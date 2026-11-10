@@ -213,6 +213,14 @@
       "line": 27,
       "signature": "theorem finite_contracting_updates_stabilize {X : Type*} [Finite X] (U : Set X → Set X) (hU : ∀ A : Set X, U A ⊆ A) (S : ℕ → Set X) (hS : ∀ n : ℕ, S (n + 1) = U (S n)) : (∃ N ≤ (S 0).ncard, ∀ n : ℕ, N ≤ n → S n = S N) ∧ {n : ℕ | S (n + 1) ≠ S n}.ncard ≤ (S 0).ncard"
     },
+    "D5/S1/Phase/ContinuousAverage.continuous_average_tendsto_haar": {
+      "module": "D5/S1/Phase/ContinuousAverage",
+      "name": "D5.S1.Phase.ContinuousAverage.continuous_average_tendsto_haar",
+      "kind": "theorem",
+      "statement_id": "sha256:f1e543c619f84ecae4890325f0da62d79dee07bfe3ea530f4a918af15cbb3343",
+      "line": 94,
+      "signature": "theorem continuous_average_tendsto_haar (α : ℝ) (hα : Irrational α) (ρ : ℝ) (f : AddCircle (1 : ℝ) → ℂ) (hf : Continuous f) : Tendsto (fun N : ℕ => (∑ i ∈ Finset.range N, f ((ρ + (i : ℝ) * α : ℝ) : AddCircle (1 : ℝ))) / (N : ℂ)) atTop (𝓝 (∫ x, f x ∂AddCircle.haarAddCircle))"
+    },
     "D5/S1/Recurrence/NormOneTraceAddition.trace_recurrence": {
       "module": "D5/S1/Recurrence/NormOneTraceAddition",
       "name": "D5.S1.Recurrence.NormOneTraceAddition.trace_recurrence",
@@ -940,6 +948,78 @@
       "statement_id": "sha256:f8d4e451ac8459519dca05b63dd8ddbd9dfb9f9e46b70e4db0b37d2d04517e94",
       "line": 14,
       "signature": "theorem bogoliubov_norm_conservation (r : ℝ) : |Real.cosh r| ^ 2 - |Real.sinh r| ^ 2 = 1"
+    },
+    "D5/S3/Quantum/CloningMachine.binaryEntropyBits": {
+      "module": "D5/S3/Quantum/CloningMachine",
+      "name": "D5.S3.Quantum.CloningMachine.binaryEntropyBits",
+      "kind": "def",
+      "statement_id": "sha256:7e149ec412c74b629d34b514da1570cabdb3bb6ad6271334cffc244e5ea4b1a4",
+      "line": 133,
+      "signature": "noncomputable def binaryEntropyBits (p : Real) : Real"
+    },
+    "D5/S3/Quantum/CloningMachine.machineEntropy": {
+      "module": "D5/S3/Quantum/CloningMachine",
+      "name": "D5.S3.Quantum.CloningMachine.machineEntropy",
+      "kind": "def",
+      "statement_id": "sha256:7e149ec412c74b629d34b514da1570cabdb3bb6ad6271334cffc244e5ea4b1a4",
+      "line": 137,
+      "signature": "noncomputable def machineEntropy : Real"
+    },
+    "D5/S3/Quantum/CloningMachine.machineReducedState": {
+      "module": "D5/S3/Quantum/CloningMachine",
+      "name": "D5.S3.Quantum.CloningMachine.machineReducedState",
+      "kind": "def",
+      "statement_id": "sha256:7e149ec412c74b629d34b514da1570cabdb3bb6ad6271334cffc244e5ea4b1a4",
+      "line": 29,
+      "signature": "noncomputable def machineReducedState (psi : QubitState) : QubitMatrix"
+    },
+    "D5/S3/Quantum/CloningMachine.machine_entropy_closed_form": {
+      "module": "D5/S3/Quantum/CloningMachine",
+      "name": "D5.S3.Quantum.CloningMachine.machine_entropy_closed_form",
+      "kind": "theorem",
+      "statement_id": "sha256:7e149ec412c74b629d34b514da1570cabdb3bb6ad6271334cffc244e5ea4b1a4",
+      "line": 140,
+      "signature": "theorem machine_entropy_closed_form : machineEntropy = Real.logb 2 3 - 2 / 3"
+    },
+    "D5/S3/Quantum/CloningMachine.machine_reduced_det": {
+      "module": "D5/S3/Quantum/CloningMachine",
+      "name": "D5.S3.Quantum.CloningMachine.machine_reduced_det",
+      "kind": "theorem",
+      "statement_id": "sha256:7e149ec412c74b629d34b514da1570cabdb3bb6ad6271334cffc244e5ea4b1a4",
+      "line": 74,
+      "signature": "theorem machine_reduced_det (psi : QubitState) (hUnit : star psi ⬝ᵥ psi = 1) : Matrix.det (machineReducedState psi) = (2 / 9 : Complex)"
+    },
+    "D5/S3/Quantum/CloningMachine.machine_reduced_is_density": {
+      "module": "D5/S3/Quantum/CloningMachine",
+      "name": "D5.S3.Quantum.CloningMachine.machine_reduced_is_density",
+      "kind": "theorem",
+      "statement_id": "sha256:7e149ec412c74b629d34b514da1570cabdb3bb6ad6271334cffc244e5ea4b1a4",
+      "line": 68,
+      "signature": "theorem machine_reduced_is_density (psi : QubitState) (hUnit : star psi ⬝ᵥ psi = 1) : (machineReducedState psi).PosSemidef ∧ Matrix.trace (machineReducedState psi) = 1"
+    },
+    "D5/S3/Quantum/CloningMachine.machine_reduced_spectrum": {
+      "module": "D5/S3/Quantum/CloningMachine",
+      "name": "D5.S3.Quantum.CloningMachine.machine_reduced_spectrum",
+      "kind": "theorem",
+      "statement_id": "sha256:7e149ec412c74b629d34b514da1570cabdb3bb6ad6271334cffc244e5ea4b1a4",
+      "line": 125,
+      "signature": "theorem machine_reduced_spectrum (psi : QubitState) (hUnit : star psi ⬝ᵥ psi = 1) : spectrum Complex (machineReducedState psi) = {(1 / 3 : Complex), (2 / 3 : Complex)}"
+    },
+    "D5/S3/Quantum/CloningMachine.orthogonalQubit": {
+      "module": "D5/S3/Quantum/CloningMachine",
+      "name": "D5.S3.Quantum.CloningMachine.orthogonalQubit",
+      "kind": "def",
+      "statement_id": "sha256:7e149ec412c74b629d34b514da1570cabdb3bb6ad6271334cffc244e5ea4b1a4",
+      "line": 19,
+      "signature": "def orthogonalQubit (psi : QubitState) : QubitState"
+    },
+    "D5/S3/Quantum/CloningMachine.orthogonal_qubit_inner": {
+      "module": "D5/S3/Quantum/CloningMachine",
+      "name": "D5.S3.Quantum.CloningMachine.orthogonal_qubit_inner",
+      "kind": "theorem",
+      "statement_id": "sha256:7e149ec412c74b629d34b514da1570cabdb3bb6ad6271334cffc244e5ea4b1a4",
+      "line": 23,
+      "signature": "theorem orthogonal_qubit_inner (psi : QubitState) : star psi ⬝ᵥ orthogonalQubit psi = 0"
     },
     "D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank.pauli_word_mul": {
       "module": "D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank",
@@ -1717,6 +1797,54 @@
       "line": 68,
       "signature": "theorem pinching_hilbert_schmidt_pythagorean (rho : QubitMatrix) : hilbertSchmidtInner rho rho = hilbertSchmidtInner (pinching rho) (pinching rho) + hilbertSchmidtInner (rho - pinching rho) (rho - pinching rho)"
     },
+    "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitoredHistory": {
+      "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation",
+      "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.MonitoredReturnConservation.monitoredHistory",
+      "kind": "def",
+      "statement_id": "sha256:ae75c01f47e23d474c5f187a8a15b655fca3f6cfc45c233fd5b9a8627c57745d",
+      "line": 55,
+      "signature": "def monitoredHistory (U : E ≃ₗᵢ[ℂ] E) (v : E) (n : ℕ) : E"
+    },
+    "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitoredStep": {
+      "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation",
+      "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.MonitoredReturnConservation.monitoredStep",
+      "kind": "def",
+      "statement_id": "sha256:ae75c01f47e23d474c5f187a8a15b655fca3f6cfc45c233fd5b9a8627c57745d",
+      "line": 50,
+      "signature": "def monitoredStep (U : E ≃ₗᵢ[ℂ] E) (v : E) : E →L[ℂ] E"
+    },
+    "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation": {
+      "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation",
+      "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.MonitoredReturnConservation.monitored_return_conservation",
+      "kind": "theorem",
+      "statement_id": "sha256:ae75c01f47e23d474c5f187a8a15b655fca3f6cfc45c233fd5b9a8627c57745d",
+      "line": 71,
+      "signature": "theorem monitored_return_conservation (U : E ≃ₗᵢ[ℂ] E) (v : E) (hv : ‖v‖ = 1) : survivalProbability U v 0 = 1 ∧ (∀ n : ℕ, returnProbability U v (n + 1) = survivalProbability U v n - survivalProbability U v (n + 1)) ∧ ∀ N : ℕ, (∑ n ∈ Finset.range N, returnProbability U v (n + 1)) + survivalProbability U v N = 1"
+    },
+    "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.returnAmplitude": {
+      "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation",
+      "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.MonitoredReturnConservation.returnAmplitude",
+      "kind": "def",
+      "statement_id": "sha256:ae75c01f47e23d474c5f187a8a15b655fca3f6cfc45c233fd5b9a8627c57745d",
+      "line": 59,
+      "signature": "def returnAmplitude (U : E ≃ₗᵢ[ℂ] E) (v : E) (n : ℕ) : ℂ"
+    },
+    "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.returnProbability": {
+      "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation",
+      "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.MonitoredReturnConservation.returnProbability",
+      "kind": "def",
+      "statement_id": "sha256:ae75c01f47e23d474c5f187a8a15b655fca3f6cfc45c233fd5b9a8627c57745d",
+      "line": 63,
+      "signature": "def returnProbability (U : E ≃ₗᵢ[ℂ] E) (v : E) (n : ℕ) : ℝ"
+    },
+    "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.survivalProbability": {
+      "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation",
+      "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.MonitoredReturnConservation.survivalProbability",
+      "kind": "def",
+      "statement_id": "sha256:ae75c01f47e23d474c5f187a8a15b655fca3f6cfc45c233fd5b9a8627c57745d",
+      "line": 67,
+      "signature": "def survivalProbability (U : E ≃ₗᵢ[ℂ] E) (v : E) (n : ℕ) : ℝ"
+    },
     "D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law": {
       "module": "D5/S3/QuantumContext/ParallelogramNormLaw",
       "name": "D5.S3.QuantumContext.ParallelogramNormLaw.inner_product_norm_parallelogram_law",
@@ -1756,6 +1884,54 @@
       "statement_id": "sha256:58cab65c4d89824384f63b0f12326f47f769eed1b6b7a813ecba718229b57fe1",
       "line": 42,
       "signature": "noncomputable def criticalAbscissa : ℝ"
+    },
+    "D5/S3/Zeros/CompletedZeta.completedZetaReading": {
+      "module": "D5/S3/Zeros/CompletedZeta",
+      "name": "D5.S3.Zeros.CompletedZeta.completedZetaReading",
+      "kind": "def",
+      "statement_id": "sha256:d757f2e1548914d4fcc0c9979f1f66fa7b34d85d2f955a2663c7c075c5a064c2",
+      "line": 27,
+      "signature": "noncomputable def completedZetaReading (s : ℂ) : ℂ"
+    },
+    "D5/S3/Zeros/CompletedZeta.xiReading": {
+      "module": "D5/S3/Zeros/CompletedZeta",
+      "name": "D5.S3.Zeros.CompletedZeta.xiReading",
+      "kind": "def",
+      "statement_id": "sha256:d757f2e1548914d4fcc0c9979f1f66fa7b34d85d2f955a2663c7c075c5a064c2",
+      "line": 31,
+      "signature": "noncomputable def xiReading (s : ℂ) : ℂ"
+    },
+    "D5/S3/Zeros/CompletedZeta.xi_reading_differentiable": {
+      "module": "D5/S3/Zeros/CompletedZeta",
+      "name": "D5.S3.Zeros.CompletedZeta.xi_reading_differentiable",
+      "kind": "theorem",
+      "statement_id": "sha256:d757f2e1548914d4fcc0c9979f1f66fa7b34d85d2f955a2663c7c075c5a064c2",
+      "line": 43,
+      "signature": "theorem xi_reading_differentiable : Differentiable ℂ xiReading"
+    },
+    "D5/S3/Zeros/CompletedZeta.xi_reading_eq_completed_zeta": {
+      "module": "D5/S3/Zeros/CompletedZeta",
+      "name": "D5.S3.Zeros.CompletedZeta.xi_reading_eq_completed_zeta",
+      "kind": "theorem",
+      "statement_id": "sha256:d757f2e1548914d4fcc0c9979f1f66fa7b34d85d2f955a2663c7c075c5a064c2",
+      "line": 35,
+      "signature": "theorem xi_reading_eq_completed_zeta {s : ℂ} (hs₀ : s ≠ 0) (hs₁ : s ≠ 1) : xiReading s = (1 / 2 : ℂ) * s * (s - 1) * completedZetaReading s"
+    },
+    "D5/S3/Zeros/CompletedZeta.xi_reading_reflection": {
+      "module": "D5/S3/Zeros/CompletedZeta",
+      "name": "D5.S3.Zeros.CompletedZeta.xi_reading_reflection",
+      "kind": "theorem",
+      "statement_id": "sha256:d757f2e1548914d4fcc0c9979f1f66fa7b34d85d2f955a2663c7c075c5a064c2",
+      "line": 50,
+      "signature": "@[simp] theorem xi_reading_reflection (s : ℂ) : xiReading (1 - s) = xiReading s"
+    },
+    "D5/S3/Zeros/Endpoints/XiEndpointValues.xi_reading_endpoint_values": {
+      "module": "D5/S3/Zeros/Endpoints/XiEndpointValues",
+      "name": "D5.S3.Zeros.Endpoints.XiEndpointValues.xi_reading_endpoint_values",
+      "kind": "theorem",
+      "statement_id": "sha256:0648d499fd32bc7fff51faf73ff211bb9072b7d2040d02d10bca7a2817bce22f",
+      "line": 17,
+      "signature": "theorem xi_reading_endpoint_values : xiReading 0 = (1 / 2 : ℂ) ∧ xiReading 1 = (1 / 2 : ℂ)"
     },
     "D5/S3/Zeros/ZetaIdentities.riemann_zeta_dirichlet_sum": {
       "module": "D5/S3/Zeros/ZetaIdentities",

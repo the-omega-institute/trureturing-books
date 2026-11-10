@@ -166,6 +166,82 @@ $$
 | **$N = 64$** | $2.8125^\circ$ | $0.9994$ | **$0.9622$（$96.2\%$）** | $0.9614$ | 高频内积投影将量子旋转强行锁死在北极线 |
 :::
 
+[@ex-zeno-strobe-freezing] 只追踪了一条分支：每次探测都回答“还在 $\lvert 0\rangle$”的那一条。同一台频闪探测器还可以记另一本账。从初态 $v$ 出发，每做一步幺正演化 $U$ 就问一次“回到 $v$ 了吗”：回答“是”就停表；回答“否”，状态被投到 $v$ 的正交补上，继续下一步。于是有两列数：恰在第 $n$ 步首次返回的概率，和前 $n$ 步都没有返回的概率。这本账有一条冻结的 Lean 定理，对任意幺正演化都成立。
+
+::: {.definition #def-monitored-return title="受监测的单步演化、返回振幅、返回概率与留存概率" lean="D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitoredStep D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitoredHistory D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.returnAmplitude D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.returnProbability D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.survivalProbability"}
+设 $E$ 为完备的复内积空间（`[NormedAddCommGroup E]`、`[InnerProductSpace ℂ E]`、`[CompleteSpace E]`），$U : E \simeq_{\mathrm{li}}[\mathbb{C}] E$ 为线性等距同构，$v \in E$。记 $P_v$ 为到一维子空间 $\mathbb{C} v$ 的正交投影。在模块 `MonitoredReturnConservation` 中：
+
+1. **受监测的单步** [`monitoredStep`](lean:D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitoredStep) $U\ v = (\mathrm{id} - P_v) \circ U$：先演化一步，再投到“没有返回”的子空间上；
+2. **监测历史** [`monitoredHistory`](lean:D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitoredHistory) $U\ v\ n = (\operatorname{monitoredStep}\ U\ v)^n\, v$：连续 $n$ 次都回答“否”之后的未归一化状态；
+3. **返回振幅** [`returnAmplitude`](lean:D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.returnAmplitude) $U\ v\ n = \bigl\langle v,\ U\bigl(\operatorname{monitoredHistory}\ U\ v\ (n - 1)\bigr)\bigr\rangle$，其中 $n - 1$ 是自然数减法；
+4. **返回概率** [`returnProbability`](lean:D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.returnProbability) $U\ v\ n = \lVert\operatorname{returnAmplitude}\ U\ v\ n\rVert^2$；
+5. **留存概率** [`survivalProbability`](lean:D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.survivalProbability) $U\ v\ n = \lVert\operatorname{monitoredHistory}\ U\ v\ n\rVert^2$。
+:::
+
+下面把 $\operatorname{returnProbability}\ U\ v\ n$ 简记为 $p_n$，把 $\operatorname{survivalProbability}\ U\ v\ n$ 简记为 $s_n$。
+
+::: {.proposition #prop-monitored-return-conservation title="受监测返回协议的逐步与有限守恒律" lean="D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation"}
+沿用 [@def-monitored-return] 的记号，设 $\lVert v\rVert = 1$（`hv`）。则以下三项同时成立：
+
+1. $s_0 = 1$；
+2. 对一切 $n \in \mathbb{N}$：$p_{n+1} = s_n - s_{n+1}$；
+3. 对一切 $N \in \mathbb{N}$：
+
+   $$
+   \sum_{n=0}^{N-1} p_{n+1} \;+\; s_N \;=\; 1 .
+   $$
+:::
+
+::: proof
+结论 1：零次监测的历史就是 $v$ 本身，范数平方为 $1$。结论 2：把向量 $U\bigl(\operatorname{monitoredHistory}\ U\ v\ n\bigr)$ 沿 $\mathbb{C}v$ 及其正交补作勾股分解（`Submodule.norm_sq_eq_add_norm_sq_starProjection`）。$U$ 是等距，左端的范数平方等于 $s_n$；沿 $\mathbb{C}v$ 的分量由一维投影公式（`Submodule.starProjection_singleton`）与 $\lVert v\rVert = 1$ 认出是返回振幅，范数平方为 $p_{n+1}$；正交补上的分量正是下一步的监测历史，范数平方为 $s_{n+1}$。结论 3 把结论 2 对 $n = 0, \dots, N - 1$ 求和，右端逐项相消（`Finset.sum_range_sub'`），再代入 $s_0 = 1$。完整证明由 Lean 内核检查。
+:::
+
+[@prop-monitored-return-conservation] 说的是概率一分不少：前 $N$ 步里首次返回的概率，加上至今没有返回的概率，恰好是 $1$。它不依赖 $U$ 是什么，也不依赖空间的维数。把它用到 [@ex-zeno-strobe-freezing] 的那只旋转比特上，会得到一个与芝诺冻结正好相对的结论。
+
+::: {.example #ex-first-return-qubit title="旋转比特的首次返回统计：平均返回时间恒为 2，与步长无关"}
+设单比特每一步绕 $X$ 轴转过布洛赫角 $\delta$，即 $U = \cos\frac{\delta}{2}\,I - i\sin\frac{\delta}{2}\,X$，初态 $v = \lvert 0\rangle$。记 $c = \cos\frac{\delta}{2}$，$s = \sin\frac{\delta}{2}$，并设 $s \neq 0$。
+
+**逐步手算。** 第一步：$U\lvert 0\rangle = c\,\lvert 0\rangle - i s\,\lvert 1\rangle$，所以 $p_1 = c^2$，没有返回的分量是 $-is\,\lvert 1\rangle$，$s_1 = s^2$。此后状态在 $\lvert 1\rangle$ 上：$U\lvert 1\rangle = c\,\lvert 1\rangle - is\,\lvert 0\rangle$，每一步以条件概率 $s^2$ 返回，以条件概率 $c^2$ 继续留在 $\lvert 1\rangle$。于是对 $n \ge 1$：
+
+$$
+\begin{aligned}
+p_1 &= c^2, \\
+p_{n+1} &= s^4\,c^{2(n-1)}, \\
+s_n &= s^2\,c^{2(n-1)} .
+\end{aligned}
+$$
+
+逐项核对 [@prop-monitored-return-conservation] 的结论 2：$s_n - s_{n+1} = s^2 c^{2(n-1)}(1 - c^2) = s^4 c^{2(n-1)} = p_{n+1}$。
+
+**总返回概率与平均返回时间。** 用几何级数求和：
+
+$$
+\begin{aligned}
+\sum_{n \ge 1} p_n &= c^2 + \frac{s^4}{1 - c^2} = c^2 + s^2 = 1, \\
+\sum_{n \ge 1} n\,p_n &= c^2 + s^4\cdot\frac{2 - c^2}{(1 - c^2)^2} = c^2 + (2 - c^2) = 2 .
+\end{aligned}
+$$
+
+平均首次返回时间恰为 $2$ 步，与 $\delta$ 无关。
+
+**数值。**
+
+| 步长 $\delta$ | $p_1$ | $p_2$ | $p_3$ | $s_3$ | $p_1 + p_2 + p_3 + s_3$ | 第一步未返回的概率 $s^2$ | 此后的条件平均返回步数 $1 + \frac{1}{s^2}$ | 平均返回时间 |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| $\frac{\pi}{16}$ | $0.990393$ | $9.23\times10^{-5}$ | $9.14\times10^{-5}$ | $0.009424$ | $1.000000$ | $0.009607$ | $105.09$ | $2.000000$ |
+| $\frac{\pi}{4}$ | $0.853553$ | $0.021447$ | $0.018306$ | $0.106694$ | $1.000000$ | $0.146447$ | $7.83$ | $2.000000$ |
+| $\frac{\pi}{2}$ | $0.500000$ | $0.250000$ | $0.125000$ | $0.125000$ | $1.000000$ | $0.500000$ | $3.00$ | $2.000000$ |
+| $2$ | $0.291927$ | $0.501368$ | $0.146363$ | $0.060343$ | $1.000000$ | $0.708073$ | $2.41$ | $2.000000$ |
+
+$\delta = \frac{\pi}{4}$ 一行的 $p_1 = 0.853553$ 就是 [@ex-zeno-strobe-freezing] 中 $N = 4$ 的单步留存概率。各行的守恒和与均值已用数值模拟核对（迭代 $4000$ 步）。
+
+**读法。** 步长越小，第一步就返回的概率越接近 $1$，这是芝诺冻结；可是万一第一步没有返回（概率 $s^2$），回来平均要再等 $\frac{1}{s^2}$ 步。两者相乘恰好补回 $1$ 步：$c^2\cdot 1 + s^2\cdot\bigl(1 + \frac{1}{s^2}\bigr) = 2$。探测得再勤，改变的只是分布的形状，改变不了均值。
+
+**一般情形（文献结果，未在本书形式化）。** Grünbaum、Velázquez、Werner 与 Werner（Commun. Math. Phys. **320**, 543, 2013）证明：对有限维情形，只要返回是必然的，平均首次探测返回时间就取整数值，等于初态在 $U$ 的本征子空间上有非零分量的不同本征值的个数。本例中这个数是 $2$。对 $3$ 维与 $4$ 维的随机幺正所作的数值模拟给出均值 $3.000000$ 与 $4.000000$。
+:::
+
+芝诺效应说，看得够勤，状态就走不掉。首次返回的账目补上了另一半：看得再勤，平均两步回来一次这件事也不会变，因为它数的不是时间，而是这只比特一共有几个方向可去。
+
 ## 7.4 观察者注意力与标量自由能记账判据：何时读出粒子节拍，何时计入热力学代价？ {#sec-observer-attention-freeze}
 
 请把 7.2 节的“量子速度极限”与 7.3 节的“量子芝诺效应”放在一起对比，再读一遍本章开篇的第二句原话：

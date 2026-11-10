@@ -479,12 +479,56 @@ Suppose $\theta^* = \frac{m}{n}\pi$ with integers $m, n$ and $n \ge 1$. Put $\ze
 Two consequences follow:
 
 1. **The rotation has infinite order.** The plane rotation $R(\theta^*)$ by the angle $\theta^*$ satisfies $R(\theta^*)^n \ne \mathrm{id}$ for every integer $n \ge 1$, because $R(\theta^*)^n = \mathrm{id}$ if and only if $n\theta^* \in 2\pi\mathbb{Z}$. Correspondingly, no positive integer power of the unit rotor $U(\theta^*) = \cos(\theta^*/2) - \hat{I}\sin(\theta^*/2)$ equals $\pm 1$.
-2. **The orbit is dense and equidistributed.** By Kronecker's theorem and Weyl's equidistribution theorem, the sequence $\{n\theta^* \bmod 2\pi\}_{n \ge 0}$ is dense and equidistributed on the circle.
+2. **The orbit is dense and equidistributed.** The sequence $\{n\theta^* \bmod 2\pi\}_{n \ge 0}$ is dense and equidistributed on the circle. The step "orbits of an irrational rotation are equidistributed" has a frozen Lean proof, see [@lem-irrational-rotation-equidistribution] below; the irrationality needed to apply it to $\theta^*$ is the first half of this remark.
 
 Whether $\theta^*/\pi$ is transcendental is not settled by this argument; it holds under Schanuel's conjecture, since it follows from the conclusion of [@conj-schanuel-dottie] (algebraic independence of $\theta^*$ and $\pi$).
 :::
 
 Put the two facts side by side: the cosine projection closes in one step at $\theta^*$ ($\cos\theta^* = \theta^*$), while the rotation with step $\theta^*$ never returns to its starting point. The same angle is a fixed point for projection and an open helix for rotation.
+
+"Never returns to its starting point" can be made more precise: the orbit not only fails to close, it also visits the whole circle uniformly. This step needs no citation from the literature; the pinned repository holds a frozen theorem.
+
+::: {.lemma #lem-irrational-rotation-equidistribution title="Under an Irrational Rotation, Orbit Averages of Continuous Observables Tend to the Haar Average" lean="D5/S1/Phase/ContinuousAverage.continuous_average_tendsto_haar"}
+Let $\alpha \in \mathbb{R}$ be irrational (`hα : Irrational α`), let $\rho \in \mathbb{R}$ be an arbitrary initial phase, and let $f : \mathbb{R}/\mathbb{Z} \to \mathbb{C}$ be continuous (in Lean, $\mathbb{R}/\mathbb{Z}$ is `AddCircle (1 : ℝ)` and the hypothesis is `hf : Continuous f`). Then, as $N \to \infty$,
+
+$$
+\frac{1}{N}\sum_{i=0}^{N-1} f\bigl(\rho + i\,\alpha\bigr) \;\longrightarrow\; \int_{\mathbb{R}/\mathbb{Z}} f(x)\,\mathrm{d}\mu(x),
+$$
+
+where $\rho + i\alpha$ stands for its image in $\mathbb{R}/\mathbb{Z}$ and $\mu$ is the normalized Haar measure on $\mathbb{R}/\mathbb{Z}$ (`AddCircle.haarAddCircle`).
+:::
+
+::: proof
+The continuous functions for which the conclusion holds form a complex linear subspace $S$. First, every character $x \mapsto e^{2\pi i m x}$ lies in $S$: for $m = 0$ both sides equal $1$; for $m \neq 0$ the orbit average is a geometric sum with ratio $e^{2\pi i m\alpha}$ divided by $N$, and since $\alpha$ is irrational the ratio is not $1$, the geometric sum is bounded, the average tends to $0$, and the Haar integral of the character is $0$ as well (`fourier_average_tendsto`). Second, $S$ is closed under uniform convergence: the averaging functionals have norm at most $\lVert f\rVert_\infty$, so they form an equicontinuous family of linear functionals and pointwise limits are preserved on closed sets. Third, the linear span of the characters is dense in the space of continuous functions (`span_fourier_closure_eq_top`). Together the three steps show that $S$ consists of all continuous functions. The full proof is checked by the Lean kernel.
+:::
+
+Applying [@lem-irrational-rotation-equidistribution] to $\alpha = \frac{\theta^*}{2\pi}$, the required irrationality comes from [@rem-dottie-angle-incommensurable] (which depends on the Lindemann–Weierstrass theorem, a literature result); the equidistribution step itself no longer depends on the literature.
+
+::: {.example #ex-dottie-orbit-seventeen title="The Orbit with Step θ*: Seventeen Steps Nearly Close It, Yet It Eventually Covers the Circle"}
+The values below were computed from closed-form geometric sums and checked by direct summation; the partial quotients of the continued fraction are numerical observations.
+
+**The near-closure after seventeen steps.** The continued fraction of $\frac{\theta^*}{2\pi} \approx 0.1176290523$ is $[0; 8, 1, 1, 191, 1, 1, \dots]$. The unusually large partial quotient $191$ makes the convergent $\frac{2}{17}$ exceptionally accurate:
+
+$$
+17\,\theta^* \;=\; 4\pi - 0.0019233\ldots \quad(\text{radians}),
+$$
+
+that is, after seventeen steps and two full turns the orbit is only $0.1102^\circ$ away from its starting point. The next closer approach has to wait until step $3256$ (gap $0.0012211$ radians).
+
+**Orbit averages of two observables.** With initial phase $\rho = 0$, compare $f_1(x) = \cos(2\pi x)$ and $f_{17}(x) = \cos(2\pi\cdot 17x)$, both of Haar average $0$:
+
+| steps $N$ | orbit average of $f_1$ | orbit average of $f_{17}$ | orbit average of $f_{17}$ when the angle is replaced by $2\pi\cdot\frac{2}{17}$ |
+| :---: | :---: | :---: | :---: |
+| $10$ | $+0.143151$ | $+0.999947$ | $1$ |
+| $10^2$ | $-0.008271$ | $+0.993938$ | $1$ |
+| $10^3$ | $-0.000091$ | $+0.488620$ | $1$ |
+| $10^4$ | $+0.000188$ | $+0.019479$ | $1$ |
+| $10^5$ | $-0.000006$ | $-0.003332$ | $1$ |
+
+The average of $f_1$ tends to $0$ quickly: the geometric sum gives the bound $\frac{1}{N\lvert\sin(\theta^*/2)\rvert} \approx \frac{2.77}{N}$. The average of $f_{17}$ hardly moves for a long time: it is sensitive exactly to the seventeen-step near-closure, the corresponding bound is $\frac{1}{N\lvert\sin(17\theta^*/2)\rvert} \approx \frac{1040}{N}$, and only for $N$ much larger than $1040$ does it become visible that the orbit has not closed. If the angle is replaced by $2\pi\cdot\frac{2}{17}$, which is commensurable with $\pi$, the orbit has only seventeen points and the average of $f_{17}$ is $1$ forever, not the Haar average: the irrationality hypothesis of [@lem-irrational-rotation-equidistribution] cannot be dropped.
+:::
+
+Within a thousand steps, the orbit with step $\theta^*$ looks almost indistinguishable from a regular heptadecagon; equidistribution shows itself only on a longer time scale. An observer with finitely many steps sees a closed polygon; the whole circle appears only in the limit of infinitely many.
 
 ## 24.6 "Is $\pi$ a Projection of $\theta$?": Two Mutually Inverse Series, Kepler's Equation, and Half-Time Free Fall {#sec-ch24-6}
 
@@ -694,11 +738,11 @@ The two mechanisms divide the work cleanly, and the diagonal adds a third piece.
 
 ### Summary of Part VI: From Spheres Beyond Spheres to $\psi = \psi(\psi)$ — Ready to Forge the Mechanical Canon
 
-Across the four chapters of Part VI, backed by **twenty-six Lean-verified theorem blocks** (seven in Chapter 21, four in each of Chapters 22 and 23, and eleven in Chapter 24), we have brought mathematical logic, prime spectral theory, Diophantine norm locks, and self-referential fixed points under one geometric roof:
+Across the four chapters of Part VI, backed by **twenty-eight Lean-verified theorem blocks** (seven in Chapter 21, five in Chapter 22, four in Chapter 23, and twelve in Chapter 24), we have brought mathematical logic, prime spectral theory, Diophantine norm locks, and self-referential fixed points under one geometric roof:
 
 - **Chapter 21** proved that any complete decoder catalog produces a relative semantic diagonal that is discontinuous in the latent partition topology ([@thm-complete-diagonal-not-continuous]), has a nonempty separation deficit ([@lem-complete-diagonal-separation-deficit]), and forces strict observation-topology refinement when adjoined ([@prop-complete-diagonal-strict-refinement], [@cor-complete-diagonal-topological-settlement]), gave the factorial remainder bound for the exponential series in a complete normed algebra ([@lem-exp-tail-le]) and the strictly positive cosine lower bound on the recovery error of a finite-record channel ([@lem-finite-support-autocorrelation-cosine], [@thm-finite-record-cosine-obstruction]), paired with Taylor remainder seams $R_{2N}(\theta)$, Descartes's $12 \times 60^\circ = 720^\circ = 4\pi$ polyhedral angular defect, the Hairy Ball Theorem, and Adams's parallelizable spheres $S^0, S^1, S^3, S^7$ ([@rem-hairy-ball-adams-literature]);
-- **Chapter 22** revealed primes as the orthogonal basis of arithmetic and established on the explicit half-plane $\operatorname{Re}(s) > 1$ the unit residue at $s = 1$ ([@lem-riemann-zeta-residue-one]), the Dirichlet series ([@prop-riemann-zeta-dirichlet-sum]), the Euler prime product ([@thm-riemann-zeta-euler-product]), and their direct equality ([@cor-dirichlet-sum-eq-euler-product]), alongside the polyhedral prime-sieve remainder and the epistemic boundary of the open Riemann Hypothesis ([@conj-riemann-hypothesis], [@rem-euler-zeta-literature]);
+- **Chapter 22** revealed primes as the orthogonal basis of arithmetic and established on the explicit half-plane $\operatorname{Re}(s) > 1$ the unit residue at $s = 1$ ([@lem-riemann-zeta-residue-one]), the Dirichlet series ([@prop-riemann-zeta-dirichlet-sum]), the Euler prime product ([@thm-riemann-zeta-euler-product]), their direct equality ([@cor-dirichlet-sum-eq-euler-product]), and the entirety and reflection symmetry $\xi(1 - s) = \xi(s)$ of the completed xi reading ([@thm-xi-reading-entire-reflection]), alongside the polyhedral prime-sieve remainder and the epistemic boundary of the open Riemann Hypothesis ([@conj-riemann-hypothesis], [@rem-euler-zeta-literature]);
 - **Chapter 23** showed how quadratic norms and traces isolate discrete integer lattices, proving unimodular shear reduction, constant discriminant $\Delta = -3$, and range invariance for the Eisenstein crossing family ([@thm-qform-eq-eisnorm], [@lem-qform-discriminant], [@cor-qform-range-eq-eisnorm]) together with the $\Delta = +5$ Golden Pell trace–norm identity ([@prop-pell-form-eq-four-mul-norm]), and auditing Koenigsmann's 2016 $\forall$/$\forall\exists$ first-order definition of $\mathbb{Z}$ in $\mathbb{Q}$ vs. the open existential problem $\mathrm{H10}(\mathbb{Q})$ ([@rem-diophantine-z-in-q-literature]);
-- **Chapter 24** proved finite contracting set stabilization and strict-change bounds ([@thm-finite-contracting-updates-stabilize]), adjacent-step agreement and static contextual non-uniqueness (identical text and interpretation rule under two distinct static contexts yield different fixed Boolean meanings, [@lem-conceptual-equivalence-stability-fixed-point], [@prop-context-parameters-distinct-fixed-points]), uniqueness of the positive golden fixed point ([@cor-golden-fixed-point-unique]), the four self-application fates of nondegenerate binary fractional maps with the $\varphi$-family as the only live one ([@thm-self-application-four-fates], [@lem-golden-inverse-branch-fixed-point]), the golden cosines of the regular pentagon ([@prop-pentagon-golden-cosines]), the diagonal landing as a fixed point of the twist together with universal escape for fixed-point-free twists and its finite count ([@lem-diagonal-landing-fixed], [@thm-self-application-fragment-package], [@prop-escaped-listing-card]), and Brouwer's fixed-point theorem on the standard simplex ([@thm-brouwer-standard-simplex]), culminating in Banach contraction on $[0, 1]$, Lindemann–Weierstrass transcendence ($|\cos q - q| > 0$), Schanuel's conjecture ([@conj-schanuel-dottie], [@rem-banach-dottie-hairy-ball-literature]), and the self-referential synthesis $\psi = \psi(\psi)$.
+- **Chapter 24** proved finite contracting set stabilization and strict-change bounds ([@thm-finite-contracting-updates-stabilize]), adjacent-step agreement and static contextual non-uniqueness (identical text and interpretation rule under two distinct static contexts yield different fixed Boolean meanings, [@lem-conceptual-equivalence-stability-fixed-point], [@prop-context-parameters-distinct-fixed-points]), uniqueness of the positive golden fixed point ([@cor-golden-fixed-point-unique]), the four self-application fates of nondegenerate binary fractional maps with the $\varphi$-family as the only live one ([@thm-self-application-four-fates], [@lem-golden-inverse-branch-fixed-point]), the golden cosines of the regular pentagon ([@prop-pentagon-golden-cosines]), the diagonal landing as a fixed point of the twist together with universal escape for fixed-point-free twists and its finite count ([@lem-diagonal-landing-fixed], [@thm-self-application-fragment-package], [@prop-escaped-listing-card]), Brouwer's fixed-point theorem on the standard simplex ([@thm-brouwer-standard-simplex]), and the convergence of orbit averages of an irrational rotation to the Haar average ([@lem-irrational-rotation-equidistribution]), culminating in Banach contraction on $[0, 1]$, Lindemann–Weierstrass transcendence ($|\cos q - q| > 0$), Schanuel's conjecture ([@conj-schanuel-dottie], [@rem-banach-dottie-hairy-ball-literature]), and the self-referential synthesis $\psi = \psi(\psi)$.
 
 With the theoretical arch of the book complete, **Part VII (*Forging the Blade — Mechanical Canon: Matrix-Free Engines and Formal Proof Libraries*)** turns these geometric laws into executable matrix-free bitmask Clifford engines and ZYZ rotor compilers, and steps inside the Lean 4 formal temple to audit the complete formal verification ledger of the monograph.

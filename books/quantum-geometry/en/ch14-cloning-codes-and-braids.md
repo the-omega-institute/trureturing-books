@@ -70,6 +70,77 @@ Four precise boundaries govern [@thm-no-cloning-overlap]:
 3. **General inner-product spaces**: The theorem holds on any `NormedAddCommGroup` equipped with `InnerProductSpace Complex`, with no assumption of finite dimension or completeness.
 4. **Necessary criterion, not a cloner construction**: The condition $z \in \{0, 1\}$ is a **necessary** compatibility requirement for a pair of states to be cloned by $U$; it must not be misread as constructing a universal cloner.
 
+Boundary 4 says that [@thm-no-cloning-overlap] is only a necessary condition. So ask the converse question: since exact cloning is impossible, how well can approximate cloning do, and where does the cost land? The question has an explicit answer.
+
+Bužek and Hillery (1996) constructed a $1 \to 2$ cloning machine that treats every input alike. It uses three qubits: the input, a blank copy, and an auxiliary "machine" qubit $M$. For a unit vector $\psi$, let $\psi^\perp$ be a unit vector orthogonal to it; the cloning isometry sends the input to
+
+$$
+\lvert\psi\rangle \;\longmapsto\; \sqrt{\tfrac{2}{3}}\;\lvert\psi\rangle\lvert\psi\rangle\lvert\psi^\perp\rangle_M \;-\; \sqrt{\tfrac{1}{3}}\;\frac{\lvert\psi\rangle\lvert\psi^\perp\rangle + \lvert\psi^\perp\rangle\lvert\psi\rangle}{\sqrt{2}}\;\lvert\psi\rangle_M ,
+$$
+
+where the three factors are clone one, clone two, and the machine qubit. Tracing out the two clones leaves the machine qubit in $\frac{1}{3}\lvert\psi\rangle\langle\psi\rvert + \frac{2}{3}\lvert\psi^\perp\rangle\langle\psi^\perp\rvert$. The Lean module `D5/S3/Quantum/CloningMachine` defines this matrix directly and proves that its spectrum does not depend on the input.
+
+::: {.definition #def-cloning-machine-reduced-state title="The Orthogonal Qubit, the Machine Reduced State of the Cloner, and the Machine Entropy" lean="D5/S3/Quantum/CloningMachine.orthogonalQubit D5/S3/Quantum/CloningMachine.machineReducedState D5/S3/Quantum/CloningMachine.binaryEntropyBits D5/S3/Quantum/CloningMachine.machineEntropy"}
+In the module `CloningMachine` (`QubitState` is $\operatorname{Fin} 2 \to \mathbb{C}$ and `QubitMatrix` is the type of complex $2 \times 2$ matrices):
+
+1. The **orthogonal qubit** [`orthogonalQubit`](lean:D5/S3/Quantum/CloningMachine.orthogonalQubit) $\psi = \bigl(-\overline{\psi_1},\ \overline{\psi_0}\bigr)$;
+2. The **machine reduced state** [`machineReducedState`](lean:D5/S3/Quantum/CloningMachine.machineReducedState) is defined as
+
+   $$
+   \operatorname{machineReducedState}\ \psi \;=\; \frac{1}{3}\,\psi\,\psi^{*} \;+\; \frac{2}{3}\,\psi^\perp\,(\psi^\perp)^{*}, \qquad \psi^\perp = \operatorname{orthogonalQubit}\ \psi,
+   $$
+
+   where $v\,v^{*}$ denotes the outer-product matrix `Matrix.vecMulVec v (star v)`;
+3. The binary entropy in bits [`binaryEntropyBits`](lean:D5/S3/Quantum/CloningMachine.binaryEntropyBits) $p = -p\log_2 p - (1 - p)\log_2(1 - p)$, and the **machine entropy** [`machineEntropy`](lean:D5/S3/Quantum/CloningMachine.machineEntropy) $= \operatorname{binaryEntropyBits}\ \frac{1}{3}$.
+:::
+
+::: {.theorem #thm-cloning-machine-spectrum title="The Input-Independent Spectrum of the Cloner's Machine Reduced State and the Closed Form of the Machine Entropy" lean="D5/S3/Quantum/CloningMachine.orthogonal_qubit_inner D5/S3/Quantum/CloningMachine.machine_reduced_is_density D5/S3/Quantum/CloningMachine.machine_reduced_det D5/S3/Quantum/CloningMachine.machine_reduced_spectrum D5/S3/Quantum/CloningMachine.machine_entropy_closed_form"}
+Let $\psi$ be a `QubitState`, with the notation of [@def-cloning-machine-reduced-state].
+
+1. **Orthogonality** (no normalization needed): $\psi^{*} \cdot \operatorname{orthogonalQubit}\ \psi = 0$, that is, `star ψ ⬝ᵥ orthogonalQubit ψ = 0`.
+
+If moreover $\psi$ is normalized (`hUnit : star ψ ⬝ᵥ ψ = 1`), then:
+
+2. **It is a density matrix**: $\operatorname{machineReducedState}\ \psi$ is positive semidefinite and has trace $1$;
+3. **Determinant**: $\det\bigl(\operatorname{machineReducedState}\ \psi\bigr) = \frac{2}{9}$;
+4. **Spectrum**: the spectrum of $\operatorname{machineReducedState}\ \psi$ over $\mathbb{C}$ is exactly $\bigl\{\frac{1}{3},\ \frac{2}{3}\bigr\}$.
+
+In addition, without reference to $\psi$:
+
+5. **Closed form of the machine entropy**: $\operatorname{machineEntropy} = \log_2 3 - \frac{2}{3}$.
+:::
+
+::: proof
+Claim 1 expands the dot product and simplifies by ring arithmetic. Claim 2: the two outer products $\psi\psi^{*}$ and $\psi^\perp(\psi^\perp)^{*}$ are each positive semidefinite, and a combination with nonnegative coefficients remains so; passing to the orthogonal qubit preserves the squared norm, so the trace equals $\frac{1}{3} + \frac{2}{3} = 1$. Claim 3: write $\psi^\perp(\psi^\perp)^{*}$ as an explicit $2 \times 2$ matrix, expand the determinant, and simplify with the normalization to get $\frac{2}{9}$. Claim 4: the characteristic polynomial of a $2 \times 2$ matrix is determined by its trace and determinant, here $X^2 - X + \frac{2}{9} = \bigl(X - \frac{1}{3}\bigr)\bigl(X - \frac{2}{3}\bigr)$ (`machine_reduced_charpoly`), and the spectrum is its set of roots. Claim 5: substitute $\log_2\frac{1}{3} = -\log_2 3$ and $\log_2\frac{2}{3} = 1 - \log_2 3$ into $\operatorname{binaryEntropyBits}\ \frac{1}{3}$ and simplify. The full proof is checked by the Lean kernel.
+:::
+
+[@thm-cloning-machine-spectrum] proves properties of the matrix in [@def-cloning-machine-reduced-state]; that this matrix is the machine marginal of the Bužek–Hillery isometry is shown by hand in the example below and is a literature result.
+
+::: {.example #ex-buzek-hillery-three-marginals title="The Three Marginals of the Bužek–Hillery Cloner: Clone Fidelity 5/6, Machine Qubit Reversed and Shrunk to 1/3"}
+The cloning isometry and its optimality are literature results (V. Bužek and M. Hillery, Phys. Rev. A **54**, 1844, 1996; for optimality see N. Gisin and S. Massar, Phys. Rev. Lett. **79**, 2153, 1997), not formalized in this book. The marginals below are obtained from the isometry by direct partial traces and were checked numerically on random input states.
+
+Write the output state as $\lvert\Omega\rangle = \sqrt{\frac{2}{3}}\,\lvert\psi\psi\rangle\lvert\psi^\perp\rangle_M - \sqrt{\frac{1}{3}}\,\lvert S\rangle\lvert\psi\rangle_M$ with $\lvert S\rangle = \frac{1}{\sqrt{2}}\bigl(\lvert\psi\psi^\perp\rangle + \lvert\psi^\perp\psi\rangle\bigr)$.
+
+- **The machine qubit.** $\lvert\psi\psi\rangle$ and $\lvert S\rangle$ are orthogonal, so the cross terms vanish when the two clones are traced out, leaving $\rho_M = \frac{2}{3}\lvert\psi^\perp\rangle\langle\psi^\perp\rvert + \frac{1}{3}\lvert\psi\rangle\langle\psi\rvert$, which is exactly $\operatorname{machineReducedState}\ \psi$ of [@def-cloning-machine-reduced-state].
+- **A single clone.** The machine factors $\lvert\psi^\perp\rangle$ and $\lvert\psi\rangle$ of the two terms are orthogonal, so after tracing out the machine the pair of clones is in the mixture $\frac{2}{3}\lvert\psi\psi\rangle\langle\psi\psi\rvert + \frac{1}{3}\lvert S\rangle\langle S\rvert$. Tracing out the other clone as well, $\lvert\psi\psi\rangle$ contributes $\lvert\psi\rangle\langle\psi\rvert$ and $\lvert S\rangle$ contributes $\frac{1}{2}\bigl(\lvert\psi\rangle\langle\psi\rvert + \lvert\psi^\perp\rangle\langle\psi^\perp\rvert\bigr)$, for a total of
+
+  $$
+  \rho_{\mathrm{clone}} \;=\; \Bigl(\frac{2}{3} + \frac{1}{6}\Bigr)\lvert\psi\rangle\langle\psi\rvert + \frac{1}{6}\,\lvert\psi^\perp\rangle\langle\psi^\perp\rvert \;=\; \frac{5}{6}\,\lvert\psi\rangle\langle\psi\rvert + \frac{1}{6}\,\lvert\psi^\perp\rangle\langle\psi^\perp\rvert .
+  $$
+
+Let the Bloch vector of the input be the unit vector $\vv{r}$ (so that $\lvert\psi^\perp\rangle$ corresponds to $-\vv{r}$):
+
+| subsystem | eigenvalues of the reduced state | Bloch vector | fidelity with the input $\langle\psi\rvert\rho\lvert\psi\rangle$ | entropy (bits) |
+| :---: | :---: | :---: | :---: | :---: |
+| input | $1,\ 0$ | $\vv{r}$ | $1$ | $0$ |
+| clone one, clone two | $\frac{5}{6},\ \frac{1}{6}$ | $\frac{2}{3}\,\vv{r}$ | $\frac{5}{6} \approx 0.8333$ | $0.6500$ |
+| machine qubit | $\frac{2}{3},\ \frac{1}{3}$ | $-\frac{1}{3}\,\vv{r}$ | $\frac{1}{3}$ | $\log_2 3 - \frac{2}{3} \approx 0.9183$ |
+
+The eigenvalues and the entropy in the machine row are claims 4 and 5 of [@thm-cloning-machine-spectrum]. Numerical check (three random input states): clone fidelity $0.833333$; Bloch shrinking factors $0.666667$ for the clones and $-0.333333$ for the machine; machine spectrum $\{0.333333,\ 0.666667\}$; determinant $0.222222$. The linear extension of the formula from the computational basis agrees with the expression for general $\psi$ up to a global phase, and it preserves inner products.
+:::
+
+So no-cloning does not mean that nothing can be copied. Exact cloning demands that the overlap satisfy $z = z^2$; the universal cloner gives up exactness and shrinks the Bloch vector of each clone uniformly to $\frac{2}{3}$. What is shrunk away does not disappear: the machine qubit carries a reversed Bloch vector of length $\frac{1}{3}$ together with an entropy of about $0.918$ bits that does not depend on the direction of the input. The global state is still pure, and the mixedness of all three marginals comes from the entanglement among them.
+
 ## Pauli Words and Stabilizer Syndromes {#sec-pauli-syndrome-parity}
 
 If [@thm-no-cloning-overlap] forbids duplicating an unknown superposition $\alpha\lvert 0\rangle + \beta\lvert 1\rangle$ into $(\alpha\lvert 0\rangle + \beta\lvert 1\rangle)^{\otimes 3}$, how does quantum error correction protect quantum information?

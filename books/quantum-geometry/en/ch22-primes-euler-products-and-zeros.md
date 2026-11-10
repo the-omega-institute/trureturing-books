@@ -161,7 +161,81 @@ Why does every nontrivial zero ever computed lie on the vertical **critical line
 
 Geometrically, Riemann's completed zeta function $\xi(s) = \frac{1}{2}s(s-1)\pi^{-s/2}\Gamma(s/2)\zeta(s)$ obeys the reflection symmetry $\xi(s) = \xi(1 - s)$, whose fixed locus under $s \leftrightarrow 1 - \bar{s}$ is precisely the vertical axis $\operatorname{Re}(s) = \frac{1}{2}$ — the Fourier-dual balance line between primal scale and spectral frequency.
 
-Yet aesthetic symmetry is not a proof. In strict compliance with our three-tier epistemic contract (`OPEN`), we state the Riemann Hypothesis as an open conjecture (carrying no `lean` attribute), followed by a literature audit delineating what the four frozen Lean theorems above do and do not certify.
+The previous paragraph cited the reflection symmetry $\xi(s) = \xi(1 - s)$ as an intuitive picture. The symmetry itself is not a conjecture, and it need not stay at the level of the literature: the module `D5/S3/Zeros/CompletedZeta` of the pinned repository freezes it together with the fact that $\xi$ is entire.
+
+::: {.definition #def-xi-reading title="The Completed Zeta Reading and the Pole-Removed Xi Reading" lean="D5/S3/Zeros/CompletedZeta.completedZetaReading D5/S3/Zeros/CompletedZeta.xiReading"}
+In the module `CompletedZeta`:
+
+1. The **completed zeta reading** [`completedZetaReading`](lean:D5/S3/Zeros/CompletedZeta.completedZetaReading) $s$ is defined as Mathlib's `completedRiemannZeta s`, the holomorphic continuation of $\Lambda(s) = \pi^{-s/2}\,\Gamma(s/2)\,\zeta(s)$ (with Mathlib's conventional values at $s = 0$ and $s = 1$);
+2. The **xi reading** [`xiReading`](lean:D5/S3/Zeros/CompletedZeta.xiReading) is defined as
+
+   $$
+   \operatorname{xiReading}\ s \;=\; \frac{1}{2}\Bigl(s\,(s - 1)\,\Lambda_0(s) + 1\Bigr),
+   $$
+
+   where $\Lambda_0$ is Mathlib's `completedRiemannZeta₀`: the entire function obtained from $\Lambda$ by subtracting its two simple poles at $s = 0$ and $s = 1$, so that $\Lambda(s) = \Lambda_0(s) - \frac{1}{s} - \frac{1}{1 - s}$.
+:::
+
+::: {.theorem #thm-xi-reading-entire-reflection title="Four Properties of the Xi Reading: Relation to the Completed Zeta, Entirety, Reflection Symmetry, and Endpoint Values" lean="D5/S3/Zeros/CompletedZeta.xi_reading_eq_completed_zeta D5/S3/Zeros/CompletedZeta.xi_reading_differentiable D5/S3/Zeros/CompletedZeta.xi_reading_reflection D5/S3/Zeros/Endpoints/XiEndpointValues.xi_reading_endpoint_values"}
+For $\operatorname{xiReading}$ of [@def-xi-reading], the following four statements hold:
+
+1. **Relation to the completed zeta**: for every $s \in \mathbb{C}$ with $s \neq 0$ and $s \neq 1$,
+
+   $$
+   \operatorname{xiReading}\ s \;=\; \frac{1}{2}\,s\,(s - 1)\,\operatorname{completedZetaReading}\ s ;
+   $$
+
+2. **Entirety**: $\operatorname{xiReading}$ is complex differentiable on all of $\mathbb{C}$ (`Differentiable ℂ xiReading`);
+3. **Reflection symmetry**: for every $s \in \mathbb{C}$,
+
+   $$
+   \operatorname{xiReading}\ (1 - s) \;=\; \operatorname{xiReading}\ s ;
+   $$
+
+4. **Endpoint values**: $\operatorname{xiReading}\ 0 = \frac{1}{2}$ and $\operatorname{xiReading}\ 1 = \frac{1}{2}$.
+:::
+
+::: proof
+Claim 1 substitutes Mathlib's identity `completedRiemannZeta_eq` ($\Lambda(s) = \Lambda_0(s) - \frac{1}{s} - \frac{1}{1-s}$) into the definition and clears denominators under the hypotheses $s \neq 0$ and $1 - s \neq 0$. Claim 2 follows from the entirety of $\Lambda_0$ (`differentiable_completedZeta₀`) and the differentiability of the polynomial factor. Claim 3 follows from the reflection symmetry `completedRiemannZeta₀_one_sub` ($\Lambda_0(1 - s) = \Lambda_0(s)$), because the factor $s\,(s - 1)$ is invariant under $s \mapsto 1 - s$. For claim 4 the factor $s\,(s - 1)$ vanishes at $s = 0$ and at $s = 1$, and the definition gives $\frac{1}{2}$ directly. The full proof is checked by the Lean kernel.
+:::
+
+Claim 3 of [@thm-xi-reading-entire-reflection] has an immediate consequence (a one-line manual derivation): if $\operatorname{xiReading}\ \rho = 0$ then $\operatorname{xiReading}\ (1 - \rho) = 0$. The map $s \mapsto 1 - s$ is the half-turn of the complex plane about the point $s = \frac{1}{2}$, so zeros come in pairs with respect to that point. Adding the conjugation symmetry $\xi(\overline{s}) = \overline{\xi(s)}$ (a literature result, not formalized in this book), zeros come in groups of four, $\rho,\ \overline{\rho},\ 1 - \rho,\ 1 - \overline{\rho}$; the four points coincide in pairs and shrink to a single pair exactly when $\operatorname{Re}(\rho) = \frac{1}{2}$. The Riemann hypothesis says precisely that every group has shrunk to a pair.
+
+The reflection symmetry pairs up values that look entirely unrelated.
+
+::: {.example #ex-xi-mirror-values title="One Number on Both Sides of the Mirror: ζ(2) and ζ(−1), ζ(4) and ζ(−3)"}
+The special values used here, $\zeta(2) = \frac{\pi^2}{6}$, $\zeta(4) = \frac{\pi^4}{90}$, $\zeta(6) = \frac{\pi^6}{945}$, $\zeta(-1) = -\frac{1}{12}$, $\zeta(-3) = \frac{1}{120}$, $\zeta(-5) = -\frac{1}{252}$, and the values of the $\Gamma$ function at half-integers, are literature results, not formalized in this book; each row is obtained by direct substitution into $\xi(s) = \frac{1}{2}s(s-1)\pi^{-s/2}\Gamma(s/2)\zeta(s)$ and was checked numerically at 30 digits.
+
+**Hand computation at $s = 2$ and $s = -1$.** With $\Gamma(1) = 1$:
+
+$$
+\xi(2) \;=\; \frac{1}{2}\cdot 2\cdot 1\cdot \pi^{-1}\cdot\Gamma(1)\cdot\frac{\pi^2}{6} \;=\; \frac{\pi}{6} .
+$$
+
+With $\Gamma\bigl(-\tfrac{1}{2}\bigr) = -2\sqrt{\pi}$:
+
+$$
+\xi(-1) \;=\; \frac{1}{2}\cdot(-1)\cdot(-2)\cdot\pi^{1/2}\cdot\bigl(-2\sqrt{\pi}\bigr)\cdot\Bigl(-\frac{1}{12}\Bigr) \;=\; \frac{\pi}{6} .
+$$
+
+The two agree, exactly as claim 3 of [@thm-xi-reading-entire-reflection] asserts at $s = 2$: $\xi(-1) = \xi(2)$.
+
+| mirror pair $(s,\ 1 - s)$ | value used on the right | values used on the left | common value of $\xi$ | numerically |
+| :---: | :---: | :---: | :---: | :---: |
+| $(2,\ -1)$ | $\zeta(2) = \frac{\pi^2}{6}$ | $\zeta(-1) = -\frac{1}{12}$, $\Gamma(-\frac{1}{2}) = -2\sqrt{\pi}$ | $\frac{\pi}{6}$ | $0.5235988$ |
+| $(4,\ -3)$ | $\zeta(4) = \frac{\pi^4}{90}$ | $\zeta(-3) = \frac{1}{120}$, $\Gamma(-\frac{3}{2}) = \frac{4\sqrt{\pi}}{3}$ | $\frac{\pi^2}{15}$ | $0.6579736$ |
+| $(6,\ -5)$ | $\zeta(6) = \frac{\pi^6}{945}$ | $\zeta(-5) = -\frac{1}{252}$, $\Gamma(-\frac{5}{2}) = -\frac{8\sqrt{\pi}}{15}$ | $\frac{2\pi^3}{63}$ | $0.9843262$ |
+| $(1,\ 0)$ | — | — | $\frac{1}{2}$ | $0.5000000$ |
+| $(\frac{1}{2},\ \frac{1}{2})$ | — | — | — | $0.4971208$ |
+
+The fourth row is claim 4 of [@thm-xi-reading-entire-reflection]; the fifth row is the value at the fixed point $s = \frac{1}{2}$ of the mirror.
+
+**Along the critical line.** On $s = \frac{1}{2} + it$ with real $t$, $\xi$ takes real values. Numerical evaluation gives $\xi\bigl(\tfrac{1}{2} + 14i\bigr) \approx +2.01\times10^{-4}$ and $\xi\bigl(\tfrac{1}{2} + 15i\bigr) \approx -7.06\times10^{-4}$: the sign changes between the two, in agreement with the first nontrivial zero $\rho_1 \approx \frac{1}{2} + 14.134725\,i$ recorded in the literature.
+:::
+
+The value $\zeta(-1) = -\frac{1}{12}$, so often singled out for dramatic effect, and the value $\zeta(2) = \frac{\pi^2}{6}$ of the Basel problem are two readings of one and the same number $\frac{\pi}{6}$ on the two sides of a mirror. The position of the mirror, $\operatorname{Re}(s) = \frac{1}{2}$, is now kernel-checked; whether every nontrivial zero stands on the mirror remains the open conjecture stated next.
+
+Yet aesthetic symmetry is not a proof. In strict compliance with our three-tier epistemic contract (`OPEN`), we state the Riemann Hypothesis as an open conjecture (carrying no `lean` attribute), followed by a literature audit delineating what the frozen Lean theorems of this chapter do and do not certify.
 
 ::: {.conjecture #conj-riemann-hypothesis title="The Riemann Hypothesis"}
 Every nontrivial zero of the analytically continued Riemann zeta function $\zeta(s)$ (that is, every zero $\rho \in \mathbb{C}$ lying in the critical strip $0 < \operatorname{Re}(\rho) < 1$) has real part equal to $\frac{1}{2}$:
@@ -176,12 +250,12 @@ $$
 ::: {.remark #rem-euler-zeta-literature title="Audit of Certified Half-Plane Identities vs. Analytic Continuation and the Riemann Hypothesis (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** Readers should keep the three epistemic layers of this chapter sharply distinct:
 
-1. **Kernel-verified frozen theorems in this book (`LEAN ✓`)**: The four formal blocks above — the unit residue at $s = 1$ ([@lem-riemann-zeta-residue-one]), the Dirichlet series identity on $\operatorname{Re}(s) > 1$ ([@prop-riemann-zeta-dirichlet-sum]), the Euler prime product identity on $\operatorname{Re}(s) > 1$ ([@thm-riemann-zeta-euler-product]), and their direct equality on $\operatorname{Re}(s) > 1$ ([@cor-dirichlet-sum-eq-euler-product]) — are fully verified by the Lean kernel. Note that the Euler product is invoked solely inside the absolute-convergence half-plane `1 < s.re` ($\operatorname{Re}(s) > 1$) supplied by the Lean hypotheses.
+1. **Kernel-verified frozen theorems in this book (`LEAN ✓`)**: The five formal blocks of this chapter — the unit residue at $s = 1$ ([@lem-riemann-zeta-residue-one]), the Dirichlet series identity on $\operatorname{Re}(s) > 1$ ([@prop-riemann-zeta-dirichlet-sum]), the Euler prime product identity on $\operatorname{Re}(s) > 1$ ([@thm-riemann-zeta-euler-product]), their direct equality on $\operatorname{Re}(s) > 1$ ([@cor-dirichlet-sum-eq-euler-product]), and the entirety, reflection symmetry $\xi(1 - s) = \xi(s)$ and endpoint values of the xi reading ([@thm-xi-reading-entire-reflection]) — are fully verified by the Lean kernel. Note that the Euler product is invoked solely inside the absolute-convergence half-plane `1 < s.re` ($\operatorname{Re}(s) > 1$) supplied by the Lean hypotheses.
 2. **Classical theorems of analytic number theory (proved in the literature, not formalized in this book)**:
-   - **Analytic continuation and functional equation (Riemann, 1859)**: $\zeta(s)$ extends meromorphically to $\mathbb{C}$ with a single simple pole at $s = 1$, and the completed function $\xi(s) = \frac{1}{2}s(s-1)\pi^{-s/2}\Gamma(s/2)\zeta(s)$ is entire and satisfies $\xi(s) = \xi(1 - s)$, with trivial zeros of $\zeta(s)$ at $s = -2, -4, -6, \dots$;
+   - **Analytic continuation, trivial zeros, and conjugation symmetry (Riemann, 1859)**: $\zeta(s)$ extends meromorphically to $\mathbb{C}$ with a single simple pole at $s = 1$, has trivial zeros at $s = -2, -4, -6, \dots$, and $\xi(\overline{s}) = \overline{\xi(s)}$. (That the completed function $\xi$ is entire and satisfies $\xi(s) = \xi(1 - s)$ no longer belongs to this layer: both are given by [@thm-xi-reading-entire-reflection] through Mathlib's completed zeta.)
    - **Nonvanishing on the line $\operatorname{Re}(s) = 1$ and the Prime Number Theorem (Hadamard, de la Vallée Poussin, 1896)**: $\zeta(1 + it) \neq 0$ for all nonzero real $t \in \mathbb{R} \setminus \{0\}$ (while $t = 0$, i.e. $s = 1$, is the simple pole), implying the Prime Number Theorem $\pi(x) \sim \frac{x}{\ln x}$;
    - **Explicit formulas (von Mangoldt, Weil)**: Fourier duality pairing prime-power logarithmic weights $\Lambda(n)$ with the spectral sum over nontrivial zeros $\rho$.
-3. **Open conjecture (`OPEN`)**: [@conj-riemann-hypothesis] asserts that all nontrivial zeros lie on $\operatorname{Re}(\rho) = 1/2$ (equivalently $\pi(x) = \operatorname{Li}(x) + O(x^{1/2}\ln x)$). The four frozen theorems of this chapter certify the residue and the sum–product identity on $\operatorname{Re}(s) > 1$; they **do not certify the Riemann Hypothesis**.
+3. **Open conjecture (`OPEN`)**: [@conj-riemann-hypothesis] asserts that all nontrivial zeros lie on $\operatorname{Re}(\rho) = 1/2$ (equivalently $\pi(x) = \operatorname{Li}(x) + O(x^{1/2}\ln x)$). The frozen theorems of this chapter certify the residue, the sum–product identity on $\operatorname{Re}(s) > 1$, and the reflection symmetry of $\xi$; they **do not certify the Riemann Hypothesis**: reflection symmetry only says that zeros come in pairs about $s = \frac{1}{2}$, not that they lie on the critical line.
 :::
 
 From the concept fibers of [Chapter 21](ch21-diagonalization-and-escape.md) to the prime orthogonal axes of this chapter, we have seen the rigid crystal structure of the integers $\mathbb{Z}$. What happens, however, when $\mathbb{Z}$ is submerged inside the dense continuum of the rational field $\mathbb{Q}$, where infinitely many fractions crowd between any two integers? Can first-order polynomial equations over $\mathbb{Q}$ still isolate the discrete integer skeleton $\mathbb{Z} \subset \mathbb{Q}$ — and why does the modern lock that achieves this rely on **quaternion norm spheres** and quadratic trace projections? Let us turn to [Chapter 23](ch23-diophantine-definability.md).

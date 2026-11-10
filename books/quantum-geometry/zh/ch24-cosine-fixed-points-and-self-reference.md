@@ -481,12 +481,56 @@ $$
 由此得到两条推论：
 
 1. **旋转的阶数无穷。** 以 $\theta^*$ 为转角的平面旋转 $R(\theta^*)$ 对一切整数 $n \ge 1$ 满足 $R(\theta^*)^n \ne \mathrm{id}$，因为 $R(\theta^*)^n = \mathrm{id}$ 当且仅当 $n\theta^* \in 2\pi\mathbb{Z}$。相应地，单位旋转器 $U(\theta^*) = \cos(\theta^*/2) - \hat{I}\sin(\theta^*/2)$ 的任何正整数次幂都不等于 $\pm 1$。
-2. **轨道稠密且等分布。** 由 Kronecker 定理与 Weyl 等分布定理，点列 $\{n\theta^* \bmod 2\pi\}_{n \ge 0}$ 在圆周上稠密且等分布。
+2. **轨道稠密且等分布。** 点列 $\{n\theta^* \bmod 2\pi\}_{n \ge 0}$ 在圆周上稠密且等分布。其中“无理旋转的轨道等分布”这一步已有冻结的 Lean 证明，见下文 [@lem-irrational-rotation-equidistribution]；用到 $\theta^*$ 上所需的无理性即本注记前半部分。
 
 $\theta^*/\pi$ 是否为超越数，上述论证不能回答；在沙努埃尔猜想之下它成立，因为它可由 [@conj-schanuel-dottie] 的结论（$\theta^*$ 与 $\pi$ 代数无关）推出。
 :::
 
 把两件事并排放：余弦投影在 $\theta^*$ 处一步闭合（$\cos\theta^* = \theta^*$），以 $\theta^*$ 为步长的旋转却永不回到起点。同一个角度，在投影上是不动点，在旋转上是一条开口螺旋。
+
+“永不回到起点”还可以说得更细：这条轨道不仅不闭合，而且把整个圆周均匀地走遍。这一步不必引文献，所钉仓库里有冻结的定理。
+
+::: {.lemma #lem-irrational-rotation-equidistribution title="无理旋转下连续可观测量的轨道平均趋于 Haar 平均" lean="D5/S1/Phase/ContinuousAverage.continuous_average_tendsto_haar"}
+设 $\alpha \in \mathbb{R}$ 为无理数（`hα : Irrational α`），$\rho \in \mathbb{R}$ 为任意初相，$f : \mathbb{R}/\mathbb{Z} \to \mathbb{C}$ 连续（Lean 中 $\mathbb{R}/\mathbb{Z}$ 记作 `AddCircle (1 : ℝ)`，`hf : Continuous f`）。则当 $N \to \infty$ 时
+
+$$
+\frac{1}{N}\sum_{i=0}^{N-1} f\bigl(\rho + i\,\alpha\bigr) \;\longrightarrow\; \int_{\mathbb{R}/\mathbb{Z}} f(x)\,\mathrm{d}\mu(x),
+$$
+
+其中 $\rho + i\alpha$ 取其在 $\mathbb{R}/\mathbb{Z}$ 中的像，$\mu$ 为 $\mathbb{R}/\mathbb{Z}$ 上的归一化 Haar 测度（`AddCircle.haarAddCircle`）。
+:::
+
+::: proof
+使结论成立的连续函数全体构成一个复线性子空间 $S$。第一步，每个特征标 $x \mapsto e^{2\pi i m x}$ 都在 $S$ 中：$m = 0$ 时两端都是 $1$；$m \neq 0$ 时轨道平均是公比 $e^{2\pi i m\alpha}$ 的几何和除以 $N$，由于 $\alpha$ 无理，公比不等于 $1$，几何和有界，平均趋于 $0$，而特征标的 Haar 积分也是 $0$（`fourier_average_tendsto`）。第二步，$S$ 在一致收敛下封闭：平均算子的模不超过 $\lVert f\rVert_\infty$，是等度连续的线性泛函族，逐点极限保持在闭集上。第三步，特征标的线性张成在连续函数空间中稠密（`span_fourier_closure_eq_top`）。三步合起来得 $S$ 是全体连续函数。完整证明由 Lean 内核检查。
+:::
+
+把 [@lem-irrational-rotation-equidistribution] 用到 $\alpha = \frac{\theta^*}{2\pi}$ 上，所需的无理性来自 [@rem-dottie-angle-incommensurable]（依赖林德曼—魏尔斯特拉斯定理，文献结果）；等分布这一步本身已不再依赖文献。
+
+::: {.example #ex-dottie-orbit-seventeen title="以 θ* 为步长的轨道：十七步几乎闭合，却终究走遍圆周"}
+以下数值由闭式几何和计算并以直接求和核对；连分数的部分商是数值观察。
+
+**十七步的近闭合。** $\frac{\theta^*}{2\pi} \approx 0.1176290523$ 的连分数为 $[0; 8, 1, 1, 191, 1, 1, \dots]$。部分商 $191$ 异常地大，使渐近分数 $\frac{2}{17}$ 格外精确：
+
+$$
+17\,\theta^* \;=\; 4\pi - 0.0019233\ldots \quad(\text{弧度}),
+$$
+
+即走十七步、绕过两整圈之后，离起点只差 $0.1102^\circ$。下一次比这更近，要等到第 $3256$ 步（差 $0.0012211$ 弧度）。
+
+**两个可观测量的轨道平均。** 取初相 $\rho = 0$，比较 $f_1(x) = \cos(2\pi x)$ 与 $f_{17}(x) = \cos(2\pi\cdot 17x)$，两者的 Haar 平均都是 $0$：
+
+| 步数 $N$ | $f_1$ 的轨道平均 | $f_{17}$ 的轨道平均 | 转角换成 $2\pi\cdot\frac{2}{17}$ 时 $f_{17}$ 的轨道平均 |
+| :---: | :---: | :---: | :---: |
+| $10$ | $+0.143151$ | $+0.999947$ | $1$ |
+| $10^2$ | $-0.008271$ | $+0.993938$ | $1$ |
+| $10^3$ | $-0.000091$ | $+0.488620$ | $1$ |
+| $10^4$ | $+0.000188$ | $+0.019479$ | $1$ |
+| $10^5$ | $-0.000006$ | $-0.003332$ | $1$ |
+
+$f_1$ 的平均很快趋于 $0$：几何和给出界 $\frac{1}{N\lvert\sin(\theta^*/2)\rvert} \approx \frac{2.77}{N}$。$f_{17}$ 则迟迟不动：它正好对十七步的近闭合敏感，相应的界是 $\frac{1}{N\lvert\sin(17\theta^*/2)\rvert} \approx \frac{1040}{N}$，要到 $N$ 远大于 $1040$ 之后才看得出轨道其实没有闭合。把转角换成与 $\pi$ 可公度的 $2\pi\cdot\frac{2}{17}$，轨道只有十七个点，$f_{17}$ 的平均永远是 $1$，不趋于 Haar 平均：[@lem-irrational-rotation-equidistribution] 的无理性前提去不掉。
+:::
+
+在一千步之内，以 $\theta^*$ 为步长的轨道看上去和一个正十七边形几乎没有区别；等分布是在更长的时间尺度上才显形的。有限步的观察者看到的是闭合的多边形，无限步的极限里才是整个圆周。
 
 ## 24.6 “$\pi$ 是 $\theta$ 的一个投影？”：互逆的两条级数、开普勒方程与半程落体 {#sec-ch24-6}
 
@@ -696,11 +740,11 @@ $$
 
 ### 第六部小结：从球外之球回到自指原点，下一步铸造机械法典
 
-回望第六部《越界·球外之球》的四章征程，我们用经 Lean 4 内核逐条验证的**二十六条正式定理级结论**（第二十一章七条，第二十二、二十三章各四条，第二十四章十一条，涵盖相对语义对角线拓扑逃逸、黎曼 $\zeta$ 函数留数与狄利克雷—欧拉乘积恒等式、艾森斯坦交越二次型剪切不变性与黄金佩尔迹—范数恒等式、以及有限收缩稳定化、解释语境相对不动点与黄金倒数唯一不动点），完成了从数理逻辑、算术频谱到自指不动点的跨界合拢：
+回望第六部《越界·球外之球》的四章征程，我们用经 Lean 4 内核逐条验证的**二十八条正式定理级结论**（第二十一章七条，第二十二章五条，第二十三章四条，第二十四章十二条，涵盖相对语义对角线拓扑逃逸、黎曼 $\zeta$ 函数留数与狄利克雷—欧拉乘积恒等式、艾森斯坦交越二次型剪切不变性与黄金佩尔迹—范数恒等式、以及有限收缩稳定化、解释语境相对不动点与黄金倒数唯一不动点），完成了从数理逻辑、算术频谱到自指不动点的跨界合拢：
 
 - **第二十一章**证明了完备解码目录诱导的相对语义对角线在潜划分拓扑下必不连续（[@thm-complete-diagonal-not-continuous]）、必具非空分离亏损（[@lem-complete-diagonal-separation-deficit]），且并入对角线后观测拓扑严格加细（[@prop-complete-diagonal-strict-refinement]、[@cor-complete-diagonal-topological-settlement]），给出了完备赋范代数中指数级数的阶乘余项界（[@lem-exp-tail-le]）与有限记录信道恢复误差的严格正余弦下界（[@lem-finite-support-autocorrelation-cosine]、[@thm-finite-record-cosine-obstruction]），并与泰勒截断余项 $R_{2N}(\theta)$、笛卡尔 $720^\circ = 4\pi$ 五边形角亏、毛球定理及 Adams 可平行化球面 $S^0, S^1, S^3, S^7$（[@rem-hairy-ball-adams-literature]）交相印证；
-- **第二十二章**将素数还原为算术对数空间的正交基，在绝对收敛半平面 $\operatorname{Re}(s) > 1$ 上严格建立了 $s=1$ 留数（[@lem-riemann-zeta-residue-one]）、狄利克雷级数（[@prop-riemann-zeta-dirichlet-sum]）、欧拉乘积（[@thm-riemann-zeta-euler-product]）及两者的直接恒等（[@cor-dirichlet-sum-eq-euler-product]），剖析了有限素数筛的多面体余项裂缝，并严格划定了它们与开放黎曼猜想（[@conj-riemann-hypothesis]、[@rem-euler-zeta-literature]）的认识论边界；
+- **第二十二章**将素数还原为算术对数空间的正交基，在绝对收敛半平面 $\operatorname{Re}(s) > 1$ 上严格建立了 $s=1$ 留数（[@lem-riemann-zeta-residue-one]）、狄利克雷级数（[@prop-riemann-zeta-dirichlet-sum]）、欧拉乘积（[@thm-riemann-zeta-euler-product]）及两者的直接恒等（[@cor-dirichlet-sum-eq-euler-product]），并给出完备化 $\xi$ 读数的整函数性与反射对称 $\xi(1 - s) = \xi(s)$（[@thm-xi-reading-entire-reflection]），剖析了有限素数筛的多面体余项裂缝，并严格划定了它们与开放黎曼猜想（[@conj-riemann-hypothesis]、[@rem-euler-zeta-literature]）的认识论边界；
 - **第二十三章**揭示了二次范数与迹投影如何在连续有理数中锁定离散整格，形式化证明了 $\Delta = -3$ 艾森斯坦交越二次型的幺模剪切归约、常数判别式与值域等同（[@thm-qform-eq-eisnorm]、[@lem-qform-discriminant]、[@cor-qform-range-eq-eisnorm]）以及 $\Delta = +5$ 黄金整数的佩尔恒等式（[@prop-pell-form-eq-four-mul-norm]），并系统评述了 Koenigsmann（2016）用四元数范数在 $\mathbb{Q}$ 中给出 $\mathbb{Z}$ 的 $\forall$/$\forall\exists$ 一阶定义与开放问题 $\mathrm{H10}(\mathbb{Q})$ 的精确关系（[@rem-diophantine-z-in-q-literature]）；
-- **第二十四章**证明了有限状态收缩更新的稳定化与变化步数界（[@thm-finite-contracting-updates-stabilize]）、相对解释不动点的相邻步贴合与静态语境非唯一性（相同的文本与解释规则在两个不同静态语境下给出不同的布尔意义，[@lem-conceptual-equivalence-stability-fixed-point]、[@prop-context-parameters-distinct-fixed-points]）正实数上黄金倒数映射的唯一不动点（[@cor-golden-fixed-point-unique]）、非退化二元分式映射的四种自作用命运及其中唯一“活着”的 $\varphi$ 族（[@thm-self-application-four-fates]、[@lem-golden-inverse-branch-fixed-point]）正五边形的黄金余弦（[@prop-pentagon-golden-cosines]）、对角线落点即扭转不动点与无不动点扭转的普遍逃逸及其有限计数（[@lem-diagonal-landing-fixed]、[@thm-self-application-fragment-package]、[@prop-escaped-listing-card]）以及标准单纯形上的布劳威尔不动点定理（[@thm-brouwer-standard-simplex]），并在巴拿赫压缩、林德曼—魏尔斯特拉斯超越性（$|\cos q - q| > 0$）与沙努埃尔猜想（[@conj-schanuel-dottie]、[@rem-banach-dottie-hairy-ball-literature]）的映照下，将全书几何直觉收束于 $\cos\theta^* = \theta^*$ 与 $\psi = \psi(\psi)$。
+- **第二十四章**证明了有限状态收缩更新的稳定化与变化步数界（[@thm-finite-contracting-updates-stabilize]）、相对解释不动点的相邻步贴合与静态语境非唯一性（相同的文本与解释规则在两个不同静态语境下给出不同的布尔意义，[@lem-conceptual-equivalence-stability-fixed-point]、[@prop-context-parameters-distinct-fixed-points]）正实数上黄金倒数映射的唯一不动点（[@cor-golden-fixed-point-unique]）、非退化二元分式映射的四种自作用命运及其中唯一“活着”的 $\varphi$ 族（[@thm-self-application-four-fates]、[@lem-golden-inverse-branch-fixed-point]）正五边形的黄金余弦（[@prop-pentagon-golden-cosines]）、对角线落点即扭转不动点与无不动点扭转的普遍逃逸及其有限计数（[@lem-diagonal-landing-fixed]、[@thm-self-application-fragment-package]、[@prop-escaped-listing-card]）标准单纯形上的布劳威尔不动点定理（[@thm-brouwer-standard-simplex]）以及无理旋转轨道平均趋于 Haar 平均（[@lem-irrational-rotation-equidistribution]），并在巴拿赫压缩、林德曼—魏尔斯特拉斯超越性（$|\cos q - q| > 0$）与沙努埃尔猜想（[@conj-schanuel-dottie]、[@rem-banach-dottie-hairy-ball-literature]）的映照下，将全书几何直觉收束于 $\cos\theta^* = \theta^*$ 与 $\psi = \psi(\psi)$。
 
 既然全书的几何直觉与理论大厦已经合拢，在最后的**第七部《铸剑·机械法典：零矩阵几何引擎与形式化证明库》**中，我们将把这一切几何定理直接铸造成可运行、零复数矩阵黑箱的位掩码克利福德引擎与 ZYZ 旋转器编译器，并走进 Lean 4 形式化公理圣殿的内部，对全书引用的每一条机器形式化声明执行终极审计！
