@@ -1789,6 +1789,54 @@
       "line": 68,
       "signature": "theorem pinching_hilbert_schmidt_pythagorean (rho : QubitMatrix) : hilbertSchmidtInner rho rho = hilbertSchmidtInner (pinching rho) (pinching rho) + hilbertSchmidtInner (rho - pinching rho) (rho - pinching rho)"
     },
+    "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitoredHistory": {
+      "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation",
+      "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.MonitoredReturnConservation.monitoredHistory",
+      "kind": "def",
+      "statement_id": "sha256:ae75c01f47e23d474c5f187a8a15b655fca3f6cfc45c233fd5b9a8627c57745d",
+      "line": 55,
+      "signature": "def monitoredHistory (U : E ≃ₗᵢ[ℂ] E) (v : E) (n : ℕ) : E"
+    },
+    "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitoredStep": {
+      "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation",
+      "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.MonitoredReturnConservation.monitoredStep",
+      "kind": "def",
+      "statement_id": "sha256:ae75c01f47e23d474c5f187a8a15b655fca3f6cfc45c233fd5b9a8627c57745d",
+      "line": 50,
+      "signature": "def monitoredStep (U : E ≃ₗᵢ[ℂ] E) (v : E) : E →L[ℂ] E"
+    },
+    "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation": {
+      "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation",
+      "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.MonitoredReturnConservation.monitored_return_conservation",
+      "kind": "theorem",
+      "statement_id": "sha256:ae75c01f47e23d474c5f187a8a15b655fca3f6cfc45c233fd5b9a8627c57745d",
+      "line": 71,
+      "signature": "theorem monitored_return_conservation (U : E ≃ₗᵢ[ℂ] E) (v : E) (hv : ‖v‖ = 1) : survivalProbability U v 0 = 1 ∧ (∀ n : ℕ, returnProbability U v (n + 1) = survivalProbability U v n - survivalProbability U v (n + 1)) ∧ ∀ N : ℕ, (∑ n ∈ Finset.range N, returnProbability U v (n + 1)) + survivalProbability U v N = 1"
+    },
+    "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.returnAmplitude": {
+      "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation",
+      "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.MonitoredReturnConservation.returnAmplitude",
+      "kind": "def",
+      "statement_id": "sha256:ae75c01f47e23d474c5f187a8a15b655fca3f6cfc45c233fd5b9a8627c57745d",
+      "line": 59,
+      "signature": "def returnAmplitude (U : E ≃ₗᵢ[ℂ] E) (v : E) (n : ℕ) : ℂ"
+    },
+    "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.returnProbability": {
+      "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation",
+      "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.MonitoredReturnConservation.returnProbability",
+      "kind": "def",
+      "statement_id": "sha256:ae75c01f47e23d474c5f187a8a15b655fca3f6cfc45c233fd5b9a8627c57745d",
+      "line": 63,
+      "signature": "def returnProbability (U : E ≃ₗᵢ[ℂ] E) (v : E) (n : ℕ) : ℝ"
+    },
+    "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.survivalProbability": {
+      "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation",
+      "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.MonitoredReturnConservation.survivalProbability",
+      "kind": "def",
+      "statement_id": "sha256:ae75c01f47e23d474c5f187a8a15b655fca3f6cfc45c233fd5b9a8627c57745d",
+      "line": 67,
+      "signature": "def survivalProbability (U : E ≃ₗᵢ[ℂ] E) (v : E) (n : ℕ) : ℝ"
+    },
     "D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law": {
       "module": "D5/S3/QuantumContext/ParallelogramNormLaw",
       "name": "D5.S3.QuantumContext.ParallelogramNormLaw.inner_product_norm_parallelogram_law",

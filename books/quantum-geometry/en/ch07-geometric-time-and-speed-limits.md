@@ -166,6 +166,82 @@ Evaluating $P_N(T)$ at $N = 1, 4, 16, 64$ shows how rapid inner-product polling 
 | **$N = 64$** | $2.8125^\circ$ | $0.9994$ | **$0.9622$ ($96.2\%$)** | $0.9614$ | High-frequency inner-product checks lock the state at $\lvert 0\rangle$ |
 :::
 
+[@ex-zeno-strobe-freezing] follows only one branch: the one in which every probe answers "still in $\lvert 0\rangle$". The same stroboscopic detector can keep a second ledger. Start from the initial state $v$; after each unitary step $U$ ask "has it returned to $v$?". If the answer is yes, stop the clock; if no, the state is projected onto the orthogonal complement of $v$ and the next step begins. This yields two sequences of numbers: the probability of returning for the first time exactly at step $n$, and the probability of not having returned during the first $n$ steps. This ledger has a frozen Lean theorem, valid for every unitary evolution.
+
+::: {.definition #def-monitored-return title="Monitored Step, Return Amplitude, Return Probability, and Survival Probability" lean="D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitoredStep D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitoredHistory D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.returnAmplitude D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.returnProbability D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.survivalProbability"}
+Let $E$ be a complete complex inner-product space (`[NormedAddCommGroup E]`, `[InnerProductSpace ℂ E]`, `[CompleteSpace E]`), $U : E \simeq_{\mathrm{li}}[\mathbb{C}] E$ a linear isometric equivalence, and $v \in E$. Write $P_v$ for the orthogonal projection onto the line $\mathbb{C} v$. In the module `MonitoredReturnConservation`:
+
+1. The **monitored step** [`monitoredStep`](lean:D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitoredStep) $U\ v = (\mathrm{id} - P_v) \circ U$: evolve one step, then project onto the "no return" subspace;
+2. The **monitored history** [`monitoredHistory`](lean:D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitoredHistory) $U\ v\ n = (\operatorname{monitoredStep}\ U\ v)^n\, v$: the unnormalized state after $n$ consecutive "no" answers;
+3. The **return amplitude** [`returnAmplitude`](lean:D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.returnAmplitude) $U\ v\ n = \bigl\langle v,\ U\bigl(\operatorname{monitoredHistory}\ U\ v\ (n - 1)\bigr)\bigr\rangle$, where $n - 1$ is natural-number subtraction;
+4. The **return probability** [`returnProbability`](lean:D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.returnProbability) $U\ v\ n = \lVert\operatorname{returnAmplitude}\ U\ v\ n\rVert^2$;
+5. The **survival probability** [`survivalProbability`](lean:D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.survivalProbability) $U\ v\ n = \lVert\operatorname{monitoredHistory}\ U\ v\ n\rVert^2$.
+:::
+
+Below, $\operatorname{returnProbability}\ U\ v\ n$ is abbreviated $p_n$ and $\operatorname{survivalProbability}\ U\ v\ n$ is abbreviated $s_n$.
+
+::: {.proposition #prop-monitored-return-conservation title="Stepwise and Finite Conservation for the Monitored Return Protocol" lean="D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation"}
+With the notation of [@def-monitored-return], let $\lVert v\rVert = 1$ (`hv`). Then all three of the following hold:
+
+1. $s_0 = 1$;
+2. For every $n \in \mathbb{N}$: $p_{n+1} = s_n - s_{n+1}$;
+3. For every $N \in \mathbb{N}$:
+
+   $$
+   \sum_{n=0}^{N-1} p_{n+1} \;+\; s_N \;=\; 1 .
+   $$
+:::
+
+::: proof
+Claim 1: the history after zero probes is $v$ itself, of squared norm $1$. Claim 2: decompose the vector $U\bigl(\operatorname{monitoredHistory}\ U\ v\ n\bigr)$ along $\mathbb{C}v$ and its orthogonal complement by Pythagoras (`Submodule.norm_sq_eq_add_norm_sq_starProjection`). $U$ is an isometry, so the squared norm on the left equals $s_n$; the component along $\mathbb{C}v$ is identified, through the formula for a rank-one projection (`Submodule.starProjection_singleton`) and $\lVert v\rVert = 1$, as the return amplitude, of squared norm $p_{n+1}$; the component in the orthogonal complement is exactly the next monitored history, of squared norm $s_{n+1}$. Claim 3 sums claim 2 over $n = 0, \dots, N - 1$; the right-hand side telescopes (`Finset.sum_range_sub'`), and $s_0 = 1$ is inserted. The full proof is checked by the Lean kernel.
+:::
+
+[@prop-monitored-return-conservation] says that no probability is lost: the probability of a first return within the first $N$ steps, plus the probability of no return so far, is exactly $1$. It does not depend on what $U$ is, nor on the dimension of the space. Applied to the rotating qubit of [@ex-zeno-strobe-freezing], it leads to a conclusion that stands exactly opposite to Zeno freezing.
+
+::: {.example #ex-first-return-qubit title="First-Return Statistics of a Rotating Qubit: The Mean Return Time Is Always 2, Whatever the Step"}
+Let a qubit turn through the Bloch angle $\delta$ about the $X$ axis at each step, $U = \cos\frac{\delta}{2}\,I - i\sin\frac{\delta}{2}\,X$, with initial state $v = \lvert 0\rangle$. Write $c = \cos\frac{\delta}{2}$ and $s = \sin\frac{\delta}{2}$, and assume $s \neq 0$.
+
+**Step by step.** First step: $U\lvert 0\rangle = c\,\lvert 0\rangle - i s\,\lvert 1\rangle$, so $p_1 = c^2$, the component that has not returned is $-is\,\lvert 1\rangle$, and $s_1 = s^2$. From then on the state sits on $\lvert 1\rangle$: $U\lvert 1\rangle = c\,\lvert 1\rangle - is\,\lvert 0\rangle$, and at each step it returns with conditional probability $s^2$ and stays on $\lvert 1\rangle$ with conditional probability $c^2$. Hence, for $n \ge 1$:
+
+$$
+\begin{aligned}
+p_1 &= c^2, \\
+p_{n+1} &= s^4\,c^{2(n-1)}, \\
+s_n &= s^2\,c^{2(n-1)} .
+\end{aligned}
+$$
+
+Check claim 2 of [@prop-monitored-return-conservation] term by term: $s_n - s_{n+1} = s^2 c^{2(n-1)}(1 - c^2) = s^4 c^{2(n-1)} = p_{n+1}$.
+
+**Total return probability and mean return time.** Summing geometric series:
+
+$$
+\begin{aligned}
+\sum_{n \ge 1} p_n &= c^2 + \frac{s^4}{1 - c^2} = c^2 + s^2 = 1, \\
+\sum_{n \ge 1} n\,p_n &= c^2 + s^4\cdot\frac{2 - c^2}{(1 - c^2)^2} = c^2 + (2 - c^2) = 2 .
+\end{aligned}
+$$
+
+The mean first-return time is exactly $2$ steps, independently of $\delta$.
+
+**Numbers.**
+
+| step $\delta$ | $p_1$ | $p_2$ | $p_3$ | $s_3$ | $p_1 + p_2 + p_3 + s_3$ | probability $s^2$ of no return at step one | conditional mean number of steps to return afterwards, $1 + \frac{1}{s^2}$ | mean return time |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| $\frac{\pi}{16}$ | $0.990393$ | $9.23\times10^{-5}$ | $9.14\times10^{-5}$ | $0.009424$ | $1.000000$ | $0.009607$ | $105.09$ | $2.000000$ |
+| $\frac{\pi}{4}$ | $0.853553$ | $0.021447$ | $0.018306$ | $0.106694$ | $1.000000$ | $0.146447$ | $7.83$ | $2.000000$ |
+| $\frac{\pi}{2}$ | $0.500000$ | $0.250000$ | $0.125000$ | $0.125000$ | $1.000000$ | $0.500000$ | $3.00$ | $2.000000$ |
+| $2$ | $0.291927$ | $0.501368$ | $0.146363$ | $0.060343$ | $1.000000$ | $0.708073$ | $2.41$ | $2.000000$ |
+
+The entry $p_1 = 0.853553$ in the row $\delta = \frac{\pi}{4}$ is the single-step survival probability for $N = 4$ in [@ex-zeno-strobe-freezing]. The conservation sums and the means in every row were confirmed by numerical simulation ($4000$ iterations).
+
+**Reading.** The smaller the step, the closer the probability of returning at the very first probe comes to $1$; this is Zeno freezing. But if the first probe finds no return (probability $s^2$), coming back takes $\frac{1}{s^2}$ further steps on average. The product makes up exactly one step: $c^2\cdot 1 + s^2\cdot\bigl(1 + \frac{1}{s^2}\bigr) = 2$. However diligently one probes, only the shape of the distribution changes, not its mean.
+
+**The general case (literature result, not formalized in this book).** Grünbaum, Velázquez, Werner, and Werner (Commun. Math. Phys. **320**, 543, 2013) proved that in finite dimension, whenever return is certain, the mean first detected return time is an integer, equal to the number of distinct eigenvalues of $U$ on whose eigenspaces the initial state has a nonzero component. Here that number is $2$. Numerical simulation with random unitaries in dimensions $3$ and $4$ gives means $3.000000$ and $4.000000$.
+:::
+
+The Zeno effect says that if one looks often enough, the state cannot leave. The first-return ledger supplies the other half: however often one looks, the fact that it comes back once every two steps on average does not change, because what this number counts is not time but how many directions this qubit has to go.
+
 ## 7.4 Observer Attention and Scalar Free-Energy Accounting: When to Read Out Particle Ticks and When to Audit Thermodynamic Cost {#sec-observer-attention-freeze}
 
 Place the quantum speed limit of Section 7.2 alongside the Zeno effect of Section 7.3, and re-read the second epigraph at the head of this chapter:
