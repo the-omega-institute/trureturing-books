@@ -358,7 +358,7 @@ This monograph consists of the **[Prelude](README.md)**, **Eight Parts (30 Chapt
             ┌─────────────────────────────────────────────────────────────────┐
             │ Part VIII: Timeless Causality, ETH & Fluids (Ch 29–30) → Coda   │
             │  • Polyhedral 4π defect & Hairy Ball • Pythagorean 4-tier escape│
-            │  • Concept Dictionary (A) • Clifford Sheet (B) • 307 Index (C)  │
+            │  • Concept Dictionary (A) • Clifford Sheet (B) • 310 Index (C)  │
             └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -369,11 +369,11 @@ Readers can navigate the book along four self-contained tracks tailored to their
 1. **Physics and Geometric Intuition Track (No Prerequisites)**:
    [Prelude](README.md) $\to$ [Chapter 1](ch01-measurement.md)–[Chapter 4](ch04-decoherence.md) (Part I: from ruler comparison to decoherence) $\to$ Chapters 5–12 (Parts II–III: from bivector area to the Bloch sphere) $\to$ Chapters 17–19 (Part V: lightcones and holographic min-cuts) $\to$ Coda and [Appendix A](appendix-a.md).
 2. **Quantum Computing and Algorithm Compilation Track**:
-   [Chapter 2](ch02-born-rule.md) $\to$ Chapters 6–8 (Pauli algebra, quantum gates, and entanglement) $\to$ Chapter 11 (microwave pulse areas and virtual-$Z$ gates) $\to$ Chapters 13–16 (CHSH game, stabilizers, Grover/QSVT, ZYZ and Solovay–Kitaev compilation) $\to$ Chapter 20 (circuit min-depth and CNOT parity bounds) $\to$ Chapters 25–27 and [Appendix B](appendix-b.md).
+   [Chapter 2](ch02-born-rule.md) $\to$ Chapters 6–8 (Pauli algebra, quantum gates, and entanglement) $\to$ Chapter 11 (microwave pulse areas and virtual-$Z$ gates) $\to$ Chapters 13–16 (CHSH game, stabilizers, Grover/QFT/QSVT, ZYZ and Solovay–Kitaev compilation) $\to$ Chapter 20 (circuit min-depth and CNOT parity bounds) $\to$ Chapters 25–27 and [Appendix B](appendix-b.md).
 3. **Mathematical Logic, Number Theory, and Epistemology Track**:
    [Prelude](README.md) $\to$ Chapter 10 (Gram matrices and order independence) $\to$ Chapters 19–20 (discrete polyhedral facet cones and open-conjecture boundaries) $\to$ Chapters 21–24 (diagonal escape, Euler products, quaternion Diophantine norms, and cosine self-reference) $\to$ [Chapter 29](ch29-timeless-causality-and-gram-space.md)–[Chapter 30](ch30-fields-lines-eth-and-navier-stokes.md) (the four-tier Pythagorean escape of number, timeless causality, the ETH horizon, and fluid vortex filaments) $\to$ Coda (golden cut-and-project spatial attractors and [@thm-coda-fixed-point-anchor]).
 4. **Lean 4 Formal Verification and Kernel Audit Track**:
-   [Prelude](README.md) §Epistemic Contract $\to$ Chapters 25–28 (Part VII: line-by-line formal tour of `Cl3`, `PauliSymplectic`, `ZYZ`, and `FiniteRecordCosineObstruction`) $\to$ [Appendix B](appendix-b.md) $\to$ [Appendix C](appendix-c.md) (auditing all $163$ environment/media frozen theorems, $53$ auxiliary definitions, and $91$ inline declarations — $307$ unique locked declarations in total — at `trureturing@dev` commit `52725b62b659`).
+   [Prelude](README.md) §Epistemic Contract $\to$ Chapters 25–28 (Part VII: line-by-line formal tour of `Cl3`, `PauliSymplectic`, `ZYZ`, and `FiniteRecordCosineObstruction`) $\to$ [Appendix B](appendix-b.md) $\to$ [Appendix C](appendix-c.md) (auditing all $166$ environment/media frozen theorems, $53$ auxiliary definitions, and $91$ inline declarations — $310$ unique locked declarations in total — at `trureturing@dev` commit `38196c62e121`).
 
 ### Quick Register of the 36 Core Chapter Theorem Anchors in Parts VI–VIII (Chapters 21–30) {#sec-coda-part6-part7-register}
 
@@ -418,4 +418,4 @@ As a bridge between the closing three parts of the monograph and the complete le
 | **Chapter 30**<br/>Fields, Lines, ETH & Vortex Filaments | T30.1 | `D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff` | Necessary and sufficient criterion for exact idempotent projection closure of a quadratic vector field |
 | **Chapter 30** | T30.2 | `D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure` | Impossibility of exact projection closure for 5-mode Leray-projected advection at every viscosity $\nu \in \mathbb{R}$ |
 
-Outside all spheres lies not emptiness, but **the unending act of measurement and counting itself**. Turn next to [Appendix A](appendix-a.md) for the complete dictionary translating conventional quantum mechanics into geometric language, [Appendix B](appendix-b.md) for the Clifford algebra and rotor cheat sheet, and [Appendix C](appendix-c.md) for the complete index of all $216$ formal environment and media `trureturing@dev` declarations ($307$ unique locked declarations including inline references).
+Outside all spheres lies not emptiness, but **the unending act of measurement and counting itself**. Turn next to [Appendix A](appendix-a.md) for the complete dictionary translating conventional quantum mechanics into geometric language, [Appendix B](appendix-b.md) for the Clifford algebra and rotor cheat sheet, and [Appendix C](appendix-c.md) for the complete index of all $219$ formal environment and media `trureturing@dev` declarations ($310$ unique locked declarations including inline references).
