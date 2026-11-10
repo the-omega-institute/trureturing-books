@@ -29,8 +29,8 @@
 
    严格对应实数 $\mathbb{R}$、复数 $\mathbb{C}$、四元数 $\mathbb{H}$ 与八元数 $\mathbb{O}$ 四大赋范可除代数。这就是为什么单量子比特的物理旋量必须栖居在平行化的三维球面 $S^3 \cong \mathrm{SU}(2)$ 上：二维布洛赫球面 $S^2$ 上梳不平的贝里相位旋涡，正是四维实空间中 $S^3$ 霍普夫纤维丛（Hopf fibration $S^1 \hookrightarrow S^3 \to S^2$）投下的影子。
 
-3. **五重余项的跨部曲共振**：
-   从第一部到第七部，“有限多面体逼近光滑球面所留下的非零接缝”以五种精确的数学形态反复重现：
+3. **第一至第七部中的五重余项原型**：
+   在进入第八部的跨领域合拢之前，“有限多面体逼近光滑球面所留下的非零接缝”已经在前七部中以五种精确的数学形态反复重现：
    - **泰勒多项式截断余项**：在第六部第 24 章中，代数多项式 $\sum_{k=0}^{N-1} (-1)^k \theta^{2k}/(2k)!$ 只是对余弦曲线的分片代数逼近，拉格朗日余项 $|R_{2N}(\theta)| \le |\theta|^{2N}/(2N)!$ 标志着有限次代数运算与超越弧长之间的距离；
    - **欧拉乘积素数尾余项**：在第 22 章中，前 $P$ 个素数张成的有限正交盒子 $\prod_{p \le P} (1 - p^{-s})^{-1}$ 与黎曼 $\zeta(s)$ 之间隔着无穷素数尾 $\sum_{n \in \mathcal{S}_P^c} n^{-s}$，切比雪夫阶梯函数与光滑对数尺度之间的振荡差值 $\psi(x) - x$ 由临界线 $\operatorname{Re}(s) = 1/2$ 上的零点谱共同雕刻；
    - **Solovay–Kitaev 群换位子螺旋**：在第四部第 16 章与第七部第 27 章中，有限通用量子门集生成的离散字在 $\mathrm{SU}(2)$ 流形上织出稠密多面体网格，每一次逼近残差都必须靠非交换群换位子 $ABA^{-1}B^{-1}$ 张开的二阶双向量面积逐步抵消；
@@ -233,7 +233,7 @@ $$
 
 ## 收缩不动点与形式认识论锚点 {#sec-coda-fixed-point-anchor}
 
-在第四层球的入口处，我们必须以全书一以贯之的形式诚实准则，严格界定“哪些核心结构已经由 Lean 4 内核机械锁定”，以及“哪些分析与数论结论属于经典文献或开放猜想”。
+在全书终章的收束处，我们必须以全书一以贯之的形式诚实准则，严格界定“哪些核心结构已经由 Lean 4 内核机械锁定”，以及“哪些分析与数论结论属于经典文献或开放猜想”。
 
 在离散与有限载体上，单调收缩算子迭代必然在有限步内抵达稳定不动点，且严格收缩的步数受初始集合基数绝对限制——这一自指稳定性的组合核心已由 Lean 内核完整验证：
 
@@ -272,7 +272,7 @@ $$
    - 动力系统中的洛伦兹奇异吸引子（Lorenz 1963，相空间体积散度 $-(\sigma+1+\beta) = -41/3 < 0$ 与数值李雅普诺夫谱给出的卡普兰—约克维数估计 $D_{\mathrm{KY}} \approx 2.06$）、洛伦兹吸引子支撑的遍历西奈—吕埃勒—鲍恩（SRB）物理不变测度（Tucker 1999；Luzzatto–Melbourne–Pugh 2005）与庞加莱回归定理（Poincaré 1890），以及准晶几何中的 Meyer 规则模型集一致重复性定理（1972）、六维超立方晶格 $\mathbb{Z}^6 \subset E_\parallel^3 \oplus E_\perp^3$ 的正二十面体投影与菱形三十面体（Rhombic Triacontahedron，$30$ 面、$60$ 棱、$32$ 顶点，$6$ 条五次轴）接受窗 $W$（Kramer & Neri 1984；Duneau & Katz 1985）、彭罗斯—康威准晶拼砖的“帝国效应”（Conway's Empire Effect，Grünbaum & Shephard 1987）；
    - 量子引力中的惠勒—德维特（Wheeler–DeWitt）无时间方程 $H\mathbf{\Psi} = 0$、佩奇—伍特斯（Page–Wootters, 1983）条件纠缠时钟切片机制、费曼路径积分振荡相位驻相条件 $\delta S = 0$，计算复杂度理论中的阿伦森后选择定理 $\mathrm{PostBQP} = \mathrm{PP}$（2005）、闭合类时曲线不动点定理 $\mathrm{P}_{\mathrm{CTC}} = \mathrm{PSPACE}$（Aaronson–Watrous 2009）、无结构黑盒搜索 $\Omega(2^{n/2})$ 下界（BBBV 1997）、格里戈里耶夫—舍内贝克（Grigoriev–Schoenebeck）平方和半正定松弛下界、卡马卡（Karmarkar 1984）线性规划内点法、卡斯特莱因（Kasteleyn 1961）平面图 Pfaffian 匹配定理、因帕利亚佐—帕图里—赞恩（Impagliazzo–Paturi–Zane 1999, 2001）指数时间假设（ETH/SETH）与稀疏化引理、PPSZ $k$-SAT 算法及 2026 年 10 月张量网络缩并 $2^{O(n\log\log n/\sqrt{\log n})}$ 亚指数预印本与学界规约审计，以及流体力学中的兰姆（Lamb）矢量恒等式、开尔文（Kelvin）环量守恒定理、拉季任斯卡娅（Ladyzhenskaya 1969）二维纳维—斯托克斯全局正则性定理、柯尔莫哥洛夫（Kolmogorov 1941）$k^{-5/3}$ 级联与耗散微尺度 $\eta = (\nu^3/\varepsilon)^{1/4}$、阿诺德（Arnold 1966）保体积微分同胚群 $\operatorname{SDiff}(M)$ 测地线定理与陶哲轩（Tao 2016）平均化三维纳维—斯托克斯方程有限时间爆破定理。
 3. **尚未解决的开放猜想（红色 `OPEN`，无 `lean` 属性）**：
-   - 标准计算模型下的 $\mathrm{P} \neq \mathrm{NP}$ 猜想（`@conj-ch20-p-ne-np`）、三维不可压缩纳维—斯托克斯方程全局光滑性与有限时间爆破问题（[@conj-coda-navier-stokes-regularity]）、沙努埃尔（Schanuel）猜想及其在 Dottie 不动点 $\theta^*$ 上的应用（包括 Timothy Chow 证明的在沙努埃尔猜想成立前提下 $\theta^*$ 不属于初等封闭数域 $\mathrm{EL}$ 的条件性结论），以及全书在附录 C 第 C.3 节汇总的开放问题。
+   - 标准计算模型下的 $\mathrm{P} \neq \mathrm{NP}$ 猜想（[@conj-p-neq-np]）、三维不可压缩纳维—斯托克斯方程全局光滑性与有限时间爆破问题（[@conj-coda-navier-stokes-regularity]）、沙努埃尔（Schanuel）猜想及其在 Dottie 不动点 $\theta^*$ 上的应用（[@conj-schanuel-dottie]，以及 Timothy Chow 证明的在沙努埃尔猜想成立前提下 $\theta^*$ 不属于初等封闭数域 $\mathrm{EL}$ 的条件性文献结论），以及全书在附录 C 第 C.3 节汇总的开放问题。
 4. **哲学与几何模型综合（`MODEL`，不作为形式定理宣称）**：
    - 休谟因果怀疑论与斯宾诺莎《伦理学》三角形几何必然性的哲学对照、双向量手性对消 $+\mathbf{\Omega} - \mathbf{\Omega} = 0$ 对驻相干涉的几何诠释、“$P$ 是无旋导向场（$\nabla \wedge \mathbf{F} = 0$）、$NP$ 是零横截面一维见证丝、三元阻挫旋度 $\nabla \wedge \mathbf{F} \neq 0$ 撕裂全局场”以及“三维纳维—斯托克斯涡管拉伸 $A \to 0$ 与 $P$ vs. $NP$ 的连续—离散场化同构”类比模型、“历史遗迹作为零相子应变空间吸引子（$\|\pi_\perp(z)-u\|\to 0$）、灵魂作为内部正交相位锚点 $u \in E_\perp^3$、遗忘初始化作为齐肯多夫高位截断、似曾相识（Déjà vu）作为分形薄层/卡西尼 $(-1)^{k+1}$ 偏移下的跨轮次内积共振 $\cos\delta\theta \to 1$”的概念映射、决定论与目的论在无时间自指中的和解、记号 $\psi = \psi(\psi)$ 以及“点 $\to$ 线 $\to$ 面 $\to$ 球 $\to$ 球外之球”的认识论图景，是对上述形式化锚点与经典文献定理的跨学科概念提炼；本书始终坚持“书负责解释直觉，Lean 内核负责裁决形式真伪”的铁律。
 :::
@@ -354,7 +354,7 @@ $$
             ┌─────────────────────────────────────────────────────────────────┐
             │ 第八部：无时间因果、ETH 视界与流体涡丝 (Ch 29–30) → 终章与附录   │
             │  • 多面体角亏 4π 与毛球定理 • 勾股面积守恒与四级“球外之球”突围  │
-            │  • 概念对照词典 (A) • 克利福德速查表 (B) • 205 项锁定声明索引 (C)│
+            │  • 概念对照词典 (A) • 克利福德速查表 (B) • 307 项锁定声明索引 (C)│
             └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -367,13 +367,13 @@ $$
 2. **量子计算与算法编译路径**：
    [第 2 章](ch02-born-rule.md) $\to$ 第 6–8 章（泡利代数、量子门与纠缠）$\to$ 第 11 章（微波脉冲与虚拟 $Z$ 门）$\to$ 第 13–16 章（CHSH 博弈、稳定子、Grover/QSVT、ZYZ 与 Solovay–Kitaev 编译）$\to$ 第 20 章（电路深度与 CNOT 奇偶下界）$\to$ 第 25–27 章与 [附录 B](appendix-b.md)。
 3. **数理逻辑、数论与认识论路径**：
-   [序曲](README.md) $\to$ 第 10 章（Gram 矩阵与顺序无关性）$\to$ 第 19–20 章（离散多面体分片锥与开放猜想边界）$\to$ 第 21–24 章（对角线逃逸、欧拉乘积、四元数丢番图范数、余弦自指不动点）$\to$ 终章（毕达哥拉斯四级数系突围与 [@thm-coda-fixed-point-anchor]）。
+   [序曲](README.md) $\to$ 第 10 章（Gram 矩阵与顺序无关性）$\to$ 第 19–20 章（离散多面体分片锥与开放猜想边界）$\to$ 第 21–24 章（对角线逃逸、欧拉乘积、四元数丢番图范数、余弦自指不动点）$\to$ [第 29 章](ch29-timeless-causality-and-gram-space.md)–[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)（毕达哥拉斯四级数系突围、无时间因果、ETH 视界与流体涡丝）$\to$ 终章（黄金切投空间吸引子与 [@thm-coda-fixed-point-anchor]）。
 4. **Lean 4 形式化验证与内核审计路径**：
-   [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 与 `FiniteRecordCosineObstruction` 的逐行形式化剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对 `trureturing@dev` 提交 `52725b62b659` 下全部 $156$ 条冻结定理与 $49$ 项辅助定义）。
+   [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 与 `FiniteRecordCosineObstruction` 的逐行形式化剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对 `trureturing@dev` 提交 `52725b62b659` 下全部 $163$ 条环境/媒体冻结定理、$53$ 项环境辅助定义与 $91$ 项行内引用声明，共计 $307$ 项唯一锁定声明）。
 
-### 第六部与第七部（第 21–28 章）32 条核心冻结定理速览 {#sec-coda-part6-part7-register}
+### 第六至第八部（第 21–30 章）36 项核心章节冻结定理锚点速览 {#sec-coda-part6-part7-register}
 
-作为连接全书收官两部曲与 [附录 C](appendix-c.md) 完整索引的桥梁，下表列出第六部（第 21–24 章）与第七部（第 25–28 章）每章刚好 $4$ 条、共计 $32$ 条核心冻结定理的章节归属与几何角色：
+作为连接全书收官三部曲与 [附录 C](appendix-c.md) 完整索引的桥梁，下表列出第六部（第 21–24 章）与第七部（第 25–28 章）每章 $4$ 条代表定理、以及第八部（第 29–30 章）每章 $2$ 条核心定理，共计 $36$ 项章节定理锚点（涵盖 $35$ 个不同 GID，其中 `pell_form_eq_four_mul_norm` 在第 23 章与第 29 章首尾呼应）：
 
 | 章节 | 定理序号 | 冻结声明 GID (`trureturing@dev`) | 核心数学内容与几何角色 |
 | :--- | :---: | :--- | :--- |
@@ -409,5 +409,9 @@ $$
 | **第 28 章** | T28.2 | `D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight` | 秩一测量通道下条件化记录权重与玻恩内积配对的精确恒等式 |
 | **第 28 章** | T28.3 | `D5/S3/Observer/Conditioning.conditionalState_isState` | 吕德斯条件化后验态保持量子态合法性（半正定与迹一归一化） |
 | **第 28 章** | T28.4 | `D5/S3/Observer/Conditioning.unreadState_fixed_iff` | 未读测量记录态保持不变当且仅当初始态与全部测量投影通道无横向相干 |
+| **第 29 章**<br/>无时间因果与 Gram 相容空间 | T29.1 | `D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm` | 黄金整数佩尔范数恒等式：连接算术 $\pm 1$ 接缝与四级数系突围 |
+| **第 29 章** | T29.2 | `D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization` | 单位向量族 Gram 重叠等价关系定理：锁定无时间成对内积刚性 |
+| **第 30 章**<br/>场线分野、ETH 与流体涡丝 | T30.1 | `D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff` | 二次矢量场有限分辨率幂等投影精确闭合的充要代数判据 |
+| **第 30 章** | T30.2 | `D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure` | 五模态勒雷投影平流对任意粘性系数 $\nu \in \mathbb{R}$ 均无精确闭合映射 |
 
-在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，并在 [附录 C](appendix-c.md) 中核验全书锁定的全部 $205$ 项 `trureturing@dev` 正式环境与媒体声明（含行内共 $297$ 项唯一锁定声明）。
+在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，并在 [附录 C](appendix-c.md) 中核验全书锁定的全部 $216$ 项 `trureturing@dev` 正式环境与媒体声明（含行内共 $307$ 项唯一锁定声明）。
