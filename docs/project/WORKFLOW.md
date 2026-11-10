@@ -13,12 +13,30 @@
 | **作者与总架构师**<br>*(Author & Principal Architect)* | **Auric** | 提出全书核心几何直觉、物理图像与哲学命题（两子丈量、有向夹角面积、正交两次寻址、球外之球、割圆多面体近似与泰勒余项逃逸、毛球定理与 $720^\circ$ 角亏、余弦自指不动点 $\cos\theta^* = \theta^*$ 与 $\psi = \psi(\psi)$）；审定目录脉络、章节题记与学术标准。 |
 | **中英双语正文主笔**<br>*(Chapter Prose Authoring)* | **Gemini**<br>*(Isolated Author Subagent)* | 负责全书 33 个单元（序曲、第一至第七部共 28 章、尾声与附录 A–C）的中英文双语学术专著与教材正文撰写，融合费曼式物理机制手算教学与尼采式维度谱系批判，严格对齐冻结的 Lean 4 定理签名并逐字保留章首作者原话题记。 |
 | **辅助工程与形式化对齐**<br>*(Auxiliary Engineering & Tooling)* | **Codex CLI**<br>*(`codex-cli`)* | 负责除正文写作外的全部工程性辅助工作：从 `trureturing@dev` 提取并核验冻结的 Lean 4 定理签名与状态切片（生成各批次 `spec-batch-*.md` 规格书）、绘制共享静态矢量图（`assets/fig-*.svg`）、编写第七部零依赖 Python 几何代数与转子编译参考引擎及测试、执行 `./tbook pin / check / build / epubcheck` 工具链验证，以及管理 Git 分支、Worktree 与上游模板修复 PR。 |
-| **交互可视化与讲解视频**<br>*(Interactive Viz & Explainer Films)* | **Claude Opus 5.5**<br>*(Subagent `claude-opus-5-5`)* | 负责全部交互式可视化（`books/<slug>/viz/<id>/`，遵循 `skills/book-viz` 规范，含双语切换、深浅主题、390px 响应式布局，并通过 `viz-validate.mjs` 与 `viz-test.mjs` 浏览器测试）与讲解视频（`books/<slug>/films/<NNN>-<name>/`，遵循 `skills/book-film` 规范，含确定性 Canvas 动画、Kokoro 英文旁白、程序化配乐、中英字幕与 `poster.jpg`）。 |
+| **交互可视化与讲解视频**<br>*(Interactive Viz & Explainer Films)* | **Claude CLI (Opus 5.5)**<br>*(`claude -p --model opus`，严禁使用 Claude Subagent)* | 直接通过命令行调用 `claude` CLI（不派生 Claude Subagent），严格遵循 `books/example-monograph/` 示例框架完成全部交互式可视化（`books/<slug>/viz/<id>/`，百分之百对齐 `golden-carry` 的三栏 `.app` 结构、`theme/viz/{theme.css,shell.js}` 与 `main.js` 契约，严禁自创主题按钮或非标类名）与讲解视频（`books/<slug>/films/<NNN>-<name>/`，百分之百对齐 `001-golden-deficit` 的 `film.json`、`script.json`、`scenes.js` 与 `poster.jpg` 规范）。 |
 | **三席异构独立审查**<br>*(3-Seat Independent Verification)* | **GPT / Oracle + Codex CLI + Subagent**<br>*(`/sshx` `review_triplet_workers`)* | 对每个出版批次执行互不可见的独立三席审查（`architecture` 架构与契约席、`quality` 数学与教学质量席、`tests` 独立数值与构建验证席），所有阻塞性缺陷清零后方能合入主干。 |
 
 ---
 
-## 2. 三席独立审查与算力调度策略（`/sshx` Verification Protocol）
+## 2. 全面对齐示例专著（`books/example-monograph/`）硬性规范
+
+本仓库的所有产出物必须与 `books/example-monograph/` 保持百分之百的规范一致，严禁在示例框架之外“自创”结构或样式：
+
+1. **交互可视化（`books/<slug>/viz/<id>/`）对齐 `books/example-monograph/viz/golden-carry/`**
+   - **入口与脚本**：`index.html` 仅引用 `../assets/theme.css`、`style.css`、`../assets/shell.js`（位于 `<head>`）以及底部的 `<script src="main.js"></script>`；严禁自造 `viz.js`、严禁在 `<html>` 上添加 `data-theme` 或内联主题切换脚本。
+   - **顶栏（`header.top`）**：左侧 `.brand`（`a.crumb`、`h1.logo`、`.tagline`），右侧 `.status`（`span.pill` 状态胶囊与 `<div class="langs">` 中英切换）；遵循 `theme/viz/theme.css` 单一暗色控制台设计，严禁自创 `<div class="themes">` 亮/暗切换控件。
+   - **三栏布局（`.app`）**：严格采用 `aside.col.deck`（`#inputs` 参数输入 + `#readouts` `<dl class="ro">` 读数面板）+ `main.center`（主视图面板 + `footer.rail#rail` 步进控制栏 `.transport` / `.clock` / `.keys`）+ `aside.col.side`（带 `data-thumb` 的副视图面板 + `#evidence` 形式化依据面板 + `#infoBtn` 按钮），外加 `<div class="drawer" id="drawer" hidden><div class="sheet">...</div></div>` 理论接口抽屉。
+   - **依据标签（`#evidence`）**：只允许使用 `theme/viz/theme.css` 原生定义的五类标签——`.lean`（`LEAN ✓`）、`.lean.num`（`NUM`）、`.lean.model`（`MODEL`）、`.lean.argued`（`ARGUED`）、`.lean.open`（`OPEN`），严禁自创 `.lean.interp`、`LIT`、`.lean-badge`、`.tier` 等非标样式。
+2. **讲解视频（`books/<slug>/films/<NNN>-<name>/`）对齐 `books/example-monograph/films/001-golden-deficit/`**
+   - 固定包含 `film.json`、`script.json`、`scenes.js`、`poster.jpg`，由 `theme/film/film.sh` 渲染并执行 `FILM.init` 自检（0 `FILM_ERRORS`）。
+3. **演示文稿（`books/<slug>/slides/<deck>/`）对齐 `books/example-monograph/slides/overview/`**
+   - 固定包含 `slides.md` 与 `slides.en.md`，使用 `theme/slides` 标准版式与 `<TheoremCard>`、`<LeanBadge>`、`<Stat>`、`<Source>`、`<Tex>` 组件。
+4. **章节与前言（`books/<slug>/{zh,en}/`）对齐 `books/example-monograph/{zh,en}/`**
+   - 严格遵循 `ch01-golden-deficit.md` 的 `theorem / lemma / proposition / corollary / definition / proof / remark / example / conjecture / problem` 块结构与媒体嵌入语法。
+
+---
+
+## 3. 三席独立审查与算力调度策略（`/sshx` Verification Protocol）
 
 为杜绝一切数学幻觉、定理越界包装或正负号/定义域疏漏，每一批次（Batch 1–8）均须通过 `/sshx` 协议的三席独立审查（`review_triplet_workers`）：
 
@@ -37,7 +55,7 @@
 
 ---
 
-## 3. 五路 Git Worktree 并行流水线（5-Worktree Pipeline）
+## 4. 五路 Git Worktree 并行流水线（5-Worktree Pipeline）
 
 全书按 8 个分卷批次（PR #1 至 PR #8）推进。为使“审查/修复阶段”与“新章节创作/媒体制作阶段”完全解耦且保持跨章上下文连贯，仓库采用最多 **5 个并行 `git worktree`** 流水线：
 
@@ -51,10 +69,10 @@
 
 1. **阶段流水化（Pipelined Stages）**
    - **Step A（辅助先行）**：由 `codex-cli` 在对应 worktree 中完成该批次 16 条冻结 Lean 4 定理的源码核验、精确签名提取（生成 `spec-batch-N.md`）与静态 SVG 绘制。
-   - **Step B（正文与媒体并行）**：由 Gemini 正文主笔 subagent 依据规格书撰写中英双语章节正文；同时由 Claude Opus 5.5 媒体 subagent 制作该批次配套的交互可视化（`viz/`）与讲解视频（`films/`）。
+   - **Step B（正文与媒体并行）**：由 Gemini 正文主笔 subagent 依据规格书撰写中英双语章节正文；同时直接通过命令行调用 `claude` CLI（`claude -p --model opus ...`，**禁止派生 Claude Subagent**），严格遵循 `books/example-monograph/` 示例框架制作该批次配套的交互可视化（`viz/`）与讲解视频（`films/`）。
    - **Step C（只读保护与三席审查）**：进入 `/sshx` 审查阶段后，目标 worktree 处于严格只读保护状态，三席审查员并行输出结构化 JSON 报告。
    - **Step D（靶向修复与复审合入）**：针对审查发现的所有阻塞项与建议项执行一次性闭环修复，通过复审与 GitHub Actions CI 后 Squash Merge 入 `main`，并将更新后的 `main`（含累积的 `SUMMARY.md` 与 `trureturing.lock.json`）变基同步至下一批次 worktree。
 2. **上游模板缺陷回馈机制**
    - 凡 `template.toml` `[managed].paths` 下的托管文件（构建脚本、测试套件、主题样式、内置 skills）均不在本书库私自修改。若发现上游模板缺陷，由 `codex-cli` 在独立的 `trureturing-books-template` 仓库并行提交修复 PR、合入并升级模板版本后，通过 `./tbook template update` 零冲突同步回本书库。
 3. **署名与零模型标识边界**
-   - 除本工程工作流文档（`docs/project/WORKFLOW.md`）与 `PROJECT.md` 第 6 节如实记录多智能体协同分工外，**所有正式出版物文件**（`books/<slug>/**` 正文、图注、可视化与视频源码、代码注释、`site.toml`、根级 `README.md`）以及 **Git 提交说明与 PR 描述** 均严格执行零模型标识规则，仅署作者 `Auric` 之名。
+   - 除本工程工作流文档（`docs/project/WORKFLOW.md`）与 `PROJECT.md` 第 7 节如实记录多智能体协同分工外，**所有正式出版物文件**（`books/<slug>/**` 正文、图注、可视化与视频源码、代码注释、`site.toml`、根级 `README.md`）以及 **Git 提交说明与 PR 描述** 均严格执行零模型标识规则，仅署作者 `Auric` 之名。

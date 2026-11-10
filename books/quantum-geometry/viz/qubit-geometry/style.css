@@ -1,9 +1,9 @@
-/* ORTHO//QUBIT layout: geometric controls & readouts on the left | 3D Bloch + Pythagorean circle + pinching ledger & formal evidence on the right.
-   Stacks to one column on phones; inside the book (?embed=1) two compact columns from 640px. Shared pieces come from ../assets/theme.css. */
+/* ORTHO//QUBIT layout: geometric controls and readouts | the Bloch / complementarity / pinching stage with its key rail | the evidence.
+   One column on phones; in the book (?embed=1) two compact columns. Shared pieces come from ../assets/theme.css. */
 .app {
   min-height: 100%;
   display: grid;
-  grid-template-columns: minmax(290px, 350px) minmax(0, 1fr);
+  grid-template-columns: minmax(270px, 310px) minmax(0, 1fr) minmax(320px, 400px);
   grid-template-rows: auto minmax(0, 1fr);
   gap: 10px;
   padding-block: 10px;
@@ -40,7 +40,6 @@ dl.ro dd .sub { display: block; font-size: 11px; color: var(--dim); }
 .vcy { color: var(--cyan); font-weight: 600; }
 .vvi { color: var(--violet); font-weight: 600; }
 .vam { color: var(--amber); font-weight: 600; }
-.lean-badge { color: var(--ok); font-family: var(--font-data); font-weight: 600; font-size: 10.5px; }
 .leanref code { color: var(--cyan); }
 .sheet .refs { margin-top: 14px; }
 
@@ -62,7 +61,12 @@ dl.ro dd .sub { display: block; font-size: 11px; color: var(--dim); }
 .sw.cy { background: var(--cyan); }
 .sw.vi { background: var(--violet); }
 .sw.am { background: var(--amber); }
-.sw.ok { background: var(--ok); }
+.sw.mg { background: var(--magenta); }
+/* the legend's LEAN ✓ key names the green kernel-verified headers drawn on the canvas (same colour rule as .lean .ok) */
+.legend .ok { color: var(--ok); font-family: var(--font-data); font-weight: 600; white-space: nowrap; }
+
+/* ---------- key rail ---------- */
+footer.rail { grid-template-columns: minmax(0, 1fr); }
 
 /* ---------- thumbnail mode (?thumb=1): the canvas alone fills the 1280x720 frame ---------- */
 :root[data-thumb-mode] .stagepanel { padding: 0; background: var(--stage-bg); }
@@ -70,14 +74,22 @@ dl.ro dd .sub { display: block; font-size: 11px; color: var(--dim); }
 :root[data-thumb-mode] .stagewrap { position: absolute; inset: 0; aspect-ratio: auto; min-height: 0; border: 0; }
 :root[data-thumb-mode] .stagepanel > :not(.stagewrap) { display: none; }
 
-/* ---------- responsive layouts ---------- */
-@media (max-width: 920px) {
-  .app { grid-template-columns: minmax(0, 1fr); }
+/* ---------- narrower screens: two columns, then one; the stage right after the inputs ---------- */
+@media (max-width: 1180px) {
+  .app { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .deck { order: 1; }
+  .center { order: 2; grid-column: 1 / -1; }
+  .side { order: 3; grid-column: 1 / -1; }
   .col { overflow: visible; }
+}
+@media (max-width: 760px) {
+  .app { grid-template-columns: minmax(0, 1fr); }
+  .center { grid-column: auto; }
   .deck { display: contents; }
   #inputs { order: 1; }
   .center { order: 2; }
   #readouts { order: 3; }
+  .side { order: 4; }
   .stagewrap { min-height: 260px; }
   .keys { text-align: left; }
 }
@@ -85,10 +97,12 @@ dl.ro dd .sub { display: block; font-size: 11px; color: var(--dim); }
 /* ---------- inside the book (?embed=1): compact, two columns from 640px ---------- */
 :root[data-embed] .app { padding-block: 8px; gap: 8px; grid-template-rows: none; }
 :root[data-embed] .keys { display: none; }
+:root[data-embed] footer.rail { display: none; }
 :root[data-embed] .stagepanel .head .aside { display: none; }
 @media (min-width: 640px) {
   :root[data-embed] .app { grid-template-columns: minmax(250px, 300px) minmax(0, 1fr); align-items: start; }
   :root[data-embed] .deck { display: flex; order: 1; grid-column: auto; }
   :root[data-embed] .center { order: 2; grid-column: auto; }
+  :root[data-embed] .side { order: 3; grid-column: 1 / -1; }
   :root[data-embed] .stagewrap { min-height: 250px; }
 }

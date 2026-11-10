@@ -109,7 +109,7 @@ check('Q04: #roHS label names ρ(η), Π(ρ₀) and ρ₀₁(η) in both languag
 check('Q04: #roEntropy label names D(ρ(η) ‖ Π(ρ₀)) = S(Π(ρ₀)) − S(ρ(η)) in both languages', (await dtText('roEntropy', 'zh')) === DT_S_ZH && (await dtText('roEntropy', 'en')) === DT_S_EN);
 check('Q04: no readout label keeps a bare ⟨ρ,ρ⟩, Π(ρ) or ΔS without a state argument', await D(() => [...document.querySelectorAll('#readouts dt')].every((dt) => !/⟨ρ,ρ⟩|Π\(ρ\)|ΔS =|\|ρ₀₁\|/.test(dt.textContent))));
 
-/* ---------- ARCH-R2-002: semantic color discipline (#46ffb2 only on .lean-badge, #ffc83d only on single active selection) ---------- */
+/* ---------- ARCH-R2-002: semantic color discipline (#46ffb2 only on standard .ok LEAN ✓ badges, #ffc83d only on single active selection) ---------- */
 const colorAudit = await D(() => {
   const OK_RGB = 'rgb(70, 255, 178)';
   const AMBER_RGB = 'rgb(255, 200, 61)';
@@ -120,7 +120,7 @@ const colorAudit = await D(() => {
   for (const el of document.querySelectorAll('*')) {
     const cs = getComputedStyle(el);
     if (cs.color === OK_RGB || cs.backgroundColor === OK_RGB) {
-      okEls.push({ tag: el.tagName, id: el.id, cls: el.className, isLeanBadge: el.classList.contains('lean-badge') });
+      okEls.push({ tag: el.tagName, id: el.id, cls: el.className, isLeanBadge: el.classList.contains('ok') && el.textContent.trim() === 'LEAN ✓' });
     }
     if (cs.color === AMBER_RGB || cs.backgroundColor === AMBER_RGB) {
       const isSingleActiveSelection = el.id === 'pillAngles' || el.parentElement?.id === 'pillAngles' || el.classList.contains('am');
@@ -144,7 +144,7 @@ const colorAudit = await D(() => {
     roEntIsCyan: roEntColor === CYAN_RGB
   };
 });
-check('ARCH-R2-002: #46ffb2 / rgb(70, 255, 178) is used ONLY on .lean-badge elements', colorAudit.okOnlyLeanBadges, JSON.stringify(colorAudit.okEls));
+check('ARCH-R2-002: #46ffb2 / rgb(70, 255, 178) is used ONLY on standard .ok LEAN ✓ badges', colorAudit.okOnlyLeanBadges, JSON.stringify(colorAudit.okEls));
 check('ARCH-R2-002: #ffc83d / rgb(255, 200, 61) is used ONLY on the single active (θ, φ) state selection', colorAudit.amberOnlyActiveSelection, JSON.stringify(colorAudit.amberEls));
 check('ARCH-R2-002: .okmark checkmarks, #gateTape, #roD, and #roEntropy use cyan/violet (not ok-green or amber)',
   colorAudit.okmarksAreCyan && colorAudit.tapeIsCyan && colorAudit.roDIsViolet && colorAudit.roEntIsCyan, JSON.stringify(colorAudit));
@@ -384,6 +384,34 @@ for (const lang of ['zh', 'en']) {
     check(`no horizontal scroll at ${w}px (${lang})`, (await overflowX(page)) === 0);
   }
 }
+/* ---------- golden-carry frame: deck | center (+ key rail) | side, then two columns, then one ---------- */
+const frame = () => D(() => {
+  const q = (s) => document.querySelector(s);
+  const r = (s) => q(s).getBoundingClientRect();
+  return {
+    dom: !!q('.app > aside.col.deck > #inputs + #readouts') && !!q('.app > main.center > #stagePanel + footer.rail#rail > .keys')
+      && !!q('.app > aside.col.side > #evidence #infoBtn') && !!q('#evidence > h2 .aside'),
+    cols: getComputedStyle(q('.app')).gridTemplateColumns.split(' ').length,
+    inputs: r('#inputs').toJSON(), readouts: r('#readouts').toJSON(), stage: r('#stagePanel').toJSON(), evidence: r('#evidence').toJSON()
+  };
+});
+await page.setViewportSize({ width: 1440, height: 900 });
+await open('?lang=zh'); await settle();
+let fr = await frame();
+check('1440px: three columns — aside.col.deck (#inputs, #readouts) | main.center (#stagePanel, footer#rail .keys) | aside.col.side (#evidence, #infoBtn)',
+  fr.dom && fr.cols === 3 && fr.stage.left > fr.inputs.right - 1 && fr.evidence.left > fr.stage.right - 1
+  && Math.abs(fr.inputs.top - fr.stage.top) < 2 && Math.abs(fr.stage.top - fr.evidence.top) < 2, JSON.stringify(fr));
+await page.setViewportSize({ width: 1000, height: 900 });
+await open('?lang=zh'); await settle();
+fr = await frame();
+check('1000px: two columns — the deck first, then the stage and the evidence across the full width',
+  fr.cols === 2 && fr.stage.top >= fr.readouts.bottom - 1 && fr.evidence.top >= fr.stage.bottom - 1
+  && fr.stage.width > 1.8 * fr.inputs.width && Math.abs(fr.evidence.width - fr.stage.width) < 2 && (await overflowX(page)) === 0, JSON.stringify(fr));
+await page.setViewportSize({ width: 390, height: 844 });
+await open('?lang=zh'); await settle();
+fr = await frame();
+check('390px: one column in the order inputs → stage → readouts → evidence',
+  fr.cols === 1 && fr.stage.top >= fr.inputs.bottom - 1 && fr.readouts.top >= fr.stage.bottom - 1 && fr.evidence.top >= fr.readouts.bottom - 1, JSON.stringify(fr));
 await page.setViewportSize({ width: 740, height: 560 });
 await open('?embed=1&lang=en'); await settle();
 check('?embed=1 hides header, crumb, and keyboard hint', await D(() => ['header.top', '.crumb', '.keys'].every((s) => getComputedStyle(document.querySelector(s)).display === 'none') && document.documentElement.dataset.embed === '1'));

@@ -54,9 +54,27 @@
 ## 5. 数学排版与零模型标识铁律
 
 - **数学宏规范**：行内公式用 `$...$`，独立公式块用单独成行且前后留空的 `$$...$$`，多行推导用 `\begin{aligned} ... \end{aligned}`。禁用反斜杠圆括号与反斜杠方括号数学定界符；禁用 `physics` 宏包中未在 `tools/tbook/mathrender.py` 注册的左矢、右矢与内积简写命令，一律写为标准命令 `\lvert\psi\rangle`、`\langle\phi\rvert`、`\langle\phi\mid\psi\rangle`（或 `tools/tbook/mathrender.py` 已注册的 `\ketbra`、`\dyad`、`\Tr`、`\vv`、`\norm`）。
-- **零模型标识（正式出版物与提交记录）**：除工程工作流文档 `docs/project/WORKFLOW.md` 与本文件第 6 节按项目治理要求如实记录多智能体协同分工外，所有正式出版物文件（`books/**` 正文、代码注释、图注、可视化与视频源码、`site.toml`、根级 `README.md`）以及 Git 提交说明与 PR 描述中，严禁出现任何语言模型、智能体或自动生成工具的名称与标识。
+- **零模型标识（正式出版物与提交记录）**：除工程工作流文档 `docs/project/WORKFLOW.md` 与本文件第 7 节按项目治理要求如实记录多智能体协同分工外，所有正式出版物文件（`books/**` 正文、代码注释、图注、可视化与视频源码、`site.toml`、根级 `README.md`）以及 Git 提交说明与 PR 描述中，严禁出现任何语言模型、智能体或自动生成工具的名称与标识。
 
-## 6. 多智能体协同分工与五路并行工作流
+## 6. 全面对齐示例专著（`books/example-monograph/`）规范
+
+本书库的所有结构、版式、组件与交互媒体一律严格对齐模板自带的权威示例专著 `books/example-monograph/` 与 `templates/`，严禁脱离示例框架“自创”结构或私有样式：
+
+1. **交互可视化（`books/<slug>/viz/<id>/`）严格对齐 `books/example-monograph/viz/golden-carry/`**：
+   - 页面入口必须只加载 `../assets/theme.css`、`style.css`、`../assets/shell.js` 与底部的 `<script src="main.js"></script>`（严禁自造 `viz.js`、内联 `<head>` 主题脚本或 `<html data-theme="...">` 属性）。
+   - 顶栏 `<header class="top">` 仅包含 `.brand`（`a.crumb`、`h1.logo`、`.tagline`）与 `.status`（状态 `span.pill` 及 `<div class="langs">` 中英切换按钮）；`theme/viz/theme.css` 明确规定可视化为单一暗色控制台主题，严禁自创 `<div class="themes">` 亮暗切换按钮。
+   - 布局严格采用 `golden-carry` 的三栏 `.app` 网格（`grid-template-columns: minmax(270px, 310px) minmax(0, 1fr) minmax(320px, 400px)`）：
+     - 左栏 `<aside class="col deck">`：`#inputs`（`.num-field`、`.stepper`、`.chips.presets`）与 `#readouts`（`<dl class="ro">`、`<p class="note">`）；
+     - 中栏 `<main class="center">`：主舞台 `<section class="panel">` 与底部 `<footer class="rail" id="rail">`（`.transport`、`.clock`、`.keys`）；
+     - 右栏 `<aside class="col side">`：带 `data-thumb` 的副视图面板 `<section class="panel sec" ... data-thumb>` 与 `#evidence` 依据面板（仅使用 `theme/viz/theme.css` 定义的标准类名 `.lean`、`.lean.num`、`.lean.model`、`.lean.argued`、`.lean.open`，严禁自创 `.lean.interp`、`LIT`、`.lean-badge`、`.tier` 等非标类名），并配 `<button class="chip" id="infoBtn">` 打开 `<div class="drawer" id="drawer" hidden><div class="sheet">...</div></div>` 理论接口。
+2. **讲解视频（`books/<slug>/films/<NNN>-<name>/`）严格对齐 `books/example-monograph/films/001-golden-deficit/`**：
+   - 目录固定由 `film.json`、`script.json`、`scenes.js` 与 `poster.jpg` 组成，统一通过 `theme/film/film.sh` 构建与校验。
+3. **演示文稿（`books/<slug>/slides/<deck>/`）严格对齐 `books/example-monograph/slides/overview/`**：
+   - 采用 `slides.md` 与 `slides.en.md` 双语对齐，仅使用 `theme/slides` 标准版式与组件（`<TheoremCard>`、`<LeanBadge>`、`<Stat>`、`<Source>`、`<Tex>`）。
+4. **章节正文、前言与附录（`books/<slug>/{zh,en}/`）严格对齐 `books/example-monograph/{zh,en}/`**：
+   - 定理环境、证明块、文献注记、开放问题、数值示例表格及文末可视化/视频嵌入块完全遵循 `ch01-golden-deficit.md` 的标准写法。
+
+## 7. 多智能体协同分工与五路并行工作流
 
 本书库采用“人机协同、专精分工、三席异构审查、五路 Worktree 流水线”方式组织生产（完整细则见 `docs/project/WORKFLOW.md`）：
 
@@ -64,6 +82,6 @@
    - **作者与总架构师（Auric）**：提出全书核心几何与哲学命题（两子丈量、球外之球、割圆多面体近似与泰勒余项、毛球定理与 $720^\circ$ 角亏、余弦自指不动点 $\psi = \psi(\psi)$），审定章节脉络与原话题记。
    - **中英双语正文主笔（Gemini Subagent）**：负责全书 33 个单元的中英文学术专著与教材正文撰写，严格对齐冻结的 Lean 4 定理签名。
    - **辅助工程与形式化对齐（`codex-cli`）**：负责冻结 Lean 4 定理核验与批次规格书（`spec-batch-*.md`）、静态矢量图（`assets/fig-*.svg`）、第七部 Python 几何代数参考引擎、`./tbook` 工具链构建检验、Git Worktree 管理及上游模板修复 PR。
-   - **交互可视化与讲解视频（Claude Opus 5.5 Subagent）**：负责全部交互可视化（`books/quantum-geometry/viz/<id>/`）与讲解视频（`books/quantum-geometry/films/<NNN>-<name>/`）的设计、实现与浏览器自动化测试。
+   - **交互可视化与讲解视频（`claude` CLI · Opus 5.5）**：直接通过命令行调用 `claude` CLI（`claude -p --model opus ...`，**禁止使用 Claude Subagent**），严格按照 `books/example-monograph/` 示例框架完成全部交互可视化（`books/quantum-geometry/viz/<id>/`）与讲解视频（`books/quantum-geometry/films/<NNN>-<name>/`）的实现与测试。
    - **三席异构独立审查（`/sshx` `review_triplet_workers`）**：每批次由 `architecture`、`quality`、`tests` 三席独立审查；第一轮（Round 1）采用 `1 nyxid-oracle + 1 codex-cli + 1 isolated-token-subagent`，第二轮及后续复审（Round 2+）禁用响应较慢的 `nyxid-oracle`，采用 `2 codex-cli + 1 isolated-token-subagent` 高速完成修复验证闭环。
 2. **五路 Git Worktree 流水线**：最多并行开启 5 个 `git worktree`（主仓库 `wt1` 及 `wt3`–`wt6`），使当前批次的审查/修复与后续批次的辅助规格、正文写作和可视化/视频制作并行推进、互不阻塞。
