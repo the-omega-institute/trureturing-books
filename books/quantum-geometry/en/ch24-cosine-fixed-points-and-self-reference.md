@@ -360,6 +360,10 @@ $$
 
 > When the ruler measures another, it is called the operator $\cos$ and the other is called the state $\theta$; when the ruler turns back to measure the angle it opens itself, operator and state become one: $\psi = \psi(\psi)$.
 
+::: {.viz src="sphere-escape" preset="dottie" height="500"}
+**Cosine again and again.** Starting from $0$, the cobweb winds in on $\theta^* \approx 0.739$ while the view zooms along. Each step is closer, the error multiplied by about $0.67$, yet no step lands exactly.
+:::
+
 ## 24.5 Carrying the Loop Through: True Convergence Rate, Derivative Speed-Up, and the Width of the Rational Seam {#sec-ch24-5}
 
 The aphorism is stated; now let us do the arithmetic. The cosine table in [@ex-dottie-and-golden-iterations] lists only four rows, and the contraction constant $\sin 1 \approx 0.8415$ of [@rem-banach-dottie-hairy-ball-literature] is the worst case over the whole interval $[0, 1]$. Three questions are still open:

@@ -362,6 +362,10 @@ $$
 
 > 当尺子去量别物时，它叫算子 $\cos$，别物叫状态 $\theta$；当尺子回过头来丈量自己张开的角度，算子就是状态，状态就是算子——万里波涛，皆归 $\psi = \psi(\psi)$。
 
+::: {.viz src="sphere-escape" preset="dottie" height="500"}
+**反复取余弦。** 从 $0$ 出发，蛛网一圈圈绕向 $\theta^* \approx 0.739$，画面跟着放大。每一步都更近，误差大约乘以 $0.67$，却没有哪一步恰好到达。
+:::
+
 ## 24.5 把闭环算到底：真实收敛率、导数加速与有理读数的裂缝宽度 {#sec-ch24-5}
 
 格言说完了，现在把账算清。[@ex-dottie-and-golden-iterations] 的余弦表只列了四行，[@rem-banach-dottie-hairy-ball-literature] 给出的压缩常数 $\sin 1 \approx 0.8415$ 则是整个区间 $[0, 1]$ 上最坏的一处。三个问题还悬着：

@@ -145,6 +145,10 @@ $$
 
 这里需要严守概念与形式化边界：本书的 [@lemma-skew-adjoint-unitary-square] 与 [@thm-relative-complex-structure-square] 在 Lean 内核中严格证明的是 $n \times n$ 复矩阵层面的核心代数恒等式 $R^2 = -I_n$ 与 $J^2 = -I_n$；而将三维欧氏空间的完整克利福德代数识别为泡利复矩阵代数 $\mathrm{Cl}_{3,0}(\mathbb{R}) \cong M_2(\mathbb{C})$（实维数 $8$）、将其**偶次子代数**识别为四元数代数 $\mathrm{Cl}^+_{3,0}(\mathbb{R}) \cong \mathbb{H}$（实维数 $4$，其单位球面 $S^3 \cong \mathrm{SU}(2)$ 由旋子构成）并用三明治积 $\vv{v}' = R(\theta)\vv{v}R(\theta)^\dagger$ 导出三维罗德里格斯旋转公式的历史与经典定理，则在章末的文献注记 [@rem-clifford-rotor-literature] 中专门界定。
 
+::: {.viz src="qubit-geometry" preset="turn1" height="500"}
+**转一圈，旋子变号。** 琥珀色的态矢量绕 $\hat{x}$ 转满 $360^\circ$ 回到出发点，线与面积都回来了；累积旋子的标量部却从 $+1$ 走到 $-1$。点图下方的 ▶ 看下一张卡：转满两圈它才回到 $+1$。
+:::
+
 ## 5.3 全局相位与相对相位：为什么单根线的自转不可见，唯有一组线的夹角才张出面积？ {#sec-global-vs-relative-phase}
 
 在彻底搞懂了“复相位就是二向量平面内的旋转角”之后，困扰无数学生的一道经典难题——**为什么全局相位 $e^{i\alpha}\lvert\psi\rangle$ 在物理上完全不可观测，而叠加态里的相对相位 $\lvert 0\rangle + e^{i\phi}\lvert 1\rangle$ 却能决定干涉条纹的生死？**——便迎刃而解了。

@@ -49,6 +49,10 @@ $$
 | **公设四：幺正演化公设**（量子门与薛定谔演化 $\rho \mapsto U\rho U^*$） | 由几何积的外积有向面积 $\vv{A}\wedge\vv{B} = \sin\theta\,\vv{I}$ 驱动的克利福德旋子 $R(\theta) = \exp(-\vv{B}\theta/2)$ 双侧刚体旋转 | [@thm-balanced-sum-skew-adjoint]（[第五章](ch05-complex-phase-and-rotors.md)）、[@thm-calibrated-unitary-group]（[第七章](ch07-geometric-time-and-speed-limits.md)） |
 | **公设五：投影坍缩与退相干公设**（测量后状态投影更新） | 系统与环境记录正交耦合后对环境求偏迹，在希尔伯特—施密特空间中执行正交捏合投影 $\Pi(\rho)$，丢弃横向外积相干面积 | [@thm-nonselective-marginal]（[第四章](ch04-decoherence.md)）、[@cor-pinching-pythagorean]（本章） |
 
+::: {.viz src="qubit-geometry" preset="half" height="500"}
+**线与面积。** 青色粗线是 $\vv{B}$ 落在量尺 $\vv{A}$ 上的影子 $\vv{A}\cdot\vv{B} = \cos\theta$，品红色的面是两者撑开的 $\lvert\vv{A}\wedge\vv{B}\rvert = \sin\theta$。在球上拖动琥珀色的箭头：两个数此消彼长，夹角 $60^\circ$ 时线是 $0.5$、面积是 $0.87$。
+:::
+
 ## 6.2 勾股守恒 $\cos^2\theta + \sin^2\theta = 1$：粒子的确定性与波的干涉面积此消彼长 {#sec-pythagorean-complementarity}
 
 既然几何积 $\vv{A}\vv{B}$ 同时装下了粒子内积 $\vv{A}\cdot\vv{B}$ 与波动外积 $\vv{A}\wedge\vv{B}$，这两部分在数量上遵循什么铁律？
@@ -210,16 +214,23 @@ $$
 一般混合环境迹距离下的 Englert 不等式作为文献背景引述，不列入本书的 Lean 形式化验证账本。
 :::
 
+::: {.viz src="qubit-geometry" preset="area" height="500"}
+**全是面积的一端。** $\vv{B}$ 与 $\vv{A}$ 垂直时，线缩成一个点，面积撑到最大：两种咔哒各占一半，条纹最清楚。用图下方的 ◀ 切到“全是线”的另一端，对照 [@thm-record-coherence-complementarity] 的两个极限。
+:::
+
 ## 6.4 交互实验：亲手拨动两子几何积、粒子内积与波动外积面 {#sec-interactive-qubit-geometry}
 
-百闻不如一试。在下面的交互实验室 **`ORTHO//QUBIT`（单比特旋子账本）** 中，你可以拖动初态的极角 $\theta$ 与方位角 $\varphi$、探针旋子的转角 $\alpha$，并逐个追加单比特门（`X`, `Y`, `Z`, `H`, `S`, `T`, `I`）：
 
-- 在布洛赫舞台上，取 $\vv{A} = \vv{e}_3$，实时观察琥珀色的当前态矢量 $\vv{B} = \vv{r}$ 如何分解为青色共线内积粒子线 $\vv{A}\cdot\vv{B} = \cos\theta$ 与紫色正交外积波动平行四边形 $\vv{A}\wedge\vv{B} = \sin\theta\,\vv{I}$；两者平方和为 1 正是 [@thm-lagrange-gram-identity] 的特例；
-- 在旋子作用账本中，每个门都是一枚旋子 $R_{\hat n}(\alpha) = \cos(\alpha/2) - B_{\hat n}\sin(\alpha/2)$，账本逐行记下布洛赫矢量 $\vv{r} \mapsto R\,\vv{r}\,R^\dagger$ 与累积旋子的四个分量；符号带标出同一个转动所对应的两枚旋子 $\pm R$ 中取的是哪一枚，例如 $HZH$ 与 $X$ 在球面上是同一个转动，旋子却差一个 $-1$，这就是 $R(2\pi) = -1$ 的旋量双覆盖；
-- 在右侧相图中，观察 $(\theta, \varphi)$ 平面上 $\langle\sigma_z\rangle$、$\langle\sigma_x\rangle$、$\langle\sigma_y\rangle$ 的分布与线路经过的轨迹，并点击相图选择初态。
+百闻不如一试。下面是完整的交互实验室 **`ORTHO//QUBIT`**。中间的布洛赫球是主角：拖动琥珀色的态矢量 $\vv{B}$，对着青色的量尺 $\vv{A}$ 看它的两个投影。
 
-::: {.viz src="qubit-geometry" height="560"}
-交互实验室 `ORTHO//QUBIT`：拨动初态 $(\theta, \varphi)$ 与探针转角 $\alpha$，逐个追加单比特门 `X, Y, Z, H, S, T`，逐步检验几何积分解 $\vv{A}\vv{B} = \vv{A}\cdot\vv{B} + \vv{A}\wedge\vv{B}$、旋子作用 $\vv{r} \mapsto R\,\vv{r}\,R^\dagger$ 与旋量双覆盖 $R(2\pi) = -1$。
+- **线与面积**：青色粗线是影子 $\vv{A}\cdot\vv{B} = \cos\theta$，品红色的面是 $\lvert\vv{A}\wedge\vv{B}\rvert = \sin\theta$；右栏的读数始终给出两者平方和为 $1$（[@thm-lagrange-gram-identity] 取 $u = \vv{A}$、$v = \vv{B}$）。
+- **探测器看到什么**：左下的图把线读成两种咔哒的概率 $\cos^2(\theta/2)$ 与 $\sin^2(\theta/2)$，把面积读成双路干涉条纹的明暗对比。这一读法是示意模型，不是对某个实验装置的模拟。
+- **门是旋子**：点 `X, Y, Z, H, S, T` 或自选转角，态矢量沿球面转动；右下的图同时画出线 $\vv{A}\cdot\vv{B}$ 与旋子的标量部 $w$。矢量转一圈回到原处时 $w = -1$，转两圈才回到 $+1$；$HZH$ 与 $X$ 在球面上是同一个转动，旋子却差一个负号。
+
+左栏的八张实验卡各讲一件事；本章与[第五章](ch05-complex-phase-and-rotors.md)正文里的图，就是其中的几张。
+
+::: {.viz src="qubit-geometry" height="620"}
+交互实验室 `ORTHO//QUBIT`：布洛赫球上的线 $\vv{A}\cdot\vv{B}$ 与面积 $\vv{A}\wedge\vv{B}$、探测器的咔哒与条纹，以及矢量一圈、旋子两圈的双覆盖。页面上的数是数值演示；所引定理由 Lean 内核检查。
 :::
 
 既然“粒子是线，面积是波，两者合起来是同一个几何积场”，那么当这片有向面积随着物理参数连续扫掠时，这个被我们称作“时间”的维度，在几何上又是什么？为什么作者会脱口而出*“我的直觉是,线是经典时间,面积是量子时间”*？让我们进入[第七章](ch07-geometric-time-and-speed-limits.md)。

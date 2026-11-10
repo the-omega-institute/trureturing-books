@@ -20,17 +20,13 @@
 
 ## 2. 全面对齐示例专著（`books/example-monograph/`）硬性规范
 
-本仓库的所有产出物必须与 `books/example-monograph/` 保持百分之百的规范一致，严禁在示例框架之外“自创”结构或样式：
+本仓库的章节、视频与演示文稿必须与 `books/example-monograph/` 的规范保持一致；交互可视化遵守共享运行时、页面契约与质量门，版式服从内容：
 
-1. **交互可视化（`books/<slug>/viz/<id>/`）在形式与元素上 1:1 对齐 `books/example-monograph/viz/golden-carry/`**
-   - **执行载体**：一律直接通过命令行调用 `claude` CLI（`claude -p --model opus ...`，**严禁派生 Claude Subagent**），以 `books/example-monograph/viz/golden-carry/{index.html,style.css,main.js}` 为唯一样板实现与重构。
-   - **入口与脚本**：`index.html` 仅引用 `../assets/theme.css`、`style.css`、`../assets/shell.js`（位于 `<head>`）以及底部的 `<script src="main.js"></script>`；严禁自造 `viz.js`、严禁在 `<html>` 上添加 `data-theme` 或内联主题切换脚本。
-   - **顶栏（`header.top`）**：左侧 `.brand`（`a.crumb`、`h1.logo`、`.tagline`），右侧 `.status`（`span.pill` 状态胶囊与 `<div class="langs">` 中英切换）；遵循 `theme/viz/theme.css` 单一暗色控制台设计，严禁自创 `<div class="themes">` 亮/暗切换控件。
-   - **三栏布局（`.app`）与全部核心元素**：
-     - **左栏 `aside.col.deck`**：`#inputs`（2–3 组 `.num-field` 含 `.stepper` `−` / `<input type="number">` / `+` 与 `<input type="range">`，外加 `.chips.presets#presets` 预设与 `Swap`/`Random`/`Reset` 按钮）+ `#readouts`（精炼 `<dl class="ro">`：6 项半宽读数 + **1 项 `.wide.deficit` 24px 发光主读数** + 2 项 `.wide` 核验行 + `<p class="note" id="roNote">`，严禁堆砌十余行稠密文字）；
-     - **中栏 `main.center`**：`<section class="panel ledger" id="ledgerPanel">`（`.head` 标题栏 + `.rules` 4 枚 `.rule.r0/.r1/.rj/.ra` 公式徽章 + 干净无文字重叠的 `.stage` 几何舞台 + **`.sheetwrap > .digits#ledger > .drow` 可点击 HTML 分步账本** + **`.tape-row` 符号带 `#tape` 与 `#tapeSum`** + `#toast`）+ **`<footer class="rail" id="rail">` 三段式传输控制栏**（`.transport` `⏮ ◀ ▶ ▶▶ ⏭` + `.clock` `#passLabel` & `#pass` 滑块 + `.keys` 快捷键）；
-     - **右栏 `aside.col.side`**：上方 **`<section class="panel sec heatpanel" id="heatPanel" data-thumb>`**（`.heatwrap > canvas#heat + .scan` 1:1 交互二维相图/矩阵 + `#nChips` + `<ul class="legend">` 四色图例 + `#heatCounts` + `#heatHover`）+ 下方 **`<section class="panel sec" id="evidence">`**（五类标准标签 `.lean` / `.lean.num` / `.lean.model` / `.lean.argued` / `.lean.open` + `#infoBtn` 打开 `<div class="drawer" id="drawer" hidden>`）。
-   - **无文字左右分栏缩略图封面（`?thumb=1` `drawCover()`）**：`TRV.thumbMode` 激活时，在 `canvas#heat`（`1280×720`）上绘制左半幅二维相图（带琥珀色十字准星与焦点框）+ 右半幅数学账本行 `#1..#k`（带青/品红格与琥珀色发光末行边框），严禁绘制自然语言散文标题。
+1. **交互可视化（`books/<slug>/viz/<id>/`）按 `skills/book-viz` 的方法制作，细则见 `PROJECT.md` 第 6 节与 `skills/local-viz-cards/SKILL.md`**
+   - **执行载体**：一律直接通过命令行调用 `claude` CLI（`claude -p --model opus ...`，**严禁派生 Claude Subagent**）。
+   - **舞台优先**：按对象选舞台，舞台占页面主体；使用共享的实验室版式 `.app.lab` 与运行时 `theme/viz/{theme.css,shell.js,kit.js}`，不自造私有运行时、主题切换或非标徽章。
+   - **按卡引用**：每张实验卡都是正文可引用的图（`::: {.viz src=… preset=…}`），中英文版本引用相同；PDF/EPUB 使用该卡的带标签静态图。
+   - **验收**：`stageFirstChecks` 与页面自己的独立核对全部通过；看过 `viz-shots` 的全部截图；封面与静态图已重新生成并提交。
 2. **讲解视频（`books/<slug>/films/<NNN>-<name>/`）对齐 `books/example-monograph/films/001-golden-deficit/`**
    - 固定包含 `film.json`、`script.json`、`scenes.js`、`poster.jpg`，由 `theme/film/film.sh` 渲染并执行 `FILM.init` 自检（0 `FILM_ERRORS`）。
 3. **演示文稿（`books/<slug>/slides/<deck>/`）对齐 `books/example-monograph/slides/overview/`**

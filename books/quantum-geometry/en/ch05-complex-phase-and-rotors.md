@@ -145,6 +145,10 @@ Bivector geometry answers both questions in two transparent steps:
 
 To maintain strict formal boundaries: [@lemma-skew-adjoint-unitary-square] and [@thm-relative-complex-structure-square] verify the matrix-level identities $R^2 = -I_n$ and $J^2 = -I_n$ in the Lean kernel, whereas the identification of the full three-dimensional Clifford algebra with the Pauli matrix algebra $\mathrm{Cl}_{3,0}(\mathbb{R}) \cong M_2(\mathbb{C})$ (real dimension $8$), its **even subalgebra** with the quaternion algebra $\mathrm{Cl}^+_{3,0}(\mathbb{R}) \cong \mathbb{H}$ (real dimension $4$, whose unit sphere $S^3 \cong \mathrm{SU}(2)$ consists of rotors), and the full three-dimensional Rodrigues sandwich formula are documented as classical background in [@rem-clifford-rotor-literature].
 
+::: {.viz src="qubit-geometry" preset="turn1" height="500"}
+**One full turn flips the rotor.** The amber state vector goes $360^\circ$ about $\hat{x}$ and returns to where it started, and so do the line and the area; the scalar part of the accumulated rotor runs from $+1$ to $-1$. Press ▶ under the figure for the next card: only after two full turns is it back at $+1$.
+:::
+
 ## 5.3 Global Phase versus Relative Phase: Why Spinning a Single Line Is Invisible, and Only a Pair of Lines Spans an Area {#sec-global-vs-relative-phase}
 
 Understanding complex phase as a planar rotation angle immediately resolves one of the most persistent puzzles of beginner quantum mechanics: **why is a global phase factor $e^{i\alpha}\lvert\psi\rangle$ physically unobservable, whereas a relative phase $\lvert 0\rangle + e^{i\phi}\lvert 1\rangle$ between two branches controls interference completely?**
