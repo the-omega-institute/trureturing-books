@@ -231,10 +231,12 @@ Notice that [@lemma-unit-gram-equality] requires overlap equal to $1$, not modul
 ### The Ultimate Truth of Order-Independence: Why Sequential Time Does Not Exist at the Base Layer, Yet Causality Is Gram Geometric Rigidity {#sec-timeless-gram-causality}
 
 > **Author's Original Words**: *"The essence of order-independence is that sequential before-and-after time simply does not exist at all... and that is why causality is so necessary." This single sentence slices straight through the 2,500-year-old "riddle of time" and "Hume's knot of causality."*
+>
+> **Author's Original Words**: *"Because the observer is finite, the causality experienced is finite; the observer's choice is made within the causally compatible space, continuously picking points in the time field."*
 
-Why is the pairwise inner-product ledger of the Gram matrix $G = A^* A$ so thoroughly order-independent? Pushing one step deeper beneath the matrix algebra reveals one of the central geometric and natural-philosophical insights of this book: **pairwise comparison is order-independent because, at the foundational layer of quantum state geometry, there is no sequential "before-and-after" flow of time; and the iron necessity of causal law arises not from one moment pushing the next along a timeline, but from the zero-time geometric rigidity of the Gram matrix.**
+Why is the pairwise inner-product ledger of the Gram matrix $G = A^* A$ so thoroughly order-independent? Pushing one step deeper beneath the matrix algebra reveals one of the central geometric and natural-philosophical insights of this book: **pairwise comparison is order-independent because, at the foundational layer of quantum state geometry, there is no sequential "before-and-after" flow of time; the iron necessity of causal law arises from the zero-time positive-semidefinite rigidity of the Gram matrix; and a finite observer simultaneously possesses genuine freedom of choice because finite 1D inner-product projections do not exhaust the orthogonal bivector area, leaving open a "causally compatible choice space" parameterized by the dihedral angle.**
 
-Let us examine this insight across three interconnected pillars:
+Let us examine this insight across four interconnected pillars:
 
 1. **Why Order-Independence Abolishes Sequential Time**
    Recall the emergence of the classical timeline analyzed in [Chapter 3](ch03-projectors-and-duality.md) together with the Taylor series of the cosine function examined in Chapter 6:
@@ -253,8 +255,8 @@ Let us examine this insight across three interconnected pillars:
    On the unit sphere of quantum states, Spinoza's timeless triangular necessity takes the exact mathematical form of **three-state Gram matrix positive semidefiniteness**. For any three normalized states $\mathbf{A}, \mathbf{B}, \mathbf{C}$ with real pairwise inner products (direction cosines)
 
    $$
-   c_{AB} = \mathbf{A}\cdot\mathbf{B} = \cos\theta_{AB}, \qquad
-   c_{BC} = \mathbf{B}\cdot\mathbf{C} = \cos\theta_{BC}, \qquad
+   c_{AB} = \mathbf{A}\cdot\mathbf{B} = \cos\theta_1, \qquad
+   c_{BC} = \mathbf{B}\cdot\mathbf{C} = \cos\theta_2, \qquad
    c_{AC} = \mathbf{A}\cdot\mathbf{C} = \cos\theta_{AC},
    $$
 
@@ -264,18 +266,35 @@ Let us examine this insight across three interconnected pillars:
    \det G(\mathbf{A},\mathbf{B},\mathbf{C}) = 1 - c_{AB}^2 - c_{BC}^2 - c_{AC}^2 + 2\,c_{AB}\,c_{BC}\,c_{AC} \ge 0.
    $$
 
-   When the three states lie in the same two-dimensional correlation plane (vanishing 3-wedge volume $\mathbf{A}\wedge\mathbf{B}\wedge\mathbf{C} = 0$), the boundary condition $\det G(\mathbf{A},\mathbf{B},\mathbf{C}) = 0$ reduces to $(c_{AC} - c_{AB}c_{BC})^2 = (1 - c_{AB}^2)(1 - c_{BC}^2)$, locking the third overlap into the exact identity:
+   Completing the square with respect to $c_{AC}$ reveals the geometric anatomy of this inequality:
 
    $$
-   c_{AC} = c_{AB}\,c_{BC} \pm \sqrt{\bigl(1 - c_{AB}^2\bigr)\bigl(1 - c_{BC}^2\bigr)} = \cos\bigl(\theta_{AB} \mp \theta_{BC}\bigr).
+   \det G = (1 - c_{AB}^2)(1 - c_{BC}^2) - \bigl(c_{AC} - c_{AB}c_{BC}\bigr)^2 = \sin^2\theta_1\sin^2\theta_2 - \bigl(c_{AC} - \cos\theta_1\cos\theta_2\bigr)^2 \ge 0.
+   $$
+
+   When the three states lie in the same two-dimensional correlation plane (vanishing 3-wedge volume $\mathbf{A}\wedge\mathbf{B}\wedge\mathbf{C} = 0$), the boundary condition $\det G(\mathbf{A},\mathbf{B},\mathbf{C}) = 0$ locks the third overlap into the exact shell identity:
+
+   $$
+   c_{AC} = c_{AB}\,c_{BC} \pm \sqrt{\bigl(1 - c_{AB}^2\bigr)\bigl(1 - c_{BC}^2\bigr)} = \cos\bigl(\theta_1 \mp \theta_2\bigr).
    $$
 
    Notice the two defining properties of this relation:
    - **First, 100% permutation symmetry (order-independence)**: The equation contains no timestamps $t_1 < t_2 < t_3$ and is completely invariant under any relabeling of $\mathbf{A}, \mathbf{B}, \mathbf{C}$;
    - **Second, 100% causal rigidity in zero elapsed time**: Once the two pairwise overlaps $c_{AB}$ and $c_{BC}$ are fixed within a shared correlation plane, the third overlap $c_{AC}$ is rigidly determined without a single tick of a clock. What we call "because $A\text{–}B$ and $B\text{–}C$, therefore necessarily $A\text{–}C$" is not a mechanical push across time, but the structural compatibility rigidity $\det G \ge 0$ of the Gram matrix on the sphere.
 
-3. **Clear Epistemic Boundary: Distinguishing Formalized Algebra from Natural-Philosophical & Cosmological Literature**
-   In keeping with the strict epistemic contract of this book, we distinguish the mathematical results proved in Lean 4 — ambient unitary reconstruction from equal complex Gram matrices ([@thm-gram-unitary-reconstruction]), the unit-overlap equivalence criterion ([@lemma-unit-gram-equality]), and the separation between static effects and sequential instruments ([@prop-static-sequential-separation]) — together with standard linear-algebraic Gram determinant non-negativity $\det G(\mathbf{A},\mathbf{B},\mathbf{C}) \ge 0$, from the broader philosophical and quantum-cosmological literature connecting order-independent Gram geometry to Hume's problem of causation, Spinoza's geometric necessity, and timeless quantum mechanics (the Wheeler–DeWitt equation and the Page–Wootters conditional-time mechanism), which we revisit in Chapter 20.
+3. **The Gram Elliptope and the Finite Observer's "Causally Compatible Choice Space"**
+   If the Gram matrix is so rigid, how can a finite observer experience genuine choice? Look again at the completed-square inequality $\sin^2\theta_1\sin^2\theta_2 - (c_{AC} - \cos\theta_1\cos\theta_2)^2 \ge 0$. Parameterizing the compatible interval by the **dihedral angle** $\phi \in [0, 2\pi)$ between the bivector planes $(\mathbf{A}\wedge\mathbf{B})$ and $(\mathbf{B}\wedge\mathbf{C})$ yields the spherical law of cosines:
+
+   $$
+   c_{AC} = \underbrace{\cos\theta_1\cos\theta_2}_{\text{locked 1D historical trunk}} + \underbrace{\cos\phi}_{\text{observer's choice degree of freedom } \in [-1, +1]} \cdot \underbrace{\sin\theta_1\sin\theta_2}_{\text{uncollapsed orthogonal area radius}}.
+   $$
+
+   In the three-dimensional correlation coordinates $(x, y, z) = (c_{AB}, c_{BC}, c_{AC}) \in [-1, 1]^3$, the inequality $1 - x^2 - y^2 - z^2 + 2xyz \ge 0$ carves out a pillow-shaped convex body known in semidefinite programming and quantum correlation theory as the **Gram elliptope**:
+   - **Inviolable Causality (the hard elliptope shell)**: No observer can ever pick a point outside the pillow-shaped elliptope shell ($\det G < 0$, which would require a negative squared volume). That shell is the unbreakable geometric boundary of causal law;
+   - **Causally Compatible Choice Space (the interior chord)**: Why is the observer not pinned to a single point? **Because the observer is finite!** Having projected only the 1D inner products $\cos\theta_1$ and $\cos\theta_2$ without exhausting the orthogonal bivector areas $\sin\theta_1$ and $\sin\theta_2$, the dihedral angle $\phi \in [0, 2\pi)$ remains an undetermined free variable! Choosing $\cos\phi = \pm 1$ ($\det G = 0$) slides inertially within the old plane ($\mathbf{A}\wedge\mathbf{B}\wedge\mathbf{C} = 0$), whereas choosing $|\cos\phi| < 1$ ($\det G > 0$) folds a nonzero dihedral angle inside the causally compatible interval $[\cos(\theta_1+\theta_2),\, \cos(\theta_1-\theta_2)]$ and opens up a new orthogonal dimension with nonzero 3-volume $\mathbf{A}\wedge\mathbf{B}\wedge\mathbf{C} \neq 0$.
+
+4. **Clear Epistemic Boundary: Distinguishing Formalized Algebra from Natural-Philosophical & Cosmological Literature**
+   In keeping with the strict epistemic contract of this book, we distinguish the mathematical results proved in Lean 4 — ambient unitary reconstruction from equal complex Gram matrices ([@thm-gram-unitary-reconstruction]), the unit-overlap equivalence criterion ([@lemma-unit-gram-equality]), and the separation between static effects and sequential instruments ([@prop-static-sequential-separation]) — together with standard linear-algebraic Gram determinant non-negativity $\det G(\mathbf{A},\mathbf{B},\mathbf{C}) = \sin^2\theta_1\sin^2\theta_2 - (c_{AC} - \cos\theta_1\cos\theta_2)^2 \ge 0$ and the convex geometry of the Gram elliptope, from the broader philosophical and quantum-cosmological literature connecting order-independent Gram geometry and causally compatible choice spaces to Hume's problem of causation, Spinoza's geometric necessity, and timeless quantum mechanics (the Wheeler–DeWitt equation and the Page–Wootters conditional-time mechanism), which we revisit in Chapter 20.
 
 ::: {.remark #rem-gram-hairy-ball-literature title="Hairy Ball and Hopf Obstructions: Literature Result, Not Formalized in This Book"}
 **Literature result, not formalized in this book.** Classical results from differential topology, mathematical physics, and the philosophy of causation frame the geometric discussions in Sections 1, 3, and 4:
