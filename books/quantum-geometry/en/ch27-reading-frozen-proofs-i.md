@@ -2,7 +2,7 @@
 
 > *"Build an academic theory of a universal machine for proposition proofs: define, state, prove."*
 
-In conventional mathematical physics monographs, a "proof" relies on an unwritten pact between author and reader: a phrase such as *"it is easy to see"*, an implicit assumption that an index set is nonempty, or a quiet slide from coordinate-line invariance to a single global phase can hide subtle gaps. From [Chapter 1](ch01-measurement.md) onward, this book has operated under a stricter contract captured by our opening epigraph — **define, state, prove**: every formal `theorem`, `lemma`, `proposition`, and `corollary` carrying the green `LEAN ✓` badge is anchored to a declaration in `the-omega-institute/trureturing@dev` (pinned at commit `52725b62b659b244d077e29f18a576aa809007b7`) that has been type-checked by the Lean 4 kernel and frozen without a single `sorry`.
+In conventional mathematical physics monographs, a "proof" relies on an unwritten pact between author and reader: a phrase such as *"it is easy to see"*, an implicit assumption that an index set is nonempty, or a quiet slide from coordinate-line invariance to a single global phase can hide subtle gaps. From [Chapter 1](ch01-measurement.md) onward, this book has operated under a stricter contract captured by our opening epigraph — **define, state, prove**: every formal `theorem`, `lemma`, `proposition`, and `corollary` carrying the green `LEAN ✓` badge is anchored to a declaration in `the-omega-institute/trureturing@dev` (pinned at commit `38196c62e121b0a334b903eea2a513bb2587e41c`) that has been type-checked by the Lean 4 kernel and frozen without a single `sorry`.
 
 In this chapter and [Chapter 28](ch28-reading-frozen-proofs-ii.md), we open the actual `.lean` source files of `trureturing@dev` and audit the formal proof scripts line by line:
 
@@ -182,7 +182,7 @@ Across the four proofs above, four recurring Lean 4 proof engineering patterns s
 
 ## Comprehensive Audit Table of Frozen Declarations Across Parts I–III {#sec-parts-i-to-iii-frozen-audit-table}
 
-The table below audits representative frozen declarations cited across Parts I through III at commit `52725b62b659b244d077e29f18a576aa809007b7`. As required by our verification contract, prose labels such as "parallelogram law", "probability skeleton", or "pinching idempotence" are descriptive titles only and carry no formal claim beyond the exact Lean signature.
+The table below audits representative frozen declarations cited across Parts I through III at commit `38196c62e121b0a334b903eea2a513bb2587e41c`. As required by our verification contract, prose labels such as "parallelogram law", "probability skeleton", or "pinching idempotence" are descriptive titles only and carry no formal claim beyond the exact Lean signature.
 
 | Chapter | Frozen GID | Source File & Line | `statement_id` Prefix | Exact Formal Scope & Contract |
 | :---------: | ---------------------------- | ---------------------------- | :------------------: | ----------------------------------------------------- |
