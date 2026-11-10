@@ -493,6 +493,22 @@
       "line": 37,
       "signature": "theorem target_recovery_criterion {X ProcessState Target : Type*} [Nonempty X] (process : Concept X ProcessState) (target : Concept X Target) : ((∃ recover : ProcessState → Target, target = recover ∘ process) ↔ ∀ ⦃x y : X⦄, process x = process y → target x = target y) ∧ ((∀ ⦃x y : X⦄, process x = process y → target x = target y) ↔ defectRelation process target = ∅) ∧ (defectRelation process target = ∅ ↔ ∃ recover : ProcessState → Target, target = recover ∘ process) ∧ ((¬∃ recover : ProcessState → Target, target = recover ∘ process) ↔ (defectRelation process target).Nonempty)"
     },
+    "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift": {
+      "module": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift",
+      "name": "D5.S3.ConceptDynamics.Topology.CircleDoubleCoverHistoryLift.circle_double_cover_history_lift",
+      "kind": "theorem",
+      "statement_id": "sha256:ccc9572bd218e8cdd478ed57c079d4c8012e632e59a0aa2a7ac7533e4f9bf20b",
+      "line": 36,
+      "signature": "theorem circle_double_cover_history_lift : let square : Circle → Circle"
+    },
+    "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section": {
+      "module": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection",
+      "name": "D5.S3.ConceptDynamics.Topology.CircleDoubleCoverNoSection.no_continuous_global_section",
+      "kind": "theorem",
+      "statement_id": "sha256:f5e0857a6af4673b8e6b849c8e3f46c5021a9c9fa548482a34028639cba1d5e0",
+      "line": 28,
+      "signature": "theorem no_continuous_global_section : ¬ ∃ s : Circle → Circle, Continuous s ∧ ∀ z : Circle, s z ^ 2 = z"
+    },
     "D5/S3/Constants/PentagonCosines.pentagon_golden_cosines": {
       "module": "D5/S3/Constants/PentagonCosines",
       "name": "D5.S3.Constants.PentagonCosines.pentagon_golden_cosines",

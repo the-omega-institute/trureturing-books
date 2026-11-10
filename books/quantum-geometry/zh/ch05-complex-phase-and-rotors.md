@@ -145,6 +145,48 @@ $$
 
 这里需要严守概念与形式化边界：本书的 [@lemma-skew-adjoint-unitary-square] 与 [@thm-relative-complex-structure-square] 在 Lean 内核中严格证明的是 $n \times n$ 复矩阵层面的核心代数恒等式 $R^2 = -I_n$ 与 $J^2 = -I_n$；而将三维欧氏空间的完整克利福德代数识别为泡利复矩阵代数 $\mathrm{Cl}_{3,0}(\mathbb{R}) \cong M_2(\mathbb{C})$（实维数 $8$）、将其**偶次子代数**识别为四元数代数 $\mathrm{Cl}^+_{3,0}(\mathbb{R}) \cong \mathbb{H}$（实维数 $4$，其单位球面 $S^3 \cong \mathrm{SU}(2)$ 由旋子构成）并用三明治积 $\vv{v}' = R(\theta)\vv{v}R(\theta)^\dagger$ 导出三维罗德里格斯旋转公式的历史与经典定理，则在章末的文献注记 [@rem-clifford-rotor-literature] 中专门界定。
 
+半角还留下一个问题。$R(2\pi) = \cos\pi - \vv{B}\sin\pi = -1$：物体转回原位，旋子却没有回来。这是 $\theta/2$ 这种写法带来的记号瑕疵，换一种更聪明的参数化就能消除，还是无论怎样都躲不开？固定一个旋转平面 $\vv{B}$，这个问题可以完全回答。绕该平面的旋子 $\cos\alpha - \vv{B}\sin\alpha$ 在乘法下构成一个圆；上面的夹乘计算 $R\,\vv{v}_\parallel R^\dagger = R^2\,\vv{v}_\parallel$ 说明，旋子 $R$ 引起的平面内旋转就是 $R^2$。所以“旋子 $\mapsto$ 旋转”在一个固定平面内正是单位圆上的平方映射 $z \mapsto z^2$，而它的拓扑性质已在所钉仓库的模块 `D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift` 中冻结。
+
+::: {.theorem #thm-circle-double-cover-history-lift title="圆的二重覆盖：路径提升唯一、没有连续的整体截面、转一整圈交换两个原像" lean="D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section"}
+记 $S^1$ 为复平面上的单位圆（Mathlib 的 `Circle`），$\operatorname{sq} : S^1 \to S^1$ 为平方映射 $z \mapsto z^2$，它是覆盖映射（Mathlib 的 `Circle.isQuotientCoveringMap_npow 2`）；记 $I = [0, 1]$。则：
+
+1. **路径提升存在且唯一**：对任意连续路径 $\gamma : I \to S^1$ 与任意满足 $\gamma(0) = z_0^2$ 的 $z_0 \in S^1$，覆盖映射给出的提升 $\widetilde{\gamma} : I \to S^1$（`IsCoveringMap.liftPath`）是连续路径，满足 $\operatorname{sq}\circ\widetilde{\gamma} = \gamma$ 与 $\widetilde{\gamma}(0) = z_0$；并且任何满足 $\operatorname{sq}\circ\beta = \gamma$ 与 $\beta(0) = z_0$ 的连续路径 $\beta : I \to S^1$ 都等于 $\widetilde{\gamma}$。
+2. **没有连续的整体截面**：不存在连续映射 $s : S^1 \to S^1$，使得对一切 $z \in S^1$ 有 $s(z)^2 = z$。
+3. **整圈交换两个原像**：对整圈回路 $\gamma_\circ(t) = e^{2\pi i t}$（`Circle.exp (2 * π * t)`），从 $z_0 = 1$ 出发的提升 $\widetilde{\gamma_\circ}$ 满足 $\operatorname{sq}\circ\widetilde{\gamma_\circ} = \gamma_\circ$、$\widetilde{\gamma_\circ}(0) = 1$ 与 $\widetilde{\gamma_\circ}(1) = -1$。
+:::
+
+::: proof
+结论 1 是覆盖映射的路径提升性质（Mathlib 的 `liftPath_lifts`、`liftPath_zero` 与 `eq_liftPath_iff'`）。结论 2：设 $s$ 连续且 $s(z)^2 = z$，对实数 $t$ 令 $r(t) = s(e^{it})\,/\,e^{it/2}$。$r$ 连续，且 $r(t)^2 = e^{it}/e^{it} = 1$，所以 $r$ 只取 $\pm 1$ 两个值；实数轴连通，$r$ 必为常值。但 $t = 0$ 与 $t = 2\pi$ 对应圆上同一点，分子相同，分母却从 $1$ 变成 $e^{i\pi} = -1$，于是 $r(2\pi) = -r(0)$，矛盾。结论 3：半角路径 $t \mapsto e^{i\pi t}$ 连续、平方等于 $\gamma_\circ$、起点为 $1$，由结论 1 的唯一性它就是提升，终点为 $e^{i\pi} = -1$。完整证明由 Lean 内核检查。
+:::
+
+把三条结论译回旋子的语言（以下对应关系是手工推导）：
+
+- **结论 3**：把物体绕固定轴连续转一整圈，旋子从 $1$ 走到 $-1$。这与 $R(2\pi) = -1$ 一致，但内容更强：结论 1 的唯一性说，任何一条连续的旋子历史，只要起点相同、所引起的旋转历史相同，就是同一条。旋子由旋转的**历史**决定，而不由旋转的终点决定。
+- **结论 2**：不存在把“转角”连续地换算成“旋子”的整体公式。任何给每个旋转指定一个旋子的规则，必然在圆上某处跳变。半角不是记号的瑕疵。
+- **两整圈**：回路 $t \mapsto e^{4\pi i t}$ 的提升是 $t \mapsto e^{2\pi i t}$（它连续、平方正确、起点为 $1$，由结论 1 的唯一性即得），终点回到 $+1$。$720^\circ$ 之后旋子才复原。
+
+::: {.example #ex-rotor-two-turns title="转角从 0° 到 720°：旋转走了两圈，旋子只走了一圈"}
+取 $\vv{B} = \vv{e}_1 \wedge \vv{e}_2$。转角为 $\theta$ 的旋转把 $\vv{e}_1$ 送到 $\cos\theta\,\vv{e}_1 + \sin\theta\,\vv{e}_2$；对应的旋子是 $R(\theta) = \cos\frac{\theta}{2} - \vv{B}\sin\frac{\theta}{2}$。下表列出旋转的坐标 $(\cos\theta, \sin\theta)$ 与旋子的坐标 $\bigl(\cos\frac{\theta}{2}, \sin\frac{\theta}{2}\bigr)$，四舍五入到所示位数：
+
+| 转角 $\theta$ | 旋转 $(\cos\theta,\ \sin\theta)$ | 旋子 $\bigl(\cos\frac{\theta}{2},\ \sin\frac{\theta}{2}\bigr)$ |
+| :---: | :---: | :---: |
+| $0^\circ$ | $(1,\ 0)$ | $(1,\ 0)$ |
+| $90^\circ$ | $(0,\ 1)$ | $(0.7071,\ 0.7071)$ |
+| $180^\circ$ | $(-1,\ 0)$ | $(0,\ 1)$ |
+| $270^\circ$ | $(0,\ -1)$ | $(-0.7071,\ 0.7071)$ |
+| $360^\circ$ | $(1,\ 0)$ | $(-1,\ 0)$ |
+| $450^\circ$ | $(0,\ 1)$ | $(-0.7071,\ -0.7071)$ |
+| $540^\circ$ | $(-1,\ 0)$ | $(0,\ -1)$ |
+| $630^\circ$ | $(0,\ -1)$ | $(0.7071,\ -0.7071)$ |
+| $720^\circ$ | $(1,\ 0)$ | $(1,\ 0)$ |
+
+第二列在 $360^\circ$ 处已经回到出发点，第三列此时恰好走到对面；相差 $360^\circ$ 的任意两行（如 $90^\circ$ 与 $450^\circ$）旋转相同、旋子相反。把第三列的每个点平方（辐角加倍），得到的正是第二列。
+
+**直接验算一处。** $R(90^\circ) = \frac{1}{\sqrt{2}}(1 - \vv{B})$，由 $\vv{B}^2 = -1$：$R(90^\circ)^2 = \frac{1}{2}(1 - 2\vv{B} + \vv{B}^2) = -\vv{B} = R(180^\circ)$，再平方得 $R(180^\circ)^2 = \vv{B}^2 = -1 = R(360^\circ)$。
+:::
+
+单独一个 $-1$ 是整体符号，按下一节的讨论它不改变任何测量读数；只有让转过一整圈的分支与没有转的分支重新相遇，这个符号才成为可以观测的相对相位。中子干涉仪实验中，自旋进动 $360^\circ$ 时干涉条纹反相、进动 $720^\circ$ 时复原（文献结果，未在本书形式化：H. Rauch 等，*Phys. Lett. A* **54**, 425, 1975；S. A. Werner 等，*Phys. Rev. Lett.* **35**, 1053, 1975）。
+
 ## 5.3 全局相位与相对相位：为什么单根线的自转不可见，唯有一组线的夹角才张出面积？ {#sec-global-vs-relative-phase}
 
 在彻底搞懂了“复相位就是二向量平面内的旋转角”之后，困扰无数学生的一道经典难题——**为什么全局相位 $e^{i\alpha}\lvert\psi\rangle$ 在物理上完全不可观测，而叠加态里的相对相位 $\lvert 0\rangle + e^{i\phi}\lvert 1\rangle$ 却能决定干涉条纹的生死？**——便迎刃而解了。
@@ -235,7 +277,7 @@ $$
    $$
    \vv{v}' = R(\theta)\vv{v}R(\theta)^\dagger = \vv{v}\cos\theta + (\hat{\vv{n}}\times\vv{v})\sin\theta + \hat{\vv{n}}(\hat{\vv{n}}\cdot\vv{v})(1 - \cos\theta).
    $$
-   由于 $\theta \mapsto \theta + 2\pi$ 使半角旋子变号 $R(\theta + 2\pi) = -R(\theta)$，而双侧夹乘中 $(-R)\vv{v}(-R)^\dagger = R\vv{v}R^\dagger$ 负负得正，旋子群 $\mathrm{Spin}(3) \cong \mathrm{SU}(2) \cong S^3$ 对三维正交旋转群 $\mathrm{SO}(3) \cong \mathbb{RP}^3$ 构成拓扑非平凡的 $2:1$ 泛覆盖（旋量转过 $360^\circ$ 变负号，转满 $720^\circ$ 方才回到自身）。
+   由于 $\theta \mapsto \theta + 2\pi$ 使半角旋子变号 $R(\theta + 2\pi) = -R(\theta)$，而双侧夹乘中 $(-R)\vv{v}(-R)^\dagger = R\vv{v}R^\dagger$ 负负得正，旋子群 $\mathrm{Spin}(3) \cong \mathrm{SU}(2) \cong S^3$ 对三维正交旋转群 $\mathrm{SO}(3) \cong \mathbb{RP}^3$ 构成拓扑非平凡的 $2:1$ 泛覆盖（旋量转过 $360^\circ$ 变负号，转满 $720^\circ$ 方才回到自身）。其中固定旋转平面的情形——旋子圆到旋转圆的平方映射——已由 [@thm-circle-double-cover-history-lift] 验证：路径提升唯一、不存在连续的整体截面、整圈使旋子变号；完整的 $\mathrm{Spin}(3) \to \mathrm{SO}(3)$ 覆盖、罗德里格斯公式与 $\mathrm{SO}(3) \cong \mathbb{RP}^3$ 仍属文献结果。
 
 上述历史脉络与三维克利福德三明治展开作为几何背景列出，不计入本书的 Lean 形式化验证账本。
 :::
