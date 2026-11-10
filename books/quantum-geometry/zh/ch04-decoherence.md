@@ -186,21 +186,96 @@ $$
 
 （注：在**零噪声恒等端点** $c = 1$、$p = 0$、$\lambda = 0$ 或 $\gamma = 0$ 处，上述信道均退化为恒等映射 $\vv{r}' = \vv{r}$，不动点集扩展为**整颗布洛赫球**；而在非收缩的**确定性边界端点**处，$p = 1$ 的比特翻转映射给出绕 $X$ 轴保模长的幺正 $\pi$ 旋转 $\rho \mapsto X\rho X$、$\vv{r}' = (r_x, -r_y, -r_z)$，并非径向压缩，$\gamma = 1$ 的振幅阻尼则一步将整颗布洛赫球重置到纯态北极 $+\vv{e}_3 = (0, 0, 1)$。）
 
-请顺着这张表的最后一行多问一句：**为什么当竖直能量轴向北极收缩了 $(1 - \gamma)$ 倍时，水平赤道腰围偏偏只收缩了开根号的 $\sqrt{1 - \gamma}$ 倍——而正是这枚开根号，直接变出了核磁共振与超导芯片实验室里大名鼎鼎的弛豫铁律 $T_2 \le 2T_1$？**
-
-答案竟然纯粹是北极点附近的**球冠相切几何**！考察紧挨着北极 $r_z = 1 - \epsilon$（$0 < \epsilon \ll 1$）的一圈球皮纯态圆环，其原始水平半径平方为 $r_x^2 + r_y^2 = 1 - r_z^2 = (1 - r_z)(1 + r_z) \approx 2\epsilon$。经过轴向漂移 $r_z' = (1 - \gamma)r_z + \gamma = 1 - (1 - \gamma)\epsilon$ 后，为了不让变形后的椭球肩部**刺穿单位布洛赫球皮**（否则密度矩阵就会出现负本征值、产生荒谬的负概率！），新高度 $r_z'$ 处球壳所允许的最大水平半径平方只能是
+顺着最后一行追问：固定朝向基态北极的轴向漂移之后，**横向最多能保留多少长度，椭球才不会刺穿球皮？** 下文以 $\lambda$ 表示两个横向坐标共有的实数保留因子，考察
 
 $$
-r_x'^2 + r_y'^2 \le 1 - r_z'^2 = (1 - r_z')(1 + r_z') \approx 2(1 - \gamma)\epsilon = (1 - \gamma)(r_x^2 + r_y^2).
+F_{a,\lambda}(x,y,z) = (\lambda x,\,\lambda y,\,az+1-a), \qquad 0 \le a \le 1.
 $$
 
-看到了吗？正是 [@prop-amplitude-damping-contraction] 证明里约掉的那同一个因子 $1 - u' = (1 - \gamma)(1 - u)$，迫使横向收缩系数 $\lambda_\perp$ 满足 $\lambda_\perp^2 \le 1 - \gamma$，即 $\lambda_\perp \le \sqrt{1 - \gamma}$！换算到连续时间演化：设纵向能量衰减为 $1 - \gamma = e^{-t/T_1}$，则单靠能量弛豫贡献的横向幅度衰减为 $\sqrt{1 - \gamma} = e^{-t/(2T_1)}$；若再叠加上速率为 $1/T_\varphi$ 的独立纯相位抖动 $c = e^{-t/T_\varphi}$，总横向相干包络 $e^{-t/T_2} = e^{-t/(2T_1)}e^{-t/T_\varphi}$ 便给出
+北极 $(0,0,1)$ 始终不动。与前文的参数对应是 $a=1-\gamma$：展开已有的轴向坐标，恰有 $\operatorname{dampedAxis}(1-a,z)=az+1-a$。把它解释为弛豫时，我们限定在**零温、朝固定北极的仿射轴向漂移与各向同性横向因子**这一模型内。
+
+::: {.theorem #thm-north-pole-ball-criterion title="固定北极的仿射映射保持整个闭单位球的充要条件" lean="D5/S3/QuantumChannels/ContractionGeometry/NorthPoleBallCriterion.north_pole_ball_preserving_iff"}
+设 $a,\lambda \in \mathbb{R}$ 且 $0 \le a \le 1$，$\lambda$ 可取任意符号。以下两条等价：
+
+1. 对任意实数 $x,y,z$，只要 $x^2+y^2+z^2 \le 1$，就有
+
+   $$
+   (\lambda x)^2+(\lambda y)^2+(az+1-a)^2 \le 1.
+   $$
+
+2. $\lambda^2 \le a$。
+:::
+
+::: proof
+充分性先把横向平方半径压到轴向因子之下：由 $\lambda^2 \le a$ 及输入点在球内，
 
 $$
-\frac{1}{T_2} = \frac{1}{2T_1} + \frac{1}{T_\varphi} \ge \frac{1}{2T_1} \quad\Longrightarrow\quad T_2 \le 2T_1!
+\begin{aligned}
+&\lambda^2(x^2+y^2)+(az+1-a)^2 \\
+&\quad\le a(1-z^2)+(az+1-a)^2 \\
+&\quad=1-a(1-a)(1-z)^2 \le 1.
+\end{aligned}
 $$
 
-不用解半行主方程，单位球面在北极点处的抛物线曲率直接把这条普适实验不等式钉死在了几何学里。
+必要性给出一个具体的逃逸点。若 $\lambda^2>a$，取
+
+$$
+\begin{gathered}
+\delta=\frac{\lambda^2-a}{\lambda^2+1}, \\
+(x,y,z)=\bigl(\sqrt{\delta(2-\delta)},\,0,\,1-\delta\bigr).
+\end{gathered}
+$$
+
+因 $0\le a$，有 $0<\delta\le1$，故该点为实数点且 $x^2+y^2+z^2=1$。利用 $\delta(\lambda^2+1)=\lambda^2-a$ 及 $\delta(\lambda^2-a^2)\le\delta(\lambda^2+1)$，其像超出球皮的平方半径为
+
+$$
+\begin{aligned}
+&\norm{F_{a,\lambda}(x,0,z)}^2-1 \\
+&\quad=\delta\bigl[2(\lambda^2-a)-\delta(\lambda^2-a^2)\bigr] \\
+&\quad\ge\delta(\lambda^2-a)>0.
+\end{aligned}
+$$
+
+因此，北极球冠的直觉对应着整个闭球上的精确判据，端点 $a=0$ 与 $a=1$ 也包含在内。完整证明由 Lean 内核检查。
+:::
+
+[@thm-north-pole-ball-criterion] 给出的是横向上界 $|\lambda|\le\sqrt a$。表中的纯振幅阻尼取 $\lambda=\sqrt a$，即 $\lambda^2=a$，恰好饱和；额外横向衰减则可以使不等式严格成立。特别地，$a=0$ 时必须 $\lambda=0$，$a=1$ 时则允许且只允许 $|\lambda|\le1$。这里判定的是球的保持性；完全正性还涉及扩展系统上的条件，不能只凭这个实坐标判据认定。
+
+现在把**同一个映射**中的两个因子取为指数包络。对任意正实数 $T_1,T_2,t$，令
+
+$$
+a=e^{-t/T_1}, \qquad \lambda=e^{-t/T_2}.
+$$
+
+此时 $0<a<1$。由上述定理，$F_{a,\lambda}$ 将整个闭单位球映入自身，当且仅当
+
+$$
+\begin{aligned}
+&e^{-2t/T_2}\le e^{-t/T_1} \\
+&\quad\Longleftrightarrow -\frac{2t}{T_2}\le-\frac{t}{T_1} \\
+&\quad\Longleftrightarrow T_2\le2T_1.
+\end{aligned}
+$$
+
+第一步用实指数函数的严格单调性，第二步约去正时间并乘以正的时间常数。这是定理在给定指数包络下的直接特例解释。$t=0$ 时，无论正的 $T_1,T_2$ 取何值，两个因子都等于 $1$，映射都是恒等映射；单靠零时刻不约束任何速率。
+
+::: {.remark #rem-relaxation-envelope-literature title="指数包络与速率相加的物理条件（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** Krantz 等的 *A quantum engineer's guide to superconducting qubits*（[arXiv:1904.06560v3](https://arxiv.org/abs/1904.06560v3)，式 40–43）在 Bloch–Redfield 描述中引入纵向与横向弛豫速率，并在式 41 相邻文字中明确指出：把横向速率写成各速率之和，预设各个衰减函数为指数型。这为这里的弛豫模型提供物理背景。
+
+若在纯振幅阻尼之外，再**额外假设包络相乘**，并给定非负的纯退相干速率 $k\ge0$，即
+
+$$
+e^{-t/T_2}=e^{-t/(2T_1)}e^{-kt},
+$$
+
+则在 $T_1,T_2,t>0$ 时取对数并约去 $t$，得到
+
+$$
+\frac{1}{T_2}=\frac{1}{2T_1}+k\ge\frac{1}{2T_1}.
+$$
+
+当 $k>0$ 时可记 $k=1/T_\varphi$；$k=0$ 对应纯振幅阻尼的饱和情形。包络乘积律是额外的物理假设，几何保持性本身不推出它。这里的 $T_2\le2T_1$ 对应固定北极、零温仿射漂移、各向同性横向收缩及指数包络的上述范围，不外推为任意环境或任意非指数衰减的定律。
+:::
 
 ## 4.3 最大混合死点（$\vv{r} = \vv{0}$） {#sec-ch04-3}
 
@@ -247,7 +322,7 @@ $$
 
 ### 第一部小结：从“点”站成“线”，下一步向“面”展翼
 
-回望第一部走过的四章征程，我们用经 Lean 4 内核逐条核验的十九条定理级结论（涵盖二十二条冻结 Lean 定理、三项核心定义及总计三十八处锁定的形式化声明），完成了量子几何地基的第一轮重塑：
+回望第一部走过的四章征程，我们用经 Lean 4 内核逐条核验的定理级结论及其锁定的形式化声明，完成了量子几何地基的第一轮重塑；各条对应关系列在本书的形式化验证账本中：
 
 - **第一章**拆穿了孤立单子与外部第 3 点 $C$ 的双重幻觉，证明单比特矩阵代数无特征标（[@thm-qubit-no-character]），并用幺正射线刚性（[@thm-ray-phase-rigidity]）与布洛赫展开（[@prop-qubit-bloch-core]）把四维复列向量还原为球面上的三维实单位线 $\vv{a} \in S^2$；
 - **第二章**以已知态自身为基，把“点 $C$”还原为内生相融影子 $\vv{c} = (\vv{a}\cdot\vv{b})\vv{a}$，从迹配对与勾股模长守恒严格导出玻恩模平方定则（[@thm-born-modulus-square]、[@thm-rank-one-born-pairing]）及半角换算 $\cos^2(\theta/2) = \frac{1 + \cos\theta}{2}$；
