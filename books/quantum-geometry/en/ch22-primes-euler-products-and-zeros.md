@@ -199,7 +199,7 @@ For $\operatorname{xiReading}$ of [@def-xi-reading], the following four statemen
 Claim 1 substitutes Mathlib's identity `completedRiemannZeta_eq` ($\Lambda(s) = \Lambda_0(s) - \frac{1}{s} - \frac{1}{1-s}$) into the definition and clears denominators under the hypotheses $s \neq 0$ and $1 - s \neq 0$. Claim 2 follows from the entirety of $\Lambda_0$ (`differentiable_completedZeta₀`) and the differentiability of the polynomial factor. Claim 3 follows from the reflection symmetry `completedRiemannZeta₀_one_sub` ($\Lambda_0(1 - s) = \Lambda_0(s)$), because the factor $s\,(s - 1)$ is invariant under $s \mapsto 1 - s$. For claim 4 the factor $s\,(s - 1)$ vanishes at $s = 0$ and at $s = 1$, and the definition gives $\frac{1}{2}$ directly. The full proof is checked by the Lean kernel.
 :::
 
-Claim 3 of [@thm-xi-reading-entire-reflection] has an immediate consequence (a one-line manual derivation): if $\operatorname{xiReading}\ \rho = 0$ then $\operatorname{xiReading}\ (1 - \rho) = 0$. The map $s \mapsto 1 - s$ is the half-turn of the complex plane about the point $s = \frac{1}{2}$, so zeros come in pairs with respect to that point. Adding the conjugation symmetry $\xi(\overline{s}) = \overline{\xi(s)}$ (a literature result, not formalized in this book), zeros come in groups of four, $\rho,\ \overline{\rho},\ 1 - \rho,\ 1 - \overline{\rho}$; the four points coincide in pairs and shrink to a single pair exactly when $\operatorname{Re}(\rho) = \frac{1}{2}$. The Riemann hypothesis says precisely that every group has shrunk to a pair.
+Claim 3 of [@thm-xi-reading-entire-reflection] has an immediate consequence (a one-line manual derivation): if $\operatorname{xiReading}\ \rho = 0$ then $\operatorname{xiReading}\ (1 - \rho) = 0$. The map $s \mapsto 1 - s$ is the half-turn of the complex plane about the point $s = \frac{1}{2}$, so zeros come in pairs with respect to that point. Adding the conjugation symmetry $\xi(\overline{s}) = \overline{\xi(s)}$ (see [@prop-zeta-conjugation-covariance] below), zeros come in groups of four, $\rho,\ \overline{\rho},\ 1 - \rho,\ 1 - \overline{\rho}$; the four points coincide in pairs and shrink to a single pair exactly when $\operatorname{Re}(\rho) = \frac{1}{2}$. The Riemann hypothesis says precisely that every group has shrunk to a pair.
 
 The reflection symmetry pairs up values that look entirely unrelated.
 
@@ -233,7 +233,150 @@ The fourth row is claim 4 of [@thm-xi-reading-entire-reflection]; the fifth row 
 **Along the critical line.** On $s = \frac{1}{2} + it$ with real $t$, $\xi$ takes real values. Numerical evaluation gives $\xi\bigl(\tfrac{1}{2} + 14i\bigr) \approx +2.01\times10^{-4}$ and $\xi\bigl(\tfrac{1}{2} + 15i\bigr) \approx -7.06\times10^{-4}$: the sign changes between the two, in agreement with the first nontrivial zero $\rho_1 \approx \frac{1}{2} + 14.134725\,i$ recorded in the literature.
 :::
 
-The value $\zeta(-1) = -\frac{1}{12}$, so often singled out for dramatic effect, and the value $\zeta(2) = \frac{\pi^2}{6}$ of the Basel problem are two readings of one and the same number $\frac{\pi}{6}$ on the two sides of a mirror. The position of the mirror, $\operatorname{Re}(s) = \frac{1}{2}$, is now kernel-checked; whether every nontrivial zero stands on the mirror remains the open conjecture stated next.
+The value $\zeta(-1) = -\frac{1}{12}$, so often singled out for dramatic effect, and the value $\zeta(2) = \frac{\pi^2}{6}$ of the Basel problem are two readings of one and the same number $\frac{\pi}{6}$ on the two sides of a mirror. The position of the mirror, $\operatorname{Re}(s) = \frac{1}{2}$, is now kernel-checked; whether every nontrivial zero stands on the mirror remains the open conjecture stated at the end of this section.
+
+The mirror has been located, but the reflection $s \mapsto 1 - s$ of [@thm-xi-reading-entire-reflection] is only a half-turn about the point $s = \frac{1}{2}$, and a half-turn fixes a single point. To fix the whole line $\operatorname{Re}(s) = \frac{1}{2}$ one must compose it with complex conjugation. This second half is also frozen at the pinned commit, in the module `D5/S3/Zeros/Symmetry/ZetaConjugationCovariance`.
+
+::: {.proposition #prop-zeta-conjugation-covariance title="Conjugation Covariance of ζ and of the ξ Reading" lean="D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.riemann_zeta_conj D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.xi_reading_conj D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.xi_reading_one_sub_conj"}
+For every $s \in \mathbb{C}$, with $\overline{s}$ the complex conjugate of $s$:
+
+1. $\operatorname{riemannZeta}\ \overline{s} = \overline{\operatorname{riemannZeta}\ s}$, where `riemannZeta` is Mathlib's Riemann zeta function (the function to which `classicalZeta` of [@def-classical-zeta] unfolds);
+2. $\operatorname{xiReading}\ \overline{s} = \overline{\operatorname{xiReading}\ s}$;
+3. $\operatorname{xiReading}\ (1 - \overline{s}) = \overline{\operatorname{xiReading}\ s}$.
+:::
+
+::: proof
+Claim 2: the function $\Lambda_0$ of [@def-xi-reading] is the Mellin transform of a real-valued function, and the Mellin transform of a real-valued function commutes with complex conjugation; the factor $s\,(s - 1)$ and the constants $\frac{1}{2}$ and $1$ have real coefficients. Claim 1: at $s = 0$ both sides equal $-\frac{1}{2}$; for $s \neq 0$, Mathlib's `riemannZeta_def_of_ne_zero` writes $\zeta(s)$ as the completed zeta divided by $\Gamma_{\mathbb{R}}(s) = \pi^{-s/2}\Gamma(s/2)$, and each of the two commutes with conjugation (the latter by `Complex.Gamma_conj`). Claim 3 composes Claim 2 with the reflection symmetry of [@thm-xi-reading-entire-reflection]. The full proof is checked by the Lean kernel.
+:::
+
+Take $s = \frac{1}{2} + it$ with real $t$ in Claim 3. Then $1 - \overline{s} = s$, so $\operatorname{xiReading}\ s = \overline{\operatorname{xiReading}\ s}$: the function $\xi$ is real on the critical line (a one-line manual derivation). The statement "real along the critical line" at the end of [@ex-xi-mirror-values] is thereby kernel-backed. The two values $\xi\bigl(\tfrac{1}{2} + 14i\bigr) > 0$ and $\xi\bigl(\tfrac{1}{2} + 15i\bigr) < 0$ quoted there remain numerical computations; granting them, the real continuous function $t \mapsto \xi\bigl(\tfrac{1}{2} + it\bigr)$ must vanish somewhere between $14$ and $15$ (intermediate value theorem), and that zero lies exactly on the critical line.
+
+**Rolling the critical line into the unit circle.** Since Chapter 1 this book has done its geometry on unit circles and unit spheres. The critical line is a straight line, but in a different coordinate it is a circle.
+
+::: {.definition #def-cayley-ratio title="The Cayley Ratio and the Logarithmic Radial Defect" lean="D5/S3/Midline/CayleyCriticalLine.cayleyRatio D5/S3/Midline/Cayley/CayleyUnitarityDefect.cayleyCoefficient D5/S3/Midline/Cayley/LogarithmicRadialDefect.logarithmicRadialDefect"}
+For $s \in \mathbb{C}$:
+
+1. The **Cayley ratio** [`cayleyRatio`](lean:D5/S3/Midline/CayleyCriticalLine.cayleyRatio) $s$ is defined as $\dfrac{s - 1}{s}$. The [`cayleyCoefficient`](lean:D5/S3/Midline/Cayley/CayleyUnitarityDefect.cayleyCoefficient) $s$ of the module `CayleyUnitarityDefect` is the same expression $\dfrac{s - 1}{s}$. Under Lean's total division, both take the value $0$ at $s = 0$.
+2. The **logarithmic radial defect** [`logarithmicRadialDefect`](lean:D5/S3/Midline/Cayley/LogarithmicRadialDefect.logarithmicRadialDefect) $s$ is defined as $\operatorname{Real.log}\,\norm{\operatorname{cayleyCoefficient}\ s}$, where `Real.log` is Mathlib's real logarithm (with the convention $\operatorname{Real.log}\ 0 = 0$).
+:::
+
+::: {.theorem #thm-cayley-critical-line-criterion title="The Cayley Ratio Lies on the Unit Circle Exactly on the Critical Line; a Radial Equivalent of the Riemann Hypothesis" lean="D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion"}
+In the notation of [@def-cayley-ratio]:
+
+1. **Unit-circle criterion.** For every $s \in \mathbb{C}$,
+
+   $$
+   \norm{\operatorname{cayleyRatio}\ s} = 1 \;\Longleftrightarrow\; \operatorname{Re}(s) = \frac{1}{2},
+   $$
+
+   and the same holds for $\operatorname{cayleyCoefficient}$.
+2. **Radial equivalent.** Mathlib's proposition `RiemannHypothesis` — for every $s \in \mathbb{C}$, if $\operatorname{riemannZeta}\ s = 0$, and there is no natural number $n$ with $s = -2(n + 1)$, and $s \neq 1$, then $\operatorname{Re}(s) = \frac{1}{2}$ — holds if and only if: for every $\rho \in \mathbb{C}$, if $\operatorname{riemannZeta}\ \rho = 0$, and there is no natural number $n$ with $\rho = -2(n + 1)$, and $\rho \neq 1$, then
+
+   $$
+   \operatorname{logarithmicRadialDefect}\ \rho = 0 .
+   $$
+:::
+
+::: proof
+Claim 1: at $s = 0$ the Cayley ratio is $0$, so its norm is not $1$, and the real part is not $\frac{1}{2}$ either; both sides are false. For $s \neq 0$, $\norm{(s - 1)/s} = 1$ is equivalent to $|s - 1| = |s|$, that is, $s$ is equidistant from the points $1$ and $0$, which describes the perpendicular bisector $\operatorname{Re}(s) = \frac{1}{2}$ of the segment $[0, 1]$; algebraically, $|s - 1|^2 - |s|^2 = 1 - 2\operatorname{Re}(s)$. Claim 2, forward direction: a zero on the critical line has a Cayley ratio of norm $1$, whose logarithm is $0$. Backward direction: $\zeta(0) = -\frac{1}{2} \neq 0$, so a zero $\rho$ is nonzero; also $\rho \neq 1$, so the Cayley ratio is nonzero and its norm is positive; a positive number with logarithm $0$ equals $1$, and Claim 1 applies. The full proof is checked by the Lean kernel.
+:::
+
+Claim 2 of [@thm-cayley-critical-line-criterion] is an **equivalent restatement of the Riemann Hypothesis, not a proof of it**: it trades "the zeros lie on a line" for "the zeros lie on a circle", and the conjecture stays open. One difference of wording deserves attention. Mathlib singles out the nontrivial zeros as "zeros that are neither of the form $-2(n+1)$ nor equal to $1$", whereas [@conj-riemann-hypothesis] singles them out as "zeros in the critical strip". That the two descriptions agree rests on the classical fact that $\zeta$ has no zeros with $\operatorname{Re}(s) \ge 1$ and only the negative even integers as zeros with $\operatorname{Re}(s) \le 0$ (a literature result, not formalized in this book).
+
+Write $w = \dfrac{s - 1}{s}$. Each of the three symmetries takes a clean form in the coordinate $w$ (one line of manual derivation each):
+
+$$
+\begin{aligned}
+s \mapsto 1 - s &:\qquad w \mapsto \frac{(1 - s) - 1}{1 - s} = \frac{s}{s - 1} = \frac{1}{w}, \\
+s \mapsto \overline{s} &:\qquad w \mapsto \overline{w}, \\
+s \mapsto 1 - \overline{s} &:\qquad w \mapsto \frac{1}{\overline{w}} .
+\end{aligned}
+$$
+
+The third line is **inversion in the unit circle**: it moves a point inside the circle to the point outside on the same ray and leaves the circle itself fixed. "The critical line is a mirror" and "the unit circle is the fixed circle of inversion" are one and the same sentence. The four-point orbit $\rho,\ \overline{\rho},\ 1 - \rho,\ 1 - \overline{\rho}$ of an off-line zero becomes $w,\ \overline{w},\ \frac{1}{w},\ \frac{1}{\overline{w}}$ in the coordinate $w$: two points inside the circle and two outside. The departure from the circle also has a closed form (from $|s - 1|^2 - |s|^2 = 1 - 2\sigma$, with $s = \sigma + it$):
+
+$$
+|w|^2 - 1 \;=\; \frac{1 - 2\sigma}{\sigma^2 + t^2} .
+$$
+
+::: {.example #ex-cayley-unit-circle-zeros title="Where the First Five Zeros Sit on the Unit Circle, and How Far an Off-Line Point Leaves It"}
+**Points on the critical line.** For $s = \frac{1}{2} + it$ one has $s - 1 = -\overline{s}$, hence $w = -\overline{s}/s$ and $|w| = 1$. For $t > 0$, $\arg s = \arctan(2t)$, so
+
+$$
+\arg w \;=\; \pi - 2\arctan(2t) \;=\; 2\arctan\frac{1}{2t} .
+$$
+
+The point $t = 0$ (that is, $s = \frac{1}{2}$) lands at $w = -1$, and $w \to 1$ as $t \to +\infty$. The upper half of the critical line is rolled onto the upper semicircle, running from $-1$ to $1$.
+
+**The first five zeros.** The imaginary parts $t_n$ are taken from the literature (a literature result, not formalized in this book); the other columns are computed from the formula above and rounded to the digits shown:
+
+| $n$ | $t_n$ | $\arg w_n$ (radians) | $\arg w_n$ (degrees) | $w_n$ |
+| :---: | :---: | :---: | :---: | :---: |
+| $1$ | $14.134725$ | $0.070718$ | $4.0519^\circ$ | $0.997501 + 0.070659\,i$ |
+| $2$ | $21.022040$ | $0.047560$ | $2.7250^\circ$ | $0.998869 + 0.047542\,i$ |
+| $3$ | $25.010858$ | $0.039977$ | $2.2905^\circ$ | $0.999201 + 0.039967\,i$ |
+| $4$ | $30.424876$ | $0.032865$ | $1.8830^\circ$ | $0.999460 + 0.032859\,i$ |
+| $5$ | $32.935062$ | $0.030360$ | $1.7395^\circ$ | $0.999539 + 0.030356\,i$ |
+
+The zero of smallest imaginary part in the upper half-plane is $t_1$, so all nontrivial zeros of the upper half-plane (if the Riemann Hypothesis holds) are crowded into a short arc of the unit circle with argument at most $4.06^\circ$, accumulating at $w = 1$; the zeros of the lower half-plane are their conjugates.
+
+**A few reference points.** $s = 2 \mapsto w = \frac{1}{2}$ (inside the circle), and its reflection $s = -1 \mapsto w = 2$ (outside), reciprocals of each other; $s = 1 \mapsto w = 0$; $s = \frac{1}{2} \mapsto w = -1$.
+
+**Off-line points.** Take $s = 0.6 + 14i$: $|w|^2 - 1 = \dfrac{1 - 1.2}{0.36 + 196} = -1.0185\times10^{-3}$ and $|w| = 0.999491$. Its mirror image $1 - \overline{s} = 0.4 + 14i$ gives $|w|^2 - 1 = \dfrac{1 - 0.8}{0.16 + 196} = +1.0196\times10^{-3}$ and $|w| = 1.000510$. The product of the two norms is $1$, as inversion requires. At height $14$, leaving the critical line by $0.1$ moves the norm of the Cayley ratio away from $1$ by only about five parts in ten thousand: in the coordinate $w$, the high part of the critical strip is squeezed into a thin film hugging the circle.
+:::
+
+**Symmetry alone does not pin the zeros.** Since $\xi$ has both the reflection and the conjugation symmetry, could these two symmetries by themselves force the zeros onto the mirror? They cannot, and a quartic polynomial suffices as a counterexample. The module `D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization` at the pinned commit writes it down.
+
+::: {.definition #def-off-critical-quartic title="The Off-Critical Quartic, Full ζ Symmetry, and Fixed-Line Localization" lean="D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.offCriticalQuartic D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.sourceZeros D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.HasFullZetaSymmetry D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.FixedLineLocalization"}
+For real numbers $\delta, \gamma$ and a function $F : \mathbb{C} \to \mathbb{C}$:
+
+1. The **off-critical quartic** [`offCriticalQuartic`](lean:D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.offCriticalQuartic) $\delta\ \gamma\ s$ is defined as
+
+   $$
+   \bigl((z - \delta)^2 + \gamma^2\bigr)\,\bigl((z + \delta)^2 + \gamma^2\bigr), \qquad z = s - \frac{1}{2} ;
+   $$
+
+2. [`sourceZeros`](lean:D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.sourceZeros) $\delta\ \gamma$ is the finite set $\bigl\{\tfrac{1}{2} + \delta + i\gamma,\ \tfrac{1}{2} + \delta - i\gamma,\ \tfrac{1}{2} - \delta + i\gamma,\ \tfrac{1}{2} - \delta - i\gamma\bigr\}$;
+3. $F$ has **full $\zeta$ symmetry**, [`HasFullZetaSymmetry`](lean:D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.HasFullZetaSymmetry) $F$, if $F(1 - s) = F(s)$ for every $s$ and $F(\overline{s}) = \overline{F(s)}$ for every $s$;
+4. $F$ satisfies **fixed-line localization**, [`FixedLineLocalization`](lean:D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.FixedLineLocalization) $F$, if for every $s$, $F(s) = 0$ implies $\operatorname{Re}(s) = \frac{1}{2}$.
+:::
+
+::: {.theorem #thm-full-symmetry-not-localization title="An Entire Function with Full ζ Symmetry Can Have No Zero on the Critical Line" lean="D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.full_symmetry_not_fixed_line_localization"}
+Let $\delta, \gamma \in \mathbb{R}$ with $\delta \neq 0$ and $\gamma \neq 0$, in the notation of [@def-off-critical-quartic]. Then:
+
+1. The function $F = \operatorname{offCriticalQuartic}\ \delta\ \gamma$ is complex differentiable on all of $\mathbb{C}$ and has full $\zeta$ symmetry; for every $s$, $F(s) = 0$ if and only if $s \in \operatorname{sourceZeros}\ \delta\ \gamma$; the set $\operatorname{sourceZeros}\ \delta\ \gamma$ has exactly $4$ elements; and every zero $s$ of $F$ satisfies $\operatorname{Re}(s) \neq \frac{1}{2}$.
+2. Consequently, the statement "every function $F : \mathbb{C} \to \mathbb{C}$ that is complex differentiable on $\mathbb{C}$ and has full $\zeta$ symmetry satisfies fixed-line localization" is false.
+:::
+
+::: proof
+Since $(z \mp \delta)^2 + \gamma^2 = (z \mp \delta - i\gamma)(z \mp \delta + i\gamma)$, the quartic splits into four linear factors and its zeros are exactly $z = \pm\delta \pm i\gamma$. The reflection $s \mapsto 1 - s$ is $z \mapsto -z$, which swaps the two quadratic factors; all coefficients are real, so the function commutes with conjugation. A polynomial is complex differentiable everywhere. The four zeros have real parts $\frac{1}{2} \pm \delta$, none equal to $\frac{1}{2}$ when $\delta \neq 0$; they are pairwise distinct when $\delta \neq 0$ and $\gamma \neq 0$. Claim 2 follows by instantiating the universal statement at the $F$ of Claim 1. The full proof is checked by the Lean kernel.
+:::
+
+::: {.example #ex-quartic-mock-quartet title="A Forged Off-Line Quartet of Zeros: δ = 1/4, γ = 14"}
+Take $\delta = \frac{1}{4}$ and $\gamma = 14$. The four zeros supplied by [@thm-full-symmetry-not-localization] are
+
+$$
+\tfrac{1}{4} \pm 14i, \qquad \tfrac{3}{4} \pm 14i ,
+$$
+
+all inside the critical strip $0 < \operatorname{Re}(s) < 1$, at about the height of the first zero of $\zeta$, and none of them on the critical line.
+
+**Numerical check of the symmetries.** At $s = 0.3 + 2i$, $F(s) = 36903.7205 - 307.1640\,i$; $F(1 - s) = F(0.7 - 2i)$ returns the same number; $F(\overline{s}) = 36903.7205 + 307.1640\,i$ is its conjugate.
+
+**On the critical line.** Substituting $z = it$ and expanding (a manual derivation):
+
+$$
+F\bigl(\tfrac{1}{2} + it\bigr) \;=\; \bigl(\delta^2 + \gamma^2 - t^2\bigr)^2 + 4\delta^2 t^2 .
+$$
+
+The value is real — a necessary consequence of full symmetry, for the same reason that $\xi$ is real on the critical line — and strictly positive. Minimizing over $t^2$, the minimum is attained at $t^2 = \gamma^2 - \delta^2$ and equals $4\delta^2\gamma^2 = 49$; at $t = 14$, $F = 49.0039$. This function never changes sign along the critical line.
+
+**In the Cayley coordinate.** The images of the four zeros have $|w| = 0.998727$ (for $\frac{3}{4} \pm 14i$) and $|w| = 1.001274$ (for $\frac{1}{4} \pm 14i$): two inside the unit circle and two outside, paired by inversion, with logarithmic radial defects $\mp 1.2735\times10^{-3}$, none of them zero.
+
+Compare [@ex-xi-mirror-values]: $\xi$ is likewise real along the critical line, but it changes sign between $t = 14$ and $t = 15$. Symmetry guarantees "real on the mirror"; it does not guarantee "changes sign on the mirror".
+:::
+
+Hence the information needed to prove the Riemann Hypothesis must come from outside these two symmetries. That much is guaranteed by [@thm-full-symmetry-not-localization]; what the extra information is — for instance the arithmetic structure carried by the Euler product in the first half of this chapter — this book does not assert.
 
 Yet aesthetic symmetry is not a proof. In strict compliance with our three-tier epistemic contract (`OPEN`), we state the Riemann Hypothesis as an open conjecture (carrying no `lean` attribute), followed by a literature audit delineating what the frozen Lean theorems of this chapter do and do not certify.
 
@@ -250,12 +393,12 @@ $$
 ::: {.remark #rem-euler-zeta-literature title="Audit of Certified Half-Plane Identities vs. Analytic Continuation and the Riemann Hypothesis (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** Readers should keep the three epistemic layers of this chapter sharply distinct:
 
-1. **Kernel-verified frozen theorems in this book (`LEAN ✓`)**: The five formal blocks of this chapter — the unit residue at $s = 1$ ([@lem-riemann-zeta-residue-one]), the Dirichlet series identity on $\operatorname{Re}(s) > 1$ ([@prop-riemann-zeta-dirichlet-sum]), the Euler prime product identity on $\operatorname{Re}(s) > 1$ ([@thm-riemann-zeta-euler-product]), their direct equality on $\operatorname{Re}(s) > 1$ ([@cor-dirichlet-sum-eq-euler-product]), and the entirety, reflection symmetry $\xi(1 - s) = \xi(s)$ and endpoint values of the xi reading ([@thm-xi-reading-entire-reflection]) — are fully verified by the Lean kernel. Note that the Euler product is invoked solely inside the absolute-convergence half-plane `1 < s.re` ($\operatorname{Re}(s) > 1$) supplied by the Lean hypotheses.
+1. **Kernel-verified frozen theorems in this book (`LEAN ✓`)**: The eight formal blocks of this chapter — the unit residue at $s = 1$ ([@lem-riemann-zeta-residue-one]), the Dirichlet series identity on $\operatorname{Re}(s) > 1$ ([@prop-riemann-zeta-dirichlet-sum]), the Euler prime product identity on $\operatorname{Re}(s) > 1$ ([@thm-riemann-zeta-euler-product]), their direct equality on $\operatorname{Re}(s) > 1$ ([@cor-dirichlet-sum-eq-euler-product]), the entirety, reflection symmetry $\xi(1 - s) = \xi(s)$ and endpoint values of the xi reading ([@thm-xi-reading-entire-reflection]), the conjugation covariance of $\zeta$ and $\xi$ ([@prop-zeta-conjugation-covariance]), the Cayley unit-circle criterion with the radial equivalent of the Riemann Hypothesis ([@thm-cayley-critical-line-criterion]), and the quartic counterexample showing that full symmetry does not imply fixed-line localization ([@thm-full-symmetry-not-localization]) — are fully verified by the Lean kernel. Note that the Euler product is invoked solely inside the absolute-convergence half-plane `1 < s.re` ($\operatorname{Re}(s) > 1$) supplied by the Lean hypotheses.
 2. **Classical theorems of analytic number theory (proved in the literature, not formalized in this book)**:
-   - **Analytic continuation, trivial zeros, and conjugation symmetry (Riemann, 1859)**: $\zeta(s)$ extends meromorphically to $\mathbb{C}$ with a single simple pole at $s = 1$, has trivial zeros at $s = -2, -4, -6, \dots$, and $\xi(\overline{s}) = \overline{\xi(s)}$. (That the completed function $\xi$ is entire and satisfies $\xi(s) = \xi(1 - s)$ no longer belongs to this layer: both are given by [@thm-xi-reading-entire-reflection] through Mathlib's completed zeta.)
+   - **Analytic continuation and trivial zeros (Riemann, 1859)**: $\zeta(s)$ extends meromorphically to $\mathbb{C}$ with a single simple pole at $s = 1$, has trivial zeros at $s = -2, -4, -6, \dots$, and has no other zeros outside the critical strip $0 < \operatorname{Re}(s) < 1$. (That the completed function $\xi$ is entire and satisfies $\xi(s) = \xi(1 - s)$ and $\xi(\overline{s}) = \overline{\xi(s)}$ no longer belongs to this layer: these are given by [@thm-xi-reading-entire-reflection] and [@prop-zeta-conjugation-covariance] through Mathlib's completed zeta.)
    - **Nonvanishing on the line $\operatorname{Re}(s) = 1$ and the Prime Number Theorem (Hadamard, de la Vallée Poussin, 1896)**: $\zeta(1 + it) \neq 0$ for all nonzero real $t \in \mathbb{R} \setminus \{0\}$ (while $t = 0$, i.e. $s = 1$, is the simple pole), implying the Prime Number Theorem $\pi(x) \sim \frac{x}{\ln x}$;
    - **Explicit formulas (von Mangoldt, Weil)**: Fourier duality pairing prime-power logarithmic weights $\Lambda(n)$ with the spectral sum over nontrivial zeros $\rho$.
-3. **Open conjecture (`OPEN`)**: [@conj-riemann-hypothesis] asserts that all nontrivial zeros lie on $\operatorname{Re}(\rho) = 1/2$ (equivalently $\pi(x) = \operatorname{Li}(x) + O(x^{1/2}\ln x)$). The frozen theorems of this chapter certify the residue, the sum–product identity on $\operatorname{Re}(s) > 1$, and the reflection symmetry of $\xi$; they **do not certify the Riemann Hypothesis**: reflection symmetry only says that zeros come in pairs about $s = \frac{1}{2}$, not that they lie on the critical line.
+3. **Open conjecture (`OPEN`)**: [@conj-riemann-hypothesis] asserts that all nontrivial zeros lie on $\operatorname{Re}(\rho) = 1/2$ (equivalently $\pi(x) = \operatorname{Li}(x) + O(x^{1/2}\ln x)$). The frozen theorems of this chapter certify the residue, the sum–product identity on $\operatorname{Re}(s) > 1$, and the reflection symmetry of $\xi$; they **do not certify the Riemann Hypothesis**: reflection symmetry only says that zeros come in pairs about $s = \frac{1}{2}$, not that they lie on the critical line; [@thm-cayley-critical-line-criterion] merely restates the conjecture equivalently on the unit circle; and [@thm-full-symmetry-not-localization] shows that the reflection and conjugation symmetries alone cannot imply it.
 :::
 
 From the concept fibers of [Chapter 21](ch21-diagonalization-and-escape.md) to the prime orthogonal axes of this chapter, we have seen the rigid crystal structure of the integers $\mathbb{Z}$. What happens, however, when $\mathbb{Z}$ is submerged inside the dense continuum of the rational field $\mathbb{Q}$, where infinitely many fractions crowd between any two integers? Can first-order polynomial equations over $\mathbb{Q}$ still isolate the discrete integer skeleton $\mathbb{Z} \subset \mathbb{Q}$ — and why does the modern lock that achieves this rely on **quaternion norm spheres** and quadratic trace projections? Let us turn to [Chapter 23](ch23-diophantine-definability.md).

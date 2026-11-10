@@ -136,6 +136,71 @@ Since $\mathrm{energy} > 0$ and $\hbar > 0$, multiplying both sides by $\frac{\h
 
 [@thm-fubini-study-record-time] makes the relationship between quantum area and classical time crystal clear: two-dimensional quantum area rotates at angular rate $\mathrm{energy}/\hbar$, while the discrete tick count $N$ of a classical clock simply counts how many orthogonal $\pi/2$ walls have been crossed!
 
+The $\mathrm{energy}$ of the theorem is an abstract speed parameter. Replacing it by the energy fluctuation of a concrete Hamiltonian shows when the bound is attained, when it is not, and how long a real qubit takes to cross the wall once.
+
+::: {.example #ex-orthogonalization-times title="Working the Speed Limit Out: Attained for Two Levels, Not for Three, and Never Reached by an Unequal Superposition"}
+This example computes directly with concrete Hamiltonians. The two general bounds it uses — the Mandelstam–Tamm bound $\tau_\perp \ge \frac{\pi\hbar}{2\,\Delta H}$ and the Margolus–Levitin bound $\tau_\perp \ge \frac{\pi\hbar}{2\langle H\rangle}$ — are literature results, not formalized in this book (see [@rem-qsl-zeno-literature]); here $\Delta H$ is the standard deviation of the energy and $\langle H\rangle$ the mean energy above the ground level.
+
+**1. Equal superposition of two levels: attained.** Take levels $0$ and $E$ and the initial state $\psi(0) = \frac{1}{\sqrt{2}}\bigl(\lvert 0\rangle + \lvert 1\rangle\bigr)$. Then $\psi(t) = \frac{1}{\sqrt{2}}\bigl(\lvert 0\rangle + e^{-iEt/\hbar}\lvert 1\rangle\bigr)$ and
+
+$$
+\begin{aligned}
+\bigl\lvert\langle\psi(0), \psi(t)\rangle\bigr\rvert &= \Bigl\lvert\frac{1 + e^{-iEt/\hbar}}{2}\Bigr\rvert = \Bigl\lvert\cos\frac{Et}{2\hbar}\Bigr\rvert, \\
+\theta_{\mathrm{FS}}\bigl(\psi(0), \psi(t)\bigr) &= \frac{Et}{2\hbar} \qquad \Bigl(0 \le t \le \frac{\pi\hbar}{E}\Bigr).
+\end{aligned}
+$$
+
+The first orthogonality occurs at $\tau_\perp = \frac{\pi\hbar}{E}$. For this state $\langle H\rangle = \frac{E}{2}$ and $\Delta H = \frac{E}{2}$, so the angle grows uniformly at speed exactly $\Delta H/\hbar$, both bounds equal $\frac{\pi\hbar}{E}$, and both are attained. Compare with [@thm-fubini-study-record-time]: take $m_0 = \psi(0)$, $m_1 = \psi(\tau_\perp)$, the anchor $a = \psi(\tau_\perp/2)$, $\mathrm{energy} = \Delta H = \frac{E}{2}$ and $\tau = \frac{\tau_\perp}{2}$. Both legs have angle $\frac{\pi}{4} = \frac{\mathrm{energy}\cdot\tau}{\hbar}$, so the hypotheses hold with equality, and so does the conclusion $\tau \ge \frac{\pi\hbar}{4\cdot\mathrm{energy}} = \frac{\pi\hbar}{2E}$.
+
+**2. Equal superposition of three levels: not attained.** Take levels $0, E, 2E$ and $\psi(0) = \frac{1}{\sqrt{3}}\bigl(\lvert 0\rangle + \lvert 1\rangle + \lvert 2\rangle\bigr)$. With $z = e^{-iEt/\hbar}$ the overlap is $\frac{1}{3}(1 + z + z^2)$, which first vanishes when $z$ becomes a primitive cube root of unity:
+
+$$
+\tau_\perp = \frac{2\pi\hbar}{3E} \approx 2.0944\,\frac{\hbar}{E} .
+$$
+
+The energy statistics are $\langle H\rangle = E$, $\langle H^2\rangle = \frac{5}{3}E^2$ and $\Delta H = \sqrt{\tfrac{2}{3}}\,E \approx 0.8165\,E$.
+
+| Quantity | Value (in units of $\hbar/E$) |
+| :--- | :---: |
+| Actual orthogonalization time $\tau_\perp$ | $2.0944$ |
+| Mandelstam–Tamm bound $\frac{\pi\hbar}{2\,\Delta H}$ | $1.9238$ |
+| Margolus–Levitin bound $\frac{\pi\hbar}{2\langle H\rangle}$ | $1.5708$ |
+
+Both bounds hold and neither is attained. The reason can be computed: the state still moves through projective space at speed $\Delta H/\hbar$, and by $\tau_\perp$ it has travelled an arc of length $\Delta H\,\tau_\perp/\hbar \approx 1.7101$ radians, whereas the geodesic between its endpoints measures only $\frac{\pi}{2} \approx 1.5708$ radians. The orbit is curved and about $8.9\%$ longer. Angle and arc length along the way ($t$ in units of $\hbar/E$, rounded to the digits shown):
+
+| $t$ | Overlap $\lvert\langle\psi(0), \psi(t)\rangle\rvert$ | Angle $\theta_{\mathrm{FS}}$ (radians) | Arc length $\Delta H\,t/\hbar$ (radians) |
+| :---: | :---: | :---: | :---: |
+| $0.5$ | $0.9184$ | $0.4068$ | $0.4082$ |
+| $1.0$ | $0.6935$ | $0.8044$ | $0.8165$ |
+| $1.5$ | $0.3805$ | $1.1805$ | $1.2247$ |
+| $2.0944$ | $0$ | $1.5708$ | $1.7101$ |
+
+**3. An unequal superposition: the wall is never reached.** Take $\psi(0) = \cos\alpha\,\lvert 0\rangle + \sin\alpha\,\lvert 1\rangle$ (levels $0, E$ as before, $0 < \alpha \le 45^\circ$). Then
+
+$$
+\bigl\lvert\langle\psi(0), \psi(t)\rangle\bigr\rvert^2 = \cos^4\alpha + \sin^4\alpha + 2\cos^2\alpha\,\sin^2\alpha\,\cos\frac{Et}{\hbar} \;\ge\; \cos^2 2\alpha ,
+$$
+
+so the smallest overlap is $\lvert\cos 2\alpha\rvert$ and the largest angle is $2\alpha$. For $\alpha = 30^\circ$ the state turns through at most $60^\circ$, for $\alpha = 40^\circ$ at most $80^\circ$; only the equal superposition $\alpha = 45^\circ$ just reaches $90^\circ$. Not every state can sound a "tick": if its weights on the two levels are unequal, it keeps some overlap with its own past forever.
+
+**4. Why only the equal two-level superposition attains the bound.** The proof of the Margolus–Levitin bound uses the inequality $\cos x \ge 1 - \frac{2}{\pi}(x + \sin x)$ for $x \ge 0$:
+
+| $x$ | $0$ | $\frac{\pi}{2}$ | $\pi$ | $\frac{3\pi}{2}$ | $2\pi$ |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| $\cos x$ | $1$ | $0$ | $-1$ | $0$ | $1$ |
+| $1 - \frac{2}{\pi}(x + \sin x)$ | $1$ | $-0.6366$ | $-1$ | $-1.3634$ | $-3$ |
+
+Equality occurs only at $x = 0$ and $x = \pi$. Attaining the bound requires the phase $E_n\tau_\perp/\hbar$ of every energy component at time $\tau_\perp$ to sit at one of these two points, which is case 1 (phases $0$ and $\pi$); in case 2 the three phases are $0, \frac{2\pi}{3}, \frac{4\pi}{3}$, so the inequality is strict.
+
+**5. Orders of magnitude.** A qubit with level splitting $E = hf$, $f = 5\,\mathrm{GHz}$ ($E \approx 20.7\,\mu\mathrm{eV}$), precessing freely, has for the equal superposition the orthogonalization time
+
+$$
+\tau_\perp = \frac{\pi\hbar}{E} = \frac{1}{2f} = 100\,\mathrm{ps} .
+$$
+
+By the counting bound of [@thm-fubini-study-record-time] with $\mathrm{energy} = \Delta H = \frac{hf}{2}$, within $T = 25\,\mathrm{ns}$ one has $N \le \frac{4\cdot\mathrm{energy}\cdot T}{\pi\hbar} = 4fT = 500$. Under drive the situation differs: [@ex-five-ghz-pi-over-two] of [Chapter 11](ch11-pulses-and-virtual-z.md) removes the carrier in the rotating frame, the energy scale of the effective Hamiltonian is the Rabi frequency $\Omega = 2\pi \times 10\,\mathrm{MHz}$, the initial state $\lvert 0\rangle$ has $\Delta H = \frac{\hbar\Omega}{2}$, and the orthogonalization time is $\tau_\perp = \frac{\pi}{\Omega} = 50\,\mathrm{ns}$, exactly twice the $25\,\mathrm{ns}$ quarter turn computed there. One and the same qubit, viewed in another frame, has a clock five hundred times slower: the spacing of the "ticks" is set by the energy fluctuation in the chosen frame, not by the level splitting itself.
+:::
+
 ## 7.3 The Quantum Zeno Effect: Exterior-Area Evolution Frozen by High-Frequency Inner-Product Measurements {#sec-quantum-zeno-effect}
 
 Now ask the converse question: what happens if a state begins sweeping out exterior area $\vv{A}\wedge\vv{B} = \sin(\omega t/2)\,\vv{I}$ in a plane, but an impatient observer refuses to wait for it to reach $90^\circ$ — repeatedly projecting the state back onto the initial axis $\vv{A}$ via $P_{\vv{A}}^2 = P_{\vv{A}}$ at tiny intervals $\delta t = T / N$?

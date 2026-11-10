@@ -493,6 +493,22 @@
       "line": 37,
       "signature": "theorem target_recovery_criterion {X ProcessState Target : Type*} [Nonempty X] (process : Concept X ProcessState) (target : Concept X Target) : ((∃ recover : ProcessState → Target, target = recover ∘ process) ↔ ∀ ⦃x y : X⦄, process x = process y → target x = target y) ∧ ((∀ ⦃x y : X⦄, process x = process y → target x = target y) ↔ defectRelation process target = ∅) ∧ (defectRelation process target = ∅ ↔ ∃ recover : ProcessState → Target, target = recover ∘ process) ∧ ((¬∃ recover : ProcessState → Target, target = recover ∘ process) ↔ (defectRelation process target).Nonempty)"
     },
+    "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift": {
+      "module": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift",
+      "name": "D5.S3.ConceptDynamics.Topology.CircleDoubleCoverHistoryLift.circle_double_cover_history_lift",
+      "kind": "theorem",
+      "statement_id": "sha256:ccc9572bd218e8cdd478ed57c079d4c8012e632e59a0aa2a7ac7533e4f9bf20b",
+      "line": 36,
+      "signature": "theorem circle_double_cover_history_lift : let square : Circle → Circle"
+    },
+    "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section": {
+      "module": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection",
+      "name": "D5.S3.ConceptDynamics.Topology.CircleDoubleCoverNoSection.no_continuous_global_section",
+      "kind": "theorem",
+      "statement_id": "sha256:f5e0857a6af4673b8e6b849c8e3f46c5021a9c9fa548482a34028639cba1d5e0",
+      "line": 28,
+      "signature": "theorem no_continuous_global_section : ¬ ∃ s : Circle → Circle, Continuous s ∧ ∀ z : Circle, s z ^ 2 = z"
+    },
     "D5/S3/Constants/PentagonCosines.pentagon_golden_cosines": {
       "module": "D5/S3/Constants/PentagonCosines",
       "name": "D5.S3.Constants.PentagonCosines.pentagon_golden_cosines",
@@ -596,6 +612,46 @@
       "statement_id": "sha256:8b1f001fa093ddd76bc2aeae51ba8b2dadd6cba9e82f4ebfd2a2395494096c23",
       "line": 725,
       "signature": "theorem stinespring_dilation {A H : Type u} [CStarAlgebra A] [PartialOrder A] [StarOrderedRing A] [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H] (φ : A →CP (H →L[ℂ] H)) : ∃ (K : Type u) (_ : NormedAddCommGroup K) (_ : InnerProductSpace ℂ K) (_ : CompleteSpace K) (π : A →⋆ₐ[ℂ] (K →L[ℂ] K)) (V : H →L[ℂ] K), ∀ (a : A) (x : H), (φ a) x = (V†) ((π a) (V x))"
+    },
+    "D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion": {
+      "module": "D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion",
+      "name": "D5.S3.Midline.Cayley.CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion",
+      "kind": "theorem",
+      "statement_id": "sha256:547e2360b6d7272103f80eba1b75ee6b705e5b162495aec1081f40c28169769a",
+      "line": 76,
+      "signature": "theorem cayley_critical_line_zeta_criterion : (∀ s : Complex, ‖cayleyCoefficient s‖ = 1 ↔ s.re = (1 : Real) / 2) ∧ (RiemannHypothesis ↔ ∀ rho : Complex, riemannZeta rho = 0 → (¬∃ n : Nat, rho = -2 * (n + 1)) → rho ≠ 1 → logarithmicRadialDefect rho = 0)"
+    },
+    "D5/S3/Midline/Cayley/CayleyUnitarityDefect.cayleyCoefficient": {
+      "module": "D5/S3/Midline/Cayley/CayleyUnitarityDefect",
+      "name": "D5.S3.Midline.Cayley.CayleyUnitarityDefect.cayleyCoefficient",
+      "kind": "def",
+      "statement_id": "sha256:53480f871ca9eb6393acbc326385c7b62468c023fe8bb218e1370c6108269822",
+      "line": 59,
+      "signature": "noncomputable def cayleyCoefficient (rho : Complex) : Complex"
+    },
+    "D5/S3/Midline/Cayley/LogarithmicRadialDefect.logarithmicRadialDefect": {
+      "module": "D5/S3/Midline/Cayley/LogarithmicRadialDefect",
+      "name": "D5.S3.Midline.Cayley.LogarithmicRadialDefect.logarithmicRadialDefect",
+      "kind": "def",
+      "statement_id": "sha256:c9fce0bdf0a41ab34320b74f16c34e33a4745259b23f386b2eea80a18d362aa9",
+      "line": 27,
+      "signature": "noncomputable def logarithmicRadialDefect (rho : Complex) : Real"
+    },
+    "D5/S3/Midline/CayleyCriticalLine.cayleyRatio": {
+      "module": "D5/S3/Midline/CayleyCriticalLine",
+      "name": "D5.S3.Midline.CayleyCriticalLine.cayleyRatio",
+      "kind": "def",
+      "statement_id": "sha256:79d47c185587dd1e3fcd1e39f5f5c9f222bde94a52e7ae3c3d5e07f4270fa8a2",
+      "line": 30,
+      "signature": "noncomputable def cayleyRatio (s : ℂ) : ℂ"
+    },
+    "D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line": {
+      "module": "D5/S3/Midline/CayleyCriticalLine",
+      "name": "D5.S3.Midline.CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line",
+      "kind": "theorem",
+      "statement_id": "sha256:79d47c185587dd1e3fcd1e39f5f5c9f222bde94a52e7ae3c3d5e07f4270fa8a2",
+      "line": 46,
+      "signature": "theorem cayley_ratio_norm_one_iff_critical_line (s : ℂ) : ‖cayleyRatio s‖ = 1 ↔ s.re = (1 : ℝ) / 2"
     },
     "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification": {
       "module": "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification",
@@ -708,6 +764,30 @@
       "statement_id": "sha256:9eed3d89d4955c0693aef4fea4a4ee687b30ab3a641ef049527d6681d6b46b53",
       "line": 26,
       "signature": "theorem finite_rank_concentration_mode_bound (concentrationEigenvalue : ℕ → ℝ) (intervalRadius frequencyMeasure threshold : ℝ) (hNonneg : ∀ j, 0 ≤ concentrationEigenvalue j) (hSummable : Summable concentrationEigenvalue) (hTrace : ∑' j, concentrationEigenvalue j = intervalRadius * frequencyMeasure / Real.pi) (hThreshold : 0 < threshold) : Set.Finite {j | threshold ≤ concentrationEigenvalue j} ∧ (({j | threshold ≤ concentrationEigenvalue j} : Set ℕ).ncard : ℝ) ≤ intervalRadius * frequencyMeasure / (Real.pi * threshold)"
+    },
+    "D5/S3/Observer/WindowRegister.clockMatrix": {
+      "module": "D5/S3/Observer/WindowRegister",
+      "name": "D5.S3.Observer.WindowRegister.clockMatrix",
+      "kind": "def",
+      "statement_id": "sha256:1f03573f26ffc97bee9217cd4164f7e0941cb73ba680130d6cfd2e970fc3554a",
+      "line": 31,
+      "signature": "noncomputable def clockMatrix (M : ℕ) : Matrix (ZMod M) (ZMod M) ℂ"
+    },
+    "D5/S3/Observer/WindowRegister.shiftMatrix": {
+      "module": "D5/S3/Observer/WindowRegister",
+      "name": "D5.S3.Observer.WindowRegister.shiftMatrix",
+      "kind": "def",
+      "statement_id": "sha256:1f03573f26ffc97bee9217cd4164f7e0941cb73ba680130d6cfd2e970fc3554a",
+      "line": 35,
+      "signature": "def shiftMatrix (M : ℕ) [NeZero M] : Matrix (ZMod M) (ZMod M) ℂ"
+    },
+    "D5/S3/Observer/WindowRegister.windowRoot": {
+      "module": "D5/S3/Observer/WindowRegister",
+      "name": "D5.S3.Observer.WindowRegister.windowRoot",
+      "kind": "def",
+      "statement_id": "sha256:1f03573f26ffc97bee9217cd4164f7e0941cb73ba680130d6cfd2e970fc3554a",
+      "line": 22,
+      "signature": "noncomputable def windowRoot (M : ℕ) : ℂ"
     },
     "D5/S3/ObserverMemory/JointCoherentReversal.joint_coherent_reversal": {
       "module": "D5/S3/ObserverMemory/JointCoherentReversal",
@@ -940,6 +1020,46 @@
       "statement_id": "sha256:dc4fb8763a0fb2fbd35914366c6bad0597bfb4799e97ced50ba6e2af629b07ef",
       "line": 55,
       "signature": "theorem secondCross_eq_neg_first {n : Type*} [Fintype n] [DecidableEq n] (A B : Matrix n n ℂ) (hCross : A * Bᴴ + B * Aᴴ = 0) : B * Aᴴ = -(A * Bᴴ)"
+    },
+    "D5/S3/Quantum/Algebra/WeylDisplacement.displacement": {
+      "module": "D5/S3/Quantum/Algebra/WeylDisplacement",
+      "name": "D5.S3.Quantum.Algebra.WeylDisplacement.displacement",
+      "kind": "def",
+      "statement_id": "sha256:11f68b7187757bbf99cfa9c84d84bb1a317de4c6e1b89738f8c5fd66d82e7e8f",
+      "line": 130,
+      "signature": "noncomputable def displacement (M : ℕ) [NeZero M] (a b : ZMod M) : Matrix (ZMod M) (ZMod M) ℂ"
+    },
+    "D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm": {
+      "module": "D5/S3/Quantum/Algebra/WeylDisplacement",
+      "name": "D5.S3.Quantum.Algebra.WeylDisplacement.displacement_comm",
+      "kind": "theorem",
+      "statement_id": "sha256:11f68b7187757bbf99cfa9c84d84bb1a317de4c6e1b89738f8c5fd66d82e7e8f",
+      "line": 174,
+      "signature": "theorem displacement_comm (a b c d : ZMod M) : windowRoot M ^ (d * a).val • (displacement M a b * displacement M c d) = windowRoot M ^ (b * c).val • (displacement M c d * displacement M a b)"
+    },
+    "D5/S3/Quantum/Algebra/WeylDisplacement.displacement_mul": {
+      "module": "D5/S3/Quantum/Algebra/WeylDisplacement",
+      "name": "D5.S3.Quantum.Algebra.WeylDisplacement.displacement_mul",
+      "kind": "theorem",
+      "statement_id": "sha256:11f68b7187757bbf99cfa9c84d84bb1a317de4c6e1b89738f8c5fd66d82e7e8f",
+      "line": 140,
+      "signature": "theorem displacement_mul (a b c d : ZMod M) : displacement M a b * displacement M c d = windowRoot M ^ (b * c).val • displacement M (a + c) (b + d)"
+    },
+    "D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute": {
+      "module": "D5/S3/Quantum/Algebra/WeylDisplacement",
+      "name": "D5.S3.Quantum.Algebra.WeylDisplacement.displacement_two_anticommute",
+      "kind": "theorem",
+      "statement_id": "sha256:11f68b7187757bbf99cfa9c84d84bb1a317de4c6e1b89738f8c5fd66d82e7e8f",
+      "line": 182,
+      "signature": "theorem displacement_two_anticommute : displacement 2 (0 : ZMod 2) (1 : ZMod 2) * displacement 2 (1 : ZMod 2) (0 : ZMod 2) = -(displacement 2 (1 : ZMod 2) (0 : ZMod 2) * displacement 2 (0 : ZMod 2) (1 : ZMod 2))"
+    },
+    "D5/S3/Quantum/Algebra/WeylDisplacementAdjoint.displacement_adjoint": {
+      "module": "D5/S3/Quantum/Algebra/WeylDisplacementAdjoint",
+      "name": "D5.S3.Quantum.Algebra.WeylDisplacementAdjoint.displacement_adjoint",
+      "kind": "theorem",
+      "statement_id": "sha256:8aae4e564b5324721006f2820a517ebfe2132d726deb1f4861e2df87f09df85e",
+      "line": 154,
+      "signature": "theorem displacement_adjoint (a b : ZMod M) : star (displacement M a b) = windowRoot M ^ (a * b).val • displacement M (-a) (-b)"
     },
     "D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation": {
       "module": "D5/S3/Quantum/Algebra/WeylDisplacementConjugation",
@@ -1469,6 +1589,14 @@
       "line": 40,
       "signature": "theorem same_effects_different_two_step_joint_law : let projectiveKraus : Bool -> QubitMatrix"
     },
+    "D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity": {
+      "module": "D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity",
+      "name": "D5.S3.Quantum.Measurements.FiniteMemoryHistoryCapacity.finite_memory_history_capacity",
+      "kind": "theorem",
+      "statement_id": "sha256:b941b8f988de974faf219875e0fcd12c6f75044ad1d886e25a6efa2b151d3b3b",
+      "line": 62,
+      "signature": "theorem finite_memory_history_capacity {N d : Nat} (rho E : Fin N → Matrix (Fin d) (Fin d) ℂ) (hRho : ∀ i, (rho i).PosSemidef ∧ (rho i).trace = 1) (hE : ∀ j, (E j).PosSemidef) (hSum : ∑ j, E j = 1) (hPairing : ∀ i j, (E j * rho i).trace = if i = j then 1 else 0) : N ≤ d"
+    },
     "D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion": {
       "module": "D5/S3/Quantum/PureState/NoCloningInnerProductCriterion",
       "name": "D5.S3.Quantum.PureState.NoCloningInnerProductCriterion.no_cloning_inner_product_criterion",
@@ -1660,6 +1788,22 @@
       "statement_id": "sha256:b0f4a78840c73750d0019a5282c2796251b339bc49991297f9e5b22013dafda3",
       "line": 44,
       "signature": "def observable {Fiber : Type*} (answer : Fiber -> Bool) : Fiber -> Real"
+    },
+    "D5/S3/QuantumBounds/CollisionEntropyUncertainty.collision_entropy_uncertainty": {
+      "module": "D5/S3/QuantumBounds/CollisionEntropyUncertainty",
+      "name": "D5.S3.QuantumBounds.CollisionEntropyUncertainty.collision_entropy_uncertainty",
+      "kind": "theorem",
+      "statement_id": "sha256:0855b96a0deb4cbea90fe404db64da68ed3125ba1fd3ba64110ab7a9d49c4bff",
+      "line": 31,
+      "signature": "theorem collision_entropy_uncertainty {d : Nat} (hd : 0 < d) (p : Fin (d + 1) -> Fin d -> Real) (purity : Real) (hprob : forall b, (forall i, 0 <= p b i) /\\ ∑ i, p b i = 1) (hcollision : ∑ b, ∑ i, (p b i) ^ 2 = 1 + purity) : (d + 1 : Real) * Real.log ((d + 1 : Real) / (1 + purity)) <= ∑ b, shannonEntropy (p b)"
+    },
+    "D5/S3/QuantumBounds/Designs/MixedStateRobertson.mixed_state_robertson_uncertainty": {
+      "module": "D5/S3/QuantumBounds/Designs/MixedStateRobertson",
+      "name": "D5.S3.QuantumBounds.Designs.MixedStateRobertson.mixed_state_robertson_uncertainty",
+      "kind": "theorem",
+      "statement_id": "sha256:a2d45f27069aab5859662a990253e1e8f4a44aec98179298418b7b74be2bd495",
+      "line": 68,
+      "signature": "theorem mixed_state_robertson_uncertainty (rho : DensityState d) (A B : Matrix d d ℂ) (hA : A.IsHermitian) (hB : B.IsHermitian) : let rhoMatrix : Matrix d d ℂ"
     },
     "D5/S3/QuantumBounds/FubiniStudyRecordTime.fsAngle": {
       "module": "D5/S3/QuantumBounds/FubiniStudyRecordTime",
@@ -1988,6 +2132,70 @@
       "statement_id": "sha256:0648d499fd32bc7fff51faf73ff211bb9072b7d2040d02d10bca7a2817bce22f",
       "line": 17,
       "signature": "theorem xi_reading_endpoint_values : xiReading 0 = (1 / 2 : ℂ) ∧ xiReading 1 = (1 / 2 : ℂ)"
+    },
+    "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.FixedLineLocalization": {
+      "module": "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization",
+      "name": "D5.S3.Zeros.SymmetricPolynomial.FullSymmetryNonlocalization.FixedLineLocalization",
+      "kind": "def",
+      "statement_id": "sha256:460e07bc5e214dac7e9ce8cf49f86488b9b31d6ada6b65f90046b51edde0a304",
+      "line": 62,
+      "signature": "def FixedLineLocalization (F : ℂ → ℂ) : Prop"
+    },
+    "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.HasFullZetaSymmetry": {
+      "module": "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization",
+      "name": "D5.S3.Zeros.SymmetricPolynomial.FullSymmetryNonlocalization.HasFullZetaSymmetry",
+      "kind": "def",
+      "statement_id": "sha256:460e07bc5e214dac7e9ce8cf49f86488b9b31d6ada6b65f90046b51edde0a304",
+      "line": 57,
+      "signature": "def HasFullZetaSymmetry (F : ℂ → ℂ) : Prop"
+    },
+    "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.full_symmetry_not_fixed_line_localization": {
+      "module": "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization",
+      "name": "D5.S3.Zeros.SymmetricPolynomial.FullSymmetryNonlocalization.full_symmetry_not_fixed_line_localization",
+      "kind": "theorem",
+      "statement_id": "sha256:460e07bc5e214dac7e9ce8cf49f86488b9b31d6ada6b65f90046b51edde0a304",
+      "line": 166,
+      "signature": "theorem full_symmetry_not_fixed_line_localization (delta gamma : ℝ) (hdelta : delta ≠ 0) (hgamma : gamma ≠ 0) : (∃ F : ℂ → ℂ, F = offCriticalQuartic delta gamma ∧ Differentiable ℂ F ∧ HasFullZetaSymmetry F ∧ (∀ s, F s = 0 ↔ s ∈ sourceZeros delta gamma) ∧ (sourceZeros delta gamma).card = 4 ∧ ∀ s, F s = 0 → s.re ≠ criticalAbscissa) ∧ ¬ (∀ F : ℂ → ℂ, Differentiable ℂ F → HasFullZetaSymmetry F → FixedLineLocalization F)"
+    },
+    "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.offCriticalQuartic": {
+      "module": "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization",
+      "name": "D5.S3.Zeros.SymmetricPolynomial.FullSymmetryNonlocalization.offCriticalQuartic",
+      "kind": "def",
+      "statement_id": "sha256:460e07bc5e214dac7e9ce8cf49f86488b9b31d6ada6b65f90046b51edde0a304",
+      "line": 31,
+      "signature": "def offCriticalQuartic (delta gamma : ℝ) (s : ℂ) : ℂ"
+    },
+    "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.sourceZeros": {
+      "module": "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization",
+      "name": "D5.S3.Zeros.SymmetricPolynomial.FullSymmetryNonlocalization.sourceZeros",
+      "kind": "def",
+      "statement_id": "sha256:460e07bc5e214dac7e9ce8cf49f86488b9b31d6ada6b65f90046b51edde0a304",
+      "line": 52,
+      "signature": "def sourceZeros (delta gamma : ℝ) : Finset ℂ"
+    },
+    "D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.riemann_zeta_conj": {
+      "module": "D5/S3/Zeros/Symmetry/ZetaConjugationCovariance",
+      "name": "D5.S3.Zeros.Symmetry.ZetaConjugationCovariance.riemann_zeta_conj",
+      "kind": "theorem",
+      "statement_id": "sha256:c71d7be1478c3fcf9ba5b711de18b38f2f07ec3798adbc033d07e7307a8064ee",
+      "line": 87,
+      "signature": "theorem riemann_zeta_conj (s : ℂ) : riemannZeta (conj s) = conj (riemannZeta s)"
+    },
+    "D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.xi_reading_conj": {
+      "module": "D5/S3/Zeros/Symmetry/ZetaConjugationCovariance",
+      "name": "D5.S3.Zeros.Symmetry.ZetaConjugationCovariance.xi_reading_conj",
+      "kind": "theorem",
+      "statement_id": "sha256:c71d7be1478c3fcf9ba5b711de18b38f2f07ec3798adbc033d07e7307a8064ee",
+      "line": 98,
+      "signature": "theorem xi_reading_conj (s : ℂ) : xiReading (conj s) = conj (xiReading s)"
+    },
+    "D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.xi_reading_one_sub_conj": {
+      "module": "D5/S3/Zeros/Symmetry/ZetaConjugationCovariance",
+      "name": "D5.S3.Zeros.Symmetry.ZetaConjugationCovariance.xi_reading_one_sub_conj",
+      "kind": "theorem",
+      "statement_id": "sha256:c71d7be1478c3fcf9ba5b711de18b38f2f07ec3798adbc033d07e7307a8064ee",
+      "line": 105,
+      "signature": "theorem xi_reading_one_sub_conj (s : ℂ) : xiReading (1 - conj s) = conj (xiReading s)"
     },
     "D5/S3/Zeros/ZetaIdentities.riemann_zeta_dirichlet_sum": {
       "module": "D5/S3/Zeros/ZetaIdentities",

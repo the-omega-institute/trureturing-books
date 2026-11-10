@@ -99,6 +99,68 @@ $$
 
 [@thm-unread-fixed-iff] 揭示了经典概率论是怎样从量子几何中分娩出来的：一旦选定了一套记录测量 $P$，凡是跨通道相干块 $P_k \rho P_l$（$k \neq l$）为零的矩阵，就退化成了互不干涉的块对角经典账本！经典世界并不是另一个平行宇宙，它就是量子状态空间在某个幂等捏合投影 $\operatorname{unreadState}(P)$ 下的**不动点子空间**。
 
+一套记录测量把 $d$ 维空间切成若干互不干涉的通道。那么反过来问：一个 $d$ 维系统最多能存放几条可以**毫无差错**读出的记录？如果允许用非正交的态来编码，再配上比投影测量更一般的读出方式，能不能在一个量子比特里塞进三条、四条？所钉仓库的模块 `D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity` 给出了否定的回答，而且前提放得很宽：记录可以是混合态，读出可以是任意一组和为单位元的半正定矩阵。
+
+::: {.proposition #prop-record-capacity title="d 维系统至多容纳 d 条可完美读出的记录" lean="D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity"}
+设 $N, d$ 为自然数，$\rho_0, \dots, \rho_{N-1}$ 与 $E_0, \dots, E_{N-1}$ 为 $d \times d$ 复矩阵。若
+
+1. 每个 $\rho_i$ 半正定且 $\Tr(\rho_i) = 1$；
+2. 每个 $E_j$ 半正定，且 $\sum_{j} E_j = 1$；
+3. 对一切 $i, j$，$\Tr(E_j\,\rho_i) = 1$（当 $i = j$）且 $\Tr(E_j\,\rho_i) = 0$（当 $i \neq j$）；
+
+则 $N \le d$。
+:::
+
+::: proof
+由前提 2，每个 $E_i$ 夹在 $0$ 与 $1$ 之间。$\Tr(E_i\rho_i) = 1 = \Tr(\rho_i)$ 给出 $\Tr\bigl((1 - E_i)\rho_i\bigr) = 0$；两个半正定矩阵乘积的迹为零时乘积本身为零，所以 $\rho_i$ 的像空间落在 $1 - E_i$ 的核里，即 $E_i$ 在其上是恒等。同理，$i \neq j$ 时 $\Tr(E_i\rho_j) = 0$ 说明 $\rho_j$ 的像空间落在 $E_i$ 的核里。每个 $\rho_i$ 迹为 $1$，故非零，可在其像空间中取非零向量 $v_i$。于是 $E_i v_i = v_i$ 而 $E_i v_j = 0$（$j \neq i$），再由 $E_i$ 厄米得 $\langle v_i, v_j\rangle = \langle E_i v_i, v_j\rangle = \langle v_i, E_i v_j\rangle = 0$。$N$ 个两两正交的非零向量线性无关，个数不超过维数 $d$。完整证明由 Lean 内核检查。
+:::
+
+把前提 3 放松，还能得到一个定量版本（手工推导，未在本书形式化）。对任意满足前提 1、2 的 $\rho_i$ 与 $E_j$，由 $\rho_i \le 1$ 与 $E_i \ge 0$ 有 $\Tr(E_i\rho_i) \le \Tr(E_i)$，对 $i$ 求和：
+
+$$
+\sum_{i=0}^{N-1} \Tr(E_i\,\rho_i) \;\le\; \Tr\Bigl(\sum_{i} E_i\Bigr) \;=\; \Tr(1) \;=\; d .
+$$
+
+若 $N$ 条记录等可能出现，读对的平均概率 $\frac{1}{N}\sum_i \Tr(E_i\rho_i)$ 便不超过 $\frac{d}{N}$。[@prop-record-capacity] 是它的特例：全部读对要求左端等于 $N$，于是 $N \le d$。
+
+::: {.example #ex-trine-record-capacity title="一个量子比特里的三条记录：最多读对三分之二"}
+在一个量子比特（$d = 2$）里放三条纯态记录，布洛赫向量在同一个大圆上两两相隔 $120^\circ$。对 $k = 0, 1, 2$ 取
+
+$$
+\lvert\psi_k\rangle = \cos\frac{k\pi}{3}\,\lvert 0\rangle + \sin\frac{k\pi}{3}\,\lvert 1\rangle .
+$$
+
+按[第二章](ch02-born-rule.md)的半角公式，布洛赫夹角 $120^\circ$ 对应 $\lvert\langle\psi_j\mid\psi_k\rangle\rvert^2 = \cos^2 60^\circ = \frac{1}{4}$（$j \neq k$）。$N = 3 > d = 2$，[@prop-record-capacity] 断言不存在能把三者完全分开的读出方式。
+
+**一组具体的读出。** 取 $E_k = \frac{2}{3}\lvert\psi_k\rangle\langle\psi_k\rvert$。三个投影之和是
+
+$$
+\sum_{k=0}^{2} \lvert\psi_k\rangle\langle\psi_k\rvert
+= \begin{pmatrix} 1 + \frac{1}{4} + \frac{1}{4} & 0 + \frac{\sqrt{3}}{4} - \frac{\sqrt{3}}{4} \\ 0 + \frac{\sqrt{3}}{4} - \frac{\sqrt{3}}{4} & 0 + \frac{3}{4} + \frac{3}{4} \end{pmatrix}
+= \frac{3}{2}\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix},
+$$
+
+所以 $\sum_k E_k = 1$，前提 2 成立。读数表为
+
+$$
+\Tr\bigl(E_j\,\lvert\psi_k\rangle\langle\psi_k\rvert\bigr) = \frac{2}{3}\,\lvert\langle\psi_j\mid\psi_k\rangle\rvert^2 ,
+$$
+
+即 $j = k$ 时为 $\frac{2}{3}$，$j \neq k$ 时为 $\frac{2}{3}\cdot\frac{1}{4} = \frac{1}{6}$；每行之和 $\frac{2}{3} + \frac{1}{6} + \frac{1}{6} = 1$。读对的概率是 $\frac{2}{3}$。
+
+**这已经是最好的。** 上面的定量界给出平均读对概率不超过 $\frac{d}{N} = \frac{2}{3}$，而这组读出恰好达到。三条记录里读对两条的份额，正是“两个维度分给三条记录”的字面意思。
+
+| 记录条数 $N$ | 维数 $d$ | 平均读对概率的上界 $d/N$ | 能否全部读对 |
+| :---: | :---: | :---: | :---: |
+| $2$ | $2$ | $1$ | 能（取正交的两条） |
+| $3$ | $2$ | $\frac{2}{3}$ | 不能 |
+| $4$ | $2$ | $\frac{1}{2}$ | 不能 |
+| $8$ | $8$（三个量子比特） | $1$ | 能 |
+| $9$ | $8$ | $\frac{8}{9}$ | 不能 |
+:::
+
+一个量子比特的态空间是一整张球面，上面有连续统那么多个点；可是能当作记录来用、读出时不出错的，同时只有两个。“存在线”可以指向任何方向，账本上的格子数却由维数说了算。
+
 ## 3.2 线与面的伴生宿命（霍奇对偶） {#sec-ch03-2}
 
 但是，往三维球体里钉入一根一维幂等轴线，是要付出几何代价的——更准确地说，它会瞬间唤醒一个与这根轴线如影随形的孪生兄弟。
@@ -185,6 +247,60 @@ $$
 | 三元完备层析 $\{X, Y, Z\}$（$|L|=3$） | 整座三维球空间 $\mathbb{R}^3$ | $\frac{1}{2}(r_x^2 + r_y^2 + r_z^2)$ | 零空间 $\{\vv{0}\}$ | $0$（盲区彻底清零） |
 
 你看，为什么单靠两套测量 $\{Z, X\}$ 依然无法唯一确定一颗量子比特的真实状态（$\pm r_y$ 手性正负难辨）？因为二维平面在三维空间里的霍奇对偶 $\star(\vv{e}_3 \wedge \vv{e}_1) = \vv{e}_2$ 还留着最后一根一维法线盲区 $\frac{1}{2}r_y^2$；唯有补齐两两正交的三根上下文轴 $\{X, Y, Z\}$（这正是第三部第九章“三元正交合拢成球”的伏笔），剩余质量才精确归零！
+
+层析表的最后一行还藏着一条没有说出口的约束。三个互补语境的读数能不能**同时**确定？把最后一行的勾股和换一个写法：对 $|d| = 2$，每个语境里 $\sum_j \bigl(p_{l,j} - \frac{1}{2}\bigr)^2 = \sum_j p_{l,j}^2 - \frac{1}{2}$，所以
+
+$$
+\sum_{l \in \{X, Y, Z\}} \sum_{j} p_{l,j}^2 \;=\; \frac{3}{2} + \frac{1}{2}\norm{\vv{r}}^2 \;=\; 1 + \Tr(\rho_{\vv{r}}^2) .
+$$
+
+左端各项 $\sum_j p_{l,j}^2$ 是“同一语境独立读两次、两次结果相同”的概率，称为碰撞概率。三个语境的碰撞概率之和被纯度锁死，不可能三个都等于 $1$。所钉仓库的模块 `D5/S3/QuantumBounds/CollisionEntropyUncertainty` 把这条守恒律变成了熵的下界。
+
+::: {.proposition #prop-collision-entropy-uncertainty title="碰撞守恒给出的熵不确定关系" lean="D5/S3/QuantumBounds/CollisionEntropyUncertainty.collision_entropy_uncertainty"}
+设 $d$ 为正整数，$p : \operatorname{Fin}(d+1) \to \operatorname{Fin} d \to \mathbb{R}$ 为 $d + 1$ 个语境、每个语境 $d$ 个结果的数表，$P \in \mathbb{R}$。若
+
+1. 对每个语境 $b$，$p_b$ 是概率分布：对一切 $i$ 有 $0 \le p_{b,i}$，且 $\sum_i p_{b,i} = 1$；
+2. **碰撞守恒**：$\sum_b \sum_i p_{b,i}^2 = 1 + P$；
+
+则
+
+$$
+(d + 1)\,\ln\frac{d + 1}{1 + P} \;\le\; \sum_{b} H(p_b), \qquad H(q) := \sum_i -q_i\ln q_i ,
+$$
+
+其中 $H$ 是以奈特为单位的香农熵（Lean 中的 `shannonEntropy`，按 Mathlib 的 `Real.negMulLog` 约定 $0\ln 0 = 0$）。
+:::
+
+::: proof
+两次詹森不等式。第一次以 $p_b$ 自身为权重：$-\ln$ 是凸函数，故 $H(p_b) = \sum_i p_{b,i}\,(-\ln p_{b,i}) \ge -\ln\bigl(\sum_i p_{b,i}^2\bigr)$，即香农熵不小于碰撞熵。第二次以均匀权重 $\frac{1}{d+1}$ 对 $d + 1$ 个语境取平均：$\frac{1}{d+1}\sum_b -\ln c_b \ge -\ln\bigl(\frac{1}{d+1}\sum_b c_b\bigr)$，其中 $c_b = \sum_i p_{b,i}^2$。代入前提 2 的 $\sum_b c_b = 1 + P$ 即得结论。完整证明由 Lean 内核检查。
+:::
+
+[@prop-collision-entropy-uncertainty] 本身是一条关于数表的不等式；量子力学的内容全在前提 2 里。对单比特的三个泡利语境，前提 2 就是上面由层析表推出的恒等式，$P = \Tr(\rho_{\vv{r}}^2)$。对一般的 $d$，若 $d + 1$ 个语境两两相互无偏，同样有 $\sum_b\sum_i p_{b,i}^2 = 1 + \Tr(\rho^2)$（文献结果，未在本书形式化：I. D. Ivanović, *J. Phys. A* **25**, L363, 1992；这样的 $d + 1$ 个语境已知在 $d$ 为素数幂时存在）。
+
+::: {.example #ex-three-pauli-entropy-sum title="三个泡利语境的熵之和：哪个读数都确定不了三个"}
+对布洛赫向量为 $\vv{r}$ 的单比特态，语境 $b \in \{X, Y, Z\}$ 的两个结果概率是 $\frac{1 \pm r_b}{2}$。由 [@prop-collision-entropy-uncertainty]（$d = 2$，$P = \frac{1 + \norm{\vv{r}}^2}{2}$）：
+
+$$
+H_X + H_Y + H_Z \;\ge\; 3\ln\frac{6}{3 + \norm{\vv{r}}^2} .
+$$
+
+纯态时右端为 $3\ln\frac{3}{2} \approx 1.2164$ 奈特（$1.7549$ 比特）。下表以奈特为单位，四舍五入到所示位数：
+
+| $\vv{r}$ | $H_X$ | $H_Y$ | $H_Z$ | 熵之和 | 下界 $3\ln\frac{6}{3 + \norm{\vv{r}}^2}$ |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| $(0, 0, 1)$ | $0.6931$ | $0.6931$ | $0$ | $1.3863$ | $1.2164$ |
+| $\frac{1}{\sqrt{2}}(1, 1, 0)$ | $0.4165$ | $0.4165$ | $0.6931$ | $1.5261$ | $1.2164$ |
+| $\frac{1}{\sqrt{3}}(1, 1, 1)$ | $0.5157$ | $0.5157$ | $0.5157$ | $1.5471$ | $1.2164$ |
+| $(0, 0, 0.6)$ | $0.6931$ | $0.6931$ | $0.5004$ | $1.8867$ | $1.7395$ |
+| $(0.5, 0.5, 0.5)$ | $0.5623$ | $0.5623$ | $0.5623$ | $1.6870$ | $1.4100$ |
+| $(0, 0, 0)$ | $0.6931$ | $0.6931$ | $0.6931$ | $2.0794$ | $2.0794$ |
+
+**读表。** 第一行：把 $Z$ 的读数完全确定（$H_Z = 0$），$X$ 与 $Y$ 就各自变成一枚公平硬币，各付 $\ln 2$。最后一行是球心，三个语境都是公平硬币，下界取等。
+
+**这条界有多紧。** 在球心它是紧的。在球面上不是：对纯态在球面上以 $0.25^\circ$ 为步长作数值搜索，熵之和的最小值是 $2\ln 2 \approx 1.3863$，在六个坐标轴方向（如第一行）取到，高于 $3\ln\frac{3}{2}$。单比特纯态的紧界 $H_X + H_Y + H_Z \ge 2\ln 2$ 是文献结果，未在本书形式化（J. Sánchez-Ruiz, *Phys. Lett. A* **201**, 125, 1995）。差距出在证明的哪一步？第一步把香农熵换成碰撞熵，对两个结果的分布只有均匀与确定两种情形不丢东西；坐标轴方向的态恰好一个语境确定、两个语境均匀，所以这一步没有损失。损失出在第二步：三个碰撞概率 $1, \frac{1}{2}, \frac{1}{2}$ 并不相等。
+:::
+
+勾股定理管的是平方和，它说三个语境的“确定程度”加起来有上限；熵把同一件事换成了信息的单位：对一个量子比特，三个互补的问题最多只能有一个得到确定的回答。
 
 ## 3.3 经典线性时间的真面目 {#sec-ch03-3}
 
