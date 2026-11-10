@@ -5,6 +5,14 @@
   "commit": "52725b62b659b244d077e29f18a576aa809007b7",
   "pinned_at": "2026-11-10T16:57:05Z",
   "declarations": {
+    "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
+      "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
+      "name": "D5.S0.Automata.BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes",
+      "kind": "theorem",
+      "statement_id": "sha256:87b15f790efca613794d25fe2bc822ee2420eb2ab847760e509a3059c25a8f17",
+      "line": 45,
+      "signature": "theorem base_success_iff_noAdjacentOnes (word : List (Fin 2)) : (∃ state, binaryZeckendorfBase.eval word = some state) ↔ NoAdjacentOnes word"
+    },
     "D5/S0/Carrier/GoldenRatio.golden_ratio_spec": {
       "module": "D5/S0/Carrier/GoldenRatio",
       "name": "D5.S0.Carrier.golden_ratio_spec",
@@ -189,6 +197,94 @@
       "line": 61,
       "signature": "theorem self_application_four_fates (m : BinaryFractionalMap) (hm : Nondegenerate m) : (∃! fate, HasFate m fate) ∧ (HasFate m .live ↔ IsPhiFamily m) ∧ (HasFate m .live → fixedCoefficients m = (1, -1, -1) ∨ fixedCoefficients m = (1, 1, -1)) ∧ (HasFate m .live → discriminant m = 1 ^ 2 + 4)"
     },
+    "D5/S0/Tower/Champions/GoldenPermanentSurvivors.golden_known_closed_preperiodic_carrier_subset": {
+      "module": "D5/S0/Tower/Champions/GoldenPermanentSurvivors",
+      "name": "D5.S0.Tower.Champions.GoldenPermanentSurvivors.golden_known_closed_preperiodic_carrier_subset",
+      "kind": "theorem",
+      "statement_id": "sha256:fb6984d789aa176bb1229a8c745ddfe2af2e57f9b2983163b759a53a3a52e2ea",
+      "line": 116,
+      "signature": "theorem golden_known_closed_preperiodic_carrier_subset : {state | IsGoldenKnownClosedPreperiodicState state} ⊆ goldenClosedPermanentSet"
+    },
+    "D5/S0/Tower/Champions/GoldenPermanentSurvivors.golden_strict_permanent_set_eq_empty": {
+      "module": "D5/S0/Tower/Champions/GoldenPermanentSurvivors",
+      "name": "D5.S0.Tower.Champions.GoldenPermanentSurvivors.golden_strict_permanent_set_eq_empty",
+      "kind": "theorem",
+      "statement_id": "sha256:fb6984d789aa176bb1229a8c745ddfe2af2e57f9b2983163b759a53a3a52e2ea",
+      "line": 47,
+      "signature": "theorem golden_strict_permanent_set_eq_empty : goldenStrictPermanentSet = ∅"
+    },
+    "D5/S0/Tower/ErgodicBridge/Golden.golden_ergodic_bridge": {
+      "module": "D5/S0/Tower/ErgodicBridge/Golden",
+      "name": "D5.S0.Tower.ErgodicBridge.Golden.golden_ergodic_bridge",
+      "kind": "theorem",
+      "statement_id": "sha256:be50156c192f73c7ed3b0f0bae150c33044f51a5ef49931733c1088c8acd6076",
+      "line": 491,
+      "signature": "theorem golden_ergodic_bridge (Q : Nat) (hQ : 2 <= Q) (x : Real) (hx : x ∈ D5.S0.Tower.MetricGeometry.GoldenSurvivor.goldenNameHull Q) : ∃ state : D5.S0.Tower.Champions.GoldenSurvivorTubes.GoldenSurvivorState, GoldenUnitState state /\\ Filter.liminf (fun level => D5.S0.Tower.MetricGeometry.GoldenSurvivor.goldenSurvivor level x) Filter.atTop = goldenOrbitLowerValue state"
+    },
+    "D5/S1/Deficit/Beatty/FiberCapacityPair.golden_dual_fiber_capacity_pair": {
+      "module": "D5/S1/Deficit/Beatty/FiberCapacityPair",
+      "name": "D5.S1.Deficit.Beatty.FiberCapacityPair.golden_dual_fiber_capacity_pair",
+      "kind": "theorem",
+      "statement_id": "sha256:02972131e4af7bacb525694293c1b5cc98a91b857413cdef578a3a2f73e67e53",
+      "line": 389,
+      "signature": "theorem golden_dual_fiber_capacity_pair (b : ℤ) (hb : 0 ≤ b) : (goldenDualFiber b).ncard ∈ ({2, 3} : Set ℕ)"
+    },
+    "D5/S1/Deficit/Beatty/FiberCapacityPair.golden_fiber_capacity_pair": {
+      "module": "D5/S1/Deficit/Beatty/FiberCapacityPair",
+      "name": "D5.S1.Deficit.Beatty.FiberCapacityPair.golden_fiber_capacity_pair",
+      "kind": "theorem",
+      "statement_id": "sha256:02972131e4af7bacb525694293c1b5cc98a91b857413cdef578a3a2f73e67e53",
+      "line": 250,
+      "signature": "theorem golden_fiber_capacity_pair (a : ℤ) (ha : 1 ≤ a) : (goldenFiber a).ncard ∈ ({4, 5} : Set ℕ)"
+    },
+    "D5/S1/Deficit/Beatty/GoldenObserverRoute.golden_observer_route_w_c1": {
+      "module": "D5/S1/Deficit/Beatty/GoldenObserverRoute",
+      "name": "D5.S1.Deficit.Beatty.GoldenObserverRoute.golden_observer_route_w_c1",
+      "kind": "theorem",
+      "statement_id": "sha256:0de2cd1eb622081fba1c27c379a7c82591c68176de09b542723ac0a70fc5b837",
+      "line": 177,
+      "signature": "theorem golden_observer_route_w_c1 : (∀ v : ℕ, beta v = Real.sqrt 5 * (v : ℝ) + remainder v ∧ remainder v = (phi - 1) - Int.fract (((v : ℝ) + 1) * phi) ∧ remainder v ∈ Set.Ioc (phi - 2) (phi - 1) ∧ beta (v + 1) - beta v ∈ ({phi, phi ^ 2} : Set ℝ) ∧ (beta (v + 1) - beta v = phi ↔ beatty (v + 1) - beatty v = 1)) ∧ beta 2 - beta 1 = phi"
+    },
+    "D5/S1/Deficit/Displacement/ZeckendorfNormSign.betaGolden_norm_sign_of_least_zeckendorf_index": {
+      "module": "D5/S1/Deficit/Displacement/ZeckendorfNormSign",
+      "name": "D5.S1.Deficit.Displacement.ZeckendorfNormSign.betaGolden_norm_sign_of_least_zeckendorf_index",
+      "kind": "theorem",
+      "statement_id": "sha256:2aacb9544de445c7a33212f95d8597209daded1af99b7949cda907ca08d06aa8",
+      "line": 338,
+      "signature": "theorem betaGolden_norm_sign_of_least_zeckendorf_index {v k : ℕ} (hv : 0 < v) (hk : k ∈ wdigits v) (hmin : ∀ j ∈ wdigits v, k ≤ j) : (0 < norm (betaGolden v) ↔ Even k) ∧ (norm (betaGolden v) < 0 ↔ Odd k)"
+    },
+    "D5/S1/Deficit/ModelSet/GoldenCutAndProject.golden_model_set_subset_cut_and_project": {
+      "module": "D5/S1/Deficit/ModelSet/GoldenCutAndProject",
+      "name": "D5.S1.Deficit.ModelSet.GoldenCutAndProject.golden_model_set_subset_cut_and_project",
+      "kind": "theorem",
+      "statement_id": "sha256:4e1696e0028d2b851ddd46e2c957791d8377b1aa473bc5bb5c916aeb9b4e7c8c",
+      "line": 54,
+      "signature": "theorem golden_model_set_subset_cut_and_project : embedding '' goldenModelSet ⊆ goldenCutAndProjectSet"
+    },
+    "D5/S1/Deficit/ModelSet/GoldenModelSetDensity.golden_model_set_density": {
+      "module": "D5/S1/Deficit/ModelSet/GoldenModelSetDensity",
+      "name": "D5.S1.Deficit.ModelSet.GoldenModelSetDensity.golden_model_set_density",
+      "kind": "theorem",
+      "statement_id": "sha256:6a9412eb64c14e73704262a4a40485c9122ee275a5476555c09a91cf1c789455",
+      "line": 160,
+      "signature": "theorem golden_model_set_density : (∀ n : Nat, (goldenPrefix n).card = n ∧ ∀ x : GoldenInt, x ∈ goldenPrefix n ↔ x ∈ goldenModelSet ∧ 0 ≤ embedding x ∧ embedding x < betaReal n) ∧ Tendsto (fun n : Nat => ((goldenPrefix n).card : Real) / betaReal n) atTop (nhds (1 / Real.sqrt 5))"
+    },
+    "D5/S1/Deficit/ModelSet/GoldenModelSetSelfSimilar.golden_model_set_self_similar": {
+      "module": "D5/S1/Deficit/ModelSet/GoldenModelSetSelfSimilar",
+      "name": "D5.S1.Deficit.GoldenModelSetSelfSimilar.golden_model_set_self_similar",
+      "kind": "theorem",
+      "statement_id": "sha256:d8572323fb2bb07500f22dc0392d3bd8e43f0a48362aa3a9ea465558678db2e1",
+      "line": 188,
+      "signature": "theorem golden_model_set_self_similar : goldenModelSet = phiBranch ∪ phiSquaredBranch ∧ Disjoint phiBranch phiSquaredBranch"
+    },
+    "D5/S1/Deficit/ModelSet/GoldenModelSetSelfSimilar.golden_window_volume": {
+      "module": "D5/S1/Deficit/ModelSet/GoldenModelSetSelfSimilar",
+      "name": "D5.S1.Deficit.GoldenModelSetSelfSimilar.golden_window_volume",
+      "kind": "theorem",
+      "statement_id": "sha256:d8572323fb2bb07500f22dc0392d3bd8e43f0a48362aa3a9ea465558678db2e1",
+      "line": 182,
+      "signature": "theorem golden_window_volume : volume goldenWindow = 1"
+    },
     "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.goldenReciprocalMap": {
       "module": "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint",
       "name": "D5.S1.FixedPoints.Algebraic.GoldenFixedPoint.goldenReciprocalMap",
@@ -228,6 +324,22 @@
       "statement_id": "sha256:92a7988dadc0a3b8e723075585142821237a04e2b403ae63692e8ee713e845f0",
       "line": 89,
       "signature": "theorem trace_recurrence (a b : R) (hab : a * b = 1) (m : Nat) : a ^ (m + 2) + b ^ (m + 2) = (a + b) * (a ^ (m + 1) + b ^ (m + 1)) - (a ^ m + b ^ m)"
+    },
+    "D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm": {
+      "module": "D5/S1/Scale/Fibonacci",
+      "name": "D5.S1.Scale.fib_cassini_from_golden_norm",
+      "kind": "theorem",
+      "statement_id": "sha256:751177242ed35f6038442f34be0329f08c8b2dc1ddcc1dafc85cddc43dcf9266",
+      "line": 37,
+      "signature": "theorem fib_cassini_from_golden_norm (n : ℕ) : (Nat.fib n : ℤ) * (Nat.fib (n + 2) : ℤ) - (Nat.fib (n + 1) : ℤ) ^ 2 = (-1 : ℤ) ^ (n + 1)"
+    },
+    "D5/S1/Scale/MinkowskiModelSet.minkowski_model_set_spec": {
+      "module": "D5/S1/Scale/MinkowskiModelSet",
+      "name": "D5.S1.Scale.minkowski_model_set_spec",
+      "kind": "theorem",
+      "statement_id": "sha256:072706fdc38d68c71dd04ac461b5f728248c44a55179226a3925e895ae875a22",
+      "line": 39,
+      "signature": "theorem minkowski_model_set_spec (window : Set ℝ) (y : ℝ) (label : JointCoordinates) : Function.Injective minkowskiEmbedding ∧ (goldenLattice : Set (ℝ × ℝ)) = Set.range minkowskiEmbedding ∧ (y ∈ modelSet window ↔ ∃ x : GoldenInt, embedding x = y ∧ embedding (conj x) ∈ window) ∧ ((y, label) ∈ labeledModelSet window ↔ ∃ (x : GoldenInt) (n : ℕ), embedding x = y ∧ embedding (conj x) ∈ window ∧ jointCoordinates x n = label)"
     },
     "D5/S3/Analytic/Characterizations/GoldenInverseBranchFixedPoint.golden_inverse_branch_positive_fixed_point_iff": {
       "module": "D5/S3/Analytic/Characterizations/GoldenInverseBranchFixedPoint",
@@ -533,6 +645,70 @@
       "line": 73,
       "signature": "theorem landauer_strict_iff (beta heat entropyChange mutualInfo divergence : Real) (hbalance : beta * heat = -entropyChange + mutualInfo + divergence) (hmutualInfo : 0 <= mutualInfo) (hdivergence : 0 <= divergence) : -entropyChange < beta * heat ↔ 0 < mutualInfo + divergence"
     },
+    "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.fluid_gap_from_mixed": {
+      "module": "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance",
+      "name": "D5.S3.FluidDynamics.Fourier.AdvectionClosureInstance.fluid_gap_from_mixed",
+      "kind": "theorem",
+      "statement_id": "sha256:b4c8a5f7ba832e91bad5796180bce860436e3f600f5a64d3b274a2fa1dbe294a",
+      "line": 303,
+      "signature": "theorem fluid_gap_from_mixed (nu : ℝ) : acceleration nu 1 1 (0, 1) 0 - acceleration nu 1 0 (0, 1) 0 = -Complex.I / 4"
+    },
+    "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.mixed_condition_fails": {
+      "module": "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance",
+      "name": "D5.S3.FluidDynamics.Fourier.AdvectionClosureInstance.mixed_condition_fails",
+      "kind": "theorem",
+      "statement_id": "sha256:b4c8a5f7ba832e91bad5796180bce860436e3f600f5a64d3b274a2fa1dbe294a",
+      "line": 267,
+      "signature": "theorem mixed_condition_fails : ¬ (∀ a b : State, P a = a → P b = 0 → P (B a b + B b a) = 0)"
+    },
+    "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.mixed_witness": {
+      "module": "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance",
+      "name": "D5.S3.FluidDynamics.Fourier.AdvectionClosureInstance.mixed_witness",
+      "kind": "theorem",
+      "statement_id": "sha256:b4c8a5f7ba832e91bad5796180bce860436e3f600f5a64d3b274a2fa1dbe294a",
+      "line": 234,
+      "signature": "theorem mixed_witness : P (family 1 0) = family 1 0 ∧ P (family 0 1) = 0 ∧ P (B (family 1 0) (family 0 1) + B (family 0 1) (family 1 0)) 0 0 = Complex.I / 4"
+    },
+    "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure": {
+      "module": "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance",
+      "name": "D5.S3.FluidDynamics.Fourier.AdvectionClosureInstance.no_exact_closure",
+      "kind": "theorem",
+      "statement_id": "sha256:b4c8a5f7ba832e91bad5796180bce860436e3f600f5a64d3b274a2fa1dbe294a",
+      "line": 276,
+      "signature": "theorem no_exact_closure (nu : ℝ) : ¬ ∃ f : State → State, ∀ x, P (vectorField (L nu) B x) = f (P x)"
+    },
+    "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_fluid_predictor_from_mixed": {
+      "module": "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance",
+      "name": "D5.S3.FluidDynamics.Fourier.AdvectionClosureInstance.no_fluid_predictor_from_mixed",
+      "kind": "theorem",
+      "statement_id": "sha256:b4c8a5f7ba832e91bad5796180bce860436e3f600f5a64d3b274a2fa1dbe294a",
+      "line": 319,
+      "signature": "theorem no_fluid_predictor_from_mixed (nu : ℝ) : ¬ ∃ predict : (Mode → Amplitude) → ℂ, ∀ alpha beta : ℝ, predict (lowObservation alpha beta) = acceleration nu alpha beta (0, 1) 0"
+    },
+    "D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path": {
+      "module": "D5/S3/FluidDynamics/Fourier/MildPathRegularity",
+      "name": "D5.S3.FluidDynamics.Fourier.MildPathRegularity.all_grade_regularity_of_mild_path",
+      "kind": "theorem",
+      "statement_id": "sha256:be3ee4050a42f97653ece80b4b7dc35917a7fba013f30e298d5314c8652ef867",
+      "line": 28,
+      "signature": "theorem all_grade_regularity_of_mild_path : (∀ (ν τ : ℝ), 0 < ν → 0 < τ → let K"
+    },
+    "D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result": {
+      "module": "D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns",
+      "name": "D5.S3.Fourier.Asymptotics.TorusObservationWindowReturns.result",
+      "kind": "theorem",
+      "statement_id": "sha256:2b292c7cf24d1e5935e5c7c193199cddf13fb0db5e503070c8c0a2e85e358614",
+      "line": 22,
+      "signature": "theorem result {I : Type*} [Fintype I] (g : I → Circle) : let G"
+    },
+    "D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result": {
+      "module": "D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution",
+      "name": "D5.S3.Fourier.Asymptotics.TorusOrbitEquidistribution.result",
+      "kind": "theorem",
+      "statement_id": "sha256:990d12ae0b8105b023c6a83152a2b2959ceb21caf6236c8d7defe7cbdfeba986",
+      "line": 24,
+      "signature": "theorem result {I : Type*} [Fintype I] (g : I → Circle) : let G"
+    },
     "D5/S3/Fourier/FinitePoisson.finite_poisson_summation": {
       "module": "D5/S3/Fourier/FinitePoisson",
       "name": "D5.S3.Fourier.FinitePoisson.finite_poisson_summation",
@@ -548,6 +724,22 @@
       "statement_id": "sha256:bead691cec70f8a3549ce49e2af64afa08ae7a4ce8ddc01eb0fb12fc5b06d35c",
       "line": 110,
       "signature": "theorem sum_annihilator_character (H : AddSubgroup (ZMod m)) (x : ZMod m) : ∑ k : annihilator H, character k.1 x = if x ∈ H then (Fintype.card (annihilator H) : ℂ) else 0"
+    },
+    "D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone": {
+      "module": "D5/S3/Fourier/GoldenModelSetDelone",
+      "name": "D5.S3.Fourier.GoldenModelSetDelone.exists_golden_modelSet_delone",
+      "kind": "theorem",
+      "statement_id": "sha256:8042cf8abe862d6acfbc12d230ebe0b3eb1c6134ad9fe1ed3108c6e5015e6bfa",
+      "line": 138,
+      "signature": "theorem exists_golden_modelSet_delone : ∃ D : Delone.DeloneSet ℝ, D.carrier = modelSet goldenWindow ∧ D.packingRadius = (1 / 2 : ℝ≥0) ∧ D.coveringRadius = (3 : ℝ≥0)"
+    },
+    "D5/S3/Fourier/GoldenModelSetDelone.norm_separation": {
+      "module": "D5/S3/Fourier/GoldenModelSetDelone",
+      "name": "D5.S3.Fourier.GoldenModelSetDelone.norm_separation",
+      "kind": "theorem",
+      "statement_id": "sha256:8042cf8abe862d6acfbc12d230ebe0b3eb1c6134ad9fe1ed3108c6e5015e6bfa",
+      "line": 37,
+      "signature": "theorem norm_separation (u v : GoldenInt) (hne : u ≠ v) (B : ℝ) (hB : |embedding (conj u) - embedding (conj v)| ≤ B) : 1 ≤ |embedding u - embedding v| * B"
     },
     "D5/S3/Geometry/FixedPoint/Brouwer.Brouwer": {
       "module": "D5/S3/Geometry/FixedPoint/Brouwer",
@@ -733,6 +925,14 @@
       "line": 36,
       "signature": "theorem rank_one_born_pairing_weight {n kappa : Type*} [Fintype n] [DecidableEq n] [Fintype kappa] (P : kappa -> Matrix n n ℂ) (rho : Matrix n n ℂ) (k : kappa) (phi psi : n -> ℂ) (hP : IsRecordMeasurement P) (hState : rho.PosSemidef ∧ Matrix.trace rho = 1) (hProjection : P k = Matrix.vecMulVec phi (star phi)) (hPureState : rho = Matrix.vecMulVec psi (star psi)) : recordWeight P rho k = ((‖star phi ⬝ᵥ psi‖ ^ 2 : ℝ) : ℂ) ∧ recordWeight P rho k = Matrix.trace (rho * P k) ∧ unreadState P rho = ∑ j, recordWeight P rho j • conditionalState P rho j"
     },
+    "D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective": {
+      "module": "D5/S3/Observer/GoldenCoding/ZeckendorfRealThread",
+      "name": "D5.S3.Observer.GoldenCoding.ZeckendorfRealThread.zeckendorf_real_thread_injective",
+      "kind": "theorem",
+      "statement_id": "sha256:87b5091d203eefbccc2aa6cb991527f1196fa514d04fe5915e105009a6f7ed85",
+      "line": 42,
+      "signature": "theorem zeckendorf_real_thread_injective : Function.Injective zeckendorfRealThread"
+    },
     "D5/S3/Observer/Linear/ExactTaylorObservationRemainder.exp_tail_le": {
       "module": "D5/S3/Observer/Linear/ExactTaylorObservationRemainder",
       "name": "D5.S3.Observer.Linear.ExactTaylorObservationRemainder.exp_tail_le",
@@ -740,6 +940,22 @@
       "statement_id": "sha256:73b8364fdd91508d12be5d6810c93607d1ed9afc0fd8e9702450ada2fc696e44",
       "line": 25,
       "signature": "theorem exp_tail_le {𝕜 A : Type*} [RCLike 𝕜] [NormedRing A] [NormedAlgebra 𝕜 A] [CompleteSpace A] [NormOneClass A] (z : A) (r : ℝ) (n : ℕ) (hr : 0 ≤ r) (hz : ‖z‖ ≤ r) : ‖NormedSpace.exp z - ∑ k ∈ range n, ((k.factorial : 𝕜)⁻¹) • z ^ k‖ ≤ r ^ n / (n.factorial : ℝ) * Real.exp r"
+    },
+    "D5/S3/Observer/Reversal/QuadraticObservationClosure.observed_increment": {
+      "module": "D5/S3/Observer/Reversal/QuadraticObservationClosure",
+      "name": "D5.S3.Observer.Reversal.QuadraticObservationClosure.observed_increment",
+      "kind": "theorem",
+      "statement_id": "sha256:ac2a549469152986fd28611f54c52d8b72c6c4cdae7c922673fa411a72fb20f9",
+      "line": 45,
+      "signature": "theorem observed_increment (P L : E →ₗ[ℝ] E) (B : E →ₗ[ℝ] E →ₗ[ℝ] E) (a b : E) : P (vectorField L B (a + b)) - P (vectorField L B a) = P (L b) - P (B a b + B b a) - P (B b b)"
+    },
+    "D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff": {
+      "module": "D5/S3/Observer/Reversal/QuadraticObservationClosure",
+      "name": "D5.S3.Observer.Reversal.QuadraticObservationClosure.quadratic_closure_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:ac2a549469152986fd28611f54c52d8b72c6c4cdae7c922673fa411a72fb20f9",
+      "line": 54,
+      "signature": "theorem quadratic_closure_iff (P L : E →ₗ[ℝ] E) (B : E →ₗ[ℝ] E →ₗ[ℝ] E) (hP : ∀ x, P (P x) = P x) : (∃ f : E → E, ∀ x, P (vectorField L B x) = f (P x)) ↔ (∀ b, P b = 0 → P (L b) = 0) ∧ (∀ b, P b = 0 → P (B b b) = 0) ∧ (∀ a b, P a = a → P b = 0 → P (B a b + B b a) = 0)"
     },
     "D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound": {
       "module": "D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound",
