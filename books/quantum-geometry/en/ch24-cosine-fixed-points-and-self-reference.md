@@ -542,11 +542,61 @@ $$
 
 On the unit circle, the point $P = (\cos\theta^*, \sin\theta^*) = (\theta^*, \lambda)$ cuts the quarter arc of the first quadrant into two pieces. The lower piece, from $(1, 0)$ to $P$, has length $\theta^*$, which is exactly the abscissa of $P$; the upper piece, from $P$ to $(0, 1)$, has length $\arcsin\theta^*$. $P$ is the only point of this arc whose arc length equals its own abscissa.
 
-The power series of the arcsine has rational coefficients only and does not contain $\pi$:
+To express this arc as a rational power series, first expand its integral kernel.
+
+::: {.lemma #lem-arcsin-binomial-kernel title="Normalized Central Binomial Coefficients and the Binomial Kernel" lean="D5/S3/Analytic/OriginalHalfBinomialIntegral.b_nonneg D5/S3/Analytic/OriginalHalfBinomialIntegral.b_le_one D5/S3/Analytic/OriginalHalfBinomialIntegral.binomial_hasSum"}
+For every $n \in \mathbb{N}$, let $b_n = \binom{2n}{n}/4^n \in \mathbb{R}$. Then $0 \le b_n \le 1$. For every real $u$ with $0 \le u < 1$,
 
 $$
-\arcsin x \;=\; \sum_{n \ge 0} \frac{\binom{2n}{n}}{4^n\,(2n+1)}\,x^{2n+1} \;=\; x + \frac{x^3}{6} + \frac{3x^5}{40} + \frac{5x^7}{112} + \cdots \qquad (\lvert x\rvert \le 1).
+\operatorname{HasSum}\!\left(n \mapsto b_n u^n,\;\frac{1}{\sqrt{1-u}}\right).
 $$
+
+Here $\operatorname{HasSum}$ specifies both convergence of the series and its sum.
+:::
+
+::: {.remark #rem-arcsin-series-derivation title="Integrating the Binomial Kernel: The Arcsine Series Including Its Endpoints"}
+Set
+
+$$
+c_n = \frac{\binom{2n}{n}}{4^n(2n+1)} \in \mathbb{Q}.
+$$
+
+Below, $c_n$ denotes its image in $\mathbb{R}$. Fix any $y \in [0,1]$, and write
+
+$$
+g(t)=\frac{1}{\sqrt{1-t^2}},\qquad
+F_N(t)=\sum_{n<N}b_n t^{2n}\quad(N\in\mathbb{N}).
+$$
+
+On the open interval $0<t<y$, we have $0\le t^2<1$. Thus [@lem-arcsin-binomial-kernel] gives $F_N(t)\to g(t)$ and $0\le F_N(t)\le g(t)$. When $y=1$, the kernel has a singularity at the right endpoint. The binomial expansion is used only on the open interval; arbitrary finite values may be assigned at the endpoints, since both have Lebesgue measure zero.
+
+Integrability follows from the primitive itself: $\arcsin$ is continuous on $[0,y]$ and has the nonnegative derivative $g(t)$ for $0<t<y$. Automatic integrability of a nonnegative derivative and the fundamental theorem of calculus therefore give[^arcsin-ftc]
+
+$$
+\int_0^y g(t)\,\mathrm{d}t=\arcsin y-\arcsin 0=\arcsin y.
+$$
+
+This includes $y=1$; for $y=0$ the integral is zero. The integrable function $g$ now dominates the nonnegative polynomial partial sums, permitting termwise integration[^arcsin-dct]:
+
+$$
+\int_0^y F_N(t)\,\mathrm{d}t
+=\sum_{n<N}\frac{b_n}{2n+1}\,y^{2n+1}
+=\sum_{n<N}c_n y^{2n+1}
+\;\longrightarrow\;\arcsin y.
+$$
+
+Convergence at $y=1$ thus follows from the integral argument, without assuming a value for the endpoint series. Finally, $\arcsin(-y)=-\arcsin y$ (`Real.arcsin_neg`) and the oddness of every monomial cover all $x\in[-1,1]$, including $x=-1$. The complete expansion is
+
+$$
+\arcsin x \;=\; \sum_{n \ge 0} c_n x^{2n+1}
+\;=\; x + \frac{x^3}{6} + \frac{3x^5}{40} + \frac{5x^7}{112} + \cdots
+\qquad (\lvert x\rvert \le 1).
+$$
+:::
+
+[^arcsin-ftc]: Continuity and differentiation use Mathlib's `Real.continuous_arcsin` and `Real.hasDerivAt_arcsin`. The latter requires $t\ne-1$ and $t\ne1$, which hold for $0<t<y\le1$. Automatic integrability uses `intervalIntegral.intervalIntegrable_deriv_of_nonneg`, and the integral identity uses `intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le`; both use derivatives only on the open interval and continuity on the closed interval.
+
+[^arcsin-dct]: Termwise integration uses Mathlib's `intervalIntegral.hasSum_integral_of_dominated_convergence`: each term is a measurable polynomial, bounded on the open interval by the nonnegative term $b_nt^{2n}$ itself. The sum of these bounds equals the integrable $g(t)$ almost everywhere. Integrating each finite polynomial gives the coefficient $b_n/(2n+1)=c_n$.
 
 Hence $\pi$ is the value at $\theta^*$ of a power series with rational coefficients:
 
@@ -554,7 +604,33 @@ $$
 \pi \;=\; A(\theta^*), \qquad A(x) \;=\; 2x + 2\arcsin x \;=\; 4x + \frac{x^3}{3} + \frac{3x^5}{20} + \frac{5x^7}{56} + \frac{35x^9}{576} + \cdots .
 $$
 
-This is the positive answer to the question, and it is stronger than "projection": knowing $\theta^*$ alone, one computes $\pi$ to any accuracy using nothing but additions and multiplications.
+The fixed-point hypotheses used here are $\theta^*\in[0,1]$ and $\cos\theta^*=\theta^*$. They supply the branch conditions $0\le\theta^*\le\pi$ required by `Real.arccos_cos`. Combining it with `Real.arccos_eq_pi_div_two_sub_arcsin` gives $\theta^*=\pi/2-\arcsin\theta^*$, hence $\pi=A(\theta^*)$.
+
+::: {.remark #rem-arcsin-interior-tail title="Geometric Truncation Bounds on Interior Intervals"}
+For every $N\in\mathbb{N}$, define
+
+$$
+S_N(x)=\sum_{n<N}c_n x^{2n+1},\qquad
+A_N(x)=2x+2S_N(x).
+$$
+
+By [@lem-arcsin-binomial-kernel], $0\le c_n=b_n/(2n+1)\le1$. For any real $q,x$ with $0\le q<1$ and $|x|\le q$,
+
+$$
+\begin{aligned}
+\left|\arcsin x-S_N(x)\right|
+&\le\sum_{n=N}^{\infty}c_n|x|^{2n+1}\\
+&\le\sum_{n=N}^{\infty}q^{2n+1}
+=\frac{q^{2N+1}}{1-q^2},\\
+\left|A(x)-A_N(x)\right|
+&\le\frac{2q^{2N+1}}{1-q^2}.
+\end{aligned}
+$$
+
+These bounds include $N=0$, when the partial sum is empty, and $q=0$, when $x=0$ and both the remainder and the bound are zero. Convergence at $x=\pm1$ comes from the integral argument in [@rem-arcsin-series-derivation]; the geometric bound here applies only to $q<1$.
+:::
+
+This gives “arbitrary precision” a precise truncation meaning. For this chapter's $\theta^*\in(0,1)$, choose $\theta^*\le q<1$. For every tolerance $\varepsilon>0$, some $N$ makes $2q^{2N+1}/(1-q^2)<\varepsilon$, and hence $|\pi-A_N(\theta^*)|<\varepsilon$. The rational polynomial $A_N$ takes finitely many additions and multiplications to evaluate. This controls series truncation for an exact input; an actual computation also needs bounds for the input error in $\theta^*$, rounding, and computational resources.
 
 **The reverse direction: reading $\theta^*$ from $\pi$.** The linear coefficient of $A$ at $0$ is $4 \neq 0$, so $A$ has a formal inverse $B = A^{-1}$, again an odd power series with rational coefficients. Order-by-order reversion gives
 

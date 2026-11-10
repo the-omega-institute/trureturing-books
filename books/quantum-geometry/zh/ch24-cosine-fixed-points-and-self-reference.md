@@ -544,11 +544,61 @@ $$
 
 在单位圆上看：点 $P = (\cos\theta^*, \sin\theta^*) = (\theta^*, \lambda)$ 把第一象限的四分之一圆弧切成两段。下段从 $(1, 0)$ 到 $P$，弧长是 $\theta^*$，恰好等于 $P$ 的横坐标；上段从 $P$ 到 $(0, 1)$，弧长是 $\arcsin\theta^*$。$P$ 是这段圆弧上唯一一个“弧长等于自己横坐标”的点。
 
-反正弦的幂级数只有有理系数，而且不含 $\pi$：
+要把这段圆弧写成有理系数级数，先展开它的积分核。
+
+::: {.lemma #lem-arcsin-binomial-kernel title="归一化中心二项系数与二项核" lean="D5/S3/Analytic/OriginalHalfBinomialIntegral.b_nonneg D5/S3/Analytic/OriginalHalfBinomialIntegral.b_le_one D5/S3/Analytic/OriginalHalfBinomialIntegral.binomial_hasSum"}
+对每个 $n \in \mathbb{N}$，令 $b_n = \binom{2n}{n}/4^n \in \mathbb{R}$，则 $0 \le b_n \le 1$。对每个满足 $0 \le u < 1$ 的实数 $u$，
 
 $$
-\arcsin x \;=\; \sum_{n \ge 0} \frac{\binom{2n}{n}}{4^n\,(2n+1)}\,x^{2n+1} \;=\; x + \frac{x^3}{6} + \frac{3x^5}{40} + \frac{5x^7}{112} + \cdots \qquad (\lvert x\rvert \le 1).
+\operatorname{HasSum}\!\left(n \mapsto b_n u^n,\;\frac{1}{\sqrt{1-u}}\right).
 $$
+
+这里 $\operatorname{HasSum}$ 同时指定级数收敛及其和。
+:::
+
+::: {.remark #rem-arcsin-series-derivation title="从二项核积分到含端点的反正弦级数"}
+令
+
+$$
+c_n = \frac{\binom{2n}{n}}{4^n(2n+1)} \in \mathbb{Q}.
+$$
+
+下文以 $c_n$ 表示它在 $\mathbb{R}$ 中的像。固定任意 $y \in [0,1]$，并记
+
+$$
+g(t)=\frac{1}{\sqrt{1-t^2}},\qquad
+F_N(t)=\sum_{n<N}b_n t^{2n}\quad(N\in\mathbb{N}).
+$$
+
+在开区间 $0<t<y$ 上有 $0\le t^2<1$，所以 [@lem-arcsin-binomial-kernel] 给出 $F_N(t)\to g(t)$，并且 $0\le F_N(t)\le g(t)$。当 $y=1$ 时，核在右端点有奇性；这里只在开区间使用二项展开，端点可以任意补上有限值，因为两个端点的勒贝格测度为零。
+
+可积性也能从原函数本身得到：$\arcsin$ 在 $[0,y]$ 上连续，在 $0<t<y$ 上的导数是非负的 $g(t)$。非负导数的自动可积性与微积分基本定理因此给出[^arcsin-ftc]
+
+$$
+\int_0^y g(t)\,\mathrm{d}t=\arcsin y-\arcsin 0=\arcsin y.
+$$
+
+这包括 $y=1$；$y=0$ 时积分为零。于是可用可积的 $g$ 控制非负多项式部分和，逐项积分[^arcsin-dct]：
+
+$$
+\int_0^y F_N(t)\,\mathrm{d}t
+=\sum_{n<N}\frac{b_n}{2n+1}\,y^{2n+1}
+=\sum_{n<N}c_n y^{2n+1}
+\;\longrightarrow\;\arcsin y.
+$$
+
+因此端点 $y=1$ 的级数收敛由积分论证得到，无需预设端点级数的和。再用 $\arcsin(-y)=-\arcsin y$（`Real.arcsin_neg`）以及每个单项式的奇性，便覆盖所有 $x\in[-1,1]$，包括 $x=-1$。反正弦的完整展开为
+
+$$
+\arcsin x \;=\; \sum_{n \ge 0} c_n x^{2n+1}
+\;=\; x + \frac{x^3}{6} + \frac{3x^5}{40} + \frac{5x^7}{112} + \cdots
+\qquad (\lvert x\rvert \le 1).
+$$
+:::
+
+[^arcsin-ftc]: 连续性与导数使用 Mathlib 的 `Real.continuous_arcsin`、`Real.hasDerivAt_arcsin`；后者要求 $t\ne-1$ 且 $t\ne1$，在 $0<t<y\le1$ 上成立。自动可积性使用 `intervalIntegral.intervalIntegrable_deriv_of_nonneg`，积分恒等式使用 `intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le`；两者只要求开区间上的导数，以及闭区间上的连续性。
+
+[^arcsin-dct]: 逐项积分使用 Mathlib 的 `intervalIntegral.hasSum_integral_of_dominated_convergence`：每项是可测多项式，在开区间上以非负项 $b_nt^{2n}$ 自身作界；这些界的和几乎处处等于可积的 $g(t)$。有限多项式的积分给出系数 $b_n/(2n+1)=c_n$。
 
 于是 $\pi$ 是 $\theta^*$ 的一条有理系数幂级数的值：
 
@@ -556,7 +606,33 @@ $$
 \pi \;=\; A(\theta^*), \qquad A(x) \;=\; 2x + 2\arcsin x \;=\; 4x + \frac{x^3}{3} + \frac{3x^5}{20} + \frac{5x^7}{56} + \frac{35x^9}{576} + \cdots .
 $$
 
-这就是对题记追问的肯定回答，而且比“投影”更强：只要知道 $\theta^*$，就能只用加法和乘法把 $\pi$ 算到任意精度。
+这里使用的不动点条件是 $\theta^*\in[0,1]$ 与 $\cos\theta^*=\theta^*$。`Real.arccos_cos` 要求的 $0\le\theta^*\le\pi$ 由此区间条件保证；结合 `Real.arccos_eq_pi_div_two_sub_arcsin`，得到 $\theta^*=\pi/2-\arcsin\theta^*$，从而 $\pi=A(\theta^*)$。
+
+::: {.remark #rem-arcsin-interior-tail title="内部区间上的几何截断误差"}
+对每个 $N\in\mathbb{N}$，定义
+
+$$
+S_N(x)=\sum_{n<N}c_n x^{2n+1},\qquad
+A_N(x)=2x+2S_N(x).
+$$
+
+由 [@lem-arcsin-binomial-kernel]，$0\le c_n=b_n/(2n+1)\le1$。对任意实数 $q,x$，若 $0\le q<1$ 且 $|x|\le q$，则
+
+$$
+\begin{aligned}
+\left|\arcsin x-S_N(x)\right|
+&\le\sum_{n=N}^{\infty}c_n|x|^{2n+1}\\
+&\le\sum_{n=N}^{\infty}q^{2n+1}
+=\frac{q^{2N+1}}{1-q^2},\\
+\left|A(x)-A_N(x)\right|
+&\le\frac{2q^{2N+1}}{1-q^2}.
+\end{aligned}
+$$
+
+这些界对 $N=0$ 也成立，此时部分和为空；对 $q=0$ 也成立，此时 $x=0$，余项和上界均为零。端点 $x=\pm1$ 的收敛来自 [@rem-arcsin-series-derivation] 的积分论证；此处的几何界只用于 $q<1$。
+:::
+
+这使“任意精度”有了明确的截断含义：对本章的 $\theta^*\in(0,1)$，选取 $\theta^*\le q<1$；给定任意误差容限 $\varepsilon>0$，总能选 $N$ 使 $2q^{2N+1}/(1-q^2)<\varepsilon$，于是 $|\pi-A_N(\theta^*)|<\varepsilon$。$A_N$ 是有理系数多项式，可用有限次加乘求值。这个结论约束的是精确输入下的级数截断误差；实际计算还需另给 $\theta^*$ 的输入误差、舍入控制与计算资源界。
 
 **反方向：从 $\pi$ 读出 $\theta^*$。** $A$ 在 $0$ 处的一阶系数是 $4 \neq 0$，所以它有形式反函数 $B = A^{-1}$，同样是有理系数的奇次幂级数。逐阶反演给出
 
