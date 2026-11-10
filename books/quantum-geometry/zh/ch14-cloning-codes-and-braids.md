@@ -70,6 +70,77 @@ $$
 3. **空间一般性**：定理对任意带 `NormedAddCommGroup` 与 `InnerProductSpace Complex` 的空间 $H$ 成立，无需假定 $H$ 为有限维或完备希尔伯特空间。
 4. **必要条件不等于通用克隆器构造**：$z \in \{0, 1\}$ 是存在满足两条克隆等式的线性等距算子 $U$ 的**必要条件**，不能反过来把该判据曲解为已构造出某种通用克隆装置。
 
+第 4 条边界说，[@thm-no-cloning-overlap] 只是必要条件。那么反过来问：既然精确克隆做不到，近似克隆最好能做到什么程度，代价又落在哪里？这个问题有显式答案。
+
+Bužek 与 Hillery（1996）构造了一台对一切输入一视同仁的 $1 \to 2$ 克隆机。它用三个量子比特：输入、空白副本，以及一个辅助的“机器”比特 $M$。对单位向量 $\psi$，记 $\psi^\perp$ 为与它正交的单位向量；克隆等距把输入送到
+
+$$
+\lvert\psi\rangle \;\longmapsto\; \sqrt{\tfrac{2}{3}}\;\lvert\psi\rangle\lvert\psi\rangle\lvert\psi^\perp\rangle_M \;-\; \sqrt{\tfrac{1}{3}}\;\frac{\lvert\psi\rangle\lvert\psi^\perp\rangle + \lvert\psi^\perp\rangle\lvert\psi\rangle}{\sqrt{2}}\;\lvert\psi\rangle_M ,
+$$
+
+三个因子依次是克隆体一、克隆体二与机器比特。对两个克隆体求偏迹，机器比特落在 $\frac{1}{3}\lvert\psi\rangle\langle\psi\rvert + \frac{2}{3}\lvert\psi^\perp\rangle\langle\psi^\perp\rvert$ 上。Lean 模块 `D5/S3/Quantum/CloningMachine` 直接把这个矩阵定义出来，并证明它的谱与输入无关。
+
+::: {.definition #def-cloning-machine-reduced-state title="正交补比特、克隆机的机器约化态与机器熵" lean="D5/S3/Quantum/CloningMachine.orthogonalQubit D5/S3/Quantum/CloningMachine.machineReducedState D5/S3/Quantum/CloningMachine.binaryEntropyBits D5/S3/Quantum/CloningMachine.machineEntropy"}
+在模块 `CloningMachine` 中（`QubitState` 为 $\operatorname{Fin} 2 \to \mathbb{C}$，`QubitMatrix` 为 $2 \times 2$ 复矩阵）：
+
+1. **正交补比特** [`orthogonalQubit`](lean:D5/S3/Quantum/CloningMachine.orthogonalQubit) $\psi = \bigl(-\overline{\psi_1},\ \overline{\psi_0}\bigr)$；
+2. **机器约化态** [`machineReducedState`](lean:D5/S3/Quantum/CloningMachine.machineReducedState) 定义为
+
+   $$
+   \operatorname{machineReducedState}\ \psi \;=\; \frac{1}{3}\,\psi\,\psi^{*} \;+\; \frac{2}{3}\,\psi^\perp\,(\psi^\perp)^{*}, \qquad \psi^\perp = \operatorname{orthogonalQubit}\ \psi,
+   $$
+
+   其中 $v\,v^{*}$ 表示外积矩阵 `Matrix.vecMulVec v (star v)`；
+3. 以比特为单位的二元熵 [`binaryEntropyBits`](lean:D5/S3/Quantum/CloningMachine.binaryEntropyBits) $p = -p\log_2 p - (1 - p)\log_2(1 - p)$，**机器熵** [`machineEntropy`](lean:D5/S3/Quantum/CloningMachine.machineEntropy) $= \operatorname{binaryEntropyBits}\ \frac{1}{3}$。
+:::
+
+::: {.theorem #thm-cloning-machine-spectrum title="克隆机机器约化态的输入无关谱与机器熵的闭式" lean="D5/S3/Quantum/CloningMachine.orthogonal_qubit_inner D5/S3/Quantum/CloningMachine.machine_reduced_is_density D5/S3/Quantum/CloningMachine.machine_reduced_det D5/S3/Quantum/CloningMachine.machine_reduced_spectrum D5/S3/Quantum/CloningMachine.machine_entropy_closed_form"}
+设 $\psi$ 为 `QubitState`，沿用 [@def-cloning-machine-reduced-state] 的记号。
+
+1. **正交性**（无需归一化）：$\psi^{*} \cdot \operatorname{orthogonalQubit}\ \psi = 0$，即 `star ψ ⬝ᵥ orthogonalQubit ψ = 0`。
+
+若再设 $\psi$ 归一化（`hUnit : star ψ ⬝ᵥ ψ = 1`），则：
+
+2. **是密度矩阵**：$\operatorname{machineReducedState}\ \psi$ 半正定，且迹等于 $1$；
+3. **行列式**：$\det\bigl(\operatorname{machineReducedState}\ \psi\bigr) = \frac{2}{9}$；
+4. **谱**：$\operatorname{machineReducedState}\ \psi$ 在 $\mathbb{C}$ 上的谱恰为 $\bigl\{\frac{1}{3},\ \frac{2}{3}\bigr\}$。
+
+此外，不涉及 $\psi$：
+
+5. **机器熵的闭式**：$\operatorname{machineEntropy} = \log_2 3 - \frac{2}{3}$。
+:::
+
+::: proof
+结论 1 展开点积后由环运算化简。结论 2：两个外积 $\psi\psi^{*}$ 与 $\psi^\perp(\psi^\perp)^{*}$ 各自半正定，非负系数的线性组合仍半正定；取正交补保持范数平方，所以迹等于 $\frac{1}{3} + \frac{2}{3} = 1$。结论 3：把 $\psi^\perp(\psi^\perp)^{*}$ 写成显式的 $2 \times 2$ 矩阵，展开行列式，再用归一化条件化简得 $\frac{2}{9}$。结论 4：$2 \times 2$ 矩阵的特征多项式由迹与行列式决定，这里是 $X^2 - X + \frac{2}{9} = \bigl(X - \frac{1}{3}\bigr)\bigl(X - \frac{2}{3}\bigr)$（`machine_reduced_charpoly`），谱就是它的根集。结论 5：把 $\log_2\frac{1}{3} = -\log_2 3$ 与 $\log_2\frac{2}{3} = 1 - \log_2 3$ 代入 $\operatorname{binaryEntropyBits}\ \frac{1}{3}$ 并化简。完整证明由 Lean 内核检查。
+:::
+
+[@thm-cloning-machine-spectrum] 证明的是 [@def-cloning-machine-reduced-state] 中那个矩阵的性质；“这个矩阵就是 Bužek–Hillery 等距的机器边缘态”这一点由下面的例子用手算给出，属于文献结果。
+
+::: {.example #ex-buzek-hillery-three-marginals title="Bužek–Hillery 克隆机的三个边缘态：克隆体保真度 5/6，机器比特反向收缩到 1/3"}
+克隆等距及其最优性是文献结果（V. Bužek 与 M. Hillery，Phys. Rev. A **54**, 1844, 1996；最优性见 N. Gisin 与 S. Massar，Phys. Rev. Lett. **79**, 2153, 1997），未在本书形式化。下面的边缘态由该等距直接求偏迹得到，并已对随机输入态作数值核对。
+
+记输出态为 $\lvert\Omega\rangle = \sqrt{\frac{2}{3}}\,\lvert\psi\psi\rangle\lvert\psi^\perp\rangle_M - \sqrt{\frac{1}{3}}\,\lvert S\rangle\lvert\psi\rangle_M$，其中 $\lvert S\rangle = \frac{1}{\sqrt{2}}\bigl(\lvert\psi\psi^\perp\rangle + \lvert\psi^\perp\psi\rangle\bigr)$。
+
+- **机器比特。** $\lvert\psi\psi\rangle$ 与 $\lvert S\rangle$ 正交，对两个克隆体求偏迹时交叉项消失，剩下 $\rho_M = \frac{2}{3}\lvert\psi^\perp\rangle\langle\psi^\perp\rvert + \frac{1}{3}\lvert\psi\rangle\langle\psi\rvert$，正是 [@def-cloning-machine-reduced-state] 中的 $\operatorname{machineReducedState}\ \psi$。
+- **单个克隆体。** 两项的机器因子 $\lvert\psi^\perp\rangle$ 与 $\lvert\psi\rangle$ 正交，对机器求偏迹后克隆对处于混合态 $\frac{2}{3}\lvert\psi\psi\rangle\langle\psi\psi\rvert + \frac{1}{3}\lvert S\rangle\langle S\rvert$。再对另一个克隆体求偏迹：$\lvert\psi\psi\rangle$ 贡献 $\lvert\psi\rangle\langle\psi\rvert$，$\lvert S\rangle$ 贡献 $\frac{1}{2}\bigl(\lvert\psi\rangle\langle\psi\rvert + \lvert\psi^\perp\rangle\langle\psi^\perp\rvert\bigr)$，合计
+
+  $$
+  \rho_{\mathrm{clone}} \;=\; \Bigl(\frac{2}{3} + \frac{1}{6}\Bigr)\lvert\psi\rangle\langle\psi\rvert + \frac{1}{6}\,\lvert\psi^\perp\rangle\langle\psi^\perp\rvert \;=\; \frac{5}{6}\,\lvert\psi\rangle\langle\psi\rvert + \frac{1}{6}\,\lvert\psi^\perp\rangle\langle\psi^\perp\rvert .
+  $$
+
+设输入的布洛赫矢量为单位向量 $\vv{r}$（于是 $\lvert\psi^\perp\rangle$ 对应 $-\vv{r}$）：
+
+| 子系统 | 约化态的本征值 | 布洛赫矢量 | 与输入的保真度 $\langle\psi\rvert\rho\lvert\psi\rangle$ | 熵（比特） |
+| :---: | :---: | :---: | :---: | :---: |
+| 输入 | $1,\ 0$ | $\vv{r}$ | $1$ | $0$ |
+| 克隆体一、克隆体二 | $\frac{5}{6},\ \frac{1}{6}$ | $\frac{2}{3}\,\vv{r}$ | $\frac{5}{6} \approx 0.8333$ | $0.6500$ |
+| 机器比特 | $\frac{2}{3},\ \frac{1}{3}$ | $-\frac{1}{3}\,\vv{r}$ | $\frac{1}{3}$ | $\log_2 3 - \frac{2}{3} \approx 0.9183$ |
+
+机器一行的本征值与熵即 [@thm-cloning-machine-spectrum] 的结论 4 与 5。数值核对（三个随机输入态）：克隆体保真度 $0.833333$，克隆体与机器的布洛赫收缩因子 $0.666667$ 与 $-0.333333$，机器谱 $\{0.333333,\ 0.666667\}$，行列式 $0.222222$；上式在计算基上的线性延拓与对一般 $\psi$ 的表达式只差整体相位，并保持内积。
+:::
+
+所以不可克隆并不是“什么都拷不了”。精确克隆要求重叠满足 $z = z^2$；通用克隆机放弃精确，把每个克隆体的布洛赫矢量均匀地缩到 $\frac{2}{3}$。缩掉的那部分没有消失：机器比特带着一根反向的、长度为 $\frac{1}{3}$ 的布洛赫矢量，以及一份与输入方向无关的熵，约 $0.918$ 比特。全局态仍是纯态，三个边缘态的混合度都来自它们之间的纠缠。
+
 ## Pauli 字与稳定子综合征 {#sec-pauli-syndrome-parity}
 
 既然 [@thm-no-cloning-overlap] 禁止我们把任意未知叠加态 $\alpha\lvert 0\rangle + \beta\lvert 1\rangle$ 复制成 $(\alpha\lvert 0\rangle + \beta\lvert 1\rangle)^{\otimes 3}$，量子纠错码究竟靠什么施展魔法？
