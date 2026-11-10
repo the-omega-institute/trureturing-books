@@ -136,6 +136,71 @@ $$
 
 [@thm-fubini-study-record-time] 把“经典时间”与“量子时间”的转换关系刻画得力透纸背：二维量子面积以 $\mathrm{energy}/\hbar$ 的角速度在球面上旋转，而一维经典时间刻度 $N$ 不过是这片总扫掠角面积按每 $\frac{\pi}{4}$（或单向直达 $\frac{\pi}{2}$）切下的一枚枚正交筹码！如果系统没有能量（$\mathrm{energy} \to 0$），扫过正交墙所需的时间 $\tau \to \infty$，经典时钟就会彻底停摆。
 
+定理里的 $\mathrm{energy}$ 是一个抽象的速度参数。把它换成具体哈密顿量的能量涨落，就可以看到这条界什么时候取等、什么时候不取等，以及一个真实的量子比特翻一次墙要多久。
+
+::: {.example #ex-orthogonalization-times title="把速度极限算到底：二能级取等，三能级不取等，不等权叠加永远到不了墙"}
+本例对具体哈密顿量直接计算。用到的两条一般界——Mandelstam–Tamm 界 $\tau_\perp \ge \frac{\pi\hbar}{2\,\Delta H}$ 与 Margolus–Levitin 界 $\tau_\perp \ge \frac{\pi\hbar}{2\langle H\rangle}$——是文献结果，未在本书形式化（见 [@rem-qsl-zeno-literature]）；其中 $\Delta H$ 是能量标准差，$\langle H\rangle$ 是从基态能量算起的平均能量。
+
+**一、二能级等权叠加：取等。** 取能级 $0$ 与 $E$，初态 $\psi(0) = \frac{1}{\sqrt{2}}\bigl(\lvert 0\rangle + \lvert 1\rangle\bigr)$，则 $\psi(t) = \frac{1}{\sqrt{2}}\bigl(\lvert 0\rangle + e^{-iEt/\hbar}\lvert 1\rangle\bigr)$，
+
+$$
+\begin{aligned}
+\bigl\lvert\langle\psi(0), \psi(t)\rangle\bigr\rvert &= \Bigl\lvert\frac{1 + e^{-iEt/\hbar}}{2}\Bigr\rvert = \Bigl\lvert\cos\frac{Et}{2\hbar}\Bigr\rvert, \\
+\theta_{\mathrm{FS}}\bigl(\psi(0), \psi(t)\bigr) &= \frac{Et}{2\hbar} \qquad \Bigl(0 \le t \le \frac{\pi\hbar}{E}\Bigr).
+\end{aligned}
+$$
+
+首次正交发生在 $\tau_\perp = \frac{\pi\hbar}{E}$。这个态的 $\langle H\rangle = \frac{E}{2}$、$\Delta H = \frac{E}{2}$，所以夹角恰好以速度 $\Delta H/\hbar$ 匀速增长，两条界都等于 $\frac{\pi\hbar}{E}$，同时取等。对照 [@thm-fubini-study-record-time]：取 $m_0 = \psi(0)$、$m_1 = \psi(\tau_\perp)$，锚点 $a = \psi(\tau_\perp/2)$，$\mathrm{energy} = \Delta H = \frac{E}{2}$，$\tau = \frac{\tau_\perp}{2}$。两段夹角都是 $\frac{\pi}{4} = \frac{\mathrm{energy}\cdot\tau}{\hbar}$，前提以等号成立，结论 $\tau \ge \frac{\pi\hbar}{4\cdot\mathrm{energy}} = \frac{\pi\hbar}{2E}$ 也以等号成立。
+
+**二、三能级等权叠加：不取等。** 取能级 $0, E, 2E$，初态 $\psi(0) = \frac{1}{\sqrt{3}}\bigl(\lvert 0\rangle + \lvert 1\rangle + \lvert 2\rangle\bigr)$。记 $z = e^{-iEt/\hbar}$，重叠为 $\frac{1}{3}(1 + z + z^2)$，它首次为零是在 $z$ 成为三次本原单位根时：
+
+$$
+\tau_\perp = \frac{2\pi\hbar}{3E} \approx 2.0944\,\frac{\hbar}{E} .
+$$
+
+能量统计为 $\langle H\rangle = E$、$\langle H^2\rangle = \frac{5}{3}E^2$、$\Delta H = \sqrt{\tfrac{2}{3}}\,E \approx 0.8165\,E$。
+
+| 量 | 数值（单位 $\hbar/E$） |
+| :--- | :---: |
+| 实际正交时间 $\tau_\perp$ | $2.0944$ |
+| Mandelstam–Tamm 界 $\frac{\pi\hbar}{2\,\Delta H}$ | $1.9238$ |
+| Margolus–Levitin 界 $\frac{\pi\hbar}{2\langle H\rangle}$ | $1.5708$ |
+
+两条界都成立，都不取等。原因可以算出来：态在射影空间里仍以速度 $\Delta H/\hbar$ 运动，到 $\tau_\perp$ 时走过的弧长是 $\Delta H\,\tau_\perp/\hbar \approx 1.7101$ 弧度，而起点与终点之间的测地线只有 $\frac{\pi}{2} \approx 1.5708$ 弧度。轨道是弯的，多走了约 $8.9\%$。沿途的夹角与弧长（$t$ 以 $\hbar/E$ 为单位，四舍五入到所示位数）：
+
+| $t$ | 重叠 $\lvert\langle\psi(0), \psi(t)\rangle\rvert$ | 夹角 $\theta_{\mathrm{FS}}$（弧度） | 弧长 $\Delta H\,t/\hbar$（弧度） |
+| :---: | :---: | :---: | :---: |
+| $0.5$ | $0.9184$ | $0.4068$ | $0.4082$ |
+| $1.0$ | $0.6935$ | $0.8044$ | $0.8165$ |
+| $1.5$ | $0.3805$ | $1.1805$ | $1.2247$ |
+| $2.0944$ | $0$ | $1.5708$ | $1.7101$ |
+
+**三、不等权叠加：到不了墙。** 取 $\psi(0) = \cos\alpha\,\lvert 0\rangle + \sin\alpha\,\lvert 1\rangle$（能级仍为 $0, E$，$0 < \alpha \le 45^\circ$）。则
+
+$$
+\bigl\lvert\langle\psi(0), \psi(t)\rangle\bigr\rvert^2 = \cos^4\alpha + \sin^4\alpha + 2\cos^2\alpha\,\sin^2\alpha\,\cos\frac{Et}{\hbar} \;\ge\; \cos^2 2\alpha ,
+$$
+
+最小重叠是 $\lvert\cos 2\alpha\rvert$，最大夹角是 $2\alpha$。$\alpha = 30^\circ$ 时最多转到 $60^\circ$，$\alpha = 40^\circ$ 时最多转到 $80^\circ$；只有 $\alpha = 45^\circ$ 的等权叠加恰好够到 $90^\circ$。不是每个态都能敲出一声“滴答”：初态在两个能级上的权重不相等，它就永远与自己的过去保留着一份重叠。
+
+**四、为什么只有二能级等权叠加取等。** Margolus–Levitin 界的证明用到不等式 $\cos x \ge 1 - \frac{2}{\pi}(x + \sin x)$（$x \ge 0$）：
+
+| $x$ | $0$ | $\frac{\pi}{2}$ | $\pi$ | $\frac{3\pi}{2}$ | $2\pi$ |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| $\cos x$ | $1$ | $0$ | $-1$ | $0$ | $1$ |
+| $1 - \frac{2}{\pi}(x + \sin x)$ | $1$ | $-0.6366$ | $-1$ | $-1.3634$ | $-3$ |
+
+等号只在 $x = 0$ 与 $x = \pi$ 处出现。取等要求每个能量分量在 $\tau_\perp$ 时刻的相位 $E_n\tau_\perp/\hbar$ 都落在这两点上，这正是第一种情形（相位 $0$ 与 $\pi$）；第二种情形的三个相位是 $0, \frac{2\pi}{3}, \frac{4\pi}{3}$，所以严格不取等。
+
+**五、数量级。** 能级差 $E = hf$、$f = 5\,\mathrm{GHz}$ 的量子比特（$E \approx 20.7\,\mu\mathrm{eV}$）自由进动时，等权叠加态的正交时间是
+
+$$
+\tau_\perp = \frac{\pi\hbar}{E} = \frac{1}{2f} = 100\,\mathrm{ps} .
+$$
+
+按 [@thm-fubini-study-record-time] 的计数上界，取 $\mathrm{energy} = \Delta H = \frac{hf}{2}$，在 $T = 25\,\mathrm{ns}$ 内 $N \le \frac{4\cdot\mathrm{energy}\cdot T}{\pi\hbar} = 4fT = 500$。受驱时情形不同：[第十一章](ch11-pulses-and-virtual-z.md) [@ex-five-ghz-pi-over-two] 在旋转参考系里消去了载频，有效哈密顿量的能量尺度是拉比频率 $\Omega = 2\pi \times 10\,\mathrm{MHz}$，对初态 $\lvert 0\rangle$ 有 $\Delta H = \frac{\hbar\Omega}{2}$，正交时间 $\tau_\perp = \frac{\pi}{\Omega} = 50\,\mathrm{ns}$，正好是那里 $25\,\mathrm{ns}$ 四分之一转的两倍。同一个量子比特，换一个参考系，时钟的快慢差了五百倍：决定“滴答”间隔的是所选参考系里的能量涨落，而不是能级差本身。
+:::
+
 ## 7.3 量子芝诺效应：被高频“内积丈量”强行冻结的“外积面积演化” {#sec-quantum-zeno-effect}
 
 反过来问：如果量子态正准备沿着二维平面扫出外积面积 $\vv{A}\wedge\vv{B} = \sin(\omega t/2)\,\vv{I}$，但观察者却像一个焦躁不安的监工，还没等它转满 $90^\circ$ 正交角，就每隔极短的时间 $\delta t = T / N$ 频频掏出初始基准轴 $\vv{A}$ 的幂等投影尺 $P_{\vv{A}}^2 = P_{\vv{A}}$ 对它做一次“内积丈量”，会发生什么？

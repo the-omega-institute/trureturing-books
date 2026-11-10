@@ -493,6 +493,22 @@
       "line": 37,
       "signature": "theorem target_recovery_criterion {X ProcessState Target : Type*} [Nonempty X] (process : Concept X ProcessState) (target : Concept X Target) : ((∃ recover : ProcessState → Target, target = recover ∘ process) ↔ ∀ ⦃x y : X⦄, process x = process y → target x = target y) ∧ ((∀ ⦃x y : X⦄, process x = process y → target x = target y) ↔ defectRelation process target = ∅) ∧ (defectRelation process target = ∅ ↔ ∃ recover : ProcessState → Target, target = recover ∘ process) ∧ ((¬∃ recover : ProcessState → Target, target = recover ∘ process) ↔ (defectRelation process target).Nonempty)"
     },
+    "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift": {
+      "module": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift",
+      "name": "D5.S3.ConceptDynamics.Topology.CircleDoubleCoverHistoryLift.circle_double_cover_history_lift",
+      "kind": "theorem",
+      "statement_id": "sha256:ccc9572bd218e8cdd478ed57c079d4c8012e632e59a0aa2a7ac7533e4f9bf20b",
+      "line": 36,
+      "signature": "theorem circle_double_cover_history_lift : let square : Circle → Circle"
+    },
+    "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section": {
+      "module": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection",
+      "name": "D5.S3.ConceptDynamics.Topology.CircleDoubleCoverNoSection.no_continuous_global_section",
+      "kind": "theorem",
+      "statement_id": "sha256:f5e0857a6af4673b8e6b849c8e3f46c5021a9c9fa548482a34028639cba1d5e0",
+      "line": 28,
+      "signature": "theorem no_continuous_global_section : ¬ ∃ s : Circle → Circle, Continuous s ∧ ∀ z : Circle, s z ^ 2 = z"
+    },
     "D5/S3/Constants/PentagonCosines.pentagon_golden_cosines": {
       "module": "D5/S3/Constants/PentagonCosines",
       "name": "D5.S3.Constants.PentagonCosines.pentagon_golden_cosines",
@@ -749,6 +765,30 @@
       "line": 26,
       "signature": "theorem finite_rank_concentration_mode_bound (concentrationEigenvalue : ℕ → ℝ) (intervalRadius frequencyMeasure threshold : ℝ) (hNonneg : ∀ j, 0 ≤ concentrationEigenvalue j) (hSummable : Summable concentrationEigenvalue) (hTrace : ∑' j, concentrationEigenvalue j = intervalRadius * frequencyMeasure / Real.pi) (hThreshold : 0 < threshold) : Set.Finite {j | threshold ≤ concentrationEigenvalue j} ∧ (({j | threshold ≤ concentrationEigenvalue j} : Set ℕ).ncard : ℝ) ≤ intervalRadius * frequencyMeasure / (Real.pi * threshold)"
     },
+    "D5/S3/Observer/WindowRegister.clockMatrix": {
+      "module": "D5/S3/Observer/WindowRegister",
+      "name": "D5.S3.Observer.WindowRegister.clockMatrix",
+      "kind": "def",
+      "statement_id": "sha256:1f03573f26ffc97bee9217cd4164f7e0941cb73ba680130d6cfd2e970fc3554a",
+      "line": 31,
+      "signature": "noncomputable def clockMatrix (M : ℕ) : Matrix (ZMod M) (ZMod M) ℂ"
+    },
+    "D5/S3/Observer/WindowRegister.shiftMatrix": {
+      "module": "D5/S3/Observer/WindowRegister",
+      "name": "D5.S3.Observer.WindowRegister.shiftMatrix",
+      "kind": "def",
+      "statement_id": "sha256:1f03573f26ffc97bee9217cd4164f7e0941cb73ba680130d6cfd2e970fc3554a",
+      "line": 35,
+      "signature": "def shiftMatrix (M : ℕ) [NeZero M] : Matrix (ZMod M) (ZMod M) ℂ"
+    },
+    "D5/S3/Observer/WindowRegister.windowRoot": {
+      "module": "D5/S3/Observer/WindowRegister",
+      "name": "D5.S3.Observer.WindowRegister.windowRoot",
+      "kind": "def",
+      "statement_id": "sha256:1f03573f26ffc97bee9217cd4164f7e0941cb73ba680130d6cfd2e970fc3554a",
+      "line": 22,
+      "signature": "noncomputable def windowRoot (M : ℕ) : ℂ"
+    },
     "D5/S3/ObserverMemory/JointCoherentReversal.joint_coherent_reversal": {
       "module": "D5/S3/ObserverMemory/JointCoherentReversal",
       "name": "D5.S3.ObserverMemory.JointCoherentReversal.joint_coherent_reversal",
@@ -980,6 +1020,46 @@
       "statement_id": "sha256:dc4fb8763a0fb2fbd35914366c6bad0597bfb4799e97ced50ba6e2af629b07ef",
       "line": 55,
       "signature": "theorem secondCross_eq_neg_first {n : Type*} [Fintype n] [DecidableEq n] (A B : Matrix n n ℂ) (hCross : A * Bᴴ + B * Aᴴ = 0) : B * Aᴴ = -(A * Bᴴ)"
+    },
+    "D5/S3/Quantum/Algebra/WeylDisplacement.displacement": {
+      "module": "D5/S3/Quantum/Algebra/WeylDisplacement",
+      "name": "D5.S3.Quantum.Algebra.WeylDisplacement.displacement",
+      "kind": "def",
+      "statement_id": "sha256:11f68b7187757bbf99cfa9c84d84bb1a317de4c6e1b89738f8c5fd66d82e7e8f",
+      "line": 130,
+      "signature": "noncomputable def displacement (M : ℕ) [NeZero M] (a b : ZMod M) : Matrix (ZMod M) (ZMod M) ℂ"
+    },
+    "D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm": {
+      "module": "D5/S3/Quantum/Algebra/WeylDisplacement",
+      "name": "D5.S3.Quantum.Algebra.WeylDisplacement.displacement_comm",
+      "kind": "theorem",
+      "statement_id": "sha256:11f68b7187757bbf99cfa9c84d84bb1a317de4c6e1b89738f8c5fd66d82e7e8f",
+      "line": 174,
+      "signature": "theorem displacement_comm (a b c d : ZMod M) : windowRoot M ^ (d * a).val • (displacement M a b * displacement M c d) = windowRoot M ^ (b * c).val • (displacement M c d * displacement M a b)"
+    },
+    "D5/S3/Quantum/Algebra/WeylDisplacement.displacement_mul": {
+      "module": "D5/S3/Quantum/Algebra/WeylDisplacement",
+      "name": "D5.S3.Quantum.Algebra.WeylDisplacement.displacement_mul",
+      "kind": "theorem",
+      "statement_id": "sha256:11f68b7187757bbf99cfa9c84d84bb1a317de4c6e1b89738f8c5fd66d82e7e8f",
+      "line": 140,
+      "signature": "theorem displacement_mul (a b c d : ZMod M) : displacement M a b * displacement M c d = windowRoot M ^ (b * c).val • displacement M (a + c) (b + d)"
+    },
+    "D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute": {
+      "module": "D5/S3/Quantum/Algebra/WeylDisplacement",
+      "name": "D5.S3.Quantum.Algebra.WeylDisplacement.displacement_two_anticommute",
+      "kind": "theorem",
+      "statement_id": "sha256:11f68b7187757bbf99cfa9c84d84bb1a317de4c6e1b89738f8c5fd66d82e7e8f",
+      "line": 182,
+      "signature": "theorem displacement_two_anticommute : displacement 2 (0 : ZMod 2) (1 : ZMod 2) * displacement 2 (1 : ZMod 2) (0 : ZMod 2) = -(displacement 2 (1 : ZMod 2) (0 : ZMod 2) * displacement 2 (0 : ZMod 2) (1 : ZMod 2))"
+    },
+    "D5/S3/Quantum/Algebra/WeylDisplacementAdjoint.displacement_adjoint": {
+      "module": "D5/S3/Quantum/Algebra/WeylDisplacementAdjoint",
+      "name": "D5.S3.Quantum.Algebra.WeylDisplacementAdjoint.displacement_adjoint",
+      "kind": "theorem",
+      "statement_id": "sha256:8aae4e564b5324721006f2820a517ebfe2132d726deb1f4861e2df87f09df85e",
+      "line": 154,
+      "signature": "theorem displacement_adjoint (a b : ZMod M) : star (displacement M a b) = windowRoot M ^ (a * b).val • displacement M (-a) (-b)"
     },
     "D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation": {
       "module": "D5/S3/Quantum/Algebra/WeylDisplacementConjugation",

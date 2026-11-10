@@ -201,6 +201,11 @@ $$
 | Ch 24 | [`D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package`](lean:D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package) | `D5/S0/Diagonal/Lawvere/QualitativeEscape.lean:48` | `sha256:f4f9c8f7` | 无不动点扭转使一切列表逃逸（无有限性假设），且该前提不可去除 |
 | Ch 24 | [`D5/S3/Geometry/FixedPoint/Brouwer.Brouwer`](lean:D5/S3/Geometry/FixedPoint/Brouwer.Brouwer) | `D5/S3/Geometry/FixedPoint/Brouwer.lean:43` | `sha256:5551c05c` | 标准单纯形 $\operatorname{stdSimplex}\ \mathbb{R}\ (\operatorname{Fin} n)$ 的连续自映射必有不动点 |
 | Ch 24 | [`D5/S1/Phase/ContinuousAverage.continuous_average_tendsto_haar`](lean:D5/S1/Phase/ContinuousAverage.continuous_average_tendsto_haar) | `D5/S1/Phase/ContinuousAverage.lean:94` | `sha256:f1e543c6` | 无理旋转下连续函数的轨道平均趋于 Haar 积分（任意初相） |
+| Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacement.displacement_mul`](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_mul) | `D5/S3/Quantum/Algebra/WeylDisplacement.lean:140` | `sha256:11f68b71` | $D(a,b)\,D(c,d) = \omega^{bc}\,D(a+c,\ b+d)$（一切 $a,b,c,d \in \mathbb{Z}_M$） |
+| Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacementAdjoint.displacement_adjoint`](lean:D5/S3/Quantum/Algebra/WeylDisplacementAdjoint.displacement_adjoint) | `D5/S3/Quantum/Algebra/WeylDisplacementAdjoint.lean:154` | `sha256:8aae4e56` | $D(a,b)^{\dagger} = \omega^{ab}\,D(-a,-b)$ |
+| Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm`](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm) | `D5/S3/Quantum/Algebra/WeylDisplacement.lean:174` | `sha256:11f68b71` | $\omega^{da}\,D(a,b)D(c,d) = \omega^{bc}\,D(c,d)D(a,b)$ |
+| Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation`](lean:D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation) | `D5/S3/Quantum/Algebra/WeylDisplacementConjugation.lean:94` | `sha256:075eec65` | $D(a,b)\,D(c,d)\,D(a,b)^{\dagger} = \omega^{bc-ad}\,D(c,d)$ |
+| Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute`](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute) | `D5/S3/Quantum/Algebra/WeylDisplacement.lean:182` | `sha256:11f68b71` | $M = 2$：$D(0,1)D(1,0) = -D(1,0)D(0,1)$ |
 
 让我们通过一个具体数值算例，把本章的四条审计定理串联在同一个单量子比特态上。
 
