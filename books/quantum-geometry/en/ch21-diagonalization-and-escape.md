@@ -210,7 +210,7 @@ The values below were computed at 40 digits and rounded to the digits shown.
 | $24$ | $3.1326286133$ | $8.96\times10^{-3}$ | $0.9914448614$ | $8.56\times10^{-3}$ |
 | $48$ | $3.1393502030$ | $2.24\times10^{-3}$ | $0.9978589232$ | $2.14\times10^{-3}$ |
 | $96$ | $3.1410319509$ | $5.61\times10^{-4}$ | $0.9994645875$ | $5.35\times10^{-4}$ |
-| $192$ | $3.1414524723$ | $1.4\times10^{-4}$ | $0.9998661379$ | $1.34\times10^{-4}$ |
+| $192$ | $3.1414524723$ | $1.40\times10^{-4}$ | $0.9998661379$ | $1.34\times10^{-4}$ |
 | $3072$ | $3.1415921060$ | $5.48\times10^{-7}$ | $0.9999994771$ | $5.23\times10^{-7}$ |
 
 Each doubling of the number of sides shrinks both residuals to about one quarter, in agreement with the asymptotics $\pi - n\sin\frac{\pi}{n} \approx \frac{\pi^3}{6n^2}$ and $1 - \cos\frac{\pi}{n} \approx \frac{\pi^2}{2n^2}$; yet for every finite $n$ both are strictly positive. (The half-perimeter of the regular $n$-gon equals the area of the regular $2n$-gon. Liu Hui cut the circle by areas, and the area of his $192$-gon corresponds to the row $n = 96$.)
