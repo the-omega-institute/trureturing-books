@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//ESCAPE · Polyhedral Approximation, Hairy Ball Defect, and Cosine Fixed Points">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//ESCAPE 多面体割圆、毛球角亏与余弦不动点</title>
+<meta name="description" content="多面体割圆、毛球角亏与余弦不动点：调节测地多面体顶点数 V（V = 12, 42, 60, 162, 642）、泰勒截断项数 N、开口螺旋螺距、余弦迭代初值 θ₀ 与步数，观测欧拉示性数 V − E + F = 2、分片欧氏等边组合模型下 12 个五度顶点的 12 × 60° = 720°（4π）角亏与实际径向投影内接多面体网格上分摊于五度及六度顶点但总和仍严格等于 4π = 720° 的度量角亏、截断余项 R₂N(θ)、螺旋的圆形影子、Dottie 余弦蛛网、黄金倒数迭代与有限收缩集合的稳定化。Polyhedral approximation, hairy ball defect, and cosine fixed points: adjust the geodesic vertex count V (V = 12, 42, 60, 162, 642), Taylor terms N, helix pitch, cosine seed θ₀ and step count to inspect Euler's V − E + F = 2, the 12 × 60° = 720° (4π) curvature defect carried by the 12 degree-5 vertices in the piecewise-Euclidean equilateral combinatorial model versus the actual radially projected inscribed polyhedral meshes where the total metric angular defect remains strictly 4π = 720° by Gauss–Bonnet while being distributed across both the 12 degree-5 and the degree-6 vertices, the remainder R₂N(θ), the circular shadow of an open helix, the Dottie cobweb, the golden reciprocal iteration and finite contracting set updates.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+</head>
+<body data-viz-id="sphere-escape">
+<div class="app" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//ESCAPE">ORTHO<b>//</b>ESCAPE</h1>
+      <div class="tagline">
+        <span class="zh">多面体割圆、毛球角亏与余弦不动点 · <em>有限的球皮必有 720° 接缝，有限的读数必留非零残差</em></span>
+        <span class="en">Polyhedral approximation, hairy ball defect &amp; cosine fixed points · <em>a finite sphere carries a 720° seam; a finite reading keeps a nonzero residual</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillChi">V − E + F <strong>—</strong></span>
+      <span class="pill" id="pillDefect">Σδ <strong>—</strong></span>
+      <span class="pill hot" id="pillTheta">θₖ <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="割圆、截断与自指迭代的控制与读数" data-aria-en="Controls and readouts for polytopes, truncation and self-referential iteration">
+    <section class="panel sec" id="inputs">
+      <h2><span class="zh">割圆多面体 · 截断 · 螺旋</span><span class="en">Polytope · Truncation · Helix</span><span class="aside">R3 · R6</span></h2>
+
+      <div class="num-field">
+        <label for="vIdx"><span class="zh">测地多面体顶点数 V（内接于 S²）</span><span class="en">Geodesic vertex count V (inscribed in S²)</span></label>
+        <output class="vout" id="vOut" for="vIdx">V = —</output>
+        <input type="range" id="vIdx" min="0" max="4" step="1" value="3">
+      </div>
+      <div class="chips vchips" id="vChips" role="group" aria-label="选择多面体顶点数" data-aria-en="Choose the polyhedron vertex count">
+        <button class="chip" type="button" data-v="0">V=12</button>
+        <button class="chip" type="button" data-v="1">V=42</button>
+        <button class="chip" type="button" data-v="2">V=60</button>
+        <button class="chip" type="button" data-v="3">V=162</button>
+        <button class="chip" type="button" data-v="4">V=642</button>
+      </div>
+
+      <div class="num-field">
+        <label for="taylorN"><span class="zh">泰勒截断项数 N（次数 2N − 2）</span><span class="en">Taylor terms N (degree 2N − 2)</span></label>
+        <div class="stepper"><button type="button" id="taylorNDec" aria-label="N 减一" data-aria-en="Decrease N">−</button><input type="number" id="taylorNNum" min="1" max="6" step="1" value="3" inputmode="numeric" aria-label="N 的值" data-aria-en="Value of N"><button type="button" id="taylorNInc" aria-label="N 加一" data-aria-en="Increase N">+</button></div>
+        <input type="range" id="taylorN" min="1" max="6" step="1" value="3">
+      </div>
+
+      <div class="num-field">
+        <label for="pitch"><span class="zh">开口螺旋每圈抬升（螺距）</span><span class="en">Open-helix lift per turn (pitch)</span></label>
+        <div class="stepper"><button type="button" id="pitchDec" aria-label="螺距减小" data-aria-en="Decrease pitch">−</button><input type="number" id="pitchNum" min="0" max="0.5" step="0.01" value="0.25" inputmode="decimal" aria-label="螺距的值" data-aria-en="Value of the pitch"><button type="button" id="pitchInc" aria-label="螺距增大" data-aria-en="Increase pitch">+</button></div>
+        <input type="range" id="pitch" min="0" max="0.5" step="0.01" value="0.25">
+      </div>
+
+      <div class="subhead"><span class="zh">余弦自指迭代 θₖ₊₁ = cos θₖ</span><span class="en">Cosine self-reference θₖ₊₁ = cos θₖ</span></div>
+
+      <div class="num-field">
+        <label for="theta0"><span class="zh">初始角 θ₀（度，对应 [0, π]）</span><span class="en">Initial angle θ₀ (degrees, maps to [0, π])</span></label>
+        <div class="stepper"><button type="button" id="theta0Dec" aria-label="θ₀ 减一" data-aria-en="Decrease θ₀">−</button><input type="number" id="theta0Num" min="0" max="180" step="1" value="60" inputmode="numeric" aria-label="θ₀ 的度数" data-aria-en="Value of θ₀ in degrees"><button type="button" id="theta0Inc" aria-label="θ₀ 加一" data-aria-en="Increase θ₀">+</button></div>
+        <input type="range" id="theta0" min="0" max="180" step="1" value="60">
+      </div>
+
+      <div class="num-field">
+        <label for="steps"><span class="zh">迭代步数 k</span><span class="en">Iteration steps k</span></label>
+        <div class="stepper"><button type="button" id="stepsDec" aria-label="步数减一" data-aria-en="One step fewer">−</button><input type="number" id="stepsNum" min="1" max="20" step="1" value="10" inputmode="numeric" aria-label="迭代步数" data-aria-en="Number of iteration steps"><button type="button" id="stepsInc" aria-label="步数加一" data-aria-en="One step more">+</button></div>
+        <input type="range" id="steps" min="1" max="20" step="1" value="10">
+      </div>
+
+      <div class="subhead"><span class="zh">预设</span><span class="en">Presets</span></div>
+      <div class="chips presets" id="presets" role="group" aria-label="预设" data-aria-en="Presets">
+        <button class="chip" type="button" data-preset="0,60,2,0.20,8"><span class="zh">V=12 正二十面体 · θ₀=60°</span><span class="en">V=12 Icosahedron · θ₀=60°</span></button>
+        <button class="chip" type="button" data-preset="2,90,3,0.30,12"><span class="zh">V=60 富勒烯角亏 · θ₀=90°</span><span class="en">V=60 Fullerene 720° · θ₀=90°</span></button>
+        <button class="chip" type="button" data-preset="1,42,1,0.00,16"><span class="zh">Dottie 黄金点附近 (42°)</span><span class="en">Near Dottie Fixed Point (42°)</span></button>
+        <button class="chip" type="button" data-preset="4,180,4,0.40,10"><span class="zh">V=642 密割圆 · π 初值螺旋</span><span class="en">V=642 Dense Dome · θ₀=π Spiral</span></button>
+      </div>
+    </section>
+
+    <section class="panel sec" id="readouts">
+      <h2><span class="zh">实时账本</span><span class="en">Live Ledger</span><span class="aside">χ · δ · R · ε</span></h2>
+      <dl class="ro">
+        <div class="wide"><dt><span class="zh">欧拉示性数 V − E + F（E = 3V − 6，F = 2V − 4）</span><span class="en">Euler characteristic V − E + F (E = 3V − 6, F = 2V − 4)</span></dt><dd id="roVEF">—</dd></div>
+        <div class="m"><dt><span class="zh">五度 / 六度顶点</span><span class="en">Degree-5 / degree-6 vertices</span></dt><dd id="roDeg">—</dd></div>
+        <div class="m"><dt><span class="zh">等边模型角亏 (6 − deg)·60°</span><span class="en">Equilateral-model defect (6 − deg)·60°</span></dt><dd id="roCombo">—</dd></div>
+        <div class="wide"><dt><span class="zh">内接多面体实际角亏 Σδᵥ（笛卡尔：= 4π）</span><span class="en">Metric defect of the inscribed polyhedron Σδᵥ (Descartes: = 4π)</span></dt><dd id="roMetric">—</dd></div>
+        <div class="wide"><dt><span class="zh">泰勒截断 cos₂N(θ₀) 与余项界 |R₂N| ≤ θ₀²ᴺ/(2N)!</span><span class="en">Taylor truncation cos₂N(θ₀) and remainder bound |R₂N| ≤ θ₀²ᴺ/(2N)!</span></dt><dd id="roTaylor">—</dd></div>
+        <div class="a"><dt><span class="zh">螺旋每圈抬升 Δz</span><span class="en">Helix lift per turn Δz</span></dt><dd id="roHelix">—</dd></div>
+        <div class="c"><dt><span class="zh">正交双矢量 sin θ* = √(1 − θ*²)</span><span class="en">Orthogonal bivector sin θ* = √(1 − θ*²)</span></dt><dd id="roSin">—</dd></div>
+        <div class="wide"><dt><span class="zh">Dottie 迭代 θₖ → θ* 与残差 εₖ = |cos θₖ − θₖ|</span><span class="en">Dottie iterate θₖ → θ* and residual εₖ = |cos θₖ − θₖ|</span></dt><dd id="roDottie">—</dd></div>
+        <div class="wide"><dt><span class="zh">黄金倒数迭代 xₖ₊₁ = 1 + 1/xₖ → φ</span><span class="en">Golden reciprocal iterate xₖ₊₁ = 1 + 1/xₖ → φ</span></dt><dd id="roGolden">—</dd></div>
+        <div class="wide"><dt><span class="zh">有限收缩集合 Sₙ₊₁ = U(Sₙ) ⊆ Sₙ</span><span class="en">Finite contracting sets Sₙ₊₁ = U(Sₙ) ⊆ Sₙ</span></dt><dd id="roSets">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <section class="panel stagepanel" id="stagePanel" data-thumb aria-label="测地多面体角亏、开口螺旋、泰勒截断、Dottie 余弦蛛网与收敛账本" data-aria-en="Geodesic polyhedron defects, open helix, Taylor truncation, Dottie cosine cobweb, and convergence ledger">
+      <div class="head thumb-hide">
+        <h2 id="stageTitle"><span class="zh">割圆多面体与开口螺旋 · 泰勒截断裂缝 · Dottie 蛛网 · 收敛账本</span><span class="en">Polytope &amp; Open Helix · Taylor Seam · Dottie Cobweb · Convergence Ledger</span></h2>
+        <span class="aside" id="stageSub">—</span>
+      </div>
+      <div class="stagewrap" id="stage">
+        <canvas id="view" role="img" aria-label="左：内接于球面的测地多面体、12 个五度角亏顶点与开口螺旋，下方为泰勒截断；右：余弦蛛网与残差、集合收缩账本" data-aria-en="Left: geodesic polyhedron inscribed in the sphere with its 12 degree-5 defect vertices and the open helix, Taylor truncation below; right: cosine cobweb, residuals and the contracting-set ledger"></canvas>
+        <div class="scan"></div>
+        <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+        <div class="toast" id="toast"></div>
+      </div>
+      <ul class="legend thumb-hide">
+        <li><i class="sw mg"></i><span class="zh">五度角亏顶点（等边模型 60°）</span><span class="en">Degree-5 defect vertices (60° in the equilateral model)</span></li>
+        <li><i class="sw cy"></i><span class="zh">余弦曲线与 Dottie 残差</span><span class="en">Cosine curve &amp; Dottie residual</span></li>
+        <li><i class="sw vi"></i><span class="zh">开口螺旋 · 泰勒多项式 · 黄金迭代</span><span class="en">Open helix · Taylor polynomial · golden iterate</span></li>
+        <li><i class="sw bl"></i><span class="zh">有限收缩集合 |Sₙ|</span><span class="en">Finite contracting sets |Sₙ|</span></li>
+        <li><i class="sw am"></i><span class="zh">当前选择（θ₀、θₖ、螺距）</span><span class="en">Current choice (θ₀, θₖ, pitch)</span></li>
+        <li><i class="sw ok"></i><span class="zh">Lean 4 已验证结论</span><span class="en">Lean 4 verified statements</span></li>
+      </ul>
+      <div class="keys thumb-hide">
+        <span class="zh"><kbd>V</kbd> 切换多面体 · <kbd>[</kbd><kbd>]</kbd> 迭代步数 · <kbd>R</kbd> 重置 · 拖动左半画布旋转多面体</span>
+        <span class="en"><kbd>V</kbd> cycle polyhedron · <kbd>[</kbd><kbd>]</kbd> iteration steps · <kbd>R</kbd> reset · drag the left half to rotate</span>
+      </div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">形式化依据与认识论分层</span><span class="en">Formal Evidence &amp; Epistemic Tiers</span><span class="aside">trureturing · Lean 4</span></h2>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">设 Address 非空、twist 无不动点、解码目录 decoderCatalog 满射，则相对语义对角线 g 从潜划分拓扑 partitionTopology(latent) 到离散输出拓扑不连续。已冻结：</span><span class="en">If Address is nonempty, twist has no fixed point and the decoder catalog is surjective, the relative semantic diagonal g is not continuous from the latent partition topology to the discrete output topology. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean#L30" target="_blank" rel="noopener"><code>complete_diagonal_not_continuous</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">同一假设下四项同时成立：¬Refines(g, latent)；g 在旧拓扑下不连续；separationDeficit(latent, g) 非空；并入 conceptJoin(latent, g) 后观测拓扑严格加细。已冻结：</span><span class="en">Under the same hypotheses four settlements hold at once: ¬Refines(g, latent); g is discontinuous in the old topology; separationDeficit(latent, g) is nonempty; adjoining conceptJoin(latent, g) strictly refines the observation topology. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_topological_settlement" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean#L94" target="_blank" rel="noopener"><code>complete_diagonal_topological_settlement</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">X 有限，U(A) ⊆ A 对一切 A 成立，S(n+1) = U(S n)，则存在 N ≤ |S 0| 使 n ≥ N 时 S n = S N，且严格变化步数 #{n | S(n+1) ≠ S n} ≤ |S 0|。已冻结：</span><span class="en">If X is finite, U(A) ⊆ A for every A and S(n+1) = U(S n), then some N ≤ |S 0| has S n = S N for all n ≥ N, and the number of strict changes #{n | S(n+1) ≠ S n} is at most |S 0|. Frozen: </span><a class="leanref" data-lean-gid="D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S1/FixedPoints/FiniteContractingStability.lean#L27" target="_blank" rel="noopener"><code>finite_contracting_updates_stabilize</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">φ = (1 + √5)/2 > 0，goldenReciprocalMap(φ) = 1 + 1/φ = φ，且对一切 x > 0 有 1 + 1/x = x ⇔ x = φ。定理断言正实数上不动点唯一，不断言迭代收敛。已冻结：</span><span class="en">φ = (1 + √5)/2 > 0, goldenReciprocalMap(φ) = 1 + 1/φ = φ, and for every x > 0, 1 + 1/x = x ⇔ x = φ. The theorem asserts uniqueness of the positive fixed point, not convergence of the iteration. Frozen: </span><a class="leanref" data-lean-gid="D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean#L40" target="_blank" rel="noopener"><code>golden_fixed_point_unique</code></a></span></div>
+      <div class="lean argued" id="litBox"><span class="ok">LIT</span><span><span class="zh">文献结果，未在本书形式化：欧拉公式 χ(S²) = 2；笛卡尔总角亏 Σδᵥ = 2πχ = 720°；毛球定理；拉格朗日余项 |R₂N(θ)| ≤ |θ|²ᴺ/(2N)!；cos 在 [−1, 1] 上以 sin 1 &lt; 1 为压缩率（巴拿赫），唯一实不动点 θ* 为超越数（林德曼—魏尔斯特拉斯），故对一切代数数 q 有 |cos q − q| > 0。</span><span class="en">Literature results, not formalized in this book: Euler's χ(S²) = 2; Descartes's total defect Σδᵥ = 2πχ = 720°; the hairy ball theorem; the Lagrange remainder |R₂N(θ)| ≤ |θ|²ᴺ/(2N)!; cos contracts [−1, 1] with rate sin 1 &lt; 1 (Banach), and its unique real fixed point θ* is transcendental (Lindemann–Weierstrass), so |cos q − q| > 0 for every algebraic q.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">开口螺旋 (cos t, sin t, p·t/2π) 是示意模型：它把“并入对角线坐标使观测拓扑严格加细”想象为沿新法向的一次抬升。Lean 定理讲的是划分拓扑，不是螺旋。</span><span class="en">The open helix (cos t, sin t, p·t/2π) is a schematic model: it pictures “adjoining the diagonal coordinate strictly refines the observation topology” as a lift along a new normal axis. The Lean theorems speak about partition topologies, not helices.</span></span></div>
+      <div class="lean open"><span class="ok">OPEN</span><span><span class="zh">θ* 与 π 在 ℚ 上代数无关吗？这可由尚未解决的沙努埃尔猜想推出，目前仍是开放问题。</span><span class="en">Are θ* and π algebraically independent over ℚ? This would follow from Schanuel's conjecture, which remains open.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">本页是数值演示，不是证明：网格的 V、E、F、顶点度与角亏，泰勒余项，三种迭代与集合序列都由页面按双精度浮点实时算出；普遍定理的严格成立由上述 Lean 4 内核声明保证。</span><span class="en">This page is a numerical illustration, not a proof: the mesh counts V, E, F, vertex degrees and defects, the Taylor remainders, the three iterations and the set sequence are computed live in double-precision floating point; the general theorems are guaranteed by the Lean 4 declarations above.</span></span></div>
+      <button class="chip" type="button" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </main>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 多面体割圆、毛球角亏与余弦不动点</span><span class="en">Theory interface · Polyhedral approximation, hairy ball defect &amp; cosine fixed points</span></h2><button class="chip" type="button" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">球永远只是近似：有限多面体要合拢成球，就必须把 4π 的总曲率集中成离散顶点上的角亏接缝；有限阶多项式要逼近 cos θ，就必须留下非零的截断余项；有限精度的读数要逼近自指不动点 θ* = cos θ*，就必须保留非零残差。本页把这三道裂缝与第二十一章的对角线逃逸、第二十四章的三类自指不动点放在同一块屏幕上。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>测地多面体与 720° 角亏（第二十一章 §21.4）。</b>V = 12、42、162、642 由正二十面体逐次中点细分并投影到单位球得到；V = 60 是 60 个点经库仑排斥弛豫后的凸包。页面实时数出 E 与 F，验证 E = 3V − 6、F = 2V − 4 与 V − E + F = 2，并统计顶点度：每张网格恰有 12 个五度顶点，其余全是六度。在等边模型里五度顶点角亏 (6 − 5)·60° = 60°、六度顶点为 0°，合计 12 × 60° = 720° = 4π。在真实的内接多面体上，凸性使每个顶点的实际角亏都严格为正：六度顶点同样分到角亏，网格越密，曲率摊得越均匀，读数里五度顶点所占的份额随 V 增大而迅速下降；但总和始终精确等于 720°（笛卡尔定理，文献结果）。只有在等边模型里，720° 才全部集中在 12 个五度顶点上。</li>
+        <li><b>泰勒截断裂缝（第二十一章 §21.3）。</b>滑块 <code>N ∈ [1, 6]</code> 取 cos₂N(θ) = ∑ⱼ₌₀ᴺ⁻¹ (−1)ʲ θ²ʲ/(2j)!（次数 2N − 2）。页面直接对尾项求和得到余项 R₂N(θ₀)，并与拉格朗日界 θ₀²ᴺ/(2N)! 比较；对 θ₀ ∈ (0, π] 余项严格非零。</li>
+        <li><b>开口螺旋与圆形影子（第二十一章 §21.3，示意模型）。</b>螺旋 (cos t, sin t, p·t/2π) 沿 z 轴投下的影子是闭合的单位圆；螺距 p 为零时螺旋退化为这个圆，p > 0 时绕一圈回到 (1, 0, p) 而不是 (1, 0, 0)。这是把“并入相对语义对角线 conceptJoin(latent, g) 使观测拓扑严格加细”想象成沿新法向抬升的意象；对应的 Lean 结论是 <a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean#L30" target="_blank" rel="noopener"><code>complete_diagonal_not_continuous</code></a> 与 <a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_topological_settlement" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean#L94" target="_blank" rel="noopener"><code>complete_diagonal_topological_settlement</code></a>（LEAN ✓），它们讲的是划分拓扑与分离亏损，螺旋本身不是定理的内容。</li>
+        <li><b>Dottie 余弦蛛网（第二十四章 §24.4）。</b>从任一初值 θ₀ ∈ [0, π] 出发迭代 θₖ₊₁ = cos θₖ，蛛网在对角线 y = θ 与余弦曲线之间螺旋收向唯一实不动点 θ* ≈ 0.7390851332，此处 cos θ* = θ*，正交双矢量 sin θ* = √(1 − θ*²) ≈ 0.6736120292。对紧不变区间内任意异于 θ* 的初值 θ₀ ∈ [0, 1] \ {θ*}（或前向轨道避开 θ* 的任意初值，例如由林德曼—魏尔斯特拉斯定理保证的 [0, 1] 内一切有理/代数弧度初值），每一有限步 k ≥ 0 的残差 εₖ = |cos θₖ − θₖ|（及 |θₖ − θ*|）均严格大于 0；cos 在 [0, 1]（及 [−1, 1]）上的压缩率为 sin 1 ≈ 0.8414709848 &lt; 1。巴拿赫压缩与 θ* 的超越性是文献结果，未在本书形式化。</li>
+        <li><b>黄金倒数迭代（第二十四章 §24.3）。</b>从 x₀ = max(0.2, θ₀) 迭代 xₖ₊₁ = 1 + 1/xₖ，残差 |1 + 1/xₖ − xₖ| 迅速下降，迭代值趋向 φ = (1 + √5)/2 ≈ 1.6180339887。<a class="leanref" data-lean-gid="D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean#L40" target="_blank" rel="noopener"><code>golden_fixed_point_unique</code></a>（LEAN ✓）保证 φ 是 1 + 1/x = x 在正实数上的唯一解；迭代的收敛只在页面上数值展示。</li>
+        <li><b>有限收缩集合（第二十四章 §24.1）。</b>有限读数网格 X = {j/16 : 0 ≤ j ≤ 50} ⊂ [0, π]。初始集 S₀ 取 X 中落在 θ₀ 与 cos θ₀ 之间（两端各放宽 1/16）的读数；更新 U(A) 保留 A 中残差 |cos q − q| 较小的一半（至少保留一个），故 U(A) ⊆ A。<a class="leanref" data-lean-gid="D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S1/FixedPoints/FiniteContractingStability.lean#L27" target="_blank" rel="noopener"><code>finite_contracting_updates_stabilize</code></a>（LEAN ✓）保证序列在 N ≤ |S₀| 步内稳定、严格变化次数不超过 |S₀|。稳定后剩下的读数 q 仍有 |cos q − q| > 0：有限精度的机器停在一个自洽的集合上，却停不到 θ*。</li>
+        <li><b>模型边界。</b>V = 60 的网格坐标取五位小数后重新归一化，其余网格由公式生成；角亏、余项、迭代与集合全部在双精度浮点下计算。θ* 与 π 是否代数无关是开放问题（可由沙努埃尔猜想推出）。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch21-diagonalization-and-escape.html#sec-ch21-3" target="_top">第二十一章 §21.3 · 割圆多面体、泰勒截断裂缝与开口螺旋</a> · <a href="../../zh/ch21-diagonalization-and-escape.html#sec-ch21-4" target="_top">§21.4 · 毛球定理与 720° 角亏</a> · <a href="../../zh/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-1" target="_top">第二十四章 §24.1 · 有限收缩稳定化</a> · <a href="../../zh/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-3" target="_top">§24.3 · 黄金锁</a> · <a href="../../zh/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-4" target="_top">§24.4 · 余弦不动点与 ψ = ψ(ψ)</a> · trureturing（所钉提交）：<a data-trureturing-path="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean" target="_blank" rel="noopener">DiagonalTopologicalEscape.lean</a> · <a data-trureturing-path="D5/S1/FixedPoints/FiniteContractingStability.lean" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S1/FixedPoints/FiniteContractingStability.lean" target="_blank" rel="noopener">FiniteContractingStability.lean</a> · <a data-trureturing-path="D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean" target="_blank" rel="noopener">GoldenFixedPoint.lean</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">A sphere is only ever approximated: a finite polyhedron can close up into a sphere only by concentrating the total curvature 4π into angular-defect seams at its vertices; a finite polynomial can approach cos θ only by leaving a nonzero truncation remainder; a finite-precision reading can approach the self-referential fixed point θ* = cos θ* only by keeping a nonzero residual. This page puts these three seams on one screen, next to the diagonal escape of Chapter 21 and the three kinds of self-referential fixed points of Chapter 24. The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>Geodesic polyhedra and the 720° defect (Chapter 21 §21.4).</b> V = 12, 42, 162, 642 come from repeated midpoint subdivision of the icosahedron projected onto the unit sphere; V = 60 is the convex hull of 60 points relaxed under Coulomb repulsion. The page counts E and F live, checks E = 3V − 6, F = 2V − 4 and V − E + F = 2, and tallies vertex degrees: every mesh has exactly 12 degree-5 vertices and all others have degree 6. In the equilateral model a degree-5 vertex carries a defect of (6 − 5)·60° = 60° and a degree-6 vertex 0°, for a total of 12 × 60° = 720° = 4π. On the actual inscribed polyhedron convexity makes every metric defect strictly positive: degree-6 vertices carry defect as well, the curvature spreads more evenly as the mesh gets finer, and the readouts show the share of the degree-5 vertices falling quickly as V grows; yet the total is always exactly 720° (Descartes's theorem, a literature result). Only in the equilateral model is all of the 720° concentrated at the 12 degree-5 vertices.</li>
+        <li><b>The Taylor truncation seam (Chapter 21 §21.3).</b> The slider <code>N ∈ [1, 6]</code> selects cos₂N(θ) = ∑ⱼ₌₀ᴺ⁻¹ (−1)ʲ θ²ʲ/(2j)! (degree 2N − 2). The page sums the tail directly to obtain the remainder R₂N(θ₀) and compares it with the Lagrange bound θ₀²ᴺ/(2N)!; for θ₀ ∈ (0, π] the remainder is strictly nonzero.</li>
+        <li><b>The open helix and its circular shadow (Chapter 21 §21.3, schematic model).</b> The helix (cos t, sin t, p·t/2π) casts a closed unit circle as its shadow along the z axis; at pitch p = 0 it collapses onto that circle, while for p > 0 one turn brings it to (1, 0, p) rather than back to (1, 0, 0). This pictures “adjoining the relative semantic diagonal conceptJoin(latent, g) strictly refines the observation topology” as a lift along a new normal; the corresponding Lean results are <a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean#L30" target="_blank" rel="noopener"><code>complete_diagonal_not_continuous</code></a> and <a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_topological_settlement" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean#L94" target="_blank" rel="noopener"><code>complete_diagonal_topological_settlement</code></a> (LEAN ✓), which concern partition topologies and separation deficits; the helix itself is not part of any theorem.</li>
+        <li><b>The Dottie cosine cobweb (Chapter 24 §24.4).</b> Starting from any seed θ₀ ∈ [0, π], the iteration θₖ₊₁ = cos θₖ spirals between the diagonal y = θ and the cosine curve towards the unique real fixed point θ* ≈ 0.7390851332, where cos θ* = θ* and the orthogonal bivector is sin θ* = √(1 − θ*²) ≈ 0.6736120292. For every seed θ₀ ∈ [0, 1] \ {θ*} (or any seed whose forward orbit avoids θ*, including all rational and algebraic angles in [0, 1] by the Lindemann–Weierstrass theorem), every finite step k ≥ 0 keeps a strictly positive residual εₖ = |cos θₖ − θₖ| &gt; 0 (and |θₖ − θ*| &gt; 0); on [0, 1] (and [−1, 1]) cos contracts with rate sin 1 ≈ 0.8414709848 &lt; 1. Banach contraction and the transcendence of θ* are literature results, not formalized in this book.</li>
+        <li><b>The golden reciprocal iteration (Chapter 24 §24.3).</b> From x₀ = max(0.2, θ₀), the iteration xₖ₊₁ = 1 + 1/xₖ drives the residual |1 + 1/xₖ − xₖ| down quickly and approaches φ = (1 + √5)/2 ≈ 1.6180339887. <a class="leanref" data-lean-gid="D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean#L40" target="_blank" rel="noopener"><code>golden_fixed_point_unique</code></a> (LEAN ✓) guarantees that φ is the only positive solution of 1 + 1/x = x; convergence of the iteration is only shown numerically.</li>
+        <li><b>Finite contracting sets (Chapter 24 §24.1).</b> The finite reading grid is X = {j/16 : 0 ≤ j ≤ 50} ⊂ [0, π]. The initial set S₀ holds the readings of X between θ₀ and cos θ₀ (widened by 1/16 at both ends); the update U(A) keeps the better half of A by residual |cos q − q| (at least one element), so U(A) ⊆ A. <a class="leanref" data-lean-gid="D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S1/FixedPoints/FiniteContractingStability.lean#L27" target="_blank" rel="noopener"><code>finite_contracting_updates_stabilize</code></a> (LEAN ✓) guarantees stabilization within N ≤ |S₀| steps with at most |S₀| strict changes. The surviving reading q still has |cos q − q| > 0: a finite-precision machine settles on a self-consistent set, but not on θ*.</li>
+        <li><b>Model limits.</b> The V = 60 mesh coordinates are stored to five decimals and renormalized; the other meshes are generated by formula; defects, remainders, iterations and sets are all computed in double-precision floating point. Whether θ* and π are algebraically independent is an open problem (it would follow from Schanuel's conjecture).</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch21-diagonalization-and-escape.html#sec-ch21-3" target="_top">Chapter 21 §21.3 · Inscribed polytopes, Taylor seams &amp; the open helix</a> · <a href="../../en/ch21-diagonalization-and-escape.html#sec-ch21-4" target="_top">§21.4 · Hairy ball theorem &amp; the 720° defect</a> · <a href="../../en/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-1" target="_top">Chapter 24 §24.1 · Finite contracting stabilization</a> · <a href="../../en/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-3" target="_top">§24.3 · The golden lock</a> · <a href="../../en/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-4" target="_top">§24.4 · Cosine fixed points &amp; ψ = ψ(ψ)</a> · trureturing (pinned commit): <a data-trureturing-path="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean" target="_blank" rel="noopener">DiagonalTopologicalEscape.lean</a> · <a data-trureturing-path="D5/S1/FixedPoints/FiniteContractingStability.lean" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S1/FixedPoints/FiniteContractingStability.lean" target="_blank" rel="noopener">FiniteContractingStability.lean</a> · <a data-trureturing-path="D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean" target="_blank" rel="noopener">GoldenFixedPoint.lean</a></p>
+    </div>
+  </div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>

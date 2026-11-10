@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" width="960" height="420">
+  <defs>
+    <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <marker id="p21-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M1 1.5L8.5 5L1 8.5Z" fill="#19f0ff"/>
+    </marker>
+    <marker id="p21-mag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M1 1.5L8.5 5L1 8.5Z" fill="#ff2fd0"/>
+    </marker>
+    <marker id="p21-amb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M1 1.5L8.5 5L1 8.5Z" fill="#ffc83d"/>
+    </marker>
+  </defs>
+  <rect x="5" y="5" width="950" height="410" rx="14" fill="#03060c" stroke="#143049" stroke-width="2"/>
+  <text x="34" y="40" font-family="JetBrains Mono,monospace" font-size="17" font-weight="600" fill="#19f0ff">Spheres Beyond Spheres · Diagonal Escape, Polyhedral Defect &amp; Adams Spheres</text>
+  <text x="34" y="64" font-family="JetBrains Mono,monospace" font-size="11" fill="#6f8ea5">I: relative diagonal escape &amp; separation deficit · II: open helix &amp; 12×60° = 4π defect · III: Adams parallelizable spheres S⁰, S¹, S³, S⁷</text>
+
+  <g font-family="JetBrains Mono,monospace">
+    <line x1="320" y1="84" x2="320" y2="352" stroke="#143049" stroke-width="1.2"/>
+    <line x1="640" y1="84" x2="640" y2="352" stroke="#143049" stroke-width="1.2"/>
+
+    <!-- PANEL I: Relative Semantic Diagonal & Partition Refinement -->
+    <text x="162" y="102" text-anchor="middle" fill="#19f0ff" font-size="12" font-weight="600">I · RELATIVE DIAGONAL ESCAPE</text>
+    <rect x="44" y="118" width="236" height="162" rx="6" fill="#07101b" stroke="#34506a"/>
+    <line x1="44" y1="172" x2="280" y2="172" stroke="#143049" stroke-dasharray="4 3"/>
+    <line x1="44" y1="226" x2="280" y2="226" stroke="#143049" stroke-dasharray="4 3"/>
+    <text x="56" y="150" fill="#6f8ea5" font-size="10">fiber q_L(a₁)=q_L(a₂)=b₀</text>
+    <circle cx="96" cy="146" r="5" fill="#9d8cff"/>
+    <circle cx="212" cy="146" r="5" fill="#ff2fd0"/>
+    <line x1="104" y1="146" x2="204" y2="146" stroke="#ff2fd0" stroke-width="1.6" stroke-dasharray="3 3"/>
+    <text x="154" y="136" text-anchor="middle" fill="#ff2fd0" font-size="10">g(a₁) ≠ g(a₂)</text>
+    <path d="M66 262L118 190L170 254L236 186" fill="none" stroke="#19f0ff" stroke-width="2" marker-end="url(#p21-cyan)"/>
+    <circle cx="170" cy="254" r="4.5" fill="#19f0ff"/>
+    <text x="162" y="298" text-anchor="middle" fill="#d4efff" font-size="11">g(a) = twist(D(a, q_L(a)))</text>
+    <text x="162" y="316" text-anchor="middle" fill="#46ffb2" font-size="11">¬Continuous(τ_L, ⊥) · Deficit ≠ ∅</text>
+    <text x="162" y="334" text-anchor="middle" fill="#46ffb2" font-size="10">τ(q_L) ⊊ τ(conceptJoin q_L g)</text>
+
+    <!-- PANEL II: Open Helix Projection & Descartes 720° = 4π Defect -->
+    <text x="480" y="102" text-anchor="middle" fill="#19f0ff" font-size="12" font-weight="600">II · HELIX SHADOW &amp; 720° DEFECT</text>
+    <polygon points="480,122 548,164 522,244 438,244 412,164" fill="#19f0ff" fill-opacity=".08" stroke="#19f0ff" stroke-width="1.5"/>
+    <polygon points="480,122 548,164 480,192 412,164" fill="#9d8cff" fill-opacity=".12" stroke="#9d8cff"/>
+    <line x1="480" y1="192" x2="522" y2="244" stroke="#34506a"/>
+    <line x1="480" y1="192" x2="438" y2="244" stroke="#34506a"/>
+    <!-- Current selection: normal escape vector e_{n+1} = ★I_n -->
+    <line x1="480" y1="192" x2="480" y2="114" stroke="#ffc83d" stroke-width="2.2" marker-end="url(#p21-amb)"/>
+    <text x="536" y="126" fill="#ffc83d" font-size="10">now: e_{n+1} = ★I_n</text>
+    <text x="480" y="268" text-anchor="middle" fill="#d4efff" font-size="11">χ(S²) = V − E + F = 12 − 30 + 20 = 2</text>
+    <text x="480" y="288" text-anchor="middle" fill="#19f0ff" font-size="11">12 deg-5 vertices × 60° = 720° = 4π</text>
+    <text x="480" y="308" text-anchor="middle" fill="#9d8cff" font-size="10">Hairy Ball: ∀ v on S²ⁿ, ∃ x₀, v(x₀) = 0</text>
+    <text x="480" y="328" text-anchor="middle" fill="#6f8ea5" font-size="10">piecewise-flat mesh · R_{2N}(θ) ≠ 0</text>
+
+    <!-- PANEL III: Hurwitz Normed Algebras & Adams Parallelizable Spheres -->
+    <text x="800" y="102" text-anchor="middle" fill="#19f0ff" font-size="12" font-weight="600">III · ADAMS DIVISION SPHERES</text>
+    <circle cx="800" cy="196" r="68" fill="#9d8cff" fill-opacity="0.05" stroke="#34506a" stroke-dasharray="4 4"/>
+    <ellipse cx="800" cy="196" rx="68" ry="22" fill="none" stroke="#19f0ff" stroke-width="1.2"/>
+    <path d="M800 128V264M732 196H868M752 148L848 244M848 148L752 244" stroke="#9d8cff" stroke-width="1.2" stroke-opacity="0.65"/>
+    <text x="800" y="188" text-anchor="middle" fill="#d4efff" font-size="16" font-weight="600">S⁰ · S¹ · S³ · S⁷</text>
+    <text x="800" y="212" text-anchor="middle" fill="#19f0ff" font-size="11">ℝ(1) · ℂ(2) · ℍ(4) · 𝕆(8)</text>
+    <text x="800" y="288" text-anchor="middle" fill="#d4efff" font-size="11">‖xy‖ = ‖x‖·‖y‖ (Hurwitz–Adams)</text>
+    <text x="800" y="308" text-anchor="middle" fill="#9d8cff" font-size="10">full frame: only S⁰,S¹,S³,S⁷ (odd S²ⁿ⁻¹: 1 field)</text>
+    <text x="800" y="328" text-anchor="middle" fill="#6f8ea5" font-size="10">Hopf fibration S³ → S² lifts TS³ frame</text>
+  </g>
+  <rect x="24" y="366" width="912" height="32" rx="6" fill="#050c16" stroke="#143049"/>
+  <text x="480" y="387" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10.5" fill="#46ffb2">LEAN ✓  [Nonempty Address] + (∀ y, twist y ≠ y) + Surjective decode  ⊢  g ∉ range decode  ∧  defect ≠ ∅  ∧  ¬Cont(g)  ∧  g ≠ const</text>
+</svg>
