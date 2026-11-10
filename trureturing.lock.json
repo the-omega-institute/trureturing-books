@@ -597,6 +597,46 @@
       "line": 725,
       "signature": "theorem stinespring_dilation {A H : Type u} [CStarAlgebra A] [PartialOrder A] [StarOrderedRing A] [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H] (φ : A →CP (H →L[ℂ] H)) : ∃ (K : Type u) (_ : NormedAddCommGroup K) (_ : InnerProductSpace ℂ K) (_ : CompleteSpace K) (π : A →⋆ₐ[ℂ] (K →L[ℂ] K)) (V : H →L[ℂ] K), ∀ (a : A) (x : H), (φ a) x = (V†) ((π a) (V x))"
     },
+    "D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion": {
+      "module": "D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion",
+      "name": "D5.S3.Midline.Cayley.CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion",
+      "kind": "theorem",
+      "statement_id": "sha256:547e2360b6d7272103f80eba1b75ee6b705e5b162495aec1081f40c28169769a",
+      "line": 76,
+      "signature": "theorem cayley_critical_line_zeta_criterion : (∀ s : Complex, ‖cayleyCoefficient s‖ = 1 ↔ s.re = (1 : Real) / 2) ∧ (RiemannHypothesis ↔ ∀ rho : Complex, riemannZeta rho = 0 → (¬∃ n : Nat, rho = -2 * (n + 1)) → rho ≠ 1 → logarithmicRadialDefect rho = 0)"
+    },
+    "D5/S3/Midline/Cayley/CayleyUnitarityDefect.cayleyCoefficient": {
+      "module": "D5/S3/Midline/Cayley/CayleyUnitarityDefect",
+      "name": "D5.S3.Midline.Cayley.CayleyUnitarityDefect.cayleyCoefficient",
+      "kind": "def",
+      "statement_id": "sha256:53480f871ca9eb6393acbc326385c7b62468c023fe8bb218e1370c6108269822",
+      "line": 59,
+      "signature": "noncomputable def cayleyCoefficient (rho : Complex) : Complex"
+    },
+    "D5/S3/Midline/Cayley/LogarithmicRadialDefect.logarithmicRadialDefect": {
+      "module": "D5/S3/Midline/Cayley/LogarithmicRadialDefect",
+      "name": "D5.S3.Midline.Cayley.LogarithmicRadialDefect.logarithmicRadialDefect",
+      "kind": "def",
+      "statement_id": "sha256:c9fce0bdf0a41ab34320b74f16c34e33a4745259b23f386b2eea80a18d362aa9",
+      "line": 27,
+      "signature": "noncomputable def logarithmicRadialDefect (rho : Complex) : Real"
+    },
+    "D5/S3/Midline/CayleyCriticalLine.cayleyRatio": {
+      "module": "D5/S3/Midline/CayleyCriticalLine",
+      "name": "D5.S3.Midline.CayleyCriticalLine.cayleyRatio",
+      "kind": "def",
+      "statement_id": "sha256:79d47c185587dd1e3fcd1e39f5f5c9f222bde94a52e7ae3c3d5e07f4270fa8a2",
+      "line": 30,
+      "signature": "noncomputable def cayleyRatio (s : ℂ) : ℂ"
+    },
+    "D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line": {
+      "module": "D5/S3/Midline/CayleyCriticalLine",
+      "name": "D5.S3.Midline.CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line",
+      "kind": "theorem",
+      "statement_id": "sha256:79d47c185587dd1e3fcd1e39f5f5c9f222bde94a52e7ae3c3d5e07f4270fa8a2",
+      "line": 46,
+      "signature": "theorem cayley_ratio_norm_one_iff_critical_line (s : ℂ) : ‖cayleyRatio s‖ = 1 ↔ s.re = (1 : ℝ) / 2"
+    },
     "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification": {
       "module": "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification",
       "name": "D5.S3.Observer.AgencyHolonomy.AnchoredPhaseClassification.anchored_phase_classification",
@@ -1988,6 +2028,70 @@
       "statement_id": "sha256:0648d499fd32bc7fff51faf73ff211bb9072b7d2040d02d10bca7a2817bce22f",
       "line": 17,
       "signature": "theorem xi_reading_endpoint_values : xiReading 0 = (1 / 2 : ℂ) ∧ xiReading 1 = (1 / 2 : ℂ)"
+    },
+    "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.FixedLineLocalization": {
+      "module": "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization",
+      "name": "D5.S3.Zeros.SymmetricPolynomial.FullSymmetryNonlocalization.FixedLineLocalization",
+      "kind": "def",
+      "statement_id": "sha256:460e07bc5e214dac7e9ce8cf49f86488b9b31d6ada6b65f90046b51edde0a304",
+      "line": 62,
+      "signature": "def FixedLineLocalization (F : ℂ → ℂ) : Prop"
+    },
+    "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.HasFullZetaSymmetry": {
+      "module": "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization",
+      "name": "D5.S3.Zeros.SymmetricPolynomial.FullSymmetryNonlocalization.HasFullZetaSymmetry",
+      "kind": "def",
+      "statement_id": "sha256:460e07bc5e214dac7e9ce8cf49f86488b9b31d6ada6b65f90046b51edde0a304",
+      "line": 57,
+      "signature": "def HasFullZetaSymmetry (F : ℂ → ℂ) : Prop"
+    },
+    "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.full_symmetry_not_fixed_line_localization": {
+      "module": "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization",
+      "name": "D5.S3.Zeros.SymmetricPolynomial.FullSymmetryNonlocalization.full_symmetry_not_fixed_line_localization",
+      "kind": "theorem",
+      "statement_id": "sha256:460e07bc5e214dac7e9ce8cf49f86488b9b31d6ada6b65f90046b51edde0a304",
+      "line": 166,
+      "signature": "theorem full_symmetry_not_fixed_line_localization (delta gamma : ℝ) (hdelta : delta ≠ 0) (hgamma : gamma ≠ 0) : (∃ F : ℂ → ℂ, F = offCriticalQuartic delta gamma ∧ Differentiable ℂ F ∧ HasFullZetaSymmetry F ∧ (∀ s, F s = 0 ↔ s ∈ sourceZeros delta gamma) ∧ (sourceZeros delta gamma).card = 4 ∧ ∀ s, F s = 0 → s.re ≠ criticalAbscissa) ∧ ¬ (∀ F : ℂ → ℂ, Differentiable ℂ F → HasFullZetaSymmetry F → FixedLineLocalization F)"
+    },
+    "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.offCriticalQuartic": {
+      "module": "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization",
+      "name": "D5.S3.Zeros.SymmetricPolynomial.FullSymmetryNonlocalization.offCriticalQuartic",
+      "kind": "def",
+      "statement_id": "sha256:460e07bc5e214dac7e9ce8cf49f86488b9b31d6ada6b65f90046b51edde0a304",
+      "line": 31,
+      "signature": "def offCriticalQuartic (delta gamma : ℝ) (s : ℂ) : ℂ"
+    },
+    "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.sourceZeros": {
+      "module": "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization",
+      "name": "D5.S3.Zeros.SymmetricPolynomial.FullSymmetryNonlocalization.sourceZeros",
+      "kind": "def",
+      "statement_id": "sha256:460e07bc5e214dac7e9ce8cf49f86488b9b31d6ada6b65f90046b51edde0a304",
+      "line": 52,
+      "signature": "def sourceZeros (delta gamma : ℝ) : Finset ℂ"
+    },
+    "D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.riemann_zeta_conj": {
+      "module": "D5/S3/Zeros/Symmetry/ZetaConjugationCovariance",
+      "name": "D5.S3.Zeros.Symmetry.ZetaConjugationCovariance.riemann_zeta_conj",
+      "kind": "theorem",
+      "statement_id": "sha256:c71d7be1478c3fcf9ba5b711de18b38f2f07ec3798adbc033d07e7307a8064ee",
+      "line": 87,
+      "signature": "theorem riemann_zeta_conj (s : ℂ) : riemannZeta (conj s) = conj (riemannZeta s)"
+    },
+    "D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.xi_reading_conj": {
+      "module": "D5/S3/Zeros/Symmetry/ZetaConjugationCovariance",
+      "name": "D5.S3.Zeros.Symmetry.ZetaConjugationCovariance.xi_reading_conj",
+      "kind": "theorem",
+      "statement_id": "sha256:c71d7be1478c3fcf9ba5b711de18b38f2f07ec3798adbc033d07e7307a8064ee",
+      "line": 98,
+      "signature": "theorem xi_reading_conj (s : ℂ) : xiReading (conj s) = conj (xiReading s)"
+    },
+    "D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.xi_reading_one_sub_conj": {
+      "module": "D5/S3/Zeros/Symmetry/ZetaConjugationCovariance",
+      "name": "D5.S3.Zeros.Symmetry.ZetaConjugationCovariance.xi_reading_one_sub_conj",
+      "kind": "theorem",
+      "statement_id": "sha256:c71d7be1478c3fcf9ba5b711de18b38f2f07ec3798adbc033d07e7307a8064ee",
+      "line": 105,
+      "signature": "theorem xi_reading_one_sub_conj (s : ℂ) : xiReading (1 - conj s) = conj (xiReading s)"
     },
     "D5/S3/Zeros/ZetaIdentities.riemann_zeta_dirichlet_sum": {
       "module": "D5/S3/Zeros/ZetaIdentities",
