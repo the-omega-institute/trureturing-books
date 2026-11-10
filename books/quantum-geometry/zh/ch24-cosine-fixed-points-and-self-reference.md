@@ -193,7 +193,7 @@ $$
    |\cos x - \cos y| \;\le\; (\sin 1)\,|x - y|, \qquad \sin 1 \approx 0.84147098 < 1.
    $$
 
-   因此 $\cos$ 在完备度量空间 $[0, 1]$ 上是 Lipschitz 常数严格小于 $1$ 的巴拿赫压缩映射，存在**唯一的实不动点** $\theta^* \approx 0.73908513321516\dots$（Dottie 数），且对任意实初值 $\theta_0 \in \mathbb{R}$，Picard 迭代序列 $\theta_{k+1} = \cos\theta_k$ 均按几何级数速率 $|\theta_k - \theta^*| \le (\sin 1)^{k-1}|\theta_1 - \theta^*|$ 全局指数收敛于 $\theta^*$。（同理，镜像算子 $-\cos\theta$ 在 $[-1, 0]$ 上以同一压缩率 $\sin 1 < 1$ 收敛于镜像方程 $\cos\theta = -\theta$ 的唯一实根 $-\theta^* \approx -0.7390851332\dots$。）
+   因此 $\cos$ 在完备度量空间 $[0, 1]$ 上是 Lipschitz 常数严格小于 $1$ 的巴拿赫压缩映射，存在**唯一的实不动点** $\theta^* \approx 0.73908513321516\dots$（Dottie 数），且对任意实初值 $\theta_0 \in \mathbb{R}$，Picard 迭代序列 $\theta_{k+1} = \cos\theta_k$ 均按几何级数速率 $|\theta_k - \theta^*| \le (\sin 1)^{k-1}|\theta_1 - \theta^*|$ 全局指数收敛于 $\theta^*$。这里的 $\sin 1$ 是整个区间上的最坏常数；不动点处的渐近压缩率是 $\lvert\cos'\theta^*\rvert = \sin\theta^* \approx 0.6736$（数值核对见 [@ex-dottie-rate-newton-rational]）。（同理，镜像算子 $-\cos\theta$ 在 $[-1, 0]$ 上以同一压缩率 $\sin 1 < 1$ 收敛于镜像方程 $\cos\theta = -\theta$ 的唯一实根 $-\theta^* \approx -0.7390851332\dots$。）
 2. **Dottie 数 $\theta^*$ 的超越性与非零代数读数残差 $|\cos q - q| > 0$（Lindemann–Weierstrass 定理）**：
    为什么 $\theta^*$ 不可能像黄金比 $\varphi = \frac{1+\sqrt{5}}{2}$ 那样是某个整系数多项式方程的代数根？假设存在非零代数数 $q \in \overline{\mathbb{Q}} \setminus \{0\}$ 满足 $\cos q = q$。由欧拉公式 $\cos q = \frac{e^{iq} + e^{-iq}}{2}$，记 $u = e^{iq}$，则 $\frac{u + u^{-1}}{2} = q$ 意味着 $u = e^{iq}$ 满足代数数系数二次方程
 
@@ -219,7 +219,7 @@ $$
 更进一步，在超越数论的最前沿，作者在手稿中曾追问：*“超越数之间的关系？$\pi$ 是 $\theta$ 的一个投影？$\theta$ 是终极超越数？”* 这一关于 Dottie 数 $\theta^*$ 与圆周率 $\pi$ 之间代数独立性的深刻追问，在现代超越数论中直接通向尚未解决的**沙努埃尔猜想（Schanuel's Conjecture）**。我们按第三层认识论规范（`OPEN`）将其记录如下。
 
 ::: {.conjecture #conj-schanuel-dottie title="沙努埃尔猜想在余弦不动点 θ* 与圆周率 π 上的代数无关性推论"}
-设沙努埃尔猜想成立（即对任意在 $\mathbb{Q}$ 上线性无关的复数 $z_1, \dots, z_m \in \mathbb{C}$，域扩张 $\mathbb{Q}(z_1, \dots, z_m, e^{z_1}, \dots, e^{z_m})$ 在 $\mathbb{Q}$ 上的超越次数至少为 $m$）。将其应用于线性无关的纯虚指数对 $z_1 = i\theta^*$ 与 $z_2 = i\pi$：由于 $e^{i\pi} = -1 \in \mathbb{Q}$，且 $u = e^{i\theta^*}$ 满足二次代数方程 $u^2 - 2\theta^* u + 1 = 0$（即 $e^{i\theta^*}$ 在 $\mathbb{Q}(\theta^*)$ 上是二次代数元，与 $\theta^*$ **代数相关**，添加 $e^{i\theta^*}$ 与 $i$ 不增加超越次数），域扩张 $\mathbb{Q}(i\theta^*, i\pi, e^{i\theta^*}, e^{i\pi}) \subseteq \overline{\mathbb{Q}(\theta^*, \pi)}$ 的超越次数至少为 $2$ 直接导出：**Dottie 余弦不动点 $\theta^*$ 与圆周率 $\pi$ 在有理数域 $\mathbb{Q}$ 上代数无关**（$\operatorname{tr.deg}_{\mathbb{Q}}\mathbb{Q}(\theta^*, \pi) = 2$）。
+设沙努埃尔猜想成立（即对任意在 $\mathbb{Q}$ 上线性无关的复数 $z_1, \dots, z_m \in \mathbb{C}$，域扩张 $\mathbb{Q}(z_1, \dots, z_m, e^{z_1}, \dots, e^{z_m})$ 在 $\mathbb{Q}$ 上的超越次数至少为 $m$）。将其应用于在 $\mathbb{Q}$ 上线性无关的纯虚指数对 $z_1 = i\theta^*$ 与 $z_2 = i\pi$（线性无关性即 $\theta^*/\pi \notin \mathbb{Q}$，无条件成立，见 [@rem-dottie-angle-incommensurable]）：由于 $e^{i\pi} = -1 \in \mathbb{Q}$，且 $u = e^{i\theta^*}$ 满足二次代数方程 $u^2 - 2\theta^* u + 1 = 0$（即 $e^{i\theta^*}$ 在 $\mathbb{Q}(\theta^*)$ 上是二次代数元，与 $\theta^*$ **代数相关**，添加 $e^{i\theta^*}$ 与 $i$ 不增加超越次数），域扩张 $\mathbb{Q}(i\theta^*, i\pi, e^{i\theta^*}, e^{i\pi}) \subseteq \overline{\mathbb{Q}(\theta^*, \pi)}$ 的超越次数至少为 $2$ 直接导出：**Dottie 余弦不动点 $\theta^*$ 与圆周率 $\pi$ 在有理数域 $\mathbb{Q}$ 上代数无关**（$\operatorname{tr.deg}_{\mathbb{Q}}\mathbb{Q}(\theta^*, \pi) = 2$）。
 
 （本条目为**尚未解决的开放猜想**，故依规不附加 `lean` 形式化属性。）
 :::
@@ -260,6 +260,132 @@ $$
 $$
 
 > 当尺子去量别物时，它叫算子 $\cos$，别物叫状态 $\theta$；当尺子回过头来丈量自己张开的角度，算子就是状态，状态就是算子——万里波涛，皆归 $\psi = \psi(\psi)$。
+
+## 24.5 把闭环算到底：真实收敛率、导数加速与有理读数的裂缝宽度 {#sec-ch24-5}
+
+格言说完了，现在把账算清。[@ex-dottie-and-golden-iterations] 的余弦表只列了四行，[@rem-banach-dottie-hairy-ball-literature] 给出的压缩常数 $\sin 1 \approx 0.8415$ 则是整个区间 $[0, 1]$ 上最坏的一处。三个问题还悬着：
+
+1. 靠近 $\theta^*$ 之后，每按一次余弦键，误差到底缩小多少？
+2. 如果尺子不只读投影 $\cos\theta$，还同时读正交分量 $\sin\theta$，闭合能快多少？
+3. 一把只有有限分母刻度的尺子，读数离 $\cos q = q$ 最近能到多近？
+
+**第一问：位置与收敛率落在同一个单位圆上。** 记误差 $\delta_k = \theta_k - \theta^*$，把 $\cos$ 在 $\theta^*$ 处展开，并用 $\cos\theta^* = \theta^*$ 消去零阶项：
+
+$$
+\delta_{k+1} \;=\; \cos(\theta^* + \delta_k) - \theta^* \;=\; -\sin\theta^*\,\delta_k \;-\; \frac{\theta^*}{2}\,\delta_k^2 \;+\; O(\delta_k^3).
+$$
+
+一阶系数的负号说明迭代点左右交替地夹住 $\theta^*$，这就是蛛网图上那条方形螺旋；它的模长
+
+$$
+\lambda \;=\; \lvert\cos'\theta^*\rvert \;=\; \sin\theta^* \;=\; \sqrt{1 - (\theta^*)^2} \;\approx\; 0.6736120292
+$$
+
+正是 [@ex-dottie-and-golden-iterations] 末行那块正交双矢量面积。于是不动点的**位置** $\theta^* = \cos\theta^*$ 与它的**渐近压缩率** $\lambda = \sin\theta^*$ 是同一根单位向量的两个分量：
+
+$$
+(\theta^*)^2 + \lambda^2 = 1.
+$$
+
+线分量告诉你闭环停在哪里，面分量告诉你闭环合拢得多快。每按一次余弦键，误差约乘以 $0.6736$，而不是全局界所说的 $0.8415$；每多一位十进制精度需要 $\ln 10 / \lvert\ln\lambda\rvert \approx 5.83$ 步，而不是 $\ln 10 / \lvert\ln\sin 1\rvert \approx 13.34$ 步。
+
+**第二问：让尺子同时读线与面。** Picard 迭代每一步只用到投影读数 $\cos\theta_k$。把方程写成 $F(\theta) = \theta - \cos\theta = 0$，牛顿迭代
+
+$$
+\theta_{k+1} \;=\; \theta_k - \frac{\theta_k - \cos\theta_k}{1 + \sin\theta_k}
+$$
+
+在每一步多读了一个量：正交分量 $\sin\theta_k$。由 $F'(\theta^*) = 1 + \sin\theta^* = 1 + \lambda$ 与 $F''(\theta^*) = \cos\theta^* = \theta^*$，误差递推从一次变成二次：
+
+$$
+\delta_{k+1} \;=\; \frac{\theta^*}{2\,(1 + \lambda)}\,\delta_k^2 + O(\delta_k^3), \qquad \frac{\theta^*}{2\,(1 + \lambda)} \approx 0.2208054 .
+$$
+
+Picard 迭代每步增加固定的位数，牛顿迭代每步把正确位数大约翻倍。
+
+**第三问：残差就是到不动点的距离。** 对 $q \in [0, 1]$，对 $F$ 用微分中值定理并注意 $F(\theta^*) = 0$：存在介于 $q$ 与 $\theta^*$ 之间的 $\xi$，使
+
+$$
+\cos q - q \;=\; -\bigl(F(q) - F(\theta^*)\bigr) \;=\; -(1 + \sin\xi)\,(q - \theta^*).
+$$
+
+因 $\xi \in [0, 1]$ 时 $1 \le 1 + \sin\xi \le 1 + \sin 1$，得到双边界
+
+$$
+\lvert q - \theta^*\rvert \;\le\; \lvert\cos q - q\rvert \;\le\; (1 + \sin 1)\,\lvert q - \theta^*\rvert, \qquad 1 + \sin 1 \approx 1.8414710,
+$$
+
+且当 $q \to \theta^*$ 时比值 $\lvert\cos q - q\rvert / \lvert q - \theta^*\rvert$ 趋于 $1 + \sin\theta^* = 1 + \lambda \approx 1.6736120$。所以“有限精度读数的残差能有多小”与“有理数能把 $\theta^*$ 逼近到多近”是同一个问题，后者由 $\theta^*$ 的连分数回答。$\theta^*$ 是无理数（[@rem-banach-dottie-hairy-ball-literature] 第 2 条），它的每一个渐近分数 $a/b$ 都满足 $\lvert\theta^* - a/b\rvert < 1/b^2$，从而
+
+$$
+0 \;<\; \Bigl\lvert\cos\frac{a}{b} - \frac{a}{b}\Bigr\rvert \;<\; \frac{1 + \sin 1}{b^2}
+$$
+
+对无穷多个分母 $b$ 成立：裂缝可以按分母的平方收窄，却永不为零。
+
+::: {.example #ex-dottie-rate-newton-rational title="真实压缩率、牛顿二次闭合与最佳有理读数残差的数值核对"}
+以下数值均以 50 位十进制精度复算后截断；连分数的部分商是数值观察，不是定理。
+
+**相邻误差之比趋于 $-\sin\theta^*$。** 从 $\theta_0 = 1$ 出发，记 $\delta_k = \theta_k - \theta^*$：
+
+| $k$ | $\theta_k$ | $\delta_k$ | $\delta_{k+1}/\delta_k$ | 二阶预测 $-\lambda - \frac{\theta^*}{2}\delta_k$ |
+| :---: | :---: | :---: | :---: | :---: |
+| $0$ | $1.0000000000$ | $+0.2609149$ | $-0.761869$ | $-0.770031$ |
+| $1$ | $0.5403023059$ | $-0.1987828$ | $-0.595967$ | $-0.600153$ |
+| $2$ | $0.8575532158$ | $+0.1184681$ | $-0.715765$ | $-0.717391$ |
+| $3$ | $0.6542897905$ | $-0.0847953$ | $-0.641488$ | $-0.642277$ |
+| $4$ | $0.7934803587$ | $+0.0543952$ | $-0.693376$ | $-0.693713$ |
+| $8$ | $0.7504177618$ | $+0.0113326$ | $-0.677785$ | $-0.677800$ |
+| $12$ | $0.7414250866$ | $+0.0023400$ | $-0.674476$ | $-0.674477$ |
+| $20$ | $0.7391843998$ | $+0.0000993$ | $-0.673649$ | $-0.673649$ |
+
+比值在极限 $-\lambda \approx -0.673612$ 两侧交替摆动，摆幅由二阶项给出。实际计数：$\lvert\delta_k\rvert$ 首次小于 $10^{-10}$ 是在 $k = 55$，首次小于 $10^{-15}$ 是在 $k = 85$。
+
+**牛顿迭代。** 同一初值 $\theta_0 = 1$：
+
+| $k$ | $\theta_k$ | $\lvert\delta_k\rvert$ | $\lvert\delta_{k+1}\rvert / \delta_k^2$ |
+| :---: | :---: | :---: | :---: |
+| $0$ | $1.000000000000000000000$ | $2.61\times10^{-1}$ | $0.165677$ |
+| $1$ | $0.750363867840243893035$ | $1.13\times10^{-2}$ | $0.218204$ |
+| $2$ | $0.739112890911361670361$ | $2.78\times10^{-5}$ | $0.220799$ |
+| $3$ | $0.739085133385283969760$ | $1.70\times10^{-10}$ | $0.220805$ |
+| $4$ | $0.739085133215160641662$ | $6.39\times10^{-21}$ | $0.220805$ |
+
+第 $3$ 步的精度 Picard 迭代要到第 $54$ 步才达到，第 $4$ 步的精度要到第 $115$ 步。
+
+**最佳有理读数。** $\theta^* = [0; 1, 2, 1, 4, 1, 40, 1, 9, 4, 2, 1, \dots]$，渐近分数 $a/b$ 及其残差：
+
+| $a/b$ | 小数值 | $\lvert a/b - \theta^*\rvert$ | 残差 $\lvert\cos(a/b) - a/b\rvert$ | $b^2 \times$ 残差 |
+| :---: | :---: | :---: | :---: | :---: |
+| $2/3$ | $0.6666666667$ | $7.24\times10^{-2}$ | $1.19\times10^{-1}$ | $1.07$ |
+| $3/4$ | $0.7500000000$ | $1.09\times10^{-2}$ | $1.83\times10^{-2}$ | $0.293$ |
+| $14/19$ | $0.7368421053$ | $2.24\times10^{-3}$ | $3.75\times10^{-3}$ | $1.35$ |
+| $17/23$ | $0.7391304348$ | $4.53\times10^{-5}$ | $7.58\times10^{-5}$ | $0.0401$ |
+| $694/939$ | $0.7390841321$ | $1.00\times10^{-6}$ | $1.68\times10^{-6}$ | $1.48$ |
+| $711/962$ | $0.7390852391$ | $1.06\times10^{-7}$ | $1.77\times10^{-7}$ | $0.164$ |
+| $7093/9597$ | $0.7390851308$ | $2.45\times10^{-9}$ | $4.09\times10^{-9}$ | $0.377$ |
+
+末列全部小于 $1 + \sin 1 \approx 1.84$，与上面的上界一致。部分商 $40$ 异常地大，使 $17/23$ 成为格外好的读数：穷举表明，分母小于 $502$ 的任何分数都不比它更接近 $\theta^*$，第一个超过它的是 $371/502$。一把十进制千分尺读出的 $739/1000$ 残差为 $1.42\times10^{-4}$，接近 $17/23$ 的两倍。
+:::
+
+[@ex-dottie-rate-newton-rational] 的最后一张表说明：把刻度加密并不自动换来更好的读数。决定裂缝宽度的不是分母有多大，而是分母与 $\theta^*$ 之间的算术关系；二十三等分的尺子在第十七格上碰巧几乎对准，而一千等分的尺子没有。
+
+有理读数永远对不准，那么换一种闭合方式——不让投影回到自己，而让旋转回到起点——行不行？答案同样是否定的，而且这一次不需要任何猜想。
+
+::: {.remark #rem-dottie-angle-incommensurable title="θ* 与 π 不可公度：以不动点为转角的旋转永不闭合（文献结果的推论，未在本书形式化）"}
+**文献结果的推论，未在本书形式化。** [@conj-schanuel-dottie] 所用的前提“$i\theta^*$ 与 $i\pi$ 在 $\mathbb{Q}$ 上线性无关”等价于 $\theta^*/\pi \notin \mathbb{Q}$。这一点不依赖任何猜想：
+
+设 $\theta^* = \frac{m}{n}\pi$，其中 $m, n$ 为整数且 $n \ge 1$。令 $\zeta = e^{i m\pi/n}$，则 $\zeta^{2n} = 1$，$\zeta$ 是单位根，因而是代数数；于是 $\cos\frac{m\pi}{n} = \frac{\zeta + \zeta^{-1}}{2}$ 也是代数数。但 $\cos\theta^* = \theta^*$，这将使 $\theta^*$ 成为代数数，与 [@rem-banach-dottie-hairy-ball-literature] 第 2 条由林德曼—魏尔斯特拉斯定理得到的超越性矛盾。故 $\theta^*/\pi$ 是无理数（数值上 $\theta^*/\pi \approx 0.2352581$，即 $\theta^* \approx 42.3465^\circ$）。
+
+由此得到两条推论：
+
+1. **旋转的阶数无穷。** 以 $\theta^*$ 为转角的平面旋转 $R(\theta^*)$ 对一切整数 $n \ge 1$ 满足 $R(\theta^*)^n \ne \mathrm{id}$，因为 $R(\theta^*)^n = \mathrm{id}$ 当且仅当 $n\theta^* \in 2\pi\mathbb{Z}$。相应地，单位旋转器 $U(\theta^*) = \cos(\theta^*/2) - \hat{I}\sin(\theta^*/2)$ 的任何正整数次幂都不等于 $\pm 1$。
+2. **轨道稠密且等分布。** 由 Kronecker 定理与 Weyl 等分布定理，点列 $\{n\theta^* \bmod 2\pi\}_{n \ge 0}$ 在圆周上稠密且等分布。
+
+$\theta^*/\pi$ 是否为超越数，上述论证不能回答；在沙努埃尔猜想之下它成立，因为它可由 [@conj-schanuel-dottie] 的结论（$\theta^*$ 与 $\pi$ 代数无关）推出。
+:::
+
+把两件事并排放：余弦投影在 $\theta^*$ 处一步闭合（$\cos\theta^* = \theta^*$），以 $\theta^*$ 为步长的旋转却永不回到起点。同一个角度，在投影上是不动点，在旋转上是一条开口螺旋。
 
 ---
 

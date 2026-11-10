@@ -191,7 +191,7 @@ The following literature note synthesizes Banach's contraction principle on $[0,
    |\cos x - \cos y| \;\le\; (\sin 1)\,|x - y|, \qquad \sin 1 \approx 0.84147098 < 1.
    $$
 
-   By Banach's contraction theorem on the complete metric space $[0, 1]$, $\cos$ has a **unique real fixed point** $\theta^* \approx 0.73908513321516\dots$ (the Dottie root), and Picard iteration $\theta_{k+1} = \cos\theta_k$ converges geometrically to $\theta^*$ from every real initial seed $\theta_0 \in \mathbb{R}$. (Symmetrically, the mirror equation $\cos\theta = -\theta$ has unique real root $-\theta^* \approx -0.7390851332\dots$.)
+   By Banach's contraction theorem on the complete metric space $[0, 1]$, $\cos$ has a **unique real fixed point** $\theta^* \approx 0.73908513321516\dots$ (the Dottie root), and Picard iteration $\theta_{k+1} = \cos\theta_k$ converges geometrically to $\theta^*$ from every real initial seed $\theta_0 \in \mathbb{R}$. Here $\sin 1$ is the worst-case constant over the whole interval; the asymptotic contraction rate at the fixed point is $\lvert\cos'\theta^*\rvert = \sin\theta^* \approx 0.6736$ (checked numerically in [@ex-dottie-rate-newton-rational]). (Symmetrically, the mirror equation $\cos\theta = -\theta$ has unique real root $-\theta^* \approx -0.7390851332\dots$.)
 2. **Transcendence of $\theta^*$ and the nonzero algebraic residual $|\cos q - q| > 0$ (Lindemann–Weierstrass theorem)**:
    Suppose a nonzero algebraic number $q \in \overline{\mathbb{Q}} \setminus \{0\}$ satisfied $\cos q = q$. Writing $\cos q = \frac{e^{iq} + e^{-iq}}{2}$ and setting $u = e^{iq}$ yields the quadratic equation
 
@@ -217,7 +217,7 @@ The following literature note synthesizes Banach's contraction principle on $[0,
 Pushing one step further into transcendental number theory, the author's foundational notes ask: *"What are the relations among transcendental numbers? Is $\pi$ a projection of $\theta$? Is $\theta$ the ultimate transcendental number?"* In modern number theory, the algebraic independence of $\theta^*$ and $\pi$ is governed by **Schanuel's Conjecture**, which we record as an open conjecture (`OPEN`, carrying no `lean` attribute).
 
 ::: {.conjecture #conj-schanuel-dottie title="Schanuel's Conjecture Applied to the Algebraic Independence of θ* and π"}
-Assuming Schanuel's conjecture (for any $\mathbb{Q}$-linearly independent complex numbers $z_1, \dots, z_m \in \mathbb{C}$, the field extension $\mathbb{Q}(z_1, \dots, z_m, e^{z_1}, \dots, e^{z_m})$ has transcendence degree at least $m$ over $\mathbb{Q}$), applying it to the $\mathbb{Q}$-linearly independent purely imaginary exponents $z_1 = i\theta^*$ and $z_2 = i\pi$ — where $e^{i\pi} = -1 \in \mathbb{Q}$ and $u = e^{i\theta^*}$ satisfies the quadratic relation $u^2 - 2\theta^* u + 1 = 0$ (so $e^{i\theta^*}$ is algebraic of degree $2$ over $\mathbb{Q}(\theta^*)$ and **algebraically dependent** on $\theta^*$, contributing $0$ additional transcendence degree over $\mathbb{Q}(\theta^*)$) — implies that $\mathbb{Q}(i\theta^*, i\pi, e^{i\theta^*}, e^{i\pi}) \subseteq \overline{\mathbb{Q}(\theta^*, \pi)}$ has transcendence degree at least $2$ over $\mathbb{Q}$, and hence that **the Dottie constant $\theta^*$ and $\pi$ are algebraically independent over $\mathbb{Q}$** ($\operatorname{tr.deg}_{\mathbb{Q}}\mathbb{Q}(\theta^*, \pi) = 2$).
+Assuming Schanuel's conjecture (for any $\mathbb{Q}$-linearly independent complex numbers $z_1, \dots, z_m \in \mathbb{C}$, the field extension $\mathbb{Q}(z_1, \dots, z_m, e^{z_1}, \dots, e^{z_m})$ has transcendence degree at least $m$ over $\mathbb{Q}$), applying it to the $\mathbb{Q}$-linearly independent purely imaginary exponents $z_1 = i\theta^*$ and $z_2 = i\pi$ (linear independence is the statement $\theta^*/\pi \notin \mathbb{Q}$, which holds unconditionally; see [@rem-dottie-angle-incommensurable]) — where $e^{i\pi} = -1 \in \mathbb{Q}$ and $u = e^{i\theta^*}$ satisfies the quadratic relation $u^2 - 2\theta^* u + 1 = 0$ (so $e^{i\theta^*}$ is algebraic of degree $2$ over $\mathbb{Q}(\theta^*)$ and **algebraically dependent** on $\theta^*$, contributing $0$ additional transcendence degree over $\mathbb{Q}(\theta^*)$) — implies that $\mathbb{Q}(i\theta^*, i\pi, e^{i\theta^*}, e^{i\pi}) \subseteq \overline{\mathbb{Q}(\theta^*, \pi)}$ has transcendence degree at least $2$ over $\mathbb{Q}$, and hence that **the Dottie constant $\theta^*$ and $\pi$ are algebraically independent over $\mathbb{Q}$** ($\operatorname{tr.deg}_{\mathbb{Q}}\mathbb{Q}(\theta^*, \pi) = 2$).
 
 *(This statement is **OPEN**; the block intentionally carries no `lean` attribute.)*
 :::
@@ -258,6 +258,132 @@ $$
 $$
 
 > When the ruler measures another, it is called the operator $\cos$ and the other is called the state $\theta$; when the ruler turns back to measure the angle it opens itself, operator and state become one: $\psi = \psi(\psi)$.
+
+## 24.5 Carrying the Loop Through: True Convergence Rate, Derivative Speed-Up, and the Width of the Rational Seam {#sec-ch24-5}
+
+The aphorism is stated; now let us do the arithmetic. The cosine table in [@ex-dottie-and-golden-iterations] lists only four rows, and the contraction constant $\sin 1 \approx 0.8415$ of [@rem-banach-dottie-hairy-ball-literature] is the worst case over the whole interval $[0, 1]$. Three questions are still open:
+
+1. Close to $\theta^*$, by how much does one press of the cosine key actually shrink the error?
+2. If the ruler reads not only the projection $\cos\theta$ but also the orthogonal component $\sin\theta$, how much faster does the loop close?
+3. How close to $\cos q = q$ can a ruler with finitely many rational tick marks get?
+
+**First question: position and rate lie on one unit circle.** Write the error as $\delta_k = \theta_k - \theta^*$, expand $\cos$ about $\theta^*$, and cancel the zeroth-order term with $\cos\theta^* = \theta^*$:
+
+$$
+\delta_{k+1} \;=\; \cos(\theta^* + \delta_k) - \theta^* \;=\; -\sin\theta^*\,\delta_k \;-\; \frac{\theta^*}{2}\,\delta_k^2 \;+\; O(\delta_k^3).
+$$
+
+The minus sign of the linear coefficient says that the iterates straddle $\theta^*$ alternately from the right and from the left, which is the square spiral of the cobweb diagram. Its modulus
+
+$$
+\lambda \;=\; \lvert\cos'\theta^*\rvert \;=\; \sin\theta^* \;=\; \sqrt{1 - (\theta^*)^2} \;\approx\; 0.6736120292
+$$
+
+is exactly the orthogonal bivector area in the last line of [@ex-dottie-and-golden-iterations]. The **position** $\theta^* = \cos\theta^*$ of the fixed point and its **asymptotic contraction rate** $\lambda = \sin\theta^*$ are therefore the two components of a single unit vector:
+
+$$
+(\theta^*)^2 + \lambda^2 = 1.
+$$
+
+The line component says where the loop comes to rest; the area component says how fast it closes. Each press of the cosine key multiplies the error by about $0.6736$, not by the global bound $0.8415$; each further decimal digit costs $\ln 10 / \lvert\ln\lambda\rvert \approx 5.83$ steps, not $\ln 10 / \lvert\ln\sin 1\rvert \approx 13.34$.
+
+**Second question: let the ruler read both line and area.** Picard iteration uses only the projection reading $\cos\theta_k$ at each step. Writing the equation as $F(\theta) = \theta - \cos\theta = 0$, Newton's iteration
+
+$$
+\theta_{k+1} \;=\; \theta_k - \frac{\theta_k - \cos\theta_k}{1 + \sin\theta_k}
+$$
+
+reads one more quantity per step: the orthogonal component $\sin\theta_k$. Since $F'(\theta^*) = 1 + \sin\theta^* = 1 + \lambda$ and $F''(\theta^*) = \cos\theta^* = \theta^*$, the error recursion turns from linear into quadratic:
+
+$$
+\delta_{k+1} \;=\; \frac{\theta^*}{2\,(1 + \lambda)}\,\delta_k^2 + O(\delta_k^3), \qquad \frac{\theta^*}{2\,(1 + \lambda)} \approx 0.2208054 .
+$$
+
+Picard iteration adds a fixed number of digits per step; Newton's iteration roughly doubles the number of correct digits per step.
+
+**Third question: the residual is the distance to the fixed point.** For $q \in [0, 1]$, apply the mean value theorem to $F$ and use $F(\theta^*) = 0$: there is some $\xi$ between $q$ and $\theta^*$ with
+
+$$
+\cos q - q \;=\; -\bigl(F(q) - F(\theta^*)\bigr) \;=\; -(1 + \sin\xi)\,(q - \theta^*).
+$$
+
+Because $1 \le 1 + \sin\xi \le 1 + \sin 1$ for $\xi \in [0, 1]$, we obtain the two-sided bound
+
+$$
+\lvert q - \theta^*\rvert \;\le\; \lvert\cos q - q\rvert \;\le\; (1 + \sin 1)\,\lvert q - \theta^*\rvert, \qquad 1 + \sin 1 \approx 1.8414710,
+$$
+
+and the ratio $\lvert\cos q - q\rvert / \lvert q - \theta^*\rvert$ tends to $1 + \sin\theta^* = 1 + \lambda \approx 1.6736120$ as $q \to \theta^*$. So "how small can the residual of a finite-precision reading be" and "how well can rationals approximate $\theta^*$" are the same question, and the second is answered by the continued fraction of $\theta^*$. Since $\theta^*$ is irrational (item 2 of [@rem-banach-dottie-hairy-ball-literature]), every one of its convergents $a/b$ satisfies $\lvert\theta^* - a/b\rvert < 1/b^2$, and hence
+
+$$
+0 \;<\; \Bigl\lvert\cos\frac{a}{b} - \frac{a}{b}\Bigr\rvert \;<\; \frac{1 + \sin 1}{b^2}
+$$
+
+holds for infinitely many denominators $b$: the seam narrows like the square of the denominator, yet never closes.
+
+::: {.example #ex-dottie-rate-newton-rational title="Numerical Check of the True Contraction Rate, Newton's Quadratic Closure, and the Residuals of the Best Rational Readings"}
+All values below were recomputed at 50 decimal digits and then truncated; the partial quotients of the continued fraction are numerical observations, not theorems.
+
+**Successive error ratios tend to $-\sin\theta^*$.** Starting from $\theta_0 = 1$, with $\delta_k = \theta_k - \theta^*$:
+
+| $k$ | $\theta_k$ | $\delta_k$ | $\delta_{k+1}/\delta_k$ | second-order prediction $-\lambda - \frac{\theta^*}{2}\delta_k$ |
+| :---: | :---: | :---: | :---: | :---: |
+| $0$ | $1.0000000000$ | $+0.2609149$ | $-0.761869$ | $-0.770031$ |
+| $1$ | $0.5403023059$ | $-0.1987828$ | $-0.595967$ | $-0.600153$ |
+| $2$ | $0.8575532158$ | $+0.1184681$ | $-0.715765$ | $-0.717391$ |
+| $3$ | $0.6542897905$ | $-0.0847953$ | $-0.641488$ | $-0.642277$ |
+| $4$ | $0.7934803587$ | $+0.0543952$ | $-0.693376$ | $-0.693713$ |
+| $8$ | $0.7504177618$ | $+0.0113326$ | $-0.677785$ | $-0.677800$ |
+| $12$ | $0.7414250866$ | $+0.0023400$ | $-0.674476$ | $-0.674477$ |
+| $20$ | $0.7391843998$ | $+0.0000993$ | $-0.673649$ | $-0.673649$ |
+
+The ratios oscillate on either side of the limit $-\lambda \approx -0.673612$, with an amplitude given by the second-order term. Actual counts: $\lvert\delta_k\rvert$ first drops below $10^{-10}$ at $k = 55$ and below $10^{-15}$ at $k = 85$.
+
+**Newton's iteration.** Same seed $\theta_0 = 1$:
+
+| $k$ | $\theta_k$ | $\lvert\delta_k\rvert$ | $\lvert\delta_{k+1}\rvert / \delta_k^2$ |
+| :---: | :---: | :---: | :---: |
+| $0$ | $1.000000000000000000000$ | $2.61\times10^{-1}$ | $0.165677$ |
+| $1$ | $0.750363867840243893035$ | $1.13\times10^{-2}$ | $0.218204$ |
+| $2$ | $0.739112890911361670361$ | $2.78\times10^{-5}$ | $0.220799$ |
+| $3$ | $0.739085133385283969760$ | $1.70\times10^{-10}$ | $0.220805$ |
+| $4$ | $0.739085133215160641662$ | $6.39\times10^{-21}$ | $0.220805$ |
+
+Picard iteration needs $54$ steps to match the accuracy of Newton's step $3$, and $115$ steps to match step $4$.
+
+**Best rational readings.** $\theta^* = [0; 1, 2, 1, 4, 1, 40, 1, 9, 4, 2, 1, \dots]$; the convergents $a/b$ and their residuals are:
+
+| $a/b$ | decimal value | $\lvert a/b - \theta^*\rvert$ | residual $\lvert\cos(a/b) - a/b\rvert$ | $b^2 \times$ residual |
+| :---: | :---: | :---: | :---: | :---: |
+| $2/3$ | $0.6666666667$ | $7.24\times10^{-2}$ | $1.19\times10^{-1}$ | $1.07$ |
+| $3/4$ | $0.7500000000$ | $1.09\times10^{-2}$ | $1.83\times10^{-2}$ | $0.293$ |
+| $14/19$ | $0.7368421053$ | $2.24\times10^{-3}$ | $3.75\times10^{-3}$ | $1.35$ |
+| $17/23$ | $0.7391304348$ | $4.53\times10^{-5}$ | $7.58\times10^{-5}$ | $0.0401$ |
+| $694/939$ | $0.7390841321$ | $1.00\times10^{-6}$ | $1.68\times10^{-6}$ | $1.48$ |
+| $711/962$ | $0.7390852391$ | $1.06\times10^{-7}$ | $1.77\times10^{-7}$ | $0.164$ |
+| $7093/9597$ | $0.7390851308$ | $2.45\times10^{-9}$ | $4.09\times10^{-9}$ | $0.377$ |
+
+Every entry of the last column is below $1 + \sin 1 \approx 1.84$, in agreement with the upper bound above. The unusually large partial quotient $40$ makes $17/23$ an exceptionally good reading: an exhaustive search shows that no fraction with denominator below $502$ is closer to $\theta^*$, and the first one to beat it is $371/502$. The reading $739/1000$ of a three-decimal ruler leaves a residual of $1.42\times10^{-4}$, nearly twice that of $17/23$.
+:::
+
+The last table of [@ex-dottie-rate-newton-rational] shows that refining the tick marks does not automatically buy a better reading. What sets the width of the seam is not the size of the denominator but its arithmetic relation to $\theta^*$: a ruler with twenty-three divisions happens to line up almost exactly at its seventeenth mark, and a ruler with a thousand divisions does not.
+
+Rational readings never line up. What about a different kind of closure: instead of asking the projection to return to itself, ask a rotation to return to its starting point? The answer is again no, and this time no conjecture is needed.
+
+::: {.remark #rem-dottie-angle-incommensurable title="θ* and π Are Incommensurable: Rotation by the Fixed-Point Angle Never Closes (Corollary of a Literature Result, Not Formalized in This Book)"}
+**Corollary of a literature result, not formalized in this book.** The hypothesis used in [@conj-schanuel-dottie], that $i\theta^*$ and $i\pi$ are linearly independent over $\mathbb{Q}$, is equivalent to $\theta^*/\pi \notin \mathbb{Q}$. This holds without any conjecture:
+
+Suppose $\theta^* = \frac{m}{n}\pi$ with integers $m, n$ and $n \ge 1$. Put $\zeta = e^{i m\pi/n}$. Then $\zeta^{2n} = 1$, so $\zeta$ is a root of unity and hence algebraic, and therefore $\cos\frac{m\pi}{n} = \frac{\zeta + \zeta^{-1}}{2}$ is algebraic as well. But $\cos\theta^* = \theta^*$, so $\theta^*$ would be algebraic, contradicting the transcendence obtained from the Lindemann–Weierstrass theorem in item 2 of [@rem-banach-dottie-hairy-ball-literature]. Hence $\theta^*/\pi$ is irrational (numerically $\theta^*/\pi \approx 0.2352581$, that is, $\theta^* \approx 42.3465^\circ$).
+
+Two consequences follow:
+
+1. **The rotation has infinite order.** The plane rotation $R(\theta^*)$ by the angle $\theta^*$ satisfies $R(\theta^*)^n \ne \mathrm{id}$ for every integer $n \ge 1$, because $R(\theta^*)^n = \mathrm{id}$ if and only if $n\theta^* \in 2\pi\mathbb{Z}$. Correspondingly, no positive integer power of the unit rotor $U(\theta^*) = \cos(\theta^*/2) - \hat{I}\sin(\theta^*/2)$ equals $\pm 1$.
+2. **The orbit is dense and equidistributed.** By Kronecker's theorem and Weyl's equidistribution theorem, the sequence $\{n\theta^* \bmod 2\pi\}_{n \ge 0}$ is dense and equidistributed on the circle.
+
+Whether $\theta^*/\pi$ is transcendental is not settled by this argument; it holds under Schanuel's conjecture, since it follows from the conclusion of [@conj-schanuel-dottie] (algebraic independence of $\theta^*$ and $\pi$).
+:::
+
+Put the two facts side by side: the cosine projection closes in one step at $\theta^*$ ($\cos\theta^* = \theta^*$), while the rotation with step $\theta^*$ never returns to its starting point. The same angle is a fixed point for projection and an open helix for rotation.
 
 ---
 
