@@ -493,6 +493,38 @@
       "line": 45,
       "signature": "theorem pentagon_golden_cosines : 2 * Real.cos (Real.pi / 5) = Real.goldenRatio ∧ 2 * Real.cos (2 * Real.pi / 5) = Real.goldenRatio⁻¹ ∧ 2 * Real.cos (Real.pi / 5) + 2 * Real.cos (2 * Real.pi / 5) = Real.sqrt 5 ∧ Irrational (2 * Real.cos (2 * Real.pi / 5))"
     },
+    "D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance": {
+      "module": "D5/S3/DivergenceSupport/LandauerBound",
+      "name": "D5.S3.DivergenceSupport.LandauerBound.landauer_bound_of_balance",
+      "kind": "theorem",
+      "statement_id": "sha256:f2f09673ac43e7b8285f1ee4d461acd081e02b0ca4b122f329b935e4cc4f0165",
+      "line": 14,
+      "signature": "theorem landauer_bound_of_balance (beta heat entropyChange mutualInfo divergence : ℝ) (hbalance : beta * heat = -entropyChange + mutualInfo + divergence) (hmutualInfo : 0 ≤ mutualInfo) (hdivergence : 0 ≤ divergence) : -entropyChange ≤ beta * heat"
+    },
+    "D5/S3/DivergenceSupport/LandauerIdentity.landauer_identity_from_balances": {
+      "module": "D5/S3/DivergenceSupport/LandauerIdentity",
+      "name": "D5.S3.DivergenceSupport.LandauerIdentity.landauer_identity_from_balances",
+      "kind": "theorem",
+      "statement_id": "sha256:e5cd8297d133a460110e113875999a9abc59a005e4b478921f9d80017686a118",
+      "line": 23,
+      "signature": "theorem landauer_identity_from_balances (beta heat systemEntropyChange reservoirEntropyChange mutualInformation reservoirDivergence : Real) (hReservoir : beta * heat = reservoirEntropyChange + reservoirDivergence) (hUnitary : mutualInformation = systemEntropyChange + reservoirEntropyChange) : beta * heat = -systemEntropyChange + mutualInformation + reservoirDivergence"
+    },
+    "D5/S3/DivergenceSupport/LandauerSaturation.landauer_saturation_iff": {
+      "module": "D5/S3/DivergenceSupport/LandauerSaturation",
+      "name": "D5.S3.DivergenceSupport.LandauerSaturation.landauer_saturation_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:21cfbcef33510168535c20f012b8dedf1af2c2703064bedec1e4717ddfffc433",
+      "line": 60,
+      "signature": "theorem landauer_saturation_iff (beta heat entropyChange mutualInfo divergence : Real) (hbalance : beta * heat = -entropyChange + mutualInfo + divergence) (hmutualInfo : 0 <= mutualInfo) (hdivergence : 0 <= divergence) : -entropyChange = beta * heat ↔ mutualInfo = 0 ∧ divergence = 0"
+    },
+    "D5/S3/DivergenceSupport/LandauerSaturation.landauer_strict_iff": {
+      "module": "D5/S3/DivergenceSupport/LandauerSaturation",
+      "name": "D5.S3.DivergenceSupport.LandauerSaturation.landauer_strict_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:21cfbcef33510168535c20f012b8dedf1af2c2703064bedec1e4717ddfffc433",
+      "line": 73,
+      "signature": "theorem landauer_strict_iff (beta heat entropyChange mutualInfo divergence : Real) (hbalance : beta * heat = -entropyChange + mutualInfo + divergence) (hmutualInfo : 0 <= mutualInfo) (hdivergence : 0 <= divergence) : -entropyChange < beta * heat ↔ 0 < mutualInfo + divergence"
+    },
     "D5/S3/Fourier/FinitePoisson.finite_poisson_summation": {
       "module": "D5/S3/Fourier/FinitePoisson",
       "name": "D5.S3.Fourier.FinitePoisson.finite_poisson_summation",

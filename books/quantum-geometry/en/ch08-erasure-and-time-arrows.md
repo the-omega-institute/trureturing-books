@@ -114,6 +114,80 @@ Follow a single qubit starting at the pure north pole $\rho_0 = \lvert 0\rangle\
    $$
 :::
 
+Stage B of [@ex-landauer-one-bit-ledger] quoted the inequality $\beta\Delta Q_{\mathrm{bath}} \ge \Delta S_S$ directly. That inequality is not obtained in one step; behind it stands a ledger of three lines. The first two lines are physical inputs, and the third is the conclusion drawn from them:
+
+- **Reservoir balance**: the heat absorbed by the reservoir (times the inverse temperature) equals the entropy change of the reservoir plus the relative entropy by which the reservoir is pushed out of equilibrium, $\beta Q = \Delta S_{\mathrm{res}} + D$;
+- **Unitary balance**: system and reservoir start uncorrelated and evolve jointly by a unitary, so the final mutual information equals the sum of the two entropy changes, $I = \Delta S_{\mathrm{sys}} + \Delta S_{\mathrm{res}}$;
+- **Conclusion**: eliminating $\Delta S_{\mathrm{res}}$ gives $\beta Q = -\Delta S_{\mathrm{sys}} + I + D$.
+
+Here $\Delta S_{\mathrm{sys}}$ is the **change** of the system entropy (final minus initial), so it is negative in an erasure, and $-\Delta S_{\mathrm{sys}}$ is the entropy decrease $\Delta S_S$ of [@ex-landauer-one-bit-ledger]. The first two lines are statements about density matrices and are literature results (see [@rem-landauer-thermodynamic-bridge-literature]). The reasoning that leads from the first two lines to the third, and on to the lower bound and its equality condition, is frozen in Lean.
+
+::: {.proposition #prop-landauer-identity-from-balances title="The Heat–Entropy–Information Identity from the Reservoir and Unitary Balances" lean="D5/S3/DivergenceSupport/LandauerIdentity.landauer_identity_from_balances"}
+Let $\beta$, $Q$, $\Delta S_{\mathrm{sys}}$, $\Delta S_{\mathrm{res}}$, $I$, $D$ be real numbers (in Lean, in this order: `beta`, `heat`, `systemEntropyChange`, `reservoirEntropyChange`, `mutualInformation`, `reservoirDivergence`). If
+
+1. **Reservoir balance (`hReservoir`)**: $\beta\,Q = \Delta S_{\mathrm{res}} + D$;
+2. **Unitary balance (`hUnitary`)**: $I = \Delta S_{\mathrm{sys}} + \Delta S_{\mathrm{res}}$;
+
+then
+
+$$
+\beta\,Q \;=\; -\Delta S_{\mathrm{sys}} + I + D .
+$$
+:::
+
+::: proof
+Solve `hUnitary` for $\Delta S_{\mathrm{res}} = I - \Delta S_{\mathrm{sys}}$ and substitute into `hReservoir`; in Lean this is done by linear arithmetic (`linarith`). The source file also contains two counterexamples showing that the conclusion can fail when either hypothesis is dropped. The full proof is checked by the Lean kernel.
+:::
+
+::: {.corollary #cor-landauer-bound-saturation title="The Landauer Lower Bound with Its Criteria for Equality and Strictness" lean="D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance D5/S3/DivergenceSupport/LandauerSaturation.landauer_saturation_iff D5/S3/DivergenceSupport/LandauerSaturation.landauer_strict_iff"}
+Let $\beta$, $Q$, $\Delta S$, $I$, $D$ be real numbers (in Lean, in this order: `beta`, `heat`, `entropyChange`, `mutualInfo`, `divergence`) satisfying
+
+- **Balance (`hbalance`)**: $\beta\,Q = -\Delta S + I + D$;
+- **Nonnegativity (`hmutualInfo`, `hdivergence`)**: $0 \le I$ and $0 \le D$.
+
+Then all three of the following hold:
+
+1. **Lower bound**: $-\Delta S \le \beta\,Q$;
+2. **Criterion for equality**: $-\Delta S = \beta\,Q$ if and only if $I = 0$ and $D = 0$;
+3. **Criterion for strictness**: $-\Delta S < \beta\,Q$ if and only if $0 < I + D$.
+:::
+
+::: proof
+The balance says that the slack $\beta Q - (-\Delta S)$ equals $I + D$ exactly (`landauer_slack_of_balance`). Both terms are nonnegative, so the slack is nonnegative, which is claim 1 (`landauer_bound_of_balance`). The slack vanishes if and only if $I + D = 0$; when both terms are nonnegative this is equivalent to $I = 0$ and $D = 0$ (`add_eq_zero_iff_of_nonneg`), which is claim 2 (`landauer_saturation_iff`). Claim 3 combines claim 1 with "the slack is nonzero" (`landauer_strict_iff`). The full proof is checked by the Lean kernel.
+:::
+
+[@prop-landauer-identity-from-balances] and [@cor-landauer-bound-saturation] are statements about real numbers only: they do not know that $Q$ is heat or that $I$ is mutual information. What they guarantee is that the bookkeeping itself cannot go wrong: whenever the two balances hold and the two remainders are nonnegative, the lower bound and the equality condition follow. The step that replaces the letters by physical quantities is still carried by the literature.
+
+When does the Landauer bound fail to be attained? Claim 2 of [@cor-landauer-bound-saturation] gives the criterion: either correlations are left between system and reservoir ($I > 0$), or the reservoir has been pushed out of equilibrium ($D > 0$). Let us run the ledger once with the smallest reservoir one can think of.
+
+::: {.example #ex-one-qubit-reservoir-swap-erasure title="Erasing with a Single Reservoir Qubit: The Excess Heat of a Finite Reservoir"}
+The two balances in this example are literature results at the level of density matrices (not formalized in this book); every number is computed directly from the definitions and cross-checked against the identity of [@prop-landauer-identity-from-balances]. Entropies are in nats.
+
+**Model.** The system is a maximally mixed qubit $\rho_S = \frac12 I_2$. The reservoir is also a single qubit, in the Gibbs state $\rho_E = \operatorname{diag}(p,\, 1 - p)$, where $p > \frac12$ is the ground-state population and the level spacing $E$ satisfies $\beta E = \ln\frac{p}{1-p}$. The joint unitary is the SWAP gate: afterwards the system holds $\operatorname{diag}(p, 1-p)$, the reservoir holds $\frac12 I_2$, and the two are still in a product state.
+
+**Term by term.** Write the binary entropy as $h(p) = -p\ln p - (1-p)\ln(1-p)$.
+
+- System entropy change: $\Delta S_{\mathrm{sys}} = h(p) - \ln 2 < 0$, an entropy decrease of $\ln 2 - h(p)$;
+- Reservoir entropy change: $\Delta S_{\mathrm{res}} = \ln 2 - h(p)$;
+- Final mutual information: $I = 0$ (the final state is a product), in agreement with the unitary balance $I = \Delta S_{\mathrm{sys}} + \Delta S_{\mathrm{res}}$;
+- Reservoir relative entropy: $D = D\bigl(\tfrac12 I_2 \,\big\|\, \rho_E\bigr) = -\ln 2 - \tfrac12\ln\bigl(p(1-p)\bigr)$;
+- Heat: the excited-state population of the reservoir rises from $1 - p$ to $\frac12$, so $\beta Q = \beta E\,\bigl(\tfrac12 - (1 - p)\bigr) = \bigl(p - \tfrac12\bigr)\ln\frac{p}{1-p}$, which expands to $-h(p) - \tfrac12\ln\bigl(p(1-p)\bigr)$, in agreement with the reservoir balance $\beta Q = \Delta S_{\mathrm{res}} + D$.
+
+**Numbers.**
+
+| ground population $p$ | entropy decrease $-\Delta S_{\mathrm{sys}}$ | mutual information $I$ | relative entropy $D$ | heat $\beta Q$ | $\beta Q / (-\Delta S_{\mathrm{sys}})$ |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| $0.6$ | $0.0201$ | $0$ | $0.0204$ | $0.0405$ | $2.01$ |
+| $0.75$ | $0.1308$ | $0$ | $0.1438$ | $0.2747$ | $2.10$ |
+| $0.9$ | $0.3681$ | $0$ | $0.5108$ | $0.8789$ | $2.39$ |
+| $0.99$ | $0.6371$ | $0$ | $1.6145$ | $2.2516$ | $3.53$ |
+| $0.999$ | $0.6852$ | $0$ | $2.7612$ | $3.4465$ | $5.03$ |
+
+Every row satisfies $\beta Q = -\Delta S_{\mathrm{sys}} + I + D$ and the Landauer lower bound, and in every row the inequality is strict: since $D > 0$, claim 3 of [@cor-landauer-bound-saturation] rules out equality.
+
+**Reading.** The cleaner the erasure is meant to be ($p \to 1$, the final system state approaching the pure state $\lvert 0\rangle\langle 0\rvert$), the closer the entropy decrease comes to its ceiling $\ln 2 \approx 0.6931$, while the excess term $D$ grows without bound. With one reservoir qubit and one swap, a bit cannot be erased at the price $k_B T\ln 2$; the extra heat paid is exactly the relative entropy by which the reservoir is pushed out of equilibrium. Approaching the Landauer bound requires both $D$ and $I$ to tend to zero, which calls for a larger reservoir and a slower process.
+:::
+
 ## 8.3 Observer Memory and the Arrow of Time: Why "Remembering the Past" Must Consume Free Energy {#sec-observer-memory-time-arrow}
 
 Now turn the lens onto the **observer's own memory register**, confirming the second epigraph of this chapter: *"So everything is settled, without a single exception — even the structure of the observer works this way."*
@@ -188,17 +262,17 @@ If the left-hand side equaled $\rho_{ij}$, then $\operatorname{recordOverlap}(\m
    $$
    where both the final mutual information $I(S' : E') \ge 0$ and bath relative entropy $D(\rho_E' \,\|\, \rho_E) \ge 0$ are nonnegative, implying $\Delta Q_{\mathrm{bath}} \ge k_B T \Delta S_S$ without any thermodynamic-limit approximation.
 
-These Stage B physical conversion formulas involving $k_B$, bath Hamiltonians $H_E$, and joules of heat $\Delta Q_{\mathrm{bath}}$ are cited from the physics literature and are not claimed in the book's Lean verification ledger.
+These Stage B physical conversion formulas involving $k_B$, bath Hamiltonians $H_E$, and joules of heat $\Delta Q_{\mathrm{bath}}$ are cited from the physics literature and are not claimed in the book's Lean verification ledger. One layer of it is verified in Lean: once the two real-number equations are granted, the reservoir balance $\beta Q = \Delta S_{\mathrm{res}} + D$ and the unitary balance $I = \Delta S_{\mathrm{sys}} + \Delta S_{\mathrm{res}}$, the identity of item 2, the lower bound and its equality condition are given by [@prop-landauer-identity-from-balances] and [@cor-landauer-bound-saturation]. The two balances themselves (statements about Gibbs states, joint unitary evolution and von Neumann entropy) and the nonnegativity $I \ge 0$, $D \ge 0$ remain literature results.
 :::
 
 ## 8.4 Part II Summary and Bridge: When a Single Plane Cannot Hold Three Orthogonal Bifurcations, Leap to the Three-Dimensional Sphere {#sec-part2-summary-bridge}
 
-Across the four chapters of Part II (*Unfolding Wings — From Line to Plane*), backed by sixteen Lean-verified theorems, lemmas, propositions, and corollaries, we have unfolded the geometry of two-dimensional oriented area:
+Across the four chapters of Part II (*Unfolding Wings — From Line to Plane*), backed by eighteen Lean-verified theorems, lemmas, propositions, and corollaries (four in each of Chapters 5–7 and six in Chapter 8), we have unfolded the geometry of two-dimensional oriented area:
 
 - **Chapter 5** demystified the imaginary unit $i$, deriving the skew-adjoint relative complex structure $J := 2AB^*$ satisfying $J^2 = -I$ from a balanced unitary sum $S = A + B$ ([@thm-balanced-sum-skew-adjoint], [@lemma-skew-adjoint-unitary-square], [@thm-relative-complex-structure-square]) alongside the phase-locked real factorization ([@prop-phase-locked-overlap]), and turning all standard single-qubit gates into three-dimensional Clifford rotors $R(\theta) = \cos(\theta/2) - \vv{B}\sin(\theta/2)$;
 - **Chapter 6** unified wave–particle duality and the five textbook postulates through the geometric product $\vv{A}\vv{B} = \vv{A}\cdot\vv{B} + \vv{A}\wedge\vv{B}$, anchored by the Lagrange–Gram identity ([@thm-lagrange-gram-identity]), the Robertson–Schrödinger conservation identity ([@thm-robertson-schrodinger]), the pure-record complementarity circle $D^2 + V^2 = 1$ ([@thm-record-coherence-complementarity]), the Hilbert–Schmidt pinching Pythagorean split ([@cor-pinching-pythagorean]), and the live interactive laboratory `ORTHO//QUBIT`;
 - **Chapter 7** established the duality of time — "the line is classical time, and the area is quantum time" — proving that any calibrated unitary group satisfies Hamiltonian self-adjointness, exponential generation, and the infinitesimal derivative law ([@thm-calibrated-unitary-group]), projection probability flow is driven by commutator area ([@prop-projection-probability-flow]), crossing a $90^\circ$ orthogonal wall obeys the Fubini–Study speed limit ([@thm-fubini-study-record-time]), alongside stroboscopic Zeno dynamics and the scalar free-energy accounting threshold criterion for critical inverse temperature ([@thm-decoherence-freeze-critical]);
-- **Chapter 8** audited the information-theoretic and thermodynamic ledger of flattening an area into a line, proving that mutually unbiased pinching produces $\ln d - S(\rho)$ of relative entropy and entropy increase ([@thm-dual-account-full]), single-step and cumulative basis-pinching entropy production equal the relative entropy of deleted coherence ([@thm-entropy-production-coherence-deletion]), local irreversibility stems from environment-record access defect ([@thm-reduced-irreversibility-access-defect]), and even a single surviving environmental copy blocks coherent time reversal ([@prop-surviving-copy-blocks-reversal]).
+- **Chapter 8** audited the information-theoretic and thermodynamic ledger of flattening an area into a line, proving that mutually unbiased pinching produces $\ln d - S(\rho)$ of relative entropy and entropy increase ([@thm-dual-account-full]), single-step and cumulative basis-pinching entropy production equal the relative entropy of deleted coherence ([@thm-entropy-production-coherence-deletion]), the reservoir and unitary balances yield the heat–entropy–information identity and the equality criterion of the Landauer bound ([@prop-landauer-identity-from-balances], [@cor-landauer-bound-saturation]), local irreversibility stems from environment-record access defect ([@thm-reduced-irreversibility-access-defect]), and even a single surviving environmental copy blocks coherent time reversal ([@prop-surviving-copy-blocks-reversal]).
 
 Now stand at the threshold between Part II and Part III and ask the question that forces our next dimensional leap: **if only a single two-dimensional plane $\operatorname{span}\{\vv{e}_1, \vv{e}_2\}$ existed, once you turned by $90^\circ$ from $\vv{e}_1$ to $\vv{e}_2$, where could you find a third direction simultaneously orthogonal at $90^\circ$ to both $\vv{e}_1$ and $\vv{e}_2$?**
 

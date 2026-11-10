@@ -114,6 +114,80 @@ $$
    $$
 :::
 
+[@ex-landauer-one-bit-ledger] 的阶段 B 直接引用了不等式 $\beta\Delta Q_{\mathrm{bath}} \ge \Delta S_S$。这条不等式并不是一步得来的，它背后有一张三行的账。前两行是物理输入，第三行是由它们推出的结论：
+
+- **热浴平衡**：热浴吸收的热量（乘以逆温度）等于热浴的熵变加上热浴被推离平衡的相对熵，$\beta Q = \Delta S_{\mathrm{res}} + D$；
+- **幺正平衡**：系统与热浴初始无关联、联合演化是幺正的，所以末态互信息等于两边熵变之和，$I = \Delta S_{\mathrm{sys}} + \Delta S_{\mathrm{res}}$；
+- **结论**：消去 $\Delta S_{\mathrm{res}}$，得 $\beta Q = -\Delta S_{\mathrm{sys}} + I + D$。
+
+这里 $\Delta S_{\mathrm{sys}}$ 是系统熵的**变化量**（末减初），所以擦除时它是负的，$-\Delta S_{\mathrm{sys}}$ 就是 [@ex-landauer-one-bit-ledger] 里的系统熵减 $\Delta S_S$。前两行本身是关于密度矩阵的命题，属于文献结果（见 [@rem-landauer-thermodynamic-bridge-literature]）。从前两行到第三行、再到下界与取等条件的这段推理，则已冻结在 Lean 里。
+
+::: {.proposition #prop-landauer-identity-from-balances title="由热浴平衡与幺正平衡推出热量—熵—信息恒等式" lean="D5/S3/DivergenceSupport/LandauerIdentity.landauer_identity_from_balances"}
+设 $\beta$、$Q$、$\Delta S_{\mathrm{sys}}$、$\Delta S_{\mathrm{res}}$、$I$、$D$ 为实数（Lean 中依次为 `beta`、`heat`、`systemEntropyChange`、`reservoirEntropyChange`、`mutualInformation`、`reservoirDivergence`）。若
+
+1. **热浴平衡（`hReservoir`）**：$\beta\,Q = \Delta S_{\mathrm{res}} + D$；
+2. **幺正平衡（`hUnitary`）**：$I = \Delta S_{\mathrm{sys}} + \Delta S_{\mathrm{res}}$；
+
+则
+
+$$
+\beta\,Q \;=\; -\Delta S_{\mathrm{sys}} + I + D .
+$$
+:::
+
+::: proof
+由 `hUnitary` 解出 $\Delta S_{\mathrm{res}} = I - \Delta S_{\mathrm{sys}}$，代入 `hReservoir` 即得；Lean 中由线性算术 `linarith` 完成。源文件还附有两条反例，说明去掉任何一条前提结论都可以不成立。完整证明由 Lean 内核检查。
+:::
+
+::: {.corollary #cor-landauer-bound-saturation title="兰道尔下界及其取等与严格的判据" lean="D5/S3/DivergenceSupport/LandauerBound.landauer_bound_of_balance D5/S3/DivergenceSupport/LandauerSaturation.landauer_saturation_iff D5/S3/DivergenceSupport/LandauerSaturation.landauer_strict_iff"}
+设 $\beta$、$Q$、$\Delta S$、$I$、$D$ 为实数（Lean 中依次为 `beta`、`heat`、`entropyChange`、`mutualInfo`、`divergence`），满足
+
+- **平衡式（`hbalance`）**：$\beta\,Q = -\Delta S + I + D$；
+- **非负性（`hmutualInfo`、`hdivergence`）**：$0 \le I$ 且 $0 \le D$。
+
+则以下三项同时成立：
+
+1. **下界**：$-\Delta S \le \beta\,Q$；
+2. **取等判据**：$-\Delta S = \beta\,Q$ 当且仅当 $I = 0$ 且 $D = 0$；
+3. **严格判据**：$-\Delta S < \beta\,Q$ 当且仅当 $0 < I + D$。
+:::
+
+::: proof
+平衡式说明差额 $\beta Q - (-\Delta S)$ 恰好等于 $I + D$（`landauer_slack_of_balance`）。两项非负，故差额非负，这是结论 1（`landauer_bound_of_balance`）。差额为零当且仅当 $I + D = 0$；在两项都非负时这等价于 $I = 0$ 且 $D = 0$（`add_eq_zero_iff_of_nonneg`），这是结论 2（`landauer_saturation_iff`）。结论 3 把结论 1 与“差额不为零”合起来（`landauer_strict_iff`）。完整证明由 Lean 内核检查。
+:::
+
+[@prop-landauer-identity-from-balances] 与 [@cor-landauer-bound-saturation] 是纯实数层面的陈述：它们不知道 $Q$ 是热量、$I$ 是互信息。它们保证的是账目本身不会出错——只要两条平衡式成立、两项余量非负，下界与取等条件就跟着成立。把字母换成物理量的那一步，仍由文献承担。
+
+兰道尔界什么时候取不到等号？[@cor-landauer-bound-saturation] 的结论 2 给了判据：要么系统与热浴之间留下了关联（$I > 0$），要么热浴被推离了平衡（$D > 0$）。下面用能想到的最小热浴把这笔账算一遍。
+
+::: {.example #ex-one-qubit-reservoir-swap-erasure title="用一个热浴量子比特擦除：有限热浴的超额热量"}
+本例中的两条平衡式是密度矩阵层面的文献结果（未在本书形式化）；各项数值由定义直接计算，并用 [@prop-landauer-identity-from-balances] 的恒等式交叉核对。熵以奈特为单位。
+
+**模型。** 系统是最大混合的单比特 $\rho_S = \frac12 I_2$。热浴也是一个量子比特，处于吉布斯态 $\rho_E = \operatorname{diag}(p,\, 1 - p)$，其中 $p > \frac12$ 是基态布居数，能级间隔 $E$ 满足 $\beta E = \ln\frac{p}{1-p}$。联合幺正取交换门 SWAP：演化之后系统拿到 $\operatorname{diag}(p, 1-p)$，热浴拿到 $\frac12 I_2$，两者仍是直积态。
+
+**逐项计算。** 记二元熵 $h(p) = -p\ln p - (1-p)\ln(1-p)$。
+
+- 系统熵变：$\Delta S_{\mathrm{sys}} = h(p) - \ln 2 < 0$，系统熵减为 $\ln 2 - h(p)$；
+- 热浴熵变：$\Delta S_{\mathrm{res}} = \ln 2 - h(p)$；
+- 末态互信息：$I = 0$（末态是直积态），与幺正平衡 $I = \Delta S_{\mathrm{sys}} + \Delta S_{\mathrm{res}}$ 相符；
+- 热浴相对熵：$D = D\bigl(\tfrac12 I_2 \,\big\|\, \rho_E\bigr) = -\ln 2 - \tfrac12\ln\bigl(p(1-p)\bigr)$；
+- 热量：热浴激发态布居数从 $1 - p$ 升到 $\frac12$，所以 $\beta Q = \beta E\,\bigl(\tfrac12 - (1 - p)\bigr) = \bigl(p - \tfrac12\bigr)\ln\frac{p}{1-p}$，展开后等于 $-h(p) - \tfrac12\ln\bigl(p(1-p)\bigr)$，与热浴平衡 $\beta Q = \Delta S_{\mathrm{res}} + D$ 相符。
+
+**数值。**
+
+| 基态布居数 $p$ | 系统熵减 $-\Delta S_{\mathrm{sys}}$ | 互信息 $I$ | 相对熵 $D$ | 热量 $\beta Q$ | $\beta Q / (-\Delta S_{\mathrm{sys}})$ |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| $0.6$ | $0.0201$ | $0$ | $0.0204$ | $0.0405$ | $2.01$ |
+| $0.75$ | $0.1308$ | $0$ | $0.1438$ | $0.2747$ | $2.10$ |
+| $0.9$ | $0.3681$ | $0$ | $0.5108$ | $0.8789$ | $2.39$ |
+| $0.99$ | $0.6371$ | $0$ | $1.6145$ | $2.2516$ | $3.53$ |
+| $0.999$ | $0.6852$ | $0$ | $2.7612$ | $3.4465$ | $5.03$ |
+
+每一行都满足 $\beta Q = -\Delta S_{\mathrm{sys}} + I + D$，也都满足兰道尔下界，而且都是严格不等：因为 $D > 0$，按 [@cor-landauer-bound-saturation] 的结论 3，等号取不到。
+
+**读法。** 想擦得越干净（$p \to 1$，系统末态越接近纯态 $\lvert 0\rangle\langle 0\rvert$），系统熵减趋于上限 $\ln 2 \approx 0.6931$，而超额项 $D$ 无界增长。只用一个热浴量子比特、一次交换，是做不到以 $k_B T\ln 2$ 的代价擦除一比特的；多付的热量恰好等于热浴被推离平衡的相对熵。要逼近兰道尔界，就得让 $D$ 与 $I$ 都趋于零，这需要更大的热浴和更缓慢的过程。
+:::
+
 ## 8.3 观察者记忆与时间之箭：为什么“记住过去”必须消耗自由能？ {#sec-observer-memory-time-arrow}
 
 现在，让我们把手术刀对准站在实验台前的**观察者自己**，印证本章开篇的第二句名言：*“所以一切都结束了,没有任何例外,连观察者结构都是这样的”*。
@@ -190,17 +264,17 @@ $$
    $$
    其中联合互信息 $I(S' : E') \ge 0$ 与热浴相对熵 $D(\rho_E' \,\|\, \rho_E) \ge 0$ 均非负，从而在微观量子力学框架下无需热力学极限假设即严格导出 $\Delta Q_{\mathrm{bath}} \ge k_B T \Delta S_S$。
 
-上述涉及物理玻尔兹曼常数 $k_B$、热浴哈密顿量 $H_E$ 与焦耳热量 $\Delta Q_{\mathrm{bath}}$ 的阶段 B 热力学重置换算作为物理背景引述，不计入本书的 Lean 形式化验证账本。
+上述涉及物理玻尔兹曼常数 $k_B$、热浴哈密顿量 $H_E$ 与焦耳热量 $\Delta Q_{\mathrm{bath}}$ 的阶段 B 热力学重置换算作为物理背景引述。其中有一层已由 Lean 验证：只要承认热浴平衡 $\beta Q = \Delta S_{\mathrm{res}} + D$ 与幺正平衡 $I = \Delta S_{\mathrm{sys}} + \Delta S_{\mathrm{res}}$ 这两条实数等式，第 2 条中的恒等式、下界及其取等条件就由 [@prop-landauer-identity-from-balances] 与 [@cor-landauer-bound-saturation] 给出。这两条平衡式本身（它们是关于吉布斯态、联合幺正演化与冯·诺依曼熵的命题）以及 $I \ge 0$、$D \ge 0$ 的非负性，仍属文献结果，不计入本书的 Lean 形式化验证账本。
 :::
 
 ## 8.4 第二部总结与过渡：当一个平面装不下三次正交分叉，向三维球面跃迁 {#sec-part2-summary-bridge}
 
-至此，第二部《展翼·从线到面》的四章画卷已经全部展开。通过十六条经 Lean 4 内核逐一验证的形式化定理、引理、命题与推论，我们彻底打通了二维有向面积的几何脉络：
+至此，第二部《展翼·从线到面》的四章画卷已经全部展开。通过十八条经 Lean 4 内核逐一验证的形式化定理、引理、命题与推论（第五至七章各四条，第八章六条），我们彻底打通了二维有向面积的几何脉络：
 
 - **第五章**拆穿了虚数单位 $i$ 的神秘伪装，从平衡幺正和 $S = A + B$ 出发严格导出反自伴相对复结构 $J := 2AB^*$ 的平方律 $J^2 = -I$（[@thm-balanced-sum-skew-adjoint]、[@lemma-skew-adjoint-unitary-square]、[@thm-relative-complex-structure-square]）与相位锁定实分解（[@prop-phase-locked-overlap]），将全部单比特量子门还原为三维布洛赫球上的克利福德旋子 $R(\theta) = \cos(\theta/2) - \vv{B}\sin(\theta/2)$；
 - **第六章**用几何积 $\vv{A}\vv{B} = \vv{A}\cdot\vv{B} + \vv{A}\wedge\vv{B}$ 终结了波粒二象性的百年割裂，以拉格朗日—格拉姆恒等式（[@thm-lagrange-gram-identity]）、罗伯逊—薛定谔四项守恒律（[@thm-robertson-schrodinger]）、纯态记录互补圆 $D^2 + V^2 = 1$（[@thm-record-coherence-complementarity]）与捏合勾股分解（[@cor-pinching-pythagorean]）将教科书五大公设熔铸为一炉，并配以实时交互实验室 `ORTHO//QUBIT`；
 - **第七章**揭示了“线是经典时间，面积是量子时间”的时间二象性，证明单参数幺正群满足哈密顿量自伴性、指数生成律与无穷小导数方程（[@thm-calibrated-unitary-group]），投影概率流由对易子面积驱动（[@prop-projection-probability-flow]），翻越 $90^\circ$ 正交墙受富比尼—施图迪速度极限约束（[@thm-fubini-study-record-time]），并给出高频投影抽检的芝诺效应以及作为标量自由能记账判据的临界逆温阈值（[@thm-decoherence-freeze-critical]）；
-- **第八章**算清了将二维面积压扁成一维线的信息与热力学账单，证明相互无偏捏合的相对熵与熵增恒为 $\ln d - S(\rho)$（[@thm-dual-account-full]），计算基捏合的单步与累积熵产生恒等于相干擦除相对熵（[@thm-entropy-production-coherence-deletion]），局部不可逆源于环境记录访问缺陷（[@thm-reduced-irreversibility-access-defect]），且哪怕漏掉唯一一份未逆转的环境副本也会阻断相干时间反演（[@prop-surviving-copy-blocks-reversal]）。
+- **第八章**算清了将二维面积压扁成一维线的信息与热力学账单，证明相互无偏捏合的相对熵与熵增恒为 $\ln d - S(\rho)$（[@thm-dual-account-full]），计算基捏合的单步与累积熵产生恒等于相干擦除相对熵（[@thm-entropy-production-coherence-deletion]），由热浴平衡与幺正平衡推出热量—熵—信息恒等式及兰道尔下界的取等判据（[@prop-landauer-identity-from-balances]、[@cor-landauer-bound-saturation]），局部不可逆源于环境记录访问缺陷（[@thm-reduced-irreversibility-access-defect]），且哪怕漏掉唯一一份未逆转的环境副本也会阻断相干时间反演（[@prop-surviving-copy-blocks-reversal]）。
 
 现在，站在第二部与第三部的交界处，请思考下一个必将到来的维度跃迁：**如果宇宙里真的只有一张二维平面 $\operatorname{span}\{\vv{e}_1, \vv{e}_2\}$，那么从基准轴 $\vv{e}_1$ 出发转过一次 $90^\circ$ 到达正交轴 $\vv{e}_2$ 之后，你还能找到同时与 $\vv{e}_1$ 和 $\vv{e}_2$ 都成 $90^\circ$ 正交的第三根方向吗？**
 
