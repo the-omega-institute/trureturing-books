@@ -210,6 +210,25 @@ $$
 
 当观察者沿着一串彼此不共线的测量轴依次执行 [@thm-conditional-state-valid] 的条件更新时，奇迹发生了：原本在球面上被彻底堵死的路径，竟然因为中间多插入了一次“看一眼并立为新起点”的动作而重新贯通！费曼在讲授量子力学时最爱在课堂上掏出三片廉价的太阳镜偏振片，现场演示下面这个令所有人目瞪口呆的桌面实验。
 
+要把三片的手算推广到任意有限片数，先看有序外积相乘时留下了什么。
+
+::: {.theorem #thm-rank-one-chain-trace title="有序外积链的迹" lean="D5/S3/Quantum/Information/BargmannImaginaryMaximizers.bargmann_path_product"}
+对每个自然数 $n$ 与任意向量 $v_0,\ldots,v_n\in\mathbb{C}^2$，令 $R_j=v_jv_j^\dagger$，并约定 $\langle u,v\rangle=u^\dagger v$。则按所列次序相乘有
+
+$$
+\Tr(R_0\cdots R_n)
+=\left(\prod_{j=0}^{n-1}\langle v_j,v_{j+1}\rangle\right)\langle v_n,v_0\rangle.
+$$
+
+当 $n=0$ 时，空积为 $1$，等式为 $\Tr(R_0)=\langle v_0,v_0\rangle$。这里没有归一化或非零假设；$R_j$ 可以为零，也不必是投影算子。
+:::
+
+::: proof
+直接相乘可见 $(uu^\dagger)(ww^\dagger)=\langle u,w\rangle uw^\dagger$。沿有限链逐次应用这个等式，每一步留下一个相邻内积，末尾剩下 $v_0v_n^\dagger$；取迹再给出闭合因子 $\Tr(v_0v_n^\dagger)=\langle v_n,v_0\rangle$。这正是所引声明中有序外积迹 `bargmann` 的展开，单个外积的情形给出归纳起点。完整证明由 Lean 内核检查。
+:::
+
+一般有序链的迹是复数，本身不是概率。下面的透射权重来自单位向量组成的特定回文链。
+
 ::: {.example #ex-malus-three-polarizers title="费曼的三偏振片级联实验：串行幂等投影如何改写历史"}
 取一束沿水平方向线偏振的光子进入实验台（注意光学约定中的一处精妙二倍角：光波电场偏振在物理空间转过夹角 $\alpha$ 时，水平偏振 $\alpha = 0^\circ$ 与竖直偏振 $\alpha = 90^\circ$ 已完全正交互斥，故光学空间角 $\alpha$ 直接对应希尔伯特空间半角 $\theta/2$，而对应的布洛赫球面角为 $\theta = 2\alpha$）。记角度 $\alpha$ 方向的线偏振秩一投影算子为
 
@@ -238,7 +257,40 @@ $$
 w_{\mathrm{total}} = w_2 \cdot w_3 = \frac{1}{2} \times \frac{1}{2} = \frac{1}{4} = 25\%!
 $$
 
-（读者甚至可以自己动手算一算：如果在 $0^\circ$ 与 $90^\circ$ 之间均匀插入 $N$ 片偏振片，每步只偏转微小的 $\frac{90^\circ}{N+1}$，总透射率 $\bigl[\cos^2\frac{\pi}{2(N+1)}\bigr]^{N+1}$ 在 $N \to \infty$ 时竟会一路飙升趋近于 $100\%$！这正是我们在第二部第八章将严格证明的**量子芝诺引导效应**。）
+这个乘法可由 [@thm-rank-one-chain-trace] 统一解释。为计数方便，以下用下标 $0$ 表示水平制备片：对任意 $m\in\mathbb{N}$，取实角 $\alpha_0=0,\alpha_1,\ldots,\alpha_m$，令单位向量 $v_j=v(\alpha_j)=(\cos\alpha_j,\sin\alpha_j)\in\mathbb{C}^2$，$P_j=v_jv_j^\dagger$。从已制备初态 $P_0$ 出发，通过随后全部 $m$ 片的分支，其未归一化状态为
+
+$$
+X_m=P_m\cdots P_1P_0P_1\cdots P_m.
+$$
+
+把定理应用于向量回文列 $(v_m,\ldots,v_1,v_0,v_1,\ldots,v_m)$，即取 $n=2m$。闭合因子为 $\langle v_m,v_m\rangle=1$，相邻内积则两两互为复共轭，于是该分支相对于已制备水平输入的透射概率为
+
+$$
+\begin{aligned}
+\Tr(X_m)&=\prod_{j=1}^{m}|\langle v_j,v_{j-1}\rangle|^2\\
+&=\prod_{j=1}^{m}\cos^2(\alpha_j-\alpha_{j-1}).
+\end{aligned}
+$$
+
+沿非零权重的历史，各因子是逐次条件透射权重；相乘不要求各次结果独立。即使某个因子为零，未归一化公式仍然成立，不必在零概率分支上定义归一化条件态。
+
+若水平片与末尾竖直片之间有 $N\in\mathbb{N}$ 片等角间隔的中间片，则 $m=N+1\ge1$，$\alpha_j=j\pi/(2m)$，有限链给出
+
+$$
+w_N=\left[\cos^2\!\left(\frac{\pi}{2(N+1)}\right)\right]^{N+1}.
+$$
+
+$N=0$ 时为 $0$，$N=1$ 时为上面的 $1/4$。这些比例均以已制备的水平光束为基准；若制备前的入射光是未偏振态 $I/2$，水平制备另贡献因子 $1/2$，所以三片实验相对于原始光束的透射比例为 $1/8$。
+:::
+
+::: {.remark #rem-polarizer-ideal-limit title="理想偏振片链的极限（文献结果，未在本书形式化）"}
+Kidambi、Widom、Lerner 与 Srivastava 在 [《Photon Polarization Measurements without the Quantum Zeno Effect》](https://arxiv.org/pdf/quant-ph/9902080v1) 第 2 页式 (7)–(8) 中给出理想投影模型的有限式与标量极限（文献的 $N$ 对应本例的 $m=N+1$）：
+
+$$
+\lim_{N\to\infty}w_N=1.
+$$
+
+这一经典极限未在本书形式化，也不包含在 [@thm-rank-one-chain-trace] 的有限代数恒等式中。它以已制备的水平输入和理想滤片为前提；若改以制备前的未偏振光束为基准，理想透射比例的极限是 $1/2$。原文紧接着明确指出，真实实验中光束通过多片偏振片总会有衰减，因此这里的理想极限不保证真实滤片达到无损透射。
 :::
 
 [@ex-malus-three-polarizers] 清晰展示了操作层面条件记录序列的几何机制：实验室时间轴上的串行测量记录，并不是一颗颗带着预先固定标签的小球在跑道上被动过关，而是一连串不共线的幂等投影 $P(\tau_1), P(\tau_2), P(\tau_3)$ 依次切出相融分量、并将幸存条件态确立为下一步新基准轴的**串行条件重定基过程**（至于未读取分支的全局去向与擦除记录的热力学代价，则分别留待下一章的幺正记录定理与第八章的兰道尔原理完整解答）。
