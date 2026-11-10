@@ -235,6 +235,33 @@ For ready reference in later chapters, the benchmark angles across both pictures
 | $180^\circ$ | $90^\circ$ | $-1$ | $0$ | Antipodal on $S^2$ $\leftrightarrow$ orthogonal in $\mathbb{C}^2$ |
 :::
 
+The table above goes angle by angle. Ask a different question: if the direction of the target state $\vv{b}$ is random, uniformly distributed on the sphere, how is the compatibility weight $p = \cos^2\frac{\theta}{2}$ distributed? Intuition may guess that it favours the middle, or the two ends. Neither is right.
+
+::: {.example #ex-uniform-born-weight title="The Born Weight in a Random Direction Is Uniformly Distributed: Archimedes' Hat-Box Theorem"}
+This example is an elementary computation, not formalized in this book; the higher-dimensional formula is a literature result.
+
+**The hat-box theorem.** On the unit sphere, the band of points with height in $[z,\ z + \mathrm{d}z]$ has circumference $2\pi\sin\theta$ and width $\mathrm{d}\theta = \mathrm{d}z / \sin\theta$ along a meridian, hence area $2\pi\,\mathrm{d}z$, independent of latitude. So for a uniformly random point of the sphere, the height $z = \cos\theta$ is uniformly distributed on $[-1, 1]$.
+
+**The Born weight.** Take the known state $\vv{a}$ to be the north pole. The half-angle formula gives $p = \cos^2\frac{\theta}{2} = \frac{1 + \cos\theta}{2} = \frac{1 + z}{2}$, an affine function of $z$, and therefore
+
+$$
+p \ \text{is uniform on}\ [0, 1], \qquad \mathbb{E}[p] = \frac{1}{2}, \qquad \operatorname{Var}[p] = \frac{1}{12}, \qquad \Pr[p \ge t] = 1 - t .
+$$
+
+| condition | equivalent range of the angle | probability |
+| :---: | :---: | :---: |
+| $p \ge \frac{1}{2}$ | $\theta \le 90^\circ$ | $\frac{1}{2}$ |
+| $p \ge \frac{3}{4}$ | $\theta \le 60^\circ$ | $\frac{1}{4}$ |
+| $p \ge 0.9$ | $\theta \le 36.87^\circ$ | $0.1$ |
+| $p \ge \frac{2 + \sqrt{3}}{4} \approx 0.933$ | $\theta \le 30^\circ$ | $\frac{2 - \sqrt{3}}{4} \approx 0.067$ |
+
+**Numerical check.** With one million uniformly random directions: sample mean $0.5001$, sample variance $0.08323$ ($\frac{1}{12} \approx 0.08333$); the frequencies of $p$ falling in $[0, 0.1)$, $[0.25, 0.75)$, $[0.9, 1]$ are $0.0996$, $0.5009$, $0.1004$.
+
+**Comparison with higher dimensions.** For a uniformly random pure state in a $d$-dimensional Hilbert space, its overlap weight with a fixed state satisfies $\Pr[p > t] = (1 - t)^{d-1}$, with mean $\frac{1}{d}$. For $d = 2$ this is the uniform distribution above; for $d = 4$, $\Pr[p > \frac{1}{2}] = \frac{1}{8}$; for $d = 16$, $\Pr[p > \frac{1}{2}] = 2^{-15} \approx 3\times10^{-5}$. A simulation with four hundred thousand samples gives means $0.5000$, $0.2498$, $0.0626$, in agreement with $\frac{1}{d}$.
+:::
+
+The single qubit is the only "fair" case: point in an arbitrary direction, and the compatibility weight is equally likely to take any value between $0$ and $1$. As soon as the dimension grows, a randomly chosen direction is almost surely nearly orthogonal to the reference state. The equatorial concentration and the barren plateaus discussed in [Chapter 12](ch12-measurement-computation-and-gradients.md) start from this fact.
+
 ::: {.remark #rem-gleason-literature title="Gleason's Theorem and Busch's Theorem (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** In this chapter, [@thm-born-probability-skeleton] proves **sufficiency**: every positive semidefinite trace-one matrix $\rho$ defines, via the canonical basis-free trace pairing $P \mapsto \Tr(\rho P)$, a normalized, finitely additive, nonnegative measure on projections. Establishing **uniqueness** (that every probability assignment obeying suitable additivity axioms must take the trace-pairing form) requires classical converse theorems and their exact dimensional and domain hypotheses:
 

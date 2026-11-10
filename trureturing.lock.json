@@ -589,6 +589,14 @@
       "line": 120,
       "signature": "theorem unit_perpendicular_pair (a b : Space) : ∃ n : Space, ‖n‖ = 1 ∧ ⟪a, n⟫_ℝ = 0 ∧ ⟪b, n⟫_ℝ = 0"
     },
+    "D5/S3/HilbertOperators/Stinespring.stinespring_dilation": {
+      "module": "D5/S3/HilbertOperators/Stinespring",
+      "name": "D5.S3.HilbertOperators.Stinespring.stinespring_dilation",
+      "kind": "theorem",
+      "statement_id": "sha256:8b1f001fa093ddd76bc2aeae51ba8b2dadd6cba9e82f4ebfd2a2395494096c23",
+      "line": 725,
+      "signature": "theorem stinespring_dilation {A H : Type u} [CStarAlgebra A] [PartialOrder A] [StarOrderedRing A] [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H] (φ : A →CP (H →L[ℂ] H)) : ∃ (K : Type u) (_ : NormedAddCommGroup K) (_ : InnerProductSpace ℂ K) (_ : CompleteSpace K) (π : A →⋆ₐ[ℂ] (K →L[ℂ] K)) (V : H →L[ℂ] K), ∀ (a : A) (x : H), (φ a) x = (V†) ((π a) (V x))"
+    },
     "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification": {
       "module": "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification",
       "name": "D5.S3.Observer.AgencyHolonomy.AnchoredPhaseClassification.anchored_phase_classification",
@@ -1300,6 +1308,54 @@
       "statement_id": "sha256:8448b6959a48d5c232600cbaa512d3eae6aadd57de71f1e30aad67fde1d1b63d",
       "line": 24,
       "signature": "theorem qubit_weyl_star : qubitZ * qubitX = -(qubitX * qubitZ) ∧ star qubitX = qubitX ∧ star qubitZ = qubitZ ∧ qubitX ^ 2 = 1 ∧ qubitZ ^ 2 = 1"
+    },
+    "D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance": {
+      "module": "D5/S3/Quantum/Foundation/FiniteTraceDistance",
+      "name": "D5.S3.Quantum.Foundation.FiniteTraceDistance.traceDistance",
+      "kind": "def",
+      "statement_id": "sha256:89528cf67c3cb1bd1e4a331a2ac84af57e0d08d2c83ef7a85db7fbecd10ced3e",
+      "line": 463,
+      "signature": "def traceDistance (rho sigma : DensityState ι) : ℝ"
+    },
+    "D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_contract": {
+      "module": "D5/S3/Quantum/Foundation/FiniteTraceDistance",
+      "name": "D5.S3.Quantum.Foundation.FiniteTraceDistance.traceDistance_contract",
+      "kind": "theorem",
+      "statement_id": "sha256:89528cf67c3cb1bd1e4a331a2ac84af57e0d08d2c83ef7a85db7fbecd10ced3e",
+      "line": 505,
+      "signature": "theorem traceDistance_contract (channel : QuantumChannel ι ι) (rho sigma : DensityState ι) : traceDistance (channel.mapState rho) (channel.mapState sigma) ≤ traceDistance rho sigma"
+    },
+    "D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_le_one": {
+      "module": "D5/S3/Quantum/Foundation/FiniteTraceDistance",
+      "name": "D5.S3.Quantum.Foundation.FiniteTraceDistance.traceDistance_le_one",
+      "kind": "theorem",
+      "statement_id": "sha256:89528cf67c3cb1bd1e4a331a2ac84af57e0d08d2c83ef7a85db7fbecd10ced3e",
+      "line": 485,
+      "signature": "theorem traceDistance_le_one (rho sigma : DensityState ι) : traceDistance rho sigma ≤ 1"
+    },
+    "D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_nonneg": {
+      "module": "D5/S3/Quantum/Foundation/FiniteTraceDistance",
+      "name": "D5.S3.Quantum.Foundation.FiniteTraceDistance.traceDistance_nonneg",
+      "kind": "theorem",
+      "statement_id": "sha256:89528cf67c3cb1bd1e4a331a2ac84af57e0d08d2c83ef7a85db7fbecd10ced3e",
+      "line": 466,
+      "signature": "theorem traceDistance_nonneg (rho sigma : DensityState ι) : 0 ≤ traceDistance rho sigma"
+    },
+    "D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_symm": {
+      "module": "D5/S3/Quantum/Foundation/FiniteTraceDistance",
+      "name": "D5.S3.Quantum.Foundation.FiniteTraceDistance.traceDistance_symm",
+      "kind": "theorem",
+      "statement_id": "sha256:89528cf67c3cb1bd1e4a331a2ac84af57e0d08d2c83ef7a85db7fbecd10ced3e",
+      "line": 469,
+      "signature": "theorem traceDistance_symm (rho sigma : DensityState ι) : traceDistance rho sigma = traceDistance sigma rho"
+    },
+    "D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_triangle": {
+      "module": "D5/S3/Quantum/Foundation/FiniteTraceDistance",
+      "name": "D5.S3.Quantum.Foundation.FiniteTraceDistance.traceDistance_triangle",
+      "kind": "theorem",
+      "statement_id": "sha256:89528cf67c3cb1bd1e4a331a2ac84af57e0d08d2c83ef7a85db7fbecd10ced3e",
+      "line": 476,
+      "signature": "theorem traceDistance_triangle (rho sigma tau : DensityState ι) : traceDistance rho tau ≤ traceDistance rho sigma + traceDistance sigma tau"
     },
     "D5/S3/Quantum/Foundation/RayPhaseRigidity.PreservesRay": {
       "module": "D5/S3/Quantum/Foundation/RayPhaseRigidity",
