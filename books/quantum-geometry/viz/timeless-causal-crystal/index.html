@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//CAUSAL · Timeless causal ledger and the Gram window">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//CAUSAL 无时间因果账本与格拉姆窗口</title>
+<meta name="description" content="给定 c_AB = cos θ₁ 与 c_BC = cos θ₂，第三条余弦只能落在格拉姆窗口 [cos(θ₁ + θ₂), cos(θ₁ − θ₂)] 内：c_AC = c₁c₂ + s₁s₂ cos φ，det G = s₁²s₂² sin²φ ≥ 0，φ = 0 或 π 时贴上 det G = 0 的边界，窗口之外 det G &lt; 0。去序账本逐阶加上 (−1)ᵏθ²ᵏ/(2k)!，看截断余弦构成的格拉姆行列式怎样越界又收敛；晶体书册把三个夹角放在 HΨ = 0 的 12 页晶体上；P 场 vs NP 线对照对数势垒的梯度流与振幅放大每步 2θ 的转动。所有数值都由页面实时计算；LEAN ✓ 只标在 trureturing 已冻结的定理上。Given c_AB = cos θ₁ and c_BC = cos θ₂, the third cosine must lie in the Gram window [cos(θ₁ + θ₂), cos(θ₁ − θ₂)]: c_AC = c₁c₂ + s₁s₂ cos φ, det G = s₁²s₂² sin²φ ≥ 0, the boundary det G = 0 at φ = 0 or π, and det G &lt; 0 outside. The de-ordered ledger adds (−1)ᵏθ²ᵏ/(2k)! order by order and shows how the Gram determinant of truncated cosines breaches and converges; the crystal book places the three angles on a 12-page crystal with HΨ = 0; P field vs NP thread sets a log-barrier gradient flow against amplitude amplification turning 2θ per step. Every number is computed on the page; LEAN ✓ marks only theorems frozen in trureturing.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+</head>
+<body data-viz-id="timeless-causal-crystal">
+<div class="app" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//CAUSAL">ORTHO<b>//</b>CAUSAL</h1>
+      <div class="tagline">
+        <span class="zh">无时间因果账本 · <em>两条余弦锁住第三条的窗口；观察者只在窗口里选点</em></span>
+        <span class="en">Timeless causal ledger · <em>two cosines fix a window for the third; the observer only picks points inside it</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill hot" id="pillTri">θ₁, θ₂ <strong>—</strong></span>
+      <span class="pill" id="pillPass">— <strong>—</strong></span>
+      <span class="pill" id="pillDet">det G <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="输入与读数" data-aria-en="Inputs and readouts">
+    <section class="panel sec" id="inputs">
+      <h2><span class="zh">输入</span><span class="en">Inputs</span><span class="aside">det G ≥ 0 · cos θ</span></h2>
+      <div class="num-field">
+        <label for="t1"><span class="zh">第一步夹角 θ₁ = ∠(A, B)（度）</span><span class="en">First step angle θ₁ = ∠(A, B) (degrees)</span></label>
+        <div class="stepper"><button type="button" id="t1Dec" aria-label="θ₁ 减一度" data-aria-en="Decrease θ₁ by one degree">−</button><input type="number" id="t1Num" min="0" max="180" step="1" value="120" inputmode="numeric" aria-label="θ₁ 的度数" data-aria-en="θ₁ in degrees"><button type="button" id="t1Inc" aria-label="θ₁ 加一度" data-aria-en="Increase θ₁ by one degree">+</button></div>
+        <input type="range" id="t1" min="0" max="180" step="1" value="120">
+      </div>
+      <div class="num-field">
+        <label for="t2"><span class="zh">第二步夹角 θ₂ = ∠(B, C)（度）</span><span class="en">Second step angle θ₂ = ∠(B, C) (degrees)</span></label>
+        <div class="stepper"><button type="button" id="t2Dec" aria-label="θ₂ 减一度" data-aria-en="Decrease θ₂ by one degree">−</button><input type="number" id="t2Num" min="0" max="180" step="1" value="75" inputmode="numeric" aria-label="θ₂ 的度数" data-aria-en="θ₂ in degrees"><button type="button" id="t2Inc" aria-label="θ₂ 加一度" data-aria-en="Increase θ₂ by one degree">+</button></div>
+        <input type="range" id="t2" min="0" max="180" step="1" value="75">
+      </div>
+      <div class="num-field">
+        <label for="phi"><span class="zh">当下一念：方位角 φ（度）</span><span class="en">Present choice: azimuth φ (degrees)</span></label>
+        <div class="stepper"><button type="button" id="phiDec" aria-label="φ 减一度" data-aria-en="Decrease φ by one degree">−</button><input type="number" id="phiNum" min="0" max="180" step="0.1" value="60" inputmode="decimal" aria-label="φ 的度数" data-aria-en="φ in degrees"><button type="button" id="phiInc" aria-label="φ 加一度" data-aria-en="Increase φ by one degree">+</button></div>
+        <input type="range" id="phi" min="0" max="180" step="0.1" value="60">
+      </div>
+      <div class="chips presets" id="qChips" role="group" aria-label="振幅放大的变量数 n" data-aria-en="Number of variables n for amplitude amplification">
+        <button class="chip" data-n="2">n = 2</button>
+        <button class="chip" data-n="4">n = 4</button>
+        <button class="chip" data-n="6">n = 6</button>
+        <button class="chip" data-n="8">n = 8</button>
+        <button class="chip" data-n="10">n = 10</button>
+        <button class="chip" data-n="12">n = 12</button>
+      </div>
+      <div class="chips presets" id="presets" role="group" aria-label="示例" data-aria-en="Examples">
+        <button class="chip" data-preset="boundary"><span class="zh">光锥边界 φ = 0°</span><span class="en">Lightcone boundary φ = 0°</span></button>
+        <button class="chip" data-preset="ortho"><span class="zh">正交两步 90° + 90°</span><span class="en">Orthogonal steps 90° + 90°</span></button>
+        <button class="chip" data-preset="slack"><span class="zh">最大余量 φ = 90°</span><span class="en">Max slack φ = 90°</span></button>
+        <button class="chip" data-preset="breach"><span class="zh">越界禁区</span><span class="en">Forbidden breach</span></button>
+        <button class="chip" data-preset="grover"><span class="zh">振幅放大 n = 6</span><span class="en">Grover n = 6</span></button>
+        <button class="chip" id="swap"><span class="zh">交换</span><span class="en">Swap</span></button>
+        <button class="chip" id="random"><span class="zh">随机</span><span class="en">Random</span></button>
+        <button class="chip" id="reset"><span class="zh">复位</span><span class="en">Reset</span></button>
+      </div>
+    </section>
+
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">c_AC = c₁c₂ + s₁s₂cos φ</span></h2>
+      <dl class="ro">
+        <div><dt>c<sub>AB</sub> = cos θ₁</dt><dd id="roAB">—</dd></div>
+        <div><dt>c<sub>BC</sub> = cos θ₂</dt><dd id="roBC">—</dd></div>
+        <div><dt><span class="zh">选定的 c<sub>AC</sub></span><span class="en">Chosen c<sub>AC</sub></span></dt><dd id="roAC">—</dd></div>
+        <div><dt><span class="zh">窗口 [c<sub>min</sub>, c<sub>max</sub>]</span><span class="en">Window [c<sub>min</sub>, c<sub>max</sub>]</span></dt><dd id="roWin">—</dd></div>
+        <div><dt><span class="zh">余量 sin θ₁ sin θ₂</span><span class="en">Slack sin θ₁ sin θ₂</span></dt><dd id="roSlack">—</dd></div>
+        <div><dt><span class="zh">振幅放大步数 √(2ⁿ)</span><span class="en">Grover √(2ⁿ) steps</span></dt><dd id="roGrover">—</dd></div>
+        <div class="wide deficit"><dt><span class="zh">格拉姆因果行列式 det G(A, B, C)</span><span class="en">Gram causal determinant det G(A, B, C)</span></dt><dd><b id="roDeficit" class="vpos">—</b><span class="sub" id="roDeficitSub">—</span><span class="okmark" id="roDeficitMark">✓</span></dd></div>
+        <div class="wide"><dt><span class="zh">(2k)! 去序商：cos²θ + sin²θ = 1</span><span class="en">(2k)! order quotient: cos²θ + sin²θ = 1</span></dt><dd><b id="roOrder" class="vpos">—</b> <span class="okmark" id="roOrderMark">✓</span><span class="sub" id="roOrderSub">—</span></dd></div>
+        <div class="wide"><dt><span class="zh">无信号 Δρ<sub>B</sub> = 0</span><span class="en">No signalling Δρ<sub>B</sub> = 0</span></dt><dd><b id="roSignal" class="vpos">—</b> <span class="okmark" id="roSignalMark">✓</span><span class="sub" id="roSignalSub">—</span></dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <section class="panel ledger" id="ledgerPanel" aria-labelledby="ledgerTitle">
+      <div class="head">
+        <h2 id="ledgerTitle"><span class="zh">无时间因果账本与格拉姆窗口</span><span class="en">Timeless causal ledger &amp; Gram window</span></h2>
+        <span class="aside" id="ledgerSub">—</span>
+      </div>
+      <div class="rules" aria-label="账本规则" data-aria-en="Ledger rules">
+        <span class="rule r0"><b>1/(2k)!</b> <span class="zh">去序阶乘</span><span class="en">de-ordering factorial</span> <i>cos θ</i></span>
+        <span class="rule r1"><b>det G &gt; 0</b> <span class="zh">内部自由选点</span><span class="en">free choice inside</span> <i>sin φ ≠ 0</i></span>
+        <span class="rule rj"><b>det G = 0</b> <span class="zh">极值测地边界</span><span class="en">extremal geodesic boundary</span> <i>φ = 0, π</i></span>
+        <span class="rule ra"><b>P vs NP</b> <span class="zh">场 vs 一维见证线</span><span class="en">field vs 1D witness thread</span> <i>√(2ⁿ)</i></span>
+      </div>
+      <div class="stage" id="stage">
+        <canvas id="stageCanvas" role="img" aria-label="当前视图的几何图" data-aria-en="Geometric diagram of the current view"></canvas>
+        <div class="scan"></div>
+        <div class="bracket tl"></div><div class="bracket tr"></div><div class="bracket bl"></div><div class="bracket br"></div>
+        <div class="hud-tl"><span class="big" id="hudBig">—</span><span class="sub" id="hudSub">—</span></div>
+        <div class="hud-tr chips" id="viewChips" role="group" aria-label="视图" data-aria-en="View">
+          <button class="chip" data-view-set="gram"><span class="zh">格拉姆窗口</span><span class="en">Gram window</span></button>
+          <button class="chip" data-view-set="book"><span class="zh">晶体书册</span><span class="en">Crystal book</span></button>
+          <button class="chip" data-view-set="field"><span class="zh">P 场 vs NP 线</span><span class="en">P field vs NP thread</span></button>
+        </div>
+      </div>
+      <div class="sheetwrap" id="sheetWrap">
+        <div class="digits" id="ledger" role="list" aria-label="逐阶的因果账本" data-aria-en="The causal ledger, step by step"></div>
+      </div>
+      <div class="tape-row">
+        <span class="tape-label"><span class="zh">符号带</span><span class="en">Sign tape</span></span>
+        <div class="tape" id="tape" aria-hidden="true"></div>
+        <span class="tape-sum" id="tapeSum">—</span>
+      </div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </section>
+
+    <footer class="rail" id="rail">
+      <div class="transport">
+        <button class="tbtn" id="first" aria-label="回到第 0 步" data-aria-en="Back to step 0">⏮</button>
+        <button class="tbtn" id="prev" aria-label="上一步" data-aria-en="Previous step">◀</button>
+        <button class="tbtn" id="play" aria-label="播放/暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+        <button class="tbtn" id="next" aria-label="下一步" data-aria-en="Next step">▶▶</button>
+        <button class="tbtn" id="last" aria-label="跳到最后一步" data-aria-en="Jump to the last step">⏭</button>
+      </div>
+      <div class="clock">
+        <span class="tau" id="passLabel">0</span>
+        <input type="range" id="pass" min="0" max="1" step="1" value="0" aria-label="当前一步" data-aria-en="Current step">
+      </div>
+      <div class="keys">
+        <span class="zh"><kbd>←</kbd><kbd>→</kbd> 一步 · <kbd>空格</kbd> 播放 · <kbd>1</kbd>–<kbd>3</kbd> 视图 · <kbd>S</kbd> 交换 · <kbd>R</kbd> 随机</span>
+        <span class="en"><kbd>←</kbd><kbd>→</kbd> step · <kbd>Space</kbd> play · <kbd>1</kbd>–<kbd>3</kbd> view · <kbd>S</kbd> swap · <kbd>R</kbd> random</span>
+      </div>
+    </footer>
+  </main>
+
+  <aside class="col side" aria-label="因果相图与依据" data-aria-en="Causal phase map and evidence">
+    <section class="panel sec heatpanel" id="heatPanel" data-thumb>
+      <h2 class="thumb-hide"><span class="zh">格拉姆因果相图 <span class="m">det G(θ₁, c<sub>AC</sub>)</span></span><span class="en">Gram causal phase map <span class="m">det G</span></span><span class="aside" id="heatRange">180° × [−1, 1]</span></h2>
+      <div class="heatwrap">
+        <canvas id="heat" role="img" aria-label="格拉姆因果相图：横轴 θ₁，纵轴 c_AC；点击选择一点" data-aria-en="Gram determinant causal compatibility phase map: θ₁ across, c_AC up; click to pick a point"></canvas>
+        <div class="scan"></div>
+      </div>
+      <div class="chips thumb-hide" id="nChips" role="group" aria-label="θ₂ 快选" data-aria-en="Quick θ₂">
+        <button class="chip" data-t2="30">θ₂ = 30°</button>
+        <button class="chip" data-t2="45">θ₂ = 45°</button>
+        <button class="chip" data-t2="60">θ₂ = 60°</button>
+        <button class="chip" data-t2="90">θ₂ = 90°</button>
+      </div>
+      <ul class="legend thumb-hide">
+        <li><i class="sw pos"></i><span class="zh">det G &gt; 0 相容</span><span class="en">det G &gt; 0 compatible</span></li>
+        <li><i class="sw zero"></i><span class="zh">det G = 0 边界</span><span class="en">det G = 0 boundary</span></li>
+        <li><i class="sw neg"></i><span class="zh">det G &lt; 0 禁区</span><span class="en">det G &lt; 0 forbidden</span></li>
+        <li><i class="sw cur"></i><span class="zh">当前一点</span><span class="en">current point</span></li>
+      </ul>
+      <p class="note thumb-hide" id="heatCounts">—</p>
+      <p class="note thumb-hide" id="heatHover">&nbsp;</p>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">对有限指标集上的实值 u、v：(Σuᵢ²)(Σvᵢ²) − (Σuᵢvᵢ)² = ½ΣᵢΣⱼ(uᵢvⱼ − uⱼvᵢ)²。取两个单位态，左边是 1 − c²，右边是楔积面积的平方 sin²θ：格拉姆矩阵的每个 2 × 2 主子式都是面积，因而非负；格拉姆窗口的半宽 sin θ₁ sin θ₂ 就是两块面积之积的平方根。已冻结：</span><span class="en">For real u, v on a finite index set: (Σuᵢ²)(Σvᵢ²) − (Σuᵢvᵢ)² = ½ΣᵢΣⱼ(uᵢvⱼ − uⱼvᵢ)². For two unit states the left side is 1 − c² and the right side the squared wedge area sin²θ: every 2 × 2 principal minor of the Gram matrix is an area, hence nonnegative; the half-width sin θ₁ sin θ₂ of the Gram window is the square root of the product of two such areas. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/QuantumBounds/LagrangeGramIdentity.lean#L17" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">在内积空间中，对一族单位向量：⟨rᵢ, rⱼ⟩ = 1 当且仅当 rᵢ = rⱼ，并且“重叠为 1”是等价关系。窗口顶端 c<sub>AC</sub> = cos(θ₁ − θ₂) 取到 1 只在 θ₁ = θ₂、φ = 0 时出现，此时 C = A；账本第 0 阶三个余弦都是 1，三点重合。已冻结：</span><span class="en">In an inner product space, for a family of unit vectors: ⟨rᵢ, rⱼ⟩ = 1 exactly when rᵢ = rⱼ, and “overlap 1” is an equivalence relation. The top of the window, c<sub>AC</sub> = cos(θ₁ − θ₂), reaches 1 only at θ₁ = θ₂, φ = 0, where C = A; at order 0 of the ledger all three cosines are 1 and the three points coincide. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Quantum/PureState/UnitGramIndistinguishability.lean#L24" target="_blank" rel="noopener"><code>unit_gram_overlap_characterization</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">设 P 为记录测量（自伴、幂等、两两正交、完备），ρ 为任意方阵，则 unreadState(P, ρ) = Σₖ PₖρPₖ 等于 ρ 当且仅当对一切 k ≠ l 有 PₖρPₗ = 0。晶体书册中每个页间块的范数都是 1/N ≠ 0，所以按页捏合必然改变晶体。已冻结：</span><span class="en">If P is a record measurement (self-adjoint, idempotent, pairwise orthogonal, complete) and ρ any square matrix, then unreadState(P, ρ) = Σₖ PₖρPₖ equals ρ exactly when PₖρPₗ = 0 for all k ≠ l. In the crystal book every inter-page block has norm 1/N ≠ 0, so pinching by pages must change the crystal. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning.unreadState_fixed_iff" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Observer/Conditioning.lean#L108" target="_blank" rel="noopener"><code>unreadState_fixed_iff</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">设 P 为记录测量，ρ 半正定且 Tr ρ = 1，且 recordWeight(P, ρ, k) ≠ 0，则条件态 conditionalState(P, ρ, k) 半正定且迹为 1。晶体书册按时钟页记录 Pⱼ = |τⱼ⟩⟨τⱼ| ⊗ I 条件化，得到 |τⱼ⟩⟨τⱼ| ⊗ |ψ(τⱼ)⟩⟨ψ(τⱼ)|，页面核对它厄米、半正定、迹为 1。已冻结：</span><span class="en">If P is a record measurement, ρ is positive semidefinite with Tr ρ = 1 and recordWeight(P, ρ, k) ≠ 0, then conditionalState(P, ρ, k) is positive semidefinite with trace 1. The crystal book conditions on the clock-page record Pⱼ = |τⱼ⟩⟨τⱼ| ⊗ I and gets |τⱼ⟩⟨τⱼ| ⊗ |ψ(τⱼ)⟩⟨ψ(τⱼ)|; the page checks that it is Hermitian, positive semidefinite and of trace 1. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning.conditionalState_isState" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Observer/Conditioning.lean#L143" target="_blank" rel="noopener"><code>conditionalState_isState</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">设 P 为记录测量，ρ 半正定且 Tr ρ = 1，Pₖ = φφ* 为秩一投影，ρ = ψψ* 为纯态，则 recordWeight(P, ρ, k) = ‖φ*ψ‖² = Tr(ρPₖ)，且 unreadState 等于权重与条件态的组合。晶体书册中 24 个秩一记录 |τⱼ, s<sub>±</sub>⟩ 的权重就是这些玻恩配对权重。已冻结：</span><span class="en">If P is a record measurement, ρ positive semidefinite with Tr ρ = 1, Pₖ = φφ* a rank-one projection and ρ = ψψ* pure, then recordWeight(P, ρ, k) = ‖φ*ψ‖² = Tr(ρPₖ), and unreadState is the combination of weights and conditional states. The weights of the 24 rank-one records |τⱼ, s<sub>±</sub>⟩ of the crystal book are these Born pairing weights. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Observer/Conditioning/RankOneBornPairingWeight.lean#L36" target="_blank" rel="noopener"><code>rank_one_born_pairing_weight</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">设 U = CJ 为等距，P 为正交投影，(PU)*(PU) = p·I，0 &lt; p &lt; 1，θ = arcsin √p，迭代 Q = (2UU* − 1)(1 − 2P)，则对一切 t：Qᵗ U = sin((2t + 1)θ) W + cos((2t + 1)θ) B。NP 线取 p = 2⁻ⁿ，每一步只转 2θ。已冻结：</span><span class="en">If U = CJ is an isometry, P an orthogonal projection, (PU)*(PU) = p·I with 0 &lt; p &lt; 1, θ = arcsin √p and Q = (2UU* − 1)(1 − 2P), then for every t: Qᵗ U = sin((2t + 1)θ) W + cos((2t + 1)θ) B. The NP thread takes p = 2⁻ⁿ, so each step turns by only 2θ. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Quantum/Recovery/CoherentUniformAmplification.lean#L214" target="_blank" rel="noopener"><code>uniform_operator_rotation</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">在连通的有限维黎曼流形上，若 V 光滑、曲线 x 在 [0, T] 上满足梯度流方程 ẋ = −grad V，则速度可积且 V(x(0)) − V(x(T)) = ∫₀ᵀ ‖ẋ(t)‖² dt。P 场沿对数势垒场积分一条梯度流并核对两边。已冻结：</span><span class="en">On a connected finite-dimensional Riemannian manifold, if V is smooth and the curve x obeys the gradient flow ẋ = −grad V on [0, T], then the speed is integrable and V(x(0)) − V(x(T)) = ∫₀ᵀ ‖ẋ(t)‖² dt. The P field integrates one gradient flow of the log-barrier field and checks both sides. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Geometry/Riemannian/GradientDissipation.lean#L157" target="_blank" rel="noopener"><code>S2_dissipation</code></a></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数值演示，不是证明：三个余弦、格拉姆窗口与 det G、逐阶的截断余弦与 det G⁽ᵏ⁾、cos²θ + sin²θ 的去序核对、无信号的 Δρ<sub>B</sub>、相图的网格计数、晶体与它的切片和捏合、振幅放大（逐分量模拟）与梯度流都由页面实时计算；它只看到有限个实例，一般结论来自上面的 Lean 定理与所注文献。</span><span class="en">A numerical illustration on the page, not a proof: the three cosines, the Gram window and det G, the truncated cosines and det G⁽ᵏ⁾ order by order, the de-ordered check of cos²θ + sin²θ, the no-signalling Δρ<sub>B</sub>, the grid count of the phase map, the crystal with its slices and pinching, amplitude amplification (simulated entry by entry) and the gradient flow are computed live; the page sees finitely many instances, and the general statements come from the Lean theorems above and the cited literature.</span></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：三阶格拉姆行列式恒等式与“格拉姆矩阵半正定 ⇔ 存在实现它的单位向量”；带拉格朗日余项的泰勒定理；惠勒—德维特约束 HΨ = 0 与佩奇—伍特斯条件时间（Page &amp; Wootters 1983）；无信号定理（Ghirardi–Rimini–Weber 1980）；振幅放大的最优性 Ω(√N)（Bennett–Bernstein–Brassard–Vazirani 1997）；Klee–Minty（1972）与内点法（Karmarkar 1984）。</span><span class="en">Literature results, not formalized in this book: the third-order Gram identity and “a Gram matrix is positive semidefinite ⇔ unit vectors realize it”; Taylor's theorem with the Lagrange remainder; the Wheeler–DeWitt constraint HΨ = 0 and Page–Wootters conditional time (Page &amp; Wootters 1983); the no-signalling theorem (Ghirardi–Rimini–Weber 1980); optimality Ω(√N) of amplitude amplification (Bennett–Bernstein–Brassard–Vazirani 1997); Klee–Minty (1972) and interior-point methods (Karmarkar 1984).</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">诠释框架与示意模型，不是定理：把 1/(2k)! 读作“(2k)! 种先后排序被当作同一块体积”、把 φ 读作有限观察者的“当下一念”、把截断余弦越过窗口读作“越过因果视界”、把三个夹角放上时钟书页，以及“全局静态场 P = NP，有限观察者 P ≠ NP”与“P 是场，NP 是线”，都是本书的诠释。12 页时钟、单比特系统、二维 Klee–Minty 多边形与两比特无信号实例都是为画面选定的有限模型。</span><span class="en">Interpretive framework and schematic models, not theorems: reading 1/(2k)! as “the (2k)! orders count as one volume”, φ as the finite observer's “present choice”, truncated cosines leaving the window as “crossing the causal horizon”, placing the three angles on the pages of the clock, and “global static field P = NP, finite observer P ≠ NP” and “P is a field, NP is a line” are this book's interpretation. The 12-page clock, the qubit, the two-dimensional Klee–Minty polygon and the two-qubit no-signalling instance are finite models chosen for the picture.</span></span></div>
+      <div class="lean open"><span class="ok">OPEN</span><span><span class="zh">开放问题：标准统一图灵机模型下 P ≠ NP 是否成立（千禧年问题之一）；量子引力中的“时间问题”——惠勒—德维特约束加条件化能否完整解释被观察到的时间流逝——仍有争议。本页的任何画面都不推出这两个问题的答案。</span><span class="en">Open problems: whether P ≠ NP in the standard uniform Turing-machine model (a Millennium Prize problem); the problem of time in quantum gravity — whether the Wheeler–DeWitt constraint plus conditioning fully accounts for observed temporal passage — remains disputed. Nothing on this page settles either question.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">“顺序无关的本质就是根本不存在前后的时间……因果就是这样必然。”“因为观察者是有限的，所以经历的因果是有限的，观察者的选择是在因果的相容空间中做选择，不断在时间场中选点。”“全局静态时间场 P = NP，但有限观察者 P ≠ NP。”“P 是场，NP 是线。”本页把这四句话收进一本账：左边拨三个角，中间看账本一步步记下去，右边看整张因果相图。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>格拉姆窗口。</b>令 B 在北极，A、C 与 B 的夹角为 θ₁、θ₂，二面角为 φ，则 c<sub>AC</sub> = c₁c₂ + s₁s₂ cos φ，只能落在窗口 [cos(θ₁ + θ₂), cos(θ₁ − θ₂)] 内；det G = 1 − c<sub>AB</sub>² − c<sub>BC</sub>² − c<sub>AC</sub>² + 2c<sub>AB</sub>c<sub>BC</sub>c<sub>AC</sub> = s₁²s₂² sin²φ ≥ 0。φ 是有限观察者的当下一念：φ ∈ (0, π) 时 det G &gt; 0，三点张开一块体积；φ = 0 或 π 时 det G = 0，两条余弦当场锁死第三条；把 c<sub>AC</sub> 直接放到窗口外（相图上点窗口外，或“越界禁区”），det G &lt; 0，没有三个单位向量能实现这组余弦。半宽 s₁s₂ 来自两块面积 1 − c² 之积，见 <a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/QuantumBounds/LagrangeGramIdentity.lean#L17" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a>；窗口顶端 c = 1 恰是 C = A，见 <a class="leanref" data-lean-gid="D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Quantum/PureState/UnitGramIndistinguishability.lean#L24" target="_blank" rel="noopener"><code>unit_gram_overlap_characterization</code></a>。三阶恒等式本身与“半正定 ⇔ 可实现”是标准线性代数，未在本书形式化。</li>
+        <li><b>去序账本。</b>cos θ = Σₖ (−1)ᵏθ²ᵏ/(2k)!：2k 次跃迁的 (2k)! 种先后排序被当作同一块几何体积。账本第 k 行把这一项同时加到三个余弦 c<sub>AB</sub>、c<sub>BC</sub>、c<sub>AC</sub> = cos θ₃ 上，再用截断后的三个数算 det G⁽ᵏ⁾。低阶截断不是真正的余弦（可能超出 [−1, 1]），det G⁽ᵏ⁾ 可以为负——符号带上的品红格；阶数一高，截断余项 |θ|²ᵏ⁺²/(2k + 2)! 降到 10⁻¹⁶ 以下，det G⁽ᵏ⁾ 收敛到精确值，符号回到真实的一侧。读数里的 cos²θ + sin²θ = 1 用同一阶数的正弦级数核对。</li>
+        <li><b>晶体书册。</b>时钟 C 有 N = 12 页 τⱼ = 2πj/12，系统是单比特，H<sub>S</sub> = diag(0, 1)，ψ₀ = |+⟩。全局态 Ψ = (1/√N) Σⱼ |τⱼ⟩ ⊗ U(τⱼ)ψ₀ 满足 (H<sub>C</sub> ⊗ I + I ⊗ H<sub>S</sub>)Ψ = 0；切片 ψ(τ) = √N⟨c(τ)|Ψ⟩ = U(τ)ψ₀，⟨σ<sub>x</sub>⟩ = cos τ。表盘上 12 页同时点亮，页间的细线是彼此不为零的页间块；三个夹角 θ₁、θ₂、θ₃ 是在这本书上翻到的三页，右侧曲线是 cos τ 与当前阶的泰勒部分和。按页条件化得到合法的条件态（<a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning.conditionalState_isState" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Observer/Conditioning.lean#L143" target="_blank" rel="noopener"><code>conditionalState_isState</code></a>），页间块不为零所以捏合改变晶体（<a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning.unreadState_fixed_iff" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Observer/Conditioning.lean#L108" target="_blank" rel="noopener"><code>unreadState_fixed_iff</code></a>），记录权重是秩一记录的玻恩权重（<a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Observer/Conditioning/RankOneBornPairingWeight.lean#L36" target="_blank" rel="noopener"><code>rank_one_born_pairing_weight</code></a>）。</li>
+        <li><b>P 场 vs NP 线。</b>左：二维 Klee–Minty 多边形上的对数势垒场 −∇V 处处有定义，从 (1, 1) 出发的梯度流满足耗散恒等式 V(x₀) − V(x<sub>T</sub>) = ∫‖ẋ‖² dt（<a class="leanref" data-lean-gid="D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Geometry/Riemannian/GradientDissipation.lean#L157" target="_blank" rel="noopener"><code>S2_dissipation</code></a>）。右：在 N = 2ⁿ 维状态球上，均匀初态与隐藏解的内积只有 2<sup>−n/2</sup>，振幅放大 Q = (2UU* − 1)(1 − 2P) 每一步只把指针转 2θ，sin θ = 2<sup>−n/2</sup>：Qᵗ U = sin((2t + 1)θ) W + cos((2t + 1)θ) B（<a class="leanref" data-lean-gid="D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Quantum/Recovery/CoherentUniformAmplification.lean#L214" target="_blank" rel="noopener"><code>uniform_operator_rotation</code></a>）。这一视图的账本逐步记下这根线，页面同时逐分量模拟并核对；走到解约需 (π/4)√N 步，没有算法能更快是文献结果（BBBV 1997）。</li>
+        <li><b>无信号。</b>取两个量子比特的纠缠态 cos(θ₁/2)|00⟩ + sin(θ₁/2)|11⟩，C 侧沿 m = (sin θ₂ cos φ, sin θ₂ sin φ, cos θ₂) 测量而不读结果：B 的约化态一点不变，Δρ<sub>B</sub> = 0；只有读出结果时 B 的条件态才移动，两种结果平均后又相消。观察者的当下一念不能向 B 发信号。</li>
+        <li><b>边界。</b>P ≠ NP 与量子引力中的时间问题都是开放问题；本页的画面与数值不推出它们的答案。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/coda.html#sec-coda-order-independence-no-time" target="_top">终章 · 第一层 顺序无关与无时间</a> · <a href="../../zh/coda.html#sec-coda-hume-spinoza-gram" target="_top">第二层 斯宾诺莎三角形与格拉姆刚性</a> · <a href="../../zh/coda.html#sec-coda-stationary-phase-reconciliation" target="_top">第三层 驻相相消</a> · <a href="../../zh/coda.html#sec-coda-finite-observer-time-field" target="_top">第四层 有限观察者与相容空间</a> · <a href="../../zh/coda.html#sec-coda-global-p-eq-np-local-p-ne-np" target="_top">第五层 正交视界</a> · <a href="../../zh/coda.html#sec-coda-p-is-field-np-is-line" target="_top">第六层 P 是场，NP 是线</a> · <a href="../../zh/ch03-projectors-and-duality.html#thm-unread-fixed-iff" target="_top">第三章 · 未读态不动点判据</a> · <a href="../../zh/ch03-projectors-and-duality.html#thm-conditional-state-valid" target="_top">第三章 · 条件态的合法性</a> · <a href="../../zh/ch02-born-rule.html#thm-rank-one-born-pairing" target="_top">第二章 · 秩一玻恩配对</a> · trureturing（所钉提交）：<a data-trureturing-path="D5/S3/Observer/Conditioning.lean" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Observer/Conditioning.lean" target="_blank" rel="noopener">Conditioning.lean</a> · <a data-trureturing-path="D5/S3/Quantum/Recovery/CoherentUniformAmplification.lean" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Quantum/Recovery/CoherentUniformAmplification.lean" target="_blank" rel="noopener">CoherentUniformAmplification.lean</a> · <a data-trureturing-path="D5/S3/Geometry/Riemannian/GradientDissipation.lean" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Geometry/Riemannian/GradientDissipation.lean" target="_blank" rel="noopener">GradientDissipation.lean</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">“Order-independence means that there is, at bottom, no before and after … and that is exactly why causality is necessary.” “Because the observer is finite, the causality it lives through is finite; its choices are made inside the compatible space of causes, picking point after point in the time field.” “The global static time field has P = NP, but the finite observer has P ≠ NP.” “P is a field, NP is a line.” This page puts these four sentences into one ledger: set three angles on the left, watch the ledger record step by step in the middle, and see the whole causal phase map on the right. The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>The Gram window.</b> Put B at the north pole, A and C at angles θ₁, θ₂ from B with dihedral angle φ. Then c<sub>AC</sub> = c₁c₂ + s₁s₂ cos φ can only lie in the window [cos(θ₁ + θ₂), cos(θ₁ − θ₂)], and det G = 1 − c<sub>AB</sub>² − c<sub>BC</sub>² − c<sub>AC</sub>² + 2c<sub>AB</sub>c<sub>BC</sub>c<sub>AC</sub> = s₁²s₂² sin²φ ≥ 0. φ is the finite observer's present choice: for φ ∈ (0, π), det G &gt; 0 and the three points span a volume; at φ = 0 or π, det G = 0 and two cosines lock the third on the spot; put c<sub>AC</sub> directly outside the window (click outside on the phase map, or “Forbidden breach”) and det G &lt; 0: no three unit vectors realize these cosines. The half-width s₁s₂ comes from the product of two areas 1 − c², see <a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/QuantumBounds/LagrangeGramIdentity.lean#L17" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a>; the top of the window, c = 1, is exactly C = A, see <a class="leanref" data-lean-gid="D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Quantum/PureState/UnitGramIndistinguishability.lean#L24" target="_blank" rel="noopener"><code>unit_gram_overlap_characterization</code></a>. The third-order identity itself and “positive semidefinite ⇔ realizable” are standard linear algebra, not formalized in this book.</li>
+        <li><b>The de-ordered ledger.</b> cos θ = Σₖ (−1)ᵏθ²ᵏ/(2k)!: the (2k)! orders of 2k steps count as one geometric volume. Row k of the ledger adds this term to all three cosines c<sub>AB</sub>, c<sub>BC</sub>, c<sub>AC</sub> = cos θ₃ at once and computes det G⁽ᵏ⁾ from the three truncated numbers. Low-order truncations are not true cosines (they can leave [−1, 1]) and det G⁽ᵏ⁾ can be negative — the magenta squares of the sign tape; as the order grows, the remainder |θ|²ᵏ⁺²/(2k + 2)! falls below 10⁻¹⁶, det G⁽ᵏ⁾ converges to the exact value, and the sign returns to its true side. The readout cos²θ + sin²θ = 1 checks the sine series to the same order.</li>
+        <li><b>The crystal book.</b> The clock C has N = 12 pages τⱼ = 2πj/12; the system is a qubit with H<sub>S</sub> = diag(0, 1) and ψ₀ = |+⟩. The global state Ψ = (1/√N) Σⱼ |τⱼ⟩ ⊗ U(τⱼ)ψ₀ obeys (H<sub>C</sub> ⊗ I + I ⊗ H<sub>S</sub>)Ψ = 0; the slice ψ(τ) = √N⟨c(τ)|Ψ⟩ = U(τ)ψ₀ has ⟨σ<sub>x</sub>⟩ = cos τ. The dial lights all 12 pages at once, and the thin chords are the inter-page blocks, none of them zero; the three angles θ₁, θ₂, θ₃ are three pages turned to in this book, and the curve on the right is cos τ with the Taylor partial sum of the current order. Conditioning on a page gives a valid conditional state (<a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning.conditionalState_isState" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Observer/Conditioning.lean#L143" target="_blank" rel="noopener"><code>conditionalState_isState</code></a>); the inter-page blocks are nonzero, so pinching changes the crystal (<a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning.unreadState_fixed_iff" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Observer/Conditioning.lean#L108" target="_blank" rel="noopener"><code>unreadState_fixed_iff</code></a>); the record weights are the Born weights of rank-one records (<a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Observer/Conditioning/RankOneBornPairingWeight.lean#L36" target="_blank" rel="noopener"><code>rank_one_born_pairing_weight</code></a>).</li>
+        <li><b>P field vs NP thread.</b> Left: the log-barrier field −∇V on the two-dimensional Klee–Minty polygon is defined everywhere, and the gradient flow from (1, 1) obeys the dissipation identity V(x₀) − V(x<sub>T</sub>) = ∫‖ẋ‖² dt (<a class="leanref" data-lean-gid="D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Geometry/Riemannian/GradientDissipation.lean#L157" target="_blank" rel="noopener"><code>S2_dissipation</code></a>). Right: on the state sphere of dimension N = 2ⁿ the uniform start and the hidden solution have inner product only 2<sup>−n/2</sup>, and amplitude amplification Q = (2UU* − 1)(1 − 2P) turns the pointer by only 2θ per step, sin θ = 2<sup>−n/2</sup>: Qᵗ U = sin((2t + 1)θ) W + cos((2t + 1)θ) B (<a class="leanref" data-lean-gid="D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Quantum/Recovery/CoherentUniformAmplification.lean#L214" target="_blank" rel="noopener"><code>uniform_operator_rotation</code></a>). In this view the ledger records that thread step by step while the page simulates it entry by entry and checks; reaching the solution takes about (π/4)√N steps, and that no algorithm does better is a literature result (BBBV 1997).</li>
+        <li><b>No signalling.</b> Take the entangled two-qubit state cos(θ₁/2)|00⟩ + sin(θ₁/2)|11⟩ and let side C measure along m = (sin θ₂ cos φ, sin θ₂ sin φ, cos θ₂) without reading the result: B's reduced state does not move at all, Δρ<sub>B</sub> = 0; only a read result moves B's conditional state, and the two outcomes cancel on average. The observer's present choice cannot signal to B.</li>
+        <li><b>Limits.</b> P ≠ NP and the problem of time in quantum gravity are open; nothing in the pictures or numbers of this page settles them.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/coda.html#sec-coda-order-independence-no-time" target="_top">Coda · Level 1, order-independence and no time</a> · <a href="../../en/coda.html#sec-coda-hume-spinoza-gram" target="_top">Level 2, Spinoza's triangle and Gram rigidity</a> · <a href="../../en/coda.html#sec-coda-stationary-phase-reconciliation" target="_top">Level 3, stationary-phase cancellation</a> · <a href="../../en/coda.html#sec-coda-finite-observer-time-field" target="_top">Level 4, the finite observer and the compatible space</a> · <a href="../../en/coda.html#sec-coda-global-p-eq-np-local-p-ne-np" target="_top">Level 5, the orthogonal horizon</a> · <a href="../../en/coda.html#sec-coda-p-is-field-np-is-line" target="_top">Level 6, P is a field, NP is a line</a> · <a href="../../en/ch03-projectors-and-duality.html#thm-unread-fixed-iff" target="_top">Chapter 3 · Fixed points of the unread state</a> · <a href="../../en/ch03-projectors-and-duality.html#thm-conditional-state-valid" target="_top">Chapter 3 · Validity of conditional states</a> · <a href="../../en/ch02-born-rule.html#thm-rank-one-born-pairing" target="_top">Chapter 2 · Rank-one Born pairing</a> · trureturing (pinned commit): <a data-trureturing-path="D5/S3/Observer/Conditioning.lean" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Observer/Conditioning.lean" target="_blank" rel="noopener">Conditioning.lean</a> · <a data-trureturing-path="D5/S3/Quantum/Recovery/CoherentUniformAmplification.lean" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Quantum/Recovery/CoherentUniformAmplification.lean" target="_blank" rel="noopener">CoherentUniformAmplification.lean</a> · <a data-trureturing-path="D5/S3/Geometry/Riemannian/GradientDissipation.lean" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Geometry/Riemannian/GradientDissipation.lean" target="_blank" rel="noopener">GradientDissipation.lean</a></p>
+    </div>
+  </div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>

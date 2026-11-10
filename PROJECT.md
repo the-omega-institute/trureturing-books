@@ -60,13 +60,27 @@
 
 本书库的所有结构、版式、组件与交互媒体一律严格对齐模板自带的权威示例专著 `books/example-monograph/` 与 `templates/`，严禁脱离示例框架“自创”结构或私有样式：
 
-1. **交互可视化（`books/<slug>/viz/<id>/`）严格对齐 `books/example-monograph/viz/golden-carry/`**：
-   - 页面入口必须只加载 `../assets/theme.css`、`style.css`、`../assets/shell.js` 与底部的 `<script src="main.js"></script>`（严禁自造 `viz.js`、内联 `<head>` 主题脚本或 `<html data-theme="...">` 属性）。
-   - 顶栏 `<header class="top">` 仅包含 `.brand`（`a.crumb`、`h1.logo`、`.tagline`）与 `.status`（状态 `span.pill` 及 `<div class="langs">` 中英切换按钮）；`theme/viz/theme.css` 明确规定可视化为单一暗色控制台主题，严禁自创 `<div class="themes">` 亮暗切换按钮。
-   - 布局严格采用 `golden-carry` 的三栏 `.app` 网格（`grid-template-columns: minmax(270px, 310px) minmax(0, 1fr) minmax(320px, 400px)`）：
-     - 左栏 `<aside class="col deck">`：`#inputs`（`.num-field`、`.stepper`、`.chips.presets`）与 `#readouts`（`<dl class="ro">`、`<p class="note">`）；
-     - 中栏 `<main class="center">`：主舞台 `<section class="panel">` 与底部 `<footer class="rail" id="rail">`（`.transport`、`.clock`、`.keys`）；
-     - 右栏 `<aside class="col side">`：带 `data-thumb` 的副视图面板 `<section class="panel sec" ... data-thumb>` 与 `#evidence` 依据面板（仅使用 `theme/viz/theme.css` 定义的标准类名 `.lean`、`.lean.num`、`.lean.model`、`.lean.argued`、`.lean.open`，严禁自创 `.lean.interp`、`LIT`、`.lean-badge`、`.tier` 等非标类名），并配 `<button class="chip" id="infoBtn">` 打开 `<div class="drawer" id="drawer" hidden><div class="sheet">...</div></div>` 理论接口。
+1. **交互可视化（`books/<slug>/viz/<id>/`）在结构、样式与视觉元素上 1:1 严格对齐 `books/example-monograph/viz/golden-carry/`（专属技能规范见 `skills/local-viz-golden-carry/SKILL.md`）**：
+   - **执行载体**：一律通过命令行直接调用 `claude` CLI（`claude -p --model opus ...`，**严禁使用 Claude Subagent**），以 `books/example-monograph/viz/golden-carry/{index.html,style.css,main.js}` 为唯一样板实现与重构。
+   - **入口与顶栏**：页面只加载 `../assets/theme.css`、`style.css`、`../assets/shell.js` 与底部的 `<script src="main.js"></script>`（严禁自造 `viz.js`、内联 `<head>` 主题脚本或 `<html data-theme="...">` 属性）。顶栏 `<header class="top">` 仅包含 `.brand`（`a.crumb`、`h1.logo`、`.tagline`）与 `.status`（状态 `span.pill` 及 `<div class="langs">` 中英切换按钮）；严禁自创 `<div class="themes">` 亮暗切换按钮。
+   - **三栏 `.app` 网格与响应式样式（`style.css`）**：直接复用 `golden-carry/style.css` 的 `.app` 三栏网格（`grid-template-columns: minmax(270px, 310px) minmax(0, 1fr) minmax(320px, 400px)`）及 `@media (max-width: 1180px)`、`@media (max-width: 760px)`、`:root[data-embed]`、`:root[data-thumb-mode]` 响应式规则。
+   - **左栏 `<aside class="col deck">`（`#inputs` + `#readouts`）**：
+     - `#inputs`：包含 2–3 组 `.num-field`（`<label>` + `.stepper` `−` / `<input type="number">` / `+` 步进器 + `<input type="range">` 滑块）与 `.chips.presets#presets`（预设按钮 + `Swap` / `Random` / `Reset` 动作按钮）；
+     - `#readouts`：`<dl class="ro">` 严禁堆砌十余行稠密文字，必须对齐 `golden-carry` 的“**6 项半宽精炼读数 + 1 项 `.wide.deficit` 24px 发光主读数（带 `.vpos/.vneg/.vzero`、`.sub` 与 `.okmark` `✓`）+ 2 项 `.wide` 定理核验行（带 `.okmark` `✓`）**”结构，底部配 `<p class="note" id="roNote">`。
+   - **中栏 `<main class="center">`（`#ledgerPanel` + `footer.rail`）**：
+     - `<section class="panel ledger" id="ledgerPanel">`：
+       - `.head`（`<h2 id="ledgerTitle">` + `.aside`）；
+       - `.rules` 规则栏：4 枚 `.rule`（`.r0`、`.r1`、`.rj`、`.ra`）核心公式/改写规则徽章（`<b>...</b> ... <i>...</i>`）；
+       - 几何舞台 `.stage`（若包含交互 `<canvas>`）：配 `.scan`、四角 `.bracket.tl/.tr/.bl/.br`、`.hud-tl`（`.big` + `.sub`）与 `.hud-tr.chips`，画布内仅绘制干净的几何图形，**严禁在 `<canvas>` 内手绘多框文字表格或产生任何文字重叠**；
+       - **分步交互账本 `.sheetwrap > .digits#ledger > .drow`**：分步推演行（`.drow.hdr`、`.drow.input`、`.drow.sum`、`.drow.pass`、当前步琥珀色发光 `.drow.now`、未来步半透明 `.drow.future`、终态行 `.drow.final`）必须用真实 HTML DOM 渲染（含 `<span class="lab">`、`<div class="cells"><span class="d0|d1|d2 touch">`、`<span class="what"><span class="sgn pos|neg|zero"><code><span class="name">`），支持点击任意 `[data-pass]` 行直接跳转到对应步；
+       - **底部符号带 `.tape-row`**：含 `<span class="tape-label">`、`<div class="tape" id="tape">`（可点击 `<i class="pos|neg|zero now|future" data-pass="...">` 方块序列）与 `<span class="tape-sum" id="tapeSum">`；
+       - `<div class="toast" id="toast">`；
+     - **`<footer class="rail" id="rail">`**：每个可视化必须具备完整的三段式播放控制栏——`.transport`（`#first` `⏮`、`#prev` `◀`、`#play` `▶`、`#next` `▶▶`、`#last` `⏭`）、`.clock`（`<span class="tau" id="passLabel">` + `<input type="range" id="pass">`）与 `.keys` 快捷键提示。
+   - **右栏 `<aside class="col side">`（`#heatPanel[data-thumb]` + `#evidence`）**：
+     - **上方二维相图面板 `<section class="panel sec heatpanel" id="heatPanel" data-thumb>`**：包含 `<h2 class="thumb-hide">...<span class="aside" id="heatRange">...</span></h2>`、`<div class="heatwrap"><canvas id="heat"></canvas><div class="scan"></div></div>`（1:1 交互二维相图/参数热图/矩阵图，带琥珀色十字准星与当前选中格琥珀色发光框，支持点击/拖拽选点）、`<div class="chips thumb-hide" id="nChips">`、`<ul class="legend thumb-hide">` 四色图例（`.sw.pos`、`.sw.zero`、`.sw.neg`、`.sw.cur`）、`<p class="note thumb-hide" id="heatCounts">` 与 `<p class="note thumb-hide" id="heatHover">`；
+     - **下方依据面板 `<section class="panel sec" id="evidence">`**：仅使用 `theme/viz/theme.css` 定义的标准类名 `.lean`、`.lean.num`、`.lean.model`、`.lean.argued`、`.lean.open`（严禁自创 `.lean.interp`、`LIT`、`.lean-badge`、`.tier` 等非标类名），并配 `<button class="chip" id="infoBtn">` 打开 `<div class="drawer" id="drawer" hidden><div class="sheet">...</div></div>` 理论接口。
+   - **无文字左右分栏缩略图封面（`?thumb=1` `drawCover()`）**：
+     - 当 `TRV.thumbMode` 激活时，在 `canvas#heat`（`1280×720`）上按 `golden-carry` 的 `drawCover()` 规范绘制：径向青色辉光背景、**左半幅（`ox = 64*u, side = 600*u`）二维相图/矩阵 + 琥珀色十字准星与选中框**、**右半幅（`x0 = 760*u`）数学账本行 `#1..#k` + 青/品红格 + 琥珀色发光末行边框**，**严禁在缩略图上绘制自然语言散文标题或说明文字**。
 2. **讲解视频（`books/<slug>/films/<NNN>-<name>/`）严格对齐 `books/example-monograph/films/001-golden-deficit/`**：
    - 目录固定由 `film.json`、`script.json`、`scenes.js` 与 `poster.jpg` 组成，统一通过 `theme/film/film.sh` 构建与校验。
 3. **演示文稿（`books/<slug>/slides/<deck>/`）严格对齐 `books/example-monograph/slides/overview/`**：

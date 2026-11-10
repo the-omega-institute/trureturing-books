@@ -51,7 +51,7 @@
     <text x="764" y="253" text-anchor="middle" fill="#6f8ea5" font-size="9">eigen-blocks survive self-measurement</text>
     <text x="764" y="284" text-anchor="middle" fill="#a5b4fc" font-size="10">0 sorry · 0 unverified theorems</text>
     <text x="764" y="304" text-anchor="middle" fill="#9d8cff" font-size="9.5">Lean 4 kernel + literature + OPEN</text>
-    <text x="764" y="324" text-anchor="middle" fill="#6f8ea5" font-size="9.5">commit 4c76e4a56525 (trureturing)</text>
+    <text x="764" y="324" text-anchor="middle" fill="#6f8ea5" font-size="9.5">commit 0932810a7773 (trureturing)</text>
   </g>
 
   <rect x="24" y="368" width="872" height="30" rx="6" fill="#050c16" stroke="#1f5d7c"/>

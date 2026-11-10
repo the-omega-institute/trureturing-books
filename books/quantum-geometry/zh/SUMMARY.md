@@ -50,3 +50,10 @@
 - [第二十六章 单量子比特旋转器编译：布洛赫几何定理与 ZYZ 欧拉角编译器](ch26-single-qubit-rotor-compilation.md)
 - [第二十七章 走进 Lean 4 公理圣殿（上）：从平行四边形恒等式到有限记录挤压](ch27-reading-frozen-proofs-i.md)
 - [第二十八章 走进 Lean 4 公理圣殿（下）：从秩一玻恩归约到 $\psi = \psi(\psi)$ 的终极合拢](ch28-reading-frozen-proofs-ii.md)
+
+# 终章与附录
+
+- [终章：在所有的球之外](coda.md)
+- [附录 A：传统量子力学与几何语言对照词典](appendix-a.md)
+- [附录 B：克利福德代数速查手册](appendix-b.md)
+- [附录 C：trureturing 锁定声明完整索引](appendix-c.md)

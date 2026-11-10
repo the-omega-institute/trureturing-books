@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 // Browser regression suite for quantum-geometry/viz/qubit-geometry (Playwright + Chromium):
 //   node books/quantum-geometry/viz/tests/qubit-geometry.test.mjs      (or node tools/node/viz-test.mjs quantum-geometry)
-// Reads page state through the read-only window.QG_DEBUG probe and verifies every geometric and information-theoretic
-// quantity against an independent implementation written here.
+// Reads page state through the read-only window.QG_DEBUG probe and checks it against an independent implementation
+// written here: complex numbers as {re, im} objects, the textbook gate matrices, rotors from a power series of
+// exp(−i(α/2) n̂·σ) (no closed form), Bloch vectors as ψ†σψ of the textbook state, and the sign convention of the tape.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -12,51 +13,64 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '.
 const BOOK = 'quantum-geometry', ID = 'qubit-geometry';
 const lock = JSON.parse(fs.readFileSync(path.join(ROOT, 'trureturing.lock.json'), 'utf8'));
 
-/* ---------- independent mathematical implementation ---------- */
-// Built from explicit 2×2 density matrices instead of Bloch vectors:
-//   ρ₀ = |ψ(θ,φ)⟩⟨ψ(θ,φ)|, |ψ⟩ = (cos(θ/2), e^{iφ} sin(θ/2));  ρ(η) = E_η(ρ₀) = (1−η)ρ₀ + ηΠ(ρ₀).
-const DEG = Math.PI / 180;
-const xlogx = (x) => (x > 1e-300 ? x * Math.log(x) : 0);
-function h2Nats(p) {
-  if (p <= 1e-15 || p >= 1 - 1e-15) return 0;
-  return -(p * Math.log(p) + (1 - p) * Math.log(1 - p));
+/* ---------- independent implementation ---------- */
+const cx = (re, im = 0) => ({ re, im });
+const add = (a, b) => cx(a.re + b.re, a.im + b.im);
+const mul = (a, b) => cx(a.re * b.re - a.im * b.im, a.re * b.im + a.im * b.re);
+const conj = (a) => cx(a.re, -a.im);
+const abs2 = (a) => a.re * a.re + a.im * a.im;
+const mat = (rows) => rows.map((r) => r.map((z) => (typeof z === 'number' ? cx(z) : z)));
+const mm = (A, B) => A.map((_, i) => B[0].map((__, j) => A[i].reduce((s, a, k) => add(s, mul(a, B[k][j])), cx(0))));
+const madd = (A, B) => A.map((r, i) => r.map((z, j) => add(z, B[i][j])));
+const msc = (A, z) => A.map((r) => r.map((w) => mul(w, z)));
+const mdiff = (A, B) => Math.max(...A.flatMap((r, i) => r.map((z, j) => Math.hypot(z.re - B[i][j].re, z.im - B[i][j].im))));
+const mv = (A, v) => A.map((r) => r.reduce((s, a, k) => add(s, mul(a, v[k])), cx(0)));
+const tr = (A) => add(A[0][0], A[1][1]);
+const det = (A) => add(mul(A[0][0], A[1][1]), mul(cx(-1), mul(A[0][1], A[1][0])));
+const ID2 = mat([[1, 0], [0, 1]]);
+const s2 = Math.SQRT1_2;
+const sx = mat([[0, 1], [1, 0]]), sy = mat([[0, cx(0, -1)], [cx(0, 1), 0]]), sz = mat([[1, 0], [0, -1]]);
+const TEXTBOOK = {
+  I: ID2, X: sx, Y: sy, Z: sz, H: mat([[s2, s2], [s2, -s2]]), S: mat([[1, 0], [0, cx(0, 1)]]), T: mat([[1, 0], [0, cx(Math.cos(Math.PI / 4), Math.sin(Math.PI / 4))]])
+};
+const AXIS = { x: [1, 0, 0], y: [0, 1, 0], z: [0, 0, 1], h: [s2, 0, s2] };
+const GATE_AXIS = { I: ['z', 0], X: ['x', Math.PI], Y: ['y', Math.PI], Z: ['z', Math.PI], H: ['h', Math.PI], S: ['z', Math.PI / 2], T: ['z', Math.PI / 4] };
+/** exp(M) by its power series (40 terms are far below double precision for ‖M‖ ≤ 2π). */
+function expm(M) {
+  let term = ID2, sum = ID2;
+  for (let k = 1; k < 60; k++) { term = msc(mm(term, M), cx(1 / k)); sum = madd(sum, term); }
+  return sum;
 }
-function independentModel(theta, phi, alpha, eta) {
-  const th = theta * DEG, ph = phi * DEG, al = alpha * DEG;
-  const dot = Math.cos(th), wedge = Math.sin(th);
-  const a = Math.cos(th / 2), b = Math.sin(th / 2);
-  // ρ₀ entries: ρ₀₀ = a², ρ₁₁ = b², ρ₀₁ = ab e^{−iφ}, ρ₁₀ = ab e^{iφ}
-  const pure = { d0: a * a, d1: b * b, re: a * b * Math.cos(ph), im: -a * b * Math.sin(ph) };
-  // E_η keeps the diagonal and multiplies the off-diagonal entries by (1 − η)
-  const cur = { d0: pure.d0, d1: pure.d1, re: (1 - eta) * pure.re, im: (1 - eta) * pure.im };
-  const off2 = (m) => 2 * (m.re * m.re + m.im * m.im);            // |ρ₀₁|² + |ρ₁₀|²
-  const hsDiag = pure.d0 ** 2 + pure.d1 ** 2;                       // ⟨Π(ρ₀),Π(ρ₀)⟩
-  const hsOffPure = off2(pure), hsOffActive = off2(cur);
-  const trSq = cur.d0 ** 2 + cur.d1 ** 2 + off2(cur);               // Tr ρ(η)² = ⟨ρ(η),ρ(η)⟩
-  // eigenvalues of ρ(η) and the relative entropy D(ρ(η) ‖ Π(ρ₀)) = Tr ρ ln ρ − Tr ρ ln Π(ρ₀)
-  const disc = Math.sqrt((cur.d0 - cur.d1) ** 2 + 2 * off2(cur));
-  const lam = [(1 + disc) / 2, (1 - disc) / 2];
-  const trRhoLnRho = xlogx(lam[0]) + xlogx(lam[1]);
-  const lnSafe = (x) => (x > 1e-300 ? Math.log(x) : 0);
-  const trRhoLnPi = cur.d0 * lnSafe(pure.d0) + cur.d1 * lnSafe(pure.d1);
-  const relEntropy = Math.max(0, trRhoLnRho - trRhoLnPi);
-  const V = Math.abs(Math.cos(al)), D = Math.sqrt(Math.max(0, 1 - V * V));
-  const entropyPinchNats = -(xlogx(pure.d0) + xlogx(pure.d1));
-  return {
-    p0: pure.d0, p1: pure.d1, dot, wedge, pythAB: dot * dot + wedge * wedge,
-    V, D, pythDV: D * D + V * V,
-    hsDiag, hsOffPure, hsOffActive, hsTotalActive: trSq,
-    entropyPinchNats, entropyPinchBits: entropyPinchNats / Math.LN2,
-    entropyCurrentNats: -trRhoLnRho, entropyRemainingNats: relEntropy,
-    blochDecohered: [2 * cur.re, -2 * cur.im, cur.d0 - cur.d1]
-  };
+const nsig = (n) => madd(madd(msc(sx, cx(n[0])), msc(sy, cx(n[1]))), msc(sz, cx(n[2])));
+const rotorExp = (n, a) => expm(msc(nsig(n), cx(0, -a / 2)));
+const ROTOR = Object.fromEntries(Object.entries(GATE_AXIS).map(([g, [ax, a]]) => [g, rotorExp(AXIS[ax], a)]));
+const state = (thDeg, phDeg) => { const t = thDeg * Math.PI / 180, p = phDeg * Math.PI / 180; return [cx(Math.cos(t / 2)), cx(Math.sin(t / 2) * Math.cos(p), Math.sin(t / 2) * Math.sin(p))]; };
+const blochOf = (psi) => [sx, sy, sz].map((S) => { const v = mv(S, psi); return mul(conj(psi[0]), v[0]).re + mul(conj(psi[1]), v[1]).re; });
+/** Components (w, b₁, b₂, b₃) of a rotor matrix M = w − i b·σ: w = Re tr M / 2, b_k = −Im tr(Mσ_k) / 2. */
+const comps = (M) => [tr(M).re / 2, ...[sx, sy, sz].map((S) => -tr(mm(M, S)).im / 2)];
+const signOf = (q) => { for (const x of q) if (Math.abs(x) > 1e-9) return Math.sign(x); return 1; };
+/** The circuit, step by step: textbook state, rotor product, Bloch vector, spinor and the tape sign. */
+function model(th, ph, gates) {
+  const psi0 = state(th, ph);
+  let textbook = psi0, M = ID2;
+  const steps = [{ r: blochOf(psi0), rotor: [1, 0, 0, 0], psi: psi0, sign: 1 }];
+  for (const g of gates) {
+    textbook = mv(TEXTBOOK[g], textbook);
+    M = mm(ROTOR[g], M);
+    const q = comps(M), psi = mv(M, psi0);
+    steps.push({ r: blochOf(textbook), rotorR: blochOf(psi), rotor: q, psi, sign: signOf(q) });
+  }
+  return steps;
 }
 const near = (a, b, tol = 1e-9) => Math.abs(a - b) <= tol;
+const nearV = (u, v, tol = 1e-9) => u.length === v.length && u.every((x, i) => near(x, v[i], tol));
+const eq = (x, y) => JSON.stringify(x) === JSON.stringify(y);
 
 /* ---------- open ---------- */
 const T = await session({ viewport: { width: 1440, height: 900 }, locale: 'zh-CN' });
 const { page, check } = T;
 const D = (fn, arg) => page.evaluate(fn, arg);
+/** Wait until every scheduled render has run (renders are batched into animation frames). */
 const settle = async () => {
   await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
   await page.waitForFunction(() => !QG_DEBUG.pending(), null, { timeout: 30000 });
@@ -66,317 +80,284 @@ const open = async (query) => {
   await T.goto(BOOK, ID, query);
   await page.waitForFunction(() => window.QG_DEBUG && QG_DEBUG.frames() > 0, null, { timeout: 30000 });
 };
-
 await open('?lang=zh');
 let st = await D(() => QG_DEBUG.state());
-check('opens on balanced state (60°, 36°, 30°, 0) with empty gate tape', st.theta === 60 && st.phi === 36 && st.alpha === 30 && st.eta === 0 && st.gates.length === 0, JSON.stringify(st));
-check('page carries its id and runtime language', (await D(() => document.body.dataset.vizId)) === ID && (await D(() => TRV.lang())) === 'zh');
+check('opens on |ψ(60°, 36°)⟩ through H, Z, H with the finished ledger, α = 240° about ẑ, ⟨σ_z⟩ map', st.theta === 60 && st.phi === 36 && st.alpha === 240 && eq(st.gates, ['H', 'Z', 'H'])
+  && st.pass === 3 && st.passes === 3 && st.axis === 'z' && st.obs === 'z', JSON.stringify(st));
+check('page carries its id and the runtime language', (await D(() => document.body.dataset.vizId)) === ID && (await D(() => TRV.lang())) === 'zh');
 
-/* ---------- static bilingual parity of index.html ---------- */
+/* ---------- static bilingual parity of index.html & golden-carry CSS preservation ---------- */
 const html = fs.readFileSync(path.join(ROOT, 'books', BOOK, 'viz', ID, 'index.html'), 'utf8');
+const css = fs.readFileSync(path.join(ROOT, 'books', BOOK, 'viz', ID, 'style.css'), 'utf8');
+const themeCss = fs.readFileSync(path.join(ROOT, 'theme', 'viz', 'theme.css'), 'utf8');
+{
+  const strip = (s) => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ').trim();
+  const blocks = (s) => { const out = []; let depth = 0, start = 0; for (let i = 0; i < s.length; i++) { if (s[i] === '{') depth++; else if (s[i] === '}') { depth--; if (depth === 0) { out.push(s.slice(start, i + 1).trim()); start = i + 1; } } } return out; };
+  const gold = blocks(strip(fs.readFileSync(path.join(ROOT, 'books', 'example-monograph', 'viz', 'golden-carry', 'style.css'), 'utf8'))), mine = strip(css);
+  const missing = gold.filter((b) => !mine.includes(b));
+  check(`style.css keeps all ${gold.length} rule blocks of golden-carry verbatim (grid, media queries, embed, thumb, ledger, tape, map)`, gold.length > 60 && missing.length === 0, missing.slice(0, 2).join(' ‖ '));
+  check('style.css: the stage is 210px tall (min 190px, flex 0 0 210px) inside the ledger panel', /\.stage \{[^}]*height: 210px; min-height: 190px; flex: 0 0 210px;/.test(mine));
+  check('theme/viz/theme.css defines .lean.model .ok as var(--amber) and .lean.argued .ok as var(--violet)', /\.lean\.model \.ok \{\s*color: var\(--amber\);\s*\}/.test(themeCss) && /\.lean\.argued \.ok \{\s*color: var\(--violet\);\s*\}/.test(themeCss));
+}
 const count = (re) => (html.match(re) || []).length;
-check('index.html has equally many <span class="zh"> and <span class="en">', count(/<span class="zh">/g) === count(/<span class="en">/g) && count(/<span class="zh">/g) > 30,
-  `${count(/<span class="zh">/g)} vs ${count(/<span class="en">/g)}`);
-check('index.html has equally many class="zh" and class="en" blocks', count(/class="zh"/g) === count(/class="en"/g));
+check('index.html has equally many class="zh" and class="en" fragments', count(/class="zh"/g) === count(/class="en"/g) && count(/class="zh"/g) > 30, `${count(/class="zh"/g)} vs ${count(/class="en"/g)}`);
 
-/* ---------- A01: explicit circuit order |ψ⟩ → U(α) → ρ₀(θ,φ) → E_η → ρ(η) ---------- */
-const PIPELINE = '|ψ⟩ → U(α) → ρ₀(θ,φ) → E_η → ρ(η)';
-const langText = (sel, lang) => D(([s, l]) => document.querySelector(`${s} .${l}`).textContent.trim(), [sel, lang]);
-const ordered = (t, parts) => parts.every((p, i) => t.indexOf(p) >= 0 && (i === 0 || t.indexOf(p) > t.indexOf(parts[i - 1])));
-check('A01: the page exposes the canonical pipeline string', (await D(() => QG_DEBUG.pipeline())) === PIPELINE);
-check('A01: gates subhead names circuit step 2 and U(α) = exp(−iα n̂·σ/2) in both languages',
-  (await langText('#gatesHead', 'zh')).includes('线路第 2 步') && (await langText('#gatesHead', 'zh')).includes('U(α) = exp(−iα n̂·σ/2)')
-  && (await langText('#gatesHead', 'en')).includes('Circuit step 2') && (await langText('#gatesHead', 'en')).includes('U(α) = exp(−iα n̂·σ/2)'));
-check('A01: tape label reads 线路顺序 / Circuit order', (await langText('#tapeLbl', 'zh')) === '线路顺序' && (await langText('#tapeLbl', 'en')) === 'Circuit order');
-let tape = await text('#gateTape');
-check('A01: the tape shows the full circuit with U(α) = I before any gate', tape === '|ψ⟩ → U(α) = I → ρ₀(60°, 36°) → E_η (η = 0.00) → ρ(η)', tape);
-check('A01: the tape lists |ψ⟩, U(α), ρ₀, E_η, ρ(η) in circuit order', ordered(tape, ['|ψ⟩', 'U(α)', 'ρ₀(', 'E_η', 'ρ(η)']), tape);
-let note = await text('#roNote');
-check('A01: the readout note states the pipeline and its four steps in order (zh)', note.includes(PIPELINE)
-  && ordered(note, ['① 态制备 |ψ⟩', '② 旋子门 U(α) = exp(−iα n̂·σ/2)', '③ 门后纯态 ρ₀ = |ψ(θ,φ)⟩⟨ψ(θ,φ)|', '④ 固定 z 轴退相干信道 E_η', 'ρ(η) = E_η(ρ₀)'])
-  && note.includes('α = 30° 只驱动互补圆'), note);
-check('A01: the theory drawer states the pipeline in both languages',
-  (await text('#drawer div.zh')).includes(PIPELINE) && (await text('#drawer div.en')).includes(PIPELINE)
-  && /线路顺序：/.test(await text('#drawer div.zh')) && /Circuit order:/.test(await text('#drawer div.en')));
-
-/* ---------- Q04: every HS and entropy formula names its state ---------- */
-const DT_HS_ZH = '当前态希尔伯特—施密特分解 ⟨ρ(η),ρ(η)⟩ = ⟨Π(ρ₀),Π(ρ₀)⟩ + (|ρ₀₁(η)|²+|ρ₁₀(η)|²)';
-const DT_HS_EN = 'Current-state Hilbert–Schmidt split ⟨ρ(η),ρ(η)⟩ = ⟨Π(ρ₀),Π(ρ₀)⟩ + (|ρ₀₁(η)|²+|ρ₁₀(η)|²)';
-const DT_S_ZH = '当前态剩余相对熵相干 D(ρ(η) ‖ Π(ρ₀)) = S(Π(ρ₀)) − S(ρ(η))';
-const DT_S_EN = 'Current-state remaining coherence D(ρ(η) ‖ Π(ρ₀)) = S(Π(ρ₀)) − S(ρ(η))';
-const dtText = (ddId, lang) => D(([id, l]) => document.getElementById(id).parentElement.querySelector(`dt .${l}`).textContent, [ddId, lang]);
-check('Q04: #roHS label names ρ(η), Π(ρ₀) and ρ₀₁(η) in both languages', (await dtText('roHS', 'zh')) === DT_HS_ZH && (await dtText('roHS', 'en')) === DT_HS_EN);
-check('Q04: #roEntropy label names D(ρ(η) ‖ Π(ρ₀)) = S(Π(ρ₀)) − S(ρ(η)) in both languages', (await dtText('roEntropy', 'zh')) === DT_S_ZH && (await dtText('roEntropy', 'en')) === DT_S_EN);
-check('Q04: no readout label keeps a bare ⟨ρ,ρ⟩, Π(ρ) or ΔS without a state argument', await D(() => [...document.querySelectorAll('#readouts dt')].every((dt) => !/⟨ρ,ρ⟩|Π\(ρ\)|ΔS =|\|ρ₀₁\|/.test(dt.textContent))));
-
-/* ---------- ARCH-R2-002: semantic color discipline (#46ffb2 only on standard .ok LEAN ✓ badges, #ffc83d only on single active selection) ---------- */
-const colorAudit = await D(() => {
-  const OK_RGB = 'rgb(70, 255, 178)';
-  const AMBER_RGB = 'rgb(255, 200, 61)';
-  const CYAN_RGB = 'rgb(25, 240, 255)';
-  const VIOLET_RGB = 'rgb(157, 140, 255)';
-  const okEls = [];
-  const amberEls = [];
-  for (const el of document.querySelectorAll('*')) {
-    const cs = getComputedStyle(el);
-    if (cs.color === OK_RGB || cs.backgroundColor === OK_RGB) {
-      okEls.push({ tag: el.tagName, id: el.id, cls: el.className, isLeanBadge: el.classList.contains('ok') && el.textContent.trim() === 'LEAN ✓' });
-    }
-    if (cs.color === AMBER_RGB || cs.backgroundColor === AMBER_RGB) {
-      const isSingleActiveSelection = el.id === 'pillAngles' || el.parentElement?.id === 'pillAngles' || el.classList.contains('am');
-      amberEls.push({ tag: el.tagName, id: el.id, cls: el.className, isSingleActiveSelection });
-    }
-  }
-  const okmarkColors = [...document.querySelectorAll('.okmark')].map((el) => getComputedStyle(el).color);
-  const tapeColor = getComputedStyle(document.getElementById('gateTape')).color;
-  const roDColor = getComputedStyle(document.querySelector('#roD .vvi')).color;
-  const roEntColor = getComputedStyle(document.querySelector('#roEntropy .vcy')).color;
+/* ---------- the golden-carry frame, element by element ---------- */
+const dom = await D(() => {
+  const q = (s) => !!document.querySelector(s), n = (s) => document.querySelectorAll(s).length;
   return {
-    okCount: okEls.length,
-    okOnlyLeanBadges: okEls.length >= 4 && okEls.every((e) => e.isLeanBadge),
-    okEls,
-    amberCount: amberEls.length,
-    amberOnlyActiveSelection: amberEls.length >= 2 && amberEls.every((e) => e.isSingleActiveSelection),
-    amberEls,
-    okmarksAreCyan: okmarkColors.length >= 4 && okmarkColors.every((c) => c === CYAN_RGB),
-    tapeIsCyan: tapeColor === CYAN_RGB,
-    roDIsViolet: roDColor === VIOLET_RGB,
-    roEntIsCyan: roEntColor === CYAN_RGB
+    deck: q('.app > aside.col.deck > section.panel.sec#inputs + section.panel.sec#readouts[aria-live="polite"]'),
+    inputs: n('#inputs > .num-field > .stepper > input[type=number]') === 3 && n('#inputs > .num-field > input[type=range]') === 3
+      && q('#inputs > h2 > .aside') && q('#inputs > .chips.presets#presets #swap') && q('#presets #random') && q('#presets #reset') && n('#presets [data-preset]') === 5 && n('#gates [data-gate]') === 7,
+    readouts: n('#readouts dl.ro > div:not(.wide)') === 6 && n('#readouts dl.ro > div.wide.deficit') === 1 && n('#readouts dl.ro > div.wide:not(.deficit)') === 2
+      && q('dl.ro .deficit dd > b#roHero.vpos + .sub#roHeroSub + .okmark') && q('#readouts > p.note#roNote'),
+    center: q('.app > main.center > section.panel.ledger#ledgerPanel + footer.rail#rail'),
+    ledger: q('#ledgerPanel > .head > h2#ledgerTitle + .aside') && n('#ledgerPanel > .rules > .rule') === 4 && ['r0', 'r1', 'rj', 'ra'].every((c) => q(`.rules > .rule.${c} > b + i`))
+      && q('#ledgerPanel > .rules + .stage#blochStage + .sheetwrap#sheetWrap > .digits#ledger') && q('#ledgerPanel > .sheetwrap + .tape-row > .tape-label + .tape#tape + .tape-sum#tapeSum')
+      && q('#ledgerPanel > .toast#toast[role="status"]'),
+    stage: q('#blochStage > canvas#blochCanvas + .scan') && ['tl', 'tr', 'bl', 'br'].every((c) => q(`#blochStage > .bracket.${c}`)) && q('#blochStage > .hud-tl > #hudBig.big + #hudSub.sub')
+      && q('#blochStage > .hud-tr.chips#viewChips') && n('#viewChips [data-axis]') === 4,
+    rail: ['first', 'prev', 'play', 'next', 'last'].every((id) => q(`#rail > .transport > button.tbtn#${id}`)) && q('#rail > .clock > .tau#passLabel + input[type=range]#pass') && q('#rail > .keys'),
+    side: q('.app > aside.col.side > section.panel.sec.heatpanel#heatPanel[data-thumb] + section.panel.sec#evidence'),
+    heat: q('#heatPanel > h2.thumb-hide > .aside#heatRange') && q('#heatPanel > .heatwrap > canvas#heat + .scan') && q('#heatPanel > .chips.thumb-hide#nChips') && n('#nChips [data-obs]') === 3
+      && ['pos', 'zero', 'neg', 'cur'].every((c) => q(`#heatPanel > ul.legend.thumb-hide .sw.${c}`)) && q('#heatPanel > p.note.thumb-hide#heatCounts + p.note.thumb-hide#heatHover'),
+    evidence: n('#evidence > .lean:not(.num):not(.model):not(.argued):not(.open)') === 5 && n('#evidence > .lean.model') === 1 && n('#evidence > .lean.num') === 1
+      && q('#evidence > button.chip#infoBtn') && q('.drawer#drawer[hidden] > .sheet'),
+    classes: [...document.querySelectorAll('#evidence [class*="lean"]')].every((e) => [...e.classList].every((c) => ['lean', 'num', 'model', 'argued', 'open', 'leanref'].includes(c)))
   };
 });
-check('ARCH-R2-002: #46ffb2 / rgb(70, 255, 178) is used ONLY on standard .ok LEAN ✓ badges', colorAudit.okOnlyLeanBadges, JSON.stringify(colorAudit.okEls));
-check('ARCH-R2-002: #ffc83d / rgb(255, 200, 61) is used ONLY on the single active (θ, φ) state selection', colorAudit.amberOnlyActiveSelection, JSON.stringify(colorAudit.amberEls));
-check('ARCH-R2-002: .okmark checkmarks, #gateTape, #roD, and #roEntropy use cyan/violet (not ok-green or amber)',
-  colorAudit.okmarksAreCyan && colorAudit.tapeIsCyan && colorAudit.roDIsViolet && colorAudit.roEntIsCyan, JSON.stringify(colorAudit));
+check('DOM: aside.col.deck holds #inputs (3 steppers + sliders, 5 presets + Swap/Random/Reset, 7 gate chips) and #readouts', dom.deck && dom.inputs, JSON.stringify(dom));
+check('DOM: #readouts has 6 half-width readouts, 1 hero .wide.deficit, 2 .wide verification rows and #roNote', dom.readouts, JSON.stringify(dom));
+check('DOM: main.center holds #ledgerPanel (head, 4 rules r0/r1/rj/ra, Bloch .stage, .sheetwrap > .digits#ledger, .tape-row, .toast) and footer.rail', dom.center && dom.ledger && dom.rail, JSON.stringify(dom));
+check('DOM: the Bloch stage has #blochCanvas, .scan, four brackets, .hud-tl (#hudBig, #hudSub) and .hud-tr.chips#viewChips', dom.stage, JSON.stringify(dom));
+check('DOM: aside.col.side holds #heatPanel[data-thumb] (heatwrap, #nChips, 4-swatch legend, #heatCounts, #heatHover) and #evidence', dom.side && dom.heat, JSON.stringify(dom));
+check('DOM: #evidence has 5 LEAN boxes, one MODEL, one NUM, only standard .lean classes, and #infoBtn for #drawer', dom.evidence && dom.classes, JSON.stringify(dom));
 
-/* ---------- presets & independent mathematical verification ---------- */
-const presets = [
-  ['0,0,0,0', [0, 0, 0, 0]],
-  ['90,0,0,0', [90, 0, 0, 0]],
-  ['60,36,30,0', [60, 36, 30, 0]],
-  ['90,0,90,1', [90, 0, 90, 1]]
-];
-for (const [code, [th, ph, al, et]] of presets) {
-  await page.click(`#presets [data-preset="${code}"]`); await settle();
-  const s = await D(() => QG_DEBUG.state());
-  const info = await D(() => QG_DEBUG.info());
-  const m = independentModel(th, ph, al, et);
-  const pressed = await D((q) => document.querySelector(`#presets [data-preset="${q}"]`).getAttribute('aria-pressed'), code);
-  check(`preset ${code} applies and sets aria-pressed="true"`, s.theta === th && s.phi === ph && s.alpha === al && near(s.eta, et) && pressed === 'true', JSON.stringify(s));
-  check(`preset ${code} agrees with independent model and Pythagorean laws`, near(info.dot, m.dot) && near(info.wedge, m.wedge) && near(info.pythAB, 1) && near(info.V, m.V) && near(info.D, m.D) && near(info.pythDV, 1) && near(info.hsTotalActive, m.hsTotalActive) && near(info.entropyPinchNats, m.entropyPinchNats) && near(info.entropyRemainingNats, m.entropyRemainingNats), JSON.stringify(info));
-}
+/* ---------- the ledger rows ---------- */
+const rows = await D(() => [...document.querySelectorAll('#ledger .drow')].map((r) => ({ cls: r.className, pass: r.dataset.pass ?? null, cells: r.querySelectorAll('.cells span').length, sgn: r.querySelector('.sgn')?.textContent ?? null })));
+check('ledger rows: .hdr, two .input rows (A, B), .sum #0, then .pass #1..#3 with .final on the last', rows.length === 7 && /\bhdr\b/.test(rows[0].cls) && /\binput\b/.test(rows[1].cls) && /\binput\b/.test(rows[2].cls)
+  && /\bsum\b/.test(rows[3].cls) && rows[3].pass === '0' && rows.slice(4).every((r, k) => /\bpass\b/.test(r.cls) && r.pass === String(k + 1)) && rows.filter((r) => /\bfinal\b/.test(r.cls)).length === 1 && /\bfinal\b/.test(rows[6].cls)
+  && rows.every((r) => r.cells === 7), JSON.stringify(rows));
+check('ledger: H·Z·H from |ψ(60°, 36°)⟩ has signs +1, +1, −1, −1 and the tape shows +, −, −', eq(rows.slice(3).map((r) => r.sgn), ['+1', '+1', '−1', '−1'])
+  && eq(await D(() => [...document.querySelectorAll('#tape i')].map((i) => i.className.split(' ')[0])), ['pos', 'neg', 'neg']), JSON.stringify(rows.map((r) => r.sgn)));
+check('ledger: the final row reports the Bloch vector and the spinor sign', /r = \(0\.70,−0\.51,−0\.50\), s = −1 ✓/.test(await text('#ledger .drow.final')), await text('#ledger .drow.final'));
 
-/* ---------- Q03 + Q04 on the full pinching dephasing preset (90°, 0°, 90°, 1): |+⟩⟨+| → I/2 ---------- */
-let info = await D(() => QG_DEBUG.info());
-check('full pinching dephasing preset: D = 1, V = 0, ρ(1) = I/2 (zero Bloch vector), active off-diagonal mass 0, pure-state mass 0.5',
-  near(info.D, 1) && near(info.V, 0) && info.blochDecohered.every((c) => near(c, 0)) && near(info.hsOffActive, 0) && near(info.hsOffPure, 0.5)
-  && near(info.hsTotalActive, 0.5) && near(info.hsDiag, 0.5), JSON.stringify(info));
-check('full pinching dephasing preset: budget S(Π(ρ₀)) = ln 2 (1 bit), S(ρ(1)) = ln 2, remaining D(ρ(1)‖Π(ρ₀)) = 0',
-  near(info.entropyPinchNats, Math.LN2) && near(info.entropyPinchBits, 1) && near(info.entropyCurrentNats, Math.LN2) && info.entropyRemainingNats === 0, JSON.stringify(info));
-let ent = await text('#roEntropy');
-check('Q04: #roEntropy shows the remaining 0.0000 nats (0.0000 bits) as primary value at (90°,0°,90°,1)', ent.startsWith('0.0000 nats (0.0000 bits)'), ent);
-check('Q04: #roEntropy sub shows the budget S(Π(ρ₀)) = H₂(cos²(θ/2)) = 0.6931 nats (1.0000 bits) and S(ρ(η)) = 0.6931 nats',
-  ent.includes('初始纯态相干预算 S(Π(ρ₀)) = H₂(cos²(θ/2)) = 0.6931 nats (1.0000 bits)') && ent.includes('当前态熵 S(ρ(η)) = 0.6931 nats'), ent);
-check('Q04: #roHS reads 0.5000 = 0.5000 + 0.0000 ✓ with Π(ρ(η)) = Π(ρ₀) = diag(0.5000, 0.5000)',
-  (await text('#roHS')).startsWith('0.5000 = 0.5000 + 0.0000 ✓') && (await text('#roHS')).includes('Π(ρ(η)) = Π(ρ₀) = diag(0.5000, 0.5000)'), await text('#roHS'));
-let ledger = await D(() => QG_DEBUG.ledger());
-check('Q04: canvas ledger header is LEAN ✓  ⟨ρ(η),ρ(η)⟩ = ⟨Π(ρ₀),Π(ρ₀)⟩ + (|ρ₀₁(η)|²+|ρ₁₀(η)|²)', ledger && ledger.head === 'LEAN ✓  ⟨ρ(η),ρ(η)⟩ = ⟨Π(ρ₀),Π(ρ₀)⟩ + (|ρ₀₁(η)|²+|ρ₁₀(η)|²)', JSON.stringify(ledger));
-check('Q04: canvas ledger bars are ⟨ρ(η),ρ(η)⟩, ⟨Π(ρ₀),Π(ρ₀)⟩, |ρ₀₁(η)|²+|ρ₁₀(η)|², D(ρ(η)‖Π(ρ₀)) [nats, max ln 2]',
-  ledger && ledger.bars.map((b) => b.code).join(' | ') === '⟨ρ(η),ρ(η)⟩ | ⟨Π(ρ₀),Π(ρ₀)⟩ | |ρ₀₁(η)|²+|ρ₁₀(η)|² | D(ρ(η)‖Π(ρ₀))'
-  && near(ledger.bars[3].max, Math.LN2) && ledger.bars[3].suffix === ' nats', JSON.stringify(ledger));
-check('Q04: at (90°,0°,90°,1) the ledger bars read 0.5, 0.5, 0, 0 nats', ledger && near(ledger.bars[0].val, 0.5) && near(ledger.bars[1].val, 0.5) && near(ledger.bars[2].val, 0) && ledger.bars[3].val === 0, JSON.stringify(ledger));
-
-/* ---------- Q03: unital dephasing is not a non-unital reset ---------- */
-check('Q03: preset label reads 正交捏合退相干 (ln 2) / Full Pinching Dephasing (ln 2)',
-  (await langText('#presets [data-preset="90,0,90,1"]', 'zh')) === '正交捏合退相干 (ln 2)' && (await langText('#presets [data-preset="90,0,90,1"]', 'en')) === 'Full Pinching Dephasing (ln 2)');
-check('Q03: no preset label calls dephasing an erasure', await D(() => [...document.querySelectorAll('#presets .chip')].every((b) => !/擦除|[Ee]rasure/.test(b.textContent))));
-const unital = await D(() => [0, 0.13, 0.5, 0.87, 1].map((e) => QG_DEBUG.dephase([0, 0, 0], e)));
-check('Q03: E_η is unital: E_η(I/2) = I/2 for every η (zero Bloch vector stays put, never pushed to |0⟩⟨0|)', unital.every((v) => v.every((c) => c === 0)), JSON.stringify(unital));
-const zfix = await D(() => [[0.3, -0.4, 0.5], [0, 0, 1], [0.6, 0.8, 0], [-0.1, 0.2, -0.97]].map((r) => [r[2], QG_DEBUG.dephase(r, 0.37)[2], QG_DEBUG.dephase(r, 1)]));
-check('Q03/Q04: E_η leaves the z axis fixed, so Π(ρ(η)) = Π(ρ₀); η = 1 is the pinching Π (transverse part removed)',
-  zfix.every(([z, zEta, full]) => z === zEta && full[0] === 0 && full[1] === 0 && full[2] === z), JSON.stringify(zfix));
-let sweepOk = true, sweepMsg = '', prevS = -1, prevD = Infinity;
-for (const e of [0, 0.1, 0.25, 0.5, 0.75, 0.9, 1]) {
-  await D((x) => QG_DEBUG.set(90, 0, 90, x), e);
-  const x = await D(() => QG_DEBUG.info());
-  if (!(x.entropyCurrentNats >= prevS - 1e-12 && x.entropyRemainingNats <= prevD + 1e-12 && near(x.entropyCurrentNats + x.entropyRemainingNats, Math.LN2))) {
-    sweepOk = false; sweepMsg = `η=${e}: ${JSON.stringify(x)}`; break;
-  }
-  prevS = x.entropyCurrentNats; prevD = x.entropyRemainingNats;
-}
-check('Q03: along |+⟩⟨+| → I/2, S(ρ(η)) rises from S(ρ₀) = 0 to ln 2 while D(ρ(η)‖Π(ρ₀)) falls from ln 2 to 0; their sum stays ln 2', sweepOk && near(prevS, Math.LN2) && prevD === 0, sweepMsg);
-const pinchZh = await text('#drawerPinchZh'), pinchEn = await text('#drawerPinchEn');
-const q03Common = ['|+⟩⟨+| → I/2', 'Π(I/2) = E_η(I/2) = I/2', 'S(ρ₀) = 0', 'S(Π(ρ₀)) = H₂(cos²(θ/2)) ≤ ln 2', 'ΔS_pinch = D(ρ ‖ Π(ρ)) = S(Π(ρ)) − S(ρ) ≥ 0',
-  'I/2 → |0⟩⟨0|', 'ΔS_sys = −ln 2 < 0', 'k_B T ln 2', 'E_η(ρ) = (1−η)ρ + ηΠ(ρ)', 'Π(ρ(η)) = Π(ρ₀) = diag(p₀, p₁)', 'p₀ = cos²(θ/2)'];
-check('Q03: drawer (zh) separates 保单位 dephasing (entropy up) from 非保单位 reset (Landauer heat, literature result)',
-  q03Common.every((s) => pinchZh.includes(s)) && ['保单位退相干', '非保单位信道', '兰道尔原理', '温度为 T 的热库', '文献结果，未在本书形式化', '相位相干泄入环境记录'].every((s) => pinchZh.includes(s)),
-  q03Common.concat(['保单位退相干', '非保单位信道']).filter((s) => !pinchZh.includes(s)).join(' | '));
-check('Q03: drawer (en) separates unital dephasing (entropy up) from non-unital reset (Landauer heat, literature result)',
-  q03Common.every((s) => pinchEn.includes(s)) && ['Unital dephasing / pinching', 'non-unital', "Landauer's principle", 'thermal reservoir at temperature T', 'literature result, not formalized in this book', 'Phase coherence leaks into environmental records'].every((s) => pinchEn.includes(s)),
-  q03Common.filter((s) => !pinchEn.includes(s)).join(' | '));
-check('Q03: drawer title distinguishes unital pinching dephasing from non-unital Landauer reset',
-  (await langText('#drawerTitle', 'zh')).includes('保单位捏合退相干与非保单位兰道尔重置') && (await langText('#drawerTitle', 'en')).includes('unital pinching dephasing vs non-unital Landauer reset'));
-check('Q03: drawer links the Landauer literature remark of chapter 8 in both languages', await D(() =>
-  !!document.querySelector('#drawer div.zh a[href="../../zh/ch08-erasure-and-time-arrows.html#rem-landauer-thermodynamic-bridge-literature"]')
-  && !!document.querySelector('#drawer div.en a[href="../../en/ch08-erasure-and-time-arrows.html#rem-landauer-thermodynamic-bridge-literature"]')));
-
-/* ---------- Q04 at η = 0: the remaining coherence equals the pure-state budget ---------- */
-await page.click('#presets [data-preset="60,36,30,0"]'); await settle();
-info = await D(() => QG_DEBUG.info());
-const budget = h2Nats(Math.cos(30 * DEG) ** 2);
-ent = await text('#roEntropy');
-check('Q04: at η = 0, D(ρ(0)‖Π(ρ₀)) = S(Π(ρ₀)) = H₂(cos²(30°)) and S(ρ(0)) = 0', near(info.entropyRemainingNats, budget) && near(info.entropyPinchNats, budget) && near(info.entropyCurrentNats, 0),
-  JSON.stringify(info));
-check('Q04: at η = 0 the primary #roEntropy value equals the budget shown in its sub line',
-  ent.startsWith(`${budget.toFixed(4)} nats (${(budget / Math.LN2).toFixed(4)} bits)`) && ent.includes(`H₂(cos²(θ/2)) = ${budget.toFixed(4)} nats`), ent);
-
-// 60 pseudo-random states (theta, phi, alpha, eta) checked against independent model
-let seed = 42;
-const rnd = () => { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; };
-let allOk = true, badMsg = '';
-for (let k = 0; k < 60; k++) {
-  const th = Math.floor(rnd() * 181);
-  const ph = Math.floor(rnd() * 361);
-  const al = Math.floor(rnd() * 91);
-  const et = Math.round(rnd() * 100) / 100;
-  await D(([a, b, c, d]) => QG_DEBUG.set(a, b, c, d), [th, ph, al, et]);
-  const x = await D(() => QG_DEBUG.info());
-  const m = independentModel(th, ph, al, et);
-  const ok = x.theta === th && x.phi === ph && x.alpha === al && near(x.eta, et)
-    && near(x.p0, m.p0) && near(x.p1, m.p1) && near(x.p0 + x.p1, 1)
-    && near(x.dot, m.dot) && near(x.wedge, m.wedge) && near(x.pythAB, 1)
-    && near(x.V, m.V) && near(x.D, m.D) && near(x.pythDV, 1)
-    && near(x.hsDiag, m.hsDiag) && near(x.hsOffPure, m.hsOffPure)
-    && near(x.hsOffActive, m.hsOffActive) && near(x.hsTotalActive, m.hsDiag + m.hsOffActive)
-    && near(x.entropyPinchNats, m.entropyPinchNats) && near(x.entropyCurrentNats, m.entropyCurrentNats)
-    && near(x.entropyRemainingNats, m.entropyRemainingNats)
-    && near(x.entropyRemainingNats, x.entropyPinchNats - x.entropyCurrentNats, 1e-12)
-    && x.blochDecohered.every((c, i) => near(c, m.blochDecohered[i]))
-    && near((1 + x.blochDecohered[2]) / 2, x.p0) && near(x.blochDecohered[2], x.blochPure[2]);
-  if (!ok) {
-    allOk = false;
-    badMsg = `(${th},${ph},${al},${et}) got ${JSON.stringify(x)} expected ${JSON.stringify(m)}`;
-    break;
-  }
-}
-check('60 pseudo-random states: Born rule, AB product, D²+V²=1, HS split of ρ(η), D(ρ(η)‖Π(ρ₀)) from 2×2 matrices, and Π(ρ(η)) = Π(ρ₀) all match', allOk, badMsg);
-
-/* ---------- Clifford rotor gates ---------- */
-await page.click('#presets [data-preset="0,0,0,0"]'); await settle();
-await page.click('#gates [data-gate="H"]'); await settle();
-st = await D(() => QG_DEBUG.state());
-check('H gate rotates |0⟩ (0°,0°) to |+⟩ (90°,0°)', st.theta === 90 && st.phi === 0 && st.gates.join(',') === 'H', JSON.stringify(st));
-tape = await text('#gateTape');
-check('A01: after H the tape reads |ψ⟩ → U(α) [H] → ρ₀(90°, 0°) → E_η (η = 0.00) → ρ(η)', tape === '|ψ⟩ → U(α) [H] → ρ₀(90°, 0°) → E_η (η = 0.00) → ρ(η)', tape);
-note = await text('#roNote');
-check('A01: after H the note lists the applied gate inside step ② and the post-gate coordinates in step ③', note.includes('已施加 1 个：H') && note.includes('(θ, φ) = (90°, 0°)'), note);
-await page.click('#gates [data-gate="S"]'); await settle();
-st = await D(() => QG_DEBUG.state());
-check('S gate rotates |+⟩ (90°,0°) to |+i⟩ (90°,90°)', st.theta === 90 && st.phi === 90 && st.gates.join(',') === 'H,S', JSON.stringify(st));
-await page.click('#gates [data-gate="T"]'); await settle();
-st = await D(() => QG_DEBUG.state());
-check('T gate advances azimuth by +45° to (90°,135°)', st.theta === 90 && st.phi === 135 && st.gates.join(',') === 'H,S,T', JSON.stringify(st));
-await page.click('#gates [data-gate="Z"]'); await settle();
-st = await D(() => QG_DEBUG.state());
-check('Z gate advances azimuth by +180° to (90°,315°)', st.theta === 90 && st.phi === 315 && st.gates.join(',') === 'H,S,T,Z', JSON.stringify(st));
-await page.click('#gates [data-gate="X"]'); await settle();
-st = await D(() => QG_DEBUG.state());
-check('X gate reflects (theta -> 180-theta, phi -> 360-phi) to (90°,45°)', st.theta === 90 && st.phi === 45, JSON.stringify(st));
-await page.click('#gates [data-gate="Y"]'); await settle();
-st = await D(() => QG_DEBUG.state());
-check('Y gate reflects (theta -> 180-theta, phi -> 180-phi) to (90°,135°)', st.theta === 90 && st.phi === 135, JSON.stringify(st));
-await page.click('#gates [data-gate="I"]'); await settle();
-st = await D(() => QG_DEBUG.state());
-check('I gate preserves (theta, phi) and records on the circuit tape', st.theta === 90 && st.phi === 135 && st.gates[st.gates.length - 1] === 'I'
-  && (await text('#gateTape')) === '|ψ⟩ → U(α) [H → S → T → Z → X → Y → I] → ρ₀(90°, 135°) → E_η (η = 0.00) → ρ(η)', await text('#gateTape'));
-await page.click('#resetGates'); await settle();
-st = await D(() => QG_DEBUG.state());
-check('Reset button clears the rotor tape and restores balanced state (60°,36°,30°,0)', st.theta === 60 && st.phi === 36 && st.alpha === 30 && st.eta === 0 && st.gates.length === 0);
-
-/* ---------- sliders, number boxes, steppers & clamping ---------- */
-await page.fill('#thetaNum', '45'); await page.press('#thetaNum', 'Enter'); await settle();
-await page.locator('#phi').fill('120'); await settle();
-await page.click('#alphaInc'); await page.click('#etaInc'); await settle();
-st = await D(() => QG_DEBUG.state());
-check('number input, range slider, and steppers update (theta=45, phi=120, alpha=31, eta=0.05)', st.theta === 45 && st.phi === 120 && st.alpha === 31 && near(st.eta, 0.05), JSON.stringify(st));
-await page.fill('#thetaNum', '999'); await page.press('#thetaNum', 'Enter'); await settle();
-await page.fill('#etaNum', '5'); await page.press('#etaNum', 'Enter'); await settle();
-st = await D(() => QG_DEBUG.state());
-check('out-of-range inputs are clamped to theta=180, eta=1.00', st.theta === 180 && near(st.eta, 1), JSON.stringify(st));
-
-/* ---------- canvas rendering check ---------- */
-await page.click('#presets [data-preset="60,36,30,0"]'); await settle();
-const lit = await D(() => {
-  const c = document.getElementById('view');
-  const d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data;
-  let n = 0;
-  for (let i = 0; i < d.length; i += 4) if (d[i] + d[i + 1] + d[i + 2] > 180) n++;
-  return n;
+/* ---------- algebra checked on the page and here ---------- */
+const alg = await D(() => {
+  const m = QG_DEBUG.math;
+  return { vol: m.verifyPauliVolume(), hzh: m.verifyHadamardConjugation(), dc: ['x', 'y', 'z', 'h'].map((a) => m.verifyDoubleCover(a)), gates: m.GATES,
+    comps: Object.fromEntries(Object.entries(m.GATES).map(([g, G]) => [g, m.rotorComponents(m.AXES[G.axis], G.angle)])) };
 });
-check('the 3D Bloch sphere, complementarity circle, and pinching bars are drawn on canvas', lit > 2000, String(lit));
+const XYZ = mm(mm(sx, sy), sz);
+check('σ₁σ₂σ₃ = i·I₂ (page and here); it is skew-adjoint and unitary and squares to −I', alg.vol.err < 1e-15 && alg.vol.skewErr < 1e-15 && alg.vol.unitErr < 1e-15 && alg.vol.squareErr < 1e-15
+  && mdiff(XYZ, msc(ID2, cx(0, 1))) < 1e-15 && mdiff(mm(XYZ, XYZ), msc(ID2, cx(-1))) < 1e-15, JSON.stringify(alg.vol));
+check('H σ₃ H = σ₁ (page and here), and R_H R_Z R_H = −R_X as rotors', alg.hzh.err < 1e-12 && alg.hzh.rotorNegErr < 1e-12
+  && mdiff(mm(mm(TEXTBOOK.H, sz), TEXTBOOK.H), sx) < 1e-12 && mdiff(mm(mm(ROTOR.H, ROTOR.Z), ROTOR.H), msc(ROTOR.X, cx(-1))) < 1e-12, JSON.stringify(alg.hzh));
+check('R_n̂(2π) = −1, R_n̂(4π) = +1 and B_n̂² = −I for the axes x̂, ŷ, ẑ, ĥ (page), and exp(−iπ n̂·σ) = −I here', alg.dc.every((d) => d.errTwoPi < 1e-12 && d.errFourPi < 1e-12 && d.bivectorSquareErr < 1e-12)
+  && Object.values(AXIS).every((n) => mdiff(rotorExp(n, 2 * Math.PI), msc(ID2, cx(-1))) < 1e-12 && mdiff(rotorExp(n, 4 * Math.PI), ID2) < 1e-12));
+check('each gate rotor equals its axis-angle form, its power-series exponential, lies in SU(2) and matches the textbook gate up to a global phase',
+  Object.entries(alg.gates).every(([g, G]) => nearV(G.rotor, alg.comps[g], 1e-12) && nearV(G.rotor, comps(ROTOR[g]), 1e-12)
+    && near(det(ROTOR[g]).re, 1, 1e-12) && near(det(ROTOR[g]).im, 0, 1e-12) && near(Math.hypot(tr(mm(ROTOR[g].map((r, i) => r.map((_, j) => conj(ROTOR[g][j][i]))), TEXTBOOK[g])).re, tr(mm(ROTOR[g].map((r, i) => r.map((_, j) => conj(ROTOR[g][j][i]))), TEXTBOOK[g])).im), 2, 1e-12)));
+
+/* ---------- presets ---------- */
+const presetCases = [
+  ['0,0|', [0, 0, 1], 1], ['0,0|H', [1, 0, 0], 1], ['0,0|H,S', [0, 1, 0], -1], ['0,0|H,T', [s2, s2, 0], -1], ['0,0|H,Z,H', [0, 0, -1], -1]
+];
+for (const [code, r, sign] of presetCases) {
+  await page.click(`#presets [data-preset="${code}"]`); await settle();
+  const s = await D(() => QG_DEBUG.state()), x = await D(() => QG_DEBUG.info());
+  const [ang, gs] = code.split('|'), gates = gs ? gs.split(',') : [];
+  const m = model(...ang.split(',').map(Number), gates).at(-1);
+  check(`preset ${code} applies, is marked and ends at r = (${r.map((v) => v.toFixed(2)).join(', ')}) with s = ${sign > 0 ? '+1' : '−1'}`,
+    eq(s.gates, gates) && s.theta === 0 && s.phi === 0 && s.pass === gates.length && nearV(x.steps.at(-1).r, r) && nearV(m.r, r) && x.finalSign === sign && m.sign === sign
+    && (await D((q) => document.querySelector(`#presets [data-preset="${q}"]`).getAttribute('aria-pressed'), code)) === 'true', JSON.stringify(x.steps.at(-1)));
+}
+let info = await D(() => QG_DEBUG.info());
+check('H·Z·H = X: the accumulated rotor is −R_X = (0, −1, 0, 0) and the readouts say s = −1', nearV(info.steps.at(-1).rotor, [0, -1, 0, 0]) && /−1/.test(await text('#pillC')) && /终态 s = −1/.test(await text('#tapeSum')));
+
+/* ---------- circuits: Bloch vector, rotor, spinor and sign against the independent model ---------- */
+const NAMES = ['I', 'X', 'Y', 'Z', 'H', 'S', 'T'];
+let seed = 11; const rnd = () => { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; };
+const circuits = [[60, 36, ['H', 'Z', 'H']], [0, 0, ['X', 'X']], [90, 0, ['S', 'S', 'S', 'S']], [180, 0, ['H']], [45, 300, ['T', 'T', 'T', 'T', 'T', 'T', 'T', 'T']], [30, 200, []]];
+for (let k = 0; k < 80; k++) circuits.push([Math.floor(rnd() * 181), Math.floor(rnd() * 361), Array.from({ length: Math.floor(rnd() * 9) }, () => NAMES[Math.floor(rnd() * 7)])]);
+let circOK = true, circBad = '';
+for (const [th, ph, gates] of circuits) {
+  await D(([a, b, g]) => QG_DEBUG.set(a, b, g), [th, ph, gates]);
+  const x = await D(() => QG_DEBUG.info()), m = model(th, ph, gates);
+  const ok = x.theta === th && x.phi === ph && eq(x.gates, gates) && x.steps.length === m.length && x.steps.every((s, k) => {
+    const n = m[k], psi = s.psi.map(([re, im]) => cx(re, im));
+    const touched = k ? [...m[k].r, ...m[k].rotor].map((v, j) => (Math.abs(v - [...m[k - 1].r, ...m[k - 1].rotor][j]) > 1e-6 ? j : -1)).filter((j) => j >= 0) : [];
+    return nearV(s.r, n.r) && nearV(s.rotor, n.rotor) && psi.every((z, i) => near(z.re, n.psi[i].re) && near(z.im, n.psi[i].im)) && s.sign === n.sign
+      && (k === 0 || nearV(n.rotorR, n.r)) && near(s.r[0] ** 2 + s.r[1] ** 2 + s.r[2] ** 2, 1) && eq(s.touched, touched);
+  }) && near(x.born[0], abs2(m[x.pass].psi[0])) && near(x.born[0] + x.born[1], 1) && near(x.born[0], (1 + m[x.pass].r[2]) / 2);
+  if (!ok) { circOK = false; circBad = `(${th}, ${ph}, ${gates.join('')}) ${JSON.stringify(x.steps.at(-1))} vs ${JSON.stringify(m.at(-1))}`; break; }
+}
+check(`${circuits.length} circuits: Bloch vectors (= textbook ψ†σψ), rotor products, spinors, tape signs, touched cells and Born weights all match; ‖r‖ = 1, P(0) + P(1) = 1`, circOK, circBad);
+await D(() => QG_DEBUG.set(0, 0, ['X', 'X'])); await settle();
+check('X·X: the vector is back (r = e₃) but the rotor is −1, so the tape ends on −1', nearV((await D(() => QG_DEBUG.info())).steps.at(-1).rotor, [-1, 0, 0, 0]) && (await D(() => QG_DEBUG.info())).finalSign === -1);
+
+/* ---------- the probe rotor Rₙ(α) and the double cover ---------- */
+await D(() => QG_DEBUG.set(60, 36, ['H', 'Z', 'H'])); await D(() => QG_DEBUG.setAlpha(360)); await settle();
+info = await D(() => QG_DEBUG.info());
+check('α = 360°: tr R = −2 and the probe brings the vector back (ghost = r)', near(info.probe.trace, -2) && nearV(info.probe.ghost, info.steps.at(-1).r, 1e-12) && (await text('#roTr')).startsWith('−2.0000'), await text('#roTr'));
+await page.click('#viewChips [data-axis="x"]'); await D(() => QG_DEBUG.setAlpha(90)); await settle();
+info = await D(() => QG_DEBUG.info());
+const rx = info.steps.at(-1).r, ghostX = blochOf(mv(rotorExp(AXIS.x, Math.PI / 2), mv(mm(mm(ROTOR.H, ROTOR.Z), ROTOR.H), state(60, 36))));
+check('axis chip x̂ and α = 90°: tr R = √2 and the ghost is r turned 90° about x̂', (await D(() => QG_DEBUG.state().axis)) === 'x' && near(info.probe.trace, Math.SQRT2) && nearV(info.probe.ghost, ghostX)
+  && near(info.probe.ghost[0], rx[0]) && (await D(() => document.querySelector('#viewChips [data-axis="x"]').getAttribute('aria-pressed'))) === 'true' && /R_x̂\(2π\) = −1 ✓/.test(await text('#roTwoPi')));
+check('readouts: r_x, r_y, r_z, P(0), P(1) of the current step; hero σ₁σ₂σ₃ = i · I₂ ✓; H σ₃ H = σ₁ ✓', await D(() => {
+  const x = QG_DEBUG.info(), r = x.steps[x.pass].r, f = (v) => (v < 0 && Math.abs(v).toFixed(4) !== '0.0000' ? '−' : '') + Math.abs(v).toFixed(4);
+  const t = (id) => document.getElementById(id).textContent;
+  return t('roRx').startsWith(f(r[0])) && t('roRy').startsWith(f(r[1])) && t('roRz').startsWith(f(r[2])) && t('roP0').startsWith(f(x.born[0])) && t('roP1').startsWith(f(x.born[1]))
+    && t('roHero') === 'σ₁σ₂σ₃ = i · I₂' && document.getElementById('roHeroOk').textContent === '✓' && /H σ₃ H = σ₁ ✓/.test(t('roHZH'));
+}));
+await page.click('#viewChips [data-axis="z"]'); await D(() => QG_DEBUG.setAlpha(240)); await settle();
+
+/* ---------- the phase map ---------- */
+for (const obs of ['z', 'x', 'y']) {
+  await page.click(`#nChips [data-obs="${obs}"]`); await settle();
+  const grid = await D((o) => QG_DEBUG.grid(o), obs), idx = { x: 0, y: 1, z: 2 }[obs];
+  let ok = grid.length === 37 * 37, bad = '';
+  for (let i = 0; i < 37 && ok; i++) for (let j = 0; j < 37; j++) {
+    const v = blochOf(state(5 * i, 10 * j))[idx];
+    if (!near(grid[i * 37 + j], v, 1e-12)) { ok = false; bad = `(${5 * i}°, ${10 * j}°) page ${grid[i * 37 + j]} mine ${v}`; break; }
+  }
+  check(`⟨σ_${obs}⟩ map: all 1369 cells agree with ψ†σψ of the textbook state; chip pressed; counts cover the grid`, ok
+    && (await D(() => document.querySelector('#nChips [aria-pressed="true"]').dataset.obs)) === obs && (await text('#heatCounts')).includes('1369') && /✓/.test(await text('#heatCounts'))
+    && (await text('#heatRange')) === '180° × 360°', bad);
+}
+await page.click('#nChips [data-obs="z"]'); await settle();
+const pt = await D(() => QG_DEBUG.cellPoint(45, 120));
+await page.mouse.click(pt.x, pt.y); await settle();
+st = await D(() => QG_DEBUG.state());
+check('clicking the phase map sets the initial state (θ, φ) = (45°, 120°) and keeps the gates', st.theta === 45 && st.phi === 120 && eq(st.gates, ['H', 'Z', 'H']), JSON.stringify(st));
+const lit = (id) => D((i) => { const c = document.getElementById(i), d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data; let n = 0; for (let k = 0; k < d.length; k += 4) if (d[k] + d[k + 1] + d[k + 2] > 200) n++; return n; }, id);
+check('the phase map and the Bloch stage are drawn', (await lit('heat')) > 2000 && (await lit('blochCanvas')) > 300);
+
+/* ---------- controls ---------- */
+await page.fill('#thetaNum', '30'); await page.press('#thetaNum', 'Enter'); await settle();
+await page.locator('#phi').fill('200'); await settle();
+st = await D(() => QG_DEBUG.state());
+check('number box and slider set θ = 30, φ = 200', st.theta === 30 && st.phi === 200 && (await D(() => document.getElementById('theta').value)) === '30' && (await D(() => document.getElementById('phiNum').value)) === '200');
+await page.click('#thetaInc'); await page.click('#phiDec'); await page.click('#alphaInc'); await settle();
+st = await D(() => QG_DEBUG.state());
+check('steppers move θ up, φ down and α up by one degree', st.theta === 31 && st.phi === 199 && st.alpha === 241);
+await page.fill('#thetaNum', '999'); await page.press('#thetaNum', 'Enter'); await settle();
+await page.fill('#alphaNum', '-5'); await page.press('#alphaNum', 'Enter'); await settle();
+st = await D(() => QG_DEBUG.state());
+check('out-of-range input is clamped (θ = 180, α = 0)', st.theta === 180 && st.alpha === 0);
+await page.click('#reset'); await settle();
+st = await D(() => QG_DEBUG.state());
+check('Reset restores |ψ(60°, 36°)⟩ → H, Z, H, α = 240° about ẑ', st.theta === 60 && st.phi === 36 && st.alpha === 240 && eq(st.gates, ['H', 'Z', 'H']) && st.axis === 'z' && st.pass === 3);
+await page.click('#gates [data-gate="S"]'); await page.click('#gates [data-gate="T"]'); await settle();
+st = await D(() => QG_DEBUG.state());
+check('gate chips append +S, +T and jump to the new last step', eq(st.gates, ['H', 'Z', 'H', 'S', 'T']) && st.pass === 5 && (await D(() => document.querySelectorAll('#ledger .drow.pass').length)) === 5);
+await page.click('#swap'); await settle();
+check('Swap order reverses the gate sequence', eq((await D(() => QG_DEBUG.state())).gates, ['T', 'S', 'H', 'Z', 'H']));
+await D(() => document.activeElement && document.activeElement.blur());
+await page.keyboard.press('y'); await page.keyboard.press('Backspace'); await page.keyboard.press('Backspace'); await page.keyboard.press('x'); await settle();
+check('keys: a gate letter appends, ⌫ removes the last gate', eq((await D(() => QG_DEBUG.state())).gates, ['T', 'S', 'H', 'Z', 'X']));
+await page.click('#random'); await settle();
+st = await D(() => QG_DEBUG.state());
+check('Random picks a state and 1–6 gates', st.theta >= 0 && st.theta <= 180 && st.phi >= 0 && st.phi < 360 && st.gates.length >= 1 && st.gates.length <= 6 && st.gates.every((g) => NAMES.includes(g)));
+
+/* ---------- transport ---------- */
+await page.click('#reset'); await settle();
+await page.click('#first'); await settle();
+check('⏮ returns to #0, later rows dimmed', (await D(() => QG_DEBUG.state().pass)) === 0 && (await D(() => document.querySelectorAll('#ledger .drow.future').length)) === 3);
+await page.click('#next'); await page.click('#next'); await settle();
+check('▶▶ steps one gate at a time and marks the current row and tape square', (await D(() => QG_DEBUG.state().pass)) === 2 && (await D(() => document.querySelector('#ledger .drow.now').dataset.pass)) === '2'
+  && (await D(() => document.querySelector('#tape i.now').dataset.pass)) === '2' && /^第2 步 \/ 3$/.test(await text('#hudBig')));
+await page.click('#prev'); await settle();
+check('◀ steps back', (await D(() => QG_DEBUG.state().pass)) === 1);
+await page.click('#last'); await settle();
+check('⏭ jumps to the final state', (await D(() => QG_DEBUG.state().pass)) === 3);
+await D(() => document.activeElement && document.activeElement.blur());
+await page.keyboard.press('ArrowLeft'); await settle();
+check('← steps back from the keyboard', (await D(() => QG_DEBUG.state().pass)) === 2);
+await page.keyboard.press('Home'); await page.keyboard.press('ArrowRight'); await settle();
+check('Home and → work from the keyboard', (await D(() => QG_DEBUG.state().pass)) === 1);
+await page.click('#ledger .drow[data-pass="2"]'); await settle();
+check('clicking a ledger row selects that step', (await D(() => QG_DEBUG.state().pass)) === 2);
+await page.click('#tape i[data-pass="3"]'); await settle();
+check('clicking a tape square selects that step', (await D(() => QG_DEBUG.state().pass)) === 3);
+await page.click('#first'); await page.click('#play'); await settle();
+check('▶ plays the circuit', (await D(() => QG_DEBUG.state().playing)) === true);
+await page.waitForFunction(() => !QG_DEBUG.state().playing, null, { timeout: 15000 }).catch(() => {});
+await page.waitForFunction(() => getComputedStyle(document.getElementById('toast')).opacity === '1', null, { timeout: 5000 }).catch(() => {});
+check('playback stops at the final state and reports the spinor sign', (await D(() => QG_DEBUG.state().pass)) === 3 && /线路完成：3 个门，旋量符号 −1/.test(await text('#toast')), await text('#toast'));
+
+/* ---------- colour semantics ---------- */
+const colours = await D(() => {
+  const rgb = (v) => { const c = document.createElement('i'); c.style.color = getComputedStyle(document.documentElement).getPropertyValue(v); document.body.append(c); const o = getComputedStyle(c).color; c.remove(); return o; };
+  const OK = rgb('--tr-ok'), AMBER = rgb('--tr-amber');
+  const greens = [], ambers = [];
+  for (const el of document.querySelectorAll('body *')) {
+    if (el.closest('#drawer')) continue;
+    const cs = getComputedStyle(el);
+    if (cs.color === OK || cs.backgroundColor === OK) greens.push(el);
+    if (cs.color === AMBER || cs.backgroundColor === AMBER) ambers.push(el);
+  }
+  const allowAmber = '#pillPair, #pillPair *, .stepper input, .drow.now .lab, .drow.now .cells span, #passLabel, #passLabel *, #hudBig, .lean.model .ok';
+  return {
+    greens: greens.length, greenOK: greens.length >= 5 && greens.every((e) => (e.matches('.lean:not(.num):not(.model) > .ok') && e.textContent === 'LEAN ✓') || e.matches('.leanref code')),
+    ambers: ambers.map((e) => `${e.tagName}#${e.id}.${e.className}`), amberOK: ambers.length >= 2 && ambers.every((e) => e.matches(allowAmber))
+  };
+});
+check('green appears only on LEAN ✓ badges and the frozen theorem names they link', colours.greenOK, JSON.stringify(colours));
+check('amber appears only on "now": the input pill, the current values, the current row, the step clock, the HUD step and the MODEL tag', colours.amberOK, JSON.stringify(colours.ambers));
 
 /* ---------- Lean links at the pinned commit; drawer ---------- */
 const links = await D(() => [...document.querySelectorAll('a[data-lean-gid]')].map((a) => [a.dataset.leanGid, a.href]));
-check('every Lean link points at the pinned commit, file, and line of trureturing.lock.json', links.length >= 8 && links.every(([gid, href]) => {
-  const d = lock.declarations[gid];
-  return d && href === `https://github.com/${lock.repo}/blob/${lock.commit}/${gid.slice(0, gid.lastIndexOf('.'))}.lean#L${d.line}`;
-}), JSON.stringify(links.slice(0, 4)));
-const cites = links.map(([g]) => g);
-const expectedGids = [
-  'D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity',
-  'D5/S3/Quantum/PureState/RecordCoherenceComplementarity.pure_record_distinguishability_coherence_complementarity',
-  'D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean',
-  'D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity'
-];
-check('the page cites all 4 core Lean 4 theorems', expectedGids.every((g) => cites.includes(g)));
-
+check('every Lean link points at the pinned commit, file and line of trureturing.lock.json, and names a theorem', links.length >= 10 && links.every(([gid, href]) => {
+  const d = lock.declarations[gid]; return d && d.kind === 'theorem' && href === `https://github.com/${lock.repo}/blob/${lock.commit}/${gid.slice(0, gid.lastIndexOf('.'))}.lean#L${d.line}`;
+}), JSON.stringify(links.slice(0, 2)));
+const cites = new Set(links.map(([g]) => g));
+const GIDS = ['D5/S3/Quantum/FiniteDimensional.qubit_weyl_star', 'D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary',
+  'D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian', 'D5/S3/Observer/Conditioning.recordWeight_sum', 'D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity'];
+check('the page cites qubit_weyl_star, square_eq_neg_one_of_skewAdjoint_unitary, bloch_geometry_of_isHermitian, recordWeight_sum and lagrange_gram_identity', GIDS.every((g) => cites.has(g)) && cites.size === 5);
+const reg = JSON.parse(fs.readFileSync(path.join(ROOT, 'books', BOOK, 'viz', 'visualizations.json'), 'utf8')).visualizations.find((v) => v.id === ID);
+check('the registry entry lists the same five theorems', eq(reg.lean.map((l) => l.gid).sort(), [...GIDS].sort()));
 await page.click('#infoBtn');
 check('theory drawer opens', (await D(() => document.getElementById('drawer').hidden)) === false);
-check('the drawer states that the page is a numerical illustration, not a proof', /数值演示，不是证明/.test(await text('#drawer div.zh')) && /numerical illustration, not a proof/.test(await text('#drawer div.en')));
+check('the drawer says the page is a numerical illustration, not a proof, and marks H·Z·H = X as a hand computation', /数值演示，不是证明/.test(await text('#drawer div.zh')) && /numerical illustration, not a proof/.test(await text('#drawer div.en'))
+  && /不是所引的 Lean 定理/.test(await text('#drawer div.zh')) && /not one of the cited Lean theorems/.test(await text('#drawer div.en')));
 await page.keyboard.press('Escape');
-check('Esc closes the drawer and returns focus to #infoBtn', (await D(() => document.getElementById('drawer').hidden)) === true && (await D(() => document.activeElement.id)) === 'infoBtn');
+check('Esc closes the drawer and focus returns to its button', (await D(() => document.getElementById('drawer').hidden)) === true && (await D(() => document.activeElement.id)) === 'infoBtn');
 
-/* ---------- English mode & zero CJK leftovers ---------- */
+/* ---------- language ---------- */
 await page.click('[data-lang-set="en"]'); await settle();
 let left = await cjkLeftovers(page);
 check('no visible Chinese in English mode', left.length === 0, left.slice(0, 6).join(' | '));
-for (const p of ['0,0,0,0', '90,0,90,1']) {
+for (const p of ['0,0|H,Z,H', '0,0|H,S']) {
   await page.click(`#presets [data-preset="${p}"]`); await settle();
+  await page.click('#first'); await settle();
   left = await cjkLeftovers(page);
   check(`no visible Chinese in English mode after preset ${p}`, left.length === 0, left.slice(0, 6).join(' | '));
 }
-// still on (90°, 0°, 90°, 1): ρ(1) = I/2
-ent = await text('#roEntropy');
-check('Q04: English #roEntropy names the budget S(Π(ρ₀)) and current-state entropy S(ρ(η))',
-  ent.includes('initial pure-state coherence budget S(Π(ρ₀)) = H₂(cos²(θ/2)) = 0.6931 nats (1.0000 bits)') && ent.includes('current-state entropy S(ρ(η)) = 0.6931 nats') && ent.startsWith('0.0000 nats (0.0000 bits)'), ent);
-await page.click('#gates [data-gate="H"]'); await settle();
-left = await cjkLeftovers(page);
-check('no visible Chinese in English mode after applying a rotor gate and showing toast', left.length === 0 && /Applied rotor gate U\(α\) = H → post-gate pure state ρ₀/.test(await text('#toast')), left.slice(0, 6).join(' | '));
-note = await text('#roNote');
-check('A01: English note states the pipeline and its four steps in order with zero CJK', !/[　-〿㐀-鿿＀-￯]/.test(note)
-  && note.startsWith(`Circuit order ${PIPELINE}:`)
-  && ordered(note, ['(1) state preparation |ψ⟩', '(2) rotor gate U(α) = exp(−iα n̂·σ/2), 1 applied: H', '(3) post-gate pure state ρ₀ = |ψ(θ,φ)⟩⟨ψ(θ,φ)|', '(4) fixed-z dephasing channel E_η', 'ρ(η) = E_η(ρ₀)']), note);
-tape = await text('#gateTape');
-check('A01: English tape is language-neutral and complete (H maps |+⟩ to |0⟩)', !/[　-〿㐀-鿿＀-￯]/.test(tape) && tape === '|ψ⟩ → U(α) [H] → ρ₀(0°, 0°) → E_η (η = 1.00) → ρ(η)', tape);
 await page.click('#infoBtn');
 left = await cjkLeftovers(page);
-check('no visible Chinese in the English theory drawer', left.length === 0, left.slice(0, 6).join(' | '));
+check('no visible Chinese in the English drawer', left.length === 0, left.slice(0, 6).join(' | '));
 await page.keyboard.press('Escape');
-check('English title is set', (await D(() => document.title)).startsWith('ORTHO//QUBIT · Pairwise geometric product'));
+check('English title', (await D(() => document.title)).startsWith('ORTHO//QUBIT · Qubit rotor ledger'));
+await page.click('#presets [data-preset="0,0|H"]'); await settle();
+await D(() => document.activeElement && document.activeElement.blur());
+await page.keyboard.press('Home'); await settle(); await page.click('#play');
+await page.waitForFunction(() => getComputedStyle(document.getElementById('toast')).opacity === '1', null, { timeout: 10000 }).catch(() => {});
+check('the end-of-playback toast is in English', /^Circuit done after 1 gate: spinor sign \+1$/.test(await text('#toast')), await text('#toast'));
 
-/* ---------- hub round trip ---------- */
+/* ---------- hub round trip (the crumb leads to ../ = the book's visualization index) ---------- */
 await page.click('.crumb'); await page.waitForLoadState('load');
-check('the crumb opens the hub, preserves English language, and lists qubit-geometry', (await D(() => document.documentElement.dataset.lang)) === 'en'
-  && (await D(() => document.querySelectorAll('.card[data-viz="qubit-geometry"]').length)) === 1
-  && (await D(() => !!document.querySelector('.card[data-viz="qubit-geometry"] img[src="qubit-geometry/thumb.jpg"]'))));
-check('language choice is remembered under tr-lang', (await D(() => localStorage.getItem('tr-lang'))) === 'en');
+check('the crumb opens the hub, which keeps the language and lists this visualization', (await D(() => document.documentElement.dataset.lang)) === 'en'
+  && (await D(() => document.querySelectorAll('.card[data-viz="qubit-geometry"]').length)) === 1 && (await D(() => !!document.querySelector('.card[data-viz="qubit-geometry"] img[src="qubit-geometry/thumb.jpg"]'))));
+check('the choice is remembered under the site-wide key tr-lang', (await D(() => localStorage.getItem('tr-lang'))) === 'en');
 left = await cjkLeftovers(page);
 check('no visible Chinese on the English hub', left.length === 0, left.slice(0, 6).join(' | '));
 await page.click('.card[data-viz="qubit-geometry"] .enter'); await page.waitForLoadState('load');
 await page.waitForFunction(() => window.QG_DEBUG && QG_DEBUG.frames() > 0, null, { timeout: 30000 });
-check('the hub card re-opens qubit-geometry', (await D(() => document.body.dataset.vizId)) === ID);
+check('the hub card opens this page', (await D(() => document.body.dataset.vizId)) === ID);
 
-/* ---------- responsive & special viewports ---------- */
+/* ---------- layouts ---------- */
 for (const lang of ['zh', 'en']) {
   for (const [w, h] of [[390, 844], [820, 1000], [1440, 900]]) {
     await page.setViewportSize({ width: w, height: h });
@@ -384,56 +365,53 @@ for (const lang of ['zh', 'en']) {
     check(`no horizontal scroll at ${w}px (${lang})`, (await overflowX(page)) === 0);
   }
 }
-/* ---------- golden-carry frame: deck | center (+ key rail) | side, then two columns, then one ---------- */
 const frame = () => D(() => {
-  const q = (s) => document.querySelector(s);
-  const r = (s) => q(s).getBoundingClientRect();
-  return {
-    dom: !!q('.app > aside.col.deck > #inputs + #readouts') && !!q('.app > main.center > #stagePanel + footer.rail#rail > .keys')
-      && !!q('.app > aside.col.side > #evidence #infoBtn') && !!q('#evidence > h2 .aside'),
-    cols: getComputedStyle(q('.app')).gridTemplateColumns.split(' ').length,
-    inputs: r('#inputs').toJSON(), readouts: r('#readouts').toJSON(), stage: r('#stagePanel').toJSON(), evidence: r('#evidence').toJSON()
-  };
+  const r = (id) => document.getElementById(id).getBoundingClientRect().toJSON();
+  return { cols: getComputedStyle(document.querySelector('.app')).gridTemplateColumns.split(' ').map(parseFloat), inputs: r('inputs'), readouts: r('readouts'), ledger: r('ledgerPanel'), heat: r('heatPanel'), evidence: r('evidence') };
 });
 await page.setViewportSize({ width: 1440, height: 900 });
 await open('?lang=zh'); await settle();
 let fr = await frame();
-check('1440px: three columns — aside.col.deck (#inputs, #readouts) | main.center (#stagePanel, footer#rail .keys) | aside.col.side (#evidence, #infoBtn)',
-  fr.dom && fr.cols === 3 && fr.stage.left > fr.inputs.right - 1 && fr.evidence.left > fr.stage.right - 1
-  && Math.abs(fr.inputs.top - fr.stage.top) < 2 && Math.abs(fr.stage.top - fr.evidence.top) < 2, JSON.stringify(fr));
+check('1440px: three columns 270–310 | 1fr | 320–400 — deck, ledger, phase map side by side with aligned tops', fr.cols.length === 3 && fr.cols[0] >= 270 && fr.cols[0] <= 310 && fr.cols[2] >= 320 && fr.cols[2] <= 400
+  && fr.ledger.left > fr.inputs.right - 1 && fr.heat.left > fr.ledger.right - 1 && Math.abs(fr.inputs.top - fr.ledger.top) < 2 && Math.abs(fr.ledger.top - fr.heat.top) < 2 && fr.evidence.top >= fr.heat.bottom - 1, JSON.stringify(fr));
 await page.setViewportSize({ width: 1000, height: 900 });
 await open('?lang=zh'); await settle();
 fr = await frame();
-check('1000px: two columns — the deck first, then the stage and the evidence across the full width',
-  fr.cols === 2 && fr.stage.top >= fr.readouts.bottom - 1 && fr.evidence.top >= fr.stage.bottom - 1
-  && fr.stage.width > 1.8 * fr.inputs.width && Math.abs(fr.evidence.width - fr.stage.width) < 2 && (await overflowX(page)) === 0, JSON.stringify(fr));
+check('1000px: two columns; the ledger spans the full width below the deck, then the side panels', fr.cols.length === 2 && fr.ledger.top >= fr.readouts.bottom - 1 && fr.heat.top >= fr.ledger.bottom - 1
+  && fr.ledger.width > 1.8 * fr.inputs.width && (await overflowX(page)) === 0, JSON.stringify(fr));
 await page.setViewportSize({ width: 390, height: 844 });
 await open('?lang=zh'); await settle();
 fr = await frame();
-check('390px: one column in the order inputs → stage → readouts → evidence',
-  fr.cols === 1 && fr.stage.top >= fr.inputs.bottom - 1 && fr.readouts.top >= fr.stage.bottom - 1 && fr.evidence.top >= fr.readouts.bottom - 1, JSON.stringify(fr));
+check('390px: one column in the order inputs → ledger → readouts → phase map → evidence', fr.cols.length === 1 && fr.ledger.top >= fr.inputs.bottom - 1 && fr.readouts.top >= fr.ledger.bottom - 1
+  && fr.heat.top >= fr.readouts.bottom - 1 && fr.evidence.top >= fr.heat.bottom - 1, JSON.stringify(fr));
 await page.setViewportSize({ width: 740, height: 560 });
 await open('?embed=1&lang=en'); await settle();
-check('?embed=1 hides header, crumb, and keyboard hint', await D(() => ['header.top', '.crumb', '.keys'].every((s) => getComputedStyle(document.querySelector(s)).display === 'none') && document.documentElement.dataset.embed === '1'));
-check('?embed=1&lang=en starts in English with zero CJK leftovers', (await D(() => TRV.lang())) === 'en' && (await cjkLeftovers(page)).length === 0);
-check('embedded at 740px: two columns, no horizontal scroll', (await overflowX(page)) === 0 && (await D(() => {
-  const a = document.getElementById('inputs').getBoundingClientRect();
-  const b = document.getElementById('stagePanel').getBoundingClientRect();
-  return b.left > a.right - 1 && Math.abs(a.top - b.top) < 40;
-})));
+check('?embed=1 hides the header, crumb and key help', await D(() => ['header.top', '.crumb', '.keys'].every((s) => getComputedStyle(document.querySelector(s)).display === 'none') && document.documentElement.dataset.embed === '1'));
+check('?embed=1&lang=en starts in English', (await D(() => TRV.lang())) === 'en' && (await cjkLeftovers(page)).length === 0);
+check('embedded at 740px: two columns, no horizontal scroll', (await overflowX(page)) === 0 && (await D(() => { const a = document.getElementById('inputs').getBoundingClientRect(), b = document.getElementById('ledgerPanel').getBoundingClientRect(); return b.left > a.right - 1 && Math.abs(a.top - b.top) < 40; })));
 await page.setViewportSize({ width: 360, height: 560 });
 await open('?embed=1&lang=zh'); await settle();
 check('embedded at 360px: no horizontal scroll', (await overflowX(page)) === 0);
 await page.setViewportSize({ width: 1280, height: 720 });
 await open('?thumb=1&lang=zh'); await settle();
-check('?thumb=1: the stage canvas fills the 1280x720 frame', await D(() => {
-  const r = document.getElementById('view').getBoundingClientRect();
-  return document.documentElement.dataset.thumbMode === '1' && r.width === 1280 && r.height === 720;
-}));
+check('?thumb=1: the phase-map panel fills the frame', await D(() => { const r = document.getElementById('heat').getBoundingClientRect(); return document.documentElement.dataset.thumbMode === '1' && r.width === 1280 && r.height === 720; }));
+const cover = await D(async () => {
+  const proto = CanvasRenderingContext2D.prototype, orig = proto.fillText, words = [];
+  proto.fillText = function (t, ...a) { if (this.canvas.id === 'heat') words.push(String(t)); return orig.call(this, t, ...a); };
+  await TRV_THUMB();
+  await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+  proto.fillText = orig;
+  const c = document.getElementById('heat'), d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data;
+  let leftLit = 0, rightLit = 0;
+  for (let k = 0; k < d.length; k += 4) if (d[k] + d[k + 1] + d[k + 2] > 200) { if ((k / 4) % c.width < c.width / 2) leftLit++; else rightLit++; }
+  return { words, leftLit, rightLit, state: QG_DEBUG.state() };
+});
+check('?thumb=1 cover: the phase map on the left, the ledger rows on the right, both drawn', cover.leftLit > 20000 && cover.rightLit > 2000 && eq(cover.state.gates, ['H', 'S', 'H', 'T', 'Z', 'H']), JSON.stringify({ l: cover.leftLit, r: cover.rightLit }));
+check('?thumb=1 cover has no words: only row labels, digits and signs', cover.words.length > 40 && cover.words.every((w) => /^(A|B|#\d+|[+−]?\d+(\.\d+)?|·)$/.test(w)), cover.words.filter((w) => !/^(A|B|#\d+|[+−]?\d+(\.\d+)?|·)$/.test(w)).slice(0, 6).join(' | '));
 await page.emulateMedia({ reducedMotion: 'reduce' });
 await page.setViewportSize({ width: 1440, height: 900 });
 await open('?lang=zh'); await settle();
 check('reduced motion is honoured (no logo glitch)', (await D(() => TRV.reduceMotion)) === true && (await D(() => !document.getElementById('app').classList.contains('glitching'))));
 
-check('no script errors, failed requests, or console errors during the session', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
+check('no script errors, failed requests or console errors during the session', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();

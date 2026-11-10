@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 // Browser regression suite for quantum-geometry/viz/sphere-escape (Playwright + Chromium):
 //   node books/quantum-geometry/viz/tests/sphere-escape.test.mjs      (or node tools/node/viz-test.mjs quantum-geometry)
-// Reads page state through the read-only window.SE_DEBUG probe and checks every mesh count, angular defect, Taylor
-// remainder, iteration and contracting set sequence against an independent implementation written here.
+// Reads page state through the read-only window.SE_DEBUG probe and the pure functions of window.SE_MATH, and checks
+// them against an independent implementation written here: rows as bit masks (Hamming distance by popcount of XOR),
+// primes by trial division, Euclid's numbers in BigInt, Euler products as exact BigInt fractions, x* by bisection.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -13,105 +14,72 @@ const BOOK = 'quantum-geometry', ID = 'sphere-escape';
 const lock = JSON.parse(fs.readFileSync(path.join(ROOT, 'trureturing.lock.json'), 'utf8'));
 const pageSource = fs.readFileSync(path.join(ROOT, 'books', BOOK, 'viz', ID, 'index.html'), 'utf8');
 const CJK = /[　-〿㐀-鿿＀-￯]/;
+const EXPECTED_GIDS = [
+  'D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode',
+  'D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous',
+  'D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_topological_settlement',
+  'D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize',
+  'D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique'
+];
 
-/* ---------- independent mathematical implementation ---------- */
-const DEG = Math.PI / 180;
-const V_LEVELS = [12, 42, 60, 162, 642];
-const PHI = (1 + Math.sqrt(5)) / 2;
-const near = (a, b, tol = 1e-12) => Math.abs(a - b) <= tol;
-// Math.cos in the browser and in Node may differ in the last place (different V8 builds), so values that pass through
-// cos are compared to a few ulps, never bit for bit.
-const ULP = 1e-15;
-const fact = (n) => { let f = 1; for (let i = 2; i <= n; i++) f *= i; return f; };
-
-/** Taylor partial sum Σ_{j<N} (−1)ʲ θ²ʲ/(2j)! by explicit powers and factorials; bound θ²ᴺ/(2N)!. */
-function taylorModel(theta, N) {
-  let poly = 0;
-  for (let j = 0; j < N; j++) poly += (-1) ** j * theta ** (2 * j) / fact(2 * j);
-  return { poly, exact: Math.cos(theta), direct: Math.abs(Math.cos(theta) - poly), bound: Math.abs(theta) ** (2 * N) / fact(2 * N) };
-}
-
-/** θ* by bisection on cos θ − θ over [0, 1] (independent of the page's Newton iteration). */
-function dottieBisect() {
-  let a = 0, b = 1;
-  for (let i = 0; i < 200; i++) { const m = (a + b) / 2; if (Math.cos(m) - m > 0) a = m; else b = m; }
-  return (a + b) / 2;
-}
-const THETA_STAR = dottieBisect();
-
-function iterModel(theta0Deg, steps) {
-  const th0 = theta0Deg * DEG;
-  const theta = [th0];
-  for (let k = 0; k < steps; k++) theta.push(Math.cos(theta[k]));
-  const x = [Math.max(0.2, th0)];
-  for (let k = 0; k < steps; k++) x.push(1 + 1 / x[k]);
-  return {
-    theta, dRes: theta.map((t) => Math.abs(Math.cos(t) - t)),
-    x, gRes: x.map((v) => Math.abs(1 + 1 / v - v))
+/* ---------- independent implementation ---------- */
+// The seed lists are defined by the mulberry32 generator (a published 32-bit PRNG): bits drawn row by row on 8 × 8,
+// the list for N is the top-left N × N block. Written here from the reference description.
+function prng(seed) {
+  let a = seed >>> 0;
+  return () => {
+    a = (a + 0x6D2B79F5) >>> 0;
+    let t = Math.imul(a ^ (a >>> 15), a | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 2 ** 32;
   };
 }
-
-/** Readings j/16 ∈ [0, π]; S₀ = readings between θ₀ and cos θ₀ widened by 1/16; U keeps the better half by residual. */
-function setsModel(theta0Deg, steps) {
-  const th0 = theta0Deg * DEG, c0 = Math.cos(th0);
-  const lo = Math.min(th0, c0) - 1 / 16, hi = Math.max(th0, c0) + 1 / 16;
-  const r = (j) => Math.abs(Math.cos(j / 16) - j / 16);
-  const S0 = [];
-  for (let j = 0; j / 16 <= Math.PI; j++) if (j / 16 >= lo - 1e-12 && j / 16 <= hi + 1e-12) S0.push(j);
-  const U = (A) => (A.length <= 1 ? A.slice() : [...A].sort((a, b) => r(a) - r(b) || a - b).slice(0, Math.ceil(A.length / 2)).sort((a, b) => a - b));
-  const seq = [S0];
-  for (let n = 0; n < Math.max(steps, S0.length) + 1; n++) seq.push(U(seq[n]));
-  return { S0, seq, r };
+function seedList(seed, n) {
+  const g = prng(seed), all = [];
+  for (let i = 0; i < 64; i++) all.push(g() < 0.5 ? 0 : 1);
+  return Array.from({ length: n }, (_, r) => all.slice(8 * r, 8 * r + n));
 }
-
-/** Counts, degrees, orientation, convexity and defects of a closed triangulated surface. */
-function meshModel({ P, faces }) {
-  const V = P.length, F = faces.length;
-  const und = new Map(), dir = new Set();
-  let orientedOnce = true;
-  for (const f of faces) for (let k = 0; k < 3; k++) {
-    const a = f[k], b = f[(k + 1) % 3];
-    const key = a < b ? `${a},${b}` : `${b},${a}`;
-    und.set(key, (und.get(key) || 0) + 1);
-    if (dir.has(`${a},${b}`)) orientedOnce = false;
-    dir.add(`${a},${b}`);
-  }
-  const E = und.size;
-  const manifold = [...und.values()].every((c) => c === 2);
-  const deg = new Array(V).fill(0);
-  for (const key of und.keys()) { const [a, b] = key.split(',').map(Number); deg[a]++; deg[b]++; }
-  const angle = new Array(V).fill(0);
-  const ang = (o, p, q) => {
-    const u = [p[0] - o[0], p[1] - o[1], p[2] - o[2]], v = [q[0] - o[0], q[1] - o[1], q[2] - o[2]];
-    const c = (u[0] * v[0] + u[1] * v[1] + u[2] * v[2]) / (Math.hypot(...u) * Math.hypot(...v));
-    return Math.acos(Math.max(-1, Math.min(1, c)));
-  };
-  let convex = Infinity, outward = true;
-  for (const f of faces) {
-    for (let k = 0; k < 3; k++) angle[f[k]] += ang(P[f[k]], P[f[(k + 1) % 3]], P[f[(k + 2) % 3]]);
-    const [a, b, c] = f.map((i) => P[i]);
-    const u = [b[0] - a[0], b[1] - a[1], b[2] - a[2]], w = [c[0] - a[0], c[1] - a[1], c[2] - a[2]];
-    const n = [u[1] * w[2] - u[2] * w[1], u[2] * w[0] - u[0] * w[2], u[0] * w[1] - u[1] * w[0]];
-    const off = n[0] * a[0] + n[1] * a[1] + n[2] * a[2];
-    if (off <= 0) outward = false;
-    for (let m = 0; m < V; m++) {
-      if (m === f[0] || m === f[1] || m === f[2]) continue;
-      convex = Math.min(convex, off - (n[0] * P[m][0] + n[1] * P[m][1] + n[2] * P[m][2]));
-    }
-  }
-  const defect = angle.map((s) => 2 * Math.PI - s);
-  const deg5 = deg.filter((x) => x === 5).length, deg6 = deg.filter((x) => x === 6).length;
-  return {
-    V, E, F, chi: V - E + F, manifold, orientedOnce, outward, convex, deg5, deg6,
-    unit: P.every((p) => near(Math.hypot(...p), 1, 1e-12)),
-    comboDeg: deg.reduce((s, x) => s + (6 - x) * 60, 0),
-    metricTotal: defect.reduce((s, x) => s + x, 0), minDefect: Math.min(...defect)
-  };
+/** Row → bit mask (bit c ↔ column c). */
+const mask = (row) => row.reduce((m, x, c) => m | (x << c), 0);
+const popcount = (x) => { let k = 0; while (x) { x &= x - 1; k++; } return k; };
+/** Flipped diagonal as a mask: bit r is the complement of bit r of row r. */
+const diagMask = (f) => f.reduce((m, row, r) => m | ((((mask(row) >> r) & 1) ^ 1) << r), 0);
+function cantorModel(f) {
+  const n = f.length, dm = diagMask(f), rows = f.map(mask);
+  const d = Array.from({ length: n }, (_, c) => (dm >> c) & 1);
+  const ham = rows.map((m) => popcount(m ^ dm));
+  const trace = f.reduce((s, row, r) => s + row[r], 0);
+  return { d, ham, minHam: Math.min(...ham), listed: rows.includes(dm), trace, weight: popcount(dm), signs: f.map((row, r) => (row[r] ? -1 : 1)) };
 }
+function isPrime(n) { if (n < 2) return false; for (let p = 2; p * p <= n; p++) if (n % p === 0) return false; return true; }
+const PRIMES = []; for (let n = 2; PRIMES.length < 400; n++) if (isPrime(n)) PRIMES.push(n);
+function euclid(k) {
+  const Q = PRIMES.slice(0, k).reduce((a, p) => a * BigInt(p), 1n) + 1n;
+  let q = 2n; while (Q % q !== 0n) q++;
+  return { Q: Number(Q), q: Number(q) };
+}
+/** ∏ p²/(p² − 1) over the first k primes, as an exact fraction, then to a double. */
+function eulerExact(k) {
+  let num = 1n, den = 1n;
+  for (const p of PRIMES.slice(0, k)) { const P = BigInt(p) * BigInt(p); num *= P; den *= P - 1n; }
+  const scale = 10n ** 30n;
+  return Number((num * scale) / den) / 1e30;
+}
+function bisectStar() { let a = 0, b = 1; for (let i = 0; i < 200; i++) { const m = (a + b) / 2; if (Math.cos(m) - m > 0) a = m; else b = m; } return (a + b) / 2; }
+const XSTAR = bisectStar();
+// Math.cos in the browser and in Node may differ in the last place, so values through cos are compared to a few ulps.
+const near = (a, b, tol = 4e-16) => Math.abs(a - b) <= tol * Math.max(1, Math.abs(a), Math.abs(b));
+const eq = (x, y) => JSON.stringify(x) === JSON.stringify(y);
 
 /* ---------- open ---------- */
 const T = await session({ viewport: { width: 1440, height: 900 }, locale: 'zh-CN' });
 const { page, check } = T;
+// record every canvas string, to check that the stage and the cover carry no prose
+await page.addInitScript(() => {
+  window.__texts = [];
+  const orig = CanvasRenderingContext2D.prototype.fillText;
+  CanvasRenderingContext2D.prototype.fillText = function (t, ...rest) { window.__texts.push([this.canvas.id, String(t)]); return orig.call(this, t, ...rest); };
+});
 const D = (fn, arg) => page.evaluate(fn, arg);
 const settle = async () => {
   await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
@@ -122,244 +90,283 @@ const open = async (query) => {
   await T.goto(BOOK, ID, query);
   await page.waitForFunction(() => window.SE_DEBUG && SE_DEBUG.frames() > 0, null, { timeout: 30000 });
 };
-const sameState = (s, [v, th, n, p, k]) => s.vIdx === v && s.theta0 === th && s.taylorN === n && near(s.pitch, p) && s.steps === k;
-
+const state = () => D(() => SE_DEBUG.state());
 await open('?lang=zh');
-let st = await D(() => SE_DEBUG.state());
-check('opens on (V = 162, θ₀ = 60°, N = 3, pitch 0.25, k = 10)', sameState(st, [3, 60, 3, 0.25, 10]), JSON.stringify(st));
-check('page carries its id and runtime language', (await D(() => document.body.dataset.vizId)) === ID && (await D(() => TRV.lang())) === 'zh');
-const zhCount = (pageSource.match(/class="(?:[^"]*\s)?zh(?:\s[^"]*)?"/g) || []).length;
-const enCount = (pageSource.match(/class="(?:[^"]*\s)?en(?:\s[^"]*)?"/g) || []).length;
-check('index.html has as many .zh as .en fragments (source and DOM)', zhCount > 0 && zhCount === enCount
-  && (await D(() => document.querySelectorAll('.zh').length === document.querySelectorAll('.en').length)), `${zhCount} vs ${enCount}`);
-check('SE_DEBUG is a frozen read-only probe and TRV_THUMB is a function', await D(() => Object.isFrozen(SE_DEBUG) && typeof window.TRV_THUMB === 'function'));
-const before = await D(() => { const i = SE_DEBUG.info(); i.dottie.theta[0] = 99; i.sets.S0.push(-1); return SE_DEBUG.info(); });
-check('mutating a probe snapshot does not touch page state', before.dottie.theta[0] === 60 * DEG && !before.sets.S0.includes(-1));
-check('SE_DEBUG.levels() lists V ∈ {12, 42, 60, 162, 642}', JSON.stringify(await D(() => SE_DEBUG.levels())) === JSON.stringify(V_LEVELS));
-
-/* ---------- the five meshes: Euler, degrees, orientation, convexity, Descartes ---------- */
-for (let v = 0; v < 5; v++) {
-  await D((x) => SE_DEBUG.set(x, 60), v); await settle();
-  const mesh = await D((x) => SE_DEBUG.mesh(x), v);
-  const info = await D(() => SE_DEBUG.info());
-  const m = meshModel(mesh);
-  const Vn = V_LEVELS[v];
-  check(`V = ${Vn}: E = 3V − 6 = ${3 * Vn - 6}, F = 2V − 4 = ${2 * Vn - 4}, V − E + F = 2 (independent count and page agree)`,
-    m.V === Vn && m.E === 3 * Vn - 6 && m.F === 2 * Vn - 4 && m.chi === 2 && info.V === m.V && info.E === m.E && info.F === m.F && info.chi === 2,
-    JSON.stringify({ m: [m.V, m.E, m.F], page: [info.V, info.E, info.F] }));
-  check(`V = ${Vn}: closed, consistently outward-oriented, convex, vertices on S²`, m.manifold && m.orientedOnce && m.outward && m.convex > 0 && m.unit, JSON.stringify({ manifold: m.manifold, oriented: m.orientedOnce, outward: m.outward, convex: m.convex }));
-  check(`V = ${Vn}: exactly 12 degree-5 and ${Vn - 12} degree-6 vertices`, m.deg5 === 12 && m.deg6 === Vn - 12 && info.deg5 === 12 && info.deg6 === Vn - 12 && info.degOther === 0);
-  check(`V = ${Vn}: equilateral-model defect 12 × 60° = 720°; metric defects all > 0 and sum to 720° (= 4π)`,
-    m.comboDeg === 720 && near(info.comboTotalDeg, 720, 1e-9) && near(m.metricTotal, 4 * Math.PI, 1e-9) && near(info.metricTotalDeg, 720, 1e-8)
-    && m.minDefect > 0 && info.minDefectDeg > 0 && near(info.minDefectDeg, m.minDefect / DEG, 1e-7),
-    JSON.stringify({ combo: m.comboDeg, metric: m.metricTotal, page: info.metricTotalDeg, min: info.minDefectDeg }));
-  if (v === 0) check('V = 12: the icosahedron puts the whole 720° on its 12 vertices (60° each)', near(info.pentShare, 1, 1e-12) && near(info.pentMeanDeg, 60, 1e-9));
+let st = await state();
+check('opens on N = 6, seed 11, x₀ = 1.00 rad, diagonal mode, finished ledger', st.N === 6 && st.seed === 11 && st.x0 === 100 && st.mode === 'diagonal' && st.pass === 6 && st.passes === 6 && !st.edited, JSON.stringify(st));
+check('page carries its id and the runtime language', (await D(() => document.body.dataset.vizId)) === ID && (await D(() => TRV.lang())) === 'zh');
+const zhCount = (pageSource.match(/class="zh"/g) || []).length, enCount = (pageSource.match(/class="en"/g) || []).length;
+check('index.html has as many .zh as .en fragments', zhCount > 20 && zhCount === enCount, `${zhCount} vs ${enCount}`);
+{
+  const css = fs.readFileSync(path.join(ROOT, 'books', BOOK, 'viz', ID, 'style.css'), 'utf8');
+  const strip = (s) => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ').trim();
+  const blocks = (s) => { const out = []; let depth = 0, start = 0; for (let i = 0; i < s.length; i++) { if (s[i] === '{') depth++; else if (s[i] === '}') { depth--; if (depth === 0) { out.push(s.slice(start, i + 1).trim()); start = i + 1; } } } return out; };
+  const gold = blocks(strip(fs.readFileSync(path.join(ROOT, 'books', 'example-monograph', 'viz', 'golden-carry', 'style.css'), 'utf8'))), mine = strip(css);
+  const missing = gold.filter((b) => !mine.includes(b));
+  check(`style.css keeps all ${gold.length} rule blocks of golden-carry verbatim (grid, media queries, embed, thumb, ledger, tape, map)`, gold.length > 60 && missing.length === 0, missing.slice(0, 2).join(' ‖ '));
+  check('style.css: the stage is 210px tall (min 190px, flex 0 0 210px) inside the ledger panel', /\.stage \{[^}]*height: 210px; min-height: 190px; flex: 0 0 210px;/.test(mine));
 }
-const shares = [];
-for (let v = 0; v < 5; v++) { await D((x) => SE_DEBUG.set(x, 60), v); shares.push(await D(() => SE_DEBUG.info().pentShare)); }
-check('the degree-5 share of the metric defect falls as the dome gets finer (V = 12 → 42 → 162 → 642)', shares[0] > shares[1] && shares[1] > shares[3] && shares[3] > shares[4], shares.map((s) => s.toFixed(4)).join(', '));
+check('SE_DEBUG and SE_MATH are frozen; TRV_THUMB is a function', await D(() => Object.isFrozen(SE_DEBUG) && Object.isFrozen(SE_MATH) && typeof window.TRV_THUMB === 'function'));
+check('SE_MATH exports the pure functions', await D(() => ['cantorDiagonal', 'verifyCantorEscape', 'dottieTrajectory', 'verifyDottiePythagorean', 'sievePrimes', 'eulerProductPartial', 'euclidEscape', 'matrixFromSeed', 'firstPrimes', 'hamming', 'dottieStar'].every((k) => typeof SE_MATH[k] === 'function')));
+const snap = await D(() => { const i = SE_DEBUG.info(); i.f[0][0] = 9; i.d.push(7); return SE_DEBUG.info(); });
+check('mutating a probe snapshot does not touch page state', snap.f[0][0] !== 9 && snap.d.length === 6);
 
-/* ---------- constants: θ*, sin θ*, sin 1, φ ---------- */
-let info = await D(() => SE_DEBUG.info());
-check('θ* agrees with an independent bisection and with 0.73908513321516', near(info.thetaStar, THETA_STAR, ULP) && near(info.thetaStar, 0.73908513321516, 1e-13) && Math.abs(Math.cos(info.thetaStar) - info.thetaStar) <= 5e-16, String(info.thetaStar));
-check('sin θ* = √(1 − θ*²) ≈ 0.6736120292 and equals sin(θ*)', near(info.sinStar, Math.sqrt(1 - THETA_STAR ** 2), ULP) && near(info.sinStar, 0.6736120292, 1e-9) && near(info.sinStar, Math.sin(info.thetaStar), ULP), String(info.sinStar));
-check('Banach rate sin 1 ≈ 0.84147098 < 1 and φ = (1 + √5)/2 with 1 + 1/φ = φ', near(info.sin1, 0.8414709848, 1e-9) && info.sin1 < 1 && near(info.phi, PHI, 0) && near(1 + 1 / info.phi, info.phi, 1e-15));
+/* ---------- 3-column layout and DOM aligned with golden-carry ---------- */
+check('1440px: three columns — deck (#inputs, #readouts) | center (#ledgerPanel, footer#rail) | side (#heatPanel, #evidence)', await D(() => {
+  const r = (s) => document.querySelector(s).getBoundingClientRect();
+  return document.querySelector('aside.col.deck #inputs + #readouts') && document.querySelector('main.center > #ledgerPanel + footer#rail')
+    && document.querySelector('aside.col.side > #heatPanel[data-thumb] + #evidence')
+    && r('#inputs').right < r('#ledgerPanel').left && r('#ledgerPanel').right < r('#heatPanel').left && Math.abs(r('#inputs').top - r('#heatPanel').top) < 2;
+}));
+check('the grid columns are minmax(270px, 310px) | 1fr | minmax(320px, 400px)', await D(() => { const c = getComputedStyle(document.getElementById('app')).gridTemplateColumns.split(' ').map(parseFloat); return c.length === 3 && c[0] >= 270 && c[0] <= 310 && c[2] >= 320 && c[2] <= 400; }));
+check('the ledger panel holds .head, .rules (r0 r1 rj ra), .stage, .sheetwrap > .digits#ledger, .tape-row and the toast, in that order', await D(() => {
+  const kids = [...document.getElementById('ledgerPanel').children].map((e) => e.className || e.id);
+  return eq(kids, ['head', 'rules', 'stage', 'sheetwrap', 'tape-row', 'toast']) && ['r0', 'r1', 'rj', 'ra'].every((c) => document.querySelector(`.rules .rule.${c}`));
+  function eq(a, b) { return JSON.stringify(a) === JSON.stringify(b); }
+}));
+check('the stage is 210px tall with scan lines, four brackets, HUD and the three mode chips', await D(() => {
+  const s = document.getElementById('escapeStage');
+  return Math.round(s.getBoundingClientRect().height) === 210 && s.querySelector('canvas#escapeCanvas') && s.querySelector('.scan') && s.querySelectorAll('.bracket.tl, .bracket.tr, .bracket.bl, .bracket.br').length === 4
+    && s.querySelector('.hud-tl #hudBig') && s.querySelector('.hud-tl #hudSub') && [...s.querySelectorAll('.hud-tr.chips#modeChips [data-mode]')].map((b) => b.dataset.mode).join() === 'diagonal,dottie,prime';
+}));
+check('readouts: six half-width items, one hero (.wide.deficit) and two verification rows, then #roNote', await D(() => {
+  const items = [...document.querySelectorAll('#readouts dl.ro > div')];
+  return items.length === 9 && items.slice(0, 6).every((d) => !d.classList.contains('wide')) && items[6].matches('.wide.deficit') && items[6].querySelector('b#roHero') && items[6].querySelector('#roHeroSub.sub')
+    && items[7].matches('.wide') && items[8].matches('.wide') && document.querySelector('#readouts > p.note#roNote');
+}));
+check('rail: ⏮ ◀ ▶ ▶▶ ⏭, the clock and the key help', await D(() => ['first', 'prev', 'play', 'next', 'last'].every((id) => document.querySelector(`#rail .transport #${id}`)) && document.querySelector('#rail .clock #passLabel.tau') && document.querySelector('#rail .clock input#pass') && document.querySelector('#rail .keys')));
 
-/* ---------- presets & independent verification ---------- */
-const presets = [
-  ['0,60,2,0.20,8', [0, 60, 2, 0.2, 8]],
-  ['2,90,3,0.30,12', [2, 90, 3, 0.3, 12]],
-  ['1,42,1,0.00,16', [1, 42, 1, 0, 16]],
-  ['4,180,4,0.40,10', [4, 180, 4, 0.4, 10]]
-];
-function agrees(x, [v, th, n, p, k]) {
-  const it = iterModel(th, k), tm = taylorModel(th * DEG, n), sm = setsModel(th, k);
-  const okT = near(x.taylor.poly, tm.poly, 1e-14) && near(x.taylor.exact, tm.exact, ULP) && near(x.taylor.bound, tm.bound, Math.max(1e-300, tm.bound * 1e-12))
-    && near(x.taylor.residual, tm.direct, 3 * ULP) && x.taylor.residual <= x.taylor.bound && (th === 0 ? x.taylor.residual === 0 : x.taylor.residual > 0)
-    && x.taylor.degree === 2 * n - 2;
-  const okD = x.dottie.theta.length === k + 1 && x.dottie.theta.every((t, i) => near(t, it.theta[i], 20 * ULP)) && x.dottie.residual.every((r, i) => near(r, it.dRes[i], 40 * ULP) && r > 0);
-  const okG = x.golden.x.every((g, i) => near(g, it.x[i], 1e-15) && g > 0) && x.golden.residual.every((r, i) => near(r, it.gRes[i], 1e-15)) && near(x.golden.x0, Math.max(0.2, th * DEG), 0);
-  const okS = JSON.stringify(x.sets.S0) === JSON.stringify(sm.S0) && x.sets.seq.every((a, i) => JSON.stringify(a) === JSON.stringify(sm.seq[i]));
-  return { okT, okD, okG, okS, all: x.vIdx === v && x.V === V_LEVELS[v] && near(x.pitch, p) && x.steps === k && okT && okD && okG && okS };
+/* ---------- the seed lists and the diagonal escape ---------- */
+const lists = await D(() => Array.from({ length: 63 }, (_, k) => SE_MATH.matrixFromSeed(8, k + 1)));
+check('matrixFromSeed agrees with the independent generator for every seed 1 … 63', lists.every((m, k) => eq(m, seedList(k + 1, 8))));
+let sweepOk = true, sweepBad = '';
+for (let seed = 1; seed <= 63 && sweepOk; seed++) for (let n = 3; n <= 8; n++) {
+  const f = seedList(seed, n), mine = cantorModel(f);
+  const page = await D(([f2]) => { const v = SE_MATH.verifyCantorEscape(f2); return { d: SE_MATH.cantorDiagonal(f2), ...v }; }, [f]);
+  if (!(eq(page.d, mine.d) && eq(page.ham, mine.ham) && page.minHam === mine.minHam && page.ok && !page.listed && !mine.listed && mine.minHam >= 1)) { sweepOk = false; sweepBad = `seed ${seed} N ${n}`; break; }
 }
-for (const [code, params] of presets) {
-  await page.click(`#presets [data-preset="${code}"]`); await settle();
-  const s = await D(() => SE_DEBUG.state());
-  const x = await D(() => SE_DEBUG.info());
-  const pressed = await D((c) => document.querySelector(`#presets [data-preset="${c}"]`).getAttribute('aria-pressed'), code);
-  const others = await D((c) => [...document.querySelectorAll('#presets [data-preset]')].filter((b) => b.dataset.preset !== c).every((b) => b.getAttribute('aria-pressed') === 'false'), code);
-  check(`preset ${code} applies and is the only aria-pressed preset`, sameState(s, params) && pressed === 'true' && others, JSON.stringify(s));
-  const a = agrees(x, params);
-  check(`preset ${code}: Taylor, Dottie, golden and set sequences agree with the independent model`, a.all, JSON.stringify(a));
-  check(`preset ${code}: the V chip and V readout follow (V = ${V_LEVELS[params[0]]})`, (await D(() => document.querySelector('#vChips [aria-pressed="true"]').dataset.v)) === String(params[0]) && (await text('#vOut')) === `V = ${V_LEVELS[params[0]]}`);
-}
-check('a preset shows a toast naming it', /载入预设/.test(await text('#toast')));
-
-/* ---------- theorem-shaped properties of the page's sequences ---------- */
-function setProps(sets) {
-  const sub = (a, b) => a.every((x) => b.includes(x));
-  const eq = (a, b) => JSON.stringify(a) === JSON.stringify(b);
-  const shrinking = sets.seq.every((a, i) => i === 0 || sub(a, sets.seq[i - 1]));
-  const stable = sets.seq.every((a, n) => n < sets.N || eq(a, sets.seq[sets.N]));
-  const strict = sets.seq.slice(0, -1).filter((a, n) => !eq(a, sets.seq[n + 1])).length;
-  return { shrinking, stable, strict, ok: shrinking && stable && sets.N <= sets.card0 && sets.changes === strict && strict <= sets.card0 && sets.rBest > 0 && sets.final.length >= 1 };
-}
-let allOk = true, badMsg = '';
-let seed = 2026;
-const rnd = () => { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; };
-for (let t = 0; t < 60; t++) {
-  const params = [Math.floor(rnd() * 5), Math.floor(rnd() * 181), 1 + Math.floor(rnd() * 6), Math.round(rnd() * 50) / 100, 1 + Math.floor(rnd() * 20)];
-  await D((p) => SE_DEBUG.set(...p), params);
-  const x = await D(() => SE_DEBUG.info());
-  const a = agrees(x, params), sp = setProps(x.sets);
-  const it = iterModel(params[1], params[4]);
-  // Banach: θ₁ ∈ [−1, 1], so from k = 1 on every step contracts the distance to θ* by at most sin 1. From k = 2 on the
-  // iterates lie in [cos 1, 1] ⊂ [0, π], where cos is decreasing, so they alternate around θ* (θ₁ may be negative).
-  let banach = true;
-  for (let k = 1; k < params[4]; k++) {
-    if (x.dottie.err[k + 1] > Math.sin(1) * x.dottie.err[k] + 1e-15) banach = false;
-    if (k >= 2 && (it.theta[k] - THETA_STAR) * (it.theta[k + 1] - THETA_STAR) > 0) banach = false;
+check('378 lists (seeds 1 … 63, N = 3 … 8): d, Hamming distances and the escape agree; d is never a row', sweepOk, sweepBad);
+const exhaustive = await D(() => {
+  let all = 0, ok = 0;
+  for (const n of [3, 4]) for (let m = 0; m < 2 ** (n * n); m++) {
+    const f = Array.from({ length: n }, (_, r) => Array.from({ length: n }, (__, c) => (m >> (r * n + c)) & 1));
+    all++; if (SE_MATH.verifyCantorEscape(f).ok) ok++;
   }
-  if (!a.all || !sp.ok || !banach || x.helixLift !== params[3] || x.helixClosed !== (params[3] === 0)) {
-    allOk = false;
-    badMsg = `${params} ${JSON.stringify({ a, sp, banach })}`;
-    break;
-  }
-}
-check('60 pseudo-random states: page values match the model; U(S) ⊆ S, N ≤ |S₀|, strict changes ≤ |S₀|, final residual > 0; Banach rate ≤ sin 1 and alternation from k = 2', allOk, badMsg);
-
-let taylorOk = true, taylorMsg = '';
-for (let n = 1; n <= 6 && taylorOk; n++) {
-  for (const th of [0, 1e-6, 0.01, 0.1, 0.5, THETA_STAR, 1, 2, 2.5, 3, Math.PI]) {
-    const x = await D(([a, b]) => SE_DEBUG.taylorAt(a, b), [th, n]);
-    const tm = taylorModel(th, n);
-    const ok = near(x.poly, tm.poly, 1e-14) && near(x.residual, tm.direct, 3 * ULP) && x.residual <= tm.bound * (1 + 1e-12)
-      && (th === 0 ? x.residual === 0 : x.residual > 0) && near(x.bound, tm.bound, Math.max(1e-300, tm.bound * 1e-12));
-    if (!ok) { taylorOk = false; taylorMsg = `N=${n} θ=${th} ${JSON.stringify(x)} vs ${JSON.stringify(tm)}`; break; }
-  }
-}
-check('Taylor remainder: 0 < |R₂N(θ)| ≤ θ²ᴺ/(2N)! for θ ∈ (0, π], N = 1 … 6 (R₂N(0) = 0)', taylorOk, taylorMsg);
-
-/* ---------- controls: chips, sliders, number boxes, steppers, clamping, keyboard ---------- */
-await D(() => SE_DEBUG.reset()); await settle();
-await page.click('#vChips [data-v="2"]'); await settle();
-await page.fill('#theta0Num', '75'); await page.press('#theta0Num', 'Enter'); await settle();
-await page.locator('#taylorN').fill('5'); await settle();
-await page.click('#pitchInc'); await page.click('#stepsDec'); await settle();
-st = await D(() => SE_DEBUG.state());
-check('chip, number box, slider and steppers update (V=60, θ₀=75, N=5, pitch 0.26, k=9)', sameState(st, [2, 75, 5, 0.26, 9]), JSON.stringify(st));
-await page.locator('#vIdx').fill('4'); await settle();
-check('the V slider selects V = 642', (await D(() => SE_DEBUG.info().V)) === 642);
-// settle after each commit: a pending render rewrites every number box, which would undo a fill not yet committed
-await page.fill('#theta0Num', '999'); await page.press('#theta0Num', 'Enter'); await settle();
-await page.fill('#pitchNum', '5'); await page.press('#pitchNum', 'Enter'); await settle();
-await page.fill('#stepsNum', '-3'); await page.press('#stepsNum', 'Enter'); await settle();
-await page.fill('#taylorNNum', '0'); await page.press('#taylorNNum', 'Enter'); await settle();
-st = await D(() => SE_DEBUG.state());
-check('out-of-range inputs are clamped (θ₀ = 180, pitch = 0.50, k = 1, N = 1)', st.theta0 === 180 && near(st.pitch, 0.5) && st.steps === 1 && st.taylorN === 1, JSON.stringify(st));
-check('steppers disable at their limits', await D(() => ['theta0Inc', 'pitchInc', 'stepsDec', 'taylorNDec'].every((id) => document.getElementById(id).disabled)));
-await page.click('body', { position: { x: 5, y: 5 } });
-await page.keyboard.press('v'); await settle();
-check('V cycles the polyhedron (642 → 12)', (await D(() => SE_DEBUG.state().vIdx)) === 0);
-await page.keyboard.press(']'); await page.keyboard.press(']'); await page.keyboard.press('['); await settle();
-check('] and [ step the iteration count', (await D(() => SE_DEBUG.state().steps)) === 2);
-await page.keyboard.press('r'); await settle();
-st = await D(() => SE_DEBUG.state());
-check('R resets to the default state', sameState(st, [3, 60, 3, 0.25, 10]), JSON.stringify(st));
-
-/* ---------- canvas: drawing, magenta defect vertices, drag rotation, labels ---------- */
-const pix = await D(() => {
-  const c = document.getElementById('view');
-  const d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data;
-  let lit = 0, magentaLeft = 0;
-  for (let y = 0; y < c.height; y++) for (let x = 0; x < c.width; x++) {
-    const i = (y * c.width + x) * 4;
-    if (d[i] + d[i + 1] + d[i + 2] > 180) lit++;
-    if (x < c.width / 2 && d[i] > 200 && d[i + 1] < 110 && d[i + 2] > 150) magentaLeft++;
-  }
-  return { lit, magentaLeft };
+  return [all, ok];
 });
-check('the four panels are drawn and the left half shows magenta degree-5 vertices', pix.lit > 4000 && pix.magentaLeft > 60, JSON.stringify(pix));
-const yaw0 = await D(() => SE_DEBUG.state().yaw);
-const box = await page.locator('#view').boundingBox();
-// (0.25 W, 0.18 H) lies in the polyhedron panel in both arrangements: landscape (left half, top 70 %) and portrait (top 36 %)
-await page.mouse.move(box.x + box.width * 0.25, box.y + box.height * 0.18);
-await page.mouse.down(); await page.mouse.move(box.x + box.width * 0.25 + 60, box.y + box.height * 0.18 + 10, { steps: 4 }); await page.mouse.up(); await settle();
-st = await D(() => SE_DEBUG.state());
-check('dragging the polyhedron panel rotates the polyhedron without touching the parameters', st.yaw !== yaw0 && sameState(st, [3, 60, 3, 0.25, 10]));
-let labels = await D(() => SE_DEBUG.labels());
-check('canvas labels carry the live Euler count, the Lean-checked set bound and θ*', labels.includes('V − E + F = 162 − 480 + 320 = 2')
-  && labels.some((l) => /^LEAN ✓ N = \d+ ≤ \|S₀\| = \d+$/.test(l)) && labels.includes('θ* ≈ 0.739085'), labels.slice(0, 8).join(' | '));
+check('every 3 × 3 and 4 × 4 list (512 + 65536): the flipped diagonal is off the list', exhaustive[0] === 512 + 65536 && exhaustive[1] === exhaustive[0], exhaustive.join('/'));
+let pageOk = true, pageBad = '';
+let seedR = 5; const rnd = () => { seedR = (seedR * 1103515245 + 12345) % 2147483648; return seedR; };
+for (let i = 0; i < 40; i++) {
+  const seed = 1 + (rnd() % 63), N = 3 + (rnd() % 6), x0 = rnd() % 315;
+  await D((o) => SE_DEBUG.set(o), { seed, N, x0 });
+  const x = await D(() => SE_DEBUG.info()), f = seedList(seed, N), mine = cantorModel(f);
+  const ok = eq(x.f, f) && eq(x.d, mine.d) && eq(x.ham, mine.ham) && x.ok && x.trace === mine.trace && x.weight === mine.weight
+    && eq(x.signs, mine.signs) && x.total === mine.weight - mine.trace && x.total === N - 2 * mine.trace && x.witness.every(Boolean);
+  if (!ok) { pageOk = false; pageBad = JSON.stringify({ seed, N }); break; }
+}
+check('40 page states: list, d, distances, signs and |d| − tr f = N − 2·tr f match the independent model', pageOk, pageBad);
+await D(() => SE_DEBUG.set({ seed: 11, N: 6, x0: 100 })); await settle();
+check('readouts show diag(f), d, the minimum distance and the escape for seed 11', (await text('#roTrace')).startsWith('100110') && (await text('#roD')).startsWith('011001') && (await text('#roHam')).startsWith('1')
+  && /6 \/ 6/.test(await text('#roCantor')) && (await text('#pillEscape')).includes('✓') && (await D(() => document.getElementById('roHero').className)) === 'vpos');
+
+/* ---------- Dottie, primes and Euler products ---------- */
+check('x* agrees with bisection and 0.73908513321516; sin x* ≈ 0.6736120292', await D(() => [SE_MATH.XSTAR, SE_DEBUG.info().sinStar]).then(([xs, s]) => near(xs, XSTAR, 2e-16) && Math.abs(xs - 0.73908513321516) < 1e-13 && Math.abs(s - 0.6736120292) < 1e-9));
+let dottieOk = true, dottieBad = '';
+for (const x0 of [0, 1, 50, 100, 157, 222, 314]) {
+  const tr = await D((a) => SE_MATH.dottieTrajectory(a / 100, 8), x0);
+  let x = x0 / 100;
+  for (let k = 0; k <= 8; k++) {
+    if (!near(tr.xs[k], x, 1e-15) || !(tr.res[k] > 0)) { dottieOk = false; dottieBad = `x₀ ${x0} k ${k}`; break; }
+    x = Math.cos(x);
+  }
+  if (Math.abs(tr.xs[8] - XSTAR) >= Math.abs(tr.xs[2] - XSTAR)) { dottieOk = false; dottieBad = `x₀ ${x0}: no approach to x*`; }
+}
+check('Dottie trajectories match xₖ₊₁ = cos xₖ; every residual |cos xₖ − xₖ| > 0; the iterates approach x*', dottieOk, dottieBad);
+check('sin²x + cos²x = 1 within four ulps at 2000 points of [0, π]', await D(() => SE_MATH.verifyDottiePythagorean(Array.from({ length: 2000 }, (_, i) => (Math.PI * i) / 1999)).ok));
+check('sievePrimes(2000) equals trial division', eq(await D(() => SE_MATH.sievePrimes(2000)), PRIMES.filter((p) => p <= 2000)) && eq(await D(() => SE_MATH.firstPrimes(8)), [2, 3, 5, 7, 11, 13, 17, 19]));
+const esc = await D(() => Array.from({ length: 8 }, (_, k) => SE_MATH.euclidEscape(SE_MATH.firstPrimes(k + 1))));
+check('Euclid: Q = p₁⋯pₖ + 1 and its least prime factor agree with BigInt arithmetic; q is never listed', esc.every((e, k) => { const m = euclid(k + 1); return e.Q === m.Q && e.q === m.q && e.outside && !PRIMES.slice(0, k + 1).includes(m.q) && e.Q === e.q * e.cofactor; })
+  && esc[5].q === 59 && esc[6].q === 19 && esc[7].q === 347, JSON.stringify(esc.map((e) => [e.Q, e.q])));
+const eul = await D(() => Array.from({ length: 8 }, (_, k) => SE_MATH.eulerProductPartial(SE_MATH.firstPrimes(k + 1), 2)));
+const zeta2 = Math.PI ** 2 / 6;
+check('partial Euler products ∏ (1 − p⁻²)⁻¹ match exact fractions, increase, and stay below π²/6', eul.every((v, k) => Math.abs(v - eulerExact(k + 1)) < 1e-14 && v < zeta2 && (k === 0 || v > eul[k - 1])) && Math.abs(eul[0] - 4 / 3) < 1e-15);
+
+/* ---------- controls ---------- */
+await page.fill('#nNum', '8'); await page.press('#nNum', 'Enter'); await settle();
+await page.locator('#seed').fill('24'); await settle();
+await page.locator('#x0').fill('0'); await settle();
+st = await state();
+check('number box and sliders set N = 8, S = 24, x₀ = 0', st.N === 8 && st.seed === 24 && st.x0 === 0 && (await D(() => document.getElementById('n').value)) === '8' && (await D(() => document.getElementById('seedNum').value)) === '24');
+await page.click('#nDec'); await page.click('#seedInc'); await page.click('#x0Inc'); await settle();
+st = await state();
+check('steppers move N down, S up and x₀ up by one', st.N === 7 && st.seed === 25 && st.x0 === 1);
+await page.fill('#seedNum', '500'); await page.press('#seedNum', 'Enter'); await page.fill('#nNum', '1'); await page.press('#nNum', 'Enter'); await settle();
+st = await state();
+check('out-of-range input is clamped (S = 63, N = 3) and the steppers disable at the limits', st.seed === 63 && st.N === 3 && (await D(() => document.getElementById('seedInc').disabled && document.getElementById('nDec').disabled)));
+for (const [p, dExpect] of [['identity', '00000000'], ['alternating', '11111111'], ['dense', '00000000']]) {
+  await page.click('#nChips [data-n="8"]'); await page.click(`#presets [data-preset="${p}"]`); await settle();
+  const x = await D(() => SE_DEBUG.info());
+  check(`preset ${p}: d = ${dExpect}, d is off the list, and the chip is the only pressed preset`, x.d.join('') === dExpect && x.ok
+    && (await D((q) => [...document.querySelectorAll('#presets [data-preset]')].every((b) => b.getAttribute('aria-pressed') === String(b.dataset.preset === q)), p)));
+}
+await page.click('#presets [data-preset="dottie0"]'); await settle();
+st = await state();
+check('preset Dottie x₀ = 0 sets x₀ = 0 and the Dottie stage', st.x0 === 0 && st.mode === 'dottie' && (await D(() => document.querySelector('#presets [data-preset="dottie0"]').getAttribute('aria-pressed'))) === 'true'
+  && (await D(() => document.querySelector('#modeChips [data-mode="dottie"]').getAttribute('aria-pressed'))) === 'true');
+await page.click('#presets [data-preset="dottie1"]'); await settle();
+check('preset Dottie x₀ = 1 sets x₀ = 1.00 rad', (await state()).x0 === 100);
+await D(() => SE_DEBUG.set({ seed: 11, N: 6 })); await settle();
+const before = await D(() => SE_DEBUG.info());
+await page.click('#swap'); await settle();
+const after = await D(() => SE_DEBUG.info());
+check('swap transposes the list: rows become columns, the diagonal and d stay, d is still off the list', eq(after.f, before.f.map((row, r) => row.map((_, c) => before.f[c][r]))) && eq(after.d, before.d) && after.ok && (await state()).edited);
+await page.click('#random'); await settle();
+st = await state();
+check('random picks another seed in 1 … 63', st.seed >= 1 && st.seed <= 63 && st.seed !== 11 && !st.edited);
+await page.click('#reset'); await settle();
+st = await state();
+check('reset restores N = 6, S = 11, x₀ = 1.00, the diagonal stage and the finished ledger', st.N === 6 && st.seed === 11 && st.x0 === 100 && st.mode === 'diagonal' && st.pass === 6 && !st.edited);
+for (const n of [4, 6, 8]) {
+  await page.click(`#nChips [data-n="${n}"]`); await settle();
+  check(`N chip ${n}: pressed, ${n} ledger rows, matrix range ${n} × ${n}`, (await state()).N === n && (await D(() => document.querySelector('#nChips [aria-pressed="true"]').dataset.n)) === String(n)
+    && (await D(() => document.querySelectorAll('#ledger .drow.pass').length)) === n && (await text('#heatRange')) === `${n} × ${n}`);
+}
+await page.click('#nChips [data-n="6"]'); await settle();
+for (const m of ['dottie', 'prime', 'diagonal']) {
+  await page.click(`#modeChips [data-mode="${m}"]`); await settle();
+  const lit = await D(() => { const c = document.getElementById('escapeCanvas'), d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data; let n = 0; for (let i = 0; i < d.length; i += 4) if (d[i] + d[i + 1] + d[i + 2] > 200) n++; return n; });
+  check(`stage mode ${m}: pressed and drawn`, (await state()).mode === m && (await D((q) => document.querySelector(`#modeChips [data-mode="${q}"]`).getAttribute('aria-pressed'), m)) === 'true' && lit > 300, String(lit));
+}
+await D(() => document.activeElement && document.activeElement.blur());
+await page.keyboard.press('m'); await settle();
+check('M cycles the stage mode', (await state()).mode === 'dottie');
+await page.click('#modeChips [data-mode="diagonal"]'); await settle();
+
+/* ---------- ledger, tape and transport ---------- */
+check('ledger rows: header, diagonal input, step 0, N steps and the escape row d', await D(() => {
+  const rows = [...document.querySelectorAll('#ledger .drow')];
+  return rows[0].matches('.hdr') && rows[1].matches('.input') && rows[2].matches('.sum[data-pass="0"]') && rows.slice(3, 9).every((r, i) => r.matches('.pass') && r.dataset.pass === String(i + 1)) && rows[9].matches('.final') && rows.length === 10;
+}));
+check('each step row marks its diagonal cell and carries a sign, the code ¬f(k,k) and a name', await D(() => [...document.querySelectorAll('#ledger .drow.pass')].every((r, i) => {
+  const t = r.querySelectorAll('.cells span.touch'); const k = i + 1;
+  return t.length === 1 && [...r.querySelectorAll('.cells span')].indexOf(t[0]) === i && r.querySelector('.what .sgn.pos, .what .sgn.neg') && r.querySelector('.what code').textContent.startsWith(`¬f(${k},${k})`) && r.querySelector('.what .name');
+})));
+await page.click('#first'); await settle();
+check('⏮ returns to step 0: N rows dimmed, the step-0 row current, d hidden', (await state()).pass === 0 && (await D(() => document.querySelectorAll('#ledger .drow.future').length)) === 6
+  && (await D(() => document.querySelector('#ledger .drow.now').dataset.pass)) === '0' && (await D(() => [...document.querySelectorAll('#ledger .drow.final .cells span')].every((s) => s.textContent === '·'))));
+await page.click('#next'); await page.click('#next'); await settle();
+check('▶▶ steps one diagonal entry at a time, marks the row and the tape square, and reveals d(1), d(2)', (await state()).pass === 2 && (await D(() => document.querySelector('#ledger .drow.now').dataset.pass)) === '2'
+  && (await D(() => document.querySelector('#tape i.now').dataset.pass)) === '2' && (await D(() => [...document.querySelectorAll('#ledger .drow.final .cells span')].map((s) => s.textContent).join(''))) === '01····');
+await page.click('#prev'); await settle();
+check('◀ steps back', (await state()).pass === 1);
+await page.click('#last'); await settle();
+check('⏭ jumps to the last step; the escape row is current and fully revealed', (await state()).pass === 6 && (await D(() => document.querySelector('#ledger .drow.final').classList.contains('now'))) && (await D(() => [...document.querySelectorAll('#ledger .drow.final .cells span')].map((s) => s.textContent).join(''))) === '011001');
+check('the sign tape sums to |d| − tr f', /总计 0 = \|d\| − tr f/.test(await text('#tapeSum')) && (await D(() => document.querySelectorAll('#tape i.pos').length)) === 3 && (await D(() => document.querySelectorAll('#tape i.neg').length)) === 3);
+await D(() => document.activeElement && document.activeElement.blur());
+await page.keyboard.press('ArrowLeft'); await settle();
+check('← steps back from the keyboard', (await state()).pass === 5);
+await page.keyboard.press('Home'); await page.keyboard.press('ArrowRight'); await settle();
+check('Home and → work from the keyboard', (await state()).pass === 1);
+await page.click('#ledger .drow[data-pass="4"]'); await settle();
+check('clicking a ledger row selects that step', (await state()).pass === 4);
+await page.click('#tape i[data-pass="2"]'); await settle();
+check('clicking a tape square selects that step', (await state()).pass === 2);
+await page.click('#first'); await page.click('#play'); await settle();
+check('▶ plays the steps', (await state()).playing === true);
+await page.waitForFunction(() => !SE_DEBUG.state().playing, null, { timeout: 15000 }).catch(() => {});
+await page.waitForFunction(() => getComputedStyle(document.getElementById('toast')).opacity === '1', null, { timeout: 5000 }).catch(() => {});
+check('playback stops at the last step and reports the escape', (await state()).pass === 6 && /对角逃逸完成：d 与全部 6 行都不同，带符号翻转计数 0 = \|d\| − tr f/.test(await text('#toast')));
+
+/* ---------- the diagonal matrix ---------- */
+let pt = await D(() => SE_DEBUG.cellPoint(2, 3));
+const m0 = await D(() => SE_DEBUG.master());
+await page.mouse.click(pt.x, pt.y); await settle();
+let m1 = await D(() => SE_DEBUG.master());
+check('clicking an off-diagonal cell flips f(2, 3), selects step 2 and leaves d alone', m1[1][2] === 1 - m0[1][2] && (await state()).pass === 2 && (await state()).edited && eq((await D(() => SE_DEBUG.info())).d, [0, 1, 1, 0, 0, 1]));
+pt = await D(() => SE_DEBUG.cellPoint(3, 3));
+await page.mouse.click(pt.x, pt.y); await settle();
+let info = await D(() => SE_DEBUG.info());
+check('clicking a diagonal cell flips f(3, 3) and d(3) together; d stays off the list', info.d[2] === 1 - info.f[2][2] && info.d[2] === 0 && info.ok && (await state()).pass === 3);
+pt = await D(() => SE_DEBUG.cellPoint('d', 5));
+const m2 = await D(() => SE_DEBUG.master());
+await page.mouse.click(pt.x, pt.y); await settle();
+check('clicking the escape row selects that step without changing the list', (await state()).pass === 5 && eq(await D(() => SE_DEBUG.master()), m2));
+await page.mouse.move(pt.x, pt.y); await settle();
+check('hovering the escape row describes d(c) = ¬f(c, c)', /d\(5\) = ¬f\(5, 5\)/.test(await text('#heatHover')));
+const lit = await D(() => { const c = document.getElementById('heat'), d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data; let n = 0; for (let i = 0; i < d.length; i += 4) if (d[i] + d[i + 1] + d[i + 2] > 200) n++; return n; });
+check('the matrix is drawn', lit > 3000, String(lit));
+check('the counts say d differs from all rows', /d 与全部 6 行都不同/.test(await text('#heatCounts')) && (await text('#heatCounts')).includes('✓'));
+await page.click('#reset'); await settle();
+const stageTexts = await D(() => window.__texts.filter(([id]) => id === 'escapeCanvas').map(([, t]) => t));
+check('the stage canvas draws symbols and numbers only (no prose, no Chinese)', stageTexts.length > 10 && stageTexts.every((t) => !CJK.test(t) && !/[A-Za-z]{2,}/.test(t)), [...new Set(stageTexts)].slice(0, 12).join(' | '));
 
 /* ---------- Lean links at the pinned commit; evidence tiers; drawer ---------- */
 const links = await D(() => [...document.querySelectorAll('a[data-lean-gid]')].map((a) => [a.dataset.leanGid, a.href]));
-check('every Lean link points at the pinned commit, file and line of trureturing.lock.json', links.length >= 8 && links.every(([gid, href]) => {
-  const d = lock.declarations[gid];
-  return d && d.kind === 'theorem' && href === `https://github.com/${lock.repo}/blob/${lock.commit}/${gid.slice(0, gid.lastIndexOf('.'))}.lean#L${d.line}`;
-}), JSON.stringify(links.slice(0, 4)));
-const expectedGids = [
-  'D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous',
-  'D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_topological_settlement',
-  'D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize',
-  'D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique'
-];
-const cited = [...new Set(links.map(([g]) => g))].sort();
-check('the page cites exactly the four frozen theorems', JSON.stringify(cited) === JSON.stringify([...expectedGids].sort()), cited.join(', '));
+check('every Lean link points at the pinned commit, file and line of trureturing.lock.json', links.length >= 10 && links.every(([gid, href]) => {
+  const d = lock.declarations[gid]; return d && d.kind === 'theorem' && href === `https://github.com/${lock.repo}/blob/${lock.commit}/${gid.slice(0, gid.lastIndexOf('.'))}.lean#L${d.line}`;
+}), JSON.stringify(links.slice(0, 2)));
+check('the page cites exactly the five frozen theorems', eq([...new Set(links.map(([g]) => g))].sort(), [...EXPECTED_GIDS].sort()), links.map(([g]) => g).join(', '));
 const paths = await D(() => [...document.querySelectorAll('a[data-trureturing-path]')].map((a) => [a.dataset.trureturingPath, a.href]));
-check('trureturing file links are pinned to the locked commit', paths.length >= 3 && paths.every(([p, href]) => href === `https://github.com/${lock.repo}/blob/${lock.commit}/${p}`));
+check('trureturing file links are pinned to the locked commit', paths.length >= 4 && paths.every(([p, href]) => href === `https://github.com/${lock.repo}/blob/${lock.commit}/${p}`));
 const tiers = await D(() => {
   const boxes = [...document.querySelectorAll('#evidence .lean')];
-  const green = boxes.filter((b) => !['num', 'model', 'argued', 'open'].some((c) => b.classList.contains(c)));
-  return {
-    green: green.length, greenLinked: green.every((b) => b.querySelectorAll('a[data-lean-gid]').length === 1 && b.querySelector('.ok').textContent === 'LEAN ✓'),
-    nonGreenUnlinked: boxes.filter((b) => !green.includes(b)).every((b) => !b.querySelector('a[data-lean-gid]') && !/LEAN/.test(b.querySelector('.ok').textContent)),
-    lit: !!document.querySelector('#evidence .lean.argued'), model: !!document.querySelector('#evidence .lean.model'),
-    open: !!document.querySelector('#evidence .lean.open'), num: !!document.querySelector('#evidence .lean.num')
-  };
+  const green = boxes.filter((b) => b.className === 'lean');
+  return { green: green.length, greenLinked: green.every((b) => b.querySelectorAll('a[data-lean-gid]').length === 1), others: boxes.filter((b) => b.className !== 'lean').map((b) => b.className), othersUnlinked: boxes.filter((b) => b.className !== 'lean').every((b) => !b.querySelector('a[data-lean-gid]')), labels: boxes.map((b) => b.querySelector('.ok').textContent) };
 });
-check('evidence tiers: four green LEAN ✓ boxes, each with one theorem link; literature, model, open and numeric boxes carry no Lean link', tiers.green === 4 && tiers.greenLinked && tiers.nonGreenUnlinked && tiers.lit && tiers.model && tiers.open && tiers.num, JSON.stringify(tiers));
+check('evidence tiers: five green LEAN ✓ boxes with one theorem link each; argued, model, open and numeric boxes carry no Lean link', tiers.green === 5 && tiers.greenLinked && tiers.othersUnlinked
+  && eq(tiers.others, ['lean argued', 'lean model', 'lean open', 'lean num']) && tiers.labels.filter((l) => l === 'LEAN ✓').length === 5, JSON.stringify(tiers));
+check('MODEL badge is amber and ARGUED badge is violet in computed styles', await D(() => {
+  const rgb = (v) => { const c = document.createElement('i'); c.style.color = getComputedStyle(document.documentElement).getPropertyValue(v); document.body.append(c); const o = getComputedStyle(c).color; c.remove(); return o; };
+  return getComputedStyle(document.querySelector('#evidence .lean.model .ok')).color === rgb('--tr-amber')
+    && getComputedStyle(document.querySelector('#evidence .lean.argued .ok')).color === rgb('--tr-violet');
+}));
+check('only standard evidence classes are used', !/lean-badge|\.tier|lean interp|class="lean [a-z]*interp/.test(pageSource));
 check('literature results are labelled as not formalized in this book', /文献结果，未在本书形式化/.test(await text('#litBox .zh')) && /Literature results, not formalized in this book/.test(await text('#litBox .en')));
 check('the golden box says the theorem asserts uniqueness, not convergence', /不断言迭代收敛/.test(pageSource) && /not convergence of the iteration/.test(pageSource));
-
 await page.click('#infoBtn');
 check('theory drawer opens', (await D(() => document.getElementById('drawer').hidden)) === false);
-check('the drawer states that the page is a numerical illustration, not a proof', /数值演示，不是证明/.test(await text('#drawer div.zh')) && /numerical illustration, not a proof/.test(await text('#drawer div.en')));
-check('drawer chapter links target the top window', await D(() => [...document.querySelectorAll('#drawer a[href*="ch2"]')].every((a) => a.target === '_top' && !a.getAttribute('href').startsWith('/'))));
+check('the drawer says the page is a numerical illustration, not a proof', /数值演示，不是证明/.test(await text('#drawer div.zh')) && /numerical illustration, not a proof/.test(await text('#drawer div.en')));
+check('drawer chapter links are relative and target the top window', await D(() => { const a = [...document.querySelectorAll('#drawer a[href*="ch2"]')]; return a.length >= 5 && a.every((x) => x.target === '_top' && x.getAttribute('href').startsWith('../../')); }));
 await page.keyboard.press('Escape');
-check('Esc closes the drawer and returns focus to #infoBtn', (await D(() => document.getElementById('drawer').hidden)) === true && (await D(() => document.activeElement.id)) === 'infoBtn');
+check('Esc closes the drawer and focus returns to its button', (await D(() => document.getElementById('drawer').hidden)) === true && (await D(() => document.activeElement.id)) === 'infoBtn');
 
-/* ---------- English mode & zero CJK leftovers (DOM, aria, title, canvas, toast, drawer) ---------- */
+/* ---------- language ---------- */
 await page.click('[data-lang-set="en"]'); await settle();
 let left = await cjkLeftovers(page);
 check('no visible Chinese in English mode', left.length === 0, left.slice(0, 6).join(' | '));
-labels = await D(() => SE_DEBUG.labels());
-check('no Chinese in the English canvas labels', labels.length > 20 && labels.every((l) => !CJK.test(l)), labels.filter((l) => CJK.test(l)).slice(0, 4).join(' | '));
-for (const [code] of presets) {
-  await page.click(`#presets [data-preset="${code}"]`); await settle();
+for (const p of ['identity', 'dottie0', 'alternating']) {
+  await page.click(`#presets [data-preset="${p}"]`); await settle();
+  await page.click('#first'); await settle();
+  for (const m of ['diagonal', 'dottie', 'prime']) { await page.click(`#modeChips [data-mode="${m}"]`); await settle(); }
   left = await cjkLeftovers(page);
-  labels = await D(() => SE_DEBUG.labels());
-  check(`no Chinese in English mode after preset ${code} (DOM, canvas, toast)`, left.length === 0 && labels.every((l) => !CJK.test(l)) && /^Preset loaded/.test(await text('#toast')) && !CJK.test(await text('#toast')), left.concat(labels.filter((l) => CJK.test(l))).slice(0, 6).join(' | '));
+  check(`no visible Chinese in English mode after preset ${p} and every stage mode`, left.length === 0, left.slice(0, 6).join(' | '));
 }
-check('English aria-labels come from data-aria-en', await D(() => [...document.querySelectorAll('[data-aria-en]')].every((el) => el.getAttribute('aria-label') === el.dataset.ariaEn)));
 await page.click('#infoBtn');
 left = await cjkLeftovers(page);
-check('no visible Chinese in the English theory drawer', left.length === 0, left.slice(0, 6).join(' | '));
+check('no visible Chinese in the English drawer', left.length === 0, left.slice(0, 6).join(' | '));
 await page.keyboard.press('Escape');
-check('English title is set', (await D(() => document.title)) === 'ORTHO//ESCAPE · Polyhedral Approximation, Hairy Ball Defect, and Cosine Fixed Points');
+check('English title', (await D(() => document.title)) === 'ORTHO//ESCAPE · Diagonal escape, the cosine fixed point and prime escape');
+check('English aria-labels come from data-aria-en', await D(() => [...document.querySelectorAll('[data-aria-en]')].every((el) => el.getAttribute('aria-label') === el.dataset.ariaEn)));
+await page.click('#reset'); await settle();
+await D(() => document.activeElement && document.activeElement.blur());
+await page.keyboard.press('Home'); await settle(); await page.click('#play');
+await page.waitForFunction(() => !SE_DEBUG.state().playing, null, { timeout: 15000 }).catch(() => {});
+await page.waitForFunction(() => getComputedStyle(document.getElementById('toast')).opacity === '1', null, { timeout: 5000 }).catch(() => {});
+check('the end-of-playback toast is in English', /^Diagonal escape complete: d differs from all 6 rows; signed flip count 0 = \|d\| − tr f; residual of x₆ /.test(await text('#toast')));
 
-/* ---------- hub round trip ---------- */
+/* ---------- hub round trip (the crumb leads to ../ = the book's visualization index) ---------- */
 await page.click('.crumb'); await page.waitForLoadState('load');
-check('the crumb opens the hub, keeps English, and lists sphere-escape with its thumbnail', (await D(() => document.documentElement.dataset.lang)) === 'en'
-  && (await D(() => document.querySelectorAll('.card[data-viz="sphere-escape"]').length)) === 1
-  && (await D(() => !!document.querySelector('.card[data-viz="sphere-escape"] img[src="sphere-escape/thumb.jpg"]'))));
-check('language choice is remembered under tr-lang', (await D(() => localStorage.getItem('tr-lang'))) === 'en');
+check('the crumb opens the hub, which keeps the language and lists this visualization', (await D(() => document.documentElement.dataset.lang)) === 'en'
+  && (await D(() => document.querySelectorAll('.card[data-viz="sphere-escape"]').length)) === 1 && (await D(() => !!document.querySelector('.card[data-viz="sphere-escape"] img[src="sphere-escape/thumb.jpg"]'))));
+check('the choice is remembered under the site-wide key tr-lang', (await D(() => localStorage.getItem('tr-lang'))) === 'en');
 left = await cjkLeftovers(page);
 check('no visible Chinese on the English hub', left.length === 0, left.slice(0, 6).join(' | '));
 await page.click('.card[data-viz="sphere-escape"] .enter'); await page.waitForLoadState('load');
 await page.waitForFunction(() => window.SE_DEBUG && SE_DEBUG.frames() > 0, null, { timeout: 30000 });
-check('the hub card re-opens sphere-escape', (await D(() => document.body.dataset.vizId)) === ID);
+check('the hub card opens this page', (await D(() => document.body.dataset.vizId)) === ID);
 
-/* ---------- responsive & special viewports ---------- */
+/* ---------- layouts ---------- */
 for (const lang of ['zh', 'en']) {
   for (const [w, h] of [[390, 844], [820, 1000], [1440, 900]]) {
     await page.setViewportSize({ width: w, height: h });
@@ -367,67 +374,43 @@ for (const lang of ['zh', 'en']) {
     check(`no horizontal scroll at ${w}px (${lang})`, (await overflowX(page)) === 0);
   }
 }
-/* ---------- golden-carry frame: deck | center (+ key rail) | side, then two columns, then one ---------- */
-const frame = () => D(() => {
-  const q = (s) => document.querySelector(s);
-  const r = (s) => q(s).getBoundingClientRect();
-  return {
-    dom: !!q('.app > aside.col.deck > #inputs + #readouts') && !!q('.app > main.center > #stagePanel + footer.rail#rail > .keys')
-      && !!q('.app > aside.col.side > #evidence #infoBtn') && !!q('#evidence > h2 .aside'),
-    cols: getComputedStyle(q('.app')).gridTemplateColumns.split(' ').length,
-    inputs: r('#inputs').toJSON(), readouts: r('#readouts').toJSON(), stage: r('#stagePanel').toJSON(), evidence: r('#evidence').toJSON()
-  };
-});
-await page.setViewportSize({ width: 1440, height: 900 });
-await open('?lang=zh'); await settle();
-let fr = await frame();
-check('1440px: three columns — aside.col.deck (#inputs, #readouts) | main.center (#stagePanel, footer#rail .keys) | aside.col.side (#evidence, #infoBtn)',
-  fr.dom && fr.cols === 3 && fr.stage.left > fr.inputs.right - 1 && fr.evidence.left > fr.stage.right - 1
-  && Math.abs(fr.inputs.top - fr.stage.top) < 2 && Math.abs(fr.stage.top - fr.evidence.top) < 2, JSON.stringify(fr));
-await page.setViewportSize({ width: 1000, height: 900 });
-await open('?lang=zh'); await settle();
-fr = await frame();
-check('1000px: two columns — the deck first, then the stage and the evidence across the full width',
-  fr.cols === 2 && fr.stage.top >= fr.readouts.bottom - 1 && fr.evidence.top >= fr.stage.bottom - 1
-  && fr.stage.width > 1.8 * fr.inputs.width && Math.abs(fr.evidence.width - fr.stage.width) < 2 && (await overflowX(page)) === 0, JSON.stringify(fr));
 await page.setViewportSize({ width: 390, height: 844 });
 await open('?lang=zh'); await settle();
-fr = await frame();
-check('390px: one column in the order inputs → stage → readouts → evidence',
-  fr.cols === 1 && fr.stage.top >= fr.inputs.bottom - 1 && fr.readouts.top >= fr.stage.bottom - 1 && fr.evidence.top >= fr.readouts.bottom - 1, JSON.stringify(fr));
-await page.setViewportSize({ width: 390, height: 844 });
-await open('?lang=en'); await settle();
-labels = await D(() => SE_DEBUG.labels());
-check('phone width: the canvas switches to the portrait layout and keeps English labels', (await D(() => { const c = document.getElementById('view'); return c.clientHeight > c.clientWidth; })) && labels.every((l) => !CJK.test(l)));
+check('390px: one column in the order inputs → ledger → readouts → matrix → evidence', await D(() => {
+  const t = ['#inputs', '#ledgerPanel', '#readouts', '#heatPanel', '#evidence'].map((s) => document.querySelector(s).getBoundingClientRect().top);
+  return t.every((y, i) => i === 0 || y > t[i - 1]);
+}));
+check('390px: the HUD sits below the mode chips', await D(() => document.getElementById('hudBig').getBoundingClientRect().top >= document.getElementById('modeChips').getBoundingClientRect().bottom - 1));
 await page.setViewportSize({ width: 740, height: 560 });
 await open('?embed=1&lang=en'); await settle();
-check('?embed=1 hides header, crumb and keyboard hint', await D(() => ['header.top', '.crumb', '.keys'].every((s) => getComputedStyle(document.querySelector(s)).display === 'none') && document.documentElement.dataset.embed === '1'));
-check('?embed=1&lang=en starts in English with zero CJK leftovers', (await D(() => TRV.lang())) === 'en' && (await cjkLeftovers(page)).length === 0);
-check('embedded at 740px: two columns, no horizontal scroll', (await overflowX(page)) === 0 && (await D(() => {
-  const a = document.getElementById('inputs').getBoundingClientRect();
-  const b = document.getElementById('stagePanel').getBoundingClientRect();
-  return b.left > a.right - 1 && Math.abs(a.top - b.top) < 40;
-})));
+check('?embed=1 hides the header, crumb and key help', await D(() => ['header.top', '.crumb', '.keys'].every((s) => getComputedStyle(document.querySelector(s)).display === 'none') && document.documentElement.dataset.embed === '1'));
+check('?embed=1&lang=en starts in English', (await D(() => TRV.lang())) === 'en' && (await cjkLeftovers(page)).length === 0);
+check('embedded at 740px: two columns, no horizontal scroll', (await overflowX(page)) === 0 && (await D(() => { const a = document.getElementById('inputs').getBoundingClientRect(), b = document.getElementById('ledgerPanel').getBoundingClientRect(); return b.left > a.right - 1 && Math.abs(a.top - b.top) < 40; })));
 await page.setViewportSize({ width: 360, height: 560 });
 await open('?embed=1&lang=zh'); await settle();
 check('embedded at 360px: no horizontal scroll', (await overflowX(page)) === 0);
 await page.setViewportSize({ width: 1440, height: 900 });
-await open('?lang=zh&v=1&theta0=42&n=1&pitch=0&steps=16'); await settle();
-check('URL parameters set the state (the "near Dottie" preset is pressed)', sameState(await D(() => SE_DEBUG.state()), [1, 42, 1, 0, 16])
-  && (await D(() => document.querySelector('#presets [data-preset="1,42,1,0.00,16"]').getAttribute('aria-pressed'))) === 'true'
-  && (await D(() => SE_DEBUG.info().helixClosed)) === true);
+await open('?lang=zh&n=8&seed=24&x0=0&mode=dottie'); await settle();
+st = await state();
+check('URL parameters set the state', st.N === 8 && st.seed === 24 && st.x0 === 0 && st.mode === 'dottie' && st.pass === 8, JSON.stringify(st));
 await page.setViewportSize({ width: 1280, height: 720 });
-await open('?thumb=1&lang=zh'); await settle();
-check('?thumb=1: the stage canvas fills the 1280x720 frame', await D(() => {
-  const r = document.getElementById('view').getBoundingClientRect();
-  return document.documentElement.dataset.thumbMode === '1' && r.width === 1280 && r.height === 720;
-}));
-await D(() => window.TRV_THUMB()); await settle();
-check('TRV_THUMB sets the cover state (V = 162, θ₀ = 180°, N = 3, pitch 0.35, k = 12)', sameState(await D(() => SE_DEBUG.state()), [3, 180, 3, 0.35, 12]));
+await open('?thumb=1&lang=zh'); await D(() => window.TRV_THUMB()); await settle();
+check('?thumb=1: the matrix panel fills the frame', await D(() => { const r = document.getElementById('heat').getBoundingClientRect(); return document.documentElement.dataset.thumbMode === '1' && r.width === 1280 && r.height === 720; }));
+check('TRV_THUMB puts the cover on the 8 × 8 list of seed 11 at step 5', eq(await state().then((s) => [s.N, s.seed, s.pass]), [8, 11, 5]));
+const cover = await D(() => {
+  window.__texts = []; window.dispatchEvent(new Event('resize'));
+  return new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(() => {
+    const c = document.getElementById('heat'), d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data;
+    const half = (x0, x1) => { let n = 0; for (let y = 0; y < c.height; y += 2) for (let x = x0; x < x1; x += 2) { const i = 4 * (y * c.width + x); if (d[i] + d[i + 1] + d[i + 2] > 300) n++; } return n; };
+    r({ left: half(0, c.width / 2), right: half(c.width / 2, c.width), texts: window.__texts.filter(([id]) => id === 'heat').map(([, t]) => t) });
+  })));
+});
+check('the cover draws the matrix on the left and the ledger on the right', cover.left > 4000 && cover.right > 400, JSON.stringify({ left: cover.left, right: cover.right }));
+check('the cover carries no words: only row codes, digits and signs', cover.texts.length > 60 && cover.texts.every((t) => /^(#\d|d|[01]|[+−]1)$/.test(t)), [...new Set(cover.texts)].join(' '));
 await page.emulateMedia({ reducedMotion: 'reduce' });
 await page.setViewportSize({ width: 1440, height: 900 });
 await open('?lang=zh'); await settle();
 check('reduced motion is honoured (no logo glitch)', (await D(() => TRV.reduceMotion)) === true && (await D(() => !document.getElementById('app').classList.contains('glitching'))));
 
-check('no script errors, failed requests, or console errors during the session', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
+check('no script errors, failed requests or console errors during the session', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();

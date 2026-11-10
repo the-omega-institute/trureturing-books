@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//PYTHAGORAS · Pell chirality ledger · the ±1 seam, prime splitting and congruent-number curves">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//PYTHAGORAS 佩尔手性账本 · ±1 接缝、素数分裂与同余数椭圆曲线</title>
+<meta name="description" content="沿 √d 的连分数逐步求渐近分数 mₖ/nₖ：一维误差 |mₖ/nₖ − √d| 趋于 0，二维范数 mₖ² − d nₖ² 却只在 +1 与 −1 之间翻转手性；素数 p ≡ 1 (mod 4) 在 ℤ[i] 中分裂为 p = (a + bi)(a − bi)，p ≡ 3 (mod 4) 保持惰性；同余数曲线 E_d: y² = x³ − d²x 在 𝔽ₚ 上的弗罗贝尼乌斯迹 aₚ 满足哈塞界 |aₚ| ≤ 2√p。页面引用 trureturing 中已由 Lean 内核验证并冻结的拉格朗日—格拉姆恒等式与平行四边形律等定理。Follow the continued fraction of √d to the convergents mₖ/nₖ: the 1D error |mₖ/nₖ − √d| goes to 0 while the 2D norm mₖ² − d nₖ² only flips its chirality between +1 and −1; primes p ≡ 1 (mod 4) split in ℤ[i] as p = (a + bi)(a − bi), primes p ≡ 3 (mod 4) stay inert; the Frobenius trace aₚ of the congruent-number curve E_d: y² = x³ − d²x obeys Hasse's bound |aₚ| ≤ 2√p. The page cites the Lagrange–Gram identity, the parallelogram law and two more theorems kernel-verified in Lean and frozen in trureturing.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+</head>
+<body data-viz-id="pythagoras-number-escape">
+<div class="app" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//PYTHAGORAS">ORTHO<b>//</b>PYTHAGORAS</h1>
+      <div class="tagline">
+        <span class="zh">佩尔手性账本 · <em>一维逼近的间隙趋于 0，二维面积的间隙恒为 ±1</em></span>
+        <span class="en">Pell chirality ledger · <em>the 1D gap of mₖ/nₖ → √d vanishes, the 2D gap mₖ² − d nₖ² stays ±1</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill hot" id="pillD">d, p <strong>—</strong></span>
+      <span class="pill" id="pillK">k <strong>—</strong></span>
+      <span class="pill" id="pillN">Δ <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="输入与读数" data-aria-en="Inputs and readouts">
+    <section class="panel sec" id="inputs">
+      <h2><span class="zh">输入</span><span class="en">Inputs</span><span class="aside">m² − d n² = ±1 · p mod 4</span></h2>
+      <div class="num-field">
+        <label for="d"><span class="zh">无平方因子根数 / 同余面积 d</span><span class="en">Squarefree radicand / congruent area d</span></label>
+        <div class="stepper"><button type="button" id="dDec" aria-label="上一个无平方因子的 d" data-aria-en="Previous squarefree d">−</button><input type="number" id="dNum" min="2" max="37" step="1" value="2" inputmode="numeric" aria-label="d 的值" data-aria-en="Value of d"><button type="button" id="dInc" aria-label="下一个无平方因子的 d" data-aria-en="Next squarefree d">+</button></div>
+        <input type="range" id="d" min="2" max="37" step="1" value="2">
+      </div>
+      <div class="num-field">
+        <label for="p"><span class="zh">素数 p（模 4 分类）</span><span class="en">Prime p (its class mod 4)</span></label>
+        <div class="stepper"><button type="button" id="pDec" aria-label="上一个素数" data-aria-en="Previous prime">−</button><input type="number" id="pNum" min="2" max="97" step="1" value="13" inputmode="numeric" aria-label="素数 p" data-aria-en="Prime p"><button type="button" id="pInc" aria-label="下一个素数" data-aria-en="Next prime">+</button></div>
+        <input type="range" id="p" min="2" max="97" step="1" value="13">
+      </div>
+      <div class="num-field">
+        <label for="k"><span class="zh">佩尔 / 泰昂渐近步 k</span><span class="en">Pell / Theon convergent step k</span></label>
+        <div class="stepper"><button type="button" id="kDec" aria-label="k 减一" data-aria-en="Decrease k">−</button><input type="number" id="kNum" min="1" max="8" step="1" value="4" inputmode="numeric" aria-label="k 的值" data-aria-en="Value of k"><button type="button" id="kInc" aria-label="k 加一" data-aria-en="Increase k">+</button></div>
+        <input type="range" id="k" min="1" max="8" step="1" value="4">
+      </div>
+      <div class="chips presets" id="presets" role="group" aria-label="示例" data-aria-en="Examples">
+        <button class="chip" data-preset="d=2"><span class="zh">d = 2 · √2 危机</span><span class="en">d = 2 · √2 crisis</span></button>
+        <button class="chip" data-preset="d=5"><span class="zh">d = 5 · 黄金分裂</span><span class="en">d = 5 · golden split</span></button>
+        <button class="chip" data-preset="d=6"><span class="zh">d = 6 · 面积 6 的三角形</span><span class="en">d = 6 · area-6 triangle</span></button>
+        <button class="chip" data-preset="p=13">p = 13 · 3² + 2²</button>
+        <button class="chip" data-preset="p=7"><span class="zh">p = 7 · 惰性</span><span class="en">p = 7 · inert</span></button>
+        <button class="chip" id="swap"><span class="zh">交换 d ↔ p</span><span class="en">Swap d ↔ p</span></button>
+        <button class="chip" id="random"><span class="zh">随机</span><span class="en">Random</span></button>
+        <button class="chip" id="reset"><span class="zh">复位</span><span class="en">Reset</span></button>
+      </div>
+    </section>
+
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">N(m + n√d) = ±1</span></h2>
+      <dl class="ro">
+        <div><dt><span class="zh">渐近分数 mₖ / nₖ</span><span class="en">Convergent mₖ / nₖ</span></dt><dd id="roConv">—</dd></div>
+        <div><dt><span class="zh">有理误差 |mₖ/nₖ − √d|</span><span class="en">Rational error |mₖ/nₖ − √d|</span></dt><dd id="roErr">—</dd></div>
+        <div><dt><span class="zh">素数 p mod 4</span><span class="en">Prime p mod 4</span></dt><dd id="roPmod">—</dd></div>
+        <div><dt><span class="zh">高斯分裂 a² + b²</span><span class="en">Gaussian split a² + b²</span></dt><dd id="roGauss">—</dd></div>
+        <div><dt><span class="zh">弗罗贝尼乌斯迹 aₚ(E<sub>d</sub>)</span><span class="en">Frobenius trace aₚ(E<sub>d</sub>)</span></dt><dd id="roAp">—</dd></div>
+        <div><dt><span class="zh">哈塞比 aₚ / (2√p)</span><span class="en">Hasse ratio aₚ / (2√p)</span></dt><dd id="roHasse">—</dd></div>
+        <div class="wide deficit"><dt><span class="zh">佩尔手性范数 Δ = mₖ² − d nₖ²</span><span class="en">Pell chirality norm Δ = mₖ² − d nₖ²</span></dt><dd><b id="roDeficit" class="vpos">+1</b><span class="sub" id="roDeficitSub"><span class="zh">mₖ² − d nₖ² = ±1 · 最小非零整数间隙</span><span class="en">mₖ² − d nₖ² = ±1 · the least nonzero integer gap</span></span><span class="okmark" id="roDeficitMark">✓</span></dd></div>
+        <div class="wide"><dt><span class="zh">勾股 a² + b² = c²（p = a² + b² 经拉格朗日—格拉姆）</span><span class="en">Pythagorean a² + b² = c² (from p = a² + b² by Lagrange–Gram)</span></dt><dd id="roPyth">—</dd></div>
+        <div class="wide"><dt><span class="zh">哈塞界 |aₚ| ≤ 2√p</span><span class="en">Hasse bound |aₚ| ≤ 2√p</span></dt><dd id="roHasseBound">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <section class="panel ledger" id="ledgerPanel" aria-labelledby="ledgerTitle">
+      <div class="head">
+        <h2 id="ledgerTitle"><span class="zh">佩尔连分数与算术手性账本</span><span class="en">Pell convergent &amp; arithmetic chirality ledger</span></h2>
+        <span class="aside" id="ledgerSub"><span class="zh">√d 的连分数逐步给出渐近分数 mₖ/nₖ；范数 mₖ² − d nₖ² 在 +1 与 −1 之间翻转手性</span><span class="en">the continued fraction of √d yields the convergents mₖ/nₖ; the norm mₖ² − d nₖ² flips its chirality between +1 and −1</span></span>
+      </div>
+      <div class="rules" aria-label="范数与分裂规则" data-aria-en="Norm and splitting rules">
+        <span class="rule r0"><b>N=+1</b> m² − d n² = +1 <i>+1</i></span>
+        <span class="rule r1"><b>N=−1</b> m² − d n² = −1 <i>−1</i></span>
+        <span class="rule rj"><b>p≡1</b> p = (a+bi)(a−bi) <i><span class="zh">面分裂</span><span class="en">plane split</span></i></span>
+        <span class="rule ra"><b>p≡3</b> x² ≡ −1 <span class="zh">无解</span><span class="en">has no root</span> <i><span class="zh">线惰性</span><span class="en">line inert</span></i></span>
+      </div>
+      <div class="stage" id="stage">
+        <canvas id="stageCanvas" role="img" aria-label="几何舞台：佩尔方块与双曲线、高斯分裂圆与模 p 剩余钟、同余三角形与椭圆曲线" data-aria-en="Geometric stage: Pell squares and hyperbola, the Gaussian splitting circle and the residue clock mod p, the congruent triangle and the elliptic curve"></canvas>
+        <div class="scan"></div>
+        <div class="bracket tl"></div><div class="bracket tr"></div><div class="bracket bl"></div><div class="bracket br"></div>
+        <div class="hud-tl"><span class="big" id="hudBig">—</span><span class="sub" id="hudSub">—</span></div>
+        <div class="hud-tr chips" id="viewChips" role="group" aria-label="视图" data-aria-en="View">
+          <button class="chip" data-view-set="pell">Pell ±1</button>
+          <button class="chip" data-view-set="primes"><span class="zh">素数 p mod 4</span><span class="en">Primes p mod 4</span></button>
+          <button class="chip" data-view-set="elliptic"><span class="zh">椭圆 E<sub>d</sub></span><span class="en">Elliptic E<sub>d</sub></span></button>
+        </div>
+      </div>
+      <div class="sheetwrap" id="sheetWrap">
+        <div class="digits" id="ledger" role="list" aria-label="逐步渐近分数与范数" data-aria-en="Convergents and norms, step by step"></div>
+      </div>
+      <div class="tape-row">
+        <span class="tape-label"><span class="zh">符号带</span><span class="en">Sign tape</span></span>
+        <div class="tape" id="tape" aria-hidden="true"></div>
+        <span class="tape-sum" id="tapeSum">—</span>
+      </div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </section>
+
+    <footer class="rail" id="rail">
+      <div class="transport">
+        <button class="tbtn" id="first" aria-label="回到第一个渐近分数" data-aria-en="Back to the first convergent">⏮</button>
+        <button class="tbtn" id="prev" aria-label="上一个渐近分数" data-aria-en="Previous convergent">◀</button>
+        <button class="tbtn" id="play" aria-label="播放/暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+        <button class="tbtn" id="next" aria-label="下一个渐近分数" data-aria-en="Next convergent">▶▶</button>
+        <button class="tbtn" id="last" aria-label="跳到第 8 步" data-aria-en="Jump to step 8">⏭</button>
+      </div>
+      <div class="clock">
+        <span class="tau" id="passLabel">4</span>
+        <input type="range" id="pass" min="1" max="8" step="1" value="4" aria-label="当前渐近步" data-aria-en="Current convergent step">
+      </div>
+      <div class="keys">
+        <span class="zh"><kbd>←</kbd><kbd>→</kbd> 渐近步 · <kbd>空格</kbd> 播放 · <kbd>S</kbd> 交换 · <kbd>R</kbd> 随机 · <kbd>V</kbd> 视图</span>
+        <span class="en"><kbd>←</kbd><kbd>→</kbd> step · <kbd>Space</kbd> play · <kbd>S</kbd> swap · <kbd>R</kbd> random · <kbd>V</kbd> view</span>
+      </div>
+    </footer>
+  </main>
+
+  <aside class="col side" aria-label="手性热图与依据" data-aria-en="Chirality map and evidence">
+    <section class="panel sec heatpanel" id="heatPanel" data-thumb>
+      <h2 class="thumb-hide"><span class="zh">算术手性热图 <span class="mth">(m, n) · m² − d n²</span></span><span class="en">Arithmetic chirality map <span class="mth">(m, n) · m² − d n²</span></span><span class="aside" id="heatRange">16 × 16</span></h2>
+      <div class="heatwrap">
+        <canvas id="heat" role="img" aria-label="佩尔范数热图：横轴 n，纵轴 m，格色为 m² − d n² 的符号；点击选择最近的渐近分数" data-aria-en="Pell norm heat map: n across, m up, each cell coloured by the sign of m² − d n²; click to pick the nearest convergent"></canvas>
+        <div class="scan"></div>
+      </div>
+      <div class="chips thumb-hide" id="nChips" role="group" aria-label="根数快选" data-aria-en="Radicand quick select">
+        <button class="chip" data-n="2">d = 2</button>
+        <button class="chip" data-n="3">d = 3</button>
+        <button class="chip" data-n="5">d = 5</button>
+        <button class="chip" data-n="13">d = 13</button>
+      </div>
+      <ul class="legend thumb-hide">
+        <li><i class="sw pos"></i>Δ = +1</li>
+        <li><i class="sw zero"></i>|Δ| &gt; 1</li>
+        <li><i class="sw neg"></i>Δ = −1</li>
+        <li><i class="sw cur"></i><span class="zh">当前渐近分数</span><span class="en">current convergent</span></li>
+      </ul>
+      <p class="note thumb-hide" id="heatCounts">—</p>
+      <p class="note thumb-hide" id="heatHover">&nbsp;</p>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">对任意有限指标集 s 与实值 u, v：(Σᵢ uᵢ²)(Σᵢ vᵢ²) − (Σᵢ uᵢvᵢ)² = (Σᵢ Σⱼ (uᵢvⱼ − uⱼvᵢ)²)/2。页面取 s = {1, 2}、u = (a, b)、v = (a, −b)，其中 p = a² + b²：左边是 p² − (a² − b²)²，右边是 (2ab)²，于是分裂素数长出勾股三元组 (|a² − b²|, 2ab, p)。已冻结：</span><span class="en">For every finite index set s and real u, v: (Σᵢ uᵢ²)(Σᵢ vᵢ²) − (Σᵢ uᵢvᵢ)² = (Σᵢ Σⱼ (uᵢvⱼ − uⱼvᵢ)²)/2. The page takes s = {1, 2}, u = (a, b) and v = (a, −b) with p = a² + b²: the left side is p² − (a² − b²)² and the right side is (2ab)², so a split prime grows the Pythagorean triple (|a² − b²|, 2ab, p). Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/QuantumBounds/LagrangeGramIdentity.lean#L17" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">实内积空间中任意 x, y：‖x + y‖² + ‖x − y‖² = 2(‖x‖² + ‖y‖²)。页面取 x = a e₁、y = b e₂：两条对角线 (a, b) 与 (a, −b) 就是共轭高斯整数 a + bi 与 a − bi，二者范数平方之和为 2(a² + b²) = 2p。已冻结：</span><span class="en">In a real inner product space, for all x, y: ‖x + y‖² + ‖x − y‖² = 2(‖x‖² + ‖y‖²). The page takes x = a e₁ and y = b e₂: the two diagonals (a, b) and (a, −b) are the conjugate Gaussian integers a + bi and a − bi, and their squared norms sum to 2(a² + b²) = 2p. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/QuantumContext/ParallelogramNormLaw.lean#L22" target="_blank" rel="noopener"><code>inner_product_norm_parallelogram_law</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">若纯度超出 Tr(ρ²) − 1/N 等于态向量的范数平方，且可见子空间投影的范数平方等于各语境概率对 1/N 的偏差平方和（N 为维数），则纯度超出 = 偏差平方和 + 正交补中的剩余质量 residualMass。页面的模型把弗罗贝尼乌斯角 θₚ 读作单比特纯态 ψ = cos θₚ|0⟩ + sin θₚ|1⟩（N = 2，可见语境为 Z 基）：½ = cos²2θₚ/2 + sin²2θₚ/2。已冻结：</span><span class="en">If the purity excess Tr(ρ²) − 1/N equals the squared norm of the state vector and the squared norm of its visible projection equals the total squared deviation of the context probabilities from 1/N (N the dimension), then purity excess = squared deviations + residualMass in the orthogonal complement. The page's model reads the Frobenius angle θₚ as the one-qubit pure state ψ = cos θₚ|0⟩ + sin θₚ|1⟩ (N = 2, Z basis visible): ½ = cos²2θₚ/2 + sin²2θₚ/2. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.lean#L33" target="_blank" rel="noopener"><code>complementary_context_probability_pythagoras</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">若第 k 个记录投影是秩一投影 P k = φφ*、态是纯态 ρ = ψψ*，则记录权重 recordWeight P ρ k = ‖φ* ⬝ ψ‖²。页面取 φ = |0⟩、|1⟩ 与 ψ = cos θₚ|0⟩ + sin θₚ|1⟩，得 P₀ = cos²θₚ = aₚ²/(4p)、P₁ = sin²θₚ = 1 − aₚ²/(4p)。已冻结：</span><span class="en">If the k-th record projection is rank one, P k = φφ*, and the state is pure, ρ = ψψ*, then the record weight is recordWeight P ρ k = ‖φ* ⬝ ψ‖². The page takes φ = |0⟩, |1⟩ and ψ = cos θₚ|0⟩ + sin θₚ|1⟩, giving P₀ = cos²θₚ = aₚ²/(4p) and P₁ = sin²θₚ = 1 − aₚ²/(4p). Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Observer/BornReduction.lean#L27" target="_blank" rel="noopener"><code>rank_one_pure_state_modulus_square_reduction</code></a></span></div>
+      <div class="lean argued" id="litBox"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：√d 的连分数是周期的，满足 |m² − d n²| &lt; √d 的 m/n 都是渐近分数，m² − d n² = −1 可解当且仅当周期为奇数（拉格朗日、勒让德）；费马二平方和定理：奇素数 p = a² + b² 当且仅当 p ≡ 1 (mod 4)，且 (−1/p) = (−1)<sup>(p−1)/2</sup>；哈塞定理 |aₚ| ≤ 2√p；E<sub>d</sub>: y² = x³ − d²x 是 E₁: y² = x³ − x 的二次扭曲，p ∤ 2d 时 aₚ(E<sub>d</sub>) = (d/p)·aₚ(E₁)，p ≡ 3 (mod 4) 时 aₚ = 0，p = a² + b²（a 奇）时 |aₚ| = 2|a|；d 是同余数当且仅当 E<sub>d</sub> 有 y ≠ 0 的有理点；Tunnell 定理（依赖 Coates–Wiles）：若 d 是同余数，则 A(d) = 2B(d)。</span><span class="en">Literature results, not formalized in this book: the continued fraction of √d is periodic, every m/n with |m² − d n²| &lt; √d is a convergent, and m² − d n² = −1 is solvable exactly when the period is odd (Lagrange, Legendre); Fermat's two-square theorem: an odd prime is p = a² + b² exactly when p ≡ 1 (mod 4), and (−1/p) = (−1)<sup>(p−1)/2</sup>; Hasse's theorem |aₚ| ≤ 2√p; E<sub>d</sub>: y² = x³ − d²x is the quadratic twist of E₁: y² = x³ − x, so aₚ(E<sub>d</sub>) = (d/p)·aₚ(E₁) for p ∤ 2d, aₚ = 0 for p ≡ 3 (mod 4) and |aₚ| = 2|a| for p = a² + b² with a odd; d is a congruent number exactly when E<sub>d</sub> has a rational point with y ≠ 0; Tunnell's theorem (resting on Coates–Wiles): if d is congruent, then A(d) = 2B(d).</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数值演示，不是证明：√d 的连分数、渐近分数 (mₖ, nₖ) 与范数 Δ 用 BigInt 精确计算；热图逐格计算 m² − d n²（m, n &lt; 1024 时双精度精确）；𝔽ₚ 上的点数 #E(𝔽ₚ) 逐点枚举；同余三角形的 a² + b² = c² 与 ab/2 = d 用有理数精确核对；|mₖ/nₖ − √d| 与 aₚ/(2√p) 用双精度。有限的检查不能证明一般结论。</span><span class="en">A numerical illustration on the page, not a proof: the continued fraction of √d, the convergents (mₖ, nₖ) and the norms Δ are exact (BigInt); the heat map evaluates m² − d n² cell by cell (exact in double precision for m, n &lt; 1024); the point counts #E(𝔽ₚ) enumerate every point; the congruent triangles are checked exactly in rationals, a² + b² = c² and ab/2 = d; |mₖ/nₖ − √d| and aₚ/(2√p) are double-precision. Finitely many checks prove no general statement.</span></span></div>
+      <div class="lean open" id="openBox"><span class="ok">OPEN</span><span><span class="zh">伯奇—斯温纳顿-戴尔猜想仍未证明。Tunnell 判据的逆向（A(d) = 2B(d) 推出 d 是同余数），以及“每个无平方因子 d ≡ 5, 6, 7 (mod 8) 都是同余数”，都只在该猜想下成立。本页在 d ≤ 37 内为每个 A(d) = 2B(d) 的 d 给出了显式直角三角形，所以这里的判定不依赖该猜想。</span><span class="en">The Birch–Swinnerton-Dyer conjecture is unproved. The converse of Tunnell's criterion (A(d) = 2B(d) implies d congruent), and the statement that every squarefree d ≡ 5, 6, 7 (mod 8) is congruent, hold only under that conjecture. For d ≤ 37 the page exhibits an explicit right triangle for every d with A(d) = 2B(d), so its verdicts here do not depend on the conjecture.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">希帕索斯发现，整数的比 m/n 永远追不上 √2；但追的过程留下一道不灭的裂缝：m² − 2n² = ±1。本页把这道 ±1 接缝推广到任意无平方因子的 d ≤ 37，再把它接到素数在高斯整数 ℤ[i] 中的分裂与同余数椭圆曲线 E<sub>d</sub>: y² = x³ − d²x 上。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>佩尔账本。</b>√d 的连分数 [a₀; a₁, a₂, …] 由整数递推 aᵢ = ⌊(a₀ + Pᵢ)/Qᵢ⌋、Pᵢ₊₁ = aᵢQᵢ − Pᵢ、Qᵢ₊₁ = (d − Pᵢ₊₁²)/Qᵢ 得到，渐近分数 mᵢ/nᵢ 按 mᵢ = aᵢmᵢ₋₁ + mᵢ₋₂ 逐行生成；种子行 #0 是平凡解 1² − d·0² = +1。每行的范数 Δ = m² − d n² 等于 ±Qᵢ₊₁，是精确整数。d = 2 时这正是泰昂的边径数 1/1、3/2、7/5、17/12……，范数在 −1 与 +1 之间交替。</li>
+        <li><b>一维与二维。</b>舞台“Pell ±1”左侧把 d nₖ² 个单位格逐行填进 mₖ × mₖ 的正方形：Δ = +1 时恰好剩一格，Δ = −1 时恰好溢出一格。右侧是 (n, m) 平面上的双曲线 m² − d n² = ±1 与渐近线 m = √d·n：渐近分数沿双曲线奔向渐近线，一维误差 |m/n − √d| = |Δ|/(n(m + n√d)) 趋于 0，二维面积差 |Δ| 却不会小于 1。</li>
+        <li><b>手性热图。</b>右栏逐格画出 m² − d n² 的符号：青色是 +1，品红是 −1，其余格只按符号淡淡着色。琥珀色十字与方框标出当前渐近分数；点击热图会选中最近的渐近步。页面核对网格内每个 ±1 格都是 √d 的渐近分数——这是文献结果的有限检查。</li>
+        <li><b>素数的面与线。</b>p ≡ 1 (mod 4) 时 −1 是模 p 的平方，p = a² + b² = (a + bi)(a − bi) 在 ℤ[i] 中分裂（“面素数”）；p ≡ 3 (mod 4) 时 x² ≡ −1 无解，p 保持惰性（“线素数”）；2 = −i(1 + i)² 分歧。舞台“素数”左侧是半径 √p 的圆与格点，右侧是模 p 的剩余钟。取 u = (a, b)、v = (a, −b) 代入 <a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/QuantumBounds/LagrangeGramIdentity.lean#L17" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a>（LEAN ✓）得到 p² = (a² − b²)² + (2ab)²：例如 13 = 3² + 2² 给出 5² + 12² = 13²。两条对角线 a ± bi 服从 <a class="leanref" data-lean-gid="D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/QuantumContext/ParallelogramNormLaw.lean#L22" target="_blank" rel="noopener"><code>inner_product_norm_parallelogram_law</code></a>（LEAN ✓）。“面”“线”与“手性”是阐释性的命名。</li>
+        <li><b>同余数曲线。</b>d 是同余数，当且仅当存在面积为 d 的有理直角三角形 (a, b, c)。曲线 E<sub>d</sub> 上任一 y ≠ 0 的有理点 (x, y) 给出 a = |(x² − d²)/y|、b = |2dx/y|、c = |(x² + d²)/y|。d ≤ 37 中的同余数是 5、6、7、13、14、15、21、22、23、29、30、31、34、37：页面为每一个存了一个有理点，并在有理数中精确核对 a² + b² = c² 与 ab/2 = d。其余 d 的 Tunnell 计数 A(d) ≠ 2B(d)，按 Tunnell 定理（文献结果）不是同余数。</li>
+        <li><b>哈塞与弗罗贝尼乌斯余弦。</b>在 𝔽ₚ 上逐点数出 #E<sub>d</sub>(𝔽ₚ)，aₚ = p + 1 − #E<sub>d</sub>(𝔽ₚ)。p ∤ 2d 时哈塞定理给出 |aₚ| ≤ 2√p，于是 cos θₚ = aₚ/(2√p) ∈ [−1, 1]；p | 2d 是坏约化素数，哈塞界不适用。E<sub>d</sub> 有复乘：p ≡ 3 (mod 4) 时 aₚ = 0（θₚ = 90°），p = a² + b² 时 |aₚ| = 2|a|，弗罗贝尼乌斯角就是高斯直角三角形的角。把 θₚ 读作单比特态 ψ = cos θₚ|0⟩ + sin θₚ|1⟩ 是页面的模型，记录权重由 <a class="leanref" data-lean-gid="D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Observer/BornReduction.lean#L27" target="_blank" rel="noopener"><code>rank_one_pure_state_modulus_square_reduction</code></a>（LEAN ✓）给出，纯度分解由 <a class="leanref" data-lean-gid="D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.lean#L33" target="_blank" rel="noopener"><code>complementary_context_probability_pythagoras</code></a>（LEAN ✓）给出。</li>
+        <li><b>交换 d ↔ p。</b>当 d 是素数且 p ≤ 37 时，“交换”让素数本身当佩尔根数：p = 13 换成 d = 13 后，第 5 步出现 18² − 13·5² = −1；p = 7 换成 d = 7 后，范数 −1 从不出现，只有 8² − 7·3² = +1。这正是“素数 p ≡ 1 (mod 4) 时 m² − p n² = −1 可解”（勒让德，文献结果）。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/coda.html#sec-coda-pythagoras-act2" target="_top">终章 · 希帕索斯之裂与佩尔余项</a> · <a href="../../zh/coda.html#sec-coda-pell-prime-splitting" target="_top">±1 佩尔接缝与线素数、面素数</a> · <a href="../../zh/coda.html#sec-coda-congruent-elliptic-torus" target="_top">同余数椭圆曲线环面</a> · <a href="../../zh/coda.html#sec-coda-hasse-sato-tate" target="_top">哈塞定理与弗罗贝尼乌斯余弦</a> · <a href="../../zh/ch01-measurement.html#thm-parallelogram-norm-law" target="_top">第一章 · 平行四边形范数律</a> · <a href="../../zh/ch02-born-rule.html#thm-born-modulus-square" target="_top">第二章 · 秩一模平方归约</a> · <a href="../../zh/ch03-projectors-and-duality.html#thm-complementary-pythagoras" target="_top">第三章 · 互补语境勾股定理</a> · <a href="../../zh/ch06-geometric-product.html#thm-lagrange-gram-identity" target="_top">第六章 · 拉格朗日—格拉姆恒等式</a> · trureturing（所钉提交）：<a data-trureturing-path="D5/S3/QuantumBounds/LagrangeGramIdentity.lean" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/QuantumBounds/LagrangeGramIdentity.lean" target="_blank" rel="noopener">LagrangeGramIdentity.lean</a> · <a data-trureturing-path="D5/S3/QuantumContext/ParallelogramNormLaw.lean" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/QuantumContext/ParallelogramNormLaw.lean" target="_blank" rel="noopener">ParallelogramNormLaw.lean</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">Hippasus found that no ratio of integers m/n ever reaches √2, yet the chase leaves a crack that never closes: m² − 2n² = ±1. The page extends this ±1 seam to every squarefree d ≤ 37 and connects it to the splitting of primes in the Gaussian integers ℤ[i] and to the congruent-number curves E<sub>d</sub>: y² = x³ − d²x. The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>The Pell ledger.</b> The continued fraction [a₀; a₁, a₂, …] of √d comes from the integer recurrence aᵢ = ⌊(a₀ + Pᵢ)/Qᵢ⌋, Pᵢ₊₁ = aᵢQᵢ − Pᵢ, Qᵢ₊₁ = (d − Pᵢ₊₁²)/Qᵢ, and the convergents mᵢ/nᵢ follow row by row from mᵢ = aᵢmᵢ₋₁ + mᵢ₋₂; the seed row #0 is the trivial solution 1² − d·0² = +1. The norm Δ = m² − d n² of each row equals ±Qᵢ₊₁, an exact integer. For d = 2 these are Theon's side and diagonal numbers 1/1, 3/2, 7/5, 17/12, …, whose norms alternate between −1 and +1.</li>
+        <li><b>1D against 2D.</b> On the stage “Pell ±1” the left picture fills the mₖ × mₖ square with d nₖ² unit cells row by row: for Δ = +1 exactly one cell is left over, for Δ = −1 exactly one spills out. The right picture is the (n, m) plane with the hyperbolas m² − d n² = ±1 and the asymptote m = √d·n: the convergents run along the hyperbolas towards the asymptote, the 1D error |m/n − √d| = |Δ|/(n(m + n√d)) goes to 0, while the 2D area gap |Δ| never drops below 1.</li>
+        <li><b>The chirality map.</b> The side panel draws the sign of m² − d n² cell by cell: cyan is +1, magenta −1, every other cell is only faintly tinted by its sign. The amber cross and box mark the current convergent; clicking the map picks the nearest convergent step. The page checks that every ±1 cell of the grid is a convergent of √d, a finite check of a literature result.</li>
+        <li><b>Plane and line primes.</b> For p ≡ 1 (mod 4), −1 is a square mod p and p = a² + b² = (a + bi)(a − bi) splits in ℤ[i] (a “plane prime”); for p ≡ 3 (mod 4), x² ≡ −1 has no root and p stays inert (a “line prime”); 2 = −i(1 + i)² ramifies. On the stage “Primes” the left picture is the circle of radius √p among the lattice points and the right picture the residue clock mod p. Putting u = (a, b) and v = (a, −b) into <a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/QuantumBounds/LagrangeGramIdentity.lean#L17" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a> (LEAN ✓) gives p² = (a² − b²)² + (2ab)²: 13 = 3² + 2², for instance, gives 5² + 12² = 13². The two diagonals a ± bi obey <a class="leanref" data-lean-gid="D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/QuantumContext/ParallelogramNormLaw.lean#L22" target="_blank" rel="noopener"><code>inner_product_norm_parallelogram_law</code></a> (LEAN ✓). “Plane”, “line” and “chirality” are interpretive names.</li>
+        <li><b>Congruent-number curves.</b> d is a congruent number exactly when a rational right triangle (a, b, c) has area d. Every rational point (x, y) with y ≠ 0 on E<sub>d</sub> gives a = |(x² − d²)/y|, b = |2dx/y|, c = |(x² + d²)/y|. The congruent numbers d ≤ 37 are 5, 6, 7, 13, 14, 15, 21, 22, 23, 29, 30, 31, 34, 37: the page stores one rational point for each and checks a² + b² = c² and ab/2 = d exactly in rationals. Every other d has Tunnell counts A(d) ≠ 2B(d), so by Tunnell's theorem (a literature result) it is not congruent.</li>
+        <li><b>Hasse and the Frobenius cosine.</b> The page counts #E<sub>d</sub>(𝔽ₚ) point by point and sets aₚ = p + 1 − #E<sub>d</sub>(𝔽ₚ). For p ∤ 2d Hasse's theorem gives |aₚ| ≤ 2√p, so cos θₚ = aₚ/(2√p) lies in [−1, 1]; p | 2d is a prime of bad reduction where Hasse's bound does not apply. E<sub>d</sub> has complex multiplication: aₚ = 0 (θₚ = 90°) for p ≡ 3 (mod 4), and |aₚ| = 2|a| for p = a² + b², so the Frobenius angle is the angle of the Gaussian right triangle. Reading θₚ as the qubit state ψ = cos θₚ|0⟩ + sin θₚ|1⟩ is the page's model; the record weights come from <a class="leanref" data-lean-gid="D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Observer/BornReduction.lean#L27" target="_blank" rel="noopener"><code>rank_one_pure_state_modulus_square_reduction</code></a> (LEAN ✓) and the purity split from <a class="leanref" data-lean-gid="D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.lean#L33" target="_blank" rel="noopener"><code>complementary_context_probability_pythagoras</code></a> (LEAN ✓).</li>
+        <li><b>Swap d ↔ p.</b> When d is prime and p ≤ 37, “Swap” makes the prime itself the Pell radicand: after p = 13 becomes d = 13, step 5 shows 18² − 13·5² = −1; after p = 7 becomes d = 7, the norm −1 never appears, only 8² − 7·3² = +1. This is the statement that m² − p n² = −1 is solvable for every prime p ≡ 1 (mod 4) (Legendre, a literature result).</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/coda.html#sec-coda-pythagoras-act2" target="_top">Coda · Hippasus’s crack and the Pell remainder</a> · <a href="../../en/coda.html#sec-coda-pell-prime-splitting" target="_top">The ±1 Pell seam, line and plane primes</a> · <a href="../../en/coda.html#sec-coda-congruent-elliptic-torus" target="_top">The congruent-number elliptic torus</a> · <a href="../../en/coda.html#sec-coda-hasse-sato-tate" target="_top">Hasse’s theorem and the Frobenius cosine</a> · <a href="../../en/ch01-measurement.html#thm-parallelogram-norm-law" target="_top">Chapter 1 · The parallelogram norm law</a> · <a href="../../en/ch02-born-rule.html#thm-born-modulus-square" target="_top">Chapter 2 · Rank-one modulus-square reduction</a> · <a href="../../en/ch03-projectors-and-duality.html#thm-complementary-pythagoras" target="_top">Chapter 3 · Pythagoras of complementary contexts</a> · <a href="../../en/ch06-geometric-product.html#thm-lagrange-gram-identity" target="_top">Chapter 6 · The Lagrange–Gram identity</a> · trureturing (pinned commit): <a data-trureturing-path="D5/S3/QuantumBounds/LagrangeGramIdentity.lean" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/QuantumBounds/LagrangeGramIdentity.lean" target="_blank" rel="noopener">LagrangeGramIdentity.lean</a> · <a data-trureturing-path="D5/S3/QuantumContext/ParallelogramNormLaw.lean" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/QuantumContext/ParallelogramNormLaw.lean" target="_blank" rel="noopener">ParallelogramNormLaw.lean</a></p>
+    </div>
+  </div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
