@@ -30,7 +30,7 @@
     <text x="182" y="102" font-size="14" font-style="italic" fill="#19f0ff">a</text>
     <text x="92" y="128" font-size="16" fill="#6f8ea5">θ = ?</text>
     <text x="131" y="248" text-anchor="middle" font-size="12" fill="#d4efff">∀ R ∈ SO(3), ‖Ra‖ = ‖a‖</text>
-    <text x="131" y="268" text-anchor="middle" font-size="11" fill="#6f8ea5">0 relational invariants</text>
+    <text x="131" y="268" text-anchor="middle" font-size="11" fill="#6f8ea5">no relative angle</text>
 
     <!-- PANEL II: N = 3 (External point C redundant) -->
     <text x="397" y="42" text-anchor="middle" font-size="12" font-weight="600" fill="#ff8a3c">II · N = 3 (SURPLUS C)</text>
@@ -87,7 +87,8 @@
     <text x="696" y="268" text-anchor="middle" font-size="11" fill="#6f8ea5">B(a) = a₀X + a₁Y + a₂Z</text>
 
     <!-- Bottom Lean-verified bar -->
-    <rect x="28" y="296" width="804" height="26" rx="6" fill="#050c16" stroke="#1f5d7c" stroke-width="1"/>
-    <text x="430" y="314" text-anchor="middle" font-size="12" fill="#46ffb2">LEAN ✓  ‖x + y‖² + ‖x − y‖² = 2(‖x‖² + ‖y‖²)   ·   IsEmpty(M₂(ℂ) →ₐ[ℂ] ℂ)   ·   A = cI (|c| = 1)</text>
+    <rect x="28" y="292" width="804" height="36" rx="6" fill="#050c16" stroke="#1f5d7c" stroke-width="1"/>
+    <text x="430" y="306" text-anchor="middle" font-size="12" fill="#46ffb2">LEAN ✓  ‖x + y‖² + ‖x − y‖² = 2(‖x‖² + ‖y‖²)   ·   IsEmpty(M₂(ℂ) →ₐ[ℂ] ℂ)</text>
+    <text x="430" y="321" text-anchor="middle" font-size="10.5" fill="#46ffb2">A unitary + all coordinate &amp; test rays preserved + connected test supports ⇒ A = cI (|c| = 1)</text>
   </g>
 </svg>
