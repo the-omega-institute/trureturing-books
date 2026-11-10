@@ -423,7 +423,7 @@ $$
 holds for infinitely many denominators $b$: the seam narrows like the square of the denominator, yet never closes.
 
 ::: {.example #ex-dottie-rate-newton-rational title="Numerical Check of the True Contraction Rate, Newton's Quadratic Closure, and the Residuals of the Best Rational Readings"}
-All values below were recomputed at 50 decimal digits and then truncated; the partial quotients of the continued fraction are numerical observations, not theorems.
+All values below were recomputed at 50 decimal digits and rounded to the digits shown; the partial quotients of the continued fraction are numerical observations, not theorems.
 
 **Successive error ratios tend to $-\sin\theta^*$.** Starting from $\theta_0 = 1$, with $\delta_k = \theta_k - \theta^*$:
 
@@ -521,7 +521,7 @@ $$
 $B$ has an equivalent description without series: first solve $\eta + \sin\eta = y/2$, then set $B(y) = \sin\eta$. Indeed, if $x = \sin\eta$ with $\eta \in [-\pi/2, \pi/2]$, then $A(x) = 2\sin\eta + 2\eta = y$. For $y = \pi$, the equation $\eta + \sin\eta = \pi/2$ is solved by $\eta = \frac{\pi}{2} - \theta^* = \arcsin\theta^*$ (substitution gives $\frac{\pi}{2} - \theta^* + \cos\theta^* = \frac{\pi}{2}$), so $B(\pi) = \sin\eta = \cos\theta^* = \theta^*$. That the series $B$ converges to this value at $y = \pi$ is a literature result (see the example below).
 
 ::: {.example #ex-dottie-pi-series title="Two Mutually Inverse Rational Series Linking π and θ*: Numerical Check of the Partial Sums"}
-The series $B$ and the identity $\theta^* = B(\pi)$ are due to Kaplan (2007, *Mathematics Magazine* 80, "The Dottie Number"): **literature result, not formalized in this book.** The expansion of $A$ is the classical arcsine series. The coefficients in the table were obtained by order-by-order reversion in exact rational arithmetic; the partial sums were computed at 50 digits and truncated.
+The series $B$ and the identity $\theta^* = B(\pi)$ are due to Kaplan (2007, *Mathematics Magazine* 80, "The Dottie Number"): **literature result, not formalized in this book.** The expansion of $A$ is the classical arcsine series. The coefficients in the table were obtained by order-by-order reversion in exact rational arithmetic; the partial sums were computed at 50 digits and rounded to the digits shown.
 
 | truncation order | partial sum of $A$ (tends to $\pi$) | difference from $\pi$ | partial sum of $B$ (tends to $\theta^*$) | difference from $\theta^*$ |
 | :---: | :---: | :---: | :---: | :---: |
