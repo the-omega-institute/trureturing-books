@@ -210,6 +210,25 @@ Write $w_k = \operatorname{recordWeight}(P, \rho, k) = \Tr(\rho P_k)$. Since $P_
 
 When an observer chains [@thm-conditional-state-valid] across non-collinear axes $\tau_1 \to \tau_2 \to \tau_3$, something extraordinary happens: a transition that was $100\%$ forbidden becomes open simply because an intermediate projection reset the reference line! Feynman loved pulling three cheap Polaroid sheets from his pocket to demonstrate this right before his students' eyes.
 
+To extend the three-sheet calculation to any finite number of sheets, first examine what survives when ordered outer products are multiplied.
+
+::: {.theorem #thm-rank-one-chain-trace title="Trace of an Ordered Outer-Product Chain" lean="D5/S3/Quantum/Information/BargmannImaginaryMaximizers.bargmann_path_product"}
+For every natural number $n$ and arbitrary vectors $v_0,\ldots,v_n\in\mathbb{C}^2$, let $R_j=v_jv_j^\dagger$, with inner product $\langle u,v\rangle=u^\dagger v$. Multiplication in the displayed order gives
+
+$$
+\Tr(R_0\cdots R_n)
+=\left(\prod_{j=0}^{n-1}\langle v_j,v_{j+1}\rangle\right)\langle v_n,v_0\rangle.
+$$
+
+For $n=0$, the empty product is $1$ and the identity reads $\Tr(R_0)=\langle v_0,v_0\rangle$. No normalization or nonzero assumption is imposed: $R_j$ may be zero and need not be a projector.
+:::
+
+::: proof
+Direct multiplication gives $(uu^\dagger)(ww^\dagger)=\langle u,w\rangle uw^\dagger$. Applying this identity along the finite chain leaves one consecutive inner product at each step and the final outer product $v_0v_n^\dagger$. Taking its trace supplies the closing factor $\Tr(v_0v_n^\dagger)=\langle v_n,v_0\rangle$. This expands the ordered outer-product trace `bargmann` in the cited statement; a single outer product supplies the induction base. The full proof is checked by the Lean kernel.
+:::
+
+The trace of a general ordered chain is complex and is not itself a probability. The transmission weight below comes from a particular palindrome of unit vectors.
+
 ::: {.example #ex-malus-three-polarizers title="Feynman's Three-Polarizer Cascade: How Sequential Idempotent Projections Rewrite History"}
 Send a beam of horizontally polarized photons onto an optical bench. (Note a helpful factor of two in optics: when an electric-field polarization axis rotates in physical space by angle $\alpha$, horizontal $\alpha = 0^\circ$ and vertical $\alpha = 90^\circ$ are already mutually orthogonal states; thus the spatial optical angle $\alpha$ equals the Hilbert-space half-angle $\theta/2$, corresponding to Bloch angle $\theta = 2\alpha$.) The rank-one projector onto linear polarization at spatial angle $\alpha$ is
 
@@ -238,7 +257,40 @@ $$
 w_{\mathrm{total}} = w_2 \cdot w_3 = \frac{1}{2} \times \frac{1}{2} = \frac{1}{4} = 25\%!
 $$
 
-(Better yet: insert $N$ evenly spaced sheets between $0^\circ$ and $90^\circ$ at step size $\frac{90^\circ}{N+1}$, and the net transmission $\bigl[\cos^2\frac{\pi}{2(N+1)}\bigr]^{N+1}$ climbs toward $100\%$ as $N \to \infty$ — the **quantum Zeno guidance effect** proved rigorously in Part II, Chapter 8!)
+[@thm-rank-one-chain-trace] explains this multiplication for any finite cascade. To count the sheets, now label the horizontal preparation by $0$: for any $m\in\mathbb{N}$, choose real angles $\alpha_0=0,\alpha_1,\ldots,\alpha_m$, and let $v_j=v(\alpha_j)=(\cos\alpha_j,\sin\alpha_j)\in\mathbb{C}^2$ be unit vectors, with $P_j=v_jv_j^\dagger$. Starting from the prepared state $P_0$, the branch that passes all subsequent $m$ sheets has unnormalized state
+
+$$
+X_m=P_m\cdots P_1P_0P_1\cdots P_m.
+$$
+
+Apply the theorem with $n=2m$ to the vector palindrome $(v_m,\ldots,v_1,v_0,v_1,\ldots,v_m)$. The closing factor is $\langle v_m,v_m\rangle=1$, and the consecutive overlaps pair with their complex conjugates. The probability of this branch, conditional on the prepared horizontal input, is therefore
+
+$$
+\begin{aligned}
+\Tr(X_m)&=\prod_{j=1}^{m}|\langle v_j,v_{j-1}\rangle|^2\\
+&=\prod_{j=1}^{m}\cos^2(\alpha_j-\alpha_{j-1}).
+\end{aligned}
+$$
+
+Along a history with nonzero weights, the factors are successive conditional transmission weights; their multiplication requires no independence assumption. The unnormalized formula also holds when a factor vanishes, without defining a normalized conditional state on a zero-probability branch.
+
+For $N\in\mathbb{N}$ equally spaced intermediate sheets between the horizontal and final vertical sheets, take $m=N+1\ge1$ and $\alpha_j=j\pi/(2m)$. The finite chain gives
+
+$$
+w_N=\left[\cos^2\!\left(\frac{\pi}{2(N+1)}\right)\right]^{N+1}.
+$$
+
+$N=0$ gives $0$, while $N=1$ gives the $1/4$ above. All these ratios refer to the prepared horizontal beam. If the incident beam before preparation is unpolarized, with state $I/2$, horizontal preparation contributes a separate factor $1/2$, so the three-sheet experiment transmits $1/8$ of that original beam.
+:::
+
+::: {.remark #rem-polarizer-ideal-limit title="The Ideal Polarizer-Chain Limit (Literature Result, Not Formalized in This Book)"}
+Kidambi, Widom, Lerner, and Srivastava give the finite formula and scalar limit for the ideal projection model in [*Photon Polarization Measurements without the Quantum Zeno Effect*](https://arxiv.org/pdf/quant-ph/9902080v1), p. 2, Eqs. (7)–(8). Their $N$ corresponds to $m=N+1$ in this example:
+
+$$
+\lim_{N\to\infty}w_N=1.
+$$
+
+This classical limit is not formalized in this book and is not part of the finite algebraic identity in [@thm-rank-one-chain-trace]. It assumes the prepared horizontal input and ideal filters. Relative to an unpolarized beam before preparation, the ideal transmission ratio instead tends to $1/2$. Immediately after the limit, the paper explicitly notes attenuation in real experiments with many polarizers; the ideal limit therefore gives no guarantee of lossless transmission through real filters.
 :::
 
 [@ex-malus-three-polarizers] brings out the operational geometry of sequential record conditioning: a chain of recorded laboratory measurements is not a conveyor belt carrying pre-labeled pebbles past passive checkpoints, but a **sequence of conditional idempotent re-basings** $P(\tau_1), P(\tau_2), P(\tau_3)$ in which each retained outcome resets the conditioned state for the next probe (while the global fate of unmonitored branches and the thermodynamic cost of erasing records are established by unitary dilation in Chapter 4 and Landauer's principle in Chapter 8, respectively).

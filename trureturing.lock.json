@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "0932810a77730496eae9b36294d2400f7d1d3b2a",
-  "pinned_at": "2026-11-10T16:14:13Z",
+  "commit": "52725b62b659b244d077e29f18a576aa809007b7",
+  "pinned_at": "2026-11-10T16:21:32Z",
   "declarations": {
     "D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover": {
       "module": "D5/S3/Geometry/Orthogonality/RationalSixAxisCover",
@@ -577,9 +577,17 @@
       "module": "D5/S3/Quantum/Information/BargmannImaginaryMaximizers",
       "name": "D5.S3.Quantum.Information.BargmannImaginaryMaximizers.Latitude.latitude_dot",
       "kind": "theorem",
-      "statement_id": "sha256:c5c8fa2f69b40b269aac6ff9a542a5d6e9fd7d05c723c4bd927226a6bd13fc21",
+      "statement_id": "sha256:8cf17e20420954cc60be93a175ffb9097332bfd33b9256383e487d679adb3720",
       "line": 318,
       "signature": "theorem latitude_dot (t : ℝ) (ht0 : 0 ≤ t) (ht1 : t ≤ 1) (z w : ℂ) : star (latitude t z) ⬝ᵥ latitude t w = ((1-t : ℝ) : ℂ) + (t : ℂ)*star z*w"
+    },
+    "D5/S3/Quantum/Information/BargmannImaginaryMaximizers.bargmann_path_product": {
+      "module": "D5/S3/Quantum/Information/BargmannImaginaryMaximizers",
+      "name": "D5.S3.Quantum.Information.BargmannImaginaryMaximizers.bargmann_path_product",
+      "kind": "theorem",
+      "statement_id": "sha256:8cf17e20420954cc60be93a175ffb9097332bfd33b9256383e487d679adb3720",
+      "line": 750,
+      "signature": "theorem bargmann_path_product (n : ℕ) (Ψ : Fin (n+1) → Fin 2 → ℂ) : bargmann Ψ = (∏ j : Fin n, star (Ψ j.castSucc) ⬝ᵥ Ψ j.succ) * (star (Ψ (Fin.last n)) ⬝ᵥ Ψ 0)"
     },
     "D5/S3/Quantum/Measurement/Bloch/QubitBloch.B": {
       "module": "D5/S3/Quantum/Measurement/Bloch/QubitBloch",
