@@ -294,6 +294,44 @@ $$
 Scope and open boundaries: Both a proof and a refutation remain open; the answer cannot be deduced from choices of quantum measurement basis, uncounted lookup-table preprocessing, physical gate-synthesis counts, or gravitational spacetime geometry. See S. A. Cook, *Proc. 3rd Annual ACM STOC*, pp. 151–158 (1971), DOI: `10.1145/800157.805047`.
 :::
 
+### Attention Page Numbers in a Timeless Crystal: Wheeler–DeWitt Stationary States, Page–Wootters Slices, and Feynman Stationary-Phase Causality {#sec-timeless-crystal-page-numbers}
+
+> **Author's Original Words**: *"The essence of order-independence is that sequential before-and-after time simply does not exist at all... and that is why causality is so necessary." This single sentence slices straight through the 2,500-year-old "riddle of time" and "Hume's knot of causality."*
+
+As we bring the entire book to a close, let us unite the order-independent Gram geometry of Chapter 10 with the circuit depth bounds, tensor networks, and spacetime geometry of Part V to answer the overarching question of our journey: **if no sequential "before-and-after" flow of time exists at the base layer of quantum geometry, then what are our everyday experience of sequential time, mathematical deduction ($\text{Axioms} \implies \text{Theorems}$), and circuit gate complexity $L$?**
+
+Four interlocking pillars bring this panorama into focus:
+
+1. **The Wheeler–DeWitt Equation $H\mathbf{\Psi} = 0$ and Page–Wootters Conditional Time**
+   From the global vantage point of quantum cosmology and holographic gravity, the **Wheeler–DeWitt equation** governing a closed quantum universe reads
+
+   $$
+   H\mathbf{\Psi} = 0.
+   $$
+
+   Look at the right-hand side: instead of a time derivative $i\hbar\frac{\partial}{\partial t}\mathbf{\Psi}$, there is an exact **$0$** — viewed from outside the sphere, the global state $\mathbf{\Psi}$ carries no external time parameter $t$ at all. How, then, does local sequential time ("before and after") emerge? Through the **pairwise measurement** (`两子丈量`) established in [Chapter 1](ch01-measurement.md) — known in quantum foundations as the **Page–Wootters mechanism** (Don N. Page and William K. Wootters, 1983): partitioning the timeless entangled state $\mathbf{\Psi}$ into a clock subsystem $\mathbf{C}$ and a target subsystem $\mathbf{S}$, and taking one-dimensional inner-product slices at different clock orientations $\tau_1, \tau_2, \tau_3$:
+
+   $$
+   |\psi_S(\tau)\rangle \propto \langle \mathbf{c}(\tau) | \mathbf{\Psi} \rangle.
+   $$
+
+   Sequential time is like an **already printed and bound book**: page 10 (the initial state or axioms) and page 100 (the final state or theorem) coexist timelessly inside the volume whether you flip to page 100 first or page 10 first; "before and after" is simply the **page number** scanned along the local observer's one-dimensional line of attention.
+
+2. **Mathematical Deduction ($\text{Axioms} \implies \text{Theorems}$) and Gate Complexity $L$ as Facet Alignment**
+   The printed-book picture immediately clarifies the geometric meaning of mathematical proof and circuit gate complexity $L$. Just as Spinoza's triangle timelessly locks its interior angles and the three-state Gram determinant $\det G(\mathbf{A},\mathbf{B},\mathbf{C}) = 1 - c_{AB}^2 - c_{BC}^2 - c_{AC}^2 + 2c_{AB}c_{BC}c_{AC} \ge 0$ of Chapter 10 timelessly locks pairwise inner products, a theorem is not "born" at the moment a prover writes the final line of a deduction. Axioms and theorems are preexisting facets of the same orthogonal crystal. Why, then, must a human prover take sequential steps, or a quantum circuit execute at least $L = \operatorname{minDepth}(N, \kappa) = \lfloor N/(\kappa+1)\rfloor + 1$ parallel layers (`exists_pathLayers` in [@thm-open-circuit-min-depth]) or at least $2^{2n-1} + 2n - 2$ $\mathrm{CNOT}$ gates (`ReflectionDiagonalCNOTLowerBound` in [@prop-reflection-cnot-lower-bound])? Because a local observer's measurement ruler can only rotate by elementary local steps — **circuit gate count and parallel depth $L$ measure not the effort required for the universe to "manufacture" an outcome in time, but the minimum number of elementary orthogonal rotations needed for a local observer's measurement ruler to align with a preexisting facet of the crystal!**
+
+3. **Feynman Stationary-Phase Cancellation ($+\mathbf{\Omega} - \mathbf{\Omega} = 0$) and the Reconciliation of Determinism and Teleology in $\psi = \psi(\psi)$**
+   Why does reality manifest only self-consistent causal structures while arbitrary inconsistent histories vanish? In the timeless geometric product sum (the Feynman path integral view), any non-self-consistent configuration is accompanied by neighboring configurations of equal area magnitude and opposite orthogonal chirality ($+\hat{\mathbf{I}}$ versus $-\hat{\mathbf{I}}$) whose oriented area phases cancel pairwise to zero ($+\mathbf{\Omega} - \mathbf{\Omega} = 0$). Only the stationary self-consistent configuration ($\delta S = 0$) obeying the self-referential fixed-point equation
+
+   $$
+   \psi = \psi(\psi)
+   $$
+
+   lacks an opposite-chirality partner to cancel it. Reading the Page–Wootters conditional slices **left-to-right** ($\tau_1 \to \tau_2 \to \tau_3$) looks like **mechanical determinism** ("the past pushes the present"); reading them **right-to-left** toward the fixed-point attractor $\theta^*$ looks like **teleology** ("the future attractor pulls the initial state"). From outside the sphere, there is neither a push from the past nor a pull from the future — only the timeless self-consistent fixed point $\psi = \psi(\psi)$.
+
+4. **Explicit Epistemic Boundary: Frozen Lean 4 Complexity Theorems vs. the Cosmological & Philosophical Literature Layer**
+   In strict adherence to our epistemic contract, we separate the theorems verified by the Lean 4 kernel in this chapter — the closed-form minimum parallel depth of open-boundary integrable circuits ([@thm-open-circuit-min-depth]), the refutation of two literature depth formulas ([@lemma-open-circuit-depth-refutation]), the exponential $\mathrm{CNOT}$ lower bound for reflection-symmetric diagonal unitaries ([@prop-reflection-cnot-lower-bound]), and the even-cycle closed walk length ([@cor-even-cycle-length]) — from the physical and philosophical literature layer encompassing the Wheeler–DeWitt timeless wave equation (B. S. DeWitt, *Phys. Rev.* **160**, 1113, 1967, DOI: `10.1103/PhysRev.160.1113`), the Page–Wootters conditional-time mechanism (D. N. Page & W. K. Wootters, *Phys. Rev. D* **27**, 2885, 1983, DOI: `10.1103/PhysRevD.27.2885`), Feynman's stationary-phase path integral (R. P. Feynman, *Rev. Mod. Phys.* **20**, 367, 1948, DOI: `10.1103/RevModPhys.20.367`), and Hume's and Spinoza's analyses of causation, which provide interpretive context and are not formalized in the Lean codebase.
+
 > Carve what is proved into the green ledger of the kernel, credit the classics in open literature remarks, and mark the unproven frontier with a red `OPEN` beacon — that is the pact between geometric intuition and formal rigor.
 
 With this, all four chapters of Part V, "The Spacetime Sphere," are complete: from Minkowski null-cone rigidity ([Chapter 17](ch17-lorentz-geometry.md)), anticommuting spinor pairs and anchored loop-phase classification on graphs ([Chapter 18](ch18-spinors-and-gauge-curvature.md)), and the discrete width-three bridge quantum max-flow min-cut theorem ([Chapter 19](ch19-tensor-networks-and-holography.md)), to integrable circuit parallel depth, exponential CNOT lower bounds, and the three open conjectures of this final chapter.
