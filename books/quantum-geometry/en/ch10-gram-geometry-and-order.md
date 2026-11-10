@@ -228,13 +228,63 @@ Notice that [@lemma-unit-gram-equality] requires overlap equal to $1$, not modul
 5. **Hairy-ball zeros and global rotor frame**: On $S^2$, $v(p) = \vv{e}_3 - (p\cdot\vv{e}_3)p$ is tangent, equals $\vv{e}_3$ at $p = \vv{e}_1$, and vanishes only at $p = \pm\vv{e}_3$, where both isolated zeros have index $+1$, totaling $2 = \chi(S^2)$. On the unit quaternion/rotor sphere $S^3$, $(pI_x, pI_y, pI_z)$ forms a global nowhere-vanishing tangent frame.
 :::
 
+### The Ultimate Truth of Order-Independence: Why Sequential Time Does Not Exist at the Base Layer, Yet Causality Is Gram Geometric Rigidity {#sec-timeless-gram-causality}
+
+> **Author's Original Words**: *"The essence of order-independence is that sequential before-and-after time simply does not exist at all... and that is why causality is so necessary." This single sentence slices straight through the 2,500-year-old "riddle of time" and "Hume's knot of causality."*
+
+Why is the pairwise inner-product ledger of the Gram matrix $G = A^* A$ so thoroughly order-independent? Pushing one step deeper beneath the matrix algebra reveals one of the central geometric and natural-philosophical insights of this book: **pairwise comparison is order-independent because, at the foundational layer of quantum state geometry, there is no sequential "before-and-after" flow of time; and the iron necessity of causal law arises not from one moment pushing the next along a timeline, but from the zero-time geometric rigidity of the Gram matrix.**
+
+Let us examine this insight across three interconnected pillars:
+
+1. **Why Order-Independence Abolishes Sequential Time**
+   Recall the emergence of the classical timeline analyzed in [Chapter 3](ch03-projectors-and-duality.md) together with the Taylor series of the cosine function examined in Chapter 6:
+
+   $$
+   \cos\theta = \sum_{k=0}^{\infty} \frac{(-1)^k}{(2k)!}\,\theta^{2k}.
+   $$
+
+   Look closely at the factorial denominator **$(2k)!$** in the $2k$-th term. Why must the accumulation of $2k$ orthogonal transitions be divided by $(2k)!$? Because in combinatorics, assigning a sequential "step 1, step 2, $\dots$, step $2k$" temporal ordering to $2k$ steps generates $(2k)!$ distinct permutations. Dividing by $(2k)!$ performs an exact **de-ordering**: it divides out all $(2k)!$ sequential permutations as pure human counting redundancy! Conversely, if fundamental reality possessed an intrinsic "before-and-after" temporal order, those $(2k)!$ differently ordered histories would be physically distinct and dividing by $(2k)!$ would be illegitimate — destroying the power series of $\cos\theta$ and $\sin\theta$ and collapsing Pythagorean conservation $\cos^2\theta + \sin^2\theta = 1$. Therefore, **acknowledging that spherical rotations and pairwise inner products are order-independent is mathematically equivalent to recognizing that the underlying orthogonal geometry contains no intrinsic sequential time dimension.**
+
+2. **Hume's Causality Knot vs. Spinoza's Triangle & Gram Matrix PSD Rigidity**
+   More than two centuries ago, David Hume posed a devastating challenge to human reason: if one presupposes a one-dimensional sequential flow of time, experience only ever reveals habitual conjunction (*"event $B$ follows event $A$"*), never a necessary logical bond proving that $A$ *must* produce $B$. As long as causality is sought inside a temporal chain of "earlier moments pushing later moments," causal necessity dissolves into psychological habit.
+
+   How is Hume's knot untied? Already in the seventeenth century, Baruch Spinoza (*Ethics*, Part I, Proposition 17 Scholium) pointed to a timeless alternative: true necessity is never a temporal push from cause to effect, but **timeless geometric implication** — *"just as from the nature of a triangle it follows from eternity and to eternity that its three angles equal two right angles."* In a $3\text{-}4\text{-}5$ Euclidean right triangle, the legs $a=3$ and $b=4$ do not grow first in time and then "push" the hypotenuse into becoming $c=5$ a few nanoseconds later; all three sides coexist timelessly, and orthogonality locks the hypotenuse at $5$ in **zero elapsed time**.
+
+   On the unit sphere of quantum states, Spinoza's timeless triangular necessity takes the exact mathematical form of **three-state Gram matrix positive semidefiniteness**. For any three normalized states $\mathbf{A}, \mathbf{B}, \mathbf{C}$ with real pairwise inner products (direction cosines)
+
+   $$
+   c_{AB} = \mathbf{A}\cdot\mathbf{B} = \cos\theta_{AB}, \qquad
+   c_{BC} = \mathbf{B}\cdot\mathbf{C} = \cos\theta_{BC}, \qquad
+   c_{AC} = \mathbf{A}\cdot\mathbf{C} = \cos\theta_{AC},
+   $$
+
+   positive semidefiniteness of the $3\times 3$ Gram matrix $G(\mathbf{A}, \mathbf{B}, \mathbf{C}) = \begin{pmatrix} 1 & c_{AB} & c_{AC} \\ c_{AB} & 1 & c_{BC} \\ c_{AC} & c_{BC} & 1 \end{pmatrix}$ (whose determinant equals the squared 3-wedge volume $\norm{\mathbf{A}\wedge\mathbf{B}\wedge\mathbf{C}}^2$) enforces the zero-time Gram determinant non-negativity law:
+
+   $$
+   \det G(\mathbf{A},\mathbf{B},\mathbf{C}) = 1 - c_{AB}^2 - c_{BC}^2 - c_{AC}^2 + 2\,c_{AB}\,c_{BC}\,c_{AC} \ge 0.
+   $$
+
+   When the three states lie in the same two-dimensional correlation plane (vanishing 3-wedge volume $\mathbf{A}\wedge\mathbf{B}\wedge\mathbf{C} = 0$), the boundary condition $\det G(\mathbf{A},\mathbf{B},\mathbf{C}) = 0$ reduces to $(c_{AC} - c_{AB}c_{BC})^2 = (1 - c_{AB}^2)(1 - c_{BC}^2)$, locking the third overlap into the exact identity:
+
+   $$
+   c_{AC} = c_{AB}\,c_{BC} \pm \sqrt{\bigl(1 - c_{AB}^2\bigr)\bigl(1 - c_{BC}^2\bigr)} = \cos\bigl(\theta_{AB} \mp \theta_{BC}\bigr).
+   $$
+
+   Notice the two defining properties of this relation:
+   - **First, 100% permutation symmetry (order-independence)**: The equation contains no timestamps $t_1 < t_2 < t_3$ and is completely invariant under any relabeling of $\mathbf{A}, \mathbf{B}, \mathbf{C}$;
+   - **Second, 100% causal rigidity in zero elapsed time**: Once the two pairwise overlaps $c_{AB}$ and $c_{BC}$ are fixed within a shared correlation plane, the third overlap $c_{AC}$ is rigidly determined without a single tick of a clock. What we call "because $A\text{–}B$ and $B\text{–}C$, therefore necessarily $A\text{–}C$" is not a mechanical push across time, but the structural compatibility rigidity $\det G \ge 0$ of the Gram matrix on the sphere.
+
+3. **Clear Epistemic Boundary: Distinguishing Formalized Algebra from Natural-Philosophical & Cosmological Literature**
+   In keeping with the strict epistemic contract of this book, we distinguish the mathematical results proved in Lean 4 — ambient unitary reconstruction from equal complex Gram matrices ([@thm-gram-unitary-reconstruction]), the unit-overlap equivalence criterion ([@lemma-unit-gram-equality]), and the separation between static effects and sequential instruments ([@prop-static-sequential-separation]) — together with standard linear-algebraic Gram determinant non-negativity $\det G(\mathbf{A},\mathbf{B},\mathbf{C}) \ge 0$, from the broader philosophical and quantum-cosmological literature connecting order-independent Gram geometry to Hume's problem of causation, Spinoza's geometric necessity, and timeless quantum mechanics (the Wheeler–DeWitt equation and the Page–Wootters conditional-time mechanism), which we revisit in Chapter 20.
+
 ::: {.remark #rem-gram-hairy-ball-literature title="Hairy Ball and Hopf Obstructions: Literature Result, Not Formalized in This Book"}
-**Literature result, not formalized in this book.** Four classical results from differential topology and mathematical physics frame the geometric discussion in Sections 1 and 3:
+**Literature result, not formalized in this book.** Classical results from differential topology, mathematical physics, and the philosophy of causation frame the geometric discussions in Sections 1, 3, and 4:
 
 1. **Poincaré–Hopf index theorem and the Hairy Ball Theorem** (J. W. Milnor, *Topology from the Differentiable Viewpoint*, University Press of Virginia, 1965): For any smooth tangent vector field with isolated zeros on a compact oriented manifold $M$, the sum of the indices at its zeros equals the Euler characteristic $\chi(M)$. Because $\chi(S^{2n}) = 2$ for all $n \ge 1$, every continuous tangent field on $S^{2n}$ has a zero (the continuous case follows by smooth approximation), as illustrated on $S^2$ by the two-zero field $v(p) = \vv{e}_3 - (p\cdot\vv{e}_3)p$ of total index $1 + 1 = 2$.
 2. **Hopf principal circle bundle and Dirac monopole potentials** (P. A. M. Dirac, *Proc. R. Soc. A* **133**, 60–72, 1931, DOI `10.1098/rspa.1931.0130`; M. Nakahara, *Geometry, Topology and Physics*, 2nd Ed., 2003): The Hopf fibration $S^1 \hookrightarrow S^3 \to S^2$ is a principal circle bundle whose first Chern number has magnitude $1$. Because a global continuous section would trivialize the bundle, no such section exists. With the Dirac monopole connection potentials $A_N = \frac{1}{2}(1 - \cos\theta)\,d\varphi$ and $A_S = -\frac{1}{2}(1 + \cos\theta)\,d\varphi$, one has $A_N - A_S = d\varphi$ and curvature $F = \frac{1}{2}\sin\theta\,d\theta\wedge d\varphi$ with $\frac{1}{2\pi}\int_{S^2} F = 1$ (under this connection convention; spin-up Berry curvature for $\gamma_B = -\Omega/2$ has the opposite sign). Do not conflate the tangent bundle $TS^2$ (Euler number $2$) with the Hopf line bundle (Chern number $\pm 1$).
 3. **Parallelizability of the rotor group $S^3 \cong \mathrm{SU}(2) \subset \mathrm{Cl}^+_{3,0}$**: Unit rotors form the norm-one sphere $S^3 \cong \mathrm{SU}(2)$ in the even Clifford algebra $\mathrm{Cl}^+_{3,0}$, which has $\chi(S^3) = 0$ and is globally parallelized by the explicit frame $(pI_x, pI_y, pI_z)$ (rather than inferring parallelizability from $\chi(S^3) = 0$ alone). The map $\mathrm{SU}(2) \to \mathrm{SO}(3)$ is a double cover, not an isomorphism, and parallelizability of the total space $S^3$ does not yield a global section over $S^2$.
 4. **Berry phase as bundle holonomy** (M. V. Berry, *Proc. R. Soc. A* **392**, 45–57, 1984, DOI `10.1098/rspa.1984.0023`; B. Simon, *Phys. Rev. Lett.* **51**, 2167, 1983, DOI `10.1103/PhysRevLett.51.2167`): For the adiabatically transported spin-up eigenline with dynamical phase removed and orientation fixed, the geometric phase is $\gamma_B = -\Omega/2$. This holonomy persists when all complex information is retained, and pairwise Gram consistency never erases physical noncommutativity.
+5. **Hume's problem of causation, Spinoza's geometric necessity, and timeless quantum correlations** (D. Hume, *A Treatise of Human Nature*, 1739 / *An Enquiry Concerning Human Understanding*, 1748; B. Spinoza, *Ethica, Ordine Geometrico Demonstrata*, 1677, Part I, Prop. 17 Scholium; and, as developed further in Chapter 20, B. S. DeWitt, *Phys. Rev.* **160**, 1113, 1967, and D. N. Page, W. K. Wootters, *Phys. Rev. D* **27**, 2885, 1983): The algebraic core of Section 4's discussion of order-independence and causal rigidity is the positive-semidefinite Gram determinant constraint $\det G(\mathbf{A},\mathbf{B},\mathbf{C}) \ge 0$ together with [@thm-gram-unitary-reconstruction]; connecting this structure to Hume's critique of temporal causation, Spinoza's geometric determinism, and timeless quantum states belongs to the philosophical and physical interpretation layer and is not formalized in the Lean codebase.
 :::
 
 Now that we understand how rotations, phases, and Gram matrices fit together on the sphere, how does an actual superconducting quantum processor execute these spherical rotations in hardware? Why do $X$ and $Y$ gates require tens of nanoseconds of microwave pulse area, whereas a $Z$ gate can be executed in **zero analog duration**? Let us step into [Chapter 11](ch11-pulses-and-virtual-z.md).
