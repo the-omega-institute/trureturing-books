@@ -29,3 +29,10 @@
 - [第十四章 把脆弱的线藏进高维的面：量子纠错码与任意子拓扑死结](ch14-cloning-codes-and-braids.md)
 - [第十五章 夹角平面旋转与赤道面积齿轮：Grover 搜索、QFT 与 Shor 大数分解](ch15-grover-qft-and-period-finding.md)
 - [第十六章 算法大一统（QSVT）、图上游走与门编译的因式约分](ch16-qsvt-walks-and-compilation.md)
+
+# 第五部 显影·时空之球：相对论度规、规范力场与全息引力
+
+- [第十七章 狭义相对论的几何脱魅：双曲旋转、光锥零线与时空面积](ch17-lorentz-geometry.md)
+- [第十八章 狄拉克旋量与规范场：为什么粒子要在球外绕行，为什么力是面积的曲率？](ch18-spinors-and-gauge-curvature.md)
+- [第十九章 纠缠编织空间：张量网络、全息对偶与离散最小割定理](ch19-tensor-networks-and-holography.md)
+- [第二十章 门复杂度即体积：黑洞内部生长、虫洞桥与计算复杂性边界](ch20-complexity-and-spacetime.md)

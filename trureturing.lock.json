@@ -3,8 +3,32 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "0932810a77730496eae9b36294d2400f7d1d3b2a",
-  "pinned_at": "2026-11-10T16:21:13Z",
+  "pinned_at": "2026-11-10T16:28:32Z",
   "declarations": {
+    "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null": {
+      "module": "D5/S0/Certificates/MinkowskiNullConeRigidity",
+      "name": "D5.S0.Certificates.MinkowskiNullConeRigidity.eq_smul_minkowski_of_null",
+      "kind": "theorem",
+      "statement_id": "sha256:fdb3d06f468e263fb3dedde86e8fff8b4c5e726076ba1dc547fb3aeac07b4b22",
+      "line": 62,
+      "signature": "theorem eq_smul_minkowski_of_null {d : Nat} (S : QuadraticForm Real (Space d)) (hnull : forall v, minkowski d v = 0 -> S v = 0) : S = S (1, 0) • minkowski d"
+    },
+    "D5/S0/Certificates/MinkowskiNullConeRigidity.exists_smul_minkowski_of_null": {
+      "module": "D5/S0/Certificates/MinkowskiNullConeRigidity",
+      "name": "D5.S0.Certificates.MinkowskiNullConeRigidity.exists_smul_minkowski_of_null",
+      "kind": "theorem",
+      "statement_id": "sha256:fdb3d06f468e263fb3dedde86e8fff8b4c5e726076ba1dc547fb3aeac07b4b22",
+      "line": 74,
+      "signature": "theorem exists_smul_minkowski_of_null {d : Nat} (S : QuadraticForm Real (Space d)) (hnull : forall v, minkowski d v = 0 -> S v = 0) : exists f : Real, S = f • minkowski d"
+    },
+    "D5/S0/Certificates/MinkowskiNullConeRigidity.null_cone_spatial_rigidity": {
+      "module": "D5/S0/Certificates/MinkowskiNullConeRigidity",
+      "name": "D5.S0.Certificates.MinkowskiNullConeRigidity.null_cone_spatial_rigidity",
+      "kind": "theorem",
+      "statement_id": "sha256:fdb3d06f468e263fb3dedde86e8fff8b4c5e726076ba1dc547fb3aeac07b4b22",
+      "line": 42,
+      "signature": "theorem null_cone_spatial_rigidity {d : Nat} (S : QuadraticForm Real (Space d)) (hnull : forall v, minkowski d v = 0 -> S v = 0) (w : EuclideanSpace Real (Fin d)) : S (0, w) = -S (1, 0) * ‖w‖ ^ 2 ∧ QuadraticMap.polar S (1, 0) (0, w) = 0"
+    },
     "D5/S0/Certificates/Quandles/BraidColoringTransport.crossing_yang_baxter": {
       "module": "D5/S0/Certificates/Quandles/BraidColoringTransport",
       "name": "D5.S0.Certificates.Quandles.BraidColoringTransport.crossing_yang_baxter",
@@ -20,6 +44,14 @@
       "statement_id": "sha256:92a7988dadc0a3b8e723075585142821237a04e2b403ae63692e8ee713e845f0",
       "line": 89,
       "signature": "theorem trace_recurrence (a b : R) (hab : a * b = 1) (m : Nat) : a ^ (m + 2) + b ^ (m + 2) = (a + b) * (a ^ (m + 1) + b ^ (m + 1)) - (a ^ m + b ^ m)"
+    },
+    "D5/S3/Combinatorics/Graph/Walks/WeightedCycleWalk.circuit_length": {
+      "module": "D5/S3/Combinatorics/Graph/Walks/WeightedCycleWalk",
+      "name": "D5.S3.Combinatorics.Graph.Walks.WeightedCycleWalk.circuit_length",
+      "kind": "theorem",
+      "statement_id": "sha256:8290384519fabbb47b99d637a47009c4903ac3ed57f4f1bccfa01c7a1cac221e",
+      "line": 77,
+      "signature": "theorem circuit_length (n : ℕ) : (circuit n).length = 2 * (n + 2)"
     },
     "D5/S3/Fourier/FinitePoisson.finite_poisson_summation": {
       "module": "D5/S3/Fourier/FinitePoisson",
@@ -68,6 +100,22 @@
       "statement_id": "sha256:d9ac78339e3f77f3c7873f510e3ffa6aef7877aa70cf744da6778d4611420194",
       "line": 120,
       "signature": "theorem unit_perpendicular_pair (a b : Space) : ∃ n : Space, ‖n‖ = 1 ∧ ⟪a, n⟫_ℝ = 0 ∧ ⟪b, n⟫_ℝ = 0"
+    },
+    "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification": {
+      "module": "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification",
+      "name": "D5.S3.Observer.AgencyHolonomy.AnchoredPhaseClassification.anchored_phase_classification",
+      "kind": "theorem",
+      "statement_id": "sha256:2ea228f59ecd1079f6cd8ebd466361376207a74ac710698e6abee888fca1dae1",
+      "line": 94,
+      "signature": "theorem anchored_phase_classification [Fintype V] [Fintype E] (ht : NamedSpanningTree s t T) (R : Set V) (r : V) (hr : r ∈ R) : let chi"
+    },
+    "D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport": {
+      "module": "D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport",
+      "name": "D5.S3.Observer.AgencyHolonomy.NamedTreePhaseTransport.selected_tree_transport",
+      "kind": "theorem",
+      "statement_id": "sha256:5023060ebfbed21f28c4c48c31620bf7b9b16c98e8d6bb27b669168a992c3892",
+      "line": 116,
+      "signature": "theorem selected_tree_transport (ht : NamedSpanningTree s t T) (r : V) : (∀ u : E → Circle, rootPhase ht r u r = 1) ∧ (∀ e ∈ T, ∀ u : E → Circle, rootPhase ht r u (t e) = u e * rootPhase ht r u (s e)) ∧ (∀ g : V → Circle, ∀ u : E → Circle, ∀ a : V, rootPhase ht r (gauge s t g u) a = g a * rootPhase ht r u a * (g r)⁻¹) ∧ (∀ a : V, Continuous (fun u : E → Circle => rootPhase ht r u a)) ∧ (∀ u w : E → Circle, ∀ a : V, rootPhase ht r (u * w) a = rootPhase ht r u a * rootPhase ht r w a) ∧ (∀ a : V, rootPhase ht r (1 : E → Circle) a = 1)"
     },
     "D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction": {
       "module": "D5/S3/Observer/BornReduction",
@@ -221,6 +269,14 @@
       "line": 132,
       "signature": "theorem two_copy_joint_reversal_certificate : let rho"
     },
+    "D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula": {
+      "module": "D5/S3/Quantum/Algebra/CovariantCommutator",
+      "name": "D5.S3.Quantum.Algebra.CovariantCommutator.covariant_commutator_formula",
+      "kind": "theorem",
+      "statement_id": "sha256:5a2e3c26e6dab3585f60cc6ab0209200ba39d5ba0815c6004a74f5c04e2364f6",
+      "line": 32,
+      "signature": "theorem covariant_commutator_formula {B : Type*} [Ring B] {U f translated : B} (hcov : SemiconjBy U f translated) : U * f - f * U = (translated - f) * U"
+    },
     "D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq": {
       "module": "D5/S3/Quantum/Algebra/GramUnitaryExtension",
       "name": "D5.S3.Quantum.Algebra.GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq",
@@ -348,6 +404,14 @@
       "statement_id": "sha256:075eec65bcc56a391500706f213ef3bc1b27041f36952fc4c71abd4ade27a9ab",
       "line": 94,
       "signature": "theorem displacement_conjugation (a b c d : ZMod M) : displacement M a b * displacement M c d * star (displacement M a b) = windowRoot M ^ (b * c - a * d).val • displacement M c d"
+    },
+    "D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation": {
+      "module": "D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation",
+      "name": "D5.S3.Quantum.Bogoliubov.BogoliubovNormConservation.bogoliubov_norm_conservation",
+      "kind": "theorem",
+      "statement_id": "sha256:f8d4e451ac8459519dca05b63dd8ddbd9dfb9f9e46b70e4db0b37d2d04517e94",
+      "line": 14,
+      "signature": "theorem bogoliubov_norm_conservation (r : ℝ) : |Real.cosh r| ^ 2 - |Real.sinh r| ^ 2 = 1"
     },
     "D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank.pauli_word_mul": {
       "module": "D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank",
@@ -509,6 +573,22 @@
       "line": 37,
       "signature": "theorem observer_pullback_trace_identity (channel : QuantumChannel d d) (heisenberg : MatrixAlgebra d →CP MatrixAlgebra d) (hduality : ∀ state effect : MatrixAlgebra d, Matrix.trace (channel.toCompletelyPositiveMap state * effect) = Matrix.trace (state * heisenberg effect)) (t : Nat) (rho : DensityState d) (effect : MatrixAlgebra d) : Matrix.trace ((evolvedState channel t rho).1 * effect) = Matrix.trace (rho.1 * ((fun A : MatrixAlgebra d => heisenberg A)^[t]) effect)"
     },
+    "D5/S3/Quantum/Dynamics/OpenIntegrableCircuitDepthRefutation.result": {
+      "module": "D5/S3/Quantum/Dynamics/OpenIntegrableCircuitDepthRefutation",
+      "name": "D5.S3.Quantum.Dynamics.OpenIntegrableCircuitDepthRefutation.result",
+      "kind": "theorem",
+      "statement_id": "sha256:390c62f30a9dba597753aa85dfe27970c19da88c66e780fc68f1f7e4e5afcc0c",
+      "line": 75,
+      "signature": "theorem result : ¬ claim"
+    },
+    "D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result": {
+      "module": "D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth",
+      "name": "D5.S3.Quantum.Dynamics.OpenIntegrableCircuitMinDepth.result",
+      "kind": "theorem",
+      "statement_id": "sha256:506538fadb7e769355523dcb17dd81c61ac7568f3887d3da683617ce1b58d8f1",
+      "line": 57,
+      "signature": "theorem result (N κ : ℕ) (hκ : 1 ≤ κ) (hN : 2 * κ ≤ N) : minDepth N κ = N / (κ + 1) + 1"
+    },
     "D5/S3/Quantum/Dynamics/OrderedThreePulseTrace.ordered_three_pulse_real_trace_bound": {
       "module": "D5/S3/Quantum/Dynamics/OrderedThreePulseTrace",
       "name": "D5.S3.Quantum.Dynamics.OrderedThreePulseTrace.ordered_three_pulse_real_trace_bound",
@@ -645,6 +725,14 @@
       "line": 318,
       "signature": "theorem latitude_dot (t : ℝ) (ht0 : 0 ≤ t) (ht1 : t ≤ 1) (z w : ℂ) : star (latitude t z) ⬝ᵥ latitude t w = ((1-t : ℝ) : ℂ) + (t : ℂ)*star z*w"
     },
+    "D5/S3/Quantum/Magic/ReflectionDiagonalCNOTLowerBound.result": {
+      "module": "D5/S3/Quantum/Magic/ReflectionDiagonalCNOTLowerBound",
+      "name": "D5.S3.Quantum.Magic.ReflectionDiagonalCNOTLowerBound.result",
+      "kind": "theorem",
+      "statement_id": "sha256:372df8dafb6e47b8241406c70dd19eac4711a686a00f7219508d684aafe46d13",
+      "line": 510,
+      "signature": "theorem result : claim"
+    },
     "D5/S3/Quantum/Measurement/Bloch/QubitBloch.B": {
       "module": "D5/S3/Quantum/Measurement/Bloch/QubitBloch",
       "name": "D5.S3.Quantum.Measurement.FourQubitParentConstruction.B",
@@ -740,6 +828,38 @@
       "statement_id": "sha256:27a50d53ea4b7ef105570f1c854b960f2a96fb04b4ba357796287115baf6237b",
       "line": 67,
       "signature": "theorem orthogonal_syndrome_recovery (S : s → Matrix n d ℂ) (hS : OrthogonalSyndromes S) (sigma : Matrix s s ℂ) (rho : Matrix d d ℂ) : syndromeDecoding S (syndromeEncoding S sigma rho) = Matrix.trace sigma • rho"
+    },
+    "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_attained": {
+      "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound",
+      "name": "D5.S3.Quantum.TensorNetworks.BridgeGraph.QuantumMaxFlowBound.QMaxFlow_attained",
+      "kind": "theorem",
+      "statement_id": "sha256:06b305ef00d70bec3cf0f07510dc024d6d39db5dfc8aec9d8456823c6e2eda29",
+      "line": 93,
+      "signature": "theorem QMaxFlow_attained (a b c d : ℕ) : ∃ (M : Fin 3 → Matrix (Fin a) (Fin b) ℂ) (N : Fin 3 → Matrix (Fin d) (Fin c) ℂ), (flow M N).rank = QMaxFlow a b c d"
+    },
+    "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_le_QMinCut": {
+      "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound",
+      "name": "D5.S3.Quantum.TensorNetworks.BridgeGraph.QuantumMaxFlowBound.QMaxFlow_le_QMinCut",
+      "kind": "theorem",
+      "statement_id": "sha256:06b305ef00d70bec3cf0f07510dc024d6d39db5dfc8aec9d8456823c6e2eda29",
+      "line": 140,
+      "signature": "theorem QMaxFlow_le_QMinCut (a b c d : ℕ) : QMaxFlow a b c d ≤ QMinCut a b c d"
+    },
+    "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.cone_QMinCut": {
+      "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound",
+      "name": "D5.S3.Quantum.TensorNetworks.BridgeGraph.QuantumMaxFlowBound.cone_QMinCut",
+      "kind": "theorem",
+      "statement_id": "sha256:06b305ef00d70bec3cf0f07510dc024d6d39db5dfc8aec9d8456823c6e2eda29",
+      "line": 158,
+      "signature": "theorem cone_QMinCut {a b c d : ℕ} (ha : 0 < a) (hc : 0 < c) (hab : a * a + b * b ≤ 3 * a * b) (hcd : c * c + d * d ≤ 3 * c * d) : QMinCut a b c d = min (a * d) (b * c)"
+    },
+    "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result": {
+      "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut",
+      "name": "D5.S3.Quantum.TensorNetworks.BridgeGraph.QuantumMaxFlowMinCut.result",
+      "kind": "theorem",
+      "statement_id": "sha256:06aeda0a0a7b05ee56b3db072016c177d52684f278224603dac7e149e7c4f8ee",
+      "line": 116,
+      "signature": "theorem result : claim"
     },
     "D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras": {
       "module": "D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras",

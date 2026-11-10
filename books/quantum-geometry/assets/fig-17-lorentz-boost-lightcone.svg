@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 420" width="920" height="420" role="img" aria-labelledby="title-17 desc-17">
+<title id="title-17">双曲旋转、光锥与固有时 / Hyperbolic boosts, light cones, and proper time</title><desc id="desc-17">Three panels compare a Euclidean circle with a Minkowski hyperbola, show a null cone and a boost rotor, and compare piecewise proper time. The Lean badge refers to null-cone quadratic-form rigidity; the rotor is literature.</desc>
+<metadata>{&quot;chapter&quot;: 17, &quot;pin&quot;: &quot;4c76e4a56525afbb474bf04a03ee2ff4aec5da45&quot;, &quot;badge_evidence&quot;: [&quot;D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null&quot;], &quot;scope&quot;: &quot;Discrete algebraic results only; violet physics is schematic or literature.&quot;}</metadata>
+<defs><pattern id="grid-17" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#143049" stroke-width="0.5" opacity="0.38"/></pattern>
+<marker id="arrow-17-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9Z" fill="#19f0ff"/></marker>
+<marker id="arrow-17-mag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9Z" fill="#ff2fd0"/></marker>
+<marker id="arrow-17-violet" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9Z" fill="#9d8cff"/></marker>
+<marker id="arrow-17-dim" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9Z" fill="#6f8ea5"/></marker>
+</defs>
+<rect x="3" y="3" width="914" height="414" rx="12" fill="#07101b" stroke="#143049"/>
+<rect x="4" y="49" width="912" height="322" fill="url(#grid-17)"/>
+<g font-family="JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, PingFang SC, system-ui, sans-serif">
+<text x="22" y="28" text-anchor="start" font-size="11" fill="#19f0ff">ORTHO//QUANTUM  ·  17</text>
+<text x="897" y="28" text-anchor="end" font-size="10" fill="#6f8ea5">PART V / 时空之球</text>
+<line x1="20" y1="43" x2="900" y2="43" stroke="#143049" stroke-width="1"/>
+<line x1="308" y1="61" x2="308" y2="365" stroke="#143049" stroke-width="1"/>
+<line x1="612" y1="61" x2="612" y2="365" stroke="#143049" stroke-width="1"/>
+<text x="154" y="70" text-anchor="middle" font-size="11" fill="#19f0ff" font-weight="600">I · CIRCLE / HYPERBOLA</text>
+<text x="154" y="90" text-anchor="middle" font-size="12" fill="#d4efff">欧氏圆与闵可夫斯基双曲线</text>
+<text x="460" y="70" text-anchor="middle" font-size="11" fill="#ff2fd0" font-weight="600">II · NULL CONE / BOOST</text>
+<text x="460" y="90" text-anchor="middle" font-size="12" fill="#d4efff">光锥零线与快度旋转器</text>
+<text x="766" y="70" text-anchor="middle" font-size="11" fill="#19f0ff" font-weight="600">III · PROPER-TIME SEGMENTS</text>
+<text x="766" y="90" text-anchor="middle" font-size="12" fill="#d4efff">分段世界线与固有时</text>
+<line x1="20" y1="374" x2="900" y2="374" stroke="#143049" stroke-width="1"/>
+<line x1="35" y1="199" x2="139" y2="199" stroke="#34506a" stroke-width="1.3"/>
+<line x1="88" y1="147" x2="88" y2="251" stroke="#34506a" stroke-width="1.3"/>
+<circle cx="88" cy="199" r="43" fill="none" stroke="#19f0ff" stroke-width="1.5"/>
+<line x1="88" y1="199" x2="122" y2="173" stroke="#19f0ff" stroke-width="2"/>
+<path d="M104 199 A16 16 0 0 0 101 189" fill="none" stroke="#19f0ff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="102" y="189" text-anchor="middle" font-size="10" fill="#19f0ff">θ</text>
+<line x1="164" y1="239" x2="282" y2="239" stroke="#34506a" stroke-width="1.3"/>
+<line x1="222" y1="126" x2="222" y2="252" stroke="#34506a" stroke-width="1.3"/>
+<line x1="171" y1="137" x2="273" y2="239" stroke="#34506a" stroke-width="1" stroke-dasharray="3 4"/>
+<line x1="171" y1="239" x2="273" y2="137" stroke="#34506a" stroke-width="1" stroke-dasharray="3 4"/>
+<path d="M175.22 164.90 L177.59 167.74 L179.86 170.44 L182.04 172.99 L184.15 175.42 L186.18 177.71 L188.13 179.88 L190.02 181.93 L191.84 183.87 L193.61 185.69 L195.31 187.41 L196.96 189.02 L198.56 190.53 L200.11 191.94 L201.62 193.26 L203.09 194.48 L204.51 195.62 L205.91 196.66 L207.27 197.62 L208.60 198.50 L209.90 199.29 L211.18 200.01 L212.44 200.64 L213.67 201.20 L214.89 201.68 L216.10 202.08 L217.29 202.42 L218.48 202.67 L219.66 202.85 L220.83 202.96 L222.00 203.00 L223.17 202.96 L224.34 202.85 L225.52 202.67 L226.71 202.42 L227.90 202.08 L229.11 201.68 L230.33 201.20 L231.56 200.64 L232.82 200.01 L234.10 199.29 L235.40 198.50 L236.73 197.62 L238.09 196.66 L239.49 195.62 L240.91 194.48 L242.38 193.26 L243.89 191.94 L245.44 190.53 L247.04 189.02 L248.69 187.41 L250.39 185.69 L252.16 183.87 L253.98 181.93 L255.87 179.88 L257.82 177.71 L259.85 175.42 L261.96 172.99 L264.14 170.44 L266.41 167.74 L268.78 164.90" fill="none" stroke="#ff2fd0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="241.5" cy="194.0" r="4.5" fill="#ffc83d" stroke="#ffc83d" stroke-width="0" data-role="present-selection"/>
+<text x="88" y="273" text-anchor="middle" font-size="11" fill="#19f0ff">x² + y² = 1</text>
+<text x="222" y="273" text-anchor="middle" font-size="11" fill="#ff2fd0">t² − x² = 1</text>
+<text x="154" y="303" text-anchor="middle" font-size="12" fill="#19f0ff">cos²θ + sin²θ = 1</text>
+<text x="154" y="327" text-anchor="middle" font-size="12" fill="#ff2fd0">cosh²η − sinh²η = 1</text>
+<text x="154" y="351" text-anchor="middle" font-size="10" fill="#6f8ea5">η = ln 2  /  β = 3/5</text>
+<path d="M460 220L365 125H555Z" fill="#19f0ff" stroke="#19f0ff" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.06"/>
+<path d="M460 220L365 315H555Z" fill="#ff2fd0" stroke="#ff2fd0" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.05"/>
+<line x1="345" y1="220" x2="578" y2="220" stroke="#34506a" stroke-width="1"/>
+<line x1="460" y1="320" x2="460" y2="112" stroke="#34506a" stroke-width="1" marker-end="url(#arrow-17-dim)"/>
+<line x1="365" y1="125" x2="555" y2="315" stroke="#19f0ff" stroke-width="1.5"/>
+<line x1="365" y1="315" x2="555" y2="125" stroke="#19f0ff" stroke-width="1.5"/>
+<line x1="460" y1="220" x2="504" y2="133" stroke="#ff2fd0" stroke-width="2.2" marker-end="url(#arrow-17-mag)"/>
+<text x="475" y="124" text-anchor="middle" font-size="10" fill="#6f8ea5">ct</text>
+<text x="579" y="235" text-anchor="middle" font-size="10" fill="#6f8ea5">x</text>
+<text x="538" y="159" text-anchor="middle" font-size="10" fill="#19f0ff">ds² = 0</text>
+<text x="484" y="177" text-anchor="middle" font-size="12" fill="#ff2fd0">η</text>
+<text x="460" y="326" text-anchor="middle" font-size="11" fill="#9d8cff">R = exp(−η e₀∧e₁ / 2)</text>
+<text x="460" y="350" text-anchor="middle" font-size="10" fill="#9d8cff">Cl(1,1) · v′ = R⁻¹vR</text>
+<line x1="700" y1="281" x2="700" y2="112" stroke="#34506a" stroke-width="1" stroke-dasharray="4 4"/>
+<line x1="700" y1="281" x2="816" y2="281" stroke="#34506a" stroke-width="1"/>
+<path d="M700 280L748 200L700 120" fill="none" stroke="#ff2fd0" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="700" cy="280" r="3" fill="#19f0ff" stroke="#19f0ff" stroke-width="1.5"/>
+<circle cx="748" cy="200" r="3" fill="#ff2fd0" stroke="#ff2fd0" stroke-width="1.5"/>
+<circle cx="700" cy="120" r="3" fill="#19f0ff" stroke="#19f0ff" stroke-width="1.5"/>
+<text x="767" y="220" text-anchor="start" font-size="11" fill="#ff2fd0">Δτ₁ = 4</text>
+<text x="767" y="158" text-anchor="start" font-size="11" fill="#ff2fd0">Δτ₂ = 4</text>
+<text x="675" y="205" text-anchor="middle" font-size="11" fill="#6f8ea5">10</text>
+<text x="765" y="302" text-anchor="middle" font-size="11" fill="#d4efff">q(Bv) = q(v) ⇒ τ′ = τ</text>
+<text x="765" y="324" text-anchor="middle" font-size="10" fill="#19f0ff">Null-cone rigidity / 零锥刚性</text>
+<text x="765" y="346" text-anchor="middle" font-size="11" fill="#3dff9b" font-weight="600" data-role="verified-theorem">LEAN ✓</text>
+<text x="460" y="397" text-anchor="middle" font-size="10" fill="#6f8ea5">q = (ct)² − x²  ·  normalize the metric / 度规须归一化  ·  τ = ∑ √q(Δx) / c</text>
+</g></svg>

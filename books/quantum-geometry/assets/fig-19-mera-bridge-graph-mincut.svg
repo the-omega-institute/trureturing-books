@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 420" width="920" height="420" role="img" aria-labelledby="title-19 desc-19">
+<title id="title-19">张量网络与离散最小割 / Tensor networks and discrete min-cut</title><desc id="desc-19">MERA-inspired hierarchy, width-three bridge contraction and its exact cone-domain max-flow min-cut identity. Discrete log-capacity facets are compared with the Ryu–Takayanagi literature formula; no continuum claim is verified.</desc>
+<metadata>{&quot;chapter&quot;: 19, &quot;pin&quot;: &quot;4c76e4a56525afbb474bf04a03ee2ff4aec5da45&quot;, &quot;badge_evidence&quot;: [&quot;D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result&quot;], &quot;scope&quot;: &quot;Discrete algebraic results only; violet physics is schematic or literature.&quot;}</metadata>
+<defs><pattern id="grid-19" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#143049" stroke-width="0.5" opacity="0.38"/></pattern>
+<marker id="arrow-19-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9Z" fill="#19f0ff"/></marker>
+<marker id="arrow-19-mag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9Z" fill="#ff2fd0"/></marker>
+<marker id="arrow-19-violet" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9Z" fill="#9d8cff"/></marker>
+<marker id="arrow-19-dim" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M1 1L9 5L1 9Z" fill="#6f8ea5"/></marker>
+</defs>
+<rect x="3" y="3" width="914" height="414" rx="12" fill="#07101b" stroke="#143049"/>
+<rect x="4" y="49" width="912" height="322" fill="url(#grid-19)"/>
+<g font-family="JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, PingFang SC, system-ui, sans-serif">
+<text x="22" y="28" text-anchor="start" font-size="11" fill="#19f0ff">ORTHO//QUANTUM  ·  19</text>
+<text x="897" y="28" text-anchor="end" font-size="10" fill="#6f8ea5">PART V / 时空之球</text>
+<line x1="20" y1="43" x2="900" y2="43" stroke="#143049" stroke-width="1"/>
+<line x1="308" y1="61" x2="308" y2="365" stroke="#143049" stroke-width="1"/>
+<line x1="612" y1="61" x2="612" y2="365" stroke="#143049" stroke-width="1"/>
+<text x="154" y="70" text-anchor="middle" font-size="11" fill="#9d8cff" font-weight="600">I · ENTANGLEMENT HIERARCHY</text>
+<text x="154" y="90" text-anchor="middle" font-size="12" fill="#d4efff">MERA 风格的层级张量网络</text>
+<text x="460" y="70" text-anchor="middle" font-size="11" fill="#19f0ff" font-weight="600">II · WIDTH-THREE BRIDGE</text>
+<text x="460" y="90" text-anchor="middle" font-size="12" fill="#d4efff">离散桥图：秩与割容量</text>
+<text x="766" y="70" text-anchor="middle" font-size="11" fill="#9d8cff" font-weight="600">III · FACETS → LITERATURE</text>
+<text x="766" y="90" text-anchor="middle" font-size="12" fill="#d4efff">离散分片与连续文献的连接</text>
+<line x1="20" y1="374" x2="900" y2="374" stroke="#143049" stroke-width="1"/>
+<line x1="154" y1="133" x2="94" y2="181" stroke="#9d8cff" stroke-width="1.7"/>
+<line x1="154" y1="133" x2="214" y2="181" stroke="#9d8cff" stroke-width="1.7"/>
+<line x1="94" y1="181" x2="54" y2="231" stroke="#9d8cff" stroke-width="1.7"/>
+<line x1="94" y1="181" x2="121" y2="231" stroke="#9d8cff" stroke-width="1.7"/>
+<line x1="214" y1="181" x2="188" y2="231" stroke="#9d8cff" stroke-width="1.7"/>
+<line x1="214" y1="181" x2="255" y2="231" stroke="#9d8cff" stroke-width="1.7"/>
+<line x1="54" y1="231" x2="40" y2="269" stroke="#9d8cff" stroke-width="1.3"/>
+<circle cx="40" cy="269" r="3" fill="#07101b" stroke="#19f0ff" stroke-width="1.5"/>
+<line x1="54" y1="231" x2="68" y2="269" stroke="#9d8cff" stroke-width="1.3"/>
+<circle cx="68" cy="269" r="3" fill="#07101b" stroke="#19f0ff" stroke-width="1.5"/>
+<line x1="121" y1="231" x2="107" y2="269" stroke="#9d8cff" stroke-width="1.3"/>
+<circle cx="107" cy="269" r="3" fill="#07101b" stroke="#19f0ff" stroke-width="1.5"/>
+<line x1="121" y1="231" x2="135" y2="269" stroke="#9d8cff" stroke-width="1.3"/>
+<circle cx="135" cy="269" r="3" fill="#07101b" stroke="#19f0ff" stroke-width="1.5"/>
+<line x1="188" y1="231" x2="174" y2="269" stroke="#9d8cff" stroke-width="1.3"/>
+<circle cx="174" cy="269" r="3" fill="#07101b" stroke="#19f0ff" stroke-width="1.5"/>
+<line x1="188" y1="231" x2="202" y2="269" stroke="#9d8cff" stroke-width="1.3"/>
+<circle cx="202" cy="269" r="3" fill="#07101b" stroke="#19f0ff" stroke-width="1.5"/>
+<line x1="255" y1="231" x2="241" y2="269" stroke="#9d8cff" stroke-width="1.3"/>
+<circle cx="241" cy="269" r="3" fill="#07101b" stroke="#19f0ff" stroke-width="1.5"/>
+<line x1="255" y1="231" x2="269" y2="269" stroke="#9d8cff" stroke-width="1.3"/>
+<circle cx="269" cy="269" r="3" fill="#07101b" stroke="#19f0ff" stroke-width="1.5"/>
+<line x1="94" y1="181" x2="214" y2="181" stroke="#ff2fd0" stroke-width="1.5" stroke-dasharray="4 3"/>
+<line x1="54" y1="231" x2="121" y2="231" stroke="#ff2fd0" stroke-width="1.5" stroke-dasharray="4 3"/>
+<line x1="188" y1="231" x2="255" y2="231" stroke="#ff2fd0" stroke-width="1.5" stroke-dasharray="4 3"/>
+<rect x="147" y="127" width="14" height="12" rx="2" fill="#07101b" stroke="#9d8cff"/>
+<rect x="87" y="175" width="14" height="12" rx="2" fill="#07101b" stroke="#9d8cff"/>
+<rect x="207" y="175" width="14" height="12" rx="2" fill="#07101b" stroke="#9d8cff"/>
+<rect x="47" y="225" width="14" height="12" rx="2" fill="#07101b" stroke="#9d8cff"/>
+<rect x="114" y="225" width="14" height="12" rx="2" fill="#07101b" stroke="#9d8cff"/>
+<rect x="181" y="225" width="14" height="12" rx="2" fill="#07101b" stroke="#9d8cff"/>
+<rect x="248" y="225" width="14" height="12" rx="2" fill="#07101b" stroke="#9d8cff"/>
+<circle cx="214" cy="181" r="4.5" fill="#ffc83d" stroke="#ffc83d" stroke-width="0" data-role="present-selection"/>
+<text x="154" y="300" text-anchor="middle" font-size="10" fill="#9d8cff">coarse ↔ fine / 粗粒 ↔ 细粒</text>
+<text x="154" y="324" text-anchor="middle" font-size="10" fill="#6f8ea5">hierarchy ≠ continuum proof</text>
+<text x="154" y="347" text-anchor="middle" font-size="10" fill="#6f8ea5">层级示意，不主张连续极限</text>
+<line x1="344" y1="147" x2="408" y2="190" stroke="#19f0ff" stroke-width="1.5"/>
+<line x1="344" y1="255" x2="408" y2="211" stroke="#19f0ff" stroke-width="1.5"/>
+<line x1="512" y1="190" x2="576" y2="147" stroke="#19f0ff" stroke-width="1.5"/>
+<line x1="512" y1="211" x2="576" y2="255" stroke="#19f0ff" stroke-width="1.5"/>
+<line x1="422" y1="187" x2="498" y2="187" stroke="#ff2fd0" stroke-width="2"/>
+<line x1="422" y1="201" x2="498" y2="201" stroke="#ff2fd0" stroke-width="2"/>
+<line x1="422" y1="215" x2="498" y2="215" stroke="#ff2fd0" stroke-width="2"/>
+<rect x="399" y="177" width="23" height="49" rx="4" fill="#07101b" stroke="#19f0ff"/>
+<rect x="498" y="177" width="23" height="49" rx="4" fill="#07101b" stroke="#19f0ff"/>
+<line x1="457" y1="157" x2="457" y2="243" stroke="#9d8cff" stroke-width="1.3" stroke-dasharray="4 4"/>
+<text x="346" y="139" text-anchor="middle" font-size="10" fill="#19f0ff">a = 2</text>
+<text x="346" y="273" text-anchor="middle" font-size="10" fill="#19f0ff">b = 3</text>
+<text x="576" y="139" text-anchor="middle" font-size="10" fill="#19f0ff">c = 2</text>
+<text x="576" y="273" text-anchor="middle" font-size="10" fill="#19f0ff">d = 3</text>
+<text x="460" y="253" text-anchor="middle" font-size="9" fill="#ff2fd0">r ∈ Fin 3</text>
+<text x="460" y="291" text-anchor="middle" font-size="12" fill="#19f0ff">QMaxFlow = QMinCut = 6</text>
+<text x="460" y="313" text-anchor="middle" font-size="11" fill="#3dff9b" font-weight="600" data-role="verified-theorem">LEAN ✓</text>
+<text x="460" y="335" text-anchor="middle" font-size="9" fill="#6f8ea5">a²+b² ≤ 3ab; c²+d² ≤ 3cd</text>
+<text x="460" y="353" text-anchor="middle" font-size="9" fill="#6f8ea5">0 &lt; a ≤ b; 0 &lt; c ≤ d</text>
+<path d="M649 205L708 157L767 176L824 131L878 178L820 226L760 220L706 244Z" fill="#9d8cff" stroke="#9d8cff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.15"/>
+<path d="M649 205L708 157L760 220ZM708 157L767 176L760 220ZM767 176L824 131L820 226ZM824 131L878 178L820 226Z" fill="none" stroke="#9d8cff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="760" y1="220" x2="767" y2="176" stroke="#ff2fd0" stroke-width="2.5"/>
+<text x="765" y="119" text-anchor="middle" font-size="10" fill="#9d8cff">DISCRETE FACETS / 离散分片</text>
+<text x="765" y="270" text-anchor="middle" font-size="10" fill="#d4efff">min(log(3ac), log(ad), log(bc))</text>
+<text x="765" y="301" text-anchor="middle" font-size="10" fill="#9d8cff">RT: S(A) = Area(γA) / (4Gℏ)</text>
+<text x="765" y="326" text-anchor="middle" font-size="10" fill="#9d8cff">Literature / 文献结果</text>
+<text x="765" y="348" text-anchor="middle" font-size="9" fill="#6f8ea5">not formalized / 未在本书形式化</text>
+<text x="460" y="397" text-anchor="middle" font-size="10" fill="#6f8ea5">Rank capacity over ℂ / 复矩阵秩容量  ·  Discrete bridge only / 仅离散桥图  ·  RT is a literature connection</text>
+</g></svg>
