@@ -142,7 +142,7 @@ $$
 \langle\psi'\mid\phi'\rangle\langle\phi'\mid\psi'\rangle = e^{-i(\alpha-\beta)}e^{+i(\alpha-\beta)}\norm{\langle\phi\mid\psi\rangle}^2 = \Tr(\rho P_k).
 $$
 
-(And here is a preview worth savoring: when the round trip visits *three* non-collinear rays $\psi \to \phi \to \chi \to \psi$ enclosing a spherical triangle on $S^2$, the uncanceled phase of the three-point Bargmann trace $\Tr(P_\psi P_\chi P_\phi)$ equals minus half the solid angle of that triangle — the **geometric Berry phase** of Part III, Chapter 11!)
+(And here is a preview worth savoring: when the round trip visits *three* rays $\psi \to \phi \to \chi \to \psi$ enclosing an oriented geodesic triangle on $S^2$, with nonzero overlaps between adjacent states, the argument of the three-point Bargmann trace $\Tr(P_\psi P_\chi P_\phi)$ equals $-\Omega/2$ modulo $2\pi$ under the spin-up and orientation conventions of [Part III, Chapter 10](ch10-gram-geometry-and-order.md#sec-spherical-order-and-berry) — the **geometric Berry phase**!)
 
 ## 2.3 The Purely Geometric Origin of Born's Rule {#sec-ch02-3}
 
