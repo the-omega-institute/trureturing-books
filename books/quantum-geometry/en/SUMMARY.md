@@ -43,3 +43,10 @@
 - [Chapter 22 Primes as the Orthogonal Basis of Arithmetic: Euler Products and Riemann Zeros](ch22-primes-euler-products-and-zeros.md)
 - [Chapter 23 The Integer Skeleton Inside the Rationals: Quaternion Norms and Diophantine Definability](ch23-diophantine-definability.md)
 - [Chapter 24 Cosine Fixed Points and Self-Reference: From $\cos\theta = \theta$ to $\psi = \psi(\psi)$](ch24-cosine-fixed-points-and-self-reference.md)
+
+# Part VII Construction and Verification — XOR Algebra, Rotor Compilation, and the Lean 4 Axiom Sanctuary
+
+- [Chapter 25 Reducing Matrices to XOR: Three-Bit Blades and the XOR–Pauli Geometric Algebra Engine](ch25-rewriting-and-xor.md)
+- [Chapter 26 Single-Qubit Rotor Compilation: Bloch Geometry Theorems and the ZYZ Euler Compiler](ch26-single-qubit-rotor-compilation.md)
+- [Chapter 27 Inside the Lean 4 Axiom Sanctuary (Part I): From the Parallelogram Law to Finite Record Pinching](ch27-reading-frozen-proofs-i.md)
+- [Chapter 28 Inside the Lean 4 Axiom Sanctuary (Part II): From Rank-One Born Reduction to the Closure of $\psi = \psi(\psi)$](ch28-reading-frozen-proofs-ii.md)
