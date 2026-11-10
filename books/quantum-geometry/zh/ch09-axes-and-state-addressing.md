@@ -215,7 +215,7 @@ $$
 1. **两角球面寻址手算**：取极角 $\theta = \frac{\pi}{3}$（$60^\circ$）、方位角 $\varphi = \frac{\pi}{4}$（$45^\circ$）。因 $\sin\frac{\pi}{3} = \frac{\sqrt{3}}{2}$、$\cos\frac{\pi}{3} = \frac{1}{2}$、$\cos\frac{\pi}{4} = \sin\frac{\pi}{4} = \frac{\sqrt{2}}{2}$，两步正交旋转给出的球面点为
 
    $$
-   x = R_z\!\Bigl(\frac{\pi}{4}\Bigr) R_y\!\Bigl(\frac{\pi}{3}\Bigr) N
+   x = R_z\Bigl(\frac{\pi}{4}\Bigr) R_y\Bigl(\frac{\pi}{3}\Bigr) N
    = \bigl(\sin\theta\cos\varphi,\; \sin\theta\sin\varphi,\; \cos\theta\bigr)
    = \Bigl(\frac{\sqrt{6}}{4},\; \frac{\sqrt{6}}{4},\; \frac{1}{2}\Bigr).
    $$

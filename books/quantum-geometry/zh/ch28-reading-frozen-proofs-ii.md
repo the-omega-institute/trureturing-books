@@ -30,7 +30,7 @@ $$
 则第 $k$ 个记录结果的迹权重精确归约为复内积欧氏范数的平方（嵌入 $\mathbb{C}$）：
 
 $$
-\operatorname{recordWeight}(P, \rho, k) = \bigl(\norm{\operatorname{star}\phi \bullet_{\!v} \psi}^2 : \mathbb{R}\bigr).
+\operatorname{recordWeight}(P, \rho, k) = \bigl(\norm{\operatorname{star}\phi \bullet_{v} \psi}^2 : \mathbb{R}\bigr).
 $$
 :::
 
@@ -55,9 +55,9 @@ theorem rank_one_pure_state_modulus_square_reduction
 
 1. `recordWeight` 与 `bornProbability` 展开目标左端为 $\Tr(\rho \cdot P_k)$；
 2. `hPureState` 与 `hProjection` 将 $\rho$ 与 $P_k$ 替换为两个秩一外积 $\operatorname{vecMulVec}(\psi, \operatorname{star}\psi)$ 与 $\operatorname{vecMulVec}(\phi, \operatorname{star}\phi)$；
-3. `Matrix.vecMulVec_mul_vecMulVec` 执行外积收缩恒等式 $(\lvert\psi\rangle\langle\psi\rvert)(\lvert\phi\rangle\langle\phi\rvert) = (\operatorname{star}\psi \bullet_{\!v} \phi)\bullet \operatorname{vecMulVec}(\psi, \operatorname{star}\phi)$；
-4. `Matrix.trace_vecMulVec` 与 `dotProduct_smul` 将外积的迹化为点积 $\Tr(\operatorname{vecMulVec}(u, v)) = v \bullet_{\!v} u$，得到 $(\operatorname{star}\psi \bullet_{\!v} \phi) \bullet (\operatorname{star}\phi \bullet_{\!v} \psi)$；
-5. `dotProduct_comm psi (star phi)` 与 `Matrix.star_dotProduct` 将前一因子改写为 $\operatorname{star}(\operatorname{star}\phi \bullet_{\!v} \psi)$，再由 `smul_eq_mul` 化为复数乘法 $\overline{z} \cdot z$（其中 $z = \operatorname{star}\phi \bullet_{\!v} \psi$）；
+3. `Matrix.vecMulVec_mul_vecMulVec` 执行外积收缩恒等式 $(\lvert\psi\rangle\langle\psi\rvert)(\lvert\phi\rangle\langle\phi\rvert) = (\operatorname{star}\psi \bullet_{v} \phi)\bullet \operatorname{vecMulVec}(\psi, \operatorname{star}\phi)$；
+4. `Matrix.trace_vecMulVec` 与 `dotProduct_smul` 将外积的迹化为点积 $\Tr(\operatorname{vecMulVec}(u, v)) = v \bullet_{v} u$，得到 $(\operatorname{star}\psi \bullet_{v} \phi) \bullet (\operatorname{star}\phi \bullet_{v} \psi)$；
+5. `dotProduct_comm psi (star phi)` 与 `Matrix.star_dotProduct` 将前一因子改写为 $\operatorname{star}(\operatorname{star}\phi \bullet_{v} \psi)$，再由 `smul_eq_mul` 化为复数乘法 $\overline{z} \cdot z$（其中 $z = \operatorname{star}\phi \bullet_{v} \psi$）；
 6. 最后调用 `Complex.normSq_eq_conj_mul_self.symm` 与 `Complex.normSq_eq_norm_sq`，将 $\overline{z} z$ 精确折叠为 `((‖star phi ⬝ᵥ psi‖ ^ 2 : ℝ) : ℂ)`。
 
 完整证明由 Lean 内核检查。
@@ -74,7 +74,7 @@ $$
 
 则同时成立以下三条等式：
 
-1. **秩一模方归约**：$\operatorname{recordWeight}(P, \rho, k) = \bigl(\norm{\operatorname{star}\phi \bullet_{\!v} \psi}^2 : \mathbb{R}\bigr)$；
+1. **秩一模方归约**：$\operatorname{recordWeight}(P, \rho, k) = \bigl(\norm{\operatorname{star}\phi \bullet_{v} \psi}^2 : \mathbb{R}\bigr)$；
 2. **迹配对恒等式**：$\operatorname{recordWeight}(P, \rho, k) = \Tr(\rho \cdot P_k)$；
 3. **未读态的加权条件态展开**：
    $$
@@ -165,7 +165,7 @@ $$
 
 | 所属章节 | 冻结声明 GID | 源码路径与行号 | `statement_id` 前缀 | 精确形式化范围与契约边界 |
 | :---------: | ---------------------------- | ---------------------------- | :------------------: | ----------------------------------------------------- |
-| Ch 2 / Ch 28 | [`D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction`](lean:D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction) | `D5/S3/Observer/BornReduction.lean:27` | `sha256:9d19ef37` | 秩一纯态与秩一投影下 $\operatorname{recordWeight}(P,\rho,k)=\norm{\operatorname{star}\phi\bullet_{\!v}\psi}^2$ |
+| Ch 2 / Ch 28 | [`D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction`](lean:D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction) | `D5/S3/Observer/BornReduction.lean:27` | `sha256:9d19ef37` | 秩一纯态与秩一投影下 $\operatorname{recordWeight}(P,\rho,k)=\norm{\operatorname{star}\phi\bullet_{v}\psi}^2$ |
 | Ch 2 / Ch 28 | [`D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight) | `D5/S3/Observer/Conditioning/RankOneBornPairingWeight.lean:36` | `sha256:3fd7a21e` | 秩一模方、迹配对与未读态加权条件态展开的三合取桥 |
 | Ch 3 / Ch 28 | [`D5/S3/Observer/Conditioning.conditionalState_isState`](lean:D5/S3/Observer/Conditioning.conditionalState_isState) | `D5/S3/Observer/Conditioning.lean:143` | `sha256:ed6f3095` | 非零权重 $w_k \neq 0$ 下吕德斯条件态保持正半定与单位迹 |
 | Ch 3 / Ch 28 | [`D5/S3/Observer/Conditioning.unreadState_fixed_iff`](lean:D5/S3/Observer/Conditioning.unreadState_fixed_iff) | `D5/S3/Observer/Conditioning.lean:108` | `sha256:ed6f3095` | $\operatorname{unreadState}(P,\rho)=\rho \iff \forall k\neq l,\; P_k\rho P_l = 0$ |
@@ -216,7 +216,7 @@ $$
 \rho = \operatorname{vecMulVec}(\psi, \operatorname{star}\psi) = \begin{pmatrix} 9/25 & -12i/25 \\ 12i/25 & 16/25 \end{pmatrix}.
 $$
 
-1. **秩一模方归约（[@thm-audit-rank-one-born]）**：内积 $\operatorname{star}\phi_0 \bullet_{\!v} \psi = \frac{3}{5}$，$\operatorname{star}\phi_1 \bullet_{\!v} \psi = \frac{4}{5}i$，故记录权重为
+1. **秩一模方归约（[@thm-audit-rank-one-born]）**：内积 $\operatorname{star}\phi_0 \bullet_{v} \psi = \frac{3}{5}$，$\operatorname{star}\phi_1 \bullet_{v} \psi = \frac{4}{5}i$，故记录权重为
    $$
    w_0 = \operatorname{recordWeight}(P, \rho, 0) = \Bigl|\frac{3}{5}\Bigr|^2 = \frac{9}{25} \neq 0, \qquad w_1 = \operatorname{recordWeight}(P, \rho, 1) = \Bigl|\frac{4}{5}i\Bigr|^2 = \frac{16}{25} \neq 0.
    $$

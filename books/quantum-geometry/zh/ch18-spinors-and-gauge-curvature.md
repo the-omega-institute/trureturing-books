@@ -122,7 +122,7 @@ $$
 
 若采用电磁学与量子力学中的物理势约定 $D_\mu = \partial_\mu - \frac{iq}{\hbar} A^{\mathrm{phys}}_\mu$，则交换子为 $[D_\mu, D_\nu] = -\frac{iq}{\hbar} F^{\mathrm{phys}}_{\mu\nu}$（此时阿贝尔情形 $[A_\mu, A_\nu] = 0$，闭合环路积分为磁通量，对应阿哈罗诺夫—玻姆效应中的干涉相移 $\Delta\varphi = q\Phi_B/\hbar$）。在连续场的晶格离散化文献中，若光滑规范势沿由无穷小位移 $\Delta x^\mu$ 与 $\Delta x^\nu$（固定指标 $\mu, \nu$ 不求和）张成的正向（逆时针）小方格边界依次积分，其小方格闭合和乐在 $\Delta x \to 0$ 的渐近极限下展开为
 $$
-U_\square = \exp\!\left(\frac{iq}{\hbar} F^{\mathrm{phys}}_{\mu\nu}\Delta x^\mu \Delta x^\nu\right) + O\bigl(\norm{\Delta x}^3\bigr) \qquad (\text{连续小方格近似}).
+U_\square = \exp\left(\frac{iq}{\hbar} F^{\mathrm{phys}}_{\mu\nu}\Delta x^\mu \Delta x^\nu\right) + O\bigl(\norm{\Delta x}^3\bigr) \qquad (\text{连续小方格近似}).
 $$
 
 对于非阿贝尔规范群（如 $SU(N)$），沿闭合回路绕行一周的平行移动和乐（holonomy）在基点规范变换下按群共轭 $U_\square \mapsto g_0 U_\square g_0^{-1}$ 变换，因此只有其**共轭类**或威尔逊圈迹（Wilson loop trace，$\Tr U_\square$）才是规范不变量。必须明确：上述无穷小方格展开式属于连续统微积分近似，而本章随后两节经 Lean 验证的定理（[@thm-tree-phase-transport] 与 [@cor-anchored-phase-classification]）严格建立在命名图上的精确离散阿贝尔单位圆群 $\operatorname{Circle} = U(1)$ 相位之上，既不依赖任何连续极限近似，也不能直接提升为非阿贝尔连续规范场定理。参见 Y. Aharonov & D. Bohm, *Phys. Rev.* **115**, 485 (1959), DOI: `10.1103/PhysRev.115.485`；以及 K. G. Wilson, *Phys. Rev. D* **10**, 2445 (1974), DOI: `10.1103/PhysRevD.10.2445`。

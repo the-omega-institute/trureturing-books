@@ -84,7 +84,7 @@ $$
    设 $\hat{B}$ 为满足 $\hat{B}^2 = -1$ 的单位双向量（代表有向旋转平面），绕 $\hat{B}$ 平面旋转角度 $\theta$ 的单位旋量属于偶子代数 $\mathcal{Cl}_{3,0}^+(\mathbb{R}) = \operatorname{span}\{1, e_{23}, e_{31}, e_{12}\} \cong \mathbb{H}$：
 
    $$
-   R(\theta, \hat{B}) = \exp\!\left(-\frac{\theta}{2}\hat{B}\right) = \cos\frac{\theta}{2} - \hat{B}\sin\frac{\theta}{2}, \qquad \widetilde{R}(\theta, \hat{B}) = \cos\frac{\theta}{2} + \hat{B}\sin\frac{\theta}{2}, \qquad R\widetilde{R} = \cos^2\frac{\theta}{2} + \sin^2\frac{\theta}{2} = 1.
+   R(\theta, \hat{B}) = \exp\left(-\frac{\theta}{2}\hat{B}\right) = \cos\frac{\theta}{2} - \hat{B}\sin\frac{\theta}{2}, \qquad \widetilde{R}(\theta, \hat{B}) = \cos\frac{\theta}{2} + \hat{B}\sin\frac{\theta}{2}, \qquad R\widetilde{R} = \cos^2\frac{\theta}{2} + \sin^2\frac{\theta}{2} = 1.
    $$
 
    对任意三维向量 $\mathbf{v} \in \mathbb{R}^3$，双面夹心映射 $\mathbf{v} \mapsto R\mathbf{v}\widetilde{R}$ 保持 $\mathbf{v}$ 为纯一阶向量且严格保持欧氏内积（当 $\theta = 2\pi$ 时 $R(2\pi) = -1$，但 $(-1)\mathbf{v}(-1) = +\mathbf{v}$，体现 $S^3 \to \mathrm{SO}(3)$ 的二重覆盖）。
@@ -147,7 +147,7 @@ $$
    由于 $\boldsymbol{\sigma}_1 = \gamma_1 \gamma_0$ 满足 $\boldsymbol{\sigma}_1^2 = +1$，沿 $x^1$ 轴快度为 $\eta$ 的洛伦兹助推旋量展开为双曲余弦与双曲正弦：
 
    $$
-   L(\eta) = \exp\!\left(\frac{\eta}{2}\gamma_1\gamma_0\right) = \cosh\frac{\eta}{2} + \gamma_1\gamma_0\sinh\frac{\eta}{2}, \qquad L(\eta)\widetilde{L}(\eta) = \cosh^2\frac{\eta}{2} - \sinh^2\frac{\eta}{2} = 1.
+   L(\eta) = \exp\left(\frac{\eta}{2}\gamma_1\gamma_0\right) = \cosh\frac{\eta}{2} + \gamma_1\gamma_0\sinh\frac{\eta}{2}, \qquad L(\eta)\widetilde{L}(\eta) = \cosh^2\frac{\eta}{2} - \sinh^2\frac{\eta}{2} = 1.
    $$
 
    双面夹心作用 $x^\mu \gamma_\mu \mapsto L(\eta)(x^\mu \gamma_\mu)\widetilde{L}(\eta)$ 自动保持闵可夫斯基二次型 $Q(x) = (x^0)^2 - (x^1)^2 - (x^2)^2 - (x^3)^2$ 不变（[`bogoliubov_norm_conservation`](lean:D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation)）。

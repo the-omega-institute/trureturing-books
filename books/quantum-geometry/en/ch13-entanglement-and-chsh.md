@@ -43,7 +43,7 @@ $$
 and the decohered classical diagonally correlated mixture
 
 $$
-\mathrm{classicalCorrelatedDensity} = \frac{1}{2}\bigl(\lvert 00\rangle\langle 00\rvert + \lvert 11\rangle\langle 11\rvert\bigr) = \operatorname{diag}\!\Bigl(\frac{1}{2},\, 0,\, 0,\, \frac{1}{2}\Bigr).
+\mathrm{classicalCorrelatedDensity} = \frac{1}{2}\bigl(\lvert 00\rangle\langle 00\rvert + \lvert 11\rangle\langle 11\rvert\bigr) = \operatorname{diag}\Bigl(\frac{1}{2},\, 0,\, 0,\, \frac{1}{2}\Bigr).
 $$
 
 Writing $\mathrm{traceEnvironment}(\rho)_{i,j} = \sum_a \rho_{(i,a),(j,a)}$ for the partial trace over the second factor and $\mathrm{traceFirstFactor}(\rho)_{i,j} = \sum_a \rho_{(a,i),(a,j)}$ for the partial trace over the first factor, the following theorem combines the general $(m, n)$ orthogonal sector decomposition with the two-qubit marginal blind-spot witnesses.

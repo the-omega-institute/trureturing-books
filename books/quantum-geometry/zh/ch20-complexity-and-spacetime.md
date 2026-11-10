@@ -186,7 +186,7 @@ $$
 2. **精确合成的指数级 CNOT 下界**：对任意由 $\mathrm{CNOT}$ 与单比特实 $R_z$ 组成的无辅助比特电路 $\mathit{circuit} : \operatorname{List}(\operatorname{gate}(2n))$ 以及任意复数 $c \in \mathbb{C}$，若
 
 $$
-\operatorname{circuitMatrix}(\mathit{circuit}) = c \cdot \operatorname{diag}\!\bigl(x \mapsto \exp(i\theta(x))\bigr),
+\operatorname{circuitMatrix}(\mathit{circuit}) = c \cdot \operatorname{diag}\bigl(x \mapsto \exp(i\theta(x))\bigr),
 $$
 
 则必有

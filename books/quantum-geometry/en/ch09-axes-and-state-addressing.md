@@ -212,7 +212,7 @@ Fix the standard basis $\vv{e}_1 = (1, 0, 0)$, $\vv{e}_2 = (0, 1, 0)$, $\vv{e}_3
 1. **Two-angle address on $S^2$**: Choose $\theta = \frac{\pi}{3}$ and $\varphi = \frac{\pi}{4}$. Since $\sin\frac{\pi}{3} = \frac{\sqrt{3}}{2}$, $\cos\frac{\pi}{3} = \frac{1}{2}$, and $\cos\frac{\pi}{4} = \sin\frac{\pi}{4} = \frac{\sqrt{2}}{2}$, we obtain
 
    $$
-   x = R_z\!\Bigl(\frac{\pi}{4}\Bigr) R_y\!\Bigl(\frac{\pi}{3}\Bigr) N
+   x = R_z\Bigl(\frac{\pi}{4}\Bigr) R_y\Bigl(\frac{\pi}{3}\Bigr) N
    = \bigl(\sin\theta\cos\varphi,\; \sin\theta\sin\varphi,\; \cos\theta\bigr)
    = \Bigl(\frac{\sqrt{6}}{4},\; \frac{\sqrt{6}}{4},\; \frac{1}{2}\Bigr),
    $$

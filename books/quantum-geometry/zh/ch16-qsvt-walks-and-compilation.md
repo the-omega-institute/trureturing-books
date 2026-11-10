@@ -223,7 +223,7 @@ $$
 \mathrm{reflectionBlock} = \bigl[\mathrm{.coin},\; \mathrm{.source},\; \mathrm{.initializedReflection},\; \mathrm{.sourceAdjoint},\; \mathrm{.coinAdjoint},\; \mathrm{.goodReflection}\bigr],
 $$
 
-递归门字定义为 $\mathrm{amplificationWord}(0) = [\mathrm{.coin},\, \mathrm{.source}]$，且 $\mathrm{amplificationWord}(n + 1) = \mathrm{reflectionBlock} \mathbin{+\!+} \mathrm{amplificationWord}(n)$。最后，定义**源查询计数** `sourceQueries w` 为门字 $w$ 中出现 `.source` 与 `.sourceAdjoint` 的总次数（注意：当 $p = 1$ 时最终门字仅取单元素列表 `[.source]`，绝不能把 $p < 1$ 的通式 $2n+1$ 误套到 $p = 1$ 分支上）。
+递归门字定义为 $\mathrm{amplificationWord}(0) = [\mathrm{.coin},\, \mathrm{.source}]$，且 $\mathrm{amplificationWord}(n + 1) = \mathrm{reflectionBlock} \mathbin{\text{++}} \mathrm{amplificationWord}(n)$。最后，定义**源查询计数** `sourceQueries w` 为门字 $w$ 中出现 `.source` 与 `.sourceAdjoint` 的总次数（注意：当 $p = 1$ 时最终门字仅取单元素列表 `[.source]`，绝不能把 $p < 1$ 的通式 $2n+1$ 误套到 $p = 1$ 分支上）。
 
 ::: {.corollary #cor-exact-source-query-count title="精确相干振幅放大的零残差门字构造与源查询次数上界推论" lean="D5/S3/Quantum/Recovery/CoherentUniformAmplification.exact_coherent_amplification"}
 设 $s, l$ 为有限可判等指标类型，$J \in M_{l \times s}(\mathbb{C})$、$C, P \in M_{l \times l}(\mathbb{C})$、$p \in \mathbb{R}$，满足
@@ -238,7 +238,7 @@ $$
 $$
 \begin{aligned}
 n &:= \Bigl\lceil \frac{\pi}{4\arcsin(\sqrt{p})} - \frac{1}{2} \Bigr\rceil_+, &\qquad
-r &:= \sin^2\!\Bigl(\frac{\pi}{4(n : \mathbb{R}) + 2}\Bigr), \qquad q := \frac{r}{p}, \\
+r &:= \sin^2\Bigl(\frac{\pi}{4(n : \mathbb{R}) + 2}\Bigr), \qquad q := \frac{r}{p}, \\
 w &:= \text{if } p = 1 \text{ then } [\mathrm{AmplificationGate.source}] \text{ else } \mathrm{amplificationWord}(n), \\
 V &:= \mathrm{evaluateWord}(J, C, P, q, w) \cdot \mathrm{coinEmbed}(J).
 \end{aligned}
@@ -344,7 +344,7 @@ $$
 **第四步：[@cor-exact-source-query-count] 在 $p = 1/4, 1/16, 1/64$ 下的精确源查询计数核对表。**
 对三个典型成功概率 $p \in \{1/4,\, 1/16,\, 1/64\}$，代入 [@cor-exact-source-query-count] 的公式计算整数步数 $n = \lceil\frac{\pi}{4\arcsin\sqrt{p}} - \frac{1}{2}\rceil_+$、源查询次数 $\mathrm{sourceQueries}(w) = 2n + 1$、修饰成功概率 $r = \sin^2(\frac{\pi}{4n+2})$、硬币缩放比 $q = r/p$ 以及理论上界 $\frac{\pi/2 + 2}{\sqrt{p}}$：
 
-| 初始成功概率 $p$ | 步数 $n$ | 源查询次数 $\mathrm{sourceQueries} = 2n+1$ | 修饰概率 $r = \sin^2\!\bigl(\frac{\pi}{4n+2}\bigr)$ | 硬币参数 $q = r/p \in (0, 1]$ | 上界 $\dfrac{\pi/2 + 2}{\sqrt{p}}$ |
+| 初始成功概率 $p$ | 步数 $n$ | 源查询次数 $\mathrm{sourceQueries} = 2n+1$ | 修饰概率 $r = \sin^2\bigl(\frac{\pi}{4n+2}\bigr)$ | 硬币参数 $q = r/p \in (0, 1]$ | 上界 $\dfrac{\pi/2 + 2}{\sqrt{p}}$ |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | $1/4 = 0.25$ | $1$ | $3$ | $0.25$ | $1$ | $\approx 7.14159265$ |
 | $1/16 = 0.0625$ | $3$ | $7$ | $\approx 0.049515566048790434$ | $\approx 0.7922490567806469$ | $\approx 14.28318531$ |

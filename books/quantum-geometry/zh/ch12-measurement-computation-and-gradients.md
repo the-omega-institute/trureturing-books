@@ -28,7 +28,7 @@ $$
 展开 $\operatorname{recordWeight}(P, \rho, k) = \Tr(\rho P_k)$，利用矩阵迹的有限线性可加性与矩阵乘法对有限求和的左分配律，结合记录测量的完备性条件 $\sum_{k \in \kappa} P_k = I$，得
 
 $$
-\sum_{k \in \kappa} \Tr(\rho P_k) = \Tr\!\Bigl(\rho \sum_{k \in \kappa} P_k\Bigr) = \Tr(\rho I) = \Tr(\rho).
+\sum_{k \in \kappa} \Tr(\rho P_k) = \Tr\Bigl(\rho \sum_{k \in \kappa} P_k\Bigr) = \Tr(\rho I) = \Tr(\rho).
 $$
 
 完整证明由 Lean 内核检查。
