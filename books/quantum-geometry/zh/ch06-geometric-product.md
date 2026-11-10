@@ -1,0 +1,225 @@
+# 第六章 几何积 $\vv{A}\vv{B} = \vv{A}\cdot\vv{B} + \vv{A}\wedge\vv{B}$：波粒二象性的终极缝合 {#ch06-geometric-product}
+
+正如本书作者所言：
+
+> *“面积是波,粒子是线,如果线与面积都是一种状态的投影,那看起来似乎是很好的波粒二象性的解释”*
+>
+> *“那面积与线、波与粒子,本质上就是一种场呀”*
+
+二十世纪物理学留给人类思想史最著名的一道伤痕，莫过于“**波粒二象性（wave–particle duality）**”。电子和光子有时候表现得像一颗弹道分明、非此即彼的颗粒（粒子），有时候又表现得像一片铺满空间、明暗相间的涟漪（波）。尼尔斯·玻尔为此提出了“互补原理（complementarity）”，宣称波和粒子是两幅互斥的经典图景，人类永远无法在同一幅几何画面里同时看清两者，只能听任它们随实验装置的切换而神秘变脸。
+
+然而，站在本书已经铺设好的正交阶梯上回望：我们在第一部（[第一章](ch01-measurement.md)至[第四章](ch04-decoherence.md)）中证明了**粒子的投影计数来自两子内积** $\vv{A}\cdot\vv{B} = \cos\theta$；又在[第五章](ch05-complex-phase-and-rotors.md)中证明了**波的相位转向来自两子外积面积** $\vv{A}\wedge\vv{B} = \sin\theta\,\vv{I}$。既然“粒子是线，面积是波”，为什么传统线性代数会把一根完整的比量动作硬生生劈成“点乘（标量内积）”和“叉乘（向量/外积）”两门老死不相往来的运算？
+
+本章将完成全书第二部的核心合拢：**把被教科书拆散的内积与外积重新缝合回同一个完整的克利福德几何积（Clifford geometric product）**
+
+$$
+\vv{A}\vv{B} = \vv{A}\cdot\vv{B} + \vv{A}\wedge\vv{B} = \cos\theta + \sin\theta\,\vv{I}!
+$$
+
+在这行只有六个符号的恒等式面前，困惑物理学界百年的波粒二象性、罗伯逊—薛定谔不确定性原理、双缝干涉与惠勒延迟选择实验，乃至传统量子力学教材里互不统属的“五大公设”，都将水落石出地收束为同一条初等几何铁律——**余弦粒子线与正弦波动面的勾股守恒 $\cos^2\theta + \sin^2\theta = 1$**。
+
+## 6.1 内积 $\vv{A}\cdot\vv{B}$ 为何是“粒子”？外积 $\vv{A}\wedge\vv{B}$ 为何是“波”？ {#sec-inner-particle-outer-wave}
+
+让我们顺着作者的一句直觉洞察，把“两子相遇”时发生的一切放到放大镜下重新审视：
+
+> *“量子态本身,即各项同性球面上的一个方向向量,应该也是一种粒子性的东西.然后也会有一种对应的波的东西”*
+
+当单位球面上的两条方向线 $\vv{A}$ 与 $\vv{B}$（$\|\vv{A}\| = \|\vv{B}\| = 1$，夹角为 $\theta$）相遇比量时，它们之间的全部几何关系由且仅由两部分组成：
+
+1. **对称共线部分——内积 $\vv{A}\cdot\vv{B} := \frac{1}{2}(\vv{A}\vv{B} + \vv{B}\vv{A}) = \cos\theta$（粒子 / 线）**：
+   它度量 $\vv{B}$ 沿着基准轴 $\vv{A}$ 投下的**共线影子长度**（[第二章](ch02-born-rule.md)的内生相融向量 $\vv{c} = (\vv{A}\cdot\vv{B})\vv{A}$）。它不改变方向，只给出“顺着 $\vv{A}$ 这把尺子看过去，$\vv{B}$ 有多少分量与它重合同向”，并在幂等投影 $P_{\vv{A}}^2 = P_{\vv{A}}$ 下凝结为探测器上一声干脆利落的“咔哒”计数（[第三章](ch03-projectors-and-duality.md)）。**这就是“粒子是线”的精确代数定义：粒子性就是几何积的零阶标量（共线投影）投影。**
+2. **反对称正交部分——外积 $\vv{A}\wedge\vv{B} := \frac{1}{2}(\vv{A}\vv{B} - \vv{B}\vv{A}) = \sin\theta\,\vv{I}$（波 / 面积）**：
+   它度量 $\vv{B}$ 垂直于基准轴 $\vv{A}$ 撑开的**有向平行四边形面积**。因为交换次序会使面积朝向反转（$\vv{B}\wedge\vv{A} = -\vv{A}\wedge\vv{B}$），它天然携带正负相干符号与旋转生成元 $\vv{I}^2 = -1$（[第五章](ch05-complex-phase-and-rotors.md)），掌管着不同路径之间的相位干涉与连续量子门演化。**这就是“面积是波”的精确代数定义：波动性就是几何积的二阶二向量（正交楔积面积）投影。**
+
+把对称的共线粒子部分与反对称的正交波动部分直接加起来，就是克利福德在 1878 年写下的**几何积**：
+
+$$
+\vv{A}\vv{B} = \underbrace{\frac{\vv{A}\vv{B} + \vv{B}\vv{A}}{2}}_{\vv{A}\cdot\vv{B}\text{（共线粒子标量）}} + \underbrace{\frac{\vv{A}\vv{B} - \vv{B}\vv{A}}{2}}_{\vv{A}\wedge\vv{B}\text{（正交波动面积）}}.
+$$
+
+为什么作者说*“那面积与线、波与粒子,本质上就是一种场呀”*？因为没有脱离外积面积而孤立存在的内积线，也没有脱离内积线而悬空漂浮的外积面积——它们本来就是**同一个几何积多向量（multivector）场 $\vv{A}\vv{B}$ 在零阶标量扇区与二阶二向量扇区上的两个正交投影切片**！当你只拿对角粒子计数器去读它时，你只看见了实部 $\cos\theta$；当你让两条路径交汇做干涉实验时，你才看见了虚部二向量 $\sin\theta\,\vv{I}$。
+
+更妙的是，这一“一条几何积恒等式统摄全局”的视角，让我们能够把传统量子力学教科书里彼此割裂的**五大公设**翻译成一张严丝合缝的几何对照表：
+
+| 传统教科书五大公设 | 本书的零冗余几何还原 | 对应形式化定理与章节 |
+| :--- | :--- | :--- |
+| **公设一：态空间公设**（纯态为复希尔伯特空间射线） | 商去不可见全局相位 $U(1)$ 后，单比特纯态是三维实球面上的单位方向线 $\vv{a} \in S^2$，混合态是球内截短弦 $\norm{\vv{r}} \le 1$ | [@thm-ray-phase-rigidity]、[@prop-qubit-bloch-core]（[第一章](ch01-measurement.md)） |
+| **公设二：可观测量公设**（物理量为厄米算符 $A^* = A$） | 每次锐利判别都是球面上的幂等投影线 $P^2 = P = P^*$；每一张旋转平面 $J^2 = -I$ 乘以 $i$ 即对偶于一根厄米对合观测轴 $(iJ)^* = iJ$ | [@def-record-measurement]（[第三章](ch03-projectors-and-duality.md)）、[@thm-relative-complex-structure-square]（[第五章](ch05-complex-phase-and-rotors.md)） |
+| **公设三：玻恩概率公设**（测量概率 $p = \Tr(\rho P) = |\langle\phi\mid\psi\rangle|^2$） | 砍掉外部第 3 点 $C$，以已知态自身为基，取几何积的内积共线投影 $\vv{A}\cdot\vv{B} = \cos\theta$（希尔伯特半角余弦平方 $\cos^2(\theta/2)$） | [@thm-born-modulus-square]、[@thm-rank-one-born-pairing]（[第二章](ch02-born-rule.md)） |
+| **公设四：幺正演化公设**（量子门与薛定谔演化 $\rho \mapsto U\rho U^*$） | 由几何积的外积有向面积 $\vv{A}\wedge\vv{B} = \sin\theta\,\vv{I}$ 驱动的克利福德旋子 $R(\theta) = \exp(-\vv{B}\theta/2)$ 双侧刚体旋转 | [@thm-balanced-sum-skew-adjoint]（[第五章](ch05-complex-phase-and-rotors.md)）、[@thm-calibrated-unitary-group]（[第七章](ch07-geometric-time-and-speed-limits.md)） |
+| **公设五：投影坍缩与退相干公设**（测量后状态投影更新） | 系统与环境记录正交耦合后对环境求偏迹，在希尔伯特—施密特空间中执行正交捏合投影 $\Pi(\rho)$，丢弃横向外积相干面积 | [@thm-nonselective-marginal]（[第四章](ch04-decoherence.md)）、[@cor-pinching-pythagorean]（本章） |
+
+## 6.2 勾股守恒 $\cos^2\theta + \sin^2\theta = 1$：粒子的确定性与波的干涉面积此消彼长 {#sec-pythagorean-complementarity}
+
+既然几何积 $\vv{A}\vv{B}$ 同时装下了粒子内积 $\vv{A}\cdot\vv{B}$ 与波动外积 $\vv{A}\wedge\vv{B}$，这两部分在数量上遵循什么铁律？
+
+在有限维实欧氏空间 $\mathbb{R}^n$ 中，任取两根向量 $\vv{u} = (u_i)_{i \in s}$ 与 $\vv{v} = (v_i)_{i \in s}$。它们模长平方的乘积 $\|\vv{u}\|^2\|\vv{v}\|^2$，减去它们内积的平方 $(\vv{u}\cdot\vv{v})^2$，剩下的差究竟是什么？十八世纪的拉格朗日（J.-L. Lagrange）写下了著名的代数恒等式：这个差一分不差地等于所有二维坐标平面 $(i, j)$ 上张成的有向平行四边形面积元 $u_i v_j - u_j v_i$ 的平方和的一半——即外积二向量模长的平方 $\|\vv{u}\wedge\vv{v}\|^2$！
+
+在 Lean 模块 `QuantumBounds/LagrangeGramIdentity` 中，这条连接内积线与外积面的基石恒等式对任意有限指标集 $s : \mathrm{Finset}\,\iota$ 得到了完全严格的形式化证明。
+
+::: {.theorem #thm-lagrange-gram-identity title="拉格朗日—格拉姆内积与外积二向量平方守恒恒等式" lean="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"}
+设 $\iota$ 为指标类型，$s : \mathrm{Finset}\,\iota$ 为有限指标集，$u, v : \iota \to \mathbb{R}$ 为实值向量函数。则两向量模长平方之积减去内积之平方，恒等于全部分量二阶外积行列式 $(u_i v_j - u_j v_i)$ 的平方和之半：
+
+$$
+\left(\sum_{i \in s} u_i^2\right)\left(\sum_{i \in s} v_i^2\right) - \left(\sum_{i \in s} u_i v_i\right)^2 = \frac{1}{2}\sum_{i \in s}\sum_{j \in s} (u_i v_j - u_j v_i)^2.
+$$
+:::
+
+::: proof
+将右端双重求和中的平方项 $(u_i v_j - u_j v_i)^2 = u_i^2 v_j^2 - 2 u_i v_i u_j v_j + u_j^2 v_i^2$ 逐项展开并按有限和的线性性拆分为三项：第一项 $\sum_{i \in s}\sum_{j \in s} u_i^2 v_j^2$ 与第三项 $\sum_{i \in s}\sum_{j \in s} u_j^2 v_i^2$ 重排求和哑指标后均等于 $\bigl(\sum_{i \in s} u_i^2\bigr)\bigl(\sum_{i \in s} v_i^2\bigr)$，而中间交叉项 $-2\sum_{i \in s}\sum_{j \in s} (u_i v_i)(u_j v_j)$ 因式分解为 $-2\bigl(\sum_{i \in s} u_i v_i\bigr)^2$。三项相加后再除以 $2$，恰得左端 $\bigl(\sum_{i \in s} u_i^2\bigr)\bigl(\sum_{i \in s} v_i^2\bigr) - \bigl(\sum_{i \in s} u_i v_i\bigr)^2$。完整证明由 Lean 内核检查。
+:::
+
+请细细品味 [@thm-lagrange-gram-identity] 的几何含义：把减号移到右边，它写出的就是
+
+$$
+\underbrace{\|\vv{u}\|^2 \|\vv{v}\|^2}_{\text{总几何容量}} = \underbrace{(\vv{u}\cdot\vv{v})^2}_{\text{粒子内积投影平方}} + \underbrace{\frac{1}{2}\sum_{i, j} (u_i v_j - u_j v_i)^2}_{\|\vv{u}\wedge\vv{v}\|^2\text{（波动外积面积平方）}}!
+$$
+
+特别地，当 $\vv{u}, \vv{v}$ 为单位向量（$\|\vv{u}\| = \|\vv{v}\| = 1$）时，上式立刻化为三角学第一恒等式 $\cos^2\theta + \sin^2\theta = 1$；同时因为右端外积平方和恒非负（$\|\vv{u}\wedge\vv{v}\|^2 \ge 0$），移项便立即给出柯西—施瓦茨不等式 $(\vv{u}\cdot\vv{v})^2 \le \|\vv{u}\|^2\|\vv{v}\|^2$——**原来柯西—施瓦茨不等式两边相差的那个“非负亏量”，不多不少，正是两根向量撑开的外积面积平方 $\|\vv{u}\wedge\vv{v}\|^2$！**
+
+![几何积 AB = A·B + A∧B 的内积粒子线与外积波动面分解、纯态记录互补勾股圆 D² + V² = 1，以及希尔伯特—施密特捏合正交勾股分解](../assets/fig-06-geometric-product-pythagoras.svg)
+
+现在，把这套拉格朗日—格拉姆勾股分解直接搬进复内积空间 $E$（Lean 模块 `QuantumBounds/RobertsonSchrodinger`）。对于任意两根复向量 $u, v \in E$，前置引理 [`gram_wedge_identity`](lean:D5/S3/QuantumBounds/RobertsonSchrodinger.gram_wedge_identity) 证明了模方乘积分解为复内积模方与非负格拉姆楔积亏量 $G := \|u\|^2\|v\|^2 - \|\langle u, v\rangle_{\mathbb{C}}\|^2 \ge 0$ 之和：
+
+$$
+\|u\|^2\|v\|^2 = \|\langle u, v\rangle_{\mathbb{C}}\|^2 + G, \qquad G \ge 0.
+$$
+
+而在复内积 $\langle u, v\rangle_{\mathbb{C}} = \operatorname{Re}\langle u, v\rangle_{\mathbb{C}} + i\operatorname{Im}\langle u, v\rangle_{\mathbb{C}}$ 内部，实部与虚部又各自代表什么？给定单位量子态 $\psi \in E$（$\|\psi\| = 1$）以及两个对称可观测算子 $A, B : E \to_l E$，取中心化涨落向量 $u := A\psi - \langle\psi, A\psi\rangle_{\mathbb{C}}\psi$ 与 $v := B\psi - \langle\psi, B\psi\rangle_{\mathbb{C}}\psi$：
+
+- 它们的**实部内积** $\operatorname{Re}\langle u, v\rangle_{\mathbb{C}}$ 恰好是两可观测量的对称**量子协方差（covariance）** $\operatorname{cov}(A, B)_\psi = \frac{1}{2}\operatorname{Re}\langle\psi, (AB + BA)\psi\rangle_{\mathbb{C}} - \operatorname{Re}\langle\psi, A\psi\rangle_{\mathbb{C}}\operatorname{Re}\langle\psi, B\psi\rangle_{\mathbb{C}}$；
+- 它们的**虚部外积** $\operatorname{Im}\langle u, v\rangle_{\mathbb{C}}$ 恰好是两算子**对易子（commutator）**生成的有向面积期望 $\frac{1}{2i}\langle\psi, (AB - BA)\psi\rangle_{\mathbb{C}}$！
+
+于是，$\|\langle u, v\rangle_{\mathbb{C}}\|^2 = (\operatorname{Re}\langle u, v\rangle_{\mathbb{C}})^2 + (\operatorname{Im}\langle u, v\rangle_{\mathbb{C}})^2$ 与格拉姆楔积亏量 $G \ge 0$ 合在一起，当场给出了著名的**罗伯逊—薛定谔不确定性精确恒等式（Robertson–Schrödinger identity）**！
+
+::: {.theorem #thm-robertson-schrodinger title="罗伯逊—薛定谔方差、协方差、对易子面积与格拉姆亏量精确守恒定理" lean="D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger"}
+设 $E$ 为复内积空间，$A, B : E \to_l E$ 为满足对称性条件 $\forall x, y \in E,\, \langle Ax, y\rangle_{\mathbb{C}} = \langle x, Ay\rangle_{\mathbb{C}}$ 与 $\langle Bx, y\rangle_{\mathbb{C}} = \langle x, By\rangle_{\mathbb{C}}$ 的线性算子，$\psi \in E$ 为单位态向量（$\|\psi\| = 1$）。定义中心化涨落向量、对称协方差、半对易子期望及格拉姆亏量如下：
+
+$$
+\begin{aligned}
+u &:= A\psi - \langle\psi, A\psi\rangle_{\mathbb{C}}\psi, \qquad v := B\psi - \langle\psi, B\psi\rangle_{\mathbb{C}}\psi, \\
+\mathrm{cov} &:= \frac{1}{2}\operatorname{Re}\bigl\langle\psi, (AB + BA)\psi\bigr\rangle_{\mathbb{C}} - \operatorname{Re}\langle\psi, A\psi\rangle_{\mathbb{C}}\operatorname{Re}\langle\psi, B\psi\rangle_{\mathbb{C}} \in \mathbb{R}, \\
+C_{1/2} &:= \frac{1}{2i}\bigl\langle\psi, (AB - BA)\psi\bigr\rangle_{\mathbb{C}} \in \mathbb{C}, \\
+G &:= \|u\|^2\|v\|^2 - \|\langle u, v\rangle_{\mathbb{C}}\|^2 \in \mathbb{R}.
+\end{aligned}
+$$
+
+则以下三条结论同时成立：
+
+1. **四项勾股分解恒等式**：$\|u\|^2\|v\|^2 = \mathrm{cov}^2 + \|C_{1/2}\|^2 + G$；
+2. **格拉姆楔积亏量非负性**：$G \ge 0$（[`gram_wedge_identity`](lean:D5/S3/QuantumBounds/RobertsonSchrodinger.gram_wedge_identity)）；
+3. **复内积实虚部精确对应**：$\operatorname{Re}\langle u, v\rangle_{\mathbb{C}} = \mathrm{cov}$ 且 $(\operatorname{Im}\langle u, v\rangle_{\mathbb{C}} : \mathbb{C}) = C_{1/2}$。
+:::
+
+::: proof
+首先验证复内积 $\langle u, v\rangle_{\mathbb{C}}$ 的展开。因 $A, B$ 对称，对任意 $\psi \in E$ 有 $\langle\psi, A\psi\rangle_{\mathbb{C}} = \overline{\langle\psi, A\psi\rangle_{\mathbb{C}}}$，故期望值 $\langle\psi, A\psi\rangle_{\mathbb{C}}$ 与 $\langle\psi, B\psi\rangle_{\mathbb{C}}$ 均为纯实数；再利用 $\|\psi\| = 1$（即 $\langle\psi, \psi\rangle_{\mathbb{C}} = 1$）展开 $\langle A\psi - \langle\psi, A\psi\rangle_{\mathbb{C}}\psi,\, B\psi - \langle\psi, B\psi\rangle_{\mathbb{C}}\psi\rangle_{\mathbb{C}}$，交叉项合并后得到
+
+$$
+\langle u, v\rangle_{\mathbb{C}} = \langle A\psi, B\psi\rangle_{\mathbb{C}} - \operatorname{Re}\langle\psi, A\psi\rangle_{\mathbb{C}}\operatorname{Re}\langle\psi, B\psi\rangle_{\mathbb{C}}.
+$$
+
+再由算子对称性知 $\langle A\psi, B\psi\rangle_{\mathbb{C}} = \langle\psi, AB\psi\rangle_{\mathbb{C}}$ 且 $\overline{\langle A\psi, B\psi\rangle_{\mathbb{C}}} = \langle B\psi, A\psi\rangle_{\mathbb{C}} = \langle\psi, BA\psi\rangle_{\mathbb{C}}$。将任意复数 $z = \langle\psi, AB\psi\rangle_{\mathbb{C}}$ 按 $\operatorname{Re} z = \frac{1}{2}\operatorname{Re}(z + \overline{z})$ 与 $(\operatorname{Im} z : \mathbb{C}) = \frac{z - \overline{z}}{2i}$ 拆开，即得 $\operatorname{Re}\langle u, v\rangle_{\mathbb{C}} = \mathrm{cov}$ 与 $(\operatorname{Im}\langle u, v\rangle_{\mathbb{C}} : \mathbb{C}) = C_{1/2}$（结论 3）。由此得复模方分解 $\|\langle u, v\rangle_{\mathbb{C}}\|^2 = (\operatorname{Re}\langle u, v\rangle_{\mathbb{C}})^2 + (\operatorname{Im}\langle u, v\rangle_{\mathbb{C}})^2 = \mathrm{cov}^2 + \|C_{1/2}\|^2$；结合 [`gram_wedge_identity`](lean:D5/S3/QuantumBounds/RobertsonSchrodinger.gram_wedge_identity) 给出的 $\|u\|^2\|v\|^2 = \|\langle u, v\rangle_{\mathbb{C}}\|^2 + G$ 及 $G \ge 0$（由内积空间柯西—施瓦茨不等式 $\|\langle u, v\rangle_{\mathbb{C}}\| \le \|u\|\|v\|$ 平方即得），立即推出结论 1 与结论 2。完整证明由 Lean 内核检查。
+:::
+
+看清 [@thm-robertson-schrodinger] 的结构了吗？传统海森堡—罗伯逊不确定性不等式 $\Delta A^2\,\Delta B^2 = \|u\|^2\|v\|^2 \ge \|C_{1/2}\|^2 = \frac{1}{4}|\langle [A, B]\rangle|^2$ 并不是什么模糊的“测量扰动玄学”，而是因为左端总几何容量 $\|u\|^2\|v\|^2$ 等于三个非负实平方项 $\mathrm{cov}^2 + \|C_{1/2}\|^2 + G$ 之和！只要两算子的非对易面积 $\|C_{1/2}\|^2 > 0$ 不为零，哪怕协方差 $\mathrm{cov} = 0$ 且格拉姆亏量 $G = 0$，涨落乘积也绝不可能压到对易子面积 $\|C_{1/2}\|^2$ 以下！
+
+## 6.3 双缝干涉与惠勒延迟选择的纯几何拆解：拆掉面积还是保留面积？ {#sec-double-slit-delayed-choice}
+
+现在，让我们带着这把锋利的几何手术刀，走进费曼口中“包含了量子力学唯一真正奥秘”的**双缝干涉实验（double-slit interference）**与约翰·惠勒（John Archibald Wheeler）提出的**延迟选择思想实验（delayed-choice experiment）**。
+
+当一颗光子或电子穿过左缝 $\lvert L\rangle$ 与右缝 $\lvert R\rangle$ 时，如果在狭缝后方有某个环境自由度（或者路径探测器）试图记录“粒子到底走了哪条缝”，那么左缝分支会耦合到单位环境记录态 $r_L \in E$（$\|r_L\| = 1$），右缝分支会耦合到单位环境记录态 $r_R \in E$（$\|r_R\| = 1$）。
+
+请盯住这两根环境记录箭头 $r_L$ 与 $r_R$ 之间的复内积重叠幅 $c := \langle r_L, r_R\rangle_{\mathbb{C}}$：
+
+- **干涉条纹的可见度（coherence visibility）** $V := \|c\| = |\langle r_L, r_R\rangle_{\mathbb{C}}| = \cos\alpha \in [0, 1]$，正是两根记录向量共线重叠的**内积余弦**；
+- **路径记录的可区分度（record distinguishability）** $D := \sqrt{1 - V^2} = \sin\alpha \in [0, 1]$，正是两根记录向量垂直张开的**外积正弦面积模长**！
+
+在 Lean 模块 `Quantum/PureState/RecordCoherenceComplementarity` 中，下面这条核心定理严格证明了 $D$ 与 $V$ 满足丝毫不差的勾股守恒律 $D^2 + V^2 = 1$，并锁定了“纯粒子记录”与“纯波干涉”两个极端端点的充要条件。
+
+::: {.theorem #thm-record-coherence-complementarity title="纯态路径记录可区分度与相干可见度的勾股互补定理" lean="D5/S3/Quantum/PureState/RecordCoherenceComplementarity.pure_record_distinguishability_coherence_complementarity"}
+设 $E$ 为复内积空间，$r_L, r_R \in E$ 为左、右两条路径对应的单位环境记录态（满足 $\|r_L\| = 1$ 且 $\|r_R\| = 1$）。定义记录重叠幅、相干可见度与路径可区分度分别为
+
+$$
+c := \langle r_L, r_R\rangle_{\mathbb{C}} \in \mathbb{C}, \qquad V := \|c\| \in \mathbb{R}, \qquad D := \sqrt{1 - V^2} \in \mathbb{R}.
+$$
+
+则以下五条互补性质同时成立：
+
+1. **精确勾股互补圆**：$D^2 + V^2 = 1$；
+2. **正交记录导致纯粒子极限**：若 $c = 0$（两环境记录正交），则 $D = 1$ 且 $V = 0$；
+3. **平行记录导致纯波动极限**：若 $V = 1$（两环境记录完全重叠），则 $D = 0$ 且 $V = 1$；
+4. **完全路径区分彻底抹除干涉项**：若 $D = 1$，则 $V = 0$，且对任意复振幅 $a \in \mathbb{C}$ 恒有 $c \cdot a = 0$；
+5. **完全干涉可见度抹除路径信息**：若 $V = 1$，则 $D = 0$。
+:::
+
+::: proof
+由内积空间柯西—施瓦茨不等式及单位范数条件 $\|r_L\| = \|r_R\| = 1$，有 $0 \le V = \|\langle r_L, r_R\rangle_{\mathbb{C}}\| \le \|r_L\|\|r_R\| = 1$，故 $1 - V^2 \ge 0$。对非负实数 $1 - V^2$ 取算术平方根后再平方，得 $D^2 = (\sqrt{1 - V^2})^2 = 1 - V^2$，移项即得 $D^2 + V^2 = 1$（性质 1）。若 $c = 0$，则 $V = \|0\| = 0$ 且 $D = \sqrt{1 - 0} = 1$（性质 2）。若 $V = 1$，则 $D = \sqrt{1 - 1^2} = 0$（性质 3 与性质 5）。反之若 $D = 1$，代入性质 1 得 $1 + V^2 = 1$，故 $V^2 = 0 \implies V = \|c\| = 0 \implies c = 0$，从而对任意 $a \in \mathbb{C}$ 均有 $c \cdot a = 0 \cdot a = 0$（性质 4）。完整证明由 Lean 内核检查。
+:::
+
+同时，从单比特约化密度矩阵 $\rho \in M_2(\mathbb{C})$ 的视角来看（回忆[第四章](ch04-decoherence.md)的 [@thm-pinching-pythagorean]），当环境记录彻底正交（$c = 0$）并执行标准基捏合投影 $\Pi(\rho)$（[`pinching`](lean:D5/S3/QuantumChannels/Pinching.pinching)）时，对角粒子布居 $\Pi(\rho)$ 与副对角波动相干残差 $\rho - \Pi(\rho)$ 在希尔伯特—施密特内积（[`hilbertSchmidtInner`](lean:D5/S3/QuantumChannels/Pinching.hilbertSchmidtInner)）下严格正交（[`pinching_hilbert_schmidt_orthogonal`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_orthogonal)）。我们将其作为本章几何积正交分解在算子空间上的直接推论重申如下：
+
+::: {.corollary #cor-pinching-pythagorean title="单比特捏合投影的正交勾股分解与副对角波动相干质量" lean="D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass"}
+对任意单比特矩阵 $\rho \in M_2(\mathbb{C})$ 及标准基对角捏合算子 $\Pi(\rho)_{ij} = \delta_{ij}\rho_{ij}$（[`pinching`](lean:D5/S3/QuantumChannels/Pinching.pinching)），对角粒子部分 $\Pi(\rho)$ 与副对角相干残差 $\rho - \Pi(\rho)$ 在希尔伯特—施密特内积 $\langle X, Y\rangle_{\mathrm{HS}} = \Tr(X^* Y)$ 下正交（$\langle \Pi(\rho),\, \rho - \Pi(\rho)\rangle_{\mathrm{HS}} = 0$，[`pinching_hilbert_schmidt_orthogonal`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_orthogonal)），故总希尔伯特—施密特范数平方满足正交勾股分解
+
+$$
+\langle \rho, \rho\rangle_{\mathrm{HS}} = \langle \Pi(\rho), \Pi(\rho)\rangle_{\mathrm{HS}} + \langle \rho - \Pi(\rho),\, \rho - \Pi(\rho)\rangle_{\mathrm{HS}},
+$$
+
+且被捏合抹去的副对角波动相干质量恒等于
+
+$$
+\langle \rho - \Pi(\rho),\, \rho - \Pi(\rho)\rangle_{\mathrm{HS}} = |\rho_{01}|^2 + |\rho_{10}|^2.
+$$
+:::
+
+::: proof
+由 [`pinching_hilbert_schmidt_orthogonal`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_orthogonal) 知交叉内积 $\langle \Pi(\rho),\, \rho - \Pi(\rho)\rangle_{\mathrm{HS}} = 0$ 且 $\langle \rho - \Pi(\rho),\, \Pi(\rho)\rangle_{\mathrm{HS}} = 0$，对恒等分解 $\rho = \Pi(\rho) + (\rho - \Pi(\rho))$ 展开双线性内积即得勾股分解式；将 $2\times 2$ 矩阵 $\rho - \Pi(\rho) = \bigl(\begin{smallmatrix} 0 & \rho_{01} \\ \rho_{10} & 0 \end{smallmatrix}\bigr)$ 代入 $\Tr((\rho - \Pi(\rho))^*(\rho - \Pi(\rho)))$ 即得 $|\rho_{01}|^2 + |\rho_{10}|^2$。完整证明由 Lean 内核检查。
+:::
+
+现在再看惠勒的“延迟选择实验”，哪里还有半点“现在的测量窜改了光子几亿年前是粒子还是波的历史”的玄学惊悚？
+
+::: {.example #ex-wheeler-delayed-choice-tradeoff title="双路径干涉仪与惠勒延迟选择的三档角度（α = 0, π/3, π/2）定量账本"}
+设双路径干涉仪中系统初态为等权叠加 $\frac{1}{\sqrt{2}}(\lvert 0\rangle + \lvert 1\rangle)$，与环境记录态耦合为 $\frac{1}{\sqrt{2}}(\lvert 0\rangle\otimes\lvert r_L\rangle + \lvert 1\rangle\otimes\lvert r_R\rangle)$，其中两单位记录态夹角为 $\alpha \in [0, \pi/2]$，即 $c = \langle r_L, r_R\rangle = \cos\alpha$。忽略环境后的单比特约化密度矩阵为
+
+$$
+\rho(\alpha) = \frac{1}{2}\begin{pmatrix} 1 & \cos\alpha \\ \cos\alpha & 1 \end{pmatrix}.
+$$
+
+由 [@thm-record-coherence-complementarity] 与 [@cor-pinching-pythagorean]，我们在三档典型实验夹角下直接算出粒子可区分度 $D$、干涉可见度 $V$ 及副对角相干质量 $|\rho_{01}|^2 + |\rho_{10}|^2 = \frac{1}{2}\cos^2\alpha$：
+
+| 环境记录夹角 $\alpha$ | 记录内积 $c = \cos\alpha$ | 干涉可见度 $V$ | 路径可区分度 $D = \sin\alpha$ | 勾股校验 $D^2 + V^2$ | 约化态相干质量 $|\rho_{01}|^2 + |\rho_{10}|^2$ | 物理图景（惠勒延迟选择） |
+| :---: | :---: | :---: | :---: | :---: | :---: | :--- |
+| **$\alpha = 0$**（量子擦除 / 合束） | $1$ | $1$ | $0$ | $0 + 1 = 1$ | $\frac{1}{4} + \frac{1}{4} = \frac{1}{2}$ | 环境未区分路径，完整保留二维外积干涉面积 |
+| **$\alpha = \frac{\pi}{3} = 60^\circ$**（部分标记） | $\frac{1}{2}$ | $\frac{1}{2}$ | $\frac{\sqrt{3}}{2} \approx 0.866$ | $\frac{3}{4} + \frac{1}{4} = 1$ | $\frac{1}{16} + \frac{1}{16} = \frac{1}{8}$ | 半粒子半波：可见度保留 $50\%$，路径区分度 $86.6\%$ |
+| **$\alpha = \frac{\pi}{2} = 90^\circ$**（正交标记） | $0$ | $0$ | $1$ | $1 + 0 = 1$ | $0$（标记前 $\frac{1}{2}$ 已转入环境） | 正交记录将局部态捏合为一维对角线 $\frac{1}{2}I_2$，干涉归零 |
+
+所谓的“延迟选择”，根本不是时光倒流：在合束器前，联合态 $\frac{1}{\sqrt{2}}(\lvert 0\rangle\lvert r_L\rangle + \lvert 1\rangle\lvert r_R\rangle)$ 本就是一个同时包含对角线与异号交叉块的完整几何积场；你在终点处选择放上正交读出器（投影到对角粒子线）还是干涉合束器（投影到横向二向量面积），只是在决定**你的探测器在终点处截取这个联合场的哪一个正交投影面**！
+:::
+
+::: {.remark #rem-englert-greenberger-literature title="Wootters–Zurek、Greenberger–Yasin 与 Englert 波粒二象性不等式（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 本章的 [@thm-record-coherence-complementarity] 针对纯环境记录态 $\|r_L\| = \|r_R\| = 1$ 给出了以记录重叠度 $V = |\langle r_L, r_R\rangle|$ 定义的可见度与 $D = \sqrt{1 - V^2}$ 之间的精确勾股等式 $D^2 + V^2 = 1$。在量子光学与干涉学文献中，关于定量波粒二象性的历史演进与混合态推广包括：
+
+1. **Wootters–Zurek 双缝信息分析（W. K. Wootters & W. H. Zurek, 1979）**：在 *Complementarity in the double-slit experiment: Quantum nonseparability and a quantitative statement of Bohr's principle*（Phys. Rev. D **19**, 473–484, 1979）中，首次证明了即便只获取极微弱的部分路径信息，干涉条纹可见度也能保持相当高的数值（如 [@ex-wheeler-delayed-choice-tradeoff] 中 $D = \frac{\sqrt{3}}{2} \approx 86.6\%$ 时仍有 $V = 50\%$ 的清晰条纹）。
+2. **Greenberger–Yasin 可预测性对偶（D. M. Greenberger & A. Yasin, 1988）与 Jaeger–Shimony–Vaidman（1995）**：对于双通道先验布居不对称 $p_0 \neq p_1$ 的纯态，先验路径可预测度 $P := |p_0 - p_1|$ 与干涉可见度 $V = 2|\rho_{01}|$ 满足 $P^2 + V^2 \le 1$（纯态取等号，即本书[第三章](ch03-projectors-and-duality.md) [@thm-complementary-pythagoras] 导出的布洛赫球关系 $r_z^2 + (r_x^2 + r_y^2) = \|\vv{r}\|^2 \le 1$）。
+3. **Englert 混合环境一般对偶不等式（B.-G. Englert, 1996）**：在 *Fringe visibility and which-way information: An inequality*（Phys. Rev. Lett. **77**, 2154–2157, 1996）中，Englert 用两个一般混合环境态 $\rho_L, \rho_R$ 之间的迹距离（trace distance）独立定义无偏路径可区分度 $D_{\mathrm{tr}} := \frac{1}{2}\Tr|\rho_L - \rho_R|$，并证明了对任意混合环境初态恒有（Englert 1996 原文利用极分解与柯西—施瓦茨不等式直接导出；现代量子信息论文献亦常由 Fuchs–van de Graaf 迹距离—保真度不等式给出等价证明）
+   $$
+   D_{\mathrm{tr}}^2 + V^2 \le 1,
+   $$
+   其中当双路径先验权重相等（$p_0 = p_1 = \frac{1}{2}$）且系统与环境初态均为纯态（如 [@thm-record-coherence-complementarity] 的等权纯记录模型，此时纯态迹距离 $\frac{1}{2}\Tr|\lvert r_L\rangle\langle r_L\rvert - \lvert r_R\rangle\langle r_R\rvert| = \sqrt{1 - |\langle r_L, r_R\rangle|^2} = D$）时，不等式饱和为单位圆精确等号 $D_{\mathrm{tr}}^2 + V^2 = 1$；而对一般混合态则有 $D_{\mathrm{tr}}^2 + V^2 \le 1$（注：当两路径条件标记幺正算子完全相同时，混合环境亦可平凡地取到 $D_{\mathrm{tr}} = 0, V = 1$ 的等号）。
+
+一般混合环境迹距离下的 Englert 不等式作为文献背景引述，不列入本书的 Lean 形式化验证账本。
+:::
+
+## 6.4 交互实验：亲手拨动两子几何积、粒子内积与波动外积面 {#sec-interactive-qubit-geometry}
+
+百闻不如一试。在下面的交互实验室 **`ORTHO//QUBIT`（两子几何积与互补圆实验室）** 中，你可以亲手拖动极角 $\theta$、方位相位角 $\varphi$、环境记录夹角 $\alpha$ 与退相干捏合强度 $\eta$，并点击单比特量子门旋子按钮（`X`, `Y`, `Z`, `H`, `S`, `T`）：
+
+- 在左侧三维布洛赫球视图中，实时观察琥珀色当前门后纯态矢量 $\rho_0 = \vv{B}(\theta,\varphi)$ 如何分解为青色共线内积粒子线 $\vv{A}\cdot\vv{B} = \cos\theta$ 与紫色正交外积波动平行四边形 $\vv{A}\wedge\vv{B} = \sin\theta\,\vv{I}$；
+- 在右上角互补圆视图中，检验路径可区分度 $D = \sin\alpha$ 与干涉可见度 $V = \cos\alpha$ 如何永远锁定在勾股互补圆 $D^2 + V^2 = 1$（`LEAN ✓`，[@thm-record-coherence-complementarity]）上；
+- 在右下角希尔伯特—施密特柱状图中，观察保单位退相干与捏合投影 $\Pi(\rho_0)$ 如何把当前态 $\rho(\eta)$ 的纯度正交拆分为对角粒子布居范数 $\langle\Pi(\rho_0),\Pi(\rho_0)\rangle_{\mathrm{HS}}$ 与副对角波动相干质量 $|\rho_{01}(\eta)|^2 + |\rho_{10}(\eta)|^2$（[@cor-pinching-pythagorean]），并实时读出当前态剩余相对熵相干 $D(\rho(\eta) \,\|\, \Pi(\rho_0)) = S(\Pi(\rho_0)) - S(\rho(\eta))$（将在[第八章](ch08-erasure-and-time-arrows.md)严格证明）。
+
+::: {.viz src="qubit-geometry" height="560"}
+交互实验室 `ORTHO//QUBIT`：拨动极角 $\theta$、相位角 $\varphi$、环境记录夹角 $\alpha$ 与捏合强度 $\eta$，或点击单比特旋子门 `X, Y, Z, H, S, T`，实时检验几何积分解 $\vv{A}\vv{B} = \vv{A}\cdot\vv{B} + \vv{A}\wedge\vv{B}$、纯态记录互补圆 $D^2 + V^2 = 1$ 与希尔伯特—施密特捏合勾股定理。
+:::
+
+既然“粒子是线，面积是波，两者合起来是同一个几何积场”，那么当这片有向面积随着物理参数连续扫掠时，这个被我们称作“时间”的维度，在几何上又是什么？为什么作者会脱口而出*“我的直觉是,线是经典时间,面积是量子时间”*？让我们进入[第七章](ch07-geometric-time-and-speed-limits.md)。

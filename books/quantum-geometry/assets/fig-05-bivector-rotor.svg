@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 420" width="920" height="420">
+  <defs>
+    <marker id="f5-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M1 1.5L8.5 5L1 8.5Z" fill="#19f0ff"/>
+    </marker>
+    <marker id="f5-vio" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M1 1.5L8.5 5L1 8.5Z" fill="#9d8cff"/>
+    </marker>
+    <marker id="f5-mag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M1 1.5L8.5 5L1 8.5Z" fill="#ff2fd0"/>
+    </marker>
+    <marker id="f5-amb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M1 1.5L8.5 5L1 8.5Z" fill="#ffc83d"/>
+    </marker>
+  </defs>
+
+  <!-- Outer Dark Stage Frame -->
+  <rect x="4" y="4" width="912" height="412" rx="12" fill="#07101b" stroke="#143049" stroke-width="1.5"/>
+  <line x1="306" y1="28" x2="306" y2="352" stroke="#143049" stroke-width="1.2"/>
+  <line x1="614" y1="28" x2="614" y2="352" stroke="#143049" stroke-width="1.2"/>
+
+  <g font-family="JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, system-ui, sans-serif">
+    <!-- PANEL I: Unit Bivector I = e1 ^ e2 & Two 90-degree Turns (I^2 = -1) -->
+    <text x="155" y="38" text-anchor="middle" font-size="12" font-weight="600" fill="#19f0ff">I · UNIT BIVECTOR I = e₁ ∧ e₂ (I² = −1)</text>
+    <text x="155" y="56" text-anchor="middle" font-size="11" fill="#6f8ea5">两次 90° 正交转向 = 180° 反向 / Two 90° Turns</text>
+
+    <!-- Oriented Bivector Plane Disk -->
+    <circle cx="155" cy="176" r="82" fill="#9d8cff" fill-opacity="0.07" stroke="#34506a" stroke-width="1.2" stroke-dasharray="4 3"/>
+    <!-- Shaded wedge e1 ^ e2 -->
+    <path d="M 155 176 L 233 176 L 233 98 L 155 98 Z" fill="#9d8cff" fill-opacity="0.16" stroke="#9d8cff" stroke-width="1" stroke-dasharray="3 2"/>
+    <text x="242" y="88" text-anchor="middle" font-size="10.5" font-weight="600" fill="#9d8cff">I = e₁ ∧ e₂</text>
+
+    <!-- +e1 vector (right) -->
+    <line x1="155" y1="176" x2="233" y2="176" stroke="#19f0ff" stroke-width="2.6" marker-end="url(#f5-cyan)"/>
+    <text x="246" y="180" text-anchor="start" font-size="12" font-weight="600" fill="#19f0ff">+e₁</text>
+
+    <!-- +e2 vector (up, after 1st 90 deg turn) -->
+    <line x1="155" y1="176" x2="155" y2="98" stroke="#9d8cff" stroke-width="2.6" marker-end="url(#f5-vio)"/>
+    <text x="155" y="86" text-anchor="middle" font-size="12" font-weight="600" fill="#9d8cff">+e₂ = e₁I</text>
+
+    <!-- -e1 vector (left, after 2nd 90 deg turn) -->
+    <line x1="155" y1="176" x2="77" y2="176" stroke="#ff2fd0" stroke-width="2.6" marker-end="url(#f5-mag)"/>
+    <text x="64" y="180" text-anchor="end" font-size="12" font-weight="600" fill="#ff2fd0">−e₁</text>
+
+    <!-- Quarter-turn arcs (radius 26, strictly clear of all labels and r=82 circle) -->
+    <path d="M 181 176 A 26 26 0 0 0 155 150" fill="none" stroke="#9d8cff" stroke-width="1.8" marker-end="url(#f5-vio)"/>
+    <text x="174" y="142" text-anchor="start" font-size="8.8" fill="#9d8cff">+90°(×I)</text>
+    <path d="M 155 150 A 26 26 0 0 0 129 176" fill="none" stroke="#ff2fd0" stroke-width="1.8" marker-end="url(#f5-mag)"/>
+    <text x="136" y="142" text-anchor="end" font-size="8.8" fill="#ff2fd0">+90°(×I)</text>
+
+    <text x="155" y="286" text-anchor="middle" font-size="11.5" fill="#d4efff">e₁ ↦ e₁I = e₂ ↦ (e₁I)I = −e₁</text>
+    <text x="155" y="308" text-anchor="middle" font-size="11" fill="#6f8ea5">复数 i 不是神秘虚数，而是平面 90° 转向算子</text>
+    <text x="155" y="326" text-anchor="middle" font-size="9.5" fill="#6f8ea5">Complex i = planar 90° quarter-turn generator</text>
+
+    <!-- PANEL II: Balanced Unitary Sum S = A + B & Relative Complex Structure J = 2AB* -->
+    <text x="460" y="38" text-anchor="middle" font-size="12" font-weight="600" fill="#9d8cff">II · BALANCED SUM S = A + B ⇒ J² = −I</text>
+    <text x="460" y="56" text-anchor="middle" font-size="11" fill="#6f8ea5">双半模分量正交交叉生成相对复结构 / Relative J</text>
+
+    <!-- Orthogonal frame for A and B -->
+    <rect x="322" y="76" width="276" height="184" rx="8" fill="#050c16" stroke="#1f4260" stroke-width="1.2"/>
+    <!-- Origin at (354, 206) -->
+    <!-- A = X / sqrt(2) horizontal -->
+    <line x1="354" y1="206" x2="462" y2="206" stroke="#19f0ff" stroke-width="2.6" marker-end="url(#f5-cyan)"/>
+    <text x="408" y="232" text-anchor="middle" font-size="9.8" fill="#19f0ff">A = X/√2 (AA† = ½I)</text>
+    <!-- B = Z / sqrt(2) vertical -->
+    <line x1="354" y1="206" x2="354" y2="112" stroke="#9d8cff" stroke-width="2.6" marker-end="url(#f5-vio)"/>
+    <text x="334" y="98" text-anchor="start" font-size="9.8" fill="#9d8cff">B = Z/√2 (B†B = ½I)</text>
+    <!-- Balanced unitary sum S = A + B diagonal -->
+    <line x1="354" y1="206" x2="462" y2="112" stroke="#ff2fd0" stroke-width="2.4" stroke-dasharray="5 3" marker-end="url(#f5-mag)"/>
+    <text x="474" y="116" text-anchor="start" font-size="10" font-weight="600" fill="#ff2fd0">S = A + B = H</text>
+    <!-- Shaded bivector cross product J = 2AB† -->
+    <polygon points="354,206 462,206 462,112 354,112" fill="#9d8cff" fill-opacity="0.14"/>
+    <text x="474" y="148" text-anchor="start" font-size="10.2" font-weight="600" fill="#d4efff">J := 2AB† = −iY</text>
+    <text x="474" y="168" text-anchor="start" font-size="9.2" fill="#46ffb2">LEAN ✓ J†=−J, J²=−I</text>
+    <text x="474" y="186" text-anchor="start" font-size="9.2" fill="#46ffb2">JJ† = I (右幺正)</text>
+
+    <text x="460" y="282" text-anchor="middle" font-size="10.2" fill="#d4efff">SS† = I ⇒ AB† + BA† = 0 ⇒ (AB†)† = −AB†</text>
+    <text x="460" y="304" text-anchor="middle" font-size="9.8" fill="#46ffb2">LEAN ✓  (iJ)† = iJ, (iJ)² = I (Hermitian involution)</text>
+    <text x="460" y="326" text-anchor="middle" font-size="11" fill="#6f8ea5">单根线无面积，两正交分量交叉张出旋转生成元 J</text>
+
+    <!-- PANEL III: Clifford Rotor Sandwich v' = R(theta) v R(theta)* -->
+    <text x="765" y="38" text-anchor="middle" font-size="12" font-weight="600" fill="#19f0ff">III · CLIFFORD ROTOR R(θ) = e^(−Bθ/2)</text>
+    <text x="765" y="56" text-anchor="middle" font-size="11" fill="#6f8ea5">半角旋子双侧夹乘 = 球面整角旋转 θ</text>
+
+    <!-- Bloch Sphere & Equatorial Plane B -->
+    <circle cx="765" cy="172" r="76" fill="#19f0ff" fill-opacity="0.04" stroke="#34506a" stroke-width="1.4"/>
+    <ellipse cx="765" cy="172" rx="76" ry="24" fill="#9d8cff" fill-opacity="0.12" stroke="#9d8cff" stroke-width="1.4"/>
+    <!-- Rotation axis n = *B -->
+    <line x1="765" y1="248" x2="765" y2="88" stroke="#19f0ff" stroke-width="2" stroke-dasharray="4 2" marker-end="url(#f5-cyan)"/>
+    <text x="765" y="80" text-anchor="middle" font-size="11" fill="#19f0ff">axis n̂ = ⋆B</text>
+
+    <!-- Initial vector v -->
+    <line x1="765" y1="172" x2="829" y2="184" stroke="#19f0ff" stroke-width="2.4" marker-end="url(#f5-cyan)"/>
+    <text x="850" y="190" text-anchor="start" font-size="11" font-weight="600" fill="#19f0ff">v</text>
+
+    <!-- Rotated active vector v' = R(theta) v R(theta)* in Amber (single selected present rotor angle theta) -->
+    <line x1="765" y1="172" x2="718" y2="191" stroke="#ffc83d" stroke-width="3" marker-end="url(#f5-amb)"/>
+    <circle cx="718" cy="191" r="3.5" fill="#ffc83d"/>
+    <text x="678" y="202" text-anchor="end" font-size="11" font-weight="600" fill="#ffc83d">v′(θ)</text>
+
+    <!-- Active rotation arc theta on plane -->
+    <path d="M 808 180 A 48 16 0 0 1 734 185" fill="none" stroke="#ffc83d" stroke-width="2.2" marker-end="url(#f5-amb)"/>
+    <text x="765" y="264" text-anchor="middle" font-size="10.2" font-weight="600" fill="#ffc83d">θ = θ/2 + θ/2</text>
+
+    <text x="764" y="286" text-anchor="middle" font-size="11" fill="#d4efff">R(θ) = cos(θ/2)I − B sin(θ/2)</text>
+    <text x="764" y="306" text-anchor="middle" font-size="9.8" fill="#d4efff">v′ = R(θ)vR(θ)† (左乘 θ/2 + 右乘 θ/2 = 整角 θ)</text>
+    <text x="764" y="326" text-anchor="middle" font-size="9.8" fill="#46ffb2">LEAN ✓  z̄ = (u⁻¹)²z, ‖u‖=1 ⇒ z = u·r (r ∈ ℝ)</text>
+
+    <!-- Bottom Lean-verified summary bar -->
+    <rect x="24" y="364" width="872" height="34" rx="6" fill="#050c16" stroke="#1f5d7c" stroke-width="1"/>
+    <text x="460" y="385" text-anchor="middle" font-size="11" fill="#46ffb2">LEAN ✓  crossProduct_is_skewAdjoint_of_balanced_sum · square_eq_neg_one_of_skewAdjoint_unitary · relativeComplexStructure_square</text>
+  </g>
+</svg>

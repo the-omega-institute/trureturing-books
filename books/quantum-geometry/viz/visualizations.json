@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "visualizations": [
+    {
+      "id": "qubit-geometry",
+      "code": "ORTHO//QUBIT",
+      "title": "两子几何积 · 粒子内积线与波动外积面的勾股守恒与旋转门",
+      "title_en": "Pairwise geometric product · Pythagorean conservation of particle dot-line and wave wedge-area with rotor action",
+      "summary": "亲手调节单比特极角 θ、方位相位 φ、环境记录重叠角 α 与退相干捏合强度 η，实时观测几何积 AB = A·B + A∧B 的内积粒子线 cos θ 与外积波动面 sin θ、记录可区分度与相干可见度的勾股圆 D² + V² = 1、SU(2)/SO(3) 旋子门序列以及希尔伯特—施密特捏合正交分解与相对熵删除账单。",
+      "summary_en": "Interactively adjust qubit polar angle θ, azimuthal phase φ, environmental record overlap angle α, and pinching decoherence strength η to inspect the geometric product AB = A·B + A∧B, the Pythagorean complementarity circle D² + V² = 1, SU(2)/SO(3) Clifford rotor gates, and the Hilbert–Schmidt pinching decomposition and relative-entropy deletion ledger.",
+      "path": "qubit-geometry/",
+      "thumbnail": "qubit-geometry/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-10",
+      "tags": [
+        "几何积",
+        "克利福德旋子",
+        "勾股互补 D²+V²=1",
+        "捏合正交分解",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Geometric product",
+        "Clifford rotor",
+        "Pythagorean duality D²+V²=1",
+        "Pinching decomposition",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第六章 · 几何积 AB = A·B + A∧B",
+          "label_en": "Chapter 6 · Geometric Product AB = A·B + A∧B",
+          "href": "../zh/ch06-geometric-product.html",
+          "href_en": "../en/ch06-geometric-product.html"
+        },
+        {
+          "label": "Lean 源码 · RecordCoherenceComplementarity.lean",
+          "label_en": "Lean source · RecordCoherenceComplementarity.lean",
+          "href": "{trureturing}/D5/S3/Quantum/PureState/RecordCoherenceComplementarity.lean"
+        }
+      ],
+      "lean": [
+        { "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" },
+        { "gid": "D5/S3/Quantum/PureState/RecordCoherenceComplementarity.pure_record_distinguishability_coherence_complementarity" },
+        { "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean" },
+        { "gid": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity" }
+      ]
+    }
+  ]
+}
