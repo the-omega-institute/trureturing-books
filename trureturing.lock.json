@@ -1829,6 +1829,54 @@
       "line": 42,
       "signature": "noncomputable def criticalAbscissa : ℝ"
     },
+    "D5/S3/Zeros/CompletedZeta.completedZetaReading": {
+      "module": "D5/S3/Zeros/CompletedZeta",
+      "name": "D5.S3.Zeros.CompletedZeta.completedZetaReading",
+      "kind": "def",
+      "statement_id": "sha256:d757f2e1548914d4fcc0c9979f1f66fa7b34d85d2f955a2663c7c075c5a064c2",
+      "line": 27,
+      "signature": "noncomputable def completedZetaReading (s : ℂ) : ℂ"
+    },
+    "D5/S3/Zeros/CompletedZeta.xiReading": {
+      "module": "D5/S3/Zeros/CompletedZeta",
+      "name": "D5.S3.Zeros.CompletedZeta.xiReading",
+      "kind": "def",
+      "statement_id": "sha256:d757f2e1548914d4fcc0c9979f1f66fa7b34d85d2f955a2663c7c075c5a064c2",
+      "line": 31,
+      "signature": "noncomputable def xiReading (s : ℂ) : ℂ"
+    },
+    "D5/S3/Zeros/CompletedZeta.xi_reading_differentiable": {
+      "module": "D5/S3/Zeros/CompletedZeta",
+      "name": "D5.S3.Zeros.CompletedZeta.xi_reading_differentiable",
+      "kind": "theorem",
+      "statement_id": "sha256:d757f2e1548914d4fcc0c9979f1f66fa7b34d85d2f955a2663c7c075c5a064c2",
+      "line": 43,
+      "signature": "theorem xi_reading_differentiable : Differentiable ℂ xiReading"
+    },
+    "D5/S3/Zeros/CompletedZeta.xi_reading_eq_completed_zeta": {
+      "module": "D5/S3/Zeros/CompletedZeta",
+      "name": "D5.S3.Zeros.CompletedZeta.xi_reading_eq_completed_zeta",
+      "kind": "theorem",
+      "statement_id": "sha256:d757f2e1548914d4fcc0c9979f1f66fa7b34d85d2f955a2663c7c075c5a064c2",
+      "line": 35,
+      "signature": "theorem xi_reading_eq_completed_zeta {s : ℂ} (hs₀ : s ≠ 0) (hs₁ : s ≠ 1) : xiReading s = (1 / 2 : ℂ) * s * (s - 1) * completedZetaReading s"
+    },
+    "D5/S3/Zeros/CompletedZeta.xi_reading_reflection": {
+      "module": "D5/S3/Zeros/CompletedZeta",
+      "name": "D5.S3.Zeros.CompletedZeta.xi_reading_reflection",
+      "kind": "theorem",
+      "statement_id": "sha256:d757f2e1548914d4fcc0c9979f1f66fa7b34d85d2f955a2663c7c075c5a064c2",
+      "line": 50,
+      "signature": "@[simp] theorem xi_reading_reflection (s : ℂ) : xiReading (1 - s) = xiReading s"
+    },
+    "D5/S3/Zeros/Endpoints/XiEndpointValues.xi_reading_endpoint_values": {
+      "module": "D5/S3/Zeros/Endpoints/XiEndpointValues",
+      "name": "D5.S3.Zeros.Endpoints.XiEndpointValues.xi_reading_endpoint_values",
+      "kind": "theorem",
+      "statement_id": "sha256:0648d499fd32bc7fff51faf73ff211bb9072b7d2040d02d10bca7a2817bce22f",
+      "line": 17,
+      "signature": "theorem xi_reading_endpoint_values : xiReading 0 = (1 / 2 : ℂ) ∧ xiReading 1 = (1 / 2 : ℂ)"
+    },
     "D5/S3/Zeros/ZetaIdentities.riemann_zeta_dirichlet_sum": {
       "module": "D5/S3/Zeros/ZetaIdentities",
       "name": "D5.S3.Zeros.ZetaIdentities.riemann_zeta_dirichlet_sum",
