@@ -122,25 +122,30 @@
         <li><i class="sw am"></i><span class="zh">当前选择（θ₀、θₖ、螺距）</span><span class="en">Current choice (θ₀, θₖ, pitch)</span></li>
         <li><i class="sw ok"></i><span class="zh">Lean 4 已验证结论</span><span class="en">Lean 4 verified statements</span></li>
       </ul>
-      <div class="keys thumb-hide">
-        <span class="zh"><kbd>V</kbd> 切换多面体 · <kbd>[</kbd><kbd>]</kbd> 迭代步数 · <kbd>R</kbd> 重置 · 拖动左半画布旋转多面体</span>
-        <span class="en"><kbd>V</kbd> cycle polyhedron · <kbd>[</kbd><kbd>]</kbd> iteration steps · <kbd>R</kbd> reset · drag the left half to rotate</span>
-      </div>
     </section>
 
+    <footer class="rail" id="rail">
+      <div class="keys">
+        <span class="zh"><kbd>V</kbd> 切换多面体 · <kbd>[</kbd><kbd>]</kbd> 迭代步数 · <kbd>R</kbd> 重置 · 拖动多面体画格旋转视角</span>
+        <span class="en"><kbd>V</kbd> cycle polyhedron · <kbd>[</kbd><kbd>]</kbd> iteration steps · <kbd>R</kbd> reset · drag the polyhedron panel to rotate</span>
+      </div>
+    </footer>
+  </main>
+
+  <aside class="col side" aria-label="依据" data-aria-en="Evidence">
     <section class="panel sec" id="evidence">
-      <h2><span class="zh">形式化依据与认识论分层</span><span class="en">Formal Evidence &amp; Epistemic Tiers</span><span class="aside">trureturing · Lean 4</span></h2>
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
       <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">设 Address 非空、twist 无不动点、解码目录 decoderCatalog 满射，则相对语义对角线 g 从潜划分拓扑 partitionTopology(latent) 到离散输出拓扑不连续。已冻结：</span><span class="en">If Address is nonempty, twist has no fixed point and the decoder catalog is surjective, the relative semantic diagonal g is not continuous from the latent partition topology to the discrete output topology. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean#L30" target="_blank" rel="noopener"><code>complete_diagonal_not_continuous</code></a></span></div>
       <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">同一假设下四项同时成立：¬Refines(g, latent)；g 在旧拓扑下不连续；separationDeficit(latent, g) 非空；并入 conceptJoin(latent, g) 后观测拓扑严格加细。已冻结：</span><span class="en">Under the same hypotheses four settlements hold at once: ¬Refines(g, latent); g is discontinuous in the old topology; separationDeficit(latent, g) is nonempty; adjoining conceptJoin(latent, g) strictly refines the observation topology. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_topological_settlement" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean#L94" target="_blank" rel="noopener"><code>complete_diagonal_topological_settlement</code></a></span></div>
       <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">X 有限，U(A) ⊆ A 对一切 A 成立，S(n+1) = U(S n)，则存在 N ≤ |S 0| 使 n ≥ N 时 S n = S N，且严格变化步数 #{n | S(n+1) ≠ S n} ≤ |S 0|。已冻结：</span><span class="en">If X is finite, U(A) ⊆ A for every A and S(n+1) = U(S n), then some N ≤ |S 0| has S n = S N for all n ≥ N, and the number of strict changes #{n | S(n+1) ≠ S n} is at most |S 0|. Frozen: </span><a class="leanref" data-lean-gid="D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S1/FixedPoints/FiniteContractingStability.lean#L27" target="_blank" rel="noopener"><code>finite_contracting_updates_stabilize</code></a></span></div>
       <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">φ = (1 + √5)/2 > 0，goldenReciprocalMap(φ) = 1 + 1/φ = φ，且对一切 x > 0 有 1 + 1/x = x ⇔ x = φ。定理断言正实数上不动点唯一，不断言迭代收敛。已冻结：</span><span class="en">φ = (1 + √5)/2 > 0, goldenReciprocalMap(φ) = 1 + 1/φ = φ, and for every x > 0, 1 + 1/x = x ⇔ x = φ. The theorem asserts uniqueness of the positive fixed point, not convergence of the iteration. Frozen: </span><a class="leanref" data-lean-gid="D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean#L40" target="_blank" rel="noopener"><code>golden_fixed_point_unique</code></a></span></div>
-      <div class="lean argued" id="litBox"><span class="ok">LIT</span><span><span class="zh">文献结果，未在本书形式化：欧拉公式 χ(S²) = 2；笛卡尔总角亏 Σδᵥ = 2πχ = 720°；毛球定理；拉格朗日余项 |R₂N(θ)| ≤ |θ|²ᴺ/(2N)!；cos 在 [−1, 1] 上以 sin 1 &lt; 1 为压缩率（巴拿赫），唯一实不动点 θ* 为超越数（林德曼—魏尔斯特拉斯），故对一切代数数 q 有 |cos q − q| > 0。</span><span class="en">Literature results, not formalized in this book: Euler's χ(S²) = 2; Descartes's total defect Σδᵥ = 2πχ = 720°; the hairy ball theorem; the Lagrange remainder |R₂N(θ)| ≤ |θ|²ᴺ/(2N)!; cos contracts [−1, 1] with rate sin 1 &lt; 1 (Banach), and its unique real fixed point θ* is transcendental (Lindemann–Weierstrass), so |cos q − q| > 0 for every algebraic q.</span></span></div>
+      <div class="lean argued" id="litBox"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：欧拉公式 χ(S²) = 2；笛卡尔总角亏 Σδᵥ = 2πχ = 720°；毛球定理；拉格朗日余项 |R₂N(θ)| ≤ |θ|²ᴺ/(2N)!；cos 在 [−1, 1] 上以 sin 1 &lt; 1 为压缩率（巴拿赫），唯一实不动点 θ* 为超越数（林德曼—魏尔斯特拉斯），故对一切代数数 q 有 |cos q − q| > 0。</span><span class="en">Literature results, not formalized in this book: Euler's χ(S²) = 2; Descartes's total defect Σδᵥ = 2πχ = 720°; the hairy ball theorem; the Lagrange remainder |R₂N(θ)| ≤ |θ|²ᴺ/(2N)!; cos contracts [−1, 1] with rate sin 1 &lt; 1 (Banach), and its unique real fixed point θ* is transcendental (Lindemann–Weierstrass), so |cos q − q| > 0 for every algebraic q.</span></span></div>
       <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">开口螺旋 (cos t, sin t, p·t/2π) 是示意模型：它把“并入对角线坐标使观测拓扑严格加细”想象为沿新法向的一次抬升。Lean 定理讲的是划分拓扑，不是螺旋。</span><span class="en">The open helix (cos t, sin t, p·t/2π) is a schematic model: it pictures “adjoining the diagonal coordinate strictly refines the observation topology” as a lift along a new normal axis. The Lean theorems speak about partition topologies, not helices.</span></span></div>
       <div class="lean open"><span class="ok">OPEN</span><span><span class="zh">θ* 与 π 在 ℚ 上代数无关吗？这可由尚未解决的沙努埃尔猜想推出，目前仍是开放问题。</span><span class="en">Are θ* and π algebraically independent over ℚ? This would follow from Schanuel's conjecture, which remains open.</span></span></div>
       <div class="lean num"><span class="ok">NUM</span><span><span class="zh">本页是数值演示，不是证明：网格的 V、E、F、顶点度与角亏，泰勒余项，三种迭代与集合序列都由页面按双精度浮点实时算出；普遍定理的严格成立由上述 Lean 4 内核声明保证。</span><span class="en">This page is a numerical illustration, not a proof: the mesh counts V, E, F, vertex degrees and defects, the Taylor remainders, the three iterations and the set sequence are computed live in double-precision floating point; the general theorems are guaranteed by the Lean 4 declarations above.</span></span></div>
       <button class="chip" type="button" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
     </section>
-  </main>
+  </aside>
 </div>
 
 <div class="drawer" id="drawer" hidden>

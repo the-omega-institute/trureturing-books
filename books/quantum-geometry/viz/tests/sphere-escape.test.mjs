@@ -250,9 +250,10 @@ st = await D(() => SE_DEBUG.state());
 check('chip, number box, slider and steppers update (V=60, θ₀=75, N=5, pitch 0.26, k=9)', sameState(st, [2, 75, 5, 0.26, 9]), JSON.stringify(st));
 await page.locator('#vIdx').fill('4'); await settle();
 check('the V slider selects V = 642', (await D(() => SE_DEBUG.info().V)) === 642);
-await page.fill('#theta0Num', '999'); await page.press('#theta0Num', 'Enter');
-await page.fill('#pitchNum', '5'); await page.press('#pitchNum', 'Enter');
-await page.fill('#stepsNum', '-3'); await page.press('#stepsNum', 'Enter');
+// settle after each commit: a pending render rewrites every number box, which would undo a fill not yet committed
+await page.fill('#theta0Num', '999'); await page.press('#theta0Num', 'Enter'); await settle();
+await page.fill('#pitchNum', '5'); await page.press('#pitchNum', 'Enter'); await settle();
+await page.fill('#stepsNum', '-3'); await page.press('#stepsNum', 'Enter'); await settle();
 await page.fill('#taylorNNum', '0'); await page.press('#taylorNNum', 'Enter'); await settle();
 st = await D(() => SE_DEBUG.state());
 check('out-of-range inputs are clamped (θ₀ = 180, pitch = 0.50, k = 1, N = 1)', st.theta0 === 180 && near(st.pitch, 0.5) && st.steps === 1 && st.taylorN === 1, JSON.stringify(st));
@@ -281,10 +282,11 @@ const pix = await D(() => {
 check('the four panels are drawn and the left half shows magenta degree-5 vertices', pix.lit > 4000 && pix.magentaLeft > 60, JSON.stringify(pix));
 const yaw0 = await D(() => SE_DEBUG.state().yaw);
 const box = await page.locator('#view').boundingBox();
-await page.mouse.move(box.x + box.width * 0.25, box.y + box.height * 0.4);
-await page.mouse.down(); await page.mouse.move(box.x + box.width * 0.25 + 60, box.y + box.height * 0.4 + 10, { steps: 4 }); await page.mouse.up(); await settle();
+// (0.25 W, 0.18 H) lies in the polyhedron panel in both arrangements: landscape (left half, top 70 %) and portrait (top 36 %)
+await page.mouse.move(box.x + box.width * 0.25, box.y + box.height * 0.18);
+await page.mouse.down(); await page.mouse.move(box.x + box.width * 0.25 + 60, box.y + box.height * 0.18 + 10, { steps: 4 }); await page.mouse.up(); await settle();
 st = await D(() => SE_DEBUG.state());
-check('dragging the left half rotates the polyhedron without touching the parameters', st.yaw !== yaw0 && sameState(st, [3, 60, 3, 0.25, 10]));
+check('dragging the polyhedron panel rotates the polyhedron without touching the parameters', st.yaw !== yaw0 && sameState(st, [3, 60, 3, 0.25, 10]));
 let labels = await D(() => SE_DEBUG.labels());
 check('canvas labels carry the live Euler count, the Lean-checked set bound and θ*', labels.includes('V − E + F = 162 − 480 + 320 = 2')
   && labels.some((l) => /^LEAN ✓ N = \d+ ≤ \|S₀\| = \d+$/.test(l)) && labels.includes('θ* ≈ 0.739085'), labels.slice(0, 8).join(' | '));
@@ -365,6 +367,34 @@ for (const lang of ['zh', 'en']) {
     check(`no horizontal scroll at ${w}px (${lang})`, (await overflowX(page)) === 0);
   }
 }
+/* ---------- golden-carry frame: deck | center (+ key rail) | side, then two columns, then one ---------- */
+const frame = () => D(() => {
+  const q = (s) => document.querySelector(s);
+  const r = (s) => q(s).getBoundingClientRect();
+  return {
+    dom: !!q('.app > aside.col.deck > #inputs + #readouts') && !!q('.app > main.center > #stagePanel + footer.rail#rail > .keys')
+      && !!q('.app > aside.col.side > #evidence #infoBtn') && !!q('#evidence > h2 .aside'),
+    cols: getComputedStyle(q('.app')).gridTemplateColumns.split(' ').length,
+    inputs: r('#inputs').toJSON(), readouts: r('#readouts').toJSON(), stage: r('#stagePanel').toJSON(), evidence: r('#evidence').toJSON()
+  };
+});
+await page.setViewportSize({ width: 1440, height: 900 });
+await open('?lang=zh'); await settle();
+let fr = await frame();
+check('1440px: three columns — aside.col.deck (#inputs, #readouts) | main.center (#stagePanel, footer#rail .keys) | aside.col.side (#evidence, #infoBtn)',
+  fr.dom && fr.cols === 3 && fr.stage.left > fr.inputs.right - 1 && fr.evidence.left > fr.stage.right - 1
+  && Math.abs(fr.inputs.top - fr.stage.top) < 2 && Math.abs(fr.stage.top - fr.evidence.top) < 2, JSON.stringify(fr));
+await page.setViewportSize({ width: 1000, height: 900 });
+await open('?lang=zh'); await settle();
+fr = await frame();
+check('1000px: two columns — the deck first, then the stage and the evidence across the full width',
+  fr.cols === 2 && fr.stage.top >= fr.readouts.bottom - 1 && fr.evidence.top >= fr.stage.bottom - 1
+  && fr.stage.width > 1.8 * fr.inputs.width && Math.abs(fr.evidence.width - fr.stage.width) < 2 && (await overflowX(page)) === 0, JSON.stringify(fr));
+await page.setViewportSize({ width: 390, height: 844 });
+await open('?lang=zh'); await settle();
+fr = await frame();
+check('390px: one column in the order inputs → stage → readouts → evidence',
+  fr.cols === 1 && fr.stage.top >= fr.inputs.bottom - 1 && fr.readouts.top >= fr.stage.bottom - 1 && fr.evidence.top >= fr.readouts.bottom - 1, JSON.stringify(fr));
 await page.setViewportSize({ width: 390, height: 844 });
 await open('?lang=en'); await settle();
 labels = await D(() => SE_DEBUG.labels());
