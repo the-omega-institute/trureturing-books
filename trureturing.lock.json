@@ -1437,6 +1437,62 @@
       "line": 733,
       "signature": "theorem result : claim"
     },
+    "D5/S3/QuantumBounds/ClassicalFiberBound.DeterministicFiberModel": {
+      "module": "D5/S3/QuantumBounds/ClassicalFiberBound",
+      "name": "D5.S3.QuantumBounds.ClassicalFiberBound.DeterministicFiberModel",
+      "kind": "inductive",
+      "statement_id": "sha256:b0f4a78840c73750d0019a5282c2796251b339bc49991297f9e5b22013dafda3",
+      "line": 39,
+      "signature": "structure DeterministicFiberModel (Fiber : Type*) where alice : Fin 2 -> Fiber -> Bool bob : Fin 2 -> Fiber -> Bool /-- The real-valued observable associated to one Boolean answer table. -/ def observable {Fiber : Type*} (answer : Fiber -> Bool) : Fiber -> Real"
+    },
+    "D5/S3/QuantumBounds/ClassicalFiberBound.boolValue": {
+      "module": "D5/S3/QuantumBounds/ClassicalFiberBound",
+      "name": "D5.S3.QuantumBounds.ClassicalFiberBound.boolValue",
+      "kind": "def",
+      "statement_id": "sha256:b0f4a78840c73750d0019a5282c2796251b339bc49991297f9e5b22013dafda3",
+      "line": 27,
+      "signature": "def boolValue : Bool -> Real | false => -1 | true => 1 @[simp] theorem bool_value_sq (answer : Bool) : boolValue answer ^ 2 = 1"
+    },
+    "D5/S3/QuantumBounds/ClassicalFiberBound.chshAt": {
+      "module": "D5/S3/QuantumBounds/ClassicalFiberBound",
+      "name": "D5.S3.QuantumBounds.ClassicalFiberBound.chshAt",
+      "kind": "def",
+      "statement_id": "sha256:b0f4a78840c73750d0019a5282c2796251b339bc49991297f9e5b22013dafda3",
+      "line": 48,
+      "signature": "def chshAt {Fiber : Type*} (model : DeterministicFiberModel Fiber) (fiber : Fiber) : Real"
+    },
+    "D5/S3/QuantumBounds/ClassicalFiberBound.classicalCHSH": {
+      "module": "D5/S3/QuantumBounds/ClassicalFiberBound",
+      "name": "D5.S3.QuantumBounds.ClassicalFiberBound.classicalCHSH",
+      "kind": "def",
+      "statement_id": "sha256:b0f4a78840c73750d0019a5282c2796251b339bc49991297f9e5b22013dafda3",
+      "line": 56,
+      "signature": "def classicalCHSH {Fiber : Type*} [Fintype Fiber] (mu : Fiber -> Real) (model : DeterministicFiberModel Fiber) : Real"
+    },
+    "D5/S3/QuantumBounds/ClassicalFiberBound.classical_chsh_abs_le_two": {
+      "module": "D5/S3/QuantumBounds/ClassicalFiberBound",
+      "name": "D5.S3.QuantumBounds.ClassicalFiberBound.classical_chsh_abs_le_two",
+      "kind": "theorem",
+      "statement_id": "sha256:b0f4a78840c73750d0019a5282c2796251b339bc49991297f9e5b22013dafda3",
+      "line": 110,
+      "signature": "theorem classical_chsh_abs_le_two {Fiber : Type*} [Fintype Fiber] (mu : Fiber -> Real) (hmu_nonneg : forall fiber, 0 <= mu fiber) (hmu_sum : Finset.univ.sum mu = 1) (model : DeterministicFiberModel Fiber) : |classicalCHSH mu model| <= 2"
+    },
+    "D5/S3/QuantumBounds/ClassicalFiberBound.classical_chsh_bound_is_exact": {
+      "module": "D5/S3/QuantumBounds/ClassicalFiberBound",
+      "name": "D5.S3.QuantumBounds.ClassicalFiberBound.classical_chsh_bound_is_exact",
+      "kind": "theorem",
+      "statement_id": "sha256:b0f4a78840c73750d0019a5282c2796251b339bc49991297f9e5b22013dafda3",
+      "line": 152,
+      "signature": "theorem classical_chsh_bound_is_exact {Fiber : Type*} [Fintype Fiber] (mu : Fiber -> Real) (hmu_nonneg : forall fiber, 0 <= mu fiber) (hmu_sum : Finset.univ.sum mu = 1) : IsGreatest (Set.range fun model : DeterministicFiberModel Fiber => |classicalCHSH mu model|) 2"
+    },
+    "D5/S3/QuantumBounds/ClassicalFiberBound.observable": {
+      "module": "D5/S3/QuantumBounds/ClassicalFiberBound",
+      "name": "D5.S3.QuantumBounds.ClassicalFiberBound.observable",
+      "kind": "def",
+      "statement_id": "sha256:b0f4a78840c73750d0019a5282c2796251b339bc49991297f9e5b22013dafda3",
+      "line": 44,
+      "signature": "def observable {Fiber : Type*} (answer : Fiber -> Bool) : Fiber -> Real"
+    },
     "D5/S3/QuantumBounds/FubiniStudyRecordTime.fsAngle": {
       "module": "D5/S3/QuantumBounds/FubiniStudyRecordTime",
       "name": "D5.S3.QuantumBounds.FubiniStudyRecordTime.fsAngle",

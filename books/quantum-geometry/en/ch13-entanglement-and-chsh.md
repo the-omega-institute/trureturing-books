@@ -286,6 +286,65 @@ In Mathlib, `IsGreatest s a` means $a \in s \land \forall x \in s,\, x \le a$. T
 
 Observe the exact quantifier scope of [@cor-fixed-chsh-tsirelson]: the frozen theorem optimizes over all $4\times 4$ positive semidefinite trace-one density matrices $\rho$ for the **fixed** operator `CHSHWitness.chshOperator` (with Alice's observables fixed at $Z, X$ and Bob's at $(Z\pm X)/\sqrt{2}$). It does not quantify over arbitrary measurement directions or arbitrary Hilbert spaces; the general Tsirelson bound across arbitrary observables is placed in [@rem-bell-chsh-literature].
 
+[@cor-fixed-chsh-tsirelson] pins the quantum summit at $2\sqrt{2}$. To call this a defeat of the classical side, the classical ceiling has to be pinned just as firmly. The rules for the classical opponent are these: Alice and Bob share a hidden variable $\lambda$ in advance (called a fiber address, `Fiber`, in Lean); afterwards each of them looks only at their own measurement setting and at $\lambda$ and answers $\pm 1$, and neither sees which setting the other chose.
+
+::: {.definition #def-deterministic-fiber-model title="Deterministic Local Fiber Models and the Classical CHSH Value" lean="D5/S3/QuantumBounds/ClassicalFiberBound.boolValue D5/S3/QuantumBounds/ClassicalFiberBound.DeterministicFiberModel D5/S3/QuantumBounds/ClassicalFiberBound.observable D5/S3/QuantumBounds/ClassicalFiberBound.chshAt D5/S3/QuantumBounds/ClassicalFiberBound.classicalCHSH"}
+In the module `ClassicalFiberBound`:
+
+1. [`boolValue`](lean:D5/S3/QuantumBounds/ClassicalFiberBound.boolValue) $: \mathrm{Bool} \to \mathbb{R}$ reads `false` as $-1$ and `true` as $+1$;
+2. A **deterministic fiber model** [`DeterministicFiberModel`](lean:D5/S3/QuantumBounds/ClassicalFiberBound.DeterministicFiberModel) $\mathrm{Fiber}$ is a structure consisting of two answer tables $\mathrm{alice},\ \mathrm{bob} : \operatorname{Fin} 2 \to \mathrm{Fiber} \to \mathrm{Bool}$: one Boolean answer for each of the two measurement settings and each fiber address;
+3. [`observable`](lean:D5/S3/QuantumBounds/ClassicalFiberBound.observable) turns an answer table $\mathrm{answer} : \mathrm{Fiber} \to \mathrm{Bool}$ into the real-valued function $\lambda \mapsto \operatorname{boolValue}(\mathrm{answer}(\lambda))$;
+4. The CHSH value at a single fiber address, [`chshAt`](lean:D5/S3/QuantumBounds/ClassicalFiberBound.chshAt), is defined as
+
+   $$
+   \operatorname{chshAt}(\mathrm{model}, \lambda) \;=\; A_0 B_0 + A_0 B_1 + A_1 B_0 - A_1 B_1,
+   $$
+
+   where $A_x = \operatorname{observable}(\mathrm{model.alice}\ x)(\lambda)$ and $B_y = \operatorname{observable}(\mathrm{model.bob}\ y)(\lambda)$;
+5. For a finite type $\mathrm{Fiber}$ and weights $\mu : \mathrm{Fiber} \to \mathbb{R}$, the **classical CHSH value** [`classicalCHSH`](lean:D5/S3/QuantumBounds/ClassicalFiberBound.classicalCHSH) is defined as
+
+   $$
+   \operatorname{classicalCHSH}(\mu, \mathrm{model}) \;=\; \sum_{\lambda \in \mathrm{Fiber}} \mu(\lambda)\,\operatorname{chshAt}(\mathrm{model}, \lambda).
+   $$
+:::
+
+::: {.theorem #thm-classical-chsh-bound-exact title="The Absolute CHSH Bound for Finite Deterministic Local Fiber Models Is Exactly 2" lean="D5/S3/QuantumBounds/ClassicalFiberBound.classical_chsh_bound_is_exact D5/S3/QuantumBounds/ClassicalFiberBound.classical_chsh_abs_le_two"}
+Let $\mathrm{Fiber}$ be a finite type (`[Fintype Fiber]`) and let the weights $\mu : \mathrm{Fiber} \to \mathbb{R}$ be nonnegative (`hmu_nonneg`: $0 \le \mu(\lambda)$ for every $\lambda$) and normalized (`hmu_sum`: $\sum_\lambda \mu(\lambda) = 1$). Then:
+
+1. For every deterministic fiber model $\mathrm{model}$ ([@def-deterministic-fiber-model]),
+
+   $$
+   \bigl\lvert \operatorname{classicalCHSH}(\mu, \mathrm{model}) \bigr\rvert \;\le\; 2 ;
+   $$
+
+2. The set $\bigl\{\, \lvert\operatorname{classicalCHSH}(\mu, \mathrm{model})\rvert \;\big|\; \mathrm{model} : \operatorname{DeterministicFiberModel}\ \mathrm{Fiber} \,\bigr\}$ has greatest element $2$ (`IsGreatest`): $2$ belongs to the set, and every element of the set is at most $2$.
+:::
+
+::: proof
+Start with a single fiber address. Four real numbers with values $\pm 1$ commute pairwise and square to $1$, so they satisfy Mathlib's commutative CHSH inequality `CHSH_inequality_of_comm`, which gives $\operatorname{chshAt} \le 2$. Negating both of Alice's answers flips the sign of $\operatorname{chshAt}$; applying the same inequality to the flipped model gives $-2 \le \operatorname{chshAt}$. Now multiply termwise by the nonnegative weights $\mu(\lambda)$, sum, and insert $\sum_\lambda \mu(\lambda) = 1$ to get $-2 \le \operatorname{classicalCHSH} \le 2$, which is claim 1 (`classical_chsh_abs_le_two`). For attainment, take the constant model in which Alice and Bob answer `true` for every setting and every fiber address: at each address $\operatorname{chshAt} = 1 + 1 + 1 - 1 = 2$, and the weighted sum equals $2$ (`classical_chsh_eq_two_exists`). Together these give claim 2. The full proof is checked by the Lean kernel.
+:::
+
+The step at a single address can be counted out by hand.
+
+::: {.example #ex-sixteen-deterministic-chsh-tables title="The CHSH Value of the Sixteen Deterministic Answer Tables: Eight Give +2 and Eight Give −2"}
+At one fixed fiber address, Alice's two answers $a_0, a_1$ and Bob's two answers $b_0, b_1$ each take the values $\pm 1$, for $2^4 = 16$ combinations. Rewrite the CHSH value as
+
+$$
+a_0 b_0 + a_0 b_1 + a_1 b_0 - a_1 b_1 \;=\; a_0\,(b_0 + b_1) + a_1\,(b_0 - b_1).
+$$
+
+Bob's two answers stand in one of only two relations:
+
+| Bob's answers | $b_0 + b_1$ | $b_0 - b_1$ | CHSH value | combinations |
+| :---: | :---: | :---: | :---: | :---: |
+| $b_0 = b_1$ | $\pm 2$ | $0$ | $2\,a_0 b_0 = \pm 2$ | $8$ |
+| $b_0 = -b_1$ | $0$ | $\pm 2$ | $2\,a_1 b_0 = \pm 2$ | $8$ |
+
+In each row the product that decides the sign takes the values $+1$ and $-1$ in half of the combinations each, so exactly eight of the sixteen combinations give $+2$ and eight give $-2$; none lies outside $[-2, 2]$ and none lies strictly inside. Any probabilistic mixture merely takes a weighted average between $-2$ and $+2$, hence $\lvert S\rvert \le 2$, in agreement with [@thm-classical-chsh-bound-exact].
+:::
+
+Both ends are now pinned: the CHSH value of a finite deterministic local model cannot leave the segment $[-2, 2]$ ([@thm-classical-chsh-bound-exact]), while the expectation of the fixed CHSH operator on quantum states reaches $2\sqrt{2}$ ([@cor-fixed-chsh-tsirelson]). Their ratio is $\sqrt{2}$, the factor by which the $45^\circ$ arc exceeds the polyline. Mind the quantifier scope of each theorem: the classical side concerns deterministic $\pm 1$ answer tables over a finite set of fibers, and the quantum side concerns one fixed two-qubit operator; for the general forms see [@rem-bell-chsh-literature] at the end of the chapter.
+
 Why is $\theta = 45^\circ$ the symmetric CHSH working angle? In a symmetric four-setting configuration (three adjacent pairs separated by $\theta$ and one pair separated by $3\theta$), the four-correlator combination is $3\cos\theta - \cos(3\theta)$, whose derivative $-3\sin\theta + 3\sin(3\theta) = 0$ attains its global maximum $2\sqrt{2}$ at $\theta = 45^\circ$ ($\pi/4$)! (Keep this four-setting optimization distinct from maximizing the single-chord pointwise difference $g(\theta) = \cos\theta - (1 - 2\theta/\pi)$ against the linear toy model: the pointwise derivative $-\sin\theta + 2/\pi = 0$ peaks at $\theta = \arcsin(2/\pi) \approx 39.5402^\circ$ with a single-chord gap of $\approx 0.2105$, whereas at the symmetric CHSH working angle $\theta = 45^\circ$ each single-chord gap is $\frac{\sqrt{2}-1}{2} \approx 0.2071$, four of which sum to $2\sqrt{2} - 2 \approx 0.8284$.) Let us now work through the complete numerical checklist connecting $\rho_{\Phi^+}$, $\rho_{\Psi^-}$, the four $45^\circ$ CHSH correlators, and the comparison between the cosine arc and a specific linear toy model.
 
 ::: {.example #ex-bell-chsh-45deg title="Complete Hand-Calculated Checklist for Bell Marginals, the 45° CHSH Value 2√2, and the Cosine Arc"}
@@ -353,10 +412,10 @@ $$
 At the cardinal angles $0^\circ, 90^\circ, 180^\circ$, both curves coincide at $+1, 0, -1$; at $\theta = 45^\circ$, the cosine arc $0.7071067811865476 > 0.5$ rises above the linear chord, and summing four such $45^\circ/135^\circ$ contributions lifts $4 \times 0.5 = 2$ to $4 \times \frac{\sqrt{2}}{2} = 2\sqrt{2}$!
 :::
 
-::: {.remark #rem-bell-chsh-literature title="The Classical CHSH Polytope Bound, the General Tsirelson Theorem, and No-Signaling (Literature Result, Not Formalized in This Book)"}
+::: {.remark #rem-bell-chsh-literature title="The General Classical Local-Hidden-Variable Bound, the General Tsirelson Theorem, and No-Signaling (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** To situate the frozen theorems of this chapter within the broader foundations literature, three classical results and physical boundaries should be kept distinct:
 
-1. **The classical CHSH bound $|S_{\mathrm{LHV}}| \le 2$ as the convex hull of deterministic models** (J. F. Clauser, M. A. Horne, A. Shimony, and R. A. Holt, *Proposed experiment to test local hidden-variable theories*, Phys. Rev. Lett. **23**, 880–884, 1969, doi:10.1103/PhysRevLett.23.880): The linear sawtooth $C_{\mathrm{cl}}(\theta) = 1 - 2\theta/\pi$ in [@ex-bell-chsh-45deg] is a specific illustrative toy model, not Bell's theorem itself. The general CHSH inequality holds for **every** local stochastic hidden-variable model $\int \bar{A}_i(\lambda)\bar{B}_j(\lambda)\,d\mu(\lambda)$ with $\bar{A}_i(\lambda), \bar{B}_j(\lambda) \in [-1, 1]$: because a multilinear expression on $[-1, 1]^4$ attains its extrema at the vertices $a_0, a_1, b_0, b_1 \in \{\pm 1\}$ where one of $b_0 \pm b_1$ is $\pm 2$ and the other is $0$, every deterministic assignment satisfies $a_0(b_0 + b_1) + a_1(b_0 - b_1) = \pm 2$, and convex averaging over any probability distribution $\mu$ enforces $|S_{\mathrm{LHV}}| \le 2$.
+1. **The classical CHSH bound $|S_{\mathrm{LHV}}| \le 2$ as the convex hull of deterministic models** (J. F. Clauser, M. A. Horne, A. Shimony, and R. A. Holt, *Proposed experiment to test local hidden-variable theories*, Phys. Rev. Lett. **23**, 880–884, 1969, doi:10.1103/PhysRevLett.23.880): The linear sawtooth $C_{\mathrm{cl}}(\theta) = 1 - 2\theta/\pi$ in [@ex-bell-chsh-45deg] is a specific illustrative toy model, not Bell's theorem itself. The general CHSH inequality holds for **every** local stochastic hidden-variable model $\int \bar{A}_i(\lambda)\bar{B}_j(\lambda)\,d\mu(\lambda)$ with $\bar{A}_i(\lambda), \bar{B}_j(\lambda) \in [-1, 1]$: because a multilinear expression on $[-1, 1]^4$ attains its extrema at the vertices $a_0, a_1, b_0, b_1 \in \{\pm 1\}$ where one of $b_0 \pm b_1$ is $\pm 2$ and the other is $0$, every deterministic assignment satisfies $a_0(b_0 + b_1) + a_1(b_0 - b_1) = \pm 2$, and convex averaging over any probability distribution $\mu$ enforces $|S_{\mathrm{LHV}}| \le 2$. The case of a finite set of hidden variables with deterministic $\pm 1$ responses is verified by [@thm-classical-chsh-bound-exact]; the general form, with an arbitrary probability measure and stochastic response functions valued in $[-1, 1]$, remains a literature result: passing from the former to the latter requires writing stochastic responses as convex combinations of deterministic ones and replacing finite sums by integrals, and neither step is formalized in this book.
 2. **The general Tsirelson bound $|\langle S\rangle| \le 2\sqrt{2}$ for arbitrary observables and Hilbert spaces** (B. S. Cirel'son, *Quantum generalizations of Bell's inequality*, Lett. Math. Phys. **4**, 93–100, 1980, doi:10.1007/BF00417500): Whereas [@cor-fixed-chsh-tsirelson] proves that $2\sqrt{2}$ is the greatest expectation value of the **fixed** two-qubit operator `CHSHWitness.chshOperator`, Cirel'son's general theorem holds over any Hilbert space $\mathcal{H}$, any state $\rho$, and **any** four Hermitian involutions $A_0, A_1, B_0, B_1$ with $[A_i, B_j] = 0$: bounding the commutator norms by $\norm{[A_0, A_1]}_{\mathrm{op}} \le 2$ and $\norm{[B_0, B_1]}_{\mathrm{op}} \le 2$ in Landau's identity $S^2 = 4I - [A_0, A_1][B_0, B_1]$ gives $\norm{S^2}_{\mathrm{op}} \le 8$, hence $|\langle S\rangle| \le 2\sqrt{2}$ universally.
 3. **No controllable superluminal signaling**: Violation of the CHSH inequality (verified across loophole-free Bell experiments) manifests only in joint correlation statistics when Alice's and Bob's records are brought together afterward. As shown in [@thm-local-correlation-sectors] and [@lemma-bell-mixed-marginal], Bob's local reduced state remains fixed at $\frac{1}{2}I_2$ regardless of Alice's measurement choice, so quantum entanglement never permits controllable faster-than-light communication.
 :::
