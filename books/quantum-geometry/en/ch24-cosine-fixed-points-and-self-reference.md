@@ -385,6 +385,94 @@ Whether $\theta^*/\pi$ is transcendental is not settled by this argument; it hol
 
 Put the two facts side by side: the cosine projection closes in one step at $\theta^*$ ($\cos\theta^* = \theta^*$), while the rotation with step $\theta^*$ never returns to its starting point. The same angle is a fixed point for projection and an open helix for rotation.
 
+## 24.6 "Is $\pi$ a Projection of $\theta$?": Two Mutually Inverse Series, Kepler's Equation, and Half-Time Free Fall {#sec-ch24-6}
+
+The question in the author's notes, *"Is $\pi$ a projection of $\theta$?"*, received at [@conj-schanuel-dottie] a conditional answer in the negative direction: under Schanuel's conjecture, no polynomial relation with integer coefficients holds between $\theta^*$ and $\pi$. But "no algebraic relation" is not "no relation". The answer in the positive direction is already inside the fixed-point equation and can be read off in one step.
+
+**The fixed point cuts the right angle in two.** For $x \in [0, 1]$, the unique solution of $\cos\theta = x$ on $[0, \pi/2]$ is $\theta = \arccos x = \frac{\pi}{2} - \arcsin x$. Substituting $x = \theta = \theta^*$:
+
+$$
+\cos\theta^* = \theta^* \quad\Longleftrightarrow\quad \frac{\pi}{2} \;=\; \theta^* + \arcsin\theta^* .
+$$
+
+On the unit circle, the point $P = (\cos\theta^*, \sin\theta^*) = (\theta^*, \lambda)$ cuts the quarter arc of the first quadrant into two pieces. The lower piece, from $(1, 0)$ to $P$, has length $\theta^*$, which is exactly the abscissa of $P$; the upper piece, from $P$ to $(0, 1)$, has length $\arcsin\theta^*$. $P$ is the only point of this arc whose arc length equals its own abscissa.
+
+The power series of the arcsine has rational coefficients only and does not contain $\pi$:
+
+$$
+\arcsin x \;=\; \sum_{n \ge 0} \frac{\binom{2n}{n}}{4^n\,(2n+1)}\,x^{2n+1} \;=\; x + \frac{x^3}{6} + \frac{3x^5}{40} + \frac{5x^7}{112} + \cdots \qquad (\lvert x\rvert \le 1).
+$$
+
+Hence $\pi$ is the value at $\theta^*$ of a power series with rational coefficients:
+
+$$
+\pi \;=\; A(\theta^*), \qquad A(x) \;=\; 2x + 2\arcsin x \;=\; 4x + \frac{x^3}{3} + \frac{3x^5}{20} + \frac{5x^7}{56} + \frac{35x^9}{576} + \cdots .
+$$
+
+This is the positive answer to the question, and it is stronger than "projection": knowing $\theta^*$ alone, one computes $\pi$ to any accuracy using nothing but additions and multiplications.
+
+**The reverse direction: reading $\theta^*$ from $\pi$.** The linear coefficient of $A$ at $0$ is $4 \neq 0$, so $A$ has a formal inverse $B = A^{-1}$, again an odd power series with rational coefficients. Order-by-order reversion gives
+
+$$
+B(y) \;=\; \frac{y}{4} - \frac{y^3}{768} - \frac{y^5}{61440} - \frac{43\,y^7}{165150720} - \frac{223\,y^9}{47563407360} - \cdots .
+$$
+
+$B$ has an equivalent description without series: first solve $\eta + \sin\eta = y/2$, then set $B(y) = \sin\eta$. Indeed, if $x = \sin\eta$ with $\eta \in [-\pi/2, \pi/2]$, then $A(x) = 2\sin\eta + 2\eta = y$. For $y = \pi$, the equation $\eta + \sin\eta = \pi/2$ is solved by $\eta = \frac{\pi}{2} - \theta^* = \arcsin\theta^*$ (substitution gives $\frac{\pi}{2} - \theta^* + \cos\theta^* = \frac{\pi}{2}$), so $B(\pi) = \sin\eta = \cos\theta^* = \theta^*$. That the series $B$ converges to this value at $y = \pi$ is a literature result (see the example below).
+
+::: {.example #ex-dottie-pi-series title="Two Mutually Inverse Rational Series Linking π and θ*: Numerical Check of the Partial Sums"}
+The series $B$ and the identity $\theta^* = B(\pi)$ are due to Kaplan (2007, *Mathematics Magazine* 80, "The Dottie Number"): **literature result, not formalized in this book.** The expansion of $A$ is the classical arcsine series. The coefficients in the table were obtained by order-by-order reversion in exact rational arithmetic; the partial sums were computed at 50 digits and truncated.
+
+| truncation order | partial sum of $A$ (tends to $\pi$) | difference from $\pi$ | partial sum of $B$ (tends to $\theta^*$) | difference from $\theta^*$ |
+| :---: | :---: | :---: | :---: | :---: |
+| $1$ | $2.9563405$ | $1.85\times10^{-1}$ | $0.7853982$ | $4.63\times10^{-2}$ |
+| $3$ | $3.0909148$ | $5.07\times10^{-2}$ | $0.7450254$ | $5.94\times10^{-3}$ |
+| $5$ | $3.1239947$ | $1.76\times10^{-2}$ | $0.7400446$ | $9.59\times10^{-4}$ |
+| $7$ | $3.1347505$ | $6.84\times10^{-3}$ | $0.7392582$ | $1.73\times10^{-4}$ |
+| $9$ | $3.1387490$ | $2.84\times10^{-3}$ | $0.7391185$ | $3.33\times10^{-5}$ |
+| $11$ | $3.1403573$ | $1.24\times10^{-3}$ | $0.7390918$ | $6.71\times10^{-6}$ |
+| $21$ | $3.1415655$ | $2.72\times10^{-5}$ | $0.7390851363$ | $3.11\times10^{-9}$ |
+
+The ratio of successive terms of $A$ tends to $(\theta^*)^2 \approx 0.546$. The ratio of successive nonzero terms of $B$ rises from $0.12$ (order $5$) to $0.22$ (order $21$) and numerically approaches $1/4$: reading $\theta^*$ from $\pi$ converges faster than reading $\pi$ from $\theta^*$.
+:::
+
+So two statements hold together without contradiction: analytically, each of $\pi$ and $\theta^*$ is the value of a rational power series at the other; algebraically, under Schanuel's conjecture, no polynomial relation holds between them. $A$ and $B$ are infinite series, not polynomials, and every finite truncation leaves a nonzero difference, as every row of the table does.
+
+**Where the fixed point lives: the half-time of a cycloid.** The auxiliary equation $\eta + \sin\eta = \pi/2$ above does not come from nowhere. With $E = \pi - \eta$ it becomes
+
+$$
+E - \sin E \;=\; \frac{\pi}{2},
+$$
+
+which is Kepler's equation $M = E - e\sin E$ with eccentricity $e = 1$ and mean anomaly $M = \pi/2$, solved by $E = \frac{\pi}{2} + \theta^* \approx 132.35^\circ$. A Kepler orbit of eccentricity $1$ degenerates into a radial segment, and motion along it is free fall.
+
+::: {.example #ex-dottie-free-fall title="Half-Time Free Fall: When Half the Fall Time Has Elapsed, the Distance Remaining Is (1 + sin θ*)/2"}
+In Newtonian mechanics, a particle falls radially from rest at distance $r_0$ in the field of a central mass $M$. Energy conservation gives $\dot{r}^2 = 2GM\left(\frac{1}{r} - \frac{1}{r_0}\right)$, whose solution is the cycloid parametrization (a classical result):
+
+$$
+r(\eta) \;=\; \frac{r_0}{2}\,(1 + \cos\eta), \qquad t(\eta) \;=\; \frac{t_{\mathrm{ff}}}{\pi}\,(\eta + \sin\eta), \qquad \eta \in [0, \pi],
+$$
+
+where $t_{\mathrm{ff}} = \frac{\pi}{2}\sqrt{\frac{r_0^3}{2GM}}$ is the total time to reach the centre. Direct differentiation confirms it: $\dot{r}^2 = \frac{r_0^2\pi^2}{4\,t_{\mathrm{ff}}^2}\cdot\frac{\sin^2\eta}{(1+\cos\eta)^2}$, while $2GM\left(\frac{1}{r} - \frac{1}{r_0}\right) = \frac{2GM}{r_0}\cdot\frac{\sin^2\eta}{(1+\cos\eta)^2}$, and the two agree exactly when $t_{\mathrm{ff}}$ has the value above.
+
+**The half-time instant.** Set $t = t_{\mathrm{ff}}/2$, that is, $\eta + \sin\eta = \pi/2$. Substituting $\eta = \frac{\pi}{2} - x$ gives $\cos x = x$, so $x = \theta^*$ and $\eta_{1/2} = \frac{\pi}{2} - \theta^* = \arcsin\theta^* \approx 47.65^\circ$. Therefore
+
+$$
+\frac{r(t_{\mathrm{ff}}/2)}{r_0} \;=\; \frac{1 + \cos\eta_{1/2}}{2} \;=\; \frac{1 + \sin\theta^*}{2} \;=\; \frac{1 + \lambda}{2} \;\approx\; 0.836806 .
+$$
+
+The infall speed at that instant, in units of the escape speed $v_0 = \sqrt{2GM/r_0}$ at $r_0$, is
+
+$$
+\frac{\lvert\dot{r}\rvert}{v_0} \;=\; \frac{\sin\eta_{1/2}}{1 + \cos\eta_{1/2}} \;=\; \frac{\theta^*}{1 + \lambda} \;\approx\; 0.441611 .
+$$
+
+**Comparison and check.** At $t/t_{\mathrm{ff}} = \frac14, \frac12, \frac34$ the ratio $r/r_0$ equals $0.960937$, $0.836806$, $0.597150$ respectively; only the middle one has a closed form in terms of $\theta^*$. Numerical integration of $t(r) = \int_r^{r_0} \mathrm{d}r' \big/ \sqrt{2GM\left(\frac{1}{r'} - \frac{1}{r_0}\right)}$ gives $t(0.836806\,r_0)/t_{\mathrm{ff}} = 0.500000$, in agreement with the closed form.
+
+The same parametric equations describe the closed dust Friedmann universe, with $r$ replaced by the scale factor and time reversed (literature result, not formalized in this book): halfway through its expansion phase in time, such a universe has already reached $83.68\%$ of its maximum size.
+:::
+
+Half the time is spent, yet less than one sixth of the distance is covered: the fall starts slowly, and most of the distance is travelled in the second half. And "half", the plainest of all division points, lands at a position given exactly by $\theta^*$. The cosine fixed point does not live only on the cosine key of a calculator; every process governed by the cycloid law — a radial Kepler orbit, free-fall collapse, a closed dust universe — reads it at the instant when half of its time has elapsed.
+
 ---
 
 ### Summary of Part VI: From Spheres Beyond Spheres to $\psi = \psi(\psi)$ — Ready to Forge the Mechanical Canon
