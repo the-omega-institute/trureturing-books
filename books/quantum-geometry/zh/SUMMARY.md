@@ -36,3 +36,17 @@
 - [第十八章 狄拉克旋量与规范场：为什么粒子要在球外绕行，为什么力是面积的曲率？](ch18-spinors-and-gauge-curvature.md)
 - [第十九章 纠缠编织空间：张量网络、全息对偶与离散最小割定理](ch19-tensor-networks-and-holography.md)
 - [第二十章 门复杂度即体积：黑洞内部生长、虫洞桥与计算复杂性边界](ch20-complexity-and-spacetime.md)
+
+# 第六部 越界·球外之球：哥德尔逃逸、算术频谱与 $\psi = \psi(\psi)$
+
+- [第二十一章 球外之球：康托尔对角线、哥德尔逃逸与毛球奇点](ch21-diagonalization-and-escape.md)
+- [第二十二章 素数是算术的正交基：欧拉乘积与黎曼零点](ch22-primes-euler-products-and-zeros.md)
+- [第二十三章 有理数里的整数骨架：四元数范数与丢番图可定义性](ch23-diophantine-definability.md)
+- [第二十四章 余弦不动点与自指：从 $\cos\theta = \theta$ 到 $\psi = \psi(\psi)$](ch24-cosine-fixed-points-and-self-reference.md)
+
+# 第七部 铸器·构造与验证：异或代数、旋子编译与 Lean 4 公理圣殿
+
+- [第二十五章 把矩阵还原为异或：3 比特刀片与 XOR–Pauli 几何代数引擎](ch25-rewriting-and-xor.md)
+- [第二十六章 单量子比特旋转器编译：布洛赫几何定理与 ZYZ 欧拉角编译器](ch26-single-qubit-rotor-compilation.md)
+- [第二十七章 走进 Lean 4 公理圣殿（上）：从平行四边形恒等式到有限记录挤压](ch27-reading-frozen-proofs-i.md)
+- [第二十八章 走进 Lean 4 公理圣殿（下）：从秩一玻恩归约到 $\psi = \psi(\psi)$ 的终极合拢](ch28-reading-frozen-proofs-ii.md)

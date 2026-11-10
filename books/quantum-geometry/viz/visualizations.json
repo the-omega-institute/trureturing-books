@@ -45,6 +45,69 @@
         { "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean" },
         { "gid": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity" }
       ]
+    },
+    {
+      "id": "sphere-escape",
+      "code": "ORTHO//ESCAPE",
+      "title": "多面体割圆、毛球角亏与余弦不动点",
+      "title_en": "Polyhedral Approximation, Hairy Ball Defect, and Cosine Fixed Points",
+      "summary": "亲手切换内接于球面的测地多面体（V = 12、42、60、162、642），实时数出 E = 3V − 6、F = 2V − 4 与欧拉示性数 V − E + F = 2，并对比分片欧氏等边组合模型（12 个五度顶点集中承担 12 × 60° = 720° = 4π 的曲率角亏）与实际径向投影内接多面体网格（高斯—博内/笛卡尔总度量角亏仍严格等于 4π = 720°，但同时分摊在 12 个五度顶点与六度顶点上）；调节泰勒截断项数 N 观察余项 R₂N(θ) 与拉格朗日界，调节螺距看开口螺旋投下闭合圆的影子；再从 θ₀ ∈ [0, π] 出发并排比较 Dottie 余弦蛛网 θₖ₊₁ = cos θₖ → θ* ≈ 0.739085、黄金倒数迭代 xₖ₊₁ = 1 + 1/xₖ → φ 与有限收缩集合在 N ≤ |S₀| 步内的稳定化。",
+      "summary_en": "Switch between geodesic polyhedra inscribed in the sphere (V = 12, 42, 60, 162, 642), count E = 3V − 6, F = 2V − 4 and Euler's V − E + F = 2 live, and contrast the piecewise-Euclidean equilateral combinatorial model (where the 12 degree-5 vertices carry 12 × 60° = 720° = 4π of curvature defect) with the actual radially projected inscribed polyhedral meshes (where the total metric angular defect remains strictly 4π = 720° by Gauss–Bonnet/Descartes while being distributed across both the 12 degree-5 vertices and the degree-6 vertices); vary the Taylor terms N to watch the remainder R₂N(θ) against the Lagrange bound, and the pitch to see an open helix cast a closed circle as its shadow; then, from a seed θ₀ ∈ [0, π], compare the Dottie cosine cobweb θₖ₊₁ = cos θₖ → θ* ≈ 0.739085, the golden reciprocal iteration xₖ₊₁ = 1 + 1/xₖ → φ, and a finite contracting set sequence that stabilizes within N ≤ |S₀| steps.",
+      "path": "sphere-escape/",
+      "thumbnail": "sphere-escape/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-10",
+      "tags": [
+        "割圆多面体",
+        "笛卡尔 720° 角亏",
+        "泰勒截断余项",
+        "Dottie 余弦不动点",
+        "黄金不动点",
+        "有限收缩稳定化",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Polyhedral approximation",
+        "Descartes 720° defect",
+        "Taylor remainder",
+        "Dottie cosine fixed point",
+        "Golden fixed point",
+        "Finite contracting stabilization",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第二十一章 · 割圆多面体、泰勒截断裂缝与开口螺旋投影",
+          "label_en": "Chapter 21 · Inscribed polytopes, Taylor remainder seams, and the open helix",
+          "href": "../zh/ch21-diagonalization-and-escape.html#sec-ch21-3",
+          "href_en": "../en/ch21-diagonalization-and-escape.html#sec-ch21-3"
+        },
+        {
+          "label": "第二十四章 · 余弦不动点与自指",
+          "label_en": "Chapter 24 · Cosine fixed points and self-reference",
+          "href": "../zh/ch24-cosine-fixed-points-and-self-reference.html",
+          "href_en": "../en/ch24-cosine-fixed-points-and-self-reference.html"
+        },
+        {
+          "label": "Lean 源码 · DiagonalTopologicalEscape.lean",
+          "label_en": "Lean source · DiagonalTopologicalEscape.lean",
+          "href": "{trureturing}/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_topological_settlement"
+        },
+        {
+          "gid": "D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize"
+        },
+        {
+          "gid": "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique"
+        }
+      ]
     }
   ]
 }
