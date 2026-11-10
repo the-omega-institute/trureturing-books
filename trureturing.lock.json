@@ -645,6 +645,14 @@
       "line": 36,
       "signature": "theorem rank_one_born_pairing_weight {n kappa : Type*} [Fintype n] [DecidableEq n] [Fintype kappa] (P : kappa -> Matrix n n ℂ) (rho : Matrix n n ℂ) (k : kappa) (phi psi : n -> ℂ) (hP : IsRecordMeasurement P) (hState : rho.PosSemidef ∧ Matrix.trace rho = 1) (hProjection : P k = Matrix.vecMulVec phi (star phi)) (hPureState : rho = Matrix.vecMulVec psi (star psi)) : recordWeight P rho k = ((‖star phi ⬝ᵥ psi‖ ^ 2 : ℝ) : ℂ) ∧ recordWeight P rho k = Matrix.trace (rho * P k) ∧ unreadState P rho = ∑ j, recordWeight P rho j • conditionalState P rho j"
     },
+    "D5/S3/Observer/Linear/ExactTaylorObservationRemainder.exp_tail_le": {
+      "module": "D5/S3/Observer/Linear/ExactTaylorObservationRemainder",
+      "name": "D5.S3.Observer.Linear.ExactTaylorObservationRemainder.exp_tail_le",
+      "kind": "theorem",
+      "statement_id": "sha256:73b8364fdd91508d12be5d6810c93607d1ed9afc0fd8e9702450ada2fc696e44",
+      "line": 25,
+      "signature": "theorem exp_tail_le {𝕜 A : Type*} [RCLike 𝕜] [NormedRing A] [NormedAlgebra 𝕜 A] [CompleteSpace A] [NormOneClass A] (z : A) (r : ℝ) (n : ℕ) (hr : 0 ≤ r) (hz : ‖z‖ ≤ r) : ‖NormedSpace.exp z - ∑ k ∈ range n, ((k.factorial : 𝕜)⁻¹) • z ^ k‖ ≤ r ^ n / (n.factorial : ℝ) * Real.exp r"
+    },
     "D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound": {
       "module": "D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound",
       "name": "D5.S3.Observer.Tomography.FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound",
@@ -1316,6 +1324,22 @@
       "statement_id": "sha256:b655c2b0b304d3a523be8f5022da59f14187460754f17bba688e25cd3b2bbd9a",
       "line": 24,
       "signature": "theorem unit_gram_overlap_characterization {𝕜 Index E : Type*} [RCLike 𝕜] [NormedAddCommGroup E] [InnerProductSpace 𝕜 E] (record : Index → E) (normalized : ∀ i, ‖record i‖ = 1) : (∀ i j, ⟪record i, record j⟫_𝕜 = 1 ↔ record i = record j) ∧ Equivalence (fun i j => ⟪record i, record j⟫_𝕜 = 1)"
+    },
+    "D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.coefficient_gamma_le_cosine": {
+      "module": "D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction",
+      "name": "D5.S3.Quantum.QuantumChannels.FiniteRecordCosineObstruction.coefficient_gamma_le_cosine",
+      "kind": "theorem",
+      "statement_id": "sha256:c2b14fbf2c35fd368aa547b3e3f4ffaa8759d34332920a0dcae9df55862166f7",
+      "line": 163,
+      "signature": "theorem coefficient_gamma_le_cosine (N : ℕ) (c : ℤ → ℂ) (hsupport : ∀ k : ℤ, k < 0 ∨ (N : ℤ) < k → c k = 0) (hnorm : (∑' k : ℤ, ‖c k‖ ^ 2) = (1 : ℝ)) (ell : ℤ) (hell : ell ≠ 0) : ‖(∑' k : ℤ, c (k + ell) * star (c k))‖ ≤ Real.cos (Real.pi / (((N / ell.natAbs : ℕ) : ℝ) + 2))"
+    },
+    "D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.finite_record_cosine_obstruction": {
+      "module": "D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction",
+      "name": "D5.S3.Quantum.QuantumChannels.FiniteRecordCosineObstruction.finite_record_cosine_obstruction",
+      "kind": "theorem",
+      "statement_id": "sha256:c2b14fbf2c35fd368aa547b3e3f4ffaa8759d34332920a0dcae9df55862166f7",
+      "line": 231,
+      "signature": "theorem finite_record_cosine_obstruction {ι : Type*} [Fintype ι] [DecidableEq ι] (N : ℕ) (c : ℤ → ℂ) (q : ι → ℤ) (hsupport : ∀ k : ℤ, k < 0 ∨ (N : ℤ) < k → c k = 0) (hnorm : (∑' k : ℤ, ‖c k‖ ^ 2) = (1 : ℝ)) : let gamma : ℤ → ℂ"
     },
     "D5/S3/Quantum/QubitWitnesses.pauli_observables_have_no_common_eigenvector": {
       "module": "D5/S3/Quantum/QubitWitnesses",
