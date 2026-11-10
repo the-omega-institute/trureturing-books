@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "52725b62b659b244d077e29f18a576aa809007b7",
-  "pinned_at": "2026-11-10T16:57:05Z",
+  "commit": "38196c62e121b0a334b903eea2a513bb2587e41c",
+  "pinned_at": "2026-11-10T22:06:30Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -348,6 +348,30 @@
       "statement_id": "sha256:296a160c79b372e304965c1323d0f3edec3d3b7e1da8a9c15bfff38182e5cc23",
       "line": 23,
       "signature": "theorem golden_inverse_branch_positive_fixed_point_iff : ∀ x : ℝ, 0 < x → ((fun y : ℝ => 1 / (y + 1)) x = x ↔ x = Real.goldenRatio⁻¹)"
+    },
+    "D5/S3/Analytic/OriginalHalfBinomialIntegral.b_le_one": {
+      "module": "D5/S3/Analytic/OriginalHalfBinomialIntegral",
+      "name": "D5.S3.Analytic.OriginalHalfBinomialIntegral.b_le_one",
+      "kind": "theorem",
+      "statement_id": "sha256:60d38eaca300529aec21cb61b7f4d861c7f369512f0b094c97bc603dc98133c0",
+      "line": 31,
+      "signature": "theorem b_le_one (n : ℕ) : b n ≤ 1"
+    },
+    "D5/S3/Analytic/OriginalHalfBinomialIntegral.b_nonneg": {
+      "module": "D5/S3/Analytic/OriginalHalfBinomialIntegral",
+      "name": "D5.S3.Analytic.OriginalHalfBinomialIntegral.b_nonneg",
+      "kind": "theorem",
+      "statement_id": "sha256:60d38eaca300529aec21cb61b7f4d861c7f369512f0b094c97bc603dc98133c0",
+      "line": 29,
+      "signature": "theorem b_nonneg (n : ℕ) : 0 ≤ b n"
+    },
+    "D5/S3/Analytic/OriginalHalfBinomialIntegral.binomial_hasSum": {
+      "module": "D5/S3/Analytic/OriginalHalfBinomialIntegral",
+      "name": "D5.S3.Analytic.OriginalHalfBinomialIntegral.binomial_hasSum",
+      "kind": "theorem",
+      "statement_id": "sha256:60d38eaca300529aec21cb61b7f4d861c7f369512f0b094c97bc603dc98133c0",
+      "line": 76,
+      "signature": "theorem binomial_hasSum (u : ℝ) (hu0 : 0 ≤ u) (hu1 : u < 1) : HasSum (fun n : ℕ => b n * u ^ n) (1 / Real.sqrt (1 - u))"
     },
     "D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm": {
       "module": "D5/S3/Arith/GoldenPell",
