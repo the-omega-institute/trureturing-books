@@ -54,4 +54,16 @@
 ## 5. 数学排版与零模型标识铁律
 
 - **数学宏规范**：行内公式用 `$...$`，独立公式块用单独成行且前后留空的 `$$...$$`，多行推导用 `\begin{aligned} ... \end{aligned}`。禁用反斜杠圆括号与反斜杠方括号数学定界符；禁用 `physics` 宏包中未在 `tools/tbook/mathrender.py` 注册的左矢、右矢与内积简写命令，一律写为标准命令 `\lvert\psi\rangle`、`\langle\phi\rvert`、`\langle\phi\mid\psi\rangle`（或 `tools/tbook/mathrender.py` 已注册的 `\ketbra`、`\dyad`、`\Tr`、`\vv`、`\norm`）。
-- **零模型标识**：书籍正文、代码注释、图注、元数据、文档、提交说明与评审记录中，严禁出现任何语言模型、智能体或自动生成工具的名称与标识。
+- **零模型标识（正式出版物与提交记录）**：除工程工作流文档 `docs/project/WORKFLOW.md` 与本文件第 6 节按项目治理要求如实记录多智能体协同分工外，所有正式出版物文件（`books/**` 正文、代码注释、图注、可视化与视频源码、`site.toml`、根级 `README.md`）以及 Git 提交说明与 PR 描述中，严禁出现任何语言模型、智能体或自动生成工具的名称与标识。
+
+## 6. 多智能体协同分工与五路并行工作流
+
+本书库采用“人机协同、专精分工、三席异构审查、五路 Worktree 流水线”方式组织生产（完整细则见 `docs/project/WORKFLOW.md`）：
+
+1. **五元角色分工**
+   - **作者与总架构师（Auric）**：提出全书核心几何与哲学命题（两子丈量、球外之球、割圆多面体近似与泰勒余项、毛球定理与 $720^\circ$ 角亏、余弦自指不动点 $\psi = \psi(\psi)$），审定章节脉络与原话题记。
+   - **中英双语正文主笔（Gemini Subagent）**：负责全书 33 个单元的中英文学术专著与教材正文撰写，严格对齐冻结的 Lean 4 定理签名。
+   - **辅助工程与形式化对齐（`codex-cli`）**：负责冻结 Lean 4 定理核验与批次规格书（`spec-batch-*.md`）、静态矢量图（`assets/fig-*.svg`）、第七部 Python 几何代数参考引擎、`./tbook` 工具链构建检验、Git Worktree 管理及上游模板修复 PR。
+   - **交互可视化与讲解视频（Claude Opus 5.5 Subagent）**：负责全部交互可视化（`books/quantum-geometry/viz/<id>/`）与讲解视频（`books/quantum-geometry/films/<NNN>-<name>/`）的设计、实现与浏览器自动化测试。
+   - **三席异构独立审查（`/sshx` `review_triplet_workers`）**：每批次由 `architecture`、`quality`、`tests` 三席独立审查；第一轮（Round 1）采用 `1 nyxid-oracle + 1 codex-cli + 1 isolated-token-subagent`，第二轮及后续复审（Round 2+）禁用响应较慢的 `nyxid-oracle`，采用 `2 codex-cli + 1 isolated-token-subagent` 高速完成修复验证闭环。
+2. **五路 Git Worktree 流水线**：最多并行开启 5 个 `git worktree`（主仓库 `wt1` 及 `wt3`–`wt6`），使当前批次的审查/修复与后续批次的辅助规格、正文写作和可视化/视频制作并行推进、互不阻塞。

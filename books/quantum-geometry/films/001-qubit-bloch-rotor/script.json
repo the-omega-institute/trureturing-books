@@ -1,0 +1,29 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Bloch": "Block", "qubit": "cue-bit"},
+  "music": {"bpm": 84, "progression": "d-minor"},
+  "scenes": [
+    {"id": "bloch", "name": "BLOCH SPHERE", "lead": 1.8, "tail": 0.4, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["Pure qubits are points on the sphere; each Bloch matrix squares to one.", "纯量子比特态是球面上的点 v；每个布洛赫矩阵都满足 B(v)² = I₂。"],
+      ["The Born weight on zero is cosine squared of half the angle.", "落在 |0⟩ 上的玻恩权重是半角余弦的平方：cos²(θ/2) = (1 + cos θ)/2。"]
+    ]},
+    {"id": "geometric", "name": "GEOMETRIC PRODUCT", "lead": 0.5, "tail": 0.4, "music": [0.9, 0.6, 0.7, 0.0, 0.3], "lines": [
+      ["The geometric product splits: cosine theta along the line, sine theta as area.", "几何积一分为二：沿线的 cos θ，与作为有向面积的 sin θ Î。"],
+      ["Particle and wave: their squares add to one.", "一为粒子，一为波：cos²θ + sin²θ = 1。"]
+    ], "cues": [{"line": 1, "at": 2.2, "kind": "chime"}]},
+    {"id": "rotor", "name": "SANDWICH ROTOR", "lead": 0.5, "tail": 0.4, "music": [0.9, 0.9, 0.8, 0.6, 0.5], "lines": [
+      ["A rotor turns half the angle, from both sides.", "转子只转半角，从两侧夹住向量：R(α) v R(α)†。"],
+      ["The axis commutes, so it stays put.", "沿旋转轴的分量与转子对易，原地不动。"],
+      ["The plane anti-commutes: two halves make one full turn.", "垂直平面内的分量与 Î 反对易：两个半角合成一整个 α。"]
+    ], "cues": [{"line": 2, "at": 2.6, "kind": "chime"}]},
+    {"id": "spinor", "name": "SPINOR 2π SIGN", "lead": 0.5, "tail": 0.4, "music": [1.0, 0.8, 0.7, 0.5, 0.4], "lines": [
+      ["At three sixty, the arrow is home, but the rotor reads minus one.", "转过 360°，箭头回到原处，转子却是 R(2π) = −I₂。"],
+      ["Only at seven twenty does it read plus one again.", "要转满 720°，转子才回到 R(4π) = +I₂。"],
+      ["Phase damping shrinks x and y, but leaves z alone.", "相位阻尼把 x、y 按 1 − γ 收缩，z 保持不动。"]
+    ], "cues": [{"line": 0, "at": 3.9, "kind": "impact"}, {"line": 1, "at": 3.2, "kind": "stamp"}]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.2, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, part two.", "《量子计算的几何直觉》· 第二部"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}

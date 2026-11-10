@@ -1,0 +1,94 @@
+/* ORTHO//QUBIT layout: geometric controls & readouts on the left | 3D Bloch + Pythagorean circle + pinching ledger & formal evidence on the right.
+   Stacks to one column on phones; inside the book (?embed=1) two compact columns from 640px. Shared pieces come from ../assets/theme.css. */
+.app {
+  min-height: 100%;
+  display: grid;
+  grid-template-columns: minmax(290px, 350px) minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 10px;
+  padding-block: 10px;
+  padding-inline: var(--gutter);
+}
+header.top { grid-column: 1 / -1; }
+.center { display: flex; flex-direction: column; gap: 10px; min-width: 0; min-height: 0; }
+
+/* ---------- controls ---------- */
+.num-field { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 3px 8px; align-items: center; }
+.num-field label { font-size: 12px; color: var(--ink); }
+.num-field input[type=range] { grid-column: 1 / -1; }
+.subhead {
+  font-family: var(--font-display); font-weight: 600; font-size: 10.5px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--dim); margin-top: 2px;
+}
+.gates .chip { min-width: 34px; text-align: center; padding: 4px 8px; font-family: var(--font-data); font-size: 12px; }
+.presets .chip { text-transform: none; letter-spacing: 0.03em; font-size: 11px; padding: 4px 8px; }
+.tape-bar {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px; align-items: center;
+  border: 1px dashed var(--line-hot); padding: 4px 8px; background: var(--stage-bg);
+}
+.tape-lbl { font-family: var(--font-display); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); white-space: nowrap; }
+.tape-seq { font-family: var(--font-data); font-size: 11.5px; color: var(--cyan); overflow-wrap: anywhere; }
+.tagline em { color: var(--cyan); }
+.stepper input { color: var(--ink); }
+.toast { border-color: var(--cyan); box-shadow: 0 0 22px color-mix(in srgb, var(--cyan) 25%, transparent); }
+.toast b, .sheet li b { color: var(--cyan); }
+
+/* ---------- readouts ---------- */
+dl.ro .v dd { color: var(--violet); }
+dl.ro dd .sub { display: block; font-size: 11px; color: var(--dim); }
+.okmark, .pill strong.okmark { color: var(--cyan); font-weight: 600; }
+.vcy { color: var(--cyan); font-weight: 600; }
+.vvi { color: var(--violet); font-weight: 600; }
+.vam { color: var(--amber); font-weight: 600; }
+.lean-badge { color: var(--ok); font-family: var(--font-data); font-weight: 600; font-size: 10.5px; }
+.leanref code { color: var(--cyan); }
+.sheet .refs { margin-top: 14px; }
+
+/* ---------- stage panel ---------- */
+.stagepanel { display: flex; flex-direction: column; padding: 10px 12px 12px; gap: 8px; min-height: 0; }
+.stagepanel .head { display: flex; justify-content: space-between; align-items: baseline; gap: 4px 12px; flex-wrap: wrap; }
+.stagepanel .head h2 { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--cyan); }
+.stagepanel .head .aside { font-family: var(--font-data); font-size: 11px; color: var(--dim); }
+.stagewrap {
+  position: relative; width: 100%; aspect-ratio: 16 / 9; min-height: 320px;
+  border: 1px solid var(--panel-edge); background: var(--stage-bg); overflow: hidden;
+  cursor: grab; touch-action: manipulation;
+}
+.stagewrap:active { cursor: grabbing; }
+.stagewrap canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.legend { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 14px; font-family: var(--font-data); font-size: 11px; color: var(--dim); }
+.legend li { display: flex; align-items: center; gap: 6px; }
+.sw { width: 11px; height: 11px; display: inline-block; border: 1px solid var(--panel-edge); }
+.sw.cy { background: var(--cyan); }
+.sw.vi { background: var(--violet); }
+.sw.am { background: var(--amber); }
+.sw.ok { background: var(--ok); }
+
+/* ---------- thumbnail mode (?thumb=1): the canvas alone fills the 1280x720 frame ---------- */
+:root[data-thumb-mode] .stagepanel { padding: 0; background: var(--stage-bg); }
+:root[data-thumb-mode] .stagepanel::after { display: none; }
+:root[data-thumb-mode] .stagewrap { position: absolute; inset: 0; aspect-ratio: auto; min-height: 0; border: 0; }
+:root[data-thumb-mode] .stagepanel > :not(.stagewrap) { display: none; }
+
+/* ---------- responsive layouts ---------- */
+@media (max-width: 920px) {
+  .app { grid-template-columns: minmax(0, 1fr); }
+  .col { overflow: visible; }
+  .deck { display: contents; }
+  #inputs { order: 1; }
+  .center { order: 2; }
+  #readouts { order: 3; }
+  .stagewrap { min-height: 260px; }
+  .keys { text-align: left; }
+}
+
+/* ---------- inside the book (?embed=1): compact, two columns from 640px ---------- */
+:root[data-embed] .app { padding-block: 8px; gap: 8px; grid-template-rows: none; }
+:root[data-embed] .keys { display: none; }
+:root[data-embed] .stagepanel .head .aside { display: none; }
+@media (min-width: 640px) {
+  :root[data-embed] .app { grid-template-columns: minmax(250px, 300px) minmax(0, 1fr); align-items: start; }
+  :root[data-embed] .deck { display: flex; order: 1; grid-column: auto; }
+  :root[data-embed] .center { order: 2; grid-column: auto; }
+  :root[data-embed] .stagewrap { min-height: 250px; }
+}

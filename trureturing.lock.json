@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "0932810a77730496eae9b36294d2400f7d1d3b2a",
-  "pinned_at": "2026-11-10T14:04:10Z",
+  "pinned_at": "2026-11-10T16:03:26Z",
   "declarations": {
     "D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction": {
       "module": "D5/S3/Observer/BornReduction",
@@ -77,6 +77,198 @@
       "line": 36,
       "signature": "theorem rank_one_born_pairing_weight {n kappa : Type*} [Fintype n] [DecidableEq n] [Fintype kappa] (P : kappa -> Matrix n n ℂ) (rho : Matrix n n ℂ) (k : kappa) (phi psi : n -> ℂ) (hP : IsRecordMeasurement P) (hState : rho.PosSemidef ∧ Matrix.trace rho = 1) (hProjection : P k = Matrix.vecMulVec phi (star phi)) (hPureState : rho = Matrix.vecMulVec psi (star psi)) : recordWeight P rho k = ((‖star phi ⬝ᵥ psi‖ ^ 2 : ℝ) : ℂ) ∧ recordWeight P rho k = Matrix.trace (rho * P k) ∧ unreadState P rho = ∑ j, recordWeight P rho j • conditionalState P rho j"
     },
+    "D5/S3/ObserverMemory/JointCoherentReversal.joint_coherent_reversal": {
+      "module": "D5/S3/ObserverMemory/JointCoherentReversal",
+      "name": "D5.S3.ObserverMemory.JointCoherentReversal.joint_coherent_reversal",
+      "kind": "theorem",
+      "statement_id": "sha256:49d78b0772db8ee1c0ffbc3604bac88ac610968176d0c8e48817b10da57dea6a",
+      "line": 53,
+      "signature": "theorem joint_coherent_reversal {Copy : Type*} [Fintype Copy] [DecidableEq Copy] (records : Copy -> EnvironmentRecord) (rho : QubitMatrix) (i j : Fin 2) (hunit : ∀ k, star (recordOverlap (records k) i j) * recordOverlap (records k) i j = 1) : multiRecordChannel (reverseOn Finset.univ records) (multiRecordChannel records rho) i j = rho i j"
+    },
+    "D5/S3/ObserverMemory/JointCoherentReversal.one_surviving_copy_composition_apply": {
+      "module": "D5/S3/ObserverMemory/JointCoherentReversal",
+      "name": "D5.S3.ObserverMemory.JointCoherentReversal.one_surviving_copy_composition_apply",
+      "kind": "theorem",
+      "statement_id": "sha256:49d78b0772db8ee1c0ffbc3604bac88ac610968176d0c8e48817b10da57dea6a",
+      "line": 73,
+      "signature": "theorem one_surviving_copy_composition_apply {Copy : Type*} [Fintype Copy] [DecidableEq Copy] (records : Copy -> EnvironmentRecord) (rho : QubitMatrix) (i j : Fin 2) (k : Copy) (hunit : ∀ l, l ≠ k -> star (recordOverlap (records l) i j) * recordOverlap (records l) i j = 1) : reverseChannelOn (Finset.univ.erase k) records (multiRecordChannel records rho) i j = recordOverlap (records k) i j * rho i j"
+    },
+    "D5/S3/ObserverMemory/JointCoherentReversal.reverseChannelOn": {
+      "module": "D5/S3/ObserverMemory/JointCoherentReversal",
+      "name": "D5.S3.ObserverMemory.JointCoherentReversal.reverseChannelOn",
+      "kind": "def",
+      "statement_id": "sha256:49d78b0772db8ee1c0ffbc3604bac88ac610968176d0c8e48817b10da57dea6a",
+      "line": 43,
+      "signature": "noncomputable def reverseChannelOn {Copy : Type*} [DecidableEq Copy] (copies : Finset Copy) (records : Copy -> EnvironmentRecord) (rho : QubitMatrix) : QubitMatrix"
+    },
+    "D5/S3/ObserverMemory/JointCoherentReversal.reverseOn": {
+      "module": "D5/S3/ObserverMemory/JointCoherentReversal",
+      "name": "D5.S3.ObserverMemory.JointCoherentReversal.reverseOn",
+      "kind": "def",
+      "statement_id": "sha256:49d78b0772db8ee1c0ffbc3604bac88ac610968176d0c8e48817b10da57dea6a",
+      "line": 38,
+      "signature": "def reverseOn {Copy : Type*} [DecidableEq Copy] (copies : Finset Copy) (records : Copy -> EnvironmentRecord) : Copy -> EnvironmentRecord"
+    },
+    "D5/S3/ObserverMemory/JointCoherentReversal.reverseRecord": {
+      "module": "D5/S3/ObserverMemory/JointCoherentReversal",
+      "name": "D5.S3.ObserverMemory.JointCoherentReversal.reverseRecord",
+      "kind": "def",
+      "statement_id": "sha256:49d78b0772db8ee1c0ffbc3604bac88ac610968176d0c8e48817b10da57dea6a",
+      "line": 29,
+      "signature": "def reverseRecord (record : EnvironmentRecord) : EnvironmentRecord"
+    },
+    "D5/S3/ObserverMemory/JointCoherentReversal.reverse_record_overlap": {
+      "module": "D5/S3/ObserverMemory/JointCoherentReversal",
+      "name": "D5.S3.ObserverMemory.JointCoherentReversal.reverse_record_overlap",
+      "kind": "theorem",
+      "statement_id": "sha256:49d78b0772db8ee1c0ffbc3604bac88ac610968176d0c8e48817b10da57dea6a",
+      "line": 33,
+      "signature": "theorem reverse_record_overlap (record : EnvironmentRecord) (i j : Fin 2) : recordOverlap (reverseRecord record) i j = star (recordOverlap record i j)"
+    },
+    "D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal": {
+      "module": "D5/S3/ObserverMemory/JointCoherentReversal",
+      "name": "D5.S3.ObserverMemory.JointCoherentReversal.surviving_copy_blocks_reversal",
+      "kind": "theorem",
+      "statement_id": "sha256:49d78b0772db8ee1c0ffbc3604bac88ac610968176d0c8e48817b10da57dea6a",
+      "line": 107,
+      "signature": "theorem surviving_copy_blocks_reversal {Copy : Type*} [Fintype Copy] [DecidableEq Copy] (records : Copy -> EnvironmentRecord) (rho : QubitMatrix) (i j : Fin 2) (k : Copy) (hunit : ∀ l, l ≠ k -> star (recordOverlap (records l) i j) * recordOverlap (records l) i j = 1) (hblock : recordOverlap (records k) i j ≠ 1) (hrho : rho i j ≠ 0) : reverseChannelOn (Finset.univ.erase k) records (multiRecordChannel records rho) i j ≠ rho i j"
+    },
+    "D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate": {
+      "module": "D5/S3/ObserverMemory/JointCoherentReversal",
+      "name": "D5.S3.ObserverMemory.JointCoherentReversal.two_copy_joint_reversal_certificate",
+      "kind": "theorem",
+      "statement_id": "sha256:49d78b0772db8ee1c0ffbc3604bac88ac610968176d0c8e48817b10da57dea6a",
+      "line": 132,
+      "signature": "theorem two_copy_joint_reversal_certificate : let rho"
+    },
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitaryComplexStructure.relativeComplexStructure",
+      "kind": "def",
+      "statement_id": "sha256:11914b84505d4cfbda3c0967fb47ad2e8c6f8c9fff40498584ef2120b6b36d7a",
+      "line": 24,
+      "signature": "def relativeComplexStructure {n : Type*} [Fintype n] (A B : Matrix n n ℂ) : Matrix n n ℂ"
+    },
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_conjTranspose_mul": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitaryComplexStructure.relativeComplexStructure_conjTranspose_mul",
+      "kind": "theorem",
+      "statement_id": "sha256:11914b84505d4cfbda3c0967fb47ad2e8c6f8c9fff40498584ef2120b6b36d7a",
+      "line": 60,
+      "signature": "theorem relativeComplexStructure_conjTranspose_mul {n : Type*} [Fintype n] [DecidableEq n] (A B : Matrix n n ℂ) (hA : Aᴴ * A = halfIdentity) (hB : B * Bᴴ = halfIdentity) : (relativeComplexStructure A B)ᴴ * relativeComplexStructure A B = (1 : Matrix n n ℂ)"
+    },
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_is_skewAdjoint": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitaryComplexStructure.relativeComplexStructure_is_skewAdjoint",
+      "kind": "theorem",
+      "statement_id": "sha256:11914b84505d4cfbda3c0967fb47ad2e8c6f8c9fff40498584ef2120b6b36d7a",
+      "line": 30,
+      "signature": "theorem relativeComplexStructure_is_skewAdjoint {n : Type*} [Fintype n] [DecidableEq n] (A B : Matrix n n ℂ) (hCross : A * Bᴴ + B * Aᴴ = 0) : (relativeComplexStructure A B)ᴴ = -(relativeComplexStructure A B)"
+    },
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_mul_conjTranspose": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitaryComplexStructure.relativeComplexStructure_mul_conjTranspose",
+      "kind": "theorem",
+      "statement_id": "sha256:11914b84505d4cfbda3c0967fb47ad2e8c6f8c9fff40498584ef2120b6b36d7a",
+      "line": 44,
+      "signature": "theorem relativeComplexStructure_mul_conjTranspose {n : Type*} [Fintype n] [DecidableEq n] (A B : Matrix n n ℂ) (hA : A * Aᴴ = halfIdentity) (hB : Bᴴ * B = halfIdentity) : relativeComplexStructure A B * (relativeComplexStructure A B)ᴴ = (1 : Matrix n n ℂ)"
+    },
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_square": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitaryComplexStructure.relativeComplexStructure_square",
+      "kind": "theorem",
+      "statement_id": "sha256:11914b84505d4cfbda3c0967fb47ad2e8c6f8c9fff40498584ef2120b6b36d7a",
+      "line": 90,
+      "signature": "theorem relativeComplexStructure_square {n : Type*} [Fintype n] [DecidableEq n] (A B : Matrix n n ℂ) (hCross : A * Bᴴ + B * Aᴴ = 0) (hA : A * Aᴴ = halfIdentity) (hB : Bᴴ * B = halfIdentity) : relativeComplexStructure A B * relativeComplexStructure A B = -(1 : Matrix n n ℂ)"
+    },
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeInvolution": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitaryComplexStructure.relativeInvolution",
+      "kind": "def",
+      "statement_id": "sha256:11914b84505d4cfbda3c0967fb47ad2e8c6f8c9fff40498584ef2120b6b36d7a",
+      "line": 105,
+      "signature": "def relativeInvolution {n : Type*} [Fintype n] (A B : Matrix n n ℂ) : Matrix n n ℂ"
+    },
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeInvolution_isHermitian": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitaryComplexStructure.relativeInvolution_isHermitian",
+      "kind": "theorem",
+      "statement_id": "sha256:11914b84505d4cfbda3c0967fb47ad2e8c6f8c9fff40498584ef2120b6b36d7a",
+      "line": 111,
+      "signature": "theorem relativeInvolution_isHermitian {n : Type*} [Fintype n] [DecidableEq n] (A B : Matrix n n ℂ) (hCross : A * Bᴴ + B * Aᴴ = 0) : (relativeInvolution A B)ᴴ = relativeInvolution A B"
+    },
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeInvolution_square": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitaryComplexStructure.relativeInvolution_square",
+      "kind": "theorem",
+      "statement_id": "sha256:11914b84505d4cfbda3c0967fb47ad2e8c6f8c9fff40498584ef2120b6b36d7a",
+      "line": 122,
+      "signature": "theorem relativeInvolution_square {n : Type*} [Fintype n] [DecidableEq n] (A B : Matrix n n ℂ) (hCross : A * Bᴴ + B * Aᴴ = 0) (hA : A * Aᴴ = halfIdentity) (hB : Bᴴ * B = halfIdentity) : relativeInvolution A B * relativeInvolution A B = (1 : Matrix n n ℂ)"
+    },
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary",
+      "kind": "theorem",
+      "statement_id": "sha256:11914b84505d4cfbda3c0967fb47ad2e8c6f8c9fff40498584ef2120b6b36d7a",
+      "line": 75,
+      "signature": "theorem square_eq_neg_one_of_skewAdjoint_unitary {n : Type*} [Fintype n] [DecidableEq n] (R : Matrix n n ℂ) (hSkew : Rᴴ = -R) (hUnitary : R * Rᴴ = (1 : Matrix n n ℂ)) : R * R = -(1 : Matrix n n ℂ)"
+    },
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitarySum.crossProduct_is_skewAdjoint",
+      "kind": "theorem",
+      "statement_id": "sha256:dc4fb8763a0fb2fbd35914366c6bad0597bfb4799e97ced50ba6e2af629b07ef",
+      "line": 64,
+      "signature": "theorem crossProduct_is_skewAdjoint {n : Type*} [Fintype n] [DecidableEq n] (A B : Matrix n n ℂ) (hCross : A * Bᴴ + B * Aᴴ = 0) : (A * Bᴴ)ᴴ = -(A * Bᴴ)"
+    },
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum",
+      "kind": "theorem",
+      "statement_id": "sha256:dc4fb8763a0fb2fbd35914366c6bad0597bfb4799e97ced50ba6e2af629b07ef",
+      "line": 74,
+      "signature": "theorem crossProduct_is_skewAdjoint_of_balanced_sum {n : Type*} [Fintype n] [DecidableEq n] (S A B : Matrix n n ℂ) (hS : S = A + B) (hUnitary : S * Sᴴ = (1 : Matrix n n ℂ)) (hA : A * Aᴴ = halfIdentity) (hB : B * Bᴴ = halfIdentity) : (A * Bᴴ)ᴴ = -(A * Bᴴ)"
+    },
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossTerms_eq_zero": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitarySum.crossTerms_eq_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:dc4fb8763a0fb2fbd35914366c6bad0597bfb4799e97ced50ba6e2af629b07ef",
+      "line": 30,
+      "signature": "theorem crossTerms_eq_zero {n : Type*} [Fintype n] [DecidableEq n] (S A B : Matrix n n ℂ) (hS : S = A + B) (hUnitary : S * Sᴴ = (1 : Matrix n n ℂ)) (hA : A * Aᴴ = halfIdentity) (hB : B * Bᴴ = halfIdentity) : A * Bᴴ + B * Aᴴ = 0"
+    },
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.halfIdentity": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitarySum.halfIdentity",
+      "kind": "def",
+      "statement_id": "sha256:dc4fb8763a0fb2fbd35914366c6bad0597bfb4799e97ced50ba6e2af629b07ef",
+      "line": 25,
+      "signature": "def halfIdentity {n : Type*} [DecidableEq n] : Matrix n n ℂ"
+    },
+    "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.secondCross_eq_neg_first": {
+      "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum",
+      "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitarySum.secondCross_eq_neg_first",
+      "kind": "theorem",
+      "statement_id": "sha256:dc4fb8763a0fb2fbd35914366c6bad0597bfb4799e97ced50ba6e2af629b07ef",
+      "line": 55,
+      "signature": "theorem secondCross_eq_neg_first {n : Type*} [Fintype n] [DecidableEq n] (A B : Matrix n n ℂ) (hCross : A * Bᴴ + B * Aᴴ = 0) : B * Aᴴ = -(A * Bᴴ)"
+    },
+    "D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.canonical_copied_address_record_eq_prior": {
+      "module": "D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery",
+      "name": "D5.S3.Quantum.Decoherence.CanonicalRecordAccessRecovery.canonical_copied_address_record_eq_prior",
+      "kind": "theorem",
+      "statement_id": "sha256:02c1d86bb12d0097d9aca6900486b4c6189424dc7034cbc38c246c15b6fac799",
+      "line": 31,
+      "signature": "theorem canonical_copied_address_record_eq_prior : D5.S3.Observer.MeasurementMarginal.copiedAddressRecord = D5.S3.Quantum.Decoherence.ReducedRecordAccessDefect.copiedAddressRecord"
+    },
+    "D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.reduced_irreversibility_is_canonical_record_access_defect": {
+      "module": "D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery",
+      "name": "D5.S3.Quantum.Decoherence.CanonicalRecordAccessRecovery.reduced_irreversibility_is_canonical_record_access_defect",
+      "kind": "theorem",
+      "statement_id": "sha256:02c1d86bb12d0097d9aca6900486b4c6189424dc7034cbc38c246c15b6fac799",
+      "line": 42,
+      "signature": "theorem reduced_irreversibility_is_canonical_record_access_defect (rho sigma : QubitMatrix) (hdiag : ∀ i, rho i i = sigma i i) (hcoherence : ∃ i j, i ≠ j ∧ rho i j ≠ sigma i j) : D5.S3.Quantum.Decoherence.ReducedRecordAccessDefect.copyUnitary ∈ Matrix.unitaryGroup (Fin 2 × Fin 2) ℂ ∧ unitaryEvolution D5.S3.Quantum.Decoherence.ReducedRecordAccessDefect.copyUn"
+    },
     "D5/S3/Quantum/Decoherence/CoherenceDecay.equal_superposition_coherence_tendsto_zero": {
       "module": "D5/S3/Quantum/Decoherence/CoherenceDecay",
       "name": "D5.S3.Quantum.Decoherence.CoherenceDecay.equal_superposition_coherence_tendsto_zero",
@@ -100,6 +292,134 @@
       "statement_id": "sha256:62d42f267c4e451e307d97488260302800a39a5186538134884bc9703e414c45",
       "line": 130,
       "signature": "theorem reduced_irreversibility_is_access_defect (rho sigma : QubitMatrix) (hdiag : ∀ i, rho i i = sigma i i) (hcoherence : ∃ i j, i ≠ j ∧ rho i j ≠ sigma i j) : copyUnitary ∈ Matrix.unitaryGroup (Fin 2 × Fin 2) ℂ ∧ (unitaryEvolution copyUnitary (blankEnvironmentJointState rho) = controlledRecordJointState copiedAddressRecord rho ∧ unitaryEvolution copyUnitary (blankEnvironmentJointState sigma) = controlledRecordJointState copiedAddressRecord sigma) ∧ traceEnvironment (controlledRecordJointState copiedAddressRecord rho) = traceEnvironment (controlledRecordJointState copiedAddressRecord sigma) "
+    },
+    "D5/S3/Quantum/Divergence/DualAccountFull.dual_account_full": {
+      "module": "D5/S3/Quantum/Divergence/DualAccountFull",
+      "name": "D5.S3.Quantum.Divergence.DualAccountFull.dual_account_full",
+      "kind": "theorem",
+      "statement_id": "sha256:35bc509bf4b82c079bd7c8c06a5c9d31ce83461f536ff1ceb9b31c11ce8b61a0",
+      "line": 72,
+      "signature": "theorem dual_account_full {d : ℕ} [NeZero d] (Z X : RankOneContext d) (hZ : IsRecordMeasurement Z.projector) (hX : IsRecordMeasurement X.projector) (hZX : ∀ j k, overlap Z X j k = (d : ℝ)⁻¹) (rho sigma : DensityState (Fin d)) (hFixed : unreadState Z.projector rho.1 = rho.1) (hPinch : unreadState X.projector rho.1 = sigma.1) : let omega"
+    },
+    "D5/S3/Quantum/Divergence/DualAccountFull.entropy_freedom_segment": {
+      "module": "D5/S3/Quantum/Divergence/DualAccountFull",
+      "name": "D5.S3.Quantum.Divergence.DualAccountFull.entropy_freedom_segment",
+      "kind": "theorem",
+      "statement_id": "sha256:35bc509bf4b82c079bd7c8c06a5c9d31ce83461f536ff1ceb9b31c11ce8b61a0",
+      "line": 118,
+      "signature": "theorem entropy_freedom_segment {d : ℕ} [NeZero d] (rho : DensityState (Fin d)) : let omega"
+    },
+    "D5/S3/Quantum/Dynamics/CalibratedUnitaryGroup.calibrated_group": {
+      "module": "D5/S3/Quantum/Dynamics/CalibratedUnitaryGroup",
+      "name": "D5.S3.Quantum.Dynamics.CalibratedUnitaryGroup.calibrated_group",
+      "kind": "theorem",
+      "statement_id": "sha256:5e4a013e1c1828b7b50300bc5357ff8f05c4146010c5e17e1a3043f26b90576a",
+      "line": 23,
+      "signature": "theorem calibrated_group {H : Type*} [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H] (U : ℝ → H →L[ℂ] H) (G : H →L[ℂ] H) (hzero : U 0 = 1) (hgroup : ∀ s t, U (s + t) = U s * U t) (hunit : ∀ t, star (U t) * U t = 1) (hderiv : HasDerivAt U G 0) (ℏ : ℝ) (hℏ : ℏ ≠ 0) : let Hamiltonian"
+    },
+    "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary": {
+      "module": "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity",
+      "name": "D5.S3.Quantum.Dynamics.EnergyEigenstateStationarity.energy_eigenstate_stationary",
+      "kind": "theorem",
+      "statement_id": "sha256:d5563afe7bd312f16b4e6f7c9f441317f7de6d07a379a2a024ddcd34ddbbc1f7",
+      "line": 54,
+      "signature": "theorem energy_eigenstate_stationary (H : Matrix n n ℂ) (hH : H.IsHermitian) (v : n → ℂ) (hv : star v ⬝ᵥ v = 1) (E t : ℝ) (he : H *ᵥ v = (E : ℂ) • v) : let U"
+    },
+    "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_variance_zero": {
+      "module": "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity",
+      "name": "D5.S3.Quantum.Dynamics.EnergyEigenstateStationarity.energy_eigenstate_variance_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:d5563afe7bd312f16b4e6f7c9f441317f7de6d07a379a2a024ddcd34ddbbc1f7",
+      "line": 98,
+      "signature": "theorem energy_eigenstate_variance_zero (H : Matrix n n ℂ) (v : n → ℂ) (hv : star v ⬝ᵥ v = 1) (E : ℝ) (he : H *ᵥ v = (E : ℂ) • v) : variance (pureDensityState v hv) H = 0"
+    },
+    "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.basisPinchingState": {
+      "module": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity",
+      "name": "D5.S3.Quantum.Dynamics.EntropyProductionCoherenceDeletionIdentity.basisPinchingState",
+      "kind": "def",
+      "statement_id": "sha256:5c5eb2eccd84b985c557cacaeecb9fd8f28c87060c42be852dcd73bfe4b2f07b",
+      "line": 132,
+      "signature": "noncomputable def basisPinchingState (rho : DensityState n) : DensityState n"
+    },
+    "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.cfc_diagonal": {
+      "module": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity",
+      "name": "D5.S3.Quantum.Dynamics.EntropyProductionCoherenceDeletionIdentity.cfc_diagonal",
+      "kind": "theorem",
+      "statement_id": "sha256:5c5eb2eccd84b985c557cacaeecb9fd8f28c87060c42be852dcd73bfe4b2f07b",
+      "line": 57,
+      "signature": "lemma cfc_diagonal (f : ℝ → ℝ) (a : n -> ℝ) : cfc f (Matrix.diagonal fun i => (a i : ℂ)) = Matrix.diagonal fun i => (f (a i) : ℂ)"
+    },
+    "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.cfc_log_diagonal": {
+      "module": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity",
+      "name": "D5.S3.Quantum.Dynamics.EntropyProductionCoherenceDeletionIdentity.cfc_log_diagonal",
+      "kind": "theorem",
+      "statement_id": "sha256:5c5eb2eccd84b985c557cacaeecb9fd8f28c87060c42be852dcd73bfe4b2f07b",
+      "line": 93,
+      "signature": "lemma cfc_log_diagonal (a : n -> ℝ) : CFC.log (Matrix.diagonal fun i => (a i : ℂ)) = Matrix.diagonal fun i => (Real.log (a i) : ℂ)"
+    },
+    "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity": {
+      "module": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity",
+      "name": "D5.S3.Quantum.Dynamics.EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity",
+      "kind": "theorem",
+      "statement_id": "sha256:5c5eb2eccd84b985c557cacaeecb9fd8f28c87060c42be852dcd73bfe4b2f07b",
+      "line": 383,
+      "signature": "theorem entropy_production_coherence_deletion_identity (U : Matrix n n ℂ) (hU : U ∈ Matrix.unitaryGroup n ℂ) (rho : ℕ → DensityState n) (hStep : ∀ k, rho (k + 1) = basisPinchingState (unitaryConjugateState U hU (rho k))) : (∀ k, vonNeumannEntropy (rho (k + 1)) - vonNeumannEntropy (rho k) = quantumRelativeEntropy (unitaryConjugateState U hU (rho k)) (basisPinchingState (unitaryConjugateState U hU (rho k))) ∧ 0 ≤ quantumRelativeEntropy (unitaryConjugateState U hU (rho k)) (basisPinchingState (unitaryConjugateState U hU (rho k)))) ∧ (∀ N, vonNeumannEntropy (rho N) - vonNeumannEntropy (rho 0) = ∑ "
+    },
+    "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.unitaryConjugateState": {
+      "module": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity",
+      "name": "D5.S3.Quantum.Dynamics.EntropyProductionCoherenceDeletionIdentity.unitaryConjugateState",
+      "kind": "def",
+      "statement_id": "sha256:5c5eb2eccd84b985c557cacaeecb9fd8f28c87060c42be852dcd73bfe4b2f07b",
+      "line": 119,
+      "signature": "noncomputable def unitaryConjugateState (U : Matrix n n ℂ) (hU : U ∈ Matrix.unitaryGroup n ℂ) (rho : DensityState n) : DensityState n"
+    },
+    "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.von_neumann_entropy_basisPinchingState": {
+      "module": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity",
+      "name": "D5.S3.Quantum.Dynamics.EntropyProductionCoherenceDeletionIdentity.von_neumann_entropy_basisPinchingState",
+      "kind": "theorem",
+      "statement_id": "sha256:5c5eb2eccd84b985c557cacaeecb9fd8f28c87060c42be852dcd73bfe4b2f07b",
+      "line": 251,
+      "signature": "lemma von_neumann_entropy_basisPinchingState (rho : DensityState n) : vonNeumannEntropy (basisPinchingState rho) = -(∑ i, (densityMatrix rho i i).re * Real.log (densityMatrix rho i i).re)"
+    },
+    "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.evolvedDensity": {
+      "module": "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow",
+      "name": "D5.S3.Quantum.Dynamics.ProjectionProbabilityFlow.evolvedDensity",
+      "kind": "def",
+      "statement_id": "sha256:db64ac80d31c38529ebef4720cc395ba99d517f4e8d1d38fc144cebcc8508ebb",
+      "line": 66,
+      "signature": "def evolvedDensity (H : Matrix n n ℂ) (rho : DensityState n) (t : ℝ) : Matrix n n ℂ"
+    },
+    "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.hamiltonianGenerator": {
+      "module": "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow",
+      "name": "D5.S3.Quantum.Dynamics.ProjectionProbabilityFlow.hamiltonianGenerator",
+      "kind": "def",
+      "statement_id": "sha256:db64ac80d31c38529ebef4720cc395ba99d517f4e8d1d38fc144cebcc8508ebb",
+      "line": 58,
+      "signature": "def hamiltonianGenerator (H : Matrix n n ℂ) : Matrix n n ℂ"
+    },
+    "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.hamiltonianPropagator": {
+      "module": "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow",
+      "name": "D5.S3.Quantum.Dynamics.ProjectionProbabilityFlow.hamiltonianPropagator",
+      "kind": "def",
+      "statement_id": "sha256:db64ac80d31c38529ebef4720cc395ba99d517f4e8d1d38fc144cebcc8508ebb",
+      "line": 62,
+      "signature": "def hamiltonianPropagator (H : Matrix n n ℂ) (t : ℝ) : Matrix n n ℂ"
+    },
+    "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.projectionProbability": {
+      "module": "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow",
+      "name": "D5.S3.Quantum.Dynamics.ProjectionProbabilityFlow.projectionProbability",
+      "kind": "def",
+      "statement_id": "sha256:db64ac80d31c38529ebef4720cc395ba99d517f4e8d1d38fc144cebcc8508ebb",
+      "line": 71,
+      "signature": "def projectionProbability (H : Matrix n n ℂ) (rho : DensityState n) (P : Matrix n n ℂ) (t : ℝ) : ℝ"
+    },
+    "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.projection_probability_flow": {
+      "module": "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow",
+      "name": "D5.S3.Quantum.Dynamics.ProjectionProbabilityFlow.projection_probability_flow",
+      "kind": "theorem",
+      "statement_id": "sha256:db64ac80d31c38529ebef4720cc395ba99d517f4e8d1d38fc144cebcc8508ebb",
+      "line": 217,
+      "signature": "theorem projection_probability_flow (H P : Matrix n n ℂ) (rho : DensityState n) (hH : H.IsHermitian) (hP : IsStarProjection P) : (∀ t : ℝ, (projectionProbability H rho P t : ℂ) = bornProbability (evolvedDensity H rho t) P) ∧ (∀ t : ℝ, HasDerivAt (projectionProbability H rho P) (Complex.re (Complex.I * Matrix.trace (evolvedDensity H rho t * (H * P - P * H)))) t ∧ ((Complex.I * Matrix.trace (evolvedDensity H rho t * (H * P - P * H))).re : ℂ) = Complex.I * Matrix.trace (evolvedDensity H rho t * (H * P - P * H))) ∧ (H * P - P * H = 0 → ∀ t : ℝ, projectionProbability H rho P t = projectionProbabili"
     },
     "D5/S3/Quantum/FiniteDimensional.QubitMatrix": {
       "module": "D5/S3/Quantum/FiniteDimensional",
@@ -189,6 +509,14 @@
       "line": 39,
       "signature": "def scalarB (t : ℝ) (a : EuclideanSpace ℝ (Fin 3)) : Matrix (Fin 2) (Fin 2) ℂ"
     },
+    "D5/S3/Quantum/PureState/RecordCoherenceComplementarity.pure_record_distinguishability_coherence_complementarity": {
+      "module": "D5/S3/Quantum/PureState/RecordCoherenceComplementarity",
+      "name": "D5.S3.Quantum.PureState.RecordCoherenceComplementarity.pure_record_distinguishability_coherence_complementarity",
+      "kind": "theorem",
+      "statement_id": "sha256:b1bcaba28401bd8438d4f90abc83eed60a1bb8107fa04ac10cfd096e537c5f49",
+      "line": 29,
+      "signature": "theorem pure_record_distinguishability_coherence_complementarity {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E] (recordLeft recordRight : E) (hLeft : ‖recordLeft‖ = 1) (hRight : ‖recordRight‖ = 1) : let c"
+    },
     "D5/S3/Quantum/QubitWitnesses.pauli_observables_have_no_common_eigenvector": {
       "module": "D5/S3/Quantum/QubitWitnesses",
       "name": "D5.S3.Quantum.QubitWitnesses.pauli_observables_have_no_common_eigenvector",
@@ -220,6 +548,62 @@
       "statement_id": "sha256:6cae4dbca64ca41bbf6386568b9390f248c98598383fe8e5b556b99db1e7548e",
       "line": 26,
       "signature": "def residualMass {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [CompleteSpace E] (visible : Submodule ℝ E) [IsClosed (visible : Set E)] (state : E) : ℝ"
+    },
+    "D5/S3/QuantumBounds/FubiniStudyRecordTime.fsAngle": {
+      "module": "D5/S3/QuantumBounds/FubiniStudyRecordTime",
+      "name": "D5.S3.QuantumBounds.FubiniStudyRecordTime.fsAngle",
+      "kind": "def",
+      "statement_id": "sha256:11e539937522cbc33603e9e316fd8c4cef1113e95b0b82ccefe65fd198bfe13a",
+      "line": 30,
+      "signature": "noncomputable def fsAngle (a b : E) : ℝ"
+    },
+    "D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle": {
+      "module": "D5/S3/QuantumBounds/FubiniStudyRecordTime",
+      "name": "D5.S3.QuantumBounds.FubiniStudyRecordTime.fs_angle_triangle",
+      "kind": "theorem",
+      "statement_id": "sha256:11e539937522cbc33603e9e316fd8c4cef1113e95b0b82ccefe65fd198bfe13a",
+      "line": 33,
+      "signature": "theorem fs_angle_triangle (a b c : E) (ha : ‖a‖ = 1) (hb : ‖b‖ = 1) (hc : ‖c‖ = 1) : fsAngle a c ≤ fsAngle a b + fsAngle b c"
+    },
+    "D5/S3/QuantumBounds/FubiniStudyRecordTime.record_count_upper_bound": {
+      "module": "D5/S3/QuantumBounds/FubiniStudyRecordTime",
+      "name": "D5.S3.QuantumBounds.FubiniStudyRecordTime.record_count_upper_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:11e539937522cbc33603e9e316fd8c4cef1113e95b0b82ccefe65fd198bfe13a",
+      "line": 80,
+      "signature": "theorem record_count_upper_bound (N : ℕ) (a m₀ m₁ : Fin N → E) (ha : ∀ i, ‖a i‖ = 1) (h₀ : ∀ i, ‖m₀ i‖ = 1) (h₁ : ∀ i, ‖m₁ i‖ = 1) (horth : ∀ i, inner ℂ (m₀ i) (m₁ i) = 0) (energy hbar T : ℝ) (τ : Fin N → ℝ) (henergy : 0 < energy) (hhbar : 0 < hbar) (speed₀ : ∀ i, fsAngle (a i) (m₀ i) ≤ energy * τ i / hbar) (speed₁ : ∀ i, fsAngle (a i) (m₁ i) ≤ energy * τ i / hbar) (budget : ∑ i, τ i ≤ T) : (N : ℝ) ≤ 4 * energy * T / (Real.pi * hbar)"
+    },
+    "D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound": {
+      "module": "D5/S3/QuantumBounds/FubiniStudyRecordTime",
+      "name": "D5.S3.QuantumBounds.FubiniStudyRecordTime.record_time_lower_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:11e539937522cbc33603e9e316fd8c4cef1113e95b0b82ccefe65fd198bfe13a",
+      "line": 59,
+      "signature": "theorem record_time_lower_bound (a m₀ m₁ : E) (ha : ‖a‖ = 1) (h₀ : ‖m₀‖ = 1) (h₁ : ‖m₁‖ = 1) (horth : inner ℂ m₀ m₁ = 0) (energy hbar τ : ℝ) (henergy : 0 < energy) (hhbar : 0 < hbar) (speed₀ : fsAngle a m₀ ≤ energy * τ / hbar) (speed₁ : fsAngle a m₁ ≤ energy * τ / hbar) : Real.pi * hbar / (4 * energy) ≤ τ"
+    },
+    "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity": {
+      "module": "D5/S3/QuantumBounds/LagrangeGramIdentity",
+      "name": "D5.S3.QuantumBounds.LagrangeGramIdentity.lagrange_gram_identity",
+      "kind": "theorem",
+      "statement_id": "sha256:ce9562e56d7264395e32b93db2bc4693a5f10348f777655ba261453542ca8f44",
+      "line": 17,
+      "signature": "theorem lagrange_gram_identity {ι : Type*} (s : Finset ι) (u v : ι → ℝ) : (∑ i ∈ s, u i ^ 2) * (∑ i ∈ s, v i ^ 2) - (∑ i ∈ s, u i * v i) ^ 2 = (∑ i ∈ s, ∑ j ∈ s, (u i * v j - u j * v i) ^ 2) / 2"
+    },
+    "D5/S3/QuantumBounds/RobertsonSchrodinger.gram_wedge_identity": {
+      "module": "D5/S3/QuantumBounds/RobertsonSchrodinger",
+      "name": "D5.S3.QuantumBounds.RobertsonSchrodinger.gram_wedge_identity",
+      "kind": "theorem",
+      "statement_id": "sha256:b919cc130f0ad5f3117a95ca3451790a4c69ea212b51d3de6a6db1ec1cb12b5e",
+      "line": 29,
+      "signature": "theorem gram_wedge_identity {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E] (u v : E) : let G"
+    },
+    "D5/S3/QuantumBounds/RobertsonSchrodinger.robertson_schrodinger": {
+      "module": "D5/S3/QuantumBounds/RobertsonSchrodinger",
+      "name": "D5.S3.QuantumBounds.RobertsonSchrodinger.robertson_schrodinger",
+      "kind": "theorem",
+      "statement_id": "sha256:b919cc130f0ad5f3117a95ca3451790a4c69ea212b51d3de6a6db1ec1cb12b5e",
+      "line": 46,
+      "signature": "theorem robertson_schrodinger {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E] (A B : E →ₗ[ℂ] E) (psi : E) (hA : A.IsSymmetric) (hB : B.IsSymmetric) (hpsi : ‖psi‖ = 1) : let u"
     },
     "D5/S3/QuantumChannels/AmplitudeDampingContraction.HasPureBoundaryEndpoint": {
       "module": "D5/S3/QuantumChannels/AmplitudeDampingContraction",
@@ -277,6 +661,30 @@
       "line": 45,
       "signature": "theorem north_pole_ball_preserving_iff (a lambda : ℝ) (ha0 : 0 ≤ a) (ha1 : a ≤ 1) : (∀ x y z : ℝ, x ^ 2 + y ^ 2 + z ^ 2 ≤ 1 → (lambda * x) ^ 2 + (lambda * y) ^ 2 + (dampedAxis (1 - a) z) ^ 2 ≤ 1) ↔ lambda ^ 2 ≤ a"
     },
+    "D5/S3/QuantumChannels/DecoherenceFreeze.criticalInverseTemperature": {
+      "module": "D5/S3/QuantumChannels/DecoherenceFreeze",
+      "name": "D5.S3.QuantumChannels.DecoherenceFreeze.criticalInverseTemperature",
+      "kind": "def",
+      "statement_id": "sha256:0eb681c9617e920fdd3e6f44d99ac1436618cb562998979a5a8383fee70e7ea6",
+      "line": 17,
+      "signature": "noncomputable def criticalInverseTemperature (entropyTax passiveEnergy : ℝ) : ℝ"
+    },
+    "D5/S3/QuantumChannels/DecoherenceFreeze.decoherence_freeze_iff_above_critical": {
+      "module": "D5/S3/QuantumChannels/DecoherenceFreeze",
+      "name": "D5.S3.QuantumChannels.DecoherenceFreeze.decoherence_freeze_iff_above_critical",
+      "kind": "theorem",
+      "statement_id": "sha256:0eb681c9617e920fdd3e6f44d99ac1436618cb562998979a5a8383fee70e7ea6",
+      "line": 22,
+      "signature": "theorem decoherence_freeze_iff_above_critical {beta entropyTax passiveEnergy : ℝ} (hbeta : 0 < beta) (henergy : 0 < passiveEnergy) : 0 < freezeDeposit beta entropyTax passiveEnergy ↔ criticalInverseTemperature entropyTax passiveEnergy < beta"
+    },
+    "D5/S3/QuantumChannels/DecoherenceFreeze.freezeDeposit": {
+      "module": "D5/S3/QuantumChannels/DecoherenceFreeze",
+      "name": "D5.S3.QuantumChannels.DecoherenceFreeze.freezeDeposit",
+      "kind": "def",
+      "statement_id": "sha256:0eb681c9617e920fdd3e6f44d99ac1436618cb562998979a5a8383fee70e7ea6",
+      "line": 13,
+      "signature": "noncomputable def freezeDeposit (beta entropyTax passiveEnergy : ℝ) : ℝ"
+    },
     "D5/S3/QuantumChannels/Pinching.hilbertSchmidtInner": {
       "module": "D5/S3/QuantumChannels/Pinching",
       "name": "D5.S3.QuantumChannels.Pinching.hilbertSchmidtInner",
@@ -301,6 +709,14 @@
       "line": 104,
       "signature": "theorem pinching_discarded_coherence_mass (rho : QubitMatrix) : hilbertSchmidtInner (rho - pinching rho) (rho - pinching rho) = Complex.normSq (rho 0 1) + Complex.normSq (rho 1 0)"
     },
+    "D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_orthogonal": {
+      "module": "D5/S3/QuantumChannels/PinchingProjection",
+      "name": "D5.S3.QuantumChannels.PinchingProjection.pinching_hilbert_schmidt_orthogonal",
+      "kind": "theorem",
+      "statement_id": "sha256:89589cffec4065508d46b324a472f9464b0c1bf461d0ce87567073df22ff6147",
+      "line": 48,
+      "signature": "theorem pinching_hilbert_schmidt_orthogonal (rho : QubitMatrix) : hilbertSchmidtInner (pinching rho) (rho - pinching rho) = 0"
+    },
     "D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean": {
       "module": "D5/S3/QuantumChannels/PinchingProjection",
       "name": "D5.S3.QuantumChannels.PinchingProjection.pinching_hilbert_schmidt_pythagorean",
@@ -316,6 +732,14 @@
       "statement_id": "sha256:b5f8dcc99110316f0bf42a48eff539f0ae4728b825b2e078ccda8269c36afcc2",
       "line": 22,
       "signature": "theorem inner_product_norm_parallelogram_law {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (x y : E) : ‖x + y‖ ^ 2 + ‖x - y‖ ^ 2 = 2 * (‖x‖ ^ 2 + ‖y‖ ^ 2)"
+    },
+    "D5/S3/QuantumStates/PhaseLockedOverlap.phase_locked_overlap_is_rotated_real": {
+      "module": "D5/S3/QuantumStates/PhaseLockedOverlap",
+      "name": "D5.S3.QuantumStates.PhaseLockedOverlap.phase_locked_overlap_is_rotated_real",
+      "kind": "theorem",
+      "statement_id": "sha256:a9a068c585f43a7aa355619c8fc899910e973d9b857f76930d832b94cb89b559",
+      "line": 20,
+      "signature": "theorem phase_locked_overlap_is_rotated_real (phase overlap : ℂ) (hphase : ‖phase‖ = 1) (hlock : star overlap = (phase⁻¹) ^ 2 * overlap) : ∃ r : ℝ, overlap = phase * r"
     }
   }
 }
