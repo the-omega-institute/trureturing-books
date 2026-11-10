@@ -466,7 +466,7 @@ $$
 \frac{\lvert\dot{r}\rvert}{v_0} \;=\; \frac{\sin\eta_{1/2}}{1 + \cos\eta_{1/2}} \;=\; \frac{\theta^*}{1 + \lambda} \;\approx\; 0.441611 .
 $$
 
-**Comparison and check.** At $t/t_{\mathrm{ff}} = \frac14, \frac12, \frac34$ the ratio $r/r_0$ equals $0.960937$, $0.836806$, $0.597150$ respectively; only the middle one has a closed form in terms of $\theta^*$. Numerical integration of $t(r) = \int_r^{r_0} \mathrm{d}r' \big/ \sqrt{2GM\left(\frac{1}{r'} - \frac{1}{r_0}\right)}$ gives $t(0.836806\,r_0)/t_{\mathrm{ff}} = 0.500000$, in agreement with the closed form.
+**Comparison and check.** At $t/t_{\mathrm{ff}} = \frac14, \frac12, \frac34$ the ratio $r/r_0$ equals $0.960937$, $0.836806$, $0.597150$ respectively; only the middle one has a closed form in terms of $\theta^*$. Numerical integration of $t(r) = \int_r^{r_0} \frac{\mathrm{d}r'}{\sqrt{2GM\left(\frac{1}{r'} - \frac{1}{r_0}\right)}}$ gives $t(0.836806\,r_0)/t_{\mathrm{ff}} = 0.500000$, in agreement with the closed form.
 
 The same parametric equations describe the closed dust Friedmann universe, with $r$ replaced by the scale factor and time reversed (literature result, not formalized in this book): halfway through its expansion phase in time, such a universe has already reached $83.68\%$ of its maximum size.
 :::
