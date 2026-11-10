@@ -289,6 +289,65 @@ $$
 
 请注意 [@cor-fixed-chsh-tsirelson] 的精确量词边界：该冻结声明固定了具体的双比特算子 `CHSHWitness.chshOperator`（即固定 Alice 为 $Z, X$、Bob 为 $(Z\pm X)/\sqrt{2}$），并在全体 $4\times 4$ 半正定迹一密度矩阵 $\rho$ 上求极值，**并未包含对任意可变测量方向的量词，也未在任意维希尔伯特空间上作全称量化**（一般可变算子下的 Tsirelson 定理归入章末 [@rem-bell-chsh-literature]）。
 
+[@cor-fixed-chsh-tsirelson] 把量子一侧的山顶钉在了 $2\sqrt{2}$。要说这是“击败”，还得把经典一侧的天花板同样钉死。经典对手的规则是：Alice 与 Bob 事先共享一个隐变量 $\lambda$（Lean 中称为纤维地址 `Fiber`），此后各自只看自己的测量设置与 $\lambda$，给出答案 $\pm 1$；谁也看不到对方选了哪个设置。
+
+::: {.definition #def-deterministic-fiber-model title="确定性局域纤维模型与经典 CHSH 值" lean="D5/S3/QuantumBounds/ClassicalFiberBound.boolValue D5/S3/QuantumBounds/ClassicalFiberBound.DeterministicFiberModel D5/S3/QuantumBounds/ClassicalFiberBound.observable D5/S3/QuantumBounds/ClassicalFiberBound.chshAt D5/S3/QuantumBounds/ClassicalFiberBound.classicalCHSH"}
+在模块 `ClassicalFiberBound` 中：
+
+1. [`boolValue`](lean:D5/S3/QuantumBounds/ClassicalFiberBound.boolValue) $: \mathrm{Bool} \to \mathbb{R}$ 把 `false` 读作 $-1$，把 `true` 读作 $+1$；
+2. **确定性纤维模型** [`DeterministicFiberModel`](lean:D5/S3/QuantumBounds/ClassicalFiberBound.DeterministicFiberModel) $\mathrm{Fiber}$ 是由两张应答表 $\mathrm{alice},\ \mathrm{bob} : \operatorname{Fin} 2 \to \mathrm{Fiber} \to \mathrm{Bool}$ 构成的结构体：对两个测量设置中的每一个、对每个纤维地址，各给出一个布尔答案；
+3. [`observable`](lean:D5/S3/QuantumBounds/ClassicalFiberBound.observable) 把一张答案表 $\mathrm{answer} : \mathrm{Fiber} \to \mathrm{Bool}$ 变成实值函数 $\lambda \mapsto \operatorname{boolValue}(\mathrm{answer}(\lambda))$；
+4. 单个纤维地址上的 CHSH 值 [`chshAt`](lean:D5/S3/QuantumBounds/ClassicalFiberBound.chshAt) 定义为
+
+   $$
+   \operatorname{chshAt}(\mathrm{model}, \lambda) \;=\; A_0 B_0 + A_0 B_1 + A_1 B_0 - A_1 B_1,
+   $$
+
+   其中 $A_x = \operatorname{observable}(\mathrm{model.alice}\ x)(\lambda)$，$B_y = \operatorname{observable}(\mathrm{model.bob}\ y)(\lambda)$；
+5. 对有限类型 $\mathrm{Fiber}$ 与权重 $\mu : \mathrm{Fiber} \to \mathbb{R}$，**经典 CHSH 值** [`classicalCHSH`](lean:D5/S3/QuantumBounds/ClassicalFiberBound.classicalCHSH) 定义为
+
+   $$
+   \operatorname{classicalCHSH}(\mu, \mathrm{model}) \;=\; \sum_{\lambda \in \mathrm{Fiber}} \mu(\lambda)\,\operatorname{chshAt}(\mathrm{model}, \lambda).
+   $$
+:::
+
+::: {.theorem #thm-classical-chsh-bound-exact title="有限确定性局域纤维模型的 CHSH 绝对值上界恰为 2" lean="D5/S3/QuantumBounds/ClassicalFiberBound.classical_chsh_bound_is_exact D5/S3/QuantumBounds/ClassicalFiberBound.classical_chsh_abs_le_two"}
+设 $\mathrm{Fiber}$ 为有限类型（`[Fintype Fiber]`），权重 $\mu : \mathrm{Fiber} \to \mathbb{R}$ 满足非负性（`hmu_nonneg`：对一切 $\lambda$ 有 $0 \le \mu(\lambda)$）与归一性（`hmu_sum`：$\sum_\lambda \mu(\lambda) = 1$）。则：
+
+1. 对每个确定性纤维模型 $\mathrm{model}$（[@def-deterministic-fiber-model]），
+
+   $$
+   \bigl\lvert \operatorname{classicalCHSH}(\mu, \mathrm{model}) \bigr\rvert \;\le\; 2 ;
+   $$
+
+2. 集合 $\bigl\{\, \lvert\operatorname{classicalCHSH}(\mu, \mathrm{model})\rvert \;\big|\; \mathrm{model} : \operatorname{DeterministicFiberModel}\ \mathrm{Fiber} \,\bigr\}$ 以 $2$ 为最大元（`IsGreatest`）：$2$ 属于这个集合，并且集合中的每个元素都不超过 $2$。
+:::
+
+::: proof
+先看单个纤维地址。四个取值 $\pm 1$ 的实数两两可交换且平方为 $1$，满足 Mathlib 的交换 CHSH 不等式 `CHSH_inequality_of_comm`，于是 $\operatorname{chshAt} \le 2$。把 Alice 的两个答案同时取反会使 $\operatorname{chshAt}$ 变号，对取反后的模型再用一次同一不等式，得 $-2 \le \operatorname{chshAt}$。然后用非负权重 $\mu(\lambda)$ 逐项相乘并求和，代入 $\sum_\lambda \mu(\lambda) = 1$，得 $-2 \le \operatorname{classicalCHSH} \le 2$，这是结论 1（`classical_chsh_abs_le_two`）。可达性取 Alice 与 Bob 在一切设置、一切纤维地址上都回答 `true` 的常值模型：每个地址上 $\operatorname{chshAt} = 1 + 1 + 1 - 1 = 2$，加权和等于 $2$（`classical_chsh_eq_two_exists`）。两者合起来即结论 2。完整证明由 Lean 内核检查。
+:::
+
+单个地址上的那一步可以直接用手数完。
+
+::: {.example #ex-sixteen-deterministic-chsh-tables title="十六张确定性应答表的 CHSH 值：八张取 +2，八张取 −2"}
+在一个固定的纤维地址上，Alice 的两个答案 $a_0, a_1$ 与 Bob 的两个答案 $b_0, b_1$ 各取 $\pm 1$，共 $2^4 = 16$ 种组合。把 CHSH 值改写为
+
+$$
+a_0 b_0 + a_0 b_1 + a_1 b_0 - a_1 b_1 \;=\; a_0\,(b_0 + b_1) + a_1\,(b_0 - b_1).
+$$
+
+Bob 的两个答案只有两种关系：
+
+| Bob 的答案 | $b_0 + b_1$ | $b_0 - b_1$ | CHSH 值 | 组合数 |
+| :---: | :---: | :---: | :---: | :---: |
+| $b_0 = b_1$ | $\pm 2$ | $0$ | $2\,a_0 b_0 = \pm 2$ | $8$ |
+| $b_0 = -b_1$ | $0$ | $\pm 2$ | $2\,a_1 b_0 = \pm 2$ | $8$ |
+
+每一行里，决定符号的那个乘积取 $+1$ 与 $-1$ 的组合各占一半，所以十六种组合中恰有八种取 $+2$、八种取 $-2$，没有任何一种落在闭区间 $[-2, 2]$ 之外，也没有任何一种落在它的内部。任何概率混合都只是在 $-2$ 与 $+2$ 之间取加权平均，于是 $\lvert S\rvert \le 2$，与 [@thm-classical-chsh-bound-exact] 一致。
+:::
+
+现在两端都钉住了：有限确定性局域模型的 CHSH 值出不了线段 $[-2, 2]$（[@thm-classical-chsh-bound-exact]），而固定 CHSH 算子在量子态上的期望值可以到达 $2\sqrt{2}$（[@cor-fixed-chsh-tsirelson]）。两者之比为 $\sqrt{2}$，这就是 $45^\circ$ 圆弧超出折线的倍数。需要留意两条定理各自的量词范围：经典一侧针对的是有限纤维集合上的确定性 $\pm 1$ 应答表，量子一侧针对的是一个固定的双比特算子；一般形式见章末 [@rem-bell-chsh-literature]。
+
 为什么 CHSH 实验偏偏选定 $\theta = 45^\circ$ 作为对称工作角？在对称四方向设置（三段相邻夹角为 $\theta$、第四段跨越角为 $3\theta$）下，四项余弦组合为 $3\cos\theta - \cos(3\theta)$，其一阶导数 $-3\sin\theta + 3\sin(3\theta) = 0$ 恰在 $\theta = 45^\circ$（$\pi/4$）处取得全局最大值 $2\sqrt{2}$！（注意区分两个不同的优化问题：$\theta = 45^\circ$ 最大化的是四项对称 CHSH 组合 $3\cos\theta - \cos(3\theta)$；若单独考察单根弦上的差函数 $g(\theta) = \cos\theta - (1 - 2\theta/\pi)$，其逐点导数 $-\sin\theta + 2/\pi = 0$ 的极大值点在 $\theta = \arcsin(2/\pi) \approx 39.5402^\circ$ 处，单弦差约为 $0.2105$，而在对称 CHSH 工作角 $\theta = 45^\circ$ 处单弦差为 $\frac{\sqrt{2}-1}{2} \approx 0.2071$，四段累加得 $2\sqrt{2} - 2 \approx 0.8284$。）让我们通过下面的综合算例，把 $\rho_{\Phi^+}$ 与 $\rho_{\Psi^-}$ 的关联张量、四项 CHSH 期望值以及 $45^\circ$ 余弦与特定玩具模型的几何对比逐一算清。
 
 ::: {.example #ex-bell-chsh-45deg title="贝尔态关联张量、CHSH 45° 极值 2√2 与余弦圆弧手算全表"}
@@ -356,10 +415,10 @@ $$
 在 $0^\circ, 90^\circ, 180^\circ$ 三个正交主轴节点上，量子余弦与经典折线严丝合缝地钉死在同一点 $(+1, 0, -1)$；唯有走到半途的 $45^\circ$ 与 $135^\circ$，勾股二次范数支撑起的圆弧 $\cos 45^\circ \approx 0.7071$ 越过了平直切割的线性折线 $0.5$，四处鼓包累加起来，正好把 $4 \times 0.5 = 2$ 顶上了 $4 \times 0.70710678\dots = 2\sqrt{2}$！
 :::
 
-::: {.remark #rem-bell-chsh-literature title="经典 CHSH 多面体上界、一般 Tsirelson 定理与无超光速通信边界（文献结果，未在本书形式化）"}
+::: {.remark #rem-bell-chsh-literature title="一般经典局域隐变量上界、一般 Tsirelson 定理与无超光速通信边界（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 在将本章的形式化定理与量子基础物理文献对照时，应当严格区分以下三个层面的经典与量子结论：
 
-1. **一般经典局域隐变量模型的 $|S_{\mathrm{LHV}}| \le 2$ 凸包定理**（J. F. Clauser, M. A. Horne, A. Shimony, and R. A. Holt, *Proposed experiment to test local hidden-variable theories*, Phys. Rev. Lett. **23**, 880–884, 1969, doi:10.1103/PhysRevLett.23.880）：[@ex-bell-chsh-45deg] 第三步中的折线 $C_{\mathrm{cl}}(\theta) = 1 - 2\theta/\pi$ 仅是一个特定的均匀隐方向玩具模型，其本身并不等同于贝尔定理。真正的贝尔—CHSH 定理对**任意**局域随机隐变量分布 $p(\lambda)$ 及任意局域响应函数 $\bar{A}_i(\lambda), \bar{B}_j(\lambda) \in [-1, 1]$ 成立：因为区间 $[-1, 1]^4$ 上的双线性泛函在极点 $a_0, a_1, b_0, b_1 \in \{\pm 1\}$ 处达到极值，而对任意 $\pm 1$ 赋值，$b_0 + b_1$ 与 $b_0 - b_1$ 中必有一项为 $0$、另一项为 $\pm 2$，故确定性组合 $a_0(b_0 + b_1) + a_1(b_0 - b_1) \in \{-2, +2\}$；对任意隐变量概率测度求凸平均后，必然服从 $|S_{\mathrm{LHV}}| \le 2$。
+1. **一般经典局域隐变量模型的 $|S_{\mathrm{LHV}}| \le 2$ 凸包定理**（J. F. Clauser, M. A. Horne, A. Shimony, and R. A. Holt, *Proposed experiment to test local hidden-variable theories*, Phys. Rev. Lett. **23**, 880–884, 1969, doi:10.1103/PhysRevLett.23.880）：[@ex-bell-chsh-45deg] 第三步中的折线 $C_{\mathrm{cl}}(\theta) = 1 - 2\theta/\pi$ 仅是一个特定的均匀隐方向玩具模型，其本身并不等同于贝尔定理。真正的贝尔—CHSH 定理对**任意**局域随机隐变量分布 $p(\lambda)$ 及任意局域响应函数 $\bar{A}_i(\lambda), \bar{B}_j(\lambda) \in [-1, 1]$ 成立：因为区间 $[-1, 1]^4$ 上的双线性泛函在极点 $a_0, a_1, b_0, b_1 \in \{\pm 1\}$ 处达到极值，而对任意 $\pm 1$ 赋值，$b_0 + b_1$ 与 $b_0 - b_1$ 中必有一项为 $0$、另一项为 $\pm 2$，故确定性组合 $a_0(b_0 + b_1) + a_1(b_0 - b_1) \in \{-2, +2\}$；对任意隐变量概率测度求凸平均后，必然服从 $|S_{\mathrm{LHV}}| \le 2$。其中有限隐变量集合、确定性 $\pm 1$ 应答的情形已由 [@thm-classical-chsh-bound-exact] 验证；任意概率测度 $p(\lambda)$ 与取值于 $[-1, 1]$ 的随机应答函数的一般形式仍属文献结果：从前者到后者需要把随机应答写成确定性应答的凸组合，并把有限和换成积分，这两步未在本书形式化。
 2. **任意维希尔伯特空间与任意可变观测量下的一般 Tsirelson 界**（B. S. Cirel'son, *Quantum generalizations of Bell's inequality*, Lett. Math. Phys. **4**, 93–100, 1980, doi:10.1007/BF00417500）：本章 [@cor-fixed-chsh-tsirelson] 证明的是**固定**双比特算子 `CHSHWitness.chshOperator` 在全体双比特态上的最大值为 $2\sqrt{2}$。而在 Cirel'son (1980) 的一般定理中，对任意希尔伯特空间 $\mathcal{H}$、任意量子态 $\rho$ 以及满足 $A_i^* = A_i$、$B_j^* = B_j$、$A_i^2 = I$、$B_j^2 = I$ 且 $[A_i, B_j] = 0$ 的**任意**四个二值可观测量，利用算子范数估计 $\norm{[A_0, A_1]}_{\mathrm{op}} \le 2\norm{A_0}\norm{A_1} = 2$ 与 $\norm{[B_0, B_1]}_{\mathrm{op}} \le 2$ 代入 Landau 恒等式 $S^2 = 4I - [A_0, A_1][B_0, B_1]$，可得 $\norm{S^2}_{\mathrm{op}} \le 4 + 4 = 8$，从而对一切空间维数与测量方向均有 $|\langle S\rangle| \le 2\sqrt{2}$。
 3. **非定域关联绝不蕴涵可控超光速通信（无信令原则）**：贝尔不等式的违背以及实验上的无漏洞贝尔检验，揭示的是联合测量结果在事后放到一起比对时呈现的非经典关联面积；正如 [@thm-local-correlation-sectors] 与 [@lemma-bell-mixed-marginal] 所示，无论 Alice 选择哪一个测量基（甚至无论她是否执行测量），只要她不通过经典信道把测量结果告诉 Bob，Bob 局部的约化密度矩阵始终纹丝不动地停留在球心 $\mathrm{traceFirstFactor}(\mathrm{bellDensity}) = \frac{1}{2}I_2$，因此量子纠缠绝不能用于传递可控超光速信号。
 :::
