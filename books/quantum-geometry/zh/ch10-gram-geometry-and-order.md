@@ -1,0 +1,257 @@
+# “两两比较，永远一致，顺序无关”：消解非对易假象与贝里相位
+
+> *“我总感觉量子的本质就是, 两两比较, 永远一致, 顺序无关”*
+
+初读章首这句格言，任何受过标准量子力学训练的人都会本能地跳起来反驳：**“怎么可能顺序无关？！量子力学和经典力学最大的区别，不就是算符不对易 $AB \neq BA$ 吗？在三维球面上，先绕 $X$ 轴转 $90^\circ$ 再绕 $Y$ 轴转 $90^\circ$，和先绕 $Y$ 轴转 $90^\circ$ 再绕 $X$ 轴转 $90^\circ$，明明停在完全不同的终点！沿着球面三角形走一圈回来，还会凭空多出一个与路径取向有关的贝里几何相位（Berry phase）！”**
+
+这场看似针锋相对的冲突，其实戳破了量子基础中最容易被混为一谈的两件事：**在时间里依次改造状态的物理动作序列**，与**在固定时刻记录一族状态彼此内积关系的全局格拉姆（Gram）账本**。
+
+本章将用四节篇幅把这两者的边界彻底厘清：
+
+1. **球面上的主动旋转与投影快门确实不对易**（$R_x R_y \neq R_y R_x$，$P_0 P_+ \neq P_+ P_0$），闭合回路也确实携带非零贝里立体角相位 $\gamma_B = -\Omega/2$；
+2. **时序测量仪器一旦丢弃算符回作用、只看静态效应元，就会漏掉真实的先后顺序差异**（[@prop-static-sequential-separation] 给出一个零假设的 $2\times 2$ 精确反例，把“概率为 $0$”与“概率为 $1$”当场分开）；
+3. **为什么我们总觉得需要依赖路径顺序？** 因为在二维基球面 $S^2$ 上，毛球定理（$\chi(S^2) = 2$）与霍普夫圆丛（Hopf bundle，$S^1 \hookrightarrow S^3 \to S^2$，第一陈数 $\pm 1$）禁止了全局连续无奇异的切标架与全局连续相位截面；而在三维旋转器超球面 $S^3 \cong \mathrm{SU}(2) \subset \mathrm{Cl}^+_{3,0}$（$\chi(S^3) = 0$）上，却天然存在处处非零的全局左不变切标架 $(pI_x, pI_y, pI_z)$；
+4. **什么才是真正的“两两比较，永远一致，顺序无关”？** 当我们保留带标签的**完整复格拉姆内积矩阵** $G_{ij} = \langle\psi_i, \psi_j\rangle$（连同复相位，而非仅仅模平方 $|G_{ij}|^2$）时，无论按什么下标顺序去读取或核对这张两两比较表，它都在差一个公共外围幺正变换 $U$ 的意义下唯一重构出整族量子态的全局几何配置（[@thm-gram-unitary-reconstruction] 与 [@lemma-unit-gram-equality]）——**连球面测地三角形的潘查拉特纳姆—贝里（Pancharatnam–Berry）几何相位本身，也已经由三点循环内积乘积 $\Delta = G_{01}G_{12}G_{20}$ 按精确符号关系 $\gamma_B \equiv -\arg\Delta = -\frac{\Omega}{2} \pmod{2\pi}$（自旋朝上本征支下等于有向立体角的负一半）永恒、自洽地编码在这张两两比较表里！**
+
+![球面旋转顺序与贝里立体角、二维球面毛球/霍普障碍与三维旋转器球全局标架，以及完整复格拉姆矩阵的幺正重构](../assets/fig-10-gram-matrix-hairy-ball.svg)
+
+## 球面转序与贝里立体角 {#sec-spherical-order-and-berry}
+
+让我们先正视非对易几何动作的客观存在，绝不用含糊的哲学辞令去抹杀它。
+
+拿手边的书本或图 10 左栏的布洛赫球做一次右手主动旋转测试。设初态指向北极 $\vv{e}_3 = (0, 0, 1)$：
+
+- 若**先绕 $Y$ 轴转 $+90^\circ$、再绕 $X$ 轴转 $+90^\circ$**，第一步 $R_y(\pi/2)\vv{e}_3 = \vv{e}_1$ 把北极拉到正东赤道极 $+X$，第二步绕 $+X$ 轴自转对已经在 $+X$ 轴上的向量不起作用，终点稳稳停在 $\vv{e}_1 = (1, 0, 0)$：
+
+  $$
+  R_x(\pi/2)\,R_y(\pi/2)\,\vv{e}_3 = \vv{e}_1.
+  $$
+
+- 反过来，若**先绕 $X$ 轴转 $+90^\circ$、再绕 $Y$ 轴转 $+90^\circ$**，第一步 $R_x(\pi/2)\vv{e}_3 = -\vv{e}_2$ 把北极拉到 $-\vv{e}_2$，第二步绕 $Y$ 轴旋转对已经在 $\pm\vv{e}_2$ 轴上的向量同样不起作用，终点却停在了 $-\vv{e}_2 = (0, -1, 0)$：
+
+  $$
+  R_y(\pi/2)\,R_x(\pi/2)\,\vv{e}_3 = -\vv{e}_2 \neq \vv{e}_1!
+  $$
+
+同样，取北极投影算子 $P_0 = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$ 与正东赤道投影算子 $P_+ = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$，直接相乘得
+
+$$
+P_0 P_+ = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 0 & 0 \end{pmatrix} \neq \frac{1}{2}\begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix} = P_+ P_0.
+$$
+
+更进一步，如果让自旋状态沿着球面八分球大圆三角形 $N(\vv{e}_3) \to +X(\vv{e}_1) \to +Y(\vv{e}_2) \to N(\vv{e}_3)$ 走完一圈闭合回路（立体角 $\Omega = \frac{\pi}{2}$，占整球立体角 $4\pi$ 的八分之一），虽然三维实方向向量 $\vv{r}$ 回到了北极原点 $N$，但悬挂在它头顶的二维复旋量却攒下了一个无法消去的几何和乐角——在自旋朝上本征支的标准约定下，**贝里几何相位**恰好等于有向立体角的负一半：
+
+$$
+\gamma_B = -\frac{\Omega}{2} = -\frac{\pi}{4}.
+$$
+
+这个相位是只能靠连续微分方程沿路径一步步积分才能算出来的“路径历史遗迹”吗？恰恰相反！只要保留三颗顶点态矢 $\psi_0, \psi_1, \psi_2$ 两两之间的**复内积** $G_{ij} = \langle\psi_i, \psi_j\rangle$，三点循环巴格曼不变量（Bargmann invariant）
+
+$$
+\Delta(\psi_0, \psi_1, \psi_2) = \langle\psi_0, \psi_1\rangle\langle\psi_1, \psi_2\rangle\langle\psi_2, \psi_0\rangle = G_{01} G_{12} G_{20}
+$$
+
+在每个顶点各自乘上任意局部相位 $\psi_k \mapsto e^{i\alpha_k}\psi_k$ 时严格保持不变（因为 $e^{-i\alpha_0}e^{i\alpha_1}\cdot e^{-i\alpha_1}e^{i\alpha_2}\cdot e^{-i\alpha_2}e^{i\alpha_0} = 1$），而它的复辐角按 $\gamma_B \equiv -\arg\Delta = -\frac{\Omega}{2} \pmod{2\pi}$ 直接编码了球面测地三角形的几何相位！
+
+为了精确计算任意纬度圈上两个复旋量的两两内积，在 Lean 模块 `BargmannImaginaryMaximizers` 中，对高度参数 $t \in [0, 1]$ 与复数 $z \in \mathbb{C}$，定义二维复向量 `latitude t z` 为
+
+$$
+\operatorname{latitude}(t, z) = \bigl(\sqrt{1 - t},\; \sqrt{t}\,z\bigr) \in (\operatorname{Fin} 2 \to \mathbb{C}).
+$$
+
+::: {.corollary #cor-latitude-complex-overlap title="同纬度复参数化向量的共轭点积恒等式" lean="D5/S3/Quantum/Information/BargmannImaginaryMaximizers.Latitude.latitude_dot"}
+设实数 $t \in \mathbb{R}$ 满足 $0 \le t \le 1$，$z, w \in \mathbb{C}$ 为任意复数。则共轭点积配对满足
+
+$$
+\operatorname{star}\bigl(\operatorname{latitude}(t, z)\bigr) \cdot_v \operatorname{latitude}(t, w)
+= (1 - t) + t\,\bar{z}\,w.
+$$
+:::
+
+::: proof
+按 `Fin 2` 上的两部分量展开共轭点积：第一分量贡献 $\overline{\sqrt{1-t}}\sqrt{1-t} = (\sqrt{1-t})^2 = 1 - t$（因 $0 \le t \le 1$ 知 $1 - t \ge 0$），第二分量贡献 $\overline{\sqrt{t}\,z}\,(\sqrt{t}\,w) = (\sqrt{t})^2 \bar{z} w = t\bar{z}w$（因 $t \ge 0$）。两项相加即得 $(1 - t) + t\bar{z}w$。完整证明由 Lean 内核检查。
+:::
+
+请注意 [@cor-latitude-complex-overlap] 的精确合同：该代数恒等式对任意复数 $z, w \in \mathbb{C}$ 均成立（若要求 $\operatorname{latitude}(t, z)$ 归一化为单位态矢，则当 $t \neq 0$ 时需附加 $|z| = |w| = 1$）。它给出的是两态之间的精确复内积重叠公式，本身并不直接声明微分几何中的贝里平行移动和乐定理（后者见 [@rem-gram-hairy-ball-literature]）。但你看，在赤道 $t = \frac{1}{2}$ 处，取东极 $z = 1$ 与正北偏内极 $w = i$，[@cor-latitude-complex-overlap] 一行就算出两者的复内积为 $\frac{1}{2} + \frac{1}{2}\cdot 1\cdot i = \frac{1 + i}{2} = \frac{1}{\sqrt{2}}e^{i\pi/4}$——那枚八分球立体角的一半 $\frac{\pi}{4}$，从一开始就明明白白地写在两两复内积的相位角里！
+
+## 保留仪器与时间顺序 {#sec-instruments-preserve-order}
+
+在进入全局格拉姆重构之前，我们必须立下一块醒目的警示牌：**“两两比较顺序无关”绝不意味着可以把不同时刻的物理测量仪器随意颠倒，或者只凭单次测量的静态概率分布（POVM 效应元）就抹去测量后的状态更新机制！**
+
+在量子测量理论中，一个双结果测量仪器由一族克劳修斯（Kraus）算符 $K_b \in M_2(\mathbb{C})$（$b \in \mathrm{Bool} = \{\mathrm{true}, \mathrm{false}\}$）描述：
+
+1. **静态效应元（单次概率）**：只看第一次测量出结果 $b$ 的概率时，玻恩定则只关心正算符 $E_b = K_b^* K_b$（满足完备性 $\sum_b E_b = I$）；
+2. **动态分支更新（序贯联合概率）**：一旦紧接着要做第二次测量（探测效应元 $F$），状态已经发生了依赖于具体仪器算符 $K_b$ 的分支演化 $\rho \mapsto K_b \rho K_b^*$，两步联合玻恩权重为 $\operatorname{bornProbability}(K_b \rho K_b^*, F) = \Tr(K_b \rho K_b^* F)$。
+
+如果两台仪器拥有**完全相同**的静态效应元 $E_b = K_b^* K_b = L_b^* L_b$，它们在两步序贯测量中的联合概率分布会不会也必定相同？下面的冻结命题用一对极简的单比特仪器给出彻底否定的反例：静态效应完全相等，但两步联合权重一个是 $0$，另一个却是 $1$！
+
+::: {.proposition #prop-static-sequential-separation title="相同静态效应元下两步序贯联合分布的严格分离" lean="D5/S3/Quantum/Measurement/StaticEffectSequentialSeparation.same_effects_different_two_step_joint_law"}
+在单比特矩阵代数 $\mathrm{QubitMatrix} = M_2(\mathbb{C})$ 中，记北极基态密度矩阵为 $P_0 = \operatorname{basisZeroDensity} = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$，泡利翻转矩阵为 $X = \operatorname{qubitX} = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$。定义两个以布尔值 $\mathrm{outcome} \in \mathrm{Bool}$ 为指标的测量仪器：
+
+$$
+\begin{aligned}
+\operatorname{projectiveKraus}(\mathrm{outcome}) &= \begin{cases} I - P_0, & \mathrm{outcome} = \mathrm{true}, \\ P_0, & \mathrm{outcome} = \mathrm{false}, \end{cases} \\
+\operatorname{flippedKraus}(\mathrm{outcome}) &= X \cdot \operatorname{projectiveKraus}(\mathrm{outcome}),
+\end{aligned}
+$$
+
+并定义效应映射 $\operatorname{effect}(K, b) = K(b)^* K(b)$、分支更新 $\operatorname{branch}(K, b, \rho) = K(b)\rho K(b)^*$ 及第二步探测效应 $\operatorname{secondEffect} = I - P_0$。则同时成立以下五条结论：
+
+1. 对一切 $\mathrm{outcome} \in \mathrm{Bool}$，$\operatorname{effect}(\operatorname{projectiveKraus}, \mathrm{outcome}) = \operatorname{effect}(\operatorname{flippedKraus}, \mathrm{outcome})$；
+2. $\sum_{\mathrm{outcome}} \operatorname{effect}(\operatorname{projectiveKraus}, \mathrm{outcome}) = I$；
+3. $\sum_{\mathrm{outcome}} \operatorname{effect}(\operatorname{flippedKraus}, \mathrm{outcome}) = I$；
+4. $\operatorname{bornProbability}\bigl(\operatorname{branch}(\operatorname{projectiveKraus}, \mathrm{false}, P_0),\, \operatorname{secondEffect}\bigr) = 0$；
+5. $\operatorname{bornProbability}\bigl(\operatorname{branch}(\operatorname{flippedKraus}, \mathrm{false}, P_0),\, \operatorname{secondEffect}\bigr) = 1$。
+:::
+
+::: proof
+因 $X^* = X$ 且 $X^2 = I$，对每个 $b \in \mathrm{Bool}$ 有
+
+$$
+L_b^* L_b = (X K_b)^* (X K_b) = K_b^* X^* X K_b = K_b^* K_b,
+$$
+
+故两族仪器的静态效应元逐项相等，且和均为 $(I - P_0) + P_0 = I$。取初态 $\rho = P_0$ 与第一步结果 $b = \mathrm{false}$：
+
+- 对投影仪器，$K_{\mathrm{false}} = P_0$，分支态为 $P_0 P_0 P_0^* = P_0$，与正交效应 $\operatorname{secondEffect} = I - P_0$ 相乘为零矩阵，故迹为 $0$；
+- 对翻转仪器，$L_{\mathrm{false}} = X P_0$，将北极态 $\lvert 0\rangle\langle 0\rvert$ 翻转至南极态 $X P_0 X = I - P_0$，再与 $\operatorname{secondEffect} = I - P_0$ 相乘得 $I - P_0$，其迹恰为 $1$。
+
+完整证明由 Lean 内核检查。
+:::
+
+[@prop-static-sequential-separation] 是一剂清醒剂：在时间演化与序贯测量中，左乘幺正翻转 $X$ 虽然在静态效应 $K^* X^* X K = K^* K$ 中被共轭相消，却实实在在地把测量后的出口态从北极掀翻到了南极。因此，**任何声称“顺序无关”的定理，都绝不能把测量仪器压缩成静态效应元，更不能抹掉时间中的算符作用次序**。
+
+## 毛球、霍普纤维与旋转器球 {#sec-hairy-ball-hopf-rotors}
+
+既然球面上的局部坐标与连续移动处处受制于路径依赖与相位扭转，为什么我们不能干脆在布洛赫球面 $S^2$ 的每一个方向 $p \in S^2$ 上，都事先钉死一根平滑变化的“标准切向量尺子”和“标准零相位旋量代表元”，从而一劳永逸地消灭贝里相位与规范坐标卡切换？
+
+答案藏在微分拓扑最著名的两道全局几何阻碍，以及三维球面 $S^3$ 与二维球面 $S^2$ 的戏剧性反差之中（图 10 中栏）：
+
+1. **二维球面 $S^2$ 上的毛球定理（切丛障碍，$\chi(S^2) = 2$）**：如果你想在日常的二维球面 $S^2$ 上梳理出一场处处连续且处处非零的切向量场 $v : S^2 \to TS^2$（好比给每个纯态方向连续指定一根正交微扰轴），庞加莱—霍普夫（Poincaré–Hopf）指标定理会当场拦住你——因为 $S^2$ 的欧拉示性数等于 $\chi(S^2) = 2 \neq 0$，任何光滑（乃至连续）切向量场在 $S^2$ 上都**必然至少有一个零点**！例如，将竖直单位向量 $\vv{e}_3$ 投影到球面切平面上：
+
+   $$
+   v(p) = \vv{e}_3 - (p \cdot \vv{e}_3)\,p \qquad (p \in S^2).
+   $$
+
+   在赤道东极 $p = \vv{e}_1$ 处，$v(\vv{e}_1) = \vv{e}_3 \neq 0$；但在北极 $p = +\vv{e}_3$ 与南极 $p = -\vv{e}_3$ 两处，$v(\pm\vv{e}_3) = 0$，两个孤立零点的指标各为 $+1$，加起来恰好等于 $1 + 1 = 2 = \chi(S^2)$。
+2. **霍普夫圆丛的无全局截面障碍（复线丛障碍，第一陈数 $|c_1| = 1$）**：与切丛 $TS^2$（欧拉数 $2$）既有联系又**绝不可混同**的另一道障碍，发生在从单位旋量球面 $S^3 = \{\psi \in \mathbb{C}^2 \mid \norm{\psi} = 1\}$ 投向布洛赫射线球面 $S^2 \cong \mathbb{CP}^1$ 的**霍普夫主圆丛（Hopf principal $S^1$-bundle）**
+
+   $$
+   S^1 \hookrightarrow S^3 \xrightarrow{\;\pi\;} S^2
+   $$
+
+   上。给球面每个方向 $p \in S^2$ 连续挑选一个确定相位的单位列向量 $\lvert\psi(p)\rangle \in S^3$，在几何上就等于为主圆丛 $\pi : S^3 \to S^2$ 构造一个**全局连续截面** $s : S^2 \to S^3$（满足 $\pi \circ s = \mathrm{id}_{S^2}$）。然而，主圆丛一旦拥有全局连续截面，整座丛就必然拓扑平凡（同胚于直积 $S^2 \times S^1$）；而 $S^3$ 绝不同胚于 $S^2 \times S^1$，该丛的第一陈数（first Chern number）模长为 $1$（而非 $0$）！这就从拓扑上彻底宣判：**不可能在整颗布洛赫球面 $S^2$ 上建立单一、连续、无奇点的全局相位规范**。北极规范势 $A_N = \frac{1}{2}(1 - \cos\theta)\,d\varphi$ 在南极 $\theta = \pi$ 处出现奇弦，南极规范势 $A_S = -\frac{1}{2}(1 + \cos\theta)\,d\varphi$ 在北极 $\theta = 0$ 处出现奇弦，两者在赤道重叠区相差绕数 $1$ 的规范变换 $A_N - A_S = d\varphi$，而曲率二形式 $F = dA_N = dA_S = \frac{1}{2}\sin\theta\,d\theta\wedge d\varphi$ 在整颗球面上的积分正好给出单极拓扑荷 $\frac{1}{2\pi}\int_{S^2} F = 1$。
+3. **三维旋转器超球面 $S^3 \cong \mathrm{SU}(2) \subset \mathrm{Cl}^+_{3,0}$ 的全局可平行化（$\chi(S^3) = 0$）**：奇异的事情发生了！虽然二维基球面 $S^2$ 既不能梳平毛发、也不能选出全局相位截面，但一旦我们回到包裹着它的四维空间 $\mathbb{R}^4$ 中的三维单位超球面 $S^3$——即克利福德偶子代数 $\mathrm{Cl}^+_{3,0}$ 中模长为 $1$ 的**旋转器（rotor / 单位四元数）群** $S^3 \cong \mathrm{SU}(2)$——所有的局部切标架障碍瞬间烟消云散！在任意单位旋转器 $p \in S^3$ 处，直接用[第九章](ch09-axes-and-state-addressing.md)的三块单位双矢量 $I_x, I_y, I_z$ 右乘 $p$：
+
+   $$
+   \bigl(\, p I_x,\;\; p I_y,\;\; p I_z \,\bigr),
+   $$
+
+   由于 $\langle p, p I_j\rangle_{\mathbb{R}^4} = 0$ 且 $\langle p I_j, p I_k\rangle_{\mathbb{R}^4} = \delta_{jk}$，这三根切向量在整颗 $S^3$ 的每一点处都严格单位正交、处处光滑且**永远不为零**（呼应 $\chi(S^3) = 0$）！（注意：旋转器群 $S^3 \cong \mathrm{SU}(2)$ 到三维旋转群 $\mathrm{SO}(3) \cong \mathbb{RP}^3$ 是二对一双覆盖 $\pm p \mapsto R_p$ 而非同构；且总空间 $S^3$ 的全局可平行化是在 $S^3$ 自身切丛 $TS^3$ 上梳平毛发，并不能替投影映射 $S^3 \to S^2$ 提供横跨纤维的全局截面。）
+
+> 二维球面因降维投射而生出极点奇弦；三维旋转器球因保留完整相位纤维而处处平滑。
+
+## 完整复格拉姆矩阵重构 {#sec-complex-gram-reconstruction}
+
+现在，让我们正面回答章首的核心命题：**既然局部坐标卡在 $S^2$ 上必有奇点、物理旋转操作又依赖于先后顺序，究竟在什么精确数学意义下，量子态满足“两两比较，永远一致，顺序无关”？**
+
+答案是：不要去人为挑选某套外部坐标基 $C$，也不要强行在 $S^2$ 上硬割局部相位截面，而是直接把一族带标签的量子态列向量 $A = [\psi_1, \dots, \psi_n] \in \mathbb{C}^{m \times n}$ 之间所有的**两两复内积**汇总成一张 $n \times n$ 厄米矩阵——**复格拉姆矩阵（complex Gram matrix）**
+
+$$
+G = A^* A, \qquad G_{ij} = \langle \psi_i, \psi_j\rangle = \psi_i^* \psi_j \qquad (i, j \in n).
+$$
+
+请看这张格拉姆矩阵 $G$ 的性质：
+
+- 在计算任意一项 $G_{ij} = \langle\psi_i, \psi_j\rangle$ 时，只是拿第 $i$ 个态与第 $j$ 个态做一次两两内积比量；你先算 $(1, 2)$ 还是先算 $(0, 2)$，或者把状态标签整体重排（对应 $G \mapsto P^* G P$），表里的每一条两两关系都丝毫不随读取顺序而变；
+- 更关键的是，下面的冻结定理证明：**这张两两内积表 $A^* A$ 已经完备地锁死了整族态矢在希尔伯特空间中的全部刚体几何！** 任何另一组态矢 $B \in \mathbb{C}^{m \times n}$，只要它给出的两两复内积表与 $A$ 完全一致（$B^* B = A^* A$），就必然存在外围空间 $\mathbb{C}^m$ 上的**同一个公共幺正变换** $U \in U(m)$，把 $A$ 中的每一根态矢同时刚体旋转为 $B$ 中的对应态矢（$B = UA$）！
+
+::: {.theorem #thm-gram-unitary-reconstruction title="复格拉姆矩阵相等下的公共外围幺正重构定理" lean="D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq"}
+设 $m$ 为具有可判等性的有限指标类型（`Fintype m`、`DecidableEq m`），$n$ 为任意有限指标类型（`Finite n`）。对任意两个复矩阵 $B, A \in M_{m \times n}(\mathbb{C})$，若它们的复格拉姆矩阵相等：
+
+$$
+B^* B = A^* A,
+$$
+
+则存在外围幺正矩阵 $U \in \operatorname{unitaryGroup}(m, \mathbb{C})$，使得
+
+$$
+B = U A.
+$$
+:::
+
+::: proof
+条件 $B^* B = A^* A$ 意味着对任意列系数向量 $v \in \mathbb{C}^n$，恒有 $\norm{Bv}^2 = v^* B^* B v = v^* A^* A v = \norm{Av}^2$。因此，在由 $A$ 的列空间张成的子空间 $\operatorname{range}(A) \subseteq \mathbb{C}^m$ 上，映射 $Av \mapsto Bv$ 是良定义的线性等距同构，将 $\operatorname{range}(A)$ 等距映为同维子空间 $\operatorname{range}(B)$。由于外围空间 $\mathbb{C}^m$ 有限维，其正交补 $\operatorname{range}(A)^\perp$ 与 $\operatorname{range}(B)^\perp$ 维数相同，故存在正交补之间的线性等距同构；将两部分直和拼合，即得到全空间 $\mathbb{C}^m$ 上的幺正变换 $U \in U(m)$ 满足对每一列均有 $(UA)_{-,j} = B_{-,j}$，即 $B = UA$。完整证明由 Lean 内核检查。
+:::
+
+细读 [@thm-gram-unitary-reconstruction] 的严密边界，每一条都极其重要：
+
+1. **零多余前提**：定理对列向量族 $A, B$ **不要求归一化，不要求方阵或可逆，不要求列满秩或张成全空间，甚至不要求指标集非空**；
+2. **存在性与唯一性边界**：定理断言存在公共外围幺正矩阵 $U$ 使 $B = UA$（当 $\operatorname{range}(A)$ 未张满 $\mathbb{C}^m$ 时，$U$ 在正交补子空间上的作用并非唯一；它是一个存在性定理而非数值分解算法）；
+3. **必须保留完整复相位与标签对应**：定理的前提是复矩阵等式 $B^* B = A^* A$（含全部复相位 $G_{ij} = \langle\psi_i, \psi_j\rangle$ 且固定列指标 $j \in n$），绝不是仅仅只保留模平方概率 $|G_{ij}|^2$！
+
+特别地，如果一族记录态矢 `record : Index → E` 均已归一化为单位向量（$\norm{\operatorname{record}(i)} = 1$），那么在这张格拉姆表里，何时两个指标 $i$ 与 $j$ 代表完全同一个态矢？下面的冻结引理给出最干净的充要判据：当且仅当它们的两两内积精确等于 $+1$（并且该关系自动构成等价关系）！
+
+::: {.lemma #lemma-unit-gram-equality title="单位态矢两两内积等于 1 的同一性判据与等价关系" lean="D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization"}
+设 $\mathbb{K}$ 为实数域或复数域（`RCLike 𝕜`），$E$ 为 $\mathbb{K}$ 上的赋范内积空间，$\mathrm{Index}$ 为任意指标类型，$\operatorname{record} : \mathrm{Index} \to E$ 为满足归一化条件 $\forall i,\; \norm{\operatorname{record}(i)} = 1$ 的向量族。则同时成立：
+
+1. 对任意 $i, j \in \mathrm{Index}$，$\langle \operatorname{record}(i),\, \operatorname{record}(j)\rangle_{\mathbb{K}} = 1 \;\Longleftrightarrow\; \operatorname{record}(i) = \operatorname{record}(j)$；
+2. 关系 $(i, j) \mapsto \bigl(\langle \operatorname{record}(i),\, \operatorname{record}(j)\rangle_{\mathbb{K}} = 1\bigr)$ 是 $\mathrm{Index}$ 上的等价关系。
+:::
+
+::: proof
+对任意单位向量 $u, v \in E$（$\norm{u} = \norm{v} = 1$），展开差向量的范数平方：
+
+$$
+\norm{u - v}^2 = \norm{u}^2 - 2\operatorname{Re}\langle u, v\rangle_{\mathbb{K}} + \norm{v}^2 = 2\bigl(1 - \operatorname{Re}\langle u, v\rangle_{\mathbb{K}}\bigr).
+$$
+
+若 $u = v$，则 $\langle u, v\rangle_{\mathbb{K}} = \norm{u}^2 = 1$；反之，若 $\langle u, v\rangle_{\mathbb{K}} = 1$，则 $\operatorname{Re}\langle u, v\rangle_{\mathbb{K}} = 1$，代入上式得 $\norm{u - v}^2 = 0$，由赋范空间非退化性知 $u = v$。由此第一条等价性成立；而第二条等价关系性质（自反、对称、传递）由“$\langle\operatorname{record}(i), \operatorname{record}(j)\rangle_{\mathbb{K}} = 1$ 等价于恒等关系 $\operatorname{record}(i) = \operatorname{record}(j)$”立即推出。完整证明由 Lean 内核检查。
+:::
+
+请注意 [@lemma-unit-gram-equality] 成立无需完备性或有限维假设，且判据是**内积本身等于 $1$**（$\langle u, v\rangle = 1$），而非模长等于 $1$（$|\langle u, v\rangle| = 1$ 只保证两向量在复数域上差一个相位因子、属于同一条射影射线）。
+
+让我们把本章所有的线索汇聚到下面的综合手算实例中，亲眼看看八分球三角形、复格拉姆矩阵、贝里相位、顺序反例与毛球切向量场如何严丝合缝地扣在一起。
+
+::: {.example #ex-octant-berry-gram title="八分球三角形、复格拉姆矩阵与顺序反例"}
+1. **八分球三顶点与完整复格拉姆矩阵**：在 $\mathbb{C}^2$ 中取对应布洛赫球北极 $+\vv{e}_3$、正东 $+\vv{e}_1$、正北偏内 $+\vv{e}_2$ 的三根单位列向量
+
+   $$
+   \psi_0 = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \qquad
+   \psi_1 = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ 1 \end{pmatrix}, \qquad
+   \psi_2 = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ i \end{pmatrix}.
+   $$
+
+   记 $a = \frac{1}{\sqrt{2}}$，由 [@cor-latitude-complex-overlap]（在 $t = \frac{1}{2}, z = 1, w = i$ 处给出 $\langle\psi_1, \psi_2\rangle = \frac{1+i}{2}$），三态构成的 $3\times 3$ 复格拉姆矩阵 $G = A^* A$（其中 $A = [\psi_0, \psi_1, \psi_2] \in \mathbb{C}^{2\times 3}$）为
+
+   $$
+   G = \begin{pmatrix}
+   1 & a & a \\
+   a & 1 & \frac{1+i}{2} \\
+   a & \frac{1-i}{2} & 1
+   \end{pmatrix}.
+   $$
+
+   计算三点循环巴格曼乘积：
+
+   $$
+   \Delta = G_{01} G_{12} G_{20} = \frac{1}{\sqrt{2}} \cdot \frac{1+i}{2} \cdot \frac{1}{\sqrt{2}} = \frac{1+i}{4} = \frac{\sqrt{2}}{4}\,e^{i\pi/4},
+   $$
+
+   其模长为 $\frac{\sqrt{2}}{4}$、复辐角为 $\arg\Delta = +\frac{\pi}{4}$。在布洛赫球面上，由 $+\vv{e}_3 \to +\vv{e}_1 \to +\vv{e}_2 \to +\vv{e}_3$ 围成的八分球测地三角形具有有向立体角 $\Omega = \frac{\pi}{2}$；按自旋朝上本征支的标准贝里约定，几何相位为 $\gamma_B = -\frac{\Omega}{2} = -\frac{\pi}{4}$（请明确区分循环内积辐角 $\arg\Delta = +\frac{\pi}{4}$ 与自旋朝上贝里相位约定 $\gamma_B = -\frac{\pi}{4}$ 的正负号对应）。
+2. **共同外围幺正变换与标签置换**：取 $2\times 2$ 幺正矩阵 $U = \operatorname{diag}(1, i)$，令 $B = UA$，则 $B^* B = A^* U^* U A = A^* A = G$ 保持完全不变（反之由 [@thm-gram-unitary-reconstruction]，任何满足 $B^* B = G$ 的 $B$ 必由某个公共 $U \in U(2)$ 给出 $B = UA$）。注意：若用置换矩阵 $P$ 重排状态标签，格拉姆矩阵按 $G' = P^* G P$ 协变重排（而非在原下标下字面相等）；且必须保留完整复相位 $\frac{1\pm i}{2}$，单靠模平方 $|G_{ij}|^2$（全部非对角元均为 $\frac{1}{2}$）无法区分 $+\frac{\pi}{4}$ 与 $-\frac{\pi}{4}$ 的手性取向。
+3. **主动旋转与投影快门的非对易性**：在 $\mathbb{R}^3$ 中，$R_x(\pi/2)R_y(\pi/2)\vv{e}_3 = \vv{e}_1$，而 $R_y(\pi/2)R_x(\pi/2)\vv{e}_3 = -\vv{e}_2$；在 $M_2(\mathbb{C})$ 中，$P_0 P_+ \neq P_+ P_0$。
+4. **静态效应与序贯测量的分离**：按 [@prop-static-sequential-separation]，取 $K_0 = P_0$、$K_1 = I - P_0$ 及 $L_j = X K_j$。两者的静态效应元完全相同（$K_j^* K_j = L_j^* L_j = P_j$）；但从初态 $\rho = P_0$ 出发、第一步测得结果 $0$ 后再测 $P_1 = I - P_0$，未归一化联合玻恩权重对仪器 $K$ 为 $0$，对仪器 $L$ 却为 $1$。
+5. **毛球零点指标与旋转器全局标架核对**：在 $S^2$ 上，切向量场 $v(p) = \vv{e}_3 - (p\cdot\vv{e}_3)p$ 在 $p = \vv{e}_1$ 处取 $v(\vv{e}_1) = \vv{e}_3$，仅在南北两极 $p = \pm\vv{e}_3$ 处为零，两个孤立零点指标各为 $+1$，总和为 $2 = \chi(S^2)$；而在单位四元数/旋转器球 $S^3$ 上，$(pI_x, pI_y, pI_z)$ 构成处处非零的全局正交切标架。
+:::
+
+::: {.remark #rem-gram-hairy-ball-literature title="毛球与霍普障碍：文献结果，未在本书形式化"}
+**文献结果，未在本书形式化。** 本章第 3 节与第 1 节涉及的四项微分拓扑与几何相位经典结论，其严格前提与文献归属如下：
+
+1. **庞加莱—霍普夫定理与偶维球面毛球定理**（参见 J. W. Milnor, *Topology from the Differentiable Viewpoint*, University Press of Virginia, 1965）：在紧致定向光滑流形 $M$ 上，任何仅有孤立零点的光滑切向量场，其零点指标之和等于欧拉示性数 $\chi(M)$。对偶维球面 $S^{2n}$（$n \ge 1$），$\chi(S^{2n}) = 2 \neq 0$，故其上不存在处处非零的连续切向量场（连续情形由光滑逼近导出；如 [@ex-octant-berry-gram] 中的双极零点场 $v(p) = \vv{e}_3 - (p\cdot\vv{e}_3)p$，两极零点指标之和为 $1 + 1 = 2$）。
+2. **霍普夫主圆丛、第一陈数与狄拉克单极势**（参见 P. A. M. Dirac, *Quantised singularities in the electromagnetic field*, Proc. R. Soc. A **133**, 60–72, 1931, DOI `10.1098/rspa.1931.0130`；以及 M. Nakahara, *Geometry, Topology and Physics*, 2nd Ed., Institute of Physics Publishing, 2003）：霍普夫纤维化 $S^1 \hookrightarrow S^3 \to S^2$ 是 $S^2$ 上的非平凡主 $S^1$ 丛，其第一陈数模长为 $|c_1| = 1$；由于主丛存在全局连续截面当且仅当该主丛平凡，故 $S^3 \to S^2$ 不存在全局连续截面。在狄拉克单极联络约定下，北半球局部联络一形式 $A_N = \frac{1}{2}(1 - \cos\theta)\,d\varphi$ 与南半球局部联络一形式 $A_S = -\frac{1}{2}(1 + \cos\theta)\,d\varphi$ 在赤道带满足过渡关系 $A_N - A_S = d\varphi$，曲率二形式 $F = \frac{1}{2}\sin\theta\,d\theta\wedge d\varphi$ 满足 $\frac{1}{2\pi}\int_{S^2} F = 1$（注：此为指定单极联络约定；对应 $\gamma_B = -\Omega/2$ 的自旋朝上贝里曲率取相反符号）。切勿将球面切丛 $TS^2$（欧拉数 $2$）与霍普夫复线丛（第一陈数 $\pm 1$）混同。
+3. **三维旋转器球 $S^3 \cong \mathrm{SU}(2) \subset \mathrm{Cl}^+_{3,0}$ 的全局可平行化**：单位旋转器构成三维欧氏克利福德偶子代数 $\mathrm{Cl}^+_{3,0}$ 的单位球面 $S^3 \cong \mathrm{SU}(2)$，其欧拉示性数 $\chi(S^3) = 0$，且由显式左平移标架 $(pI_x, pI_y, pI_z)$ 给出全局非零正交切标架（而非仅凭 $\chi(S^3) = 0$ 推断可平行化）。映射 $\mathrm{SU}(2) \to \mathrm{SO}(3)$ 是二对一双覆盖而非同构；总空间 $S^3$ 的可平行化并不给出基空间 $S^2$ 上的全局截面。
+4. **贝里几何相位与西蒙和乐解释**（参见 M. V. Berry, *Quantal phase factors accompanying adiabatic changes*, Proc. R. Soc. A **392**, 45–57, 1984, DOI `10.1098/rspa.1984.0023`；以及 B. Simon, *Holonomy, the quantum adiabatic theorem, and Berry's phase*, Phys. Rev. Lett. **51**, 2167, 1983, DOI `10.1103/PhysRevLett.51.2167`）：在剥离动力学相位并固定定向与自旋朝上本征支后，沿 $S^2$ 闭合回路绝热平行移动获得的几何相位为 $\gamma_B = -\Omega/2$。这一非平凡和乐在完整保留复内积信息时依然存在；格拉姆矩阵的两两自洽性并不抹杀物理算符的真实非对易性。
+:::
+
+至此，我们在理论上彻底澄明了球面转序、贝里相位与格拉姆矩阵重构的关系。那么，当我们走进真正的超导量子计算实验室，工程师们究竟是用什么物理手段在芯片上拨动这颗三维球面上的方向箭头？为什么绕 $X, Y$ 轴转需要实打实地发射几十纳秒的微波脉冲，而绕 $Z$ 轴转却可以在理想脉冲调度下做到**“零附加模拟脉冲时长”**？让我们进入[第十一章](ch11-pulses-and-virtual-z.md)。
