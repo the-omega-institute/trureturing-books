@@ -30,7 +30,7 @@ $$
 则第 $k$ 个记录结果的迹权重精确归约为复内积欧氏范数的平方（嵌入 $\mathbb{C}$）：
 
 $$
-\operatorname{recordWeight}(P, \rho, k) = \bigl(\norm{\operatorname{star}\phi \bullet_{\!v} \psi}^2 : \mathbb{R}\bigr).
+\operatorname{recordWeight}(P, \rho, k) = \bigl(\norm{\operatorname{star}\phi \bullet_{v} \psi}^2 : \mathbb{R}\bigr).
 $$
 :::
 
@@ -55,9 +55,9 @@ theorem rank_one_pure_state_modulus_square_reduction
 
 1. `recordWeight` 与 `bornProbability` 展开目标左端为 $\Tr(\rho \cdot P_k)$；
 2. `hPureState` 与 `hProjection` 将 $\rho$ 与 $P_k$ 替换为两个秩一外积 $\operatorname{vecMulVec}(\psi, \operatorname{star}\psi)$ 与 $\operatorname{vecMulVec}(\phi, \operatorname{star}\phi)$；
-3. `Matrix.vecMulVec_mul_vecMulVec` 执行外积收缩恒等式 $(\lvert\psi\rangle\langle\psi\rvert)(\lvert\phi\rangle\langle\phi\rvert) = (\operatorname{star}\psi \bullet_{\!v} \phi)\bullet \operatorname{vecMulVec}(\psi, \operatorname{star}\phi)$；
-4. `Matrix.trace_vecMulVec` 与 `dotProduct_smul` 将外积的迹化为点积 $\Tr(\operatorname{vecMulVec}(u, v)) = v \bullet_{\!v} u$，得到 $(\operatorname{star}\psi \bullet_{\!v} \phi) \bullet (\operatorname{star}\phi \bullet_{\!v} \psi)$；
-5. `dotProduct_comm psi (star phi)` 与 `Matrix.star_dotProduct` 将前一因子改写为 $\operatorname{star}(\operatorname{star}\phi \bullet_{\!v} \psi)$，再由 `smul_eq_mul` 化为复数乘法 $\overline{z} \cdot z$（其中 $z = \operatorname{star}\phi \bullet_{\!v} \psi$）；
+3. `Matrix.vecMulVec_mul_vecMulVec` 执行外积收缩恒等式 $(\lvert\psi\rangle\langle\psi\rvert)(\lvert\phi\rangle\langle\phi\rvert) = (\operatorname{star}\psi \bullet_{v} \phi)\bullet \operatorname{vecMulVec}(\psi, \operatorname{star}\phi)$；
+4. `Matrix.trace_vecMulVec` 与 `dotProduct_smul` 将外积的迹化为点积 $\Tr(\operatorname{vecMulVec}(u, v)) = v \bullet_{v} u$，得到 $(\operatorname{star}\psi \bullet_{v} \phi) \bullet (\operatorname{star}\phi \bullet_{v} \psi)$；
+5. `dotProduct_comm psi (star phi)` 与 `Matrix.star_dotProduct` 将前一因子改写为 $\operatorname{star}(\operatorname{star}\phi \bullet_{v} \psi)$，再由 `smul_eq_mul` 化为复数乘法 $\overline{z} \cdot z$（其中 $z = \operatorname{star}\phi \bullet_{v} \psi$）；
 6. 最后调用 `Complex.normSq_eq_conj_mul_self.symm` 与 `Complex.normSq_eq_norm_sq`，将 $\overline{z} z$ 精确折叠为 `((‖star phi ⬝ᵥ psi‖ ^ 2 : ℝ) : ℂ)`。
 
 完整证明由 Lean 内核检查。
@@ -74,7 +74,7 @@ $$
 
 则同时成立以下三条等式：
 
-1. **秩一模方归约**：$\operatorname{recordWeight}(P, \rho, k) = \bigl(\norm{\operatorname{star}\phi \bullet_{\!v} \psi}^2 : \mathbb{R}\bigr)$；
+1. **秩一模方归约**：$\operatorname{recordWeight}(P, \rho, k) = \bigl(\norm{\operatorname{star}\phi \bullet_{v} \psi}^2 : \mathbb{R}\bigr)$；
 2. **迹配对恒等式**：$\operatorname{recordWeight}(P, \rho, k) = \Tr(\rho \cdot P_k)$；
 3. **未读态的加权条件态展开**：
    $$
@@ -164,8 +164,8 @@ $$
 与上一章的第一至三部审计表相呼应，下表汇总了本书第四部（纠缠、贝尔边界与傅里叶对偶）、第五部（玻戈留波夫双曲变换、闵可夫斯基光锥刚性、规范完整群、张量网络流割与电路深度反例）以及第六部（对角拓扑逃逸、黎曼 $\zeta$ 欧拉乘积、艾森斯坦范数型与收缩不动点）在 `trureturing@dev`（提交 `52725b62b659b244d077e29f18a576aa809007b7`）中的精确源码坐标、语句摘要哈希前缀（`statement_id`）及形式化边界。
 
 | 所属章节 | 冻结声明 GID | 源码路径与行号 | `statement_id` 前缀 | 精确形式化范围与契约边界 |
-| :---: | --- | --- | :---: | --- |
-| Ch 2 / Ch 28 | [`D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction`](lean:D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction) | `D5/S3/Observer/BornReduction.lean:27` | `sha256:9d19ef37` | 秩一纯态与秩一投影下 $\operatorname{recordWeight}(P,\rho,k)=\norm{\operatorname{star}\phi\bullet_{\!v}\psi}^2$ |
+| :---------: | ---------------------------- | ---------------------------- | :------------------: | ----------------------------------------------------- |
+| Ch 2 / Ch 28 | [`D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction`](lean:D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction) | `D5/S3/Observer/BornReduction.lean:27` | `sha256:9d19ef37` | 秩一纯态与秩一投影下 $\operatorname{recordWeight}(P,\rho,k)=\norm{\operatorname{star}\phi\bullet_{v}\psi}^2$ |
 | Ch 2 / Ch 28 | [`D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight) | `D5/S3/Observer/Conditioning/RankOneBornPairingWeight.lean:36` | `sha256:3fd7a21e` | 秩一模方、迹配对与未读态加权条件态展开的三合取桥 |
 | Ch 3 / Ch 28 | [`D5/S3/Observer/Conditioning.conditionalState_isState`](lean:D5/S3/Observer/Conditioning.conditionalState_isState) | `D5/S3/Observer/Conditioning.lean:143` | `sha256:ed6f3095` | 非零权重 $w_k \neq 0$ 下吕德斯条件态保持正半定与单位迹 |
 | Ch 3 / Ch 28 | [`D5/S3/Observer/Conditioning.unreadState_fixed_iff`](lean:D5/S3/Observer/Conditioning.unreadState_fixed_iff) | `D5/S3/Observer/Conditioning.lean:108` | `sha256:ed6f3095` | $\operatorname{unreadState}(P,\rho)=\rho \iff \forall k\neq l,\; P_k\rho P_l = 0$ |
@@ -186,6 +186,12 @@ $$
 | Ch 21 | [`D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.finite_record_cosine_obstruction`](lean:D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.finite_record_cosine_obstruction) | `D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.lean:231` | `sha256:c2b14fbf` | 平移记录信道：任意恢复信道的最坏迹距离误差 $\ge \frac{1}{2}\bigl(1 - \cos\frac{\pi}{\lfloor N/\lvert\ell\rvert\rfloor + 2}\bigr) > 0$ |
 | Ch 22 | [`D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product`](lean:D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product) | `D5/S3/Zeros/ZetaUpgrade.lean:25` | `sha256:d42c4a0a` | 半平面 $\operatorname{Re}(s)>1$ 上黎曼 $\zeta(s)$ 级数与欧拉乘积恒等 |
 | Ch 22 | [`D5/S3/Zeros/CompletedZeta.xi_reading_reflection`](lean:D5/S3/Zeros/CompletedZeta.xi_reading_reflection) | `D5/S3/Zeros/CompletedZeta.lean:50` | `sha256:d757f2e1` | 去极点 $\xi$ 读数的反射对称 $\xi(1 - s) = \xi(s)$（一切 $s \in \mathbb{C}$） |
+| Ch 22 | [`D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.riemann_zeta_conj`](lean:D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.riemann_zeta_conj) | `D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.lean:87` | `sha256:c71d7be1` | $\zeta(\overline{s}) = \overline{\zeta(s)}$（一切 $s \in \mathbb{C}$） |
+| Ch 22 | [`D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.xi_reading_conj`](lean:D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.xi_reading_conj) | `D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.lean:98` | `sha256:c71d7be1` | $\xi(\overline{s}) = \overline{\xi(s)}$（一切 $s \in \mathbb{C}$） |
+| Ch 22 | [`D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.xi_reading_one_sub_conj`](lean:D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.xi_reading_one_sub_conj) | `D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.lean:105` | `sha256:c71d7be1` | $\xi(1-\overline{s}) = \overline{\xi(s)}$（一切 $s \in \mathbb{C}$） |
+| Ch 22 | [`D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line`](lean:D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line) | `D5/S3/Midline/CayleyCriticalLine.lean:46` | `sha256:79d47c18` | $\norm{(s-1)/s} = 1 \iff \operatorname{Re}(s) = \tfrac12$（一切 $s \in \mathbb{C}$） |
+| Ch 22 | [`D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion`](lean:D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion) | `D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.lean:76` | `sha256:547e2360` | `RiemannHypothesis` 等价于每个非平凡零点的对数径向亏量为零（等价改写，非证明） |
+| Ch 22 | [`D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.full_symmetry_not_fixed_line_localization`](lean:D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.full_symmetry_not_fixed_line_localization) | `D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.lean:166` | `sha256:460e07bc` | $\delta,\gamma \ne 0$ 时离线四次式为整函数、具完全 $\zeta$ 对称性、恰有四个零点且全不在临界线上 |
 | Ch 23 | [`D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_range_eq_eisNorm`](lean:D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_range_eq_eisNorm) | `D5/S3/PrimeForms/Crossing/CrossingNormForm.lean:35` | `sha256:d56f3761` | 整二次型 $a^2-ab+b^2$ 值域与艾森斯坦整数环范数像恒等 |
 | Ch 24 | [`D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize`](lean:D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize) | `D5/S1/FixedPoints/FiniteContractingStability.lean:27` | `sha256:d7f526a9` | 有限集 $X$ 上仅删减更新 $U(S)\subseteq S$ 必在 $\le (S_0).\mathrm{ncard}$ 步内达不动点 |
 | Ch 24 | [`D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique) | `D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean:40` | `sha256:0711b0ac` | 黄金比正性（$0<\varphi$）、不动点方程 $\varphi=1+1/\varphi$（$\varphi^2=\varphi+1$）及正实数域 $(0,\infty)$ 上的唯一性 |
@@ -195,6 +201,11 @@ $$
 | Ch 24 | [`D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package`](lean:D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package) | `D5/S0/Diagonal/Lawvere/QualitativeEscape.lean:48` | `sha256:f4f9c8f7` | 无不动点扭转使一切列表逃逸（无有限性假设），且该前提不可去除 |
 | Ch 24 | [`D5/S3/Geometry/FixedPoint/Brouwer.Brouwer`](lean:D5/S3/Geometry/FixedPoint/Brouwer.Brouwer) | `D5/S3/Geometry/FixedPoint/Brouwer.lean:43` | `sha256:5551c05c` | 标准单纯形 $\operatorname{stdSimplex}\ \mathbb{R}\ (\operatorname{Fin} n)$ 的连续自映射必有不动点 |
 | Ch 24 | [`D5/S1/Phase/ContinuousAverage.continuous_average_tendsto_haar`](lean:D5/S1/Phase/ContinuousAverage.continuous_average_tendsto_haar) | `D5/S1/Phase/ContinuousAverage.lean:94` | `sha256:f1e543c6` | 无理旋转下连续函数的轨道平均趋于 Haar 积分（任意初相） |
+| Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacement.displacement_mul`](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_mul) | `D5/S3/Quantum/Algebra/WeylDisplacement.lean:140` | `sha256:11f68b71` | $D(a,b)\,D(c,d) = \omega^{bc}\,D(a+c,\ b+d)$（一切 $a,b,c,d \in \mathbb{Z}_M$） |
+| Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacementAdjoint.displacement_adjoint`](lean:D5/S3/Quantum/Algebra/WeylDisplacementAdjoint.displacement_adjoint) | `D5/S3/Quantum/Algebra/WeylDisplacementAdjoint.lean:154` | `sha256:8aae4e56` | $D(a,b)^{\dagger} = \omega^{ab}\,D(-a,-b)$ |
+| Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm`](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm) | `D5/S3/Quantum/Algebra/WeylDisplacement.lean:174` | `sha256:11f68b71` | $\omega^{da}\,D(a,b)D(c,d) = \omega^{bc}\,D(c,d)D(a,b)$ |
+| Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation`](lean:D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation) | `D5/S3/Quantum/Algebra/WeylDisplacementConjugation.lean:94` | `sha256:075eec65` | $D(a,b)\,D(c,d)\,D(a,b)^{\dagger} = \omega^{bc-ad}\,D(c,d)$ |
+| Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute`](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute) | `D5/S3/Quantum/Algebra/WeylDisplacement.lean:182` | `sha256:11f68b71` | $M = 2$：$D(0,1)D(1,0) = -D(1,0)D(0,1)$ |
 
 让我们通过一个具体数值算例，把本章的四条审计定理串联在同一个单量子比特态上。
 
@@ -205,7 +216,7 @@ $$
 \rho = \operatorname{vecMulVec}(\psi, \operatorname{star}\psi) = \begin{pmatrix} 9/25 & -12i/25 \\ 12i/25 & 16/25 \end{pmatrix}.
 $$
 
-1. **秩一模方归约（[@thm-audit-rank-one-born]）**：内积 $\operatorname{star}\phi_0 \bullet_{\!v} \psi = \frac{3}{5}$，$\operatorname{star}\phi_1 \bullet_{\!v} \psi = \frac{4}{5}i$，故记录权重为
+1. **秩一模方归约（[@thm-audit-rank-one-born]）**：内积 $\operatorname{star}\phi_0 \bullet_{v} \psi = \frac{3}{5}$，$\operatorname{star}\phi_1 \bullet_{v} \psi = \frac{4}{5}i$，故记录权重为
    $$
    w_0 = \operatorname{recordWeight}(P, \rho, 0) = \Bigl|\frac{3}{5}\Bigr|^2 = \frac{9}{25} \neq 0, \qquad w_1 = \operatorname{recordWeight}(P, \rho, 1) = \Bigl|\frac{4}{5}i\Bigr|^2 = \frac{16}{25} \neq 0.
    $$

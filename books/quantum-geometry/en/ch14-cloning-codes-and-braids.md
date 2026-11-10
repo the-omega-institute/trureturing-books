@@ -171,7 +171,10 @@ When two Pauli-word operators multiply, on each mode $n$ the factor $Z^{a.z_n}$ 
 Let $N, p \in \mathbb{N}$ with `[NeZero p]`. For any two Pauli words $a, b : \mathrm{PauliWord}\,N\,p$, the product of their matrix operators satisfies
 
 $$
-\mathrm{pauliWordOperator}(a) \cdot \mathrm{pauliWordOperator}(b) = \mathrm{windowRoot}(p)^{\bigl(\sum_{n \in \mathrm{Fin}\,N} a.z_n \cdot b.x_n\bigr).\mathrm{val}} \bullet \mathrm{pauliWordOperator}\bigl(\mathrm{wordMul}(a, b)\bigr).
+\begin{aligned}
+&\mathrm{pauliWordOperator}(a) \cdot \mathrm{pauliWordOperator}(b) \\
+&= \mathrm{windowRoot}(p)^{\bigl(\sum_{n \in \mathrm{Fin}\,N} a.z_n \cdot b.x_n\bigr).\mathrm{val}} \bullet \mathrm{pauliWordOperator}\bigl(\mathrm{wordMul}(a, b)\bigr).
+\end{aligned}
 $$
 :::
 
@@ -358,8 +361,10 @@ which is nonzero whenever $|\alpha| \neq |\beta|$! One must therefore never clai
 Set $s = \mathrm{Fin}\,4$, $n = \mathrm{Fin}\,8$, $d = \mathrm{Fin}\,2$, and define the four $8\times 2$ syndrome embeddings $S_j = E_j V$ ($j \in \{0, 1, 2, 3\}$). Because the four shifted basis pairs in Step 2 partition the $8$ basis vectors of $\mathbb{C}^8$ into mutually orthogonal $2$-dimensional subspaces, $S_i^* S_j = V^* E_i^* E_j V = \delta_{ij} I_2$ (`OrthogonalSyndromes S`). Taking $\sigma = \operatorname{diag}\bigl(\frac{1}{2}, \frac{1}{4}, \frac{1}{8}, \frac{1}{8}\bigr)$ ($\Tr\sigma = 1$) and $\rho = \lvert +\rangle\langle +\rvert = \begin{pmatrix} 1/2 & 1/2 \\ 1/2 & 1/2 \end{pmatrix}$, [@prop-orthogonal-syndrome-recovery] gives
 
 $$
-\mathrm{syndromeDecoding}\bigl(S,\, \mathrm{syndromeEncoding}(S, \sigma, \rho)\bigr)
-= \Bigl(\frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \frac{1}{8}\Bigr)\begin{pmatrix} 1/2 & 1/2 \\ 1/2 & 1/2 \end{pmatrix} = \rho.
+\begin{aligned}
+&\mathrm{syndromeDecoding}\bigl(S,\, \mathrm{syndromeEncoding}(S, \sigma, \rho)\bigr) \\
+&= \Bigl(\frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \frac{1}{8}\Bigr)\begin{pmatrix} 1/2 & 1/2 \\ 1/2 & 1/2 \end{pmatrix} = \rho.
+\end{aligned}
 $$
 
 Note the scope of this code: it corrects only single $X$ bit-flip errors; a single phase flip $Z_1 = Z \otimes I \otimes I$ commutes with both $g_1$ and $g_2$ and acts as an undetected logical phase error $\bar{Z}\lvert +_L\rangle = \lvert -_L\rangle$, so this code does not correct arbitrary single-qubit noise.

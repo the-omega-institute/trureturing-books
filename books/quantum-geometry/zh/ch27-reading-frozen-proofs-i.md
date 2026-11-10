@@ -61,7 +61,12 @@ theorem inner_product_norm_parallelogram_law {E : Type*} [NormedAddCommGroup E]
    $$
    无论 $k$ 推演到多大，离散整数平方 $m_k^2$ 与 $2n_k^2$ 之间永远横亘着一道不可磨灭的单位算术裂隙 $(-1)^k = \pm 1$！在本书的概念与哲学综合中，正是这道 $\pm 1$ 裂隙，促使汉字“**数**”从离散计数的动词算子“**数**（shǔ，$\mathbb{N} \to \mathbb{Q}$）”升华为连续几何坐标的名词“**数**（shù）”，并勾勒出四阶段概念演进图景（注：此四阶段为几何概念的层级演进，而非数域的集合包含链 $\pi \subset \theta^*$；其中满足 $\varphi = 1 + 1/\varphi$ 的代数黄金比 $\varphi = \frac{1+\sqrt{5}}{2} \in \overline{\mathbb{Q}}$ 已属于第二阶段代数数，而第四阶段的 $\theta^* \approx 0.739085$ 特指满足 $\cos\theta^* = \theta^*$ 的超越自指余弦不动点）：
    $$
-   \mathbb{Q}\text{（有理网格）} \;\longrightarrow\; \overline{\mathbb{Q}}\text{（代数数：$\sqrt{2}$ 勾股对角线与黄金比 $\varphi$）} \;\longrightarrow\; \pi\text{（圆周超越旋转）} \;\longrightarrow\; \theta^*\text{（自指余弦不动点 $\cos\theta^* = \theta^*$）}.
+   \begin{aligned}
+   &\mathbb{Q}\text{（有理网格）} \\
+   &\longrightarrow\; \overline{\mathbb{Q}}\text{（代数数：$\sqrt{2}$ 勾股对角线与黄金比 $\varphi$）} \\
+   &\longrightarrow\; \pi\text{（圆周超越旋转）} \\
+   &\longrightarrow\; \theta^*\text{（自指余弦不动点 $\cos\theta^* = \theta^*$）}.
+   \end{aligned}
    $$
 
 接下来看 `D5/S3/Quantum/FiniteDimensional.lean:78` 中的玻恩概率骨架引理。源码首先对任意有限类型 `n`（`[Fintype n]`）与复方阵 $\rho, P \in M_n(\mathbb{C})$ 定义迹配对映射：
@@ -104,7 +109,7 @@ $$
 
 现在我们转向两道在几何与观察者条件化中最具代表性的结构性定理（图 27 中栏与右栏）。
 
-第一道来自 `D5/S3/Quantum/Foundation/RayPhaseRigidity.lean:97`。在量子基础中，如果一个幺正算符 $A \in U(\iota, \mathbb{C})$ 把所有坐标基向量 $\vv{e}_i = \operatorname{Pi.single}\,i\,1$ 都留在各自的复射线上（`PreservesRay A x` 定义为 $A *_{\!v} x \in \operatorname{Submodule.span}\,\mathbb{C}\,\{x\}$），那么 $A$ 必然是对角矩阵；但怎样保证所有对角元 $A_{ii}$ 都等于**同一个**单位模长全局相位 $c \in \mathbb{C}$（$\norm{c} = 1$，$A = c \bullet I$）？
+第一道来自 `D5/S3/Quantum/Foundation/RayPhaseRigidity.lean:97`。在量子基础中，如果一个幺正算符 $A \in U(\iota, \mathbb{C})$ 把所有坐标基向量 $\vv{e}_i = \operatorname{Pi.single}\,i\,1$ 都留在各自的复射线上（`PreservesRay A x` 定义为 $A *_{v} x \in \operatorname{Submodule.span}\,\mathbb{C}\,\{x\}$），那么 $A$ 必然是对角矩阵；但怎样保证所有对角元 $A_{ii}$ 都等于**同一个**单位模长全局相位 $c \in \mathbb{C}$（$\norm{c} = 1$，$A = c \bullet I$）？
 
 很多非形式化文献粗糙地要求“提供一根所有分量全不为零的满支撑测试态”，但真实物理耦合图往往是稀疏的！`RayPhaseRigidity.lean` 给出了一个远为精炼的图论充分条件——**支撑连通性（`RaySupportConnected tests`）**：只要测试态集合 `tests` 中两两同时非零的坐标对 $(i, j)$（即 $\exists x \in \mathrm{tests},\; x_i \neq 0 \land x_j \neq 0$）生成的自反传递闭包 `Relation.ReflTransGen` 连通了所有坐标，哪怕没有任何一根测试态具有满支撑，幺正矩阵 $A$ 也必然刚性坍缩为单一全局相位倍乘算子 $c \bullet I$（甚至在零维空指标类型 $\iota = \varnothing$ 下也无懈可击）！
 
@@ -126,8 +131,8 @@ $$
 在 `D5/S3/Quantum/Foundation/RayPhaseRigidity.lean:97` 中，证明分两阶段推进：
 
 1. **私有核心引理 `coordinate_shape_of_connected_ray_tests`**：
-   - 先证非对角元全为零（`hoff : ∀ i j, i ≠ j → A i j = 0`）：对任意 $j \in \iota$，由 `hcoord j` 知存在 $d \in \mathbb{C}$ 使 $A *_{\!v} \vv{e}_j = d\vv{e}_j$；取第 $i \neq j$ 分量得 $A_{ij} = d \cdot 0 = 0$。
-   - 再证单步支撑重叠传递（`hstep`）：若存在 $x \in \mathrm{tests}$ 使 $x_i \neq 0$ 且 $x_j \neq 0$，由 `htests x hx` 知存在 $d \in \mathbb{C}$ 使 $A *_{\!v} x = d x$。因 $A$ 已是对角阵（非对角项由 `Finset.sum_eq_single k` 与 `hoff` 消去），第 $k$ 分量满足 $A_{kk} x_k = d x_k$；当 $x_k \neq 0$ 时由右消去律 `mul_right_cancel₀` 得 $A_{kk} = d$，故 $A_{ii} = d = A_{jj}$！
+   - 先证非对角元全为零（`hoff : ∀ i j, i ≠ j → A i j = 0`）：对任意 $j \in \iota$，由 `hcoord j` 知存在 $d \in \mathbb{C}$ 使 $A *_{v} \vv{e}_j = d\vv{e}_j$；取第 $i \neq j$ 分量得 $A_{ij} = d \cdot 0 = 0$。
+   - 再证单步支撑重叠传递（`hstep`）：若存在 $x \in \mathrm{tests}$ 使 $x_i \neq 0$ 且 $x_j \neq 0$，由 `htests x hx` 知存在 $d \in \mathbb{C}$ 使 $A *_{v} x = d x$。因 $A$ 已是对角阵（非对角项由 `Finset.sum_eq_single k` 与 `hoff` 消去），第 $k$ 分量满足 $A_{kk} x_k = d x_k$；当 $x_k \neq 0$ 时由右消去律 `mul_right_cancel₀` 得 $A_{kk} = d$，故 $A_{ii} = d = A_{jj}$！
    - 随后对传递闭包 `Relation.ReflTransGen` 施行归纳（`induction hij with | refl => rfl | @tail j k _ hjk ih => exact ih.trans (hstep j k hjk)`），证得对一切 $i, j \in \iota$ 均有 $A_{ii} = A_{jj}$。
 2. **主定理组装与空类型分支防御**：调用 `cases isEmpty_or_nonempty ι`：
    - 若 $\iota$ 为空类型（`inl hempty`），直接取 $c = 1$，由 `norm_one` 与空矩阵唯一性 `Subsingleton.elim _ _` 证毕；
@@ -182,7 +187,7 @@ $$
 下面的审计表列出了本书第一部至第三部所引用的代表性冻结声明在 `trureturing@dev`（提交 `52725b62b659b244d077e29f18a576aa809007b7`）中的精确源码路径、行号、语句摘要哈希前缀（`statement_id`）以及形式化契约边界。表中任何中文/英文散文标题（如“平行四边形定律”“玻恩概率骨架”“挤压幂等”）仅作导读说明，不附加超出冻结签名本身的额外形式化声明。
 
 | 所属章节 | 冻结声明 GID | 源码路径与行号 | `statement_id` 前缀 | 精确形式化范围与契约边界 |
-| :---: | --- | --- | :---: | --- |
+| :---------: | ---------------------------- | ---------------------------- | :------------------: | ----------------------------------------------------- |
 | Ch 1 / Ch 27 | [`D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law`](lean:D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law) | `D5/S3/QuantumContext/ParallelogramNormLaw.lean:22` | `sha256:b5f8dcc9` | 实内积空间 $\norm{x+y}^2+\norm{x-y}^2=2(\norm{x}^2+\norm{y}^2)$ |
 | Ch 1 / Ch 18 / Ch 25 | [`D5/S3/Quantum/FiniteDimensional.qubit_weyl_star`](lean:D5/S3/Quantum/FiniteDimensional.qubit_weyl_star) | `D5/S3/Quantum/FiniteDimensional.lean:24` | `sha256:8448b695` | `qubitX` 与 `qubitZ` 反对易、自伴、平方为 $1$ |
 | Ch 1 / Ch 25 | [`D5/S3/Quantum/FiniteDimensional.qubit_matrix_algebra_has_no_character`](lean:D5/S3/Quantum/FiniteDimensional.qubit_matrix_algebra_has_no_character) | `D5/S3/Quantum/FiniteDimensional.lean:46` | `sha256:8448b695` | $\operatorname{IsEmpty}(\mathrm{QubitMatrix} \to_{\mathrm{alg}[\mathbb{C}]} \mathbb{C})$ |
@@ -190,6 +195,8 @@ $$
 | Ch 2 / Ch 27 | [`D5/S3/Quantum/FiniteDimensional.born_probability_skeleton`](lean:D5/S3/Quantum/FiniteDimensional.born_probability_skeleton) | `D5/S3/Quantum/FiniteDimensional.lean:78` | `sha256:8448b695` | 正半定迹一态在单位元、加法与自伴幂等投影上的玻恩三性质 |
 | Ch 3 / Ch 27 | [`D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent`](lean:D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent) | `D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.lean:30` | `sha256:aa98f3d9` | $(\operatorname{unreadState} P)\circ(\operatorname{unreadState} P) = \operatorname{unreadState} P$ |
 | Ch 3 | [`D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras`](lean:D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras) | `D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.lean:33` | `sha256:6cae4dbc` | 对复矩阵 `rho : Matrix d d ℂ`、完备实内积空间 `E`（`[NormedAddCommGroup E] [InnerProductSpace ℝ E] [CompleteSpace E]`）中的抽象希尔伯特空间向量 `state : E`（严格区分复矩阵 `rho` 与抽象向量 `state`）、`probability : L → d → ℝ`（`[Fintype d] [Nonempty d] [Fintype L]`）以及闭实子模 `visible : Submodule ℝ E`（`[IsClosed (visible : Set E)]`），在校准假设 `hpurity : (Matrix.trace (rho * rho)).re - (Fintype.card d : ℝ)⁻¹ = ‖state‖ ^ 2` 与 `hcoordinates : ‖visible.starProjection state‖ ^ 2 = ∑ l, ∑ j, (probability l j - (Fintype.card d : ℝ)⁻¹) ^ 2` 下，成立 `(Matrix.trace (rho * rho)).re - (Fintype.card d : ℝ)⁻¹ = (∑ l, ∑ j, (probability l j - (Fintype.card d : ℝ)⁻¹) ^ 2) + residualMass visible state` |
+| Ch 3 | [`D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity`](lean:D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity) | `D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.lean:62` | `sha256:b941b8f9` | $N$ 个密度矩阵被 $N$ 结果 POVM 完美区分（$\Tr(E_j\rho_i)=\delta_{ij}$）则 $N \le d$ |
+| Ch 3 | [`D5/S3/QuantumBounds/CollisionEntropyUncertainty.collision_entropy_uncertainty`](lean:D5/S3/QuantumBounds/CollisionEntropyUncertainty.collision_entropy_uncertainty) | `D5/S3/QuantumBounds/CollisionEntropyUncertainty.lean:31` | `sha256:0855b96a` | $d+1$ 个 $d$ 结果分布的碰撞和为 $1+P$ 时 $\sum_b H(p_b) \ge (d+1)\ln\frac{d+1}{1+P}$ |
 | Ch 4 | [`D5/S3/Quantum/Decoherence/NonselectiveMarginalization.nonselective_recording_marginal`](lean:D5/S3/Quantum/Decoherence/NonselectiveMarginalization.nonselective_recording_marginal) | `D5/S3/Quantum/Decoherence/NonselectiveMarginalization.lean:32` | `sha256:645a742c` | 非选择性记录边缘态与对角退相干混合态恒等 |
 | Ch 4 | [`D5/S3/HilbertOperators/Stinespring.stinespring_dilation`](lean:D5/S3/HilbertOperators/Stinespring.stinespring_dilation) | `D5/S3/HilbertOperators/Stinespring.lean:725` | `sha256:8b1f001f` | 完全正映射 `φ : A →CP (H →L[ℂ] H)` 存在希尔伯特空间 $K$、保幺 \*-同态 $\pi$ 与有界算子 $V$，使 $\varphi(a)x = V^{\dagger}\pi(a)Vx$ |
 | Ch 4 | [`D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance`](lean:D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance) | `D5/S3/Quantum/Foundation/FiniteTraceDistance.lean:463` | `sha256:89528cf6` | 定义：$\operatorname{traceDistance}(\rho,\sigma)=\tfrac12\operatorname{traceNorm}(\rho-\sigma)$ |
@@ -198,8 +205,11 @@ $$
 | Ch 4 | [`D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_triangle`](lean:D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_triangle) | `D5/S3/Quantum/Foundation/FiniteTraceDistance.lean:476` | `sha256:89528cf6` | 迹距离的三角不等式 |
 | Ch 4 | [`D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_le_one`](lean:D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_le_one) | `D5/S3/Quantum/Foundation/FiniteTraceDistance.lean:485` | `sha256:89528cf6` | $\operatorname{traceDistance}(\rho,\sigma)\le 1$ |
 | Ch 4 | [`D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_contract`](lean:D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_contract) | `D5/S3/Quantum/Foundation/FiniteTraceDistance.lean:505` | `sha256:89528cf6` | 任意 `QuantumChannel ι ι` 下迹距离不增 |
+| Ch 5 | [`D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift`](lean:D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift) | `D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.lean:36` | `sha256:ccc9572b` | 圆上平方映射：路径提升存在且唯一、无连续整体截面、整圈回路的提升从 $1$ 到 $-1$ |
+| Ch 5 | [`D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section`](lean:D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section) | `D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.lean:28` | `sha256:f5e0857a` | 不存在连续 $s : S^1 \to S^1$ 使 $s(z)^2 = z$ |
 | Ch 6 | [`D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity`](lean:D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity) | `D5/S3/QuantumBounds/LagrangeGramIdentity.lean:17` | `sha256:ce9562e5` | 二维向量拉格朗日—格拉姆面积平方恒等式 |
 | Ch 6 | [`D5/S3/Quantum/PureState/RecordCoherenceComplementarity.pure_record_distinguishability_coherence_complementarity`](lean:D5/S3/Quantum/PureState/RecordCoherenceComplementarity.pure_record_distinguishability_coherence_complementarity) | `D5/S3/Quantum/PureState/RecordCoherenceComplementarity.lean:29` | `sha256:b1bcaba2` | 纯态记录可区分度与相干性范数的毕达哥拉斯互补律 |
+| Ch 6 | [`D5/S3/QuantumBounds/Designs/MixedStateRobertson.mixed_state_robertson_uncertainty`](lean:D5/S3/QuantumBounds/Designs/MixedStateRobertson.mixed_state_robertson_uncertainty) | `D5/S3/QuantumBounds/Designs/MixedStateRobertson.lean:68` | `sha256:a2d45f27` | 密度态 $\rho$ 与厄米 $A,B$：$\norm{(A-\langle A\rangle)\sqrt\rho}\,\norm{(B-\langle B\rangle)\sqrt\rho} \ge \tfrac12\lvert\Tr(\rho(AB-BA))\rvert$ |
 | Ch 4 / Ch 6 | [`D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean) | `D5/S3/QuantumChannels/PinchingProjection.lean:68` | `sha256:89589cff` | 挤压信道在希尔伯特—施密特范数下的正交勾股分解 |
 | Ch 8 | [`D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity) | `D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.lean:383` | `sha256:5c5eb2ec` | 相对熵产生与相干性抹除的精确等式 |
 | Ch 7 | [`D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation`](lean:D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation) | `D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.lean:71` | `sha256:ae75c01f` | 受监测返回协议：$s_0 = 1$、$p_{n+1} = s_n - s_{n+1}$、$\sum_{n<N} p_{n+1} + s_N = 1$ |
@@ -216,7 +226,7 @@ $$
 ::: {.example #ex-lean-audit-part1-3 title="前提变异测试：当测试支撑图断开时，相位刚性定理在哪一步失效？"}
 考察 [@prop-audit-ray-phase-rigidity] 在二维空间 $\iota = \operatorname{Fin} 2 = \{0, 1\}$ 上的情形：
 
-1. **当 `RaySupportConnected tests` 成立时**：取单元素测试集 $\mathrm{tests} = \{x\}$，其中 $x = (1, 1)$ 满足 $x_0 = 1 \neq 0$ 且 $x_1 = 1 \neq 0$。若幺正矩阵 $A \in U(2, \mathbb{C})$ 保持两根坐标射线 $\vv{e}_0 = (1, 0)$ 与 $\vv{e}_1 = (0, 1)$，则 `hoff` 先迫使 $A = \operatorname{diag}(c_0, c_1)$；接着 `hstep 0 1` 将 $A *_{\!v} (1, 1) = (c_0, c_1) = d(1, 1)$ 的两个分量通过右消去律 `mul_right_cancel₀` 锁在一起，给出 $c_0 = d = c_1$，故 $A = c_0 I_2$（$|c_0| = 1$）。
+1. **当 `RaySupportConnected tests` 成立时**：取单元素测试集 $\mathrm{tests} = \{x\}$，其中 $x = (1, 1)$ 满足 $x_0 = 1 \neq 0$ 且 $x_1 = 1 \neq 0$。若幺正矩阵 $A \in U(2, \mathbb{C})$ 保持两根坐标射线 $\vv{e}_0 = (1, 0)$ 与 $\vv{e}_1 = (0, 1)$，则 `hoff` 先迫使 $A = \operatorname{diag}(c_0, c_1)$；接着 `hstep 0 1` 将 $A *_{v} (1, 1) = (c_0, c_1) = d(1, 1)$ 的两个分量通过右消去律 `mul_right_cancel₀` 锁在一起，给出 $c_0 = d = c_1$，故 $A = c_0 I_2$（$|c_0| = 1$）。
 2. **当 `RaySupportConnected tests` 被移除或断开时**：设 $\mathrm{tests} = \{\vv{e}_0, \vv{e}_1\}$，没有任何一个测试向量在坐标 $0$ 与 $1$ 处**同时非零**。此时 `Relation.ReflTransGen (fun i j => ∃ x ∈ tests, x i ≠ 0 ∧ x j ≠ 0) 0 1` 不成立！在物理上，相位门 $A = \operatorname{diag}(1, i) \in U(2, \mathbb{C})$ 保持 $\vv{e}_0$ 与 $\vv{e}_1$ 的射线不变，但它显然不是标量矩阵 $c I_2$。源码中的 `hconnect : RaySupportConnected tests` 恰恰在 `hchain (hconnect i j)` 这一行严丝合缝地堵住了“不连通子空间各自携带独立相对相位”的反例漏洞！
 :::
 

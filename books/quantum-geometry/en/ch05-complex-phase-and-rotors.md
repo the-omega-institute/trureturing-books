@@ -145,9 +145,51 @@ Bivector geometry answers both questions in two transparent steps:
 
 To maintain strict formal boundaries: [@lemma-skew-adjoint-unitary-square] and [@thm-relative-complex-structure-square] verify the matrix-level identities $R^2 = -I_n$ and $J^2 = -I_n$ in the Lean kernel, whereas the identification of the full three-dimensional Clifford algebra with the Pauli matrix algebra $\mathrm{Cl}_{3,0}(\mathbb{R}) \cong M_2(\mathbb{C})$ (real dimension $8$), its **even subalgebra** with the quaternion algebra $\mathrm{Cl}^+_{3,0}(\mathbb{R}) \cong \mathbb{H}$ (real dimension $4$, whose unit sphere $S^3 \cong \mathrm{SU}(2)$ consists of rotors), and the full three-dimensional Rodrigues sandwich formula are documented as classical background in [@rem-clifford-rotor-literature].
 
+The half angle leaves one question open. $R(2\pi) = \cos\pi - \vv{B}\sin\pi = -1$: the object is back where it started, yet the rotor is not. Is this a blemish of the notation $\theta/2$ that a cleverer parametrization would remove, or is it unavoidable? For a fixed plane of rotation $\vv{B}$ the question has a complete answer. The rotors $\cos\alpha - \vv{B}\sin\alpha$ about that plane form a circle under multiplication, and the sandwich computation above, $R\,\vv{v}_\parallel R^\dagger = R^2\,\vv{v}_\parallel$, shows that the in-plane rotation induced by a rotor $R$ is $R^2$. So within a fixed plane, "rotor $\mapsto$ rotation" is exactly the squaring map $z \mapsto z^2$ of the unit circle, and its topology is frozen at the pinned commit in the module `D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift`.
+
+::: {.theorem #thm-circle-double-cover-history-lift title="The Double Cover of the Circle: Unique Path Lifting, No Continuous Global Section, and One Full Turn Swaps the Two Preimages" lean="D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section"}
+Let $S^1$ be the unit circle in the complex plane (Mathlib's `Circle`) and let $\operatorname{sq} : S^1 \to S^1$ be the squaring map $z \mapsto z^2$, which is a covering map (Mathlib's `Circle.isQuotientCoveringMap_npow 2`); write $I = [0, 1]$. Then:
+
+1. **Path lifts exist and are unique.** For every continuous path $\gamma : I \to S^1$ and every $z_0 \in S^1$ with $\gamma(0) = z_0^2$, the lift $\widetilde{\gamma} : I \to S^1$ supplied by the covering map (`IsCoveringMap.liftPath`) is a continuous path with $\operatorname{sq}\circ\widetilde{\gamma} = \gamma$ and $\widetilde{\gamma}(0) = z_0$; and every continuous path $\beta : I \to S^1$ with $\operatorname{sq}\circ\beta = \gamma$ and $\beta(0) = z_0$ equals $\widetilde{\gamma}$.
+2. **There is no continuous global section.** No continuous map $s : S^1 \to S^1$ satisfies $s(z)^2 = z$ for all $z \in S^1$.
+3. **A full turn swaps the two preimages.** For the full-turn loop $\gamma_\circ(t) = e^{2\pi i t}$ (`Circle.exp (2 * π * t)`), the lift $\widetilde{\gamma_\circ}$ starting at $z_0 = 1$ satisfies $\operatorname{sq}\circ\widetilde{\gamma_\circ} = \gamma_\circ$, $\widetilde{\gamma_\circ}(0) = 1$ and $\widetilde{\gamma_\circ}(1) = -1$.
+:::
+
+::: proof
+Claim 1 is the path-lifting property of covering maps (Mathlib's `liftPath_lifts`, `liftPath_zero` and `eq_liftPath_iff'`). Claim 2: suppose $s$ is continuous with $s(z)^2 = z$, and for real $t$ put $r(t) = s(e^{it})\,/\,e^{it/2}$. Then $r$ is continuous and $r(t)^2 = e^{it}/e^{it} = 1$, so $r$ takes only the values $\pm 1$; the real line is connected, so $r$ is constant. But $t = 0$ and $t = 2\pi$ name the same point of the circle, so the numerators agree, while the denominator changes from $1$ to $e^{i\pi} = -1$; hence $r(2\pi) = -r(0)$, a contradiction. Claim 3: the half-angle path $t \mapsto e^{i\pi t}$ is continuous, squares to $\gamma_\circ$ and starts at $1$, so by the uniqueness in Claim 1 it is the lift, and it ends at $e^{i\pi} = -1$. The full proof is checked by the Lean kernel.
+:::
+
+Translated back into the language of rotors (the dictionary below is a manual derivation):
+
+- **Claim 3.** Turning an object continuously through one full turn about a fixed axis carries the rotor from $1$ to $-1$. This agrees with $R(2\pi) = -1$ but says more: by the uniqueness in Claim 1, any continuous rotor history with the same starting point that induces the same rotation history is the same history. A rotor is determined by the **history** of the rotation, not by where the rotation ends.
+- **Claim 2.** There is no global formula converting "angle of rotation" into "rotor" continuously. Any rule that assigns one rotor to each rotation must jump somewhere on the circle. The half angle is not a blemish of notation.
+- **Two full turns.** The loop $t \mapsto e^{4\pi i t}$ lifts to $t \mapsto e^{2\pi i t}$ (it is continuous, squares correctly and starts at $1$, so uniqueness in Claim 1 applies), which ends at $+1$. Only after $720^\circ$ is the rotor restored.
+
+::: {.example #ex-rotor-two-turns title="Angles from 0° to 720°: the Rotation Goes Around Twice, the Rotor Only Once"}
+Take $\vv{B} = \vv{e}_1 \wedge \vv{e}_2$. The rotation through the angle $\theta$ sends $\vv{e}_1$ to $\cos\theta\,\vv{e}_1 + \sin\theta\,\vv{e}_2$; the corresponding rotor is $R(\theta) = \cos\frac{\theta}{2} - \vv{B}\sin\frac{\theta}{2}$. The table lists the coordinates $(\cos\theta, \sin\theta)$ of the rotation and $\bigl(\cos\frac{\theta}{2}, \sin\frac{\theta}{2}\bigr)$ of the rotor, rounded to the digits shown:
+
+| Angle $\theta$ | Rotation $(\cos\theta,\ \sin\theta)$ | Rotor $\bigl(\cos\frac{\theta}{2},\ \sin\frac{\theta}{2}\bigr)$ |
+| :---: | :---: | :---: |
+| $0^\circ$ | $(1,\ 0)$ | $(1,\ 0)$ |
+| $90^\circ$ | $(0,\ 1)$ | $(0.7071,\ 0.7071)$ |
+| $180^\circ$ | $(-1,\ 0)$ | $(0,\ 1)$ |
+| $270^\circ$ | $(0,\ -1)$ | $(-0.7071,\ 0.7071)$ |
+| $360^\circ$ | $(1,\ 0)$ | $(-1,\ 0)$ |
+| $450^\circ$ | $(0,\ 1)$ | $(-0.7071,\ -0.7071)$ |
+| $540^\circ$ | $(-1,\ 0)$ | $(0,\ -1)$ |
+| $630^\circ$ | $(0,\ -1)$ | $(0.7071,\ -0.7071)$ |
+| $720^\circ$ | $(1,\ 0)$ | $(1,\ 0)$ |
+
+The second column is back at its starting point at $360^\circ$, when the third column has reached exactly the opposite point; any two rows $360^\circ$ apart (such as $90^\circ$ and $450^\circ$) have the same rotation and opposite rotors. Squaring each point of the third column (doubling its argument) gives the second column.
+
+**One direct check.** $R(90^\circ) = \frac{1}{\sqrt{2}}(1 - \vv{B})$, and with $\vv{B}^2 = -1$: $R(90^\circ)^2 = \frac{1}{2}(1 - 2\vv{B} + \vv{B}^2) = -\vv{B} = R(180^\circ)$; squaring again, $R(180^\circ)^2 = \vv{B}^2 = -1 = R(360^\circ)$.
+:::
+
 ::: {.viz src="qubit-geometry" preset="turn1" height="500"}
 **One full turn flips the rotor.** The amber state vector goes $360^\circ$ about $\hat{x}$ and returns to where it started, and so do the line and the area; the scalar part of the accumulated rotor runs from $+1$ to $-1$. Press ▶ under the figure for the next card: only after two full turns is it back at $+1$.
 :::
+
+A lone $-1$ is an overall sign, and by the discussion of the next section it changes no measurement reading; only when a branch that has been turned through a full turn is brought back together with a branch that has not does the sign become an observable relative phase. In neutron interferometry the fringes are inverted when the spin has precessed through $360^\circ$ and restored at $720^\circ$ (a literature result, not formalized in this book: H. Rauch et al., *Phys. Lett. A* **54**, 425, 1975; S. A. Werner et al., *Phys. Rev. Lett.* **35**, 1053, 1975).
 
 ## 5.3 Global Phase versus Relative Phase: Why Spinning a Single Line Is Invisible, and Only a Pair of Lines Spans an Area {#sec-global-vs-relative-phase}
 
@@ -239,7 +281,7 @@ Now let us check [@thm-balanced-sum-skew-adjoint] and [@thm-relative-complex-str
    $$
    \vv{v}' = R(\theta)\vv{v}R(\theta)^\dagger = \vv{v}\cos\theta + (\hat{\vv{n}}\times\vv{v})\sin\theta + \hat{\vv{n}}(\hat{\vv{n}}\cdot\vv{v})(1 - \cos\theta).
    $$
-   Because advancing $\theta \mapsto \theta + 2\pi$ negates the half-angle rotor $R(\theta + 2\pi) = -R(\theta)$ while $(-R)\vv{v}(-R)^\dagger = R\vv{v}R^\dagger$, the rotor group $\mathrm{Spin}(3) \cong \mathrm{SU}(2) \cong S^3$ forms the universal $2:1$ double cover of $\mathrm{SO}(3) \cong \mathbb{RP}^3$ (a spinor reverses sign under a $360^\circ$ turn and returns to itself only after $720^\circ$).
+   Because advancing $\theta \mapsto \theta + 2\pi$ negates the half-angle rotor $R(\theta + 2\pi) = -R(\theta)$ while $(-R)\vv{v}(-R)^\dagger = R\vv{v}R^\dagger$, the rotor group $\mathrm{Spin}(3) \cong \mathrm{SU}(2) \cong S^3$ forms the universal $2:1$ double cover of $\mathrm{SO}(3) \cong \mathbb{RP}^3$ (a spinor reverses sign under a $360^\circ$ turn and returns to itself only after $720^\circ$). The case of a fixed plane of rotation — the squaring map from the circle of rotors to the circle of rotations — is verified by [@thm-circle-double-cover-history-lift]: path lifts are unique, there is no continuous global section, and a full turn negates the rotor; the full cover $\mathrm{Spin}(3) \to \mathrm{SO}(3)$, the Rodrigues formula and $\mathrm{SO}(3) \cong \mathbb{RP}^3$ remain literature results.
 
 These classical Clifford-algebraic and historical results provide geometric context and are not claimed in the book's Lean verification ledger.
 :::

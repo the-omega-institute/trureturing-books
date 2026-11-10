@@ -30,7 +30,7 @@ $$
 Then the record weight of outcome $k$ reduces to the squared norm of the inner product (coerced to $\mathbb{C}$):
 
 $$
-\operatorname{recordWeight}(P, \rho, k) = \bigl(\norm{\operatorname{star}\phi \bullet_{\!v} \psi}^2 : \mathbb{R}\bigr).
+\operatorname{recordWeight}(P, \rho, k) = \bigl(\norm{\operatorname{star}\phi \bullet_{v} \psi}^2 : \mathbb{R}\bigr).
 $$
 :::
 
@@ -55,9 +55,9 @@ Tracing the nine rewrites inside `rw [...]` step by step:
 
 1. `recordWeight` and `bornProbability` unfold the left-hand side to $\Tr(\rho \cdot P_k)$;
 2. `hPureState` and `hProjection` substitute $\operatorname{vecMulVec}(\psi, \operatorname{star}\psi)$ and $\operatorname{vecMulVec}(\phi, \operatorname{star}\phi)$;
-3. `Matrix.vecMulVec_mul_vecMulVec` contracts the product of outer products into $(\operatorname{star}\psi \bullet_{\!v} \phi) \bullet \operatorname{vecMulVec}(\psi, \operatorname{star}\phi)$;
-4. `Matrix.trace_vecMulVec` and `dotProduct_smul` evaluate the trace of the outer product as $(\operatorname{star}\psi \bullet_{\!v} \phi) \bullet (\operatorname{star}\phi \bullet_{\!v} \psi)$;
-5. `dotProduct_comm psi (star phi)`, `Matrix.star_dotProduct`, and `smul_eq_mul` rewrite the first factor as the complex conjugate $\operatorname{star}(\operatorname{star}\phi \bullet_{\!v} \psi)$, producing $\overline{z} \cdot z$ for $z = \operatorname{star}\phi \bullet_{\!v} \psi$;
+3. `Matrix.vecMulVec_mul_vecMulVec` contracts the product of outer products into $(\operatorname{star}\psi \bullet_{v} \phi) \bullet \operatorname{vecMulVec}(\psi, \operatorname{star}\phi)$;
+4. `Matrix.trace_vecMulVec` and `dotProduct_smul` evaluate the trace of the outer product as $(\operatorname{star}\psi \bullet_{v} \phi) \bullet (\operatorname{star}\phi \bullet_{v} \psi)$;
+5. `dotProduct_comm psi (star phi)`, `Matrix.star_dotProduct`, and `smul_eq_mul` rewrite the first factor as the complex conjugate $\operatorname{star}(\operatorname{star}\phi \bullet_{v} \psi)$, producing $\overline{z} \cdot z$ for $z = \operatorname{star}\phi \bullet_{v} \psi$;
 6. Finally, `Complex.normSq_eq_conj_mul_self.symm` and `Complex.normSq_eq_norm_sq` fold $\overline{z} z$ into `((‖star phi ⬝ᵥ psi‖ ^ 2 : ℝ) : ℂ)`.
 
 The full proof is checked by the Lean kernel.
@@ -74,7 +74,7 @@ $$
 
 all three identities hold simultaneously:
 
-1. **Modulus-squared reduction**: $\operatorname{recordWeight}(P, \rho, k) = \bigl(\norm{\operatorname{star}\phi \bullet_{\!v} \psi}^2 : \mathbb{R}\bigr)$;
+1. **Modulus-squared reduction**: $\operatorname{recordWeight}(P, \rho, k) = \bigl(\norm{\operatorname{star}\phi \bullet_{v} \psi}^2 : \mathbb{R}\bigr)$;
 2. **Trace pairing identity**: $\operatorname{recordWeight}(P, \rho, k) = \Tr(\rho \cdot P_k)$;
 3. **Weighted conditional-state ensemble decomposition**:
    $$
@@ -159,8 +159,8 @@ The full proof is checked by the Lean kernel.
 Completing the audit table begun in [Chapter 27](ch27-reading-frozen-proofs-i.md), the table below records the exact source files, line numbers, `statement_id` prefixes, and formal contracts for the declarations audited in this chapter together with representative frozen declarations across Parts IV, V, and VI at commit `52725b62b659b244d077e29f18a576aa809007b7`.
 
 | Chapter | Frozen GID | Source File & Line | `statement_id` Prefix | Exact Formal Scope & Contract |
-| :---: | --- | --- | :---: | --- |
-| Ch 2 / Ch 28 | [`D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction`](lean:D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction) | `D5/S3/Observer/BornReduction.lean:27` | `sha256:9d19ef37` | $\operatorname{recordWeight}(P,\rho,k)=\norm{\operatorname{star}\phi\bullet_{\!v}\psi}^2$ for rank-one $P_k$ and $\rho$ |
+| :---------: | ---------------------------- | ---------------------------- | :------------------: | ----------------------------------------------------- |
+| Ch 2 / Ch 28 | [`D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction`](lean:D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction) | `D5/S3/Observer/BornReduction.lean:27` | `sha256:9d19ef37` | $\operatorname{recordWeight}(P,\rho,k)=\norm{\operatorname{star}\phi\bullet_{v}\psi}^2$ for rank-one $P_k$ and $\rho$ |
 | Ch 2 / Ch 28 | [`D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight) | `D5/S3/Observer/Conditioning/RankOneBornPairingWeight.lean:36` | `sha256:3fd7a21e` | Three-conjunct bridge: modulus squared, trace pairing, and weighted ensemble sum |
 | Ch 3 / Ch 28 | [`D5/S3/Observer/Conditioning.conditionalState_isState`](lean:D5/S3/Observer/Conditioning.conditionalState_isState) | `D5/S3/Observer/Conditioning.lean:143` | `sha256:ed6f3095` | Nonzero weight $w_k \neq 0$ preserves `PosSemidef` and unit trace on `conditionalState` |
 | Ch 3 / Ch 28 | [`D5/S3/Observer/Conditioning.unreadState_fixed_iff`](lean:D5/S3/Observer/Conditioning.unreadState_fixed_iff) | `D5/S3/Observer/Conditioning.lean:108` | `sha256:ed6f3095` | $\operatorname{unreadState}(P,\rho)=\rho \iff \forall k\neq l,\; P_k\rho P_l = 0$ |
@@ -181,6 +181,12 @@ Completing the audit table begun in [Chapter 27](ch27-reading-frozen-proofs-i.md
 | Ch 21 | [`D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.finite_record_cosine_obstruction`](lean:D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.finite_record_cosine_obstruction) | `D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.lean:231` | `sha256:c2b14fbf` | Shift-recording channel: for every recovery channel the worst-case trace-distance error is $\ge \frac{1}{2}\bigl(1 - \cos\frac{\pi}{\lfloor N/\lvert\ell\rvert\rfloor + 2}\bigr) > 0$ |
 | Ch 22 | [`D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product`](lean:D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product) | `D5/S3/Zeros/ZetaUpgrade.lean:25` | `sha256:d42c4a0a` | Identity between the Dirichlet series and Euler product of $\zeta(s)$ for $\operatorname{Re}(s)>1$ |
 | Ch 22 | [`D5/S3/Zeros/CompletedZeta.xi_reading_reflection`](lean:D5/S3/Zeros/CompletedZeta.xi_reading_reflection) | `D5/S3/Zeros/CompletedZeta.lean:50` | `sha256:d757f2e1` | Reflection symmetry $\xi(1 - s) = \xi(s)$ of the pole-removed xi reading, for every $s \in \mathbb{C}$ |
+| Ch 22 | [`D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.riemann_zeta_conj`](lean:D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.riemann_zeta_conj) | `D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.lean:87` | `sha256:c71d7be1` | $\zeta(\overline{s}) = \overline{\zeta(s)}$ for all $s \in \mathbb{C}$ |
+| Ch 22 | [`D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.xi_reading_conj`](lean:D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.xi_reading_conj) | `D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.lean:98` | `sha256:c71d7be1` | $\xi(\overline{s}) = \overline{\xi(s)}$ for all $s \in \mathbb{C}$ |
+| Ch 22 | [`D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.xi_reading_one_sub_conj`](lean:D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.xi_reading_one_sub_conj) | `D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.lean:105` | `sha256:c71d7be1` | $\xi(1-\overline{s}) = \overline{\xi(s)}$ for all $s \in \mathbb{C}$ |
+| Ch 22 | [`D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line`](lean:D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line) | `D5/S3/Midline/CayleyCriticalLine.lean:46` | `sha256:79d47c18` | $\norm{(s-1)/s} = 1 \iff \operatorname{Re}(s) = \tfrac12$ for all $s \in \mathbb{C}$ |
+| Ch 22 | [`D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion`](lean:D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion) | `D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.lean:76` | `sha256:547e2360` | `RiemannHypothesis` is equivalent to zero logarithmic radial defect at every nontrivial zero (a restatement, not a proof) |
+| Ch 22 | [`D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.full_symmetry_not_fixed_line_localization`](lean:D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.full_symmetry_not_fixed_line_localization) | `D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.lean:166` | `sha256:460e07bc` | For $\delta,\gamma \ne 0$ the off-critical quartic is entire, has full $\zeta$ symmetry and exactly four zeros, none on the critical line |
 | Ch 23 | [`D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_range_eq_eisNorm`](lean:D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_range_eq_eisNorm) | `D5/S3/PrimeForms/Crossing/CrossingNormForm.lean:35` | `sha256:d56f3761` | Equality between the range of $a^2-ab+b^2$ and the norm image of $\mathbb{Z}[\omega]$ |
 | Ch 24 | [`D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize`](lean:D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize) | `D5/S1/FixedPoints/FiniteContractingStability.lean:27` | `sha256:d7f526a9` | Deletion-only set updates $U(S)\subseteq S$ on finite $X$ stabilize within $(S_0).\mathrm{ncard}$ steps |
 | Ch 24 | [`D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique) | `D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean:40` | `sha256:0711b0ac` | Positivity ($0<\varphi$), fixed-point equation $\varphi=1+1/\varphi$ ($\varphi^2=\varphi+1$), and uniqueness on $(0,\infty)$ |
@@ -190,6 +196,11 @@ Completing the audit table begun in [Chapter 27](ch27-reading-frozen-proofs-i.md
 | Ch 24 | [`D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package`](lean:D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package) | `D5/S0/Diagonal/Lawvere/QualitativeEscape.lean:48` | `sha256:f4f9c8f7` | A fixed-point-free twist escapes every listing (no finiteness assumption), and the hypothesis cannot be dropped |
 | Ch 24 | [`D5/S3/Geometry/FixedPoint/Brouwer.Brouwer`](lean:D5/S3/Geometry/FixedPoint/Brouwer.Brouwer) | `D5/S3/Geometry/FixedPoint/Brouwer.lean:43` | `sha256:5551c05c` | Every continuous self-map of the standard simplex $\operatorname{stdSimplex}\ \mathbb{R}\ (\operatorname{Fin} n)$ has a fixed point |
 | Ch 24 | [`D5/S1/Phase/ContinuousAverage.continuous_average_tendsto_haar`](lean:D5/S1/Phase/ContinuousAverage.continuous_average_tendsto_haar) | `D5/S1/Phase/ContinuousAverage.lean:94` | `sha256:f1e543c6` | Under an irrational rotation, orbit averages of a continuous function tend to the Haar integral (any initial phase) |
+| Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacement.displacement_mul`](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_mul) | `D5/S3/Quantum/Algebra/WeylDisplacement.lean:140` | `sha256:11f68b71` | $D(a,b)\,D(c,d) = \omega^{bc}\,D(a+c,\ b+d)$ for all $a,b,c,d \in \mathbb{Z}_M$ |
+| Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacementAdjoint.displacement_adjoint`](lean:D5/S3/Quantum/Algebra/WeylDisplacementAdjoint.displacement_adjoint) | `D5/S3/Quantum/Algebra/WeylDisplacementAdjoint.lean:154` | `sha256:8aae4e56` | $D(a,b)^{\dagger} = \omega^{ab}\,D(-a,-b)$ |
+| Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm`](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm) | `D5/S3/Quantum/Algebra/WeylDisplacement.lean:174` | `sha256:11f68b71` | $\omega^{da}\,D(a,b)D(c,d) = \omega^{bc}\,D(c,d)D(a,b)$ |
+| Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation`](lean:D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation) | `D5/S3/Quantum/Algebra/WeylDisplacementConjugation.lean:94` | `sha256:075eec65` | $D(a,b)\,D(c,d)\,D(a,b)^{\dagger} = \omega^{bc-ad}\,D(c,d)$ |
+| Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute`](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute) | `D5/S3/Quantum/Algebra/WeylDisplacement.lean:182` | `sha256:11f68b71` | $M = 2$: $D(0,1)D(1,0) = -D(1,0)D(0,1)$ |
 
 Let us trace all four theorems of this chapter on a single concrete qubit state.
 
@@ -200,7 +211,7 @@ $$
 \rho = \operatorname{vecMulVec}(\psi, \operatorname{star}\psi) = \begin{pmatrix} 9/25 & -12i/25 \\ 12i/25 & 16/25 \end{pmatrix}.
 $$
 
-1. **Rank-one modulus-squared reduction ([@thm-audit-rank-one-born])**: Since $\operatorname{star}\phi_0 \bullet_{\!v} \psi = \frac{3}{5}$ and $\operatorname{star}\phi_1 \bullet_{\!v} \psi = \frac{4}{5}i$, the record weights are
+1. **Rank-one modulus-squared reduction ([@thm-audit-rank-one-born])**: Since $\operatorname{star}\phi_0 \bullet_{v} \psi = \frac{3}{5}$ and $\operatorname{star}\phi_1 \bullet_{v} \psi = \frac{4}{5}i$, the record weights are
    $$
    w_0 = \operatorname{recordWeight}(P, \rho, 0) = \Bigl|\frac{3}{5}\Bigr|^2 = \frac{9}{25} \neq 0, \qquad w_1 = \operatorname{recordWeight}(P, \rho, 1) = \Bigl|\frac{4}{5}i\Bigr|^2 = \frac{16}{25} \neq 0.
    $$

@@ -28,7 +28,7 @@ $$
 展开 $\operatorname{recordWeight}(P, \rho, k) = \Tr(\rho P_k)$，利用矩阵迹的有限线性可加性与矩阵乘法对有限求和的左分配律，结合记录测量的完备性条件 $\sum_{k \in \kappa} P_k = I$，得
 
 $$
-\sum_{k \in \kappa} \Tr(\rho P_k) = \Tr\!\Bigl(\rho \sum_{k \in \kappa} P_k\Bigr) = \Tr(\rho I) = \Tr(\rho).
+\sum_{k \in \kappa} \Tr(\rho P_k) = \Tr\Bigl(\rho \sum_{k \in \kappa} P_k\Bigr) = \Tr(\rho I) = \Tr(\rho).
 $$
 
 完整证明由 Lean 内核检查。
@@ -161,10 +161,12 @@ $$
 2. **由开区间内部一致性转移至全导数速率可积（`within_velocity_eq_velocity`）**：在开区间内部 $t \in (0, T)$，闭区间 $[0, T]$ 是 $t$ 的邻域，故区间内导数与全导数严格相等：$\operatorname{mfderivWithin}_{\mathrm{IR},\mathbb{I}}\,x\,[0, T]\,t\,1 = \operatorname{mfderiv}_{\mathrm{IR},\mathbb{I}}\,x\,t\,1$。由于开区间 $(0, T)$ 外的两个端点勒贝格测度为零，由 `IntervalIntegrable.congr_uIoo` 立即推出全导数速率 $t \mapsto \norm{\operatorname{mfderiv}_{\mathrm{IR},\mathbb{I}}\,x\,t\,1}$ 及其平方在 $[0, T]$ 上同样区间可积（结论 1 与结论 2）。
 3. **开区间链式法则与微积分基本定理**：复合函数 $V \circ x$ 在闭区间 $[0, T]$ 上连续（`ContinuousOn (V ∘ x) (Set.Icc 0 T)`）；而在开区间内部 $t \in (0, T)$，$x$ 在 $t$ 处流形可微且全导数满足 $\operatorname{mfderiv}_{\mathrm{IR},\mathbb{I}}\,x\,t\,1 = -\operatorname{actualGradient}(V, x(t))$。由链式法则与里斯对偶配对（`actual_gradient_flow_chain_rule`），对任意 $t \in (0, T)$ 有
    $$
-   \frac{d}{dt} V\bigl(x(t)\bigr)
-   = \bigl(\operatorname{mfderiv}_{\mathbb{I},\mathrm{IR}}\,V\,x(t)\bigr)\bigl(\operatorname{mfderiv}_{\mathrm{IR},\mathbb{I}}\,x\,t\,1\bigr)
-   = \bigl\langle \operatorname{actualGradient}(V, x(t)),\, \operatorname{mfderiv}_{\mathrm{IR},\mathbb{I}}\,x\,t\,1\bigr\rangle_{T_{x(t)}M}
-   = -\norm{\operatorname{mfderiv}_{\mathrm{IR},\mathbb{I}}\,x\,t\,1}^2.
+   \begin{aligned}
+   &\frac{d}{dt} V\bigl(x(t)\bigr) \\
+   &= \bigl(\operatorname{mfderiv}_{\mathbb{I},\mathrm{IR}}\,V\,x(t)\bigr)\bigl(\operatorname{mfderiv}_{\mathrm{IR},\mathbb{I}}\,x\,t\,1\bigr) \\
+   &= \bigl\langle \operatorname{actualGradient}(V, x(t)),\, \operatorname{mfderiv}_{\mathrm{IR},\mathbb{I}}\,x\,t\,1\bigr\rangle_{T_{x(t)}M} \\
+   &= -\norm{\operatorname{mfderiv}_{\mathrm{IR},\mathbb{I}}\,x\,t\,1}^2.
+   \end{aligned}
    $$
    结合 $[0, T]$ 上的端点连续性、$(0, T)$ 内的导数公式与已证的速率平方区间可积性，应用微积分基本定理（`intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le`）即得 $V(x(0)) - V(x(T)) = \int_0^T \norm{\operatorname{mfderiv}_{\mathrm{IR},\mathbb{I}}\,x\,t\,1}^2\,dt$。完整证明由 Lean 内核检查。
 :::

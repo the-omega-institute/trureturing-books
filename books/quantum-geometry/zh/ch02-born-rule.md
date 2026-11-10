@@ -215,7 +215,7 @@ $$
 看！当把上下两个对角元相加求迹时，带虚数 $i$ 的叉乘旋转项 $\pm i(a_0 b_1 - a_1 b_0)$ 正负相消，留下的干干净净恰好是两倍三维点积 $2(\vv{a} \cdot \vv{b})$！代回迹公式，结合倍角恒等式 $1 + \cos\theta = 2\cos^2(\theta/2)$，一气呵成得到：
 
 $$
-\Tr(\rho_{\vv{a}} P_{\vv{b}}) = \frac{1}{4}\bigl(2 + 0 + 0 + 2\,\vv{a}\cdot\vv{b}\bigr) = \frac{1 + \vv{a}\cdot\vv{b}}{2} = \frac{1 + \cos\theta}{2} = \cos^2\!\Bigl(\frac{\theta}{2}\Bigr).
+\Tr(\rho_{\vv{a}} P_{\vv{b}}) = \frac{1}{4}\bigl(2 + 0 + 0 + 2\,\vv{a}\cdot\vv{b}\bigr) = \frac{1 + \vv{a}\cdot\vv{b}}{2} = \frac{1 + \cos\theta}{2} = \cos^2\Bigl(\frac{\theta}{2}\Bigr).
 $$
 
 这行极其优美的等式把一切迷雾一扫而空：

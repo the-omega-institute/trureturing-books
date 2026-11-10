@@ -99,6 +99,68 @@ The full proof is checked by the Lean kernel.
 
 [@thm-unread-fixed-iff] exposes the birth of classical probability inside quantum geometry: once a record frame $P$ is chosen, matrices with vanishing inter-branch coherence $P_k \rho P_l = 0$ ($k \neq l$) behave as non-interfering classical ledgers. Classicality is not a separate realm of nature — it is the **fixed-point subspace** of an idempotent pinching map $\operatorname{unreadState}(P)$.
 
+A record measurement cuts a $d$-dimensional space into non-interfering channels. Turn the question around: how many records can a $d$-dimensional system hold if each must be read back **without any error**? If one is allowed to encode in non-orthogonal states, and to read out by something more general than a projective measurement, could three or four records be squeezed into one qubit? The module `D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity` at the pinned commit answers no, under generous hypotheses: the records may be mixed states and the readout may be any family of positive semidefinite matrices summing to the identity.
+
+::: {.proposition #prop-record-capacity title="A d-Dimensional System Holds at Most d Perfectly Readable Records" lean="D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity"}
+Let $N, d$ be natural numbers and let $\rho_0, \dots, \rho_{N-1}$ and $E_0, \dots, E_{N-1}$ be $d \times d$ complex matrices. If
+
+1. every $\rho_i$ is positive semidefinite with $\Tr(\rho_i) = 1$;
+2. every $E_j$ is positive semidefinite, and $\sum_{j} E_j = 1$;
+3. for all $i, j$, $\Tr(E_j\,\rho_i) = 1$ when $i = j$ and $\Tr(E_j\,\rho_i) = 0$ when $i \neq j$;
+
+then $N \le d$.
+:::
+
+::: proof
+By hypothesis 2 every $E_i$ lies between $0$ and $1$. From $\Tr(E_i\rho_i) = 1 = \Tr(\rho_i)$ one gets $\Tr\bigl((1 - E_i)\rho_i\bigr) = 0$; when the trace of a product of two positive semidefinite matrices vanishes the product itself vanishes, so the range of $\rho_i$ lies in the kernel of $1 - E_i$, that is, $E_i$ acts as the identity on it. Likewise, for $i \neq j$, $\Tr(E_i\rho_j) = 0$ puts the range of $\rho_j$ inside the kernel of $E_i$. Each $\rho_i$ has trace $1$ and is therefore nonzero, so its range contains a nonzero vector $v_i$. Then $E_i v_i = v_i$ and $E_i v_j = 0$ for $j \neq i$, and since $E_i$ is Hermitian, $\langle v_i, v_j\rangle = \langle E_i v_i, v_j\rangle = \langle v_i, E_i v_j\rangle = 0$. Pairwise orthogonal nonzero vectors are linearly independent, so there are at most $d$ of them. The full proof is checked by the Lean kernel.
+:::
+
+Relaxing hypothesis 3 yields a quantitative version (a manual derivation, not formalized in this book). For any $\rho_i$ and $E_j$ satisfying hypotheses 1 and 2, $\rho_i \le 1$ and $E_i \ge 0$ give $\Tr(E_i\rho_i) \le \Tr(E_i)$; summing over $i$,
+
+$$
+\sum_{i=0}^{N-1} \Tr(E_i\,\rho_i) \;\le\; \Tr\Bigl(\sum_{i} E_i\Bigr) \;=\; \Tr(1) \;=\; d .
+$$
+
+If the $N$ records are equally likely, the average probability $\frac{1}{N}\sum_i \Tr(E_i\rho_i)$ of reading correctly is at most $\frac{d}{N}$. [@prop-record-capacity] is the special case in which every record is read correctly: the left-hand side must equal $N$, hence $N \le d$.
+
+::: {.example #ex-trine-record-capacity title="Three Records in One Qubit: at Most Two Thirds Read Correctly"}
+Place three pure-state records in one qubit ($d = 2$), with Bloch vectors $120^\circ$ apart on a common great circle. For $k = 0, 1, 2$ take
+
+$$
+\lvert\psi_k\rangle = \cos\frac{k\pi}{3}\,\lvert 0\rangle + \sin\frac{k\pi}{3}\,\lvert 1\rangle .
+$$
+
+By the half-angle formula of [Chapter 2](ch02-born-rule.md), a Bloch angle of $120^\circ$ corresponds to $\lvert\langle\psi_j\mid\psi_k\rangle\rvert^2 = \cos^2 60^\circ = \frac{1}{4}$ for $j \neq k$. Since $N = 3 > d = 2$, [@prop-record-capacity] says that no readout separates the three perfectly.
+
+**A concrete readout.** Take $E_k = \frac{2}{3}\lvert\psi_k\rangle\langle\psi_k\rvert$. The three projectors add up to
+
+$$
+\sum_{k=0}^{2} \lvert\psi_k\rangle\langle\psi_k\rvert
+= \begin{pmatrix} 1 + \frac{1}{4} + \frac{1}{4} & 0 + \frac{\sqrt{3}}{4} - \frac{\sqrt{3}}{4} \\ 0 + \frac{\sqrt{3}}{4} - \frac{\sqrt{3}}{4} & 0 + \frac{3}{4} + \frac{3}{4} \end{pmatrix}
+= \frac{3}{2}\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix},
+$$
+
+so $\sum_k E_k = 1$ and hypothesis 2 holds. The readout table is
+
+$$
+\Tr\bigl(E_j\,\lvert\psi_k\rangle\langle\psi_k\rvert\bigr) = \frac{2}{3}\,\lvert\langle\psi_j\mid\psi_k\rangle\rvert^2 ,
+$$
+
+which equals $\frac{2}{3}$ for $j = k$ and $\frac{2}{3}\cdot\frac{1}{4} = \frac{1}{6}$ for $j \neq k$; each row sums to $\frac{2}{3} + \frac{1}{6} + \frac{1}{6} = 1$. The probability of reading correctly is $\frac{2}{3}$.
+
+**This is already optimal.** The quantitative bound above caps the average probability of reading correctly at $\frac{d}{N} = \frac{2}{3}$, and this readout attains it. Two records out of three is the literal meaning of "two dimensions shared among three records".
+
+| Records $N$ | Dimension $d$ | Bound $d/N$ on average success | All read correctly? |
+| :---: | :---: | :---: | :---: |
+| $2$ | $2$ | $1$ | yes (take two orthogonal records) |
+| $3$ | $2$ | $\frac{2}{3}$ | no |
+| $4$ | $2$ | $\frac{1}{2}$ | no |
+| $8$ | $8$ (three qubits) | $1$ | yes |
+| $9$ | $8$ | $\frac{8}{9}$ | no |
+:::
+
+The state space of a qubit is a whole sphere, with a continuum of points on it; yet only two of them at a time can serve as records that are read back without error. An "existence line" may point in any direction, but the number of slots in the ledger is set by the dimension.
+
 ## 3.2 The Inseparable Fate of Line and Plane (Hodge Duality) {#sec-ch03-2}
 
 Yet driving a one-dimensional idempotent axis into a three-dimensional sphere carries an immediate geometric consequence: it automatically singles out an inseparable twin.
@@ -185,6 +247,60 @@ Even better, the context index set $L$ in [@thm-complementary-pythagoras] maps o
 | Full triad $\{X, Y, Z\}$ ($|L|=3$) | Full 3D ball space $\mathbb{R}^3$ | $\frac{1}{2}(r_x^2 + r_y^2 + r_z^2)$ | Zero subspace $\{\vv{0}\}$ | $0$ (blind spot eliminated) |
 
 Notice why measuring only two complementary bases $\{Z, X\}$ still leaves a chirality ambiguity $\pm r_y$: the Hodge dual of a two-dimensional plane inside $\mathbb{R}^3$ is a one-dimensional normal line $\star(\vv{e}_3 \wedge \vv{e}_1) = \vv{e}_2$ carrying residual mass $\frac{1}{2}r_y^2$. Only when all three mutually orthogonal axes $\{X, Y, Z\}$ are probed (foreshadowing Part III, Chapter 9) does the residual blind spot vanish identically!
+
+The last row of the tomography table still hides a constraint that has not been said aloud. Can the readings of the three complementary contexts be definite **at the same time**? Rewrite the Pythagorean sum of the last row: for $|d| = 2$, each context satisfies $\sum_j \bigl(p_{l,j} - \frac{1}{2}\bigr)^2 = \sum_j p_{l,j}^2 - \frac{1}{2}$, hence
+
+$$
+\sum_{l \in \{X, Y, Z\}} \sum_{j} p_{l,j}^2 \;=\; \frac{3}{2} + \frac{1}{2}\norm{\vv{r}}^2 \;=\; 1 + \Tr(\rho_{\vv{r}}^2) .
+$$
+
+Each term $\sum_j p_{l,j}^2$ on the left is the probability that two independent readings of the same context agree, called the collision probability. The sum of the three collision probabilities is locked by the purity, so they cannot all equal $1$. The module `D5/S3/QuantumBounds/CollisionEntropyUncertainty` at the pinned commit turns this conservation law into a lower bound on entropy.
+
+::: {.proposition #prop-collision-entropy-uncertainty title="The Entropic Uncertainty Relation Given by Collision Conservation" lean="D5/S3/QuantumBounds/CollisionEntropyUncertainty.collision_entropy_uncertainty"}
+Let $d$ be a positive integer, let $p : \operatorname{Fin}(d+1) \to \operatorname{Fin} d \to \mathbb{R}$ be a table for $d + 1$ contexts with $d$ outcomes each, and let $P \in \mathbb{R}$. If
+
+1. for every context $b$, $p_b$ is a probability distribution: $0 \le p_{b,i}$ for all $i$, and $\sum_i p_{b,i} = 1$;
+2. **collision conservation**: $\sum_b \sum_i p_{b,i}^2 = 1 + P$;
+
+then
+
+$$
+(d + 1)\,\ln\frac{d + 1}{1 + P} \;\le\; \sum_{b} H(p_b), \qquad H(q) := \sum_i -q_i\ln q_i ,
+$$
+
+where $H$ is the Shannon entropy in nats (`shannonEntropy` in Lean, with $0\ln 0 = 0$ by the convention of Mathlib's `Real.negMulLog`).
+:::
+
+::: proof
+Two applications of Jensen's inequality. The first uses $p_b$ itself as weights: $-\ln$ is convex, so $H(p_b) = \sum_i p_{b,i}\,(-\ln p_{b,i}) \ge -\ln\bigl(\sum_i p_{b,i}^2\bigr)$; the Shannon entropy is at least the collision entropy. The second averages over the $d + 1$ contexts with uniform weights $\frac{1}{d+1}$: $\frac{1}{d+1}\sum_b -\ln c_b \ge -\ln\bigl(\frac{1}{d+1}\sum_b c_b\bigr)$, where $c_b = \sum_i p_{b,i}^2$. Substituting $\sum_b c_b = 1 + P$ from hypothesis 2 gives the claim. The full proof is checked by the Lean kernel.
+:::
+
+[@prop-collision-entropy-uncertainty] is by itself an inequality about tables of numbers; all the quantum mechanics sits in hypothesis 2. For the three Pauli contexts of a qubit, hypothesis 2 is the identity derived above from the tomography table, with $P = \Tr(\rho_{\vv{r}}^2)$. For general $d$, if the $d + 1$ contexts are mutually unbiased, one likewise has $\sum_b\sum_i p_{b,i}^2 = 1 + \Tr(\rho^2)$ (a literature result, not formalized in this book: I. D. Ivanović, *J. Phys. A* **25**, L363, 1992; such $d + 1$ contexts are known to exist when $d$ is a prime power).
+
+::: {.example #ex-three-pauli-entropy-sum title="The Entropy Sum of the Three Pauli Contexts: No State Makes All Three Readings Definite"}
+For a qubit state with Bloch vector $\vv{r}$, the two outcome probabilities in context $b \in \{X, Y, Z\}$ are $\frac{1 \pm r_b}{2}$. By [@prop-collision-entropy-uncertainty] with $d = 2$ and $P = \frac{1 + \norm{\vv{r}}^2}{2}$:
+
+$$
+H_X + H_Y + H_Z \;\ge\; 3\ln\frac{6}{3 + \norm{\vv{r}}^2} .
+$$
+
+For a pure state the right-hand side is $3\ln\frac{3}{2} \approx 1.2164$ nats ($1.7549$ bits). The table is in nats, rounded to the digits shown:
+
+| $\vv{r}$ | $H_X$ | $H_Y$ | $H_Z$ | Entropy sum | Lower bound $3\ln\frac{6}{3 + \norm{\vv{r}}^2}$ |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| $(0, 0, 1)$ | $0.6931$ | $0.6931$ | $0$ | $1.3863$ | $1.2164$ |
+| $\frac{1}{\sqrt{2}}(1, 1, 0)$ | $0.4165$ | $0.4165$ | $0.6931$ | $1.5261$ | $1.2164$ |
+| $\frac{1}{\sqrt{3}}(1, 1, 1)$ | $0.5157$ | $0.5157$ | $0.5157$ | $1.5471$ | $1.2164$ |
+| $(0, 0, 0.6)$ | $0.6931$ | $0.6931$ | $0.5004$ | $1.8867$ | $1.7395$ |
+| $(0.5, 0.5, 0.5)$ | $0.5623$ | $0.5623$ | $0.5623$ | $1.6870$ | $1.4100$ |
+| $(0, 0, 0)$ | $0.6931$ | $0.6931$ | $0.6931$ | $2.0794$ | $2.0794$ |
+
+**Reading the table.** First row: make the $Z$ reading fully definite ($H_Z = 0$) and both $X$ and $Y$ become fair coins, each costing $\ln 2$. The last row is the centre of the ball, where all three contexts are fair coins and the bound is attained.
+
+**How tight the bound is.** It is tight at the centre. On the sphere it is not: a numerical search over pure states with a step of $0.25^\circ$ finds the minimum entropy sum $2\ln 2 \approx 1.3863$, attained in the six coordinate-axis directions (such as the first row) and above $3\ln\frac{3}{2}$. The tight bound $H_X + H_Y + H_Z \ge 2\ln 2$ for pure qubit states is a literature result, not formalized in this book (J. Sánchez-Ruiz, *Phys. Lett. A* **201**, 125, 1995). Which step of the proof opens the gap? The first step replaces the Shannon entropy by the collision entropy, and for a two-outcome distribution this loses nothing only in the uniform and the deterministic cases; an axis state has exactly one deterministic and two uniform contexts, so the first step is lossless. The loss occurs in the second step, because the three collision probabilities $1, \frac{1}{2}, \frac{1}{2}$ are not equal.
+:::
+
+The Pythagorean theorem governs sums of squares; it says that the "degrees of definiteness" of the three contexts have a capped total. Entropy restates the same fact in units of information: for one qubit, at most one of three complementary questions can receive a definite answer.
 
 ## 3.3 The True Face of Classical Linear Time {#sec-ch03-3}
 
@@ -277,7 +393,7 @@ Along a history with nonzero weights, the factors are successive conditional tra
 For $N\in\mathbb{N}$ equally spaced intermediate sheets between the horizontal and final vertical sheets, take $m=N+1\ge1$ and $\alpha_j=j\pi/(2m)$. The finite chain gives
 
 $$
-w_N=\left[\cos^2\!\left(\frac{\pi}{2(N+1)}\right)\right]^{N+1}.
+w_N=\left[\cos^2\left(\frac{\pi}{2(N+1)}\right)\right]^{N+1}.
 $$
 
 $N=0$ gives $0$, while $N=1$ gives the $1/4$ above. All these ratios refer to the prepared horizontal beam. If the incident beam before preparation is unpolarized, with state $I/2$, horizontal preparation contributes a separate factor $1/2$, so the three-sheet experiment transmits $1/8$ of that original beam.

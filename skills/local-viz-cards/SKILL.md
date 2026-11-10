@@ -41,12 +41,12 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十一章 | §21.4 末 | `sphere-escape` 完整实验室 |
 | 第二十二章 | §22.2 末 | `sphere-escape` · `euclid` |
 | 第二十四章 | §24.4 末 | `sphere-escape` · `dottie` |
-| 终章 | 第二幕末 | `pythagoras-number-escape` · `hippasus` |
-| 终章 | 第一座桥末 | `pythagoras-number-escape` · `five` |
-| 终章 | 第三座桥末 | `pythagoras-number-escape` 完整实验室 |
-| 终章 | 第一层末 | `timeless-causal-crystal` · `crystal` |
-| 终章 | 第四层末 | `timeless-causal-crystal` · `window` |
-| 终章 | 第六层末 | `timeless-causal-crystal` 完整实验室 |
+| 第二十九章 | 第二幕末 | `pythagoras-number-escape` · `hippasus` |
+| 第二十九章 | 第一座桥末 | `pythagoras-number-escape` · `five` |
+| 第二十九章 | 第三座桥末 | `pythagoras-number-escape` 完整实验室 |
+| 第二十九章 | 第一层末 | `timeless-causal-crystal` · `crystal` |
+| 第二十九章 | 第四层末 | `timeless-causal-crystal` · `window` |
+| 第二十九章 | 定理 `thm-ch29-gram-rigidity-and-pell` 之后 | `timeless-causal-crystal` 完整实验室 |
 
 ## 增删或修改一张卡之后
 

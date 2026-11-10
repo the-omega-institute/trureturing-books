@@ -171,7 +171,10 @@ $$
 设 $N, p \in \mathbb{N}$ 且满足 `[NeZero p]`。对任意两个泡利字 $a, b : \mathrm{PauliWord}\,N\,p$，其对应矩阵算子的乘积恒等于
 
 $$
-\mathrm{pauliWordOperator}(a) \cdot \mathrm{pauliWordOperator}(b) = \mathrm{windowRoot}(p)^{\bigl(\sum_{n \in \mathrm{Fin}\,N} a.z_n \cdot b.x_n\bigr).\mathrm{val}} \bullet \mathrm{pauliWordOperator}\bigl(\mathrm{wordMul}(a, b)\bigr).
+\begin{aligned}
+&\mathrm{pauliWordOperator}(a) \cdot \mathrm{pauliWordOperator}(b) \\
+&= \mathrm{windowRoot}(p)^{\bigl(\sum_{n \in \mathrm{Fin}\,N} a.z_n \cdot b.x_n\bigr).\mathrm{val}} \bullet \mathrm{pauliWordOperator}\bigl(\mathrm{wordMul}(a, b)\bigr).
+\end{aligned}
 $$
 :::
 
@@ -372,9 +375,11 @@ $$
 现在取噪声系数矩阵 $\sigma = \operatorname{diag}\bigl(\frac{1}{2}, \frac{1}{4}, \frac{1}{8}, \frac{1}{8}\bigr) \in M_4(\mathbb{C})$（其迹为 $\Tr(\sigma) = \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \frac{1}{8} = 1$），并取逻辑密度矩阵 $\rho = \lvert +\rangle\langle +\rvert = \begin{pmatrix} 1/2 & 1/2 \\ 1/2 & 1/2 \end{pmatrix} \in M_2(\mathbb{C})$。受损物理态为 $8\times 8$ 块混合矩阵 $\mathrm{syndromeEncoding}(S, \sigma, \rho) = \sum_{j=0}^3 \sigma_{jj} S_j \rho S_j^*$。对其应用解码映射 $\mathrm{syndromeDecoding}(S, \cdot)$，由 [@prop-orthogonal-syndrome-recovery] 逐块缩并得：
 
 $$
-\mathrm{syndromeDecoding}\bigl(S,\, \mathrm{syndromeEncoding}(S, \sigma, \rho)\bigr)
-= \sum_{i=0}^3 S_i^* \Bigl(\sum_{j=0}^3 \sigma_{jj} S_j \rho S_j^*\Bigr) S_i
-= \Bigl(\frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \frac{1}{8}\Bigr)\begin{pmatrix} 1/2 & 1/2 \\ 1/2 & 1/2 \end{pmatrix} = \rho!
+\begin{aligned}
+&\mathrm{syndromeDecoding}\bigl(S,\, \mathrm{syndromeEncoding}(S, \sigma, \rho)\bigr) \\
+&= \sum_{i=0}^3 S_i^* \Bigl(\sum_{j=0}^3 \sigma_{jj} S_j \rho S_j^*\Bigr) S_i \\
+&= \Bigl(\frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \frac{1}{8}\Bigr)\begin{pmatrix} 1/2 & 1/2 \\ 1/2 & 1/2 \end{pmatrix} = \rho!
+\end{aligned}
 $$
 
 最后必须指明该码的纠错边界：这套四分支正交综合征仅能纠正至多一个 $X$ 位翻转错误 $\{I, X_1, X_2, X_3\}$；倘若发生的是单比特相位翻转错误 $Z_1 = Z \otimes I \otimes I$，由于 $Z_1$ 与 $g_1 = Z_1 Z_2$、$g_2 = Z_2 Z_3$ 均对易，它不会触发任何综合征警报（停留在 $S_0$ 子空间内），却把逻辑态 $\lvert +_L\rangle$ 翻转成了正交的 $\lvert -_L\rangle = \frac{\lvert 000\rangle - \lvert 111\rangle}{\sqrt{2}}$。因此三比特重复码绝不能纠正任意单比特量子噪声（纠正任意单比特错误至少需要五比特码或七比特 Steane 码、九比特 Shor 码）。

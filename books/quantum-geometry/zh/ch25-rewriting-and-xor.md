@@ -11,7 +11,7 @@
 1. 在二维复希尔伯特空间中，泡利生成元 `qubitX` 与 `qubitZ` 的全部非交换量子性，都浓缩在三条代数规则里：**平方为一**（$X^2 = I, Z^2 = I$）、**自伴**（$X^* = X, Z^* = Z$）与**反对易**（$ZX = -XZ$）；
 2. 在三维克利福德代数 $\mathcal{Cl}_{3,0}(\mathbb{R})$ 中，八维基刀片（blades）$\{1, e_1, e_2, e_1 e_2, e_3, e_1 e_3, e_2 e_3, e_1 e_2 e_3\}$ 与 3 比特整数掩码 $m \in \{000_2, \dots, 111_2\}$ 一一对应：同方向平方 $e_i^2 = +1$ 恰恰就是二进制同位清零的**按位异或（XOR，`left ^ right`）**，而异方向反对易 $e_j e_i = -e_i e_j$（$i < j$）不过是统计比特对跨越次数的**逆序对奇偶号（inversion parity）**！
 
-本章先呈现单比特外尔（Weyl）星代数、无特征标定理、无公共特征向量定理与无迹布洛赫算符核四条经 Lean 4 内核验证的冻结定理，随后给出完整的零依赖 Python 3 `GeometricState` 引擎实现。
+本章先呈现单比特外尔（Weyl）星代数、无特征标定理、无公共特征向量定理与无迹布洛赫算符核四条经 Lean 4 内核验证的冻结定理，再以外尔位移词的合成、伴随与共轭律为“异或加符号”的泡利词乘法提供第五条内核依据，随后给出完整的零依赖 Python 3 `GeometricState` 引擎实现。
 
 ![三比特刀片异或乘法与逆序奇偶符号、外尔对反对易与无特征标/无公共特征向量阻碍，以及无迹布洛赫算符核](../assets/fig-25-xor-pauli-symplectic-table.svg)
 
@@ -153,7 +153,7 @@ $$
    $$
 2. **输出正负号 = 跨位逆序对奇偶性（Inversion Parity）**：要把 $E_{\mathrm{left}} E_{\mathrm{right}}$ 中乱序的基向量按标准升序 $e_1 e_2 e_3$ 排好，左掩码 $\mathrm{left}$ 中每一个为 $1$ 的第 $i$ 位（$i \in \{0, 1, 2\}$），都需要跨过右掩码 $\mathrm{right}$ 中所有下标严格小于 $i$（即落在低位掩码 `(1 << i) - 1` 内）的 $1$ 位。每跨过一次就触发一次反对易变号 $e_i e_j = -e_j e_i$（$j < i$）！因此总交换次数与符号函数 `_blade_sign(left, right)` 为：
    $$
-   \operatorname{inv}(\mathrm{left}, \mathrm{right}) = \sum_{i=0}^{2} \bigl((\mathrm{left} \gg i)\,\&\,1\bigr)\cdot \operatorname{popcount}\!\bigl(\mathrm{right}\,\&\,(2^i - 1)\bigr), \qquad
+   \operatorname{inv}(\mathrm{left}, \mathrm{right}) = \sum_{i=0}^{2} \bigl((\mathrm{left} \gg i)\,\&\,1\bigr)\cdot \operatorname{popcount}\bigl(\mathrm{right}\,\&\,(2^i - 1)\bigr), \qquad
    \operatorname{sign}(\mathrm{left}, \mathrm{right}) = (-1)^{\operatorname{inv}(\mathrm{left}, \mathrm{right})}.
    $$
 
@@ -174,6 +174,74 @@ $$
   $$
 
 此外，对任意 $k$-阶刀片（$k = \operatorname{popcount}(m)$），把因子顺序完全颠倒的**逆序共轭（reversion）** $\widetilde{E}_m$ 需要做 $\frac{k(k-1)}{2}$ 次相邻对换，符号为 $(-1)^{k(k-1)/2}$：对 $k \in \{0, 1\}$ 为 $+1$，对 $k \in \{2, 3\}$ 为 $-1$。
+
+“下标异或、再乘一个符号”这条规则，到目前为止只是对着克利福德公理数交换次数得到的。对由一对生成元拼出的词，它有一条经内核验证的一般形式，而且不限于两个能级：把“取反”换成“乘一个 $M$ 次单位根”，同一条规则对任意 $M$ 能级系统成立。所钉仓库的模块 `D5/S3/Quantum/Algebra/WeylDisplacement` 及其两个后续模块冻结了它。
+
+::: {.definition #def-weyl-displacement-word title="窗口单位根、时钟矩阵、移位矩阵与外尔位移词" lean="D5/S3/Observer/WindowRegister.windowRoot D5/S3/Observer/WindowRegister.clockMatrix D5/S3/Observer/WindowRegister.shiftMatrix D5/S3/Quantum/Algebra/WeylDisplacement.displacement"}
+设 $M$ 为正整数（`[NeZero M]`），指标取自 $\mathbb{Z}_M$（`ZMod M`），$a.\mathrm{val} \in \{0, \dots, M-1\}$ 表示 $a \in \mathbb{Z}_M$ 的标准代表元。
+
+1. **窗口单位根** [`windowRoot`](lean:D5/S3/Observer/WindowRegister.windowRoot) $M$ 定义为 $\omega = e^{2\pi i/M}$；
+2. **时钟矩阵** [`clockMatrix`](lean:D5/S3/Observer/WindowRegister.clockMatrix) $M$ 是以 $\mathbb{Z}_M$ 为行列指标的对角复矩阵，第 $i$ 个对角元为 $\omega^{\,i.\mathrm{val}}$，记作 $Z$；
+3. **移位矩阵** [`shiftMatrix`](lean:D5/S3/Observer/WindowRegister.shiftMatrix) $M$ 是循环矩阵 `Matrix.circulant (fun i => if i = 1 then 1 else 0)`，即 $(i, j)$ 元当 $i - j = 1$ 时为 $1$、否则为 $0$，记作 $X$；
+4. **位移词** [`displacement`](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement) $M\ a\ b$ 定义为 $X^{a.\mathrm{val}}\,Z^{\,b.\mathrm{val}}$，记作 $D(a, b)$。
+:::
+
+::: {.theorem #thm-weyl-displacement-laws title="外尔位移词的合成律、伴随律、交换律与共轭律" lean="D5/S3/Quantum/Algebra/WeylDisplacement.displacement_mul D5/S3/Quantum/Algebra/WeylDisplacementAdjoint.displacement_adjoint D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute"}
+设 $M$ 为正整数，沿用 [@def-weyl-displacement-word] 的记号。对一切 $a, b, c, d \in \mathbb{Z}_M$（指数中的乘积与差先在 $\mathbb{Z}_M$ 中计算，再取标准代表元）：
+
+1. **合成律**：$D(a, b)\,D(c, d) = \omega^{\,bc}\,D(a + c,\ b + d)$；
+2. **伴随律**：$D(a, b)^{\dagger} = \omega^{\,ab}\,D(-a,\ -b)$；
+3. **交换律**：$\omega^{\,da}\,D(a, b)\,D(c, d) = \omega^{\,bc}\,D(c, d)\,D(a, b)$；
+4. **共轭律**：$D(a, b)\,D(c, d)\,D(a, b)^{\dagger} = \omega^{\,bc - ad}\,D(c, d)$；
+5. **符号确实出现**：$M = 2$ 时 $D(0, 1)\,D(1, 0) = -\,D(1, 0)\,D(0, 1)$。
+:::
+
+::: proof
+关键的一步是把时钟推过移位：$Z X = \omega\,X Z$，因而 $Z^{b} X^{c} = \omega^{\,bc} X^{c} Z^{b}$；又 $X^M = Z^M = 1$，指数只依赖于模 $M$ 的余数。结论 1 即由此重排 $X^a Z^b X^c Z^d$ 得到。结论 2：$(X^a Z^b)^{\dagger} = Z^{-b} X^{-a} = D(0, -b)\,D(-a, 0)$，再用结论 1 重排，相位为 $\omega^{(-b)(-a)}$。结论 3 是把结论 1 用于两种次序后比较。结论 4 把结论 1 与结论 2 相乘，三个相位的指数合计 $bc + ab + (b + d)(-a) = bc - ad$。结论 5 是结论 1 在 $\omega = -1$ 时的特例。完整证明由 Lean 内核检查。
+:::
+
+结论 4 的指数 $bc - ad$ 是两个下标对 $(a, b)$ 与 $(c, d)$ 的**辛配对**：交换两对下标它变号，与自己配对为零。由结论 3 可以读出对易判据（手工推导，未在本书形式化；Lean 模块本身不陈述这一推论）：$D(c, d)\,D(a, b)$ 可逆，所以 $D(a, b)$ 与 $D(c, d)$ 对易当且仅当 $\omega^{\,bc - ad} = 1$，即 $bc - ad \equiv 0 \pmod M$。
+
+多个 $M$ 能级系统并排时的乘法律已在[第十四章](ch14-cloning-codes-and-braids.md) [@lemma-pauli-word-phase] 中引用：那里的交叉相位指数 $\sum_n a.z_n \cdot b.x_n$，就是本定理结论 1 的指数 $bc$ 逐个系统求和。
+
+::: {.example #ex-pauli-words-xor-sign-table title="M = 2：四个泡利词的乘法表，逐项对照“异或加符号”"}
+取 $M = 2$。此时 $\omega = -1$，由 [@def-weyl-displacement-word]：
+
+$$
+X = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \qquad
+Z = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}, \qquad
+D(1, 1) = XZ = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} = -iY .
+$$
+
+四个词是 $D(0,0) = I$、$D(1,0) = X$、$D(0,1) = Z$、$D(1,1) = XZ$。$\mathbb{Z}_2$ 中的加法就是异或，所以合成律读作
+
+$$
+D(a, b)\,D(c, d) = (-1)^{bc}\,D(a \oplus c,\ b \oplus d) .
+$$
+
+**乘法表**（行为左因子，列为右因子；每一格由上式得到，并用 $2 \times 2$ 矩阵相乘逐格核对）：
+
+| 左 \ 右 | $I$ | $X$ | $Z$ | $XZ$ |
+| :---: | :---: | :---: | :---: | :---: |
+| $I$ | $I$ | $X$ | $Z$ | $XZ$ |
+| $X$ | $X$ | $I$ | $XZ$ | $Z$ |
+| $Z$ | $Z$ | $-XZ$ | $I$ | $-X$ |
+| $XZ$ | $XZ$ | $-Z$ | $X$ | $-I$ |
+
+负号只出现在左因子含 $Z$（$b = 1$）且右因子含 $X$（$c = 1$）的四格里，这就是指数 $bc$。右下角 $(XZ)^2 = -I$ 与 $(-iY)^2 = -I$ 一致。
+
+**与本节位运算规则对照。** 把 $x$ 放在第 $0$ 位、$z$ 放在第 $1$ 位，本节的逆序计数公式对两比特掩码只剩一项：
+
+$$
+\operatorname{inv}(\mathrm{left}, \mathrm{right}) = z_{\mathrm{left}}\cdot x_{\mathrm{right}} ,
+$$
+
+正是合成律中的指数 $bc$（$b = z_{\mathrm{left}}$，$c = x_{\mathrm{right}}$）；输出掩码的异或对应下标相加。引擎的两比特规则与矩阵词 $X^a Z^b$ 的乘法逐格一致。
+
+**对易表。** 由辛配对 $bc - ad \bmod 2$：$X$ 与 $Z$ 给出 $0\cdot 0 - 1\cdot 1 \equiv 1$，反对易；$X$ 与 $XZ$ 给出 $0\cdot 1 - 1\cdot 1 \equiv 1$，反对易；$Z$ 与 $XZ$ 给出 $1\cdot 1 - 0\cdot 1 \equiv 1$，反对易；每个词与自己配对为 $0$。三个非平凡词两两反对易，与乘法表中对称位置互为相反数一致。
+
+**三能级对照。** $M = 3$ 时 $\omega = e^{2\pi i/3}$，合成律给出 $Z X = \omega\,X Z$：交换一次不再是变号，而是转过 $120^\circ$；两个词对易当且仅当 $bc - ad \equiv 0 \pmod 3$。
+:::
 
 ## 零依赖 Python 3 几何代数引擎实现与自检 {#sec-geometric-state-python-engine}
 
@@ -294,8 +362,8 @@ class GeometricState:
 **文献结果，未在本书形式化。** 关于实克利福德代数 $\mathcal{Cl}_{p,q}(\mathbb{R})$ 的矩阵同构分类及多比特泡利群的二元辛表示，其经典文献归属与本书冻结定理的职责边界如下：
 
 1. **$\mathcal{Cl}_{3,0}(\mathbb{R}) \cong M_2(\mathbb{C})$ 与实克利福德代数分类**（参见 P. Lounesto, *Clifford Algebras and Spinors*, 2nd Ed., Cambridge University Press, 2001, Ch. 3 & Ch. 16；以及 H. B. Lawson & M.-L. Michelsohn, *Spin Geometry*, Princeton University Press, 1989, Ch. I）：三维欧氏实克利福德代数 $\mathcal{Cl}_{3,0}(\mathbb{R})$ 作为 8 维实结合代数同构于 $2\times 2$ 复矩阵代数 $M_2(\mathbb{C})$（其中心由 $\{1, I_3 = e_1 e_2 e_3\}$ 张成，同构于 $\mathbb{C}$），而其 4 维偶子代数 $\mathcal{Cl}^+_{3,0}(\mathbb{R})$ 同构于哈密顿四元数代数 $\mathbb{H}$。
-2. **多比特泡利群的二元辛向量空间表示与 Gottesman–Knill 定理**（参见 D. Gottesman, *Stabilizer Codes and Quantum Error Correction*, PhD thesis, Caltech, 1997, arXiv:quant-ph/9705052；以及 S. Aaronson & D. Gottesman, *Improved simulation of stabilizer circuits*, Phys. Rev. A **70**, 052328, 2004, DOI `10.1103/PhysRevA.70.052328`）：$n$ 比特泡利群模去中心相位后同构于二元域上的 $2n$ 维辛向量空间 $\mathbb{F}_2^{2n}$，群乘法化为按位异或（XOR），交换/反对易关系由辛内积决定。
-3. **冻结定理的精确边界**：本章经 Lean 4 内核验证的四条定理分别是单比特外尔星恒等式（[@thm-qubit-weyl-star]）、单比特矩阵代数无特征标定理（[@lemma-qubit-no-character]）、泡利 $X, Z$ 无非零公共特征向量定理（[@prop-pauli-no-common-eigenvector]）以及无迹布洛赫算符 $2\times 2$ 矩阵展开核（[@cor-bloch-operator-core]）。正文中给出的 Python 3 `GeometricState` 3 比特刀片引擎用于展示 $\mathcal{Cl}_{3,0}(\mathbb{R})$ 的可执行计算构造，并不把 $\mathcal{Cl}_{3,0}(\mathbb{R}) \cong M_2(\mathbb{C})$ 的泛性质同构或一般 $n$ 比特 Gottesman–Knill 复杂性定理声明为本章的 Lean 冻结定理。
+2. **多比特泡利群的二元辛向量空间表示与 Gottesman–Knill 定理**（参见 D. Gottesman, *Stabilizer Codes and Quantum Error Correction*, PhD thesis, Caltech, 1997, arXiv:quant-ph/9705052；以及 S. Aaronson & D. Gottesman, *Improved simulation of stabilizer circuits*, Phys. Rev. A **70**, 052328, 2004, DOI `10.1103/PhysRevA.70.052328`）：$n$ 比特泡利群模去中心相位后同构于二元域上的 $2n$ 维辛向量空间 $\mathbb{F}_2^{2n}$，群乘法化为按位异或（XOR），交换/反对易关系由辛内积决定。其中单个 $M$ 能级系统上位移词的合成相位与共轭相位（$M = 2$ 即单比特泡利词）已由 [@thm-weyl-displacement-laws] 验证，多模泡利字的乘法与交叉相位已由[第十四章](ch14-cloning-codes-and-braids.md) [@lemma-pauli-word-phase] 验证；“模去相位后同构于辛向量空间”的整体表述、稳定子表、克利福德门对辛向量的作用与 Gottesman–Knill 模拟定理仍属文献结果。
+3. **冻结定理的精确边界**：本章经 Lean 4 内核验证的五条定理分别是外尔位移词的合成、伴随、交换与共轭律（[@thm-weyl-displacement-laws]）、单比特外尔星恒等式（[@thm-qubit-weyl-star]）、单比特矩阵代数无特征标定理（[@lemma-qubit-no-character]）、泡利 $X, Z$ 无非零公共特征向量定理（[@prop-pauli-no-common-eigenvector]）以及无迹布洛赫算符 $2\times 2$ 矩阵展开核（[@cor-bloch-operator-core]）。正文中给出的 Python 3 `GeometricState` 3 比特刀片引擎用于展示 $\mathcal{Cl}_{3,0}(\mathbb{R})$ 的可执行计算构造，并不把 $\mathcal{Cl}_{3,0}(\mathbb{R}) \cong M_2(\mathbb{C})$ 的泛性质同构或一般 $n$ 比特 Gottesman–Knill 复杂性定理声明为本章的 Lean 冻结定理。
 :::
 
 既然 3 比特刀片与异或乘法已经把 $\mathcal{Cl}_{3,0}(\mathbb{R})$ 装进了三十行 Python 代码，下一步自然是：**如何在这个偶子代数 $\mathcal{Cl}^+_{3,0}(\mathbb{R})$ 里，把任意单量子比特门 $( \alpha, \beta, \gamma )$ 编译成单位旋转器（rotor），并用双侧夹心积 $v \mapsto R v \widetilde{R}$ 驱动三维布洛赫球面上的精确转向？** 让我们进入[第二十六章](ch26-single-qubit-rotor-compilation.md)。

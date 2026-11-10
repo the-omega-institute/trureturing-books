@@ -127,6 +127,70 @@ By operator symmetry, $\langle A\psi, B\psi\rangle_{\mathbb{C}} = \langle\psi, A
 
 [@thm-robertson-schrodinger] strips away every trace of mysticism from Heisenberg–Robertson uncertainty: the variance product $\Delta A^2\,\Delta B^2 = \|u\|^2\|v\|^2$ is the sum of three nonnegative squares $\mathrm{cov}^2 + \|C_{1/2}\|^2 + G$, so whenever the noncommuting bivector area $\|C_{1/2}\|^2 = \frac{1}{4}|\langle[A, B]\rangle|^2$ is nonzero, the fluctuation product can never drop below that area!
 
+[@thm-robertson-schrodinger] assumes a unit vector $\psi$, that is, a pure state. After [Chapter 4](ch04-decoherence.md), the mixed states near the centre of the ball are equally legitimate states. Does the uncertainty relation survive there? It does, and its proof is still one Cauchy–Schwarz inequality: replace the state vector $\psi$ by the matrix $\sqrt{\rho}$ and the inner product of vectors by the Hilbert–Schmidt inner product of matrices. The module `D5/S3/QuantumBounds/Designs/MixedStateRobertson` at the pinned commit freezes this statement.
+
+::: {.theorem #thm-mixed-state-robertson title="The Robertson Uncertainty Relation for Mixed States" lean="D5/S3/QuantumBounds/Designs/MixedStateRobertson.mixed_state_robertson_uncertainty"}
+Let $d$ be a finite index type (`[Fintype d]`, `[DecidableEq d]`), let $\rho$ be a density state on $d$ (`DensityState d`: a positive semidefinite $d \times d$ complex matrix of trace $1$), and let $A, B$ be Hermitian $d \times d$ complex matrices (`A.IsHermitian`, `B.IsHermitian`). Write $\sqrt{\rho}$ for the positive semidefinite square root of $\rho$ (`CFC.sqrt`) and set
+
+$$
+u := \bigl(A - \Tr(\rho A)\cdot 1\bigr)\sqrt{\rho}, \qquad v := \bigl(B - \Tr(\rho B)\cdot 1\bigr)\sqrt{\rho} .
+$$
+
+With matrices measured in the Hilbert–Schmidt norm $\norm{X} = \sqrt{\Tr(X^{\dagger}X)}$ (induced in the Lean module by the inner product $\langle X, Y\rangle = \Tr(X^{\dagger}Y)$),
+
+$$
+\norm{u}\,\norm{v} \;\ge\; \frac{1}{2}\,\bigl\lvert \Tr\bigl(\rho\,(AB - BA)\bigr) \bigr\rvert .
+$$
+:::
+
+::: proof
+Put $a = \Tr(\rho A)$ and $b = \Tr(\rho B)$; these are real because $A, B$ are Hermitian and $\rho$ is positive semidefinite. By cyclicity of the trace, $\langle u, v\rangle = \Tr\bigl(\sqrt{\rho}\,(A - a)(B - b)\sqrt{\rho}\bigr) = \Tr\bigl(\rho\,(A - a)(B - b)\bigr)$, and likewise $\langle v, u\rangle = \Tr\bigl(\rho\,(B - b)(A - a)\bigr)$. Subtracting, all constant terms cancel: $\langle u, v\rangle - \langle v, u\rangle = \Tr\bigl(\rho\,(AB - BA)\bigr)$. Since $\langle v, u\rangle = \overline{\langle u, v\rangle}$, the left-hand side equals $2i\operatorname{Im}\langle u, v\rangle$. Therefore $\frac{1}{2}\lvert\Tr(\rho\,(AB - BA))\rvert = \lvert\operatorname{Im}\langle u, v\rangle\rvert \le \lvert\langle u, v\rangle\rvert \le \norm{u}\,\norm{v}$, the last step being the Cauchy–Schwarz inequality. The full proof is checked by the Lean kernel.
+:::
+
+The quantity $\norm{u}$ in the theorem is the standard deviation. Again by cyclicity of the trace (a one-line manual derivation),
+
+$$
+\norm{u}^2 \;=\; \Tr\bigl(\sqrt{\rho}\,(A - a)^2\sqrt{\rho}\bigr) \;=\; \Tr\bigl(\rho\,(A - a)^2\bigr) \;=\; \Tr(\rho A^2) - \Tr(\rho A)^2 \;=\; \sigma_A^2 ,
+$$
+
+so [@thm-mixed-state-robertson] reads $\sigma_A\,\sigma_B \ge \frac{1}{2}\lvert\langle[A, B]\rangle_\rho\rvert$, the same form as for pure states. The difference hides in the slack: once the state is mixed, by how much does the inequality loosen? For one qubit the answer can be computed in full.
+
+::: {.example #ex-mixed-qubit-robertson-slack title="A Mixed Qubit: the Slack of the Inequality Is Exactly Mixedness Plus Squared Covariance"}
+Take the qubit state $\rho = \frac{1}{2}(I + r_x\sigma_x + r_y\sigma_y + r_z\sigma_z)$ with Bloch vector $\vv{r} = (r_x, r_y, r_z)$, $\norm{\vv{r}} \le 1$, together with $A = \sigma_x$ and $B = \sigma_y$.
+
+**Three quantities.** From $\sigma_x^2 = I$ and $\Tr(\rho\,\sigma_x) = r_x$: $\sigma_A^2 = 1 - r_x^2$, and likewise $\sigma_B^2 = 1 - r_y^2$. From $\sigma_x\sigma_y - \sigma_y\sigma_x = 2i\sigma_z$: $\frac{1}{2}\lvert\Tr(\rho\,(AB - BA))\rvert = \lvert r_z\rvert$. In this case [@thm-mixed-state-robertson] asserts
+
+$$
+\sqrt{(1 - r_x^2)(1 - r_y^2)} \;\ge\; \lvert r_z\rvert .
+$$
+
+**The slack identity.** Squaring both sides, subtracting and expanding (a manual derivation):
+
+$$
+(1 - r_x^2)(1 - r_y^2) - r_z^2 \;=\; \bigl(1 - \norm{\vv{r}}^2\bigr) \;+\; r_x^2\,r_y^2 .
+$$
+
+Both terms on the right are nonnegative, which proves the inequality once more, and each has a meaning:
+
+- $r_x^2 r_y^2$ is the squared covariance. Since $\sigma_x\sigma_y + \sigma_y\sigma_x = 0$, the symmetrized covariance is $\frac{1}{2}\langle AB + BA\rangle - \langle A\rangle\langle B\rangle = -r_x r_y$. This term is already present for pure states; it is the $\mathrm{cov}^2$ of [@thm-robertson-schrodinger].
+- $1 - \norm{\vv{r}}^2 = 2\bigl(1 - \Tr(\rho^2)\bigr)$ is the mixedness, and it is exactly the Gram defect $\norm{u}^2\norm{v}^2 - \lvert\langle u, v\rangle\rvert^2$ of the two matrices $u, v$. For a pure state it vanishes: the two fluctuation vectors of a pure qubit both lie in the one-dimensional subspace orthogonal to $\psi$ and are therefore parallel. The further the state is from the sphere, the larger this term.
+
+**Numerical table.** Each row was cross-checked by computing $u$, $v$ and both sides directly with $2 \times 2$ matrices; values are rounded to the digits shown:
+
+| $\vv{r}$ | $\sigma_A\sigma_B$ | $\lvert r_z\rvert$ | $1 - \norm{\vv{r}}^2$ | $r_x^2 r_y^2$ | $(\sigma_A\sigma_B)^2 - r_z^2$ |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| $(0, 0, 1)$ | $1$ | $1$ | $0$ | $0$ | $0$ |
+| $(0.6, 0, 0.8)$ | $0.8$ | $0.8$ | $0$ | $0$ | $0$ |
+| $\frac{1}{\sqrt{3}}(1, 1, 1)$ | $0.6667$ | $0.5774$ | $0$ | $0.1111$ | $0.1111$ |
+| $(0, 0, 0.6)$ | $1$ | $0.6$ | $0.64$ | $0$ | $0.64$ |
+| $(0.5, 0.5, 0.5)$ | $0.75$ | $0.5$ | $0.25$ | $0.0625$ | $0.3125$ |
+| $(0, 0, 0)$ | $1$ | $0$ | $1$ | $0$ | $1$ |
+
+The first three rows are pure states: the slack comes from the covariance alone, and the first two rows attain equality. The last three rows are mixed states: in the fourth row the state has moved inward along the $z$ axis, the commutator expectation has dropped from $1$ to $0.6$, and the product of the two standard deviations is still $1$; the last row is the centre of the ball, where the commutator expectation vanishes and the inequality becomes $1 \ge 0$.
+:::
+
+On the sphere the uncertainty relation can be attained. Toward the centre the variances do not shrink, while the commutator expectation shortens together with $r_z$; the gap between the two is filled exactly by the mixedness.
+
 ## 6.3 Pure Geometric Dissection of Double-Slit Interference and Wheeler's Delayed Choice: Discarding or Preserving the Area? {#sec-double-slit-delayed-choice}
 
 Equipped with this Pythagorean decomposition, let us step into the **double-slit experiment** and John Archibald Wheeler's **delayed-choice thought experiment**.

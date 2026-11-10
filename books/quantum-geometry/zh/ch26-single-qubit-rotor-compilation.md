@@ -133,7 +133,7 @@ $$
 请注意 $B_y = e_3 e_1 = -e_1 e_3$ 的符号：按照右手螺旋定则，从 $+z$ 轴（$e_3$）转向 $+x$ 轴（$e_1$）的有向面积元是 $e_3 \wedge e_1 = e_3 e_1 = -e_1 e_3$。由于每块单位双矢量都满足 $B_u^2 = -1$ 且 $\widetilde{B}_u = -B_u$（$u \in \{x, y, z\}$），绕 $u$ 轴右手旋转角度 $\theta$ 的**基本旋转器（elementary rotor）**由半角欧拉公式给出（图 26 中栏）：
 
 $$
-R_u(\theta) = \exp\!\Bigl(-\frac{\theta}{2} B_u\Bigr) = \cos\frac{\theta}{2} - \sin\frac{\theta}{2}\,B_u \in \mathcal{Cl}^+_{3,0}(\mathbb{R}).
+R_u(\theta) = \exp\Bigl(-\frac{\theta}{2} B_u\Bigr) = \cos\frac{\theta}{2} - \sin\frac{\theta}{2}\,B_u \in \mathcal{Cl}^+_{3,0}(\mathbb{R}).
 $$
 
 直接用[第二十五章](ch25-rewriting-and-xor.md)的逆序共轭 $\widetilde{R}_u(\theta) = \cos\frac{\theta}{2} + \sin\frac{\theta}{2}\,B_u$ 检验归一化：
@@ -371,7 +371,7 @@ self_test()
    $$
    U = e^{i\delta}\,R_z(\alpha)\,R_y(\beta)\,R_z(\gamma).
    $$
-2. **旋量旋转器群 $\operatorname{Spin}(3) \cong \mathrm{SU}(2)$ 到 $\mathrm{SO}(3)$ 的二对一满同态**：在 $\mathcal{Cl}^+_{3,0}(\mathbb{R})$ 中，单位偶多重向量群 $\operatorname{Spin}(3) = \{R \in \mathcal{Cl}^+_{3,0}(\mathbb{R}) \mid R\widetilde{R} = 1\} \cong S^3 \cong \mathrm{SU}(2)$ 通过夹心伴随作用 $\operatorname{Ad}_R(v) = R v \widetilde{R}$ 满射到三维特殊正交群 $\mathrm{SO}(3)$，其核为 $\{\pm 1\}$（故 $R$ 与 $-R$ 诱导出同一个三维球面旋转）。
+2. **旋量旋转器群 $\operatorname{Spin}(3) \cong \mathrm{SU}(2)$ 到 $\mathrm{SO}(3)$ 的二对一满同态**：在 $\mathcal{Cl}^+_{3,0}(\mathbb{R})$ 中，单位偶多重向量群 $\operatorname{Spin}(3) = \{R \in \mathcal{Cl}^+_{3,0}(\mathbb{R}) \mid R\widetilde{R} = 1\} \cong S^3 \cong \mathrm{SU}(2)$ 通过夹心伴随作用 $\operatorname{Ad}_R(v) = R v \widetilde{R}$ 满射到三维特殊正交群 $\mathrm{SO}(3)$，其核为 $\{\pm 1\}$（故 $R$ 与 $-R$ 诱导出同一个三维球面旋转）。固定旋转平面时这一二对一映射的拓扑——路径提升唯一、无连续整体截面、整圈使旋子变号——已由[第五章](ch05-complex-phase-and-rotors.md) [@thm-circle-double-cover-history-lift] 验证。
 3. **冻结定理的精确边界**：本章经 Lean 4 内核验证的四条定理均来自 `D5/S3/Quantum/Information/ActualPureQubitGeometry.lean`，严格刻画布洛赫重构矩阵的迹（[@thm-bloch-matrix-trace]）、三维布洛赫向量还原（[@lemma-bloch-coordinate-recovery]）、厄米 $2\times 2$ 矩阵的布洛赫分解与幂等纯态单位球面性质（[@prop-hermitian-bloch-geometry]）以及正半定矩阵的布洛赫球界 $\norm{\operatorname{bloch}(M)} \le \operatorname{Re}(\Tr M)$（[@cor-psd-bloch-ball-bound]）。通用 $\mathrm{U}(2)$ 门的 ZYZ 欧拉角存在性分解与 $\mathrm{SU}(2) \to \mathrm{SO}(3)$ 满射性属于上述经典文献结论，而 `RotorCompiler` 则是给定 $(\alpha, \beta, \gamma)$ 后的可执行正向旋转器合成器。
 :::
 

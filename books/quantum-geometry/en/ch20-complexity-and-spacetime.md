@@ -186,7 +186,7 @@ $$
 2. **Exponential CNOT lower bound for exact synthesis**: For every ancilla-free circuit $\mathit{circuit} : \operatorname{List}(\operatorname{gate}(2n))$ built from $\mathrm{CNOT}$ and single-qubit real $R_z$ gates and every complex scalar $c \in \mathbb{C}$, if
 
 $$
-\operatorname{circuitMatrix}(\mathit{circuit}) = c \cdot \operatorname{diag}\!\bigl(x \mapsto \exp(i\theta(x))\bigr),
+\operatorname{circuitMatrix}(\mathit{circuit}) = c \cdot \operatorname{diag}\bigl(x \mapsto \exp(i\theta(x))\bigr),
 $$
 
 then

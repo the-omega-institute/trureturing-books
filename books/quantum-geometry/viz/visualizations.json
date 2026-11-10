@@ -190,28 +190,28 @@
       ],
       "theory": [
         {
-          "label": "终章 · 第二幕 希帕索斯之裂与佩尔余项",
-          "label_en": "Coda · Act II, Hippasus’s crack and the Pell remainder",
-          "href": "../zh/coda.html#sec-coda-pythagoras-act2",
-          "href_en": "../en/coda.html#sec-coda-pythagoras-act2"
+          "label": "第 29 章 · 第二幕 希帕索斯之裂与佩尔余项",
+          "label_en": "Chapter 29 · Act II, Hippasus’s crack and the Pell remainder",
+          "href": "../zh/ch29-timeless-causality-and-gram-space.html#sec-coda-pythagoras-act2",
+          "href_en": "../en/ch29-timeless-causality-and-gram-space.html#sec-coda-pythagoras-act2"
         },
         {
-          "label": "终章 · ±1 佩尔接缝将奇素数一分为二：线素数与面素数",
-          "label_en": "Coda · The ±1 Pell seam splits the odd primes: line and plane primes",
-          "href": "../zh/coda.html#sec-coda-pell-prime-splitting",
-          "href_en": "../en/coda.html#sec-coda-pell-prime-splitting"
+          "label": "第 29 章 · ±1 佩尔接缝将奇素数一分为二：线素数与面素数",
+          "label_en": "Chapter 29 · The ±1 Pell seam splits the odd primes: line and plane primes",
+          "href": "../zh/ch29-timeless-causality-and-gram-space.html#sec-coda-pell-prime-splitting",
+          "href_en": "../en/ch29-timeless-causality-and-gram-space.html#sec-coda-pell-prime-splitting"
         },
         {
-          "label": "终章 · 同余数椭圆曲线环面",
-          "label_en": "Coda · The congruent-number elliptic torus",
-          "href": "../zh/coda.html#sec-coda-congruent-elliptic-torus",
-          "href_en": "../en/coda.html#sec-coda-congruent-elliptic-torus"
+          "label": "第 29 章 · 同余数椭圆曲线环面",
+          "label_en": "Chapter 29 · The congruent-number elliptic torus",
+          "href": "../zh/ch29-timeless-causality-and-gram-space.html#sec-coda-congruent-elliptic-torus",
+          "href_en": "../en/ch29-timeless-causality-and-gram-space.html#sec-coda-congruent-elliptic-torus"
         },
         {
-          "label": "终章 · 哈塞定理、弗罗贝尼乌斯余弦与佐藤—泰特分布",
-          "label_en": "Coda · Hasse’s theorem, the Frobenius cosine and Sato–Tate",
-          "href": "../zh/coda.html#sec-coda-hasse-sato-tate",
-          "href_en": "../en/coda.html#sec-coda-hasse-sato-tate"
+          "label": "第 29 章 · 哈塞定理、弗罗贝尼乌斯余弦与佐藤—泰特分布",
+          "label_en": "Chapter 29 · Hasse’s theorem, the Frobenius cosine and Sato–Tate",
+          "href": "../zh/ch29-timeless-causality-and-gram-space.html#sec-coda-hasse-sato-tate",
+          "href_en": "../en/ch29-timeless-causality-and-gram-space.html#sec-coda-hasse-sato-tate"
         },
         {
           "label": "第一章 · 实内积空间的平行四边形范数律",
@@ -255,7 +255,7 @@
         "梯度流",
         "振幅放大",
         "P 是场，NP 是线",
-        "终章"
+        "第 29 章"
       ],
       "tags_en": [
         "Gram window",
@@ -264,32 +264,32 @@
         "gradient flow",
         "amplitude amplification",
         "P is a field, NP is a line",
-        "coda"
+        "chapter 29"
       ],
       "theory": [
         {
-          "label": "终章 · 顺序无关、无时间之网与几何因果的必然性",
-          "label_en": "Coda · Order-independence, the timeless web and the necessity of causality",
-          "href": "../zh/coda.html#sec-coda-timeless-causality",
-          "href_en": "../en/coda.html#sec-coda-timeless-causality"
+          "label": "第 29 章 · 顺序无关、无时间之网与几何因果的必然性",
+          "label_en": "Chapter 29 · Order-independence, the timeless web and the necessity of causality",
+          "href": "../zh/ch29-timeless-causality-and-gram-space.html#sec-coda-timeless-causality",
+          "href_en": "../en/ch29-timeless-causality-and-gram-space.html#sec-coda-timeless-causality"
         },
         {
-          "label": "终章 · 第四层 有限观察者与因果相容空间",
-          "label_en": "Coda · Level 4, the finite observer and the compatible space",
-          "href": "../zh/coda.html#sec-coda-finite-observer-time-field",
-          "href_en": "../en/coda.html#sec-coda-finite-observer-time-field"
+          "label": "第 29 章 · 第四层 有限观察者与因果相容空间",
+          "label_en": "Chapter 29 · Level 4, the finite observer and the compatible space",
+          "href": "../zh/ch29-timeless-causality-and-gram-space.html#sec-coda-finite-observer-time-field",
+          "href_en": "../en/ch29-timeless-causality-and-gram-space.html#sec-coda-finite-observer-time-field"
         },
         {
-          "label": "终章 · 第五层 全局静态场与有限观察者",
-          "label_en": "Coda · Level 5, global static field and finite observer",
-          "href": "../zh/coda.html#sec-coda-global-p-eq-np-local-p-ne-np",
-          "href_en": "../en/coda.html#sec-coda-global-p-eq-np-local-p-ne-np"
+          "label": "第 30 章 · 全局静态场与有限观察者",
+          "label_en": "Chapter 30 · Global static field and finite observer",
+          "href": "../zh/ch30-fields-lines-eth-and-navier-stokes.html#sec-coda-global-p-eq-np-local-p-ne-np",
+          "href_en": "../en/ch30-fields-lines-eth-and-navier-stokes.html#sec-coda-global-p-eq-np-local-p-ne-np"
         },
         {
-          "label": "终章 · 第六层 P 是场，NP 是线",
-          "label_en": "Coda · Level 6, P is a field, NP is a line",
-          "href": "../zh/coda.html#sec-coda-p-is-field-np-is-line",
-          "href_en": "../en/coda.html#sec-coda-p-is-field-np-is-line"
+          "label": "第 30 章 · P 是场，NP 是线",
+          "label_en": "Chapter 30 · P is a field, NP is a line",
+          "href": "../zh/ch30-fields-lines-eth-and-navier-stokes.html#sec-coda-p-is-field-np-is-line",
+          "href_en": "../en/ch30-fields-lines-eth-and-navier-stokes.html#sec-coda-p-is-field-np-is-line"
         },
         {
           "label": "Lean 源码 · Conditioning.lean",

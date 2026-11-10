@@ -51,6 +51,11 @@
 - [Chapter 27 Inside the Lean 4 Axiom Sanctuary (Part I): From the Parallelogram Law to Finite Record Pinching](ch27-reading-frozen-proofs-i.md)
 - [Chapter 28 Inside the Lean 4 Axiom Sanctuary (Part II): From Rank-One Born Reduction to the Closure of $\psi = \psi(\psi)$](ch28-reading-frozen-proofs-ii.md)
 
+# Part VIII Synthesis — Timeless Causality, Complexity Horizons, and Fluid Vortex Filaments
+
+- [Chapter 29 Timeless Causality and the Gram Compatible Space: From the Pythagorean Pell Seam to Elliptic-Curve Tori](ch29-timeless-causality-and-gram-space.md)
+- [Chapter 30 Fields ($P$) and Lines ($NP$): From the Exponential Time Hypothesis (ETH) to Navier–Stokes Vortex Filaments](ch30-fields-lines-eth-and-navier-stokes.md)
+
 # Coda and Appendices
 
 - [Coda: Outside All Spheres](coda.md)
