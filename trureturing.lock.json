@@ -1701,6 +1701,14 @@
       "line": 44,
       "signature": "def observable {Fiber : Type*} (answer : Fiber -> Bool) : Fiber -> Real"
     },
+    "D5/S3/QuantumBounds/Designs/MixedStateRobertson.mixed_state_robertson_uncertainty": {
+      "module": "D5/S3/QuantumBounds/Designs/MixedStateRobertson",
+      "name": "D5.S3.QuantumBounds.Designs.MixedStateRobertson.mixed_state_robertson_uncertainty",
+      "kind": "theorem",
+      "statement_id": "sha256:a2d45f27069aab5859662a990253e1e8f4a44aec98179298418b7b74be2bd495",
+      "line": 68,
+      "signature": "theorem mixed_state_robertson_uncertainty (rho : DensityState d) (A B : Matrix d d ℂ) (hA : A.IsHermitian) (hB : B.IsHermitian) : let rhoMatrix : Matrix d d ℂ"
+    },
     "D5/S3/QuantumBounds/FubiniStudyRecordTime.fsAngle": {
       "module": "D5/S3/QuantumBounds/FubiniStudyRecordTime",
       "name": "D5.S3.QuantumBounds.FubiniStudyRecordTime.fsAngle",

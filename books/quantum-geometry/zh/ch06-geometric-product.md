@@ -123,6 +123,70 @@ $$
 
 看清 [@thm-robertson-schrodinger] 的结构了吗？传统海森堡—罗伯逊不确定性不等式 $\Delta A^2\,\Delta B^2 = \|u\|^2\|v\|^2 \ge \|C_{1/2}\|^2 = \frac{1}{4}|\langle [A, B]\rangle|^2$ 并不是什么模糊的“测量扰动玄学”，而是因为左端总几何容量 $\|u\|^2\|v\|^2$ 等于三个非负实平方项 $\mathrm{cov}^2 + \|C_{1/2}\|^2 + G$ 之和！只要两算子的非对易面积 $\|C_{1/2}\|^2 > 0$ 不为零，哪怕协方差 $\mathrm{cov} = 0$ 且格拉姆亏量 $G = 0$，涨落乘积也绝不可能压到对易子面积 $\|C_{1/2}\|^2$ 以下！
 
+[@thm-robertson-schrodinger] 的前提是单位向量 $\psi$，也就是纯态。[第四章](ch04-decoherence.md)之后，球心附近的混合态同样是合法的状态，不确定关系在那里还成立吗？成立，而且证明仍然是一条柯西—施瓦茨不等式：只需把态向量 $\psi$ 换成矩阵 $\sqrt{\rho}$，把向量内积换成矩阵的希尔伯特—施密特内积。所钉仓库的模块 `D5/S3/QuantumBounds/Designs/MixedStateRobertson` 冻结了这条结论。
+
+::: {.theorem #thm-mixed-state-robertson title="混合态下的罗伯逊不确定关系" lean="D5/S3/QuantumBounds/Designs/MixedStateRobertson.mixed_state_robertson_uncertainty"}
+设 $d$ 为有限指标类型（`[Fintype d]`、`[DecidableEq d]`），$\rho$ 为 $d$ 上的密度态（`DensityState d`：半正定且迹为 $1$ 的 $d \times d$ 复矩阵），$A, B$ 为 $d \times d$ 复厄米矩阵（`A.IsHermitian`、`B.IsHermitian`）。记 $\sqrt{\rho}$ 为 $\rho$ 的半正定平方根（`CFC.sqrt`），并令
+
+$$
+u := \bigl(A - \Tr(\rho A)\cdot 1\bigr)\sqrt{\rho}, \qquad v := \bigl(B - \Tr(\rho B)\cdot 1\bigr)\sqrt{\rho} .
+$$
+
+以希尔伯特—施密特范数 $\norm{X} = \sqrt{\Tr(X^{\dagger}X)}$ 度量矩阵（Lean 模块中由内积 $\langle X, Y\rangle = \Tr(X^{\dagger}Y)$ 给出），则
+
+$$
+\norm{u}\,\norm{v} \;\ge\; \frac{1}{2}\,\bigl\lvert \Tr\bigl(\rho\,(AB - BA)\bigr) \bigr\rvert .
+$$
+:::
+
+::: proof
+记 $a = \Tr(\rho A)$、$b = \Tr(\rho B)$；$A, B$ 厄米而 $\rho$ 半正定，故 $a, b$ 为实数。由迹的循环性，$\langle u, v\rangle = \Tr\bigl(\sqrt{\rho}\,(A - a)(B - b)\sqrt{\rho}\bigr) = \Tr\bigl(\rho\,(A - a)(B - b)\bigr)$，同理 $\langle v, u\rangle = \Tr\bigl(\rho\,(B - b)(A - a)\bigr)$。两式相减，常数项全部抵消：$\langle u, v\rangle - \langle v, u\rangle = \Tr\bigl(\rho\,(AB - BA)\bigr)$。而 $\langle v, u\rangle = \overline{\langle u, v\rangle}$，所以左端等于 $2i\operatorname{Im}\langle u, v\rangle$。于是 $\frac{1}{2}\lvert\Tr(\rho\,(AB - BA))\rvert = \lvert\operatorname{Im}\langle u, v\rangle\rvert \le \lvert\langle u, v\rangle\rvert \le \norm{u}\,\norm{v}$，最后一步是柯西—施瓦茨不等式。完整证明由 Lean 内核检查。
+:::
+
+定理里的 $\norm{u}$ 就是标准差。同样由迹的循环性（一行手工推导），
+
+$$
+\norm{u}^2 \;=\; \Tr\bigl(\sqrt{\rho}\,(A - a)^2\sqrt{\rho}\bigr) \;=\; \Tr\bigl(\rho\,(A - a)^2\bigr) \;=\; \Tr(\rho A^2) - \Tr(\rho A)^2 \;=\; \sigma_A^2 ,
+$$
+
+所以 [@thm-mixed-state-robertson] 读作 $\sigma_A\,\sigma_B \ge \frac{1}{2}\lvert\langle[A, B]\rangle_\rho\rvert$，与纯态时形式相同。不同之处藏在余量里：态变混之后，不等式究竟松了多少？单比特可以把它完全算出来。
+
+::: {.example #ex-mixed-qubit-robertson-slack title="单比特混合态：不等式的余量恰好是混合度加协方差平方"}
+取布洛赫向量为 $\vv{r} = (r_x, r_y, r_z)$（$\norm{\vv{r}} \le 1$）的单比特态 $\rho = \frac{1}{2}(I + r_x\sigma_x + r_y\sigma_y + r_z\sigma_z)$，以及 $A = \sigma_x$、$B = \sigma_y$。
+
+**三个量。** 由 $\sigma_x^2 = I$ 与 $\Tr(\rho\,\sigma_x) = r_x$：$\sigma_A^2 = 1 - r_x^2$，同理 $\sigma_B^2 = 1 - r_y^2$。由 $\sigma_x\sigma_y - \sigma_y\sigma_x = 2i\sigma_z$：$\frac{1}{2}\lvert\Tr(\rho\,(AB - BA))\rvert = \lvert r_z\rvert$。[@thm-mixed-state-robertson] 此时断言
+
+$$
+\sqrt{(1 - r_x^2)(1 - r_y^2)} \;\ge\; \lvert r_z\rvert .
+$$
+
+**余量恒等式。** 把两端平方后相减并展开（手工推导）：
+
+$$
+(1 - r_x^2)(1 - r_y^2) - r_z^2 \;=\; \bigl(1 - \norm{\vv{r}}^2\bigr) \;+\; r_x^2\,r_y^2 .
+$$
+
+右端两项都非负，不等式由此再次得证，而且两项各有含义：
+
+- $r_x^2 r_y^2$ 是协方差的平方。由 $\sigma_x\sigma_y + \sigma_y\sigma_x = 0$，对称协方差为 $\frac{1}{2}\langle AB + BA\rangle - \langle A\rangle\langle B\rangle = -r_x r_y$。这一项在纯态时已经存在，就是 [@thm-robertson-schrodinger] 里的 $\mathrm{cov}^2$。
+- $1 - \norm{\vv{r}}^2 = 2\bigl(1 - \Tr(\rho^2)\bigr)$ 是混合度，它正是 $u, v$ 两个矩阵的格拉姆亏量 $\norm{u}^2\norm{v}^2 - \lvert\langle u, v\rangle\rvert^2$。纯态时它为零：单比特纯态的两个涨落向量都落在与 $\psi$ 正交的那一维子空间里，必然平行。态离开球面多远，这一项就有多大。
+
+**数值表。** 下表各行另用 $2 \times 2$ 矩阵直接计算 $u$、$v$ 与两端核对，四舍五入到所示位数：
+
+| $\vv{r}$ | $\sigma_A\sigma_B$ | $\lvert r_z\rvert$ | $1 - \norm{\vv{r}}^2$ | $r_x^2 r_y^2$ | $(\sigma_A\sigma_B)^2 - r_z^2$ |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| $(0, 0, 1)$ | $1$ | $1$ | $0$ | $0$ | $0$ |
+| $(0.6, 0, 0.8)$ | $0.8$ | $0.8$ | $0$ | $0$ | $0$ |
+| $\frac{1}{\sqrt{3}}(1, 1, 1)$ | $0.6667$ | $0.5774$ | $0$ | $0.1111$ | $0.1111$ |
+| $(0, 0, 0.6)$ | $1$ | $0.6$ | $0.64$ | $0$ | $0.64$ |
+| $(0.5, 0.5, 0.5)$ | $0.75$ | $0.5$ | $0.25$ | $0.0625$ | $0.3125$ |
+| $(0, 0, 0)$ | $1$ | $0$ | $1$ | $0$ | $1$ |
+
+前三行是纯态：余量只来自协方差，前两行取等。后三行是混合态：第四行沿 $z$ 轴缩进球内，对易子期望从 $1$ 降到 $0.6$，而两个标准差的乘积仍是 $1$；最后一行是球心，对易子期望为零，不等式变成 $1 \ge 0$。
+:::
+
+球面上，不确定关系可以取等；往球心走，方差不会变小，对易子期望却随 $r_z$ 一起缩短，两者之间的空隙正好由混合度填满。
+
 ## 6.3 双缝干涉与惠勒延迟选择的纯几何拆解：拆掉面积还是保留面积？ {#sec-double-slit-delayed-choice}
 
 现在，让我们带着这把锋利的几何手术刀，走进费曼口中“包含了量子力学唯一真正奥秘”的**双缝干涉实验（double-slit interference）**与约翰·惠勒（John Archibald Wheeler）提出的**延迟选择思想实验（delayed-choice experiment）**。
