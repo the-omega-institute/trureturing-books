@@ -244,7 +244,10 @@ $$
 By [`one_surviving_copy_composition_apply`](lean:D5/S3/ObserverMemory/JointCoherentReversal.one_surviving_copy_composition_apply) (which uses [`reverse_record_overlap`](lean:D5/S3/ObserverMemory/JointCoherentReversal.reverse_record_overlap) to replace each reversed copy's overlap for $l \in \mathrm{Finset.univ.erase}\,k$ by $\overline{\operatorname{recordOverlap}(\mathrm{records}(l), i, j)}$ and cancels $\overline{c_l} c_l = 1$ via hypothesis 1), every factor $l \neq k$ reduces to $1$, leaving only the unreversed overlap factor of copy $k$:
 
 $$
-\operatorname{reverseChannelOn}\Bigl(\mathrm{Finset.univ.erase}\,k,\, \mathrm{records},\, \operatorname{multiRecordChannel}(\mathrm{records}, \rho)\Bigr)_{ij} = \operatorname{recordOverlap}\bigl(\mathrm{records}(k), i, j\bigr) \cdot \rho_{ij}.
+\begin{aligned}
+&\operatorname{reverseChannelOn}\Bigl(\mathrm{Finset.univ.erase}\,k,\, \mathrm{records},\, \operatorname{multiRecordChannel}(\mathrm{records}, \rho)\Bigr)_{ij} \\
+&= \operatorname{recordOverlap}\bigl(\mathrm{records}(k), i, j\bigr) \cdot \rho_{ij}.
+\end{aligned}
 $$
 
 If the left-hand side equaled $\rho_{ij}$, then $\operatorname{recordOverlap}(\mathrm{records}(k), i, j) \cdot \rho_{ij} = 1 \cdot \rho_{ij}$. Since $\mathbb{C}$ has no zero divisors and $\rho_{ij} \neq 0$ (hypothesis 3), right cancellation would yield $\operatorname{recordOverlap}(\mathrm{records}(k), i, j) = 1$, contradicting hypothesis 2 ($\operatorname{recordOverlap}(\mathrm{records}(k), i, j) \neq 1$). The full proof is checked by the Lean kernel.
