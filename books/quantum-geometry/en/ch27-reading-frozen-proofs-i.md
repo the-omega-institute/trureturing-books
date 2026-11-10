@@ -61,7 +61,12 @@ Why must `parallelogram_law_with_norm` and `norm_add_sq_real` square 1D vectors 
    $$
    For every $k \ge 1$, an indestructible unit arithmetic crack $(-1)^k = \pm 1$ separates $m_k^2$ from $2n_k^2$. In this book's conceptual and philosophical synthesis, that unit crack propels the Chinese concept of *number* (`数`) from the discrete counting verb operator (`shǔ`, $\mathbb{N} \to \mathbb{Q}$) to the continuous geometric noun coordinate (`shù`), tracing a four-stage conceptual progression (note that this is a conceptual hierarchy rather than a chain of field inclusions $\pi \subset \theta^*$; the algebraic golden ratio $\varphi = \frac{1+\sqrt{5}}{2} \in \overline{\mathbb{Q}}$ satisfying $\varphi = 1 + 1/\varphi$ belongs to Stage 2, whereas Stage 4's $\theta^* \approx 0.739085$ denotes the transcendental self-referential cosine fixed point $\cos\theta^* = \theta^*$):
    $$
-   \mathbb{Q}\text{ (rational grid)} \;\longrightarrow\; \overline{\mathbb{Q}}\text{ (algebraic numbers: $\sqrt{2}$ diagonal \& golden ratio $\varphi$)} \;\longrightarrow\; \pi\text{ (transcendental circle rotation)} \;\longrightarrow\; \theta^*\text{ (self-referential cosine fixed point $\cos\theta^* = \theta^*$)}.
+   \begin{aligned}
+   &\mathbb{Q}\text{ (rational grid)} \\
+   &\longrightarrow\; \overline{\mathbb{Q}}\text{ (algebraic numbers: $\sqrt{2}$ diagonal \& golden ratio $\varphi$)} \\
+   &\longrightarrow\; \pi\text{ (transcendental circle rotation)} \\
+   &\longrightarrow\; \theta^*\text{ (self-referential cosine fixed point $\cos\theta^* = \theta^*$)}.
+   \end{aligned}
    $$
 
 Next we inspect `born_probability_skeleton` in `D5/S3/Quantum/FiniteDimensional.lean:78`. For any finite index type `n` (`[Fintype n]`) and matrices $\rho, P \in M_n(\mathbb{C})$, the trace pairing is defined as
@@ -180,7 +185,7 @@ Across the four proofs above, four recurring Lean 4 proof engineering patterns s
 The table below audits representative frozen declarations cited across Parts I through III at commit `52725b62b659b244d077e29f18a576aa809007b7`. As required by our verification contract, prose labels such as "parallelogram law", "probability skeleton", or "pinching idempotence" are descriptive titles only and carry no formal claim beyond the exact Lean signature.
 
 | Chapter | Frozen GID | Source File & Line | `statement_id` Prefix | Exact Formal Scope & Contract |
-| :---: | --- | --- | :---: | --- |
+| :---------: | ---------------------------- | ---------------------------- | :------------------: | ----------------------------------------------------- |
 | Ch 1 / Ch 27 | [`D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law`](lean:D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law) | `D5/S3/QuantumContext/ParallelogramNormLaw.lean:22` | `sha256:b5f8dcc9` | $\norm{x+y}^2+\norm{x-y}^2=2(\norm{x}^2+\norm{y}^2)$ in real inner-product spaces |
 | Ch 1 / Ch 18 / Ch 25 | [`D5/S3/Quantum/FiniteDimensional.qubit_weyl_star`](lean:D5/S3/Quantum/FiniteDimensional.qubit_weyl_star) | `D5/S3/Quantum/FiniteDimensional.lean:24` | `sha256:8448b695` | `qubitX` and `qubitZ` anticommute, are self-adjoint, and square to $1$ |
 | Ch 1 / Ch 25 | [`D5/S3/Quantum/FiniteDimensional.qubit_matrix_algebra_has_no_character`](lean:D5/S3/Quantum/FiniteDimensional.qubit_matrix_algebra_has_no_character) | `D5/S3/Quantum/FiniteDimensional.lean:46` | `sha256:8448b695` | $\operatorname{IsEmpty}(\mathrm{QubitMatrix} \to_{\mathrm{alg}[\mathbb{C}]} \mathbb{C})$ |

@@ -61,7 +61,12 @@ theorem inner_product_norm_parallelogram_law {E : Type*} [NormedAddCommGroup E]
    $$
    无论 $k$ 推演到多大，离散整数平方 $m_k^2$ 与 $2n_k^2$ 之间永远横亘着一道不可磨灭的单位算术裂隙 $(-1)^k = \pm 1$！在本书的概念与哲学综合中，正是这道 $\pm 1$ 裂隙，促使汉字“**数**”从离散计数的动词算子“**数**（shǔ，$\mathbb{N} \to \mathbb{Q}$）”升华为连续几何坐标的名词“**数**（shù）”，并勾勒出四阶段概念演进图景（注：此四阶段为几何概念的层级演进，而非数域的集合包含链 $\pi \subset \theta^*$；其中满足 $\varphi = 1 + 1/\varphi$ 的代数黄金比 $\varphi = \frac{1+\sqrt{5}}{2} \in \overline{\mathbb{Q}}$ 已属于第二阶段代数数，而第四阶段的 $\theta^* \approx 0.739085$ 特指满足 $\cos\theta^* = \theta^*$ 的超越自指余弦不动点）：
    $$
-   \mathbb{Q}\text{（有理网格）} \;\longrightarrow\; \overline{\mathbb{Q}}\text{（代数数：$\sqrt{2}$ 勾股对角线与黄金比 $\varphi$）} \;\longrightarrow\; \pi\text{（圆周超越旋转）} \;\longrightarrow\; \theta^*\text{（自指余弦不动点 $\cos\theta^* = \theta^*$）}.
+   \begin{aligned}
+   &\mathbb{Q}\text{（有理网格）} \\
+   &\longrightarrow\; \overline{\mathbb{Q}}\text{（代数数：$\sqrt{2}$ 勾股对角线与黄金比 $\varphi$）} \\
+   &\longrightarrow\; \pi\text{（圆周超越旋转）} \\
+   &\longrightarrow\; \theta^*\text{（自指余弦不动点 $\cos\theta^* = \theta^*$）}.
+   \end{aligned}
    $$
 
 接下来看 `D5/S3/Quantum/FiniteDimensional.lean:78` 中的玻恩概率骨架引理。源码首先对任意有限类型 `n`（`[Fintype n]`）与复方阵 $\rho, P \in M_n(\mathbb{C})$ 定义迹配对映射：
@@ -182,7 +187,7 @@ $$
 下面的审计表列出了本书第一部至第三部所引用的代表性冻结声明在 `trureturing@dev`（提交 `52725b62b659b244d077e29f18a576aa809007b7`）中的精确源码路径、行号、语句摘要哈希前缀（`statement_id`）以及形式化契约边界。表中任何中文/英文散文标题（如“平行四边形定律”“玻恩概率骨架”“挤压幂等”）仅作导读说明，不附加超出冻结签名本身的额外形式化声明。
 
 | 所属章节 | 冻结声明 GID | 源码路径与行号 | `statement_id` 前缀 | 精确形式化范围与契约边界 |
-| :---: | --- | --- | :---: | --- |
+| :---------: | ---------------------------- | ---------------------------- | :------------------: | ----------------------------------------------------- |
 | Ch 1 / Ch 27 | [`D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law`](lean:D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law) | `D5/S3/QuantumContext/ParallelogramNormLaw.lean:22` | `sha256:b5f8dcc9` | 实内积空间 $\norm{x+y}^2+\norm{x-y}^2=2(\norm{x}^2+\norm{y}^2)$ |
 | Ch 1 / Ch 18 / Ch 25 | [`D5/S3/Quantum/FiniteDimensional.qubit_weyl_star`](lean:D5/S3/Quantum/FiniteDimensional.qubit_weyl_star) | `D5/S3/Quantum/FiniteDimensional.lean:24` | `sha256:8448b695` | `qubitX` 与 `qubitZ` 反对易、自伴、平方为 $1$ |
 | Ch 1 / Ch 25 | [`D5/S3/Quantum/FiniteDimensional.qubit_matrix_algebra_has_no_character`](lean:D5/S3/Quantum/FiniteDimensional.qubit_matrix_algebra_has_no_character) | `D5/S3/Quantum/FiniteDimensional.lean:46` | `sha256:8448b695` | $\operatorname{IsEmpty}(\mathrm{QubitMatrix} \to_{\mathrm{alg}[\mathbb{C}]} \mathbb{C})$ |

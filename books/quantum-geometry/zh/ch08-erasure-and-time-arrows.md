@@ -246,7 +246,10 @@ $$
 首先由 [`one_surviving_copy_composition_apply`](lean:D5/S3/ObserverMemory/JointCoherentReversal.one_surviving_copy_composition_apply)（其内部利用 [`reverse_record_overlap`](lean:D5/S3/ObserverMemory/JointCoherentReversal.reverse_record_overlap) 将 $\mathrm{Finset.univ.erase}\,k$ 中每个副本 $l \neq k$ 的逆转重叠因子化为复共轭 $\overline{\operatorname{recordOverlap}(\mathrm{records}(l), i, j)}$，再由条件 1 的幺模假设 $\overline{c_l} c_l = 1$ 逐项抵消为 $1$），连乘积中唯一剩下的因子正是未逆转幸存副本 $k$ 的前向重叠因子：
 
 $$
-\operatorname{reverseChannelOn}\Bigl(\mathrm{Finset.univ.erase}\,k,\, \mathrm{records},\, \operatorname{multiRecordChannel}(\mathrm{records}, \rho)\Bigr)_{ij} = \operatorname{recordOverlap}\bigl(\mathrm{records}(k), i, j\bigr) \cdot \rho_{ij}.
+\begin{aligned}
+&\operatorname{reverseChannelOn}\Bigl(\mathrm{Finset.univ.erase}\,k,\, \mathrm{records},\, \operatorname{multiRecordChannel}(\mathrm{records}, \rho)\Bigr)_{ij} \\
+&= \operatorname{recordOverlap}\bigl(\mathrm{records}(k), i, j\bigr) \cdot \rho_{ij}.
+\end{aligned}
 $$
 
 假若上式左端等于 $\rho_{ij}$，则有 $\operatorname{recordOverlap}(\mathrm{records}(k), i, j) \cdot \rho_{ij} = 1 \cdot \rho_{ij}$。因复数域 $\mathbb{C}$ 无零因子且条件 3 给出 $\rho_{ij} \neq 0$，由右消去律立得 $\operatorname{recordOverlap}(\mathrm{records}(k), i, j) = 1$，与条件 2 的 $\operatorname{recordOverlap}(\mathrm{records}(k), i, j) \neq 1$ 直接矛盾！故相干元严格无法复原。完整证明由 Lean 内核检查。
