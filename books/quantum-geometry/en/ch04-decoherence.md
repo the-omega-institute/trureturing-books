@@ -56,13 +56,53 @@ using $P_b^* = P_b$ (`recording_isometry_and_state_blocks` in Lean; note also $V
 
 [@thm-nonselective-marginal] demystifies decoherence at a stroke: the interference blocks $P_a \rho P_b$ ($a \neq b$) never vanished from $V \rho V^*$ — they are sitting intact in the off-diagonal environment sectors $(a, b)$! Only because $\Tr_{\mathrm{Outcome}}$ sums exclusively along diagonal sectors $(a, a)$ do those cross-blocks disappear from the local ledger. Traditional textbook orthodoxy drew a mysterious "Heisenberg cut" between microscopic systems and macroscopic observers, as if the observer enjoyed a special exemption outside quantum geometry; isometric recording closes the book on that artificial divide once and for all — **so everything is settled, without a single exception: even the structure of the observer works this exact way**, coupling and projecting on a higher-dimensional joint sphere by the very same orthogonal law.
 
+[@thm-nonselective-marginal] is a dilation built by hand for one family of orthogonal projections. Every completely positive map has such a dilation; this is the content of Stinespring's theorem, and its general C\*-algebraic form is frozen in the pinned repository. The setting is the Heisenberg picture: the map $\varphi$ acts on observables rather than on states.
+
+::: {.theorem #thm-stinespring-dilation title="Stinespring's Dilation Theorem: A Completely Positive Map Is a Representation Sandwiched between V† and V" lean="D5/S3/HilbertOperators/Stinespring.stinespring_dilation"}
+Let $A$ be a unital complex C\*-algebra with a partial order compatible with the star operation (`[CStarAlgebra A]`, `[PartialOrder A]`, `[StarOrderedRing A]`), let $H$ be a complex Hilbert space (`[NormedAddCommGroup H]`, `[InnerProductSpace ℂ H]`, `[CompleteSpace H]`), and let $\varphi : A \to B(H)$ be a completely positive map (`φ : A →CP (H →L[ℂ] H)`), where $B(H)$ denotes the bounded linear operators on $H$. Then there exist
+
+- a complex Hilbert space $K$,
+- a unital \*-algebra homomorphism $\pi : A \to B(K)$ (`π : A →⋆ₐ[ℂ] (K →L[ℂ] K)`),
+- a bounded linear operator $V : H \to K$,
+
+such that for all $a \in A$ and $x \in H$,
+
+$$
+\varphi(a)\,x \;=\; V^{\dagger}\,\pi(a)\,V\,x ,
+$$
+
+where $V^{\dagger}$ is the adjoint of $V$.
+:::
+
+::: proof
+The construction is of the same type as the GNS construction. On the space of finitely supported $H$-valued functions (formal sums $\sum_i a_i \otimes x_i$) define the sesquilinear form $\bigl\langle \sum_i a_i \otimes x_i,\ \sum_j b_j \otimes y_j \bigr\rangle = \sum_{i,j} \langle x_i,\ \varphi(a_i^{*} b_j)\,y_j\rangle$. Complete positivity is exactly what makes this form positive semidefinite (`cp_gram_sum_nonneg`). Quotienting by null vectors and completing yields the Hilbert space $K$. Left multiplication of $A$ on formal sums, $a \cdot (b \otimes y) = ab \otimes y$, is bounded for this form and extends to $K$ as $\pi(a)$; checking in turn that it respects addition, scalar multiplication, products, the unit, and the star shows that $\pi$ is a \*-algebra homomorphism. The operator $V$ sends $x$ to the class of $1 \otimes x$ and is bounded as well. The conclusion follows from the inner-product identity $\langle x,\ V^{\dagger}\pi(a)V y\rangle = \langle 1 \otimes x,\ a \otimes y\rangle = \langle x,\ \varphi(a)\,y\rangle$ (`stinespringV_inner_rep`). The full proof is checked by the Lean kernel.
+:::
+
+Taking $a = 1$ in [@thm-stinespring-dilation] and using $\pi(1) = 1$ gives $\varphi(1) = V^{\dagger}V$ at once: $V$ is an isometry if and only if $\varphi$ is unital (a one-line manual derivation).
+
+::: {.example #ex-pinching-stinespring-by-hand title="The Stinespring Dilation of Computational-Basis Pinching on a Qubit, Checked by Hand"}
+Take $A = M_2(\mathbb{C})$, $H = \mathbb{C}^2$, and let $\varphi$ be the action of computational-basis pinching on observables:
+
+$$
+\varphi(a) \;=\; P_0\,a\,P_0 + P_1\,a\,P_1 \;=\; \begin{pmatrix} a_{00} & 0 \\ 0 & a_{11} \end{pmatrix}, \qquad P_j = \lvert j\rangle\langle j\rvert .
+$$
+
+One set of dilation data is: $K = \mathbb{C}^2 \otimes \mathbb{C}^2$, $\pi(a) = a \otimes I_2$, $V\lvert j\rangle = \lvert j\rangle \otimes \lvert j\rangle$ for $j = 0, 1$. Clearly $\pi$ is a unital \*-homomorphism. Check matrix element by matrix element:
+
+$$
+\langle i\rvert\, V^{\dagger}\,(a \otimes I_2)\,V\,\lvert j\rangle \;=\; \bigl(\langle i\rvert \otimes \langle i\rvert\bigr)\,(a \otimes I_2)\,\bigl(\lvert j\rangle \otimes \lvert j\rangle\bigr) \;=\; a_{ij}\,\langle i \mid j\rangle \;=\; a_{ij}\,\delta_{ij},
+$$
+
+so $V^{\dagger}\pi(a)V = \operatorname{diag}(a_{00}, a_{11}) = \varphi(a)$. Moreover $V^{\dagger}V = I_2$, in agreement with $\varphi(I_2) = I_2$. This $V$ is exactly the isometry of [@thm-nonselective-marginal] that copies the branch label into the record register: the second factor $\mathbb{C}^2$ is the record. The off-diagonal entries $a_{01}$ and $a_{10}$ have not disappeared; they are still inside $a \otimes I_2$ and are merely sandwiched away by $V$.
+:::
+
 ::: {.remark #rem-stinespring-literature title="Stinespring's Dilation Theorem and Microscopic Bath Underdetermination (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** In this chapter, [@thm-nonselective-marginal] constructs an explicit isometric recording dilation for finite orthogonal projective families $\{P_a\}$, and [@thm-reduced-access-defect] gives an explicit two-qubit unitary dilation for controlled copying. For an arbitrary completely positive trace-preserving (CPTP) quantum channel $\mathcal{E} : M_d(\mathbb{C}) \to M_{d'}(\mathbb{C})$, norm-preserving high-dimensional embedding is governed by **Stinespring's dilation theorem** (W. F. Stinespring, *Positive functions on $C^*$-algebras*, Proc. Amer. Math. Soc. **6**, 211–216, 1955):
 
 1. **Existence of isometric and unitary dilations**: There exists a finite-dimensional auxiliary environment Hilbert space $\mathcal{H}_{\mathrm{E}}$ (of dimension at most $d d'$, with minimal dimension equal to the Choi rank of $\mathcal{E}$) and a linear isometry $V : \mathcal{H}_{\mathrm{S}} \to \mathcal{H}_{\mathrm{S}'} \otimes \mathcal{H}_{\mathrm{E}}$ ($V^* V = I_{\mathrm{S}}$) such that $\mathcal{E}(\rho) = \Tr_{\mathrm{E}}(V \rho V^*)$ for all $\rho \in M_d(\mathbb{C})$; when $d' = d$, fixing a reference pure ancilla $\lvert e_0\rangle \in \mathcal{H}_{\mathrm{E}}$ and extending $V\lvert\psi\rangle = U(\lvert\psi\rangle \otimes \lvert e_0\rangle)$ to a joint unitary $U$ yields $\mathcal{E}(\rho) = \Tr_{\mathrm{E}}\bigl(U(\rho \otimes \lvert e_0\rangle\langle e_0\rvert)U^*\bigr)$.
 2. **Minimal-isometry unitary equivalence versus physical bath underdetermination**: Any two **minimal** isometric dilations $(\mathcal{H}_{\mathrm{E}_1}, V_1)$ and $(\mathcal{H}_{\mathrm{E}_2}, V_2)$ of the same channel $\mathcal{E}$ (with linearly independent Kraus operators and no uncoupled environment subspace) are related by a unique unitary operator $W : \mathcal{H}_{\mathrm{E}_1} \to \mathcal{H}_{\mathrm{E}_2}$ on the auxiliary environment satisfying $(I_{\mathrm{S}'} \otimes W)V_1 = V_2$. Physically, however, knowing the reduced channel $\mathcal{E}$ alone **underdetermines the actual microscopic bath**: redundant non-minimal bath dimensions, local basis rotations $W$ on $\mathcal{H}_{\mathrm{E}}$, and the continuous-time system–bath Hamiltonian $H_{\mathrm{SE}}(t)$ or interaction history that generated $V$ cannot be uniquely reconstructed from local channel tomography alone.
 
-These general CPTP existence and minimal-dilation uniqueness results are cited from the classical operator-algebra literature and are not claimed in the book's Lean verification ledger.
+Of these, existence in its general C\*-algebraic form (Heisenberg picture, $\varphi(a) = V^{\dagger}\pi(a)V$) is verified by [@thm-stinespring-dilation]. Passing from it to the finite-dimensional Schrödinger-picture form of item 1 takes two further steps: every representation of the matrix algebra $M_{d'}(\mathbb{C})$ is unitarily equivalent to $a \mapsto a \otimes I_{\mathrm{E}}$, and the duality $\Tr(\mathcal{E}(\rho)\,a) = \Tr(\rho\,\varphi(a))$. These two steps, the dimension bounds, and the minimal-dilation uniqueness of item 2 are still cited from the classical operator-algebra literature and are not claimed in the book's Lean verification ledger.
 :::
 
 An immediate, far-reaching consequence follows: **apparent local irreversibility is not dynamical destruction — it is an access defect caused by losing the environment key!**
@@ -276,6 +316,57 @@ $$
 
 For $k>0$, one may write $k=1/T_\varphi$; $k=0$ gives saturation under pure amplitude damping. The product law is an additional physical assumption, not a consequence of geometric preservation. Here $T_2\le2T_1$ applies within the stated scope of a fixed north pole, zero-temperature affine drift, isotropic transverse contraction, and exponential envelopes; it is not extended to arbitrary environments or arbitrary nonexponential decay.
 :::
+
+The three kinds of noise deform the ball in different ways, yet they share one feature: none of them pulls two points of the ball farther apart. This sentence has a precise form. The **trace distance** between two states is $T(\rho, \sigma) = \frac{1}{2}\lVert\rho - \sigma\rVert_1$; for a qubit, the two eigenvalues of $\rho - \sigma = \frac{1}{2}(\vv{r} - \vv{s})\cdot\vv{\sigma}$ are $\pm\frac{1}{2}\lVert\vv{r} - \vv{s}\rVert$, so
+
+$$
+T(\rho, \sigma) \;=\; \frac{1}{2}\,\lVert\vv{r} - \vv{s}\rVert ,
+$$
+
+half the Euclidean distance between the two Bloch vectors (this step is a manual computation).
+
+::: {.definition #def-trace-distance title="The Trace Distance between Finite-Dimensional Density States" lean="D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance"}
+Let $\iota$ be a finite type (`[Fintype ι]`, `[DecidableEq ι]`). For two density states $\rho, \sigma$ (`DensityState ι`: positive semidefinite complex $\iota \times \iota$ matrices of trace $1$), define
+
+$$
+\operatorname{traceDistance}(\rho, \sigma) \;=\; \frac{1}{2}\,\operatorname{traceNorm}(\rho - \sigma),
+$$
+
+where `traceNorm` $M$ is the real part of the trace of $\sqrt{M^{\dagger}M}$.
+:::
+
+::: {.proposition #prop-trace-distance-metric-contraction title="The Trace Distance Is a Distance Bounded by 1 and Does Not Increase under Any Quantum Channel" lean="D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_nonneg D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_symm D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_triangle D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_le_one D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_contract"}
+Let $\iota$ be a finite type and $\rho, \sigma, \tau$ density states on $\iota$; use the notation of [@def-trace-distance] and abbreviate $T = \operatorname{traceDistance}$. Then:
+
+1. **Nonnegativity**: $0 \le T(\rho, \sigma)$;
+2. **Symmetry**: $T(\rho, \sigma) = T(\sigma, \rho)$;
+3. **Triangle inequality**: $T(\rho, \tau) \le T(\rho, \sigma) + T(\sigma, \tau)$;
+4. **Boundedness**: $T(\rho, \sigma) \le 1$;
+5. **Contraction under channels**: for every quantum channel $\Phi$ (`QuantumChannel ι ι`, a trace-preserving completely positive map),
+
+   $$
+   T\bigl(\Phi(\rho),\ \Phi(\sigma)\bigr) \;\le\; T(\rho, \sigma).
+   $$
+:::
+
+::: proof
+The first four claims come from the nonnegativity of the trace norm, the identity $\operatorname{traceNorm}(-M) = \operatorname{traceNorm}(M)$, the triangle inequality for the trace norm (`traceNorm_add_le`), and the fact that the trace norm of a positive semidefinite matrix equals its trace. Claim 5: take the Jordan decomposition $\rho - \sigma = P - M$ of the Hermitian matrix $\rho - \sigma$ into its positive and negative parts, both positive semidefinite, whose trace norm equals $\operatorname{Tr} P + \operatorname{Tr} M$ (`trace_norm_jordan_mass`). A channel maps positive semidefinite matrices to positive semidefinite matrices and preserves the trace, so $\operatorname{traceNorm}\bigl(\Phi(P) - \Phi(M)\bigr) \le \operatorname{Tr}\Phi(P) + \operatorname{Tr}\Phi(M) = \operatorname{Tr} P + \operatorname{Tr} M$. Dividing by $2$ gives the claim. The full proof is checked by the Lean kernel.
+:::
+
+::: {.example #ex-bloch-distance-contraction title="Distance Contraction under Three Kinds of Qubit Noise: A Numerical Check"}
+Take the Bloch forms of three channels, each with parameter $\frac{1}{2}$: dephasing $(x, y, z) \mapsto \bigl(\frac{x}{2}, \frac{y}{2}, z\bigr)$; amplitude damping $(x, y, z) \mapsto \bigl(\frac{x}{\sqrt{2}}, \frac{y}{\sqrt{2}}, \frac{1 + z}{2}\bigr)$; depolarizing $\vv{r} \mapsto \frac{1}{2}\vv{r}$. Consider two pairs of states: the north pole and $+x$ ($\vv{r} = (0, 0, 1)$, $\vv{s} = (1, 0, 0)$), and $+x$ and $-x$. Trace distances are computed from $T = \frac{1}{2}\lVert\vv{r} - \vv{s}\rVert$:
+
+| channel | north pole and $+x$ | $+x$ and $-x$ |
+| :---: | :---: | :---: |
+| before | $0.7071$ | $1.0000$ |
+| dephasing | $0.5590$ | $0.5000$ |
+| amplitude damping | $0.4330$ | $0.7071$ |
+| depolarizing | $0.3536$ | $0.5000$ |
+
+No entry exceeds the first row, in agreement with claim 5 of [@prop-trace-distance-metric-contraction]. The first number in the amplitude-damping row was recomputed by applying the Kraus operators to the density matrices and taking the trace norm, again giving $0.4330$. Note that amplitude damping pushes the whole ball toward the north pole, so the centre is not fixed, yet the distance between any two points still does not increase.
+:::
+
+So "a mixed state is a shortened line inside the ball" can be stated as a theorem that does not depend on any particular noise model: a channel may translate, squash, or rotate the ball, but it can never pull any two of its points apart. Distinguishability can only be lost; it never grows out of nothing.
 
 ## 4.3 The Maximally Mixed Dead Center ($\vv{r} = \vv{0}$) {#sec-ch04-3}
 
