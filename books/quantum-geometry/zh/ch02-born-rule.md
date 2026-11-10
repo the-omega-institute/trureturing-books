@@ -142,7 +142,7 @@ $$
 \langle\psi'\mid\phi'\rangle\langle\phi'\mid\psi'\rangle = e^{-i(\alpha-\beta)}e^{+i(\alpha-\beta)}\norm{\langle\phi\mid\psi\rangle}^2 = \Tr(\rho P_k).
 $$
 
-（顺便剧透一笔：当往返路径不再是两点折返，而是沿着球面上不共线的三点 $\psi \to \phi \to \chi \to \psi$ 围出一块有向球面三角形时，闭环迹 $\Tr(P_\psi P_\chi P_\phi)$ 里抵消不掉的净相位恰恰就是那块球面三角形立体角的一半——第三部第十一章的**几何贝里相位**！）
+（顺便剧透一笔：当往返路径不再是两点折返，而是沿着球面上三点 $\psi \to \phi \to \chi \to \psi$ 围出有向测地三角形，且相邻态的重叠均非零时，在[第三部第十章](ch10-gram-geometry-and-order.md#sec-spherical-order-and-berry)的自旋朝上与路径取向约定下，闭环迹 $\Tr(P_\psi P_\chi P_\phi)$ 的辐角模 $2\pi$ 等于有向立体角的负一半 $-\Omega/2$——这就是**几何贝里相位**！）
 
 ## 2.3 玻恩概率法则的纯几何起源 {#sec-ch02-3}
 

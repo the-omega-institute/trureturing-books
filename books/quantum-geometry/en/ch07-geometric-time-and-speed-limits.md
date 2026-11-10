@@ -92,7 +92,7 @@ In particular, when $\psi$ is an energy eigenstate ($H\psi = E\psi$), theorems [
 
 If "the line is classical time and the area is quantum time," **what is the minimum duration required to convert continuous two-dimensional quantum rotation into two genuinely distinguishable ticks of a classical clock?**
 
-Pose the question geometrically. When do two target states $m_0$ and $m_1$ constitute two truly distinct, non-overlapping clock records? Only when they are ** mutually orthogonal** ($\langle m_0, m_1\rangle_{\mathbb{C}} = 0$), so that their Fubini–Study geodesic angle ([`fsAngle`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.fsAngle) $\theta_{\mathrm{FS}}(x, y) := \arccos\|\langle x, y\rangle_{\mathbb{C}}\|$) equals a full right angle:
+Pose the question geometrically. When do two target states $m_0$ and $m_1$ constitute two truly distinct, non-overlapping clock records? Only when they are **mutually orthogonal** ($\langle m_0, m_1\rangle_{\mathbb{C}} = 0$), so that their Fubini–Study geodesic angle ([`fsAngle`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.fsAngle) $\theta_{\mathrm{FS}}(x, y) := \arccos\|\langle x, y\rangle_{\mathbb{C}}\|$) equals a full right angle:
 
 $$
 \theta_{\mathrm{FS}}(m_0, m_1) = \arccos\|0\| = \frac{\pi}{2} = 90^\circ!
