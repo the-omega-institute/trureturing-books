@@ -153,7 +153,7 @@ $$
    $$
 2. **输出正负号 = 跨位逆序对奇偶性（Inversion Parity）**：要把 $E_{\mathrm{left}} E_{\mathrm{right}}$ 中乱序的基向量按标准升序 $e_1 e_2 e_3$ 排好，左掩码 $\mathrm{left}$ 中每一个为 $1$ 的第 $i$ 位（$i \in \{0, 1, 2\}$），都需要跨过右掩码 $\mathrm{right}$ 中所有下标严格小于 $i$（即落在低位掩码 `(1 << i) - 1` 内）的 $1$ 位。每跨过一次就触发一次反对易变号 $e_i e_j = -e_j e_i$（$j < i$）！因此总交换次数与符号函数 `_blade_sign(left, right)` 为：
    $$
-   \operatorname{inv}(\mathrm{left}, \mathrm{right}) = \sum_{i=0}^{2} \bigl((\mathrm{left} \gg i)\,\&\,1\bigr)\cdot \operatorname{popcount}\!\bigl(\mathrm{right}\,\&\,(2^i - 1)\bigr), \qquad
+   \operatorname{inv}(\mathrm{left}, \mathrm{right}) = \sum_{i=0}^{2} \bigl((\mathrm{left} \gg i)\,\&\,1\bigr)\cdot \operatorname{popcount}\bigl(\mathrm{right}\,\&\,(2^i - 1)\bigr), \qquad
    \operatorname{sign}(\mathrm{left}, \mathrm{right}) = (-1)^{\operatorname{inv}(\mathrm{left}, \mathrm{right})}.
    $$
 

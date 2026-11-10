@@ -74,17 +74,17 @@ The complete $8\times 8$ multiplication Cayley table for the canonical basis bla
      $$
 
 2. **Reversion Anti-Involution ($\widetilde{A}$)**:
-   Reversing the order of vector factors inside every blade ($\widetilde{AB} = \widetilde{B}\widetilde{A}$) acts on grade $k$ with sign $(-1)^{k(k-1)/2}$:
+   Reversing the order of vector factors inside every blade ($(AB)^{\sim} = \widetilde{B}\,\widetilde{A}$) acts on grade $k$ with sign $(-1)^{k(k-1)/2}$:
 
    $$
-   \widetilde{\langle A\rangle_0} = +\langle A\rangle_0, \qquad \widetilde{\langle A\rangle_1} = +\langle A\rangle_1, \qquad \widetilde{\langle A\rangle_2} = -\langle A\rangle_2, \qquad \widetilde{\langle A\rangle_3} = -\langle A\rangle_3.
+   \langle A\rangle_0^{\sim} = +\langle A\rangle_0, \qquad \langle A\rangle_1^{\sim} = +\langle A\rangle_1, \qquad \langle A\rangle_2^{\sim} = -\langle A\rangle_2, \qquad \langle A\rangle_3^{\sim} = -\langle A\rangle_3.
    $$
 
 3. **3D Rotors and the Double-Sided Sandwich Action**:
    For a unit bivector $\hat{B}$ ($\hat{B}^2 = -1$) representing an oriented rotation plane, the unit rotor generating a rotation by angle $\theta$ in plane $\hat{B}$ belongs to the even subalgebra $\mathcal{Cl}_{3,0}^+(\mathbb{R}) = \operatorname{span}\{1, e_{23}, e_{31}, e_{12}\} \cong \mathbb{H}$:
 
    $$
-   R(\theta, \hat{B}) = \exp\!\left(-\frac{\theta}{2}\hat{B}\right) = \cos\frac{\theta}{2} - \hat{B}\sin\frac{\theta}{2}, \qquad \widetilde{R}(\theta, \hat{B}) = \cos\frac{\theta}{2} + \hat{B}\sin\frac{\theta}{2}, \qquad R\widetilde{R} = \cos^2\frac{\theta}{2} + \sin^2\frac{\theta}{2} = 1.
+   R(\theta, \hat{B}) = \exp\left(-\frac{\theta}{2}\hat{B}\right) = \cos\frac{\theta}{2} - \hat{B}\sin\frac{\theta}{2}, \qquad \widetilde{R}(\theta, \hat{B}) = \cos\frac{\theta}{2} + \hat{B}\sin\frac{\theta}{2}, \qquad R\widetilde{R} = \cos^2\frac{\theta}{2} + \sin^2\frac{\theta}{2} = 1.
    $$
 
    The double-sided sandwich map $\mathbf{v} \mapsto R\mathbf{v}\widetilde{R}$ preserves grade-1 vectors and Euclidean inner products (at $\theta = 2\pi$, $R(2\pi) = -1$ while $(-1)\mathbf{v}(-1) = +\mathbf{v}$, realizing the spinor double cover $S^3 \to \mathrm{SO}(3)$).
@@ -147,7 +147,7 @@ In Part V (Chapters 17–18), replacing the Euclidean signature with the Minkows
    Because $\boldsymbol{\sigma}_1 = \gamma_1 \gamma_0$ satisfies $\boldsymbol{\sigma}_1^2 = +1$, a Lorentz boost of rapidity $\eta$ along the $x^1$-axis expands in hyperbolic cosine and sine:
 
    $$
-   L(\eta) = \exp\!\left(\frac{\eta}{2}\gamma_1\gamma_0\right) = \cosh\frac{\eta}{2} + \gamma_1\gamma_0\sinh\frac{\eta}{2}, \qquad L(\eta)\widetilde{L}(\eta) = \cosh^2\frac{\eta}{2} - \sinh^2\frac{\eta}{2} = 1.
+   L(\eta) = \exp\left(\frac{\eta}{2}\gamma_1\gamma_0\right) = \cosh\frac{\eta}{2} + \gamma_1\gamma_0\sinh\frac{\eta}{2}, \qquad L(\eta)\widetilde{L}(\eta) = \cosh^2\frac{\eta}{2} - \sinh^2\frac{\eta}{2} = 1.
    $$
 
    The sandwich action $x^\mu \gamma_\mu \mapsto L(\eta)(x^\mu \gamma_\mu)\widetilde{L}(\eta)$ preserves the Minkowski quadratic form $Q(x) = (x^0)^2 - (x^1)^2 - (x^2)^2 - (x^3)^2$ ([`bogoliubov_norm_conservation`](lean:D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation)).

@@ -215,7 +215,7 @@ $$
 When we add the two diagonal entries to form the trace, the imaginary cross-product terms $\pm i(a_0 b_1 - a_1 b_0)$ cancel identically, leaving $2(\vv{a} \cdot \vv{b})$! Substituting this back and applying the half-angle identity $1 + \cos\theta = 2\cos^2(\theta/2)$ yields
 
 $$
-\Tr(\rho_{\vv{a}} P_{\vv{b}}) = \frac{1}{4}\bigl(2 + 0 + 0 + 2\,\vv{a}\cdot\vv{b}\bigr) = \frac{1 + \vv{a}\cdot\vv{b}}{2} = \frac{1 + \cos\theta}{2} = \cos^2\!\Bigl(\frac{\theta}{2}\Bigr).
+\Tr(\rho_{\vv{a}} P_{\vv{b}}) = \frac{1}{4}\bigl(2 + 0 + 0 + 2\,\vv{a}\cdot\vv{b}\bigr) = \frac{1 + \vv{a}\cdot\vv{b}}{2} = \frac{1 + \cos\theta}{2} = \cos^2\Bigl(\frac{\theta}{2}\Bigr).
 $$
 
 Every piece of the puzzle clicks into place:

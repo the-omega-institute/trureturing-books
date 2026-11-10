@@ -178,7 +178,7 @@ $$
 这与三维欧氏空间中双矢量平方为 $-1$（生成圆旋转 $\cos(\theta/2) - I\sin(\theta/2)$）形成鲜明对比。正因为 $B^2 = +1$，以双矢量面积 $\eta B / 2$ 生成的指数旋转器（hyperbolic rotor）必然展开为双曲函数：
 
 $$
-R(\eta) = \exp\!\left(-\frac{\eta}{2} B\right) = \cosh\frac{\eta}{2} - B\sinh\frac{\eta}{2}, \qquad R(\eta)^{-1} = \cosh\frac{\eta}{2} + B\sinh\frac{\eta}{2}.
+R(\eta) = \exp\left(-\frac{\eta}{2} B\right) = \cosh\frac{\eta}{2} - B\sinh\frac{\eta}{2}, \qquad R(\eta)^{-1} = \cosh\frac{\eta}{2} + B\sinh\frac{\eta}{2}.
 $$
 
 若约定旋转器对时空向量 $v = t e_0 + x e_1$ 的双边夹心作用为 $v \mapsto R(\eta)^{-1} v R(\eta)$，则由基向量与双矢量 $B = e_0 e_1$ 的反交换关系

@@ -112,7 +112,7 @@ We now audit two structural theorems from Part I that showcase graph induction a
 In `D5/S3/Quantum/Foundation/RayPhaseRigidity.lean:97`, a matrix $A \in M_\iota(\mathbb{C})$ preserves the ray of a vector $x : \iota \to \mathbb{C}$ when
 
 $$
-\operatorname{PreservesRay}(A, x) \;\Longleftrightarrow\; A *_{\!v} x \in \operatorname{Submodule.span}\,\mathbb{C}\,\{x\}.
+\operatorname{PreservesRay}(A, x) \;\Longleftrightarrow\; A *_{v} x \in \operatorname{Submodule.span}\,\mathbb{C}\,\{x\}.
 $$
 
 If $A$ preserves every coordinate basis ray $\vv{e}_i = \operatorname{Pi.single}\,i\,1$, then $A$ must be diagonal. To force all diagonal entries $A_{ii}$ to equal a **single common phase** $c$, no single full-support test vector is required; instead, `RaySupportConnected tests` requires only that every pair of indices $i, j \in \iota$ is connected by the reflexive-transitive closure `Relation.ReflTransGen` of pairwise support overlaps $(\exists x \in \mathrm{tests},\; x_i \neq 0 \land x_j \neq 0)$.
@@ -135,8 +135,8 @@ $$
 In `D5/S3/Quantum/Foundation/RayPhaseRigidity.lean:97`, the proof proceeds in two stages:
 
 1. **Private lemma `coordinate_shape_of_connected_ray_tests`**:
-   - First, `hoff` proves $A_{ij} = 0$ for all $i \neq j$: unpacking `hcoord j` gives $A *_{\!v} \vv{e}_j = d\,\vv{e}_j$ for some $d \in \mathbb{C}$, whose $i$-th component ($i \neq j$) reduces to $A_{ij} = 0$.
-   - Second, `hstep` proves that whenever some $x \in \mathrm{tests}$ satisfies $x_i \neq 0$ and $x_j \neq 0$, we have $A_{ii} = A_{jj}$: unpacking `htests x hx` gives $A *_{\!v} x = d\,x$, and because $A$ is diagonal (`Finset.sum_eq_single k` with `hoff`), each component $k$ obeys $A_{kk} x_k = d x_k$. Canceling $x_k \neq 0$ via `mul_right_cancel₀` gives $A_{ii} = d = A_{jj}$.
+   - First, `hoff` proves $A_{ij} = 0$ for all $i \neq j$: unpacking `hcoord j` gives $A *_{v} \vv{e}_j = d\,\vv{e}_j$ for some $d \in \mathbb{C}$, whose $i$-th component ($i \neq j$) reduces to $A_{ij} = 0$.
+   - Second, `hstep` proves that whenever some $x \in \mathrm{tests}$ satisfies $x_i \neq 0$ and $x_j \neq 0$, we have $A_{ii} = A_{jj}$: unpacking `htests x hx` gives $A *_{v} x = d\,x$, and because $A$ is diagonal (`Finset.sum_eq_single k` with `hoff`), each component $k$ obeys $A_{kk} x_k = d x_k$. Canceling $x_k \neq 0$ via `mul_right_cancel₀` gives $A_{ii} = d = A_{jj}$.
    - Third, `hchain` inducts over `Relation.ReflTransGen` (`| refl => rfl` and `| @tail j k _ hjk ih => exact ih.trans (hstep j k hjk)`), establishing $A_{ii} = A_{jj}$ for all $i, j \in \iota$.
 2. **Main theorem and empty-type guard**: Splitting on `isEmpty_or_nonempty ι`:
    - If $\iota$ is empty (`inl hempty`), $c = 1$ satisfies `norm_one` and `Subsingleton.elim _ _`.
@@ -224,7 +224,7 @@ Let us trace a concrete hypothesis-mutation check on [@prop-audit-ray-phase-rigi
 ::: {.example #ex-lean-audit-part1-3 title="Hypothesis Mutation Audit: Where Disconnected Test Supports Break Phase Rigidity"}
 Consider $\iota = \operatorname{Fin} 2 = \{0, 1\}$ in [@prop-audit-ray-phase-rigidity]:
 
-1. **Connected test support**: Take $\mathrm{tests} = \{x\}$ with $x = (1, 1)$, so $x_0 = 1 \neq 0$ and $x_1 = 1 \neq 0$. For any $A \in U(2, \mathbb{C})$ preserving the coordinate rays $\vv{e}_0 = (1, 0)$ and $\vv{e}_1 = (0, 1)$, `hoff` forces $A = \operatorname{diag}(c_0, c_1)$, and `hstep 0 1` cancels $x_0, x_1 \neq 0$ from $A *_{\!v} (1, 1) = d(1, 1)$ via `mul_right_cancel₀` to lock $c_0 = d = c_1$, yielding $A = c_0 I_2$ ($|c_0| = 1$).
+1. **Connected test support**: Take $\mathrm{tests} = \{x\}$ with $x = (1, 1)$, so $x_0 = 1 \neq 0$ and $x_1 = 1 \neq 0$. For any $A \in U(2, \mathbb{C})$ preserving the coordinate rays $\vv{e}_0 = (1, 0)$ and $\vv{e}_1 = (0, 1)$, `hoff` forces $A = \operatorname{diag}(c_0, c_1)$, and `hstep 0 1` cancels $x_0, x_1 \neq 0$ from $A *_{v} (1, 1) = d(1, 1)$ via `mul_right_cancel₀` to lock $c_0 = d = c_1$, yielding $A = c_0 I_2$ ($|c_0| = 1$).
 2. **Disconnected test support (counterexample blocked by `hconnect`)**: If we drop `hconnect : RaySupportConnected tests` and take $\mathrm{tests} = \{\vv{e}_0, \vv{e}_1\}$, no vector in $\mathrm{tests}$ is simultaneously nonzero at both $0$ and $1$. Then the unitary phase gate $A = \operatorname{diag}(1, i) \in U(2, \mathbb{C})$ satisfies both `hcoord` and `htests`, yet $A$ is not a scalar multiple of $I_2$! In the Lean proof, the induction call `hchain (hconnect i j)` is the exact line that blocks disconnected phase sectors.
 :::
 
