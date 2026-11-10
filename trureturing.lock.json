@@ -3,8 +3,40 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "0932810a77730496eae9b36294d2400f7d1d3b2a",
-  "pinned_at": "2026-11-10T16:03:26Z",
+  "pinned_at": "2026-11-10T16:14:13Z",
   "declarations": {
+    "D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover": {
+      "module": "D5/S3/Geometry/Orthogonality/RationalSixAxisCover",
+      "name": "D5.S3.Geometry.Orthogonality.RationalSixAxisCover.rational_six_axis_open_cover",
+      "kind": "theorem",
+      "statement_id": "sha256:eeeafc5d388504009f89b6aa1f74da33bbdefabb1f9a59ee85895c1ecea43b2a",
+      "line": 127,
+      "signature": "theorem rational_six_axis_open_cover : (∀ i : Fin 6, IsOpen (color i)) ∧ (∀ (i : Fin 6) (x : UnitSphere), x ∈ color i → ∀ (y : UnitSphere), y ∈ color i → inner ℝ (x : Space) (y : Space) ≠ 0) ∧ (⋃ i : Fin 6, color i) = Set.univ"
+    },
+    "D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation": {
+      "module": "D5/S3/Geometry/Riemannian/GradientDissipation",
+      "name": "Original172.S2_dissipation",
+      "kind": "theorem",
+      "statement_id": "sha256:d2d84f9aaaba9680028befa6be5b742d24165cea34dd02b325e023472e121c5e",
+      "line": 157,
+      "signature": "theorem S2_dissipation {T : ℝ} (hT : 0 < T) (V : M → ℝ) (x : ℝ → M) (hV : ContMDiff 𝕀 IR 1 V) (hx : ContMDiffOn IR 𝕀 1 x (Icc (0 : ℝ) T)) (hflow : ∀ t ∈ Icc (0 : ℝ) T, mfderivWithin IR 𝕀 x (Icc (0 : ℝ) T) t 1 = -actualGradient V (x t)) : IntervalIntegrable (fun t => ‖mfderiv IR 𝕀 x t 1‖) volume 0 T ∧ IntervalIntegrable (fun t => ‖mfderiv IR 𝕀 x t 1‖ ^ 2) volume 0 T ∧ V (x 0) - V (x T) = ∫ t in (0 : ℝ)..T, ‖mfderiv IR 𝕀 x t 1‖ ^ 2"
+    },
+    "D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word": {
+      "module": "D5/S3/Geometry/TwoAxisFiniteRotation",
+      "name": "D5.S3.Geometry.TwoAxisFiniteRotation.two_axis_finite_word",
+      "kind": "theorem",
+      "statement_id": "sha256:d9ac78339e3f77f3c7873f510e3ffa6aef7877aa70cf744da6778d4611420194",
+      "line": 327,
+      "signature": "theorem two_axis_finite_word (a b : Space) (hab : ⟪a, b⟫_ℝ ^ 2 < ‖a‖ ^ 2 * ‖b‖ ^ 2) (R : Orthogonal) (hR : determinant R = 1) : ∃ l : List Orthogonal, IsAxisWord a b l ∧ l.prod = R"
+    },
+    "D5/S3/Geometry/TwoAxisFiniteRotation.unit_perpendicular_pair": {
+      "module": "D5/S3/Geometry/TwoAxisFiniteRotation",
+      "name": "D5.S3.Geometry.TwoAxisFiniteRotation.unit_perpendicular_pair",
+      "kind": "theorem",
+      "statement_id": "sha256:d9ac78339e3f77f3c7873f510e3ffa6aef7877aa70cf744da6778d4611420194",
+      "line": 120,
+      "signature": "theorem unit_perpendicular_pair (a b : Space) : ∃ n : Space, ‖n‖ = 1 ∧ ⟪a, n⟫_ℝ = 0 ∧ ⟪b, n⟫_ℝ = 0"
+    },
     "D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction": {
       "module": "D5/S3/Observer/BornReduction",
       "name": "D5.S3.Observer.BornReduction.rank_one_pure_state_modulus_square_reduction",
@@ -45,6 +77,14 @@
       "line": 41,
       "signature": "noncomputable def recordWeight (P : kappa -> Matrix n n ℂ) (rho : Matrix n n ℂ) (k : kappa) : ℂ"
     },
+    "D5/S3/Observer/Conditioning.recordWeight_sum": {
+      "module": "D5/S3/Observer/Conditioning",
+      "name": "D5.S3.Observer.Conditioning.recordWeight_sum",
+      "kind": "theorem",
+      "statement_id": "sha256:ed6f30958e446325932ee89f5919e5399b7f57de483aae2fd9143b7d7189924d",
+      "line": 47,
+      "signature": "theorem recordWeight_sum (hP : IsRecordMeasurement P) (rho : Matrix n n ℂ) : ∑ k, recordWeight P rho k = Matrix.trace rho"
+    },
     "D5/S3/Observer/Conditioning.unreadState": {
       "module": "D5/S3/Observer/Conditioning",
       "name": "D5.S3.Observer.Conditioning.unreadState",
@@ -76,6 +116,14 @@
       "statement_id": "sha256:3fd7a21edfbcbab67f68210ebcce0fc11fba19166510569af2ece042b6df68b2",
       "line": 36,
       "signature": "theorem rank_one_born_pairing_weight {n kappa : Type*} [Fintype n] [DecidableEq n] [Fintype kappa] (P : kappa -> Matrix n n ℂ) (rho : Matrix n n ℂ) (k : kappa) (phi psi : n -> ℂ) (hP : IsRecordMeasurement P) (hState : rho.PosSemidef ∧ Matrix.trace rho = 1) (hProjection : P k = Matrix.vecMulVec phi (star phi)) (hPureState : rho = Matrix.vecMulVec psi (star psi)) : recordWeight P rho k = ((‖star phi ⬝ᵥ psi‖ ^ 2 : ℝ) : ℂ) ∧ recordWeight P rho k = Matrix.trace (rho * P k) ∧ unreadState P rho = ∑ j, recordWeight P rho j • conditionalState P rho j"
+    },
+    "D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound": {
+      "module": "D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound",
+      "name": "D5.S3.Observer.Tomography.FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:9eed3d89d4955c0693aef4fea4a4ee687b30ab3a641ef049527d6681d6b46b53",
+      "line": 26,
+      "signature": "theorem finite_rank_concentration_mode_bound (concentrationEigenvalue : ℕ → ℝ) (intervalRadius frequencyMeasure threshold : ℝ) (hNonneg : ∀ j, 0 ≤ concentrationEigenvalue j) (hSummable : Summable concentrationEigenvalue) (hTrace : ∑' j, concentrationEigenvalue j = intervalRadius * frequencyMeasure / Real.pi) (hThreshold : 0 < threshold) : Set.Finite {j | threshold ≤ concentrationEigenvalue j} ∧ (({j | threshold ≤ concentrationEigenvalue j} : Set ℕ).ncard : ℝ) ≤ intervalRadius * frequencyMeasure / (Real.pi * threshold)"
     },
     "D5/S3/ObserverMemory/JointCoherentReversal.joint_coherent_reversal": {
       "module": "D5/S3/ObserverMemory/JointCoherentReversal",
@@ -140,6 +188,14 @@
       "statement_id": "sha256:49d78b0772db8ee1c0ffbc3604bac88ac610968176d0c8e48817b10da57dea6a",
       "line": 132,
       "signature": "theorem two_copy_joint_reversal_certificate : let rho"
+    },
+    "D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq": {
+      "module": "D5/S3/Quantum/Algebra/GramUnitaryExtension",
+      "name": "D5.S3.Quantum.Algebra.GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:70b7fbd2597a0dc19c76a7b19d7d76c6677882724bdf45769d54164b356a2ab9",
+      "line": 43,
+      "signature": "theorem exists_unitary_mul_eq_of_conjTranspose_mul_eq {m n : Type*} [Fintype m] [DecidableEq m] [Finite n] (B A : Matrix m n ℂ) (hGram : Bᴴ * B = Aᴴ * A) : ∃ U : Matrix.unitaryGroup m ℂ, B = (U : Matrix m m ℂ) * A"
     },
     "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure": {
       "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure",
@@ -333,6 +389,22 @@
       "line": 98,
       "signature": "theorem energy_eigenstate_variance_zero (H : Matrix n n ℂ) (v : n → ℂ) (hv : star v ⬝ᵥ v = 1) (E : ℝ) (he : H *ᵥ v = (E : ℂ) • v) : variance (pureDensityState v hv) H = 0"
     },
+    "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.exp_mulVec_of_eigenvector": {
+      "module": "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity",
+      "name": "D5.S3.Quantum.Dynamics.EnergyEigenstateStationarity.exp_mulVec_of_eigenvector",
+      "kind": "theorem",
+      "statement_id": "sha256:d5563afe7bd312f16b4e6f7c9f441317f7de6d07a379a2a024ddcd34ddbbc1f7",
+      "line": 24,
+      "signature": "theorem exp_mulVec_of_eigenvector (A : Matrix n n ℂ) (v : n → ℂ) (μ : ℂ) (hv : A *ᵥ v = μ • v) : NormedSpace.exp A *ᵥ v = Complex.exp μ • v"
+    },
+    "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.pureDensityState": {
+      "module": "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity",
+      "name": "D5.S3.Quantum.Dynamics.EnergyEigenstateStationarity.pureDensityState",
+      "kind": "def",
+      "statement_id": "sha256:d5563afe7bd312f16b4e6f7c9f441317f7de6d07a379a2a024ddcd34ddbbc1f7",
+      "line": 43,
+      "signature": "def pureDensityState (v : n → ℂ) (hv : star v ⬝ᵥ v = 1) : DensityState n"
+    },
     "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.basisPinchingState": {
       "module": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity",
       "name": "D5.S3.Quantum.Dynamics.EntropyProductionCoherenceDeletionIdentity.basisPinchingState",
@@ -380,6 +452,22 @@
       "statement_id": "sha256:5c5eb2eccd84b985c557cacaeecb9fd8f28c87060c42be852dcd73bfe4b2f07b",
       "line": 251,
       "signature": "lemma von_neumann_entropy_basisPinchingState (rho : DensityState n) : vonNeumannEntropy (basisPinchingState rho) = -(∑ i, (densityMatrix rho i i).re * Real.log (densityMatrix rho i i).re)"
+    },
+    "D5/S3/Quantum/Dynamics/ObserverPullbackTraceIdentity.observer_pullback_trace_identity": {
+      "module": "D5/S3/Quantum/Dynamics/ObserverPullbackTraceIdentity",
+      "name": "D5.S3.Quantum.Dynamics.ObserverPullbackTraceIdentity.observer_pullback_trace_identity",
+      "kind": "theorem",
+      "statement_id": "sha256:3bab964c7fe2ab39dea7a0b332d633f68051a87d107b430876d8ae3a87f3baeb",
+      "line": 37,
+      "signature": "theorem observer_pullback_trace_identity (channel : QuantumChannel d d) (heisenberg : MatrixAlgebra d →CP MatrixAlgebra d) (hduality : ∀ state effect : MatrixAlgebra d, Matrix.trace (channel.toCompletelyPositiveMap state * effect) = Matrix.trace (state * heisenberg effect)) (t : Nat) (rho : DensityState d) (effect : MatrixAlgebra d) : Matrix.trace ((evolvedState channel t rho).1 * effect) = Matrix.trace (rho.1 * ((fun A : MatrixAlgebra d => heisenberg A)^[t]) effect)"
+    },
+    "D5/S3/Quantum/Dynamics/OrderedThreePulseTrace.ordered_three_pulse_real_trace_bound": {
+      "module": "D5/S3/Quantum/Dynamics/OrderedThreePulseTrace",
+      "name": "D5.S3.Quantum.Dynamics.OrderedThreePulseTrace.ordered_three_pulse_real_trace_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:18558b28ede14237d806963cd65f67bc095a23fc4427064b79ff5671e2f0c4fe",
+      "line": 38,
+      "signature": "theorem ordered_three_pulse_real_trace_bound (A B C : Matrix I I ℝ) (hA : A.IsSymm) (hB : B.IsSymm) (hC : C.IsSymm) (L : ℝ) (hL : 0 ≤ L) (hAn : @norm (Matrix I I ℝ) Matrix.frobeniusNormedAddCommGroup.toNorm A ≤ L) (hBn : @norm (Matrix I I ℝ) Matrix.frobeniusNormedAddCommGroup.toNorm B ≤ L) (hCn : @norm (Matrix I I ℝ) Matrix.frobeniusNormedAddCommGroup.toNorm C ≤ L) (t : ℝ) (ht : 0 < t) : (∀ X : Matrix I I ℂ, pulse0 X 0 = X) ∧ (∀ X : Matrix I I ℂ, ∀ s : ℝ, s ≠ 0 → pulse0 X s = ((s : ℂ) * Complex.I)⁻¹ • (NormedSpace.exp (((s : ℂ) * Complex.I) • X) - 1)) ∧ |(Matrix.trace (pulse0 (A.map Complex.of"
     },
     "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.evolvedDensity": {
       "module": "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow",
@@ -485,6 +573,14 @@
       "line": 97,
       "signature": "theorem unitary_phase_of_connected_ray_tests (A : Matrix ι ι ℂ) (hA : A ∈ Matrix.unitaryGroup ι ℂ) (hcoord : ∀ i : ι, PreservesRay A (Pi.single i 1)) (tests : Set (ι → ℂ)) (htests : ∀ x ∈ tests, PreservesRay A x) (hconnect : RaySupportConnected tests) : ∃ c : ℂ, ‖c‖ = 1 ∧ A = c • (1 : Matrix ι ι ℂ)"
     },
+    "D5/S3/Quantum/Information/BargmannImaginaryMaximizers.Latitude.latitude_dot": {
+      "module": "D5/S3/Quantum/Information/BargmannImaginaryMaximizers",
+      "name": "D5.S3.Quantum.Information.BargmannImaginaryMaximizers.Latitude.latitude_dot",
+      "kind": "theorem",
+      "statement_id": "sha256:c5c8fa2f69b40b269aac6ff9a542a5d6e9fd7d05c723c4bd927226a6bd13fc21",
+      "line": 318,
+      "signature": "theorem latitude_dot (t : ℝ) (ht0 : 0 ≤ t) (ht1 : t ≤ 1) (z w : ℂ) : star (latitude t z) ⬝ᵥ latitude t w = ((1-t : ℝ) : ℂ) + (t : ℂ)*star z*w"
+    },
     "D5/S3/Quantum/Measurement/Bloch/QubitBloch.B": {
       "module": "D5/S3/Quantum/Measurement/Bloch/QubitBloch",
       "name": "D5.S3.Quantum.Measurement.FourQubitParentConstruction.B",
@@ -509,6 +605,14 @@
       "line": 39,
       "signature": "def scalarB (t : ℝ) (a : EuclideanSpace ℝ (Fin 3)) : Matrix (Fin 2) (Fin 2) ℂ"
     },
+    "D5/S3/Quantum/Measurement/StaticEffectSequentialSeparation.same_effects_different_two_step_joint_law": {
+      "module": "D5/S3/Quantum/Measurement/StaticEffectSequentialSeparation",
+      "name": "D5.S3.Quantum.Measurement.StaticEffectSequentialSeparation.same_effects_different_two_step_joint_law",
+      "kind": "theorem",
+      "statement_id": "sha256:3ea176c7c539c1e2ba0a610a37be2dd411f4c5974ac43ab4823a57398a267066",
+      "line": 40,
+      "signature": "theorem same_effects_different_two_step_joint_law : let projectiveKraus : Bool -> QubitMatrix"
+    },
     "D5/S3/Quantum/PureState/RecordCoherenceComplementarity.pure_record_distinguishability_coherence_complementarity": {
       "module": "D5/S3/Quantum/PureState/RecordCoherenceComplementarity",
       "name": "D5.S3.Quantum.PureState.RecordCoherenceComplementarity.pure_record_distinguishability_coherence_complementarity",
@@ -516,6 +620,14 @@
       "statement_id": "sha256:b1bcaba28401bd8438d4f90abc83eed60a1bb8107fa04ac10cfd096e537c5f49",
       "line": 29,
       "signature": "theorem pure_record_distinguishability_coherence_complementarity {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E] (recordLeft recordRight : E) (hLeft : ‖recordLeft‖ = 1) (hRight : ‖recordRight‖ = 1) : let c"
+    },
+    "D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization": {
+      "module": "D5/S3/Quantum/PureState/UnitGramIndistinguishability",
+      "name": "D5.S3.Quantum.PureState.UnitGramIndistinguishability.unit_gram_overlap_characterization",
+      "kind": "theorem",
+      "statement_id": "sha256:b655c2b0b304d3a523be8f5022da59f14187460754f17bba688e25cd3b2bbd9a",
+      "line": 24,
+      "signature": "theorem unit_gram_overlap_characterization {𝕜 Index E : Type*} [RCLike 𝕜] [NormedAddCommGroup E] [InnerProductSpace 𝕜 E] (record : Index → E) (normalized : ∀ i, ‖record i‖ = 1) : (∀ i j, ⟪record i, record j⟫_𝕜 = 1 ↔ record i = record j) ∧ Equivalence (fun i j => ⟪record i, record j⟫_𝕜 = 1)"
     },
     "D5/S3/Quantum/QubitWitnesses.pauli_observables_have_no_common_eigenvector": {
       "module": "D5/S3/Quantum/QubitWitnesses",
@@ -740,6 +852,14 @@
       "statement_id": "sha256:a9a068c585f43a7aa355619c8fc899910e973d9b857f76930d832b94cb89b559",
       "line": 20,
       "signature": "theorem phase_locked_overlap_is_rotated_real (phase overlap : ℂ) (hphase : ‖phase‖ = 1) (hlock : star overlap = (phase⁻¹) ^ 2 * overlap) : ∃ r : ℝ, overlap = phase * r"
+    },
+    "D5/S3/Topology/SphereOrthogonalityCover.sphere_two_open_orthogonality_free_cover_lower_six": {
+      "module": "D5/S3/Topology/SphereOrthogonalityCover",
+      "name": "D5.S3.Topology.SphereOrthogonalityCover.sphere_two_open_orthogonality_free_cover_lower_six",
+      "kind": "theorem",
+      "statement_id": "sha256:4afe43b854e2458ef67f9357e4f8b808f2257340b1afb27d2212da242bca7b99",
+      "line": 416,
+      "signature": "theorem sphere_two_open_orthogonality_free_cover_lower_six {k : ℕ} (U : Fin k → Set (sphere (0 : EuclideanSpace ℝ (Fin 3)) 1)) (hopen : ∀ i, IsOpen (U i)) (hcover : ∀ x, ∃ i, x ∈ U i) (hfree : ∀ i, OrthogonalityFree (U i)) : 6 ≤ k"
     }
   }
 }

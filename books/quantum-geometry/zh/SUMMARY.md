@@ -15,3 +15,10 @@
 - [第六章 几何积 $\vv{A}\vv{B} = \vv{A}\cdot\vv{B} + \vv{A}\wedge\vv{B}$：波粒二象性的终极缝合](ch06-geometric-product.md)
 - [第七章 时间的二象性：为什么线是经典时间，面积是量子时间？](ch07-geometric-time-and-speed-limits.md)
 - [第八章 擦除的代价：兰道尔原理与热力学时间箭头](ch08-erasure-and-time-arrows.md)
+
+# 第三部 合拢·从面到球：三元正交、全局相容与注意力计算
+
+- [第九章 三元两两正交：为什么只要“正交一次、正交两次”就能走遍全球？](ch09-axes-and-state-addressing.md)
+- [第十章 “两两比较，永远一致，顺序无关”：消解非对易假象与贝里相位](ch10-gram-geometry-and-order.md)
+- [第十一章 硬件里的量子门：微波脉冲面积与零耗时的“虚拟 Z 门”](ch11-pulses-and-virtual-z.md)
+- [第十二章 注意力即计算：基于测量的量子计算（MBQC）与球面自然梯度](ch12-measurement-computation-and-gradients.md)
