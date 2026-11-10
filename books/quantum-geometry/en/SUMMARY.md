@@ -29,3 +29,10 @@
 - [Chapter 14 Hiding Fragile Lines in Higher-Dimensional Areas: Quantum Error-Correcting Codes and Anyonic Topological Braids](ch14-cloning-codes-and-braids.md)
 - [Chapter 15 Invariant-Plane Rotations and Equatorial Area Gears: Grover Search, QFT, and Shor Factoring](ch15-grover-qft-and-period-finding.md)
 - [Chapter 16 Grand Unification of Quantum Algorithms (QSVT), Quantum Walks, and Gate-Compilation Polytopes](ch16-qsvt-walks-and-compilation.md)
+
+# Part V The Spacetime Sphere — Relativistic Metrics, Gauge Fields, and Holographic Gravity
+
+- [Chapter 17 Geometric Demystification of Special Relativity: Hyperbolic Rotors, Null Light Cones, and Spacetime Area](ch17-lorentz-geometry.md)
+- [Chapter 18 Dirac Spinors and Gauge Fields: Why Fermions Detour Through the Sphere and Why Force Is Area Curvature](ch18-spinors-and-gauge-curvature.md)
+- [Chapter 19 Entanglement Weaves Space: Tensor Networks, Holographic Duality, and the Discrete Min-Cut Theorem](ch19-tensor-networks-and-holography.md)
+- [Chapter 20 Gate Complexity as Volume: Black-Hole Interior Growth, Wormhole Bridges, and Computational Complexity Boundaries](ch20-complexity-and-spacetime.md)
