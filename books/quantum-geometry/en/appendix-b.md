@@ -74,10 +74,10 @@ The complete $8\times 8$ multiplication Cayley table for the canonical basis bla
      $$
 
 2. **Reversion Anti-Involution ($\widetilde{A}$)**:
-   Reversing the order of vector factors inside every blade ($\widetilde{AB} = \widetilde{B}\widetilde{A}$) acts on grade $k$ with sign $(-1)^{k(k-1)/2}$:
+   Reversing the order of vector factors inside every blade ($(AB)^{\sim} = \widetilde{B}\,\widetilde{A}$) acts on grade $k$ with sign $(-1)^{k(k-1)/2}$:
 
    $$
-   \widetilde{\langle A\rangle_0} = +\langle A\rangle_0, \qquad \widetilde{\langle A\rangle_1} = +\langle A\rangle_1, \qquad \widetilde{\langle A\rangle_2} = -\langle A\rangle_2, \qquad \widetilde{\langle A\rangle_3} = -\langle A\rangle_3.
+   \langle A\rangle_0^{\sim} = +\langle A\rangle_0, \qquad \langle A\rangle_1^{\sim} = +\langle A\rangle_1, \qquad \langle A\rangle_2^{\sim} = -\langle A\rangle_2, \qquad \langle A\rangle_3^{\sim} = -\langle A\rangle_3.
    $$
 
 3. **3D Rotors and the Double-Sided Sandwich Action**:

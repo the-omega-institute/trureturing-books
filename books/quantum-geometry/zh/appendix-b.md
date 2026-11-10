@@ -74,10 +74,10 @@ $$
      $$
 
 2. **逆序反自同构（Reversion $\widetilde{A}$）**：
-   将基片内向量因子的排列顺序完全颠倒（满足 $\widetilde{AB} = \widetilde{B}\widetilde{A}$），在等级 $k$ 子空间上的符号因子为 $(-1)^{k(k-1)/2}$：
+   将基片内向量因子的排列顺序完全颠倒（满足 $(AB)^{\sim} = \widetilde{B}\,\widetilde{A}$），在等级 $k$ 子空间上的符号因子为 $(-1)^{k(k-1)/2}$：
 
    $$
-   \widetilde{\langle A\rangle_0} = +\langle A\rangle_0, \qquad \widetilde{\langle A\rangle_1} = +\langle A\rangle_1, \qquad \widetilde{\langle A\rangle_2} = -\langle A\rangle_2, \qquad \widetilde{\langle A\rangle_3} = -\langle A\rangle_3.
+   \langle A\rangle_0^{\sim} = +\langle A\rangle_0, \qquad \langle A\rangle_1^{\sim} = +\langle A\rangle_1, \qquad \langle A\rangle_2^{\sim} = -\langle A\rangle_2, \qquad \langle A\rangle_3^{\sim} = -\langle A\rangle_3.
    $$
 
 3. **三维旋量（Rotor）与双面夹心作用**：
