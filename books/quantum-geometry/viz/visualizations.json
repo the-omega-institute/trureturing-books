@@ -4,26 +4,26 @@
     {
       "id": "qubit-geometry",
       "code": "ORTHO//QUBIT",
-      "title": "两子几何积 · 粒子内积线与波动外积面的勾股守恒与旋转门",
-      "title_en": "Pairwise geometric product · Pythagorean conservation of particle dot-line and wave wedge-area with rotor action",
-      "summary": "亲手调节单比特极角 θ、方位相位 φ、环境记录重叠角 α 与退相干捏合强度 η，实时观测几何积 AB = A·B + A∧B 的内积粒子线 cos θ 与外积波动面 sin θ、记录可区分度与相干可见度的勾股圆 D² + V² = 1、SU(2)/SO(3) 旋子门序列以及希尔伯特—施密特捏合正交分解与相对熵删除账单。",
-      "summary_en": "Interactively adjust qubit polar angle θ, azimuthal phase φ, environmental record overlap angle α, and pinching decoherence strength η to inspect the geometric product AB = A·B + A∧B, the Pythagorean complementarity circle D² + V² = 1, SU(2)/SO(3) Clifford rotor gates, and the Hilbert–Schmidt pinching decomposition and relative-entropy deletion ledger.",
+      "title": "单比特旋子账本 · 布洛赫球、泡利体积元与旋量双覆盖",
+      "title_en": "Qubit rotor ledger · the Bloch sphere, the Pauli volume element and the spinor double cover",
+      "summary": "选一个初态 |ψ(θ, φ)⟩，逐个追加单比特门：每个门是一枚 SU(2) 旋子，账本逐步记下布洛赫矢量 r ↦ R r R† 与累积旋子的四个分量，符号带记下旋量落在哪一叶。页面核对 σ₁σ₂σ₃ = i·I₂、H σ₃ H = σ₁ 与 R(2π) = −1，舞台同时画出 A·B 与 A∧B，相图给出 (θ, φ) 上的 ⟨σ⟩。",
+      "summary_en": "Pick an initial state |ψ(θ, φ)⟩ and append single-qubit gates: each gate is an SU(2) rotor, the ledger records the Bloch vector r ↦ R r R† and the four components of the accumulated rotor step by step, and the sign tape records which sheet the spinor is on. The page checks σ₁σ₂σ₃ = i·I₂, H σ₃ H = σ₁ and R(2π) = −1, the stage also draws A·B and A∧B, and the phase map shows ⟨σ⟩ over (θ, φ).",
       "path": "qubit-geometry/",
       "thumbnail": "qubit-geometry/thumb.jpg",
       "status": "live",
       "added": "2026-11-10",
       "tags": [
-        "几何积",
+        "布洛赫球",
         "克利福德旋子",
-        "勾股互补 D²+V²=1",
-        "捏合正交分解",
+        "泡利体积元",
+        "旋量双覆盖",
         "Lean 4 已证"
       ],
       "tags_en": [
-        "Geometric product",
+        "Bloch sphere",
         "Clifford rotor",
-        "Pythagorean duality D²+V²=1",
-        "Pinching decomposition",
+        "Pauli volume element",
+        "Spinor double cover",
         "Lean 4 verified"
       ],
       "theory": [
@@ -34,79 +34,234 @@
           "href_en": "../en/ch06-geometric-product.html"
         },
         {
-          "label": "Lean 源码 · RecordCoherenceComplementarity.lean",
-          "label_en": "Lean source · RecordCoherenceComplementarity.lean",
-          "href": "{trureturing}/D5/S3/Quantum/PureState/RecordCoherenceComplementarity.lean"
+          "label": "第五章 · 复相位就是平面旋转生成元",
+          "label_en": "Chapter 5 · Complex phase is a planar rotation generator",
+          "href": "../zh/ch05-complex-phase-and-rotors.html",
+          "href_en": "../en/ch05-complex-phase-and-rotors.html"
+        },
+        {
+          "label": "Lean 源码 · FiniteDimensional.lean",
+          "label_en": "Lean source · FiniteDimensional.lean",
+          "href": "{trureturing}/D5/S3/Quantum/FiniteDimensional.lean"
         }
       ],
       "lean": [
-        { "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" },
-        { "gid": "D5/S3/Quantum/PureState/RecordCoherenceComplementarity.pure_record_distinguishability_coherence_complementarity" },
-        { "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean" },
-        { "gid": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity" }
+        { "gid": "D5/S3/Quantum/FiniteDimensional.qubit_weyl_star" },
+        { "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary" },
+        { "gid": "D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian" },
+        { "gid": "D5/S3/Observer/Conditioning.recordWeight_sum" },
+        { "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" }
       ]
     },
     {
       "id": "sphere-escape",
       "code": "ORTHO//ESCAPE",
-      "title": "多面体割圆、毛球角亏与余弦不动点",
-      "title_en": "Polyhedral Approximation, Hairy Ball Defect, and Cosine Fixed Points",
-      "summary": "亲手切换内接于球面的测地多面体（V = 12、42、60、162、642），实时数出 E = 3V − 6、F = 2V − 4 与欧拉示性数 V − E + F = 2，并对比分片欧氏等边组合模型（12 个五度顶点集中承担 12 × 60° = 720° = 4π 的曲率角亏）与实际径向投影内接多面体网格（高斯—博内/笛卡尔总度量角亏仍严格等于 4π = 720°，但同时分摊在 12 个五度顶点与六度顶点上）；调节泰勒截断项数 N 观察余项 R₂N(θ) 与拉格朗日界，调节螺距看开口螺旋投下闭合圆的影子；再从 θ₀ ∈ [0, π] 出发并排比较 Dottie 余弦蛛网 θₖ₊₁ = cos θₖ → θ* ≈ 0.739085、黄金倒数迭代 xₖ₊₁ = 1 + 1/xₖ → φ 与有限收缩集合在 N ≤ |S₀| 步内的稳定化。",
-      "summary_en": "Switch between geodesic polyhedra inscribed in the sphere (V = 12, 42, 60, 162, 642), count E = 3V − 6, F = 2V − 4 and Euler's V − E + F = 2 live, and contrast the piecewise-Euclidean equilateral combinatorial model (where the 12 degree-5 vertices carry 12 × 60° = 720° = 4π of curvature defect) with the actual radially projected inscribed polyhedral meshes (where the total metric angular defect remains strictly 4π = 720° by Gauss–Bonnet/Descartes while being distributed across both the 12 degree-5 vertices and the degree-6 vertices); vary the Taylor terms N to watch the remainder R₂N(θ) against the Lagrange bound, and the pitch to see an open helix cast a closed circle as its shadow; then, from a seed θ₀ ∈ [0, π], compare the Dottie cosine cobweb θₖ₊₁ = cos θₖ → θ* ≈ 0.739085, the golden reciprocal iteration xₖ₊₁ = 1 + 1/xₖ → φ, and a finite contracting set sequence that stabilizes within N ≤ |S₀| steps.",
+      "title": "对角逃逸、余弦不动点与素数逃逸",
+      "title_en": "Diagonal Escape, the Cosine Fixed Point, and Prime Escape",
+      "summary": "一张清单 f 列出 N 行二进制串（N = 3 … 8，由种子 S 生成，或在矩阵上逐格点击翻转）。账本逐步读出对角元 f(k, k) 并翻转：d(k) = ¬f(k, k) 在第 k 位与第 k 行不同，所以 d 不在清单里，汉明距离的最小值总是至少为 1——这是 relative_semantic_diagonal_ne_listed_decode 取 latent = id、twist = ¬ 的情形。同一条步进轴推进余弦迭代 xₖ = cos xₖ₋₁ → x* ≈ 0.739085（有限步残差严格为正，并逐步核对 sin²xₖ + cos²xₖ = 1），并列出前 k 个素数、p₁⋯pₖ + 1 不在清单中的最小素因子与有限欧拉积 ∏ (1 − p⁻²)⁻¹ < π²/6。",
+      "summary_en": "A list f holds N binary rows (N = 3 … 8, generated by a seed S, or flipped cell by cell on the matrix). The ledger reads the diagonal entry f(k, k) step by step and flips it: d(k) = ¬f(k, k) differs from row k in place k, so d is not on the list and the smallest Hamming distance is always at least 1 — the case latent = id, twist = ¬ of relative_semantic_diagonal_ne_listed_decode. The same step rail advances the cosine iteration xₖ = cos xₖ₋₁ → x* ≈ 0.739085 (the residual after finitely many steps stays strictly positive, and sin²xₖ + cos²xₖ = 1 is checked at every step) and lists the first k primes, the least prime factor of p₁⋯pₖ + 1, which is not on the list, and the finite Euler product ∏ (1 − p⁻²)⁻¹ < π²/6.",
       "path": "sphere-escape/",
       "thumbnail": "sphere-escape/thumb.jpg",
       "status": "live",
       "added": "2026-11-10",
       "tags": [
-        "割圆多面体",
-        "笛卡尔 720° 角亏",
-        "泰勒截断余项",
+        "康托尔对角线",
+        "相对语义对角线",
+        "汉明距离",
         "Dottie 余弦不动点",
-        "黄金不动点",
-        "有限收缩稳定化",
+        "欧几里得素数逃逸",
+        "有限欧拉积",
         "Lean 4 已证"
       ],
       "tags_en": [
-        "Polyhedral approximation",
-        "Descartes 720° defect",
-        "Taylor remainder",
+        "Cantor diagonal",
+        "Relative semantic diagonal",
+        "Hamming distance",
         "Dottie cosine fixed point",
-        "Golden fixed point",
-        "Finite contracting stabilization",
+        "Euclid prime escape",
+        "Finite Euler product",
         "Lean 4 verified"
       ],
       "theory": [
         {
-          "label": "第二十一章 · 割圆多面体、泰勒截断裂缝与开口螺旋投影",
-          "label_en": "Chapter 21 · Inscribed polytopes, Taylor remainder seams, and the open helix",
-          "href": "../zh/ch21-diagonalization-and-escape.html#sec-ch21-3",
-          "href_en": "../en/ch21-diagonalization-and-escape.html#sec-ch21-3"
+          "label": "第二十一章 · 康托尔—哥德尔相对语义对角线",
+          "label_en": "Chapter 21 · The Cantor–Gödel relative semantic diagonal",
+          "href": "../zh/ch21-diagonalization-and-escape.html#sec-ch21-2",
+          "href_en": "../en/ch21-diagonalization-and-escape.html#sec-ch21-2"
         },
         {
-          "label": "第二十四章 · 余弦不动点与自指",
-          "label_en": "Chapter 24 · Cosine fixed points and self-reference",
-          "href": "../zh/ch24-cosine-fixed-points-and-self-reference.html",
-          "href_en": "../en/ch24-cosine-fixed-points-and-self-reference.html"
+          "label": "第二十四章 · 余弦不动点与 ψ = ψ(ψ)",
+          "label_en": "Chapter 24 · Cosine fixed points and ψ = ψ(ψ)",
+          "href": "../zh/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-4",
+          "href_en": "../en/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-4"
         },
         {
-          "label": "Lean 源码 · DiagonalTopologicalEscape.lean",
-          "label_en": "Lean source · DiagonalTopologicalEscape.lean",
-          "href": "{trureturing}/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean"
+          "label": "Lean 源码 · RelativeSemanticDiagonal.lean",
+          "label_en": "Lean source · RelativeSemanticDiagonal.lean",
+          "href": "{trureturing}/D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.lean"
         }
       ],
       "lean": [
+        { "gid": "D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode" },
+        { "gid": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous" },
+        { "gid": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_topological_settlement" },
+        { "gid": "D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize" },
+        { "gid": "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique" }
+      ]
+    },
+    {
+      "id": "pythagoras-number-escape",
+      "code": "ORTHO//PYTHAGORAS",
+      "title": "佩尔手性账本：±1 接缝、素数分裂与同余数椭圆曲线",
+      "title_en": "Pell Chirality Ledger: the ±1 Seam, Prime Splitting and Congruent-Number Curves",
+      "summary": "沿 √d（2 ≤ d ≤ 37，无平方因子）的连分数逐步求渐近分数 mₖ/nₖ：账本逐行给出部分商、精确的 BigInt 渐近分数与范数 Δ = mₖ² − d nₖ²；一维误差 |mₖ/nₖ − √d| 趋于 0，二维面积差 |Δ| 却从不小于 1，单位解的范数在 +1 与 −1 之间翻转手性（d = 2 即泰昂边径数 1/1、3/2、7/5、17/12……）。右栏热图逐格画出 m² − d n² 的符号并标出全部 ±1 格，点击即选中最近的渐近步。舞台的另两个视图：素数 p ≡ 1 (mod 4) 在 ℤ[i] 中分裂为 (a + bi)(a − bi)，经拉格朗日—格拉姆恒等式长出勾股三元组 (|a² − b²|, 2ab, p)，p ≡ 3 (mod 4) 保持惰性；同余数曲线 E_d: y² = x³ − d²x 上的有理点给出面积为 d 的有理直角三角形，𝔽ₚ 上逐点计数得到弗罗贝尼乌斯迹 aₚ 与哈塞界 |aₚ| ≤ 2√p。",
+      "summary_en": "Follow the continued fraction of √d (squarefree 2 ≤ d ≤ 37) step by step to the convergents mₖ/nₖ: the ledger lists the partial quotients, the exact BigInt convergents and the norms Δ = mₖ² − d nₖ²; the 1D error |mₖ/nₖ − √d| goes to 0 while the 2D area gap |Δ| never drops below 1, and the unit norms flip their chirality between +1 and −1 (for d = 2, Theon's side and diagonal numbers 1/1, 3/2, 7/5, 17/12, …). The side map draws the sign of m² − d n² cell by cell and marks every ±1 cell; a click picks the nearest convergent step. The stage has two more views: a prime p ≡ 1 (mod 4) splits in ℤ[i] as (a + bi)(a − bi) and, by the Lagrange–Gram identity, grows the Pythagorean triple (|a² − b²|, 2ab, p), while p ≡ 3 (mod 4) stays inert; a rational point on the congruent-number curve E_d: y² = x³ − d²x gives a rational right triangle of area d, and counting points over 𝔽ₚ gives the Frobenius trace aₚ with Hasse's bound |aₚ| ≤ 2√p.",
+      "path": "pythagoras-number-escape/",
+      "thumbnail": "pythagoras-number-escape/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-10",
+      "tags": [
+        "佩尔方程 m² − d n² = ±1",
+        "√d 的连分数",
+        "泰昂边径数",
+        "高斯整数分裂 p = a² + b²",
+        "同余数曲线 y² = x³ − d²x",
+        "哈塞界 |aₚ| ≤ 2√p",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Pell equation m² − d n² = ±1",
+        "Continued fraction of √d",
+        "Theon's side and diagonal numbers",
+        "Gaussian splitting p = a² + b²",
+        "Congruent-number curve y² = x³ − d²x",
+        "Hasse bound |aₚ| ≤ 2√p",
+        "Lean 4 verified"
+      ],
+      "theory": [
         {
-          "gid": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous"
+          "label": "终章 · 第二幕 希帕索斯之裂与佩尔余项",
+          "label_en": "Coda · Act II, Hippasus’s crack and the Pell remainder",
+          "href": "../zh/coda.html#sec-coda-pythagoras-act2",
+          "href_en": "../en/coda.html#sec-coda-pythagoras-act2"
         },
         {
-          "gid": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_topological_settlement"
+          "label": "终章 · ±1 佩尔接缝将奇素数一分为二：线素数与面素数",
+          "label_en": "Coda · The ±1 Pell seam splits the odd primes: line and plane primes",
+          "href": "../zh/coda.html#sec-coda-pell-prime-splitting",
+          "href_en": "../en/coda.html#sec-coda-pell-prime-splitting"
         },
         {
-          "gid": "D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize"
+          "label": "终章 · 同余数椭圆曲线环面",
+          "label_en": "Coda · The congruent-number elliptic torus",
+          "href": "../zh/coda.html#sec-coda-congruent-elliptic-torus",
+          "href_en": "../en/coda.html#sec-coda-congruent-elliptic-torus"
         },
         {
-          "gid": "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique"
+          "label": "终章 · 哈塞定理、弗罗贝尼乌斯余弦与佐藤—泰特分布",
+          "label_en": "Coda · Hasse’s theorem, the Frobenius cosine and Sato–Tate",
+          "href": "../zh/coda.html#sec-coda-hasse-sato-tate",
+          "href_en": "../en/coda.html#sec-coda-hasse-sato-tate"
+        },
+        {
+          "label": "第一章 · 实内积空间的平行四边形范数律",
+          "label_en": "Chapter 1 · The parallelogram norm law of real inner product spaces",
+          "href": "../zh/ch01-measurement.html#thm-parallelogram-norm-law",
+          "href_en": "../en/ch01-measurement.html#thm-parallelogram-norm-law"
+        },
+        {
+          "label": "Lean 源码 · LagrangeGramIdentity.lean",
+          "label_en": "Lean source · LagrangeGramIdentity.lean",
+          "href": "{trureturing}/D5/S3/QuantumBounds/LagrangeGramIdentity.lean"
         }
+      ],
+      "lean": [
+        { "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" },
+        { "gid": "D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law" },
+        { "gid": "D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras" },
+        { "gid": "D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction" }
+      ]
+    },
+    {
+      "id": "timeless-causal-crystal",
+      "code": "ORTHO//CAUSAL",
+      "title": "无时间因果账本与格拉姆窗口",
+      "title_en": "Timeless causal ledger and the Gram window",
+      "summary": "给定 c_AB = cos θ₁ 与 c_BC = cos θ₂，第三条余弦只能落在格拉姆窗口 [cos(θ₁ + θ₂), cos(θ₁ − θ₂)] 内：c_AC = c₁c₂ + s₁s₂ cos φ，det G = s₁²s₂² sin²φ ≥ 0，φ = 0 或 π 时贴上 det G = 0 的边界，窗口之外 det G < 0。中间的去序账本逐阶把 (−1)ᵏθ²ᵏ/(2k)! 同时加到三个余弦上，看截断余弦的 det G⁽ᵏ⁾ 怎样越过视界又收敛回真实的一侧；右侧相图画出整片 (θ₁, c_AC) 上的相容透镜。三个视图：格拉姆窗口（球面上的两条小圆、相容椭圆与 det G 抛物线）、晶体书册（HΨ = 0 的 12 页佩奇—伍特斯晶体与泰勒部分和）、P 场 vs NP 线（Klee–Minty 对数势垒的梯度流与耗散恒等式，对照振幅放大每步只转 2θ、逐分量模拟到 t* ≈ (π/4)√(2ⁿ)）；读数另核对 cos²θ + sin²θ = 1 与未读测量下的无信号 Δρ_B = 0。",
+      "summary_en": "Given c_AB = cos θ₁ and c_BC = cos θ₂, the third cosine must lie in the Gram window [cos(θ₁ + θ₂), cos(θ₁ − θ₂)]: c_AC = c₁c₂ + s₁s₂ cos φ, det G = s₁²s₂² sin²φ ≥ 0, the boundary det G = 0 at φ = 0 or π, and det G < 0 outside. The de-ordered ledger in the middle adds (−1)ᵏθ²ᵏ/(2k)! to all three cosines order by order and shows det G⁽ᵏ⁾ of the truncated cosines crossing the horizon and converging back to its true side; the phase map on the right draws the compatible lens over the whole (θ₁, c_AC) plane. Three views: the Gram window (two small circles on the sphere, the compatibility ellipse and the det G parabola), the crystal book (a 12-page Page–Wootters crystal with HΨ = 0 and Taylor partial sums), and P field vs NP thread (a log-barrier gradient flow on Klee–Minty with the dissipation identity, against amplitude amplification turning only 2θ per step, simulated entry by entry up to t* ≈ (π/4)√(2ⁿ)); the readouts also check cos²θ + sin²θ = 1 and no signalling, Δρ_B = 0 under an unread measurement.",
+      "path": "timeless-causal-crystal/",
+      "thumbnail": "timeless-causal-crystal/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-10",
+      "tags": [
+        "格拉姆窗口",
+        "因果相容",
+        "去序阶乘",
+        "佩奇—伍特斯",
+        "无时间晶体",
+        "正交视界",
+        "振幅放大",
+        "P 是场，NP 是线",
+        "无信号",
+        "终章"
+      ],
+      "tags_en": [
+        "Gram window",
+        "causal compatibility",
+        "de-ordering factorial",
+        "Page–Wootters",
+        "timeless crystal",
+        "orthogonal horizon",
+        "amplitude amplification",
+        "P is a field, NP is a line",
+        "no signalling",
+        "coda"
+      ],
+      "theory": [
+        {
+          "label": "终章 · 顺序无关、无时间之网与几何因果的必然性",
+          "label_en": "Coda · Order-independence, the timeless web and the necessity of causality",
+          "href": "../zh/coda.html#sec-coda-timeless-causality",
+          "href_en": "../en/coda.html#sec-coda-timeless-causality"
+        },
+        {
+          "label": "终章 · 第四层 有限观察者与因果相容空间",
+          "label_en": "Coda · Level 4, the finite observer and the compatible space",
+          "href": "../zh/coda.html#sec-coda-finite-observer-time-field",
+          "href_en": "../en/coda.html#sec-coda-finite-observer-time-field"
+        },
+        {
+          "label": "终章 · 第五层 全局静态场与有限观察者",
+          "label_en": "Coda · Level 5, global static field and finite observer",
+          "href": "../zh/coda.html#sec-coda-global-p-eq-np-local-p-ne-np",
+          "href_en": "../en/coda.html#sec-coda-global-p-eq-np-local-p-ne-np"
+        },
+        {
+          "label": "终章 · 第六层 P 是场，NP 是线",
+          "label_en": "Coda · Level 6, P is a field, NP is a line",
+          "href": "../zh/coda.html#sec-coda-p-is-field-np-is-line",
+          "href_en": "../en/coda.html#sec-coda-p-is-field-np-is-line"
+        },
+        {
+          "label": "第三章 · 未读态不动点的块对角充要判据",
+          "label_en": "Chapter 3 · The block-diagonal criterion for fixed unread states",
+          "href": "../zh/ch03-projectors-and-duality.html#thm-unread-fixed-iff",
+          "href_en": "../en/ch03-projectors-and-duality.html#thm-unread-fixed-iff"
+        },
+        {
+          "label": "Lean 源码 · Conditioning.lean",
+          "label_en": "Lean source · Conditioning.lean",
+          "href": "{trureturing}/D5/S3/Observer/Conditioning.lean"
+        }
+      ],
+      "lean": [
+        { "gid": "D5/S3/Observer/Conditioning.unreadState_fixed_iff" },
+        { "gid": "D5/S3/Observer/Conditioning.conditionalState_isState" },
+        { "gid": "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight" },
+        { "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" },
+        { "gid": "D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization" },
+        { "gid": "D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation" },
+        { "gid": "D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation" }
       ]
     }
   ]

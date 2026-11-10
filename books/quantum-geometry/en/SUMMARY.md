@@ -50,3 +50,10 @@
 - [Chapter 26 Single-Qubit Rotor Compilation: Bloch Geometry Theorems and the ZYZ Euler Compiler](ch26-single-qubit-rotor-compilation.md)
 - [Chapter 27 Inside the Lean 4 Axiom Sanctuary (Part I): From the Parallelogram Law to Finite Record Pinching](ch27-reading-frozen-proofs-i.md)
 - [Chapter 28 Inside the Lean 4 Axiom Sanctuary (Part II): From Rank-One Born Reduction to the Closure of $\psi = \psi(\psi)$](ch28-reading-frozen-proofs-ii.md)
+
+# Coda and Appendices
+
+- [Coda: Outside All Spheres](coda.md)
+- [Appendix A: Dictionary of Conventional vs. Geometric Quantum Terms](appendix-a.md)
+- [Appendix B: Clifford Algebra Cheat Sheet](appendix-b.md)
+- [Appendix C: Complete Index of Locked trureturing Declarations](appendix-c.md)

@@ -212,14 +212,14 @@ $$
 
 ## 6.4 交互实验：亲手拨动两子几何积、粒子内积与波动外积面 {#sec-interactive-qubit-geometry}
 
-百闻不如一试。在下面的交互实验室 **`ORTHO//QUBIT`（两子几何积与互补圆实验室）** 中，你可以亲手拖动极角 $\theta$、方位相位角 $\varphi$、环境记录夹角 $\alpha$ 与退相干捏合强度 $\eta$，并点击单比特量子门旋子按钮（`X`, `Y`, `Z`, `H`, `S`, `T`）：
+百闻不如一试。在下面的交互实验室 **`ORTHO//QUBIT`（单比特旋子账本）** 中，你可以拖动初态的极角 $\theta$ 与方位角 $\varphi$、探针旋子的转角 $\alpha$，并逐个追加单比特门（`X`, `Y`, `Z`, `H`, `S`, `T`, `I`）：
 
-- 在左侧三维布洛赫球视图中，实时观察琥珀色当前门后纯态矢量 $\rho_0 = \vv{B}(\theta,\varphi)$ 如何分解为青色共线内积粒子线 $\vv{A}\cdot\vv{B} = \cos\theta$ 与紫色正交外积波动平行四边形 $\vv{A}\wedge\vv{B} = \sin\theta\,\vv{I}$；
-- 在右上角互补圆视图中，检验路径可区分度 $D = \sin\alpha$ 与干涉可见度 $V = \cos\alpha$ 如何永远锁定在勾股互补圆 $D^2 + V^2 = 1$（`LEAN ✓`，[@thm-record-coherence-complementarity]）上；
-- 在右下角希尔伯特—施密特柱状图中，观察保单位退相干与捏合投影 $\Pi(\rho_0)$ 如何把当前态 $\rho(\eta)$ 的纯度正交拆分为对角粒子布居范数 $\langle\Pi(\rho_0),\Pi(\rho_0)\rangle_{\mathrm{HS}}$ 与副对角波动相干质量 $|\rho_{01}(\eta)|^2 + |\rho_{10}(\eta)|^2$（[@cor-pinching-pythagorean]），并实时读出当前态剩余相对熵相干 $D(\rho(\eta) \,\|\, \Pi(\rho_0)) = S(\Pi(\rho_0)) - S(\rho(\eta))$（将在[第八章](ch08-erasure-and-time-arrows.md)严格证明）。
+- 在布洛赫舞台上，取 $\vv{A} = \vv{e}_3$，实时观察琥珀色的当前态矢量 $\vv{B} = \vv{r}$ 如何分解为青色共线内积粒子线 $\vv{A}\cdot\vv{B} = \cos\theta$ 与紫色正交外积波动平行四边形 $\vv{A}\wedge\vv{B} = \sin\theta\,\vv{I}$；两者平方和为 1 正是 [@thm-lagrange-gram-identity] 的特例；
+- 在旋子作用账本中，每个门都是一枚旋子 $R_{\hat n}(\alpha) = \cos(\alpha/2) - B_{\hat n}\sin(\alpha/2)$，账本逐行记下布洛赫矢量 $\vv{r} \mapsto R\,\vv{r}\,R^\dagger$ 与累积旋子的四个分量；符号带标出同一个转动所对应的两枚旋子 $\pm R$ 中取的是哪一枚，例如 $HZH$ 与 $X$ 在球面上是同一个转动，旋子却差一个 $-1$，这就是 $R(2\pi) = -1$ 的旋量双覆盖；
+- 在右侧相图中，观察 $(\theta, \varphi)$ 平面上 $\langle\sigma_z\rangle$、$\langle\sigma_x\rangle$、$\langle\sigma_y\rangle$ 的分布与线路经过的轨迹，并点击相图选择初态。
 
 ::: {.viz src="qubit-geometry" height="560"}
-交互实验室 `ORTHO//QUBIT`：拨动极角 $\theta$、相位角 $\varphi$、环境记录夹角 $\alpha$ 与捏合强度 $\eta$，或点击单比特旋子门 `X, Y, Z, H, S, T`，实时检验几何积分解 $\vv{A}\vv{B} = \vv{A}\cdot\vv{B} + \vv{A}\wedge\vv{B}$、纯态记录互补圆 $D^2 + V^2 = 1$ 与希尔伯特—施密特捏合勾股定理。
+交互实验室 `ORTHO//QUBIT`：拨动初态 $(\theta, \varphi)$ 与探针转角 $\alpha$，逐个追加单比特门 `X, Y, Z, H, S, T`，逐步检验几何积分解 $\vv{A}\vv{B} = \vv{A}\cdot\vv{B} + \vv{A}\wedge\vv{B}$、旋子作用 $\vv{r} \mapsto R\,\vv{r}\,R^\dagger$ 与旋量双覆盖 $R(2\pi) = -1$。
 :::
 
 既然“粒子是线，面积是波，两者合起来是同一个几何积场”，那么当这片有向面积随着物理参数连续扫掠时，这个被我们称作“时间”的维度，在几何上又是什么？为什么作者会脱口而出*“我的直觉是,线是经典时间,面积是量子时间”*？让我们进入[第七章](ch07-geometric-time-and-speed-limits.md)。

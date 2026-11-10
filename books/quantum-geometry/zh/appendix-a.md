@@ -1,0 +1,130 @@
+# 附录 A：传统量子力学与几何语言对照词典
+
+传统量子力学教材通常建立在抽象希尔伯特空间、厄米算符谱分解与复矩阵索引之上：初学者虽然能熟练推演狄拉克符号 $|\psi\rangle$ 与对易子 $[A, B]$，却往往难以看清每一行代数背后的空间方向、有向面积、球面曲率与拓扑障碍。本附录将全书七部曲及终章涉及的**传统量子力学/数理逻辑术语**、**本书的几何直觉语言**、**Lean 4 形式化声明（`trureturing@dev` GID）**、**一行核心不变量**与**认识论状态（Epistemic Status）**汇入一张总对照表，供读者随时检索。
+
+---
+
+## 全书概念与形式化锚点总对照表 {#sec-appendix-a-master-table}
+
+| 传统物理 / 数学术语 (Conventional Term) | 本书几何直觉语言 (Geometric Intuition Term) | Lean 4 形式对象 / 锁定声明 GID | 一行核心不变量 / 恒等式 (One-Line Invariant) | 认识论状态 (Status) |
+| :--- | :--- | :--- | :--- | :--- |
+| **测量 / 物理量**<br/>(Measurement / Physical Quantity) | **动词“量（liáng）”与名词“量（liàng）”**：成对尺子比对算子 vs. 截断投影读数 | [`born_probability_skeleton`](lean:D5/S3/Quantum/FiniteDimensional.born_probability_skeleton) | $\operatorname{prob}_0(\psi) + \operatorname{prob}_1(\psi) = \|\psi_0\|^2 + \|\psi_1\|^2$ | `LEAN ✓`（第 1–2 章） |
+| **量子纯态 $|\psi\rangle$**<br/>(Pure Quantum State) | **单位球面上的有向方向射线**（由成对测量余弦唯一锁定） | [`bloch_geometry_of_isHermitian`](lean:D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian) | $x^2 + y^2 + z^2 = 1 \iff \operatorname{Tr}(\rho^2) = 1$ | `LEAN ✓`（第 1–3、26 章） |
+| **可观测量与投影算符 $P$**<br/>(Observable & Projector) | **几何标尺与幂等正交投影方向**（$P^2 = P = P^\dagger$） | [`finite_record_pinching_idempotent`](lean:D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent) | $\mathcal{P}(\mathcal{P}(\rho)) = \mathcal{P}(\rho),\quad P_\psi^2 = P_\psi$ | `LEAN ✓`（第 1、3、27 章） |
+| **玻恩概率法则 $P = |\langle\phi|\psi\rangle|^2$**<br/>(Born Probability Rule) | **内积投影平方与秩一迹配对**（勾股斜边在标尺轴上的面积分量） | [`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight) | $P_\psi P_\phi P_\psi = |\langle\psi, \phi\rangle|^2 P_\psi$ | `LEAN ✓`（第 2、28 章） |
+| **正交态分解与完备性**<br/>(Orthogonal Decomposition) | **内积空间平行四边形与勾股定律**：正交向量一维不可加，平方后二维面积守恒 | [`inner_product_norm_parallelogram_law`](lean:D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law) | $\langle u, v\rangle = 0 \implies \|u + v\|^2 = \|u\|^2 + \|v\|^2$ | `LEAN ✓`（第 1、27 章、终章） |
+| **全局相位 $e^{i\alpha}|\psi\rangle$**<br/>(Global Phase / Ray Equivalence) | **绕测量轴自身的规范空转**（连通射线测试下的幺正全局相位刚性） | [`unitary_phase_of_connected_ray_tests`](lean:D5/S3/Quantum/Foundation/RayPhaseRigidity.unitary_phase_of_connected_ray_tests) | $|c| = 1 \implies P_{c\psi} = P_\psi$ | `LEAN ✓`（第 1、27 章） |
+| **密度矩阵 $\rho$ 与混合态**<br/>(Density Matrix & Mixed State) | **布洛赫球体内部重心向量 $\mathbf{r} \in B^3$**（纯度亏格度量丢失的相位面积） | [`norm_bloch_le_trace_of_posSemidef`](lean:D5/S3/Quantum/Information/ActualPureQubitGeometry.norm_bloch_le_trace_of_posSemidef) | $\|\mathbf{r}\| \le \operatorname{Tr}(\rho),\quad \operatorname{Tr}(\rho(\mathbf{r})) = 1$ | `LEAN ✓`（第 3、26 章） |
+| **退相干与量子信道 $\Phi(\rho)$**<br/>(Decoherence & Quantum Channel) | **向测量轴的正交捏合投影（Pinching）**：横向圆周相干性向纵向直径坍缩 | [`pinching_hilbert_schmidt_pythagorean`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean) | $\|\rho\|_{\mathrm{HS}}^2 = \|\mathcal{P}(\rho)\|_{\mathrm{HS}}^2 + \|\rho - \mathcal{P}(\rho)\|_{\mathrm{HS}}^2$ | `LEAN ✓`（第 4、6 章） |
+| **量子不可克隆原理**<br/>(No-Cloning Theorem) | **幺正内积刚性**：保内积映射无法同时复制非正交且非共线的未知方向 | [`no_cloning_inner_product_criterion`](lean:D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion) | $s = s^2 \implies s = 0 \lor s = 1$ | `LEAN ✓`（第 14 章） |
+| **算符对易子 $[A, B] = AB - BA$**<br/>(Operator Commutator) | **克利福德外积有向面积 $2(\mathbf{a}\wedge\mathbf{b})$**：衡量两步测量顺序差异张开的旋转平面 | [`crossProduct_is_skewAdjoint_of_balanced_sum`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum) | $\mathbf{u}\wedge\mathbf{v} = -\mathbf{v}\wedge\mathbf{u},\quad (AB - BA)^\dagger = -(AB - BA)$ | `LEAN ✓`（第 5–6 章） |
+| **虚数单位 $i$ 与泡利矩阵 $\sigma_x, \sigma_y, \sigma_z$**<br/>(Imaginary Unit & Pauli Matrices) | **三维正交基向量 $e_1, e_2, e_3$ 与反自伴幺正双向量复结构 $\hat{\mathbf{I}}^2 = -1$** | [`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary) | $\hat{\mathbf{I}}^2 = -1,\quad ZX = -XZ$ | `LEAN ✓`（第 5、25 章） |
+| **单比特幺正门 $U \in \mathrm{SU}(2)$**<br/>(Single-Qubit Unitary Gate) | **双向量指数旋量（Rotor）$R = \cos(\theta/2) - \hat{B}\sin(\theta/2)$** 的校准幺正演化群 | [`calibrated_group`](lean:D5/S3/Quantum/Dynamics/CalibratedUnitaryGroup.calibrated_group) | $U(s+t) = U(s)U(t),\quad v \mapsto R v \widetilde{R}$ | `LEAN ✓`（第 7、27 章） |
+| **双比特纠缠与并发度（Concurrence）**<br/>(Two-Qubit Entanglement) | **复四维状态向量的外积楔面积与纯态边缘最大混合盲区** | [`bell_pure_state_has_maximally_mixed_marginal`](lean:D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal) | $\rho_A = \frac{1}{2}I_2,\quad \psi_{00}\psi_{11} - \psi_{01}\psi_{10} \neq 0$ | `LEAN ✓`（第 8、13 章） |
+| **量子态层析（State Tomography）**<br/>(Quantum State Tomography) | **三正交轴两步完备寻址与六轴有理开覆盖** | [`rational_six_axis_open_cover`](lean:D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover) | $\forall v \in S^2,\; \exists i \in \operatorname{Fin} 6,\; \langle v, a_i\rangle \neq 0$ | `LEAN ✓`（第 9 章） |
+| **海森堡顺序依赖 vs. 潘查拉特纳姆—贝里相位**<br/>(Order Dependence vs. Berry Phase) | **“两两比较，永远一致，顺序无关”**：单位态重叠等于 $1$ 当且仅当两向量相等（`LEAN ✓`；一般投影射线相等当且仅当相对相位对齐）vs. 闭合环路立体角 $\Omega/2$（`文献结果`） | [`unit_gram_overlap_characterization`](lean:D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization) | $\|u\|=\|v\|=1 \implies (\langle u,v\rangle = 1 \iff u = v);\; \gamma_{\mathrm{Berry}} = -\Omega/2$ | `LEAN ✓` / `文献结果`（第 10 章） |
+| **微波拉比脉冲与虚拟 $Z$ 门**<br/>(Microwave Pulse & Virtual-$Z$ Gate) | **旋转坐标系中的三脉冲有序迹界与观测者拉回迹恒等式** | [`ordered_three_pulse_real_trace_bound`](lean:D5/S3/Quantum/Dynamics/OrderedThreePulseTrace.ordered_three_pulse_real_trace_bound) | $R_z(-\phi) R_{\text{xy}}(\theta, 0) R_z(\phi) = R_{\text{xy}}(\theta, \phi)$ | `LEAN ✓`（第 11 章） |
+| **旋量 $4\pi$ 周期性与万向节死锁**<br/>(Spinor $4\pi$ Periodicity & Gimbal Lock) | **$S^3 \to \mathrm{SO}(3)$ 二重覆盖与毛球定理 $\chi(S^2) = 2$**：二维球面必有坐标奇点，升维至平行化 $S^3$（$\chi(S^3)=0$）方能消解 | [`projection_probability_flow`](lean:D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.projection_probability_flow) | $R(2\pi) = -1 \in S^3,\quad R(4\pi) = +1$ | `LEAN ✓` / `文献结果`（第 12 章） |
+| **贝尔—CHSH 不等式与齐雷尔森界**<br/>(Bell–CHSH & Tsirelson Bound) | **经典 $\ell_1$ 八面体多面体（$\le 2$）vs. 量子 $\ell_2$ 勾股圆球（$2\sqrt{2}$）** | [`bell_chsh_state_expectation_is_greatest`](lean:D5/S3/QuantumBounds/TsirelsonTightness.bell_chsh_state_expectation_is_greatest) | $\mathcal{S}_{\text{classical}} \le 2 < \mathcal{S}_{\text{quantum}} \le 2\sqrt{2}$ | `LEAN ✓`（第 13 章） |
+| **稳定子码与克利福德群编织**<br/>(Stabilizer Codes & Clifford Braiding) | **有限域 $\mathbb{F}_2^{2n}$ 上的泡利词乘法与杨—巴克斯特自分配架（Rack）编织** | [`pauli_word_mul`](lean:D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank.pauli_word_mul), [`crossing_yang_baxter`](lean:D5/S0/Certificates/Quandles/BraidColoringTransport.crossing_yang_baxter) | $P_1 P_2 = P_2 P_1 \iff x_1 z_2 \oplus z_1 x_2 = 0$ | `LEAN ✓`（第 14、26 章） |
+| **Grover 搜索 / QFT / QSVT / 量子漫步**<br/>(Grover / QFT / QSVT / Szegedy Walk) | **二维子空间一致算子旋转、有限泊松求和与切比雪夫多项式谱变换** | [`uniform_operator_rotation`](lean:D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation), [`finite_poisson_summation`](lean:D5/S3/Fourier/FinitePoisson.finite_poisson_summation) | $R_{\psi}\,R_{\perp} = \operatorname{Rot}(2\theta),\quad T_n(\cos\theta) = \cos(n\theta)$ | `LEAN ✓`（第 15 章） |
+| **Solovay–Kitaev 门集编译定理**<br/>(Solovay–Kitaev Compilation) | **双轴有限旋转字、范数一迹递推与群换位子 $ABA^{-1}B^{-1}$ 面积螺旋** | [`two_axis_finite_word`](lean:D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word), [`trace_recurrence`](lean:D5/S1/Recurrence/NormOneTraceAddition.trace_recurrence) | $\operatorname{Tr}(U^{n+1}) = \operatorname{Tr}(U)\operatorname{Tr}(U^n) - \operatorname{Tr}(U^{n-1})$ | `LEAN ✓` / `文献结果`（第 16 章） |
+| **洛伦兹变换与博戈留波夫变换**<br/>(Lorentz Boost & Bogoliubov Transform) | **闵可夫斯基双曲旋量（$\cosh\eta - \gamma_0\gamma_1\sinh\eta$）与零光锥刚性** | [`bogoliubov_norm_conservation`](lean:D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation) | $\cosh^2\eta - \sinh^2\eta = 1,\quad Q(v)=0 \implies Q = c\,\eta$ | `LEAN ✓`（第 17 章） |
+| **狄拉克旋量与阿贝尔规范场联络**<br/>(Dirac Spinor & Gauge Connection) | **左右手外尔分量之字形（Zitterbewegung）跃迁与生成树余切环路和乐（Holonomy）** | [`anchored_phase_classification`](lean:D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification) | $A(E) / \mathcal{G}_R \cong (U(1))^{|E \setminus T|} \times (U(1))^{|R| - 1}$ | `LEAN ✓`（第 18 章） |
+| **全息纠缠熵与 MERA 张量网络**<br/>(Holographic Entanglement & MERA) | **离散桥图量子最大流等于最小割定理与分片多面体容量锥** | [`result`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result) | $\operatorname{QMaxFlow}(a,b,c,d) = \min(3ac, \min(ad, bc))$ | `LEAN ✓` / `文献结果`（第 19 章） |
+| **量子电路复杂度、CV 猜想与 ER=EPR**<br/>(Circuit Complexity, CV & ER=EPR) | **可积电路分割最小深度 $\lfloor N/(\kappa+1)\rfloor + 1$、奇偶相位 CNOT 下界与黑洞内部体积猜想** | [`result`](lean:D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result) | $\operatorname{minDepth}(N, \kappa) = \lfloor N/(\kappa+1)\rfloor + 1$ | `LEAN ✓` / `OPEN`（第 20 章） |
+| **康托尔对角线、停机问题与哥德尔不完备**<br/>(Cantor Diagonal, Halting & Gödel) | **完备语义对角线拓扑逃逸：分离亏格非空、不连续性与严格拓扑细化** | [`complete_diagonal_topological_settlement`](lean:D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_topological_settlement) | $\operatorname{separationDeficit} \neq \emptyset,\quad \tau_0 \subsetneq \tau_{\mathrm{diag}}$ | `LEAN ✓`（第 21 章） |
+| **黎曼 $\zeta(s)$、欧拉乘积与临界线**<br/>(Riemann Zeta, Euler Product & Critical Line) | **素数无穷维正交坐标系 $\bigoplus_p \mathbb{Z}\mathbf{e}_p$、狄利克雷级数等于欧拉乘积与临界轴 $\sigma = 1/2$** | [`riemann_zeta_dirichlet_sum_eq_euler_product`](lean:D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product) | $\sum_{n=1}^\infty n^{-s} = \prod_p (1 - p^{-s})^{-1}\quad (\operatorname{Re}(s) > 1)$ | `LEAN ✓` / `OPEN`（第 22 章） |
+| **希尔伯特第十问题 $H_{10}(\mathbb{Q})$ 与四元数范数**<br/>(Hilbert's 10th over $\mathbb{Q}$ & Quaternion Norm) | **艾森斯坦交叉二次范数型簇 $Q_t$、黄金整数佩尔恒等式与四元数范数乘法锁** | [`Qform_range_eq_eisNorm`](lean:D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_range_eq_eisNorm), [`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm) | $(2a+b)^2 - 5b^2 = 4(a^2 + ab - b^2)$ | `LEAN ✓` / `文献结果`（第 23 章） |
+| **不动点定理与自指映射 $\psi = \psi(\psi)$**<br/>(Fixed-Point Theorems & Self-Reference) | **有限单调收缩有限步稳定、黄金不动点 $\varphi$、Dottie 实根 $\cos\theta^* = \theta^*$ 与语境分岔** | [`finite_contracting_updates_stabilize`](lean:D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize) | $\exists N \le |S_0|,\; \forall n \ge N,\; S_n = S_N$ | `LEAN ✓` / `文献结果` / `OPEN`（第 24 章） |
+| **三维克利福德代数 $\mathcal{Cl}_{3,0}(\mathbb{R})$**<br/>(3D Clifford Geometric Algebra) | **3 比特掩码异或（XOR）与逆序偶奇符号驱动的 8 维基片引擎 `Cl3` 及外尔星代数** | [`qubit_weyl_star`](lean:D5/S3/Quantum/FiniteDimensional.qubit_weyl_star), [`B_formula_core`](lean:D5/S3/Quantum/Measurement/Bloch/QubitBloch.B_formula_core) | $ZX = -XZ,\quad e_a e_b = (-1)^{\operatorname{inv}(a,b)} e_{a \oplus b}$ | `LEAN ✓`（第 25 章、附录 B） |
+| **ZYZ 欧拉角分解与旋量级联**<br/>(ZYZ Euler Decomposition) | **单比特旋量三因子分解 $R_z(\alpha)R_y(\beta)R_z(\gamma)$ 与双轴有限旋转字合成** | [`two_axis_finite_word`](lean:D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word) | $R_z(\alpha)R_y(0)R_z(\gamma) = R_z(\alpha + \gamma)$ | `LEAN ✓`（第 9、16、27 章、附录 B） |
+| **吕德斯（Lüders）状态更新与有限记录阻碍**<br/>(Lüders Rule & Finite-Record Obstruction) | **测量记录条件化后验态合法性与未读记录不动点判据** | [`conditionalState_isState`](lean:D5/S3/Observer/Conditioning.conditionalState_isState), [`unreadState_fixed_iff`](lean:D5/S3/Observer/Conditioning.unreadState_fixed_iff) | $\sum_i p_i \rho_i = \Phi(\rho),\quad \operatorname{Tr}(\rho_i) = 1$ | `LEAN ✓`（第 3、28 章） |
+| **毕达哥拉斯“万物皆数”与四级数系扩张**<br/>("All Is Number" & 4-Tier Number Hierarchy) | **动词“数（shǔ，生成算子）”vs. 名词“数（shù，静态刻度）”**：从 $\mathbb{Q} \to \overline{\mathbb{Q}} \to \pi \to \theta^*$ 的四级“球外之球”突围 | [`inner_product_norm_parallelogram_law`](lean:D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law), [`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique) | $\mathbf{c}^2 = \mathbf{a}^2 + \mathbf{b}^2,\quad m^2 - 2n^2 = \pm 1,\quad \cos\theta^* = \theta^*$ | `LEAN ✓` / `文献结果`（终章 §2） |
+| **奇素数模 4 分裂、同余数椭圆曲线与佐藤—泰特分布**<br/>(Prime Splitting, Congruent Elliptic Curve & Sato–Tate) | **$\pm 1$ 佩尔接缝分出“面素数”（$p \equiv 1 \bmod 4$）与“线素数”（$p \equiv 3 \bmod 4$）；复乘同余曲线 $dy^2 = x(x^2-1)$（$\chi=0$）服从高斯两模分裂律，而非复乘椭圆曲线在哈塞临界线 $\sqrt{p}$ 下服从 $S^3 \cong \mathrm{SU}(2)$ 佐藤—泰特余弦投影** | [`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary), [`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm) | $\cos\theta_p = \frac{a_p}{2\sqrt{p}} \in [-1, +1],\quad d\mu_{\mathrm{ST},\text{non-CM}} = \frac{2}{\pi}\sin^2\theta\,d\theta$ | `LEAN ✓` / `文献结果`（终章 §3） |
+| **惠勒—德维特无时间态、佩奇—伍特斯切片与几何因果律**<br/>(Wheeler–DeWitt, Page–Wootters & Geometric Causality) | **顺序无关消解先后时间：$(2k)!$ 去序模型（`MODEL`）、理想时钟假设下的条件切片表观演化（`文献结果`）、Gram 行列式 $\det G \ge 0$（`LEAN ✓`）与驻相干涉 $\delta S=0$（双向量手性对消模型 $+\mathbf{\Omega}-\mathbf{\Omega}=0$）** | [`unit_gram_overlap_characterization`](lean:D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization), [`conditionalState_isState`](lean:D5/S3/Observer/Conditioning.conditionalState_isState) | $\det G(\mathbf{A},\mathbf{B},\mathbf{C}) \ge 0,\quad H\mathbf{\Psi} = 0$ | `LEAN ✓` / `文献结果` / `MODEL`（终章 §4） |
+| **有限观察者、格拉姆椭圆体（因果相容空间）与半正定矩阵补全**<br/>(Finite Observer, Gram Elliptope & PSD Matrix Completion) | **因为观察者是有限的，选择是在因果相容空间（$\det G > 0$ 的二面角 $\phi$ 区间）中不断在时间场中选点（$G_{M+1} \succeq 0$），并以一维自指平衡点 $\theta^* \approx 0.739$（`MODEL`）对比全知死锁与零记忆噪声** | [`lagrange_gram_identity`](lean:D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity), [`finite_contracting_updates_stabilize`](lean:D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize) | $c_{AC} = \cos\theta_1\cos\theta_2 + \cos\phi\,\sin\theta_1\sin\theta_2,\quad \det G \ge 0$ | `LEAN ✓` / `文献结果` / `MODEL`（终章 §4.4） |
+| **全局静态时间场 $P = NP$ vs. 场内有限观察者 $P \neq NP$**<br/>(Global Static Time Field $P = NP$ vs. Finite Observer $P \neq NP$) | **后选择与无时间不动点模型呈现复杂度坍缩（$\mathrm{PostBQP}=\mathrm{PP}\supseteq\mathrm{NP}$，$\mathrm{P}_{\mathrm{CTC}}=\mathrm{PSPACE}\supseteq\mathrm{NP}$）；场内有限观察者在黑盒查询下受 $\theta_0 \approx \frac{\pi}{2} - 2^{-n/2}$ 正交视界（$L=\Theta(2^{n/2})$）与有界阶 SoS 局部 $G_M \succeq 0$ 盲区阻隔（标准 $\mathrm{P}\neq\mathrm{NP}$ 仍为 `OPEN`）** | [`uniform_operator_rotation`](lean:D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation), [`result`](lean:D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result) | $\cos\theta_0 = 2^{-n/2},\quad L = \Theta(2^{n/2}),\quad G_M \succeq 0\;(M = o(n))$ | `LEAN ✓` / `文献结果` / `OPEN` / `MODEL`（第 15、20 章、终章 §4.5） |
+| **“$P$ 是场，$NP$ 是线”：见证丝、导向场与毛球旋度**<br/>("$P$ Is a Field, $NP$ Is a Line": Witness Thread, Guiding Field & Hairy-Ball Curl) | **几何模型（`MODEL`）：$NP$ 见证是横截面为零的一维细丝（顺线验真 $\in \mathrm{P}$）；典型 $P$ 类算法依托全局导向场（如 Karmarkar 内点势场与 Kasteleyn 平面图反对称双向量场 $A_K^T = -A_K,\; [\operatorname{Pf}(A_K)]^2=\det A_K,\; Z = \sum_M \prod_{e \in M} w_e = |\operatorname{Pf}(A_K)|$），而三元阻挫旋度 $\nabla\wedge\mathbf{F}\neq 0$ 类比局部寻场的指数漩涡** | [`complete_diagonal_topological_settlement`](lean:D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_topological_settlement), [`result`](lean:D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result) | $A_K^T = -A_K,\quad [\operatorname{Pf}(A_K)]^2 = \det A_K,\quad Z = |\operatorname{Pf}(A_K)|$ | `LEAN ✓` / `文献结果` / `OPEN` / `MODEL`（第 20、21 章、终章 §4.6） |
+
+---
+
+## 七部曲核心符号与算子速查指南 {#sec-appendix-a-part-by-part}
+
+为了帮助读者在阅读具体章节时快速定位代数记号与 Lean 源码之间的映射，以下按部曲归纳最常出现的翻译法则：
+
+1. **第一部（点与线）**：
+   每当传统教材写下内积 $\langle\phi|\psi\rangle$ 与投影概率 $|\langle\phi|\psi\rangle|^2$，本书将其翻译为**成对标尺余弦投影**与秩一算符迹配对 $\operatorname{Tr}(P_\phi P_\psi)$。正交性 $\langle u, v\rangle = 0$ 直接触发内积勾股定理 $\|u + v\|^2 = \|u\|^2 + \|v\|^2$。
+2. **第二部（面与手性）**：
+   每当传统教材写下反对称对易子 $[A, B]$ 或三维叉积 $\mathbf{u} \times \mathbf{v}$，本书将其还原为**二阶外积双向量（Bivector）$\mathbf{u}\wedge\mathbf{v}$**。三维空间之所以看似能把旋转平面变成“旋转轴向量”，只是因为三维空间独有的霍奇对偶 $\star(\mathbf{u}\wedge\mathbf{v}) = (\mathbf{u}\wedge\mathbf{v})I_3^{-1}$ 把有向面积偷换成了法向量。
+3. **第三部（球与寻址）与第四部（多体与算法）**：
+   单比特态空间是二维球面 $S^2$（$\chi = 2$，受毛球定理制约），而驱动它旋转的幺正门流形是平行化的三维超球面 $S^3 \cong \mathrm{SU}(2)$（$\chi = 0$）。Grover 搜索、QSVT 与 Solovay–Kitaev 编译全部归结为在选定二维双向量平面内作精确角度的旋量递推。
+4. **第五部（时空、全息与复杂度）**：
+   将欧氏正定度规替换为闵可夫斯基度规 $(+,-,-,-)$，三角函数旋量 $\cos(\theta/2) - \hat{B}\sin(\theta/2)$ 立即变为双曲旋量 $\cosh(\eta/2) - \gamma_0\gamma_1\sinh(\eta/2)$，而张量网络极小割与量子电路深度则在离散图上刻出多面体容量锥。
+5. **第六部（球外之球）与第七部（最小几何代数引擎）**：
+   康托尔—劳维尔对角线、欧拉乘积素数盒子、四元数丢番图范数与收缩不动点揭示了静态形式系统的边界；而 `Cl3`、`PauliSymplectic`、`ZYZ` 与 `FiniteRecordCosineObstruction` 四个核心形式化模块则把前六部的几何直觉铸造为可由 Lean 4 内核逐行检验的机械引擎。
+
+---
+
+## 全书 52 条原始思想命题与主题综合总台账（A01–A52） {#sec-appendix-a-verbatim-ledger}
+
+下表完整收录了贯通全书序曲、二十八章正文与终章的 **52 条核心原始命题（`A01`–`A52`）**，将每一句原始追问与直觉论断严格映射到对应的几何机制与章节锚点：
+
+| 编号 | 原始命题（100% 原文记录） | 几何与形式化机制综合 | 对应章节 |
+| :--- | :--- | :--- | :--- |
+| **A01** (`PDF-01`) | 量子到底是什么东西呀,量子门,我虽然整天在研究这些,我却不懂 | 破除把“量子”当静态颗粒名词的迷思，开启从方向与旋转重构量子力学的追问 | 第 1 章（章首箴言） |
+| **A02** (`PDF-02`) | 量子态是方向,量子门是让量子态转向的,那么可以理解为一种有面积的几何结构 | 一维状态射线 vs. 二维双向量旋转面积元 $\mathbf{u}\wedge\mathbf{v}$ | 第 5 章（章首箴言） |
+| **A03** (`PDF-03`) | 为什么是球面上的面积?而不是夹角面积?两个量子态之间只能用线连接吧在球的表面积 A B | 大圆测地弧长 $\theta$（一维内积角）与球面闭合环路立体角 $\Omega$（二维贝里曲率面积）的区分 | 第 5、10 章 |
+| **A04** (`PDF-04`) | 但是点 C这是额外的信息吧 C | 揭露外部第 3 个参考原点 $C$ 的笛卡尔坐标冗余 | 第 2 章 |
+| **A05** (`PDF-05`) | 那测量基我们可以选 A或者 B作为测量基呀,这样可以避免 C? | 内生自指基选择：直接以 $\mathbf{A}$ 或 $\mathbf{B}$ 自身为标尺，消去外部参考系 $C$ | 第 2 章（章首箴言） |
+| **A06** (`PDF-06`) | 其实点 C并不是一个已知量,而是一个相融点的投影,因为实际上一条确定的量子态只能确定一条线,一组量子态才能对应一个面积. | 单态定线（幂等投影 $P^2=P$），双态张面（外积 $\mathbf{A}\wedge\mathbf{B}$），相融投影生玻恩法则 | 第 2、3 章 |
+| **A07** (`PDF-07`) | 我的直觉是,线是经典时间,面积是量子时间 | 一维投影轨迹构成经典单向时钟线，二维双向量旋转面积构成相干演化的量子时间 | 第 7 章（章首箴言）、第 8 章 |
+| **A08** (`PDF-08`) | 这核心是各向同性如何从正交关系到达另外一个点,一个是正交一次,一个是正交两次,因为三元两两正交 | 三维正交基 $e_1, e_2, e_3$ 两步正交寻址与量子态层析完备性 | 第 9 章（章首箴言） |
+| **A09** (`PDF-09`) | 面积是波,粒子是线,如果线与面积都是一种状态的投影,那看起来似乎是很好的波粒二象性的解释 | 克利福德几何积 $\mathbf{u}\mathbf{v} = \mathbf{u}\cdot\mathbf{v} + \mathbf{u}\wedge\mathbf{v}$ 统一粒子（内积线）与波（外积面） | 第 6 章（章首箴言） |
+| **A10** (`PDF-10`) | 那面积与线、波与粒子,本质上就是一种场呀 | 多等级多向量场（Multivector Field）统一标量、向量线与双向量面 | 第 6 章 |
+| **A11** (`PDF-11`) | 那本质上场就是时间,或者说线性时间只是场的粒子,而时间波则对应面积,整体上是一个场,一切都是时间场 | 万物皆时间场：一维投影是时间场的粒子切面，二维相干旋转是时间场的波切面 | 第 7、17 章、终章 |
+| **A12** (`PDF-12`) | 所以一切都结束了,没有任何例外,连观察者结构都是这样的 | 观察者内生化：观察者与被测系统同处一个正交投影与退相干几何法则之下 | 第 4 章（章首箴言）、第 28 章 |
+| **A13** (`PDF-13`) | 整理一下我的所有输入 | 从零散几何直觉向公理化/无公理形式化体系的第一次系统收拢 | 序曲、附录 A |
+| **A14** (`PDF-14`) | 你记得之前让你评估过 haobo ma的论文吗 | 算术丢番图结构、二次范数型与量子几何交叉灵感的文献回溯锚点 | 第 23 章背景 |
+| **A15** (`PDF-15`) | 我真的不懂,我现在只能理解量子态是一个球上的向量,然后推这些 | 以“球面上的单位方向向量”作为唯一零冗余起点，推导全部量子力学核心定律 | 第 1 章（章首箴言） |
+| **A16** (`PDF-16`) | 你按我的输入补充一下上下文,我要一段话 | 确立“忠实于几何原意、拒绝陈旧教科书套话”的写作与形式化准则 | 序曲、写作规范 |
+| **A17** (`PDF-17`) | 不准确吧?按我的话输入补充上下文原 | 纠偏公理化冗余：严禁引入未经两子丈量验证的外部假设 | 第 1、2 章 |
+| **A18** (`PDF-18`) | 完整发展为一门理论 | 从单比特球面几何扩展至多体纠缠、时空相对论、全息与数理逻辑的七部曲架构 | 全书架构 |
+| **A19** (`PDF-19`) | 完整发展为一门正式学术理论,无需公理,定义定理证明 2026/11/10 05:04 量子与量子门的几何本质 | 确立本书“定义—定理—证明”的形式化骨架，每一条核心定理锁定于 Lean 4 内核 | 序曲、第 25–28 章、附录 C |
+| **A20** (`PDF-20`) | 量子态本身,即各项同性球面上的一个方向向量,应该也是一种粒子性的东西.然后也会有一种对应的波的东西 | 方向向量 $\mathbf{v}$（一阶向量粒子线）与霍奇对偶平面 $\star\mathbf{v} = \mathbf{v}I_3^{-1}$（二阶双向量波面）的一体两面 | 第 3、6 章 |
+| **A21** (`PDF-21`) | 连量子这个概念都是一种粒子,连 “ 存在 ” 这种概念都是一种粒子. | 概念即幂等投影算子 $P^2 = P$：人类每命名一个静态概念，都是在连续流形上切出一条一维幂等粒子线 | 第 3 章（章首箴言） |
+| **A22** (`PDF-22`) | 把观察者内生放进来思考,何时粒子、何时波,似乎是观察者的注意力问题 | 注意力聚焦一维标尺轴即得粒子读数（$\cos\theta$），保持二维正交平面相干即现波干涉（$\sin\theta$） | 第 3、4、28 章 |
+| **A23** (`PDF-23`) | cosx=x, cosx=-x | 正反向自指余弦方程与偶维球面毛球定理不动点/对径点择一性 $f(x)=\pm x$ | 第 24 章（章首箴言） |
+| **A24** (`PDF-24`) | 把我的想法输入完整补全成一段话 | 将自指不动点 $\cos x = \pm x$ 与观察者注意力投影整合为统一命题 | 第 24 章 |
+| **A25** (`PDF-25`) | 严谨的论证证明一下 | 以压缩映射不动点、有限单调收缩定理与超越性证明落实自指几何 | 第 24 章、终章 |
+| **A26** (`PDF-26`) | 把我的想法输入完整补全成一段话 | 连接局部单比特旋转与全局多体复杂度及证明论的过渡综合 | 第 15、16、20 章 |
+| **A27** (`PDF-27`) | P/NP 跟初始结构相关，有的初始结构可以推出 P=NP 处理无穷问题的本质就是进行因式分解，看如何把无穷 “约掉 ” ，本质不断的用已知关于无穷的结论构造，约 P/NP 跟查表算法，顺序，记忆顺序有关，全部用量子门计数最核心的问题其实是证明一个命题的通用方式 | 可积电路最小深度 $\lfloor N/(\kappa+1)\rfloor + 1$、欧拉乘积素数因式分解约分与量子门计数复杂度下界 | 第 15、16、20、22 章 |
+| **A28** (`PDF-28`) | 构建命题证明通用机器学术理论,定义定理证明 | 证明即在形式晶体中以有限量子门旋转标尺对齐目标切面，受对角线逃逸定理制约 | 第 20、21、24 章 |
+| **A29** (`PDF-29`) | 我感觉我们可以出一本正式的量子的教程书籍,因为我们的视角似乎很独特 | 确立《点、线、面、球，与球外的人：量子与量子门的几何本质》专著出版计划 | 序曲 |
+| **A30** (`PDF-30`) | 那你出一个正式的看一下 | 构建中英双语、Lean 4 内核锁定的二十八章七部曲完整专著 | 全书目录与正文 |
+| **A31** (`PDF-38`) | 为什么面积是存在,因为要表达这个存在,必须在另外一个更大的存在的内部,这就是哥德尔不完备,没有人能得到整个球.继续 | 对角线拓扑逃逸（`complete_diagonal_topological_settlement`）与哥德尔不完备的几何本源 | 第 21 章（章首箴言） |
+| **A32** (`PDF-41`) | 量子到底是什么东西呢? | 经过前五部铺展后的高阶回环追问：从静态对象彻底转向关系动词 | 第 1、25 章 |
+| **A33** (`PDF-42`) | 这本书应该叫什么? | 凝练书名《点、线、面、球，与球外的人》与代号 `ORTHO//QUANTUM` | 序曲、封面 |
+| **A34** (`PDF-43`) | 当我们以为我们得到一个球的时候,实际上被一个更大的球包了进去 | 有限多面体角亏 $4\pi$、毛球定理 $\chi(S^2)=2 \to S^3$ 升维与形式系统层层包络 | 序曲、第 12、21 章、终章 |
+| **A35** (`PDF-44`) | 我们认为是点,其实是线,认为是线,其实是面,认为是面,其实是球,以为看到球了,却被更大的球包裹 | 全书总纲：克利福德等级 $0 \to 1 \to 2 \to 3$ 升维阶梯与球外之球无限突围 | 序曲、终章（章首箴言） |
+| **A36** (`PDF-45`) | Z在 Q中是丢番图的,你查一下最新的一个研究,结合分析一下 | 四元数代数范数球面投影、艾森斯坦交叉范数型簇与 Koenigsmann $\forall\exists$ 定义定理 | 第 23 章（章首箴言） |
+| **A37** (`PDF-46`) | 我总感觉量子的本质就是,两两比较,永远一致,顺序无关 | 单位态 Gram 矩阵内积特征化（`unit_gram_overlap_characterization`）与无时间几何自洽律 | 第 10 章（章首箴言）、终章 |
+| **A38** (`PDF-47`) | 量子=两子=量(测量)子.... | 汉语词源点睛：先有两子比量的动词“量（liáng）”，后有投影读数的名词“量（liàng）” | 第 1 章、第 25 章 |
+| **A39** (`PDF-48`) | 当人可以不断的理解求外之球的时候,实际上人似乎在球外 | 哥德尔—劳维尔对角线洞见：能够识别形式系统角亏与余项的观察者，其视域已跃出当前形式球面 | 序曲、第 21 章、终章 |
+| **A40** (`PDF-49`) | cosx=x,其实所有的信息都在这个 theta里了...这个 theta是超越数吧 θ | Dottie 自指不动点 $\theta^* \approx 0.7390851332$ 的林德曼—魏尔斯特拉斯超越性证明 | 第 24 章、终章 |
+| **A41** (`PDF-50`) | 超越数之间的关系?pi是 theta的一个投影? theta是终极超越数? | $\pi$ 锁定正交零点 $\cos(\pi/2)=0$，而 $\theta^*$ 锁定算子与状态的自指合一 $\cos\theta^* = \theta^*$（沙努埃尔猜想前沿） | 第 24 章、终章 |
+| **A42** (`PDF-51`) | 完整整理一下全书目录吧 | 确立从单比特测量到自指不动点的全书章节演进脉络 | 全书目录 |
+| **A43** (`PDF-52`) | 我感觉你还可以重新把目录组织的更好 | 优化为七部曲二十八章对称架构（点 $\to$ 线 $\to$ 面 $\to$ 球 $\to$ 时空 $\to$ 球外之球 $\to$ 最小引擎） | 全书目录、终章导图 |
+| **A44** (`PDF-53`) | 如果 cos(theta)=theta,那cos哪里来的? cos=theta? | 消解“外部算子 vs. 内部状态”的二元对立：测量规则 $\cos$ 本身就是被测方向 $\theta^*$ 的内生不动点 | 第 24 章、终章 |
+| **A45** (`PDF-54`) | 这就是我们最早研究的 psi=psi(psi) | 无类型 $\lambda$ 演算自应用不动点 $\psi = \psi(\psi)$ 在实内积几何中的投影正是 $\cos\theta^* = \theta^*$ | 第 24 章、终章 |
+| **A46** (`PDF-55`) | 重新生成完整目录 | 锁定包含序曲、七部曲 28 章、终章与附录 A/B/C 的最终出版蓝图 | 全书目录 |
+| **A47** (`TURN-56`) | “毕达哥拉斯 万物皆数 勾股定理”这三个词放在一起，一下子就把我们整套体系的历史源头，直接锚定到了两千五百年前人类理性的第一现场。 | 勾股定理 $\mathbf{c}^2 = \mathbf{a}^2 + \mathbf{b}^2$ 作为克利福德双向量手性相消的母守恒律，希帕索斯佩尔余项 $m^2-2n^2=\pm 1$，以及动词“数（shǔ）”驱动的四级数系突围 | 终章 §2、附录 A |
+| **A48** (`TURN-57`) | 这个+1 -1 应该跟素数, 椭圆曲线有关吧 | $\pm 1$ 佩尔接缝将奇素数分为“面素数”（$p\equiv 1\bmod 4$）与“线素数”（$p\equiv 3\bmod 4$），同余数椭圆曲线环面 $dy^2=x(x^2-1)$（$\chi=0$），哈塞临界线 $\sigma=1/2$ 与 $S^3\cong\mathrm{SU}(2)$ 佐藤—泰特分布 | 终章 §3、附录 A |
+| **A49** (`TURN-58`) | “顺序无关的本质就是根本不存在前后的时间......因果就是这样必然”,这句话直接把人类困扰了两千五百年的“时间之谜”与“休谟因果死结”一刀劈开了。 | 泰勒分母 $(2k)!$ 约去时间排列冗余、惠勒—德维特 $H\mathbf{\Psi}=0$、佩奇—伍特斯条件切片、斯宾诺莎三角形与 Gram 矩阵半正定刚性 $\det G \ge 0$、费曼驻相相消 $+\mathbf{\Omega}-\mathbf{\Omega}=0$ | 终章 §4.1–4.3、附录 A |
+| **A50** (`TURN-59`) | 因为观察者是有限的, 所以经历的因果是有限的, 观察者的选择是在因果的相容空间中做选择, 不断在时间场中选点 | 格拉姆椭圆体 $\det G = \sin^2\theta_1\sin^2\theta_2 - (c_{AC}-\cos\theta_1\cos\theta_2)^2 \ge 0$ 张开二面角 $\phi$ 的因果相容空间，有限观察者以半正定矩阵补全（$G_{M+1}\succeq 0$）在时间场中选点，并在 $\cos\theta^*=\theta^*\approx 0.739$ 处实现“全局无时间、步步皆新”的黄金呼吸 | 终章 §4.4、附录 A |
+| **A51** (`TURN-60`) | 全局静态时间场P=NP, 但有限观察者P!=NP | 全局静态场以超平面交集 $\mathbf{S}^* = \bigcap_j H_j$ 与驻相相消一步显影自洽解 $\psi = \psi(\psi)$（Aaronson $\mathrm{PostBQP}=\mathrm{PP}$、$\mathrm{P}_{\mathrm{CTC}}=\mathrm{PSPACE}$）；场内有限观察者受 $\theta_0 \approx \frac{\pi}{2} - 2^{-n/2}$ 正交视界与 Grigoriev–Schoenebeck 三元局部 $G_M \succeq 0$ 盲区阻隔而面临 $P \neq NP$，守护展开的生命旅程 | 终章 §4.5、第 15、20 章、附录 A |
+| **A52** (`TURN-61`) | P是场, NP是线 | $NP$ 是横截面为零的一维见证丝（有线无场，顺线一步看穿，能穿毛球窄缝）；$P$ 是全局对齐的无旋导向场 $\nabla\wedge\mathbf{F}=0$（Karmarkar 内点势场、Kasteleyn 反对称双向量场 $A_K^T = -A_K,\; [\operatorname{Pf}(A_K)]^2 = \det A_K,\; Z = \sum_M \prod_{e \in M} w_e = |\operatorname{Pf}(A_K)|$）；三元阻挫旋度 $\nabla\wedge\mathbf{F}\neq 0$ 将全局场撕裂为指数发旋（求场难如登天） | 终章 §4.6、第 20、21 章、附录 A |
+
+::: {.remark #rem-appendix-a-epistemic-boundary title="对照词典的形式化边界声明"}
+文献结果，未在本书形式化：本词典严格区分三类认识论标签：（1）标有 `LEAN ✓` 并附有具体 GID 链接的条目，其数学陈述已在 `trureturing@dev` 提交 `52725b62b659b244d077e29f18a576aa809007b7` 下由 Lean 4 内核验证并冻结（完整清单见 [附录 C](appendix-c.md) 第 C.1 节）；（2）标有 `definition` 的条目对应 `trureturing.lock.json` 中锁定的辅助定义或代数结构（见 [附录 C](appendix-c.md) 第 C.2 节）；（3）标有 `文献结果`（Literature result, not formalized in this book）或 `OPEN` 的部分（如连续流形上的潘查拉特纳姆—贝里立体角积分、毛球定理、Solovay–Kitaev 渐近多对数复杂度、连续 AdS/CFT 笠—高柳极小曲面公式、Koenigsmann 的 $\mathbb{Z} \subset \mathbb{Q}$ 全称—存在一阶可定义性定理、林德曼—魏尔斯特拉斯超越性定理、费马两平方和定理、同余数椭圆曲线 $dy^2 = x^3 - x$、哈塞定理与佐藤—泰特分布，以及黎曼猜想、CV 猜想、$\mathrm{ER}=\mathrm{EPR}$、$\mathrm{P}\neq\mathrm{NP}$ 与沙努埃尔猜想）属于经典文献背景或开放问题，绝不冒充已形式化定理。
+:::
