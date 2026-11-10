@@ -1,133 +1,88 @@
-# trureturing-books-template
+# trureturing 书库 · trureturing Books
 
-**出版“每一条定理都经 Lean 内核验证”的专著。** 一个仓库容纳多本书、多种语言（默认中文与英文），一次编写，导出为在线 HTML、PDF（深色屏幕版 / 白底印刷版）与 Apple Books 兼容的 EPUB，配交互可视化、视频与演示文稿，经 GitHub Pages 与 Release 自动发布。
+**每一条定理都经 Lean 内核验证的双语形式化专著与教材书库。**  
+*Bilingual formal monographs and self-contained textbooks in which every theorem is kernel-verified in Lean.*
 
-*Publish monographs in which every theorem is kernel-verified in Lean. Multiple books, multiple languages (Chinese and English by default), one source exported to HTML, PDF (screen and print) and EPUB for Apple Books, with interactive visualizations, films and slides, published automatically to GitHub Pages and Releases.*
+本书库中的每一部专著均遵循“书负责解释，Lean 负责成立”的分工契约：所有正式的 `theorem`、`lemma`、`proposition` 与 `corollary` 均按全局标识符（GID）绑定至 [trureturing](https://github.com/the-omega-institute/trureturing)（`dev` 分支，精确提交锁定于 [trureturing.lock.json](trureturing.lock.json)）中已经 Lean 4 内核验证并冻结的声明。同一份中英双语源码同步导出为在线 HTML（构建期 KaTeX 排版与源码永久链接）、PDF（深色屏幕版与白底印刷版）及兼容 Apple Books 的 EPUB 3。
 
-| 组成 | 方案 |
-| --- | --- |
-| 形式化验证 | [trureturing](https://github.com/the-omega-institute/trureturing)：Lean 代码写在那里；书按 GID 引用其已冻结的声明，提交钉在 `trureturing.lock.json` |
-| 在线阅读 | [trureturing-mdbook](https://github.com/the-omega-institute/trureturing-mdbook) 的 mdBook 方案（KaTeX 构建期渲染、永久链接） |
-| 交互可视化 | [trureturing-visualize](https://github.com/the-omega-institute/trureturing-visualize) 方案（纯 HTML/CSS/JS、双语、理论接口抽屉） |
-| 视频 | [trureturing-film](https://github.com/the-omega-institute/trureturing-film) 方案（确定性 Canvas、TTS 旁白、双语字幕） |
-| 演示文稿 | [chrono-company-slides](https://github.com/ChronoAIProject/chrono-company-slides) 方案（Slidev、中英逐页对应、PDF 导出） |
-| PDF / EPUB | Pandoc → Typst；Pandoc EPUB 3 + MathML |
-| 视觉 | trureturing 赛博朋克风，配色唯一来源 `theme/tokens.json` |
+Every formal `theorem`, `lemma`, `proposition`, and `corollary` in this library cites a declaration verified by the Lean 4 kernel and frozen on the `dev` branch of [trureturing](https://github.com/the-omega-institute/trureturing), pinned in [trureturing.lock.json](trureturing.lock.json). A single aligned Chinese and English source builds cleanly into online HTML, screen and print PDFs, and MathML-enabled EPUB 3.
 
-## 承诺与检查
+---
 
-书中的 `theorem / lemma / proposition / corollary` 必须写成：
+## 在编专著 · Featured Monograph
 
-```markdown
-::: {.theorem #thm-deficit-three-valued title="亏量只取三个值" lean="D5/S1/Deficit/DeficitThreeValued.deficit_three_valued"}
-对所有自然数 $v_1, v_2$，$c(v_1, v_2) \in \{-1, 0, 1\}$。
-:::
-```
+### 《量子计算的几何直觉：从两子丈量、球外之球到 $\psi = \psi(\psi)$》
+***Geometric Intuition of Quantum Computing: From Pairwise Measurement and Spheres Beyond Spheres to $\psi = \psi(\psi)$***
 
-`./tbook check` 在所钉的 trureturing 提交上读取 `Golden/Frozen/state/<module>.lean.json`——trureturing 冻结律下“已被内核验证并冻结”的唯一判据——确认该声明存在且是 `theorem`；缺少 Lean 引用的定理、引用了 Lean 的开放问题、过期或被手改的锁文件、中英版本不一致，都会让 CI 失败。`lean-verify` 工作流再生成一个依赖所钉 trureturing 的 Lake 工程，逐条检查公理闭包。详见 [docs/VERIFICATION.md](docs/VERIFICATION.md)。
+- **作者 / Author**：Auric
+- **代号 / Code**：`ORTHO//QUANTUM`
+- **路径 / Path**：[books/quantum-geometry/](books/quantum-geometry/book.toml)（中文权威版 `zh/` · 英文版 `en/`）
+- **文本许可 / Text License**：`CC-BY-4.0`
 
-渲染后，每个定理框带绿色 `LEAN ✓` 徽章与指向所钉提交上 Lean 源（含行号）的链接，书末自动生成“形式化验证账本”；锁文件不能确认的形式结论显示红色 `UNVERIFIED`，徽章不是链接，锁文件没有的声明也不给链接（`./tbook check` 会报错，不能发布）。
+本书将直观的物理机制推演、概念谱系批判与机器形式化证明熔于一炉，沿着**“点 $\to$ 线 $\to$ 面 $\to$ 球 $\to$ 多球共振 $\to$ 时空之球 $\to$ 球外之球与机械法典”**的七部二十八章正交阶梯推进：
 
-## 快速开始
+| 部次 / Part | 主题 / Theme | 章节范围 / Chapters |
+| :--- | :--- | :--- |
+| **序曲 / Prelude** | 点、线、面、球，与球外的人（四重维度盲区与自指收束） | `README.md` |
+| **第一部 / Part I** | 破妄·从点到线：两子丈量与零冗余投影 | 第 1–4 章（已发布：两子丈量、无第 3 点玻恩迹配对、幂等存在线与霍奇对偶、环境偏迹退相干与噪声几何收缩） |
+| **第二部 / Part II** | 展翼·从线到面：正交分叉、量子门与时间二象性 | 第 5–8 章 |
+| **第三部 / Part III** | 合拢·从面到球：三元正交、全局相容与注意力计算 | 第 9–12 章 |
+| **第四部 / Part IV** | 交织·多球共振：量子纠缠、容错编码与算法大一统 | 第 13–16 章 |
+| **第五部 / Part V** | 显影·时空之球：相对论度规、规范力场与全息引力 | 第 17–20 章 |
+| **第六部 / Part VI** | 越界·球外之球：哥德尔逃逸、算术频谱与 $\psi = \psi(\psi)$ | 第 21–24 章 |
+| **第七部 / Part VII** | 铸剑·机械法典：零矩阵几何引擎与形式化证明库 | 第 25–28 章、终跋与附录 A–C |
 
-1. 在 GitHub 上点 **Use this template** 新建书库并克隆。
-2. 安装工具链：
+本书库的文风规范、中英受控术语表与三层认识论诚实契约详见 [PROJECT.md](PROJECT.md)。
 
-   ```bash
-   python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-   ```
+---
 
-   ```bash
-   npm ci
-   ```
+## 形式化验证契约 · Verification Contract
 
-   ```bash
-   cargo install mdbook --version 0.5.4 --locked
-   ```
+1. **Lean 内核验证定理（绿色 `LEAN ✓`）**：凡使用 `theorem`、`lemma`、`proposition`、`corollary` 环境的条目，均通过 `lean="<GID>"` 指向 `trureturing@dev` 所钉提交中状态片 `Golden/Frozen/state/<module>.lean.json` 已冻结为 `theorem` 的声明，书末自动生成带源码行号链接的形式化验证账本（[trureturing.lock.json](trureturing.lock.json) 同时解析 `definition` 环境与行内代码链接所引用的 Lean `def`/`inductive` 声明以生成源码链接，但仅有 `theorem` 类声明驱动正式定理盒并获授绿色 `LEAN ✓` 徽章 / *[trureturing.lock.json](trureturing.lock.json) also resolves referenced Lean `def`/`inductive` declarations for `definition` blocks and inline code links, while only `theorem`-kind declarations power formal theorem boxes and receive the green `LEAN ✓` badge*）。
+2. **经典文献结果（常规边框 `remark` / `example`）**：数学物理文献中已有严格证明、但尚未在本书所钉仓库形式化的背景定理（如 Gleason 定理、Busch 定理、Stinespring 扩张定理、Lindemann–Weierstrass 定理），统一置于 `remark` 或 `example` 环境中，并显式标明“文献结果，未在本书形式化” / *Literature result, not formalized in this book*。
+3. **开放问题与猜想（红色 `OPEN`）**：尚未解决的猜想与开放问题统一使用 `conjecture` 或 `problem` 环境，绝不附加 Lean 引用。
 
-   ```bash
-   ./tbook doctor
-   ```
+校验模型与流水线细节见 [docs/VERIFICATION.md](docs/VERIFICATION.md)，写作语法规范见 [docs/AUTHORING.md](docs/AUTHORING.md)，仓库架构见 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)。
 
-3. 修改 `site.toml`（站点标题、语言），并在 `[books]` 中隐藏模板附带的示例书：
+---
 
-   ```toml
-   [books]
-   order = ["my-book"]
-   hide = ["example-*"]
-   ```
+## 本地校验与构建 · Local Verification & Build
 
-   示例书留在 `books/example-*/` 供参考，但检查、构建、站点与发版都当它不存在。不要删除它：以后用 git 合并模板改动时，被删除而模板又改过的示例书会冲突（[docs/UPGRADING.md](docs/UPGRADING.md) §6）。然后新建一本书：
-
-   ```bash
-   ./tbook new-book my-book --title zh="我的书" --title en="My Book"
-   ```
-
-4. 写作（见 [docs/AUTHORING.md](docs/AUTHORING.md)），引用新的 Lean 声明后：
-
-   ```bash
-   ./tbook pin --refresh
-   ```
-
-   ```bash
-   ./tbook check
-   ```
-
-5. 构建与预览：
-
-   ```bash
-   ./tbook build all && ./tbook serve
-   ```
-
-6. 在 GitHub：Settings → Pages → Source 选 **GitHub Actions**。推送到 `main` 即构建（含视频）并部署；打 tag `<slug>-v<version>` 并推送即发布 Release（PDF、EPUB、幻灯片 PDF 与构建缓存；tag 的原理与步骤见 [docs/PUBLISHING.md](docs/PUBLISHING.md) §6）。输入未变的产物不再重建：CI 从 Actions 缓存或最近的已发布 Release 恢复，PR 运行只从 Release 恢复；本地构建设置 `TBOOK_CACHE_REMOTE=1` 时也从 Release 恢复（[docs/PUBLISHING.md](docs/PUBLISHING.md) §5）。
-
-## 目录
-
-```
-site.toml  trureturing.lock.json  template.toml
-books/<slug>/{book.toml, zh/, en/, assets/, viz/, films/, slides/}
-theme/   tools/   templates/   skills/   docs/   .github/workflows/
-```
-
-完整说明见 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)。
-
-## 命令
-
-| 命令 | 作用 |
-| --- | --- |
-| `./tbook doctor` | 工具链体检 |
-| `./tbook check` | 结构、多语言对齐、Lean 引用 |
-| `./tbook pin [<sha>\|<branch>\|<tag>\|--refresh]` | 钉 trureturing 提交（须在 `site.toml` 的分支上），解析引用 |
-| `./tbook new-book` / `new-chapter` | 新书、新章节 |
-| `./tbook books [--hidden]` | 列出书库中的书（`site.toml` 的 `[books] hide` 隐藏的书不算；`--hidden` 列出它们） |
-| `./tbook build [html\|pdf\|epub\|slides\|viz\|films\|site\|all]` | 构建（输入未变的单元从缓存恢复） |
-| `./tbook cache status\|key\|prune\|export` | 构建缓存：输入未变的单元不再构建；各单元状态、存储内容摘要（Actions 缓存键的内容部分）、清理旧条目、导出 Release 附件 |
-| `./tbook serve` | 本地预览站点 |
-| `./tbook viz\|slides\|film new …` | 新建可视化、演示文稿、视频 |
-| `./tbook lean-project` | 生成深度验证 Lake 工程 |
-| `./tbook template status\|update` | 模板版本与升级 |
-
-## Agent 与 skills
-
-`CLAUDE.md`（`AGENTS.md` 指向它）是 agent 工作守则；`skills/`（`.claude/skills` 指向它）内置写作、形式化往返、钉版、可视化、视频、演示文稿、导出、发版与模板升级等 skills。`skills/template-update` 负责把书库升级到模板新版本，以及把改进（包括 skills 自身的修订）回馈模板。
-
-## 升级模板
+### 1. 环境准备 · Toolchain Setup
 
 ```bash
-./tbook template update
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+npm ci
+cargo install mdbook --version 0.5.4 --locked
+./tbook doctor
 ```
 
-模板托管的文件（工具、主题、工作流、skills、文档）会被同步，书的内容与配置永不被覆盖；本地改过的托管文件会以 `.template-new` 标出冲突。`template-sync` 工作流每周自动开升级 PR。详见 [docs/UPGRADING.md](docs/UPGRADING.md)。
+### 2. 常用命令 · Common Commands
 
-## 示例
+| 命令 / Command | 说明 / Purpose |
+| :--- | :--- |
+| `./tbook check` | 校验章节结构、中英双语逐项对齐、数学语法与所钉 Lean 冻结声明引用 |
+| `./tbook pin --refresh` | 在当前所钉 `trureturing` 提交上解析新增或变更的声明引用并更新锁文件 |
+| `./tbook build html pdf epub site` | 构建中英双语 HTML、屏幕版/印刷版 PDF、EPUB 3 与书库门户站点 |
+| `./tbook serve` | 本地启动预览服务器查看 `_site/` 构建产物 |
+| `./tbook books` | 列出当前公开书目（模板示例书已通过 [site.toml](site.toml) 的 `hide = ["example-*"]` 隐藏） |
+| `./tbook template status` | 检查上游发布模板版本与托管文件完整性 |
 
-模板附带两本示例书：
+---
 
-- `books/example-monograph/`《黄金整数与可观测性》：四章加一个附录，演示全部写法（各种定理环境、多个 Lean 引用、开放问题与猜想、交叉引用、表格、图、脚注、定义列表、引文）以及书内可视化、视频与演示文稿。内容从 Zeckendorf 进位亏量只取三个值出发，经有限证书与反驳、细化与记忆、黄金词，到齐肯多夫表示与进位的附录。
-- `books/example-primer/`《斐波那契与卢卡斯：一本可验证的入门小书》：两章的入门小书，没有媒体，演示一本书最少需要什么。
+## 仓库目录结构 · Repository Layout
 
-模板附带的示例书都以 `example-` 开头；书库用 `site.toml` 的 `[books] hide = ["example-*"]` 隐藏它们（见快速开始第 3 步）。
+```text
+site.toml                  站点与书目配置（下游所有）
+PROJECT.md                 书库写作规范、受控术语表与诚实标注契约（下游所有）
+trureturing.lock.json      所钉 trureturing 提交与已解析形式化声明账本（由 ./tbook pin 生成）
+books/quantum-geometry/    《量子计算的几何直觉》双语源码（book.toml, zh/, en/, assets/）
+theme/  tools/  docs/      上游模板托管的赛博朋克主题、构建工具链与技术契约文档
+```
 
-## 许可
+---
 
-模板代码以 Apache-2.0 发布（见 `LICENSE`）。每本书的文本许可在其 `book.toml` 中声明（示例书为 CC-BY-4.0）。
+## 许可协议 · License
+
+- 书库构建框架与工具代码采用 `Apache-2.0` 许可协议发布（见 [LICENSE](LICENSE)）。
+- 专著《量子计算的几何直觉 / *Geometric Intuition of Quantum Computing*》文本与插图由作者 Auric 按 `CC-BY-4.0`（Creative Commons Attribution 4.0 International）许可协议发布（声明于 [books/quantum-geometry/book.toml](books/quantum-geometry/book.toml)）。

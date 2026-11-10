@@ -1,0 +1,31 @@
+# 《量子计算的几何直觉》书籍元数据
+[book]
+version = "0.1.0"
+authors = ["Auric"]
+license = "CC-BY-4.0"
+editions = ["zh", "en"]
+code = "ORTHO//QUANTUM"
+date = "2026-11-10"
+
+[book.title]
+zh = "量子计算的几何直觉"
+en = "Geometric Intuition of Quantum Computing"
+
+[book.subtitle]
+zh = "从两子丈量、球外之球到 ψ = ψ(ψ)"
+en = "From Pairwise Measurement and Spheres Beyond Spheres to ψ = ψ(ψ)"
+
+[book.description]
+zh = "一部将物理直觉、哲学谱系批判与机器形式化证明熔于一炉的双语专著与教材。全书沿“点 → 线 → 面 → 球 → 多球交织 → 时空之球 → 球外之球”的七部二十八章正交阶梯推进：从废除外部第 3 点 C 的两子丈量与玻恩内积投影出发，经由幂等存在线、退相干截短弦、双矢量量子门与三元正交寻址，贯通量子纠缠、容错计算、相对论时空、数论频谱与自指不动点 ψ = ψ(ψ)。书中每一条正式定理、引理、命题与推论均经 trureturing 仓库中的 Lean 4 内核验证并冻结。"
+en = "A bilingual monograph and self-contained textbook uniting physical intuition, genealogical critique, and machine-checked proof. Advancing along a seven-part, twenty-eight-chapter orthogonal ladder — Point, Line, Plane, Sphere, Entangled Spheres, Spacetime Sphere, and Spheres Beyond Spheres — the book reconstructs quantum measurement, Born's rule, decoherence, bivector gates, entanglement, fault-tolerant algorithms, relativistic geometry, arithmetic spectra, and the self-referential fixed point ψ = ψ(ψ) from zero-redundancy pairwise geometry. Every formal theorem, lemma, proposition, and corollary is kernel-verified and frozen in Lean 4 within trureturing."
+
+[outputs]
+html = true
+pdf = ["screen", "print"]
+epub = true
+
+[pdf]
+paper = "a4"
+
+[epub]
+embed_fonts = false
