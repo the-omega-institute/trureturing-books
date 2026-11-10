@@ -202,6 +202,8 @@ $$
 
 结论 4 的指数 $bc - ad$ 是两个下标对 $(a, b)$ 与 $(c, d)$ 的**辛配对**：交换两对下标它变号，与自己配对为零。由结论 3 可以读出对易判据（手工推导，未在本书形式化；Lean 模块本身不陈述这一推论）：$D(c, d)\,D(a, b)$ 可逆，所以 $D(a, b)$ 与 $D(c, d)$ 对易当且仅当 $\omega^{\,bc - ad} = 1$，即 $bc - ad \equiv 0 \pmod M$。
 
+多个 $M$ 能级系统并排时的乘法律已在[第十四章](ch14-cloning-codes-and-braids.md) [@lemma-pauli-word-phase] 中引用：那里的交叉相位指数 $\sum_n a.z_n \cdot b.x_n$，就是本定理结论 1 的指数 $bc$ 逐个系统求和。
+
 ::: {.example #ex-pauli-words-xor-sign-table title="M = 2：四个泡利词的乘法表，逐项对照“异或加符号”"}
 取 $M = 2$。此时 $\omega = -1$，由 [@def-weyl-displacement-word]：
 
@@ -360,7 +362,7 @@ class GeometricState:
 **文献结果，未在本书形式化。** 关于实克利福德代数 $\mathcal{Cl}_{p,q}(\mathbb{R})$ 的矩阵同构分类及多比特泡利群的二元辛表示，其经典文献归属与本书冻结定理的职责边界如下：
 
 1. **$\mathcal{Cl}_{3,0}(\mathbb{R}) \cong M_2(\mathbb{C})$ 与实克利福德代数分类**（参见 P. Lounesto, *Clifford Algebras and Spinors*, 2nd Ed., Cambridge University Press, 2001, Ch. 3 & Ch. 16；以及 H. B. Lawson & M.-L. Michelsohn, *Spin Geometry*, Princeton University Press, 1989, Ch. I）：三维欧氏实克利福德代数 $\mathcal{Cl}_{3,0}(\mathbb{R})$ 作为 8 维实结合代数同构于 $2\times 2$ 复矩阵代数 $M_2(\mathbb{C})$（其中心由 $\{1, I_3 = e_1 e_2 e_3\}$ 张成，同构于 $\mathbb{C}$），而其 4 维偶子代数 $\mathcal{Cl}^+_{3,0}(\mathbb{R})$ 同构于哈密顿四元数代数 $\mathbb{H}$。
-2. **多比特泡利群的二元辛向量空间表示与 Gottesman–Knill 定理**（参见 D. Gottesman, *Stabilizer Codes and Quantum Error Correction*, PhD thesis, Caltech, 1997, arXiv:quant-ph/9705052；以及 S. Aaronson & D. Gottesman, *Improved simulation of stabilizer circuits*, Phys. Rev. A **70**, 052328, 2004, DOI `10.1103/PhysRevA.70.052328`）：$n$ 比特泡利群模去中心相位后同构于二元域上的 $2n$ 维辛向量空间 $\mathbb{F}_2^{2n}$，群乘法化为按位异或（XOR），交换/反对易关系由辛内积决定。其中单个 $M$ 能级系统上位移词的合成相位与共轭相位（$M = 2$ 即单比特泡利词）已由 [@thm-weyl-displacement-laws] 验证；$n$ 比特的稳定子表、克利福德门对辛向量的作用与 Gottesman–Knill 模拟定理仍属文献结果。
+2. **多比特泡利群的二元辛向量空间表示与 Gottesman–Knill 定理**（参见 D. Gottesman, *Stabilizer Codes and Quantum Error Correction*, PhD thesis, Caltech, 1997, arXiv:quant-ph/9705052；以及 S. Aaronson & D. Gottesman, *Improved simulation of stabilizer circuits*, Phys. Rev. A **70**, 052328, 2004, DOI `10.1103/PhysRevA.70.052328`）：$n$ 比特泡利群模去中心相位后同构于二元域上的 $2n$ 维辛向量空间 $\mathbb{F}_2^{2n}$，群乘法化为按位异或（XOR），交换/反对易关系由辛内积决定。其中单个 $M$ 能级系统上位移词的合成相位与共轭相位（$M = 2$ 即单比特泡利词）已由 [@thm-weyl-displacement-laws] 验证，多模泡利字的乘法与交叉相位已由[第十四章](ch14-cloning-codes-and-braids.md) [@lemma-pauli-word-phase] 验证；“模去相位后同构于辛向量空间”的整体表述、稳定子表、克利福德门对辛向量的作用与 Gottesman–Knill 模拟定理仍属文献结果。
 3. **冻结定理的精确边界**：本章经 Lean 4 内核验证的五条定理分别是外尔位移词的合成、伴随、交换与共轭律（[@thm-weyl-displacement-laws]）、单比特外尔星恒等式（[@thm-qubit-weyl-star]）、单比特矩阵代数无特征标定理（[@lemma-qubit-no-character]）、泡利 $X, Z$ 无非零公共特征向量定理（[@prop-pauli-no-common-eigenvector]）以及无迹布洛赫算符 $2\times 2$ 矩阵展开核（[@cor-bloch-operator-core]）。正文中给出的 Python 3 `GeometricState` 3 比特刀片引擎用于展示 $\mathcal{Cl}_{3,0}(\mathbb{R})$ 的可执行计算构造，并不把 $\mathcal{Cl}_{3,0}(\mathbb{R}) \cong M_2(\mathbb{C})$ 的泛性质同构或一般 $n$ 比特 Gottesman–Knill 复杂性定理声明为本章的 Lean 冻结定理。
 :::
 
