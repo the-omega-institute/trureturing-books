@@ -28,7 +28,7 @@ $$
 Expanding $\operatorname{recordWeight}(P, \rho, k) = \Tr(\rho P_k)$ and using linearity of the matrix trace together with completeness $\sum_{k \in \kappa} P_k = I$ gives
 
 $$
-\sum_{k \in \kappa} \Tr(\rho P_k) = \Tr\!\Bigl(\rho \sum_{k \in \kappa} P_k\Bigr) = \Tr(\rho I) = \Tr(\rho).
+\sum_{k \in \kappa} \Tr(\rho P_k) = \Tr\Bigl(\rho \sum_{k \in \kappa} P_k\Bigr) = \Tr(\rho I) = \Tr(\rho).
 $$
 
 The full proof is checked by the Lean kernel.

@@ -30,7 +30,7 @@ $$
 Then the record weight of outcome $k$ reduces to the squared norm of the inner product (coerced to $\mathbb{C}$):
 
 $$
-\operatorname{recordWeight}(P, \rho, k) = \bigl(\norm{\operatorname{star}\phi \bullet_{\!v} \psi}^2 : \mathbb{R}\bigr).
+\operatorname{recordWeight}(P, \rho, k) = \bigl(\norm{\operatorname{star}\phi \bullet_{v} \psi}^2 : \mathbb{R}\bigr).
 $$
 :::
 
@@ -55,9 +55,9 @@ Tracing the nine rewrites inside `rw [...]` step by step:
 
 1. `recordWeight` and `bornProbability` unfold the left-hand side to $\Tr(\rho \cdot P_k)$;
 2. `hPureState` and `hProjection` substitute $\operatorname{vecMulVec}(\psi, \operatorname{star}\psi)$ and $\operatorname{vecMulVec}(\phi, \operatorname{star}\phi)$;
-3. `Matrix.vecMulVec_mul_vecMulVec` contracts the product of outer products into $(\operatorname{star}\psi \bullet_{\!v} \phi) \bullet \operatorname{vecMulVec}(\psi, \operatorname{star}\phi)$;
-4. `Matrix.trace_vecMulVec` and `dotProduct_smul` evaluate the trace of the outer product as $(\operatorname{star}\psi \bullet_{\!v} \phi) \bullet (\operatorname{star}\phi \bullet_{\!v} \psi)$;
-5. `dotProduct_comm psi (star phi)`, `Matrix.star_dotProduct`, and `smul_eq_mul` rewrite the first factor as the complex conjugate $\operatorname{star}(\operatorname{star}\phi \bullet_{\!v} \psi)$, producing $\overline{z} \cdot z$ for $z = \operatorname{star}\phi \bullet_{\!v} \psi$;
+3. `Matrix.vecMulVec_mul_vecMulVec` contracts the product of outer products into $(\operatorname{star}\psi \bullet_{v} \phi) \bullet \operatorname{vecMulVec}(\psi, \operatorname{star}\phi)$;
+4. `Matrix.trace_vecMulVec` and `dotProduct_smul` evaluate the trace of the outer product as $(\operatorname{star}\psi \bullet_{v} \phi) \bullet (\operatorname{star}\phi \bullet_{v} \psi)$;
+5. `dotProduct_comm psi (star phi)`, `Matrix.star_dotProduct`, and `smul_eq_mul` rewrite the first factor as the complex conjugate $\operatorname{star}(\operatorname{star}\phi \bullet_{v} \psi)$, producing $\overline{z} \cdot z$ for $z = \operatorname{star}\phi \bullet_{v} \psi$;
 6. Finally, `Complex.normSq_eq_conj_mul_self.symm` and `Complex.normSq_eq_norm_sq` fold $\overline{z} z$ into `((‖star phi ⬝ᵥ psi‖ ^ 2 : ℝ) : ℂ)`.
 
 The full proof is checked by the Lean kernel.
@@ -74,7 +74,7 @@ $$
 
 all three identities hold simultaneously:
 
-1. **Modulus-squared reduction**: $\operatorname{recordWeight}(P, \rho, k) = \bigl(\norm{\operatorname{star}\phi \bullet_{\!v} \psi}^2 : \mathbb{R}\bigr)$;
+1. **Modulus-squared reduction**: $\operatorname{recordWeight}(P, \rho, k) = \bigl(\norm{\operatorname{star}\phi \bullet_{v} \psi}^2 : \mathbb{R}\bigr)$;
 2. **Trace pairing identity**: $\operatorname{recordWeight}(P, \rho, k) = \Tr(\rho \cdot P_k)$;
 3. **Weighted conditional-state ensemble decomposition**:
    $$
@@ -160,7 +160,7 @@ Completing the audit table begun in [Chapter 27](ch27-reading-frozen-proofs-i.md
 
 | Chapter | Frozen GID | Source File & Line | `statement_id` Prefix | Exact Formal Scope & Contract |
 | :---------: | ---------------------------- | ---------------------------- | :------------------: | ----------------------------------------------------- |
-| Ch 2 / Ch 28 | [`D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction`](lean:D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction) | `D5/S3/Observer/BornReduction.lean:27` | `sha256:9d19ef37` | $\operatorname{recordWeight}(P,\rho,k)=\norm{\operatorname{star}\phi\bullet_{\!v}\psi}^2$ for rank-one $P_k$ and $\rho$ |
+| Ch 2 / Ch 28 | [`D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction`](lean:D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction) | `D5/S3/Observer/BornReduction.lean:27` | `sha256:9d19ef37` | $\operatorname{recordWeight}(P,\rho,k)=\norm{\operatorname{star}\phi\bullet_{v}\psi}^2$ for rank-one $P_k$ and $\rho$ |
 | Ch 2 / Ch 28 | [`D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight) | `D5/S3/Observer/Conditioning/RankOneBornPairingWeight.lean:36` | `sha256:3fd7a21e` | Three-conjunct bridge: modulus squared, trace pairing, and weighted ensemble sum |
 | Ch 3 / Ch 28 | [`D5/S3/Observer/Conditioning.conditionalState_isState`](lean:D5/S3/Observer/Conditioning.conditionalState_isState) | `D5/S3/Observer/Conditioning.lean:143` | `sha256:ed6f3095` | Nonzero weight $w_k \neq 0$ preserves `PosSemidef` and unit trace on `conditionalState` |
 | Ch 3 / Ch 28 | [`D5/S3/Observer/Conditioning.unreadState_fixed_iff`](lean:D5/S3/Observer/Conditioning.unreadState_fixed_iff) | `D5/S3/Observer/Conditioning.lean:108` | `sha256:ed6f3095` | $\operatorname{unreadState}(P,\rho)=\rho \iff \forall k\neq l,\; P_k\rho P_l = 0$ |
@@ -211,7 +211,7 @@ $$
 \rho = \operatorname{vecMulVec}(\psi, \operatorname{star}\psi) = \begin{pmatrix} 9/25 & -12i/25 \\ 12i/25 & 16/25 \end{pmatrix}.
 $$
 
-1. **Rank-one modulus-squared reduction ([@thm-audit-rank-one-born])**: Since $\operatorname{star}\phi_0 \bullet_{\!v} \psi = \frac{3}{5}$ and $\operatorname{star}\phi_1 \bullet_{\!v} \psi = \frac{4}{5}i$, the record weights are
+1. **Rank-one modulus-squared reduction ([@thm-audit-rank-one-born])**: Since $\operatorname{star}\phi_0 \bullet_{v} \psi = \frac{3}{5}$ and $\operatorname{star}\phi_1 \bullet_{v} \psi = \frac{4}{5}i$, the record weights are
    $$
    w_0 = \operatorname{recordWeight}(P, \rho, 0) = \Bigl|\frac{3}{5}\Bigr|^2 = \frac{9}{25} \neq 0, \qquad w_1 = \operatorname{recordWeight}(P, \rho, 1) = \Bigl|\frac{4}{5}i\Bigr|^2 = \frac{16}{25} \neq 0.
    $$

@@ -43,7 +43,7 @@ $$
 并定义退去相干项的经典对角关联混合态
 
 $$
-\mathrm{classicalCorrelatedDensity} = \frac{1}{2}\bigl(\lvert 00\rangle\langle 00\rvert + \lvert 11\rangle\langle 11\rvert\bigr) = \operatorname{diag}\!\Bigl(\frac{1}{2},\, 0,\, 0,\, \frac{1}{2}\Bigr).
+\mathrm{classicalCorrelatedDensity} = \frac{1}{2}\bigl(\lvert 00\rangle\langle 00\rvert + \lvert 11\rangle\langle 11\rvert\bigr) = \operatorname{diag}\Bigl(\frac{1}{2},\, 0,\, 0,\, \frac{1}{2}\Bigr).
 $$
 
 记消去第 2 个因子的偏迹为 $\mathrm{traceEnvironment}(\rho)_{i,j} = \sum_a \rho_{(i,a),(j,a)}$，消去第 1 个因子的偏迹为 $\mathrm{traceFirstFactor}(\rho)_{i,j} = \sum_a \rho_{(a,i),(a,j)}$。下面的定理将一般 $(m, n)$ 维数的正交扇区分解与双比特边缘盲区见证完整地合取在同一个形式化声明中。

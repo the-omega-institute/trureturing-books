@@ -131,7 +131,7 @@ $$
 Because $B_u^2 = -1$ and $\widetilde{B}_u = -B_u$ for each axis $u \in \{x, y, z\}$, the **elementary rotor** for a right-handed rotation by angle $\theta$ about axis $u$ is given by the half-angle formula (Panel II of Figure 26):
 
 $$
-R_u(\theta) = \exp\!\Bigl(-\frac{\theta}{2} B_u\Bigr) = \cos\frac{\theta}{2} - \sin\frac{\theta}{2}\,B_u \in \mathcal{Cl}^+_{3,0}(\mathbb{R}),
+R_u(\theta) = \exp\Bigl(-\frac{\theta}{2} B_u\Bigr) = \cos\frac{\theta}{2} - \sin\frac{\theta}{2}\,B_u \in \mathcal{Cl}^+_{3,0}(\mathbb{R}),
 $$
 
 with unit norm $R_u(\theta)\widetilde{R}_u(\theta) = \cos^2(\theta/2) + \sin^2(\theta/2) = 1$. Under the two-sided **sandwich product** $v \mapsto R_u(\theta)\,v\,\widetilde{R}_u(\theta)$, components $v_\parallel$ parallel to axis $u$ commute with $B_u$ and remain fixed, whereas components $v_\perp$ lying in the plane $B_u$ anticommute with $B_u$, combining the two half-angles into a full rotation $R_u(\theta)^2 v_\perp = (\cos\theta - \sin\theta\,B_u)v_\perp$.

@@ -178,7 +178,7 @@ $$
 in sharp contrast to a Euclidean bivector, which squares to $-1$ and generates circular rotations $\cos(\theta/2) - I\sin(\theta/2)$. Because $B^2 = +1$, exponentiating the half-rapidity bivector area $-\eta B/2$ produces a hyperbolic rotor:
 
 $$
-R(\eta) = \exp\!\left(-\frac{\eta}{2} B\right) = \cosh\frac{\eta}{2} - B\sinh\frac{\eta}{2}, \qquad R(\eta)^{-1} = \cosh\frac{\eta}{2} + B\sinh\frac{\eta}{2}.
+R(\eta) = \exp\left(-\frac{\eta}{2} B\right) = \cosh\frac{\eta}{2} - B\sinh\frac{\eta}{2}, \qquad R(\eta)^{-1} = \cosh\frac{\eta}{2} + B\sinh\frac{\eta}{2}.
 $$
 
 Under the convention that a boost acts on spacetime vectors $v = t e_0 + x e_1$ via the two-sided sandwich product $v \mapsto R(\eta)^{-1} v R(\eta)$, the basis vectors anticommute with the bivector $B = e_0 e_1$:

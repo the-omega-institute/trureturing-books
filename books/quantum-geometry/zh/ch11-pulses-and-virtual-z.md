@@ -104,7 +104,7 @@ $$
 一旦不同时刻的生成元彼此对易，时间演化算符就不需要复杂的戴森（Dyson）时间排序级数，而直接化为普通定积分的矩阵指数：
 
 $$
-U_{\mathrm{rot}}(T) = \exp\!\Bigl(-i\int_0^T H_{\mathrm{rot}}(t)\,dt\Bigr) = \exp\!\Bigl(-\frac{i}{2}\theta\bigl(\cos\varphi\, X + \sin\varphi\, Y\bigr)\Bigr) = R_\varphi(\theta),
+U_{\mathrm{rot}}(T) = \exp\Bigl(-i\int_0^T H_{\mathrm{rot}}(t)\,dt\Bigr) = \exp\Bigl(-\frac{i}{2}\theta\bigl(\cos\varphi\, X + \sin\varphi\, Y\bigr)\Bigr) = R_\varphi(\theta),
 $$
 
 其中决定布洛赫球面真实转角 $\theta$ 的唯一几何量，正是**拉比包络曲线下方的脉冲面积（pulse area）**：

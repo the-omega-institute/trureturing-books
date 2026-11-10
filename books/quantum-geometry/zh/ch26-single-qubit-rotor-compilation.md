@@ -133,7 +133,7 @@ $$
 请注意 $B_y = e_3 e_1 = -e_1 e_3$ 的符号：按照右手螺旋定则，从 $+z$ 轴（$e_3$）转向 $+x$ 轴（$e_1$）的有向面积元是 $e_3 \wedge e_1 = e_3 e_1 = -e_1 e_3$。由于每块单位双矢量都满足 $B_u^2 = -1$ 且 $\widetilde{B}_u = -B_u$（$u \in \{x, y, z\}$），绕 $u$ 轴右手旋转角度 $\theta$ 的**基本旋转器（elementary rotor）**由半角欧拉公式给出（图 26 中栏）：
 
 $$
-R_u(\theta) = \exp\!\Bigl(-\frac{\theta}{2} B_u\Bigr) = \cos\frac{\theta}{2} - \sin\frac{\theta}{2}\,B_u \in \mathcal{Cl}^+_{3,0}(\mathbb{R}).
+R_u(\theta) = \exp\Bigl(-\frac{\theta}{2} B_u\Bigr) = \cos\frac{\theta}{2} - \sin\frac{\theta}{2}\,B_u \in \mathcal{Cl}^+_{3,0}(\mathbb{R}).
 $$
 
 直接用[第二十五章](ch25-rewriting-and-xor.md)的逆序共轭 $\widetilde{R}_u(\theta) = \cos\frac{\theta}{2} + \sin\frac{\theta}{2}\,B_u$ 检验归一化：

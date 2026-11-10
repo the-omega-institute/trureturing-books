@@ -153,7 +153,7 @@ With this 3-bit encoding, the geometric product of any two basis blades $E_{\mat
    $$
 2. **Sign factor via bit-inversion parity**: Sorting the concatenated product $E_{\mathrm{left}} E_{\mathrm{right}}$ into canonical order $e_1 e_2 e_3$ requires moving each active bit $i \in \{0, 1, 2\}$ of $\mathrm{left}$ past every active bit $j < i$ of $\mathrm{right}$ (captured by the low-bit mask `(1 << i) - 1`). Each crossing flips the sign via $e_i e_j = -e_j e_i$ ($j < i$), giving `_blade_sign(left, right)`:
    $$
-   \operatorname{inv}(\mathrm{left}, \mathrm{right}) = \sum_{i=0}^{2} \bigl((\mathrm{left} \gg i)\,\&\,1\bigr)\cdot \operatorname{popcount}\!\bigl(\mathrm{right}\,\&\,(2^i - 1)\bigr), \qquad
+   \operatorname{inv}(\mathrm{left}, \mathrm{right}) = \sum_{i=0}^{2} \bigl((\mathrm{left} \gg i)\,\&\,1\bigr)\cdot \operatorname{popcount}\bigl(\mathrm{right}\,\&\,(2^i - 1)\bigr), \qquad
    \operatorname{sign}(\mathrm{left}, \mathrm{right}) = (-1)^{\operatorname{inv}(\mathrm{left}, \mathrm{right})}.
    $$
 

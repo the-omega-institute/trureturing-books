@@ -102,7 +102,7 @@ Inspect what happens whenever the drive phase $\varphi$ is held constant during 
   $$
 - Consequently, no Dyson time-ordering series is needed, and the time-evolution propagator integrates directly to
   $$
-  U_{\mathrm{rot}}(T) = \exp\!\Bigl(-i\int_0^T H_{\mathrm{rot}}(t)\,dt\Bigr) = \exp\!\Bigl(-\frac{i}{2}\theta\bigl(\cos\varphi\, X + \sin\varphi\, Y\bigr)\Bigr) = R_\varphi(\theta),
+  U_{\mathrm{rot}}(T) = \exp\Bigl(-i\int_0^T H_{\mathrm{rot}}(t)\,dt\Bigr) = \exp\Bigl(-\frac{i}{2}\theta\bigl(\cos\varphi\, X + \sin\varphi\, Y\bigr)\Bigr) = R_\varphi(\theta),
   $$
   where the rotation angle on the Bloch sphere is given by the **pulse area**:
   $$

@@ -109,7 +109,7 @@ $$
 
 现在我们转向两道在几何与观察者条件化中最具代表性的结构性定理（图 27 中栏与右栏）。
 
-第一道来自 `D5/S3/Quantum/Foundation/RayPhaseRigidity.lean:97`。在量子基础中，如果一个幺正算符 $A \in U(\iota, \mathbb{C})$ 把所有坐标基向量 $\vv{e}_i = \operatorname{Pi.single}\,i\,1$ 都留在各自的复射线上（`PreservesRay A x` 定义为 $A *_{\!v} x \in \operatorname{Submodule.span}\,\mathbb{C}\,\{x\}$），那么 $A$ 必然是对角矩阵；但怎样保证所有对角元 $A_{ii}$ 都等于**同一个**单位模长全局相位 $c \in \mathbb{C}$（$\norm{c} = 1$，$A = c \bullet I$）？
+第一道来自 `D5/S3/Quantum/Foundation/RayPhaseRigidity.lean:97`。在量子基础中，如果一个幺正算符 $A \in U(\iota, \mathbb{C})$ 把所有坐标基向量 $\vv{e}_i = \operatorname{Pi.single}\,i\,1$ 都留在各自的复射线上（`PreservesRay A x` 定义为 $A *_{v} x \in \operatorname{Submodule.span}\,\mathbb{C}\,\{x\}$），那么 $A$ 必然是对角矩阵；但怎样保证所有对角元 $A_{ii}$ 都等于**同一个**单位模长全局相位 $c \in \mathbb{C}$（$\norm{c} = 1$，$A = c \bullet I$）？
 
 很多非形式化文献粗糙地要求“提供一根所有分量全不为零的满支撑测试态”，但真实物理耦合图往往是稀疏的！`RayPhaseRigidity.lean` 给出了一个远为精炼的图论充分条件——**支撑连通性（`RaySupportConnected tests`）**：只要测试态集合 `tests` 中两两同时非零的坐标对 $(i, j)$（即 $\exists x \in \mathrm{tests},\; x_i \neq 0 \land x_j \neq 0$）生成的自反传递闭包 `Relation.ReflTransGen` 连通了所有坐标，哪怕没有任何一根测试态具有满支撑，幺正矩阵 $A$ 也必然刚性坍缩为单一全局相位倍乘算子 $c \bullet I$（甚至在零维空指标类型 $\iota = \varnothing$ 下也无懈可击）！
 
@@ -131,8 +131,8 @@ $$
 在 `D5/S3/Quantum/Foundation/RayPhaseRigidity.lean:97` 中，证明分两阶段推进：
 
 1. **私有核心引理 `coordinate_shape_of_connected_ray_tests`**：
-   - 先证非对角元全为零（`hoff : ∀ i j, i ≠ j → A i j = 0`）：对任意 $j \in \iota$，由 `hcoord j` 知存在 $d \in \mathbb{C}$ 使 $A *_{\!v} \vv{e}_j = d\vv{e}_j$；取第 $i \neq j$ 分量得 $A_{ij} = d \cdot 0 = 0$。
-   - 再证单步支撑重叠传递（`hstep`）：若存在 $x \in \mathrm{tests}$ 使 $x_i \neq 0$ 且 $x_j \neq 0$，由 `htests x hx` 知存在 $d \in \mathbb{C}$ 使 $A *_{\!v} x = d x$。因 $A$ 已是对角阵（非对角项由 `Finset.sum_eq_single k` 与 `hoff` 消去），第 $k$ 分量满足 $A_{kk} x_k = d x_k$；当 $x_k \neq 0$ 时由右消去律 `mul_right_cancel₀` 得 $A_{kk} = d$，故 $A_{ii} = d = A_{jj}$！
+   - 先证非对角元全为零（`hoff : ∀ i j, i ≠ j → A i j = 0`）：对任意 $j \in \iota$，由 `hcoord j` 知存在 $d \in \mathbb{C}$ 使 $A *_{v} \vv{e}_j = d\vv{e}_j$；取第 $i \neq j$ 分量得 $A_{ij} = d \cdot 0 = 0$。
+   - 再证单步支撑重叠传递（`hstep`）：若存在 $x \in \mathrm{tests}$ 使 $x_i \neq 0$ 且 $x_j \neq 0$，由 `htests x hx` 知存在 $d \in \mathbb{C}$ 使 $A *_{v} x = d x$。因 $A$ 已是对角阵（非对角项由 `Finset.sum_eq_single k` 与 `hoff` 消去），第 $k$ 分量满足 $A_{kk} x_k = d x_k$；当 $x_k \neq 0$ 时由右消去律 `mul_right_cancel₀` 得 $A_{kk} = d$，故 $A_{ii} = d = A_{jj}$！
    - 随后对传递闭包 `Relation.ReflTransGen` 施行归纳（`induction hij with | refl => rfl | @tail j k _ hjk ih => exact ih.trans (hstep j k hjk)`），证得对一切 $i, j \in \iota$ 均有 $A_{ii} = A_{jj}$。
 2. **主定理组装与空类型分支防御**：调用 `cases isEmpty_or_nonempty ι`：
    - 若 $\iota$ 为空类型（`inl hempty`），直接取 $c = 1$，由 `norm_one` 与空矩阵唯一性 `Subsingleton.elim _ _` 证毕；
@@ -226,7 +226,7 @@ $$
 ::: {.example #ex-lean-audit-part1-3 title="前提变异测试：当测试支撑图断开时，相位刚性定理在哪一步失效？"}
 考察 [@prop-audit-ray-phase-rigidity] 在二维空间 $\iota = \operatorname{Fin} 2 = \{0, 1\}$ 上的情形：
 
-1. **当 `RaySupportConnected tests` 成立时**：取单元素测试集 $\mathrm{tests} = \{x\}$，其中 $x = (1, 1)$ 满足 $x_0 = 1 \neq 0$ 且 $x_1 = 1 \neq 0$。若幺正矩阵 $A \in U(2, \mathbb{C})$ 保持两根坐标射线 $\vv{e}_0 = (1, 0)$ 与 $\vv{e}_1 = (0, 1)$，则 `hoff` 先迫使 $A = \operatorname{diag}(c_0, c_1)$；接着 `hstep 0 1` 将 $A *_{\!v} (1, 1) = (c_0, c_1) = d(1, 1)$ 的两个分量通过右消去律 `mul_right_cancel₀` 锁在一起，给出 $c_0 = d = c_1$，故 $A = c_0 I_2$（$|c_0| = 1$）。
+1. **当 `RaySupportConnected tests` 成立时**：取单元素测试集 $\mathrm{tests} = \{x\}$，其中 $x = (1, 1)$ 满足 $x_0 = 1 \neq 0$ 且 $x_1 = 1 \neq 0$。若幺正矩阵 $A \in U(2, \mathbb{C})$ 保持两根坐标射线 $\vv{e}_0 = (1, 0)$ 与 $\vv{e}_1 = (0, 1)$，则 `hoff` 先迫使 $A = \operatorname{diag}(c_0, c_1)$；接着 `hstep 0 1` 将 $A *_{v} (1, 1) = (c_0, c_1) = d(1, 1)$ 的两个分量通过右消去律 `mul_right_cancel₀` 锁在一起，给出 $c_0 = d = c_1$，故 $A = c_0 I_2$（$|c_0| = 1$）。
 2. **当 `RaySupportConnected tests` 被移除或断开时**：设 $\mathrm{tests} = \{\vv{e}_0, \vv{e}_1\}$，没有任何一个测试向量在坐标 $0$ 与 $1$ 处**同时非零**。此时 `Relation.ReflTransGen (fun i j => ∃ x ∈ tests, x i ≠ 0 ∧ x j ≠ 0) 0 1` 不成立！在物理上，相位门 $A = \operatorname{diag}(1, i) \in U(2, \mathbb{C})$ 保持 $\vv{e}_0$ 与 $\vv{e}_1$ 的射线不变，但它显然不是标量矩阵 $c I_2$。源码中的 `hconnect : RaySupportConnected tests` 恰恰在 `hchain (hconnect i j)` 这一行严丝合缝地堵住了“不连通子空间各自携带独立相对相位”的反例漏洞！
 :::
 

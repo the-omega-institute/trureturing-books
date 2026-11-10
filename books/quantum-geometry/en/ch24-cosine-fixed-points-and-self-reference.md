@@ -151,7 +151,7 @@ The next corollary proves that across all positive real numbers $x > 0$, the sel
 For $\operatorname{goldenReciprocalMap}(x) = 1 + 1/x$ of [@def-golden-reciprocal-map], all three properties hold:
 
 1. **Positivity**: $0 < \frac{1 + \sqrt{5}}{2}$;
-2. **Fixed-point identity**: $\operatorname{goldenReciprocalMap}\!\left(\frac{1 + \sqrt{5}}{2}\right) = \frac{1 + \sqrt{5}}{2}$;
+2. **Fixed-point identity**: $\operatorname{goldenReciprocalMap}\left(\frac{1 + \sqrt{5}}{2}\right) = \frac{1 + \sqrt{5}}{2}$;
 3. **Uniqueness on the positive reals**: for every real number $x > 0$,
 
    $$
