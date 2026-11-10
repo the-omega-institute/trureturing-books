@@ -213,6 +213,14 @@
       "line": 27,
       "signature": "theorem finite_contracting_updates_stabilize {X : Type*} [Finite X] (U : Set X → Set X) (hU : ∀ A : Set X, U A ⊆ A) (S : ℕ → Set X) (hS : ∀ n : ℕ, S (n + 1) = U (S n)) : (∃ N ≤ (S 0).ncard, ∀ n : ℕ, N ≤ n → S n = S N) ∧ {n : ℕ | S (n + 1) ≠ S n}.ncard ≤ (S 0).ncard"
     },
+    "D5/S1/Phase/ContinuousAverage.continuous_average_tendsto_haar": {
+      "module": "D5/S1/Phase/ContinuousAverage",
+      "name": "D5.S1.Phase.ContinuousAverage.continuous_average_tendsto_haar",
+      "kind": "theorem",
+      "statement_id": "sha256:f1e543c619f84ecae4890325f0da62d79dee07bfe3ea530f4a918af15cbb3343",
+      "line": 94,
+      "signature": "theorem continuous_average_tendsto_haar (α : ℝ) (hα : Irrational α) (ρ : ℝ) (f : AddCircle (1 : ℝ) → ℂ) (hf : Continuous f) : Tendsto (fun N : ℕ => (∑ i ∈ Finset.range N, f ((ρ + (i : ℝ) * α : ℝ) : AddCircle (1 : ℝ))) / (N : ℂ)) atTop (𝓝 (∫ x, f x ∂AddCircle.haarAddCircle))"
+    },
     "D5/S1/Recurrence/NormOneTraceAddition.trace_recurrence": {
       "module": "D5/S1/Recurrence/NormOneTraceAddition",
       "name": "D5.S1.Recurrence.NormOneTraceAddition.trace_recurrence",
