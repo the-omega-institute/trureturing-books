@@ -1509,6 +1509,14 @@
       "line": 40,
       "signature": "theorem same_effects_different_two_step_joint_law : let projectiveKraus : Bool -> QubitMatrix"
     },
+    "D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity": {
+      "module": "D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity",
+      "name": "D5.S3.Quantum.Measurements.FiniteMemoryHistoryCapacity.finite_memory_history_capacity",
+      "kind": "theorem",
+      "statement_id": "sha256:b941b8f988de974faf219875e0fcd12c6f75044ad1d886e25a6efa2b151d3b3b",
+      "line": 62,
+      "signature": "theorem finite_memory_history_capacity {N d : Nat} (rho E : Fin N → Matrix (Fin d) (Fin d) ℂ) (hRho : ∀ i, (rho i).PosSemidef ∧ (rho i).trace = 1) (hE : ∀ j, (E j).PosSemidef) (hSum : ∑ j, E j = 1) (hPairing : ∀ i j, (E j * rho i).trace = if i = j then 1 else 0) : N ≤ d"
+    },
     "D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion": {
       "module": "D5/S3/Quantum/PureState/NoCloningInnerProductCriterion",
       "name": "D5.S3.Quantum.PureState.NoCloningInnerProductCriterion.no_cloning_inner_product_criterion",
@@ -1700,6 +1708,14 @@
       "statement_id": "sha256:b0f4a78840c73750d0019a5282c2796251b339bc49991297f9e5b22013dafda3",
       "line": 44,
       "signature": "def observable {Fiber : Type*} (answer : Fiber -> Bool) : Fiber -> Real"
+    },
+    "D5/S3/QuantumBounds/CollisionEntropyUncertainty.collision_entropy_uncertainty": {
+      "module": "D5/S3/QuantumBounds/CollisionEntropyUncertainty",
+      "name": "D5.S3.QuantumBounds.CollisionEntropyUncertainty.collision_entropy_uncertainty",
+      "kind": "theorem",
+      "statement_id": "sha256:0855b96a0deb4cbea90fe404db64da68ed3125ba1fd3ba64110ab7a9d49c4bff",
+      "line": 31,
+      "signature": "theorem collision_entropy_uncertainty {d : Nat} (hd : 0 < d) (p : Fin (d + 1) -> Fin d -> Real) (purity : Real) (hprob : forall b, (forall i, 0 <= p b i) /\\ ∑ i, p b i = 1) (hcollision : ∑ b, ∑ i, (p b i) ^ 2 = 1 + purity) : (d + 1 : Real) * Real.log ((d + 1 : Real) / (1 + purity)) <= ∑ b, shannonEntropy (p b)"
     },
     "D5/S3/QuantumBounds/Designs/MixedStateRobertson.mixed_state_robertson_uncertainty": {
       "module": "D5/S3/QuantumBounds/Designs/MixedStateRobertson",
