@@ -375,4 +375,4 @@ self_test()
 3. **冻结定理的精确边界**：本章经 Lean 4 内核验证的四条定理均来自 `D5/S3/Quantum/Information/ActualPureQubitGeometry.lean`，严格刻画布洛赫重构矩阵的迹（[@thm-bloch-matrix-trace]）、三维布洛赫向量还原（[@lemma-bloch-coordinate-recovery]）、厄米 $2\times 2$ 矩阵的布洛赫分解与幂等纯态单位球面性质（[@prop-hermitian-bloch-geometry]）以及正半定矩阵的布洛赫球界 $\norm{\operatorname{bloch}(M)} \le \operatorname{Re}(\Tr M)$（[@cor-psd-bloch-ball-bound]）。通用 $\mathrm{U}(2)$ 门的 ZYZ 欧拉角存在性分解与 $\mathrm{SU}(2) \to \mathrm{SO}(3)$ 满射性属于上述经典文献结论，而 `RotorCompiler` 则是给定 $(\alpha, \beta, \gamma)$ 后的可执行正向旋转器合成器。
 :::
 
-至此，我们已经亲手建造并运行了第七部的前两章工程构件（`GeometricState` 与 `RotorCompiler`）。从下一章开始，我们将进入全书最庄严的收官双章——**直接打开 `trureturing@dev` 的冻结 Lean 4 源码卷宗，逐行精读并审计支撑起整部专著的公理圣殿**！让我们迈入[第二十七章](ch27-reading-frozen-proofs-i.md)。
+至此，我们已经亲手建造并运行了第七部的前两章工程构件（`GeometricState` 与 `RotorCompiler`）。从下一章开始，我们将进入第七部最庄严的收官双章——**直接打开 `trureturing@dev` 的冻结 Lean 4 源码卷宗，逐行精读并审计支撑起整部专著的公理圣殿**！让我们迈入[第二十七章](ch27-reading-frozen-proofs-i.md)。

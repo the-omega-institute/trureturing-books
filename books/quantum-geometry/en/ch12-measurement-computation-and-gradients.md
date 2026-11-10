@@ -200,6 +200,8 @@ Note that [@cor-finite-trace-mode-budget] does not separately assume $R > 0$ or 
    r' = \Bigl(\frac{21\sqrt{3}}{2\sqrt{403}},\; 0,\; \frac{17}{2\sqrt{403}}\Bigr) \approx (0.90593576,\; 0,\; 0.42341516), \qquad V(r') \approx 0.42341516 < 0.5.
    $$
 
+   Notice also that the tangent gradient field $\operatorname{grad}_{S^2} V(r) = \vv{e}_3 - r_z r$ vanishes at the north and south poles $r = \pm \vv{e}_3$ ($r_z = \pm 1$), with Poincaré–Hopf index sum $1 + 1 = 2 = \chi(S^2)$ — a direct manifestation of the **Hairy Ball Theorem** of [Chapter 10](ch10-gram-geometry-and-order.md) (`#rem-gram-hairy-ball-literature`, literature result, not formalized in this book) in spherical variational optimization: because $\chi(S^2) = 2 \neq 0$, $S^2$ admits no nowhere-vanishing smooth tangent descent field, so every smooth spherical cost landscape necessarily harbors critical equilibria (extrema or saddle singularities) where the Riemannian gradient vanishes.
+
 4. **Equatorial concentration on $S^{2^n - 1}$**: For a uniform real unit vector in $\mathbb{R}^d$ with $d = 2^n$, symmetry gives $\mathbb{E}[x_1^2] = 1/d$, hence $\Pr(|x_1| \ge \varepsilon) \le 1/(d\varepsilon^2)$. With $n = 20$ and $\varepsilon = 0.1$,
 
    $$
