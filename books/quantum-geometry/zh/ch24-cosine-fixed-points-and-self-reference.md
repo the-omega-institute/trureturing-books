@@ -171,6 +171,107 @@ $$
 由实数域无零因子性知 $x - \varphi = 0$ 或 $x + \varphi - 1 = 0$。但因 $x > 0$ 且 $\varphi > 1$（`Real.one_lt_goldenRatio`），第二个因子严格为正：$x + \varphi - 1 > 0 + 1 - 1 = 0$，绝不可能为零！故必有 $x = \varphi = \frac{1 + \sqrt{5}}{2}$。完整证明由 Lean 内核检查。
 :::
 
+[@cor-golden-fixed-point-unique] 回答了“$1 + 1/x$ 的不动点是什么”，却绕过了一个更靠前的问题：**为什么是 $1 + 1/x$？** 说它是“最简单的加一与取倒数的组合”只是印象。要把印象变成定理，就得把同类映射全部列出来，逐个检查。
+
+“同类”指系数只取 $0$ 与 $1$ 的分式线性映射 $x \mapsto \frac{ax + b}{cx + d}$。令它等于 $x$ 并通分，得到不动点方程
+
+$$
+c\,x^2 + (d - a)\,x - b \;=\; 0,
+$$
+
+其判别式为 $(d - a)^2 + 4bc$。Lean 模块 `D5/S0/Diagonal/SelfApplicationFates` 把这些量逐一定义出来，并按方程的样子给每个映射判一种“自作用命运”。
+
+::: {.definition #def-binary-fractional-map-fates title="二元分式映射、不动点系数、判别式与四种自作用命运" lean="D5/S0/Diagonal/SelfApplicationFates.BinaryFractionalMap D5/S0/Diagonal/SelfApplicationFates.determinant D5/S0/Diagonal/SelfApplicationFates.Nondegenerate D5/S0/Diagonal/SelfApplicationFates.fixedCoefficients D5/S0/Diagonal/SelfApplicationFates.discriminant D5/S0/Diagonal/SelfApplicationFates.SelfApplicationFate D5/S0/Diagonal/SelfApplicationFates.HasFate D5/S0/Diagonal/SelfApplicationFates.IsPhiFamily"}
+在模块 `SelfApplicationFates` 中：
+
+1. **二元分式映射** [`BinaryFractionalMap`](lean:D5/S0/Diagonal/SelfApplicationFates.BinaryFractionalMap) 是由四个取值于 $\operatorname{Fin} 2 = \{0, 1\}$ 的分量 $a, b, c, d$ 构成的结构体；
+2. **行列式** [`determinant`](lean:D5/S0/Diagonal/SelfApplicationFates.determinant) 定义为整数 $\operatorname{determinant} m = a\,d - b\,c$；称 $m$ **非退化**（[`Nondegenerate`](lean:D5/S0/Diagonal/SelfApplicationFates.Nondegenerate)），若 $\operatorname{determinant} m \neq 0$；
+3. **不动点系数** [`fixedCoefficients`](lean:D5/S0/Diagonal/SelfApplicationFates.fixedCoefficients) 定义为整数三元组 $\operatorname{fixedCoefficients} m = (c,\; d - a,\; -b)$；
+4. **判别式** [`discriminant`](lean:D5/S0/Diagonal/SelfApplicationFates.discriminant) 定义为整数 $\operatorname{discriminant} m = (d - a)^2 + 4\,b\,c$；
+5. **自作用命运** [`SelfApplicationFate`](lean:D5/S0/Diagonal/SelfApplicationFates.SelfApplicationFate) 是恰有四个构造子 `empty`、`dead`、`collapse`、`live` 的归纳类型；谓词 [`HasFate`](lean:D5/S0/Diagonal/SelfApplicationFates.HasFate) $m$ 在四个构造子上分别定义为：
+   - `empty`：$\operatorname{fixedCoefficients} m = (0, 0, 0)$；
+   - `dead`：$\operatorname{fixedCoefficients} m = (0, 0, -1)$；
+   - `collapse`：$\operatorname{discriminant} m = 0$ 或 $\operatorname{discriminant} m = 4$，并且 $\operatorname{fixedCoefficients} m \neq (0, 0, 0)$，并且 $\operatorname{fixedCoefficients} m \neq (0, 0, -1)$；
+   - `live`：$\operatorname{discriminant} m = 5$；
+6. **$\varphi$ 族** [`IsPhiFamily`](lean:D5/S0/Diagonal/SelfApplicationFates.IsPhiFamily) $m$ 定义为 $(a, b, c, d) = (1, 1, 1, 0)$ 或 $(a, b, c, d) = (0, 1, 1, 1)$。
+:::
+
+把四个比特 $(a, b, c, d)$ 读成映射 $x \mapsto \frac{ax+b}{cx+d}$ 是本书的解读；[@def-binary-fractional-map-fates] 中的 Lean 定义只涉及这四个比特和由它们算出的整数。（同一模块另有 [`fixedPolynomial`](lean:D5/S0/Diagonal/SelfApplicationFates.fixedPolynomial)，它在有理数 $x$ 处取值 $c\,x^2 + (d - a)\,x - b$，正是上面那条不动点方程的左端。）四种命运的名字各有所指：`empty` 是方程 $0 = 0$，每个点都是不动点，方程不含任何信息；`dead` 是方程 $-1 = 0$，没有不动点；`collapse` 是判别式为完全平方数 $0$ 或 $4$ 的情形，根落回有理数；`live` 是判别式为 $5$ 的情形，根是无理数。
+
+::: {.theorem #thm-self-application-four-fates title="非退化二元分式映射的四种自作用命运与 φ 族的刻画" lean="D5/S0/Diagonal/SelfApplicationFates.self_application_four_fates"}
+设 $m$ 为二元分式映射（[@def-binary-fractional-map-fates]），且 $m$ 非退化（`hm : Nondegenerate m`）。则以下四项同时成立：
+
+1. **命运存在且唯一**：存在唯一的 $\mathrm{fate}$ 使 $\operatorname{HasFate}\ m\ \mathrm{fate}$ 成立；
+2. **`live` 当且仅当属于 $\varphi$ 族**：
+
+   $$
+   \operatorname{HasFate}\ m\ \mathtt{live} \quad\Longleftrightarrow\quad \operatorname{IsPhiFamily}\ m\,;
+   $$
+
+3. **`live` 时的不动点系数**：若 $\operatorname{HasFate}\ m\ \mathtt{live}$，则 $\operatorname{fixedCoefficients} m = (1, -1, -1)$ 或 $\operatorname{fixedCoefficients} m = (1, 1, -1)$；
+4. **`live` 时的判别式**：若 $\operatorname{HasFate}\ m\ \mathtt{live}$，则 $\operatorname{discriminant} m = 1^2 + 4$。
+:::
+
+::: proof
+`BinaryFractionalMap` 只有 $2^4 = 16$ 个元素。证明先把 $m$ 拆成四个分量并对每个分量分 $0$、$1$ 两种情形（`fin_cases`），用 `norm_num` 化简前提 `hm`，退化的情形随即被排除。在余下的每个情形里，结论 1 的存在性由直接给出对应的构造子并用 `decide` 判定得到，唯一性则对四个构造子逐一分情形、展开 `HasFate`、`fixedCoefficients` 与 `discriminant` 后化简得到；结论 2、3、4 都是有限情形上的可判定命题，由 `decide` 判定。完整证明由 Lean 内核检查。
+:::
+
+非退化的二元分式映射一共只有六个，可以全部摆上桌面。
+
+::: {.example #ex-six-binary-fractional-maps title="六个非退化二元分式映射的逐一枚举"}
+行列式 $ad - bc \neq 0$ 且 $a, b, c, d \in \{0, 1\}$ 的四元组恰有六个：$a = d = 1$ 且 $bc = 0$ 的三个，以及 $b = c = 1$ 且 $ad = 0$ 的三个。逐一计算 [@def-binary-fractional-map-fates] 中的量：
+
+| $(a, b, c, d)$ | 映射 $x \mapsto \frac{ax+b}{cx+d}$ | 不动点方程 | 判别式 | 命运 | 实不动点 |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| $(1, 0, 0, 1)$ | $x \mapsto x$ | $0 = 0$ | $0$ | `empty` | 每个 $x$ |
+| $(1, 1, 0, 1)$ | $x \mapsto x + 1$ | $-1 = 0$ | $0$ | `dead` | 无 |
+| $(1, 0, 1, 1)$ | $x \mapsto \frac{x}{x+1}$ | $x^2 = 0$ | $0$ | `collapse` | $0$ |
+| $(0, 1, 1, 0)$ | $x \mapsto \frac{1}{x}$ | $x^2 - 1 = 0$ | $4$ | `collapse` | $\pm 1$ |
+| $(1, 1, 1, 0)$ | $x \mapsto 1 + \frac{1}{x}$ | $x^2 - x - 1 = 0$ | $5$ | `live` | $\varphi,\ -\varphi^{-1}$ |
+| $(0, 1, 1, 1)$ | $x \mapsto \frac{1}{1+x}$ | $x^2 + x - 1 = 0$ | $5$ | `live` | $\varphi^{-1},\ -\varphi$ |
+
+每一行恰有一种命运，与 [@thm-self-application-four-fates] 的结论 1 一致；`live` 的两行正是 $\varphi$ 族，不动点系数分别为 $(1, -1, -1)$ 与 $(1, 1, -1)$，与结论 2、3 一致。两个 `live` 映射互为共轭：若 $x = 1 + 1/x$，则 $y = 1/x$ 满足 $y = 1/(1 + y)$。
+:::
+
+所以 $1 + 1/x$ 不是随手挑的。在用 $0$ 和 $1$ 能写出的全部六个非退化分式映射里，一个什么都没说，一个无处可停，两个停在有理数上，只有 $1 + 1/x$ 和它的共轭 $1/(1+x)$ 停在有理数够不到的地方。[@cor-golden-fixed-point-unique] 已经算出前者在正实数上的唯一不动点；后者的对应结论同样有冻结的 Lean 证明。
+
+::: {.lemma #lem-golden-inverse-branch-fixed-point title="映射 1/(1+x) 在正实数上的唯一不动点是黄金比的倒数" lean="D5/S3/Analytic/Characterizations/GoldenInverseBranchFixedPoint.golden_inverse_branch_positive_fixed_point_iff"}
+对任意实数 $x$，若 $0 < x$，则
+
+$$
+\frac{1}{x + 1} = x \quad\Longleftrightarrow\quad x = \varphi^{-1},
+$$
+
+其中 $\varphi$ 为 Mathlib 的 `Real.goldenRatio`。
+:::
+
+::: proof
+先从 `golden_transfer_triangle` 取出恒等式 $\varphi - 1 = \varphi^{-1}$。正向：由 $x > 0$ 知 $x + 1 \neq 0$，于是 $\frac{1}{x+1} = x$ 等价于 $1 = x\,(x + 1)$；结合 $\varphi^2 = \varphi + 1$（`Real.goldenRatio_sq`）与 $\varphi > 1$（`Real.one_lt_goldenRatio`），非线性算术给出 $x = \varphi - 1 = \varphi^{-1}$。反向：代入 $x = \varphi^{-1}$，由 $\varphi^{-1} + 1 = \varphi$ 得 $\frac{1}{\varphi^{-1} + 1} = \frac{1}{\varphi} = \varphi^{-1}$。完整证明由 Lean 内核检查。
+:::
+
+到这里，黄金自指还是一件纯代数的事：加法、除法、一个二次方程。§24.4 将把它与余弦自指 $\cos\theta = \theta$ 对比，并强调前者停在代数数、后者跃入超越数。但这两种自指并非互不相干。黄金比本身就是一个余弦读数，读的是正五边形的角。
+
+::: {.proposition #prop-pentagon-golden-cosines title="正五边形的倍余弦读出黄金比、它的倒数与 √5" lean="D5/S3/Constants/PentagonCosines.pentagon_golden_cosines"}
+记 $\varphi$ 为 Mathlib 的 `Real.goldenRatio`。以下四项同时成立：
+
+1. $2\cos\dfrac{\pi}{5} = \varphi$；
+2. $2\cos\dfrac{2\pi}{5} = \varphi^{-1}$；
+3. $2\cos\dfrac{\pi}{5} + 2\cos\dfrac{2\pi}{5} = \sqrt{5}$；
+4. $2\cos\dfrac{2\pi}{5}$ 是无理数。
+:::
+
+::: proof
+结论 1 由 Mathlib 的闭式 `Real.cos_pi_div_five`（$\cos\frac{\pi}{5} = \frac{1 + \sqrt5}{4}$）乘以 $2$ 得到。对结论 2，把 $\frac{2\pi}{5}$ 写成 $2\cdot\frac{\pi}{5}$，用倍角公式 $\cos 2\alpha = 2\cos^2\alpha - 1$ 与同一闭式算出 $\cos\frac{2\pi}{5} = \frac{\sqrt5 - 1}{4}$（其中用到 $(\sqrt5)^2 = 5$），再由 `Real.inv_goldenRatio` 把 $\varphi^{-1}$ 改写为 $-\frac{1 - \sqrt5}{2}$ 对上。结论 3 把前两项相加，由 `Real.goldenRatio_sub_goldenConj` 得 $\sqrt5$。结论 4 由 $\varphi$ 的无理性（`Real.goldenRatio_irrational`）经取倒数保持无理性得到。完整证明由 Lean 内核检查。
+:::
+
+把 [@prop-pentagon-golden-cosines] 的前两项代入黄金不动点方程 $1 + \varphi^{-1} = \varphi$（[@cor-golden-fixed-point-unique] 的结论 2），它就变成一条三角恒等式：
+
+$$
+1 + 2\cos\frac{2\pi}{5} \;=\; 2\cos\frac{\pi}{5}.
+$$
+
+黄金自指是正五边形里的一条长度关系：单位边长的正五边形，对角线长为 $2\cos\frac{\pi}{5} = \varphi$。于是代数自指与余弦自指的差别可以说得更准：$\varphi$ 也是余弦读数，但读的是 $\frac{\pi}{5}$ 这样与 $\pi$ 可公度的角，而凡与 $\pi$ 可公度的角，余弦必是代数数；$\theta^*$ 的余弦是超越数，所以它必与 $\pi$ 不可公度——这正是后面 [@rem-dottie-angle-incommensurable] 要证明的事。
+
 ## 24.4 从 $\cos\theta^* = \theta^*$ 到 $\psi = \psi(\psi)$：超越性、截断裂缝与毛球对跖不动点 {#sec-ch24-4}
 
 现在，把 [@cor-golden-fixed-point-unique] 中的代数自指 $x = 1 + 1/x$（只涉及一维有理加除，锁在二次代数数 $\varphi = \frac{1+\sqrt{5}}{2}$ 上），与球面内积投影的**余弦自指**
@@ -184,7 +285,7 @@ $$
 让我们在下面的经典文献审计中，把巴拿赫压缩唯一性、林德曼—魏尔斯特拉斯超越性证明、泰勒余项 $R_{2N}(\theta)$ 与毛球定理的球面不动点/对跖点二分法一次尽收眼底。
 
 ::: {.remark #rem-banach-dottie-hairy-ball-literature title="巴拿赫压缩映射、Dottie 数的超越性、泰勒余项界与偶维球面不动点/对跖点定理（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 围绕余弦自指方程 $\cos\theta = \theta$ 与高维球面自映射，经典实分析、超越数论与代数拓扑给出以下四项严格定理（与本章四个冻结 Lean 定理共同构成完整图景）：
+**文献结果，未在本书形式化。** 围绕余弦自指方程 $\cos\theta = \theta$ 与高维球面自映射，经典实分析、超越数论与代数拓扑给出以下四项严格定理（与本章的冻结 Lean 定理共同构成完整图景）：
 
 1. **紧区间 $[0, 1]$ 上的巴拿赫压缩映射原理与全局收敛（Banach Contraction Principle）**：
    与 [@thm-finite-contracting-updates-stabilize] 处理离散有限集 $X$ 上的子集单调收缩 $U(A) \subseteq A$ 相对偶，在连续实轴 $\mathbb{R}$ 上，余弦函数将全实轴映入 $[-1, 1]$，并将 $[-1, 1]$ 映入紧不变子区间 $[0, 1]$（因 $\cos([0, 1]) = [\cos 1, 1] \subset [0.54, 1] \subset [0, 1]$）。在 $[0, 1]$ 上，由微分中值定理，对任意 $x, y \in [0, 1]$ 有
@@ -479,11 +580,11 @@ $$
 
 ### 第六部小结：从球外之球回到自指原点，下一步铸造机械法典
 
-回望第六部《越界·球外之球》的四章征程，我们用经 Lean 4 内核逐条验证的**十六条正式定理级结论**（每章四条，涵盖相对语义对角线拓扑逃逸、黎曼 $\zeta$ 函数留数与狄利克雷—欧拉乘积恒等式、艾森斯坦交越二次型剪切不变性与黄金佩尔迹—范数恒等式、以及有限收缩稳定化、解释语境相对不动点与黄金倒数唯一不动点），完成了从数理逻辑、算术频谱到自指不动点的跨界合拢：
+回望第六部《越界·球外之球》的四章征程，我们用经 Lean 4 内核逐条验证的**十九条正式定理级结论**（第二十一至二十三章各四条，第二十四章七条，涵盖相对语义对角线拓扑逃逸、黎曼 $\zeta$ 函数留数与狄利克雷—欧拉乘积恒等式、艾森斯坦交越二次型剪切不变性与黄金佩尔迹—范数恒等式、以及有限收缩稳定化、解释语境相对不动点与黄金倒数唯一不动点），完成了从数理逻辑、算术频谱到自指不动点的跨界合拢：
 
 - **第二十一章**证明了完备解码目录诱导的相对语义对角线在潜划分拓扑下必不连续（[@thm-complete-diagonal-not-continuous]）、必具非空分离亏损（[@lem-complete-diagonal-separation-deficit]），且并入对角线后观测拓扑严格加细（[@prop-complete-diagonal-strict-refinement]、[@cor-complete-diagonal-topological-settlement]），并与泰勒截断余项 $R_{2N}(\theta)$、笛卡尔 $720^\circ = 4\pi$ 五边形角亏、毛球定理及 Adams 可平行化球面 $S^0, S^1, S^3, S^7$（[@rem-hairy-ball-adams-literature]）交相印证；
 - **第二十二章**将素数还原为算术对数空间的正交基，在绝对收敛半平面 $\operatorname{Re}(s) > 1$ 上严格建立了 $s=1$ 留数（[@lem-riemann-zeta-residue-one]）、狄利克雷级数（[@prop-riemann-zeta-dirichlet-sum]）、欧拉乘积（[@thm-riemann-zeta-euler-product]）及两者的直接恒等（[@cor-dirichlet-sum-eq-euler-product]），剖析了有限素数筛的多面体余项裂缝，并严格划定了它们与开放黎曼猜想（[@conj-riemann-hypothesis]、[@rem-euler-zeta-literature]）的认识论边界；
 - **第二十三章**揭示了二次范数与迹投影如何在连续有理数中锁定离散整格，形式化证明了 $\Delta = -3$ 艾森斯坦交越二次型的幺模剪切归约、常数判别式与值域等同（[@thm-qform-eq-eisnorm]、[@lem-qform-discriminant]、[@cor-qform-range-eq-eisnorm]）以及 $\Delta = +5$ 黄金整数的佩尔恒等式（[@prop-pell-form-eq-four-mul-norm]），并系统评述了 Koenigsmann（2016）用四元数范数在 $\mathbb{Q}$ 中给出 $\mathbb{Z}$ 的 $\forall$/$\forall\exists$ 一阶定义与开放问题 $\mathrm{H10}(\mathbb{Q})$ 的精确关系（[@rem-diophantine-z-in-q-literature]）；
-- **第二十四章**证明了有限状态收缩更新的稳定化与变化步数界（[@thm-finite-contracting-updates-stabilize]）、相对解释不动点的相邻步贴合与静态语境非唯一性（相同的文本与解释规则在两个不同静态语境下给出不同的布尔意义，[@lem-conceptual-equivalence-stability-fixed-point]、[@prop-context-parameters-distinct-fixed-points]）以及正实数上黄金倒数映射的唯一不动点（[@cor-golden-fixed-point-unique]），并在巴拿赫压缩、林德曼—魏尔斯特拉斯超越性（$|\cos q - q| > 0$）与沙努埃尔猜想（[@conj-schanuel-dottie]、[@rem-banach-dottie-hairy-ball-literature]）的映照下，将全书几何直觉收束于 $\cos\theta^* = \theta^*$ 与 $\psi = \psi(\psi)$。
+- **第二十四章**证明了有限状态收缩更新的稳定化与变化步数界（[@thm-finite-contracting-updates-stabilize]）、相对解释不动点的相邻步贴合与静态语境非唯一性（相同的文本与解释规则在两个不同静态语境下给出不同的布尔意义，[@lem-conceptual-equivalence-stability-fixed-point]、[@prop-context-parameters-distinct-fixed-points]）正实数上黄金倒数映射的唯一不动点（[@cor-golden-fixed-point-unique]）、非退化二元分式映射的四种自作用命运及其中唯一“活着”的 $\varphi$ 族（[@thm-self-application-four-fates]、[@lem-golden-inverse-branch-fixed-point]）以及正五边形的黄金余弦（[@prop-pentagon-golden-cosines]），并在巴拿赫压缩、林德曼—魏尔斯特拉斯超越性（$|\cos q - q| > 0$）与沙努埃尔猜想（[@conj-schanuel-dottie]、[@rem-banach-dottie-hairy-ball-literature]）的映照下，将全书几何直觉收束于 $\cos\theta^* = \theta^*$ 与 $\psi = \psi(\psi)$。
 
 既然全书的几何直觉与理论大厦已经合拢，在最后的**第七部《铸剑·机械法典：零矩阵几何引擎与形式化证明库》**中，我们将把这一切几何定理直接铸造成可运行、零复数矩阵黑箱的位掩码克利福德引擎与 ZYZ 旋转器编译器，并走进 Lean 4 形式化公理圣殿的内部，对全书引用的每一条机器形式化声明执行终极审计！
