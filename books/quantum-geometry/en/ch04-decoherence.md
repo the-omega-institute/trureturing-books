@@ -1,0 +1,257 @@
+# Chapter 4 When Sight Turns Away: Decoherence, Mixed States, and the Truncated Chord Inside the Sphere
+
+> *"So everything is settled, without a single exception — even the structure of the observer works this way."*
+
+Throughout our first three chapters, the single-qubit arrow $\vv{a}$ stood proudly on the **outer shell** of the unit sphere $S^2$ ($\norm{\vv{a}} = 1$): in [Chapter 1](ch01-measurement.md) as a real three-dimensional ray freed of global phase redundancy, in [Chapter 2](ch02-born-rule.md) as the geometric source of Born's half-angle law $\cos^2(\theta/2)$, and in [Chapter 3](ch03-projectors-and-duality.md) as a unit hypotenuse split by an idempotent line $P^2 = P$ into axial particle bias and equatorial wave coherence.
+
+Walk into an actual superconducting-qubit lab, ion-trap chamber, or NMR spectrometer, however, and pure shell states are the exception rather than the rule. Real experimental states live inside the **interior** of the Bloch ball as **mixed states**: their Bloch vector $\vv{r}$ shrinks into a truncated chord $\norm{\vv{r}} < 1$, often collapsing all the way to the featureless dead center $\vv{r} = \vv{0}$.
+
+Who stole the missing length $1 - \norm{\vv{r}}$? Does "decoherence" mean that nature suffers an irreversible ontological decay? Closing Part I, this chapter explains the geometric mechanism of mixed states: **any local quantum channel or mixed-state contraction can be embedded via an isometric or unitary dilation (Stinespring dilation; see [@rem-stinespring-literature]) into a higher-dimensional system–environment evolution — a shortened chord inside the Bloch ball is realized as the foreshortened cosine shadow cast onto a three-dimensional local slice by a unit spear tilted into an auxiliary environment space**.
+
+## 4.1 Pure States Are the Spherical Shell ($\|\vv{r}\| = 1$), Mixed States Are Truncated Chords Inside ($\|\vv{r}\| = \cos\theta_{\mathrm{env}} < 1$) {#sec-ch04-1}
+
+Start with a three-line Feynman calculation. Prepare a qubit pointing due east on the Bloch equator ($\vv{r} = +\vv{e}_1$), the pure superposition $\lvert +\rangle = \frac{1}{\sqrt{2}}(\lvert 0\rangle + \lvert 1\rangle)$ of unit transverse coherence $r_x = 1$.
+
+Now let a stray environmental degree of freedom — a cavity photon or a microscopic two-level defect in the substrate — brush past your qubit. When the qubit sits in $\lvert 0\rangle$, the environment remains in its initial state $\lvert e_0\rangle$; when the qubit sits in $\lvert 1\rangle$, the interaction nudges the environment arrow by angle $\theta_{\mathrm{env}}$ into another unit state $\lvert e_1\rangle$ with overlap $\langle e_0\mid e_1\rangle = \cos\theta_{\mathrm{env}} \in [0, 1]$. Globally, the combined system–environment state is still a $100\%$ pure vector of unit norm:
+
+$$
+\lvert\Psi_{\mathrm{SE}}\rangle = \frac{1}{\sqrt{2}}\bigl(\lvert 0\rangle \otimes \lvert e_0\rangle + \lvert 1\rangle \otimes \lvert e_1\rangle\bigr).
+$$
+
+Next, the environment particle flies beyond reach of your detectors. Looking solely at your local qubit means taking the **partial trace** over the environment (summing diagonal projections across an orthonormal basis of the environment). Watch what happens to the reduced qubit matrix $\rho_{\mathrm{S}} = \Tr_{\mathrm{E}}(\lvert\Psi_{\mathrm{SE}}\rangle\langle\Psi_{\mathrm{SE}}\rvert)$:
+
+$$
+\rho_{\mathrm{S}} = \frac{1}{2}\begin{pmatrix} \langle e_0\mid e_0\rangle & \langle e_1\mid e_0\rangle \\ \langle e_0\mid e_1\rangle & \langle e_1\mid e_1\rangle \end{pmatrix} = \frac{1}{2}\begin{pmatrix} 1 & \cos\theta_{\mathrm{env}} \\ \cos\theta_{\mathrm{env}} & 1 \end{pmatrix}!
+$$
+
+Compare this with [@prop-qubit-bloch-core] from [Chapter 1](ch01-measurement.md): its Bloch vector is $\vv{r} = (\cos\theta_{\mathrm{env}},\, 0,\, 0)$! Nothing non-unitary clipped your arrow. The joint spear $\lvert\Psi_{\mathrm{SE}}\rangle$ still has full length $1$ in the higher-dimensional joint space; because it tilted upward by $\theta_{\mathrm{env}}$ into the environment register, viewing its shadow flat on the floor of the single-qubit subspace foreshortens its apparent length to $\|\vv{r}\| = \cos\theta_{\mathrm{env}} < 1$!
+
+![Pure spherical shell versus truncated interior chords: environmental partial-trace foreshortening, geometric deformations under quantum noise channels, and the maximally mixed dead center](../assets/fig-04-bloch-decoherence.svg)
+
+In the sharp limit $\theta_{\mathrm{env}} = 90^\circ$ where the environment distinguishes system branches orthogonally ($\cos 90^\circ = 0$), the interaction is an isometric recording map, and turning one's gaze away from the record reproduces the exact Lüders unread state $\sum_a P_a \rho P_a$ of [Chapter 3](ch03-projectors-and-duality.md). Our first theorem proves this identity across arbitrary finite systems and outcome registers.
+
+::: {.theorem #thm-nonselective-marginal title="Partial Trace of Isometric Recording Equals the Nonselective Block Sum" lean="D5/S3/Quantum/Decoherence/NonselectiveMarginalization.nonselective_recording_marginal"}
+Let $\mathrm{System}$ and $\mathrm{Outcome}$ be finite types with decidable equality, and let $\{P_a\}_{a \in \mathrm{Outcome}}$ be a family of matrices on $\mathrm{System}$ satisfying self-adjointness $P_a^* = P_a$, orthogonal idempotence $P_a P_b = \delta_{ab} P_a$, and completeness $\sum_a P_a = I$. Define the canonical recording matrix $V \in M_{(\mathrm{System} \times \mathrm{Outcome}) \times \mathrm{System}}(\mathbb{C})$ and the partial trace $\Tr_{\mathrm{Outcome}}$ over the outcome register by
+
+$$
+V_{(i, a),\, j} = (P_a)_{i, j}, \qquad \bigl(\Tr_{\mathrm{Outcome}}(J)\bigr)_{i, j} = \sum_{a \in \mathrm{Outcome}} J_{(i, a),\, (j, a)}.
+$$
+
+Then for every system matrix $\rho \in M_{\mathrm{System}}(\mathbb{C})$, tracing out the recording register yields the nonselective sum of diagonal projective blocks:
+
+$$
+\Tr_{\mathrm{Outcome}}(V \rho V^*) = \sum_{a \in \mathrm{Outcome}} P_a \rho P_a.
+$$
+:::
+
+::: proof
+Evaluate block $(a, b)$ of the joint matrix $J = V \rho V^*$ at system indices $(i, j)$:
+
+$$
+(V \rho V^*)_{(i, a),\, (j, b)} = \sum_{k, l \in \mathrm{System}} V_{(i, a),\, k}\,\rho_{k, l}\,\overline{V_{(j, b),\, l}} = \sum_{k, l \in \mathrm{System}} (P_a)_{i, k}\,\rho_{k, l}\,(P_b^*)_{l, j} = (P_a \rho P_b)_{i, j},
+$$
+
+using $P_b^* = P_b$ (`recording_isometry_and_state_blocks` in Lean; note also $V^* V = \sum_a P_a^* P_a = \sum_a P_a = I$, confirming that $V$ is an isometry). Setting $b = a$ and summing over $a \in \mathrm{Outcome}$ omits every off-diagonal environment block $a \neq b$ and leaves entrywise $\sum_a (P_a \rho P_a)_{i, j}$. The full proof is checked by the Lean kernel.
+:::
+
+[@thm-nonselective-marginal] demystifies decoherence at a stroke: the interference blocks $P_a \rho P_b$ ($a \neq b$) never vanished from $V \rho V^*$ — they are sitting intact in the off-diagonal environment sectors $(a, b)$! Only because $\Tr_{\mathrm{Outcome}}$ sums exclusively along diagonal sectors $(a, a)$ do those cross-blocks disappear from the local ledger. Traditional textbook orthodoxy drew a mysterious "Heisenberg cut" between microscopic systems and macroscopic observers, as if the observer enjoyed a special exemption outside quantum geometry; isometric recording closes the book on that artificial divide once and for all — **so everything is settled, without a single exception: even the structure of the observer works this exact way**, coupling and projecting on a higher-dimensional joint sphere by the very same orthogonal law.
+
+::: {.remark #rem-stinespring-literature title="Stinespring's Dilation Theorem and Microscopic Bath Underdetermination (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** In this chapter, [@thm-nonselective-marginal] constructs an explicit isometric recording dilation for finite orthogonal projective families $\{P_a\}$, and [@thm-reduced-access-defect] gives an explicit two-qubit unitary dilation for controlled copying. For an arbitrary completely positive trace-preserving (CPTP) quantum channel $\mathcal{E} : M_d(\mathbb{C}) \to M_{d'}(\mathbb{C})$, norm-preserving high-dimensional embedding is governed by **Stinespring's dilation theorem** (W. F. Stinespring, *Positive functions on $C^*$-algebras*, Proc. Amer. Math. Soc. **6**, 211–216, 1955):
+
+1. **Existence of isometric and unitary dilations**: There exists a finite-dimensional auxiliary environment Hilbert space $\mathcal{H}_{\mathrm{E}}$ (of dimension at most $d d'$, with minimal dimension equal to the Choi rank of $\mathcal{E}$) and a linear isometry $V : \mathcal{H}_{\mathrm{S}} \to \mathcal{H}_{\mathrm{S}'} \otimes \mathcal{H}_{\mathrm{E}}$ ($V^* V = I_{\mathrm{S}}$) such that $\mathcal{E}(\rho) = \Tr_{\mathrm{E}}(V \rho V^*)$ for all $\rho \in M_d(\mathbb{C})$; when $d' = d$, fixing a reference pure ancilla $\lvert e_0\rangle \in \mathcal{H}_{\mathrm{E}}$ and extending $V\lvert\psi\rangle = U(\lvert\psi\rangle \otimes \lvert e_0\rangle)$ to a joint unitary $U$ yields $\mathcal{E}(\rho) = \Tr_{\mathrm{E}}\bigl(U(\rho \otimes \lvert e_0\rangle\langle e_0\rvert)U^*\bigr)$.
+2. **Minimal-isometry unitary equivalence versus physical bath underdetermination**: Any two **minimal** isometric dilations $(\mathcal{H}_{\mathrm{E}_1}, V_1)$ and $(\mathcal{H}_{\mathrm{E}_2}, V_2)$ of the same channel $\mathcal{E}$ (with linearly independent Kraus operators and no uncoupled environment subspace) are related by a unique unitary operator $W : \mathcal{H}_{\mathrm{E}_1} \to \mathcal{H}_{\mathrm{E}_2}$ on the auxiliary environment satisfying $(I_{\mathrm{S}'} \otimes W)V_1 = V_2$. Physically, however, knowing the reduced channel $\mathcal{E}$ alone **underdetermines the actual microscopic bath**: redundant non-minimal bath dimensions, local basis rotations $W$ on $\mathcal{H}_{\mathrm{E}}$, and the continuous-time system–bath Hamiltonian $H_{\mathrm{SE}}(t)$ or interaction history that generated $V$ cannot be uniquely reconstructed from local channel tomography alone.
+
+These general CPTP existence and minimal-dilation uniqueness results are cited from the classical operator-algebra literature and are not claimed in the book's Lean verification ledger.
+:::
+
+An immediate, far-reaching consequence follows: **apparent local irreversibility is not dynamical destruction — it is an access defect caused by losing the environment key!**
+
+Test this on the sharpest possible pair: prepare East $\rho = \lvert +\rangle\langle +\rvert = \frac{1}{2}\bigl(\begin{smallmatrix}1 & 1\\ 1 & 1\end{smallmatrix}\bigr)$ versus West $\sigma = \lvert -\rangle\langle -\rvert = \frac{1}{2}\bigl(\begin{smallmatrix}1 & -1\\ -1 & 1\end{smallmatrix}\bigr)$ alongside a blank environment qubit $\lvert 0\rangle_{\mathrm{env}}$, and apply the reversible controlled-copy unitary $U_{\mathrm{copy}}$ (a CNOT permutation flipping the environment bit $a \mapsto 1 - a$ iff the system bit is $1$). Afterward:
+
+1. Locally on the system qubit alone, $\rho$ and $\sigma$ collapse to the **exact same** dead-center matrix $\frac{1}{2}I$ — no local recovery map on Earth can tell whether the input was $\lvert +\rangle$ or $\lvert -\rangle$;
+2. Globally on the joint two-qubit register, the two output states remain completely distinct, and applying the inverse unitary $U_{\mathrm{copy}}^*$ restores both $\rho$ and $\sigma$ without a scratch!
+
+The next theorem packages all six parts of this diagnosis into a single kernel-verified statement.
+
+::: {.theorem #thm-reduced-access-defect title="Reduced Irreversibility Is an Environment-Record Access Defect" lean="D5/S3/Quantum/Decoherence/ReducedRecordAccessDefect.reduced_irreversibility_is_access_defect"}
+Let $\rho, \sigma \in M_2(\mathbb{C})$ be two qubit matrices with identical diagonal entries ($\forall i,\, \rho_{ii} = \sigma_{ii}$) but at least one distinct off-diagonal entry ($\exists i \neq j,\, \rho_{ij} \neq \sigma_{ij}$). Write $U_{\mathrm{copy}} \in M_{\mathrm{Fin}\,2 \times \mathrm{Fin}\,2}(\mathbb{C})$ for the controlled address-copy permutation matrix, $B(\tau) = \tau \otimes \lvert 0\rangle\langle 0\rvert_{\mathrm{env}}$ for the blank-environment joint embedding, $R(\tau)$ for the controlled-record joint state, and $\Tr_{\mathrm{env}}$ for the partial trace over the environment. Then all six statements hold:
+
+1. **Unitarity of global coupling**: $U_{\mathrm{copy}} \in U(\mathrm{Fin}\,2 \times \mathrm{Fin}\,2, \mathbb{C})$;
+2. **Forward unitary record writing**: $U_{\mathrm{copy}} B(\rho) U_{\mathrm{copy}}^* = R(\rho)$ and $U_{\mathrm{copy}} B(\sigma) U_{\mathrm{copy}}^* = R(\sigma)$;
+3. **Identical reduced system marginals**: $\Tr_{\mathrm{env}}(R(\rho)) = \Tr_{\mathrm{env}}(R(\sigma))$;
+4. **Distinct global joint states**: $R(\rho) \neq R(\sigma)$;
+5. **Impossibility of local recovery**: there exists no recovery map $\mathcal{R} : M_2(\mathbb{C}) \to M_{\mathrm{Fin}\,2 \times \mathrm{Fin}\,2}(\mathbb{C})$ on the reduced state alone satisfying both $\mathcal{R}(\Tr_{\mathrm{env}}(R(\rho))) = R(\rho)$ and $\mathcal{R}(\Tr_{\mathrm{env}}(R(\sigma))) = R(\sigma)$;
+6. **Exact global unitary reversibility**: $U_{\mathrm{copy}}^* R(\rho) U_{\mathrm{copy}} = B(\rho)$ and $U_{\mathrm{copy}}^* R(\sigma) U_{\mathrm{copy}} = B(\sigma)$.
+:::
+
+::: proof
+Because $(i, a) \mapsto (i, a \oplus i)$ is an involutive permutation of `Fin 2 × Fin 2`, its permutation matrix $U_{\mathrm{copy}}$ is unitary (claim 1). Conjugating the blank-environment embedding $B(\tau)$ by $U_{\mathrm{copy}}$ reindexes entries so that system indices $(i, j)$ are copied into environment addresses $(i, i)$ and $(j, j)$, producing $R(\tau)$ (claim 2). Tracing out the environment kills $i \neq j$ terms by address mismatch and retains only diagonal entries $\tau_{ii}$; since $\rho_{ii} = \sigma_{ii}$, the reduced states coincide: $\Tr_{\mathrm{env}}(R(\rho)) = \Tr_{\mathrm{env}}(R(\sigma))$ (claim 3). Meanwhile, entry $((i, i), (j, j))$ of $R(\tau)$ equals $\tau_{ij}$, so $\rho_{ij} \neq \sigma_{ij}$ forces $R(\rho) \neq R(\sigma)$ (claim 4). No single-valued function $\mathcal{R}$ can map equal inputs $\Tr_{\mathrm{env}}(R(\rho)) = \Tr_{\mathrm{env}}(R(\sigma))$ to distinct outputs $R(\rho) \neq R(\sigma)$ (claim 5). Finally, conjugating by $U_{\mathrm{copy}}^*$ cancels $U_{\mathrm{copy}}$ via $U_{\mathrm{copy}}^* U_{\mathrm{copy}} = I$, recovering both $B(\rho)$ and $B(\sigma)$ exactly (claim 6). The full proof is checked by the Lean kernel.
+:::
+
+Write out the $4\times 4$ joint matrices of [@thm-reduced-access-defect] explicitly in the ordered two-qubit basis $\{\lvert 00\rangle, \lvert 01\rangle, \lvert 10\rangle, \lvert 11\rangle\}$ for East $\rho = \lvert +\rangle\langle +\rvert$ and West $\sigma = \lvert -\rangle\langle -\rvert$, and the mechanism jumps off the page:
+
+$$
+B\Bigl(\lvert \pm\rangle\langle \pm\rvert\Bigr) = \frac{1}{2}\begin{pmatrix} 1 & 0 & \pm 1 & 0 \\ 0 & 0 & 0 & 0 \\ \pm 1 & 0 & 1 & 0 \\ 0 & 0 & 0 & 0 \end{pmatrix} \;\xrightarrow{\;U_{\mathrm{copy}}\,\cdot\,U_{\mathrm{copy}}^*\;}\; R\Bigl(\lvert \pm\rangle\langle \pm\rvert\Bigr) = \frac{1}{2}\begin{pmatrix} 1 & 0 & 0 & \pm 1 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ \pm 1 & 0 & 0 & 1 \end{pmatrix}!
+$$
+
+Look at the four corners on the right: the coherence sign $\pm\frac{1}{2}$ was never erased — it simply moved from $(00, 10)$ out to the extreme corners $(00, 11)$ and $(11, 00)$! Yet taking the partial trace $\Tr_{\mathrm{env}}$ replaces each $2\times 2$ environment block by the sum of its *own* two diagonal entries: in the upper-right $2\times 2$ block, the block-diagonal positions $(00, 10)$ and $(01, 11)$ are both $0$, while the corner $(00, 11)$ holding $\pm\frac{1}{2}$ sits off the environment diagonal and is skipped! Thus both states reduce locally to the identical matrix $\frac{1}{2}\bigl(\begin{smallmatrix} 1+0 & 0+0 \\ 0+0 & 0+1 \end{smallmatrix}\bigr) = \frac{1}{2}I$.
+
+> Spilled milk looks irreversible only when you stare solely at the cup; in the ledger of the whole room, every phase is still accounted for.
+
+## 4.2 Understanding Quantum Noise Geometrically Without Memorizing Kraus Operators {#sec-ch04-2}
+
+Once decoherence is understood as projection foreshortening of the Bloch ball, the intimidating zoo of Kraus operator sums ($\mathcal{E}(\rho) = \sum_k E_k \rho E_k^*$) in quantum-information textbooks turns completely transparent. Without memorizing a single Kraus matrix, every standard single-qubit noise channel is simply an **affine compression and shift of the unit sphere into an interior ellipsoid**!
+
+Start with complete transverse dephasing — **standard-basis pinching** $\mathcal{P}(\rho)$ ([`pinching`](lean:D5/S3/QuantumChannels/Pinching.pinching) in Lean, preserving diagonal entries $\rho_{00}, \rho_{11}$ and zeroing off-diagonal entries $\rho_{01}, \rho_{10}$). Under the Hilbert–Schmidt inner product ([`hilbertSchmidtInner`](lean:D5/S3/QuantumChannels/Pinching.hilbertSchmidtInner) $\langle A, B\rangle_{\mathrm{HS}} = \Tr(A^* B)$), pinching is an exact orthogonal projection flattening the Bloch sphere onto its vertical diameter $[-\vv{e}_3, +\vv{e}_3]$, and the discarded equatorial mass equals the sum of squared moduli of the two off-diagonal entries!
+
+::: {.theorem #thm-pinching-pythagorean title="Hilbert–Schmidt Pythagorean Split and Discarded Coherence Mass of Qubit Pinching" lean="D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass"}
+For every qubit matrix $\rho \in M_2(\mathbb{C})$, writing $\mathcal{P}(\rho)_{ij} = \delta_{ij}\rho_{ij}$ for standard-basis pinching and $\langle A, B\rangle_{\mathrm{HS}} = \Tr(A^* B)$ for the Hilbert–Schmidt inner product:
+
+1. **Orthogonal Pythagorean decomposition**:
+
+   $$
+   \langle \rho, \rho\rangle_{\mathrm{HS}} = \langle \mathcal{P}(\rho), \mathcal{P}(\rho)\rangle_{\mathrm{HS}} + \langle \rho - \mathcal{P}(\rho),\, \rho - \mathcal{P}(\rho)\rangle_{\mathrm{HS}};
+   $$
+
+2. **Explicit discarded coherence mass**:
+
+   $$
+   \langle \rho - \mathcal{P}(\rho),\, \rho - \mathcal{P}(\rho)\rangle_{\mathrm{HS}} = |\rho_{01}|^2 + |\rho_{10}|^2.
+   $$
+
+:::
+
+::: proof
+Split $\rho = \mathcal{P}(\rho) + D$ with purely off-diagonal residual $D = \rho - \mathcal{P}(\rho)$. Because $\mathcal{P}$ is Hilbert–Schmidt self-adjoint ($\langle \mathcal{P}(A), B\rangle_{\mathrm{HS}} = \langle A, \mathcal{P}(B)\rangle_{\mathrm{HS}}$) and $\mathcal{P}(D) = 0$, both cross-terms $\langle \mathcal{P}(\rho), D\rangle_{\mathrm{HS}} = \langle \rho, \mathcal{P}(D)\rangle_{\mathrm{HS}} = 0$ and $\langle D, \mathcal{P}(\rho)\rangle_{\mathrm{HS}} = 0$ vanish, yielding the Pythagorean identity upon expanding $\langle \mathcal{P}(\rho) + D,\, \mathcal{P}(\rho) + D\rangle_{\mathrm{HS}}$ (claim 1). Substituting $D = \bigl(\begin{smallmatrix} 0 & \rho_{01} \\ \rho_{10} & 0 \end{smallmatrix}\bigr)$ into $\Tr(D^* D)$ sums its two diagonal entries $|\rho_{10}|^2$ and $|\rho_{01}|^2$ to $|\rho_{01}|^2 + |\rho_{10}|^2$ (claim 2). The full proof is checked by the Lean kernel.
+:::
+
+In continuous laboratory time, nature rarely crushes the sphere flat in a single blow; instead, repeated weak collisions in the strictly noisy regime multiply the equatorial waist by a retention factor $c \in [0, 1)$ at each step (with $c = 1$ being the noiseless identity endpoint). That is **phase damping** ($T_2$ transverse relaxation): whenever $c \in [0, 1)$, every vertical height $r_z$ stays frozen while the equatorial radius $(r_x, r_y)$ contracts strictly as $c^N$, squeezing the sphere into a prolate cigar that converges onto the north–south axis as $N \to \infty$!
+
+::: {.proposition #prop-phase-damping-decay title="Iterated Phase-Damping Entries and Exponential Decay of Equatorial Coherence" lean="D5/S3/Quantum/QubitWitnesses.phaseDampingIterate_apply D5/S3/Quantum/Decoherence/CoherenceDecay.equal_superposition_coherence_tendsto_zero"}
+Let $c \in [0, 1]$ be a real coherence-retention coefficient, and let $\mathcal{D}_c^{(N)}$ denote the $N$-fold iterate ($N \in \mathbb{N}$) of the single-step phase-damping map that preserves diagonal entries and scales off-diagonal entries by $c$. Then:
+
+1. For every qubit matrix $\rho \in M_2(\mathbb{C})$ and indices $i, j \in \{0, 1\}$,
+
+   $$
+   \bigl(\mathcal{D}_c^{(N)}(\rho)\bigr)_{i, j} = \begin{cases} \rho_{i, j}, & i = j, \\ c^N \rho_{i, j}, & i \neq j; \end{cases}
+   $$
+
+2. Whenever $c < 1$, for the equal-superposition density matrix $\rho_+ = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$, the off-diagonal coherence converges to zero as $N \to \infty$:
+
+   $$
+   \lim_{N \to \infty} \bigl(\mathcal{D}_c^{(N)}(\rho_+)\bigr)_{0, 1} = 0.
+   $$
+
+:::
+
+::: proof
+Claim 1 follows by induction on $N$: $N = 0$ is the identity ($c^0 = 1$), and step $N \to N + 1$ leaves diagonal entries $i = j$ untouched while multiplying off-diagonal entries $i \neq j$ by one more factor of $c$ to give $c^{N+1}\rho_{ij}$. For claim 2, evaluating claim 1 on $\rho_+$ at $(0, 1)$ gives $\frac{1}{2}c^N$; since $0 \le c < 1$, $|c| < 1$ implies $c^N \to 0$ as $N \to \infty$, and scaling by $\frac{1}{2}$ preserves convergence to $0$. The full proof is checked by the Lean kernel.
+:::
+
+Alongside energy-conserving $T_2$ dephasing stands energy-relaxing **amplitude damping** ($T_1$ spontaneous emission): an excited state at the south pole ($-1$) emits a quantum of energy into a cold bath and relaxes toward the ground state at the north pole ($+1$). Geometrically, the Bloch ball does not merely shrink around the origin — its center **drifts upward** along the vertical axis via the affine map [`dampedAxis`](lean:D5/S3/QuantumChannels/AmplitudeDampingContraction.dampedAxis) $u \mapsto u' = (1 - \gamma)u + \gamma$ ($0 \le \gamma < 1$).
+
+When we measure transverse coherence contraction under this axial drift using monotone Riemannian metrics of quantum information geometry — comparing the symmetric logarithmic derivative profile $\varphi_{\mathrm{SLD}}(u) = 1$ against the right logarithmic derivative profile $\varphi_{\mathrm{RLD}}(u) = \frac{1}{1 - u^2}$ via [`coherenceRatio`](lean:D5/S3/QuantumChannels/AmplitudeDampingContraction.coherenceRatio) $\mathcal{R}_\varphi(\gamma, u) = (1 - \gamma)\frac{\varphi(u')}{\varphi(u)}$ — their behavior at the pure ground-state boundary $u \to 1^-$ contrasts sharply!
+
+::: {.proposition #prop-amplitude-damping-contraction title="SLD and RLD Coherence-Contraction Endpoints Under Amplitude Damping" lean="D5/S3/QuantumChannels/AmplitudeDampingContraction.amplitude_damping_sld_rld_endpoints"}
+Let $0 \le \gamma < 1$, write $u'(\gamma, u) = (1 - \gamma)u + \gamma$ for the damped axial coordinate, and for a radial profile $\varphi : \mathbb{R} \to \mathbb{R}$ define the coherence contraction ratio $\mathcal{R}_\varphi(\gamma, u) = (1 - \gamma)\varphi(u'(\gamma, u)) / \varphi(u)$. With $\varphi_{\mathrm{SLD}}(u) = 1$ and $\varphi_{\mathrm{RLD}}(u) = \frac{1}{1 - u^2}$, both properties hold:
+
+1. **Constant SLD contraction**: for all $u \in \mathbb{R}$, $\mathcal{R}_{\varphi_{\mathrm{SLD}}}(\gamma, u) = 1 - \gamma$;
+2. **RLD interior bound and pure-boundary limit**: $\mathcal{R}_{\varphi_{\mathrm{RLD}}}(\gamma, u) \le 1$ for every interior coordinate $u \in (-1, 1)$, and as $u$ approaches the pure boundary $1$ from below,
+
+   $$
+   \lim_{u \to 1^-} \mathcal{R}_{\varphi_{\mathrm{RLD}}}(\gamma, u) = 1.
+   $$
+
+:::
+
+::: proof
+Claim 1 simplifies immediately since $\varphi_{\mathrm{SLD}}(u) = 1$. For claim 2 — packaged in Lean via the predicate [`HasPureBoundaryEndpoint`](lean:D5/S3/QuantumChannels/AmplitudeDampingContraction.HasPureBoundaryEndpoint), conjunction of the interior upper bound $\le 1$ on $u \in (-1, 1)$ and the left-neighborhood filter limit as $u \to 1^-$ — when $u \in (-1, 1)$ and $0 \le \gamma < 1$, note that $1 - u' = 1 - ((1 - \gamma)u + \gamma) = (1 - \gamma)(1 - u)$. Substituting $\varphi_{\mathrm{RLD}}(v) = \frac{1}{(1 - v)(1 + v)}$ cancels $(1 - \gamma)(1 - u)$ cleanly between numerator and denominator:
+
+$$
+\mathcal{R}_{\varphi_{\mathrm{RLD}}}(\gamma, u) = (1 - \gamma)\cdot\frac{1 - u^2}{1 - u'^2} = (1 - \gamma)\cdot\frac{(1 - u)(1 + u)}{(1 - \gamma)(1 - u)(1 + u')} = \frac{1 + u}{1 + (1 - \gamma)u + \gamma}.
+$$
+
+Because $u < 1$ and $\gamma \ge 0$, subtracting numerator from denominator gives $\gamma(1 - u) \ge 0$ with positive denominator, proving $\mathcal{R}_{\varphi_{\mathrm{RLD}}}(\gamma, u) \le 1$ on $(-1, 1)$; letting $u \to 1^-$ sends both numerator and denominator continuously to $2$, yielding limit $\frac{2}{2} = 1$. The full proof is checked by the Lean kernel.
+:::
+
+We can now summarize the four workhorse single-qubit noise channels as simple three-dimensional deformations of the Bloch ball — no Kraus tables required:
+
+| Noise Channel (Strictly Contracting Domain) | Affine Bloch Map $\vv{r} = (r_x, r_y, r_z) \mapsto \vv{r}'$ | Geometric Deformation of the Sphere | Fixed-Point Locus on Strictly Contracting Domain |
+| :--- | :---: | :--- | :--- |
+| **Phase Damping** ($0 \le c < 1$) | $(c\,r_x,\; c\,r_y,\; r_z)$ | Horizontal waist squeeze into a vertical cigar around $Z$ | $Z$-axis segment $(0, 0, r_z)$ |
+| **Bit-Flip Channel** ($0 < p < 1$) | $\bigl(r_x,\; (1-2p)r_y,\; (1-2p)r_z\bigr)$ | Radial cylindrical squeeze toward the $X$ axis (with transverse sign flip for $p > \frac{1}{2}$) | $X$-axis segment $(r_x, 0, 0)$ |
+| **Depolarizing Channel** ($0 < \lambda \le 1$) | $\bigl((1-\lambda)r_x,\; (1-\lambda)r_y,\; (1-\lambda)r_z\bigr)$ | Uniform isotropic contraction toward the origin | Bloch center $\vv{r} = \vv{0}$ only |
+| **Amplitude Damping** ($0 < \gamma < 1$) | $\bigl(\sqrt{1-\gamma}\,r_x,\; \sqrt{1-\gamma}\,r_y,\; (1-\gamma)r_z + \gamma\bigr)$ | Ellipsoidal contraction + upward drift toward North $+\vv{e}_3$ | North pole $+\vv{e}_3 = (0, 0, 1)$ only |
+
+(Note: At the **zero-noise identity endpoints** $c = 1$, $p = 0$, $\lambda = 0$, or $\gamma = 0$, each channel reduces to the identity map $\vv{r}' = \vv{r}$ and fixes the **entire Bloch ball**; at the non-contracting **deterministic upper endpoints**, the bit-flip map at $p = 1$ becomes the norm-preserving unitary $\pi$-rotation $\rho \mapsto X\rho X$, $\vv{r}' = (r_x, -r_y, -r_z)$ about the $X$ axis rather than a radial squeeze, while amplitude damping at $\gamma = 1$ resets the entire Bloch ball in one step to the pure north pole $+\vv{e}_3 = (0, 0, 1)$.)
+
+Ask one more geometric question about the last row of that table: **why does shrinking the vertical energy axis toward North by $(1 - \gamma)$ force the equatorial waist to shrink by the square root $\sqrt{1 - \gamma}$ — and how does that single square root immediately enforce the universal NMR and superconducting-qubit bound $T_2 \le 2T_1$?**
+
+Look at the **tangent cap of the sphere right around the North Pole**! Take a narrow pure-state latitude ring at $r_z = 1 - \epsilon$ ($0 < \epsilon \ll 1$), whose horizontal radius squared is $r_x^2 + r_y^2 = 1 - r_z^2 = (1 - r_z)(1 + r_z) \approx 2\epsilon$. After upward axial drift to $r_z' = (1 - \gamma)r_z + \gamma = 1 - (1 - \gamma)\epsilon$, keeping the deformed ellipsoid *inside* the unit Bloch ball (so that no eigenvalue of $\rho$ ever goes negative!) caps the new horizontal radius squared at
+
+$$
+r_x'^2 + r_y'^2 \le 1 - r_z'^2 = (1 - r_z')(1 + r_z') \approx 2(1 - \gamma)\epsilon = (1 - \gamma)(r_x^2 + r_y^2).
+$$
+
+There it is: the exact same algebraic factor $1 - u' = (1 - \gamma)(1 - u)$ that canceled in [@prop-amplitude-damping-contraction] forces the transverse contraction factor $\lambda_\perp$ to obey $\lambda_\perp^2 \le 1 - \gamma$, i.e., $\lambda_\perp \le \sqrt{1 - \gamma}$! In continuous time, longitudinal energy decay $1 - \gamma = e^{-t/T_1}$ therefore contributes transverse amplitude decay $\sqrt{1 - \gamma} = e^{-t/(2T_1)}$. Multiplying by any independent pure-dephasing factor $c = e^{-t/T_\varphi}$ gives net transverse envelope $e^{-t/T_2} = e^{-t/(2T_1)}e^{-t/T_\varphi}$, whence
+
+$$
+\frac{1}{T_2} = \frac{1}{2T_1} + \frac{1}{T_\varphi} \ge \frac{1}{2T_1} \quad\Longrightarrow\quad T_2 \le 2T_1!
+$$
+
+Without solving a single Lindblad differential equation, the parabolic curvature of the unit sphere at its North Pole locks $T_2 \le 2T_1$ directly into place.
+
+## 4.3 The Maximally Mixed Dead Center ($\vv{r} = \vv{0}$) {#sec-ch04-3}
+
+Follow the contraction all the way inward: first annihilate equatorial coherence so the state lands on the north–south axis, and then erase vertical bias $r_z$ as well until the Bloch vector vanishes into the geometric origin $\vv{r} = \vv{0}$.
+
+First we record the exact algebraic criterion for vanishing equatorial coherence as an immediate corollary of [@thm-pinching-pythagorean].
+
+::: {.corollary #cor-pinching-zero-offdiag title="Zero Discarded Coherence Mass and Pinching Fixed Points via Off-Diagonal Vanishing" lean="D5/S3/QuantumChannels/CoherenceMassBridge.pinching_eq_self_iff_offDiag_eq_zero D5/S3/QuantumChannels/CoherenceMassBridge.pinching_discarded_mass_eq_zero_iff"}
+For any qubit matrix $\rho \in M_2(\mathbb{C})$ with off-diagonal pair $\operatorname{offDiag}(\rho) = (\rho_{01}, \rho_{10}) \in \mathbb{C} \times \mathbb{C}$, the following three conditions are equivalent:
+
+1. $\rho$ is a fixed point of standard-basis pinching: $\mathcal{P}(\rho) = \rho$;
+2. Pinching discards zero Hilbert–Schmidt coherence mass: $\langle \rho - \mathcal{P}(\rho),\, \rho - \mathcal{P}(\rho)\rangle_{\mathrm{HS}} = 0$;
+3. Both off-diagonal entries of $\rho$ vanish: $\operatorname{offDiag}(\rho) = (0, 0)$.
+:::
+
+::: proof
+($1 \Leftrightarrow 3$): $\mathcal{P}(\rho)$ agrees with $\rho$ on diagonal indices $(0, 0), (1, 1)$ and equals $0$ at $(0, 1), (1, 0)$, so $\mathcal{P}(\rho) = \rho$ holds if and only if $\rho_{01} = \rho_{10} = 0$. ($2 \Leftrightarrow 3$): By claim 2 of [@thm-pinching-pythagorean], the discarded mass equals $|\rho_{01}|^2 + |\rho_{10}|^2$; a sum of two nonnegative real numbers vanishes if and only if each summand vanishes, which holds if and only if $\rho_{01} = \rho_{10} = 0$. The full proof is checked by the Lean kernel.
+:::
+
+Setting $\rho_{01} = \rho_{10} = 0$ ($r_x = r_y = 0$) together with equal populations $\rho_{00} = \rho_{11} = \frac{1}{2}$ ($r_z = 0$) brings us to the most symmetric — and locally most silent — state in single-qubit physics: $\rho_* = \frac{1}{2}I$. Let us examine this dead center from four angles, discovering at its core a secret portal to multi-qubit entanglement.
+
+::: {.example #ex-maximally-mixed-center title="Anatomy of the Maximally Mixed Center and a Preview of Bell Entanglement"}
+At the Bloch origin $\vv{r} = (0, 0, 0)$, [@prop-qubit-bloch-core] gives $B(\vv{0}) = 0$, so the density matrix is half the identity:
+
+$$
+\rho_* = \frac{1}{2}\bigl(I + B(\vv{0})\bigr) = \frac{1}{2}\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}.
+$$
+
+Four geometric properties converge at this single point:
+
+1. **Omnidirectional blindness**: Against *every* unit measurement direction $\vv{n} \in S^2$ ($P_{\vv{n}} = \frac{1}{2}(I + B(\vv{n}))$), the Born formula of [@ex-bloch-half-angle] gives
+
+   $$
+   \Tr(\rho_* P_{\vv{n}}) = \frac{1 + \vv{0}\cdot\vv{n}}{2} = \frac{1}{2}.
+   $$
+
+   Rotate your Stern–Gerlach magnet or polarizer wherever you please — north, east, or skew — and the detector answers with $50\% : 50\%$ white noise! Just as diagnosed in the Fourth Blind Spot of the [Prelude](README.md), averaging impartially over all directions on the sphere ($\frac{1}{4\pi}\int_{S^2} \vv{a}\,d\Omega = \vv{0}$) collapses "omniscient symmetry" into total blindness.
+2. **Zero purity excess**: Since $\rho_*^2 = \frac{1}{4}I$, purity hits the two-dimensional floor $\Tr(\rho_*^2) = \frac{1}{2}$. In [@thm-complementary-pythagoras] ($|d| = 2$), the purity excess $\Tr(\rho_*^2) - \frac{1}{2} = 0$ vanishes identically: neither axial particle bias nor equatorial wave coherence remains.
+3. **Infinite ensemble ambiguity**: Mixing $50\%$ North with $50\%$ South gives $\frac{1}{2}\rho_{+\vv{e}_3} + \frac{1}{2}\rho_{-\vv{e}_3} = \frac{1}{2}I$; mixing $50\%$ East with $50\%$ West also gives $\frac{1}{2}\rho_{+\vv{e}_1} + \frac{1}{2}\rho_{-\vv{e}_1} = \frac{1}{2}I$! Once collapsed to the center of mass $\vv{r} = \vv{0}$, no experiment can ever reconstruct which antipodal pair was blended to form it.
+4. **Foreshadowing Part IV (Entangled Spheres)**: Return to the joint pure state of Section 4.1 at $\theta_{\mathrm{env}} = 90^\circ$ — the maximally entangled **Bell state** $\lvert\Phi^+\rangle = \frac{1}{\sqrt{2}}(\lvert 00\rangle + \lvert 11\rangle)$, whose density operator expands as $\rho_{AB} = \frac{1}{4}(I \otimes I + \sigma_x \otimes \sigma_x - \sigma_y \otimes \sigma_y + \sigma_z \otimes \sigma_z)$. Globally, the two-qubit pair is in a zero-entropy pure state of full norm ($\Tr(\rho_{AB}^2) = 1$). Yet inspect qubit $A$ alone and you find $\rho_A = \frac{1}{2}I$ ($\vv{r}_A = \vv{0}$); inspect qubit $B$ alone and you find $\rho_B = \frac{1}{2}I$ ($\vv{r}_B = \vv{0}$)! Both local spheres sit at their dead centers, with vanishing single-qubit Pauli sectors $\sigma_i \otimes I$ and $I \otimes \sigma_j$. Where does $100\%$ of the nontrivial purity reside? **Entirely in the joint two-qubit Pauli correlation sector $\sigma_i \otimes \sigma_j$ (which Part IV, Chapter 13 interprets geometrically as shared correlation planes spanning the two spheres)!**
+:::
+
+---
+
+### Summary of Part I: From Point to Line — Ready to Open the Plane
+
+Across the four chapters of Part I, backed by nineteen Lean-verified theorem blocks (spanning twenty-two frozen Lean theorems, three core definitions, and thirty-eight locked formal declarations in total), we have rebuilt the ground floor of quantum mechanics without a single mysterious postulate:
+
+- **Chapter 1** dismantled both the isolated-particle myth and the external-point-$C$ coordinate scaffolding, proved that $M_2(\mathbb{C})$ admits no algebraic character ([@thm-qubit-no-character]), and used unitary ray rigidity ([@thm-ray-phase-rigidity]) and the Bloch map ([@prop-qubit-bloch-core]) to turn four-parameter complex column vectors into real unit rays $\vv{a} \in S^2$;
+- **Chapter 2** chose the known state itself as basis, identified "point $C$" as the endogenous compatibility shadow $\vv{c} = (\vv{a}\cdot\vv{b})\vv{a}$, and derived Born's squared-modulus rule ([@thm-born-modulus-square], [@thm-rank-one-born-pairing]) and the half-angle identity $\cos^2(\theta/2) = \frac{1 + \cos\theta}{2}$ directly from coordinate-free trace pairing and Pythagoras's theorem;
+- **Chapter 3** revealed particles, concepts, and ticks of classical linear time as fixed points of idempotent lines $P^2 = P$ ([@thm-pinching-idempotent], [@thm-unread-fixed-iff], [@thm-conditional-state-valid]), paired inseparably with their Hodge-dual wave planes via complementary Pythagorean tomography ([@thm-complementary-pythagoras]);
+- **Chapter 4** traced decoherence to partial-trace foreshortening ([@thm-nonselective-marginal]), proved that local irreversibility is an environment-access defect rather than ontological loss ([@thm-reduced-access-defect]), and mapped quantum noise channels onto transparent ellipsoidal contractions of the Bloch ball ([@thm-pinching-pythagorean], [@prop-phase-damping-decay], [@prop-amplitude-damping-contraction], [@cor-pinching-zero-offdiag]).
+
+With the one-dimensional projection line $\vv{a}\cdot\vv{b} = \cos\theta$ firmly in hand, **Part II (*Unfolding Wings — From Line to Plane*)** raises our gaze to the oriented two-dimensional area $\vv{a} \wedge \vv{b} = \sin\theta\,\hat{I}$ — revealing why the "imaginary unit" is nothing more than a $90^\circ$ planar turn, and unifying quantum gates with all five textbook postulates through the single Clifford geometric product $AB = A\cdot B + A\wedge B$.

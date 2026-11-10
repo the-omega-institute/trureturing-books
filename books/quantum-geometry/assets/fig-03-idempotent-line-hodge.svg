@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 352" width="860" height="352">
+  <defs>
+    <marker id="p3-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M1 1.5L8.5 5L1 8.5Z" fill="#19f0ff"/>
+    </marker>
+    <marker id="p3-mag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M1 1.5L8.5 5L1 8.5Z" fill="#ff2fd0"/>
+    </marker>
+    <marker id="p3-amb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M1 1.5L8.5 5L1 8.5Z" fill="#ffc83d"/>
+    </marker>
+    <marker id="p3-vio" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M1 1.5L8.5 5L1 8.5Z" fill="#9d8cff"/>
+    </marker>
+    <marker id="p3-slate" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M1 1.5L8.5 5L1 8.5Z" fill="#6f8ea5"/>
+    </marker>
+  </defs>
+
+  <rect x="4" y="4" width="852" height="344" rx="12" fill="#07101b" stroke="#143049" stroke-width="1.5"/>
+  <line x1="420" y1="28" x2="420" y2="294" stroke="#143049" stroke-width="1.2"/>
+
+  <g font-family="JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, system-ui, sans-serif">
+    <!-- LEFT PANEL: Idempotent Axial Line & Hodge Dual Equatorial Plane -->
+    <text x="212" y="42" text-anchor="middle" font-size="12" font-weight="600" fill="#19f0ff">IDEMPOTENT AXIS P² = P &amp; HODGE DUAL ⋆e₁</text>
+
+    <!-- Equatorial bivector disc e2 ^ e3 -->
+    <ellipse cx="205" cy="186" rx="116" ry="36" fill="#ff2fd0" fill-opacity="0.14" stroke="#ff2fd0" stroke-width="1.6"/>
+    <!-- Oriented circulation arc inside equatorial disc -->
+    <path d="M145 186 A60 18 0 1 0 265 186" fill="none" stroke="#ff2fd0" stroke-width="1.6" stroke-dasharray="4 2" marker-end="url(#p3-mag)"/>
+
+    <!-- Basis vectors e2, e3 on disc -->
+    <line x1="205" y1="186" x2="306" y2="186" stroke="#6f8ea5" stroke-width="1.6" marker-end="url(#p3-mag)"/>
+    <line x1="205" y1="186" x2="148" y2="208" stroke="#6f8ea5" stroke-width="1.6" marker-end="url(#p3-mag)"/>
+    <text x="318" y="190" font-size="12" fill="#ff2fd0">e₂</text>
+    <text x="134" y="216" font-size="12" fill="#ff2fd0">e₃</text>
+
+    <!-- Vertical idempotent line e1 (observer attention axis) -->
+    <line x1="205" y1="258" x2="205" y2="74" stroke="#ffc83d" stroke-width="2.6" marker-end="url(#p3-amb)"/>
+    <text x="205" y="64" text-anchor="middle" font-size="13" font-weight="600" fill="#ffc83d">e₁ (V)</text>
+
+    <!-- State vector r and orthogonal decomposition V (+) V^perp -->
+    <line x1="205" y1="186" x2="278" y2="112" stroke="#19f0ff" stroke-width="2.4" marker-end="url(#p3-cyan)"/>
+    <!-- Drop to vertical axis V -->
+    <line x1="278" y1="112" x2="205" y2="112" stroke="#cfe3ff" stroke-width="1.3" stroke-dasharray="3 3"/>
+    <!-- Drop to equatorial plane V^perp -->
+    <line x1="278" y1="112" x2="278" y2="186" stroke="#ff2fd0" stroke-width="1.3" stroke-dasharray="3 3"/>
+    <line x1="205" y1="186" x2="276" y2="186" stroke="#ff2fd0" stroke-width="2.4"/>
+    <circle cx="205" cy="112" r="4" fill="#ffc83d"/>
+    <!-- Self-loop showing P(P(r)) = P(r) -->
+    <path d="M198 108 C170 96, 170 128, 198 116" fill="none" stroke="#19f0ff" stroke-width="1.5" marker-end="url(#p3-cyan)"/>
+    <text x="166" y="116" text-anchor="end" font-size="11" fill="#19f0ff">P² = P</text>
+    <text x="288" y="110" font-size="12" font-weight="600" fill="#19f0ff">state</text>
+    <text x="205" y="246" text-anchor="middle" font-size="12" fill="#ff2fd0">V⊥ : ⋆e₁ = e₂ ∧ e₃</text>
+    <text x="205" y="276" text-anchor="middle" font-size="11" fill="#cfe3ff">‖state‖² = ‖Π_V(state)‖² + ‖Π_V⊥(state)‖²</text>
+
+    <!-- RIGHT PANEL: Classical Time Axis & Three-Polarizer Cascade -->
+    <text x="638" y="42" text-anchor="middle" font-size="12" font-weight="600" fill="#19f0ff">CLASSICAL TICKS τ₁ → τ₂ → τ₃ (MALUS CASCADE)</text>
+
+    <!-- Classical history timeline (neutral slate/cyan) -->
+    <line x1="464" y1="154" x2="812" y2="154" stroke="#6f8ea5" stroke-width="2" marker-end="url(#p3-cyan)"/>
+    <text x="822" y="158" font-size="12" font-weight="600" fill="#19f0ff">τ</text>
+
+    <!-- Gate 1: tau_1 (0 deg, past tick) -->
+    <rect x="492" y="102" width="44" height="104" rx="6" fill="#050c16" stroke="#6f8ea5" stroke-width="1.6"/>
+    <line x1="514" y1="116" x2="514" y2="192" stroke="#d4efff" stroke-width="2.2" marker-end="url(#p3-slate)"/>
+    <circle cx="514" cy="154" r="3.5" fill="#6f8ea5"/>
+    <text x="514" y="92" text-anchor="middle" font-size="12" fill="#6f8ea5">τ₁ : P₀°</text>
+    <text x="514" y="224" text-anchor="middle" font-size="11" fill="#d4efff">w₁ = 1</text>
+
+    <!-- Gate 2: tau_2 (45 deg, selected present tick in amber) -->
+    <rect x="608" y="102" width="44" height="104" rx="6" fill="#050c16" stroke="#ffc83d" stroke-width="2"/>
+    <line x1="615" y1="178" x2="645" y2="130" stroke="#ffc83d" stroke-width="2.4" marker-end="url(#p3-amb)"/>
+    <circle cx="630" cy="154" r="4.2" fill="#ffc83d"/>
+    <text x="630" y="92" text-anchor="middle" font-size="12" font-weight="600" fill="#ffc83d">τ₂ (now) : P₄₅°</text>
+    <text x="630" y="224" text-anchor="middle" font-size="11" fill="#ffc83d">w₂ = cos²45° = ½</text>
+
+    <!-- Gate 3: tau_3 (90 deg, future tick) -->
+    <rect x="724" y="102" width="44" height="104" rx="6" fill="#050c16" stroke="#6f8ea5" stroke-width="1.6"/>
+    <line x1="730" y1="154" x2="762" y2="154" stroke="#d4efff" stroke-width="2.2" marker-end="url(#p3-slate)"/>
+    <circle cx="746" cy="154" r="3.5" fill="#6f8ea5"/>
+    <text x="746" y="92" text-anchor="middle" font-size="12" fill="#6f8ea5">τ₃ : P₉₀°</text>
+    <text x="746" y="224" text-anchor="middle" font-size="11" fill="#d4efff">w₃|₂ = cos²45° = ½</text>
+
+    <!-- Comparison note -->
+    <text x="638" y="256" text-anchor="middle" font-size="12" fill="#cfe3ff">P₉₀° P₀° = 0 (w = 0)   vs   P₉₀° P₄₅° P₀° ≠ 0 (w = ¼)</text>
+    <text x="638" y="276" text-anchor="middle" font-size="11" fill="#6f8ea5">ρ|ₖ = wₖ⁻¹ Pₖ ρ Pₖ   (Tr ρ|ₖ = 1, ρ|ₖ ≥ 0)</text>
+
+    <!-- Bottom Lean-verified bar -->
+    <rect x="28" y="304" width="804" height="28" rx="6" fill="#050c16" stroke="#1f5d7c" stroke-width="1"/>
+    <text x="430" y="322" text-anchor="middle" font-size="12" fill="#46ffb2">LEAN ✓  unreadState(P) ∘ unreadState(P) = unreadState(P)   ·   unreadState(P, ρ) = ρ ⇔ ∀ k ≠ l, Pₖ ρ Pₗ = 0</text>
+  </g>
+</svg>

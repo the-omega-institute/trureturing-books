@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 340" width="860" height="340">
+  <defs>
+    <marker id="p1-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M1 1.5L8.5 5L1 8.5Z" fill="#19f0ff"/>
+    </marker>
+    <marker id="p1-mag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M1 1.5L8.5 5L1 8.5Z" fill="#ff2fd0"/>
+    </marker>
+    <marker id="p1-amb" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M1 1.5L8.5 5L1 8.5Z" fill="#ffc83d"/>
+    </marker>
+    <marker id="p1-dim" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto">
+      <path d="M1 1.5L8.5 5L1 8.5Z" fill="#6f8ea5"/>
+    </marker>
+  </defs>
+
+  <rect x="4" y="4" width="852" height="332" rx="12" fill="#07101b" stroke="#143049" stroke-width="1.5"/>
+
+  <!-- Panel dividers -->
+  <line x1="258" y1="28" x2="258" y2="290" stroke="#143049" stroke-width="1.2"/>
+  <line x1="536" y1="28" x2="536" y2="290" stroke="#143049" stroke-width="1.2"/>
+
+  <g font-family="JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, system-ui, sans-serif">
+    <!-- PANEL I: N = 1 (Isolated single vector undefined) -->
+    <text x="131" y="42" text-anchor="middle" font-size="12" font-weight="600" fill="#6f8ea5">I · N = 1 (ISOLATED)</text>
+    <circle cx="131" cy="154" r="64" fill="#19f0ff" fill-opacity="0.03" stroke="#34506a" stroke-width="1.4" stroke-dasharray="4 4"/>
+    <ellipse cx="131" cy="154" rx="64" ry="20" fill="none" stroke="#34506a" stroke-width="0.9" stroke-dasharray="3 4"/>
+    <line x1="131" y1="154" x2="171" y2="105" stroke="#19f0ff" stroke-width="2.4" marker-end="url(#p1-cyan)"/>
+    <circle cx="131" cy="154" r="3" fill="#6f8ea5"/>
+    <text x="182" y="102" font-size="14" font-style="italic" fill="#19f0ff">a</text>
+    <text x="92" y="128" font-size="16" fill="#6f8ea5">θ = ?</text>
+    <text x="131" y="248" text-anchor="middle" font-size="12" fill="#d4efff">∀ R ∈ SO(3), ‖Ra‖ = ‖a‖</text>
+    <text x="131" y="268" text-anchor="middle" font-size="11" fill="#6f8ea5">0 relational invariants</text>
+
+    <!-- PANEL II: N = 3 (External point C redundant) -->
+    <text x="397" y="42" text-anchor="middle" font-size="12" font-weight="600" fill="#ff8a3c">II · N = 3 (SURPLUS C)</text>
+    <!-- Redundant external Cartesian grid -->
+    <g stroke="#34506a" stroke-width="0.8" stroke-dasharray="2 3">
+      <path d="M300 95H494M300 135H494M300 175H494M300 215H494"/>
+      <path d="M325 75V228M365 75V228M405 75V228M445 75V228M485 75V228"/>
+    </g>
+    <!-- External C_ext -->
+    <circle cx="332" cy="202" r="4" fill="#ff8a3c"/>
+    <line x1="332" y1="202" x2="452" y2="188" stroke="#6f8ea5" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#p1-dim)"/>
+    <line x1="332" y1="202" x2="416" y2="104" stroke="#6f8ea5" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#p1-dim)"/>
+    <!-- True pair a, b -->
+    <line x1="382" y1="162" x2="452" y2="188" stroke="#19f0ff" stroke-width="2.2" marker-end="url(#p1-cyan)"/>
+    <line x1="382" y1="162" x2="416" y2="104" stroke="#ff2fd0" stroke-width="2.2" marker-end="url(#p1-mag)"/>
+    <!-- Strike out C_ext -->
+    <path d="M320 190L344 214M344 190L320 214" stroke="#ff8a3c" stroke-width="2.4"/>
+    <text x="318" y="226" font-size="12" fill="#ff8a3c">C_ext</text>
+    <text x="462" y="193" font-size="13" font-style="italic" fill="#19f0ff">x</text>
+    <text x="424" y="102" font-size="13" font-style="italic" fill="#ff2fd0">y</text>
+    <text x="397" y="248" text-anchor="middle" font-size="12" fill="#d4efff">⟨x, y⟩ = ¼(‖x+y‖² − ‖x−y‖²)</text>
+    <text x="397" y="268" text-anchor="middle" font-size="11" fill="#ff8a3c">C_ext cancels identically</text>
+
+    <!-- PANEL III: N = 2 Pairwise encounter + 1D shutter -->
+    <text x="696" y="42" text-anchor="middle" font-size="12" font-weight="600" fill="#19f0ff">III · N = 2 (PAIRWISE + SHUTTER)</text>
+    <!-- Continuous circle + two vectors -->
+    <circle cx="645" cy="150" r="60" fill="#19f0ff" fill-opacity="0.05" stroke="#19f0ff" stroke-width="1.4"/>
+    <path d="M645 150 L645 90 A60 60 0 0 1 694 115 Z" fill="#ff2fd0" fill-opacity="0.18"/>
+    <!-- Ruler axis A (vertical, observer focus in amber) -->
+    <line x1="645" y1="210" x2="645" y2="88" stroke="#ffc83d" stroke-width="2.4" marker-end="url(#p1-amb)"/>
+    <!-- State B -->
+    <line x1="645" y1="150" x2="694" y2="115" stroke="#ff2fd0" stroke-width="2.4" marker-end="url(#p1-mag)"/>
+    <!-- Projection dashed line onto A -->
+    <line x1="694" y1="115" x2="645" y2="115" stroke="#cfe3ff" stroke-width="1.3" stroke-dasharray="3 3"/>
+    <circle cx="645" cy="115" r="3.5" fill="#19f0ff"/>
+    <path d="M645 122 A28 28 0 0 1 668 134" fill="none" stroke="#d4efff" stroke-width="1.3"/>
+    <text x="662" y="120" font-size="12" font-style="italic" fill="#d4efff">θ</text>
+    <text x="634" y="86" font-size="13" font-weight="600" fill="#ffc83d">A</text>
+    <text x="702" y="114" font-size="13" font-style="italic" fill="#ff2fd0">B</text>
+
+    <!-- 1D Shutter readout on right of Panel III -->
+    <line x1="756" y1="90" x2="756" y2="210" stroke="#6f8ea5" stroke-width="1.6"/>
+    <line x1="748" y1="90" x2="764" y2="90" stroke="#ffc83d" stroke-width="2.4"/>
+    <line x1="748" y1="210" x2="764" y2="210" stroke="#ffc83d" stroke-width="2.4"/>
+    <circle cx="756" cy="90" r="4.5" fill="#19f0ff"/>
+    <circle cx="756" cy="210" r="4.5" fill="#ff2fd0"/>
+    <line x1="708" y1="102" x2="744" y2="92" stroke="#19f0ff" stroke-width="1.1" stroke-dasharray="2 2" marker-end="url(#p1-cyan)"/>
+    <line x1="708" y1="186" x2="744" y2="206" stroke="#ff2fd0" stroke-width="1.1" stroke-dasharray="2 2" marker-end="url(#p1-mag)"/>
+    <text x="786" y="95" font-size="12" font-weight="600" fill="#19f0ff">+1</text>
+    <text x="786" y="214" font-size="12" font-weight="600" fill="#ff2fd0">−1</text>
+    <text x="788" y="154" font-size="11" fill="#6f8ea5">ZX = −XZ</text>
+
+    <text x="696" y="248" text-anchor="middle" font-size="12" fill="#d4efff">S³ / U(1) ≅ S² ⊂ ℝ³</text>
+    <text x="696" y="268" text-anchor="middle" font-size="11" fill="#6f8ea5">B(a) = a₀X + a₁Y + a₂Z</text>
+
+    <!-- Bottom Lean-verified bar -->
+    <rect x="28" y="296" width="804" height="26" rx="6" fill="#050c16" stroke="#1f5d7c" stroke-width="1"/>
+    <text x="430" y="314" text-anchor="middle" font-size="12" fill="#46ffb2">LEAN ✓  ‖x + y‖² + ‖x − y‖² = 2(‖x‖² + ‖y‖²)   ·   IsEmpty(M₂(ℂ) →ₐ[ℂ] ℂ)   ·   A = cI (|c| = 1)</text>
+  </g>
+</svg>

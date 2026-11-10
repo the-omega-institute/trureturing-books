@@ -1,0 +1,139 @@
+# Prelude: Point, Line, Plane, Sphere, and the One Beyond the Sphere
+
+> *"What we take to be a point is in fact a line; what we take to be a line is in fact a plane; what we take to be a plane is in fact a sphere; and when we think we have seen the sphere, we are already enclosed within a larger sphere."*
+>
+> *"This is the $\psi = \psi(\psi)$ we investigated from the very beginning."*
+
+For more than a century, quantum mechanics has been taught like a temple guarded by arcane rites. Beginners are asked to surrender everyday spatial intuition at the door, memorize a catechism of disconnected postulates — complex Hilbert spaces, Hermitian spectral decompositions, unitary evolution, and sudden wave-packet collapse — and then wander through decades of fog over why operators fail to commute, why cats seem suspended between life and death, and where an observation truly ends. Generation after generation comes away convinced that the microscopic world is strange because nature, at its foundation, has betrayed geometry.
+
+This book advances the opposite diagnosis: **nature has never betrayed geometry; what betrays us is a hierarchy of dimensional blind spots in which an embedded observer mistakes a low-dimensional projection slice for the whole of reality.** There was never a pre-packaged "quantum" (liàng, a discrete noun-share) sitting in nature; two states simply met and measured (liáng, a relational verb) one another, and when the ruler that measures ($\cos$) and the reading that is measured ($\theta$) collapse into one, everything returns to the primordial equation: $\psi = \psi(\psi)$.
+
+Whenever physics has appeared haunted by paradox, the culprit has almost always been the same cognitive habit: forcing a higher-dimensional motion onto a lower-dimensional ruler, and then inventing mystical dynamical forces to explain why the shadow on the ruler stretches, shrinks, or reverses sign. Before we enter the rigorous algebraic derivations and Lean-verified theorems of the book, let us draw back the four dimensional curtains that stand before the eye.
+
+![The orthogonal ladder of dimensions: from zero-dimensional head-on point, one-dimensional idempotent line, two-dimensional bivector plane, and three-dimensional sphere to the sphere beyond spheres and self-referential closure](../assets/fig-00-dimensional-ladder.svg)
+
+## First Blind Spot: Mistaking a Line for a Point {#sec-blindspot-1}
+
+**What we take to be a point is in fact a line.**
+
+Imagine standing in a dark room while someone aims a laser pointer or narrow flashlight beam straight into your pupil. What appears on your retina? Not a long luminous shaft, but a single, dazzling, motionless **dot** suspended in the darkness. Even if the beam stretches a hundred meters along your line of sight, as long as your gaze is strictly collinear with its direction of travel ($\theta = 0$), an entire one-dimensional ray is crushed flat into a zero-dimensional point at the back of the eye.
+
+Both the physicist's "elementary particle" and the philosopher's "substance" begin as just such a head-on flash. Indolent habits of grammar seduce us into positing self-subsistent little pebbles first, and only afterward asking how those pebbles acquire direction, spin, or relation. That is the oldest idol of metaphysics: mistaking the zero-dimensional cross-section produced when an observer's attention aligns head-on with a ray ($\vv{o} \cdot \vv{a} = 1$) for an isolated pellet floating in empty space.
+
+Step half a pace to the side and the dot immediately unfolds into what it always was: a directed one-dimensional ray $\vv{a}$. At the quantum foundation there are no directionless bare marbles. Even a single pure quantum state is geometrically a **unit directional line** piercing an isotropic background, corresponding logically to an idempotent projection $P^2 = P$ — the act of looking again and finding the exact same answer ([Chapter 3](ch03-projectors-and-duality.md)).
+
+> A "particle" is merely the bruise left on the retina when a ray meets the eye head-on; "substance" is what grammar invents when the gaze refuses to turn.
+
+## Second Blind Spot: Mistaking a Plane for a Line {#sec-blindspot-2}
+
+**What we take to be a line is in fact a plane.**
+
+Now stand a coin upright spinning at constant angular speed on a tabletop — or place a vertical peg on the rim of a steadily turning phonograph platter — and lower your eye until it is flush with the edge of the table.
+
+From that edge-on vantage, the broad two-dimensional disc vanishes. All you see is a peg shuttling back and forth along a one-dimensional segment, racing through the center, slowing as if against an invisible spring near the rim, halting, and reversing course according to $\cos(\omega t)$. If you stubbornly deny the existence of the orthogonal depth dimension across the tabletop, you are forced to invent elaborate hidden mechanics for a "one-dimensional particle": why does its speed peak at the origin? And when two pegs cross the center ($\cos 90^\circ = 0$ and $\cos 270^\circ = 0$) at the exact same spot on your line, how does one "know" to move left next while the other moves right? Must each carry a secret metaphysical ledger inside?
+
+Raise your head three inches and the mystery evaporates. There is no invisible spring and no occult ledger — only an **oriented two-dimensional area** $\vv{a} \wedge \vv{b} = \sin\theta\,\hat{I}$ rotating uniformly in a plane.
+
+The "complex phase factors," "imaginary unit $i$," and "unitary gate matrices" that intimidate students in standard quantum computing textbooks are nothing more than this spinning platter seen edge-on. The unit bivector $\hat{I}$ satisfies $\hat{I}^2 = -1$ not because nature traffics in "imaginary" numbers, but because two successive $90^\circ$ orthogonal turns within the same plane ($90^\circ + 90^\circ = 180^\circ$) reverse the direction of every vector in that plane. When we peer at two-dimensional quantum gate rotations from the thin edge of our one-dimensional classical timeline, rigid rotation of an oriented area masquerades as the waxing and waning of probability amplitudes along a line.
+
+## Third Blind Spot: Mistaking a Sphere for a Plane {#sec-blindspot-3}
+
+**What we take to be a plane is in fact a sphere.**
+
+Once we lift our eyes and recognize the plane of rotation, a third temptation awaits: assuming that a single flat two-dimensional complex plane exhausts quantum geometry, much as ancient mapmakers pictured the earth as a flat disc.
+
+Even a single qubit ($d = 2$) immediately shatters that flatland illusion. In a Stern–Gerlach apparatus or a superconducting microwave cavity, we can measure spin not only along a vertical axis $\vv{e}_3$ and a horizontal axis $\vv{e}_1$, but also along a third axis $\vv{e}_2$ perpendicular to both. Three orthonormal axes ($\vv{e}_i \cdot \vv{e}_j = \delta_{ij}$) span three coordinate rotation planes $\operatorname{span}\{\vv{e}_2, \vv{e}_3\}$, $\operatorname{span}\{\vv{e}_3, \vv{e}_1\}$, $\operatorname{span}\{\vv{e}_1, \vv{e}_2\}$ that meet pairwise at $90^\circ$ dihedral angles along their shared coordinate axes (intersecting in one-dimensional coordinate axes rather than $\{\vv{0}\}$ as subspaces of $\mathbb{R}^3$, while their unit coordinate bivectors $\{\vv{e}_2 \wedge \vv{e}_3,\, \vv{e}_3 \wedge \vv{e}_1,\, \vv{e}_1 \wedge \vv{e}_2\}$ form an orthonormal basis of the exterior bivector space $\Lambda^2(\mathbb{R}^3)$), interlocking like the gimbals of a gyroscope: after quotienting global phase, the pure-state manifold of a **single qubit ($d = 2$)** is the **two-dimensional unit sphere** $S^2 \cong \mathbb{CP}^1 \subset \mathbb{R}^3$ ([Chapter 1](ch01-measurement.md)). (To keep dimensional boundaries exact: for a general $d$-level quantum system, pure states form complex projective space $\mathbb{CP}^{d-1}$, which for $d \ge 3$ embeds as a proper submanifold rather than the full sphere in $\mathbb{R}^{d^2 - 1}$, while mixed states form a higher-dimensional convex body; Part IV develops higher-dimensional systems geometrically through tensor-product correlation planes across multiple qubit spheres.)
+
+On this single-qubit sphere, every rippling plane of wave interference is an **equatorial great-circle slice** cut perpendicular to some chosen axis; meanwhile, three textbook phenomena often lumped together actually stem from three distinct geometric structures over the sphere:
+
+1. **Noncommutativity of Pauli observables** arises from the orthogonal cross-product (bivector) Lie algebra $[\vv{a}\cdot\vv{\sigma},\, \vv{b}\cdot\vv{\sigma}] = 2i(\vv{a}\times\vv{b})\cdot\vv{\sigma}$ (giving $ZX = -XZ$ on orthogonal axes);
+2. **Heisenberg–Robertson uncertainty** is a state-dependent variance bound governed by the expectation value of the commutator in the prepared state;
+3. **Berry's geometric phase** $\gamma_B = -\frac{1}{2}\Omega$ is the parallel-transport holonomy of the $U(1)$ Hopf bundle connection over $S^2$, whose curvature two-form is $-\frac{1}{2}\,d\Omega$.
+
+None of the three represents a breakdown of logic or a capricious throw of dice — each reflects orthogonal algebra and bundle geometry projected onto local frames.
+
+## Fourth Blind Spot: The Sphere Beyond Spheres {#sec-blindspot-4}
+
+**And at the very moment we think we have beheld the whole sphere, we are already enclosed within a larger sphere.**
+
+Why must this be so? Ask a foundational question rarely posed in physics classrooms: **when you point to a two-dimensional equatorial area $\vv{e}_1 \wedge \vv{e}_2$ and name it as a definite "entity" — say, a spin-up axis or a settled proposition — where is your own attention standing?**
+
+Were you trapped strictly inside the two-dimensional sheet $\operatorname{span}\{\vv{e}_1, \vv{e}_2\}$, every vector at your disposal would lie within that sheet, leaving no external normal direction from which to orient and name the plane as a single axis. You condense a two-dimensional rotation plane into a one-dimensional axis of "being" only because you already inhabit an **oriented three-dimensional ambient space** $\mathbb{R}^3$ (with volume trivector $I_3 = \vv{e}_1 \wedge \vv{e}_2 \wedge \vv{e}_3$), stepping out via the three-dimensional Hodge star $\star_3$ onto the **orthogonal normal axis** $\vv{e}_3 = \star_3(\vv{e}_1 \wedge \vv{e}_2)$ ([Chapter 3](ch03-projectors-and-duality.md)).
+
+Now apply that exact distinction to the oriented three-dimensional space $I_3$ itself. Note an essential fact of exterior algebra: **within oriented $\mathbb{R}^3$ alone, the Hodge dual of the top-degree volume element is a scalar, $\star_3 I_3 = 1$, not a fourth vector!** Whenever you seek to represent the totality $I_3$ as a new normal axis — obtaining a **fourth orthogonal normal vector** $\vv{e}_4 = \star_4(\vv{e}_1 \wedge \vv{e}_2 \wedge \vv{e}_3)$ perpendicular to $\vv{e}_1, \vv{e}_2, \vv{e}_3$ — mathematics requires **first specifying an oriented four-dimensional ambient space $\mathbb{R}^4 \supset \mathbb{R}^3$** (and, to iterate indefinitely, an explicit tower of ambient embeddings $\mathbb{R}^n \hookrightarrow \mathbb{R}^{n+1}$ equipped with $\star_{n+1}$). The instant you step back into that ambient fourth dimension to survey the unit two-sphere $S^2 \subset \mathbb{R}^3$ from outside, while the newly adjoined one-dimensional normal axis $\mathbb{R}\vv{e}_4$ by itself has only the zero-dimensional two-pole unit sphere $S^0 = \{\pm\vv{e}_4\}$, the combined four-dimensional ambient space $\mathbb{R}^4 = \mathbb{R}^3 \oplus \mathbb{R}\vv{e}_4$ has unit sphere $S^3 \subset \mathbb{R}^4$ — within which the original $S^2 \subset \mathbb{R}^3 \times \{0\}$ embeds as the equatorial subsphere $x_4 = 0$ and $\pm\vv{e}_4$ sit as its north and south poles (generally, $\mathbb{R}^n \hookrightarrow \mathbb{R}^{n+1} = \mathbb{R}^n \oplus \mathbb{R}\vv{e}_{n+1}$ embeds $S^{n-1}$ equatorially into $S^n$)!
+
+Representing a subspace by a normal line requires an ambient space large enough to contain that normal; within a fixed sphere, no single internal vantage captures everything at once. Anchor yourself to one ruler $\vv{o}$, and the orthogonal equator at $90^\circ$ falls into the unbiased horizon $\cos 90^\circ = 0$; abandon every preferred axis and average uniformly over the sphere, and north cancels south, east cancels west, $\frac{1}{4\pi}\int_{S^2} \vv{a}\,d\Omega = \vv{0}$, collapsing the state to the featureless maximally mixed center $\rho_* = \frac{1}{2}I$ ([Chapter 4](ch04-decoherence.md)). Framed explicitly as a **philosophical and structural analogy** — rather than an identity deduced from three-dimensional linear algebra alone — this interplay between internal horizons and ambient lifting parallels Gödelian incompleteness in formal logic (whose exact diagonalization theorems are established formally in Part VI, Chapter 21).
+
+## Final Awakening: From Beyond the Sphere Back to $\psi = \psi(\psi)$ {#sec-awakening}
+
+Were the story to end at the fourth blind spot, thought would resemble a Sisyphus beetle climbing an endless tower of ambient embeddings $S^1 \hookrightarrow S^2 \hookrightarrow S^3 \hookrightarrow \cdots$, escaping each shell only by positing another overhead.
+
+Yet pause and reflect: **how could a creature wholly confined to a single shell ever recognize the recursive law of "spheres beyond spheres" itself?**
+
+In the book's philosophical interpretation, what gets enclosed inside each larger ambient space is always the frozen footprint left a moment ago — the concept already fixed, the detector click already logged, the completed noun-quantum (*liàng*). By contrast, the act of comprehension that perceives the boundary, posits the ambient embedding $\mathbb{R}^n \hookrightarrow \mathbb{R}^{n+1}$, and grasps the generating rule of the entire tower — the measuring verb (*liáng*) — is not exhausted by any single finite shell. **"When one can continually comprehend spheres beyond spheres, one already stands, in truth, beyond the sphere."** Whoever recognizes a horizon as a horizon already thinks across it.
+
+Remarkably, this self-referential motif admits a rigorous realization in elementary real analysis. With no external ruler supplied from outside, let the compatibility reading $\cos\theta$ obtained at one stage serve directly as the radian angle $\theta$ fed into the next. Consider the real cosine map $\cos : \mathbb{R} \to [-1, 1]$: it maps $[-1, 1]$ into the compact invariant interval $[0, 1]$, on which its derivative obeys the uniform bound
+
+$$
+\sup_{\theta \in [0, 1]} |\sin\theta| = \sin 1 < 0.85 < 1.
+$$
+
+Consequently, $\cos$ is a strict Banach contraction on the compact invariant interval $[0, 1]$, turning iterated self-feedback into an exponentially convergent process with a unique real fixed point $\theta^* \in (0, 1)$:
+
+$$
+\cos\theta^* = \theta^* \qquad (\theta^* \approx 0.7390851332\dots).
+$$
+
+::: {.remark #rem-prelude-dottie-literature title="Uniqueness and Transcendence of the Cosine Fixed Point (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** Two classical theorems of analysis and transcendental number theory govern the real iteration $\theta_{k+1} = \cos(\theta_k)$ (examined further in Part VI, Chapter 24):
+
+1. **Global convergence and uniqueness (Banach fixed-point theorem)**: For every initial value $\theta_0 \in \mathbb{R}$, the first iterate satisfies $\theta_1 = \cos\theta_0 \in [-1, 1]$ and the second enters the compact invariant interval $\theta_2 = \cos\theta_1 \in [0, 1]$. Since $|\cos'(\theta)| = |\sin\theta| \le \sin 1 < 1$ on $[0, 1]$, Banach's contraction theorem guarantees a unique real fixed point $\theta^* \approx 0.7390851332\dots$ (the Dottie number) on $[0, 1]$ — hence on all of $\mathbb{R}$ — with $\lim_{k \to \infty} \theta_k = \theta^*$ for every $\theta_0 \in \mathbb{R}$.
+2. **Transcendence of $\theta^*$ over $\mathbb{Q}$ (Lindemann–Weierstrass theorem)**: The fixed point $\theta^*$ is **transcendental** ($\theta^* \notin \overline{\mathbb{Q}}$). Indeed, $\theta^* \neq 0$ since $\cos 0 = 1 \neq 0$; if $\theta^*$ were algebraic, the distinct algebraic exponents $i\theta^*, -i\theta^*, 0$ would make $e^{i\theta^*}$, $e^{-i\theta^*}$, and $e^0 = 1$ linearly independent over $\overline{\mathbb{Q}}$ by the Lindemann–Weierstrass theorem, forcing $\cos\theta^* - \theta^* = \frac{1}{2}e^{i\theta^*} + \frac{1}{2}e^{-i\theta^*} - \theta^* e^0 \neq 0$, a contradiction. By the same theorem, **every rational or algebraic number $q \in \overline{\mathbb{Q}}$ leaves a strictly nonzero residual $|\cos q - q| > 0$**: for $q = 0$, $|\cos 0 - 0| = 1 > 0$; for any nonzero algebraic $q \in \overline{\mathbb{Q}} \setminus \{0\}$, $\cos q$ is transcendental and therefore cannot equal the algebraic number $q$.
+:::
+
+Ask one further interpretive question: what does the outer function $\cos(\cdot)$ itself express? In the power series $\cos(\theta) = \sum_{k=0}^\infty \frac{(-1)^k}{(2k)!}\theta^{2k}$, the even powers $2k$ reflect even-order return to the principal axis, the alternating signs $(-1)^k$ reflect orientation reversal under two $90^\circ$ planar turns ($\hat{I}^2 = -1$), and the factorials $(2k)!$ divide out permutation order. In this authorial reading, as the infinite nesting $\theta^* = \cos(\cos(\cos(\cdots)))$ reaches its limit, the operator $\cos$ and the fixed-point state $\theta^*$ meet in the symbolic emblem on our title page:
+
+$$
+\psi = \psi(\psi).
+$$
+
+Yet this self-referential limit should not be mistaken for a static Platonic sphere attainable in finitely many discrete steps. Looking back down the dimensional ladder, the book offers an anti-Platonic geometric interpretation — **"In truth, every sphere is only an approximation: we think we have obtained a sphere, when all we ever hold is an approximate sphere"** — supported by **three precise mathematical facts (items 1, 2, and 4)** paired with **one heuristic geometric analogy (item 3)**:
+
+1. **Finite reachable set and convex-hull polytope over a discrete gate alphabet (mathematical fact)**: Even in the idealized continuum model, a single fixed-axis rotation family $R_y(\theta)$ sweeps only one meridian great circle; reaching every point on $S^2$ from a reference pole requires two-axis continuous Euler products $R_z(\phi)R_y(\theta)$ or continuous rotations $R_{\vv{n}}(\alpha)$ about arbitrary unit axes $\vv{n} \in S^2$ (foreshadowing the two-step orthogonal addressing of Part III, Chapter 9). In fault-tolerant compilation over a **finite discrete gate alphabet** $\mathcal{G}$, a non-universal finite-subgroup generator set such as the Clifford pair $\{H, S\}$ visits only a fixed finite orbit (the $6$ vertices of a regular octahedron from $\lvert 0\rangle$); and even for a **topologically dense universal gate alphabet** such as $\{H, T\}$ in Solovay–Kitaev synthesis (generating a topologically dense subgroup in projective $\mathrm{PU}(2) \cong \mathrm{SO}(3)$, or in $\mathrm{SU}(2)$ via unimodular phase representatives $-iH, e^{-i\pi/8}T$, as gate count $L \to \infty$), at **every finite gate count $L < \infty$** the reachable set $\mathcal{S}_L \subset S^2$ from a fixed initial state is only a **finite discrete point set** on $S^2$, while its Euclidean convex hull $\operatorname{conv}(\mathcal{S}_L) \subset \mathbb{R}^3$ forms an inscribed finite polytope (a three-dimensional convex polyhedron once four non-coplanar vertices are reached, exhausting the smooth sphere asymptotically much like Liu Hui's classical polygon-exhaustion method).
+2. **Nonzero Taylor remainder $R_{2N}(\theta)$ (mathematical fact)**: No finite-degree Taylor polynomial $T_{2N}(\theta) = \sum_{k=0}^N (-1)^k \frac{\theta^{2k}}{(2k)!}$ equals $\cos\theta$ identically as a function on $\mathbb{R}$; specifically, for every $\theta \in (0, 2]$ (covering the entire fixed-point interval $(0, 1]$), successive terms of the alternating series decrease strictly in magnitude ($\frac{\theta^2}{(2m+1)(2m+2)} \le \frac{4}{12} = \frac{1}{3} < 1$ for all $m \ge 1$), so the remainder $R_{2N}(\theta) = \cos\theta - T_{2N}(\theta)$ is strictly nonzero and satisfies $|R_{2N}(\theta)| \le \frac{\theta^{2N+2}}{(2N+2)!}$.
+3. **Open-helix axial projection as geometric intuition (heuristic analogy, not a physical theorem)**: Offered explicitly as a **geometric analogy** for conceptual dimensional lifting rather than a proved physical law or formal theorem, picturing each ambient embedding $\mathbb{R}^n \hookrightarrow \mathbb{R}^{n+1}$ as an ascent along the newly adjoined normal axis lets an apparently closed circle be visualized as the axial shadow of an open ascending helix.
+4. **Nonzero residual at finite-precision algebraic readings and finite iterates (mathematical fact)**: By [@rem-prelude-dottie-literature], because $\theta^*$ is transcendental, any finite-precision rational or algebraic instrument reading $q \in \overline{\mathbb{Q}}$ satisfies $|\cos q - q| > 0$; separately, along the exact iteration $\theta_{k+1} = \cos(\theta_k)$ starting from $\theta_0 = 1$ (or any $\theta_0 \in [0, 1] \setminus \{\theta^*\}$), strict injectivity of $\cos$ on $[0, \pi]$ together with $\theta_0 \neq \theta^*$ ensures $\theta_k \neq \theta^*$ and hence $|\cos\theta_k - \theta_k| > 0$ for every finite step $k \in \mathbb{N}$ — *"Every crack of approximation is the gate through which all things grow"*.
+
+Unfolded, it spans twenty-eight chapters across quantum computing, spacetime physics, and mathematical logic; folded back, it is simply $\psi$ taking itself as ruler to measure the angle it opens, and recognizing itself across the living seam of approximation.
+
+## Reader's Guide and Formal Verification Contract {#sec-contract}
+
+The full architecture of *Geometric Intuition of Quantum Computing* comprises **seven parts and twenty-eight chapters** (four chapters per part, mirroring the four-beat rhythm of *establishing a line, opening a plane, closing a sphere, and crossing the horizon*):
+
+| Part | Dimensional Stage | Scope and Core Geometric Theme |
+| :--- | :--- | :--- |
+| **Part I** | **Breaking Illusions — From Point to Line**: Pairwise Measurement and Zero-Redundancy Projection | **Chapters 1–4** (published in this volume): Dismantling the isolated-particle and external-point-$C$ idols; deriving the Bloch sphere, Born's trace pairing and squared-modulus law, idempotent record projections, complementary Pythagorean tomography, environmental partial-trace decoherence, and quantum noise contractions from Lean-verified theorems. |
+| **Part II** | **Unfolding Wings — From Line to Plane**: Orthogonal Bifurcation, Quantum Gates, and Dual Time | **Chapters 5–8**: Oriented bivector areas $A \wedge B$ and the geometric meaning of $\hat{I}^2 = -1$, matrix-free rotors, unifying the five textbook postulates via $AB = A\cdot B + A\wedge B$, quantum speed limits and Zeno freezing, and Landauer erasure heat as discarded orthogonal area. |
+| **Part III** | **Closing the Loop — From Plane to Sphere**: Triad Orthogonality, Global Compatibility, and Attention Computing | **Chapters 9–12**: Two-step spherical addressing (first and second orthogonal steps), Berry curvature and global Gram-matrix order independence, superconducting Rabi pulse areas and zero-time virtual $Z$ gates, measurement-based quantum computing (MBQC), parameter-shift gradients, and high-dimensional equatorial measure concentration. |
+| **Part IV** | **Entangled Resonance — Many Spheres**: Entanglement, Fault Tolerance, and Algorithmic Unification | **Chapters 13–16**: Bell states with vanishing local rays and the $45^\circ$ CHSH cosine violation ($2\sqrt{2} > 2$), no-cloning, stabilizer codes and two-dimensional anyonic braids, Grover planar rotation, Quantum Fourier gears and Shor period cancellation, QSVT, quantum walks, and Solovay–Kitaev commutator compilation. |
+| **Part V** | **Manifesting Spacetime — The Cosmic Sphere**: Relativistic Metric, Gauge Curvature, and Holographic Gravity | **Chapters 17–20**: Special relativity as the Pythagorean identity on the time field, Dirac matrices as orthogonal basis lines and Yang–Mills fields as alignment curvature, Bekenstein–Hawking horizon area and Ryu–Takayanagi entanglement surfaces, and spacetime volume growth as minimal gate count $L$. |
+| **Part VI** | **Crossing the Horizon — Spheres Beyond Spheres**: Gödelian Escape, Arithmetic Spectra, and $\psi = \psi(\psi)$ | **Chapters 21–24**: Gödel's incompleteness as normal escape and the no-whole-sphere principle, prime orthogonal axes, Euler-product cancellation and the $\sigma = 1/2$ balance line, quaternion norm-trace projections for Diophantine definitions of $\mathbb{Z}$ in $\mathbb{Q}$, and the transcendental fixed point $\theta^*$ collapsing into $\psi = \psi(\psi)$. |
+| **Part VII** | **Forging the Blade — Mechanical Canon**: Matrix-Free Engines and Formal Proof Libraries | **Chapters 25–28**, Coda & Appendices: Bitmask XOR Clifford engines, matrix-free geodesic circuit synthesis, Lean 4 formalization architecture, trilingual dictionary, and geometric mastery problems. |
+
+Readers may begin directly with [Chapter 1](ch01-measurement.md): no prior familiarity with operator algebras or advanced quantum theory is assumed, and every $2\times 2$ matrix calculation, trace identity, Bloch coordinate map, and partial-trace reduction is worked out explicitly through [Chapter 2](ch02-born-rule.md), [Chapter 3](ch03-projectors-and-duality.md), and [Chapter 4](ch04-decoherence.md).
+
+### Formal Verification and Epistemic Honesty Contract {#sec-honesty-rules}
+
+While the prose aims for vivid physical clarity, every mathematical claim obeys a strict three-tier formal verification contract: **the book explains why a truth makes sense; the Lean kernel guarantees that it holds.**
+
+1. **Numbering and Cross-References**: Within each chapter, definitions, theorems, lemmas, propositions, corollaries, examples, and remarks share a single sequential counter (`Theorem 1.1`, `Proposition 4.5`, etc.); items in the Prelude carry prefix `0`, and appendices carry `A, B, …`. All cross-references are live links across HTML, PDF, and EPUB.
+2. **Semantic Badges and Color Discipline**: Colors carry fixed epistemic meanings throughout the book and its diagrams:
+
+| Badge / Visual Cue | Semantic Color | Exact Meaning |
+| :--- | :--- | :--- |
+| `LEAN ✓` badge | Green | Reserved exclusively for formal `theorem`, `lemma`, `proposition`, and `corollary` items whose cited declarations are kernel-verified and frozen with kind `theorem` in [trureturing](https://github.com/the-omega-institute/trureturing) (`dev` branch at the pinned commit). Clicking the badge or declaration footer jumps to the exact Lean source line. |
+| Classical literature note | Neutral frame (`remark` / `example`) | Proved results from the mathematical-physics literature not formalized in this book's pinned repository (such as Gleason's theorem) are placed in `remark` or `example` blocks and explicitly labeled *Literature result, not formalized in this book*. |
+| `OPEN` badge | Red | Reserved for unresolved `conjecture` and `problem` environments, which never carry a Lean citation. |
+| Observer focus / active state | Amber | Used in figures and UI elements solely to mark the observer's currently selected measurement axis or active reading position. |
+
+3. **Role of Proof Blocks**: Every `Proof` (`proof`) block appears immediately after its theorem box to illuminate the underlying geometric and algebraic mechanism in human terms, concluding with *"The full proof is checked by the Lean kernel."* An automatically generated **Formal Verification Ledger** at the end of the book records the pinned `trureturing` commit hash, source links, and frozen statement digests for independent audit.
