@@ -3,8 +3,40 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "0932810a77730496eae9b36294d2400f7d1d3b2a",
-  "pinned_at": "2026-11-10T16:28:32Z",
+  "pinned_at": "2026-11-10T16:36:20Z",
   "declarations": {
+    "D5/S0/Carrier/GoldenRatio.golden_ratio_spec": {
+      "module": "D5/S0/Carrier/GoldenRatio",
+      "name": "D5.S0.Carrier.golden_ratio_spec",
+      "kind": "theorem",
+      "statement_id": "sha256:a365beeb85e26bb1c7b6ee52d6535048e4a071ee4f0d1e0dfe3e1a3f4a0f81ef",
+      "line": 13,
+      "signature": "theorem golden_ratio_spec : Real.goldenRatio = (1 + Real.sqrt 5) / 2 ∧ Real.goldenRatio ^ 2 = Real.goldenRatio + 1 ∧ 1 - Real.goldenRatio = -(1 / Real.goldenRatio)"
+    },
+    "D5/S0/Carrier/Norm.norm": {
+      "module": "D5/S0/Carrier/Norm",
+      "name": "D5.S0.Carrier.norm",
+      "kind": "def",
+      "statement_id": "sha256:c4f5cc5e163371dd94da0a55809709297a222bd47ad93480f32df345f87ddf60",
+      "line": 13,
+      "signature": "def norm (x : GoldenInt) : ℤ"
+    },
+    "D5/S0/Carrier/Ring.GoldenInt": {
+      "module": "D5/S0/Carrier/Ring",
+      "name": "D5.S0.Carrier.GoldenInt",
+      "kind": "inductive",
+      "statement_id": "sha256:cf9edcb1b0afa3e79e62dbc00419cce07094df49bbc47cafd4e7a6158ac052e7",
+      "line": 13,
+      "signature": "@[ext] structure GoldenInt where a : ℤ b : ℤ deriving DecidableEq instance : Zero GoldenInt"
+    },
+    "D5/S0/Carrier/Units.isUnit_iff_norm_eq_one_or_neg_one": {
+      "module": "D5/S0/Carrier/Units",
+      "name": "D5.S0.Carrier.isUnit_iff_norm_eq_one_or_neg_one",
+      "kind": "theorem",
+      "statement_id": "sha256:074877dbe3e7ad85e88911b6dd3f8e26d1611d261e449f821c5407c5ea744d54",
+      "line": 29,
+      "signature": "theorem isUnit_iff_norm_eq_one_or_neg_one (x : GoldenInt) : IsUnit x ↔ norm x = 1 ∨ norm x = -1"
+    },
     "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null": {
       "module": "D5/S0/Certificates/MinkowskiNullConeRigidity",
       "name": "D5.S0.Certificates.MinkowskiNullConeRigidity.eq_smul_minkowski_of_null",
@@ -37,6 +69,30 @@
       "line": 61,
       "signature": "theorem crossing_yang_baxter (x y z : Q) : crossing₁ (crossing₂ (crossing₁ (x, (y, z)))) = crossing₂ (crossing₁ (crossing₂ (x, (y, z))))"
     },
+    "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.goldenReciprocalMap": {
+      "module": "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint",
+      "name": "D5.S1.FixedPoints.Algebraic.GoldenFixedPoint.goldenReciprocalMap",
+      "kind": "def",
+      "statement_id": "sha256:0711b0acf1a066d33ef6b75f82f22ba4f01249fa4455c41dba1a5eed0761f4c2",
+      "line": 35,
+      "signature": "noncomputable def goldenReciprocalMap (x : Real) : Real"
+    },
+    "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique": {
+      "module": "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint",
+      "name": "D5.S1.FixedPoints.Algebraic.GoldenFixedPoint.golden_fixed_point_unique",
+      "kind": "theorem",
+      "statement_id": "sha256:0711b0acf1a066d33ef6b75f82f22ba4f01249fa4455c41dba1a5eed0761f4c2",
+      "line": 40,
+      "signature": "theorem golden_fixed_point_unique : 0 < (1 + Real.sqrt 5) / 2 ∧ goldenReciprocalMap ((1 + Real.sqrt 5) / 2) = (1 + Real.sqrt 5) / 2 ∧ ∀ x : Real, 0 < x → (goldenReciprocalMap x = x ↔ x = (1 + Real.sqrt 5) / 2)"
+    },
+    "D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize": {
+      "module": "D5/S1/FixedPoints/FiniteContractingStability",
+      "name": "D5.S1.FixedPoints.FiniteContractingStability.finite_contracting_updates_stabilize",
+      "kind": "theorem",
+      "statement_id": "sha256:d7f526a9871c87847c7e6614c4680969a4c25bd5dedda51e1691e2bd129834b6",
+      "line": 27,
+      "signature": "theorem finite_contracting_updates_stabilize {X : Type*} [Finite X] (U : Set X → Set X) (hU : ∀ A : Set X, U A ⊆ A) (S : ℕ → Set X) (hS : ∀ n : ℕ, S (n + 1) = U (S n)) : (∃ N ≤ (S 0).ncard, ∀ n : ℕ, N ≤ n → S n = S N) ∧ {n : ℕ | S (n + 1) ≠ S n}.ncard ≤ (S 0).ncard"
+    },
     "D5/S1/Recurrence/NormOneTraceAddition.trace_recurrence": {
       "module": "D5/S1/Recurrence/NormOneTraceAddition",
       "name": "D5.S1.Recurrence.NormOneTraceAddition.trace_recurrence",
@@ -45,6 +101,22 @@
       "line": 89,
       "signature": "theorem trace_recurrence (a b : R) (hab : a * b = 1) (m : Nat) : a ^ (m + 2) + b ^ (m + 2) = (a + b) * (a ^ (m + 1) + b ^ (m + 1)) - (a ^ m + b ^ m)"
     },
+    "D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm": {
+      "module": "D5/S3/Arith/GoldenPell",
+      "name": "D5.S3.Arith.GoldenPell.pell_form_eq_four_mul_norm",
+      "kind": "theorem",
+      "statement_id": "sha256:c97735b84c325d32ca097c3de9bf52294a373b4aacd44ebf62d92dd3fbb46cc5",
+      "line": 83,
+      "signature": "theorem pell_form_eq_four_mul_norm (g : GoldenInt) : (2 * g.a + g.b) ^ 2 - 5 * g.b ^ 2 = 4 * norm g"
+    },
+    "D5/S3/Arith/GoldenPell.pell_pm_four_iff_signed_lucas_fib": {
+      "module": "D5/S3/Arith/GoldenPell",
+      "name": "D5.S3.Arith.GoldenPell.pell_pm_four_iff_signed_lucas_fib",
+      "kind": "theorem",
+      "statement_id": "sha256:c97735b84c325d32ca097c3de9bf52294a373b4aacd44ebf62d92dd3fbb46cc5",
+      "line": 101,
+      "signature": "theorem pell_pm_four_iff_signed_lucas_fib (x y : ℤ) : (x ^ 2 - 5 * y ^ 2 = 4 ∨ x ^ 2 - 5 * y ^ 2 = -4) ↔ ∃ (s : Bool) (n : ℤ), x = signedInt s (goldenLucasZ n) ∧ y = signedInt s (Int.fib n)"
+    },
     "D5/S3/Combinatorics/Graph/Walks/WeightedCycleWalk.circuit_length": {
       "module": "D5/S3/Combinatorics/Graph/Walks/WeightedCycleWalk",
       "name": "D5.S3.Combinatorics.Graph.Walks.WeightedCycleWalk.circuit_length",
@@ -52,6 +124,238 @@
       "statement_id": "sha256:8290384519fabbb47b99d637a47009c4903ac3ed57f4f1bccfa01c7a1cac221e",
       "line": 77,
       "signature": "theorem circuit_length (n : ℕ) : (circuit n).length = 2 * (n + 2)"
+    },
+    "D5/S3/ConceptDynamics/ConceptFiberDecomposition.Concept": {
+      "module": "D5/S3/ConceptDynamics/ConceptFiberDecomposition",
+      "name": "D5.S3.ConceptDynamics.ConceptFiberDecomposition.Concept",
+      "kind": "def",
+      "statement_id": "sha256:85c331b4c10db305346a102641ce62515386c16c7be2a5617f9623b37e3cc62d",
+      "line": 27,
+      "signature": "def Concept (X B : Type _)"
+    },
+    "D5/S3/ConceptDynamics/ConceptFiberDecomposition.ConceptFiber": {
+      "module": "D5/S3/ConceptDynamics/ConceptFiberDecomposition",
+      "name": "D5.S3.ConceptDynamics.ConceptFiberDecomposition.ConceptFiber",
+      "kind": "def",
+      "statement_id": "sha256:85c331b4c10db305346a102641ce62515386c16c7be2a5617f9623b37e3cc62d",
+      "line": 30,
+      "signature": "def ConceptFiber {X B : Type _} (q_C : Concept X B) (b : B)"
+    },
+    "D5/S3/ConceptDynamics/ConceptFiberDecomposition.concept_fiber_decomposition": {
+      "module": "D5/S3/ConceptDynamics/ConceptFiberDecomposition",
+      "name": "D5.S3.ConceptDynamics.ConceptFiberDecomposition.concept_fiber_decomposition",
+      "kind": "theorem",
+      "statement_id": "sha256:85c331b4c10db305346a102641ce62515386c16c7be2a5617f9623b37e3cc62d",
+      "line": 34,
+      "signature": "theorem concept_fiber_decomposition {X B : Type _} (q_C : Concept X B) : Nonempty (X ≃ Σ b : B, ConceptFiber q_C b)"
+    },
+    "D5/S3/ConceptDynamics/ConceptJoinUniversal.Refines": {
+      "module": "D5/S3/ConceptDynamics/ConceptJoinUniversal",
+      "name": "D5.S3.ConceptDynamics.ConceptJoinUniversal.Refines",
+      "kind": "def",
+      "statement_id": "sha256:46dfcb4e0f994ccdbaff9a38e548f8f79ce92541a1946fce7fbf8f0781d54808",
+      "line": 28,
+      "signature": "def Refines {X C D : Type _} (q_C : Concept X C) (q_D : Concept X D) : Prop"
+    },
+    "D5/S3/ConceptDynamics/ConceptJoinUniversal.conceptJoin": {
+      "module": "D5/S3/ConceptDynamics/ConceptJoinUniversal",
+      "name": "D5.S3.ConceptDynamics.ConceptJoinUniversal.conceptJoin",
+      "kind": "def",
+      "statement_id": "sha256:46dfcb4e0f994ccdbaff9a38e548f8f79ce92541a1946fce7fbf8f0781d54808",
+      "line": 32,
+      "signature": "def conceptJoin {X C D : Type _} (q_C : Concept X C) (q_D : Concept X D) : Concept X (C × D)"
+    },
+    "D5/S3/ConceptDynamics/DefinitionEscape/LatentAdequacyCriterion.TargetAdequate": {
+      "module": "D5/S3/ConceptDynamics/DefinitionEscape/LatentAdequacyCriterion",
+      "name": "D5.S3.ConceptDynamics.DefinitionEscape.LatentAdequacyCriterion.TargetAdequate",
+      "kind": "def",
+      "statement_id": "sha256:3d6aa8fe43d1d4bc54814fd9decf9b7273ea28a9d5c16d2b01e5f9bc89b40bb2",
+      "line": 33,
+      "signature": "def TargetAdequate {X Latent Target : Type*} (latent : Concept X Latent) (target : Concept X Target) : Prop"
+    },
+    "D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relativeSemanticDiagonal": {
+      "module": "D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal",
+      "name": "D5.S3.ConceptDynamics.DefinitionEscape.RelativeSemanticDiagonal.relativeSemanticDiagonal",
+      "kind": "def",
+      "statement_id": "sha256:957023a4124f6ab871743dc9586757c92c2b0b3ecaa419007d5a217b05742af4",
+      "line": 38,
+      "signature": "def relativeSemanticDiagonal {Address Coordinate Output : Type*} (twist : Output → Output) (latent : Concept Address Coordinate) (decoderCatalog : Address → Coordinate → Output) : Concept Address Output"
+    },
+    "D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode": {
+      "module": "D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal",
+      "name": "D5.S3.ConceptDynamics.DefinitionEscape.RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode",
+      "kind": "theorem",
+      "statement_id": "sha256:957023a4124f6ab871743dc9586757c92c2b0b3ecaa419007d5a217b05742af4",
+      "line": 48,
+      "signature": "theorem relative_semantic_diagonal_ne_listed_decode {Address Coordinate Output : Type*} (twist : Output → Output) (latent : Concept Address Coordinate) (decoderCatalog : Address → Coordinate → Output) (fixedPointFree : ∀ output, twist output ≠ output) (address : Address) : relativeSemanticDiagonal twist latent decoderCatalog ≠ decoderCatalog address ∘ latent"
+    },
+    "D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective": {
+      "module": "D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal",
+      "name": "D5.S3.ConceptDynamics.DefinitionEscape.RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective",
+      "kind": "theorem",
+      "statement_id": "sha256:957023a4124f6ab871743dc9586757c92c2b0b3ecaa419007d5a217b05742af4",
+      "line": 79,
+      "signature": "theorem relative_semantic_diagonal_target_inadequate_of_surjective {Address Coordinate Output : Type*} (twist : Output → Output) (latent : Concept Address Coordinate) (decoderCatalog : Address → Coordinate → Output) (fixedPointFree : ∀ output, twist output ≠ output) (complete : Function.Surjective decoderCatalog) : ¬TargetAdequate latent (relativeSemanticDiagonal twist latent decoderCatalog)"
+    },
+    "D5/S3/ConceptDynamics/Epistemic/PartitionKnowledgeNegativeIntrospection.partitionTopology": {
+      "module": "D5/S3/ConceptDynamics/Epistemic/PartitionKnowledgeNegativeIntrospection",
+      "name": "D5.S3.ConceptDynamics.Epistemic.PartitionKnowledgeNegativeIntrospection.partitionTopology",
+      "kind": "def",
+      "statement_id": "sha256:c034b51365c5a0278a8aa99d7429bcb9b7f0eb6d7eb5304f46bbe9bbc7ffb2d5",
+      "line": 32,
+      "signature": "@[reducible] def partitionTopology {X B : Type _} (readout : Concept X B) : TopologicalSpace X"
+    },
+    "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.InterpretationContext": {
+      "module": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint",
+      "name": "D5.S3.ConceptDynamics.Interpretation.InterpretationFixedPoint.InterpretationContext",
+      "kind": "inductive",
+      "statement_id": "sha256:96404644a157ae0e6767f94a5b4471a9f36f34faecf47647b6527ba909ce0240",
+      "line": 36,
+      "signature": "structure InterpretationContext (Text ReaderAdmission Background EvaluationGoal Rule : Type*) where text : Text readerAdmission : ReaderAdmission background : Background evaluationGoal : EvaluationGoal interpretationRule : Rule /-- A stage is a relative interpretation fixed point when its next concept is conceptually equivalent to the current one and both have the same interpreted result in the fixed context. -/ def IsRelativeInterpretationFixedPoint {Text ReaderAdmission Background EvaluationGoal Rule Concept Meaning : Type*} (conceptuallyEquivalent : Concept -> Concept -> Prop) (interpret : "
+    },
+    "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.IsBinaryFixedMeaning": {
+      "module": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint",
+      "name": "D5.S3.ConceptDynamics.Interpretation.InterpretationFixedPoint.IsBinaryFixedMeaning",
+      "kind": "def",
+      "statement_id": "sha256:96404644a157ae0e6767f94a5b4471a9f36f34faecf47647b6527ba909ce0240",
+      "line": 100,
+      "signature": "def IsBinaryFixedMeaning (context : BinaryInterpretationContext) (meaning : Bool × Bool × Bool) : Prop"
+    },
+    "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.IsRelativeInterpretationFixedPoint": {
+      "module": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint",
+      "name": "D5.S3.ConceptDynamics.Interpretation.InterpretationFixedPoint.IsRelativeInterpretationFixedPoint",
+      "kind": "def",
+      "statement_id": "sha256:96404644a157ae0e6767f94a5b4471a9f36f34faecf47647b6527ba909ce0240",
+      "line": 47,
+      "signature": "def IsRelativeInterpretationFixedPoint {Text ReaderAdmission Background EvaluationGoal Rule Concept Meaning : Type*} (conceptuallyEquivalent : Concept -> Concept -> Prop) (interpret : InterpretationContext Text ReaderAdmission Background EvaluationGoal Rule -> Concept -> Meaning) (concepts : Nat -> Concept) (context : InterpretationContext Text ReaderAdmission Background EvaluationGoal Rule) (n : Nat) : Prop"
+    },
+    "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.alternateContext": {
+      "module": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint",
+      "name": "D5.S3.ConceptDynamics.Interpretation.InterpretationFixedPoint.alternateContext",
+      "kind": "def",
+      "statement_id": "sha256:96404644a157ae0e6767f94a5b4471a9f36f34faecf47647b6527ba909ce0240",
+      "line": 91,
+      "signature": "def alternateContext : BinaryInterpretationContext where text"
+    },
+    "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.baselineContext": {
+      "module": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint",
+      "name": "D5.S3.ConceptDynamics.Interpretation.InterpretationFixedPoint.baselineContext",
+      "kind": "def",
+      "statement_id": "sha256:96404644a157ae0e6767f94a5b4471a9f36f34faecf47647b6527ba909ce0240",
+      "line": 84,
+      "signature": "def baselineContext : BinaryInterpretationContext where text"
+    },
+    "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.conceptual_equivalence_and_stability_reach_fixed_point": {
+      "module": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint",
+      "name": "D5.S3.ConceptDynamics.Interpretation.InterpretationFixedPoint.conceptual_equivalence_and_stability_reach_fixed_point",
+      "kind": "theorem",
+      "statement_id": "sha256:96404644a157ae0e6767f94a5b4471a9f36f34faecf47647b6527ba909ce0240",
+      "line": 62,
+      "signature": "theorem conceptual_equivalence_and_stability_reach_fixed_point {Text ReaderAdmission Background EvaluationGoal Rule Concept Meaning : Type*} (conceptuallyEquivalent : Concept -> Concept -> Prop) (interpret : InterpretationContext Text ReaderAdmission Background EvaluationGoal Rule -> Concept -> Meaning) (concepts : Nat -> Concept) (context : InterpretationContext Text ReaderAdmission Background EvaluationGoal Rule) (n : Nat) (hConcept : conceptuallyEquivalent (concepts (n + 1)) (concepts n)) (hStable : interpret context (concepts (n + 1)) = interpret context (concepts n)) : IsRelativeInterpret"
+    },
+    "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.context_parameters_can_select_distinct_fixed_points": {
+      "module": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint",
+      "name": "D5.S3.ConceptDynamics.Interpretation.InterpretationFixedPoint.context_parameters_can_select_distinct_fixed_points",
+      "kind": "theorem",
+      "statement_id": "sha256:96404644a157ae0e6767f94a5b4471a9f36f34faecf47647b6527ba909ce0240",
+      "line": 108,
+      "signature": "theorem context_parameters_can_select_distinct_fixed_points : baselineContext.text = alternateContext.text ∧ baselineContext.interpretationRule = alternateContext.interpretationRule ∧ baselineContext.readerAdmission ≠ alternateContext.readerAdmission ∧ baselineContext.background ≠ alternateContext.background ∧ baselineContext.evaluationGoal ≠ alternateContext.evaluationGoal ∧ IsBinaryFixedMeaning baselineContext (false, false, false) ∧ IsBinaryFixedMeaning alternateContext (true, true, true) ∧ (false, false, false) ≠ (true, true, true)"
+    },
+    "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor": {
+      "module": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint",
+      "name": "D5.S3.ConceptDynamics.Interpretation.InterpretationFixedPoint.objective_claim_requires_invariant_common_factor",
+      "kind": "theorem",
+      "statement_id": "sha256:96404644a157ae0e6767f94a5b4471a9f36f34faecf47647b6527ba909ce0240",
+      "line": 133,
+      "signature": "theorem objective_claim_requires_invariant_common_factor {Context Meaning Factor : Type*} (isFixedMeaning : Context -> Meaning -> Prop) (factor : Meaning -> Factor) (claim : ObjectiveInterpretationClaim isFixedMeaning factor) : ∃ commonFactor, ∀ context meaning, isFixedMeaning context meaning -> factor meaning = commonFactor"
+    },
+    "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous": {
+      "module": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape",
+      "name": "D5.S3.ConceptDynamics.ObservationTopology.DiagonalTopologicalEscape.complete_diagonal_not_continuous",
+      "kind": "theorem",
+      "statement_id": "sha256:b2dce622e28cc3d577134dcf48e071bba88a752c8938fc22ce39d0a4f4db8f38",
+      "line": 30,
+      "signature": "theorem complete_diagonal_not_continuous {Address Coordinate Output : Type*} [Nonempty Address] (twist : Output → Output) (latent : Concept Address Coordinate) (decoderCatalog : Address → Coordinate → Output) (fixedPointFree : ∀ output, twist output ≠ output) (complete : Function.Surjective decoderCatalog) : ¬ @Continuous Address Output (partitionTopology latent) ⊥ (relativeSemanticDiagonal twist latent decoderCatalog)"
+    },
+    "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_separationDeficit_nonempty": {
+      "module": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape",
+      "name": "D5.S3.ConceptDynamics.ObservationTopology.DiagonalTopologicalEscape.complete_diagonal_separationDeficit_nonempty",
+      "kind": "theorem",
+      "statement_id": "sha256:b2dce622e28cc3d577134dcf48e071bba88a752c8938fc22ce39d0a4f4db8f38",
+      "line": 50,
+      "signature": "theorem complete_diagonal_separationDeficit_nonempty {Address Coordinate Output : Type*} [Nonempty Address] (twist : Output → Output) (latent : Concept Address Coordinate) (decoderCatalog : Address → Coordinate → Output) (fixedPointFree : ∀ output, twist output ≠ output) (complete : Function.Surjective decoderCatalog) : (separationDeficit latent (relativeSemanticDiagonal twist latent decoderCatalog)).Nonempty"
+    },
+    "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_strict_topology_refinement": {
+      "module": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape",
+      "name": "D5.S3.ConceptDynamics.ObservationTopology.DiagonalTopologicalEscape.complete_diagonal_strict_topology_refinement",
+      "kind": "theorem",
+      "statement_id": "sha256:b2dce622e28cc3d577134dcf48e071bba88a752c8938fc22ce39d0a4f4db8f38",
+      "line": 74,
+      "signature": "theorem complete_diagonal_strict_topology_refinement {Address Coordinate Output : Type*} [Nonempty Address] (twist : Output → Output) (latent : Concept Address Coordinate) (decoderCatalog : Address → Coordinate → Output) (fixedPointFree : ∀ output, twist output ≠ output) (complete : Function.Surjective decoderCatalog) : StrictObservationRefinement (partitionTopology latent) (partitionTopology (conceptJoin latent (relativeSemanticDiagonal twist latent decoderCatalog)))"
+    },
+    "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_topological_settlement": {
+      "module": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape",
+      "name": "D5.S3.ConceptDynamics.ObservationTopology.DiagonalTopologicalEscape.complete_diagonal_topological_settlement",
+      "kind": "theorem",
+      "statement_id": "sha256:b2dce622e28cc3d577134dcf48e071bba88a752c8938fc22ce39d0a4f4db8f38",
+      "line": 94,
+      "signature": "theorem complete_diagonal_topological_settlement {Address Coordinate Output : Type*} [Nonempty Address] (twist : Output → Output) (latent : Concept Address Coordinate) (decoderCatalog : Address → Coordinate → Output) (fixedPointFree : ∀ output, twist output ≠ output) (complete : Function.Surjective decoderCatalog) : (¬Refines (relativeSemanticDiagonal twist latent decoderCatalog) latent) ∧ (¬ @Continuous Address Output (partitionTopology latent) ⊥ (relativeSemanticDiagonal twist latent decoderCatalog)) ∧ (separationDeficit latent (relativeSemanticDiagonal twist latent decoderCatalog)).Nonempty"
+    },
+    "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel": {
+      "module": "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel",
+      "name": "D5.S3.ConceptDynamics.ObservationTopology.PartitionTopologyKernel.partition_inseparable_iff_kernel",
+      "kind": "theorem",
+      "statement_id": "sha256:8dfabfe9835ba29a6bf90b392eee5c5fc9a0c1258b931a73be90285abc196678",
+      "line": 18,
+      "signature": "theorem partition_inseparable_iff_kernel {X B : Type*} (readout : Concept X B) (x y : X) : @Inseparable X (partitionTopology readout) x y <-> readout x = readout y"
+    },
+    "D5/S3/ConceptDynamics/ObservationTopology/PrimitiveEscapeStrictRefinement.StrictObservationRefinement": {
+      "module": "D5/S3/ConceptDynamics/ObservationTopology/PrimitiveEscapeStrictRefinement",
+      "name": "D5.S3.ConceptDynamics.ObservationTopology.PrimitiveEscapeStrictRefinement.StrictObservationRefinement",
+      "kind": "def",
+      "statement_id": "sha256:167b96ad9ce52ce5a3b45a097a86947a0541c492db8074d6e331c5f36983efff",
+      "line": 24,
+      "signature": "def StrictObservationRefinement {X : Type*} (coarse fine : TopologicalSpace X) : Prop"
+    },
+    "D5/S3/ConceptDynamics/ObservationTopology/RedundantCoordinateTopology.coordinate_inadequate_iff_strict_join_refinement": {
+      "module": "D5/S3/ConceptDynamics/ObservationTopology/RedundantCoordinateTopology",
+      "name": "D5.S3.ConceptDynamics.ObservationTopology.RedundantCoordinateTopology.coordinate_inadequate_iff_strict_join_refinement",
+      "kind": "theorem",
+      "statement_id": "sha256:6dd82f75e32111566fd52184ac5bf024e578d5c1fd6da80edc6cd0f44c21cf0e",
+      "line": 69,
+      "signature": "theorem coordinate_inadequate_iff_strict_join_refinement {X Current Candidate : Type*} [Nonempty X] (current : Concept X Current) (candidate : Concept X Candidate) : (¬Refines candidate current) ↔ StrictObservationRefinement (partitionTopology current) (partitionTopology (conceptJoin current candidate))"
+    },
+    "D5/S3/ConceptDynamics/ObservationTopology/ResidualSeparationTopology.defectRelation_eq_separationDeficit": {
+      "module": "D5/S3/ConceptDynamics/ObservationTopology/ResidualSeparationTopology",
+      "name": "D5.S3.ConceptDynamics.ObservationTopology.ResidualSeparationTopology.defectRelation_eq_separationDeficit",
+      "kind": "theorem",
+      "statement_id": "sha256:808836e09644eb2fcdfa3bbca69f9297933929a30684bfd2765c993c95d4f3e4",
+      "line": 28,
+      "signature": "theorem defectRelation_eq_separationDeficit {X Current Target : Type*} (current : Concept X Current) (target : Concept X Target) : defectRelation current target = separationDeficit current target"
+    },
+    "D5/S3/ConceptDynamics/ObservationTopology/ResidualSeparationTopology.separationDeficit": {
+      "module": "D5/S3/ConceptDynamics/ObservationTopology/ResidualSeparationTopology",
+      "name": "D5.S3.ConceptDynamics.ObservationTopology.ResidualSeparationTopology.separationDeficit",
+      "kind": "def",
+      "statement_id": "sha256:808836e09644eb2fcdfa3bbca69f9297933929a30684bfd2765c993c95d4f3e4",
+      "line": 22,
+      "signature": "def separationDeficit {X Current Target : Type*} (current : Concept X Current) (target : Concept X Target) : Set (X × X)"
+    },
+    "D5/S3/ConceptDynamics/ObservationTopology/TargetContinuityFactorization.target_factors_iff_continuous_partition": {
+      "module": "D5/S3/ConceptDynamics/ObservationTopology/TargetContinuityFactorization",
+      "name": "D5.S3.ConceptDynamics.ObservationTopology.TargetContinuityFactorization.target_factors_iff_continuous_partition",
+      "kind": "theorem",
+      "statement_id": "sha256:54fbe84e633a6079f45ef103bf95a7e5fc6d8971612eefcde6b1ec5950155c7b",
+      "line": 73,
+      "signature": "theorem target_factors_iff_continuous_partition {X Coordinate Target : Type*} [Nonempty X] (readout : Concept X Coordinate) (target : Concept X Target) : Refines target readout <-> @Continuous X Target (partitionTopology readout) ⊥ target"
+    },
+    "D5/S3/ConceptDynamics/Restoration/TargetRecoveryCriterion.target_recovery_criterion": {
+      "module": "D5/S3/ConceptDynamics/Restoration/TargetRecoveryCriterion",
+      "name": "D5.S3.ConceptDynamics.Restoration.TargetRecoveryCriterion.target_recovery_criterion",
+      "kind": "theorem",
+      "statement_id": "sha256:b00b35b9fad01258b563836e879dfb6cd8370b8d8d4f8c83cfafb011a2cc3a56",
+      "line": 37,
+      "signature": "theorem target_recovery_criterion {X ProcessState Target : Type*} [Nonempty X] (process : Concept X ProcessState) (target : Concept X Target) : ((∃ recover : ProcessState → Target, target = recover ∘ process) ↔ ∀ ⦃x y : X⦄, process x = process y → target x = target y) ∧ ((∀ ⦃x y : X⦄, process x = process y → target x = target y) ↔ defectRelation process target = ∅) ∧ (defectRelation process target = ∅ ↔ ∃ recover : ProcessState → Target, target = recover ∘ process) ∧ ((¬∃ recover : ProcessState → Target, target = recover ∘ process) ↔ (defectRelation process target).Nonempty)"
     },
     "D5/S3/Fourier/FinitePoisson.finite_poisson_summation": {
       "module": "D5/S3/Fourier/FinitePoisson",
@@ -268,6 +572,46 @@
       "statement_id": "sha256:49d78b0772db8ee1c0ffbc3604bac88ac610968176d0c8e48817b10da57dea6a",
       "line": 132,
       "signature": "theorem two_copy_joint_reversal_certificate : let rho"
+    },
+    "D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform": {
+      "module": "D5/S3/PrimeForms/Crossing/CrossingNormForm",
+      "name": "D5.S3.PrimeForms.Crossing.CrossingNormForm.Qform",
+      "kind": "def",
+      "statement_id": "sha256:d56f376192e4a6271921a68c667dbf2fd4cc76722878a78450bb3efc937225a7",
+      "line": 14,
+      "signature": "def Qform (t P Q : ℤ) : ℤ"
+    },
+    "D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_discriminant": {
+      "module": "D5/S3/PrimeForms/Crossing/CrossingNormForm",
+      "name": "D5.S3.PrimeForms.Crossing.CrossingNormForm.Qform_discriminant",
+      "kind": "theorem",
+      "statement_id": "sha256:d56f376192e4a6271921a68c667dbf2fd4cc76722878a78450bb3efc937225a7",
+      "line": 27,
+      "signature": "theorem Qform_discriminant (t : ℤ) : (2 * t + 1) ^ 2 - 4 * (t ^ 2 + t + 1) = -3"
+    },
+    "D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_eq_eisNorm": {
+      "module": "D5/S3/PrimeForms/Crossing/CrossingNormForm",
+      "name": "D5.S3.PrimeForms.Crossing.CrossingNormForm.Qform_eq_eisNorm",
+      "kind": "theorem",
+      "statement_id": "sha256:d56f376192e4a6271921a68c667dbf2fd4cc76722878a78450bb3efc937225a7",
+      "line": 21,
+      "signature": "theorem Qform_eq_eisNorm (t P Q : ℤ) : Qform t P Q = eisNorm (P - (t + 1) * Q) Q"
+    },
+    "D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_range_eq_eisNorm": {
+      "module": "D5/S3/PrimeForms/Crossing/CrossingNormForm",
+      "name": "D5.S3.PrimeForms.Crossing.CrossingNormForm.Qform_range_eq_eisNorm",
+      "kind": "theorem",
+      "statement_id": "sha256:d56f376192e4a6271921a68c667dbf2fd4cc76722878a78450bb3efc937225a7",
+      "line": 35,
+      "signature": "theorem Qform_range_eq_eisNorm (t : ℤ) : Set.range (fun p : ℤ × ℤ => Qform t p.1 p.2) = Set.range (fun p : ℤ × ℤ => eisNorm p.1 p.2)"
+    },
+    "D5/S3/PrimeForms/Crossing/CrossingNormForm.eisNorm": {
+      "module": "D5/S3/PrimeForms/Crossing/CrossingNormForm",
+      "name": "D5.S3.PrimeForms.Crossing.CrossingNormForm.eisNorm",
+      "kind": "def",
+      "statement_id": "sha256:d56f376192e4a6271921a68c667dbf2fd4cc76722878a78450bb3efc937225a7",
+      "line": 17,
+      "signature": "def eisNorm (x y : ℤ) : ℤ"
     },
     "D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula": {
       "module": "D5/S3/Quantum/Algebra/CovariantCommutator",
@@ -1100,6 +1444,70 @@
       "statement_id": "sha256:4afe43b854e2458ef67f9357e4f8b808f2257340b1afb27d2212da242bca7b99",
       "line": 416,
       "signature": "theorem sphere_two_open_orthogonality_free_cover_lower_six {k : ℕ} (U : Fin k → Set (sphere (0 : EuclideanSpace ℝ (Fin 3)) 1)) (hopen : ∀ i, IsOpen (U i)) (hcover : ∀ x, ∃ i, x ∈ U i) (hfree : ∀ i, OrthogonalityFree (U i)) : 6 ≤ k"
+    },
+    "D5/S3/Weil/Convention.classicalZeta": {
+      "module": "D5/S3/Weil/Convention",
+      "name": "D5.S3.Weil.Convention.classicalZeta",
+      "kind": "def",
+      "statement_id": "sha256:58cab65c4d89824384f63b0f12326f47f769eed1b6b7a813ecba718229b57fe1",
+      "line": 36,
+      "signature": "noncomputable def classicalZeta : ZetaFunction"
+    },
+    "D5/S3/Weil/Convention.criticalAbscissa": {
+      "module": "D5/S3/Weil/Convention",
+      "name": "D5.S3.Weil.Convention.criticalAbscissa",
+      "kind": "def",
+      "statement_id": "sha256:58cab65c4d89824384f63b0f12326f47f769eed1b6b7a813ecba718229b57fe1",
+      "line": 42,
+      "signature": "noncomputable def criticalAbscissa : ℝ"
+    },
+    "D5/S3/Zeros/ZetaIdentities.riemann_zeta_dirichlet_sum": {
+      "module": "D5/S3/Zeros/ZetaIdentities",
+      "name": "D5.S3.Zeros.ZetaIdentities.riemann_zeta_dirichlet_sum",
+      "kind": "theorem",
+      "statement_id": "sha256:2beb43a0d49cc4c1a5376e240d53e574f998eb4797ee3f258553457b02c41115",
+      "line": 24,
+      "signature": "theorem riemann_zeta_dirichlet_sum (s : ℂ) (hs : 1 < s.re) : (∑' n : ℕ, (n : ℂ) ^ (-s)) = classicalZeta s"
+    },
+    "D5/S3/Zeros/ZetaIdentities.riemann_zeta_euler_product": {
+      "module": "D5/S3/Zeros/ZetaIdentities",
+      "name": "D5.S3.Zeros.ZetaIdentities.riemann_zeta_euler_product",
+      "kind": "theorem",
+      "statement_id": "sha256:2beb43a0d49cc4c1a5376e240d53e574f998eb4797ee3f258553457b02c41115",
+      "line": 30,
+      "signature": "theorem riemann_zeta_euler_product (s : ℂ) (hs : 1 < s.re) : (∏' p : Nat.Primes, (1 - (p : ℂ) ^ (-s))⁻¹) = classicalZeta s"
+    },
+    "D5/S3/Zeros/ZetaIdentities.riemann_zeta_residue_one": {
+      "module": "D5/S3/Zeros/ZetaIdentities",
+      "name": "D5.S3.Zeros.ZetaIdentities.riemann_zeta_residue_one",
+      "kind": "theorem",
+      "statement_id": "sha256:2beb43a0d49cc4c1a5376e240d53e574f998eb4797ee3f258553457b02c41115",
+      "line": 18,
+      "signature": "theorem riemann_zeta_residue_one : Tendsto (fun s : ℂ => (s - 1) * classicalZeta s) (𝓝[≠] 1) (𝓝 1)"
+    },
+    "D5/S3/Zeros/ZetaUpgrade.HasUniqueSimplePoleWithResidue": {
+      "module": "D5/S3/Zeros/ZetaUpgrade",
+      "name": "D5.S3.Zeros.ZetaUpgrade.HasUniqueSimplePoleWithResidue",
+      "kind": "def",
+      "statement_id": "sha256:d42c4a0a6d7c0e9779156a97b715482e15a2795cac7aabc19ec834f7af06ef2e",
+      "line": 18,
+      "signature": "def HasUniqueSimplePoleWithResidue (f : ℂ -> ℂ) (z residue : ℂ) : Prop"
+    },
+    "D5/S3/Zeros/ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one": {
+      "module": "D5/S3/Zeros/ZetaUpgrade",
+      "name": "D5.S3.Zeros.ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one",
+      "kind": "theorem",
+      "statement_id": "sha256:d42c4a0a6d7c0e9779156a97b715482e15a2795cac7aabc19ec834f7af06ef2e",
+      "line": 36,
+      "signature": "theorem classical_zeta_unique_simple_pole_residue_one : HasUniqueSimplePoleWithResidue classicalZeta 1 1"
+    },
+    "D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product": {
+      "module": "D5/S3/Zeros/ZetaUpgrade",
+      "name": "D5.S3.Zeros.ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product",
+      "kind": "theorem",
+      "statement_id": "sha256:d42c4a0a6d7c0e9779156a97b715482e15a2795cac7aabc19ec834f7af06ef2e",
+      "line": 25,
+      "signature": "theorem riemann_zeta_dirichlet_sum_eq_euler_product (s : ℂ) (hs : 1 < s.re) : (∑' n : ℕ, (n : ℂ) ^ (-s)) = ∏' p : Nat.Primes, (1 - (p : ℂ) ^ (-s))⁻¹"
     }
   }
 }

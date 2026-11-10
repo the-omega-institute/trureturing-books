@@ -36,3 +36,10 @@
 - [Chapter 18 Dirac Spinors and Gauge Fields: Why Fermions Detour Through the Sphere and Why Force Is Area Curvature](ch18-spinors-and-gauge-curvature.md)
 - [Chapter 19 Entanglement Weaves Space: Tensor Networks, Holographic Duality, and the Discrete Min-Cut Theorem](ch19-tensor-networks-and-holography.md)
 - [Chapter 20 Gate Complexity as Volume: Black-Hole Interior Growth, Wormhole Bridges, and Computational Complexity Boundaries](ch20-complexity-and-spacetime.md)
+
+# Part VI Crossing the Horizon — Spheres Beyond Spheres: Gödelian Escape, Arithmetic Spectra, and $\psi = \psi(\psi)$
+
+- [Chapter 21 Spheres Beyond Spheres: Cantor Diagonalization, Gödel Escape, and Hairy-Ball Singularities](ch21-diagonalization-and-escape.md)
+- [Chapter 22 Primes as the Orthogonal Basis of Arithmetic: Euler Products and Riemann Zeros](ch22-primes-euler-products-and-zeros.md)
+- [Chapter 23 The Integer Skeleton Inside the Rationals: Quaternion Norms and Diophantine Definability](ch23-diophantine-definability.md)
+- [Chapter 24 Cosine Fixed Points and Self-Reference: From $\cos\theta = \theta$ to $\psi = \psi(\psi)$](ch24-cosine-fixed-points-and-self-reference.md)

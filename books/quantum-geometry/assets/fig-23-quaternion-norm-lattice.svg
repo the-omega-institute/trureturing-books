@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" width="960" height="420">
+  <defs>
+    <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect x="5" y="5" width="950" height="410" rx="14" fill="#03060c" stroke="#143049" stroke-width="2"/>
+  <text x="34" y="40" font-family="JetBrains Mono,monospace" font-size="17" font-weight="600" fill="#19f0ff">The Integer Skeleton in ℚ · Eisenstein Shear, Golden Pell &amp; Quaternion Norm Locks</text>
+  <text x="34" y="64" font-family="JetBrains Mono,monospace" font-size="11" fill="#6f8ea5">I: crossing form Q_t(P,Q) = eisNorm (Δ = −3) · II: golden Pell (2a+b)² − 5b² = 4N(g) · III: Koenigsmann ∀ / ∀¹∃ norm lock in ℚ</text>
+
+  <g font-family="JetBrains Mono,monospace">
+    <line x1="320" y1="84" x2="320" y2="352" stroke="#143049" stroke-width="1.2"/>
+    <line x1="640" y1="84" x2="640" y2="352" stroke="#143049" stroke-width="1.2"/>
+
+    <!-- PANEL I: Eisenstein / Löschian Norm Lattice (Δ = -3) -->
+    <text x="162" y="102" text-anchor="middle" fill="#19f0ff" font-size="12" font-weight="600">I · EISENSTEIN SHEAR INVARIANCE</text>
+    <circle cx="162" cy="192" r="58" fill="#19f0ff" fill-opacity="0.06" stroke="#19f0ff" stroke-width="1.4"/>
+    <polygon points="220,192 191,242 133,242 104,192 133,142 191,142" fill="none" stroke="#9d8cff" stroke-width="1.4"/>
+    <circle cx="220" cy="192" r="4" fill="#46ffb2"/>
+    <circle cx="191" cy="242" r="4" fill="#46ffb2"/>
+    <circle cx="133" cy="242" r="4" fill="#46ffb2"/>
+    <circle cx="104" cy="192" r="4" fill="#46ffb2"/>
+    <circle cx="133" cy="142" r="4" fill="#46ffb2"/>
+    <circle cx="191" cy="142" r="4" fill="#46ffb2"/>
+    <!-- Current selection: shear parameter t=2 -->
+    <circle cx="162" cy="192" r="4.5" fill="#ffc83d"/>
+    <text x="162" y="178" text-anchor="middle" fill="#ffc83d" font-size="9.5">now: t=2</text>
+    <text x="162" y="274" text-anchor="middle" fill="#d4efff" font-size="11">Q_t(P,Q) = eisNorm(P−(t+1)Q, Q)</text>
+    <text x="162" y="294" text-anchor="middle" fill="#19f0ff" font-size="11">eisNorm(x,y) = x² + xy + y²</text>
+    <text x="162" y="314" text-anchor="middle" fill="#46ffb2" font-size="11">Δ(Q_t) = (2t+1)² − 4(t²+t+1) = −3</text>
+    <text x="162" y="334" text-anchor="middle" fill="#6f8ea5" font-size="10">range(Q_t) = range(eisNorm) ∀ t ∈ ℤ</text>
+
+    <!-- PANEL II: Golden Pell Hyperbola (Δ = +5) -->
+    <text x="480" y="102" text-anchor="middle" fill="#19f0ff" font-size="12" font-weight="600">II · GOLDEN PELL NORM BRIDGE</text>
+    <rect x="366" y="118" width="228" height="136" rx="6" fill="#07101b" stroke="#34506a"/>
+    <path d="M402 134Q452 186 402 238" fill="none" stroke="#ff2fd0" stroke-width="2"/>
+    <path d="M558 134Q508 186 558 238" fill="none" stroke="#ff2fd0" stroke-width="2"/>
+    <line x1="382" y1="242" x2="578" y2="130" stroke="#34506a" stroke-dasharray="3 3"/>
+    <line x1="382" y1="130" x2="578" y2="242" stroke="#34506a" stroke-dasharray="3 3"/>
+    <circle cx="430" cy="186" r="4.5" fill="#46ffb2"/>
+    <circle cx="530" cy="186" r="4.5" fill="#46ffb2"/>
+    <text x="480" y="274" text-anchor="middle" fill="#d4efff" font-size="11">(2a + b)² − 5b² = 4(a² + ab − b²)</text>
+    <text x="480" y="294" text-anchor="middle" fill="#ff2fd0" font-size="11">Tr(g)² − 5b² = 4·norm(g)</text>
+    <text x="480" y="314" text-anchor="middle" fill="#46ffb2" font-size="11">x² − 5y² = ±4 ⟺ (±L_n, ±F_n)</text>
+    <text x="480" y="334" text-anchor="middle" fill="#6f8ea5" font-size="10">GoldenInt unit group ℤ/2ℤ × φ^ℤ</text>
+
+    <!-- PANEL III: Quaternion Norm-Trace Lock for ℤ in ℚ (Literature) -->
+    <text x="800" y="102" text-anchor="middle" fill="#19f0ff" font-size="12" font-weight="600">III · DEFINING ℤ IN ℚ (LIT.)</text>
+    <circle cx="800" cy="184" r="56" fill="#9d8cff" fill-opacity="0.06" stroke="#9d8cff" stroke-width="1.4"/>
+    <ellipse cx="800" cy="184" rx="56" ry="18" fill="none" stroke="#19f0ff" stroke-dasharray="4 3"/>
+    <line x1="716" y1="246" x2="884" y2="246" stroke="#34506a" stroke-width="1.8"/>
+    <circle cx="744" cy="246" r="4" fill="#9d8cff"/>
+    <circle cx="772" cy="246" r="4" fill="#9d8cff"/>
+    <circle cx="800" cy="246" r="4" fill="#9d8cff"/>
+    <circle cx="828" cy="246" r="4" fill="#9d8cff"/>
+    <circle cx="856" cy="246" r="4" fill="#9d8cff"/>
+    <text x="800" y="182" text-anchor="middle" fill="#d4efff" font-size="12">Nrd(α) &amp; Trd(α)</text>
+    <text x="800" y="200" text-anchor="middle" fill="#6f8ea5" font-size="10">Hasse–Minkowski &amp; Jacobson rad.</text>
+    <text x="800" y="274" text-anchor="middle" fill="#d4efff" font-size="10.5">Koenigsmann (2016): Thm 1 (∀) · Cor 21 (∀¹∃)</text>
+    <text x="800" y="294" text-anchor="middle" fill="#9d8cff" font-size="10.5">ℚ \ ℤ is Diophantine (∃) · Daans ∀¹⁰</text>
+    <text x="800" y="314" text-anchor="middle" fill="#ff5064" font-size="11">OPEN: ∃ definition of ℤ in ℚ &amp; H10(ℚ)</text>
+    <text x="800" y="334" text-anchor="middle" fill="#6f8ea5" font-size="10">literature layer vs frozen norm forms</text>
+  </g>
+  <rect x="24" y="366" width="912" height="32" rx="6" fill="#050c16" stroke="#143049"/>
+  <text x="480" y="387" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11.5" fill="#46ffb2">LEAN ✓  Qform t P Q = eisNorm (P−(t+1)Q) Q   ·   Δ = −3   ·   range(Qform t) = range(eisNorm)   ·   (2a+b)²−5b² = 4·norm g</text>
+</svg>
