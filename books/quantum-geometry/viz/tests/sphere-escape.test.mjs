@@ -201,7 +201,10 @@ check('number box and sliders set N = 8, S = 24, x₀ = 0', st.N === 8 && st.see
 await page.click('#nDec'); await page.click('#seedInc'); await page.click('#x0Inc'); await settle();
 st = await state();
 check('steppers move N down, S up and x₀ up by one', st.N === 7 && st.seed === 25 && st.x0 === 1);
-await page.fill('#seedNum', '500'); await page.press('#seedNum', 'Enter'); await page.fill('#nNum', '1'); await page.press('#nNum', 'Enter'); await settle();
+await page.fill('#seedNum', '500'); await page.press('#seedNum', 'Enter'); await settle();
+// Settle before touching the next box: render() rewrites every number box from state on the next frame, so a frame
+// that lands after #nNum is filled and before Enter would wipe the typed value and the second commit would not happen.
+await page.fill('#nNum', '1'); await page.press('#nNum', 'Enter'); await settle();
 st = await state();
 check('out-of-range input is clamped (S = 63, N = 3) and the steppers disable at the limits', st.seed === 63 && st.N === 3 && (await D(() => document.getElementById('seedInc').disabled && document.getElementById('nDec').disabled)));
 for (const [p, dExpect] of [['identity', '00000000'], ['alternating', '11111111'], ['dense', '00000000']]) {
