@@ -22,3 +22,17 @@
 - [Chapter 10 Pairwise Comparison, Always Consistent, Order-Independent: Dissolving the Non-Commutativity Illusion and Berry Phase](ch10-gram-geometry-and-order.md)
 - [Chapter 11 Quantum Gates in Hardware: Microwave Pulse Area and Zero-Duration Virtual Z Gates](ch11-pulses-and-virtual-z.md)
 - [Chapter 12 Attention as Computation: Measurement-Based Quantum Computing and Spherical Natural Gradients](ch12-measurement-computation-and-gradients.md)
+
+# Part IV Entangled Spheres — Quantum Entanglement, Fault-Tolerant Codes, and Grand Unification of Algorithms
+
+- [Chapter 13 Quantum Entanglement and the Bell 45° Violation: How the Cosine Arc Defeats the Classical Polygonal Line](ch13-entanglement-and-chsh.md)
+- [Chapter 14 Hiding Fragile Lines in Higher-Dimensional Areas: Quantum Error-Correcting Codes and Anyonic Topological Braids](ch14-cloning-codes-and-braids.md)
+- [Chapter 15 Invariant-Plane Rotations and Equatorial Area Gears: Grover Search, QFT, and Shor Factoring](ch15-grover-qft-and-period-finding.md)
+- [Chapter 16 Grand Unification of Quantum Algorithms (QSVT), Quantum Walks, and Gate-Compilation Polytopes](ch16-qsvt-walks-and-compilation.md)
+
+# Part V The Spacetime Sphere — Relativistic Metrics, Gauge Fields, and Holographic Gravity
+
+- [Chapter 17 Geometric Demystification of Special Relativity: Hyperbolic Rotors, Null Light Cones, and Spacetime Area](ch17-lorentz-geometry.md)
+- [Chapter 18 Dirac Spinors and Gauge Fields: Why Fermions Detour Through the Sphere and Why Force Is Area Curvature](ch18-spinors-and-gauge-curvature.md)
+- [Chapter 19 Entanglement Weaves Space: Tensor Networks, Holographic Duality, and the Discrete Min-Cut Theorem](ch19-tensor-networks-and-holography.md)
+- [Chapter 20 Gate Complexity as Volume: Black-Hole Interior Growth, Wormhole Bridges, and Computational Complexity Boundaries](ch20-complexity-and-spacetime.md)
