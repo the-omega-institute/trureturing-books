@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ORTHO//QUBIT 两子几何积 · 粒子内积线与波动外积面的勾股守恒与旋转门</title>
-<meta name="description" content="两子几何积 AB = A·B + A∧B：调节极角 θ、方位相位 φ、环境记录夹角 α 与退相干捏合强度 η，观测内积粒子线 cos θ 与外积波动面 sin θ、勾股互补圆 D² + V² = 1、SU(2)/SO(3) 旋子门序列以及希尔伯特—施密特捏合正交分解。Pairwise geometric product AB = A·B + A∧B: adjust polar angle θ, azimuthal phase φ, record overlap angle α, and pinching decoherence η to inspect particle dot-line cos θ, wave wedge-area sin θ, Pythagorean circle D² + V² = 1, Clifford rotor gates, and Hilbert–Schmidt pinching decomposition.">
+<meta name="description" content="两子几何积 AB = A·B + A∧B：调节极角 θ、方位相位 φ、环境记录夹角 α 与退相干捏合强度 η，观测内积粒子线 cos θ 与外积波动面 sin θ、勾股互补圆 D² + V² = 1、SU(2)/SO(3) 旋转器门序列以及希尔伯特—施密特捏合正交分解。Pairwise geometric product AB = A·B + A∧B: adjust polar angle θ, azimuthal phase φ, record overlap angle α, and pinching decoherence η to inspect particle dot-line cos θ, wave wedge-area sin θ, Pythagorean circle D² + V² = 1, Clifford rotor gates, and Hilbert–Schmidt pinching decomposition.">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +20,7 @@
       <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
       <h1 class="logo" data-text="ORTHO//QUBIT">ORTHO<b>//</b>QUBIT</h1>
       <div class="tagline">
-        <span class="zh">两子几何积 · <em>AB = A·B + A∧B：内积粒子线 cos θ 与外积波动面 sin θ 的勾股守恒、旋子门与捏合账单</em></span>
+        <span class="zh">两子几何积 · <em>AB = A·B + A∧B：内积粒子线 cos θ 与外积波动面 sin θ 的勾股守恒、旋转器门与捏合账单</em></span>
         <span class="en">Pairwise geometric product · <em>AB = A·B + A∧B: Pythagorean conservation of particle dot-line cos θ and wave wedge-area sin θ</em></span>
       </div>
     </div>
@@ -43,7 +43,7 @@
       </div>
 
       <div class="num-field">
-        <label for="phi"><span class="zh">方位相位角 φ（赤道旋子角）</span><span class="en">Azimuthal phase φ (rotor)</span></label>
+        <label for="phi"><span class="zh">方位相位角 φ（赤道旋转器角）</span><span class="en">Azimuthal phase φ (rotor)</span></label>
         <div class="stepper"><button type="button" id="phiDec" aria-label="φ 减一" data-aria-en="Decrease φ">−</button><input type="number" id="phiNum" min="0" max="360" step="1" value="36" inputmode="numeric" aria-label="φ 的度数" data-aria-en="Value of φ in degrees"><button type="button" id="phiInc" aria-label="φ 加一" data-aria-en="Increase φ">+</button></div>
         <input type="range" id="phi" min="0" max="360" step="1" value="36">
       </div>
@@ -60,8 +60,8 @@
         <input type="range" id="eta" min="0" max="1" step="0.01" value="0">
       </div>
 
-      <div class="subhead" id="gatesHead"><span class="zh">线路第 2 步 · 单比特旋子门 <span style="text-transform:none">U(α) = exp(−iα n̂·σ/2)</span></span><span class="en">Circuit step 2 · single-qubit rotor gate <span style="text-transform:none">U(α) = exp(−iα n̂·σ/2)</span></span></div>
-      <div class="chips gates" id="gates" role="group" aria-label="单比特量子门旋子" data-aria-en="Single-qubit rotor gates">
+      <div class="subhead" id="gatesHead"><span class="zh">线路第 2 步 · 单比特旋转器门 <span style="text-transform:none">U(α) = exp(−iα n̂·σ/2)</span></span><span class="en">Circuit step 2 · single-qubit rotor gate <span style="text-transform:none">U(α) = exp(−iα n̂·σ/2)</span></span></div>
+      <div class="chips gates" id="gates" role="group" aria-label="单比特量子门旋转器" data-aria-en="Single-qubit rotor gates">
         <button class="chip" type="button" data-gate="I">I</button>
         <button class="chip" type="button" data-gate="X">X</button>
         <button class="chip" type="button" data-gate="Y">Y</button>
@@ -125,7 +125,7 @@
 
     <footer class="rail" id="rail">
       <div class="keys">
-        <span class="zh"><kbd>X</kbd><kbd>Y</kbd><kbd>Z</kbd><kbd>H</kbd><kbd>S</kbd><kbd>T</kbd> 施加旋子门 · <kbd>R</kbd> 重置 · 拖动画布微调 (θ, φ)</span>
+        <span class="zh"><kbd>X</kbd><kbd>Y</kbd><kbd>Z</kbd><kbd>H</kbd><kbd>S</kbd><kbd>T</kbd> 施加旋转器门 · <kbd>R</kbd> 重置 · 拖动画布微调 (θ, φ)</span>
         <span class="en"><kbd>X</kbd><kbd>Y</kbd><kbd>Z</kbd><kbd>H</kbd><kbd>S</kbd><kbd>T</kbd> apply rotor gate · <kbd>R</kbd> reset · drag canvas to adjust (θ, φ)</span>
       </div>
     </footer>
@@ -149,10 +149,10 @@
     <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 两子几何积、勾股互补圆、保单位捏合退相干与非保单位兰道尔重置</span><span class="en">Theory interface · Pairwise geometric product, Pythagorean circle, unital pinching dephasing vs non-unital Landauer reset</span></h2><button class="chip" type="button" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
     <div class="zh">
       <p class="lede">克利福德几何积将参考测量轴 A = ẑ 与单比特布洛赫态向量 B(θ, φ) 的关系缝合为同一个代数方程 AB = A·B + A∧B：标量内积 A·B = cos θ 给出粒子投影的确定性，二向量外积 A∧B = sin θ I 给出横向相干与量子门旋转的平行四边形面积。本页是数值演示，不是证明。</p>
-      <p class="lede"><b>线路顺序：</b>态制备 |ψ⟩（滑块 θ, φ 与预设）→ 单比特旋子门 U(α) = exp(−iα n̂·σ/2)（门带，至多差一个全局相位）→ 门后纯态 ρ₀ = |ψ(θ,φ)⟩⟨ψ(θ,φ)| = B(θ, φ)（每施加一个门，滑块 θ, φ 即同步为 ρ₀ 的坐标）→ 固定 z 轴退相干信道 E_η → ρ(η) = E_η(ρ₀)。简写为 <code>|ψ⟩ → U(α) → ρ₀(θ,φ) → E_η → ρ(η)</code>。</p>
+      <p class="lede"><b>线路顺序：</b>态制备 |ψ⟩（滑块 θ, φ 与预设）→ 单比特旋转器门 U(α) = exp(−iα n̂·σ/2)（门带，至多差一个全局相位）→ 门后纯态 ρ₀ = |ψ(θ,φ)⟩⟨ψ(θ,φ)| = B(θ, φ)（每施加一个门，滑块 θ, φ 即同步为 ρ₀ 的坐标）→ 固定 z 轴退相干信道 E_η → ρ(η) = E_η(ρ₀)。简写为 <code>|ψ⟩ → U(α) → ρ₀(θ,φ) → E_η → ρ(η)</code>。</p>
       <ol>
         <li><b>几何积与勾股守恒（第六章 §6.1–§6.2）。</b>极角滑块 <code>θ ∈ [0°, 180°]</code> 与方位角滑块 <code>φ ∈ [0°, 360°]</code> 控制单位向量 B(θ, φ)。内积线长度 cos θ 与外积面积 ‖A∧B‖ = sin θ 恒满足 cos²θ + sin²θ = 1，对应冻结定理 <a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S3/QuantumBounds/LagrangeGramIdentity.lean#L17" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a>（LEAN ✓）。</li>
-        <li><b>线路第 2 步 · 单比特旋子门 U(α)（第五章 §5.2–§5.4）。</b>按钮 <code>I, X, Y, Z, H, S, T</code> 各自施加一个旋子门 U(α) = exp(−iα n̂·σ/2)（至多差一个全局相位）：X、Y、Z 分别绕 x̂、ŷ、ẑ 转 α = π，H 绕 (x̂ + ẑ)/√2 转 α = π，S、T 绕 ẑ 分别转 α = π/2、π/4，I 即 α = 0。这里的 α 是门的转角，与第 3 项的环境记录重叠角滑块 α 无关。门作用在当前布洛赫向量上，输出门后纯态 ρ₀ = B(θ, φ)，并按时间先后记入“线路顺序”带；例如从 |0⟩（θ = 0°）点击 <code>H</code> 立即得到赤道叠加态 ρ₀ = |+⟩⟨+|（θ = 90°, φ = 0°）。</li>
+        <li><b>线路第 2 步 · 单比特旋转器门 U(α)（第五章 §5.2–§5.4）。</b>按钮 <code>I, X, Y, Z, H, S, T</code> 各自施加一个旋转器门 U(α) = exp(−iα n̂·σ/2)（至多差一个全局相位）：X、Y、Z 分别绕 x̂、ŷ、ẑ 转 α = π，H 绕 (x̂ + ẑ)/√2 转 α = π，S、T 绕 ẑ 分别转 α = π/2、π/4，I 即 α = 0。这里的 α 是门的转角，与第 3 项的环境记录重叠角滑块 α 无关。门作用在当前布洛赫向量上，输出门后纯态 ρ₀ = B(θ, φ)，并按时间先后记入“线路顺序”带；例如从 |0⟩（θ = 0°）点击 <code>H</code> 立即得到赤道叠加态 ρ₀ = |+⟩⟨+|（θ = 90°, φ = 0°）。</li>
         <li><b>环境记录互补圆 D² + V² = 1（第六章 §6.3）。</b>滑块 <code>α ∈ [0°, 90°]</code> 设定双路径干涉仪中左右环境记录态的夹角，决定记录重叠 c = cos α、干涉条纹可见度 V = |cos α| 与路径可区分度 D = √(1 − V²) = sin α，对应冻结定理 <a class="leanref" data-lean-gid="D5/S3/Quantum/PureState/RecordCoherenceComplementarity.pure_record_distinguishability_coherence_complementarity" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S3/Quantum/PureState/RecordCoherenceComplementarity.lean#L29" target="_blank" rel="noopener"><code>pure_record_distinguishability_coherence_complementarity</code></a>（LEAN ✓）。</li>
         <li id="drawerPinchZh"><b>线路第 3 步 · 保单位捏合退相干 ≠ 非保单位兰道尔重置（第六章 §6.3、第八章 §8.2）。</b>滑块 <code>η ∈ [0, 1]</code> 控制固定 z 轴退相干信道 E_η(ρ) = (1−η)ρ + ηΠ(ρ)，其中 Π(ρ) = diag(ρ₀₀, ρ₁₁) 是计算基捏合。它把门后纯态 ρ₀ 的布洛赫向量阻尼为 r(η) = ((1−η)sin θ cos φ, (1−η)sin θ sin φ, cos θ)，得到当前态 ρ(η) = E_η(ρ₀)；z 分量不动，所以 Π(ρ(η)) = Π(ρ₀) = diag(p₀, p₁)，p₀ = cos²(θ/2)。下面两种过程必须分开：
           <ul>
@@ -160,9 +160,9 @@
             <li><b>(b) 逻辑重置 / 擦除。</b>I/2 → |0⟩⟨0|。这是非保单位信道：它把整个布洛赫球压到北极，压缩系统态空间，ΔS_sys = −ln 2 &lt; 0。按兰道尔原理，它必须向温度为 T 的热库耗散至少 k_B T ln 2 的热量（文献结果，未在本书形式化）。</li>
           </ul>
           本页的 η 滑块只实现 (a)：“正交捏合退相干 (ln 2)”预设显示的是系统熵增 ln 2，不是擦除所需的放热。</li>
-        <li><b>模型边界。</b>页面在双精度浮点下计算三维正交投影、二元熵与柱状账单，旋子按钮将角度取整到度以便与滑块同步；页面只含保单位信道 E_η，不含任何非保单位重置信道。形式化定理本身在 Lean 4 中对任意精度实数与复矩阵严格成立。</li>
+        <li><b>模型边界。</b>页面在双精度浮点下计算三维正交投影、二元熵与柱状账单，旋转器按钮将角度取整到度以便与滑块同步；页面只含保单位信道 E_η，不含任何非保单位重置信道。形式化定理本身在 Lean 4 中对任意精度实数与复矩阵严格成立。</li>
       </ol>
-      <p class="lede refs">书中：<a href="../../zh/ch05-complex-phase-and-rotors.html#thm-relative-complex-structure-square" target="_top">第五章 · 相对复结构与旋子</a> · <a href="../../zh/ch06-geometric-product.html#thm-record-coherence-complementarity" target="_top">第六章 · 几何积与勾股互补圆</a> · <a href="../../zh/ch08-erasure-and-time-arrows.html#thm-entropy-production-coherence-deletion" target="_top">第八章 · 相干删除与熵产生恒等式</a> · <a href="../../zh/ch08-erasure-and-time-arrows.html#rem-landauer-thermodynamic-bridge-literature" target="_top">第八章 · 兰道尔原理（文献结果）</a> ·trureturing（所钉提交）：<a data-trureturing-path="D5/S3/Quantum/PureState/RecordCoherenceComplementarity.lean" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S3/Quantum/PureState/RecordCoherenceComplementarity.lean" target="_blank" rel="noopener">RecordCoherenceComplementarity.lean</a> · <a data-trureturing-path="D5/S3/QuantumChannels/PinchingProjection.lean" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S3/QuantumChannels/PinchingProjection.lean" target="_blank" rel="noopener">PinchingProjection.lean</a></p>
+      <p class="lede refs">书中：<a href="../../zh/ch05-complex-phase-and-rotors.html#thm-relative-complex-structure-square" target="_top">第五章 · 相对复结构与旋转器</a> · <a href="../../zh/ch06-geometric-product.html#thm-record-coherence-complementarity" target="_top">第六章 · 几何积与勾股互补圆</a> · <a href="../../zh/ch08-erasure-and-time-arrows.html#thm-entropy-production-coherence-deletion" target="_top">第八章 · 相干删除与熵产生恒等式</a> · <a href="../../zh/ch08-erasure-and-time-arrows.html#rem-landauer-thermodynamic-bridge-literature" target="_top">第八章 · 兰道尔原理（文献结果）</a> ·trureturing（所钉提交）：<a data-trureturing-path="D5/S3/Quantum/PureState/RecordCoherenceComplementarity.lean" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S3/Quantum/PureState/RecordCoherenceComplementarity.lean" target="_blank" rel="noopener">RecordCoherenceComplementarity.lean</a> · <a data-trureturing-path="D5/S3/QuantumChannels/PinchingProjection.lean" href="https://github.com/the-omega-institute/trureturing/blob/4c76e4a56525afbb474bf04a03ee2ff4aec5da45/D5/S3/QuantumChannels/PinchingProjection.lean" target="_blank" rel="noopener">PinchingProjection.lean</a></p>
     </div>
     <div class="en">
       <p class="lede">Clifford's geometric product unifies the reference measurement axis A = ẑ and the qubit Bloch vector B(θ, φ) into a single algebraic identity AB = A·B + A∧B: the scalar inner product A·B = cos θ measures collinear particle certainty, while the exterior bivector A∧B = sin θ I measures the transverse wave parallelogram area that generates quantum gate rotations. The page is a numerical illustration, not a proof.</p>

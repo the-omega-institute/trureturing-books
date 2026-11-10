@@ -46,7 +46,7 @@ $$
 | **公设一：态空间公设**（纯态为复希尔伯特空间射线） | 商去不可见全局相位 $U(1)$ 后，单比特纯态是三维实球面上的单位方向线 $\vv{a} \in S^2$，混合态是球内截短弦 $\norm{\vv{r}} \le 1$ | [@thm-ray-phase-rigidity]、[@prop-qubit-bloch-core]（[第一章](ch01-measurement.md)） |
 | **公设二：可观测量公设**（物理量为厄米算符 $A^* = A$） | 每次锐利判别都是球面上的幂等投影线 $P^2 = P = P^*$；每一张旋转平面 $J^2 = -I$ 乘以 $i$ 即对偶于一根厄米对合观测轴 $(iJ)^* = iJ$ | [@def-record-measurement]（[第三章](ch03-projectors-and-duality.md)）、[@thm-relative-complex-structure-square]（[第五章](ch05-complex-phase-and-rotors.md)） |
 | **公设三：玻恩概率公设**（测量概率 $p = \Tr(\rho P) = |\langle\phi\mid\psi\rangle|^2$） | 砍掉外部第 3 点 $C$，以已知态自身为基，取几何积的内积共线投影 $\vv{A}\cdot\vv{B} = \cos\theta$（希尔伯特半角余弦平方 $\cos^2(\theta/2)$） | [@thm-born-modulus-square]、[@thm-rank-one-born-pairing]（[第二章](ch02-born-rule.md)） |
-| **公设四：幺正演化公设**（量子门与薛定谔演化 $\rho \mapsto U\rho U^*$） | 由几何积的外积有向面积 $\vv{A}\wedge\vv{B} = \sin\theta\,\vv{I}$ 驱动的克利福德旋子 $R(\theta) = \exp(-\vv{B}\theta/2)$ 双侧刚体旋转 | [@thm-balanced-sum-skew-adjoint]（[第五章](ch05-complex-phase-and-rotors.md)）、[@thm-calibrated-unitary-group]（[第七章](ch07-geometric-time-and-speed-limits.md)） |
+| **公设四：幺正演化公设**（量子门与薛定谔演化 $\rho \mapsto U\rho U^*$） | 由几何积的外积有向面积 $\vv{A}\wedge\vv{B} = \sin\theta\,\vv{I}$ 驱动的克利福德旋转器 $R(\theta) = \exp(-\vv{B}\theta/2)$ 双侧刚体旋转 | [@thm-balanced-sum-skew-adjoint]（[第五章](ch05-complex-phase-and-rotors.md)）、[@thm-calibrated-unitary-group]（[第七章](ch07-geometric-time-and-speed-limits.md)） |
 | **公设五：投影坍缩与退相干公设**（测量后状态投影更新） | 系统与环境记录正交耦合后对环境求偏迹，在希尔伯特—施密特空间中执行正交捏合投影 $\Pi(\rho)$，丢弃横向外积相干面积 | [@thm-nonselective-marginal]（[第四章](ch04-decoherence.md)）、[@cor-pinching-pythagorean]（本章） |
 
 ## 6.2 勾股守恒 $\cos^2\theta + \sin^2\theta = 1$：粒子的确定性与波的干涉面积此消彼长 {#sec-pythagorean-complementarity}
@@ -212,14 +212,14 @@ $$
 
 ## 6.4 交互实验：亲手拨动两子几何积、粒子内积与波动外积面 {#sec-interactive-qubit-geometry}
 
-百闻不如一试。在下面的交互实验室 **`ORTHO//QUBIT`（两子几何积与互补圆实验室）** 中，你可以亲手拖动极角 $\theta$、方位相位角 $\varphi$、环境记录夹角 $\alpha$ 与退相干捏合强度 $\eta$，并点击单比特量子门旋子按钮（`X`, `Y`, `Z`, `H`, `S`, `T`）：
+百闻不如一试。在下面的交互实验室 **`ORTHO//QUBIT`（两子几何积与互补圆实验室）** 中，你可以亲手拖动极角 $\theta$、方位相位角 $\varphi$、环境记录夹角 $\alpha$ 与退相干捏合强度 $\eta$，并点击单比特量子门旋转器按钮（`X`, `Y`, `Z`, `H`, `S`, `T`）：
 
 - 在左侧三维布洛赫球视图中，实时观察琥珀色当前门后纯态矢量 $\rho_0 = \vv{B}(\theta,\varphi)$ 如何分解为青色共线内积粒子线 $\vv{A}\cdot\vv{B} = \cos\theta$ 与紫色正交外积波动平行四边形 $\vv{A}\wedge\vv{B} = \sin\theta\,\vv{I}$；
 - 在右上角互补圆视图中，检验路径可区分度 $D = \sin\alpha$ 与干涉可见度 $V = \cos\alpha$ 如何永远锁定在勾股互补圆 $D^2 + V^2 = 1$（`LEAN ✓`，[@thm-record-coherence-complementarity]）上；
 - 在右下角希尔伯特—施密特柱状图中，观察保单位退相干与捏合投影 $\Pi(\rho_0)$ 如何把当前态 $\rho(\eta)$ 的纯度正交拆分为对角粒子布居范数 $\langle\Pi(\rho_0),\Pi(\rho_0)\rangle_{\mathrm{HS}}$ 与副对角波动相干质量 $|\rho_{01}(\eta)|^2 + |\rho_{10}(\eta)|^2$（[@cor-pinching-pythagorean]），并实时读出当前态剩余相对熵相干 $D(\rho(\eta) \,\|\, \Pi(\rho_0)) = S(\Pi(\rho_0)) - S(\rho(\eta))$（将在[第八章](ch08-erasure-and-time-arrows.md)严格证明）。
 
 ::: {.viz src="qubit-geometry" height="560"}
-交互实验室 `ORTHO//QUBIT`：拨动极角 $\theta$、相位角 $\varphi$、环境记录夹角 $\alpha$ 与捏合强度 $\eta$，或点击单比特旋子门 `X, Y, Z, H, S, T`，实时检验几何积分解 $\vv{A}\vv{B} = \vv{A}\cdot\vv{B} + \vv{A}\wedge\vv{B}$、纯态记录互补圆 $D^2 + V^2 = 1$ 与希尔伯特—施密特捏合勾股定理。
+交互实验室 `ORTHO//QUBIT`：拨动极角 $\theta$、相位角 $\varphi$、环境记录夹角 $\alpha$ 与捏合强度 $\eta$，或点击单比特旋转器门 `X, Y, Z, H, S, T`，实时检验几何积分解 $\vv{A}\vv{B} = \vv{A}\cdot\vv{B} + \vv{A}\wedge\vv{B}$、纯态记录互补圆 $D^2 + V^2 = 1$ 与希尔伯特—施密特捏合勾股定理。
 :::
 
 既然“粒子是线，面积是波，两者合起来是同一个几何积场”，那么当这片有向面积随着物理参数连续扫掠时，这个被我们称作“时间”的维度，在几何上又是什么？为什么作者会脱口而出*“我的直觉是,线是经典时间,面积是量子时间”*？让我们进入[第七章](ch07-geometric-time-and-speed-limits.md)。

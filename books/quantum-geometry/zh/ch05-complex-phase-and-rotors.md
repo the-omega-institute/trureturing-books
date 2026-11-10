@@ -46,7 +46,7 @@ $$
 
 真相大白！几个世纪以来被称为“虚数（imaginary number）”的 $i$，在几何上一点也不“虚”：**只要一个算子代表平面内保模长的 $90^\circ$ 正交转向（在矩阵代数中表现为反自伴性 $R^* = -R$ 与右幺正性 $R R^* = I$ 的结合），它连续作用两次就必然等于反向算子 $-I$**。
 
-![单位二向量 I = e₁ ∧ e₂ 的两次 90° 正交转向、平衡幺正和 S = A + B 生成相对复结构 J² = −I，以及克利福德半角旋子双侧夹乘](../assets/fig-05-bivector-rotor.svg)
+![单位二向量 I = e₁ ∧ e₂ 的两次 90° 正交转向、平衡幺正和 S = A + B 生成相对复结构 J² = −I，以及克利福德半角旋转器双侧夹乘](../assets/fig-05-bivector-rotor.svg)
 
 <figure data-tbook-film="001-qubit-bloch-rotor"></figure>
 
@@ -118,20 +118,20 @@ $$
 
 不仅如此，在同一模块中，若把这枚代表单位旋转平面的反自伴复结构 $J$ 乘上标量 $i$，就得到与之配对的**相对对合算子** $K := iJ$（[`relativeInvolution`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeInvolution)）：由于 $i$ 与 $J$ 在取伴随时双双变号（$(-i)(-J) = iJ$）且在平方时负负得正（$i^2 J^2 = (-1)(-I_n) = I_n$），$K = iJ$ 自动成为一个满足 $K^* = K$（[`relativeInvolution_isHermitian`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeInvolution_isHermitian)）且 $K^2 = I_n$（[`relativeInvolution_square`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeInvolution_square)）的厄米对合反射轴！这再次印证了[第三章](ch03-projectors-and-duality.md)揭示的霍奇对偶图景：每一张平方为 $-I$ 的旋转面积 $J$，都与一根平方为 $+I$ 的厄米可观测轴 $iJ$ 形影不离。
 
-## 5.2 从欧拉公式 $e^{i\theta}$ 到克利福德旋子 $R(\theta) = \cos(\theta/2) - \vv{B}\sin(\theta/2)$ {#sec-euler-to-rotor}
+## 5.2 从欧拉公式 $e^{i\theta}$ 到克利福德旋转器 $R(\theta) = \cos(\theta/2) - \vv{B}\sin(\theta/2)$ {#sec-euler-to-rotor}
 
-既然单位二向量 $\vv{B}$（或矩阵层面的相对复结构 $J$）满足与虚数单位完全同构的平方律 $\vv{B}^2 = -1$，那么把复分析里大名鼎鼎的欧拉公式 $e^{i\alpha} = \cos\alpha + i\sin\alpha$ 中的虚数 $i$ 替换为具体的几何旋转平面 $-\vv{B}$，就立刻得到了无需绑定任何特定坐标基的**克利福德旋子（Clifford rotor）**：
+既然单位二向量 $\vv{B}$（或矩阵层面的相对复结构 $J$）满足与虚数单位完全同构的平方律 $\vv{B}^2 = -1$，那么把复分析里大名鼎鼎的欧拉公式 $e^{i\alpha} = \cos\alpha + i\sin\alpha$ 中的虚数 $i$ 替换为具体的几何旋转平面 $-\vv{B}$，就立刻得到了无需绑定任何特定坐标基的**克利福德旋转器（Clifford rotor）**：
 
 $$
 R(\theta) := \exp\Bigl(-\vv{B}\,\frac{\theta}{2}\Bigr) = \sum_{k=0}^\infty \frac{(-\vv{B}\,\theta/2)^k}{k!} = \cos\frac{\theta}{2} - \vv{B}\sin\frac{\theta}{2}.
 $$
 
-初学者第一次看到这行旋子公式时，几乎都会问同一个问题：**为什么旋转角度是半角 $\theta/2$，而不是整角 $\theta$？而且为什么旋子作用在三维布洛赫向量 $\vv{v}$ 上时，要写成左右两边夹乘的“三明治积（sandwich product）” $\vv{v}' = R(\theta)\,\vv{v}\,R(\theta)^\dagger$，而不是像平面复数那样只乘一边？**
+初学者第一次看到这行旋转器公式时，几乎都会问同一个问题：**为什么旋转角度是半角 $\theta/2$，而不是整角 $\theta$？而且为什么旋转器作用在三维布洛赫向量 $\vv{v}$ 上时，要写成左右两边夹乘的“三明治积（sandwich product）” $\vv{v}' = R(\theta)\,\vv{v}\,R(\theta)^\dagger$，而不是像平面复数那样只乘一边？**
 
 用二向量几何来回答，只需两句话就能让人恍然大悟：
 
 1. **为什么单边相乘在三维空间里不够用？** 当你站在二维平面 $\vv{B} = \vv{e}_1 \wedge \vv{e}_2$ 内部时，所有向量都躺在平面内，因此它们与二向量 $\vv{B}$ 满足**反对易**关系：$\vv{v}_\parallel \vv{B} = -\vv{B} \vv{v}_\parallel$。但在三维布洛赫空间 $\mathbb{R}^3$ 中，除了躺在旋转平面内的平行分量 $\vv{v}_\parallel$ 外，还有垂直于旋转平面的法向旋转轴分量 $\vv{v}_\perp$（例如沿着 $\vv{e}_3$ 的分量）！由于 $\vv{e}_3$ 与 $\vv{e}_1, \vv{e}_2$ 都正交，越过两个正交基向量会连变两次符号（$(-1)^2 = +1$），因此法向向量与旋转平面 $\vv{B}$ **可交换（对易）**：$\vv{v}_\perp \vv{B} = +\vv{B}\vv{v}_\perp$。如果你只从左边单侧乘上 $e^{-\vv{B}\theta}$，平行分量固然在平面内旋转了，但法向轴 $\vv{v}_\perp$ 却会被乘出一个脱离原三维向量空间的三向量（伪标量）项 $\vv{v}_\perp \vv{B}$！
-2. **为什么双侧三明治夹乘刚好凑出整角 $\theta$ 并保护旋转轴不动？** 现在改用半角旋子 $R(\theta) = e^{-\vv{B}\theta/2}$ 与其逆（共轭反转 $R(\theta)^\dagger = e^{+\vv{B}\theta/2}$）从左右两侧同时夹住 $\vv{v} = \vv{v}_\parallel + \vv{v}_\perp$：
+2. **为什么双侧三明治夹乘刚好凑出整角 $\theta$ 并保护旋转轴不动？** 现在改用半角旋转器 $R(\theta) = e^{-\vv{B}\theta/2}$ 与其逆（共轭反转 $R(\theta)^\dagger = e^{+\vv{B}\theta/2}$）从左右两侧同时夹住 $\vv{v} = \vv{v}_\parallel + \vv{v}_\perp$：
    - 对于**垂直于平面**的旋转轴分量 $\vv{v}_\perp$：因为它与 $\vv{B}$ 对易，右边的 $R(\theta)^\dagger$ 可以直接穿过 $\vv{v}_\perp$ 与左边的 $R(\theta)$ 相遇抵消：
      $$
      R(\theta)\,\vv{v}_\perp\,R(\theta)^\dagger = R(\theta)R(\theta)^\dagger\,\vv{v}_\perp = e^{-\vv{B}\theta/2}e^{+\vv{B}\theta/2}\vv{v}_\perp = \vv{v}_\perp!
@@ -143,7 +143,7 @@ $$
      $$
      左边半个角 $\theta/2$ 加上右边穿过来同向叠加的半个角 $\theta/2$，严丝合缝地合拢为平面内的整角旋转 $\theta$！
 
-这里需要严守概念与形式化边界：本书的 [@lemma-skew-adjoint-unitary-square] 与 [@thm-relative-complex-structure-square] 在 Lean 内核中严格证明的是 $n \times n$ 复矩阵层面的核心代数恒等式 $R^2 = -I_n$ 与 $J^2 = -I_n$；而将三维欧氏空间的完整克利福德代数识别为泡利复矩阵代数 $\mathrm{Cl}_{3,0}(\mathbb{R}) \cong M_2(\mathbb{C})$（实维数 $8$）、将其**偶次子代数**识别为四元数代数 $\mathrm{Cl}^+_{3,0}(\mathbb{R}) \cong \mathbb{H}$（实维数 $4$，其单位球面 $S^3 \cong \mathrm{SU}(2)$ 由旋子构成）并用三明治积 $\vv{v}' = R(\theta)\vv{v}R(\theta)^\dagger$ 导出三维罗德里格斯旋转公式的历史与经典定理，则在章末的文献注记 [@rem-clifford-rotor-literature] 中专门界定。
+这里需要严守概念与形式化边界：本书的 [@lemma-skew-adjoint-unitary-square] 与 [@thm-relative-complex-structure-square] 在 Lean 内核中严格证明的是 $n \times n$ 复矩阵层面的核心代数恒等式 $R^2 = -I_n$ 与 $J^2 = -I_n$；而将三维欧氏空间的完整克利福德代数识别为泡利复矩阵代数 $\mathrm{Cl}_{3,0}(\mathbb{R}) \cong M_2(\mathbb{C})$（实维数 $8$）、将其**偶次子代数**识别为四元数代数 $\mathrm{Cl}^+_{3,0}(\mathbb{R}) \cong \mathbb{H}$（实维数 $4$，其单位球面 $S^3 \cong \mathrm{SU}(2)$ 由旋转器构成）并用三明治积 $\vv{v}' = R(\theta)\vv{v}R(\theta)^\dagger$ 导出三维罗德里格斯旋转公式的历史与经典定理，则在章末的文献注记 [@rem-clifford-rotor-literature] 中专门界定。
 
 ## 5.3 全局相位与相对相位：为什么单根线的自转不可见，唯有一组线的夹角才张出面积？ {#sec-global-vs-relative-phase}
 
@@ -184,11 +184,11 @@ $$
 
 [@prop-phase-locked-overlap] 在几何上极其直观：在复平面上，乘以 $u^{-1}$ 相当于把坐标轴顺时针旋转到与单位向量 $u$ 对齐；条件 $\overline{z} = (u^{-1})^2 z$ 等价于 $\overline{u^{-1}z} = u^{-1}z$，说明矢量 $z$ 恰好躺成与基准射线 $u$ 共线的一维线段（外积有向面积 $u \wedge z = 0$），因此剥去方向因子 $u$ 后剩下的纯长度 $r = \operatorname{Re}(u^{-1}z)$ 自然是一个一维实数！
 
-## 5.4 单比特常见量子门（$X, Y, Z, H, S, T$）的纯几何旋子图鉴 {#sec-single-qubit-gates-as-rotors}
+## 5.4 单比特常见量子门（$X, Y, Z, H, S, T$）的纯几何旋转器图鉴 {#sec-single-qubit-gates-as-rotors}
 
-现在，我们可以把量子计算教科书里最常用的六扇单比特基础量子门——泡利三门 $X, Y, Z$、阿达马门（Hadamard gate）$H$、相位门 $S$ 与 $\pi/8$ 门 $T$——统统请下“复矩阵神坛”，还原为三维布洛赫球面上的**刚体旋子图鉴**。
+现在，我们可以把量子计算教科书里最常用的六扇单比特基础量子门——泡利三门 $X, Y, Z$、阿达马门（Hadamard gate）$H$、相位门 $S$ 与 $\pi/8$ 门 $T$——统统请下“复矩阵神坛”，还原为三维布洛赫球面上的**刚体旋转器图鉴**。
 
-在阅读任何一张量子电路图时，只要记住一条黄金换算律：若二能级幺正矩阵写成标准 $\mathrm{SU}(2)$ 旋子形式（相差一个物理上不可观测的全局相位 $e^{i\alpha}$）
+在阅读任何一张量子电路图时，只要记住一条黄金换算律：若二能级幺正矩阵写成标准 $\mathrm{SU}(2)$ 旋转器形式（相差一个物理上不可观测的全局相位 $e^{i\alpha}$）
 
 $$
 U = e^{i\alpha} R_{\hat{\vv{n}}}(\theta) = e^{i\alpha}\left(\cos\frac{\theta}{2}\,I_2 - i\sin\frac{\theta}{2}\,(\hat{\vv{n}}\cdot\vv{\sigma})\right),
@@ -196,10 +196,10 @@ $$
 
 那么这扇量子门在三维空间里做的唯一一件事，就是**抓起整颗布洛赫球，绕着单位轴 $\hat{\vv{n}} \in S^2$（即霍奇对偶旋转平面 $\vv{B} = \star\hat{\vv{n}}$）右手刚体旋转整角 $\theta$**！
 
-::: {.example #ex-single-qubit-gate-atlas title="单比特六大基础量子门的旋子分解与阿达马门平衡复结构验算"}
-我们将单比特标准门集 $\{X, Y, Z, H, S, T\}$ 的旋子参数、旋转平面二向量、球面转轴与转角汇总如下表，并对最核心的阿达马门 $H$ 做一次逐项对照 [@thm-balanced-sum-skew-adjoint] 与 [@thm-relative-complex-structure-square] 的显式验算：
+::: {.example #ex-single-qubit-gate-atlas title="单比特六大基础量子门的旋转器分解与阿达马门平衡复结构验算"}
+我们将单比特标准门集 $\{X, Y, Z, H, S, T\}$ 的旋转器参数、旋转平面二向量、球面转轴与转角汇总如下表，并对最核心的阿达马门 $H$ 做一次逐项对照 [@thm-balanced-sum-skew-adjoint] 与 [@thm-relative-complex-structure-square] 的显式验算：
 
-| 量子门 | 标准矩阵表示 | $\mathrm{SU}(2)$ 旋子形式 $e^{i\alpha}R_{\hat{\vv{n}}}(\theta)$ | 旋转平面二向量 $\vv{B}$ | 布洛赫球转轴 $\hat{\vv{n}}$ | 球面转角 $\theta$（旋子半角 $\theta/2$） |
+| 量子门 | 标准矩阵表示 | $\mathrm{SU}(2)$ 旋转器形式 $e^{i\alpha}R_{\hat{\vv{n}}}(\theta)$ | 旋转平面二向量 $\vv{B}$ | 布洛赫球转轴 $\hat{\vv{n}}$ | 球面转角 $\theta$（旋转器半角 $\theta/2$） |
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | **$X$** | $\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$ | $i\bigl(\cos\frac{\pi}{2}I - i\sin\frac{\pi}{2}\sigma_x\bigr)$ | $\vv{e}_2 \wedge \vv{e}_3$（$YZ$ 平面） | $+\vv{e}_1 = (1, 0, 0)$ | $\pi = 180^\circ$（$\frac{\pi}{2} = 90^\circ$） |
 | **$Y$** | $\begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}$ | $i\bigl(\cos\frac{\pi}{2}I - i\sin\frac{\pi}{2}\sigma_y\bigr)$ | $\vv{e}_3 \wedge \vv{e}_1$（$ZX$ 平面） | $+\vv{e}_2 = (0, 1, 0)$ | $\pi = 180^\circ$（$\frac{\pi}{2} = 90^\circ$） |
@@ -223,19 +223,19 @@ $$
    $$
    J = 2\Bigl(\frac{1}{\sqrt{2}}X\Bigr)\Bigl(\frac{1}{\sqrt{2}}Z\Bigr) = XZ = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}\begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} = -iY!
    $$
-   验算可知 $J^* = (-iY)^* = +iY = -J$（反自伴），且 $J^2 = (-iY)^2 = -Y^2 = -I_2$！更美妙的是，与之伴生的厄米对合算子 $K = iJ = i(-iY) = +Y$ 恰好就是垂直于 $XZ$ 平面的**第三根正交泡利轴 $Y$**（满足 $Y^* = Y$ 且 $Y^2 = I_2$）！请注意这里的旋量半角与布洛赫球整角的精确对应：两条正交分量 $X$ 与 $Z$ 一旦平衡相加，它们张出的有向面积 $J = XZ = -iY = \bigl(\begin{smallmatrix} 0 & -1 \\ 1 & 0 \end{smallmatrix}\bigr)$ 在**实二维状态振幅平面** $(\psi_0, \psi_1)^{\mathsf{T}}$ 上是旋转**半角 $\frac{\pi}{2} = 90^\circ$** 的正交四分之一转矩阵，恰等于旋量旋子 $R_y(\pi) = \exp(-i\frac{\pi}{2}Y)$；而当它通过双侧三明治积 $J\,\vv{v}\,J^\dagger$ 作用在**三维布洛赫球面 $S^2$** 上时，两个半角叠加为绕 $Y$ 轴旋转**整角 $\pi = 180^\circ$** 的半周翻转（将北极 $\lvert 0\rangle$ 翻转到南极 $\lvert 1\rangle$）！
+   验算可知 $J^* = (-iY)^* = +iY = -J$（反自伴），且 $J^2 = (-iY)^2 = -Y^2 = -I_2$！更美妙的是，与之伴生的厄米对合算子 $K = iJ = i(-iY) = +Y$ 恰好就是垂直于 $XZ$ 平面的**第三根正交泡利轴 $Y$**（满足 $Y^* = Y$ 且 $Y^2 = I_2$）！请注意这里的旋量半角与布洛赫球整角的精确对应：两条正交分量 $X$ 与 $Z$ 一旦平衡相加，它们张出的有向面积 $J = XZ = -iY = \bigl(\begin{smallmatrix} 0 & -1 \\ 1 & 0 \end{smallmatrix}\bigr)$ 在**实二维状态振幅平面** $(\psi_0, \psi_1)^{\mathsf{T}}$ 上是旋转**半角 $\frac{\pi}{2} = 90^\circ$** 的正交四分之一转矩阵，恰等于旋量旋转器 $R_y(\pi) = \exp(-i\frac{\pi}{2}Y)$；而当它通过双侧三明治积 $J\,\vv{v}\,J^\dagger$ 作用在**三维布洛赫球面 $S^2$** 上时，两个半角叠加为绕 $Y$ 轴旋转**整角 $\pi = 180^\circ$** 的半周翻转（将北极 $\lvert 0\rangle$ 翻转到南极 $\lvert 1\rangle$）！
 :::
 
-::: {.remark #rem-clifford-rotor-literature title="四元数、罗德里格斯半角公式与克利福德旋子双覆盖史话（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 本章的 [@thm-balanced-sum-skew-adjoint]、[@lemma-skew-adjoint-unitary-square] 与 [@thm-relative-complex-structure-square] 在 Lean 4 中形式化了一般 $n \times n$ 复矩阵上平衡幺正和生成反自伴相对复结构 $J^2 = -I_n$ 的代数定理，[@prop-phase-locked-overlap] 形式化了相位锁定复重叠幅的实数分解。关于三维旋转半角公式与克利福德几何代数的历史源流及完整三维旋子定理，来自以下经典数学物理文献：
+::: {.remark #rem-clifford-rotor-literature title="四元数、罗德里格斯半角公式与克利福德旋转器双覆盖史话（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 本章的 [@thm-balanced-sum-skew-adjoint]、[@lemma-skew-adjoint-unitary-square] 与 [@thm-relative-complex-structure-square] 在 Lean 4 中形式化了一般 $n \times n$ 复矩阵上平衡幺正和生成反自伴相对复结构 $J^2 = -I_n$ 的代数定理，[@prop-phase-locked-overlap] 形式化了相位锁定复重叠幅的实数分解。关于三维旋转半角公式与克利福德几何代数的历史源流及完整三维旋转器定理，来自以下经典数学物理文献：
 
 1. **罗德里格斯半角合成公式（O. Rodrigues, 1840）与哈密顿四元数（W. R. Hamilton, 1843）**：Olinde Rodrigues 在 1840 年（*Des lois géométriques qui régissent les déplacements d'un système solide dans l'espace*, J. Math. Pures Appl. **5**, 380–440）首次发现了三维空间两次镜面反射合成一次双倍角旋转的半角切线公式；三年后，William Rowan Hamilton 在都柏林布鲁姆桥（Brougham Bridge）上刻下四元数基本关系 $\mathbf{i}^2 = \mathbf{j}^2 = \mathbf{k}^2 = \mathbf{i}\mathbf{j}\mathbf{k} = -1$。用现代外代数眼光复盘，哈密顿的 $\mathbf{i}, \mathbf{j}, \mathbf{k}$ 实际上并不是三维向量，而是三维空间中的三个正交单位**二向量（旋转平面）**：$\mathbf{i} = -\vv{e}_2 \wedge \vv{e}_3 = -i\sigma_x$，$\mathbf{j} = -\vv{e}_3 \wedge \vv{e}_1 = -i\sigma_y$，$\mathbf{k} = -\vv{e}_1 \wedge \vv{e}_2 = -i\sigma_z$！
 2. **克利福德几何代数与泡利代数同构（W. K. Clifford, 1878）**：William Kingdon Clifford（*Applications of Grassmann's extensive algebra*, Amer. J. Math. **1**, 350–358, 1878）将格拉斯曼（H. Grassmann, 1844）的外积 $\vv{a}\wedge\vv{b}$ 与内积 $\vv{a}\cdot\vv{b}$ 统一为几何积 $\vv{a}\vv{b} = \vv{a}\cdot\vv{b} + \vv{a}\wedge\vv{b}$。在三维欧氏空间 $\mathbb{R}^3$ 的完整克利福德代数 $\mathrm{Cl}_{3,0}(\mathbb{R}) \cong M_2(\mathbb{C})$（实维数 $8$）中，偶次子代数 $\mathrm{Cl}^+_{3,0}(\mathbb{R}) = \mathbb{R} \oplus \Lambda^2(\mathbb{R}^3) \cong \mathbb{H}$（实维数 $4$）由标量与二向量张成，单位二向量 $\vv{B}$ 满足 $\vv{B}^2 = -1$。
-3. **旋量双覆盖 $\mathrm{Spin}(3) \cong \mathrm{SU}(2) \xrightarrow{2:1} \mathrm{SO}(3)$ 与罗德里格斯展开**：对任意单位二向量 $\vv{B} = \star\hat{\vv{n}}$ 及角度 $\theta \in \mathbb{R}$，旋子 $R(\theta) = \cos(\theta/2) - \vv{B}\sin(\theta/2) \in \mathrm{Spin}(3)$ 通过双侧三明治作用 $\vv{v} \mapsto R(\theta)\vv{v}R(\theta)^\dagger$ 导出标准三维罗德里格斯旋转公式：
+3. **旋量双覆盖 $\mathrm{Spin}(3) \cong \mathrm{SU}(2) \xrightarrow{2:1} \mathrm{SO}(3)$ 与罗德里格斯展开**：对任意单位二向量 $\vv{B} = \star\hat{\vv{n}}$ 及角度 $\theta \in \mathbb{R}$，旋转器 $R(\theta) = \cos(\theta/2) - \vv{B}\sin(\theta/2) \in \mathrm{Spin}(3)$ 通过双侧三明治作用 $\vv{v} \mapsto R(\theta)\vv{v}R(\theta)^\dagger$ 导出标准三维罗德里格斯旋转公式：
    $$
    \vv{v}' = R(\theta)\vv{v}R(\theta)^\dagger = \vv{v}\cos\theta + (\hat{\vv{n}}\times\vv{v})\sin\theta + \hat{\vv{n}}(\hat{\vv{n}}\cdot\vv{v})(1 - \cos\theta).
    $$
-   由于 $\theta \mapsto \theta + 2\pi$ 使半角旋子变号 $R(\theta + 2\pi) = -R(\theta)$，而双侧夹乘中 $(-R)\vv{v}(-R)^\dagger = R\vv{v}R^\dagger$ 负负得正，旋子群 $\mathrm{Spin}(3) \cong \mathrm{SU}(2) \cong S^3$ 对三维正交旋转群 $\mathrm{SO}(3) \cong \mathbb{RP}^3$ 构成拓扑非平凡的 $2:1$ 泛覆盖（旋量转过 $360^\circ$ 变负号，转满 $720^\circ$ 方才回到自身）。
+   由于 $\theta \mapsto \theta + 2\pi$ 使半角旋转器变号 $R(\theta + 2\pi) = -R(\theta)$，而双侧夹乘中 $(-R)\vv{v}(-R)^\dagger = R\vv{v}R^\dagger$ 负负得正，旋转器群 $\mathrm{Spin}(3) \cong \mathrm{SU}(2) \cong S^3$ 对三维正交旋转群 $\mathrm{SO}(3) \cong \mathbb{RP}^3$ 构成拓扑非平凡的 $2:1$ 泛覆盖（旋量转过 $360^\circ$ 变负号，转满 $720^\circ$ 方才回到自身）。
 
 上述历史脉络与三维克利福德三明治展开作为几何背景列出，不计入本书的 Lean 形式化验证账本。
 :::

@@ -156,7 +156,7 @@ The full proof is checked by the Lean kernel.
 
 ## Comprehensive Audit Table of Frozen Declarations Across Parts IV–VI {#sec-parts-iv-to-vi-frozen-audit-table}
 
-Completing the audit table begun in [Chapter 27](ch27-reading-frozen-proofs-i.md), the table below records the exact source files, line numbers, `statement_id` prefixes, and formal contracts for the declarations audited in this chapter together with representative frozen declarations across Parts IV, V, and VI at commit `4c76e4a56525afbb474bf04a03ee2ff4aec5da45`.
+Completing the audit table begun in [Chapter 27](ch27-reading-frozen-proofs-i.md), the table below records the exact source files, line numbers, `statement_id` prefixes, and formal contracts for the declarations audited in this chapter together with representative frozen declarations across Parts IV, V, and VI at commit `52725b62b659b244d077e29f18a576aa809007b7`.
 
 | Chapter | Frozen GID | Source File & Line | `statement_id` Prefix | Exact Formal Scope & Contract |
 | :---: | --- | --- | :---: | --- |

@@ -8,7 +8,7 @@
 
 在[第七章](ch07-geometric-time-and-speed-limits.md)中，我们揭开了时间的二象性：连续扫掠的二维二向量有向面积 $\vv{A}\wedge\vv{B}$ 是**量子时间（时间波）**，而被幂等投影尺 $P^2 = P$ 切下的一串正交刻度则是**经典时间（线性时间粒子）**。正如作者在上面第一句引文中所作的终极概括——*“那本质上场就是时间,或者说线性时间只是场的粒子,而时间波则对应面积,整体上是一个场,一切都是时间场”*。
 
-然而，只要把这两种时间放到一起，物理学里著名的“洛施密特时间反演佯谬（Loschmidt paradox）”便迎面扑来：**既然底层的幺正旋转 $U(t) = \exp((-it/\hbar)H_{\mathrm{op}})$ 是百分之百双向可逆的——把旋子倒转一个负角 $R(-\theta) = R(\theta)^\dagger$ 就能原路退回——为什么宏观世界与观察者的记忆却拥有一支铁板钉钉、有去无回的“热力学时间箭头”？为什么我们能记住昨天、却记不住明天？**
+然而，只要把这两种时间放到一起，物理学里著名的“洛施密特时间反演佯谬（Loschmidt paradox）”便迎面扑来：**既然底层的幺正旋转 $U(t) = \exp((-it/\hbar)H_{\mathrm{op}})$ 是百分之百双向可逆的——把旋转器倒转一个负角 $R(-\theta) = R(\theta)^\dagger$ 就能原路退回——为什么宏观世界与观察者的记忆却拥有一支铁板钉钉、有去无回的“热力学时间箭头”？为什么我们能记住昨天、却记不住明天？**
 
 作为第二部《展翼·从线到面》的收官之章，本章将用四条经 Lean 4 内核验证的形式化定理，彻底算清这笔“从二维面积压扁成一维线”的信息与热力学总账：
 
@@ -197,7 +197,7 @@ $$
 
 至此，第二部《展翼·从线到面》的四章画卷已经全部展开。通过十六条经 Lean 4 内核逐一验证的形式化定理、引理、命题与推论，我们彻底打通了二维有向面积的几何脉络：
 
-- **第五章**拆穿了虚数单位 $i$ 的神秘伪装，从平衡幺正和 $S = A + B$ 出发严格导出反自伴相对复结构 $J := 2AB^*$ 的平方律 $J^2 = -I$（[@thm-balanced-sum-skew-adjoint]、[@lemma-skew-adjoint-unitary-square]、[@thm-relative-complex-structure-square]）与相位锁定实分解（[@prop-phase-locked-overlap]），将全部单比特量子门还原为三维布洛赫球上的克利福德旋子 $R(\theta) = \cos(\theta/2) - \vv{B}\sin(\theta/2)$；
+- **第五章**拆穿了虚数单位 $i$ 的神秘伪装，从平衡幺正和 $S = A + B$ 出发严格导出反自伴相对复结构 $J := 2AB^*$ 的平方律 $J^2 = -I$（[@thm-balanced-sum-skew-adjoint]、[@lemma-skew-adjoint-unitary-square]、[@thm-relative-complex-structure-square]）与相位锁定实分解（[@prop-phase-locked-overlap]），将全部单比特量子门还原为三维布洛赫球上的克利福德旋转器 $R(\theta) = \cos(\theta/2) - \vv{B}\sin(\theta/2)$；
 - **第六章**用几何积 $\vv{A}\vv{B} = \vv{A}\cdot\vv{B} + \vv{A}\wedge\vv{B}$ 终结了波粒二象性的百年割裂，以拉格朗日—格拉姆恒等式（[@thm-lagrange-gram-identity]）、罗伯逊—薛定谔四项守恒律（[@thm-robertson-schrodinger]）、纯态记录互补圆 $D^2 + V^2 = 1$（[@thm-record-coherence-complementarity]）与捏合勾股分解（[@cor-pinching-pythagorean]）将教科书五大公设熔铸为一炉，并配以实时交互实验室 `ORTHO//QUBIT`；
 - **第七章**揭示了“线是经典时间，面积是量子时间”的时间二象性，证明单参数幺正群满足哈密顿量自伴性、指数生成律与无穷小导数方程（[@thm-calibrated-unitary-group]），投影概率流由对易子面积驱动（[@prop-projection-probability-flow]），翻越 $90^\circ$ 正交墙受富比尼—施图迪速度极限约束（[@thm-fubini-study-record-time]），并给出高频投影抽检的芝诺效应以及作为标量自由能记账判据的临界逆温阈值（[@thm-decoherence-freeze-critical]）；
 - **第八章**算清了将二维面积压扁成一维线的信息与热力学账单，证明相互无偏捏合的相对熵与熵增恒为 $\ln d - S(\rho)$（[@thm-dual-account-full]），计算基捏合的单步与累积熵产生恒等于相干擦除相对熵（[@thm-entropy-production-coherence-deletion]），局部不可逆源于环境记录访问缺陷（[@thm-reduced-irreversibility-access-defect]），且哪怕漏掉唯一一份未逆转的环境副本也会阻断相干时间反演（[@prop-surviving-copy-blocks-reversal]）。

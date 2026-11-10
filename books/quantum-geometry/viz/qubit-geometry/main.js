@@ -168,7 +168,7 @@
     const gz = n ? `已施加 ${n} 个：${d.gates.join(' → ')}` : '尚未施加（U = I）';
     const ge = n ? `${n} applied: ${d.gates.join(' → ')}` : 'none applied yet (U = I)';
     $('roNote').textContent = L(
-      `线路顺序 ${PIPELINE}：① 态制备 |ψ⟩（滑块 θ, φ 或预设）；② 旋子门 U(α) = exp(−iα n̂·σ/2)，${gz}；`
+      `线路顺序 ${PIPELINE}：① 态制备 |ψ⟩（滑块 θ, φ 或预设）；② 旋转器门 U(α) = exp(−iα n̂·σ/2)，${gz}；`
         + `③ 门后纯态 ρ₀ = |ψ(θ,φ)⟩⟨ψ(θ,φ)|，(θ, φ) = (${d.theta}°, ${d.phi}°)；④ 固定 z 轴退相干信道 E_η，η = ${d.eta.toFixed(2)}，输出 ρ(η) = E_η(ρ₀)。`
         + `环境记录重叠角 α = ${d.alpha}° 只驱动互补圆 D² + V² = 1，不在此线路中。`,
       `Circuit order ${PIPELINE}: (1) state preparation |ψ⟩ (θ, φ sliders or a preset); (2) rotor gate U(α) = exp(−iα n̂·σ/2), ${ge}; `
@@ -672,7 +672,7 @@
     TRV.toast(
       $('toast'),
       L(
-        `施加旋子门 U(α) = <b>${name}</b> → 门后纯态 ρ₀(θ = ${S.theta}°, φ = ${S.phi}°) → E_η`,
+        `施加旋转器门 U(α) = <b>${name}</b> → 门后纯态 ρ₀(θ = ${S.theta}°, φ = ${S.phi}°) → E_η`,
         `Applied rotor gate U(α) = <b>${name}</b> → post-gate pure state ρ₀(θ = ${S.theta}°, φ = ${S.phi}°) → E_η`
       ),
       2600

@@ -2,7 +2,7 @@
 
 > *“这就是我们最早研究的 psi=psi(psi)”*
 
-当走完前二十七章的几何与算子长征，回望[第一章](ch01-measurement.md)中“成对测量与向量重叠”的起点，以及第二十四章中观察者自我映射的收缩不动点，读者会蓦然领悟题记里那句贯穿始终的感叹：**“这就是我们最早研究的 psi=psi(psi)”**！
+当走完前二十七章的几何与算子长征，回望[第一章](ch01-measurement.md)中“两子丈量与向量重叠”的起点，以及第二十四章中观察者自我映射的收缩不动点，读者会蓦然领悟题记里那句贯穿始终的感叹：**“这就是我们最早研究的 psi=psi(psi)”**！
 
 在量子几何的语言里，观察者对系统施加一次记录测量 $P = \{P_k\}_{k \in \kappa}$，既可以通过单分支条件化将状态更新为 $\rho_k = (\operatorname{recordWeight}(P, \rho, k))^{-1} P_k \rho P_k$，也可以通过非选择性未读演化把状态更新为 $\operatorname{unreadState}(P, \rho) = \sum_{k \in \kappa} P_k \rho P_k$。什么时候一个量子态 $\rho$ 在自我测量的映射下达到**完全自洽的不动点** $\operatorname{unreadState}(P, \rho) = \rho$？答案不是哲学隐喻，而是 `trureturing@dev` 中被 Lean 4 内核一锤定音的双向充要定理：当且仅当所有异分支交叉干涉块 $P_k \rho P_l$（$k \neq l$）恒等于零！
 
@@ -161,7 +161,7 @@ $$
 
 ## 第四至六部冻结声明全景审计表 {#sec-parts-iv-to-vi-frozen-audit-table}
 
-与上一章的第一至三部审计表相呼应，下表汇总了本书第四部（纠缠、贝尔边界与傅里叶对偶）、第五部（玻戈留波夫双曲变换、闵可夫斯基光锥刚性、规范完整群、张量网络流割与电路深度反例）以及第六部（对角拓扑逃逸、黎曼 $\zeta$ 欧拉乘积、艾森斯坦范数型与收缩不动点）在 `trureturing@dev`（提交 `4c76e4a56525afbb474bf04a03ee2ff4aec5da45`）中的精确源码坐标、语句摘要哈希前缀（`statement_id`）及形式化边界。
+与上一章的第一至三部审计表相呼应，下表汇总了本书第四部（纠缠、贝尔边界与傅里叶对偶）、第五部（玻戈留波夫双曲变换、闵可夫斯基光锥刚性、规范完整群、张量网络流割与电路深度反例）以及第六部（对角拓扑逃逸、黎曼 $\zeta$ 欧拉乘积、艾森斯坦范数型与收缩不动点）在 `trureturing@dev`（提交 `52725b62b659b244d077e29f18a576aa809007b7`）中的精确源码坐标、语句摘要哈希前缀（`statement_id`）及形式化边界。
 
 | 所属章节 | 冻结声明 GID | 源码路径与行号 | `statement_id` 前缀 | 精确形式化范围与契约边界 |
 | :---: | --- | --- | :---: | --- |
@@ -208,8 +208,8 @@ $$
 ::: {.remark #rem-psi-fixed-point-synthesis-literature title="冯·诺依曼测量链、吕德斯规则与自指不动点综合（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 关于量子测量条件化、退相干不动点与自指不动点方程的经典文献背景如下：
 
-1. **冯·诺依曼—吕德斯投影更新规则**（J. von Neumann, *Mathematische Grundlagen der Quantenmechanik*, Springer, 1932；G. Lüders, *Über die Zustandsänderung durch den Meßprozeß*, Annalen der Physik **443**(5–8), 322–328, 1950, DOI `10.1002/andp.19504430510`）：吕德斯将冯·诺依曼的一维投影测量推广到任意维正交投影族 $\{P_k\}$，给出了条件化更新 $\rho \mapsto P_k \rho P_k / \Tr(\rho P_k)$ 与非选择性对角挤压信道 $\rho \mapsto \sum_k P_k \rho P_k$。在本书的冻结定理 [@prop-audit-conditional-state] 与 [@cor-audit-unread-fixed-iff] 中，这两条规则在任意有限维完备正交投影族上得到了无漏洞的内核级形式化。
-2. **题记 $\psi = \psi(\psi)$ 的哲学综合与形式化纪律边界**：在本书中，符号 $\psi = \psi(\psi)$ 是统摄多条严格不动点定理的**哲学与几何母题**，它在各章分别具象化为具体的绿色冻结定理：在[第三章](ch03-projectors-and-duality.md)与本章中体现为未读挤压算子的幂等性与零相干不动点判据 $\operatorname{unreadState}(P, \rho) = \rho$（[@cor-audit-pinching-idempotent]、[@cor-audit-unread-fixed-iff]）；在第二十一章中体现为观察拓扑对角见证的四合取逃逸结算；在第二十四章中体现为有限集删减更新 $U(S)\subseteq S$ 在 $(S_0).\mathrm{ncard}$ 步内达不动点以及正实数域上黄金不动点 $\varphi = 1 + 1/\varphi$ 的唯一性。遵循本书的验证契约，我们绝不将未形式化的宇宙学或意识哲学外推包装成 `LEAN ✓` 定理——每一分绿色的确定性，都精准停留在 Lean 4 内核所签发的定义、前提与结论之内。
+1. **冯·诺依曼—吕德斯投影更新规则**（J. von Neumann, *Mathematische Grundlagen der Quantenmechanik*, Springer, 1932；G. Lüders, *Über die Zustandsänderung durch den Meßprozeß*, Annalen der Physik **443**(5–8), 322–328, 1950, DOI `10.1002/andp.19504430510`）：吕德斯将冯·诺依曼的一维投影测量推广到任意维正交投影族 $\{P_k\}$，给出了条件化更新 $\rho \mapsto P_k \rho P_k / \Tr(\rho P_k)$ 与非选择性对角捏合信道 $\rho \mapsto \sum_k P_k \rho P_k$。在本书的冻结定理 [@prop-audit-conditional-state] 与 [@cor-audit-unread-fixed-iff] 中，这两条规则在任意有限维完备正交投影族上得到了无漏洞的内核级形式化。
+2. **题记 $\psi = \psi(\psi)$ 的哲学综合与形式化纪律边界**：在本书中，符号 $\psi = \psi(\psi)$ 是统摄多条严格不动点定理的**哲学与几何母题**，它在各章分别具象化为具体的绿色冻结定理：在[第三章](ch03-projectors-and-duality.md)与本章中体现为未读捏合算子的幂等性与零相干不动点判据 $\operatorname{unreadState}(P, \rho) = \rho$（[@cor-audit-pinching-idempotent]、[@cor-audit-unread-fixed-iff]）；在第二十一章中体现为观察拓扑对角见证的四合取逃逸结算；在第二十四章中体现为有限集删减更新 $U(S)\subseteq S$ 在 $(S_0).\mathrm{ncard}$ 步内达不动点以及正实数域上黄金不动点 $\varphi = 1 + 1/\varphi$ 的唯一性。遵循本书的验证契约，我们绝不将未形式化的宇宙学或意识哲学外推包装成 `LEAN ✓` 定理——每一分绿色的确定性，都精准停留在 Lean 4 内核所签发的定义、前提与结论之内。
 :::
 
-至此，第七部“构造与验证”的四章旅程已全部完成：我们亲手编写了零依赖的 3 比特克利福德几何代数与泡利辛重写法引擎（[第二十五章](ch25-rewriting-and-xor.md)），构造了单量子比特 ZYZ 欧拉转子编译器（[第二十六章](ch26-single-qubit-rotor-compilation.md)），并走入 `trureturing@dev` 的源码圣殿完成了全书前六部核心定理的逐行审计（[第二十七章](ch27-reading-frozen-proofs-i.md)与本章）。在接下来的终章与附录中，我们将登上“所有的球之外”，鸟瞰整座量子几何大厦的完整版图！
+至此，第七部“构造与验证”的四章旅程已全部完成：我们亲手编写了零依赖的 3 比特克利福德几何代数与泡利辛重写法引擎（[第二十五章](ch25-rewriting-and-xor.md)），构造了单量子比特 ZYZ 欧拉旋转器编译器（[第二十六章](ch26-single-qubit-rotor-compilation.md)），并走入 `trureturing@dev` 的源码圣殿完成了全书前六部核心定理的逐行审计（[第二十七章](ch27-reading-frozen-proofs-i.md)与本章）。在接下来的终章与附录中，我们将登上“所有的球之外”，鸟瞰整座量子几何大厦的完整版图！

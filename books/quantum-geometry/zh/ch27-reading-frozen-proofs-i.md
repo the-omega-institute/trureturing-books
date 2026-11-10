@@ -1,15 +1,15 @@
-# 走进 Lean 4 公理圣殿（上）：从平行四边形恒等式到有限记录挤压
+# 走进 Lean 4 公理圣殿（上）：从平行四边形恒等式到有限记录捏合
 
 > *“构建命题证明通用机器学术理论,定义定理证明”*
 
-在传统数学与理论物理专著里，“证明”往往依赖作者与审稿人的肉眼默契：一句“显然可得”、一处隐去边界条件的指标缩并，或者把“局部连通”悄悄当成“全局常相位”，就可能让整座理论大厦埋下隐蔽的裂缝。而本书自[第一章](ch01-measurement.md)立下的最高契约，正是题记中的这十六个字：**构建命题证明通用机器学术理论，定义、定理、证明**——全书每一条标有绿色 `LEAN ✓` 徽章的 `theorem / lemma / proposition / corollary`，都逐一锚定在 `the-omega-institute/trureturing@dev`（所钉提交 `4c76e4a56525afbb474bf04a03ee2ff4aec5da45`）中被 Lean 4 类型检查内核验证并冻结的真实声明上！
+在传统数学与理论物理专著里，“证明”往往依赖作者与审稿人的肉眼默契：一句“显然可得”、一处隐去边界条件的指标缩并，或者把“局部连通”悄悄当成“全局常相位”，就可能让整座理论大厦埋下隐蔽的裂缝。而本书自[第一章](ch01-measurement.md)立下的最高契约，正是题记中的这十六个字：**构建命题证明通用机器学术理论，定义、定理、证明**——全书每一条标有绿色 `LEAN ✓` 徽章的 `theorem / lemma / proposition / corollary`，都逐一锚定在 `the-omega-institute/trureturing@dev`（所钉提交 `52725b62b659b244d077e29f18a576aa809007b7`）中被 Lean 4 类型检查内核验证并冻结的真实声明上！
 
 本章与[第二十八章](ch28-reading-frozen-proofs-ii.md)将带领读者直接走进这座 Lean 4 形式化公理圣殿的源码深处：
 
-1. 在本章（上篇）中，我们逐行解剖支撑起第一部至第三部的四块基石证明：**实内积空间的平行四边形范数恒等式**、**正半定迹一矩阵的玻恩概率三公理骨架**、**支撑连通射线测试下的幺正全局相位刚性定理**，以及**有限完备正交记录测量的挤压算符幂等定理**；
+1. 在本章（上篇）中，我们逐行解剖支撑起第一部至第三部的四块基石证明：**实内积空间的平行四边形范数恒等式**、**正半定迹一矩阵的玻恩概率三公理骨架**、**支撑连通射线测试下的幺正全局相位刚性定理**，以及**有限完备正交记录测量的捏合算符幂等定理**；
 2. 我们将真实源码中的每一条策略（`parallelogram_law_with_norm`、`mul_mul_conjTranspose_same`、`Relation.ReflTransGen` 传递闭包归纳、`Finset.sum_eq_single` 正交块消去）摊开在阳光下，并给出一张覆盖第一至三部核心冻结声明的**源码行号、语句摘要哈希（`statement_id`）与形式化职责边界全景审计表**。
 
-![第一至三部 Lean 4 内核证明审计架构：平行四边形范数律与玻恩概率骨架、支撑链射线相位刚性归纳，以及有限记录挤压幂等性](../assets/fig-27-lean-kernel-audit-part1-3.svg)
+![第一至三部 Lean 4 内核证明审计架构：平行四边形范数律与玻恩概率骨架、支撑链射线相位刚性归纳，以及有限记录捏合幂等性](../assets/fig-27-lean-kernel-audit-part1-3.svg)
 
 ## 定义、定理与证明：走进 Lean 4 内核审计 {#sec-lean-kernel-audit-architecture}
 
@@ -100,7 +100,7 @@ $$
 完整证明由 Lean 内核检查。
 :::
 
-## 支撑链射线相位刚性与有限记录挤压幂等 {#sec-audit-ray-rigidity-and-pinching}
+## 支撑链射线相位刚性与有限记录捏合幂等 {#sec-audit-ray-rigidity-and-pinching}
 
 现在我们转向两道在几何与观察者条件化中最具代表性的结构性定理（图 27 中栏与右栏）。
 
@@ -136,7 +136,7 @@ $$
 完整证明由 Lean 内核检查。
 :::
 
-第二道结构定理来自 `D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.lean:30`，它把[第三章](ch03-projectors-and-duality.md)与[第四章](ch04-decoherence.md)中的“未读测量（吕德斯挤压信道）做两次等于做一次”提升为任意有限结果集 $\kappa$ 上的算子函数复合等式。
+第二道结构定理来自 `D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.lean:30`，它把[第三章](ch03-projectors-and-duality.md)与[第四章](ch04-decoherence.md)中的“未读测量（吕德斯捏合信道）做两次等于做一次”提升为任意有限结果集 $\kappa$ 上的算子函数复合等式。
 
 在母模块 `D5/S3/Observer/Conditioning.lean` 中，记录测量 `IsRecordMeasurement P` 包含四条公理：`selfAdjoint`（$\forall k, P_k^* = P_k$）、`idempotent`（$\forall k, P_k^2 = P_k$）、`orthogonal`（$\forall k \neq l, P_k P_l = 0$）与 `complete`（$\sum_k P_k = 1$）；未读测量映射定义为
 
@@ -144,7 +144,7 @@ $$
 \operatorname{unreadState}(P, \rho) = \sum_{k \in \kappa} P_k \rho P_k.
 $$
 
-::: {.corollary #cor-audit-pinching-idempotent title="有限完备正交记录测量挤压映射的函数复合幂等定理" lean="D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent"}
+::: {.corollary #cor-audit-pinching-idempotent title="有限完备正交记录测量捏合映射的函数复合幂等定理" lean="D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent"}
 设 $n$ 为具有可判等性的有限指标类型（`[Fintype n] [DecidableEq n]`），$\kappa$ 为有限结果类型（`[Fintype kappa]`），$P : \kappa \to M_n(\mathbb{C})$ 满足记录测量条件 `hP : IsRecordMeasurement P`。则未读状态映射作为 $M_n(\mathbb{C})$ 上的自映射满足函数复合幂等恒等式：
 
 $$
@@ -179,7 +179,7 @@ $$
 
 ## 第一至三部冻结声明全景审计表 {#sec-parts-i-to-iii-frozen-audit-table}
 
-下面的审计表列出了本书第一部至第三部所引用的代表性冻结声明在 `trureturing@dev`（提交 `4c76e4a56525afbb474bf04a03ee2ff4aec5da45`）中的精确源码路径、行号、语句摘要哈希前缀（`statement_id`）以及形式化契约边界。表中任何中文/英文散文标题（如“平行四边形定律”“玻恩概率骨架”“挤压幂等”）仅作导读说明，不附加超出冻结签名本身的额外形式化声明。
+下面的审计表列出了本书第一部至第三部所引用的代表性冻结声明在 `trureturing@dev`（提交 `52725b62b659b244d077e29f18a576aa809007b7`）中的精确源码路径、行号、语句摘要哈希前缀（`statement_id`）以及形式化契约边界。表中任何中文/英文散文标题（如“平行四边形定律”“玻恩概率骨架”“捏合幂等”）仅作导读说明，不附加超出冻结签名本身的额外形式化声明。
 
 | 所属章节 | 冻结声明 GID | 源码路径与行号 | `statement_id` 前缀 | 精确形式化范围与契约边界 |
 | :---: | --- | --- | :---: | --- |
@@ -193,7 +193,7 @@ $$
 | Ch 4 | `D5/S3/Quantum/Decoherence/NonselectiveMarginalization.nonselective_recording_marginal` | `D5/S3/Quantum/Decoherence/NonselectiveMarginalization.lean:32` | `sha256:645a742c` | 非选择性记录边缘态与对角退相干混合态恒等 |
 | Ch 5 | `D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity` | `D5/S3/QuantumBounds/LagrangeGramIdentity.lean:17` | `sha256:ce9562e5` | 二维向量拉格朗日—格拉姆面积平方恒等式 |
 | Ch 6 | `D5/S3/Quantum/PureState/RecordCoherenceComplementarity.pure_record_distinguishability_coherence_complementarity` | `D5/S3/Quantum/PureState/RecordCoherenceComplementarity.lean:29` | `sha256:b1bcaba2` | 纯态记录可区分度与相干性范数的毕达哥拉斯互补律 |
-| Ch 7 | `D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean` | `D5/S3/QuantumChannels/PinchingProjection.lean:68` | `sha256:89589cff` | 挤压信道在希尔伯特—施密特范数下的正交勾股分解 |
+| Ch 7 | `D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean` | `D5/S3/QuantumChannels/PinchingProjection.lean:68` | `sha256:89589cff` | 捏合信道在希尔伯特—施密特范数下的正交勾股分解 |
 | Ch 8 | `D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity` | `D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.lean:383` | `sha256:5c5eb2ec` | 相对熵产生与相干性抹除的精确等式 |
 | Ch 9 | `D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word` | `D5/S3/Geometry/TwoAxisFiniteRotation.lean:327` | `sha256:d9ac7833` | 任意两不共线轴连续旋转圆生成 $\mathrm{SO}(3)$ 有限字 |
 | Ch 9 | `D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover` | `D5/S3/Geometry/Orthogonality/RationalSixAxisCover.lean:127` | `sha256:eeeafc5d` | 单位球面 $S^2$ 的显式有理六轴无正交对开覆盖 |

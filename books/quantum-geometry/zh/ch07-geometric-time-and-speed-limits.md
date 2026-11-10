@@ -37,7 +37,7 @@ $$
 
 因为 $i$ 和 $G$ 在取共轭伴随时双双变号（$(-i)(-G) = +iG$），两个负号相乘抵消，这才把反自伴的**二向量面积旋转率 $G$** 包装成了自伴的**厄米哈密顿量 $H_{\mathrm{op}}$**！薛定谔方程根本不是一条需要死记硬背的神秘波动方程，它不过是再朴素不过的刚体角速度公式“**瞬时转向率 $=$ 单位时间扫过的二向量面积 $G$**”。
 
-在 Lean 4 形式化模块 `Quantum/Dynamics/CalibratedUnitaryGroup` 中，下面这条定理在完备复内积空间（希尔伯特空间）$H$ 上一次性严格证明了：从单参数保模长群出发，校准后的哈密顿量 $H_{\mathrm{op}} = (i\hbar)G$ 必自伴、有限时间演化必为指数旋子 $U(t) = \exp((-it/\hbar)H_{\mathrm{op}})$，且处处满足算子薛定谔微分方程！
+在 Lean 4 形式化模块 `Quantum/Dynamics/CalibratedUnitaryGroup` 中，下面这条定理在完备复内积空间（希尔伯特空间）$H$ 上一次性严格证明了：从单参数保模长群出发，校准后的哈密顿量 $H_{\mathrm{op}} = (i\hbar)G$ 必自伴、有限时间演化必为指数旋转器 $U(t) = \exp((-it/\hbar)H_{\mathrm{op}})$，且处处满足算子薛定谔微分方程！
 
 ::: {.theorem #thm-calibrated-unitary-group title="单参数幺正演化群的校准自伴哈密顿量与指数薛定谔方程定理" lean="D5/S3/Quantum/Dynamics/CalibratedUnitaryGroup.calibrated_group"}
 设 $H$ 为完备复内积空间，$U : \mathbb{R} \to (H \to_L[\mathbb{C}] H)$ 为连续线性算子构成的单参数族，$G : H \to_L[\mathbb{C}] H$ 为 $U$ 在 $t = 0$ 处的导数（`HasDerivAt U G 0`）。若 $U$ 满足单参数幺正群条件：
@@ -49,7 +49,7 @@ $$
 则对任意非零实校准常数 $\hbar \in \mathbb{R}$（$\hbar \neq 0$），定义校准哈密顿算子 $H_{\mathrm{op}} := (i\hbar)\cdot G$，以下三条结论同时成立：
 
 1. **校准哈密顿量的自伴性**：$H_{\mathrm{op}}$ 为自伴算子（`IsSelfAdjoint H_op`，即 $H_{\mathrm{op}}^* = H_{\mathrm{op}}$）；
-2. **有限时间指数旋子表示**：对一切 $t \in \mathbb{R}$，
+2. **有限时间指数旋转器表示**：对一切 $t \in \mathbb{R}$，
    $$
    U(t) = \exp\Bigl(\bigl(-\frac{it}{\hbar}\bigr) H_{\mathrm{op}}\Bigr);
    $$

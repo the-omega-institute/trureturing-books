@@ -93,7 +93,7 @@ check('A01: the tape shows the full circuit with U(α) = I before any gate', tap
 check('A01: the tape lists |ψ⟩, U(α), ρ₀, E_η, ρ(η) in circuit order', ordered(tape, ['|ψ⟩', 'U(α)', 'ρ₀(', 'E_η', 'ρ(η)']), tape);
 let note = await text('#roNote');
 check('A01: the readout note states the pipeline and its four steps in order (zh)', note.includes(PIPELINE)
-  && ordered(note, ['① 态制备 |ψ⟩', '② 旋子门 U(α) = exp(−iα n̂·σ/2)', '③ 门后纯态 ρ₀ = |ψ(θ,φ)⟩⟨ψ(θ,φ)|', '④ 固定 z 轴退相干信道 E_η', 'ρ(η) = E_η(ρ₀)'])
+  && ordered(note, ['① 态制备 |ψ⟩', '② 旋转器门 U(α) = exp(−iα n̂·σ/2)', '③ 门后纯态 ρ₀ = |ψ(θ,φ)⟩⟨ψ(θ,φ)|', '④ 固定 z 轴退相干信道 E_η', 'ρ(η) = E_η(ρ₀)'])
   && note.includes('α = 30° 只驱动互补圆'), note);
 check('A01: the theory drawer states the pipeline in both languages',
   (await text('#drawer div.zh')).includes(PIPELINE) && (await text('#drawer div.en')).includes(PIPELINE)
