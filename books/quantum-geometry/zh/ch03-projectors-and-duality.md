@@ -124,10 +124,10 @@ $$
 若 $N$ 条记录等可能出现，读对的平均概率 $\frac{1}{N}\sum_i \Tr(E_i\rho_i)$ 便不超过 $\frac{d}{N}$。[@prop-record-capacity] 是它的特例：全部读对要求左端等于 $N$，于是 $N \le d$。
 
 ::: {.example #ex-trine-record-capacity title="一个量子比特里的三条记录：最多读对三分之二"}
-在一个量子比特（$d = 2$）里放三条纯态记录，布洛赫向量在同一个大圆上两两相隔 $120^\circ$：
+在一个量子比特（$d = 2$）里放三条纯态记录，布洛赫向量在同一个大圆上两两相隔 $120^\circ$。对 $k = 0, 1, 2$ 取
 
 $$
-\lvert\psi_k\rangle = \cos\frac{k\pi}{3}\,\lvert 0\rangle + \sin\frac{k\pi}{3}\,\lvert 1\rangle, \qquad k = 0, 1, 2 .
+\lvert\psi_k\rangle = \cos\frac{k\pi}{3}\,\lvert 0\rangle + \sin\frac{k\pi}{3}\,\lvert 1\rangle .
 $$
 
 按[第二章](ch02-born-rule.md)的半角公式，布洛赫夹角 $120^\circ$ 对应 $\lvert\langle\psi_j\mid\psi_k\rangle\rvert^2 = \cos^2 60^\circ = \frac{1}{4}$（$j \neq k$）。$N = 3 > d = 2$，[@prop-record-capacity] 断言不存在能把三者完全分开的读出方式。
@@ -143,11 +143,10 @@ $$
 所以 $\sum_k E_k = 1$，前提 2 成立。读数表为
 
 $$
-\Tr\bigl(E_j\,\lvert\psi_k\rangle\langle\psi_k\rvert\bigr) = \frac{2}{3}\,\lvert\langle\psi_j\mid\psi_k\rangle\rvert^2 =
-\begin{cases} \dfrac{2}{3}, & j = k, \\ \dfrac{1}{6}, & j \neq k, \end{cases}
+\Tr\bigl(E_j\,\lvert\psi_k\rangle\langle\psi_k\rvert\bigr) = \frac{2}{3}\,\lvert\langle\psi_j\mid\psi_k\rangle\rvert^2 ,
 $$
 
-每行之和 $\frac{2}{3} + \frac{1}{6} + \frac{1}{6} = 1$。读对的概率是 $\frac{2}{3}$。
+即 $j = k$ 时为 $\frac{2}{3}$，$j \neq k$ 时为 $\frac{2}{3}\cdot\frac{1}{4} = \frac{1}{6}$；每行之和 $\frac{2}{3} + \frac{1}{6} + \frac{1}{6} = 1$。读对的概率是 $\frac{2}{3}$。
 
 **这已经是最好的。** 上面的定量界给出平均读对概率不超过 $\frac{d}{N} = \frac{2}{3}$，而这组读出恰好达到。三条记录里读对两条的份额，正是“两个维度分给三条记录”的字面意思。
 

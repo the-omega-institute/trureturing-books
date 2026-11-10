@@ -124,10 +124,10 @@ $$
 If the $N$ records are equally likely, the average probability $\frac{1}{N}\sum_i \Tr(E_i\rho_i)$ of reading correctly is at most $\frac{d}{N}$. [@prop-record-capacity] is the special case in which every record is read correctly: the left-hand side must equal $N$, hence $N \le d$.
 
 ::: {.example #ex-trine-record-capacity title="Three Records in One Qubit: at Most Two Thirds Read Correctly"}
-Place three pure-state records in one qubit ($d = 2$), with Bloch vectors $120^\circ$ apart on a common great circle:
+Place three pure-state records in one qubit ($d = 2$), with Bloch vectors $120^\circ$ apart on a common great circle. For $k = 0, 1, 2$ take
 
 $$
-\lvert\psi_k\rangle = \cos\frac{k\pi}{3}\,\lvert 0\rangle + \sin\frac{k\pi}{3}\,\lvert 1\rangle, \qquad k = 0, 1, 2 .
+\lvert\psi_k\rangle = \cos\frac{k\pi}{3}\,\lvert 0\rangle + \sin\frac{k\pi}{3}\,\lvert 1\rangle .
 $$
 
 By the half-angle formula of [Chapter 2](ch02-born-rule.md), a Bloch angle of $120^\circ$ corresponds to $\lvert\langle\psi_j\mid\psi_k\rangle\rvert^2 = \cos^2 60^\circ = \frac{1}{4}$ for $j \neq k$. Since $N = 3 > d = 2$, [@prop-record-capacity] says that no readout separates the three perfectly.
@@ -143,15 +143,14 @@ $$
 so $\sum_k E_k = 1$ and hypothesis 2 holds. The readout table is
 
 $$
-\Tr\bigl(E_j\,\lvert\psi_k\rangle\langle\psi_k\rvert\bigr) = \frac{2}{3}\,\lvert\langle\psi_j\mid\psi_k\rangle\rvert^2 =
-\begin{cases} \dfrac{2}{3}, & j = k, \\ \dfrac{1}{6}, & j \neq k, \end{cases}
+\Tr\bigl(E_j\,\lvert\psi_k\rangle\langle\psi_k\rvert\bigr) = \frac{2}{3}\,\lvert\langle\psi_j\mid\psi_k\rangle\rvert^2 ,
 $$
 
-with row sums $\frac{2}{3} + \frac{1}{6} + \frac{1}{6} = 1$. The probability of reading correctly is $\frac{2}{3}$.
+which equals $\frac{2}{3}$ for $j = k$ and $\frac{2}{3}\cdot\frac{1}{4} = \frac{1}{6}$ for $j \neq k$; each row sums to $\frac{2}{3} + \frac{1}{6} + \frac{1}{6} = 1$. The probability of reading correctly is $\frac{2}{3}$.
 
 **This is already optimal.** The quantitative bound above caps the average probability of reading correctly at $\frac{d}{N} = \frac{2}{3}$, and this readout attains it. Two records out of three is the literal meaning of "two dimensions shared among three records".
 
-| Number of records $N$ | Dimension $d$ | Bound $d/N$ on the average probability of reading correctly | Can all be read correctly? |
+| Records $N$ | Dimension $d$ | Bound $d/N$ on average success | All read correctly? |
 | :---: | :---: | :---: | :---: |
 | $2$ | $2$ | $1$ | yes (take two orthogonal records) |
 | $3$ | $2$ | $\frac{2}{3}$ | no |
