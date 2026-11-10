@@ -192,6 +192,180 @@ $$
 2. **有限门计数下的割圆凸多面体**：在容错量子计算中，工程师手里只有有限离散门集 $\mathcal{G}$（例如克利福德加 $T$ 门 $\{H, T\}$）。在任意有限电路深度（量子门计数）$L < \infty$ 下，从北极初态 $\lvert 0\rangle$ 出发所能抵达的状态集合 $\mathcal{S}_L \subset S^2$ 永远只是球面上的有限离散点集，其欧氏凸包 $\operatorname{conv}(\mathcal{S}_L)$ 仅仅是一颗**内接于布洛赫球的有限凸多面体**——就像刘徽与祖冲之用割圆多边形逼近圆周一样，多面体的每一张平坦切面与真实球皮之间，都留着一弯等待更高门计数去填补的弓形残差。
 3. **开口螺旋的轴向投影意象**：如果把 [@prop-complete-diagonal-strict-refinement] 中每一次并入新对角线坐标 $\operatorname{conceptJoin}(\operatorname{latent}, g)$ 的拓扑加细，直观想象为沿着新增正交法向轴 $\vv{e}_{n+1} = \star I_n$ 的一次垂直抬升，那么低维观察者眼底那条看似首尾咬合、周而复始的闭合圆周 $(\cos t, \sin t)$，在并入了逃逸维度的外围空间里，其实是一条永不封口的**开口上升螺旋线** $(\cos t, \sin t, c\,t)$ 顺着法轴投下的平面阴影！你以为自己绕了一圈回到了原点 $(1, 0, 0)$，实际上高度坐标已经悄然跃迁到了 $(1, 0, 2\pi c)$。
 
+三条论断到这里都还只是话。下面把前两条换成可以核对的数字和已经冻结的定理。
+
+**先看刘徽的割圆。** 取单位圆的内接正 $n$ 边形。它的半周长 $n\sin\frac{\pi}{n}$ 从下方逼近 $\pi$；每条边的中点到圆心的距离（边心距）是 $\cos\frac{\pi}{n}$；边的中点与圆弧之间的缝隙（弓高）是
+
+$$
+1 - \cos\frac{\pi}{n} \;=\; 2\sin^2\frac{\pi}{2n} .
+$$
+
+::: {.example #ex-liu-hui-polygon-sagitta title="刘徽割圆的数值表：半周长、边心距与弓高"}
+以下数值以 40 位精度计算后截断。
+
+| $n$ | 半周长 $n\sin\frac{\pi}{n}$ | $\pi - n\sin\frac{\pi}{n}$ | 边心距 $\cos\frac{\pi}{n}$ | 弓高 $1 - \cos\frac{\pi}{n}$ |
+| :---: | :---: | :---: | :---: | :---: |
+| $6$ | $3.0000000000$ | $1.42\times10^{-1}$ | $0.8660254038$ | $1.34\times10^{-1}$ |
+| $12$ | $3.1058285412$ | $3.58\times10^{-2}$ | $0.9659258263$ | $3.41\times10^{-2}$ |
+| $24$ | $3.1326286133$ | $8.96\times10^{-3}$ | $0.9914448614$ | $8.56\times10^{-3}$ |
+| $48$ | $3.1393502030$ | $2.24\times10^{-3}$ | $0.9978589232$ | $2.14\times10^{-3}$ |
+| $96$ | $3.1410319509$ | $5.61\times10^{-4}$ | $0.9994645875$ | $5.35\times10^{-4}$ |
+| $192$ | $3.1414524723$ | $1.40\times10^{-4}$ | $0.9998661379$ | $1.34\times10^{-4}$ |
+| $3072$ | $3.1415921060$ | $5.48\times10^{-7}$ | $0.9999994771$ | $5.23\times10^{-7}$ |
+
+边数每翻一倍，两种残差都缩到约四分之一，与渐近式 $\pi - n\sin\frac{\pi}{n} \approx \frac{\pi^3}{6n^2}$、$1 - \cos\frac{\pi}{n} \approx \frac{\pi^2}{2n^2}$ 相符；但对每个有限的 $n$，两者都严格为正。（正 $n$ 边形的半周长等于正 $2n$ 边形的面积。刘徽用面积割圆，他的正 $192$ 边形面积对应表中 $n = 96$ 一行。）
+:::
+
+**泰勒余项的已验证版本。** 第 1 条引用的拉格朗日余项界是经典分析结果。所钉仓库里冻结着一条适用面更宽的余项界，它不只对实数上的余弦成立，而是对任意完备赋范代数里的指数级数成立。
+
+::: {.lemma #lem-exp-tail-le title="完备赋范代数中指数级数的阶乘余项界" lean="D5/S3/Observer/Linear/ExactTaylorObservationRemainder.exp_tail_le"}
+设 $\mathbb{K}$ 为 $\mathbb{R}$ 或 $\mathbb{C}$（`[RCLike 𝕜]`），$A$ 为 $\mathbb{K}$ 上的完备赋范代数且 $\lVert 1\rVert = 1$（`[NormedRing A]`、`[NormedAlgebra 𝕜 A]`、`[CompleteSpace A]`、`[NormOneClass A]`）。设 $z \in A$，$r \in \mathbb{R}$，$n \in \mathbb{N}$，满足 $0 \le r$ 与 $\lVert z\rVert \le r$。则
+
+$$
+\Bigl\lVert\, \exp z \;-\; \sum_{k=0}^{n-1} \frac{1}{k!}\,z^k \,\Bigr\rVert \;\le\; \frac{r^n}{n!}\,e^{r} .
+$$
+:::
+
+::: proof
+$\exp z$ 是级数 $\sum_k z^k/k!$ 的和（`NormedSpace.exp_series_hasSum_exp'`），减去前 $n$ 项后剩下尾部 $\sum_{k \ge 0} z^{k+n}/(k+n)!$。逐项估计：$\lVert z^{k+n}\rVert \le r^{k+n}$，而 $n!\,k!$ 整除 $(k+n)!$（`Nat.factorial_mul_factorial_dvd_factorial_add`），故 $(k+n)! \ge n!\,k!$，于是尾部第 $k$ 项的范数不超过 $\frac{r^n}{n!}\cdot\frac{r^k}{k!}$。右端对 $k$ 求和得 $\frac{r^n}{n!}\,e^r$，由逐项控制即得结论。完整证明由 Lean 内核检查。
+:::
+
+把 [@lem-exp-tail-le] 用到两个具体的代数上（以下两步代入是本书的手工说明）：
+
+- 取 $A = \mathbb{C}$、$z = i\theta$、$n = 2N$。部分和 $\sum_{k<2N}(i\theta)^k/k!$ 的实部正是余弦的前 $N$ 项偶次多项式，而复数实部的绝对值不超过它的模，所以 $\lvert R_{2N}(\theta)\rvert \le \frac{\lvert\theta\rvert^{2N}}{(2N)!}\,e^{\lvert\theta\rvert}$。它比拉格朗日界多一个因子 $e^{\lvert\theta\rvert}$，换来的是内核验证。
+- 取 $A = M_2(\mathbb{C})$（算子范数）、$z = -\frac{i\theta}{2}\,\vv{n}\cdot\vv{\sigma}$（$\vv{n}$ 为单位向量，于是 $\lVert z\rVert = \frac{\lvert\theta\rvert}{2}$）。旋转器 $U = \exp z$ 的 $n$ 项截断满足 $\bigl\lVert U - \sum_{k<n} z^k/k!\bigr\rVert \le \frac{(\lvert\theta\rvert/2)^n}{n!}\,e^{\lvert\theta\rvert/2}$。
+
+::: {.example #ex-taylor-remainder-three-bounds title="余弦与旋转器的截断余项：实际值、拉格朗日界与已验证界"}
+**余弦，取 $\theta = \theta^* \approx 0.739085$（第二十四章的余弦不动点）。**
+
+| $N$ | 实际余项 $\lvert R_{2N}(\theta^*)\rvert$ | 拉格朗日界 $\frac{(\theta^*)^{2N}}{(2N)!}$ | 已验证界 $\frac{(\theta^*)^{2N}}{(2N)!}\,e^{\theta^*}$ |
+| :---: | :---: | :---: | :---: |
+| $1$ | $2.61\times10^{-1}$ | $2.73\times10^{-1}$ | $5.72\times10^{-1}$ |
+| $2$ | $1.22\times10^{-2}$ | $1.24\times10^{-2}$ | $2.60\times10^{-2}$ |
+| $3$ | $2.24\times10^{-4}$ | $2.26\times10^{-4}$ | $4.74\times10^{-4}$ |
+| $4$ | $2.19\times10^{-6}$ | $2.21\times10^{-6}$ | $4.62\times10^{-6}$ |
+| $5$ | $1.33\times10^{-8}$ | $1.34\times10^{-8}$ | $2.81\times10^{-8}$ |
+| $6$ | $5.53\times10^{-11}$ | $5.55\times10^{-11}$ | $1.16\times10^{-10}$ |
+
+**旋转器，取 $\theta = \pi$（一次 $\pi$ 脉冲），$r = \pi/2$。**
+
+| 截断项数 $n$ | 实际误差 $\bigl\lVert U - \sum_{k<n} z^k/k!\bigr\rVert$ | 已验证界 $\frac{(\pi/2)^n}{n!}\,e^{\pi/2}$ |
+| :---: | :---: | :---: |
+| $4$ | $2.45\times10^{-1}$ | $1.22$ |
+| $8$ | $9.08\times10^{-4}$ | $4.42\times10^{-3}$ |
+| $12$ | $4.68\times10^{-7}$ | $2.27\times10^{-6}$ |
+
+每一行的实际余项都落在界内，也都严格为正。
+:::
+
+**有限记录的弓形残差。** 第 2 条论断说，有限步操作得到的只是内接多面体，平坦的面与球皮之间留着弓形残差。所钉仓库里有两条冻结定理，给这句话一个字面意义上的版本：把“有限的门计数”换成“只有有限格的记录指针”，残差恰好就是正多边形的弓高。
+
+物理图像是这样的。一台记录指针有 $N + 1$ 格，振幅为 $c(0), \dots, c(N)$。系统的第 $i$ 个分支带一个整数标签 $q_i$，记录的方式是把指针平移 $q_i$ 格。两个标签相差 $\ell$ 的分支，记录之后它们之间的相干项被乘上一个因子：指针与它自己平移 $\ell$ 格之后的重叠
+
+$$
+\gamma(\ell) \;=\; \sum_{k \in \mathbb{Z}} c(k + \ell)\,\overline{c(k)} .
+$$
+
+若 $\lvert\gamma(\ell)\rvert = 1$，平移前后的指针无法区分，这次记录什么也没记下，相干性完好；若 $\lvert\gamma(\ell)\rvert < 1$，相干性受损。问题是：有限格的指针能不能让 $\lvert\gamma(\ell)\rvert$ 等于 $1$？
+
+::: {.lemma #lem-finite-support-autocorrelation-cosine title="有限支撑单位序列的自相关模长不超过割圆角的余弦" lean="D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.coefficient_gamma_le_cosine"}
+设 $N \in \mathbb{N}$，$c : \mathbb{Z} \to \mathbb{C}$ 满足：
+
+1. **有限支撑（`hsupport`）**：对一切 $k \in \mathbb{Z}$，若 $k < 0$ 或 $N < k$，则 $c(k) = 0$；
+2. **归一化（`hnorm`）**：$\sum_{k \in \mathbb{Z}} \lVert c(k)\rVert^2 = 1$。
+
+则对一切整数 $\ell \neq 0$，
+
+$$
+\Bigl\lVert \sum_{k \in \mathbb{Z}} c(k + \ell)\,\overline{c(k)} \Bigr\rVert \;\le\; \cos\frac{\pi}{\lfloor N/\lvert\ell\rvert\rfloor + 2},
+$$
+
+其中 $\lfloor N/\lvert\ell\rvert\rfloor$ 是自然数除法 $N / \ell.\mathrm{natAbs}$。
+:::
+
+::: proof
+记 $d = \lvert\ell\rvert$，$m = \lfloor N/d\rfloor$。把支撑 $\{0, \dots, N\}$ 按模 $d$ 的剩余类分成 $d$ 条链，每条链上相邻两个下标恰好相差 $d$，链长不超过 $m + 1$；自相关的模长不超过各链上“相邻两项模长乘积之和”的总和，而各链的模长平方和加起来等于 $\sum_k \lVert c(k)\rVert^2$（`residue_block_bounds`）。在每条链上使用路径不等式 $\sum_{k<m} x_k x_{k+1} \le \cos\frac{\pi}{m+2}\sum_{k \le m} x_k^2$（`path_correlation_le_cos`，由最近邻平均的二次型界与柯西—施瓦茨不等式得到），对各链求和并代入归一化条件即得结论。完整证明由 Lean 内核检查。
+:::
+
+右端的 $\cos\frac{\pi}{m+2}$ 正是单位圆内接正 $(m+2)$ 边形的边心距（[@ex-liu-hui-polygon-sagitta]），它严格小于 $1$。所以答案是否定的：有限格的指针一旦被平移，就一定留下痕迹。下面的定理把这道痕迹换算成任何恢复操作都补不回来的误差。
+
+::: {.theorem #thm-finite-record-cosine-obstruction title="有限记录信道的恢复误差具有严格为正的余弦下界" lean="D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.finite_record_cosine_obstruction"}
+设 $\iota$ 为有限类型（`[Fintype ι]`、`[DecidableEq ι]`），$N \in \mathbb{N}$，$c : \mathbb{Z} \to \mathbb{C}$，$q : \iota \to \mathbb{Z}$，并设 $c$ 满足 [@lem-finite-support-autocorrelation-cosine] 的两条前提 `hsupport` 与 `hnorm`。记
+
+- $\gamma(t) = \sum_{k \in \mathbb{Z}} c(k + t)\,\overline{c(k)}$（$t \in \mathbb{Z}$）；
+- $Q = \sum_{i \in \iota} \lvert q_i\rvert$，$L = N + 2Q + 1$，$\operatorname{coord}(a) = a - Q$（$a \in \operatorname{Fin} L$）；
+- $\operatorname{record}_i(a) = c(\operatorname{coord}(a) + q_i)$；
+- $V$ 为 $(\iota \times \operatorname{Fin} L) \times \iota$ 复矩阵，$V_{(i', a),\, j} = \operatorname{record}_{i'}(a)$（当 $j = i'$），否则为 $0$；
+- $\operatorname{partialTrace}(J)_{ij} = \sum_{a \in \operatorname{Fin} L} J_{(i, a), (j, a)}$；
+- $\Lambda(A) = \operatorname{partialTrace}(V A V^\dagger)$（$A$ 为 $\iota \times \iota$ 复矩阵）。
+
+则存在量子信道 $C$（`QuantumChannel ι ι`，即迹保持的完全正映射）使得：
+
+1. 对一切 $\iota \times \iota$ 复矩阵 $A$：$\operatorname{act} C\ A = \Lambda(A)$；
+2. 对一切 $A$ 与 $i, j \in \iota$：$\Lambda(A)_{ij} = \gamma(q_i - q_j)\,A_{ij}$；
+3. 对一切 $i, j \in \iota$ 与整数 $\ell \neq 0$，若 $q_i - q_j = \ell$，则对每个量子信道 $R$（`QuantumChannel ι ι`），记
+
+   $$
+   f = \Bigl\lfloor \frac{N}{\lvert\ell\rvert} \Bigr\rfloor, \qquad \mathrm{bound} = \frac{1}{2}\Bigl(1 - \cos\frac{\pi}{f + 2}\Bigr),
+   $$
+
+   并记 $\mathrm{errors} = \bigl\{\, T\bigl(R(C(\rho)),\, \rho\bigr) \;\big|\; \rho \in \operatorname{DensityState}\ \iota \,\bigr\}$（$T$ 为迹距离 `traceDistance`），$\mathrm{matrixErrors} = \bigl\{\, \tfrac12\lVert \operatorname{act} R\ (\Lambda(\rho)) - \rho \rVert_1 \;\big|\; \rho \in \operatorname{DensityState}\ \iota \,\bigr\}$（$\lVert\cdot\rVert_1$ 为迹范数 `traceNorm`），以下五项同时成立：
+   - $\mathrm{errors} = \mathrm{matrixErrors}$；
+   - 对一切密度态 $\rho, \sigma$：$0 \le T(\rho, \sigma) \le 1$；
+   - $\mathrm{errors}$ 非空且有上界；
+   - $\mathrm{bound} \le \sup \mathrm{errors}$；
+   - $0 < \mathrm{bound}$。
+:::
+
+::: proof
+证明把三个模块的结论接在一起。其一，`FiniteShiftedRecordChannel` 证明 $\Lambda$ 是一个量子信道的作用，并给出逐元公式 $\Lambda(A)_{ij} = \gamma(q_i - q_j)\,A_{ij}$，这是结论 1 与 2。其二，`FiniteRecordRecoveryError` 证明：只要 $q_i \neq q_j$，对任何恢复信道 $R$，误差集合非空、有上界，且其上确界不小于 $\frac12\bigl(1 - \lVert\gamma(q_i - q_j)\rVert\bigr)$；同一模块给出迹距离落在 $[0, 1]$ 中。其三，[@lem-finite-support-autocorrelation-cosine] 给出 $\lVert\gamma(\ell)\rVert \le \cos\frac{\pi}{f+2}$，代入即得 $\mathrm{bound} \le \sup\mathrm{errors}$。最后，因 $0 < \frac{\pi}{f+2} \le \frac{\pi}{2}$，余弦严格小于 $\cos 0 = 1$，故 $\mathrm{bound} > 0$（`gap_floor_positive`）。完整证明由 Lean 内核检查。
+:::
+
+[@thm-finite-record-cosine-obstruction] 中的下界可以直接读成几何量：
+
+$$
+\mathrm{bound} \;=\; \frac12\Bigl(1 - \cos\frac{\pi}{m + 2}\Bigr), \qquad m = \Bigl\lfloor \frac{N}{\lvert\ell\rvert} \Bigr\rfloor,
+$$
+
+是单位圆内接正 $(m+2)$ 边形弓高的一半。$m = 0$（指针一步就被移出自己的支撑）时它等于 $\frac12$；$m = 1, 2, 4, 10, 98$ 时分别为 $0.2500$、$0.1464$、$0.0670$、$0.0170$、$2.47\times10^{-4}$；$m$ 很大时它按 $\frac{\pi^2}{4(m+2)^2}$ 趋于零。指针越长，记录可以越轻，留下的不可恢复误差越小，但对每个有限的 $N$ 它都严格为正。这条定理只针对这一种平移记录信道与一对标签差非零的分支，并不断言其他编码方式下也有同样的下界。
+
+**有限门计数的硬下界。** 回到第 2 条论断本身。那里只说内接多面体与球皮之间“留着”残差，没有说至少留多少。一行球冠面积就能给出答案。
+
+::: {.example #ex-cap-covering-gate-count title="球冠覆盖：N 个顶点的内接多面体至少留下 2/N 的残差，以及门计数的下界"}
+本例是初等论证，未在本书形式化。
+
+**残差的定义。** 设 $S$ 为单位球面 $S^2$ 上的 $N$ 个点，$P = \operatorname{conv}(S)$ 为其凸包。对单位向量 $\vv{u}$，球面在这个方向上伸到 $1$，多面体伸到支撑函数值 $h_P(\vv{u}) = \max_{\vv{s} \in S} \vv{u}\cdot\vv{s}$。称 $1 - h_P(\vv{u})$ 为方向 $\vv{u}$ 上的残差。
+
+**断言：存在方向 $\vv{u}$ 使残差不小于 $2/N$。** 设最大残差为 $\rho$，并假设 $\rho < 2/N$；取 $\delta$ 满足 $\rho < \delta < 2/N$。每个方向 $\vv{u}$ 都有某个 $\vv{s} \in S$ 使 $\vv{u}\cdot\vv{s} > 1 - \delta$，即 $\vv{u}$ 落在以 $\vv{s}$ 为顶、高为 $\delta$ 的球冠里。高为 $\delta$ 的球冠面积是 $2\pi\delta$（阿基米德：单位球面上球冠的面积等于 $2\pi$ 乘以它的高），$N$ 个这样的球冠总面积 $2\pi\delta N < 4\pi$，盖不住整个球面，矛盾。
+
+**用正多面体核对。** 正多面体的最大残差出现在面心方向，等于 $1$ 减去内切球与外接球半径之比：
+
+| 多面体 | 顶点数 $N$ | 实际最大残差 | 下界 $2/N$ |
+| :---: | :---: | :---: | :---: |
+| 正四面体 | $4$ | $0.6667$ | $0.5000$ |
+| 正八面体 | $6$ | $0.4226$ | $0.3333$ |
+| 正方体 | $8$ | $0.4226$ | $0.2500$ |
+| 正二十面体 | $12$ | $0.2053$ | $0.1667$ |
+| 正十二面体 | $20$ | $0.2053$ | $0.1000$ |
+
+**换算成门计数。** 门集有 $g$ 个门时，从固定初态出发、长度不超过 $L$ 的门字至多 $1 + g + \dots + g^L = \frac{g^{L+1} - 1}{g - 1}$ 个，可达的点数不超过这个数。对 $g = 2$（例如 $\{H, T\}$），$N \le 2^{L+1} - 1$，于是最大残差至少为 $\frac{2}{2^{L+1} - 1}$，相应的角半径（球面上离可达点集最远的点的角距离）至少为 $\arccos\bigl(1 - \frac{2}{N}\bigr)$：
+
+| 门长上限 $L$ | 点数上限 $2^{L+1} - 1$ | 残差下界 | 角半径下界 |
+| :---: | :---: | :---: | :---: |
+| $1$ | $3$ | $0.6667$ | $70.53^\circ$ |
+| $2$ | $7$ | $0.2857$ | $44.42^\circ$ |
+| $3$ | $15$ | $0.1333$ | $29.93^\circ$ |
+| $5$ | $63$ | $0.0317$ | $14.48^\circ$ |
+| $10$ | $2047$ | $9.77\times10^{-4}$ | $2.533^\circ$ |
+| $20$ | $2097151$ | $9.54\times10^{-7}$ | $0.0791^\circ$ |
+
+第十六章 [@ex-finite-ht-polytope] 中长度不超过 $3$ 的 $\{H, T\}$ 门字实际只到达 $5$ 个不同的点，按本例残差至少为 $2/5$，角半径至少为 $53.13^\circ$。
+
+**反过来读。** 要让球面上每一点离可达点集的角距离都小于 $\varepsilon$，必须 $2^{L+1} - 1 \ge \frac{2}{1 - \cos\varepsilon}$，即 $L \ge \log_2\bigl(\frac{2}{1 - \cos\varepsilon} + 1\bigr) - 1 \approx 2\log_2\frac{1}{\varepsilon} + 1$。对 $\varepsilon = 10^{-2}, 10^{-3}, 10^{-6}$（弧度）分别给出 $L \ge 15, 21, 41$。这是一个只靠计数得到的下界：门长至少随 $\log\frac{1}{\varepsilon}$ 线性增长。Solovay–Kitaev 定理（[@rem-solovay-kitaev-literature]，文献结果）给出的是与之配对的上界。
+:::
+
+把四种残差并排放：正 $n$ 边形的弓高约为 $\frac{\pi^2}{2n^2}$；$N + 1$ 格指针的不可恢复误差至少是正 $(m+2)$ 边形弓高的一半；$N$ 个顶点的内接多面体至少留下 $\frac{2}{N}$；前 $N$ 项余弦多项式留下约 $\frac{\theta^{2N}}{(2N)!}$。它们都随资源增长而趋于零，也都对每一份有限的资源严格为正。序曲里那句“我们以为我们得到了一个球，但实际只是近似得到一个球”，在这四个场合各有一个可以核对的数。
+
 ## 21.4 毛球定理、笛卡尔 $720^\circ$ 角亏与 Adams 除法代数球面 {#sec-ch21-4}
 
 甚至哪怕我们退一步，不去跨维度构造哥德尔对角线，而是老老实实待在三维空间里那颗光滑的二维单比特布洛赫球面 $S^2$ 上，拓扑学本身也在球皮表面埋下了一颗无法抚平的奇点——这就是大名鼎鼎的**毛球定理（Hairy Ball Theorem）**，以及它在离散多面体上的孪生兄弟**笛卡尔总角亏定理**与高维球面上的 **Adams 可平行化定理**。

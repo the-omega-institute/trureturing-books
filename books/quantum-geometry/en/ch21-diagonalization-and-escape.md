@@ -192,6 +192,180 @@ At the close of the [Prelude](README.md), we stated the book's central anti-Plat
 2. **Inscribed convex polytopes at finite gate count $L$**: In fault-tolerant quantum synthesis over a finite discrete gate alphabet $\mathcal{G}$ (such as $\{H, T\}$), at any finite gate count $L < \infty$ the reachable set $\mathcal{S}_L \subset S^2$ from $\lvert 0\rangle$ is a finite point set whose Euclidean convex hull $\operatorname{conv}(\mathcal{S}_L) \subset \mathbb{R}^3$ is an **inscribed convex polyhedron** rather than a smooth sphere — leaving curved spherical caps outside every flat facet until $L$ is increased.
 3. **The open ascending helix projected as a circle**: Viewed heuristically, if each topological refinement $\operatorname{conceptJoin}(\operatorname{latent}, g)$ in [@prop-complete-diagonal-strict-refinement] is pictured as an ascent along a newly adjoined normal axis $\vv{e}_{n+1} = \star I_n$, then what looks to a flatland observer like a closed periodic circle $(\cos t, \sin t)$ is the axial shadow of an **open ascending helix** $(\cos t, \sin t, c\,t)$ in the ambient space: returning to $(\cos 2\pi, \sin 2\pi) = (1, 0)$ in the base plane actually lands one turn higher at $(1, 0, 2\pi c)$!
 
+So far the three claims are only words. The first two will now be replaced by numbers that can be checked and by theorems that are already frozen.
+
+**Liu Hui's circle cutting first.** Take the regular $n$-gon inscribed in the unit circle. Its half-perimeter $n\sin\frac{\pi}{n}$ approaches $\pi$ from below; the distance from the centre to the midpoint of each side (the apothem) is $\cos\frac{\pi}{n}$; the gap between the midpoint of a side and the arc (the sagitta) is
+
+$$
+1 - \cos\frac{\pi}{n} \;=\; 2\sin^2\frac{\pi}{2n} .
+$$
+
+::: {.example #ex-liu-hui-polygon-sagitta title="Liu Hui's Circle Cutting in Numbers: Half-Perimeter, Apothem, and Sagitta"}
+The values below were computed at 40 digits and truncated.
+
+| $n$ | half-perimeter $n\sin\frac{\pi}{n}$ | $\pi - n\sin\frac{\pi}{n}$ | apothem $\cos\frac{\pi}{n}$ | sagitta $1 - \cos\frac{\pi}{n}$ |
+| :---: | :---: | :---: | :---: | :---: |
+| $6$ | $3.0000000000$ | $1.42\times10^{-1}$ | $0.8660254038$ | $1.34\times10^{-1}$ |
+| $12$ | $3.1058285412$ | $3.58\times10^{-2}$ | $0.9659258263$ | $3.41\times10^{-2}$ |
+| $24$ | $3.1326286133$ | $8.96\times10^{-3}$ | $0.9914448614$ | $8.56\times10^{-3}$ |
+| $48$ | $3.1393502030$ | $2.24\times10^{-3}$ | $0.9978589232$ | $2.14\times10^{-3}$ |
+| $96$ | $3.1410319509$ | $5.61\times10^{-4}$ | $0.9994645875$ | $5.35\times10^{-4}$ |
+| $192$ | $3.1414524723$ | $1.40\times10^{-4}$ | $0.9998661379$ | $1.34\times10^{-4}$ |
+| $3072$ | $3.1415921060$ | $5.48\times10^{-7}$ | $0.9999994771$ | $5.23\times10^{-7}$ |
+
+Each doubling of the number of sides shrinks both residuals to about one quarter, in agreement with the asymptotics $\pi - n\sin\frac{\pi}{n} \approx \frac{\pi^3}{6n^2}$ and $1 - \cos\frac{\pi}{n} \approx \frac{\pi^2}{2n^2}$; yet for every finite $n$ both are strictly positive. (The half-perimeter of the regular $n$-gon equals the area of the regular $2n$-gon. Liu Hui cut the circle by areas, and the area of his $192$-gon corresponds to the row $n = 96$.)
+:::
+
+**A verified version of the Taylor remainder.** The Lagrange remainder bound quoted in item 1 is a classical result of analysis. The pinned repository holds a frozen remainder bound of wider scope: it holds not only for the real cosine but for the exponential series in any complete normed algebra.
+
+::: {.lemma #lem-exp-tail-le title="Factorial Remainder Bound for the Exponential Series in a Complete Normed Algebra" lean="D5/S3/Observer/Linear/ExactTaylorObservationRemainder.exp_tail_le"}
+Let $\mathbb{K}$ be $\mathbb{R}$ or $\mathbb{C}$ (`[RCLike 𝕜]`) and let $A$ be a complete normed algebra over $\mathbb{K}$ with $\lVert 1\rVert = 1$ (`[NormedRing A]`, `[NormedAlgebra 𝕜 A]`, `[CompleteSpace A]`, `[NormOneClass A]`). Let $z \in A$, $r \in \mathbb{R}$, and $n \in \mathbb{N}$ satisfy $0 \le r$ and $\lVert z\rVert \le r$. Then
+
+$$
+\Bigl\lVert\, \exp z \;-\; \sum_{k=0}^{n-1} \frac{1}{k!}\,z^k \,\Bigr\rVert \;\le\; \frac{r^n}{n!}\,e^{r} .
+$$
+:::
+
+::: proof
+$\exp z$ is the sum of the series $\sum_k z^k/k!$ (`NormedSpace.exp_series_hasSum_exp'`); subtracting the first $n$ terms leaves the tail $\sum_{k \ge 0} z^{k+n}/(k+n)!$. Estimate term by term: $\lVert z^{k+n}\rVert \le r^{k+n}$, and $n!\,k!$ divides $(k+n)!$ (`Nat.factorial_mul_factorial_dvd_factorial_add`), so $(k+n)! \ge n!\,k!$ and the norm of the $k$-th tail term is at most $\frac{r^n}{n!}\cdot\frac{r^k}{k!}$. Summing the right-hand side over $k$ gives $\frac{r^n}{n!}\,e^r$, and termwise domination yields the claim. The full proof is checked by the Lean kernel.
+:::
+
+Apply [@lem-exp-tail-le] to two concrete algebras (the two substitutions below are manual remarks of this book):
+
+- Take $A = \mathbb{C}$, $z = i\theta$, $n = 2N$. The real part of the partial sum $\sum_{k<2N}(i\theta)^k/k!$ is exactly the even cosine polynomial with $N$ terms, and the absolute value of the real part of a complex number is at most its modulus, so $\lvert R_{2N}(\theta)\rvert \le \frac{\lvert\theta\rvert^{2N}}{(2N)!}\,e^{\lvert\theta\rvert}$. Compared with the Lagrange bound it carries an extra factor $e^{\lvert\theta\rvert}$; what it buys is kernel verification.
+- Take $A = M_2(\mathbb{C})$ (operator norm) and $z = -\frac{i\theta}{2}\,\vv{n}\cdot\vv{\sigma}$ with $\vv{n}$ a unit vector, so that $\lVert z\rVert = \frac{\lvert\theta\rvert}{2}$. The $n$-term truncation of the rotor $U = \exp z$ satisfies $\bigl\lVert U - \sum_{k<n} z^k/k!\bigr\rVert \le \frac{(\lvert\theta\rvert/2)^n}{n!}\,e^{\lvert\theta\rvert/2}$.
+
+::: {.example #ex-taylor-remainder-three-bounds title="Truncation Remainders of the Cosine and of a Rotor: Actual Value, Lagrange Bound, and Verified Bound"}
+**Cosine at $\theta = \theta^* \approx 0.739085$ (the cosine fixed point of Chapter 24).**
+
+| $N$ | actual remainder $\lvert R_{2N}(\theta^*)\rvert$ | Lagrange bound $\frac{(\theta^*)^{2N}}{(2N)!}$ | verified bound $\frac{(\theta^*)^{2N}}{(2N)!}\,e^{\theta^*}$ |
+| :---: | :---: | :---: | :---: |
+| $1$ | $2.61\times10^{-1}$ | $2.73\times10^{-1}$ | $5.72\times10^{-1}$ |
+| $2$ | $1.22\times10^{-2}$ | $1.24\times10^{-2}$ | $2.60\times10^{-2}$ |
+| $3$ | $2.24\times10^{-4}$ | $2.26\times10^{-4}$ | $4.74\times10^{-4}$ |
+| $4$ | $2.19\times10^{-6}$ | $2.21\times10^{-6}$ | $4.62\times10^{-6}$ |
+| $5$ | $1.33\times10^{-8}$ | $1.34\times10^{-8}$ | $2.81\times10^{-8}$ |
+| $6$ | $5.53\times10^{-11}$ | $5.55\times10^{-11}$ | $1.16\times10^{-10}$ |
+
+**Rotor at $\theta = \pi$ (one $\pi$ pulse), $r = \pi/2$.**
+
+| number of terms $n$ | actual error $\bigl\lVert U - \sum_{k<n} z^k/k!\bigr\rVert$ | verified bound $\frac{(\pi/2)^n}{n!}\,e^{\pi/2}$ |
+| :---: | :---: | :---: |
+| $4$ | $2.45\times10^{-1}$ | $1.22$ |
+| $8$ | $9.08\times10^{-4}$ | $4.42\times10^{-3}$ |
+| $12$ | $4.68\times10^{-7}$ | $2.27\times10^{-6}$ |
+
+In every row the actual remainder lies within the bound, and it is strictly positive.
+:::
+
+**The sagitta of a finite record.** Item 2 says that finitely many operations produce only an inscribed polytope, with a bow-shaped residual between each flat face and the sphere. The pinned repository holds two frozen theorems that give this sentence a literal version: replace "finite gate count" by "a record pointer with finitely many cells", and the residual is exactly the sagitta of a regular polygon.
+
+The physical picture is this. A record pointer has $N + 1$ cells with amplitudes $c(0), \dots, c(N)$. The $i$-th branch of the system carries an integer label $q_i$, and recording consists in shifting the pointer by $q_i$ cells. For two branches whose labels differ by $\ell$, the coherence between them is multiplied after the recording by one factor: the overlap of the pointer with itself shifted by $\ell$ cells,
+
+$$
+\gamma(\ell) \;=\; \sum_{k \in \mathbb{Z}} c(k + \ell)\,\overline{c(k)} .
+$$
+
+If $\lvert\gamma(\ell)\rvert = 1$, the pointer before and after the shift cannot be told apart, nothing has been recorded, and coherence is intact; if $\lvert\gamma(\ell)\rvert < 1$, coherence is damaged. The question is whether a pointer with finitely many cells can make $\lvert\gamma(\ell)\rvert$ equal to $1$.
+
+::: {.lemma #lem-finite-support-autocorrelation-cosine title="The Autocorrelation of a Finitely Supported Unit Sequence Is Bounded by the Cosine of a Polygon Angle" lean="D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.coefficient_gamma_le_cosine"}
+Let $N \in \mathbb{N}$ and let $c : \mathbb{Z} \to \mathbb{C}$ satisfy:
+
+1. **Finite support (`hsupport`)**: for every $k \in \mathbb{Z}$, if $k < 0$ or $N < k$ then $c(k) = 0$;
+2. **Normalization (`hnorm`)**: $\sum_{k \in \mathbb{Z}} \lVert c(k)\rVert^2 = 1$.
+
+Then for every integer $\ell \neq 0$,
+
+$$
+\Bigl\lVert \sum_{k \in \mathbb{Z}} c(k + \ell)\,\overline{c(k)} \Bigr\rVert \;\le\; \cos\frac{\pi}{\lfloor N/\lvert\ell\rvert\rfloor + 2},
+$$
+
+where $\lfloor N/\lvert\ell\rvert\rfloor$ is the natural-number division $N / \ell.\mathrm{natAbs}$.
+:::
+
+::: proof
+Put $d = \lvert\ell\rvert$ and $m = \lfloor N/d\rfloor$. Split the support $\{0, \dots, N\}$ into $d$ chains according to residue classes modulo $d$; consecutive indices of a chain differ by exactly $d$, and a chain has length at most $m + 1$. The modulus of the autocorrelation is at most the total, over all chains, of the sums of products of adjacent moduli, while the squared moduli of all chains add up to $\sum_k \lVert c(k)\rVert^2$ (`residue_block_bounds`). On each chain apply the path inequality $\sum_{k<m} x_k x_{k+1} \le \cos\frac{\pi}{m+2}\sum_{k \le m} x_k^2$ (`path_correlation_le_cos`, obtained from a quadratic-form bound for nearest-neighbour averages and the Cauchy–Schwarz inequality), sum over the chains, and insert the normalization. The full proof is checked by the Lean kernel.
+:::
+
+The right-hand side $\cos\frac{\pi}{m+2}$ is precisely the apothem of the regular $(m+2)$-gon inscribed in the unit circle ([@ex-liu-hui-polygon-sagitta]), and it is strictly less than $1$. So the answer is no: once a pointer with finitely many cells is shifted, it necessarily leaves a trace. The next theorem converts this trace into an error that no recovery operation can undo.
+
+::: {.theorem #thm-finite-record-cosine-obstruction title="The Recovery Error of a Finite-Record Channel Has a Strictly Positive Cosine Lower Bound" lean="D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.finite_record_cosine_obstruction"}
+Let $\iota$ be a finite type (`[Fintype ι]`, `[DecidableEq ι]`), $N \in \mathbb{N}$, $c : \mathbb{Z} \to \mathbb{C}$, $q : \iota \to \mathbb{Z}$, and let $c$ satisfy the two hypotheses `hsupport` and `hnorm` of [@lem-finite-support-autocorrelation-cosine]. Put
+
+- $\gamma(t) = \sum_{k \in \mathbb{Z}} c(k + t)\,\overline{c(k)}$ for $t \in \mathbb{Z}$;
+- $Q = \sum_{i \in \iota} \lvert q_i\rvert$, $L = N + 2Q + 1$, $\operatorname{coord}(a) = a - Q$ for $a \in \operatorname{Fin} L$;
+- $\operatorname{record}_i(a) = c(\operatorname{coord}(a) + q_i)$;
+- $V$ the complex matrix of shape $(\iota \times \operatorname{Fin} L) \times \iota$ with $V_{(i', a),\, j} = \operatorname{record}_{i'}(a)$ when $j = i'$ and $0$ otherwise;
+- $\operatorname{partialTrace}(J)_{ij} = \sum_{a \in \operatorname{Fin} L} J_{(i, a), (j, a)}$;
+- $\Lambda(A) = \operatorname{partialTrace}(V A V^\dagger)$ for a complex $\iota \times \iota$ matrix $A$.
+
+Then there exists a quantum channel $C$ (`QuantumChannel ι ι`, a trace-preserving completely positive map) such that:
+
+1. For every complex $\iota \times \iota$ matrix $A$: $\operatorname{act} C\ A = \Lambda(A)$;
+2. For every $A$ and all $i, j \in \iota$: $\Lambda(A)_{ij} = \gamma(q_i - q_j)\,A_{ij}$;
+3. For all $i, j \in \iota$ and every integer $\ell \neq 0$ with $q_i - q_j = \ell$, and for every quantum channel $R$ (`QuantumChannel ι ι`), put
+
+   $$
+   f = \Bigl\lfloor \frac{N}{\lvert\ell\rvert} \Bigr\rfloor, \qquad \mathrm{bound} = \frac{1}{2}\Bigl(1 - \cos\frac{\pi}{f + 2}\Bigr),
+   $$
+
+   and let $\mathrm{errors} = \bigl\{\, T\bigl(R(C(\rho)),\, \rho\bigr) \;\big|\; \rho \in \operatorname{DensityState}\ \iota \,\bigr\}$ ($T$ the trace distance `traceDistance`) and $\mathrm{matrixErrors} = \bigl\{\, \tfrac12\lVert \operatorname{act} R\ (\Lambda(\rho)) - \rho \rVert_1 \;\big|\; \rho \in \operatorname{DensityState}\ \iota \,\bigr\}$ ($\lVert\cdot\rVert_1$ the trace norm `traceNorm`). Then all five of the following hold:
+   - $\mathrm{errors} = \mathrm{matrixErrors}$;
+   - for all density states $\rho, \sigma$: $0 \le T(\rho, \sigma) \le 1$;
+   - $\mathrm{errors}$ is nonempty and bounded above;
+   - $\mathrm{bound} \le \sup \mathrm{errors}$;
+   - $0 < \mathrm{bound}$.
+:::
+
+::: proof
+The proof joins the conclusions of three modules. First, `FiniteShiftedRecordChannel` shows that $\Lambda$ is the action of a quantum channel and gives the entrywise formula $\Lambda(A)_{ij} = \gamma(q_i - q_j)\,A_{ij}$; these are claims 1 and 2. Second, `FiniteRecordRecoveryError` shows that whenever $q_i \neq q_j$, for every recovery channel $R$ the error set is nonempty and bounded above, and its supremum is at least $\frac12\bigl(1 - \lVert\gamma(q_i - q_j)\rVert\bigr)$; the same module shows that the trace distance lies in $[0, 1]$. Third, [@lem-finite-support-autocorrelation-cosine] gives $\lVert\gamma(\ell)\rVert \le \cos\frac{\pi}{f+2}$, and substitution yields $\mathrm{bound} \le \sup\mathrm{errors}$. Finally, since $0 < \frac{\pi}{f+2} \le \frac{\pi}{2}$, the cosine is strictly less than $\cos 0 = 1$, so $\mathrm{bound} > 0$ (`gap_floor_positive`). The full proof is checked by the Lean kernel.
+:::
+
+The lower bound of [@thm-finite-record-cosine-obstruction] can be read directly as a geometric quantity:
+
+$$
+\mathrm{bound} \;=\; \frac12\Bigl(1 - \cos\frac{\pi}{m + 2}\Bigr), \qquad m = \Bigl\lfloor \frac{N}{\lvert\ell\rvert} \Bigr\rfloor,
+$$
+
+is half the sagitta of the regular $(m+2)$-gon inscribed in the unit circle. For $m = 0$ (one shift already moves the pointer off its own support) it equals $\frac12$; for $m = 1, 2, 4, 10, 98$ it equals $0.2500$, $0.1464$, $0.0670$, $0.0170$, $2.47\times10^{-4}$; for large $m$ it tends to zero like $\frac{\pi^2}{4(m+2)^2}$. The longer the pointer, the gentler the recording can be and the smaller the unrecoverable error it leaves, but for every finite $N$ it is strictly positive. The theorem concerns this shift-recording channel and a pair of branches with nonzero label difference only; it makes no claim that other encodings obey the same bound.
+
+**A hard lower bound at finite gate count.** Return to item 2 itself. It says only that a residual "remains" between the inscribed polytope and the sphere, not how much must remain. One line about the area of a spherical cap gives the answer.
+
+::: {.example #ex-cap-covering-gate-count title="Cap Covering: An Inscribed Polytope with N Vertices Leaves a Residual of at Least 2/N, and a Lower Bound on Gate Count"}
+This example is an elementary argument, not formalized in this book.
+
+**Definition of the residual.** Let $S$ be a set of $N$ points on the unit sphere $S^2$ and $P = \operatorname{conv}(S)$ its convex hull. For a unit vector $\vv{u}$, the sphere extends to $1$ in this direction and the polytope extends to its support function $h_P(\vv{u}) = \max_{\vv{s} \in S} \vv{u}\cdot\vv{s}$. Call $1 - h_P(\vv{u})$ the residual in the direction $\vv{u}$.
+
+**Claim: some direction $\vv{u}$ has residual at least $2/N$.** Let $\rho$ be the maximal residual and suppose $\rho < 2/N$; choose $\delta$ with $\rho < \delta < 2/N$. Every direction $\vv{u}$ then has some $\vv{s} \in S$ with $\vv{u}\cdot\vv{s} > 1 - \delta$, that is, $\vv{u}$ lies in the spherical cap of height $\delta$ with apex $\vv{s}$. A cap of height $\delta$ has area $2\pi\delta$ (Archimedes: the area of a cap of the unit sphere is $2\pi$ times its height), so $N$ such caps have total area $2\pi\delta N < 4\pi$ and cannot cover the sphere, a contradiction.
+
+**Check against the regular polyhedra.** The maximal residual of a regular polyhedron occurs in the direction of a face centre and equals $1$ minus the ratio of the inradius to the circumradius:
+
+| polyhedron | vertices $N$ | actual maximal residual | lower bound $2/N$ |
+| :---: | :---: | :---: | :---: |
+| tetrahedron | $4$ | $0.6667$ | $0.5000$ |
+| octahedron | $6$ | $0.4226$ | $0.3333$ |
+| cube | $8$ | $0.4226$ | $0.2500$ |
+| icosahedron | $12$ | $0.2053$ | $0.1667$ |
+| dodecahedron | $20$ | $0.2053$ | $0.1000$ |
+
+**Conversion to gate count.** With a gate set of $g$ gates, at most $1 + g + \dots + g^L = \frac{g^{L+1} - 1}{g - 1}$ gate words of length at most $L$ start from a fixed initial state, so the number of reachable points does not exceed this number. For $g = 2$ (for example $\{H, T\}$), $N \le 2^{L+1} - 1$, hence the maximal residual is at least $\frac{2}{2^{L+1} - 1}$ and the corresponding angular radius (the angular distance of the point of the sphere farthest from the reachable set) is at least $\arccos\bigl(1 - \frac{2}{N}\bigr)$:
+
+| gate-length cap $L$ | point-count cap $2^{L+1} - 1$ | residual lower bound | angular-radius lower bound |
+| :---: | :---: | :---: | :---: |
+| $1$ | $3$ | $0.6667$ | $70.53^\circ$ |
+| $2$ | $7$ | $0.2857$ | $44.42^\circ$ |
+| $3$ | $15$ | $0.1333$ | $29.93^\circ$ |
+| $5$ | $63$ | $0.0317$ | $14.48^\circ$ |
+| $10$ | $2047$ | $9.77\times10^{-4}$ | $2.533^\circ$ |
+| $20$ | $2097151$ | $9.54\times10^{-7}$ | $0.0791^\circ$ |
+
+In [@ex-finite-ht-polytope] of Chapter 16 the $\{H, T\}$ words of length at most $3$ actually reach only $5$ distinct points; by the present example the residual is then at least $2/5$ and the angular radius at least $53.13^\circ$.
+
+**Reading it backwards.** For every point of the sphere to lie within angular distance $\varepsilon$ of the reachable set, one needs $2^{L+1} - 1 \ge \frac{2}{1 - \cos\varepsilon}$, that is, $L \ge \log_2\bigl(\frac{2}{1 - \cos\varepsilon} + 1\bigr) - 1 \approx 2\log_2\frac{1}{\varepsilon} + 1$. For $\varepsilon = 10^{-2}, 10^{-3}, 10^{-6}$ (radians) this gives $L \ge 15, 21, 41$. This is a lower bound obtained by counting alone: the gate length must grow at least linearly in $\log\frac{1}{\varepsilon}$. The Solovay–Kitaev theorem ([@rem-solovay-kitaev-literature], a literature result) supplies the matching upper bound.
+:::
+
+Put the four residuals side by side: the sagitta of the regular $n$-gon is about $\frac{\pi^2}{2n^2}$; the unrecoverable error of a pointer with $N + 1$ cells is at least half the sagitta of the regular $(m+2)$-gon; an inscribed polytope with $N$ vertices leaves at least $\frac{2}{N}$; the cosine polynomial with $N$ terms leaves about $\frac{\theta^{2N}}{(2N)!}$. All of them tend to zero as the resource grows, and all of them are strictly positive for every finite amount of the resource. The sentence of the prelude, "we think we have obtained a sphere, but in fact we have only approximately obtained one", has in each of these four settings a number that can be checked.
+
 ## 21.4 The Hairy Ball Theorem, Descartes's $720^\circ$ Angular Defect, and Adams's Division-Algebra Spheres {#sec-ch21-4}
 
 Even if we refrain from constructing Gödelian diagonals and stay strictly on the smooth two-dimensional Bloch sphere $S^2 \subset \mathbb{R}^3$, topology itself plants an immovable singularity right on the surface of the sphere — governed by the **Poincaré–Brouwer Hairy Ball Theorem**, **Descartes's polyhedral angular-defect theorem**, and **Adams's parallelizability theorem**.
