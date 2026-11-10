@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "0932810a77730496eae9b36294d2400f7d1d3b2a",
-  "pinned_at": "2026-11-10T16:36:20Z",
+  "pinned_at": "2026-11-10T16:44:22Z",
   "declarations": {
     "D5/S0/Carrier/GoldenRatio.golden_ratio_spec": {
       "module": "D5/S0/Carrier/GoldenRatio",
@@ -1060,6 +1060,38 @@
       "statement_id": "sha256:33a591cb2edb3f9927d21a39fcf060aeddd8cc3c03d083195128c4f4d9347180",
       "line": 97,
       "signature": "theorem unitary_phase_of_connected_ray_tests (A : Matrix ι ι ℂ) (hA : A ∈ Matrix.unitaryGroup ι ℂ) (hcoord : ∀ i : ι, PreservesRay A (Pi.single i 1)) (tests : Set (ι → ℂ)) (htests : ∀ x ∈ tests, PreservesRay A x) (hconnect : RaySupportConnected tests) : ∃ c : ℂ, ‖c‖ = 1 ∧ A = c • (1 : Matrix ι ι ℂ)"
+    },
+    "D5/S3/Quantum/Information/ActualPureQubitGeometry.blochMatrix_trace": {
+      "module": "D5/S3/Quantum/Information/ActualPureQubitGeometry",
+      "name": "D5.S3.Quantum.Information.ActualPureQubitCostInfimum.blochMatrix_trace",
+      "kind": "theorem",
+      "statement_id": "sha256:d6295d809e769b7736bedc71a7e1a58bd5adaa58f3eaf12aded8d5a663d967d0",
+      "line": 58,
+      "signature": "theorem blochMatrix_trace (a : ℝ) (r : EuclideanSpace ℝ (Fin 3)) : Matrix.trace (blochMatrix a r) = (a : ℂ)"
+    },
+    "D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_blochMatrix": {
+      "module": "D5/S3/Quantum/Information/ActualPureQubitGeometry",
+      "name": "D5.S3.Quantum.Information.ActualPureQubitCostInfimum.bloch_blochMatrix",
+      "kind": "theorem",
+      "statement_id": "sha256:d6295d809e769b7736bedc71a7e1a58bd5adaa58f3eaf12aded8d5a663d967d0",
+      "line": 63,
+      "signature": "theorem bloch_blochMatrix (a : ℝ) (r : EuclideanSpace ℝ (Fin 3)) : bloch (blochMatrix a r) = r"
+    },
+    "D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian": {
+      "module": "D5/S3/Quantum/Information/ActualPureQubitGeometry",
+      "name": "D5.S3.Quantum.Information.ActualPureQubitCostInfimum.bloch_geometry_of_isHermitian",
+      "kind": "theorem",
+      "statement_id": "sha256:d6295d809e769b7736bedc71a7e1a58bd5adaa58f3eaf12aded8d5a663d967d0",
+      "line": 68,
+      "signature": "theorem bloch_geometry_of_isHermitian (M : Matrix (Fin 2) (Fin 2) ℂ) (hM : M.IsHermitian) : M = blochMatrix (Matrix.trace M).re (bloch M) ∧ (Matrix.trace M = 1 → M * M = M → ‖bloch M‖ = 1)"
+    },
+    "D5/S3/Quantum/Information/ActualPureQubitGeometry.norm_bloch_le_trace_of_posSemidef": {
+      "module": "D5/S3/Quantum/Information/ActualPureQubitGeometry",
+      "name": "D5.S3.Quantum.Information.ActualPureQubitCostInfimum.norm_bloch_le_trace_of_posSemidef",
+      "kind": "theorem",
+      "statement_id": "sha256:d6295d809e769b7736bedc71a7e1a58bd5adaa58f3eaf12aded8d5a663d967d0",
+      "line": 100,
+      "signature": "theorem norm_bloch_le_trace_of_posSemidef (M : Matrix (Fin 2) (Fin 2) ℂ) (hM : M.PosSemidef) : ‖bloch M‖ ≤ (Matrix.trace M).re"
     },
     "D5/S3/Quantum/Information/BargmannImaginaryMaximizers.Latitude.latitude_dot": {
       "module": "D5/S3/Quantum/Information/BargmannImaginaryMaximizers",
