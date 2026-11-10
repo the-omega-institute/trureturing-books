@@ -186,21 +186,96 @@ We can now summarize the four workhorse single-qubit noise channels as simple th
 
 (Note: At the **zero-noise identity endpoints** $c = 1$, $p = 0$, $\lambda = 0$, or $\gamma = 0$, each channel reduces to the identity map $\vv{r}' = \vv{r}$ and fixes the **entire Bloch ball**; at the non-contracting **deterministic upper endpoints**, the bit-flip map at $p = 1$ becomes the norm-preserving unitary $\pi$-rotation $\rho \mapsto X\rho X$, $\vv{r}' = (r_x, -r_y, -r_z)$ about the $X$ axis rather than a radial squeeze, while amplitude damping at $\gamma = 1$ resets the entire Bloch ball in one step to the pure north pole $+\vv{e}_3 = (0, 0, 1)$.)
 
-Ask one more geometric question about the last row of that table: **why does shrinking the vertical energy axis toward North by $(1 - \gamma)$ force the equatorial waist to shrink by the square root $\sqrt{1 - \gamma}$ — and how does that single square root immediately enforce the universal NMR and superconducting-qubit bound $T_2 \le 2T_1$?**
-
-Look at the **tangent cap of the sphere right around the North Pole**! Take a narrow pure-state latitude ring at $r_z = 1 - \epsilon$ ($0 < \epsilon \ll 1$), whose horizontal radius squared is $r_x^2 + r_y^2 = 1 - r_z^2 = (1 - r_z)(1 + r_z) \approx 2\epsilon$. After upward axial drift to $r_z' = (1 - \gamma)r_z + \gamma = 1 - (1 - \gamma)\epsilon$, keeping the deformed ellipsoid *inside* the unit Bloch ball (so that no eigenvalue of $\rho$ ever goes negative!) caps the new horizontal radius squared at
+The last row raises a geometric question: once the axial drift toward the ground-state north pole is fixed, **how much transverse length can remain before the ellipsoid pierces the sphere?** Let $\lambda$ now denote the common real retention factor of the two transverse coordinates, and consider
 
 $$
-r_x'^2 + r_y'^2 \le 1 - r_z'^2 = (1 - r_z')(1 + r_z') \approx 2(1 - \gamma)\epsilon = (1 - \gamma)(r_x^2 + r_y^2).
+F_{a,\lambda}(x,y,z) = (\lambda x,\,\lambda y,\,az+1-a), \qquad 0 \le a \le 1.
 $$
 
-There it is: the exact same algebraic factor $1 - u' = (1 - \gamma)(1 - u)$ that canceled in [@prop-amplitude-damping-contraction] forces the transverse contraction factor $\lambda_\perp$ to obey $\lambda_\perp^2 \le 1 - \gamma$, i.e., $\lambda_\perp \le \sqrt{1 - \gamma}$! In continuous time, longitudinal energy decay $1 - \gamma = e^{-t/T_1}$ therefore contributes transverse amplitude decay $\sqrt{1 - \gamma} = e^{-t/(2T_1)}$. Multiplying by any independent pure-dephasing factor $c = e^{-t/T_\varphi}$ gives net transverse envelope $e^{-t/T_2} = e^{-t/(2T_1)}e^{-t/T_\varphi}$, whence
+The north pole $(0,0,1)$ stays fixed. The correspondence with the preceding notation is $a=1-\gamma$: expanding the existing axial coordinate gives exactly $\operatorname{dampedAxis}(1-a,z)=az+1-a$. Its relaxation interpretation is restricted here to **zero-temperature affine drift toward a fixed north pole with an isotropic transverse factor**.
+
+::: {.theorem #thm-north-pole-ball-criterion title="Exact Criterion for a North-Pole Affine Map to Preserve the Whole Closed Unit Ball" lean="D5/S3/QuantumChannels/ContractionGeometry/NorthPoleBallCriterion.north_pole_ball_preserving_iff"}
+Let $a,\lambda \in \mathbb{R}$ with $0 \le a \le 1$, allowing either sign of $\lambda$. The following are equivalent:
+
+1. For every real $x,y,z$ satisfying $x^2+y^2+z^2 \le 1$,
+
+   $$
+   (\lambda x)^2+(\lambda y)^2+(az+1-a)^2 \le 1.
+   $$
+
+2. $\lambda^2 \le a$.
+:::
+
+::: proof
+For sufficiency, bound the squared transverse radius using $\lambda^2 \le a$ and the input ball condition:
 
 $$
-\frac{1}{T_2} = \frac{1}{2T_1} + \frac{1}{T_\varphi} \ge \frac{1}{2T_1} \quad\Longrightarrow\quad T_2 \le 2T_1!
+\begin{aligned}
+&\lambda^2(x^2+y^2)+(az+1-a)^2 \\
+&\quad\le a(1-z^2)+(az+1-a)^2 \\
+&\quad=1-a(1-a)(1-z)^2 \le 1.
+\end{aligned}
 $$
 
-Without solving a single Lindblad differential equation, the parabolic curvature of the unit sphere at its North Pole locks $T_2 \le 2T_1$ directly into place.
+For necessity, construct a specific escaping point. If $\lambda^2>a$, set
+
+$$
+\begin{gathered}
+\delta=\frac{\lambda^2-a}{\lambda^2+1}, \\
+(x,y,z)=\bigl(\sqrt{\delta(2-\delta)},\,0,\,1-\delta\bigr).
+\end{gathered}
+$$
+
+Since $0\le a$, we have $0<\delta\le1$, so the point is real and $x^2+y^2+z^2=1$. Using $\delta(\lambda^2+1)=\lambda^2-a$ and $\delta(\lambda^2-a^2)\le\delta(\lambda^2+1)$, its image exceeds the sphere's squared radius by
+
+$$
+\begin{aligned}
+&\norm{F_{a,\lambda}(x,0,z)}^2-1 \\
+&\quad=\delta\bigl[2(\lambda^2-a)-\delta(\lambda^2-a^2)\bigr] \\
+&\quad\ge\delta(\lambda^2-a)>0.
+\end{aligned}
+$$
+
+Thus the north-pole cap intuition has an exact criterion on the whole closed ball, including the endpoints $a=0$ and $a=1$. The full proof is checked by the Lean kernel.
+:::
+
+[@thm-north-pole-ball-criterion] gives the transverse bound $|\lambda|\le\sqrt a$. Pure amplitude damping in the table takes $\lambda=\sqrt a$, so $\lambda^2=a$ saturates this bound; additional transverse decay can make the inequality strict. In particular, $a=0$ forces $\lambda=0$, while $a=1$ permits exactly $|\lambda|\le1$. This criterion concerns ball preservation; complete positivity also imposes conditions on extended systems and cannot be inferred from this real-coordinate criterion alone.
+
+Now assign exponential envelopes to the factors of **the same map**. For any positive real $T_1,T_2,t$, set
+
+$$
+a=e^{-t/T_1}, \qquad \lambda=e^{-t/T_2}.
+$$
+
+Then $0<a<1$. By the theorem, $F_{a,\lambda}$ maps the entire closed unit ball into itself if and only if
+
+$$
+\begin{aligned}
+&e^{-2t/T_2}\le e^{-t/T_1} \\
+&\quad\Longleftrightarrow -\frac{2t}{T_2}\le-\frac{t}{T_1} \\
+&\quad\Longleftrightarrow T_2\le2T_1.
+\end{aligned}
+$$
+
+The first step uses strict monotonicity of the real exponential; the second cancels positive time and multiplies by positive time constants. This explains a direct specialization of the theorem under the stated exponential envelopes. At $t=0$, both factors equal $1$ for every positive pair $T_1,T_2$, giving the identity map; zero time alone constrains no rate.
+
+::: {.remark #rem-relaxation-envelope-literature title="Physical Conditions for Exponential Envelopes and Rate Addition (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** Krantz et al., *A quantum engineer's guide to superconducting qubits* ([arXiv:1904.06560v3](https://arxiv.org/abs/1904.06560v3), equations 40–43), introduce longitudinal and transverse relaxation rates in the Bloch–Redfield description. The text adjacent to equation 41 explicitly notes that expressing the transverse rate as a sum presumes exponential individual decay functions. This supplies physical context for the relaxation model used here.
+
+If, in addition to pure amplitude damping, we **assume a product of envelopes** and supply a nonnegative pure-dephasing rate $k\ge0$, namely
+
+$$
+e^{-t/T_2}=e^{-t/(2T_1)}e^{-kt},
+$$
+
+then for $T_1,T_2,t>0$, taking logarithms and canceling $t$ gives
+
+$$
+\frac{1}{T_2}=\frac{1}{2T_1}+k\ge\frac{1}{2T_1}.
+$$
+
+For $k>0$, one may write $k=1/T_\varphi$; $k=0$ gives saturation under pure amplitude damping. The product law is an additional physical assumption, not a consequence of geometric preservation. Here $T_2\le2T_1$ applies within the stated scope of a fixed north pole, zero-temperature affine drift, isotropic transverse contraction, and exponential envelopes; it is not extended to arbitrary environments or arbitrary nonexponential decay.
+:::
 
 ## 4.3 The Maximally Mixed Dead Center ($\vv{r} = \vv{0}$) {#sec-ch04-3}
 
@@ -247,7 +322,7 @@ Four geometric properties converge at this single point:
 
 ### Summary of Part I: From Point to Line — Ready to Open the Plane
 
-Across the four chapters of Part I, backed by nineteen Lean-verified theorem blocks (spanning twenty-two frozen Lean theorems, three core definitions, and thirty-eight locked formal declarations in total), we have rebuilt the ground floor of quantum mechanics without a single mysterious postulate:
+Across the four chapters of Part I, the theorem statements checked by the Lean kernel and their pinned formal declarations support our reconstruction of the foundations of quantum geometry; their individual correspondences appear in the book's formal verification ledger:
 
 - **Chapter 1** dismantled both the isolated-particle myth and the external-point-$C$ coordinate scaffolding, proved that $M_2(\mathbb{C})$ admits no algebraic character ([@thm-qubit-no-character]), and used unitary ray rigidity ([@thm-ray-phase-rigidity]) and the Bloch map ([@prop-qubit-bloch-core]) to turn four-parameter complex column vectors into real unit rays $\vv{a} \in S^2$;
 - **Chapter 2** chose the known state itself as basis, identified "point $C$" as the endogenous compatibility shadow $\vv{c} = (\vv{a}\cdot\vv{b})\vv{a}$, and derived Born's squared-modulus rule ([@thm-born-modulus-square], [@thm-rank-one-born-pairing]) and the half-angle identity $\cos^2(\theta/2) = \frac{1 + \cos\theta}{2}$ directly from coordinate-free trace pairing and Pythagoras's theorem;

@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "4c76e4a56525afbb474bf04a03ee2ff4aec5da45",
-  "pinned_at": "2026-11-09T21:46:35Z",
+  "commit": "0932810a77730496eae9b36294d2400f7d1d3b2a",
+  "pinned_at": "2026-11-10T14:04:10Z",
   "declarations": {
     "D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction": {
       "module": "D5/S3/Observer/BornReduction",
@@ -268,6 +268,14 @@
       "statement_id": "sha256:8bdfa71a048ea9c25b88351e02bb5c57c19927bb794ef73bc4505c8204ff22f0",
       "line": 81,
       "signature": "theorem pinching_eq_self_iff_offDiag_eq_zero (rho : QubitMatrix) : pinching rho = rho ↔ offDiag rho = 0"
+    },
+    "D5/S3/QuantumChannels/ContractionGeometry/NorthPoleBallCriterion.north_pole_ball_preserving_iff": {
+      "module": "D5/S3/QuantumChannels/ContractionGeometry/NorthPoleBallCriterion",
+      "name": "D5.S3.QuantumChannels.ContractionGeometry.NorthPoleBallCriterion.north_pole_ball_preserving_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:f28dc7ec72ddf37572aff57f5939faa8825992f395b25402c81a6aba30f3022b",
+      "line": 45,
+      "signature": "theorem north_pole_ball_preserving_iff (a lambda : ℝ) (ha0 : 0 ≤ a) (ha1 : a ≤ 1) : (∀ x y z : ℝ, x ^ 2 + y ^ 2 + z ^ 2 ≤ 1 → (lambda * x) ^ 2 + (lambda * y) ^ 2 + (dampedAxis (1 - a) z) ^ 2 ≤ 1) ↔ lambda ^ 2 ≤ a"
     },
     "D5/S3/QuantumChannels/Pinching.hilbertSchmidtInner": {
       "module": "D5/S3/QuantumChannels/Pinching",
