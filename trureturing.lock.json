@@ -69,6 +69,46 @@
       "line": 61,
       "signature": "theorem crossing_yang_baxter (x y z : Q) : crossing₁ (crossing₂ (crossing₁ (x, (y, z)))) = crossing₂ (crossing₁ (crossing₂ (x, (y, z))))"
     },
+    "D5/S0/Diagonal/EscapeCount.IsEscaped": {
+      "module": "D5/S0/Diagonal/EscapeCount",
+      "name": "D5.S0.Diagonal.EscapeCount.IsEscaped",
+      "kind": "def",
+      "statement_id": "sha256:14c5e871019d250bbba8a1cfb0c399fd2e9a89049951d338ff133e02d61c38ba",
+      "line": 25,
+      "signature": "def IsEscaped (f : Y → Y) (g : A → A → Y) : Prop"
+    },
+    "D5/S0/Diagonal/EscapeCount.diagonal": {
+      "module": "D5/S0/Diagonal/EscapeCount",
+      "name": "D5.S0.Diagonal.EscapeCount.diagonal",
+      "kind": "def",
+      "statement_id": "sha256:14c5e871019d250bbba8a1cfb0c399fd2e9a89049951d338ff133e02d61c38ba",
+      "line": 22,
+      "signature": "def diagonal (f : Y → Y) (g : A → A → Y) : A → Y"
+    },
+    "D5/S0/Diagonal/EscapeCount.diagonal_landing_fixed": {
+      "module": "D5/S0/Diagonal/EscapeCount",
+      "name": "D5.S0.Diagonal.EscapeCount.diagonal_landing_fixed",
+      "kind": "theorem",
+      "statement_id": "sha256:14c5e871019d250bbba8a1cfb0c399fd2e9a89049951d338ff133e02d61c38ba",
+      "line": 28,
+      "signature": "theorem diagonal_landing_fixed {f : Y → Y} {g : A → A → Y} {a₀ : A} : g a₀ = diagonal f g → f (g a₀ a₀) = g a₀ a₀"
+    },
+    "D5/S0/Diagonal/EscapeCount.escaped_listing_card": {
+      "module": "D5/S0/Diagonal/EscapeCount",
+      "name": "D5.S0.Diagonal.EscapeCount.escaped_listing_card",
+      "kind": "theorem",
+      "statement_id": "sha256:14c5e871019d250bbba8a1cfb0c399fd2e9a89049951d338ff133e02d61c38ba",
+      "line": 140,
+      "signature": "theorem escaped_listing_card [Fintype A] [Fintype Y] (f : Y → Y) : Nat.card {g : A → A → Y // IsEscaped f g} = (Fintype.card Y ^ Fintype.card A - Nat.card {y : Y // f y = y}) ^ Fintype.card A"
+    },
+    "D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package": {
+      "module": "D5/S0/Diagonal/Lawvere/QualitativeEscape",
+      "name": "D5.S0.Diagonal.Lawvere.QualitativeEscape.self_application_fragment_package",
+      "kind": "theorem",
+      "statement_id": "sha256:f4f9c8f7bbe3d674e020788a338506fda2a7e7512386a5142bec282841247c0e",
+      "line": 48,
+      "signature": "theorem self_application_fragment_package (f : Y → Y) (g : A → A → Y) : (∀ a : A, diagonal f g a = f (g a a)) ∧ (IsEscaped f g ↔ diagonal f g ∉ Set.range g) ∧ ((∀ y, f y ≠ y) → ∀ h : A → A → Y, IsEscaped f h) ∧ (∃ (f₀ : Bool → Bool) (g₀ : Unit → Unit → Bool), ¬ IsEscaped f₀ g₀)"
+    },
     "D5/S0/Diagonal/SelfApplicationFates.BinaryFractionalMap": {
       "module": "D5/S0/Diagonal/SelfApplicationFates",
       "name": "D5.S0.Diagonal.SelfApplicationFates.BinaryFractionalMap",
@@ -468,6 +508,14 @@
       "statement_id": "sha256:bead691cec70f8a3549ce49e2af64afa08ae7a4ce8ddc01eb0fb12fc5b06d35c",
       "line": 110,
       "signature": "theorem sum_annihilator_character (H : AddSubgroup (ZMod m)) (x : ZMod m) : ∑ k : annihilator H, character k.1 x = if x ∈ H then (Fintype.card (annihilator H) : ℂ) else 0"
+    },
+    "D5/S3/Geometry/FixedPoint/Brouwer.Brouwer": {
+      "module": "D5/S3/Geometry/FixedPoint/Brouwer",
+      "name": "D5.S3.Geometry.FixedPoint.Brouwer",
+      "kind": "theorem",
+      "statement_id": "sha256:5551c05c128aa510e8a3432b00de558b7e2a04a7cec3856daabbf9ae698b4d74",
+      "line": 43,
+      "signature": "theorem Brouwer (hf : Continuous f) : ∃ x, f x = x"
     },
     "D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover": {
       "module": "D5/S3/Geometry/Orthogonality/RationalSixAxisCover",

@@ -314,7 +314,7 @@ $$
 
    在任意实区间上，拉格朗日余项定理给出一致估计 $|R_{2N}(\theta)| \le \frac{|\theta|^{2N}}{(2N)!}$；且对一切 $\theta \in (0, 2]$（含 $\theta^* \in (0, 1)$），由于交错级数相邻项模长严格递减，截断余项满足严格双边不等式 $0 < |R_{2N}(\theta)| < \frac{\theta^{2N}}{(2N)!}$。与此同时，对于精确 Picard 迭代 $\theta_{k+1} = \cos\theta_k$，由于 $\cos$ 在紧区间 $[0, 1]$ 上严格单调递减（从而是单射），**对紧不变区间内任意异于 $\theta^*$ 的初值 $\theta_0 \in [0, 1] \setminus \{\theta^*\}$**（或更一般地，对前向轨道避开 $\theta^*$ 的可数原像集的任意实初值 $\theta_0$；注意若在 $[0, 1]$ 外取偶函数镜像初值 $\theta_0 = -\theta^* \neq \theta^*$，则一步即达 $\theta_1 = \cos(-\theta^*) = \theta^*$），在一切有限步 $k \ge 0$ 处恒有 $\theta_k \neq \theta^*$ 及非零迭代残差 $\varepsilon_k = |\cos\theta_k - \theta_k| > 0$；连同第 2 条对一切代数数读数 $q \in \overline{\mathbb{Q}}$ 成立的 $|\cos q - q| > 0$，这印证了任何有限阶代数多项式或有限精度有理/代数读数与超越不动点 $\theta^*$ 之间永远隔着一道生生不息的近似裂缝。
 4. **偶维球面自映射的不动点/对跖点定理与布劳威尔不动点定理（`R6` 球面闭环）**：
-   回到[第二十一章](ch21-diagonalization-and-escape.md) [@rem-hairy-ball-adams-literature] 中的庞加莱—布劳威尔毛球定理：在任意偶数维球面 $S^{2n}$（如单量子比特布洛赫球面 $S^2$）上，**任何连续自映射 $f : S^{2n} \to S^{2n}$ 必然至少在某一点 $x \in S^{2n}$ 处满足正演不动点 $f(x) = +x$ 或对跖反射点 $f(x) = -x$**！证明极其优美：若对一切 $x \in S^{2n}$ 均有 $f(x) \neq x$ 且 $f(x) \neq -x$，则 $f(x)$ 与 $x$ 处处不共线，将其正交投影到 $x$ 处的切平面即可构造出处处非零的连续切向量场 $v(x) = f(x) - \langle f(x), x\rangle x \neq 0$，直接违背毛球定理！与此同时，若把视野扩展到包含球心混合态的闭布洛赫球体 $B^{n+1} = \{\vv{r} \in \mathbb{R}^{n+1} \mid \|\vv{r}\| \le 1\}$，布劳威尔不动点定理（Brouwer Fixed-Point Theorem）保证任何连续信道映射 $\Phi : B^{n+1} \to B^{n+1}$ 必在球体内部或球皮上拥有至少一个真正的不动点 $\Phi(\vv{r}^*) = \vv{r}^*$。
+   回到[第二十一章](ch21-diagonalization-and-escape.md) [@rem-hairy-ball-adams-literature] 中的庞加莱—布劳威尔毛球定理：在任意偶数维球面 $S^{2n}$（如单量子比特布洛赫球面 $S^2$）上，**任何连续自映射 $f : S^{2n} \to S^{2n}$ 必然至少在某一点 $x \in S^{2n}$ 处满足正演不动点 $f(x) = +x$ 或对跖反射点 $f(x) = -x$**！证明极其优美：若对一切 $x \in S^{2n}$ 均有 $f(x) \neq x$ 且 $f(x) \neq -x$，则 $f(x)$ 与 $x$ 处处不共线，将其正交投影到 $x$ 处的切平面即可构造出处处非零的连续切向量场 $v(x) = f(x) - \langle f(x), x\rangle x \neq 0$，直接违背毛球定理！与此同时，若把视野扩展到包含球心混合态的闭布洛赫球体 $B^{n+1} = \{\vv{r} \in \mathbb{R}^{n+1} \mid \|\vv{r}\| \le 1\}$，布劳威尔不动点定理（Brouwer Fixed-Point Theorem）保证任何连续信道映射 $\Phi : B^{n+1} \to B^{n+1}$ 必在球体内部或球皮上拥有至少一个真正的不动点 $\Phi(\vv{r}^*) = \vv{r}^*$。（标准单纯形上的布劳威尔定理已由 Lean 验证，见 [@thm-brouwer-standard-simplex]；闭球与单纯形同胚，但把结论从单纯形转移到闭球的这一步未在本书形式化。）
 :::
 
 更进一步，在超越数论的最前沿，作者在手稿中曾追问：*“超越数之间的关系？$\pi$ 是 $\theta$ 的一个投影？$\theta$ 是终极超越数？”* 这一关于 Dottie 数 $\theta^*$ 与圆周率 $\pi$ 之间代数独立性的深刻追问，在现代超越数论中直接通向尚未解决的**沙努埃尔猜想（Schanuel's Conjecture）**。我们按第三层认识论规范（`OPEN`）将其记录如下。
@@ -425,7 +425,7 @@ $$
 对无穷多个分母 $b$ 成立：裂缝可以按分母的平方收窄，却永不为零。
 
 ::: {.example #ex-dottie-rate-newton-rational title="真实压缩率、牛顿二次闭合与最佳有理读数残差的数值核对"}
-以下数值均以 50 位十进制精度复算后截断；连分数的部分商是数值观察，不是定理。
+以下数值均以 50 位十进制精度复算，四舍五入到所示位数；连分数的部分商是数值观察，不是定理。
 
 **相邻误差之比趋于 $-\sin\theta^*$。** 从 $\theta_0 = 1$ 出发，记 $\delta_k = \theta_k - \theta^*$：
 
@@ -523,7 +523,7 @@ $$
 $B$ 有一个不含级数的等价描述：先解 $\eta + \sin\eta = y/2$，再取 $B(y) = \sin\eta$。事实上若 $x = \sin\eta$ 且 $\eta \in [-\pi/2, \pi/2]$，则 $A(x) = 2\sin\eta + 2\eta = y$。取 $y = \pi$，方程 $\eta + \sin\eta = \pi/2$ 的解是 $\eta = \frac{\pi}{2} - \theta^* = \arcsin\theta^*$（代入即得 $\frac{\pi}{2} - \theta^* + \cos\theta^* = \frac{\pi}{2}$），于是 $B(\pi) = \sin\eta = \cos\theta^* = \theta^*$。级数 $B$ 在 $y = \pi$ 处收敛到这个值是文献结果（见下例）。
 
 ::: {.example #ex-dottie-pi-series title="π 与 θ* 互逆的两条有理系数级数：部分和的数值核对"}
-级数 $B$ 及等式 $\theta^* = B(\pi)$ 见 Kaplan（2007，*Mathematics Magazine* 第 80 卷，“The Dottie Number”）：**文献结果，未在本书形式化。** $A$ 的展开是经典的反正弦级数。下表的系数用精确有理数算术逐阶反演得到，部分和以 50 位精度计算后截断。
+级数 $B$ 及等式 $\theta^* = B(\pi)$ 见 Kaplan（2007，*Mathematics Magazine* 第 80 卷，“The Dottie Number”）：**文献结果，未在本书形式化。** $A$ 的展开是经典的反正弦级数。下表的系数用精确有理数算术逐阶反演得到，部分和以 50 位精度计算，四舍五入到所示位数。
 
 | 截断阶数 | $A$ 的部分和（趋于 $\pi$） | 与 $\pi$ 的差 | $B$ 的部分和（趋于 $\theta^*$） | 与 $\theta^*$ 的差 |
 | :---: | :---: | :---: | :---: | :---: |
@@ -576,15 +576,131 @@ $$
 
 时间用掉一半，路程只走了不到六分之一：下落开始得很慢，绝大部分距离是在后半程走完的。而“一半”这个最朴素的分割点，落在的位置恰好由 $\theta^*$ 给出。余弦不动点不只住在计算器的余弦键上；凡是服从摆线律的过程——径向开普勒轨道、自由落体塌缩、闭合尘埃宇宙——在时间过半的那一刻，都在读它。
 
+
+## 24.7 追逐在哪里停下：对角线落点即不动点，以及不靠压缩的存在性 {#sec-ch24-7}
+
+本章开头问过：怎样才能让[第二十一章](ch21-diagonalization-and-escape.md)那场“球外之球”的追逐停下来？前面几节用压缩性回答了它的一个特例（$\cos$ 把区间越压越小），用枚举回答了另一个特例（$1 + 1/x$ 是唯一活着的二元分式映射）。但 $\psi = \psi(\psi)$ 这行字说的是更一般的事：**自作用本身就能产出不动点**。这句话有没有不依赖任何具体函数的精确形式？有，而且已经冻结在 Lean 里。
+
+设定只有三样东西：一个地址集 $A$，一个取值集 $Y$，和一张**列表** $g : A \to A \to Y$，它给每个地址 $a$ 分配一行 $g\ a : A \to Y$。再取一个**扭转** $f : Y \to Y$。把列表的对角线 $a \mapsto g\ a\ a$ 逐点扭一下，得到一条新的行 $a \mapsto f(g\ a\ a)$。第二十一章的全部逃逸现象都来自同一个问题：这条被扭过的对角线，是不是列表里已有的某一行？
+
+::: {.definition #def-twisted-diagonal-escape title="扭转对角线与逃逸" lean="D5/S0/Diagonal/EscapeCount.diagonal D5/S0/Diagonal/EscapeCount.IsEscaped"}
+设 $A$、$Y$ 为任意类型，$f : Y \to Y$，$g : A \to A \to Y$。
+
+1. **扭转对角线** [`diagonal`](lean:D5/S0/Diagonal/EscapeCount.diagonal) $f\ g : A \to Y$ 定义为 $a \mapsto f(g\ a\ a)$；
+2. 称列表 $g$ 被 $f$ **逃逸**（[`IsEscaped`](lean:D5/S0/Diagonal/EscapeCount.IsEscaped) $f\ g$），若 $\operatorname{diagonal} f\ g \notin \operatorname{Set.range} g$，即不存在地址 $a$ 使 $g\ a = \operatorname{diagonal} f\ g$。
+:::
+
+列表没有被逃逸时，存在一行 $g\ a_0$ 恰好等于扭转对角线。下文把这种情形叫作列表**捕获**了自己的扭转对角线，把 $a_0$ 叫作**落点**。
+
+::: {.lemma #lem-diagonal-landing-fixed title="对角线落点处的自作用值是扭转的不动点" lean="D5/S0/Diagonal/EscapeCount.diagonal_landing_fixed"}
+设 $f : Y \to Y$，$g : A \to A \to Y$，$a_0 \in A$。若
+
+$$
+g\ a_0 \;=\; \operatorname{diagonal} f\ g,
+$$
+
+则
+
+$$
+f(g\ a_0\ a_0) \;=\; g\ a_0\ a_0 .
+$$
+:::
+
+::: proof
+把函数等式 $g\ a_0 = \operatorname{diagonal} f\ g$ 在地址 $a_0$ 处取值（`congrFun`），得 $g\ a_0\ a_0 = \operatorname{diagonal} f\ g\ a_0 = f(g\ a_0\ a_0)$；交换等式两端即为结论。完整证明由 Lean 内核检查。
+:::
+
+证明只有一行，但它就是 $\psi = \psi(\psi)$ 的骨架。记 $\psi := g\ a_0$，它是列表里的一行，本身是地址上的函数；把地址 $a_0$ 读作这一行自己的名字 $\ulcorner\psi\urcorner$。那么 $g\ a_0\ a_0 = \psi(\ulcorner\psi\urcorner)$ 就是“$\psi$ 作用在自己的名字上”，而 [@lem-diagonal-landing-fixed] 说的是
+
+$$
+f\bigl(\psi(\ulcorner\psi\urcorner)\bigr) \;=\; \psi(\ulcorner\psi\urcorner).
+$$
+
+扭转 $f$ 奈何不了这个值。书名里的 $\psi = \psi(\psi)$ 是这条引理的格言化写法：被自己的列表捕获的那一行，在自己名字上的取值对扭转不变。
+
+逃逸与捕获的全貌由下面的定理给出。注意它对 $A$ 与 $Y$ 没有任何有限性要求。
+
+::: {.theorem #thm-self-application-fragment-package title="自作用片段：对角线公式、逃逸刻画、无不动点扭转的普遍逃逸与前提的不可去除" lean="D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package"}
+设 $A$、$Y$ 为任意类型，$f : Y \to Y$，$g : A \to A \to Y$。以下四项同时成立：
+
+1. 对一切 $a \in A$：$\operatorname{diagonal} f\ g\ a = f(g\ a\ a)$；
+2. $\operatorname{IsEscaped} f\ g \iff \operatorname{diagonal} f\ g \notin \operatorname{Set.range} g$；
+3. 若 $f$ 无不动点（对一切 $y \in Y$ 有 $f(y) \neq y$），则对一切列表 $h : A \to A \to Y$ 均有 $\operatorname{IsEscaped} f\ h$；
+4. 存在 $f_0 : \mathrm{Bool} \to \mathrm{Bool}$ 与 $g_0 : \mathrm{Unit} \to \mathrm{Unit} \to \mathrm{Bool}$，使得 $\neg\operatorname{IsEscaped} f_0\ g_0$。
+:::
+
+::: proof
+前两项由定义展开即得（`rfl` 与 `Iff.rfl`）。第 3 项：设 $f$ 无不动点而某列表 $h$ 未被逃逸，则存在 $a$ 使 $h\ a = \operatorname{diagonal} f\ h$，由 [@lem-diagonal-landing-fixed] 得 $f(h\ a\ a) = h\ a\ a$，与无不动点矛盾（`escaped_of_fixedPointFree`）。第 4 项取 $f_0$ 为恒等映射、$g_0$ 为恒取 $\mathrm{true}$ 的列表，其扭转对角线就是唯一的那一行（`exists_captured_listing_of_fixedPoint`）。完整证明由 Lean 内核检查。
+:::
+
+[@thm-self-application-fragment-package] 的结论 3 是康托尔对角线论证的骨架，与第二十一章 [@thm-complete-diagonal-not-continuous] 背后的机制相同（那里在满射解码目录的框架中表述）；结论 4 说明“无不动点”这个前提去不掉。把结论 3 与 [@lem-diagonal-landing-fixed] 并排，就得到对本章开头那个问题的回答：
+
+- 扭转没有不动点时，追逐永不停下，任何列表都被逃逸；
+- 追逐一旦停下，停下的那一行在自己地址上的取值，必是扭转的不动点。
+
+反过来，只要扭转 $f$ 有一个不动点 $y^*$ 且 $A$ 非空，恒取 $y^*$ 的常值列表就捕获自己的扭转对角线（这一步是直接代入的手工验证）。取 $f = \cos$、$Y = \mathbb{R}$：任何捕获了自己余弦对角线的实值列表，落点上的自作用值都满足 $\cos y = y$，由实不动点的唯一性（[@rem-banach-dottie-hairy-ball-literature] 第 1 条，文献结果）只能是 $\theta^*$。
+
+有限情形下，逃逸与捕获各占多少可以精确数出来。
+
+::: {.proposition #prop-escaped-listing-card title="有限列表中被逃逸者的精确计数" lean="D5/S0/Diagonal/EscapeCount.escaped_listing_card"}
+设 $A$、$Y$ 为有限类型（`[Fintype A]`、`[Fintype Y]`），$f : Y \to Y$。则被 $f$ 逃逸的列表个数为
+
+$$
+\operatorname{Nat.card}\bigl\{\, g : A \to A \to Y \;\big|\; \operatorname{IsEscaped} f\ g \,\bigr\} \;=\; \Bigl(\lvert Y\rvert^{\lvert A\rvert} - \operatorname{Nat.card}\{\, y : Y \mid f(y) = y \,\}\Bigr)^{\lvert A\rvert},
+$$
+
+其中 $\lvert A\rvert = \operatorname{Fintype.card} A$，$\lvert Y\rvert = \operatorname{Fintype.card} Y$，右端的减法是自然数减法。
+:::
+
+::: proof
+先处理 $A$ 为空的情形，此时两端都等于 $1$。$A$ 非空时，把一张列表拆成它的对角线 $X : A \to Y$ 与每一行的其余元素。固定对角线 $X$ 后，逃逸条件按行独立：若 $f(X(a)) \neq X(a)$，第 $a$ 行在位置 $a$ 上已与扭转对角线不同，其余 $\lvert A\rvert - 1$ 个元素任取，有 $\lvert Y\rvert^{\lvert A\rvert - 1}$ 种；若 $X(a)$ 是 $f$ 的不动点，则须排除其余元素恰与扭转对角线全同的那一种，有 $\lvert Y\rvert^{\lvert A\rvert - 1} - 1$ 种。对 $X(a)$ 的全部取值求和，每一行贡献 $\lvert Y\rvert^{\lvert A\rvert} - k$，其中 $k$ 为 $f$ 的不动点个数；各行相乘即得结论。完整证明由 Lean 内核检查。
+:::
+
+::: {.example #ex-three-by-three-capture-escape title="3×3 列表上的捕获与逃逸：同一张表，两种扭转"}
+取 $A = Y = \{0, 1, 2\}$，列表 $g$ 的三行为
+
+$$
+g\ 0 = (0, 1, 2), \qquad g\ 1 = (1, 2, 2), \qquad g\ 2 = (2, 2, 2),
+$$
+
+对角线为 $(g\ 0\ 0,\ g\ 1\ 1,\ g\ 2\ 2) = (0, 2, 2)$。
+
+**有不动点的扭转。** 取 $f_1 : 0 \mapsto 1,\ 1 \mapsto 2,\ 2 \mapsto 2$，它有唯一不动点 $2$。扭转对角线为 $(f_1(0), f_1(2), f_1(2)) = (1, 2, 2) = g\ 1$：列表捕获了自己的扭转对角线，落点 $a_0 = 1$。落点处的自作用值 $g\ 1\ 1 = 2$ 正是 $f_1$ 的不动点，与 [@lem-diagonal-landing-fixed] 一致。
+
+**无不动点的扭转。** 取循环 $f_2 : 0 \mapsto 1,\ 1 \mapsto 2,\ 2 \mapsto 0$。扭转对角线为 $(f_2(0), f_2(2), f_2(2)) = (1, 0, 0)$，它在位置 $0, 1, 2$ 上分别不同于 $g\ 0$、$g\ 1$、$g\ 2$，不是任何一行：列表被逃逸，与 [@thm-self-application-fragment-package] 的结论 3 一致。
+
+**计数。** $\lvert A\rvert = \lvert Y\rvert = 3$ 时共有 $3^9 = 19683$ 张列表。按 [@prop-escaped-listing-card]：对 $f_2$（无不动点），被逃逸的有 $(27 - 0)^3 = 19683$ 张，即全部；对 $f_1$（一个不动点），被逃逸的有 $(27 - 1)^3 = 17576$ 张，被捕获的有 $19683 - 17576 = 2107$ 张，约占 $10.7\%$；对恒等映射（三个不动点），被逃逸的有 $(27 - 3)^3 = 13824$ 张。三个数都已由穷举全部 $19683$ 张列表核对。
+:::
+
+对角线机制说明了停下的地方必是不动点，却不保证扭转有不动点。存在性从哪里来？§24.4 用的是压缩性。还有一条完全不同的路，不需要任何压缩常数，只需要连续性和一个没有洞的舞台。
+
+::: {.theorem #thm-brouwer-standard-simplex title="标准单纯形上的布劳威尔不动点定理" lean="D5/S3/Geometry/FixedPoint/Brouwer.Brouwer"}
+设 $n$ 为正自然数（`n : ℕ+`），记 $\Delta = \operatorname{stdSimplex}\ \mathbb{R}\ (\operatorname{Fin} n)$ 为标准单纯形，即满足 $x_i \ge 0$（对一切 $i$）与 $\sum_i x_i = 1$ 的函数 $x : \operatorname{Fin} n \to \mathbb{R}$ 全体，带子空间拓扑。若 $f : \Delta \to \Delta$ 连续（`hf : Continuous f`），则存在 $x \in \Delta$ 使
+
+$$
+f(x) = x .
+$$
+:::
+
+::: proof
+证明走组合路线。对每个正整数 $l$，取单纯形上坐标分母为 $l$ 的格点；给每个格点 $x$ 标一种颜色：一个满足 $x_i \le f(x)_i$ 的坐标 $i$（两点的坐标和都是 $1$，这样的 $i$ 必存在）。Scarf 型组合引理为每个 $l$ 提供一小簇格点连同一个颜色集 $C$，簇内任意两点的格坐标相差小于 $2(n+1)$，于是簇的直径随 $l \to \infty$ 趋于零。颜色集只有有限种可能，可取子列使 $C$ 恒定；再由单纯形的紧性取收敛子列，得极限点 $z$。在极限处，$C$ 之外的坐标 $z_i = 0$，$C$ 上坐标之和为 $1$；由 $f$ 的连续性，对每个 $i \in C$ 有 $f(z)_i \ge z_i$，故 $\sum_{i \in C} f(z)_i \ge 1$。而 $f(z)$ 的坐标非负且总和为 $1$，所以 $C$ 之外 $f(z)_i = 0$，$C$ 之内逐坐标相等，即 $f(z) = z$。完整证明由 Lean 内核检查。
+:::
+
+标准单纯形不是抽象的几何体：它就是 $n$ 个记录结果上的全体概率分布，也就是[第四章](ch04-decoherence.md)里捏合之后密度矩阵对角线所在的地方。[@thm-brouwer-standard-simplex] 因此说：对记录概率的任何连续更新规则，都存在一个自洽的分布，更新之后还是它自己。
+
+取 $n = 2$，单纯形是线段 $\{(p, 1 - p) \mid p \in [0, 1]\}$。因为 $p \in [0, 1]$ 时 $\cos p \in [\cos 1, 1] \subset [0, 1]$，映射 $(p, 1 - p) \mapsto (\cos p, 1 - \cos p)$ 是这条线段到自身的连续映射，[@thm-brouwer-standard-simplex] 给出 $p \in [0, 1]$ 使 $\cos p = p$。（把 $\cos$ 代入定理的这一步是本书的手工说明，不是冻结声明。）于是余弦不动点的**存在**可以完全不借助压缩性得到；压缩性提供的是另外两样东西：**唯一**，以及 §24.5 算出的**收敛速度**。
+
+两种机制分工清楚，对角线再补上第三块。拓扑保证有地方可停；压缩保证只有一处可停，并且迭代走得到；对角线说明停在那里的值是谁：是一行作用在自己名字上的那个值。
+
 ---
 
 ### 第六部小结：从球外之球回到自指原点，下一步铸造机械法典
 
-回望第六部《越界·球外之球》的四章征程，我们用经 Lean 4 内核逐条验证的**十九条正式定理级结论**（第二十一至二十三章各四条，第二十四章七条，涵盖相对语义对角线拓扑逃逸、黎曼 $\zeta$ 函数留数与狄利克雷—欧拉乘积恒等式、艾森斯坦交越二次型剪切不变性与黄金佩尔迹—范数恒等式、以及有限收缩稳定化、解释语境相对不动点与黄金倒数唯一不动点），完成了从数理逻辑、算术频谱到自指不动点的跨界合拢：
+回望第六部《越界·球外之球》的四章征程，我们用经 Lean 4 内核逐条验证的**二十三条正式定理级结论**（第二十一至二十三章各四条，第二十四章十一条，涵盖相对语义对角线拓扑逃逸、黎曼 $\zeta$ 函数留数与狄利克雷—欧拉乘积恒等式、艾森斯坦交越二次型剪切不变性与黄金佩尔迹—范数恒等式、以及有限收缩稳定化、解释语境相对不动点与黄金倒数唯一不动点），完成了从数理逻辑、算术频谱到自指不动点的跨界合拢：
 
 - **第二十一章**证明了完备解码目录诱导的相对语义对角线在潜划分拓扑下必不连续（[@thm-complete-diagonal-not-continuous]）、必具非空分离亏损（[@lem-complete-diagonal-separation-deficit]），且并入对角线后观测拓扑严格加细（[@prop-complete-diagonal-strict-refinement]、[@cor-complete-diagonal-topological-settlement]），并与泰勒截断余项 $R_{2N}(\theta)$、笛卡尔 $720^\circ = 4\pi$ 五边形角亏、毛球定理及 Adams 可平行化球面 $S^0, S^1, S^3, S^7$（[@rem-hairy-ball-adams-literature]）交相印证；
 - **第二十二章**将素数还原为算术对数空间的正交基，在绝对收敛半平面 $\operatorname{Re}(s) > 1$ 上严格建立了 $s=1$ 留数（[@lem-riemann-zeta-residue-one]）、狄利克雷级数（[@prop-riemann-zeta-dirichlet-sum]）、欧拉乘积（[@thm-riemann-zeta-euler-product]）及两者的直接恒等（[@cor-dirichlet-sum-eq-euler-product]），剖析了有限素数筛的多面体余项裂缝，并严格划定了它们与开放黎曼猜想（[@conj-riemann-hypothesis]、[@rem-euler-zeta-literature]）的认识论边界；
 - **第二十三章**揭示了二次范数与迹投影如何在连续有理数中锁定离散整格，形式化证明了 $\Delta = -3$ 艾森斯坦交越二次型的幺模剪切归约、常数判别式与值域等同（[@thm-qform-eq-eisnorm]、[@lem-qform-discriminant]、[@cor-qform-range-eq-eisnorm]）以及 $\Delta = +5$ 黄金整数的佩尔恒等式（[@prop-pell-form-eq-four-mul-norm]），并系统评述了 Koenigsmann（2016）用四元数范数在 $\mathbb{Q}$ 中给出 $\mathbb{Z}$ 的 $\forall$/$\forall\exists$ 一阶定义与开放问题 $\mathrm{H10}(\mathbb{Q})$ 的精确关系（[@rem-diophantine-z-in-q-literature]）；
-- **第二十四章**证明了有限状态收缩更新的稳定化与变化步数界（[@thm-finite-contracting-updates-stabilize]）、相对解释不动点的相邻步贴合与静态语境非唯一性（相同的文本与解释规则在两个不同静态语境下给出不同的布尔意义，[@lem-conceptual-equivalence-stability-fixed-point]、[@prop-context-parameters-distinct-fixed-points]）正实数上黄金倒数映射的唯一不动点（[@cor-golden-fixed-point-unique]）、非退化二元分式映射的四种自作用命运及其中唯一“活着”的 $\varphi$ 族（[@thm-self-application-four-fates]、[@lem-golden-inverse-branch-fixed-point]）以及正五边形的黄金余弦（[@prop-pentagon-golden-cosines]），并在巴拿赫压缩、林德曼—魏尔斯特拉斯超越性（$|\cos q - q| > 0$）与沙努埃尔猜想（[@conj-schanuel-dottie]、[@rem-banach-dottie-hairy-ball-literature]）的映照下，将全书几何直觉收束于 $\cos\theta^* = \theta^*$ 与 $\psi = \psi(\psi)$。
+- **第二十四章**证明了有限状态收缩更新的稳定化与变化步数界（[@thm-finite-contracting-updates-stabilize]）、相对解释不动点的相邻步贴合与静态语境非唯一性（相同的文本与解释规则在两个不同静态语境下给出不同的布尔意义，[@lem-conceptual-equivalence-stability-fixed-point]、[@prop-context-parameters-distinct-fixed-points]）正实数上黄金倒数映射的唯一不动点（[@cor-golden-fixed-point-unique]）、非退化二元分式映射的四种自作用命运及其中唯一“活着”的 $\varphi$ 族（[@thm-self-application-four-fates]、[@lem-golden-inverse-branch-fixed-point]）正五边形的黄金余弦（[@prop-pentagon-golden-cosines]）、对角线落点即扭转不动点与无不动点扭转的普遍逃逸及其有限计数（[@lem-diagonal-landing-fixed]、[@thm-self-application-fragment-package]、[@prop-escaped-listing-card]）以及标准单纯形上的布劳威尔不动点定理（[@thm-brouwer-standard-simplex]），并在巴拿赫压缩、林德曼—魏尔斯特拉斯超越性（$|\cos q - q| > 0$）与沙努埃尔猜想（[@conj-schanuel-dottie]、[@rem-banach-dottie-hairy-ball-literature]）的映照下，将全书几何直觉收束于 $\cos\theta^* = \theta^*$ 与 $\psi = \psi(\psi)$。
 
 既然全书的几何直觉与理论大厦已经合拢，在最后的**第七部《铸剑·机械法典：零矩阵几何引擎与形式化证明库》**中，我们将把这一切几何定理直接铸造成可运行、零复数矩阵黑箱的位掩码克利福德引擎与 ZYZ 旋转器编译器，并走进 Lean 4 形式化公理圣殿的内部，对全书引用的每一条机器形式化声明执行终极审计！
