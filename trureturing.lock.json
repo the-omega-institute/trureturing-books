@@ -69,6 +69,86 @@
       "line": 61,
       "signature": "theorem crossing_yang_baxter (x y z : Q) : crossing₁ (crossing₂ (crossing₁ (x, (y, z)))) = crossing₂ (crossing₁ (crossing₂ (x, (y, z))))"
     },
+    "D5/S0/Diagonal/SelfApplicationFates.BinaryFractionalMap": {
+      "module": "D5/S0/Diagonal/SelfApplicationFates",
+      "name": "D5.S0.Diagonal.SelfApplicationFates.BinaryFractionalMap",
+      "kind": "inductive",
+      "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
+      "line": 12,
+      "signature": "structure BinaryFractionalMap where a : Fin 2 b : Fin 2 c : Fin 2 d : Fin 2 deriving DecidableEq, Fintype def determinant (m : BinaryFractionalMap) : Int"
+    },
+    "D5/S0/Diagonal/SelfApplicationFates.HasFate": {
+      "module": "D5/S0/Diagonal/SelfApplicationFates",
+      "name": "D5.S0.Diagonal.SelfApplicationFates.HasFate",
+      "kind": "def",
+      "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
+      "line": 41,
+      "signature": "def HasFate (m : BinaryFractionalMap) : SelfApplicationFate → Prop | .empty => fixedCoefficients m = (0, 0, 0) | .dead => fixedCoefficients m = (0, 0, -1) | .collapse => (discriminant m = 0 ∨ discriminant m = 4) ∧ fixedCoefficients m ≠ (0, 0, 0) ∧ fixedCoefficients m ≠ (0, 0, -1) | .live => discriminant m = 5 instance (m : BinaryFractionalMap) (fate : SelfApplicationFate) : Decidable (HasFate m fate)"
+    },
+    "D5/S0/Diagonal/SelfApplicationFates.IsPhiFamily": {
+      "module": "D5/S0/Diagonal/SelfApplicationFates",
+      "name": "D5.S0.Diagonal.SelfApplicationFates.IsPhiFamily",
+      "kind": "def",
+      "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
+      "line": 53,
+      "signature": "def IsPhiFamily (m : BinaryFractionalMap) : Prop"
+    },
+    "D5/S0/Diagonal/SelfApplicationFates.Nondegenerate": {
+      "module": "D5/S0/Diagonal/SelfApplicationFates",
+      "name": "D5.S0.Diagonal.SelfApplicationFates.Nondegenerate",
+      "kind": "def",
+      "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
+      "line": 22,
+      "signature": "def Nondegenerate (m : BinaryFractionalMap) : Prop"
+    },
+    "D5/S0/Diagonal/SelfApplicationFates.SelfApplicationFate": {
+      "module": "D5/S0/Diagonal/SelfApplicationFates",
+      "name": "D5.S0.Diagonal.SelfApplicationFates.SelfApplicationFate",
+      "kind": "inductive",
+      "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
+      "line": 34,
+      "signature": "inductive SelfApplicationFate | empty | dead | collapse | live deriving DecidableEq, Fintype def HasFate (m : BinaryFractionalMap) : SelfApplicationFate → Prop | .empty => fixedCoefficients m = (0, 0, 0) | .dead => fixedCoefficients m = (0, 0, -1) | .collapse => (discriminant m = 0 ∨ discriminant m = 4) ∧ fixedCoefficients m ≠ (0, 0, 0) ∧ fixedCoefficients m ≠ (0, 0, -1) | .live => discriminant m = 5 instance (m : BinaryFractionalMap) (fate : SelfApplicationFate) : Decidable (HasFate m fate)"
+    },
+    "D5/S0/Diagonal/SelfApplicationFates.determinant": {
+      "module": "D5/S0/Diagonal/SelfApplicationFates",
+      "name": "D5.S0.Diagonal.SelfApplicationFates.determinant",
+      "kind": "def",
+      "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
+      "line": 19,
+      "signature": "def determinant (m : BinaryFractionalMap) : Int"
+    },
+    "D5/S0/Diagonal/SelfApplicationFates.discriminant": {
+      "module": "D5/S0/Diagonal/SelfApplicationFates",
+      "name": "D5.S0.Diagonal.SelfApplicationFates.discriminant",
+      "kind": "def",
+      "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
+      "line": 30,
+      "signature": "def discriminant (m : BinaryFractionalMap) : Int"
+    },
+    "D5/S0/Diagonal/SelfApplicationFates.fixedCoefficients": {
+      "module": "D5/S0/Diagonal/SelfApplicationFates",
+      "name": "D5.S0.Diagonal.SelfApplicationFates.fixedCoefficients",
+      "kind": "def",
+      "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
+      "line": 27,
+      "signature": "def fixedCoefficients (m : BinaryFractionalMap) : Int × Int × Int"
+    },
+    "D5/S0/Diagonal/SelfApplicationFates.fixedPolynomial": {
+      "module": "D5/S0/Diagonal/SelfApplicationFates",
+      "name": "D5.S0.Diagonal.SelfApplicationFates.fixedPolynomial",
+      "kind": "def",
+      "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
+      "line": 24,
+      "signature": "def fixedPolynomial (m : BinaryFractionalMap) (x : Rat) : Rat"
+    },
+    "D5/S0/Diagonal/SelfApplicationFates.self_application_four_fates": {
+      "module": "D5/S0/Diagonal/SelfApplicationFates",
+      "name": "D5.S0.Diagonal.SelfApplicationFates.self_application_four_fates",
+      "kind": "theorem",
+      "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
+      "line": 61,
+      "signature": "theorem self_application_four_fates (m : BinaryFractionalMap) (hm : Nondegenerate m) : (∃! fate, HasFate m fate) ∧ (HasFate m .live ↔ IsPhiFamily m) ∧ (HasFate m .live → fixedCoefficients m = (1, -1, -1) ∨ fixedCoefficients m = (1, 1, -1)) ∧ (HasFate m .live → discriminant m = 1 ^ 2 + 4)"
+    },
     "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.goldenReciprocalMap": {
       "module": "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint",
       "name": "D5.S1.FixedPoints.Algebraic.GoldenFixedPoint.goldenReciprocalMap",
@@ -100,6 +180,14 @@
       "statement_id": "sha256:92a7988dadc0a3b8e723075585142821237a04e2b403ae63692e8ee713e845f0",
       "line": 89,
       "signature": "theorem trace_recurrence (a b : R) (hab : a * b = 1) (m : Nat) : a ^ (m + 2) + b ^ (m + 2) = (a + b) * (a ^ (m + 1) + b ^ (m + 1)) - (a ^ m + b ^ m)"
+    },
+    "D5/S3/Analytic/Characterizations/GoldenInverseBranchFixedPoint.golden_inverse_branch_positive_fixed_point_iff": {
+      "module": "D5/S3/Analytic/Characterizations/GoldenInverseBranchFixedPoint",
+      "name": "D5.S3.Analytic.Characterizations.GoldenInverseBranchFixedPoint.golden_inverse_branch_positive_fixed_point_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:296a160c79b372e304965c1323d0f3edec3d3b7e1da8a9c15bfff38182e5cc23",
+      "line": 23,
+      "signature": "theorem golden_inverse_branch_positive_fixed_point_iff : ∀ x : ℝ, 0 < x → ((fun y : ℝ => 1 / (y + 1)) x = x ↔ x = Real.goldenRatio⁻¹)"
     },
     "D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm": {
       "module": "D5/S3/Arith/GoldenPell",
@@ -356,6 +444,14 @@
       "statement_id": "sha256:b00b35b9fad01258b563836e879dfb6cd8370b8d8d4f8c83cfafb011a2cc3a56",
       "line": 37,
       "signature": "theorem target_recovery_criterion {X ProcessState Target : Type*} [Nonempty X] (process : Concept X ProcessState) (target : Concept X Target) : ((∃ recover : ProcessState → Target, target = recover ∘ process) ↔ ∀ ⦃x y : X⦄, process x = process y → target x = target y) ∧ ((∀ ⦃x y : X⦄, process x = process y → target x = target y) ↔ defectRelation process target = ∅) ∧ (defectRelation process target = ∅ ↔ ∃ recover : ProcessState → Target, target = recover ∘ process) ∧ ((¬∃ recover : ProcessState → Target, target = recover ∘ process) ↔ (defectRelation process target).Nonempty)"
+    },
+    "D5/S3/Constants/PentagonCosines.pentagon_golden_cosines": {
+      "module": "D5/S3/Constants/PentagonCosines",
+      "name": "D5.S3.Constants.PentagonCosines.pentagon_golden_cosines",
+      "kind": "theorem",
+      "statement_id": "sha256:038cd8610f04ca79d22518cdee753555520de8a2c93fd7b411d397fa70b6ba42",
+      "line": 45,
+      "signature": "theorem pentagon_golden_cosines : 2 * Real.cos (Real.pi / 5) = Real.goldenRatio ∧ 2 * Real.cos (2 * Real.pi / 5) = Real.goldenRatio⁻¹ ∧ 2 * Real.cos (Real.pi / 5) + 2 * Real.cos (2 * Real.pi / 5) = Real.sqrt 5 ∧ Irrational (2 * Real.cos (2 * Real.pi / 5))"
     },
     "D5/S3/Fourier/FinitePoisson.finite_poisson_summation": {
       "module": "D5/S3/Fourier/FinitePoisson",

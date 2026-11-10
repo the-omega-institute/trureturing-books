@@ -169,6 +169,107 @@ $$
 Since $x > 0$ and $\varphi > 1$ (`Real.one_lt_goldenRatio`), the second factor is strictly positive ($x + \varphi - 1 > 0$), forcing $x - \varphi = 0$, i.e., $x = \frac{1 + \sqrt{5}}{2}$. The full proof is checked by the Lean kernel.
 :::
 
+[@cor-golden-fixed-point-unique] answers "what is the fixed point of $1 + 1/x$" but steps around an earlier question: **why $1 + 1/x$?** Calling it "the simplest combination of adding one and taking a reciprocal" is an impression. To turn the impression into a theorem, one has to list every map of the same kind and examine each.
+
+"The same kind" means the fractional linear maps $x \mapsto \frac{ax + b}{cx + d}$ whose coefficients are only $0$ and $1$. Setting the map equal to $x$ and clearing the denominator gives the fixed-point equation
+
+$$
+c\,x^2 + (d - a)\,x - b \;=\; 0,
+$$
+
+with discriminant $(d - a)^2 + 4bc$. The Lean module `D5/S0/Diagonal/SelfApplicationFates` defines these quantities one by one and assigns each map a "self-application fate" according to the shape of its equation.
+
+::: {.definition #def-binary-fractional-map-fates title="Binary Fractional Maps, Fixed-Point Coefficients, Discriminant, and the Four Self-Application Fates" lean="D5/S0/Diagonal/SelfApplicationFates.BinaryFractionalMap D5/S0/Diagonal/SelfApplicationFates.determinant D5/S0/Diagonal/SelfApplicationFates.Nondegenerate D5/S0/Diagonal/SelfApplicationFates.fixedCoefficients D5/S0/Diagonal/SelfApplicationFates.discriminant D5/S0/Diagonal/SelfApplicationFates.SelfApplicationFate D5/S0/Diagonal/SelfApplicationFates.HasFate D5/S0/Diagonal/SelfApplicationFates.IsPhiFamily"}
+In the module `SelfApplicationFates`:
+
+1. A **binary fractional map** [`BinaryFractionalMap`](lean:D5/S0/Diagonal/SelfApplicationFates.BinaryFractionalMap) is a structure with four components $a, b, c, d$ taking values in $\operatorname{Fin} 2 = \{0, 1\}$;
+2. The **determinant** [`determinant`](lean:D5/S0/Diagonal/SelfApplicationFates.determinant) is the integer $\operatorname{determinant} m = a\,d - b\,c$; $m$ is **nondegenerate** ([`Nondegenerate`](lean:D5/S0/Diagonal/SelfApplicationFates.Nondegenerate)) if $\operatorname{determinant} m \neq 0$;
+3. The **fixed-point coefficients** [`fixedCoefficients`](lean:D5/S0/Diagonal/SelfApplicationFates.fixedCoefficients) are the integer triple $\operatorname{fixedCoefficients} m = (c,\; d - a,\; -b)$;
+4. The **discriminant** [`discriminant`](lean:D5/S0/Diagonal/SelfApplicationFates.discriminant) is the integer $\operatorname{discriminant} m = (d - a)^2 + 4\,b\,c$;
+5. The **self-application fate** [`SelfApplicationFate`](lean:D5/S0/Diagonal/SelfApplicationFates.SelfApplicationFate) is an inductive type with exactly four constructors `empty`, `dead`, `collapse`, `live`; the predicate [`HasFate`](lean:D5/S0/Diagonal/SelfApplicationFates.HasFate) $m$ is defined on the four constructors by:
+   - `empty`: $\operatorname{fixedCoefficients} m = (0, 0, 0)$;
+   - `dead`: $\operatorname{fixedCoefficients} m = (0, 0, -1)$;
+   - `collapse`: $\operatorname{discriminant} m = 0$ or $\operatorname{discriminant} m = 4$, and $\operatorname{fixedCoefficients} m \neq (0, 0, 0)$, and $\operatorname{fixedCoefficients} m \neq (0, 0, -1)$;
+   - `live`: $\operatorname{discriminant} m = 5$;
+6. The **$\varphi$-family** [`IsPhiFamily`](lean:D5/S0/Diagonal/SelfApplicationFates.IsPhiFamily) $m$ is defined as $(a, b, c, d) = (1, 1, 1, 0)$ or $(a, b, c, d) = (0, 1, 1, 1)$.
+:::
+
+Reading the four bits $(a, b, c, d)$ as the map $x \mapsto \frac{ax+b}{cx+d}$ is this book's interpretation; the Lean definitions in [@def-binary-fractional-map-fates] involve only the four bits and the integers computed from them. (The same module also contains [`fixedPolynomial`](lean:D5/S0/Diagonal/SelfApplicationFates.fixedPolynomial), whose value at a rational $x$ is $c\,x^2 + (d - a)\,x - b$, the left-hand side of the fixed-point equation above.) The four names mean what they say: `empty` is the equation $0 = 0$, where every point is fixed and the equation carries no information; `dead` is the equation $-1 = 0$, with no fixed point; `collapse` is the case of a perfect-square discriminant $0$ or $4$, where the roots fall back into the rationals; `live` is the case of discriminant $5$, where the roots are irrational.
+
+::: {.theorem #thm-self-application-four-fates title="The Four Self-Application Fates of Nondegenerate Binary Fractional Maps and the Characterization of the φ-Family" lean="D5/S0/Diagonal/SelfApplicationFates.self_application_four_fates"}
+Let $m$ be a binary fractional map ([@def-binary-fractional-map-fates]) that is nondegenerate (`hm : Nondegenerate m`). Then all four of the following hold:
+
+1. **A fate exists and is unique**: there is exactly one $\mathrm{fate}$ such that $\operatorname{HasFate}\ m\ \mathrm{fate}$;
+2. **`live` if and only if in the $\varphi$-family**:
+
+   $$
+   \operatorname{HasFate}\ m\ \mathtt{live} \quad\Longleftrightarrow\quad \operatorname{IsPhiFamily}\ m\,;
+   $$
+
+3. **Fixed-point coefficients when `live`**: if $\operatorname{HasFate}\ m\ \mathtt{live}$, then $\operatorname{fixedCoefficients} m = (1, -1, -1)$ or $\operatorname{fixedCoefficients} m = (1, 1, -1)$;
+4. **Discriminant when `live`**: if $\operatorname{HasFate}\ m\ \mathtt{live}$, then $\operatorname{discriminant} m = 1^2 + 4$.
+:::
+
+::: proof
+`BinaryFractionalMap` has only $2^4 = 16$ elements. The proof splits $m$ into its four components, cases on each being $0$ or $1$ (`fin_cases`), and simplifies the hypothesis `hm` with `norm_num`, which discards the degenerate cases at once. In each remaining case, existence in claim 1 is obtained by exhibiting the corresponding constructor and deciding it with `decide`, and uniqueness by casing on the four constructors and simplifying after unfolding `HasFate`, `fixedCoefficients`, and `discriminant`; claims 2, 3, and 4 are decidable propositions on a finite case and are settled by `decide`. The full proof is checked by the Lean kernel.
+:::
+
+There are only six nondegenerate binary fractional maps, so all of them can be laid on the table.
+
+::: {.example #ex-six-binary-fractional-maps title="Enumerating the Six Nondegenerate Binary Fractional Maps"}
+Exactly six quadruples with $a, b, c, d \in \{0, 1\}$ have determinant $ad - bc \neq 0$: three with $a = d = 1$ and $bc = 0$, and three with $b = c = 1$ and $ad = 0$. Computing the quantities of [@def-binary-fractional-map-fates] one by one:
+
+| $(a, b, c, d)$ | map $x \mapsto \frac{ax+b}{cx+d}$ | fixed-point equation | discriminant | fate | real fixed points |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| $(1, 0, 0, 1)$ | $x \mapsto x$ | $0 = 0$ | $0$ | `empty` | every $x$ |
+| $(1, 1, 0, 1)$ | $x \mapsto x + 1$ | $-1 = 0$ | $0$ | `dead` | none |
+| $(1, 0, 1, 1)$ | $x \mapsto \frac{x}{x+1}$ | $x^2 = 0$ | $0$ | `collapse` | $0$ |
+| $(0, 1, 1, 0)$ | $x \mapsto \frac{1}{x}$ | $x^2 - 1 = 0$ | $4$ | `collapse` | $\pm 1$ |
+| $(1, 1, 1, 0)$ | $x \mapsto 1 + \frac{1}{x}$ | $x^2 - x - 1 = 0$ | $5$ | `live` | $\varphi,\ -\varphi^{-1}$ |
+| $(0, 1, 1, 1)$ | $x \mapsto \frac{1}{1+x}$ | $x^2 + x - 1 = 0$ | $5$ | `live` | $\varphi^{-1},\ -\varphi$ |
+
+Every row has exactly one fate, in agreement with claim 1 of [@thm-self-application-four-fates]; the two `live` rows are precisely the $\varphi$-family, with fixed-point coefficients $(1, -1, -1)$ and $(1, 1, -1)$, in agreement with claims 2 and 3. The two `live` maps are conjugate to each other: if $x = 1 + 1/x$, then $y = 1/x$ satisfies $y = 1/(1 + y)$.
+:::
+
+So $1 + 1/x$ was not picked at random. Among all six nondegenerate fractional maps that can be written with $0$ and $1$, one says nothing, one has nowhere to stop, two stop at rational numbers, and only $1 + 1/x$ and its conjugate $1/(1+x)$ stop where the rationals cannot reach. [@cor-golden-fixed-point-unique] already computed the unique positive fixed point of the former; the corresponding statement for the latter also has a frozen Lean proof.
+
+::: {.lemma #lem-golden-inverse-branch-fixed-point title="The Unique Positive Fixed Point of 1/(1+x) Is the Inverse Golden Ratio" lean="D5/S3/Analytic/Characterizations/GoldenInverseBranchFixedPoint.golden_inverse_branch_positive_fixed_point_iff"}
+For every real number $x$ with $0 < x$,
+
+$$
+\frac{1}{x + 1} = x \quad\Longleftrightarrow\quad x = \varphi^{-1},
+$$
+
+where $\varphi$ is Mathlib's `Real.goldenRatio`.
+:::
+
+::: proof
+First extract the identity $\varphi - 1 = \varphi^{-1}$ from `golden_transfer_triangle`. Forward direction: since $x > 0$ we have $x + 1 \neq 0$, so $\frac{1}{x+1} = x$ is equivalent to $1 = x\,(x + 1)$; together with $\varphi^2 = \varphi + 1$ (`Real.goldenRatio_sq`) and $\varphi > 1$ (`Real.one_lt_goldenRatio`), nonlinear arithmetic yields $x = \varphi - 1 = \varphi^{-1}$. Reverse direction: substituting $x = \varphi^{-1}$ and using $\varphi^{-1} + 1 = \varphi$ gives $\frac{1}{\varphi^{-1} + 1} = \frac{1}{\varphi} = \varphi^{-1}$. The full proof is checked by the Lean kernel.
+:::
+
+Up to this point, golden self-reference is a purely algebraic matter: addition, division, one quadratic equation. Section 24.4 will contrast it with the cosine self-reference $\cos\theta = \theta$ and stress that the former stops at an algebraic number while the latter leaps into the transcendental ones. Yet the two kinds of self-reference are not unrelated. The golden ratio is itself a cosine reading, taken at the angles of the regular pentagon.
+
+::: {.proposition #prop-pentagon-golden-cosines title="The Doubled Pentagon Cosines Read the Golden Ratio, Its Inverse, and √5" lean="D5/S3/Constants/PentagonCosines.pentagon_golden_cosines"}
+Let $\varphi$ denote Mathlib's `Real.goldenRatio`. All four of the following hold:
+
+1. $2\cos\dfrac{\pi}{5} = \varphi$;
+2. $2\cos\dfrac{2\pi}{5} = \varphi^{-1}$;
+3. $2\cos\dfrac{\pi}{5} + 2\cos\dfrac{2\pi}{5} = \sqrt{5}$;
+4. $2\cos\dfrac{2\pi}{5}$ is irrational.
+:::
+
+::: proof
+Claim 1 is Mathlib's closed form `Real.cos_pi_div_five` ($\cos\frac{\pi}{5} = \frac{1 + \sqrt5}{4}$) multiplied by $2$. For claim 2, write $\frac{2\pi}{5}$ as $2\cdot\frac{\pi}{5}$ and use the double-angle formula $\cos 2\alpha = 2\cos^2\alpha - 1$ with the same closed form to compute $\cos\frac{2\pi}{5} = \frac{\sqrt5 - 1}{4}$ (using $(\sqrt5)^2 = 5$); `Real.inv_goldenRatio` rewrites $\varphi^{-1}$ as $-\frac{1 - \sqrt5}{2}$, which matches. Claim 3 adds the first two and obtains $\sqrt5$ from `Real.goldenRatio_sub_goldenConj`. Claim 4 follows from the irrationality of $\varphi$ (`Real.goldenRatio_irrational`), which is preserved under taking inverses. The full proof is checked by the Lean kernel.
+:::
+
+Substituting the first two claims of [@prop-pentagon-golden-cosines] into the golden fixed-point equation $1 + \varphi^{-1} = \varphi$ (claim 2 of [@cor-golden-fixed-point-unique]) turns it into a trigonometric identity:
+
+$$
+1 + 2\cos\frac{2\pi}{5} \;=\; 2\cos\frac{\pi}{5}.
+$$
+
+Golden self-reference is a length relation inside the regular pentagon: a regular pentagon of unit side has diagonals of length $2\cos\frac{\pi}{5} = \varphi$. The difference between algebraic and cosine self-reference can therefore be stated more precisely. $\varphi$ is a cosine reading too, but one taken at an angle such as $\frac{\pi}{5}$ that is commensurable with $\pi$, and the cosine of every angle commensurable with $\pi$ is algebraic; the cosine of $\theta^*$ is transcendental, so $\theta^*$ must be incommensurable with $\pi$ — which is exactly what [@rem-dottie-angle-incommensurable] proves below.
+
 ## 24.4 From $\cos\theta^* = \theta^*$ to $\psi = \psi(\psi)$: Transcendence, Remainder Seams, and the Hairy Ball Fixed/Antipodal Alternative {#sec-ch24-4}
 
 Contrast the one-dimensional rational self-reference $x = 1 + 1/x$ of [@cor-golden-fixed-point-unique] (which stays inside the quadratic algebraic numbers $\overline{\mathbb{Q}}$ at $\varphi = \frac{1+\sqrt{5}}{2}$) with the two-dimensional rotational projection self-reference
@@ -182,7 +283,7 @@ Why does upgrading the self-referential operator from a one-dimensional rational
 The following literature note synthesizes Banach's contraction principle on $[0, 1]$, the Lindemann–Weierstrass transcendence proof, the Lagrange Taylor remainder bound $|R_{2N}(\theta)|$, and the Hairy Ball fixed/antipodal theorem on even-dimensional spheres.
 
 ::: {.remark #rem-banach-dottie-hairy-ball-literature title="Banach Contraction on [0,1], Transcendence of the Dottie Root, Taylor Remainder Bounds, and the Hairy Ball Fixed/Antipodal Alternative (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** Four classical theorems from analysis, transcendental number theory, and algebraic topology complement the four frozen declarations of this chapter:
+**Literature result, not formalized in this book.** Four classical theorems from analysis, transcendental number theory, and algebraic topology complement the frozen Lean declarations of this chapter:
 
 1. **Banach contraction principle on $[0, 1]$ and global Picard convergence**:
    Whereas [@thm-finite-contracting-updates-stabilize] governs discrete contracting set updates $U(A) \subseteq A$ on a finite type $X$, on the real line $\mathbb{R}$ the cosine map sends $\mathbb{R}$ into $[-1, 1]$ and maps $[-1, 1]$ into the compact invariant interval $[0, 1]$. On $[0, 1]$, the mean value theorem gives the strict Lipschitz bound
@@ -477,11 +578,11 @@ Half the time is spent, yet less than one sixth of the distance is covered: the 
 
 ### Summary of Part VI: From Spheres Beyond Spheres to $\psi = \psi(\psi)$ — Ready to Forge the Mechanical Canon
 
-Across the four chapters of Part VI, backed by **sixteen Lean-verified theorem blocks** (four per chapter), we have brought mathematical logic, prime spectral theory, Diophantine norm locks, and self-referential fixed points under one geometric roof:
+Across the four chapters of Part VI, backed by **nineteen Lean-verified theorem blocks** (four in each of Chapters 21–23 and seven in Chapter 24), we have brought mathematical logic, prime spectral theory, Diophantine norm locks, and self-referential fixed points under one geometric roof:
 
 - **Chapter 21** proved that any complete decoder catalog produces a relative semantic diagonal that is discontinuous in the latent partition topology ([@thm-complete-diagonal-not-continuous]), has a nonempty separation deficit ([@lem-complete-diagonal-separation-deficit]), and forces strict observation-topology refinement when adjoined ([@prop-complete-diagonal-strict-refinement], [@cor-complete-diagonal-topological-settlement]), paired with Taylor remainder seams $R_{2N}(\theta)$, Descartes's $12 \times 60^\circ = 720^\circ = 4\pi$ polyhedral angular defect, the Hairy Ball Theorem, and Adams's parallelizable spheres $S^0, S^1, S^3, S^7$ ([@rem-hairy-ball-adams-literature]);
 - **Chapter 22** revealed primes as the orthogonal basis of arithmetic and established on the explicit half-plane $\operatorname{Re}(s) > 1$ the unit residue at $s = 1$ ([@lem-riemann-zeta-residue-one]), the Dirichlet series ([@prop-riemann-zeta-dirichlet-sum]), the Euler prime product ([@thm-riemann-zeta-euler-product]), and their direct equality ([@cor-dirichlet-sum-eq-euler-product]), alongside the polyhedral prime-sieve remainder and the epistemic boundary of the open Riemann Hypothesis ([@conj-riemann-hypothesis], [@rem-euler-zeta-literature]);
 - **Chapter 23** showed how quadratic norms and traces isolate discrete integer lattices, proving unimodular shear reduction, constant discriminant $\Delta = -3$, and range invariance for the Eisenstein crossing family ([@thm-qform-eq-eisnorm], [@lem-qform-discriminant], [@cor-qform-range-eq-eisnorm]) together with the $\Delta = +5$ Golden Pell trace–norm identity ([@prop-pell-form-eq-four-mul-norm]), and auditing Koenigsmann's 2016 $\forall$/$\forall\exists$ first-order definition of $\mathbb{Z}$ in $\mathbb{Q}$ vs. the open existential problem $\mathrm{H10}(\mathbb{Q})$ ([@rem-diophantine-z-in-q-literature]);
-- **Chapter 24** proved finite contracting set stabilization and strict-change bounds ([@thm-finite-contracting-updates-stabilize]), adjacent-step agreement and static contextual non-uniqueness (identical text and interpretation rule under two distinct static contexts yield different fixed Boolean meanings, [@lem-conceptual-equivalence-stability-fixed-point], [@prop-context-parameters-distinct-fixed-points]), and uniqueness of the positive golden fixed point ([@cor-golden-fixed-point-unique]), culminating in Banach contraction on $[0, 1]$, Lindemann–Weierstrass transcendence ($|\cos q - q| > 0$), Schanuel's conjecture ([@conj-schanuel-dottie], [@rem-banach-dottie-hairy-ball-literature]), and the self-referential synthesis $\psi = \psi(\psi)$.
+- **Chapter 24** proved finite contracting set stabilization and strict-change bounds ([@thm-finite-contracting-updates-stabilize]), adjacent-step agreement and static contextual non-uniqueness (identical text and interpretation rule under two distinct static contexts yield different fixed Boolean meanings, [@lem-conceptual-equivalence-stability-fixed-point], [@prop-context-parameters-distinct-fixed-points]), uniqueness of the positive golden fixed point ([@cor-golden-fixed-point-unique]), the four self-application fates of nondegenerate binary fractional maps with the $\varphi$-family as the only live one ([@thm-self-application-four-fates], [@lem-golden-inverse-branch-fixed-point]), and the golden cosines of the regular pentagon ([@prop-pentagon-golden-cosines]), culminating in Banach contraction on $[0, 1]$, Lindemann–Weierstrass transcendence ($|\cos q - q| > 0$), Schanuel's conjecture ([@conj-schanuel-dottie], [@rem-banach-dottie-hairy-ball-literature]), and the self-referential synthesis $\psi = \psi(\psi)$.
 
 With the theoretical arch of the book complete, **Part VII (*Forging the Blade — Mechanical Canon: Matrix-Free Engines and Formal Proof Libraries*)** turns these geometric laws into executable matrix-free bitmask Clifford engines and ZYZ rotor compilers, and steps inside the Lean 4 formal temple to audit the complete formal verification ledger of the monograph.
