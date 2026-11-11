@@ -60,6 +60,9 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 `two-angle-addressing` 的琥珀色点是从北极出发的布洛赫方向，紫色是两根转轴 $a = \vv{e}_3$ 与 $b$（夹角 $\alpha$，$90^\circ$ 时 $b = \vv{e}_2$），白色小旗是转动带走的切向 $\vv{e}_1$，青色虚线圈是“绕 $b$ 转了 $j$ 次后离 $N$ 至多 $2j\alpha$”的界，品红的点是没有球冠盖住的地方。绿色框只给第九章引用的三条定理（有限旋转字、有理六轴覆盖、六色下界）；两角公式与欧拉分解标 `ARGUED`；斜轴的旋转字由页面按贪心规则当场构造、球面最小值由网格取样，都标 `NUM`，页面不声称是最短字。
 `pulse-area-virtual-z` 的品红是“面积”的两面：左边包络下扫过的面积与右边球上同样大小的扇形；紫色是此刻的转轴（实验室系里是载频的 z 轴），青色是态在 z 轴上的影子 P(0)，白色虚线是对照的那条路（换序、电路字面、不失谐或同面积方波）。绿色框只给第十一章正文用 `lean=` 引用的本征态定态性（`energy_eigenstate_stationary`，抽屉里另有 `exp_mulVec_of_eigenvector` 与 `observer_pullback_trace_identity`）；面积律、旋转系消去载频、轴向共轭恒等式与虚拟 Z 调度按该章文献注记标 `ARGUED`；截断高斯与实验室系画法标 `MODEL`；失谐时的分段时序乘积标 `NUM`。`order` 卡只演示两个转动不对易，不代表该章三脉冲积分核误差界。
+| `pairwise-shutter` | 快门每次只报“过”或“不过”；按得越多，“过”的比例越贴近两支箭头的夹角定下的权重 | `clicks` `sixty` `right` `same` `opposite` `turn` `random` |
+
+`pairwise-shutter` 的青色是已知态 $A$、它那条直径上从 $-1$ 端到 $B$ 的垂足的一段（长度占直径的 $p$）、权重的虚线与“过”的方块；琥珀色是目标态 $B$ 与当前的比例；细曲线（墨色）是数出来的比例 $k/N$；紫色只在 `turn` 卡里出现，是两支共用的转轴。绿色框只给第二章用 `lean=` 引用的两条定理：`born_probability_skeleton`（过与不过两份权重非负、相加为 1）与 `rank_one_born_pairing_weight`（$\lvert\langle\phi\mid\psi\rangle\rvert^2 = \Tr(\rho P_k)$）；半角公式 $(1 + \cos\theta)/2$ 与随机方向上权重均匀是第二章例题的手算，页面三路数值核对标 `NUM`；快门计数是固定种子的抽样模型，比例趋向权重是大数定律（本书未形式化），浅色带 $p \pm 2\sqrt{p(1-p)/N}$ 只是参考尺度，一并标 `MODEL`。这一页不画 `qubit-geometry` · `line` 的“影子长 $\cos\theta$”，只画计数。
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
@@ -149,6 +152,12 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第十一章 | 文献注记 `rem-virtual-z-scheduling-literature` 之后（第 3 条符号核对） | `pulse-area-virtual-z` · `sign` |
 | 第十一章 | 例 `ex-five-ghz-pi-over-two` 之后、文献注记 `rem-pulses-literature` 之前 | `pulse-area-virtual-z` · `gauss` |
 | 第十一章 | 文献注记 `rem-pulses-literature` 之后（章末） | `pulse-area-virtual-z` · `detune`，随后完整实验室 |
+| 第一章 | §1.2 快门插图 `ch01-shutter` 之后、“全能属性账本”一段之前 | `pairwise-shutter` · `clicks` |
+| 第二章 | §2.1 插图 `ch02-cut-c` 之后、“矩阵的迹”一段之前 | `pairwise-shutter` · `sixty` |
+| 第二章 | §2.1 “矩阵的迹”一段之后、定义 `def-born-probability` 之前 | `pairwise-shutter` · `turn` |
+| 第二章 | §2.3 `qubit-geometry` · `line` 之后、“上面的表是逐个角度算的”之前 | `pairwise-shutter` · `right` |
+| 第二章 | §2.3 “单比特是唯一‘公平’的情形”一段之后 | `pairwise-shutter` · `random` |
+| 第二章 | 文献注记 `rem-gleason-literature` 之后、转入第三章之前 | `pairwise-shutter` 完整实验室 |
 
 ## 增删或修改一张卡之后
 
