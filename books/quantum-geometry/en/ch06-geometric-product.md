@@ -202,6 +202,10 @@ Examine the complex overlap $c := \langle r_L, r_R\rangle_{\mathbb{C}}$ between 
 - **Coherence visibility** $V := \|c\| = |\langle r_L, r_R\rangle_{\mathbb{C}}| = \cos\alpha \in [0, 1]$ is the **inner-product cosine** measuring how collinear the two environmental records remain;
 - **Record distinguishability** $D := \sqrt{1 - V^2} = \sin\alpha \in [0, 1]$ is the **exterior-product sine area** measuring how orthogonally separated the two records are!
 
+::: {.viz src="double-slit-marker" preset="partial" height="500"}
+**The marker turned by $60^\circ$.** In the circle on the right the amber arrow $r_R$ makes an angle $\alpha = 60^\circ$ with the horizontal $r_L$: the cyan shadow is the visibility $V = \cos\alpha = 0.5$, the magenta height the distinguishability $D = \sin\alpha \approx 0.87$, and the point is on the circle. On the screen to the left the hits still pile up into fringes, but the dark fringes are no longer black and the cyan band is half as thick.
+:::
+
 In the Lean module `Quantum/PureState/RecordCoherenceComplementarity`, the following theorem proves the exact Pythagorean conservation law $D^2 + V^2 = 1$ together with the extreme particle and wave endpoints.
 
 ::: {.theorem #thm-record-coherence-complementarity title="Pythagorean Complementarity Between Pure-State Record Distinguishability and Coherence Visibility" lean="D5/S3/Quantum/PureState/RecordCoherenceComplementarity.pure_record_distinguishability_coherence_complementarity"}
@@ -222,6 +226,10 @@ Then all five complementarity statements hold:
 
 ::: proof
 By the Cauchy–Schwarz inequality and $\|r_L\| = \|r_R\| = 1$, we have $0 \le V = \|\langle r_L, r_R\rangle_{\mathbb{C}}\| \le \|r_L\|\|r_R\| = 1$, so $1 - V^2 \ge 0$. Squaring $D = \sqrt{1 - V^2}$ gives $D^2 = 1 - V^2$, hence $D^2 + V^2 = 1$ (claim 1). If $c = 0$, then $V = \|0\| = 0$ and $D = \sqrt{1 - 0} = 1$ (claim 2). If $V = 1$, then $D = \sqrt{1 - 1^2} = 0$ (claims 3 and 5). Conversely, if $D = 1$, then claim 1 implies $1 + V^2 = 1$, so $V^2 = 0 \implies V = \|c\| = 0 \implies c = 0$, whence $c \cdot a = 0 \cdot a = 0$ for every $a \in \mathbb{C}$ (claim 4). The full proof is checked by the Lean kernel.
+:::
+
+::: {.viz src="double-slit-marker" preset="which" height="500"}
+**Orthogonal markers, no fringes.** At $\alpha = 90^\circ$ the arrows are square: the cyan shadow shrinks to nothing, the magenta height reaches the top, and the point sits at the highest point of the circle (property 2 of [@thm-record-coherence-complementarity]). The hits on the screen pile up into a hump without fringes.
 :::
 
 Simultaneously, on the $2\times 2$ qubit density matrix $\rho \in M_2(\mathbb{C})$ (recalling [@thm-pinching-pythagorean] from [Chapter 4](ch04-decoherence.md)), standard-basis pinching $\Pi(\rho)$ ([`pinching`](lean:D5/S3/QuantumChannels/Pinching.pinching)) decomposes $\rho$ into a diagonal particle part $\Pi(\rho)$ and an off-diagonal wave residual $\rho - \Pi(\rho)$ that are strictly orthogonal under the Hilbert–Schmidt inner product ([`hilbertSchmidtInner`](lean:D5/S3/QuantumChannels/Pinching.hilbertSchmidtInner), [`pinching_hilbert_schmidt_orthogonal`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_orthogonal)):
@@ -264,6 +272,14 @@ Evaluating [@thm-record-coherence-complementarity] and [@cor-pinching-pythagorea
 Nothing in Wheeler's delayed choice reaches backward in time: prior to the final measurement, the joint state $\frac{1}{\sqrt{2}}(\lvert 0\rangle\lvert r_L\rangle + \lvert 1\rangle\lvert r_R\rangle)$ is a single unified geometric-product field containing both diagonal populations and off-diagonal coherence blocks; choosing whether to read out orthogonal which-way records or recombine the beams at the exit port simply chooses **whether to project that field onto its diagonal particle line or preserve its transverse bivector area**!
 :::
 
+::: {.viz src="double-slit-marker" preset="delayed" height="500"}
+**Hits first, reading later.** At $\alpha = 90^\circ$ the marker is read for the path only after every hit has landed: the same hits are copied into a “left” and a “right” row, and both magenta rows are humps without fringes.
+:::
+
+::: {.viz src="double-slit-marker" preset="erase" height="500"}
+**The same hits, read another way.** The very same hits, but now the marker is read to erase: one cyan row shows fringes, the other anti-fringes shifted by half a period, and together they are still the hump above. The later choice moves no hit on the screen; it only decides how they are sorted.
+:::
+
 ::: {.remark #rem-englert-greenberger-literature title="Wootters–Zurek, Greenberger–Yasin, and Englert Wave–Particle Duality Inequalities (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** In this chapter, [@thm-record-coherence-complementarity] proves the exact pure-record equality $D^2 + V^2 = 1$ where $V = |\langle r_L, r_R\rangle|$ and $D = \sqrt{1 - V^2}$ is defined from the unit record overlap. In the interferometry literature, the historical development and mixed-state generalizations proceed through three landmarks:
 
@@ -278,8 +294,16 @@ Nothing in Wheeler's delayed choice reaches backward in time: prior to the final
 Englert's trace-distance inequality for general mixed environmental states is cited from the physics literature and is not claimed in the book's Lean verification ledger.
 :::
 
+::: {.viz src="double-slit-marker" preset="mixed" height="500"}
+**A mixed marker falls inside the circle.** When the marker itself is noisy (purity $\lambda = 0.5$), the visibility is still $V = 0.5$, but only $0.43$ of trace-distance distinguishability can be read: the point drops inside the circle along the dashed magenta arc, $D^2 + V^2 \approx 0.44 < 1$. This is one instance of Englert's inequality above (a literature result, not formalized in this book).
+:::
+
 ::: {.viz src="qubit-geometry" preset="area" height="500"}
 **The all-area end.** With $\vv{B}$ perpendicular to $\vv{A}$ the line shrinks to a point and the area is as large as it gets: the two clicks are 50 / 50 and the fringes are sharpest. Use ◀ under the figure to reach the opposite, all-line end, and compare the two limits of [@thm-record-coherence-complementarity].
+:::
+
+::: {.viz src="double-slit-marker" height="560"}
+Interactive laboratory `SLIT//MARKER`: hits arriving one by one on the screen with their fringes, and the two marker arrows $r_L$ and $r_R$ on the complementarity circle; drag the angle, change how the marker is read, or lower its purity. The numbers on the page are a numerical illustration; $D^2 + V^2 = 1$ is [@thm-record-coherence-complementarity], checked by the Lean kernel.
 :::
 
 ## 6.4 Interactive Laboratory: Hands-On Exploration of the Pairwise Geometric Product, Particle Inner Line, and Wave Wedge Area {#sec-interactive-qubit-geometry}

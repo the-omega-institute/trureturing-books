@@ -41,6 +41,11 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 后四个页面的依据分层要写在页面与图注里：第三十章转述的 2026 年预印本只作为该章的转述出现，页面上的曲线与涡管是示意模型（`MODEL`）；菱形三十面体与“帝国”是文献结果（`ARGUED`）；灵魂、遗迹、似曾相识是诠释模型（`MODEL`）；只有带 Lean 链接的绿色框是已验证定理。`spatial-attractor-deja-vu` 不引用任何 Lean 定理。
 
 `bloch-noise` 的绿色框只引用第四章正文已用 `lean=` 引用的定理；三种噪声的布洛赫仿射形式与 $T = \frac{1}{2}\lVert\vv{r} - \vv{s}\rVert$ 按该章例题标 `ARGUED`；时间轴上两个整数步之间取相邻整数步输出的凸组合、把横向剩余读成 $\cos\theta_{\mathrm{env}}$ 标 `MODEL`。`wide` 卡里的映射不是信道，页面只说它刺穿球皮。
+| `double-slit-marker` | 路径记得越清，条纹越淡；两者落在同一个圆上，怎么读标记可以等落点到了再定 | `wave` `partial` `which` `delayed` `erase` `mixed` |
+
+后四个页面的依据分层要写在页面与图注里：第三十章转述的 2026 年预印本只作为该章的转述出现，页面上的曲线与涡管是示意模型（`MODEL`）；菱形三十面体与“帝国”是文献结果（`ARGUED`）；灵魂、遗迹、似曾相识是诠释模型（`MODEL`）；只有带 Lean 链接的绿色框是已验证定理。`spatial-attractor-deja-vu` 不引用任何 Lean 定理。
+
+`double-slit-marker` 的绿色框只给纯态标记的 $D^2 + V^2 = 1$（`pure_record_distinguishability_coherence_complementarity`）与捏合去掉的相干质量（`pinching_discarded_coherence_mass`）；混合标记落在圆内用迹距离可辨度，是 Englert 不等式（`ARGUED`）；屏上的高斯包络、二维实向量标记与两种读法是示意模型（`MODEL`）。这一页的青色是条纹对比度 $V$（影子）与擦除后分拣出的两行，品红是路径可辨度 $D$（高）与按路径分拣出的两行。
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
@@ -92,6 +97,11 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第四章 | §4.2 末（“可分辨性只会丢”） | `bloch-noise` · `distance` |
 | 第四章 | §4.3 开头一段之后 | `bloch-noise` · `centre` |
 | 第四章 | 例 `ex-maximally-mixed-center` 之后、第一部小结之前 | `bloch-noise` 完整实验室 |
+| 第六章 | §6.3 可见度 $V$ 与可区分度 $D$ 的两条定义之后 | `double-slit-marker` · `partial` |
+| 第六章 | §6.3 定理 `thm-record-coherence-complementarity` 的证明之后 | `double-slit-marker` · `which` |
+| 第六章 | §6.3 惠勒延迟选择算例 `ex-wheeler-delayed-choice-tradeoff` 之后、文献注记之前 | `double-slit-marker` · `delayed`、`erase` |
+| 第六章 | §6.3 文献注记 `rem-englert-greenberger-literature` 之后 | `double-slit-marker` · `mixed` |
+| 第六章 | §6.3 末（`qubit-geometry` · `area` 之后、§6.4 之前） | `double-slit-marker` 完整实验室 |
 
 ## 增删或修改一张卡之后
 

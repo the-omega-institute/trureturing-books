@@ -689,6 +689,55 @@
           "gid": "D5/S3/QuantumChannels/CoherenceMassBridge.pinching_eq_self_iff_offDiag_eq_zero"
         }
       ]
+    },
+    {
+      "id": "double-slit-marker",
+      "code": "SLIT//MARKER",
+      "title": "双缝与路径标记 · 条纹对比度与路径可辨度落在同一个圆上",
+      "title_en": "The double slit and the path marker · fringe contrast and path distinguishability on one circle",
+      "summary": "双缝后面放一个路径标记：左缝把它写成 r_L，右缝写成 r_R。在互补圆上拖动两者的夹角 α：青色的影子是屏上的条纹对比度 V = cos α，品红的高是路径可辨度 D = sin α，点始终在圆上，D² + V² = 1（Lean 已验证）。落点一个个到达屏上；读标记的方式可以等落点到齐再定：按路径读，两行都没有条纹；按擦除方向读，同一批落点分成条纹与反条纹，合起来仍是原来的屏。标记本身带噪声时，点落进圆内（Englert 不等式，文献结果）。六张实验卡各讲一件事，可以在正文里单独引用。",
+      "summary_en": "A path marker sits behind the double slit: the left slit writes it as r_L, the right one as r_R. Drag the angle α between them on the complementarity circle: the cyan shadow is the fringe contrast on the screen, V = cos α, the magenta height is the path distinguishability, D = sin α, and the point stays on the circle, D² + V² = 1 (kernel-verified in Lean). Hits arrive on the screen one by one; how to read the marker can wait until they are all in: read it for the path and neither row shows fringes; read it to erase and the same hits split into fringes and anti-fringes that add up to the screen as it was. When the marker itself is noisy, the point falls inside the circle (Englert's inequality, a literature result). Each of the six experiment cards makes one of these points and can be cited on its own from the text.",
+      "path": "double-slit-marker/",
+      "thumbnail": "double-slit-marker/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "双缝",
+        "路径标记",
+        "互补圆",
+        "量子擦除",
+        "延迟选择",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Double slit",
+        "Path marker",
+        "Complementarity circle",
+        "Quantum eraser",
+        "Delayed choice",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "本书第六章 §6.3",
+          "label_en": "Chapter 6 §6.3",
+          "href": "../zh/ch06-geometric-product.html#sec-double-slit-delayed-choice",
+          "href_en": "../en/ch06-geometric-product.html#sec-double-slit-delayed-choice"
+        },
+        {
+          "label": "RecordCoherenceComplementarity.lean",
+          "label_en": "RecordCoherenceComplementarity.lean",
+          "href": "{trureturing}/D5/S3/Quantum/PureState/RecordCoherenceComplementarity.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/PureState/RecordCoherenceComplementarity.pure_record_distinguishability_coherence_complementarity"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass"
+        }
+      ]
     }
   ]
 }
