@@ -26,7 +26,7 @@ START = -10.0
 def draw(fig):
     t = fig.t
     ox, oy, R = 160, 232, 186
-    fig.arc(ox, oy, R, -16, 128, "faint", 1.2, dash="3 4")
+    fig.arc(ox, oy, R, -12, 128, "faint", 1.2, dash="3 4")
     angles = [START + k * OMEGA_DT for k in range(4)]
     areas = []
     for k in range(3):
