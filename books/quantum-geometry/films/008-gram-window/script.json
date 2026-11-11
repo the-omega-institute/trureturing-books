@@ -1,0 +1,37 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen"},
+  "music": {"bpm": 76, "progression": "d-minor"},
+  "scenes": [
+    {"id": "fix", "name": "TWO COSINES", "lead": 1.8, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["Take three unit vectors, A, B and C, and fix two cosines: A with B, and B with C.", "取三根单位向量 A、B、C，先定下两条余弦：A·B 与 B·C。"],
+      ["Then C is no longer free. It can only circle around B.", "于是 C 不再自由：它只能绕着 B 转一圈。"]
+    ]},
+    {"id": "window", "name": "GRAM WINDOW", "lead": 0.5, "tail": 0.5, "music": [0.9, 0.6, 0.7, 0.0, 0.3], "lines": [
+      ["As C goes round, the third cosine swings between two edges.", "C 转一圈，第三条余弦 A·C 在两道边之间来回摆动。"],
+      ["The middle is the product of the two cosines; the half-width is the product of the two sines.", "窗口的中点是两条余弦之积 cos θ₁ cos θ₂，半宽是两个正弦之积 sin θ₁ sin θ₂。"],
+      ["At sixty and forty-five degrees, the window runs from the cosine of a hundred and five degrees to the cosine of fifteen.", "θ₁ = 60°、θ₂ = 45° 时，窗口从 cos 105° 到 cos 15°。"]
+    ], "cues": [{"line": 2, "at": 3.0, "kind": "chime"}]},
+    {"id": "volume", "name": "VOLUME", "lead": 0.5, "tail": 0.5, "music": [0.9, 0.8, 0.8, 0.5, 0.4], "lines": [
+      ["The three arrows span a solid. Its volume squared is the Gram determinant.", "三根箭头撑开一块立体，它的体积平方就是格拉姆行列式 det G。"],
+      ["Swap the letters and it reads the same: no vector comes first.", "三个字母任意对调，式子一字不变：谁也不在谁之前。"],
+      ["Inside the window it is positive. At an edge it is zero, and the three lie in one plane.", "窗口内部 det G > 0；贴上窗边时 det G = 0，三根向量落进同一个平面。"],
+      ["Ask for a cosine outside, and it turns negative. No three unit vectors can do that.", "想要窗外的余弦，det G 就成了负数：没有任何三根单位向量做得到。"]
+    ], "cues": [{"line": 3, "at": 2.6, "kind": "impact"}]},
+    {"id": "ellipse", "name": "ELLIPSE", "lead": 0.5, "tail": 0.5, "music": [1.0, 0.8, 0.9, 0.6, 0.5], "lines": [
+      ["Now let the second angle run from zero to a hundred and eighty degrees.", "现在让第二个角 θ₂ 从 0° 走到 180°。"],
+      ["Each window is one vertical slit. Together they fill an ellipse.", "每个窗口是一道竖缝，合起来铺满一个椭圆。"],
+      ["Its rim is the two addition tracks: the cosine of theta one minus theta two on top, and of theta one plus theta two below.", "椭圆的边是两条余弦加法轨线：上沿 cos(θ₁ − θ₂)，下沿 cos(θ₁ + θ₂)。"]
+    ]},
+    {"id": "lock", "name": "OVERLAP ONE", "lead": 0.5, "tail": 0.8, "music": [1.0, 0.8, 0.7, 0.5, 0.4], "lines": [
+      ["Where theta two equals theta one, the top edge touches one.", "θ₂ = θ₁ 处，上沿碰到 1。"],
+      ["An overlap of one means the two unit vectors are equal: C lands on A.", "两根单位向量的内积等于 1，当且仅当它们相等：C 落在 A 上。"],
+      ["Lean has checked this, and that overlap one is an equivalence relation.", "这一条已由 Lean 内核检验，“内积等于 1”还是一个等价关系。"],
+      ["Two cosines lock the third, and no clock ticks anywhere.", "两条余弦锁住第三条，其间没有任何时钟在走。"]
+    ], "cues": [{"line": 2, "at": 1.0, "kind": "stamp"}]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.2, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, chapter twenty-nine.", "《量子计算的几何直觉》· 第二十九章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}
