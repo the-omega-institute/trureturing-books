@@ -174,7 +174,7 @@ $$
 即存在标量 $d \in \mathbb{C}$ 使得 $Ax = dx$（当 $x = 0$ 时该条件自动成立）。
 :::
 
-倘若一个幺正演化 $A$ 只保持某组孤立的标准基射线 $\{e_i\}_{i \in \iota}$ 不变，它仍然可以在不同坐标轴上偷偷乘以各自不同的相位 $e^{i\gamma_i}$（成为对角相位矩阵），从而改变叠加态的方向。但是，只要我们额外再确认 $A$ 保持一族支撑集交叠连通（[`RaySupportConnected`](lean:D5/S3/Quantum/Foundation/RayPhaseRigidity.RaySupportConnected)，即任意两个坐标下标 $i, j \in \iota$ 都可以通过一串测试向量 $x^{(1)}, \dots, x^{(m)}$ 首尾相连，每一步都有某个测试向量在相邻两个坐标上同时非零）的叠加射线，所有局部相位差便被瞬间锁死为同一个全局相位 $c$！
+倘若一个幺正演化 $A$ 只保持某组孤立的标准基射线 $\{e_i\}_{i \in \iota}$ 不变，它仍然可以在不同坐标轴上偷偷乘以各自不同的相位 $e^{i\gamma_i}$（成为对角相位矩阵），从而改变叠加态的方向。但是，只要我们额外再确认 $A$ 保持一族支撑集交叠连通（[`RaySupportConnected`](lean:D5/S3/Quantum/Foundation/RayPhaseRigidity.RaySupportConnected)，即任意两个坐标下标 $i, j \in \iota$ 都可以通过一串测试向量 $x^{(1)}, \dots, x^{(m)}$ 首尾相连，每一步都有某个测试向量在相邻两个坐标上同时非零）的叠加射线，各坐标上的相位因子便都锁定为同一个全局相位 $c$，这些因子之间的相位差归零！
 
 ::: {.theorem #thm-ray-phase-rigidity title="连通射线检验下的幺正全局相位刚性" lean="D5/S3/Quantum/Foundation/RayPhaseRigidity.unitary_phase_of_connected_ray_tests"}
 设 $\iota$ 为任意有限可判等指标类型（允许 $\iota$ 为空类型），$A \in U(\iota, \mathbb{C})$ 为幺正矩阵，$T \subseteq (\iota \to \mathbb{C})$ 为一族测试向量。若：

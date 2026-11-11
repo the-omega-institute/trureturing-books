@@ -1,14 +1,14 @@
 # quantum-geometry 内容准确性覆盖与证据
 
-核对日期：2026-11-11。中文为权威，英文逐段对照。本记录区分内容证据与输出验收；构建成功不证明物理解释成立。只对序曲及第一章作局部事实纠错，不改作品方向、章首题记、Lean 声明或锁文件。现行工作树以主线 `de48d8d0b2a032a9c31e71f5f37132aee4f71a59`（含 PR #55、#56）为基准，沿用首轮在 `f9f092a319b6e46a5a1afd92ff2c4942daefa792` 上取得的证据时另核对依赖。全目标为现有中英 SUMMARY 的 35 个单元，本批覆盖 2 个，33 个待核对。本地核对不等于独立复审、合入或部署完成。
+核对日期：2026-11-11。中文为权威，英文逐段对照。本记录区分内容证据与输出验收；构建成功不证明物理解释成立。只对序曲及第一章作局部事实纠错，不改作品方向、章首题记、Lean 声明或锁文件。本次复审修复从候选 `76ecbfd280a2da37b868507e49c170fc551bd782` 开始，基于主线 `71fc82959991d900a65cc5442ad85f5e32af3652`（含 PR #57）。沿用首轮和此前整合的内容证据时另核对依赖；下文按各候选分别标明输出基线。全目标为现有中英 SUMMARY 的 35 个单元，本批覆盖 2 个，33 个待核对。本地核对不等于独立复审、合入或部署完成。
 
 ## 全书覆盖
 
-“已覆盖”表示两种语言的全部段落、公式、例子和本章图片均已读并按下列证据核查；首轮确认问题修复后仍待独立复审。“待核对”没有内容准确性通过结论。为查证序曲中的引用与导读，局部查阅第 6、10、16、23、24、29、30 章；这些查阅不计入章节覆盖。
+“已覆盖”表示两种语言的全部段落、公式、例子和本章图片均已读并按下列证据核查；本地修复后仍须由独立复审核对。“待核对”没有内容准确性通过结论。为查证序曲中的引用与导读，局部查阅相应的章节段落与分级；这些查阅不计入章节覆盖。
 
 | 序号 | SUMMARY 文件（中英同名） | 中英覆盖 / 状态 | 证据 |
 | --- | --- | --- | --- |
-| 0 | README.md | 已覆盖；确认问题已作最小双语修正 | P1–P8、Q1–Q4、R1–R7 |
+| 0 | README.md | 已覆盖；本批指定问题已作最小双语修正 | P1–P8、Q1–Q4、R1–R7、第三轮导读复核 |
 | 1 | ch01-measurement.md | 已覆盖；确认问题已作最小双语修正 | F1–F6、D1、C1–C5、Q3、R1–R7 |
 | 2 | ch02-born-rule.md | 待核对 | — |
 | 3 | ch03-projectors-and-duality.md | 待核对 | — |
@@ -104,13 +104,13 @@
 
 ### C5 · 第一章图及双语
 
-`fig-01-pairwise-measurement.svg`：检查全部文本标签。SO(3) 保范数正确，因孤立单位箭头没有“相对角”，将含混的 `0 relational invariants` 改为 `no relative angle`。极化公式用实内积；S³/U(1)≅S²、泡利 B 组合及 ZX=−XZ 均正确。绿色栏中的范数律、无特征标与相位结论对应 F1、F3、F5。此前实际图像仍裸列 A=cI，图像替代文本无法充当可见前提；本轮在原 SVG 底栏内分为两行，第二行可见地写明 A 幺正、保持全部坐标射线与测试射线、测试支撑连通后才推出 A=cI、|c|=1。中英替代文本和相位解释同步显式保留测试射线。+1/−1 只示意理想二结果快门。保留原图尺寸、分栏、主题色与静态 SVG；底栏高度由 26 调为 36，未新增组件或运行时。
+`fig-01-pairwise-measurement.svg`：检查全部文本标签。SO(3) 保范数正确，因孤立单位箭头没有“相对角”，将含混的 `0 relational invariants` 改为 `no relative angle`。第 II 栏的极化公式旁现可直接看到 `real inner product`；中英文替代文本保留相同条件。对复单位向量 x=(1,0)、y=(i,0)，两个平方范数均为 2，右边为 0，而内积为 ±i（取决于共轭约定），故这条公式不能直接用作复内积公式。S³/U(1)≅S²、泡利 B 组合及 ZX=−XZ 均正确。绿色栏中的范数律、无特征标与相位结论对应 F1、F3、F5。首轮把原底栏分成两行，第二行可见地写明 A 幺正、保持全部坐标射线、保持全部测试射线、测试支撑连通后才推出 A=cI、|c|=1。该行与中英替代文本在复审修复中均保留。+1/−1 只示意理想二结果快门。保留原图尺寸、分栏、主题色与静态 SVG；首轮底栏高度由 26 调为 36，未新增组件或运行时。
 
-双语逐段核对：六个形式框、定义、六个证明、六极点表及媒体对应；实/复域、未归一化/实际强度、全局/相对相位、零向量/混合态、纯态/一般态、额外测试前提一致。章节题记见 Q3。
+双语逐段核对：六个形式框、定义、六个证明、六极点表及媒体对应；实/复域、未归一化/实际强度、零向量/混合态、纯态/一般态、额外测试前提一致。中文相位段现与原英文一致：A 施加的各坐标相位因子都等于 c，因子间相位差为零。取 A=iI 和连通测试向量 (1,i)，全局因子为 i，因子之比为 1，且态原有的分量之比 i 保持不变。章节题记见 Q3。
 
 ### P1 · README / sec-blindspot-1、sec-blindspot-2
 
-单位方向同向时 o·a=1，沿视线正交投影为零横向位移；这是理想几何观察图像，不是把真实有限宽光束或粒子实验还原为一条数学线的证明。转盘的投影 x(t)=cosωt，速度 −ωsinωt：中心模速最大，端点为零，90°/270° 同位置反向速度；所谓弹簧/隐变量均属修辞比较。对单位 a,b，a∧b=sinθ Î。固定 a=e₁、令 b(t)=cos(ωt)e₁+sin(ωt)e₂ 时，a∧b(t)=sin(ωt)e₁∧e₂：改变的是有符号面积，平面未转动；两方向共同转动时楔积反而不变。序曲两处现均把匀速转动归于平面内方向，保留转盘意象。在定向欧氏平面 Î²=−1，对平面向量两次 90° 转向为 −I。推广到任意量子门或一般高维纯态的散文意象不当作形式结论。图注已给单位长度约定。
+单位方向同向时 o·a=1，沿视线正交投影为零横向位移；这是理想几何观察图像，不是把真实有限宽光束或粒子实验还原为一条数学线的证明。转盘的投影 x(t)=cosωt，速度 −ωsinωt：中心模速最大，端点为零，90°/270° 同位置反向速度；所谓弹簧/隐变量均属修辞比较。对单位 a,b，a∧b=sinθ Î，θ 按固定定向 Î 从 a 转到 b。以 a=e₁、b=±e₂ 为例，无向夹角均为 π/2，楔积却分别为 ±Î。固定 a=e₁、令 b(t)=cos(ωt)e₁+sin(ωt)e₂ 时，a∧b(t)=sin(ωt)e₁∧e₂：改变的是有符号面积，平面未转动；两方向共同转动时楔积反而不变。序曲两处现均把匀速转动归于平面内方向，保留转盘意象。在定向欧氏平面 Î²=−1，对平面向量两次 90° 转向为 −I。推广到任意量子门或一般高维纯态的散文意象不当作形式结论。图旁可见说明给出单位长度和有向角约定，见 P8。
 
 ### P2 · README / sec-blindspot-3、rem-prelude-sphere-literature
 
@@ -150,7 +150,7 @@ Lindemann–Weierstrass 使用的是互异代数数的指数在代数数域上�
 
 第八部导读按中英文第 29 章的佩尔方程、奇素数模 4 分裂、复椭圆曲线环面与格拉姆补全段落核对；只说用补全阐释无时间因果，不把物理诠释当成定理，也不用单个行列式条件代替一般矩阵的半正定性。第 30 章把亚指数 3-SAT 作为预印本主张，把场与线作为类比；导读沿用这一分级，未独立审查预印本。按该章的示意归一化，log₂(558)/√558 ≈ 0.386255，log₁₀(2⁵⁵⁸) ≈ 167.975；导读只用作交叉尺度的数量级比较。该章的二次平流结论核对到当前 pin 上的 `quadratic_closure_iff` 与 `AdvectionClosureInstance.no_exact_closure`，后者限定在五模态傅里叶实例及其低频投影，不外推到任意流体截断或三维方程的整体正则性。第 29–30 章及其余各章的正文、证明与来源仍待逐章审查。
 
-`fig-00-dimensional-ladder.svg` 全部标签已查：O·A=1/θ=0 按单位向量；P²=P 是投影；A∧B=sinθÎ 与 Î²=−1 按定向欧氏平面单位方向；三轴正交与 I₃=e₁e₂e₃ 按正取向；⋆₄I₃=e₄ 和一般嵌入依赖外围维数；底栏几何积、三角恒等式和不动点近似正确。STAGE III 的 3D 指外围 ℝ³，球面自身维数为 2；CLOSURE·∞ 是迭代/哲学意象，不是新无限维态定理。只补图注约定，未改 SVG。
+`fig-00-dimensional-ladder.svg` 全部标签已查：O·A=1/θ=0 按单位向量；P²=P 是投影；A∧B=sinθÎ 与 Î²=−1 按定向欧氏平面单位方向；三轴正交与 I₃=e₁e₂e₃ 按正取向；⋆₄I₃=e₄ 和一般嵌入依赖外围维数；底栏几何积、三角恒等式和不动点近似正确。STAGE III 的 3D 指外围 ℝ³，球面自身维数为 2；CLOSURE·∞ 是迭代/哲学意象，不是新无限维态定理。图旁的中英可见说明明确 O、A、B 为单位向量，并注明平面栏的 θ 按固定定向 Î 从 A 转到 B；原替代文本与 SVG 保留。若 O=2A 且 A 为单位向量，则 O·A=2；若 A=e₁、B=2e₂，则楔积为 2Î。两例分别反证省略单位条件后第 0 栏和第 II 栏的简式。
 
 双语比对覆盖了序曲全部段落、列表和表格。英文“in truth”用于“似乎在球外”时过强，已恢复 seems；另一个“In truth, every sphere…”对应中文“实际上”，并非同一问题，保留。一般 d 的纯态真子流形、Hodge 外围维数、Berry 模 2π、实/复代数读数域和尾项起点语义一致。
 
@@ -216,13 +216,13 @@ PDF 查看范围以第二章起点为界，包含序曲、第一部扉页和第�
 
 本轮 PDF 首批查看范围：中文屏幕物理页 9–25、中文印刷 11–28、英文屏幕 10–28、英文印刷 11–30；增加的英文屏幕页源于文字重排。版式验收和账本抽看不增加任何章节内容覆盖。未变的主题/语言切换及宽表交互沿用已有证据，本轮无工具、可视化或交互代码变更，未重跑无关测试套件。
 
-## 现行整合与输出验收
+## 此前整合与输出验收（de48d8d）
 
 与旧修复候选相比，两版序曲仅少第一、二部的旧发布标签；两版第一章和图 01 与该候选逐字节相同，图 00、四条双语题记、手稿两份文件、两版 SUMMARY 与第 6 章正文也未变。因而原有计算（含 R1–R6 的数学边界和反例）、原话取证及已核对的文献段落沿用其原执行记录；换钉的依赖已按上文重新比较。两版简介采用现行主线原文，核对了八部三十章和第八部梗概。主线第 24 章的反正弦级数更新及第 29–30 章等其他正文均未纳入本轮内容覆盖。未改工具、模板或可视化代码，未重跑其独立测试。
 
 验收后观察到本地 `origin/main` 更新到 `71fc82959991d900a65cc5442ad85f5e32af3652`（PR #57）。这次更新仅涉及待核对单元，未改序曲、第一章、两图、简介、目录、Robertson 链接所在的第 6 章或锁文件。以下输出仍对应指定的 `de48d8d` 整合工作树。
 
-本地证据根目录为 `build/content-accuracy/integration-381/`。以下均为现行工作树的实际验收。
+本地证据根目录为 `build/content-accuracy/integration-381/`。以下均为当时整合工作树的实际验收。
 
 | 操作 | 结果 | 证据 |
 | --- | --- | --- |
@@ -233,9 +233,70 @@ PDF 查看范围以第二章起点为界，包含序曲、第一部扉页和第�
 | 两份 EPUBCheck、解包及渲染查看 | 两份均 0 错误、0 警告，未跳过；各检查 24 条内部链接、2 张图及完整简介，查看首批 XHTML 的 MathML、表格、图和修订段。以浏览器读取 EPUB 内的文件，未在 Apple Books 导入实测 | `export-verification.json`、`epub-layout.json`、`epub/*contact.png` |
 | 现行固定链接和站点下载校验 | HTML 两版各有六枚正式徽章；HTML、PDF、EPUB 各版本的首批 18 条 Lean 链接逐条对应现行 pin 与正确声明行号。序曲至第 6 章的两条 Robertson 跳转及目标源码已核对。站点六份下载与新建成品字节一致 | `links.json` |
 
+## 第二轮图示修复与输出验收（第三轮修订前，基于 71fc829）
+
+图示缺失可见前提的专项复核限于序曲和第一章的四个中英图片引用、两张实际加载的静态 SVG。修复前（`76ecbfd`）枚举了全部 49 个文本节点：28 个标签或比喻，18 个已有可见适用范围或无需补前提，3 个缺口为图 00 的 `O·A=1`、`A∧B=sinθÎ` 和图 01 第 II 栏的极化式。图 00 两处由紧邻的中英可见说明限定，图 01 由公式旁的实内积标签限定；现有图 01 相位栏的四项前提均保留。两图无脚本或嵌套图像，修复后 50 个文本节点均在各自视框内；该检查不外推到其他图片、交互可视化或章节。
+
+本地证据在 `build/content-accuracy/repair-r2/`。`content.json` 与同目录的节点枚举、语义分类记录给出基线和反例，确认两版题记、形式框、定义、证明、图片引用、英文第一章、图 00、简介和锁文件均未变。先前 `38196c6` 的源码、原话、工具和可视化证据只用于未变的输入；上节 `de48d8d` 的输出仍保留为历史记录。
+
+| 操作 | 结果 | 证据 |
+| --- | --- | --- |
+| `./tbook check`；无缓存重建 `./tbook build html pdf epub site --book quantum-geometry` | 0 错误、0 警告；生成中英 HTML、四份 PDF、两份 EPUB 和本地站点，六份站点下载与成品逐字节相同。既有视频仍用海报回退 | `check.txt`、`build.txt`、`exports.json` |
+| 经 `./tbook serve --port 8886` 浏览 | 中英 × navy/light × 1440×1000 / 390×844 × 两单元，共 16 种组合；查看修改段与两图，无整页横向溢出、公式错误或裁切。四个图片引用均加载与源码同字节的 SVG，第 II 栏实内积标签与相位栏均在原图边界内 | `browser/report.json`、`browser/*-contact.png`、`browser/*-native.png` |
+| 查看四份 PDF 实际渲染 | 按图 00 与说明、转盘段、图 01、相位段的顺序，物理页为中文屏幕 9/10/19/23、中文印刷 11/12/22/26、英文屏幕 11/12/22/26、英文印刷 12/13/24/28。已查改动处的文字、公式与图示，无裁切或重叠 | `exports.json`、`pdf/*-contact.png` |
+| 两份 EPUBCheck、解包并查看 XHTML | 均 0 错误、0 警告，未跳过；八种浏览器组合中查看修改段、MathML 和实际图示。两图资源均与源码逐字节相同；未导入 Apple Books 实测 | `exports.json`、`epub/report.json`、`epub/*-contact.png` |
+
+## 第三轮导读修复与输出验收（本次补修前）
+
+中文、英文序曲仅改 `sec-contract` 表的第四、五部两行。本轮以 `76ecbfd` 上已核验的第二轮修复封存清单为前态，逐字节确认双语第一章、两张 SVG、书籍元数据及锁文件相同；双语序曲其余行也完全相同。沿用未变的题记、形式框、定义、证明、工具、可视化及两图修复后 50 个可见文字节点的核查；上节输出是修订前的历史证据。
+
+- **第四部**：[第 13 章的局部边缘态](../../books/quantum-geometry/zh/ch13-entanglement-and-chsh.md#sec-bell-local-zero)以及[锁定声明 L83][bell-marginal-src]给出固定贝尔态在迹掉第二系统后的边缘态。独立在基底 $00,01,10,11$ 下取 $\rho_{ij,kl}=\delta_{ij}\delta_{kl}/2$；分别对第一、第二系统求部分迹，两个结果都为 $I_2/2$，行列式为 $1/4$、秩为 2。三个泡利期望值均为 0，故两个局部布洛赫向量均为零。约化态非零，也不是纯态射线。英文原“vanishing local rays”与中文未指明归零对象的说法已统一修正。
+- **第五部**：[第 20 章的 CV 条目](../../books/quantum-geometry/zh/ch20-complexity-and-spacetime.md#conj-complexity-equals-volume)是无 `lean` 属性的开放猜想：在指定半经典全息态、参考态、局域门集和正则化等条件下，重整化电路复杂度与锚定边界的最大类空切片的重整化空间体积成正比。[最小深度声明 L57][open-depth-src]在 $1\le\kappa$、$2\kappa\le N$ 下给出特定开放边界可积电路族的最小并行层数。独立枚举 $\kappa=2$、$N=8,11$ 时的所有配置，用共享站点的先后依赖算最短排程，分别得 3、4 层；每个电路却分别有 9、12 道门。两种计量不同。导读现并列电路复杂度与开放的复杂度—体积猜想。
+
+逐行对照中英文导读和目前章节的对应段落。下表只记录导读范围、主题归属和分级，不对所指章节作全文审查。
+
+| 导读 | 当前双语章节定位与分级 |
+| --- | --- |
+| 第一部（1–4） | 第 1 章的范数律、Weyl 关系与射线刚性解释线性代数；第 2 章 `thm-born-modulus-square` 和 `thm-rank-one-born-pairing` 在标准态与测量约定下做玻恩归约，第 3 章 `def-record-measurement`、`thm-complementary-pythagoras` 给记录测量和分解，第 4 章 `thm-nonselective-marginal` 与 `sec-ch04-2` 对应部分迹及信道例。孤立粒子与第 3 点是导读的哲学框架。 |
+| 第二部（5–8） | 第 5 章 `thm-relative-complex-structure-square`、`sec-euler-to-rotor`，第 6 章 `sec-inner-particle-outer-wave` 的五公设几何对照表与 `sec-interactive-qubit-geometry` 实验室，第 7 章 `rem-qsl-zeno-literature`，第 8 章 `prop-landauer-identity-from-balances`、`prop-surviving-copy-blocks-reversal` 和 `rem-landauer-thermodynamic-bridge-literature`。五公设的“统一”对应解释性的对照表；单条几何积恒等式不推出这些公设。兰道尔文献原理与书中带平衡前提的恒等式分别归属。 |
+| 第三部（9–12） | 第 9 章 `sec-two-angle-state-address` 的两角寻址；第 10 章 `sec-spherical-order-and-berry`、`thm-gram-unitary-reconstruction` 对应贝里相位与完整复 Gram 数据的重构，静态顺序无关不等于操作可交换；第 11 章 `rem-pulses-literature` 的拉比面积与虚拟 $Z$ 是硬件文献，后者不加实体脉冲；第 12 章 `rem-mbqc-gradients-literature`、`sec-equator-concentration-limits` 对应 MBQC、梯度与测度集中。 |
+| 第四部（13–16） | 第 13 章 `sec-bell-local-zero`、`ex-bell-chsh-45deg` 对应本轮修订与固定设置的 CHSH 值；第 14 章 `sec-no-cloning-overlap`、`rem-error-correction-anyons-literature`，第 15 章 `sec-grover-invariant-plane`、`sec-qft-phase-gears`、`sec-shor-order-reconstruction`，第 16 章 `rem-qsvt-walks-literature`、`rem-solovay-kitaev-literature`。具体冻结例与通用纠错、算法或编译文献分开。 |
+| 第五部（17–20） | 第 17 章 `thm-hyperbolic-norm` 和 `sec-lorentz-normalization` 的洛伦兹度规，第 18 章 `sec-chiral-factorization`、`rem-dirac-zitterbewegung-literature`、`rem-gauge-holonomy-literature` 的旋量与规范曲率，第 19 章 `rem-ryu-takayanagi-literature` 的静态 RT 余维二极小曲面属于文献结果，第 20 章 `thm-open-circuit-min-depth` 与 `conj-complexity-equals-volume` 分别对应特定电路的正式结论和开放问题。RT 与离散桥图定理的分级不同；见下列另行记录。 |
+| 第六部（21–24） | 第 21 章 `sec-ch21-2` 的相对语义对角线及与经典哥德尔不完备性的结构类比；第 22 章 `thm-riemann-zeta-euler-product`、`thm-cayley-critical-line-criterion` 和开放的 `conj-riemann-hypothesis`；第 23 章 `rem-diophantine-z-in-q-literature` 区分文献中的一阶定义与开放的存在性定义；第 24 章 `rem-banach-dottie-hairy-ball-literature` 的超越不动点及自指主题。全知、球外与自指合拢为作者诠释。 |
+| 第七部（25–28） | 第 25 章 `sec-geometric-state-python-engine`、第 26 章 `sec-zyz-rotor-compiler-python` 是工程实现；第 27 章 `sec-lean-kernel-audit-architecture`、`sec-parts-i-to-iii-frozen-audit-table` 与第 28 章 `sec-audit-rank-one-born-and-pairing`、`sec-parts-iv-to-vi-frozen-audit-table` 对应已有形式化与源码审计。没有把编译器实现整体记为冻结定理。 |
+| 第八部（29–30） | 第 29 章 `sec-coda-primes-elliptic-curves`、`thm-ch29-gram-rigidity-and-pell` 对应数论主题和格拉姆补全，后者用于阐释无时间因果；第 30 章 `sec-coda-eth-tensor-rank-and-cosmic-horizon` 是预印本主张和示意尺度，`sec-coda-navier-stokes-and-p-vs-np` 涵盖场/线类比与兰姆双向量，`thm-coda-quadratic-advection-no-closure` 仅为五模态实例。详细边界见 P8。 |
+
+补修前另行记录：第五部导读把黑洞面积熵（英文点名 Bekenstein–Hawking）列为核心内容，但第 17–20 章的正文只在第 19 章 RT 文献注末列 Bekenstein 1973 作为背景，并未陈述黑洞面积熵公式。第 20 章中文 `sec-timeless-crystal-page-numbers` 还将同一 $L$ 称为“顺序门计数”，与前文定义的并行层数不符；对应英文是 “sequential gate layers”。其中导读主题缺口已在下节的有界补修中关闭；第 20 章正文问题保留为该章待核对事项，本批不改。
+
+补修前证据在 `build/content-accuracy/repair-r3/`，`content.json` 含本轮两版序曲的前后哈希、封存依赖、精确计算以及两条固定声明的源码和冻结状态片核对。该节产物从当时修订后的正文无缓存生成；因下节再次改动导读，此处输出只作为补修前历史记录。
+
+| 操作 | 结果 | 当时证据 |
+| --- | --- | --- |
+| `./tbook check`；`TBOOK_CACHE=0 ./tbook build html pdf epub site --book quantum-geometry` | 0 错误、0 警告；中英 HTML、4 份 PDF、2 份 EPUB、本地站点构建成功；站点 6 份下载与成品逐字节相同。既有视频使用海报回退 | `check.txt`、`build.txt`、`exports.json` |
+| 经 `./tbook serve --port 8887` 实际查看导读 | 两版序曲 × navy/light × 1440×1000 桌面 / 390×844 手机，共 8 组合。第四、五部修订可读；手机可滚到末列，无整页横向溢出、页面错误、失败请求、坏图或公式渲染错误 | `browser/report.json`、`browser/*-contact.png` |
+| 四份 PDF 的相关页实际渲染并查看 | 两处修订在中文屏幕物理页 15、印刷页 17，英文屏幕页 17、印刷页 18；四版表格无可见裁切或重叠 | `exports.json`、`pdf/roadmap-contact.png` |
+| 两份 EPUBCheck、解包并查看 XHTML | 两份均 `valid=true`，0 错误、0 警告，未跳过。两版 `EPUB/text/ch002.xhtml` 的两条修订、表格和 MathML 已在浏览器查看；未在 Apple Books 导入 | `exports.json`、`epub/report.json`、`epub/contact.png` |
+
+## 第三轮有界补修：第五部主题承诺与当前输出
+
+本次仅从中文序曲第五部导读删除“黑洞面积熵与”，同步从英文删除 “Bekenstein–Hawking horizon area and ”；其余正文逐字节不变。第 19 章中英 `rem-ryu-takayanagi-literature` 实际陈述的是静态、领先阶半经典 AdS/CFT 的 RT 纠缠熵—面积公式，指定边界子区域、同调条件及余维二极小曲面，按文献结果分级；Bekenstein 1973 只在注末作为背景引用。保留 RT 主题、量子电路复杂度与开放的复杂度—体积猜想即可与现有正文对应，不补写黑洞熵章节。
+
+上表八行的主题、对象和分级语义核对沿用第三轮逐行记录及每种语言 54 个章节锚点对应；本次只修该有限范围中最后一项已确认的主题落差。锚点计数本身不替代语义核对，也不等于已审完后文章节。两张 SVG 的 50 个文字节点、首批形式声明/源码、证明、题记、工具及可视化证据按未变依赖复用；不重记为本次新执行。第 20 章中文将并行层数 $L$ 称作“顺序门计数”的问题仍待该章审查，未修改。
+
+本次证据单独位于 `build/content-accuracy/repair-r3-followup/`。`content.json` 记录两版序曲均只在第 133 行作上述删除、其余字节不变，另外 366 个封存源文件均未变，并核对第三轮封存依赖及八行双语锚点。以下产物全部在这次删除后重新生成；`repair-r3/` 及更早输出保持历史标签，不作当前输出验收。
+
+| 操作 | 结果 | 本次证据 |
+| --- | --- | --- |
+| `./tbook check`；`TBOOK_CACHE=0 ./tbook build html pdf epub site --book quantum-geometry` | 0 错误、0 警告；中英 HTML、4 份 PDF、2 份 EPUB 和本地站点构建成功；站点六份下载与成品逐字节相同 | `check.txt`、`check.json`、`build.txt`、`build.json`、`exports.json` |
+| 经 `./tbook serve --port 8888` 实看导读 | 中英 × navy/light × 1440×1000 桌面 / 390×844 手机，共八种组合。第五部实际单元格完整可读；英文手机表格可横滚至末列。无整页横向溢出、页面错误、失败请求、坏图或公式渲染错误；第四部先前修正也保留 | `browser/report.json`、`browser/zh-part5-contact.png`、`browser/en-part5-contact.png` |
+| 四份 PDF 相关页渲染并实看 | 中文屏幕物理页 15、印刷页 17，英文屏幕页 17、印刷页 18。第五部三列与修改后的 RT 主题均可读，无裁切或重叠 | `exports.json`、`pdf/part5-contact.png`、`pdf/*-part5.png` |
+| 两份 EPUBCheck、解包并实看 XHTML | 两份均 `valid=true`，0 错误、0 警告，未跳过。`EPUB/text/ch002.xhtml` 的八行表格、MathML 及删除后的 RT 主题已核对；中英 × 浏览器明/暗色偏好 × 760×950 桌面 / 390×844 手机，共八种组合，第五部单元格完整可读 | `exports.json`、`epub/report.json`、`epub/zh-part5-contact.png`、`epub/en-part5-contact.png` |
+
+EPUB 浏览器预览不等于 Apple Books 原生主题验收，尚未导入 Apple Books；既有视频工具链及海报回退限制沿用此前记录。本次不新增已提交测试，不重跑未变工具或可视化套件。最终独立复审 R4、PR、CI 与 Pages 由调用方后续办理。
+
 ## 待办边界
 
-其余 33 单元全部待核对。首次三席独立审查已结束，确认的准确性问题按 R1–R7 修复；调用方继续暂存三处已解冲突的文件与更新的证据记录、完成变基并更新现有 PR #53，随后安排三席独立复审，跟进合入、CI 与 Pages 部署。Q4 无待作者裁定的出处事项。`book.toml` 的部章计数已由主线修正，计数核对依据 SUMMARY，不构成对新增章节正文的认证。Apple Books 导入仍未实测；本地视频工具链缺失导致既有视频使用海报回退。
+其余 33 单元全部待核对。首次三席独立审查已结束，确认的准确性问题按 R1–R7 修复；现行候选已基于 `71fc829`，保留第二轮图示修复，第三轮两项指定导读问题及下节的第五部主题残留已修正；最终独立 R4 仍待执行。现有 PR #53 的更新、修订后的独立复审核对、合入、CI 与 Pages 部署仍由调用方跟进。Q4 无待作者裁定的出处事项。`book.toml` 的部章计数已由主线修正，计数核对依据 SUMMARY，不构成对新增章节正文的认证。Apple Books 导入仍未实测；本地视频工具链缺失导致既有视频使用海报回退。
 
 [par-src]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/QuantumContext/ParallelogramNormLaw.lean#L22
 [par-frozen]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/Golden/Frozen/state/D5/S3/QuantumContext/ParallelogramNormLaw.lean.json
@@ -254,3 +315,5 @@ PDF 查看范围以第二章起点为界，包含序曲、第一部扉页和第�
 [dawson-paper]: https://arxiv.org/pdf/quant-ph/0505030
 [rs-src]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/QuantumBounds/RobertsonSchrodinger.lean#L46
 [mixed-src]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/QuantumBounds/Designs/MixedStateRobertson.lean#L68
+[bell-marginal-src]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.lean#L83
+[open-depth-src]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.lean#L57
