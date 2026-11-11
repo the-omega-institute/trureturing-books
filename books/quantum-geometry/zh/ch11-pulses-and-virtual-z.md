@@ -87,6 +87,10 @@ $$
 最后的牵连项 $-\frac{1}{2}\omega_0 Z = -H_0$ 将背景载频项 $H_0$ 精确抵消：在无外加驱动的旋转参考系中，布洛赫向量保持静止。
 :::
 
+::: {.viz src="pulse-area-virtual-z" preset="carrier" height="500"}
+**实验室系里，赤道在飞转，两极不动。** 没有驱动时，琥珀色的态从 $\lvert +\rangle$ 出发，绕紫色的 $z$ 轴每 $0.2\,\mathrm{ns}$ 转一圈；北极与南极的两个白点纹丝不动，正是 [@thm-hermitian-eigenstate-stationary] 所说的能量本征态。左边的虚线是载频参考 $\cos\omega_0 t$，在 $0.4\,\mathrm{ns}$ 里也走了两个周期。
+:::
+
 ## 共振微波与脉冲面积 {#sec-resonant-pulse-area}
 
 消去背景载频后，共振横向微波驱动在旋波近似（RWA）下化为固定赤道轴脉冲面积积分的标准物理推导汇总如下（图 11 中栏；[@rem-rwa-pulse-area-literature]）。
@@ -117,9 +121,17 @@ $$
 
 这一有效模型从硬件层面呼应了章首题记的几何直觉（`MODEL`）：量子态对应球面方向，而驱动其转向的控制脉冲在时域包络上表现为一个具有明确面积的几何结构（[@rem-rwa-pulse-area-literature]）。
 
+::: {.viz src="pulse-area-virtual-z" preset="quarter" height="500"}
+**面积 $\pi/2$，转四分之一圈。** $10\,\mathrm{MHz}$、$25\,\mathrm{ns}$ 的方波：左边品红的面积是 $\pi/2$；右边琥珀色的态从北极出发，绕紫色的 $X$ 轴转过同样大小的品红扇形，停在赤道上，$P(0) = 1/2$。面积律是文献结果（[@rem-rwa-pulse-area-literature]），未在本书形式化。
+:::
+
 ## 有序脉冲与误差界 {#sec-ordered-pulse-control}
 
 在上一节的共振脉冲面积公式里，我们享受了一项至关重要的便利：单段脉冲内部相位 $\varphi$ 固定，生成元在时间上处处对易。然而，一旦我们在电路里**依次串接三个不同方向的脉冲生成元** $A, B, C$（比如为了合成多轴旋转或探测三阶非对易几何响应），指数生成元在有限步长 $t > 0$ 下的高阶非对易展开项就会浮现出来。
+
+::: {.viz src="pulse-area-virtual-z" preset="order" height="500"}
+**同样两个脉冲，次序一换，终点不同。** 两个面积 $\pi/2$ 的方波，先绕 $X$ 再绕 $Y$：北极走到 $-y$；白色虚线是先 $Y$ 后 $X$，走到 $+x$。这只是两个不对易转动的数值演示，不是下面 [@prop-ordered-pulse-error] 的积分核误差界。
+:::
 
 为了在严格的数学分析层面刻画三段有序脉冲积分核与理想三矩阵乘积迹 $\Tr(ABC)$ 之间的定量偏差，Lean 模块 `OrderedThreePulseTrace` 针对有限指标集 $I$ 上的任意复方阵 $X \in M_I(\mathbb{C})$ 与实步长参数 $s \in \mathbb{R}$，定义了积分脉冲核 `pulse0`：
 
@@ -163,6 +175,10 @@ $$
 
 与需要非零模拟脉冲时长积累包络面积的赤道驱动门（[@rem-rwa-pulse-area-literature]）相对，超导硬件通过轴向共轭恒等式与软件参考系相位寄存器实现零附加模拟时长的**虚拟 $Z$ 门**调度（图 11 右栏；具体恒等式与符号约定汇总于 [@rem-virtual-z-scheduling-literature]）。
 
+::: {.viz src="pulse-area-virtual-z" preset="vz" height="500"}
+**虚拟 $Z$：$0\,\mathrm{ns}$，只改相位，读数不变。** 从 $\lvert +\rangle$ 出发，电路是先 $Z(90^\circ)$ 再 $X(\pi/2)$。左边紫色的竖线宽 $0\,\mathrm{ns}$，脉冲改以 $\varphi - \lambda = -90^\circ$（$-Y$）发出：实线绕 $-Y$ 转到北极；白色虚线照字面先绕竖轴转到 $+y$，再绕 $X$ 转到北极。两者都在北极，青色的影子相同，$P(0) = 1$（[@rem-virtual-z-scheduling-literature]，文献结果，未在本书形式化）。
+:::
+
 ::: {.remark #rem-virtual-z-scheduling-literature title="单比特轴向共轭恒等式与被动虚拟 Z 相位寄存器调度（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 对绕竖直能量轴旋转 $R_z(\lambda) = \exp\bigl(-\frac{i}{2}\lambda Z\bigr) = \operatorname{diag}(e^{-i\lambda/2}, e^{+i\lambda/2})$ 与赤道驱动门 $R_\varphi(\theta) = \exp\bigl[-\frac{i}{2}\theta(\cos\varphi\, X + \sin\varphi\, Y)\bigr]$，由 $R_z(\lambda) X R_z(-\lambda) = \cos\lambda\, X + \sin\lambda\, Y$ 与 $R_z(\lambda) Y R_z(-\lambda) = -\sin\lambda\, X + \cos\lambda\, Y$ 立得轴向共轭恒等式与右移交换恒等式（工程调度出处见 [@rem-pulses-literature]）：
 
@@ -186,6 +202,10 @@ $$
    R_x(\pi/2)\,R_z(\pi/2)\lvert +\rangle = R_z(\pi/2)\,R_{-\pi/2}(\pi/2)\lvert +\rangle = e^{-i\pi/4}\lvert 0\rangle,
    $$
    测得 $\lvert 0\rangle$ 概率为 $P(0) = 1$：省去前置 $R_z(\pi/2)$ 并将后续脉冲物理驱动角设为 $\varphi_{\mathrm{phys}} = 0 - \frac{\pi}{2} = -\frac{\pi}{2}$（$-Y$ 脉冲）同样将 $\lvert +\rangle$ 送至北极 $\lvert 0\rangle$（$P(0) = 1$），而误取 $+\frac{\pi}{2}$（$+Y$ 脉冲）则会将其送至南极 $\lvert 1\rangle$（$P(0) = 0$）。
+:::
+
+::: {.viz src="pulse-area-virtual-z" preset="sign" height="500"}
+**相位改错了符号，就到了对面的极点。** 同一个电路，脉冲却以 $\varphi + \lambda = +90^\circ$（$+Y$）发出：实线绕 $+Y$ 转到南极，$P(0) = 0$；白色虚线（电路本来的意思）仍停在北极。
 :::
 
 从更一般的算子代数视角看，“推动量子态向前演化（薛定谔图像）”与“保持量子态不动、把测量效应算符向后拉回更新（海森堡参考系更新图像）”之所以给出完全相同的实验读数，源于迹配对的步进拉回恒等式。在 Lean 模块 `ObserverPullbackTraceIdentity` 中，设 $d$ 为有限可判等指标类型，$\mathrm{MatrixAlgebra}\,d$ 为 $d\times d$ 复 $C^*$-矩阵代数，$\mathrm{DensityState}\,d$ 为其正半定迹一状态子类型，$\mathrm{QuantumChannel}\,d\,d$ 为完全正保迹（CPTP）量子信道，而 $\operatorname{evolvedState}(\mathrm{channel}, t, \rho)$ 表示状态映射 $\operatorname{mapState}(\mathrm{channel})$ 在离散步数 $t \in \mathbb{N}$ 下的迭代。
@@ -247,12 +267,24 @@ $$
    再次强调：该数值是三个积分核 `pulse0` 的实部迹偏差上界，既不是硬件量子门的不保真度，也不是上面的微波脉冲面积公式本身。
 :::
 
+::: {.viz src="pulse-area-virtual-z" preset="gauss" height="500"}
+**形状不同，面积相同，终点相同。** 高斯包络的面积同样是 $\pi/2$：中间高、两头低，琥珀色的态先慢、后快、再慢，白色虚线的方波匀速走；到 $25\,\mathrm{ns}$ 两者停在同一点（[@ex-five-ghz-pi-over-two] 第 2 步）。
+:::
+
 ::: {.remark #rem-pulses-literature title="拉比脉冲面积与虚拟 Z 门（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 关于超导与自旋量子硬件中的微波脉冲控制及虚拟 $Z$ 门实现，其物理建模假设与文献出处如下：
 
 1. **虚拟 $Z$ 门与零附加模拟脉冲时长**（D. C. McKay, C. J. Wood, S. Sheldon, J. M. Chow, & J. M. Gambetta, *Efficient Z gates for quantum processors*, Phys. Rev. A **96**, 022330, 2017, DOI `10.1103/PhysRevA.96.022330`；单比特旋转约定参见 M. A. Nielsen & I. L. Chuang, *Quantum Computation and Quantum Information*, 2010, §4.2）：通过更新参考系相位寄存器 $\phi_{\mathrm{frame}} \mapsto \phi_{\mathrm{frame}} + \lambda$（并在把前置 $R_z(\lambda)$ 推向最终 $Z$ 读出时将后续赤道脉冲的物理驱动相位设为 $\varphi_{\mathrm{phys}} = \varphi - \phi_{\mathrm{frame}}$）实现 $Z$ 轴旋转，在理想脉冲调度下具有零附加模拟脉冲时长（$\Delta t_{\mathrm{analog}} = 0$）。这是一项工程调度约定，不等于零经典数字延迟，也不意味着实际硬件中的总物理错误率为绝对的 $0\%$（实际系统仍受相位寄存器有限位数、混频器偏置与背景退相干限制）。
 2. **共振脉冲面积公式的前提条件**：公式 $\theta = \int_0^T \Omega(t)\,dt$ 成立需要同时满足载频共振（$\omega_d = \omega_0$）、单脉冲内驱动相位/转轴固定、理想孤立二能级模型（忽略向高能级 $\lvert 2\rangle$ 的泄漏及 DRAG 修正）以及旋波近似（RWA，$\Omega \ll \omega_0$）。若脉冲相位 $\varphi(t)$ 随时间变化或存在失谐 $\Delta(t) \neq 0$，生成元在不同时刻不再对易，一般须保留时间排序算符 $\mathcal{T}\exp\bigl(-i\int_0^T H_{\mathrm{rot}}(t)\,dt\bigr)$。
 3. **冻结定理的精确职责边界**：本章的 [@cor-frame-pullback-readout] 仅在显式迹对偶假设 `hduality` 下证明离散步数 $t \in \mathbb{N}$ 的薛定谔—海森堡迹读出恒等式，并不对模拟脉冲时长、驱动校准、环境退相干、能级泄漏或门错误率作出形式化证明。
+:::
+
+::: {.viz src="pulse-area-virtual-z" preset="detune" height="500"}
+**失谐时，面积不再说了算。** 同一个面积 $\pi/2$ 的高斯包络，驱动频率偏了 $5\,\mathrm{MHz}$：紫色的转轴倾出赤道并随包络晃动（紫色虚线是轴端走过的路），琥珀色的态没有停在白色虚线（不失谐）的终点上，差了约 $26^\circ$。页面把脉冲切成上千小段按时间次序相乘，这是数值演示。
+:::
+
+::: {.viz src="pulse-area-virtual-z" height="560"}
+脉冲面积与虚拟 $Z$ 的完整实验室：拖包络的顶与右端改面积和时长，改驱动相位、失谐与虚拟 $Z$ 的角度，加第二个脉冲并换序，或在实验室系与旋转系之间切换。绿色框只引用本章用 Lean 验证的定理；面积律与虚拟 $Z$ 调度是文献结果，未在本书形式化。
 :::
 
 到这里，我们已经看到了一个意味深长的趋势：原本以为必须靠物理外力去硬推量子态的 $Z$ 门，其实只需要**移动观察者自己的参考系注意力（相位基准）**就能零耗时完成。如果沿着这个方向再往前推到极致——**我们能不能干脆连所有的单比特门和多比特门都不再去“硬推”量子态，而是先铺好一张静止的纠缠网络，仅仅靠观察者一步步移动测量视线（注意力方向），就把整场通用量子计算全部算完？** 让我们推开第三部收官之章——[第十二章](ch12-measurement-computation-and-gradients.md)的大门。

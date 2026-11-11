@@ -87,6 +87,10 @@ $$
 where the frame term $-\frac{1}{2}\omega_0 Z = -H_0$ cancels the $5\,\mathrm{GHz}$ carrier Hamiltonian $H_0$ identically.
 :::
 
+::: {.viz src="pulse-area-virtual-z" preset="carrier" height="500"}
+**In the lab frame the equator spins and the poles stay.** With no drive, the amber state leaves $\lvert +\rangle$ and goes round the violet $z$ axis once every $0.2\,\mathrm{ns}$, while the two white dots at the north and south poles do not move: they are the energy eigenstates of [@thm-hermitian-eigenstate-stationary]. The dashed line on the left is the carrier reference $\cos\omega_0 t$, which also runs through two cycles in $0.4\,\mathrm{ns}$.
+:::
+
 ## Resonant Drives and Pulse Area {#sec-resonant-pulse-area}
 
 With the background carrier removed, the standard reduction of a resonant transverse microwave drive under the rotating-wave approximation (RWA) to a fixed-axis pulse-area integral is recorded below (Panel II of Figure 11; [@rem-rwa-pulse-area-literature]).
@@ -117,9 +121,19 @@ so in this idealized fixed-axis RWA model the Bloch rotation angle $\theta$ equa
 
 This effective hardware picture echoes the epigraph's geometric intuition (`MODEL`): a quantum state is a spherical direction, while a resonant control pulse acts in the time domain through an envelope of definite integrated area ([@rem-rwa-pulse-area-literature]).
 
+::: {.viz src="pulse-area-virtual-z" preset="quarter" height="500"}
+**Area $\pi/2$, a quarter turn.** A square pulse of $10\,\mathrm{MHz}$ for $25\,\mathrm{ns}$: the magenta area on the left is $\pi/2$; on the right the amber state leaves the north pole and turns about the violet $X$ axis through a magenta sector of the same size, stopping on the equator with $P(0) = 1/2$. The area law is a literature result ([@rem-rwa-pulse-area-literature]), not formalized in this book.
+:::
+
 ## Ordered Pulses and an Error Bound {#sec-ordered-pulse-control}
 
-When three distinct generators $A, B, C$ are applied sequentially in finite steps $t > 0$ rather than along a single commuting axis, higher-order noncommuting corrections appear. In the Lean module `OrderedThreePulseTrace`, for a finite decidable index type $I$, a complex matrix $X \in M_I(\mathbb{C})$, and real parameter $s \in \mathbb{R}$, define the integrated kernel
+When three distinct generators $A, B, C$ are applied sequentially in finite steps $t > 0$ rather than along a single commuting axis, higher-order noncommuting corrections appear.
+
+::: {.viz src="pulse-area-virtual-z" preset="order" height="500"}
+**The same two pulses, swapped, end elsewhere.** Two square pulses of area $\pi/2$, first about $X$, then about $Y$: the north pole goes to $-y$; the white dashed path, $Y$ first and then $X$, goes to $+x$. This is only a numerical picture of two noncommuting turns, not the kernel bound of [@prop-ordered-pulse-error] below.
+:::
+
+In the Lean module `OrderedThreePulseTrace`, for a finite decidable index type $I$, a complex matrix $X \in M_I(\mathbb{C})$, and real parameter $s \in \mathbb{R}$, define the integrated kernel
 
 $$
 \operatorname{pulse0}(X, s) = \int_0^1 \exp\bigl(s r i X\bigr)\,X\,dr.
@@ -167,6 +181,10 @@ Notice the geometric reason why the trace error scales as $O(t^2)$ rather than $
 
 In contrast to equatorial rotations implemented via nonzero-duration microwave envelopes ([@rem-rwa-pulse-area-literature]), superconducting hardware executes **virtual $Z$ gates** with zero additional analog pulse duration via axial conjugation and a software phase register (Panel III of Figure 11; the conjugation identities and sign conventions are recorded in [@rem-virtual-z-scheduling-literature]).
 
+::: {.viz src="pulse-area-virtual-z" preset="vz" height="500"}
+**A virtual $Z$: $0\,\mathrm{ns}$, a phase shift, the same readout.** From $\lvert +\rangle$ the circuit is $Z(90^\circ)$ and then $X(\pi/2)$. The violet mark on the left is $0\,\mathrm{ns}$ wide and the pulse goes out at $\varphi - \lambda = -90^\circ$ ($-Y$): the solid path turns about $-Y$ to the north pole; the white dashed path takes the circuit literally, turning about the vertical axis to $+y$ and then about $X$ to the north pole. Both end at the north pole with the same cyan shadow, $P(0) = 1$ ([@rem-virtual-z-scheduling-literature], a literature result not formalized in this book).
+:::
+
 ::: {.remark #rem-virtual-z-scheduling-literature title="Single-Qubit Axial Conjugation Identity and Passive Virtual-Z Phase-Register Scheduling (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** For an axial rotation $R_z(\lambda) = \exp(-i\lambda Z/2) = \operatorname{diag}(e^{-i\lambda/2}, e^{+i\lambda/2})$ and an equatorial drive gate $R_\varphi(\theta) = \exp\bigl[-\frac{i}{2}\theta(\cos\varphi\, X + \sin\varphi\, Y)\bigr]$, the relations $R_z(\lambda) X R_z(-\lambda) = \cos\lambda\, X + \sin\lambda\, Y$ and $R_z(\lambda) Y R_z(-\lambda) = -\sin\lambda\, X + \cos\lambda\, Y$ yield both the axial conjugation identity and the right-commutation identity (for hardware scheduling citations, see [@rem-pulses-literature]):
 
@@ -190,6 +208,10 @@ To implement virtual $Z$ gates without sign ambiguity, control software distingu
    R_x(\pi/2)\,R_z(\pi/2)\lvert +\rangle = R_z(\pi/2)\,R_{-\pi/2}(\pi/2)\lvert +\rangle = e^{-i\pi/4}\lvert 0\rangle,
    $$
    with outcome probability $P(0) = 1$: omitting $R_z(\pi/2)$ and setting $\varphi_{\mathrm{phys}} = -\pi/2$ ($-Y$ pulse) rotates $\lvert +\rangle$ to $\lvert 0\rangle$ ($P(0) = 1$), whereas $+\pi/2$ ($+Y$ pulse) would rotate $\lvert +\rangle$ to $\lvert 1\rangle$ ($P(0) = 0$).
+:::
+
+::: {.viz src="pulse-area-virtual-z" preset="sign" height="500"}
+**Shift the phase the wrong way and you land on the opposite pole.** The same circuit, but the pulse goes out at $\varphi + \lambda = +90^\circ$ ($+Y$): the solid path turns about $+Y$ to the south pole, $P(0) = 0$, while the white dashed path, what the circuit means, still ends at the north pole.
 :::
 
 At the operator-algebraic level, pushing a state forward by $t$ discrete channel steps (Schrödinger picture) versus pulling the measurement effect back by $t$ adjoint iterates (Heisenberg reference-frame update) is certified by the frozen trace-duality identity in `ObserverPullbackTraceIdentity`. Here `MatrixAlgebra d` is the complex square CStar-matrix algebra, `DensityState d` is its positive trace-one subtype, `QuantumChannel d d` carries a completely positive trace-preserving map, and `evolvedState channel t rho` iterates `QuantumChannel.mapState` $t \in \mathbb{N}$ times.
@@ -253,11 +275,23 @@ Next verify the four concrete numerical items:
    bounding the real trace deviation of three integrated `pulse0` kernels (not a hardware gate infidelity or the microwave-area formula).
 :::
 
+::: {.viz src="pulse-area-virtual-z" preset="gauss" height="500"}
+**Another shape, the same area, the same end point.** The Gaussian envelope also has area $\pi/2$: tall in the middle and low at the ends, so the amber state moves slowly, then fast, then slowly, while the white dashed square pulse moves evenly; at $25\,\mathrm{ns}$ both stop at the same point (Step 2 of [@ex-five-ghz-pi-over-two]).
+:::
+
 ::: {.remark #rem-pulses-literature title="Rabi Pulse Area and Virtual Z Gates (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** Two hardware-control results from the quantum-engineering literature frame this chapter:
 
 1. **Virtual $Z$ gates and pulse scheduling** (D. C. McKay et al., “Efficient Z Gates for Quantum Processors,” *Phys. Rev. A* **96**, 022330, 2017, DOI `10.1103/PhysRevA.96.022330`; single-qubit rotations in M. A. Nielsen & I. L. Chuang, 2010, §4.2): Implementing $Z$-axis rotations via software phase-reference updates $\phi_{\mathrm{frame}} \mapsto \phi_{\mathrm{frame}} + \lambda$ (which shifts the physical drive phase of subsequent equatorial pulses to $\varphi_{\mathrm{phys}} = \varphi - \phi_{\mathrm{frame}}$ when commuting $R_z(\lambda)$ to final $Z$ readout) adds zero analog pulse duration in ideal scheduling conventions. Zero additional analog duration is a scheduling convention, not zero classical digital latency or $0\%$ total physical error.
 2. **Assumptions behind the simple pulse-area law**: The formula $\theta = \int_0^T \Omega(t)\,dt$ requires resonance ($\omega_d = \omega_0$), a fixed phase/rotation axis during the pulse, an isolated effective two-level model, and the rotating-wave approximation. Time-dependent phase $\varphi(t)$ or detuning generally requires time ordering. Meanwhile, [@cor-frame-pullback-readout] applies under its explicit `hduality` premise and makes no claim about pulse duration, drive calibration, decoherence, leakage, or gate error rates.
+:::
+
+::: {.viz src="pulse-area-virtual-z" preset="detune" height="500"}
+**Detuned, the area no longer decides.** The same Gaussian envelope of area $\pi/2$, with the drive $5\,\mathrm{MHz}$ off: the violet axis tilts out of the equator and sways with the envelope (the dashed violet trail is where its tip has been), and the amber state misses the end of the white dashed (undetuned) path by about $26^\circ$. The page cuts the pulse into a thousand or more slices and multiplies them in time order: a numerical illustration.
+:::
+
+::: {.viz src="pulse-area-virtual-z" height="560"}
+The full lab for pulse area and the virtual $Z$: drag the top and the right end of the envelope to change its area and length, change the drive phase, the detuning and the angle of the virtual $Z$, add a second pulse and swap the two, or switch between the lab and the rotating frame. The green boxes cite only the theorems this chapter verifies in Lean; the area law and virtual-$Z$ scheduling are literature results, not formalized in this book.
 :::
 
 If a $Z$ gate can be executed simply by shifting the observer's phase reference, can we go one step further and perform **all** quantum computation by shifting the observer's measurement axes across an entangled resource state? Let us enter [Chapter 12](ch12-measurement-computation-and-gradients.md).

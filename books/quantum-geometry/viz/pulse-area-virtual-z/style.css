@@ -1,0 +1,7 @@
+/* PULSE//AREA: the shared lab layout (../assets/theme.css) carries the page; only the axis readout colour, the
+   dashed swatch of the compared path and the dimmed controls belong to this visualization. */
+#cv { cursor: grab; touch-action: none; }
+dl.ro .v dd { color: var(--violet); }
+.sw.dash { background: repeating-linear-gradient(90deg, var(--ink) 0 4px, transparent 4px 7px); }
+.field.off, .chips.off { opacity: 0.45; }
+.stage .tag.big { font-size: 15px; font-weight: 600; }
