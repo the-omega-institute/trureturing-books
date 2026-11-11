@@ -665,14 +665,14 @@ section: "三层依据"
   <p class="kicker">Three tiers of warrant</p>
   <h2 class="t">三层依据，<em>三种颜色</em>，从不越级</h2>
   <div class="split mt">
-    <img src="./img/prelude-three-tiers.zh.svg" alt="三条横条：绿色 187，紫色 128，红色 6；绿色下注锁文件里 311 条 theorem 声明。" style="display: block; width: 900px; max-width: 100%;">
+    <img src="./img/prelude-three-tiers.zh.svg" alt="三条横条：绿色 188，紫色 128，红色 6；绿色下注锁文件里 312 条 theorem 声明。" style="display: block; width: 900px; max-width: 100%;">
     <div>
       <div class="g3">
-        <Stat value="187" label="带 lean= 的定理、引理、命题与推论" tone="ok" />
+        <Stat value="188" label="带 lean= 的定理、引理、命题与推论" tone="ok" />
         <Stat value="128" label="写明“文献结果，未在本书形式化”的注记与例" tone="violet" />
         <Stat value="6" label="开放猜想，标为 OPEN，不带 Lean 引用" tone="warn" />
       </div>
-      <p class="lead mt">锁文件 <span class="mono">trureturing.lock.json</span> 钉住 <span class="mono">dev@6cfcf7850967</span>，共 448 项声明，其中 311 项是 Lean theorem。</p>
+      <p class="lead mt">锁文件 <span class="mono">trureturing.lock.json</span> 钉住 <span class="mono">dev@6cfcf7850967</span>，共 449 项声明，其中 312 项是 Lean theorem。</p>
     </div>
   </div>
 </div>

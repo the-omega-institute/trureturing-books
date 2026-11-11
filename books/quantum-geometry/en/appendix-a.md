@@ -9,51 +9,608 @@ Conventional quantum mechanics textbooks are written in the language of abstract
 ::: {.remark #rem-appendix-a-master-dictionary title="Master Dictionary of Conventional, Geometric, and Formal Terms (Including literature result, not formalized in this book)"}
 **Literature result, not formalized in this book (for sub-clauses tagged `Literature`; entries tagged `LEAN ✓` with clickable GID links are kernel-verified in this book, `OPEN` marks unresolved open conjectures, and `MODEL` marks interpretive geometric models).**
 
-| Conventional Term (传统物理 / 数学术语) | Geometric Intuition Term (本书几何直觉语言) | Lean-Facing Object / Locked GID | One-Line Invariant / Identity | Epistemic Status |
-| :--- | :--- | :--- | :--- | :--- |
-| **Measurement / Physical Quantity**<br/>(测量 / 物理量) | **Verb `liáng` (to measure) vs. Noun `liàng` (reading)**: pairwise ruler comparison operator vs. truncated scalar readout | [`born_probability_skeleton`](lean:D5/S3/Quantum/FiniteDimensional.born_probability_skeleton) | $\operatorname{prob}_0(\psi) + \operatorname{prob}_1(\psi) = \|\psi_0\|^2 + \|\psi_1\|^2$ | `LEAN ✓` (Ch 1–2) |
-| **Pure Quantum State $|\psi\rangle$**<br/>(量子纯态) | **Oriented unit ray on the sphere** uniquely addressed by pairwise cosine projections | [`bloch_geometry_of_isHermitian`](lean:D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian) | $x^2 + y^2 + z^2 = 1 \iff \operatorname{Tr}(\rho^2) = 1$ | `LEAN ✓` (Ch 1–3, 26) |
-| **Observable & Projector $P$**<br/>(可观测量与投影算符) | **Geometric ruler & idempotent orthogonal projection axis** ($P^2 = P = P^\dagger$) | [`finite_record_pinching_idempotent`](lean:D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent) | $\mathcal{P}(\mathcal{P}(\rho)) = \mathcal{P}(\rho),\quad P_\psi^2 = P_\psi$ | `LEAN ✓` (Ch 1, 3, 27) |
-| **Born Probability Rule $P = |\langle\phi|\psi\rangle|^2$**<br/>(玻恩概率法则) | **Squared inner-product projection & rank-one trace pairing** (Pythagorean area share along the ruler axis) | [`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight) | $P_\psi P_\phi P_\psi = |\langle\psi, \phi\rangle|^2 P_\psi$ | `LEAN ✓` (Ch 2, 28) |
-| **Orthogonal Decomposition**<br/>(正交态分解与完备性) | **Inner-product parallelogram & Pythagorean theorem**: 1D orthogonal segments cannot add, 2D squared areas conserve norm | [`inner_product_norm_parallelogram_law`](lean:D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law) | $\langle u, v\rangle = 0 \implies \|u + v\|^2 = \|u\|^2 + \|v\|^2$ | `LEAN ✓` (Ch 1, 27, Coda) |
-| **Global Phase $e^{i\alpha}|\psi\rangle$**<br/>(全局相位与射线等价) | **Gauge spin around the state's own axis** (unitary phase rigidity under connected ray tests) | [`unitary_phase_of_connected_ray_tests`](lean:D5/S3/Quantum/Foundation/RayPhaseRigidity.unitary_phase_of_connected_ray_tests) | $|c| = 1 \implies P_{c\psi} = P_\psi$ | `LEAN ✓` (Ch 1, 27) |
-| **Density Matrix $\rho$ & Mixed State**<br/>(密度矩阵与混合态) | **Interior barycenter vector $\mathbf{r} \in B^3$ of the Bloch ball** (purity deficit measures discarded phase area) | [`norm_bloch_le_trace_of_posSemidef`](lean:D5/S3/Quantum/Information/ActualPureQubitGeometry.norm_bloch_le_trace_of_posSemidef) | $\|\mathbf{r}\| \le \operatorname{Tr}(\rho),\quad \operatorname{Tr}(\rho(\mathbf{r})) = 1$ | `LEAN ✓` (Ch 3, 26) |
-| **Decoherence & Quantum Channel $\Phi(\rho)$**<br/>(退相干与量子信道) | **Orthogonal pinching projection onto the measurement axis**: transverse circular coherence collapses onto the longitudinal diameter | [`pinching_hilbert_schmidt_pythagorean`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean) | $\|\rho\|_{\mathrm{HS}}^2 = \|\mathcal{P}(\rho)\|_{\mathrm{HS}}^2 + \|\rho - \mathcal{P}(\rho)\|_{\mathrm{HS}}^2$ | `LEAN ✓` (Ch 4, 6) |
-| **No-Cloning Theorem**<br/>(量子不可克隆原理) | **Unitary inner-product rigidity**: an inner-product-preserving map cannot duplicate neither-orthogonal-nor-collinear rays | [`no_cloning_inner_product_criterion`](lean:D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion) | $s = s^2 \implies s = 0 \lor s = 1$ | `LEAN ✓` (Ch 14) |
-| **Operator Commutator $[A, B] = AB - BA$**<br/>(算符对易子) | **Clifford exterior bivector area $2(\mathbf{a}\wedge\mathbf{b})$** measuring the oriented rotation plane spanned by order reversal | [`crossProduct_is_skewAdjoint_of_balanced_sum`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum) | $\mathbf{u}\wedge\mathbf{v} = -\mathbf{v}\wedge\mathbf{u},\quad (AB - BA)^\dagger = -(AB - BA)$ | `LEAN ✓` (Ch 5–6) |
-| **Imaginary Unit $i$ & Pauli Matrices $\sigma_x, \sigma_y, \sigma_z$**<br/>(虚数单位与泡利矩阵) | **3D orthonormal basis vectors $e_1, e_2, e_3$ & skew-adjoint unitary complex structure $\hat{\mathbf{I}}^2 = -1$** | [`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary) | $\hat{\mathbf{I}}^2 = -1,\quad ZX = -XZ$ | `LEAN ✓` (Ch 5, 25) |
-| **Single-Qubit Unitary Gate $U \in \mathrm{SU}(2)$**<br/>(单比特幺正门) | **Bivector exponential rotor $R = \cos(\theta/2) - \hat{B}\sin(\theta/2)$** in a calibrated unitary evolution group | [`calibrated_group`](lean:D5/S3/Quantum/Dynamics/CalibratedUnitaryGroup.calibrated_group) | $U(s+t) = U(s)U(t),\quad v \mapsto R v \widetilde{R}$ | `LEAN ✓` (Ch 7, 27) |
-| **Two-Qubit Entanglement & Concurrence**<br/>(双比特纠缠与并发度) | **Exterior wedge area in $\mathbb{C}^4$ & maximally mixed marginal blind spot of Bell states** | [`bell_pure_state_has_maximally_mixed_marginal`](lean:D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal) | $\rho_A = \frac{1}{2}I_2,\quad \psi_{00}\psi_{11} - \psi_{01}\psi_{10} \neq 0$ | `LEAN ✓` (Ch 8, 13) |
-| **Quantum State Tomography**<br/>(量子态层析) | **Three-axis orthogonal addressing & rational six-axis open cover** | [`rational_six_axis_open_cover`](lean:D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover) | $\forall v \in S^2,\; \exists i \in \operatorname{Fin} 6,\; \langle v, a_i\rangle \neq 0$ | `LEAN ✓` (Ch 9) |
-| **Order Dependence vs. Pancharatnam–Berry Phase**<br/>(顺序依赖与贝里相位) | **"Pairwise comparison is always consistent and order-independent"**: unit-vector overlap equals $1$ iff vectors coincide (`LEAN ✓`; general ray equality up to phase $e^{i\theta}$) vs. spherical solid angle $\Omega/2$ (`Literature`) | [`unit_gram_overlap_characterization`](lean:D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization) | $\|u\|=\|v\|=1 \implies (\langle u,v\rangle = 1 \iff u = v);\; \gamma_{\mathrm{Berry}} = -\Omega/2$ | `LEAN ✓` / `Literature` (Ch 10) |
-| **Microwave Rabi Pulse & Virtual-$Z$ Gate**<br/>(微波脉冲与虚拟 $Z$ 门) | **Ordered three-pulse real trace bound & observer pullback trace identity in the rotating frame** | [`ordered_three_pulse_real_trace_bound`](lean:D5/S3/Quantum/Dynamics/OrderedThreePulseTrace.ordered_three_pulse_real_trace_bound) | $R_z(-\phi) R_{\text{xy}}(\theta, 0) R_z(\phi) = R_{\text{xy}}(\theta, \phi)$ | `LEAN ✓` (Ch 11) |
-| **Spinor $4\pi$ Periodicity & Gimbal Lock**<br/>(旋量 $4\pi$ 周期与万向节死锁) | **$S^3 \to \mathrm{SO}(3)$ double cover & Hairy Ball $\chi(S^2) = 2$**: 2-sphere vortices require lifting to parallelizable $S^3$ ($\chi(S^3)=0$) | [`projection_probability_flow`](lean:D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.projection_probability_flow) | $R(2\pi) = -1 \in S^3,\quad R(4\pi) = +1$ | `LEAN ✓` / `Literature` (Ch 12) |
-| **Bell–CHSH Inequality & Tsirelson Bound**<br/>(贝尔不等式与齐雷尔森界) | **Classical $\ell_1$ octahedron polytope ($\le 2$) vs. quantum $\ell_2$ Pythagorean sphere ($2\sqrt{2}$)** | [`bell_chsh_state_expectation_is_greatest`](lean:D5/S3/QuantumBounds/TsirelsonTightness.bell_chsh_state_expectation_is_greatest)<br/>[`bell_value_le`](lean:D5/S3/QuantumBounds/PeritoTsirelson.bell_value_le) | $\mathcal{S}_{\text{classical}} \le 2 < \mathcal{S}_{\text{quantum}} \le 2\sqrt{2}$ | `LEAN ✓` (Ch 13) |
-| **Stabilizer Codes & Clifford Braiding**<br/>(稳定子码与克利福德编织) | **Pauli word multiplication over $\mathbb{F}_2^{2n}$ & Yang–Baxter self-distributive rack braiding** | [`pauli_word_mul`](lean:D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank.pauli_word_mul), [`crossing_yang_baxter`](lean:D5/S0/Certificates/Quandles/BraidColoringTransport.crossing_yang_baxter) | $P_1 P_2 = P_2 P_1 \iff x_1 z_2 \oplus z_1 x_2 = 0$ | `LEAN ✓` (Ch 14, 26) |
-| **Grover / QFT / QSVT / Szegedy Walk**<br/>(量子搜索、傅里叶与奇异值变换) | **Uniform operator rotation in a 2D plane, finite Poisson summation & Chebyshev spectral polynomials** | [`uniform_operator_rotation`](lean:D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation), [`finite_poisson_summation`](lean:D5/S3/Fourier/FinitePoisson.finite_poisson_summation) | $R_{\psi}\,R_{\perp} = \operatorname{Rot}(2\theta),\quad T_n(\cos\theta) = \cos(n\theta)$ | `LEAN ✓` (Ch 15) |
-| **Solovay–Kitaev Compilation Theorem**<br/>(Solovay–Kitaev 门编译) | **Two-axis finite rotation words, norm-one trace recurrence & group-commutator helix $ABA^{-1}B^{-1}$** | [`two_axis_finite_word`](lean:D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word), [`trace_recurrence`](lean:D5/S1/Recurrence/NormOneTraceAddition.trace_recurrence) | $\operatorname{Tr}(U^{n+1}) = \operatorname{Tr}(U)\operatorname{Tr}(U^n) - \operatorname{Tr}(U^{n-1})$ | `LEAN ✓` / `Literature` (Ch 16) |
-| **Lorentz Boost & Bogoliubov Transform**<br/>(洛伦兹助推与博戈留波夫变换) | **Minkowski hyperbolic rotor ($\cosh\eta - \gamma_0\gamma_1\sinh\eta$) & null lightcone rigidity** | [`bogoliubov_norm_conservation`](lean:D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation) | $\cosh^2\eta - \sinh^2\eta = 1,\quad Q(v)=0 \implies Q = c\,\eta$ | `LEAN ✓` (Ch 17) |
-| **Dirac Spinor & Abelian Gauge Connection**<br/>(狄拉克旋量与规范联络) | **Chiral Weyl Zitterbewegung coupling & spanning-tree chord holonomy classification** | [`anchored_phase_classification`](lean:D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification) | $A(E) / \mathcal{G}_R \cong (U(1))^{|E \setminus T|} \times (U(1))^{|R| - 1}$ | `LEAN ✓` (Ch 18) |
-| **Holographic Entanglement & MERA Networks**<br/>(全息纠缠熵与张量网络) | **Discrete bridge-graph quantum max-flow min-cut theorem & polyhedral capacity cones** | [`result`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result) | $\operatorname{QMaxFlow}(a,b,c,d) = \min(3ac, \min(ad, bc))$ | `LEAN ✓` / `Literature` (Ch 19) |
-| **Circuit Complexity, CV & ER=EPR**<br/>(电路复杂度、复杂度=体积与 ER=EPR) | **Segmented integrable circuit min-depth $\lfloor N/(\kappa+1)\rfloor + 1$, CNOT parity lower bound & wormhole volume conjecture** | [`result`](lean:D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result) | $\operatorname{minDepth}(N, \kappa) = \lfloor N/(\kappa+1)\rfloor + 1$ | `LEAN ✓` / `OPEN` (Ch 20) |
-| **Cantor Diagonal, Halting & Gödel Incompleteness**<br/>(康托尔对角线、停机与不完备性) | **Complete semantic diagonal topological escape: nonempty separation deficit, discontinuity & strict topology refinement** | [`complete_diagonal_topological_settlement`](lean:D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_topological_settlement) | $\operatorname{separationDeficit} \neq \emptyset,\quad \tau_0 \subsetneq \tau_{\mathrm{diag}}$ | `LEAN ✓` (Ch 21) |
-| **Riemann $\zeta(s)$, Euler Product & Critical Line**<br/>(黎曼 $\zeta$、欧拉乘积与临界线) | **Infinite-dimensional prime orthogonal lattice $\bigoplus_p \mathbb{Z}\mathbf{e}_p$, Dirichlet-to-Euler product identity & symmetry axis $\sigma = 1/2$** | [`riemann_zeta_dirichlet_sum_eq_euler_product`](lean:D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product) | $\sum_{n=1}^\infty n^{-s} = \prod_p (1 - p^{-s})^{-1}\quad (\operatorname{Re}(s) > 1)$ | `LEAN ✓` / `OPEN` (Ch 22) |
-| **Hilbert's 10th over $\mathbb{Q}$ & Quaternion Norms**<br/>(有理数希尔伯特第十问题与四元数范数) | **Eisenstein crossing quadratic norm forms $Q_t$, golden-integer Pell identity & quaternion norm multiplicativity** | [`Qform_range_eq_eisNorm`](lean:D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_range_eq_eisNorm), [`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm) | $(2a+b)^2 - 5b^2 = 4(a^2 + ab - b^2)$ | `LEAN ✓` / `Literature` (Ch 23) |
-| **Fixed-Point Theorems & Self-Reference $\psi = \psi(\psi)$**<br/>(不动点定理与自指映射) | **Finite monotone contraction stabilization, golden ratio $\varphi$, Dottie root $\cos\theta^* = \theta^*$, and context bifurcation** | [`finite_contracting_updates_stabilize`](lean:D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize) | $\exists N \le |S_0|,\; \forall n \ge N,\; S_n = S_N$ | `LEAN ✓` / `Literature` / `OPEN` (Ch 24) |
-| **3D Clifford Geometric Algebra $\mathcal{Cl}_{3,0}(\mathbb{R})$**<br/>(三维克利福德几何代数) | **8D blade engine `Cl3` driven by 3-bit mask XOR, inversion signs, and single-qubit Weyl star algebra** | [`qubit_weyl_star`](lean:D5/S3/Quantum/FiniteDimensional.qubit_weyl_star), [`B_formula_core`](lean:D5/S3/Quantum/Measurement/Bloch/QubitBloch.B_formula_core) | $ZX = -XZ,\quad e_a e_b = (-1)^{\operatorname{inv}(a,b)} e_{a \oplus b}$ | `LEAN ✓` (Ch 25, App B) |
-| **ZYZ Euler Decomposition & Rotor Cascade**<br/>(ZYZ 欧拉分解与旋量级联) | **Three-factor single-qubit rotor $R_z(\alpha)R_y(\beta)R_z(\gamma)$ & two-axis finite rotation word synthesis** | [`two_axis_finite_word`](lean:D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word) | $R_z(\alpha)R_y(0)R_z(\gamma) = R_z(\alpha + \gamma)$ | `LEAN ✓` (Ch 9, 16, 27, App B) |
-| **Lüders State Update & Finite-Record Obstruction**<br/>(吕德斯态更新与有限记录阻碍) | **Valid quantum state preservation under record conditioning & unread-state fixed-point criterion** | [`conditionalState_isState`](lean:D5/S3/Observer/Conditioning.conditionalState_isState), [`unreadState_fixed_iff`](lean:D5/S3/Observer/Conditioning.unreadState_fixed_iff) | $\sum_i p_i \rho_i = \Phi(\rho),\quad \operatorname{Tr}(\rho_i) = 1$ | `LEAN ✓` (Ch 3, 28) |
-| **Pythagorean "All Is Number" & 4-Tier Escape**<br/>(毕达哥拉斯“万物皆数”与四级数系突围) | **Verb `shǔ` (counting/squaring operator) vs. Noun `shù` (coordinate mark)**: four-tier sphere escape $\mathbb{Q} \to \overline{\mathbb{Q}} \to \pi \to \theta^*$ | [`inner_product_norm_parallelogram_law`](lean:D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law), [`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique) | $\mathbf{c}^2 = \mathbf{a}^2 + \mathbf{b}^2,\quad m^2 - 2n^2 = \pm 1,\quad \cos\theta^* = \theta^*$ | `LEAN ✓` / `Literature` (Ch 29, Coda) |
-| **Prime Splitting mod 4, Congruent Elliptic Curve & Sato–Tate**<br/>(素数模 4 分裂、同余数椭圆曲线与佐藤—泰特分布) | **$\pm 1$ Pell seam splits "Plane Primes" ($p \equiv 1 \bmod 4$) from "Line Primes" ($p \equiv 3 \bmod 4$); CM curve $dy^2 = x(x^2-1)$ ($\chi=0$) obeys Gauss's bimodal law, while non-CM curves at Hasse scale $\sqrt{p}$ follow the $S^3 \cong \mathrm{SU}(2)$ Sato–Tate cosine law** | [`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary), [`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm) | $\cos\theta_p = \frac{a_p}{2\sqrt{p}} \in [-1, +1],\quad d\mu_{\mathrm{ST},\text{non-CM}} = \frac{2}{\pi}\sin^2\theta\,d\theta$ | `LEAN ✓` / `Literature` (Ch 29) |
-| **Wheeler–DeWitt Timeless State, Page–Wootters Slicing & Geometric Causality**<br/>(惠勒—德维特无时间态、佩奇—伍特斯切片与几何因果律) | **Order-independence abolishes sequential time: $(2k)!$ de-ordering model (`MODEL`), conditional slicing under ideal clock assumptions (`Literature`), Gram rigidity $\det G \ge 0$ (`LEAN ✓`), and stationary phase $\delta S=0$ (bivector model $+\mathbf{\Omega}-\mathbf{\Omega}=0$)** | [`unit_gram_overlap_characterization`](lean:D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization), [`conditionalState_isState`](lean:D5/S3/Observer/Conditioning.conditionalState_isState) | $\det G(\mathbf{A},\mathbf{B},\mathbf{C}) \ge 0,\quad H\mathbf{\Psi} = 0$ | `LEAN ✓` / `Literature` / `MODEL` (Ch 29) |
-| **Finite Observer, Gram Elliptope (Causally Compatible Space) & PSD Matrix Completion**<br/>(有限观察者、格拉姆椭圆体与时间场选点) | **Because the observer is finite, choice operates inside the causally compatible Gram elliptope ($\det G > 0$, dihedral angle $\phi$), continuously picking points in the time field ($G_{M+1} \succeq 0$) with $\theta^* \approx 0.739$ (`MODEL`) as the 1D self-referential balance prototype** | [`lagrange_gram_identity`](lean:D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity), [`finite_contracting_updates_stabilize`](lean:D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize) | $c_{AC} = \cos\theta_1\cos\theta_2 + \cos\phi\,\sin\theta_1\sin\theta_2,\quad \det G \ge 0$ | `LEAN ✓` / `Literature` / `MODEL` (Ch 29) |
-| **Global Static Time Field $P = NP$ vs. Finite Observer $P \neq NP$**<br/>(全局静态时间场 $P = NP$ vs. 有限观察者 $P \neq NP$) | **Postselection & CTC fixed-point models collapse ($\mathrm{PostBQP}=\mathrm{PP}\supseteq\mathrm{NP}$, $\mathrm{P}_{\mathrm{CTC}}=\mathrm{PSPACE}\supseteq\mathrm{NP}$); a finite observer faces the black-box $\theta_0 \approx \frac{\pi}{2} - 2^{-n/2}$ orthogonal horizon ($L=\Theta(2^{n/2})$) and bounded-degree SoS local $G_M \succeq 0$ blind spot (standard $\mathrm{P}\neq\mathrm{NP}$ remains `OPEN`)** | [`uniform_operator_rotation`](lean:D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation), [`result`](lean:D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result) | $\cos\theta_0 = 2^{-n/2},\quad L = \Theta(2^{n/2}),\quad G_M \succeq 0\;(M = o(n))$ | `LEAN ✓` / `Literature` / `OPEN` / `MODEL` (Ch 15, 20, 30) |
-| **"$P$ Is a Field, $NP$ Is a Line": Witness Thread, Guiding Field & Hairy-Ball Curl**<br/>(“$P$ 是场，$NP$ 是线”：见证丝、导向场与毛球旋度) | **Geometric model (`MODEL`): an $NP$ witness is a zero-cross-section 1D thread (verifiable in $O(k)$); paradigmatic $P$ algorithms construct a guiding field (Karmarkar interior barrier field, Kasteleyn planar skew-symmetric bivector field $A_K^T = -A_K,\; [\operatorname{Pf}(A_K)]^2=\det A_K,\; Z = \sum_M \prod_{e \in M} w_e = |\operatorname{Pf}(A_K)|$), while 3-body curl $\nabla\wedge\mathbf{F}\neq 0$ models exponential search vortices** | [`complete_diagonal_topological_settlement`](lean:D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_topological_settlement), [`result`](lean:D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result) | $A_K^T = -A_K,\quad [\operatorname{Pf}(A_K)]^2 = \det A_K,\quad Z = |\operatorname{Pf}(A_K)|$ | `LEAN ✓` / `Literature` / `OPEN` / `MODEL` (Ch 20, 21, 30) |
-| **Navier–Stokes Equations, Lamb Bivector Curl & $P$ vs. $NP$ Field Analogy**<br/>(纳维—斯托克斯方程、兰姆双向量旋度与 $P$ vs. $NP$ 场化类比) | **Structural analogy (`MODEL`): Lamb's identity splits inner-product kinetic gradient (irrotational potential $P$-state) from exterior vortex force $\mathbf{u}\cdot(\nabla\wedge\mathbf{u})$; 2D stretch-free global smoothness (analogous to $\text{2-SAT}\in\mathrm{P}$) vs. 3D potential vortex stretching and conditional $A\to 0$ filament collapse (analogous to $\text{3-SAT}\in\mathrm{NP}\text{-complete}$; 2026 forced Statements C/D blow-up verified in Lean 4, unforced Statements A/B remain `OPEN`); inviscid Euler Arnold $\operatorname{SDiff}(M)$ $L^2$ geodesic and the quadratic advection projection closure obstruction (`LEAN ✓`)** | [`quadratic_closure_iff`](lean:D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff), [`no_exact_closure`](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure), [`all_grade_regularity_of_mild_path`](lean:D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path) | $(\mathbf{u}\cdot\nabla)\mathbf{u} = \frac{1}{2}\nabla(\|\mathbf{u}\|^2) + \mathbf{u}\cdot(\nabla\wedge\mathbf{u}),\quad \Gamma \approx A\|\boldsymbol{\omega}\|$ | `LEAN ✓` / `Literature` / `OPEN` / `MODEL` (Ch 30) |
-| **Exponential Time Hypothesis (ETH), Tensor-Network Rank Collapse & Cosmic Horizon Galactic Algorithm**<br/>(指数时间假设 ETH、张量网络秩约分与宇宙视界银河算法) | **Impagliazzo–Paturi–Zane ETH ($s_3>0$) & late-October 2026 tensor-network $2^{O(n\log\log n/\sqrt{\log n})}$ subexponential bound: local 3-body facets leave an asymptotic $\frac{\log\log n}{\sqrt{\log n}}$ rank-deficiency seam (`MODEL`, with bridge-graph min-cut & finite-rank concentration as formal prototypes), yet under the illustrative $c=1$ curve the crossover $n \approx 2^{558} \gg 10^{80}$ lies beyond the observable universe horizon and top-level specification audits enact relative semantic diagonal escape (`LEAN ✓`)** | [`result`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result), [`finite_rank_concentration_mode_bound`](lean:D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound), [`relative_semantic_diagonal_target_inadequate_of_surjective`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective) | $s_k = \inf\{\delta \mid k\text{-SAT}\in O(2^{\delta n})\},\quad r_{\mathrm{new}}(n) \sim \frac{\log_2\log_2 n}{\sqrt{\log_2 n}}$ | `LEAN ✓` / `Literature` / `OPEN` / `MODEL` (Ch 19, 21, 30) |
-| **Spatial Attractors, `trureturing` Cut-and-Project Observer, Cassini $(-1)^{k+1}$ Seam & Déjà Vu**<br/>(空间吸引子、`trureturing` 黄金切投观察者、卡西尼接缝与似曾相识) | **Golden cut-and-project model set & coding theorems (`LEAN ✓`: Minkowski lattice embedding, `goldenModelSet` cut-and-project inclusion, Zeckendorf `NoAdjacentOnes` & nonnegative real `NNReal` thread injectivity, conjugate norm separation & full-window Delone set, Cassini's identity $F_n F_{n+2}-F_{n+1}^2=(-1)^{n+1}$, and closed-subgroup bounded-gap torus returns) combined with the rhombic triacontahedron window $W\subset E_\perp^3$ ($30$ faces, $32$ vertices, $6$ five-fold axes), Conway's Empire Effect, and the Lorenz attractor $D_{\mathrm{KY}}\approx 2.06$ (`Literature`), inspiring the philosophical model (`MODEL`) of the soul as the internal window phase $u\in E_\perp$, forgetting as high-level Zeckendorf truncation, historical ruins as large-margin $d_{\partial}$ interior nodes, and Déjà vu as cross-round inner-product resonance $\cos\delta\theta\to 1$ as $\delta\theta\to 0$** | [`minkowski_model_set_spec`](lean:D5/S1/Scale/MinkowskiModelSet.minkowski_model_set_spec), [`golden_model_set_subset_cut_and_project`](lean:D5/S1/Deficit/ModelSet/GoldenCutAndProject.golden_model_set_subset_cut_and_project), [`fib_cassini_from_golden_norm`](lean:D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm), [`TorusObservationWindowReturns.result`](lean:D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result) | $F_n F_{n+2} - F_{n+1}^2 = (-1)^{n+1},\quad \delta\theta\to 0 \implies \cos\delta\theta \to 1$ | `LEAN ✓` / `Literature` / `MODEL` (Ch 24, 29, Coda) |
-| **Quantum Fairness, Entanglement Monogamy & Ergodic Statistical Holism**<br/>(量子公平性、纠缠单配性与遍历统计全息) | **Rank-one Born pairing reciprocity, complementary-context purity Pythagoras, no-cloning inner-product lock, Bell mixed marginals, Landauer's balance bound, and compact closed-subgroup torus Haar equidistribution and bounded-gap returns (`LEAN ✓`), paired with spherical Haar isotropy and the CKW entanglement monogamy inequality $\tau_{A|B}+\tau_{A|C}\le\tau_{A|BC}$ (`Literature`), grounding the fivefold privilege-abolition and ergodic statistical-holism model (`MODEL`)** | [`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight), [`complementary_context_probability_pythagoras`](lean:D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras), [`no_cloning_inner_product_criterion`](lean:D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion), [`TorusOrbitEquidistribution.result`](lean:D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result) | $\tau_{A|B} + \tau_{A|C} \le \tau_{A|BC},\quad \lim_{N\to\infty}\frac{1}{N}\sum_{n=0}^{N-1} f(g^{n+1}) = \int_G f\,d\mu$ | `LEAN ✓` / `Literature` / `MODEL` (Ch 31) |
-| **Orthogonal Self-Referential Unified Field, Icosian–$E_8$ Golden Bridge & Eight-Program Meta-Unification**<br/>(正交自指统一场、艾柯西安 $E_8$ 黄金桥与八大纲领元统一) | **Complex-structure squaring $R^2=-I$, finite monotone contraction, golden fixed point $\varphi$, binary Zeckendorf `NoAdjacentOnes` prohibition, Minkowski null-cone rigidity, spanning-tree loop holonomy classification, and bridge-graph min-cut (`LEAN ✓`), paired with Jacobson's horizon equation of state, Conway–Sloane's golden-field Icosian ring $\mathcal{I}\subset\mathbb{H}$ equipped with the rescaled Galois quadratic form $Q(q)=2(a+b)$ isometric to the $E_8$ root lattice, and eight foundational unification programs (`Literature`), forming the six-domain unified-field dictionary and 3D cognitive meta-unification compass (`MODEL`)** | [`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary), [`base_success_iff_noAdjacentOnes`](lean:D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes), [`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null), [`anchored_phase_classification`](lean:D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification), [`result`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result) | $R^2 = -I,\quad (\mathcal{I}, Q)\cong E_8\;\bigl(Q(q)=\operatorname{tr}_{\mathbb{Q}(\sqrt{5})/\mathbb{Q}}\bigl(\tfrac{2\varphi}{\sqrt{5}}\operatorname{Nrd}(q)\bigr)=2(a+b)\bigr),\quad \psi = \psi(\psi)$ | `LEAN ✓` / `Literature` / `MODEL` (Ch 32) |
+**Measurement / Physical Quantity**<br/>(测量 / 物理量)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Verb `liáng` (to measure) vs. Noun `liàng` (reading)**: pairwise ruler comparison operator vs. truncated scalar readout
+
+**Lean-Facing Object / Locked GID:**
+[`born_probability_skeleton`](lean:D5/S3/Quantum/FiniteDimensional.born_probability_skeleton)
+
+**One-Line Invariant / Identity:**
+$\operatorname{prob}_0(\psi) + \operatorname{prob}_1(\psi) = \|\psi_0\|^2 + \|\psi_1\|^2$
+
+**Epistemic Status:**
+`LEAN ✓` (Ch 1–2)
+
+**Pure Quantum State $|\psi\rangle$**<br/>(量子纯态)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Oriented unit ray on the sphere** uniquely addressed by pairwise cosine projections
+
+**Lean-Facing Object / Locked GID:**
+[`bloch_geometry_of_isHermitian`](lean:D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian)
+
+**One-Line Invariant / Identity:**
+$x^2 + y^2 + z^2 = 1 \iff \operatorname{Tr}(\rho^2) = 1$
+
+**Epistemic Status:**
+`LEAN ✓` (Ch 1–3, 26)
+
+**Observable & Projector $P$**<br/>(可观测量与投影算符)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric ruler & idempotent orthogonal projection axis** ($P^2 = P = P^\dagger$)
+
+**Lean-Facing Object / Locked GID:**
+[`finite_record_pinching_idempotent`](lean:D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent)
+
+**One-Line Invariant / Identity:**
+$\mathcal{P}(\mathcal{P}(\rho)) = \mathcal{P}(\rho),\quad P_\psi^2 = P_\psi$
+
+**Epistemic Status:**
+`LEAN ✓` (Ch 1, 3, 27)
+
+**Born Probability Rule $P = |\langle\phi|\psi\rangle|^2$**<br/>(玻恩概率法则)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Squared inner-product projection & rank-one trace pairing** (Pythagorean area share along the ruler axis)
+
+**Lean-Facing Object / Locked GID:**
+[`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight)
+
+**One-Line Invariant / Identity:**
+$P_\psi P_\phi P_\psi = |\langle\psi, \phi\rangle|^2 P_\psi$
+
+**Epistemic Status:**
+`LEAN ✓` (Ch 2, 28)
+
+**Orthogonal Decomposition**<br/>(正交态分解与完备性)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Inner-product parallelogram & Pythagorean theorem**: 1D orthogonal segments cannot add, 2D squared areas conserve norm
+
+**Lean-Facing Object / Locked GID:**
+[`inner_product_norm_parallelogram_law`](lean:D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law)
+
+**One-Line Invariant / Identity:**
+$\langle u, v\rangle = 0 \implies \|u + v\|^2 = \|u\|^2 + \|v\|^2$
+
+**Epistemic Status:**
+`LEAN ✓` (Ch 1, 27, Coda)
+
+**Global Phase $e^{i\alpha}|\psi\rangle$**<br/>(全局相位与射线等价)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Gauge spin around the state's own axis** (unitary phase rigidity under connected ray tests)
+
+**Lean-Facing Object / Locked GID:**
+[`unitary_phase_of_connected_ray_tests`](lean:D5/S3/Quantum/Foundation/RayPhaseRigidity.unitary_phase_of_connected_ray_tests)
+
+**One-Line Invariant / Identity:**
+$|c| = 1 \implies P_{c\psi} = P_\psi$
+
+**Epistemic Status:**
+`LEAN ✓` (Ch 1, 27)
+
+**Density Matrix $\rho$ & Mixed State**<br/>(密度矩阵与混合态)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Interior barycenter vector $\mathbf{r} \in B^3$ of the Bloch ball** (purity deficit measures discarded phase area)
+
+**Lean-Facing Object / Locked GID:**
+[`norm_bloch_le_trace_of_posSemidef`](lean:D5/S3/Quantum/Information/ActualPureQubitGeometry.norm_bloch_le_trace_of_posSemidef)
+
+**One-Line Invariant / Identity:**
+$\|\mathbf{r}\| \le \operatorname{Tr}(\rho),\quad \operatorname{Tr}(\rho(\mathbf{r})) = 1$
+
+**Epistemic Status:**
+`LEAN ✓` (Ch 3, 26)
+
+**Decoherence & Quantum Channel $\Phi(\rho)$**<br/>(退相干与量子信道)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Orthogonal pinching projection onto the measurement axis**: transverse circular coherence collapses onto the longitudinal diameter
+
+**Lean-Facing Object / Locked GID:**
+[`pinching_hilbert_schmidt_pythagorean`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean)
+
+**One-Line Invariant / Identity:**
+$\|\rho\|_{\mathrm{HS}}^2 = \|\mathcal{P}(\rho)\|_{\mathrm{HS}}^2 + \|\rho - \mathcal{P}(\rho)\|_{\mathrm{HS}}^2$
+
+**Epistemic Status:**
+`LEAN ✓` (Ch 4, 6)
+
+**No-Cloning Theorem**<br/>(量子不可克隆原理)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Unitary inner-product rigidity**: an inner-product-preserving map cannot duplicate neither-orthogonal-nor-collinear rays
+
+**Lean-Facing Object / Locked GID:**
+[`no_cloning_inner_product_criterion`](lean:D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion)
+
+**One-Line Invariant / Identity:**
+$s = s^2 \implies s = 0 \lor s = 1$
+
+**Epistemic Status:**
+`LEAN ✓` (Ch 14)
+
+**Operator Commutator $[A, B] = AB - BA$**<br/>(算符对易子)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Clifford exterior bivector area $2(\mathbf{a}\wedge\mathbf{b})$** measuring the oriented rotation plane spanned by order reversal
+
+**Lean-Facing Object / Locked GID:**
+[`crossProduct_is_skewAdjoint_of_balanced_sum`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum)
+
+**One-Line Invariant / Identity:**
+$\mathbf{u}\wedge\mathbf{v} = -\mathbf{v}\wedge\mathbf{u},\quad (AB - BA)^\dagger = -(AB - BA)$
+
+**Epistemic Status:**
+`LEAN ✓` (Ch 5–6)
+
+**Imaginary Unit $i$ & Pauli Matrices $\sigma_x, \sigma_y, \sigma_z$**<br/>(虚数单位与泡利矩阵)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**3D orthonormal basis vectors $e_1, e_2, e_3$ & skew-adjoint unitary complex structure $\hat{\mathbf{I}}^2 = -1$**
+
+**Lean-Facing Object / Locked GID:**
+[`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary)
+
+**One-Line Invariant / Identity:**
+$\hat{\mathbf{I}}^2 = -1,\quad ZX = -XZ$
+
+**Epistemic Status:**
+`LEAN ✓` (Ch 5, 25)
+
+**Single-Qubit Unitary Gate $U \in \mathrm{SU}(2)$**<br/>(单比特幺正门)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Bivector exponential rotor $R = \cos(\theta/2) - \hat{B}\sin(\theta/2)$** in a calibrated unitary evolution group
+
+**Lean-Facing Object / Locked GID:**
+[`calibrated_group`](lean:D5/S3/Quantum/Dynamics/CalibratedUnitaryGroup.calibrated_group)
+
+**One-Line Invariant / Identity:**
+$U(s+t) = U(s)U(t),\quad v \mapsto R v \widetilde{R}$
+
+**Epistemic Status:**
+`LEAN ✓` (Ch 7, 27)
+
+**Two-Qubit Entanglement & Concurrence**<br/>(双比特纠缠与并发度)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Exterior wedge area in $\mathbb{C}^4$ & maximally mixed marginal blind spot of Bell states**
+
+**Lean-Facing Object / Locked GID:**
+[`bell_pure_state_has_maximally_mixed_marginal`](lean:D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal)
+
+**One-Line Invariant / Identity:**
+$\rho_A = \frac{1}{2}I_2,\quad \psi_{00}\psi_{11} - \psi_{01}\psi_{10} \neq 0$
+
+**Epistemic Status:**
+`LEAN ✓` (Ch 8, 13)
+
+**Quantum State Tomography**<br/>(量子态层析)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Three-axis orthogonal addressing & rational six-axis open cover**
+
+**Lean-Facing Object / Locked GID:**
+[`rational_six_axis_open_cover`](lean:D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover)
+
+**One-Line Invariant / Identity:**
+$\forall v \in S^2,\; \exists i \in \operatorname{Fin} 6,\; \langle v, a_i\rangle \neq 0$
+
+**Epistemic Status:**
+`LEAN ✓` (Ch 9)
+
+**Order Dependence vs. Pancharatnam–Berry Phase**<br/>(顺序依赖与贝里相位)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**"Pairwise comparison is always consistent and order-independent"**: unit-vector overlap equals $1$ iff vectors coincide (`LEAN ✓`; general ray equality up to phase $e^{i\theta}$) vs. spherical solid angle $\Omega/2$ (`Literature`)
+
+**Lean-Facing Object / Locked GID:**
+[`unit_gram_overlap_characterization`](lean:D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization)
+
+**One-Line Invariant / Identity:**
+$\|u\|=\|v\|=1 \implies (\langle u,v\rangle = 1 \iff u = v);\; \gamma_{\mathrm{Berry}} = -\Omega/2$
+
+**Epistemic Status:**
+`LEAN ✓` / `Literature` (Ch 10)
+
+**Microwave Rabi Pulse & Virtual-$Z$ Gate**<br/>(微波脉冲与虚拟 $Z$ 门)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Ordered three-pulse real trace bound & observer pullback trace identity in the rotating frame**
+
+**Lean-Facing Object / Locked GID:**
+[`ordered_three_pulse_real_trace_bound`](lean:D5/S3/Quantum/Dynamics/OrderedThreePulseTrace.ordered_three_pulse_real_trace_bound)
+
+**One-Line Invariant / Identity:**
+$R_z(-\phi) R_{\text{xy}}(\theta, 0) R_z(\phi) = R_{\text{xy}}(\theta, \phi)$
+
+**Epistemic Status:**
+`LEAN ✓` (Ch 11)
+
+**Spinor $4\pi$ Periodicity & Gimbal Lock**<br/>(旋量 $4\pi$ 周期与万向节死锁)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**$S^3 \to \mathrm{SO}(3)$ double cover & Hairy Ball $\chi(S^2) = 2$**: 2-sphere vortices require lifting to parallelizable $S^3$ ($\chi(S^3)=0$)
+
+**Lean-Facing Object / Locked GID:**
+[`projection_probability_flow`](lean:D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.projection_probability_flow)
+
+**One-Line Invariant / Identity:**
+$R(2\pi) = -1 \in S^3,\quad R(4\pi) = +1$
+
+**Epistemic Status:**
+`LEAN ✓` / `Literature` (Ch 12)
+
+**Bell–CHSH Inequality & Tsirelson Bound**<br/>(贝尔不等式与齐雷尔森界)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Classical $\ell_1$ octahedron polytope ($\le 2$) vs. quantum $\ell_2$ Pythagorean sphere ($2\sqrt{2}$)**
+
+**Lean-Facing Object / Locked GID:**
+[`bell_chsh_state_expectation_is_greatest`](lean:D5/S3/QuantumBounds/TsirelsonTightness.bell_chsh_state_expectation_is_greatest)<br/>[`bell_value_le`](lean:D5/S3/QuantumBounds/PeritoTsirelson.bell_value_le)
+
+**One-Line Invariant / Identity:**
+$\mathcal{S}_{\text{classical}} \le 2 < \mathcal{S}_{\text{quantum}} \le 2\sqrt{2}$
+
+**Epistemic Status:**
+`LEAN ✓` (Ch 13)
+
+**Stabilizer Codes & Clifford Braiding**<br/>(稳定子码与克利福德编织)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Pauli word multiplication over $\mathbb{F}_2^{2n}$ & Yang–Baxter self-distributive rack braiding**
+
+**Lean-Facing Object / Locked GID:**
+[`pauli_word_mul`](lean:D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank.pauli_word_mul), [`crossing_yang_baxter`](lean:D5/S0/Certificates/Quandles/BraidColoringTransport.crossing_yang_baxter)
+
+**One-Line Invariant / Identity:**
+$P_1 P_2 = P_2 P_1 \iff x_1 z_2 \oplus z_1 x_2 = 0$
+
+**Epistemic Status:**
+`LEAN ✓` (Ch 14, 26)
+
+**Grover / QFT / QSVT / Szegedy Walk**<br/>(量子搜索、傅里叶与奇异值变换)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Uniform operator rotation in a 2D plane, finite Poisson summation & Chebyshev spectral polynomials**
+
+**Lean-Facing Object / Locked GID:**
+[`uniform_operator_rotation`](lean:D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation), [`finite_poisson_summation`](lean:D5/S3/Fourier/FinitePoisson.finite_poisson_summation)
+
+**One-Line Invariant / Identity:**
+$R_{\psi}\,R_{\perp} = \operatorname{Rot}(2\theta),\quad T_n(\cos\theta) = \cos(n\theta)$
+
+**Epistemic Status:**
+`LEAN ✓` (Ch 15)
+
+**Solovay–Kitaev Compilation Theorem**<br/>(Solovay–Kitaev 门编译)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Two-axis finite rotation words, norm-one trace recurrence & group-commutator helix $ABA^{-1}B^{-1}$**
+
+**Lean-Facing Object / Locked GID:**
+[`two_axis_finite_word`](lean:D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word), [`trace_recurrence`](lean:D5/S1/Recurrence/NormOneTraceAddition.trace_recurrence)
+
+**One-Line Invariant / Identity:**
+$\operatorname{Tr}(U^{n+1}) = \operatorname{Tr}(U)\operatorname{Tr}(U^n) - \operatorname{Tr}(U^{n-1})$
+
+**Epistemic Status:**
+`LEAN ✓` / `Literature` (Ch 16)
+
+**Lorentz Boost & Bogoliubov Transform**<br/>(洛伦兹助推与博戈留波夫变换)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Minkowski hyperbolic rotor ($\cosh\eta - \gamma_0\gamma_1\sinh\eta$) & null lightcone rigidity**
+
+**Lean-Facing Object / Locked GID:**
+[`bogoliubov_norm_conservation`](lean:D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation)
+
+**One-Line Invariant / Identity:**
+$\cosh^2\eta - \sinh^2\eta = 1,\quad Q(v)=0 \implies Q = c\,\eta$
+
+**Epistemic Status:**
+`LEAN ✓` (Ch 17)
+
+**Dirac Spinor & Abelian Gauge Connection**<br/>(狄拉克旋量与规范联络)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Chiral Weyl Zitterbewegung coupling & spanning-tree chord holonomy classification**
+
+**Lean-Facing Object / Locked GID:**
+[`anchored_phase_classification`](lean:D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification)
+
+**One-Line Invariant / Identity:**
+$A(E) / \mathcal{G}_R \cong (U(1))^{|E \setminus T|} \times (U(1))^{|R| - 1}$
+
+**Epistemic Status:**
+`LEAN ✓` (Ch 18)
+
+**Holographic Entanglement & MERA Networks**<br/>(全息纠缠熵与张量网络)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Discrete bridge-graph quantum max-flow min-cut theorem & polyhedral capacity cones**
+
+**Lean-Facing Object / Locked GID:**
+[`result`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result)
+
+**One-Line Invariant / Identity:**
+$\operatorname{QMaxFlow}(a,b,c,d) = \min(3ac, \min(ad, bc))$
+
+**Epistemic Status:**
+`LEAN ✓` / `Literature` (Ch 19)
+
+**Circuit Complexity, CV & ER=EPR**<br/>(电路复杂度、复杂度=体积与 ER=EPR)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Segmented integrable circuit min-depth $\lfloor N/(\kappa+1)\rfloor + 1$, CNOT parity lower bound & wormhole volume conjecture**
+
+**Lean-Facing Object / Locked GID:**
+[`result`](lean:D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result)
+
+**One-Line Invariant / Identity:**
+$\operatorname{minDepth}(N, \kappa) = \lfloor N/(\kappa+1)\rfloor + 1$
+
+**Epistemic Status:**
+`LEAN ✓` / `OPEN` (Ch 20)
+
+**Cantor Diagonal, Halting & Gödel Incompleteness**<br/>(康托尔对角线、停机与不完备性)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Complete semantic diagonal topological escape: nonempty separation deficit, discontinuity & strict topology refinement**
+
+**Lean-Facing Object / Locked GID:**
+[`complete_diagonal_topological_settlement`](lean:D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_topological_settlement)
+
+**One-Line Invariant / Identity:**
+$\operatorname{separationDeficit} \neq \emptyset,\quad \tau_0 \subsetneq \tau_{\mathrm{diag}}$
+
+**Epistemic Status:**
+`LEAN ✓` (Ch 21)
+
+**Riemann $\zeta(s)$, Euler Product & Critical Line**<br/>(黎曼 $\zeta$、欧拉乘积与临界线)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Infinite-dimensional prime orthogonal lattice $\bigoplus_p \mathbb{Z}\mathbf{e}_p$, Dirichlet-to-Euler product identity & symmetry axis $\sigma = 1/2$**
+
+**Lean-Facing Object / Locked GID:**
+[`riemann_zeta_dirichlet_sum_eq_euler_product`](lean:D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product)
+
+**One-Line Invariant / Identity:**
+$\sum_{n=1}^\infty n^{-s} = \prod_p (1 - p^{-s})^{-1}\quad (\operatorname{Re}(s) > 1)$
+
+**Epistemic Status:**
+`LEAN ✓` / `OPEN` (Ch 22)
+
+**Hilbert's 10th over $\mathbb{Q}$ & Quaternion Norms**<br/>(有理数希尔伯特第十问题与四元数范数)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Eisenstein crossing quadratic norm forms $Q_t$, golden-integer Pell identity & quaternion norm multiplicativity**
+
+**Lean-Facing Object / Locked GID:**
+[`Qform_range_eq_eisNorm`](lean:D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_range_eq_eisNorm), [`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)
+
+**One-Line Invariant / Identity:**
+$(2a+b)^2 - 5b^2 = 4(a^2 + ab - b^2)$
+
+**Epistemic Status:**
+`LEAN ✓` / `Literature` (Ch 23)
+
+**Fixed-Point Theorems & Self-Reference $\psi = \psi(\psi)$**<br/>(不动点定理与自指映射)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Finite monotone contraction stabilization, golden ratio $\varphi$, Dottie root $\cos\theta^* = \theta^*$, and context bifurcation**
+
+**Lean-Facing Object / Locked GID:**
+[`finite_contracting_updates_stabilize`](lean:D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize)
+
+**One-Line Invariant / Identity:**
+$\exists N \le |S_0|,\; \forall n \ge N,\; S_n = S_N$
+
+**Epistemic Status:**
+`LEAN ✓` / `Literature` / `OPEN` (Ch 24)
+
+**3D Clifford Geometric Algebra $\mathcal{Cl}_{3,0}(\mathbb{R})$**<br/>(三维克利福德几何代数)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**8D blade engine `Cl3` driven by 3-bit mask XOR, inversion signs, and single-qubit Weyl star algebra**
+
+**Lean-Facing Object / Locked GID:**
+[`qubit_weyl_star`](lean:D5/S3/Quantum/FiniteDimensional.qubit_weyl_star), [`B_formula_core`](lean:D5/S3/Quantum/Measurement/Bloch/QubitBloch.B_formula_core)
+
+**One-Line Invariant / Identity:**
+$ZX = -XZ,\quad e_a e_b = (-1)^{\operatorname{inv}(a,b)} e_{a \oplus b}$
+
+**Epistemic Status:**
+`LEAN ✓` (Ch 25, App B)
+
+**ZYZ Euler Decomposition & Rotor Cascade**<br/>(ZYZ 欧拉分解与旋量级联)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Three-factor single-qubit rotor $R_z(\alpha)R_y(\beta)R_z(\gamma)$ & two-axis finite rotation word synthesis**
+
+**Lean-Facing Object / Locked GID:**
+[`two_axis_finite_word`](lean:D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word)
+
+**One-Line Invariant / Identity:**
+$R_z(\alpha)R_y(0)R_z(\gamma) = R_z(\alpha + \gamma)$
+
+**Epistemic Status:**
+`LEAN ✓` (Ch 9, 16, 27, App B)
+
+**Lüders State Update & Finite-Record Obstruction**<br/>(吕德斯态更新与有限记录阻碍)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Valid quantum state preservation under record conditioning & unread-state fixed-point criterion**
+
+**Lean-Facing Object / Locked GID:**
+[`conditionalState_isState`](lean:D5/S3/Observer/Conditioning.conditionalState_isState), [`unreadState_fixed_iff`](lean:D5/S3/Observer/Conditioning.unreadState_fixed_iff)
+
+**One-Line Invariant / Identity:**
+$\sum_i p_i \rho_i = \Phi(\rho),\quad \operatorname{Tr}(\rho_i) = 1$
+
+**Epistemic Status:**
+`LEAN ✓` (Ch 3, 28)
+
+**Pythagorean "All Is Number" & 4-Tier Escape**<br/>(毕达哥拉斯“万物皆数”与四级数系突围)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Verb `shǔ` (counting/squaring operator) vs. Noun `shù` (coordinate mark)**: four-tier sphere escape $\mathbb{Q} \to \overline{\mathbb{Q}} \to \pi \to \theta^*$
+
+**Lean-Facing Object / Locked GID:**
+[`inner_product_norm_parallelogram_law`](lean:D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law), [`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique)
+
+**One-Line Invariant / Identity:**
+$\mathbf{c}^2 = \mathbf{a}^2 + \mathbf{b}^2,\quad m^2 - 2n^2 = \pm 1,\quad \cos\theta^* = \theta^*$
+
+**Epistemic Status:**
+`LEAN ✓` / `Literature` (Ch 29, Coda)
+
+**Prime Splitting mod 4, Congruent Elliptic Curve & Sato–Tate**<br/>(素数模 4 分裂、同余数椭圆曲线与佐藤—泰特分布)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**$\pm 1$ Pell seam splits "Plane Primes" ($p \equiv 1 \bmod 4$) from "Line Primes" ($p \equiv 3 \bmod 4$); CM curve $dy^2 = x(x^2-1)$ ($\chi=0$) obeys Gauss's bimodal law, while non-CM curves at Hasse scale $\sqrt{p}$ follow the $S^3 \cong \mathrm{SU}(2)$ Sato–Tate cosine law**
+
+**Lean-Facing Object / Locked GID:**
+[`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary), [`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)
+
+**One-Line Invariant / Identity:**
+$\cos\theta_p = \frac{a_p}{2\sqrt{p}} \in [-1, +1],\quad d\mu_{\mathrm{ST},\text{non-CM}} = \frac{2}{\pi}\sin^2\theta\,d\theta$
+
+**Epistemic Status:**
+`LEAN ✓` / `Literature` (Ch 29)
+
+**Wheeler–DeWitt Timeless State, Page–Wootters Slicing & Geometric Causality**<br/>(惠勒—德维特无时间态、佩奇—伍特斯切片与几何因果律)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Order-independence abolishes sequential time: $(2k)!$ de-ordering model (`MODEL`), conditional slicing under ideal clock assumptions (`Literature`), Gram rigidity $\det G \ge 0$ (`LEAN ✓`), and stationary phase $\delta S=0$ (bivector model $+\mathbf{\Omega}-\mathbf{\Omega}=0$)**
+
+**Lean-Facing Object / Locked GID:**
+[`unit_gram_overlap_characterization`](lean:D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization), [`conditionalState_isState`](lean:D5/S3/Observer/Conditioning.conditionalState_isState)
+
+**One-Line Invariant / Identity:**
+$\det G(\mathbf{A},\mathbf{B},\mathbf{C}) \ge 0,\quad H\mathbf{\Psi} = 0$
+
+**Epistemic Status:**
+`LEAN ✓` / `Literature` / `MODEL` (Ch 29)
+
+**Finite Observer, Gram Elliptope (Causally Compatible Space) & PSD Matrix Completion**<br/>(有限观察者、格拉姆椭圆体与时间场选点)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Because the observer is finite, choice operates inside the causally compatible Gram elliptope ($\det G > 0$, dihedral angle $\phi$), continuously picking points in the time field ($G_{M+1} \succeq 0$) with $\theta^* \approx 0.739$ (`MODEL`) as the 1D self-referential balance prototype**
+
+**Lean-Facing Object / Locked GID:**
+[`lagrange_gram_identity`](lean:D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity), [`finite_contracting_updates_stabilize`](lean:D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize)
+
+**One-Line Invariant / Identity:**
+$c_{AC} = \cos\theta_1\cos\theta_2 + \cos\phi\,\sin\theta_1\sin\theta_2,\quad \det G \ge 0$
+
+**Epistemic Status:**
+`LEAN ✓` / `Literature` / `MODEL` (Ch 29)
+
+**Global Static Time Field $P = NP$ vs. Finite Observer $P \neq NP$**<br/>(全局静态时间场 $P = NP$ vs. 有限观察者 $P \neq NP$)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Postselection & CTC fixed-point models collapse ($\mathrm{PostBQP}=\mathrm{PP}\supseteq\mathrm{NP}$, $\mathrm{P}_{\mathrm{CTC}}=\mathrm{PSPACE}\supseteq\mathrm{NP}$); a finite observer faces the black-box $\theta_0 \approx \frac{\pi}{2} - 2^{-n/2}$ orthogonal horizon ($L=\Theta(2^{n/2})$) and bounded-degree SoS local $G_M \succeq 0$ blind spot (standard $\mathrm{P}\neq\mathrm{NP}$ remains `OPEN`)**
+
+**Lean-Facing Object / Locked GID:**
+[`uniform_operator_rotation`](lean:D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation), [`result`](lean:D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result)
+
+**One-Line Invariant / Identity:**
+$\cos\theta_0 = 2^{-n/2},\quad L = \Theta(2^{n/2}),\quad G_M \succeq 0\;(M = o(n))$
+
+**Epistemic Status:**
+`LEAN ✓` / `Literature` / `OPEN` / `MODEL` (Ch 15, 20, 30)
+
+**"$P$ Is a Field, $NP$ Is a Line": Witness Thread, Guiding Field & Hairy-Ball Curl**<br/>(“$P$ 是场，$NP$ 是线”：见证丝、导向场与毛球旋度)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Geometric model (`MODEL`): an $NP$ witness is a zero-cross-section 1D thread (verifiable in $O(k)$); paradigmatic $P$ algorithms construct a guiding field (Karmarkar interior barrier field, Kasteleyn planar skew-symmetric bivector field $A_K^T = -A_K,\; [\operatorname{Pf}(A_K)]^2=\det A_K,\; Z = \sum_M \prod_{e \in M} w_e = |\operatorname{Pf}(A_K)|$), while 3-body curl $\nabla\wedge\mathbf{F}\neq 0$ models exponential search vortices**
+
+**Lean-Facing Object / Locked GID:**
+[`complete_diagonal_topological_settlement`](lean:D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_topological_settlement), [`result`](lean:D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result)
+
+**One-Line Invariant / Identity:**
+$A_K^T = -A_K,\quad [\operatorname{Pf}(A_K)]^2 = \det A_K,\quad Z = |\operatorname{Pf}(A_K)|$
+
+**Epistemic Status:**
+`LEAN ✓` / `Literature` / `OPEN` / `MODEL` (Ch 20, 21, 30)
+
+**Navier–Stokes Equations, Lamb Bivector Curl & $P$ vs. $NP$ Field Analogy**<br/>(纳维—斯托克斯方程、兰姆双向量旋度与 $P$ vs. $NP$ 场化类比)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Structural analogy (`MODEL`): Lamb's identity splits inner-product kinetic gradient (irrotational potential $P$-state) from exterior vortex force $\mathbf{u}\cdot(\nabla\wedge\mathbf{u})$; 2D stretch-free global smoothness (analogous to $\text{2-SAT}\in\mathrm{P}$) vs. 3D potential vortex stretching and conditional $A\to 0$ filament collapse (analogous to $\text{3-SAT}\in\mathrm{NP}\text{-complete}$; 2026 forced Statements C/D blow-up verified in Lean 4, unforced Statements A/B remain `OPEN`); inviscid Euler Arnold $\operatorname{SDiff}(M)$ $L^2$ geodesic and the quadratic advection projection closure obstruction (`LEAN ✓`)**
+
+**Lean-Facing Object / Locked GID:**
+[`quadratic_closure_iff`](lean:D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff), [`no_exact_closure`](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure), [`all_grade_regularity_of_mild_path`](lean:D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path)
+
+**One-Line Invariant / Identity:**
+$(\mathbf{u}\cdot\nabla)\mathbf{u} = \frac{1}{2}\nabla(\|\mathbf{u}\|^2) + \mathbf{u}\cdot(\nabla\wedge\mathbf{u}),\quad \Gamma \approx A\|\boldsymbol{\omega}\|$
+
+**Epistemic Status:**
+`LEAN ✓` / `Literature` / `OPEN` / `MODEL` (Ch 30)
+
+**Exponential Time Hypothesis (ETH), Tensor-Network Rank Collapse & Cosmic Horizon Galactic Algorithm**<br/>(指数时间假设 ETH、张量网络秩约分与宇宙视界银河算法)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Impagliazzo–Paturi–Zane ETH ($s_3>0$) & late-October 2026 tensor-network $2^{O(n\log\log n/\sqrt{\log n})}$ subexponential bound: local 3-body facets leave an asymptotic $\frac{\log\log n}{\sqrt{\log n}}$ rank-deficiency seam (`MODEL`, with bridge-graph min-cut & finite-rank concentration as formal prototypes), yet under the illustrative $c=1$ curve the crossover $n \approx 2^{558} \gg 10^{80}$ lies beyond the observable universe horizon and top-level specification audits enact relative semantic diagonal escape (`LEAN ✓`)**
+
+**Lean-Facing Object / Locked GID:**
+[`result`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result), [`finite_rank_concentration_mode_bound`](lean:D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound), [`relative_semantic_diagonal_target_inadequate_of_surjective`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective)
+
+**One-Line Invariant / Identity:**
+$s_k = \inf\{\delta \mid k\text{-SAT}\in O(2^{\delta n})\},\quad r_{\mathrm{new}}(n) \sim \frac{\log_2\log_2 n}{\sqrt{\log_2 n}}$
+
+**Epistemic Status:**
+`LEAN ✓` / `Literature` / `OPEN` / `MODEL` (Ch 19, 21, 30)
+
+**Spatial Attractors, `trureturing` Cut-and-Project Observer, Cassini $(-1)^{k+1}$ Seam & Déjà Vu**<br/>(空间吸引子、`trureturing` 黄金切投观察者、卡西尼接缝与似曾相识)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Golden cut-and-project model set & coding theorems (`LEAN ✓`: Minkowski lattice embedding, `goldenModelSet` cut-and-project inclusion, Zeckendorf `NoAdjacentOnes` & nonnegative real `NNReal` thread injectivity, conjugate norm separation & full-window Delone set, Cassini's identity $F_n F_{n+2}-F_{n+1}^2=(-1)^{n+1}$, and closed-subgroup bounded-gap torus returns) combined with the rhombic triacontahedron window $W\subset E_\perp^3$ ($30$ faces, $32$ vertices, $6$ five-fold axes), Conway's Empire Effect, and the Lorenz attractor $D_{\mathrm{KY}}\approx 2.06$ (`Literature`), inspiring the philosophical model (`MODEL`) of the soul as the internal window phase $u\in E_\perp$, forgetting as high-level Zeckendorf truncation, historical ruins as large-margin $d_{\partial}$ interior nodes, and Déjà vu as cross-round inner-product resonance $\cos\delta\theta\to 1$ as $\delta\theta\to 0$**
+
+**Lean-Facing Object / Locked GID:**
+[`minkowski_model_set_spec`](lean:D5/S1/Scale/MinkowskiModelSet.minkowski_model_set_spec), [`golden_model_set_subset_cut_and_project`](lean:D5/S1/Deficit/ModelSet/GoldenCutAndProject.golden_model_set_subset_cut_and_project), [`fib_cassini_from_golden_norm`](lean:D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm), [`TorusObservationWindowReturns.result`](lean:D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result)
+
+**One-Line Invariant / Identity:**
+$F_n F_{n+2} - F_{n+1}^2 = (-1)^{n+1},\quad \delta\theta\to 0 \implies \cos\delta\theta \to 1$
+
+**Epistemic Status:**
+`LEAN ✓` / `Literature` / `MODEL` (Ch 24, 29, Coda)
+
+**Quantum Fairness, Entanglement Monogamy & Ergodic Statistical Holism**<br/>(量子公平性、纠缠单配性与遍历统计全息)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Rank-one Born pairing reciprocity, complementary-context purity Pythagoras, no-cloning inner-product lock, Bell mixed marginals, Landauer's balance bound, and compact closed-subgroup torus Haar equidistribution and bounded-gap returns (`LEAN ✓`), paired with spherical Haar isotropy and the CKW entanglement monogamy inequality $\tau_{A|B}+\tau_{A|C}\le\tau_{A|BC}$ (`Literature`), grounding the fivefold privilege-abolition and ergodic statistical-holism model (`MODEL`)**
+
+**Lean-Facing Object / Locked GID:**
+[`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight), [`complementary_context_probability_pythagoras`](lean:D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras), [`no_cloning_inner_product_criterion`](lean:D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion), [`TorusOrbitEquidistribution.result`](lean:D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result)
+
+**One-Line Invariant / Identity:**
+$\tau_{A|B} + \tau_{A|C} \le \tau_{A|BC},\quad \lim_{N\to\infty}\frac{1}{N}\sum_{n=0}^{N-1} f(g^{n+1}) = \int_G f\,d\mu$
+
+**Epistemic Status:**
+`LEAN ✓` / `Literature` / `MODEL` (Ch 31)
+
+**Orthogonal Self-Referential Unified Field, Icosian–$E_8$ Golden Bridge & Eight-Program Meta-Unification**<br/>(正交自指统一场、艾柯西安 $E_8$ 黄金桥与八大纲领元统一)
+
+**Geometric Intuition Term (本书几何直觉语言):**
+**Complex-structure squaring $R^2=-I$, finite monotone contraction, golden fixed point $\varphi$, binary Zeckendorf `NoAdjacentOnes` prohibition, Minkowski null-cone rigidity, spanning-tree loop holonomy classification, and bridge-graph min-cut (`LEAN ✓`), paired with Jacobson's horizon equation of state, Conway–Sloane's golden-field Icosian ring $\mathcal{I}\subset\mathbb{H}$ equipped with the rescaled Galois quadratic form $Q(q)=2(a+b)$ isometric to the $E_8$ root lattice, and eight foundational unification programs (`Literature`), forming the six-domain unified-field dictionary and 3D cognitive meta-unification compass (`MODEL`)**
+
+**Lean-Facing Object / Locked GID:**
+[`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary), [`base_success_iff_noAdjacentOnes`](lean:D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes), [`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null), [`anchored_phase_classification`](lean:D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification), [`result`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result)
+
+**One-Line Invariant / Identity:**
+$R^2 = -I,\quad (\mathcal{I}, Q)\cong E_8\;\bigl(Q(q)=\operatorname{tr}_{\mathbb{Q}(\sqrt{5})/\mathbb{Q}}\bigl(\tfrac{2\varphi}{\sqrt{5}}\operatorname{Nrd}(q)\bigr)=2(a+b)\bigr),\quad \psi = \psi(\psi)$
+
+**Epistemic Status:**
+`LEAN ✓` / `Literature` / `MODEL` (Ch 32)
+
 :::
 
 ::: {.figure src="appa-dictionary"}
