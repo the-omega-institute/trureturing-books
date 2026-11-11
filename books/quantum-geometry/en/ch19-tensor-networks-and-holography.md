@@ -16,9 +16,17 @@ In keeping with our three-tier epistemological contract and the discrete facet-s
 
 Suppose two composite quantum subsystems — a left boundary and a right boundary — communicate through an intermediate network of contracted tensor legs. If only a single one-dimensional scalar wire links the two sides, the induced linear map across the cut has rank at most $1$ regardless of how large the boundary Hilbert spaces are. When multiple internal bonds bridge the interface in parallel, the operator rank across the cut (the number of nonzero Schmidt singular values) can grow with the product of the bond dimensions.
 
+::: {.viz src="layered-network-cut" preset="one" height="500"}
+**One site: the cut is its own leg.** Site 16 at the bottom of the layered network forms the amber interval on its own, and the magenta minimal cut severs only that one leg. A single bond crosses the cut, so the rank across it is at most the dimension of that bond; only when more bonds are cut does the bound become the product of their dimensions.
+:::
+
 ![Hierarchical tensor-network schematic, width-three bridge-graph quantum max-flow min-cut theorem, and discrete log-capacity polyhedral facets alongside the continuum RT literature boundary](../assets/fig-19-mera-bridge-graph-mincut.svg)
 
 As illustrated in Panel I of the figure above, hierarchical tensor networks such as MERA are widely used in the physics literature to motivate a geometric link between boundary entanglement and bulk bottleneck cuts. In general tensor networks, however, the quantum max-flow (the maximum matrix rank achievable by varying local tensors) can be strictly smaller than the quantum min-cut (the minimum product of bond dimensions across a disconnecting cut). To establish a theorem verified by the Lean kernel, we focus on an explicit finite-dimensional bridge network whose parameters and cone domain are completely specified.
+
+::: {.viz src="layered-network-cut" preset="four" height="500"}
+**Four sites: the cut runs through the network.** Four neighbouring sites at the bottom form the amber interval. Severing their four legs is not the cheapest option: the magenta minimal cut dips into the network and severs only 3 bonds, with the cyan tensors on its inner side. The page counts severed legs, which only bounds the rank from above; as noted above, in a general network the max-flow can fall short of the min-cut, and the network itself is a schematic model.
+:::
 
 In the Lean module `D5.S3.Quantum.TensorNetworks.BridgeGraph.QuantumMaxFlowBound`, fix four natural-number bond dimensions $a, b, c, d \in \mathbb{N}$ and a bridge of width $3$ (indexed by $r \in \operatorname{Fin} 3$):
 
@@ -239,6 +247,18 @@ Two guardrails are mandatory when comparing discrete tensor-network bounds with 
 2. **Respect the R3 discrete-facet boundary**: in this book, the geometric bridge from [@thm-bridge-quantum-maxflow-mincut] to holographic ideas proceeds strictly through the discrete log-capacity polyhedral facets, bottlenecks, and seam stitching of [@ex-log-capacity-facets], without claiming that a continuum limit or holographic duality has been proved.
 
 See S. Ryu & T. Takayanagi, *Phys. Rev. Lett.* **96**, 181602 (2006), DOI: `10.1103/PhysRevLett.96.181602`; B. Swingle, *Phys. Rev. D* **86**, 065007 (2012), DOI: `10.1103/PhysRevD.86.065007`; and J. D. Bekenstein, *Phys. Rev. D* **7**, 2333 (1973), DOI: `10.1103/PhysRevD.7.2333`.
+:::
+
+::: {.viz src="layered-network-cut" preset="grow" height="500"}
+**Double the interval, and the cut gains only about two legs.** The amber interval keeps its right end and grows from 1 site to 16; the magenta minimal cut climbs layer by layer from 1 bond to only 8, whereas severing every leg would take 16. For every interval of this 32-site network the cut stays within $2\log_2 L + 1$ (checked one by one on the page). Reading the number of severed legs as the “area” of an RT minimal surface is Swingle's MERA analogy (a literature result, not formalized in this book).
+:::
+
+::: {.viz src="layered-network-cut" preset="two" height="500"}
+**Two intervals: cut them apart, or cut them together.** Two sites separate the amber intervals A and B, and A grows leftward from a single site. While A is short, the magenta minimal cut is two separate cuts; from 7 sites on, one large cut around A, B and the gap, plus a small cut through the two legs of the gap, is cheaper: at 10 sites, cutting together takes 10 bonds and cutting apart 13. The minimal cut is always the cheapest of the candidates; for the analogous verified bound on the width-three bridge graph see [@prop-bridge-flow-cut-bound].
+:::
+
+::: {.viz src="layered-network-cut" height="560"}
+The full laboratory of the layered network and its cut: drag one or two intervals along the boundary and watch the magenta minimal cut thread through the network, counting the bonds it severs. The network is a schematic model and the counts are computed by the page; the RT formula and the MERA analogy are literature results, not formalized in this book, and green is reserved for [@prop-bridge-flow-cut-bound].
 :::
 
 Across the width-three bridge network, we have seen how a collection of quantum channels saturates the discrete minimum cut $\min(ad, bc)$ ([@thm-bridge-quantum-maxflow-mincut]) and stitches together affine log-capacity facets along the seam $ad = bc$. Yet what happens in a dynamical quantum circuit after boundary entanglement has already saturated its cut bound? How do parallel circuit depth, exact two-qubit gate synthesis lower bounds, and closed graph walks behave — and where is the exact boundary between Lean-verified circuit theorems and the great open conjectures of holographic complexity and computational complexity theory? Let us turn to [Chapter 20](ch20-complexity-and-spacetime.md).
