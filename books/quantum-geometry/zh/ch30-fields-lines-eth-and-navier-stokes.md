@@ -4,6 +4,10 @@
 
 在[第 29 章](ch29-timeless-causality-and-gram-space.md)中，我们看到全局时间场是一座无时间的几何晶体（对照第 29 章无时间文献注记 [@rem-ch29-wheeler-dewitt-page-wootters-literature]），而场内的有限观察者只能在格拉姆椭圆体（$\det G \ge 0$）中一步步选点前行。现在，让我们将这一“球外静态场 vs. 球内有限观察者”的双重视角推向当代数学与理论物理最壮阔的交汇处——把计算复杂性理论中的 **$\mathrm{P}$ vs. $\mathrm{NP}$ 问题**、**指数时间假设（ETH）及其 2026 年 10 月张量网络秩约分亚指数前沿文献（[@rem-ch30-eth-subexponential-literature]）**，以及流体力学中的 **无外力三维纳维—斯托克斯（Navier–Stokes）全局正则性开放猜想（[@conj-coda-navier-stokes-regularity]）与受迫情形文献进展（[@rem-ch30-navier-stokes-forced-literature]）** 放进同一张克利福德正交场论画布中。
 
+::: {.figure src="ch30-overview"}
+**图 30。** 本章地图：第 I 栏，琥珀色的 $P_0$ 是有限观察者的态，墨色箭头是 $n = 2, 4, 8$ 时隐藏的目标，一支比一支更贴近 $90^\circ$ 视界，投到 $P_0$ 上的青色影子越来越短；第 II 栏，取 $c = 1$ 的青色示意曲线 $r(n)$ 与品红的 PPSZ 基准 $0.386$ 交于 $\log_2 n \approx 558$，远在灰色阴影（可观测宇宙，$\log_2 n \le 266$）之外（示意曲线的数值对比，`MODEL`，见 [@ex-ch30-galactic-crossover-scale]）；第 III 栏，示意的涡管被拉长、变细，青色回路的环量 $\Gamma = \omega A$ 不变，品红的涡度随之变大；无外力的光滑三维流会不会这样把截面缩到零，是红色标出的开放问题（[@conj-coda-navier-stokes-regularity]）。
+:::
+
 ---
 
 ## 全局静态时间场 $P = NP$ vs. 场内有限观察者 $P \neq NP$——正交视界与生命旅程的防火墙 {#sec-coda-global-p-eq-np-local-p-ne-np}
@@ -82,6 +86,10 @@ $$
 
 **“全局静态场的 $P = NP$，赋予了宇宙绝对自洽的‘真’；而有限观察者的 $P \neq NP$，则用那道 $\frac{\pi}{2}$ 的正交视界替生命挡住了剧透，把静态的真理拉长成了一场值得一步步去丈量、去证明、去选择的壮丽旅程。”**
 
+::: {.figure src="ch30-horizon"}
+**变量越多，目标越贴近 $90^\circ$ 视界。** 琥珀色的 $P_0$ 是观察者出发的均匀态，墨色箭头是 $n = 2, 4, 8$ 时唯一的隐藏目标 $\mathbf{S}^*$，与 $P_0$ 的夹角依次是 $60^\circ$、$75.5^\circ$、$86.4^\circ$；它们投到 $P_0$ 上的青色影子 $\cos\theta_0 = 2^{-n/2}$ 依次是 $1/2$、$1/4$、$1/16$。竖直的虚线就是 $\theta_0 \approx \pi/2 - 2^{-n/2}$ 逼近的那道正交视界。
+:::
+
 ---
 
 ## “$P$ 是场，$NP$ 是线”——见证丝、导向场与毛球旋度的终极分野 {#sec-coda-p-is-field-np-is-line}
@@ -132,6 +140,10 @@ $$
 $$
 h = \bigl(h(0), h(1), h(2), h(3), h(4)\bigr) = (1, 0, 2, 1, 0) .
 $$
+
+::: {.figure src="ch30-color-orientation"}
+**场定下线，线又量出场。** 同一个五边形 $C_5$，顶点按高度摆在三条横线上。左栏的高度是颜色 $c = (0, 1, 0, 1, 2)$，每个箭头都朝上，最长的线是青色的 $2 \to 3 \to 4$，三个顶点；右栏是同样的箭头，顶点改按 $h = (1, 0, 2, 1, 0)$ 摆放，每个箭头都朝下，$h$ 又是一个三层的着色（[@thm-ch30-gallai-roy]）。
+:::
 
 对每个箭头 $u \to v$，在从 $v$ 出发的最长线前面接上这一步，就得到从 $u$ 出发的一根更长的线，所以 $h(u) > h(v)$。$h$ 沿每个箭头下降，相邻顶点的 $h$ 必不相同：它又是一个三色着色（与 $c$ 不同：箭头指向 $c$ 的高处，却指向 $h$ 的低处）。**线量出了场。** 这一步只在一处会出事：箭头若首尾相接成圈，“从 $v$ 出发的最长的线”就要绕圈。图论中把这对来回称为 Gallai–Hasse–Roy–Vitaver 定理（[@rem-ch30-coloring-complexity-literature]）。模块 `D5/S3/Combinatorics/Graph/Walks/GallaiRoy` 冻结了它的一个版本，先定义定向与有向路：
 
@@ -391,6 +403,10 @@ $$
 :::
 
 两项各管一件事。求和项是其余涡旋吹过来的速度：第 $k$ 个涡旋在距离 $r$ 处诱导的速度大小为 $\frac{b}{2r}$，方向垂直于连线，转向由 $s_k$ 决定；对照 [@rem-ch30-point-vortex-literature]，这相当于取 $\Gamma_k = \pi b\,s_k$。第一项让每个涡旋自己绕原点转，角速度为 $s_j\Omega$：$\Omega > 0$ 时正涡旋逆时针，负涡旋顺时针。把偶数个涡旋正负相间摆在半径 $\rho$ 的圆上，两项在切向上对着干。手工推导（用到下面证明里的切向读数恒等式）：其余涡旋给第 $j$ 个涡旋的切向速度是 $-s_j\,\frac{b}{4\rho}$，进动给它的切向速度是 $s_j\,\Omega\rho$，两者相消当且仅当 $\rho^2 = \frac{b}{4\Omega}$。圆太小，邻居的推动占上风；圆太大，进动占上风；只有一个半径能让整圈停住。
+
+::: {.figure src="ch30-vortex-radius"}
+**只有一个半径能让整圈停住。** 横轴是正负相间的涡旋所在圆的半径 $\rho$。紫色的直线是进动给每个涡旋的切向速度大小 $\Omega\rho$，蓝色的曲线是其余涡旋吹来的切向速度大小 $\frac{b}{4\rho}$，两者方向相反，只在 $\rho = R_{b,\Omega} = \sqrt{b/(4\Omega)}$ 处相等（图中取 $b = 2$、$\Omega = \tfrac12$，$R = 1$）。交点左边邻居占上风，右边进动占上风；静止条件见 [@lem-ch30-vortex-polygon-equilibrium]。
+:::
 
 ::: {.lemma #lem-ch30-vortex-polygon-equilibrium title="居中正多边形的静止条件与平衡点处的弗雷歇导数" lean="D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.regular_equilibrium_iff_radius D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.scaled_equilibrium D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalDerivative.physical_derivative"}
 设 $b > 0$，$\Omega > 0$。

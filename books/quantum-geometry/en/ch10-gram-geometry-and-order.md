@@ -96,6 +96,10 @@ Note the exact contract of [@cor-latitude-complex-overlap]: it holds for all com
 **Once round the equator.** The four corners $+X, +Y, -X, -Y$ all lie on the latitude $t = \frac{1}{2}$, so by [@cor-latitude-complex-overlap] each neighbouring inner product is $\frac{1+i}{2}$; their product is $-\frac{1}{4}$ and the cyan needle at the lower right stops at $\pi$. The magenta area is the whole northern hemisphere, $2\pi$. The amber arrow returns to $+X$ on top of the dashed one, as if it had not turned; the full magenta disc beside it shows that it has in fact turned a whole circle.
 :::
 
+::: {.film src="003-two-angles-berry"}
+**One orthogonal step, then another: two-angle addressing and the Berry phase (about 140 seconds).** Turning about a single axis, the amber point only draws a circle; a tilt of $\theta = 60^\circ$ about $\vv{e}_2$ followed by a twist of $\varphi = 45^\circ$ about $\vv{e}_3$ lands it on $\bigl(\frac{\sqrt{6}}{4}, \frac{\sqrt{6}}{4}, \frac{1}{2}\bigr)$, and two axes only $30^\circ$ apart still reach a target in four alternating turns ([@thm-two-axis-finite-word]). Then two $90^\circ$ turns taken in either order stop at $+X$ and at $-Y$; carried around the octant loop, the arrow comes back turned by the enclosed area $\Omega = \frac{\pi}{2}$; finally the overlap $\frac{1+i}{2}$ of [@cor-latitude-complex-overlap] multiplies out to $\Delta = \frac{1+i}{4}$, whose phase $\frac{\pi}{4}$ stays put when every state is re-phased (for the Berry phase and the area, see [@rem-berry-pancharatnam-holonomy-literature]).
+:::
+
 ## Keeping Instruments and Time Order {#sec-instruments-preserve-order}
 
 Before turning to global Gram reconstruction, let us enforce a crucial operational boundary: **pairwise consistency of state overlaps never makes sequential physical operations commute, nor does it allow sequential measurement statistics to be deduced from static single-step effects alone.**

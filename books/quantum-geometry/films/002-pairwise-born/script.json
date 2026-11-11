@@ -1,0 +1,36 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen", "qubit": "cue-bit", "C:": "C,"},
+  "music": {"bpm": 80, "progression": "d-minor"},
+  "scenes": [
+    {"id": "pair", "name": "TWO ARROWS", "lead": 1.8, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["One arrow alone points nowhere. A second arrow makes an angle.", "一支箭头孤悬，说不出指向哪里；来了第二支，才有夹角。"],
+      ["No outside frame is needed: the two diagonals already read that angle.", "用不着外部坐标架 C：平行四边形的两条对角线自己就读出夹角。"],
+      ["Three plus one is four. Three minus one, over four, is one half: sixty degrees.", "3 + 1 = 4 = 2(1² + 1²)；(3 − 1)/4 = 1/2 = cos 60°。"]
+    ], "cues": [{"line": 2, "at": 3.4, "kind": "chime"}]},
+    {"id": "shadow", "name": "POINT C", "lead": 0.5, "tail": 0.4, "music": [0.9, 0.6, 0.6, 0.0, 0.2], "lines": [
+      ["Let A be its own axis, and drop a perpendicular from the tip of B.", "让 A 自己当轴，从 B 的箭尖向 A 所在的直线作垂线。"],
+      ["The foot is the point C: B's shadow on A, of length cosine theta.", "垂足就是点 C：B 落在 A 上的影子，长 cos θ。"],
+      ["The rest stands at right angles, with length sine theta.", "剩下的一截与 A 垂直，长 sin θ。"]
+    ]},
+    {"id": "born", "name": "BORN WEIGHT", "lead": 0.5, "tail": 0.5, "music": [0.9, 0.8, 0.8, 0.4, 0.4], "lines": [
+      ["Squeeze that shadow, from minus one to one, into zero to one.", "把影子的取值从 [−1, 1] 线性压进 [0, 1]。"],
+      ["One plus cosine theta, over two, is cosine squared of half the angle: the Born weight.", "(1 + cos θ)/2 = cos²(θ/2)：这就是玻恩权重。"],
+      ["Lean checks that the trace pairing is the squared overlap.", "迹配对 Tr(ρP) 等于重叠的模平方 |⟨φ|ψ⟩|²，由 Lean 内核检验。"]
+    ], "cues": [{"line": 2, "at": 2.6, "kind": "stamp"}]},
+    {"id": "square", "name": "WHY SQUARES", "lead": 0.5, "tail": 0.5, "music": [1.0, 0.8, 0.7, 0.5, 0.4], "lines": [
+      ["Why the square? Split the arrow along the shutter and across it.", "为什么是平方？把箭头沿着快门和垂直于快门拆成两段。"],
+      ["First powers overshoot, fourth powers leak. Only squares always add to one.", "一次方之和会超出，四次方之和会漏掉；只有平方之和恒等于 1。"],
+      ["So a shutter and its complement share the whole weight, as Lean confirms.", "所以快门 P 与它的补 I − P 恰好分完全部权重；这一条也由 Lean 检验。"]
+    ], "cues": [{"line": 1, "at": 3.8, "kind": "chime"}]},
+    {"id": "chord", "name": "INSIDE THE BALL", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["Now a passing particle records which branch the qubit took.", "现在，一颗路过的环境粒子记下了比特走的是哪一支。"],
+      ["Look at the qubit alone: its sideways part shrinks to the records' shadow, while its height stays.", "只看这个比特：它的横向部分缩成两条记录的影子 cos θ_env，高度不变。"],
+      ["Once the records are orthogonal, the arrow is a short line on the axis. The weights survive; only the coherence is gone.", "两条记录正交时，箭头成了竖轴上一截短线：权重原样留下，只有相干被丢掉。"]
+    ], "cues": [{"line": 2, "at": 3.0, "kind": "impact"}]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, part one.", "《量子计算的几何直觉》· 第一部"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}

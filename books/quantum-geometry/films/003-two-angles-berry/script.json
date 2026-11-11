@@ -1,0 +1,42 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen", "pi over": "pie over", "phi": "fye"},
+  "music": {"bpm": 78, "progression": "d-minor"},
+  "scenes": [
+    {"id": "one", "name": "ONE TURN", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["Start at the north pole, and turn about a single axis.", "从北极 N 出发，只绕一根轴转。"],
+      ["The point sweeps one circle and comes back home. One kind of turn draws only a circle.", "点沿一条子午圆走一整圈，又回到 N：只转一种，只画得出一个圆。"]
+    ]},
+    {"id": "two", "name": "TWO ANGLES", "lead": 0.5, "tail": 0.5, "music": [0.9, 0.6, 0.6, 0.0, 0.2], "lines": [
+      ["First step: tilt about the y axis by theta. The height drops to cosine theta.", "正交一次：绕 e₂ 倾转 θ，高度降到 cos θ。"],
+      ["Second step: twist about the vertical axis by phi. The height stays, and the point swings round its latitude.", "正交两次：绕竖轴 e₃ 拧转 φ，高度不变，点沿着纬度圈转过去。"],
+      ["Sixty degrees, then forty-five: we land at root six over four, root six over four, one half.", "θ = 60°、φ = 45°：落在 (√6/4, √6/4, 1/2)。"],
+      ["Two angles reach every point. Only at the poles does the twist do nothing.", "两个角走遍整颗球；只在两极，第二步白拧。"]
+    ], "cues": [{"line": 2, "at": 3.2, "kind": "chime"}]},
+    {"id": "skew", "name": "SKEW AXES", "lead": 0.5, "tail": 0.5, "music": [0.9, 0.8, 0.7, 0.3, 0.3], "lines": [
+      ["The two axes need not be perpendicular. Thirty degrees apart, four turns still reach the target.", "两根轴不必正交：只差 30°，交替转四次，照样到达目标。"],
+      ["Lean checks that any rotation is a finite word in two axes that are not parallel.", "只要两轴不共线，任一旋转都是绕它们的有限旋转字，由 Lean 内核检验。"]
+    ], "cues": [{"line": 1, "at": 2.6, "kind": "stamp"}]},
+    {"id": "order", "name": "ORDER", "lead": 0.5, "tail": 0.5, "music": [1.0, 0.8, 0.8, 0.4, 0.4], "lines": [
+      ["Now swap the order. Quarter turn about Y, then about X: we end on plus X.", "现在调换次序。先绕 Y、再绕 X 各转 90°：停在 +X。"],
+      ["About X first, then Y: we end on minus Y, ninety degrees away.", "先绕 X、再绕 Y：停在 −Y，两个终点相隔 90°。"],
+      ["In each second step the point stays put, yet the arrow it carries turns a quarter.", "两条路的第二步里点都不动，它带着的小箭头却各转了四分之一圈。"]
+    ], "cues": [{"line": 1, "at": 2.4, "kind": "chime"}]},
+    {"id": "loop", "name": "OCTANT LOOP", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["Walk a closed loop: north, to plus X, to plus Y, and home.", "走一圈闭合回路：N → +X → +Y → N。"],
+      ["Carry the arrow without twisting it. It comes back turned by ninety degrees.", "一路不拧箭头，平行搬运；回到 N 时，它转过了 90°。"],
+      ["That is the enclosed area, pi over two, one eighth of the sphere.", "这正是圈住的面积 Ω = π/2，整颗球的八分之一。"],
+      ["The literature gives the spin a Berry phase of minus half that area: minus pi over four.", "文献给出，自旋攒下的贝里相位是这块面积的负一半：γ = −π/4。"]
+    ], "cues": [{"line": 1, "at": 3.0, "kind": "chime"}]},
+    {"id": "pairs", "name": "PAIRWISE PHASE", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.5, 0.4], "lines": [
+      ["The same angle is already written in the pairwise overlaps.", "同一个角，早就写在两两内积里。"],
+      ["On the equator, Lean checks the overlap formula: plus X against plus Y gives one plus i, over two.", "赤道上，同纬度内积公式由 Lean 内核检验：+X 与 +Y 的内积是 (1 + i)/2。"],
+      ["Multiply the three overlaps around the loop: one plus i, over four. Its phase is pi over four.", "沿回路把三个内积连乘：Δ = (1 + i)/4，相位 π/4。"],
+      ["Re-phase each state however you like: the product does not move.", "给每个态任意乘上局部相位：连乘积纹丝不动。"]
+    ], "cues": [{"line": 1, "at": 2.8, "kind": "stamp"}]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, part three.", "《量子计算的几何直觉》· 第三部"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}

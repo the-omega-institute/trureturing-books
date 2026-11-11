@@ -1899,6 +1899,206 @@
           "gid": "D5/S3/Zeros/ZetaIdentities.riemann_zeta_residue_one"
         }
       ]
+    },
+    {
+      "id": "blade-multiplication",
+      "code": "BLADE//XOR",
+      "title": "刀片乘法",
+      "title_en": "Multiplying blades",
+      "summary": "Cl(3,0) 的 8 块基刀片记成 3 位掩码，排成 8 × 8 的乘法表：乘积是哪一块只看两个掩码的异或，正负号只看排序时要交换几次。点表里的一格，舞台右边把这一乘积拆开：左右因子拼成一串，右因子逐个向左越过比它大的左因子，每交换一次两条线交叉一次、符号变一次；排好后同号相邻的一对按 eᵢ² = +1 抵掉，剩下的就是异或。e₂ · e₁ = −e₁₂ 交换一次；e₁₂ · e₁₂ = −1；伪标量 I₃ · I₃ 交换 0 + 1 + 2 = 3 次得 −1，I₃ 那一行与那一列逐格相同。只用两位（X、Z）时就是四个泡利字的乘法表，负号恰在左因子含 Z、右因子含 X 的四格，即合成律 D(a, b)·D(c, d) = (−1)^(bc)·D(a ⊕ c, b ⊕ d)。向量场景把 v = 3e₁ + 4e₂ + 12e₃ 自乘的九项逐一加进来：交叉项成对抵消，v² = 169，与 B(3, 4, 12)² = 169·I 一致。每一格都与 2 × 2 复矩阵的乘积核对。六张实验卡可以在第二十五章正文里单独引用。",
+      "summary_en": "The 8 basis blades of Cl(3,0), written as 3-bit masks, fill an 8 × 8 multiplication table: which blade the product is depends only on the XOR of the two masks, and its sign only on how many swaps sorting needs. Click a cell and the right of the stage takes that product apart: the factors are joined into one string, each right factor moves left past the larger left factors, every swap is two crossing lines and one sign flip, and once sorted each adjacent equal pair cancels by eᵢ² = +1, leaving the XOR. e₂ · e₁ = −e₁₂ takes one swap; e₁₂ · e₁₂ = −1; the pseudoscalar I₃ · I₃ takes 0 + 1 + 2 = 3 swaps and gives −1, and the row and the column of I₃ agree cell by cell. With two bits (X, Z) it is the multiplication table of the four Pauli words, with minus signs exactly where the left factor contains Z and the right one X: the composition law D(a, b)·D(c, d) = (−1)^(bc)·D(a ⊕ c, b ⊕ d). The vector scene adds the nine terms of v = 3e₁ + 4e₂ + 12e₃ squared one at a time: the cross terms cancel in pairs and v² = 169, in agreement with B(3, 4, 12)² = 169·I. Every cell is checked against 2 × 2 complex matrices. Each of the six experiment cards can be cited on its own from Chapter 25.",
+      "path": "blade-multiplication/",
+      "thumbnail": "blade-multiplication/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "克利福德代数",
+        "刀片",
+        "异或",
+        "泡利字",
+        "外尔位移",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Clifford algebra",
+        "Blades",
+        "XOR",
+        "Pauli words",
+        "Weyl displacements",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第二十五章 · 三比特刀片掩码、逆序符号与两比特辛泡利字",
+          "label_en": "Chapter 25 · Three-bit blade masks, inversion parity, and two-bit symplectic Pauli words",
+          "href": "../zh/ch25-rewriting-and-xor.html#sec-three-bit-blade-masks-and-symplectic-pauli",
+          "href_en": "../en/ch25-rewriting-and-xor.html#sec-three-bit-blade-masks-and-symplectic-pauli"
+        },
+        {
+          "label": "第二十五章 · 外尔对、反对易与无特征标定理",
+          "label_en": "Chapter 25 · The Weyl pair, anticommutation, and the no-character theorem",
+          "href": "../zh/ch25-rewriting-and-xor.html#sec-weyl-pair-no-character",
+          "href_en": "../en/ch25-rewriting-and-xor.html#sec-weyl-pair-no-character"
+        },
+        {
+          "label": "Lean 源码 · WeylDisplacement",
+          "label_en": "Lean source · WeylDisplacement",
+          "href": "{trureturing}/D5/S3/Quantum/Algebra/WeylDisplacement.lean"
+        },
+        {
+          "label": "Lean 源码 · QubitBloch",
+          "label_en": "Lean source · QubitBloch",
+          "href": "{trureturing}/D5/S3/Quantum/Measurement/Bloch/QubitBloch.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/FiniteDimensional.qubit_weyl_star"
+        },
+        {
+          "gid": "D5/S3/Quantum/FiniteDimensional.qubit_matrix_algebra_has_no_character"
+        },
+        {
+          "gid": "D5/S3/Quantum/QubitWitnesses.pauli_observables_have_no_common_eigenvector"
+        },
+        {
+          "gid": "D5/S3/Quantum/Measurement/Bloch/QubitBloch.B_formula_core"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/WeylDisplacement.displacement_mul"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/WeylDisplacementAdjoint.displacement_adjoint"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute"
+        }
+      ]
+    },
+    {
+      "id": "zyz-compile",
+      "code": "ZYZ//COMPILE",
+      "title": "ZYZ 编译",
+      "title_en": "Compiling to ZYZ",
+      "summary": "布洛赫球上的 ZYZ 编译：琥珀色的箭头 v 依次绕 z 转 γ、绕 y 转 β、再绕 z 转 α，对应旋子 R(α, β, γ) = R_z(α) R_y(β) R_z(γ) 从右到左的三个因子。每一段里，v 在转轴上的影子（青色）不动，平面里的那一份扫出品红的扇形，左右两个半角合成整角。页面在八个刀片掩码上按异或乘出旋子，读出它的四个分量、RR̃ = 1、三列 Re₁、Re₂、Re₃，以及它自己的转轴 n 与转角：绕 n 一次转到的地方，就是三段走到的地方。箭头同时是纯态 ρ = blochMatrix(1, v)，页面当场核对第二十六章冻结的迹与坐标还原。五张实验卡（夹心、三段、T 门、H 门、单一转轴）各讲一件事，可以在正文里单独引用。",
+      "summary_en": "ZYZ compilation on the Bloch sphere: the amber arrow v turns by γ about z, by β about y and by α about z again, the three factors of the rotor R(α, β, γ) = R_z(α) R_y(β) R_z(γ) read from right to left. In each turn the shadow of v on the axis (cyan) stays put while the part in the plane sweeps a magenta fan, the two half-angles on either side adding up to the whole angle. The page multiplies the rotor on the eight blade masks by XOR and reads off its four components, RR̃ = 1, the columns Re₁, Re₂, Re₃, and its own axis n and angle: one turn about n arrives where the three turns arrive. The arrow is also the pure state ρ = blochMatrix(1, v), on which the page checks the trace and coordinate-recovery theorems frozen in Chapter 26. Each of the five experiment cards (sandwich, three turns, the T gate, the H gate, one axis) makes one point and can be cited on its own from the text.",
+      "path": "zyz-compile/",
+      "thumbnail": "zyz-compile/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "布洛赫球",
+        "旋子",
+        "ZYZ 欧拉角",
+        "夹心积",
+        "偶子代数",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Bloch sphere",
+        "Rotors",
+        "ZYZ Euler angles",
+        "Sandwich product",
+        "Even subalgebra",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第二十六章 · 偶子代数双矢量与双侧夹心积",
+          "label_en": "Chapter 26 · Even-subalgebra bivectors and the sandwich",
+          "href": "../zh/ch26-single-qubit-rotor-compilation.html#sec-even-rotor-sandwich-action",
+          "href_en": "../en/ch26-single-qubit-rotor-compilation.html#sec-even-rotor-sandwich-action"
+        },
+        {
+          "label": "第二十六章 · ZYZ 旋转器编译器与数值核验",
+          "label_en": "Chapter 26 · The ZYZ rotor compiler and its numerical check",
+          "href": "../zh/ch26-single-qubit-rotor-compilation.html#sec-zyz-rotor-compiler-python",
+          "href_en": "../en/ch26-single-qubit-rotor-compilation.html#sec-zyz-rotor-compiler-python"
+        },
+        {
+          "label": "第二十六章 · 布洛赫矩阵的迹与坐标还原",
+          "label_en": "Chapter 26 · Trace and coordinate recovery of the Bloch matrix",
+          "href": "../zh/ch26-single-qubit-rotor-compilation.html#sec-bloch-matrix-trace-and-recovery",
+          "href_en": "../en/ch26-single-qubit-rotor-compilation.html#sec-bloch-matrix-trace-and-recovery"
+        },
+        {
+          "label": "Lean · ActualPureQubitGeometry",
+          "label_en": "Lean · ActualPureQubitGeometry",
+          "href": "{trureturing}/D5/S3/Quantum/Information/ActualPureQubitGeometry.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Information/ActualPureQubitGeometry.blochMatrix_trace"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_blochMatrix"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/ActualPureQubitGeometry.norm_bloch_le_trace_of_posSemidef"
+        }
+      ]
+    },
+    {
+      "id": "fixed-point-convergence",
+      "code": "FIXED//CONVERGE",
+      "title": "不动点的收束 · 不动点处的斜率定下收束的快慢",
+      "title_en": "How fixed points close in · the slope at the fixed point sets the pace",
+      "summary": "三个场景画在同一张蛛网图上（曲线 y = f(x) 与直线 y = x）。迭代：反复按 1 + 1/x 或 cos，折线一左一右夹住不动点，误差每步乘上不动点处的斜率（−1/φ² ≈ −0.382、−sin θ* ≈ −0.674），而不是全局最坏的 −sin 1；加上单位圆，点 (θ*, sin θ*) 的横坐标是闭环停下的位置，高度是它合拢的速率。牛顿：沿切线走到直线，四步之内误差从 0.26 缩到 6.4×10⁻²¹，单纯迭代要走 115 步。读数：θ* 的渐近分数 2/3、3/4、14/19、17/23……的残差 |cos q − q| 停在斜率 0 与 −sin 1 张成的楔形里，分母² × 残差总低于 1 + sin 1；千分尺的 0.739 不如 17/23。轨道与残差都用 70 位定点整数实算。",
+      "summary_en": "Three scenes on one cobweb plane (the curve y = f(x) and the line y = x). Iterate: pressing 1 + 1/x or cos again and again, the path closes in on the fixed point from alternating sides, and each step multiplies the error by the slope at the fixed point (−1/φ² ≈ −0.382, −sin θ* ≈ −0.674), not by the worst-case −sin 1; with the unit circle added, the point (θ*, sin θ*) has the stopping place as its abscissa and the closing rate as its height. Newton: follow the tangent to the line, and within four steps the error falls from 0.26 to 6.4×10⁻²¹, where the plain iteration needs 115 steps. Readings: the convergents 2/3, 3/4, 14/19, 17/23, … of θ* leave residuals |cos q − q| inside the wedge between slopes 0 and −sin 1, and denominator² × residual stays below 1 + sin 1; the 0.739 of a thousandths ruler is worse than 17/23. Orbits and residuals are computed with 70-digit fixed-point integers.",
+      "path": "fixed-point-convergence/",
+      "thumbnail": "fixed-point-convergence/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "余弦不动点",
+        "黄金比",
+        "蛛网图",
+        "收敛率",
+        "牛顿迭代",
+        "连分数",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Cosine fixed point",
+        "Golden ratio",
+        "Cobweb plot",
+        "Rate of convergence",
+        "Newton's method",
+        "Continued fractions",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第二十四章 §24.3 · 代数自指的唯一黄金锁",
+          "label_en": "Chapter 24 §24.3 · The unique algebraic golden lock",
+          "href": "../zh/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-3",
+          "href_en": "../en/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-3"
+        },
+        {
+          "label": "第二十四章 §24.5 · 真实收敛率、导数加速与有理读数的裂缝",
+          "label_en": "Chapter 24 §24.5 · True rate, derivative speed-up and the rational seam",
+          "href": "../zh/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-5",
+          "href_en": "../en/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-5"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique"
+        },
+        {
+          "gid": "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"
+        }
+      ]
     }
   ]
 }
