@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="prelude-overview" data-lang="zh" data-wrap="1" viewBox="0 0 740 270" width="740" height="270" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="三栏。第一栏：左边一只眼睛，一根青色的射线 A 从右边迎面射进眼里，琥珀色的视线 O 与它在同一条直线上，标着 O·A = 1；下方一个小圆是眼睛看到的样子：正中只有一个亮点。第二栏：两支单位箭头 A（灰）与 B（琥珀）从同一点出发，夹角 θ，按带箭头的小圈 Î 所示的方向从 A 转到 B；它们张成的平行四边形涂成品红，标着 A∧B = sin θ Î。第三栏：一个球，赤道画成青色，标着 S^{n−1}；球的轮廓标着 S^{n}；一根紫色的竖轴穿过两极，两极标着 ±e_{n+1}。">
+<title>三栏。第一栏：左边一只眼睛，一根青色的射线 A 从右边迎面射进眼里，琥珀色的视线 O 与它在同一条直线上，标着 O·A = 1；下方一个小圆是眼睛看到的样子：正中只有一个亮点。第二栏：两支单位箭头 A（灰）与 B（琥珀）从同一点出发，夹角 θ，按带箭头的小圈 Î 所示的方向从 A 转到 B；它们张成的平行四边形涂成品红，标着 A∧B = sin θ Î。第三栏：一个球，赤道画成青色，标着 S^{n−1}；球的轮廓标着 S^{n}；一根紫色的竖轴穿过两极，两极标着 ±e_{n+1}。</title>
+<style>.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="236" height="270" viewBox="0 0 236 270">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">I　点其实是线</text>
+<path d="M18 92 L20.2 89.81 L22.4 87.67 L24.6 85.64 L26.8 83.77 L29 82.1 L31.2 80.67 L33.4 79.53 L35.6 78.69 L37.8 78.17 L40 78 L42.2 78.17 L44.4 78.69 L46.6 79.53 L48.8 80.67 L51 82.1 L53.2 83.77 L55.4 85.64 L57.6 87.67 L59.8 89.81 L62 92 L62 92 L59.8 94.19 L57.6 96.33 L55.4 98.36 L53.2 100.23 L51 101.9 L48.8 103.33 L46.6 104.47 L44.4 105.31 L42.2 105.83 L40 106 L37.8 105.83 L35.6 105.31 L33.4 104.47 L31.2 103.33 L29 101.9 L26.8 100.23 L24.6 98.36 L22.4 96.33 L20.2 94.19 L18 92Z" class="ts-dim" stroke-width="1.6" stroke-linejoin="round" fill="none"/>
+<circle cx="44" cy="92" r="9" class="ts-dim tf-panel" stroke-width="1.4"/>
+<circle cx="46" cy="92" r="4" class="tf-ink"/>
+<line x1="222" y1="92" x2="66" y2="92" class="ts-cyan" stroke-width="3.2" fill="none"/>
+<path d="M160 92 L172 86.96 L172 97.04Z" class="tf-cyan"/>
+<text class="tf-cyan" x="206" y="78" font-size="15" text-anchor="middle"><tspan font-style="italic">A</tspan></text>
+<line x1="64" y1="92" x2="117.2" y2="92" class="ts-amber" stroke-width="2" fill="none"/>
+<path d="M124 92 L116 95.36 L116 88.64Z" class="tf-amber"/>
+<text class="tf-amber" x="96" y="114" font-size="15" text-anchor="middle"><tspan font-style="italic">O</tspan></text>
+<text class="tf-ink" x="118" y="146" font-size="14" text-anchor="middle"><tspan font-style="italic">O</tspan>·<tspan font-style="italic">A</tspan> = 1</text>
+<circle cx="118" cy="206" r="34" class="ts-dim tf-panel" stroke-width="1.4"/>
+<circle cx="118" cy="206" r="5" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-dim" x="118" y="260" font-size="13" text-anchor="middle">看到：一个点</text>
+</svg>
+<svg class="tr-fig-panel" x="252" y="0" width="236" height="270" viewBox="0 0 236 270">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">II　线其实是面</text>
+<path d="M34 190 L142 190 L211.42 107.27 L103.42 107.27Z" class="ts-magenta tf-magenta" stroke-width="1.2" stroke-linejoin="round" fill-opacity="0.18"/>
+<line x1="34" y1="190" x2="134.35" y2="190" class="ts-ink" stroke-width="2.4" fill="none"/>
+<path d="M142 190 L133 193.78 L133 186.22Z" class="tf-ink"/>
+<line x1="34" y1="190" x2="98.5" y2="113.13" class="ts-amber" stroke-width="2.6" fill="none"/>
+<path d="M103.42 107.27 L100.53 116.59 L94.74 111.73Z" class="tf-amber"/>
+<path d="M74 190 L73.89 187.09 L73.58 184.2 L73.05 181.34 L72.32 178.53 L71.38 175.77 L70.25 173.1 L68.93 170.51 L67.42 168.02 L65.73 165.65 L63.88 163.41 L61.87 161.31 L59.71 159.36" class="ts-ink" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+<text class="tf-ink" x="81.04" y="173.11" font-size="14" text-anchor="middle"><tspan font-style="italic">θ</tspan></text>
+<text class="tf-ink" x="140" y="212" font-size="15" text-anchor="middle"><tspan font-style="italic">A</tspan></text>
+<text class="tf-amber" x="91.42" y="103.27" font-size="15" text-anchor="middle"><tspan font-style="italic">B</tspan></text>
+<path d="M121.58 152.74 L122.68 154.63 L124.18 156.35 L126.03 157.83 L128.17 159.03 L130.54 159.91 L133.07 160.45 L135.67 160.63 L138.28 160.45 L140.8 159.91 L143.17 159.03 L145.31 157.83 L147.16 156.35 L148.66 154.63 L149.77 152.74 L150.44 150.72 L150.67 148.63 L150.44 146.55 L149.77 144.53 L148.66 142.63 L147.16 140.92 L145.31 139.44 L143.17 138.24 L140.8 137.36 L138.28 136.82 L135.67 136.63 L133.07 136.82 L130.54 137.36 L128.17 138.24" class="ts-magenta" stroke-width="1.6" stroke-linejoin="round" fill="none"/>
+<path d="M128.17 138.24 L133.7 133.04 L135.76 138.55Z" class="tf-magenta"/>
+<text class="tf-magenta" x="159.67" y="153.63" font-size="15"><tspan font-style="italic">Î</tspan></text>
+<text class="tf-magenta ts-bg" x="118" y="236" font-size="14" text-anchor="middle" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">A</tspan>∧<tspan font-style="italic">B</tspan> = sin <tspan font-style="italic">θ</tspan> <tspan font-style="italic">Î</tspan></text>
+</svg>
+<svg class="tr-fig-panel" x="504" y="0" width="236" height="270" viewBox="0 0 236 270">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">III　球外还有球</text>
+<circle cx="118" cy="146" r="84" class="ts-dim tf-cyan" stroke-width="1.5" fill-opacity="0.04"/>
+<path d="M196.93 155.83 L198.33 154.4 L199.5 152.95 L200.46 151.48 L201.18 150 L201.68 148.5 L201.95 147 L201.99 145.5" class="ts-cyan" stroke-width="2.6" stroke-linejoin="round" fill="none"/>
+<path d="M201.99 145.5 L201.8 144 L201.37 142.5 L200.72 141.01 L199.85 139.54 L198.75 138.08 L197.42 136.65 L195.88 135.24 L194.13 133.86 L192.17 132.51 L190 131.2 L187.64 129.93 L185.09 128.71 L182.35 127.53 L179.43 126.41 L176.35 125.33 L173.11 124.32 L169.72 123.36 L166.18 122.47 L162.51 121.64 L158.72 120.87 L154.82 120.18 L150.82 119.55 L146.73 119 L142.56 118.53 L138.32 118.12 L134.03 117.8 L129.69 117.55 L125.32 117.38 L120.93 117.29 L116.53 117.27 L112.14 117.34 L107.76 117.48 L103.41 117.71 L99.1 118.01 L94.85 118.38 L90.65 118.84 L86.53 119.36 L82.5 119.96 L78.56 120.63 L74.74 121.37 L71.03 122.18 L67.45 123.06 L64.01 123.99 L60.71 124.99 L57.58 126.04 L54.6 127.15 L51.81 128.31 L49.19 129.52 L46.76 130.78 L44.53 132.07 L42.5 133.41 L40.68 134.77 L39.07 136.17 L37.67 137.6 L36.5 139.05 L35.54 140.52 L34.82 142 L34.32 143.5 L34.05 145 L34.01 146.5" class="ts-cyan" stroke-width="1.95" stroke-dasharray="4 4" stroke-linejoin="round" fill="none" opacity="0.55"/>
+<path d="M34.01 146.5 L34.2 148 L34.63 149.5 L35.28 150.99 L36.15 152.46 L37.25 153.92 L38.58 155.35 L40.12 156.76 L41.87 158.14 L43.83 159.49 L46 160.8 L48.36 162.07 L50.91 163.29 L53.65 164.47 L56.57 165.59 L59.65 166.67 L62.89 167.68 L66.28 168.64 L69.82 169.53 L73.49 170.36 L77.28 171.13 L81.18 171.82 L85.18 172.45 L89.27 173 L93.44 173.47 L97.68 173.88 L101.97 174.2 L106.31 174.45 L110.68 174.62 L115.07 174.71 L119.47 174.73 L123.86 174.66 L128.24 174.52 L132.59 174.29 L136.9 173.99 L141.15 173.62 L145.35 173.16 L149.47 172.64 L153.5 172.04 L157.44 171.37 L161.26 170.63 L164.97 169.82 L168.55 168.94 L171.99 168.01 L175.29 167.01 L178.42 165.96 L181.4 164.85 L184.19 163.69 L186.81 162.48 L189.24 161.22 L191.47 159.93 L193.5 158.59 L195.32 157.23 L196.93 155.83" class="ts-cyan" stroke-width="2.6" stroke-linejoin="round" fill="none"/>
+<line x1="118" y1="242.3" x2="118" y2="49.7" class="ts-violet" stroke-width="1.8" fill="none"/>
+<circle cx="118" cy="67.07" r="5" class="tf-violet"/>
+<circle cx="118" cy="224.93" r="5" class="tf-violet"/>
+<text class="tf-violet" x="128" y="61.07" font-size="14">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">n+1</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-violet" x="128" y="240.93" font-size="14">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">n+1</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-cyan ts-bg" x="85.27" y="197" font-size="14" text-anchor="middle" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">S</tspan><tspan dy="-0.42em" font-size="72%">n−1</tspan><tspan dy="0.42em">​</tspan></text>
+<text class="tf-dim" x="36" y="72" font-size="14" text-anchor="middle"><tspan font-style="italic">S</tspan><tspan dy="-0.42em" font-size="72%">n</tspan><tspan dy="0.42em">​</tspan></text>
+<text class="tf-dim" x="118" y="260" font-size="13" text-anchor="middle">旧球是新球的赤道</text>
+</svg>
+</svg>
