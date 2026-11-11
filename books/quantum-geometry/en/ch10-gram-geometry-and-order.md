@@ -13,7 +13,9 @@ Across four sections, this chapter makes the boundary between the two completely
 3. **Why local coordinate charts on $S^2$ look path-tangled**: the tangent-bundle and Hopf-bundle topological obstructions on $S^2$ versus the global rotor frame on $S^3$ are summarized in the literature notes [@rem-hopf-dirac-monopole-literature] and [@rem-gram-hairy-ball-literature];
 4. **Where true order-independent pairwise consistency lives**: when we retain the labeled **full complex Gram matrix** $G_{ij} = \langle\psi_i, \psi_j\rangle$ (with complex phases intact, not merely squared moduli $|G_{ij}|^2$), reading its pairwise entries in any order reconstructs the entire family of state vectors uniquely up to a single common ambient unitary $U$ ([@thm-gram-unitary-reconstruction] and [@lemma-unit-gram-equality]), while the complex phase of the cyclic triple product $\Delta = G_{01}G_{12}G_{20}$ is already retained inside $G$ (compared with Berry phase in [@rem-berry-pancharatnam-holonomy-literature])!
 
-![Noncommuting spherical rotations and Berry solid angle, Hairy Ball and Hopf obstructions versus the global rotor frame on S3, and unitary reconstruction from the full complex Gram matrix](../assets/fig-10-gram-matrix-hairy-ball.svg)
+::: {.figure src="ch10-overview"}
+**Figure 10.** The chapter at a glance. Panel I: two amber arcs leave the North Pole $N$; turning about $Y$ and then $X$ lands at $+X$, turning about $X$ and then $Y$ lands at $-Y$, and the two ends are $90^\circ$ apart. Panel II: the small cyan arrows on the sphere at the left shrink to zero at both poles (violet rings; a literature result, not formalized in this book), while the dashed circle at the right stands for the rotor sphere $S^3$ and carries a violet frame at every point. Panel III: the full complex Gram table of the three states of [@ex-octant-berry-gram], with the pairwise complex overlaps in the cyan cells ([@thm-gram-unitary-reconstruction]).
+:::
 
 ## Rotation Order and Berry Solid Angle {#sec-spherical-order-and-berry}
 
@@ -33,11 +35,19 @@ Take the Bloch sphere in Panel I of Figure 10 and apply active right-hand rotati
   R_y(\pi/2)\,R_x(\pi/2)\,\vv{e}_3 = -\vv{e}_2 \neq \vv{e}_1!
   $$
 
+::: {.viz src="berry-loop" preset="order" height="500"}
+**The same two turns in the other order end somewhere else.** From the North Pole, the amber point turned about $Y$ and then $X$ ends at $+X$; the one turned about $X$ and then $Y$ ends at $-Y$, $90^\circ$ away. In the second step neither point moves, yet the amber arrow attached to each turns by $90^\circ$.
+:::
+
 Likewise, the north projector $P_0 = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$ and east projector $P_+ = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$ do not commute:
 
 $$
 P_0 P_+ = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 0 & 0 \end{pmatrix} \neq \frac{1}{2}\begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix} = P_+ P_0.
 $$
+
+::: {.figure src="ch10-shutter-order"}
+**Swap the two shutters and the arrow ends on a different line.** This is the real plane of state vectors, where the cyan lines $\lvert 0\rangle$ and $\lvert +\rangle$ are $45^\circ$ apart ($90^\circ$ on the Bloch sphere). Starting from the same grey $v$, the left panel projects onto the $\lvert +\rangle$ line first and then onto the $\lvert 0\rangle$ line, so the amber $P_0P_+v$ ends on the horizontal line; the right panel reverses the order, and the amber $P_+P_0v$ ends on the slanted line, much shorter.
+:::
 
 Furthermore, the classical correspondence between closed-loop geometric holonomy on $S^2$ and three-vertex complex overlap invariants is recorded below ([@rem-berry-pancharatnam-holonomy-literature]).
 
@@ -55,6 +65,10 @@ $$
 $$
 
 is invariant under independent vertex phase rephasings $\psi_k \mapsto e^{i\alpha_k}\psi_k$, and its complex phase encodes the solid angle directly via $\gamma_B \equiv -\arg\Delta = -\frac{\Omega}{2} \pmod{2\pi}$ (see [@rem-gram-hairy-ball-literature] at the end of the chapter for full differential-topological details).
+:::
+
+::: {.viz src="berry-loop" preset="octant" height="500"}
+**An eighth of the sphere.** The cyan loop $N \to +X \to +Y \to N$ encloses a magenta area $\Omega = \frac{\pi}{2}$. Carried once round, the amber arrow comes back to $N$ turned by $\frac{\pi}{2}$ from the dashed direction it set out in; the cyan needle at the lower right is the phase $\frac{\pi}{4}$ of the product of neighbouring inner products, $\Delta = \frac{1+i}{4}$ — exactly half the area. The general link between turn, phase and area is the literature result above, not formalized in this book.
 :::
 
 To compute complex overlaps along any latitude circle cleanly, the Lean module `BargmannImaginaryMaximizers` defines, for $t \in \mathbb{R}$ and $z \in \mathbb{C}$, the two-component complex vector
@@ -77,6 +91,14 @@ Expanding the dot product over `Fin 2`, the first component contributes $\overli
 :::
 
 Note the exact contract of [@cor-latitude-complex-overlap]: it holds for all complex $z, w \in \mathbb{C}$ without assuming $|z| = |w| = 1$ (unit normalization of `latitude t z` requires $|z| = 1$ unless $t = 0$), and it computes inner-product overlaps rather than Berry holonomy itself. On the equator $t = \frac{1}{2}$ with $z = 1$ ($+X$) and $w = i$ ($+Y$), [@cor-latitude-complex-overlap] immediately evaluates the overlap $\langle\psi_1, \psi_2\rangle = \frac{1 + i}{2} = \frac{1}{\sqrt{2}}e^{i\pi/4}$, exhibiting the angle $\frac{\pi}{4}$ directly inside the pairwise Gram entry.
+
+::: {.viz src="berry-loop" preset="equator" height="500"}
+**Once round the equator.** The four corners $+X, +Y, -X, -Y$ all lie on the latitude $t = \frac{1}{2}$, so by [@cor-latitude-complex-overlap] each neighbouring inner product is $\frac{1+i}{2}$; their product is $-\frac{1}{4}$ and the cyan needle at the lower right stops at $\pi$. The magenta area is the whole northern hemisphere, $2\pi$. The amber arrow returns to $+X$ on top of the dashed one, as if it had not turned; the full magenta disc beside it shows that it has in fact turned a whole circle.
+:::
+
+::: {.film src="003-two-angles-berry"}
+**One orthogonal step, then another: two-angle addressing and the Berry phase (1 min 58 s).** Turning about a single axis, the amber point only draws a circle; a tilt of $\theta = 60^\circ$ about $\vv{e}_2$ followed by a twist of $\varphi = 45^\circ$ about $\vv{e}_3$ lands it on $\bigl(\frac{\sqrt{6}}{4}, \frac{\sqrt{6}}{4}, \frac{1}{2}\bigr)$, and two axes only $30^\circ$ apart still reach a target in four alternating turns ([@thm-two-axis-finite-word]). Then two $90^\circ$ turns taken in either order stop at $+X$ and at $-Y$; carried around the octant loop, the arrow comes back turned by the enclosed area $\Omega = \frac{\pi}{2}$; finally the overlap $\frac{1+i}{2}$ of [@cor-latitude-complex-overlap] multiplies out to $\Delta = \frac{1+i}{4}$, whose phase $\frac{\pi}{4}$ stays put when every state is re-phased (for the Berry phase and the area, see [@rem-berry-pancharatnam-holonomy-literature]).
+:::
 
 ## Keeping Instruments and Time Order {#sec-instruments-preserve-order}
 
@@ -145,7 +167,15 @@ Panel II of Figure 10 contrasts the two distinct topological obstructions on the
    Remember two essential distinctions: the homomorphism $\mathrm{SU}(2) \to \mathrm{SO}(3)$ is a $2:1$ double cover rather than an isomorphism, and global parallelizability of the total space $S^3$ trivializes $TS^3$ without providing a global section over the base sphere $S^2$.
 :::
 
+::: {.viz src="berry-loop" preset="comb" height="500"}
+**The point that cannot be combed.** The small cyan arrows are $v(p) = \vv{e}_3 - (p\cdot\vv{e}_3)p$, the shadow of the vertical on each tangent plane. The amber point walks north from $+X$ along a meridian; its arrow, of length $\sin\theta$, shrinks and vanishes at the North Pole. The two poles circled in violet are the only zeros of this field, each of index $+1$ (a literature result, not formalized in this book).
+:::
+
 > Singularities arise when we try to flatten the phase fiber onto $S^2$; on the rotor sphere $S^3$, the global frame never vanishes.
+
+::: {.figure src="ch10-gauge-winding"}
+**In the north gauge the phase turns once around the south pole, so it has no value there.** The southern hemisphere seen from above, with the south pole at the centre. On two latitude circles, the cyan hand in each dial is the phase of $\langle 1\mid\psi_N\rangle$ for the north-gauge representative $\psi_N = \bigl(\cos\frac{\theta}{2}, e^{i\varphi}\sin\frac{\theta}{2}\bigr)$: once round a circle, the hands turn once round too; the inner circle, closer to the pole, still gives one full turn, so no value fits at the pole inside the dashed violet ring. That the Hopf bundle has no global section is a literature result, not formalized in this book ([@rem-hopf-dirac-monopole-literature]).
+:::
 
 ## Reconstruction from the Full Complex Gram Matrix {#sec-complex-gram-reconstruction}
 
@@ -158,6 +188,10 @@ G = A^* A, \qquad G_{ij} = \langle \psi_i, \psi_j\rangle = \psi_i^* \psi_j \qqua
 $$
 
 Whenever a second $m \times n$ matrix $B \in \mathbb{C}^{m \times n}$ has the exact same complex Gram matrix $B^* B = A^* A$, the following frozen theorem guarantees a **single common ambient unitary matrix** $U \in U(m)$ such that $B = UA$.
+
+::: {.figure src="ch10-common-turn"}
+**Same table of pairwise overlaps, one common turn.** The grey triangle $A$ joins $N, +X, +Y$ (the three states of [@ex-octant-berry-gram]); the ink triangle $B = UA$, with $U = \operatorname{diag}(1, i)$, joins $N, +Y, -X$. The two violet curved arrows are one and the same $90^\circ$ turn about the vertical axis, carrying the whole triangle rigidly, and the two complex Gram matrices agree entry by entry ([@thm-gram-unitary-reconstruction]).
+:::
 
 ::: {.theorem #thm-gram-unitary-reconstruction title="Ambient Unitary Reconstruction from Equal Complex Gram Matrices" lean="D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq"}
 Let $m$ be a finite index type with decidable equality (`Fintype m`, `DecidableEq m`) and let $n$ be any finite index type (`Finite n`). For any two complex matrices $B, A \in M_{m \times n}(\mathbb{C})$, if their complex Gram matrices are equal,
@@ -236,6 +270,14 @@ Notice that [@lemma-unit-gram-equality] requires overlap equal to $1$, not modul
 3. **Noncommuting rotations and projectors**: Active right-hand rotations obey $R_x(\pi/2)R_y(\pi/2)\vv{e}_3 = \vv{e}_1$ whereas $R_y(\pi/2)R_x(\pi/2)\vv{e}_3 = -\vv{e}_2$. Likewise $P_0 P_+ \neq P_+ P_0$ for $P_0 = \operatorname{diag}(1, 0)$ and $P_+ = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$.
 4. **Sequential instrument counterexample**: For $K_0 = P_0$, $K_1 = I - P_0$, and $L_j = X K_j$, both instruments share identical static effects $K_j^* K_j = L_j^* L_j = P_j$. Starting at $\rho = P_0$, conditioning on first outcome $0$, and reading second effect $P_1$, the unnormalized joint Born weights are $0$ for $K$ and $1$ for $L$.
 5. **Hairy-ball zeros and global rotor frame**: On $S^2$, $v(p) = \vv{e}_3 - (p\cdot\vv{e}_3)p$ is tangent, equals $\vv{e}_3$ at $p = \vv{e}_1$, and vanishes only at $p = \pm\vv{e}_3$, where both isolated zeros have index $+1$, totaling $2 = \chi(S^2)$. On the unit quaternion/rotor sphere $S^3$, $(pI_x, pI_y, pI_z)$ forms a global nowhere-vanishing tangent frame.
+:::
+
+::: {.viz src="berry-loop" preset="reverse" height="500"}
+**Walked the other way, the handedness flips.** The same triangle taken as $N \to +Y \to +X \to N$: the magenta area is just as large, but the amber arrow turns $\frac{\pi}{2}$ the other way and the cyan needle at the lower right stops at $-\frac{\pi}{4}$. The three neighbouring squared moduli are still all $\frac{1}{2}$: squared moduli alone cannot tell the two walks apart.
+:::
+
+::: {.viz src="berry-loop" height="560"}
+The full lab: drag the cyan corners, add a corner on an edge or reverse the loop, and compare the magenta area, the turn of the amber arrow and the phase on the cyan needle at the lower right; the “Order” and “Comb” scenes are one click away.
 :::
 
 ### A Timeless Interpretation: How Gram Geometry Constrains Causally Compatible Choices {#sec-timeless-gram-causality}

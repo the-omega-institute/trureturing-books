@@ -6,6 +6,10 @@ This appendix is the **Master Audit Ledger** of the book's epistemic boundaries.
 2. **C.2 Formal Definitions and Algebraic Carriers (89 Unique `definition` / `structure` / `inductive` Declarations)**: Foundational algebraic structures, rotor types, and state-space definitions bound to `definition` environments or media manifests; together with **C.2.1 Inline-Referenced Auxiliary Theorems and Definitions (123 Unique Inline Declarations)**, these account for all **435 unique locked declarations** in `trureturing.lock.json` (`223 + 89 + 123 = 435`);
 3. **C.3 Open Problems and Unformalized Frontier Register (8 Entries: 6 `conjecture` / `OPEN` Environments + 2 Frontier Literature `remark` Entries)**: Propositions that remain unformalized in `trureturing` or represent open frontier problems in mathematics and physics, isolated throughout the book inside `conjecture` environments (red `OPEN` badges) or explicitly tagged literature `remark` blocks with zero `lean` attributes.
 
+::: {.viz src="lean-declaration-map" preset="all" height="500"}
+**435 cells, one per locked declaration.** The rail reads from the prelude to Appendix B, and the declarations a chapter cites first drop into its column: green for the entries of kind theorem in the lock, grey for definitions, hollow for those reached by inline links only. At the end of the main text the map has as many cells as `trureturing.lock.json` has entries.
+:::
+
 ---
 
 ## C.1 Verified and Frozen Lean 4 Theorems (223 Unique `theorem` GIDs) {#sec-appendix-c-theorems}
@@ -468,6 +472,10 @@ In addition to the 312 declarations bound to formal environments or media anchor
 | `R122` | [`Zeta23.RvM.completedRiemannZeta_ne_zero_of_re_nonpos`](lean:D5/S3/Weil/ZetaRvm/CountByIntegral.completedRiemannZeta_ne_zero_of_re_nonpos) | `D5/S3/Weil/ZetaRvm/CountByIntegral.lean:67` | `theorem` | Ch 22 |
 | `R123` | [`D5.S3.Zeros.ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one`](lean:D5/S3/Zeros/ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one) | `D5/S3/Zeros/ZetaUpgrade.lean:36` | `theorem` | Ch 22 |
 
+::: {.viz src="lean-declaration-map" preset="inline" height="500"}
+**The ones reached by inline links alone.** Only the 124 hollow cells remain: 82 green theorems and 42 grey definitions. The one cell more than the 123 entries of this section is `T036` of C.1: the main text reaches it by inline links only, and it is listed in C.1 because a visualization cites it.
+:::
+
 ---
 
 ## C.3 Open Conjectures & Unformalized Problems Register (8 Entries: 6 `OPEN` Conjectures + 2 Literature Boundaries — Zero `lean` Attributes) {#sec-appendix-c-open-register}
@@ -502,6 +510,14 @@ Every build and release of this book mechanically enforces the following five ve
 | **Auxiliary Definition / Structure Count** | `89` environment definitions (`131` total `kind` in `def`, `inductive` with inline refs) | Segregated into Section C.2 and never counted as `theorem / lemma / proposition / corollary` boxes | `PASS` |
 | **Bilingual Structural Alignment** | 100% parity between `zh` and `en` chapter order, env IDs, and Lean citations | Checked item-by-item by `./tbook check` (`0 error(s), 0 warning(s)`) | `PASS` |
 
+::: {.viz src="lean-declaration-map" preset="theorems" height="500"}
+**Theorems only.** The map keeps the 304 entries of kind theorem in the lock, all green: 222 filled cells cited by a theorem environment with `lean=`, and 82 hollow ones that appear in inline links only.
+:::
+
 ::: {.remark #rem-appendix-c-epistemic-boundary title="Verification Boundary Note for the Complete Declaration Index"}
 All 223 formal environment/media theorems in Section C.1, all 89 environment definitions/structures in Section C.2, and all 123 inline cross-referenced declarations in Section C.2.1 (435 locked declarations in total: 304 theorems + 131 definitions/structures) are verified by the Lean 4 kernel at `trureturing@dev` commit `1d9bf98cab8306e67ec38a739359f2cdae63877a` and locked in `trureturing.lock.json`. By contrast, the open conjectures (`OPEN`) and classical literature results (Literature result, not formalized in this book) registered in Section C.3 are strictly excluded from the formal theorem count, ensuring that every `LEAN ✓` badge in this book is backed by an unambiguous kernel proof.
+:::
+
+::: {.viz src="lean-declaration-map" height="560"}
+The whole map of declarations: click a cell for its kind, module and source line, every chapter that cites it and its entry in this appendix; click the foot of a column to see what that chapter cites; scrub the rail to watch the chapters land one after another.
 :::

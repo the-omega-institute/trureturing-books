@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="FIXED//CONVERGE · How fixed points close in: the slope at the fixed point sets the pace">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FIXED//CONVERGE 不动点的收束 · 不动点处的斜率定下收束的快慢</title>
+<meta name="description" content="蛛网图上的三种收束：反复按 1 + 1/x 与反复按 cos，误差每步乘上不动点处的斜率（−1/φ² 与 −sin θ*）；牛顿迭代沿切线走到对角线，正确位数每步翻倍；有理读数 a/b 离 cos q = q 总隔着一道缝，缝按分母的平方收窄却不为零。Three ways of closing in, on the cobweb plane: iterating 1 + 1/x or cos multiplies the error at each step by the slope at the fixed point (−1/φ² and −sin θ*); Newton's method follows the tangent to the diagonal and doubles the correct digits at each step; a rational reading a/b always stays a seam away from cos q = q, a seam that narrows like one over the square of the denominator and never closes.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="fixed-point-convergence">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="FIXED//CONVERGE">FIXED<b>//</b>CONVERGE</h1>
+      <div class="tagline">
+        <span class="zh">不动点的收束 · <em>蛛网每绕一圈，误差乘上不动点处的斜率；连斜率一起读，几步就合拢；有理读数却总差一道缝</em></span>
+        <span class="en">How fixed points close in · <em>each turn of the cobweb multiplies the error by the slope at the fixed point; read the slope too and it closes in a few steps; a rational reading always misses by a seam</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillScene">SCENE <strong>—</strong></span>
+      <span class="pill" id="pillStep"><span class="zh">步</span><span class="en">STEP</span> <strong>0</strong></span>
+      <span class="pill hot" id="pillGap"><span class="zh">还差</span><span class="en">TO GO</span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="golden" aria-pressed="false"><span class="code">GOLDEN-LOCK</span><span class="cn zh">1 + 1/x：一左一右夹住 φ</span><span class="cn en">1 + 1/x: closing on φ from both sides</span></button>
+        <button class="preset" data-preset="rate" aria-pressed="false"><span class="code">RATE-0.674</span><span class="cn zh">余弦：每步乘以 −0.674</span><span class="cn en">Cosine: −0.674 per step</span></button>
+        <button class="preset" data-preset="circle" aria-pressed="false"><span class="code">LINE-AND-AREA</span><span class="cn zh">停在哪里、合拢多快：同一个圆上的点</span><span class="cn en">Where it stops, how fast: one point on the circle</span></button>
+        <button class="preset" data-preset="newton" aria-pressed="false"><span class="code">NEWTON</span><span class="cn zh">沿切线走：位数每步翻倍</span><span class="cn en">Follow the tangent: digits double</span></button>
+        <button class="preset" data-preset="rational" aria-pressed="false"><span class="code">CONVERGENTS</span><span class="cn zh">渐近分数：缝收窄却不合上</span><span class="cn en">Convergents: the seam narrows, never closes</span></button>
+        <button class="preset" data-preset="ruler" aria-pressed="false"><span class="code">17/23 vs 739/1000</span><span class="cn zh">二十三等分胜过千分尺</span><span class="cn en">Twenty-three ticks beat a thousand</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec" data-scenes="iter newton">
+      <h2><span class="zh">映射与起点</span><span class="en">Map and start</span><span class="aside">xₖ₊₁ = f(xₖ)</span></h2>
+      <div class="chips" id="mapChips" role="group" aria-label="映射" data-aria-en="Map">
+        <button class="chip" data-map="cos" aria-pressed="true">cos x</button>
+        <button class="chip" data-map="golden" aria-pressed="false">1 + 1/x</button>
+      </div>
+      <div class="field">
+        <label for="x0"><span class="zh">起点 x₀</span><span class="en">Start x₀</span><small class="zh">也可以在舞台上直接拖</small><small class="en">or drag it on the stage</small></label><output id="oX0" for="x0">1.00</output>
+        <input type="range" id="x0" min="-1.5" max="3" step="0.01" value="1">
+      </div>
+      <div class="chips" id="camChips" role="group" aria-label="镜头" data-aria-en="Camera">
+        <button class="chip" data-cam="follow" aria-pressed="true"><span class="zh">跟着放大</span><span class="en">Follow and zoom</span></button>
+        <button class="chip" data-cam="whole" aria-pressed="false"><span class="zh">看全程</span><span class="en">Whole path</span></button>
+        <button class="chip" data-cam="circle" aria-pressed="false"><span class="zh">单位圆</span><span class="en">Unit circle</span></button>
+      </div>
+      <p class="note"><span class="zh">“跟着放大”时画面以不动点为中心，每一步按误差重新定比例尺。</span><span class="en">“Follow and zoom” keeps the fixed point at the centre and rescales the view to the error at every step.</span></p>
+    </section>
+
+    <section class="panel sec" data-scenes="read" hidden>
+      <h2><span class="zh">有理读数</span><span class="en">Rational readings</span><span class="aside">q = a/b</span></h2>
+      <p class="note"><span class="zh">时间轴每走一格，换下一个渐近分数。品红的竖线是残差 |cos q − q|：直线 y = x 与余弦曲线在 q 处的落差。</span><span class="en">Each step of the rail takes the next convergent. The magenta upright is the residual |cos q − q|: the drop from the line y = x to the cosine curve at q.</span></p>
+      <div class="field">
+        <label for="ruler"><span class="zh">尺子的分母 D</span><span class="en">Ruler denominator D</span><small class="zh">离 θ* 最近的一格 a/D；0 = 不用尺子</small><small class="en">the tick a/D nearest θ*; 0 = no ruler</small></label><output id="oRuler" for="ruler">0</output>
+        <input type="range" id="ruler" min="0" max="1000" step="1" value="0">
+      </div>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage still" id="stage" data-thumb aria-label="舞台：蛛网图，曲线 y = f(x)、直线 y = x、迭代走过的折线与不动点" data-aria-en="Stage: the cobweb plane with the curve y = f(x), the line y = x, the path of the iteration and the fixed point">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+        <button class="chip" data-scene="iter" aria-pressed="true"><span class="zh">迭代</span><span class="en">Iterate</span></button>
+        <button class="chip" data-scene="newton" aria-pressed="false"><span class="zh">牛顿</span><span class="en">Newton</span></button>
+        <button class="chip" data-scene="read" aria-pressed="false"><span class="zh">读数</span><span class="en">Readings</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="pATitle"></h2><span id="pAMeta"></span></div>
+        <canvas id="plotA" aria-label="本场景的第一张小图" data-aria-en="First small plot of the scene"></canvas>
+      </section>
+      <section class="panel">
+        <div class="head"><h2 id="pBTitle"></h2><span id="pBMeta"></span></div>
+        <canvas id="plotB" aria-label="本场景的第二张小图" data-aria-en="Second small plot of the scene"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="roKeyL"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div class="wide"><dt id="roL1"></dt><dd id="ro1">—</dd></div>
+        <div class="wide"><dt id="roL2"></dt><dd id="ro2">—</dd></div>
+        <div><dt id="roL3"></dt><dd id="ro3">—</dd></div>
+        <div><dt id="roL4"></dt><dd id="ro4">—</dd></div>
+        <div class="wide"><dt id="roL5"></dt><dd id="ro5">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean" data-map="cos"><span class="ok">LEAN ✓</span><span><span class="zh">存在唯一的正实数 θ* 使 cos θ* = θ*，且 0 &lt; θ* &lt; 1（同一条定理还给出有理复合逆级数在 π 处的绝对收敛与和）。舞台上的 θ* 就是它。已冻结：</span><span class="en">There is exactly one positive real θ* with cos θ* = θ*, and 0 &lt; θ* &lt; 1 (the same theorem also gives the absolute convergence and the sum of the rational inverse series at π). The θ* on the stage is this number. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Analytic/PowerSeries/DottieInverseSeries.lean" target="_blank" rel="noopener"><code>rational_inverse_endpoint</code></a></span></div>
+      <div class="lean" data-map="golden" hidden><span class="ok">LEAN ✓</span><span><span class="zh">(1 + √5)/2 是正数，是 1 + 1/x 的不动点，并且在正实数中，1 + 1/x = x 当且仅当 x = (1 + √5)/2。已冻结：</span><span class="en">(1 + √5)/2 is positive, is a fixed point of 1 + 1/x, and among positive reals 1 + 1/x = x holds exactly when x = (1 + √5)/2. Frozen: </span><a class="leanref" data-lean-gid="D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean" target="_blank" rel="noopener"><code>golden_fixed_point_unique</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：余弦在 [0, 1] 上是常数 sin 1 的压缩映射，从任何实初值出发都收敛到 θ*；靠近 θ* 后误差每步约乘以 −sin θ*；牛顿迭代二次收敛；对 q ∈ [0, 1] 有 |q − θ*| ≤ |cos q − q| ≤ (1 + sin 1)|q − θ*|；θ* 是无理数，所以每个渐近分数 a/b 的残差满足 0 &lt; |cos(a/b) − a/b| &lt; (1 + sin 1)/b²。1 + 1/x 收敛到 φ、每步约乘以 −1/φ² 同属经典分析。</span><span class="en">Literature results, not formalized in this book: on [0, 1] the cosine is a contraction with constant sin 1, so it converges to θ* from every real start; near θ* the error is multiplied by about −sin θ* per step; Newton's method converges quadratically; for q in [0, 1], |q − θ*| ≤ |cos q − q| ≤ (1 + sin 1)|q − θ*|; θ* is irrational, so every convergent a/b has residual 0 &lt; |cos(a/b) − a/b| &lt; (1 + sin 1)/b². That 1 + 1/x converges to φ, about −1/φ² per step, is classical analysis too.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数值演示，不是证明：每条轨道、每个残差都用 70 位十进制的定点整数实算，再换成双精度来画；连分数的部分商是数值观察。“跟着放大”时坐标以不动点为原点，所以 10⁻²⁰ 的误差也画得出来。</span><span class="en">A numerical illustration on the page, not a proof: every orbit and every residual is computed with 70-digit fixed-point integers and only then turned into doubles for drawing; the partial quotients of the continued fraction are a numerical observation. When following, the coordinates are measured from the fixed point, so an error of 10⁻²⁰ can still be drawn.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="60" step="any" value="0" aria-label="时间轴：迭代的步数，或第几个渐近分数" data-aria-en="Rail: the step of the iteration, or which convergent">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>1</kbd>–<kbd>3</kbd> <span class="zh">场景</span><span class="en">scene</span> · <kbd>M</kbd> <span class="zh">换映射</span><span class="en">switch map</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">舞台是蛛网图：青色曲线 y = f(x)、灰色直线 y = x，两者的交点就是不动点。从起点竖直走到曲线，再水平走回直线，就是按一次 f。本页看的是这条折线怎样收进不动点、收得多快。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>迭代。</b>按一次 f，误差 δₖ = xₖ − x* 变成 δₖ₊₁ ≈ f′(x*)·δₖ。余弦在 θ* 处的斜率是 −sin θ* = −λ ≈ −0.6736；1 + 1/x 在 φ 处的斜率是 −1/φ² ≈ −0.382。负号让折线一左一右地夹住不动点，模长就是每步缩小的比例。舞台上品红的虚线是不动点处的切线；对余弦，灰色虚线是 [0, 1] 上最陡的斜率 −sin 1 ≈ −0.8415，即压缩映射原理的全局常数（文献结果，未在本书形式化）。</li>
+        <li><b>单位圆。</b>点 P = (cos θ*, sin θ*) = (θ*, λ) 在单位圆上：青色的横坐标 θ* 是闭环停下的位置，品红的纵坐标 λ 是它合拢的速率，(θ*)² + λ² = 1。这是第二十四章 §24.5 的读法。</li>
+        <li><b>牛顿。</b>在 xₖ 处沿曲线的切线走到直线 y = x，落点就是 xₖ − (xₖ − cos xₖ)/(1 + sin xₖ)：比单纯取余弦多读了一个量 sin xₖ。误差满足 δₖ₊₁ ≈ θ*/(2(1 + λ))·δₖ²（文献结果，未在本书形式化）。读数里的“迭代要走几步”是页面把两条轨道逐步比较数出来的。</li>
+        <li><b>读数。</b>θ* 的连分数是 [0; 1, 2, 1, 4, 1, 40, 1, 9, 4, 2, 1, …]（数值观察）。对每个渐近分数 q = a/b，品红竖线是残差 |cos q − q|。其中从直线到水平线 y = θ* 的那一段恰好是 |q − θ*|；整条竖线停在两条灰色虚线张成的楔形里，因为曲线在 [0, 1] 上的斜率介于 0 与 −sin 1 之间。b² × 残差始终低于 1 + sin 1。尺子 D 取离 θ* 最近的 a/D：D = 1000 时是 0.739，残差约为 17/23 的两倍。</li>
+        <li><b>已验证的部分。</b>θ* 的存在、唯一与 0 &lt; θ* &lt; 1，以及 φ 是 1 + 1/x 唯一的正不动点，是两条冻结的 Lean 定理（见绿色框）。收敛本身、收敛的速率、牛顿的二次收敛与残差的双边界都是文献结果，未在本书形式化。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-3" target="_top">第二十四章 §24.3 · 1 + 1/x 与 φ</a> · <a href="../../zh/ch24-cosine-fixed-points-and-self-reference.html#rem-dottie-convergent-residual-literature" target="_top">§24.5 · 渐近压缩率、牛顿加速与渐近分数残差</a> · <a href="../../zh/ch24-cosine-fixed-points-and-self-reference.html#ex-dottie-rate-newton-rational" target="_top">§24.5 · 数值核对</a> · <a href="../../zh/ch24-cosine-fixed-points-and-self-reference.html#thm-dottie-rational-inverse-endpoint" target="_top">§24.6 · θ* 的存在与唯一</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">The stage is the cobweb plane: the cyan curve y = f(x) and the grey line y = x meet at the fixed point. Going up or down to the curve from the start and then across to the line is one application of f. The page shows how that path closes in on the fixed point, and how fast. It is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>Iteration.</b> One application of f turns the error δₖ = xₖ − x* into δₖ₊₁ ≈ f′(x*)·δₖ. The slope of the cosine at θ* is −sin θ* = −λ ≈ −0.6736; the slope of 1 + 1/x at φ is −1/φ² ≈ −0.382. The minus sign makes the path close in from alternating sides, and the size is the ratio by which the error shrinks per step. The dashed magenta line on the stage is the tangent at the fixed point; for the cosine, the dashed grey line has the steepest slope on [0, 1], −sin 1 ≈ −0.8415, the global constant of the contraction principle (a literature result, not formalized in this book).</li>
+        <li><b>The unit circle.</b> The point P = (cos θ*, sin θ*) = (θ*, λ) lies on the unit circle: its cyan abscissa θ* is where the loop stops, its magenta ordinate λ is how fast it closes, and (θ*)² + λ² = 1. This is the reading of chapter 24, §24.5.</li>
+        <li><b>Newton.</b> At xₖ, follow the tangent of the curve to the line y = x; it lands at xₖ − (xₖ − cos xₖ)/(1 + sin xₖ), which reads one quantity more than the plain cosine: sin xₖ. The error obeys δₖ₊₁ ≈ θ*/(2(1 + λ))·δₖ² (a literature result, not formalized in this book). The readout “steps the iteration needs” is counted by the page, comparing the two orbits step by step.</li>
+        <li><b>Readings.</b> The continued fraction of θ* is [0; 1, 2, 1, 4, 1, 40, 1, 9, 4, 2, 1, …] (a numerical observation). For each convergent q = a/b the magenta upright is the residual |cos q − q|. The part of it from the line to the level y = θ* is exactly |q − θ*|; the whole upright stays inside the wedge of the two dashed grey lines, because on [0, 1] the slope of the curve lies between 0 and −sin 1. b² times the residual always stays below 1 + sin 1. The ruler D takes the a/D nearest θ*: with D = 1000 it reads 0.739, whose residual is about twice that of 17/23.</li>
+        <li><b>What is verified.</b> The existence and uniqueness of θ* with 0 &lt; θ* &lt; 1, and φ as the only positive fixed point of 1 + 1/x, are two frozen Lean theorems (the green boxes). Convergence itself, its rate, Newton's quadratic convergence and the two-sided residual bound are literature results, not formalized in this book.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-3" target="_top">Chapter 24 §24.3 · 1 + 1/x and φ</a> · <a href="../../en/ch24-cosine-fixed-points-and-self-reference.html#rem-dottie-convergent-residual-literature" target="_top">§24.5 · Contraction rate, Newton's speed-up and convergent residuals</a> · <a href="../../en/ch24-cosine-fixed-points-and-self-reference.html#ex-dottie-rate-newton-rational" target="_top">§24.5 · Numerical check</a> · <a href="../../en/ch24-cosine-fixed-points-and-self-reference.html#thm-dottie-rational-inverse-endpoint" target="_top">§24.6 · Existence and uniqueness of θ*</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

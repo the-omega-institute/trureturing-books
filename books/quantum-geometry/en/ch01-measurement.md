@@ -10,6 +10,10 @@ In classical Chinese, the character *liàng* (量) preserves an older wisdom thr
 
 This chapter takes our first step in breaking metaphysical illusions. Combining geometric pictures with theorems verified in the Lean kernel, we develop the author's interpretation: **first comes the relational verb of two states measuring one another (*liáng*); only afterward appears the discrete click on the detector screen (*liàng*).** Every celebrated "paradox" of introductory quantum mechanics begins the moment we invert cause and effect, projecting the outcome of a relational act backward in time and hardening it into the private possession of an isolated thing.
 
+::: {.figure src="ch01-overview"}
+**Figure 1.** The chapter at a glance. Panel I: a single arrow $A$ in empty space; however it is turned about its tail, the grey dashed copies look alike and no $\theta$ can be named. Panel II: behind two arrows $x$ and $y$ stands a grey dashed external frame $C$, and the cyan angle $\theta$ between them does not need it. Panel III: the cyan arrow $A$ serves as the ruler, the amber arrow $B$ opens an angle $\theta$ with it, and an ideal two-outcome reading lands only at the two ends of $A$'s line, $+1$ and $-1$.
+:::
+
 ## 1.1 One Is Too Few, Three Is Redundant {#sec-ch01-1}
 
 Begin with the simplest possible thought experiment. Wipe away the laboratory bench, the Earth, the fixed stars, and every sheet of graph paper in your pocket, leaving only an utterly homogeneous, isotropic void. Into that void, place **one** directed arrow $A$.
@@ -19,8 +23,6 @@ Now ask: at what angle does $A$ point? Is it "spin up" or "spin down"? Is it in 
 Geometrically, the question is nonsense. In an empty isotropic space devoid of any second reference, a solitary arrow points neither north nor east, neither straight nor askew. "**One is too few**" — an isolated monad cannot even define a direction, let alone carry an observable physical state. Metaphysics loves to ask what a "thing-in-itself" looks like before anything else encounters it; geometry replies that without a partner to compare against, a lone arrow has nothing to say.
 
 How does direction come into being? Introduce a **second** arrow $B$. The instant two arrows meet, however the surrounding void may tumble as a whole, the relative angle $\theta$ spanned between them becomes an invariant, coordinate-free geometric fact.
-
-![One vector alone has no relative angle, an external third reference point C is redundant, and pairwise encounter yields discrete records through an ideal two-outcome shutter; direction arrows are unit vectors, the polarization formula uses a real inner product, and the phase conclusion assumes unitarity, preservation of all coordinate and test rays, and connected test supports](../assets/fig-01-pairwise-measurement.svg)
 
 Yet right here, Cartesian habit commits the opposite sin. Faced with two arrows $A$ and $B$, standard textbooks immediately summon an imaginary **third reference point $C$** from outside the system: an external origin equipped with three coordinate axes $(x, y, z)$, assigning three numbers $(a_1, a_2, a_3)$ to $A$ and three numbers $(b_1, b_2, b_3)$ to $B$ — as though $A$ and $B$ could not interact physically without first registering their addresses with an external notary $C$.
 
@@ -61,6 +63,10 @@ $$
 \langle x, y\rangle = \frac{3 - 1}{4} = \frac{1}{2} = \cos 60^\circ!
 $$
 
+::: {.figure src="ch01-parallelogram"}
+**With no axes drawn, the two diagonals read off the angle.** Two unit arrows $x$ and $y$ open at $60^\circ$: the solid cyan line is the long diagonal $x + y$, with $\norm{x + y}^2 = 3$; the dashed cyan line is the short diagonal $x - y$, with $\norm{x - y}^2 = 1$. Their sum is $4 = 2(1^2 + 1^2)$ ([@thm-parallelogram-norm-law]); a quarter of their difference is $\frac{1}{2} = \cos 60^\circ$.
+:::
+
 Without drawing a single coordinate axis, the $60^\circ$ inclination between $x$ and $y$ steps straight out of the port contrast. Two states meeting in the dark carry their own ruler; every third reference frame $C$ is scaffolding waiting to be dismantled ([Chapter 2](ch02-born-rule.md)).
 
 ::: {.viz src="qubit-geometry" preset="line" height="500"}
@@ -76,6 +82,14 @@ Following this picture of continuous geometric angles between two arrows, why do
 Picture a mechanical device after Feynman's heart. On a bench spins a smooth, continuous flywheel whose rim can point at any angle around the $360^\circ$ circle. Your probe, however, is a **one-dimensional two-way sorting shutter** — like a Stern–Gerlach magnet splitting a beam along a single vertical axis $\vv{e}_3$ into an upper port ($+1$) and a lower port ($-1$). Every trial forced through that narrow slit must exit through either the upper channel or the lower channel.
 
 When you **measure** (*liáng*) a continuous wheel through a one-dimensional binary shutter, the readout necessarily emerges in discrete **quanta** (*liàng*). Discreteness at the exit port does not mean the wheel was secretly a bag of pre-labeled $+1$ and $-1$ marbles before it hit the slit; **a discrete quantum is the echo left when continuous spherical geometry is forced through a one-dimensional idempotent slit.**
+
+::: {.figure src="ch01-shutter"}
+**A continuous direction leaves a two-outcome shutter as one of two records.** The wheel on the left is ticked all the way round, and the amber arrow can stop at any angle; the shutter in the middle splits along $\vv{e}_3$ into an upper and a lower channel; on the right there are only two cyan dots, $+1$ for the upper channel and $-1$ for the lower. A schematic.
+:::
+
+::: {.viz src="pairwise-shutter" preset="clicks" height="500"}
+**The arrow may point anywhere; the shutter reports only the two ends.** The amber $B$ is $70^\circ$ from the cyan $A$; each shot lands at one end of $A$'s diameter, $+1$ “pass” at $A$ and $-1$ “fail” at the far end. The row of squares at the top right is shot by shot, solid cyan for a pass and hollow grey for a fail; which shot passes cannot be foretold. A sampling demonstration.
+:::
 
 Suppose we make the further assumption that prior to measurement the system carries an omniscient hidden ledger $\chi$ assigning a definite complex value $\chi(A)$ to every complex matrix $A$, preserving the identity, addition, complex scalar multiplication, and multiplication on all matrices, including products of noncommuting matrices. What happens then?
 
@@ -107,6 +121,10 @@ Because both $X$ and $Z$ have real entries symmetric across the main diagonal, c
 :::
 
 Look closely at the minus sign in $ZX = -XZ$. Geometrically there is nothing spooky about it: reflecting a real plane vector across a horizontal line ($Z$) and then across a $45^\circ$ diagonal ($X$) gives a counterclockwise $90^\circ$ rotation $XZ$; reversing the order gives a clockwise $90^\circ$ rotation $ZX$. They differ by $180^\circ$, the ordinary real-plane half-turn $-I$. Yet the moment one tries to flatten those geometric operations into a numerical ledger $\chi : M_2(\mathbb{C}) \to \mathbb{C}$ preserving all algebraic operations, that minus sign triggers an immediate collapse.
+
+::: {.figure src="ch01-reflections"}
+**The same two mirrors in the other order turn the other way.** Both drawings have the horizontal $Z$ mirror and the $X$ mirror on the $45^\circ$ diagonal; the amber arrow $v$ starts at $20^\circ$, and the dashed arrow is where the first mirror sends it. On the left, $Z$ then $X$: the violet arc turns $+90^\circ$, counter-clockwise ($XZ$). On the right, $X$ then $Z$: the violet arc turns $-90^\circ$, clockwise ($ZX$). The two results differ by $180^\circ$, which is $ZX = -XZ$ ([@lem-qubit-weyl-star]).
+:::
 
 ::: {.theorem #thm-qubit-no-character title="The Qubit Matrix Algebra Admits No Algebraic Character" lean="D5/S3/Quantum/FiniteDimensional.qubit_matrix_algebra_has_no_character"}
 The type of unital $\mathbb{C}$-algebra homomorphisms from the $2\times 2$ complex matrix algebra $M_2(\mathbb{C})$ to $\mathbb{C}$ is empty; that is, there exists no map $\chi : M_2(\mathbb{C}) \to \mathbb{C}$ preserving the identity matrix, addition, scalar multiplication, and matrix multiplication.
@@ -233,6 +251,10 @@ $$
 $$
 
 Everything opaque in the $2\times 2$ matrix suddenly turns visual: the diagonal entries $\frac{1 \pm a_2}{2}$ are the two $Z$-measurement probabilities determined by the vertical height $a_2$, while the off-diagonal pair $\frac{a_0 \mp i a_1}{2}$ encodes its horizontal shadow in the equatorial plane $(\vv{e}_1, \vv{e}_2)$! Let us work through the six cardinal poles by hand to cement this dictionary once and for all.
+
+::: {.figure src="ch01-two-writings"}
+**One state, written two ways.** On the left, the amber arrows in two complex planes are $\alpha = \cos 30^\circ$ and $\beta = e^{i\,70^\circ}\sin 30^\circ$, four real numbers in all; the dashed arrows are both multiplied by the same global phase $e^{i\gamma}$. On the right, the Bloch sphere carries a single amber arrow $\vv{a}$, $\theta = 60^\circ$ from the north pole at azimuth $\phi = 70^\circ$: the solid and the dashed writing both name this arrow.
+:::
 
 ::: {.example #ex-bloch-six-poles title="Explicit Calculation of the Six Cardinal Bloch Poles and Phase Cancellation"}
 For polar angle $\theta \in [0, \pi]$ and azimuthal angle $\phi \in [0, 2\pi)$, multiply the normalized column vector $\lvert\psi(\theta, \phi)\rangle = \begin{pmatrix} \cos(\theta/2) \\ e^{i\phi}\sin(\theta/2) \end{pmatrix}$ by an arbitrary global phase $e^{i\gamma}$ ($\gamma \in \mathbb{R}$). Forming the outer product cancels $e^{i\gamma} e^{-i\gamma} = 1$ on the spot:

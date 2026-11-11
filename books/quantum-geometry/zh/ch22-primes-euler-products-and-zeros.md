@@ -16,7 +16,9 @@ $$
 
 本章将沿着这一“素数即算术正交基”的几何直觉，严格建立**狄利克雷（Dirichlet）自然数级数**与**欧拉（Euler）无穷素数乘积**在绝对收敛半平面 $\operatorname{Re}(s) > 1$ 上的机器形式化恒等式，剖析有限素数筛的“多面体截断余项”，并在严谨的三层认识论契约下远眺数论皇冠上的开放猜想——**黎曼猜想（Riemann Hypothesis）**。
 
-![素数正交基、欧拉乘积与黎曼临界线：Re(s) > 1 半平面上的狄利克雷—欧拉恒等式、有限素数筛截断余项与临界带 σ = 1/2 开放猜想](../assets/fig-22-euler-prime-resonator.svg)
+::: {.figure src="ch22-overview"}
+**图 22。** 本章地图：第 I 栏，横走一步乘 $2$、竖走一步乘 $3$，每个整数是素数轴上的一个格点，青色的箭头走到 $12 = 2^2 \times 3$；第 II 栏，$1$ 到 $30$ 中只用 $2, 3, 5$ 乘得出的格子是青色，其余是品红，第一个品红格是 $7$（[@ex-prime-log-orthogonality-and-sieve]）；第 III 栏，临界带 $0 < \operatorname{Re}(s) < 1$ 中央的虚线是 $\sigma = \frac{1}{2}$，前十个零点（数值结果）都落在线上，$s = 1$ 处的叉是极点；红色的问号与标签说的是开放问题：是否所有非平凡零点都在这条线上（[@conj-riemann-hypothesis]）。
+:::
 
 ## 22.1 算术正交基与因式分解消除无穷 {#sec-ch22-1}
 
@@ -31,6 +33,10 @@ $$
 $$
 
 你看，单根素数轴上的无穷多项之和 $1 + p^{-s} + p^{-2s} + \cdots$，被等比求和公式一口气“约掉”成了干净利落的单因子 $(1 - p^{-s})^{-1}$！把所有相互正交的素数轴 $p \in \mathrm{Primes}$ 乘在一起，由于乘法分配律在展开时恰好不重不漏地遍历每一个非负整数坐标向量 $(v_2, v_3, v_5, \dots)$（仅有限个坐标非零），全体自然数的狄利克雷级数便与全体素数的欧拉乘积严丝合缝地合二为一。
+
+::: {.viz src="euler-product-sieve" preset="two" height="500"}
+**一根素数轴。** 清单上只有 $2$：青色曲线是等比级数 $1 + 2^{-s} + 4^{-s} + \cdots = (1 - 2^{-s})^{-1}$，在琥珀色竖线 $s = 2$ 处等于 $\frac{4}{3}$，比墨色的 $\zeta(2)$ 低一截。下方的整数里只有 $2$ 的幂 $1, 2, 4, 8, 16, 32, 64$ 是青色，其余都是品红，第一个品红格是 $3$。
+:::
 
 为了在 Lean 4 中把这一经典桥梁铸成零歧义的形式化定理，我们首先对齐 `trureturing` 仓库中模块 `D5/S3/Weil/Convention` 所采用的黎曼 $\zeta$ 函数约定。
 
@@ -47,6 +53,10 @@ $$
 在进入 $\operatorname{Re}(s) > 1$ 的级数与乘积展开之前，让我们先锁定 $\zeta(s)$ 在复平面上最醒目的地标：位于 $s = 1$ 处的**唯一一阶极点（调和级数发散奇点）**。
 
 从几何上看，当 $s \to 1^+$ 时，调和级数 $\sum_{n=1}^\infty n^{-s}$ 之所以发散，正是因为无穷多根素数正交轴上的放大因子 $(1 - p^{-1})^{-1} = \frac{p}{p-1}$ 源源不断地累积发散；而它发散的速度，恰好由 $(s - 1)^{-1}$ 以单位留数 $1$ 精准标定！
+
+::: {.viz src="euler-product-sieve" preset="near" height="500"}
+**越靠近 1，缺口越宽。** 清单是到 $31$ 为止的 $11$ 个素数，琥珀色竖线在 $s = 1.1$：青色的乘积只有 $4.93$，墨色的 $\zeta(1.1) = 10.58$，品红的缺口比乘积本身还大。往左走缺口只会更宽：在 $s = 1$ 处青色曲线停在有限值 $\prod_{p \le 31} \frac{p}{p-1} \approx 6.54$，墨色的 $\zeta$ 却冲出画面，那里是 [@lem-riemann-zeta-residue-one] 的极点。
+:::
 
 ::: {.lemma #lem-riemann-zeta-residue-one title="黎曼 ζ 函数在 s = 1 处的留数为 1" lean="D5/S3/Zeros/ZetaIdentities.riemann_zeta_residue_one"}
 对 [@def-classical-zeta] 中的黎曼 $\zeta$ 函数 $\operatorname{classicalZeta} : \mathbb{C} \to \mathbb{C}$，当复变量 $s \in \mathbb{C}$ 沿去心邻域滤子 $\mathcal{N}_{\neq}(1)$ 趋近于 $1$ 时，有极限
@@ -88,6 +98,10 @@ $$
 在半平面假设 `hs : 1 < s.re` 下，函数 $n \mapsto (n : \mathbb{C})^{-s}$ 为完全积性函数且级数绝对可和。由唯一素因子分解与完全积性函数的欧拉乘积一般定理，局部几何级数因子 $(1 - p^{-s})^{-1} = \sum_{k=0}^\infty p^{-ks}$ over $p \in \mathrm{Nat.Primes}$ 的无穷乘积收敛于同一极限 `riemannZeta s`（Mathlib 定理 `riemannZeta_eulerProduct_tprod`）。展开 [`classicalZeta`](lean:D5/S3/Weil/Convention.classicalZeta) 即完成证明。完整证明由 Lean 内核检查。
 :::
 
+::: {.figure src="ch22-euler-staircase"}
+**有限个素数的欧拉乘积一级级爬向 $\zeta(2)$，却总差一截。** 青色的阶梯是前 $K$ 个素数的乘积在 $s = 2$ 处的值，$K = 3$ 时是 $\frac{25}{16}$；墨色的线是 $\zeta(2) = \frac{\pi^2}{6}$。两者之间品红的缝越来越窄，用到 $97$ 为止的 $25$ 个素数仍差 $0.0030$；只有乘进全体素数，乘积才等于 $\zeta(s)$（[@thm-riemann-zeta-euler-product]）。图中数值为数值结果。
+:::
+
 现在，消去中间桥梁 $\operatorname{classicalZeta}(s)$，[@prop-riemann-zeta-dirichlet-sum] 与 [@thm-riemann-zeta-euler-product] 在半平面 $\operatorname{Re}(s) > 1$ 上直接会师，给出全书第六部最璀璨的一条算术—几何恒等式：加法端遍历全体自然数，乘法端只遍历素数正交基！
 
 ::: {.corollary #cor-dirichlet-sum-eq-euler-product title="半平面 Re(s) > 1 上自然数狄利克雷级数与素数欧拉乘积的恒等定理" lean="D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product"}
@@ -104,6 +118,10 @@ $$
 在假设 `hs : 1 < s.re` 下，由 [@prop-riemann-zeta-dirichlet-sum] 知左端等于 $\operatorname{classicalZeta}(s)$，再由 [@thm-riemann-zeta-euler-product] 的对称形式将 $\operatorname{classicalZeta}(s)$ 替换为右端的素数无穷乘积即得。完整证明由 Lean 内核检查。
 :::
 
+::: {.viz src="euler-product-sieve" preset="all" height="500"}
+**格子全青，缺口还在。** 素数一个个加进清单，直到 $97$：下方 $1$ 到 $96$ 的格子全部变成青色，每一个都出现在乘积的展开里；在 $s = 2$ 处青色曲线离墨色的 $\zeta$ 只差 $0.0030$。放大镜里的品红缺口仍在，垫底的一段是 $101^{-s}$。只有把全体素数都乘进来，乘积才等于整个级数（[@cor-dirichlet-sum-eq-euler-product]）。
+:::
+
 ::: {.viz src="sphere-escape" preset="euclid" height="500"}
 **乘起来加一。** 清单里每多一个素数，就把它们全部乘起来再加一得到 $Q$。每只钟有 $p$ 个刻度，指针指着 $Q$ 除以 $p$ 的余数：全都指着 $1$，没有一只指着红色的 $0$，所以整除 $Q$ 的素数一定不在清单里（欧几里得的论证，文献结果）。全屏打开后，下方的图给出有限个素数的欧拉乘积离 $\zeta(2)$ 还差多少（[@thm-riemann-zeta-euler-product] 取 $s = 2$）。
 :::
@@ -117,6 +135,10 @@ p^{-s} = p^{-\sigma - it} = p^{-\sigma} e^{-i t \ln p} = p^{-\sigma}\bigl(\cos(t
 $$
 
 在复平面上，每一个素数 $p$ 都可看作一只以固有对数角频率 $\omega_p = \ln p$ 匀速旋转的**相位指针（素数时钟）**！在 $t = 0$ 把所有时钟拨到十二点（读数 $1$）再放手：时钟 $2$ 每隔 $2\pi/\ln 2 \approx 9.0647$ 个时间单位回到十二点，时钟 $3$ 每隔 $2\pi/\ln 3 \approx 5.7192$ 个时间单位回到十二点。时钟 $2$ 走完第 $12$ 圈时，时钟 $3$ 走了 $12\ln 3/\ln 2 \approx 19.01955$ 圈，只越过十二点 $7.04^\circ$，差一点就对齐了。它们会不会在某个时刻 $t \neq 0$ 真正同时回到十二点？
+
+::: {.figure src="ch22-prime-clocks"}
+**两只素数时钟差一点就对齐。** 在 $t = 12 \cdot 2\pi/\ln 2 \approx 108.78$，时钟 $2$ 走完第 $12$ 圈，琥珀色的指针正指十二点；同一时刻时钟 $3$ 走了 $19.02$ 圈，指针越过十二点 $7.04^\circ$，那块品红的小扇形就是没对上的部分。
+:::
 
 假设会：$t\ln 2 = 2\pi a$，$t\ln 3 = 2\pi b$，$a, b$ 为整数。前式乘 $b$、后式乘 $a$ 再相减，得 $t\,(b\ln 2 - a\ln 3) = 0$；因为 $t \neq 0$，所以 $b\ln 2 = a\ln 3$。由于 $\ln 2, \ln 3 > 0$，$a$ 与 $b$ 要么同为零，要么同号；若同号，不妨都为正，两边取指数得 $2^{b} = 3^{a}$，左边是偶数，右边是奇数。所以 $a = b = 0$，于是 $t = 2\pi a/\ln 2 = 0$，与 $t \neq 0$ 矛盾。这里起作用的只有一个机制：取指数把对数之间的整系数关系变成素数幂的乘积等式，而唯一素因子分解不允许两组互不相交的素数幂乘出同一个整数。所钉仓库的模块 `D5/S3/Factorization/PrimeLogIndependence` 对任意有限个素数冻结了这一机制，模块 `D5/S3/Weil/PrimeAddress/PrimeLogIndependence` 再把它改写成 $\mathbb{Q}$ 上的线性无关。
 
@@ -236,7 +258,27 @@ $$
 两者的严格正截断差值 $R_{> 5}(2) = \zeta(2) - P_{\le 5}(2) \approx 0.082434 > 0$，其领头项恰恰是第四根正交素数轴投下的平方反比权重 $7^{-2} = \frac{1}{49} \approx 0.020408$（紧接着是 $11^{-2} = \frac{1}{121} \approx 0.008264$、$13^{-2} = \frac{1}{169} \approx 0.005917$ 与混合合数项 $14^{-2} = (2\times 7)^{-2} = \frac{1}{196} \approx 0.005102$）！
 :::
 
+::: {.viz src="euler-product-sieve" preset="five" height="500"}
+**漏网的第一个是 7。** 清单是 $2, 3, 5$：青色格子 $1, 2, 3, 4, 5, 6, 8, 9, 10, 12, \dots$ 是乘积展开出来的项，$7$ 是第一个品红格。在 $s = 2$ 处青色曲线是 $\frac{25}{16} = 1.5625$，墨色的 $\zeta(2) = 1.6449$；放大镜把缺口 $0.0824$ 自下而上拆成 $7^{-2}$、$11^{-2}$、$13^{-2}$ 和更薄的一段段，每一段是一个品红格的 $n^{-2}$。
+:::
+
+::: {.viz src="euler-product-sieve" preset="remainder" height="500"}
+**余项垫底的总是 $7^{-s}$。** 清单仍是 $2, 3, 5$，琥珀色竖线从 $s = 4$ 扫到 $s = 1.3$：品红的缺口越来越宽，放大镜里最底下的一段始终是 $7^{-s}$。墨色与青色之间的品红虚线是乘积加上 $7^{-s}$，缺口从不比它窄，即 $R_{>5}(s) > 7^{-s}$（文献结果，页面只在画出的点上数值核对）。
+:::
+
 请看 [@ex-prime-log-orthogonality-and-sieve] 与[第二十一章](ch21-diagonalization-and-escape.md)欧几里得—哥德尔逃逸的绝妙同构：只要你只握有有限 $K$ 根素数正交轴 $\{p_1, \dots, p_K\}$，你张成的“算术多面体”就必然在 $n = p_{K+1}$ 处留下一道非恒零的狄利克雷余项裂缝（在全体实数 $s > 1$ 上逐点严格大于 $p_{K+1}^{-s} > 0$）；要想把这道首项裂缝补上，你必须把第 $K+1$ 个素数 $p_{K+1}$ 作为一根全新的正交基准轴并入系统——而素数有无穷多个，因此算术球面在有限截断下永远留有通向更高素数维度的生长之门！
+
+::: {.viz src="euler-product-sieve" preset="thirtyone" height="500"}
+**到 31，漏网从 37 起。** 清单是到 $31$ 为止的 $11$ 个素数：$1$ 到 $36$ 全是青色，第一个品红格是 $37$。在 $s = 2$ 处缺口缩到 $0.0102$，放大镜里垫底的仍是 $37^{-2}$：要补上这一段，只能把 $37$ 加进清单。
+:::
+
+::: {.viz src="sphere-escape" preset="thirteen" height="500"}
+**加一之后不一定是素数。** 清单是 $2, 3, 5, 7, 11, 13$，$Q = 30031$：每只钟的指针都指着 $1$，没有一只指着 $0$。可 $Q = 59 \times 509$ 本身不是素数；欧几里得的论证（文献结果）只说 $Q$ 的素因子都不在清单里，新找到的 $59$ 也不是紧接着的 $17$。
+:::
+
+::: {.viz src="euler-product-sieve" height="560"}
+欧拉乘积与筛的完整实验室：拖动时间轴加减素数，拖动琥珀色竖线改 $s$，点一个品红格把它的最大素因子放进清单。下方第一张小图里，墨色的 $(s - 1)\zeta(s)$ 走向绿色虚线 $1$（[@lem-riemann-zeta-residue-one]），青色的 $(s - 1)$ 乘以乘积走向 $0$；第二张小图是乘积与 $\zeta(s)$ 相差不到 $1\%$ 所需的素数个数。
+:::
 
 > 合数是素数正交轴张成的对角网格；欧拉乘积不过是把纠缠在自然数长线上的无穷和，顺着一根根互不相干的素数主轴正交投影拆解开来。
 
@@ -318,6 +360,10 @@ $$
 第四行是 [@thm-xi-reading-entire-reflection] 的结论 4；第五行是镜像的不动点 $s = \frac{1}{2}$ 处的数值。
 
 **沿临界线。** 在 $s = \frac{1}{2} + it$（$t$ 为实数）上 $\xi$ 取实值。数值计算给出 $\xi\bigl(\tfrac{1}{2} + 14i\bigr) \approx +2.01\times10^{-4}$ 与 $\xi\bigl(\tfrac{1}{2} + 15i\bigr) \approx -7.06\times10^{-4}$：符号在两者之间改变，与文献所载的第一个非平凡零点 $\rho_1 \approx \frac{1}{2} + 14.134725\,i$ 相符。由此可见，常被单独拿出来渲染的 $\zeta(-1) = -\frac{1}{12}$ 与巴塞尔问题的 $\zeta(2) = \frac{\pi^2}{6}$，其实是同一个数 $\frac{\pi}{6}$ 在镜子两侧的两个读数。
+:::
+
+::: {.figure src="ch22-critical-line"}
+**沿临界线往上走，$\lvert\zeta\rvert$ 一次次落到零。** 墨色的曲线是 $\lvert\zeta(\frac{1}{2} + it)\rvert$，$0 \le t \le 50$；十个品红的点是它落到零的地方，第一个在 $t \approx 14.13$，与上例中 $\xi$ 在 $t = 14$ 与 $t = 15$ 之间变号相符。曲线与零点位置是数值结果；红色标签问的是开放问题：所有非平凡零点是否都在这条线上（[@conj-riemann-hypothesis]）。
 :::
 
 镜子的位置 $\operatorname{Re}(s) = \frac{1}{2}$ 已由 [@thm-xi-reading-entire-reflection] 的内核证明锁定；所有非平凡零点是否都站在镜面上，则仍然是本节末尾那条开放猜想。

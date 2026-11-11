@@ -9,6 +9,10 @@ In the [previous chapter](ch17-lorentz-geometry.md), we saw how vanishing on the
 
 The opening epigraph points to the common geometric thread linking both questions: when one-dimensional idempotent lines (particles) and two-dimensional bivector phase rotations (waves and areas) are placed on a network, chiral spinor coupling and gauge curvature emerge as two facets of a field. Following our three-tier epistemological contract, this chapter begins with the Lean-verified two-dimensional anticommuting Weyl pair ([@lemma-qubit-clifford-pair]) and the algebraic covariant commutator identity ([@prop-covariant-commutator]), then proves the exact spanning-tree phase transport theorem ([@thm-tree-phase-transport]) and anchored loop-phase classification theorem ([@cor-anchored-phase-classification]) for abelian $U(1)$ (`Circle`) gauge fields on named graphs, while keeping four-dimensional Dirac Zitterbewegung and continuum non-abelian gauge theory within explicitly demarcated literature remarks.
 
+::: {.figure src="ch18-overview"}
+**Figure 18.** A map of the chapter. Panel I: the two components of the two-component chiral model $H = pZ + mX$, the blue upper component $Z = +1$ and the orange lower component $Z = -1$, each carry only their diagonal term $\pm p$, and the mass $m$ is the only link between them. Panel II: a magenta plaquette in the lattice, walked once around $0 \to 1 \to 2 \to 3 \to 0$. Panel III: the single square of the worked example under the violet gauge $g = (1, i, -1, -i)$; the phase pointers at the edge midpoints read $(i, i, i, -1)$, and the magenta loop phase at the centre is still $i$ ([@cor-anchored-phase-classification]).
+:::
+
 ## Chiral decomposition and explicit anticommutation {#sec-chiral-factorization}
 
 Begin with the algebraic puzzle Paul Dirac faced in 1928. A relativistic particle of rest mass $m$ and momentum $p$ obeys the quadratic dispersion relation $E^2 = p^2 + m^2$. Quantum time evolution, however, is first-order in time: to build a linear first-order Hamiltonian $H = p\alpha + m\beta$ free of the square root $\sqrt{p^2 + m^2}$, the square of the linear operator $p\alpha + m\beta$ must reproduce the sum of squares $p^2 + m^2$ identically:
@@ -18,8 +22,6 @@ $$
 $$
 
 If $\alpha$ and $\beta$ were ordinary commuting numbers, the cross term $2pm\alpha\beta$ could never vanish for nonzero $p$ and $m$. To keep $\alpha^2 = I$ and $\beta^2 = I$ while annihilating $\alpha\beta + \beta\alpha = 0$, $\alpha$ and $\beta$ must **anticommute**: $\alpha\beta = -\beta\alpha$.
-
-![Chiral coupling and anticommuting matrices, plaquette covariant transport commutator, and loop-phase gauge classification on a selected spanning tree](../assets/fig-18-dirac-spinor-gauge-holonomy.svg)
 
 In finite-dimensional complex matrix algebra, the smallest faithful carrier of an anticommuting self-adjoint involution pair is the $2\times 2$ qubit matrix algebra $\operatorname{QubitMatrix} = M_2(\mathbb{C})$ equipped with $\operatorname{qubitX}$ and $\operatorname{qubitZ}$ from [Chapter 1](ch01-measurement.md). Keep three dimensions distinct: the spinor state carrier $\mathbb{C}^2$ has **complex dimension $2$** (and **real dimension $4$**); the rotation Lie algebra $\mathfrak{su}(2) \simeq \mathbb{R}^3$ spanned by traceless skew-Hermitian Pauli generators has **real dimension $3$**; and the full $2\times 2$ matrix algebra $\operatorname{QubitMatrix} = M_2(\mathbb{C})$ has **complex dimension $4$** and **real dimension $8$** (isomorphic as a real algebra to the $8$-dimensional Clifford algebra $\mathrm{Cl}_{3,0}(\mathbb{R})$).
 
@@ -65,6 +67,10 @@ $$
 Thus $E^2 = 25$, giving energy eigenvalues $E = \pm 5$ (the Pythagorean triple $3^2 + 4^2 = 5^2$).
 
 Inspect the structure of $H = \begin{pmatrix} 3 & 4 \\ 4 & -3 \end{pmatrix}$: at $m = 0$, $H = 3Z = \operatorname{diag}(3, -3)$ is diagonal and the two chiral eigenstates of $Z$ propagate independently without coupling; turning on $m = 4$ introduces the off-diagonal operator $mX$ that linearly couples the two chiral components (with coupling angular frequency scale $m/\hbar$). Keep **operator coupling** distinct from **mandatory state oscillation**: an energy eigenstate of $H = 3Z + 4X$ — such as $\frac{1}{\sqrt{5}}(2, 1)^\top$ for $E = +5$ or $\frac{1}{\sqrt{5}}(1, -2)^\top$ for $E = -5$ — is a stationary coherent superposition of both chiral components that evolves purely by the phase factor $e^{\mp 5it}$, keeping its chiral probabilities ($4/5$ and $1/5$) constant in time; coherent oscillations between the two chiral populations occur when the state is initialized in a definite-chirality basis vector (such as $(1, 0)^\top$, which superposes the $E = +5$ and $E = -5$ eigenstates). Here we treat $H$ strictly as an exact $2\times 2$ Hermitian matrix model: we do not assign an unconditional stochastic reflection rate to measurements, nor do we conflate this two-dimensional pedagogical matrix with full four-dimensional Dirac dynamics.
+:::
+
+::: {.figure src="ch18-chiral-levels"}
+**The mass pushes the two chiral levels $\pm 3$ apart to $\pm 5$.** Left column, $m = 0$: the bar at $E = +3$ is all blue (upper component, $Z = +1$) and the bar at $E = -3$ all orange (lower component, $Z = -1$). Right column, $m = 4$: the bars are pushed to $E = \pm 5$; the $+5$ bar is $4/5$ blue and $1/5$ orange, and the $-5$ bar the other way round. Each energy eigenstate is now a fixed-ratio mixture of the two chiral components.
 :::
 
 ::: {.remark #rem-dirac-zitterbewegung-literature title="Four-Dimensional Dirac Equation and Zitterbewegung Frequencies (Literature result, not formalized in this book)"}
@@ -138,6 +144,10 @@ $$
 \operatorname{gauge}(s, t, g, u)(e) = g\bigl(t(e)\bigr) \cdot u(e) \cdot g\bigl(s(e)\bigr)^{-1}.
 $$
 
+::: {.viz src="lattice-gauge-loop" preset="twist" height="500"}
+**Twist one corner, and the phases on its two edges run through every value.** On a single square only corner 1 turns, a full circle (the amber gauge hand): the hands on $e_0$ and $e_1$ turn opposite ways, each passing $1, i, -1, -i$, while the magenta loop phase at the centre stays at $i$.
+:::
+
 Because $g$ can rotate the phase at each endpoint independently, the phase on a single open edge is never gauge-invariant by itself. To synchronize phases across the graph, we select a **named spanning tree** (`NamedSpanningTree`) $T \subseteq E$ and a reference root vertex $r \in V$:
 
 - Every tree edge $e \in T$ is non-loop ($\forall e \in T,\; s(e) \neq t(e)$);
@@ -145,6 +155,10 @@ Because $g$ can rotate the phase at each endpoint independently, the phase on a 
 - The simple support graph $\operatorname{treeSupport}(s, t, T)$ is a connected acyclic tree (`IsTree`), while non-tree edges $e \notin T$ outside $T$ may freely include parallel edges and self-loops.
 
 In $\operatorname{treeSupport}(s, t, T)$, every vertex $a \in V$ is connected to the root $r$ by a unique simple tree path $\operatorname{rootPath}(ht, r, a)$. Multiplying the edge phases along this unique tree path (multiplying by $u(e)$ along forward steps and $u(e)^{-1}$ along reverse steps) defines the **root-to-vertex tree phase** `rootPhase` $\operatorname{rootPhase}(ht, r, u, a) \in \operatorname{Circle}$. Our next theorem establishes all six fundamental properties of tree phase transport.
+
+::: {.figure src="ch18-root-path"}
+**The tree phase multiplies along the one tree path.** Cyan is the spanning tree $T$; the grey dashed edges are the chords outside it, among them a self-loop and an edge parallel to a tree edge. The thick cyan path from the root $r$ to $a$ runs through $e_1$, $e_2$, $e_3$: walking with an edge's arrow multiplies by $u(e)$, walking against it ($e_2$) by $u(e)^{-1}$, so $\operatorname{rootPhase}(a) = u(e_1)\,u(e_2)^{-1}\,u(e_3)$.
+:::
 
 ::: {.theorem #thm-tree-phase-transport title="Selected-tree phase transport" lean="D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport"}
 Let $V$ and $E$ be arbitrary types, $s, t : E \to V$ source and target maps, $T \subseteq E$ a selected subset of edges, $ht : \operatorname{NamedSpanningTree}\;s\;t\;T$ a named spanning tree, and $r \in V$ a root vertex. For edge phase fields valued in $\operatorname{Circle} = U(1)$, all six properties hold simultaneously:
@@ -181,6 +195,11 @@ In $\operatorname{treeSupport}(s, t, T)$, the unique simple path from $r$ to $r$
 Look closely at property 3 of [@thm-tree-phase-transport]: under a gauge transformation $g$, the tree transport phase to vertex $a$ transforms as $g(a)\cdot\operatorname{rootPhase}(u, a)\cdot g(r)^{-1}$. Two immediate invariants jump out:
 
 - For every **non-tree chord edge** $e \notin T$, traversing the unique tree path from $r$ to $s(e)$, crossing $e$ itself, and returning along the tree from $t(e)$ to $r$ forms a **fundamental closed loop** whose phase $\operatorname{rootPhase}(u, s(e))\,u(e)\,\operatorname{rootPhase}(u, t(e))^{-1}$ cancels both $g(s(e))$ and $g(t(e))$ identically.
+
+::: {.viz src="lattice-gauge-loop" preset="chord" height="500"}
+**The fundamental loop of a chord ignores gauge transformations.** On two squares, the cyan spanning tree is the top and bottom rows and the leftmost column; the fundamental loop of the right-hand chord is the whole rectangle inside the dashed magenta line. Every corner except the root turns: every hand on an edge moves, yet the magenta hands of both squares and of the outer loop stay put (property 3 of [@thm-tree-phase-transport]).
+:::
+
 - Moreover, if we fix a set of **reference anchor vertices** $R \subseteq V$ containing the root $r \in R$ and restrict gauge transformations to the **anchored gauge subgroup**
 
 $$
@@ -188,6 +207,10 @@ $$
 $$
 
 then for every non-root anchor $a \in R \setminus \{r\}$, the root-to-anchor tree phase $\operatorname{rootPhase}(u, a)$ also becomes strictly invariant because $g(a) = g(r) = 1$!
+
+::: {.viz src="lattice-gauge-loop" preset="anchor" height="500"}
+**The tree-path phase between two anchors cannot be twisted.** On four squares, the root $r$ and the top-right corner $a$ are both locked squares and every other corner turns freely: each edge along the tree path $r \to a$ (the cyan band) moves, yet the path phase shown by the cyan hand on the right stays put.
+:::
 
 When $V$ and $E$ are finite (`[Fintype V] [Fintype E]`), [`AnchoredPhaseClassification`](lean:D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification) packages these two families of invariants into the product coordinate space
 
@@ -229,7 +252,15 @@ and $\operatorname{Nonempty}\bigl(\operatorname{Coordinates}(T, R, r) \simeq_{\m
 By endpoint gauge covariance in [@thm-tree-phase-transport], the vertex gauge factors at $s(e)$ and $t(e)$ cancel in every fundamental chord loop $e \notin T$, while $g(a) = g(r) = 1$ at every anchor $a \in R$, so function extensionality (`Prod.ext` and `funext`) establishes $\chi(\operatorname{gauge}\;s\;t\;g\;u) = \chi(u)$; conversely, if $\chi(u) = \chi(w)$, defining the root-referenced vertex potential ratio $g(v) = \operatorname{rootPhase}(w, v)\cdot\operatorname{rootPhase}(u, v)^{-1}$ gives $g \in \operatorname{anchoredGroup}(R)$ (by root normalization and equality of non-root anchor coordinates) and satisfies $\operatorname{gauge}\;s\;t\;g\;u = w$ edge-by-edge (`funext e`, using property 2 `hedge` on tree edges and chord coordinate equality outside $T$). For the canonical section $\sigma(z) = \operatorname{gauge}(s, t, \operatorname{sectionPotential}(z), \operatorname{sectionLoops}(z))$, because `sectionLoops` is identically $1$ on $T$, its tree transport `rootPhase` is identically $1$, so endpoint gauge covariance gives $\operatorname{rootPhase}(\sigma(z), v) = \operatorname{sectionPotential}(z, v)$, proving $\chi(\sigma(z)) = z$ (`RightInverse`) and $\ker(\chi) = N$ (claims 1–2). Because $\chi$ and $\sigma$ are continuous homomorphisms between compact Hausdorff abelian topological groups with $\chi \circ \sigma = \mathrm{id}$, the quotient homomorphism $q$ is a homeomorphic group isomorphism (claim 3). Finally, a spanning tree on $n$ vertices has $|T| = n - 1$ edges, leaving $c = m - |T| = m + 1 - n$ non-tree chords and $a = k - 1$ non-root anchors, so the coordinate torus has dimension $c + a = m + k - n$ (claim 4). The full proof is checked by the Lean kernel.
 :::
 
+::: {.viz src="lattice-gauge-loop" preset="two" height="500"}
+**Multiply the loop phases of two neighbouring squares and you get the outer loop.** On two squares only the shared middle edge turns (amber): the magenta hand of the left square turns one way, the right square the other, and the magenta hand of the outer loop does not move. The shared edge is walked in opposite directions in the two squares and cancels in the product, so only $c = m + 1 - n = 7 + 1 - 6 = 2$ of the three loops are independent (claim 4 of [@cor-anchored-phase-classification]).
+:::
+
 > Phase along an unanchored tree branch can be ironed flat by local gauge choices; the fundamental closed-loop phases and the root-to-anchor tree phases between fixed reference vertices are the exact invariants that no anchored gauge transformation can erase.
+
+::: {.viz src="lattice-gauge-loop" preset="tree" height="500"}
+**Iron the spanning tree flat: tree edges become 1 and only loop phases are left on the chords.** On four squares, the rail turns every corner by the inverse of its tree transport phase: all 8 cyan tree edges turn to $1$, and the 4 chords keep the phases of their fundamental loops — a chord in the middle column equals the square to its left, a chord in the right column the product of the two squares in its row. This is exactly the shape of the section $\sigma$ ([@cor-anchored-phase-classification]).
+:::
 
 Let us verify [@cor-anchored-phase-classification] by hand on a four-vertex plaquette loop.
 
@@ -260,6 +291,14 @@ c + a = m + k - n = 4 + 1 - 4 = 1.
 $$
 
 At the chord $e_3$ ($3 \to 0$), $\operatorname{rootPhase}(u, 3) = 1$ and $\operatorname{rootPhase}(u', 3) = i^3 = -i$, so $\chi(u)(e_3) = 1 \cdot i \cdot 1^{-1} = i$ and $\chi(u')(e_3) = (-i) \cdot (-1) \cdot 1^{-1} = i$, confirming $\chi(u) = \chi(u')$ exactly.
+:::
+
+::: {.viz src="lattice-gauge-loop" preset="plaquette" height="500"}
+**The four edges of the example: the phase spreads out, the loop is still $i$.** The edge phases start at $(1, 1, 1, i)$ and the violet hands turn the gauge from $1$ to $g = (1, i, -1, -i)$; at the end of the rail the four edges read $(i, i, i, -1)$, and the magenta loop phase at the centre is $i$ throughout.
+:::
+
+::: {.viz src="lattice-gauge-loop" height="560"}
+**The lattice gauge lab.** Switch between 1, 2 and 4 squares, drag a hand on an edge to change its phase, drag the violet hand at a corner to make a gauge transformation, or lock the far corner $a$ as a second anchor: the readouts keep track of $c = m + 1 - n$, $a = k - 1$ and the number of invariant phases $c + a = m + k - n$, while the magenta loop phases move only when an edge phase itself is changed.
 :::
 
 From two-by-two anticommuting chiral matrices ([@lemma-qubit-clifford-pair]) to anchored phase classification on graphs ([@cor-anchored-phase-classification]), we see how unanchored local gauge redundancy is absorbed along free spanning-tree branches, while the complete gauge-invariant content resides in the $c = m + 1 - n$ fundamental closed-loop phases across non-tree chords together with the $a = k - 1$ root-to-anchor tree phases between fixed reference vertices (reducing purely to closed-loop holonomies in the single-anchor case $k = 1, a = 0$). What happens when many local quantum degrees of freedom are wired into a tensor network and we ask how much entanglement rank can flow across a bottleneck cut? Let us turn to [Chapter 19](ch19-tensor-networks-and-holography.md).

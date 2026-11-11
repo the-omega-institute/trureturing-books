@@ -1,0 +1,30 @@
+{
+  "id": "003-two-angles-berry",
+  "title": "One orthogonal step, then another: two-angle addressing and the Berry phase",
+  "title_zh": "正交一次、正交两次：两角寻址与贝里相位",
+  "summary": "From the north pole a single kind of turn only draws one circle; two orthogonal steps reach every point: tilt by θ about e₂, so the height becomes cos θ, then twist by φ about e₃ along that latitude, r(θ, φ) = (sin θ cos φ, sin θ sin φ, cos θ), with θ = 60°, φ = 45° landing on (√6/4, √6/4, 1/2), while at the poles the twist does nothing. Two axes only 30° apart still reach a target 110° from N in four turns of a greedy word; Lean checks that any rotation is a finite word in two non-collinear axes. Swapping the order of two quarter turns ends on +X or on −Y, 90° apart, and in each second step the point stays while its carried arrow turns a quarter. Around the octant loop N → +X → +Y → N the parallel-transported arrow comes back turned by the enclosed area Ω = π/2, and the literature gives the Berry phase −Ω/2 = −π/4. The same angle sits in the pairwise overlaps: Lean checks the latitude overlap (1 + i)/2 between +X and +Y, the three-point product Δ = (1 + i)/4 has phase π/4, and it does not move when each state is re-phased.",
+  "summary_zh": "从北极出发，只转一种只画得出一个圆；正交两步就走遍整颗球：先绕 e₂ 倾转 θ，高度变为 cos θ，再绕 e₃ 沿这条纬度圈拧转 φ，r(θ, φ) = (sin θ cos φ, sin θ sin φ, cos θ)；θ = 60°、φ = 45° 落在 (√6/4, √6/4, 1/2)，而在两极第二步白拧。两根只差 30° 的轴，按一条贪心规则交替转四次，照样到达离 N 为 110° 的目标；Lean 检验了任一旋转都是两根不共线轴的有限旋转字。两次 90° 转动换个次序，分别停在 +X 与 −Y，相隔 90°；第二步里点不动，它带着的箭头却转了四分之一圈。沿八分球回路 N → +X → +Y → N 平行搬运，箭头回来时转过所圈面积 Ω = π/2，文献给出贝里相位 −Ω/2 = −π/4。同一个角写在两两内积里：Lean 检验了同纬度内积公式，+X 与 +Y 的内积为 (1 + i)/2，三点连乘 Δ = (1 + i)/4 的相位为 π/4，给每个态乘上任意局部相位时它纹丝不动。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "subject_commit": "1d9bf98cab8306e67ec38a739359f2cdae63877a",
+  "released": "2026-11-11",
+  "duration": "1:58",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · Bloch sphere, tilt and twist, skew-axis word, rotation order, parallel transport around the octant, pairwise overlap phase dial",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word",
+    "D5/S3/Quantum/Information/BargmannImaginaryMaximizers.Latitude.latitude_dot"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_003_720p_narrated.mp4",
+    "cover": "quantum-geometry_003_cover.jpg"
+  }
+}

@@ -4,6 +4,10 @@
 
 In [Chapter 29](ch29-timeless-causality-and-gram-space.md), we saw that the global time field is a timeless geometric crystal (cf. Chapter 29's timeless literature remark [@rem-ch29-wheeler-dewitt-page-wootters-literature]), while any finite observer inside the field must pick points step by step within the causally compatible Gram elliptope ($\det G \ge 0$). We now carry this dual perspective of "global static field vs. finite observer" to the grandest intersection of contemporary mathematics and theoretical physics—placing **$\mathrm{P}$ vs. $\mathrm{NP}$**, the **Exponential Time Hypothesis (ETH) and the late-October 2026 tensor-network rank-reduction preprints ([@rem-ch30-eth-subexponential-literature])**, and the **open unforced three-dimensional Navier–Stokes regularity conjecture ([@conj-coda-navier-stokes-regularity]) alongside forced-regime literature advances ([@rem-ch30-navier-stokes-forced-literature])** onto a single Clifford orthogonal field canvas.
 
+::: {.figure src="ch30-overview"}
+**Figure 30.** A map of the chapter. Panel I: the amber $P_0$ is the finite observer's state and the ink arrows are the hidden target for $n = 2, 4, 8$, each closer to the $90^\circ$ horizon, with ever shorter cyan shadows on $P_0$. Panel II: the cyan schematic curve $r(n)$ with $c = 1$ meets the magenta PPSZ benchmark $0.386$ at $\log_2 n \approx 558$, far beyond the grey band of the observable universe ($\log_2 n \le 266$) (a numerical comparison of a schematic curve, `MODEL`; see [@ex-ch30-galactic-crossover-scale]). Panel III: a schematic vortex tube stretched longer and thinner; the circulation $\Gamma = \omega A$ of the cyan loop stays fixed, so the magenta vorticity grows. Whether a smooth unforced three-dimensional flow can shrink a cross-section to zero like this is the open problem marked in red ([@conj-coda-navier-stokes-regularity]).
+:::
+
 ---
 
 ## Global Static Time Field $P = NP$ vs. Finite Observer $P \neq NP$—The Orthogonal Horizon and the Firewall of the Living Journey {#sec-coda-global-p-eq-np-local-p-ne-np}
@@ -53,6 +57,10 @@ Once we return to a real finite observer inside the field—unable to postselect
 - **Second Geometric Blind Spot (Local Gram Consistency from Binary Chains $\mathbf{e}_i\wedge\mathbf{e}_j$ to Three-Body Facets $\mathbf{e}_i\wedge\mathbf{e}_j\wedge\mathbf{e}_k$)**:
   In our geometric model (`MODEL`), binary implication clauses $\mathbf{e}_i\wedge\mathbf{e}_j$ form **1D directed chains** whose transitive closure propagates locally, whereas ternary clauses $\mathbf{e}_i\wedge\mathbf{e}_j\wedge\mathbf{e}_k$ act like **triangular surface patches** stitching a closed 2D manifold—an observer inspecting only $M \ll n$ local inner-product moments can see locally consistent patches in every direction while remaining blind to a global parity contradiction around a macroscopic cycle.
 
+::: {.viz src="timeless-causal-crystal" preset="thread" height="500"}
+**A thread: one small turn per step.** One target among $256$ candidates: the amber state starts near the "rest" axis and turns $2\theta = 7.17^\circ$ towards the target per step; the cyan dots record every step taken, and after $12$ steps it is almost aligned. Trying one by one takes $128$ tries on average (dashed magenta). That every step turns by the same angle is [`uniform_operator_rotation`](lean:D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation); reading it as a "line" is this book's interpretation (`MODEL`).
+:::
+
 The unconditional restricted-model lower bounds corresponding to these two geometric pictures belong to the external complexity literature (and do not resolve the open uniform Turing-machine conjecture $\mathrm{P} \neq \mathrm{NP}$, [@conj-p-neq-np]):
 
 ::: {.remark #rem-ch30-query-sos-literature title="Literature Note on Black-Box Quantum Query and Bounded-Degree Sum-of-Squares Lower Bounds"}
@@ -61,6 +69,10 @@ The unconditional restricted-model lower bounds corresponding to these two geome
 1. **Unstructured Black-Box Quantum Query Lower Bound (C. H. Bennett, E. Bernstein, G. Brassard & U. Vazirani, *SIAM J. Comput.* **26**, 1510–1523, 1997)**: In the black-box oracle model, identifying a marked item among $N = 2^n$ candidates with bounded error requires $L = \Omega(2^{n/2})$ quantum queries (matching Grover's $O(2^{n/2})$ upper bound up to constants, $\Theta(2^{n/2})$);
 2. **Classical Watershed Between 2-SAT and 3-SAT (S. A. Cook, 1971; L. A. Levin, 1973; B. Aspvall, M. F. Plass & R. E. Tarjan, 1979)**: 2-SAT is decidable in linear time $O(n+m)$ via strongly connected components of the implication graph (hence $\text{2-SAT} \in \mathrm{P}$), whereas 3-SAT is $\mathrm{NP}$-complete;
 3. **Bounded-Degree Sum-of-Squares (SoS) Lower Bound (D. Grigoriev, *Theor. Comput. Sci.* **259**, 613–622, 2001; G. Schoenebeck, *FOCS*, 593–602, 2008)**: For random 3-XOR / 3-SAT instances that are globally unsatisfiable due to parity frustration, every local Lasserre / Gram semidefinite relaxation $G_M \succeq 0$ of degree $M = o(n)$ remains feasible and positive semidefinite with high probability, ruling out subexponential-size SoS refutations at sublinear degree.
+:::
+
+::: {.viz src="timeless-causal-crystal" preset="longer" height="500"}
+**16 times the space, 4 times the steps.** With $4096$ candidates the angle per step shrinks to a quarter ($2\theta = 1.79^\circ$) and the steps grow to about $50$; in the plot below, the cyan $(\pi/4)\sqrt{N}$ and the dashed magenta $N/2$ pull further and further apart. The thread lengthens like $\sqrt{N}$, and there is still no slope to follow; this is the same order as the query lower bound of item 1 above (a literature result).
 :::
 
 ### 3. The Author's Interpretation: Complexity Horizons, Subjective Time, and Choice
@@ -73,6 +85,10 @@ Placing the global static field alongside the finite observer expresses the auth
 | **Finite Observer in the Field** | Query and SoS bounds have restricted scope; standard $P\neq NP$ remains `OPEN` ([@rem-ch30-query-sos-literature], [@conj-p-neq-np]) | Small initial overlap, rotation by a specified reflection product [`uniform_operator_rotation`](lean:D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation), and local Gram blind spots | **The Unfolded Journey (author's interpretation)**: successive choices and proof steps give the journey meaning |
 
 ***"The $P = NP$ of the global static field endows the universe with self-consistent truth; the $P \neq NP$ of the finite observer uses the $\frac{\pi}{2}$ orthogonal horizon to shield life from spoilers, stretching static truth into a magnificent journey worth measuring, proving, and choosing step by step."*** (**“全局静态场的 $P = NP$，赋予了宇宙绝对自洽的‘真’；而有限观察者的 $P \neq NP$，则用那道 $\frac{\pi}{2}$ 的正交视界替生命挡住了剧透，把静态的真理拉长成了一场值得一步步去丈量、去证明、去选择的壮丽旅程。”**)
+
+::: {.figure src="ch30-horizon"}
+**The more variables, the closer the target sits to the $90^\circ$ horizon.** The amber $P_0$ is the observer's uniform starting state; the ink arrows are the single hidden target $\mathbf{S}^*$ for $n = 2, 4, 8$, at $60^\circ$, $75.5^\circ$ and $86.4^\circ$ from $P_0$, and their cyan shadows on $P_0$, $\cos\theta_0 = 2^{-n/2}$, are $1/2$, $1/4$ and $1/16$. The dashed vertical line is the orthogonal horizon that $\theta_0 \approx \pi/2 - 2^{-n/2}$ closes in on.
+:::
 
 ---
 
@@ -105,6 +121,10 @@ In our geometric interpretation (`MODEL`), geometric or algebraic structure used
 3. **Poincaré–Brouwer Hairy Ball Theorem (H. Poincaré, 1885; L. E. J. Brouwer, 1912)**: Because the 2-sphere has Euler characteristic $\chi(S^2) = 2 \neq 0$, every continuous tangent vector field on $S^2$ must vanish at least at one point (a topological vortex).
 :::
 
+::: {.viz src="timeless-causal-crystal" preset="field" height="500"}
+**A field: a slope everywhere.** The cyan flow lines start from all over the sphere; each looks only at the slope underfoot, and each flows to the target. The amber line is the chosen one, and the field vanishes at the opposite point. In the plot below, whatever the cyan potential loses, the magenta dissipation pays, and their sum (dashed amber) stays fixed ([`S2_dissipation`](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation)). Reading it as a "field" is this book's interpretation (`MODEL`).
+:::
+
 The three items of [@rem-ch30-karmarkar-kasteleyn-literature] are literature only. There is, however, a small discrete problem in which both the "field" and the "line" can be written down as exact mathematics and handed to the kernel: coloring the vertices of a graph.
 
 Start with the smallest odd cycle, the pentagon $C_5$: vertices $0, 1, 2, 3, 4$, edges $01, 12, 23, 34, 40$. Paint the vertices with the colors $c = (0, 1, 0, 1, 2)$; no two neighbors share a color. Read the color as a height, and this is a three-level field on the vertices. Now let every edge point towards its higher-colored end:
@@ -120,6 +140,10 @@ Conversely, given only the arrows, can we recover a field? Let $h(v)$ be the num
 $$
 h = \bigl(h(0), h(1), h(2), h(3), h(4)\bigr) = (1, 0, 2, 1, 0) .
 $$
+
+::: {.figure src="ch30-color-orientation"}
+**The field fixes the threads, and the threads measure out a field.** The same pentagon $C_5$, its vertices placed by height on three levels. On the left the height is the color $c = (0, 1, 0, 1, 2)$, every arrow points up, and the longest thread is the cyan $2 \to 3 \to 4$, with three vertices. On the right are the same arrows with the vertices placed by $h = (1, 0, 2, 1, 0)$: every arrow points down, and $h$ is again a three-level coloring ([@thm-ch30-gallai-roy]).
+:::
 
 For every arrow $u \to v$, putting this step in front of the longest thread from $v$ gives a longer thread from $u$, so $h(u) > h(v)$. Thus $h$ drops along every arrow, neighbors always get different values of $h$, and $h$ is again a three-coloring (a different one from $c$: the arrows point up in $c$ but down in $h$). **The lines measure out the field.** Only one thing can go wrong in this step: if the arrows close up into a cycle, "the longest thread starting at $v$" runs round in circles. In graph theory this round trip is called the Gallai–Hasse–Roy–Vitaver theorem ([@rem-ch30-coloring-complexity-literature]). The module `D5/S3/Combinatorics/Graph/Walks/GallaiRoy` freezes a version of it, starting with the definitions of orientation and directed path:
 
@@ -254,6 +278,14 @@ Comparing the mathematical mechanism in [@rem-ch30-eth-subexponential-literature
 The function $g(n)=n\log\log n/\sqrt{\log n}$ grows faster than $\log n$, so for fixed $c>0$ the comparison function $2^{c g(n)}$ exceeds every fixed-degree polynomial. But $T(n)=2^{O(g(n))}$ is only an upper bound: it permits faster, even polynomial-time algorithms and does not prove $P\neq NP$. For a problem with natural parameter $n$ whose chosen circuit encoding has size $S=\Theta(n^2)$, if Tseitin transformation produces $N=\Theta(n^2)$ variables, substitution into the discussed formula gives the upper bound $2^{O(n^2\log\log n/\sqrt{\log n})}$. This changes the scale of that encoding and upper-bound expression; it is no super-exponential cost that every optimal algorithm must pay. The table's $c=1$ curve fixes neither the actual constant nor the validity threshold hidden in big $O$, and does not determine the relative speed of real algorithms.
 :::
 
+::: {.viz src="eth-horizon-crossover" preset="human" height="500"}
+**$2^{16}$ variables: the rate is only back at 1.** The amber reading stops at $n = 2^{16}$, some sixty-five thousand variables. Only here does the cyan schematic curve with $c = 1$ come down to $1$, the same exponent per variable as brute force; the magenta PPSZ line sits at $0.386$. This is the first row of the table above (a numerical comparison of schematic curves, `MODEL`).
+:::
+
+::: {.viz src="eth-horizon-crossover" preset="cross" height="500"}
+**The crossover: $n \approx 2^{558}$.** Let the scale grow: the cyan curve sinks slowly and meets the magenta $0.386$ only at $n \approx 2^{558}$, far outside the shaded part (scales within the number of atoms in the observable universe). This is the last row of the table above (a numerical comparison of schematic curves, `MODEL`).
+:::
+
 The trans-cosmological scale and reduction comparison in [@ex-ch30-galactic-crossover-scale] highlights three closing reflections for our theme of "the finite observer inside the sphere vs. the one beyond the sphere" (`MODEL`):
 
 - **Galactic Algorithms and Physical Scale Boundaries for Finite Observers (`MODEL`)**: The normalized illustrative curve in [@ex-ch30-galactic-crossover-scale] shows how a crossover can occur only at astronomical scales, echoing the picture of a galactic algorithm. The **Finite Memory History Capacity Theorem** ([`finite_memory_history_capacity`](lean:D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity), bounding distinguishable histories) and **Open Integrable Circuit Minimum Depth Theorem** ([`OpenIntegrableCircuitMinDepth.result`](lean:D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result), giving minimum depth $\lfloor N/(\kappa+1)\rfloor+1$ under its locality assumptions) each constrain resources in a specified model. Juxtaposing them with the upper-bound curve supports the author's finite-observer interpretation, but does not combine them into a lower bound for all SAT algorithms or a proof that finite observers necessarily face intractability. Standard $P\neq NP$ remains `OPEN` ([@conj-p-neq-np]).
@@ -295,6 +327,10 @@ $$
 In classical continuum fluid mechanics, this separates two regimes: when the orthogonal exterior curl vanishes ($\nabla\wedge\mathbf{u} = 0$, irrotational potential flow), the convective nonlinearity collapses to a pure scalar potential gradient absorbed directly into Bernoulli pressure, reducing a divergence-free irrotational flow on a simply connected domain to a linear Laplace potential field $\mathbf{u} = -\nabla\Phi$; when the orthogonal exterior curl is nonzero ($\nabla\wedge\mathbf{u} \neq 0$, rotational flow), because the exterior derivative of a scalar gradient vanishes identically, scalar pressure gradients cannot cancel the exterior curl $\nabla\wedge\mathbf{u}$, coupling streamlines nonlinearly with orthogonal vorticity planes.
 :::
 
+::: {.viz src="navier-stokes-p-np" preset="potential" height="500"}
+**No vorticity: advection is a gradient.** At $s = 0$ the flow is the stagnation flow $\mathbf{u} = (x, -y)$, with no vorticity. At the amber probe the white advection arrow coincides with the cyan gradient half, and the magenta Lamb half is zero: the whole term joins the pressure.
+:::
+
 Mapping the irrotational and rotational regimes recorded in [@rem-ch30-lamb-decomposition-literature] onto the geometric analogy (`MODEL`) of the preceding section — "$P$ as an irrotational guidance field, $NP$ as a thread in a rotational wilderness" — aligns the irrotational phase conceptually with a smooth global guidance field (analogous to a hydrodynamic $P$ state) and the rotational phase with multi-scale eddy entanglement.
 
 ::: {.viz src="navier-stokes-p-np" preset="vortex" height="500"}
@@ -315,6 +351,14 @@ In a 2D planar flow $\mathbf{u}(x_1, x_2, t) = (u_1, u_2, 0)$, the vorticity vec
 $$
 \text{Axial stretching outpaces viscosity with } A \to 0 \implies \|\boldsymbol{\omega}\| \approx \frac{\Gamma}{A} \to \infty.
 $$
+:::
+
+::: {.viz src="navier-stokes-p-np" preset="flat" height="500"}
+**Two dimensions: no stretching.** The vorticity is normal to the plane of the flow and nothing pulls on it. The tube does not thin; viscosity only widens it slowly (the cross-section $A$ grows from the dashed $1$ to about $2$), the circulation $\Gamma = \omega A$ of the cyan loop stays fixed, and the magenta vorticity can only fall (a schematic model, `MODEL`).
+:::
+
+::: {.viz src="navier-stokes-p-np" preset="strain" height="500"}
+**Three dimensions: thinner and thinner.** Pull the tube along its axis at a steady rate, without viscosity: it grows longer and thinner, the circulation $\Gamma = \omega A$ of the cyan loop stays fixed, and so the magenta vorticity grows like $\Gamma/A$ all the way, the $\|\boldsymbol{\omega}\| \approx \Gamma/A$ of the formula above (a schematic model, `MODEL`).
 :::
 
 Comparing [@rem-ch30-vorticity-transport-literature] with the dimensional watershed of computational complexity shows that the structural transition occurs at **$2 \to 3$** in both domains (stated here as a cross-domain structural analogy, `MODEL`, rather than a formal complexity equivalence):
@@ -360,6 +404,10 @@ Let $N \in \mathbb{N}$ and $b, \Omega \in \mathbb{R}$.
 :::
 
 Each of the two terms has one job. The sum is the velocity blown onto vortex $j$ by the others: the $k$-th vortex induces, at distance $r$, a velocity of magnitude $\frac{b}{2r}$, perpendicular to the line joining the two, with the sense given by $s_k$; compared with [@rem-ch30-point-vortex-literature], this is the choice $\Gamma_k = \pi b\,s_k$. The first term makes each vortex circle the origin on its own, with angular velocity $s_j\Omega$: for $\Omega > 0$, positive vortices go counterclockwise and negative ones clockwise. Put an even number of vortices of alternating sign on a circle of radius $\rho$ and the two terms pull against each other along the tangent. A manual derivation (it uses the tangential readout identity quoted in the proof below): the other vortices give the $j$-th one the tangential velocity $-s_j\,\frac{b}{4\rho}$, the precession gives it $s_j\,\Omega\rho$, and the two cancel exactly when $\rho^2 = \frac{b}{4\Omega}$. On too small a circle the neighbors win; on too large a circle the precession wins; a single radius brings the whole ring to rest.
+
+::: {.figure src="ch30-vortex-radius"}
+**Only one radius brings the whole ring to rest.** Across is the radius $\rho$ of the circle carrying the alternating vortices. The violet line is the size $\Omega\rho$ of the tangential velocity the precession gives each vortex, the blue curve the size $\frac{b}{4\rho}$ of the tangential velocity blown in by the others; the two point in opposite directions and are equal only at $\rho = R_{b,\Omega} = \sqrt{b/(4\Omega)}$ (here $b = 2$, $\Omega = \tfrac12$, so $R = 1$). Left of the crossing the neighbors win, right of it the precession wins; the condition for rest is [@lem-ch30-vortex-polygon-equilibrium].
+:::
 
 ::: {.lemma #lem-ch30-vortex-polygon-equilibrium title="When a Centered Regular Polygon Is Stationary, and the Fréchet Derivative at the Equilibrium" lean="D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.regular_equilibrium_iff_radius D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.scaled_equilibrium D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalDerivative.physical_derivative"}
 Let $b > 0$ and $\Omega > 0$.
@@ -471,6 +519,10 @@ Before stating the open unforced Clay Millennium conjecture, we strictly isolate
 2. **2026 Finite-Time Blow-Up Construction and External Lean 4 Verification for Forced 3D Navier–Stokes (Clay Statements C / D, Smooth Forcing $\mathbf{f} \in C^\infty$)**: In C. Fefferman's Clay Millennium formulation, forced Statements C / D allow a smooth, compactly supported external forcing field $\mathbf{f}(\mathbf{x}, t)$ keeping total kinetic energy uniformly bounded ($\sup_t \|\mathbf{u}(\cdot, t)\|_{L^2} < \infty$). A 166-page analytical construction announced in 2026 together with an external Lean 4 formalization establishes that under such smooth external forcing, phase-aligned pumping of an inward-spiraling, axially elongating self-similar vortex filament can overpower viscous diffusion $\nu\nabla^2\mathbf{u}$ in finite time $T^* < \infty$, producing $A(t) \to 0$ and $\limsup_{t \nearrow T^*} \|\mathbf{u}(\cdot, t)\|_{L^\infty} = \infty$ (see also related Euler and fluid singularity results by T. M. Elgindi, *Ann. of Math.* **194**, 2021; J. Chen & T. Y. Hou, 2022–2023; D. Córdoba & L. Martínez-Zoroa; and T. Buckmaster & L. Alpöge, 2026). These results apply to forced or inviscid settings and **do not resolve** the unforced ($\mathbf{f} \equiv \mathbf{0}$) viscous Statements A / B below.
 :::
 
+::: {.viz src="navier-stokes-p-np" preset="burgers" height="500"}
+**Viscosity holds: the Burgers vortex.** Add viscosity to the steady stretching: the thinning core also spreads outwards, the cross-section $A$ stops shrinking near $4\pi\nu/\alpha$, the magenta vorticity levels off with it, and the circulation of the cyan loop is still $1$. Stretching and viscosity balance exactly and the tube does not pinch off (a schematic model, `MODEL`).
+:::
+
 ::: {.viz src="navier-stokes-p-np" preset="runaway" height="500"}
 **Thinner and thinner (a schematic model).** The circulation $\Gamma = \omega A$ of the cyan loop stays fixed; the dashed outline is the tube as it started. Here the strain is taken proportional to the vorticity itself ($\alpha = \kappa\omega$, a schematic closure and not a solution of the Navier–Stokes equations): $\kappa\Gamma = 0.50$ exceeds $4\pi\nu = 0.151$, so by $t = 2.4$ the cross-section is down to $0.162$ and the magenta vorticity up to $6.18$, and the cross-section reaches zero at $t^* = 2.86$. Whether a real three-dimensional fluid does this is the open problem stated next (`MODEL`).
 :::
@@ -529,6 +581,10 @@ Necessity evaluates the increment on the opposite hidden pair $\pm b$ (isolating
 
 ::: {.viz src="navier-stokes-p-np" preset="mixed" height="500"}
 **The unseen variable leaks in.** An observer of $x$ alone: each curve shows, for one fixed $x$, how the seen acceleration $P(V)$ changes with the unseen $y$. With the mixed term on, the curves fan out: for the same $x = 0.5$, cyan marks the acceleration at $y = 0$, the amber point the acceleration at the current $y$, and the amber bar their difference. Where that difference is not zero there is no exact closure depending on $x$ alone (a schematic instance on $\mathbb{R}^2$; the general criterion and the five-mode instance are the theorem above).
+:::
+
+::: {.viz src="navier-stokes-p-np" preset="closed" height="500"}
+**No leak: the low modes decide.** All three leaks are off: however the unseen $y$ moves, the amber point runs along a level line, with the same acceleration as the cyan one at $y = 0$, and their difference is zero. The observer of $x$ can predict the next step alone; this is the "if" half of the criterion above (a schematic instance on $\mathbb{R}^2$).
 :::
 
 ### 4. Viscous Landauer Erasure, High-Dimensional Geodesics, and the Six-Row Continuum–Discrete Analogy (`MODEL`)

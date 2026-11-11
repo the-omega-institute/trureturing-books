@@ -10,11 +10,13 @@ Before taking a single step, we state the epistemological status of the opening 
 2. **Tier 2 (Literature remarks)**: In [@rem-complexity-growth-literature] and [@rem-computational-model-literature], we clarify the definitions of state complexity, Nielsen geometry, post-thermalization growth windows, uniform Turing complexity classes, and the accounting of lookup-table preprocessing costs;
 3. **Tier 3 (Red `OPEN`)**: We formulate three celebrated open problems — **Complexity = Volume (CV)** ([@conj-complexity-equals-volume]), **$\mathrm{ER}=\mathrm{EPR}$** ([@conj-er-equals-epr]), and **$\mathrm{P}\neq\mathrm{NP}$** ([@conj-p-neq-np]) — inside `conjecture` environments carrying no `lean` attribute.
 
+::: {.figure src="ch20-overview"}
+**Figure 20.** The chapter at a glance. Panel I, toy schematic curves: the cyan $S(t) = \min(2t, 4)$ runs into the grey dashed level $4$ at $t = 2$ and goes flat, while the magenta $C(t) = 2t$ keeps climbing. Panel II, a schematic Penrose diagram of a two-sided black hole: violet slices pinned to the left and right boundaries stretch as boundary time runs on, and reading them as complexity is the open complexity = volume conjecture ([@conj-complexity-equals-volume]). Panel III: the cyan P sits inside NP, and the red question mark between them is the open $\mathrm{P}\neq\mathrm{NP}$ ([@conj-p-neq-np]).
+:::
+
 ## Gate count, parallel depth, and growth models {#sec-circuit-depth-growth}
 
 Whenever we ask how "complex" a quantum circuit is, our first duty is to keep four distinct notions separate: **total gate count** (the total number of elementary gates in a circuit list), **parallel circuit depth** (the minimum number of time layers required when gates on disjoint sites execute simultaneously), **continuous Nielsen geodesic length** on the unitary group, and laboratory **physical time $t$**.
-
-![Circuit parallel depth and entropy-saturation schematic, open-boundary integrable circuit minimum depth theorem, and the open boundaries of CV, ER=EPR, and P≠NP](../assets/fig-20-complexity-volume-wormhole.svg)
 
 Begin with an exact parallel-depth problem solved completely in the Lean module `D5.S3.Quantum.Dynamics.OpenIntegrableCircuitMinDepth`. Consider a one-dimensional open-boundary chain of $N$ sites $\{1, 2, \dots, N\}$, whose elementary gate alphabet `Gate` has three constructors:
 
@@ -29,6 +31,10 @@ $$
 $$
 
 By packing non-overlapping bulk and boundary gates into parallel layers, our first theorem establishes the exact closed-form formula for $\operatorname{minDepth}(N, \kappa)$.
+
+::: {.figure src="ch20-turning-points"}
+**The turning points cut the chain of gates into $\kappa + 1$ runs, one layer per gate in each run.** $N = 11$, $S = \{4, 8\}$: the $12$ gates are $12$ cyan bricks forming three staircases that step down to the right, four bricks each; grey arrows point from the gate that runs first to the one after it, and magenta triangles mark the turning points $U_4$ and $U_8$. The gate count is $12$, the depth only $4 = \lfloor 11/3\rfloor + 1$ ([@thm-open-circuit-min-depth]).
+:::
 
 ::: {.theorem #thm-open-circuit-min-depth title="Minimum open-boundary circuit depth" lean="D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result"}
 Let $N, \kappa \in \mathbb{N}$ be natural numbers satisfying $1 \le \kappa$ and $2\kappa \le N$. Then the minimum parallel depth over configurations of size $\kappa$ in the open-boundary integrable circuit family is
@@ -68,6 +74,10 @@ $$
 recurses on prefix length $M$ with $j$ remaining splits to obtain $(S_0, g_0)$ (with $g_0(M) = 0$), inserts the split point $M + 1$ into $S_0$ ($S = S_0 \cup \{M + 1\}$), and defines $g(i) = g_0(i)$ for $i \le M$ and $g(i) = n - i \le d \le q$ for $i > M$. (For instance, at $N = 5, \kappa = 2, q = 1$: the outer step $j = 1, n = 5$ sets $d = \min(1, 5 - 2 - 1) = 1, M = 3$ and inserts $M + 1 = 4$; the inner step $j = 0, n = 3$ sets $d = \min(1, 3 - 0 - 1) = 1, M = 1$ and inserts $M + 1 = 2$, yielding $S = \{2, 4\}$ and the valid two-layer assignment $g = [1, 0, 1, 0, 1, 0] < 2$.) Instantiating this recursion at $n = N$ and $k = \kappa$ constructs a valid layer assignment strictly below $q + 1 = \lfloor N / (\kappa + 1)\rfloor + 1$, proving $\operatorname{minDepth}(N, \kappa) = \lfloor N / (\kappa + 1)\rfloor + 1$. The full proof is checked by the Lean kernel.
 :::
 
+::: {.viz src="complexity-growth" preset="floor" height="500"}
+**Move the turning points and the stack stops on the white line.** N = 11, κ = 2: as the magenta triangles move step by step from {2, 3} to {4, 8}, the cyan bricks come down from 9 layers one at a time to 4 and land on the white line ⌊11/3⌋ + 1 = 4, below which they never go ([@thm-open-circuit-min-depth]).
+:::
+
 Keep the contract of [@thm-open-circuit-min-depth] sharp: $\operatorname{minDepth}(N, \kappa)$ is the optimal parallel layer depth over configurations $|S| = \kappa$ within the **fixed open-boundary integrable circuit family** `circuit N S`; it is neither the unconstrained minimum gate count to synthesize an arbitrary unitary operator nor physical time $t$. Let us write out the explicit layer schedules at $\kappa = 2$ for $N = 8$ and $N = 11$.
 
 ::: {.example #ex-open-circuit-depths title="Explicit Layer Schedules and Minimum Depths for N = 8 and N = 11 at κ = 2"}
@@ -100,6 +110,10 @@ $$
 Remember that these combinatorial layer counts inside a specific integrable circuit family are not empirical measurements of black-hole interior volume.
 :::
 
+::: {.viz src="complexity-growth" preset="eight" height="500"}
+**Nine gates, three layers.** N = 8, S = {3, 6}: the cyan bricks light up layer by layer — KN, U5, U2 in layer 0, U7, U4, U1 in layer 1, K1, U3, U6 in layer 2 — and top out on the white line; the grey dashed line is the 4 layers the old formula predicts ([@ex-open-circuit-depths]).
+:::
+
 ## Black-hole interiors and the complexity–volume conjecture {#sec-complexity-volume-conjecture}
 
 Why is formal verification indispensable even for finite combinatorial circuit depths? Because small-parameter patterns can easily mislead intuition.
@@ -129,6 +143,10 @@ To prove $\neg(\operatorname{conjectureOne} \lor \operatorname{conjectureTwo})$,
 The full proof is checked by the Lean kernel.
 :::
 
+::: {.viz src="complexity-growth" preset="eleven" height="500"}
+**The old formula counts one layer too many.** N = 11, S = {4, 8}: the 12 gates stack into 4 layers of 3 and top out on the white line; the grey dashed line is the 5 layers predicted by the odd-N formula (N + 3)/2 − κ ([@lemma-open-circuit-depth-refutation]).
+:::
+
 Note the strict scope of [@lemma-open-circuit-depth-refutation]: it refutes only the two combinatorial depth formulas `conjectureOne` and `conjectureTwo` from `arXiv:2607.02093v1`; it is **not** a refutation of Complexity=Volume, $\mathrm{ER}=\mathrm{EPR}$, or $\mathrm{P}\neq\mathrm{NP}$.
 
 Before stating the open Complexity=Volume conjecture, we summarize the literature conventions governing state complexity growth in the following remark.
@@ -144,6 +162,14 @@ In particular, one must distinguish **$\varepsilon$-approximate state complexity
 In chaotic many-body models and holographic black-hole narratives, after subsystem entanglement entropy saturates at its thermal value $S_{\mathrm{th}} \sim O(N)$ around the thermalization scale $t_{\mathrm{th}}$, $\varepsilon$-approximate state complexity (or continuous Nielsen complexity) is expected to grow approximately linearly with $t$ across an intermediate window $t_{\mathrm{th}} \ll t \ll e^{O(N)}$. In any closed system with a finite-dimensional Hilbert space and bounded spectrum, however, complexity is bounded above by $\exp(O(N))$ and, over longer model- and spectrum-dependent timescales (typically doubly exponential quantum Poincaré recurrence scales), saturates and undergoes recurrences rather than growing linearly forever as $t \to \infty$. See L. Susskind, *Fortschr. Phys.* **64**, 24–43 (2016), DOI: `10.1002/prop.201500092`; and S. Aaronson (2016), `arXiv:1607.05256`.
 :::
 
+::: {.viz src="complexity-growth" preset="saturate" height="500"}
+**Entropy caps first; the gate count goes on.** A random brick-wall circuit on 8 qubits run to layer 14: the cyan half-chain entropy climbs along the grey staircase and around layer 13 settles between 3.18 and 3.36 bits, under the white 4-bit line, while the white line (gates used) rises all the way to 49. The random circuit is an illustrative model; its entropy and gate count are computed layer by layer ([@rem-complexity-growth-literature]).
+:::
+
+::: {.viz src="complexity-growth" preset="ceiling" height="500"}
+**Gates can always be added; complexity has a ceiling.** Run on to layer 90: the cyan entropy stays put and the white line reaches 315 gates; the magenta expected complexity (an illustrative model) follows the white line until layer 74, meets the dashed 2^N = 256 and runs flat from there.
+:::
+
 ::: {.conjecture #conj-complexity-equals-volume title="Complexity equals volume"}
 Fix an applicable semiclassical holographic state, a boundary reference state, a local gate set, and a UV regularization and precision scheme. The **Complexity = Volume (CV) conjecture** proposes that, in units with $c = 1$, the renormalized circuit complexity $\mathcal{C}_V(\psi(t))$ of the boundary quantum state at boundary time $t$ is proportional to the maximal renormalized spatial volume $V_{\mathrm{ren}}(\Sigma_t)$ of a smooth spacelike codimension-one bulk hypersurface $\Sigma_t$ anchored at the boundary time slice $t$:
 
@@ -156,9 +182,17 @@ where $G_N$ is the bulk Newton gravitational constant and $\ell_*$ is a characte
 Scope and open boundaries: $V_{\mathrm{ren}}(\Sigma_t)$ is the **spatial volume of a codimension-one slice**; it must not be confused with the distinct **Complexity = Action (CA) conjecture**, which relates circuit complexity to the **on-shell gravitational action** $\mathcal{C}_A(\psi(t)) = I_{\mathrm{WDW}} / (\pi\hbar)$ evaluated on the bulk **Wheeler–DeWitt (WDW) causal patch** anchored at the boundary slice (including Einstein–Hilbert bulk, Gibbons–Hawking–York boundary, and null-joint action terms, rather than bare four-dimensional spacetime volume). In both CV and CA, proportionality constants depend on gate-cost weighting and UV regularization conventions, and neither conjecture claims that exact discrete minimum gate counts equal continuum bulk quantities without regularization. See L. Susskind, *Fortschr. Phys.* **64**, 24–43 (2016), DOI: `10.1002/prop.201500092`; and A. R. Brown, D. A. Roberts, L. Susskind, B. Swingle & Y. Zhao, *Phys. Rev. Lett.* **116**, 191301 (2016), DOI: `10.1103/PhysRevLett.116.191301`.
 :::
 
+::: {.viz src="complexity-growth" preset="cv" height="500"}
+**Whether this rising line is a volume, nobody has proved.** The red mark covers the rising stretch of the magenta line: the entropy stopped long ago, and this line is still climbing. Reading that stretch as the volume of a slice through the black-hole interior is the complexity = volume conjecture ([@conj-complexity-equals-volume]); no volume is drawn on the stage.
+:::
+
 ## Entanglement bridges and the scope of ER=EPR {#sec-er-epr-conjecture}
 
 While holographic conjectures motivate studying how many gates are needed to build highly entangled states, what can we prove rigorously about worst-case two-qubit gate counts in finite-dimensional circuit synthesis?
+
+::: {.figure src="ch20-cv-slices"}
+**As boundary time runs on, the slice through the black-hole interior stretches; whether it tracks the gate count is open.** A schematic Penrose diagram of a two-sided black hole: the vertical sides are the two boundaries, the zigzags are the singularities, the dashed diagonals the horizons. The violet slices $\Sigma_t$ are pinned at boundary times $t = 0, 1, 2, 3$ and grow longer later on (schematic; no volume is computed). The red tag is the complexity = volume conjecture ([@conj-complexity-equals-volume]), an open problem.
+:::
 
 In the Lean module `D5.S3.Quantum.Magic.ReflectionDiagonalCNOTLowerBound`, fix an even number of qubits $m = 2n$ ($n \ge 1$):
 
@@ -228,6 +262,10 @@ Note the exact scope of [@prop-reflection-cnot-lower-bound]:
 
 Alongside circuit synthesis bounds, we record the open $\mathrm{ER}=\mathrm{EPR}$ conjecture on the geometric interpretation of bipartite entanglement in semiclassical gravity.
 
+::: {.figure src="ch20-er-epr"}
+**ER=EPR proposes "entanglement is a bridge" only for heavily entangled semiclassical systems.** Top row: many cyan dashed entangled pairs between the systems $L$ and $R$, set against a side view of an Einstein–Rosen bridge by a red “≟”; the correspondence is an open problem ([@conj-er-equals-epr]). Bottom row: the small bridge a single Bell pair points to is crossed out—one pair of entangled qubits has no smooth wormhole between them. The whole figure is schematic.
+:::
+
 ::: {.conjecture #conj-er-equals-epr title="ER=EPR"}
 In entangled bipartite systems that admit a semiclassical gravitational description (prototypically a two-sided eternal black hole in the thermofield double state), the **$\mathrm{ER}=\mathrm{EPR}$ conjecture** proposes that a non-traversable **Einstein–Rosen (ER) bridge** serves as the bulk geometric description of the **Einstein–Podolsky–Rosen (EPR) entanglement** between the two boundary subsystems.
 
@@ -273,6 +311,10 @@ $$
 This arithmetic toy model merely illustrates how an uncapped linear function $C(t)$ continues past a capped curve $S(t) \le 4$; it does not claim that minimum quantum circuit complexity must grow monotonically.
 :::
 
+::: {.viz src="complexity-growth" height="560"}
+**How complexity grows · the full lab.** In Growth, drag the rail to see where the cyan entropy and the white gate count each go, and switch on the CV reading; in Depth, change N and κ, or click sites to move the magenta turning points, and see whether the cyan bricks can get below the white line.
+:::
+
 Finally, let us address the computational question raised by the opening epigraph: does pre-computing answers into a lookup table or changing the initial basis prove $\mathrm{P} = \mathrm{NP}$, or does the exponential CNOT lower bound of [@prop-reflection-cnot-lower-bound] prove $\mathrm{P} \neq \mathrm{NP}$? Neither does.
 
 ::: {.remark #rem-computational-model-literature title="Uniform Computational Models, Lookup-Table Preprocessing Costs, and Complexity Class Boundaries (Literature result, not formalized in this book)"}
@@ -282,6 +324,10 @@ Finally, let us address the computational question raised by the opening epigrap
 2. **Exponential unitary-synthesis gate bounds do not prove $\mathrm{P} \neq \mathrm{NP}$**: In [@prop-reflection-cnot-lower-bound], any ancilla-free $\{\mathrm{CNOT}, R_z\}$ circuit synthesizing the explicit reflection-symmetric diagonal witness $\operatorname{diag}(e^{i\theta_{\mathrm{hard}}(x)})$ requires at least $2^{2n-1} + 2n - 2$ $\mathrm{CNOT}$ gates because $\theta_{\mathrm{hard}}$ evaluates to $-1$ on all $2^{2n-1} - 1$ nonzero even-weight Walsh–Hadamard characters, forcing the circuit to generate every nonzero even-weight parity output and execute at least $2n - 1$ odd-return steps to restore the terminal wire parities (while in the unformalized circuit-synthesis literature, such as V. V. Shende, S. S. Bullock & I. L. Markov, *Phys. Rev. A* **70**, 012310 (2004), synthesizing generic $m$-qubit unitaries in $\mathrm{U}(2^m)$ also requires $\Omega(4^m)$ two-qubit gates by continuous real parameter-dimension counting over a $4^m$-dimensional manifold). Neither a discrete parity-output counting bound for an explicit $2^{2n}\times 2^{2n}$ diagonal unitary nor generic continuous parameter-dimension counting rules out $\operatorname{poly}(n)$-time algorithms for succinctly encoded decision problems of input bit-length $n = |x|$ in $\mathrm{NP}$, and therefore neither proves $\mathrm{P} \neq \mathrm{NP}$.
 
 See S. A. Cook, "The complexity of theorem-proving procedures," *Proc. 3rd Annual ACM Symposium on Theory of Computing (STOC)*, pp. 151–158 (1971), DOI: `10.1145/800157.805047`; and S. Aaronson, *The Complexity of Quantum States and Transformations: From Quantum Money to Black Holes* (2016), `arXiv:1607.05256`.
+:::
+
+::: {.figure src="ch20-lookup-budget"}
+**A precomputed lookup table soon outgrows any polynomial budget.** On a logarithmic vertical scale, the magenta line is the table's $2^n$ rows and the cyan curve a sample polynomial budget $n^3$; they cross at the dashed vertical $n = 10$, after which the magenta line pulls ever further ahead. Violet tag: literature result, not formalized in this book ([@rem-computational-model-literature]); red tag: $\mathrm{P}\neq\mathrm{NP}$ remains open, and this figure does not answer it.
 :::
 
 ::: {.conjecture #conj-p-neq-np title="P≠NP"}

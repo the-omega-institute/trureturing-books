@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="EQUATOR//CROWD · Concentration at the equator">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EQUATOR//CROWD 赤道集中</title>
+<meta name="description" content="在 d 维单位球面上均匀地取点，看它们在一根固定测量轴上的坐标 x₁。三维时 x₁ 在 −1 到 1 之间均匀分布；维数越高，点越挤向垂直于这根轴的赤道，宽度按 1/√d 缩小：二十个量子比特（d = 2²⁰）时，|x₁| ≥ 0.1 的份额不超过马尔可夫上界 9.54 × 10⁻⁵，实际约为 3 × 10⁻²²⁹¹。Pick points uniformly on the unit sphere in d dimensions and look at their coordinate x₁ along one fixed measured axis. In three dimensions x₁ is spread evenly between −1 and 1; as the dimension grows the points crowd onto the equator perpendicular to the axis, and the width shrinks like 1/√d: at twenty qubits (d = 2²⁰) the share with |x₁| ≥ 0.1 is below the Markov bound 9.54 × 10⁻⁵ and is in fact about 3 × 10⁻²²⁹¹.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="equator-concentration">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="EQUATOR//CROWD">EQUATOR<b>//</b>CROWD</h1>
+      <div class="tagline">
+        <span class="zh">赤道集中 · <em>维数越高，球面上的点越挤在垂直于测量轴的赤道上，宽度按 1/√d 缩小</em></span>
+        <span class="en">Concentration at the equator · <em>the higher the dimension, the more the points of the sphere crowd onto the equator perpendicular to the measured axis, in a belt that shrinks like 1/√d</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillD">d <strong>—</strong></span>
+      <span class="pill hot" id="pillOut"><span class="zh">带外</span><span class="en">OUTSIDE</span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="three" aria-pressed="false"><span class="code">d = 3</span><span class="cn zh">三维球面：高度均匀分布</span><span class="cn en">The ordinary sphere: heights spread evenly</span></button>
+        <button class="preset" data-preset="four" aria-pressed="false"><span class="code">4 QUBITS</span><span class="cn zh">四个量子比特，d = 16：开始挤向赤道</span><span class="cn en">Four qubits, d = 16: crowding towards the equator</span></button>
+        <button class="preset" data-preset="width" aria-pressed="false"><span class="code">1/√d</span><span class="cn zh">维数一路升高：宽度按 1/√d 缩小</span><span class="cn en">Dimension rising: the width shrinks like 1/√d</span></button>
+        <button class="preset" data-preset="bound" aria-pressed="false"><span class="code">MARKOV</span><span class="cn zh">马尔可夫上界：总在实际份额之上</span><span class="cn en">The Markov bound: always above the actual share</span></button>
+        <button class="preset" data-preset="twenty" aria-pressed="false"><span class="code">20 QUBITS</span><span class="cn zh">二十个量子比特：全挤在赤道窄带里</span><span class="cn en">Twenty qubits: all in the narrow belt</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">赤道带</span><span class="en">The equator belt</span><span class="aside">|x₁| &lt; ε</span></h2>
+      <div class="field">
+        <label for="eps"><span class="zh">带宽 ε</span><span class="en">Belt half-width ε</span><small class="zh">点离赤道超平面 x₁ = 0 不到 ε 算在带内</small><small class="en">a point is in the belt when it is less than ε from the hyperplane x₁ = 0</small></label><output id="oEps" for="eps">0.10</output>
+        <input type="range" id="eps" min="0.02" max="0.5" step="0.01" value="0.1">
+      </div>
+      <div class="chips" id="redrawRow">
+        <button class="chip" id="redraw"><span class="zh">重新抽样</span><span class="en">Redraw</span></button>
+      </div>
+      <p class="note"><span class="zh">时间轴是维数：d = 2ⁿ，n 从 1 到 20（n 是量子比特数；d = 3 是普通的球面）。舞台上的 1500 个点是按 x₁ 的精确分布抽出的样本。</span><span class="en">The rail is the dimension: d = 2ⁿ with n from 1 to 20 (n is the number of qubits; d = 3 is the ordinary sphere). The 1500 points on the stage are samples drawn from the exact distribution of x₁.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="舞台：左边是球面过测量轴的截面，每个随机点按它的坐标 x₁ 放在圆上；右边是 x₁ 的分布，横着画，与圆共用同一根竖直的 x₁ 轴" data-aria-en="Stage: on the left the section of the sphere through the measured axis, each random point placed on the circle at its coordinate x₁; on the right the distribution of x₁, drawn sideways on the same vertical x₁ axis">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="plotTitle"></h2><span id="plotMeta"></span></div>
+        <canvas id="plot" aria-label="宽度与带外份额随维数的变化" data-aria-en="Width and outside share against the dimension"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">E[x₁²] = 1/d</span></h2>
+      <dl class="ro" id="ro"></dl>
+      <p class="note" id="roNote"></p>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">均匀单位球面上 E[x₁²] = 1/d 与马尔可夫上界 Pr(|x₁| ≥ ε) ≤ 1/(dε²)：文献结果，未在本书形式化。x₁ 的密度正比于 (1 − x²)<sup>(d−3)/2</sup> 也是经典结果。本页不引用任何 Lean 定理。</span><span class="en">On the uniform unit sphere E[x₁²] = 1/d and the Markov bound Pr(|x₁| ≥ ε) ≤ 1/(dε²): literature results, not formalized in this book. That x₁ has density proportional to (1 − x²)<sup>(d−3)/2</sup> is classical as well. This page cites no Lean theorem.</span></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">贫瘠高原（McClean 等，2018；Cerezo 等，2021）依赖随机电路分布、酉 2-设计、可观测量的局域性与电路深度：文献结果，未在本书形式化。实振幅球面只是受限的状态模型；赤道集中本身不证明电路梯度的指数衰减，页面也不画梯度。</span><span class="en">Barren plateaus (McClean et al., 2018; Cerezo et al., 2021) depend on the random-circuit distribution, unitary 2-designs, the locality of the observable and the circuit depth: literature results, not formalized in this book. The real-amplitude sphere is a restricted state model; equator concentration by itself does not prove exponentially small circuit gradients, and the page draws no gradients.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">带内外的精确份额由不完全贝塔函数算出（对数形式，二十个量子比特时也不下溢）；舞台上的点按精确分布的分位数从固定种子的均匀随机数换算而来。这是数值演示，不是证明。</span><span class="en">The exact shares inside and outside the belt come from the incomplete beta function (in logarithms, so nothing underflows even at twenty qubits); the points on the stage are quantiles of the exact distribution at seeded uniform random numbers. A numerical illustration, not a proof.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="时间轴：维数 d = 2ⁿ" data-aria-en="Rail: the dimension d = 2ⁿ">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">一个量子比特</span><span class="en">one qubit</span> · <kbd>R</kbd> <span class="zh">重新抽样</span><span class="en">redraw</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">在实单位球面 S<sup>d−1</sup> ⊂ ℝ<sup>d</sup> 上按旋转不变的均匀测度取点 x，看它在一根固定测量轴上的坐标 x₁。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>舞台。</b>左边是球面过测量轴的截面：圆上的每个点就是一个随机点，放在高度 x₁ 处（离赤道的距离），左右随机。右边把 x₁ 的分布横着画，与圆共用同一根竖直轴：曲线是精确密度，灰色的条是这 1500 个点的直方图。赤道带 |x₁| &lt; ε 里的点是青色，带外的是品红。</li>
+        <li><b>精确分布。</b>x₁ 的密度正比于 (1 − x²)<sup>(d−3)/2</sup>；等价地，x₁² 服从 Beta(1/2, (d − 1)/2)。d = 3 时密度是常数 1/2：普通球面上点的高度均匀分布（阿基米德）。页面用不完全贝塔函数精确算出带内外的份额，并在对数下计算，所以 d = 2²⁰ 时也能给出约 3 × 10<sup>−2291</sup> 这样的数。</li>
+        <li><b>宽度。</b>各坐标对称，x₁² + … + x<sub>d</sub>² = 1，所以 E[x₁²] = 1/d，典型宽度 1/√d：量子比特每多一个，宽度缩小为 1/√2。小图在对数坐标上画出宽度与带外份额随 d 的变化。</li>
+        <li><b>马尔可夫上界。</b>Pr(|x₁| ≥ ε) ≤ E[x₁²]/ε² = 1/(dε²)。它总在实际份额之上，而且宽松得多：d = 128、ε = 0.2 时界是 0.195，实际是 0.023；二十个量子比特、ε = 0.1 时界是 9.54 × 10<sup>−5</sup>（第十二章的例子），实际约 3 × 10<sup>−2291</sup>。</li>
+        <li><b>边界。</b>实振幅球面只是受限的状态模型（一般 n 比特复态在 S<sup>2<sup>n+1</sup>−1</sup> 上）。赤道集中是贫瘠高原的几何背景，但随机电路梯度的指数衰减还依赖电路分布、2-设计与可观测量的局域性等条件（文献结果，未在本书形式化）；页面不画梯度。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch12-measurement-computation-and-gradients.html#sec-equator-concentration-limits" target="_top">第十二章 · 赤道集中与贫瘠高原的条件</a> · <a href="../../zh/ch12-measurement-computation-and-gradients.html#rem-sphere-equator-markov-literature" target="_top">实单位球面二阶矩与赤道马尔可夫集中上界</a> · <a href="../../zh/ch12-measurement-computation-and-gradients.html#ex-cluster-shift-and-gradient" target="_top">一次传态、两次移位与一次球面下降</a> · <a href="../../zh/ch12-measurement-computation-and-gradients.html#rem-mbqc-gradients-literature" target="_top">文献注记</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">Pick a point x of the real unit sphere S<sup>d−1</sup> ⊂ ℝ<sup>d</sup> under the rotation-invariant uniform measure and look at its coordinate x₁ along one fixed measured axis. The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>The stage.</b> On the left is the section of the sphere through the measured axis: every dot on the circle is one random point, placed at height x₁ (its distance from the equator) on a random side. On the right the distribution of x₁ is drawn sideways on the same vertical axis: the curve is the exact density, the grey bars the histogram of the 1500 points. Points in the equator belt |x₁| &lt; ε are cyan, points outside it magenta.</li>
+        <li><b>The exact distribution.</b> x₁ has density proportional to (1 − x²)<sup>(d−3)/2</sup>; equivalently x₁² follows Beta(1/2, (d − 1)/2). At d = 3 the density is the constant 1/2: on the ordinary sphere the heights of points are spread evenly (Archimedes). The page computes the shares inside and outside the belt exactly from the incomplete beta function, in logarithms, so even at d = 2²⁰ it can report a number like 3 × 10<sup>−2291</sup>.</li>
+        <li><b>The width.</b> By symmetry and x₁² + … + x<sub>d</sub>² = 1, E[x₁²] = 1/d and the typical width is 1/√d: every extra qubit narrows it by a factor 1/√2. The small plot shows the width and the outside share against d on logarithmic axes.</li>
+        <li><b>The Markov bound.</b> Pr(|x₁| ≥ ε) ≤ E[x₁²]/ε² = 1/(dε²). It always lies above the actual share and is far from tight: at d = 128 and ε = 0.2 the bound is 0.195 against an actual 0.023; at twenty qubits and ε = 0.1 the bound is 9.54 × 10<sup>−5</sup> (the example of Chapter 12) against an actual 3 × 10<sup>−2291</sup> or so.</li>
+        <li><b>Limits.</b> The real-amplitude sphere is a restricted state model (general complex n-qubit states lie on S<sup>2<sup>n+1</sup>−1</sup>). Equator concentration is the geometric background of barren plateaus, but the exponential decay of random-circuit gradients also needs conditions on the circuit distribution, 2-designs and the locality of the observable (literature results, not formalized in this book); the page draws no gradients.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch12-measurement-computation-and-gradients.html#sec-equator-concentration-limits" target="_top">Chapter 12 · Equator concentration and conditions for barren plateaus</a> · <a href="../../en/ch12-measurement-computation-and-gradients.html#rem-sphere-equator-markov-literature" target="_top">second moment and the Markov bound on the real unit sphere</a> · <a href="../../en/ch12-measurement-computation-and-gradients.html#ex-cluster-shift-and-gradient" target="_top">one teleportation, two shifts and one spherical descent</a> · <a href="../../en/ch12-measurement-computation-and-gradients.html#rem-mbqc-gradients-literature" target="_top">literature note</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

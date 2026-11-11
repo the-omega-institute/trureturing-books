@@ -4,6 +4,10 @@
 
 在前七部二十八章中，我们从两子丈量的内积投影一路走到了 Lean 4 公理圣殿的机械验证。现在，在开启全书第八部收官合拢之际，让我们把整座几何大厦推向最深层的两个本体论追问：第一，两千五百年前毕达哥拉斯的“勾股定理”与“万物皆数”，如何通过 $\pm 1$ 佩尔算术接缝连接起素数二象性、同余数椭圆曲线环面与三维旋量球面 $S^3$？第二，为什么第 10 章“两两比较、永远一致、顺序无关”的 Gram 矩阵刚性直接消解了前后的时间流逝，却同时铸就了斯宾诺莎式的几何因果必然性与有限观察者在格拉姆椭圆体（因果相容空间）中的自由选点？
 
+::: {.figure src="ch29-overview"}
+**图 29。** 本章地图：第 I 栏，四级台阶依次写着青色的 $\mathbb{Q}$ 与品红的 $\sqrt{2}$、$\pi$、$\theta^*$，每个品红的常数都是逃出前一级的那个数；第 II 栏，模 $4$ 表盘上两个平方之和只落在青色的第 $0$、$1$、$2$ 格，品红虚线围出的第 $3$ 格永远空着（[@lem-ch29-square-residues-mod-four]）；第 III 栏，$c_{AB} = \cos 60^\circ$ 时的格拉姆窗口：紫色的内部 $\det G > 0$，边上 $\det G = 0$，琥珀色竖线是 $c_{BC} = \cos 45^\circ$ 时 $c_{AC}$ 能取的范围。
+:::
+
 ---
 
 ## 毕达哥拉斯、万物皆数与四级“球外之球”突围 {#sec-coda-pythagoras-all-is-number}
@@ -134,6 +138,10 @@ $$
 误差一列正负交替，绝对值每行缩为上一行的 $s \approx 0.414$ 倍；第四列只取 $\pm 1$；最后一列与误差的绝对值相同，且在这六行里最小值只在 $m = P_{k+1}$ 处取到（唯一性是枚举所见；两条定理只保证最小值等于 $s^{k+1}$ 并在 $m = P_{k+1}$ 处取到）。例如 $k = 1$ 时只能取 $m = 1, 2, 3, 4$，距离依次为 $0.41421356$、$0.17157288$、$0.24264069$、$0.34314575$，最小者正是 $m = P_2 = 2$。$k = 5$ 一行也能用整数核对：行列式 $P_7P_5 - P_6^2 = 169\cdot 29 - 70^2 = 4901 - 4900 = 1$；相位质量的括号 $P_7 + s\,P_6 = 99 + 70\sqrt{2} \approx 197.99495$，乘以 $s^6 \approx 0.0050506339$ 恰为 $1$。
 :::
 
+::: {.figure src="ch29-pell-seam"}
+**误差每步变号、缩成 $s$ 倍，却从不归零；$Q^2 - 2P^2$ 始终是 $\pm 1$。** 竖线是上表第三列的误差 $P_{k+1}\,s - P_k$，青色朝上为正、品红朝下为负；纵轴按绝对值取对数刻度，所以每步缩成 $s \approx 0.414$ 倍在图上是相同的一格，端点都落在虚线包络 $\pm s^{k+1}$ 上（[@thm-ch29-silver-pell-remainder] 第 1 条）。竖线旁是渐近分数 $Q_{k+1}/P_{k+1}$，最下一行是第四列的 $Q_{k+1}^2 - 2P_{k+1}^2$。
+:::
+
 ::: {.remark #rem-ch29-pell-convergents-literature title="$Q_n/P_n$ 与 $\sqrt{2}$ 的连分数渐近分数（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 经典连分数理论给出
 
@@ -179,6 +187,10 @@ $$
 - 把勾股定理无穷次施加于圆内接正 $2^k$ 边形，多面体折线逼近圆弧，凝聚出**第 3 层球**的灵魂常数 $\pi$，完成了静态球面的合拢；
 - 最后，当我们不再把测量算子 $\cos$ 与被测角度 $\theta$ 割裂为“尺子”与“读数”，而是追问“当尺子的投影输出恰好等于尺子自身的张角 $\cos\theta = \theta$ 时会发生什么”，不动点 $\theta^*$ 便破茧而出，带我们跃入**第 4 层球**——在那里，计数的动词 **数（shǔ，$\cos$）** 与被计数的名词 **数（shù，$\theta$）** 终于融为一体！
 
+::: {.figure src="ch29-four-tiers"}
+**四级突围：每一层都被下一种操作撑破。** 第 1 层是数轴上青色的有理点 $m/n$；单位正方形品红的对角线 $\sqrt{2}$ 撑破它，开出第 2 层；青色的正八边形贴着品红的圆，割圆逼近凝出第 3 层的 $\pi$；青色的 $y = \cos\theta$ 与虚线 $y = \theta$ 交于品红的点 $\theta^* \approx 0.739$，即第 4 层。台阶上的常数就是 [@rem-ch29-four-tier-sphere-table] 的四行；其中的超越性结论是文献结果，未在本书形式化。
+:::
+
 ---
 
 ## $\pm 1$ 算术接缝、素数二象性与椭圆曲线环面上的 $S^3$ 投影 {#sec-coda-primes-elliptic-curves}
@@ -205,6 +217,10 @@ $$
 
 **面素数**是 $p \equiv 1 \pmod 4$ 的奇素数（$5, 13, 17, 29, 37, \dots$），**线素数**是 $p \equiv 3 \pmod 4$ 的奇素数（$3, 7, 11, 19, 23, \dots$）。这道分界的主体已冻结在所钉的 `trureturing@dev` 中，下面的两个引理与两个定理都由 Lean 内核检查。先看最朴素的机制：把整数的平方放到只有四格的模 $4$ 表盘上。偶数 $2k$ 的平方是 $4k^2$，落在第 $0$ 格；奇数 $2k + 1$ 的平方是 $4(k^2 + k) + 1$，落在第 $1$ 格。两个平方相加只能落在第 $0$、$1$、$2$ 格，第 $3$ 格永远空着。
 
+::: {.figure src="ch29-mod-four-dial"}
+**模 $4$ 表盘：两个平方之和只落在第 $0$、$1$、$2$ 格，第 $3$ 格永远空着。** 青色的三格标着落在那里的两个平方余数之和 $0 + 0$、$0 + 1$、$1 + 1$；品红虚线围出的第 $3$ 格是空的，左边品红的线素数 $3, 7, 11, 19, 23$ 正指向它，右边青色的面素数 $5, 13, 17, 29, 37$ 落在第 $1$ 格（[@lem-ch29-square-residues-mod-four]）。
+:::
+
 ::: {.lemma #lem-ch29-square-residues-mod-four title="平方数模 4 只取 0 或 1，两平方和模 4 不等于 3" lean="D5/S3/PrimeForms/QuadraticResidues.square_residues_and_sum_obstruction"}
 对每个自然数 $n$，有 $n^2 \bmod 4 = 0$ 或 $n^2 \bmod 4 = 1$；对所有自然数 $a, b$，有 $(a^2 + b^2) \bmod 4 \neq 3$。
 :::
@@ -214,6 +230,10 @@ Lean 证明就是上面的表盘。把 $n$ 写成 $r + 2k$，其中 $r \in \{0, 
 :::
 
 表盘立刻说明线素数**写不成**两平方和：$p \bmod 4 = 3$ 恰是那个空格。反方向——面素数**一定写得成**——却不是表盘能看出来的，它要求模 $p$ 算术里真的住着一个 $90^\circ$ 旋转。
+
+::: {.viz src="pythagoras-number-escape" preset="seven" height="500"}
+**$7$：圆上没有格点。** 半径 $\sqrt{7}$ 的品红圆从格点之间穿过，一个也碰不到：$7 \bmod 4 = 3$，正落在表盘上那个空格里，$7$ 写不成两个平方之和（[@lem-ch29-square-residues-mod-four]），是线素数。
+:::
 
 ::: {.theorem #thm-ch29-face-prime-two-squares title="模 4 余 1 的素数是两个平方之和；高斯整数乘以其共轭等于两平方和" lean="D5/S3/PrimeForms/SumTwoSquares.prime_eq_sq_add_sq_of_mod_four_eq_one D5/S3/PrimeForms/GaussianIntegers/GaussianIntegerNorm.gaussian_integer_mul_conj_eq_sq_add_sq"}
 1. 设自然数 $p$ 为素数且 $p \bmod 4 = 1$，则存在自然数 $a, b$ 使 $p = a^2 + b^2$。
@@ -256,6 +276,10 @@ $$
 2. **对奇素数 $p$，同余方程 $x^2 \equiv -1 \pmod p$ 有解，当且仅当 $p \equiv 1 \pmod 4$。** 若 $p \equiv 1$，取 $p = a^2 + b^2$：$b = 0$ 会使素数 $p = a^2$ 成为平方数，而 $b^2 \le p < p^2$ 给出 $b < p$，所以 $0 < b < p$，$b$ 模 $p$ 可逆；由 $a^2 \equiv -b^2$ 得 $x \equiv a\,b^{-1}$ 满足 $x^2 \equiv -1$。若 $p \equiv 3$ 而 $x^2 \equiv -1$，取 $0 \le x < p$，则 $p \mid x^2 + 1^2$，[@lem-ch29-line-prime-descent] 给出 $p \mid 1$，矛盾。这就是上文“能否在模 $p$ 算术中开出 $\sqrt{-1}$”的分界。
 3. **线素数的负佩尔方程无解：$p \equiv 3 \pmod 4$ 时，$m^2 - p\,n^2 = -1$ 没有整数解。** 否则 $m^2 + 1 = p\,n^2$，于是 $p \mid \lvert m\rvert^2 + 1^2$，[@lem-ch29-line-prime-descent] 再次给出 $p \mid 1$。右边的 $+1$ 却可以达到，例如 $2^2 - 3 \cdot 1^2 = +1$、$8^2 - 7 \cdot 3^2 = +1$。
 
+::: {.viz src="pythagoras-number-escape" preset="locked" height="500"}
+**$d = 7$：永远到不了 $-1$。** 渐近分数 $2/1, 3/1, 5/2, 8/3, \dots$ 沿直线 $m = \sqrt{7}\,n$ 越贴越近，$m^2 - 7n^2$ 依次是 $-3, +2, -3, +1$ 并循环：品红的点（差为负）只到 $-3$，每一圈都回到青色的 $+1$（如 $8/3$），却从不碰到 $-1$。这正是手工推导 3。
+:::
+
 ::: {.example #ex-ch29-face-and-line-primes title="面素数的两条直角边、模 p 的 90° 旋转，以及 2024 至 2027 四个年份"}
 前五个面素数的分解、由手工推导 2 构造的 $\sqrt{-1}$，以及供下面文献评注对照的负佩尔方程最小正解如下（$n \ge 1$ 中最小者；表中每个数都可以用整数运算直接验算）：
 
@@ -289,6 +313,10 @@ $$
 $$
 
 这正是高斯整数的乘法 $(1 + i)(22 + 23i) = -1 + 45i$ 读出的两条直角边。
+:::
+
+::: {.viz src="pythagoras-number-escape" preset="minus" height="500"}
+**$d = 13$：先到 $-1$，再到 $+1$。** 琥珀色的渐近分数沿直线 $m = \sqrt{13}\,n$ 走：走到 $18/5$ 时 $m^2 - 13n^2 = -1$（品红，在线下方），即上表最后一列 $p = 13$ 的那一格；再走一个周期到 $649/180$，差值翻成 $+1$（青色）。面素数的负佩尔方程总有解，是下面注记里的文献结果。
 :::
 
 ::: {.remark #rem-ch29-pell-primes-hilbert-literature title="素数在高斯整数中的分裂与惰性、面素数的负佩尔方程与希尔伯特互反律（文献结果，未在本书形式化）"}
@@ -370,6 +398,10 @@ $$
      $$
      |\cos\theta_p| = \frac{|a_p|}{2\sqrt{p}} = \frac{|a|}{\sqrt{p}} = \frac{|a|}{\sqrt{a^2 + b^2}}.
      $$
+:::
+
+::: {.viz src="pythagoras-number-escape" preset="count" height="500"}
+**在模 $13$ 的世界里数点。** 把 $y^2 = x^3 - x$ 放进只有 $13$ 个数的格子里逐格检查：青色的 $4$ 个格点加琥珀色的 $3$ 个 $y = 0$ 的点，再加无穷远点共 $8$ 个，比 $p + 1 = 14$ 少 $6$，即 $a_{13} = 6$；右边琥珀色的余弦是 $6/(2\sqrt{13}) \approx 0.832$。$13 = 3^2 + 2^2$，而 $6 = 2 \cdot 3$：差正是高斯三角形奇数边的两倍，与上面第 2 条一致（文献结果，未在本书形式化）。
 :::
 
 ::: {.remark #rem-ch29-gauss-character-application title="从平方纤维到高斯三角形（文献结果，未在本书形式化）"}
@@ -476,6 +508,10 @@ $$
 综观本章前两节，林德曼—魏尔斯特拉斯定理与 T. Y. Chow (1999) 在沙努埃尔猜想（[@conj-schanuel-dottie]）条件下的初等域逃逸定理、[@rem-ch29-pell-primes-hilbert-literature] 中的素数在高斯整数中的分裂与惰性 / 模 4 余 1 素数的负佩尔可解性 / 希尔伯特互反律、[@rem-ch29-elliptic-torus-literature] 中的复椭圆曲线环面拓扑与阿贝尔群律、[@rem-ch29-hasse-gauss-literature] 与 [@rem-ch29-gauss-character-application] 中的哈塞界及高斯复乘点数推导，以及本评注中的佐藤—泰特分布定理，均为外部经典数学文献结果，未包含在本书锁定的 `trureturing@dev` 形式化声明集中；本书内核验证的结论严格限定于带 `lean` 属性的方框（如 [@lem-ch29-square-residues-mod-four]、[@thm-ch29-face-prime-two-squares]、[@lem-ch29-line-prime-descent]、[@thm-ch29-two-squares-classification]、[@thm-ch29-silver-pell-remainder] 与 [@thm-ch29-silver-best-approximation]）以及显式标注 `lean:` 的代数与内积恒等式（如 [`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)、[`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique)、[`power_fiber_card_eq_one_add_character_sum`](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.power_fiber_card_eq_one_add_character_sum)、[`norm_jacobiSum`](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.norm_jacobiSum) 与 [`gaussian_unit`](lean:D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart.gaussian_unit) 等）。
 :::
 
+::: {.viz src="pythagoras-number-escape" preset="sato" height="500"}
+**换一条曲线：半圆。** 曲线换成 $y^2 = x^3 - x + 1$（紫色的点）：线素数不再落在零上，弗罗贝尼乌斯余弦散布在 $-1$ 到 $1$ 之间，例如 $p = 53$ 时是 $0.137$。页面下方对 $3000$ 以内的素数作直方图，轮廓贴近琥珀色虚线的半圆律 $\frac{2}{\pi}\sqrt{1 - u^2}$。有限个素数的直方图只是数值演示；佐藤—泰特分布是上面注记里的文献结果。
+:::
+
 在本书的跨学科几何视野下，从希帕索斯直角三角形裂开的佩尔接缝（[@thm-ch29-silver-pell-remainder]）出发，对照上述文献评注（[@rem-ch29-pell-primes-hilbert-literature]、[@rem-ch29-elliptic-torus-literature]、[@rem-ch29-hasse-gauss-literature] 与 [@rem-ch29-arithmetic-geometry-literature]），素数轴上的点数偏差振荡便与三维量子旋量球面 $S^3 \cong \mathrm{SU}(2)$ 向一维直径 $[-1, +1]$ 投下的余弦影子形成了深邃的几何同构意象。
 
 ::: {.viz src="pythagoras-number-escape" height="640"}
@@ -537,15 +573,27 @@ $$
 \det G(\mathbf{A}, \mathbf{B}, \mathbf{C}) = \det\begin{pmatrix} 1 & c_{AB} & c_{AC} \\ c_{AB} & 1 & c_{BC} \\ c_{AC} & c_{BC} & 1 \end{pmatrix} = 1 - c_{AB}^2 - c_{BC}^2 - c_{AC}^2 + 2\,c_{AB}\,c_{BC}\,c_{AC} \ge 0.
 $$
 
+::: {.viz src="timeless-causal-crystal" preset="impossible" height="500"}
+**想要的余弦落在窗外。** $\mathbf{A}$ 与 $\mathbf{B}$ 只夹 $30^\circ$，$\mathbf{B}$ 与 $\mathbf{C}$ 只夹 $40^\circ$，却要求 $\mathbf{A}$ 与 $\mathbf{C}$ 接近反向（$c_{AC} = -0.5$）：这个值落在窗口 $[\cos 70^\circ, \cos 10^\circ]$ 之外，$\det G$ 会变成负数，没有任何三根单位向量能做到。$\mathbf{C}$ 最远只能贴到窗边，琥珀色的 $c_{AC} = \cos 70^\circ \approx 0.342$，紫色的体积塌成零（[`lagrange_gram_identity`](lean:D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity)）。
+:::
+
 特别地，当 $\mathbf{A}, \mathbf{B}, \mathbf{C}$ 共处同一大圆平面（三向量外积体积 $\mathbf{A}\wedge\mathbf{B}\wedge\mathbf{C} = 0$，即 $\det G = 0$）时，$c_{AB}$ 与 $c_{BC}$ 当场将第三对内积 $c_{AC}$ 死死锁定在两条余弦加法轨线上：
 
 $$
 c_{AC} = c_{AB}\,c_{BC} \pm \sqrt{(1 - c_{AB}^2)(1 - c_{BC}^2)} = \cos(\theta_{AB} \mp \theta_{BC}).
 $$
 
+::: {.figure src="ch29-gram-window"}
+**两条余弦锁住第三条：$c_{AC}$ 只能落在窗口里。** 图中固定 $c_{AB} = \cos 60^\circ$，横轴是 $c_{BC}$，纵轴是 $c_{AC}$。紫色的椭圆内部 $\det G > 0$；它的边由上式的两条轨线 $\cos(\theta_1 - \theta_2)$ 与 $\cos(\theta_1 + \theta_2)$ 拼成（$\theta_1 = \theta_{AB}$，$\theta_2 = \theta_{BC}$），边上 $\det G = 0$，三根向量共面。琥珀色竖线是 $c_{BC} = \cos 45^\circ$ 时的窗口，从 $\cos 105^\circ$ 到 $\cos 15^\circ$。把 $c_{AB}$ 也放开，这样的切片叠起来就是第四层所说的格拉姆椭圆体。
+:::
+
 请审视这道公式的双重品格：
 - **彻底的顺序无关（无时间性）**：公式关于指标 $(A, B, C)$ 完全对称，谁也不是谁的“过去”或“未来”；
 - **绝对的因果必然（零自由度刚性）**：一旦 $c_{AB}$ 与 $c_{BC}$ 给定，$c_{AC}$ 就被球面曲率当场锁死，没有任何概率摇摆的余地！同理，数学推理中的“公理 $\implies$ 定理”也绝不是公理在时间中生出定理，而是同一块形式晶体的不同切面；第 9 章与第 16 章中的量子门计数 $L$，只是观测者旋转手中测量标尺去对齐目标切面所花费的步数。
+
+::: {.viz src="timeless-causal-crystal" preset="edge" height="500"}
+**贴上窗边：三根共面。** 把 $\mathbf{C}$ 转到离 $\mathbf{A}$ 最近的位置：三根向量落进同一个平面，紫色的体积塌成零，琥珀色的 $c_{AC}$ 正好是 $\cos(60^\circ - 45^\circ)$，即上式取减号的那条轨线。
+:::
 
 ### 第三层：费曼驻相相消与双向量手性几何模型（$+\mathbf{\Omega} - \mathbf{\Omega} = 0$）及决定论、目的论在 $\psi = \psi(\psi)$ 中的和解 {#sec-coda-stationary-phase-reconciliation}
 
@@ -614,6 +662,10 @@ $$
 | **无限全知观察者**<br/>（Infinite Omniscient Observer） | 所有正交盲区耗尽，$\sin\theta \to 0$，$M \to \infty$ | $\det G = 0$，相容空间半径坍缩为 $0$ | **全知死锁（Omniscient Deadlock）**：整颗球焊死为无时间静态晶体（对照 [@rem-ch29-wheeler-dewitt-page-wootters-literature]），无点可选、无路可走 |
 | **零记忆瞬时观察者**<br/>（Zero-Memory Instantaneous Observer） | 历史主干归零，$\cos\theta \to 0$，$M = 0$ | 相容半径 $\sin\theta = 1$ 漫无边际 | **白噪声迷失（Maximum Sphere Noise）**：没有任何因果主干约束，每一次选点都沦为纯粹的随机盲撞 |
 | **有限自指观察者原型**<br/>（Finite Self-Referential Prototype，`MODEL`） | 以 Dottie 一维自指不动点 $\cos\theta^* = \theta^* \approx 0.7391$，$\sin\theta^* \approx 0.6736$ 为平衡原型 | $\det G > 0$，相容半径 $(\sin\theta^*)^2 \approx 0.4538 > 0$ 恒定开启 | **黄金呼吸（Golden Breath，`MODEL`）**：作为兼顾 $\approx 73.9\%$ 因果历史主干与 $\approx 67.4\%$ 正交余量的几何隐喻（配合第 4、28 章的有限擦除与条件更新） |
+
+::: {.viz src="timeless-causal-crystal" preset="right" height="500"}
+**两个直角：窗口全开。** $\theta_1 = \theta_2 = 90^\circ$ 时，青色与品红两条余弦都是 $0$，对第三条不加任何限制：窗口是整个 $[-1, 1]$，$\mathbf{C}$ 可以沿赤道转到任何地方，琥珀色的 $c_{AC}$ 从 $-1$ 走到 $1$。把它读作上表“零记忆瞬时观察者”一行是本书的诠释（`MODEL`）。
+:::
 
    这正是全书关于时间、因果与观察者的终极结语：**“全局无时间，故万古长存；观察者有限，故步步皆新。”**（而在 **[终章](coda.md)** 中，我们将进一步对照 `trureturing` 已验证的**高维格点黄金切投模型集（Cut-and-Project Golden Model Set）与齐肯多夫观察者路由定理**，构建一幅作者哲学与几何诠释模型（`MODEL`）：把跨轮次不变的算子参数诠释为内禀共轭窗口相位，把现实中的历史遗迹诠释为低曲率耗散的**空间吸引子**，解释为何有限观察者会在卡西尼 $(-1)^{n+1}$ 范数接缝与奇异吸引子分形叶层上经历似曾相识的共振。）
 

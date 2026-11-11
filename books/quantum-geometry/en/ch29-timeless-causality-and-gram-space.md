@@ -4,6 +4,10 @@
 
 Across the twenty-eight chapters of Parts I–VII, we have traveled from pairwise inner-product projections to mechanical verification inside the Lean 4 kernel. Opening **Part VIII** of the monograph, we now confront two foundational ontological questions at the summit of our geometric architecture: first, how do Pythagoras's theorem and "All Is Number" connect—through the $\pm 1$ Pell arithmetic seam—to prime duality, congruent-number elliptic-curve tori, and the spinor 3-sphere $S^3$? Second, why does the order-independent Gram matrix rigidity of Chapter 10 abolish sequential time while simultaneously grounding Spinozist causal necessity and a finite observer's freedom of choice inside the Gram elliptope?
 
+::: {.figure src="ch29-overview"}
+**Figure 29.** A map of the chapter. Panel I: four steps carrying the cyan $\mathbb{Q}$ and the magenta $\sqrt{2}$, $\pi$ and $\theta^*$; each magenta constant is the one that escaped the step below. Panel II: on the mod $4$ dial a sum of two squares lands only in the cyan cells $0$, $1$, $2$, while cell $3$, outlined in dashed magenta, stays empty ([@lem-ch29-square-residues-mod-four]). Panel III: the Gram window for $c_{AB} = \cos 60^\circ$, violet inside where $\det G > 0$ and $\det G = 0$ on the rim; the amber segment is the range open to $c_{AC}$ when $c_{BC} = \cos 45^\circ$.
+:::
+
 ---
 
 ## Pythagoras, "All Is Number," and the Four-Tier Escape of Number {#sec-coda-pythagoras-all-is-number}
@@ -134,6 +138,10 @@ Let $\delta_k$ be the minimum of $|m\,s - z|$ over $0 < m < P_{k+2}$ and $z \in 
 The error column alternates in sign, and its absolute value shrinks by a factor of $s \approx 0.414$ from row to row; the fourth column takes only the values $\pm 1$; the last column equals the absolute error, and in these six rows the minimum is attained only at $m = P_{k+1}$ (the uniqueness is an observation from the enumeration; the two theorems guarantee only that the minimum equals $s^{k+1}$ and is attained at $m = P_{k+1}$). For $k = 1$, for instance, only $m = 1, 2, 3, 4$ are allowed, at distances $0.41421356$, $0.17157288$, $0.24264069$ and $0.34314575$, and the smallest is exactly $m = P_2 = 2$. The row $k = 5$ can also be checked in integers: the determinant is $P_7P_5 - P_6^2 = 169\cdot 29 - 70^2 = 4901 - 4900 = 1$, and the phase-mass bracket $P_7 + s\,P_6 = 99 + 70\sqrt{2} \approx 197.99495$ times $s^6 \approx 0.0050506339$ is exactly $1$.
 :::
 
+::: {.figure src="ch29-pell-seam"}
+**The error changes sign and shrinks by the factor $s$ at every step, yet never reaches zero; $Q^2 - 2P^2$ stays $\pm 1$.** The stems are the errors $P_{k+1}\,s - P_k$ of the third column above, cyan and upwards when positive, magenta and downwards when negative. The vertical axis is logarithmic in the size of the error, so shrinking by $s \approx 0.414$ is one equal step, and every stem ends on the dashed envelope $\pm s^{k+1}$ (part 1 of [@thm-ch29-silver-pell-remainder]). Each stem carries its convergent $Q_{k+1}/P_{k+1}$; the bottom row is the fourth column, $Q_{k+1}^2 - 2P_{k+1}^2$.
+:::
+
 ::: {.remark #rem-ch29-pell-convergents-literature title="$Q_n/P_n$ and the Continued-Fraction Convergents of $\sqrt{2}$ (Literature result, not formalized in this book)"}
 **Literature result, not formalized in this book.** Classical continued-fraction theory gives
 
@@ -179,6 +187,10 @@ Seen through this four-tier table, Pythagoras and the overarching thesis of this
 - Applying the Pythagorean theorem infinitely many times to inscribed $2^k$-gons bends polygonal chords into circular arcs, crystallizing $\pi$ and closing the static **Tier 3 Sphere**;
 - Finally, when we stop separating the measuring operator $\cos$ from the measured angle $\theta$ as "ruler" versus "reading" and ask what happens when the ruler's projected output equals its own opening angle ($\cos\theta = \theta$), the fixed point $\theta^*$ emerges and carries us into the **Tier 4 Sphere**—where the counting verb **shǔ ($\cos$)** and the counted noun **shù ($\theta$)** become one!
 
+::: {.figure src="ch29-four-tiers"}
+**Four tiers: each is broken open by the next operation.** Tier 1 is the cyan rational points $m/n$ on the number line; the magenta diagonal $\sqrt{2}$ of the unit square breaks it and opens tier 2; the cyan octagon hugging the magenta circle stands for the inscribed polygons whose limit gives tier 3 its $\pi$; the cyan curve $y = \cos\theta$ meets the dashed line $y = \theta$ at the magenta point $\theta^* \approx 0.739$, tier 4. The constants on the steps are the four rows of [@rem-ch29-four-tier-sphere-table]; the transcendence statements behind them are literature results, not formalized in this book.
+:::
+
 ---
 
 ## The $\pm 1$ Arithmetic Seam, Prime Duality, and the $S^3$ Projection on Elliptic Curve Tori {#sec-coda-primes-elliptic-curves}
@@ -205,6 +217,10 @@ At first glance, the right-hand side is merely a sign choice between $+1$ and $-
 
 **Plane primes** are the odd primes with $p \equiv 1 \pmod 4$ ($5, 13, 17, 29, 37, \dots$); **line primes** are the odd primes with $p \equiv 3 \pmod 4$ ($3, 7, 11, 19, 23, \dots$). The core of this dichotomy is frozen at the pinned `trureturing@dev` commit, and each of the two lemmas and two theorems below is checked by the Lean kernel. Start with the plainest mechanism: put the squares of the integers on a clock face with only four slots, the residues modulo $4$. The square of an even number $2k$ is $4k^2$ and lands in slot $0$; the square of an odd number $2k + 1$ is $4(k^2 + k) + 1$ and lands in slot $1$. A sum of two squares can therefore only land in slots $0$, $1$ or $2$; slot $3$ stays empty forever.
 
+::: {.figure src="ch29-mod-four-dial"}
+**The mod $4$ dial: a sum of two squares lands only in cells $0$, $1$ and $2$; cell $3$ stays empty.** The three cyan cells show which residues of the two squares add up to land there, $0 + 0$, $0 + 1$ and $1 + 1$; cell $3$, outlined in dashed magenta, is empty, and the magenta line primes $3, 7, 11, 19, 23$ on the left point straight into it, while the cyan plane primes $5, 13, 17, 29, 37$ on the right sit in cell $1$ ([@lem-ch29-square-residues-mod-four]).
+:::
+
 ::: {.lemma #lem-ch29-square-residues-mod-four title="Squares Are 0 or 1 Modulo 4, and a Sum of Two Squares Is Never 3 Modulo 4" lean="D5/S3/PrimeForms/QuadraticResidues.square_residues_and_sum_obstruction"}
 For every natural number $n$, either $n^2 \bmod 4 = 0$ or $n^2 \bmod 4 = 1$; and for all natural numbers $a, b$, $(a^2 + b^2) \bmod 4 \neq 3$.
 :::
@@ -214,6 +230,10 @@ The Lean proof is the clock face above. Write $n = r + 2k$, where $r \in \{0, 1\
 :::
 
 The clock face shows at once that a line prime **cannot** be a sum of two squares: $p \bmod 4 = 3$ is exactly the empty slot. The converse direction, that a plane prime **always** is one, cannot be read off the clock face; it requires that arithmetic modulo $p$ really contain a $90^\circ$ rotation.
+
+::: {.viz src="pythagoras-number-escape" preset="seven" height="500"}
+**7: no lattice point on the circle.** The magenta circle of radius $\sqrt{7}$ threads between the lattice points and touches none of them: $7 \bmod 4 = 3$ falls exactly into the empty slot of the clock face, so $7$ is not a sum of two squares ([@lem-ch29-square-residues-mod-four]); it is a line prime.
+:::
 
 ::: {.theorem #thm-ch29-face-prime-two-squares title="A Prime Congruent to 1 Modulo 4 Is a Sum of Two Squares; a Gaussian Integer Times Its Conjugate Is a Sum of Two Squares" lean="D5/S3/PrimeForms/SumTwoSquares.prime_eq_sq_add_sq_of_mod_four_eq_one D5/S3/PrimeForms/GaussianIntegers/GaussianIntegerNorm.gaussian_integer_mul_conj_eq_sq_add_sq"}
 1. Let $p$ be a prime natural number with $p \bmod 4 = 1$. Then there are natural numbers $a, b$ with $p = a^2 + b^2$.
@@ -256,6 +276,10 @@ after which the square factor is multiplied back in. The full proof is checked b
 2. **For an odd prime $p$, the congruence $x^2 \equiv -1 \pmod p$ is solvable if and only if $p \equiv 1 \pmod 4$.** If $p \equiv 1$, take $p = a^2 + b^2$. Here $b = 0$ would make the prime $p = a^2$ a perfect square, and $b^2 \le p < p^2$ gives $b < p$; so $0 < b < p$ and $b$ is invertible modulo $p$. From $a^2 \equiv -b^2$, the residue $x \equiv a\,b^{-1}$ satisfies $x^2 \equiv -1$. If $p \equiv 3$ and $x^2 \equiv -1$ with $0 \le x < p$, then $p \mid x^2 + 1^2$, and [@lem-ch29-line-prime-descent] gives $p \mid 1$, a contradiction. This is precisely the dividing line, drawn above, between primes modulo which $\sqrt{-1}$ exists and those modulo which it does not.
 3. **For a line prime the negative Pell equation has no solution: if $p \equiv 3 \pmod 4$, then $m^2 - p\,n^2 = -1$ has no integer solution.** Otherwise $m^2 + 1 = p\,n^2$, so $p \mid \lvert m\rvert^2 + 1^2$, and [@lem-ch29-line-prime-descent] again gives $p \mid 1$. The value $+1$, on the other hand, is reached, for instance $2^2 - 3 \cdot 1^2 = +1$ and $8^2 - 7 \cdot 3^2 = +1$.
 
+::: {.viz src="pythagoras-number-escape" preset="locked" height="500"}
+**$d = 7$: $-1$ is never reached.** The convergents $2/1, 3/1, 5/2, 8/3, \dots$ close in on the line $m = \sqrt{7}\,n$, while $m^2 - 7n^2$ runs through $-3, +2, -3, +1$ and repeats. The magenta points (negative gap) only reach $-3$; every cycle comes back to a cyan $+1$ (such as $8/3$) and never touches $-1$. This is hand derivation 3.
+:::
+
 ::: {.example #ex-ch29-face-and-line-primes title="The Two Legs of a Plane Prime, the 90° Rotation Modulo p, and the Four Years 2024 to 2027"}
 For the first five plane primes, here are the decomposition, the $\sqrt{-1}$ built by manual derivation 2, and, for comparison with the literature remark below, the least positive solution of the negative Pell equation (the one with the smallest $n \ge 1$; every entry can be checked directly in exact integer arithmetic):
 
@@ -289,6 +313,10 @@ $$
 $$
 
 which are exactly the two legs read off from the Gaussian product $(1 + i)(22 + 23i) = -1 + 45i$.
+:::
+
+::: {.viz src="pythagoras-number-escape" preset="minus" height="500"}
+**$d = 13$: first $-1$, then $+1$.** The amber convergent walks along the line $m = \sqrt{13}\,n$. At $18/5$ the gap is $m^2 - 13n^2 = -1$ (magenta, below the line), the entry for $p = 13$ in the last column of the table above; one more period on, at $649/180$, it flips to $+1$ (cyan). That the negative Pell equation of every plane prime is solvable is a literature result, recorded in the remark below.
 :::
 
 ::: {.remark #rem-ch29-pell-primes-hilbert-literature title="Splitting and Inertia of Primes in the Gaussian Integers, the Negative Pell Equation for Plane Primes, and Hilbert Reciprocity (Literature result, not formalized in this book)"}
@@ -370,6 +398,10 @@ which is governed by two foundational theorems:
      $$
      |\cos\theta_p| = \frac{|a_p|}{2\sqrt{p}} = \frac{|a|}{\sqrt p} = \frac{|a|}{\sqrt{a^2 + b^2}}.
      $$
+:::
+
+::: {.viz src="pythagoras-number-escape" preset="count" height="500"}
+**Counting points mod $13$.** Put $y^2 = x^3 - x$ into a grid of only $13$ numbers and check every cell: $4$ cyan lattice points, $3$ amber points with $y = 0$ and the point at infinity make $8$, six fewer than $p + 1 = 14$, so $a_{13} = 6$; the amber cosine on the right is $6/(2\sqrt{13}) \approx 0.832$. Since $13 = 3^2 + 2^2$ and $6 = 2 \cdot 3$, the deficit is twice the odd leg of the Gaussian triangle, as in item 2 above (literature result, not formalized in this book).
 :::
 
 ::: {.remark #rem-ch29-gauss-character-application title="From Square Fibers to a Gaussian Triangle (Literature result, not formalized in this book)"}
@@ -476,6 +508,10 @@ Geometrically, on the three-dimensional unit quaternion rotor sphere $S^3 \cong 
 Across the first two sections of this chapter, the Lindemann–Weierstrass theorem and T. Y. Chow's (1999) elementary-field theorem conditional on Schanuel's conjecture ([@conj-schanuel-dottie]), the splitting and inertia of primes in the Gaussian integers / negative Pell solvability for primes $p \equiv 1 \pmod 4$ / Hilbert's reciprocity law in [@rem-ch29-pell-primes-hilbert-literature], the complex elliptic-curve torus topology and abelian group law in [@rem-ch29-elliptic-torus-literature], Hasse's bound and Gauss's CM point-count derivation in [@rem-ch29-hasse-gauss-literature] and [@rem-ch29-gauss-character-application], and the Sato–Tate equidistribution theorem in the present remark are classical mathematical literature results outside the `trureturing@dev` formalization locked by this book; kernel-verified results in these sections are strictly the boxes with a `lean` attribute (such as [@lem-ch29-square-residues-mod-four], [@thm-ch29-face-prime-two-squares], [@lem-ch29-line-prime-descent], [@thm-ch29-two-squares-classification], [@thm-ch29-silver-pell-remainder], and [@thm-ch29-silver-best-approximation]) and the statements carrying explicit `lean:` citations (such as [`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm), [`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique), [`power_fiber_card_eq_one_add_character_sum`](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.power_fiber_card_eq_one_add_character_sum), [`norm_jacobiSum`](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.norm_jacobiSum), and [`gaussian_unit`](lean:D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart.gaussian_unit)).
 :::
 
+::: {.viz src="pythagoras-number-escape" preset="sato" height="500"}
+**Another curve: the semicircle.** Switch to $y^2 = x^3 - x + 1$ (the violet points): line primes no longer sit at zero, and the Frobenius cosines scatter between $-1$ and $1$; at $p = 53$, for instance, the cosine is $0.137$. The histogram further down the page, over the primes below $3000$, follows the dashed amber semicircle law $\frac{2}{\pi}\sqrt{1 - u^2}$. A histogram over finitely many primes is only a numerical demonstration; the Sato–Tate distribution is the literature result of the remark above.
+:::
+
 In the overarching geometric synthesis of this book, starting from the Pell seam cracked open by Hippasus's right triangle ([@thm-ch29-silver-pell-remainder]) and reading across the arithmetic-geometry literature remarks above ([@rem-ch29-pell-primes-hilbert-literature], [@rem-ch29-elliptic-torus-literature], [@rem-ch29-hasse-gauss-literature], and [@rem-ch29-arithmetic-geometry-literature]), the point-count oscillations along the prime axes align visually with the cosine shadow cast by the quantum spinor sphere $S^3 \cong \mathrm{SU}(2)$ onto its diameter $[-1, +1]$.
 
 ::: {.viz src="pythagoras-number-escape" height="640"}
@@ -537,15 +573,27 @@ $$
 \det G(\mathbf{A}, \mathbf{B}, \mathbf{C}) = \det\begin{pmatrix} 1 & c_{AB} & c_{AC} \\ c_{AB} & 1 & c_{BC} \\ c_{AC} & c_{BC} & 1 \end{pmatrix} = 1 - c_{AB}^2 - c_{BC}^2 - c_{AC}^2 + 2\,c_{AB}\,c_{BC}\,c_{AC} \ge 0.
 $$
 
+::: {.viz src="timeless-causal-crystal" preset="impossible" height="500"}
+**A cosine outside the window.** $\mathbf{A}$ and $\mathbf{B}$ are only $30^\circ$ apart and $\mathbf{B}$ and $\mathbf{C}$ only $40^\circ$, yet $\mathbf{A}$ and $\mathbf{C}$ are asked to be nearly opposite ($c_{AC} = -0.5$). That value lies outside the window $[\cos 70^\circ, \cos 10^\circ]$, $\det G$ would turn negative, and no three unit vectors can do it. $\mathbf{C}$ can get no farther than the edge of the window, where the amber $c_{AC} = \cos 70^\circ \approx 0.342$ and the violet volume collapses to zero ([`lagrange_gram_identity`](lean:D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity)).
+:::
+
 In particular, whenever $\mathbf{A}, \mathbf{B}, \mathbf{C}$ lie in a common great-circle plane ($\mathbf{A}\wedge\mathbf{B}\wedge\mathbf{C} = 0$, so $\det G = 0$), $c_{AB}$ and $c_{BC}$ lock the third pairwise inner product $c_{AC}$ onto the exact cosine addition locus:
 
 $$
 c_{AC} = c_{AB}\,c_{BC} \pm \sqrt{(1 - c_{AB}^2)(1 - c_{BC}^2)} = \cos(\theta_{AB} \mp \theta_{BC}).
 $$
 
+::: {.figure src="ch29-gram-window"}
+**Two cosines lock the third: $c_{AC}$ can only fall inside the window.** The figure fixes $c_{AB} = \cos 60^\circ$, with $c_{BC}$ across and $c_{AC}$ up. Inside the violet ellipse $\det G > 0$; its rim is made of the two tracks of the formula above, $\cos(\theta_1 - \theta_2)$ and $\cos(\theta_1 + \theta_2)$ (with $\theta_1 = \theta_{AB}$, $\theta_2 = \theta_{BC}$), and on the rim $\det G = 0$: the three vectors are coplanar. The amber segment is the window at $c_{BC} = \cos 45^\circ$, from $\cos 105^\circ$ to $\cos 15^\circ$. Let $c_{AB}$ vary as well, and these slices stack up into the Gram elliptope of Level 4.
+:::
+
 This single equation exhibits two inseparable faces:
 - **Complete order-independence (timelessness)**: the relation is completely permutation-symmetric in $(A, B, C)$, with no "earlier cause" or "later effect";
 - **Absolute causal necessity (zero-degree-of-freedom rigidity)**: once $c_{AB}$ and $c_{BC}$ are fixed, spherical geometry locks $c_{AC}$ with zero slack! Likewise, mathematical deduction ($\text{Axioms} \implies \text{Theorems}$) is timeless crystal facet alignment, where the gate count $L$ of Chapters 9 and 16 merely counts how many steps an observer takes to rotate their measurement ruler into alignment with the target facet.
+
+::: {.viz src="timeless-causal-crystal" preset="edge" height="500"}
+**At the edge: all three coplanar.** Turn $\mathbf{C}$ to its nearest position to $\mathbf{A}$: the three vectors fall into one plane, the violet volume collapses to zero, and the amber $c_{AC}$ is exactly $\cos(60^\circ - 45^\circ)$, the minus-sign branch of the locus above.
+:::
 
 ### Level 3: Feynman Stationary-Phase Cancellation, the Bivector Chirality Model ($+\mathbf{\Omega} - \mathbf{\Omega} = 0$), and the Reconciliation of Determinism and Teleology in $\psi = \psi(\psi)$ {#sec-coda-stationary-phase-reconciliation}
 
@@ -614,6 +662,10 @@ If the global time field is a timeless geometric crystal and local causality pos
 | **Infinite Omniscient Observer**<br/>（无限全知观察者） | Orthogonal slack exhausted: $\sin\theta \to 0$, $M \to \infty$ | $\det G = 0$, compatible radius collapses to $0$ | **Omniscient Deadlock**: welded into the timeless static crystal (cf. [@rem-ch29-wheeler-dewitt-page-wootters-literature]) with zero room for choice or motion |
 | **Zero-Memory Instantaneous Observer**<br/>（零记忆瞬时观察者） | Historical backbone lost: $\cos\theta \to 0$, $M = 0$ | Compatible radius $\sin\theta = 1$ unconstrained | **Maximum Sphere Noise**: devoid of causal continuity, every step degenerates into memoryless random drift |
 | **Finite Self-Referential Prototype**<br/>（有限自指观察者原型，`MODEL`） | Modeled by the 1D Dottie fixed point $\cos\theta^* = \theta^* \approx 0.7391$, $\sin\theta^* \approx 0.6736$ | $\det G > 0$, open corridor radius $(\sin\theta^*)^2 \approx 0.4538 > 0$ | **Golden Breath (`MODEL`)**: a geometric metaphor balancing a $\approx 73.9\%$ causal backbone with $\approx 67.4\%$ orthogonal slack for renewal |
+
+::: {.viz src="timeless-causal-crystal" preset="right" height="500"}
+**Two right angles: the window is wide open.** With $\theta_1 = \theta_2 = 90^\circ$ the cyan and magenta cosines are both $0$ and put no constraint on the third: the window is all of $[-1, 1]$, $\mathbf{C}$ can travel anywhere along the equator, and the amber $c_{AC}$ runs from $-1$ to $1$. Reading this as the "Zero-Memory Instantaneous Observer" row of the table above is this book's interpretation (`MODEL`).
+:::
 
    This seals the book's synthesis of time, causality, and agency in a single aphorism: ***"Globally timeless, hence eternal; finitely observed, hence new at every step."*** (**“全局无时间，故万古长存；观察者有限，故步步皆新。”**) (In the **[Coda](coda.md)**, we will pair the Lean-verified **`trureturing` Cut-and-Project Golden Model Set and Zeckendorf Observer Route theorems** with an explicit authorial geometric interpretation (`MODEL`): viewing cross-round invariant operator parameters as internal conjugate-window phase anchors and historical ruins as low-dissipation **spatial attractors**, to illuminate why a finite observer experiences déjà-vu resonance across Cassini's $(-1)^{n+1}$ norm seam and strange-attractor fractal sheets.)
 

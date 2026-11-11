@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch01-overview" data-lang="en" data-wrap="1" viewBox="0 0 740 262" width="740" height="262" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="Three panels. Panel I: a single arrow A in empty space; wherever it is turned about its tail, the grey dashed copies look the same, marked θ = ?. Panel II: behind two arrows x and y stands a grey dashed external frame C; the angle between the two arrows does not need it. Panel III: the cyan arrow A is the ruler, the line it lies on is marked +1 and −1 at its two ends, and the amber arrow B opens an angle θ with A.">
+<title>Three panels. Panel I: a single arrow A in empty space; wherever it is turned about its tail, the grey dashed copies look the same, marked θ = ?. Panel II: behind two arrows x and y stands a grey dashed external frame C; the angle between the two arrows does not need it. Panel III: the cyan arrow A is the ruler, the line it lies on is marked +1 and −1 at its two ends, and the amber arrow B opens an angle θ with A.</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="236" height="262" viewBox="0 0 236 262">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">I  one: no direction</text>
+<line x1="118" y1="150" x2="193.19" y2="136.74" class="ts-dim" stroke-width="1.5" stroke-dasharray="4 4" fill="none" opacity="0.6"/>
+<path d="M200.72 135.41 L192.52 140.7 L191.2 133.25Z" class="tf-dim" opacity="0.6"/>
+<line x1="118" y1="150" x2="51.88" y2="111.83" class="ts-dim" stroke-width="1.5" stroke-dasharray="4 4" fill="none" opacity="0.6"/>
+<path d="M45.25 108 L54.94 109.23 L51.16 115.77Z" class="tf-dim" opacity="0.6"/>
+<line x1="118" y1="150" x2="55.46" y2="193.79" class="ts-dim" stroke-width="1.5" stroke-dasharray="4 4" fill="none" opacity="0.6"/>
+<path d="M49.19 198.18 L54.4 189.92 L58.73 196.11Z" class="tf-dim" opacity="0.6"/>
+<line x1="118" y1="150" x2="156.18" y2="216.12" class="ts-dim" stroke-width="1.5" stroke-dasharray="4 4" fill="none" opacity="0.6"/>
+<path d="M160 222.75 L152.23 216.84 L158.77 213.06Z" class="tf-dim" opacity="0.6"/>
+<line x1="118" y1="150" x2="144.11" y2="78.25" class="ts-ink" stroke-width="2.6" fill="none"/>
+<path d="M146.73 71.07 L147.2 80.82 L140.1 78.23Z" class="tf-ink"/>
+<path d="M126.23 117.01 L123.32 116.42 L120.37 116.08 L117.41 116.01 L114.45 116.19 L111.51 116.62 L108.63 117.32 L105.82 118.26 L103.1 119.44 L100.49 120.86 L98.02 122.49 L95.69 124.34 L93.54 126.38 L91.58 128.6 L89.81 130.99 L88.26 133.52 L86.94 136.17 L85.85 138.93 L85.01 141.77 L84.42 144.68" class="ts-dim" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+<path d="M84.42 144.68 L82.93 137.24 L88.7 138.41Z" class="tf-dim"/>
+<text class="tf-ink" x="154.73" y="77.07" font-size="16"><tspan font-style="italic">A</tspan></text>
+<text class="tf-dim" x="118" y="252" font-size="16" text-anchor="middle"><tspan font-style="italic">θ</tspan> = ?</text>
+</svg>
+<svg class="tr-fig-panel" x="252" y="0" width="236" height="262" viewBox="0 0 236 262">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">II  three: C is surplus</text>
+<line x1="50" y1="210" x2="216.05" y2="210" class="ts-dim" stroke-width="1.3" stroke-dasharray="4 4" fill="none"/>
+<path d="M222 210 L215 212.94 L215 207.06Z" class="tf-dim"/>
+<line x1="50" y1="210" x2="50" y2="49.95" class="ts-dim" stroke-width="1.3" stroke-dasharray="4 4" fill="none"/>
+<path d="M50 44 L52.94 51 L47.06 51Z" class="tf-dim"/>
+<text class="tf-dim" x="42" y="228" font-size="16" text-anchor="middle"><tspan font-style="italic">C</tspan></text>
+<line x1="104" y1="178" x2="191.83" y2="149.46" class="ts-ink" stroke-width="2.4" fill="none"/>
+<path d="M199.11 147.1 L191.71 153.47 L189.38 146.28Z" class="tf-ink"/>
+<line x1="104" y1="178" x2="123.2" y2="87.67" class="ts-ink" stroke-width="2.4" fill="none"/>
+<path d="M124.79 80.19 L126.62 89.77 L119.22 88.2Z" class="tf-ink"/>
+<path d="M138.24 166.88 L137.38 164.51 L136.36 162.22 L135.18 160 L133.85 157.87 L132.37 155.84 L130.75 153.91 L129.01 152.1 L127.14 150.42 L125.16 148.88 L123.08 147.47 L120.9 146.21 L118.64 145.11 L116.31 144.17 L113.92 143.39 L111.48 142.79" class="ts-cyan" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+<text class="tf-cyan" x="136.62" y="147.17" font-size="15" text-anchor="middle"><tspan font-style="italic">θ</tspan></text>
+<text class="tf-ink" x="197.11" y="167.1" font-size="15" text-anchor="middle"><tspan font-style="italic">x</tspan></text>
+<text class="tf-ink" x="134.79" y="86.19" font-size="15"><tspan font-style="italic">y</tspan></text>
+</svg>
+<svg class="tr-fig-panel" x="504" y="0" width="236" height="262" viewBox="0 0 236 262">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">III  two: each the other&#x27;s ruler</text>
+<line x1="118" y1="226" x2="118" y2="58" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<line x1="118" y1="150" x2="118" y2="85.65" class="ts-cyan" stroke-width="2.8" fill="none"/>
+<path d="M118 78 L121.78 87 L114.22 87Z" class="tf-cyan"/>
+<line x1="118" y1="150" x2="170.71" y2="113.09" class="ts-amber" stroke-width="2.6" fill="none"/>
+<path d="M176.98 108.7 L171.77 116.96 L167.44 110.77Z" class="tf-amber"/>
+<path d="M142.57 132.79 L141.24 131.03 L139.78 129.36 L138.19 127.81 L136.5 126.38 L134.71 125.08 L132.83 123.92 L130.86 122.9 L128.83 122.02 L126.73 121.3 L124.59 120.73 L122.41 120.33 L120.21 120.08 L118 120" class="ts-cyan" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+<text class="tf-cyan" x="137.74" y="117.48" font-size="15" text-anchor="middle"><tspan font-style="italic">θ</tspan></text>
+<circle cx="118" cy="58" r="5.5" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="118" cy="226" r="5.5" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-cyan" x="106" y="64" font-size="15" text-anchor="end" font-weight="600">+1</text>
+<text class="tf-cyan" x="106" y="232" font-size="15" text-anchor="end" font-weight="600">−1</text>
+<text class="tf-cyan" x="128" y="92" font-size="15"><tspan font-style="italic">A</tspan></text>
+<text class="tf-amber" x="184.98" y="112.7" font-size="15"><tspan font-style="italic">B</tspan></text>
+</svg>
+</svg>

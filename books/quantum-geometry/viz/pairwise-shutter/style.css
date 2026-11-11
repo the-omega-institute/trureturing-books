@@ -1,0 +1,6 @@
+/* PAIR//SHUTTER: the shared lab layout (../assets/theme.css) carries the page. Put here only what belongs to this
+   visualization alone; colours come from the tokens (var(--cyan) …), never from hex values. */
+#cv { cursor: grab; touch-action: none; }
+/* the legend names only what is on the stage: the violet axis while the pair turns, the counted curve outside random mode */
+.stage:not(.turning) .lg-turn, .stage.random .lg-fixed { display: none !important; }
+.deck .chips + .chips { margin-top: 6px; }

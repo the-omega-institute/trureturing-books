@@ -6,7 +6,9 @@ In [Chapter 13](ch13-entanglement-and-chsh.md), we saw how a two-qubit Bell stat
 
 In classical digital hardware, protecting information against noise is straightforward — **copy it**. To guard a classical bit against thermal flips, a repetition circuit duplicates $0 \mapsto 000$ and $1 \mapsto 111$ and takes a majority vote. Before quantum error correction can even begin, however, an uncompromising law of inner-product geometry bars the classical copying strategy: **an unknown quantum superposition cannot be cloned**. Since we cannot duplicate a fragile local direction line into two independent local lines, this chapter studies a different encoding strategy: use multi-qubit Pauli stabilizers or braid trajectories in two spatial dimensions to encode logical information in higher-dimensional correlation areas and algebraic knots, protecting it relative to a specified error model. No-cloning constrains copying, but it neither uniquely selects an encoding architecture nor guarantees that all local directions vanish.
 
-![Figure 14](../assets/fig-14-nocloning-stabilizer-braid.svg)
+::: {.figure src="ch14-overview"}
+**Figure 14.** The chapter at a glance. Panel I: on the real overlap slice, the cyan diagonal $y = z$ is what an isometry must output and the dim parabola $y = z^2$ is what cloning outputs; they meet only at $0$ and $1$, with a magenta gap between them. Panel II: the four syndrome rooms of the three-qubit code; the cyan code state lives in the $(+,+)$ room, the magenta $X_2$ carries it whole into the $(-,-)$ room, and the amber arrow brings it back. Panel III: in the plane, a loop around a particle (dim dashed) cannot be undone; through the violet third direction $e_3$ it can be lifted over (a sketch; literature result, not formalized in this book).
+:::
 
 ## No Cloning: Preserving an Overlap and Squaring It {#sec-no-cloning-overlap}
 
@@ -145,11 +147,19 @@ The eigenvalues and the entropy in the machine row are claims 4 and 5 of [@thm-c
 Thus, whereas exact cloning is obstructed by the $z = z^2$ criterion of [@thm-no-cloning-overlap], this approximate cloner shrinks the Bloch vector of each clone uniformly to $\frac{2}{3}$ while the machine qubit carries a reversed Bloch vector of length $\frac{1}{3}$ and an input-independent entropy of $\log_2 3 - \frac{2}{3} \approx 0.918$ bits, with the mixedness of all three marginals arising from tripartite entanglement.
 :::
 
+::: {.figure src="ch14-approx-clone"}
+**The price of approximate cloning: each clone shrinks to 2/3, and the machine carries away 1/3 the other way.** The amber point on the shell is the input $\vv{r}$; the cyan arrow is the Bloch vector $\frac{2}{3}\vv{r}$ of each clone, ending on the cyan dashed circle; the magenta arrow is the machine qubit's $-\frac{1}{3}\vv{r}$. All three vectors are computed by partial traces of the cloning isometry. Literature result, not formalized in this book; for the machine's spectrum see [@thm-cloning-machine-spectrum].
+:::
+
 ## Pauli Words and Stabilizer Syndromes {#sec-pauli-syndrome-parity}
 
 If [@thm-no-cloning-overlap] forbids duplicating an unknown superposition $\alpha\lvert 0\rangle + \beta\lvert 1\rangle$ into $(\alpha\lvert 0\rangle + \beta\lvert 1\rangle)^{\otimes 3}$, how does quantum error correction protect quantum information?
 
 The key is to **embed orthogonal basis states into a multi-body entangled subspace** — for instance extending $\lvert 0\rangle \mapsto \lvert 000\rangle$ and $\lvert 1\rangle \mapsto \lvert 111\rangle$ linearly to $\alpha\lvert 0\rangle + \beta\lvert 1\rangle \mapsto \alpha\lvert 000\rangle + \beta\lvert 111\rangle$ — and then measure only multi-body **Pauli words** that check joint parity without ever probing the single-qubit amplitudes $\alpha, \beta$!
+
+::: {.figure src="ch14-syndrome-table"}
+**The checks read which bit flipped, never $\alpha$ or $\beta$.** The four rows are the errors $I$, $X_1$, $X_2$, $X_3$; each row shows $E\lvert 000\rangle$ on the left and $E\lvert 111\rangle$ on the right, with the flipped bit outlined in magenta, and beside each string the two lamps $g_1 = Z_1Z_2$ and $g_2 = Z_2Z_3$, lit (magenta) when the reading is $-1$. The four errors light four different patterns, and within a row both strings light the same lamps: reading the lamps cannot tell $\lvert 000\rangle$ from $\lvert 111\rangle$, so it never touches $\alpha$ or $\beta$. Which lamps light is the mod-$2$ parity derived after [@lemma-pauli-word-phase] below.
+:::
 
 To formalize this algebra across arbitrary mode count $N \in \mathbb{N}$ and arbitrary local level count $p \in \mathbb{N}$ with `[NeZero p]` (note that **$p$ is not required to be prime, and $N$ may be $0$**), the source module `StabilizerGenuineEntanglementCommutationRank` defines the structure `PauliWord N p` with three fields:
 
@@ -197,6 +207,10 @@ Two critical points in [@lemma-pauli-word-phase] must be observed:
 
    which determines whether a stabilizer check $a$ commutes ($+1$) or anticommutes ($-1$) with a Pauli error $b$. Note that [@lemma-pauli-word-phase] itself is the operator multiplication identity; turning syndromes into guaranteed logical recovery requires the orthogonal-syndrome decoding structure developed next.
 
+::: {.viz src="syndrome-decoding" preset="single" height="500"}
+**One light points at the flipped qubit.** The two checks of the three-qubit repetition code, $g_1 = Z_1Z_2$ and $g_2 = Z_2Z_3$, sit over neighbouring pairs of qubits. When the first qubit flips (the magenta X), only $g_1$, which sits over it, lights up (magenta) and $g_2$ stays dark: $X_1$ anticommutes with $g_1$ and commutes with $g_2$, exactly the parity mod $2$ above, with the cross phase coming from [@lemma-pauli-word-phase]. The decoder follows the light and flips the first qubit back (amber); the cyan bars return to the code space and land on the dashed outline.
+:::
+
 ## Logical Recovery from Orthogonal Syndromes {#sec-orthogonal-syndrome-recovery}
 
 Once environmental errors kick an encoded logical state $\rho \in M_d(\mathbb{C})$ into distinct error channels, how does recovery strip away the error matrix $\sigma$ and restore $\rho$ intact?
@@ -208,6 +222,10 @@ $$
 $$
 
 Each $S_i$ isometrically embeds the $d$-dimensional logical space into the $i$-th syndrome subspace ($S_i^* S_i = I_d$), while distinct syndrome subspaces are strictly orthogonal ($S_i^* S_j = 0$ for $i \neq j$).
+
+::: {.viz src="syndrome-decoding" preset="rooms" height="500"}
+**An error moves the state, whole, into another room.** Below, the eight basis states fall into four rooms $S_j = E_jV$ ($E \in \{I, X_1, X_2, X_3\}$) according to the readings of the two checks. The middle qubit flips and both lights go on; the two cyan bars of $\alpha\lvert 000\rangle + \beta\lvert 111\rangle$ move unchanged into room $(-1,-1)$, onto $\lvert 010\rangle$ and $\lvert 101\rangle$, and the other three rooms stay empty.
+:::
 
 For any syndrome coefficient matrix $\sigma \in M_s(\mathbb{C})$ and any logical matrix $\rho \in M_d(\mathbb{C})$, the **syndrome encoding map** is
 
@@ -242,9 +260,18 @@ $$
 By `OrthogonalSyndromes S`, $S_i^* S_j = \delta_{ij} I_d$ and $S_k^* S_i = (S_i^* S_k)^* = \delta_{ik} I_d$. For each fixed $i \in s$, every term with $j \neq i$ or $k \neq i$ vanishes, leaving only the $j = k = i$ term $\sigma_{ii}(I_d \rho I_d) = \sigma_{ii}\rho$. Summing over $i \in s$ yields $\bigl(\sum_{i \in s} \sigma_{ii}\bigr)\rho = \Tr(\sigma) \bullet \rho$. The full proof is checked by the Lean kernel.
 :::
 
+::: {.figure src="ch14-trace-survives"}
+**After decoding, only the diagonal of $\sigma$ survives.** On the left is the $4\times 4$ noise matrix $\sigma$: the four cyan diagonal cells take the values $\frac{1}{2}, \frac{1}{4}, \frac{1}{8}, \frac{1}{8}$ from step four of [@ex-repetition-code-syndrome], and the other twelve, the magenta cross-room coherences, are all struck out. The diagonal adds up to $\Tr\sigma = 1$, and decoding outputs $1 \cdot \rho = \rho$ ([@prop-orthogonal-syndrome-recovery]). With non-zero coherences, a numerical check on the three-qubit code returns the same $\rho$.
+:::
+
 Two important domain boundaries apply to [@prop-orthogonal-syndrome-recovery]:
 
 1. **No positivity, unit-trace, or diagonality assumption on $\sigma$ or $\rho$**: The identity holds for **arbitrary** complex matrices $\sigma \in M_s(\mathbb{C})$ and $\rho \in M_d(\mathbb{C})$. In particular, off-diagonal coherent error superpositions $\sigma_{jk}$ ($j \neq k$) between distinct syndrome subspaces are automatically annihilated by $S_i^* S_j = \delta_{ij}I_d$ and $S_k^* S_i = \delta_{ik}I_d$, and when $\Tr(\sigma) = 1$, exact unscaled recovery $\mathrm{syndromeDecoding}(S, \mathrm{syndromeEncoding}(S, \sigma, \rho)) = \rho$ follows as a special case.
+
+::: {.viz src="syndrome-decoding" preset="mix" height="500"}
+**Four branches each come back and add up to the state.** Take $\sigma = \operatorname{diag}\bigl(\frac{1}{2}, \frac{1}{4}, \frac{1}{8}, \frac{1}{8}\bigr)$ (step 4 of [@ex-repetition-code-syndrome]) and $\rho = \lvert +\rangle\langle +\rvert$: four branches, no error and a flip of the first, second or third qubit, each cyan bar as wide as its weight and each branch in its own room. Decoding pulls every branch back into the code space, where they line up side by side into one whole bar that fills the dashed outline exactly: $\Tr(\sigma)\,\rho = \rho$, which is [@prop-orthogonal-syndrome-recovery].
+:::
+
 2. **Algebraic decoding on the syndrome support versus a globally trace-preserving channel**: $\mathrm{syndromeDecoding}(S, \cdot) = \sum_{i \in s} S_i^* (\cdot) S_i$ is an algebraic recovery formula on the direct sum $\bigoplus_{i \in s} \operatorname{range}(S_i)$. Whenever $|s|d < n$ so that $\sum_{i \in s} S_i S_i^* \neq I_n$, one cannot unconditionally claim that $\{S_i^*\}_{i \in s}$ alone defines a trace-preserving (CPTP) channel on the entire physical space $M_n(\mathbb{C})$; a full physical channel requires completing the Kraus operators on the orthogonal complement $I_n - \sum_{i \in s} S_i S_i^*$.
 
 ## Planar Braids and the Third Orthogonal Direction {#sec-braids-and-third-axis}
@@ -254,6 +281,14 @@ Beyond active syndrome measurement, nature offers a passive topological mechanis
 In the intuitive picture of low-dimensional topology and anyon physics (recorded in [@rem-error-correction-anyons-literature] below), a natural question arises: why does confining particle worldlines to a two-dimensional plane $(e_1, e_2)$ yield a braid exchange structure qualitatively distinct from three-dimensional space?
 
 Diagrammatically (as illustrated in Figure 14, Panel III), the clue points to the **third orthogonal spatial axis $e_3$**! For non-intersecting strands arranged in a row, passing strand $1$ over strand $2$ ($\mathrm{crossing}$) and passing it under ($\mathrm{crossingInv}$) define inverse elementary crossings. On three strands $(x, (y, z))$, sliding the middle strand past the crossing of the outer two motivates the fundamental **three-strand braid relation (the Yang–Baxter equation)** $\sigma_1 \sigma_2 \sigma_1 = \sigma_2 \sigma_1 \sigma_2$.
+
+::: {.viz src="braiding" preset="over" height="500"}
+**One exchange: which strand passes in front is kept in the third direction.** Two particles in a plane trace world lines as time goes up and swap places by half a turn about their midpoint: the left strand passes in front (nearer to you), the right one behind. The numbers on the strands are colors: the front strand carries its $0$ to the right, the one behind is recolored by it, and $1$ becomes $0 \star 1 = 2$, which is $\mathrm{crossing}(x, y) = (x \star y,\, x)$.
+:::
+
+::: {.viz src="braiding" preset="inverse" height="500"}
+**Exchange back the other way, and everything returns.** On the left, one exchange followed by the opposite one (this time the right strand passes in front): both strands are back in place and the colors $(0, 1)$ reach the top as they were, $\mathrm{crossingInv}(\mathrm{crossing}(x, y)) = (x, y)$. On the right, two straight strands with no exchange, also $(0, 1)$ at the top.
+:::
 
 In the source module `D5/S0/Certificates/Quandles/BraidColoringTransport.lean`, this braid invariance is formalized algebraically via rack-coloring transport. Let $Q$ be any type equipped with a `Rack Q` instance, providing a binary operation $\star : Q \to Q \to Q$ (`act`) and inverse operation $\star^{-1} : Q \to Q \to Q$ (`invAct`) that is left-action bijective — for each fixed first argument $x \in Q$, the left translation map $L_x : y \mapsto x \star y$ is a bijection with inverse $L_x^{-1} : y \mapsto x \star^{-1} y$ (`Function.LeftInverse (invAct x) (act x)` and `Function.RightInverse (invAct x) (act x)`, so $x \star^{-1}(x \star y) = y$ and $x \star (x \star^{-1} y) = y$) — and obeys left self-distributivity:
 
@@ -310,6 +345,10 @@ $$
 The trailing pairs $(x \star y, x)$ are identical on both sides, and the leading entries $(x \star y) \star (x \star z)$ and $x \star (y \star z)$ agree by the rack self-distributivity axiom. The full proof is checked by the Lean kernel.
 :::
 
+::: {.viz src="braiding" preset="yb" height="500"}
+**The two orders on three strands land in the same place.** Three strands colored $(0, 1, 2)$. The left braid exchanges in the order $\sigma_1, \sigma_2, \sigma_1$, the right one $\sigma_2, \sigma_1, \sigma_2$: the world lines run differently, and both reach the top as $(0, 2, 0)$. Click the numbers at the bottom for other colors and the two tops still agree; this is [@cor-braid-yang-baxter].
+:::
+
 ::: {.remark #rem-braid-knot-topology-literature title="Scope Boundaries Between Rack Colorings, Configuration-Space Braids, and 3D Knots (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** Three theoretical boundaries govern how [@cor-braid-yang-baxter] connects to the low-dimensional topology and condensed-matter literature (see also [@rem-error-correction-anyons-literature] below; both the dimensional dichotomy between $B_n$ and $S_n$ on configuration spaces and the nontrivial knottedness of closed knots such as the trefoil in $\mathbb{R}^3$ are external literature results not formalized in this book):
 
@@ -318,9 +357,17 @@ The trailing pairs $(x \star y, x)$ are identical on both sides, and the leading
 3. **Anyonic statistics and topological fault-tolerance belong to the physics literature**: Configuration-space homotopy groups, non-Abelian anyons, and physical error bounds are summarized in [@rem-error-correction-anyons-literature].
 :::
 
+::: {.viz src="braiding" preset="twice" height="500"}
+**Two exchanges the same way are not the same as none.** On the left, two exchanges in the same direction: the two world lines wind a full turn around each other and each particle is back where it started, yet the colors have gone from $(0, 1)$ to $(1, 2)$. On the right, two straight strands with no exchange, still $(0, 1)$ at the top. While the particles are confined to the plane this turn cannot be undone; lifting it over through a third spatial direction is the literature result of item 2 of [@rem-braid-knot-topology-literature].
+:::
+
 ## Closing the Braid: Markov Stabilization and Coloring Counts {#sec-markov-stabilization-coloring-count}
 
 Item 2 of [@rem-braid-knot-topology-literature] says that a trefoil in three-dimensional space stays knotted, and that colorings are the classical tool for telling it apart. How is the tool used? [@cor-braid-yang-baxter] is about a piece of braid: a row of loose ends on top, a row below, and colors carried from one row to the other. A knot has no loose ends. Bend the braid around and join the $k$-th bottom end to the $k$-th top end; only then do the strands form closed loops. This is the **closure** of the braid. Once the ends are joined, "the color at the top" and "the color at the bottom" are colors of one and the same piece of string, so a coloring of the closed braid has a single condition left to meet: carried once through the braid, the colors must come back unchanged. **A coloring of a closed braid is a fixed point of the coloring transport.**
+
+::: {.viz src="braiding" preset="close" height="500"}
+**Close it up, and the colors must come back.** One exchange $\sigma_1$, then each top end is led back along an arc on the right to the bottom end in the same place. The colors $(0, 1)$ reach the top as $(2, 0)$, and both arcs clash (magenta). Of the nine colorings only $(0, 0)$, $(1, 1)$ and $(2, 2)$ come back.
+:::
 
 The module `D5/S3/Topology/QuandleMarkovColoring` turns this sentence into a definition. It does not speak of strings drawn on paper: a braid is an element of a group given by generators and relations, and the coloring transport is the action of that group on sequences of colors.
 
@@ -366,6 +413,10 @@ Keep the notation of [@def-closed-braid-colorings].
 In a picture: conjugation cuts the closed loop open at a different place; stabilization adds one new strand on the far right and lets it cross the old last strand exactly once, so that the closure gains one small loop that disappears with a single twist (these two sentences are geometric pictures; their precise form belongs to Markov's theorem in [@rem-alexander-markov-literature]). The algebraic question is: does the number of fixed points survive these three steps?
 
 Conjugation is easy: carry all the colors along. Stabilization is the hard one, because it changes even the number of strands. Let the new strand have color $z$. By the product convention of [@def-closed-braid-colorings], $\iota_n(b)\,\sigma_n$ lets $\sigma_n$ act first, turning the last two strands $(c_n,\ z)$ into $(c_n \star z,\ c_n)$; after that $\iota_n(b)$ touches only the first $n$ strands. The new strand meets no further crossing, so it comes back unchanged only if $z = c_n$. Strand $n$ therefore receives $c_n \star c_n$. Is that equal to $c_n$? No rack axiom says so. A rack with the additional axiom $x \star x = x$ is called a **quandle** (`Quandle Q` in Mathlib). With that axiom the small loop has no effect on the colors at all: the new strand merely copies $c_n$, and the condition on the first $n$ strands is untouched. This hand computation is the central step of the Lean proof, and the module turns it into an explicit one-to-one correspondence.
+
+::: {.viz src="braiding" preset="stabilize" height="500"}
+**Add a strand: it merely copies the last color.** On the left, $\sigma_1^3$ on two strands; closed up, the colors $(0, 1)$ match (cyan). On the right a strand is added on the far right and first crosses the old last strand once, which is $\iota_2(\sigma_1^3)\,\sigma_2$: the new strand's color just copies the last one, $1$, and passes the crossing unchanged as $1 \star 1 = 1$. Colorings that come back: $9$ on the left, and $9$ on the right too.
+:::
 
 ::: {.definition #def-markov-coloring-equivs title="Three Equivalences of Closed-Coloring Spaces under Stabilization and Conjugation" lean="D5/S3/Topology/QuandleMarkovColoring.positiveStabilizationEquiv D5/S3/Topology/QuandleMarkovColoring.negativeStabilizationEquiv D5/S3/Topology/QuandleMarkovColoring.conjugationEquiv"}
 Let $Q$ be a type with `[Quandle Q]` (not assumed finite), $n \in \mathbb{N}$ and $b \in \mathrm{Artin}\,n$. The module defines three equivalences (Lean's `Equiv`: a pair of maps together with the proofs that they are mutually inverse):
@@ -442,6 +493,14 @@ In every row the three counts agree, and the closed colorings on three strands a
 **The idempotence axiom cannot be dropped.** Take $Q' = \mathbb{Z}/3$ with $x \star y = y + 1$. It is a rack: every left translation is a bijection, and both sides of the self-distributive law equal $z + 2$. But $x \star x = x + 1 \ne x$, so it is not a quandle. The braid $(1, e)$ has $3$ closed colorings; its positive stabilization $(2, \sigma_1)$ sends $(x, y)$ to $(y + 1,\ x)$, and a fixed point would need $x = y$ and $y + 1 = x$: there is none. The count drops from $3$ to $0$.
 :::
 
+::: {.viz src="braiding" preset="trefoil" height="500"}
+**$\sigma_1$ and $\sigma_1^3$ count differently.** $\sigma_1$ on the left, $\sigma_1^3$ on the right, both starting from $(0, 1)$: the left one clashes when closed up (magenta), the right one matches (cyan). Colorings that come back: $3$ on the left, $9$ on the right; since $3 \ne 9$, by [@thm-quandle-coloring-markov-invariant] the two are not Markov equivalent.
+:::
+
+::: {.viz src="braiding" preset="rack" height="500"}
+**A rack that is not a quandle: add a strand and nothing comes back.** The color rule is now $x \star y = y + 1$. On the left, one strand and no crossing: all three colorings come back. On the right a strand is added with one crossing: the copied $0$ passes the crossing as $0 \star 0 = 1$, the arcs clash (magenta), and none of the nine colorings comes back.
+:::
+
 ::: {.remark #rem-alexander-markov-literature title="Artin, Alexander, and Markov: From Algebraic Markov Classes to Link Invariants (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** The statement of [@thm-quandle-coloring-markov-invariant] contains no geometric object. Reading it as an invariant of links takes three classical theorems (braids and links below are smooth or piecewise linear):
 
@@ -453,6 +512,10 @@ Taken together: the closed-coloring count of a finite quandle is an isotopy inva
 :::
 
 A braid has a beginning and an end; a knot has neither. Once the ends are joined, the colors have to come back unchanged; as long as the colors come from a quandle, add a strand, or cut the loop open somewhere else, and exactly as many colorings come back as before. That half is verified by Lean.
+
+::: {.viz src="braiding" height="560"}
+The full braiding lab: add crossings $\sigma_k^{\pm 1}$ on top, change the number of strands, click the numbers at the bottom to change colors, and watch the colors ride up the world lines; close the braid and count the colorings that come back, or switch to the non-idempotent rack $x \star y = y + 1$ for comparison.
+:::
 
 Let us now work through the four-part numerical and matrix calculation connecting no-cloning, the three-qubit bit-flip code, local Bloch expectations, and $8\times 2$ orthogonal syndrome recovery.
 
@@ -514,6 +577,14 @@ $$
 Note the scope of this code: it corrects only single $X$ bit-flip errors; a single phase flip $Z_1 = Z \otimes I \otimes I$ commutes with both $g_1$ and $g_2$ and acts as an undetected logical phase error $\bar{Z}\lvert +_L\rangle = \lvert -_L\rangle$, so this code does not correct arbitrary single-qubit noise (correcting arbitrary single-qubit errors requires at least the five-qubit code, or the seven-qubit Steane or nine-qubit Shor code; cf. [@rem-error-correction-anyons-literature]).
 :::
 
+::: {.viz src="syndrome-decoding" preset="two" height="500"}
+**Flip two, and the lights point the wrong way.** In the logical state $\lvert 000\rangle$ the first and second qubits flip together (two magenta X's): only $g_2$ lights up, exactly as if the third qubit alone had flipped. The decoder follows the light and flips the third qubit back (amber); together that is $X_1X_2X_3$, a logical flip, and the cyan bar lands on $\lvert 111\rangle$ while the dashed outline stands on $\lvert 000\rangle$. This code corrects at most one $X$ flip.
+:::
+
+::: {.viz src="syndrome-decoding" preset="phase" height="500"}
+**Flip a phase: no light, yet the state has changed.** In the logical state $\lvert +_L\rangle$ the first qubit has its phase flipped (the magenta Z): $Z_1$ commutes with both $g_1$ and $g_2$, neither light goes on, the bars never leave the code space and the decoder does nothing; yet the cyan bar on $\lvert 111\rangle$ has flipped below the axis, exactly opposite the dashed outline, and the state has become the orthogonal $\lvert -_L\rangle$.
+:::
+
 ::: {.remark #rem-error-correction-anyons-literature title="Knill–Laflamme Conditions, Stabilizer Codes, and Anyonic Braiding (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** Beyond the frozen algebraic results of this chapter ([@thm-no-cloning-overlap], [@lemma-pauli-word-phase], [@prop-orthogonal-syndrome-recovery], and [@cor-braid-yang-baxter]), four foundational results from the quantum error-correction and topological physics literature should be noted:
 
@@ -521,6 +592,10 @@ Note the scope of this code: it corrects only single $X$ bit-flip errors; a sing
 2. **Stabilizer codes** (D. Gottesman, *Stabilizer Codes and Quantum Error Correction*, Caltech Ph.D. thesis, 1997, arXiv:quant-ph/9705052): An Abelian subgroup $\mathcal{S} \subset \mathcal{P}_N$ of cardinality $|\mathcal{S}| = 2^{N-k}$ generated by $N - k$ independent commuting Pauli operators and not containing $-I^{\otimes N}$ defines a $2^k$-dimensional code space $\mathcal{C}$ via its joint $+1$ eigenspace. Pauli errors anticommuting with at least one generator of $\mathcal{S}$ are diagnosed via the binary symplectic inner product; quotienting out the central scalar phase subgroup $\langle i I^{\otimes N}\rangle = \{\pm I^{\otimes N}, \pm i I^{\otimes N}\}$, operators in $N(\mathcal{S}) \setminus (\langle i I^{\otimes N}\rangle \cdot \mathcal{S})$ represent nontrivial logical classes in $N(\mathcal{S}) / (\langle i I^{\otimes N}\rangle \cdot \mathcal{S})$ (excluding central scalar multiples such as $-I^{\otimes N}$ of weight $0$), and the code distance $d_{\mathrm{code}}$ is the minimum Pauli weight among all $E \in N(\mathcal{S}) \setminus (\langle i I^{\otimes N}\rangle \cdot \mathcal{S})$.
 3. **Configuration-space braid groups in 2D versus 3D** (J. M. Leinaas and J. Myrheim, *On the theory of identical particles*, Nuovo Cimento B **37**, 1–23, 1977, doi:10.1007/BF02727953): For $n$ indistinguishable non-colliding point particles in $\mathbb{R}^d$, the fundamental group of configuration space is the symmetric group $S_n$ for $d \ge 3$ (whose one-dimensional unitary exchange representations allow only the bosonic $+1$ or fermionic $-1$ exchange sign), and the Artin braid group $B_n$ for $d = 2$.
 4. **Non-Abelian anyons and physical limits of topological protection** (C. Nayak, S. H. Simon, A. Stern, M. Freedman, and S. Das Sarma, *Non-Abelian anyons and topological quantum computation*, Rev. Mod. Phys. **80**, 1083–1159, 2008, doi:10.1103/RevModPhys.80.1083): In gapped 2D topological phases, braiding non-Abelian anyons induces unitary transformations on degenerate fusion spaces protected against local perturbations up to exponentially small splitting $\propto e^{-L/\xi}$. This gate regime requires well-separated anyons, motion adiabatic relative to the bulk gap, and an operation duration that does not resolve the residual energy splitting at finite separation. As emphasized in the text, the triviality of point-particle double exchange in $\mathbb{R}^3$ does not mean closed $1$-dimensional knots in $\mathbb{R}^3$ untie themselves, nor does topological protection imply strictly zero error in finite-temperature hardware subject to thermally excited quasiparticles.
+:::
+
+::: {.viz src="syndrome-decoding" height="560"}
+The full syndrome-decoding lab: click qubits on the stage to add $X$ or $Z$ errors and watch which of the two checks light up, which qubit the decoder flips back, and whether the bars land back on the dashed outline; you can also change the logical state or switch to the four-branch mixture $\sigma$.
 :::
 
 With our logical states shielded inside higher-dimensional error-correcting subspaces, we are ready to put those fault-tolerant registers to work. **How do flagship quantum algorithms harness invariant-plane rotations and Fourier phase gears to find targets and hidden periods across exponentially large state spaces?** Let us proceed to [Chapter 15](ch15-grover-qft-and-period-finding.md).

@@ -16,7 +16,9 @@ Look at the geometric structure of that correspondence: unique prime factorizati
 
 Guided by this geometric realization of primes as orthogonal axes, this chapter establishes the Lean-verified identities linking the **Dirichlet natural-number series**, the **simple-pole residue at $s = 1$**, and the **Euler prime product** on the half-plane of absolute convergence $\operatorname{Re}(s) > 1$, examines the "polyhedral prime sieve" remainder under finite truncation, and demarcates the exact epistemic boundary separating these proved theorems from the open **Riemann Hypothesis**.
 
-![Primes as orthogonal basis axes, the Euler product, and the Riemann critical line: the Dirichlet–Euler identity on Re(s) > 1, finite prime-sieve truncation remainder, and the open critical-line conjecture at σ = 1/2](../assets/fig-22-euler-prime-resonator.svg)
+::: {.figure src="ch22-overview"}
+**Figure 22.** The chapter at a glance. Panel I: each step right multiplies by $2$ and each step up by $3$, so every integer is a lattice point on the prime axes; the cyan arrows walk to $12 = 2^2 \times 3$. Panel II: among $1$ to $30$, the cells that are products of $2, 3, 5$ alone are cyan and the rest magenta; the first magenta cell is $7$ ([@ex-prime-log-orthogonality-and-sieve]). Panel III: the dashed line down the middle of the critical strip $0 < \operatorname{Re}(s) < 1$ is $\sigma = \frac{1}{2}$; the first ten zeros (a numerical result) all sit on it, and the cross at $s = 1$ is the pole. The red question mark and tag mark the open problem: whether every nontrivial zero lies on this line ([@conj-riemann-hypothesis]).
+:::
 
 ## 22.1 Orthogonal Prime Axes and Canceling Infinity by Factorization {#sec-ch22-1}
 
@@ -31,6 +33,10 @@ $$
 $$
 
 In a single algebraic stroke, the infinite sum $1 + p^{-s} + p^{-2s} + \cdots$ along axis $p$ collapses into the closed factor $(1 - p^{-s})^{-1}$! Multiplying those factors across all mutually orthogonal prime axes $p \in \mathrm{Primes}$ traverses every finitely supported exponent vector $(v_2, v_3, v_5, \dots)$ exactly once by the distributive law, identifying the Dirichlet sum over $\mathbb{N}$ with the Euler product over primes.
+
+::: {.viz src="euler-product-sieve" preset="two" height="500"}
+**One prime axis.** Only $2$ is on the list: the cyan curve is the geometric series $1 + 2^{-s} + 4^{-s} + \cdots = (1 - 2^{-s})^{-1}$, which equals $\frac{4}{3}$ at the amber line $s = 2$, a step below the ink $\zeta(2)$. Among the integers below, only the powers of $2$ ($1, 2, 4, 8, 16, 32, 64$) are cyan; everything else is magenta, starting with $3$.
+:::
 
 To state these theorems with complete formal precision in Lean 4, we first record the conventions of module `D5/S3/Weil/Convention`.
 
@@ -47,6 +53,10 @@ On the complex plane $\mathbb{C}$, let [`classicalZeta`](lean:D5/S3/Weil/Convent
 Before entering the half-plane $\operatorname{Re}(s) > 1$, we anchor the most prominent landmark of $\zeta(s)$ in the complex plane: its **unique simple pole at $s = 1$**, where the harmonic series diverges with unit residue.
 
 Geometrically, as $s \to 1^+$, the divergence of $\sum_{n=1}^\infty n^{-s}$ reflects the unbounded accumulation of prime amplification factors $(1 - p^{-1})^{-1} = \frac{p}{p-1}$ across infinitely many orthogonal prime axes, scaled by $(s - 1)^{-1}$ with residue exactly $1$.
+
+::: {.viz src="euler-product-sieve" preset="near" height="500"}
+**The closer to 1, the wider the gap.** The list holds the $11$ primes up to $31$ and the amber line stands at $s = 1.1$: the cyan product reaches only $4.93$ against the ink $\zeta(1.1) = 10.58$, so the magenta gap is larger than the product itself. Moving left only widens it: at $s = 1$ the cyan curve stops at the finite value $\prod_{p \le 31} \frac{p}{p-1} \approx 6.54$, while the ink $\zeta$ runs off the top of the picture, at the pole of [@lem-riemann-zeta-residue-one].
+:::
 
 ::: {.lemma #lem-riemann-zeta-residue-one title="Unit Residue of the Riemann Zeta Function at s = 1" lean="D5/S3/Zeros/ZetaIdentities.riemann_zeta_residue_one"}
 For the Riemann zeta function $\operatorname{classicalZeta} : \mathbb{C} \to \mathbb{C}$ of [@def-classical-zeta], as $s \in \mathbb{C}$ approaches $1$ along the punctured neighborhood filter $\mathcal{N}_{\neq}(1)$,
@@ -88,6 +98,10 @@ $$
 Under the half-plane hypothesis `hs : 1 < s.re`, $n \mapsto (n : \mathbb{C})^{-s}$ is a completely multiplicative, absolutely summable arithmetic function. By unique prime factorization and Mathlib's Euler product theorem `riemannZeta_eulerProduct_tprod`, the infinite product of local geometric-series factors $(1 - p^{-s})^{-1} = \sum_{k=0}^\infty p^{-ks}$ over $p : \mathrm{Nat.Primes}$ converges to `riemannZeta s = classicalZeta s`. The full proof is checked by the Lean kernel.
 :::
 
+::: {.figure src="ch22-euler-staircase"}
+**The Euler product over finitely many primes climbs towards $\zeta(2)$ step by step, yet always falls short.** The cyan staircase is the product over the first $K$ primes at $s = 2$, reaching $\frac{25}{16}$ at $K = 3$; the ink line is $\zeta(2) = \frac{\pi^2}{6}$. The magenta gap between them keeps narrowing, but with all $25$ primes up to $97$ it is still $0.0030$; only the product over every prime equals $\zeta(s)$ ([@thm-riemann-zeta-euler-product]). The values plotted are numerical.
+:::
+
 Eliminating the intermediate symbol $\operatorname{classicalZeta}(s)$ joins [@prop-riemann-zeta-dirichlet-sum] and [@thm-riemann-zeta-euler-product] directly on $\operatorname{Re}(s) > 1$: the sum over all natural numbers equals the product over the prime orthogonal basis alone!
 
 ::: {.corollary #cor-dirichlet-sum-eq-euler-product title="Equality of the Natural-Number Dirichlet Series and Prime Euler Product for Re(s) > 1" lean="D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product"}
@@ -104,6 +118,10 @@ $$
 Under `hs : 1 < s.re`, transitivity of equality combines [@prop-riemann-zeta-dirichlet-sum] ($\sum'_{n : \mathbb{N}} n^{-s} = \operatorname{classicalZeta}(s)$) with the symmetry of [@thm-riemann-zeta-euler-product] ($\operatorname{classicalZeta}(s) = \prod'_{p : \mathrm{Nat.Primes}} (1 - p^{-s})^{-1}$). The full proof is checked by the Lean kernel.
 :::
 
+::: {.viz src="euler-product-sieve" preset="all" height="500"}
+**Every cell cyan, the gap still there.** Primes join the list one by one up to $97$: every cell from $1$ to $96$ turns cyan, so each of these integers appears in the expansion of the product, and at $s = 2$ the cyan curve comes within $0.0030$ of the ink $\zeta$. The magenta gap in the magnifier remains, with $101^{-s}$ as its lowest slice. Only with every prime multiplied in does the product equal the whole series ([@cor-dirichlet-sum-eq-euler-product]).
+:::
+
 ::: {.viz src="sphere-escape" preset="euclid" height="500"}
 **Multiply, add one.** Each time the list gains a prime, multiply them all and add one to get $Q$. Every dial has $p$ ticks and its hand points at the remainder of $Q$ divided by $p$: all of them point at $1$ and none at the red $0$, so any prime dividing $Q$ is not on the list (Euclid's argument, a literature result). Opened full screen, the plot below shows how far the Euler product over finitely many primes still is from $\zeta(2)$ ([@thm-riemann-zeta-euler-product] with $s = 2$).
 :::
@@ -117,6 +135,10 @@ p^{-s} = p^{-\sigma - it} = p^{-\sigma} e^{-i t \ln p} = p^{-\sigma}\bigl(\cos(t
 $$
 
 In the complex plane, each prime $p$ acts as a **phase pointer (prime clock)** rotating uniformly at its intrinsic logarithmic angular frequency $\omega_p = \ln p$! Set every clock to twelve o'clock (reading $1$) at $t = 0$ and let go. Clock $2$ comes back to twelve every $2\pi/\ln 2 \approx 9.0647$ time units, clock $3$ every $2\pi/\ln 3 \approx 5.7192$. When clock $2$ completes its $12$th turn, clock $3$ has made $12\ln 3/\ln 2 \approx 19.01955$ turns and stands only $7.04^\circ$ past twelve: a near miss. Will the two ever be back at twelve together at some time $t \neq 0$?
+
+::: {.figure src="ch22-prime-clocks"}
+**Two prime clocks almost line up.** At $t = 12 \cdot 2\pi/\ln 2 \approx 108.78$, clock $2$ completes its $12$th turn and its amber hand points straight at twelve; at the same moment clock $3$ has turned $19.02$ times, and its hand is $7.04^\circ$ past twelve. The small magenta wedge is the part that fails to line up.
+:::
 
 Suppose they are: $t\ln 2 = 2\pi a$ and $t\ln 3 = 2\pi b$ with integers $a, b$. Multiply the first equation by $b$, the second by $a$, and subtract: $t\,(b\ln 2 - a\ln 3) = 0$, and as $t \neq 0$, $b\ln 2 = a\ln 3$. Since $\ln 2, \ln 3 > 0$, either $a$ and $b$ are both zero or they have the same sign; in the latter case take both positive and exponentiate, which gives $2^{b} = 3^{a}$, an even number equal to an odd one. Hence $a = b = 0$, so $t = 2\pi a/\ln 2 = 0$, contradicting $t \neq 0$. Only one mechanism is at work: exponentiation turns an integer relation among logarithms into an equality of prime-power products, and unique factorization forbids two products over disjoint sets of primes from being the same integer. The pinned module `D5/S3/Factorization/PrimeLogIndependence` freezes this mechanism for any finite set of primes, and `D5/S3/Weil/PrimeAddress/PrimeLogIndependence` restates it as linear independence over $\mathbb{Q}$.
 
@@ -236,7 +258,27 @@ $$
 The strictly positive discrepancy $R_{> 5}(2) = \zeta(2) - P_{\le 5}(2) \approx 0.082434 > 0$ is led by the fourth orthogonal prime axis $7^{-2} = \frac{1}{49} \approx 0.020408$ (followed by $11^{-2} = \frac{1}{121} \approx 0.008264$, $13^{-2} = \frac{1}{169} \approx 0.005917$, and the mixed composite $14^{-2} = (2\times 7)^{-2} = \frac{1}{196} \approx 0.005102$).
 :::
 
+::: {.viz src="euler-product-sieve" preset="five" height="500"}
+**The first to slip through is 7.** The list is $2, 3, 5$: the cyan cells $1, 2, 3, 4, 5, 6, 8, 9, 10, 12, \dots$ are the terms the product expands into, and $7$ is the first magenta cell. At $s = 2$ the cyan curve sits at $\frac{25}{16} = 1.5625$ against the ink $\zeta(2) = 1.6449$; the magnifier splits the gap of $0.0824$, from the bottom up, into $7^{-2}$, $11^{-2}$, $13^{-2}$ and ever thinner slices, each the $n^{-2}$ of one magenta cell.
+:::
+
+::: {.viz src="euler-product-sieve" preset="remainder" height="500"}
+**The remainder always rests on $7^{-s}$.** The list is still $2, 3, 5$, and the amber line sweeps from $s = 4$ down to $s = 1.3$: the magenta gap keeps widening, and the lowest slice in the magnifier is always $7^{-s}$. The dashed magenta curve between the ink and the cyan is the product plus $7^{-s}$, and the gap never gets narrower than that: $R_{>5}(s) > 7^{-s}$ (a literature result, checked by the page only at the points it draws).
+:::
+
 Notice the exact structural parallel between [@ex-prime-log-orthogonality-and-sieve] and the Euclidean–Gödelian escape of [Chapter 21](ch21-diagonalization-and-escape.md): any finite prime sieve spanned by $K$ prime axes $\{p_1, \dots, p_K\}$ is an arithmetic polytope whose remainder series $R_{> p_K}(s)$ leaks immediately at $n = p_{K+1}$ (and is strictly positive, $R_{> p_K}(s) > p_{K+1}^{-s} > 0$, for every real $s > 1$). Eliminating that leading term requires adjoining $p_{K+1}$ as a new orthogonal axis — and because the primes are inexhaustible, no finite truncation ever seals the arithmetic sphere.
+
+::: {.viz src="euler-product-sieve" preset="thirtyone" height="500"}
+**Up to 31, the leak starts at 37.** The list holds the $11$ primes up to $31$: everything from $1$ to $36$ is cyan, and the first magenta cell is $37$. At $s = 2$ the gap has shrunk to $0.0102$, yet its lowest slice in the magnifier is still $37^{-2}$: the only way to close that slice is to put $37$ on the list.
+:::
+
+::: {.viz src="sphere-escape" preset="thirteen" height="500"}
+**The sum need not be prime itself.** The list is $2, 3, 5, 7, 11, 13$ and $Q = 30031$: every clock hand points at $1$, none at $0$. Yet $Q = 59 \times 509$ is not prime. Euclid's argument (a literature result) says only that the prime factors of $Q$ are off the list, and the new prime it finds, $59$, is not the next one, $17$.
+:::
+
+::: {.viz src="euler-product-sieve" height="560"}
+The full lab of the Euler product and the sieve: scrub the rail to add or drop primes, drag the amber line to move $s$, and click a magenta cell to put its largest prime factor on the list. In the first small plot below, the ink curve $(s - 1)\zeta(s)$ heads for the green dashed line at $1$ ([@lem-riemann-zeta-residue-one]) while the cyan $(s - 1)$ times the product heads for $0$; the second shows how many primes the product needs to come within $1\%$ of $\zeta(s)$.
+:::
 
 > Composite numbers are the diagonal lattice points of the prime basis; Euler's product simply projects an entangled sum along the natural-number line onto its mutually orthogonal prime axes.
 
@@ -318,6 +360,10 @@ The two agree, exactly as claim 3 of [@thm-xi-reading-entire-reflection] asserts
 The fourth row is claim 4 of [@thm-xi-reading-entire-reflection]; the fifth row is the value at the fixed point $s = \frac{1}{2}$ of the mirror.
 
 **Along the critical line.** On $s = \frac{1}{2} + it$ with real $t$, $\xi$ takes real values. Numerical evaluation gives $\xi\bigl(\tfrac{1}{2} + 14i\bigr) \approx +2.01\times10^{-4}$ and $\xi\bigl(\tfrac{1}{2} + 15i\bigr) \approx -7.06\times10^{-4}$: the sign changes between the two, in agreement with the first nontrivial zero $\rho_1 \approx \frac{1}{2} + 14.134725\,i$ recorded in the literature. Thus $\zeta(-1) = -\frac{1}{12}$, so often singled out for dramatic effect, and the Basel value $\zeta(2) = \frac{\pi^2}{6}$ are two readings of one and the same number $\frac{\pi}{6}$ on opposite sides of the mirror.
+:::
+
+::: {.figure src="ch22-critical-line"}
+**Walking up the critical line, $\lvert\zeta\rvert$ keeps dropping to zero.** The ink curve is $\lvert\zeta(\frac{1}{2} + it)\rvert$ for $0 \le t \le 50$; the ten magenta dots are where it touches zero, the first at $t \approx 14.13$, consistent with the sign change of $\xi$ between $t = 14$ and $t = 15$ in the example above. The curve and the zero positions are numerical; the red tag asks the open question of whether every nontrivial zero lies on this line ([@conj-riemann-hypothesis]).
 :::
 
 The position of the mirror, $\operatorname{Re}(s) = \frac{1}{2}$, is kernel-checked by [@thm-xi-reading-entire-reflection]; whether every nontrivial zero stands on the mirror remains the open conjecture stated at the end of this section.

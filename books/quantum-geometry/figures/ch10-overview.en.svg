@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch10-overview" data-lang="en" data-wrap="1" viewBox="0 0 740 290" width="740" height="290" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="Three panels. Panel I: a sphere; two amber arcs leave the north pole N: turning about Y and then X lands at +X, turning about X and then Y lands at −Y, and a dashed arc between the two ends is marked 90°. Panel II: on the left a sphere covered with small cyan arrows, all pointing towards the north pole and shorter near the poles, with a violet ring marking the zero at each pole; on the right a small dashed circle stands for the rotor sphere S³, with a pair of violet frame arrows at every point. Panel III: a 3 × 3 table with rows and columns ψ₀, ψ₁, ψ₂; the diagonal is 1 and the other cells are the cyan inner products 1/√2, (1+i)/2, (1−i)/2; a green tag below reads “LEAN ✓ B∗B = A∗A ⇒ B = UA”.">
+<title>Three panels. Panel I: a sphere; two amber arcs leave the north pole N: turning about Y and then X lands at +X, turning about X and then Y lands at −Y, and a dashed arc between the two ends is marked 90°. Panel II: on the left a sphere covered with small cyan arrows, all pointing towards the north pole and shorter near the poles, with a violet ring marking the zero at each pole; on the right a small dashed circle stands for the rotor sphere S³, with a pair of violet frame arrows at every point. Panel III: a 3 × 3 table with rows and columns ψ₀, ψ₁, ψ₂; the diagonal is 1 and the other cells are the cyan inner products 1/√2, (1+i)/2, (1−i)/2; a green tag below reads “LEAN ✓ B∗B = A∗A ⇒ B = UA”.</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="236" height="290" viewBox="0 0 236 290">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">I  swap the order, land elsewhere</text>
+<circle cx="118" cy="160" r="86" class="ts-dim tf-cyan" stroke-width="1.5" fill-opacity="0.04"/>
+<path d="M198.81 148.98 L197.16 147.41 L195.3 145.88 L193.22 144.38 L190.93 142.93 L188.45 141.52 L185.77 140.17 L182.91 138.86 L179.86 137.62 L176.65 136.44 L173.28 135.32 L169.76 134.27 L166.09 133.29 L162.29 132.39 L158.37 131.55 L154.35 130.8 L150.22 130.13 L146 129.54 L141.7 129.03 L137.35 128.61 L132.93 128.27 L128.48 128.02 L124 127.86 L119.5 127.79 L115 127.8 L110.5 127.91 L106.03 128.1 L101.59 128.38 L97.19 128.74 L92.86 129.19 L88.59 129.73 L84.4 130.34 L80.3 131.04 L76.31 131.82 L72.43 132.68 L68.67 133.61 L65.05 134.61 L61.58 135.69 L58.26 136.83 L55.1 138.03 L52.12 139.29 L49.32 140.61 L46.7 141.98 L44.28 143.41 L42.07 144.88 L40.06 146.38 L38.26 147.93 L36.69 149.51 L35.33 151.12 L34.2 152.75 L33.31 154.41 L32.64 156.07 L32.21 157.75 L32.01 159.44 L32.05 161.12" class="ts-faint" stroke-width="1" stroke-dasharray="4 4" stroke-linejoin="round" fill="none" opacity="0.55"/>
+<path d="M32.05 161.12 L32.33 162.81 L32.84 164.48 L33.58 166.15 L34.55 167.79 L35.76 169.42 L37.19 171.02 L38.84 172.59 L40.7 174.12 L42.78 175.62 L45.07 177.07 L47.55 178.48 L50.23 179.83 L53.09 181.14 L56.14 182.38 L59.35 183.56 L62.72 184.68 L66.24 185.73 L69.91 186.71 L73.71 187.61 L77.63 188.45 L81.65 189.2 L85.78 189.87 L90 190.46 L94.3 190.97 L98.65 191.39 L103.07 191.73 L107.52 191.98 L112 192.14 L116.5 192.21 L121 192.2 L125.5 192.09 L129.97 191.9 L134.41 191.62 L138.81 191.26 L143.14 190.81 L147.41 190.27 L151.6 189.66 L155.7 188.96 L159.69 188.18 L163.57 187.32 L167.33 186.39 L170.95 185.39 L174.42 184.31 L177.74 183.17 L180.9 181.97 L183.88 180.71 L186.68 179.39 L189.3 178.02 L191.72 176.59 L193.93 175.12 L195.94 173.62 L197.74 172.07 L199.31 170.49 L200.67 168.88 L201.8 167.25 L202.69 165.59 L203.36 163.93 L203.79 162.25 L203.99 160.56 L203.95 158.88" class="ts-faint" stroke-width="1.1" stroke-linejoin="round" fill="none"/>
+<path d="M203.95 158.88 L203.67 157.19 L203.16 155.52 L202.42 153.85 L201.45 152.21 L200.24 150.58 L198.81 148.98" class="ts-faint" stroke-width="1" stroke-dasharray="4 4" stroke-linejoin="round" fill="none" opacity="0.55"/>
+<path d="M147.41 190.27 L144.75 190.62 L142.07 190.93 L139.35 191.21 L136.61 191.45 L133.86 191.66 L131.08 191.84 L128.29 191.98 L125.5 192.09 L122.69 192.17 L119.88 192.21 L117.06 192.21 L114.25 192.19 L111.44 192.12 L108.64 192.02 L105.85 191.89 L103.07 191.73 L100.3 191.53 L97.56 191.29 L94.84 191.03 L92.14 190.73 L89.47 190.39 L86.83 190.03 L84.22 189.63 L81.65 189.2 L79.12 188.74 L76.63 188.24 L74.19 187.72 L71.79 187.17 L69.44 186.59 L67.15 185.98 L64.91 185.34 L62.72 184.68 L60.59 183.99 L58.53 183.27 L56.53 182.53 L54.59 181.76 L52.73 180.98 L50.93 180.16 L49.2 179.33 L47.55 178.48 L45.98 177.61 L44.48 176.71 L43.06 175.8 L41.72 174.88 L40.46 173.93 L39.28 172.97 L38.19 172 L37.19 171.02" class="ts-dim" stroke-width="1.4" stroke-dasharray="4 3" stroke-linejoin="round" fill="none"/>
+<path d="M118 80.26 L119.92 82.41 L121.84 84.9 L123.74 87.7 L125.61 90.81 L127.45 94.22 L129.26 97.92 L131.01 101.87 L132.71 106.08 L134.34 110.52 L135.91 115.17 L137.39 120.01 L138.8 125.02 L140.11 130.19 L141.34 135.48 L142.46 140.87 L143.47 146.35 L144.38 151.88 L145.17 157.45 L145.85 163.04 L146.41 168.6 L146.85 174.14 L147.16 179.61 L147.35 184.99 L147.41 190.27" class="ts-amber" stroke-width="2.4" stroke-linejoin="round" fill="none"/>
+<path d="M147.41 190.27 L143.96 182.31 L150.68 182.23Z" class="tf-amber"/>
+<path d="M118 80.26 L112.71 81.15 L107.45 82.38 L102.23 83.94 L97.08 85.83 L92.02 88.04 L87.07 90.55 L82.26 93.36 L77.59 96.45 L73.1 99.82 L68.8 103.45 L64.72 107.31 L60.86 111.41 L57.24 115.71 L53.89 120.2 L50.81 124.86 L48.01 129.67 L45.52 134.62 L43.34 139.67 L41.48 144.8 L39.94 150.01 L38.74 155.25 L37.88 160.52 L37.36 165.78 L37.19 171.02" class="ts-amber" stroke-width="2.4" stroke-linejoin="round" fill="none"/>
+<path d="M37.19 171.02 L34.09 162.91 L40.81 163.13Z" class="tf-amber"/>
+<circle cx="118" cy="80.26" r="4" class="ts-bg tf-dim" stroke-width="1.4"/>
+<circle cx="147.41" cy="190.27" r="5" class="ts-bg tf-amber" stroke-width="1.4"/>
+<circle cx="37.19" cy="171.02" r="5" class="ts-bg tf-amber" stroke-width="1.4"/>
+<text class="tf-dim" x="126" y="74.26" font-size="15"><tspan font-style="italic">N</tspan></text>
+<text class="tf-amber" x="157.41" y="206.27" font-size="15">+<tspan font-style="italic">X</tspan></text>
+<text class="tf-amber ts-bg" x="29.19" y="175.02" font-size="15" text-anchor="end" stroke-width="4.2" stroke-linejoin="round" paint-order="stroke">−<tspan font-style="italic">Y</tspan></text>
+<text class="tf-dim ts-bg" x="81.65" y="209.2" font-size="13" text-anchor="middle" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">90°</text>
+<text class="tf-amber ts-bg" x="130.8" y="135.02" font-size="13" text-anchor="end" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">Y</tspan> then <tspan font-style="italic">X</tspan></text>
+<text class="tf-amber ts-bg" x="55.52" y="102.52" font-size="13" text-anchor="end" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">X</tspan> then <tspan font-style="italic">Y</tspan></text>
+</svg>
+<svg class="tr-fig-panel" x="252" y="0" width="236" height="290" viewBox="0 0 236 290">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">II  uncombable sphere, rotor sphere</text>
+<circle cx="78" cy="150" r="62" class="ts-dim tf-cyan" stroke-width="1.5" fill-opacity="0.04"/>
+<line x1="69.04" y1="104.17" x2="70.23" y2="101.61" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M71.47 98.94 L71.33 102.69 L68.7 101.46Z" class="tf-cyan"/>
+<line x1="82.55" y1="104.53" x2="81.94" y2="101.92" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M81.31 99.21 L83.4 102.09 L80.71 102.71Z" class="tf-cyan"/>
+<line x1="94.84" y1="102.76" x2="92.6" y2="100.39" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M90.26 97.92 L94.23 99.67 L91.79 101.98Z" class="tf-cyan"/>
+<line x1="102.62" y1="99.33" x2="99.34" y2="97.41" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M95.93 95.42 L100.93 96.08 L98.96 99.45Z" class="tf-cyan"/>
+<line x1="103.8" y1="95.15" x2="100.37" y2="93.79" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M96.79 92.38 L101.7 92.27 L100.3 95.81Z" class="tf-cyan"/>
+<line x1="53.38" y1="93.79" x2="56.66" y2="92.61" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M60.07 91.38 L56.66 94.51 L55.45 91.14Z" class="tf-cyan"/>
+<line x1="52.2" y1="97.97" x2="55.63" y2="96.23" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M59.21 94.42 L55.89 98.32 L54.11 94.78Z" class="tf-cyan"/>
+<line x1="57.93" y1="101.76" x2="60.6" y2="99.52" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M63.39 97.19 L61.26 101.31 L58.96 98.56Z" class="tf-cyan"/>
+<line x1="61.76" y1="125.89" x2="63.9" y2="116.98" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M64.89 112.85 L65.76 118.2 L61.68 117.22Z" class="tf-cyan"/>
+<line x1="86.25" y1="126.55" x2="85.17" y2="117.6" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M84.66 113.38 L87.34 118.1 L83.17 118.6Z" class="tf-cyan"/>
+<line x1="108.53" y1="123.34" x2="104.45" y2="114.64" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M102.64 110.79 L106.67 114.43 L102.86 116.21Z" class="tf-cyan"/>
+<line x1="122.63" y1="117.12" x2="116.59" y2="109.16" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M114.02 105.77 L118.72 108.48 L115.37 111.02Z" class="tf-cyan"/>
+<line x1="124.77" y1="109.55" x2="118.62" y2="102.8" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M115.75 99.66 L120.67 101.94 L117.57 104.77Z" class="tf-cyan"/>
+<line x1="31.23" y1="114.65" x2="37.53" y2="107.05" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M40.25 103.77 L38.67 108.96 L35.44 106.28Z" class="tf-cyan"/>
+<line x1="41.62" y1="121.53" x2="46.51" y2="113.02" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M48.63 109.33 L47.96 114.71 L44.32 112.62Z" class="tf-cyan"/>
+<line x1="57.52" y1="152.13" x2="58.73" y2="138.51" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M59.11 134.27 L60.76 139.44 L56.57 139.07Z" class="tf-cyan"/>
+<line x1="88.4" y1="152.96" x2="87.78" y2="139.29" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M87.59 135.04 L89.91 139.94 L85.72 140.13Z" class="tf-cyan"/>
+<line x1="116.49" y1="148.92" x2="114.22" y2="135.5" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M113.51 131.31 L116.41 135.89 L112.27 136.59Z" class="tf-cyan"/>
+<line x1="134.28" y1="141.07" x2="130.96" y2="128.19" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M129.91 124.07 L133.19 128.39 L129.12 129.44Z" class="tf-cyan"/>
+<line x1="19.02" y1="137.95" x2="22.48" y2="125.3" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M23.6 121.2 L24.31 126.57 L20.26 125.47Z" class="tf-cyan"/>
+<line x1="32.12" y1="146.63" x2="34.83" y2="133.37" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M35.69 129.21 L36.74 134.53 L32.63 133.68Z" class="tf-cyan"/>
+<line x1="57.12" y1="177.97" x2="56.31" y2="165.98" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M56.03 161.74 L58.46 166.59 L54.27 166.87Z" class="tf-cyan"/>
+<line x1="88.6" y1="178.82" x2="89.01" y2="166.88" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M89.15 162.63 L91.08 167.7 L86.89 167.56Z" class="tf-cyan"/>
+<line x1="117.25" y1="174.69" x2="118.77" y2="162.51" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M119.29 158.29 L120.76 163.51 L116.59 162.99Z" class="tf-cyan"/>
+<line x1="135.38" y1="166.69" x2="137.62" y2="154.06" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M138.36 149.87 L139.56 155.16 L135.42 154.43Z" class="tf-cyan"/>
+<line x1="17.87" y1="163.52" x2="15.51" y2="150.71" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M14.74 146.53 L17.71 151.07 L13.58 151.83Z" class="tf-cyan"/>
+<line x1="31.23" y1="172.37" x2="29.41" y2="160.05" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M28.79 155.84 L31.6 160.48 L27.44 161.1Z" class="tf-cyan"/>
+<line x1="60.63" y1="198.57" x2="58.94" y2="193.28" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M57.64 189.24 L61.17 193.36 L57.17 194.64Z" class="tf-cyan"/>
+<line x1="86.82" y1="199.28" x2="87.65" y2="194.26" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M88.34 190.07 L89.6 195.34 L85.45 194.66Z" class="tf-cyan"/>
+<line x1="110.65" y1="195.84" x2="114.15" y2="189.73" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M116.26 186.04 L115.6 191.42 L111.95 189.34Z" class="tf-cyan"/>
+<line x1="125.72" y1="189.19" x2="131.39" y2="181.64" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M133.94 178.24 L132.62 183.5 L129.26 180.98Z" class="tf-cyan"/>
+<line x1="39.09" y1="193.91" x2="34.74" y2="187.32" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M32.4 183.78 L36.91 186.79 L33.4 189.1Z" class="tf-cyan"/>
+<line x1="97.93" y1="208.4" x2="100.46" y2="207.17" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<path d="M103.1 205.89 L100.63 208.7 L99.36 206.09Z" class="tf-cyan"/>
+<circle cx="78" cy="91.03" r="7" class="ts-violet" stroke-width="2" fill="none"/>
+<circle cx="78" cy="208.97" r="7" class="ts-violet" stroke-width="2" stroke-dasharray="3 2" fill="none"/>
+<text class="tf-ink" x="78" y="240" font-size="15" text-anchor="middle"><tspan font-style="italic">S</tspan><tspan dy="-0.42em" font-size="72%">2</tspan><tspan dy="0.42em">​</tspan></text>
+<text class="tf-violet" x="78" y="260" font-size="13" text-anchor="middle">must vanish</text>
+<circle cx="186" cy="150" r="34" class="ts-dim" stroke-width="1.3" stroke-dasharray="4 3" fill="none"/>
+<line x1="217.41" y1="136.99" x2="214.06" y2="128.9" class="ts-violet" stroke-width="1.4" fill="none"/>
+<path d="M212.44 124.98 L216.29 128.79 L212.41 130.4Z" class="tf-violet"/>
+<line x1="217.41" y1="136.99" x2="223.65" y2="134.41" class="ts-violet" stroke-width="1.4" fill="none"/>
+<path d="M227.57 132.78 L223.76 136.63 L222.15 132.75Z" class="tf-violet"/>
+<line x1="199.01" y1="118.59" x2="190.93" y2="115.24" class="ts-violet" stroke-width="1.4" fill="none"/>
+<path d="M187 113.61 L192.42 113.59 L190.82 117.47Z" class="tf-violet"/>
+<line x1="199.01" y1="118.59" x2="201.59" y2="112.35" class="ts-violet" stroke-width="1.4" fill="none"/>
+<path d="M203.22 108.43 L203.25 113.85 L199.37 112.24Z" class="tf-violet"/>
+<line x1="172.99" y1="118.59" x2="164.9" y2="121.94" class="ts-violet" stroke-width="1.4" fill="none"/>
+<path d="M160.98 123.56 L164.79 119.71 L166.4 123.59Z" class="tf-violet"/>
+<line x1="172.99" y1="118.59" x2="170.41" y2="112.35" class="ts-violet" stroke-width="1.4" fill="none"/>
+<path d="M168.78 108.43 L172.63 112.24 L168.75 113.85Z" class="tf-violet"/>
+<line x1="154.59" y1="136.99" x2="151.24" y2="145.07" class="ts-violet" stroke-width="1.4" fill="none"/>
+<path d="M149.61 149 L149.59 143.58 L153.47 145.18Z" class="tf-violet"/>
+<line x1="154.59" y1="136.99" x2="148.35" y2="134.41" class="ts-violet" stroke-width="1.4" fill="none"/>
+<path d="M144.43 132.78 L149.85 132.75 L148.24 136.63Z" class="tf-violet"/>
+<line x1="154.59" y1="163.01" x2="157.94" y2="171.1" class="ts-violet" stroke-width="1.4" fill="none"/>
+<path d="M159.56 175.02 L155.71 171.21 L159.59 169.6Z" class="tf-violet"/>
+<line x1="154.59" y1="163.01" x2="148.35" y2="165.59" class="ts-violet" stroke-width="1.4" fill="none"/>
+<path d="M144.43 167.22 L148.24 163.37 L149.85 167.25Z" class="tf-violet"/>
+<line x1="172.99" y1="181.41" x2="181.07" y2="184.76" class="ts-violet" stroke-width="1.4" fill="none"/>
+<path d="M185 186.39 L179.58 186.41 L181.18 182.53Z" class="tf-violet"/>
+<line x1="172.99" y1="181.41" x2="170.41" y2="187.65" class="ts-violet" stroke-width="1.4" fill="none"/>
+<path d="M168.78 191.57 L168.75 186.15 L172.63 187.76Z" class="tf-violet"/>
+<line x1="199.01" y1="181.41" x2="207.1" y2="178.06" class="ts-violet" stroke-width="1.4" fill="none"/>
+<path d="M211.02 176.44 L207.21 180.29 L205.6 176.41Z" class="tf-violet"/>
+<line x1="199.01" y1="181.41" x2="201.59" y2="187.65" class="ts-violet" stroke-width="1.4" fill="none"/>
+<path d="M203.22 191.57 L199.37 187.76 L203.25 186.15Z" class="tf-violet"/>
+<line x1="217.41" y1="163.01" x2="220.76" y2="154.93" class="ts-violet" stroke-width="1.4" fill="none"/>
+<path d="M222.39 151 L222.41 156.42 L218.53 154.82Z" class="tf-violet"/>
+<line x1="217.41" y1="163.01" x2="223.65" y2="165.59" class="ts-violet" stroke-width="1.4" fill="none"/>
+<path d="M227.57 167.22 L222.15 167.25 L223.76 163.37Z" class="tf-violet"/>
+<text class="tf-ink" x="186" y="240" font-size="15" text-anchor="middle"><tspan font-style="italic">S</tspan><tspan dy="-0.42em" font-size="72%">3</tspan><tspan dy="0.42em">​</tspan></text>
+<text class="tf-violet" x="186" y="260" font-size="13" text-anchor="middle">no zeros</text>
+</svg>
+<svg class="tr-fig-panel" x="504" y="0" width="236" height="290" viewBox="0 0 236 290">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">III  the full table of overlaps</text>
+<text class="tf-dim" x="38" y="97.04" font-size="14" text-anchor="end">ψ<tspan dy="0.28em" font-size="72%">0</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim" x="80" y="52" font-size="14" text-anchor="middle">ψ<tspan dy="0.28em" font-size="72%">0</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="50" y="62" width="60" height="60" class="ts-edge" stroke-width="1.1" fill="none"/>
+<text class="tf-dim" x="80" y="97.04" font-size="14" text-anchor="middle">1</text>
+<rect x="110" y="62" width="60" height="60" class="ts-edge tf-cyan" stroke-width="1.1" fill-opacity="0.1"/>
+<text class="tf-cyan" x="140" y="96.68" font-size="13" text-anchor="middle">1/√2</text>
+<rect x="170" y="62" width="60" height="60" class="ts-edge tf-cyan" stroke-width="1.1" fill-opacity="0.1"/>
+<text class="tf-cyan" x="200" y="96.68" font-size="13" text-anchor="middle">1/√2</text>
+<text class="tf-dim" x="38" y="157.04" font-size="14" text-anchor="end">ψ<tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim" x="140" y="52" font-size="14" text-anchor="middle">ψ<tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="50" y="122" width="60" height="60" class="ts-edge tf-cyan" stroke-width="1.1" fill-opacity="0.1"/>
+<text class="tf-cyan" x="80" y="156.68" font-size="13" text-anchor="middle">1/√2</text>
+<rect x="110" y="122" width="60" height="60" class="ts-edge" stroke-width="1.1" fill="none"/>
+<text class="tf-dim" x="140" y="157.04" font-size="14" text-anchor="middle">1</text>
+<rect x="170" y="122" width="60" height="60" class="ts-edge tf-cyan" stroke-width="1.1" fill-opacity="0.1"/>
+<text class="tf-cyan" x="200" y="156.68" font-size="13" text-anchor="middle">(1+i)/2</text>
+<text class="tf-dim" x="38" y="217.04" font-size="14" text-anchor="end">ψ<tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim" x="200" y="52" font-size="14" text-anchor="middle">ψ<tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="50" y="182" width="60" height="60" class="ts-edge tf-cyan" stroke-width="1.1" fill-opacity="0.1"/>
+<text class="tf-cyan" x="80" y="216.68" font-size="13" text-anchor="middle">1/√2</text>
+<rect x="110" y="182" width="60" height="60" class="ts-edge tf-cyan" stroke-width="1.1" fill-opacity="0.1"/>
+<text class="tf-cyan" x="140" y="216.68" font-size="13" text-anchor="middle">(1−i)/2</text>
+<rect x="170" y="182" width="60" height="60" class="ts-edge" stroke-width="1.1" fill="none"/>
+<text class="tf-dim" x="200" y="217.04" font-size="14" text-anchor="middle">1</text>
+<rect x="17.4" y="252" width="201.2" height="21" class="ts-ok tf-ok" stroke-width="1.2" fill-opacity="0.12"/>
+<text class="tf-ok tr-fig-mono" x="24.4" y="268" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">LEAN ✓  B∗B = A∗A ⇒ B = UA</text>
+</svg>
+</svg>

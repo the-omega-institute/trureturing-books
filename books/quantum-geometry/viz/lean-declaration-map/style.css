@@ -1,0 +1,6 @@
+/* LEAN//MAP: the shared lab layout (../assets/theme.css) carries the page; colours come from the tokens only. */
+#cv { cursor: pointer; touch-action: manipulation; }
+.sw.box.hollow { background: transparent; border: 1.5px solid var(--ok); }
+#roModule a { color: inherit; overflow-wrap: anywhere; }
+#roModule code, #roName code { overflow-wrap: anywhere; }
+#roWhere { overflow-wrap: anywhere; }

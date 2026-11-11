@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="LEAN//MAP · The map of Lean declarations">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LEAN//MAP Lean 声明地图</title>
+<meta name="description" content="Lean 声明地图 · The map of Lean declarations">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="lean-declaration-map">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="LEAN//MAP">LEAN<span class="sl">//</span>MAP</h1>
+      <div class="tagline">
+        <span class="zh">Lean 声明地图 · <em>书里引用的每一条冻结声明都落在它第一次出场的那一章；读完正文，锁文件里的条目一条不剩全部落定</em></span>
+        <span class="en">The map of Lean declarations · <em>every frozen declaration the book cites lands in the chapter where it first appears; by the end of the main text every entry of the lock file has landed</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillRead"><span class="zh">读到</span><span class="en">READ TO</span> <strong>—</strong></span>
+      <span class="pill hot" id="pillMet"><span class="zh">已落定</span><span class="en">LANDED</span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="all" aria-pressed="false"><span class="code">WHOLE-BOOK</span><span class="cn zh">全书：一章一章落定</span><span class="cn en">The whole book, chapter by chapter</span></button>
+        <button class="preset" data-preset="bedrock" aria-pressed="false"><span class="code">CH27-FOUR</span><span class="cn zh">第二十七章解剖的四条</span><span class="cn en">The four Chapter 27 dissects</span></button>
+        <button class="preset" data-preset="table27" aria-pressed="false"><span class="code">CH27-TABLE</span><span class="cn zh">第二十七章的审计表</span><span class="cn en">Chapter 27's audit table</span></button>
+        <button class="preset" data-preset="closure" aria-pressed="false"><span class="code">CH28-FOUR</span><span class="cn zh">第二十八章解剖的四条</span><span class="cn en">The four Chapter 28 dissects</span></button>
+        <button class="preset" data-preset="table28" aria-pressed="false"><span class="code">CH28-TABLE</span><span class="cn zh">第二十八章的审计表</span><span class="cn en">Chapter 28's audit table</span></button>
+        <button class="preset" data-preset="theorems" aria-pressed="false"><span class="code">THEOREMS</span><span class="cn zh">只看定理</span><span class="cn en">Theorems only</span></button>
+        <button class="preset" data-preset="inline" aria-pressed="false"><span class="code">INLINE</span><span class="cn zh">只在行内链接里出现的</span><span class="cn en">Cited only by inline links</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+    <section class="panel sec">
+      <h2><span class="zh">筛选</span><span class="en">Filter</span><span class="aside">KIND</span></h2>
+      <div class="chips" id="filterChips" role="group" aria-label="筛选声明" data-aria-en="Filter declarations">
+        <button class="chip" data-filter="all" aria-pressed="true"><span class="zh">全部</span><span class="en">All</span></button><button class="chip" data-filter="theorem" aria-pressed="false"><span class="zh">只看定理</span><span class="en">Theorems</span></button><button class="chip" data-filter="inline" aria-pressed="false"><span class="zh">只看行内</span><span class="en">Inline only</span></button>
+      </div>
+    </section>
+    <section class="panel sec">
+      <h2><span class="zh">从一章往回看</span><span class="en">Look back from a chapter</span><span class="aside">CITES</span></h2>
+      <div class="field">
+        <label for="src"><span class="zh">这一章引用的声明</span><span class="en">The declarations this chapter cites</span><small class="zh">也可以直接点舞台上某一章的柱子底部</small><small class="en">or click the foot of a column on the stage</small></label><output id="oSrc" for="src">—</output>
+        <input type="range" id="src" min="-1" max="33" step="1" value="-1">
+      </div>
+      <div class="chips" id="modeChips" role="group" aria-label="引用方式" data-aria-en="How it is cited">
+        <button class="chip" data-mode="all" aria-pressed="true"><span class="zh">全部引用</span><span class="en">Every citation</span></button><button class="chip" data-mode="env" aria-pressed="false"><span class="zh">只看定理环境</span><span class="en">Environments only</span></button>
+      </div>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage still" id="stage" data-thumb aria-label="按章排开的冻结声明：每一格是一条声明，落在它第一次出场的那一章" data-aria-en="The frozen declarations laid out by chapter: each cell is one declaration, placed in the chapter where it first appears">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-bl">
+        <span><i class="sw box ok"></i><span class="zh">定理</span><span class="en">theorem</span></span>
+        <span><i class="sw box dm"></i><span class="zh">定义</span><span class="en">definition</span></span>
+        <span><i class="sw box hollow"></i><span class="zh">空心：只在行内链接里</span><span class="en">hollow: inline links only</span></span>
+        <span><i class="sw cy"></i><span class="zh">这一章引用的</span><span class="en">cited by this chapter</span></span>
+        <span><i class="sw am"></i><span class="zh">选中的声明</span><span class="en">the chosen declaration</span></span>
+      </div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2><span class="zh">读到这一章，已有多少条落定</span><span class="en">How many have landed by this chapter</span></h2><span id="plotMeta"></span></div>
+        <canvas id="plot" aria-label="随阅读位置累计落定的声明条数，虚线是锁文件的条目数" data-aria-en="Declarations landed against the reading position; the dashed line is the number of entries in the lock file"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">LOCK</span></h2>
+      <dl class="ro">
+        <div class="key"><dt><span class="zh">已落定 / 锁文件里的条目</span><span class="en">landed / entries in the lock</span></dt><dd><b id="roMet">—</b><span id="roMetSub"></span></dd></div>
+        <div class="a"><dt><span class="zh">选中的声明</span><span class="en">chosen declaration</span></dt><dd id="roName">—</dd></div>
+        <div><dt><span class="zh">种类</span><span class="en">kind</span></dt><dd id="roKind">—</dd></div>
+        <div><dt><span class="zh">模块与行</span><span class="en">module and line</span></dt><dd id="roModule">—</dd></div>
+        <div><dt><span class="zh">在书中出现于</span><span class="en">appears in</span></dt><dd id="roWhere">—</dd></div>
+        <div><dt><span class="zh">附录 C 序号</span><span class="en">Appendix C entry</span></dt><dd id="roSerial">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+    </section>
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">每一格、每一个种类、每一处出现的章，都由 <code>trureturing.lock.json</code> 与中文章节里的 <code>lean=</code> 属性和 <code>lean:</code> 行内链接当场数出，不手填；锁文件的条目数与格数相同。</span><span class="en">Every cell, every kind and every chapter it appears in is counted from <code>trureturing.lock.json</code> and from the <code>lean=</code> attributes and <code>lean:</code> inline links of the Chinese chapters, never typed by hand; the map has exactly as many cells as the lock has entries.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">“落在第一次出场的那一章”与格子在柱子里的次序（先定理后定义，先实心后空心）是本页的画法；绿色只说锁文件里的种类是 <code>theorem</code>。</span><span class="en">“Landing in the chapter of its first appearance” and the order inside a column (theorems before definitions, filled before hollow) are this page's way of drawing; green says only that the lock records the kind <code>theorem</code>.</span></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">第二十七章逐行解剖的四条：平行四边形恒等式、玻恩概率三公理骨架、支撑连通下的全局相位刚性、未读挤压的复合幂等。已冻结：</span><span class="en">The four Chapter 27 dissects line by line: the parallelogram law, the three-axiom skeleton of Born probability, global phase rigidity under connected ray tests, and idempotence of the unread pinching. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumContext/ParallelogramNormLaw.lean" target="_blank" rel="noopener"><code>inner_product_norm_parallelogram_law</code></a> · <a class="leanref" data-lean-gid="D5/S3/Quantum/FiniteDimensional.born_probability_skeleton" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/FiniteDimensional.lean" target="_blank" rel="noopener"><code>born_probability_skeleton</code></a> · <a class="leanref" data-lean-gid="D5/S3/Quantum/Foundation/RayPhaseRigidity.unitary_phase_of_connected_ray_tests" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Foundation/RayPhaseRigidity.lean" target="_blank" rel="noopener"><code>unitary_phase_of_connected_ray_tests</code></a> · <a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.lean" target="_blank" rel="noopener"><code>finite_record_pinching_idempotent</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">第二十八章逐行解剖的四条：秩一玻恩模方归约、三合取配对桥、非零权重下条件态仍是态、未读不动点当且仅当交叉块为零。已冻结：</span><span class="en">The four Chapter 28 dissects line by line: the rank-one Born modulus-square reduction, the three-way pairing bridge, the conditional state is a state when its weight is non-zero, and the unread fixed point holds exactly when the cross blocks vanish. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Observer/BornReduction.lean" target="_blank" rel="noopener"><code>rank_one_pure_state_modulus_square_reduction</code></a> · <a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Observer/Conditioning/RankOneBornPairingWeight.lean" target="_blank" rel="noopener"><code>rank_one_born_pairing_weight</code></a> · <a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning.conditionalState_isState" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Observer/Conditioning.lean" target="_blank" rel="noopener"><code>conditionalState_isState</code></a> · <a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning.unreadState_fixed_iff" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Observer/Conditioning.lean" target="_blank" rel="noopener"><code>unreadState_fixed_iff</code></a></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="34" step="any" value="34" aria-label="阅读位置" data-aria-en="Reading position">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">每次一章</span><span class="en">one chapter at a time</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">舞台从左到右是全书的阅读顺序（序曲、三十章、终章、附录 A 与 B），每一格是 <code>trureturing.lock.json</code> 里的一条冻结声明，落在中文正文第一次引用它的那一章的柱子里。附录 C 是逐条的总索引，引用了每一条，所以不单列一柱，只在读数里给出它的序号。时间轴是阅读位置：读到哪一章，那一章的格子就落定。本页是这本书引用关系的一份清点，不是证明；每一条声明成立与否由 Lean 内核负责，页面只数它们在哪里。</p>
+      <ol>
+        <li><b>依据的章节。</b><a href="../../zh/ch27-reading-frozen-proofs-i.html#sec-parts-i-to-iii-frozen-audit-table" target="_top">第二十七章 · 第一至三部冻结声明全景审计表</a>、<a href="../../zh/ch28-reading-frozen-proofs-ii.html#sec-parts-iv-to-vi-frozen-audit-table" target="_top">第二十八章 · 第四至六部冻结声明全景审计表</a> 与 <a href="../../zh/appendix-c.html#sec-appendix-c-theorems" target="_top">附录 C · 冻结定理总索引</a>。</li>
+        <li><b>格子从哪里来。</b>生成脚本 <code>gen-data.py</code> 读锁文件的每一条（GID、种类、源码行），再读中文章节：<code>:::</code> 行上的 <code>lean="…"</code> 属性记作“环境引用”（实心），<code>(lean:…)</code> 行内链接记作“行内引用”；两者都没有、只靠行内链接出现的画成空心。附录 C 的序号（T、D、R 三段）取自那张表的第一列。</li>
+        <li><b>绿色。</b>绿色只说锁文件里这一条的种类是 <code>theorem</code>，即 Lean 内核检查过的定理；灰色是定义（<code>def</code> 与 <code>inductive</code>）。依据栏里两组 <code>LEAN ✓</code> 是第二十七、二十八章逐行解剖的八条，正文已写出它们的陈述。</li>
+        <li><b>不在页面上的。</b>页面不读 Lean 源码、不重新检查证明，也不判断一条声明“重要”与否；柱子的高低只表示那一章第一次引入了多少条。</li>
+      </ol>
+    </div>
+    <div class="en">
+      <p class="lede">From left to right the stage follows the reading order of the book (the prelude, thirty chapters, the coda, Appendices A and B). Each cell is one frozen declaration of <code>trureturing.lock.json</code>, placed in the column of the chapter whose Chinese text cites it first. Appendix C is the entry-by-entry index and cites every one of them, so it has no column of its own; the readouts give its entry number instead. The rail is the reading position: as you read a chapter, its cells land. The page is a count of how the book cites, not a proof; whether each declaration holds is the Lean kernel's business, and the page only counts where they are.</p>
+      <ol>
+        <li><b>The chapters behind it.</b> <a href="../../en/ch27-reading-frozen-proofs-i.html#sec-parts-i-to-iii-frozen-audit-table" target="_top">Chapter 27 · the audit table of Parts I–III</a>, <a href="../../en/ch28-reading-frozen-proofs-ii.html#sec-parts-iv-to-vi-frozen-audit-table" target="_top">Chapter 28 · the audit table of Parts IV–VI</a> and <a href="../../en/appendix-c.html#sec-appendix-c-theorems" target="_top">Appendix C · the index of frozen theorems</a>.</li>
+        <li><b>Where the cells come from.</b> The script <code>gen-data.py</code> reads every entry of the lock (GID, kind, source line), then the Chinese chapters: a <code>lean="…"</code> attribute on a <code>:::</code> line counts as an environment citation (filled), a <code>(lean:…)</code> link as an inline citation; a declaration that only inline links cite is drawn hollow. The Appendix C entry numbers (sections T, D, R) are read from the first column of that table.</li>
+        <li><b>Green.</b> Green says only that the lock records the kind <code>theorem</code> for the entry, a theorem checked by the Lean kernel; grey is a definition (<code>def</code> or <code>inductive</code>). The two <code>LEAN ✓</code> boxes in the evidence panel are the eight theorems Chapters 27 and 28 dissect line by line, whose statements the text writes out.</li>
+        <li><b>Not on the page.</b> The page does not read the Lean sources, does not recheck any proof and does not judge whether a declaration is “important”; the height of a column only says how many declarations that chapter introduces first.</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

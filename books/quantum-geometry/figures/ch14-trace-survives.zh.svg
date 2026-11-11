@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch14-trace-survives" data-lang="zh" viewBox="0 0 540 270" width="540" height="270" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="左边是 4 × 4 的噪声矩阵 σ，行列标着 I、X₁、X₂、X₃。对角线上四格青色，写着 ½、¼、⅛、⅛；其余十二格是品红的跨房间相干项，每格都被划掉。一支箭头指向右边：四个对角数相加得 Tr σ = 1，乘上逻辑态 ρ，解码后正好回到 ρ。">
+<title>左边是 4 × 4 的噪声矩阵 σ，行列标着 I、X₁、X₂、X₃。对角线上四格青色，写着 ½、¼、⅛、⅛；其余十二格是品红的跨房间相干项，每格都被划掉。一支箭头指向右边：四个对角数相加得 Tr σ = 1，乘上逻辑态 ρ，解码后正好回到 ρ。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<text class="tf-ink" x="158" y="26" font-size="14" text-anchor="middle" font-weight="600">噪声矩阵 <tspan font-style="italic">σ</tspan></text>
+<text class="tf-dim" x="95" y="48" font-size="13" text-anchor="middle">I</text>
+<text class="tf-dim" x="64" y="81.68" font-size="13" text-anchor="end">I</text>
+<rect x="76" y="58" width="38" height="38" rx="3" class="ts-cyan tf-cyan" stroke-width="1.4" fill-opacity="0.3"/>
+<text class="tf-cyan" x="95" y="82.76" font-size="16" text-anchor="middle" font-weight="600">½</text>
+<rect x="118" y="58" width="38" height="38" rx="3" class="ts-magenta tf-magenta" stroke-width="1" fill-opacity="0.12"/>
+<line x1="130" y1="70" x2="144" y2="84" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<line x1="130" y1="84" x2="144" y2="70" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<rect x="160" y="58" width="38" height="38" rx="3" class="ts-magenta tf-magenta" stroke-width="1" fill-opacity="0.12"/>
+<line x1="172" y1="70" x2="186" y2="84" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<line x1="172" y1="84" x2="186" y2="70" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<rect x="202" y="58" width="38" height="38" rx="3" class="ts-magenta tf-magenta" stroke-width="1" fill-opacity="0.12"/>
+<line x1="214" y1="70" x2="228" y2="84" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<line x1="214" y1="84" x2="228" y2="70" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<text class="tf-dim" x="137" y="48" font-size="13" text-anchor="middle">X₁</text>
+<text class="tf-dim" x="64" y="123.68" font-size="13" text-anchor="end">X₁</text>
+<rect x="76" y="100" width="38" height="38" rx="3" class="ts-magenta tf-magenta" stroke-width="1" fill-opacity="0.12"/>
+<line x1="88" y1="112" x2="102" y2="126" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<line x1="88" y1="126" x2="102" y2="112" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<rect x="118" y="100" width="38" height="38" rx="3" class="ts-cyan tf-cyan" stroke-width="1.4" fill-opacity="0.3"/>
+<text class="tf-cyan" x="137" y="124.76" font-size="16" text-anchor="middle" font-weight="600">¼</text>
+<rect x="160" y="100" width="38" height="38" rx="3" class="ts-magenta tf-magenta" stroke-width="1" fill-opacity="0.12"/>
+<line x1="172" y1="112" x2="186" y2="126" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<line x1="172" y1="126" x2="186" y2="112" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<rect x="202" y="100" width="38" height="38" rx="3" class="ts-magenta tf-magenta" stroke-width="1" fill-opacity="0.12"/>
+<line x1="214" y1="112" x2="228" y2="126" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<line x1="214" y1="126" x2="228" y2="112" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<text class="tf-dim" x="179" y="48" font-size="13" text-anchor="middle">X₂</text>
+<text class="tf-dim" x="64" y="165.68" font-size="13" text-anchor="end">X₂</text>
+<rect x="76" y="142" width="38" height="38" rx="3" class="ts-magenta tf-magenta" stroke-width="1" fill-opacity="0.12"/>
+<line x1="88" y1="154" x2="102" y2="168" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<line x1="88" y1="168" x2="102" y2="154" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<rect x="118" y="142" width="38" height="38" rx="3" class="ts-magenta tf-magenta" stroke-width="1" fill-opacity="0.12"/>
+<line x1="130" y1="154" x2="144" y2="168" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<line x1="130" y1="168" x2="144" y2="154" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<rect x="160" y="142" width="38" height="38" rx="3" class="ts-cyan tf-cyan" stroke-width="1.4" fill-opacity="0.3"/>
+<text class="tf-cyan" x="179" y="166.76" font-size="16" text-anchor="middle" font-weight="600">⅛</text>
+<rect x="202" y="142" width="38" height="38" rx="3" class="ts-magenta tf-magenta" stroke-width="1" fill-opacity="0.12"/>
+<line x1="214" y1="154" x2="228" y2="168" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<line x1="214" y1="168" x2="228" y2="154" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<text class="tf-dim" x="221" y="48" font-size="13" text-anchor="middle">X₃</text>
+<text class="tf-dim" x="64" y="207.68" font-size="13" text-anchor="end">X₃</text>
+<rect x="76" y="184" width="38" height="38" rx="3" class="ts-magenta tf-magenta" stroke-width="1" fill-opacity="0.12"/>
+<line x1="88" y1="196" x2="102" y2="210" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<line x1="88" y1="210" x2="102" y2="196" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<rect x="118" y="184" width="38" height="38" rx="3" class="ts-magenta tf-magenta" stroke-width="1" fill-opacity="0.12"/>
+<line x1="130" y1="196" x2="144" y2="210" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<line x1="130" y1="210" x2="144" y2="196" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<rect x="160" y="184" width="38" height="38" rx="3" class="ts-magenta tf-magenta" stroke-width="1" fill-opacity="0.12"/>
+<line x1="172" y1="196" x2="186" y2="210" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<line x1="172" y1="210" x2="186" y2="196" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<rect x="202" y="184" width="38" height="38" rx="3" class="ts-cyan tf-cyan" stroke-width="1.4" fill-opacity="0.3"/>
+<text class="tf-cyan" x="221" y="208.76" font-size="16" text-anchor="middle" font-weight="600">⅛</text>
+<text class="tf-magenta" x="158" y="250" font-size="13" text-anchor="middle">跨房间的相干项：解码时切掉</text>
+<line x1="264" y1="140" x2="322.35" y2="140" class="ts-dim" stroke-width="1.8" fill="none"/>
+<path d="M330 140 L321 143.78 L321 136.22Z" class="tf-dim"/>
+<text class="tf-dim" x="297" y="128" font-size="13" text-anchor="middle">解码</text>
+<text class="tf-cyan" x="348" y="123.04" font-size="14">Tr <tspan font-style="italic">σ</tspan> = ½ + ¼ + ⅛ + ⅛ = 1</text>
+<text class="tf-ink" x="348" y="159.4" font-size="15" font-weight="600">输出 = 1 · <tspan font-style="italic">ρ</tspan> = <tspan font-style="italic">ρ</tspan></text>
+</svg>

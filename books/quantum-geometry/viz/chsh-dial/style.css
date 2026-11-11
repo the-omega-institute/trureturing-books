@@ -1,0 +1,6 @@
+/* CHSH//DIAL: the shared lab layout (../assets/theme.css) carries the page. Put here only what belongs to this
+   visualization alone; colours come from the tokens (var(--cyan) …), never from hex values. */
+#cv { cursor: grab; touch-action: none; }
+/* on a phone the three scene buttons share the top row with the title: the title goes below them */
+@media (max-width: 520px) { #stage .hud-tl { top: 46px; } }
+#stage .tag.dim { color: var(--dim); }

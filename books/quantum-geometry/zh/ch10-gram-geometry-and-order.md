@@ -13,7 +13,9 @@
 3. **为什么局部球面坐标卡总显得依赖路径？** 二维基球面 $S^2$ 上的切丛/主圆丛拓扑障碍与三维旋转器球 $S^3$ 全局左不变标架的对比归纳于文献注记 [@rem-hopf-dirac-monopole-literature] 与 [@rem-gram-hairy-ball-literature]；
 4. **什么才是真正的“两两比较，永远一致，顺序无关”？** 当我们保留带标签的**完整复格拉姆内积矩阵** $G_{ij} = \langle\psi_i, \psi_j\rangle$（连同复相位，而非仅仅模平方 $|G_{ij}|^2$）时，无论按什么下标顺序去读取或核对这张两两比较表，它都在差一个公共外围幺正变换 $U$ 的意义下唯一重构出整族量子态的全局几何配置（[@thm-gram-unitary-reconstruction] 与 [@lemma-unit-gram-equality]），而三点循环内积乘积 $\Delta = G_{01}G_{12}G_{20}$ 的复相位本身也直接保存在 $G$ 中（与贝里相位的对照见 [@rem-berry-pancharatnam-holonomy-literature]）！
 
-![球面旋转顺序与贝里立体角、二维球面毛球/霍普障碍与三维旋转器球全局标架，以及完整复格拉姆矩阵的幺正重构](../assets/fig-10-gram-matrix-hairy-ball.svg)
+::: {.figure src="ch10-overview"}
+**图 10。** 本章地图：第 I 栏，从北极 $N$ 出发的两条琥珀色弧，先绕 $Y$ 再绕 $X$ 落到 $+X$，先绕 $X$ 再绕 $Y$ 落到 $-Y$，两个终点相隔 $90^\circ$；第 II 栏，左边球面上青色的小箭头在南北两极缩成零（紫色的圈，文献结果，未在本书形式化），右边虚线的小圆示意旋转器球 $S^3$，处处带着紫色的标架；第 III 栏，[@ex-octant-berry-gram] 中三个态的完整复格拉姆表，青色的格子是两两复内积（[@thm-gram-unitary-reconstruction]）。
+:::
 
 ## 球面转序与贝里立体角 {#sec-spherical-order-and-berry}
 
@@ -33,11 +35,19 @@
   R_y(\pi/2)\,R_x(\pi/2)\,\vv{e}_3 = -\vv{e}_2 \neq \vv{e}_1!
   $$
 
+::: {.viz src="berry-loop" preset="order" height="500"}
+**同样两次转动，换个次序就停在别处。** 从北极出发，先绕 $Y$ 再绕 $X$ 的琥珀色点停在 $+X$，先绕 $X$ 再绕 $Y$ 的停在 $-Y$，两者相隔 $90^\circ$。第二步里两个点都不动，贴在点上的琥珀色箭头却各转了 $90^\circ$。
+:::
+
 同样，取北极投影算子 $P_0 = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$ 与正东赤道投影算子 $P_+ = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$，直接相乘得
 
 $$
 P_0 P_+ = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 0 & 0 \end{pmatrix} \neq \frac{1}{2}\begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix} = P_+ P_0.
 $$
+
+::: {.figure src="ch10-shutter-order"}
+**两道快门换个次序，箭头停在不同的线上。** 画的是态矢所在的实平面，青色的 $\lvert 0\rangle$ 与 $\lvert +\rangle$ 两条线相差 $45^\circ$（在布洛赫球上相差 $90^\circ$）。同一支灰色的 $v$，左栏先投到 $\lvert +\rangle$ 线、再投到 $\lvert 0\rangle$ 线，琥珀色的 $P_0P_+v$ 停在水平线上；右栏次序相反，琥珀色的 $P_+P_0v$ 停在斜线上，而且短得多。
+:::
 
 更进一步，闭合球面回路上的几何和乐与三顶点复内积不变量之间的经典对应关系汇总如下（[@rem-berry-pancharatnam-holonomy-literature]）。
 
@@ -55,6 +65,10 @@ $$
 $$
 
 在每个顶点各自乘上任意局部相位 $\psi_k \mapsto e^{i\alpha_k}\psi_k$ 时严格保持不变（因为 $e^{-i\alpha_0}e^{i\alpha_1}\cdot e^{-i\alpha_1}e^{i\alpha_2}\cdot e^{-i\alpha_2}e^{i\alpha_0} = 1$），而它的复辐角按 $\gamma_B \equiv -\arg\Delta = -\frac{\Omega}{2} \pmod{2\pi}$ 直接编码了球面测地三角形的几何相位（更多微分拓扑文献细节见章末 [@rem-gram-hairy-ball-literature]）。
+:::
+
+::: {.viz src="berry-loop" preset="octant" height="500"}
+**八分之一球。** 青色的回路 $N \to +X \to +Y \to N$ 圈住品红的面积 $\Omega = \frac{\pi}{2}$。琥珀色的箭头沿回路搬运一圈，回到 $N$ 时比虚线的出发方向转了 $\frac{\pi}{2}$；右下角青色的指针是相邻内积连乘积 $\Delta = \frac{1+i}{4}$ 的相位 $\frac{\pi}{4}$，正是这块面积的一半。转角、相位与面积的一般对应是上面的文献结果，未在本书形式化。
 :::
 
 为了精确计算任意纬度圈上两个复旋量的两两内积，在 Lean 模块 `BargmannImaginaryMaximizers` 中，对高度参数 $t \in [0, 1]$ 与复数 $z \in \mathbb{C}$，定义二维复向量 `latitude t z` 为
@@ -77,6 +91,14 @@ $$
 :::
 
 请注意 [@cor-latitude-complex-overlap] 的精确合同：该代数恒等式对任意复数 $z, w \in \mathbb{C}$ 均成立（若要求 $\operatorname{latitude}(t, z)$ 归一化为单位态矢，则当 $t \neq 0$ 时需附加 $|z| = |w| = 1$）。它给出的是两态之间的精确复内积重叠公式，本身并不直接声明微分几何中的贝里平行移动和乐定理（后者见 [@rem-gram-hairy-ball-literature]）。但你看，在赤道 $t = \frac{1}{2}$ 处，取东极 $z = 1$ 与正北偏内极 $w = i$，[@cor-latitude-complex-overlap] 一行就算出两者的复内积为 $\frac{1}{2} + \frac{1}{2}\cdot 1\cdot i = \frac{1 + i}{2} = \frac{1}{\sqrt{2}}e^{i\pi/4}$——那枚八分球立体角的一半 $\frac{\pi}{4}$，从一开始就明明白白地写在两两复内积的相位角里！
+
+::: {.viz src="berry-loop" preset="equator" height="500"}
+**赤道一圈。** 四个顶点 $+X, +Y, -X, -Y$ 都在 $t = \frac{1}{2}$ 的纬度上，按 [@cor-latitude-complex-overlap]，相邻两点的内积都是 $\frac{1+i}{2}$，四个连乘得 $-\frac{1}{4}$，右下角青色的指针停在 $\pi$；品红的面积是整个北半球 $2\pi$。琥珀色的箭头回到 $+X$ 时与虚线重合，看上去没转，箭头旁品红的整圆表示它其实转满了一周。
+:::
+
+::: {.film src="003-two-angles-berry"}
+**正交一次、正交两次：两角寻址与贝里相位（1 分 58 秒）。** 只绕一根轴转，琥珀色的点只画出一个圆；先绕 $\vv{e}_2$ 倾转 $\theta = 60^\circ$、再绕 $\vv{e}_3$ 拧转 $\varphi = 45^\circ$，它落在 $\bigl(\frac{\sqrt{6}}{4}, \frac{\sqrt{6}}{4}, \frac{1}{2}\bigr)$；两根只差 $30^\circ$ 的轴交替转四次也能到达目标（[@thm-two-axis-finite-word]）。随后两次 $90^\circ$ 转动换个次序，分别停在 $+X$ 与 $-Y$；沿八分球回路平行搬运，箭头回来时转过所圈面积 $\Omega = \frac{\pi}{2}$；最后由 [@cor-latitude-complex-overlap] 的 $\frac{1+i}{2}$ 连乘出 $\Delta = \frac{1+i}{4}$，它的相位 $\frac{\pi}{4}$ 在每个态改乘局部相位时纹丝不动（贝里相位与面积的对应见 [@rem-berry-pancharatnam-holonomy-literature]）。
+:::
 
 ## 保留仪器与时间顺序 {#sec-instruments-preserve-order}
 
@@ -157,7 +179,15 @@ $$
    由于 $\langle p, p I_j\rangle_{\mathbb{R}^4} = 0$ 且 $\langle p I_j, p I_k\rangle_{\mathbb{R}^4} = \delta_{jk}$，这三根切向量在整颗 $S^3$ 的每一点处都严格单位正交、处处光滑且**永远不为零**（呼应 $\chi(S^3) = 0$）！（注意：旋转器群 $S^3 \cong \mathrm{SU}(2)$ 到三维旋转群 $\mathrm{SO}(3) \cong \mathbb{RP}^3$ 是二对一双覆盖 $\pm p \mapsto R_p$ 而非同构；且总空间 $S^3$ 的全局可平行化是在 $S^3$ 自身切丛 $TS^3$ 上梳平毛发，并不能替投影映射 $S^3 \to S^2$ 提供横跨纤维的全局截面。）
 :::
 
+::: {.viz src="berry-loop" preset="comb" height="500"}
+**梳不平的一点。** 青色的小箭头是 $v(p) = \vv{e}_3 - (p\cdot\vv{e}_3)p$，竖直方向在切平面上的影子。琥珀色的点从 $+X$ 沿经线向北走，箭头长度 $\sin\theta$ 越来越短，到北极缩成零；紫色圈出的南北两极是这一场仅有的两个零点，指标各为 $+1$（文献结果，未在本书形式化）。
+:::
+
 > 二维球面因降维投射而生出极点奇弦；三维旋转器球因保留完整相位纤维而处处平滑。
+
+::: {.figure src="ch10-gauge-winding"}
+**北极规范的相位绕南极转满一圈，南极上没有它的值。** 从上往下看南半球，南极在中心。两圈纬线上，每个表盘里青色的指针是北极规范代表元 $\psi_N = \bigl(\cos\frac{\theta}{2}, e^{i\varphi}\sin\frac{\theta}{2}\bigr)$ 的 $\langle 1\mid\psi_N\rangle$ 的相位：沿纬线走一圈，指针也转满一圈；内圈离南极更近，仍是一圈，所以紫色虚线圈处的南极取不到值。霍普夫丛没有全局截面是文献结果，未在本书形式化（[@rem-hopf-dirac-monopole-literature]）。
+:::
 
 ## 完整复格拉姆矩阵重构 {#sec-complex-gram-reconstruction}
 
@@ -173,6 +203,10 @@ $$
 
 - 在计算任意一项 $G_{ij} = \langle\psi_i, \psi_j\rangle$ 时，只是拿第 $i$ 个态与第 $j$ 个态做一次两两内积比量；你先算 $(1, 2)$ 还是先算 $(0, 2)$，或者把状态标签整体重排（对应 $G \mapsto P^* G P$），表里的每一条两两关系都丝毫不随读取顺序而变；
 - 更关键的是，下面的冻结定理证明：**这张两两内积表 $A^* A$ 已经完备地锁死了整族态矢在希尔伯特空间中的全部刚体几何！** 任何另一组态矢 $B \in \mathbb{C}^{m \times n}$，只要它给出的两两复内积表与 $A$ 完全一致（$B^* B = A^* A$），就必然存在外围空间 $\mathbb{C}^m$ 上的**同一个公共幺正变换** $U \in U(m)$，把 $A$ 中的每一根态矢同时刚体旋转为 $B$ 中的对应态矢（$B = UA$）！
+
+::: {.figure src="ch10-common-turn"}
+**两两内积表相同，就只差一个公共的转动。** 灰色的三角形 $A$ 连着 $N, +X, +Y$（[@ex-octant-berry-gram] 的三个态），墨色的三角形 $B = UA$（$U = \operatorname{diag}(1, i)$）连着 $N, +Y, -X$；两支紫色的弧箭头是同一个绕竖轴 $90^\circ$ 的转动，它把整块三角形刚性地搬过去，两组态的复格拉姆矩阵逐项相等（[@thm-gram-unitary-reconstruction]）。
+:::
 
 ::: {.theorem #thm-gram-unitary-reconstruction title="复格拉姆矩阵相等下的公共外围幺正重构定理" lean="D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq"}
 设 $m$ 为具有可判等性的有限指标类型（`Fintype m`、`DecidableEq m`），$n$ 为任意有限指标类型（`Finite n`）。对任意两个复矩阵 $B, A \in M_{m \times n}(\mathbb{C})$，若它们的复格拉姆矩阵相等：
@@ -253,6 +287,14 @@ $$
 3. **主动旋转与投影快门的非对易性**：在 $\mathbb{R}^3$ 中，$R_x(\pi/2)R_y(\pi/2)\vv{e}_3 = \vv{e}_1$，而 $R_y(\pi/2)R_x(\pi/2)\vv{e}_3 = -\vv{e}_2$；在 $M_2(\mathbb{C})$ 中，$P_0 P_+ \neq P_+ P_0$。
 4. **静态效应与序贯测量的分离**：按 [@prop-static-sequential-separation]，取 $K_0 = P_0$、$K_1 = I - P_0$ 及 $L_j = X K_j$。两者的静态效应元完全相同（$K_j^* K_j = L_j^* L_j = P_j$）；但从初态 $\rho = P_0$ 出发、第一步测得结果 $0$ 后再测 $P_1 = I - P_0$，未归一化联合玻恩权重对仪器 $K$ 为 $0$，对仪器 $L$ 却为 $1$。
 5. **毛球零点指标与旋转器全局标架核对**：在 $S^2$ 上，切向量场 $v(p) = \vv{e}_3 - (p\cdot\vv{e}_3)p$ 在 $p = \vv{e}_1$ 处取 $v(\vv{e}_1) = \vv{e}_3$，仅在南北两极 $p = \pm\vv{e}_3$ 处为零，两个孤立零点指标各为 $+1$，总和为 $2 = \chi(S^2)$；而在单位四元数/旋转器球 $S^3$ 上，$(pI_x, pI_y, pI_z)$ 构成处处非零的全局正交切标架。
+:::
+
+::: {.viz src="berry-loop" preset="reverse" height="500"}
+**反着走，手性翻转。** 同一个三角形改走 $N \to +Y \to +X \to N$：品红的面积一样大，琥珀色的箭头却往另一边转 $\frac{\pi}{2}$，右下角青色的指针停在 $-\frac{\pi}{4}$。三个相邻内积的模平方仍然都是 $\frac{1}{2}$：只看模平方，分不出这两种走法。
+:::
+
+::: {.viz src="berry-loop" height="560"}
+完整实验室：拖动青色的顶点、在边上加点或反着走，比较品红的面积、琥珀色箭头的转角与右下角青色指针的相位；也可以切到“转序”与“梳毛”两个场景。
 :::
 
 ### 无时间诠释：格拉姆几何如何约束因果相容空间？ {#sec-timeless-gram-causality}

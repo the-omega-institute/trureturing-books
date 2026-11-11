@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="CHSH//DIAL · The CHSH angle dial">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CHSH//DIAL CHSH 角度盘</title>
+<meta name="description" content="Alice 与 Bob 在同一张角度盘上各摆两个测量方向，贝尔态上的 CHSH 值是四个夹角余弦的加减。四个余弦叠起来，可以越过经典上界 2，却越不过这一组方向的天花板 √(4 + 4 sin α sin β)，而天花板最高只到 2√2：两侧都张成直角、Bob 的十字架再转 45° 时到达。每个隐方向各自给出 +2 或 −2 的经典模型，怎么转都出不了 2。On one dial Alice and Bob each set two measurement directions; on the Bell state the CHSH value adds and subtracts the cosines of four angles. Stacked up, the four cosines can pass the classical bound 2, but never the ceiling √(4 + 4 sin α sin β) of the chosen directions, and that ceiling tops out at 2√2: reached when both sides open a right angle and Bob's cross is turned by 45°. A classical model in which every hidden direction gives +2 or −2 never leaves 2, however the directions turn.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="chsh-dial">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="CHSH//DIAL">CHSH<b>//</b>DIAL</h1>
+      <div class="tagline">
+        <span class="zh">CHSH 角度盘 · <em>四个余弦叠起来能越过 2，却越不过两侧张开的面积给的天花板；经典的隐方向怎么转都停在 2</em></span>
+        <span class="en">The CHSH angle dial · <em>four cosines stack past 2 but never past the ceiling set by the areas the two sides open; classical hidden directions stay at 2 however they turn</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillScene"><span class="zh">场景</span><span class="en">SCENE</span> <strong>—</strong></span>
+      <span class="pill hot" id="pillKey"><span id="pillKeyName"></span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="collinear" aria-pressed="false"><span class="code">COLLINEAR</span><span class="cn zh">Alice 的两个方向重合：怎么转都到不了 2 之上</span><span class="cn en">Alice's two directions coincide: no turn gets above 2</span></button>
+        <button class="preset" data-preset="sixty" aria-pressed="false"><span class="code">60° · 60°</span><span class="cn zh">两侧各张 60°：越过 2，天花板 √7</span><span class="cn en">Both sides open 60°: past 2, ceiling √7</span></button>
+        <button class="preset" data-preset="cross" aria-pressed="false"><span class="code">CROSS · 0°</span><span class="cn zh">两侧都张成直角，Bob 的十字架摆错了位置</span><span class="cn en">Both sides open a right angle, Bob's cross in the wrong place</span></button>
+        <button class="preset" data-preset="sweep" aria-pressed="false"><span class="code">TURN BOB</span><span class="cn zh">转动 Bob 的十字架：只在 45° 碰到顶</span><span class="cn en">Turn Bob's cross: it touches the top only at 45°</span></button>
+        <button class="preset" data-preset="tsirelson" aria-pressed="false"><span class="code">45° · 2√2</span><span class="cn zh">Bob 转过 45°：四个余弦叠到 2√2</span><span class="cn en">Bob turned by 45°: the four cosines stack to 2√2</span></button>
+        <button class="preset" data-preset="hidden" aria-pressed="false"><span class="code">HIDDEN ±2</span><span class="cn zh">360 个隐方向，每个只给 +2 或 −2</span><span class="cn en">360 hidden directions, each giving only +2 or −2</span></button>
+        <button class="preset" data-preset="arc" aria-pressed="false"><span class="code">ARC · LINE</span><span class="cn zh">余弦弧高出折线的四段，累加成 2√2 − 2</span><span class="cn en">Four stretches where the arc clears the line add up to 2√2 − 2</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">两侧的张角</span><span class="en">The two openings</span><span class="aside">α · β</span></h2>
+      <div class="field">
+        <label for="alpha"><span class="zh">Alice 的张角 α</span><span class="en">Alice's opening α</span><small class="zh">A₁ 相对 A₀ 转过的角</small><small class="en">how far A₁ is turned from A₀</small></label><output id="oAlpha" for="alpha">90°</output>
+        <input type="range" id="alpha" min="-180" max="180" step="1" value="90">
+      </div>
+      <div class="field">
+        <label for="beta"><span class="zh">Bob 的张角 β</span><span class="en">Bob's opening β</span><small class="zh">B₁ 相对 B₀ 反向转过的角</small><small class="en">how far B₁ is turned back from B₀</small></label><output id="oBeta" for="beta">90°</output>
+        <input type="range" id="beta" min="-180" max="180" step="1" value="90">
+      </div>
+      <p class="note"><span class="zh">时间轴转动 Bob 的一对方向（B₀ 的方向 φ，B₁ 跟着转）。也可以直接拖动盘上任何一支箭头。</span><span class="en">The rail turns Bob's pair (B₀ points at φ and B₁ follows). You can also drag any arrow on the dial.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="舞台：角度盘上 Alice 的两支实线箭头与 Bob 的两支虚线箭头、两侧张开的品红面积；右边一根量尺，青色的四段是四个余弦的加减，琥珀色的横线是 CHSH 值，虚线是经典上界 2，品红的刻度是这组方向的天花板" data-aria-en="Stage: on the dial, Alice's two solid arrows and Bob's two dashed arrows with the magenta areas each pair opens; on the right a gauge where four cyan steps add and subtract the cosines, the amber bar is the CHSH value, the dashed line is the classical bound 2 and the magenta mark is the ceiling of these directions">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+        <button class="chip" data-scene="dial" aria-pressed="true"><span class="zh">角度盘</span><span class="en">Dial</span></button>
+        <button class="chip" data-scene="hidden" aria-pressed="false"><span class="zh">隐方向</span><span class="en">Hidden</span></button>
+        <button class="chip" data-scene="arc" aria-pressed="false"><span class="zh">弧与折线</span><span class="en">Arc</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="plotTitle"></h2><span id="plotMeta"></span></div>
+        <canvas id="plot" aria-label="转动 Bob 的一对方向时 CHSH 值的变化" data-aria-en="The CHSH value as Bob's pair turns"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro" id="ro"></dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">有限纤维、非负且总和为 1 的权重、每个纤维上两张 ±1 应答表：经典 CHSH 值的绝对值不超过 2。“隐方向”场景里 360 个隐方向、每个权重 1/360 的模型正是这样一个模型。已冻结：</span><span class="en">A finite fiber, non-negative weights summing to 1, and on each fiber two ±1 answer tables per side: the classical CHSH value has absolute value at most 2. The model of the hidden scene, 360 hidden directions of weight 1/360 each, is exactly such a model. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumBounds/ClassicalFiberBound.classical_chsh_abs_le_two" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumBounds/ClassicalFiberBound.lean" target="_blank" rel="noopener"><code>classical_chsh_abs_le_two</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">四个测量算子厄米且平方为 1，若一侧的两个可交换，则 S² = 4I。盘上 Alice 的两个方向重合（或反向）时就是这种情形，品红的刻度落在 2。已冻结：</span><span class="en">For four Hermitian measurement operators squaring to 1, if one side's two commute then S² = 4I. On the dial this is the case when Alice's two directions coincide (or are opposite), and the magenta mark sits at 2. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LandauCommutingCollapse.chsh_square_eq_four_of_local_pair_commutes" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumBounds/LandauCommutingCollapse.lean" target="_blank" rel="noopener"><code>chsh_square_eq_four_of_local_pair_commutes</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">若换位子项 C 的实谱落在 {N, −N} 上（0 &lt; N &lt; 4），S 的实谱落在 ±√(4 + N)、±√(4 − N) 四点上。盘上 N = 4 |sin α sin β|（第十三章的手算），品红的刻度画在 ±√(4 + N)。已冻结：</span><span class="en">If the real spectrum of the commutator term C lies in {N, −N} (0 &lt; N &lt; 4), the real spectrum of S lies on the four points ±√(4 + N), ±√(4 − N). On the dial N = 4 |sin α sin β| (worked by hand in Chapter 13), and the magenta marks sit at ±√(4 + N). Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumBounds/CHSHSpectrum.chsh_spectrum" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumBounds/CHSHSpectrum.lean" target="_blank" rel="noopener"><code>chsh_spectrum</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">固定算子 Z ⊗ B₀ + Z ⊗ B₁ + X ⊗ B₀ − X ⊗ B₁、B₀,₁ = (Z ± X)/√2，在全体双比特态上的期望值以 2√2 为最大元。这正是卡 45° · 2√2 的四个方向。已冻结：</span><span class="en">The fixed operator Z ⊗ B₀ + Z ⊗ B₁ + X ⊗ B₀ − X ⊗ B₁ with B₀,₁ = (Z ± X)/√2 has 2√2 as the greatest expectation value over all two-qubit states. These are exactly the four directions of the card 45° · 2√2. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumBounds/TsirelsonTightness.bell_chsh_state_expectation_is_greatest" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumBounds/TsirelsonTightness.lean" target="_blank" rel="noopener"><code>bell_chsh_state_expectation_is_greatest</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">有限维幺正策略的贝尔值不超过 2/sin(π/(2d))。取 d = 2、再对 A₀、A₁ 同时取负（第十三章的手工推导），任意四个厄米对合观测量的 |⟨S⟩| ≤ 2√2：量尺顶上那条线。已冻结：</span><span class="en">The Bell value of a finite-dimensional unitary strategy is at most 2/sin(π/(2d)). Taking d = 2 and negating A₀ and A₁ together (a manual step in Chapter 13) gives |⟨S⟩| ≤ 2√2 for any four Hermitian involutions: the line at the top of the gauge. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumBounds/PeritoTsirelson.bell_value_le" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumBounds/PeritoTsirelson.lean" target="_blank" rel="noopener"><code>bell_value_le</code></a></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">贝尔态 |Φ⁺⟩ 上同平面两方向的关联 cos(夹角)、四个余弦的加减、√(4 + N)，以及“转动 Bob 的一对方向，⟨S⟩ 的最大值恰为 √(4 + N)”，都是页面实时算出的数，与第十三章的手算一致。这是数值演示，不是证明。</span><span class="en">The correlation cos(angle) of two coplanar directions on the Bell state |Φ⁺⟩, the four cosines added and subtracted, √(4 + N), and the fact that turning Bob's pair lifts ⟨S⟩ at most to √(4 + N) are numbers computed live by the page, matching the hand calculations of Chapter 13. A numerical illustration, not a proof.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">“隐方向”与“弧与折线”两个场景的经典模型是第十三章的均匀隐方向玩具模型（每人输出 sgn(方向 · 隐方向)），这里取 360 个等距隐方向。它只是一个经典模型，不代表所有经典模型。</span><span class="en">The classical model of the hidden and arc scenes is the uniform hidden-direction toy model of Chapter 13 (each side outputs sgn(direction · hidden direction)), here with 360 equally spaced hidden directions. It is one classical model, not all of them.</span></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">任意隐变量测度与取值于 [−1, 1] 的随机应答下的 |S| ≤ 2（CHSH，1969），以及无穷维、只要求对易的 Tsirelson 界（Cirel'son，1980）：文献结果，未在本书形式化。</span><span class="en">|S| ≤ 2 for any hidden-variable measure and random answers in [−1, 1] (CHSH, 1969), and the Tsirelson bound in infinite dimensions with commuting observables only (Cirel'son, 1980): literature results, not formalized in this book.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="时间轴：Bob 一对方向的转角 φ" data-aria-en="Rail: the turn φ of Bob's pair">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> <span class="zh">场景</span><span class="en">scenes</span> · <span class="zh">拖动箭头改方向</span><span class="en">drag an arrow to turn it</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">两颗量子比特处在贝尔态 |Φ⁺⟩ = (|00⟩ + |11⟩)/√2。Alice 与 Bob 各在 (Z, X) 平面里摆两个测量方向，角度从 Z 轴量起（盘上向上是 Z，向右是 X）。页面上的每个数都实时算出；本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>四个余弦。</b>同平面两个方向 a、b 的关联是 E = ⟨Φ⁺|(a·σ) ⊗ (b·σ)|Φ⁺⟩ = cos(a − b)（第十三章 §贝尔态的手算）。CHSH 值 ⟨S⟩ = E₀₀ + E₀₁ + E₁₀ − E₁₁。量尺上青色的四段就是这四项，从 0 依次往上（或往下）叠，最后停在琥珀色的横线上。</li>
+        <li><b>两块面积。</b>Alice 的两个方向张开 α，Bob 的张开 β；品红的菱形是两支箭头（缩到 0.55）张成的平行四边形，面积正比于 |sin α| 与 |sin β|。由 Landau 恒等式 S² = 4I − [A₀, A₁] ⊗ [B₀, B₁] 与泡利乘法，换位子项的谱是 ±N，N = 4 |sin α sin β|（手工推导）。0 &lt; N &lt; 4 时，冻结命题把 S 的谱关进 ±√(4 + N)、±√(4 − N)；N = 0 时 S² = 4I；N = 4 时手算得谱 {±2√2, 0}。品红的刻度画在 ±√(4 + N)。</li>
+        <li><b>转动 Bob。</b>时间轴把 Bob 的一对方向整体转动 φ。把四项写成 Re(e^{iφ} Z̄)，Z = e^{ia₀} + e^{i(a₀+β)} + e^{ia₁} − e^{i(a₁+β)}，|Z|² = 4 + 4 sin α sin β：转一整圈，琥珀色的横线的最高与最低正好是 ±√(4 + 4 sin α sin β)。sin α 与 sin β 同号时，它正好碰到外侧的品红刻度 ±√(4 + N)；异号时只碰到内侧的点线 ±√(4 − N)（页面的数值核对；它说的只是贝尔态上的同平面方向）。</li>
+        <li><b>天花板。</b>|sin α sin β| ≤ 1，所以品红的刻度最高到 √8 = 2√2：两侧都张成直角时。这时还要 Bob 的十字架转 45°，四个夹角成为 45°、45°、45° 与 135°，⟨S⟩ = 4/√2 = 2√2。冻结推论说这组固定方向在所有双比特态上最多就是 2√2；冻结定理取 d = 2（手工推导）说任何有限维的四个厄米对合观测量都超不过它。</li>
+        <li><b>隐方向。</b>经典的对手：每对粒子带一个隐方向 λ，Alice 输出 sgn(a·λ)，Bob 输出 sgn(b·λ)（值为 0 时记作 +1）。页面取 λ = 0.5°, 1.5°, …, 359.5°，权重各 1/360。每个隐方向上的 CHSH 值都是 ±2（第十三章十六张应答表），环上青色的刻度是 +2，品红的是 −2；平均值就是这个经典模型的 CHSH 值。它是一个有限确定性纤维模型，冻结定理保证它出不了 [−2, 2]。两侧都张成直角时，Bob 的十字架在 0° 到 90° 之间怎么转，360 个隐方向都给 +2，平均值钉在 2。</li>
+        <li><b>弧与折线。</b>横轴是两方向的夹角（0° 到 180°）。青色的弧是 cos，暗色的折线是隐方向模型的关联，夹角为整数度时恰为 1 − 2θ/π。四个夹角各落一对点；品红的竖段是弧高出（或低于）折线的部分。在 0°、90°、180° 两者重合；在 45° 与 135°，四段之差加起来是 2√2 − 2 ≈ 0.828。这条折线只属于这个玩具模型。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch13-entanglement-and-chsh.html#sec-chsh-commutator-area" target="_top">第十三章 · CHSH 平方：正交面积的换位子项</a> · <a href="../../zh/ch13-entanglement-and-chsh.html#ex-chsh-spectrum-angle-table" target="_top">五组夹角下的面积参数 N</a> · <a href="../../zh/ch13-entanglement-and-chsh.html#sec-bell-45-tsirelson" target="_top">45° 余弦与固定 CHSH 极值</a> · <a href="../../zh/ch13-entanglement-and-chsh.html#ex-bell-chsh-45deg" target="_top">余弦圆弧手算全表</a> · <a href="../../zh/ch13-entanglement-and-chsh.html#rem-bell-chsh-literature" target="_top">文献注记</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">Two qubits are in the Bell state |Φ⁺⟩ = (|00⟩ + |11⟩)/√2. Alice and Bob each set two measurement directions in the (Z, X) plane, with angles measured from the Z axis (up on the dial is Z, right is X). Every number on the page is computed live; the page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>Four cosines.</b> Two coplanar directions a and b have the correlation E = ⟨Φ⁺|(a·σ) ⊗ (b·σ)|Φ⁺⟩ = cos(a − b) (worked by hand in Chapter 13, on Bell states). The CHSH value is ⟨S⟩ = E₀₀ + E₀₁ + E₁₀ − E₁₁. The four cyan steps on the gauge are these four terms, stacked up (or down) from 0, ending at the amber bar.</li>
+        <li><b>Two areas.</b> Alice's two directions open an angle α and Bob's open β; each magenta rhombus is the parallelogram of two arrows (scaled to 0.55), with area proportional to |sin α| and |sin β|. From Landau's identity S² = 4I − [A₀, A₁] ⊗ [B₀, B₁] and Pauli multiplication, the commutator term has spectrum ±N with N = 4 |sin α sin β| (a manual step). For 0 &lt; N &lt; 4 the frozen proposition confines the spectrum of S to ±√(4 + N), ±√(4 − N); at N = 0, S² = 4I; at N = 4 a hand calculation gives the spectrum {±2√2, 0}. The magenta marks sit at ±√(4 + N).</li>
+        <li><b>Turning Bob.</b> The rail turns Bob's pair as a whole by φ. Writing the four terms as Re(e^{iφ} Z̄) with Z = e^{ia₀} + e^{i(a₀+β)} + e^{ia₁} − e^{i(a₁+β)} gives |Z|² = 4 + 4 sin α sin β: over a full turn the amber bar reaches exactly ±√(4 + 4 sin α sin β). When sin α and sin β have the same sign it touches the outer magenta marks ±√(4 + N); when they differ it touches only the inner dotted marks ±√(4 − N) (a numerical check by the page; it concerns coplanar directions on the Bell state only).</li>
+        <li><b>The ceiling.</b> |sin α sin β| ≤ 1, so the magenta mark reaches at most √8 = 2√2, when both sides open a right angle. Bob's cross must then also be turned by 45°: the four angles become 45°, 45°, 45° and 135°, and ⟨S⟩ = 4/√2 = 2√2. The frozen corollary says this fixed set of directions gives at most 2√2 over all two-qubit states; the frozen theorem with d = 2 (a manual step) says no four Hermitian involutions in finite dimension do better.</li>
+        <li><b>Hidden directions.</b> The classical opponent: each pair carries a hidden direction λ; Alice outputs sgn(a·λ) and Bob sgn(b·λ) (a value of 0 counts as +1). The page takes λ = 0.5°, 1.5°, …, 359.5°, each with weight 1/360. On every hidden direction the CHSH value is ±2 (the sixteen answer tables of Chapter 13); cyan ticks on the ring are +2, magenta ones −2, and their mean is the CHSH value of this classical model. It is a finite deterministic fiber model, so the frozen theorem keeps it inside [−2, 2]. With both sides at right angles, however Bob's cross turns between 0° and 90°, all 360 hidden directions give +2 and the mean stays pinned at 2.</li>
+        <li><b>Arc and line.</b> The horizontal axis is the angle between two directions (0° to 180°). The cyan arc is cos; the dark polyline is the correlation of the hidden-direction model, exactly 1 − 2θ/π at whole degrees. Each of the four angles drops a pair of points, and the magenta segment is where the arc clears (or dips below) the line. They meet at 0°, 90° and 180°; at 45° and 135° the four gaps add up to 2√2 − 2 ≈ 0.828. The polyline belongs to this toy model only.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch13-entanglement-and-chsh.html#sec-chsh-commutator-area" target="_top">Chapter 13 · The CHSH square: its commutator area term</a> · <a href="../../en/ch13-entanglement-and-chsh.html#ex-chsh-spectrum-angle-table" target="_top">the area parameter N at five angle pairs</a> · <a href="../../en/ch13-entanglement-and-chsh.html#sec-bell-45-tsirelson" target="_top">the 45° cosine and the fixed CHSH maximum</a> · <a href="../../en/ch13-entanglement-and-chsh.html#ex-bell-chsh-45deg" target="_top">the cosine-arc checklist</a> · <a href="../../en/ch13-entanglement-and-chsh.html#rem-bell-chsh-literature" target="_top">literature remark</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

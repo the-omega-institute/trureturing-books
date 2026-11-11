@@ -18,6 +18,10 @@ $$
 
 Before this six-symbol identity, wave–particle duality, the Robertson–Schrödinger uncertainty relation, double-slit interference, Wheeler's delayed-choice experiment, and the five disconnected postulates of textbook quantum mechanics all collapse into a single elementary geometric law: **Pythagorean conservation $\cos^2\theta + \sin^2\theta = 1$ between the cosine particle line and the sine wave area**.
 
+::: {.figure src="ch06-overview"}
+**Figure 6.** The chapter at a glance. Panel I: the cyan shadow of the amber $\vv{B}$ on $\vv{A}$ is $\cos\theta$, and the magenta parallelogram they span is $\sin\theta$. Panel II: the quarter circle $D^2 + V^2 = 1$; the amber point at $\alpha = 60^\circ$ is made of the magenta $D \approx 0.87$ and the cyan $V = 0.5$, and the ends of the arc are “path only” and “fringes only” ([@thm-record-coherence-complementarity]). Panel III: the $\rho$ of [@ex-wheeler-delayed-choice-tradeoff] at $\alpha = 60^\circ$; its cyan diagonal part $\Pi(\rho)$ and magenta off-diagonal part $\rho - \Pi(\rho)$ are the two legs of a right triangle whose hypotenuse is $\rho$ ([@cor-pinching-pythagorean]).
+:::
+
 ## 6.1 Why Is the Inner Product $\vv{A}\cdot\vv{B}$ the "Particle" and the Exterior Product $\vv{A}\wedge\vv{B}$ the "Wave"? {#sec-inner-particle-outer-wave}
 
 Follow the author's intuition as we place the meeting of two quantum states under a geometric magnifying glass:
@@ -36,6 +40,10 @@ Adding the symmetric collinear particle part and the antisymmetric orthogonal wa
 $$
 \vv{A}\vv{B} = \underbrace{\frac{\vv{A}\vv{B} + \vv{B}\vv{A}}{2}}_{\vv{A}\cdot\vv{B}\text{ (collinear particle scalar)}} + \underbrace{\frac{\vv{A}\vv{B} - \vv{B}\vv{A}}{2}}_{\vv{A}\wedge\vv{B}\text{ (orthogonal wave bivector)}}.
 $$
+
+::: {.figure src="ch06-swap"}
+**Swap the order: the line stays, the area flips.** Both panels show the same two unit arrows, $\vv{A}$ and the amber $\vv{B}$. The cyan shadows are equally long, $\vv{A}\cdot\vv{B} = \vv{B}\cdot\vv{A} = \cos\theta$, and the magenta parallelograms are equally large, but the violet curved arrows turn opposite ways: $\vv{A}\wedge\vv{B} = +\sin\theta\,\vv{I}$ on the left, $\vv{B}\wedge\vv{A} = -\sin\theta\,\vv{I}$ on the right. The symmetric half keeps the line; the antisymmetric half keeps the oriented area.
+:::
 
 Why does the author remark, *"Then area and line, wave and particle, are in essence a single field"*? Because no inner-product line exists in isolation from its exterior wedge area, and no wedge area floats free of its inner-product line — they are simply **the grade-0 scalar slice and the grade-2 bivector slice of one and the same multivector field $\vv{A}\vv{B}$**! Read out diagonal populations alone, and you see the cosine line $\cos\theta$; recombine two branches in an interferometer, and you see the sine bivector area $\sin\theta\,\vv{I}$.
 
@@ -81,7 +89,9 @@ $$
 
 For unit vectors ($\|\vv{u}\| = \|\vv{v}\| = 1$), this is literally $\cos^2\theta + \sin^2\theta = 1$; and because the sum of squares $\|\vv{u}\wedge\vv{v}\|^2 \ge 0$ on the right is manifestly nonnegative, dropping it immediately yields the Cauchy–Schwarz inequality $(\vv{u}\cdot\vv{v})^2 \le \|\vv{u}\|^2\|\vv{v}\|^2$ — **the nonnegative "slack" in the Cauchy–Schwarz inequality is nothing other than the squared exterior bivector area $\|\vv{u}\wedge\vv{v}\|^2$!**
 
-![Decomposition of the geometric product AB = A·B + A∧B into particle inner line and wave wedge area, the Pythagorean complementarity circle D² + V² = 1, and the Hilbert–Schmidt orthogonal pinching split](../assets/fig-06-geometric-product-pythagoras.svg)
+::: {.figure src="ch06-gram-deficit"}
+**The gap in Cauchy–Schwarz is the square of the area.** Left: the grey $\vv{u}$ and the amber $\vv{v}$ span a magenta parallelogram of area $\lvert\vv{u}\wedge\vv{v}\rvert$. Right: a right triangle with legs $\lvert\vv{u}\cdot\vv{v}\rvert$ and $\lvert\vv{u}\wedge\vv{v}\rvert$ and hypotenuse $\lvert\vv{u}\rvert\lvert\vv{v}\rvert$; the cyan square $(\vv{u}\cdot\vv{v})^2$ and the magenta square $\lvert\vv{u}\wedge\vv{v}\rvert^2$ together make exactly the square $\lvert\vv{u}\rvert^2\lvert\vv{v}\rvert^2$ on the hypotenuse ([@thm-lagrange-gram-identity]).
+:::
 
 Now lift this exact Lagrange–Gram decomposition into a complex inner-product space $E$ (Lean module `QuantumBounds/RobertsonSchrodinger`). For any two vectors $u, v \in E$, the helper theorem [`gram_wedge_identity`](lean:D5/S3/QuantumBounds/RobertsonSchrodinger.gram_wedge_identity) proves that the product of squared norms splits into the squared modulus of the complex inner product plus a nonnegative Gram wedge defect $G := \|u\|^2\|v\|^2 - \|\langle u, v\rangle_{\mathbb{C}}\|^2 \ge 0$:
 
@@ -197,10 +207,18 @@ Equipped with this Pythagorean decomposition, let us step into the **double-slit
 
 When a quantum passes through a left path $\lvert L\rangle$ and a right path $\lvert R\rangle$ while an environmental register (or which-way detector) couples to the two paths, the left branch prepares a unit environmental record vector $r_L \in E$ ($\|r_L\| = 1$) and the right branch prepares a unit environmental record vector $r_R \in E$ ($\|r_R\| = 1$).
 
+::: {.figure src="ch06-three-markers"}
+**The two marker arrows decide whether the screen shows fringes.** On the left of each row are the marker arrows, grey $r_L$ and amber $r_R$; on the right, the distribution of hits on the screen. No marker ($\alpha = 0$): the arrows coincide and the screen shows cyan fringes at full contrast. Path marker ($\alpha = 90^\circ$): the arrows are perpendicular, the magenta vertical is the distinguishability $D = 1$, and the screen shows a single bump without fringes. Erased marker: the arrows are still perpendicular, but the marker is read along the violet diagonals; sorting by that reading gives two rows, cyan fringes and dashed anti-fringes half a fringe apart, which add up to the same bump. The envelope is schematic.
+:::
+
 Examine the complex overlap $c := \langle r_L, r_R\rangle_{\mathbb{C}}$ between the two environmental record arrows:
 
 - **Coherence visibility** $V := \|c\| = |\langle r_L, r_R\rangle_{\mathbb{C}}| = \cos\alpha \in [0, 1]$ is the **inner-product cosine** measuring how collinear the two environmental records remain;
 - **Record distinguishability** $D := \sqrt{1 - V^2} = \sin\alpha \in [0, 1]$ is the **exterior-product sine area** measuring how orthogonally separated the two records are!
+
+::: {.viz src="double-slit-marker" preset="partial" height="500"}
+**The marker turned by $60^\circ$.** In the circle on the right the amber arrow $r_R$ makes an angle $\alpha = 60^\circ$ with the horizontal $r_L$: the cyan shadow is the visibility $V = \cos\alpha = 0.5$, the magenta height the distinguishability $D = \sin\alpha \approx 0.87$, and the point is on the circle. On the screen to the left the hits still pile up into fringes, but the dark fringes are no longer black and the cyan band is half as thick.
+:::
 
 In the Lean module `Quantum/PureState/RecordCoherenceComplementarity`, the following theorem proves the exact Pythagorean conservation law $D^2 + V^2 = 1$ together with the extreme particle and wave endpoints.
 
@@ -222,6 +240,10 @@ Then all five complementarity statements hold:
 
 ::: proof
 By the Cauchy–Schwarz inequality and $\|r_L\| = \|r_R\| = 1$, we have $0 \le V = \|\langle r_L, r_R\rangle_{\mathbb{C}}\| \le \|r_L\|\|r_R\| = 1$, so $1 - V^2 \ge 0$. Squaring $D = \sqrt{1 - V^2}$ gives $D^2 = 1 - V^2$, hence $D^2 + V^2 = 1$ (claim 1). If $c = 0$, then $V = \|0\| = 0$ and $D = \sqrt{1 - 0} = 1$ (claim 2). If $V = 1$, then $D = \sqrt{1 - 1^2} = 0$ (claims 3 and 5). Conversely, if $D = 1$, then claim 1 implies $1 + V^2 = 1$, so $V^2 = 0 \implies V = \|c\| = 0 \implies c = 0$, whence $c \cdot a = 0 \cdot a = 0$ for every $a \in \mathbb{C}$ (claim 4). The full proof is checked by the Lean kernel.
+:::
+
+::: {.viz src="double-slit-marker" preset="which" height="500"}
+**Orthogonal markers, no fringes.** At $\alpha = 90^\circ$ the arrows are square: the cyan shadow shrinks to nothing, the magenta height reaches the top, and the point sits at the highest point of the circle (property 2 of [@thm-record-coherence-complementarity]). The hits on the screen pile up into a hump without fringes.
 :::
 
 Simultaneously, on the $2\times 2$ qubit density matrix $\rho \in M_2(\mathbb{C})$ (recalling [@thm-pinching-pythagorean] from [Chapter 4](ch04-decoherence.md)), standard-basis pinching $\Pi(\rho)$ ([`pinching`](lean:D5/S3/QuantumChannels/Pinching.pinching)) decomposes $\rho$ into a diagonal particle part $\Pi(\rho)$ and an off-diagonal wave residual $\rho - \Pi(\rho)$ that are strictly orthogonal under the Hilbert–Schmidt inner product ([`hilbertSchmidtInner`](lean:D5/S3/QuantumChannels/Pinching.hilbertSchmidtInner), [`pinching_hilbert_schmidt_orthogonal`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_orthogonal)):
@@ -264,6 +286,14 @@ Evaluating [@thm-record-coherence-complementarity] and [@cor-pinching-pythagorea
 Nothing in Wheeler's delayed choice reaches backward in time: prior to the final measurement, the joint state $\frac{1}{\sqrt{2}}(\lvert 0\rangle\lvert r_L\rangle + \lvert 1\rangle\lvert r_R\rangle)$ is a single unified geometric-product field containing both diagonal populations and off-diagonal coherence blocks; choosing whether to read out orthogonal which-way records or recombine the beams at the exit port simply chooses **whether to project that field onto its diagonal particle line or preserve its transverse bivector area**!
 :::
 
+::: {.viz src="double-slit-marker" preset="delayed" height="500"}
+**Hits first, reading later.** At $\alpha = 90^\circ$ the marker is read for the path only after every hit has landed: the same hits are copied into a “left” and a “right” row, and both magenta rows are humps without fringes.
+:::
+
+::: {.viz src="double-slit-marker" preset="erase" height="500"}
+**The same hits, read another way.** The very same hits, but now the marker is read to erase: one cyan row shows fringes, the other anti-fringes shifted by half a period, and together they are still the hump above. The later choice moves no hit on the screen; it only decides how they are sorted.
+:::
+
 ::: {.remark #rem-englert-greenberger-literature title="Wootters–Zurek, Greenberger–Yasin, and Englert Wave–Particle Duality Inequalities (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** In this chapter, [@thm-record-coherence-complementarity] proves the exact pure-record equality $D^2 + V^2 = 1$ where $V = |\langle r_L, r_R\rangle|$ and $D = \sqrt{1 - V^2}$ is defined from the unit record overlap. In the interferometry literature, the historical development and mixed-state generalizations proceed through three landmarks:
 
@@ -278,8 +308,16 @@ Nothing in Wheeler's delayed choice reaches backward in time: prior to the final
 Englert's trace-distance inequality for general mixed environmental states is cited from the physics literature and is not claimed in the book's Lean verification ledger.
 :::
 
+::: {.viz src="double-slit-marker" preset="mixed" height="500"}
+**A mixed marker falls inside the circle.** When the marker itself is noisy (purity $\lambda = 0.5$), the visibility is still $V = 0.5$, but only $0.43$ of trace-distance distinguishability can be read: the point drops inside the circle along the dashed magenta arc, $D^2 + V^2 \approx 0.44 < 1$. This is one instance of Englert's inequality above (a literature result, not formalized in this book).
+:::
+
 ::: {.viz src="qubit-geometry" preset="area" height="500"}
 **The all-area end.** With $\vv{B}$ perpendicular to $\vv{A}$ the line shrinks to a point and the area is as large as it gets: the two clicks are 50 / 50 and the fringes are sharpest. Use ◀ under the figure to reach the opposite, all-line end, and compare the two limits of [@thm-record-coherence-complementarity].
+:::
+
+::: {.viz src="double-slit-marker" height="560"}
+Interactive laboratory `SLIT//MARKER`: hits arriving one by one on the screen with their fringes, and the two marker arrows $r_L$ and $r_R$ on the complementarity circle; drag the angle, change how the marker is read, or lower its purity. The numbers on the page are a numerical illustration; $D^2 + V^2 = 1$ is [@thm-record-coherence-complementarity], checked by the Lean kernel.
 :::
 
 ## 6.4 Interactive Laboratory: Hands-On Exploration of the Pairwise Geometric Product, Particle Inner Line, and Wave Wedge Area {#sec-interactive-qubit-geometry}

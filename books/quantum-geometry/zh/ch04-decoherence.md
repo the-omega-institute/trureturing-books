@@ -8,6 +8,10 @@
 
 那截原本好端端的长度 $1 - \norm{\vv{r}}$ 究竟被谁偷走了？“退相干（decoherence）”真的是微观世界在某种神秘摩擦下发生了不可逆的本体毁灭吗？作为第一部“从点到线”的收官之章，我们将揭开混合态的几何机制：**正交记录耦合与环境偏迹边缘化如何在更大空间中压短局部状态**（[@thm-nonselective-marginal]、[@thm-reduced-access-defect]，并由 C\*-代数表示压缩 [@thm-stinespring-dilation] 与一般信道薛定谔图景扩张文献 [@rem-stinespring-literature] 对照补充）。不妨借斜刺的长矛和它截短的影子来想象局部布洛赫向量的缩短；实际求偏迹的是联合密度算子。
 
+::: {.figure src="ch04-overview"}
+**图 4。** 本章地图，三栏都是布洛赫球的竖直截面：第 I 栏，琥珀色的局部箭头朝着球皮上的 $\lvert +\rangle$（虚线），却只到 $\cos\theta_{\mathrm{env}}$ 就停在球里；第 II 栏，相位阻尼一步步把球收成更窄的青色椭圆，高度不变，收向紫色的竖轴；第 III 栏，琥珀色的点先抹掉横向部分、落到竖轴上，再抹掉 $r_z$、落到紫色的球心 $\frac{1}{2}I$。
+:::
+
 ## 4.1 纯态是球皮（$\|\vv{r}\| = 1$），混合态是球肚子里截短的线（$\|\vv{r}\| < 1$） {#sec-ch04-1}
 
 让我们先做一次三行就能算清的费曼式手算实验。假设你的单量子比特原本稳稳指向布洛赫球正东赤道极 $+\vv{e}_1$，即纯叠加态 $\lvert +\rangle = \frac{1}{\sqrt{2}}(\lvert 0\rangle + \lvert 1\rangle)$，此时横向相干长度 $r_x = 1$，箭头顶端紧贴在球皮上。
@@ -26,7 +30,13 @@ $$
 
 对照[第一章](ch01-measurement.md)的 [@prop-qubit-bloch-core]，这正是布洛赫向量 $\vv{r} = (\cos\theta_{\mathrm{env}},\, 0,\, 0)$！联合态依然是模长为 $1$ 的纯态。在这个等权叠加、环境记录内积为实且非负的例子里，局部布洛赫向量的长度是 $\|\vv{r}\| = \cos\theta_{\mathrm{env}}$；两条环境记录的夹角越大，“影子”就越短。这个角度是环境记录之间的夹角，偏迹并不是把联合态向量正交投影到某个三维局部子空间。
 
-![球皮纯态与球内截短之线：环境纠缠偏迹压缩、三种典型量子噪声对布洛赫球的几何形变，以及球心最大混合死点](../assets/fig-04-bloch-decoherence.svg)
+::: {.figure src="ch04-env-shadow"}
+**环境里两条记录的影子，就是局部布洛赫箭头的长度。** 左边，环境的两个态 $\lvert e_0\rangle$ 与 $\lvert e_1\rangle$ 夹角 $\theta_{\mathrm{env}}$，$\lvert e_1\rangle$ 落在 $\lvert e_0\rangle$ 上的青色影子长 $\cos\theta_{\mathrm{env}}$；右边是布洛赫球的竖直截面，琥珀色的箭头 $\vv{r}$ 朝着球皮上的 $\lvert +\rangle$（虚线），只走到 $\cos\theta_{\mathrm{env}}$，它下方的青色线段与左边的影子一样长。图中取 $\theta_{\mathrm{env}} = 50^\circ$。
+:::
+
+::: {.viz src="bloch-noise" preset="shorten" height="500"}
+**离开球皮的线。** 相位阻尼一步步作用在赤道两端的 $\lvert +\rangle$ 与 $\lvert -\rangle$ 上：琥珀色的 $\rho$ 与白色的 $\sigma$ 离开细线画的球皮，沿横轴缩向球心，青色的球同时收腰。舞台左上角把横向剩下的比例读成 $\cos\theta_{\mathrm{env}}$ 并给出这个角度；白线是两态之间的距离。
+:::
 
 特别地，当环境彻底分辨了系统的不同分支（$\theta_{\mathrm{env}} = 90^\circ$，环境记录彼此正交 $\cos 90^\circ = 0$），联合演化就成了一次标准的等距记录耦合，而“移开视线忽略环境”在数学上精确等价于[第三章](ch03-projectors-and-duality.md)定义的吕德斯未读捏合 $\sum_a P_a \rho P_a$。下面的定理在任意有限维系统与任意有限结果寄存器上严格证明了这一核心等价。
 
@@ -145,6 +155,10 @@ $$
 
 首先看最纯粹的横向去相干极限——**标准基捏合投影** $\mathcal{P}(\rho)$（Lean 模块 `QuantumChannels/Pinching` 中定义为 [`pinching`](lean:D5/S3/QuantumChannels/Pinching.pinching)，保留对角元 $\rho_{00}, \rho_{11}$、抹零副对角元 $\rho_{01}, \rho_{10}$）。在矩阵希尔伯特—施密特内积（[`hilbertSchmidtInner`](lean:D5/S3/QuantumChannels/Pinching.hilbertSchmidtInner) $\langle A, B\rangle_{\mathrm{HS}} = \Tr(A^* B)$）下，捏合不是粗暴的涂改，而是一次精确的正交勾股投影：整颗布洛赫球被垂直压扁到南北极直径线段 $[-\vv{e}_3, +\vv{e}_3]$ 上，而被压掉的水平赤道质量恰好等于两个副对角相干元的模平方之和！
 
+::: {.viz src="bloch-noise" preset="pinch" height="500"}
+**压到竖轴上。** 一步完全去相干：青色的球被压成竖直的一条线，紫色虚线标出整根竖轴都是不动点。$\rho$ 与 $\sigma$ 高度相同、只差横向部分，落到轴上同一点，白线缩成零；被压掉的正是横向那一截所带的相干质量（[@thm-pinching-pythagorean]）。
+:::
+
 ::: {.theorem #thm-pinching-pythagorean title="单比特捏合投影的希尔伯特—施密特勾股分解与丢弃相干质量" lean="D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass"}
 设 $\rho \in M_2(\mathbb{C})$ 为任意单比特复矩阵，记标准基捏合算子为 $\mathcal{P}(\rho)_{ij} = \delta_{ij}\rho_{ij}$，希尔伯特—施密特内积为 $\langle A, B\rangle_{\mathrm{HS}} = \Tr(A^* B)$。则同时成立：
 
@@ -168,6 +182,10 @@ $$
 
 在实际物理时间里，环境很少一步到位地把球压成一根细棍，而是通过一次次微弱碰撞，在严格含噪区间内每次把赤道半径乘上一个保留系数 $c \in [0, 1)$（$c = 1$ 则对应无噪恒等端点）。这就是超导与核磁共振实验里天天测量的**相位阻尼信道**（phase damping，对应横向弛豫时间 $T_2$）：当 $c \in [0, 1)$ 时，每走一步，布洛赫球的南北高度 $r_z$ 纹丝不动，水平腰围 $(r_x, r_y)$ 则按等比数列 $c^N$ 一圈圈往里严格收腰，从圆球瘦身成橄榄形的雪茄椭球，最终在 $N \to \infty$ 时收敛到南北主轴！
 
+::: {.viz src="bloch-noise" preset="dephase" height="500"}
+**只收腰，不掉高。** 每一步横向乘 $c = 0.7$，高度不动：青色的球收成竖直的雪茄，再细向紫色的竖轴；$\rho$ 与 $\sigma$ 沿水平方向走向轴线。下方时间轴数的是步数 $N$（[@prop-phase-damping-decay]）。
+:::
+
 ::: {.proposition #prop-phase-damping-decay title="迭代相位阻尼的矩阵元演化与等权叠加态的相干指数衰减" lean="D5/S3/Quantum/QubitWitnesses.phaseDampingIterate_apply D5/S3/Quantum/Decoherence/CoherenceDecay.equal_superposition_coherence_tendsto_zero"}
 设相干保留系数 $c \in [0, 1]$，单步实相位阻尼映射保持对角元不变并将副对角元乘以 $c$，记其 $N$ 次迭代为 $\mathcal{D}_c^{(N)}$（$N \in \mathbb{N}$）。则：
 
@@ -190,6 +208,10 @@ $$
 :::
 
 除了“只收腰、不掉高”的相位阻尼外，实验室里还有另一类截然不同的能量耗散过程——**振幅阻尼信道**（amplitude damping，对应自发辐射能量弛豫时间 $T_1$）：处于激发态（南极 $-1$）的量子比特会向低温环境吐出一颗能量光子而跌回基态（北极 $+1$）。因此，在几何上，整颗布洛赫球不仅在往里收缩，而且球心还在往北极 $u = +1$ 方向**整体上漂**：轴向坐标按仿射律 [`dampedAxis`](lean:D5/S3/QuantumChannels/AmplitudeDampingContraction.dampedAxis) $u \mapsto u' = (1 - \gamma)u + \gamma$（阻尼率 $0 \le \gamma < 1$）向 $+1$ 聚拢！
+
+::: {.viz src="bloch-noise" preset="amp" height="500"}
+**缩小并往北漂。** 振幅阻尼每一步取 $\gamma = 0.3$：青色的球一边缩小一边往北极上漂，横向缩得比纵向慢；紫色的北极 $\lvert 0\rangle$ 不动，从南极出发的琥珀色 $\rho$ 一路爬向北极。
+:::
 
 有趣的是，在量子信息几何（Petz 单调黎曼度规族）中，当我们用对称对数导数度规（SLD，径向权重函数 $\varphi_{\mathrm{SLD}}(u) = 1$）与右对数导数度规（RLD，径向权重函数 $\varphi_{\mathrm{RLD}}(u) = \frac{1}{1 - u^2}$）分别衡量振幅阻尼下的横向相干收缩比 [`coherenceRatio`](lean:D5/S3/QuantumChannels/AmplitudeDampingContraction.coherenceRatio) $\mathcal{R}_\varphi(\gamma, u) = (1 - \gamma)\frac{\varphi(u')}{\varphi(u)}$ 时，两把几何标尺在纯态北极边界 $u \to 1^-$ 处呈现出截然不同的端点极限行为！
 
@@ -225,6 +247,10 @@ $$
 | **振幅阻尼 / 能量弛豫**（$0 < \gamma < 1$） | $\bigl(\sqrt{1-\gamma}\,r_x,\; \sqrt{1-\gamma}\,r_y,\; (1-\gamma)r_z + \gamma\bigr)$ | 椭球收缩的同时，整体向北极基态 $+\vv{e}_3$ 上漂 | 仅北极基态单点 $+\vv{e}_3 = (0, 0, 1)$ |
 
 （注：在**零噪声恒等端点** $c = 1$、$p = 0$、$\lambda = 0$ 或 $\gamma = 0$ 处，上述信道均退化为恒等映射 $\vv{r}' = \vv{r}$，不动点集扩展为**整颗布洛赫球**。在 $p = 1$ 端点，比特翻转映射给出绕 $X$ 轴的幺正 $\pi$ 旋转 $\rho \mapsto X\rho X$、$\vv{r}' = (r_x, -r_y, -r_z)$，保持两态间距离；在 $\gamma = 1$ 端点，振幅阻尼则一步将整颗布洛赫球重置到纯态北极 $+\vv{e}_3 = (0, 0, 1)$，任意两态的输出距离均为零。）
+
+::: {.figure src="ch04-noise-gallery"}
+**四种噪声，四种变形。** 四幅都是布洛赫球的竖直截面，强度都取一半（$c = \frac{1}{2}$、$p = \frac{1}{4}$、$\lambda = \frac{1}{2}$、$\gamma = \frac{1}{2}$），按上表的仿射公式画出：细线是原来的球皮，青色是作用一次后的像，紫色是不动的部分。相位阻尼收成竖直的窄椭圆，竖轴不动；比特翻转压成扁平的横椭圆，$x$ 轴不动；去极化缩成半径一半的同心圆，只有球心不动；振幅阻尼缩小并整体上移，顶端贴着北极，只有北极不动。表中的仿射形式是文献结果，未在本书形式化。
+:::
 
 顺着最后一行追问：固定朝向基态北极的轴向漂移之后，**横向最多能保留多少长度，椭球才不会刺穿球皮？** 下文以 $\lambda$ 表示两个横向坐标共有的实数保留因子，考察
 
@@ -281,6 +307,10 @@ $$
 
 [@thm-north-pole-ball-criterion] 给出的是横向上界 $|\lambda|\le\sqrt a$。表中的纯振幅阻尼取 $\lambda=\sqrt a$，即 $\lambda^2=a$，恰好饱和；额外横向衰减则可以使不等式严格成立。特别地，$a=0$ 时必须 $\lambda=0$，$a=1$ 时则允许且只允许 $|\lambda|\le1$。这里判定的是球的保持性；完全正性还涉及扩展系统上的条件，不能只凭这个实坐标判据认定。
 
+::: {.figure src="ch04-ball-criterion"}
+**横向能留多少，由轴向因子说了算。** 绿色的区域是 [@thm-north-pole-ball-criterion] 的充要条件 $\lambda^2 \le a$，由两支抛物线 $\lambda = \pm\sqrt{a}$ 围成，上边界正是纯振幅阻尼 $\lambda = \sqrt{a}$；它在 $a = 0$ 处收成一点，在 $a = 1$ 处张开到 $|\lambda| \le 1$。区域外品红的点 $(a, \lambda) = (0.15, 0.75)$ 对应的映射把球的一部分推出了球皮。
+:::
+
 现在把**同一个映射**中的两个因子取为指数包络。对任意正实数 $T_1,T_2,t$，令
 
 $$
@@ -298,6 +328,10 @@ $$
 $$
 
 第一步用实指数函数的严格单调性，第二步约去正时间并乘以正的时间常数。这是定理在给定指数包络下的直接特例解释。$t=0$ 时，无论正的 $T_1,T_2$ 取何值，两个因子都等于 $1$，映射都是恒等映射；单靠零时刻不约束任何速率。
+
+::: {.viz src="bloch-noise" preset="wide" height="500"}
+**横向留太多，就刺穿球皮。** 取 $T_2 = 6T_1$，即 $\lambda = a^{1/6} > \sqrt{a}$：青色的像在北极附近从侧面鼓出细线画的单位球，品红的部分已不在球里，品红点标出离球心最远的像点。改回 $T_2 \le 2T_1$，品红随即消失（[@thm-north-pole-ball-criterion]）。
+:::
 
 ::: {.remark #rem-relaxation-envelope-literature title="指数包络与速率相加的物理条件（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** Krantz 等的 *A quantum engineer's guide to superconducting qubits*（[arXiv:1904.06560v3](https://arxiv.org/abs/1904.06560v3)，式 40–43）在 Bloch–Redfield 描述中引入纵向与横向弛豫速率，并在式 41 相邻文字中明确指出：把横向速率写成各速率之和，预设各个衰减函数为指数型。这为这里的弛豫模型提供物理背景。
@@ -370,9 +404,17 @@ $$
 
 所以“混合态是球肚子里截短的线”可以说成一条不依赖具体噪声模型的定理：信道可以平移、压扁、旋转这只球，唯独不能把其中任何两点拉开。可分辨性只会丢，不会凭空长出来。
 
+::: {.viz src="bloch-noise" preset="distance" height="500"}
+**两个态只会靠近。** 例中第一对态：北极的 $\rho$ 与 $+x$ 的 $\sigma$，振幅阻尼走一步（$\gamma = \frac{1}{2}$）。$\rho$ 不动，$\sigma$ 被拉向北方；白线标出的距离从虚线的 $0.707$ 缩到 $0.433$（[@prop-trace-distance-metric-contraction]）。
+:::
+
 ## 4.3 最大混合死点（$\vv{r} = \vv{0}$） {#sec-ch04-3}
 
 顺着这张几何形变表往下看：先用标准基捏合彻底抹掉赤道相干元（把球压到竖直主轴上），再连竖直主轴上的粒子偏置 $r_z$ 也一并消磨殆尽，整根布洛赫向量就会彻底缩进球的几何中心——**最大混合死点** $\vv{r} = \vv{0}$。
+
+::: {.viz src="bloch-noise" preset="centre" height="500"}
+**球心：从哪来都一样。** 强度为 $1$ 的去极化把整颗球缩成紫色的球心一点：北极的 $\rho$ 与 $+x$ 的 $\sigma$ 落在同一处，白线长度为零。
+:::
 
 让我们先用一条紧接 [@thm-pinching-pythagorean] 的推论，把“赤道相干彻底清零”的代数判据钉死。
 
@@ -409,6 +451,14 @@ $$
 2. **零纯度盈余**：计算 $\rho_*^2 = \frac{1}{4}I$，纯度跌至二维空间的绝对下限 $\Tr(\rho_*^2) = \frac{1}{2}$。代入[第三章](ch03-projectors-and-duality.md)的互补勾股定理 [@thm-complementary-pythagoras]（$|d| = 2$），左端纯度盈余 $\Tr(\rho_*^2) - \frac{1}{2} = 0$，意味着无论可见粒子偏离还是正交波动余量都一滴不剩。
 3. **经典系综拆解的无穷歧义**：把五成北极与五成南极混在一起，$\frac{1}{2}\rho_{+\vv{e}_3} + \frac{1}{2}\rho_{-\vv{e}_3} = \frac{1}{2}I$；把五成东极与五成西极混在一起，$\frac{1}{2}\rho_{+\vv{e}_1} + \frac{1}{2}\rho_{-\vv{e}_1} = \frac{1}{2}I$！一旦缩成球心一点，任何实验都无法倒推它当初是由南北对冲还是东西对冲混合而成的——因为密度矩阵只记录合成后的净几何重心 $\vv{r}$，从不替历史保存混配配方。
 4. **通往第四部“多球纠缠”的惊天伏笔**：最奇妙的一幕还在后头！回到本章 4.1 节开头的双比特联合纯态，令 $\theta_{\mathrm{env}} = 90^\circ$，即著名的**最大纠缠贝尔态（Bell state）** $\lvert\Phi^+\rangle = \frac{1}{\sqrt{2}}(\lvert 00\rangle + \lvert 11\rangle)$，其密度矩阵展开为 $\rho_{AB} = \frac{1}{4}(I \otimes I + \sigma_x \otimes \sigma_x - \sigma_y \otimes \sigma_y + \sigma_z \otimes \sigma_z)$。整个双比特系统明明处在最纯粹、零熵、模长为 $1$ 的全局纯态（$\Tr(\rho_{AB}^2) = 1$），可是当你单独去量第一颗比特 $A$ 时，$\rho_A = \frac{1}{2}I$（$\vv{r}_A = \vv{0}$）；单独去量第二颗比特 $B$ 时，$\rho_B = \frac{1}{2}I$（$\vv{r}_B = \vv{0}$）！两颗局部球心里空空如也，单比特局域泡利分量 $\sigma_i \otimes I$ 与 $I \otimes \sigma_j$ 全部为零——那么那整整 $100\%$ 的非平凡纯度藏到哪儿去了？答案一清二楚：**它百分之百储存在联合双比特泡利关联扇区 $\sigma_i \otimes \sigma_j$ 之中（第四部第十三章将在几何上把这组跨球张量关联阐释为横跨两颗球的共享关联平面）！**
+:::
+
+::: {.figure src="ch04-centre-mixtures"}
+**球心不记得自己是怎么混出来的。** 南北两极各取 $\frac{1}{2}$、东西两极各取 $\frac{1}{2}$，或者斜虚线两端的另一对对径点各取 $\frac{1}{2}$，混出的布洛赫向量都是弦的中点，全都落在紫色的球心 $\frac{1}{2}I$（[@ex-maximally-mixed-center] 第 3 条）。
+:::
+
+::: {.viz src="bloch-noise" height="560"}
+**完整实验室。** 切换三种噪声、调每一步的强度与 $T_2 / T_1$，或在球皮上拖动 $\rho$ 与 $\sigma$，沿时间轴看青色的球怎样变形、白线怎样只缩不长。
 :::
 
 ---

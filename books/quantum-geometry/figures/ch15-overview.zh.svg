@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch15-overview" data-lang="zh" data-wrap="1" viewBox="0 0 740 270" width="740" height="270" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="三栏。第一栏：成功方向 W 朝上、失败方向 B 朝右，一支箭头 U 与 B 成 30°，一步之后转过紫色的 2θ = 60°，琥珀色的箭头正好落在 W 上。第二栏：三只圆形齿轮，齿数分别是 2、4、8，琥珀色的指针对 x = 5 分别指向 π、π/2 与 5π/4。第三栏：16 个频率上的柱状图，只有 0、4、8、12 四处有等高的青色柱，高 1/4，其余全为零。">
+<title>三栏。第一栏：成功方向 W 朝上、失败方向 B 朝右，一支箭头 U 与 B 成 30°，一步之后转过紫色的 2θ = 60°，琥珀色的箭头正好落在 W 上。第二栏：三只圆形齿轮，齿数分别是 2、4、8，琥珀色的指针对 x = 5 分别指向 π、π/2 与 5π/4。第三栏：16 个频率上的柱状图，只有 0、4、8、12 四处有等高的青色柱，高 1/4，其余全为零。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="236" height="270" viewBox="0 0 236 270">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">I　一步转过 2<tspan font-style="italic">θ</tspan></text>
+<path d="M198 240 L197.62 228.98 L196.46 218.01 L194.55 207.15 L191.88 196.45 L188.47 185.96 L184.34 175.74 L179.51 165.82 L173.99 156.27 L167.82 147.13 L161.04 138.44 L153.66 130.24 L145.72 122.58 L137.27 115.49 L128.35 109.01 L119 103.17 L109.26 97.99 L99.19 93.5 L88.82 89.73 L78.22 86.69 L67.44 84.4 L56.52 82.87 L45.51 82.1 L34.49 82.1 L23.48 82.87 L12.56 84.4" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 4" stroke-linejoin="round" fill="none"/>
+<line x1="40" y1="240" x2="216.96" y2="240" class="ts-dim" stroke-width="1.3" fill="none"/>
+<line x1="40" y1="240" x2="40" y2="63.04" class="ts-dim" stroke-width="1.3" fill="none"/>
+<text class="tf-dim" x="220.96" y="245" font-size="13"><tspan font-style="italic">B</tspan></text>
+<text class="tf-dim" x="48" y="67.04" font-size="13"><tspan font-style="italic">W</tspan></text>
+<path d="M124.84 191.02 L121.21 185.22 L117.19 179.69 L112.8 174.45 L108.05 169.53 L102.97 164.96 L97.58 160.75 L91.91 156.93 L85.99 153.51 L79.84 150.51 L73.5 147.95 L67 145.83 L60.37 144.18 L53.63 142.99 L46.83 142.28 L40 142.04" class="ts-violet" stroke-width="2.6" stroke-linejoin="round" fill="none"/>
+<path d="M40 142.04 L50 137.84 L50 146.24Z" class="tf-violet"/>
+<text class="tf-violet ts-bg" x="102.46" y="144.14" font-size="15" font-weight="600" stroke-width="4.2" stroke-linejoin="round" paint-order="stroke">2<tspan font-style="italic">θ</tspan></text>
+<path d="M74 240 L73.93 237.78 L73.71 235.56 L73.35 233.37 L72.84 231.2 L72.2 229.07 L71.41 226.99 L70.49 224.96 L69.44 223" class="ts-dim" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+<text class="tf-dim" x="84.34" y="233.16" font-size="14" text-anchor="middle"><tspan font-style="italic">θ</tspan></text>
+<line x1="40" y1="240" x2="170.21" y2="164.82" class="ts-ink" stroke-width="2.2" fill="none"/>
+<path d="M176.83 161 L170.93 168.77 L167.15 162.23Z" class="tf-ink"/>
+<text class="tf-ink" x="182.83" y="155" font-size="15"><tspan font-style="italic">U</tspan></text>
+<line x1="40" y1="240" x2="40" y2="89.65" class="ts-amber" stroke-width="3" fill="none"/>
+<path d="M40 82 L43.78 91 L36.22 91Z" class="tf-amber"/>
+<text class="tf-amber" x="50" y="98" font-size="15"><tspan font-style="italic">QU</tspan></text>
+<text class="tf-dim" x="126.9" y="228" font-size="13" text-anchor="middle"><tspan font-style="italic">N</tspan> = 4</text>
+</svg>
+<svg class="tr-fig-panel" x="252" y="0" width="236" height="270" viewBox="0 0 236 270">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">II　二进制相位齿轮</text>
+<text class="tf-amber" x="118" y="58" font-size="14" text-anchor="middle"><tspan font-style="italic">x</tspan> = 5 = 101₂</text>
+<circle cx="40" cy="132" r="31" class="ts-dim" stroke-width="1.5" fill="none"/>
+<line x1="71" y1="132" x2="78" y2="132" class="ts-dim" stroke-width="2" fill="none"/>
+<line x1="9" y1="132" x2="2" y2="132" class="ts-dim" stroke-width="2" fill="none"/>
+<line x1="40" y1="132" x2="18.8" y2="132" class="ts-amber" stroke-width="2.6" fill="none"/>
+<path d="M12 132 L20 128.64 L20 135.36Z" class="tf-amber"/>
+<circle cx="40" cy="132" r="2.6" class="tf-ink"/>
+<text class="tf-ink" x="40" y="193" font-size="14" text-anchor="middle">0.1₂</text>
+<text class="tf-amber" x="40" y="215" font-size="14" text-anchor="middle">π</text>
+<circle cx="118" cy="132" r="31" class="ts-dim" stroke-width="1.5" fill="none"/>
+<line x1="149" y1="132" x2="156" y2="132" class="ts-dim" stroke-width="2" fill="none"/>
+<line x1="118" y1="101" x2="118" y2="94" class="ts-dim" stroke-width="2" fill="none"/>
+<line x1="87" y1="132" x2="80" y2="132" class="ts-dim" stroke-width="2" fill="none"/>
+<line x1="118" y1="163" x2="118" y2="170" class="ts-dim" stroke-width="2" fill="none"/>
+<line x1="118" y1="132" x2="118" y2="110.8" class="ts-amber" stroke-width="2.6" fill="none"/>
+<path d="M118 104 L121.36 112 L114.64 112Z" class="tf-amber"/>
+<circle cx="118" cy="132" r="2.6" class="tf-ink"/>
+<text class="tf-ink" x="118" y="193" font-size="14" text-anchor="middle">0.01₂</text>
+<text class="tf-amber" x="118" y="215" font-size="14" text-anchor="middle">π/2</text>
+<circle cx="196" cy="132" r="31" class="ts-dim" stroke-width="1.5" fill="none"/>
+<line x1="227" y1="132" x2="234" y2="132" class="ts-dim" stroke-width="2" fill="none"/>
+<line x1="217.92" y1="110.08" x2="222.87" y2="105.13" class="ts-dim" stroke-width="2" fill="none"/>
+<line x1="196" y1="101" x2="196" y2="94" class="ts-dim" stroke-width="2" fill="none"/>
+<line x1="174.08" y1="110.08" x2="169.13" y2="105.13" class="ts-dim" stroke-width="2" fill="none"/>
+<line x1="165" y1="132" x2="158" y2="132" class="ts-dim" stroke-width="2" fill="none"/>
+<line x1="174.08" y1="153.92" x2="169.13" y2="158.87" class="ts-dim" stroke-width="2" fill="none"/>
+<line x1="196" y1="163" x2="196" y2="170" class="ts-dim" stroke-width="2" fill="none"/>
+<line x1="217.92" y1="153.92" x2="222.87" y2="158.87" class="ts-dim" stroke-width="2" fill="none"/>
+<line x1="196" y1="132" x2="181.01" y2="146.99" class="ts-amber" stroke-width="2.6" fill="none"/>
+<path d="M176.2 151.8 L179.48 143.77 L184.23 148.52Z" class="tf-amber"/>
+<circle cx="196" cy="132" r="2.6" class="tf-ink"/>
+<text class="tf-ink" x="196" y="193" font-size="14" text-anchor="middle">0.101₂</text>
+<text class="tf-amber" x="196" y="215" font-size="14" text-anchor="middle">5π/4</text>
+<text class="tf-dim" x="118" y="252" font-size="13" text-anchor="middle">齿数 2、4、8</text>
+</svg>
+<svg class="tr-fig-panel" x="504" y="0" width="236" height="270" viewBox="0 0 236 270">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">III　只剩共振频率</text>
+<text class="tf-ink" x="118" y="52" font-size="14" text-anchor="middle"><tspan font-style="italic">Q</tspan> = 16,  <tspan font-style="italic">r</tspan> = 4</text>
+<line x1="28" y1="93.33" x2="224" y2="93.33" class="ts-faint" stroke-width="1" stroke-dasharray="3 4" fill="none"/>
+<text class="tf-dim" x="22" y="98.37" font-size="14" text-anchor="end">¼</text>
+<line x1="36.37" y1="210" x2="36.37" y2="93.33" class="ts-cyan" stroke-width="7" fill="none"/>
+<circle cx="48.32" cy="210" r="2.2" class="tf-dim"/>
+<circle cx="60.27" cy="210" r="2.2" class="tf-dim"/>
+<circle cx="72.22" cy="210" r="2.2" class="tf-dim"/>
+<line x1="84.17" y1="210" x2="84.17" y2="93.33" class="ts-cyan" stroke-width="7" fill="none"/>
+<circle cx="96.12" cy="210" r="2.2" class="tf-dim"/>
+<circle cx="108.07" cy="210" r="2.2" class="tf-dim"/>
+<circle cx="120.02" cy="210" r="2.2" class="tf-dim"/>
+<line x1="131.98" y1="210" x2="131.98" y2="93.33" class="ts-cyan" stroke-width="7" fill="none"/>
+<circle cx="143.93" cy="210" r="2.2" class="tf-dim"/>
+<circle cx="155.88" cy="210" r="2.2" class="tf-dim"/>
+<circle cx="167.83" cy="210" r="2.2" class="tf-dim"/>
+<line x1="179.78" y1="210" x2="179.78" y2="93.33" class="ts-cyan" stroke-width="7" fill="none"/>
+<circle cx="191.73" cy="210" r="2.2" class="tf-dim"/>
+<circle cx="203.68" cy="210" r="2.2" class="tf-dim"/>
+<circle cx="215.63" cy="210" r="2.2" class="tf-dim"/>
+<line x1="28" y1="210" x2="224" y2="210" class="ts-dim" stroke-width="1.3" fill="none"/>
+<line x1="36.37" y1="210" x2="36.37" y2="215" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="36.37" y="228" font-size="13" text-anchor="middle">0</text>
+<line x1="84.17" y1="210" x2="84.17" y2="215" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="84.17" y="228" font-size="13" text-anchor="middle">4</text>
+<line x1="131.98" y1="210" x2="131.98" y2="215" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="131.98" y="228" font-size="13" text-anchor="middle">8</text>
+<line x1="179.78" y1="210" x2="179.78" y2="215" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="179.78" y="228" font-size="13" text-anchor="middle">12</text>
+<line x1="215.63" y1="210" x2="215.63" y2="215" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="215.63" y="228" font-size="13" text-anchor="middle">15</text>
+<text class="tf-dim" x="118" y="252" font-size="13" text-anchor="middle">频率 <tspan font-style="italic">k</tspan></text>
+</svg>
+</svg>
