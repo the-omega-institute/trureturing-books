@@ -53,6 +53,10 @@ $$
 - **第二道几何盲区（从二元链 $\mathbf{e}_i\wedge\mathbf{e}_j$ 到三元面片 $\mathbf{e}_i\wedge\mathbf{e}_j\wedge\mathbf{e}_k$ 的局部 Gram 相容错觉）**：
   在几何模型（`MODEL`）上，每条子句仅含两个文字的二元蕴含约束 $\mathbf{e}_i\wedge\mathbf{e}_j$ 构成**一维有向链**，局部传递步步可追；而三元子句 $\mathbf{e}_i\wedge\mathbf{e}_j\wedge\mathbf{e}_k$ 则如同拼接二维闭合球面的**三角面片**——仅凭 $M \ll n$ 阶局部内积记忆向外张望时，四周局部块可以处处相容，却把奇偶阻挫死结藏在全局闭合回路之中。
 
+::: {.viz src="timeless-causal-crystal" preset="thread" height="500"}
+**线：每步只转一个小角。** $256$ 个候选里找一个：琥珀色的态从“其余”轴附近出发，每步向目标转 $2\theta = 7.17^\circ$，青色记下走过的每一步，$12$ 步之后几乎对准；逐个试平均要 $128$ 次（品红虚线）。每步转同一个角是 [`uniform_operator_rotation`](lean:D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation)；把它读作“线”是本书的诠释（`MODEL`）。
+:::
+
 对应于上述两道几何图像的严格复杂度模型下界属于外部经典文献结论（注意它们均不等同于解决标准统一图灵机下的 $\mathrm{P} \neq \mathrm{NP}$ 开放猜想 [@conj-p-neq-np]）：
 
 ::: {.remark #rem-ch30-query-sos-literature title="黑盒量子查询下界与有界阶平方和松弛下界的文献说明"}
@@ -61,6 +65,10 @@ $$
 1. **无结构黑盒量子查询下界（C. H. Bennett, E. Bernstein, G. Brassard & U. Vazirani, *SIAM J. Comput.* **26**, 1510–1523, 1997）**：在黑盒神谕（Oracle）查询模型下，从 $N = 2^n$ 个候选中以有界误差定位未知目标至少需要 $L = \Omega(2^{n/2})$ 次量子查询（与 Grover 算法的 $O(2^{n/2})$ 上界共同锁定 $\Theta(2^{n/2})$）；
 2. **2-SAT 与 3-SAT 的经典复杂度分水岭（S. A. Cook, 1971；L. A. Levin, 1973；B. Aspvall, M. F. Plass & R. E. Tarjan, 1979）**：2-SAT 可通过强连通分量传递闭包在 $O(n+m)$ 线性时间内判定（故 $\text{2-SAT} \in \mathrm{P}$），而 3-SAT 为 $\mathrm{NP}$-完全问题；
 3. **有界阶平方和（SoS）半正定松弛下界（D. Grigoriev, *Theor. Comput. Sci.* **259**, 613–622, 2001；G. Schoenebeck, *FOCS*, 593–602, 2008）**：对于存在全局奇偶矛盾而不可满足的随机 3-XOR / 3-SAT 实例，任何阶数 $M = o(n)$ 的局部 Lasserre / Gram 半正定矩阵松弛 $G_M \succeq 0$ 均以高概率保持半正定与局部自洽，无法在亚线性松弛阶数（对应亚指数规模半正定规划）内证伪不可满足性。
+:::
+
+::: {.viz src="timeless-causal-crystal" preset="longer" height="500"}
+**空间翻 $16$ 倍，步数翻 $4$ 倍。** 候选增到 $4096$ 个，每步的转角缩到四分之一（$2\theta = 1.79^\circ$），步数变成约 $50$；下方的图里青色的 $(\pi/4)\sqrt{N}$ 与品红虚线的 $N/2$ 越拉越开。线变长的速度是 $\sqrt{N}$，仍然没有坡度可循；这与上面第 1 条的查询下界同阶（文献结果）。
 :::
 
 ### 3. 终极反转：$P \neq NP$ 正是守护主观时间与自由选择的几何防火墙
@@ -103,6 +111,10 @@ $$
 1. **卡马卡（N. Karmarkar, *Combinatorica* **4**, 373–395, 1984）线性规划内点法**：单纯形法沿着凸多面体表面的一维棱线折线爬行，在 Klee–Minty（1972）扭曲超立方体最坏实例上需走完指数级 $2^n$ 步；而内点法离开一维边界折线，进入多面体内部沿光滑对数势垒梯度场迭代，在多项式时间内抵达最优解；
 2. **卡斯特莱因（P. W. Kasteleyn, *Physica* **27**, 1209–1225, 1961）平面图 Pfaffian 完美匹配定理**：一般二分图完美匹配计数（永久式 Permanent）经 L. G. Valiant（1979）证明为 `#P`-完全；但在平面图上，Kasteleyn 定向为每条有向边赋予手性符号，构造反对称矩阵 $A_K^T = -A_K$ 使非平面交叉项正反相消，进而由凯莱恒等式 $[\operatorname{Pf}(A_K)]^2 = \det A_K$ 在多项式时间内精确算出加权完美匹配配分函数 $Z = |\operatorname{Pf}(A_K)| = \sqrt{\det A_K}$；
 3. **庞加莱—布劳威尔偶维球面毛球定理（H. Poincaré, 1885；L. E. J. Brouwer, 1912）**：二维球面欧拉示性数 $\chi(S^2) = 2 \neq 0$，其上任何连续切向量场必至少存在一个零点（奇异发旋）。
+:::
+
+::: {.viz src="timeless-causal-crystal" preset="field" height="500"}
+**场：处处有坡度。** 青色的流线从球上各处出发，每条都只看脚下的坡度，都流到目标；琥珀色是选中的那一条，球的对面那一点场为零。下方的图里，青色的势能降下多少，品红的耗散就付出多少，两者之和（琥珀色虚线）不变（[`S2_dissipation`](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation)）。把它读作“场”是本书的诠释（`MODEL`）。
 :::
 
 [@rem-ch30-karmarkar-kasteleyn-literature] 的三条都只是文献。在一个离散的小问题上，“场”与“线”两边都能写成精确的数学，并交给内核检查：给图的顶点着色。
@@ -254,6 +266,14 @@ $C_5$ 中最长有向路含 $5$ 个顶点的 $12$ 个定向里，有 $2$ 个是�
 此外，在 [@rem-ch30-eth-subexponential-literature] 的亚指数上界公式下：一方面，亚指数上界 $2^{O(n \log\log n / \sqrt{\log n})}$ 与多项式时间 $n^{O(1)}$（有效单变量指数率 $r_P(n) = O(\frac{\log n}{n})$）之间仍隔着超多项式渐近鸿沟；另一方面，对于自然输入规模为 $n$、但其标准电路或网格约束表具有平方规模 $S = \Theta(n^2)$ 的问题，经线性电路 Tseitin 转换生成 $N = \Theta(n^2)$ 个 3-SAT 变量后，代入该亚指数上界公式得到的关于原参数 $n$ 的时间上界立即回升为超指数形式 $2^{O(n^2 \log\log n / \sqrt{\log n})}$。
 :::
 
+::: {.viz src="eth-horizon-crossover" preset="human" height="500"}
+**$2^{16}$ 个变量：指数率才降回 $1$。** 琥珀色的读数停在 $n = 2^{16}$，六万多个变量：取 $c = 1$ 的青色示意曲线在这里才降到 $1$，每个变量付出的指数与穷举相同；品红的 PPSZ 是 $0.386$。这是上表第一行（示意曲线的数值对比，`MODEL`）。
+:::
+
+::: {.viz src="eth-horizon-crossover" preset="cross" height="500"}
+**交叉点：$n \approx 2^{558}$。** 让规模一路增大：青色曲线缓缓下降，直到 $n \approx 2^{558}$ 才与品红的 $0.386$ 相交，远在阴影（可观测宇宙原子数以内的规模）之外。这是上表最后一行（示意曲线的数值对比，`MODEL`）。
+:::
+
 [@ex-ch30-galactic-crossover-scale] 中跨越宇宙尺度的数值与规约对比，为本书“球内有限观察者 vs. 球外之球”的认识论图景（`MODEL`）提供了三点深刻启示：
 
 - **银河算法与有限观察者的物理尺度边界（`MODEL`）**：如 [@ex-ch30-galactic-crossover-scale] 所示，示意曲线下穿传统局部搜索基准的交叉尺度远超可观测宇宙的重子自由度预算（此类仅在超天文尺度显影渐近优势的算法在复杂性理论惯例中被称为**银河算法 Galactic Algorithm**）。在本书形式化库中，**有限记忆历史容量定理**（[`finite_memory_history_capacity`](lean:D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity)，证明可区分测量历史数受有限记忆载体容量上界制约）与**开放可积电路最小深度定理**（[`OpenIntegrableCircuitMinDepth.result`](lean:D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result)，给出局部性为 $\kappa$ 的开放可积电路最小深度 $\lfloor N/(\kappa+1)\rfloor + 1$）从各自模型侧面刻画了有限物理系统的容量与深度硬约束；将它们与 [@ex-ch30-galactic-crossover-scale] 的银河交叉尺度并置，在几何模型（`MODEL`）上直观展现了为什么在物理可实现的观测尺度内，有限观察者依然面对高耸的有效搜索壁垒（同时重申：标准统一图灵机模型下的 $\mathrm{P} \neq \mathrm{NP}$ 猜想 [@conj-p-neq-np] 仍为未决的 `OPEN` 问题）。
@@ -294,6 +314,10 @@ $$
 在经典连续介质流体力学中，由此可区分两类区域：当正交外积旋度为零（$\nabla\wedge\mathbf{u} = 0$，无旋势流）时，对流非线性退化为纯标量势梯度并直接并入伯努利总压抵消，单连通域上无散无旋流场归约为线性拉普拉斯势场 $\mathbf{u} = -\nabla\Phi$；当正交外积旋度非零（$\nabla\wedge\mathbf{u} \neq 0$，有旋涡流）时，由于标量势梯度的外微分恒为零，标量压强梯度无法抵消外积旋度 $\nabla\wedge\mathbf{u}$，流线与正交涡面发生非线性耦合。
 :::
 
+::: {.viz src="navier-stokes-p-np" preset="potential" height="500"}
+**无旋：对流项只是一个梯度。** $s = 0$ 的驻点流 $\mathbf{u} = (x, -y)$，没有涡度。琥珀色探针处，白色的对流项箭头与青色的梯度那一半完全重合，品红的兰姆那一半为零：这一项整个并入压强。
+:::
+
 将 [@rem-ch30-lamb-decomposition-literature] 所载的无旋势流相与有旋涡流相映射回上一节“$P$ 是无旋导向场，$NP$ 是旋涡荒原中的细线”的几何类比模型（`MODEL`），无旋相在概念上对应光滑全局导向场（类比流体中的 $P$ 态），而有旋相则对应多尺度旋涡缠绕。
 
 ::: {.viz src="navier-stokes-p-np" preset="vortex" height="500"}
@@ -314,6 +338,14 @@ $$
 $$
 \text{轴向拉伸压倒粘性耗散且 } A \to 0 \implies \|\boldsymbol{\omega}\| \approx \frac{\Gamma}{A} \to \infty.
 $$
+:::
+
+::: {.viz src="navier-stokes-p-np" preset="flat" height="500"}
+**二维：涡管不被拉伸。** 涡度垂直于流动的平面，没有东西去拉它：涡管不变细，粘性只让它慢慢变粗（截面 $A$ 从虚线的 $1$ 涨到约 $2$），青色回路的环量 $\Gamma = \omega A$ 不变，品红的涡度只降不升（示意模型，`MODEL`）。
+:::
+
+::: {.viz src="navier-stokes-p-np" preset="strain" height="500"}
+**三维：越拉越细。** 沿轴以恒定拉伸率拉这根涡管，不计粘性：它越来越长、越来越细，青色回路的环量 $\Gamma = \omega A$ 不变，所以品红的涡度按 $\Gamma/A$ 一路变大，即上式的 $\|\boldsymbol{\omega}\| \approx \Gamma/A$（示意模型，`MODEL`）。
 :::
 
 对比 [@rem-ch30-vorticity-transport-literature] 与计算复杂性中的维度分水岭，结构相变同时出现在 **$2 \to 3$**（以下为跨领域结构类比 `MODEL`，而非复杂性理论中的形式逻辑等价）：
@@ -470,6 +502,10 @@ $c_0$ 是整个多边形绕原点的无穷小转动：场对公共转动协变�
 2. **受迫三维纳维—斯托克斯（克雷陈述 C / D，含光滑外力 $\mathbf{f} \in C^\infty$）的 2026 年有限时间爆破构造与外部 Lean 4 验证**：在克雷数学研究所（C. Fefferman）制定的问题描述中，受迫陈述 C / D 允许施加光滑、紧支且保持总动能一致有界（$\sup_t \|\mathbf{u}(\cdot, t)\|_{L^2} < \infty$）的外力场 $\mathbf{f}(\mathbf{x}, t)$。2026 年公布的 166 页解析构造及其配套外部 Lean 4 形式化证明确认：在受迫情形下，精心设计的光滑外力可持续对齐并泵浦多尺度向内盘旋、轴向拉伸的自相似涡丝结构，使三维涡管拉伸局部压倒粘性耗散 $\nu\nabla^2\mathbf{u}$，在有限时间 $T^* < \infty$ 内产生横截面积 $A(t) \to 0$、$\limsup_{t \nearrow T^*} \|\mathbf{u}(\cdot, t)\|_{L^\infty} = \infty$ 的奇点（相关欧拉与流体奇点文献亦见 T. M. Elgindi, *Ann. of Math.* **194**, 2021；J. Chen & T. Y. Hou, 2022–2023；D. Córdoba & L. Martínez-Zoroa；以及 T. Buckmaster & L. Alpöge, 2026）。这些结果针对含外力或无粘情形，**并未解决**下文无外力（$\mathbf{f} \equiv \mathbf{0}$）粘性陈述 A / B。
 :::
 
+::: {.viz src="navier-stokes-p-np" preset="burgers" height="500"}
+**粘性拦住：伯格斯涡。** 恒定拉伸之外再加上粘性：变细的涡核同时向外扩散，截面 $A$ 停在 $4\pi\nu/\alpha$ 附近不再变小，品红的涡度也随之停住，青色回路的环量仍是 $1$。拉伸与粘性恰好相抵，涡管不会夹断（示意模型，`MODEL`）。
+:::
+
 ::: {.viz src="navier-stokes-p-np" preset="runaway" height="500"}
 **越拉越细（示意模型）。** 青色回路的环量 $\Gamma = \omega A$ 不变，虚线是出发时的涡管。这里让拉伸率正比于涡度本身（$\alpha = \kappa\omega$，示意性的闭合，不是纳维—斯托克斯方程的解）：$\kappa\Gamma = 0.50$ 大于 $4\pi\nu = 0.151$，到 $t = 2.4$ 截面已缩到 $0.162$，品红的涡度升到 $6.18$，截面将在 $t^* = 2.86$ 归零。真实的三维流体是否如此，正是下面的开放问题（`MODEL`）。
 :::
@@ -528,6 +564,10 @@ $$
 
 ::: {.viz src="navier-stokes-p-np" preset="mixed" height="500"}
 **看不见的变量漏进来。** 只看 $x$ 的观察者：每条曲线是固定一个 $x$ 时，看得见的加速度 $P(V)$ 随看不见的 $y$ 的变化。混合项打开后，曲线张成一把扇子：同一个 $x = 0.5$，青色是 $y = 0$ 时的加速度，琥珀色的点是当前 $y$ 时的加速度，琥珀色竖线是两者之差。差不为零，就没有只依赖 $x$ 的精确闭合（$\mathbb{R}^2$ 上的示意实例；一般判据与五模态实例见上面的定理）。
+:::
+
+::: {.viz src="navier-stokes-p-np" preset="closed" height="500"}
+**没有泄漏：低频自己说了算。** 三项泄漏都关掉：看不见的 $y$ 怎么变，琥珀色的点都沿着水平线走，与青色的 $y = 0$ 时的加速度一样，两者之差为零。只看 $x$ 的观察者可以自己预测下一步，这是上面判据的“当”那一半（$\mathbb{R}^2$ 上的示意实例）。
 :::
 
 ### 4. 粘性兰道尔擦除、高维测地线视角与连续—离散六重类比总结（`MODEL`）

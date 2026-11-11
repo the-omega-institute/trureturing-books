@@ -182,6 +182,10 @@ $$
 看！只要把黄金范数锁在单位群 $\operatorname{norm}(g) = \pm 1$ 上，[@prop-pell-form-eq-four-mul-norm] 就自动把迹坐标 $x = 2a + b$ 与副坐标 $y = b$ 锁死在离散的卢卡斯—斐波那契整数格点 $(L_n, F_n)$ 上！
 :::
 
+::: {.viz src="pythagoras-number-escape" preset="golden" height="500"}
+**$d = 5$：卢卡斯与斐波那契。** 渐近分数沿直线 $m = \sqrt{5}\,n$ 越贴越近，青色在线上方、品红在线下方；绿圈标出分母为斐波那契数、分子为卢卡斯数的格点 $(n, m) = (F_k, L_k)$，它们都落在 $m^2 - 5n^2 = \pm 4$ 上。加上正负号，这些配对恰是该方程的全部整数解（[`pell_pm_four_iff_signed_lucas_fib`](lean:D5/S3/Arith/GoldenPell.pell_pm_four_iff_signed_lucas_fib)）。
+:::
+
 ## 23.3 从二次型到四元数范数球面：$\mathbb{Z}$ 在 $\mathbb{Q}$ 中的可定义性全景 {#sec-ch23-3}
 
 现在，让我们回答本章题记提出的那个核心问题：**如何把这种“用范数与迹锁定离散整数”的几何机制，从二元二次型推广到四维四元数代数，从而在有理数域 $\mathbb{Q}$ 的内部一阶定义出整数集 $\mathbb{Z}$？**

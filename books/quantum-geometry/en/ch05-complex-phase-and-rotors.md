@@ -167,6 +167,10 @@ Translated back into the language of rotors (the dictionary below is a manual de
 - **Claim 2.** There is no global formula converting a rotation (the angle taken modulo $360^\circ$) into a rotor continuously. Any rule that assigns one rotor to each rotation must jump somewhere on the circle. The half angle is not a blemish of notation.
 - **Two full turns.** The loop $t \mapsto e^{4\pi i t}$ lifts to $t \mapsto e^{2\pi i t}$ (it is continuous, squares correctly and starts at $1$, so uniqueness in Claim 1 applies), which ends at $+1$. Only after $720^\circ$ is the rotor restored.
 
+::: {.viz src="qubit-geometry" preset="turn2" height="500"}
+**Two turns to come back.** The amber state vector $B$ turns twice about $\hat{x}$ (four legs of $180^\circ$ each). After the first full turn it is back where it started, yet the rotor's scalar part $w$, read out at the top left and drawn as the dashed violet curve below, sits at $-1$; only after $720^\circ$ does $w$ return to $+1$. One turn for the vector, two for the rotor (the fixed-plane case is [@thm-circle-double-cover-history-lift]).
+:::
+
 ::: {.example #ex-rotor-two-turns title="Angles from 0° to 720°: the Rotation Goes Around Twice, the Rotor Only Once"}
 Take $\vv{B} = \vv{e}_1 \wedge \vv{e}_2$. The rotation through the angle $\theta$ sends $\vv{e}_1$ to $\cos\theta\,\vv{e}_1 + \sin\theta\,\vv{e}_2$; the corresponding rotor is $R(\theta) = \cos\frac{\theta}{2} - \vv{B}\sin\frac{\theta}{2}$. The table lists the coordinates $(\cos\theta, \sin\theta)$ of the rotation and $\bigl(\cos\frac{\theta}{2}, \sin\frac{\theta}{2}\bigr)$ of the rotor, rounded to the digits shown:
 

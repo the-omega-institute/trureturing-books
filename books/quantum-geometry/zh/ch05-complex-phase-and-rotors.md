@@ -167,6 +167,10 @@ $$
 - **结论 2**：不存在把“旋转”（即模 $360^\circ$ 的转角）连续地换算成“旋子”的整体公式。任何给每个旋转指定一个旋子的规则，必然在圆上某处跳变。半角不是记号的瑕疵。
 - **两整圈**：回路 $t \mapsto e^{4\pi i t}$ 的提升是 $t \mapsto e^{2\pi i t}$（它连续、平方正确、起点为 $1$，由结论 1 的唯一性即得），终点回到 $+1$。$720^\circ$ 之后旋子才复原。
 
+::: {.viz src="qubit-geometry" preset="turn2" height="500"}
+**转两圈才回来。** 琥珀色的态矢量 $B$ 绕 $\hat{x}$ 连转两圈（四段各 $180^\circ$）：转满第一圈时它已回到出发点，左上角读出的旋子标量部 $w$（下方图里的紫色虚线）却停在 $-1$；转满 $720^\circ$，$w$ 才回到 $+1$。矢量一圈，旋子两圈（固定旋转平面的情形见 [@thm-circle-double-cover-history-lift]）。
+:::
+
 ::: {.example #ex-rotor-two-turns title="转角从 0° 到 720°：旋转走了两圈，旋子只走了一圈"}
 取 $\vv{B} = \vv{e}_1 \wedge \vv{e}_2$。转角为 $\theta$ 的旋转把 $\vv{e}_1$ 送到 $\cos\theta\,\vv{e}_1 + \sin\theta\,\vv{e}_2$；对应的旋子是 $R(\theta) = \cos\frac{\theta}{2} - \vv{B}\sin\frac{\theta}{2}$。下表列出旋转的坐标 $(\cos\theta, \sin\theta)$ 与旋子的坐标 $\bigl(\cos\frac{\theta}{2}, \sin\frac{\theta}{2}\bigr)$，四舍五入到所示位数：
 
