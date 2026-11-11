@@ -994,6 +994,72 @@
           "gid": "D5/S3/Quantum/Information/BargmannImaginaryMaximizers.Latitude.latitude_dot"
         }
       ]
+    },
+    {
+      "id": "pulse-area-virtual-z",
+      "code": "PULSE//AREA",
+      "title": "脉冲面积与虚拟 Z",
+      "title_en": "Pulse area and the virtual Z",
+      "summary": "左边是微波脉冲的包络，右边是布洛赫球：在旋转参考系里，固定相位的共振脉冲把态绕赤道上的一根轴转过的角，就是包络下的面积（品红）。方波 25 ns、10 MHz 的面积 π/2 是四分之一转，同面积的高斯波停在同一点，面积 π 是半转；失谐 5 MHz 时转轴随包络晃动，同样的面积差了约 26°；两个不同相位的脉冲换个次序，终点不同。实验室系里赤道上的态每 0.2 ns 绕竖轴一圈，两极不动（Lean 已证的本征态定态性）。虚拟 Z 不发脉冲，只把后面脉冲的相位改成 φ − λ：终点高度不变，Z 基读数相同；符号改错成 φ + λ，就从北极跑到南极。八张实验卡各讲其中一件事，可以在正文里单独引用。",
+      "summary_en": "On the left the envelope of a microwave pulse, on the right the Bloch sphere: in the rotating frame a resonant pulse of fixed phase turns the state about an axis on the equator by an angle equal to the area under the envelope (magenta). A 25 ns, 10 MHz square pulse has area π/2 and makes a quarter turn, a Gaussian of the same area stops at the same point, and area π is a half turn; detuned by 5 MHz the axis sways with the envelope and the same area misses by about 26°; two pulses of different phase end elsewhere when swapped. In the lab frame a state on the equator goes round the vertical axis every 0.2 ns while the poles stay put (the stationarity of eigenstates, proved in Lean). A virtual Z sends no pulse and only shifts the later pulses to phase φ − λ: the end point keeps its height and the Z readout is unchanged; with the wrong sign φ + λ it goes from the north pole to the south pole. Each of the eight experiment cards makes one of these points and can be cited on its own from the text.",
+      "path": "pulse-area-virtual-z/",
+      "thumbnail": "pulse-area-virtual-z/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "布洛赫球",
+        "微波脉冲",
+        "脉冲面积",
+        "旋转参考系",
+        "虚拟 Z 门",
+        "失谐",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Bloch sphere",
+        "Microwave pulses",
+        "Pulse area",
+        "Rotating frame",
+        "Virtual Z gate",
+        "Detuning",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第十一章 · 旋转坐标系与载频约分",
+          "label_en": "Chapter 11 · Rotating frames and carrier removal",
+          "href": "../zh/ch11-pulses-and-virtual-z.html#sec-rotating-frame-calibration",
+          "href_en": "../en/ch11-pulses-and-virtual-z.html#sec-rotating-frame-calibration"
+        },
+        {
+          "label": "第十一章 · 共振微波与脉冲面积",
+          "label_en": "Chapter 11 · Resonant drives and pulse area",
+          "href": "../zh/ch11-pulses-and-virtual-z.html#sec-resonant-pulse-area",
+          "href_en": "../en/ch11-pulses-and-virtual-z.html#sec-resonant-pulse-area"
+        },
+        {
+          "label": "第十一章 · 虚拟 Z 与相位参考更新",
+          "label_en": "Chapter 11 · Virtual Z and phase-reference updates",
+          "href": "../zh/ch11-pulses-and-virtual-z.html#sec-virtual-z-phase-reference",
+          "href_en": "../en/ch11-pulses-and-virtual-z.html#sec-virtual-z-phase-reference"
+        },
+        {
+          "label": "Lean 源码 · EnergyEigenstateStationarity.lean",
+          "label_en": "Lean source · EnergyEigenstateStationarity.lean",
+          "href": "{trureturing}/D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary"
+        },
+        {
+          "gid": "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.exp_mulVec_of_eigenvector"
+        },
+        {
+          "gid": "D5/S3/Quantum/Dynamics/ObserverPullbackTraceIdentity.observer_pullback_trace_identity"
+        }
+      ]
     }
   ]
 }
