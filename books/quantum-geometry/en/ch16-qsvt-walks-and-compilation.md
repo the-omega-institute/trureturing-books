@@ -11,7 +11,9 @@ We establish and examine four interconnected themes:
 3. **Continuous two-axis generation versus finite-word $\{H, T\}$ polytope approximation (Liu Hui's three-dimensional 割圆术)**: While continuous rotations around any two non-collinear axes generate $\mathrm{SO}(3)$ in finitely many steps, restricting to words of length $\le L$ over the discrete gate set $\{H, T\}$ applied to a fixed initial Bloch state $\vv{r}_0 \in S^2$ produces a finite point set $\mathcal{S}_L \subset S^2$ whose Euclidean convex hull $P_L = \operatorname{conv}(\mathcal{S}_L)$ is a flat-faced inscribed polytope with strictly positive covering residual $\varepsilon_L > 0$;
 4. **Exact coin-assisted source-query counts versus asymptotic gate compilation length**: When the initial success probability $p \in (0, 1]$ is known, an auxiliary coin rotation eliminates discrete overshoot and achieves exact amplitude amplification in at most $\frac{\pi/2 + 2}{\sqrt{p}}$ source queries — a query count (`sourceQueries`) that must be kept strictly distinct from asymptotic $\{H, T\}$ gate compilation length (recorded in [@rem-solovay-kitaev-literature]).
 
-![The Chebyshev polynomial T₃(x) = 4x³ − 3x on a two-dimensional signal block; the polytope spanned by the landing points of finite gate words; and the staircase of gate length against compilation accuracy, with the bound on source queries](../assets/fig-16-qsvt-solovay-kitaev-polytope.svg)
+::: {.figure src="ch16-overview"}
+**Figure 16.** The chapter at a glance. Panel I: on $[-1, 1]$ the cyan Chebyshev polynomial $T_3(x) = 4x^3 - 3x$ swings back and forth between $-1$ and $1$; the grey line is $T_1(x) = x$. Panel II: the $19$ cyan vertices where $\{H, T\}$ words of length at most $6$ take the north pole; their convex hull encloses the centre with flat chordal faces, leaving gaps below the shell. Panel III: the cyan staircase of source queries $2n + 1$ for exact amplitude amplification stays under the green bound $(\pi/2 + 2)/\sqrt{p}$ ([@cor-exact-source-query-count]); the three dots are the table's $3$, $7$ and $13$.
+:::
 
 ## QSVT: Two-Dimensional Blocks and Chebyshev Recurrences {#sec-qsvt-chebyshev-blocks}
 
@@ -56,6 +58,10 @@ W(x) = \begin{pmatrix} x & i\sqrt{1 - x^2} \\ i\sqrt{1 - x^2} & x \end{pmatrix} 
 $$
 
 has eigenvalues $a = e^{i\theta}$ and $b = e^{-i\theta}$ ($\det W(x) = ab = 1$, $\Tr W(x) = 2x$), so its $m$-th power $W(x)^m$ carries $T_m(x) = \cos(m\theta)$ in its top-left entry!
+
+::: {.figure src="ch16-chebyshev-shadows"}
+**Turn $m$ times and the shadow is $T_m(x)$.** Take $x = \cos\theta = \frac{1}{2}$ ($\theta = 60^\circ$): four arrows, each turned one more violet angle $\theta$, stop at $0^\circ$, $60^\circ$, $120^\circ$ and the amber $180^\circ$. Their cyan shadows on the axis are $T_0 = 1$, $T_1 = \frac{1}{2}$, $T_2 = -\frac{1}{2}$ and $T_3 = -1$, matching the recurrence of [@thm-chebyshev-trace-recurrence] term by term.
+:::
 
 **Strict mathematical boundary**: [@thm-chebyshev-trace-recurrence] is a scalar recurrence in an arbitrary commutative ring $R$ with $ab = 1$ and makes no assumptions about matrices, singular values, or phase sequences; connecting it to $W(x) \in \mathrm{SU}(2)$ is an explicit hand calculation, not a formalization of the full QSVT theorem. In particular, one cannot realize an arbitrary polynomial from this recurrence alone (the polynomial realizability conditions for full QSVT are recorded in [@rem-qsvt-walks-literature]).
 
@@ -283,6 +289,10 @@ Then all six clauses hold:
 
 ::: proof
 When $p = 1$, $w = [\mathrm{.source}]$ uses $1$ source query and $\mathrm{coinLift}(C)\cdot\mathrm{coinEmbed}(J) = \mathrm{coinEmbed}(\mathrm{success}(CJ, P, 1))$. When $0 < p < 1$, choosing $n = \lceil \frac{\pi}{4\arcsin\sqrt{p}} - \frac{1}{2}\rceil_+$ ensures $0 < r = \sin^2(\frac{\pi}{4n+2}) \le p < 1$ and $0 < q = r/p \le 1$. The modified preparation $U_q = (\mathrm{coinRotation}(q)\cdot\mathrm{coinLift}(C))\cdot\mathrm{coinEmbed}(J)$ has success Gram matrix $q p I_s = r I_s$ and normalized success block $\mathrm{coinEmbed}(\mathrm{success}(CJ, P, p))$. Since $(2n + 1)\arcsin(\sqrt{r}) = \frac{\pi}{2}$, applying [@thm-grover-uniform-rotation] to $U_q$ at step $n$ gives $\sin(\pi/2) = 1$ and $\cos(\pi/2) = 0$, proving $V = \mathrm{coinEmbed}(\mathrm{success}(CJ, P, p))$ and $(1 - \mathrm{coinGood}(P))V = 0$. Finally, $\mathrm{amplificationWord}(n)$ contains $1 + 2n$ occurrences of `.source` and `.sourceAdjoint`, and $n < \frac{\pi}{4\arcsin\sqrt{p}} + \frac{1}{2}$ with $\arcsin\sqrt{p} \ge \sqrt{p}$ bounds $2n + 1 \le \frac{\pi/2 + 2}{\sqrt{p}}$. The full proof is checked by the Lean kernel.
+:::
+
+::: {.figure src="ch16-slowed-steps"}
+**Slow each step a little and whole steps land exactly on the target.** For $p = 1/16$ and $n = 3$: on the left, three violet steps of the original size $\theta \approx 14.48^\circ$ carry the amber arrow past the success direction $W$, overshooting by the magenta $11.3^\circ$; on the right, the coin slows each step to $\theta_r = \pi/14 = 180^\circ/14$, and the same three steps put the amber arrow exactly on $W$, since $(2n+1)\theta_r = \pi/2$; see [@cor-exact-source-query-count].
 :::
 
 **Critical distinction (Figure 16, Panel III)**: `sourceQueries(w)` in [@cor-exact-source-query-count] counts **only** `.source` and `.sourceAdjoint` calls ($1$ for $p = 1$, $2n + 1$ for $p < 1$) using the continuous coin rotation `coinRotation q` for known $p$; it is not the total gate count and **must never be confused with the Solovay–Kitaev $\{H, T\}$ compilation gate length**.
