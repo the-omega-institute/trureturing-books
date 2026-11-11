@@ -96,6 +96,10 @@ $$
 **赤道一圈。** 四个顶点 $+X, +Y, -X, -Y$ 都在 $t = \frac{1}{2}$ 的纬度上，按 [@cor-latitude-complex-overlap]，相邻两点的内积都是 $\frac{1+i}{2}$，四个连乘得 $-\frac{1}{4}$，右下角青色的指针停在 $\pi$；品红的面积是整个北半球 $2\pi$。琥珀色的箭头回到 $+X$ 时与虚线重合，看上去没转，箭头旁品红的整圆表示它其实转满了一周。
 :::
 
+::: {.film src="003-two-angles-berry"}
+**正交一次、正交两次：两角寻址与贝里相位（约 140 秒）。** 只绕一根轴转，琥珀色的点只画出一个圆；先绕 $\vv{e}_2$ 倾转 $\theta = 60^\circ$、再绕 $\vv{e}_3$ 拧转 $\varphi = 45^\circ$，它落在 $\bigl(\frac{\sqrt{6}}{4}, \frac{\sqrt{6}}{4}, \frac{1}{2}\bigr)$；两根只差 $30^\circ$ 的轴交替转四次也能到达目标（[@thm-two-axis-finite-word]）。随后两次 $90^\circ$ 转动换个次序，分别停在 $+X$ 与 $-Y$；沿八分球回路平行搬运，箭头回来时转过所圈面积 $\Omega = \frac{\pi}{2}$；最后由 [@cor-latitude-complex-overlap] 的 $\frac{1+i}{2}$ 连乘出 $\Delta = \frac{1+i}{4}$，它的相位 $\frac{\pi}{4}$ 在每个态改乘局部相位时纹丝不动（贝里相位与面积的对应见 [@rem-berry-pancharatnam-holonomy-literature]）。
+:::
+
 ## 保留仪器与时间顺序 {#sec-instruments-preserve-order}
 
 在进入全局格拉姆重构之前，我们必须立下一块醒目的警示牌：**“两两比较顺序无关”绝不意味着可以把不同时刻的物理测量仪器随意颠倒，或者只凭单次测量的静态概率分布（POVM 效应元）就抹去测量后的状态更新机制！**
