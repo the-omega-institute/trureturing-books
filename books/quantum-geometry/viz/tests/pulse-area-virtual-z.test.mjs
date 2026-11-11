@@ -74,6 +74,42 @@ const mm = (A, B) => [0, 1].map((i) => [0, 1].map((j) => ca(cm(A[i][0], B[0][j])
 const Rz = (l) => [[[Math.cos(l / 2), -Math.sin(l / 2)], [0, 0]], [[0, 0], [Math.cos(l / 2), Math.sin(l / 2)]]];
 const Rphi = (phi, th) => { const c = Math.cos(th / 2), s = Math.sin(th / 2); return [[[c, 0], cm([0, -s], [Math.cos(phi), -Math.sin(phi)])], [cm([0, -s], [Math.cos(phi), Math.sin(phi)]), [c, 0]]]; };
 const mdiff = (A, B) => Math.max(...[0, 1].flatMap((i) => [0, 1].map((j) => Math.hypot(A[i][j][0] - B[i][j][0], A[i][j][1] - B[i][j][1]))));
+// the note under the readouts reports the end points of the whole program: recomputed here by RK4 at the program's end,
+// with the angle between two ends taken from chords (the page uses atan2 of the cross and dot products)
+const num = (x) => Number(String(x).replace(/−/g, '-'));
+const P0T = (r) => (1 + r[2]) / 2;
+function sepT(a, b) {
+  const d = vdist(a, b), s = Math.hypot(a[0] + b[0], a[1] + b[1], a[2] + b[2]);
+  return (d <= Math.SQRT2 ? 2 * Math.asin(Math.min(1, d / 2)) : PI - 2 * Math.asin(Math.min(1, s / 2))) / DEG;
+}
+const nsT = (t) => `${t.toFixed(t < 2 ? 2 : 1)} ns`;
+const degT = (d) => { const x = ((d + 180) % 360 + 360) % 360 - 180; return `${String(x === -180 ? 180 : x).replace('-', '−')}°`; };
+const NOTE = {
+  zh: { pair: /实线 P\(0\) = ([−\d.]+)，虚线[^P]*P\(0\) = ([−\d.]+)，相距 ([−\d.]+)°/, one: /P\(0\) = ([−\d.]+)（起点 ([−\d.]+)），离起点 ([−\d.]+)°/,
+    from: /实线离起点 ([−\d.]+)°/, at: (end, lab) => `全程终点（t = ${nsT(end)}${lab ? '，旋转系' : ''}）` },
+  en: { pair: /solid P\(0\) = ([−\d.]+), dashed[^P]*P\(0\) = ([−\d.]+), ([−\d.]+)° apart/, one: /P\(0\) = ([−\d.]+) \(start ([−\d.]+)\), ([−\d.]+)° from the start/,
+    from: /the solid end is ([−\d.]+)° from the start/, at: (end, lab, two) => `Full-program end${two ? 's' : ''} (t = ${nsT(end)}${lab ? ', rotating frame' : ''})` }
+};
+const TOL_P = 5e-5 + 2e-6, TOL_A = 0.05 + 2e-3;   // the note rounds P(0) to 4 places and angles to 0.1°
+/** The ends of the whole program by RK4 (whatever the rail's time): both P(0), the angle between them, and from the start. */
+function endsT(s) {
+  const end = s.max, m = run(s, 'main', end), g = s.ghost ? run(s, s.ghost, end) : null;
+  return { end, m, g, P0m: P0T(m), P0g: g ? P0T(g) : null, gap: g ? sepT(m, g) : null, from: sepT(s.r0, m) };
+}
+/** Whether a note (language lng) reports those ends, labelled as the full program's: [ok, what disagrees]. */
+function noteMatches(note, lng, s, E) {
+  const R = NOTE[lng], bad = [], off = (txt, v, tol, what) => { if (!(Math.abs(num(txt) - v) <= tol)) bad.push(`${what} ${txt} vs ${v}`); };
+  if (!note.includes(R.at(E.end, s.frame === 'lab', !!E.g))) bad.push('label');
+  if (E.g) {
+    const x = note.match(R.pair);
+    if (!x) bad.push('no pair'); else { off(x[1], E.P0m, TOL_P, 'solid P0'); off(x[2], E.P0g, TOL_P, 'dashed P0'); off(x[3], E.gap, TOL_A, 'apart'); }
+    if (s.ghost === 'gauss') { const y = note.match(R.from); if (!y) bad.push('no from'); else off(y[1], E.from, TOL_A, 'from start'); }
+  } else {
+    const x = note.match(R.one);
+    if (!x) bad.push('no end'); else { off(x[1], E.P0m, TOL_P, 'P0'); off(x[2], P0T(s.r0), TOL_P, 'start P0'); off(x[3], E.from, TOL_A, 'from start'); }
+  }
+  return [bad.length === 0, `${lng}: ${bad.join('; ')}`];
+}
 
 /* ---------- the gates every stage-first page must pass ---------- */
 await stageFirstChecks(T, BOOK, ID);
@@ -208,6 +244,147 @@ let ident = 0;
 for (let k = 0; k < 20; k++) { const phi = 6 * rnd(), th = 6 * rnd(), l = 6 * rnd(); ident = Math.max(ident, mdiff(mm(Rphi(phi, th), Rz(l)), mm(Rz(l), Rphi(phi - l, th))), mdiff(mm(mm(Rz(l), Rphi(phi, th)), Rz(-l)), Rphi(phi + l, th))); }
 check('matrices: R_φ(θ)R_z(λ) = R_z(λ)R_{φ−λ}(θ) and R_z(λ)R_φ(θ)R_z(−λ) = R_{φ+λ}(θ) (20 random cases, independent of the page)', ident < 1e-12);
 
+// the note: what it says about the two ends must be what the ends of the whole program are (RK4), in both languages,
+// wherever the rail stands; sameness or difference only as the numbers show it
+const notes = async () => { const zh = await page.textContent('#roNote'); await lang('en'); const en = await page.textContent('#roNote'); await lang('zh'); return { zh, en }; };
+const p0Now = async () => num((await page.textContent('#roP0')).trim().split(' ')[0]);
+const both = (N, s, E) => { const a = noteMatches(N.zh, 'zh', s, E), b = noteMatches(N.en, 'en', s, E); return [a[0] && b[0], `${a[1]} | ${b[1]}`]; };
+let E, N, M;
+// equal ends where the phases differ: X(π/2) then −X(π/2) undo each other in either order
+await pick('order'); await setRange('phase2', 180); s = await seek(30);
+E = endsT(s); N = await notes(); M = both(N, s, E);
+check('ORDER at 0°/180°, π/2 each: RK4 returns both orders to the north pole; the note reports P(0) = 1.0000 twice and 0.0° apart, and no difference or non-commutation (zh, en)',
+  s.ghost === 'two' && close(s.phi2, 180) && vdist(E.m, [0, 0, 1]) < 1e-9 && vdist(E.g, [0, 0, 1]) < 1e-9 && M[0] && N.zh.includes('相距 0.0°') && N.en.includes('0.0° apart')
+  && !/不对易|终点不同|却/.test(N.zh) && !/commute|elsewhere|different points|yet/.test(N.en), `${M[1]} | ${N.zh} | ${N.en}`);
+const cur30 = P0T(run(s, 'main', 30));
+check('…scrubbed to 30 ns: the P(0) readout is the current one (RK4) while the note keeps the full-program end at 50 ns',
+  Math.abs((await p0Now()) - cur30) <= TOL_P && Math.abs(cur30 - E.P0m) > 0.3 && N.zh.includes('全程终点（t = 50.0 ns）') && N.en.includes('Full-program ends (t = 50.0 ns)'), `${cur30}`);
+// two π pulses about X and Y: the propagators differ only by a sign, so both orders end at the same point
+await pick('order'); await setRange('area', 1); s = await seek(50);
+E = endsT(s); N = await notes(); M = both(N, s, E);
+const negM = (A) => A.map((row) => row.map((z) => cs(z, -1))), XY = mm(Rphi(PI / 2, PI), Rphi(0, PI)), YX = mm(Rphi(0, PI), Rphi(PI / 2, PI));
+const ang4 = 2 * Math.acos(Math.max(-1, Math.min(1, traceHalf(s, 50)))) / PI, aN = [N.zh.match(/合成传播子的转角是 ([−\d.]+)π/), N.en.match(/combined propagator turns by ([−\d.]+)π/)];
+check('ORDER with two π pulses, X then Y: the two products differ by a global sign (matrices); RK4 ends both orders at the north pole; the note says 0.0° apart, P(0) = 1 twice, areas 2.00π and the RK4 angle, without a contrast',
+  mdiff(XY, YX) > 1 && mdiff(XY, negM(YX)) < 1e-12 && vdist(E.m, [0, 0, 1]) < 1e-9 && vdist(E.g, [0, 0, 1]) < 1e-9 && M[0] && N.zh.includes('面积合计 2.00π') && N.en.includes('add up to 2.00π')
+  && aN.every((x) => x && Math.abs(num(x[1]) - ang4) <= 0.005 + 1e-6) && close(ang4, 1, 1e-6) && !/不对易|却/.test(N.zh) && !/commute|yet/.test(N.en), `${M[1]} | ${N.zh} | ${N.en}`);
+// the wrong sign from the north pole: other azimuth, same height
+await pick('quarter'); await setRange('lam', 90); await chip('#signChips [data-sign="-1"]'); s = await seek(10);
+E = endsT(s); N = await notes(); M = both(N, s, E);
+check('WRONG SIGN from the north pole, λ = 90°: RK4 ends the two paths 90° apart at the same height (P(0) = 1/2 both); the note reports that and does not say the readout changes',
+  s.ghost === 'lam' && s.sign === -1 && close(E.P0m, 0.5, 1e-9) && close(E.P0g, 0.5, 1e-9) && close(E.gap, 90, 1e-6) && M[0]
+  && N.zh.includes('读数在四位小数上相同') && !N.zh.includes('读数变了') && N.en.includes('agree to four decimals') && !/readout changes|another height/.test(N.en), `${M[1]} | ${N.zh}`);
+await pick('sign'); s = await seek(25);
+E = endsT(s); N = await notes(); M = both(N, s, E);
+check('WRONG-SIGN card: RK4 ends at P(0) = 0 against 1, 180° apart, and the note says the readout changes (zh, en)',
+  close(E.P0m, 0, 1e-9) && close(E.P0g, 1, 1e-9) && close(E.gap, 180, 1e-4) && M[0] && N.zh.includes('读数变了') && N.en.includes('the readout changes'), `${M[1]}`);
+// the right sign: the literal end is the hardware end turned by λ about z, also when both sit on the axis
+await pick('vz'); s = await seek(12);
+E = endsT(s); N = await notes(); M = both(N, s, E);
+check('VIRTUAL-Z: both ends on the north pole (RK4), related by Z(90°) trivially; the note states the z-turn relation and reports 0.0° apart, not 90° (zh, en)',
+  vdist(E.m, [0, 0, 1]) < 1e-9 && vdist(rotZ(E.m, PI / 2), E.g) < 1e-9 && M[0] && N.zh.includes('把实线的终点绕 z 轴转 90° 就得到虚线的终点') && N.zh.includes('相距 0.0°')
+  && N.en.includes('Turning the solid end by 90° about z gives the dashed end') && N.en.includes('0.0° apart') && !N.en.includes('90.0° apart') && !N.zh.includes('只差'), `${M[1]} | ${N.en}`);
+await pick('quarter'); await setRange('lam', 90); s = await seek(25);
+E = endsT(s); N = await notes(); M = both(N, s, E);
+check('right sign from the north pole, λ = 90°: RK4 ends 90° apart, the literal one the hardware one turned by 90° about z, P(0) = 1/2 both; the note agrees',
+  s.sign === 1 && vdist(rotZ(E.m, PI / 2), E.g) < 1e-9 && close(E.gap, 90, 1e-6) && close(E.P0m, 0.5, 1e-9) && M[0] && N.zh.includes('高度相同') && N.en.includes('same height'), M[1]);
+await pick('quarter'); await setRange('lam', 180); await chip('#signChips [data-sign="-1"]'); s = await seek(25);
+E = endsT(s); N = await notes(); M = both(N, s, E);
+check('λ = 180° with the “wrong” sign: φ + λ and φ − λ are one phase, RK4 relates the ends by Z(180°) (180° apart, P(0) = 1/2 both), and the note says the sign makes no difference',
+  s.sign === -1 && close(s.phys[0], 180) && vdist(rotZ(E.m, PI), E.g) < 1e-9 && close(E.gap, 180, 1e-4) && M[0] && N.zh.includes('同一个相位') && !N.zh.includes('改错了符号')
+  && N.en.includes('the same phase') && !N.en.includes('wrong sign') && N.en.includes('Turning the solid end by 180° about z'), `${M[1]} | ${N.en}`);
+// detuned: a square envelope keeps one tilted axis, a Gaussian one turns it
+await pick('quarter'); await setRange('det', 5); s = await state();
+const axSq = [s.peak, 0, 5 * MHZ].map((x, i, g) => x / Math.hypot(...g));
+let axes = []; for (const t of [0, 3, 12.5, 24.9, 25]) axes.push((await seek(t)).axis);
+s = await seek(7); E = endsT(s); N = await notes(); M = both(N, s, E);
+const tiltSq = (Math.asin(axSq[2]) / DEG).toFixed(1), axTxt = `(${axSq.map((x) => x.toFixed(2)).join(', ')})`;
+check('detuned square pulse (5 MHz, 10 MHz peak): the axis is the constant (Ω, 0, Δ)/|·| = (0.894…, 0, 0.447…) at every time, and the note says fixed, gives it and its 26.6° tilt, and the RK4 ends',
+  axes.every((a) => a && vdist(a, axSq) < 1e-12) && close(axSq[0], 2 / Math.sqrt(5), 1e-12) && tiltSq === '26.6' && M[0] && N.zh.includes(`固定为 ${axTxt}`) && N.zh.includes(`倾出赤道 ${tiltSq}°`)
+  && N.en.includes(`stays at ${axTxt}`) && N.en.includes(`${tiltSq}° off the equator`) && !N.zh.includes('晃') && !/sway/.test(N.en), `${M[1]} | ${N.en}`);
+await pick('detune'); s = await state();
+const zG = (t) => 5 * MHZ / Math.hypot(s.peak * SHAPE.gauss(t, 25), 5 * MHZ);
+axes = []; for (const t of [0, 6, 12.5, 25]) axes.push([t, (await seek(t)).axis]);
+s = await seek(9); E = endsT(s); N = await notes(); M = both(N, s, E);
+const tiltG = (Math.asin(zG(12.5)) / DEG).toFixed(1);
+check('detuned Gaussian (DETUNED card): the axis tilt follows the envelope, vertical (+z) at both ends, lower at 6 ns, lowest at the peak; the note says so with the peak tilt and the RK4 ends',
+  axes.every(([t, a]) => a && close(a[2], zG(t), 1e-9) && close(a[1], 0, 1e-12)) && close(axes[0][1][2], 1, 1e-9) && close(axes[3][1][2], 1, 1e-9) && axes[1][1][2] > axes[2][1][2] + 0.05
+  && M[0] && N.zh.includes('随包络变化') && N.zh.includes(`峰值处倾出赤道 ${tiltG}°`) && N.zh.includes('沿 +z') && N.en.includes('changes with the envelope') && N.en.includes(`${tiltG}° off the equator at the peak`) && N.en.includes('along +z'),
+  `${M[1]} | ${axes.map(([t, a]) => `${t}: ${a && a[2]}`).join(', ')}`);
+// the ordinary single pulse: the area is the propagator's angle, not the distance every start travels
+await pick('quarter'); s = await seek(25);
+E = endsT(s); N = await notes(); M = both(N, s, E);
+check('QUARTER (default): the note calls the area 0.50π the propagator\'s angle (90.0°) and reports the RK4 end, P(0) = 0.5000 from 1.0000, 90.0° from the start',
+  !s.ghost && M[0] && N.zh.includes('面积 0.50π 是传播子的转角') && N.zh.includes('转过 90.0°') && N.en.includes('The area 0.50π is the angle of the propagator') && N.en.includes('90.0° from the start'), `${M[1]} | ${N.en}`);
+s = await seek(10);
+const N10 = await notes(), cur10 = P0T(run(s, 'main', 10));
+check('…scrubbed to 10 ns, the note is unchanged while the P(0) readout follows the rail (RK4)', N10.zh === N.zh && N10.en === N.en && Math.abs((await p0Now()) - cur10) <= TOL_P && Math.abs(cur10 - 0.5) > 0.1, `${cur10}`);
+await pick('vz'); await setRange('lam', 0); s = await seek(25);
+E = endsT(s); N = await notes(); M = both(N, s, E);
+check('from |+⟩ on the X axis the same quarter-turn leaves the state where it is (RK4): the note keeps 90.0° as the propagator\'s angle and reports 0.0° from the start',
+  !s.ghost && vdist(E.m, [1, 0, 0]) < 1e-9 && M[0] && N.zh.includes('转过 90.0°') && N.zh.includes('离起点 0.0°') && N.en.includes('0.0° from the start'), `${M[1]} | ${N.zh}`);
+await pick('gauss'); s = await seek(6);
+E = endsT(s); N = await notes(); M = both(N, s, E);
+check('SAME-AREA, scrubbed to 6 ns: the note reports the Gaussian and the dashed square ending 0.0° apart (RK4), 90.0° from the start, while the readout shows the current P(0)',
+  s.ghost === 'gauss' && E.gap < 1e-6 && M[0] && N.zh.includes('是传播子的转角') && Math.abs((await p0Now()) - P0T(run(s, 'main', 6))) <= TOL_P && Math.abs(P0T(run(s, 'main', 6)) - E.P0m) > 0.1, M[1]);
+
+// the continuous domain: programs of every kind with random areas, durations, phases, detunings and virtual Z, read at
+// a random time on the rail and again elsewhere
+const rnd2 = (() => { let a = 20261112; return () => { a = (a * 1103515245 + 12345) % 2147483648; return a / 2147483648; }; })();
+const MIX = [
+  { card: 'vz', shape: 'gauss', two: 1, det: 1, frame: 'lab' }, { card: 'quarter', shape: 'square', lam: 1, sign: -1, det: 1 },
+  { card: 'vz', shape: 'gauss', lam: 1, sign: 1, det: 1 }, { card: 'quarter', shape: 'square', det: 1 }, { card: 'vz', shape: 'gauss', det: 1, frame: 'lab' },
+  { card: 'vz', shape: 'square' }, { card: 'quarter', shape: 'gauss', frame: 'lab' }, { card: 'vz', shape: 'square', two: 1, lam: 1 },
+  { card: 'vz', shape: 'gauss', lam: 1, sign: -1 }, { card: 'quarter', shape: 'square', two: 1, det: 1, same: 1 }, { card: 'quarter', shape: 'square', two: 1 }
+];
+const bad = { ends: [], rail: [], words: [] }, seen = new Set();
+let lagged = 0;
+for (const [k, c] of MIX.entries()) {
+  await pick(c.card); await chip(`#shapeChips [data-shape="${c.shape}"]`);
+  await setRange('area', (0.15 + 1.7 * rnd2()).toFixed(2)); await setRange('dur', (4 + 32 * rnd2()).toFixed(1));
+  const ph = 5 * Math.round((360 * rnd2() - 180) / 5); await setRange('phase', ph);
+  await setRange('det', c.det ? 0.5 * Math.round(28 * rnd2() - 14) || 2.5 : 0);
+  await setRange('lam', c.lam ? 15 * Math.round(22 * rnd2() - 11) || 45 : 0);
+  if (c.lam) await chip(`#signChips [data-sign="${c.sign || 1}"]`);
+  if (c.two) { await chip('#twoChips [data-two="1"]'); await setRange('phase2', c.same ? ph : 5 * Math.round((360 * rnd2() - 180) / 5)); }
+  if (c.frame) await chip(`#frameChips [data-frame="${c.frame}"]`);
+  s = await state(); seen.add(s.ghost || 'none');
+  s = await seek(s.max * (0.15 + 0.6 * rnd2()));
+  E = endsT(s); N = await notes(); M = both(N, s, E);
+  if (!M[0]) bad.ends.push(`#${k} ${M[1]}`);
+  // the rail: the note stays, the readout follows
+  const nowP0 = P0T(run(s, 'main', s.t)), shown = await p0Now();
+  if (Math.abs(shown - nowP0) > TOL_P) bad.rail.push(`#${k} readout ${shown} vs ${nowP0}`);
+  if (Math.abs(nowP0 - E.P0m) > 0.01) lagged++;
+  await seek(s.max * 0.97); if ((await page.textContent('#roNote')) !== N.zh) bad.rail.push(`#${k} note moved with the rail`);
+  // the words follow the numbers the note shows
+  const x = [N.zh.match(NOTE.zh.pair), N.en.match(NOTE.en.pair)], w = (ok, what) => { if (!ok) bad.words.push(`#${k} ${what}`); };
+  if (s.ghost === 'lam') {
+    const exact = s.sign > 0 || ((2 * s.lam) % 360 + 360) % 360 === 0;
+    if (exact) w(vdist(rotZ(E.m, s.lam * DEG), E.g) < 1e-6 && N.zh.includes(`绕 z 轴转 ${degT(s.lam)}`) && N.en.includes(`by ${degT(s.lam)} about z`) && N.en.includes('same height'), 'z-turn relation');
+    else if (!x[0]) w(false, 'wrong sign without the pair');
+    else {
+      const [a, b, g] = x[0].slice(1), want =a !== b ? ['读数变了', 'the readout changes'] : num(g) !== 0 ? ['四位小数上相同', 'agree to four decimals'] : ['两个终点相同', 'coincide'];
+      w(N.zh.includes('改错了符号') && N.en.includes('wrong sign') && N.zh.includes(want[0]) && N.en.includes(want[1]), `wrong-sign verdict ${a} ${b} ${g}`);
+    }
+  } else if (s.ghost === 'two') {
+    const same = ((s.phi - s.phi2) % 360 + 360) % 360 === 0, g = x[0] && num(x[0][3]);
+    w(same ? N.zh.includes('完全相同') && N.en.includes('identical') : g !== 0 ? N.zh.includes('不对易') && N.en.includes('do not commute') : !N.zh.includes('不对易') && !N.en.includes('commute'), 'commutation follows the measured gap');
+    if (s.det !== 0) w(!N.zh.includes('轴') && !/axis|axes/.test(N.en), 'no axis claim for detuned pulses in a row');
+    if (s.det === 0 && !same) {
+      const ar = 2 * simpson((t) => s.peak * SHAPE[s.shape](t, s.T), 0, s.T) / PI, an = 2 * Math.acos(Math.max(-1, Math.min(1, traceHalf(s, s.max)))) / PI;
+      const za = N.zh.match(/面积合计 ([−\d.]+)π，合成传播子的转角是 ([−\d.]+)π/);
+      w(za && Math.abs(num(za[1]) - ar) <= 0.005 + 1e-9 && Math.abs(num(za[2]) - an) <= 0.005 + 1e-5 && !/yet/.test(N.en), 'areas and the RK4 angle');
+    }
+  } else if (s.ghost === 'det') {
+    const tilt = Math.asin(s.det * MHZ / Math.hypot(s.peak, s.det * MHZ)) / DEG, tz = N.zh.match(/倾出赤道 ([−\d.]+)°/);
+    w(tz && Math.abs(num(tz[1]) - tilt) <= 0.05 + 1e-9 && !N.zh.includes('晃') && !/sway/.test(N.en)
+      && (s.shape === 'square' ? N.zh.includes('固定为') && N.en.includes('stays at') : N.zh.includes('随包络变化') && N.en.includes('changes with the envelope')), `axis words for ${s.shape}`);
+  } else w(N.zh.includes(`转过 ${(s.areaSet / DEG).toFixed(1)}°`) && N.en.includes('is the angle of the propagator'), 'area as the propagator angle');
+}
+check('mixed programs (11, every kind, both frames): the note gives the RK4 full-program ends, both P(0), the angle apart and from the start, in both languages', bad.ends.length === 0, bad.ends.slice(0, 3).join(' || '));
+check('mixed programs: the note does not move with the rail, while the P(0) readout follows it (RK4 at the rail\'s time), and the two differ in some programs', bad.rail.length === 0 && lagged >= 3, `${bad.rail.slice(0, 3).join(' || ')} · lagged ${lagged}`);
+check('mixed programs: the words follow the numbers: z-turn relation only with the right phase, wrong-sign verdicts, commutation, axis words by envelope', bad.words.length === 0 && ['two', 'lam', 'det', 'gauss', 'none'].every((k) => seen.has(k)), `${bad.words.slice(0, 3).join(' || ')} · ${[...seen]}`);
+
 // controls
 await pick('quarter');
 await setRange('area', 1); s = await state();
@@ -250,6 +427,9 @@ check('pressing inside the envelope plot moves the rail there', Math.abs(s.t - 5
 const from = await page.evaluate(() => window.PULSE_DEBUG.screen(window.PULSE_DEBUG.state.r0));
 await page.mouse.move(from[0], from[1]); await page.mouse.down(); await page.mouse.move(from[0] + 60, from[1] + 70, { steps: 5 }); await page.mouse.up(); s = await state();
 check('dragging the amber ring moves the starting state on the sphere', vdist(s.r0, [0, 0, 1]) > 0.2 && close(Math.hypot(...s.r0), 1, 1e-12) && err(s) < 1e-8);
+E = endsT(s); N = await notes(); M = both(N, s, E);
+check('…from the dragged start, with the rail mid-pulse: the note gives the RK4 full-program end (P(0), angle from the new start) and the P(0) readout the current state',
+  !s.ghost && s.t < s.max - 1 && M[0] && Math.abs((await p0Now()) - P0T(run(s, 'main', s.t))) <= TOL_P, `${M[1]} | t ${s.t} / ${s.max}`);
 const cam0 = await page.evaluate(() => window.PULSE_DEBUG.camera()), b0 = await page.evaluate(() => window.PULSE_DEBUG.screen([0, 0, -1.6]));
 await page.mouse.move(b0[0] + 90, b0[1]); await page.mouse.down(); await page.mouse.move(b0[0] + 160, b0[1] - 20, { steps: 4 }); await page.mouse.up();
 check('dragging empty space orbits the camera', (await page.evaluate(() => window.PULSE_DEBUG.camera())).yaw !== cam0.yaw);
