@@ -156,14 +156,14 @@ $$
 
 特别地，必须严格区分**有限离散门集下的 $\varepsilon$-近似态复杂度**与**连续门族（或 Nielsen 几何）下的精确复杂度**：
 
-1. **有限普适门集（如 Clifford + $T$）与正误差容限 $\varepsilon > 0$**：若基本门集 $\mathcal{G}$ 是有限集合，则所有有限长电路在零误差（$\varepsilon = 0$）下能精确到达的量子态至多有可数多个，而非平稳的连续时间态轨道 $\lvert\psi(t)\rangle = e^{-iHt/\hbar}\lvert\psi(0)\rangle$ 通常包含不可数多个态。因此，为保证一般目标态在有限普适门集下具有有限复杂度，以下**固定近似容限 $\varepsilon > 0$**（要求电路输出态与目标态的距离不超过 $\varepsilon$，参见 S. Aaronson, `arXiv:1607.05256`, Definitions 3.2.1 & 3.3.1）；在固定 $\varepsilon > 0$ 下，多比特态与酉算子的近似合成复杂度受限于指数级天花板 $\mathcal{C}_\varepsilon(\lvert\psi(t)\rangle) \le \exp(O(N))$（例如结合连续双比特分解与 Solovay–Kitaev 编译给出的 $O(2^N \operatorname{poly}(\log(1/\varepsilon)))$ 态合成上界或 $O(4^N \operatorname{poly}(\log(1/\varepsilon)))$ 酉合成上界）。
+1. **有限普适门集（如 Clifford + $T$）与正误差容限 $\varepsilon > 0$**：若基本门集 $\mathcal{G}$ 是有限集合，则所有有限长电路在零误差（$\varepsilon = 0$）下能精确到达的量子态至多有可数多个，而非平稳的连续时间态轨道 $\lvert\psi(t)\rangle = e^{-iHt/\hbar}\lvert\psi(0)\rangle$ 通常包含不可数多个态。因此，为保证一般目标态在有限普适门集下具有有限复杂度，以下**固定近似容限 $\varepsilon > 0$**（要求电路输出态与目标态的距离不超过 $\varepsilon$，参见 S. Aaronson, `arXiv:1607.05256`, Definitions 3.2.1 & 3.3.1）；在固定 $\varepsilon > 0$ 下，多比特态与酉算子的近似合成复杂度受限于指数级天花板 $\mathcal{C}_\varepsilon(\lvert\psi(t)\rangle) \le \exp(O(N))$（例如结合连续双比特分解与 Solovay–Kitaev 编译：先把目标分解为 $L$ 个连续双比特门，态合成 $L = O(2^N)$、酉合成 $L = O(4^N)$；再把每个门逐一编译到误差 $\varepsilon/L$ 以内，使 $L$ 个门累加的误差不超过 $\varepsilon$，每个门需 $\operatorname{poly}(\log(L/\varepsilon))$ 个门，合计 $O(L \operatorname{poly}(\log(L/\varepsilon)))$，即 $O(2^N \operatorname{poly}(N + \log(1/\varepsilon)))$ 的态合成上界或 $O(4^N \operatorname{poly}(N + \log(1/\varepsilon)))$ 的酉合成上界；参见 C. M. Dawson & M. A. Nielsen, `arXiv:quant-ph/0505030`）。
 2. **连续双比特门族或连续 Nielsen 几何（$\varepsilon = 0$）**：若允许任意连续参数的单比特与双比特门 $\mathcal{G} = \mathrm{SU}(4)$ 按单位成本计价（或采用酉群流形上的连续 Nielsen 测地线距离），则任意 $N$ 比特纯态或酉算子的精确合成（$\varepsilon = 0$）对一切时刻 $t$ 均良定义，且同样受限于指数级构造上界 $\exp(O(N))$（态合成 $O(2^N)$、一般酉算子合成 $O(4^N)$）。
 
 在混沌多体量子系统与全息黑洞模型的物理叙述中，当系统演化越过热化时间 $t_{\mathrm{th}}$ 后，子系统纠缠熵 $S(t)$ 已达热平衡饱和值 $S_{\mathrm{th}} \sim O(N)$，而在中间时间窗 $t_{\mathrm{th}} \ll t \ll e^{O(N)}$ 内，$\varepsilon$-近似态复杂度（或连续 Nielsen 复杂度）被预期继续随时间 $t$ 近似线性增长。但在任何具有有限维希尔伯特空间与有界能谱的封闭量子系统中，态复杂度无法跨越 $\exp(O(N))$ 天花板，且在依赖于具体能谱与演化模型的更长时间尺度（典型情形下如双指数级量子庞加莱回归时间）上必然发生饱和与回归，绝不可能对一切 $t \to \infty$ 永远保持单调线性增长。参见 L. Susskind, *Fortschr. Phys.* **64**, 24–43 (2016), DOI: `10.1002/prop.201500092`；以及 S. Aaronson (2016), `arXiv:1607.05256`。
 :::
 
 ::: {.viz src="complexity-growth" preset="saturate" height="500"}
-**熵先封顶，门数接着长。** 8 个量子比特的随机砖墙电路走到第 14 层：青色的半链熵沿灰色台阶爬升，第 13 层前后停在 3.18–3.36 比特之间，压在 4 比特的白线下面；同一段里白线（已用门数）一路涨到 49。随机电路是示意模型，熵与门数逐层实算（[@rem-complexity-growth-literature]）。
+**熵先封顶，门数接着长。** 8 个量子比特的随机砖墙电路走到第 14 层：青色的半链熵沿灰色台阶爬升，第 13 层升到 3.14 比特，第 14 层仍是 3.14，压在 4 比特的白线下面；同一段里白线（已用门数）一路涨到 49。淡色的后段（第 40–90 层）在 3.18–3.36 比特之间起伏。随机电路是示意模型，熵与门数逐层实算（[@rem-complexity-growth-literature]）。
 :::
 
 ::: {.viz src="complexity-growth" preset="ceiling" height="500"}
