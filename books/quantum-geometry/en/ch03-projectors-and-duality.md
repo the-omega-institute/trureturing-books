@@ -28,7 +28,9 @@ In the geometric interpretation of this book, these three insights share **one a
 **Project again, and nothing moves.** At the first press the amber arrow drops onto the cyan measurement line and the magenta part vanishes; at the second and third presses the arrow stays put, and "this press moved it" at the top left reads 0. A press here is a measurement along the line whose result is not read, so "a second press changes nothing" is exactly [@thm-pinching-idempotent].
 :::
 
-![Existence as an idempotent line: axial projection P²=P, its inseparable Hodge-dual equatorial plane, and sequential record ticks generating classical time](../assets/fig-03-idempotent-line-hodge.svg)
+::: {.figure src="ch03-overview"}
+**Figure 3.** The chapter at a glance. Panel I: the amber arrow $x$ is projected onto the cyan measurement line, leaving the cyan shadow $Px$, and projecting again leaves the shadow where it is. Panel II: the cyan axis $\vv{e}_3$ stands in the middle of the magenta dual plane $\star\vv{e}_3 = \vv{e}_1 \wedge \vv{e}_2$, and the amber arrow splits into a cyan part along the axis and a magenta part lying in the plane. Panel III: polarizers at $0^\circ$, $45^\circ$ and $90^\circ$ stand along a timeline; each multiplies the beam by $\frac{1}{2}$, so the transmitted share runs $1$, $\frac{1}{2}$, $\frac{1}{4}$, and it is $0$ without the $45^\circ$ one.
+:::
 
 In an actual laboratory apparatus we rarely erect a single ray in isolation; instead we partition the space into a mutually exclusive, exhaustive family of orthogonal readout ports $\{P_k\}_{k \in \kappa}$ (such as the upper and lower beams of a Stern–Gerlach magnet or a multi-port polarizing splitter). In the Lean module `Observer/Conditioning`, this complete ruler is formalized as a **record measurement**.
 
@@ -60,6 +62,10 @@ P_\pm^2 = \frac{1}{4}(I \pm 2M + M^2) = \frac{1}{4}(2I \pm 2M) = P_\pm, \qquad P
 $$
 
 Every binary observable $M$ (such as $X$ or $Z$) is simply the signed difference of two back-to-back orthogonal idempotent lines $\{P_+, P_-\}$ forming an `IsRecordMeasurement`!
+
+::: {.figure src="ch03-mirror-and-slit"}
+**The projection is the midpoint between an arrow and its mirror image.** The mirror $M$ flips the amber arrow $x$ to the other side of the mirror line, giving the dashed arrow $Mx$, and a second flip brings it back ($M^2 = I$). The dotted segment joining the two tips crosses the mirror line at the cyan point: the thick cyan segment from the origin to it is $P_+x = \frac{1}{2}(x + Mx)$, and the magenta segment from it to the tip of $x$ is $P_-x = \frac{1}{2}(x - Mx)$. The slit $P_+$ keeps only the cyan half. Here $M$ is the reflection $Z$ of the real plane.
+:::
 
 Once each branch satisfies $P_k^2 = P_k$ and distinct branches annihilate one another ($P_k P_l = 0$), idempotence automatically lifts from the operator level to the **superoperator** level on density matrices: pinching a quantum state through an unread measurement channel twice is identical to pinching it once!
 
@@ -252,6 +258,10 @@ $$
 
 Equality $D_{\mathrm{pred}}^2 + V_{\mathrm{vis}}^2 = 1$ holds if and only if the state lies on the pure spherical shell ($\norm{\vv{r}} = 1$): demanding $D_{\mathrm{pred}} = 0.8$ of particle path bias geometrically caps wave fringe contrast at $V_{\mathrm{vis}} = \sqrt{1 - 0.8^2} = 0.6$!
 
+::: {.figure src="ch03-complementarity"}
+**A definite path and a sharp fringe share one unit hypotenuse.** Predictability $D_{\mathrm{pred}}$ runs across and visibility $V_{\mathrm{vis}}$ up. Pure states lie on the quarter circle: the amber point $(0.8, 0.6)$ is made of the cyan $D$ and the magenta $V$. The grey point is a mixed state with $\norm{\vv{r}} = 0.6$, on the dashed arc of radius $0.6$ inside.
+:::
+
 Even better, the context index set $L$ in [@thm-complementary-pythagoras] maps out the entire dimensional ladder of **quantum state tomography** at a glance:
 
 | Measured Pauli Contexts $L$ | Visible Subspace $V \subseteq \mathbb{R}^3$ | Visible Deviation $\norm{P_V(s)}^2$ | Blind Complement $V^\perp$ | Residual Mass $\operatorname{residualMass}(V, s)$ |
@@ -261,6 +271,10 @@ Even better, the context index set $L$ in [@thm-complementary-pythagoras] maps o
 | Full triad $\{X, Y, Z\}$ ($|L|=3$) | Full 3D ball space $\mathbb{R}^3$ | $\frac{1}{2}(r_x^2 + r_y^2 + r_z^2)$ | Zero subspace $\{\vv{0}\}$ | $0$ (blind spot eliminated) |
 
 Notice why measuring only two complementary bases $\{Z, X\}$ still leaves a chirality ambiguity $\pm r_y$: the Hodge dual of a two-dimensional plane inside $\mathbb{R}^3$ is a one-dimensional normal line $\star(\vv{e}_3 \wedge \vv{e}_1) = \vv{e}_2$ carrying residual mass $\frac{1}{2}r_y^2$. Only when all three mutually orthogonal axes $\{X, Y, Z\}$ are probed (foreshadowing Part III, Chapter 9) does the residual blind spot vanish identically!
+
+::: {.figure src="ch03-tomography-ladder"}
+**Each added complementary context lowers the blind spot by one dimension.** The three spheres are the three rows of the tomography table. Measuring $Z$ alone, the cyan vertical axis is seen and the magenta equatorial plane is blind; measuring $Z$ and $X$, the cyan meridian plane is seen and only the magenta $y$ axis is left; measuring $X$, $Y$ and $Z$, the whole ball is cyan and nothing is blind ([@thm-complementary-pythagoras]).
+:::
 
 The last row of the tomography table still hides a constraint that has not been said aloud. Can the readings of the three complementary contexts be definite **at the same time**? Rewrite the Pythagorean sum of the last row: for $|d| = 2$, each context satisfies $\sum_j \bigl(p_{l,j} - \frac{1}{2}\bigr)^2 = \sum_j p_{l,j}^2 - \frac{1}{2}$, hence
 
@@ -413,6 +427,10 @@ w_N=\left[\cos^2\left(\frac{\pi}{2(N+1)}\right)\right]^{N+1}.
 $$
 
 $N=0$ gives $0$, while $N=1$ gives the $1/4$ above. All these ratios refer to the prepared horizontal beam. If the incident beam before preparation is unpolarized, with state $I/2$, horizontal preparation contributes a separate factor $1/2$, so the three-sheet experiment transmits $1/8$ of that original beam.
+:::
+
+::: {.figure src="ch03-polarizer-chain"}
+**The more polarizers in between, the more light gets through.** The cyan dots are $w_N = \bigl[\cos^2\frac{\pi}{2(N+1)}\bigr]^{N+1}$: $0$ with only the first and last polarizers ($N = 0$), $\frac{1}{4}$ for the ringed three-polarizer case ($N = 1$), and about $0.83$ at $N = 12$; the finite values come from the finite chain of [@thm-rank-one-chain-trace]. The dashed violet line at the top marks the limit $1$ as $N \to \infty$, a literature result not formalized in this book ([@rem-polarizer-ideal-limit]).
 :::
 
 ::: {.remark #rem-polarizer-ideal-limit title="The Ideal Polarizer-Chain Limit (Literature Result, Not Formalized in This Book)"}
