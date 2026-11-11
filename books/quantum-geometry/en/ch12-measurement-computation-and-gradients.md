@@ -13,7 +13,9 @@ At the end of [Chapter 11](ch11-pulses-and-virtual-z.md), we saw a striking reve
 
 3. **Riemannian Natural Gradients and Equatorial Concentration**: Along a negative Riemannian gradient flow on a manifold, potential energy dissipates at a rate equal to the integrated squared norm of the velocity ([@thm-riemannian-gradient-dissipation]). Yet as qubit count $n$ grows and ambient dimension scales as $d = 2^n$, measure on high-dimensional spheres concentrates overwhelmingly into a narrow **equatorial belt** orthogonal to any fixed measurement axis — setting the geometric stage (under specific random-circuit design assumptions) for barren plateaus; separately, as a standalone spectral counting result for nonnegative summable sequences, a finite trace identity $\sum_j \lambda_j = RW/\pi$ supplies a sufficient upper bound on the number of modes above any threshold $\tau > 0$ ([@cor-finite-trace-mode-budget]).
 
-![MBQC cluster measurement teleportation and adaptive corrections, the exact plus/minus pi over two parameter-shift rule for a single Pauli rotation, and equatorial concentration on the restricted real-amplitude sphere](../assets/fig-12-mbqc-parameter-shift-barren.svg)
+::: {.figure src="ch12-overview"}
+**Figure 12.** The chapter at a glance: Panel I is a measuring angle becoming a gate on another node, Panel II is a quarter turn each way giving the exact slope, and Panel III is the distribution crowding onto the equator as the dimension grows. In Panel I the amber pointer is the measuring angle $\alpha$ and the dashed arrow carries the classical bit $s$ to the output node; in Panel II the amber point sits at $\theta = 60^\circ$, the two cyan points $90^\circ$ to either side, and the dashed line is the tangent; Panel III shows the exact density of $x_1$, flat for $d = 3$ and a cyan spike at the equator for $d = 300$. MBQC, the parameter-shift rule and equatorial concentration are literature results, not formalized in this book ([@rem-mbqc-gradients-literature]); the small green chip in the lower right refers only to [@cor-finite-trace-mode-budget].
+:::
 
 ## Cluster Measurements and Classical Feedforward {#sec-cluster-measurement-feedforward}
 
@@ -52,6 +54,10 @@ Now watch how measuring one qubit of a two-qubit entangled link turns the observ
 
    with probability $1/2$ for each outcome $s \in \{0, 1\}$ when $\lvert\psi\rangle$ is normalized.
 3. **Classical feedforward correction**: Up to a global phase, correcting the byproduct operator $X^s$ yields $H R_z(-\alpha)\lvert\psi\rangle$. Because $X R_z(-\beta) = e^{i\gamma} R_z(+\beta) X$, later measurement angles in a multi-qubit cluster must adapt to earlier random outcomes $s$ via classical feedforward.
+
+::: {.figure src="ch12-feedforward"}
+**Either outcome will do: half a turn about $x$ brings the $s = 1$ branch onto the $s = 0$ branch.** The Bloch sphere shows qubit 2 for the two outcomes: the amber point is $s = 0$, the grey point $s = 1$, each with chance one half; the amber curved arrow, half a turn about the violet $x$ axis, is the feedforward $X$. Here $\alpha = 60^\circ$ and the input is a generic state; the two chances of $\frac{1}{2}$ add to $1$, as [@lemma-measurement-branch-sum] requires. MBQC is a literature result, not formalized in this book ([@rem-mbqc-gradients-literature]).
+:::
 
 ## Pauli Angles and Exact Parameter Shift {#sec-pauli-parameter-shift}
 
@@ -128,6 +134,10 @@ $$
 $$
 
 The next frozen theorem proves that for any $C^1$ potential $V$ and any $C^1$ curve $x$ on $[0, T]$ ($T > 0$) whose closed-interval within-derivative (continuous on $[0, T]$, corresponding in coordinates to `ContinuousOn (fun t => derivWithin x (Set.Icc 0 T) t) (Set.Icc 0 T)`) equals $-\operatorname{actualGradient}(V, x(t))$, the full-derivative speed and squared speed are interval-integrable and the potential drop $V(x(0)) - V(x(T))$ equals the integrated squared speed.
+
+::: {.figure src="ch12-dissipation"}
+**The potential drops by exactly the area under the squared speed.** The downhill gradient flow of $V(\vv{r}) = r_z$ on the unit sphere, starting at $\vv{r} = (\frac{\sqrt{3}}{2}, 0, \frac{1}{2})$ (the amber point): the ink curve is $V$, the magenta area is the area $1.46$ under $\lvert\dot{\vv{r}}\rvert^2$ over $[0, 2.5]$, and the magenta bar on the right is the drop $V(x(0)) - V(x(T))$, also $1.46$. This is a numerical check of [@thm-riemannian-gradient-dissipation] on the flow of step 3 of [@ex-cluster-shift-and-gradient].
+:::
 
 ::: {.theorem #thm-riemannian-gradient-dissipation title="Riemannian Gradient-Flow Speed Integrability and Exact Energy Dissipation" lean="D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation"}
 Let $E$ be a finite-dimensional real inner-product space, and let $M$ be a Hausdorff connected smooth manifold modeled on $E$ with a continuous Riemannian tangent bundle. For real $T > 0$, a $C^1$ potential $V : M \to \mathbb{R}$ (`ContMDiff 𝕀 IR 1 V`), and a $C^1$ curve $x : \mathbb{R} \to M$ on $[0, T]$ (`ContMDiffOn IR 𝕀 1 x (Icc 0 T)`), suppose that at every $t \in [0, T]$ the closed-interval within-derivative satisfies

@@ -13,7 +13,9 @@
 
 3. **黎曼自然梯度与高维赤道集中**：在弯曲球面与射影流形上，沿着内蕴黎曼度量（如球面诱导度量或 Fubini–Study 度量）的负梯度流下滑，势能的减少量精确等于切速度模长平方的时间积分（[@thm-riemannian-gradient-dissipation]）；然而一旦维度随比特数 $n$ 指数暴涨到 $d = 2^n$，高维球面上几乎所有的测度都会死死挤压在垂直于任一固定测量轴的**赤道窄带**内，在满足特定随机电路设计假设时构成变分量子算法“贫瘠高原（barren plateau）”现象的几何背景；与此同时，作为一条独立于球面测度与电路梯度的纯谱分析工具，当非负可和本征值序列满足有限迹预算等式 $\sum_j \lambda_j = RW/\pi$ 时，其超过任意正阈值 $\tau > 0$ 的模式个数满足一个充分的有限计数上界（[@cor-finite-trace-mode-budget]）。
 
-![簇态测量传态与自适应前馈、单次泡利旋转的正交参数位移律，以及受限实振幅高维球面的赤道集中与有限迹谱模式界](../assets/fig-12-mbqc-parameter-shift-barren.svg)
+::: {.figure src="ch12-overview"}
+**图 12。** 本章地图：第 I 栏是测量的角度变成另一个节点上的门，第 II 栏是左右各转 $90^\circ$ 取出精确斜率，第 III 栏是维数越高、分布越挤向赤道。第 I 栏琥珀色的指针是测量角 $\alpha$，虚线把经典比特 $s$ 送到输出节点；第 II 栏琥珀色的点在 $\theta = 60^\circ$，两个青色的点在左右各 $90^\circ$ 处，虚线是切线；第 III 栏是 $x_1$ 的精确密度，$d = 3$ 时是平线，$d = 300$ 时是赤道上青色的尖峰。MBQC、参数位移律与赤道集中是文献结果，未在本书形式化（[@rem-mbqc-gradients-literature]）；右下角绿色的小框只指 [@cor-finite-trace-mode-budget]。
+:::
 
 ## 簇态测量与经典前馈 {#sec-cluster-measurement-feedforward}
 
@@ -70,6 +72,10 @@ $$
    $$
 
    你看：观察者在第 1 颗比特上选定的赤道测量角 $\alpha$，已经越过纠缠桥，在第 2 颗比特上精准刻下了单比特旋转门 $H R_z(-\alpha)$！哪怕单次测量结果 $s \in \{0, 1\}$ 是随机的，只要用一根经典导线把比特 $s$ 传给下一步（当 $s = 1$ 时施加泡利修正 $X$，或者在后续节点把测量角自适应反号 $\alpha_{\mathrm{next}} \mapsto (-1)^s \alpha_{\mathrm{next}}$），随机性就被百分之百熨平，留下的完全是确定性的幺正计算！
+
+::: {.figure src="ch12-feedforward"}
+**测得哪一支都不要紧：$s = 1$ 那一支绕 $x$ 轴转半圈，就和 $s = 0$ 那一支重合。** 布洛赫球上是第 2 颗比特在两种结果下的态：琥珀色的点是 $s = 0$，灰色的点是 $s = 1$，各占一半；琥珀色的弯箭头绕紫色的 $x$ 轴转半圈，就是前馈的 $X$。这里取 $\alpha = 60^\circ$ 与一个一般的输入态；两支的概率各为 $\frac{1}{2}$，与 [@lemma-measurement-branch-sum] 的总和为 $1$ 相符。MBQC 是文献结果，未在本书形式化（[@rem-mbqc-gradients-literature]）。
+:::
 
 ## 泡利转角与精确参数位移 {#sec-pauli-parameter-shift}
 
@@ -154,6 +160,10 @@ $$
 $$
 
 下面的冻结定理严格证明：只要一条定义在闭区间 $[0, T]$（$T > 0$）上的区间 $C^1$ 曲线 $x : \mathbb{R} \to M$（其闭区间内导数在 $[0, T]$ 上连续，对应局部坐标下的 `ContinuousOn (fun t => derivWithin x (Set.Icc 0 T) t) (Set.Icc 0 T)`）在区间内部及端点的**区间内流形导数（within-derivative）**处处满足负梯度流方程 $\dot{x}_{\mathrm{within}}(t) = -\operatorname{actualGradient}(V, x(t))$，那么全流形导数速率及其平方在 $[0, T]$ 上均可积，且势函数从初态 $x(0)$ 到末态 $x(T)$ 的总耗散降落量**精确等于速率平方沿时间的积分**！
+
+::: {.figure src="ch12-dissipation"}
+**势能降了多少，就是速率平方曲线下的面积。** 单位球面上 $V(\vv{r}) = r_z$ 的负梯度流，从 $\vv{r} = (\frac{\sqrt{3}}{2}, 0, \frac{1}{2})$ 出发（琥珀色的点）：墨色的曲线是 $V$，品红的面积是 $\lvert\dot{\vv{r}}\rvert^2$ 曲线下 $[0, 2.5]$ 上的面积 $1.46$；右边品红的竖条是降落 $V(x(0)) - V(x(T))$，也是 $1.46$。这是 [@thm-riemannian-gradient-dissipation] 在 [@ex-cluster-shift-and-gradient] 第 3 步那条流上的数值核对。
+:::
 
 ::: {.theorem #thm-riemannian-gradient-dissipation title="黎曼流形负梯度流的速度平方可积性与精确能量耗散恒等式" lean="D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation"}
 设 $E$ 为有限维实内积空间，$M$ 为建模于 $E$ 上的豪斯多夫连通光滑流形并配备连续黎曼切丛度量。设实数 $T > 0$，$V : M \to \mathbb{R}$ 为 $C^1$ 势函数（`ContMDiff 𝕀 IR 1 V`），$x : \mathbb{R} \to M$ 在闭区间 $[0, T]$ 上为 $C^1$ 曲线（`ContMDiffOn IR 𝕀 1 x (Icc 0 T)`）。若对一切 $t \in [0, T]$，闭区间内的流形切速度满足负梯度流条件：

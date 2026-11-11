@@ -11,7 +11,9 @@ Across our first ten chapters, we stripped away matrix mystique and restored eve
 
 This chapter builds the bridge between exact formal dynamics and hardware pulse physics: from matrix exponentials on eigenlines and the stationarity of energy eigenstates, through rotating-frame carrier cancellation and resonant pulse area, to an explicit trace error bound for ordered three-pulse kernels and the trace-duality pullback identity linking state evolution to reference-frame updates.
 
-![Rotating-frame transformation at omega0, a fixed-axis microwave envelope whose integral gives the rotation angle, and a virtual-Z phase-reference update with zero additional analog pulse duration in ideal scheduling](../assets/fig-11-rabi-pulse-virtual-z.svg)
+::: {.figure src="ch11-overview"}
+**Figure 11.** The chapter at a glance: Panel I is the rotating frame that turns with the carrier, Panel II is the area under the envelope equalling the turning angle on the sphere, and Panel III is a virtual $Z$ that sends no pulse and only shifts the phase of the pulses after it. Panel I looks down on the equatorial plane: the grey $x'$ axis turns about $z$ by $\omega_0 t$ (violet curved arrow) and the amber state rides along it, still in the rotating frame; in Panel II the magenta area under the envelope and the magenta sector are both $\pi/2$; in Panel III the violet dashed line is the $X$ written in the circuit, the solid violet line the $-Y$ actually sent, and the amber curved arrow the phase shift $-\lambda$, costing $0\,\mathrm{ns}$. The area law and virtual-$Z$ scheduling are literature results, not formalized in this book ([@rem-rwa-pulse-area-literature], [@rem-virtual-z-scheduling-literature]).
+:::
 
 ## Rotating Frames and Carrier Removal {#sec-rotating-frame-calibration}
 
@@ -119,6 +121,10 @@ $$
 so in this idealized fixed-axis RWA model the Bloch rotation angle $\theta$ equals the **integrated pulse area** under the envelope (an area of $\pi/2$ executes a quarter-turn, and an area of $\pi$ executes a half-turn bit flip).
 :::
 
+::: {.figure src="ch11-lab-spiral"}
+**One quarter-turn: a spiral in the lab frame, a single meridian arc in the rotating frame.** Left: the amber path leaves the north pole and winds round the violet $z$ axis, turn after turn, down to the equator. Right: during the same pulse the amber state only runs down a meridian from the north pole to $-y$, sweeping a magenta sector of $\pi/2$ about the violet $X$ axis. Schematic: the $25\,\mathrm{ns}$ pulse holds $125$ carrier cycles, of which the picture draws $6$. The rotating frame and the area law are literature results, not formalized in this book ([@rem-rwa-pulse-area-literature]).
+:::
+
 This effective hardware picture echoes the epigraph's geometric intuition (`MODEL`): a quantum state is a spherical direction, while a resonant control pulse acts in the time domain through an envelope of definite integrated area ([@rem-rwa-pulse-area-literature]).
 
 ::: {.viz src="pulse-area-virtual-z" preset="quarter" height="500"}
@@ -177,6 +183,10 @@ Expanding each factor $\operatorname{pulse0}(X_{\mathbb{C}}, t) = X_{\mathbb{C}}
 
 Notice the geometric reason why the trace error scales as $O(t^2)$ rather than $O(t)$: for real symmetric generators $A, B, C$, the first-order drift is purely imaginary, so taking the real part $\operatorname{Re}\Tr(\cdots)$ projects out the $O(t)$ term orthogonally! Keep the mathematical contract of [@prop-ordered-pulse-error] clear: `pulse0` is an integrated exponential-times-matrix kernel (where `NormedSpace.exp` uses the local L2 operator norm while the hypotheses bound Frobenius norms), not a unitary propagator, microwave envelope, or hardware gate fidelity.
 
+::: {.figure src="ch11-trace-order"}
+**The first-order drift is all imaginary; the real deviation starts at second order.** On log-log axes, the magenta line is the imaginary part of the trace of the three ordered pulse kernels, with slope $1$, growing like $t$; the cyan line is the deviation of the real part from $\Tr(ABC)$, with slope $2$, growing like $t^2$; the dashed green line is the bound $\frac{5}{4}L^5 t^2$ of [@prop-ordered-pulse-error], and the cyan line stays below it. The matrices are three real symmetric $2\times 2$ matrices of Frobenius norm $1$ ($L = 1$); the two curves are numerical results.
+:::
+
 ## Virtual Z and Phase-Reference Updates {#sec-virtual-z-phase-reference}
 
 In contrast to equatorial rotations implemented via nonzero-duration microwave envelopes ([@rem-rwa-pulse-area-literature]), superconducting hardware executes **virtual $Z$ gates** with zero additional analog pulse duration via axial conjugation and a software phase register (Panel III of Figure 11; the conjugation identities and sign conventions are recorded in [@rem-virtual-z-scheduling-literature]).
@@ -215,6 +225,10 @@ To implement virtual $Z$ gates without sign ambiguity, control software distingu
 :::
 
 At the operator-algebraic level, pushing a state forward by $t$ discrete channel steps (Schrödinger picture) versus pulling the measurement effect back by $t$ adjoint iterates (Heisenberg reference-frame update) is certified by the frozen trace-duality identity in `ObserverPullbackTraceIdentity`. Here `MatrixAlgebra d` is the complex square CStar-matrix algebra, `DensityState d` is its positive trace-one subtype, `QuantumChannel d d` carries a completely positive trace-preserving map, and `evolvedState channel t rho` iterates `QuantumChannel.mapState` $t \in \mathbb{N}$ times.
+
+::: {.figure src="ch11-two-pictures"}
+**Push the state, or pull the readout back: the same angle, the same reading.** Left: the amber state turns about the violet axis to a new place while the readout direction (the north pole) stays put. Right: the amber state stays and the grey readout direction turns back by the same angle. The cyan arcs on both sides are the same angle $\alpha$, so the chance of reading $\lvert 0\rangle$ is the same. This is the special case of [@cor-frame-pullback-readout] for a single unitary turn.
+:::
 
 ::: {.corollary #cor-frame-pullback-readout title="Observer Pullback Trace Identity Across Discrete Channel Iterations" lean="D5/S3/Quantum/Dynamics/ObserverPullbackTraceIdentity.observer_pullback_trace_identity"}
 Let $d$ be a finite index type with decidable equality, let $\mathrm{channel} : \mathrm{QuantumChannel}\,d\,d$ be a quantum channel, and let $\mathrm{heisenberg} : \mathrm{MatrixAlgebra}\,d \to_{\mathrm{CP}} \mathrm{MatrixAlgebra}\,d$ be a completely positive map satisfying the explicit trace-duality premise (`hduality`):

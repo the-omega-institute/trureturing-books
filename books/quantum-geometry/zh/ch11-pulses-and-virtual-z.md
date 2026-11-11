@@ -11,7 +11,9 @@
 
 本章将从矩阵指数在本征线上的精确相位演化与能量本征态定态不变性出发，逐步推演旋转参考系消去载频、共振脉冲面积积分、有序三脉冲核的迹误差界，以及薛定谔状态演化与海森堡效应拉回之间的迹对偶恒等式。
 
-![旋转坐标系消去 5 GHz 载频、共振微波脉冲包络面积决定旋转角，以及零附加模拟脉冲时长的虚拟 Z 相位基准更新](../assets/fig-11-rabi-pulse-virtual-z.svg)
+::: {.figure src="ch11-overview"}
+**图 11。** 本章地图：第 I 栏是跟着载频一起转的旋转系，第 II 栏是包络下的面积等于球上的转角，第 III 栏是虚拟 $Z$ 不发脉冲、只改后面脉冲的相位。第 I 栏从北极往下看赤道面，灰色的 $x'$ 轴以 $\omega_0 t$ 绕 $z$ 转（紫色的弯箭头），琥珀色的态沿着它，在旋转系里不动；第 II 栏品红的包络面积与品红的扇形都是 $\pi/2$；第 III 栏紫色虚线是电路写的 $X$，紫色实线是实际发出的 $-Y$，琥珀色的弯箭头是相位的改动 $-\lambda$，耗时 $0\,\mathrm{ns}$。面积律与虚拟 $Z$ 调度是文献结果，未在本书形式化（[@rem-rwa-pulse-area-literature]、[@rem-virtual-z-scheduling-literature]）。
+:::
 
 ## 旋转坐标系与载频约分 {#sec-rotating-frame-calibration}
 
@@ -119,6 +121,10 @@ $$
 即在该理想固定轴 RWA 模型中，布洛赫球面转角 $\theta$ 由**拉比包络下方的脉冲面积**决定（例如面积 $\pi/2$ 对应四分之一转，面积 $\pi$ 对应半圈翻转）。
 :::
 
+::: {.figure src="ch11-lab-spiral"}
+**同一个四分之一转，在实验室系里是螺旋，在旋转系里只是一段经线。** 左边：琥珀色的路径从北极出发，绕紫色的 $z$ 轴一圈圈盘旋，落到赤道上；右边：同一个脉冲里，琥珀色的态只沿经线从北极走到 $-y$，扫过 $\pi/2$ 的品红扇形，转轴是紫色的 $X$。示意：$25\,\mathrm{ns}$ 的脉冲里实际有 $125$ 个载频周期，图中只画 $6$ 圈。旋转系与面积律是文献结果，未在本书形式化（[@rem-rwa-pulse-area-literature]）。
+:::
+
 这一有效模型从硬件层面呼应了章首题记的几何直觉（`MODEL`）：量子态对应球面方向，而驱动其转向的控制脉冲在时域包络上表现为一个具有明确面积的几何结构（[@rem-rwa-pulse-area-literature]）。
 
 ::: {.viz src="pulse-area-virtual-z" preset="quarter" height="500"}
@@ -171,6 +177,10 @@ $$
 
 请留意 [@prop-ordered-pulse-error] 证明中那个极其精妙的几何机制：**为什么误差不是一阶的 $O(t)$，而是直接跳到了二阶的 $O(t^2)$？** 因为实对称矩阵 $A, B, C$ 的一阶修正项带有纯虚因子 $i t / 2$，而对称矩阵乘积的迹为实数，所以在取迹的实部 $\operatorname{Re}\Tr(\cdots)$ 时，一阶漂移被正交虚轴自动滤除！（同时遵守诚实契约：`pulse0` 是积分指数乘矩阵核而非幺正演化算符或硬件门保真度，其中 `NormedSpace.exp` 采用局部 $L^2$ 算子范数拓扑，而前提界 $L$ 显式施加在弗罗贝尼乌斯范数上。）
 
+::: {.figure src="ch11-trace-order"}
+**一阶漂移全在虚部，实部偏差从二阶才开始。** 双对数坐标：品红的线是三段脉冲核乘积的迹的虚部，斜率 $1$，按 $t$ 增长；青色的线是迹的实部与 $\Tr(ABC)$ 的偏差，斜率 $2$，按 $t^2$ 增长；绿色虚线是 [@prop-ordered-pulse-error] 的界 $\frac{5}{4}L^5 t^2$，青色的线始终在它下方。这里取了三个弗罗贝尼乌斯范数为 $1$ 的实对称 $2\times 2$ 矩阵（$L = 1$），两条曲线是数值结果。
+:::
+
 ## 虚拟 Z 与相位参考更新 {#sec-virtual-z-phase-reference}
 
 与需要非零模拟脉冲时长积累包络面积的赤道驱动门（[@rem-rwa-pulse-area-literature]）相对，超导硬件通过轴向共轭恒等式与软件参考系相位寄存器实现零附加模拟时长的**虚拟 $Z$ 门**调度（图 11 右栏；具体恒等式与符号约定汇总于 [@rem-virtual-z-scheduling-literature]）。
@@ -209,6 +219,10 @@ $$
 :::
 
 从更一般的算子代数视角看，“推动量子态向前演化（薛定谔图像）”与“保持量子态不动、把测量效应算符向后拉回更新（海森堡参考系更新图像）”之所以给出完全相同的实验读数，源于迹配对的步进拉回恒等式。在 Lean 模块 `ObserverPullbackTraceIdentity` 中，设 $d$ 为有限可判等指标类型，$\mathrm{MatrixAlgebra}\,d$ 为 $d\times d$ 复 $C^*$-矩阵代数，$\mathrm{DensityState}\,d$ 为其正半定迹一状态子类型，$\mathrm{QuantumChannel}\,d\,d$ 为完全正保迹（CPTP）量子信道，而 $\operatorname{evolvedState}(\mathrm{channel}, t, \rho)$ 表示状态映射 $\operatorname{mapState}(\mathrm{channel})$ 在离散步数 $t \in \mathbb{N}$ 下的迭代。
+
+::: {.figure src="ch11-two-pictures"}
+**推态，或把读出方向倒着拉回，夹角一样，读数一样。** 左边：琥珀色的态绕紫色的轴转到新位置，读出方向（北极）不动；右边：琥珀色的态不动，灰色的读出方向倒着转同样的角度。两边青色的弧是同一个夹角 $\alpha$，所以读到 $\lvert 0\rangle$ 的概率相同。这是 [@cor-frame-pullback-readout] 在一次幺正转动下的特例。
+:::
 
 ::: {.corollary #cor-frame-pullback-readout title="量子信道离散演化与海森堡拉回迭代的迹对偶恒等式" lean="D5/S3/Quantum/Dynamics/ObserverPullbackTraceIdentity.observer_pullback_trace_identity"}
 设 $d$ 为具有可判等性的有限指标类型，$\mathrm{channel} : \mathrm{QuantumChannel}\,d\,d$ 为量子信道，$\mathrm{heisenberg} : \mathrm{MatrixAlgebra}\,d \to_{\mathrm{CP}} \mathrm{MatrixAlgebra}\,d$ 为完全正线性映射。若它们对一切矩阵状态 $\mathrm{state}$ 与矩阵效应 $\mathrm{effect}$ 满足迹对偶前提（`hduality`）：
