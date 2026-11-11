@@ -8,10 +8,10 @@ That apparent clash exposes a foundational distinction between two things that t
 
 Across four sections, this chapter makes the boundary between the two completely rigorous:
 
-1. **Sequential spherical rotations and projective shutters genuinely fail to commute** ($R_x R_y \neq R_y R_x$, $P_0 P_+ \neq P_+ P_0$), and closed loops on $S^2$ genuinely carry a nonzero Berry phase $\gamma_B = -\Omega/2$;
+1. **Sequential spherical rotations and projective shutters genuinely fail to commute** ($R_x R_y \neq R_y R_x$, $P_0 P_+ \neq P_+ P_0$), while the Berry solid-angle holonomy of closed loops and its relation to the three-vertex Bargmann invariant are recorded in [@rem-berry-pancharatnam-holonomy-literature];
 2. **Sequential quantum instruments depend strictly on operational order and post-measurement updates**, which cannot be inferred from static single-step POVM effects alone ([@prop-static-sequential-separation] proves a parameter-free qubit counterexample where two instruments share identical static effects yet yield sequential joint probabilities $0$ and $1$);
-3. **Why local coordinate charts on $S^2$ look path-tangled**: on the two-dimensional base sphere $S^2$, the Hairy Ball Theorem ($\chi(S^2) = 2$) forbids any nowhere-vanishing continuous tangent field, while the nontrivial Hopf circle bundle $S^1 \hookrightarrow S^3 \to S^2$ (first Chern number $|c_1| = 1$) forbids any continuous global phase section; by contrast, the three-dimensional rotor sphere $S^3 \cong \mathrm{SU}(2) \subset \mathrm{Cl}^+_{3,0}$ ($\chi(S^3) = 0$) carries an explicit nowhere-vanishing global tangent frame $(pI_x, pI_y, pI_z)$;
-4. **Where true order-independent pairwise consistency lives**: when we retain the labeled **full complex Gram matrix** $G_{ij} = \langle\psi_i, \psi_j\rangle$ (with complex phases intact, not merely squared moduli $|G_{ij}|^2$), reading its pairwise entries in any order reconstructs the entire family of state vectors uniquely up to a single common ambient unitary $U$ ([@thm-gram-unitary-reconstruction] and [@lemma-unit-gram-equality]) — and even the Pancharatnam–Berry phase of an oriented spherical geodesic triangle is already encoded inside $G$ by the cyclic triple product $\Delta = G_{01}G_{12}G_{20}$ via the exact sign relation $\gamma_B \equiv -\arg\Delta = -\frac{\Omega}{2} \pmod{2\pi}$ (minus half the signed solid angle under the spin-up convention)!
+3. **Why local coordinate charts on $S^2$ look path-tangled**: the tangent-bundle and Hopf-bundle topological obstructions on $S^2$ versus the global rotor frame on $S^3$ are summarized in the literature notes [@rem-hopf-dirac-monopole-literature] and [@rem-gram-hairy-ball-literature];
+4. **Where true order-independent pairwise consistency lives**: when we retain the labeled **full complex Gram matrix** $G_{ij} = \langle\psi_i, \psi_j\rangle$ (with complex phases intact, not merely squared moduli $|G_{ij}|^2$), reading its pairwise entries in any order reconstructs the entire family of state vectors uniquely up to a single common ambient unitary $U$ ([@thm-gram-unitary-reconstruction] and [@lemma-unit-gram-equality]), while the complex phase of the cyclic triple product $\Delta = G_{01}G_{12}G_{20}$ is already retained inside $G$ (compared with Berry phase in [@rem-berry-pancharatnam-holonomy-literature])!
 
 ![Noncommuting spherical rotations and Berry solid angle, Hairy Ball and Hopf obstructions versus the global rotor frame on S3, and unitary reconstruction from the full complex Gram matrix](../assets/fig-10-gram-matrix-hairy-ball.svg)
 
@@ -39,19 +39,23 @@ $$
 P_0 P_+ = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 0 & 0 \end{pmatrix} \neq \frac{1}{2}\begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix} = P_+ P_0.
 $$
 
-Furthermore, if a qubit state traverses the closed octant geodesic triangle $N(\vv{e}_3) \to +X(\vv{e}_1) \to +Y(\vv{e}_2) \to N(\vv{e}_3)$ enclosing oriented solid angle $\Omega = \frac{\pi}{2}$ (one-eighth of the $4\pi$ sphere), the real direction $\vv{r}$ returns to $N$, yet under the standard spin-up eigenline convention its transported spinor acquires **Berry's geometric phase** equal to minus one-half of the oriented solid angle:
+Furthermore, the classical correspondence between closed-loop geometric holonomy on $S^2$ and three-vertex complex overlap invariants is recorded below ([@rem-berry-pancharatnam-holonomy-literature]).
+
+::: {.remark #rem-berry-pancharatnam-holonomy-literature title="Octant Berry Geometric Phase and Cyclic Bargmann Invariant (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** If a qubit state traverses the closed octant geodesic triangle $N(\vv{e}_3) \to +X(\vv{e}_1) \to +Y(\vv{e}_2) \to N(\vv{e}_3)$ enclosing oriented solid angle $\Omega = \frac{\pi}{2}$ (one-eighth of the $4\pi$ sphere), the real direction $\vv{r}$ returns to $N$, yet under the standard spin-up eigenline convention its transported spinor acquires **Berry's geometric phase** (Berry, 1984; Simon, 1983) equal to minus one-half of the oriented solid angle:
 
 $$
 \gamma_B = -\frac{\Omega}{2} = -\frac{\pi}{4}.
 $$
 
-Does capturing this geometric phase require integrating differential equations along a path? Not at all: if we retain the **pairwise complex overlaps** $G_{ij} = \langle\psi_i, \psi_j\rangle$ among the three vertices $\psi_0, \psi_1, \psi_2$, the cyclic three-vertex Bargmann invariant
+Capturing this geometric phase does not require integrating differential equations along a path: if we retain the **pairwise complex overlaps** $G_{ij} = \langle\psi_i, \psi_j\rangle$ among the three vertices $\psi_0, \psi_1, \psi_2$, the cyclic three-vertex Bargmann invariant (Bargmann, 1964; Pancharatnam, 1956)
 
 $$
 \Delta(\psi_0, \psi_1, \psi_2) = \langle\psi_0, \psi_1\rangle\langle\psi_1, \psi_2\rangle\langle\psi_2, \psi_0\rangle = G_{01} G_{12} G_{20}
 $$
 
-is invariant under independent vertex phase rephasings $\psi_k \mapsto e^{i\alpha_k}\psi_k$, and its complex phase encodes the solid angle directly via $\gamma_B \equiv -\arg\Delta = -\frac{\Omega}{2} \pmod{2\pi}$.
+is invariant under independent vertex phase rephasings $\psi_k \mapsto e^{i\alpha_k}\psi_k$, and its complex phase encodes the solid angle directly via $\gamma_B \equiv -\arg\Delta = -\frac{\Omega}{2} \pmod{2\pi}$ (see [@rem-gram-hairy-ball-literature] at the end of the chapter for full differential-topological details).
+:::
 
 To compute complex overlaps along any latitude circle cleanly, the Lean module `BargmannImaginaryMaximizers` defines, for $t \in \mathbb{R}$ and $z \in \mathbb{C}$, the two-component complex vector
 
@@ -113,7 +117,10 @@ establishing conjuncts 1–3. For the initial state $P_0$ and first outcome $\ma
 
 Why does local coordinate descriptions on the Bloch sphere $S^2$ inevitably run into gauge patches, phase twists, and singular poles? Why can we not simply assign a smooth tangent ruler and a smooth unit spinor $\lvert\psi(p)\rangle$ to every direction $p \in S^2$ once and for all?
 
-Panel II of Figure 10 contrasts the two distinct topological obstructions on the base sphere $S^2$ with the global parallelizability of the rotor sphere $S^3$:
+Panel II of Figure 10 contrasts the two distinct topological obstructions on the base sphere $S^2$ with the global parallelizability of the rotor sphere $S^3$ (recorded below in [@rem-hopf-dirac-monopole-literature]):
+
+::: {.remark #rem-hopf-dirac-monopole-literature title="Hairy Ball Obstruction on S², Hopf Principal Bundle, and Global Rotor Frame on S³ (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** The two global topological obstructions on the base sphere $S^2$ and the global parallelizability of the total space $S^3$ contrast as follows (for full citations see [@rem-gram-hairy-ball-literature]):
 
 1. **The Hairy Ball obstruction on the tangent bundle $TS^2$ ($\chi(S^2) = 2$)**: By the Poincaré–Hopf theorem, for any smooth tangent vector field with isolated zeros on a compact oriented manifold $M$, the sum of its zero indices equals the Euler characteristic $\chi(M)$. Because $\chi(S^2) = 2 \neq 0$, every continuous tangent vector field on $S^2$ must vanish somewhere. Explicitly, the meridian tangent field
 
@@ -136,6 +143,7 @@ Panel II of Figure 10 contrasts the two distinct topological obstructions on the
    $$
 
    Remember two essential distinctions: the homomorphism $\mathrm{SU}(2) \to \mathrm{SO}(3)$ is a $2:1$ double cover rather than an isomorphism, and global parallelizability of the total space $S^3$ trivializes $TS^3$ without providing a global section over the base sphere $S^2$.
+:::
 
 > Singularities arise when we try to flatten the phase fiber onto $S^2$; on the rotor sphere $S^3$, the global frame never vanishes.
 
@@ -177,7 +185,7 @@ Note the precise mathematical contract of [@thm-gram-unitary-reconstruction]:
 
 Let us pause to appreciate why [@thm-gram-unitary-reconstruction] resolves the apparent tension between path-dependent rotations and order-independent pairwise consistency:
 
-- **Why solo local coordinate charts look path-dependent**: When an observer insists on describing each state $\psi_i$ separately by picking a single reference axis and a local phase chart on $S^2$, the Hairy Ball and Hopf bundle obstructions force singular poles and path-dependent gauge jumps.
+- **Why solo local coordinate charts look path-dependent**: When an observer insists on describing each state $\psi_i$ separately by picking a single reference axis and a local phase chart on $S^2$, the global bundle obstructions recorded in [@rem-hopf-dirac-monopole-literature] force singular poles and path-dependent gauge jumps.
 - **Why the full complex Gram matrix $G = A^* A$ is globally consistent and order-independent**: Instead of projecting states onto an arbitrary external basis $C$, $G_{ij} = \langle\psi_i, \psi_j\rangle$ records the direct relation between state $i$ and state $j$ for every pair $(i, j)$. Reading or verifying the entries of this Hermitian table in any order — whether row by row, column by column, or along a triangle $(0,1) \to (1,2) \to (2,0)$ — always refers to the same globally consistent inner-product geometry, which [@thm-gram-unitary-reconstruction] guarantees can be realized in $\mathbb{C}^m$ uniquely up to a single common ambient unitary $U \in U(m)$.
 - **Why full complex phases matter**: If one discards complex phases and keeps only the real transition probabilities $|G_{ij}|^2$, then the octant triangle $(\psi_0, \psi_1, \psi_2)$ and its mirror-reflected conjugate triangle share the exact same squared moduli $|G_{ij}|^2$, losing the sign of the solid angle $\Omega = \pm\pi/2$. Retaining the full complex Gram entries $G_{ij}$ preserves the cyclic Bargmann product $\Delta = G_{01}G_{12}G_{20}$ and hence the exact geometric phase!
 
@@ -197,6 +205,8 @@ For unit vectors $u, v \in E$, expanding $\norm{u - v}^2 = \norm{u}^2 - 2\operat
 Notice that [@lemma-unit-gram-equality] requires overlap equal to $1$, not modulus $|\langle u, v\rangle_{\mathbb{K}}| = 1$ (which identifies rays rather than vectors in the complex case), and requires neither completeness nor finite dimensionality.
 
 ::: {.example #ex-octant-berry-gram title="An Octant Triangle, a Complex Gram Matrix, and an Order Counterexample"}
+(In this example, the spin-up Berry-phase convention $\gamma_B = -\Omega/2$ in item 1 and the Poincaré–Hopf zero-index sum in item 5 are each a **literature result, not formalized in this book**; see [@rem-berry-pancharatnam-holonomy-literature], [@rem-hopf-dirac-monopole-literature], and [@rem-gram-hairy-ball-literature].)
+
 1. **Octant vertices, complex Gram matrix, and Berry phase**: In $\mathbb{C}^2$, take the three unit column vectors corresponding to North $+\vv{e}_3$, east $+\vv{e}_1$, and $+\vv{e}_2$:
 
    $$

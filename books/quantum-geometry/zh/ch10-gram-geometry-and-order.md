@@ -8,10 +8,10 @@
 
 本章将用四节篇幅把这两者的边界彻底厘清：
 
-1. **球面上的主动旋转与投影快门确实不对易**（$R_x R_y \neq R_y R_x$，$P_0 P_+ \neq P_+ P_0$），闭合回路也确实携带非零贝里立体角相位 $\gamma_B = -\Omega/2$；
+1. **球面上的主动旋转与投影快门确实不对易**（$R_x R_y \neq R_y R_x$，$P_0 P_+ \neq P_+ P_0$），而闭合回路的贝里立体角和乐与三点巴格曼不变量对照见 [@rem-berry-pancharatnam-holonomy-literature]；
 2. **时序测量仪器一旦丢弃算符回作用、只看静态效应元，就会漏掉真实的先后顺序差异**（[@prop-static-sequential-separation] 给出一个零假设的 $2\times 2$ 精确反例，把“概率为 $0$”与“概率为 $1$”当场分开）；
-3. **为什么我们总觉得需要依赖路径顺序？** 因为在二维基球面 $S^2$ 上，毛球定理（$\chi(S^2) = 2$）与霍普夫圆丛（Hopf bundle，$S^1 \hookrightarrow S^3 \to S^2$，第一陈数 $\pm 1$）禁止了全局连续无奇异的切标架与全局连续相位截面；而在三维旋转器超球面 $S^3 \cong \mathrm{SU}(2) \subset \mathrm{Cl}^+_{3,0}$（$\chi(S^3) = 0$）上，却天然存在处处非零的全局左不变切标架 $(pI_x, pI_y, pI_z)$；
-4. **什么才是真正的“两两比较，永远一致，顺序无关”？** 当我们保留带标签的**完整复格拉姆内积矩阵** $G_{ij} = \langle\psi_i, \psi_j\rangle$（连同复相位，而非仅仅模平方 $|G_{ij}|^2$）时，无论按什么下标顺序去读取或核对这张两两比较表，它都在差一个公共外围幺正变换 $U$ 的意义下唯一重构出整族量子态的全局几何配置（[@thm-gram-unitary-reconstruction] 与 [@lemma-unit-gram-equality]）——**连球面测地三角形的潘查拉特纳姆—贝里（Pancharatnam–Berry）几何相位本身，也已经由三点循环内积乘积 $\Delta = G_{01}G_{12}G_{20}$ 按精确符号关系 $\gamma_B \equiv -\arg\Delta = -\frac{\Omega}{2} \pmod{2\pi}$（自旋朝上本征支下等于有向立体角的负一半）永恒、自洽地编码在这张两两比较表里！**
+3. **为什么局部球面坐标卡总显得依赖路径？** 二维基球面 $S^2$ 上的切丛/主圆丛拓扑障碍与三维旋转器球 $S^3$ 全局左不变标架的对比归纳于文献注记 [@rem-hopf-dirac-monopole-literature] 与 [@rem-gram-hairy-ball-literature]；
+4. **什么才是真正的“两两比较，永远一致，顺序无关”？** 当我们保留带标签的**完整复格拉姆内积矩阵** $G_{ij} = \langle\psi_i, \psi_j\rangle$（连同复相位，而非仅仅模平方 $|G_{ij}|^2$）时，无论按什么下标顺序去读取或核对这张两两比较表，它都在差一个公共外围幺正变换 $U$ 的意义下唯一重构出整族量子态的全局几何配置（[@thm-gram-unitary-reconstruction] 与 [@lemma-unit-gram-equality]），而三点循环内积乘积 $\Delta = G_{01}G_{12}G_{20}$ 的复相位本身也直接保存在 $G$ 中（与贝里相位的对照见 [@rem-berry-pancharatnam-holonomy-literature]）！
 
 ![球面旋转顺序与贝里立体角、二维球面毛球/霍普障碍与三维旋转器球全局标架，以及完整复格拉姆矩阵的幺正重构](../assets/fig-10-gram-matrix-hairy-ball.svg)
 
@@ -39,19 +39,23 @@ $$
 P_0 P_+ = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 0 & 0 \end{pmatrix} \neq \frac{1}{2}\begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix} = P_+ P_0.
 $$
 
-更进一步，如果让自旋状态沿着球面八分球大圆三角形 $N(\vv{e}_3) \to +X(\vv{e}_1) \to +Y(\vv{e}_2) \to N(\vv{e}_3)$ 走完一圈闭合回路（立体角 $\Omega = \frac{\pi}{2}$，占整球立体角 $4\pi$ 的八分之一），虽然三维实方向向量 $\vv{r}$ 回到了北极原点 $N$，但悬挂在它头顶的二维复旋量却攒下了一个无法消去的几何和乐角——在自旋朝上本征支的标准约定下，**贝里几何相位**恰好等于有向立体角的负一半：
+更进一步，闭合球面回路上的几何和乐与三顶点复内积不变量之间的经典对应关系汇总如下（[@rem-berry-pancharatnam-holonomy-literature]）。
+
+::: {.remark #rem-berry-pancharatnam-holonomy-literature title="八分球贝里几何相位与三点循环巴格曼不变量（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 如果让自旋状态沿着球面八分球大圆三角形 $N(\vv{e}_3) \to +X(\vv{e}_1) \to +Y(\vv{e}_2) \to N(\vv{e}_3)$ 走完一圈闭合回路（立体角 $\Omega = \frac{\pi}{2}$，占整球立体角 $4\pi$ 的八分之一），虽然三维实方向向量 $\vv{r}$ 回到了北极原点 $N$，但悬挂在它头顶的二维复旋量却攒下了一个无法消去的几何和乐角——在自旋朝上本征支的标准约定下，**贝里几何相位**（Berry, 1984；Simon, 1983）等于有向立体角的负一半：
 
 $$
 \gamma_B = -\frac{\Omega}{2} = -\frac{\pi}{4}.
 $$
 
-这个相位是只能靠连续微分方程沿路径一步步积分才能算出来的“路径历史遗迹”吗？恰恰相反！只要保留三颗顶点态矢 $\psi_0, \psi_1, \psi_2$ 两两之间的**复内积** $G_{ij} = \langle\psi_i, \psi_j\rangle$，三点循环巴格曼不变量（Bargmann invariant）
+这个相位并不只能靠沿连续路径积分微分方程来刻画：只要保留三颗顶点态矢 $\psi_0, \psi_1, \psi_2$ 两两之间的**复内积** $G_{ij} = \langle\psi_i, \psi_j\rangle$，三点循环巴格曼不变量（Bargmann, 1964；Pancharatnam, 1956）
 
 $$
 \Delta(\psi_0, \psi_1, \psi_2) = \langle\psi_0, \psi_1\rangle\langle\psi_1, \psi_2\rangle\langle\psi_2, \psi_0\rangle = G_{01} G_{12} G_{20}
 $$
 
-在每个顶点各自乘上任意局部相位 $\psi_k \mapsto e^{i\alpha_k}\psi_k$ 时严格保持不变（因为 $e^{-i\alpha_0}e^{i\alpha_1}\cdot e^{-i\alpha_1}e^{i\alpha_2}\cdot e^{-i\alpha_2}e^{i\alpha_0} = 1$），而它的复辐角按 $\gamma_B \equiv -\arg\Delta = -\frac{\Omega}{2} \pmod{2\pi}$ 直接编码了球面测地三角形的几何相位！
+在每个顶点各自乘上任意局部相位 $\psi_k \mapsto e^{i\alpha_k}\psi_k$ 时严格保持不变（因为 $e^{-i\alpha_0}e^{i\alpha_1}\cdot e^{-i\alpha_1}e^{i\alpha_2}\cdot e^{-i\alpha_2}e^{i\alpha_0} = 1$），而它的复辐角按 $\gamma_B \equiv -\arg\Delta = -\frac{\Omega}{2} \pmod{2\pi}$ 直接编码了球面测地三角形的几何相位（更多微分拓扑文献细节见章末 [@rem-gram-hairy-ball-literature]）。
+:::
 
 为了精确计算任意纬度圈上两个复旋量的两两内积，在 Lean 模块 `BargmannImaginaryMaximizers` 中，对高度参数 $t \in [0, 1]$ 与复数 $z \in \mathbb{C}$，定义二维复向量 `latitude t z` 为
 
@@ -125,7 +129,10 @@ $$
 
 既然球面上的局部坐标与连续移动处处受制于路径依赖与相位扭转，为什么我们不能干脆在布洛赫球面 $S^2$ 的每一个方向 $p \in S^2$ 上，都事先钉死一根平滑变化的“标准切向量尺子”和“标准零相位旋量代表元”，从而一劳永逸地消灭贝里相位与规范坐标卡切换？
 
-答案藏在微分拓扑最著名的两道全局几何阻碍，以及三维球面 $S^3$ 与二维球面 $S^2$ 的戏剧性反差之中（图 10 中栏）：
+答案藏在微分拓扑最著名的两道全局几何阻碍，以及三维球面 $S^3$ 与二维球面 $S^2$ 的戏剧性反差之中（图 10 中栏；以下三条微分拓扑结论均归入 [@rem-hopf-dirac-monopole-literature]）：
+
+::: {.remark #rem-hopf-dirac-monopole-literature title="S² 毛球障碍、霍普夫主圆丛与 S³ 旋转器全局切标架（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 基球面 $S^2$ 上的两道全局拓扑障碍与总空间 $S^3$ 的全局可平行化对照如下（出处详见 [@rem-gram-hairy-ball-literature]）：
 
 1. **二维球面 $S^2$ 上的毛球定理（切丛障碍，$\chi(S^2) = 2$）**：如果你想在日常的二维球面 $S^2$ 上梳理出一场处处连续且处处非零的切向量场 $v : S^2 \to TS^2$（好比给每个纯态方向连续指定一根正交微扰轴），庞加莱—霍普夫（Poincaré–Hopf）指标定理会当场拦住你——因为 $S^2$ 的欧拉示性数等于 $\chi(S^2) = 2 \neq 0$，任何光滑（乃至连续）切向量场在 $S^2$ 上都**必然至少有一个零点**！例如，将竖直单位向量 $\vv{e}_3$ 投影到球面切平面上：
 
@@ -148,6 +155,7 @@ $$
    $$
 
    由于 $\langle p, p I_j\rangle_{\mathbb{R}^4} = 0$ 且 $\langle p I_j, p I_k\rangle_{\mathbb{R}^4} = \delta_{jk}$，这三根切向量在整颗 $S^3$ 的每一点处都严格单位正交、处处光滑且**永远不为零**（呼应 $\chi(S^3) = 0$）！（注意：旋转器群 $S^3 \cong \mathrm{SU}(2)$ 到三维旋转群 $\mathrm{SO}(3) \cong \mathbb{RP}^3$ 是二对一双覆盖 $\pm p \mapsto R_p$ 而非同构；且总空间 $S^3$ 的全局可平行化是在 $S^3$ 自身切丛 $TS^3$ 上梳平毛发，并不能替投影映射 $S^3 \to S^2$ 提供横跨纤维的全局截面。）
+:::
 
 > 二维球面因降维投射而生出极点奇弦；三维旋转器球因保留完整相位纤维而处处平滑。
 
@@ -214,6 +222,8 @@ $$
 让我们把本章所有的线索汇聚到下面的综合手算实例中，亲眼看看八分球三角形、复格拉姆矩阵、贝里相位、顺序反例与毛球切向量场如何严丝合缝地扣在一起。
 
 ::: {.example #ex-octant-berry-gram title="八分球三角形、复格拉姆矩阵与顺序反例"}
+（本例第 1 步中的自旋朝上贝里相位约定 $\gamma_B = -\Omega/2$ 与第 5 步中的庞加莱—霍普夫零点指标和均属**文献结果，未在本书形式化**；详见 [@rem-berry-pancharatnam-holonomy-literature]、[@rem-hopf-dirac-monopole-literature] 与 [@rem-gram-hairy-ball-literature]。）
+
 1. **八分球三顶点与完整复格拉姆矩阵**：在 $\mathbb{C}^2$ 中取对应布洛赫球北极 $+\vv{e}_3$、正东 $+\vv{e}_1$、正北偏内 $+\vv{e}_2$ 的三根单位列向量
 
    $$

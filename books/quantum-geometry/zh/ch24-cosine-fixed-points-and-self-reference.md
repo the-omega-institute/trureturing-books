@@ -27,7 +27,7 @@ $$
 \psi = \psi(\psi).
 $$
 
-在本章中，我们将用最严密的数学与 Lean 4 形式化定理，把这幅自指画卷拆解为四个相互辉映的层次：**有限状态空间上的单调收缩稳定化定理**、**相邻步解释语境相对不动点与语境非唯一性定理**、**正实数上黄金连分数自指映射 $x = 1 + 1/x$ 的唯一代数不动点定理**，以及经典分析与超越数论中**余弦压缩不动点 $\theta^*$（Dottie 数）的唯一性、超越性与有限精度残差裂缝**。
+在本章中，我们将用严密的数学与 Lean 4 形式化定理，把这幅自指画卷拆解为四个相互辉映的层次：**有限状态空间上的单调收缩稳定化定理**、**相邻步解释语境相对不动点与语境非唯一性定理**、**正实数上黄金连分数自指映射 $x = 1 + 1/x$ 的唯一代数不动点定理**，以及收录在文献注记 [@rem-banach-dottie-hairy-ball-literature] 与 [@rem-dottie-angle-incommensurable] 中的**Dottie 余弦自指 $\cos\theta^* = \theta^*$ 的经典分析与超越数论背景**。
 
 ![余弦不动点与自指闭环：Dottie 蛛网螺旋吸引子 cos θ* = θ*、有限集合单调收缩稳定化、相邻步贴合及语境非唯一性，以及黄金倒数唯一不动点与 ψ = ψ(ψ)](../assets/fig-24-dottie-spiral-attractor.svg)
 
@@ -249,7 +249,7 @@ $$
 先从 `golden_transfer_triangle` 取出恒等式 $\varphi - 1 = \varphi^{-1}$。正向：由 $x > 0$ 知 $x + 1 \neq 0$，于是 $\frac{1}{x+1} = x$ 等价于 $1 = x\,(x + 1)$；结合 $\varphi^2 = \varphi + 1$（`Real.goldenRatio_sq`）与 $\varphi > 1$（`Real.one_lt_goldenRatio`），非线性算术给出 $x = \varphi - 1 = \varphi^{-1}$。反向：代入 $x = \varphi^{-1}$，由 $\varphi^{-1} + 1 = \varphi$ 得 $\frac{1}{\varphi^{-1} + 1} = \frac{1}{\varphi} = \varphi^{-1}$。完整证明由 Lean 内核检查。
 :::
 
-到这里，黄金自指还是一件纯代数的事：加法、除法、一个二次方程。§24.4 将把它与余弦自指 $\cos\theta = \theta$ 对比，并强调前者停在代数数、后者跃入超越数。但这两种自指并非互不相干。黄金比本身就是一个余弦读数，读的是正五边形的角。
+到这里，黄金自指还是一件纯代数的事：加法、除法、一个二次方程。§24.4 将把它与余弦自指 $\cos\theta = \theta$ 放在一起对比（后者的经典分析与超越数论性质见 §24.4 的文献注记）。但这两种自指并非互不相干。黄金比本身就是一个余弦读数，读的是正五边形的角。
 
 ::: {.proposition #prop-pentagon-golden-cosines title="正五边形的倍余弦读出黄金比、它的倒数与 √5" lean="D5/S3/Constants/PentagonCosines.pentagon_golden_cosines"}
 记 $\varphi$ 为 Mathlib 的 `Real.goldenRatio`。以下四项同时成立：
@@ -270,7 +270,7 @@ $$
 1 + 2\cos\frac{2\pi}{5} \;=\; 2\cos\frac{\pi}{5}.
 $$
 
-黄金自指是正五边形里的一条长度关系：单位边长的正五边形，对角线长为 $2\cos\frac{\pi}{5} = \varphi$。于是代数自指与余弦自指的差别可以说得更准：$\varphi$ 也是余弦读数，但读的是 $\frac{\pi}{5}$ 这样与 $\pi$ 可公度的角，而凡与 $\pi$ 可公度的角，余弦必是代数数；$\theta^*$ 的余弦是超越数，所以它必与 $\pi$ 不可公度——这正是后面 [@rem-dottie-angle-incommensurable] 要证明的事。
+黄金自指是正五边形里的一条长度关系：单位边长的正五边形，对角线长为 $2\cos\frac{\pi}{5} = \varphi$。于是 $\varphi$ 也是余弦读数，读在 $\frac{\pi}{5}$ 处并落在二次代数数域 $\mathbb{Q}(\sqrt{5})$ 内；至于当角本身等于自己的余弦（$\cos\theta^* = \theta^*$）时，其算术性质与是否与 $\pi$ 可公度，将在下一节的文献注记 [@rem-banach-dottie-hairy-ball-literature] 与 [@rem-dottie-angle-incommensurable] 中给出。
 
 ## 24.4 从 $\cos\theta^* = \theta^*$ 到 $\psi = \psi(\psi)$：超越性、截断裂缝与毛球对跖不动点 {#sec-ch24-4}
 
@@ -280,7 +280,7 @@ $$
 \cos\theta^* = \theta^*
 $$
 
-放在一起对比！为什么当自指算子从一维有理分式 $1 + 1/x$ 升级为二维旋转投影 $\cos\theta$ 时，它的唯一实不动点 $\theta^* \approx 0.7390851332\dots$（**Dottie 数**）会一举跃出全部代数数域 $\overline{\mathbb{Q}}$，成为一颗真正的**超越数（transcendental number）**？
+放在一起对比！当自指算子从一维有理分式 $1 + 1/x$ 升级为二维旋转投影 $\cos\theta$ 时，实不动点 $\theta^* \approx 0.7390851332\dots$（**Dottie 数**）在经典分析与超越数论中具有怎样的存在唯一性与算术地位？
 
 让我们在下面的经典文献审计中，把巴拿赫压缩唯一性、林德曼—魏尔斯特拉斯超越性证明、泰勒余项 $R_{2N}(\theta)$ 与毛球定理的球面不动点/对跖点二分法一次尽收眼底。
 
@@ -338,7 +338,7 @@ $$
    $$
 
    由于算子只含一维有理加除，其极限停留在二次代数数 $\varphi \in \overline{\mathbb{Q}}$（满足 $\varphi^2 - \varphi - 1 = 0$）。
-3. **二维旋转投影余弦自指（$\theta_{k+1} = \cos\theta_k$，[@rem-banach-dottie-hairy-ball-literature]）**：同样从弧度 $\theta_0 = 1$ 出发，连续按下余弦键：
+3. **二维旋转投影余弦自指（$\theta_{k+1} = \cos\theta_k$，**文献结果，未在本书形式化**；见 [@rem-banach-dottie-hairy-ball-literature]）**：同样从弧度 $\theta_0 = 1$ 出发，连续按下余弦键：
 
    $$
    \begin{aligned}
@@ -373,6 +373,9 @@ $$
 1. 靠近 $\theta^*$ 之后，每按一次余弦键，误差到底缩小多少？
 2. 如果尺子不只读投影 $\cos\theta$，还同时读正交分量 $\sin\theta$，闭合能快多少？
 3. 一把只有有限分母刻度的尺子，读数离 $\cos q = q$ 最近能到多近？
+
+::: {.remark #rem-dottie-convergent-residual-literature title="θ* 的渐近压缩率、牛顿二次加速与连分数渐近分数残差双边界（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。**
 
 **第一问：位置与收敛率落在同一个单位圆上。** 记误差 $\delta_k = \theta_k - \theta^*$，把 $\cos$ 在 $\theta^*$ 处展开，并用 $\cos\theta^* = \theta^*$ 消去零阶项：
 
@@ -420,16 +423,17 @@ $$
 \lvert q - \theta^*\rvert \;\le\; \lvert\cos q - q\rvert \;\le\; (1 + \sin 1)\,\lvert q - \theta^*\rvert, \qquad 1 + \sin 1 \approx 1.8414710,
 $$
 
-且当 $q \to \theta^*$ 时比值 $\lvert\cos q - q\rvert / \lvert q - \theta^*\rvert$ 趋于 $1 + \sin\theta^* = 1 + \lambda \approx 1.6736120$。所以“有限精度读数的残差能有多小”与“有理数能把 $\theta^*$ 逼近到多近”是同一个问题，后者由 $\theta^*$ 的连分数回答。$\theta^*$ 是无理数（[@rem-banach-dottie-hairy-ball-literature] 第 2 条），它的每一个渐近分数 $a/b$ 都满足 $\lvert\theta^* - a/b\rvert < 1/b^2$，从而
+且当 $q \to \theta^*$ 时比值 $\lvert\cos q - q\rvert / \lvert q - \theta^*\rvert$ 趋于 $1 + \sin\theta^* = 1 + \lambda \approx 1.6736120$。所以“有限精度读数的残差能有多小”与“有理数能把 $\theta^*$ 逼近到多近”是同一个问题。进一步由 $\theta^*$ 的无理性（[@rem-banach-dottie-hairy-ball-literature] 第 2 条，林德曼—魏尔斯特拉斯定理）及实数连分数逼近基本不等式，它的每一个连分数渐近分数 $a/b$ 都满足 $0 < \lvert\theta^* - a/b\rvert < 1/b^2$，代入上面的中值双边界即得
 
 $$
 0 \;<\; \Bigl\lvert\cos\frac{a}{b} - \frac{a}{b}\Bigr\rvert \;<\; \frac{1 + \sin 1}{b^2}
 $$
 
 对无穷多个分母 $b$ 成立：裂缝可以按分母的平方收窄，却永不为零。
+:::
 
 ::: {.example #ex-dottie-rate-newton-rational title="真实压缩率、牛顿二次闭合与最佳有理读数残差的数值核对"}
-以下数值均以 50 位十进制精度复算，四舍五入到所示位数；连分数的部分商是数值观察，不是定理。
+**文献结果，未在本书形式化（以下数值均以 50 位十进制精度复算，四舍五入到所示位数；连分数的部分商是数值观察，不是定理）。**
 
 **相邻误差之比趋于 $-\sin\theta^*$。** 从 $\theta_0 = 1$ 出发，记 $\delta_k = \theta_k - \theta^*$：
 
@@ -477,8 +481,8 @@ $$
 
 有理读数永远对不准，那么换一种闭合方式——不让投影回到自己，而让旋转回到起点——行不行？答案同样是否定的，而且这一次不需要任何猜想。
 
-::: {.remark #rem-dottie-angle-incommensurable title="θ* 与 π 不可公度：以不动点为转角的旋转永不闭合（文献结果的推论，未在本书形式化）"}
-**文献结果的推论，未在本书形式化。** [@conj-schanuel-dottie] 所用的前提“$i\theta^*$ 与 $i\pi$ 在 $\mathbb{Q}$ 上线性无关”等价于 $\theta^*/\pi \notin \mathbb{Q}$。这一点不依赖任何猜想：
+::: {.remark #rem-dottie-angle-incommensurable title="θ* 与 π 不可公度：以不动点为转角的旋转永不闭合（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** [@conj-schanuel-dottie] 所用的前提“$i\theta^*$ 与 $i\pi$ 在 $\mathbb{Q}$ 上线性无关”等价于 $\theta^*/\pi \notin \mathbb{Q}$。这一点不依赖任何猜想：
 
 设 $\theta^* = \frac{m}{n}\pi$，其中 $m, n$ 为整数且 $n \ge 1$。令 $\zeta = e^{i m\pi/n}$，则 $\zeta^{2n} = 1$，$\zeta$ 是单位根，因而是代数数；于是 $\cos\frac{m\pi}{n} = \frac{\zeta + \zeta^{-1}}{2}$ 也是代数数。但 $\cos\theta^* = \theta^*$，这将使 $\theta^*$ 成为代数数，与 [@rem-banach-dottie-hairy-ball-literature] 第 2 条由林德曼—魏尔斯特拉斯定理得到的超越性矛盾。故 $\theta^*/\pi$ 是无理数（数值上 $\theta^*/\pi \approx 0.2352581$，即 $\theta^* \approx 42.3465^\circ$）。
 
@@ -508,10 +512,8 @@ $$
 使结论成立的连续函数全体构成一个复线性子空间 $S$。第一步，每个特征标 $x \mapsto e^{2\pi i m x}$ 都在 $S$ 中：$m = 0$ 时两端都是 $1$；$m \neq 0$ 时轨道平均是公比 $e^{2\pi i m\alpha}$ 的几何和除以 $N$，由于 $\alpha$ 无理，公比不等于 $1$，几何和有界，平均趋于 $0$，而特征标的 Haar 积分也是 $0$（`fourier_average_tendsto`）。第二步，$S$ 在一致收敛下封闭：平均算子的模不超过 $\lVert f\rVert_\infty$，是等度连续的线性泛函族，逐点极限保持在闭集上。第三步，特征标的线性张成在连续函数空间中稠密（`span_fourier_closure_eq_top`）。三步合起来得 $S$ 是全体连续函数。完整证明由 Lean 内核检查。
 :::
 
-把 [@lem-irrational-rotation-equidistribution] 用到 $\alpha = \frac{\theta^*}{2\pi}$ 上，所需的无理性来自 [@rem-dottie-angle-incommensurable]（依赖林德曼—魏尔斯特拉斯定理，文献结果）；等分布这一步本身已不再依赖文献。
-
 ::: {.example #ex-dottie-orbit-seventeen title="以 θ* 为步长的轨道：十七步几乎闭合，却终究走遍圆周"}
-以下数值由闭式几何和计算并以直接求和核对；连分数的部分商是数值观察。
+（把 [@lem-irrational-rotation-equidistribution] 用到 $\alpha = \frac{\theta^*}{2\pi}$ 上时，等分布定理本身已由 Lean 内核验证，而输入前提 $\alpha \notin \mathbb{Q}$ 来自 [@rem-dottie-angle-incommensurable]，属**文献结果，未在本书形式化**。）以下数值由闭式几何和计算并以直接求和核对；连分数的部分商是数值观察。
 
 **十七步的近闭合。** $\frac{\theta^*}{2\pi} \approx 0.1176290523$ 的连分数为 $[0; 8, 1, 1, 191, 1, 1, \dots]$。部分商 $191$ 异常地大，使渐近分数 $\frac{2}{17}$ 格外精确：
 
@@ -540,13 +542,15 @@ $f_1$ 的平均很快趋于 $0$：几何和给出界 $\frac{1}{N\lvert\sin(\thet
 
 作者手稿里的追问 *“$\pi$ 是 $\theta$ 的一个投影？”* 在 [@conj-schanuel-dottie] 处得到的是一个否定方向的条件性回答：在沙努埃尔猜想之下，$\theta^*$ 与 $\pi$ 之间没有任何整系数多项式关系。但“没有代数关系”不等于“没有关系”。肯定方向的回答就藏在不动点方程里，一步就能读出来。
 
-**直角被不动点切成两段。** 对 $x \in [0, 1]$，方程 $\cos\theta = x$ 在 $[0, \pi/2]$ 上的唯一解是 $\theta = \arccos x = \frac{\pi}{2} - \arcsin x$。把 $x = \theta = \theta^*$ 代入：
+::: {.remark #rem-dottie-right-angle-split-literature title="不动点将直角切分为两段互补圆弧（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 对 $x \in [0, 1]$，方程 $\cos\theta = x$ 在 $[0, \pi/2]$ 上的唯一解是 $\theta = \arccos x = \frac{\pi}{2} - \arcsin x$。把 $x = \theta = \theta^*$ 代入：
 
 $$
 \cos\theta^* = \theta^* \quad\Longleftrightarrow\quad \frac{\pi}{2} \;=\; \theta^* + \arcsin\theta^* .
 $$
 
 在单位圆上看：点 $P = (\cos\theta^*, \sin\theta^*) = (\theta^*, \lambda)$ 把第一象限的四分之一圆弧切成两段。下段从 $(1, 0)$ 到 $P$，弧长是 $\theta^*$，恰好等于 $P$ 的横坐标；上段从 $P$ 到 $(0, 1)$，弧长是 $\arcsin\theta^*$。$P$ 是这段圆弧上唯一一个“弧长等于自己横坐标”的点。
+:::
 
 要把这段圆弧写成有理系数级数，先展开它的积分核。
 
@@ -560,8 +564,8 @@ $$
 这里 $\operatorname{HasSum}$ 同时指定级数收敛及其和。
 :::
 
-::: {.remark #rem-arcsin-series-derivation title="从二项核积分到含端点的反正弦级数"}
-令
+::: {.remark #rem-arcsin-series-derivation title="从二项核积分到含端点的反正弦级数（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 令
 
 $$
 c_n = \frac{\binom{2n}{n}}{4^n(2n+1)} \in \mathbb{Q}.
@@ -605,11 +609,6 @@ $$
 \qquad(\lvert x\rvert\le1).
 \end{aligned}
 $$
-:::
-
-[^arcsin-ftc]: 连续性与导数使用 Mathlib 的 `Real.continuous_arcsin`、`Real.hasDerivAt_arcsin`；后者要求 $t\ne-1$ 且 $t\ne1$，在 $0<t<y\le1$ 上成立。自动可积性使用 `intervalIntegral.intervalIntegrable_deriv_of_nonneg`，除闭区间连续性与开区间导数外，还使用上述导数的非负性。积分恒等式使用 `intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le`，其前提是 $0\le y$、同样的连续性与开区间导数，以及前一步建立的区间可积性。两者均不要求端点可导。
-
-[^arcsin-dct]: 逐项积分使用 Mathlib 的 `intervalIntegral.hasSum_integral_of_dominated_convergence`：每项是可测多项式，在开区间上以非负项 $b_nt^{2n}$ 自身作界；这些界的和几乎处处等于可积的 $g(t)$。有限多项式的积分给出系数 $b_n/(2n+1)=c_n$。
 
 于是 $\pi$ 是 $\theta^*$ 的一条有理系数幂级数的值：
 
@@ -618,9 +617,14 @@ $$
 $$
 
 这里使用的不动点条件是 $\theta^*\in[0,1]$ 与 $\cos\theta^*=\theta^*$。`Real.arccos_cos` 要求的 $0\le\theta^*\le\pi$ 由此区间条件保证；结合 `Real.arccos_eq_pi_div_two_sub_arcsin`，得到 $\theta^*=\pi/2-\arcsin\theta^*$，从而 $\pi=A(\theta^*)$。
+:::
 
-::: {.remark #rem-arcsin-interior-tail title="内部区间上的几何截断误差"}
-对每个 $N\in\mathbb{N}$，定义
+[^arcsin-ftc]: 连续性与导数使用 Mathlib 的 `Real.continuous_arcsin`、`Real.hasDerivAt_arcsin`；后者要求 $t\ne-1$ 且 $t\ne1$，在 $0<t<y\le1$ 上成立。自动可积性使用 `intervalIntegral.intervalIntegrable_deriv_of_nonneg`，除闭区间连续性与开区间导数外，还使用上述导数的非负性。积分恒等式使用 `intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le`，其前提是 $0\le y$、同样的连续性与开区间导数，以及前一步建立的区间可积性。两者均不要求端点可导。
+
+[^arcsin-dct]: 逐项积分使用 Mathlib 的 `intervalIntegral.hasSum_integral_of_dominated_convergence`：每项是可测多项式，在开区间上以非负项 $b_nt^{2n}$ 自身作界；这些界的和几乎处处等于可积的 $g(t)$。有限多项式的积分给出系数 $b_n/(2n+1)=c_n$。
+
+::: {.remark #rem-arcsin-interior-tail title="内部区间上的几何截断误差（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 对每个 $N\in\mathbb{N}$，定义
 
 $$
 \begin{aligned}
@@ -642,21 +646,19 @@ $$
 \end{aligned}
 $$
 
-这些界对 $N=0$ 也成立，此时部分和为空；对 $q=0$ 也成立，此时 $x=0$，余项和上界均为零。端点 $x=\pm1$ 的收敛来自 [@rem-arcsin-series-derivation] 的积分论证；此处的几何界只用于 $q<1$。
+这些界对 $N=0$ 也成立，此时部分和为空；对 $q=0$ 也成立，此时 $x=0$，余项和上界均为零。端点 $x=\pm1$ 的收敛来自 [@rem-arcsin-series-derivation] 的积分论证；此处的几何界只用于 $q<1$。对本章的 $\theta^*\in(0,1)$，选取 $\theta^*\le q<1$；给定任意误差容限 $\varepsilon>0$，总能选 $N$ 使 $2q^{2N+1}/(1-q^2)<\varepsilon$，于是 $|\pi-A_N(\theta^*)|<\varepsilon$。$A_N$ 是有理系数多项式，可用有限次加乘求值。这个结论约束的是精确输入下的级数截断误差；实际计算还需另给 $\theta^*$ 的输入误差、舍入控制与计算资源界。
 :::
 
-这使“任意精度”有了明确的截断含义：对本章的 $\theta^*\in(0,1)$，选取 $\theta^*\le q<1$；给定任意误差容限 $\varepsilon>0$，总能选 $N$ 使 $2q^{2N+1}/(1-q^2)<\varepsilon$，于是 $|\pi-A_N(\theta^*)|<\varepsilon$。$A_N$ 是有理系数多项式，可用有限次加乘求值。这个结论约束的是精确输入下的级数截断误差；实际计算还需另给 $\theta^*$ 的输入误差、舍入控制与计算资源界。
+**反方向：从 $\pi$ 读出 $\theta^*$。** 将 $A(x)$ 在原点附近作反演所得的有理系数奇次幂级数 $B = A^{-1}$ 及其在 $y = \pi$ 处的收敛算例汇总如下（[@ex-dottie-pi-series]）。
 
-**反方向：从 $\pi$ 读出 $\theta^*$。** $A$ 在 $0$ 处的一阶系数是 $4 \neq 0$，所以它有形式反函数 $B = A^{-1}$，同样是有理系数的奇次幂级数。逐阶反演给出
+::: {.example #ex-dottie-pi-series title="π 与 θ* 互逆的两条有理系数级数：部分和的数值核对"}
+**文献结果，未在本书形式化。** $A$ 在 $0$ 处的一阶系数是 $4 \neq 0$，其形式反函数 $B = A^{-1}$ 逐阶反演给出有理系数奇次幂级数
 
 $$
 B(y) \;=\; \frac{y}{4} - \frac{y^3}{768} - \frac{y^5}{61440} - \frac{43\,y^7}{165150720} - \frac{223\,y^9}{47563407360} - \cdots .
 $$
 
-$B$ 有一个不含级数的等价描述：先解 $\eta + \sin\eta = y/2$，再取 $B(y) = \sin\eta$。事实上若 $x = \sin\eta$ 且 $\eta \in [-\pi/2, \pi/2]$，则 $A(x) = 2\sin\eta + 2\eta = y$。取 $y = \pi$，方程 $\eta + \sin\eta = \pi/2$ 的解是 $\eta = \frac{\pi}{2} - \theta^* = \arcsin\theta^*$（代入即得 $\frac{\pi}{2} - \theta^* + \cos\theta^* = \frac{\pi}{2}$），于是 $B(\pi) = \sin\eta = \cos\theta^* = \theta^*$。级数 $B$ 在 $y = \pi$ 处收敛到这个值是文献结果（见下例）。
-
-::: {.example #ex-dottie-pi-series title="π 与 θ* 互逆的两条有理系数级数：部分和的数值核对"}
-级数 $B$ 及等式 $\theta^* = B(\pi)$ 见 Kaplan（2007，*Mathematics Magazine* 第 80 卷，“The Dottie Number”）：**文献结果，未在本书形式化。** $A$ 的展开是经典的反正弦级数。下表的系数用精确有理数算术逐阶反演得到，部分和以 50 位精度计算，四舍五入到所示位数。
+$B$ 有一个不含级数的等价描述：先解 $\eta + \sin\eta = y/2$，再取 $B(y) = \sin\eta$（若 $x = \sin\eta$ 且 $\eta \in [-\pi/2, \pi/2]$，则 $A(x) = 2\sin\eta + 2\eta = y$）。取 $y = \pi$，方程 $\eta + \sin\eta = \pi/2$ 的解是 $\eta = \frac{\pi}{2} - \theta^* = \arcsin\theta^*$，于是 $B(\pi) = \sin\eta = \cos\theta^* = \theta^*$。级数 $B$ 的收敛性与等式 $\theta^* = B(\pi)$ 见 Kaplan（2007，*Mathematics Magazine* 第 80 卷，“The Dottie Number”）。$A$ 的展开是经典的反正弦级数。下表的系数用精确有理数算术逐阶反演得到，部分和以 50 位精度计算，四舍五入到所示位数。
 
 | 截断阶数 | $A$ 的部分和（趋于 $\pi$） | 与 $\pi$ 的差 | $B$ 的部分和（趋于 $\theta^*$） | 与 $\theta^*$ 的差 |
 | :---: | :---: | :---: | :---: | :---: |
@@ -671,18 +673,12 @@ $B$ 有一个不含级数的等价描述：先解 $\eta + \sin\eta = y/2$，再�
 $A$ 的相邻项之比趋于 $(\theta^*)^2 \approx 0.546$。$B$ 的相邻非零项之比从 $0.12$（第 $5$ 阶）升到 $0.22$（第 $21$ 阶），数值上趋向 $1/4$：从 $\pi$ 读出 $\theta^*$ 比从 $\theta^*$ 读出 $\pi$ 收敛得快。
 :::
 
-所以两句话同时成立，并不矛盾：解析上，$\pi$ 与 $\theta^*$ 互为对方的有理系数幂级数的值；代数上，在沙努埃尔猜想之下，二者之间没有任何多项式关系。$A$ 与 $B$ 是无穷级数，不是多项式，任何有限截断都留下非零的差，正如上表每一行的差都不为零。
+所以两句话同时成立，并不矛盾：解析上，$\pi$ 与 $\theta^*$ 互为对方的有理系数幂级数的值（[@ex-dottie-pi-series]）；代数上，在沙努埃尔猜想（[@conj-schanuel-dottie]）之下，二者之间没有任何多项式关系。$A$ 与 $B$ 是无穷级数，不是多项式，任何有限截断都留下非零的差，正如上表每一行的差都不为零。
 
-**不动点住在哪里：摆线的半程。** 上面那条辅助方程 $\eta + \sin\eta = \pi/2$ 不是凭空出现的。令 $E = \pi - \eta$，它变成
-
-$$
-E - \sin E \;=\; \frac{\pi}{2},
-$$
-
-这是偏心率 $e = 1$、平近点角 $M = \pi/2$ 的开普勒方程 $M = E - e\sin E$，其解为 $E = \frac{\pi}{2} + \theta^* \approx 132.35^\circ$。偏心率为 $1$ 的开普勒轨道退化成一条径向线段，沿它运动的就是自由落体。
+**不动点住在哪里：摆线的半程。** 辅助方程 $\eta + \sin\eta = \pi/2$ 在天体力学开普勒方程与径向自由落体中的物理化身汇总于下例（[@ex-dottie-free-fall]）。
 
 ::: {.example #ex-dottie-free-fall title="半程落体：下落时间过半时，离中心的距离还剩 (1 + sin θ*)/2"}
-牛顿力学中，质点在中心质量 $M$ 的引力场里从距离 $r_0$ 处由静止径向下落。能量守恒给出 $\dot{r}^2 = 2GM\left(\frac{1}{r} - \frac{1}{r_0}\right)$，其解是摆线参数化（经典结果）：
+**文献结果，未在本书形式化。** 在 [@ex-dottie-pi-series] 的辅助方程 $\eta + \sin\eta = \pi/2$ 中令 $E = \pi - \eta$，它变成偏心率 $e = 1$、平近点角 $M = \pi/2$ 的开普勒方程 $E - \sin E = \frac{\pi}{2}$，其解为 $E = \frac{\pi}{2} + \theta^* \approx 132.35^\circ$。偏心率为 $1$ 的开普勒轨道退化成一条径向线段，沿它运动的就是牛顿力学中质点在中心质量 $M$ 的引力场里从距离 $r_0$ 处由静止径向下落的自由落体。能量守恒给出 $\dot{r}^2 = 2GM\left(\frac{1}{r} - \frac{1}{r_0}\right)$，其解是摆线参数化：
 
 $$
 r(\eta) \;=\; \frac{r_0}{2}\,(1 + \cos\eta), \qquad t(\eta) \;=\; \frac{t_{\mathrm{ff}}}{\pi}\,(\eta + \sin\eta), \qquad \eta \in [0, \pi],
@@ -705,9 +701,9 @@ $$
 **对照与核对。** 在 $t/t_{\mathrm{ff}} = \frac14, \frac12, \frac34$ 三个时刻，$r/r_0$ 分别为 $0.960937$、$0.836806$、$0.597150$；只有中间一个能用 $\theta^*$ 写成闭式。对 $t(r) = \int_r^{r_0} \frac{\mathrm{d}r'}{\sqrt{2GM\left(\frac{1}{r'} - \frac{1}{r_0}\right)}}$ 作数值积分，得 $t(0.836806\,r_0)/t_{\mathrm{ff}} = 0.500000$，与闭式一致。
 
 同一组参数方程也描述闭合的尘埃弗里德曼宇宙，只需把 $r$ 换成标度因子并把时间反向（文献结果，未在本书形式化）：这样的宇宙在膨胀期时间过半时，尺度已达到最大值的 $83.68\%$。
-:::
 
 时间用掉一半，路程只走了不到六分之一：下落开始得很慢，绝大部分距离是在后半程走完的。而“一半”这个最朴素的分割点，落在的位置恰好由 $\theta^*$ 给出。余弦不动点不只住在计算器的余弦键上；凡是服从摆线律的过程——径向开普勒轨道、自由落体塌缩、闭合尘埃宇宙——在时间过半的那一刻，都在读它。
+:::
 
 
 ## 24.7 追逐在哪里停下：对角线落点即不动点，以及不靠压缩的存在性 {#sec-ch24-7}
@@ -771,7 +767,7 @@ $$
 - 扭转没有不动点时，追逐永不停下，任何列表都被逃逸；
 - 追逐一旦停下，停下的那一行在自己地址上的取值，必是扭转的不动点。
 
-反过来，只要扭转 $f$ 有一个不动点 $y^*$ 且 $A$ 非空，恒取 $y^*$ 的常值列表就捕获自己的扭转对角线（这一步是直接代入的手工验证）。取 $f = \cos$、$Y = \mathbb{R}$：任何捕获了自己余弦对角线的实值列表，落点上的自作用值都满足 $\cos y = y$，由实不动点的唯一性（[@rem-banach-dottie-hairy-ball-literature] 第 1 条，文献结果）只能是 $\theta^*$。
+反过来，只要扭转 $f$ 有一个不动点 $y^*$ 且 $A$ 非空，恒取 $y^*$ 的常值列表就捕获自己的扭转对角线（这一步是直接代入的手工验证）。取 $f = \cos$、$Y = \mathbb{R}$：任何捕获了自己余弦对角线的实值列表，落点上的自作用值都满足余弦不动点方程 $\cos y = y$（其实轴性质见 [@rem-banach-dottie-hairy-ball-literature]）。
 
 有限情形下，逃逸与捕获各占多少可以精确数出来。
 
@@ -831,9 +827,9 @@ $$
 
 回望第六部《越界·球外之球》的四章征程，我们用经 Lean 4 内核逐条验证的**三十二条正式定理级结论**（第二十一章七条，第二十二章八条，第二十三章四条，第二十四章十三条，涵盖相对语义对角线拓扑逃逸、黎曼 $\zeta$ 函数留数与狄利克雷—欧拉乘积恒等式、艾森斯坦交越二次型剪切不变性与黄金佩尔迹—范数恒等式、以及有限收缩稳定化、解释语境相对不动点与黄金倒数唯一不动点），完成了从数理逻辑、算术频谱到自指不动点的跨界合拢：
 
-- **第二十一章**证明了完备解码目录诱导的相对语义对角线在潜划分拓扑下必不连续（[@thm-complete-diagonal-not-continuous]）、必具非空分离亏损（[@lem-complete-diagonal-separation-deficit]），且并入对角线后观测拓扑严格加细（[@prop-complete-diagonal-strict-refinement]、[@cor-complete-diagonal-topological-settlement]），给出了完备赋范代数中指数级数的阶乘余项界（[@lem-exp-tail-le]）与有限记录信道恢复误差的严格正余弦下界（[@lem-finite-support-autocorrelation-cosine]、[@thm-finite-record-cosine-obstruction]），并与泰勒截断余项 $R_{2N}(\theta)$、笛卡尔 $720^\circ = 4\pi$ 五边形角亏、毛球定理及 Adams 可平行化球面 $S^0, S^1, S^3, S^7$（[@rem-hairy-ball-adams-literature]）交相印证；
-- **第二十二章**将素数还原为算术对数空间的正交基，在绝对收敛半平面 $\operatorname{Re}(s) > 1$ 上严格建立了 $s=1$ 留数（[@lem-riemann-zeta-residue-one]）、狄利克雷级数（[@prop-riemann-zeta-dirichlet-sum]）、欧拉乘积（[@thm-riemann-zeta-euler-product]）及两者的直接恒等（[@cor-dirichlet-sum-eq-euler-product]），给出完备化 $\xi$ 读数的整函数性与反射对称 $\xi(1 - s) = \xi(s)$（[@thm-xi-reading-entire-reflection]）及共轭协变（[@prop-zeta-conjugation-covariance]），把临界线卷成单位圆并得到黎曼猜想的径向等价形式（[@thm-cayley-critical-line-criterion]），用一个四次多项式说明完全对称性不足以把零点锁在临界线上（[@thm-full-symmetry-not-localization]），剖析了有限素数筛的多面体余项裂缝，并严格划定了它们与开放黎曼猜想（[@conj-riemann-hypothesis]、[@rem-euler-zeta-literature]）的认识论边界；
-- **第二十三章**揭示了二次范数与迹投影如何在连续有理数中锁定离散整格，形式化证明了 $\Delta = -3$ 艾森斯坦交越二次型的幺模剪切归约、常数判别式与值域等同（[@thm-qform-eq-eisnorm]、[@lem-qform-discriminant]、[@cor-qform-range-eq-eisnorm]）以及 $\Delta = +5$ 黄金整数的佩尔恒等式（[@prop-pell-form-eq-four-mul-norm]），并系统评述了 Koenigsmann（2016）用四元数范数在 $\mathbb{Q}$ 中给出 $\mathbb{Z}$ 的 $\forall$/$\forall\exists$ 一阶定义与开放问题 $\mathrm{H10}(\mathbb{Q})$ 的精确关系（[@rem-diophantine-z-in-q-literature]）；
-- **第二十四章**证明了有限状态收缩更新的稳定化与变化步数界（[@thm-finite-contracting-updates-stabilize]）、相对解释不动点的相邻步贴合与静态语境非唯一性（相同的文本与解释规则在两个不同静态语境下给出不同的布尔意义，[@lem-conceptual-equivalence-stability-fixed-point]、[@prop-context-parameters-distinct-fixed-points]）正实数上黄金倒数映射的唯一不动点（[@cor-golden-fixed-point-unique]）、非退化二元分式映射的四种自作用命运及其中唯一“活着”的 $\varphi$ 族（[@thm-self-application-four-fates]、[@lem-golden-inverse-branch-fixed-point]）正五边形的黄金余弦（[@prop-pentagon-golden-cosines]）、对角线落点即扭转不动点与无不动点扭转的普遍逃逸及其有限计数（[@lem-diagonal-landing-fixed]、[@thm-self-application-fragment-package]、[@prop-escaped-listing-card]）标准单纯形上的布劳威尔不动点定理（[@thm-brouwer-standard-simplex]）、无理旋转轨道平均趋于 Haar 平均（[@lem-irrational-rotation-equidistribution]），以及反正弦展开所用的归一化中心二项系数界与二项核级数（[@lem-arcsin-binomial-kernel]），并在巴拿赫压缩、林德曼—魏尔斯特拉斯超越性（$|\cos q - q| > 0$）与沙努埃尔猜想（[@conj-schanuel-dottie]、[@rem-banach-dottie-hairy-ball-literature]）的映照下，将全书几何直觉收束于 $\cos\theta^* = \theta^*$ 与 $\psi = \psi(\psi)$。
+- **第二十一章**证明了完备解码目录诱导的相对语义对角线在潜划分拓扑下必不连续（[@thm-complete-diagonal-not-continuous]）、必具非空分离亏损（[@lem-complete-diagonal-separation-deficit]），且并入对角线后观测拓扑严格加细（[@prop-complete-diagonal-strict-refinement]、[@cor-complete-diagonal-topological-settlement]），给出了完备赋范代数中指数级数的阶乘余项界（[@lem-exp-tail-le]）与有限记录信道恢复误差的严格正余弦下界（[@lem-finite-support-autocorrelation-cosine]、[@thm-finite-record-cosine-obstruction]），并与经典分析余项与球面拓扑文献评注（[@rem-lagrange-taylor-remainder-literature]、[@rem-hairy-ball-adams-literature]）交相印证；
+- **第二十二章**将素数还原为算术对数空间的正交基，在绝对收敛半平面 $\operatorname{Re}(s) > 1$ 上严格建立了 $s=1$ 留数（[@lem-riemann-zeta-residue-one]）、狄利克雷级数（[@prop-riemann-zeta-dirichlet-sum]）、欧拉乘积（[@thm-riemann-zeta-euler-product]）及两者的直接恒等（[@cor-dirichlet-sum-eq-euler-product]），给出完备化 $\xi$ 读数的整函数性与反射对称 $\xi(1 - s) = \xi(s)$（[@thm-xi-reading-entire-reflection]）及共轭协变（[@prop-zeta-conjugation-covariance]），把临界线卷成单位圆并得到黎曼猜想的径向等价形式（[@thm-cayley-critical-line-criterion]），用一个四次多项式说明完全对称性不足以把零点锁在临界线上（[@thm-full-symmetry-not-localization]），剖析了有限素数筛的多面体余项裂缝，并严格划定了它们与开放黎曼猜想及经典文献背景（[@conj-riemann-hypothesis]、[@rem-euler-zeta-literature]）的认识论边界；
+- **第二十三章**揭示了二次范数与迹投影如何在连续有理数中锁定离散整格，形式化证明了 $\Delta = -3$ 艾森斯坦交越二次型的幺模剪切归约、常数判别式与值域等同（[@thm-qform-eq-eisnorm]、[@lem-qform-discriminant]、[@cor-qform-range-eq-eisnorm]）以及 $\Delta = +5$ 黄金整数的佩尔恒等式（[@prop-pell-form-eq-four-mul-norm]），并在文献评注（[@rem-diophantine-z-in-q-literature]）中划定了有理数域一阶可定义性文献与开放问题 $\mathrm{H10}(\mathbb{Q})$ 的精确边界；
+- **第二十四章**证明了有限状态收缩更新的稳定化与变化步数界（[@thm-finite-contracting-updates-stabilize]）、相对解释不动点的相邻步贴合与静态语境非唯一性（相同的文本与解释规则在两个不同静态语境下给出不同的布尔意义，[@lem-conceptual-equivalence-stability-fixed-point]、[@prop-context-parameters-distinct-fixed-points]）、正实数上黄金倒数映射的唯一不动点（[@cor-golden-fixed-point-unique]）、非退化二元分式映射的四种自作用命运及其中唯一“活着”的 $\varphi$ 族（[@thm-self-application-four-fates]、[@lem-golden-inverse-branch-fixed-point]）、正五边形的黄金余弦（[@prop-pentagon-golden-cosines]）、对角线落点即扭转不动点与无不动点扭转的普遍逃逸及其有限计数（[@lem-diagonal-landing-fixed]、[@thm-self-application-fragment-package]、[@prop-escaped-listing-card]）、标准单纯形上的布劳威尔不动点定理（[@thm-brouwer-standard-simplex]）、无理旋转轨道平均趋于 Haar 平均（[@lem-irrational-rotation-equidistribution]），以及反正弦展开所用的归一化中心二项系数界与二项核级数（[@lem-arcsin-binomial-kernel]），并在经典不动点与超越数文献评注（[@rem-banach-dottie-hairy-ball-literature]）及开放沙努埃尔猜想（[@conj-schanuel-dottie]）的映照下，将全书几何直觉收束于 $\cos\theta^* = \theta^*$ 与 $\psi = \psi(\psi)$。
 
 既然前六部的几何直觉与理论大厦已经合拢，在接下来的**第七部《铸器·构造与验证：异或代数、旋子编译与 Lean 4 公理圣殿》**中，我们将把这一切几何定理直接铸造成可运行、零复数矩阵黑箱的位掩码克利福德引擎与 ZYZ 旋转器编译器，并走进 Lean 4 形式化公理圣殿的内部，对支撑全书的机器形式化声明展开逐行审计，随后在**第八部**与**终章**中完成全书八部曲的总合拢！

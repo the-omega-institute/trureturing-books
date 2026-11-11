@@ -234,10 +234,10 @@ $$
 
 第四行是 [@thm-xi-reading-entire-reflection] 的结论 4；第五行是镜像的不动点 $s = \frac{1}{2}$ 处的数值。
 
-**沿临界线。** 在 $s = \frac{1}{2} + it$（$t$ 为实数）上 $\xi$ 取实值。数值计算给出 $\xi\bigl(\tfrac{1}{2} + 14i\bigr) \approx +2.01\times10^{-4}$ 与 $\xi\bigl(\tfrac{1}{2} + 15i\bigr) \approx -7.06\times10^{-4}$：符号在两者之间改变，与文献所载的第一个非平凡零点 $\rho_1 \approx \frac{1}{2} + 14.134725\,i$ 相符。
+**沿临界线。** 在 $s = \frac{1}{2} + it$（$t$ 为实数）上 $\xi$ 取实值。数值计算给出 $\xi\bigl(\tfrac{1}{2} + 14i\bigr) \approx +2.01\times10^{-4}$ 与 $\xi\bigl(\tfrac{1}{2} + 15i\bigr) \approx -7.06\times10^{-4}$：符号在两者之间改变，与文献所载的第一个非平凡零点 $\rho_1 \approx \frac{1}{2} + 14.134725\,i$ 相符。由此可见，常被单独拿出来渲染的 $\zeta(-1) = -\frac{1}{12}$ 与巴塞尔问题的 $\zeta(2) = \frac{\pi^2}{6}$，其实是同一个数 $\frac{\pi}{6}$ 在镜子两侧的两个读数。
 :::
 
-那个常被单独拿出来渲染的 $\zeta(-1) = -\frac{1}{12}$，与巴塞尔问题的 $\zeta(2) = \frac{\pi^2}{6}$，其实是同一个数 $\frac{\pi}{6}$ 在镜子两侧的两个读数。镜子的位置是 $\operatorname{Re}(s) = \frac{1}{2}$，这一点已由内核验证；所有非平凡零点是否都站在镜面上，则仍然是本节末尾那条开放猜想。
+镜子的位置 $\operatorname{Re}(s) = \frac{1}{2}$ 已由 [@thm-xi-reading-entire-reflection] 的内核证明锁定；所有非平凡零点是否都站在镜面上，则仍然是本节末尾那条开放猜想。
 
 镜子的位置已经确定，但 [@thm-xi-reading-entire-reflection] 的反射 $s \mapsto 1 - s$ 只是绕点 $s = \frac{1}{2}$ 的半周旋转，它的不动点只有一个；要让整条直线 $\operatorname{Re}(s) = \frac{1}{2}$ 不动，还要再叠上复共轭。共轭这一半在所钉仓库的模块 `D5/S3/Zeros/Symmetry/ZetaConjugationCovariance` 中同样已经冻结。
 
@@ -285,7 +285,11 @@ $$
 结论 1：$s = 0$ 时凯莱比为 $0$，模不是 $1$，实部也不是 $\frac{1}{2}$，两端同假。$s \neq 0$ 时 $\norm{(s - 1)/s} = 1$ 等价于 $|s - 1| = |s|$，即 $s$ 到点 $1$ 与到点 $0$ 等距，这正是线段 $[0, 1]$ 的垂直平分线 $\operatorname{Re}(s) = \frac{1}{2}$；代数上 $|s - 1|^2 - |s|^2 = 1 - 2\operatorname{Re}(s)$。结论 2 的正向：零点在临界线上，则凯莱比的模为 $1$，对数为 $0$。反向：$\zeta(0) = -\frac{1}{2} \neq 0$，故零点 $\rho \neq 0$；又 $\rho \neq 1$，故凯莱比非零、模为正；正数的对数为 $0$ 迫使模等于 $1$，再用结论 1。完整证明由 Lean 内核检查。
 :::
 
-[@thm-cayley-critical-line-criterion] 的结论 2 是黎曼猜想的一种**等价改写，不是证明**：它把“零点在一条直线上”换成“零点在一个圆上”，猜想本身仍然开放。另外要留意表述上的差别：Mathlib 用“不是 $-2(n+1)$ 且不等于 $1$ 的零点”刻画非平凡零点，[@conj-riemann-hypothesis] 用“临界带内的零点”刻画；两者相同，依赖于 $\zeta$ 在 $\operatorname{Re}(s) \ge 1$ 无零点、在 $\operatorname{Re}(s) \le 0$ 只有负偶数零点这一经典事实（文献结果，未在本书形式化）。
+[@thm-cayley-critical-line-criterion] 的结论 2 是黎曼猜想的一种**等价改写，不是证明**：它把“零点在一条直线上”换成“零点在一个圆上”，猜想本身仍然开放。至于 Mathlib 的 `RiemannHypothesis` 与 [@conj-riemann-hypothesis] 在非平凡零点刻画方式上的衔接，单独记录于下框（[@rem-zeta-zero-free-region-literature]）。
+
+::: {.remark #rem-zeta-zero-free-region-literature title="ζ 的无零点半平面 Re(s) ≥ 1 与平凡零点分布（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** Mathlib 的 `RiemannHypothesis` 用“不是 $-2(n+1)$ 且不等于 $1$ 的零点”刻画非平凡零点，而 [@conj-riemann-hypothesis] 用“临界带 $0 < \operatorname{Re}(s) < 1$ 内的零点”刻画；两种表述外延一致，依赖解析数论中的经典事实：黎曼 $\zeta$ 函数在半平面 $\operatorname{Re}(s) \ge 1$ 内无零点（Hadamard 与 de la Vallée Poussin, 1896），且在半平面 $\operatorname{Re}(s) \le 0$ 内仅有负偶整数平凡零点 $s = -2(n+1)$（$n \in \mathbb{N}$）。
+:::
 
 记 $w = \dfrac{s - 1}{s}$。三种对称在 $w$ 坐标里各有一个干净的样子（各一行手工推导）：
 

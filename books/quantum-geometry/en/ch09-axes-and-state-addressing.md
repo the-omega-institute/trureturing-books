@@ -69,7 +69,7 @@ Armed with the orthonormal triad $(\vv{e}_1, \vv{e}_2, \vv{e}_3)$, stand at the 
   \vv{r}(\theta, \varphi) = R_z(\varphi) R_y(\theta) N = (\sin\theta\cos\varphi,\; \sin\theta\sin\varphi,\; \cos\theta) \in S^2.
   $$
 
-Why is no "third orthogonal step" needed to locate a state on the sphere? Because $S^2 \subset \mathbb{R}^3$ is a two-dimensional surface: the polar angle $\theta \in [0, \pi]$ selects the latitude circle and the azimuthal angle $\varphi \in [0, 2\pi)$ selects the meridian, so two orthogonal turns already reach every unit vector on $S^2$. (Synthesizing an arbitrary *unitary gate* in $\mathrm{SO}(3)$ or $\mathrm{SU}(2)$, by contrast, also requires a third Euler angle of rotation about the target axis itself, plus a possible global phase; see [@rem-axes-literature].)
+Why is no "third orthogonal step" needed to locate a state on the sphere? Because $S^2 \subset \mathbb{R}^3$ is a two-dimensional surface: the polar angle $\theta \in [0, \pi]$ selects the latitude circle and the azimuthal angle $\varphi \in [0, 2\pi)$ selects the meridian, so two orthogonal turns already reach every unit vector on $S^2$. (Synthesizing an arbitrary *unitary gate* in $\mathrm{SO}(3)$ or $\mathrm{SU}(2)$, as opposed to addressing a state on $S^2$, is treated in [@rem-axes-literature] and in the kernel-verified ZYZ compiler of [Chapter 26](ch26-single-qubit-rotor-compilation.md).)
 
 Two essential geometric distinctions must be kept sharp whenever we use this two-angle address:
 

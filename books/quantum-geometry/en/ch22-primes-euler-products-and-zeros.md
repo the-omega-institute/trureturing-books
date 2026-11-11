@@ -208,7 +208,7 @@ Claim 3 of [@thm-xi-reading-entire-reflection] has an immediate consequence (a o
 The reflection symmetry pairs up values that look entirely unrelated.
 
 ::: {.example #ex-xi-mirror-values title="One Number on Both Sides of the Mirror: ζ(2) and ζ(−1), ζ(4) and ζ(−3)"}
-The special values used here, $\zeta(2) = \frac{\pi^2}{6}$, $\zeta(4) = \frac{\pi^4}{90}$, $\zeta(6) = \frac{\pi^6}{945}$, $\zeta(-1) = -\frac{1}{12}$, $\zeta(-3) = \frac{1}{120}$, $\zeta(-5) = -\frac{1}{252}$, and the values of the $\Gamma$ function at half-integers, are literature results, not formalized in this book; each row is obtained by direct substitution into $\xi(s) = \frac{1}{2}s(s-1)\pi^{-s/2}\Gamma(s/2)\zeta(s)$ and was checked numerically at 30 digits.
+Each of the special values used here — $\zeta(2) = \frac{\pi^2}{6}$, $\zeta(4) = \frac{\pi^4}{90}$, $\zeta(6) = \frac{\pi^6}{945}$, $\zeta(-1) = -\frac{1}{12}$, $\zeta(-3) = \frac{1}{120}$, $\zeta(-5) = -\frac{1}{252}$, and the values of the $\Gamma$ function at half-integers — is a **literature result, not formalized in this book**; each row is obtained by direct substitution into $\xi(s) = \frac{1}{2}s(s-1)\pi^{-s/2}\Gamma(s/2)\zeta(s)$ and was checked numerically at 30 digits.
 
 **Hand computation at $s = 2$ and $s = -1$.** With $\Gamma(1) = 1$:
 
@@ -234,10 +234,10 @@ The two agree, exactly as claim 3 of [@thm-xi-reading-entire-reflection] asserts
 
 The fourth row is claim 4 of [@thm-xi-reading-entire-reflection]; the fifth row is the value at the fixed point $s = \frac{1}{2}$ of the mirror.
 
-**Along the critical line.** On $s = \frac{1}{2} + it$ with real $t$, $\xi$ takes real values. Numerical evaluation gives $\xi\bigl(\tfrac{1}{2} + 14i\bigr) \approx +2.01\times10^{-4}$ and $\xi\bigl(\tfrac{1}{2} + 15i\bigr) \approx -7.06\times10^{-4}$: the sign changes between the two, in agreement with the first nontrivial zero $\rho_1 \approx \frac{1}{2} + 14.134725\,i$ recorded in the literature.
+**Along the critical line.** On $s = \frac{1}{2} + it$ with real $t$, $\xi$ takes real values. Numerical evaluation gives $\xi\bigl(\tfrac{1}{2} + 14i\bigr) \approx +2.01\times10^{-4}$ and $\xi\bigl(\tfrac{1}{2} + 15i\bigr) \approx -7.06\times10^{-4}$: the sign changes between the two, in agreement with the first nontrivial zero $\rho_1 \approx \frac{1}{2} + 14.134725\,i$ recorded in the literature. Thus $\zeta(-1) = -\frac{1}{12}$, so often singled out for dramatic effect, and the Basel value $\zeta(2) = \frac{\pi^2}{6}$ are two readings of one and the same number $\frac{\pi}{6}$ on opposite sides of the mirror.
 :::
 
-The value $\zeta(-1) = -\frac{1}{12}$, so often singled out for dramatic effect, and the value $\zeta(2) = \frac{\pi^2}{6}$ of the Basel problem are two readings of one and the same number $\frac{\pi}{6}$ on the two sides of a mirror. The position of the mirror, $\operatorname{Re}(s) = \frac{1}{2}$, is now kernel-checked; whether every nontrivial zero stands on the mirror remains the open conjecture stated at the end of this section.
+The position of the mirror, $\operatorname{Re}(s) = \frac{1}{2}$, is kernel-checked by [@thm-xi-reading-entire-reflection]; whether every nontrivial zero stands on the mirror remains the open conjecture stated at the end of this section.
 
 The mirror has been located, but the reflection $s \mapsto 1 - s$ of [@thm-xi-reading-entire-reflection] is only a half-turn about the point $s = \frac{1}{2}$, and a half-turn fixes a single point. To fix the whole line $\operatorname{Re}(s) = \frac{1}{2}$ one must compose it with complex conjugation. This second half is also frozen at the pinned commit, in the module `D5/S3/Zeros/Symmetry/ZetaConjugationCovariance`.
 
@@ -285,7 +285,11 @@ In the notation of [@def-cayley-ratio]:
 Claim 1: at $s = 0$ the Cayley ratio is $0$, so its norm is not $1$, and the real part is not $\frac{1}{2}$ either; both sides are false. For $s \neq 0$, $\norm{(s - 1)/s} = 1$ is equivalent to $|s - 1| = |s|$, that is, $s$ is equidistant from the points $1$ and $0$, which describes the perpendicular bisector $\operatorname{Re}(s) = \frac{1}{2}$ of the segment $[0, 1]$; algebraically, $|s - 1|^2 - |s|^2 = 1 - 2\operatorname{Re}(s)$. Claim 2, forward direction: a zero on the critical line has a Cayley ratio of norm $1$, whose logarithm is $0$. Backward direction: $\zeta(0) = -\frac{1}{2} \neq 0$, so a zero $\rho$ is nonzero; also $\rho \neq 1$, so the Cayley ratio is nonzero and its norm is positive; a positive number with logarithm $0$ equals $1$, and Claim 1 applies. The full proof is checked by the Lean kernel.
 :::
 
-Claim 2 of [@thm-cayley-critical-line-criterion] is an **equivalent restatement of the Riemann Hypothesis, not a proof of it**: it trades "the zeros lie on a line" for "the zeros lie on a circle", and the conjecture stays open. One difference of wording deserves attention. Mathlib singles out the nontrivial zeros as "zeros that are neither of the form $-2(n+1)$ nor equal to $1$", whereas [@conj-riemann-hypothesis] singles them out as "zeros in the critical strip". That the two descriptions agree rests on the classical fact that $\zeta$ has no zeros with $\operatorname{Re}(s) \ge 1$ and only the negative even integers as zeros with $\operatorname{Re}(s) \le 0$ (a literature result, not formalized in this book).
+Claim 2 of [@thm-cayley-critical-line-criterion] is an **equivalent restatement of the Riemann Hypothesis, not a proof of it**: it trades "the zeros lie on a line" for "the zeros lie on a circle", and the conjecture stays open. How Mathlib's `RiemannHypothesis` predicate aligns with the critical-strip phrasing of [@conj-riemann-hypothesis] is recorded separately below ([@rem-zeta-zero-free-region-literature]).
+
+::: {.remark #rem-zeta-zero-free-region-literature title="Zero-Free Half-Plane Re(s) ≥ 1 and Trivial Zeros of ζ (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** Mathlib singles out the nontrivial zeros as "zeros that are neither of the form $-2(n+1)$ nor equal to $1$", whereas [@conj-riemann-hypothesis] singles them out as "zeros in the critical strip $0 < \operatorname{Re}(s) < 1$". That the two descriptions coincide rests on the classical theorem of analytic number theory that $\zeta(s)$ has no zeros with $\operatorname{Re}(s) \ge 1$ (Hadamard and de la Vallée Poussin, 1896) and has only the negative even integers $s = -2(n+1)$ ($n \in \mathbb{N}$) as zeros in $\operatorname{Re}(s) \le 0$.
+:::
 
 Write $w = \dfrac{s - 1}{s}$. Each of the three symmetries takes a clean form in the coordinate $w$ (one line of manual derivation each):
 

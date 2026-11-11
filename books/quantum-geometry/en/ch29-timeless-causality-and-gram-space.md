@@ -48,19 +48,21 @@ Take the simplest isosceles right triangle: $a = 1, b = 1$, sitting along the sy
 
 Under the early Pythagorean dogma that "all is a ratio of whole numbers," there should exist positive integers $m, n$ with $(m/n)^2 = 2$, or $m^2 = 2n^2$. Placed inside the prime orthogonal coordinate lattice of Part VI (Chapter 22), the fundamental theorem of arithmetic renders an immediate verdict: each prime $p$ spans an independent orthogonal axis in $\mathbb{Q}_{>0}^\times \cong \bigoplus_p \mathbb{Z}\,\mathbf{e}_p$; along the $p = 2$ axis, the $2$-adic valuation $v_2(m^2) = 2v_2(m)$ is always **even**, whereas $v_2(2n^2) = 2v_2(n) + 1$ is always **odd**. Because an even integer can never equal an odd integer, $m^2 = 2n^2$ has no nonzero integer solution!
 
-Better still, when we approximate the $45^\circ$ diagonal $\sqrt{2}$ on the discrete integer grid $\mathbb{Z}^2$, the continued-fraction convergents
+::: {.remark #rem-ch29-pell-convergents-literature title="Continued-Fraction Convergents of the Square Root of 2 and the Unit Pell Remainder (Literature result, not formalized in this book)"}
+**Literature result, not formalized in this book.** In classical continued-fraction and quadratic Diophantine theory (outside the `trureturing@dev` formalization locked by this book), when we approximate the $45^\circ$ diagonal $\sqrt{2}$ on the discrete integer grid $\mathbb{Z}^2$, the continued-fraction convergents
 
 $$
 \frac{m_k}{n_k} = \frac{1}{1},\; \frac{3}{2},\; \frac{7}{5},\; \frac{17}{12},\; \frac{41}{29},\; \frac{99}{70},\; \dots
 $$
 
-leave an indestructible unit arithmetic crack governed by **Pell's equation**:
+leave at every stage $k$ an indestructible unit arithmetic crack governed by **Pell's equation**:
 
 $$
 1^2 - 2(1^2) = -1,\quad 3^2 - 2(2^2) = +1,\quad 7^2 - 2(5^2) = -1,\quad 17^2 - 2(12^2) = +1,\quad \dots,\quad m_k^2 - 2n_k^2 = (-1)^k.
 $$
+:::
 
-Echoing the golden-integer Pell identity $(2a + b)^2 - 5b^2 = 4\operatorname{norm}(g)$ proved in Chapter 23 ([`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)), any attempt to stitch a $90^\circ$ orthogonal area rotation onto a one-dimensional integer grid leaves an irreducible $\pm 1$ seam. What Hippasus uncovered was not the failure of mathematics, but **the first seam of a larger sphere breaking through the static rational sphere**.
+The classical continued-fraction phenomenon in [@rem-ch29-pell-convergents-literature] echoes the golden-integer Pell identity $(2a + b)^2 - 5b^2 = 4\operatorname{norm}(g)$ proved in Chapter 23 ([`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)): any attempt to stitch a $90^\circ$ orthogonal area rotation onto a one-dimensional integer grid leaves an irreducible unit arithmetic seam. What Hippasus uncovered was not the failure of mathematics, but **the first seam of a larger sphere breaking through the static rational sphere**.
 
 ::: {.viz src="pythagoras-number-escape" preset="hippasus" height="500"}
 **Always one cell off.** The convergents $1/1, 3/2, 7/5, 17/12, \dots$ hug the line $m = \sqrt{2}\,n$ ever more closely; the two bands on the right are the cell counts $m^2$ and $2n^2$, and in the magnifier they are always one cell apart.
@@ -77,12 +79,17 @@ Quite the opposite! Just as Chapter 1 revealed that the Chinese character **量*
 
 When "number" is reduced to a static noun (`shù`), every number system is inevitably punctured by the next geometric operation; when "number" is restored to its generative verb (`shǔ`), each fracture of an old sphere becomes the engine that constructs the next enclosing sphere. From integers to the self-referential fixed point, the history of number is a **Four-Tier Escape of Enclosing Spheres**:
 
+::: {.remark #rem-ch29-four-tier-sphere-table title="Four-Tier Escape of Enclosing Spheres (Includes Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book (for the classical continued-fraction, $\pi$, and cosine-fixed-point $\theta^*$ transcendence properties summarized below; golden-ratio fixed-point uniqueness is formally verified by `golden_fixed_point_unique`, and algebraic independence is marked `OPEN` in [@conj-schanuel-dottie]).**
+
 | Sphere Tier | Number Domain & Landmark Constants | Generative Geometric / Algebraic Operator (Verb `shǔ`) | Internal Closure Law (Noun `shù`) | The Crack & Remainder Forcing Escape to the Next Sphere |
 | :--- | :--- | :--- | :--- | :--- |
-| **Tier 1 Sphere** | Integers $\mathbb{Z}$ & Rationals $\mathbb{Q}$<br/>(ratio marks $m/n$) | $0^\circ$ collinear Euclidean algorithm and linear addition/subtraction | Finite commensurable closure on a 1D rational ruler: $n \cdot (m/n) = m$ | $90^\circ$ orthogonal Pythagorean squaring $1^2 + 1^2 = 2$ triggers a $2$-adic parity clash, leaving the indestructible Pell seam $m^2 - 2n^2 = \pm 1$ |
-| **Tier 2 Sphere** | Algebraic Irrationals $\overline{\mathbb{Q}}$<br/>(diagonal $\sqrt{2}$, golden ratio $\varphi = \frac{1+\sqrt{5}}{2}$) | Finite-dimensional orthogonal Pythagorean area conservation $a^2 + b^2 = c^2$ and polynomial root extraction | Finite algebraic polyhedral closure: $x^2 - 2 = 0$, $x^2 - x - 1 = 0$ ([`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique)) | Liu Hui and Archimedes's infinite $2^k$-gon cyclotomic halving drives circular arc length outside all finite polynomial root loci |
-| **Tier 3 Sphere** | Elementary / Period Transcendentals<br/>(circle constant $\pi$, natural base $e$) | Infinite Pythagorean half-angle iteration $\sin(\theta/2) = \sqrt{(1-\cos\theta)/2}$ and exponential map $e^{i\theta} = \cos\theta + i\sin\theta$ | Static unit-circle and spherical period closure: $e^{i\pi} + 1 = 0$, $\cos(\pi/2) = 0$ | Arc input $\theta$ and chord projection $\cos\theta$ remain split across the operator; Taylor truncation leaves a nonzero residual $|\cos q - q| > 0$ at every algebraic $q \neq 0$ |
-| **Tier 4 Sphere** | Self-Referential Dottie Transcendental<br/>($\theta^* \approx 0.7390851332\dots$) | Self-referential feedback $\theta_{k+1} = \cos(\theta_k)$ equating the Pythagorean leg projection $\cos\theta$ with the arc angle $\theta$ itself | Operator-coordinate unification: $\cos(\theta^*) = \theta^*$ (the real-axis projection of $\psi = \psi(\psi)$) | Transcendental by Lindemann–Weierstrass; conjectured under Schanuel's conjecture and Chow's theorem to lie outside the elementary field generated by $\pi$ and $e$ |
+| **Tier 1 Sphere** | Integers $\mathbb{Z}$ & Rationals $\mathbb{Q}$<br/>(ratio marks $m/n$) | $0^\circ$ collinear Euclidean algorithm and linear addition/subtraction | Finite commensurable closure on a 1D rational ruler: $n \cdot (m/n) = m$ | $90^\circ$ orthogonal Pythagorean squaring $1^2 + 1^2 = 2$ triggers a $2$-adic parity clash (for the continued-fraction Pell seam, see [@rem-ch29-pell-convergents-literature]) |
+| **Tier 2 Sphere** | Algebraic Irrationals $\overline{\mathbb{Q}}$<br/>(diagonal $\sqrt{2}$, golden ratio $\varphi = \frac{1+\sqrt{5}}{2}$) | Finite-dimensional orthogonal Pythagorean area conservation $a^2 + b^2 = c^2$ and polynomial root extraction | Finite algebraic polyhedral closure: $x^2 - 2 = 0$, $x^2 - x - 1 = 0$ ([`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique)) | Infinite $2^k$-gon cyclotomic halving limit (for classical arc-transcendence literature notes, see [@rem-banach-dottie-hairy-ball-literature]) |
+| **Tier 3 Sphere** | Elementary Period Constants<br/>(circle constant $\pi$, natural base $e$) | Infinite Pythagorean half-angle iteration $\sin(\theta/2) = \sqrt{(1-\cos\theta)/2}$ and exponential map $e^{i\theta} = \cos\theta + i\sin\theta$ | Static unit-circle and spherical period closure: $e^{i\pi} + 1 = 0$, $\cos(\pi/2) = 0$ | Arc input $\theta$ and chord projection $\cos\theta$ remain split across the operator (for nonzero algebraic residuals, see [@rem-banach-dottie-hairy-ball-literature]) |
+| **Tier 4 Sphere** | Self-Referential Cosine Fixed Point<br/>(Dottie constant $\theta^*$) | Self-referential feedback $\theta_{k+1} = \cos(\theta_k)$ equating the Pythagorean leg projection $\cos\theta$ with the arc angle $\theta$ itself | Operator-coordinate unification: $\cos(\theta^*) = \theta^*$ (the real-axis projection of $\psi = \psi(\psi)$) | Classical transcendence literature in [@rem-banach-dottie-hairy-ball-literature]; algebraic-independence frontier with $\pi, e$ in open conjecture [@conj-schanuel-dottie] (`OPEN`) |
+
+:::
 
 Seen through this four-tier table, Pythagoras and the overarching thesis of this book converge into a single arc:
 - In the **Tier 1 Sphere**, we measure back and forth along a single line and mistake rational ratios $m/n$ for the whole universe;
@@ -114,6 +121,9 @@ $$
 
 At first glance, the right-hand side is merely a sign choice between $+1$ and $-1$. Yet in the two-dimensional Clifford exterior plane, $-1$ is the square of the skew-adjoint unitary complex structure (the bivector imaginary generator) $\hat{\mathbf{I}}$, namely $\hat{\mathbf{I}}^2 = -1$ ([`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary))! Depending on whether $\sqrt{-1}$ exists modulo $p$—that is, whether the Legendre symbol $\left(\frac{-1}{p}\right) = (-1)^{(p-1)/2}$ equals $+1$ or $-1$—the $\pm 1$ seam splits all odd primes into two families of distinct geometric dimension:
 
+::: {.remark #rem-ch29-pell-primes-hilbert-literature title="Fermat's Two-Square Prime Splitting, the Odd-Prime Negative Pell Equation, and Hilbert Reciprocity (Literature result, not formalized in this book)"}
+**Literature result, not formalized in this book.** In classical algebraic number theory and class field theory, the mod-$4$ quadratic-residue bifurcation of odd primes and the local-to-global conservation of quadratic Hilbert symbols are given by the following literature theorems (outside the `trureturing@dev` formalization locked by this book):
+
 1. **Split "Plane Primes" ($p \equiv 1 \pmod 4$, such as $5, 13, 17, 29, 37, \dots$; while the even prime $p = 2 = -i(1+i)^2 = 1^2 + 1^2$ is the ramified bridge prime)**:
    For odd primes $p \equiv 1 \pmod 4$, $\left(\frac{-1}{p}\right) = +1$, so $x^2 \equiv -1 \pmod p$ is solvable and mod-$p$ arithmetic admits the 2D rotation generator $\hat{\mathbf{I}}^2 = -1$. By Fermat's two-square theorem, every such odd prime splits in the Gaussian integer plane $\mathbb{Z}[i]$ into a pair of distinct conjugate Gaussian primes (while $p = 2 = (1+i)(1-i)$ ramifies):
 
@@ -121,95 +131,191 @@ At first glance, the right-hand side is merely a sign choice between $+1$ and $-
    p = a^2 + b^2 = (a + b\hat{\mathbf{I}})(a - b\hat{\mathbf{I}}),
    $$
 
-   making $p$ a genuine **two-dimensional Pythagorean hypotenuse square (a Plane Prime)**! Consequently, in the real quadratic field $\mathbb{Q}(\sqrt{p})$, the **negative Pell equation $m^2 - p\,n^2 = -1$ is always solvable in integers** (for instance, $2^2 - 5\cdot 1^2 = -1$ for $p=5$; $18^2 - 13\cdot 5^2 = -1$ for $p=13$; $4^2 - 17\cdot 1^2 = -1$ for $p=17$). Its fundamental unit has norm $-1$ (an orientation-reversing glide reflection) whose square $(-1)^2 = +1$ restores pure rotation.
+   admitting the geometric reading of a **two-dimensional Pythagorean hypotenuse square (a Plane Prime)**. Consequently, in the real quadratic field $\mathbb{Q}(\sqrt{p})$, the **negative Pell equation $m^2 - p\,n^2 = -1$ is always solvable in integers** (for instance, $2^2 - 5\cdot 1^2 = -1$ for $p=5$; $18^2 - 13\cdot 5^2 = -1$ for $p=13$; $4^2 - 17\cdot 1^2 = -1$ for $p=17$). Its fundamental unit has norm $-1$ (an orientation-reversing glide reflection) whose square $(-1)^2 = +1$ restores pure rotation.
 2. **Inert "Line Primes" ($p \equiv 3 \pmod 4$, such as $3, 7, 11, 19, 23, \dots$)**:
    Here $\left(\frac{-1}{p}\right) = -1$, so no $90^\circ$ rotation operator $\sqrt{-1}$ exists modulo $p$. Such a prime cannot be written as a sum of two squares and remains an indecomposable **one-dimensional rigid scalar (a Line Prime)** in $\mathbb{Z}[i]$. Because $m^2 - p\,n^2 \equiv m^2 \pmod p$ can never be congruent to $-1$, the **negative Pell equation $m^2 - p\,n^2 = -1$ has no integer solutions**, locking all lattice approximations to $\sqrt{p}$ onto the $+1$ branch $m^2 - p\,n^2 = +1$ (e.g., $2^2 - 3\cdot 1^2 = +1$ for $p=3$, $8^2 - 7\cdot 3^2 = +1$ for $p=7$).
 
-Globally across all prime places $v = p$ and the real archimedean place $v = \infty$ of $\mathbb{Q}$, the **Hilbert reciprocity law** of class field theory enforces an exact conservation law: for any nonzero rationals $a, b \in \mathbb{Q}^\times$, the product of the local Hilbert symbols $(a, b)_v \in \{+1, -1\}$ over all places equals $+1$:
+3. **Hilbert Reciprocity Law**: Globally across all prime places $v = p$ and the real archimedean place $v = \infty$ of $\mathbb{Q}$, class field theory establishes that for any nonzero rationals $a, b \in \mathbb{Q}^\times$, the product of the local Hilbert symbols $(a, b)_v \in \{+1, -1\}$ over all places equals $+1$:
 
-$$
-\prod_{v \le \infty} (a, b)_v = +1.
-$$
+   $$
+   \prod_{v \le \infty} (a, b)_v = +1.
+   $$
 
-Thus a $-1$ chiral twist can never arise in isolation at a single prime axis; it must always cancel pairwise across places—the arithmetic counterpart of Chapter 10's principle that "pairwise comparison is always consistent and order-independent."
+   In our geometric reading, a $-1$ chiral twist can never arise in isolation at a single prime axis; it cancels pairwise across places—echoing Chapter 10's principle that "pairwise comparison is always consistent and order-independent."
+:::
 
 ::: {.viz src="pythagoras-number-escape" preset="five" height="500"}
 **Plane primes and line primes.** When the circle of radius $\sqrt{p}$ passes through a lattice point, $p = a^2 + b^2$ is a plane prime, and squaring $a + bi$ gives an integer right triangle; step through the odd primes with the rail under the figure, and for $p \equiv 3 \pmod 4$ the circle touches no lattice point at all.
 :::
 
-### Pillar 2: Intersecting Two Quadratic Seams ($2 \times 2 = 4$)—From the Hairy Sphere ($\chi = 2$) to the Elliptic Curve Torus ($\chi = 0$) {#sec-coda-congruent-elliptic-torus}
+### Pillar 2: Intersecting Two Quadratic Seams ($2 \times 2 = 4$)—From a Single Quadric to the Congruent-Number Elliptic Curve Torus {#sec-coda-congruent-elliptic-torus}
 
-A single Pell equation $m^2 - d\,n^2 = \pm 1$ is a single quadratic conic of genus $g = 0$. Over $\mathbb{C}$, a smooth projective curve of genus $0$ is topologically a 2-sphere $S^2$ with Euler characteristic $\chi(S^2) = 2$—which, by the Hairy Ball Theorem, cannot support a globally nowhere-vanishing group flow without singularities.
+Passing from a single quadratic conic to the classical congruent-number problem—where a rational right triangle simultaneously satisfies a Pythagorean hypotenuse constraint and a prescribed orthogonal area—leads to the following classical algebraic-geometric and Riemann-surface structure:
 
-When we return to the Pythagorean right triangle and pose the classical **Congruent Number Question**—which positive integers $d$ occur as the area of a rational right triangle $(a, b, c) \in \mathbb{Q}_{>0}^3$?—we simultaneously impose two quadratic constraints:
+::: {.remark #rem-ch29-elliptic-torus-literature title="Congruent-Number Birational Reduction, Complex Elliptic-Curve Torus Topology, and Abelian Group Law (Literature result, not formalized in this book)"}
+**Literature result, not formalized in this book.** In classical number theory, algebraic geometry, and Riemann-surface theory (outside the `trureturing@dev` formalization locked by this book), passing from one quadric to the intersection of two quadrics is governed by the following results:
 
-$$
-a^2 + b^2 = c^2 \quad (\text{Pythagorean hypotenuse}), \qquad \frac{1}{2}ab = d \quad (\text{orthogonal bivector area}).
-$$
-
-Equivalently, we intersect the two quadratic conics $(a + b)^2 = c^2 + 4d$ and $(a - b)^2 = c^2 - 4d$ in projective space. The intersection of two quadrics has degree $2 \times 2 = 4$; under the birational substitution $x = (a+c)/b,\; y = 2(a+c)/b^2$ (or $X = dx = d(a+c)/b,\; Y = d^2 y = 2d^2(a+c)/b^2$ for the standard Weierstrass model $Y^2 = X^3 - d^2 X$), this pair of Pythagorean constraints transforms directly into the **congruent-number elliptic curve**:
-
-$$
-E_d :\quad d\,y^2 = x^3 - x = x(x - 1)(x + 1).
-$$
-
-Look at the three roots on the right-hand side: $0,\; +1,\; -1$—precisely the origin together with the two chiral boundaries $\pm 1$ of the Pell seam!
-
-Passing from a single quadric to the intersection of two quadrics triggers a topological phase transition:
-- Over $\mathbb{C}$, the Riemann surface $E_d(\mathbb{C}) \cong \mathbb{C}/(\mathbb{Z}\omega_1 \oplus \mathbb{Z}\omega_2)$ branched over $\{0, +1, -1, \infty\}$ is no longer a genus-$0$ Hairy Sphere $S^2$ ($\chi = 2$), but a **genus-$1$ torus $T^2 = S^1 \times S^1$ with Euler characteristic $\chi(T^2) = 2 - 2g = 0$**!
-- Because $\chi(T^2) = 0$, the Hairy Ball vortex vanishes completely: the holomorphic differential $\omega = dx/y$ is everywhere nonvanishing and pole-free on $E_d$, combing the surface completely flat and endowing $E_d(\mathbb{Q})$ with a smooth global abelian group law $P \oplus Q$ (the exact elliptic-curve divisibility structure used by Poonen prior to Koenigsmann's quaternion norm reduction discussed in Chapter 23).
-
-### Pillar 3: Hasse's Theorem ($\sigma = 1/2$), the Frobenius Cosine $\cos\theta_p$, and the Sato–Tate Distribution on $S^3 \cong \mathrm{SU}(2)$ {#sec-coda-hasse-sato-tate}
-
-The grandest geometric closure appears when we project the normalized congruent-number elliptic curve $E : y^2 = x^3 - x$ onto each odd prime axis $\mathbb{F}_p$ ($p \ge 3$) from Chapter 22.
-
-Over the finite field $\mathbb{F}_p$, the flat projective line $\mathbb{P}^1(\mathbb{F}_p)$ has $p + 1$ points (including the point at infinity). The deviation $a_p = p + 1 - \#E(\mathbb{F}_p)$ of the elliptic curve's point count from $p + 1$ is determined at each $x \in \mathbb{F}_p$ by whether $x^3 - x$ is a quadratic residue (splitting into $+1$ pair of points), a non-residue ($-1$ deficit), or zero ($0$)—making $a_p$ a literal sum of **$+1, -1, 0$ Legendre spins**:
-
-$$
-a_p = p + 1 - \#E(\mathbb{F}_p) = -\sum_{x=0}^{p-1} \left(\frac{x^3 - x}{p}\right).
-$$
-
-This oscillating mod-$p$ spin sum is governed by **Hasse's Theorem** (the proved Riemann Hypothesis for elliptic curves over finite fields):
-
-$$
-|a_p| \le 2\sqrt{p}.
-$$
-
-Notice the scaling factor $\sqrt{p} = p^{1/2}$: the exponent $1/2$ is the exact arithmetic realization of the Riemann critical line $\operatorname{Re}(s) = \sigma = 1/2$ from Chapter 22! Dividing $a_p$ by $2\sqrt{p}$ normalizes the Frobenius eigenvalues $\alpha_p, \bar{\alpha}_p = \sqrt{p}\,e^{\pm i\theta_p}$ onto the unit circle and turns every prime's point-count deviation into a **Frobenius cosine projection**:
-
-$$
-\cos\theta_p := \frac{a_p}{2\sqrt{p}} \in [-1, +1].
-$$
-
-On the Pythagorean congruent curve $y^2 = x^3 - x$ (which has complex multiplication by $\mathbb{Z}[i]$), Gauss's classical theorem reveals how the "Line Primes" and "Plane Primes" of Pillar 1 separate cleanly under $\cos\theta_p$:
-
-- **At inert "Line Primes" $p \equiv 3 \pmod 4$**: because $(-x)^3 - (-x) = -(x^3 - x)$ and $\left(\frac{-1}{p}\right) = -1$, the spins at $+x$ and $-x$ cancel pairwise, forcing
+- **From a genus-$0$ conic to the congruent-number elliptic curve**: A single Pell equation $m^2 - d\,n^2 = \pm 1$ is a single quadratic conic of genus $g = 0$; over $\mathbb{C}$, a smooth projective curve of genus $0$ is topologically a 2-sphere $S^2$ with Euler characteristic $\chi(S^2) = 2$ (for the Hairy Ball obstruction, see Chapter 21, [@rem-hairy-ball-adams-literature]), which cannot support a globally nowhere-vanishing group flow without singularities. In the classical **Congruent Number Question**—which positive integers $d$ occur as the area of a rational right triangle $(a, b, c) \in \mathbb{Q}_{>0}^3$?—one simultaneously imposes two quadratic constraints:
 
   $$
-  a_p = 0 \implies \cos\theta_p = 0 \quad (\theta_p = \pi/2\text{, the orthogonal equator})!
+  a^2 + b^2 = c^2 \quad (\text{Pythagorean hypotenuse}), \qquad \frac{1}{2}ab = d \quad (\text{orthogonal bivector area}),
   $$
 
-- **At split "Plane Primes" $p = a^2 + b^2 \equiv 1 \pmod 4$ ($a$ odd, $b$ even)**: Gauss proved that $|a_p| = 2|a|$, so the magnitude of the Frobenius cosine equals the **exact Pythagorean cosine** (adjacent leg over hypotenuse) of the prime's own Gaussian right triangle $(|a|, |b|, \sqrt{p})$:
+  equivalently intersecting the two quadratic conics $(a + b)^2 = c^2 + 4d$ and $(a - b)^2 = c^2 - 4d$ in projective space (degree $2 \times 2 = 4$). Under the classical birational substitution $x = (a+c)/b,\; y = 2(a+c)/b^2$ (or $X = dx = d(a+c)/b,\; Y = d^2 y = 2d^2(a+c)/b^2$ for the standard Weierstrass model $Y^2 = X^3 - d^2 X$), this pair of Pythagorean constraints is birationally equivalent to the **congruent-number elliptic curve**:
 
   $$
-  |\cos\theta_p| = \frac{|a_p|}{2\sqrt{p}} = \frac{2|a|}{2\sqrt{a^2 + b^2}} = \frac{|a|}{\sqrt{a^2 + b^2}}!
+  E_d :\quad d\,y^2 = x^3 - x = x(x - 1)(x + 1),
   $$
 
-And if we pass to a generic elliptic curve over $\mathbb{Q}$ without extra complex-multiplication symmetry (such as $y^2 = x^3 - x + 1$), how are the Frobenius cosines $\cos\theta_p \in [-1, +1]$ distributed as $p \to \infty$ over all primes of good reduction?
+  whose three roots $0,\; +1,\; -1$ on the right-hand side mark the origin together with the $\pm 1$ seam boundaries.
+- **Complex torus topology and abelian group law**: Over $\mathbb{C}$, the Riemann surface $E_d(\mathbb{C}) \cong \mathbb{C}/(\mathbb{Z}\omega_1 \oplus \mathbb{Z}\omega_2)$ branched over $\{0, +1, -1, \infty\}$ is no longer a genus-$0$ 2-sphere $S^2$ ($\chi = 2$), but a **genus-$1$ torus $T^2 = S^1 \times S^1$ with Euler characteristic $\chi(T^2) = 2 - 2g = 0$**;
+- Because $\chi(T^2) = 0$, the even-sphere Hairy Ball obstruction (cf. [@rem-hairy-ball-adams-literature]) disappears on the torus: the invariant holomorphic differential $\omega = dx/y$ is everywhere nonvanishing and pole-free on the smooth projective curve $E_d$, endowing $E_d(\mathbb{Q})$ with a smooth global abelian group law $P \oplus Q$ (cf. [@rem-diophantine-z-in-q-literature] in Chapter 23 on Poonen's elliptic-curve divisibility method).
+:::
 
-The **Sato–Tate Theorem** (proved for non-CM elliptic curves over $\mathbb{Q}$ by Barnet-Lamb, Geraghty, Harris, and Taylor in 2011) gives the definitive geometric answer: $\theta_p \in [0, \pi]$ is equidistributed with respect to the **four-dimensional hyperspherical slice law**:
+### Pillar 3: Finite-Field Elliptic-Curve Reduction, the Frobenius Cosine, and the $S^3 \cong \mathrm{SU}(2)$ Projection {#sec-coda-hasse-sato-tate}
+
+A deeper arithmetic–geometric correspondence appears when we reduce the normalized congruent-number elliptic curve $E : y^2 = x^3 - x$ onto each odd prime axis $\mathbb{F}_p$ ($p \ge 3$) from Chapter 22:
+
+::: {.remark #rem-ch29-hasse-gauss-literature title="Finite-Field Point-Count Deviation, Hasse's Bound, and Gauss's CM Point-Count Formula (Literature result, not formalized in this book)"}
+**Literature result, not formalized in this book.** In classical arithmetic geometry (outside the `trureturing@dev` formalization locked by this book), over the finite field $\mathbb{F}_p$ ($p \ge 3$), the flat projective line $\mathbb{P}^1(\mathbb{F}_p)$ has $p + 1$ points (including the point at infinity), and the point-count deviation of the smooth projective elliptic curve $E(\mathbb{F}_p)$ ($E : y^2 = x^3 - x$) from $p + 1$ is given by the Legendre-symbol character sum
+
+$$
+a_p = p + 1 - \#E(\mathbb{F}_p) = -\sum_{x=0}^{p-1} \left(\frac{x^3 - x}{p}\right),
+$$
+
+which is governed by two foundational theorems:
+
+1. **Hasse's Theorem (H. Hasse, 1936; the proved Riemann Hypothesis for elliptic curves over finite fields)**: For every prime $p$ of good reduction, the point-count deviation obeys
+
+   $$
+   |a_p| \le 2\sqrt{p}.
+   $$
+
+   The scaling factor $\sqrt{p} = p^{1/2}$ carries the critical-line exponent $\sigma = 1/2$ of the local finite-field zeta function. Dividing $a_p$ by $2\sqrt{p}$ normalizes the Frobenius eigenvalues $\alpha_p, \bar{\alpha}_p = \sqrt{p}\,e^{\pm i\theta_p}$ onto the unit circle and turns each prime's point-count deviation into a **Frobenius cosine projection**:
+
+   $$
+   \cos\theta_p := \frac{a_p}{2\sqrt{p}} \in [-1, +1].
+   $$
+
+2. **Gauss's CM Point-Count Formula and the Line/Plane Prime Dichotomy**: On the Pythagorean congruent curve $y^2 = x^3 - x$ (which has complex multiplication by $\mathbb{Z}[i]$), the two odd-prime families of Pillar 1 ([@rem-ch29-pell-primes-hilbert-literature]) separate cleanly under $\cos\theta_p$:
+   - **At inert "Line Primes" $p \equiv 3 \pmod 4$**: because $(-x)^3 - (-x) = -(x^3 - x)$ and $\left(\frac{-1}{p}\right) = -1$, the spins at $+x$ and $-x$ cancel pairwise, forcing
+
+     $$
+     a_p = 0 \implies \cos\theta_p = 0 \quad (\theta_p = \pi/2\text{, the orthogonal equator})!
+     $$
+
+   - **At split "Plane Primes" $p \equiv 1 \pmod 4$**: for any integers $a,b$ satisfying $p=a^2+b^2$, with $a$ odd and $b$ even, the classical Gauss formula (a literature result; see [@rem-ch29-gauss-character-application]) gives $|a_p|=2|a|$. The magnitude of the Frobenius cosine therefore equals the **Pythagorean cosine** (adjacent leg over hypotenuse) of the prime's own Gaussian right triangle $(|a|, |b|, \sqrt{p})$:
+
+     $$
+     |\cos\theta_p| = \frac{|a_p|}{2\sqrt{p}} = \frac{|a|}{\sqrt p} = \frac{|a|}{\sqrt{a^2 + b^2}}.
+     $$
+:::
+
+::: {.remark #rem-ch29-gauss-character-application title="From Square Fibers to a Gaussian Triangle (Literature result, not formalized in this book)"}
+**Literature result, not formalized in this book.** Why does the same odd leg $|a|$ appear in the curve's point count? The key is to express the deviation as the sum of two conjugate complex numbers. Conjugation cancels their imaginary parts, leaving twice the real part, while their length is the square root of the prime $p$. Here is the classical character-sum derivation. Schoof's survey provides background on point counting and complex multiplication[^gauss-count-background].
+
+Fix any prime $p\equiv1\pmod4$ and any integers $a,b$ with $p=a^2+b^2$, $a$ odd and $b$ even. Throughout, take $F=\mathbb{F}_p$ and the same curve $E:y^2=x^3-x$. Its projective equation is $Y^2Z=X^3-XZ^2$; its discriminant is $64\ne0$, so it is smooth. Setting $Z=0$ shows that its unique point at infinity is $O=[0:1:0]$. Write
+
+$$
+N=\#E(F),\qquad T=p+1-N=a_p.
+$$
+
+Let $\phi(t)=\left(\frac{t}{p}\right)$ be the quadratic character, with $\phi(0)=0$. Each vertical line $x=\text{constant}$ meets the affine curve in zero, one, or two points, since for every $t\in F$,
+
+$$
+\#\{y\in F:y^2=t\}=1+\phi(t).
+$$
+
+A nonzero square has two roots, a nonsquare has none, and zero has one. Thus the actual curve points consist of these vertical fibers together with exactly one $O$:
+
+$$
+N=1+\sum_{x\in F}\bigl(1+\phi(x^3-x)\bigr),\qquad
+T=-\sum_{x\in F}\phi(x^3-x).
+$$
+
+Next record the fibers in the complex plane. The group $F^\times$ is cyclic of order $p-1$, and $4\mid p-1$, so we may choose a multiplicative character $\chi:F\to\mathbb{C}$ of exact order four, again extended by zero at zero. On nonzero elements its values lie in $\{1,i,-1,-i\}$, and its square is the unique nontrivial quadratic character. Hence $\chi^2=\phi$, with the integer values of $\phi$ understood through their usual embedding into $\mathbb{C}$. This auxiliary $\chi$ is constructed from $p$, rather than imposed as an additional assumption. We have $\phi(-1)=1$, and $\chi,\phi,\chi\phi=\chi^{-1}$ are all nontrivial.
+
+Define the Jacobi sum
+
+$$
+J(\chi,\phi)=\sum_{t\in F}\chi(t)\phi(1-t).
+$$
+
+Now group terms by $t=x^2$. Since $\chi(x^2)=\phi(x)$, we have $\phi(x^3-x)=\chi(x^2)\phi(x^2-1)$. The weight is constant on each square fiber, so
+
+$$
+\begin{aligned}
+\sum_{x\in F}\phi(x^3-x)
+&=\sum_{t\in F}\#\{x\in F:x^2=t\}\,\chi(t)\phi(t-1)\\
+&=\sum_{t\in F}(1+\phi(t))\chi(t)\phi(1-t)\\
+&=J(\chi,\phi)+J(\chi^{-1},\phi)\\
+&=J(\chi,\phi)+\overline{J(\chi,\phi)}.
+\end{aligned}
+$$
+
+The second line uses $\phi(-1)=1$, the third uses $\phi\chi=\chi^{-1}$, and the last uses complex conjugation of character values. This grouping includes the zero fiber: $t=0$ has one square root but $\chi(0)=0$; at $t=1$ the weight contains $\phi(0)=0$. Thus $x=0,\pm1$ have not been discarded: each contributes one affine point to the original count. Writing $J=J(\chi,\phi)$ gives $T=-2\operatorname{Re}J$.
+
+All these character values are Gaussian integers, so $J=r+si$ for integers $r,s$. The classical Jacobi-sum norm formula applies when both characters and their product are nontrivial, giving $|J|=\sqrt p$[^gauss-jacobi-background], hence $r^2+s^2=p$. We still need to identify which leg is the real part. The integrality congruence for quartic Jacobi sums gives some $z\in\mathbb{Z}[i]$ such that
+
+$$
+J=-1+z(i-1)^2.
+$$
+
+Writing $z=u+vi$ with $u,v\in\mathbb{Z}$ and using $(i-1)^2=-2i$, we obtain
+
+$$
+J=(-1+2v)-2ui,\qquad r=-1+2v\text{ is odd},\quad s=-2u\text{ is even}.
+$$
+
+Finally compare $r+si$ with the given $a+bi$. The Gaussian norm $N_G(x+yi)=(x+yi)(x-yi)=x^2+y^2$ is multiplicative. Both numbers have norm equal to the prime $p$, ruling out a factorization into nonunits; in the Euclidean ring $\mathbb{Z}[i]$, they are therefore Gaussian primes. Since $p=(a+bi)(a-bi)$, unique factorization in the Gaussian integers makes $r+si$ associate to either $a+bi$ or $a-bi$. A unit must have norm $1$, and the integer equation $x^2+y^2=1$ gives just the units $1,-1,i,-i$. Multiplication by $\pm i$ would put the even imaginary coordinate in the real slot, contradicting the oddness of $r$; multiplication by $\pm1$ only changes the real part's sign. Therefore $|r|=|a|$ for every such pair $a,b$, and
+
+$$
+|T|=2|r|=2|a|,\qquad
+\left|\frac{T}{2\sqrt p}\right|
+=\frac{|a|}{\sqrt p}
+=\frac{|a|}{\sqrt{a^2+b^2}}.
+$$
+
+This explains the adjacent-leg projection: $J$ has length $\sqrt p$, and its absolute real part is precisely the odd leg $|a|$. No sign for $T$ is chosen, and no restriction modulo $8$ is imposed on $p$. For example, at $p=5=1^2+2^2$, the values of $\phi(x^3-x)$ for $x=0,1,2,3,4$ are $0,0,1,1,0$. There are seven affine points and the point $O$, so $N=8$, $T=-2$, and the absolute cosine is $1/\sqrt5$.
+
+The three algebraic results used here have distinct scopes. The [power-fiber counting formula](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.power_fiber_card_eq_one_add_character_sum) applies to every finite field $K$, positive integer $d$, and complex multiplicative character $\eta:K\to\mathbb{C}$ of exact order $d$. For every $t\in K$, it states, in $\mathbb{C}$,
+
+$$
+\#\{x\in K:x^d=t\}
+=1+\sum_{j=1}^{d-1}\eta^j(t).
+$$
+
+Characters are extended by zero at zero, and the natural-number count on the left is embedded in $\mathbb{C}$ in the usual way. Taking $K=\mathbb{F}_p$, $d=2$, and $\eta=\phi$ gives the square-fiber formula above, including at $t=0$.
+
+The [Jacobi-sum norm formula](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.norm_jacobiSum) applies to complex multiplicative characters $\alpha,\beta$ on any finite field $K$, under all three hypotheses $\alpha\ne1$, $\beta\ne1$, and $\alpha\beta\ne1$. Its conclusion is
+
+$$
+\left|\sum_{t\in K}\alpha(t)\beta(1-t)\right|
+=\sqrt{\#K}.
+$$
+
+Here $1$ denotes the trivial multiplicative character, equal to $1$ away from zero and $0$ at zero. For $K=\mathbb{F}_p$, $\alpha=\chi$, and $\beta=\phi$, the exact orders are four for $\chi$, two for $\phi$, and four for $\chi\phi=\chi^{-1}$, so all three nontriviality hypotheses hold. The [classification of Gaussian units](lean:D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart.gaussian_unit) states that every invertible Gaussian integer $u\in\mathbb{Z}[i]^\times$ satisfies $u=1$, $u=i$, $u=-1$, or $u=-i$: precisely the four possibilities used above to rule out exchanging the two legs.
+
+The quartic integrality congruence corresponds to Mathlib's `exists_jacobiSum_eq_neg_one_add`, with $n=4$, primitive fourth root $i$, and $4\mid p-1$. The three algebraic results respectively control an individual fiber, the length of a Jacobi sum, and the units of the Gaussian integers; none assumes the curve's trace formula. The complete derivation connecting the actual curve's point count, Jacobi sums, Gaussian primes, and the normalized cosine remains a **literature result, not formalized in this book**. It supplies no formal proof of the adjacent inert-prime cancellation, the general Hasse bound, or the non-CM Sato–Tate distribution.
+:::
+
+[^gauss-count-background]: René Schoof, “Counting points on elliptic curves over finite fields”, *Journal de Théorie des Nombres de Bordeaux* 7 (1995), §§1, 3. Cited here only for background on standard Weierstrass point counts and Gaussian complex multiplication.
+
+[^gauss-jacobi-background]: Keith Conrad, *Gauss and Jacobi Sums*, author's notes, Theorem 2.4 and Corollary 2.5, on the norm of Gauss sums of nontrivial characters and the Jacobi-sum norm when both characters and their product are nontrivial. This citation supports only the norm step here, not the complete trace derivation for this curve.
+
+::: {.remark #rem-ch29-arithmetic-geometry-literature title="Sato–Tate Equidistribution on Non-CM Elliptic Curves and Formalization Boundary (Literature result, not formalized in this book)"}
+**Literature result, not formalized in this book.** Passing to a generic elliptic curve over $\mathbb{Q}$ without extra complex-multiplication symmetry (such as $y^2 = x^3 - x + 1$), the asymptotic distribution of the normalized cosines $\cos\theta_p \in [-1, +1]$ as $p \to \infty$ over all primes of good reduction is established by the **Sato–Tate Theorem** (proved for non-CM elliptic curves over $\mathbb{Q}$ by Barnet-Lamb, Geraghty, Harris, and Taylor, *Ann. of Math.* **173**, 2011): $\theta_p \in [0, \pi]$ is equidistributed with respect to the **four-dimensional hyperspherical slice law**:
 
 $$
 d\mu_{\mathrm{ST}}(\theta) = \frac{2}{\pi}\sin^2\theta\,d\theta \quad \Longleftrightarrow \quad \frac{2}{\pi}\sqrt{1 - u^2}\,du \quad (u = \cos\theta \in [-1, +1]).
 $$
 
-Why $\frac{2}{\pi}\sin^2\theta\,d\theta$? Because on the three-dimensional unit quaternion rotor sphere $S^3 \cong \mathrm{SU}(2)$—the parallelizable hypersphere defined by $s^2 + x^2 + y^2 + z^2 = 1$ with $\chi(S^3) = 0$ whose tangent bundle is combed completely flat—the two-dimensional latitude sphere at polar angle $\theta \in [0, \pi]$ has radius $\sin\theta$ and surface area proportional to $\sin^2\theta$! Projecting the uniform Haar measure of $S^3 \cong \mathrm{SU}(2)$ onto the normalized trace diameter $u = \frac{1}{2}\operatorname{Tr}(U) = \cos\theta \in [-1, +1]$ yields precisely $\frac{2}{\pi}\sin^2\theta\,d\theta$.
+Geometrically, on the three-dimensional unit quaternion rotor sphere $S^3 \cong \mathrm{SU}(2)$—the parallelizable hypersphere defined by $s^2 + x^2 + y^2 + z^2 = 1$ with $\chi(S^3) = 0$ (cf. [@rem-hairy-ball-adams-literature])—the two-dimensional latitude sphere at polar angle $\theta \in [0, \pi]$ has radius $\sin\theta$ and surface area proportional to $\sin^2\theta$; projecting the uniform Haar measure of $S^3 \cong \mathrm{SU}(2)$ onto the normalized trace diameter $u = \frac{1}{2}\operatorname{Tr}(U) = \cos\theta \in [-1, +1]$ yields $\frac{2}{\pi}\sin^2\theta\,d\theta$.
 
-Thus, starting from the $\pm 1$ Pell seam cracked open by Hippasus's right triangle, passing through the $4k \pm 1$ line/plane duality of primes, the congruent-number elliptic curve torus $y^2 = x(x-1)(x+1)$ ($\chi = 0$), and Hasse's critical-line scaling $\sqrt{p} = p^{1/2}$, the arithmetic oscillations of the primes emerge as **the inner-product cosine shadow $\cos\theta_p$ cast by the combed-flat quantum spinor sphere $S^3 \cong \mathrm{SU}(2)$ onto its diameter $[-1, +1]$**!
-
-::: {.remark #rem-ch29-arithmetic-geometry-literature title="Formalization Boundary for Arithmetic-Geometry and Transcendence Theorems (Literature result, not formalized in this book)"}
-**Literature result, not formalized in this book.** The classical transcendence and arithmetic-geometry theorems cited in the first two sections of this chapter—including the Lindemann–Weierstrass theorem and T. Y. Chow's (1999) elementary-field theorem conditional on Schanuel's conjecture (cf. Chapter 24, [@conj-schanuel-dottie]), Fermat's two-square prime splitting and solvability of the negative Pell equation $m^2 - p n^2 = -1$ for primes $p \equiv 1 \pmod 4$, Hilbert's local-symbol reciprocity law $\prod_{v \le \infty} (a, b)_v = +1$, Hasse's elliptic-curve bound $|a_p| \le 2\sqrt{p}$ (H. Hasse, 1936), Gauss's point-count formula $|a_p| = 2|a|$ on the CM curve $y^2 = x^3 - x$, and the Sato–Tate equidistribution theorem for non-CM elliptic curves over $\mathbb{Q}$ (T. Barnet-Lamb, D. Geraghty, M. Harris & R. Taylor, *Ann. of Math.* **173**, 2011)—are classical mathematical literature results outside the `trureturing@dev` formalization locked by this book; kernel-verified claims in these sections are strictly those carrying explicit `lean:` citations (such as [`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm) and [`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique)).
+Across the first two sections of this chapter, the Lindemann–Weierstrass theorem and T. Y. Chow's (1999) elementary-field theorem conditional on Schanuel's conjecture ([@conj-schanuel-dottie]), Fermat's two-square prime splitting / odd-prime negative Pell solvability / Hilbert's reciprocity law in [@rem-ch29-pell-primes-hilbert-literature], the complex elliptic-curve torus topology and abelian group law in [@rem-ch29-elliptic-torus-literature], Hasse's bound and Gauss's CM point-count derivation in [@rem-ch29-hasse-gauss-literature] and [@rem-ch29-gauss-character-application], and the Sato–Tate equidistribution theorem in the present remark are classical mathematical literature results outside the `trureturing@dev` formalization locked by this book; kernel-verified results in these sections are strictly those carrying explicit `lean:` citations (such as [`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm), [`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique), [`power_fiber_card_eq_one_add_character_sum`](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.power_fiber_card_eq_one_add_character_sum), [`norm_jacobiSum`](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.norm_jacobiSum), and [`gaussian_unit`](lean:D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart.gaussian_unit)).
 :::
+
+In the overarching geometric synthesis of this book, starting from the Pell seam cracked open by Hippasus's right triangle ([@rem-ch29-pell-convergents-literature]) and reading across the arithmetic-geometry literature remarks above ([@rem-ch29-pell-primes-hilbert-literature], [@rem-ch29-elliptic-torus-literature], [@rem-ch29-hasse-gauss-literature], and [@rem-ch29-arithmetic-geometry-literature]), the point-count oscillations along the prime axes align visually with the cosine shadow cast by the quantum spinor sphere $S^3 \cong \mathrm{SU}(2)$ onto its diameter $[-1, +1]$.
 
 ::: {.viz src="pythagoras-number-escape" height="640"}
 **Interactive laboratory `ORTHO//PYTHAGORAS`**: three scenes along the $\pm 1$ seam. The Pell seam: the convergents of $\sqrt{d}$ hug the line ever more closely while $m^2 - d\,n^2$ is a nonzero integer (for $d = 5$ the green rings mark all the $\pm 4$ solutions, as verified in Lean); line primes and plane primes: whether the circle of radius $\sqrt{p}$ passes through lattice points; points mod $p$: for the curve $y^2 = x^3 - x$, $a_p$ is held inside Hasse's bound, line primes sit exactly at zero, and the Frobenius cosine of a plane prime equals the cosine of its Gaussian triangle. Fermat's two-square theorem, Hasse's theorem and the Sato–Tate distribution are literature results, not formalized in this book.
@@ -225,32 +331,34 @@ When the principle of Chapter 10 ("pairwise comparison is always consistent and 
 
 Why does order-independence abolish sequential time while simultaneously grounding unbreakable causal necessity? We can trace this across three exact mathematical and physical levels:
 
-### Level 1: Why Order-Independence Abolishes Sequential Time ($\frac{1}{(2k)!}$, Wheeler–DeWitt $H\mathbf{\Psi}=0$, and Page–Wootters Slicing) {#sec-coda-order-independence-no-time}
+### Level 1: Why Order-Independence Abolishes Sequential Time {#sec-coda-order-independence-no-time}
 
-1. **The Factorial Denominator $\frac{1}{(2k)!}$ as a De-Ordering Geometric Model (`MODEL`)**:
-   Consider the cosine series that runs through the entire book:
+::: {.remark #rem-ch29-wheeler-dewitt-page-wootters-literature title="Factorial De-Ordering, the Wheeler–DeWitt Timeless Constraint, and Page–Wootters Conditional-Time Slicing (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** Consider the cosine power series that runs through the book (cf. Prelude [@rem-prelude-dottie-literature]):
 
-   $$
-   \cos\theta = \sum_{k=0}^{\infty} \frac{(-1)^k}{(2k)!}\,\theta^{2k}.
-   $$
+$$
+\cos\theta = \sum_{k=0}^{\infty} \frac{(-1)^k}{(2k)!}\,\theta^{2k}.
+$$
 
-   Analytically, $\frac{1}{(2k)!}$ arises from iterated differentiation (or the simplex volume $\int_{0\le t_1\le\cdots\le t_{2k}\le\theta} dt_1\cdots dt_{2k} = \frac{\theta^{2k}}{(2k)!}$ of commuting generators); in our orthogonal geometric interpretation (`MODEL`), dividing by $(2k)!$ can be viewed as modding out all $(2k)!$ sequential permutations of $2k$ orthogonal transitions along an artificial time axis.
-2. **The Timeless Global State of the Wheeler–DeWitt Equation $H\mathbf{\Psi} = 0$ (`Literature result`)**:
-   In canonical quantum gravity, the wave function of the universe $\mathbf{\Psi}$ obeys the Wheeler–DeWitt equation
+Analytically, $\frac{1}{(2k)!}$ arises from iterated differentiation (or the simplex volume $\int_{0\le t_1\le\cdots\le t_{2k}\le\theta} dt_1\cdots dt_{2k} = \frac{\theta^{2k}}{(2k)!}$ of commuting generators); in our orthogonal geometric interpretation (`MODEL`), dividing by $(2k)!$ can be viewed as modding out all $(2k)!$ sequential permutations of $2k$ orthogonal transitions along an artificial time axis. In canonical quantum gravity and relational quantum mechanics (classical physics literature models outside the `trureturing@dev` formalization locked by this book), global timelessness and emergent relational evolution are formulated via two standard constructions:
+
+1. **The Timeless Global State of the Wheeler–DeWitt Equation (B. S. DeWitt, *Phys. Rev.* **160**, 1113, 1967) $H\mathbf{\Psi} = 0$**:
+   In canonical quantum gravity, the closed-universe wave function $\mathbf{\Psi}$ obeys the Hamiltonian constraint
 
    $$
    H\mathbf{\Psi} = 0,
    $$
 
-   which contains no external time parameter $t$ ($\partial_t \mathbf{\Psi} = 0$). Viewed from outside the sphere, past, present, and future do not pop into and out of existence in a queue; they coexist simultaneously inside an already printed and bound geometric correlation crystal.
-3. **The Page–Wootters Slicing Mechanism—"Before and After" as Page Numbers of Attention (`Literature result`)**:
-   If the global state $\mathbf{\Psi}$ is timeless, where does our experience of sequential flow come from? Page and Wootters (1983) showed that under standard model assumptions—a bipartite factorization $\mathcal{H} = \mathcal{H}_{\mathbf{C}} \otimes \mathcal{H}_{\mathbf{S}}$, an ideal conjugate clock Hamiltonian $H_{\mathbf{C}} = \hat{p}_\tau$, and a non-interacting total constraint $H = H_{\mathbf{C}} \otimes I + I \otimes H_{\mathbf{S}}$—applying Chapter 1's **pairwise measurement (inner-product projection)** along clock readings $|\mathbf{c}(\tau)\rangle$ (corresponding to the conditioned state formalism [`conditionalState_isState`](lean:D5/S3/Observer/Conditioning.conditionalState_isState) of Chapters 3 and 28):
+   which contains no external time parameter $t$ ($\partial_t \mathbf{\Psi} = 0$); geometrically, past, present, and future coexist inside a single static correlation structure.
+2. **The Page–Wootters Conditional-Time Slicing Mechanism (D. N. Page & W. K. Wootters, *Phys. Rev. D* **27**, 2885, 1983)**:
+   Under standard model assumptions—a bipartite factorization $\mathcal{H} = \mathcal{H}_{\mathbf{C}} \otimes \mathcal{H}_{\mathbf{S}}$, an ideal conjugate clock Hamiltonian $H_{\mathbf{C}} = \hat{p}_\tau$, and a non-interacting total constraint $H = H_{\mathbf{C}} \otimes I + I \otimes H_{\mathbf{S}}$—taking inner-product conditional slices along clock readings $|\mathbf{c}(\tau)\rangle$ (analogous to the finite-dimensional conditioned state formalism [`conditionalState_isState`](lean:D5/S3/Observer/Conditioning.conditionalState_isState) of Chapters 3 and 28):
 
    $$
    |\psi_{\mathbf{S}}(\tau)\rangle \propto \langle \mathbf{c}(\tau) \mid \mathbf{\Psi}\rangle,
    $$
 
-   yields relational Schrödinger evolution $i\hbar\partial_\tau|\psi_{\mathbf{S}}(\tau)\rangle = H_{\mathbf{S}}|\psi_{\mathbf{S}}(\tau)\rangle$ across the slices! Sequential "before and after" in this model acts like the page number scanned by a one-dimensional line of attention moving across an already bound two-dimensional volume.
+   yields relational Schrödinger evolution $i\hbar\partial_\tau|\psi_{\mathbf{S}}(\tau)\rangle = H_{\mathbf{S}}|\psi_{\mathbf{S}}(\tau)\rangle$ across the slices—treating sequential "before and after" like the page number scanned by finite attention across an already bound volume.
+:::
 
 ::: {.viz src="timeless-causal-crystal" preset="crystal" height="500"}
 **Every page is there at once.** All twelve pages are on the sphere the whole time and none appears first; when it plays, only the amber reading head moves. Conditioning on the clock reading is what gives the page under the head (a schematic model with a finite clock, `MODEL`).
@@ -282,13 +390,15 @@ This single equation exhibits two inseparable faces:
 
 From the standpoint of path integrals and the bivector chirality model, why does nature display only the causally necessary trajectory?
 
-In standard Feynman path-integral mechanics (`Literature result`), virtual trajectories far from the classical path oscillate rapidly via $\exp(iS[x]/\hbar)$ and cancel by destructive phase interference, leaving constructive interference around the stationary-action locus $\delta S = 0$. In our Clifford geometric interpretation (`MODEL`), where the unit imaginary $i$ is realized as a grade-2 bivector generator $\hat{\mathbf{I}}$, an order-independent sum over configurations pairs off-shell trajectories into opposite-chirality bivector partners ($+\hat{\mathbf{I}}$ and $-\hat{\mathbf{I}}$) whose oriented area elements cancel:
+::: {.remark #rem-ch29-feynman-stationary-phase-literature title="Feynman Path-Integral Stationary Phase and the Bivector Chirality Interpretation (Literature result, not formalized in this book)"}
+**Literature result, not formalized in this book.** In the standard Feynman path-integral formulation of quantum mechanics (R. P. Feynman, *Rev. Mod. Phys.* **20**, 367, 1948; not formalized in `trureturing@dev`), virtual trajectories far from the classical path oscillate rapidly via $\exp(iS[x]/\hbar)$ and cancel by destructive phase interference, leaving constructive interference around the stationary-action locus $\delta S = 0$. In our Clifford geometric interpretation (`MODEL`), where the unit imaginary $i$ is realized as a grade-2 bivector generator $\hat{\mathbf{I}}$, an order-independent sum over configurations pairs off-shell trajectories into opposite-chirality bivector partners ($+\hat{\mathbf{I}}$ and $-\hat{\mathbf{I}}$) whose oriented area elements cancel:
 
 $$
 +\mathbf{\Omega} - \mathbf{\Omega} = 0.
 $$
 
-Only the self-consistent stationary configuration ($\delta S = 0$) lacks an opposite-chirality partner to cancel it, surviving orthogonal projection as the macroscopic law of cause and effect!
+Only the self-consistent stationary configuration ($\delta S = 0$) lacks an opposite-chirality partner to cancel it, surviving orthogonal projection as the macroscopic trajectory.
+:::
 
 This picture simultaneously reconciles the age-old rivalry between **mechanical determinism** and **teleology**:
 - Reading the page numbers **left to right** along the Picard iteration $\theta_{k+1} = \cos(\theta_k)$ from an initial state $\theta_0$ looks like **determinism** ("the past pushes the present step by step");
@@ -340,7 +450,7 @@ If the global time field is a timeless geometric crystal and local causality pos
 
 | Observer Regime | Historical Backbone $\cos\theta$ & Orthogonal Area $\sin\theta$ | Gram Determinant $\det G$ & Compatible Radius | Geometric & Epistemological Fate |
 | :--- | :--- | :--- | :--- |
-| **Infinite Omniscient Observer**<br/>（无限全知观察者） | Orthogonal slack exhausted: $\sin\theta \to 0$, $M \to \infty$ | $\det G = 0$, compatible radius collapses to $0$ | **Omniscient Deadlock**: welded into the static crystal $H\mathbf{\Psi} = 0$ with zero room for choice or motion |
+| **Infinite Omniscient Observer**<br/>（无限全知观察者） | Orthogonal slack exhausted: $\sin\theta \to 0$, $M \to \infty$ | $\det G = 0$, compatible radius collapses to $0$ | **Omniscient Deadlock**: welded into the timeless static crystal (cf. [@rem-ch29-wheeler-dewitt-page-wootters-literature]) with zero room for choice or motion |
 | **Zero-Memory Instantaneous Observer**<br/>（零记忆瞬时观察者） | Historical backbone lost: $\cos\theta \to 0$, $M = 0$ | Compatible radius $\sin\theta = 1$ unconstrained | **Maximum Sphere Noise**: devoid of causal continuity, every step degenerates into memoryless random drift |
 | **Finite Self-Referential Prototype**<br/>（有限自指观察者原型，`MODEL`） | Modeled by the 1D Dottie fixed point $\cos\theta^* = \theta^* \approx 0.7391$, $\sin\theta^* \approx 0.6736$ | $\det G > 0$, open corridor radius $(\sin\theta^*)^2 \approx 0.4538 > 0$ | **Golden Breath (`MODEL`)**: a geometric metaphor balancing a $\approx 73.9\%$ causal backbone with $\approx 67.4\%$ orthogonal slack for renewal |
 
@@ -348,12 +458,6 @@ If the global time field is a timeless geometric crystal and local causality pos
 
 ::: {.viz src="timeless-causal-crystal" preset="window" height="500"}
 **The Gram window.** $\mathbf{B}$ stands at the north pole and $\mathbf{C}$ can only go around it: $c_{AC}$ swings inside $[\cos(\theta_1 + \theta_2), \cos(\theta_1 - \theta_2)]$, and the volume spanned by the three vectors is positive inside the window and collapses to zero at its edges. You can also drag $\mathbf{C}$ on the sphere.
-:::
-
-
-
-::: {.remark #rem-ch29-wheeler-dewitt-page-wootters-literature title="Formalization Boundary for Timeless Quantum Gravity and Path-Integral Models (Literature result, not formalized in this book)"}
-**Literature result, not formalized in this book.** The canonical Wheeler–DeWitt constraint $H\mathbf{\Psi} = 0$ (B. S. DeWitt, *Phys. Rev.* **160**, 1113, 1967), the Page–Wootters conditional-time mechanism $|\psi_{\mathbf{S}}(\tau)\rangle \propto \langle \mathbf{c}(\tau)\mid\mathbf{\Psi}\rangle$ (D. N. Page & W. K. Wootters, *Phys. Rev. D* **27**, 2885, 1983), and Feynman's path-integral stationary-phase principle $\delta S = 0$ discussed in this section are classical physics literature models not formalized in `trureturing@dev`; the Lean-4-verified results below are strictly the golden-integer Pell norm identity and the unit-vector Gram overlap equivalence theorem.
 :::
 
 ::: {.theorem #thm-ch29-gram-rigidity-and-pell title="Golden-Integer Pell Norm Identity and Unit-Vector Gram Overlap Equivalence" lean="D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm, D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization"}
@@ -387,6 +491,6 @@ Part 1 expands $(2a + b)^2 - 5b^2 = 4a^2 + 4ab + b^2 - 5b^2 = 4(a^2 + ab - b^2) 
 
 ## Chapter Summary: From the Arithmetic Seam to the Timeless Causal Crystal {#sec-ch29-summary}
 
-This chapter has unified Pythagorean area conservation, Hippasus's $\pm 1$ Pell remainder, the $4k \pm 1$ line/plane duality of odd primes, and the $S^3 \cong \mathrm{SU}(2)$ Sato–Tate projection on congruent-number elliptic-curve tori ($\chi = 0$) with the timeless Wheeler–DeWitt state $H\mathbf{\Psi} = 0$, Spinoza's geometric necessity, and the finite observer's Gram elliptope ($\det G \ge 0$): **because the global field is timeless, truth endures forever; because the observer is finite, every step is new.**
+This chapter has unified Pythagorean area conservation, the golden-integer Pell norm identity, and unit-vector Gram overlap equivalence ([@thm-ch29-gram-rigidity-and-pell])—alongside the Pell-convergent and arithmetic-geometry literature remarks ([@rem-ch29-pell-convergents-literature], [@rem-ch29-pell-primes-hilbert-literature], [@rem-ch29-elliptic-torus-literature], [@rem-ch29-hasse-gauss-literature], [@rem-ch29-arithmetic-geometry-literature]) and the timeless-constraint and stationary-phase literature remarks ([@rem-ch29-wheeler-dewitt-page-wootters-literature], [@rem-ch29-feynman-stationary-phase-literature])—with Spinoza's geometric necessity and the finite observer's Gram elliptope ($\det G \ge 0$): **because the global field is timeless, truth endures forever; because the observer is finite, every step is new.**
 
 In [Chapter 30](ch30-fields-lines-eth-and-navier-stokes.md), we carry this tension between the global static field and the finite observer to the twin peaks of computational complexity and continuum fluid dynamics—examining **$\mathrm{P}$ vs. $\mathrm{NP}$**, the **Exponential Time Hypothesis (ETH) and 2026 tensor-network rank reduction**, and **three-dimensional Navier–Stokes vortex filaments**.

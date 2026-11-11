@@ -59,12 +59,11 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十章 | 文献注记 `rem-ch30-navier-stokes-forced-literature` 之后、猜想 `conj-coda-navier-stokes-regularity` 之前 | `navier-stokes-p-np` · `runaway` |
 | 第三十章 | 定理 `thm-coda-quadratic-advection-no-closure` 的证明之后 | `navier-stokes-p-np` · `mixed` |
 | 第三十章 | 纳维—斯托克斯一节末 | `navier-stokes-p-np` 完整实验室 |
-| 终章 | 空间吸引子 · 二 末 | `spatial-attractor-deja-vu` · `forget` |
-| 终章 | 空间吸引子 · 三 第一段后 | `spatial-attractor-deja-vu` · `dimension` |
+| 终章 | 空间吸引子 · 二 末（文献注记 `rem-coda-lorenz-srb-literature` 之后） | `spatial-attractor-deja-vu` · `forget`、`dimension` |
 | 终章 | 空间吸引子一节末 | `spatial-attractor-deja-vu` · `return`，随后完整实验室 |
 | 终章 | 黄金切投 · 一 末 | `golden-cut-observer` · `cut` |
 | 终章 | 黄金切投 · 二 末 | `golden-cut-observer` · `phason` |
-| 终章 | 黄金切投 · 三 末 | `golden-cut-observer` · `window`、`empire` |
+| 终章 | 黄金切投 · 三 末（文献注记 `rem-coda-quasicrystal-empire-literature` 之后） | `golden-cut-observer` · `window`、`empire` |
 | 终章 | 定理 `thm-coda-golden-cut-observer-cassini` 之前 | `golden-cut-observer` · `cassini`、`returns` |
 | 终章 | 该定理的证明之后 | `golden-cut-observer` 完整实验室 |
 
