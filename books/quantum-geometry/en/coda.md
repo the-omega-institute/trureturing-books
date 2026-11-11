@@ -449,7 +449,7 @@ This monograph consists of the **[Prelude](README.md)**, **Eight Parts (30 Chapt
 ```
 
 ::: {.figure src="coda-dependency-tree"}
-**Which chapter rests on which.** The thirty dots, top to bottom, are chapters 1 to 30, banded on the left by part. The arc arrow into each chapter comes from the earlier chapter it refers back to most often in its own text (a chapter link or a "Chapter N" mention); the more mentions, the thicker the arrow. Chapter 1 sends six arrows, chapter 3 four, and chapter 21 two thick ones into chapters 22 and 24; chapter 11 never refers back to an earlier chapter and is a hollow dot.
+**Which chapter rests on which.** The dots, top to bottom, are the chapters of the book, banded on the left by part. The arc arrow into each chapter comes from the earlier chapter it refers back to most often in its own text (a chapter link or a "Chapter N" mention); the more mentions, the thicker the arrow. A hollow dot is a chapter that never refers back to an earlier one. The arrows are counted from the chapters by a script, so each one is a cross-chapter reference that the text contains.
 :::
 
 ::: {.slides src="overview"}

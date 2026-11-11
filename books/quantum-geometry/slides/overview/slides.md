@@ -686,10 +686,10 @@ section: "依赖导图"
 <div class="body">
   <p class="kicker">Reading and dependency map</p>
   <div class="split">
-    <img src="./img/coda-dependency-tree.zh.svg" alt="三十个点自上而下是第 1 至 30 章，弧形箭头来自回头引用最多的那一章。" style="display: block; height: 720px; max-width: 100%; margin: 0 auto;">
+    <img src="./img/coda-dependency-tree.zh.svg" alt="圆点自上而下是全书各章，弧形箭头来自回头引用最多的那一章。" style="display: block; height: 720px; max-width: 100%; margin: 0 auto;">
     <div>
       <h2 class="t">哪一章<em>依赖</em>哪一章</h2>
-      <p class="lead">指向每一章的弧形箭头，来自它回头引用最多的那一章。第 1 章发出六支箭头；第 21 章的两支粗箭头指向第 22、24 章。</p>
+      <p class="lead">指向每一章的弧形箭头，来自它回头引用最多的那一章；引用越多，箭头越粗。</p>
       <ul class="plain mt">
         <li><b>物理直觉：</b>序曲 → 第 1–12 章 → 第 17–19 章</li>
         <li><b>算法编译：</b>第 2 章 → 第 13–16 章 → 第 25–27 章</li>

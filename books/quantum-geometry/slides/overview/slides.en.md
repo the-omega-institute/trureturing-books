@@ -686,10 +686,10 @@ section: "Dependency map"
 <div class="body">
   <p class="kicker">Reading and dependency map</p>
   <div class="split">
-    <img src="./img/coda-dependency-tree.en.svg" alt="Thirty dots from top to bottom are chapters 1 to 30; each curved arrow comes from the chapter it refers back to most." style="display: block; height: 720px; max-width: 100%; margin: 0 auto;">
+    <img src="./img/coda-dependency-tree.en.svg" alt="The dots from top to bottom are the chapters of the book; each curved arrow comes from the chapter it refers back to most." style="display: block; height: 720px; max-width: 100%; margin: 0 auto;">
     <div>
       <h2 class="t">Which chapter <em>builds on</em> which</h2>
-      <p class="lead">The curved arrow into each chapter comes from the earlier chapter it refers back to most. Chapter 1 sends out six arrows; two thick arrows run from Chapter 21 to Chapters 22 and 24.</p>
+      <p class="lead">The curved arrow into each chapter comes from the earlier chapter it refers back to most; the more mentions, the thicker the arrow.</p>
       <ul class="plain mt">
         <li><b>Physical intuition:</b> Prelude → Ch. 1–12 → Ch. 17–19</li>
         <li><b>Algorithms and compilation:</b> Ch. 2 → Ch. 13–16 → Ch. 25–27</li>
