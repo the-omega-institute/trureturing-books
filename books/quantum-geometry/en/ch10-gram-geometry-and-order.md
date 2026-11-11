@@ -13,7 +13,9 @@ Across four sections, this chapter makes the boundary between the two completely
 3. **Why local coordinate charts on $S^2$ look path-tangled**: the tangent-bundle and Hopf-bundle topological obstructions on $S^2$ versus the global rotor frame on $S^3$ are summarized in the literature notes [@rem-hopf-dirac-monopole-literature] and [@rem-gram-hairy-ball-literature];
 4. **Where true order-independent pairwise consistency lives**: when we retain the labeled **full complex Gram matrix** $G_{ij} = \langle\psi_i, \psi_j\rangle$ (with complex phases intact, not merely squared moduli $|G_{ij}|^2$), reading its pairwise entries in any order reconstructs the entire family of state vectors uniquely up to a single common ambient unitary $U$ ([@thm-gram-unitary-reconstruction] and [@lemma-unit-gram-equality]), while the complex phase of the cyclic triple product $\Delta = G_{01}G_{12}G_{20}$ is already retained inside $G$ (compared with Berry phase in [@rem-berry-pancharatnam-holonomy-literature])!
 
-![Noncommuting spherical rotations and Berry solid angle, Hairy Ball and Hopf obstructions versus the global rotor frame on S3, and unitary reconstruction from the full complex Gram matrix](../assets/fig-10-gram-matrix-hairy-ball.svg)
+::: {.figure src="ch10-overview"}
+**Figure 10.** The chapter at a glance. Panel I: two amber arcs leave the North Pole $N$; turning about $Y$ and then $X$ lands at $+X$, turning about $X$ and then $Y$ lands at $-Y$, and the two ends are $90^\circ$ apart. Panel II: the small cyan arrows on the sphere at the left shrink to zero at both poles (violet rings; a literature result, not formalized in this book), while the dashed circle at the right stands for the rotor sphere $S^3$ and carries a violet frame at every point. Panel III: the full complex Gram table of the three states of [@ex-octant-berry-gram], with the pairwise complex overlaps in the cyan cells ([@thm-gram-unitary-reconstruction]).
+:::
 
 ## Rotation Order and Berry Solid Angle {#sec-spherical-order-and-berry}
 
@@ -42,6 +44,10 @@ Likewise, the north projector $P_0 = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix
 $$
 P_0 P_+ = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 0 & 0 \end{pmatrix} \neq \frac{1}{2}\begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix} = P_+ P_0.
 $$
+
+::: {.figure src="ch10-shutter-order"}
+**Swap the two shutters and the arrow ends on a different line.** This is the real plane of state vectors, where the cyan lines $\lvert 0\rangle$ and $\lvert +\rangle$ are $45^\circ$ apart ($90^\circ$ on the Bloch sphere). Starting from the same grey $v$, the left panel projects onto the $\lvert +\rangle$ line first and then onto the $\lvert 0\rangle$ line, so the amber $P_0P_+v$ ends on the horizontal line; the right panel reverses the order, and the amber $P_+P_0v$ ends on the slanted line, much shorter.
+:::
 
 Furthermore, the classical correspondence between closed-loop geometric holonomy on $S^2$ and three-vertex complex overlap invariants is recorded below ([@rem-berry-pancharatnam-holonomy-literature]).
 
@@ -163,6 +169,10 @@ Panel II of Figure 10 contrasts the two distinct topological obstructions on the
 
 > Singularities arise when we try to flatten the phase fiber onto $S^2$; on the rotor sphere $S^3$, the global frame never vanishes.
 
+::: {.figure src="ch10-gauge-winding"}
+**In the north gauge the phase turns once around the south pole, so it has no value there.** The southern hemisphere seen from above, with the south pole at the centre. On two latitude circles, the cyan hand in each dial is the phase of $\langle 1\mid\psi_N\rangle$ for the north-gauge representative $\psi_N = \bigl(\cos\frac{\theta}{2}, e^{i\varphi}\sin\frac{\theta}{2}\bigr)$: once round a circle, the hands turn once round too; the inner circle, closer to the pole, still gives one full turn, so no value fits at the pole inside the dashed violet ring. That the Hopf bundle has no global section is a literature result, not formalized in this book ([@rem-hopf-dirac-monopole-literature]).
+:::
+
 ## Reconstruction from the Full Complex Gram Matrix {#sec-complex-gram-reconstruction}
 
 We are now ready to state the exact mathematical theorem behind *"compare things pairwise, always consistently, regardless of order"* (Panel III of Figure 10).
@@ -174,6 +184,10 @@ G = A^* A, \qquad G_{ij} = \langle \psi_i, \psi_j\rangle = \psi_i^* \psi_j \qqua
 $$
 
 Whenever a second $m \times n$ matrix $B \in \mathbb{C}^{m \times n}$ has the exact same complex Gram matrix $B^* B = A^* A$, the following frozen theorem guarantees a **single common ambient unitary matrix** $U \in U(m)$ such that $B = UA$.
+
+::: {.figure src="ch10-common-turn"}
+**Same table of pairwise overlaps, one common turn.** The grey triangle $A$ joins $N, +X, +Y$ (the three states of [@ex-octant-berry-gram]); the ink triangle $B = UA$, with $U = \operatorname{diag}(1, i)$, joins $N, +Y, -X$. The two violet curved arrows are one and the same $90^\circ$ turn about the vertical axis, carrying the whole triangle rigidly, and the two complex Gram matrices agree entry by entry ([@thm-gram-unitary-reconstruction]).
+:::
 
 ::: {.theorem #thm-gram-unitary-reconstruction title="Ambient Unitary Reconstruction from Equal Complex Gram Matrices" lean="D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq"}
 Let $m$ be a finite index type with decidable equality (`Fintype m`, `DecidableEq m`) and let $n$ be any finite index type (`Finite n`). For any two complex matrices $B, A \in M_{m \times n}(\mathbb{C})$, if their complex Gram matrices are equal,
