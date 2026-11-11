@@ -48,7 +48,9 @@ $$
 
 ![单位二向量 I = e₁ ∧ e₂ 的两次 90° 正交转向、平衡幺正和 S = A + B 生成相对复结构 J² = −I，以及克利福德半角旋子双侧夹乘](../assets/fig-05-bivector-rotor.svg)
 
-<figure data-tbook-film="001-qubit-bloch-rotor"></figure>
+::: {.film src="001-qubit-bloch-rotor"}
+**半角旋子与布洛赫球（50 秒）。** 球面上的箭头是一个纯态；几何积把它与量尺的关系分成沿线的 $\cos\theta$ 与张成面积的 $\sin\theta$；旋子从两侧各转半角，箭头转过 $360^\circ$ 回到原处时旋子差一个负号，转满 $720^\circ$ 才回来。
+:::
 
 在 Lean 4 形式化库 `Quantum/Algebra/Unitary` 中，我们无需预先假定任何外加的复几何公设，而是直接从最基本的**平衡幺正分解** $S = A + B$ 出发，严格证明了这一正交转向生成元的诞生机制：当你把一个右幺正门 $S$（满足 $S S^* = I$）拆成两个各占一半模长的平衡分量 $A$ 与 $B$（即 $A A^* = \frac{1}{2}I$ 且 $B B^* = \frac{1}{2}I$，在 Lean 中记作 [`halfIdentity`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.halfIdentity)）时，幺正保模长条件会强行迫使两分量的对称交叉项归零（$A B^* + B A^* = 0$），从而使它们的交叉乘积 $A B^*$ 自动成为一个反自伴的旋转生成元！
 
