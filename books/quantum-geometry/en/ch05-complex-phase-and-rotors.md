@@ -185,6 +185,10 @@ The second column is back at its starting point at $360^\circ$, when the third c
 **One direct check.** $R(90^\circ) = \frac{1}{\sqrt{2}}(1 - \vv{B})$, and with $\vv{B}^2 = -1$: $R(90^\circ)^2 = \frac{1}{2}(1 - 2\vv{B} + \vv{B}^2) = -\vv{B} = R(180^\circ)$; squaring again, $R(180^\circ)^2 = \vv{B}^2 = -1 = R(360^\circ)$. In neutron interferometry the fringes are inverted when the spin has precessed through $360^\circ$ and restored at $720^\circ$ (a literature result, not formalized in this book: H. Rauch et al., *Phys. Lett. A* **54**, 425, 1975; S. A. Werner et al., *Phys. Rev. Lett.* **35**, 1053, 1975).
 :::
 
+::: {.viz src="qubit-geometry" preset="turn1" height="500"}
+**One full turn flips the rotor.** The amber state vector goes $360^\circ$ about $\hat{x}$ and returns to where it started, and so do the line and the area; the scalar part of the accumulated rotor runs from $+1$ to $-1$. Press ▶ under the figure for the next card: only after two full turns is it back at $+1$.
+:::
+
 A lone $-1$ is an overall sign, and by the discussion of the next section it changes no single-branch measurement reading; only when a branch that has been turned through a full turn is brought back together with a branch that has not (as in the interferometric setting at the end of [@ex-rotor-two-turns]) does the sign become an observable relative phase.
 
 ## 5.3 Global Phase versus Relative Phase: Why Spinning a Single Line Is Invisible, and Only a Pair of Lines Spans an Area {#sec-global-vs-relative-phase}

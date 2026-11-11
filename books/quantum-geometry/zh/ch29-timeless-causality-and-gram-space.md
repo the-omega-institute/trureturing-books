@@ -64,6 +64,10 @@ $$
 
 [@rem-ch29-pell-convergents-literature] 中的经典连分数现象与我们在第 23 章证明的黄金整数佩尔型恒等式 $(2a + b)^2 - 5b^2 = 4\operatorname{norm}(g)$（[`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)）遥相呼应：用一维离散整数网格去缝合二维正交旋转时，网格接缝处永远残留着单位算术裂隙。希帕索斯发现的不是数学的崩塌，而是**第 1 层有理数球面被 $90^\circ$ 正交面积运算撑破时露出的第一道“球外之球”接缝**。
 
+::: {.viz src="pythagoras-number-escape" preset="hippasus" height="500"}
+**永远差一格。** 渐近分数 $1/1, 3/2, 7/5, 17/12, \dots$ 沿直线 $m = \sqrt{2}\,n$ 越贴越近；右侧两条色带是 $m^2$ 与 $2n^2$ 的格子数，放大镜里它们永远差着一格。
+:::
+
 ### 第三幕：为“万物皆数”正名——从动词“数（shǔ）”到四级数系突围 {#sec-coda-pythagoras-act3}
 
 既然有理数连最简单的正交斜边 $\sqrt{2}$ 都装不下，毕达哥拉斯的“万物皆数”错了吗？
@@ -138,6 +142,10 @@ $$
    $$
 
    在本书的几何读法中，这意味着 $-1$ 手性扭结绝不可能在单个素数轴上孤立创生，它必须在成对的素数位之间两两配对、正反相消——与第三部第 10 章“两两比较，永远一致，顺序无关”形成算术呼应。
+:::
+
+::: {.viz src="pythagoras-number-escape" preset="five" height="500"}
+**面素数与线素数。** 半径 $\sqrt{p}$ 的圆穿过格点时，$p = a^2 + b^2$ 是面素数，把 $a + bi$ 平方就得到整数直角三角形；用图下方的时间轴逐个走过奇素数，$p \equiv 3 \pmod 4$ 时圆上一个格点也没有。
 :::
 
 ### 第二座桥：两道二次接缝相交（$2 \times 2 = 4$）——从二次曲线到同余数椭圆曲线环面 {#sec-coda-congruent-elliptic-torus}
@@ -309,8 +317,8 @@ $$
 
 在本书的跨学科几何视野下，从希帕索斯直角三角形裂开的佩尔接缝（[@rem-ch29-pell-convergents-literature]）出发，对照上述文献评注（[@rem-ch29-pell-primes-hilbert-literature]、[@rem-ch29-elliptic-torus-literature]、[@rem-ch29-hasse-gauss-literature] 与 [@rem-ch29-arithmetic-geometry-literature]），素数轴上的点数偏差振荡便与三维量子旋量球面 $S^3 \cong \mathrm{SU}(2)$ 向一维直径 $[-1, +1]$ 投下的余弦影子形成了深邃的几何同构意象。
 
-::: {.viz src="pythagoras-number-escape" height="560"}
-**交互实验室：佩尔手性账本、`±1` 接缝、高斯素数分裂与同余数椭圆曲线**。调节无平方因子判别参数 $d$（$2 \le d \le 37$）、奇素数 $p$ 与连分数渐近阶数 $k$：账本逐行给出 $\sqrt{d}$ 的连分数部分商、精确 `BigInt` 渐近分数 $m_k/n_k$ 与佩尔范数 $\Delta = m_k^2 - d\,n_k^2$（一维误差 $|m_k/n_k - \sqrt{d}| \to 0$，二维面积差 $|\Delta| \ge 1$；当连分数周期为奇数如 $d = 2, 5, 13$ 时单位解在 $-1$ 与 $+1$ 间交替翻转手性，周期为偶数如 $d = 3$ 时单位解锁在 $+1$ 分支，$d = 2$ 即希帕索斯与泰昂边径数 $1/1, 3/2, 7/5, 17/12\dots$）；右侧格点相图逐格标出 $m^2 - d\,n^2$ 的符号与全部 $\pm 1$ 单位格；舞台可在佩尔双曲线与正方形对比、高斯素数分裂 $p \equiv 1 \pmod 4 \iff p = a^2 + b^2$（经拉格朗日—格拉姆恒等式生成本原勾股三元组）与同余数椭圆曲线 $E_d : y^2 = x^3 - d^2 x$ 在良约化素数 $p \nmid 2d$ 下的有限域弗罗贝尼乌斯余弦 $\cos\theta_p = a_p/(2\sqrt{p})$ 之间切换。
+::: {.viz src="pythagoras-number-escape" height="640"}
+**交互实验室 `ORTHO//PYTHAGORAS`**：沿着 $\pm 1$ 接缝走一遍的三个场景。佩尔接缝：$\sqrt{d}$ 的渐近分数沿直线越贴越近，$m^2 - d\,n^2$ 却是非零整数（$d = 5$ 时绿圈标出已由 Lean 验证的全部 $\pm 4$ 解）；线素数与面素数：半径 $\sqrt{p}$ 的圆上有没有格点；模 $p$ 数点：曲线 $y^2 = x^3 - x$ 的 $a_p$ 被哈塞界关住，线素数恰在零上，面素数的弗罗贝尼乌斯余弦等于高斯三角形的余弦。费马二平方和定理、哈塞定理与佐藤—泰特分布是文献结果，未在本书形式化。
 :::
 
 ---
@@ -350,6 +358,10 @@ $$
    $$
 
    切片内部即涌现出相对时钟读数 $\tau$ 的关系型薛定谔演化 $i\hbar\partial_\tau|\psi_{\mathbf{S}}(\tau)\rangle = H_{\mathbf{S}}|\psi_{\mathbf{S}}(\tau)\rangle$——“前后时间”在这一模型中好比有限注意力翻阅静态书册时扫过的页码。
+:::
+
+::: {.viz src="timeless-causal-crystal" preset="crystal" height="500"}
+**所有页同时都在。** 十二页一直都画在球上，没有哪一页先出现；播放时移动的只有琥珀色的读头。对时钟读数条件化，才得到读头下面的那一页（有限时钟的示意模型，`MODEL`）。
 :::
 
 ### 第二层：没有时间推动，因果何以必然？——休谟死结 vs. 斯宾诺莎三角形与 Gram 矩阵刚性 {#sec-coda-hume-spinoza-gram}
@@ -444,6 +456,10 @@ $$
 
    这正是全书关于时间、因果与观察者的终极结语：**“全局无时间，故万古长存；观察者有限，故步步皆新。”**（而在 **[终章](coda.md)** 中，我们将进一步对照 `trureturing` 已验证的**高维格点黄金切投模型集（Cut-and-Project Golden Model Set）与齐肯多夫观察者路由定理**，构建一幅作者哲学与几何诠释模型（`MODEL`）：把跨轮次不变的算子参数诠释为内禀共轭窗口相位，把现实中的历史遗迹诠释为低曲率耗散的**空间吸引子**，解释为何有限观察者会在卡西尼 $(-1)^{n+1}$ 范数接缝与奇异吸引子分形叶层上经历似曾相识的共振。）
 
+::: {.viz src="timeless-causal-crystal" preset="window" height="500"}
+**格拉姆窗口。** $\mathbf{B}$ 立在北极，$\mathbf{C}$ 只能绕它转一圈：$c_{AC}$ 在 $[\cos(\theta_1 + \theta_2), \cos(\theta_1 - \theta_2)]$ 里来回，三根向量撑开的体积在窗口内部为正，贴上窗边时塌成零。也可以在球上直接拖动 $\mathbf{C}$。
+:::
+
 ::: {.theorem #thm-ch29-gram-rigidity-and-pell title="黄金整数佩尔范数恒等式与单位向量族 Gram 重叠等价关系定理" lean="D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm, D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization"}
 在算术二次格与内积空间几何中，离散接缝范数与单位向量记录的成对重叠判据分别由以下两条经 Lean 4 内核验证的定理给出：
 
@@ -466,8 +482,8 @@ $$
 第一部分将左边 $(2a + b)^2 - 5b^2 = 4a^2 + 4ab + b^2 - 5b^2 = 4(a^2 + ab - b^2)$ 直接在环算术下展开，与黄金整数范数定义 $4\,\operatorname{norm}(g)$ 逐项恒等。第二部分对归一化向量 $\operatorname{record}(i), \operatorname{record}(j)$ 直接调用内积空间柯西—施瓦茨取等判据（`inner_eq_one_iff_of_norm_eq_one`）得到 $\langle \operatorname{record}(i), \operatorname{record}(j)\rangle_{\mathbb{K}} = 1 \iff \operatorname{record}(i) = \operatorname{record}(j)$，再将相等关系的自反性、对称性与传递性提升为单位 Gram 重叠关系的等价性（`Equivalence`）。完整证明由 Lean 内核检查。
 :::
 
-::: {.viz src="timeless-causal-crystal" height="560"}
-**交互实验室：无时间因果账本、格拉姆窗口与“$P$ 是场，$NP$ 是线”**。给定 $c_{AB} = \cos\theta_1$ 与 $c_{BC} = \cos\theta_2$，拨动当下一念 $\phi$：$c_{AC} = c_1 c_2 + s_1 s_2 \cos\phi$ 只能落在格拉姆窗口 $[\cos(\theta_1 + \theta_2), \cos(\theta_1 - \theta_2)]$ 内，$\det G = s_1^2 s_2^2 \sin^2\phi \ge 0$，$\cos\phi = \pm 1$ 时贴上 $\det G = 0$ 的边界，窗口之外 $\det G < 0$。去序账本逐阶加上 $(-1)^k \theta^{2k}/(2k)!$，记下截断余弦的 $\det G^{(k)}$ 怎样越过视界又收敛回真实的一侧；右侧相图画出整片 $(\theta_1, c_{AC})$ 上的相容透镜。三个视图依次是格拉姆窗口、$H\Psi = 0$ 的无时间晶体书册，以及 Klee–Minty 对数势垒梯度流（$P$ 是场）对照振幅放大一步步转过 $2\theta$（$NP$ 是线）。
+::: {.viz src="timeless-causal-crystal" height="640"}
+**交互实验室 `ORTHO//CAUSAL`**：同一颗球上的四个场景。窗口：两条余弦锁住第三条的范围，$\det G$ 是三根向量撑开的体积的平方；书页：有限时钟上所有页同时存在，条件化才取出一页；场：梯度流处处有坡度，降下的势能等于走过的耗散；线：振幅放大每步只转 $2\theta$，约 $(\pi/4)\sqrt{N}$ 步到达。把它们读作“选择”“书页”“场”与“线”是本书的诠释（`MODEL`）；$\mathrm{P} \neq \mathrm{NP}$ 仍是开放问题，本页的任何画面都不推出它的答案。
 :::
 
 

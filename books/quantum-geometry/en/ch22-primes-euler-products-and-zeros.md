@@ -104,6 +104,10 @@ $$
 Under `hs : 1 < s.re`, transitivity of equality combines [@prop-riemann-zeta-dirichlet-sum] ($\sum'_{n : \mathbb{N}} n^{-s} = \operatorname{classicalZeta}(s)$) with the symmetry of [@thm-riemann-zeta-euler-product] ($\operatorname{classicalZeta}(s) = \prod'_{p : \mathrm{Nat.Primes}} (1 - p^{-s})^{-1}$). The full proof is checked by the Lean kernel.
 :::
 
+::: {.viz src="sphere-escape" preset="euclid" height="500"}
+**Multiply, add one.** Each time the list gains a prime, multiply them all and add one to get $Q$. Every dial has $p$ ticks and its hand points at the remainder of $Q$ divided by $p$: all of them point at $1$ and none at the red $0$, so any prime dividing $Q$ is not on the list (Euclid's argument, a literature result). Opened full screen, the plot below shows how far the Euler product over finitely many primes still is from $\zeta(2)$ ([@thm-riemann-zeta-euler-product] with $s = 2$).
+:::
+
 ## 22.3 The Polyhedral Prime Sieve Remainder and Phase-Oscillator Hand Calculation {#sec-ch22-3}
 
 Write the complex exponent as $s = \sigma + it$, where the real part $\sigma = \operatorname{Re}(s)$ governs radial damping and the imaginary part $t = \operatorname{Im}(s)$ governs rotational frequency. Each prime mode in [@cor-dirichlet-sum-eq-euler-product] acts as an independent complex rotor:

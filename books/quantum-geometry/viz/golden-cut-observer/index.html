@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//CUT · The golden cut · a quasicrystal cut from a lattice by a window, the ±1 seam and returns with bounded gaps">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//CUT 黄金切投 · 一条窗口从格点里切出的准晶、±1 接缝与有界间隙的回归</title>
+<meta name="description" content="终章“黄金切投”一节的四个场景。切投：黄金整数 a + bφ 画成平面上的格点 (a + bφ, a + bψ)，一条长度为 1 的窗口选出其中一些，投到物理直线上得到间隔只有 φ 与 φ² 的点集；移动窗口，贴边的点翻转，深处的点不动。卡西尼：φ 的幂在同一张格点图里与原点围成的矩形，面积恒为 ±1。回归：圆上按黄金角旋转的轨道，以有界的间隔一次次回到观测窗。接受窗：菱形三十面体，30 面 60 棱 32 顶点，点离边界越远越稳。Four scenes for the coda’s section on the golden cut. Cut and project: the golden integers a + bφ are drawn as lattice points (a + bφ, a + bψ), a window of length 1 selects some of them, and their projections form a set whose gaps are φ and φ² only; move the window and points at its edge flip while deep points stay. Cassini: in the same lattice, the rectangle between the origin and a power of φ always has area ±1. Returns: an orbit turning by the golden angle on the circle comes back to an observation window with bounded gaps. The acceptance window: a rhombic triacontahedron with 30 faces, 60 edges and 32 vertices, where a point is the safer the farther it is from the boundary.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="golden-cut-observer">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//CUT">ORTHO<b>//</b>CUT</h1>
+      <div class="tagline">
+        <span class="zh">黄金切投 · <em>窗口挪一挪，贴边的点翻转，深处的点留在原地</em></span>
+        <span class="en">The golden cut · <em>shift the window and the points at its edge flip, while the deep ones stay where they are</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillScene">SCENE <strong>—</strong></span>
+      <span class="pill" id="pillWhat"><strong>—</strong></span>
+      <span class="pill hot" id="pillKey"><strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="cut" aria-pressed="false"><span class="code">CUT</span><span class="cn zh">一条窗口切出一串点</span><span class="cn en">A window cuts out a chain of points</span></button>
+        <button class="preset" data-preset="phason" aria-pressed="false"><span class="code">PHASON</span><span class="cn zh">挪动窗口：贴边的点翻转</span><span class="cn en">Shift the window: edge points flip</span></button>
+        <button class="preset" data-preset="empire" aria-pressed="false"><span class="code">EMPIRE</span><span class="cn zh">一小片定住远处的点</span><span class="cn en">A small patch fixes distant points</span></button>
+        <button class="preset" data-preset="cassini" aria-pressed="false"><span class="code">CASSINI</span><span class="cn zh">面积永远是 ±1</span><span class="cn en">The area is always ±1</span></button>
+        <button class="preset" data-preset="returns" aria-pressed="false"><span class="code">RETURNS</span><span class="cn zh">回到窗口：间隔有界</span><span class="cn en">Back in the window: bounded gaps</span></button>
+        <button class="preset" data-preset="narrow" aria-pressed="false"><span class="code">NARROW</span><span class="cn zh">窗口变窄：等得久，仍有界</span><span class="cn en">A narrow window: longer waits, still bounded</span></button>
+        <button class="preset" data-preset="window" aria-pressed="false"><span class="code">WINDOW-3D</span><span class="cn zh">菱形三十面体：深处的点</span><span class="cn en">Rhombic triacontahedron: a deep point</span></button>
+        <button class="preset" data-preset="edge" aria-pressed="false"><span class="code">EDGE</span><span class="cn zh">贴近边界：一碰就翻</span><span class="cn en">Near the boundary: a touch flips it</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+    <section class="panel sec" data-scenes="cut">
+      <h2><span class="zh">窗口的相位</span><span class="en">Phase of the window</span><span class="aside">W + u</span></h2>
+      <div class="chips" id="patchChips" role="group" aria-label="固定一小片" data-aria-en="Fix a small patch">
+        <button class="chip" data-patch="off" aria-pressed="true"><span class="zh">不固定</span><span class="en">No patch</span></button>
+        <button class="chip" data-patch="on" aria-pressed="false"><span class="zh">固定中间一小片</span><span class="en">Fix the middle patch</span></button>
+      </div>
+      <p class="note"><span class="zh">时间轴是窗口的平移量 u，从 −0.5 到 0.5；固定一小片之后，它只在容许的那一段里走。也可以在舞台上直接上下拖那条窗口。</span><span class="en">The rail is the shift u of the window, from −0.5 to 0.5; once a patch is fixed it runs over the admissible range only. Or drag the window up and down on the stage.</span></p>
+    </section>
+    <section class="panel sec" data-scenes="cassini" hidden>
+      <h2><span class="zh">黄金比的幂</span><span class="en">Powers of the golden ratio</span><span class="aside">φᵏ⁺¹ = Fₖ + Fₖ₊₁φ</span></h2>
+      <p class="note"><span class="zh">时间轴是 k，从 1 到 6。横坐标是黄金整数本身，纵坐标是它的共轭，与“切投”场景是同一张格点图。</span><span class="en">The rail is k, from 1 to 6. Across is the golden integer itself and up is its conjugate: the same lattice as in the Cut scene.</span></p>
+    </section>
+    <section class="panel sec" data-scenes="returns" hidden>
+      <h2><span class="zh">观测窗</span><span class="en">The observation window</span><span class="aside">h(x) = cos 2πx ∈ (u₁, u₂)</span></h2>
+      <div class="field"><label for="wc"><span class="zh">窗口中心</span><span class="en">Centre of the window</span></label><output id="oWC" for="wc">0.50</output><input type="range" id="wc" min="-0.9" max="0.9" step="0.05" value="0.5"></div>
+      <div class="field"><label for="ww"><span class="zh">窗口宽度</span><span class="en">Width of the window</span></label><output id="oWW" for="ww">0.60</output><input type="range" id="ww" min="0.05" max="1" step="0.05" value="0.6"></div>
+      <p class="note"><span class="zh">时间轴是步数 N，从 1 到 233。每一步转过 φ 圈，也就是黄金角。也可以在舞台上直接上下拖那条带子。</span><span class="en">The rail is the number of steps N, from 1 to 233. Each step turns by φ of a full turn, the golden angle. Or drag the band up and down on the stage.</span></p>
+    </section>
+    <section class="panel sec" data-scenes="window3" hidden>
+      <h2><span class="zh">窗口里的一个点</span><span class="en">A point in the window</span><span class="aside">d∂ = dist(p, ∂W)</span></h2>
+      <p class="note"><span class="zh">时间轴把点从中心沿一个方向推向边界，s = 1 时到达边界。球的半径就是它到边界的距离 d∂，以棱长为 1。拖动舞台可以转动窗口。</span><span class="en">The rail pushes the point from the centre towards the boundary along one direction, reaching it at s = 1. The radius of the ball is its distance d∂ to the boundary, in units of the edge. Drag the stage to turn the window.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage still" id="stage" data-thumb aria-label="舞台：黄金格点与窗口；φ 的幂与面积为 1 的矩形；圆上的轨道与观测窗；或菱形三十面体接受窗" data-aria-en="Stage: the golden lattice and the window; the powers of φ with their rectangles of area 1; the orbit on the circle with its observation window; or the rhombic triacontahedron">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+        <button class="chip" data-scene="cut" aria-pressed="true"><span class="zh">切投</span><span class="en">Cut</span></button>
+        <button class="chip" data-scene="cassini" aria-pressed="false"><span class="zh">卡西尼</span><span class="en">Cassini</span></button>
+        <button class="chip" data-scene="returns" aria-pressed="false"><span class="zh">回归</span><span class="en">Returns</span></button>
+        <button class="chip" data-scene="window3" aria-pressed="false"><span class="zh">接受窗</span><span class="en">Window</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="pATitle"></h2><span id="pAMeta"></span></div>
+        <canvas id="plotA" aria-label="本场景的小图 A" data-aria-en="Small plot A of the scene"></canvas>
+      </section>
+      <section class="panel">
+        <div class="head"><h2 id="pBTitle"></h2><span id="pBMeta"></span></div>
+        <canvas id="plotB" aria-label="本场景的小图 B" data-aria-en="Small plot B of the scene"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="roKeyL"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div class="c"><dt id="roL1"></dt><dd id="ro1">—</dd></div>
+        <div class="m"><dt id="roL2"></dt><dd id="ro2">—</dd></div>
+        <div><dt id="roL3"></dt><dd id="ro3">—</dd></div>
+        <div><dt id="roL4"></dt><dd id="ro4">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+<div class="lean" data-scenes="cut"><span class="ok">LEAN ✓</span><span><span class="zh">闵可夫斯基嵌入 x ↦ (x, x 的共轭) 是单射，黄金格点就是它的像；y 属于窗口 W 的模型集，当且仅当存在黄金整数 x，它的嵌入是 y 而共轭落在 W 里。已冻结：</span><span class="en">The Minkowski embedding x ↦ (x, conjugate of x) is injective and the golden lattice is its image; y belongs to the model set of a window W iff there is a golden integer x whose embedding is y and whose conjugate lies in W. Frozen: </span><a class="leanref" data-lean-gid="D5/S1/Scale/MinkowskiModelSet.minkowski_model_set_spec" href="https://github.com/the-omega-institute/trureturing/blob/52725b62b659b244d077e29f18a576aa809007b7/D5/S1/Scale/MinkowskiModelSet.lean#L39" target="_blank" rel="noopener"><code>minkowski_model_set_spec</code></a></span></div>
+<div class="lean" data-scenes="cut"><span class="ok">LEAN ✓</span><span><span class="zh">自然数的黄金展开 β(n) 都落在窗口 [φ − 2, φ − 1] 的切投集里（舞台上的绿圈）。已冻结：</span><span class="en">The golden expansions β(n) of the natural numbers all lie in the cut-and-project set of the window [φ − 2, φ − 1] (the green rings on the stage). Frozen: </span><a class="leanref" data-lean-gid="D5/S1/Deficit/ModelSet/GoldenCutAndProject.golden_model_set_subset_cut_and_project" href="https://github.com/the-omega-institute/trureturing/blob/52725b62b659b244d077e29f18a576aa809007b7/D5/S1/Deficit/ModelSet/GoldenCutAndProject.lean#L54" target="_blank" rel="noopener"><code>golden_model_set_subset_cut_and_project</code></a></span></div>
+<div class="lean" data-scenes="cassini" hidden><span class="ok">LEAN ✓</span><span><span class="zh">对一切自然数 n：Fₙ·Fₙ₊₂ − Fₙ₊₁² = (−1)ⁿ⁺¹。已冻结：</span><span class="en">For every natural number n: Fₙ·Fₙ₊₂ − Fₙ₊₁² = (−1)ⁿ⁺¹. Frozen: </span><a class="leanref" data-lean-gid="D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm" href="https://github.com/the-omega-institute/trureturing/blob/52725b62b659b244d077e29f18a576aa809007b7/D5/S1/Scale/Fibonacci.lean#L37" target="_blank" rel="noopener"><code>fib_cassini_from_golden_norm</code></a></span></div>
+<div class="lean" data-scenes="returns" hidden><span class="ok">LEAN ✓</span><span><span class="zh">设 g 是有限维环面的元素，G 是它生成的闭子群，a 是 g 在 G 中的像，h 是 G 上的连续实函数，实数列 e 满足 e(n) − h(aⁿ) → 0。则对任何与 h 的值域相交的开区间 (u, v)：存在 n₀ ≥ 1 与 M，使得对每个 n ≥ n₀，n 到 n + M 之间总有某个 m 满足 e(m) ∈ (u, v)；并且对任何 ε &gt; 0，N 充分大时前 N 步中落入 (u, v) 的比例不小于 1/(M + 1) − ε。已冻结：</span><span class="en">Let g be an element of a finite-dimensional torus, G the closed subgroup it generates, a the image of g in G, h a continuous real function on G, and e a real sequence with e(n) − h(aⁿ) → 0. Then for every open interval (u, v) that meets the range of h there are n₀ ≥ 1 and M such that for each n ≥ n₀ some m between n and n + M has e(m) ∈ (u, v); and for every ε &gt; 0 the share of the first N steps that fall in (u, v) is at least 1/(M + 1) − ε for all large N. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result" href="https://github.com/the-omega-institute/trureturing/blob/52725b62b659b244d077e29f18a576aa809007b7/D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.lean#L22" target="_blank" rel="noopener"><code>TorusObservationWindowReturns.result</code></a></span></div>
+<div class="lean argued" data-scenes="window3" hidden><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：正二十面体准晶由六维格点切投得到，三维内部空间的接受窗是菱形三十面体（Kramer 与 Neri 1984；Duneau 与 Katz 1985）。页面按坐标构造这个多面体并数它的面、棱、顶点。</span><span class="en">Literature result, not formalized in this book: icosahedral quasicrystals are cut and projected from a six-dimensional lattice, and the acceptance window in the three-dimensional internal space is a rhombic triacontahedron (Kramer and Neri 1984; Duneau and Katz 1985). The page builds the polyhedron from coordinates and counts its faces, edges and vertices.</span></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+<div class="lean argued" data-scenes="cut"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：固定一小片拼砖会限制容许的窗口相位，从而强制远处的砖（康威的“帝国”，见 Grünbaum 与 Shephard《Tilings and Patterns》）。舞台上画的是它在一维黄金切投里的对应物。</span><span class="en">Literature result, not formalized in this book: fixing a small patch of a tiling restricts the admissible phases of the window and so forces distant tiles (Conway’s “empire”, see Grünbaum and Shephard, Tilings and Patterns). The stage draws its counterpart in the one-dimensional golden cut.</span></span></div>
+<div class="lean model"><span class="ok">MODEL</span><span><span class="zh">“同一个灵魂是不变的窗口相位”“遗迹是窗口深处的点”“似曾相识是有界间隙的回归”是本书终章的诠释模型，不是定理；页面上的数学事实各自成立，诠释不由它们推出。</span><span class="en">“The same soul is the unchanged phase of the window”, “a ruin is a point deep in the window” and “déjà vu is a return with bounded gaps” are an interpretive model of this book’s coda, not theorems; the mathematical facts on the page hold on their own and the interpretation does not follow from them.</span></span></div>
+<div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数值演示，不是证明：格点、间隔与裕度逐点算出，斐波那契数用 BigInt，轨道与多面体用双精度。页面只看到有限个点与有限步，一般结论来自 Lean 定理。</span><span class="en">A numerical illustration on the page, not a proof: lattice points, gaps and margins are computed point by point, Fibonacci numbers with BigInt, the orbit and the polyhedron in double precision. The page only sees finitely many points and steps; the general statements come from the Lean theorems.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="时间轴：窗口的平移、k、步数或点的位置" data-aria-en="Rail: the shift of the window, k, the number of steps or the position of the point">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>1</kbd>–<kbd>4</kbd> <span class="zh">场景</span><span class="en">scene</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">终章把“观察者”对照到 trureturing 里已经验证的黄金切投：高维的周期格点不动，一条窗口决定哪些点被看见。本页把这套构造画出来，并画出与它相伴的 ±1 接缝和回归定理。本页是数值演示，不是证明；灵魂与遗迹的说法是本书的诠释模型。</p>
+      <ol>
+        <li><b>切投。</b>黄金整数 a + bφ 有一个共轭 a + bψ，ψ = 1 − φ。把它画成平面上的点（横坐标是它本身，纵坐标是共轭），全体黄金整数是一张格点。水平的窗口 [φ − 2, φ − 1] + u 长度为 1，选出共轭落在其中的点，投到横轴上：相邻两点的间隔只有 φ 与 φ² 两种（u = 0 时两个端点都被取到，多出一个长为 1 的间隔），最小间隔不小于 1。上下挪动窗口，贴着边的点进进出出（相子翻转），离边远的点留在原地：一个点到窗口边界的距离就是它经得起的平移量。固定中间一小片之后，容许的平移只剩一小段，凡是在这一小段平移下始终留在窗口里的点（包括很远的点）都被这一小片定住。</li>
+        <li><b>卡西尼。</b>黄金整数 φᵏ⁺¹ = Fₖ + Fₖ₊₁φ 在格点图里位于 (φᵏ⁺¹, ψᵏ⁺¹)。它与原点围成的矩形，面积是这两个坐标的乘积，也就是它的范数 Fₖ·Fₖ₊₂ − Fₖ₊₁² = (−1)ᵏ⁺¹：永远恰好是 1，一次在横轴上方，一次在下方。k 越大，矩形越扁长，面积不变。非零黄金整数的范数是非零整数，所以两条双曲线 x·x′ = ±1 之间除了原点没有别的格点。</li>
+        <li><b>回归。</b>圆上每一步转过黄金角。观测量取 h(x) = cos 2πx，观测窗是它的一段取值 (u₁, u₂)。轨道以有界的间隔一次次落进窗口：到目前为止最长的等待是 M + 1 步，落进去的步数所占比例不低于 1/(M + 1)。</li>
+        <li><b>接受窗。</b>三维正二十面体准晶的接受窗是菱形三十面体：六条五重轴各出一条棱，拼成 30 个黄金菱形面，12 个五重顶点与 20 个三重顶点。窗口里的点到边界的距离 d∂ 是它经得起的扰动大小；点推到边界上，d∂ 归零，再往外就翻转。离边界至少 d 的部分是窗口缩小 1 − d/r 倍的副本（r 是内切球半径），所以它占体积的 (1 − d/r)³。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/coda.html#sec-coda-trureturing-observer-def" target="_top">终章 · 黄金切投模型集与观察者路由定理</a> · <a href="../../zh/coda.html#sec-coda-trureturing-rhombic-triacontahedron-empire" target="_top">菱形三十面体接受窗与“帝国效应”</a> · <a href="../../zh/coda.html#sec-coda-trureturing-cassini-torus-return" target="_top">卡西尼接缝与有界间隙回归</a> · <a href="../../zh/coda.html#thm-coda-golden-cut-observer-cassini" target="_top">八项性质的定理</a> · trureturing（所钉提交）：<a data-trureturing-path="D5/S1/Scale/MinkowskiModelSet.lean" href="https://github.com/the-omega-institute/trureturing/blob/52725b62b659b244d077e29f18a576aa809007b7/D5/S1/Scale/MinkowskiModelSet.lean" target="_blank" rel="noopener">MinkowskiModelSet.lean</a> · <a data-trureturing-path="D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.lean" href="https://github.com/the-omega-institute/trureturing/blob/52725b62b659b244d077e29f18a576aa809007b7/D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.lean" target="_blank" rel="noopener">TorusObservationWindowReturns.lean</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">The coda sets “the observer” beside the golden cut-and-project construction already verified in trureturing: a periodic lattice in a higher dimension stays put, and a window decides which of its points are seen. This page draws that construction together with the ±1 seam and the return theorem that go with it. The page is a numerical illustration, not a proof; what it says about souls and ruins is an interpretive model of this book.</p>
+      <ol>
+        <li><b>Cut and project.</b> A golden integer a + bφ has a conjugate a + bψ, with ψ = 1 − φ. Draw it as a point of the plane (itself across, its conjugate up) and the golden integers form a lattice. The horizontal window [φ − 2, φ − 1] + u has length 1; it selects the points whose conjugate lies inside, and they are projected to the horizontal axis: neighbouring points are φ or φ² apart and nothing else (at u = 0 both ends of the window are hit and one gap of length 1 appears), and no gap is smaller than 1. Move the window up and down and the points at its edge come and go (phason flips) while points far from the edge stay: the distance of a point to the boundary of the window is the shift it can withstand. Once a small patch in the middle is fixed, only a short range of shifts remains admissible, and every point that stays in the window under all of them, however far away, is fixed by that patch.</li>
+        <li><b>Cassini.</b> The golden integer φᵏ⁺¹ = Fₖ + Fₖ₊₁φ sits at (φᵏ⁺¹, ψᵏ⁺¹) in the lattice. The rectangle it spans with the origin has as its area the product of the two coordinates, which is its norm Fₖ·Fₖ₊₂ − Fₖ₊₁² = (−1)ᵏ⁺¹: always exactly 1, above the horizontal axis and below it in turn. The larger k, the longer and flatter the rectangle, with the same area. The norm of a nonzero golden integer is a nonzero integer, so between the two hyperbolas x·x′ = ±1 there is no lattice point but the origin.</li>
+        <li><b>Returns.</b> Each step on the circle turns by the golden angle. The observable is h(x) = cos 2πx and the observation window is a range (u₁, u₂) of its values. The orbit falls into the window again and again with bounded gaps: the longest wait so far is M + 1 steps, and the share of steps inside is at least 1/(M + 1).</li>
+        <li><b>The acceptance window.</b> For icosahedral quasicrystals in three dimensions the acceptance window is a rhombic triacontahedron: each of the six fivefold axes supplies an edge, giving 30 golden rhombi, 12 fivefold and 20 threefold vertices. The distance d∂ of a point in the window to the boundary is the size of the disturbance it can withstand; pushed onto the boundary its d∂ is zero, and beyond it flips. The part at least d from the boundary is a copy of the window shrunk by 1 − d/r (r is the inradius), so it takes up (1 − d/r)³ of the volume.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/coda.html#sec-coda-trureturing-observer-def" target="_top">Coda · The golden cut-and-project set and the observer route</a> · <a href="../../en/coda.html#sec-coda-trureturing-rhombic-triacontahedron-empire" target="_top">The rhombic triacontahedron and the “empire effect”</a> · <a href="../../en/coda.html#sec-coda-trureturing-cassini-torus-return" target="_top">The Cassini seam and returns with bounded gaps</a> · <a href="../../en/coda.html#thm-coda-golden-cut-observer-cassini" target="_top">The theorem of eight properties</a> · trureturing (pinned commit): <a data-trureturing-path="D5/S1/Scale/MinkowskiModelSet.lean" href="https://github.com/the-omega-institute/trureturing/blob/52725b62b659b244d077e29f18a576aa809007b7/D5/S1/Scale/MinkowskiModelSet.lean" target="_blank" rel="noopener">MinkowskiModelSet.lean</a> · <a data-trureturing-path="D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.lean" href="https://github.com/the-omega-institute/trureturing/blob/52725b62b659b244d077e29f18a576aa809007b7/D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.lean" target="_blank" rel="noopener">TorusObservationWindowReturns.lean</a></p>
+    </div>
+    <h3 class="evh"><span class="zh">全部依据</span><span class="en">All evidence</span></h3>
+<div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">共轭范数互反分离：对相异的黄金整数 u ≠ v 与实数 B，若 |u 的共轭 − v 的共轭| ≤ B，则 1 ≤ |u − v|·B。取 B = 1（窗口的长度）：同一窗口里的两点至少相距 1。已冻结：</span><span class="en">Reciprocal separation: for distinct golden integers u ≠ v and a real B, if |conjugate of u − conjugate of v| ≤ B then 1 ≤ |u − v|·B. With B = 1 (the length of the window): two points of one window are at least 1 apart. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Fourier/GoldenModelSetDelone.norm_separation" href="https://github.com/the-omega-institute/trureturing/blob/52725b62b659b244d077e29f18a576aa809007b7/D5/S3/Fourier/GoldenModelSetDelone.lean#L37" target="_blank" rel="noopener"><code>norm_separation</code></a></span></div>
+<div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">存在一个 Delone 集，它的点集是窗口 [φ − 2, φ − 1] 的模型集，装球半径为 1/2，覆盖半径为 3。已冻结：</span><span class="en">There is a Delone set whose points are the model set of the window [φ − 2, φ − 1], with packing radius 1/2 and covering radius 3. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone" href="https://github.com/the-omega-institute/trureturing/blob/52725b62b659b244d077e29f18a576aa809007b7/D5/S3/Fourier/GoldenModelSetDelone.lean#L138" target="_blank" rel="noopener"><code>exists_golden_modelSet_delone</code></a></span></div>
+<div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">有限维环面上任意元素 g 的幂在它生成的闭子群 G 中等分布：对 G 上每个连续复值函数 f，(1/N)·Σₙ f(gⁿ⁺¹) 收敛到 f 关于哈尔测度的积分。已冻结：</span><span class="en">The powers of any element g of a finite-dimensional torus equidistribute in the closed subgroup G it generates: for every continuous complex function f on G, (1/N)·Σₙ f(gⁿ⁺¹) converges to the integral of f against Haar measure. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result" href="https://github.com/the-omega-institute/trureturing/blob/52725b62b659b244d077e29f18a576aa809007b7/D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.lean#L24" target="_blank" rel="noopener"><code>TorusOrbitEquidistribution.result</code></a></span></div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

@@ -90,6 +90,14 @@
 3. **庞加莱回归定理与自治常微分方程轨道不相交性（H. Poincaré, 1890；皮卡—林德洛夫解唯一性定理）**：在保测遍历系统 $(\Lambda, \mu_{\mathrm{SRB}})$ 上，对任意满足 $\mu_{\mathrm{SRB}}\bigl(\mathcal{U}_\epsilon(\mathbf{x}_{\mathrm{ruin}})\bigr) > 0$ 的开邻域，$\mu_{\mathrm{SRB}}$-几乎所有吸引子轨迹均无穷多次重返 $\mathcal{U}_\epsilon(\mathbf{x}_{\mathrm{ruin}})$；同时由自治光滑常微分方程解的唯一性，相异几何轨道互不相交，且每条非周期轨道对时间 $t \in \mathbb{R}$ 严格单射（永不自交），每次重返 $\mathcal{U}_\epsilon(\mathbf{x}_{\mathrm{ruin}})$ 均穿过互不重合的轨道弧段。
 :::
 
+::: {.viz src="spatial-attractor-deja-vu" preset="forget" height="500"}
+**忘掉起点，落回同一对翅膀。** 洛伦兹系统在 $(\sigma, \rho, \beta) = (10, 28, 8/3)$ 下的两条轨道：青色是第 $k$ 轮，品红是第 $k+1$ 轮，起点相距很远（两个圆圈），参数相同。短暂游荡之后它们落到同一对翅膀上；琥珀色的小点是每次经过“遗迹”邻域（琥珀色的圆）的地方。把一条轨道读作“一轮”是诠释模型（`MODEL`）。
+:::
+
+::: {.viz src="spatial-attractor-deja-vu" preset="dimension" height="500"}
+**比一张面多一点。** 沿一条长轨道（青色）估计三个李雅普诺夫指数；图上方的读数给出 $\lambda_1 \approx 0.9$、$\lambda_2 \approx 0$、$\lambda_3 \approx -14.6$ 与卡普兰—约克维数的估计 $D_{\mathrm{KY}} \approx 2.06$（数值估计，不是定理）。
+:::
+
 ### 三、 似曾相识（Déjà vu）的几何诠释：分形横截结构与跨轮次内积共振 {#sec-coda-deja-vu-fractal-dimension}
 
 在本书的哲学与几何诠释（`MODEL`）中，借用 [@rem-coda-lorenz-srb-literature] 所载奇异吸引子文献图景作为动力学隐喻——即清空上一轮表层轨迹记事但保留算子内禀参数——“宿命重逢”与“自由选点”便在同一几何意象下并行不悖：
@@ -103,6 +111,14 @@
    $$
 
    在这一诠释模型（`MODEL`）中，所谓“似曾相识”，正是同一观察者算子在不同轮次划过同一座空间吸引子邻域、局部注意力方向趋于共线（$\delta\theta \to 0$）时触发的**高幅值内积共振**。
+
+::: {.viz src="spatial-attractor-deja-vu" preset="return" height="500"}
+**擦肩而过时方向几乎平行。** 停在 $t = 22$：两轮都已经过遗迹的邻域（琥珀色的圆）。它们经过时的弧段并不重合，方向却几乎平行；图上方给出最近两次经过的方向夹角，内积 $\cos\delta\theta$ 接近 $1$。把它读作“似曾相识”是诠释模型（`MODEL`）。
+:::
+
+::: {.viz src="spatial-attractor-deja-vu" height="640"}
+**交互实验室 `ORTHO//ATTRACTOR`**：洛伦兹系统上的三个场景。两轮：起点不同、参数相同的两条轨道落到同一对翅膀上，按“遗忘”可以换一对起点再来；收缩：$500$ 个点的体积按 $e^{-41t/3}$ 缩小，压成一张薄片；维数：李雅普诺夫指数与卡普兰—约克维数的数值估计，换成 $\rho = 14$ 或 $\rho = 160$，吸引子变成一个点或一条闭合的环。本页是数值演示与诠释模型，不引用 Lean 定理。
+:::
 
 ---
 
@@ -142,6 +158,10 @@
    - 同时，对任意正整数第一坐标 $a \ge 1$，Beatty 第一坐标原像纤维 $\operatorname{goldenFiber}(a) = \{v \in \mathbb{N} \mid \operatorname{fiberA}(v) = a\}$ 的基数严格属于 $\{4, 5\}$（[`golden_fiber_capacity_pair`](lean:D5/S1/Deficit/Beatty/FiberCapacityPair.golden_fiber_capacity_pair)），而对任意非负整数第二坐标 $b \ge 0$，对偶第二坐标原像纤维 $\operatorname{goldenDualFiber}(b) = \{v \in \mathbb{N} \mid \operatorname{fiberB}(v) = b\}$ 的基数严格属于 $\{2, 3\}$（[`golden_dual_fiber_capacity_pair`](lean:D5/S1/Deficit/Beatty/FiberCapacityPair.golden_dual_fiber_capacity_pair)）。
    在本书的认识论诠释模型（`MODEL`）中，我们将“有理斜率扫描 $\to$ 坐标原像纤维分割 $\to$ 消除相邻 `11` 的齐肯多夫规范化”诠释为有限观察者体验到的主观时间步进。
 
+::: {.viz src="golden-cut-observer" preset="cut" height="500"}
+**一条窗口切出一串点。** 黄金整数 $a + b\varphi$ 画成格点：横坐标是它本身，纵坐标是共轭 $a + b\psi$。琥珀色的窗口 $[\varphi - 2, \varphi - 1]$ 选出青色的点，投到下面的直线上，相邻两点只相距 $\varphi$ 或 $\varphi^2$；闭窗口的两个端点上各有一个格点（品红），所以原点左边多出一段长为 $1$ 的间隔。绿圈是自然数的黄金展开 $\beta(n)$，Lean 已验证它们都在这个窗口里。
+:::
+
 ### 二、 哲学诠释模型（`MODEL`）：什么是“同一个灵魂”？什么是“单次生命与遗忘”？ {#sec-coda-trureturing-soul-vs-lifetime}
 
 借用上述 `trureturing` 切投模型集与编码线程的数学结构，我们可以为第 29 章与上一节关于“灵魂内禀倾角”与“遗忘清空表层记事”的哲学思考建立一套清晰的几何诠释模型（`MODEL`）：
@@ -152,6 +172,10 @@
    - 与此同时，在紧致阿贝尔群与环面动力学层面，`trureturing` 的**环面闭子群轨道均匀分布定理** [`TorusOrbitEquidistribution.result`](lean:D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result) 严格证明：对有限维环面 $I \to \mathrm{Circle}$ 中的任意元素 $g$，记 $G = \overline{\langle g\rangle}$ 为由 $g$ 生成的循环子群的紧致拓扑闭包、$\mu$ 为 $G$ 上的归一化哈尔（Haar）概率测度，则对 $G$ 上任意连续复值可观测量 $f \in C(G, \mathbb{C})$，轨道遍历平均 $\frac{1}{N}\sum_{n=0}^{N-1} f(g^{n+1})$ 当 $N \to \infty$ 时严格收敛于哈尔测度积分 $\int_G f\,d\mu$（当 $g$ 的频率分量在 $\mathbb{Z}$ 上与 $1$ 线性无关时，$G$ 即为整个环面；此外，[`golden_ergodic_bridge`](lean:D5/S0/Tower/ErgodicBridge/Golden.golden_ergodic_bridge) 证明对任意 $Q \ge 2$ 及名称包壳 `goldenNameHull Q` 中的实数 $x$，其跨层级幸存量下极限 $\liminf_{\mathrm{level}\to\infty} \operatorname{goldenSurvivor}(\mathrm{level}, x)$ 必等于某个黄金单位幸存态的轨道下值）。在我们的哲学诠释（`MODEL`）中，这象征着不同观察者虽拥有各自的局部视角，却在遍历平均下共享统一的宏观统计规律。
 2. **“单次有限生命与遗忘初始化”（`MODEL`）$\leftrightarrow$ 齐肯多夫高阶层级截断与有理扫描阶数 $k$ 的重置**：
    在哲学模型中，单次有限生命好比只将编码线程 $\operatorname{zeckendorfRealThread}(x)(N)$ 或斐波那契有理斜率 $F_{k+1}/F_k$ 推进到有限阶数 $N, k \le K_{\max}$。随着历史约束累积，相容空间趋于饱和；而**诞生与遗忘初始化**则被诠释为**截断高阶齐肯多夫层级并重置扫描阶数 $k$**——抹去上一轮的高阶表层细节（名词 `量 liàng`），但保持内部窗口相位锚点 $u \in E_\perp$ 与黄金倾角 $\varphi$（动词 `量 liáng` 的内禀参数）不变。
+
+::: {.viz src="golden-cut-observer" preset="phason" height="500"}
+**挪动窗口。** 窗口平移到 $u = +0.3$：贴着边的点（品红）稍一挪动就会翻转，离边远的点留在原地；最深的那个点离边约 $0.46$，窗口要挪过这么远才碰得到它。在书页上播放，可以看到每次有点进出，下面那排砖里相邻的一长一短就对调一次。
+:::
 
 ### 三、 接受窗内部裕度与空间吸引盆地的几何诠释 {#sec-coda-trureturing-rhombic-triacontahedron-empire}
 
@@ -180,6 +204,14 @@
 3. **非局域交集窗约束与空间吸引盆地的几何类比（`MODEL`）**：
    对照 [@rem-coda-quasicrystal-empire-literature] 第 2 条，在我们的哲学模型（`MODEL`）中，局部高对称构型通过收紧容许相位集对远方格点施加的非局域窗口约束性质，恰可类比为历史遗迹在相容空间中形成的吸引盆地。
 
+::: {.viz src="golden-cut-observer" preset="window" height="500"}
+**深处的点。** 菱形三十面体：$30$ 个菱形面、$60$ 条棱、$32$ 个顶点，青色圆点是 $12$ 个五重顶点。琥珀色的点在窗口深处，琥珀色的球以它到边界的距离 $d_\partial$ 为半径，品红是离它最近的面：幅度小于 $d_\partial$ 的扰动推不出窗口。这个多面体是正二十面体准晶的接受窗，属文献结果；把深处的点读作“遗迹”是诠释模型（`MODEL`）。
+:::
+
+::: {.viz src="golden-cut-observer" preset="empire" height="500"}
+**一小片定住远处的点。** 固定中间 $|x| \le 4$ 的一小片（虚线之间）之后，窗口只能在一小段范围里平移；较深的青色带是这些窗口位置的公共部分。落在这条带里的点（带圈）怎么挪都在，因此被这一小片定住，哪怕离得很远；品红的点仍未定。这是康威“帝国”在一维黄金切投里的对应物（文献结果的示意）。
+:::
+
 ### 四、 卡西尼恒等式 $(-1)^{n+1}$ 接缝与环面观测窗有界间隙回归 {#sec-coda-trureturing-cassini-torus-return}
 
 最后，让我们用 `trureturing` 中已验证的**斐波那契—卡西尼恒等式**与**环面观测窗有界回归定理**（`LEAN ✓`），精确刻画离散序列的交替接缝与回归性质，并说明其与“跨轮次似曾相识”（`MODEL`）的对应关系：
@@ -204,6 +236,14 @@
 3. **跨轮次回归与“似曾相识”的几何诠释（`MODEL`）**：
    将上述两条严格定理放回我们的哲学模型（`MODEL`）：$(-1)^{k+1}$ 的正负交替意味着不同阶数的有理逼近从正反两侧交替贴近无理方向（而不重合于同一有理切片），而只要某个目标区域对应着连续观测像集中的非空开窗口 $(u_1, u_2)$（或内部窗口中具有正安全裕度 $d_{\partial} > 0$ 的邻域），轨道便以有界步数间隙 $M$ 与严格正的最终访问比例反复重返该窗口——这为“同一个灵魂一轮又一轮走过自己熟悉的地方，并在擦肩而过时触发 $\cos\delta\theta \to 1$ 的似曾相识共振”提供了严谨的数学灵感源泉。
 
+::: {.viz src="golden-cut-observer" preset="cassini" height="500"}
+**面积永远是 $\pm 1$。** 还是那张格点图。$\varphi$ 的幂 $\varphi^2, \varphi^3, \dots$ 一个在横轴上方（青色）、一个在下方（品红），落在双曲线 $x \cdot x' = \pm 1$ 上；每个幂与原点围成的矩形越来越扁长，面积却恰好是 $1$。填色的是 $\varphi^5 = 3 + 5\varphi$：$F_4 F_6 - F_5^2 = 3 \cdot 8 - 5^2 = -1$。两条双曲线之间除了原点没有别的格点。
+:::
+
+::: {.viz src="golden-cut-observer" preset="returns" height="500"}
+**以有界的间隔回到窗口。** 圆上的点每一步转过黄金角，它的高度 $\cos 2\pi n\varphi$ 画在右边。琥珀色的带子是观测窗 $(0.2, 0.8)$，青色是落在带子里的步：前 $89$ 步里进入 $21$ 次，相邻两次最多相隔 $7$ 步（品红）。这是有限步的数值演示；对一切 $n$ 都存在这样的上界，是 Lean 验证的定理。
+:::
+
 ::: {.theorem #thm-coda-golden-cut-observer-cassini title="黄金切投模型集、卡西尼 ±1 范数恒等式、齐肯多夫实线程与环面观测窗有界回归定理" lean="D5/S1/Scale/MinkowskiModelSet.minkowski_model_set_spec, D5/S1/Deficit/ModelSet/GoldenCutAndProject.golden_model_set_subset_cut_and_project, D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm, D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes, D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective, D5/S3/Fourier/GoldenModelSetDelone.norm_separation, D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result, D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result"}
 在 `trureturing` 的黄金切投模型集、齐肯多夫编码与环面渐近分析体系中，以下八项核心性质已由 Lean 4 内核验证并冻结：
 
@@ -221,6 +261,10 @@
 
 ::: proof
 第 1 部分由 `embedding_injective` 直接导出 `minkowskiEmbedding` 的单射性与模型集特征化，并利用 `betaContraction_mem_window`（即自然数黄金展开的共轭坐标落在 $\operatorname{goldenWindow}$ 内）确立 $\operatorname{embedding} '' \operatorname{goldenModelSet} \subseteq \operatorname{goldenCutAndProjectSet}$。第 2 部分由 $\varphi^{n+1} = F_n + F_{n+1}\varphi$（`golden_phi_pow_eq_fib_pair`）与范数乘性 $\operatorname{norm}(\varphi^{n+1}) = (-1)^{n+1}$ 化简得到卡西尼恒等式。第 3 部分对二进制列表作归纳验证自动机接受条件与 `NoAdjacentOnes` 的等价性，并对满足 $a > b \ge 0$ 的两个非负实数利用 $\varphi^N(a - b) \to +\infty$ 最终超过 $2$ 导出存在层级 $N$ 使 $\lfloor\varphi^N a\rfloor_+ \neq \lfloor\varphi^N b\rfloor_+$，从而证明 `zeckendorfRealThread` 在 `NNReal` 上单射。第 4 部分利用非零黄金整数范数 $|\operatorname{norm}(u - v)| \ge 1$ 导出互反分离不等式，并由特征标几何级数有界估计与紧致群 $G$ 的有限开覆盖导出哈尔均匀分布与有界间隙回归。完整证明由 Lean 内核检查。
+:::
+
+::: {.viz src="golden-cut-observer" height="640"}
+**交互实验室 `ORTHO//CUT`**：本节的四个场景。切投：上下拖动窗口，看贴边的点翻转、深处的点不动，再固定中间一小片；卡西尼：$\varphi$ 的幂与面积为 $\pm 1$ 的矩形；回归：改变观测窗的位置与宽度，等待变长但仍有上界；接受窗：把点从菱形三十面体的中心推向边界，$d_\partial$ 归零时它翻出窗口。绿色依据框对应 Lean 已验证的定理；三十面体与“帝国”是文献结果，灵魂与遗迹的说法是诠释模型（`MODEL`）。
 :::
 
 ### 五、 `trureturing` 形式定理、正交几何与灵魂—遗迹吸引子诠释模型（`MODEL`）对照表 {#sec-coda-trureturing-soul-ruin-table}

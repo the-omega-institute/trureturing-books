@@ -104,6 +104,10 @@ $$
 在假设 `hs : 1 < s.re` 下，由 [@prop-riemann-zeta-dirichlet-sum] 知左端等于 $\operatorname{classicalZeta}(s)$，再由 [@thm-riemann-zeta-euler-product] 的对称形式将 $\operatorname{classicalZeta}(s)$ 替换为右端的素数无穷乘积即得。完整证明由 Lean 内核检查。
 :::
 
+::: {.viz src="sphere-escape" preset="euclid" height="500"}
+**乘起来加一。** 清单里每多一个素数，就把它们全部乘起来再加一得到 $Q$。每只钟有 $p$ 个刻度，指针指着 $Q$ 除以 $p$ 的余数：全都指着 $1$，没有一只指着红色的 $0$，所以整除 $Q$ 的素数一定不在清单里（欧几里得的论证，文献结果）。全屏打开后，下方的图给出有限个素数的欧拉乘积离 $\zeta(2)$ 还差多少（[@thm-riemann-zeta-euler-product] 取 $s = 2$）。
+:::
+
 ## 22.3 有限素数筛的“多面体截断余项”与相位共振手算 {#sec-ch22-3}
 
 让我们把复变量写成 $s = \sigma + it$（其中实部 $\sigma = \operatorname{Re}(s)$ 控制振幅衰减，虚部 $t = \operatorname{Im}(s)$ 控制旋转角频率），看看 [@cor-dirichlet-sum-eq-euler-product] 中的每一个素数因子在几何上究竟在做什么：

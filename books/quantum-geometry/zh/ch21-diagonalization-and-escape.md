@@ -180,6 +180,10 @@ $$
 
 > 完备的目录必自裂其壳；凡想在球内穷尽一切者，必被对角线顺着法向顶出球外。
 
+::: {.viz src="sphere-escape" preset="diagonal" height="500"}
+**对角线逃出清单。** 逐行读出对角线上的那一位并翻转，拼成品红色的 $d$；$d$ 与第 $k$ 行在第 $k$ 位不同，所以不在清单里（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode) 取 $\operatorname{latent} = \mathrm{id}$、$\operatorname{twist} = \neg$）。右侧的点阵是全部 $2^N$ 个串，与 $d$ 相容的候选每步减半。
+:::
+
 ## 21.3 割圆多面体、泰勒截断裂缝与开口螺旋投影 {#sec-ch21-3}
 
 既然没有任何固定维度的形式球壳能够一次性封死全部真理，让我们回过头来重新审视物理学与计算工程里的“球”本身。
@@ -376,6 +380,10 @@ $$
 
 把四种残差尺度并排放：正 $n$ 边形的弓高为 $1 - \cos\frac{\pi}{n} = 2\sin^2\frac{\pi}{2n}$（[@ex-liu-hui-polygon-sagitta]）；$N + 1$ 格指针的不可恢复误差至少是正 $(m+2)$ 边形弓高的一半（[@thm-finite-record-cosine-obstruction]）；$N$ 个顶点的内接多面体覆盖下界见 [@ex-cap-covering-gate-count]；前 $N$ 项余弦多项式的余项受 [@lem-exp-tail-le] 的阶乘界 $\frac{|\theta|^{2N}}{(2N)!}e^{|\theta|}$ 控制（数值对照见 [@ex-taylor-remainder-three-bounds]）。它们都随资源增长而趋于零，而对有限记录信道与有限算例均呈严格正残差。序曲里那句“我们以为我们得到了一个球，但实际只是近似得到一个球”，在这四个场合各有一个可以核对的数。
 
+::: {.viz src="sphere-escape" preset="liuhui" height="500"}
+**刘徽割圆。** 边数从 $6$ 翻倍到 $192$，多边形越来越像圆；右侧的放大镜始终把一条边与圆弧之间的缝放大到看得见。这条缝 $1 - \cos\frac{\pi}{n}$ 每翻一倍缩到约四分之一，对任何有限的 $n$ 都大于零（[@ex-liu-hui-polygon-sagitta]）。
+:::
+
 ## 21.4 毛球定理、笛卡尔 $720^\circ$ 角亏与 Adams 除法代数球面 {#sec-ch21-4}
 
 甚至哪怕我们退一步，不去跨维度构造哥德尔对角线，而是老老实实待在三维空间里那颗光滑的二维单比特布洛赫球面 $S^2$ 上，拓扑学本身也在球皮表面埋下了一颗无法抚平的奇点——这就是大名鼎鼎的**毛球定理（Hairy Ball Theorem）**，以及它在离散多面体上的孪生兄弟**笛卡尔总角亏定理**与高维球面上的 **Adams 可平行化定理**。
@@ -410,7 +418,7 @@ $$
 把上述微分拓扑文献注记（[@rem-hairy-ball-adams-literature]）与本章经内核验证的相对语义对角线拓扑安顿推论（[@cor-complete-diagonal-topological-settlement]）对照阅读，可以看到同一条结构脉络：**球内的奇点与不完备，唯有借球外之球方能安顿。**
 
 ::: {.viz src="sphere-escape" height="640"}
-交互可视化（康托尔对角线、Dottie 余弦迭代与欧几里得素数逃逸在同一条步进轴上联动）：调节枚举维数 $N = 3, \dots, 8$、清单种子 $S$ 与余弦迭代初值 $x_0$，账本逐步读出对角元 $f(k, k)$ 并翻转为 $d(k) = \neg f(k, k)$，每一步都留下一个见证：第 $k$ 行在第 $k$ 位与 $d$ 不同；末行给出完整的逃逸向量 $d$ 与有限步残差 $\lvert \cos x_N - x_N \rvert > 0$。舞台可在三种模式间切换：清单各行画在圆上、$d$ 画在圆外并标出汉明距离；余弦蛛网 $x_{k+1} = \cos x_k \to x^* \approx 0.739085$；素数螺线、$p_1 \cdots p_k + 1$ 不在清单中的最小素因子，以及始终小于 $\pi^2/6$（见[第二十二章](ch22-primes-euler-products-and-zeros.md) [@ex-xi-mirror-values]）的有限欧拉积 $\prod_p (1 - p^{-2})^{-1}$。右栏的 $N \times N$ 对角矩阵可逐格点击翻转，$d$ 始终留在清单之外。这正是 [@def-relative-semantic-diagonal] 取 $\mathrm{Address} = \mathrm{Coordinate} = \{1, \dots, N\}$、$\operatorname{latent} = \mathrm{id}$、$\operatorname{twist} = \neg$ 的情形，对角线与每一行都不同由 [`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode) 保证；依据面板同时列出 [@thm-complete-diagonal-not-continuous]、[@cor-complete-diagonal-topological-settlement] 与第二十四章的两条不动点定理。
+交互实验室 `ORTHO//ESCAPE`：四个场景画同一件事——有限步之后总有东西留在外面。对角线翻出的串不在清单里（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)）；内接多边形与圆之间的缝永不为零；余弦迭代永远差一点；有限个素数乘起来加一，素因子都在清单之外。舞台下方的两张图画出“留在外面的量”随步数的变化。把四个场景并排是本书的读法（`MODEL`），它们在数学上是四个不同的事实；依据面板同时列出 [@thm-complete-diagonal-not-continuous]、[@cor-complete-diagonal-topological-settlement] 与第二十四章的两条不动点定理。
 :::
 
 那么，在这座无穷无尽的升维阶梯上，算术世界本身的那些“互不相干的正交坐标轴”究竟长什么模样？当我们用“两两比较、顺序无关”的几何眼光去打量全体自然数时，为什么每一个素数 $p = 2, 3, 5, 7, \dots$ 都自动站成了一根独立的正交基准轴？让我们推开[第二十二章](ch22-primes-euler-products-and-zeros.md)的大门。
