@@ -101,6 +101,9 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `layered-network-cut` | 把边界上的一段切下来，割要从网络里面穿过；区间翻倍，割只多两三条腿 | `one` `four` `grow` `two` |
 
 `layered-network-cut` 与 `eth-horizon-crossover` 的 `bridge`、`narrow` 分工：那两张讲宽度三桥图的流矩阵与三道割，本页讲 32 格开边界二元 MERA 式层级网络里，把底边一段区间切下来要割断几条键。舞台上的网络是示意模型（`MODEL`）；最小割由增广路实算，527 段区间都不超过 $2\log_2 L + 1$（`NUM`）；“跨割的秩 ≤ χᵏ”在一般网络上、RT 公式与 Swingle 的 MERA 类比标 `ARGUED`；绿色框只给第十九章用 `lean=` 引用的 `QMaxFlow_le_QMinCut`，并写明层级网络不在它的范围内。这一页的琥珀是选中的区间 A、B，品红是最小割断的键（带短横），青色是割内侧的张量与键，其余的键是中性灰。
+| `complexity-growth` | 熵几层就封顶，门数还一层层往上长；电路怎么排，层数都压不到 ⌊N/(κ+1)⌋ + 1 以下 | `saturate` `ceiling` `cv` `floor` `eight` `eleven` |
+
+`complexity-growth` 有两个场景。“增长”是 8 个量子比特、固定种子哈尔随机两比特门的砖墙电路：半链熵（青色）由 16 × 16 约化密度矩阵的本征值逐层实算、门数与跨割门数按门表数出（`NUM`）；熵不超过 4 比特与每道跨割门至多加 2 比特（灰色台阶）、exp(O(N)) 复杂度天花板与热化后预期线性增长按第二十章文献注记标 `ARGUED`；品红的“预期复杂度” min(门数, 2^N) 与天花板的常数是示意模型（`MODEL`），页面不声称算出了复杂度；把品红上升段读成体积的 CV 标 `OPEN`（舞台上的红字与依据框用同一个 `--warn`）。“深度”是第二十章的开放边界链：青色的砖是 N + 1 道门按最早可放的层排好，品红三角是折返点 S，白线是 minDepth(N, κ)，灰色虚线是旧公式；绿色框只给本章用 `lean=` 引用的 `OpenIntegrableCircuitMinDepth.result` 与 `OpenIntegrableCircuitDepthRefutation.result`，CNOT 下界与偶圈长度不上页面。路线图候选“最小深度的下界”做成 `floor`，“增长停在哪里是开放的”改为 `ceiling`（天花板是文献结果）与 `cv`（开放的是 CV 读法），并按正文的两个反例加了 `eight` 与 `eleven`。
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
@@ -279,6 +282,12 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第十九章 | 纠缠层级一节首段（“跨越接口的算子秩……随内部腿维数的乘积而增长”）之后、插图之前 | `layered-network-cut` · `one` |
 | 第十九章 | 纠缠层级一节插图解读段（MERA 瓶颈、一般网络最大流不一定等于最小割）之后 | `layered-network-cut` · `four` |
 | 第十九章 | 文献注记 `rem-ryu-takayanagi-literature` 之后、章末收束段之前 | `layered-network-cut` · `grow`、`two`，随后完整实验室 |
+| 第二十章 | 定理 `thm-open-circuit-min-depth` 的证明之后、“请严格注意”一段之前 | `complexity-growth` · `floor` |
+| 第二十章 | 例 `ex-open-circuit-depths` 之后、§黑洞内部与复杂度—体积猜想之前 | `complexity-growth` · `eight` |
+| 第二十章 | 引理 `lemma-open-circuit-depth-refutation` 的证明之后、“必须严格声明”一段之前 | `complexity-growth` · `eleven` |
+| 第二十章 | 文献注记 `rem-complexity-growth-literature` 之后、猜想 `conj-complexity-equals-volume` 之前 | `complexity-growth` · `saturate`、`ceiling` |
+| 第二十章 | 猜想 `conj-complexity-equals-volume` 之后、§纠缠桥与 ER=EPR 之前 | `complexity-growth` · `cv` |
+| 第二十章 | 例 `ex-cnot-and-cycle-bounds` 之后、P/NP 的提问之前 | `complexity-growth` 完整实验室 |
 
 ## 增删或修改一张卡之后
 
