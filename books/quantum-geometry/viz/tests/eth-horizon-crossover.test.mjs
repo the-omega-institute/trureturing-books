@@ -16,6 +16,8 @@ const page = await T.goto(BOOK, ID, '?lang=zh');
 await settle(page, 300);
 const D = (fn, arg) => page.evaluate(fn, arg);
 const state = async () => { await settle(page); return D(() => window.HORIZON_DEBUG.state); };
+// playback advances on animation frames, and a busy runner delivers them late: wait until the page reports the move, not for a fixed time
+const until = (fn) => page.waitForFunction(fn, null, { timeout: 30000 }).catch(() => {});
 const seek = async (t) => { await D((v) => window.HORIZON_DEBUG.seek(v), t); return state(); };
 const pick = async (id) => { await page.click(`[data-preset="${id}"]`); await settle(page, 60); };
 const setRange = async (id, v) => { await D(([i, val]) => { const el = document.getElementById(i); el.value = String(val); el.dispatchEvent(new Event('input', { bubbles: true })); }, [id, v]); await settle(page); };
@@ -120,7 +122,7 @@ check('clicking the stage sets the threshold there', near(s.theta, 0.3, 0.01), S
 /* ---------- keyboard, language, labels ---------- */
 await page.click('body', { position: { x: 5, y: 5 } });
 for (const [key, sc] of [['1', 'rates'], ['2', 'cut'], ['3', 'modes']]) { await page.keyboard.press(key); check(`key ${key} switches to the scene ${sc}`, (await state()).scene === sc); }
-await page.keyboard.press('1'); await page.keyboard.press('Home'); await page.keyboard.press('Space'); await page.waitForTimeout(500); s = await state();
+await page.keyboard.press('1'); await page.keyboard.press('Home'); await page.keyboard.press('Space'); await until(() => { const d = window.HORIZON_DEBUG.state; return d.playing && d.t > 0; }); s = await state();
 check('Space plays the scale', s.playing && s.t > 0); await page.keyboard.press('Space'); check('Space pauses', !(await state()).playing);
 check('the schematic curve is labelled as a model and the preprints as unaudited', await D(() => { const m = document.querySelector('.lean.model[data-scenes="rates"]'); return !!m && /审计/.test(m.textContent) && /不是定理/.test(m.textContent) && !!document.querySelector('.lean.open'); }));
 await page.click('[data-lang-set="en"]'); await settle(page, 150);

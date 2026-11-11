@@ -22,6 +22,8 @@ const page = await T.goto(BOOK, ID, '?lang=zh');
 await settle(page, 300);
 const D = (fn, arg) => page.evaluate(fn, arg);
 const state = async () => { await settle(page); return D(() => window.ATTRACTOR_DEBUG.state); };
+// playback advances on animation frames, and a busy runner delivers them late: wait until the page reports the move, not for a fixed time
+const until = (fn) => page.waitForFunction(fn, null, { timeout: 30000 }).catch(() => {});
 const seek = async (t) => { await D((v) => window.ATTRACTOR_DEBUG.seek(v), t); return state(); };
 const pick = async (id) => { await page.click(`[data-preset="${id}"]`); await settle(page, 60); };
 
@@ -104,7 +106,7 @@ check('dragging the stage turns the attractor (the picture changes, the card sta
 await page.click('body', { position: { x: 5, y: 5 } });
 for (const [key, sc] of [['2', 'shrink'], ['3', 'dimension'], ['1', 'rounds']]) { await page.keyboard.press(key); check(`key ${key} switches to the scene ${sc}`, (await state()).scene === sc); }
 await page.keyboard.press('Home'); await page.keyboard.press('ArrowRight'); check('Home and → step the rail by one unit of time', near((await state()).t, 1));
-await page.keyboard.press('Space'); await page.waitForTimeout(500); s = await state(); check('Space plays', s.playing && s.t > 1); await page.keyboard.press('Space'); check('Space pauses', !(await state()).playing);
+await page.keyboard.press('Space'); await until(() => { const d = window.ATTRACTOR_DEBUG.state; return d.playing && d.t > 1; }); s = await state(); check('Space plays', s.playing && s.t > 1); await page.keyboard.press('Space'); check('Space pauses', !(await state()).playing);
 check('the page cites no Lean theorem and says so', (await D(() => document.querySelectorAll('a[data-lean-gid]').length)) === 0 && /不引用任何 Lean 定理/.test(await page.textContent('#evidence')));
 await page.click('[data-lang-set="en"]'); await settle(page, 150);
 for (const sc of ['rounds', 'shrink', 'dimension']) { await page.click(`#sceneChips [data-scene="${sc}"]`); await settle(page, 60); const left = await cjkLeftovers(page); check(`English: no Chinese left in the scene ${sc} after free play`, left.length === 0, left.slice(0, 4).join(' | ')); }

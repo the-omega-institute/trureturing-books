@@ -36,6 +36,8 @@ await stageFirstChecks(T, BOOK, ID);
 const page = await T.goto(BOOK, ID, '?lang=zh');
 await page.waitForTimeout(300);
 const state = async () => { await settle(page); return page.evaluate(() => window.QUBIT_DEBUG.state); };
+// playback advances on animation frames, and a busy runner delivers them late: wait until the page reports the move, not for a fixed time
+const until = (fn) => page.waitForFunction(fn, null, { timeout: 30000 }).catch(() => {});
 const pick = async (id) => { await page.click(`[data-preset="${id}"]`); await settle(page); };   // a card glides B to its start before it applies; settle lands that glide instead of waiting for it
 const end = async () => { await page.evaluate(() => { const d = window.QUBIT_DEBUG; d.seek(d.state.n); }); return state(); };
 const setRange = async (id, v) => { await page.evaluate(([i, val]) => { const el = document.getElementById(i); el.value = String(val); el.dispatchEvent(new Event('input', { bubbles: true })); }, [id, v]); await page.waitForTimeout(40); };
@@ -121,7 +123,7 @@ await page.locator('body').click({ position: { x: 5, y: 5 } });
 await page.keyboard.press('ArrowRight'); check('→ steps one gate forward', close((await state()).tau, 3));
 await page.keyboard.press('ArrowLeft'); await page.keyboard.press('ArrowLeft'); check('← steps back', close((await state()).tau, 1));
 await page.keyboard.press('Home'); check('Home returns to ψ₀', close((await state()).tau, 0));
-await page.keyboard.press('Space'); await page.waitForTimeout(600); s = await state();
+await page.keyboard.press('Space'); await until(() => { const d = window.QUBIT_DEBUG.state; return d.playing && d.tau > 0; }); s = await state();
 check('Space plays', s.playing && s.tau > 0);
 await page.keyboard.press('Space'); const paused = await state(); await page.waitForTimeout(200);
 check('Space pauses', !paused.playing && close((await state()).tau, paused.tau));

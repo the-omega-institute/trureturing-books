@@ -16,6 +16,8 @@ const page = await T.goto(BOOK, ID, '?lang=zh');
 await settle(page, 300);
 const D = (fn, arg) => page.evaluate(fn, arg);
 const state = async () => { await settle(page); return D(() => window.VORTEX_DEBUG.state); };
+// playback advances on animation frames, and a busy runner delivers them late: wait until the page reports the move, not for a fixed time
+const until = (fn) => page.waitForFunction(fn, null, { timeout: 30000 }).catch(() => {});
 const seek = async (t) => { await D((v) => window.VORTEX_DEBUG.seek(v), t); return state(); };
 const pick = async (id) => { await page.click(`[data-preset="${id}"]`); await settle(page, 60); };
 const setRange = async (id, v) => { await D(([i, val]) => { const el = document.getElementById(i); el.value = String(val); el.dispatchEvent(new Event('input', { bubbles: true })); }, [id, v]); await settle(page); };
@@ -100,7 +102,7 @@ await page.click('body', { position: { x: 5, y: 5 } });
 for (const [key, sc] of [['1', 'lamb'], ['2', 'tube'], ['3', 'closure']]) { await page.keyboard.press(key); check(`key ${key} switches to the scene ${sc}`, (await state()).scene === sc); }
 await page.keyboard.press('Home'); await page.keyboard.press('ArrowRight'); s = await state();
 check('Home and → step the rail', near(s.t, 0.1, 1e-9));
-await page.keyboard.press('Space'); await page.waitForTimeout(600); s = await state(); check('Space plays', s.playing && s.t > 0.1);
+await page.keyboard.press('Space'); await until(() => { const d = window.VORTEX_DEBUG.state; return d.playing && d.t > 0.1; }); s = await state(); check('Space plays', s.playing && s.t > 0.1);
 await page.keyboard.press('Space'); check('Space pauses', !(await state()).playing);
 await page.click('#rew'); check('⏮ returns to the start', (await state()).t === 0);
 await page.click('[data-lang-set="en"]'); await settle(page, 150);

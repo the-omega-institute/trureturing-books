@@ -17,6 +17,8 @@ await stageFirstChecks(T, BOOK, ID);
 const page = await T.goto(BOOK, ID, '?lang=zh');
 await settle(page, 300);
 const state = async () => { await settle(page); return page.evaluate(() => window.CAUSAL_DEBUG.state); };
+// playback advances on animation frames, and a busy runner delivers them late: wait until the page reports the move, not for a fixed time
+const until = (fn) => page.waitForFunction(fn, null, { timeout: 30000 }).catch(() => {});
 const seek = async (t) => { await page.evaluate((v) => window.CAUSAL_DEBUG.seek(v), t); return state(); };
 const pick = async (id) => { await page.click(`[data-preset="${id}"]`); await settle(page, 60); };
 const scene = async (sc) => { await page.click(`#sceneChips [data-scene="${sc}"]`); await settle(page, 40); };
@@ -120,7 +122,7 @@ check('only the controls and evidence of the current scene are shown', vis.every
 await scene('window'); await page.locator('body').click({ position: { x: 5, y: 5 } });
 s = await seek(30); await page.keyboard.press('ArrowRight'); check('→ turns C by one 15° step', close((await state()).t, 45));
 await page.keyboard.press('End'); check('End completes the turn', close((await state()).t, 360));
-await page.keyboard.press('Home'); await page.keyboard.press('Space'); await page.waitForTimeout(900); s = await state();
+await page.keyboard.press('Home'); await page.keyboard.press('Space'); await until(() => { const d = window.CAUSAL_DEBUG.state; return d.playing && d.t > 0; }); s = await state();
 check('Space plays', s.playing && s.t > 0);
 await page.keyboard.press('Space'); check('Space pauses', !(await state()).playing);
 check('the pills follow the scene', (await page.textContent('#pillScene strong')) === 'WINDOW');

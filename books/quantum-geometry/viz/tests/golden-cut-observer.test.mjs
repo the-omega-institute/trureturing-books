@@ -23,6 +23,8 @@ const page = await T.goto(BOOK, ID, '?lang=zh');
 await settle(page, 300);
 const D = (fn, arg) => page.evaluate(fn, arg);
 const state = async () => { await settle(page); return D(() => window.CUT_DEBUG.state); };
+// playback advances on animation frames, and a busy runner delivers them late: wait until the page reports the move, not for a fixed time
+const until = (fn) => page.waitForFunction(fn, null, { timeout: 30000 }).catch(() => {});
 const seek = async (t) => { await D((v) => window.CUT_DEBUG.seek(v), t); return state(); };
 const pick = async (id) => { await page.click(`[data-preset="${id}"]`); await settle(page, 60); };
 const setRange = async (id, v) => { await page.$eval(`#${id}`, (el, val) => { el.value = String(val); el.dispatchEvent(new Event('input', { bubbles: true })); }, v); await settle(page, 30); };
@@ -199,7 +201,7 @@ check('dragging the stage turns the triacontahedron (the picture changes, the po
 await page.click('body', { position: { x: 5, y: 5 } });
 for (const [k, sc] of [['2', 'cassini'], ['3', 'returns'], ['4', 'window3'], ['1', 'cut']]) { await page.keyboard.press(k); check(`key ${k} switches to the scene ${sc}`, (await state()).scene === sc); }
 await page.keyboard.press('Home'); await page.keyboard.press('ArrowRight'); check('Home and → step the rail (u from −0.5 to −0.45)', near((await state()).u, -0.45));
-await page.keyboard.press('Space'); await page.waitForTimeout(500); s = await state(); check('Space plays', s.playing && s.u > -0.45); await page.keyboard.press('Space'); check('Space pauses', !(await state()).playing);
+await page.keyboard.press('Space'); await until(() => { const d = window.CUT_DEBUG.state; return d.playing && d.u > -0.45; }); s = await state(); check('Space plays', s.playing && s.u > -0.45); await page.keyboard.press('Space'); check('Space pauses', !(await state()).playing);
 const shown = async () => D(() => [...document.querySelectorAll('#readouts a[data-lean-gid]')].filter((a) => !a.closest('[hidden]')).map((a) => a.dataset.leanGid.split('.').pop()).join());
 const perScene = {}; for (const sc of ['cut', 'cassini', 'returns', 'window3']) { await page.click(`#sceneChips [data-scene="${sc}"]`); await settle(page, 40); perScene[sc] = await shown(); }
 check('each scene shows the theorem it rests on beside the readouts, and the window scene, which rests on the literature, shows none', perScene.cut === 'minkowski_model_set_spec,golden_model_set_subset_cut_and_project' && perScene.cassini === 'fib_cassini_from_golden_norm' && perScene.returns === 'result' && perScene.window3 === '', JSON.stringify(perScene));

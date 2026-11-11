@@ -18,6 +18,8 @@ await stageFirstChecks(T, BOOK, ID);
 const page = await T.goto(BOOK, ID, '?lang=zh');
 await settle(page, 300);
 const state = async () => { await settle(page); return page.evaluate(() => window.PYTHAGORAS_DEBUG.state); };
+// playback advances on animation frames, and a busy runner delivers them late: wait until the page reports the move, not for a fixed time
+const until = (fn) => page.waitForFunction(fn, null, { timeout: 30000 }).catch(() => {});
 const seek = async (t) => { await page.evaluate((v) => window.PYTHAGORAS_DEBUG.seek(v), t); return state(); };
 const pick = async (id) => { await page.click(`[data-preset="${id}"]`); await settle(page, 60); };
 const setRange = async (id, v) => { await page.evaluate(([i, val]) => { const el = document.getElementById(i); el.value = String(val); el.dispatchEvent(new Event('input', { bubbles: true })); }, [id, v]); await settle(page); };
@@ -112,7 +114,7 @@ check('only the controls and evidence of the current scene are shown', vis.every
 s = await seek(2); await page.keyboard.press('ArrowRight'); s = await state();
 check('→ moves to the next prime', s.step === 3 && s.p === 11);
 await page.keyboard.press('End'); check('End reaches p = 97', (await state()).p === 97);
-await page.keyboard.press('Home'); await page.keyboard.press('Space'); await page.waitForTimeout(900); s = await state();
+await page.keyboard.press('Home'); await page.keyboard.press('Space'); await until(() => { const d = window.PYTHAGORAS_DEBUG.state; return d.playing && d.t > 0; }); s = await state();
 check('Space plays through the primes', s.playing && s.t > 0);
 await page.keyboard.press('Space'); check('Space pauses', !(await state()).playing);
 check('the rail label names the prime', /^p \d+/.test((await page.textContent('#tau')).trim()));

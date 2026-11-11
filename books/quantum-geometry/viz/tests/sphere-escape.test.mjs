@@ -14,6 +14,8 @@ await stageFirstChecks(T, BOOK, ID);
 const page = await T.goto(BOOK, ID, '?lang=zh');
 await settle(page, 300);
 const state = async () => { await settle(page); return page.evaluate(() => window.ESCAPE_DEBUG.state); };
+// playback advances on animation frames, and a busy runner delivers them late: wait until the page reports the move, not for a fixed time
+const until = (fn) => page.waitForFunction(fn, null, { timeout: 30000 }).catch(() => {});
 const seek = async (t) => { await page.evaluate((v) => window.ESCAPE_DEBUG.seek(v), t); return state(); };
 const pick = async (id) => { await page.click(`[data-preset="${id}"]`); await settle(page, 60); };
 const scene = async (sc) => { await page.click(`#sceneChips [data-scene="${sc}"]`); await settle(page, 40); };
@@ -139,7 +141,7 @@ await page.locator('body').click({ position: { x: 5, y: 5 } });   // keys act on
 await page.keyboard.press('ArrowRight'); check('→ adds one prime', (await state()).step === 4);
 await page.keyboard.press('ArrowLeft'); await page.keyboard.press('Home'); check('Home goes back to step 0', (await state()).step === 0);
 await page.keyboard.press('End'); check('End goes to the last step', (await state()).step === 12);
-await page.keyboard.press('Home'); await page.keyboard.press('Space'); await page.waitForTimeout(900); s = await state();
+await page.keyboard.press('Home'); await page.keyboard.press('Space'); await until(() => { const d = window.ESCAPE_DEBUG.state; return d.playing && d.t > 0; }); s = await state();
 check('Space plays the scene forward', s.playing && s.t > 0);
 await page.keyboard.press('Space'); check('Space pauses', !(await state()).playing);
 check('the pills follow the scene', (await page.textContent('#pillScene strong')) === 'PRIMES');
