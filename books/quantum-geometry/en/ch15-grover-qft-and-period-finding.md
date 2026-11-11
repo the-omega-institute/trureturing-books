@@ -9,7 +9,7 @@ When stripped of circuit notation, the two flagship families of quantum algorith
 - **Grover search composes two reflections into an invariant-plane rotation**: Inside an isotropic $l$-dimensional search space, the prepared state and the target projection span a common two-dimensional block plane; reflecting first across the target subspace ("one orthogonal step") and then across the prepared subspace ("two orthogonal steps") rotates the state vector by $2\theta$ straight toward the target!
 - **QFT and period finding harness character orthogonality across binary phase gears**: Conjugating Weyl shift and clock operators kicks back symplectic phases that wind binary equatorial gears; summing characters over the dual annihilator subgroup cancels every non-resonant frequency to zero while constructively reinforcing the hidden period!
 
-![Figure 15](../assets/fig-15-grover-qft-shor.svg)
+![Grover's two reflections composing into a rotation of a plane; the binary-fraction phase gears of the quantum Fourier transform; and the four equal peaks that cancelling frequencies leave when Q = 16 and r = 4](../assets/fig-15-grover-qft-shor.svg)
 
 ## Grover: The Common Invariant Plane of Two Reflections {#sec-grover-invariant-plane}
 

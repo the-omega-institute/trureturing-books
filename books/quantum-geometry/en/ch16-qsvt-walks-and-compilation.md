@@ -11,7 +11,7 @@ We establish and examine four interconnected themes:
 3. **Continuous two-axis generation versus finite-word $\{H, T\}$ polytope approximation (Liu Hui's three-dimensional 割圆术)**: While continuous rotations around any two non-collinear axes generate $\mathrm{SO}(3)$ in finitely many steps, restricting to words of length $\le L$ over the discrete gate set $\{H, T\}$ applied to a fixed initial Bloch state $\vv{r}_0 \in S^2$ produces a finite point set $\mathcal{S}_L \subset S^2$ whose Euclidean convex hull $P_L = \operatorname{conv}(\mathcal{S}_L)$ is a flat-faced inscribed polytope with strictly positive covering residual $\varepsilon_L > 0$;
 4. **Exact coin-assisted source-query counts versus asymptotic gate compilation length**: When the initial success probability $p \in (0, 1]$ is known, an auxiliary coin rotation eliminates discrete overshoot and achieves exact amplitude amplification in at most $\frac{\pi/2 + 2}{\sqrt{p}}$ source queries — a query count (`sourceQueries`) that must be kept strictly distinct from asymptotic $\{H, T\}$ gate compilation length (recorded in [@rem-solovay-kitaev-literature]).
 
-![Figure 16](../assets/fig-16-qsvt-solovay-kitaev-polytope.svg)
+![The Chebyshev polynomial T₃(x) = 4x³ − 3x on a two-dimensional signal block; the polytope spanned by the landing points of finite gate words; and the staircase of gate length against compilation accuracy, with the bound on source queries](../assets/fig-16-qsvt-solovay-kitaev-polytope.svg)
 
 ## QSVT: Two-Dimensional Blocks and Chebyshev Recurrences {#sec-qsvt-chebyshev-blocks}
 

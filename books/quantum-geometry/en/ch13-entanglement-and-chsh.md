@@ -8,7 +8,7 @@ Now suppose the second qubit coupled to our system is not a stray particle lost 
 
 This chapter opens Part IV, *Higher-Dimensional Spheres — Entanglement, Topology, and Quantum Algorithms*. Starting from the orthogonal sector decomposition of bipartite Hermitian operator space, we pass through the central marginal blind spot of Bell states and Landau's commutator-area identity for the squared CHSH operator, culminating in the $2\sqrt{2}$ maximum at the $45^\circ$ ($\pi/4$) symmetric quarter-right angle.
 
-![Figure 13](../assets/fig-13-bell-chsh-45deg.svg)
+![The 6 + 9 = 15 ledger of local lines and correlation faces; the Bell state, whose two local balls shrink to their centres while the correlation sits between them; and the cosine arc rising above the classical straight line at 45°, where the fixed CHSH witness reaches 2√2](../assets/fig-13-bell-chsh-45deg.svg)
 
 ## Local Lines and Correlation Areas: 6 + 9 = 15 {#sec-pauli-local-correlation}
 

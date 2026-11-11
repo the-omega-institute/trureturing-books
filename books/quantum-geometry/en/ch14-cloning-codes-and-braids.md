@@ -6,7 +6,7 @@ In [Chapter 13](ch13-entanglement-and-chsh.md), we saw how a two-qubit Bell stat
 
 In classical digital hardware, protecting information against noise is straightforward — **copy it**. To guard a classical bit against thermal flips, a repetition circuit duplicates $0 \mapsto 000$ and $1 \mapsto 111$ and takes a majority vote. Before quantum error correction can even begin, however, an uncompromising law of inner-product geometry bars the classical copying strategy: **an unknown quantum superposition cannot be cloned**. Since we cannot duplicate a fragile local direction line into two independent local lines, our only recourse is to evacuate logical information from local lines altogether, encoding it into multi-qubit Pauli stabilizer correlation areas and worldline braids that local noise cannot silently corrupt.
 
-![Figure 14](../assets/fig-14-nocloning-stabilizer-braid.svg)
+![The overlap rigidity z = z² behind no-cloning; three-qubit stabilizer parity checks with mutually orthogonal syndromes; and planar exchange paths passing around each other through a third spatial axis, with the braid relation](../assets/fig-14-nocloning-stabilizer-braid.svg)
 
 ## No Cloning: Preserving an Overlap and Squaring It {#sec-no-cloning-overlap}
 

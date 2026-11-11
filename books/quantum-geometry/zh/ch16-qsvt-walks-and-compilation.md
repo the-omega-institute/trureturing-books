@@ -11,7 +11,7 @@
 3. **两轴连续旋转生成与离散 $\{H, T\}$ 门集的三维割圆多面体**：在连续正交群 $\mathrm{SO}(3)$ 中，绕两根不共线轴的连续轴圆经有限步乘积即可精确到达任意三维旋转；然而一旦落回真实量子计算机的有限离散门集 $\{H, T\}$，在任意有限门长预算 $L < \infty$ 下，固定初态的可达点集 $\mathcal{S}_L \subset S^2$ 张成的凸包 $P_L = \operatorname{conv}(\mathcal{S}_L)$ 永远只是一座由平直弦面拼接而成的**三维割圆多面体**，球皮与弦面之间恒存在严格为正的逼近残差 $\varepsilon_L > 0$；
 4. **精确振幅放大的源查询计数与渐近门编译的区分**：当已知初始成功概率 $p$ 时，借助辅助硬币旋转调慢步长，可以用至多 $\frac{\pi/2 + 2}{\sqrt{p}}$ 次源算子查询实现零残差的精确振幅放大；同时我们将严格区分这一“源查询次数（`sourceQueries`）”与 $\{H, T\}$ 离散门集的渐近门编译字长（详见章末 [@rem-solovay-kitaev-literature]）。
 
-![图 16](../assets/fig-16-qsvt-solovay-kitaev-polytope.svg)
+![二维信号块上的切比雪夫多项式 T₃(x) = 4x³ − 3x、有限门字落点张成的割圆多面体，以及门长随编译精度上升的阶梯与源查询计数界](../assets/fig-16-qsvt-solovay-kitaev-polytope.svg)
 
 ## QSVT：二维块与切比雪夫递推 {#sec-qsvt-chebyshev-blocks}
 
