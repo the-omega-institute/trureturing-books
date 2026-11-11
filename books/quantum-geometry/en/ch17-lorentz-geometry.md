@@ -17,6 +17,10 @@ Lay planar Euclidean geometry and two-dimensional spacetime geometry side by sid
 
 ![Comparison of Euclidean circle and Minkowski hyperbola metrics, null cone and hyperbolic boost rotor, and worldline segment proper time with null-cone rigidity](../assets/fig-17-lorentz-boost-lightcone.svg)
 
+::: {.viz src="rapidity-lightcone" preset="circle" height="500"}
+**A turn runs on a circle, a boost on a hyperbola.** One event $v = (5, 3)$: the magenta point is turned and runs along the magenta circle $t^2 + x^2 = 34$, soon crossing the white light cone; the cyan point is boosted and runs along the cyan hyperbola $t^2 - x^2 = 16$, hugging the cone but never crossing it ([@thm-hyperbolic-norm]).
+:::
+
 Before writing down any spacetime coordinate transformation, let us verify in the Lean module `BogoliubovNormConservation` the exact real-analytic identity that underpins both Lorentz boosts and Bogoliubov squeezing transformations.
 
 ::: {.theorem #thm-hyperbolic-norm title="Real hyperbolic norm" lean="D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation"}
@@ -67,6 +71,10 @@ $$
 In the original laboratory coordinates, the Minkowski quadratic form on $v = (5, 3)^\top$ is $t^2 - x^2 = 5^2 - 3^2 = 25 - 9 = 16$. In the boosted coordinates $(4, 0)^\top$, the spatial displacement vanishes and the interval reduces to the squared proper time $\tau^2 = 4^2 - 0^2 = 16$, giving $\tau = 4$ directly.
 
 One sometimes sees the auxiliary trigonometric parameterization $\sin\theta = \beta = 3/5$, which gives $\cos\theta = \sqrt{1 - \beta^2} = 1/\gamma = 4/5$. Keep in mind that this is merely a convenient algebraic reparameterization of a bounded velocity $|\beta| < 1$; it must never be mistaken for identifying a Minkowski hyperbolic boost (preserving $t^2 - x^2$) with a Euclidean circular rotation (preserving $t^2 + x^2$).
+:::
+
+::: {.viz src="rapidity-lightcone" preset="boost" height="500"}
+**η = ln 2 takes (5, 3) to (4, 0).** The amber point slides along the cyan hyperbola $\tau = 4$ onto the time axis, where $\cosh\eta = 5/4$ and $\sinh\eta = 3/4$; the two amber axes close toward the light cone like scissors, and the grey dashed lines are where they started.
 :::
 
 ## Null light cones and spatial restrictions {#sec-null-cone-rigidity}
@@ -128,6 +136,10 @@ Half their sum gives $S(0, w) = -S(1, 0)\norm{w}^2$, while their difference give
 
 Notice the geometric mechanism inside the proof of [@lemma-null-cone-spatial]: why does vanishing on the null cone control purely spatial displacements $(0, w)$? Because lifting any spatial displacement $w$ by an equal forward or backward light-travel time $\pm\norm{w}$ lands directly on the future and past null rays $(\pm\norm{w}, w)$. Symmetrizing and antisymmetrizing across those two null rays acts as a two-sided caliper that clamps the time-space cross term $\operatorname{polar}_S((1, 0), (0, w))$ to zero and ties the spatial norm $-\norm{w}^2$ directly to the temporal scale $S(1, 0)$.
 
+::: {.viz src="rapidity-lightcone" preset="caliper" height="500"}
+**The null caliper.** Lift the amber spatial displacement $(0, w)$ by $|w|$ up and down, and the two white arrows $(\pm|w|, w)$ land exactly on the future and past light-cone lines, with $t^2 - x^2 = 0$; the diagonals of the dashed rhombus are $2(0, w)$ and $2|w|(1, 0)$ ([@lemma-null-cone-spatial]).
+:::
+
 ## Lorentz transformations and scale normalization {#sec-lorentz-normalization}
 
 With both the spatial restriction $S(0, w)$ and the cross polarization $\operatorname{polar}_S((1, 0), (0, w))$ pinned down by [@lemma-null-cone-spatial], the value of $S$ on any general spacetime vector $v = (t, w) = t(1, 0) + (0, w)$ has no remaining freedom except the overall scalar factor $S(1, 0)$.
@@ -166,6 +178,14 @@ $$
 
 To conclude full Lorentz invariance $\operatorname{minkowski}_d(Bv) = \operatorname{minkowski}_d(v)$, one must **separately impose the scale normalization** $\operatorname{minkowski}_d(Be_0) = 1$ (physically corresponding to calibrating unit clock ticks on the boosted time axis $Be_0$ or matching transverse rods).
 
+::: {.viz src="rapidity-lightcone" preset="cone" height="500"}
+**The light cone stays put under a boost.** Sweep $\eta$ from $-0.6$ to $1$: the white beads only slide along the white cone, the right-hand string crowding toward the origin and the left-hand one spreading out, and none leaves the two lines; the amber point runs along its cyan hyperbola, and the grey grid is squeezed into rhombi.
+:::
+
+::: {.viz src="rapidity-lightcone" preset="scale" height="500"}
+**Times k: the cone survives, the tick does not.** At $k = 1.5$ and $\eta = \ln 2$ the white beads are still on the cone, but the amber point drops off the cyan $\tau = 4$ onto the dashed cyan $\tau = 6$, and the unit tick lands on $\tau = 1.5$; the mismatch is exactly the factor $\operatorname{minkowski}_1(kBe_0) = k^2$ ([@prop-null-cone-rigidity]).
+:::
+
 > The null cone locks the shape of the metric up to scale; a unit clock tick fixes the single remaining factor $S(1, 0) = 1$.
 
 ::: {.remark #rem-lorentz-rotor-literature title="Hyperbolic Rotors and Spacetime Clifford Algebra (Literature result, not formalized in this book)"}
@@ -199,6 +219,10 @@ $$
 \Delta\tau = \sqrt{q(\Delta v)} = \sqrt{\Delta t^2 - \norm{\Delta w}^2} \le \Delta t,
 $$
 with **strict inequality** $\Delta\tau < \Delta t$ (time dilation) whenever the spatial displacement is nonzero ($\Delta w \neq 0$, or $\Delta x \neq 0$ in $1+1$ dimensions) and **equality** $\Delta\tau = \Delta t$ along a rest worldline ($\Delta w = 0$). By contrast, a photon propagates along a nonzero null displacement $\Delta w \neq 0$ on the null cone $q(\Delta v) = 0$ (where $\Delta\tau = 0$, the singular limit $\eta \to \pm\infty$) and possesses no comoving inertial rest frame. See R. P. Feynman, R. B. Leighton & M. Sands, *The Feynman Lectures on Physics*, Vol. I, chs. 15–17 (Addison–Wesley, 1963); and D. Hestenes, *Space-Time Algebra* (Gordon and Breach, 1966).
+:::
+
+::: {.viz src="rapidity-lightcone" preset="light" height="500"}
+**Along the cone, no proper time.** Drag the turning point $A$ to $(5, 5)$: both legs of the cyan path run along the edges of the white diamond with $t^2 - x^2 = 0$ and carry not a single tick, so $\tau = 0$; the thick white rest worldline carries all 10.
 :::
 
 ## Worldline segments and proper time {#sec-proper-time-segments}
@@ -252,6 +276,18 @@ $$
 $$
 
 Segment-by-segment invariance of $q$ guarantees that every inertial frame computes $\tau(\gamma_{\mathrm{bent}}) = 8$ and $\tau(\gamma_{\mathrm{rest}}) = 10$, not that distinct worldlines sharing endpoints have equal proper time. Because spatial displacement enters $t^2 - \norm{\Delta w}^2$ with a minus sign, any spatial detour reduces total proper time. In the extreme null case $v_{\mathrm{null}} = (1, 1)$, $q(1, 1) = 1^2 - 1^2 = 0$ ($\Delta\tau = 0$), and a photon on the null cone admits no rest frame.
+:::
+
+::: {.viz src="rapidity-lightcone" preset="twins" height="500"}
+**Bent 4 + 4 = 8, rest 10.** The turning point $A$ moves from $(5, 0)$ to $(5, 3)$: the ticks on the cyan path drop from 10 to 8 (4 per leg), while the thick white rest worldline keeps all 10; each tick of the outbound leg sits on one of the faint cyan hyperbolas centred at $O$.
+:::
+
+::: {.viz src="rapidity-lightcone" preset="frames" height="500"}
+**Another frame, still 8 and 10.** Boost into the outbound traveller's frame ($\eta = \ln 2$): every event slides along the faint cyan hyperbolas, the outbound leg becomes the vertical $(4, 0)$ and the return leg $(8.5, -7.5)$; both worldlines lean over, yet not one tick is gained or lost.
+:::
+
+::: {.viz src="rapidity-lightcone" height="560"}
+The full rapidity-and-light-cone lab: four scenes (compare, boost, caliper, worldlines) on one rail; the green boxes are reserved for the three Lean-verified results of this chapter ([@thm-hyperbolic-norm], [@lemma-null-cone-spatial], [@prop-null-cone-rigidity]).
 :::
 
 With the hyperbolic identity $|\cosh r|^2 - |\sinh r|^2 = 1$ ([@thm-hyperbolic-norm]) and the null-cone rigidity chain ([@lemma-null-cone-spatial], [@prop-null-cone-rigidity], and [@cor-null-cone-proportionality]) in place, the metric skeleton of special relativity is fully demystified. In the next chapter ([Dirac Spinors and Gauge Fields](ch18-spinors-and-gauge-curvature.md)), we take the matrix square root of relativistic dispersion and trace how anticommuting Pauli operators and closed-loop phases on graphs give rise to spinor coupling and gauge holonomy.

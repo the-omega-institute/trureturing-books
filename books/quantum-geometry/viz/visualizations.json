@@ -1567,6 +1567,58 @@
           "gid": "D5/S3/Fourier/FinitePoisson.sum_annihilator_character"
         }
       ]
+    },
+    {
+      "id": "rapidity-lightcone",
+      "code": "RAPIDITY//CONE",
+      "title": "快度与光锥",
+      "title_en": "Rapidity and the light cone",
+      "summary": "一张可以推动参考系的时空图：推动只让事件沿双曲线 t² − x² = 常数 滑动，光锥 t = ±x 一动不动，转动走的圆却会穿出光锥；η = ln 2 把 (5, 3) 推到 (4, 0)；两条零向量 (±|w|, w) 像卡尺一样夹住 (0, w)；乘上比例 k 时光锥保住、单位刻度没保住；从 O 到 P 的折线世界线 4 + 4 = 8，少于静止世界线的 10，换哪个参考系都一样。",
+      "summary_en": "A spacetime diagram whose frame you can push: a boost only slides events along the hyperbolas t² − x² = const and leaves the light cone t = ±x where it is, while a turn runs on a circle that leaves the cone; η = ln 2 takes (5, 3) to (4, 0); the null vectors (±|w|, w) clamp (0, w) like a caliper; a scale k keeps the cone but not the unit tick; from O to P the bent worldline's 4 + 4 = 8 is less than the rest worldline's 10, in every frame.",
+      "path": "rapidity-lightcone/",
+      "thumbnail": "rapidity-lightcone/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "快度",
+        "光锥",
+        "双曲线",
+        "洛伦兹推动",
+        "固有时",
+        "零锥刚性"
+      ],
+      "tags_en": [
+        "rapidity",
+        "light cone",
+        "hyperbola",
+        "Lorentz boost",
+        "proper time",
+        "null-cone rigidity"
+      ],
+      "theory": [
+        {
+          "label": "本书第十七章",
+          "label_en": "Chapter 17",
+          "href": "../zh/ch17-lorentz-geometry.html",
+          "href_en": "../en/ch17-lorentz-geometry.html"
+        },
+        {
+          "label": "零锥刚性（Lean 源码）",
+          "label_en": "Null-cone rigidity (Lean source)",
+          "href": "{trureturing}/D5/S0/Certificates/MinkowskiNullConeRigidity.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation"
+        },
+        {
+          "gid": "D5/S0/Certificates/MinkowskiNullConeRigidity.null_cone_spatial_rigidity"
+        },
+        {
+          "gid": "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null"
+        }
+      ]
     }
   ]
 }

@@ -91,6 +91,9 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `phase-gears` | 逐级减半转速的齿轮给每一格拧出相位；周期梳子上的相位箭头首尾相接，不共振的绕成圈抵消，只剩周期留下的峰 | `basis` `cancel` `four` `read` `leak` |
 
 `phase-gears` 的舞台从上到下是一排相位齿轮（紫色，每只对应 $k$ 的一个二进制位，选中的频率用到的那几只亮着）、选中频率 $k$ 的相位箭头链（青色箭头，墨色合成箭头）、寄存器里的周期梳子（青色格，琥珀色框是扫到的格）与频率谱（青色柱，琥珀色框是选中的 $k$，品红小三角在 $sQ/r$）。绿色框只给第十五章用 `lean=` 引用的 `sum_annihilator_character`：$r \mid Q$、起点为 $0$ 时梳子是 $Q/r$ 的倍数所成子群的零化子，链上的和就是这条命题的和；QFT 的二进制乘积分解（齿轮）、$r \nmid Q$ 时的狄利克雷核集中与连分数读阶标 `ARGUED`；谱由直接求和算出标 `NUM`。页面的“读出阶”取分母不超过 $\sqrt{Q}$ 的最后一个渐近分数。
+| `rapidity-lightcone` | 推动只让事件沿双曲线滑动，光锥一动不动；绕路的世界线攒下的固有时更少 | `circle` `boost` `caliper` `cone` `scale` `light` `twins` `frames` |
+
+`rapidity-lightcone` 的舞台是时空图本身（横轴 x、竖轴 t、两轴等比）。白色（墨色）是光锥、零向量与光锥上的珠子，也是“世界线”场景里的静止世界线（粗线）与因果菱形；青色是闵可夫斯基一侧：双曲线 t² − x² = 常数、被推动的点、经 A 的折线与它的固有时刻度；品红只在“对照”场景里出现，是欧氏转动走的圆 t² + x² = 34；琥珀只给当前事件、被推动的两根轴与单位刻度、空间位移 (0, w) 与折返点 A。绿色框只给第十七章用 `lean=` 引用的三条：`bogoliubov_norm_conservation`（推动保持 t² − x² 由它一步代数得出，页面照此写明）、`null_cone_spatial_rigidity`（卡尺场景）、`eq_smul_minkowski_of_null`（比例场景，取 S(v) = minkowski(kBv)）；把 B(η) 读作速度 β = tanh η 的洛伦兹推动、Δτ ≤ Δt 与零线上 Δτ = 0 按该章文献注记标 `ARGUED`；推动、转动、珠子与各段固有时实算（`NUM`）。路线图候选里的“两次变换快度相加”与“同时线倾斜”正文没有对应的句子，未做成卡。
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
@@ -254,6 +257,12 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第十五章 | 文献注记 `rem-shor-divisibility-boundary-literature` 之后、四步算例之前 | `phase-gears` · `leak` |
 | 第十五章 | 例 `ex-grover-four-shor-fifteen` 之后（`grover-reflections` · `four`、`eight` 之后） | `phase-gears` · `four`、`read` |
 | 第十五章 | 章末文献注记 `rem-grover-qft-shor-literature` 之后、转入第十六章之前 | `phase-gears` 完整实验室 |
+| 第十七章 | §17.1 圆与双曲线的对照列表及章图之后、定理 `thm-hyperbolic-norm` 引言之前 | `rapidity-lightcone` · `circle` |
+| 第十七章 | 例 `ex-rapidity-three-fifths` 之后、§17.2 之前 | `rapidity-lightcone` · `boost` |
+| 第十七章 | 引理 `lemma-null-cone-spatial` 证明后的解读段（“双向卡尺”）之后 | `rapidity-lightcone` · `caliper` |
+| 第十七章 | §17.3 边界列表第 2 条（零锥保持与尺度归一化分离）之后、格言之前 | `rapidity-lightcone` · `cone`、`scale` |
+| 第十七章 | 文献注记 `rem-lorentz-rotor-literature` 之后、§17.4 之前 | `rapidity-lightcone` · `light` |
+| 第十七章 | 例 `ex-two-worldline-segments` 之后 | `rapidity-lightcone` · `twins`、`frames`，随后完整实验室 |
 
 ## 增删或修改一张卡之后
 
