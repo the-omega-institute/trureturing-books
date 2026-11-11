@@ -17,11 +17,13 @@ correction: smallest bilingual change, if confirmed
 limits: assumptions, provenance limits, and units not covered
 ```
 
-Do not use stale line numbers after a rebase. Keep the old intake as provenance only and cite the final candidate’s current location.
+Do not use stale line numbers after integration. Keep the old intake as provenance and reconfirm the claim at the current candidate’s stable location before repairing it.
 
 ## Coverage record
 
-Maintain one row per SUMMARY unit. A row can say `pending`, `read-only review`, `fixed pending review`, `approved pending PR`, `merged`, or `not reviewed`; only mark it covered after both languages, formal environments, formulas/examples, and shared media have evidence. The total must match the actual SUMMARY, including coda and appendices.
+Maintain one row per SUMMARY unit. A row can say `pending`, `read-only review`, `fixed pending review`, `approved pending PR`, `merged`, or `not reviewed`; only mark it fully covered after both languages, formal environments, formulas/examples and shared media have evidence. The total must match SUMMARY, including coda and appendices. Retain historical text coverage separately when later media remain pending; neither a historical unit count nor lifecycle completion approves newly integrated material.
+
+On recovery or integration, record the prior evidence candidate, current input HEAD and changed scope. Compare the dependencies relevant to each reused conclusion: text/environment bytes, referenced source and pin, media/captions, and output tools/assets. State which evidence survives and why, which changed claims need fresh review, and which outputs need rebuilding. Do not treat changed tooling as a new content audit of every chapter, or unchanged text as approval of new media. For an uncommitted handoff, identify the input HEAD and changed file digests; a later committed hash needs the lifecycle owner’s correspondence check.
 
 ## Three review seats
 
@@ -29,7 +31,7 @@ Maintain one row per SUMMARY unit. A row can say `pending`, `read-only review`, 
 - **Quality:** Lean assumptions and proof explanations, independent algebra/numerics, physical protocol conditions, literature attribution, terminology, and bilingual semantic parity.
 - **Tests:** fresh `./tbook check`, affected builds, EPUBCheck, SVG/XML and link checks, independent calculations, and browser checks for the changed chapter matrix.
 
-Each seat returns a short structured result with `verdict`, `blocking_findings`, `checks`, `limits`, and a candidate hash. An approval for an earlier hash does not approve a later rebase or edit.
+Each seat returns a short structured result with `verdict`, `blocking_findings`, `checks`, `limits` and candidate identity. Review scope and any reused dependency evidence must be explicit. An earlier approval does not automatically approve later changed inputs. Read the current project workflow for seat composition and orchestration ownership; a repair worker does not start an extra review panel when the caller owns that stage.
 
 ## Validation matrix
 
@@ -40,9 +42,10 @@ Choose checks that match the change, and record the actual result:
 | Chapter text, environments, GIDs | `./tbook check`; both-language environment sequence and GID comparison; source/state inspection at the current pin |
 | Formula, table, angle, probability, or physical scale | independent calculation or a reproducible small script, with assumptions and rounding stated |
 | SVG or image | XML parse, internal-reference check, and visual inspection at relevant output sizes |
+| Interactive lab or its caption | changed-lab browser tests with independent edge cases; project-required shots inspected and cited stills regenerated |
 | HTML/PDF/EPUB/site output | affected `./tbook build` targets, EPUBCheck for EPUBs, and browser inspection of changed pages in desktop/mobile and relevant themes |
-| Rebase or lock-pin change | rerun the affected architecture and quality checks; confirm current pin and historical baseline separately |
+| Integration or lock-pin change | explicit dependency comparison, then affected architecture/quality checks and output validation; confirm current pin and historical baseline separately |
 
 ## PR handoff
 
-Before pushing, require a clean worktree, `git diff --check`, final candidate hash, three-seat results, and a ledger update that still leaves unreviewed units pending. The PR body states what readers will see, the current pin, validation, and remaining coverage. It contains no model or agent identifiers.
+An implementation handoff includes changed paths, input/candidate identity, `git diff --check`, actual validation, limits and exact remaining review/lifecycle obligations. The lifecycle owner checks the committed candidate against that patch, obtains the required three-seat results, and updates the ledger while leaving unreviewed units pending. Before pushing, check the final commit and worktree state. The PR body states concrete reader-visible changes, pin, validation and remaining coverage, without model or agent identifiers.

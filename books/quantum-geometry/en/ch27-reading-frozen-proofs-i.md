@@ -4,6 +4,10 @@
 
 In conventional mathematical physics monographs, a "proof" relies on an unwritten pact between author and reader: a phrase such as *"it is easy to see"*, an implicit assumption that an index set is nonempty, or a quiet slide from coordinate-line invariance to a single global phase can hide subtle gaps. From [Chapter 1](ch01-measurement.md) onward, this book has operated under a stricter contract captured by our opening epigraph — **define, state, prove**: every formal `theorem`, `lemma`, `proposition`, and `corollary` carrying the green `LEAN ✓` badge is anchored to a declaration in `the-omega-institute/trureturing@dev` (pinned at commit `1d9bf98cab8306e67ec38a739359f2cdae63877a`) that has been type-checked by the Lean 4 kernel and frozen without a single `sorry`.
 
+::: {.figure src="ch27-overview"}
+**Figure 27.** The chapter at a glance. Panel I: the ink arrows $x$ and $y$ span a parallelogram, and the squares of its two cyan diagonals $x + y$ and $x - y$ add up to the squares of its four sides ([@thm-audit-parallelogram-law]). Panel II: four coordinates form a chain; each cyan arc is a test vector that is non-zero on two neighbouring coordinates, and the violet phase arrows in all four diagonal entries point the same way, $A = c \cdot 1$ ([@prop-audit-ray-phase-rigidity]). Panel III: pinching strips the magenta off-diagonal blocks from the $3 \times 3$ block matrix $\rho$ and keeps the cyan diagonal ones; pinching again leaves the matrix in place ([@cor-audit-pinching-idempotent]).
+:::
+
 In this chapter and [Chapter 28](ch28-reading-frozen-proofs-ii.md), we open the actual `.lean` source files of `trureturing@dev` and audit the formal proof scripts line by line:
 
 1. In this chapter (Part I of our kernel audit), we dissect four foundational proofs underlying Parts I through III: **the real inner-product parallelogram norm law**, **the three-part Born probability skeleton on positive trace-one matrices**, **unitary global phase rigidity under support-connected ray tests**, and **idempotence of finite complete orthogonal record pinching**;
@@ -12,8 +16,6 @@ In this chapter and [Chapter 28](ch28-reading-frozen-proofs-ii.md), we open the 
 ::: {.viz src="lean-declaration-map" preset="bedrock" height="500"}
 **The four theorems Chapter 27 dissects, back where they first appear.** Cyan lines run from the foot of Chapter 27 to four filled green cells, all of which first appear in Chapters 1–3; the amber frame is the parallelogram law ([@thm-audit-parallelogram-law]), and the amber lines go to the other chapters that cite it.
 :::
-
-![Lean 4 kernel proof audit for Parts I to III: the parallelogram norm law, the Born probability skeleton and ray phase rigidity, and finite record pinching idempotence](../assets/fig-27-lean-kernel-audit-part1-3.svg)
 
 ## Define, State, Prove: Inside the Lean 4 Kernel Audit {#sec-lean-kernel-audit-architecture}
 
@@ -121,6 +123,10 @@ In `D5/S3/Quantum/FiniteDimensional.lean:78`:
 The full proof is checked by the Lean kernel.
 :::
 
+::: {.figure src="ch27-born-skeleton"}
+**The Born skeleton is proved along three branches, and only the third takes a detour.** Dashed ovals are hypotheses; boxes are the steps the proof names, each with the lemma that does it. Branches ① and ② take one step each; branch ③ first turns $\rho \succeq 0$ into the sandwich $P\rho P^* \succeq 0$, then uses $P^* = P$ and $P^2 = P$ with the cyclic trace to bring its trace back to $\Tr(\rho P)$, and finally takes a nonnegative trace. All three meet in the green [@lemma-audit-born-skeleton].
+:::
+
 ## Support-Chain Ray Phase Rigidity and Finite Record Pinching Idempotence {#sec-audit-ray-rigidity-and-pinching}
 
 We now audit two structural theorems from Part I that showcase graph induction and block-diagonal projection algebra in Lean 4 (Panels II and III of Figure 27).
@@ -161,6 +167,10 @@ In `D5/S3/Quantum/Foundation/RayPhaseRigidity.lean:97`, the proof proceeds in tw
 The full proof is checked by the Lean kernel.
 :::
 
+::: {.figure src="ch27-ray-skeleton"}
+**Phase rigidity: first force $A$ diagonal, then pass one phase along the support chain.** The large dashed frame holds the three steps of the private lemma `coordinate_shape_of_connected_ray_tests`, each fed by one dashed hypothesis on the left; below the frame the proof splits on whether $\iota$ is empty, and the non-empty branch uses "$A$ unitary" to get $\lvert c\rvert = 1$. Both branches meet in the green [@prop-audit-ray-phase-rigidity].
+:::
+
 Our fourth audited declaration in this chapter is `finite_record_pinching_idempotent` in `D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.lean:30`, which proves functional idempotence of the unread Lüders pinching map
 
 $$
@@ -185,6 +195,10 @@ P_k \cdot \operatorname{unreadState}(P, \rho) = \sum_{l \in \kappa} P_k P_l \rho
 $$
 
 by collapsing the sum over $l \in \kappa$ to the single index $l = k$ via `Finset.sum_eq_single k` and pairwise orthogonality `hP.orthogonal k l`, then applying `hP.idempotent k`. Multiplying on the right by $P_k$ inside the outer sum $\sum_k P_k (\operatorname{unreadState} P \rho) P_k$ and applying `hP.idempotent k` a second time yields $\sum_k P_k \rho P_k = \operatorname{unreadState}(P, \rho)$. The full proof is checked by the Lean kernel.
+:::
+
+::: {.figure src="ch27-pinching-skeleton"}
+**The idempotence of pinching is proved in one straight chain.** The dashed hypotheses, orthogonality and idempotence, first let the left projection absorb the whole sum, $P_k \cdot U(\rho) = P_k \rho P_k$; multiplying by $P_k$ on the right absorbs once more and gives pointwise idempotence; function extensionality then carries it to every $\rho$, ending in the green [@cor-audit-pinching-idempotent]. In the figure, $U(\rho)$ stands for $\operatorname{unreadState}(P, \rho)$.
 :::
 
 ## Line-by-Line Source Anatomy: From Mathlib Lemmas to Graph Induction and Block Elimination {#sec-line-by-line-proof-anatomy-i}

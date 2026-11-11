@@ -8,7 +8,9 @@
 
 本章作为全书形式化公理圣殿审计的下篇，将逐行解剖连接纯态内积模方、迹配对权重、吕德斯条件态完备性与未读不动点充要判据的四条核心源码，并给出覆盖第四部至第六部代表性冻结声明的**全景源码审计表**。
 
-![第四至六部 Lean 4 内核证明审计架构：秩一纯态玻恩模方归约、三合取配对桥、吕德斯条件态正半定与单位迹保持，以及未读测量不动点的充要判据](../assets/fig-28-lean-kernel-audit-part4-6.svg)
+::: {.figure src="ch28-overview"}
+**图 28。** 本章地图：左栏，琥珀色的箭头 $\psi$ 在青色的线 $\phi$ 上落下青色的影子 $\lvert\langle\phi\mid\psi\rangle\rvert = 3/5$，以影子为边的青色正方形就是记录权重 $9/25$（[@thm-audit-rank-one-born]）；中栏上半，长为 $1$ 的横条按权重 $w_0 = 9/25$、$w_1 = 16/25$ 分成两段，合起来是未读态（[@lemma-audit-born-pairing-weight]）；中栏下半，每段除以自己的权重，各自撑满一整根，条件态的迹回到 $1$（[@prop-audit-conditional-state]）；右栏，带品红交叉块的 $\rho$ 被挤压改变，交叉块划掉的 $\rho'$ 是不动点（[@cor-audit-unread-fixed-iff]）。数值取自本章末尾的例子。
+:::
 
 ## 秩一玻恩模方归约与三合取配对桥的源码解剖 {#sec-audit-rank-one-born-and-pairing}
 
@@ -63,6 +65,10 @@ theorem rank_one_pure_state_modulus_square_reduction
 完整证明由 Lean 内核检查。
 :::
 
+::: {.figure src="ch28-rank-one-chain"}
+**秩一归约是一条六步的重写链。** 从上往下，每个箭头旁是证明里那一步用的引理：迹先被拆成两个外积 $\lvert\psi\rangle\langle\psi\rvert$、$\lvert\phi\rangle\langle\phi\rvert$，外积相乘收缩出一个内积，取迹再收缩出另一个内积，两者正好互为共轭，乘起来是青色的 $\lvert z\rvert^2$，$z = \langle\phi\mid\psi\rangle$；链的终点是绿色的 [@thm-audit-rank-one-born]。
+:::
+
 更进一步，在 `D5/S3/Observer/Conditioning/RankOneBornPairingWeight.lean:36` 中，单分支的秩一模方公式被无缝桥接到全套有限记录测量系综的分解定理上（图 28 中上栏）。
 
 ::: {.lemma #lemma-audit-born-pairing-weight title="秩一玻恩配对权重与未读条件态凸组合的三合取桥接引理（内核审计版）" lean="D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight"}
@@ -92,6 +98,10 @@ $$
   - 若权重为零（$w_j = 0$），左边 $0 \bullet \operatorname{conditionalState}(P, \rho, j) = 0$，而右边调用关键引理 `compressed_eq_zero_of_recordWeight_eq_zero`：由于压缩矩阵 $P_j \rho P_j$ 是正半定的（`hCompressed : (P_j * rho * P_j).PosSemidef`）且其迹等于 $w_j = 0$，Mathlib 定理 `hCompressed.trace_eq_zero_iff.mp` 保证**迹为零的正半定矩阵必为零矩阵** $P_j \rho P_j = 0$！因此零概率分支不会留下任何幽灵算子残余。
 
 源码文件第 57–91 行还附带了三组匿名 `example` 检验探针（分别位于第 57、72 与 88 行）：第一组探针（第 57 行）通过 `.2.1` 投影提取第二合取项迹配对恒等式 $\operatorname{recordWeight}(P, \rho, k) = \Tr(\rho P_k)$，第二组探针（第 72 行）通过 `.2.2` 投影提取第三合取项加权条件态系综重构恒等式 $\operatorname{unreadState}(P, \rho) = \sum_j \operatorname{recordWeight}(P, \rho, j)\bullet\operatorname{conditionalState}(P, \rho, j)$，第三组探针（第 88 行）证明 `Matrix.trace (0 : Matrix n n ℂ) ≠ 1`（即 $\Tr(0) \neq 1$），从而验证零矩阵 $\rho = 0$ 被单位迹状态假设 $\Tr(\rho) = 1$ 严格排除。完整证明由 Lean 内核检查。
+:::
+
+::: {.figure src="ch28-bridge-skeleton"}
+**三合取桥：一项借上一条定理，一项按定义，一项逐项分两种情形。** 绿色的“① 秩一归约”就是 [@thm-audit-rank-one-born]；② 用 `rfl`；③ 用 `unread_eq_weighted_ensemble`，它对每个 $j$ 按 $w_j$ 是否为零分支——不为零时数乘互相抵消，为零时借虚线圈里的 $\rho \succeq 0$ 推出 $P_j \rho P_j = 0$。三路汇入绿色的 [@lemma-audit-born-pairing-weight]；图中 $\rho_j$ 即 $\operatorname{conditionalState}(P, \rho, j)$。
 :::
 
 ## 吕德斯条件态完备性与未读不动点充要判据 {#sec-audit-conditional-state-and-fixed-point}
@@ -130,7 +140,15 @@ $$
 完整证明由 Lean 内核检查。
 :::
 
+::: {.figure src="ch28-conditional-skeleton"}
+**条件态完备性的四步，第三步借用第二十七章的玻恩骨架。** 右列自上而下是证明的四步，每步旁是所用的引理；左边虚线圈里的前提各喂进一步，绿色的 [@lemma-audit-born-skeleton] 喂进第 ③ 步，给出权重非负。链的终点是绿色的 [@prop-audit-conditional-state]；图中 $\rho_k$ 即 $\operatorname{conditionalState}(P, \rho, k)$，$w_k$ 即 $\operatorname{recordWeight}(P, \rho, k)$。
+:::
+
 最后，我们审计 `Conditioning.lean:108` 的**未读测量不动点充要定理**。这正是连接量子测量与自指方程 $\psi = \psi(\psi)$ 的严格算子判据（图 28 右栏）：把测量信道 $\mathcal{E}_P(\rho) = \operatorname{unreadState}(P, \rho)$ 视为观察者对自身状态空间的投影自映射，那么 $\rho$ 成为不动点 $\mathcal{E}_P(\rho) = \rho$ 的充要条件，恰好是所有异指标交叉块 $P_k \rho P_l$（$k \neq l$）全部消失。
+
+::: {.figure src="ch28-fixed-skeleton"}
+**不动点判据的两个方向，各三步。** 左列“⇒”从 $U(\rho) = \rho$ 出发，把 $\rho$ 换成 $U(\rho)$，左投影吸收后由正交性归零；右列“⇐”从交叉块为零出发，用完备性把 $P_k\rho$ 展开成和式，和式只剩对角那一项，再对 $k$ 求和回到 $\rho$。两列汇入绿色的 [@cor-audit-unread-fixed-iff]；图中 $U(\rho)$ 即 $\operatorname{unreadState}(P, \rho)$。
+:::
 
 ::: {.corollary #cor-audit-unread-fixed-iff title="未读记录测量不动点与异分支交叉块归零的充要定理（内核审计版）" lean="D5/S3/Observer/Conditioning.unreadState_fixed_iff"}
 设 $n$ 为具有可判等性的有限指标类型（`[Fintype n] [DecidableEq n]`），$\kappa$ 为有限结果类型（`[Fintype kappa]`），$P : \kappa \to M_n(\mathbb{C})$ 满足记录测量公理 `hP : IsRecordMeasurement P`，$\rho \in M_n(\mathbb{C})$ 为任意复方阵。则未读状态等于原状态，当且仅当所有相异分支之间的非对角投影块全为零：
@@ -166,6 +184,10 @@ $$
 ## 第四至六部冻结声明全景审计表 {#sec-parts-iv-to-vi-frozen-audit-table}
 
 与上一章的第一至三部审计表相呼应，下表汇总了本书第四部（纠缠、贝尔边界与傅里叶对偶）、第五部（玻戈留波夫双曲变换、闵可夫斯基光锥刚性、规范完整群、张量网络流割与电路深度反例）以及第六部（对角拓扑逃逸、黎曼 $\zeta$ 欧拉乘积、艾森斯坦范数型与收缩不动点）在 `trureturing@dev`（提交 `1d9bf98cab8306e67ec38a739359f2cdae63877a`）中的精确源码坐标、语句摘要哈希前缀（`statement_id`）及形式化边界。
+
+::: {.figure src="ch28-declaration-parts"}
+**全书八部各引用了多少条冻结声明。** 柱高是该部各章用 `lean=` 引用的不同声明数（一条声明在两部都被引用时两部各算一次），柱上标着总数；下段绿色是锁文件里种类为定理的声明，上段灰色是定义与归纳类型。上方两道括号标出两章审计表各自覆盖的部：第二十七章是第一至第三部，本章是第四至第六部。图由脚本从 `trureturing.lock.json` 与中文章节算出。
+:::
 
 | 所属章节 | 冻结声明 GID | 源码路径与行号 | `statement_id` 前缀 | 精确形式化范围与契约边界 |
 | :---------: | ---------------------------- | ---------------------------- | :------------------: | ----------------------------------------------------- |

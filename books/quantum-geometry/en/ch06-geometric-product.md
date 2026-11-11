@@ -309,7 +309,7 @@ Englert's trace-distance inequality for general mixed environmental states is ci
 :::
 
 ::: {.viz src="double-slit-marker" preset="mixed" height="500"}
-**A mixed marker falls inside the circle.** When the marker itself is noisy (purity $\lambda = 0.5$), the visibility is still $V = 0.5$, but only $0.43$ of trace-distance distinguishability can be read: the point drops inside the circle along the dashed magenta arc, $D^2 + V^2 \approx 0.44 < 1$. This is one instance of Englert's inequality above (a literature result, not formalized in this book).
+**A mixed marker falls inside the circle.** When the marker itself is noisy (pure-state weight $\lambda = 0.5$, purity $\Tr\rho^2 = (1 + \lambda^2)/2 = 0.625$), the visibility is still $V = 0.5$, but only $0.43$ of trace-distance distinguishability can be read: the point drops inside the circle along the dashed magenta arc, $D^2 + V^2 \approx 0.44 < 1$. This is one instance of Englert's inequality above (a literature result, not formalized in this book).
 :::
 
 ::: {.viz src="qubit-geometry" preset="area" height="500"}
@@ -317,7 +317,7 @@ Englert's trace-distance inequality for general mixed environmental states is ci
 :::
 
 ::: {.viz src="double-slit-marker" height="560"}
-Interactive laboratory `SLIT//MARKER`: hits arriving one by one on the screen with their fringes, and the two marker arrows $r_L$ and $r_R$ on the complementarity circle; drag the angle, change how the marker is read, or lower its purity. The numbers on the page are a numerical illustration; $D^2 + V^2 = 1$ is [@thm-record-coherence-complementarity], checked by the Lean kernel.
+Interactive laboratory `SLIT//MARKER`: hits arriving one by one on the screen with their fringes, and the two marker arrows $r_L$ and $r_R$ on the complementarity circle; drag the angle, change how the marker is read, or lower its pure-state weight $\lambda$. The numbers on the page are a numerical illustration; $D^2 + V^2 = 1$ for a pure record marker ($\lambda = 1$) is [@thm-record-coherence-complementarity], checked by the Lean kernel, while a mixed marker, inside the circle for $\alpha > 0$ and on it at $\alpha = 0$, is a case of Englert's inequality (a literature result, not formalized in this book).
 :::
 
 ## 6.4 Interactive Laboratory: Hands-On Exploration of the Pairwise Geometric Product, Particle Inner Line, and Wave Wedge Area {#sec-interactive-qubit-geometry}

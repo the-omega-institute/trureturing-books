@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch25-overview" data-lang="en" data-wrap="1" viewBox="0 0 740 290" width="740" height="290" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="Three panels. Panel I: the three-bit masks of e₂ · e₁ as three rows of cells under columns e₁, e₂, e₃; the left factor 010₂ lights e₂, the right factor 001₂ lights e₁, and the result row 011₂ lights both, which is e₁₂. Below, two magenta strands cross once to sort e₂e₁ into e₁e₂, and the result carries a magenta minus: e₂ · e₁ = −e₁₂. Panel II: two cyan dashed mirrors in the plane of state vectors; the amber arrow u reflected in X then Z, or in Z then X, gives two dark arrows ZXu and XZu at opposite ends. Panel III: an amber arrow a split into a vertical cyan part and a horizontal dark part; in the 2 × 2 grid below, the diagonal holds the cyan a₂ and −a₂ and the two corners hold the dark a₀ − i a₁ and a₀ + i a₁.">
+<title>Three panels. Panel I: the three-bit masks of e₂ · e₁ as three rows of cells under columns e₁, e₂, e₃; the left factor 010₂ lights e₂, the right factor 001₂ lights e₁, and the result row 011₂ lights both, which is e₁₂. Below, two magenta strands cross once to sort e₂e₁ into e₁e₂, and the result carries a magenta minus: e₂ · e₁ = −e₁₂. Panel II: two cyan dashed mirrors in the plane of state vectors; the amber arrow u reflected in X then Z, or in Z then X, gives two dark arrows ZXu and XZu at opposite ends. Panel III: an amber arrow a split into a vertical cyan part and a horizontal dark part; in the 2 × 2 grid below, the diagonal holds the cyan a₂ and −a₂ and the two corners hold the dark a₀ − i a₁ and a₀ + i a₁.</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="236" height="290" viewBox="0 0 236 290">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">I  XOR masks, count crossings</text>
+<text class="tf-dim" x="110" y="44" font-size="13" text-anchor="middle"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim" x="146" y="44" font-size="13" text-anchor="middle"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim" x="182" y="44" font-size="13" text-anchor="middle"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim" x="82" y="74.68" font-size="13" text-anchor="end">left</text>
+<rect x="94" y="54" width="32" height="32" rx="4" class="ts-faint" stroke-width="1.4" fill="none"/>
+<text class="tf-dim tr-fig-mono" x="110" y="75.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0</text>
+<rect x="130" y="54" width="32" height="32" rx="4" class="ts-ink tf-ink" stroke-width="1.4" fill-opacity="0.28"/>
+<text class="tf-ink tr-fig-mono" x="146" y="75.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1</text>
+<rect x="166" y="54" width="32" height="32" rx="4" class="ts-faint" stroke-width="1.4" fill="none"/>
+<text class="tf-dim tr-fig-mono" x="182" y="75.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0</text>
+<text class="tf-dim" x="82" y="114.68" font-size="13" text-anchor="end">right</text>
+<rect x="94" y="94" width="32" height="32" rx="4" class="ts-ink tf-ink" stroke-width="1.4" fill-opacity="0.28"/>
+<text class="tf-ink tr-fig-mono" x="110" y="115.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1</text>
+<rect x="130" y="94" width="32" height="32" rx="4" class="ts-faint" stroke-width="1.4" fill="none"/>
+<text class="tf-dim tr-fig-mono" x="146" y="115.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0</text>
+<rect x="166" y="94" width="32" height="32" rx="4" class="ts-faint" stroke-width="1.4" fill="none"/>
+<text class="tf-dim tr-fig-mono" x="182" y="115.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0</text>
+<line x1="88" y1="129" x2="204" y2="129" class="ts-dim" stroke-width="1.4" fill="none"/>
+<text class="tf-cyan" x="82" y="155.04" font-size="14" text-anchor="end" font-weight="600">⊕</text>
+<rect x="94" y="134" width="32" height="32" rx="4" class="ts-cyan tf-cyan" stroke-width="1.4" fill-opacity="0.28"/>
+<text class="tf-cyan tr-fig-mono" x="110" y="155.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1</text>
+<rect x="130" y="134" width="32" height="32" rx="4" class="ts-cyan tf-cyan" stroke-width="1.4" fill-opacity="0.28"/>
+<text class="tf-cyan tr-fig-mono" x="146" y="155.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1</text>
+<rect x="166" y="134" width="32" height="32" rx="4" class="ts-faint" stroke-width="1.4" fill="none"/>
+<text class="tf-dim tr-fig-mono" x="182" y="155.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0</text>
+<text class="tf-ink" x="102" y="184" font-size="14" text-anchor="middle"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-ink" x="146" y="184" font-size="14" text-anchor="middle"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
+<line x1="102" y1="192" x2="146" y2="238" class="ts-magenta" stroke-width="2.2" fill="none"/>
+<line x1="146" y1="192" x2="102" y2="238" class="ts-magenta" stroke-width="2.2" fill="none"/>
+<text class="tf-ink" x="102" y="256" font-size="14" text-anchor="middle"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-ink" x="146" y="256" font-size="14" text-anchor="middle"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-magenta" x="170" y="220" font-size="13">1 crossing</text>
+<text class="tf-ink" x="118" y="282" font-size="14" text-anchor="middle" font-weight="600"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em"> · </tspan><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em"> = −</tspan><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">12</tspan><tspan dy="-0.28em">​</tspan></text>
+</svg>
+<svg class="tr-fig-panel" x="252" y="0" width="236" height="290" viewBox="0 0 236 290">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">II  two mirrors, two orders</text>
+<circle cx="112" cy="160" r="84" class="ts-faint" stroke-width="1.2" fill="none"/>
+<line x1="12.88" y1="160" x2="211.12" y2="160" class="ts-cyan" stroke-width="1.6" stroke-dasharray="6 4" fill="none"/>
+<line x1="41.91" y1="230.09" x2="182.09" y2="89.91" class="ts-cyan" stroke-width="1.6" stroke-dasharray="6 4" fill="none"/>
+<line x1="183.18" y1="119.55" x2="156.66" y2="93.03" class="ts-dim" stroke-width="1.4" stroke-dasharray="4 3" fill="none"/>
+<path d="M152.45 88.82 L159.48 91.69 L155.32 95.85Z" class="tf-dim"/>
+<line x1="147.5" y1="90.87" x2="147.5" y2="223.18" class="ts-dim" stroke-width="1.4" stroke-dasharray="4 3" fill="none"/>
+<path d="M147.5 229.13 L144.56 222.13 L150.44 222.13Z" class="tf-dim"/>
+<line x1="188.13" y1="131.5" x2="188.13" y2="182.55" class="ts-dim" stroke-width="1.4" fill="none"/>
+<path d="M188.13 188.5 L185.19 181.5 L191.07 181.5Z" class="tf-dim"/>
+<line x1="183.18" y1="190.55" x2="85.66" y2="93.03" class="ts-dim" stroke-width="1.4" fill="none"/>
+<path d="M81.45 88.82 L88.48 91.69 L84.32 95.85Z" class="tf-dim"/>
+<circle cx="147.5" cy="83.87" r="3.4" class="ts-bg tf-dim" stroke-width="1.4"/>
+<circle cx="188.13" cy="195.5" r="3.4" class="ts-bg tf-dim" stroke-width="1.4"/>
+<line x1="112" y1="160" x2="144.27" y2="229.2" class="ts-ink" stroke-width="2.6" fill="none"/>
+<path d="M147.5 236.13 L140.27 229.57 L147.12 226.38Z" class="tf-ink"/>
+<line x1="112" y1="160" x2="79.73" y2="90.8" class="ts-ink" stroke-width="2.6" fill="none"/>
+<path d="M76.5 83.87 L83.73 90.43 L76.88 93.62Z" class="tf-ink"/>
+<line x1="112" y1="160" x2="181.2" y2="127.73" class="ts-amber" stroke-width="2.6" fill="none"/>
+<path d="M188.13 124.5 L181.57 131.73 L178.38 124.88Z" class="tf-amber"/>
+<circle cx="112" cy="160" r="3" class="tf-ink"/>
+<text class="tf-amber ts-bg" x="196.13" y="128.5" font-size="14" font-weight="600" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">u</tspan></text>
+<text class="tf-ink ts-bg" x="153.5" y="250.13" font-size="14" font-weight="600" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">ZXu</tspan></text>
+<text class="tf-ink ts-bg" x="70.5" y="77.87" font-size="14" text-anchor="end" font-weight="600" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">XZu</tspan></text>
+<text class="tf-ink" x="118" y="282" font-size="14" text-anchor="middle" font-weight="600"><tspan font-style="italic">ZX</tspan> = −<tspan font-style="italic">XZ</tspan></text>
+</svg>
+<svg class="tr-fig-panel" x="504" y="0" width="236" height="290" viewBox="0 0 236 290">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">III  a vector as a 2 × 2 matrix</text>
+<line x1="138.68" y1="83.35" x2="85.32" y2="128.65" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<line x1="38.7" y1="97.76" x2="185.3" y2="114.24" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<line x1="112" y1="180.18" x2="112" y2="31.82" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<line x1="112" y1="106" x2="161.03" y2="120.75" class="ts-ink" stroke-width="2.2" fill="none"/>
+<line x1="161.03" y1="120.75" x2="161.03" y2="85.14" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<line x1="112" y1="106" x2="112" y2="70.39" class="ts-cyan" stroke-width="3.2" fill="none"/>
+<line x1="112" y1="70.39" x2="161.03" y2="85.14" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<line x1="112" y1="106" x2="153.99" y2="88.14" class="ts-amber" stroke-width="2.6" fill="none"/>
+<path d="M161.03 85.14 L154.23 92.14 L151.27 85.19Z" class="tf-amber"/>
+<text class="tf-amber" x="169.03" y="87.14" font-size="15" font-weight="600"><tspan font-style="italic">a</tspan></text>
+<text class="tf-cyan" x="104" y="74.39" font-size="13" text-anchor="end"><tspan font-style="italic">a</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="40" y="196" width="76" height="28" rx="4" class="ts-cyan tf-cyan" stroke-width="1.3" fill-opacity="0.16"/>
+<text class="tf-cyan" x="78" y="214.68" font-size="13" text-anchor="middle"><tspan font-style="italic">a</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="120" y="196" width="76" height="28" rx="4" class="ts-edge" stroke-width="1.3" fill="none"/>
+<text class="tf-ink" x="158" y="214.68" font-size="13" text-anchor="middle"><tspan font-style="italic">a</tspan><tspan dy="0.28em" font-size="72%">0</tspan><tspan dy="-0.28em"> − </tspan><tspan font-style="italic">i a</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="40" y="228" width="76" height="28" rx="4" class="ts-edge" stroke-width="1.3" fill="none"/>
+<text class="tf-ink" x="78" y="246.68" font-size="13" text-anchor="middle"><tspan font-style="italic">a</tspan><tspan dy="0.28em" font-size="72%">0</tspan><tspan dy="-0.28em"> + </tspan><tspan font-style="italic">i a</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="120" y="228" width="76" height="28" rx="4" class="ts-cyan tf-cyan" stroke-width="1.3" fill-opacity="0.16"/>
+<text class="tf-cyan" x="158" y="246.68" font-size="13" text-anchor="middle">−<tspan font-style="italic">a</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim" x="118" y="282" font-size="13" text-anchor="middle">the diagonal sums to 0</text>
+</svg>
+</svg>

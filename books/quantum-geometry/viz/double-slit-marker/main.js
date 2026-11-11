@@ -5,9 +5,11 @@
              once the marker is read, the same hits are copied into two rows, one for each reading
      circle  the two unit marker states as arrows: r_L lies along the horizontal axis, r_R is turned by α; the cyan
              shadow of r_R on r_L is V = cos α, its magenta height is D = sin α, and the point (V, D) stays on the
-             quarter circle; a mixed marker of purity λ puts the point at (cos α, λ·sin α), inside the circle
+             quarter circle; a mixed marker with pure-state weight λ puts the point at (cos α, λ·sin α), so that
+             D² + V² = 1 − (1 − λ²)·sin²α: inside the circle for α > 0, on it at α = 0
    Model: the marker is a real 2-vector; r_R = R(α) r_L. A mixed marker is the state λ|e₀⟩⟨e₀| + (1 − λ)·I/2 put
-   through the same two turns, i.e. e₀ with weight (1 + λ)/2 and e₁ with weight (1 − λ)/2. Reading the marker in the
+   through the same two turns, i.e. e₀ with weight (1 + λ)/2 and e₁ with weight (1 − λ)/2. λ is the weight of the pure
+   part, not the purity: Tr ρ² = (1 + λ²)/2. (The control keeps the id "purity" for compatibility.) Reading the marker in the
    orthonormal pair (m₁, m₂) gives P(x, m) = Σ w·½·env(x)·(a² + b² + 2ab·cos kx) with a = ⟨m, r_L⟩, b = ⟨m, r_R⟩.
    The rail is the number of hits. Read-only probe for the browser suite: window.SLIT_DEBUG. */
 (() => {
@@ -134,7 +136,9 @@
     lab(V / 2, 0, `V = ${fix(V, 2)}`, P.cyan, 'center', 0, 16);
     if (D > 0.04) lab(c, D / 2, `D = ${fix(D, 2)}`, P.magenta, c > 0.82 ? 'right' : 'left', c > 0.82 ? -10 : 10, 0);
     else lab(c, 0, `D = ${fix(D, 2)}`, P.magenta, 'right', -6, -14);
-    text(ctx, S.lambda < 1 ? `D² + V² = ${fix(D * D + V * V, 2)} < 1` : 'D² + V² = 1', Math.min(g.X(1.2), rect.x + rect.w - 4), g.Y(-0.1), P.ink, { align: 'right', size: 12 });
+    // strictly inside only when the mixed marker has recorded something (λ < 1 and α > 0); at α = 0 it stays on the circle
+    const gap = (1 - S.lambda * S.lambda) * s * s, sumTxt = gap <= 1e-12 ? 'D² + V² = 1' : fix(D * D + V * V, 2) === '1.00' ? 'D² + V² < 1' : `D² + V² = ${fix(D * D + V * V, 2)} < 1`;
+    text(ctx, sumTxt, Math.min(g.X(1.2), rect.x + rect.w - 4), g.Y(-0.1), P.ink, { align: 'right', size: 12 });
   }
 
   function drawStage() {
@@ -202,8 +206,10 @@
     const how = S.reader === 'none' ? L('标记没读', 'marker not read') : S.hold ? L('落点先到，标记稍后再读', 'hits first; the marker is read afterwards') : S.reader === 'path' ? L('按路径读了标记', 'marker read for the path') : L('按擦除方向读了标记', 'marker read to erase');
     $('hudSub').textContent = L(`屏上 ${n} 个落点 · ${how}`, `${n} hits on the screen · ${how}`);
     $('roSum').innerHTML = `<span class="c-mg">${fix(D * D, 3)}</span> + <span class="c-cy">${fix(V * V, 3)}</span> = ${fix(sum, 3)}`;
-    $('roSumSub').textContent = pure ? L('纯态标记：无论 α 是多少都等于 1', 'pure marker: 1 whatever α is') : L('混合标记：小于 1，点在圆内', 'mixed marker: below 1, the point is inside the circle');
-    $('roV').textContent = fix(V, 3); $('roD').textContent = fix(D, 3); $('roA').textContent = `${fix(S.alpha, 0)}°`; $('roL').textContent = fix(S.lambda, 2);
+    $('roSumSub').textContent = pure ? L('纯态标记：无论 α 是多少都等于 1', 'pure marker: 1 whatever α is')
+      : sum < 1 - 1e-12 ? L('混合标记、α > 0：小于 1，点在圆内', 'mixed marker, α > 0: below 1, the point is inside the circle')
+        : L('混合标记、α = 0：标记什么也没记下，仍等于 1，点在圆上', 'mixed marker, α = 0: nothing is recorded, still 1, the point is on the circle');
+    $('roV').textContent = fix(V, 3); $('roD').textContent = fix(D, 3); $('roA').textContent = `${fix(S.alpha, 0)}°`; $('roL').textContent = `${fix(S.lambda, 2)} · ${fix((1 + S.lambda * S.lambda) / 2, 3)}`;
     $('roM').textContent = `${fix(V * V / 2, 3)} = V²/2`;
     $('roNote').textContent = V > 0.995 ? L('两支箭头重合：标记什么也没记下，条纹满对比度。', 'The arrows coincide: the marker has recorded nothing, and the fringes have full contrast.')
       : V < 0.005 && pure ? L('两支箭头垂直：路径完全写进了标记，条纹消失。', 'The arrows are square: the path is fully written into the marker, and the fringes are gone.')
@@ -266,7 +272,7 @@
     which: ['α = 90°：两支箭头垂直，影子缩成零，点停在圆顶。落点堆成一个平滑的鼓包，没有条纹。', 'α = 90°: the arrows are square, the shadow shrinks to nothing and the point sits at the top of the circle. The hits pile up into a smooth hump without fringes.'],
     delayed: ['α = 90°。落点先到齐，然后才按路径读标记：同一批落点被复制成两行，“左缝”一行与“右缝”一行都是没有条纹的鼓包。', 'α = 90°. All hits arrive first, and only then is the marker read for the path: the same hits are copied into two rows, and both the “left” row and the “right” row are humps without fringes.'],
     erase: ['同样 α = 90°、同一批落点，这回按擦除方向读标记：一行是条纹，另一行是错开半格的反条纹，两行合起来仍是上面那个鼓包。', 'Again α = 90° and the same hits, but this time the marker is read to erase: one row shows fringes, the other anti-fringes shifted by half a period, and together they are still the hump above.'],
-    mixed: ['标记本身带噪声（纯度 λ = 0.5）：对比度仍是 V = 0.5，能读出的可辨度只剩 D = 0.43，点落进圆内，沿品红的虚弧走：D² + V² = 0.44 < 1。', 'A noisy marker (purity λ = 0.5): the contrast is still V = 0.5, but only D = 0.43 of distinguishability can be read; the point falls inside the circle and moves along the dashed magenta arc: D² + V² = 0.44 < 1.']
+    mixed: ['标记本身带噪声（纯态权重 λ = 0.5，纯度 Tr ρ² = 0.625）：对比度仍是 V = 0.5，能读出的可辨度只剩 D = 0.43，点落进圆内，沿品红的虚弧走：D² + V² = 0.44 < 1。', 'A noisy marker (pure-state weight λ = 0.5, purity Tr ρ² = 0.625): the contrast is still V = 0.5, but only D = 0.43 of distinguishability can be read; the point falls inside the circle and moves along the dashed magenta arc: D² + V² = 0.44 < 1.']
   };
   let booting = true;
   function applyPreset(id) {
@@ -286,7 +292,7 @@
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
   const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
-    idle: ['自由探索：在圆上拖琥珀色的箭头，调标记的纯度，换一种读法，或拖动时间轴。随时可以再选一张卡。', 'Free play: drag the amber arrow on the circle, change the purity of the marker, read it another way, or scrub the rail. Pick a card again at any time.'] });
+    idle: ['自由探索：在圆上拖琥珀色的箭头，调标记的纯态权重 λ，换一种读法，或拖动时间轴。随时可以再选一张卡。', 'Free play: drag the amber arrow on the circle, change the marker\'s pure-state weight λ, read it another way, or scrub the rail. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });
   TRV.startGlitch(document.querySelector('.brand'));

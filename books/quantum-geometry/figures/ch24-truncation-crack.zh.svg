@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch24-truncation-crack" data-lang="zh" viewBox="0 0 560 300" width="560" height="300" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="横轴是截断多项式的次数 0、2、4、6、8、10，纵轴是它的不动点 q 与 θ* 的差，按绝对值取对数刻度。六根竖线交替朝上（青色，q 比 θ* 大）和朝下（品红，q 比 θ* 小），长度一次比一次短：差依次约为 0.26、0.0070、0.00013、1.3×10⁻⁶、8×10⁻⁹、3.3×10⁻¹¹，越来越小，却没有一根落到中线上。竖线旁标着 q 的值，前两个是 1 与 √3 − 1。">
+<title>横轴是截断多项式的次数 0、2、4、6、8、10，纵轴是它的不动点 q 与 θ* 的差，按绝对值取对数刻度。六根竖线交替朝上（青色，q 比 θ* 大）和朝下（品红，q 比 θ* 小），长度一次比一次短：差依次约为 0.26、0.0070、0.00013、1.3×10⁻⁶、8×10⁻⁹、3.3×10⁻¹¹，越来越小，却没有一根落到中线上。竖线旁标着 q 的值，前两个是 1 与 √3 − 1。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<line x1="96" y1="135" x2="516" y2="135" class="ts-dim" stroke-width="1.3" fill="none"/>
+<line x1="91" y1="100" x2="96" y2="100" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="88" y="104.68" font-size="13" text-anchor="end">10⁻⁸</text>
+<line x1="91" y1="170" x2="96" y2="170" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="88" y="174.68" font-size="13" text-anchor="end">−10⁻⁸</text>
+<line x1="91" y1="65" x2="96" y2="65" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="88" y="69.68" font-size="13" text-anchor="end">10⁻⁴</text>
+<line x1="91" y1="205" x2="96" y2="205" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="88" y="209.68" font-size="13" text-anchor="end">−10⁻⁴</text>
+<line x1="91" y1="30" x2="96" y2="30" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="88" y="34.68" font-size="13" text-anchor="end">1</text>
+<line x1="91" y1="240" x2="96" y2="240" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="88" y="244.68" font-size="13" text-anchor="end">−1</text>
+<line x1="96" y1="30" x2="96" y2="240" class="ts-dim" stroke-width="1.3" fill="none"/>
+<text class="tf-ink" x="516" y="127" font-size="14" text-anchor="end"><tspan font-style="italic">θ</tspan><tspan dy="-0.42em" font-size="72%">∗</tspan><tspan dy="0.42em">​</tspan></text>
+<line x1="130.43" y1="135" x2="130.43" y2="35.11" class="ts-cyan" stroke-width="4.2" stroke-linecap="round" fill="none"/>
+<circle cx="130.43" cy="35.11" r="4.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-cyan ts-bg" x="130.43" y="23.11" font-size="13" text-anchor="middle" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">1</text>
+<text class="tf-dim" x="130.43" y="268" font-size="13" text-anchor="middle">0</text>
+<line x1="199.28" y1="135" x2="199.28" y2="221.16" class="ts-magenta" stroke-width="4.2" stroke-linecap="round" fill="none"/>
+<circle cx="199.28" cy="221.16" r="4.4" class="ts-bg tf-magenta" stroke-width="1.4"/>
+<text class="tf-magenta ts-bg" x="199.28" y="243.16" font-size="13" text-anchor="middle" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">√3 − 1</text>
+<text class="tf-dim" x="199.28" y="268" font-size="13" text-anchor="middle">2</text>
+<line x1="268.13" y1="135" x2="268.13" y2="63.89" class="ts-cyan" stroke-width="4.2" stroke-linecap="round" fill="none"/>
+<circle cx="268.13" cy="63.89" r="4.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-cyan ts-bg" x="268.13" y="51.89" font-size="13" text-anchor="middle" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">0.73922</text>
+<text class="tf-dim" x="268.13" y="268" font-size="13" text-anchor="middle">4</text>
+<line x1="336.98" y1="135" x2="336.98" y2="188.53" class="ts-magenta" stroke-width="4.2" stroke-linecap="round" fill="none"/>
+<circle cx="336.98" cy="188.53" r="4.4" class="ts-bg tf-magenta" stroke-width="1.4"/>
+<text class="tf-magenta ts-bg" x="336.98" y="210.53" font-size="13" text-anchor="middle" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">0.739084</text>
+<text class="tf-dim" x="336.98" y="268" font-size="13" text-anchor="middle">6</text>
+<line x1="405.84" y1="135" x2="405.84" y2="100.86" class="ts-cyan" stroke-width="4.2" stroke-linecap="round" fill="none"/>
+<circle cx="405.84" cy="100.86" r="4.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-cyan ts-bg" x="405.84" y="88.86" font-size="13" text-anchor="middle" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">0.73908514</text>
+<text class="tf-dim" x="405.84" y="268" font-size="13" text-anchor="middle">8</text>
+<line x1="474.69" y1="135" x2="474.69" y2="148.29" class="ts-magenta" stroke-width="4.2" stroke-linecap="round" fill="none"/>
+<circle cx="474.69" cy="148.29" r="4.4" class="ts-bg tf-magenta" stroke-width="1.4"/>
+<text class="tf-magenta ts-bg" x="474.69" y="170.29" font-size="13" text-anchor="middle" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">0.739085133</text>
+<text class="tf-dim" x="474.69" y="268" font-size="13" text-anchor="middle">10</text>
+<text class="tf-dim" x="88" y="268" font-size="13" text-anchor="end">次数</text>
+<text class="tf-dim" x="14" y="17" font-size="13"><tspan font-style="italic">q</tspan> − <tspan font-style="italic">θ</tspan><tspan dy="-0.42em" font-size="72%">∗</tspan><tspan dy="0.42em">（对数刻度）</tspan></text>
+</svg>

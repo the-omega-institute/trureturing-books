@@ -309,7 +309,7 @@ $$
 :::
 
 ::: {.viz src="double-slit-marker" preset="mixed" height="500"}
-**混合的标记落在圆内。** 标记本身带噪声（纯度 $\lambda = 0.5$）：可见度仍是 $V = 0.5$，能读出的迹距离可区分度只剩 $0.43$，点沿品红的虚弧落进圆内，$D^2 + V^2 \approx 0.44 < 1$。这是上面 Englert 不等式（文献结果，未在本书形式化）的一个实例。
+**混合的标记落在圆内。** 标记本身带噪声（纯态权重 $\lambda = 0.5$，纯度 $\Tr\rho^2 = (1 + \lambda^2)/2 = 0.625$）：可见度仍是 $V = 0.5$，能读出的迹距离可区分度只剩 $0.43$，点沿品红的虚弧落进圆内，$D^2 + V^2 \approx 0.44 < 1$。这是上面 Englert 不等式（文献结果，未在本书形式化）的一个实例。
 :::
 
 ::: {.viz src="qubit-geometry" preset="area" height="500"}
@@ -317,7 +317,7 @@ $$
 :::
 
 ::: {.viz src="double-slit-marker" height="560"}
-交互实验室 `SLIT//MARKER`：屏上一个个到达的落点与条纹，互补圆上的两支标记箭头 $r_L$、$r_R$；拖动夹角，切换读标记的方式，或调低标记的纯度。页面上的数是数值演示；$D^2 + V^2 = 1$ 由 [@thm-record-coherence-complementarity] 保证，由 Lean 内核检查。
+交互实验室 `SLIT//MARKER`：屏上一个个到达的落点与条纹，互补圆上的两支标记箭头 $r_L$、$r_R$；拖动夹角，切换读标记的方式，或调低标记的纯态权重 $\lambda$。页面上的数是数值演示；纯态记录标记（$\lambda = 1$）的 $D^2 + V^2 = 1$ 由 [@thm-record-coherence-complementarity] 保证，由 Lean 内核检查；混合标记在 $\alpha > 0$ 时落进圆内、$\alpha = 0$ 时仍在圆上，是 Englert 不等式（文献结果，未在本书形式化）的情形。
 :::
 
 ## 6.4 交互实验：亲手拨动两子几何积、粒子内积与波动外积面 {#sec-interactive-qubit-geometry}

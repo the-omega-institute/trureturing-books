@@ -306,7 +306,7 @@ These Stage B physical conversion formulas involving $k_B$, bath Hamiltonians $H
 :::
 
 ::: {.viz src="erasure-ledger" height="560"}
-**The erasure ledger · full lab.** Keep the books of one bit with the operations: turn, pinch, ideal reset, reset with a bath qubit, copy and undo; the disc on the left draws the state, the two columns on the right record the system's entropy and the heat paid to the environment. Green boxes go only to the frozen theorems this chapter cites; the heat of stage B is marked as a literature result.
+**The erasure ledger · full lab.** Keep the books of one bit with the operations: turn, pinch, ideal reset, reset with a bath qubit, copy and undo; the disc on the left draws the state, the two columns on the right record the system's entropy and the heat paid to the environment. Entropy and heat at whole steps are computed from density matrices; the animation between steps is only an interpolated sketch, not the entropy of the state in between. Green boxes go only to the frozen theorems this chapter cites; the heat of stage B is marked as a literature result.
 :::
 
 ## 8.4 Part II Summary and Bridge: When a Single Plane Cannot Hold Three Orthogonal Bifurcations, Leap to the Three-Dimensional Sphere {#sec-part2-summary-bridge}

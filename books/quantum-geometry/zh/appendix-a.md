@@ -54,6 +54,10 @@
 | **空间吸引子、`trureturing` 黄金切投观察者、卡西尼 $(-1)^{k+1}$ 接缝与似曾相识**<br/>(Spatial Attractors, `trureturing` Cut-and-Project Observer, Cassini Seam & Déjà Vu) | **黄金切投模型集与编码定理（`LEAN ✓`：闵可夫斯基格嵌入、`goldenModelSet` 切投包含、齐肯多夫 `NoAdjacentOnes` 与非负实数 `NNReal` 线程单射、共轭范数互反分离与全窗口 Delone 集、卡西尼恒等式 $F_n F_{n+2}-F_{n+1}^2=(-1)^{n+1}$ 与环面闭子群观测窗有界回归）结合准晶菱形三十面体接受窗 $W\subset E_\perp^3$（$30$ 面、$32$ 顶点、$6$ 条五次轴）、康威帝国效应与洛伦兹吸引子 $D_{\mathrm{KY}}\approx 2.06$（`文献结果`），并在哲学模型（`MODEL`）中将灵魂诠释为内空间窗口相位 $u\in E_\perp$、遗忘诠释为齐肯多夫高阶截断、历史遗迹诠释为大边界裕度 $d_{\partial}$ 中心点、似曾相识诠释为局部近共线（$\delta\theta\to 0$）下的跨轮次内积共振 $\cos\delta\theta\to 1$** | [`minkowski_model_set_spec`](lean:D5/S1/Scale/MinkowskiModelSet.minkowski_model_set_spec), [`golden_model_set_subset_cut_and_project`](lean:D5/S1/Deficit/ModelSet/GoldenCutAndProject.golden_model_set_subset_cut_and_project), [`fib_cassini_from_golden_norm`](lean:D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm), [`TorusObservationWindowReturns.result`](lean:D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result) | $F_n F_{n+2} - F_{n+1}^2 = (-1)^{n+1},\quad \delta\theta\to 0 \implies \cos\delta\theta \to 1$ | `LEAN ✓` / `文献结果` / `MODEL`（第 24、29 章、终章） |
 :::
 
+::: {.figure src="appa-dictionary"}
+**表中最常用的六行：上面是传统写法，下面是它在本书里对应的那幅图。** 纯态是球面上一支琥珀色的箭头；玻恩法则是箭头 $b$ 落在标尺 $a$ 上的青色影子 $\cos\theta$ 再平方；密度矩阵是球内的琥珀色点，$\lvert\mathbf{r}\rvert < 1$；退相干沿品红的横向虚线把点捏到青色的测量轴上；对易子是 $\mathbf{u}$、$\mathbf{v}$ 张成的品红有向面积；单比特门是绕紫色转轴的一转，把灰色箭头转到琥珀色箭头。各行的 Lean 锚点与认识论状态以上表为准，图不另加断言。
+:::
+
 ---
 
 ## 八部曲核心符号与算子速查指南 {#sec-appendix-a-part-by-part}

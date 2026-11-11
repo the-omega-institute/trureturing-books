@@ -35,8 +35,8 @@ def draw(fig):
 
     # ---- I: N = 4, one step from 30° to 90°
     title(one, "I　一步转过 2*θ*", "I  one step turns 2*θ*")
-    th = 30.0  # arcsin(1/√4) = π/6; exact degrees keep arc sampling stable.
-    assert abs(math.degrees(grover_theta(4)) - th) < 1e-9 and abs(math.sin(math.radians(3 * th)) - 1) < 1e-12
+    th = math.degrees(grover_theta(4))
+    assert abs(th - 30) < 1e-9 and abs(math.sin(math.radians(3 * th)) - 1) < 1e-12
     cx, cy, R = 40, 240, 158
     P = plane(one, cx, cy, R, w_label=("*W*", "*W*"), b_label=("*B*", "*B*"))
     one.arc(cx, cy, R * 0.62, th, 3 * th, "axis", 2.6)
