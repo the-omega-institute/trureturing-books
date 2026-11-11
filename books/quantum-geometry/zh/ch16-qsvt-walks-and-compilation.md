@@ -209,6 +209,15 @@ $$
    $$
 
    这是一座内接于单位球体的有限顶点凸多面体。当 $L$ 很小时（如 $L = 0, 1, 2$），$P_L$ 退化为单点、线段或平面多边形（绝不能声称对每一个 $L$，$P_L$ 都已经是满三维多面体！）。当 $P_L$ 达到满三维时，它的每一个二维面（facet）都是削过球体内部的**平直欧氏弦面（flat chordal polygon）**——绝不能把这些欧氏平面多边形称作“球面 $S^2$ 上本身平坦的面”。当 $L$ 足够大使得球心落入多面体内部（$0 \in \operatorname{int} P_L$）时，将 $P_L$ 的棱与面沿径向投影（radial projection）回球皮 $S^2$，平直棱投影为大圆劣弧，便在 $S^2$ 上切出一张球面三角/多边形网格，通常称为“**测地多面体（geodesic polytope）**”（注意该术语仅指径向投影到球面上的大圆弧网格，而 $\operatorname{conv}(\mathcal{S}_L)$ 本身始终是欧氏平直多面体）。
+
+::: {.viz src="gate-word-polytope" preset="one" height="500"}
+**门长 1：一条线段。** 北极是 $T$ 的不动点，只有 $H$ 把它送到 $\vv{e}_x$：两个青色的点只连成一条线段，还谈不上多面体。琥珀色的目标落在 $\vv{e}_x$ 上，门字 $H$ 精确命中，没有品红的缺口；紫色是 $H$ 与 $T$ 的转轴。
+:::
+
+::: {.viz src="gate-word-polytope" preset="six" height="500"}
+**门长 6：包住球心，投回球皮。** $19$ 个可达点的凸包已经包住球心，把它的棱沿半径投到球皮上，就成了一张青色的大圆弧网格（测地多面体）。网格里最大的洞是品红虚线圈住的空球冠，半径 $\varepsilon_6 = 47.27^\circ$，琥珀色的箭头指着它的中心。这里画的是有限门字在球面上的落点，不是 [第二十一章](ch21-diagonalization-and-escape.md) 平面割圆里的多边形。
+:::
+
 4. **有限门长下的正逼近残差 $\varepsilon_L > 0$ 与曲率失配**：对于任何有限门长 $L < \infty$，由于 $S^2$ 是紧致二维连续统而 $\mathcal{S}_L$ 是有限点集，球面上最坏方向离最近可达顶点的测地角距离（覆盖半径）
 
    $$
@@ -217,6 +226,11 @@ $$
 
    **严格大于零**（且随 $L$ 增大单调不增 $\varepsilon_{L+1} \le \varepsilon_L$；至于离散通用门集在渐近编译层面的文献条件见章末 [@rem-solovay-kitaev-literature]，不能从连续轴圆定理 [@prop-two-axis-finite-word] 直接推出）。
    对于任意不落在有限点集 $\mathcal{S}_L$ 中的单位外法向 $\vv{n} \in S^2$，平直弦面的欧氏支持高度 $h = \max_{\vv{s} \in \mathcal{S}_L} (\vv{n} \cdot \vv{s}) < 1$ 与球面支持高度 $1$ 之间恒隔着一道严格为正的**径向支撑间隙** $1 - h > 0$（尽管落在 $\mathcal{S}_L$ 上的顶点本身在球面上并可被相应门字精确命中；关于圆球面曲率与多面体离散角亏的经典微分几何与拓扑文献对照，详见[第二十一章](ch21-diagonalization-and-escape.md) [@rem-hairy-ball-adams-literature]）。
+
+::: {.viz src="gate-word-polytope" preset="nearest" height="500"}
+**离目标最近的点与它的门字。** 门长 $L \le 10$ 时有 $64$ 个可达点。琥珀色的目标在 $\theta = 110^\circ$、$\varphi = 200^\circ$：离它最近的可达点由门字 $HTHTTTTTH$ 到达，相隔 $17.04^\circ$（品红的弧）；平直多面体在这个方向的支持高度 $h = 0.956$，与球皮之间的径向间隙 $1 - h = 0.044$（品红的半径段）。
+:::
+
 5. **刘徽“三维割圆术”的教学类比与单态/全门误差区分**：公元三世纪中国数学家刘徽在《九章算术注》中创立“割圆术”，用内接正多边形的平直弦段逼近圆周（“割之弥细，所失弥少，割之又割，以至于不可割”）。在三维量子门编译中，随着门字预算 $L$ 递增，有限顶点层 $\mathcal{S}_L$、内接平直弦面层 $P_L$ 与外包光滑球面层 $S^2$ 构成了鲜明的**三维割圆术**图像（注：这纯粹是“用越来越细的离散弦面逼近光滑曲面”的几何教学类比，绝非声称古代割圆术已证明现代量子编译或给出 Solovay–Kitaev 误差指数）。最后务必牢记：单态球面覆盖误差 $\varepsilon_L$ 会放过绕初态 $\vv{r}_0$ 旋转的稳定子相位，因此不能直接代替整个门算子在 $\mathrm{PU}(2)/\mathrm{SU}(2)$ 上的算子范数编译误差 $\delta(U, V) = \min_{\varphi \in \mathbb{R}}\norm{U - e^{i\varphi}V}_{\mathrm{op}}$。
 
 ::: {.viz src="sphere-escape" preset="zu" height="500"}
@@ -381,6 +395,10 @@ $$
 表中每一行均严格满足 $0 < q \le 1$、$(2n+1)\arcsin\sqrt{r} = \frac{\pi}{2}$ 以及 $2n + 1 \le \frac{\pi/2 + 2}{\sqrt{p}}$。再次强调：这一阶梯给出的是已知 $p$ 时的振幅放大源算子查询次数，而非离散 $\{H, T\}$ 编译门数。
 :::
 
+::: {.viz src="gate-word-polytope" preset="three" height="500"}
+**门长 3：五个顶点，球心在外。** 例中的五个青色顶点第一次围成立体，但它们都在 $x \ge 0$、$z \ge 0$ 的一侧。琥珀色的目标指向 $-\vv{e}_x$：最近的顶点在 $90^\circ$ 外，支持高度 $h = 0$，品红的径向间隙从球心一直到球皮，整整为 $1$，与第三步的计算一致。
+:::
+
 <!-- alias: #rem-qsvt-solovay-kitaev-literature -->
 ::: {.remark #rem-solovay-kitaev-literature title="Solovay–Kitaev 门编译定理与对数多面体逼近复杂度（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 当我们将目标从连续两轴旋转（[@prop-two-axis-finite-word]）转向离散有限门集编译时，其渐近字长由量子编译理论中的 **Solovay–Kitaev 定理**（参见 C. M. Dawson and M. A. Nielsen, *The Solovay–Kitaev algorithm*, Quantum Inf. Comput. **6**, 81–95, 2006, arXiv:quant-ph/0505030）给出：
@@ -401,6 +419,14 @@ $$
 
    这里要合成步长为 $O(\varepsilon)$ 的微小旋转修正 $\exp([A, B])$，必须取两根步长为 **$O(\sqrt{\varepsilon})$** 的旋转生成元 $A, B$，使换位子主项 $[A, B]$ 落在 $O(\sqrt{\varepsilon})\cdot O(\sqrt{\varepsilon}) = O(\varepsilon)$ 量级，而高阶残差落在 $O\bigl((\sqrt{\varepsilon})^3\bigr) = O(\varepsilon^{3/2})$ 量级（绝不能错写成换位子对原步长呈线性关系）。
 4. **反柏拉图边界重申**：Solovay–Kitaev 定理是一个关于 $\varepsilon \to 0$ 时字长增长率的渐近逼近定理——它**既不意味着**在任何有限字长 $L < \infty$ 下最坏目标门 $U \notin \mathcal{W}_{\le L}$ 的覆盖残差可以归零（虽然恰好已属于有限字集 $\mathcal{W}_{\le L}$ 的离散顶点如 $I, H, T$ 本身具有零误差，但在整个连续群或球面上，最坏覆盖半径 $\varepsilon_L > 0$ 对一切有限 $L$ 恒成立），**也不允许**把固定初态在 $S^2$ 上的单态覆盖误差 $\varepsilon_L$ 直接等同于 $\mathrm{SU}(2)/\mathrm{PU}(2)$ 上的全门编译误差。
+:::
+
+::: {.viz src="gate-word-polytope" preset="shrink" height="500"}
+**最大的缺口一级级缩小，却补不上。** 门长从 $0$ 走到 $20$：青色的可达点一层层变密，品红虚线圈出的最大空球冠从 $180^\circ$ 缩到 $\varepsilon_{20} = 9.10^\circ$，有几层一点也不缩；到 $L = 20$ 有 $971$ 个点，洞仍然在。曲线是页面对每个 $L$ 实算的覆盖半径，不拟合任何渐近速率；渐近字长是 [@rem-solovay-kitaev-literature] 的文献结果。
+:::
+
+::: {.viz src="gate-word-polytope" height="560"}
+**门字多面体实验室。** 拖时间轴改门长 $L$，在球上拖动琥珀色的目标，或换成最坏方向：青色是长度不超过 $L$ 的 $\{H, T\}$ 门字的落点与它们的凸包，品红是到最近可达点的弧、径向间隙与空球冠。绿色框是 [@prop-two-axis-finite-word]，作为连续轴圆的对照；其余都是页面的数值。
 :::
 
 至此，第四部“高维球体——纠缠、拓扑与量子算法”的四章旅程全部合拢：我们从双比特 $6 + 9 = 15$ 的关联扇区与贝尔 $45^\circ$ 余弦破缺（[第十三章](ch13-entanglement-and-chsh.md)）出发，用泡利稳定子与架编织把脆弱的局部线藏进正交综合征子空间（[第十四章](ch14-cloning-codes-and-braids.md)），在不变平面旋转与有限群对偶零化子相消中看清了 Grover 与 Shor 算法的几何引擎（[第十五章](ch15-grover-qft-and-period-finding.md)），最终在切比雪夫递推与三维割圆多面体 $P_L$ 中直面了有限离散门字逼近连续球面的永恒残差 $\varepsilon_L > 0$（本章）。正是这道在任何有限步内都无法彻底抹平的多面体缝隙，为我们打开了通往第五部与第六部——时空与观察者复杂性、不完备性对角线逃逸与余弦自指不动点（其经典分析与算术性质见[第二十四章](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature]）——的深层大门。

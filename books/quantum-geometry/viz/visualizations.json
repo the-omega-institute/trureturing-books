@@ -1319,6 +1319,58 @@
           "gid": "D5/S3/Quantum/Walks/SymmetricCoinMaximalWalkEntanglement.result"
         }
       ]
+    },
+    {
+      "id": "gate-word-polytope",
+      "code": "GATE//POLYTOPE",
+      "title": "门字多面体",
+      "title_en": "The polytope of gate words",
+      "summary": "从北极出发，用 H 与 T 两个门拼出长度不超过 L 的门字，每个门字把北极送到布洛赫球面上的一点（按第十六章例题的转动 R_H、R_T 逐层算出，每点标出最短门字）。这些点只有有限个：点数 1、2、3、5、8、13、19……远小于 2^(L+1) − 1。它们的凸包是内接于球的平直多面体：门长 1 是一条线段，门长 3 第一次成为立体却不含球心，从门长 5 起包住球心，可把棱投回球皮成为测地网格。拖动琥珀色的目标，品红的弧与半径段给出它到最近可达点的角度与径向间隙 1 − h；切到最坏方向，品红虚线圈出最大的空球冠 ε_L，它随 L 一级级缩小（L = 20 时 971 个点，ε = 9.10°），却在任何有限 L 下都不为零。五张实验卡可以在第十六章正文里单独引用。",
+      "summary_en": "Starting from the north pole, the gates H and T make words of length at most L, and each word carries the pole to a point of the Bloch sphere (computed layer by layer with the rotations R_H, R_T of the worked example in Chapter 16, each point labelled with a shortest word). There are only finitely many: 1, 2, 3, 5, 8, 13, 19, … points, far below 2^(L+1) − 1. Their convex hull is a flat polytope inscribed in the sphere: at length 1 it is a segment, at length 3 it is solid for the first time but misses the centre, and from length 5 on it holds the centre, so that its edges project onto the sphere as a geodesic mesh. Drag the amber target, and the magenta arc and piece of radius give its angle to the nearest reachable point and the radial gap 1 − h; switch to the worst direction, and dashed magenta circles the largest empty cap ε_L, which shrinks step by step with L (971 points and ε = 9.10° at L = 20) yet never vanishes for a finite L. Each of the five experiment cards can be cited on its own from Chapter 16.",
+      "path": "gate-word-polytope/",
+      "thumbnail": "gate-word-polytope/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "门编译",
+        "H 与 T 门",
+        "布洛赫球",
+        "凸包",
+        "覆盖半径",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Gate compilation",
+        "H and T gates",
+        "Bloch sphere",
+        "Convex hull",
+        "Covering radius",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第十六章 · 有限门字与三维割圆多面体",
+          "label_en": "Chapter 16 · Finite gate words and the polytope",
+          "href": "../zh/ch16-qsvt-walks-and-compilation.html#sec-finite-gate-polytope",
+          "href_en": "../en/ch16-qsvt-walks-and-compilation.html#sec-finite-gate-polytope"
+        },
+        {
+          "label": "第十六章 · L ≤ 3 的五顶点验算",
+          "label_en": "Chapter 16 · The five vertices for L ≤ 3",
+          "href": "../zh/ch16-qsvt-walks-and-compilation.html#ex-finite-ht-polytope",
+          "href_en": "../en/ch16-qsvt-walks-and-compilation.html#ex-finite-ht-polytope"
+        },
+        {
+          "label": "Lean 源码 · TwoAxisFiniteRotation",
+          "label_en": "Lean source · TwoAxisFiniteRotation",
+          "href": "{trureturing}/D5/S3/Geometry/TwoAxisFiniteRotation.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word"
+        }
+      ]
     }
   ]
 }
