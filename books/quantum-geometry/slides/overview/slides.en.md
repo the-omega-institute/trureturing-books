@@ -668,11 +668,11 @@ section: "Three tiers"
     <img src="./img/prelude-three-tiers.en.svg" alt="Three bars: green 184, violet 127, red 6; under the green bar, 308 theorem declarations in the lock file." style="display: block; width: 900px; max-width: 100%;">
     <div>
       <div class="g3">
-        <Stat value="186" label="theorems, lemmas, propositions and corollaries with lean=" tone="ok" />
+        <Stat value="187" label="theorems, lemmas, propositions and corollaries with lean=" tone="ok" />
         <Stat value="127" label="remarks and examples marked “literature result, not formalized”" tone="violet" />
         <Stat value="6" label="open conjectures, marked OPEN, with no Lean reference" tone="warn" />
       </div>
-      <p class="lead mt">The lock file <span class="mono">trureturing.lock.json</span> pins <span class="mono">dev@1d9bf98cab83</span>: 441 declarations, 310 of them Lean theorems.</p>
+      <p class="lead mt">The lock file <span class="mono">trureturing.lock.json</span> pins <span class="mono">dev@1d9bf98cab83</span>: 443 declarations, 312 of them Lean theorems.</p>
     </div>
   </div>
 </div>

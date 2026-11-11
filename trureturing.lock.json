@@ -317,6 +317,22 @@
       "line": 94,
       "signature": "theorem continuous_average_tendsto_haar (α : ℝ) (hα : Irrational α) (ρ : ℝ) (f : AddCircle (1 : ℝ) → ℂ) (hf : Continuous f) : Tendsto (fun N : ℕ => (∑ i ∈ Finset.range N, f ((ρ + (i : ℝ) * α : ℝ) : AddCircle (1 : ℝ))) / (N : ℂ)) atTop (𝓝 (∫ x, f x ∂AddCircle.haarAddCircle))"
     },
+    "D5/S1/Phase/ThreeGap/Main.three_gap_card_le_three": {
+      "module": "D5/S1/Phase/ThreeGap/Main",
+      "name": "ThreeGap.three_gap_card_le_three",
+      "kind": "theorem",
+      "statement_id": "sha256:73452cca2519671f0aac9172804b037d4893debaea39150d42b302516ea39ac3",
+      "line": 223,
+      "signature": "theorem three_gap_card_le_three (a : ℝ) (N : ℕ) : (gaps a N).toFinset.card ≤ 3"
+    },
+    "D5/S1/Phase/ThreeGap/Main.three_gap_lengths_eq": {
+      "module": "D5/S1/Phase/ThreeGap/Main",
+      "name": "ThreeGap.three_gap_lengths_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:73452cca2519671f0aac9172804b037d4893debaea39150d42b302516ea39ac3",
+      "line": 237,
+      "signature": "theorem three_gap_lengths_eq (a : ℝ) {N : ℕ} (h3 : (gaps a N).toFinset.card = 3) : (gaps a N).toFinset = ({etaPos a N, etaNeg a N, etaPos a N + etaNeg a N} : Finset ℝ)"
+    },
     "D5/S1/Recurrence/NormOneTraceAddition.trace_recurrence": {
       "module": "D5/S1/Recurrence/NormOneTraceAddition",
       "name": "D5.S1.Recurrence.NormOneTraceAddition.trace_recurrence",

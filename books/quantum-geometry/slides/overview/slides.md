@@ -668,11 +668,11 @@ section: "三层依据"
     <img src="./img/prelude-three-tiers.zh.svg" alt="三条横条：绿色 184，紫色 127，红色 6；绿色下注锁文件里 308 条 theorem 声明。" style="display: block; width: 900px; max-width: 100%;">
     <div>
       <div class="g3">
-        <Stat value="186" label="带 lean= 的定理、引理、命题与推论" tone="ok" />
+        <Stat value="187" label="带 lean= 的定理、引理、命题与推论" tone="ok" />
         <Stat value="127" label="写明“文献结果，未在本书形式化”的注记与例" tone="violet" />
         <Stat value="6" label="开放猜想，标为 OPEN，不带 Lean 引用" tone="warn" />
       </div>
-      <p class="lead mt">锁文件 <span class="mono">trureturing.lock.json</span> 钉住 <span class="mono">dev@1d9bf98cab83</span>，共 441 项声明，其中 310 项是 Lean theorem。</p>
+      <p class="lead mt">锁文件 <span class="mono">trureturing.lock.json</span> 钉住 <span class="mono">dev@1d9bf98cab83</span>，共 443 项声明，其中 312 项是 Lean theorem。</p>
     </div>
   </div>
 </div>

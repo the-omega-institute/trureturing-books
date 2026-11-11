@@ -363,6 +363,63 @@ Part 1 derives injectivity of `minkowskiEmbedding` and the model-set characteriz
 **A narrow window: longer waits, still bounded.** Narrow the amber observation window to $(0.45, 0.55)$: in the first $233$ steps only $8$ cyan steps fall inside, and the longest gap, marked in magenta, stretches to $48$ steps, yet the gaps are still bounded. In the plot further down the page, the cyan share of steps inside stays no lower than the dashed magenta $1/(M + 1)$. Finitely many steps are a numerical demonstration; bounded returns for all $n$ are item 4 of the theorem above.
 :::
 
+**Gaps in time, gaps in space.** The cards “back in the window with bounded gaps” and “a narrow window” above look at time: how many steps the orbit takes to come back to the window. Put the first $N$ points of the same golden-angle orbit on the circle together and the question is about space: how long is the arc between neighbouring points? The answer is strikingly tidy, and not only for the golden angle.
+
+::: {.theorem #thm-coda-three-gap title="The Three-Gap Theorem: The First N Points of a Circle Rotation Cut at Most Three Arc Lengths" lean="D5/S1/Phase/ThreeGap/Main.three_gap_card_le_three, D5/S1/Phase/ThreeGap/Main.three_gap_lengths_eq"}
+Let $a \in \mathbb{R}$ and $N \ge 1$. Write $\{t\} = t - \lfloor t \rfloor$ for the fractional part and $P = \{\{ia\} : 0 \le i < N\} \subset [0, 1)$ (repeated points counted once). List the elements of $P$ in increasing order as $s_0 < s_1 < \cdots < s_{k-1}$, and call the multiset
+
+$$
+\{\, s_{j+1} - s_j : 0 \le j < k - 1 \,\} \;\cup\; \{\, s_0 + 1 - s_{k-1} \,\}
+$$
+
+the **arc lengths** of $P$ (the last term is the arc that wraps around). Then:
+
+1. the arc lengths of $P$ take at most three distinct values;
+2. if they take exactly three, let $\eta^+$ be the smallest positive element of $P$ and $\eta^-$ be $1$ minus the largest positive element of $P$; then the three values are exactly $\eta^+$, $\eta^-$ and $\eta^+ + \eta^-$.
+:::
+
+::: proof
+The proof uses one fact: the difference of two orbit points is again an orbit point, with the indices subtracted. Write $\eta^+ = \{m^+ a\}$ and $1 - \eta^- = \{m^- a\}$ with $m^\pm < N$. Look to the right of an orbit point $v = \{ja\}$. As long as the index $j + m^+$ is still below $N$, there is an orbit point at distance $\eta^+$ to the right of $v$; as long as $j - m^-$ is not negative, there is one at distance $\eta^-$. The minimality of $\eta^+$ and the maximality of $1 - \eta^-$ rule out any point in between, so the arc to the right of $v$ is $\eta^+$ or $\eta^-$. In the “corner case” where neither route is available, Lean proves separately that no orbit point lies between $v$ and the next point, and the arc is exactly $\eta^+ + \eta^-$. Every arc therefore lies in $\{\eta^+, \eta^-, \eta^+ + \eta^-\}$: at most three lengths, and exactly these three when there are three. The full proof is checked by the Lean kernel.
+:::
+
+::: {.example #ex-coda-golden-three-gap title="Arc Lengths of the Golden Angle: Consecutive Negative Powers of φ, with Two Lengths Exactly at the Fibonacci Numbers"}
+Take the golden angle $a = 1/\varphi^2 \approx 0.381966$ of a turn, that is $137.5^\circ$. The table lists the arc lengths cut by the first $N$ points and how many arcs have each length (computed to high precision and matched one by one against $\varphi^{-k}$):
+
+| $N$ | Arc lengths (number of arcs) | Distinct lengths |
+| ---: | :--- | ---: |
+| $2$ | $\varphi^{-1}$ (1), $\varphi^{-2}$ (1) | $2$ |
+| $3$ | $\varphi^{-2}$ (2), $\varphi^{-3}$ (1) | $2$ |
+| $4$ | $\varphi^{-2}$ (1), $\varphi^{-3}$ (2), $\varphi^{-4}$ (1) | $3$ |
+| $5$ | $\varphi^{-3}$ (3), $\varphi^{-4}$ (2) | $2$ |
+| $6$ | $\varphi^{-3}$ (2), $\varphi^{-4}$ (3), $\varphi^{-5}$ (1) | $3$ |
+| $7$ | $\varphi^{-3}$ (1), $\varphi^{-4}$ (4), $\varphi^{-5}$ (2) | $3$ |
+| $8$ | $\varphi^{-4}$ (5), $\varphi^{-5}$ (3) | $2$ |
+| $9$ | $\varphi^{-4}$ (4), $\varphi^{-5}$ (4), $\varphi^{-6}$ (1) | $3$ |
+| $10$ | $\varphi^{-4}$ (3), $\varphi^{-5}$ (5), $\varphi^{-6}$ (2) | $3$ |
+| $11$ | $\varphi^{-4}$ (2), $\varphi^{-5}$ (6), $\varphi^{-6}$ (3) | $3$ |
+| $12$ | $\varphi^{-4}$ (1), $\varphi^{-5}$ (7), $\varphi^{-6}$ (4) | $3$ |
+| $13$ | $\varphi^{-5}$ (8), $\varphi^{-6}$ (5) | $2$ |
+
+Three things can be checked by hand:
+
+- **With three lengths, the largest is the sum of the other two.** At $N = 4$, for instance, $\eta^+ = \varphi^{-4}$, $\eta^- = \varphi^{-3}$, and the longest arc is $\varphi^{-2} = \varphi^{-3} + \varphi^{-4}$. That is $\varphi^2 = \varphi + 1$ divided by $\varphi^4$ (manual derivation), exactly item 2 of [@thm-coda-three-gap].
+- **The numbers of arcs are Fibonacci numbers.** In the row $N = 13$, $8\varphi^{-5} + 5\varphi^{-6} = \varphi^{-6}(8\varphi + 5) = 1$, because induction on $\varphi^2 = \varphi + 1$ gives $\varphi^{n} = F_n \varphi + F_{n-1}$, and $n = 6$ is $\varphi^6 = 8\varphi + 5$ (manual derivation).
+- **Two lengths occur only at the Fibonacci numbers.** Among $2 \le N \le 400$, the values of $N$ with exactly two arc lengths are precisely the $12$ Fibonacci numbers $2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377$; the other $387$ values all have three (numerical check).
+
+**The golden angle cuts most evenly.** Over the same range $2 \le N \le 400$, take the largest ratio of the longest arc to the shortest (numerical computation):
+
+| Rotation $a$ | Largest ratio, longest arc / shortest arc | Attained at |
+| :--- | ---: | ---: |
+| $1/\varphi^2$ (golden angle) | $2.618 = \varphi^2$ | $N = 378$ |
+| $\sqrt{2} - 1$ | $3.414 = 2 + \sqrt{2}$ | $N = 72$ |
+| $e - 2$ | $7.528$ | $N = 73$ |
+| $\pi - 3$ | $293.6$ | $N = 114$ |
+
+The large number for $\pi - 3$ comes from $355/113$: $113\pi - 355 \approx -3.0 \times 10^{-5}$, so the point $\{113(\pi - 3)\} \approx 1 - 3.0 \times 10^{-5}$ lands almost back on $0$ and cuts a very short arc there (manual derivation). The ratio stays bounded for all $N$ exactly when the partial quotients of the continued fraction of $a$ are bounded, and the golden angle's partial quotients are all $1$. That general statement, and the phyllotaxis model in which the florets of a sunflower head are laid out at successive golden angles (H. Vogel, 1979), are **literature results, not formalized in this book**.
+:::
+
+> In time, the orbit comes back within a bounded wait; in space, it leaves only three kinds of gap.
+
 ::: {.viz src="golden-cut-observer" height="640"}
 **Interactive laboratory `ORTHO//CUT`**: the four scenes of this section. Cut and project: drag the window up and down to see edge points flip and deep points stay, then fix a small patch in the middle; Cassini: the powers of $\varphi$ and their rectangles of area $\pm 1$; returns: change the position and width of the observation window, and the waits grow longer but stay bounded; the acceptance window: push a point from the centre of the rhombic triacontahedron to its boundary, where $d_\partial$ reaches zero and it flips out. The green evidence boxes are the theorems verified in Lean; the triacontahedron and the “empire” are literature results, and what is said about souls and ruins is an interpretive model (`MODEL`).
 :::
@@ -415,6 +472,8 @@ Because $S(n+1) = U(S(n)) \subseteq S(n)$ for every $n \in \mathbb{N}$, the sequ
 
 1. **Kernel-verified frozen theorems in `trureturing.lock.json` (green `LEAN ✓` badge)**:
    - Finite-step stabilization of contracting subset updates [`finite_contracting_updates_stabilize`](lean:D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize) ([@thm-coda-fixed-point-anchor]);
+   - Birkhoff's pointwise ergodic theorem [`birkhoff_pointwise_ergodic`](lean:D5/S3/Analytic/Probability/BirkhoffPointwise.birkhoff_pointwise_ergodic) ([@thm-coda-birkhoff-ergodic]);
+   - The three-gap theorem for circle rotations [`three_gap_card_le_three`](lean:D5/S1/Phase/ThreeGap/Main.three_gap_card_le_three) and [`three_gap_lengths_eq`](lean:D5/S1/Phase/ThreeGap/Main.three_gap_lengths_eq) ([@thm-coda-three-gap]);
    - The golden cut-and-project model set, Cassini $\pm 1$ norm identity, nonnegative real Zeckendorf thread, and bounded-gap torus return theorem ([@thm-coda-golden-cut-observer-cassini]): including the Minkowski lattice embedding and model-set specification [`minkowski_model_set_spec`](lean:D5/S1/Scale/MinkowskiModelSet.minkowski_model_set_spec), natural-number golden expansion range inclusion [`golden_model_set_subset_cut_and_project`](lean:D5/S1/Deficit/ModelSet/GoldenCutAndProject.golden_model_set_subset_cut_and_project), unit window volume [`golden_window_volume`](lean:D5/S1/Deficit/ModelSet/GoldenModelSetSelfSimilar.golden_window_volume), disjoint self-similar branch decomposition [`golden_model_set_self_similar`](lean:D5/S1/Deficit/ModelSet/GoldenModelSetSelfSimilar.golden_model_set_self_similar), prefix counting density limit $1/\sqrt{5}$ [`golden_model_set_density`](lean:D5/S1/Deficit/ModelSet/GoldenModelSetDensity.golden_model_set_density), Beatty observer route [`golden_observer_route_w_c1`](lean:D5/S1/Deficit/Beatty/GoldenObserverRoute.golden_observer_route_w_c1), Fibonacci–Cassini $\pm 1$ golden norm identity [`fib_cassini_from_golden_norm`](lean:D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm), Zeckendorf least-index norm-sign alternation [`betaGolden_norm_sign_of_least_zeckendorf_index`](lean:D5/S1/Deficit/Displacement/ZeckendorfNormSign.betaGolden_norm_sign_of_least_zeckendorf_index), `NoAdjacentOnes` regular language equivalence [`base_success_iff_noAdjacentOnes`](lean:D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes), nonnegative real (`NNReal`) multi-scale Zeckendorf thread injectivity [`zeckendorf_real_thread_injective`](lean:D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective), Beatty coordinate fiber capacity pairs [`golden_fiber_capacity_pair`](lean:D5/S1/Deficit/Beatty/FiberCapacityPair.golden_fiber_capacity_pair) and [`golden_dual_fiber_capacity_pair`](lean:D5/S1/Deficit/Beatty/FiberCapacityPair.golden_dual_fiber_capacity_pair), conjugate norm separation and full-window Delone certification [`norm_separation`](lean:D5/S3/Fourier/GoldenModelSetDelone.norm_separation) and [`exists_golden_modelSet_delone`](lean:D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone), closed-subgroup torus Haar equidistribution [`TorusOrbitEquidistribution.result`](lean:D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result), the golden survivor-hull ergodic bridge [`golden_ergodic_bridge`](lean:D5/S0/Tower/ErgodicBridge/Golden.golden_ergodic_bridge), and bounded-gap torus observation-window returns [`TorusObservationWindowReturns.result`](lean:D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result);
    - The necessary and sufficient criterion for exact projection closure of quadratic vector fields [`quadratic_closure_iff`](lean:D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff), the 5-mode Fourier–Galerkin fluid advection non-closure theorem [`no_exact_closure`](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure) ([@thm-coda-quadratic-advection-no-closure]), and all-grade regularity of 2D periodic mild Fourier paths [`all_grade_regularity_of_mild_path`](lean:D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path);
    - Uniqueness of the golden-ratio fixed point $\varphi = (1+\sqrt{5})/2$ for the self-referential continued-fraction map $x \mapsto 1 + 1/x$ on $(0, \infty)$ [`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique);
@@ -518,7 +577,7 @@ This monograph consists of the **[Prelude](README.md)**, **Eight Parts (32 Chapt
             ┌─────────────────────────────────────────────────────────────────┐
             │ Part VIII: Causality, ETH, Fairness & Meta (Ch 29–32) → Coda    │
             │  • Polyhedral defect & Hairy Ball lit. • Pythagorean 4-tier arc │
-            │  • Concept Dictionary (A) • Clifford Sheet (B) • 441 Index (C)  │
+            │  • Concept Dictionary (A) • Clifford Sheet (B) • 443 Index (C)  │
             └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -541,7 +600,7 @@ Readers can navigate the book along four self-contained tracks tailored to their
 3. **Mathematical Logic, Number Theory, and Epistemology Track**:
    [Prelude](README.md) $\to$ Chapter 10 (Gram matrices and order independence) $\to$ Chapters 19–20 (discrete polyhedral facet cones and open-conjecture boundaries) $\to$ Chapters 21–24 (diagonal escape, Euler products, quaternion Diophantine norms, and cosine self-reference) $\to$ [Chapter 29](ch29-timeless-causality-and-gram-space.md)–[Chapter 32](ch32-unified-field-and-meta-unification.md) (the four-tier Pythagorean escape of number, timeless causality, the ETH horizon, fluid vortex filaments, quantum fairness, and meta-unification) $\to$ Coda (golden cut-and-project spatial attractors and [@thm-coda-fixed-point-anchor]).
 4. **Lean 4 Formal Verification and Kernel Audit Track**:
-   [Prelude](README.md) §Epistemic Contract $\to$ Chapters 25–28 (Part VII: line-by-line formal tour of `Cl3`, `PauliSymplectic`, `ZYZ`, and `FiniteRecordCosineObstruction`) $\to$ [Appendix B](appendix-b.md) $\to$ [Appendix C](appendix-c.md) (auditing all $229$ environment/media frozen theorems, $89$ auxiliary definitions, and $123$ inline declarations — $441$ unique locked declarations in total — at `trureturing@dev` commit `1d9bf98cab83`).
+   [Prelude](README.md) §Epistemic Contract $\to$ Chapters 25–28 (Part VII: line-by-line formal tour of `Cl3`, `PauliSymplectic`, `ZYZ`, and `FiniteRecordCosineObstruction`) $\to$ [Appendix B](appendix-b.md) $\to$ [Appendix C](appendix-c.md) (auditing all $231$ environment/media frozen theorems, $89$ auxiliary definitions, and $123$ inline declarations — $443$ unique locked declarations in total — at `trureturing@dev` commit `1d9bf98cab83`).
 
 ### Quick Register of the 41 Core Chapter Theorem Anchors in Parts VI–VIII (Chapters 21–32) {#sec-coda-part6-part7-register}
 
@@ -591,4 +650,4 @@ As a bridge between the closing three parts of the monograph and the complete le
 | **Chapter 32**<br/>Unified Field & Meta-Unification | T32.1 | `D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes` | The binary Zeckendorf finite automaton accepts a binary word iff `NoAdjacentOnes` holds |
 | **Chapter 32** | T32.2 | `D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null` | Every real quadratic form vanishing on all Minkowski null-cone vectors is a scalar multiple of `minkowski d` |
 
-Outside all spheres lies not emptiness, but **the unending act of measurement and counting itself**. Turn next to [Appendix A](appendix-a.md) for the complete dictionary translating conventional quantum mechanics into geometric language, [Appendix B](appendix-b.md) for the Clifford algebra and rotor cheat sheet, and [Appendix C](appendix-c.md) for the complete index of all $318$ formal environment and media `trureturing@dev` declarations ($441$ unique locked declarations including inline references).
+Outside all spheres lies not emptiness, but **the unending act of measurement and counting itself**. Turn next to [Appendix A](appendix-a.md) for the complete dictionary translating conventional quantum mechanics into geometric language, [Appendix B](appendix-b.md) for the Clifford algebra and rotor cheat sheet, and [Appendix C](appendix-c.md) for the complete index of all $320$ formal environment and media `trureturing@dev` declarations ($443$ unique locked declarations including inline references).
