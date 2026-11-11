@@ -270,13 +270,108 @@ $$
 
 单比特是唯一“公平”的情形：随便指一个方向，相融权重取 $0$ 到 $1$ 之间每个值的机会都一样。维数一高，随机指的方向就以压倒性的概率与基准态接近正交。[第十二章](ch12-measurement-computation-and-gradients.md)讨论的赤道集中与贫瘠高原，起点就是这件事。
 
+到这里为止，我们走的一直是“正向”：先给定状态 $\rho$ 与快门 $P$，再算出权重 $\Tr(\rho P)$。现在把问题倒过来：假如手里只有一组**探针**——每一根都是能被百分之百确认的纯态方向——再加上两子丈量本身，能不能单凭它们，把任意一台探测器的读数拆成若干彼此互斥的“确认”？拆出来的探针，会不会自己排成一套像 [@thm-rank-one-born-pairing] 里那样的完备记录测量？
+
+关键是**最小确认**。对每根探针 $p$，在所有“对 $p$ 必然通过、在任何探针上都不超过 $1$”的非负读数里，取最吝啬的那一个，记作 $e_p$。在单比特上，$e_p(q) = \Tr(pq) = \frac{1 + \cos\theta}{2}$（下文 [@ex-qubit-confirmation-peel] 手工核验），正是 [@ex-bloch-half-angle] 的那张表：拿 $p$ 去丈量 $q$，只用这两根箭头，不请第三方裁判。下面的定义把这个结构搬到任意实向量空间上。
+
+::: {.definition #def-confirmation-system title="探针上的正泛函与确认系统" lean="D5/S3/Quantum/Foundation/LeastConfirmationGeneration.Positive D5/S3/Quantum/Foundation/LeastConfirmationGeneration.ConfirmationSystem"}
+设 $A$ 为实向量空间，$P \subseteq A$ 为任意一组**探针**。线性泛函 $f : A \to \mathbb{R}$ 称为**在 $P$ 上为正**（Lean 中 `Positive P f`），若对一切 $p \in P$ 有 $f(p) \ge 0$。$P$ 上的一个**确认系统**（`ConfirmationSystem P`）由以下七项组成：
+
+1. 线性泛函 $u : A \to \mathbb{R}$，称为单位泛函（`unit`）；
+2. 归一化（`normalized`）：对一切 $p \in P$，$u(p) = 1$；
+3. 对每个 $p \in P$ 指定的线性泛函 $e_p : A \to \mathbb{R}$，称为 $p$ 的确认效应（`effect`）；
+4. 合规（`proper`）：对一切 $p, q \in P$，$0 \le e_p(q) \le 1$；
+5. 确认（`confirms`）：对一切 $p \in P$，$e_p(p) = 1$；
+6. 最小性（`least`）：对一切 $p \in P$ 与线性泛函 $f$，若 $f$ 在 $P$ 上为正、对一切 $q \in P$ 有 $f(q) \le 1$，且 $f(p) = 1$，则对一切 $q \in P$ 有 $e_p(q) \le f(q)$；
+7. 极大值可达（`maximum`）：对每个在 $P$ 上为正且不恒为零的线性泛函 $f$，存在 $p \in P$，使 $f(p) > 0$ 且对一切 $q \in P$ 有 $f(q) \le f(p)$。
+:::
+
+前五项只是记账：$u$ 给每根探针总量 $1$，$e_p$ 是一个合规且对 $p$ 必然通过的读数。有内容的是后两项。最小性说 $e_p$ 不多给任何探针一分权重：任何别的合规且对 $p$ 必然通过的读数，在每根探针上给出的都不少于 $e_p$。极大值可达说每个非零正读数都在某根探针上取到最大值；Lean 把它写成结构的一个字段，是假设，不是由紧致性推出的定理。顺带一行手工推导：这一项迫使 $P$ 张成整个 $A$，否则一个在 $P$ 上恒为零的非零泛函在 $P$ 上为正，却找不到使它取正值的探针。
+
+::: {.theorem #thm-positive-dual-generation title="最小确认生成正对偶" lean="D5/S3/Quantum/Foundation/LeastConfirmationGeneration.positive_dual_generation"}
+设 $A$ 为有限维实向量空间，$P \subseteq A$，并给定 $P$ 上的一个确认系统（[@def-confirmation-system]），其单位泛函为 $u$，确认效应为 $p \mapsto e_p$。若线性泛函 $f : A \to \mathbb{R}$ 在 $P$ 上为正，则存在一个有限列表 $(m_1, p_1), \dots, (m_\ell, p_\ell)$（$\ell \ge 0$，$m_i \in \mathbb{R}$，$p_i \in P$），满足：
+
+1. 对每个 $i$，$m_i > 0$；
+2. $f = \sum_{i=1}^{\ell} m_i\, e_{p_i}$；
+3. 对一切 $i < j$，$e_{p_j}(p_i) = 0$ 且 $e_{p_i}(p_j) = 0$；
+4. 对一切 $q \in P$，$\sum_{i=1}^{\ell} e_{p_i}(q) \le u(q)$；
+5. $\ell \le \dim A$；
+6. 若 $f = u$，则每个 $m_i = 1$。
+:::
+
+::: proof
+证明是一层一层地“剥皮”。若 $f = 0$，取空列表。否则由极大值可达，取使 $f$ 最大的探针 $p$，记 $m = f(p) > 0$。泛函 $m^{-1}f$ 在 $P$ 上为正、不超过 $1$、在 $p$ 处等于 $1$，最小性给出在 $P$ 上 $e_p \le m^{-1}f$，于是余项 $r = f - m\,e_p$ 仍在 $P$ 上为正，且 $r(p) = 0$。记 $Z(f)$ 为被 $f$ 打成零的探针所张成的子空间（Lean 中 [`zeroSpan`](lean:D5/S3/Quantum/Foundation/LeastConfirmationGeneration.zeroSpan)）。若探针 $x$ 满足 $f(x) = 0$，则 $0 \le r(x) = -m\,e_p(x) \le 0$，故 $Z(f) \subseteq Z(r)$；而 $p \in Z(r)$ 不在 $Z(f)$ 中，因为 $Z(f) \subseteq \ker f$ 而 $f(p) = m > 0$。所以每剥一层，$Z$ 的维数至少加一；对 $\dim A - \dim Z(f)$ 作强归纳，剥皮至多 $\dim A$ 层就停下，给出展开式与长度界。每层的余项 $r$ 是后面各层的正权和，每一项在探针上都非负，而 $r(p) = 0$，所以后剥出的效应在先剥出的探针上都为零：$i < j$ 时 $e_{p_j}(p_i) = 0$。反方向来自最小性：若 $e_q(p) = 0$，泛函 $u - e_q$ 在 $P$ 上为正、不超过 $1$、在 $p$ 处等于 $1$，故 $e_p(q) \le u(q) - e_q(q) = 0$，又 $e_p(q) \ge 0$，所以 $e_p(q) = 0$。总和界对列表归纳：尾部之和 $t$ 在 $P$ 上介于 $0$ 与 $1$ 之间，并在首个探针 $a$ 处为零，于是 $u - t$ 满足最小性的前提，给出 $e_a(q) + t(q) \le 1 = u(q)$。最后，双向互斥使 $\bigl(\sum_j m_j e_{p_j}\bigr)(p_i) = m_i$；若 $f = u$，左边等于 $u(p_i) = 1$，故 $m_i = 1$。完整证明由 Lean 内核检查。
+:::
+
+先看最透明的模型，一颗 $n$ 面骰子（手工推导）。取 $A = \mathbb{R}^n$，探针为标准基向量 $\delta_1, \dots, \delta_n$（“必然掷出第 $k$ 面”），单位泛函 $u(x) = x_1 + \cdots + x_n$，确认效应为坐标读数 $e_{\delta_k}(x) = x_k$。七项一眼可见：$e_{\delta_k}(\delta_j)$ 在 $j = k$ 时为 $1$、否则为 $0$；若 $f$ 在探针上非负且 $f(\delta_k) = 1$，则 $j \ne k$ 时 $f(\delta_j) \ge 0 = e_{\delta_k}(\delta_j)$，这就是最小性；非零正读数 $f(x) = c_1 x_1 + \cdots + c_n x_n$ 的系数 $c_j = f(\delta_j) \ge 0$ 不全为零，最大的那个就是极大值。坐标读数线性无关，两两互斥又排除了重复的探针，所以 [@thm-positive-dual-generation] 给出的展开在这里只能是按坐标拆开；证明里的剥皮，就是按系数从大到小一项一项剥。例如 $n = 3$、$f(x) = 0.5\,x_1 + 0.3\,x_3$，剥成 $0.5\,e_{\delta_1} + 0.3\,e_{\delta_3}$，两层，不超过 $\dim A = 3$。骰子只有 $n$ 根探针，剥皮毫无悬念；量子比特的探针却铺满整个球面，哪几根会被剥出来，要由读数自己挑。
+
+::: {.example #ex-qubit-confirmation-peel title="在布洛赫球上剥皮：一枚非锐利效应的谱分解"}
+本例是**手工推导**：单比特满足 [@def-confirmation-system] 的七项，以及下面每一层剥皮，都是用前文的矩阵算出来的，不是所引 Lean 声明的内容。
+
+**实例。** 取 $A$ 为 $2\times 2$ 厄米矩阵构成的实向量空间（基为 $I, \sigma_X, \sigma_Y, \sigma_Z$，$\dim A = 4$），探针为全体纯态投影 $\rho_{\vv{a}} = \frac{1}{2}(I + B(\vv{a}))$，$\vv{a} \in S^2$；单位泛函 $u = \Tr$，确认效应 $e_p(X) = \Tr(pX)$，于是 $e_{\rho_{\vv{a}}}(\rho_{\vv{b}}) = \frac{1 + \vv{a}\cdot\vv{b}}{2}$。归一化、合规与确认三项立即成立：$\Tr p = 1$，$0 \le \Tr(pq) \le 1$，$\Tr(pp) = \Tr p = 1$。$A$ 上每个线性泛函都唯一地写成 $f(X) = \Tr(FX)$，$F$ 厄米；在探针上为正即 $F \ge 0$，在探针上不超过 $1$ 即 $F \le I$。若又有 $f(p) = 1$，$p = \lvert\psi\rangle\langle\psi\rvert$，则 $\langle\psi\rvert(I - F)\lvert\psi\rangle = 0$ 且 $I - F \ge 0$，迫使 $F\lvert\psi\rangle = \lvert\psi\rangle$，故 $F = p + \lambda(I - p)$，$0 \le \lambda \le 1$，从而 $f(q) \ge \Tr(pq) = e_p(q)$：这就是最小性。极大值可达由 $F$ 的最大本征值 $\lambda_{\max} > 0$ 的本征向量给出，因为 $f(\lvert\phi\rangle\langle\phi\rvert) = \langle\phi\rvert F\lvert\phi\rangle \le \lambda_{\max}$。
+
+**一枚非锐利探测器。** 设探测器的点击效应为
+
+$$
+E = \begin{pmatrix} 3/5 & 1/5 \\ 1/5 & 3/10 \end{pmatrix} = 0.45\,I + 0.2\,\sigma_X + 0.15\,\sigma_Z ,
+$$
+
+读数 $f(q) = \Tr(Eq)$ 是纯态 $q$ 触发点击的概率。代入 $\rho_{\vv{a}}$ 得
+
+$$
+\begin{aligned}
+f(\rho_{\vv{a}}) &= 0.45 + 0.2\,a_0 + 0.15\,a_2 \\
+&= 0.45 + 0.25\,\vv{a}\cdot\vv{s}, \qquad \vv{s} = (0.8,\ 0,\ 0.6).
+\end{aligned}
+$$
+
+在球面上，$f$ 是一个朝 $\vv{s}$ 倾斜的“高度函数”：最亮处在 $\vv{s}$（极角 $\arccos 0.6 \approx 53.13^\circ$），最暗处在对跖点 $-\vv{s}$。
+
+**第一层。** 极大值落在 $\vv{s}$ 对应的纯态 $p_1 = \lvert\psi_1\rangle\langle\psi_1\rvert$，$\lvert\psi_1\rangle = \frac{1}{\sqrt{5}}\binom{2}{1}$，权重 $m_1 = f(p_1) = 0.7$。剥掉它：
+
+$$
+\begin{aligned}
+E - 0.7\,p_1 &= \begin{pmatrix} 3/5 & 1/5 \\ 1/5 & 3/10 \end{pmatrix} - \frac{7}{10}\begin{pmatrix} 4/5 & 2/5 \\ 2/5 & 1/5 \end{pmatrix} \\
+&= \begin{pmatrix} 1/25 & -2/25 \\ -2/25 & 4/25 \end{pmatrix} = 0.2\,p_2 ,
+\end{aligned}
+$$
+
+其中 $p_2 = \lvert\psi_2\rangle\langle\psi_2\rvert$，$\lvert\psi_2\rangle = \frac{1}{\sqrt{5}}\binom{-1}{2}$，布洛赫向量为 $-\vv{s}$。余项 $r_1 = f - 0.7\,e_{p_1}$ 仍非负，且只在 $p_1$ 处为零。$f$ 在每个纯态上都至少是 $0.2$，被它打成零的探针张成 $\{0\}$；被 $r_1$ 打成零的探针张成一维的 $\operatorname{span}\{p_1\}$：维数从 $0$ 升到 $1$。
+
+**第二层。** $r_1$ 的极大值落在 $p_2$，权重 $m_2 = 0.2$，余项为零，被零泛函打成零的探针张成整个 $A$（维数 $4$），剥皮结束：
+
+$$
+\begin{aligned}
+f &= 0.7\,e_{p_1} + 0.2\,e_{p_2}, \\
+E &= 0.7\,p_1 + 0.2\,p_2 .
+\end{aligned}
+$$
+
+| 纯态探针 $q$ | 布洛赫向量 | $f(q) = \Tr(Eq)$ | $e_{p_1}(q)$ | 余项 $r_1(q)$ |
+| :---: | :---: | :---: | :---: | :---: |
+| $\lvert 0\rangle$ | $(0, 0, 1)$ | $0.6$ | $0.8$ | $0.04$ |
+| $\lvert 1\rangle$ | $(0, 0, -1)$ | $0.3$ | $0.2$ | $0.16$ |
+| $\lvert +\rangle$ | $(1, 0, 0)$ | $0.65$ | $0.9$ | $0.02$ |
+| $\lvert +i\rangle$ | $(0, 1, 0)$ | $0.45$ | $0.5$ | $0.1$ |
+| $\lvert\psi_1\rangle$ | $(0.8, 0, 0.6)$ | $0.7$ | $1$ | $0$ |
+| $\lvert\psi_2\rangle$ | $(-0.8, 0, -0.6)$ | $0.2$ | $0$ | $0.2$ |
+
+**对照定理的六条结论。** 权重 $0.7, 0.2 > 0$；$e_{p_2}(p_1) = e_{p_1}(p_2) = \Tr(p_1 p_2) = 0$（布洛赫向量对跖）；$e_{p_1}(q) + e_{p_2}(q) = \Tr\bigl((p_1 + p_2)q\bigr) = \Tr q = 1 = u(q)$，总和界取等号；长度 $2 \le \dim A = 4$。若读数换成单位泛函 $f = \Tr$，每个纯态都取到最大值 $1$，剥皮可以从任意一根 $p$ 开始：$\Tr = e_p + e_{I - p}$，两个权重都是 $1$，即 $I = p + (I - p)$——一套完备记录测量，而且哪根轴都行。
+:::
+
+剥皮的结果正是 $E$ 的谱分解：两根探针是 $E$ 的本征方向，两个权重是本征值。可剥皮本身没有解过本征方程，也用不着外部基 $\{\lvert 0\rangle, \lvert 1\rangle\}$（上面写出矩阵只是为了核对）：第一根探针是读数最亮的方向，第二根是余项最亮的方向，每一步只做两子丈量。
+
+> 不必先立坐标再测量；读数最亮的方向，就是读数自己挑出的坐标轴。
+
+有三条界线要说清。第一，[@thm-positive-dual-generation] 的长度界是 $\dim A$，在单比特上是 $4$；实际只剥出两层，是因为 $\mathbb{C}^2$ 里至多有两个互相正交的单位向量（$\Tr(p_i p_j) = 0$ 即 $\langle\psi_i\mid\psi_j\rangle = 0$），这个更紧的界 $2$ 是本例的手工观察，不是定理的结论。第二，单比特满足七项是上面的手工推导；所引 Lean 文件在文件头写明，紧致归一化基上的应用与状态一侧的谱桥是另外的数学义务，不在这条定理之内。第三，这条定理分解的是在探针上为正的读数，回答“读数由什么组成”；它没有断言“满足可加性的概率赋值必取迹配对形式”。那个唯一性问题是下面 [@rem-gleason-literature] 所讲的格里森定理与布施定理的内容。
+
 ::: {.remark #rem-gleason-literature title="格里森定理与布施定理（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 本章的 [@thm-born-probability-skeleton] 严格证明了“充分性方向”：任何半正定且迹为 $1$ 的密度矩阵 $\rho$，通过典范无坐标基迹配对 $P \mapsto \Tr(\rho P)$ 都会在正交投影算子格上诱导出一个归一化、可加且实非负的概率权重。要反过来确立“唯一性方向”（即任何满足可加性公理的概率赋值必取迹配对形式），则依赖数学物理中的两条经典逆定理及其精确的维数与定义域前提：
 
 - **格里森定理**（A. M. Gleason, *Measures on the closed subspaces of a Hilbert space*, J. Math. Mech. **6**, 885–893, 1957）：要求可分希尔伯特空间维数满足 **$\dim\mathcal{H} \ge 3$**。在此维数前提下，闭子空间（正交投影）格上的任何可数可加概率测度 $\mu$（在有限维 $3 \le \dim\mathcal{H} < \infty$ 下归约为两两正交投影上的有限可加性），必唯一表示为某个半正定迹一算子 $\rho$ 的玻恩迹配对 $\mu(P) = \Tr(\rho P)$。**当 $\dim\mathcal{H} = 2$ 时，格里森定理在纯正交投影格上不成立**：因为二维空间中的每组正交基仅含两个对跖秩一投影 $\{P_{\vv{n}}, P_{-\vv{n}}\}$，不同测量轴之间不存在公共投影元来传递跨基连锁约束，故在 $S^2$ 上可以构造出无穷多满足逐对对跖之和为 $1$ 的非玻恩标架函数（frame functions）。
 - **布施定理**（P. Busch, *Quantum states and generalized observables: A simple proof of Gleason's theorem*, Phys. Rev. Lett. **91**, 120403, 2003）：若将可加性定义域从尖锐正交投影扩展到全体正半定广义测量效应（POVM 效应元 $0 \le E_i \le I$，要求每当 $\sum_i E_i \le I$ 时满足可加性 $\mu(\sum_i E_i) = \sum_i \mu(E_i)$），则对**一切维数 $\dim\mathcal{H} \ge 2$**（包含单量子比特 $\dim\mathcal{H} = 2$）唯一性全面恢复：任何广义概率测度必唯一表示为 $E \mapsto \Tr(\rho E)$。
 
-本书所钉仓库聚焦于显式有限维矩阵构造与建设性归约（[@thm-born-probability-skeleton]、[@thm-born-modulus-square] 与 [@thm-rank-one-born-pairing]），上述两条逆向唯一性定理由经典文献给出，不列入本书的 Lean 验证声明账本。
+本书所钉仓库聚焦于显式有限维矩阵构造与建设性归约（[@thm-born-probability-skeleton]、[@thm-born-modulus-square] 与 [@thm-rank-one-born-pairing]），并冻结了由最小确认出发的结构分解 [@thm-positive-dual-generation]；上述两条逆向唯一性定理由经典文献给出，不列入本书的 Lean 验证声明账本。
 :::
 
 砍掉了冗余的第 3 点 $C$，看清了相融垂足 $\vv{c} = (\vv{a}\cdot\vv{b})\vv{a}$ 与半角余弦平方 $\cos^2(\theta/2)$ 的几何真相之后，我们的目光自然落到了这章所有公式里反复出现的那把标尺本身——满足 $P^2 = P$ 的**幂等投影算子**。为什么“测量一次”和“说出一个概念”乃至“感知到一秒钟的经典时间流逝”，在底层全都是同一个方程 $P^2 = P$？让我们进入[第三章](ch03-projectors-and-duality.md)。
