@@ -535,6 +535,38 @@ EPUB 浏览器预览不等于 Apple Books 原生主题验收，尚未导入 Appl
 
 本批 ch05–08 正文、四实验室及其测试和静态帧未因该整合改变；与 `1d4199c` 比较的 246 份正文、实验室、工具、主题和治理依赖均逐字相同，锁与七份终章/序曲图稿则与当前主线逐字相同。对应记录见 `build/content-accuracy/integration-d170f29/candidate-correspondence.json`。整合后重新运行 `./tbook check`，1 本可见书、0 错误、0 警告，`git diff --check` 通过。此前 `1d4199c` 的架构与测试席结论只约束其未变依赖，不批准后来的终章、序曲、技能或整合产物。最终三席复审、当前导出、PR #90 CI、合入与 Pages 继续待办。新视频与演示文稿的整合不增加全文或媒体内容批准，历史正文覆盖仍为 9/35。
 
+## PR90 R3：ARCH-R3-01 有限归属修复（待最终复审）
+
+本次输入为干净的 `7a9d9ffb56f3fc8469d776e49aedd64ceec16b94`，pin 仍为 `1d9bf98cab8306e67ec38a739359f2cdae63877a`。此前 R3 三席均已终态收齐：架构 reject、质量 approve、测试 approve，机械汇总为 fix；唯一准入阻断项是 **ARCH-R3-01**。这是最终审查新发现的来源归属缺口，与已完成的七类媒体及衍生图修复分开记录。质量席元描述建议仍按非阻断 advisory 处理。
+
+- **ARCH-R3-01（确认）**：`qubit-geometry/index.html` 的 Evidence 首个绿色框把泡利双矢量实例与指数三角展开也放在同一个冻结归属下。逐字核对精确 pin 的 `BalancedUnitaryComplexStructure.lean` 第 75–83 行及冻结状态片：该引理只假设有限阶复矩阵满足 `Rᴴ = −R`、`R Rᴴ = I`，结论为 `R² = −I`；既不形式化该泡利实例，也不陈述指数公式。中英绿色框现仅保留这条引理及原 GID/链接；正确的双矢量与指数说明保留在相邻普通短注中，明确为冻结陈述之外的手算。同一理论抽屉只补相应的手算/一般引理归属限定，数学内容保留。
+- **质量 advisory 的一致性修正**：`double-slit-marker/index.html` 仅在双语 `meta[name=description]` 加入登记表已有的“纯态标记在 α = 90° 时 / for a pure marker at α = 90°”条件。非正交纯态标记仍有 `V = cos α > 0`，不能无条件说按路径读的两行没有条纹；登记表、物理模型和卡片均未改。此项没有升级为阻断裁决。
+- **聚焦技能迭代**：在 `local-content-accuracy` 原有来源/证明检查的第 2 步加入一条完整读取媒体绿色依据框的要求：GID 存在不等于框内伴随推论全被验证，手算实例化与推导须在验证框外保有自己的归属。原引用文件、流程和检查强度保留；没有新增案例目录或测试套件。
+
+本轮交互源码按项目规定直接实施；首次短注展开过多，经差异检查后使用唯一一次允许的纠正续行压缩，未再续修。所有证据位于 `build/content-accuracy/arch-r3-01-7a9d9ff/`（构建目录，不作为出版正文）。来源核对见 `source-attribution.json`，输入与依赖见 `input-correspondence.json`、`dependency-correspondence.json`、`font-correspondence.json`；浏览与输出见 `browser-inspection.json`、`visual-inspection.json`、`site-correspondence.json`。
+
+| 本次实际检查 | 结果与边界 |
+| --- | --- |
+| 输入与不变量 | 修复前 1,507 个跟踪路径与测试席精确候选归档全部逐字节相同。修复后，72 份双语章节/图注、253 份源码运行时及测试依赖、登记表、锁文件与全部 476 张实验室 JPEG 均保留原摘要；GID、链接标记、稳定 ID、题记、媒体顺序未改。 |
+| 源码门禁与技能 | `./tbook check` exit 0：1 本可见书、0 错误、0 警告；两本隐藏示例未查。技能验证通过，两份本地引用文件存在且摘要未变。`git diff --check` 通过。未改工具，未重复工具单元测试。 |
+| 现有浏览器套件 | `qubit-geometry` 普通与 `VIZ_SLOW_FRAMES=1000` 各 **107/107**；`double-slit-marker` 两种模式各 **89/89**；均 exit 0，包含 `stageFirstChecks`。未新增镜像测试。未变的另外两页保留此前 R3 测试证据，不冒称本轮重跑四页 419 项。 |
+| 官方截图与静态图 | 两页 `viz-shots` 共 14 张桌面/书内/手机/封面图均已查看；`viz-thumbs` 各执行一次，共 28 张封面/引用卡 JPEG 重采后全部字节一致，未产生图片源码差异。依据与手算短注位于捕获舞台之外，截图参数、舞台源码、共享捕获工具、图注、引用卡及运行时的依赖对应均已核对。 |
+| 当前 HTML/site | 双语 HTML 重建及 site 构建 exit 0。两份发布页等于当前修正源码经既有 pin-link 转换后的内容；4 份 ch05/ch06 发布章节等于新建 HTML 经既有未建视频海报标记转换后的内容，全部实验室嵌入与图注字节相同；6 份站点下载等于核验过的 R3 导出摘要。site 同时检查/生成中英概览各 39 页演示文稿；不据此增加内容批准。 |
+| 实际浏览 | 通过 `./tbook serve` 在 Pages 子路径浏览：两页中英桌面/手机共 **8** 个组合；ch05/ch06 中英、navy/light、1440/390 px 共 **16** 个组合，**120** 次运行时嵌入全部载入。无页面/控制台/请求错误、坏图、KaTeX 错误或页面/嵌入/依据框/抽屉横向溢出。另逐一查看四组 Evidence 与抽屉配对截图、两组章节联系表。实验室沿用固定夜间配色，没有新造主题。 |
+| PDF/EPUB 按依赖复用 | 两种既有导出配置分别比较中英实际 Pandoc `book.md`、`meta.json`、`_book/`、`_theme/`，每组 **722/722** 相同；11 份受控字体摘要相同。PDF 配置对照保存的最终 R3 stage，EPUB 发布地址配置对照由 R3 原源码重建的 stage，并核查既有 EPUB 中的发布地址。静态嵌入只消费未变的登记标题、图注、卡图与地址，不嵌入实验室 HTML。核验并复用四 PDF、两 EPUB 及此前两 EPUBCheck valid、0 错误/0 警告证据，未重复 PDF/EPUB 整书编译。 |
+
+导出复用的配置限制必须保留：首次把当前 Git 自动推导的发布地址与 R3 最终 PDF stage 直接比较时不等；查明此前受控字体 PDF 的 `online_url/repo_url` 为空，EPUB 则含发布地址后，分别按各自原配置比较通过。复用的 PDF 保留此前 `ignore_system_fonts=True` 配置及空在线地址；先前默认 macOS 字体 LastResort 建议、未知字体族警告及默认/CI 不等价限制仍有效。本轮不声称当前默认配置会生成同样字节。站点八部视频均为 `TBOOK_FILMS=skip` 海报回退；未检查原生阅读器/设备、整片/音频或 CI/Pages。
+
+当前三份产品/技能文件 SHA-256（账本自身摘要在交付结果中记录）：
+
+| 路径 | SHA-256 |
+| --- | --- |
+| `books/quantum-geometry/viz/qubit-geometry/index.html` | `c82429d6d90f6f05e18602098d6a559d0a0aeaf5ef0c87d16c089058e2d4b916` |
+| `books/quantum-geometry/viz/double-slit-marker/index.html` | `8d20be8031c6d16aae9a30a2bacf28e39bf301598d6ee6f9bbbb2928b5433bd6` |
+| `skills/local-content-accuracy/SKILL.md` | `b9076b3adade38479f2c05e5cb7250729410ffba17589eece3f2abc54b130cbc` |
+
+本次为未提交的有限实施交付，**最终复审待调用方编排**；此前质量/测试批准不是对本次改动的自动批准。调用方还须核对提交与本补丁的对应、PR #90 CI、合入与 Pages。未执行暂存、提交、合并、变基、贮藏、推送、PR 操作或委派；未改锁、Lean、托管路径、工具、正文、图注、登记表或运行时。历史文字覆盖仍为 **9/35**，其余 **26** 个单元待审，全 35 单元目标继续。
+
 [par-src]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/QuantumContext/ParallelogramNormLaw.lean#L22
 [par-frozen]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/Golden/Frozen/state/D5/S3/QuantumContext/ParallelogramNormLaw.lean.json
 [fin-src]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/Quantum/FiniteDimensional.lean#L24
