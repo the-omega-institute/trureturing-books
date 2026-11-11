@@ -1,6 +1,6 @@
 # quantum-geometry 内容准确性覆盖与证据
 
-核对日期：2026-11-11。中文为权威，英文逐段对照。本记录区分内容证据与输出验收；构建成功不证明物理解释成立。只对序曲及第一章作局部事实纠错，不改作品方向、章首题记、Lean 声明或锁文件。本次复审修复从候选 `76ecbfd280a2da37b868507e49c170fc551bd782` 开始，基于主线 `71fc82959991d900a65cc5442ad85f5e32af3652`（含 PR #57）。沿用首轮和此前整合的内容证据时另核对依赖；下文按各候选分别标明输出基线。全目标为现有中英 SUMMARY 的 35 个单元，本批覆盖 2 个，33 个待核对。本地核对不等于独立复审、合入或部署完成。
+核对日期：2026-11-11。中文为权威，英文逐段对照。中英 SUMMARY 共 35 个单元：内容覆盖为 5/35，其中序曲和第 1 章已独立复审并合入，第 2–4 章的 R1 确认阻断项已修复并通过 R2 三席独立复审；PR #62 待合入；其余 30 个单元尚未全文核对。本记录区分内容证据、输出验收与合入状态。首批各轮的候选与输出基线分别保留在下文。
 
 ## 全书覆盖
 
@@ -8,11 +8,11 @@
 
 | 序号 | SUMMARY 文件（中英同名） | 中英覆盖 / 状态 | 证据 |
 | --- | --- | --- | --- |
-| 0 | README.md | 已覆盖；本批指定问题已作最小双语修正 | P1–P8、Q1–Q4、R1–R7、第三轮导读复核 |
-| 1 | ch01-measurement.md | 已覆盖；确认问题已作最小双语修正 | F1–F6、D1、C1–C5、Q3、R1–R7 |
-| 2 | ch02-born-rule.md | 待核对 | — |
-| 3 | ch03-projectors-and-duality.md | 待核对 | — |
-| 4 | ch04-decoherence.md | 待核对 | — |
+| 0 | README.md | 已覆盖；已复审并合入 PR #53 | P1–P8、Q1–Q4、R1–R7、第三轮导读复核 |
+| 1 | ch01-measurement.md | 已覆盖；已复审并合入 PR #53 | F1–F6、D1、C1–C5、Q3、R1–R7 |
+| 2 | ch02-born-rule.md | 已覆盖；R2 复审通过，PR #62 待合入 | F01、F02；图 02；本批 R1-B01、B02 |
+| 3 | ch03-projectors-and-duality.md | 已覆盖；R2 复审通过，PR #62 待合入 | F03、F04、F06、F07；图 03；本批 R1-B02 |
+| 4 | ch04-decoherence.md | 已覆盖；R2 复审通过，PR #62 待合入 | F01、F05、F08；图 04；本批 R1-B03–B05 |
 | 5 | ch05-complex-phase-and-rotors.md | 待核对 | — |
 | 6 | ch06-geometric-product.md | 待核对 | — |
 | 7 | ch07-geometric-time-and-speed-limits.md | 待核对 | — |
@@ -44,7 +44,7 @@
 | 33 | appendix-b.md | 待核对 | — |
 | 34 | appendix-c.md | 待核对 | — |
 
-## 固定源码与冻结条目
+## 首批（序曲、第 1 章）：固定源码与冻结条目
 
 现行源码基准为 `trureturing@38196c62e121b0a334b903eea2a513bb2587e41c`；首轮逐条核对和原始取样基于 `52725b62b659b244d077e29f18a576aa809007b7`。本次在 trureturing 只读检出中分别用 `git show <提交>:<路径>` 取两版源码、冻结状态片及现有 Blueprint，逐项比较字节和锁项；下列链接指向现行提交。状态片摘要是模块级，不当作每条定理的独立陈述摘要。未重跑 Lean；这里核对的是既有冻结证明与书中陈述/解释的对应，非新增形式化。以下用正文稳定 `#id` 定位，中英同用，不复制锁文件完整签名目录。
 
@@ -292,11 +292,81 @@ PDF 查看范围以第二章起点为界，包含序曲、第一部扉页和第�
 | 四份 PDF 相关页渲染并实看 | 中文屏幕物理页 15、印刷页 17，英文屏幕页 17、印刷页 18。第五部三列与修改后的 RT 主题均可读，无裁切或重叠 | `exports.json`、`pdf/part5-contact.png`、`pdf/*-part5.png` |
 | 两份 EPUBCheck、解包并实看 XHTML | 两份均 `valid=true`，0 错误、0 警告，未跳过。`EPUB/text/ch002.xhtml` 的八行表格、MathML 及删除后的 RT 主题已核对；中英 × 浏览器明/暗色偏好 × 760×950 桌面 / 390×844 手机，共八种组合，第五部单元格完整可读 | `exports.json`、`epub/report.json`、`epub/zh-part5-contact.png`、`epub/en-part5-contact.png` |
 
-EPUB 浏览器预览不等于 Apple Books 原生主题验收，尚未导入 Apple Books；既有视频工具链及海报回退限制沿用此前记录。本次不新增已提交测试，不重跑未变工具或可视化套件。最终独立复审 R4、PR、CI 与 Pages 由调用方后续办理。
+EPUB 浏览器预览不等于 Apple Books 原生主题验收，尚未导入 Apple Books；既有视频工具链及海报回退限制沿用此前记录。本次不新增已提交测试，不重跑未变工具或可视化套件。后续复审与发布结果见下节。
+
+## 首批合入与线上核对
+
+[PR #53](https://github.com/the-omega-institute/trureturing-books/pull/53) 经三席独立复审通过，PR 的八项检查均成功，已合入 `237030d7c915dbdb0e9b108e32c09a1df9e16e2b`。该合并提交的 [CI](https://github.com/the-omega-institute/trureturing-books/actions/runs/42934777044)、[CodeQL](https://github.com/the-omega-institute/trureturing-books/actions/runs/42934776519) 和 [Pages](https://github.com/the-omega-institute/trureturing-books/actions/runs/42934777154) 均成功。合并提交的九份封存文件与复审候选 `e0dde0b` 逐字节相同。线上中英序曲和第 1 章的四个正文区域与复审输出快照相同，图 00、01 在两种语言路径下均与快照逐字节相同。证据见 `build/content-accuracy/ch02-ch04/first-batch-live/report.json`。该比较只覆盖四个正文区域和两图；同一主线基线含 PR #58 对第 29、30 章、终章与附录 C 的修改，旧整书 PDF/EPUB 字节不作为本次部署证据。
+
+## 第 2–4 章：覆盖与局部纠错
+
+输入为 `76ecbfd` 上完整核读的六份正文（2,222 行）和三张静态图；这些文件及锁文件与本批初始基线 `237030d` 逐字节相同。中英各 80 个独立公式块、全部题记、22 个正式环境（19 条正式结论、3 项定义）及证明块在首次局部修订前后不变；下文 R1 补修另行校正两个正式环境的标题与范围措辞。29 个环境属性引用涉及 19 个模块；计入正文内链共 38 条不同引用、20 个模块。逐条以 `git show <pin>:<path>` 复核锁定源码、冻结记录的名称、种类与模块摘要；原核查的每条声明假设、类型、量词、结论及证明解释见 `formal-review.json`，其中本轮发现的对应缺口以下文 R1 补修为准，正文内链另见 `inline-definition-review.json`。没有重跑 Lean，也没有改锁。
+
+| 章节 | 两版全文及三图的证据 |
+| --- | --- |
+| 第 2 章（4 个正式环境） | 玻恩迹配对的充分性、秩一归约和零权分支，半角/五行概率表、球面尾概率与 Haar 例，Gleason/Busch 的定义域和可加性；图 02 的垂足及半角。 |
+| 第 3 章（8 个正式环境） | 记录捏合的幂等、不动点与容量，三态、霍奇互补与可见度、三泡利碰撞概率和熵表、偏振链；图 03 的投影与对偶标签。 |
+| 第 4 章（10 个正式环境） | 偏迹、扩张和访问限制，四种信道的数值与端点、北极球保持、指数包络前提、迹距离及贝尔边缘态；图 04 的截短、相位衰减和振幅漂移。 |
+
+`build/content-accuracy/ch02-ch04/` 下的 `coverage.json`、`paragraph-index.json` 按修订前行号定位每段；`locked-sources.json` 提供固定提交上的源码与冻结状态片链接和哈希。原稿 PDF 第 6、26、15 页分别支持三章中文题记，英文核对语义；两版题记逐字节保留。已重跑 50 项独立等式比较，无失败；`independent-calculations.json` 另保留数值表、反例和独立取样结果。图示核对覆盖六个引用、三份共享 SVG、52 个原有文字节点（35 个断言、13 个记号、4 个语境标签），以及对应的 24 种普通 HTML 视图和 3 个原始 SVG 视图。只确认 F08 的两个可见前提缺口；图 02、03 源文件和本章引用不变。该核对只覆盖当前三张图及其随章语境。
+
+| 修订 | 原文位置（修订前） | 决定性证据及修正 |
+| --- | --- | --- |
+| F01 · 单比特维数 | 第 2 章第 5 行；第 4 章中文第 418 行 | 两个复分量即四个实坐标；参见 [`Fin 2 → ℂ` 的源码][wit-src]。中英修正复维数，英文第 4 章原有“四参数”措辞保留。 |
+| F02 · 对称三态 | 第 2 章中文第 234 行 | 布洛赫夹角 120° 给平方重叠 $1/4$；[Renes 等](https://arxiv.org/abs/quant-ph/0310075) 式 (1) 的单比特 SIC 有四态、平方重叠 $1/3$。中文改为 trine，原数值及英文标签保留。 |
+| F03 · 捏合不动点 | 第 3 章第 78、100 行 | [记录测量与不动点][qg-pinching-fixed] 只要求跨分支块为零。以 $P_0=\operatorname{diag}(1,1,0)$、$P_1=\operatorname{diag}(0,0,1)$ 为例，前两坐标中的 $\lvert0\rangle$ 和 $(\lvert0\rangle+\lvert1\rangle)/\sqrt2$ 的密度矩阵均为不动点，但交换子 $(0,1)$ 项为 $1/2$。两版区分经典分支标签与分支内相干；秩一细分给出完全对角态。 |
+| F04 · 可见度平方 | 第 3 章第 179 行 | 取 $\vv{r}=(0.6,0,0.8)$，原强度公式给极值 $0.8,0.2$，调制振幅 $0.3$、可见度 $0.6$，而 $r_x^2+r_y^2=0.36$。修正物理量名称，保留后文的公式。 |
+| F05 · 偏迹与影子 | 第 4 章第 9、11、27、144 行 | [矩阵偏迹][qg-marginal]与 [Stinespring 压缩][qg-stinespring]不包含联合态向量向三维空间的投影。等权模型中 $\rho_S=\frac12\bigl(\begin{smallmatrix}1&c\\c&1\end{smallmatrix}\bigr)$；当 $c=0$ 时局部布洛赫长度为 0，联合态与原乘积态的内积为 $1/2$，投到 $\mathbb C^2\otimes\operatorname{span}\{e_0\}$ 的向量长度为 $1/\sqrt2$。将长矛的影子保留为比喻，$\norm{\vv{r}}=\cos\theta_{\mathrm{env}}$ 只用于等权且环境记录重叠实非负的例子。 |
+| F06 · 同一律归属 | 第 3 章第 19 行 | [《形而上学》IV.3](https://classics.mit.edu/Aristotle/metaphysics.4.iv.html) 的“最确定”原理是不矛盾律。两版只用现代同一律记号引入幂等性，保留布尔与冯·诺依曼的例子。 |
+| F07 · 文献分级 | 第 3 章第 278 行 | 对完备 MUB，各基的无迹投影子空间两两正交，总维数 $(d+1)(d-1)=d^2-1$。把 $\rho-I/d$ 正交分解，得 $\sum_{b,i}(p_{b,i}-1/d)^2=\Tr(\rho^2)-1/d$，即原恒等式。仅把原段落放入两版同 ID 的文献注，保留 Ivanović 归属，不加 Lean 引用。 |
+| F08 · 图 04 端点 | 图 04 的 II、III 栏 | [相位极限][qg-phase]在 $c=1$ 时不成立，因 $c^N=1$；[RLD 左极限][qg-rld]在 $\gamma=1$ 的重置端点不适用，$u'=1$ 使常用 RLD 剖面奇异。两栏各在公式旁加一条可见范围 $0\le c<1$、$0\le\gamma<1$，保留正文的合法信道端点。 |
+
+出处边界（A01–A05）：费曼在课堂演示所述具体轶事未找到可验证的一手出处；三偏振片的数学与该轶事分开。原蒙特卡洛运行的种子、代码和输出，以及原角度搜索的运行记录未取得；独立取样和网格计算支持数值，不能认证旧运行。[Ivanović](https://doi.org/10.1088/0305-4470/25/7/014) 和 [Sánchez-Ruiz](https://doi.org/10.1016/0375-9601(95)00219-S) 的原文未能访问；书目信息已核对，后者的紧界有 [Wehner–Winter](https://arxiv.org/abs/0907.3704) §III.C.1 佐证，前者的恒等式另行推导。第 4 章收束处的哲学概括，以及第 3 章末尾已是捏合不动点的纯态例外，保留为提示项。核查所到页节和限制见 `literature-review.json`、`advisory.json`。
+
+下表第 2–4 章的首次本地产物从 `237030d` 加本批修订无缓存构建，对应 R1 补修前候选 `5b07140`；不作为下文 R1 补修后的输出证据。首批历史整书产物仍按上文各自基线标记。
+
+| 验收 | 实际结果 | 本批本地证据 |
+| --- | --- | --- |
+| `./tbook check`；`TBOOK_CACHE=0 ./tbook build html pdf epub site --book quantum-geometry` | 0 错误、0 警告；生成中英 HTML、四份 PDF、两份 EPUB 及本地站点。六份站点下载与本次成品逐字节相同；既有视频仍使用海报回退 | `check.txt`、`build.txt`、`exports.json` |
+| 通过 `./tbook serve` 查看 HTML | 三章 × 两种语言 × navy/light × 1440×1000 桌面 / 390×844 手机，共 24 种视图。修改段、文献注、三图和角度表末列可见；手机表格可横滚至末列，无整页横向溢出 | `html/report.json`、`html/*.png` |
+| 查看四份 PDF 的实际渲染 | 修订段落和图 04 的两个范围均可读；图 04 在中文屏幕版/印刷版物理页 48/52，英文 51/54 | `exports.json`、`pdf/*.png`、`figure04-full.png` |
+| EPUBCheck；实际查看两版解包 XHTML | 两版均有效，0 错误、0 警告，未跳过。三章 × 两种语言 × 明暗浏览器偏好 × 760×950 桌面 / 390×844 手机，共 24 种视图；核对段落、MathML、图和表格末列。手机预览已有的横向滚动宽度与首批存档相同。未导入 Apple Books | `epubcheck.json`、`epub/report.json`、`epub/*.png`、`mobile-details.json` |
+
+图 04 两条范围的原始 SVG 字形均在视框内，与邻近文字无重叠。HTML 和 EPUB 的手机内嵌图随页面缩小，可打开原图按栏查看；两种语言、两种输出的原尺寸手机截图见 `*-mobile-figure-*.png`。
+
+## 第 2–4 章 R1 有界补修：确认阻断项已修复，待 R2
+
+以候选 `5b07140` 为前态，只修六份双语正文及本账本。上文 F01–F08 的八类局部纠错和 A01–A05 的出处、旧运行记录与诠释限制继续保留；本轮不把建议项改记为已证错误或已解决。覆盖仍是 5/35：2 单元已合入，3 单元待 R2，30 单元待全文核对。
+
+| 阻断项 | 锁定来源、决定性核查与本轮最小修正 |
+| --- | --- |
+| R1-B01 · 外积恒等式的假设 | [`BornReduction` L27][qg-born-reduction] 只要求有限指标类型及 $P_k=\phi\phi^*$、$\rho=\psi\psi^*$，没有单位化、非零、秩一、投影或密度态前提。两版 `thm-born-modulus-square` 改为任意向量的外积矩阵恒等式；单位向量的物理特例留在框外。独立代入 $\phi=(2,0)$、$\psi=(3,0)$，两边为 36；$\phi=0$ 时两边为 0。 |
+| R1-B02 · 效应与更新分开 | [`Conditioning` L137][qg-conditional-state] 明确选用 $P_k\rho P_k/\Tr(\rho P_k)$ 的条件态。第 2 章与第 3 章开头两版将立即复核限定为吕德斯更新且无中间演化。独立反例 $K_0=\lvert1\rangle\langle0\rvert$、$K_1=\lvert0\rangle\langle1\rvert$ 满足 $K_j^*K_j=P_j$，却把输入 $\lvert0\rangle$ 的首次结果 0 更新为 $\lvert1\rangle$，重复结果 0 的概率为 0；同一效应不能单独保证重复性。 |
+| R1-B03 · 模型诠释与一般压缩 | [正交记录偏迹][qg-marginal] 的正确正式框保持不变，周边观察者/长矛语言明确为该记录模型与前述等权例子的诠释。[Stinespring 源码 L725][qg-stinespring] 给一般 $V^{\dagger}\pi(a)V$，没有等距假设；两版过渡与文献桥接明确 $V^*V=\varphi(1)$，保单位才等距，有限维对偶中对应态映射保迹。独立核对 $\varphi(a)=2a$ 可取 $V=\sqrt2 I$，并不等距；正交记录但权重为 $1/4,3/4$ 时局部布洛赫长度为 $1/2$，不能把等权的 $\cos\theta_{\mathrm{env}}$ 长度式泛化。 |
+| R1-B04 · 两个上端点 | 第 4 章两版端点注分开说明：$p=1$ 是保两态距离的幺正旋转，$\gamma=1$ 是常值重置，任意输出对的距离为 0。独立取北极与 $+x$，迹距离由 $1/\sqrt2$ 在前者保持，在后者变成 0；不再共享“非收缩”类别。图 04 的原有 $\gamma<1$ 前提保留。 |
+| R1-B05 · 收缩声明的类型范围 | [`FiniteTraceDistance` L505][qg-trace-contract] 的量词为 `QuantumChannel ι ι` 与 `DensityState ι`。两版 `prop-trace-distance-metric-contraction` 标题、第 5 条与章末直接归属均明确输入输出使用同一有限指标类型；没有将改变维数的偏迹直接归于该 GID。章末改为两态可分辨性限制，避免把距离不增等同于每个态到球心的半径不增。 |
+
+本轮以固定 pin 的 `git show` 重新读取上述五个模块的源码及冻结状态片，十份文件 SHA256 均与 `ch02-ch04/locked-sources.json` 相同；核对的是实际声明签名，未用源码注释中的“normalized”字样额外添加前提。六份正文的全部 ID、`lean` 属性、证明块、章首题记与独立公式块相对 `5b07140` 逐字节不变，中英环境序列相同；锁文件和三张 SVG 不变。`git diff --check` 无问题；`./tbook check` 为 0 错误、0 警告。独立代入和反例核算如上，不重跑未变工具测试，也不把结构校验计作内容复审通过。
+
+最终修订后的输出证据单列于 `build/content-accuracy/ch02-ch04-r1-repair/`。`focused-checks.json` 记录七份源文件前后哈希、十份固定源码/冻结文件哈希、保留项及独立代入结果；只证明此处列明的有界核查，不代替 R2。
+
+| 本轮验证 | 实际结果与证据 |
+| --- | --- |
+| `TBOOK_CACHE=0 ./tbook build html pdf epub site --book quantum-geometry` | 中英 HTML、四份 PDF、两份 EPUB 及站点成功；六份站点下载与最终成品逐字节相同，见 `exports.json`。既有视频仍以海报回退。 |
+| 经 `./tbook serve --port 8894` 实看 HTML | 三章 × 中英 × navy/light × 1440×1000 桌面 / 390×844 手机，共 24 组合、88 张段落/环境截图。新标题和修订段可读，无页面错误、失败请求、坏图、公式错误或整页横向溢出，见 `html/report.json`、`html/*-contact.png`。第 2 章最后把更新规则明确写成充分条件后重看该章 8 组合，其余 16 组合沿用本轮未变的第 3、4 章正文视图。 |
+| 四份 PDF 相关页渲染并实看 | 新外积标题与同型信道标题分别位于中文屏幕物理页 29/56、印刷页 32/60，英文屏幕页 33/60、印刷页 35/63；同时查看吕德斯限定、模型过渡与端点注相关页，未见新裁切或重叠，见 `pdf/*.png`、`exports.json`。 |
+| 两份 EPUBCheck 与解包正文核对 | 两份均 `valid=true`，0 错误、0 警告，未跳过，见 `epubcheck.json`。三章最终修订文本在 `EPUB/text/ch005.xhtml`、`ch006.xhtml`、`ch007.xhtml`，两个标题亦同步至 `ch046.xhtml` 验证账本，见 `exports.json`。本轮未做 EPUB 浏览器实看或 Apple Books 原生导入；上节旧 EPUB 视图仅保留为历史证据。 |
+
+
+## 第 2–4 章 R2 复审结论
+
+候选 `1555b6b4f22b8068be9668ba0d0afb85fcd6a31d` 的 R2 三席均批准：架构席确认五项 R1 阻断已关闭且无新的契约缺陷；质量席重新核对 38 条冻结引用、B01–B05、F01–F08 与独立算例；测试席在隔离归档上运行严格检查并核对最终 HTML、PDF、EPUB、SVG 与链接。三席共同范围仅为第 2–4 章及其三张图，不能外推到全书。测试席提示的审计元数据哈希差异属于历史 focused-checks 记录，正文与成品对应已按最终候选重新核对；冻结源码链接路径已修正。
+
+本记录现标记 5/35 个单元有内容覆盖：序曲和第 1 章已随 PR #53 合入，第 2–4 章 R2 通过、PR #62 待合入；其余 30 个单元仍待全文校对。
 
 ## 待办边界
 
-其余 33 单元全部待核对。首次三席独立审查已结束，确认的准确性问题按 R1–R7 修复；现行候选已基于 `71fc829`，保留第二轮图示修复，第三轮两项指定导读问题及下节的第五部主题残留已修正；最终独立 R4 仍待执行。现有 PR #53 的更新、修订后的独立复审核对、合入、CI 与 Pages 部署仍由调用方跟进。Q4 无待作者裁定的出处事项。`book.toml` 的部章计数已由主线修正，计数核对依据 SUMMARY，不构成对新增章节正文的认证。Apple Books 导入仍未实测；本地视频工具链缺失导致既有视频使用海报回退。
+本批第 2–4 章的五项 R1 确认阻断项已作最小双语修复，并经 R2 架构、质量、测试三席一致批准；PR #62、CI、Pages 由调用方跟进。本轮未提交、推送或操作 GitHub。剩余 30 个单元没有全文准确性结论。第 20 章将并行层数 $L$ 称为“顺序门计数”（英文 “sequential gate layers”）的问题仍待该章核查；PR #58 修改的四个未审单元须以新正文为准。
 
 [par-src]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/QuantumContext/ParallelogramNormLaw.lean#L22
 [par-frozen]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/Golden/Frozen/state/D5/S3/QuantumContext/ParallelogramNormLaw.lean.json
@@ -317,3 +387,11 @@ EPUB 浏览器预览不等于 Apple Books 原生主题验收，尚未导入 Appl
 [mixed-src]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/QuantumBounds/Designs/MixedStateRobertson.lean#L68
 [bell-marginal-src]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.lean#L83
 [open-depth-src]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.lean#L57
+[qg-pinching-fixed]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/Observer/Conditioning.lean#L108
+[qg-marginal]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/Quantum/Decoherence/NonselectiveMarginalization.lean#L43
+[qg-stinespring]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/HilbertOperators/Stinespring.lean#L725
+[qg-phase]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/Quantum/Decoherence/CoherenceDecay.lean#L17
+[qg-rld]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/QuantumChannels/AmplitudeDampingContraction.lean#L62
+[qg-born-reduction]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/Observer/BornReduction.lean#L27
+[qg-conditional-state]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/Observer/Conditioning.lean#L137
+[qg-trace-contract]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/Quantum/Foundation/FiniteTraceDistance.lean#L505
