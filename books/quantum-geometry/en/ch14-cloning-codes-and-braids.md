@@ -268,6 +268,14 @@ In the intuitive picture of low-dimensional topology and anyon physics (recorded
 
 Diagrammatically (as illustrated in Figure 14, Panel III), the clue points to the **third orthogonal spatial axis $e_3$**! For non-intersecting strands arranged in a row, passing strand $1$ over strand $2$ ($\mathrm{crossing}$) and passing it under ($\mathrm{crossingInv}$) define inverse elementary crossings. On three strands $(x, (y, z))$, sliding the middle strand past the crossing of the outer two motivates the fundamental **three-strand braid relation (the Yang–Baxter equation)** $\sigma_1 \sigma_2 \sigma_1 = \sigma_2 \sigma_1 \sigma_2$.
 
+::: {.viz src="braiding" preset="over" height="500"}
+**One exchange: which strand passes in front is kept in the third direction.** Two particles in a plane trace world lines as time goes up and swap places by half a turn about their midpoint: the left strand passes in front (nearer to you), the right one behind. The numbers on the strands are colors: the front strand carries its $0$ to the right, the one behind is recolored by it, and $1$ becomes $0 \star 1 = 2$, which is $\mathrm{crossing}(x, y) = (x \star y,\, x)$.
+:::
+
+::: {.viz src="braiding" preset="inverse" height="500"}
+**Exchange back the other way, and everything returns.** On the left, one exchange followed by the opposite one (this time the right strand passes in front): both strands are back in place and the colors $(0, 1)$ reach the top as they were, $\mathrm{crossingInv}(\mathrm{crossing}(x, y)) = (x, y)$. On the right, two straight strands with no exchange, also $(0, 1)$ at the top.
+:::
+
 In the source module `D5/S0/Certificates/Quandles/BraidColoringTransport.lean`, this braid invariance is formalized algebraically via rack-coloring transport. Let $Q$ be any type equipped with a `Rack Q` instance, providing a binary operation $\star : Q \to Q \to Q$ (`act`) and inverse operation $\star^{-1} : Q \to Q \to Q$ (`invAct`) that is left-action bijective — for each fixed first argument $x \in Q$, the left translation map $L_x : y \mapsto x \star y$ is a bijection with inverse $L_x^{-1} : y \mapsto x \star^{-1} y$ (`Function.LeftInverse (invAct x) (act x)` and `Function.RightInverse (invAct x) (act x)`, so $x \star^{-1}(x \star y) = y$ and $x \star (x \star^{-1} y) = y$) — and obeys left self-distributivity:
 
 $$
@@ -323,6 +331,10 @@ $$
 The trailing pairs $(x \star y, x)$ are identical on both sides, and the leading entries $(x \star y) \star (x \star z)$ and $x \star (y \star z)$ agree by the rack self-distributivity axiom. The full proof is checked by the Lean kernel.
 :::
 
+::: {.viz src="braiding" preset="yb" height="500"}
+**The two orders on three strands land in the same place.** Three strands colored $(0, 1, 2)$. The left braid exchanges in the order $\sigma_1, \sigma_2, \sigma_1$, the right one $\sigma_2, \sigma_1, \sigma_2$: the world lines run differently, and both reach the top as $(0, 2, 0)$. Click the numbers at the bottom for other colors and the two tops still agree; this is [@cor-braid-yang-baxter].
+:::
+
 ::: {.remark #rem-braid-knot-topology-literature title="Scope Boundaries Between Rack Colorings, Configuration-Space Braids, and 3D Knots (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** Three theoretical boundaries govern how [@cor-braid-yang-baxter] connects to the low-dimensional topology and condensed-matter literature (see also [@rem-error-correction-anyons-literature] below; both the dimensional dichotomy between $B_n$ and $S_n$ on configuration spaces and the nontrivial knottedness of closed knots such as the trefoil in $\mathbb{R}^3$ are external literature results not formalized in this book):
 
@@ -331,9 +343,17 @@ The trailing pairs $(x \star y, x)$ are identical on both sides, and the leading
 3. **Anyonic statistics and topological fault-tolerance belong to the physics literature**: Configuration-space homotopy groups, non-Abelian anyons, and physical error bounds are summarized in [@rem-error-correction-anyons-literature].
 :::
 
+::: {.viz src="braiding" preset="twice" height="500"}
+**Two exchanges the same way are not the same as none.** On the left, two exchanges in the same direction: the two world lines wind a full turn around each other and each particle is back where it started, yet the colors have gone from $(0, 1)$ to $(1, 2)$. On the right, two straight strands with no exchange, still $(0, 1)$ at the top. While the particles are confined to the plane this turn cannot be undone; lifting it over through a third spatial direction is the literature result of item 2 of [@rem-braid-knot-topology-literature].
+:::
+
 ## Closing the Braid: Markov Stabilization and Coloring Counts {#sec-markov-stabilization-coloring-count}
 
 Item 2 of [@rem-braid-knot-topology-literature] says that a trefoil in three-dimensional space stays knotted, and that colorings are the classical tool for telling it apart. How is the tool used? [@cor-braid-yang-baxter] is about a piece of braid: a row of loose ends on top, a row below, and colors carried from one row to the other. A knot has no loose ends. Bend the braid around and join the $k$-th bottom end to the $k$-th top end; only then do the strands form closed loops. This is the **closure** of the braid. Once the ends are joined, "the color at the top" and "the color at the bottom" are colors of one and the same piece of string, so a coloring of the closed braid has a single condition left to meet: carried once through the braid, the colors must come back unchanged. **A coloring of a closed braid is a fixed point of the coloring transport.**
+
+::: {.viz src="braiding" preset="close" height="500"}
+**Close it up, and the colors must come back.** One exchange $\sigma_1$, then each top end is led back along an arc on the right to the bottom end in the same place. The colors $(0, 1)$ reach the top as $(2, 0)$, and both arcs clash (magenta). Of the nine colorings only $(0, 0)$, $(1, 1)$ and $(2, 2)$ come back.
+:::
 
 The module `D5/S3/Topology/QuandleMarkovColoring` turns this sentence into a definition. It does not speak of strings drawn on paper: a braid is an element of a group given by generators and relations, and the coloring transport is the action of that group on sequences of colors.
 
@@ -379,6 +399,10 @@ Keep the notation of [@def-closed-braid-colorings].
 In a picture: conjugation cuts the closed loop open at a different place; stabilization adds one new strand on the far right and lets it cross the old last strand exactly once, so that the closure gains one small loop that disappears with a single twist (these two sentences are geometric pictures; their precise form belongs to Markov's theorem in [@rem-alexander-markov-literature]). The algebraic question is: does the number of fixed points survive these three steps?
 
 Conjugation is easy: carry all the colors along. Stabilization is the hard one, because it changes even the number of strands. Let the new strand have color $z$. By the product convention of [@def-closed-braid-colorings], $\iota_n(b)\,\sigma_n$ lets $\sigma_n$ act first, turning the last two strands $(c_n,\ z)$ into $(c_n \star z,\ c_n)$; after that $\iota_n(b)$ touches only the first $n$ strands. The new strand meets no further crossing, so it comes back unchanged only if $z = c_n$. Strand $n$ therefore receives $c_n \star c_n$. Is that equal to $c_n$? No rack axiom says so. A rack with the additional axiom $x \star x = x$ is called a **quandle** (`Quandle Q` in Mathlib). With that axiom the small loop has no effect on the colors at all: the new strand merely copies $c_n$, and the condition on the first $n$ strands is untouched. This hand computation is the central step of the Lean proof, and the module turns it into an explicit one-to-one correspondence.
+
+::: {.viz src="braiding" preset="stabilize" height="500"}
+**Add a strand: it merely copies the last color.** On the left, $\sigma_1^3$ on two strands; closed up, the colors $(0, 1)$ match (cyan). On the right a strand is added on the far right and first crosses the old last strand once, which is $\iota_2(\sigma_1^3)\,\sigma_2$: the new strand's color just copies the last one, $1$, and passes the crossing unchanged as $1 \star 1 = 1$. Colorings that come back: $9$ on the left, and $9$ on the right too.
+:::
 
 ::: {.definition #def-markov-coloring-equivs title="Three Equivalences of Closed-Coloring Spaces under Stabilization and Conjugation" lean="D5/S3/Topology/QuandleMarkovColoring.positiveStabilizationEquiv D5/S3/Topology/QuandleMarkovColoring.negativeStabilizationEquiv D5/S3/Topology/QuandleMarkovColoring.conjugationEquiv"}
 Let $Q$ be a type with `[Quandle Q]` (not assumed finite), $n \in \mathbb{N}$ and $b \in \mathrm{Artin}\,n$. The module defines three equivalences (Lean's `Equiv`: a pair of maps together with the proofs that they are mutually inverse):
@@ -455,6 +479,14 @@ In every row the three counts agree, and the closed colorings on three strands a
 **The idempotence axiom cannot be dropped.** Take $Q' = \mathbb{Z}/3$ with $x \star y = y + 1$. It is a rack: every left translation is a bijection, and both sides of the self-distributive law equal $z + 2$. But $x \star x = x + 1 \ne x$, so it is not a quandle. The braid $(1, e)$ has $3$ closed colorings; its positive stabilization $(2, \sigma_1)$ sends $(x, y)$ to $(y + 1,\ x)$, and a fixed point would need $x = y$ and $y + 1 = x$: there is none. The count drops from $3$ to $0$.
 :::
 
+::: {.viz src="braiding" preset="trefoil" height="500"}
+**$\sigma_1$ and $\sigma_1^3$ count differently.** $\sigma_1$ on the left, $\sigma_1^3$ on the right, both starting from $(0, 1)$: the left one clashes when closed up (magenta), the right one matches (cyan). Colorings that come back: $3$ on the left, $9$ on the right; since $3 \ne 9$, by [@thm-quandle-coloring-markov-invariant] the two are not Markov equivalent.
+:::
+
+::: {.viz src="braiding" preset="rack" height="500"}
+**A rack that is not a quandle: add a strand and nothing comes back.** The color rule is now $x \star y = y + 1$. On the left, one strand and no crossing: all three colorings come back. On the right a strand is added with one crossing: the copied $0$ passes the crossing as $0 \star 0 = 1$, the arcs clash (magenta), and none of the nine colorings comes back.
+:::
+
 ::: {.remark #rem-alexander-markov-literature title="Artin, Alexander, and Markov: From Algebraic Markov Classes to Link Invariants (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** The statement of [@thm-quandle-coloring-markov-invariant] contains no geometric object. Reading it as an invariant of links takes three classical theorems (braids and links below are smooth or piecewise linear):
 
@@ -466,6 +498,10 @@ Taken together: the closed-coloring count of a finite quandle is an isotopy inva
 :::
 
 A braid has a beginning and an end; a knot has neither. Once the ends are joined, the colors have to come back unchanged; as long as the colors come from a quandle, add a strand, or cut the loop open somewhere else, and exactly as many colorings come back as before. That half is verified by Lean.
+
+::: {.viz src="braiding" height="560"}
+The full braiding lab: add crossings $\sigma_k^{\pm 1}$ on top, change the number of strands, click the numbers at the bottom to change colors, and watch the colors ride up the world lines; close the braid and count the colorings that come back, or switch to the non-idempotent rack $x \star y = y + 1$ for comparison.
+:::
 
 Let us now work through the four-part numerical and matrix calculation connecting no-cloning, the three-qubit bit-flip code, local Bloch expectations, and $8\times 2$ orthogonal syndrome recovery.
 

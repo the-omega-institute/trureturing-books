@@ -268,6 +268,14 @@ $$
 
 从几何图解（如图 14 面板 III）上看，线索指向**第三根正交空间方向**！当不可互穿的绳股排成一列时，第 1 股绳子跨过第 2 股绳子（正向交叉 $\mathrm{crossing}$）与从底下钻过去（反向交叉 $\mathrm{crossingInv}$）给出互逆的基本交叉步。而在三股绳子 $(x, (y, z))$ 的编织中，先交换前两股、再交换后两股、再交换前两股（$\sigma_1 \sigma_2 \sigma_1$），与先交换后两股、再交换前两股、再交换后两股（$\sigma_2 \sigma_1 \sigma_2$），在图解上恰好对应把中间那根绳子滑过另外两根绳子的交点——著名的**三股编织恒等式（Yang–Baxter 方程）**。
 
+::: {.viz src="braiding" preset="over" height="500"}
+**一次交换：谁从前面过，记在第三个方向上。** 平面里的两颗粒子随时间往上走出世界线，绕中点转半圈换了位置：左边那股从前面过（离你近），右边那股从后面过。绳子上的数字是颜色：前面那股带着 $0$ 走到右边，后面那股被它改色，$1$ 变成 $0 \star 1 = 2$，正是 $\mathrm{crossing}(x, y) = (x \star y,\, x)$。
+:::
+
+::: {.viz src="braiding" preset="inverse" height="500"}
+**反着再交换一次，原样回来。** 左边先交换一次，再反着交换一次（这回右边那股从前面过），两股回到原位，颜色 $(0, 1)$ 原样回到顶端：$\mathrm{crossingInv}(\mathrm{crossing}(x, y)) = (x, y)$。右边是不交换的直线，顶端也是 $(0, 1)$。
+:::
+
 在源码模块 `D5/S0/Certificates/Quandles/BraidColoringTransport.lean` 中，这一编织不变量通过架（`Rack Q`）的代数着色传输得到了纯组合形式化。设类型 $Q$ 带有 `Rack Q` 实例，其上配备二元运算 $\star : Q \to Q \to Q$（源码记作 `act`）及逆运算 $\star^{-1} : Q \to Q \to Q$（源码记作 `invAct`），使得对每个固定的第一宗量 $x \in Q$，左平移作用映射 $L_x : y \mapsto x \star y$ 是双射（其逆映射为 $L_x^{-1} : y \mapsto x \star^{-1} y$，满足 `Function.LeftInverse (invAct x) (act x)` 与 `Function.RightInverse (invAct x) (act x)`，即 $x \star^{-1} (x \star y) = y$ 且 $x \star (x \star^{-1} y) = y$），并满足左自分配公理（left self-distributivity）：
 
 $$
@@ -323,6 +331,10 @@ $$
 比较左端与右端的最终三元组：后两个分量均为 $(x \star y, x)$，完全一致；第一个分量由 `Rack Q` 的自分配律 $(x \star y) \star (x \star z) = x \star (y \star z)$ 严格相等。完整证明由 Lean 内核检查。
 :::
 
+::: {.viz src="braiding" preset="yb" height="500"}
+**三股的两种顺序落在同一处。** 三股，颜色 $(0, 1, 2)$。左边按 $\sigma_1, \sigma_2, \sigma_1$ 交换，右边按 $\sigma_2, \sigma_1, \sigma_2$：两边世界线的走法不一样，顶端都是 $(0, 2, 0)$。点底部的数字换一组颜色，两边的顶端仍然相同，这就是 [@cor-braid-yang-baxter]。
+:::
+
 ::: {.remark #rem-braid-knot-topology-literature title="架着色实现与配置空间辫群、三维绳结拓扑的边界（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 在将 [@cor-braid-yang-baxter] 与物理及低维拓扑文献（另参下文 [@rem-error-correction-anyons-literature]）对接时，必须严格守住三条理论边界（其中配置空间基本群 $B_n$ 与 $S_n$ 的维数二分及三维三叶结的非平凡结拓扑均属外部文献结论，未在本书形式化）：
 
@@ -331,9 +343,17 @@ $$
 3. **任意子统计与物理容错边界归入文献**：非阿贝尔任意子的物理实现、配置空间同伦群以及有限温度下的拓扑纠错界限属于凝聚态与量子信息文献结果，详见下文 [@rem-error-correction-anyons-literature]。
 :::
 
+::: {.viz src="braiding" preset="twice" height="500"}
+**同向交换两次，不等于不交换。** 左边同一个方向交换两次，两条世界线互相绕了整整一圈，每颗粒子都回到原位，颜色却从 $(0, 1)$ 变成 $(1, 2)$；右边是不交换的直线，顶端仍是 $(0, 1)$。粒子被限制在平面里时这一圈解不开；借第三个空间方向把它抬过去解开，是 [@rem-braid-knot-topology-literature] 第 2 条的文献结果。
+:::
+
 ## 把编织首尾相接：Markov 稳定化与着色计数 {#sec-markov-stabilization-coloring-count}
 
 [@rem-braid-knot-topology-literature] 的第 2 条说，三维空间里的三叶结解不开，而着色正是分辨它的经典工具。这件工具怎么用？[@cor-braid-yang-baxter] 管的是一段编织：上面一排线头，下面一排线头，颜色从一排传到另一排。可是结没有线头。把编织弯过来，让第 $k$ 个下端接回第 $k$ 个上端，绳子才成了闭合的圈，这叫编织的**闭合**。接上之后，“上端的颜色”与“下端的颜色”是同一段绳子的颜色，于是闭合编织的着色只剩一个条件：颜色沿编织传一遍，必须原样回来。**闭合编织的着色，就是着色传输的不动点。**
+
+::: {.viz src="braiding" preset="close" height="500"}
+**首尾接上，颜色得原样回来。** 一次交换 $\sigma_1$，再把每个顶端顺着右边的弧接回同一位置的底端。颜色 $(0, 1)$ 到顶端成了 $(2, 0)$，两条弧都对不上（品红）。九个着色里只有 $(0, 0)$、$(1, 1)$、$(2, 2)$ 回得来。
+:::
 
 模块 `D5/S3/Topology/QuandleMarkovColoring` 把这句话写成了定义。它不谈画在纸上的绳子：编织是由生成元与关系给出的群里的元素，着色传输是这个群在颜色序列上的作用。
 
@@ -379,6 +399,10 @@ $$
 画出来：共轭是把闭合的绳圈换一处剪开；稳定化是在最右边添一股新绳，让它与原来的最后一股只交叉一次，闭合后多出的是一个拧一下就消失的小圈（这两句是几何图像，严格陈述属于 [@rem-alexander-markov-literature] 中的 Markov 定理）。代数问题是：不动点的个数经得起这三步吗？
 
 共轭不难，把颜色整体搬运一下即可。难的是稳定化，它连股数都改了。设新股的颜色是 $z$。按 [@def-closed-braid-colorings] 的乘法约定，$\iota_n(b)\,\sigma_n$ 先让 $\sigma_n$ 作用，把最后两股的 $(c_n,\ z)$ 变成 $(c_n \star z,\ c_n)$；随后 $\iota_n(b)$ 只动前 $n$ 股。新股不再碰到任何交叉，要原样回来就必须 $z = c_n$。于是第 $n$ 股拿到的是 $c_n \star c_n$。它等于 $c_n$ 吗？架的公理里没有这一条。多带公理 $x \star x = x$ 的架叫 quandle（Mathlib 的 `Quandle Q`，下文称**幂等架**）。有了这一条，那个小圈对颜色毫无影响：新股只是把 $c_n$ 抄了一遍，前 $n$ 股的条件原封不动。这段手算正是 Lean 证明的核心一步，模块把它做成了显式的一一对应。
+
+::: {.viz src="braiding" preset="stabilize" height="500"}
+**添一股：新股只把末位颜色抄一遍。** 左边是两股的 $\sigma_1^3$，接回来后颜色 $(0, 1)$ 对得上（青色）。右边在最右边添一股，先与原来最后一股交叉一次，即 $\iota_2(\sigma_1^3)\,\sigma_2$：新股的颜色只是把末位的 $1$ 抄一遍，过交叉时 $1 \star 1 = 1$ 不变。回得来的着色左边 $9$ 个，右边也是 $9$ 个。
+:::
 
 ::: {.definition #def-markov-coloring-equivs title="稳定化与共轭下闭合着色空间的三个等价" lean="D5/S3/Topology/QuandleMarkovColoring.positiveStabilizationEquiv D5/S3/Topology/QuandleMarkovColoring.negativeStabilizationEquiv D5/S3/Topology/QuandleMarkovColoring.conjugationEquiv"}
 设 $Q$ 为带 `[Quandle Q]` 的类型（不要求有限），$n \in \mathbb{N}$，$b \in \mathrm{Artin}\,n$。模块定义了三个等价（Lean 的 `Equiv`：一对映射，连同它们互逆的证明）：
@@ -455,6 +479,14 @@ $$
 **幂等公理省不得。** 取 $Q' = \mathbb{Z}/3$，$x \star y = y + 1$。它是架：每个左平移都是双射，自分配律两边都等于 $z + 2$；但 $x \star x = x + 1 \ne x$，它不是幂等架。$(1, e)$ 有 $3$ 个闭合着色；它的正稳定化 $(2, \sigma_1)$ 把 $(x, y)$ 送到 $(y + 1,\ x)$，不动点要求 $x = y$ 且 $y + 1 = x$，一个也没有。计数从 $3$ 变成 $0$。
 :::
 
+::: {.viz src="braiding" preset="trefoil" height="500"}
+**$\sigma_1$ 与 $\sigma_1^3$ 数出不同的数。** 左边 $\sigma_1$，右边 $\sigma_1^3$，颜色都从 $(0, 1)$ 出发：左边接回来对不上（品红），右边对得上（青色）。回得来的着色左边 $3$ 个，右边 $9$ 个；$3 \ne 9$，按 [@thm-quandle-coloring-markov-invariant] 两者不是 Markov 等价的。
+:::
+
+::: {.viz src="braiding" preset="rack" height="500"}
+**不幂等的架：添一股就一个也回不来。** 颜色规则换成 $x \star y = y + 1$。左边一股、没有交叉，三个着色都回得来。右边添一股、交叉一次：新股抄来的 $0$ 过交叉变成 $0 \star 0 = 1$，接回来对不上（品红），九个着色一个也回不来。
+:::
+
 ::: {.remark #rem-alexander-markov-literature title="Artin、Alexander 与 Markov：从代数 Markov 类到链环不变量（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** [@thm-quandle-coloring-markov-invariant] 的陈述中没有任何几何对象。把它读成链环的不变量，需要三条经典定理（以下的编织与链环都指光滑或分段线性的）：
 
@@ -466,6 +498,10 @@ $$
 :::
 
 编织有头有尾，结没有。头尾接上之后，颜色还得原样回来；只要颜色取自幂等架，添一股，换一处剪口，回得来的着色就一个不多、一个不少。这一半，Lean 已经验证。
+
+::: {.viz src="braiding" height="560"}
+编织的完整实验室：在最上面添交叉 $\sigma_k^{\pm 1}$、换股数、点底部的数字换颜色，看颜色怎样顺着世界线往上传；首尾接上之后数一数回得来的着色，也可以换成不幂等的架 $x \star y = y + 1$ 对照。
+:::
 
 现在，让我们通过一个四步连贯的具体数值与矩阵算例，把不可克隆内积差、三比特重复码的二元辛综合征、编码态局部布洛赫向量的精确行为以及正交综合征矩阵恢复完整地验算一遍。
 

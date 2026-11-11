@@ -69,6 +69,9 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `syndrome-decoding` | 校验只问相邻两个比特一不一致：亮起的灯指出翻了哪一个，翻回去，叠加原样回来；翻两个或翻相位，灯就指错或者不亮 | `single` `rooms` `mix` `two` `phase` |
 
 `syndrome-decoding` 的绿色框只给第十四章用 `lean=` 引用的两条：`orthogonal_syndrome_recovery`（解码(编码(σ, ρ)) = Tr(σ)·ρ）与 `pauli_word_mul`（泡利字乘法的交叉相位；“灯亮不亮看模 2 辛奇偶”是正文由它推出的读法，页面照此写明）。三比特码只纠一个 X、纠任意单比特错误要更大的码与 Knill–Laflamme 条件标 `ARGUED`；“量校验再查表翻回”的解码器与柱子在房间之间滑动的画法标 `MODEL`；振幅、综合征、解码后的 2 × 2 矩阵与重合度实算（`NUM`）。这一页的青色是振幅柱子与码空间那间房，品红是错误与亮起的校验，琥珀只给解码器这一步翻回的比特，虚线是原来的态。
+| `braiding` | 交换两颗粒子，谁从前面过记在第三个方向上；反着交换一次就回来，同向交换两次回不来，三股的两种顺序落在同一处 | `over` `inverse` `twice` `yb` `close` `stabilize` `trefoil` `rack` |
+
+`braiding` 的绿色框只给第十四章用 `lean=` 引用的 `crossing_yang_baxter`（任意架上的三股恒等式）与 `quandle_coloring_markov_invariant`（有限幂等架的闭合着色数在 Markov 等价下不变）；平面里双交换解不开而空间里能借第三方向解开（Bₙ 与 Sₙ）、Artin/Alexander/Markov 定理、σ₁³ 闭合成三叶结标 `ARGUED`；世界线画法（时间朝上，σ<sub>k</sub> 是从上往下看逆时针半圈、左边那股从前面过）标 `MODEL`；颜色传输与闭合着色数由穷举实算（`NUM`）。ℤ/3 的三个颜色在绳子上写成数字 0、1、2，不占用青、品红；世界线是中性墨色，琥珀只给此刻的时间平面与此刻的颜色，青色与品红只用在闭合弧上（颜色对上 / 对不上）。对照卡（`inverse` `twice` `yb` `stabilize` `trefoil` `rack`）右边那条编织的底端颜色取左边的，多一股时抄末位。
 
 `pairwise-shutter` 的青色是已知态 $A$、它那条直径上从 $-1$ 端到 $B$ 的垂足的一段（长度占直径的 $p$）、权重的虚线与“过”的方块；琥珀色是目标态 $B$ 与当前的比例；细曲线（墨色）是数出来的比例 $k/N$；紫色只在 `turn` 卡里出现，是两支共用的转轴。绿色框只给第二章用 `lean=` 引用的两条定理：`born_probability_skeleton`（过与不过两份权重非负、相加为 1）与 `rank_one_born_pairing_weight`（$\lvert\langle\phi\mid\psi\rangle\rvert^2 = \Tr(\rho P_k)$）；半角公式 $(1 + \cos\theta)/2$ 与随机方向上权重均匀是第二章例题的手算，页面三路数值核对标 `NUM`；快门计数是固定种子的抽样模型，比例趋向权重是大数定律（本书未形式化），浅色带 $p \pm 2\sqrt{p(1-p)/N}$ 只是参考尺度，一并标 `MODEL`。这一页不画 `qubit-geometry` · `line` 的“影子长 $\cos\theta$”，只画计数。
 
@@ -204,6 +207,13 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第十四章 | 命题 `prop-orthogonal-syndrome-recovery` 后边界列表第 1 条之后、第 2 条之前 | `syndrome-decoding` · `mix` |
 | 第十四章 | 例 `ex-repetition-code-syndrome` 之后、文献注记 `rem-error-correction-anyons-literature` 之前 | `syndrome-decoding` · `two`、`phase` |
 | 第十四章 | 文献注记 `rem-error-correction-anyons-literature` 之后、转入第十五章之前 | `syndrome-decoding` 完整实验室 |
+| 第十四章 | 编织一节“三股编织恒等式（Yang–Baxter 方程）”一段之后 | `braiding` · `over`、`inverse` |
+| 第十四章 | 推论 `cor-braid-yang-baxter` 的证明之后 | `braiding` · `yb` |
+| 第十四章 | 文献注记 `rem-braid-knot-topology-literature` 之后、Markov 一节之前 | `braiding` · `twice` |
+| 第十四章 | Markov 一节首段（“闭合编织的着色，就是着色传输的不动点”）之后 | `braiding` · `close` |
+| 第十四章 | 稳定化手算一段之后、定义 `def-markov-coloring-equivs` 之前 | `braiding` · `stabilize` |
+| 第十四章 | 例 `ex-fox-three-colorings-markov` 之后、文献注记 `rem-alexander-markov-literature` 之前 | `braiding` · `trefoil`、`rack` |
+| 第十四章 | Markov 一节末（“这一半，Lean 已经验证”）之后 | `braiding` 完整实验室 |
 
 ## 增删或修改一张卡之后
 
