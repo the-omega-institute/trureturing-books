@@ -6,6 +6,10 @@ Across the four chapters of [Part I](ch01-measurement.md), we stripped away the 
 
 Stepping into Part V, "The Spacetime Sphere," we confront a deeper geometric question. In the two-dimensional Euclidean plane $(x, y)$, rotating the coordinate axes preserves the two-dimensional sum of squares $\Delta x^2 + \Delta y^2$ around a closed circle (just as arbitrary spatial rotations in three-dimensional Euclidean space $\mathbb{R}^3$ preserve the three-dimensional norm $\Delta x^2 + \Delta y^2 + \Delta z^2$ on a sphere). Why, the moment time $t$ and space $x$ are measured together in a two-dimensional Minkowski spacetime plane $(t, x)$ — or in $(1+3)$-dimensional Minkowski spacetime $(t, x, y, z)$ — does the frame-invariant quantity switch from an additive sum of squares $t^2 + x^2$ to a subtractive quadratic form $t^2 - x^2$ (or $t^2 - \norm{w}^2$ in $1+d$ dimensions) carrying a minus sign? The opening epigraph records the author's intuitive starting point: a sequential worldline readout leaves a one-dimensional "line of classical time," whereas a two-dimensional bivector plane spanned by two directions carries the "area" of phase and frame tilting. To anchor this physical intuition on rigorous mathematical ground, this chapter separates Lean-verified hyperbolic identities and null-cone quadratic-form rigidity theorems from the spacetime Clifford-rotor formalism in the physics literature and the operational conventions required to calibrate physical scales.
 
+::: {.figure src="ch17-overview"}
+**Figure 17.** A map of the chapter. Panel I: one event $(t, x) = (5, 3)$, when rotated, runs along the magenta circle $t^2 + x^2 = 34$ and leaves the white dashed light cone; when boosted, it runs along the cyan hyperbola $t^2 - x^2 = 16$, hugging the cone without ever crossing it. Panel II: the two amber axes $t'$ and $x'$ of the frame moving at $\beta = 3/5$ close toward the white light cone like scissors, while the cone itself stays put. Panel III: from $O$ to $P = (10, 0)$, the thick white worldline at rest carries $10$ ticks, while the cyan worldline that turns at $A = (5, 3)$ carries only $4$ per leg, $8$ in all. The figure uses $c = 1$; in physical units each segment's proper time is $\Delta\tau_{\mathrm{phys}} = \sqrt{q(\Delta v)}/c$.
+:::
+
 ## Circles and hyperbolas: distinguish the metrics {#sec-euclidean-and-hyperbolic}
 
 Why do students encountering Lorentz transformations for the first time often feel that the ubiquitous square-root factor $\gamma = 1/\sqrt{1 - \beta^2}$ is an ad hoc algebraic patch? Because habit reaches for a Euclidean compass built for a positive-definite metric ($++\dots+$) to measure a Minkowski stage governed by an indefinite signature ($+-\dots-$).
@@ -14,8 +18,6 @@ Lay planar Euclidean geometry and two-dimensional spacetime geometry side by sid
 
 - **Euclidean plane (signature $+,+$)**: The locus of points at fixed squared distance $x^2 + y^2 = R^2$ from the origin is a **closed circle**. Rotating the coordinate axes by an angle $\theta \in \mathbb{R}$ mixes coordinates via $(x, y) \mapsto (x\cos\theta - y\sin\theta,\, x\sin\theta + y\cos\theta)$, resting on the circular identity $\cos^2\theta + \sin^2\theta = 1$.
 - **Minkowski plane (signature $+,-$)**: The locus of events at fixed squared spacetime interval $t^2 - x^2 = \tau^2$ is no longer a closed circle, but an open **hyperbola** extending to infinity. Boosting an inertial frame along the spatial axis by a **rapidity** parameter $r \in \mathbb{R}$ tilts time and space axes symmetrically like a pair of scissors, resting on the difference-of-squares identity for hyperbolic cosine and hyperbolic sine.
-
-![Comparison of Euclidean circle and Minkowski hyperbola metrics, null cone and hyperbolic boost rotor, and worldline segment proper time with null-cone rigidity](../assets/fig-17-lorentz-boost-lightcone.svg)
 
 ::: {.viz src="rapidity-lightcone" preset="circle" height="500"}
 **A turn runs on a circle, a boost on a hyperbola.** One event $v = (5, 3)$: the magenta point is turned and runs along the magenta circle $t^2 + x^2 = 34$, soon crossing the white light cone; the cyan point is boosted and runs along the cyan hyperbola $t^2 - x^2 = 16$, hugging the cone but never crossing it ([@thm-hyperbolic-norm]).
@@ -44,6 +46,10 @@ The Lean declaration [`bogoliubov_norm_conservation`](lean:D5/S3/Quantum/Bogoliu
 In keeping with our three-tier epistemological contract, note the exact scope of [@thm-hyperbolic-norm]: the statement retains the absolute-value bars $|\cosh r|^2 - |\sinh r|^2 = 1$ from the Lean source (matching the modulus-squared norm interface used in Bogoliubov transformations, which is equivalent on $\mathbb{R}$ to $\cosh^2 r - \sinh^2 r = 1$), and is purely a real hyperbolic identity. By itself, it does not assert the physical postulate of invariant light speed, dynamical equations of motion, or spinor double-cover topology.
 
 Once [@thm-hyperbolic-norm] is in hand, however, the square roots of special relativity dissolve into clean rational arithmetic. Let us work through an exact rational-ratio example by hand.
+
+::: {.figure src="ch17-unit-hyperbola"}
+**$\eta = \ln 2$ lands on a rational point of the unit hyperbola.** On the cyan unit hyperbola $t^2 - x^2 = 1$, the amber point is $(t, x) = (\cosh\eta, \sinh\eta) = (5/4, 3/4)$: its two dashed legs are $5/4$ and $3/4$ long, and their squares differ by exactly $1$ ([@thm-hyperbolic-norm]). The amber ray from the origin through it moves $3$ across for every $5$ up, so $\beta = 3/5$. The white dashed lines are the light cone.
+:::
 
 ::: {.example #ex-rapidity-three-fifths title="Explicit Hyperbolic Boost at Rapidity η = ln 2 and β = 3/5"}
 In natural units $c = 1$, choose rapidity $\eta = \ln 2$. Since $e^\eta = 2$ and $e^{-\eta} = \frac{1}{2}$, the hyperbolic functions, dimensionless velocity $\beta$, and Lorentz factor $\gamma$ evaluate to exact rational fractions:
@@ -92,6 +98,10 @@ consisting of one real time coordinate $t \in \mathbb{R}$ and $d$ Euclidean spat
 $$
 \operatorname{minkowski}_d(t, w) = t^2 - \norm{w}^2.
 $$
+
+::: {.figure src="ch17-interval-signs"}
+**The light cone splits the plane into inside and outside.** Take $d = 1$: in the pale cyan wedges inside the cone, $q = \operatorname{minkowski}_1(t, x) = t^2 - x^2 > 0$; in the pale magenta wedges outside it, $q < 0$; on the white light lines, $q = 0$. The three arrows, read as $(t, x)$: cyan $(2, 1)$ gives $3$, magenta $(1, 2)$ gives $-3$, and white $(1.5, 1.5)$ along the cone gives $0$.
+:::
 
 For any real quadratic form $S : \operatorname{QuadraticForm}\;\mathbb{R}\;(\operatorname{Space}(d))$, Mathlib defines its associated polarization bilinear map (`QuadraticMap.polar`) without a factor of $\frac{1}{2}$:
 
@@ -250,6 +260,10 @@ $$
 $$
 
 (with equality $\Delta\tau = \Delta t$ at rest $\Delta w = 0$, strict inequality $\Delta\tau < \Delta t$ when $\Delta w \neq 0$, and $\Delta\tau = 0$ on a strict null ray with $\Delta w \neq 0$ and $q(\Delta v) = 0$). Along a piecewise inertial worldline $\gamma = (\Delta v_1, \Delta v_2, \dots, \Delta v_m)$, total proper time in $c = 1$ units is the sum $\tau(\gamma) = \sum_{k=1}^m \sqrt{q(\Delta v_k)}$ (or $\tau_{\mathrm{phys}}(\gamma) = \sum_{k=1}^m \sqrt{q(\Delta v_k)}/c$ in physical clock units). A common pitfall is to confuse Lorentz invariance of each segment's quadratic form $q(\Delta v_k)$ with path independence of total proper time between fixed endpoints. The next concrete example resolves that confusion completely.
+
+::: {.figure src="ch17-proper-time-budget"}
+**For the same $\Delta t = 5$, the farther a segment travels in space, the less proper time it records.** The cyan curve $\Delta\tau = \sqrt{25 - \Delta x^2}$ stays everywhere below the white dashed line $\Delta t = 5$: at rest $\Delta\tau = \Delta t = 5$, the first leg $(5, 3)$ of the example gives $4$, and $(5, 5)$ along the light cone gives $0$. The curve is a quarter circle, $\Delta\tau^2 + \Delta x^2 = \Delta t^2$.
+:::
 
 ::: {.example #ex-two-worldline-segments title="Proper-Time Comparison Between a Two-Segment Worldline and a Rest Worldline"}
 In two-dimensional Minkowski spacetime $\operatorname{Space}(1) = \mathbb{R} \times \mathbb{R}$, compare two worldlines connecting the initial event $O = (0, 0)$ to the final event $P = (10, 0)$:
