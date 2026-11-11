@@ -12,6 +12,10 @@
 
 进入第二部《展翼·从线到面》，本章将彻底撕下虚数单位 $i$ 的神秘面纱。我们将证明：**单根量子态只能确定一条一维方向线；而量子门之所以能让量子态转向，是因为一对不共线的量子态（或一对平衡正交算子分量）张出了一块二维有向面积（二向量 bivector）！** 所谓的虚数单位 $i$，根本不是什么“虚幻的数字”，而是二维平面内**正交 $90^\circ$ 旋转生成元**的代数记号——因为在同一张平面上连续执行两次 $90^\circ$ 正交转向（$90^\circ + 90^\circ = 180^\circ$），任何向量都会严丝合缝地指向自己的反方向！
 
+::: {.figure src="ch05-overview"}
+**图 5。** 本章地图：第 I 栏，品红的小方块是单位二向量 $\vv{I}$，琥珀色的 $\vv{e}_1$ 右乘两次 $\vv{I}$，沿两段紫色的弧经 $\vv{e}_2$ 转到 $-\vv{e}_1$；第 II 栏（示意），两支互相垂直、长 $\frac{1}{\sqrt{2}}$ 的箭头 $A$、$B$ 拼出落在虚线单位圆上的紫色斜箭头 $S = A + B$，它们张出的品红方块是 $J = 2AB^*$；第 III 栏，灰色的 $\vv{v}$ 绕紫色的轴 $\hat{\vv{n}}$ 转成琥珀色的 $\vv{v}'$，沿轴的青色一段不动，品红平面 $\vv{B}$ 里的那一份先后转过两个 $\theta/2$。
+:::
+
 ## 5.1 为什么 $i^2 = -1$？单位二向量 $I = \vv{e}_1 \wedge \vv{e}_2$ 连转两次 $90^\circ$ 的几何必然 {#sec-unit-bivector-square}
 
 让我们从作者最初面对球面与量子门时提出的那个直击要害的追问开始：
@@ -40,13 +44,15 @@ $$
 
 无论你选平面内的哪一根向量 $\vv{v} = x\vv{e}_1 + y\vv{e}_2$，连续作用两次 $\vv{I}$ 都会把它转过 $90^\circ + 90^\circ = 180^\circ$，变成反向的 $-\vv{v}$。抽去被作用的向量本身，算子自身的平方满足：
 
+::: {.figure src="ch05-quarter-turns"}
+**乘两次 $\vv{I}$，向量掉头。** 琥珀色的 $\vv{v}$ 右乘一次 $\vv{I}$，沿紫色的弧逆时针转 $90^\circ$ 成为灰色的 $\vv{v}\vv{I}$；再乘一次，又转 $90^\circ$，成为 $-\vv{v}$。三支箭头一样长，都落在虚线单位圆上；原点旁的品红小方块是单位二向量 $\vv{I} = \vv{e}_1 \wedge \vv{e}_2$。
+:::
+
 $$
 \vv{I}^2 = (\vv{e}_1 \vv{e}_2)(\vv{e}_1 \vv{e}_2) = -\vv{e}_1 \vv{e}_1 \vv{e}_2 \vv{e}_2 = -1!
 $$
 
 真相大白！几个世纪以来被称为“虚数（imaginary number）”的 $i$，在几何上一点也不“虚”：**只要一个算子代表平面内保模长的 $90^\circ$ 正交转向（在矩阵代数中表现为反自伴性 $R^* = -R$ 与右幺正性 $R R^* = I$ 的结合），它连续作用两次就必然等于反向算子 $-I$**。
-
-![单位二向量 I = e₁ ∧ e₂ 的两次 90° 正交转向、平衡幺正和 S = A + B 生成相对复结构 J² = −I，以及克利福德半角旋子双侧夹乘](../assets/fig-05-bivector-rotor.svg)
 
 ::: {.film src="001-qubit-bloch-rotor"}
 **半角旋子与布洛赫球（50 秒）。** 球面上的箭头是一个纯态；几何积把它与量尺的关系分成沿线的 $\cos\theta$ 与张成面积的 $\sin\theta$；旋子从两侧各转半角，箭头转过 $360^\circ$ 回到原处时旋子差一个负号，转满 $720^\circ$ 才回来。
@@ -149,6 +155,10 @@ $$
 
 半角还留下一个问题。$R(2\pi) = \cos\pi - \vv{B}\sin\pi = -1$：物体转回原位，旋子却没有回来。这是 $\theta/2$ 这种写法带来的记号瑕疵，换一种更聪明的参数化就能消除，还是无论怎样都躲不开？固定一个旋转平面 $\vv{B}$，这个问题可以完全回答。绕该平面的旋子 $\cos\alpha - \vv{B}\sin\alpha$ 在乘法下构成一个圆；上面的夹乘计算 $R\,\vv{v}_\parallel R^\dagger = R^2\,\vv{v}_\parallel$ 说明，旋子 $R$ 引起的平面内旋转就是 $R^2$。所以“旋子 $\mapsto$ 旋转”在一个固定平面内正是单位圆上的平方映射 $z \mapsto z^2$，而它的拓扑性质已在所钉仓库的模块 `D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift` 中冻结。
 
+::: {.figure src="ch05-double-cover"}
+**旋转转一圈，旋子只走半圈。** 左边紫色的圆是旋子 $R(\theta)$，右边是旋转；把左边的点平方（$z \mapsto z^2$）就落到右边。转角每加 $90^\circ$，右边的点走 $90^\circ$，左边的只走 $45^\circ$：第一圈（实线）右边绕满一周，左边只走了上半圆；第二圈（虚线）左边才走完下半圆。琥珀色的点是 $\theta = 360^\circ$：右边回到出发点，左边停在 $-1$。点的坐标就是 [@ex-rotor-two-turns] 的表；拓扑上的结论见 [@thm-circle-double-cover-history-lift]。
+:::
+
 ::: {.theorem #thm-circle-double-cover-history-lift title="圆的二重覆盖：路径提升唯一、没有连续的整体截面、转一整圈交换两个原像" lean="D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section"}
 记 $S^1$ 为复平面上的单位圆（Mathlib 的 `Circle`），$\operatorname{sq} : S^1 \to S^1$ 为平方映射 $z \mapsto z^2$，它是覆盖映射（Mathlib 的 `Circle.isQuotientCoveringMap_npow 2`）；记 $I = [0, 1]$。则：
 
@@ -236,6 +246,10 @@ $$
 
 [@prop-phase-locked-overlap] 在几何上极其直观：在复平面上，乘以 $u^{-1}$ 相当于把坐标轴顺时针旋转到与单位向量 $u$ 对齐；条件 $\overline{z} = (u^{-1})^2 z$ 等价于 $\overline{u^{-1}z} = u^{-1}z$，说明矢量 $z$ 恰好躺成与基准射线 $u$ 共线的一维线段（外积有向面积 $u \wedge z = 0$），因此剥去方向因子 $u$ 后剩下的纯长度 $r = \operatorname{Re}(u^{-1}z)$ 自然是一个一维实数！
 
+::: {.figure src="ch05-phase-locked"}
+**锁定相位的重叠幅躺在 $u$ 的那条线上。** 青色的直线穿过原点与单位相位 $u$。琥珀色的 $z = u \cdot r$ 躺在这条线上：它在线里的镜像就是它自己，即 $\overline{z} = (u^{-1})^2 z$，与 $u$ 张开的面积为零（[@prop-phase-locked-overlap]）。灰色的 $z'$ 不在线上：它的镜像（虚线箭头）是另一个点，它与 $u$ 张开一块品红的平行四边形。
+:::
+
 ## 5.4 单比特常见量子门（$X, Y, Z, H, S, T$）的纯几何旋子图鉴 {#sec-single-qubit-gates-as-rotors}
 
 现在，我们可以把量子计算教科书里最常用的六扇单比特基础量子门——泡利三门 $X, Y, Z$、阿达马门（Hadamard gate）$H$、相位门 $S$ 与 $\pi/8$ 门 $T$——统统请下“复矩阵神坛”，还原为三维布洛赫球面上的**刚体旋子图鉴**。
@@ -247,6 +261,10 @@ U = e^{i\alpha} R_{\hat{\vv{n}}}(\theta) = e^{i\alpha}\left(\cos\frac{\theta}{2}
 $$
 
 那么这扇量子门在三维空间里做的唯一一件事，就是**抓起整颗布洛赫球，绕着单位轴 $\hat{\vv{n}} \in S^2$（即霍奇对偶旋转平面 $\vv{B} = \star\hat{\vv{n}}$）右手刚体旋转整角 $\theta$**！
+
+::: {.figure src="ch05-gate-atlas"}
+**六个门，各绕一根轴转一次。** 每颗球上紫色的线是转轴 $\hat{\vv{n}}$，琥珀色的弧是转动路径，从灰点转到琥珀色的点。$X$、$Y$ 各转 $180^\circ$，都把北极 $\lvert 0\rangle$ 送到南极 $\lvert 1\rangle$，只是走的路不同；$Z$ 转 $180^\circ$，把赤道上的 $\lvert +\rangle$ 送到对面；$H$ 绕 $x$ 与 $z$ 之间的斜轴转 $180^\circ$，把北极送到 $\lvert +\rangle$；$S$、$T$ 绕同一根竖轴分别转 $90^\circ$ 与 $45^\circ$。轴与转角取自下面 [@ex-single-qubit-gate-atlas] 的表。
+:::
 
 先看阿达马门怎样把北极态带到赤道，再逐项读下面的旋子参数表。
 

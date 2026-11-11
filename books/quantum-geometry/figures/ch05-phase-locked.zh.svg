@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch05-phase-locked" data-lang="zh" viewBox="0 0 460 330" width="460" height="330" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="复平面，虚线是单位圆。青色的直线穿过原点和单位相位 u。琥珀色的箭头 z 躺在这条青色的线上，写作 z = u·r，r 是实数；它在这条线里的镜像就是它自己，与 u 张开的面积为零。另一支灰色的箭头 z′ 不在线上：它的镜像是另一支虚线箭头，它与 u 张开一块品红的平行四边形，标“u∧z′ ≠ 0”。">
+<title>复平面，虚线是单位圆。青色的直线穿过原点和单位相位 u。琥珀色的箭头 z 躺在这条青色的线上，写作 z = u·r，r 是实数；它在这条线里的镜像就是它自己，与 u 张开的面积为零。另一支灰色的箭头 z′ 不在线上：它的镜像是另一支虚线箭头，它与 u 张开一块品红的平行四边形，标“u∧z′ ≠ 0”。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<line x1="20" y1="212" x2="446" y2="212" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="196" y1="324" x2="196" y2="8" class="ts-faint" stroke-width="1.1" fill="none"/>
+<text class="tf-dim" x="446" y="230" font-size="13" text-anchor="end">Re</text>
+<text class="tf-dim" x="204" y="20" font-size="13">Im</text>
+<circle cx="196" cy="212" r="96" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 4" fill="none"/>
+<line x1="94.23" y1="275.59" x2="362.9" y2="107.71" class="ts-cyan" stroke-width="1.8" fill="none"/>
+<path d="M196 212 L277.41 161.13 L248.38 44.69 L166.97 95.56Z" class="ts-magenta tf-magenta" stroke-width="1.2" stroke-linejoin="round" fill-opacity="0.18"/>
+<line x1="196" y1="212" x2="282.07" y2="284.22" class="ts-dim" stroke-width="1.6" stroke-dasharray="5 4" fill="none"/>
+<path d="M287.93 289.13 L278.6 286.25 L283.46 280.45Z" class="tf-dim"/>
+<line x1="166.97" y1="95.56" x2="287.93" y2="289.13" class="ts-faint" stroke-width="1.2" stroke-dasharray="2 4" fill="none"/>
+<line x1="196" y1="212" x2="168.82" y2="102.99" class="ts-dim" stroke-width="2.2" fill="none"/>
+<path d="M166.97 95.56 L172.81 103.38 L165.48 105.21Z" class="tf-dim"/>
+<line x1="196" y1="212" x2="315.7" y2="137.2" class="ts-amber" stroke-width="2.8" fill="none"/>
+<path d="M322.19 133.15 L316.56 141.12 L312.55 134.71Z" class="tf-amber"/>
+<circle cx="277.41" cy="161.13" r="4.6" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-cyan" x="281.41" y="183.13" font-size="16" font-weight="600"><tspan font-style="italic">u</tspan></text>
+<text class="tf-amber" x="332.19" y="137.15" font-size="15"><tspan font-style="italic">z</tspan> = <tspan font-style="italic">u</tspan>·<tspan font-style="italic">r</tspan></text>
+<text class="tf-dim" x="156.97" y="99.56" font-size="15" text-anchor="end"><tspan font-style="italic">z</tspan>′</text>
+<text class="tf-dim" x="295.93" y="305.13" font-size="13"><tspan font-style="italic">z</tspan>′ 的镜像</text>
+<text class="tf-magenta ts-bg" x="222.19" y="129.39" font-size="14" text-anchor="middle" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">u</tspan>∧<tspan font-style="italic">z</tspan>′ ≠ 0</text>
+</svg>
