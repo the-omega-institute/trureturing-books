@@ -198,6 +198,14 @@ $$
 
 几何直觉藏在**高维球面的赤道测度集中现象（concentration of measure）**里（图 12 右栏；受限实振幅模型球面上的二阶矩上界汇总于 [@rem-sphere-equator-markov-literature]）。
 
+::: {.viz src="equator-concentration" preset="three" height="500"}
+**普通的三维球面上，点的高度均匀分布。** $d = 3$：圆上的点上下铺开，右边的精确密度是一条竖直的直线 $1/2$；$\varepsilon = 0.1$ 的赤道带里恰好是 10% 的点（青色），其余 90% 是品红的点。高度均匀是阿基米德的经典结果，未在本书形式化。
+:::
+
+::: {.viz src="equator-concentration" preset="width" height="500"}
+**维数越高，点越挤向赤道。** 时间轴把维数从 $d = 2$ 升到 $d = 2^{10}$：圆上的点挤向垂直于测量轴的赤道，右边的鼓包变窄变高，两道短横线 $\pm 1/\sqrt{d}$ 一起收拢；到 $d = 1024$ 时带外只剩 0.13%。宽度 $1/\sqrt{d}$ 来自 $\mathbb{E}[x_1^2] = 1/d$（[@rem-sphere-equator-markov-literature]）。
+:::
+
 ::: {.remark #rem-sphere-equator-markov-literature title="实单位球面二阶矩与赤道马尔可夫集中上界（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 在受限的实振幅模型球面 $S^{d-1} \subset \mathbb{R}^d$（其中希尔伯特维数 $d = 2^n$）上，设 $x = (x_1, \dots, x_d) \in S^{d-1}$ 是从 $d$ 维单位球面上按旋转不变均匀测度随机抽取的一根单位实向量。由于总模长恒满足 $\sum_{j=1}^d x_j^2 = 1$，且各向同性保证每个坐标分量的平方期望完全相等（$\mathbb{E}[x_1^2] = \cdots = \mathbb{E}[x_d^2]$），故任意单根固定测量轴（如 $x_1$ 轴）上的投影平方期望等于维数的倒数：
 
@@ -212,6 +220,14 @@ $$
 $$
 
 例如 $n = 20$ 颗量子比特（$d = 2^{20} = 1{,}048{,}576$）、带宽 $\varepsilon = 0.1$ 时，$\Pr(|x_1| \ge 0.1) \le \frac{100}{1048576} \approx 9.54 \times 10^{-5}$，即至少 $99.99046\%$ 的高维实球面测度集中在 $|x_1| < 0.1$ 的赤道窄带内，从固定单根测量轴看几乎正交于视线（与随机量子电路贫瘠高原定理的条件边界详见 [@rem-mbqc-gradients-literature]）。
+:::
+
+::: {.viz src="equator-concentration" preset="bound" height="500"}
+**马尔可夫上界总在实际份额之上。** $d = 2^7 = 128$、$\varepsilon = 0.2$：品红的带外份额是 0.023，上界 $1/(d\varepsilon^2) = 0.195$ 在它之上，大了八倍多（[@rem-sphere-equator-markov-literature]）。
+:::
+
+::: {.viz src="equator-concentration" preset="twenty" height="500"}
+**二十个量子比特：所有的点都在赤道窄带里。** $d = 2^{20}$、$\varepsilon = 0.1$：圆上的点全落在赤道上，密度是赤道上的一根细针。马尔可夫上界给出 $9.54 \times 10^{-5}$，页面用不完全贝塔函数算出的精确份额约为 $3 \times 10^{-2291}$。这是受限实振幅模型上的测度集中，不是电路梯度定律（[@rem-mbqc-gradients-literature]）。
 :::
 
 与上述均匀球面测度集中和随机电路梯度定律**完全独立**，在算子层析与时频集中分析中还有另一类常被对比的数学问题：**当一个非负实数列 $\lambda : \mathbb{N} \to \mathbb{R}$ 可和且满足有限迹恒等式 $\sum_{j=0}^\infty \lambda_j = \frac{R W}{\pi}$ 时，如何从上界控制它超过给定阈值 $\tau > 0$ 的模式个数？** 在 Lean 模块 `FiniteRankConcentrationModeBound` 中，下面的冻结推论给出了这一**充分计数上界**：任何超过正阈值 $\tau > 0$ 的超水平集 $S_\tau = \{j \in \mathbb{N} \mid \tau \le \lambda_j\}$ 必然是有限集，且其基数受显式上界 $\frac{R W}{\pi \tau}$ 控制。（请务必注意边界：该定理只是一个关于非负可和序列的**充分计数上界**，既不是超水平集有限的必要条件——例如不可和的调和序列 $\lambda_j = \frac{1}{j+1}$ 总和发散，但对每个正阈值 $\tau > 0$ 同样只有有限项满足 $\lambda_j \ge \tau$——也不提供逃离贫瘠高原或保证电路梯度非零的机制，因为有限维密度矩阵天然迹为 $1$，且有限迹预算丝毫不能阻止常数目标函数的梯度恒为零。）
@@ -275,6 +291,10 @@ $$
 
    即至少 $99.9904633\%$ 的测度集中在 $|x_1| < 0.1$ 的赤道带内（此为经典二阶矩/马尔可夫上界，而非已证电路梯度定律）。
 5. **冻结有限迹谱预算界的显式实例化**：在 [@cor-finite-trace-mode-budget] 中取几何衰减谱 $\lambda_j = 2^{-(j+1)}$（$j \in \mathbb{N}$），区间半径 $R = \pi$，频率测度 $W = 1$，阈值 $\tau = \frac{1}{8}$。此时 $\sum_{j=0}^\infty \lambda_j = 1 = \frac{R W}{\pi}$，满足 $\lambda_j \ge \frac{1}{8}$ 的下标恰好为 $j \in \{0, 1, 2\}$ 共 $3$ 个模式（$\lambda_0 = \frac{1}{2}, \lambda_1 = \frac{1}{4}, \lambda_2 = \frac{1}{8}$），严格符合上界 $3 \le \frac{R W}{\pi \tau} = 8$。
+:::
+
+::: {.viz src="equator-concentration" height="560"}
+**赤道集中：完整实验室。** 时间轴是维数 $d = 2^n$（$n$ 从 1 到 20），可以改带宽 $\varepsilon$、重新抽样；小图在对数坐标上画出宽度 $1/\sqrt{d}$、精确的带外份额与马尔可夫上界 $1/(d\varepsilon^2)$。
 :::
 
 ::: {.remark #rem-mbqc-gradients-literature title="单向量子计算、参数位移、自然梯度与贫瘠高原（文献结果，未在本书形式化）"}

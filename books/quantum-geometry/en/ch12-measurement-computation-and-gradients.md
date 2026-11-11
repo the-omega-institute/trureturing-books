@@ -161,6 +161,14 @@ Note the mathematical contract of [@thm-riemannian-gradient-dissipation]: endpoi
 
 When we scale from a single qubit to $n$ qubits with dimension $d = 2^n$, why do high-dimensional state spaces become overwhelmingly orthogonal to any fixed measurement axis (Panel III of Figure 12; [@rem-sphere-equator-markov-literature])?
 
+::: {.viz src="equator-concentration" preset="three" height="500"}
+**On the ordinary sphere the heights of points are spread evenly.** At $d = 3$ the dots spread up and down the circle, and on the right the exact density is a vertical straight line at $1/2$; the equator belt with $\varepsilon = 0.1$ holds exactly 10% of the points (cyan), and the other 90% are magenta. The even spread of heights is a classical result of Archimedes, not formalized in this book.
+:::
+
+::: {.viz src="equator-concentration" preset="width" height="500"}
+**The higher the dimension, the more the points crowd onto the equator.** The rail raises the dimension from $d = 2$ to $d = 2^{10}$: the dots crowd onto the equator perpendicular to the measured axis, the bump on the right grows narrower and taller, and the two short ticks at $\pm 1/\sqrt{d}$ close in with it; at $d = 1024$ only 0.13% lies outside. The width $1/\sqrt{d}$ comes from $\mathbb{E}[x_1^2] = 1/d$ ([@rem-sphere-equator-markov-literature]).
+:::
+
 ::: {.remark #rem-sphere-equator-markov-literature title="Second-Moment and Markov Equatorial Concentration Bound on the Real Unit Sphere (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** On the restricted real-amplitude unit sphere $S^{d-1} \subset \mathbb{R}^d$ ($d = 2^n$), for a uniform real unit vector $x = (x_1, \dots, x_d) \in S^{d-1}$, symmetry across the $d$ coordinates gives $\mathbb{E}[x_1^2] = \frac{1}{d}$, so Markov's inequality yields
 
@@ -169,6 +177,14 @@ $$
 $$
 
 At $n = 20$ qubits ($d = 1{,}048{,}576$) and $\varepsilon = 0.1$, at least $99.9904633\%$ of the sphere lies inside the narrow equatorial band $|x_1| < 0.1$ (for the separate random-circuit barren-plateau hypotheses, see [@rem-mbqc-gradients-literature]).
+:::
+
+::: {.viz src="equator-concentration" preset="bound" height="500"}
+**The Markov bound always lies above the actual share.** At $d = 2^7 = 128$ and $\varepsilon = 0.2$ the magenta outside share is 0.023, and the bound $1/(d\varepsilon^2) = 0.195$ lies above it, more than eight times larger ([@rem-sphere-equator-markov-literature]).
+:::
+
+::: {.viz src="equator-concentration" preset="twenty" height="500"}
+**Twenty qubits: every point lies in the narrow equator belt.** At $d = 2^{20}$ and $\varepsilon = 0.1$ every dot lands on the equator, and the density is a thin needle there. The Markov bound gives $9.54 \times 10^{-5}$; the exact share, computed by the page from the incomplete beta function, is about $3 \times 10^{-2291}$. This is concentration of measure on the restricted real-amplitude model, not a law for circuit gradients ([@rem-mbqc-gradients-literature]).
 :::
 
 Separately from uniform sphere measure and random-circuit gradient laws, when a nonnegative summable sequence $\lambda_j \ge 0$ obeys a finite trace identity $\sum_{j=0}^\infty \lambda_j = \frac{R W}{\pi}$, the frozen theorem in `FiniteRankConcentrationModeBound` provides a **sufficient counting upper bound** on the number of modes above any threshold $\tau > 0$. (Keep its scope exact: summability is a sufficient condition for the upper bound $RW/(\pi\tau)$, not a necessary condition even for finite superlevel sets — for instance, the non-summable harmonic sequence $\lambda_j = 1/(j+1)$ also has finitely many terms above each $\tau > 0$ — and a finite trace budget neither prevents zero gradients nor provides an escape from barren plateaus, as finite-dimensional density matrices already have unit trace.)
@@ -231,6 +247,10 @@ Note that [@cor-finite-trace-mode-budget] does not separately assume $R > 0$ or 
 
    so at least $99.9904633\%$ of the sphere lies in the equatorial belt $|x_1| < 0.1$ (a literature second-moment/Markov bound, not a proven circuit-gradient law or a universal $99.999\%$ statement).
 5. **Explicit check of the frozen spectral mode bound**: Instantiating [@cor-finite-trace-mode-budget] with $\lambda_j = 2^{-(j+1)}$, $R = \pi$, $W = 1$, and $\tau = 1/8$, the eigenvalues sum to $1 = RW/\pi$, precisely $j \in \{0, 1, 2\}$ satisfy $\lambda_j \ge 1/8$, and $3 \le RW/(\pi\tau) = 8$.
+:::
+
+::: {.viz src="equator-concentration" height="560"}
+**Concentration at the equator: the full lab.** The rail is the dimension $d = 2^n$ ($n$ from 1 to 20); change the belt half-width $\varepsilon$ or redraw the points. The small plot shows the width $1/\sqrt{d}$, the exact outside share and the Markov bound $1/(d\varepsilon^2)$ on logarithmic axes.
 :::
 
 ::: {.remark #rem-mbqc-gradients-literature title="One-Way Quantum Computing, Parameter Shift, Natural Gradients, and Barren Plateaus (Literature Result, Not Formalized in This Book)"}

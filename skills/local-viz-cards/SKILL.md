@@ -35,6 +35,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `erasure-ledger` | 转动不记账；抹掉横着的那一份，系统的熵就多出这一份；把比特复位，这笔熵要化成热付给环境，只能多付，不能少付 | `pinch` `steps` `cycle` `bath` `copy` |
 | `speed-limit-zeno` | 翻过 90° 的墙快不过能量涨落；看得越勤越走不掉，可平均还是两步回来一次 | `equal` `three` `unequal` `strobe4` `strobe16` `mean` |
 | `parameter-shift` | 左右各转 90° 取两个值，两值之差的一半正好是这一点的斜率；小步长差分总差一点，还把散粒噪声放大 | `shift` `anywhere` `step` `noise` |
+| `equator-concentration` | 维数越高，球面上的点越挤在垂直于测量轴的赤道上，宽度按 1/√d 缩小 | `three` `four` `width` `bound` `twenty` |
 
 后四个页面的依据分层要写在页面与图注里：第三十章转述的 2026 年预印本只作为该章的转述出现，页面上的曲线与涡管是示意模型（`MODEL`）；菱形三十面体与“帝国”是文献结果（`ARGUED`）；灵魂、遗迹、似曾相识是诠释模型（`MODEL`）；只有带 Lean 链接的绿色框是已验证定理。`spatial-attractor-deja-vu` 不引用任何 Lean 定理。
 
@@ -55,6 +56,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `speed-limit-zeno` 的速度线与墙上的 MT、ML 刻度按 Mandelstam–Tamm、Margolus–Levitin 公式画出，芝诺冻结的极限是 Misra–Sudarshan 定理，三者都是文献结果（`ARGUED`）；“平均返回时间恒为 2”是第七章例子的手算与页面的数值核对（`NUM`）；绿色框只给第七章引用的两条定理：`record_time_lower_bound` 与 `monitored_return_conservation`。
 
 `parameter-shift` 的绿色框只给第十二章引用的 `projection_probability_flow`：虚线切线的斜率按它的对易子公式在 2 × 2 密度矩阵上算出；两点公式本身（参数位移律）是文献结果（`ARGUED`）；采样场景的每一发来自固定种子的伪随机数，散布与理论宽度是页面的数值（`NUM`）。这一页的青色是期望值曲线与 ±90° 两点（影子），品红是小步长差分。
+
+`equator-concentration` 不引用任何 Lean 定理（第十二章引用的冻结定理与球面测度集中无关，正文强调它们相互独立）：E[x₁²] = 1/d、马尔可夫上界、x₁ 的密度 ∝ (1 − x²)^{(d−3)/2} 与贫瘠高原都是文献结果（`ARGUED`）；带内外的精确份额由不完全贝塔函数算出、舞台上的点是精确分布的分位数（`NUM`）。页面不画梯度。青色是赤道带里的点与带内密度，品红是带外的点与带外密度。
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
@@ -126,6 +129,9 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第十二章 | 开篇三座高峰第 2 条（参数位移律）之后、第 3 条之前 | `parameter-shift` · `noise` |
 | 第十二章 | §泡利转角与精确参数位移 · 文献注记 `rem-parameter-shift-rule-literature` 之前 | `parameter-shift` · `shift` |
 | 第十二章 | 文献注记 `rem-parameter-shift-rule-literature` 之后（该节末） | `parameter-shift` · `anywhere`，随后完整实验室 |
+| 第十二章 | §赤道集中与贫瘠高原的条件 · 文献注记 `rem-sphere-equator-markov-literature` 之前 | `equator-concentration` · `three`、`width` |
+| 第十二章 | 文献注记 `rem-sphere-equator-markov-literature` 之后 | `equator-concentration` · `bound`、`twenty` |
+| 第十二章 | 例 `ex-cluster-shift-and-gradient` 之后、文献注记 `rem-mbqc-gradients-literature` 之前 | `equator-concentration` 完整实验室 |
 
 ## 增删或修改一张卡之后
 
