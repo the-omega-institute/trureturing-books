@@ -412,4 +412,8 @@ Our pinned repository focuses on constructive finite-dimensional matrix reductio
 The full lab: drag the amber $B$ or the cyan $A$ and watch the cyan stretch and the weight change together while the share of passes follows; draw new random numbers and the curve changes while the dashed cyan line does not; “both turn together” and “a random direction each shot” are in the left column.
 :::
 
+::: {.film src="002-pairwise-born"}
+**Pairwise measurement: from two arrows to the Born weight (about 100 seconds).** Two arrows $60^\circ$ apart read their own angle from the two diagonals of their parallelogram ([@thm-parallelogram-norm-law]); with $A$ as its own axis, the foot $C$ becomes the cyan shadow $\cos\theta$ that $B$ casts on $A$; squeezing that shadow from $[-1, 1]$ into $[0, 1]$ gives the weight $\cos^2(\theta/2)$ ([@thm-born-modulus-square]); only squares let a shutter and its complement share the whole weight ([@thm-born-probability-skeleton]); finally an environment records the branch, and the arrow shrinks to a short line on the vertical axis inside the ball ([@thm-nonselective-marginal]).
+:::
+
 Having eliminated the external third point $C$ and derived $\cos^2(\theta/2) = \frac{1 + \cos\theta}{2}$ from pure trace geometry, we now turn the spotlight onto the ruler itself — the **idempotent projector** $P^2 = P$ that appeared in every theorem of this chapter. Why do "detecting a particle," "naming a logical concept," and "experiencing a tick of classical linear time" all reduce to the single equation $P^2 = P$? Let us step into [Chapter 3](ch03-projectors-and-duality.md).
