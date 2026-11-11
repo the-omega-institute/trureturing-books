@@ -12,7 +12,7 @@
 <line x1="104" y1="262" x2="161.3" y2="40.08" class="ts-ink" stroke-width="1.8" fill="none"/>
 <path d="M163 33.49 L164.25 42.08 L157.75 40.4Z" class="tf-ink"/>
 <line x1="118.75" y1="26.46" x2="118.75" y2="262" class="ts-cyan" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
-<line x1="104" y1="262" x2="118.32" y2="33.25" class="ts-ink" stroke-width="1.8" fill="none"/>
+<line x1="104" y1="262" x2="118.33" y2="33.25" class="ts-ink" stroke-width="1.8" fill="none"/>
 <path d="M118.75 26.46 L121.6 34.66 L114.9 34.24Z" class="tf-ink"/>
 <line x1="104" y1="262" x2="222" y2="262" class="ts-cyan" stroke-width="4.4" stroke-linecap="round" fill="none"/>
 <circle cx="222" cy="262" r="3.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
