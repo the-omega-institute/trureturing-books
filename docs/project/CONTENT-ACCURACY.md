@@ -1,6 +1,6 @@
 # quantum-geometry 内容准确性覆盖与证据
 
-核对日期：2026-11-11。中文为权威，英文逐段对照。中英 SUMMARY 共 35 个单元：内容覆盖为 5/35，其中序曲和第 1 章已独立复审并合入，第 2–4 章的 R1 确认阻断项已修复，等待强制 R2 三席独立复审；其余 30 个单元尚未全文核对。本记录区分内容证据、输出验收与合入状态。首批各轮的候选与输出基线分别保留在下文。
+核对日期：2026-11-11。中文为权威，英文逐段对照。中英 SUMMARY 共 35 个单元：内容覆盖为 5/35，其中序曲和第 1 章已独立复审并合入，第 2–4 章的 R1 确认阻断项已修复并通过 R2 三席独立复审；PR #62 待合入；其余 30 个单元尚未全文核对。本记录区分内容证据、输出验收与合入状态。首批各轮的候选与输出基线分别保留在下文。
 
 ## 全书覆盖
 
@@ -10,9 +10,9 @@
 | --- | --- | --- | --- |
 | 0 | README.md | 已覆盖；已复审并合入 PR #53 | P1–P8、Q1–Q4、R1–R7、第三轮导读复核 |
 | 1 | ch01-measurement.md | 已覆盖；已复审并合入 PR #53 | F1–F6、D1、C1–C5、Q3、R1–R7 |
-| 2 | ch02-born-rule.md | 已覆盖；R1 阻断项已修复，待 R2 | F01、F02；图 02；本批 R1-B01、B02 |
-| 3 | ch03-projectors-and-duality.md | 已覆盖；R1 阻断项已修复，待 R2 | F03、F04、F06、F07；图 03；本批 R1-B02 |
-| 4 | ch04-decoherence.md | 已覆盖；R1 阻断项已修复，待 R2 | F01、F05、F08；图 04；本批 R1-B03–B05 |
+| 2 | ch02-born-rule.md | 已覆盖；R2 复审通过，PR #62 待合入 | F01、F02；图 02；本批 R1-B01、B02 |
+| 3 | ch03-projectors-and-duality.md | 已覆盖；R2 复审通过，PR #62 待合入 | F03、F04、F06、F07；图 03；本批 R1-B02 |
+| 4 | ch04-decoherence.md | 已覆盖；R2 复审通过，PR #62 待合入 | F01、F05、F08；图 04；本批 R1-B03–B05 |
 | 5 | ch05-complex-phase-and-rotors.md | 待核对 | — |
 | 6 | ch06-geometric-product.md | 待核对 | — |
 | 7 | ch07-geometric-time-and-speed-limits.md | 待核对 | — |
@@ -357,9 +357,16 @@ EPUB 浏览器预览不等于 Apple Books 原生主题验收，尚未导入 Appl
 | 四份 PDF 相关页渲染并实看 | 新外积标题与同型信道标题分别位于中文屏幕物理页 29/56、印刷页 32/60，英文屏幕页 33/60、印刷页 35/63；同时查看吕德斯限定、模型过渡与端点注相关页，未见新裁切或重叠，见 `pdf/*.png`、`exports.json`。 |
 | 两份 EPUBCheck 与解包正文核对 | 两份均 `valid=true`，0 错误、0 警告，未跳过，见 `epubcheck.json`。三章最终修订文本在 `EPUB/text/ch005.xhtml`、`ch006.xhtml`、`ch007.xhtml`，两个标题亦同步至 `ch046.xhtml` 验证账本，见 `exports.json`。本轮未做 EPUB 浏览器实看或 Apple Books 原生导入；上节旧 EPUB 视图仅保留为历史证据。 |
 
+
+## 第 2–4 章 R2 复审结论
+
+候选 `1555b6b4f22b8068be9668ba0d0afb85fcd6a31d` 的 R2 三席均批准：架构席确认五项 R1 阻断已关闭且无新的契约缺陷；质量席重新核对 38 条冻结引用、B01–B05、F01–F08 与独立算例；测试席在隔离归档上运行严格检查并核对最终 HTML、PDF、EPUB、SVG 与链接。三席共同范围仅为第 2–4 章及其三张图，不能外推到全书。测试席提示的审计元数据哈希差异属于历史 focused-checks 记录，正文与成品对应已按最终候选重新核对；冻结源码链接路径已修正。
+
+本记录现标记 5/35 个单元有内容覆盖：序曲和第 1 章已随 PR #53 合入，第 2–4 章 R2 通过、PR #62 待合入；其余 30 个单元仍待全文校对。
+
 ## 待办边界
 
-本批第 2–4 章的五项 R1 确认阻断项已作最小双语修复，等待强制 R2 三席独立复审，尚无批准结论；PR、CI、Pages 由调用方跟进。本轮未提交、推送或操作 GitHub。剩余 30 个单元没有全文准确性结论。第 20 章将并行层数 $L$ 称为“顺序门计数”（英文 “sequential gate layers”）的问题仍待该章核查；PR #58 修改的四个未审单元须以新正文为准。
+本批第 2–4 章的五项 R1 确认阻断项已作最小双语修复，并经 R2 架构、质量、测试三席一致批准；PR #62、CI、Pages 由调用方跟进。本轮未提交、推送或操作 GitHub。剩余 30 个单元没有全文准确性结论。第 20 章将并行层数 $L$ 称为“顺序门计数”（英文 “sequential gate layers”）的问题仍待该章核查；PR #58 修改的四个未审单元须以新正文为准。
 
 [par-src]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/QuantumContext/ParallelogramNormLaw.lean#L22
 [par-frozen]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/Golden/Frozen/state/D5/S3/QuantumContext/ParallelogramNormLaw.lean.json
