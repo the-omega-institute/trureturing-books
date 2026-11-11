@@ -1,0 +1,7 @@
+/* FIXED//CONVERGE: the shared lab layout (../assets/theme.css) carries the page. Only what belongs to this page:
+   the drag cursor of the cobweb stage and the neutral swatch of the path already walked. */
+#cv { cursor: grab; touch-action: none; }
+#cv:active { cursor: grabbing; }
+.sw.ink { background: var(--sigma); }
+.sw.dash { background: repeating-linear-gradient(90deg, var(--magenta) 0 4px, transparent 4px 7px); }
+.sw.dash.dm { background: repeating-linear-gradient(90deg, var(--dim) 0 4px, transparent 4px 7px); }

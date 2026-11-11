@@ -136,11 +136,19 @@ $$
 
 with unit norm $R_u(\theta)\widetilde{R}_u(\theta) = \cos^2(\theta/2) + \sin^2(\theta/2) = 1$. Under the two-sided **sandwich product** $v \mapsto R_u(\theta)\,v\,\widetilde{R}_u(\theta)$, components $v_\parallel$ parallel to axis $u$ commute with $B_u$ and remain fixed, whereas components $v_\perp$ lying in the plane $B_u$ anticommute with $B_u$, combining the two half-angles into a full rotation $R_u(\theta)^2 v_\perp = (\cos\theta - \sin\theta\,B_u)v_\perp$.
 
+::: {.viz src="zyz-compile" preset="sandwich" height="500"}
+**The sandwich: the shadow on the axis stays, the plane turns in full.** The amber arrow $v = (\tfrac{\sqrt{3}}{2}, 0, \tfrac{1}{2})$ turns by $90^\circ$ about the violet $z$ axis: its cyan shadow $\tfrac{1}{2}e_3$ stays on the axis, while the magenta part sweeps a $90^\circ$ fan in the plane $z = \tfrac{1}{2}$, split by the dashed line into two halves of $45^\circ$, the half-angles contributed by $R_z$ on the left and $\widetilde{R}_z$ on the right. This is the hand computation of this section; the page is a numerical illustration.
+:::
+
 Consequently, compiling a **ZYZ Euler triple** $(\alpha, \beta, \gamma)$ requires only two multivector multiplications in $\mathcal{Cl}^+_{3,0}(\mathbb{R})$:
 
 $$
 R(\alpha, \beta, \gamma) = R_z(\alpha)\,R_y(\beta)\,R_z(\gamma).
 $$
+
+::: {.viz src="zyz-compile" preset="chain" height="500"}
+**Three turns multiply into one rotor.** With the triple $(\alpha, \beta, \gamma) = (0.37, -0.81, 0.52)$ of the example below, the amber arrow $v$ turns first by $\gamma$ about the violet $z$ axis, then by $\beta$ about $y$, and last by $\alpha$ about $z$; the white tripod comes to rest at $Re_1$, $Re_2$, $Re_3$, and the top of the figure shows the compiled rotor $0.830 - 0.396\,e_1e_2 - 0.393\,e_1e_3 + 0.030\,e_2e_3$. Rotor compilation has no frozen theorem; on the page it is a numerical illustration only.
+:::
 
 ## Python 3 ZYZ Rotor Compiler Implementation and Numerical Verification {#sec-zyz-rotor-compiler-python}
 
@@ -344,6 +352,14 @@ Let us verify the compiled multivector coefficients and rotated basis vectors on
    satisfying $R_H e_1 \widetilde{R}_H = e_3$, $R_H e_2 \widetilde{R}_H = -e_2$, and $R_H e_3 \widetilde{R}_H = e_1$.
 :::
 
+::: {.viz src="zyz-compile" preset="t" height="500"}
+**The $T$ gate: the middle turn is zero.** For $(\alpha, \beta, \gamma) = (\pi/4, 0, 0)$ the first two angles vanish, and neither the amber arrow nor the white tripod moves; the last turn is $45^\circ$ about the violet $z$ axis, the arrow runs $45^\circ$ along the equator from $e_1$, $Re_3$ stays at the north pole, and the rotor at the top is $0.924 - 0.383\,e_1e_2$.
+:::
+
+::: {.viz src="zyz-compile" preset="h" height="500"}
+**The Hadamard gate $(0, \pi/2, \pi)$.** The first turn is $180^\circ$ about $z$: the amber arrow sits at the north pole, on the axis, so only its cyan shadow is left while the tripod's $Re_1$ and $Re_2$ flip over; the second turn is $90^\circ$ about $y$ and brings the arrow down to $e_1$. The violet dashed line is the diagonal axis $(e_1 + e_3)/\sqrt{2}$, and the tripod comes to rest at $Re_1 = e_3$, $Re_2 = -e_2$, $Re_3 = e_1$.
+:::
+
 ::: {.remark #rem-zyz-euler-compilation-literature title="The SU(2)→SO(3) Double Cover and Universal ZYZ Euler Decomposition (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** Two classical theorems from quantum computation and Lie group theory frame the compiler construction above:
 
@@ -353,6 +369,14 @@ Let us verify the compiled multivector coefficients and rotated basis vectors on
    $$
 2. **The $2:1$ spin double cover $\operatorname{Spin}(3) \cong \mathrm{SU}(2) \to \mathrm{SO}(3)$**: Inside $\mathcal{Cl}^+_{3,0}(\mathbb{R})$, the norm-one rotor group $\operatorname{Spin}(3) = \{R \in \mathcal{Cl}^+_{3,0}(\mathbb{R}) \mid R\widetilde{R} = 1\} \cong S^3 \cong \mathrm{SU}(2)$ acts on $\mathbb{R}^3$ via $v \mapsto R v \widetilde{R}$, defining a surjective $2:1$ homomorphism onto $\mathrm{SO}(3)$ with kernel $\{\pm 1\}$. For a fixed plane of rotation, the topology of this two-to-one map — unique path lifting, no continuous global section, sign reversal of the rotor after a full turn — is verified by [@thm-circle-double-cover-history-lift] in [Chapter 5](ch05-complex-phase-and-rotors.md).
 3. **Exact scope of the frozen theorems**: The four Lean-verified theorems in this chapter (`ActualPureQubitGeometry`) prove the trace formula for `blochMatrix a r` ([@thm-bloch-matrix-trace]), coordinate recovery `bloch (blochMatrix a r) = r` ([@lemma-bloch-coordinate-recovery]), Hermitian Bloch reconstruction and unit-sphere norm for trace-one idempotent projectors ([@prop-hermitian-bloch-geometry]), and the positive-semidefinite ball bound $\norm{\operatorname{bloch}(M)} \le \operatorname{Re}(\Tr M)$ ([@cor-psd-bloch-ball-bound]). Surjectivity of $\mathrm{SU}(2) \to \mathrm{SO}(3)$ and existence of ZYZ angles for arbitrary $U \in \mathrm{U}(2)$ belong to the literature layer, while `RotorCompiler` implements the forward rotor synthesis from $(\alpha, \beta, \gamma)$.
+:::
+
+::: {.viz src="zyz-compile" preset="fold" height="500"}
+**Three turns equal one turn about one axis.** For the same angles $(0.37, -0.81, 0.52)$, the violet dashed line is the compiled rotor's own axis $n$ and the violet dashed arc a single turn of $67.9^\circ$ about it: leaving the white start ring, it lands exactly where the white road of the three turns ends. That a unit rotor is one turn about one axis belongs to the literature results above and is not formalized in this book; the axis and the angle are computed numerically by the page.
+:::
+
+::: {.viz src="zyz-compile" height="560"}
+**The ZYZ compilation lab.** Drag the three Euler angles, move the arrow's start, or switch on the single axis $n$: in every turn the cyan shadow stays put while the magenta fan sweeps the whole angle, and in the strip scalar$^2$ and area$^2$ trade off with a sum that stays $1$. The green boxes cite only this chapter's four frozen theorems ([@thm-bloch-matrix-trace], [@lemma-bloch-coordinate-recovery], [@prop-hermitian-bloch-geometry], [@cor-psd-bloch-ball-bound]), which the page checks one by one on the pure state $\rho = \operatorname{blochMatrix}(1, v)$ of the arrow.
 :::
 
 With our executable Python 3 geometric algebra and rotor compilation engine complete, we now step directly into the frozen Lean 4 source files of `trureturing@dev` to audit the proof scripts that certify this monograph. Let us open [Chapter 27](ch27-reading-frozen-proofs-i.md).

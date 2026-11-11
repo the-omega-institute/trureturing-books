@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch19-overview" data-lang="en" data-wrap="1" viewBox="0 0 740 290" width="740" height="290" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="Three panels. Panel I: a binary layered network with 8 legs along the bottom, merging in pairs into one tensor per step up to a single tensor at the top; legs 3 to 6 are the amber interval, and cutting it off takes only the two bonds marked magenta, not four legs. Panel II: the width-three bridge graph, three bridges between tensors M and N, legs a = 2, b = 3, c = 2, d = 3; the two magenta dashed lines above and below are the min cut ad = bc = 6, with a green LEAN ✓ tag beneath: flow = cut = 6. Panel III: a log-capacity plot; the blue sloping line ln ad and the orange horizontal line ln bc join into one bent line at the dashed vertical seam, with three lattice points d = 2, 3, 4 on it; a violet tag at the bottom right: RT · literature.">
+<title>Three panels. Panel I: a binary layered network with 8 legs along the bottom, merging in pairs into one tensor per step up to a single tensor at the top; legs 3 to 6 are the amber interval, and cutting it off takes only the two bonds marked magenta, not four legs. Panel II: the width-three bridge graph, three bridges between tensors M and N, legs a = 2, b = 3, c = 2, d = 3; the two magenta dashed lines above and below are the min cut ad = bc = 6, with a green LEAN ✓ tag beneath: flow = cut = 6. Panel III: a log-capacity plot; the blue sloping line ln ad and the orange horizontal line ln bc join into one bent line at the dashed vertical seam, with three lattice points d = 2, 3, 4 on it; a violet tag at the bottom right: RT · literature.</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="236" height="290" viewBox="0 0 236 290">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">I  a cut in a layered net</text>
+<line x1="37.45" y1="172" x2="24" y2="222" class="ts-dim" stroke-width="1.6" fill="none"/>
+<line x1="37.45" y1="172" x2="50.9" y2="222" class="ts-dim" stroke-width="1.6" fill="none"/>
+<line x1="91.25" y1="172" x2="77.8" y2="222" class="ts-dim" stroke-width="1.6" fill="none"/>
+<line x1="91.25" y1="172" x2="104.7" y2="222" class="ts-dim" stroke-width="1.6" fill="none"/>
+<line x1="145.05" y1="172" x2="131.6" y2="222" class="ts-dim" stroke-width="1.6" fill="none"/>
+<line x1="145.05" y1="172" x2="158.5" y2="222" class="ts-dim" stroke-width="1.6" fill="none"/>
+<line x1="198.85" y1="172" x2="185.4" y2="222" class="ts-dim" stroke-width="1.6" fill="none"/>
+<line x1="198.85" y1="172" x2="212.3" y2="222" class="ts-dim" stroke-width="1.6" fill="none"/>
+<line x1="64.35" y1="122" x2="37.45" y2="172" class="ts-dim" stroke-width="1.6" fill="none"/>
+<line x1="64.35" y1="122" x2="91.25" y2="172" class="ts-magenta" stroke-width="3" fill="none"/>
+<line x1="70.8" y1="145" x2="84.8" y2="149" class="ts-magenta" stroke-width="2.4" fill="none"/>
+<line x1="171.95" y1="122" x2="145.05" y2="172" class="ts-magenta" stroke-width="3" fill="none"/>
+<line x1="151.5" y1="145" x2="165.5" y2="149" class="ts-magenta" stroke-width="2.4" fill="none"/>
+<line x1="171.95" y1="122" x2="198.85" y2="172" class="ts-dim" stroke-width="1.6" fill="none"/>
+<line x1="118.15" y1="72" x2="64.35" y2="122" class="ts-dim" stroke-width="1.6" fill="none"/>
+<line x1="118.15" y1="72" x2="171.95" y2="122" class="ts-dim" stroke-width="1.6" fill="none"/>
+<line x1="24" y1="222" x2="24" y2="248" class="ts-dim" stroke-width="1.6" fill="none"/>
+<circle cx="24" cy="222" r="4.2" class="tf-dim"/>
+<line x1="50.9" y1="222" x2="50.9" y2="248" class="ts-dim" stroke-width="1.6" fill="none"/>
+<circle cx="50.9" cy="222" r="4.2" class="tf-dim"/>
+<line x1="77.8" y1="222" x2="77.8" y2="248" class="ts-amber" stroke-width="3" fill="none"/>
+<circle cx="77.8" cy="222" r="4.2" class="tf-amber"/>
+<line x1="104.7" y1="222" x2="104.7" y2="248" class="ts-amber" stroke-width="3" fill="none"/>
+<circle cx="104.7" cy="222" r="4.2" class="tf-amber"/>
+<line x1="131.6" y1="222" x2="131.6" y2="248" class="ts-amber" stroke-width="3" fill="none"/>
+<circle cx="131.6" cy="222" r="4.2" class="tf-amber"/>
+<line x1="158.5" y1="222" x2="158.5" y2="248" class="ts-amber" stroke-width="3" fill="none"/>
+<circle cx="158.5" cy="222" r="4.2" class="tf-amber"/>
+<line x1="185.4" y1="222" x2="185.4" y2="248" class="ts-dim" stroke-width="1.6" fill="none"/>
+<circle cx="185.4" cy="222" r="4.2" class="tf-dim"/>
+<line x1="212.3" y1="222" x2="212.3" y2="248" class="ts-dim" stroke-width="1.6" fill="none"/>
+<circle cx="212.3" cy="222" r="4.2" class="tf-dim"/>
+<rect x="29.45" y="165" width="16" height="14" rx="3" class="ts-ink tf-panel" stroke-width="1.6"/>
+<rect x="83.25" y="165" width="16" height="14" rx="3" class="ts-ink tf-panel" stroke-width="1.6"/>
+<rect x="137.05" y="165" width="16" height="14" rx="3" class="ts-ink tf-panel" stroke-width="1.6"/>
+<rect x="190.85" y="165" width="16" height="14" rx="3" class="ts-ink tf-panel" stroke-width="1.6"/>
+<rect x="56.35" y="115" width="16" height="14" rx="3" class="ts-ink tf-panel" stroke-width="1.6"/>
+<rect x="163.95" y="115" width="16" height="14" rx="3" class="ts-ink tf-panel" stroke-width="1.6"/>
+<rect x="110.15" y="65" width="16" height="14" rx="3" class="ts-ink tf-panel" stroke-width="1.6"/>
+<text class="tf-dim" x="118" y="274" font-size="13" text-anchor="middle">4 legs, 2 bonds cut</text>
+</svg>
+<svg class="tr-fig-panel" x="252" y="0" width="236" height="290" viewBox="0 0 236 290">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">II  bridge: flow = cut</text>
+<line x1="89" y1="129" x2="147" y2="129" class="ts-ink" stroke-width="2.2" fill="none"/>
+<line x1="89" y1="140" x2="147" y2="140" class="ts-ink" stroke-width="2.2" fill="none"/>
+<line x1="89" y1="151" x2="147" y2="151" class="ts-ink" stroke-width="2.2" fill="none"/>
+<line x1="72" y1="116" x2="72" y2="76" class="ts-ink" stroke-width="2.2" fill="none"/>
+<line x1="72" y1="164" x2="72" y2="204" class="ts-ink" stroke-width="2.2" fill="none"/>
+<circle cx="72" cy="76" r="3.2" class="tf-ink"/>
+<circle cx="72" cy="204" r="3.2" class="tf-ink"/>
+<text class="tf-dim" x="72" y="66" font-size="13" text-anchor="middle"><tspan font-style="italic">a</tspan> = 2</text>
+<text class="tf-dim" x="72" y="223.1" font-size="13" text-anchor="middle"><tspan font-style="italic">b</tspan> = 3</text>
+<line x1="164" y1="116" x2="164" y2="76" class="ts-ink" stroke-width="2.2" fill="none"/>
+<line x1="164" y1="164" x2="164" y2="204" class="ts-ink" stroke-width="2.2" fill="none"/>
+<circle cx="164" cy="76" r="3.2" class="tf-ink"/>
+<circle cx="164" cy="204" r="3.2" class="tf-ink"/>
+<text class="tf-dim" x="164" y="66" font-size="13" text-anchor="middle"><tspan font-style="italic">d</tspan> = 3</text>
+<text class="tf-dim" x="164" y="223.1" font-size="13" text-anchor="middle"><tspan font-style="italic">c</tspan> = 2</text>
+<rect x="55" y="116" width="34" height="48" rx="5" class="ts-ink tf-panel" stroke-width="2"/>
+<text class="tf-ink" x="72" y="145.76" font-size="16" text-anchor="middle" font-weight="600"><tspan font-style="italic">M</tspan></text>
+<rect x="147" y="116" width="34" height="48" rx="5" class="ts-ink tf-panel" stroke-width="2"/>
+<text class="tf-ink" x="164" y="145.76" font-size="16" text-anchor="middle" font-weight="600"><tspan font-style="italic">N</tspan></text>
+<line x1="42" y1="94" x2="194" y2="94" class="ts-magenta" stroke-width="2.6" stroke-dasharray="7 5" fill="none"/>
+<line x1="42" y1="186" x2="194" y2="186" class="ts-magenta" stroke-width="2.6" stroke-dasharray="7 5" fill="none"/>
+<rect x="35.4" y="264" width="165.2" height="21" class="ts-ok tf-ok" stroke-width="1.2" fill-opacity="0.12"/>
+<text class="tf-ok tr-fig-mono" x="42.4" y="280" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">LEAN ✓ flow = cut = 6</text>
+</svg>
+<svg class="tr-fig-panel" x="504" y="0" width="236" height="290" viewBox="0 0 236 290">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">III  facets meet at a seam</text>
+<line x1="28" y1="222" x2="220" y2="222" class="ts-dim" stroke-width="1.3" fill="none"/>
+<line x1="65.6" y1="222" x2="65.6" y2="227" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="65.6" y="240" font-size="13" text-anchor="middle">2</text>
+<line x1="133.92" y1="222" x2="133.92" y2="227" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="133.92" y="240" font-size="13" text-anchor="middle">3</text>
+<line x1="182.4" y1="222" x2="182.4" y2="227" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="182.4" y="240" font-size="13" text-anchor="middle">4</text>
+<text class="tf-dim" x="220" y="256.25" font-size="13" text-anchor="end"><tspan font-style="italic">d</tspan></text>
+<line x1="28" y1="54" x2="28" y2="222" class="ts-dim" stroke-width="1.3" fill="none"/>
+<path d="M28 222 L133.92 119.87" class="ts-blue" stroke-width="3.4" stroke-linejoin="round" fill="none"/>
+<path d="M133.92 119.87 L220 119.87" class="ts-orange" stroke-width="3.4" stroke-linejoin="round" fill="none"/>
+<line x1="133.92" y1="54" x2="133.92" y2="222" class="ts-dim" stroke-width="1.4" stroke-dasharray="3 4" fill="none"/>
+<text class="tf-dim" x="139.92" y="61.39" font-size="13">seam</text>
+<text class="tf-blue" x="67.82" y="169.7" font-size="14" text-anchor="end"><tspan font-style="italic">ad</tspan></text>
+<text class="tf-orange" x="218" y="109.87" font-size="14" text-anchor="end"><tspan font-style="italic">bc</tspan></text>
+<circle cx="65.6" cy="185.75" r="5" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="133.92" cy="119.87" r="5" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="182.4" cy="119.87" r="5" class="ts-bg tf-ink" stroke-width="1.4"/>
+<rect x="108" y="264" width="122" height="21" class="ts-violet tf-violet" stroke-width="1.2" fill-opacity="0.12"/>
+<text class="tf-violet tr-fig-mono" x="115" y="280" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">RT · literature</text>
+</svg>
+</svg>

@@ -10,11 +10,13 @@
 2. **第二层（文献注记）**：在 [@rem-complexity-growth-literature] 与 [@rem-computational-model-literature] 中澄清态复杂度定义、Nielsen 几何、热化后线性增长叙述的时间窗，以及统一图灵机模型与预存查表成本的核算规则；
 3. **第三层（红色 `OPEN`）**：将全息物理与计算复杂性理论中的三大核心未解问题——**复杂度等于体积（CV）**（[@conj-complexity-equals-volume]）、**$\mathrm{ER}=\mathrm{EPR}$**（[@conj-er-equals-epr]）与 **$\mathrm{P}\neq\mathrm{NP}$**（[@conj-p-neq-np]）——严格标记为不带 `lean` 属性的开放猜想。
 
+::: {.figure src="ch20-overview"}
+**图 20。** 本章地图：第 I 栏，玩具示意曲线——青色的 $S(t) = \min(2t, 4)$ 在 $t = 2$ 撞上灰色虚线 $4$ 后横着走，品红的 $C(t) = 2t$ 继续上升；第 II 栏，双边黑洞的示意彭罗斯图，紫色的切片两端钉在左右边界上、随边界时间越拉越长，把它读成复杂度是开放的复杂度—体积猜想（[@conj-complexity-equals-volume]）；第 III 栏，青色的 P 套在 NP 里，两者之间红色的问号是开放的 $\mathrm{P}\neq\mathrm{NP}$（[@conj-p-neq-np]）。
+:::
+
 ## 门计数、并行深度与增长模型 {#sec-circuit-depth-growth}
 
 当我们谈论一段量子电路有多“复杂”时，第一件必须做好的基本功，就是把四个经常被混为一谈的量严格拆开：**总门数**（gate count，电路列表中基本门的总个数）、**并行深度**（parallel depth，互不重叠门合并到同一时间层后所需的最少层数）、**连续几何测地线长度**（Nielsen 复杂度）以及实验室时钟走过的**物理时间 $t$**。
-
-![电路并行深度与熵饱和示意、开放边界可积电路最小深度定理，以及 CV、ER=EPR 与 P≠NP 三大开放猜想边界](../assets/fig-20-complexity-volume-wormhole.svg)
 
 让我们先看一个在 Lean 模块 `D5.S3.Quantum.Dynamics.OpenIntegrableCircuitMinDepth` 中被彻底算穿的并行深度问题。考察一条含 $N$ 个格点 $\{1, 2, \dots, N\}$ 的一维开放边界自旋链，电路的基本门字母表 `Gate` 包含三类局域算子：
 
@@ -29,6 +31,10 @@ $$
 $$
 
 通过把不共用格点的内部门与边界门并行打包，下面的定理给出了 $\operatorname{minDepth}(N, \kappa)$ 的精确闭式解。
+
+::: {.figure src="ch20-turning-points"}
+**折返点把门链切成 $\kappa + 1$ 段，每段里的门各占一层。** $N = 11$、$S = \{4, 8\}$：$12$ 道门是 $12$ 块青色的砖，排成三段向右下降的台阶，每段 $4$ 块；灰色箭头从先执行的门指向后执行的门，品红三角标出折返点 $U_4$、$U_8$。门数是 $12$，层数只有 $4 = \lfloor 11/3\rfloor + 1$（[@thm-open-circuit-min-depth]）。
+:::
 
 ::: {.theorem #thm-open-circuit-min-depth title="开放边界电路的最小深度" lean="D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result"}
 设自然数 $N, \kappa \in \mathbb{N}$ 满足 $1 \le \kappa$ 且 $2\kappa \le N$。则开放边界可积电路族的配置最小并行深度为
@@ -184,6 +190,10 @@ $$
 
 在 [@conj-complexity-equals-volume] 中，全息物理学家试图把“制备一个高度纠缠多体态所需的电路门数”与“连接黑洞两侧的爱因斯坦—罗森桥（虫洞）内部体积”联系起来。回到有限维矩阵与量子电路的严格数学领地，我们自然要问：**在给定的局域双比特门集下，精确合成一类具有特定对称性的多比特酉算子，究竟能不能证出指数级的门数下界？**
 
+::: {.figure src="ch20-cv-slices"}
+**边界时间往后走，穿过黑洞内部的切片越拉越长；它与门数是否成正比是开放问题。** 示意的双边黑洞彭罗斯图：左右竖边是两个边界，上下锯齿线是奇点，对角虚线是视界。紫色的切片 $\Sigma_t$ 两端钉在边界时刻 $t = 0, 1, 2, 3$ 上，越往后越长（示意，未计算体积）。红色标签是复杂度—体积猜想（[@conj-complexity-equals-volume]），开放问题。
+:::
+
 Lean 的 `D5.S3.Quantum.Magic.ReflectionDiagonalCNOTLowerBound` 模块对偶数比特数 $m = 2n$（$n \ge 1$）给出了一个干净利落的肯定定理。让我们先把模块中的电路与门集定义交代清楚：
 
 - 记 $m$ 比特计算基类型为 $\operatorname{Qubits}(m) = (\operatorname{Fin} m \to \operatorname{Bool})$（共 $2^m$ 个布尔位串）；
@@ -252,6 +262,10 @@ $$
 
 在全息引力文献中，与多比特纠缠与双边态紧密相关的另一条著名假说是马达西那（Juan Maldacena）与萨斯坎德（Leonard Susskind）提出的 $\mathrm{ER}=\mathrm{EPR}$ 猜想。我们将其严格置于开放猜想环境中。
 
+::: {.figure src="ch20-er-epr"}
+**ER=EPR 只在大量纠缠的半经典体系里提出“纠缠就是桥”。** 上一行：左右两套系统 $L$、$R$ 之间许多青色虚线的纠缠对，与右边爱因斯坦—罗森桥的侧视图之间是红色的“≟”，这一对应是开放问题（[@conj-er-equals-epr]）。下一行：一对贝尔态指向的小桥被划掉——一对微观纠缠比特之间没有光滑的虫洞。全图是示意。
+:::
+
 ::: {.conjecture #conj-er-equals-epr title="ER=EPR"}
 在允许半经典高维引力几何描述的适当纠缠双体系（典型原型为处于热场双态 thermofield double state 下的双边永恒反德西特黑洞）中，**$\mathrm{ER}=\mathrm{EPR}$ 猜想**认为：连接左右两个渐近边界外部区域的非可穿越**爱因斯坦—罗森桥**（Einstein–Rosen bridge，简称 ER 虫洞），在体几何上对偶于左右两套边界量子系统之间的**爱因斯坦—波多尔斯基—罗森**（Einstein–Podolsky–Rosen，简称 EPR）量子纠缠。
 
@@ -312,6 +326,10 @@ $$
 2. **酉矩阵精确合成的指数下界不等于 $\mathrm{P} \neq \mathrm{NP}$**：在 [@prop-reflection-cnot-lower-bound] 中，无辅助比特 $\{\mathrm{CNOT}, R_z\}$ 电路精确合成显式反射对称硬相位算子 $\operatorname{diag}(e^{i\theta_{\mathrm{hard}}(x)})$ 需要至少 $2^{2n-1} + 2n - 2$ 个 $\mathrm{CNOT}$ 门，这是因为该显式证人在全部 $2^{2n-1} - 1$ 个非零偶奇偶 Walsh–Hadamard 特征标上均取非平凡值 $-1$，迫使电路逐一生成全部非零偶奇偶标签并完成 $2n - 1$ 次导线奇复原（而在未在本书形式化的量子电路文献中，如 V. V. Shende, S. S. Bullock & I. L. Markov, *Phys. Rev. A* **70**, 012310 (2004)，合成一般 $m$ 比特酉群 $\mathrm{U}(2^m)$ 中的矩阵亦因 $4^m$ 维连续实参数流形维数计数而需要 $\Omega(4^m)$ 个双比特门）。然而，$\mathrm{NP}$ 判定问题是由编码长度为 $n = |x|$ 的紧凑布尔公式或图灵机实例描述的判定问题；无论是针对全空间对角算子 $\theta_{\mathrm{hard}}$ 的指数级奇偶输出计数下界，还是一般酉算子族的连续参数计数下界，都不能阻止某个特定紧凑判定问题拥有 $\operatorname{poly}(n)$ 时间算法，因此不能用来证明 $\mathrm{P} \neq \mathrm{NP}$。
 
 参见 S. A. Cook, "The complexity of theorem-proving procedures," *Proc. 3rd Annual ACM Symposium on Theory of Computing (STOC)*, pp. 151–158 (1971), DOI: `10.1145/800157.805047`；以及 S. Aaronson, *The Complexity of Quantum States and Transformations: From Quantum Money to Black Holes* (2016), `arXiv:1607.05256`。
+:::
+
+::: {.figure src="ch20-lookup-budget"}
+**预存的查找表很快超出任何多项式预算。** 纵轴按对数刻度：品红的直线是查找表的行数 $2^n$，青色的曲线是取作示例的多项式预算 $n^3$；两者在 $n = 10$ 的竖直虚线处交叉，此后品红线越走越远。紫色标签：文献结果，未在本书形式化（[@rem-computational-model-literature]）；红色标签：$\mathrm{P}\neq\mathrm{NP}$ 仍是开放问题，这张图不回答它。
 :::
 
 ::: {.conjecture #conj-p-neq-np title="P≠NP"}

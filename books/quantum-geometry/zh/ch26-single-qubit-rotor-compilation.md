@@ -150,6 +150,10 @@ $$
   R_u(\theta)\,v_\perp\,\widetilde{R}_u(\theta) = R_u(\theta)^2\,v_\perp = \bigl(\cos\theta - \sin\theta\,B_u\bigr) v_\perp!
   $$
 
+::: {.viz src="zyz-compile" preset="sandwich" height="500"}
+**夹心积：轴上的影子不动，平面里转整角。** 琥珀色的箭头 $v = (\tfrac{\sqrt{3}}{2}, 0, \tfrac{1}{2})$ 绕紫色的 $z$ 轴转 $90^\circ$：青色的影子 $\tfrac{1}{2}e_3$ 留在轴上不动，品红的那一份在 $z = \tfrac{1}{2}$ 的平面里扫出 $90^\circ$ 的扇形，虚线把它分成 $45^\circ + 45^\circ$ 两半，即左边的 $R_z$ 与右边的 $\widetilde{R}_z$ 各贡献的半角。这是本节的手算，页面为数值演示。
+:::
+
 更美妙的是，当我们将三段欧拉旋转依次串接为 **ZYZ 欧拉角序列** $(\alpha, \beta, \gamma)$ 时，编译器只需在四维偶子代数 $\mathcal{Cl}^+_{3,0}(\mathbb{R})$ 中做两次异或刀片乘法：
 
 $$
@@ -157,6 +161,10 @@ R(\alpha, \beta, \gamma) = R_z(\alpha)\,R_y(\beta)\,R_z(\gamma),
 $$
 
 就能把任意长串的旋转门折叠成**唯一一枚四分量偶多重向量** $R = s + b_{12} e_1 e_2 + b_{13} e_1 e_3 + b_{23} e_2 e_3$！
+
+::: {.viz src="zyz-compile" preset="chain" height="500"}
+**三段转动乘成一枚旋子。** 取下面例题的 $(\alpha, \beta, \gamma) = (0.37, -0.81, 0.52)$：琥珀色的箭头 $v$ 先绕紫色的 $z$ 轴转 $\gamma$，再绕 $y$ 轴转 $\beta$，最后绕 $z$ 轴转 $\alpha$；白色三脚架停在 $Re_1$、$Re_2$、$Re_3$，图顶写出乘完的旋子 $0.830 - 0.396\,e_1e_2 - 0.393\,e_1e_3 + 0.030\,e_2e_3$。旋子编译没有冻结定理，页面上它只是数值演示。
+:::
 
 ## ZYZ 旋转器编译器 Python 3 实现与数值核验 {#sec-zyz-rotor-compiler-python}
 
@@ -364,6 +372,14 @@ self_test()
    直接执行夹心积检验得 $R_H e_1 \widetilde{R}_H = e_3$、$R_H e_2 \widetilde{R}_H = -e_2$、$R_H e_3 \widetilde{R}_H = e_1$，分毫不差！
 :::
 
+::: {.viz src="zyz-compile" preset="t" height="500"}
+**$T$ 门：中间一段为零。** $(\alpha, \beta, \gamma) = (\pi/4, 0, 0)$ 的前两段角为零，琥珀色的箭头和白色三脚架一动不动；最后一段绕紫色的 $z$ 轴转 $45^\circ$，箭头沿赤道从 $e_1$ 走过 $45^\circ$，$Re_3$ 留在北极，图顶的旋子是 $0.924 - 0.383\,e_1e_2$。
+:::
+
+::: {.viz src="zyz-compile" preset="h" height="500"}
+**阿达玛门 $(0, \pi/2, \pi)$。** 第一段绕 $z$ 转 $180^\circ$：琥珀色的箭头在北极、就在轴上，只剩青色的影子，三脚架的 $Re_1$、$Re_2$ 翻到反面；第二段绕 $y$ 转 $90^\circ$，箭头落到 $e_1$。紫色虚线是对角轴 $(e_1 + e_3)/\sqrt{2}$，三脚架停在 $Re_1 = e_3$、$Re_2 = -e_2$、$Re_3 = e_1$。
+:::
+
 ::: {.remark #rem-zyz-euler-compilation-literature title="SU(2)→SO(3) 双覆盖与单比特 ZYZ 欧拉角分解定理（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 关于任意单比特幺正门 $U \in \mathrm{U}(2)$ 的 ZYZ 欧拉角完备分解与双覆盖同态，其经典文献出处与本章冻结定理的职责边界如下：
 
@@ -373,6 +389,14 @@ self_test()
    $$
 2. **旋量旋转器群 $\operatorname{Spin}(3) \cong \mathrm{SU}(2)$ 到 $\mathrm{SO}(3)$ 的二对一满同态**：在 $\mathcal{Cl}^+_{3,0}(\mathbb{R})$ 中，单位偶多重向量群 $\operatorname{Spin}(3) = \{R \in \mathcal{Cl}^+_{3,0}(\mathbb{R}) \mid R\widetilde{R} = 1\} \cong S^3 \cong \mathrm{SU}(2)$ 通过夹心伴随作用 $\operatorname{Ad}_R(v) = R v \widetilde{R}$ 满射到三维特殊正交群 $\mathrm{SO}(3)$，其核为 $\{\pm 1\}$（故 $R$ 与 $-R$ 诱导出同一个三维球面旋转）。固定旋转平面时这一二对一映射的拓扑——路径提升唯一、无连续整体截面、整圈使旋子变号——已由[第五章](ch05-complex-phase-and-rotors.md) [@thm-circle-double-cover-history-lift] 验证。
 3. **冻结定理的精确边界**：本章经 Lean 4 内核验证的四条定理均来自 `D5/S3/Quantum/Information/ActualPureQubitGeometry.lean`，严格刻画布洛赫重构矩阵的迹（[@thm-bloch-matrix-trace]）、三维布洛赫向量还原（[@lemma-bloch-coordinate-recovery]）、厄米 $2\times 2$ 矩阵的布洛赫分解与幂等纯态单位球面性质（[@prop-hermitian-bloch-geometry]）以及正半定矩阵的布洛赫球界 $\norm{\operatorname{bloch}(M)} \le \operatorname{Re}(\Tr M)$（[@cor-psd-bloch-ball-bound]）。通用 $\mathrm{U}(2)$ 门的 ZYZ 欧拉角存在性分解与 $\mathrm{SU}(2) \to \mathrm{SO}(3)$ 满射性属于上述经典文献结论，而 `RotorCompiler` 则是给定 $(\alpha, \beta, \gamma)$ 后的可执行正向旋转器合成器。
+:::
+
+::: {.viz src="zyz-compile" preset="fold" height="500"}
+**三段等于绕一根轴转一次。** 同一组角 $(0.37, -0.81, 0.52)$：紫色虚线是乘完的旋子自己的转轴 $n$，紫色虚弧是绕 $n$ 一次转 $67.9^\circ$，它从白色的起点圈出发，落在白色的路（三段）走到的同一点。“单位旋子就是绕一根轴的一次转动”属于上面的文献结果，未在本书形式化；轴与转角由页面数值算出。
+:::
+
+::: {.viz src="zyz-compile" height="560"}
+**ZYZ 编译实验室。** 拖动三个欧拉角、换箭头的起点或打开单一转轴 $n$：青色的影子在每一段里都不动，品红的扇形扫过整角，条带小图里标量$^2$ 与面积$^2$ 此消彼长、和恒为 $1$。绿色框只给本章的四条冻结定理（[@thm-bloch-matrix-trace]、[@lemma-bloch-coordinate-recovery]、[@prop-hermitian-bloch-geometry]、[@cor-psd-bloch-ball-bound]），页面在箭头对应的纯态 $\rho = \operatorname{blochMatrix}(1, v)$ 上逐一核对。
 :::
 
 至此，我们已经亲手建造并运行了第七部的前两章工程构件（`GeometricState` 与 `RotorCompiler`）。从下一章开始，我们将进入第七部最庄严的收官双章——**直接打开 `trureturing@dev` 的冻结 Lean 4 源码卷宗，逐行精读并审计支撑起整部专著的公理圣殿**！让我们迈入[第二十七章](ch27-reading-frozen-proofs-i.md)。
