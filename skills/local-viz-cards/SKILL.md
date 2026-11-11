@@ -39,6 +39,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 `repeated-projection` 的箭头是布洛赫矢量，“投一次”是沿测量线的未读测量 $P_+\rho P_+ + P_-\rho P_-$，不是第三章偏振片例题里的选择性条件更新（那里 $0^\circ$ 与 $90^\circ$ 偏振片在布洛赫球上是同一条线的两端）；“一投等于投到线上的影子”是页面的数值核对（`NUM`），绿色框只给本章引用的三条定理：捏合幂等、不动点判据、互补勾股。
 | `bloch-noise` | 噪声把球往里压、往北推，却从不把球里的两个点拉开 | `shorten` `pinch` `dephase` `amp` `wide` `depol` `distance` `centre` |
+| `two-angle-addressing` | 先倾一次、再拧一次，就到得了球面上任何一点；两根轴斜着，只是要多转几次 | `tilt` `address` `pole` `skew` `collinear` `narrow` `three` `six` |
 
 后四个页面的依据分层要写在页面与图注里：第三十章转述的 2026 年预印本只作为该章的转述出现，页面上的曲线与涡管是示意模型（`MODEL`）；菱形三十面体与“帝国”是文献结果（`ARGUED`）；灵魂、遗迹、似曾相识是诠释模型（`MODEL`）；只有带 Lean 链接的绿色框是已验证定理。`spatial-attractor-deja-vu` 不引用任何 Lean 定理。
 
@@ -52,6 +53,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `erasure-ledger` 的账本按第八章的分层标注：捏合的熵增等于 D、双账本 ln 2、兰道尔账目恒等式及其取等/严格判据、受控拷贝的可撤回与约化态重合是绿色；阶段 B 的热量换算（兰道尔原理、Reeb–Wolf 两条平衡式）是文献结果（`ARGUED`）；“理想复位”把 I = D = 0 当作理想极限记账，是示意模型（`MODEL`）；单比特热浴交换的各项都实算（`NUM`），并与第八章的数值表逐行一致。账本两栏用中性灰（不占用青、品红），品红只给箭头横着的那一份（相干）。
 
 `speed-limit-zeno` 的速度线与墙上的 MT、ML 刻度按 Mandelstam–Tamm、Margolus–Levitin 公式画出，芝诺冻结的极限是 Misra–Sudarshan 定理，三者都是文献结果（`ARGUED`）；“平均返回时间恒为 2”是第七章例子的手算与页面的数值核对（`NUM`）；绿色框只给第七章引用的两条定理：`record_time_lower_bound` 与 `monitored_return_conservation`。
+
+`two-angle-addressing` 的琥珀色点是从北极出发的布洛赫方向，紫色是两根转轴 $a = \vv{e}_3$ 与 $b$（夹角 $\alpha$，$90^\circ$ 时 $b = \vv{e}_2$），白色小旗是转动带走的切向 $\vv{e}_1$，青色虚线圈是“绕 $b$ 转了 $j$ 次后离 $N$ 至多 $2j\alpha$”的界，品红的点是没有球冠盖住的地方。绿色框只给第九章引用的三条定理（有限旋转字、有理六轴覆盖、六色下界）；两角公式与欧拉分解标 `ARGUED`；斜轴的旋转字由页面按贪心规则当场构造、球面最小值由网格取样，都标 `NUM`，页面不声称是最短字。
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
@@ -120,6 +123,15 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第七章 | §7.3 例 `ex-zeno-strobe-freezing` 之后 | `speed-limit-zeno` · `strobe4` |
 | 第七章 | §7.3 例 `ex-first-return-qubit` 之后 | `speed-limit-zeno` · `mean` |
 | 第七章 | §7.3 末、转入 §7.4 之前 | `speed-limit-zeno` 完整实验室 |
+| 第九章 | 章首第二段（“单张平面只能画出一个一维圆周”）之后 | `two-angle-addressing` · `tilt` |
+| 第九章 | 两角寻址的两步列表之后、“为什么不需要正交三次”之前 | `two-angle-addressing` · `address` |
+| 第九章 | 两角寻址一节末（南北两极的方位角冗余） | `two-angle-addressing` · `pole` |
+| 第九章 | 定理 `thm-two-axis-finite-word` 的证明之后 | `two-angle-addressing` · `skew` |
+| 第九章 | 该定理契约列表第 1 条（共线退化）之后 | `two-angle-addressing` · `collinear` |
+| 第九章 | 该定理契约列表第 2 条之后、有理六轴一节之前 | `two-angle-addressing` · `narrow` |
+| 第九章 | 命题 `prop-rational-six-axis-cover` 之前 | `two-angle-addressing` · `three` |
+| 第九章 | 例 `ex-two-angle-six-axis` 之后 | `two-angle-addressing` · `six` |
+| 第九章 | 文献注记 `rem-axes-literature` 之后、转入第十章之前 | `two-angle-addressing` 完整实验室 |
 
 ## 增删或修改一张卡之后
 

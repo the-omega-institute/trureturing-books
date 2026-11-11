@@ -878,6 +878,70 @@
           "gid": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation"
         }
       ]
+    },
+    {
+      "id": "two-angle-addressing",
+      "code": "TWO//ANGLES",
+      "title": "球面两角寻址与旋转字",
+      "title_en": "Two-angle addressing and rotation words",
+      "summary": "从北极 N 出发，先绕水平轴 e₂ 倾转 θ、再绕竖轴 e₃ 拧转 φ，就到达球面上任一点 r(θ, φ)；第二步只沿高度 cos θ 不变的纬度圈走，在两极则白拧一圈。两根转轴斜着时，页面按一条贪心规则当场构造旋转字：每次绕 b 的转动最多把点推离 N 2α，所以夹角越小要转的次数越多，而两轴共线时 N 寸步难移。“覆盖”场景在同一颗球上画出六根有理轴的 12 个 45° 球冠：它们盖住整颗球，与当前点正交的大圆不进入含它的任何球冠；三根坐标轴的球冠则在卦限对角线处漏缝。八张实验卡各讲其中一件事，可以在正文里单独引用。",
+      "summary_en": "From the north pole N, tilt by θ about the horizontal axis e₂ and then twist by φ about the vertical axis e₃, and you reach any point r(θ, φ) of the sphere; the second turn runs along the latitude circle of fixed height cos θ, and at the poles it does nothing. With skew axes the page builds a rotation word on the spot by a greedy rule: each turn about b pushes the point at most 2α further from N, so a smaller angle between the axes needs more turns, and collinear axes cannot move N at all. The “Cover” scene draws, on the same sphere, the 12 caps of 45° around six rational axes: they cover the whole sphere, and the great circle orthogonal to the current point enters none of the caps that hold it; the caps of the three coordinate axes leave gaps at the octant diagonals. Each of the eight experiment cards makes one of these points and can be cited on its own from the text.",
+      "path": "two-angle-addressing/",
+      "thumbnail": "two-angle-addressing/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "布洛赫球",
+        "两角寻址",
+        "旋转字",
+        "SO(3)",
+        "球冠覆盖",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Bloch sphere",
+        "Two-angle addressing",
+        "Rotation words",
+        "SO(3)",
+        "Cap cover",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第九章 · 从北极出发的两角寻址",
+          "label_en": "Chapter 9 · Two-angle addressing from the north pole",
+          "href": "../zh/ch09-axes-and-state-addressing.html#sec-two-angle-state-address",
+          "href_en": "../en/ch09-axes-and-state-addressing.html#sec-two-angle-state-address"
+        },
+        {
+          "label": "第九章 · 初始结构与有限旋转字",
+          "label_en": "Chapter 9 · Initial structure and finite rotation words",
+          "href": "../zh/ch09-axes-and-state-addressing.html#sec-finite-axis-words",
+          "href_en": "../en/ch09-axes-and-state-addressing.html#sec-finite-axis-words"
+        },
+        {
+          "label": "第九章 · 有理六轴覆盖与六色下界",
+          "label_en": "Chapter 9 · The rational six-axis cover and the six-colour bound",
+          "href": "../zh/ch09-axes-and-state-addressing.html#sec-rational-six-axis-atlas",
+          "href_en": "../en/ch09-axes-and-state-addressing.html#sec-rational-six-axis-atlas"
+        },
+        {
+          "label": "Lean 源码 · TwoAxisFiniteRotation.lean",
+          "label_en": "Lean source · TwoAxisFiniteRotation.lean",
+          "href": "{trureturing}/D5/S3/Geometry/TwoAxisFiniteRotation.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word"
+        },
+        {
+          "gid": "D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover"
+        },
+        {
+          "gid": "D5/S3/Topology/SphereOrthogonalityCover.sphere_two_open_orthogonality_free_cover_lower_six"
+        }
+      ]
     }
   ]
 }
