@@ -292,6 +292,43 @@ E = endsT(s); N = await notes(); M = both(N, s, E);
 check('λ = 180° with the “wrong” sign: φ + λ and φ − λ are one phase, RK4 relates the ends by Z(180°) (180° apart, P(0) = 1/2 both), and the note says the sign makes no difference',
   s.sign === -1 && close(s.phys[0], 180) && vdist(rotZ(E.m, PI), E.g) < 1e-9 && close(E.gap, 180, 1e-4) && M[0] && N.zh.includes('同一个相位') && !N.zh.includes('改错了符号')
   && N.en.includes('the same phase') && !N.en.includes('wrong sign') && N.en.includes('Turning the solid end by 180° about z'), `${M[1]} | ${N.en}`);
+// the drawer and the registry summary as the hub serves it: what they say must hold for the programs above (RK4).
+// Swaps with equal ends and wrong signs that keep the readout exist, so both are stated as possibilities, the
+// wrong-sign pole flip with its start, λ and pulse; the VIRTUAL-Z ends both sit on a pole, so the drawer and summary
+// relate the two paths by the turn about z, not by an azimuth; the poles stay put only under the free evolution by H₀.
+// The wrong sign can keep the z-turn relation (λ = 180° from |+⟩), so it is never said to fail outright; the summary's
+// numeric examples carry their programs: the DETUNED card's Gaussian (π/2, 25 ns, from north) and a resonant swap from north.
+const prog = (o) => Object.assign({ two: false, phi: 0, phi2: 90, lam: 0, sign: 1, det: 0, shape: 'square', T: 25, peak: PI / 50, r0: [0, 0, 1] }, o);
+const endsOf = (st, kind) => { const end = st.T * (st.two ? 2 : 1), m = run(st, 'main', end), g = run(st, kind, end); return { gap: sepT(m, g), P0: [P0T(m), P0T(g)] }; };
+const swapSame = [prog({ two: true, phi2: 180 }), prog({ two: true, peak: PI / 25 })].map((st) => endsOf(st, 'two'));
+const keepRead = endsOf(prog({ lam: 90, sign: -1 }), 'lam'), flip = endsOf(prog({ lam: 90, sign: -1, r0: [1, 0, 0] }), 'lam');
+const coin = prog({ lam: 180, sign: -1, r0: [1, 0, 0] }), coinGap = vdist(rotZ(run(coin, 'main', 25), PI), run(coin, 'lam', 25));
+const hub = await T.newPage(); await hub.goto(T.url(BOOK, ''), { waitUntil: 'load' });
+const sum = await hub.$eval(`article[data-viz="${ID}"] .sum`, (el) => ({ zh: el.querySelector('.zh').textContent, en: el.querySelector('.en').textContent }));
+await hub.close();
+const drw = await page.evaluate(() => ({ zh: document.querySelector('#drawer .sheet > .zh').textContent, en: document.querySelector('#drawer .sheet > .en').textContent }));
+const clauses = (txt, lng) => txt.split(lng === 'zh' ? /[。；]/ : /;\s|\.\s+(?=[A-Z])/);
+const claimBad = [];
+for (const [where, T2] of [['summary', sum], ['drawer', drw]]) for (const lng of ['zh', 'en']) {
+  const cs = clauses(T2[lng], lng), has = (re) => cs.filter((c) => re.test(c)), need = (c, re, what) => { if (!re.test(c)) claimBad.push(`${where} ${lng} ${what}: ${c.trim().slice(0, 90)}`); };
+  const hedge = lng === 'zh' ? /可能|未必|一般/ : /\bcan\b|\bmay\b|need not|in general/;
+  if (where === 'summary') for (const c of has(lng === 'zh' ? /换个次序/ : /swapped/)) need(c, hedge, 'swap stated without possibility');
+  for (const c of has(/φ \+ λ/)) { if (/南极|south pole/.test(c)) { need(c, /\|\+⟩/, 'pole flip without its start |+⟩'); need(c, /90°/, 'pole flip without λ = 90°'); } }
+  for (const c of has(lng === 'zh' ? /符号(改错|取反)/ : /wrong sign|sign reversed/)) {
+    need(c, hedge, 'wrong sign stated without possibility');
+    if ((lng === 'zh' ? /不再成立/ : /no longer holds/).test(c)) claimBad.push(`${where} ${lng} wrong sign said to break the relation outright: ${c.trim().slice(0, 90)}`);
+  }
+  if (where === 'summary') {
+    for (const c of has(/26°/)) need(c, lng === 'zh' ? /DETUNED.*北极.*π\/2.*25 ns.*高斯.*5 MHz/ : /DETUNED.*Gaussian.*π\/2.*25 ns.*north pole.*5 MHz/, '26° without the DETUNED Gaussian program');
+    for (const c of has(lng === 'zh' ? /先 X 后 Y/ : /X then Y/)) need(c, lng === 'zh' ? /共振.*北极/ : /resonant.*north pole/, 'X/Y swap example without resonance and the north start');
+  }
+  for (const c of has(/Lean/)) if (/两极|poles/.test(c)) need(c, lng === 'zh' ? /不加驱动|这一演化/ : /no drive|this evolution/, 'pole stationarity without the free-H₀ condition');
+  if (/方位差|azimuths? .{0,12}λ apart/.test(T2[lng])) claimBad.push(`${where} ${lng}: an azimuth gap between ends that can sit on a pole`);
+  if (has(/φ − λ/).length) need(T2[lng], lng === 'zh' ? /绕 z 轴转 λ/ : /by λ about z/, 'virtual Z without the turn by λ about z');
+}
+check('drawer and served hub summary (zh, en): swaps and wrong signs as possibilities with the pole flip\'s |+⟩, λ = 90°, the z-turn relation for the virtual Z, and the free-H₀ condition for the poles, as the RK4 programs require',
+  swapSame.every((e) => e.gap < 1e-6 && close(e.P0[0], 1, 1e-9) && close(e.P0[1], 1, 1e-9)) && close(keepRead.gap, 90, 1e-6) && keepRead.P0.every((p) => close(p, 0.5, 1e-9))
+  && close(flip.P0[0], 0, 1e-9) && close(flip.P0[1], 1, 1e-9) && coinGap < 1e-6 && claimBad.length === 0, claimBad.slice(0, 4).join(' || '));
 // detuned: a square envelope keeps one tilted axis, a Gaussian one turns it
 await pick('quarter'); await setRange('det', 5); s = await state();
 const axSq = [s.peak, 0, 5 * MHZ].map((x, i, g) => x / Math.hypot(...g));
