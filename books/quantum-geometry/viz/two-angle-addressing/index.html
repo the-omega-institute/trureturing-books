@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="TWO//ANGLES · Two-angle addressing and rotation words">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TWO//ANGLES 球面两角寻址与旋转字</title>
+<meta name="description" content="从北极 N 出发，先绕水平轴倾转 θ、再绕竖轴拧转 φ，就到得了球面上任何一点；两根不共线的斜轴也能把 N 送到任何地方，只是要多转几次，而两根共线的轴永远困在原地。同一颗球上再画出六根有理轴的 12 个 45° 球冠：它们盖住整颗球，而三根坐标轴的球冠在卦限对角线处漏缝。From the north pole N, tilt by θ about a horizontal axis and twist by φ about the vertical one, and you reach any point of the sphere; two skew axes that are not collinear also carry N anywhere, only with more turns, while two collinear axes never leave the spot. On the same sphere, the 12 caps of 45° around six rational axes cover everything, while the caps of the three coordinate axes leave gaps at the octant diagonals.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="two-angle-addressing">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="TWO//ANGLES">TWO<b>//</b>ANGLES</h1>
+      <div class="tagline">
+        <span class="zh">球面两角寻址与旋转字 · <em>先倾一次、再拧一次，就到得了球面上任何一点；两根轴斜着，只是要多转几次</em></span>
+        <span class="en">Two-angle addressing and rotation words · <em>tilt once, twist once, and you reach any point of the sphere; with skew axes it only takes more turns</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillLen"><span class="zh">转动次数</span><span class="en">TURNS</span> <strong>—</strong></span>
+      <span class="pill" id="pillPolar"><span class="zh">离 N</span><span class="en">FROM N</span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="tilt" aria-pressed="false"><span class="code">ONE-TURN</span><span class="cn zh">只转一次：一个圆</span><span class="cn en">One turn: one circle</span></button>
+        <button class="preset" data-preset="address" aria-pressed="false"><span class="code">TILT+TWIST</span><span class="cn zh">倾一次、拧一次：到达任一点</span><span class="cn en">Tilt, then twist: any point</span></button>
+        <button class="preset" data-preset="pole" aria-pressed="false"><span class="code">POLE</span><span class="cn zh">在南极：第二步白拧</span><span class="cn en">At the pole: the twist does nothing</span></button>
+        <button class="preset" data-preset="skew" aria-pressed="false"><span class="code">SKEW-30°</span><span class="cn zh">斜轴 30°：多转几次也能到</span><span class="cn en">Skew axes at 30°: more turns, still there</span></button>
+        <button class="preset" data-preset="collinear" aria-pressed="false"><span class="code">COLLINEAR</span><span class="cn zh">两轴共线：困在原地</span><span class="cn en">Collinear axes: stuck in place</span></button>
+        <button class="preset" data-preset="narrow" aria-pressed="false"><span class="code">SKEW-10°</span><span class="cn zh">夹角 10°：转动次数变多</span><span class="cn en">Axes 10° apart: many more turns</span></button>
+        <button class="preset" data-preset="three" aria-pressed="false"><span class="code">THREE-CAPS</span><span class="cn zh">三根坐标轴：对角线漏缝</span><span class="cn en">Three coordinate axes: a gap on the diagonal</span></button>
+        <button class="preset" data-preset="six" aria-pressed="false"><span class="code">SIX-AXES</span><span class="cn zh">六根有理轴：处处被盖住</span><span class="cn en">Six rational axes: covered everywhere</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">两根转轴</span><span class="en">Two axes</span><span class="aside">a · b</span></h2>
+      <div class="field">
+        <label for="alpha"><span class="zh">两轴夹角 α</span><span class="en">Angle between the axes α</span><small class="zh">a 是竖轴 e₃；90° 时 b 就是 e₂</small><small class="en">a is the vertical axis e₃; at 90° b is e₂</small></label><output id="oAlpha" for="alpha">90°</output>
+        <input type="range" id="alpha" min="0" max="90" step="1" value="90">
+      </div>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">目标点</span><span class="en">Target</span><span class="aside">θ · φ</span></h2>
+      <div class="field">
+        <label for="theta"><span class="zh">极角 θ</span><span class="en">Polar angle θ</span><small class="zh">也可以在球上直接拖动白色的目标圈</small><small class="en">or drag the white target ring on the sphere</small></label><output id="oTheta" for="theta">60°</output>
+        <input type="range" id="theta" min="0" max="180" step="1" value="60">
+      </div>
+      <div class="field">
+        <label for="phi"><span class="zh">方位角 φ</span><span class="en">Azimuth φ</span></label><output id="oPhi" for="phi">45°</output>
+        <input type="range" id="phi" min="0" max="359" step="1" value="45">
+      </div>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">球冠</span><span class="en">Caps</span><span class="aside"><span class="zh">覆盖场景</span><span class="en">cover scene</span></span></h2>
+      <div class="chips" id="setChips" role="group" aria-label="用哪几根轴的球冠" data-aria-en="Which axes give the caps">
+        <button class="chip" data-set="six" aria-pressed="true"><span class="zh">六根有理轴</span><span class="en">Six rational axes</span></button>
+        <button class="chip" data-set="three" aria-pressed="false"><span class="zh">三根坐标轴</span><span class="en">Three coordinate axes</span></button>
+      </div>
+      <p class="note"><span class="zh">每根轴给出一对 45° 的对跖开球冠：(x·â)² &gt; ½。拖空白处旋转视角，滚轮缩放。</span><span class="en">Each axis gives a pair of antipodal open caps of 45°: (x·â)² &gt; ½. Drag empty space to turn the view, scroll to zoom.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="单位球：琥珀色的点从北极 N 出发，绕紫色的转轴一次次转动；白色的线是走过的路，白色的圈是目标；覆盖场景里青色与灰色的圆是 45° 球冠的边，品红的点是没有被盖住的地方" data-aria-en="Unit sphere: the amber point starts at the north pole N and turns again and again about the violet axes; the white line is the road travelled, the white ring the target; in the cover scene the cyan and grey circles bound the caps of 45°, and magenta dots mark what no cap covers">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+        <button class="chip" data-scene="words" aria-pressed="true"><span class="zh">寻址</span><span class="en">Address</span></button>
+        <button class="chip" data-scene="cover" aria-pressed="false"><span class="zh">覆盖</span><span class="en">Cover</span></button>
+      </div>
+      <div class="hud-bl" id="legend">
+        <span><i class="sw am"></i><span class="zh">当前的点</span><span class="en">the current point</span></span>
+        <span><i class="sw vi"></i><span class="zh">转轴与这一步的圆</span><span class="en">axes and this turn's circle</span></span>
+        <span><i class="sw ik"></i><span class="zh">走过的路 · 目标</span><span class="en">road travelled · target</span></span>
+        <span id="legReach"><i class="sw cy"></i><span class="zh">绕 b 转过的次数能到的最远处</span><span class="en">farthest reach for the turns about b so far</span></span>
+        <span id="legCaps" hidden><i class="sw cy"></i><span class="zh">含当前点的球冠</span><span class="en">caps holding the point</span></span>
+        <span id="legPerp" hidden><i class="sw ik"></i><span class="zh">虚线：与 x 正交的大圆</span><span class="en">dashed: the great circle orthogonal to x</span></span>
+        <span id="legGap" hidden><i class="sw mg"></i><span class="zh">没有球冠盖住</span><span class="en">covered by no cap</span></span>
+      </div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel" id="polarPanel">
+        <div class="head"><h2><span class="zh">离北极多远，被绕 b 的次数挡住</span><span class="en">How far from the pole, capped by the turns about b</span></h2><span id="polarMeta"></span></div>
+        <canvas id="polarPlot" aria-label="当前点离北极的角度随转动步数的变化，青色的台阶是到这一步为止绕 b 转过的次数乘以 2α" data-aria-en="The angle of the current point from the north pole against the turns of the word; the cyan staircase is twice α times the number of turns about b so far"></canvas>
+      </section>
+      <section class="panel" id="capPanel" hidden>
+        <div class="head"><h2><span class="zh">最贴近的那根轴有多近</span><span class="en">How close the nearest axis is</span></h2><span id="capMeta"></span></div>
+        <canvas id="capPlot" aria-label="当前点与最贴近的那根轴的夹角余弦平方随转动步数的变化，虚线是球冠的门槛二分之一" data-aria-en="The squared cosine between the current point and its nearest axis against the turns of the word; the dashed line is the cap threshold one half"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt><span class="zh">旋转字（按作用的先后，每个转动绕 a 或绕 b）</span><span class="en">rotation word (in order of action, each turn about a or about b)</span></dt><dd><b id="roWord">—</b><span id="roWordSub"></span></dd></div>
+        <div class="a"><dt><span class="zh">当前点 x</span><span class="en">current point x</span></dt><dd id="roPoint">—</dd></div>
+        <div><dt><span class="zh">两轴夹角 α</span><span class="en">angle between the axes α</span></dt><dd id="roAlpha">—</dd></div>
+        <div class="c"><dt><span class="zh">绕 b 的次数 · ⌈离 N 的角度 / 2α⌉</span><span class="en">turns about b · ⌈angle from N / 2α⌉</span></dt><dd id="roCount">—</dd></div>
+        <div><dt><span class="zh">x 所在的颜色（2(x·aᵢ)² &gt; 5）</span><span class="en">colours holding x (2(x·aᵢ)² &gt; 5)</span></dt><dd id="roColors">—</dd></div>
+        <div class="c"><dt><span class="zh">最贴近的轴 (x·â)² · 整颗球上的最小值</span><span class="en">nearest axis (x·â)² · its minimum over the sphere</span></dt><dd id="roNear">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean" id="leanWord"><span class="ok">LEAN ✓</span><span><span class="zh">a、b ∈ ℝ³ 满足 ⟨a, b⟩² &lt; ‖a‖²‖b‖²（非零且不共线）时，每个行列式为 1 的线性等距 R 都是一个有限列表的乘积，列表里每个因子都固定 a 或固定 b。只断言存在，不给字长。已冻结：</span><span class="en">When a, b ∈ ℝ³ satisfy ⟨a, b⟩² &lt; ‖a‖²‖b‖² (nonzero and not collinear), every linear isometry R of determinant 1 is the product of a finite list whose every factor fixes a or fixes b. It asserts existence only, with no word length. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Geometry/TwoAxisFiniteRotation.lean" target="_blank" rel="noopener"><code>two_axis_finite_word</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">六根有理轴 a₀ … a₅ 定义的六个颜色 {x : 5 &lt; 2⟨x, aᵢ⟩²} 都是球面上的开集，同色两点的内积不为零，六色合起来盖住整颗单位球面。已冻结：</span><span class="en">The six colours {x : 5 &lt; 2⟨x, aᵢ⟩²} given by the rational axes a₀ … a₅ are open in the sphere, two points of one colour never have inner product zero, and together the six colours cover the whole unit sphere. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Geometry/Orthogonality/RationalSixAxisCover.lean" target="_blank" rel="noopener"><code>rational_six_axis_open_cover</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">k 个开集盖住 S²、且每一个都不含正交的点对时，必有 6 ≤ k。已冻结：</span><span class="en">If k open sets cover S² and none of them contains an orthogonal pair of points, then 6 ≤ k. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Topology/SphereOrthogonalityCover.sphere_two_open_orthogonality_free_cover_lower_six" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Topology/SphereOrthogonalityCover.lean" target="_blank" rel="noopener"><code>sphere_two_open_orthogonality_free_cover_lower_six</code></a></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">两角公式 r(θ, φ) = R_z(φ) R_y(θ) N = (sin θ cos φ, sin θ sin φ, cos θ) 是正文的手算；纯态两角参数化与单比特门的欧拉分解是文献结果，未在本书形式化（第九章文献注记）。</span><span class="en">The two-angle formula r(θ, φ) = R_z(φ) R_y(θ) N = (sin θ cos φ, sin θ sin φ, cos θ) is a hand computation in the text; the two-angle parametrization of pure states and the Euler decomposition of qubit gates are literature results, not formalized in this book (the literature remark of Chapter 9).</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">斜轴的旋转字由页面按一条贪心规则当场构造，不是最短字的算法；转动次数、颜色与整颗球上的最小值都是按双精度实时算出（最小值在球面网格上取样）的数值演示，不是证明。</span><span class="en">The words for skew axes are built on the spot by a greedy rule of the page, not an algorithm for the shortest word; the turn counts, the colours and the minimum over the sphere (sampled on a grid of the sphere) are computed live in double precision: an illustration, not a proof.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到北极" data-aria-en="Back to the north pole">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="2" step="any" value="0" aria-label="旋转字走到第几个转动" data-aria-en="How many turns of the word have been made">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">一次一个转动</span><span class="en">one turn at a time</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">舞台是单位球，琥珀色的点从北极 N = e₃ 出发。每一个转动绕两根紫色转轴之一：a 是竖轴 e₃，b 与 a 成 α 角（α = 90° 时 b = e₂）。一串这样的转动叫旋转字；时间轴一次走一个转动。“覆盖”场景在同一颗球上画出 45° 的对跖开球冠。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>两角寻址。</b>α = 90° 时页面的字就是正文的两步：先绕 e₂ 倾转 θ，到 (sin θ, 0, cos θ)；再绕 e₃ 拧转 φ，高度 cos θ 不变，到 r(θ, φ) = (sin θ cos φ, sin θ sin φ, cos θ)。θ = 0 或 180° 时第二步不动这个点，所以 (θ, φ) 在两极不是坐标卡。这是正文的手算；纯态两角参数化与单比特门要多一个欧拉角，是文献结果，未在本书形式化。</li>
+        <li><b>斜轴的有限字。</b>两轴非零且不共线时，每个行列式为 1 的线性等距都是有限个“固定 a 或固定 b”的因子之积：<a class="leanref" data-lean-gid="D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Geometry/TwoAxisFiniteRotation.lean" target="_blank" rel="noopener"><code>two_axis_finite_word</code></a>（LEAN ✓）。定理只说存在，不给字长、不给算法。页面只演示把 N 送到目标点，所用的字由一条贪心规则当场构造：每次先绕 a 把点摆到合适的方位，再绕 b 把它离 N 的角度推远至多 2α，最后绕 a 对准目标。</li>
+        <li><b>为什么夹角小就要多转。</b>绕 b 转动时点到 b 的距离不变，所以它离 a 的角度最多变 2α（球面上的三角不等式，手算）；绕 a 转动不改变这个角度。于是 j 次绕 b 之后点离 N 至多 2jα，青色的台阶画的就是这个界；页面的构造恰好用 ⌈Θ / 2α⌉ 次绕 b 的转动（Θ 是目标离 N 的角度）。两轴共线（α = 0）时这个界一直是 0，N 一步也走不开。</li>
+        <li><b>无正交对的覆盖。</b>第 i 号颜色是 {x : 5 &lt; 2⟨x, aᵢ⟩²}，即围绕 ±aᵢ/√5 的一对 45° 开球冠；六根有理轴 (1, ±2, 0)、(0, 1, ±2)、(±2, 0, 1) 的六种颜色都是开集、同色两点不正交、合起来盖住整颗球：<a class="leanref" data-lean-gid="D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Geometry/Orthogonality/RationalSixAxisCover.lean" target="_blank" rel="noopener"><code>rational_six_axis_open_cover</code></a>（LEAN ✓）。少于六块不行：<a class="leanref" data-lean-gid="D5/S3/Topology/SphereOrthogonalityCover.sphere_two_open_orthogonality_free_cover_lower_six" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Topology/SphereOrthogonalityCover.lean" target="_blank" rel="noopener"><code>sphere_two_open_orthogonality_free_cover_lower_six</code></a>（LEAN ✓）。舞台上虚线是与当前点正交的大圆，它不进入含当前点的任何球冠。三根坐标轴的球冠在卦限对角线 (±1, ±1, ±1)/√3 附近漏缝（品红的点，网格取样）。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch09-axes-and-state-addressing.html#sec-two-angle-state-address" target="_top">从北极出发的两角寻址</a> · <a href="../../zh/ch09-axes-and-state-addressing.html#sec-finite-axis-words" target="_top">初始结构与有限旋转字</a> · <a href="../../zh/ch09-axes-and-state-addressing.html#thm-two-axis-finite-word" target="_top">有限旋转字定理</a> · <a href="../../zh/ch09-axes-and-state-addressing.html#sec-rational-six-axis-atlas" target="_top">有理六轴覆盖与六色下界</a> · <a href="../../zh/ch09-axes-and-state-addressing.html#ex-two-angle-six-axis" target="_top">同一点核对的例题</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">The stage is the unit sphere, and the amber point starts at the north pole N = e₃. Each turn is about one of the two violet axes: a is the vertical axis e₃, and b makes the angle α with a (at α = 90°, b = e₂). A string of such turns is a rotation word; the rail advances one turn at a time. The “Cover” scene draws antipodal open caps of 45° on the same sphere. The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>Two-angle addressing.</b> At α = 90° the page's word is the text's two steps: tilt by θ about e₂ to (sin θ, 0, cos θ), then twist by φ about e₃, keeping the height cos θ, to r(θ, φ) = (sin θ cos φ, sin θ sin φ, cos θ). At θ = 0 or 180° the second step leaves the point where it is, so (θ, φ) is not a chart at the poles. This is the text's hand computation; the two-angle parametrization of pure states, and the extra Euler angle a qubit gate needs, are literature results, not formalized in this book.</li>
+        <li><b>Finite words for skew axes.</b> When the two axes are nonzero and not collinear, every linear isometry of determinant 1 is a product of finitely many factors that each fix a or fix b: <a class="leanref" data-lean-gid="D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Geometry/TwoAxisFiniteRotation.lean" target="_blank" rel="noopener"><code>two_axis_finite_word</code></a> (LEAN ✓). The theorem asserts existence only, with no word length and no algorithm. The page only shows N being carried to a target point, by a word built on the spot with a greedy rule: turn about a to set the point at a suitable azimuth, turn about b to push its angle from N out by at most 2α, and finally turn about a onto the target.</li>
+        <li><b>Why a small angle needs more turns.</b> A turn about b keeps the distance of the point to b, so its angle from a changes by at most 2α (the triangle inequality on the sphere, by hand); a turn about a does not change that angle. After j turns about b the point is therefore at most 2jα from N, which is the cyan staircase; the page's construction uses exactly ⌈Θ / 2α⌉ turns about b, Θ being the angle of the target from N. For collinear axes (α = 0) the bound stays 0, and N cannot move at all.</li>
+        <li><b>A cover without orthogonal pairs.</b> Colour i is {x : 5 &lt; 2⟨x, aᵢ⟩²}, a pair of open caps of 45° around ±aᵢ/√5. For the six rational axes (1, ±2, 0), (0, 1, ±2), (±2, 0, 1) the six colours are open, no colour holds two orthogonal points, and together they cover the whole sphere: <a class="leanref" data-lean-gid="D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Geometry/Orthogonality/RationalSixAxisCover.lean" target="_blank" rel="noopener"><code>rational_six_axis_open_cover</code></a> (LEAN ✓). Fewer than six cannot do it: <a class="leanref" data-lean-gid="D5/S3/Topology/SphereOrthogonalityCover.sphere_two_open_orthogonality_free_cover_lower_six" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Topology/SphereOrthogonalityCover.lean" target="_blank" rel="noopener"><code>sphere_two_open_orthogonality_free_cover_lower_six</code></a> (LEAN ✓). On the stage the dashed line is the great circle orthogonal to the current point; it enters none of the caps that hold the point. The caps of the three coordinate axes leave gaps around the octant diagonals (±1, ±1, ±1)/√3 (the magenta dots, sampled on a grid).</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch09-axes-and-state-addressing.html#sec-two-angle-state-address" target="_top">two-angle addressing from the north pole</a> · <a href="../../en/ch09-axes-and-state-addressing.html#sec-finite-axis-words" target="_top">initial structure and finite rotation words</a> · <a href="../../en/ch09-axes-and-state-addressing.html#thm-two-axis-finite-word" target="_top">the finite-word theorem</a> · <a href="../../en/ch09-axes-and-state-addressing.html#sec-rational-six-axis-atlas" target="_top">the rational six-axis cover and the six-colour bound</a> · <a href="../../en/ch09-axes-and-state-addressing.html#ex-two-angle-six-axis" target="_top">the worked example</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="SLIT//MARKER · The double slit and the path marker · fringe contrast and path distinguishability on one circle">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SLIT//MARKER 双缝与路径标记 · 条纹对比度与路径可辨度落在同一个圆上</title>
+<meta name="description" content="第 6 章 §6.3 的双缝装置。每条缝后面有一个路径标记：左缝把它写成 r_L，右缝写成 r_R，两者夹角 α。屏上的条纹对比度 V = |⟨r_L, r_R⟩| = cos α，路径可辨度 D = √(1 − V²) = sin α，两者落在同一个单位圆上（Lean 已验证）。落点一个个到达屏上；读标记的方式可以留到落点之后再定：按路径读，两行都没有条纹；按擦除方向读，同一批落点分成条纹与反条纹。标记本身是混合态时，点落进圆内（Englert 不等式，文献结果）。The double-slit setup of §6.3 of chapter 6. A path marker sits behind the slits: the left slit writes it as r_L, the right one as r_R, at an angle α. The fringe contrast on the screen is V = |⟨r_L, r_R⟩| = cos α and the path distinguishability is D = √(1 − V²) = sin α; both sit on one unit circle (kernel-verified in Lean). Hits arrive on the screen one by one; how to read the marker can wait until after they land: read for the path and neither row shows fringes; read in the erasing direction and the same hits split into fringes and anti-fringes. When the marker itself is mixed, the point falls inside the circle (Englert's inequality, a literature result).">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="double-slit-marker">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="SLIT//MARKER">SLIT<b>//</b>MARKER</h1>
+      <div class="tagline">
+        <span class="zh">双缝与路径标记 · <em>路径记得越清，条纹越淡；两者落在同一个圆上，怎么读标记可以等落点到了再定</em></span>
+        <span class="en">The double slit and the path marker · <em>the better the path is recorded, the fainter the fringes; both sit on one circle, and how to read the record can wait until the hits are in</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillAngle">α <strong>—</strong></span>
+      <span class="pill" id="pillVD"><strong>—</strong></span>
+      <span class="pill hot" id="pillSum">D² + V² <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="wave" aria-pressed="false"><span class="code">WAVE</span><span class="cn zh">标记不动：条纹全在</span><span class="cn en">The marker stays put: full fringes</span></button>
+        <button class="preset" data-preset="partial" aria-pressed="false"><span class="code">SIXTY</span><span class="cn zh">转开 60°：V = 0.5，D = 0.87</span><span class="cn en">Turned 60°: V = 0.5, D = 0.87</span></button>
+        <button class="preset" data-preset="which" aria-pressed="false"><span class="code">WHICH-PATH</span><span class="cn zh">转到垂直：条纹消失</span><span class="cn en">Turned square: the fringes are gone</span></button>
+        <button class="preset" data-preset="delayed" aria-pressed="false"><span class="code">DELAYED</span><span class="cn zh">先落点，后按路径读</span><span class="cn en">Hits first, then read the path</span></button>
+        <button class="preset" data-preset="erase" aria-pressed="false"><span class="code">ERASER</span><span class="cn zh">同一批落点，擦除后分拣出条纹</span><span class="cn en">The same hits, sorted into fringes by erasing</span></button>
+        <button class="preset" data-preset="mixed" aria-pressed="false"><span class="code">MIXED</span><span class="cn zh">混合的标记：点落进圆内</span><span class="cn en">A mixed marker: the point falls inside</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+    <section class="panel sec">
+      <h2><span class="zh">路径标记</span><span class="en">The path marker</span><span class="aside">r_L · r_R</span></h2>
+      <div class="field">
+        <label for="alpha"><span class="zh">标记夹角 α</span><span class="en">Marker angle α</span><small class="zh">r_L 与 r_R 转开多少；也可以在圆上拖琥珀色的箭头</small><small class="en">how far r_L and r_R are turned apart; or drag the amber arrow on the circle</small></label><output id="oAlpha" for="alpha">60°</output>
+        <input type="range" id="alpha" min="0" max="90" step="1" value="60">
+      </div>
+      <div class="field">
+        <label for="purity"><span class="zh">标记的纯度 λ</span><span class="en">Purity of the marker λ</span><small class="zh">1 是纯态；小于 1 时标记本身带噪声</small><small class="en">1 is a pure state; below 1 the marker itself is noisy</small></label><output id="oPurity" for="purity">1.00</output>
+        <input type="range" id="purity" min="0" max="1" step="0.05" value="1">
+      </div>
+    </section>
+    <section class="panel sec">
+      <h2><span class="zh">怎样读标记</span><span class="en">How to read the marker</span><span class="aside">READER</span></h2>
+      <div class="chips" id="readerChips" role="group" aria-label="读标记的方式" data-aria-en="How to read the marker">
+        <button class="chip" data-reader="none" aria-pressed="true"><span class="zh">不读</span><span class="en">Don’t read</span></button>
+        <button class="chip" data-reader="path" aria-pressed="false"><span class="zh">按路径读</span><span class="en">Read the path</span></button>
+        <button class="chip" data-reader="erase" aria-pressed="false"><span class="zh">擦除方向读</span><span class="en">Read to erase</span></button>
+      </div>
+      <p class="note"><span class="zh">读标记不移动屏上的任何一个落点，只把它们分成两行。时间轴是到达屏上的粒子数。</span><span class="en">Reading the marker moves no hit on the screen; it only sorts them into two rows. The rail is the number of particles that have reached the screen.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage still" id="stage" data-thumb aria-label="舞台：屏上的落点与条纹，以及互补圆上的两支标记箭头" data-aria-en="Stage: the hits and fringes on the screen, and the two marker arrows on the complementarity circle">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-bl" id="legend"></div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2><span class="zh">沿标记夹角：一个涨，一个落</span><span class="en">Along the marker angle: one rises, one falls</span></h2><span id="pAMeta"></span></div>
+        <canvas id="plotA" aria-label="对比度 V 与可辨度 D 随标记夹角的变化" data-aria-en="The contrast V and the distinguishability D against the marker angle"></canvas>
+      </section>
+      <section class="panel">
+        <div class="head"><h2><span class="zh">从落点里数出的对比度</span><span class="en">The contrast counted from the hits</span></h2><span id="pBMeta"></span></div>
+        <canvas id="plotB" aria-label="由已到达的落点估计的条纹对比度" data-aria-en="The fringe contrast estimated from the hits so far"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">D² + V²</span></h2>
+      <dl class="ro">
+        <div class="key"><dt><span class="zh">可辨度² + 对比度²</span><span class="en">distinguishability² + contrast²</span></dt><dd><b id="roSum">—</b><span id="roSumSub"></span></dd></div>
+        <div class="c"><dt><span class="zh">条纹对比度 V</span><span class="en">fringe contrast V</span></dt><dd id="roV">—</dd></div>
+        <div class="m"><dt><span class="zh">路径可辨度 D</span><span class="en">path distinguishability D</span></dt><dd id="roD">—</dd></div>
+        <div><dt><span class="zh">标记夹角 α</span><span class="en">marker angle α</span></dt><dd id="roA">—</dd></div>
+        <div><dt><span class="zh">标记的纯度 λ</span><span class="en">purity of the marker λ</span></dt><dd id="roL">—</dd></div>
+        <div class="wide"><dt><span class="zh">相干质量 |ρ₀₁|² + |ρ₁₀|²</span><span class="en">coherence mass |ρ₀₁|² + |ρ₁₀|²</span></dt><dd id="roM">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">对单位记录态 r_L、r_R，令 c = ⟨r_L, r_R⟩、V = ‖c‖、D = √(1 − V²)。则 D² + V² = 1；c = 0 时 D = 1、V = 0；V = 1 时 D = 0；D = 1 时 V = 0 且干涉项 c·a 对一切复数 a 为零。已冻结：</span><span class="en">For unit record states r_L and r_R let c = ⟨r_L, r_R⟩, V = ‖c‖ and D = √(1 − V²). Then D² + V² = 1; c = 0 gives D = 1 and V = 0; V = 1 gives D = 0; D = 1 gives V = 0, and the interference term c·a vanishes for every complex a. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/PureState/RecordCoherenceComplementarity.pure_record_distinguishability_coherence_complementarity" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/PureState/RecordCoherenceComplementarity.lean" target="_blank" rel="noopener"><code>pure_record_distinguishability_coherence_complementarity</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">对任意 2×2 矩阵 ρ，捏合去掉的副对角部分 ρ − Π(ρ) 的希尔伯特—施密特范数平方等于 |ρ₀₁|² + |ρ₁₀|²。本页的路径约化态有 ρ₀₁ = ρ₁₀ = c/2，所以这一项是 V²/2。已冻结：</span><span class="en">For every 2×2 matrix ρ, the squared Hilbert–Schmidt norm of the off-diagonal part ρ − Π(ρ) that pinching discards equals |ρ₀₁|² + |ρ₁₀|². The reduced path state of this page has ρ₀₁ = ρ₁₀ = c/2, so the term is V²/2. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumChannels/PinchingProjection.lean" target="_blank" rel="noopener"><code>pinching_discarded_coherence_mass</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：标记是混合态时，以迹距离定义的可辨度 D = ½‖ρ_L − ρ_R‖₁ 满足 D² + V² ≤ 1（Englert 1996），纯态标记取等号。本页的混合标记落在圆内，只是这条不等式的一个实例。</span><span class="en">Literature result, not formalized in this book: when the marker is mixed, the distinguishability defined by the trace distance, D = ½‖ρ_L − ρ_R‖₁, satisfies D² + V² ≤ 1 (Englert 1996), with equality for a pure marker. The mixed marker of this page falling inside the circle is one instance of that inequality.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">为画面选定的模型：屏上的分布取远场双缝 env(x)·(1 + c·cos kx)，包络 env 是高斯形；标记是一个二维实向量，r_R 由 r_L 转过 α 得到；混合标记是纯度 λ 的标记态经同样两次转动。“延迟选择只是决定截取哪一个投影”是第 6 章的诠释。</span><span class="en">A model chosen for the picture: the screen shows the far-field two-slit law env(x)·(1 + c·cos kx) with a Gaussian envelope env; the marker is a real two-dimensional vector, and r_R is r_L turned by α; the mixed marker is a marker state of purity λ put through the same two turns. “Delayed choice only decides which projection is taken” is the reading of chapter 6.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数值演示，不是证明：落点由带种子的伪随机数按上面的分布抽出；分拣按标记读数的条件概率抽签；“数出的对比度”由已到达落点的 cos kx 平均值反解得到。</span><span class="en">A numerical illustration on the page, not a proof: the hits are drawn from the law above with a seeded pseudo-random generator; sorting draws each hit’s marker reading from its conditional probability; the “counted contrast” is solved back from the average of cos kx over the hits so far.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1600" step="any" value="1600" aria-label="时间轴：到达屏上的粒子数" data-aria-en="Rail: the number of particles that have reached the screen">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">每次 100 个</span><span class="en">100 at a time</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">粒子穿过双缝，缝后的标记把“走了哪条缝”写下来：左缝写成 r_L，右缝写成 r_R。左边是屏，右边是两支标记箭头。拖动它们的夹角 α，条纹对比度与路径可辨度此消彼长，点始终在圆上。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>圆。</b>两支箭头都是单位长。r_R 落在 r_L 上的影子是 c = cos α，就是条纹对比度 V；r_R 的高是 sin α，就是路径可辨度 D = √(1 − V²)。Lean 证明了 D² + V² = 1，以及两端：c = 0 时条纹全无、路径全知，V = 1 时路径全无（第 6 章定理 thm-record-coherence-complementarity）。</li>
+        <li><b>屏。</b>忽略标记后，路径的约化态是 ½(1, c; c, 1)。屏上的分布是 env(x)·(1 + c·cos kx)：c 越小，亮纹越矮、暗纹越亮。副对角元 c/2 的平方和 c²/2 就是捏合会去掉的相干质量（Lean 已验证的恒等式）。</li>
+        <li><b>先落点，后读标记。</b>读标记要选一组方向。按路径读（使 r_L、r_R 最好区分的那组方向），α = 90° 时每个落点都被正确地记作左或右，两行都没有条纹；按擦除方向读（r_L 与 r_R 的角平分线及其垂线），两行分别是条纹与错开半格的反条纹。无论怎样读，两行合起来就是上面那片落点：屏上的分布不因后来的选择而改变。</li>
+        <li><b>混合的标记。</b>标记本身带噪声（纯度 λ &lt; 1）时，条纹对比度仍是 cos α，能读出的可辨度却只有 λ·sin α，点落进圆内，沿一条内弧走。以迹距离定义可辨度时 D² + V² ≤ 1 是 Englert 1996 的文献结果，未在本书形式化。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch06-geometric-product.html#sec-double-slit-delayed-choice" target="_top">第 6 章 §6.3 · 双缝干涉与惠勒延迟选择</a> · trureturing（所钉提交）：<a data-trureturing-path="D5/S3/Quantum/PureState/RecordCoherenceComplementarity.lean" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/PureState/RecordCoherenceComplementarity.lean" target="_blank" rel="noopener">RecordCoherenceComplementarity.lean</a> · <a data-trureturing-path="D5/S3/QuantumChannels/PinchingProjection.lean" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumChannels/PinchingProjection.lean" target="_blank" rel="noopener">PinchingProjection.lean</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">A particle passes the double slit, and a marker behind the slits writes down which way it went: the left slit writes r_L, the right slit r_R. The screen is on the left, the two marker arrows on the right. Drag the angle α between them: the fringe contrast and the path distinguishability trade places, and the point stays on the circle. The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>The circle.</b> Both arrows have unit length. The shadow of r_R on r_L is c = cos α, the fringe contrast V; the height of r_R is sin α, the path distinguishability D = √(1 − V²). Lean proves D² + V² = 1 and both ends: with c = 0 the fringes are gone and the path is known, with V = 1 the path is unknown (theorem thm-record-coherence-complementarity of chapter 6).</li>
+        <li><b>The screen.</b> Once the marker is ignored, the reduced path state is ½(1, c; c, 1). The screen shows env(x)·(1 + c·cos kx): the smaller c, the lower the bright fringes and the brighter the dark ones. The squares of the off-diagonal entries c/2 add up to c²/2, the coherence mass that pinching removes (a Lean-verified identity).</li>
+        <li><b>Hits first, reading later.</b> Reading the marker means choosing a pair of directions. Read for the path (the pair that tells r_L from r_R best) and at α = 90° every hit is recorded correctly as left or right, and neither row shows fringes; read to erase (the bisector of r_L and r_R and its perpendicular) and the rows show fringes and anti-fringes shifted by half a period. However the marker is read, the two rows together are the hits above: the screen does not change with the later choice.</li>
+        <li><b>A mixed marker.</b> When the marker itself is noisy (purity λ &lt; 1), the fringe contrast is still cos α but the readable distinguishability is only λ·sin α, and the point falls inside the circle, on an inner arc. With the distinguishability defined by the trace distance, D² + V² ≤ 1 is a literature result of Englert (1996), not formalized in this book.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch06-geometric-product.html#sec-double-slit-delayed-choice" target="_top">Chapter 6 §6.3 · The double slit and Wheeler’s delayed choice</a> · trureturing (pinned commit): <a data-trureturing-path="D5/S3/Quantum/PureState/RecordCoherenceComplementarity.lean" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/PureState/RecordCoherenceComplementarity.lean" target="_blank" rel="noopener">RecordCoherenceComplementarity.lean</a> · <a data-trureturing-path="D5/S3/QuantumChannels/PinchingProjection.lean" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumChannels/PinchingProjection.lean" target="_blank" rel="noopener">PinchingProjection.lean</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

@@ -8,6 +8,10 @@ Walk into an actual superconducting-qubit lab, ion-trap chamber, or NMR spectrom
 
 Who stole the missing length $1 - \norm{\vv{r}}$? Does "decoherence" mean that nature suffers an irreversible ontological decay? Closing Part I, this chapter explains the geometric mechanism of mixed states: **orthogonal record coupling and partial-trace marginalization in a larger joint space shorten the reduced local state** ([@thm-nonselective-marginal] and [@thm-reduced-access-defect], alongside C\*-algebraic representation compression [@thm-stinespring-dilation] and the general Schrödinger-picture channel dilation recorded in [@rem-stinespring-literature]). Picture a tilted spear casting a shorter shadow to get a feel for the shortening of the local Bloch vector; the partial trace itself acts on the joint density operator.
 
+::: {.figure src="ch04-overview"}
+**Figure 4.** The chapter at a glance, each panel a vertical cross-section of the Bloch ball. Panel I: the amber local arrow heads for $\lvert +\rangle$ on the shell (dashed) but stops inside at $\cos\theta_{\mathrm{env}}$. Panel II: step by step, phase damping narrows the ball into thinner cyan ellipses of the same height, closing in on the violet vertical axis. Panel III: the amber point first loses its sideways part and lands on the vertical axis, then loses $r_z$ and lands on the violet centre $\frac{1}{2}I$.
+:::
+
 ## 4.1 Pure States Are the Spherical Shell ($\|\vv{r}\| = 1$), Mixed States Are Truncated Chords Inside ($\|\vv{r}\| < 1$) {#sec-ch04-1}
 
 Start with a three-line Feynman calculation. Prepare a qubit pointing due east on the Bloch equator ($\vv{r} = +\vv{e}_1$), the pure superposition $\lvert +\rangle = \frac{1}{\sqrt{2}}(\lvert 0\rangle + \lvert 1\rangle)$ of unit transverse coherence $r_x = 1$.
@@ -26,7 +30,13 @@ $$
 
 Compare this with [@prop-qubit-bloch-core] from [Chapter 1](ch01-measurement.md): its Bloch vector is $\vv{r} = (\cos\theta_{\mathrm{env}},\, 0,\, 0)$! The joint state remains a pure vector of unit norm. In this equal-weight example with real, nonnegative overlap between the environment records, the local Bloch vector has length $\|\vv{r}\| = \cos\theta_{\mathrm{env}}$: the greater the angle between those two records, the shorter the "shadow." The partial trace is not an orthogonal projection of the joint ket onto a three-dimensional local subspace.
 
-![Pure spherical shell versus truncated interior chords: environmental partial-trace foreshortening, geometric deformations under quantum noise channels, and the maximally mixed dead center](../assets/fig-04-bloch-decoherence.svg)
+::: {.figure src="ch04-env-shadow"}
+**The shadow between the two environment records is the length of the local Bloch arrow.** On the left, the environment states $\lvert e_0\rangle$ and $\lvert e_1\rangle$ meet at the angle $\theta_{\mathrm{env}}$, and the cyan shadow of $\lvert e_1\rangle$ on $\lvert e_0\rangle$ has length $\cos\theta_{\mathrm{env}}$. On the right, in the vertical cross-section of the Bloch ball, the amber arrow $\vv{r}$ heads for $\lvert +\rangle$ on the shell (dashed) but reaches only $\cos\theta_{\mathrm{env}}$; the cyan segment beneath it is exactly as long as the shadow on the left. The figure takes $\theta_{\mathrm{env}} = 50^\circ$.
+:::
+
+::: {.viz src="bloch-noise" preset="shorten" height="500"}
+**A line that leaves the skin.** Phase damping acts step by step on $\lvert +\rangle$ and $\lvert -\rangle$ at the two ends of the equator: the amber $\rho$ and the white $\sigma$ leave the skin drawn as a thin wire and shrink along the horizontal axis towards the centre, while the cyan ball narrows at the waist. The top left of the stage reads the transverse fraction left as $\cos\theta_{\mathrm{env}}$ and gives that angle; the white line is the distance between the two states.
+:::
 
 In the sharp limit $\theta_{\mathrm{env}} = 90^\circ$ where the environment distinguishes system branches orthogonally ($\cos 90^\circ = 0$), the interaction is an isometric recording map, and turning one's gaze away from the record reproduces the exact Lüders unread state $\sum_a P_a \rho P_a$ of [Chapter 3](ch03-projectors-and-duality.md). Our first theorem proves this identity across arbitrary finite systems and outcome registers.
 
@@ -145,6 +155,10 @@ Once we see how the partial trace shortens the local Bloch vector in this exampl
 
 Start with complete transverse dephasing — **standard-basis pinching** $\mathcal{P}(\rho)$ ([`pinching`](lean:D5/S3/QuantumChannels/Pinching.pinching) in Lean, preserving diagonal entries $\rho_{00}, \rho_{11}$ and zeroing off-diagonal entries $\rho_{01}, \rho_{10}$). Under the Hilbert–Schmidt inner product ([`hilbertSchmidtInner`](lean:D5/S3/QuantumChannels/Pinching.hilbertSchmidtInner) $\langle A, B\rangle_{\mathrm{HS}} = \Tr(A^* B)$), pinching is an exact orthogonal projection flattening the Bloch sphere onto its vertical diameter $[-\vv{e}_3, +\vv{e}_3]$, and the discarded equatorial mass equals the sum of squared moduli of the two off-diagonal entries!
 
+::: {.viz src="bloch-noise" preset="pinch" height="500"}
+**Squashed onto the axis.** One step of complete dephasing: the cyan ball is squashed into a vertical line, and the violet dashes mark the whole axis as fixed. $\rho$ and $\sigma$ have the same height and differ only sideways, so they land on the same point of the axis and the white line shrinks to nothing; what is squashed away is the coherence mass carried by the sideways part ([@thm-pinching-pythagorean]).
+:::
+
 ::: {.theorem #thm-pinching-pythagorean title="Hilbert–Schmidt Pythagorean Split and Discarded Coherence Mass of Qubit Pinching" lean="D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass"}
 For every qubit matrix $\rho \in M_2(\mathbb{C})$, writing $\mathcal{P}(\rho)_{ij} = \delta_{ij}\rho_{ij}$ for standard-basis pinching and $\langle A, B\rangle_{\mathrm{HS}} = \Tr(A^* B)$ for the Hilbert–Schmidt inner product:
 
@@ -168,6 +182,10 @@ Split $\rho = \mathcal{P}(\rho) + D$ with purely off-diagonal residual $D = \rho
 
 In continuous laboratory time, nature rarely crushes the sphere flat in a single blow; instead, repeated weak collisions in the strictly noisy regime multiply the equatorial waist by a retention factor $c \in [0, 1)$ at each step (with $c = 1$ being the noiseless identity endpoint). That is **phase damping** ($T_2$ transverse relaxation): whenever $c \in [0, 1)$, every vertical height $r_z$ stays frozen while the equatorial radius $(r_x, r_y)$ contracts strictly as $c^N$, squeezing the sphere into a prolate cigar that converges onto the north–south axis as $N \to \infty$!
 
+::: {.viz src="bloch-noise" preset="dephase" height="500"}
+**The waist goes, the height stays.** Each step multiplies the sideways part by $c = 0.7$ and keeps the height: the cyan ball pinches into an upright cigar and thins towards the violet axis, while $\rho$ and $\sigma$ move horizontally towards it. The rail below counts the steps $N$ ([@prop-phase-damping-decay]).
+:::
+
 ::: {.proposition #prop-phase-damping-decay title="Iterated Phase-Damping Entries and Exponential Decay of Equatorial Coherence" lean="D5/S3/Quantum/QubitWitnesses.phaseDampingIterate_apply D5/S3/Quantum/Decoherence/CoherenceDecay.equal_superposition_coherence_tendsto_zero"}
 Let $c \in [0, 1]$ be a real coherence-retention coefficient, and let $\mathcal{D}_c^{(N)}$ denote the $N$-fold iterate ($N \in \mathbb{N}$) of the single-step phase-damping map that preserves diagonal entries and scales off-diagonal entries by $c$. Then:
 
@@ -190,6 +208,10 @@ Claim 1 follows by induction on $N$: $N = 0$ is the identity ($c^0 = 1$), and st
 :::
 
 Alongside energy-conserving $T_2$ dephasing stands energy-relaxing **amplitude damping** ($T_1$ spontaneous emission): an excited state at the south pole ($-1$) emits a quantum of energy into a cold bath and relaxes toward the ground state at the north pole ($+1$). Geometrically, the Bloch ball does not merely shrink around the origin — its center **drifts upward** along the vertical axis via the affine map [`dampedAxis`](lean:D5/S3/QuantumChannels/AmplitudeDampingContraction.dampedAxis) $u \mapsto u' = (1 - \gamma)u + \gamma$ ($0 \le \gamma < 1$).
+
+::: {.viz src="bloch-noise" preset="amp" height="500"}
+**Shrink and drift north.** Amplitude damping with $\gamma = 0.3$ per step: the cyan ball shrinks while it drifts towards the north pole, more slowly across than up; the violet north pole $\lvert 0\rangle$ stays put, and the amber $\rho$ climbs all the way from the south pole towards it.
+:::
 
 When we measure transverse coherence contraction under this axial drift using monotone Riemannian metrics of quantum information geometry — comparing the symmetric logarithmic derivative profile $\varphi_{\mathrm{SLD}}(u) = 1$ against the right logarithmic derivative profile $\varphi_{\mathrm{RLD}}(u) = \frac{1}{1 - u^2}$ via [`coherenceRatio`](lean:D5/S3/QuantumChannels/AmplitudeDampingContraction.coherenceRatio) $\mathcal{R}_\varphi(\gamma, u) = (1 - \gamma)\frac{\varphi(u')}{\varphi(u)}$ — their behavior at the pure ground-state boundary $u \to 1^-$ contrasts sharply!
 
@@ -225,6 +247,10 @@ We can now summarize the four workhorse single-qubit noise channels as simple th
 | **Amplitude Damping** ($0 < \gamma < 1$) | $\bigl(\sqrt{1-\gamma}\,r_x,\; \sqrt{1-\gamma}\,r_y,\; (1-\gamma)r_z + \gamma\bigr)$ | Ellipsoidal contraction + upward drift toward North $+\vv{e}_3$ | North pole $+\vv{e}_3 = (0, 0, 1)$ only |
 
 (Note: At the **zero-noise identity endpoints** $c = 1$, $p = 0$, $\lambda = 0$, or $\gamma = 0$, each channel reduces to the identity map $\vv{r}' = \vv{r}$ and fixes the **entire Bloch ball**. At $p = 1$, the bit-flip map is the unitary $\pi$-rotation $\rho \mapsto X\rho X$, $\vv{r}' = (r_x, -r_y, -r_z)$ about the $X$ axis and preserves the distance between states; at $\gamma = 1$, amplitude damping resets the entire Bloch ball in one step to the pure north pole $+\vv{e}_3 = (0, 0, 1)$, so the output distance between any two states is zero.)
+
+::: {.figure src="ch04-noise-gallery"}
+**Four kinds of noise, four deformations.** Each panel is a vertical cross-section of the Bloch ball at half strength ($c = \frac{1}{2}$, $p = \frac{1}{4}$, $\lambda = \frac{1}{2}$, $\gamma = \frac{1}{2}$), drawn from the affine formulas of the table: the thin line is the original shell, cyan its image after one application, violet what stays fixed. Phase damping gives a tall narrow ellipse and fixes the vertical axis; bit flip a flat wide ellipse and fixes the $x$ axis; depolarizing a concentric circle of half the radius and fixes only the centre; amplitude damping shrinks the ball and lifts it until its top touches the north pole, which alone stays fixed. The affine forms in the table are literature results, not formalized in this book.
+:::
 
 The last row raises a geometric question: once the axial drift toward the ground-state north pole is fixed, **how much transverse length can remain before the ellipsoid pierces the sphere?** Let $\lambda$ now denote the common real retention factor of the two transverse coordinates, and consider
 
@@ -281,6 +307,10 @@ Thus the north-pole cap intuition has an exact criterion on the whole closed bal
 
 [@thm-north-pole-ball-criterion] gives the transverse bound $|\lambda|\le\sqrt a$. Pure amplitude damping in the table takes $\lambda=\sqrt a$, so $\lambda^2=a$ saturates this bound; additional transverse decay can make the inequality strict. In particular, $a=0$ forces $\lambda=0$, while $a=1$ permits exactly $|\lambda|\le1$. This criterion concerns ball preservation; complete positivity also imposes conditions on extended systems and cannot be inferred from this real-coordinate criterion alone.
 
+::: {.figure src="ch04-ball-criterion"}
+**How much transverse length may survive is set by the axial factor.** The green region is the criterion $\lambda^2 \le a$ of [@thm-north-pole-ball-criterion], bounded by the two branches $\lambda = \pm\sqrt{a}$; its upper edge is pure amplitude damping, $\lambda = \sqrt{a}$. It closes to a point at $a = 0$ and opens to $|\lambda| \le 1$ at $a = 1$. The magenta point $(a, \lambda) = (0.15, 0.75)$ outside it is a map that pushes part of the ball through the shell.
+:::
+
 Now assign exponential envelopes to the factors of **the same map**. For any positive real $T_1,T_2,t$, set
 
 $$
@@ -298,6 +328,10 @@ $$
 $$
 
 The first step uses strict monotonicity of the real exponential; the second cancels positive time and multiplies by positive time constants. This explains a direct specialization of the theorem under the stated exponential envelopes. At $t=0$, both factors equal $1$ for every positive pair $T_1,T_2$, giving the identity map; zero time alone constrains no rate.
+
+::: {.viz src="bloch-noise" preset="wide" height="500"}
+**Keep too much sideways and the skin is pierced.** Take $T_2 = 6T_1$, that is $\lambda = a^{1/6} > \sqrt{a}$: near the north pole the cyan image bulges out through the unit ball drawn as a thin wire, the magenta part is no longer inside, and the magenta dot marks the image point farthest from the centre. Set $T_2 \le 2T_1$ again and the magenta disappears ([@thm-north-pole-ball-criterion]).
+:::
 
 ::: {.remark #rem-relaxation-envelope-literature title="Physical Conditions for Exponential Envelopes and Rate Addition (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** Krantz et al., *A quantum engineer's guide to superconducting qubits* ([arXiv:1904.06560v3](https://arxiv.org/abs/1904.06560v3), equations 40–43), introduce longitudinal and transverse relaxation rates in the Bloch–Redfield description. The text adjacent to equation 41 explicitly notes that expressing the transverse rate as a sum presumes exponential individual decay functions. This supplies physical context for the relaxation model used here.
@@ -370,9 +404,17 @@ No entry exceeds the first row, in agreement with claim 5 of [@prop-trace-distan
 
 So "a mixed state is a shortened line inside the ball" can be stated as a theorem that does not depend on any particular noise model: a channel may translate, squash, or rotate the ball, but it can never pull any two of its points apart. Distinguishability can only be lost; it never grows out of nothing.
 
+::: {.viz src="bloch-noise" preset="distance" height="500"}
+**Two states only get closer.** The first pair of the example: $\rho$ at the north pole and $\sigma$ at $+x$, one step of amplitude damping ($\gamma = \frac{1}{2}$). $\rho$ stays, $\sigma$ is pulled north, and the distance on the white line drops from the dashed $0.707$ to $0.433$ ([@prop-trace-distance-metric-contraction]).
+:::
+
 ## 4.3 The Maximally Mixed Dead Center ($\vv{r} = \vv{0}$) {#sec-ch04-3}
 
 Follow the contraction all the way inward: first annihilate equatorial coherence so the state lands on the north–south axis, and then erase vertical bias $r_z$ as well until the Bloch vector vanishes into the geometric origin $\vv{r} = \vv{0}$.
+
+::: {.viz src="bloch-noise" preset="centre" height="500"}
+**The centre: the origin forgotten.** Depolarizing at strength $1$ shrinks the whole ball to the violet centre: $\rho$ from the north pole and $\sigma$ from $+x$ land on the same spot, and the white line has length zero.
+:::
 
 First we record the exact algebraic criterion for vanishing equatorial coherence as an immediate corollary of [@thm-pinching-pythagorean].
 
@@ -409,6 +451,14 @@ Four geometric properties converge at this single point:
 2. **Zero purity excess**: Since $\rho_*^2 = \frac{1}{4}I$, purity hits the two-dimensional floor $\Tr(\rho_*^2) = \frac{1}{2}$. In [@thm-complementary-pythagoras] ($|d| = 2$), the purity excess $\Tr(\rho_*^2) - \frac{1}{2} = 0$ vanishes identically: neither axial particle bias nor equatorial wave coherence remains.
 3. **Infinite ensemble ambiguity**: Mixing $50\%$ North with $50\%$ South gives $\frac{1}{2}\rho_{+\vv{e}_3} + \frac{1}{2}\rho_{-\vv{e}_3} = \frac{1}{2}I$; mixing $50\%$ East with $50\%$ West also gives $\frac{1}{2}\rho_{+\vv{e}_1} + \frac{1}{2}\rho_{-\vv{e}_1} = \frac{1}{2}I$! Once collapsed to the center of mass $\vv{r} = \vv{0}$, no experiment can ever reconstruct which antipodal pair was blended to form it.
 4. **Foreshadowing Part IV (Entangled Spheres)**: Return to the joint pure state of Section 4.1 at $\theta_{\mathrm{env}} = 90^\circ$ — the maximally entangled **Bell state** $\lvert\Phi^+\rangle = \frac{1}{\sqrt{2}}(\lvert 00\rangle + \lvert 11\rangle)$, whose density operator expands as $\rho_{AB} = \frac{1}{4}(I \otimes I + \sigma_x \otimes \sigma_x - \sigma_y \otimes \sigma_y + \sigma_z \otimes \sigma_z)$. Globally, the two-qubit pair is in a zero-entropy pure state of full norm ($\Tr(\rho_{AB}^2) = 1$). Yet inspect qubit $A$ alone and you find $\rho_A = \frac{1}{2}I$ ($\vv{r}_A = \vv{0}$); inspect qubit $B$ alone and you find $\rho_B = \frac{1}{2}I$ ($\vv{r}_B = \vv{0}$)! Both local spheres sit at their dead centers, with vanishing single-qubit Pauli sectors $\sigma_i \otimes I$ and $I \otimes \sigma_j$. Where does $100\%$ of the nontrivial purity reside? **Entirely in the joint two-qubit Pauli correlation sector $\sigma_i \otimes \sigma_j$ (which Part IV, Chapter 13 interprets geometrically as shared correlation planes spanning the two spheres)!**
+:::
+
+::: {.figure src="ch04-centre-mixtures"}
+**The centre does not remember how it was mixed.** Half north with half south, half east with half west, or half of each end of the dashed tilted chord: every equal mixture has the midpoint of its chord as Bloch vector, and all of them land on the violet centre $\frac{1}{2}I$ (item 3 of [@ex-maximally-mixed-center]).
+:::
+
+::: {.viz src="bloch-noise" height="560"}
+**The full lab.** Switch between the three noises, set the strength per step and $T_2 / T_1$, or drag $\rho$ and $\sigma$ on the skin, and follow along the rail how the cyan ball deforms and how the white line only shrinks.
 :::
 
 ---

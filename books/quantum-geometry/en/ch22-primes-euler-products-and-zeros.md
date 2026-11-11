@@ -32,6 +32,10 @@ $$
 
 In a single algebraic stroke, the infinite sum $1 + p^{-s} + p^{-2s} + \cdots$ along axis $p$ collapses into the closed factor $(1 - p^{-s})^{-1}$! Multiplying those factors across all mutually orthogonal prime axes $p \in \mathrm{Primes}$ traverses every finitely supported exponent vector $(v_2, v_3, v_5, \dots)$ exactly once by the distributive law, identifying the Dirichlet sum over $\mathbb{N}$ with the Euler product over primes.
 
+::: {.viz src="euler-product-sieve" preset="two" height="500"}
+**One prime axis.** Only $2$ is on the list: the cyan curve is the geometric series $1 + 2^{-s} + 4^{-s} + \cdots = (1 - 2^{-s})^{-1}$, which equals $\frac{4}{3}$ at the amber line $s = 2$, a step below the ink $\zeta(2)$. Among the integers below, only the powers of $2$ ($1, 2, 4, 8, 16, 32, 64$) are cyan; everything else is magenta, starting with $3$.
+:::
+
 To state these theorems with complete formal precision in Lean 4, we first record the conventions of module `D5/S3/Weil/Convention`.
 
 ::: {.definition #def-classical-zeta title="Formal Convention for the Riemann Zeta Function and Simple-Pole Predicate" lean="D5/S3/Weil/Convention.classicalZeta D5/S3/Zeros/ZetaUpgrade.HasUniqueSimplePoleWithResidue"}
@@ -47,6 +51,10 @@ On the complex plane $\mathbb{C}$, let [`classicalZeta`](lean:D5/S3/Weil/Convent
 Before entering the half-plane $\operatorname{Re}(s) > 1$, we anchor the most prominent landmark of $\zeta(s)$ in the complex plane: its **unique simple pole at $s = 1$**, where the harmonic series diverges with unit residue.
 
 Geometrically, as $s \to 1^+$, the divergence of $\sum_{n=1}^\infty n^{-s}$ reflects the unbounded accumulation of prime amplification factors $(1 - p^{-1})^{-1} = \frac{p}{p-1}$ across infinitely many orthogonal prime axes, scaled by $(s - 1)^{-1}$ with residue exactly $1$.
+
+::: {.viz src="euler-product-sieve" preset="near" height="500"}
+**The closer to 1, the wider the gap.** The list holds the $11$ primes up to $31$ and the amber line stands at $s = 1.1$: the cyan product reaches only $4.93$ against the ink $\zeta(1.1) = 10.58$, so the magenta gap is larger than the product itself. Moving left only widens it: at $s = 1$ the cyan curve stops at the finite value $\prod_{p \le 31} \frac{p}{p-1} \approx 6.54$, while the ink $\zeta$ runs off the top of the picture, at the pole of [@lem-riemann-zeta-residue-one].
+:::
 
 ::: {.lemma #lem-riemann-zeta-residue-one title="Unit Residue of the Riemann Zeta Function at s = 1" lean="D5/S3/Zeros/ZetaIdentities.riemann_zeta_residue_one"}
 For the Riemann zeta function $\operatorname{classicalZeta} : \mathbb{C} \to \mathbb{C}$ of [@def-classical-zeta], as $s \in \mathbb{C}$ approaches $1$ along the punctured neighborhood filter $\mathcal{N}_{\neq}(1)$,
@@ -102,6 +110,10 @@ $$
 
 ::: proof
 Under `hs : 1 < s.re`, transitivity of equality combines [@prop-riemann-zeta-dirichlet-sum] ($\sum'_{n : \mathbb{N}} n^{-s} = \operatorname{classicalZeta}(s)$) with the symmetry of [@thm-riemann-zeta-euler-product] ($\operatorname{classicalZeta}(s) = \prod'_{p : \mathrm{Nat.Primes}} (1 - p^{-s})^{-1}$). The full proof is checked by the Lean kernel.
+:::
+
+::: {.viz src="euler-product-sieve" preset="all" height="500"}
+**Every cell cyan, the gap still there.** Primes join the list one by one up to $97$: every cell from $1$ to $96$ turns cyan, so each of these integers appears in the expansion of the product, and at $s = 2$ the cyan curve comes within $0.0030$ of the ink $\zeta$. The magenta gap in the magnifier remains, with $101^{-s}$ as its lowest slice. Only with every prime multiplied in does the product equal the whole series ([@cor-dirichlet-sum-eq-euler-product]).
 :::
 
 ::: {.viz src="sphere-escape" preset="euclid" height="500"}
@@ -236,7 +248,27 @@ $$
 The strictly positive discrepancy $R_{> 5}(2) = \zeta(2) - P_{\le 5}(2) \approx 0.082434 > 0$ is led by the fourth orthogonal prime axis $7^{-2} = \frac{1}{49} \approx 0.020408$ (followed by $11^{-2} = \frac{1}{121} \approx 0.008264$, $13^{-2} = \frac{1}{169} \approx 0.005917$, and the mixed composite $14^{-2} = (2\times 7)^{-2} = \frac{1}{196} \approx 0.005102$).
 :::
 
+::: {.viz src="euler-product-sieve" preset="five" height="500"}
+**The first to slip through is 7.** The list is $2, 3, 5$: the cyan cells $1, 2, 3, 4, 5, 6, 8, 9, 10, 12, \dots$ are the terms the product expands into, and $7$ is the first magenta cell. At $s = 2$ the cyan curve sits at $\frac{25}{16} = 1.5625$ against the ink $\zeta(2) = 1.6449$; the magnifier splits the gap of $0.0824$, from the bottom up, into $7^{-2}$, $11^{-2}$, $13^{-2}$ and ever thinner slices, each the $n^{-2}$ of one magenta cell.
+:::
+
+::: {.viz src="euler-product-sieve" preset="remainder" height="500"}
+**The remainder always rests on $7^{-s}$.** The list is still $2, 3, 5$, and the amber line sweeps from $s = 4$ down to $s = 1.3$: the magenta gap keeps widening, and the lowest slice in the magnifier is always $7^{-s}$. The dashed magenta curve between the ink and the cyan is the product plus $7^{-s}$, and the gap never gets narrower than that: $R_{>5}(s) > 7^{-s}$ (a literature result, checked by the page only at the points it draws).
+:::
+
 Notice the exact structural parallel between [@ex-prime-log-orthogonality-and-sieve] and the Euclidean–Gödelian escape of [Chapter 21](ch21-diagonalization-and-escape.md): any finite prime sieve spanned by $K$ prime axes $\{p_1, \dots, p_K\}$ is an arithmetic polytope whose remainder series $R_{> p_K}(s)$ leaks immediately at $n = p_{K+1}$ (and is strictly positive, $R_{> p_K}(s) > p_{K+1}^{-s} > 0$, for every real $s > 1$). Eliminating that leading term requires adjoining $p_{K+1}$ as a new orthogonal axis — and because the primes are inexhaustible, no finite truncation ever seals the arithmetic sphere.
+
+::: {.viz src="euler-product-sieve" preset="thirtyone" height="500"}
+**Up to 31, the leak starts at 37.** The list holds the $11$ primes up to $31$: everything from $1$ to $36$ is cyan, and the first magenta cell is $37$. At $s = 2$ the gap has shrunk to $0.0102$, yet its lowest slice in the magnifier is still $37^{-2}$: the only way to close that slice is to put $37$ on the list.
+:::
+
+::: {.viz src="sphere-escape" preset="thirteen" height="500"}
+**The sum need not be prime itself.** The list is $2, 3, 5, 7, 11, 13$ and $Q = 30031$: every clock hand points at $1$, none at $0$. Yet $Q = 59 \times 509$ is not prime. Euclid's argument (a literature result) says only that the prime factors of $Q$ are off the list, and the new prime it finds, $59$, is not the next one, $17$.
+:::
+
+::: {.viz src="euler-product-sieve" height="560"}
+The full lab of the Euler product and the sieve: scrub the rail to add or drop primes, drag the amber line to move $s$, and click a magenta cell to put its largest prime factor on the list. In the first small plot below, the ink curve $(s - 1)\zeta(s)$ heads for the green dashed line at $1$ ([@lem-riemann-zeta-residue-one]) while the cyan $(s - 1)$ times the product heads for $0$; the second shows how many primes the product needs to come within $1\%$ of $\zeta(s)$.
+:::
 
 > Composite numbers are the diagonal lattice points of the prime basis; Euler's product simply projects an entangled sum along the natural-number line onto its mutually orthogonal prime axes.
 

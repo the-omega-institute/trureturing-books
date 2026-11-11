@@ -11,7 +11,9 @@ We establish and examine four interconnected themes:
 3. **Continuous two-axis generation versus finite-word $\{H, T\}$ polytope approximation (Liu Hui's three-dimensional 割圆术)**: While continuous rotations around any two non-collinear axes generate $\mathrm{SO}(3)$ in finitely many steps, restricting to words of length $\le L$ over the discrete gate set $\{H, T\}$ applied to a fixed initial Bloch state $\vv{r}_0 \in S^2$ produces a finite point set $\mathcal{S}_L \subset S^2$ whose Euclidean convex hull $P_L = \operatorname{conv}(\mathcal{S}_L)$ is a flat-faced inscribed polytope with strictly positive covering residual $\varepsilon_L > 0$;
 4. **Exact coin-assisted source-query counts versus asymptotic gate compilation length**: When the initial success probability $p \in (0, 1]$ is known, an auxiliary coin rotation eliminates discrete overshoot and achieves exact amplitude amplification in at most $\frac{\pi/2 + 2}{\sqrt{p}}$ source queries — a query count (`sourceQueries`) that must be kept strictly distinct from asymptotic $\{H, T\}$ gate compilation length (recorded in [@rem-solovay-kitaev-literature]).
 
-![Figure 16](../assets/fig-16-qsvt-solovay-kitaev-polytope.svg)
+::: {.figure src="ch16-overview"}
+**Figure 16.** The chapter at a glance. Panel I: on $[-1, 1]$ the cyan Chebyshev polynomial $T_3(x) = 4x^3 - 3x$ swings back and forth between $-1$ and $1$; the grey line is $T_1(x) = x$. Panel II: the $19$ cyan vertices where $\{H, T\}$ words of length at most $6$ take the north pole; their convex hull encloses the centre with flat chordal faces, leaving gaps below the shell. Panel III: the cyan staircase of source queries $2n + 1$ for exact amplitude amplification stays under the green bound $(\pi/2 + 2)/\sqrt{p}$ ([@cor-exact-source-query-count]); the three dots are the table's $3$, $7$ and $13$.
+:::
 
 ## QSVT: Two-Dimensional Blocks and Chebyshev Recurrences {#sec-qsvt-chebyshev-blocks}
 
@@ -57,6 +59,10 @@ $$
 
 has eigenvalues $a = e^{i\theta}$ and $b = e^{-i\theta}$ ($\det W(x) = ab = 1$, $\Tr W(x) = 2x$), so its $m$-th power $W(x)^m$ carries $T_m(x) = \cos(m\theta)$ in its top-left entry!
 
+::: {.figure src="ch16-chebyshev-shadows"}
+**Turn $m$ times and the shadow is $T_m(x)$.** Take $x = \cos\theta = \frac{1}{2}$ ($\theta = 60^\circ$): four arrows, each turned one more violet angle $\theta$, stop at $0^\circ$, $60^\circ$, $120^\circ$ and the amber $180^\circ$. Their cyan shadows on the axis are $T_0 = 1$, $T_1 = \frac{1}{2}$, $T_2 = -\frac{1}{2}$ and $T_3 = -1$, matching the recurrence of [@thm-chebyshev-trace-recurrence] term by term.
+:::
+
 **Strict mathematical boundary**: [@thm-chebyshev-trace-recurrence] is a scalar recurrence in an arbitrary commutative ring $R$ with $ab = 1$ and makes no assumptions about matrices, singular values, or phase sequences; connecting it to $W(x) \in \mathrm{SU}(2)$ is an explicit hand calculation, not a formalization of the full QSVT theorem. In particular, one cannot realize an arbitrary polynomial from this recurrence alone (the polynomial realizability conditions for full QSVT are recorded in [@rem-qsvt-walks-literature]).
 
 ## Quantum Walks: Coherent Superposition and Its Limits {#sec-quantum-walk-interference}
@@ -84,6 +90,10 @@ $$
 \mathrm{cStar} = c_* = \begin{pmatrix} 1/\sqrt{2} \\ i/\sqrt{2} \end{pmatrix}.
 $$
 
+::: {.viz src="walk-spreading" preset="ten" height="500"}
+**One origin, two ways to walk.** From the origin with the coin $c_*$, ten steps of the rule above: the cyan quantum distribution above is symmetric, its two tallest bars at $\pm 6$ and all of it inside the dashed lines $\pm 10$; the grey classical random walk below piles up in the middle. The cyan bracket has width $\sigma = 5.47$, the grey one only $\sqrt{10} = 3.16$.
+:::
+
 To quantify multi-mode entanglement across the entire mode set $\iota = \mathrm{Fin}\,2 \times \mathrm{ZMod}\,p$, the source maps any amplitude profile $\lambda : \iota \to \mathbb{C}$ to the single-excitation W-state `wState(λ)` on Boolean occupation configurations $s : \iota \to \mathrm{Bool}$ (assigning $\lambda_k$ when $s$ is `true` at $k$ alone and $0$ otherwise), defines modewise product states $\mathrm{productState}(z)(s) = \prod_{k \in \iota} z_k(\text{if } s_k \text{ then } 1 \text{ else } 0)$ over tuples of unit spinors `unitFactors z`, and defines the inner-product overlap helper $\mathrm{overlap}(\lambda, z)$ (taking the amplitude profile $\lambda : \iota \to \mathbb{C}$ first and the spinor family $z : \iota \to \mathrm{Fin}\,2 \to \mathbb{C}$ second) and maximum squared overlap:
 
 $$
@@ -108,10 +118,26 @@ $$
 In `SymmetricCoinMaximalWalkEntanglement`, `walk_linearity` and `walk_reflection` establish `walk_pair_probabilities`: for every site $x \in \mathrm{ZMod}\,p$ and every unit coin $c$, the mirror mode pair $(0, x)$ and $(1, -x)$ has fixed total probability $|\mathrm{walkState}(p, n, c)(0, x)|^2 + |\mathrm{walkState}(p, n, c)(1, -x)|^2 = a^2 + b^2$, while the circularly polarized coin $\mathrm{cStar} = (1/\sqrt{2}, i/\sqrt{2})$ equalizes the two weights to $(a^2 + b^2)/2$. Applying the fixed-sum pair-balancing lemmas `pair_balancing` and `pair_average_le` across all pairs $((0, x), (1, -x))$ proves $\mathrm{gMax}\bigl(\mathrm{walkState}(p, n, \mathrm{cStar})\bigr) \le \mathrm{gMax}\bigl(\mathrm{walkState}(p, n, c)\bigr)$, and subtracting from $1$ yields $\mathrm{geometricEntanglement}\bigl(\mathrm{walkState}(p, n, c)\bigr) \le \mathrm{geometricEntanglement}\bigl(\mathrm{walkState}(p, n, \mathrm{cStar})\bigr)$. The full proof is checked by the Lean kernel.
 :::
 
+::: {.viz src="walk-spreading" preset="coin" height="500"}
+**Half and half is not enough; it takes the $i$.** A real coin $(1, 1)/\sqrt{2}$, half and half as well, for fifty steps: the cyan distribution leans left, the dashed outline is its mirror image $P(-x)$, and magenta is what it has beyond them, $0.51$ in all. With the coin $c_*$ the magenta is gone: the probabilities of a mirror pair $(0, x)$ and $(1, -x)$ add up to the same total whatever the coin, and $c_*$ splits every pair evenly (a step of the proof sketch above). The figure shows distributions, not the geometric entanglement of [@lemma-symmetric-coin-walk].
+:::
+
+::: {.viz src="walk-spreading" preset="ring" height="500"}
+**Wrapped round, still a mirror.** A cycle of only $p = 9$ points, coin $c_*$, twenty steps: the walk has long since wrapped round, and the cyan bars, like the grey ones, cover the whole ring with no front running outwards; yet they are still mirror images of each other, with no magenta. [@lemma-symmetric-coin-walk] holds for every cycle length $p \ge 1$ and every number of steps $n$.
+:::
+
 Two strict boundaries apply to [@lemma-symmetric-coin-walk]:
 
 1. **All-mode single-excitation W-state geometric entanglement versus coin–position bipartite entropy**: Here `geometricEntanglement` measures the single-excitation W-state across all $2p$ modes $\iota = \mathrm{Fin}\,2 \times \mathrm{ZMod}\,p$ relative to modewise product states (`1 - gMax`); it is **not** the reduced von Neumann entropy of the coin after tracing out position.
 2. **Scope of quantum-walk interference**: [@lemma-symmetric-coin-walk] analyzes coin-phase symmetry on the cycle $\mathrm{ZMod}\,p$; it does **not** prove exponential speedup on general mazes, does **not** imply that all backtracking paths cancel to zero on arbitrary graphs, and is **not** the glued-trees oracle separation theorem.
+
+::: {.viz src="walk-spreading" preset="fifty" height="500"}
+**Fifty steps, nearly four times as wide.** The two cyan peaks have run out to $\pm 34$, while the grey bell spreads only to about $\pm 7$: quantum width $\sigma = 27.07$, classical $\sigma = \sqrt{50} = 7.07$.
+:::
+
+::: {.viz src="walk-spreading" preset="width" height="500"}
+**A straight line against a $\sqrt{n}$.** Width against the steps: the cyan quantum width is a straight line ($\sigma / n$ stays near $0.54$), the grey classical width is $\sqrt{n}$; at sixty steps it is $32.5$ against $7.75$. On a line the gap between them is a square, not an exponential; the exponential separation on glued trees and the bound for general graphs are in item 2 of [@rem-qsvt-walks-literature] (literature results, not formalized in this book), and the curves are the page's numbers.
+:::
 
 ::: {.remark #rem-qsvt-walks-literature title="Full QSVT Realizability and the Glued-Trees Quantum-Walk Separation (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** Two landmark theorems from the quantum algorithms literature govern the full scope of QSVT and quantum walks:
@@ -120,6 +146,10 @@ Two strict boundaries apply to [@lemma-symmetric-coin-walk]:
    - **Direct two-dimensional complex QSP (Theorem 3)**: A pair of complex polynomials $(P_{\mathrm{c}}, Q_{\mathrm{c}}) \in \mathbb{C}[x]^2$ is realized directly as the matrix entries of a single phase-modulated sequence $U_{\Phi}(x)$ if and only if $\deg(P_{\mathrm{c}}) \le d$, $\deg(Q_{\mathrm{c}}) \le d - 1$, $P_{\mathrm{c}}$ has parity $d \bmod 2$, $Q_{\mathrm{c}}$ has opposite parity $(d - 1) \bmod 2$, and $|P_{\mathrm{c}}(x)|^2 + (1 - x^2)|Q_{\mathrm{c}}(x)|^2 = 1$ for all $x \in [-1, 1]$.
    - **General bounded real-polynomial QSVT via complex completion and real-part extraction (Theorem 17 / Corollary 18)**: For a general real target polynomial $P_{\mathrm{target}} \in \mathbb{R}[x]$ of degree $\le d$, definite parity $d \bmod 2$, and uniform bound $\max_{x \in [-1, 1]} |P_{\mathrm{target}}(x)| \le 1$ (for instance $P_{\mathrm{target}}(x) = x/2$, where $P_{\mathrm{target}}(1)^2 = 1/4 < 1$ precludes any real completion $P_{\mathrm{target}}(x)^2 + (1 - x^2)Q(x)^2 = 1$), Fejér–Riesz factorization constructs a complex completion pair $(P_{\mathrm{c}}, Q_{\mathrm{c}}) \in \mathbb{C}[x]^2$ satisfying Theorem 3 with $\operatorname{Re} P_{\mathrm{c}}(x) = P_{\mathrm{target}}(x)$ and $|P_{\mathrm{c}}(x)|^2 + (1 - x^2)|Q_{\mathrm{c}}(x)|^2 = 1$. Introducing one additional $\lvert +\rangle$ control ancilla to superpose the forward and negated phase sequences $\frac{1}{2}(U_{\Phi} + U_{-\Phi})$, followed by ancilla $\langle +\rvert$ projection and the parity-dependent block projection ($\tilde{\Pi}(\cdot)\Pi$ for odd $d$, $\Pi(\cdot)\Pi$ for even $d$), extracts the exact real transformation $P_{\mathrm{target}}^{(\mathrm{SV})}(A)$ across every singular-value $2\times 2$ block using $d$ queries to $U$ and $U^*$.
 2. **Exponential quantum-walk speedup on glued trees and its structural limits** (A. M. Childs, R. Cleve, E. Deotto, E. Farhi, S. Gutmann, and D. A. Spielman, *Exponential algorithmic speedup by a quantum walk*, Proc. 35th ACM STOC, 59–68, 2003, doi:10.1145/780542.780552, arXiv:quant-ph/0209131): On two depth-$n$ binary trees joined by a random cycle of alternating edges at the leaves, a continuous-time quantum walk starting at the entrance root remains confined to the $(2n+2)$-dimensional symmetric column subspace and reaches the `EXIT` root in $\mathrm{poly}(n)$ time, whereas Childs et al. prove that any classical algorithm making at most $2^{n/6}$ oracle queries finds the `EXIT` vertex with probability at most $4\cdot 2^{-n/6}$ (yielding a $2^{\Omega(n)}$ classical query lower bound for bounded success probability). This exponential separation relies critically on graph symmetry, oracle access, and task definition; on general unstructured graphs, interference does not automatically cancel all backtracking paths.
+:::
+
+::: {.viz src="walk-spreading" height="560"}
+**The walk-spreading lab.** Drag the rail to change the steps, change the coin's share $w$ and phase $\varphi$, or shorten the cycle: cyan above is the quantum walk, grey below the classical random walk, and magenta what the quantum distribution has beyond its mirror image. The green box is [@lemma-symmetric-coin-walk]; the widths and the lopsidedness are the page's numbers.
 :::
 
 ## Finite Gate Words and Three-Dimensional Polytope Approximation {#sec-finite-gate-polytope}
@@ -165,6 +195,15 @@ In [@prop-two-axis-finite-word], each step chooses any continuous angle from $\m
 
    Note that $\mathcal{S}_L$ is the orbit of a **fixed initial state $\vv{r}_0$**, not the full $3$-parameter gate space; using $|w| \le L$ ensures monotonic nesting $\mathcal{S}_L \subseteq \mathcal{S}_{L+1}$ with $|\mathcal{S}_L| \le \sum_{j=0}^L 2^j = 2^{L+1} - 1$ (with collisions reducing the count).
 3. **The Euclidean convex hull $P_L = \operatorname{conv}(\mathcal{S}_L)$ and geodesic polytopes**: The Euclidean convex hull $P_L = \operatorname{conv}(\mathcal{S}_L) \subset \mathbb{R}^3$ is a finite-vertex convex polytope inscribed in the unit ball. For small $L$ ($L = 0, 1, 2$), $P_L$ degenerates to a point, segment, or planar polygon (do not claim $P_L$ is $3$-dimensional for every $L$!). When $P_L$ is $3$-dimensional, its facets are **flat Euclidean chordal polygons** (never call them intrinsically flat faces of $S^2$). When $0 \in \operatorname{int}(P_L)$, radially projecting the edges and faces of $P_L$ onto $S^2$ yields a spherical mesh of great-circle arcs called a **geodesic polytope** — a term referring strictly to the radial projection mesh on $S^2$, while $P_L = \operatorname{conv}(\mathcal{S}_L)$ itself remains a flat-faced Euclidean polytope.
+
+::: {.viz src="gate-word-polytope" preset="one" height="500"}
+**Length 1: a segment.** The north pole is fixed by $T$, and only $H$ carries it to $\vv{e}_x$: the two cyan points span a segment, nothing like a polytope yet. The amber target sits on $\vv{e}_x$, the word $H$ hits it exactly, and there is no magenta gap; violet marks the axes of $H$ and $T$.
+:::
+
+::: {.viz src="gate-word-polytope" preset="six" height="500"}
+**Length 6: around the centre, projected onto the sphere.** The hull of the $19$ reachable points now holds the centre, and projecting its edges radially onto the sphere gives a mesh of cyan great-circle arcs (a geodesic polytope). The largest hole in the mesh is the empty cap circled in dashed magenta, of radius $\varepsilon_6 = 47.27^\circ$, with the amber arrow at its centre. What is drawn here is where finite gate words land on the sphere, not the polygon of the planar circle-cutting in [Chapter 21](ch21-diagonalization-and-escape.md).
+:::
+
 4. **Strict positivity of the covering residual $\varepsilon_L > 0$ and curvature mismatch**: Because $S^2$ is compact and $\mathcal{S}_L$ is finite, the worst-case geodesic covering radius
 
    $$
@@ -172,7 +211,16 @@ In [@prop-two-axis-finite-word], each step chooses any continuous angle from $\m
    $$
 
    is **strictly positive** for every finite $L$ and monotonically non-increasing ($\varepsilon_{L+1} \le \varepsilon_L$; asymptotic compilation properties of universal discrete gate sets are documented separately in [@rem-solovay-kitaev-literature] and do not follow from [@prop-two-axis-finite-word]). Along any outward unit facet normal $\vv{n} \in S^2 \setminus \mathcal{S}_L$ with support height $h = \max_{\vv{s} \in \mathcal{S}_L} (\vv{n} \cdot \vv{s}) < 1$, a positive **radial support gap** $1 - h > 0$ separates the flat chordal face from the sphere, even though the vertices $\vv{s} \in \mathcal{S}_L$ lie on $S^2$ (for the classical differential-geometric and polyhedral angular-defect comparison between round spheres and flat-faced polyhedra, see [Chapter 21](ch21-diagonalization-and-escape.md), [@rem-hairy-ball-adams-literature]).
+
+::: {.viz src="gate-word-polytope" preset="nearest" height="500"}
+**The point nearest the target, and its word.** With $L \le 10$ there are $64$ reachable points. The amber target is at $\theta = 110^\circ$, $\varphi = 200^\circ$: the nearest reachable point is reached by the word $HTHTTTTTH$, $17.04^\circ$ away (the magenta arc); in this direction the flat polytope has support height $h = 0.956$, and the radial gap to the sphere is $1 - h = 0.044$ (the magenta piece of radius).
+:::
+
 5. **Liu Hui's three-dimensional 割圆术 analogy and state versus operator error**: Just as Liu Hui's third-century *circle-cutting method* (割圆术) approximates a smooth circle by inscribed flat chords, increasing $L$ refines the inscribed chordal polytope $P_L$ inside $S^2$ (with three distinct layers in Figure 16, Panel II: finite vertices $\mathcal{S}_L$, flat chordal faces of $P_L$, and the sphere $S^2$). This is a pedagogical geometric analogy, not a historical claim about quantum compilation or the Solovay–Kitaev exponent. Finally, because the stabilizer circle of $\vv{r}_0$ hides one rotation angle around $\vv{r}_0$, the single-state covering error $\varepsilon_L$ on $S^2$ cannot replace the full operator compilation error $\delta(U, V) = \min_{\varphi}\norm{U - e^{i\varphi}V}_{\mathrm{op}}$ on $\mathrm{PU}(2)/\mathrm{SU}(2)$.
+
+::: {.viz src="sphere-escape" preset="zu" height="500"}
+**At $24576$ sides the gap is still there.** Zu Chongzhi pushed the circle-cutting to $24576$ sides. The cyan inscribed polygon can no longer be told apart from the circle, and the magenta gap $1 - \cos\frac{\pi}{n}$ is down to $8.17\times10^{-9}$; magnified about $7.5\times10^{7}$ times vertically, it looks exactly as it did at the first step. This is circle-cutting in the plane; reading it as chordal faces approximating a sphere is only the pedagogical analogy of item 5 above (for the numerical table, see [Chapter 21](ch21-diagonalization-and-escape.md), [@ex-liu-hui-polygon-sagitta]).
+:::
 
 ## Compilation Error, Query Counts, and Asymptotic Gate Length {#sec-compilation-error-and-count}
 
@@ -243,6 +291,10 @@ Then all six clauses hold:
 When $p = 1$, $w = [\mathrm{.source}]$ uses $1$ source query and $\mathrm{coinLift}(C)\cdot\mathrm{coinEmbed}(J) = \mathrm{coinEmbed}(\mathrm{success}(CJ, P, 1))$. When $0 < p < 1$, choosing $n = \lceil \frac{\pi}{4\arcsin\sqrt{p}} - \frac{1}{2}\rceil_+$ ensures $0 < r = \sin^2(\frac{\pi}{4n+2}) \le p < 1$ and $0 < q = r/p \le 1$. The modified preparation $U_q = (\mathrm{coinRotation}(q)\cdot\mathrm{coinLift}(C))\cdot\mathrm{coinEmbed}(J)$ has success Gram matrix $q p I_s = r I_s$ and normalized success block $\mathrm{coinEmbed}(\mathrm{success}(CJ, P, p))$. Since $(2n + 1)\arcsin(\sqrt{r}) = \frac{\pi}{2}$, applying [@thm-grover-uniform-rotation] to $U_q$ at step $n$ gives $\sin(\pi/2) = 1$ and $\cos(\pi/2) = 0$, proving $V = \mathrm{coinEmbed}(\mathrm{success}(CJ, P, p))$ and $(1 - \mathrm{coinGood}(P))V = 0$. Finally, $\mathrm{amplificationWord}(n)$ contains $1 + 2n$ occurrences of `.source` and `.sourceAdjoint`, and $n < \frac{\pi}{4\arcsin\sqrt{p}} + \frac{1}{2}$ with $\arcsin\sqrt{p} \ge \sqrt{p}$ bounds $2n + 1 \le \frac{\pi/2 + 2}{\sqrt{p}}$. The full proof is checked by the Lean kernel.
 :::
 
+::: {.figure src="ch16-slowed-steps"}
+**Slow each step a little and whole steps land exactly on the target.** For $p = 1/16$ and $n = 3$: on the left, three violet steps of the original size $\theta \approx 14.48^\circ$ carry the amber arrow past the success direction $W$, overshooting by the magenta $11.3^\circ$; on the right, the coin slows each step to $\theta_r = \pi/14 = 180^\circ/14$, and the same three steps put the amber arrow exactly on $W$, since $(2n+1)\theta_r = \pi/2$; see [@cor-exact-source-query-count].
+:::
+
 **Critical distinction (Figure 16, Panel III)**: `sourceQueries(w)` in [@cor-exact-source-query-count] counts **only** `.source` and `.sourceAdjoint` calls ($1$ for $p = 1$, $2n + 1$ for $p < 1$) using the continuous coin rotation `coinRotation q` for known $p$; it is not the total gate count and **must never be confused with the Solovay–Kitaev $\{H, T\}$ compilation gate length**.
 
 Let us now verify all four numerical examples of this chapter.
@@ -277,6 +329,10 @@ On $\mathcal{S}_3$, the support maximum in direction $+\vv{e}_y$ is $1$, whereas
 Each row satisfies $0 < q \le 1$, $(2n+1)\arcsin\sqrt{r} = \pi/2$, and $2n + 1 \le \frac{\pi/2 + 2}{\sqrt{p}}$. This counts amplitude-amplification source queries for known $p$, not Solovay–Kitaev compilation gate counts.
 :::
 
+::: {.viz src="gate-word-polytope" preset="three" height="500"}
+**Length 3: five vertices, the centre outside.** The five cyan vertices of the example enclose a solid for the first time, but all of them lie where $x \ge 0$ and $z \ge 0$. The amber target points to $-\vv{e}_x$: the nearest vertex is $90^\circ$ away, the support height is $h = 0$, and the magenta radial gap runs from the centre all the way to the sphere, a full $1$, as computed in the third step.
+:::
+
 <!-- alias: #rem-qsvt-solovay-kitaev-literature -->
 ::: {.remark #rem-solovay-kitaev-literature title="The Solovay–Kitaev Compilation Theorem and Polylogarithmic Gate Length (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** When compiling arbitrary single-qubit gates into words over a finite discrete gate set, the asymptotic gate length is governed by the **Solovay–Kitaev theorem** (see C. M. Dawson and M. A. Nielsen, *The Solovay–Kitaev algorithm*, Quantum Inf. Comput. **6**, 81–95, 2006, arXiv:quant-ph/0505030):
@@ -285,6 +341,14 @@ Each row satisfies $0 < q \le 1$, $(2n+1)\arcsin\sqrt{r} = \pi/2$, and $2n + 1 \
 2. **Inverse closure of $\{H, T\}$ and projective lifts**: Because $H^{-1} = H$ and $T^{-1} = T^7$ in $\mathrm{PU}(2)$ (with unimodular $\mathrm{SU}(2)$ lifts $\tilde{H} = iH, \tilde{T} = e^{-i\pi/8}T$ requiring consistent tracking of central signs $\pm I_2$), inverses cost a constant factor, so the projective compilation problem inherits the $O(\log^c(1/\varepsilon))$ scaling up to constant prefactors.
 3. **Scaling of the group commutator**: In $\exp(A)\exp(B)\exp(-A)\exp(-B) = \exp([A, B] + O(\norm{A}^3 + \norm{B}^3))$, choosing $A, B = O(\sqrt{\varepsilon})$ produces a correction $[A, B]$ of order $O(\varepsilon)$ with residual $O(\varepsilon^{3/2})$ (one must never misstate the commutator as linear in an $O(\varepsilon)$ step).
 4. **Nonzero worst-case finite-$L$ residual**: The Solovay–Kitaev theorem is an asymptotic scaling theorem as $\varepsilon \to 0$; while discrete gate words already belonging to $\mathcal{W}_{\le L}$ (such as $I, H, T$) trivially have zero error at depth $L$, the worst-case covering radius across the continuous group or sphere remains strictly positive ($\varepsilon_L > 0$) at every finite word length $L < \infty$, so worst-case target gates outside $\mathcal{W}_{\le L}$ always incur a nonzero compilation residual; nor does the theorem equate the single-state $S^2$ covering radius $\varepsilon_L$ with full $\mathrm{SU}(2)/\mathrm{PU}(2)$ operator compilation.
+:::
+
+::: {.viz src="gate-word-polytope" preset="shrink" height="500"}
+**The largest hole shrinks step by step and never closes.** The length runs from $0$ to $20$: the cyan reachable points grow denser layer by layer, and the largest empty cap circled in dashed magenta shrinks from $180^\circ$ to $\varepsilon_{20} = 9.10^\circ$, not at all at some layers; at $L = 20$ there are $971$ points, and the hole is still there. The staircase is the covering radius the page computes for each $L$, with no asymptotic rate fitted; the asymptotic word length is the literature result of [@rem-solovay-kitaev-literature].
+:::
+
+::: {.viz src="gate-word-polytope" height="560"}
+**The gate-word polytope lab.** Drag the rail to change the length $L$, drag the amber target on the sphere, or switch to the worst direction: cyan is where the $\{H, T\}$ words of length at most $L$ land, and their hull; magenta is the arc to the nearest reachable point, the radial gap and the empty cap. The green box is [@prop-two-axis-finite-word], as the continuous-axis contrast; everything else is the page's numbers.
 :::
 
 With this chapter, Part IV (*Higher-Dimensional Spheres — Entanglement, Topology, and Quantum Algorithms*) is complete. Across Chapters 13 through 16, we have traced how quantum geometry rises from single spheres to bipartite correlation sectors, stabilizer subspaces, invariant-plane rotations, Fourier annihilator lattices, and finite-word inscribed polytopes $P_L$ whose positive residual $\varepsilon_L > 0$ leaves the door open to Parts V and VI — spacetime and observer complexity, incompleteness diagonal escape, and self-referential cosine fixed points (whose classical analytic and number-theoretic properties are recorded in [Chapter 24](ch24-cosine-fixed-points-and-self-reference.md), [@rem-banach-dottie-hairy-ball-literature]).

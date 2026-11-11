@@ -1,0 +1,91 @@
+"""第九章地图：三根正交轴与三块正交面、从北极出发先倾后拧的两角寻址、六根有理轴的十二个球冠盖满球面。
+Chapter 9 at a glance: three orthogonal axes and three orthogonal planes, two-angle addressing from the north
+pole (tilt, then twist), and the twelve caps of the six rational axes covering the sphere.
+
+Panel I draws e₁, e₂, e₃ and the three discs they span pairwise; the script asserts the axes are orthonormal.
+Panel II turns N about e₂ by θ and then about e₃ by φ and asserts that the end point is
+(sin θ cos φ, sin θ sin φ, cos θ). Panel III draws the 45° caps about ±aᵢ/√5 for the six rational axes and
+asserts on a grid of the sphere that every point lies in some colour (the cover the chapter cites with lean=).
+"""
+
+import math
+
+from tbook import figkit
+from _ch09 import SIX_AXES, in_color, title
+
+SIZE = (740, 270)
+WRAP = True
+ALT = {
+    "zh": "三栏，各是一颗球。第一栏：三支紫色的箭头 e₁、e₂、e₃ 两两垂直，三块品红的圆盘是它们两两张成的平面 I_x、I_y、I_z。"
+          "第二栏：琥珀色的点从北极 N 出发，先沿子午线倾转 θ，再沿虚线的纬度圈拧转 φ，停在目标点上。"
+          "第三栏：六根有理轴各在两端套一个 45° 的青色球冠，共十二个，把整颗球盖满；底部一枚绿色标签 LEAN ✓。",
+    "en": "Three panels, each a sphere. Panel I: three violet arrows e₁, e₂, e₃, mutually perpendicular; three magenta discs are "
+          "the planes I_x, I_y, I_z they span in pairs. Panel II: the amber point leaves the north pole N, tilts by θ along a "
+          "meridian and then twists by φ along the dashed latitude circle, stopping at the target. Panel III: each of the six "
+          "rational axes carries a cyan 45° cap at both ends, twelve in all, covering the whole sphere; a green LEAN ✓ tag "
+          "sits at the bottom.",
+}
+
+THETA, PHI = 60, 75           # panel II, degrees
+
+
+def draw(fig):
+    one, two, three = fig.row([236, 236, 236], 270, gap=16)
+    E = ((1.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0))
+    for i in range(3):
+        for j in range(3):
+            assert figkit.dot3(E[i], E[j]) == (1.0 if i == j else 0.0)
+
+    # ---- I: three axes, three planes
+    title(one, "I　三轴与三块正交面", "I  three axes, three planes")
+    sp = one.sphere(118, 152, 84, el=20)
+    for n in E:
+        sp.disc(n, "area", fill_opacity=0.10, color="area", width=1.1)
+    for e in E:
+        sp.segment((0, 0, 0), tuple(-c for c in e), "axis", 1.2, dash="3 3")
+        sp.arrow(e, "axis", 2.4, scale=1.12)
+    sp.label(E[0], "*e*_{1}", scale=1.12, dx=-6, dy=16, size=15, color="axis", anchor="end")
+    sp.label(E[1], "*e*_{2}", scale=1.12, dx=6, dy=-6, size=15, color="axis")
+    sp.label(E[2], "*e*_{3}", scale=1.12, dx=8, dy=4, size=15, color="axis")
+    sp.label((0.62, 0.62, 0), "*I*_{z}", size=14, color="area", anchor="middle", middle=True, halo=True)
+    sp.label((0.0, 0.62, 0.62), "*I*_{x}", size=14, color="area", anchor="middle", middle=True, halo=True)
+    sp.label((0.55, 0.0, 0.7), "*I*_{y}", dx=-4, size=14, color="area", anchor="end", middle=True, halo=True)
+
+    # ---- II: tilt once, twist once
+    title(two, "II　倾一次、拧一次", "II  tilt once, twist once")
+    sp = two.sphere(118, 152, 84, el=20)
+    sp.outline()
+    N = (0.0, 0.0, 1.0)
+    p1 = figkit.rotate(N, E[1], THETA)
+    p2 = figkit.rotate(p1, E[2], PHI)
+    assert max(abs(p2[k] - figkit.sph(THETA, PHI)[k]) for k in range(3)) < 1e-12
+    sp.small_circle(E[2], THETA, "faint", 1.2, dash="3 4")
+    sp.great_circle(E[1], "faint", 1.0)
+    sp.path([N, p1], "now", 2.4, arrow=True)
+    lat = [figkit.rotate(p1, E[2], PHI * k / 60) for k in range(61)]
+    sp.curve(lat, "now", 2.4)
+    (xa, ya), (xb, yb) = sp.xy(lat[-2]), sp.xy(lat[-1])
+    two.arrow_head(xb, yb, math.degrees(math.atan2(-(yb - ya), xb - xa)), "now", head=8)
+    sp.dot(N, "dim", 4, ring="bg")
+    sp.dot(p2, "now", 5, ring="bg")
+    sp.label(N, "*N*", dx=8, dy=-6, size=15, color="dim")
+    mid = figkit.slerp(N, p1, 0.5)
+    sp.label(mid, "θ", dx=-10, size=15, color="now", anchor="end", middle=True, halo=True)
+    sp.label(figkit.rotate(p1, E[2], PHI / 2), "φ", dy=13, size=15, color="now", anchor="middle", middle=True, halo=True)
+
+    # ---- III: six rational axes, twelve caps
+    title(three, "III　六根有理轴盖满球面", "III  six rational axes cover it")
+    sp = three.sphere(118, 146, 80, el=20)
+    sp.outline()
+    for k in range(40):
+        for m in range(80):
+            x = figkit.sph(180 * (k + 0.5) / 40, 360 * m / 80)
+            assert any(in_color(x, i) for i in range(6))
+    for a in SIX_AXES:
+        u = figkit.unit(a)
+        for s in (1, -1):
+            v = tuple(s * c for c in u)
+            sp.small_circle(v, 45, "line", 1.6)
+            if sp.proj(v)[2] >= 0:
+                sp.dot(v, "line", 3.2)
+    three.chip(118, 254, "LEAN ✓", "lean", anchor="middle")

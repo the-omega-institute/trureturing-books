@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch01-reflections" data-lang="zh" data-wrap="1" viewBox="0 0 560 290" width="560" height="290" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="两幅同样的实平面图，各有两面镜子：水平的 Z 镜与 45° 斜线上的 X 镜。琥珀色的箭头 v 都从 20° 出发。左图先照 Z 镜（虚线箭头 Zv），再照 X 镜，到达 110°，紫色的弧标出逆时针转了 +90°。右图先照 X 镜（虚线箭头 Xv），再照 Z 镜，到达 −70°，紫色的弧标出顺时针转了 −90°。两种结果正好相差 180°。">
+<title>两幅同样的实平面图，各有两面镜子：水平的 Z 镜与 45° 斜线上的 X 镜。琥珀色的箭头 v 都从 20° 出发。左图先照 Z 镜（虚线箭头 Zv），再照 X 镜，到达 110°，紫色的弧标出逆时针转了 +90°。右图先照 X 镜（虚线箭头 Xv），再照 Z 镜，到达 −70°，紫色的弧标出顺时针转了 −90°。两种结果正好相差 180°。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="272" height="290" viewBox="0 0 272 290">
+<text class="tf-ink" x="136" y="22" font-size="14" text-anchor="middle" font-weight="600">先 Z 后 X：XZ</text>
+<line x1="20" y1="150" x2="260" y2="150" class="ts-dim" stroke-width="1.6" fill="none"/>
+<line x1="65.75" y1="224.25" x2="224.85" y2="65.15" class="ts-dim" stroke-width="1.6" fill="none"/>
+<text class="tf-dim" x="20" y="142" font-size="13">Z 镜</text>
+<text class="tf-dim" x="77.75" y="226.25" font-size="13">X 镜</text>
+<line x1="140" y1="150" x2="226.78" y2="181.59" class="ts-ink" stroke-width="1.6" stroke-dasharray="5 4" fill="none"/>
+<path d="M233.97 184.2 L224.22 184.68 L226.8 177.57Z" class="tf-ink"/>
+<line x1="140" y1="150" x2="108.41" y2="63.22" class="ts-ink" stroke-width="2.4" fill="none"/>
+<path d="M105.8 56.03 L112.43 63.2 L105.32 65.78Z" class="tf-ink"/>
+<line x1="140" y1="150" x2="226.78" y2="118.41" class="ts-amber" stroke-width="2.6" fill="none"/>
+<path d="M233.97 115.8 L226.8 122.43 L224.22 115.32Z" class="tf-amber"/>
+<circle cx="140" cy="150" r="3" class="tf-dim"/>
+<text class="tf-amber" x="247.12" y="115.01" font-size="15"><tspan font-style="italic">v</tspan></text>
+<text class="tf-dim ts-bg" x="249" y="194.67" font-size="14" text-anchor="middle" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">Z</tspan><tspan font-style="italic">v</tspan></text>
+<text class="tf-ink ts-bg" x="100.33" y="46" font-size="15" text-anchor="middle" stroke-width="4.2" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">X</tspan><tspan font-style="italic">Z</tspan><tspan font-style="italic">v</tspan></text>
+<path d="M181.35 134.95 L180.5 132.81 L179.55 130.71 L178.48 128.67 L177.31 126.68 L176.04 124.76 L174.67 122.91 L173.21 121.13 L171.65 119.44 L170.01 117.82 L168.28 116.29 L166.48 114.86 L164.6 113.52 L162.66 112.28 L160.66 111.15 L158.6 110.12 L156.48 109.2 L154.32 108.4 L152.13 107.7 L149.9 107.13 L147.64 106.67 L145.36 106.33 L143.07 106.11 L140.77 106.01 L138.46 106.03 L136.17 106.17 L133.88 106.43 L131.6 106.81 L129.36 107.31 L127.14 107.92 L124.95 108.65" class="ts-violet" stroke-width="2" stroke-linejoin="round" fill="none"/>
+<path d="M124.95 108.65 L131.47 102.93 L133.6 109.3Z" class="tf-violet"/>
+<text class="tf-violet ts-bg" x="167.89" y="95.58" font-size="15" text-anchor="middle" font-weight="600" stroke-width="4.2" stroke-linejoin="round" paint-order="stroke">+90°</text>
+</svg>
+<svg class="tr-fig-panel" x="288" y="0" width="272" height="290" viewBox="0 0 272 290">
+<text class="tf-ink" x="136" y="22" font-size="14" text-anchor="middle" font-weight="600">先 X 后 Z：ZX</text>
+<line x1="20" y1="150" x2="260" y2="150" class="ts-dim" stroke-width="1.6" fill="none"/>
+<line x1="65.75" y1="224.25" x2="224.85" y2="65.15" class="ts-dim" stroke-width="1.6" fill="none"/>
+<text class="tf-dim" x="20" y="142" font-size="13">Z 镜</text>
+<text class="tf-dim" x="77.75" y="226.25" font-size="13">X 镜</text>
+<line x1="140" y1="150" x2="171.59" y2="63.22" class="ts-ink" stroke-width="1.6" stroke-dasharray="5 4" fill="none"/>
+<path d="M174.2 56.03 L174.68 65.78 L167.57 63.2Z" class="tf-ink"/>
+<line x1="140" y1="150" x2="171.59" y2="236.78" class="ts-ink" stroke-width="2.4" fill="none"/>
+<path d="M174.2 243.97 L167.57 236.8 L174.68 234.22Z" class="tf-ink"/>
+<line x1="140" y1="150" x2="226.78" y2="118.41" class="ts-amber" stroke-width="2.6" fill="none"/>
+<path d="M233.97 115.8 L226.8 122.43 L224.22 115.32Z" class="tf-amber"/>
+<circle cx="140" cy="150" r="3" class="tf-dim"/>
+<text class="tf-amber" x="247.12" y="115.01" font-size="15"><tspan font-style="italic">v</tspan></text>
+<text class="tf-dim ts-bg" x="179.67" y="46" font-size="14" text-anchor="middle" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">X</tspan><tspan font-style="italic">v</tspan></text>
+<text class="tf-ink ts-bg" x="179.67" y="264" font-size="15" text-anchor="middle" stroke-width="4.2" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">Z</tspan><tspan font-style="italic">X</tspan><tspan font-style="italic">v</tspan></text>
+<path d="M181.35 134.95 L182.08 137.14 L182.69 139.36 L183.19 141.6 L183.57 143.88 L183.83 146.17 L183.97 148.46 L183.99 150.77 L183.89 153.07 L183.67 155.36 L183.33 157.64 L182.87 159.9 L182.3 162.13 L181.6 164.32 L180.8 166.48 L179.88 168.6 L178.85 170.66 L177.72 172.66 L176.48 174.6 L175.14 176.48 L173.71 178.28 L172.18 180.01 L170.56 181.65 L168.87 183.21 L167.09 184.67 L165.24 186.04 L163.32 187.31 L161.33 188.48 L159.29 189.55 L157.19 190.5 L155.05 191.35" class="ts-violet" stroke-width="2" stroke-linejoin="round" fill="none"/>
+<path d="M155.05 191.35 L161.26 185.29 L163.72 191.54Z" class="tf-violet"/>
+<text class="tf-violet ts-bg" x="199.82" y="183.29" font-size="15" text-anchor="middle" font-weight="600" stroke-width="4.2" stroke-linejoin="round" paint-order="stroke">−90°</text>
+</svg>
+</svg>

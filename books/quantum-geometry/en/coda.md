@@ -62,6 +62,10 @@ In the holographic tensor-network geometry of **[Chapter 19](ch19-tensor-network
 
 That such sites remain standing across wars and entropy, or are rebuilt nine times upon the exact same foundation (like the nine superimposed cities of Troy or the layered capitals of Chang'an), is not merely a matter of durable masonry: in our timeless geometric model, that spatial coordinate acts as a **topological stationary point** in the global time field. When a finite observer picks points step by step inside the Gram causally compatible space ($\det G > 0$), the surrounding field curvature naturally tilts toward these stationary points—causing seemingly chance journeys to slide imperceptibly toward the same basin center.
 
+::: {.viz src="spatial-attractor-deja-vu" preset="butterfly" height="500"}
+**Two starts, the same wings.** Two orbits of the Lorenz system at $(\sigma, \rho, \beta) = (10, 28, 8/3)$, cyan for round $k$ and magenta for round $k+1$, start from two distant points. After a short wander they land on the same pair of wings; the small amber dots mark each passage through the neighbourhood of the "ruin". The Lorenz attractor is a literature result, recorded in the remark below; reading the wings as a "basin" and an orbit as a "round" is an interpretive model (`MODEL`).
+:::
+
 ### 2. Forgetting Clears Surface Episodic Readings While Preserving the Soul's Intrinsic Inclination {#sec-coda-forgetting-intrinsic-inclination}
 
 This raises a profound geometric question: in Chapter 29 we saw that for a finite observer to possess a positive-volume causally compatible space ($\det G > 0$) and genuine agency, each birth initialization must be accompanied by **truncating and clearing historical anchors (forgetting)**. If the concrete names, dates, and linear narrative memories of the previous round are wiped clean, by what right do we say that the traveler who walks back into this ruin in the next round is still "the same soul"?
@@ -69,6 +73,14 @@ This raises a profound geometric question: in Chapter 29 we saw that for a finit
 In our self-referential geometric model (`MODEL`), the answer resides in the operator structure of $\psi = \psi(\psi)$:
 - **What forgetting erases** is only the one-dimensional sequence of local particle readings left on the ruler in the previous round (surface **episodic memory**, the noun `liàng`);
 - **What forgetting never erases** is the observer's **intrinsic geometric parameter tuple** as the measuring operator $\psi(\cdot)$ itself (the intrinsic inclination of the verb `liáng`)—its characteristic orthogonal deflection angle, aesthetic resonance ratio, and topological chirality preference when comparing states inside the compatible space!
+
+::: {.viz src="spatial-attractor-deja-vu" preset="fixed" height="500"}
+**Other parameters: into a point.** Change $\rho$ to $14$: the cyan and magenta rounds each spiral into a fixed point and then stay, and the pair of wings is gone. Where an orbit ends up is decided by the parameters of the equation, not by its start; reading the parameters as an "intrinsic inclination" is an interpretive model (`MODEL`).
+:::
+
+::: {.viz src="spatial-attractor-deja-vu" preset="cycle" height="500"}
+**$\rho = 160$: one closed loop.** Both rounds land on the same closed loop and tread the same place on every lap. This is a one-dimensional attractor: it repeats, with no room to spare, the "rigid 1D closed loop" of item 1 in Section 3 below (`MODEL`).
+:::
 
 Before unfolding this philosophical picture into cross-round recurrence on fractal sheets, we enclose the three classical continuous dynamical-systems theorems invoked as an analogy—the Lorenz strange attractor, its SRB physical measure, and Poincaré recurrence—inside a dedicated literature remark:
 
@@ -261,6 +273,10 @@ Within the golden cut-and-project model set, Zeckendorf coding, and torus asympt
 
 ::: proof
 Part 1 derives injectivity of `minkowskiEmbedding` and the model-set characterization from `embedding_injective`, and uses `betaContraction_mem_window` to establish $\operatorname{embedding} '' \operatorname{goldenModelSet} \subseteq \operatorname{goldenCutAndProjectSet}$. Part 2 uses $\varphi^{n+1} = F_n + F_{n+1}\varphi$ (`golden_phi_pow_eq_fib_pair`) and norm multiplicativity $\operatorname{norm}(\varphi^{n+1}) = (-1)^{n+1}$ to obtain Cassini's identity. Part 3 proves the equivalence between automaton acceptance and `NoAdjacentOnes` by structural induction, and establishes injectivity of `zeckendorfRealThread` on `NNReal` by showing that for $a > b \ge 0$, $\varphi^N(a - b) \to +\infty$ eventually exceeds $2$, forcing $\lfloor\varphi^N a\rfloor_+ \neq \lfloor\varphi^N b\rfloor_+$. Part 4 uses the nonzero golden-integer norm bound $|\operatorname{norm}(u - v)| \ge 1$ to obtain reciprocal separation, and combines geometric character-sum bounds with finite open subcovers of the compact group $G$ to prove Haar equidistribution and bounded-gap window returns. The full proof is checked by the Lean kernel.
+:::
+
+::: {.viz src="golden-cut-observer" preset="narrow" height="500"}
+**A narrow window: longer waits, still bounded.** Narrow the amber observation window to $(0.45, 0.55)$: in the first $233$ steps only $8$ cyan steps fall inside, and the longest gap, marked in magenta, stretches to $48$ steps, yet the gaps are still bounded. In the plot further down the page, the cyan share of steps inside stays no lower than the dashed magenta $1/(M + 1)$. Finitely many steps are a numerical demonstration; bounded returns for all $n$ are item 4 of the theorem above.
 :::
 
 ::: {.viz src="golden-cut-observer" height="640"}

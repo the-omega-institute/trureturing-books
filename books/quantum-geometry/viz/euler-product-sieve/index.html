@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="EULER//SIEVE · The Euler product and the sieve">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EULER//SIEVE 欧拉乘积与筛</title>
+<meta name="description" content="实轴 s > 1 上的 ζ(s) 与前 K 个素数的欧拉乘积：乘积展开里只有素因子都在清单上的整数，缺的那一截正是带着清单外素因子的整数，第一个就是下一个素数；s 越靠近 1，缺口越宽。The Euler product over the first K primes against ζ(s) on the real axis s > 1: the product's expansion holds only the integers whose prime factors are all on the list, and what is missing is exactly the integers with a prime factor off the list, the next prime first; the closer s is to 1, the wider the gap.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="euler-product-sieve">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="EULER//SIEVE">EULER<b>//</b>SIEVE</h1>
+      <div class="tagline">
+        <span class="zh">欧拉乘积与筛 · <em>有限个素数乘起来总比 ζ 少一截：少的正是带着清单外素因子的整数，s 越靠近 1 少得越多</em></span>
+        <span class="en">The Euler product and the sieve · <em>finitely many primes always fall short of ζ: what is missing is exactly the integers with a prime factor off the list, and the closer s is to 1, the more is missing</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillK"><span class="zh">素数</span><span class="en">PRIMES</span> <strong>—</strong></span>
+      <span class="pill" id="pillS">s <strong>—</strong></span>
+      <span class="pill hot" id="pillGap"><span class="zh">缺口</span><span class="en">GAP</span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="two" aria-pressed="false"><span class="code">ONLY-TWO</span><span class="cn zh">只用 2：一根轴</span><span class="cn en">Only 2: one axis</span></button>
+        <button class="preset" data-preset="near" aria-pressed="false"><span class="code">NEAR-ONE</span><span class="cn zh">s = 1.1：缺口张开</span><span class="cn en">s = 1.1: the gap opens</span></button>
+        <button class="preset" data-preset="all" aria-pressed="false"><span class="code">UP-TO-97</span><span class="cn zh">到 97：格子全青，缺口还在</span><span class="cn en">Up to 97: all cells cyan, gap still there</span></button>
+        <button class="preset" data-preset="five" aria-pressed="false"><span class="code">UP-TO-5</span><span class="cn zh">2、3、5：第一个漏网的是 7</span><span class="cn en">2, 3, 5: the first to slip through is 7</span></button>
+        <button class="preset" data-preset="remainder" aria-pressed="false"><span class="code">REMAINDER</span><span class="cn zh">筛的余项：垫底的是 7⁻ˢ</span><span class="cn en">The remainder: 7⁻ˢ at the bottom</span></button>
+        <button class="preset" data-preset="thirtyone" aria-pressed="false"><span class="code">UP-TO-31</span><span class="cn zh">到 31：漏网的从 37 起</span><span class="cn en">Up to 31: the leak starts at 37</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+    <section class="panel sec">
+      <h2><span class="zh">实轴上的 s</span><span class="en">The real point s</span><span class="aside">s &gt; 1</span></h2>
+      <div class="field">
+        <label for="sval"><span class="zh">指数 s</span><span class="en">Exponent s</span><small class="zh">也可以在舞台上拖动琥珀色竖线</small><small class="en">or drag the amber line on the stage</small></label><output id="oS" for="sval">2.00</output>
+        <input type="range" id="sval" min="1.05" max="4" step="0.01" value="2">
+      </div>
+      <p class="note"><span class="zh">时间轴把素数一个个加进清单。点一个品红格，就把它最大的素因子（连同更小的素数）放进清单。</span><span class="en">The rail puts primes on the list one at a time. Click a magenta cell to put its largest prime factor (and every smaller prime) on the list.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage still" id="stage" data-thumb aria-label="上方：实轴上的 ζ(s) 与有限个素数的乘积，以及放大的缺口；下方：整数 1 到 96，按是否在乘积的展开里着色" data-aria-en="Top: ζ(s) on the real axis against the product over finitely many primes, with the gap magnified; bottom: the integers 1 to 96, coloured by whether the product's expansion contains them">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-bl">
+        <span><i class="sw ink"></i><span class="zh">ζ(s)</span><span class="en">ζ(s)</span></span>
+        <span><i class="sw cy"></i><span class="zh">清单上素数的乘积；它展开出的整数</span><span class="en">product over the listed primes; the integers it expands into</span></span>
+        <span><i class="sw mg"></i><span class="zh">缺口；带清单外素因子的整数</span><span class="en">the gap; integers with a prime factor off the list</span></span>
+        <span><i class="sw am"></i><span class="zh">当前的 s；刚加进的素数</span><span class="en">the current s; the prime just added</span></span>
+      </div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2><span class="zh">贴近极点：谁留下</span><span class="en">Near the pole: what survives</span></h2><span id="pAMeta"></span></div>
+        <canvas id="plotA" aria-label="(s − 1) 乘以 ζ(s) 与乘以乘积，靠近 s = 1" data-aria-en="(s − 1) times ζ(s) and times the product, near s = 1"></canvas>
+      </section>
+      <section class="panel">
+        <div class="head"><h2><span class="zh">差不到 1% 要几个素数</span><span class="en">Primes needed to come within 1%</span></h2><span id="pBMeta"></span></div>
+        <canvas id="plotB" aria-label="乘积与 ζ(s) 相差不到 1% 所需的素数个数，随 s 变化" data-aria-en="The number of primes the product needs to come within 1% of ζ(s), against s"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">Re s &gt; 1</span></h2>
+      <dl class="ro">
+        <div class="key"><dt><span class="zh">缺口 ζ(s) − 乘积</span><span class="en">The gap ζ(s) − product</span></dt><dd><b id="roGap">—</b><span id="roGapSub"></span></dd></div>
+        <div class="wide"><dt><span class="zh">清单上的素数</span><span class="en">Primes on the list</span></dt><dd id="roList">—</dd></div>
+        <div class="c"><dt><span class="zh">乘积 ∏(1 − p⁻ˢ)⁻¹</span><span class="en">Product ∏(1 − p⁻ˢ)⁻¹</span></dt><dd id="roProd">—</dd></div>
+        <div><dt>ζ(s)</dt><dd id="roZeta">—</dd></div>
+        <div class="c"><dt><span class="zh">乘积占 ζ(s) 的份额</span><span class="en">Share of ζ(s) reached</span></dt><dd id="roShare">—</dd></div>
+        <div class="m"><dt><span class="zh">差不到 1% 要前几个素数</span><span class="en">Primes needed for 1%</span></dt><dd id="roNeed">—</dd></div>
+      </dl>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">对 Re(s) &gt; 1，遍历全体素数的无穷乘积 ∏(1 − p⁻ˢ)⁻¹ 等于 ζ(s)。页面只画实轴上有限个素数的部分乘积。已冻结：</span><span class="en">For Re(s) &gt; 1, the infinite product ∏(1 − p⁻ˢ)⁻¹ over all primes equals ζ(s). The page draws only partial products over finitely many primes, on the real axis. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Zeros/ZetaIdentities.riemann_zeta_euler_product" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Zeros/ZetaIdentities.lean" target="_blank" rel="noopener"><code>riemann_zeta_euler_product</code></a></span></div>
+      <p class="note" id="roNote"></p>
+    </section>
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">对 Re(s) &gt; 1，自然数上的狄利克雷级数 Σ n⁻ˢ 等于素数上的欧拉乘积：下方格子里的每个整数都是级数的一项。已冻结：</span><span class="en">For Re(s) &gt; 1, the Dirichlet series Σ n⁻ˢ over the natural numbers equals the Euler product over the primes: every integer in the grid below is one term of the series. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Zeros/ZetaUpgrade.lean" target="_blank" rel="noopener"><code>riemann_zeta_dirichlet_sum_eq_euler_product</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">当 s → 1（s ≠ 1）时 (s − 1)·ζ(s) → 1：舞台下方第一张小图里的墨色曲线走向绿色虚线。已冻结：</span><span class="en">As s → 1 (s ≠ 1), (s − 1)·ζ(s) → 1: in the first small plot under the stage the ink curve heads for the green dashed line. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Zeros/ZetaIdentities.riemann_zeta_residue_one" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Zeros/ZetaIdentities.lean" target="_blank" rel="noopener"><code>riemann_zeta_residue_one</code></a></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：截断乘积的余项 ζ(s) − ∏<sub>p ≤ p<sub>K</sub></sub>(1 − p⁻ˢ)⁻¹ 等于最大素因子大于 p<sub>K</sub> 的整数 n 的 n⁻ˢ 之和，在实数 s &gt; 1 上严格大于 p<sub>K+1</sub>⁻ˢ；ζ(2) = π²/6。页面只在画出的点上数值核对。</span><span class="en">Literature result, not formalized in this book: the remainder ζ(s) − ∏<sub>p ≤ p<sub>K</sub></sub>(1 − p⁻ˢ)⁻¹ is the sum of n⁻ˢ over the integers n whose largest prime factor exceeds p<sub>K</sub>, and for real s &gt; 1 it is strictly larger than p<sub>K+1</sub>⁻ˢ; ζ(2) = π²/6. The page checks these numerically at the points it draws.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数都是双精度实算的数值演示，不是证明：ζ(s) 用欧拉—麦克劳林求和，乘积逐个素数相乘，素数由 2 000 000 以内的筛法得到；放大镜里每一段是一个整数的 n⁻ˢ。</span><span class="en">Every number on the page is computed live in double precision, an illustration and not a proof: ζ(s) by Euler–Maclaurin summation, the product prime by prime, the primes by a sieve up to 2 000 000; each slice in the magnifier is n⁻ˢ for one integer.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="25" step="any" value="3" aria-label="清单上的素数个数" data-aria-en="Number of primes on the list">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">减一个 / 加一个素数</span><span class="en">one prime fewer / more</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">舞台上方是实轴 1 &lt; s ≤ 4 上的两条曲线：墨色的 ζ(s) 与青色的、只用前 K 个素数的乘积 ∏(1 − p⁻ˢ)⁻¹；两者之间是品红的缺口。右边的放大镜把当前 s 处的缺口按整数拆开。下方是整数 1 到 96：青色的格子出现在乘积的展开里（素因子全在清单上），品红的格子不在。时间轴把素数一个个加进清单。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>依据的章节。</b><a href="../../zh/ch22-primes-euler-products-and-zeros.html#sec-ch22-1" target="_top">第二十二章 · 22.1 一根素数轴上的等比级数</a>、<a href="../../zh/ch22-primes-euler-products-and-zeros.html#thm-riemann-zeta-euler-product" target="_top">欧拉乘积</a>与<a href="../../zh/ch22-primes-euler-products-and-zeros.html#ex-prime-log-orthogonality-and-sieve" target="_top">前三个素数的有限筛</a>。</li>
+        <li><b>已验证的定理。</b>Re(s) &gt; 1 上全体素数的欧拉乘积等于 ζ(s)：<a class="leanref" data-lean-gid="D5/S3/Zeros/ZetaIdentities.riemann_zeta_euler_product" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Zeros/ZetaIdentities.lean" target="_blank" rel="noopener"><code>riemann_zeta_euler_product</code></a>；狄利克雷级数等于欧拉乘积：<a class="leanref" data-lean-gid="D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Zeros/ZetaUpgrade.lean" target="_blank" rel="noopener"><code>riemann_zeta_dirichlet_sum_eq_euler_product</code></a>；s = 1 处的留数为 1：<a class="leanref" data-lean-gid="D5/S3/Zeros/ZetaIdentities.riemann_zeta_residue_one" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Zeros/ZetaIdentities.lean" target="_blank" rel="noopener"><code>riemann_zeta_residue_one</code></a>（均为 LEAN ✓）。Lean 的陈述对复数 s 成立；页面只取实数 s。</li>
+        <li><b>页面算的是什么。</b>ζ(s) 由欧拉—麦克劳林求和算出（前 11 项加 7 个伯努利修正），乘积逐个素数相乘。放大镜里自下而上依次是品红格子里的整数 n 的 n⁻ˢ，最底下一段是下一个素数 p<sub>K+1</sub>⁻ˢ，余下的整数合成最上面的浅色一段。主图的纵轴按“值 − 1”取对数刻度，好让 s = 2 到 4 之间的曲线不挤在一起；刻度上写的是值本身。“差不到 1% 要几个素数”逐个素数累乘，直到乘积达到 ζ(s) 的 99%；超出 2 000 000 以内的 148 933 个素数时只标“超出”。这些都是数值（NUM）。</li>
+        <li><b>文献结果与开放问题。</b>余项等于最大素因子大于 p<sub>K</sub> 的整数之和、在实数 s &gt; 1 上大于 p<sub>K+1</sub>⁻ˢ，以及 ζ(2) = π²/6，是文献结果，未在本书形式化（ARGUED）。在临界带 0 &lt; Re(s) &lt; 1 里欧拉乘积不再收敛，零点是否都在 Re(s) = 1/2 上（黎曼猜想）仍是开放问题；本页不画临界带。</li>
+      </ol>
+    </div>
+    <div class="en">
+      <p class="lede">The top of the stage shows two curves over the real axis 1 &lt; s ≤ 4: the ink curve ζ(s) and the cyan product ∏(1 − p⁻ˢ)⁻¹ over the first K primes only, with the magenta gap between them. The magnifier on the right takes the gap at the current s apart, integer by integer. Below are the integers 1 to 96: a cyan cell appears in the product's expansion (all its prime factors are on the list), a magenta one does not. The rail puts the primes on the list one at a time. The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>The chapter behind it.</b> <a href="../../en/ch22-primes-euler-products-and-zeros.html#sec-ch22-1" target="_top">Chapter 22 · 22.1, the geometric series along one prime axis</a>, <a href="../../en/ch22-primes-euler-products-and-zeros.html#thm-riemann-zeta-euler-product" target="_top">the Euler product</a> and <a href="../../en/ch22-primes-euler-products-and-zeros.html#ex-prime-log-orthogonality-and-sieve" target="_top">the finite sieve of the first three primes</a>.</li>
+        <li><b>Verified theorems.</b> On Re(s) &gt; 1 the Euler product over all primes equals ζ(s): <a class="leanref" data-lean-gid="D5/S3/Zeros/ZetaIdentities.riemann_zeta_euler_product" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Zeros/ZetaIdentities.lean" target="_blank" rel="noopener"><code>riemann_zeta_euler_product</code></a>; the Dirichlet series equals the Euler product: <a class="leanref" data-lean-gid="D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Zeros/ZetaUpgrade.lean" target="_blank" rel="noopener"><code>riemann_zeta_dirichlet_sum_eq_euler_product</code></a>; the residue at s = 1 is 1: <a class="leanref" data-lean-gid="D5/S3/Zeros/ZetaIdentities.riemann_zeta_residue_one" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Zeros/ZetaIdentities.lean" target="_blank" rel="noopener"><code>riemann_zeta_residue_one</code></a> (all LEAN ✓). Lean states them for complex s; the page takes real s only.</li>
+        <li><b>What the page computes.</b> ζ(s) comes from Euler–Maclaurin summation (eleven terms and seven Bernoulli corrections); the product is multiplied out prime by prime. From the bottom up, the magnifier stacks n⁻ˢ for the integers n of the magenta cells; the lowest slice is the next prime, p<sub>K+1</sub>⁻ˢ, and the remaining integers make up the pale slice on top. The main plot's vertical axis is logarithmic in “value − 1”, so that the curves between s = 2 and 4 do not crowd together; the ticks show the values themselves. “Primes needed for 1%” multiplies prime by prime until the product reaches 99% of ζ(s); beyond the 148 933 primes below 2 000 000 the page only says “beyond”. All of this is numerical (NUM).</li>
+        <li><b>Literature and open problems.</b> That the remainder is the sum over the integers whose largest prime factor exceeds p<sub>K</sub>, that it exceeds p<sub>K+1</sub>⁻ˢ for real s &gt; 1, and that ζ(2) = π²/6 are literature results, not formalized in this book (ARGUED). In the critical strip 0 &lt; Re(s) &lt; 1 the Euler product no longer converges, and whether every zero there lies on Re(s) = 1/2 (the Riemann hypothesis) is still open; the page does not draw the critical strip.</li>
+      </ol>
+    </div>
+    <h3 class="evh"><span class="zh">开放问题</span><span class="en">Open problem</span></h3>
+    <div class="lean open"><span class="ok">OPEN</span><span><span class="zh">黎曼猜想：临界带 0 &lt; Re(s) &lt; 1 内 ζ 的每个零点都在 Re(s) = 1/2 上。本书把它写成猜想，不附 Lean 引用；本页只画欧拉乘积收敛的实轴 s &gt; 1。</span><span class="en">The Riemann hypothesis: every zero of ζ in the critical strip 0 &lt; Re(s) &lt; 1 lies on Re(s) = 1/2. The book states it as a conjecture, without a Lean reference; this page draws only the real axis s &gt; 1, where the Euler product converges.</span></span></div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

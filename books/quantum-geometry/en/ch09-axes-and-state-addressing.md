@@ -6,9 +6,15 @@ Across Part I ([Chapter 1](ch01-measurement.md) through [Chapter 4](ch04-decoher
 
 Start with an elementary geometric question. If an observer commands only a single flat turntable — say, a phase gate rotating about one fixed axis — can that observer reach every direction in three-dimensional space? Never: a single plane traces only a one-dimensional circle. To step off that circle and reach every point on the unit sphere $S^2 \subset \mathbb{R}^3$, how many mutually orthogonal axes must the ambient space provide? And starting from the north-pole reference state, why do **one orthogonal step, then a second** suffice to address every pure-state direction on the globe?
 
+::: {.viz src="two-angle-addressing" preset="tilt" height="500"}
+**One turn draws only one circle.** Turning about $\vv{e}_2$ alone, the amber point runs once round the violet dashed meridian and comes back to the north pole $N$; the white line, the road it travelled, never leaves that one circle.
+:::
+
 This chapter turns that intuitive maxim into four precise geometric and topological results: from the existence of a unit normal perpendicular to any pair of vectors in $\mathbb{R}^3$, through two-angle addressing from the North Pole and finite-word generation of $\mathrm{SO}(3)$ from any two noncollinear axes, to an explicit rational six-axis open cover of $S^2$ free of orthogonal pairs (where each strict superlevel condition $2\langle x, a_i\rangle_{\mathbb{R}}^2 > 5\norm{x}^2$ defines a pair of antipodal open spherical caps around $\pm a_i/\norm{a_i}$, giving 6 antipodal pairs = 12 open caps on $S^2$) and its matching topological six-color lower bound.
 
-![Three orthogonal axes and Pauli bivector planes, two-angle Bloch-sphere addressing from the north pole, and a frozen rational six-axis open cover](../assets/fig-09-three-axis-addressing.svg)
+::: {.figure src="ch09-overview"}
+**Figure 09.** The chapter at a glance. Panel I: three violet axes $\vv{e}_1, \vv{e}_2, \vv{e}_3$, mutually perpendicular, and the three magenta discs they span in pairs, the rotation planes $I_x, I_y, I_z$. Panel II: the amber point leaves the North Pole $N$, tilts by $\theta$ along a meridian, then twists by $\varphi$ along the dashed latitude circle. Panel III: each of the six rational axes carries a cyan $45^\circ$ cap at both ends, and the twelve caps cover the whole sphere ([@prop-rational-six-axis-cover]).
+:::
 
 ## Three Axes and Three Bivector Planes {#sec-three-axis-pauli-bivectors}
 
@@ -29,6 +35,10 @@ Let $W = \operatorname{span}_{\mathbb{R}}\{a, b\} \subseteq \mathbb{R}^3$ be the
 :::
 
 Notice the exact scope of [@lemma-three-axis-normal]: no normalization, nonzero, or pairwise-orthogonality hypothesis is imposed on the inputs $a, b \in \mathbb{R}^3$. When $a$ and $b$ are collinear and not both zero ($\dim_{\mathbb{R}}\operatorname{span}\{a, b\} = 1$), the common unit normals form a unit circle $S^1$ in the orthogonal plane; when $a = b = 0$, the orthogonality constraints are vacuous and the common unit normals form the entire unit sphere $S^2$. The lemma asserts the existence of at least one unit vector perpendicular to both without selecting an orientation.
+
+::: {.figure src="ch09-common-normal"}
+**Any two vectors share a unit normal.** Left: $a$ and $b$ differ in length and are not perpendicular; the violet $n$ stands perpendicular to the magenta disc they span, with $-n$ dashed at the other end. Right: $a$ and $b$ are collinear, and the unit vectors perpendicular to both fill a whole violet circle ([@lemma-three-axis-normal]).
+:::
 
 Once we fix the standard orthonormal triad $\vv{e}_1 = (1, 0, 0)$, $\vv{e}_2 = (0, 1, 0)$, $\vv{e}_3 = (0, 0, 1)$, this duality between pairs of axes and normal directions locks into a clean geometric architecture:
 
@@ -69,6 +79,10 @@ Armed with the orthonormal triad $(\vv{e}_1, \vv{e}_2, \vv{e}_3)$, stand at the 
   \vv{r}(\theta, \varphi) = R_z(\varphi) R_y(\theta) N = (\sin\theta\cos\varphi,\; \sin\theta\sin\varphi,\; \cos\theta) \in S^2.
   $$
 
+::: {.viz src="two-angle-addressing" preset="address" height="500"}
+**Tilt once, twist once, and any point is reached.** First tilt by $\theta = 60^\circ$ about $\vv{e}_2$, then twist by $\varphi = 45^\circ$ about the vertical axis $\vv{e}_3$: the second turn runs along the violet dashed latitude circle at the fixed height $\cos\theta = \frac{1}{2}$, and the amber point stops in the white target ring at $x = \bigl(\frac{\sqrt{6}}{4}, \frac{\sqrt{6}}{4}, \frac{1}{2}\bigr)$, the point of [@ex-two-angle-six-axis].
+:::
+
 Why is no "third orthogonal step" needed to locate a state on the sphere? Because $S^2 \subset \mathbb{R}^3$ is a two-dimensional surface: the polar angle $\theta \in [0, \pi]$ selects the latitude circle and the azimuthal angle $\varphi \in [0, 2\pi)$ selects the meridian, so two orthogonal turns already reach every unit vector on $S^2$. (Synthesizing an arbitrary *unitary gate* in $\mathrm{SO}(3)$ or $\mathrm{SU}(2)$, as opposed to addressing a state on $S^2$, is treated in [@rem-axes-literature] and in the kernel-verified ZYZ compiler of [Chapter 26](ch26-single-qubit-rotor-compilation.md).)
 
 Two essential geometric distinctions must be kept sharp whenever we use this two-angle address:
@@ -80,6 +94,10 @@ Two essential geometric distinctions must be kept sharp whenever we use this two
    $$
 
 2. **Azimuthal redundancy at the poles**: At $\theta = 0$ (North Pole $N$) and $\theta = \pi$ (South Pole $-N$), $\sin\theta = 0$, so $\vv{r}(0, \varphi) = (0, 0, 1)$ and $\vv{r}(\pi, \varphi) = (0, 0, -1)$ for *every* $\varphi \in [0, 2\pi)$. Thus $\varphi$ is redundant at both poles, and $(\theta, \varphi)$ is a surjective coordinate parametrization rather than a global nonsingular chart on $S^2$.
+
+::: {.viz src="two-angle-addressing" preset="pole" height="500"}
+**At the south pole the twist does nothing.** Tilt by $\theta = 180^\circ$ to the south pole, then twist a full turn about the vertical axis: the amber point stays exactly where it is, and only the white flag sweeps round the dashed circle. At the poles every $\varphi$ names the same point.
+:::
 
 ## Initial Structure and Finite Rotation Words {#sec-finite-axis-words}
 
@@ -117,16 +135,33 @@ $$
 The hypothesis $\langle a, b\rangle_{\mathbb{R}}^2 < \norm{a}^2 \norm{b}^2$ ensures $a \neq 0$, $b \neq 0$, and $|\langle \hat{a}, \hat{b}\rangle_{\mathbb{R}}| < 1$ for the normalized directions $\hat{a} = \norm{a}^{-1}a$ and $\hat{b} = \norm{b}^{-1}b$. Alternating rotations from $\operatorname{axisCircle}(a)$ and $\operatorname{axisCircle}(b)$ expand the reachable latitude band on $S^2$ by a fixed positive angular increment controlled by $\sqrt{1 - \langle\hat{a},\hat{b}\rangle_{\mathbb{R}}^2} > 0$ at each stage, so finitely many alternating factors carry any unit vector to $\hat{a}$ and conjugate rotations about any axis into $\operatorname{axisCircle}(a)$. Concatenating the finite stabilizing word with the remaining axial rotation yields a finite list $l$ whose elements all lie in $\operatorname{axisCircle}(a) \cup \operatorname{axisCircle}(b)$ and whose product equals $R$. The full proof is checked by the Lean kernel.
 :::
 
+::: {.viz src="two-angle-addressing" preset="skew" height="500"}
+**Skew axes get there too, with more turns.** The violet axes are only $30^\circ$ apart: each turn about $b$ pushes the point at most $60^\circ$ further out, and the cyan dashed circle is the farthest it can be so far. Four turns, alternating about $b$ and about $a$, bring the amber point to the white target ring $110^\circ$ from $N$. The page builds this word on the spot by a greedy rule; [@thm-two-axis-finite-word] only guarantees that such a finite word exists.
+:::
+
 Keep the mathematical contract of [@thm-two-axis-finite-word] exact:
 
 1. **Why initial structure matters (and the zero-vector degenerate case)**: The inputs $a, b$ need not be unit vectors or mutually orthogonal; they only need $\langle a, b\rangle_{\mathbb{R}}^2 < \norm{a}^2 \norm{b}^2$. When Cauchy–Schwarz holds with equality ($\langle a, b\rangle_{\mathbb{R}}^2 = \norm{a}^2 \norm{b}^2$), two distinct degenerate cases arise: if $a \neq 0$ and $b \neq 0$ are **nonzero collinear axes** ($a \parallel b$), both axis circles collapse into the same abelian circle subgroup $\operatorname{axisCircle}(a) = \operatorname{axisCircle}(b) \cong \mathrm{SO}(2)$ and finite words cannot leave a single plane; if instead $a = 0$ or $b = 0$, then by the total definition $\operatorname{axisCircle}(0) = \{R \in \mathrm{Orthogonal} \mid \operatorname{determinant}(R) = 1 \land R(0) = 0\} = \mathrm{SO}(3)$ (since every linear map fixes $0$), so the stabilizer of $0$ is already all of $\mathrm{SO}(3)$ and every rotation is trivially a one-letter word even though $0$ defines no geometric rotation axis.
+
+::: {.viz src="two-angle-addressing" preset="collinear" height="500"}
+**Collinear axes are stuck in place.** At $\alpha = 0$ the violet axes $a$ and $b$ coincide: a turn about $a$ and a turn about $b$ are the same kind of turn, and both fix $N$. The amber point stays put; the white flag only turns in the horizontal plane.
+:::
+
 2. **Existence versus word-length bounds and discrete gates**: [@thm-two-axis-finite-word] allows arbitrary continuous rotations from the full subgroups $\operatorname{axisCircle}(a)$ and $\operatorname{axisCircle}(b)$ and asserts the existence of a finite list $l$ with $l.\mathrm{prod} = R$. It does **not** assert a universal word length of $2$ or $3$ for skew axes (as the angle between $a$ and $b$ shrinks, more alternating steps are needed), does **not** assert that two fixed discrete gates reach every state, and provides **no** minimal-length bound or constructive synthesis algorithm.
+
+::: {.viz src="two-angle-addressing" preset="narrow" height="500"}
+**The smaller the angle, the more the turns.** With the violet axes only $10^\circ$ apart, each turn about $b$ pushes the point at most $20^\circ$ further out, and the cyan dashed circle creeps outward one step at a time; the same target, $110^\circ$ from $N$, now takes twelve turns. This is the page's construction, not a shortest word.
+:::
 
 ## A Rational Six-Axis Cover and the Six-Color Lower Bound {#sec-rational-six-axis-atlas}
 
 Because two-angle coordinates $(\theta, \varphi)$ become singular at the poles and any single reference axis $\vv{a}$ leaves an orthogonal equator $\{x \in S^2 \mid \langle x, \vv{a}\rangle_{\mathbb{R}} = 0\}$ where inner-product overlap vanishes ([Chapter 1](ch01-measurement.md) and [Chapter 2](ch02-born-rule.md)), a natural topological question arises:
 
 **What is the minimum number of relatively open sets $U_0, \dots, U_{k-1} \subseteq S^2$ required to cover the entire unit two-sphere $S^2$ so that no single open set $U_i$ contains an orthogonal pair of vectors ($\langle x, y\rangle_{\mathbb{R}} \neq 0$ for all $x, y \in U_i$)?**
+
+::: {.figure src="ch09-antipodal-caps"}
+**One colour is a pair of antipodal caps, and no right angle fits inside it.** This is the cross-section of the sphere through the axis $\pm\hat{a}$: the cyan arcs at top and bottom are the two caps within $45^\circ$ of the axis, and the grey arcs at the sides are gaps. $x$ and $y$ in the same cap are less than $90^\circ$ apart; $x$ and $z$ in opposite caps are more than $90^\circ$ apart; a pair exactly $90^\circ$ apart never occurs.
+:::
 
 Can we construct such an orthogonality-free open atlas explicitly using only axes with integer coordinates? Panel III of Figure 09 shows that **six rational axes** suffice. In the Lean module `RationalSixAxisCover`, let $\mathrm{UnitSphere} = \{x \in \mathbb{R}^3 \mid \norm{x} = 1\}$ and define the six rational vectors `axis` in exact index order $i \in \{0, 1, 2, 3, 4, 5\}$:
 
@@ -152,6 +187,10 @@ Since $\norm{a_i}^2 = 5$ and $\norm{x}^2 = 1$ on $\mathrm{UnitSphere}$, the homo
 - It is **disconnected** (the northern cap around $+\hat{a}_i$ and the southern cap around $-\hat{a}_i$ are disjoint);
 - It **contains obtuse pairs** (picking $x$ near $+\hat{a}_i$ and $y$ near $-\hat{a}_i$ gives $\langle x, y\rangle_{\mathbb{R}} < -1/2 < 0$);
 - Yet **no two vectors inside the same $\operatorname{color}(i)$ can ever be orthogonal** ($\langle x, y\rangle_{\mathbb{R}} \neq 0$), because every vector in $\operatorname{color}(i)$ has more than half of its squared norm aligned with the single line $\mathbb{R}a_i$, leaving strictly less than half of its squared norm in the two-dimensional orthogonal plane $a_i^\perp$.
+
+::: {.viz src="two-angle-addressing" preset="three" height="500"}
+**The caps of the three coordinate axes leave gaps on the diagonals.** With only the $45^\circ$ caps around $\pm\vv{e}_1, \pm\vv{e}_2, \pm\vv{e}_3$, the amber point reaches the octant diagonal $(1, 1, 1)/\sqrt{3}$, where none of the three grey pairs of circles holds it: it sits in the magenta gap, where $\langle x, \vv{e}_j\rangle_{\mathbb{R}}^2 = 1/3 < 1/2$. The magenta dots are the gaps the page finds by sampling a grid on the sphere.
+:::
 
 ::: {.proposition #prop-rational-six-axis-cover title="Rational Six-Axis Orthogonality-Free Open Cover of the Two-Sphere" lean="D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover"}
 For the six subsets $\operatorname{color} : \operatorname{Fin} 6 \to \mathcal{P}(\mathrm{UnitSphere})$ defined by the rational axes $a_0, \dots, a_5$ above, all three properties hold:
@@ -241,12 +280,20 @@ Fix the standard basis $\vv{e}_1 = (1, 0, 0)$, $\vv{e}_2 = (0, 1, 0)$, $\vv{e}_3
    Under the strict membership condition $5 < 2(x \cdot a_i)^2$, precisely colors $0, 2, 4$ contain $x$.
 :::
 
+::: {.viz src="two-angle-addressing" preset="six" height="500"}
+**Six rational axes cover everything.** Addressed by two angles, the amber point stops at $x = \bigl(\frac{\sqrt{6}}{4}, \frac{\sqrt{6}}{4}, \frac{1}{2}\bigr)$, inside the cyan caps of colours $0, 2, 4$, as computed by hand above; the white dashed line is the great circle orthogonal to $x$, and it enters no cap of those three colours ([@prop-rational-six-axis-cover]).
+:::
+
 ::: {.remark #rem-axes-literature title="Two-Angle Parametrization, Euler Gate Decomposition, and the Six-Axis Open Cover (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** Three scope distinctions govern the classical and topological background of this chapter:
 
 1. **Two-angle state rays versus three-parameter single-qubit gates** (M. A. Nielsen & I. L. Chuang, *Quantum Computation and Quantum Information*, 10th Anniversary Ed., Cambridge University Press, 2010, §1.2 and §4.2): The coordinate formula $\vv{r}(\theta, \varphi) = (\sin\theta\cos\varphi, \sin\theta\sin\varphi, \cos\theta)$ and spinor correspondence $\lvert\psi\rangle = \cos(\theta/2)\lvert 0\rangle + e^{i\varphi}\sin(\theta/2)\lvert 1\rangle$ parametrize pure-state rays. Arbitrary single-qubit gates $U \in U(2)$ require a third Euler rotation parameter and possibly a global phase factor $e^{i\alpha}$.
 2. **Finite word existence versus gate-count complexity**: [@thm-two-axis-finite-word] proves only that a finite word in the two full continuous axis circles $\operatorname{axisCircle}(a)$ and $\operatorname{axisCircle}(b)$ exists for each $R \in \mathrm{SO}(3)$. It does not provide an optimal gate count, a discrete-alphabet compiler, or any resolution of $\mathrm{P}$ versus $\mathrm{NP}$.
 3. **Provenance and scope of the rational six-axis cover**: The rational six-axis construction in [@prop-rational-six-axis-cover] cites D. Feldman & A. Wilce, arXiv:2608.13320v1, Question 3, as recorded in the Lean source module; no claim of original novelty is made. Moreover, [@prop-rational-six-axis-cover] and [@cor-six-colors-necessary] concern open sets containing no orthogonal pair of unit vectors, not a global smooth tangent frame on $S^2$ (which is obstructed by the Hairy Ball Theorem studied in [Chapter 10](ch10-gram-geometry-and-order.md)).
+:::
+
+::: {.viz src="two-angle-addressing" height="560"}
+**The full lab for two-angle addressing and rotation words.** Drag the white target ring and change the angle $\alpha$ between the two violet axes to see which rotation word carries the amber point there, and how the cyan dashed circle caps how far from the north pole each step can reach; switch to the “Cover” scene to compare, on the same sphere, the $45^\circ$ caps of six rational axes with those of the three coordinate axes. The green boxes cite only [@thm-two-axis-finite-word], [@prop-rational-six-axis-cover] and [@cor-six-colors-necessary]; the construction of the words and the sampling of the sphere are the page's numerical illustration.
 :::
 
 Having established how two orthogonal steps address the sphere and how six rational axis caps cover it without orthogonal blind spots, we now confront a deeper puzzle: **if sequential rotations on $S^2$ manifestly depend on order ($R_x R_y \neq R_y R_x$), what does it mean to say that pairwise quantum comparisons are globally consistent and order-independent?** Let us turn to [Chapter 10](ch10-gram-geometry-and-order.md).

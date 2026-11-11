@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="PHASE//GEARS · Phase gears and the period">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PHASE//GEARS 相位齿轮与周期</title>
+<meta name="description" content="量子傅里叶变换给寄存器里的每一格 x 拧一排齿轮：第一只每格转半圈，下一只转四分之一圈，逐级减半。频率 k 的相位是 k 的二进制位选中的那几只齿轮的转角之和。把周期为 r 的梳子上各格的相位箭头首尾相接，r 整除 Q 时，除 Q/r 的倍数外箭头都绕成闭合的多边形、合成为零，谱上只剩 r 根等高的峰；不整除时峰落在 sQ/r 附近的整数上，用连分数从峰读出阶。The quantum Fourier transform turns a row of gears for every cell x of the register: the first turns half a turn per cell, the next a quarter, each half as fast. The phase of frequency k is the sum of the angles of the gears picked by the binary digits of k. Chain the phase arrows of the cells of a comb with period r head to tail: when r divides Q, every frequency except the multiples of Q/r closes into a polygon and sums to zero, leaving r equal peaks; otherwise the peaks sit on the integers near sQ/r, and continued fractions read the order from a peak.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="phase-gears">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="PHASE//GEARS">PHASE<b>//</b>GEARS</h1>
+      <div class="tagline">
+        <span class="zh">相位齿轮与周期 · <em>逐级减半转速的齿轮给每一格拧出相位；周期梳子上的相位箭头首尾相接，不共振的绕成圈抵消，只剩周期留下的峰</em></span>
+        <span class="en">Phase gears and the period · <em>gears turning ever more slowly give each cell its phase; chained along a periodic comb, off-resonant arrows close into loops and cancel, leaving the peaks of the period</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillQ">Q · r <strong>—</strong></span>
+      <span class="pill hot" id="pillK">k <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="basis" aria-pressed="false"><span class="code">ONE CELL</span><span class="cn zh">一个基态 x = 5：三只齿轮，谱是平的</span><span class="cn en">One basis state x = 5: three gears, a flat spectrum</span></button>
+        <button class="preset" data-preset="cancel" aria-pressed="false"><span class="code">CANCEL</span><span class="cn zh">k = 1：1 + i − 1 − i = 0</span><span class="cn en">k = 1: 1 + i − 1 − i = 0</span></button>
+        <button class="preset" data-preset="four" aria-pressed="false"><span class="code">PERIOD 4</span><span class="cn zh">周期 4、Q = 16：四根等高的峰</span><span class="cn en">Period 4, Q = 16: four equal peaks</span></button>
+        <button class="preset" data-preset="read" aria-pressed="false"><span class="code">READ r</span><span class="cn zh">由峰读出阶：k = 8 只读到 2</span><span class="cn en">Reading the order: k = 8 only gives 2</span></button>
+        <button class="preset" data-preset="leak" aria-pressed="false"><span class="code">NOT DIVIDING</span><span class="cn zh">周期 6、Q = 64：峰落在 sQ/r 附近</span><span class="cn en">Period 6, Q = 64: peaks near sQ/r</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">寄存器与梳子</span><span class="en">Register and comb</span><span class="aside">x₀ + jr &lt; Q</span></h2>
+      <div class="chips" id="qChips" role="group" aria-label="寄存器大小 Q" data-aria-en="Register size Q">
+        <button class="chip" data-q="8" aria-pressed="false">Q = 8</button><button class="chip" data-q="16" aria-pressed="true">Q = 16</button><button class="chip" data-q="32" aria-pressed="false">Q = 32</button><button class="chip" data-q="64" aria-pressed="false">Q = 64</button>
+      </div>
+      <div class="field">
+        <label for="r"><span class="zh">周期 r</span><span class="en">Period r</span><small class="zh">r = Q 时只有一格</small><small class="en">r = Q leaves one cell</small></label><output id="oR" for="r">4</output>
+        <input type="range" id="r" min="1" max="16" step="1" value="4">
+      </div>
+      <div class="field">
+        <label for="x0"><span class="zh">起点 x₀</span><span class="en">Offset x₀</span></label><output id="oX0" for="x0">0</output>
+        <input type="range" id="x0" min="0" max="15" step="1" value="0">
+      </div>
+      <div class="field">
+        <label for="k"><span class="zh">看哪个频率 k</span><span class="en">Frequency k to follow</span><small class="zh">也可以点谱上的柱子</small><small class="en">or click a bar of the spectrum</small></label><output id="oK" for="k">1</output>
+        <input type="range" id="k" min="0" max="15" step="1" value="1">
+      </div>
+      <div class="chips"><button class="chip" id="readBtn" aria-pressed="false"><span class="zh">由峰读出阶</span><span class="en">Read the order</span></button></div>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="舞台：一排逐级减半转速的相位齿轮、相位箭头首尾相接的链、寄存器里的周期梳子与下方的频率谱" data-aria-en="Stage: a row of phase gears each turning half as fast as the last, the chain of phase arrows laid head to tail, the periodic comb in the register and the frequency spectrum below">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="plotTitle"></h2><span id="plotMeta"></span></div>
+        <canvas id="plot" aria-label="小图：选中频率的合成箭头长度随扫过的格数变化" data-aria-en="Small plot: the length of the summed arrow of the chosen frequency as the sweep goes on"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">|α_k|² = |Σ e^(2πikx/Q)|² / (Qn)</span></h2>
+      <dl class="ro" id="ro"></dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">对 ZMod m 的任意加法子群 H 与任意 x：零化子上的特征标和 Σ<sub>k ∈ annihilator(H)</sub> character(k)(x) 在 x ∈ H 时等于 annihilator(H) 的元素个数，否则为 0。r 整除 Q、起点为 0 时，梳子 {0, r, 2r, …} 正是 Q/r 的倍数所成子群的零化子，而 character(k)(x) = character(x)(k)，所以链上的和就是这条命题的和：k 是 Q/r 的倍数时长为梳齿数，否则为 0。已冻结：</span><span class="en">For every additive subgroup H of ZMod m and every x: the character sum over the annihilator, Σ<sub>k ∈ annihilator(H)</sub> character(k)(x), is the number of elements of annihilator(H) when x ∈ H and 0 otherwise. When r divides Q and the offset is 0, the comb {0, r, 2r, …} is exactly the annihilator of the subgroup of multiples of Q/r, and character(k)(x) = character(x)(k); so the sum along the chain is this proposition's sum: as many as the comb has cells when k is a multiple of Q/r, and 0 otherwise. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Fourier/FinitePoisson.sum_annihilator_character" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Fourier/FinitePoisson.lean" target="_blank" rel="noopener"><code>sum_annihilator_character</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">两条文献结果，未在本书形式化：QFT 把 |x⟩ 写成每个比特一个赤道态的张量积，第 j 个比特的相位是 2π·2<sup>j</sup>x/Q（齿轮）；r 不整除 Q 时谱集中在 sQ/r 附近（狄利克雷核），Shor 取 Q ≥ N² 后用连分数从 k/Q 读出 s/r。页面的“读出”取分母不超过 √Q 的最后一个渐近分数。</span><span class="en">Two literature results, not formalized in this book: the QFT writes |x⟩ as a tensor product of one equatorial state per qubit, the phase of qubit j being 2π·2<sup>j</sup>x/Q (the gears); and when r does not divide Q the spectrum concentrates near sQ/r (the Dirichlet kernel), from which Shor, taking Q ≥ N², reads s/r off k/Q by continued fractions. The page's reading takes the last convergent with denominator at most √Q.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">谱上每一根柱子都是梳子上各格相位箭头的直接求和（正指数、单位化的 F₊），双精度；齿轮的转角与链上的箭头也是逐格算出的。这是数值演示，不是证明。</span><span class="en">Every bar of the spectrum is the direct sum of the phase arrows of the comb's cells (the positive-exponent, unitary F₊) in double precision; the gear angles and the arrows of the chain are computed cell by cell. A numerical illustration, not a proof.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="时间轴：扫过寄存器的格 x" data-aria-en="Rail: the cell x reached by the sweep through the register">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">一格</span><span class="en">one cell</span> · <span class="zh">点谱上的柱子选 k，点寄存器的格改起点</span><span class="en">click a bar to choose k, a cell to move the offset</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">寄存器有 Q = 2<sup>q</sup> 格。输入是梳子 {x₀, x₀ + r, x₀ + 2r, …} 上 n 格的等幅叠加；正指数单位化 QFT 之后，频率 k 的振幅是 α<sub>k</sub> = Σ<sub>x</sub> e<sup>2πikx/Q</sup> / √(Qn)。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>齿轮。</b>每只齿轮对应 k 的一个二进制位 2<sup>j</sup>：时间轴每走一格 x，它转 2<sup>j</sup>/Q 圈。最左边那只每格转半圈，只停两个位置；往右每只慢一半，停的位置多一倍。频率 k 在格 x 的相位 2πkx/Q 是 k 的二进制位选中的那几只（亮的）齿轮的转角之和。Q = 8、x = 5 时三只齿轮停在 π、π/2、5π/4，与第十五章第二步一致（文献结果，未在本书形式化）。</li>
+        <li><b>链。</b>时间轴扫过梳子上的一格，就给选中的频率 k 接上一支长为 1、方向 2πkx/Q 的青色箭头。墨色的合成箭头就是 Σ e<sup>2πikx/Q</sup>；它的长度平方除以 Qn，就是谱上第 k 根柱子的高度。</li>
+        <li><b>相消。</b>r 整除 Q、起点为 0 时，k 不是 Q/r 的倍数，箭头均匀绕一圈，链首尾相接、合成为 0；k 是 Q/r 的倍数时箭头全部同向，合成长 n。Q = 16、r = 4、k = 1 正是第十五章第四步的 1 + i + (−1) + (−i) = 0。扫描途中不共振的柱子会先长出来，再缩回 0。</li>
+        <li><b>峰。</b>品红的小三角在 sQ/r（s = 0, 1, …, r − 1）。r 整除 Q 时它们都落在整数上，每根峰高 1/r；不整除时它们落在两个整数之间，峰摊到相邻几格，离 sQ/r 最近的那些格合计占大部分概率。</li>
+        <li><b>读出阶。</b>对每个峰把 k/Q 展开成连分数，取分母不超过 √Q 的最后一个渐近分数 s/d。Q = 16、r = 4 时，k = 4、12 读出 1/4、3/4，得到 4；k = 8 读出 1/2，只得到 2（阶的真因子），要再检验；k = 0 不含信息。Q = 64、r = 6 时，k = 11 读出 1/6。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch15-grover-qft-and-period-finding.html#sec-qft-phase-gears" target="_top">第十五章 · 相位反冲与 QFT 二进制齿轮</a> · <a href="../../zh/ch15-grover-qft-and-period-finding.html#prop-finite-character-cancellation" target="_top">特征标正交相消命题</a> · <a href="../../zh/ch15-grover-qft-and-period-finding.html#rem-shor-divisibility-boundary-literature" target="_top">整除与不整除的边界（文献结果）</a> · <a href="../../zh/ch15-grover-qft-and-period-finding.html#ex-grover-four-shor-fifteen" target="_top">x = 5 的齿轮与 N = 15 的阶</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">The register has Q = 2<sup>q</sup> cells. The input is the equal superposition of the n cells of the comb {x₀, x₀ + r, x₀ + 2r, …}; after the positive-exponent unitary QFT the amplitude of frequency k is α<sub>k</sub> = Σ<sub>x</sub> e<sup>2πikx/Q</sup> / √(Qn). The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>The gears.</b> Each gear stands for one binary digit 2<sup>j</sup> of k: every cell x along the rail turns it by 2<sup>j</sup>/Q of a turn. The leftmost gear turns half a turn per cell and rests in only two positions; each gear to the right is half as fast and rests in twice as many. The phase 2πkx/Q of frequency k at cell x is the sum of the angles of the gears picked (lit) by the binary digits of k. At Q = 8 and x = 5 the three gears rest at π, π/2 and 5π/4, as in Step 2 of Chapter 15 (a literature result, not formalized in this book).</li>
+        <li><b>The chain.</b> Each time the rail passes a cell of the comb, the chosen frequency k gains a cyan arrow of length 1 pointing at 2πkx/Q. The ink resultant is Σ e<sup>2πikx/Q</sup>; its squared length divided by Qn is the height of bar k of the spectrum.</li>
+        <li><b>Cancellation.</b> When r divides Q and the offset is 0, a k that is not a multiple of Q/r turns the arrows evenly round, the chain closes on itself and sums to 0; when k is a multiple of Q/r all arrows point the same way and the sum has length n. Q = 16, r = 4, k = 1 is exactly the 1 + i + (−1) + (−i) = 0 of Step 4 of Chapter 15. During the sweep the off-resonant bars first grow and then shrink back to 0.</li>
+        <li><b>Peaks.</b> The small magenta triangles sit at sQ/r (s = 0, 1, …, r − 1). When r divides Q they all fall on integers and each peak has height 1/r; otherwise they fall between two integers, each peak spreads over neighbouring cells, and the cells nearest to sQ/r together carry most of the probability.</li>
+        <li><b>Reading the order.</b> For each peak the page expands k/Q as a continued fraction and keeps the last convergent s/d with denominator at most √Q. At Q = 16 and r = 4, k = 4 and 12 read 1/4 and 3/4, giving 4; k = 8 reads 1/2 and only gives 2 (a proper divisor of the order), which must be checked again; k = 0 carries no information. At Q = 64 and r = 6, k = 11 reads 1/6.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch15-grover-qft-and-period-finding.html#sec-qft-phase-gears" target="_top">Chapter 15 · Phase kickback and the binary gears of the QFT</a> · <a href="../../en/ch15-grover-qft-and-period-finding.html#prop-finite-character-cancellation" target="_top">character sum orthogonality</a> · <a href="../../en/ch15-grover-qft-and-period-finding.html#rem-shor-divisibility-boundary-literature" target="_top">divisible and non-divisible periods (literature)</a> · <a href="../../en/ch15-grover-qft-and-period-finding.html#ex-grover-four-shor-fifteen" target="_top">the gears of x = 5 and the order for N = 15</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

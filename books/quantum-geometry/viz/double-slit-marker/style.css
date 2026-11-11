@@ -1,0 +1,3 @@
+/* SLIT//MARKER: the shared lab layout (../assets/theme.css) carries the page. Only the cursor is set here: the
+   amber arrow on the circle can be dragged, the screen cannot (main.js switches it to grab over the circle). */
+#cv { cursor: default; touch-action: none; }

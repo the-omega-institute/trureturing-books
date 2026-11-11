@@ -1,0 +1,6 @@
+/* PHASE//GEARS: the shared lab layout (../assets/theme.css) carries the page. Put here only what belongs to this
+   visualization alone; colours come from the tokens (var(--cyan) …), never from hex values. */
+#cv { cursor: pointer; touch-action: none; }
+.tag.vi { color: var(--violet); font-size: 12px; }
+.tag.num.cy { color: var(--cyan); }
+.tag.num.hot { color: var(--amber); }
