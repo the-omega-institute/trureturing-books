@@ -8,6 +8,10 @@ Walk into an actual superconducting-qubit lab, ion-trap chamber, or NMR spectrom
 
 Who stole the missing length $1 - \norm{\vv{r}}$? Does "decoherence" mean that nature suffers an irreversible ontological decay? Closing Part I, this chapter explains the geometric mechanism of mixed states: **orthogonal record coupling and partial-trace marginalization in a larger joint space shorten the reduced local state** ([@thm-nonselective-marginal] and [@thm-reduced-access-defect], alongside C\*-algebraic representation compression [@thm-stinespring-dilation] and the general Schrödinger-picture channel dilation recorded in [@rem-stinespring-literature]). Picture a tilted spear casting a shorter shadow to get a feel for the shortening of the local Bloch vector; the partial trace itself acts on the joint density operator.
 
+::: {.figure src="ch04-overview"}
+**Figure 4.** The chapter at a glance, each panel a vertical cross-section of the Bloch ball. Panel I: the amber local arrow heads for $\lvert +\rangle$ on the shell (dashed) but stops inside at $\cos\theta_{\mathrm{env}}$. Panel II: step by step, phase damping narrows the ball into thinner cyan ellipses of the same height, closing in on the violet vertical axis. Panel III: the amber point first loses its sideways part and lands on the vertical axis, then loses $r_z$ and lands on the violet centre $\frac{1}{2}I$.
+:::
+
 ## 4.1 Pure States Are the Spherical Shell ($\|\vv{r}\| = 1$), Mixed States Are Truncated Chords Inside ($\|\vv{r}\| < 1$) {#sec-ch04-1}
 
 Start with a three-line Feynman calculation. Prepare a qubit pointing due east on the Bloch equator ($\vv{r} = +\vv{e}_1$), the pure superposition $\lvert +\rangle = \frac{1}{\sqrt{2}}(\lvert 0\rangle + \lvert 1\rangle)$ of unit transverse coherence $r_x = 1$.
@@ -32,10 +36,6 @@ Compare this with [@prop-qubit-bloch-core] from [Chapter 1](ch01-measurement.md)
 
 ::: {.viz src="bloch-noise" preset="shorten" height="500"}
 **A line that leaves the skin.** Phase damping acts step by step on $\lvert +\rangle$ and $\lvert -\rangle$ at the two ends of the equator: the amber $\rho$ and the white $\sigma$ leave the skin drawn as a thin wire and shrink along the horizontal axis towards the centre, while the cyan ball narrows at the waist. The top left of the stage reads the transverse fraction left as $\cos\theta_{\mathrm{env}}$ and gives that angle; the white line is the distance between the two states.
-:::
-
-::: {.figure src="ch04-overview"}
-**Figure 4.** The chapter at a glance, each panel a vertical cross-section of the Bloch ball. Panel I: the amber local arrow heads for $\lvert +\rangle$ on the shell (dashed) but stops inside at $\cos\theta_{\mathrm{env}}$. Panel II: step by step, phase damping narrows the ball into thinner cyan ellipses of the same height, closing in on the violet vertical axis. Panel III: the amber point first loses its sideways part and lands on the vertical axis, then loses $r_z$ and lands on the violet centre $\frac{1}{2}I$.
 :::
 
 In the sharp limit $\theta_{\mathrm{env}} = 90^\circ$ where the environment distinguishes system branches orthogonally ($\cos 90^\circ = 0$), the interaction is an isometric recording map, and turning one's gaze away from the record reproduces the exact Lüders unread state $\sum_a P_a \rho P_a$ of [Chapter 3](ch03-projectors-and-duality.md). Our first theorem proves this identity across arbitrary finite systems and outcome registers.

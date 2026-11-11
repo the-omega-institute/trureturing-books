@@ -12,6 +12,10 @@ This chapter uses the Lüders state update: for an outcome of nonzero weight, th
 
 Linear-algebra textbooks routinely treat $P^2 = P$ as a dry technical definition ("a matrix whose eigenvalues are $0$ and $1$"). Yet in the genealogical interpretation developed in this book, examining the operational structure of "being," "substance," "logical concepts," and "sequential classical records" brings an illuminating thread into focus: **across these seemingly disparate classical categories runs the shared algebraic signature $P^2 = P$.**
 
+::: {.figure src="ch03-overview"}
+**Figure 3.** The chapter at a glance. Panel I: the amber arrow $x$ is projected onto the cyan measurement line, leaving the cyan shadow $Px$, and projecting again leaves the shadow where it is. Panel II: the cyan axis $\vv{e}_3$ stands in the middle of the magenta dual plane $\star\vv{e}_3 = \vv{e}_1 \wedge \vv{e}_2$, and the amber arrow splits into a cyan part along the axis and a magenta part lying in the plane. Panel III: polarizers at $0^\circ$, $45^\circ$ and $90^\circ$ stand along a timeline; each multiplies the beam by $\frac{1}{2}$, so the transmitted share runs $1$, $\frac{1}{2}$, $\frac{1}{4}$, and it is $0$ without the $45^\circ$ one.
+:::
+
 ## 3.1 Why Even "Existence" Itself Is a Particle {#sec-ch03-1}
 
 Ask a deceptively simple operational question: **what does it actually take for something to count as an existing thing?**
@@ -26,10 +30,6 @@ In the geometric interpretation of this book, these three insights share **one a
 
 ::: {.viz src="repeated-projection" preset="twice" height="500"}
 **Project again, and nothing moves.** At the first press the amber arrow drops onto the cyan measurement line and the magenta part vanishes; at the second and third presses the arrow stays put, and "this press moved it" at the top left reads 0. A press here is a measurement along the line whose result is not read, so "a second press changes nothing" is exactly [@thm-pinching-idempotent].
-:::
-
-::: {.figure src="ch03-overview"}
-**Figure 3.** The chapter at a glance. Panel I: the amber arrow $x$ is projected onto the cyan measurement line, leaving the cyan shadow $Px$, and projecting again leaves the shadow where it is. Panel II: the cyan axis $\vv{e}_3$ stands in the middle of the magenta dual plane $\star\vv{e}_3 = \vv{e}_1 \wedge \vv{e}_2$, and the amber arrow splits into a cyan part along the axis and a magenta part lying in the plane. Panel III: polarizers at $0^\circ$, $45^\circ$ and $90^\circ$ stand along a timeline; each multiplies the beam by $\frac{1}{2}$, so the transmitted share runs $1$, $\frac{1}{2}$, $\frac{1}{4}$, and it is $0$ without the $45^\circ$ one.
 :::
 
 In an actual laboratory apparatus we rarely erect a single ray in isolation; instead we partition the space into a mutually exclusive, exhaustive family of orthogonal readout ports $\{P_k\}_{k \in \kappa}$ (such as the upper and lower beams of a Stern–Gerlach magnet or a multi-port polarizing splitter). In the Lean module `Observer/Conditioning`, this complete ruler is formalized as a **record measurement**.
