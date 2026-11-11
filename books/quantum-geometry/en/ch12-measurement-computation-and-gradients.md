@@ -6,9 +6,16 @@ At the end of [Chapter 11](ch11-pulses-and-virtual-z.md), we saw a striking reve
 
 1. **Measurement-Based Quantum Computing (MBQC)**: Once an entangled cluster resource state is prepared, no further unitary gates need to be applied during the computation. By sequentially choosing equatorial measurement angles $\alpha$ (steering the observer's attention) and feeding classical measurement outcomes forward to adapt later measurement axes, projective measurements alone drive universal quantum logic!
 2. **The Pauli Parameter-Shift Rule**: When optimizing a parametrized quantum circuit, evaluating the analytical gradient $\partial_\theta f(\theta)$ of an expectation value with respect to a single Pauli rotation angle $\theta$ requires no finite-difference limit $\delta\theta \to 0$. Because a single Pauli rotation slices a pure first-order sinusoid on the sphere, evaluating (or estimating from repeated measurement shots) the expectation value at two **orthogonal $\pm 90^\circ$ parameter settings** $\theta \pm \frac{\pi}{2}$ yields the exact analytical derivative with zero finite-difference truncation error (while finite-shot estimation retains ordinary statistical sampling uncertainty)!
+
+::: {.viz src="parameter-shift" preset="noise" height="500"}
+**The same number of shots, scatters more than ten times apart.** At $\theta = 60^\circ$ with only 100 shots per setting, each trial drops one cyan dot (half the difference a quarter turn each way) and one magenta dot (the $\pm 6^\circ$ small-step difference) on the gauge. The cyan dots crowd the dashed tangent slope with a width of about 0.035; the magenta dots spread about 0.58, some of them off the gauge. Both scatters are shot noise, and the small step magnifies it ([@rem-parameter-shift-rule-literature]).
+:::
+
 3. **Riemannian Natural Gradients and Equatorial Concentration**: Along a negative Riemannian gradient flow on a manifold, potential energy dissipates at a rate equal to the integrated squared norm of the velocity ([@thm-riemannian-gradient-dissipation]). Yet as qubit count $n$ grows and ambient dimension scales as $d = 2^n$, measure on high-dimensional spheres concentrates overwhelmingly into a narrow **equatorial belt** orthogonal to any fixed measurement axis — setting the geometric stage (under specific random-circuit design assumptions) for barren plateaus; separately, as a standalone spectral counting result for nonnegative summable sequences, a finite trace identity $\sum_j \lambda_j = RW/\pi$ supplies a sufficient upper bound on the number of modes above any threshold $\tau > 0$ ([@cor-finite-trace-mode-budget]).
 
-![MBQC cluster measurement teleportation and adaptive corrections, the exact plus/minus pi over two parameter-shift rule for a single Pauli rotation, and equatorial concentration on the restricted real-amplitude sphere](../assets/fig-12-mbqc-parameter-shift-barren.svg)
+::: {.figure src="ch12-overview"}
+**Figure 12.** The chapter at a glance: Panel I is a measuring angle becoming a gate on another node, Panel II is a quarter turn each way giving the exact slope, and Panel III is the distribution crowding onto the equator as the dimension grows. In Panel I the amber pointer is the measuring angle $\alpha$ and the dashed arrow carries the classical bit $s$ to the output node; in Panel II the amber point sits at $\theta = 60^\circ$, the two cyan points $90^\circ$ to either side, and the dashed line is the tangent; Panel III shows the exact density of $x_1$, flat for $d = 3$ and a cyan spike at the equator for $d = 300$. MBQC, the parameter-shift rule and equatorial concentration are literature results, not formalized in this book ([@rem-mbqc-gradients-literature]); the small green chip in the lower right refers only to [@cor-finite-trace-mode-budget].
+:::
 
 ## Cluster Measurements and Classical Feedforward {#sec-cluster-measurement-feedforward}
 
@@ -48,6 +55,10 @@ Now watch how measuring one qubit of a two-qubit entangled link turns the observ
    with probability $1/2$ for each outcome $s \in \{0, 1\}$ when $\lvert\psi\rangle$ is normalized.
 3. **Classical feedforward correction**: Up to a global phase, correcting the byproduct operator $X^s$ yields $H R_z(-\alpha)\lvert\psi\rangle$. Because $X R_z(-\beta) = e^{i\gamma} R_z(+\beta) X$, later measurement angles in a multi-qubit cluster must adapt to earlier random outcomes $s$ via classical feedforward.
 
+::: {.figure src="ch12-feedforward"}
+**Either outcome will do: half a turn about $x$ brings the $s = 1$ branch onto the $s = 0$ branch.** The Bloch sphere shows qubit 2 for the two outcomes: the amber point is $s = 0$, the grey point $s = 1$, each with chance one half; the amber curved arrow, half a turn about the violet $x$ axis, is the feedforward $X$. Here $\alpha = 60^\circ$ and the input is a generic state; the two chances of $\frac{1}{2}$ add to $1$, as [@lemma-measurement-branch-sum] requires. MBQC is a literature result, not formalized in this book ([@rem-mbqc-gradients-literature]).
+:::
+
 ## Pauli Angles and Exact Parameter Shift {#sec-pauli-parameter-shift}
 
 How does a measurement probability change as a Hamiltonian generator $H$ acts for real time $t \in \mathbb{R}$? In the Lean module `ProjectionProbabilityFlow` (cross-referencing Chapter 7's `#prop-projection-probability-flow`), for a finite decidable type $n$, a density state $\rho \in \mathrm{DensityState}\,n$, a Hermitian matrix $H \in M_n(\mathbb{C})$, and a star projection $P \in M_n(\mathbb{C})$ (`IsStarProjection P`, meaning $P^* = P$ and $P^2 = P$), define the evolved density $\rho_t = \operatorname{evolvedDensity}(H, \rho, t) = e^{-itH}\rho e^{itH}$ and real readout $\operatorname{projectionProbability}(H, \rho, P, t) = \operatorname{Re}\bigl(\operatorname{bornProbability}(\rho_t, P)\bigr)$.
@@ -86,6 +97,10 @@ Positivity and Hermiticity of $\rho_t$ and $P$ ensure that $\Tr(\rho_t P)$ is re
 
 When a circuit parameter $\theta$ enters a single occurrence of an involutory Pauli rotation, the classical two-sample shift formula paired with [@prop-measurement-gradient-flow] is recorded below (Panel II of Figure 12; [@rem-parameter-shift-rule-literature]).
 
+::: {.viz src="parameter-shift" preset="shift" height="500"}
+**A quarter turn each way: half the difference is the slope.** With $f = \cos\theta$ the amber point sits at $\theta = 60^\circ$ and the two cyan points at $-30^\circ$ and $150^\circ$, at heights $0.866$ and $-0.866$; half their difference, $-0.866$, is exactly the slope of the dashed tangent, which is computed from the commutator formula of [@prop-measurement-gradient-flow]. In the dial the two cyan arrows are perpendicular to the amber one, and their heights on the measured axis are these two values.
+:::
+
 ::: {.remark #rem-parameter-shift-rule-literature title="Two-Sample Parameter-Shift Rule for a Single Involutory Pauli Rotation (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** For a **single occurrence** of a Pauli rotation $R_P(\theta) = e^{-i\theta P_{\mathrm{gen}}/2}$ with $P_{\mathrm{gen}}^* = P_{\mathrm{gen}}$ and $P_{\mathrm{gen}}^2 = I$, the involution $P_{\mathrm{gen}}^2 = I$ collapses the matrix exponential into Euler's formula $R_P(\theta) = \cos(\theta/2)I - i\sin(\theta/2)P_{\mathrm{gen}}$. Conjugating any observable $O$ by $R_P(\theta)$ produces products of $\cos(\theta/2)$ and $\sin(\theta/2)$ of degree two, which by double-angle trigonometry contain only the zeroth and first harmonics $1, \cos\theta, \sin\theta$:
 
@@ -102,6 +117,14 @@ $$
 Geometrically, instead of nudging the sphere by a tiny angle $\delta\theta \ll 1$, the observer evaluates the expectation value at two **orthogonal $90^\circ$ shifts** on the sphere. Keep the boundary explicit: [@prop-measurement-gradient-flow] certifies the infinitesimal commutator derivative and its realness, whereas the finite $\pm\pi/2$ shift rule relies additionally on the single-gate involutory Pauli frequency expansion ([@rem-mbqc-gradients-literature]).
 :::
 
+::: {.viz src="parameter-shift" preset="anywhere" height="500"}
+**Another angle, another curve: still exact.** A tilted state and measured axis give the curve $f = c + a\cos\theta + b\sin\theta$, raised by the constant $c$ and shifted in phase. As $\theta$ sweeps a full turn, the cyan bar on the gauge stays on the dashed tangent line while the magenta bar (the $\pm 30^\circ$ small-step difference) always falls short; the constant $c$ cancels in the difference ([@rem-parameter-shift-rule-literature]).
+:::
+
+::: {.viz src="parameter-shift" height="560"}
+**The parameter-shift rule: the full lab.** Two scenes on one rail: the curve (drag the curve or the arrow in the dial to set the angle, switch the curve, change the small step $h$) and the shots (change the number of shots $N$ per setting and watch how the two scatters change with $N$ and $h$).
+:::
+
 ## Riemannian Gradients and Dissipation {#sec-riemannian-natural-gradient}
 
 Once gradients are evaluated on a curved state manifold $M$, steepest descent follows the intrinsic **Riemannian gradient** rather than Euclidean coordinate differences. In the Lean module `GradientDissipation`, let $E$ be a finite-dimensional real inner-product space and let $M$ be a Hausdorff (`T2Space M`), connected (`ConnectedSpace M`) smooth manifold modeled on $\mathbb{I} = \mathcal{I}(\mathbb{R}, E)$ (with $\mathrm{IR} = \mathcal{I}(\mathbb{R}, \mathbb{R})$) and equipped with a continuous Riemannian tangent-bundle structure (`RiemannianBundle`, `IsContinuousRiemannianBundle`). At $p \in M$, the Riesz gradient of $V : M \to \mathbb{R}$ is
@@ -111,6 +134,10 @@ $$
 $$
 
 The next frozen theorem proves that for any $C^1$ potential $V$ and any $C^1$ curve $x$ on $[0, T]$ ($T > 0$) whose closed-interval within-derivative (continuous on $[0, T]$, corresponding in coordinates to `ContinuousOn (fun t => derivWithin x (Set.Icc 0 T) t) (Set.Icc 0 T)`) equals $-\operatorname{actualGradient}(V, x(t))$, the full-derivative speed and squared speed are interval-integrable and the potential drop $V(x(0)) - V(x(T))$ equals the integrated squared speed.
+
+::: {.figure src="ch12-dissipation"}
+**The potential drops by exactly the area under the squared speed.** The downhill gradient flow of $V(\vv{r}) = r_z$ on the unit sphere, starting at $\vv{r} = (\frac{\sqrt{3}}{2}, 0, \frac{1}{2})$ (the amber point): the ink curve is $V$, the magenta area is the area $1.46$ under $\lvert\dot{\vv{r}}\rvert^2$ over $[0, 2.5]$, and the magenta bar on the right is the drop $V(x(0)) - V(x(T))$, also $1.46$. This is a numerical check of [@thm-riemannian-gradient-dissipation] on the flow of step 3 of [@ex-cluster-shift-and-gradient].
+:::
 
 ::: {.theorem #thm-riemannian-gradient-dissipation title="Riemannian Gradient-Flow Speed Integrability and Exact Energy Dissipation" lean="D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation"}
 Let $E$ be a finite-dimensional real inner-product space, and let $M$ be a Hausdorff connected smooth manifold modeled on $E$ with a continuous Riemannian tangent bundle. For real $T > 0$, a $C^1$ potential $V : M \to \mathbb{R}$ (`ContMDiff 𝕀 IR 1 V`), and a $C^1$ curve $x : \mathbb{R} \to M$ on $[0, T]$ (`ContMDiffOn IR 𝕀 1 x (Icc 0 T)`), suppose that at every $t \in [0, T]$ the closed-interval within-derivative satisfies
@@ -144,6 +171,14 @@ Note the mathematical contract of [@thm-riemannian-gradient-dissipation]: endpoi
 
 When we scale from a single qubit to $n$ qubits with dimension $d = 2^n$, why do high-dimensional state spaces become overwhelmingly orthogonal to any fixed measurement axis (Panel III of Figure 12; [@rem-sphere-equator-markov-literature])?
 
+::: {.viz src="equator-concentration" preset="three" height="500"}
+**On the ordinary sphere the heights of points are spread evenly.** At $d = 3$ the dots spread up and down the circle, and on the right the exact density is a vertical straight line at $1/2$; the equator belt with $\varepsilon = 0.1$ holds exactly 10% of the points (cyan), and the other 90% are magenta. The even spread of heights is a classical result of Archimedes, not formalized in this book.
+:::
+
+::: {.viz src="equator-concentration" preset="width" height="500"}
+**The higher the dimension, the more the points crowd onto the equator.** The rail raises the dimension from $d = 2$ to $d = 2^{10}$: the dots crowd onto the equator perpendicular to the measured axis, the bump on the right grows narrower and taller, and the two short ticks at $\pm 1/\sqrt{d}$ close in with it; at $d = 1024$ only 0.13% lies outside. The width $1/\sqrt{d}$ comes from $\mathbb{E}[x_1^2] = 1/d$ ([@rem-sphere-equator-markov-literature]).
+:::
+
 ::: {.remark #rem-sphere-equator-markov-literature title="Second-Moment and Markov Equatorial Concentration Bound on the Real Unit Sphere (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** On the restricted real-amplitude unit sphere $S^{d-1} \subset \mathbb{R}^d$ ($d = 2^n$), for a uniform real unit vector $x = (x_1, \dots, x_d) \in S^{d-1}$, symmetry across the $d$ coordinates gives $\mathbb{E}[x_1^2] = \frac{1}{d}$, so Markov's inequality yields
 
@@ -152,6 +187,14 @@ $$
 $$
 
 At $n = 20$ qubits ($d = 1{,}048{,}576$) and $\varepsilon = 0.1$, at least $99.9904633\%$ of the sphere lies inside the narrow equatorial band $|x_1| < 0.1$ (for the separate random-circuit barren-plateau hypotheses, see [@rem-mbqc-gradients-literature]).
+:::
+
+::: {.viz src="equator-concentration" preset="bound" height="500"}
+**The Markov bound always lies above the actual share.** At $d = 2^7 = 128$ and $\varepsilon = 0.2$ the magenta outside share is 0.023, and the bound $1/(d\varepsilon^2) = 0.195$ lies above it, more than eight times larger ([@rem-sphere-equator-markov-literature]).
+:::
+
+::: {.viz src="equator-concentration" preset="twenty" height="500"}
+**Twenty qubits: every point lies in the narrow equator belt.** At $d = 2^{20}$ and $\varepsilon = 0.1$ every dot lands on the equator, and the density is a thin needle there. The Markov bound gives $9.54 \times 10^{-5}$; the exact share, computed by the page from the incomplete beta function, is about $3 \times 10^{-2291}$. This is concentration of measure on the restricted real-amplitude model, not a law for circuit gradients ([@rem-mbqc-gradients-literature]).
 :::
 
 Separately from uniform sphere measure and random-circuit gradient laws, when a nonnegative summable sequence $\lambda_j \ge 0$ obeys a finite trace identity $\sum_{j=0}^\infty \lambda_j = \frac{R W}{\pi}$, the frozen theorem in `FiniteRankConcentrationModeBound` provides a **sufficient counting upper bound** on the number of modes above any threshold $\tau > 0$. (Keep its scope exact: summability is a sufficient condition for the upper bound $RW/(\pi\tau)$, not a necessary condition even for finite superlevel sets — for instance, the non-summable harmonic sequence $\lambda_j = 1/(j+1)$ also has finitely many terms above each $\tau > 0$ — and a finite trace budget neither prevents zero gradients nor provides an escape from barren plateaus, as finite-dimensional density matrices already have unit trace.)
@@ -173,6 +216,14 @@ $$
 
 ::: proof
 Summability of $\lambda$ with $\tau > 0$ implies that only finitely many indices $j \in \mathbb{N}$ can satisfy $\tau \le \lambda_j$. Summing $\tau \le \lambda_j$ over the finite set $S_\tau$ gives $\operatorname{ncard}(S_\tau)\,\tau \le \sum_{j \in S_\tau} \lambda_j \le \sum_{j=0}^\infty \lambda_j = \frac{R W}{\pi}$, and dividing by $\tau > 0$ yields the stated bound. The full proof is checked by the Lean kernel.
+:::
+
+::: {.viz src="eth-horizon-crossover" preset="plateau" height="500"}
+**A plateau: few modes carry the weight.** The first few modes are close to $1$, and from the ninth on the spectrum drops to zero. At the amber threshold $\theta = 0.5$, eight cyan modes clear the line while the magenta wall stands at $T/\theta = 16$ (on the page, $T$ is the trace budget $RW/\pi$ and $\theta$ is $\tau$): the count stays short of the wall, which is [@cor-finite-trace-mode-budget].
+:::
+
+::: {.viz src="eth-horizon-crossover" preset="tail" height="500"}
+**Lower threshold: more modes, never past the wall.** Switch to a power law with a long tail and lower the amber threshold all the way: more and more cyan bars clear the line, the magenta wall $T/\theta$ retreats as well, and the bars never reach it (at $\theta = 0.07$, six modes clear the line and the wall stands at $37.4$).
 :::
 
 Note that [@cor-finite-trace-mode-budget] does not separately assume $R > 0$ or $W > 0$ (the trace identity $\sum_j \lambda_j = RW/\pi$ with $\lambda_j \ge 0$ implies only that the product satisfies $R W \ge 0$, not that $R \ge 0$ and $W \ge 0$ individually — for instance, $R = -\pi$ and $W = -1$ satisfy all hypotheses), and it concerns a sufficient spectral superlevel counting bound rather than learnability, uniform sphere measure, random-circuit gradients, or a barren-plateau tail bound.
@@ -214,6 +265,10 @@ Note that [@cor-finite-trace-mode-budget] does not separately assume $R > 0$ or 
 
    so at least $99.9904633\%$ of the sphere lies in the equatorial belt $|x_1| < 0.1$ (a literature second-moment/Markov bound, not a proven circuit-gradient law or a universal $99.999\%$ statement).
 5. **Explicit check of the frozen spectral mode bound**: Instantiating [@cor-finite-trace-mode-budget] with $\lambda_j = 2^{-(j+1)}$, $R = \pi$, $W = 1$, and $\tau = 1/8$, the eigenvalues sum to $1 = RW/\pi$, precisely $j \in \{0, 1, 2\}$ satisfy $\lambda_j \ge 1/8$, and $3 \le RW/(\pi\tau) = 8$.
+:::
+
+::: {.viz src="equator-concentration" height="560"}
+**Concentration at the equator: the full lab.** The rail is the dimension $d = 2^n$ ($n$ from 1 to 20); change the belt half-width $\varepsilon$ or redraw the points. The small plot shows the width $1/\sqrt{d}$, the exact outside share and the Markov bound $1/(d\varepsilon^2)$ on logarithmic axes.
 :::
 
 ::: {.remark #rem-mbqc-gradients-literature title="One-Way Quantum Computing, Parameter Shift, Natural Gradients, and Barren Plateaus (Literature Result, Not Formalized in This Book)"}

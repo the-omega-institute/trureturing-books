@@ -567,6 +567,1338 @@
           "gid": "D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result"
         }
       ]
+    },
+    {
+      "id": "repeated-projection",
+      "code": "IDEMPOTENT//LINE",
+      "title": "反复投影",
+      "title_en": "Projecting again and again",
+      "summary": "布洛赫球里的一支箭头、一条测量线和与它垂直的对偶平面。按一次“投一次”，就是沿这条线测量而不读结果（P₊ρP₊ + P₋ρP₋，用 2×2 复矩阵实算）：箭头落到它在线上的影子，面上的那一份消失，箭头变短；再投多少次，影子都一动不动。箭头本来在线上就投不动，整个躺在对偶平面里就投成零；线上一份加面上一份拼回原箭头，纯度盈余等于概率偏离加剩余质量。五张实验卡各讲一件事，可以在第三章正文里单独引用。",
+      "summary_en": "Inside the Bloch ball: an arrow, a measurement line and the dual plane perpendicular to it. One press of “Project” is a measurement along the line whose result is not read (P₊ρP₊ + P₋ρP₋, computed with 2×2 complex matrices): the arrow drops to its shadow on the line, its part in the plane is gone and it gets shorter; press again as often as you like and the shadow does not move. An arrow already on the line cannot be moved, an arrow lying in the dual plane projects to zero, and the line part plus the plane part rebuild the arrow, so that the purity surplus is the probability deviation plus the residual mass. Each of the five experiment cards makes one of these points and can be cited on its own from Chapter 3.",
+      "path": "repeated-projection/",
+      "thumbnail": "repeated-projection/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "幂等投影",
+        "未读态",
+        "霍奇对偶",
+        "布洛赫球",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Idempotent projection",
+        "Unread state",
+        "Hodge duality",
+        "Bloch sphere",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第三章 §3.1 · 为什么说“连‘存在’本身都是一颗粒子”",
+          "label_en": "Chapter 3 §3.1 · Why even “existence” itself is a particle",
+          "href": "../zh/ch03-projectors-and-duality.html#sec-ch03-1",
+          "href_en": "../en/ch03-projectors-and-duality.html#sec-ch03-1"
+        },
+        {
+          "label": "第三章 §3.2 · 线与面的伴生宿命（霍奇对偶）",
+          "label_en": "Chapter 3 §3.2 · The inseparable fate of line and plane (Hodge duality)",
+          "href": "../zh/ch03-projectors-and-duality.html#sec-ch03-2",
+          "href_en": "../en/ch03-projectors-and-duality.html#sec-ch03-2"
+        },
+        {
+          "label": "Blueprint · Observer/Conditioning",
+          "label_en": "Blueprint · Observer/Conditioning",
+          "href": "{trureturing}/D5/S3/Observer/Conditioning.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning.unreadState_fixed_iff"
+        },
+        {
+          "gid": "D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras"
+        }
+      ]
+    },
+    {
+      "id": "bloch-noise",
+      "code": "BLOCH//NOISE",
+      "title": "三种噪声下的布洛赫球",
+      "title_en": "The Bloch ball under three noises",
+      "summary": "让相位阻尼、振幅阻尼与去极化一步步作用在整颗布洛赫球上：相位阻尼只收腰、不掉高，强度为 1 时一步把球压成竖轴（捏合）；振幅阻尼把球缩小并往北极上漂，只有北极不动；去极化让球同心缩向球心。横向寿命超过 2T₁ 时，固定北极的像会刺穿球皮（λ² ≤ a 的判据）。两个态 ρ 与 σ 之间的迹距离一步也不会变长，最后可以落到同一点。八张实验卡各讲其中一件事，可以在正文里单独引用。",
+      "summary_en": "Let phase damping, amplitude damping and depolarizing act step by step on the whole Bloch ball: phase damping narrows the waist and keeps the height, and at strength 1 squashes the ball onto the vertical axis in one step (pinching); amplitude damping shrinks the ball and lifts it towards the north pole, its only fixed point; depolarizing shrinks it evenly towards the centre. With a transverse lifetime beyond 2T₁ the image of a north-pole map pierces the skin (the criterion λ² ≤ a). The trace distance between two states ρ and σ never grows, and they may end on the same point. Each of the eight experiment cards makes one of these points and can be cited on its own from the text.",
+      "path": "bloch-noise/",
+      "thumbnail": "bloch-noise/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "布洛赫球",
+        "退相干",
+        "相位阻尼",
+        "振幅阻尼",
+        "去极化",
+        "迹距离",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Bloch ball",
+        "Decoherence",
+        "Phase damping",
+        "Amplitude damping",
+        "Depolarizing",
+        "Trace distance",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第 4.1 节 · 纯态是球皮，混合态是截短的线",
+          "label_en": "§4.1 · Pure states are the shell, mixed states are shorter chords",
+          "href": "../zh/ch04-decoherence.html#sec-ch04-1",
+          "href_en": "../en/ch04-decoherence.html#sec-ch04-1"
+        },
+        {
+          "label": "第 4.2 节 · 不用背 Kraus 算符看懂三种量子噪声",
+          "label_en": "§4.2 · Quantum noise geometrically, without Kraus operators",
+          "href": "../zh/ch04-decoherence.html#sec-ch04-2",
+          "href_en": "../en/ch04-decoherence.html#sec-ch04-2"
+        },
+        {
+          "label": "第 4.3 节 · 最大混合死点",
+          "label_en": "§4.3 · The maximally mixed dead center",
+          "href": "../zh/ch04-decoherence.html#sec-ch04-3",
+          "href_en": "../en/ch04-decoherence.html#sec-ch04-3"
+        },
+        {
+          "label": "Lean 源码 · NorthPoleBallCriterion.lean",
+          "label_en": "Lean source · NorthPoleBallCriterion.lean",
+          "href": "{trureturing}/D5/S3/QuantumChannels/ContractionGeometry/NorthPoleBallCriterion.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_contract"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/ContractionGeometry/NorthPoleBallCriterion.north_pole_ball_preserving_iff"
+        },
+        {
+          "gid": "D5/S3/Quantum/QubitWitnesses.phaseDampingIterate_apply"
+        },
+        {
+          "gid": "D5/S3/Quantum/Decoherence/CoherenceDecay.equal_superposition_coherence_tendsto_zero"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/CoherenceMassBridge.pinching_eq_self_iff_offDiag_eq_zero"
+        }
+      ]
+    },
+    {
+      "id": "double-slit-marker",
+      "code": "SLIT//MARKER",
+      "title": "双缝与路径标记 · 条纹对比度与路径可辨度落在同一个圆上",
+      "title_en": "The double slit and the path marker · fringe contrast and path distinguishability on one circle",
+      "summary": "双缝后面放一个路径标记：左缝把它写成 r_L，右缝写成 r_R。在互补圆上拖动两者的夹角 α：青色的影子是屏上的条纹对比度 V = cos α，品红的高是路径可辨度 D = sin α，点始终在圆上，D² + V² = 1（Lean 已验证）。落点一个个到达屏上；读标记的方式可以等落点到齐再定：按路径读，两行都没有条纹；按擦除方向读，同一批落点分成条纹与反条纹，合起来仍是原来的屏。标记本身带噪声时，点落进圆内（Englert 不等式，文献结果）。六张实验卡各讲一件事，可以在正文里单独引用。",
+      "summary_en": "A path marker sits behind the double slit: the left slit writes it as r_L, the right one as r_R. Drag the angle α between them on the complementarity circle: the cyan shadow is the fringe contrast on the screen, V = cos α, the magenta height is the path distinguishability, D = sin α, and the point stays on the circle, D² + V² = 1 (kernel-verified in Lean). Hits arrive on the screen one by one; how to read the marker can wait until they are all in: read it for the path and neither row shows fringes; read it to erase and the same hits split into fringes and anti-fringes that add up to the screen as it was. When the marker itself is noisy, the point falls inside the circle (Englert's inequality, a literature result). Each of the six experiment cards makes one of these points and can be cited on its own from the text.",
+      "path": "double-slit-marker/",
+      "thumbnail": "double-slit-marker/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "双缝",
+        "路径标记",
+        "互补圆",
+        "量子擦除",
+        "延迟选择",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Double slit",
+        "Path marker",
+        "Complementarity circle",
+        "Quantum eraser",
+        "Delayed choice",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "本书第六章 §6.3",
+          "label_en": "Chapter 6 §6.3",
+          "href": "../zh/ch06-geometric-product.html#sec-double-slit-delayed-choice",
+          "href_en": "../en/ch06-geometric-product.html#sec-double-slit-delayed-choice"
+        },
+        {
+          "label": "RecordCoherenceComplementarity.lean",
+          "label_en": "RecordCoherenceComplementarity.lean",
+          "href": "{trureturing}/D5/S3/Quantum/PureState/RecordCoherenceComplementarity.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/PureState/RecordCoherenceComplementarity.pure_record_distinguishability_coherence_complementarity"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass"
+        }
+      ]
+    },
+    {
+      "id": "erasure-ledger",
+      "code": "ERASURE//LEDGER",
+      "title": "擦除账本",
+      "title_en": "The erasure ledger",
+      "summary": "一个量子比特的布洛赫圆盘与一本两栏账：系统的熵、付给环境的热。转动不记账；捏合抹掉箭头横着的那一份（相干），系统的熵恰好多出这一步的相对熵 D，连做几步就一块块叠起来；理想复位把这笔熵化成热付给环境，正好碰到兰道尔下界；只用一个热浴比特交换复位，多付的一截恰好是热浴被推离平衡的 D，与第八章的数值表一致；拷贝进记录比特让局部的熵涨到 ln 2 却不付热，还能撤回。五张实验卡可以在第八章正文里单独引用。",
+      "summary_en": "The Bloch disc of one qubit and a two-column ledger: the system's entropy and the heat paid to the environment. Turning writes nothing; pinching wipes out the arrow's sideways part (its coherence) and the system's entropy rises by exactly that step's relative entropy D, block by block over several steps; the ideal reset pays the entropy out as heat that just touches the Landauer floor; resetting by a swap with a single bath qubit pays extra, exactly the D by which the bath is pushed off equilibrium, as in Chapter 8's table; copying into a record bit raises the local entropy to ln 2 with no heat at all, and can be undone. Each of the five experiment cards can be cited on its own from Chapter 8.",
+      "path": "erasure-ledger/",
+      "thumbnail": "erasure-ledger/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "兰道尔原理",
+        "相干擦除",
+        "熵产生",
+        "有限热浴",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Landauer's principle",
+        "Coherence erasure",
+        "Entropy production",
+        "Finite bath",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第八章 §8.1 · 幺正旋转的可逆性与信息擦除的不可逆性",
+          "label_en": "Chapter 8 §8.1 · Unitary reversibility versus the irreversibility of erasure",
+          "href": "../zh/ch08-erasure-and-time-arrows.html#sec-unitary-reversibility-vs-erasure",
+          "href_en": "../en/ch08-erasure-and-time-arrows.html#sec-unitary-reversibility-vs-erasure"
+        },
+        {
+          "label": "第八章 §8.2 · 相干擦除产熵与兰道尔原理的两阶段图景",
+          "label_en": "Chapter 8 §8.2 · The two-stage picture of coherence erasure and Landauer's principle",
+          "href": "../zh/ch08-erasure-and-time-arrows.html#sec-landauer-principle-geometry",
+          "href_en": "../en/ch08-erasure-and-time-arrows.html#sec-landauer-principle-geometry"
+        },
+        {
+          "label": "第八章 §8.3 · 观察者记忆与时间之箭",
+          "label_en": "Chapter 8 §8.3 · Observer memory and the arrow of time",
+          "href": "../zh/ch08-erasure-and-time-arrows.html#sec-observer-memory-time-arrow",
+          "href_en": "../en/ch08-erasure-and-time-arrows.html#sec-observer-memory-time-arrow"
+        },
+        {
+          "label": "Blueprint · EntropyProductionCoherenceDeletionIdentity",
+          "label_en": "Blueprint · EntropyProductionCoherenceDeletionIdentity",
+          "href": "{trureturing}/D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Divergence/DualAccountFull.dual_account_full"
+        },
+        {
+          "gid": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity"
+        },
+        {
+          "gid": "D5/S3/DivergenceSupport/LandauerIdentity.landauer_identity_from_balances"
+        },
+        {
+          "gid": "D5/S3/DivergenceSupport/LandauerSaturation.landauer_saturation_iff"
+        },
+        {
+          "gid": "D5/S3/DivergenceSupport/LandauerSaturation.landauer_strict_iff"
+        },
+        {
+          "gid": "D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.reduced_irreversibility_is_canonical_record_access_defect"
+        }
+      ]
+    },
+    {
+      "id": "speed-limit-zeno",
+      "code": "SPEED//ZENO",
+      "title": "速度极限与芝诺频闪",
+      "title_en": "Speed limits and the Zeno strobe",
+      "summary": "三个场景共用一条时间轴。速度极限：左边把重叠 ⟨ψ(0), ψ(t)⟩ 画成每个能级一支首尾相接的箭头，圆心就是 90° 的墙；右边画夹角随时间的曲线、速度线 ΔH·t 与墙。二能级等权叠加贴着速度线在 t = π 撞墙，三能级等权叠加弯着走、到 2.094 才撞墙，不等权叠加最多转到 2α。芝诺频闪：布洛赫球上的箭头每转 180°/N 就被拉回 |0⟩，全程留存 [cos²(π/2N)]^N 随 N 增大。首次返回：每一步问一次“回来了吗”，每根账目柱的已返回加未返回恰好是 1，平均返回时间对任何步长都是 2。六张实验卡各讲一件事，可以在第七章正文里单独引用。",
+      "summary_en": "Three scenes on one rail. Speed limit: on the left the overlap ⟨ψ(0), ψ(t)⟩ is drawn as one arrow per level, head to tail, and the centre is the 90° wall; on the right the angle rises against time below the speed line ΔH·t towards the wall. Two even levels run along the speed line into the wall at t = π, three even levels bend and reach it only at 2.094, and uneven weights turn at most 2α. Zeno strobe: on the Bloch sphere the arrow is pulled back to |0⟩ after every 180°/N, and the survival [cos²(π/2N)]^N grows with N. First return: ask “back yet?” after every step; returned plus not yet is exactly 1 on every column of the ledger, and the mean return time is 2 whatever the step. Each of the six experiment cards makes one of these points and can be cited on its own from Chapter 7.",
+      "path": "speed-limit-zeno/",
+      "thumbnail": "speed-limit-zeno/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "量子速度极限",
+        "富比尼—施图迪夹角",
+        "量子芝诺效应",
+        "首次返回",
+        "布洛赫球",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Quantum speed limit",
+        "Fubini–Study angle",
+        "Quantum Zeno effect",
+        "First return",
+        "Bloch sphere",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第七章 §7.2 · 量子速度极限",
+          "label_en": "Chapter 7 §7.2 · Quantum speed limits",
+          "href": "../zh/ch07-geometric-time-and-speed-limits.html#sec-quantum-speed-limit",
+          "href_en": "../en/ch07-geometric-time-and-speed-limits.html#sec-quantum-speed-limit"
+        },
+        {
+          "label": "第七章 §7.3 · 量子芝诺效应与首次返回",
+          "label_en": "Chapter 7 §7.3 · The quantum Zeno effect and first returns",
+          "href": "../zh/ch07-geometric-time-and-speed-limits.html#sec-quantum-zeno-effect",
+          "href_en": "../en/ch07-geometric-time-and-speed-limits.html#sec-quantum-zeno-effect"
+        },
+        {
+          "label": "Blueprint · QuantumBounds/FubiniStudyRecordTime",
+          "label_en": "Blueprint · QuantumBounds/FubiniStudyRecordTime",
+          "href": "{trureturing}/D5/S3/QuantumBounds/FubiniStudyRecordTime.lean"
+        },
+        {
+          "label": "Blueprint · ProjectionDiagnostics/MonitoredReturnConservation",
+          "label_en": "Blueprint · ProjectionDiagnostics/MonitoredReturnConservation",
+          "href": "{trureturing}/D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation"
+        }
+      ]
+    },
+    {
+      "id": "two-angle-addressing",
+      "code": "TWO//ANGLES",
+      "title": "球面两角寻址与旋转字",
+      "title_en": "Two-angle addressing and rotation words",
+      "summary": "从北极 N 出发，先绕水平轴 e₂ 倾转 θ、再绕竖轴 e₃ 拧转 φ，就到达球面上任一点 r(θ, φ)；第二步只沿高度 cos θ 不变的纬度圈走，在两极则白拧一圈。两根转轴斜着时，页面按一条贪心规则当场构造旋转字：每次绕 b 的转动最多把点推离 N 2α，所以夹角越小要转的次数越多，而两轴共线时 N 寸步难移。“覆盖”场景在同一颗球上画出六根有理轴的 12 个 45° 球冠：它们盖住整颗球，与当前点正交的大圆不进入含它的任何球冠；三根坐标轴的球冠则在卦限对角线处漏缝。八张实验卡各讲其中一件事，可以在正文里单独引用。",
+      "summary_en": "From the north pole N, tilt by θ about the horizontal axis e₂ and then twist by φ about the vertical axis e₃, and you reach any point r(θ, φ) of the sphere; the second turn runs along the latitude circle of fixed height cos θ, and at the poles it does nothing. With skew axes the page builds a rotation word on the spot by a greedy rule: each turn about b pushes the point at most 2α further from N, so a smaller angle between the axes needs more turns, and collinear axes cannot move N at all. The “Cover” scene draws, on the same sphere, the 12 caps of 45° around six rational axes: they cover the whole sphere, and the great circle orthogonal to the current point enters none of the caps that hold it; the caps of the three coordinate axes leave gaps at the octant diagonals. Each of the eight experiment cards makes one of these points and can be cited on its own from the text.",
+      "path": "two-angle-addressing/",
+      "thumbnail": "two-angle-addressing/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "布洛赫球",
+        "两角寻址",
+        "旋转字",
+        "SO(3)",
+        "球冠覆盖",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Bloch sphere",
+        "Two-angle addressing",
+        "Rotation words",
+        "SO(3)",
+        "Cap cover",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第九章 · 从北极出发的两角寻址",
+          "label_en": "Chapter 9 · Two-angle addressing from the north pole",
+          "href": "../zh/ch09-axes-and-state-addressing.html#sec-two-angle-state-address",
+          "href_en": "../en/ch09-axes-and-state-addressing.html#sec-two-angle-state-address"
+        },
+        {
+          "label": "第九章 · 初始结构与有限旋转字",
+          "label_en": "Chapter 9 · Initial structure and finite rotation words",
+          "href": "../zh/ch09-axes-and-state-addressing.html#sec-finite-axis-words",
+          "href_en": "../en/ch09-axes-and-state-addressing.html#sec-finite-axis-words"
+        },
+        {
+          "label": "第九章 · 有理六轴覆盖与六色下界",
+          "label_en": "Chapter 9 · The rational six-axis cover and the six-color bound",
+          "href": "../zh/ch09-axes-and-state-addressing.html#sec-rational-six-axis-atlas",
+          "href_en": "../en/ch09-axes-and-state-addressing.html#sec-rational-six-axis-atlas"
+        },
+        {
+          "label": "Lean 源码 · TwoAxisFiniteRotation.lean",
+          "label_en": "Lean source · TwoAxisFiniteRotation.lean",
+          "href": "{trureturing}/D5/S3/Geometry/TwoAxisFiniteRotation.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word"
+        },
+        {
+          "gid": "D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover"
+        },
+        {
+          "gid": "D5/S3/Topology/SphereOrthogonalityCover.sphere_two_open_orthogonality_free_cover_lower_six"
+        }
+      ]
+    },
+    {
+      "id": "berry-loop",
+      "code": "BERRY//LOOP",
+      "title": "球面回路与贝里相位",
+      "title_en": "Loops on the sphere and the Berry phase",
+      "summary": "布洛赫球面上一条由大圆弧连成、顶点可拖动的闭合回路。琥珀色的箭头沿回路平行移动，与沿“起点 → 内点 → 当前点”搬来的虚线参照相比，随时多转出品红扇形已扫过的面积；走回起点时，它转过的角正好是回路圈住的立体角 Ω。相邻顶点复内积的连乘积 Δ 的相位只记下一半：八分之一球 N → +X → +Y 的 Ω = π/2、arg Δ = π/4；赤道一圈 Ω = 2π，箭头看似没转、实则转满一周，四个相邻内积都是 (1 + i)/2，相位为 π；反着走，角与相位都变号而模平方一个不变。另有两种转序的对照（先 Y 后 X 停在 +X，先 X 后 Y 停在 −Y）与只在两极为零的箭头场。五张实验卡可以在第十章正文里单独引用。",
+      "summary_en": "A closed loop of great-circle arcs with draggable corners on the Bloch sphere. The amber arrow is carried along it; compared with the dashed reference carried along start → inside point → current point, it gets ahead by exactly the magenta area the fan has swept, and back at the start it has turned by the solid angle Ω the loop encloses. The product Δ of the complex inner products of neighbouring corners keeps half of that in its phase: the octant N → +X → +Y has Ω = π/2 and arg Δ = π/4; once round the equator Ω = 2π, the arrow seems not to have turned yet has turned a full circle, all four neighbouring inner products are (1 + i)/2 and the phase is π; walked backwards, the angle and the phase flip sign while not one squared modulus changes. Two rotation orders (Y then X ends at +X, X then Y at −Y) and a tangent field that vanishes only at the poles complete the page. Each of the five experiment cards can be cited on its own from Chapter 10.",
+      "path": "berry-loop/",
+      "thumbnail": "berry-loop/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "贝里相位",
+        "巴格曼不变量",
+        "平行移动",
+        "毛球定理",
+        "布洛赫球",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Berry phase",
+        "Bargmann invariant",
+        "Parallel transport",
+        "Hairy ball theorem",
+        "Bloch sphere",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第十章 · 球面转序与贝里立体角",
+          "label_en": "Chapter 10 · Rotation order and the Berry solid angle",
+          "href": "../zh/ch10-gram-geometry-and-order.html#sec-spherical-order-and-berry",
+          "href_en": "../en/ch10-gram-geometry-and-order.html#sec-spherical-order-and-berry"
+        },
+        {
+          "label": "第十章 · 毛球、霍普纤维与旋转器球",
+          "label_en": "Chapter 10 · Hairy ball, Hopf fibres and the rotor sphere",
+          "href": "../zh/ch10-gram-geometry-and-order.html#sec-hairy-ball-hopf-rotors",
+          "href_en": "../en/ch10-gram-geometry-and-order.html#sec-hairy-ball-hopf-rotors"
+        },
+        {
+          "label": "trureturing · BargmannImaginaryMaximizers.lean",
+          "label_en": "trureturing · BargmannImaginaryMaximizers.lean",
+          "href": "{trureturing}/D5/S3/Quantum/Information/BargmannImaginaryMaximizers.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Information/BargmannImaginaryMaximizers.Latitude.latitude_dot"
+        }
+      ]
+    },
+    {
+      "id": "pulse-area-virtual-z",
+      "code": "PULSE//AREA",
+      "title": "脉冲面积与虚拟 Z",
+      "title_en": "Pulse area and the virtual Z",
+      "summary": "左边是微波脉冲的包络，右边是布洛赫球：在旋转参考系里，固定相位的共振脉冲把态绕赤道上的一根轴转过的角，就是包络下的面积（品红）。方波 25 ns、10 MHz 的面积 π/2 是四分之一转，同面积的高斯波停在同一点，面积 π 是半转；失谐 5 MHz 时转轴随包络晃动，同样的面积差了约 26°；两个不同相位的脉冲换个次序，终点不同。实验室系里赤道上的态每 0.2 ns 绕竖轴一圈，两极不动（Lean 已证的本征态定态性）。虚拟 Z 不发脉冲，只把后面脉冲的相位改成 φ − λ：终点高度不变，Z 基读数相同；符号改错成 φ + λ，就从北极跑到南极。八张实验卡各讲其中一件事，可以在正文里单独引用。",
+      "summary_en": "On the left the envelope of a microwave pulse, on the right the Bloch sphere: in the rotating frame a resonant pulse of fixed phase turns the state about an axis on the equator by an angle equal to the area under the envelope (magenta). A 25 ns, 10 MHz square pulse has area π/2 and makes a quarter turn, a Gaussian of the same area stops at the same point, and area π is a half turn; detuned by 5 MHz the axis sways with the envelope and the same area misses by about 26°; two pulses of different phase end elsewhere when swapped. In the lab frame a state on the equator goes round the vertical axis every 0.2 ns while the poles stay put (the stationarity of eigenstates, proved in Lean). A virtual Z sends no pulse and only shifts the later pulses to phase φ − λ: the end point keeps its height and the Z readout is unchanged; with the wrong sign φ + λ it goes from the north pole to the south pole. Each of the eight experiment cards makes one of these points and can be cited on its own from the text.",
+      "path": "pulse-area-virtual-z/",
+      "thumbnail": "pulse-area-virtual-z/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "布洛赫球",
+        "微波脉冲",
+        "脉冲面积",
+        "旋转参考系",
+        "虚拟 Z 门",
+        "失谐",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Bloch sphere",
+        "Microwave pulses",
+        "Pulse area",
+        "Rotating frame",
+        "Virtual Z gate",
+        "Detuning",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第十一章 · 旋转坐标系与载频约分",
+          "label_en": "Chapter 11 · Rotating frames and carrier removal",
+          "href": "../zh/ch11-pulses-and-virtual-z.html#sec-rotating-frame-calibration",
+          "href_en": "../en/ch11-pulses-and-virtual-z.html#sec-rotating-frame-calibration"
+        },
+        {
+          "label": "第十一章 · 共振微波与脉冲面积",
+          "label_en": "Chapter 11 · Resonant drives and pulse area",
+          "href": "../zh/ch11-pulses-and-virtual-z.html#sec-resonant-pulse-area",
+          "href_en": "../en/ch11-pulses-and-virtual-z.html#sec-resonant-pulse-area"
+        },
+        {
+          "label": "第十一章 · 虚拟 Z 与相位参考更新",
+          "label_en": "Chapter 11 · Virtual Z and phase-reference updates",
+          "href": "../zh/ch11-pulses-and-virtual-z.html#sec-virtual-z-phase-reference",
+          "href_en": "../en/ch11-pulses-and-virtual-z.html#sec-virtual-z-phase-reference"
+        },
+        {
+          "label": "Lean 源码 · EnergyEigenstateStationarity.lean",
+          "label_en": "Lean source · EnergyEigenstateStationarity.lean",
+          "href": "{trureturing}/D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary"
+        },
+        {
+          "gid": "D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.exp_mulVec_of_eigenvector"
+        },
+        {
+          "gid": "D5/S3/Quantum/Dynamics/ObserverPullbackTraceIdentity.observer_pullback_trace_identity"
+        }
+      ]
+    },
+    {
+      "id": "parameter-shift",
+      "code": "SHIFT//RULE",
+      "title": "参数位移",
+      "title_en": "The parameter-shift rule",
+      "summary": "单扇泡利旋转门 R_y(θ) 下，期望值 f(θ) = c + a cos θ + b sin θ 是一条余弦型曲线，圆里转动的箭头在测量轴上的影子就是它。把角度左右各转 90° 取两个值，两值之差的一半正好等于由对易子公式算出的切线斜率：换一个角度、换一条这样的曲线都精确。小步长差分总比斜率短 sin h / h；有限次采样时，它把同样的散粒噪声除以 2h，散布宽十几倍。四张实验卡可以在第十二章正文里单独引用。",
+      "summary_en": "Under a single Pauli rotation R_y(θ) the expectation value f(θ) = c + a cos θ + b sin θ is a cosine-shaped curve: the shadow on the measured axis of an arrow turning in the dial. Turn the angle a quarter turn each way and read two values: half their difference equals the tangent slope given by the commutator formula, at any angle and for any such curve. A small-step difference always falls short by sin h / h, and with finitely many shots it divides the same shot noise by 2h and scatters more than ten times wider. Each of the four experiment cards can be cited on its own from Chapter 12.",
+      "path": "parameter-shift/",
+      "thumbnail": "parameter-shift/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "参数位移",
+        "期望值曲线",
+        "对易子导数",
+        "有限差分",
+        "散粒噪声",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Parameter shift",
+        "Expectation curve",
+        "Commutator derivative",
+        "Finite difference",
+        "Shot noise",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第十二章 · 泡利转角与精确参数位移",
+          "label_en": "Chapter 12 · Pauli angles and exact parameter shift",
+          "href": "../zh/ch12-measurement-computation-and-gradients.html#sec-pauli-parameter-shift",
+          "href_en": "../en/ch12-measurement-computation-and-gradients.html#sec-pauli-parameter-shift"
+        },
+        {
+          "label": "Lean · Quantum/Dynamics/ProjectionProbabilityFlow",
+          "label_en": "Lean · Quantum/Dynamics/ProjectionProbabilityFlow",
+          "href": "{trureturing}/D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.projection_probability_flow"
+        }
+      ]
+    },
+    {
+      "id": "equator-concentration",
+      "code": "EQUATOR//CROWD",
+      "title": "赤道集中",
+      "title_en": "Concentration at the equator",
+      "summary": "在 d 维实单位球面上均匀取点，看它们在一根固定测量轴上的坐标 x₁：左边把每个点按 x₁ 放在过测量轴的圆截面上，右边横着画 x₁ 的精确密度与直方图。三维时高度均匀分布；维数 d = 2ⁿ 升高，点挤向垂直于测量轴的赤道，宽度按 1/√d 缩小。马尔可夫上界 1/(dε²) 总在精确的带外份额之上：二十个量子比特、ε = 0.1 时界是 9.54 × 10⁻⁵，精确值约 3 × 10⁻²²⁹¹。赤道集中、马尔可夫上界与贫瘠高原都是文献结果，页面不画梯度。五张实验卡可以在第十二章正文里单独引用。",
+      "summary_en": "Pick points uniformly on the real unit sphere in d dimensions and look at their coordinate x₁ along one fixed measured axis: on the left each point sits at its x₁ on the section of the sphere through the axis, on the right the exact density of x₁ and the histogram are drawn sideways. In three dimensions the heights are spread evenly; as d = 2ⁿ grows the points crowd onto the equator perpendicular to the axis, in a belt that shrinks like 1/√d. The Markov bound 1/(dε²) always lies above the exact outside share: at twenty qubits and ε = 0.1 the bound is 9.54 × 10⁻⁵ and the exact share about 3 × 10⁻²²⁹¹. Equator concentration, the Markov bound and barren plateaus are literature results, and the page draws no gradients. Each of the five experiment cards can be cited on its own from Chapter 12.",
+      "path": "equator-concentration/",
+      "thumbnail": "equator-concentration/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "测度集中",
+        "高维球面",
+        "马尔可夫不等式",
+        "贫瘠高原",
+        "数值演示"
+      ],
+      "tags_en": [
+        "Concentration of measure",
+        "High-dimensional sphere",
+        "Markov inequality",
+        "Barren plateaus",
+        "Numerical illustration"
+      ],
+      "theory": [
+        {
+          "label": "第十二章 · 赤道集中与贫瘠高原的条件",
+          "label_en": "Chapter 12 · Equator concentration and conditions for barren plateaus",
+          "href": "../zh/ch12-measurement-computation-and-gradients.html#sec-equator-concentration-limits",
+          "href_en": "../en/ch12-measurement-computation-and-gradients.html#sec-equator-concentration-limits"
+        },
+        {
+          "label": "McClean 等 · 贫瘠高原（2018）",
+          "label_en": "McClean et al. · Barren plateaus (2018)",
+          "href": "https://doi.org/10.1038/s41467-018-07090-4"
+        }
+      ],
+      "lean": []
+    },
+    {
+      "id": "pairwise-shutter",
+      "code": "PAIR//SHUTTER",
+      "title": "两子丈量与快门计数",
+      "title_en": "Pairwise measurement and shutter counts",
+      "summary": "布洛赫球上两支箭头：青色的 A 是已知态，琥珀色的 B 是目标态，两者之间只有一个角 θ。快门每次只报“过”（+1）或“不过”（−1），一次过不过说不准；按得越多，“过”的比例 k/N 越贴近权重 p = Tr(ρ_A P_B) = (1 + cos θ)/2：B 向 A 的直径作垂线，垂足把直径分出的青色一段就是 p。共线时每次都过，对跖时一次也不过，90° 时一半一半而晃得最厉害；两支一起转，权重与计数都不变；B 每次取随机方向时，权重在 [0, 1] 上均匀分布。七张实验卡各讲其中一件事，可以在正文里单独引用。",
+      "summary_en": "Two arrows on the Bloch sphere: the cyan A is the known state, the amber B the target, and between them there is just one angle θ. Each shot of the shutter reports only “pass” (+1) or “fail” (−1), and no single shot can be foretold; the more shots, the closer the share of passes k/N comes to the weight p = Tr(ρ_A P_B) = (1 + cos θ)/2, which is the cyan stretch cut off on A's diameter by the foot of B's perpendicular. Collinear arrows pass every time, antipodal ones never, at 90° it is half and half with the widest wobble; turning both together changes neither the weight nor the counts; with a random direction for B at every shot the weight is uniform on [0, 1]. Each of the seven experiment cards makes one of these points and can be cited on its own from the text.",
+      "path": "pairwise-shutter/",
+      "thumbnail": "pairwise-shutter/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "两子丈量",
+        "快门计数",
+        "玻恩权重",
+        "半角公式",
+        "大数定律",
+        "帽盒定理",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Pairwise measurement",
+        "Shutter counts",
+        "Born weight",
+        "Half-angle formula",
+        "Law of large numbers",
+        "Hat-box theorem",
+        "Proved in Lean 4"
+      ],
+      "theory": [
+        {
+          "label": "本书第一章 §1.2",
+          "label_en": "Chapter 1 §1.2",
+          "href": "../zh/ch01-measurement.html#sec-ch01-2",
+          "href_en": "../en/ch01-measurement.html#sec-ch01-2"
+        },
+        {
+          "label": "本书第二章",
+          "label_en": "Chapter 2",
+          "href": "../zh/ch02-born-rule.html",
+          "href_en": "../en/ch02-born-rule.html"
+        },
+        {
+          "label": "Lean：玻恩配对权重",
+          "label_en": "Lean: Born pairing weight",
+          "href": "{trureturing}/D5/S3/Observer/Conditioning/RankOneBornPairingWeight.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/FiniteDimensional.born_probability_skeleton"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight"
+        }
+      ]
+    },
+    {
+      "id": "chsh-dial",
+      "code": "CHSH//DIAL",
+      "title": "CHSH 角度盘",
+      "title_en": "The CHSH angle dial",
+      "summary": "Alice 与 Bob 在同一张角度盘上各摆两个测量方向。贝尔态 |Φ⁺⟩ 上两方向的关联是夹角的余弦，CHSH 值是四个余弦的加减，在量尺上一段段叠起来。两侧各张开一块面积（|sin α| 与 |sin β|），它们决定这组方向的天花板 √(4 + 4|sin α sin β|)：Alice 的两个方向重合时天花板落在 2，两侧都张成直角时升到 2√2，再把 Bob 的十字架转 45°，四个余弦正好叠到 2√2。换成 360 个隐方向的经典模型，每个隐方向只给 +2 或 −2，平均怎么转都出不了 2；余弦弧与经典折线在 45° 与 135° 的四段之差合计 2√2 − 2。七张实验卡可以在第十三章正文里单独引用。",
+      "summary_en": "On one dial Alice and Bob each set two measurement directions. On the Bell state |Φ⁺⟩ two directions correlate as the cosine of their angle, and the CHSH value adds and subtracts four cosines, stacked step by step on a gauge. Each side opens an area (|sin α| and |sin β|), and these set the ceiling √(4 + 4|sin α sin β|) of the chosen directions: at 2 when Alice's two directions coincide, at 2√2 when both sides open a right angle; turn Bob's cross by 45° and the four cosines stack exactly to 2√2. Against a classical model of 360 hidden directions, each giving only +2 or −2, the mean never leaves 2 however the directions turn; the four gaps between the cosine arc and the classical polyline at 45° and 135° add up to 2√2 − 2. Each of the seven experiment cards can be cited on its own from Chapter 13.",
+      "path": "chsh-dial/",
+      "thumbnail": "chsh-dial/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "CHSH",
+        "贝尔态",
+        "Landau 恒等式",
+        "Tsirelson 界",
+        "隐变量模型",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "CHSH",
+        "Bell state",
+        "Landau identity",
+        "Tsirelson bound",
+        "Hidden-variable model",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第十三章 · CHSH 平方：正交面积的换位子项",
+          "label_en": "Chapter 13 · The CHSH square: its commutator area term",
+          "href": "../zh/ch13-entanglement-and-chsh.html#sec-chsh-commutator-area",
+          "href_en": "../en/ch13-entanglement-and-chsh.html#sec-chsh-commutator-area"
+        },
+        {
+          "label": "第十三章 · 45° 余弦与固定 CHSH 极值",
+          "label_en": "Chapter 13 · The 45° cosine and the fixed CHSH maximum",
+          "href": "../zh/ch13-entanglement-and-chsh.html#sec-bell-45-tsirelson",
+          "href_en": "../en/ch13-entanglement-and-chsh.html#sec-bell-45-tsirelson"
+        },
+        {
+          "label": "Lean · QuantumBounds/ClassicalFiberBound",
+          "label_en": "Lean · QuantumBounds/ClassicalFiberBound",
+          "href": "{trureturing}/D5/S3/QuantumBounds/ClassicalFiberBound.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/QuantumBounds/ClassicalFiberBound.classical_chsh_abs_le_two"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/LandauCommutingCollapse.chsh_square_eq_four_of_local_pair_commutes"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/CHSHSpectrum.chsh_spectrum"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/TsirelsonTightness.bell_chsh_state_expectation_is_greatest"
+        },
+        {
+          "gid": "D5/S3/QuantumBounds/PeritoTsirelson.bell_value_le"
+        }
+      ]
+    },
+    {
+      "id": "syndrome-decoding",
+      "code": "SYNDROME//DECODE",
+      "title": "综合征解码",
+      "title_en": "Syndrome decoding",
+      "summary": "三比特重复码：两道校验 Z₁Z₂、Z₂Z₃ 只问相邻两个比特一不一致。翻一个比特，亮起的校验指出是哪一个，柱子整个搬进另一间正交的房，翻回去，叠加原样回来；四分支混合按权重拼回原态（Tr σ · ρ）；翻两个时灯指错，翻相位时灯不亮。",
+      "summary_en": "The three-qubit repetition code: the two checks Z₁Z₂ and Z₂Z₃ only ask whether neighbouring qubits agree. Flip one qubit and the lit checks point at it, the bars move whole into another orthogonal room, and flipping back returns the superposition; a four-branch mixture adds back up to the state by weight (Tr σ · ρ); with two flips the lights point wrong, with a phase flip they stay dark.",
+      "path": "syndrome-decoding/",
+      "thumbnail": "syndrome-decoding/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "量子纠错",
+        "综合征",
+        "重复码",
+        "稳定子"
+      ],
+      "tags_en": [
+        "quantum error correction",
+        "syndrome",
+        "repetition code",
+        "stabilizers"
+      ],
+      "theory": [
+        {
+          "label": "本书第十四章 · 正交综合征中的逻辑恢复",
+          "label_en": "Chapter 14 · logical recovery on orthogonal syndromes",
+          "href": "../zh/ch14-cloning-codes-and-braids.html#sec-orthogonal-syndrome-recovery",
+          "href_en": "../en/ch14-cloning-codes-and-braids.html#sec-orthogonal-syndrome-recovery"
+        },
+        {
+          "label": "Blueprint · OrthogonalSyndromeDecoding",
+          "label_en": "Blueprint · OrthogonalSyndromeDecoding",
+          "href": "{trureturing}/D5/S3/Quantum/Recovery/OrthogonalSyndromeDecoding.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Recovery/OrthogonalSyndromeDecoding.orthogonal_syndrome_recovery"
+        },
+        {
+          "gid": "D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank.pauli_word_mul"
+        }
+      ]
+    },
+    {
+      "id": "braiding",
+      "code": "BRAID//STRANDS",
+      "title": "编织",
+      "title_en": "Braiding",
+      "summary": "平面里的粒子随时间往上走出世界线；交换两颗时谁从前面过，记在第三个方向上。颜色顺着绳子往上传：反着再交换一次就回来，同向交换两次回不来，三股的两种顺序落在同一处（Yang–Baxter）。把编织首尾接上，数回得来的着色：σ₁ 有 3 个，σ₁³ 有 9 个，添一股不变；换成不幂等的架，添一股就一个也不剩。",
+      "summary_en": "Particles in a plane trace world lines as time goes up; when two exchange, which one passes in front is kept in the third direction. Colors ride up the strands: the opposite exchange undoes one, two the same way do not, and the two orders on three strands land in the same place (Yang–Baxter). Close the braid and count the colorings that come back: 3 for σ₁, 9 for σ₁³, unchanged when a strand is added; with a rack that is not a quandle, adding a strand leaves none.",
+      "path": "braiding/",
+      "thumbnail": "braiding/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "编织",
+        "世界线",
+        "Yang–Baxter",
+        "架着色",
+        "Markov 稳定化"
+      ],
+      "tags_en": [
+        "braids",
+        "world lines",
+        "Yang–Baxter",
+        "rack colorings",
+        "Markov stabilization"
+      ],
+      "theory": [
+        {
+          "label": "本书第十四章 · 二维编织与第三正交方向",
+          "label_en": "Chapter 14 · planar braids and the third orthogonal direction",
+          "href": "../zh/ch14-cloning-codes-and-braids.html#sec-braids-and-third-axis",
+          "href_en": "../en/ch14-cloning-codes-and-braids.html#sec-braids-and-third-axis"
+        },
+        {
+          "label": "本书第十四章 · Markov 稳定化与着色计数",
+          "label_en": "Chapter 14 · Markov stabilization and coloring counts",
+          "href": "../zh/ch14-cloning-codes-and-braids.html#sec-markov-stabilization-coloring-count",
+          "href_en": "../en/ch14-cloning-codes-and-braids.html#sec-markov-stabilization-coloring-count"
+        },
+        {
+          "label": "Blueprint · BraidColoringTransport",
+          "label_en": "Blueprint · BraidColoringTransport",
+          "href": "{trureturing}/D5/S0/Certificates/Quandles/BraidColoringTransport.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S0/Certificates/Quandles/BraidColoringTransport.crossing_yang_baxter"
+        },
+        {
+          "gid": "D5/S3/Topology/QuandleMarkovColoring.quandle_coloring_markov_invariant"
+        }
+      ]
+    },
+    {
+      "id": "walk-spreading",
+      "code": "WALK//SPREAD",
+      "title": "游走扩散",
+      "title_en": "How walks spread",
+      "summary": "同一条线（一个足够长的圈 ZMod p）上，量子游走与经典随机游走从同一个原点出发，并排画在线的上下两侧。量子的一份按正文的 Hadamard 单步规则带着硬币相干地走，两个尖峰贴着 ±n 往外跑，宽度按步数 n 线性长大；经典的一份每步左右各 ½，宽度只按 √n 长大，走 50 步时两者相差 3.83 倍。硬币取 c* = (1, i)/√2 时每一对镜像模式 (0, x)、(1, −x) 都均分概率，分布左右对称；换成同样一半一半的实硬币 (1, 1)/√2，分布就偏向一边。圈只有 9 个点时游走绕回来，对称仍在。五张实验卡可以在第十六章正文里单独引用。",
+      "summary_en": "On one line (a long enough cycle ZMod p) a quantum walk and a classical random walk start from the same origin, drawn above and below the line. The quantum one follows the text's Hadamard step, moving coherently with its coin: its two peaks run out next to ±n and its width grows linearly in the number of steps n. The classical one steps left or right with probability ½ and widens only like √n; after fifty steps they are 3.83 times apart. With the coin c* = (1, i)/√2 every mirror pair of modes (0, x), (1, −x) splits its probability evenly and the distribution is symmetric; a real coin (1, 1)/√2, half and half as well, tilts it to one side. On a cycle of only nine points the walk wraps round and the symmetry stays. Each of the five experiment cards can be cited on its own from Chapter 16.",
+      "path": "walk-spreading/",
+      "thumbnail": "walk-spreading/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "量子游走",
+        "Hadamard 硬币",
+        "随机游走",
+        "扩散宽度",
+        "对称硬币",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Quantum walk",
+        "Hadamard coin",
+        "Random walk",
+        "Spreading width",
+        "Symmetric coin",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第十六章 · 图上游走：相干叠加与适用边界",
+          "label_en": "Chapter 16 · Walks on graphs: coherence and its limits",
+          "href": "../zh/ch16-qsvt-walks-and-compilation.html#sec-quantum-walk-interference",
+          "href_en": "../en/ch16-qsvt-walks-and-compilation.html#sec-quantum-walk-interference"
+        },
+        {
+          "label": "第十六章 · 对称硬币引理",
+          "label_en": "Chapter 16 · The symmetric-coin lemma",
+          "href": "../zh/ch16-qsvt-walks-and-compilation.html#lemma-symmetric-coin-walk",
+          "href_en": "../en/ch16-qsvt-walks-and-compilation.html#lemma-symmetric-coin-walk"
+        },
+        {
+          "label": "Lean 源码 · SymmetricCoinMaximalWalkEntanglement",
+          "label_en": "Lean source · SymmetricCoinMaximalWalkEntanglement",
+          "href": "{trureturing}/D5/S3/Quantum/Walks/SymmetricCoinMaximalWalkEntanglement.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Walks/SymmetricCoinMaximalWalkEntanglement.result"
+        }
+      ]
+    },
+    {
+      "id": "gate-word-polytope",
+      "code": "GATE//POLYTOPE",
+      "title": "门字多面体",
+      "title_en": "The polytope of gate words",
+      "summary": "从北极出发，用 H 与 T 两个门拼出长度不超过 L 的门字，每个门字把北极送到布洛赫球面上的一点（按第十六章例题的转动 R_H、R_T 逐层算出，每点标出最短门字）。这些点只有有限个：点数 1、2、3、5、8、13、19……远小于 2^(L+1) − 1。它们的凸包是内接于球的平直多面体：门长 1 是一条线段，门长 3 第一次成为立体却不含球心，从门长 5 起包住球心，可把棱投回球皮成为测地网格。拖动琥珀色的目标，品红的弧与半径段给出它到最近可达点的角度与径向间隙 1 − h；切到最坏方向，品红虚线圈出最大的空球冠 ε_L，它随 L 一级级缩小（L = 20 时 971 个点，ε = 9.10°），却在任何有限 L 下都不为零。五张实验卡可以在第十六章正文里单独引用。",
+      "summary_en": "Starting from the north pole, the gates H and T make words of length at most L, and each word carries the pole to a point of the Bloch sphere (computed layer by layer with the rotations R_H, R_T of the worked example in Chapter 16, each point labelled with a shortest word). There are only finitely many: 1, 2, 3, 5, 8, 13, 19, … points, far below 2^(L+1) − 1. Their convex hull is a flat polytope inscribed in the sphere: at length 1 it is a segment, at length 3 it is solid for the first time but misses the centre, and from length 5 on it holds the centre, so that its edges project onto the sphere as a geodesic mesh. Drag the amber target, and the magenta arc and piece of radius give its angle to the nearest reachable point and the radial gap 1 − h; switch to the worst direction, and dashed magenta circles the largest empty cap ε_L, which shrinks step by step with L (971 points and ε = 9.10° at L = 20) yet never vanishes for a finite L. Each of the five experiment cards can be cited on its own from Chapter 16.",
+      "path": "gate-word-polytope/",
+      "thumbnail": "gate-word-polytope/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "门编译",
+        "H 与 T 门",
+        "布洛赫球",
+        "凸包",
+        "覆盖半径",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Gate compilation",
+        "H and T gates",
+        "Bloch sphere",
+        "Convex hull",
+        "Covering radius",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第十六章 · 有限门字与三维割圆多面体",
+          "label_en": "Chapter 16 · Finite gate words and the polytope",
+          "href": "../zh/ch16-qsvt-walks-and-compilation.html#sec-finite-gate-polytope",
+          "href_en": "../en/ch16-qsvt-walks-and-compilation.html#sec-finite-gate-polytope"
+        },
+        {
+          "label": "第十六章 · L ≤ 3 的五顶点验算",
+          "label_en": "Chapter 16 · The five vertices for L ≤ 3",
+          "href": "../zh/ch16-qsvt-walks-and-compilation.html#ex-finite-ht-polytope",
+          "href_en": "../en/ch16-qsvt-walks-and-compilation.html#ex-finite-ht-polytope"
+        },
+        {
+          "label": "Lean 源码 · TwoAxisFiniteRotation",
+          "label_en": "Lean source · TwoAxisFiniteRotation",
+          "href": "{trureturing}/D5/S3/Geometry/TwoAxisFiniteRotation.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word"
+        }
+      ]
+    },
+    {
+      "id": "grover-reflections",
+      "code": "GROVER//REFLECT",
+      "title": "Grover 两次反射",
+      "title_en": "Grover's two reflections",
+      "summary": "Grover 搜索的每一步是两面镜子：先对失败轴照一次，再对初始态 |s⟩ 那条线照一次，合起来在目标与失败两轴张成的平面里转 2θ，sin θ = 1/√N；第 n 步后箭头停在 (2n + 1)θ，在目标轴上的影子就是成功振幅。N = 4 一步正好立在目标上；N = 8 两步之后成功概率 121/128，第三步转过了头；N = 256 时十二小步爬到 0.99995，最佳步数紧跟 π√N/4。五张实验卡可以在第十五章正文里单独引用。",
+      "summary_en": "Each Grover step is two mirrors: one in the failure axis, then one in the line of the initial state |s⟩. Together they turn the state by 2θ, with sin θ = 1/√N, in the plane of the target and failure axes; after n steps the arrow sits at (2n + 1)θ and its shadow on the target axis is the success amplitude. N = 4 lands exactly on the target in one step; N = 8 reaches 121/128 after two steps and overshoots on the third; N = 256 climbs to 0.99995 in twelve small steps, and the best step count follows π√N/4. Each of the five experiment cards can be cited on its own from Chapter 15.",
+      "path": "grover-reflections/",
+      "thumbnail": "grover-reflections/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "Grover 搜索",
+        "振幅放大",
+        "两次反射",
+        "不变平面",
+        "过冲",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Grover search",
+        "Amplitude amplification",
+        "Two reflections",
+        "Invariant plane",
+        "Overshoot",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第十五章 · 两次反射的共同不变平面",
+          "label_en": "Chapter 15 · The common invariant plane of two reflections",
+          "href": "../zh/ch15-grover-qft-and-period-finding.html#sec-grover-invariant-plane",
+          "href_en": "../en/ch15-grover-qft-and-period-finding.html#sec-grover-invariant-plane"
+        },
+        {
+          "label": "Lean · Quantum/Recovery/CoherentUniformAmplification",
+          "label_en": "Lean · Quantum/Recovery/CoherentUniformAmplification",
+          "href": "{trureturing}/D5/S3/Quantum/Recovery/CoherentUniformAmplification.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation"
+        }
+      ]
+    },
+    {
+      "id": "phase-gears",
+      "code": "PHASE//GEARS",
+      "title": "相位齿轮与周期",
+      "title_en": "Phase gears and the period",
+      "summary": "量子傅里叶变换给寄存器里的每一格 x 拧一排相位齿轮：第一只每格转半圈，往后每只慢一半；频率 k 的相位是 k 的二进制位选中的那几只齿轮的转角之和，Q = 8、x = 5 时三只齿轮停在 π、π/2、5π/4。把周期梳子上各格的相位箭头首尾相接：r 整除 Q 时不共振的频率绕成闭合的多边形、合成为零（Q = 16、k = 1 正是 1 + i − 1 − i = 0），谱上只剩 r 根等高的峰；不整除时峰摊在 sQ/r 附近，用连分数从峰读出阶。五张实验卡可以在第十五章正文里单独引用。",
+      "summary_en": "The quantum Fourier transform turns a row of phase gears for every cell x of the register: the first turns half a turn per cell and each next one half as fast; the phase of frequency k is the sum of the angles of the gears picked by the binary digits of k, and at Q = 8, x = 5 the three gears rest at π, π/2 and 5π/4. Chain the phase arrows of the cells of a periodic comb head to tail: when r divides Q every off-resonant frequency closes into a polygon and sums to zero (Q = 16, k = 1 is exactly 1 + i − 1 − i = 0), leaving r equal peaks; otherwise the peaks spread near sQ/r, and continued fractions read the order from a peak. Each of the five experiment cards can be cited on its own from Chapter 15.",
+      "path": "phase-gears/",
+      "thumbnail": "phase-gears/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "量子傅里叶变换",
+        "相位齿轮",
+        "特征标相消",
+        "周期寻找",
+        "连分数",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Quantum Fourier transform",
+        "Phase gears",
+        "Character cancellation",
+        "Period finding",
+        "Continued fractions",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第十五章 · 相位反冲与 QFT 二进制齿轮",
+          "label_en": "Chapter 15 · Phase kickback and the binary gears of the QFT",
+          "href": "../zh/ch15-grover-qft-and-period-finding.html#sec-qft-phase-gears",
+          "href_en": "../en/ch15-grover-qft-and-period-finding.html#sec-qft-phase-gears"
+        },
+        {
+          "label": "第十五章 · 有限字符正交与非共振相消",
+          "label_en": "Chapter 15 · Finite character orthogonality and nonresonant cancellation",
+          "href": "../zh/ch15-grover-qft-and-period-finding.html#sec-period-frequency-cancellation",
+          "href_en": "../en/ch15-grover-qft-and-period-finding.html#sec-period-frequency-cancellation"
+        },
+        {
+          "label": "Lean · Fourier/FinitePoisson",
+          "label_en": "Lean · Fourier/FinitePoisson",
+          "href": "{trureturing}/D5/S3/Fourier/FinitePoisson.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Fourier/FinitePoisson.sum_annihilator_character"
+        }
+      ]
+    },
+    {
+      "id": "rapidity-lightcone",
+      "code": "RAPIDITY//CONE",
+      "title": "快度与光锥",
+      "title_en": "Rapidity and the light cone",
+      "summary": "一张可以推动参考系的时空图：推动只让事件沿双曲线 t² − x² = 常数 滑动，光锥 t = ±x 一动不动，转动走的圆却会穿出光锥；η = ln 2 把 (5, 3) 推到 (4, 0)；两条零向量 (±|w|, w) 像卡尺一样夹住 (0, w)；乘上比例 k 时光锥保住、单位刻度没保住；从 O 到 P 的折线世界线 4 + 4 = 8，少于静止世界线的 10，换哪个参考系都一样。",
+      "summary_en": "A spacetime diagram whose frame you can push: a boost only slides events along the hyperbolas t² − x² = const and leaves the light cone t = ±x where it is, while a turn runs on a circle that leaves the cone; η = ln 2 takes (5, 3) to (4, 0); the null vectors (±|w|, w) clamp (0, w) like a caliper; a scale k keeps the cone but not the unit tick; from O to P the bent worldline's 4 + 4 = 8 is less than the rest worldline's 10, in every frame.",
+      "path": "rapidity-lightcone/",
+      "thumbnail": "rapidity-lightcone/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "快度",
+        "光锥",
+        "双曲线",
+        "洛伦兹推动",
+        "固有时",
+        "零锥刚性"
+      ],
+      "tags_en": [
+        "rapidity",
+        "light cone",
+        "hyperbola",
+        "Lorentz boost",
+        "proper time",
+        "null-cone rigidity"
+      ],
+      "theory": [
+        {
+          "label": "本书第十七章",
+          "label_en": "Chapter 17",
+          "href": "../zh/ch17-lorentz-geometry.html",
+          "href_en": "../en/ch17-lorentz-geometry.html"
+        },
+        {
+          "label": "零锥刚性（Lean 源码）",
+          "label_en": "Null-cone rigidity (Lean source)",
+          "href": "{trureturing}/D5/S0/Certificates/MinkowskiNullConeRigidity.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation"
+        },
+        {
+          "gid": "D5/S0/Certificates/MinkowskiNullConeRigidity.null_cone_spatial_rigidity"
+        },
+        {
+          "gid": "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null"
+        }
+      ]
+    },
+    {
+      "id": "lattice-gauge-loop",
+      "code": "GAUGE//LOOP",
+      "title": "格点规范与回路相位",
+      "title_en": "Lattice gauge and the loop phase",
+      "summary": "一小块格点，每条有向边上一枚单位圆相位指针 u(e)，每个顶点一枚紫色的规范指针 g(v)，边相位按 g(t(e))·u(e)·g(s(e))⁻¹ 变换；每个方格中心是品红的回路相位，即逆时针四条边的乘积。时间轴从变换前走到变换后：拧一个顶点，相邻两条边的指针转遍所有值，回路相位却纹丝不动；青色的生成树（全部横边加最左一列）把每条弦对应到一个基本回路，锚住远角后根到锚点的树路径相位也不动；沿树拧平时树边全变成 1，弦上剩下的正是回路坐标，独立的不变相位共 c + a = m + k − n 个。第十八章的例题（边场 (1, 1, 1, i)、规范 (1, i, −1, −i)、回路始终为 i）是其中一张卡。六张实验卡可以在第十八章正文里单独引用。",
+      "summary_en": "A small lattice with a unit-circle phase u(e) on every directed edge, drawn as a hand on a dial, and a violet gauge hand g(v) at every corner; edge phases transform as g(t(e))·u(e)·g(s(e))⁻¹. At the centre of each square sits the magenta loop phase, the product of its four edges taken counter-clockwise. The rail runs from before a change to after it: twist one corner and the hands on its two edges pass through every value while the loop phase does not move; the cyan spanning tree (every horizontal edge and the leftmost column) assigns each chord a fundamental loop, and once a far corner is anchored the tree-path phase from the root to it stays put too; ironing the tree flat turns every tree edge to 1 and leaves exactly the loop coordinates on the chords, c + a = m + k − n phases that no anchored gauge can change. The worked example of Chapter 18 (edges (1, 1, 1, i), gauge (1, i, −1, −i), loop i throughout) is one of the cards. Each of the six experiment cards can be cited on its own from Chapter 18.",
+      "path": "lattice-gauge-loop/",
+      "thumbnail": "lattice-gauge-loop/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "规范场",
+        "格点",
+        "回路相位",
+        "生成树",
+        "U(1)",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Gauge fields",
+        "Lattice",
+        "Loop phase",
+        "Spanning tree",
+        "U(1)",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第十八章 · 选定生成树上的相位输运",
+          "label_en": "Chapter 18 · Phase transport on a selected spanning tree",
+          "href": "../zh/ch18-spinors-and-gauge-curvature.html#sec-tree-gauge-transport",
+          "href_en": "../en/ch18-spinors-and-gauge-curvature.html#sec-tree-gauge-transport"
+        },
+        {
+          "label": "第十八章 · 闭合回路相位与锚定规范等价",
+          "label_en": "Chapter 18 · Loop phases and anchored gauge equivalence",
+          "href": "../zh/ch18-spinors-and-gauge-curvature.html#sec-gauge-loop-coordinates",
+          "href_en": "../en/ch18-spinors-and-gauge-curvature.html#sec-gauge-loop-coordinates"
+        },
+        {
+          "label": "Lean 源码 · AnchoredPhaseClassification",
+          "label_en": "Lean source · AnchoredPhaseClassification",
+          "href": "{trureturing}/D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification"
+        },
+        {
+          "gid": "D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport"
+        }
+      ]
+    },
+    {
+      "id": "layered-network-cut",
+      "code": "NETWORK//CUT",
+      "title": "层级网络与割",
+      "title_en": "The layered network and its cut",
+      "summary": "第 19 章的层级张量网络：底边 32 格，上面是一张开边界的二元 MERA 式网络（方块是解纠缠器，三角是等距器），每条键维数相同。拖动底边的琥珀色区间，页面用增广路求出把它与其余底边分开最少要割断几条键，品红画出这道最小割，青色是割内侧的张量。一格的区间割它自己那条腿；四格时割钻进网络，只要 3 条；区间从 1 格长到 16 格，割只从 1 条长到 8 条，527 段区间都不超过 2·log₂L + 1；两段区间相隔 2 格时，A 长到 7 格起，一起割比分开割省。跨过割的秩不超过 χᵏ 与 MERA/RT 的类比按第 19 章标为文献结果；绿色只给宽度三桥图上已验证的“秩不超过最小割”。四张实验卡各讲其中一件事，可以在正文里单独引用。",
+      "summary_en": "Chapter 19's layered tensor network: thirty-two boundary sites under a binary MERA-like network with open ends (squares are disentanglers, triangles isometries), every bond of the same dimension. Drag the amber interval on the boundary; the page finds by augmenting paths the fewest bonds whose cutting separates it from the rest of the boundary, draws that minimal cut in magenta and the tensors inside it in cyan. One site cuts its own leg; four sites are cut off by 3 bonds running inside the network; as the interval grows from 1 site to 16 the cut grows only from 1 bond to 8, and none of the 527 intervals needs more than 2·log₂L + 1; for two intervals two sites apart, cutting them together is cheaper once A reaches 7 sites. The rank bound χᵏ across a cut and the MERA/RT analogy are marked as literature results, as in chapter 19; green is given only to the verified bound rank ≤ minimal cut on the width-three bridge graph. Each of the four experiment cards makes one of these points and can be cited on its own from the text.",
+      "path": "layered-network-cut/",
+      "thumbnail": "layered-network-cut/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "张量网络",
+        "MERA",
+        "最小割",
+        "Ryu–Takayanagi",
+        "全息",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Tensor network",
+        "MERA",
+        "Minimal cut",
+        "Ryu–Takayanagi",
+        "Holography",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第十九章 · 纠缠层级与有限张量网络",
+          "label_en": "Chapter 19 · Entanglement hierarchies and finite tensor networks",
+          "href": "../zh/ch19-tensor-networks-and-holography.html#sec-mera-hierarchy",
+          "href_en": "../en/ch19-tensor-networks-and-holography.html#sec-mera-hierarchy"
+        },
+        {
+          "label": "第十九章 · 从离散桥图到 RT 文献边界",
+          "label_en": "Chapter 19 · From the discrete bridge graph to the RT literature boundary",
+          "href": "../zh/ch19-tensor-networks-and-holography.html#sec-rt-literature-bridge",
+          "href_en": "../en/ch19-tensor-networks-and-holography.html#sec-rt-literature-bridge"
+        },
+        {
+          "label": "Lean 源码 · QuantumMaxFlowBound",
+          "label_en": "Lean source · QuantumMaxFlowBound",
+          "href": "{trureturing}/D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_le_QMinCut"
+        }
+      ]
+    },
+    {
+      "id": "complexity-growth",
+      "code": "COMPLEXITY//GROWTH",
+      "title": "复杂度增长",
+      "title_en": "How complexity grows",
+      "summary": "两个舞台。增长：8 个量子比特的随机砖墙电路，逐层实算半链纠缠熵与已用门数——熵几层之后就停在 4 比特的天花板下，门数一层层继续往上长，预期复杂度（模型）要到 2^N 量级才封顶，把那条上升的线读成虫洞体积是开放猜想（CV）。深度：第二十章的开放边界可积电路，点格点挪动折返点 S，层数永远压不到 ⌊N/(κ+1)⌋ + 1 以下；N = 8 与 N = 11、κ = 2 时比旧公式少一层。",
+      "summary_en": "Two stages. Growth: a random brick-wall circuit on 8 qubits, with the half-chain entanglement entropy and the gate count computed layer by layer — the entropy stops under its 4-bit ceiling after a few layers while the gate count keeps climbing, the expected complexity (a model) only levels off at the order of 2^N, and reading that rising line as a wormhole volume is an open conjecture (CV). Depth: the open-boundary integrable circuit of Chapter 20 — click sites to move the turning points S and the number of layers never drops below ⌊N/(κ+1)⌋ + 1; at N = 8 and N = 11 with κ = 2 it is one layer fewer than the old formulas.",
+      "path": "complexity-growth/",
+      "thumbnail": "complexity-growth/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "电路复杂度",
+        "并行深度",
+        "纠缠熵",
+        "随机电路",
+        "复杂度等于体积",
+        "反例"
+      ],
+      "tags_en": [
+        "circuit complexity",
+        "parallel depth",
+        "entanglement entropy",
+        "random circuit",
+        "complexity = volume",
+        "counterexample"
+      ],
+      "theory": [
+        {
+          "label": "本书第二十章",
+          "label_en": "Chapter 20",
+          "href": "../zh/ch20-complexity-and-spacetime.html",
+          "href_en": "../en/ch20-complexity-and-spacetime.html"
+        },
+        {
+          "label": "Lean：开放边界电路的最小深度",
+          "label_en": "Lean: minimum open-boundary circuit depth",
+          "href": "{trureturing}/D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.lean"
+        },
+        {
+          "label": "Lean：两条深度公式的反例",
+          "label_en": "Lean: counterexamples to two depth formulas",
+          "href": "{trureturing}/D5/S3/Quantum/Dynamics/OpenIntegrableCircuitDepthRefutation.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result"
+        },
+        {
+          "gid": "D5/S3/Quantum/Dynamics/OpenIntegrableCircuitDepthRefutation.result"
+        }
+      ]
+    },
+    {
+      "id": "norm-lattice",
+      "code": "NORM//LATTICE",
+      "title": "范数格",
+      "title_en": "Lattices and their norms",
+      "summary": "两张整数格与它们的范数等值线。艾森斯坦格画在复平面上，范数 x² + xy + y² 是到原点距离的平方，等值线是圆，虚线圆 2、5、6 上没有格点；改用整数坐标 (P, Q) = (x + (t + 1)y, y) 去读，同一批点、同一批圆成了斜椭圆，二次型成了 Qform(t, P, Q) = P² − (2t + 1)PQ + (t² + t + 1)Q²。时间轴推动 t：复平面里格点与圆不动，只有基矢 u₂ 沿一行滑动，品红格子的面积始终是 √3/2，判别式 = −4 × 面积² = −3；整数坐标里每行格点滑过去又填满整数网格，取到的值始终是 0、1、3、4、7、9、12、13。黄金整数 g = a + bφ 画在 (g, ḡ) 平面上，范数 a² + ab − b² 是一块矩形的有向面积，等值线是双曲线；把坐标轴转 45°，对角线上的影子是迹 2a + b，(2a + b)² − 5b² = 4 × 范数；从 1 出发每乘一次 φ，点在 g·ḡ = ±1 两支之间跳，(2a + b, b) 依次是 (Lₙ, Fₙ)。七张实验卡可以在第二十三章正文里单独引用。",
+      "summary_en": "Two integer lattices and the level curves of their norms. The Eisenstein lattice is drawn in the complex plane: the norm x² + xy + y² is the squared distance to the origin, the level curves are circles, and the dashed circles 2, 5, 6 carry no lattice point; read in the integer coordinates (P, Q) = (x + (t + 1)y, y), the same points and circles become slanted ellipses and the form becomes Qform(t, P, Q) = P² − (2t + 1)PQ + (t² + t + 1)Q². The rail drives t: in the plane the points and circles stay still and only the basis vector u₂ slides along a row, so the magenta cell keeps its area √3/2 and the discriminant −4 × area² = −3; in integer coordinates each row slides and the points fill the integer grid again, always taking the values 0, 1, 3, 4, 7, 9, 12, 13. The golden integers g = a + bφ are drawn in the (g, ḡ) plane, where the norm a² + ab − b² is the signed area of a rectangle and the level curves are hyperbolas; turning the axes by 45° shows the trace 2a + b as the shadow on the diagonal, with (2a + b)² − 5b² = 4 × norm; starting from 1, each multiplication by φ hops between the branches g·ḡ = ±1 and (2a + b, b) runs through (Lₙ, Fₙ). Each of the seven experiment cards can be cited on its own from Chapter 23.",
+      "path": "norm-lattice/",
+      "thumbnail": "norm-lattice/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "数论",
+        "二次型",
+        "艾森斯坦整数",
+        "黄金整数",
+        "佩尔方程",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Number theory",
+        "Quadratic forms",
+        "Eisenstein integers",
+        "Golden integers",
+        "Pell equation",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第二十三章 · 二次范数与迹投影",
+          "label_en": "Chapter 23 · Quadratic norms and trace projections",
+          "href": "../zh/ch23-diophantine-definability.html#sec-ch23-1",
+          "href_en": "../en/ch23-diophantine-definability.html#sec-ch23-1"
+        },
+        {
+          "label": "第二十三章 · 艾森斯坦范数剪切不变性与黄金佩尔恒等式",
+          "label_en": "Chapter 23 · Eisenstein shear invariance and the golden Pell identity",
+          "href": "../zh/ch23-diophantine-definability.html#sec-ch23-2",
+          "href_en": "../en/ch23-diophantine-definability.html#sec-ch23-2"
+        },
+        {
+          "label": "Lean 源码 · CrossingNormForm",
+          "label_en": "Lean source · CrossingNormForm",
+          "href": "{trureturing}/D5/S3/PrimeForms/Crossing/CrossingNormForm.lean"
+        },
+        {
+          "label": "Lean 源码 · GoldenPell",
+          "label_en": "Lean source · GoldenPell",
+          "href": "{trureturing}/D5/S3/Arith/GoldenPell.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_eq_eisNorm"
+        },
+        {
+          "gid": "D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_discriminant"
+        },
+        {
+          "gid": "D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_range_eq_eisNorm"
+        },
+        {
+          "gid": "D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm"
+        }
+      ]
+    },
+    {
+      "id": "euler-product-sieve",
+      "code": "EULER//SIEVE",
+      "title": "欧拉乘积与筛",
+      "title_en": "The Euler product and the sieve",
+      "summary": "实轴 1 < s ≤ 4 上，墨色的 ζ(s) 与青色的、只用前 K 个素数的欧拉乘积 ∏(1 − p⁻ˢ)⁻¹ 并排画出，两者之间是品红的缺口；放大镜把当前 s 处的缺口按整数拆开，最底下一段总是下一个素数的 p⁻ˢ。下方的整数 1 到 96 按是否出现在乘积的展开里着色：青色的格子素因子全在清单上，品红的格子带着清单外的素因子，第一个就是下一个素数。时间轴把素数一个个加进清单，拖动琥珀色竖线改 s：只用 2 时乘积是 4/3；用到 5 时是 25/16，缺口 0.0824 的领头项是 7⁻²；到 97 时 1 到 96 全变青色，缺口仍在；s 越靠近 1 缺口越宽，s = 1 处乘积停在有限值而 ζ 趋于无穷。六张实验卡可以在第二十二章正文里单独引用。",
+      "summary_en": "On the real axis 1 < s ≤ 4 the ink curve ζ(s) runs beside the cyan Euler product ∏(1 − p⁻ˢ)⁻¹ over the first K primes only, with the magenta gap between them; a magnifier splits the gap at the current s into the integers it is made of, and its lowest slice is always p⁻ˢ of the next prime. Below, the integers 1 to 96 are coloured by whether the product expands into them: cyan cells have every prime factor on the list, magenta cells carry a prime factor off it, the next prime first. The rail puts primes on the list one at a time and the amber line moves s: with 2 alone the product is 4/3; up to 5 it is 25/16 and the gap of 0.0824 is led by 7⁻²; up to 97 every cell from 1 to 96 is cyan and the gap is still there; the closer s is to 1 the wider the gap, and at s = 1 the product stops at a finite value while ζ goes to infinity. Each of the six experiment cards can be cited on its own from Chapter 22.",
+      "path": "euler-product-sieve/",
+      "thumbnail": "euler-product-sieve/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "欧拉乘积",
+        "ζ 函数",
+        "素数",
+        "筛法",
+        "余项",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Euler product",
+        "Zeta function",
+        "Primes",
+        "Sieve",
+        "Remainder",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第二十二章 · 极点留数、狄利克雷级数与欧拉乘积",
+          "label_en": "Chapter 22 · The residue, the Dirichlet series and the Euler product",
+          "href": "../zh/ch22-primes-euler-products-and-zeros.html#sec-ch22-2",
+          "href_en": "../en/ch22-primes-euler-products-and-zeros.html#sec-ch22-2"
+        },
+        {
+          "label": "第二十二章 · 有限素数筛的截断余项",
+          "label_en": "Chapter 22 · The remainder of a finite prime sieve",
+          "href": "../zh/ch22-primes-euler-products-and-zeros.html#ex-prime-log-orthogonality-and-sieve",
+          "href_en": "../en/ch22-primes-euler-products-and-zeros.html#ex-prime-log-orthogonality-and-sieve"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Zeros/ZetaIdentities.riemann_zeta_euler_product"
+        },
+        {
+          "gid": "D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product"
+        },
+        {
+          "gid": "D5/S3/Zeros/ZetaIdentities.riemann_zeta_residue_one"
+        }
+      ]
     }
   ]
 }

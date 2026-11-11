@@ -6,7 +6,9 @@
 
 在经典数字电路里，对抗噪声的办法简单粗暴——**备份（克隆）**。怕一根电线上的电压被热涨落掀翻，就把比特 $0$ 复制成三份 $000$，把比特 $1$ 复制成三份 $111$，少数服从多数。然而，在踏入量子纠错的大门之前，一条铁面无私的内积几何定律当头拦住了所有照搬经典备份思路的去路：**未知量子叠加态不可克隆**。既然不能把一根脆弱的局部方向线简单复印成两根独立的局部线，我们唯一的选择就是反其道而行之——不再执着于局部的“线”，而是利用多体泡利稳定子或二维时空中的编织轨迹，把逻辑信息编码进局部噪声无法单独窥探的高维“面”与代数死结之中。
 
-![图 14](../assets/fig-14-nocloning-stabilizer-braid.svg)
+::: {.figure src="ch14-overview"}
+**图 14。** 本章地图：面板 I，在实重叠截面上，青色的对角线 $y = z$ 是保内积要求的输出，暗色的抛物线 $y = z^2$ 是克隆给出的输出，两者只在 $0$ 与 $1$ 相交，中间夹着品红的缺口；面板 II，三比特码的四间综合征房间，青色的码态住在 $(+,+)$ 那间，品红的 $X_2$ 把它整个搬进 $(-,-)$ 那间，琥珀色的箭头把它翻回；面板 III，平面里绕着一颗粒子的回路（暗色虚线）解不开，借紫色的第三方向 $e_3$ 可以把它抬过去（示意；文献结果，未在本书形式化）。
+:::
 
 ## 不可克隆：保内积与平方内积 {#sec-no-cloning-overlap}
 
@@ -145,11 +147,19 @@ Lean 模块 `D5/S3/Quantum/CloningMachine` 直接把这一候选机器约化态�
 由此可见，精确克隆受 [@thm-no-cloning-overlap] 的 $z = z^2$ 判据阻断；而在上述近似克隆方案中，每个克隆体的布洛赫矢量均匀收缩到 $\frac{2}{3}$，机器比特则携带着长度为 $\frac{1}{3}$ 的反向布洛赫矢量与输入方向无关的熵 $\log_2 3 - \frac{2}{3} \approx 0.918$ 比特，三个边缘态的混合度均源于三体纯态纠缠。
 :::
 
+::: {.figure src="ch14-approx-clone"}
+**近似克隆的代价：克隆体缩到 2/3，机器反向带走 1/3。** 琥珀色的点是球皮上的输入 $\vv{r}$；青色的箭头是每个克隆体的布洛赫矢量 $\frac{2}{3}\vv{r}$，落在青色虚线圆上；品红的箭头是机器比特的 $-\frac{1}{3}\vv{r}$。三个矢量由克隆等距求偏迹算出。文献结果，未在本书形式化；机器比特的谱见 [@thm-cloning-machine-spectrum]。
+:::
+
 ## Pauli 字与稳定子综合征 {#sec-pauli-syndrome-parity}
 
 既然 [@thm-no-cloning-overlap] 禁止我们把任意未知叠加态 $\alpha\lvert 0\rangle + \beta\lvert 1\rangle$ 复制成 $(\alpha\lvert 0\rangle + \beta\lvert 1\rangle)^{\otimes 3}$，量子纠错码究竟靠什么施展魔法？
 
 诀窍在于：**不复制整个叠加态，而是只把正交基嵌入多体纠缠空间**（例如将 $\lvert 0\rangle \mapsto \lvert 000\rangle$、$\lvert 1\rangle \mapsto \lvert 111\rangle$ 线性延拓为 $\alpha\lvert 0\rangle + \beta\lvert 1\rangle \mapsto \alpha\lvert 000\rangle + \beta\lvert 111\rangle$），然后不再测量任何会暴露 $\alpha, \beta$ 的局部单比特方向线，而是专门测量多体**泡利字（Pauli words）**的联合奇偶校验面！
+
+::: {.figure src="ch14-syndrome-table"}
+**校验读出错在哪一位，读不出 $\alpha$、$\beta$。** 四行依次是错误 $I$、$X_1$、$X_2$、$X_3$；每行左边是 $E\lvert 000\rangle$，右边是 $E\lvert 111\rangle$，被翻的那一位描成品红；每串旁的两盏灯是 $g_1 = Z_1Z_2$ 与 $g_2 = Z_2Z_3$，亮起（品红）表示读数 $-1$。四种错误亮四组不同的灯；同一行左右两串亮的灯一样，所以读灯分不出 $\lvert 000\rangle$ 与 $\lvert 111\rangle$，也就碰不到 $\alpha$、$\beta$。灯亮不亮的规则是下文 [@lemma-pauli-word-phase] 之后的模 $2$ 奇偶。
+:::
 
 为了在任意有限模式数 $N \in \mathbb{N}$ 与任意局部能级数 $p \in \mathbb{N}$（满足非零条件 `[NeZero p]`；注意此处 **$p$ 未要求是素数，且 $N$ 允许为 $0$**）的一般框架下刻画这套代数，源码模块 `StabilizerGenuineEntanglementCommutationRank` 定义了 $N$ 模式模 $p$ 泡利字结构 `PauliWord N p`，包含三个字段：
 
@@ -197,6 +207,10 @@ $$
 
    决定！需要强调的是，[@lemma-pauli-word-phase] 本身是泡利字算子的精确代数乘法引理；至于如何利用这套综合征在不破坏逻辑态的前提下完整恢复受损信息，还需要引入码空间与正交综合征投影的恢复架构——这正是下一节的主题。
 
+::: {.viz src="syndrome-decoding" preset="single" height="500"}
+**一盏灯指出翻了哪一个比特。** 三比特重复码的两道校验 $g_1 = Z_1Z_2$、$g_2 = Z_2Z_3$ 跨在相邻两个比特之上。第一个比特翻了（品红的 X），只有跨在它上面的 $g_1$ 亮起（品红），$g_2$ 不亮：$X_1$ 与 $g_1$ 反对易、与 $g_2$ 对易，正是上式的模 $2$ 奇偶，交叉相位来自 [@lemma-pauli-word-phase]。解码器照灯翻回第一个比特（琥珀色），青色的柱子回到码空间，落在虚线上。
+:::
+
 ## 正交综合征中的逻辑恢复 {#sec-orthogonal-syndrome-recovery}
 
 当环境噪声把原本安居在基准码空间里的逻辑态 $\rho \in M_d(\mathbb{C})$ 踢进了不同的错误通道时，为什么我们能够像外科手术一样把错误剥离、让 $\rho$ 原封不动地复原？
@@ -208,6 +222,10 @@ $$
 $$
 
 这意味着：对每一个综合征编号 $i \in s$，$S_i^* S_i = I_d$ 保证 $S_i$ 把 $d$ 维逻辑球体无畸变地等距放进第 $i$ 间综合征子空间；而当 $i \neq j$ 时，$S_i^* S_j = 0$ 保证不同综合征房间之间严格垂直、绝不串门！
+
+::: {.viz src="syndrome-decoding" preset="rooms" height="500"}
+**错误把态整个搬进另一间房。** 下面的八个基态按两道校验的读数分成四间房 $S_j = E_jV$（$E \in \{I, X_1, X_2, X_3\}$）。中间的比特翻了，两盏灯都亮；$\alpha\lvert 000\rangle + \beta\lvert 111\rangle$ 的两根青色柱子原样搬进 $(-1,-1)$ 那间房，落在 $\lvert 010\rangle$、$\lvert 101\rangle$ 上，另外三间房空着。
+:::
 
 在此几何舞台上，任意携带综合征系数矩阵 $\sigma \in M_s(\mathbb{C})$（允许包含不同错误分支之间的非对角相干项 $\sigma_{jk}$）的受损物理态由**综合征编码映射**给出：
 
@@ -242,9 +260,18 @@ $$
 由前提 `OrthogonalSyndromes S`，左侧内积满足 $S_i^* S_j = \delta_{ij} I_d$，右侧内积满足 $S_k^* S_i = (S_i^* S_k)^* = \delta_{ik} I_d$。因此在固定 $i \in s$ 时，所有 $j \neq i$ 或 $k \neq i$ 的项全部乘以零矩阵而消失，唯独 $j = i$ 且 $k = i$ 的对角项幸存为 $\sigma_{ii} (I_d \rho I_d) = \sigma_{ii} \rho$。对全体 $i \in s$ 求和，即得 $\bigl(\sum_{i \in s} \sigma_{ii}\bigr)\rho = \Tr(\sigma) \bullet \rho$。完整证明由 Lean 内核检查。
 :::
 
+::: {.figure src="ch14-trace-survives"}
+**解码之后，$\sigma$ 只剩对角线。** 左边是 $4\times 4$ 的噪声矩阵 $\sigma$：对角线上青色的四格取例 [@ex-repetition-code-syndrome] 第四步的 $\frac{1}{2}, \frac{1}{4}, \frac{1}{8}, \frac{1}{8}$，其余十二格是品红的跨房间相干项，全部划掉。四个对角数相加得 $\Tr\sigma = 1$，解码输出 $1 \cdot \rho = \rho$（[@prop-orthogonal-syndrome-recovery]）。相干项取非零值时，在三比特码上的数值核对给出同一个 $\rho$。
+:::
+
 [@prop-orthogonal-syndrome-recovery] 的代数结构干净得令人赞叹，在应用时需把握两条精确边界：
 
 1. **无需假设 $\sigma$ 对角、半正定或迹一**：定理对**任意**复矩阵 $\sigma \in M_s(\mathbb{C})$ 和 $\rho \in M_d(\mathbb{C})$ 均成立。哪怕物理噪声是多个错误算子的相干叠加（使得 $\sigma$ 具有非零的非对角元 $\sigma_{jk}$，$j \neq k$），正交投影夹逼 $S_i^* S_j \rho S_k^* S_i$ 也会自动切掉所有 $j \neq k$ 的跨综合征相干项，只留下对角迹和 $\sum_i \sigma_{ii} = \Tr(\sigma)$；特别地，当噪声权重归一化满足 $\Tr(\sigma) = 1$ 时，立刻作为特例给出无缩放的精确恢复 $\mathrm{syndromeDecoding}(S, \mathrm{syndromeEncoding}(S, \sigma, \rho)) = \rho$。
+
+::: {.viz src="syndrome-decoding" preset="mix" height="500"}
+**四个分支各回各的，拼回原态。** 取 $\sigma = \operatorname{diag}\bigl(\frac{1}{2}, \frac{1}{4}, \frac{1}{8}, \frac{1}{8}\bigr)$（例 [@ex-repetition-code-syndrome] 第四步）与 $\rho = \lvert +\rangle\langle +\rvert$：不出错、翻第一个、翻第二个、翻第三个四个分支，青色柱子的宽窄就是权重，各进各的房。解码时各自拉回码空间，并排拼成一整根，正好填满虚线：$\Tr(\sigma)\,\rho = \rho$，即 [@prop-orthogonal-syndrome-recovery]。
+:::
+
 2. **支持子空间上的代数解码与全空间迹保持信道的区分**：$\mathrm{syndromeDecoding}(S, \cdot) = \sum_{i \in s} S_i^* (\cdot) S_i$ 是在可纠综合征支持集 $\mathcal{W} = \bigoplus_{i \in s} \operatorname{range}(S_i)$ 上定义的解码代数式。由于 $s$ 个 $d$ 维正交房间占用的总维数为 $|s|d \le n$，当 $|s|d < n$（即 $\sum_{i \in s} S_i S_i^* \neq I_n$）时，不能无条件声称仅由 $\{S_i^*\}_{i \in s}$ 构成的映射已在整个 $n$ 维物理空间 $M_n(\mathbb{C})$ 上定义了一个迹保持（CPTP）量子信道；若要延拓为全空间上的迹保持信道，还必须把支持子空间正交补 $I_n - \sum_{i \in s} S_i S_i^*$ 上的附加 Kraus 算子补齐。
 
 ## 二维编织与第三正交方向 {#sec-braids-and-third-axis}
@@ -254,6 +281,14 @@ $$
 在低维拓扑与任意子物理的直观图景（详见下文 [@rem-error-correction-anyons-literature]）中，人们常追问：为什么把粒子世界线限制在二维平面 $(e_1, e_2)$ 时，$(2+1)$ 维时空中的交换编织会呈现出与三维空间截然不同的结构？
 
 从几何图解（如图 14 面板 III）上看，线索指向**第三根正交空间方向**！当不可互穿的绳股排成一列时，第 1 股绳子跨过第 2 股绳子（正向交叉 $\mathrm{crossing}$）与从底下钻过去（反向交叉 $\mathrm{crossingInv}$）给出互逆的基本交叉步。而在三股绳子 $(x, (y, z))$ 的编织中，先交换前两股、再交换后两股、再交换前两股（$\sigma_1 \sigma_2 \sigma_1$），与先交换后两股、再交换前两股、再交换后两股（$\sigma_2 \sigma_1 \sigma_2$），在图解上恰好对应把中间那根绳子滑过另外两根绳子的交点——著名的**三股编织恒等式（Yang–Baxter 方程）**。
+
+::: {.viz src="braiding" preset="over" height="500"}
+**一次交换：谁从前面过，记在第三个方向上。** 平面里的两颗粒子随时间往上走出世界线，绕中点转半圈换了位置：左边那股从前面过（离你近），右边那股从后面过。绳子上的数字是颜色：前面那股带着 $0$ 走到右边，后面那股被它改色，$1$ 变成 $0 \star 1 = 2$，正是 $\mathrm{crossing}(x, y) = (x \star y,\, x)$。
+:::
+
+::: {.viz src="braiding" preset="inverse" height="500"}
+**反着再交换一次，原样回来。** 左边先交换一次，再反着交换一次（这回右边那股从前面过），两股回到原位，颜色 $(0, 1)$ 原样回到顶端：$\mathrm{crossingInv}(\mathrm{crossing}(x, y)) = (x, y)$。右边是不交换的直线，顶端也是 $(0, 1)$。
+:::
 
 在源码模块 `D5/S0/Certificates/Quandles/BraidColoringTransport.lean` 中，这一编织不变量通过架（`Rack Q`）的代数着色传输得到了纯组合形式化。设类型 $Q$ 带有 `Rack Q` 实例，其上配备二元运算 $\star : Q \to Q \to Q$（源码记作 `act`）及逆运算 $\star^{-1} : Q \to Q \to Q$（源码记作 `invAct`），使得对每个固定的第一宗量 $x \in Q$，左平移作用映射 $L_x : y \mapsto x \star y$ 是双射（其逆映射为 $L_x^{-1} : y \mapsto x \star^{-1} y$，满足 `Function.LeftInverse (invAct x) (act x)` 与 `Function.RightInverse (invAct x) (act x)`，即 $x \star^{-1} (x \star y) = y$ 且 $x \star (x \star^{-1} y) = y$），并满足左自分配公理（left self-distributivity）：
 
@@ -310,6 +345,10 @@ $$
 比较左端与右端的最终三元组：后两个分量均为 $(x \star y, x)$，完全一致；第一个分量由 `Rack Q` 的自分配律 $(x \star y) \star (x \star z) = x \star (y \star z)$ 严格相等。完整证明由 Lean 内核检查。
 :::
 
+::: {.viz src="braiding" preset="yb" height="500"}
+**三股的两种顺序落在同一处。** 三股，颜色 $(0, 1, 2)$。左边按 $\sigma_1, \sigma_2, \sigma_1$ 交换，右边按 $\sigma_2, \sigma_1, \sigma_2$：两边世界线的走法不一样，顶端都是 $(0, 2, 0)$。点底部的数字换一组颜色，两边的顶端仍然相同，这就是 [@cor-braid-yang-baxter]。
+:::
+
 ::: {.remark #rem-braid-knot-topology-literature title="架着色实现与配置空间辫群、三维绳结拓扑的边界（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 在将 [@cor-braid-yang-baxter] 与物理及低维拓扑文献（另参下文 [@rem-error-correction-anyons-literature]）对接时，必须严格守住三条理论边界（其中配置空间基本群 $B_n$ 与 $S_n$ 的维数二分及三维三叶结的非平凡结拓扑均属外部文献结论，未在本书形式化）：
 
@@ -318,9 +357,17 @@ $$
 3. **任意子统计与物理容错边界归入文献**：非阿贝尔任意子的物理实现、配置空间同伦群以及有限温度下的拓扑纠错界限属于凝聚态与量子信息文献结果，详见下文 [@rem-error-correction-anyons-literature]。
 :::
 
+::: {.viz src="braiding" preset="twice" height="500"}
+**同向交换两次，不等于不交换。** 左边同一个方向交换两次，两条世界线互相绕了整整一圈，每颗粒子都回到原位，颜色却从 $(0, 1)$ 变成 $(1, 2)$；右边是不交换的直线，顶端仍是 $(0, 1)$。粒子被限制在平面里时这一圈解不开；借第三个空间方向把它抬过去解开，是 [@rem-braid-knot-topology-literature] 第 2 条的文献结果。
+:::
+
 ## 把编织首尾相接：Markov 稳定化与着色计数 {#sec-markov-stabilization-coloring-count}
 
 [@rem-braid-knot-topology-literature] 的第 2 条说，三维空间里的三叶结解不开，而着色正是分辨它的经典工具。这件工具怎么用？[@cor-braid-yang-baxter] 管的是一段编织：上面一排线头，下面一排线头，颜色从一排传到另一排。可是结没有线头。把编织弯过来，让第 $k$ 个下端接回第 $k$ 个上端，绳子才成了闭合的圈，这叫编织的**闭合**。接上之后，“上端的颜色”与“下端的颜色”是同一段绳子的颜色，于是闭合编织的着色只剩一个条件：颜色沿编织传一遍，必须原样回来。**闭合编织的着色，就是着色传输的不动点。**
+
+::: {.viz src="braiding" preset="close" height="500"}
+**首尾接上，颜色得原样回来。** 一次交换 $\sigma_1$，再把每个顶端顺着右边的弧接回同一位置的底端。颜色 $(0, 1)$ 到顶端成了 $(2, 0)$，两条弧都对不上（品红）。九个着色里只有 $(0, 0)$、$(1, 1)$、$(2, 2)$ 回得来。
+:::
 
 模块 `D5/S3/Topology/QuandleMarkovColoring` 把这句话写成了定义。它不谈画在纸上的绳子：编织是由生成元与关系给出的群里的元素，着色传输是这个群在颜色序列上的作用。
 
@@ -366,6 +413,10 @@ $$
 画出来：共轭是把闭合的绳圈换一处剪开；稳定化是在最右边添一股新绳，让它与原来的最后一股只交叉一次，闭合后多出的是一个拧一下就消失的小圈（这两句是几何图像，严格陈述属于 [@rem-alexander-markov-literature] 中的 Markov 定理）。代数问题是：不动点的个数经得起这三步吗？
 
 共轭不难，把颜色整体搬运一下即可。难的是稳定化，它连股数都改了。设新股的颜色是 $z$。按 [@def-closed-braid-colorings] 的乘法约定，$\iota_n(b)\,\sigma_n$ 先让 $\sigma_n$ 作用，把最后两股的 $(c_n,\ z)$ 变成 $(c_n \star z,\ c_n)$；随后 $\iota_n(b)$ 只动前 $n$ 股。新股不再碰到任何交叉，要原样回来就必须 $z = c_n$。于是第 $n$ 股拿到的是 $c_n \star c_n$。它等于 $c_n$ 吗？架的公理里没有这一条。多带公理 $x \star x = x$ 的架叫 quandle（Mathlib 的 `Quandle Q`，下文称**幂等架**）。有了这一条，那个小圈对颜色毫无影响：新股只是把 $c_n$ 抄了一遍，前 $n$ 股的条件原封不动。这段手算正是 Lean 证明的核心一步，模块把它做成了显式的一一对应。
+
+::: {.viz src="braiding" preset="stabilize" height="500"}
+**添一股：新股只把末位颜色抄一遍。** 左边是两股的 $\sigma_1^3$，接回来后颜色 $(0, 1)$ 对得上（青色）。右边在最右边添一股，先与原来最后一股交叉一次，即 $\iota_2(\sigma_1^3)\,\sigma_2$：新股的颜色只是把末位的 $1$ 抄一遍，过交叉时 $1 \star 1 = 1$ 不变。回得来的着色左边 $9$ 个，右边也是 $9$ 个。
+:::
 
 ::: {.definition #def-markov-coloring-equivs title="稳定化与共轭下闭合着色空间的三个等价" lean="D5/S3/Topology/QuandleMarkovColoring.positiveStabilizationEquiv D5/S3/Topology/QuandleMarkovColoring.negativeStabilizationEquiv D5/S3/Topology/QuandleMarkovColoring.conjugationEquiv"}
 设 $Q$ 为带 `[Quandle Q]` 的类型（不要求有限），$n \in \mathbb{N}$，$b \in \mathrm{Artin}\,n$。模块定义了三个等价（Lean 的 `Equiv`：一对映射，连同它们互逆的证明）：
@@ -442,6 +493,14 @@ $$
 **幂等公理省不得。** 取 $Q' = \mathbb{Z}/3$，$x \star y = y + 1$。它是架：每个左平移都是双射，自分配律两边都等于 $z + 2$；但 $x \star x = x + 1 \ne x$，它不是幂等架。$(1, e)$ 有 $3$ 个闭合着色；它的正稳定化 $(2, \sigma_1)$ 把 $(x, y)$ 送到 $(y + 1,\ x)$，不动点要求 $x = y$ 且 $y + 1 = x$，一个也没有。计数从 $3$ 变成 $0$。
 :::
 
+::: {.viz src="braiding" preset="trefoil" height="500"}
+**$\sigma_1$ 与 $\sigma_1^3$ 数出不同的数。** 左边 $\sigma_1$，右边 $\sigma_1^3$，颜色都从 $(0, 1)$ 出发：左边接回来对不上（品红），右边对得上（青色）。回得来的着色左边 $3$ 个，右边 $9$ 个；$3 \ne 9$，按 [@thm-quandle-coloring-markov-invariant] 两者不是 Markov 等价的。
+:::
+
+::: {.viz src="braiding" preset="rack" height="500"}
+**不幂等的架：添一股就一个也回不来。** 颜色规则换成 $x \star y = y + 1$。左边一股、没有交叉，三个着色都回得来。右边添一股、交叉一次：新股抄来的 $0$ 过交叉变成 $0 \star 0 = 1$，接回来对不上（品红），九个着色一个也回不来。
+:::
+
 ::: {.remark #rem-alexander-markov-literature title="Artin、Alexander 与 Markov：从代数 Markov 类到链环不变量（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** [@thm-quandle-coloring-markov-invariant] 的陈述中没有任何几何对象。把它读成链环的不变量，需要三条经典定理（以下的编织与链环都指光滑或分段线性的）：
 
@@ -453,6 +512,10 @@ $$
 :::
 
 编织有头有尾，结没有。头尾接上之后，颜色还得原样回来；只要颜色取自幂等架，添一股，换一处剪口，回得来的着色就一个不多、一个不少。这一半，Lean 已经验证。
+
+::: {.viz src="braiding" height="560"}
+编织的完整实验室：在最上面添交叉 $\sigma_k^{\pm 1}$、换股数、点底部的数字换颜色，看颜色怎样顺着世界线往上传；首尾接上之后数一数回得来的着色，也可以换成不幂等的架 $x \star y = y + 1$ 对照。
+:::
 
 现在，让我们通过一个四步连贯的具体数值与矩阵算例，把不可克隆内积差、三比特重复码的二元辛综合征、编码态局部布洛赫向量的精确行为以及正交综合征矩阵恢复完整地验算一遍。
 
@@ -529,6 +592,14 @@ $$
 最后必须指明该码的纠错边界：这套四分支正交综合征仅能纠正至多一个 $X$ 位翻转错误 $\{I, X_1, X_2, X_3\}$；倘若发生的是单比特相位翻转错误 $Z_1 = Z \otimes I \otimes I$，由于 $Z_1$ 与 $g_1 = Z_1 Z_2$、$g_2 = Z_2 Z_3$ 均对易，它不会触发任何综合征警报（停留在 $S_0$ 子空间内），却把逻辑态 $\lvert +_L\rangle$ 翻转成了正交的 $\lvert -_L\rangle = \frac{\lvert 000\rangle - \lvert 111\rangle}{\sqrt{2}}$。因此三比特重复码绝不能纠正任意单比特量子噪声（纠正任意单比特错误至少需要五比特码或七比特 Steane 码、九比特 Shor 码）。
 :::
 
+::: {.viz src="syndrome-decoding" preset="two" height="500"}
+**翻两个，灯指错。** 逻辑态 $\lvert 000\rangle$ 的第一、二个比特一起翻（两个品红的 X）：只有 $g_2$ 亮，与只翻第三个一模一样。解码器照灯翻回第三个比特（琥珀色），合起来是 $X_1X_2X_3$，一个逻辑翻转：青色柱子落在 $\lvert 111\rangle$ 上，虚线却在 $\lvert 000\rangle$。这套码只纠至多一个 $X$ 翻转。
+:::
+
+::: {.viz src="syndrome-decoding" preset="phase" height="500"}
+**翻相位，灯不亮，态却变了。** 逻辑态 $\lvert +_L\rangle$ 的第一个比特翻了相位（品红的 Z）：$Z_1$ 与 $g_1$、$g_2$ 都对易，两盏灯都不亮，柱子没有离开码空间，解码器也不动；可 $\lvert 111\rangle$ 那根青色柱子翻到了轴下，与虚线正好相反，态成了正交的 $\lvert -_L\rangle$。
+:::
+
 ::: {.remark #rem-error-correction-anyons-literature title="Knill–Laflamme 纠错条件、稳定子码与任意子拓扑编织（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 本章的形式化结果聚焦于不可克隆内积判据（[@thm-no-cloning-overlap]）、泡利字算子乘法相位（[@lemma-pauli-word-phase]）、正交综合征子空间恢复代数式（[@prop-orthogonal-syndrome-recovery]）以及架着色的三股编织恒等式（[@cor-braid-yang-baxter]）。在量子纠错与拓扑量子计算的完整理论中，以下四项核心定理由经典文献给出：
 
@@ -542,6 +613,10 @@ $$
 2. **Gottesman 稳定子码形式体系**（D. Gottesman, *Stabilizer Codes and Quantum Error Correction*, Caltech Ph.D. thesis, 1997, arXiv:quant-ph/9705052）：在 $N$ 比特泡利群 $\mathcal{P}_N$ 中，取由 $N - k$ 个相互独立且两两对易的泡利生成元生成、阶为 $|\mathcal{S}| = 2^{N-k}$ 且不含 $-I^{\otimes N}$ 的阿贝尔子群 $\mathcal{S} \cong (\mathbb{Z}/2\mathbb{Z})^{N-k}$，其公共 $+1$ 特征子空间构成 $2^k$ 维码空间 $\mathcal{C}$。凡与 $\mathcal{S}$ 中某个生成元反对易的泡利错误算子均由二元辛内积唯一标记非零综合征；而在 $\mathcal{S}$ 的正规化子（即中心化子）$N(\mathcal{S})$ 中，商去全局标量相位中心群 $\langle i I^{\otimes N}\rangle = \{\pm I^{\otimes N}, \pm i I^{\otimes N}\}$ 与稳定子群 $\mathcal{S}$ 后，集合 $N(\mathcal{S}) \setminus (\langle i I^{\otimes N}\rangle \cdot \mathcal{S})$ 中的算子代表商群 $N(\mathcal{S}) / (\langle i I^{\otimes N}\rangle \cdot \mathcal{S})$ 中的非平凡逻辑算子（商去标量相位排除了诸如 $-I^{\otimes N}$ 这类仅改变全局相位、泡利权重为 $0$ 的平凡中心元），码距 $d_{\mathrm{code}}$ 则严格定义为全体 $E \in N(\mathcal{S}) \setminus (\langle i I^{\otimes N}\rangle \cdot \mathcal{S})$ 的最小泡利汉明权重。
 3. **二维配置空间辫群与任意子分数统计**（J. M. Leinaas and J. Myrheim, *On the theory of identical particles*, Nuovo Cimento B **37**, 1–23, 1977, doi:10.1007/BF02727953）：对空间流形 $M$ 上 $n$ 个全同不可碰撞点粒子的配置空间 $\mathrm{Conf}_n(M) = \{(x_1, \dots, x_n) \in M^n : i \neq j \Rightarrow x_i \neq x_j\} / S_n$，当空间维数 $\dim M \ge 3$ 时基本群同构于有限对称群 $\pi_1(\mathrm{Conf}_n(\mathbb{R}^d)) \cong S_n$（故仅允许玻色子与费米子）；唯有当 $\dim M = 2$ 时，基本群扩张为无穷阶 Artin 辫群 $\pi_1(\mathrm{Conf}_n(\mathbb{R}^2)) \cong B_n$，允许连续阿贝尔任意子相位或非阿贝尔高维幺正编织表示。
 4. **非阿贝尔任意子与拓扑容错的物理边界**（C. Nayak, S. H. Simon, A. Stern, M. Freedman, and S. Das Sarma, *Non-Abelian anyons and topological quantum computation*, Rev. Mod. Phys. **80**, 1083–1159, 2008, doi:10.1103/RevModPhys.80.1083）：在具有能隙的二维拓扑物相中，非阿贝尔准粒子的简并融合空间对局域微扰具有随准粒子间距 $L$ 指数衰减的分裂保护 $\Delta E \propto e^{-L/\xi}$，世界线编织在简并子空间上诱导出满足 Yang–Baxter 关系的非平凡幺正门。但需注意：首先，如正文所述，三维空间中点粒子交换回路可借第三空间轴解开，绝不意味着三维闭合一维绳结（knots）会自动解开；其次，拓扑保护在真实有限温度硬件中仍受热激发准粒子游走（thermal poisoning）与有限尺寸效应限制，并非在物理实现中绝对零错误。
+:::
+
+::: {.viz src="syndrome-decoding" height="560"}
+综合征解码的完整实验室：在舞台上点比特加上 $X$ 或 $Z$ 错误，看两道校验怎样亮、解码器翻回哪一个、柱子是否落回虚线；也可以换逻辑态，或换成四分支混合 $\sigma$。
 :::
 
 现在，我们已经学会了如何用纠缠和正交综合征把脆弱的量子态稳稳护在多比特高维子空间里。一旦拥有了受保护的逻辑量子寄存器，我们接下来自然要问：**在这片高维球面上，量子算法究竟如何利用“两子正交反射”与“赤道相位齿轮”完成经典计算机望尘莫及的加速？** 让我们推开[第十五章](ch15-grover-qft-and-period-finding.md)的大门，走进 Grover 搜索、量子傅里叶变换（QFT）与 Shor 周期寻找的几何心脏。

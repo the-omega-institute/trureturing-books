@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="PAIR//SHUTTER · Pairwise measurement and shutter counts">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PAIR//SHUTTER 两子丈量与快门计数</title>
+<meta name="description" content="布洛赫球上两支箭头：青色的 A 是已知态，琥珀色的 B 是目标态。快门每次只报“过”或“不过”；按得越多，“过”的比例越贴近两支箭头的夹角定下的权重 (1 + cos θ)/2。On the Bloch sphere, two arrows: the cyan A is the known state, the amber B the target. Each shot of the shutter reports only pass or fail; the more shots, the closer the share of passes comes to the weight (1 + cos θ)/2 set by the angle between the two arrows.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="pairwise-shutter">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="PAIR//SHUTTER">PAIR<b>//</b>SHUTTER</h1>
+      <div class="tagline">
+        <span class="zh">两子丈量与快门计数 · <em>快门每次只报“过”或“不过”；按得越多，“过”的比例越贴近两支箭头的夹角定下的权重</em></span>
+        <span class="en">Pairwise measurement and shutter counts · <em>each shot says only pass or fail; the more shots, the closer the share of passes comes to the weight set by the angle between the two arrows</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillAngle">θ <strong>—</strong></span>
+      <span class="pill" id="pillWeight"><span class="zh">权重</span><span class="en">WEIGHT</span> <strong>—</strong></span>
+      <span class="pill hot" id="pillShots"><span class="zh">快门</span><span class="en">SHOTS</span> <strong>0</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="clicks" aria-pressed="false"><span class="code">CLICKS</span><span class="cn zh">一次只有 +1 或 −1</span><span class="cn en">Each shot: +1 or −1</span></button>
+        <button class="preset" data-preset="sixty" aria-pressed="false"><span class="code">60°</span><span class="cn zh">60°：比例趋向 3/4</span><span class="cn en">60°: the share heads for 3/4</span></button>
+        <button class="preset" data-preset="right" aria-pressed="false"><span class="code">90°</span><span class="cn zh">90°：一半一半，晃得最厉害</span><span class="cn en">90°: half and half, the widest wobble</span></button>
+        <button class="preset" data-preset="same" aria-pressed="false"><span class="code">0°</span><span class="cn zh">共线：每次都过</span><span class="cn en">Collinear: every shot passes</span></button>
+        <button class="preset" data-preset="opposite" aria-pressed="false"><span class="code">180°</span><span class="cn zh">对跖：一次也不过</span><span class="cn en">Antipodal: not a single pass</span></button>
+        <button class="preset" data-preset="turn" aria-pressed="false"><span class="code">TURN</span><span class="cn zh">两支一起转，权重不动</span><span class="cn en">Both turn together, the weight stays</span></button>
+        <button class="preset" data-preset="random" aria-pressed="false"><span class="code">RANDOM</span><span class="cn zh">随机方向：权重均匀</span><span class="cn en">Random directions: the weight is uniform</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">目标态 B</span><span class="en">Target state B</span><span class="aside"><span class="zh">固定还是随机</span><span class="en">fixed or random</span></span></h2>
+      <div class="chips" id="modeChips" role="group" aria-label="目标态的取法" data-aria-en="How the target state is chosen">
+        <button class="chip" data-mode="fixed" aria-pressed="true"><span class="zh">固定的 B</span><span class="en">a fixed B</span></button>
+        <button class="chip" data-mode="random" aria-pressed="false"><span class="zh">每次随机方向</span><span class="en">a random direction each shot</span></button>
+      </div>
+      <div class="chips" id="turnChips" role="group" aria-label="两支箭头是否一起转" data-aria-en="Whether the two arrows turn together">
+        <button class="chip" data-turn="off" aria-pressed="true"><span class="zh">不转</span><span class="en">still</span></button>
+        <button class="chip" data-turn="on" aria-pressed="false"><span class="zh">两支一起转</span><span class="en">both turn together</span></button>
+      </div>
+      <p class="note"><span class="zh">在球上直接拖动琥珀色 B 或青色 A 的箭尖；拖空白处转动视角。拖动时快门的随机数不变，只有权重在变。</span><span class="en">Drag the tip of the amber B or of the cyan A on the sphere; drag empty space to turn the view. While you drag, the shutter's random numbers stay the same and only the weight changes.</span></p>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">快门</span><span class="en">The shutter</span><span class="aside"><span class="zh">随机数</span><span class="en">random numbers</span></span></h2>
+      <div class="chips" id="countChips" role="group" aria-label="这一轮按多少次快门" data-aria-en="How many shots in this run">
+        <button class="chip" data-count="24" aria-pressed="false">24</button>
+        <button class="chip" data-count="400" aria-pressed="false">400</button>
+        <button class="chip" data-count="4000" aria-pressed="true">4000</button>
+      </div>
+      <p class="note"><span class="zh">“换一串”换一组随机数重按一轮：曲线换了样子，青色的虚线不动。</span><span class="en">“New run” draws new random numbers and shoots again: the curve changes, the dashed cyan line does not.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="布洛赫球上青色的已知态 A 与琥珀色的目标态 B，以及快门“过”的比例随次数趋向权重的曲线" data-aria-en="On the Bloch sphere, the cyan known state A and the amber target state B, and the share of passes of the shutter heading for the weight as the shots add up">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr">
+        <button class="chip" id="reseed"><span class="zh">换一串 ↻</span><span class="en">New run ↻</span></button>
+      </div>
+      <div class="hud-bl" id="legend">
+        <span><i class="sw cy"></i><span class="zh">A 与它的直径：青色一段长 = 权重 p</span><span class="en">A and its diameter: the cyan stretch = weight p</span></span>
+        <span><i class="sw am"></i><span class="zh">B，与当前的比例</span><span class="en">B, and the share now</span></span>
+        <span class="lg-fixed"><i class="sw dm"></i><span class="zh">数出来的比例 k/N</span><span class="en">counted share k/N</span></span>
+        <span class="lg-turn"><i class="sw vi"></i><span class="zh">两支共用的转轴</span><span class="en">the common axis of turning</span></span>
+      </div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside">k/N → p</span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="dtKey"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div><dt id="dtAngle"></dt><dd id="roAngle">—</dd></div>
+        <div class="c"><dt id="dtSphere"></dt><dd id="roSphere">—</dd></div>
+        <div><dt id="dtSpinor"></dt><dd id="roSpinor">—</dd></div>
+        <div><dt id="dtTrace"></dt><dd id="roTrace">—</dd></div>
+        <div><dt id="dtCount"></dt><dd id="roCount">—</dd></div>
+        <div><dt id="dtDev"></dt><dd id="roDev">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">对半正定、迹为 1 的 ρ：Tr(ρI) = 1，Tr(ρ(P + Q)) = Tr(ρP) + Tr(ρQ)，对自伴幂等的 P 有 0 ≤ Tr(ρP)。本页“过”是 P<sub>B</sub>，“不过”是 I − P<sub>B</sub>：两份权重都不为负，加起来是 1。已冻结：</span><span class="en">For positive semidefinite ρ with trace 1: Tr(ρI) = 1, Tr(ρ(P + Q)) = Tr(ρP) + Tr(ρQ), and 0 ≤ Tr(ρP) for self-adjoint idempotent P. Here “pass” is P<sub>B</sub> and “fail” is I − P<sub>B</sub>: neither weight is negative and they add up to 1. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/FiniteDimensional.born_probability_skeleton" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/FiniteDimensional.lean" target="_blank" rel="noopener"><code>born_probability_skeleton</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">完备记录测量里，若 P<sub>k</sub> = |φ⟩⟨φ|、ρ = |ψ⟩⟨ψ|，则这一分支的记录权重 = |⟨φ|ψ⟩|² = Tr(ρP<sub>k</sub>)。上面“旋量”与“矩阵”两行就是这两条路。已冻结：</span><span class="en">In a complete record measurement with P<sub>k</sub> = |φ⟩⟨φ| and ρ = |ψ⟩⟨ψ|, the record weight of that branch = |⟨φ|ψ⟩|² = Tr(ρP<sub>k</sub>). The rows “spinor” and “matrix” above are these two routes. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Observer/Conditioning/RankOneBornPairingWeight.lean" target="_blank" rel="noopener"><code>rank_one_born_pairing_weight</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">权重 = (1 + cos θ)/2 是第二章例题的手算（半角公式）。页面按球面、旋量、矩阵三条路各算一遍，三个数一致：这是数值核对，不是引用的定理。</span><span class="en">Weight = (1 + cos θ)/2 is the hand computation of Chapter 2's example (the half-angle formula). The page computes it by three routes, on the sphere, with spinors and with matrices, and the three agree: a numerical check, not a cited theorem.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">快门计数是抽样模型：每次快门独立地以概率 p 报“过”，随机数来自固定种子的伪随机数发生器。比例靠近权重是大数定律（概率论的经典结果，本书未形式化）；页面只演示一轮抽样。浅色带 p ± 2√(p(1 − p)/N) 是参考尺度，不是保证。</span><span class="en">The shutter counts are a sampling model: each shot independently says “pass” with probability p, from a seeded pseudo-random generator. The share approaching the weight is the law of large numbers (a classical result of probability, not formalized in this book); the page only shows one run. The pale band p ± 2√(p(1 − p)/N) is a reference scale, not a guarantee.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">“每次随机方向”把三个独立高斯数归一化成球面上的均匀方向，再把它们的权重分成十段计数。权重在 [0, 1] 上均匀，是第二章例题由阿基米德帽盒定理做的初等计算；直方图只是计数。</span><span class="en">“A random direction each shot” normalizes three independent Gaussian numbers into a uniform direction on the sphere and counts their weights in ten bins. That the weight is uniform on [0, 1] is the elementary computation of Chapter 2's example via Archimedes' hat-box theorem; the histogram is only a count.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到第一次快门之前" data-aria-en="Back to before the first shot">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="已经按了多少次快门（对数刻度）" data-aria-en="How many shots so far (logarithmic)">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>R</kbd> <span class="zh">换一串随机数</span><span class="en">new random numbers</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">青色的箭头 A 是已知态 ρ<sub>A</sub> = ½(I + a·σ)，琥珀色的箭头 B 是目标态，快门问的是“是不是 B”：P<sub>B</sub> = ½(I + b·σ) 记“过”（+1），I − P<sub>B</sub> 记“不过”（−1）。两支箭头之间只有一个角 θ，不需要第三个坐标架。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>一次只有两种读数。</b>每按一次快门，读数只落在 A 那条直径的两端：+1（过）或 −1（不过）。哪一端是随机的，页面用固定种子的伪随机数抽（MODEL）。</li>
+        <li><b>权重是夹角定的。</b>“过”的权重 p = Tr(ρ<sub>A</sub>P<sub>B</sub>) = |⟨φ<sub>B</sub>|ψ<sub>A</sub>⟩|²：<a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Observer/Conditioning/RankOneBornPairingWeight.lean" target="_blank" rel="noopener"><code>rank_one_born_pairing_weight</code></a>（LEAN ✓）。第二章的半角公式把它写成 (1 + cos θ)/2 = cos²(θ/2)；页面用球面点积、旋量内积与 2×2 矩阵的迹三条路各算一遍（NUM）。在球上，B 向 A 的直径作垂线，垂足把直径分成两段，靠 −1 那端的一段占全长的 p：图上青色的那一段。</li>
+        <li><b>两份权重加起来是 1。</b>“过”与“不过”是一套完备记录测量的两支，权重非负、相加为 1：<a class="leanref" data-lean-gid="D5/S3/Quantum/FiniteDimensional.born_probability_skeleton" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/FiniteDimensional.lean" target="_blank" rel="noopener"><code>born_probability_skeleton</code></a>（LEAN ✓）。</li>
+        <li><b>比例趋向权重。</b>按了 N 次，过了 k 次，比例 k/N 在青色虚线 p 附近摆动，N 越大摆得越小。这是大数定律（概率论的经典结果，本书未形式化）；页面只演示一轮抽样，浅色带 p ± 2√(p(1 − p)/N) 是参考尺度，不是保证。90° 时 p(1 − p) 最大，摆得最厉害；0° 与 180° 时带宽为零，每次结果都确定。</li>
+        <li><b>一起转，权重不动。</b>“两支一起转”时，每次快门前把 A 与 B 绕同一根紫色的轴转同一个角。夹角不变，每一次快门的权重都不变；页面逐次用矩阵重算权重，用同一串随机数得到与不转时相同的计数。这对应第二章的话：迹在基变换下不变，Tr(UρU* · UPU*) = Tr(ρP)。</li>
+        <li><b>随机方向上权重均匀。</b>“每次随机方向”让 B 在球面上均匀地随机取（三个高斯数归一化），十段直方图越数越平，每段约占 1/10。这是第二章例题的初等计算：帽盒定理给出高度 cos θ 在 [−1, 1] 上均匀，p = (1 + cos θ)/2 于是在 [0, 1] 上均匀（NUM）。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch01-measurement.html#sec-ch01-2" target="_top">第一章 §1.2 · 从丈量到份额</a> · <a href="../../zh/ch02-born-rule.html#sec-ch02-1" target="_top">第二章 §2.1 · 奥卡姆剃刀下的测量基</a> · <a href="../../zh/ch02-born-rule.html#thm-rank-one-born-pairing" target="_top">秩一分支的玻恩配对</a> · <a href="../../zh/ch02-born-rule.html#ex-bloch-half-angle" target="_top">半角公式</a> · <a href="../../zh/ch02-born-rule.html#ex-uniform-born-weight" target="_top">随机方向上的玻恩权重</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">The cyan arrow A is the known state ρ<sub>A</sub> = ½(I + a·σ), the amber arrow B is the target, and the shutter asks “is it B?”: P<sub>B</sub> = ½(I + b·σ) records “pass” (+1) and I − P<sub>B</sub> records “fail” (−1). Between the two arrows there is just one angle θ, and no third frame is needed. The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>Only two readings per shot.</b> Each shot lands at one of the two ends of A's diameter: +1 (pass) or −1 (fail). Which end is random; the page draws it with a seeded pseudo-random generator (MODEL).</li>
+        <li><b>The angle sets the weight.</b> The weight of “pass” is p = Tr(ρ<sub>A</sub>P<sub>B</sub>) = |⟨φ<sub>B</sub>|ψ<sub>A</sub>⟩|²: <a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Observer/Conditioning/RankOneBornPairingWeight.lean" target="_blank" rel="noopener"><code>rank_one_born_pairing_weight</code></a> (LEAN ✓). Chapter 2's half-angle formula writes it as (1 + cos θ)/2 = cos²(θ/2); the page computes it by the dot product on the sphere, the spinor overlap and the trace of 2×2 matrices (NUM). On the sphere, drop a perpendicular from B onto A's diameter: its foot cuts the diameter so that the stretch on the −1 side is p of the whole, the cyan stretch in the picture.</li>
+        <li><b>The two weights add up to 1.</b> “Pass” and “fail” are the two branches of a complete record measurement; their weights are non-negative and add up to 1: <a class="leanref" data-lean-gid="D5/S3/Quantum/FiniteDimensional.born_probability_skeleton" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/FiniteDimensional.lean" target="_blank" rel="noopener"><code>born_probability_skeleton</code></a> (LEAN ✓).</li>
+        <li><b>The share heads for the weight.</b> After N shots with k passes, the share k/N wobbles around the dashed cyan line p, less and less as N grows. That is the law of large numbers (a classical result of probability, not formalized in this book); the page shows one run, and the pale band p ± 2√(p(1 − p)/N) is a reference scale, not a guarantee. At 90° p(1 − p) is largest and the wobble widest; at 0° and 180° the band has zero width and every outcome is certain.</li>
+        <li><b>Turning both leaves the weight alone.</b> With “both turn together”, before each shot A and B are turned by the same angle about the same violet axis. The angle between them stays, so the weight of every shot stays; the page recomputes the weight shot by shot with matrices and, with the same random numbers, gets the same counts as without turning. This is Chapter 2's remark that the trace does not change under a change of basis, Tr(UρU* · UPU*) = Tr(ρP).</li>
+        <li><b>On random directions the weight is uniform.</b> “A random direction each shot” draws B uniformly on the sphere (three Gaussian numbers, normalized); the ten-bin histogram flattens as it fills, each bin near 1/10. This is the elementary computation of Chapter 2's example: the hat-box theorem makes the height cos θ uniform on [−1, 1], so p = (1 + cos θ)/2 is uniform on [0, 1] (NUM).</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch01-measurement.html#sec-ch01-2" target="_top">Chapter 1 §1.2 · from measuring to portions</a> · <a href="../../en/ch02-born-rule.html#sec-ch02-1" target="_top">Chapter 2 §2.1 · the measurement basis under Occam's razor</a> · <a href="../../en/ch02-born-rule.html#thm-rank-one-born-pairing" target="_top">Born pairing of a rank-one branch</a> · <a href="../../en/ch02-born-rule.html#ex-bloch-half-angle" target="_top">the half-angle formula</a> · <a href="../../en/ch02-born-rule.html#ex-uniform-born-weight" target="_top">the Born weight on random directions</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

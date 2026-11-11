@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="SYNDROME//DECODE · Syndrome decoding">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SYNDROME//DECODE 综合征解码</title>
+<meta name="description" content="三比特重复码：两道校验 Z₁Z₂、Z₂Z₃ 只问相邻两个比特一不一致。翻一个比特，亮起的校验指出是哪一个，翻回去，叠加原样回来；翻两个或翻相位，灯就指错或根本不亮。The three-qubit repetition code: the two checks Z₁Z₂ and Z₂Z₃ only ask whether neighbouring qubits agree. Flip one qubit and the checks that light up point at it; flip it back and the superposition returns whole. Flip two, or flip a phase, and the lights point the wrong way or stay dark.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="syndrome-decoding">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="SYNDROME//DECODE">SYNDROME<b>//</b>DECODE</h1>
+      <div class="tagline">
+        <span class="zh">综合征解码 · <em>校验只问相邻两个比特一不一致：亮起的灯指出翻了哪一个，翻回去，叠加原样回来；翻两个或翻相位，灯就指错或者不亮</em></span>
+        <span class="en">Syndrome decoding · <em>the checks only ask whether neighbours agree: the lights point at the flipped qubit, flipping it back returns the superposition whole; flip two, or flip a phase, and the lights point wrong or stay dark</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillSyn"><span class="zh">综合征</span><span class="en">SYNDROME</span> <strong>—</strong></span>
+      <span class="pill hot" id="pillFid"><span class="zh">重合</span><span class="en">OVERLAP</span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="single" aria-pressed="false"><span class="code">ONE FLIP</span><span class="cn zh">翻一个：灯指出是哪一个</span><span class="cn en">One flip: the lights point at it</span></button>
+        <button class="preset" data-preset="rooms" aria-pressed="false"><span class="code">ROOMS</span><span class="cn zh">错误把态整个搬进另一间房</span><span class="cn en">The error moves the state, whole, into another room</span></button>
+        <button class="preset" data-preset="mix" aria-pressed="false"><span class="code">σ MIX</span><span class="cn zh">四个分支各回各的，拼回原态</span><span class="cn en">Four branches each come back and add up to the state</span></button>
+        <button class="preset" data-preset="two" aria-pressed="false"><span class="code">TWO FLIPS</span><span class="cn zh">翻两个：灯指错，越纠越错</span><span class="cn en">Two flips: the lights point the wrong way</span></button>
+        <button class="preset" data-preset="phase" aria-pressed="false"><span class="code">PHASE</span><span class="cn zh">翻相位：灯不亮，态却变了</span><span class="cn en">A phase flip: no light, yet the state has changed</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+    <section class="panel sec">
+      <h2><span class="zh">错误</span><span class="en">Errors</span><span class="aside"><span class="zh">点比特</span><span class="en">click a qubit</span></span></h2>
+      <div class="chips" id="kindChips" role="group" aria-label="点一下比特加上哪种错误" data-aria-en="Which error a click on a qubit adds">
+        <button class="chip" data-kind="X" aria-pressed="true"><span class="zh">X 翻转</span><span class="en">X flip</span></button>
+        <button class="chip" data-kind="Z" aria-pressed="false"><span class="zh">Z 相位</span><span class="en">Z phase</span></button>
+      </div>
+      <div class="chips" id="noiseChips" role="group" aria-label="噪声是一个确定的错误还是四个分支的混合" data-aria-en="Whether the noise is one definite error or a mixture of four branches">
+        <button class="chip" data-noise="one" aria-pressed="true"><span class="zh">一个错误</span><span class="en">one error</span></button>
+        <button class="chip" data-noise="mix" aria-pressed="false"><span class="zh">四分支混合 σ</span><span class="en">four-branch mixture σ</span></button>
+        <button class="chip" id="clear"><span class="zh">清除错误</span><span class="en">clear errors</span></button>
+      </div>
+      <p class="note"><span class="zh">在舞台上点三个比特中的一个，给它加上（或去掉）所选的错误；可以同时加好几个。</span><span class="en">Click one of the three qubits on the stage to add (or remove) the chosen error; several can be on at once.</span></p>
+    </section>
+    <section class="panel sec">
+      <h2><span class="zh">逻辑态</span><span class="en">Logical state</span><span class="aside">α|000⟩ + β|111⟩</span></h2>
+      <div class="field">
+        <label for="theta"><span class="zh">角度 θ：α = cos(θ/2)，β = sin(θ/2)</span><span class="en">Angle θ: α = cos(θ/2), β = sin(θ/2)</span></label><output id="oTheta" for="theta">90°</output>
+        <input type="range" id="theta" min="0" max="360" step="5" value="90">
+      </div>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="三个量子比特与跨在相邻两个之上的两道校验；下面是八个基态分成的四间房，青色的柱子是每个基态上的振幅" data-aria-en="Three qubits and the two checks over neighbouring pairs; below, the eight basis states in four rooms, with the amplitude on each basis state as a cyan bar">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-bl">
+        <span><i class="sw cy"></i><span class="zh">振幅（每个基态一根柱子）</span><span class="en">amplitude (one bar per basis state)</span></span>
+        <span><i class="sw dm"></i><span class="zh">虚线：原来的态</span><span class="en">dashed: the original state</span></span>
+        <span><i class="sw mg"></i><span class="zh">错误与亮起的校验</span><span class="en">errors and lit checks</span></span>
+        <span><i class="sw am"></i><span class="zh">解码器这一步翻回的比特</span><span class="en">the qubit the decoder flips back now</span></span>
+      </div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">⟨ψ|out|ψ⟩</span></h2>
+      <dl class="ro">
+        <div class="key"><dt><span class="zh">解码后与原态的重合</span><span class="en">overlap of the decoded state with the original</span></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div class="m"><dt><span class="zh">错误</span><span class="en">error</span></dt><dd id="roErr">—</dd></div>
+        <div class="m"><dt><span class="zh">综合征 (g₁, g₂)</span><span class="en">syndrome (g₁, g₂)</span></dt><dd id="roSyn">—</dd></div>
+        <div><dt><span class="zh">模 2 奇偶：Z 行 · 翻转位</span><span class="en">parity mod 2: Z row · flips</span></dt><dd id="roPar">—</dd></div>
+        <div><dt><span class="zh">解码器翻回</span><span class="en">the decoder flips back</span></dt><dd id="roFix">—</dd></div>
+        <div><dt><span class="zh">纠完剩下的</span><span class="en">left after decoding</span></dt><dd id="roNet">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">房间两两正交（S<sub>i</sub>*S<sub>j</sub> = δ<sub>ij</sub>I）时，对任意 σ 与 ρ：解码(编码(σ, ρ)) = Tr(σ)·ρ。本页的四间房是 S<sub>j</sub> = E<sub>j</sub>V，E ∈ {I, X₁, X₂, X₃}。已冻结：</span><span class="en">When the rooms are pairwise orthogonal (S<sub>i</sub>*S<sub>j</sub> = δ<sub>ij</sub>I), for every σ and ρ: decoding(encoding(σ, ρ)) = Tr(σ)·ρ. The four rooms here are S<sub>j</sub> = E<sub>j</sub>V with E ∈ {I, X₁, X₂, X₃}. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Recovery/OrthogonalSyndromeDecoding.orthogonal_syndrome_recovery" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Recovery/OrthogonalSyndromeDecoding.lean" target="_blank" rel="noopener"><code>orthogonal_syndrome_recovery</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">两个泡利字相乘，等于字段逐项相加的那个字，外面再乘交叉相位 ω<sup>Σ a.z·b.x</sup>（p = 2 时 ω = −1）。正文由此读出：校验与错误对易还是反对易、灯亮不亮，看上面那一行模 2 奇偶。已冻结：</span><span class="en">The product of two Pauli words is the word with the fields added, times the cross phase ω<sup>Σ a.z·b.x</sup> outside (ω = −1 for p = 2). The chapter reads off from it that whether a check commutes or anticommutes with the error, lit or dark, is the parity mod 2 in the row above. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank.pauli_word_mul" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank.lean" target="_blank" rel="noopener"><code>pauli_word_mul</code></a></span></div>
+    </section>
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">振幅、综合征、解码后的 2 × 2 矩阵与重合度都由页面按比特运算实时算出，与第十四章例题第二步的综合征表、第四步的 8 × 2 恢复逐项一致。</span><span class="en">Amplitudes, syndrome, the decoded 2 × 2 matrix and the overlap are computed live by bit arithmetic, and agree entry by entry with the syndrome table of step 2 and the 8 × 2 recovery of step 4 in Chapter 14's example.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">“量校验、再查表翻回”是本页选定的解码器（按第二步的表）；柱子在房间之间滑动只是把一次泡利作用画成基态的搬家。</span><span class="en">“Measure the checks, then look up the table and flip back” is the decoder chosen here (step 2's table); bars sliding between rooms are only a picture of a Pauli acting as a shuffle of basis states.</span></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">三比特重复码只纠至多一个 X 翻转；纠任意单比特错误要五比特码、Steane 码或 Shor 码；Knill–Laflamme 条件。文献结果，未在本书形式化。</span><span class="en">The three-qubit repetition code corrects at most one X flip; arbitrary single-qubit errors need the five-qubit, Steane or Shor code; the Knill–Laflamme conditions. Literature results, not formalized in this book.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到编码好的态" data-aria-en="Back to the encoded state">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="3" step="any" value="0" aria-label="步骤：编码、出错、量校验、纠正" data-aria-en="Step: encode, error, measure, correct">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">一步</span><span class="en">one step</span> · <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> <span class="zh">点比特</span><span class="en">click a qubit</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">第十四章的三比特位翻转重复码：V|0⟩ = |000⟩，V|1⟩ = |111⟩，逻辑态 α|0⟩ + β|1⟩ 编成 α|000⟩ + β|111⟩。两道校验 g₁ = Z₁Z₂、g₂ = Z₂Z₃ 只问相邻两个比特一不一致，从不问 α、β。八个基态按两道校验的读数分成四间两两正交的房。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>翻一个比特，灯指出它。</b>X<sub>k</sub> 与跨在第 k 个比特上的校验反对易：g₁ 管第 1、2 个，g₂ 管第 2、3 个。亮法 (−1,+1)、(−1,−1)、(+1,−1) 分别指向第 1、2、3 个比特，与例题第二步的表一致。灯亮不亮，由泡利字乘法吐出的交叉相位决定：<a class="leanref" data-lean-gid="D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank.pauli_word_mul" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank.lean" target="_blank" rel="noopener"><code>pauli_word_mul</code></a>（LEAN ✓）；模 2 辛奇偶的读法是正文由它推出的。</li>
+        <li><b>错误把态整个搬进另一间房。</b>四间房是 S<sub>j</sub> = E<sub>j</sub>V（E ∈ {I, X₁, X₂, X₃}），两两正交。一个 X 错误把 |000⟩、|111⟩ 两根柱子一起搬进同一间房，α、β 原样跟着走，别的房一点不沾。</li>
+        <li><b>拼回原态。</b>解码映射 Σ<sub>i</sub> S<sub>i</sub>*(·)S<sub>i</sub> 把每间房里的东西拉回逻辑空间，房与房之间的交叉项全被切掉：对任意 σ、ρ，结果是 Tr(σ)·ρ：<a class="leanref" data-lean-gid="D5/S3/Quantum/Recovery/OrthogonalSyndromeDecoding.orthogonal_syndrome_recovery" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Recovery/OrthogonalSyndromeDecoding.lean" target="_blank" rel="noopener"><code>orthogonal_syndrome_recovery</code></a>（LEAN ✓）。“σ 混合”取例题第四步的 σ = diag(½, ¼, ⅛, ⅛)：四个分支的柱子按权重分宽窄，回到码空间后并排拼成一整根。</li>
+        <li><b>翻两个，灯指错。</b>X₁X₂ 的灯与 X₃ 相同，解码器翻回第 3 个比特，合起来是 X₁X₂X₃：逻辑翻转，|000⟩ 与 |111⟩ 的柱子对调。正文说这套码只纠至多一个 X 翻转。</li>
+        <li><b>翻相位，灯不亮。</b>Z₁ 与 g₁、g₂ 都对易，两盏灯都不亮，态留在码空间里，可 |111⟩ 的柱子翻到了轴下：|+<sub>L</sub>⟩ 变成正交的 |−<sub>L</sub>⟩。纠任意单比特错误要更大的码（五比特码、Steane 码、Shor 码），这是文献结果，未在本书形式化。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch14-cloning-codes-and-braids.html#sec-pauli-syndrome-parity" target="_top">第十四章 · Pauli 字与稳定子综合征</a> · <a href="../../zh/ch14-cloning-codes-and-braids.html#sec-orthogonal-syndrome-recovery" target="_top">正交综合征中的逻辑恢复</a> · <a href="../../zh/ch14-cloning-codes-and-braids.html#ex-repetition-code-syndrome" target="_top">三比特重复码全流程验算</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">Chapter 14's three-qubit bit-flip repetition code: V|0⟩ = |000⟩, V|1⟩ = |111⟩, so the logical state α|0⟩ + β|1⟩ is encoded as α|000⟩ + β|111⟩. The two checks g₁ = Z₁Z₂ and g₂ = Z₂Z₃ only ask whether neighbouring qubits agree, never about α or β. By the readings of the two checks the eight basis states fall into four pairwise orthogonal rooms. The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>Flip one qubit and the lights point at it.</b> X<sub>k</sub> anticommutes with the checks over qubit k: g₁ covers qubits 1 and 2, g₂ covers 2 and 3. The patterns (−1,+1), (−1,−1), (+1,−1) point at qubits 1, 2, 3, as in the table of step 2 of the example. Whether a light goes on is decided by the cross phase that the product of Pauli words throws out: <a class="leanref" data-lean-gid="D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank.pauli_word_mul" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank.lean" target="_blank" rel="noopener"><code>pauli_word_mul</code></a> (LEAN ✓); reading it as a symplectic parity mod 2 is the chapter's consequence of it.</li>
+        <li><b>The error moves the state, whole, into another room.</b> The four rooms are S<sub>j</sub> = E<sub>j</sub>V (E ∈ {I, X₁, X₂, X₃}), pairwise orthogonal. An X error carries both bars, |000⟩ and |111⟩, into one room together; α and β ride along unchanged, and no other room gets anything.</li>
+        <li><b>Adding up to the state again.</b> The decoding map Σ<sub>i</sub> S<sub>i</sub>*(·)S<sub>i</sub> pulls the contents of every room back to the logical space and cuts away every cross term between rooms: for every σ and ρ the result is Tr(σ)·ρ: <a class="leanref" data-lean-gid="D5/S3/Quantum/Recovery/OrthogonalSyndromeDecoding.orthogonal_syndrome_recovery" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Recovery/OrthogonalSyndromeDecoding.lean" target="_blank" rel="noopener"><code>orthogonal_syndrome_recovery</code></a> (LEAN ✓). “σ mixture” takes σ = diag(½, ¼, ⅛, ⅛) from step 4 of the example: the bars of the four branches are as wide as their weights, and back in the code space they line up side by side into one whole bar.</li>
+        <li><b>Flip two and the lights point wrong.</b> X₁X₂ lights the same checks as X₃, so the decoder flips qubit 3 back, and together that is X₁X₂X₃: a logical flip, with the bars of |000⟩ and |111⟩ swapped. The chapter says that this code corrects at most one X flip.</li>
+        <li><b>Flip a phase and no light goes on.</b> Z₁ commutes with g₁ and g₂, both lights stay dark and the state stays in the code space, yet the bar of |111⟩ has flipped below the axis: |+<sub>L</sub>⟩ has become the orthogonal |−<sub>L</sub>⟩. Correcting arbitrary single-qubit errors needs larger codes (five-qubit, Steane, Shor), a literature result not formalized in this book.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch14-cloning-codes-and-braids.html#sec-pauli-syndrome-parity" target="_top">Chapter 14 · Pauli words and stabilizer syndromes</a> · <a href="../../en/ch14-cloning-codes-and-braids.html#sec-orthogonal-syndrome-recovery" target="_top">logical recovery on orthogonal syndromes</a> · <a href="../../en/ch14-cloning-codes-and-braids.html#ex-repetition-code-syndrome" target="_top">the repetition code worked through</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="PULSE//AREA · Pulse area and the virtual Z">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PULSE//AREA 脉冲面积与虚拟 Z</title>
+<meta name="description" content="在旋转参考系里，一段固定相位的共振微波脉冲把布洛赫球上的态绕赤道上的一根轴转过一个角，这个角就是包络下的面积：方波和高斯波只要面积相同，转到同一处；失谐时同样的面积转不到那里；两个不同相位的脉冲换个次序，终点不同；绕竖轴的一转不发脉冲，只把后面脉冲的相位改掉，Z 基读数不变，相位改错了符号就送到对面的极点。Inside the rotating frame, a resonant microwave pulse of fixed phase turns the Bloch state about an axis on the equator by an angle equal to the area under its envelope: a square and a Gaussian pulse of the same area end at the same point; detuned, the same area misses it; two pulses of different phase end elsewhere when swapped; and a turn about the vertical axis sends no pulse at all, only shifts the phase of the pulses after it, leaving the Z readout unchanged, while the wrong sign of that shift lands on the opposite pole.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="pulse-area-virtual-z">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="PULSE//AREA">PULSE<b>//</b>AREA</h1>
+      <div class="tagline">
+        <span class="zh">脉冲面积与虚拟 Z · <em>包络下有多少面积，态就转多大的角；绕竖轴的那一转不发脉冲，只改后面脉冲的相位</em></span>
+        <span class="en">Pulse area and the virtual Z · <em>the area under the envelope is the angle turned; the turn about the vertical axis sends no pulse, it only shifts the phase of the pulses after it</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill hot" id="pillArea"><span class="zh">面积</span><span class="en">AREA</span> <strong>—</strong></span>
+      <span class="pill" id="pillTime"><span class="zh">模拟时长</span><span class="en">ANALOG TIME</span> <strong>—</strong></span>
+      <span class="pill" id="pillP0">P(0) <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="carrier" aria-pressed="false"><span class="code">CARRIER</span><span class="cn zh">实验室系：赤道上的态飞转，两极不动</span><span class="cn en">Lab frame: the equator spins, the poles stay</span></button>
+        <button class="preset" data-preset="quarter" aria-pressed="false"><span class="code">QUARTER</span><span class="cn zh">方波 25 ns：面积 π/2，转四分之一圈</span><span class="cn en">Square, 25 ns: area π/2, a quarter turn</span></button>
+        <button class="preset" data-preset="gauss" aria-pressed="false"><span class="code">SAME-AREA</span><span class="cn zh">高斯波，同样的面积：同一个终点</span><span class="cn en">Gaussian, same area: the same end point</span></button>
+        <button class="preset" data-preset="half" aria-pressed="false"><span class="code">HALF-TURN</span><span class="cn zh">面积 π：北极翻到南极</span><span class="cn en">Area π: north pole to south pole</span></button>
+        <button class="preset" data-preset="detune" aria-pressed="false"><span class="code">DETUNED</span><span class="cn zh">失谐 5 MHz：面积没变，转轴在晃</span><span class="cn en">Detuned 5 MHz: same area, the axis sways</span></button>
+        <button class="preset" data-preset="order" aria-pressed="false"><span class="code">SWAP-ORDER</span><span class="cn zh">先 X 后 Y，与先 Y 后 X 不同</span><span class="cn en">X then Y is not Y then X</span></button>
+        <button class="preset" data-preset="vz" aria-pressed="false"><span class="code">VIRTUAL-Z</span><span class="cn zh">虚拟 Z：0 ns，改相位，读数不变</span><span class="cn en">Virtual Z: 0 ns, a phase shift, the same readout</span></button>
+        <button class="preset" data-preset="sign" aria-pressed="false"><span class="code">WRONG-SIGN</span><span class="cn zh">相位改错符号：送到南极</span><span class="cn en">The wrong sign: off to the south pole</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">脉冲</span><span class="en">The pulse</span><span class="aside">Ω(t) · φ · Δ</span></h2>
+      <div class="chips" id="shapeChips" role="group" aria-label="包络形状" data-aria-en="Envelope shape">
+        <button class="chip" data-shape="square" aria-pressed="true"><span class="zh">方波</span><span class="en">Square</span></button>
+        <button class="chip" data-shape="gauss" aria-pressed="false"><span class="zh">高斯波</span><span class="en">Gaussian</span></button>
+      </div>
+      <div class="field">
+        <label for="area"><span class="zh">脉冲面积 ∫Ω dt</span><span class="en">Pulse area ∫Ω dt</span><small class="zh">也可以在舞台上拖包络的顶</small><small class="en">or drag the top of the envelope on the stage</small></label><output id="oArea" for="area">0.50π</output>
+        <input type="range" id="area" min="0" max="2" step="0.01" value="0.5">
+      </div>
+      <div class="field">
+        <label for="dur"><span class="zh">时长 T</span><span class="en">Duration T</span><small class="zh">拖包络的右端；振幅不变，面积跟着变</small><small class="en">drag the right end; the height stays, the area follows</small></label><output id="oDur" for="dur">25 ns</output>
+        <input type="range" id="dur" min="0.4" max="40" step="0.1" value="25">
+      </div>
+      <div class="field">
+        <label for="phase"><span class="zh">驱动相位 φ（转轴在赤道上的方位）</span><span class="en">Drive phase φ (azimuth of the axis on the equator)</span></label><output id="oPhase" for="phase">0°</output>
+        <input type="range" id="phase" min="-180" max="180" step="5" value="0">
+      </div>
+      <div class="field">
+        <label for="det"><span class="zh">失谐 Δ/2π</span><span class="en">Detuning Δ/2π</span></label><output id="oDet" for="det">0 MHz</output>
+        <input type="range" id="det" min="-15" max="15" step="0.5" value="0">
+      </div>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">序列</span><span class="en">The sequence</span><span class="aside">Z(λ) · 2nd pulse</span></h2>
+      <div class="field">
+        <label for="lam"><span class="zh">脉冲之前的虚拟 Z(λ)</span><span class="en">A virtual Z(λ) before the pulse</span><small class="zh">0 ns；软件把后面脉冲的相位改成 φ − λ</small><small class="en">0 ns; software shifts the later pulses to φ − λ</small></label><output id="oLam" for="lam">0°</output>
+        <input type="range" id="lam" min="-180" max="180" step="15" value="0">
+      </div>
+      <div class="chips" id="signChips" role="group" aria-label="相位补偿的符号" data-aria-en="Sign of the phase shift">
+        <button class="chip" data-sign="1" aria-pressed="true"><span class="zh">φ − λ（正确）</span><span class="en">φ − λ (right)</span></button>
+        <button class="chip" data-sign="-1" aria-pressed="false"><span class="zh">φ + λ（错误）</span><span class="en">φ + λ (wrong)</span></button>
+      </div>
+      <div class="chips" id="twoChips" role="group" aria-label="第二个脉冲" data-aria-en="Second pulse">
+        <button class="chip" data-two="0" aria-pressed="true"><span class="zh">一个脉冲</span><span class="en">One pulse</span></button>
+        <button class="chip" data-two="1" aria-pressed="false"><span class="zh">再加一个同面积的脉冲</span><span class="en">Add a second pulse of the same area</span></button>
+      </div>
+      <div class="field" id="phase2Field">
+        <label for="phase2"><span class="zh">第二个脉冲的相位 φ₂</span><span class="en">Phase of the second pulse φ₂</span></label><output id="oPhase2" for="phase2">90°</output>
+        <input type="range" id="phase2" min="-180" max="180" step="5" value="90">
+      </div>
+      <div class="chips"><button class="chip" id="swap"><span class="zh">两个脉冲换序</span><span class="en">Swap the two pulses</span></button></div>
+      <p class="note"><span class="zh">在球上拖琥珀色的圆圈选起始态；拖空白处转动视角。</span><span class="en">Drag the amber ring on the sphere to choose the starting state; drag empty space to turn the view.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="左边是微波包络与它下面的品红面积；右边是布洛赫球：紫色的转轴、琥珀色的当前态，品红的扇形是已经转过的角" data-aria-en="Left: the microwave envelope and the magenta area under it; right: the Bloch sphere with the violet axis, the amber current state, and a magenta sector for the angle turned so far">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="frameChips" role="group" aria-label="参考系" data-aria-en="Frame">
+        <button class="chip" data-frame="rot" aria-pressed="true"><span class="zh">旋转系</span><span class="en">Rotating</span></button>
+        <button class="chip" data-frame="lab" aria-pressed="false"><span class="zh">实验室系</span><span class="en">Lab</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2><span class="zh">扫过的面积与转过的角</span><span class="en">Area swept and angle turned</span></h2><span id="angMeta"></span></div>
+        <canvas id="angPlot" aria-label="随时间累积的脉冲面积（品红）与传播子转过的角（白色虚线）" data-aria-en="The pulse area accumulated over time (magenta) and the angle of the propagator (white dashed)"></canvas>
+      </section>
+      <section class="panel">
+        <div class="head"><h2><span class="zh">Z 基读出：测得 0 的概率</span><span class="en">Z readout: the chance of 0</span></h2><span id="p0Meta"></span></div>
+        <canvas id="p0Plot" aria-label="测得 |0⟩ 的概率随时间的变化；虚线是对照的那条路" data-aria-en="The probability of reading |0⟩ against time; the dashed line is the path compared with"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt><span class="zh">扫过的脉冲面积 ∫Ω dt 与传播子的转角</span><span class="en">pulse area swept ∫Ω dt and the angle of the propagator</span></dt><dd><b id="roArea">—</b><span id="roAreaSub"></span></dd></div>
+        <div class="c"><dt><span class="zh">测得 0 的概率 P(0) = (1 + z)/2</span><span class="en">chance of reading 0, P(0) = (1 + z)/2</span></dt><dd id="roP0">—</dd></div>
+        <div class="v"><dt><span class="zh">此刻的转轴</span><span class="en">the axis right now</span></dt><dd id="roAxis">—</dd></div>
+        <div><dt><span class="zh">相位寄存器 φ_frame · 发出的相位 φ_phys</span><span class="en">frame register φ_frame · phase sent φ_phys</span></dt><dd id="roFrame">—</dd></div>
+        <div><dt><span class="zh">模拟脉冲时长</span><span class="en">analog pulse time</span></dt><dd id="roTime">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean" id="leanStationary"><span class="ok">LEAN ✓</span><span><span class="zh">厄米 H、单位本征向量 Hv = Ev、实数 t：U = exp(−itH) 是幺正的，且 UρU* = ρ（ρ = vv*）。两极是 H₀ = ½ω₀Z 的本征态，所以实验室系里它们不动。已冻结：</span><span class="en">For Hermitian H, a unit eigenvector Hv = Ev and real t: U = exp(−itH) is unitary and UρU* = ρ (ρ = vv*). The poles are eigenstates of H₀ = ½ω₀Z, so in the lab frame they stay put. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.lean" target="_blank" rel="noopener"><code>energy_eigenstate_stationary</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">面积律 θ = ∫Ω dt、旋转参考系消去载频、轴向共轭恒等式 R_φ(θ)R_z(λ) = R_z(λ)R_{φ−λ}(θ) 与虚拟 Z 的调度约定（McKay 等，2017）：第十一章的文献注记，文献结果，未在本书形式化。前提是共振或给定失谐、孤立二能级与旋波近似。</span><span class="en">The area law θ = ∫Ω dt, the rotating frame that removes the carrier, the axial identity R_φ(θ)R_z(λ) = R_z(λ)R_{φ−λ}(θ) and the virtual-Z scheduling convention (McKay et al., 2017): the literature remarks of Chapter 11, literature results not formalized in this book. They assume resonance or a given detuning, an isolated two-level system and the rotating-wave approximation.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">高斯波取截断到两端为零的高斯（σ = T/6）；实验室系的画面是把旋转系里的解绕 z 轴转回 ω_d t（略去二倍频项）；把面积与转角都画成品红，是本书的读法。</span><span class="en">The Gaussian is truncated to zero at both ends (σ = T/6); the lab-frame picture turns the rotating-frame solution back about z by ω_d t (the double-frequency term dropped); drawing both the area and the angle in magenta is this book's reading.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数都是按双精度实时算出的数值演示，不是证明：不失谐时按面积精确转动；失谐时把脉冲切成上千小段，逐段做精确的 2 × 2 指数再按时间次序相乘。</span><span class="en">Every number on the page is computed live in double precision, an illustration and not a proof: without detuning the turn follows the area exactly; with detuning the pulse is cut into a thousand or more slices, each an exact 2 × 2 exponential, multiplied in time order.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到 0 ns" data-aria-en="Back to 0 ns">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="25" step="any" value="0" aria-label="时间（纳秒）" data-aria-en="Time (nanoseconds)">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">每次八分之一</span><span class="en">an eighth at a time</span> · <kbd>F</kbd> <span class="zh">参考系</span><span class="en">frame</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">左边是微波脉冲的包络 Ω(t)/2π（单位 MHz，横轴是纳秒），右边是布洛赫球。时间轴走到哪里，左边就把那之前的包络下的面积涂成品红，右边就把态转到那一刻。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>旋转系。</b>比特的固有哈密顿量 H₀ = ½ω₀Z（ω₀/2π = 5 GHz）。在实验室系里，赤道上的态每 0.2 ns 绕竖轴转一圈；两极是 H₀ 的本征态，纹丝不动（<a class="leanref" data-lean-gid="D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.lean" target="_blank" rel="noopener"><code>energy_eigenstate_stationary</code></a>，LEAN ✓；它依赖本征线上的标量指数化 <a class="leanref" data-lean-gid="D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.exp_mulVec_of_eigenvector" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.lean" target="_blank" rel="noopener"><code>exp_mulVec_of_eigenvector</code></a>，LEAN ✓）。跟着驱动频率 ω_d 一起转的参考系把载频消掉，这是文献结果，未在本书形式化。页面默认画旋转系；切到“实验室系”时，把旋转系里的解绕 z 轴转 ω_d t。</li>
+        <li><b>面积律。</b>共振、相位 φ 固定、旋波近似下，旋转系哈密顿量是 ½Ω(t)(cos φ X + sin φ Y)，各时刻彼此对易，传播子是绕赤道轴 (cos φ, sin φ, 0) 转 θ = ∫Ω dt 的 R_φ(θ) = exp[−(i/2)θ(cos φ X + sin φ Y)]。所以方波和高斯波只要面积相同就转到同一处：面积 π/2 是四分之一转，π 是半转。文献结果，未在本书形式化。</li>
+        <li><b>失谐。</b>加上 Δ = ω₀ − ω_d，生成元是 ½(Ω(t)cos φ X + Ω(t)sin φ Y + ΔZ)。包络在变时，各时刻的生成元不再对易，转轴随时间晃动，要按时间次序相乘；页面把脉冲切成至少 1200 小段，每段用该段的平均振幅做精确指数。</li>
+        <li><b>次序。</b>两个绕不同轴的转动一般不对易：先 X(π/2) 后 Y(π/2) 把北极送到 −y，先 Y 后 X 送到 +x。页面只是数这两个终点，不涉及第十一章冻结的三脉冲积分核误差界——那条命题讲的是 pulse0 核的迹，不是幺正门。</li>
+        <li><b>虚拟 Z。</b>由 R_φ(θ)R_z(λ) = R_z(λ)R_{φ−λ}(θ)：电路里先做 R_z(λ) 再做 R_φ(θ)，等于把后面的脉冲改成相位 φ − λ，再在最后补一个 R_z(λ)；最后那个 R_z 与 Z 基投影对易，不改读数，于是可以不发。舞台上的实线是硬件真正做的（只发相位 φ − λ 的脉冲，0 ns 的 Z），白色虚线是电路字面上的那条路（先绕竖轴转 λ，再按 φ 发脉冲）：两条路终点的高度相同，所以 P(0) 相同，方位差 λ。符号取反（φ + λ）时终点高度一般不同：从 |+⟩ 出发、λ = 90°、X(π/2) 时，正确的符号到北极 P(0) = 1，错误的符号到南极 P(0) = 0。这些是第十一章文献注记的内容，文献结果，未在本书形式化。读数不随参考系更新而变，在算子代数层面对应状态前推与效应拉回的迹对偶：若信道与完全正映射满足迹对偶前提，则 t 步前推后的读数等于效应拉回 t 次后的读数（<a class="leanref" data-lean-gid="D5/S3/Quantum/Dynamics/ObserverPullbackTraceIdentity.observer_pullback_trace_identity" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Dynamics/ObserverPullbackTraceIdentity.lean" target="_blank" rel="noopener"><code>observer_pullback_trace_identity</code></a>，LEAN ✓；t 是离散步数，定理不涉及脉冲时长）。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch11-pulses-and-virtual-z.html#sec-rotating-frame-calibration" target="_top">第十一章 · 旋转坐标系与载频约分</a> · <a href="../../zh/ch11-pulses-and-virtual-z.html#sec-resonant-pulse-area" target="_top">共振微波与脉冲面积</a> · <a href="../../zh/ch11-pulses-and-virtual-z.html#sec-ordered-pulse-control" target="_top">有序脉冲与误差界</a> · <a href="../../zh/ch11-pulses-and-virtual-z.html#sec-virtual-z-phase-reference" target="_top">虚拟 Z 与相位参考更新</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">On the left is the envelope Ω(t)/2π of the microwave pulse (MHz against nanoseconds), on the right the Bloch sphere. Wherever the rail stands, the left side paints the area under the envelope up to that moment in magenta, and the right side turns the state to that moment. The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>The rotating frame.</b> The qubit's own Hamiltonian is H₀ = ½ω₀Z (ω₀/2π = 5 GHz). In the lab frame a state on the equator goes once round the vertical axis every 0.2 ns; the poles are eigenstates of H₀ and do not move (<a class="leanref" data-lean-gid="D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.lean" target="_blank" rel="noopener"><code>energy_eigenstate_stationary</code></a>, LEAN ✓; it rests on the scalar exponential along an eigenline, <a class="leanref" data-lean-gid="D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.exp_mulVec_of_eigenvector" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.lean" target="_blank" rel="noopener"><code>exp_mulVec_of_eigenvector</code></a>, LEAN ✓). A frame turning along at the drive frequency ω_d removes the carrier; that is a literature result, not formalized in this book. The page draws the rotating frame by default; in “Lab” it turns the rotating-frame solution about z by ω_d t.</li>
+        <li><b>The area law.</b> At resonance, with fixed phase φ and the rotating-wave approximation, the rotating-frame Hamiltonian is ½Ω(t)(cos φ X + sin φ Y); its values at different times commute, and the propagator turns about the equatorial axis (cos φ, sin φ, 0) by θ = ∫Ω dt: R_φ(θ) = exp[−(i/2)θ(cos φ X + sin φ Y)]. So a square and a Gaussian pulse of the same area end at the same point: area π/2 is a quarter turn, π a half turn. Literature result, not formalized in this book.</li>
+        <li><b>Detuning.</b> With Δ = ω₀ − ω_d the generator is ½(Ω(t)cos φ X + Ω(t)sin φ Y + ΔZ). While the envelope changes, its values at different times no longer commute, the axis sways, and the slices must be multiplied in time order; the page cuts the pulse into at least 1200 slices, each an exact exponential at the slice's mean amplitude.</li>
+        <li><b>Order.</b> Two turns about different axes do not commute in general: X(π/2) then Y(π/2) takes the north pole to −y, Y then X takes it to +x. The page only counts these two end points; it has nothing to do with the frozen three-pulse kernel bound of Chapter 11, which is about the trace of pulse0 kernels, not unitary gates.</li>
+        <li><b>The virtual Z.</b> From R_φ(θ)R_z(λ) = R_z(λ)R_{φ−λ}(θ): doing R_z(λ) and then R_φ(θ) is the same as sending the later pulse at phase φ − λ and appending R_z(λ) at the end; that last R_z commutes with the Z-basis projectors and does not change the readout, so it need not be sent. On the stage the solid path is what the hardware does (only a pulse at phase φ − λ, a Z of 0 ns), and the white dashed path is the circuit taken literally (first turn by λ about the vertical axis, then a pulse at φ): the two end points have the same height, hence the same P(0), and azimuths λ apart. With the sign reversed (φ + λ) the heights differ in general: from |+⟩ with λ = 90° and X(π/2), the right sign reaches the north pole, P(0) = 1, the wrong sign the south pole, P(0) = 0. These are the literature remarks of Chapter 11, literature results not formalized in this book. That the readout survives a frame update matches, at the level of operator algebras, the trace duality of pushing states forward and pulling effects back: when a channel and a completely positive map satisfy the duality premise, the readout after t steps forward equals the readout of the effect pulled back t times (<a class="leanref" data-lean-gid="D5/S3/Quantum/Dynamics/ObserverPullbackTraceIdentity.observer_pullback_trace_identity" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Dynamics/ObserverPullbackTraceIdentity.lean" target="_blank" rel="noopener"><code>observer_pullback_trace_identity</code></a>, LEAN ✓; t counts discrete steps, and the theorem says nothing about pulse durations).</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch11-pulses-and-virtual-z.html#sec-rotating-frame-calibration" target="_top">Chapter 11 · Rotating frames and carrier removal</a> · <a href="../../en/ch11-pulses-and-virtual-z.html#sec-resonant-pulse-area" target="_top">Resonant drives and pulse area</a> · <a href="../../en/ch11-pulses-and-virtual-z.html#sec-ordered-pulse-control" target="_top">Ordered pulses and an error bound</a> · <a href="../../en/ch11-pulses-and-virtual-z.html#sec-virtual-z-phase-reference" target="_top">Virtual Z and phase-reference updates</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

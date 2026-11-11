@@ -1,0 +1,3 @@
+/* GATE//POLYTOPE: the shared lab layout (../assets/theme.css) carries the page; colours come from the tokens.
+   The amber target is dragged on the sphere, empty space orbits the camera. */
+#cv { cursor: grab; touch-action: none; }

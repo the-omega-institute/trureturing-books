@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="WALK//SPREAD · How walks spread">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WALK//SPREAD 游走扩散</title>
+<meta name="description" content="一条线（一个足够长的圈）上，量子游走与经典随机游走从同一个原点出发：量子的那一份带着硬币相干地走，宽度按步数 n 长大，两个尖峰贴着 ±n 往外跑；经典的那一份宽度只按 √n 长大。硬币取 c* = (1, i)/√2 时量子分布左右成镜像，换一枚硬币就偏向一边。On a line (a long enough cycle) a quantum walk and a classical random walk start from the same origin: the quantum one moves coherently with its coin, its width grows like the number of steps n and its two peaks run out next to ±n; the classical one widens only like √n. With the coin c* = (1, i)/√2 the quantum distribution is its own mirror image; another coin tilts it to one side.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="walk-spreading">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="WALK//SPREAD">WALK<b>//</b>SPREAD</h1>
+      <div class="tagline">
+        <span class="zh">游走扩散 · <em>带着硬币相干地走，宽度按步数长大；掷硬币乱走，宽度只按步数的平方根长大</em></span>
+        <span class="en">How walks spread · <em>walk coherently with a coin and the width grows with the steps; toss the coin and it grows only with their square root</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillN"><span class="zh">步数</span><span class="en">STEPS</span> <strong>—</strong></span>
+      <span class="pill hot" id="pillRatio"><span class="zh">宽度比</span><span class="en">WIDTH RATIO</span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="ten" aria-pressed="false"><span class="code">TEN-STEPS</span><span class="cn zh">走 10 步：两侧各一个尖峰</span><span class="cn en">Ten steps: a peak on either side</span></button>
+        <button class="preset" data-preset="fifty" aria-pressed="false"><span class="code">FIFTY-STEPS</span><span class="cn zh">走 50 步：宽度差近四倍</span><span class="cn en">Fifty steps: nearly four times as wide</span></button>
+        <button class="preset" data-preset="width" aria-pressed="false"><span class="code">WIDTH</span><span class="cn zh">宽度：一条直线，一条 √n</span><span class="cn en">Width: a straight line and a √n</span></button>
+        <button class="preset" data-preset="coin" aria-pressed="false"><span class="code">REAL-COIN</span><span class="cn zh">硬币 (1, 1)/√2：偏向一边</span><span class="cn en">Coin (1, 1)/√2: tilted to one side</span></button>
+        <button class="preset" data-preset="ring" aria-pressed="false"><span class="code">RING-9</span><span class="cn zh">九个点的圈：绕回来，仍是镜像</span><span class="cn en">A ring of nine: wrapped round, still a mirror</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+    <section class="panel sec">
+      <h2><span class="zh">硬币</span><span class="en">Coin</span><span class="aside">c = (√w, e<sup>iφ</sup>√(1−w))</span></h2>
+      <div class="field">
+        <label for="wt"><span class="zh">|0⟩ 的份额 w</span><span class="en">Share of |0⟩, w</span><small class="zh">|0⟩ 向左走，|1⟩ 向右走</small><small class="en">|0⟩ steps left, |1⟩ steps right</small></label><output id="oWt" for="wt">0.50</output>
+        <input type="range" id="wt" min="0" max="1" step="0.01" value="0.5">
+      </div>
+      <div class="field">
+        <label for="phi"><span class="zh">相对相位 φ</span><span class="en">Relative phase φ</span><small class="zh">w = ½、φ = 90° 就是 c* = (1, i)/√2</small><small class="en">w = ½ and φ = 90° give c* = (1, i)/√2</small></label><output id="oPhi" for="phi">90°</output>
+        <input type="range" id="phi" min="-180" max="180" step="1" value="90">
+      </div>
+    </section>
+    <section class="panel sec">
+      <h2><span class="zh">圈长</span><span class="en">Cycle</span><span class="aside">ZMod p</span></h2>
+      <div class="field">
+        <label for="pp"><span class="zh">圈上的点数 p</span><span class="en">Points on the cycle p</span><small class="zh">p = 121 时 60 步内绕不回来，就是一条线</small><small class="en">at p = 121 no walk of 60 steps wraps round: a line</small></label><output id="oP" for="pp">121</output>
+        <input type="range" id="pp" min="3" max="121" step="1" value="121">
+      </div>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage still" id="stage" data-thumb aria-label="一条线上的两种游走：上方青色的柱是量子游走 n 步后各位置的概率，下方灰色的柱是经典随机游走；虚线是 n 步走得到的最远处 ±n；硬币不对称时，品红标出量子分布比它的镜像多出的部分" data-aria-en="Two walks on one line: the cyan bars above are the probabilities of the quantum walk after n steps, the grey bars below those of the classical random walk; the dashed lines are the farthest reach ±n; with a lopsided coin, magenta marks what the quantum distribution has beyond its mirror image">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+        <button class="chip" data-scene="dist" aria-pressed="true"><span class="zh">分布</span><span class="en">Spread</span></button>
+        <button class="chip" data-scene="width" aria-pressed="false"><span class="zh">宽度</span><span class="en">Width</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2><span class="zh">左右差多少</span><span class="en">How lopsided</span></h2><span id="plotMeta"></span></div>
+        <canvas id="plot" aria-label="量子分布与它的镜像之差（品红）随步数的变化；硬币取 c* 时它一直是零" data-aria-en="How far the quantum distribution is from its mirror image (magenta) against the steps; with the coin c* it stays at zero"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt><span class="zh">宽度比：量子 ÷ 经典</span><span class="en">width ratio: quantum ÷ classical</span></dt><dd><b id="roRatio">—</b><span id="roRatioSub"></span></dd></div>
+        <div><dt><span class="zh">步数 n · 圈长 p</span><span class="en">steps n · cycle length p</span></dt><dd id="roN">—</dd></div>
+        <div class="c"><dt><span class="zh">量子宽度 σ · σ ÷ n</span><span class="en">quantum width σ · σ ÷ n</span></dt><dd id="roQ">—</dd></div>
+        <div><dt><span class="zh">经典宽度 σ · √n</span><span class="en">classical width σ · √n</span></dt><dd id="roC">—</dd></div>
+        <div class="m"><dt><span class="zh">左右失衡 ½ Σ |P(x) − P(−x)|</span><span class="en">lopsidedness ½ Σ |P(x) − P(−x)|</span></dt><dd id="roImb">—</dd></div>
+        <div><dt><span class="zh">镜像对 (0, x) 与 (1, −x) 的最大差 · 总概率</span><span class="en">largest gap in a mirror pair (0, x), (1, −x) · total</span></dt><dd id="roPair">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">对一切圈长 p ≥ 1、步数 n 与单位硬币 c，圈 ZMod p 上 Hadamard 游走 n 步后的态，其几何纠缠（把 2p 个硬币 × 位置模式看作单激发 W 态）不超过硬币取 c* = (1, i)/√2 时的值。页面不计算这个纠缠量。已冻结：</span><span class="en">For every cycle length p ≥ 1, number of steps n and unit coin c, the geometric entanglement of the Hadamard walk on ZMod p after n steps (its 2p coin × position modes read as a single-excitation W state) is at most its value for the coin c* = (1, i)/√2. The page does not compute this entanglement. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Walks/SymmetricCoinMaximalWalkEntanglement.result" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Walks/SymmetricCoinMaximalWalkEntanglement.lean" target="_blank" rel="noopener"><code>SymmetricCoinMaximalWalkEntanglement.result</code></a></span></div>
+    </section>
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">两种分布、宽度、左右失衡与镜像对之差都按正文的单步规则在双精度下逐步算出：量子的一份是振幅，经典的一份是每步各 ½ 的概率。这是数值演示，不是证明。</span><span class="en">Both distributions, the widths, the lopsidedness and the mirror-pair gaps are computed step by step in double precision from the one-step rule of the text: amplitudes for the quantum walk, probability ½ each way per step for the classical one. An illustration, not a proof.</span></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">线上 Hadamard 游走的宽度按 n 线性增长、经典随机游走按 √n，是文献结果，未在本书形式化；页面只算到 60 步。黏合树上的指数加速与“一般图通常至多二次加速”见第十六章文献注记，同样未形式化。</span><span class="en">That the width of the Hadamard walk on a line grows linearly in n while the classical random walk grows like √n is a literature result, not formalized in this book; the page only computes up to 60 steps. The exponential speedup on glued trees and “at most quadratic on general graphs, as a rule” are in the literature remark of Chapter 16, likewise not formalized.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到原点" data-aria-en="Back to the origin">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="60" step="any" value="0" aria-label="走了几步" data-aria-en="Steps walked">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">一次一步</span><span class="en">one step at a time</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">舞台是一个有 p 个点的圈 ZMod p，画成一条线（默认 p = 121，60 步之内绕不回来）。两种游走都从原点出发：上方青色是量子游走，下方灰色是经典随机游走，时间轴是步数 n。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>单步规则。</b>按正文的 hadamardStep：新的 (0, x) 振幅是 (ψ(0, x + 1) + ψ(1, x + 1))/√2，新的 (1, x) 振幅是 (ψ(0, x − 1) − ψ(1, x − 1))/√2。所以 |0⟩ 那一份向左走、|1⟩ 那一份向右走，两份在每一步都按 Hadamard 混合、相互干涉。初态是原点上的硬币 c = (√w, e<sup>iφ</sup>√(1 − w))。位置 x 的概率 P(x) = |ψ(0, x)|² + |ψ(1, x)|²。</li>
+        <li><b>经典对照。</b>经典随机游走每步以 ½ 的概率向左或向右，n 步后是二项分布，方差恰为 n，宽度 √n。量子游走的宽度在页面上随 n 线性增长（σ ÷ n 停在 0.54 附近）；这一渐近行为是文献结果，未在本书形式化。两者的差距是平方关系：在一条线上是二次的，不是指数的。</li>
+        <li><b>对称硬币。</b>正文证明梗概里的一步：镜像对 (0, x) 与 (1, −x) 的概率之和与硬币无关，c* 把每一对均分。页面数出每一对的最大差：c*（以及它的共轭 (1, −i)/√2）时为零，于是 P(x) = P(−x)；换一枚硬币，例如 (1, 1)/√2，分布就偏向一边，品红是它比镜像多出的部分。冻结的结论是关于几何纠缠的：<a class="leanref" data-lean-gid="D5/S3/Quantum/Walks/SymmetricCoinMaximalWalkEntanglement.result" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Walks/SymmetricCoinMaximalWalkEntanglement.lean" target="_blank" rel="noopener"><code>SymmetricCoinMaximalWalkEntanglement.result</code></a>（LEAN ✓）：对一切 p ≥ 1、n 与单位硬币 c，geometricEntanglement(walkState(p, n, c)) ≤ geometricEntanglement(walkState(p, n, c*))。页面不计算这个纠缠量，只画分布。</li>
+        <li><b>适用边界。</b>这个引理不说量子游走在任意图上都有指数加速，也不说相消干涉能把任意图上的回头路清零。黏合树上的指数分离与一般图通常至多二次加速是文献结果，未在本书形式化（第十六章文献注记）。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch16-qsvt-walks-and-compilation.html#sec-quantum-walk-interference" target="_top">图上游走：相干叠加与适用边界</a> · <a href="../../zh/ch16-qsvt-walks-and-compilation.html#lemma-symmetric-coin-walk" target="_top">对称硬币引理</a> · <a href="../../zh/ch16-qsvt-walks-and-compilation.html#rem-qsvt-walks-literature" target="_top">QSVT 与量子游走的文献注记</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">The stage is a cycle ZMod p of p points, drawn as a line (p = 121 by default, so no walk of 60 steps wraps round). Both walks start at the origin: the cyan one above is the quantum walk, the grey one below the classical random walk, and the rail counts the steps n. The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>The one-step rule.</b> As in the text's hadamardStep: the new amplitude at (0, x) is (ψ(0, x + 1) + ψ(1, x + 1))/√2 and the new amplitude at (1, x) is (ψ(0, x − 1) − ψ(1, x − 1))/√2. The |0⟩ part steps left, the |1⟩ part steps right, and at every step the Hadamard mixes the two so that they interfere. The walk starts at the origin with the coin c = (√w, e<sup>iφ</sup>√(1 − w)). The probability at x is P(x) = |ψ(0, x)|² + |ψ(1, x)|².</li>
+        <li><b>The classical comparison.</b> The classical random walk steps left or right with probability ½ each; after n steps it is binomial with variance exactly n, width √n. On the page the width of the quantum walk grows linearly in n (σ ÷ n settles near 0.54); that asymptotic behaviour is a literature result, not formalized in this book. The gap between the two is a square: on a line the gain is quadratic, not exponential.</li>
+        <li><b>The symmetric coin.</b> A step of the proof sketch in the text: the sum of the probabilities of a mirror pair (0, x) and (1, −x) does not depend on the coin, and c* splits every pair evenly. The page reports the largest gap within a pair: zero for c* (and for its conjugate (1, −i)/√2), and then P(x) = P(−x); with another coin, such as (1, 1)/√2, the distribution tilts to one side, and magenta is what it has beyond its mirror image. The frozen result is about geometric entanglement: <a class="leanref" data-lean-gid="D5/S3/Quantum/Walks/SymmetricCoinMaximalWalkEntanglement.result" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Walks/SymmetricCoinMaximalWalkEntanglement.lean" target="_blank" rel="noopener"><code>SymmetricCoinMaximalWalkEntanglement.result</code></a> (LEAN ✓): for every p ≥ 1, n and unit coin c, geometricEntanglement(walkState(p, n, c)) ≤ geometricEntanglement(walkState(p, n, c*)). The page does not compute this entanglement; it draws the distributions.</li>
+        <li><b>Where it stops.</b> The lemma does not say that quantum walks give an exponential speedup on every graph, nor that destructive interference clears every way back on any graph. The exponential separation on glued trees, and at most a quadratic speedup on general graphs as a rule, are literature results not formalized in this book (the literature remark of Chapter 16).</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch16-qsvt-walks-and-compilation.html#sec-quantum-walk-interference" target="_top">walks on graphs: coherence and its limits</a> · <a href="../../en/ch16-qsvt-walks-and-compilation.html#lemma-symmetric-coin-walk" target="_top">the symmetric-coin lemma</a> · <a href="../../en/ch16-qsvt-walks-and-compilation.html#rem-qsvt-walks-literature" target="_top">the literature remark on QSVT and walks</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

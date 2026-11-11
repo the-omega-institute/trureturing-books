@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="BLOCH//NOISE · The Bloch ball under three noises">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BLOCH//NOISE 三种噪声下的布洛赫球</title>
+<meta name="description" content="让相位阻尼、振幅阻尼与去极化一步步作用在整颗布洛赫球上：球被压成竖轴、缩小并往北极上漂、或同心缩向球心；横向保留得比 √a 多的映射会刺穿球皮；而球里任意两个态之间的距离一步也不会变长。Let phase damping, amplitude damping and depolarizing act step by step on the whole Bloch ball: it is squashed onto the vertical axis, shrinks while drifting north, or shrinks towards the centre; a map that keeps more than √a sideways pierces the skin; and the distance between any two states never grows.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="bloch-noise">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="BLOCH//NOISE">BLOCH<b>//</b>NOISE</h1>
+      <div class="tagline">
+        <span class="zh">三种噪声下的布洛赫球 · <em>噪声把球往里压、往北推，却从不把球里的两个点拉开</em></span>
+        <span class="en">The Bloch ball under three noises · <em>noise squashes the ball and pushes it north, but never pulls two of its points apart</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillLen"><span class="zh">ρ 的长度</span><span class="en">LENGTH OF ρ</span> <strong>—</strong></span>
+      <span class="pill" id="pillDist"><span class="zh">距离</span><span class="en">DISTANCE</span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="shorten" aria-pressed="false"><span class="code">SHORTER</span><span class="cn zh">离开球皮：截短的线</span><span class="cn en">Off the skin: a shorter line</span></button>
+        <button class="preset" data-preset="pinch" aria-pressed="false"><span class="code">ONTO-AXIS</span><span class="cn zh">捏合：整颗球压到竖轴上</span><span class="cn en">Pinching: the ball onto the axis</span></button>
+        <button class="preset" data-preset="dephase" aria-pressed="false"><span class="code">CIGAR</span><span class="cn zh">相位阻尼：只收腰，不掉高</span><span class="cn en">Phase damping: waist, not height</span></button>
+        <button class="preset" data-preset="amp" aria-pressed="false"><span class="code">DRIFT-NORTH</span><span class="cn zh">振幅阻尼：缩小并往北漂</span><span class="cn en">Amplitude damping: shrink and rise</span></button>
+        <button class="preset" data-preset="wide" aria-pressed="false"><span class="code">T2 &gt; 2T1</span><span class="cn zh">横向留太多：刺穿球皮</span><span class="cn en">Too wide: through the skin</span></button>
+        <button class="preset" data-preset="depol" aria-pressed="false"><span class="code">SHRINK</span><span class="cn zh">去极化：同心缩小</span><span class="cn en">Depolarizing: an even shrink</span></button>
+        <button class="preset" data-preset="distance" aria-pressed="false"><span class="code">NEVER-FARTHER</span><span class="cn zh">两个态只会靠近</span><span class="cn en">Two states only get closer</span></button>
+        <button class="preset" data-preset="centre" aria-pressed="false"><span class="code">DEAD-CENTRE</span><span class="cn zh">球心：从哪来都一样</span><span class="cn en">The centre: the origin forgotten</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">噪声</span><span class="en">Noise</span><span class="aside"><span class="zh">每一步作用一次</span><span class="en">applied once per step</span></span></h2>
+      <div class="chips" id="chChips" role="group" aria-label="噪声种类" data-aria-en="Kind of noise">
+        <button class="chip" data-ch="dephase" aria-pressed="false"><span class="zh">相位阻尼</span><span class="en">Phase damping</span></button>
+        <button class="chip" data-ch="amp" aria-pressed="true"><span class="zh">振幅阻尼</span><span class="en">Amplitude damping</span></button>
+        <button class="chip" data-ch="depol" aria-pressed="false"><span class="zh">去极化</span><span class="en">Depolarizing</span></button>
+      </div>
+      <div class="field">
+        <label for="strength"><span class="zh">每一步的强度 p</span><span class="en">Strength per step p</span><small class="zh" id="pHintZh"></small><small class="en" id="pHintEn"></small></label><output id="oStrength" for="strength">0.30</output>
+        <input type="range" id="strength" min="0" max="1" step="0.01" value="0.3">
+      </div>
+      <div class="field" id="ratioField">
+        <label for="ratio"><span class="zh">横向寿命 T₂ / 纵向寿命 T₁</span><span class="en">Transverse / longitudinal lifetime T₂ / T₁</span><small class="zh">只用于振幅阻尼；2 是纯振幅阻尼</small><small class="en">amplitude damping only; 2 is pure amplitude damping</small></label><output id="oRatio" for="ratio">2.0</output>
+        <input type="range" id="ratio" min="0.5" max="8" step="0.1" value="2">
+      </div>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">两个态</span><span class="en">Two states</span><span class="aside">ρ · σ</span></h2>
+      <p class="note"><span class="zh">在球皮上拖动琥珀色的 ρ 或白色的 σ，选它们出发的纯态；拖空白处旋转视角，滚轮缩放。</span><span class="en">Drag the amber ρ or the white σ on the skin to choose the pure states they start from; drag empty space to turn the view, scroll to zoom.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="布洛赫球：细线是噪声之前的单位球，青色是噪声之后球的像；琥珀色的态 ρ、白色的态 σ 与它们之间的白线；紫色是不动点" data-aria-en="Bloch ball: the thin wire is the unit ball before the noise, the cyan body is its image after the noise; the amber state ρ, the white state σ and the white line between them; violet marks the fixed points">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-bl" id="legend">
+        <span><i class="sw box cy"></i><span class="zh">噪声之后的球</span><span class="en">the ball after the noise</span></span>
+        <span><i class="sw am"></i><span class="zh">态 ρ</span><span class="en">state ρ</span></span>
+        <span><i class="sw ik"></i><span class="zh">态 σ 与两态距离</span><span class="en">state σ and the distance</span></span>
+        <span><i class="sw vi"></i><span class="zh">不动点</span><span class="en">fixed points</span></span>
+        <span id="legEsc" hidden><i class="sw mg"></i><span class="zh">刺穿球皮的部分</span><span class="en">the part through the skin</span></span>
+      </div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2><span class="zh">球还剩多宽、多高</span><span class="en">How wide and how tall the ball stays</span></h2><span id="axesMeta"></span></div>
+        <canvas id="axesPlot" aria-label="噪声之后球的横向半轴与纵向半轴随步数的变化；振幅阻尼时另画横向半轴的上限 √a" data-aria-en="The transverse and vertical half-axes of the ball after the noise against the number of steps; for amplitude damping also the bound √a on the transverse half-axis"></canvas>
+      </section>
+      <section class="panel">
+        <div class="head"><h2><span class="zh">两个态的距离只减不增</span><span class="en">The distance of two states never grows</span></h2><span id="distMeta"></span></div>
+        <canvas id="distPlot" aria-label="ρ 与 σ 之间的迹距离随步数的变化，虚线是作用之前的距离" data-aria-en="The trace distance between ρ and σ against the number of steps; the dashed line is the distance before the noise"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt><span class="zh">两态距离 T = ½‖r − s‖：之前 → 之后</span><span class="en">distance T = ½‖r − s‖: before → after</span></dt><dd><b id="roDist">—</b><span id="roDistSub"></span></dd></div>
+        <div class="a"><dt><span class="zh">ρ 的长度 ‖r‖</span><span class="en">length of ρ, ‖r‖</span></dt><dd id="roLen">—</dd></div>
+        <div class="c"><dt><span class="zh">横向半轴 λ · 纵向半轴 a</span><span class="en">half-axes: across λ · up a</span></dt><dd id="roAxes">—</dd></div>
+        <div class="m"><dt><span class="zh">ρ 的相干质量 |ρ₀₁|² + |ρ₁₀|²</span><span class="en">coherence mass of ρ, |ρ₀₁|² + |ρ₁₀|²</span></dt><dd id="roMass">—</dd></div>
+        <div><dt><span class="zh">像在球里吗（λ² 对 a）</span><span class="en">image inside the ball? (λ² vs a)</span></dt><dd id="roBall">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">迹距离在量子信道下不增：对同一有限指标类型上的任意量子信道 Φ（迹保持的完全正映射），T(Φ(ρ), Φ(σ)) ≤ T(ρ, σ)。已冻结：</span><span class="en">The trace distance does not grow under a quantum channel: for any quantum channel Φ on one finite index type (a trace-preserving completely positive map), T(Φ(ρ), Φ(σ)) ≤ T(ρ, σ). Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_contract" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Foundation/FiniteTraceDistance.lean" target="_blank" rel="noopener"><code>traceDistance_contract</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">固定北极的仿射映射 (λx, λy, az + 1 − a)（0 ≤ a ≤ 1）把整个闭单位球送进自身，当且仅当 λ² ≤ a。已冻结：</span><span class="en">The north-pole affine map (λx, λy, az + 1 − a) with 0 ≤ a ≤ 1 sends the whole closed unit ball into itself if and only if λ² ≤ a. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumChannels/ContractionGeometry/NorthPoleBallCriterion.north_pole_ball_preserving_iff" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumChannels/ContractionGeometry/NorthPoleBallCriterion.lean" target="_blank" rel="noopener"><code>north_pole_ball_preserving_iff</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">相位阻尼迭代 N 次：对角元不变，副对角元乘以 c^N。已冻结：</span><span class="en">Phase damping iterated N times leaves the diagonal entries alone and multiplies the off-diagonal ones by c^N. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/QubitWitnesses.phaseDampingIterate_apply" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/QubitWitnesses.lean" target="_blank" rel="noopener"><code>phaseDampingIterate_apply</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">捏合丢掉的希尔伯特—施密特相干质量等于 |ρ₀₁|² + |ρ₁₀|²。已冻结：</span><span class="en">The Hilbert–Schmidt coherence mass that pinching discards equals |ρ₀₁|² + |ρ₁₀|². Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumChannels/PinchingProjection.lean" target="_blank" rel="noopener"><code>pinching_discarded_coherence_mass</code></a></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">三种噪声的布洛赫仿射形式与单比特换算 T = ½‖r − s‖ 是标准教材算例（第四章例“三种单比特噪声下的距离收缩”：文献结果，未在本书形式化）。</span><span class="en">The Bloch affine forms of the three noises and the qubit conversion T = ½‖r − s‖ are standard textbook computations (Chapter 4, the example on distance contraction under three kinds of qubit noise: literature result, not formalized in this book).</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">时间轴上两个整数步之间，页面取相邻两个整数步输出的凸组合；把横向剩下的比例读成环境记录的夹角 cos θ_env，是第 4.1 节等权例子的读法。</span><span class="en">Between two whole steps on the rail, the page takes the convex combination of the outputs of the two neighbouring whole steps; reading the transverse fraction left as the angle cos θ_env of two environment records follows the equal-weight example of §4.1.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数都是按双精度实时算出的数值演示，不是证明。</span><span class="en">Every number on the page is computed live in double precision: an illustration, not a proof.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到第 0 步" data-aria-en="Back to step 0">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="8" step="any" value="0" aria-label="噪声作用的步数" data-aria-en="Number of noise steps">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step by step</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">单比特的态是布洛赫球里的一点 r：球皮上是纯态，球肚子里是混合态。一种噪声每作用一步，就把整颗球做一次仿射变形 r ↦ (λx, λy, az + h)。舞台上的细线是作用之前的单位球，青色是它的像；琥珀色的 ρ 与白色的 σ 是从球皮出发的两个态，白线是它们之间的迹距离 T = ½‖r − s‖。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>三种噪声的形状。</b>相位阻尼 (cx, cy, z)：只收腰、不掉高，不动点是整根竖轴；振幅阻尼 (√a x, √a y, az + 1 − a)：缩小并往北极上漂，只有北极不动；去极化 (fx, fy, fz)：同心缩小，只有球心不动。页面里每一步取 c = 1 − p、a = 1 − p、f = 1 − p，走 N 步就是 c^N、a^N、f^N。这些布洛赫形式是标准教材算例：文献结果，未在本书形式化。</li>
+        <li><b>相位阻尼与捏合。</b>相位阻尼迭代 N 次只把副对角元乘以 c^N：<a class="leanref" data-lean-gid="D5/S3/Quantum/QubitWitnesses.phaseDampingIterate_apply" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/QubitWitnesses.lean" target="_blank" rel="noopener"><code>phaseDampingIterate_apply</code></a>（LEAN ✓）；c &lt; 1 时等权叠加态的相干元趋于零：<a class="leanref" data-lean-gid="D5/S3/Quantum/Decoherence/CoherenceDecay.equal_superposition_coherence_tendsto_zero" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Decoherence/CoherenceDecay.lean" target="_blank" rel="noopener"><code>equal_superposition_coherence_tendsto_zero</code></a>（LEAN ✓）。c = 0 一步就是捏合：捏合丢掉的相干质量是 |ρ₀₁|² + |ρ₁₀|²，在布洛赫坐标里等于 (x² + y²)/2（手算）：<a class="leanref" data-lean-gid="D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumChannels/PinchingProjection.lean" target="_blank" rel="noopener"><code>pinching_discarded_coherence_mass</code></a>（LEAN ✓）；捏合的不动点恰是副对角元为零的矩阵，即竖轴：<a class="leanref" data-lean-gid="D5/S3/QuantumChannels/CoherenceMassBridge.pinching_eq_self_iff_offDiag_eq_zero" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumChannels/CoherenceMassBridge.lean" target="_blank" rel="noopener"><code>pinching_eq_self_iff_offDiag_eq_zero</code></a>（LEAN ✓）。</li>
+        <li><b>横向最多留多少。</b>固定北极的映射 (λx, λy, az + 1 − a) 保持整个闭单位球，当且仅当 λ² ≤ a：<a class="leanref" data-lean-gid="D5/S3/QuantumChannels/ContractionGeometry/NorthPoleBallCriterion.north_pole_ball_preserving_iff" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumChannels/ContractionGeometry/NorthPoleBallCriterion.lean" target="_blank" rel="noopener"><code>north_pole_ball_preserving_iff</code></a>（LEAN ✓）。纯振幅阻尼取 λ = √a，恰好饱和。滑块 T₂ / T₁ 按第四章的指数包络 a = e^{−t/T₁}、λ = e^{−t/T₂} 取 λ = a^{T₁/T₂}；于是 λ² ≤ a 当且仅当 T₂ ≤ 2T₁。T₂ &gt; 2T₁ 时像的一部分落到球外（品红），这样的映射不把态送到态。这里判定的只是球的保持性，不是完全正性。</li>
+        <li><b>距离只减不增。</b>对任意量子信道，迹距离不增：<a class="leanref" data-lean-gid="D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_contract" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Foundation/FiniteTraceDistance.lean" target="_blank" rel="noopener"><code>traceDistance_contract</code></a>（LEAN ✓）。单比特上 T = ½‖r − s‖ 是手算换算。步与步之间页面取相邻两个整数步输出的凸组合；每一步是信道时它也是信道，所以白线在整条时间轴上都只缩不长；整数步上的数与 N 次迭代完全一致。</li>
+        <li><b>球心。</b>强度为 1 的去极化把整颗球送到球心 r = 0，即 ρ = I/2：从哪个态出发都落在同一点，距离为零。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch04-decoherence.html#sec-ch04-1" target="_top">第 4.1 节 · 纯态是球皮，混合态是截短的线</a> · <a href="../../zh/ch04-decoherence.html#sec-ch04-2" target="_top">第 4.2 节 · 三种量子噪声</a> · <a href="../../zh/ch04-decoherence.html#thm-north-pole-ball-criterion" target="_top">固定北极的保球判据</a> · <a href="../../zh/ch04-decoherence.html#prop-trace-distance-metric-contraction" target="_top">迹距离在信道下不增</a> · <a href="../../zh/ch04-decoherence.html#sec-ch04-3" target="_top">第 4.3 节 · 最大混合死点</a> · trureturing（所钉提交）：<a data-trureturing-path="D5/S3/QuantumChannels/AmplitudeDampingContraction.lean" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumChannels/AmplitudeDampingContraction.lean" target="_blank" rel="noopener">AmplitudeDampingContraction.lean</a>（<code>dampedAxis</code>）</p>
+    </div>
+    <div class="en">
+      <p class="lede">A qubit state is a point r of the Bloch ball: pure states on the skin, mixed states inside. Each step of a noise deforms the whole ball by one affine map r ↦ (λx, λy, az + h). The thin wire on the stage is the unit ball before the noise and the cyan body is its image; the amber ρ and the white σ are two states that start on the skin, and the white line between them is their trace distance T = ½‖r − s‖. The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>The shapes of the three noises.</b> Phase damping (cx, cy, z) narrows the waist and keeps the height; its fixed points are the whole vertical axis. Amplitude damping (√a x, √a y, az + 1 − a) shrinks the ball and lifts it towards the north pole, the only fixed point. Depolarizing (fx, fy, fz) shrinks it evenly towards the centre, the only fixed point. Each step on the page takes c = 1 − p, a = 1 − p, f = 1 − p, so N steps give c^N, a^N, f^N. These Bloch forms are standard textbook computations: literature result, not formalized in this book.</li>
+        <li><b>Phase damping and pinching.</b> Phase damping iterated N times only multiplies the off-diagonal entries by c^N: <a class="leanref" data-lean-gid="D5/S3/Quantum/QubitWitnesses.phaseDampingIterate_apply" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/QubitWitnesses.lean" target="_blank" rel="noopener"><code>phaseDampingIterate_apply</code></a> (LEAN ✓); for c &lt; 1 the coherence of the equal superposition tends to zero: <a class="leanref" data-lean-gid="D5/S3/Quantum/Decoherence/CoherenceDecay.equal_superposition_coherence_tendsto_zero" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Decoherence/CoherenceDecay.lean" target="_blank" rel="noopener"><code>equal_superposition_coherence_tendsto_zero</code></a> (LEAN ✓). One step with c = 0 is pinching: the coherence mass it discards is |ρ₀₁|² + |ρ₁₀|², which is (x² + y²)/2 in Bloch coordinates (by hand): <a class="leanref" data-lean-gid="D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumChannels/PinchingProjection.lean" target="_blank" rel="noopener"><code>pinching_discarded_coherence_mass</code></a> (LEAN ✓); the fixed points of pinching are exactly the matrices with zero off-diagonal entries, the vertical axis: <a class="leanref" data-lean-gid="D5/S3/QuantumChannels/CoherenceMassBridge.pinching_eq_self_iff_offDiag_eq_zero" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumChannels/CoherenceMassBridge.lean" target="_blank" rel="noopener"><code>pinching_eq_self_iff_offDiag_eq_zero</code></a> (LEAN ✓).</li>
+        <li><b>How much may stay sideways.</b> The north-pole map (λx, λy, az + 1 − a) keeps the whole closed unit ball if and only if λ² ≤ a: <a class="leanref" data-lean-gid="D5/S3/QuantumChannels/ContractionGeometry/NorthPoleBallCriterion.north_pole_ball_preserving_iff" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumChannels/ContractionGeometry/NorthPoleBallCriterion.lean" target="_blank" rel="noopener"><code>north_pole_ball_preserving_iff</code></a> (LEAN ✓). Pure amplitude damping takes λ = √a and saturates it. The T₂ / T₁ slider follows the exponential envelopes of Chapter 4, a = e^{−t/T₁} and λ = e^{−t/T₂}, so λ = a^{T₁/T₂}, and λ² ≤ a exactly when T₂ ≤ 2T₁. For T₂ &gt; 2T₁ part of the image lies outside the ball (magenta), and such a map does not send states to states. This decides only whether the ball is kept, not complete positivity.</li>
+        <li><b>Distances never grow.</b> The trace distance does not grow under any quantum channel: <a class="leanref" data-lean-gid="D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_contract" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Foundation/FiniteTraceDistance.lean" target="_blank" rel="noopener"><code>traceDistance_contract</code></a> (LEAN ✓). On a qubit, T = ½‖r − s‖ is a hand computation. Between steps the page takes the convex combination of the outputs of the two neighbouring whole steps; when each step is a channel, so is that combination, and the white line only shrinks along the whole rail; at whole steps the numbers are exactly those of N iterations.</li>
+        <li><b>The centre.</b> Depolarizing at strength 1 sends the whole ball to the centre r = 0, that is ρ = I/2: every starting state lands on the same point, at distance zero.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch04-decoherence.html#sec-ch04-1" target="_top">§4.1 · pure states are the skin, mixed states are shorter lines</a> · <a href="../../en/ch04-decoherence.html#sec-ch04-2" target="_top">§4.2 · three quantum noises</a> · <a href="../../en/ch04-decoherence.html#thm-north-pole-ball-criterion" target="_top">the north-pole ball criterion</a> · <a href="../../en/ch04-decoherence.html#prop-trace-distance-metric-contraction" target="_top">trace distance under channels</a> · <a href="../../en/ch04-decoherence.html#sec-ch04-3" target="_top">§4.3 · the maximally mixed centre</a> · trureturing (pinned commit): <a data-trureturing-path="D5/S3/QuantumChannels/AmplitudeDampingContraction.lean" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumChannels/AmplitudeDampingContraction.lean" target="_blank" rel="noopener">AmplitudeDampingContraction.lean</a> (<code>dampedAxis</code>)</p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

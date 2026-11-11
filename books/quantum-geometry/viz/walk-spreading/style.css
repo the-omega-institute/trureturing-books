@@ -1,0 +1,4 @@
+/* WALK//SPREAD: the shared lab layout (../assets/theme.css) carries the page; colours come from the tokens.
+   Nothing on the stage is dragged (the rail sets the steps, the deck the coin), so the canvas keeps the default
+   cursor and lets a phone scroll through it. */
+#cv { cursor: default; }

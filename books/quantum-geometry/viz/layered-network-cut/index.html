@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="NETWORK//CUT · The layered network and its cut · an interval on the boundary, the fewest legs that cut it off, and how slowly that number grows">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NETWORK//CUT 层级网络与割 · 边界上的一段区间、把它切下来最少要割断几条腿，以及这个数长得有多慢</title>
+<meta name="description" content="第 19 章的层级张量网络。底边 32 格，上面是一张二元 MERA 式的层级网络（方块是解纠缠器，三角是等距器），每条键维数相同。拖动底边的琥珀色区间，页面用增广路求出把它与其余底边分开最少要割断几条键：一格的区间割它自己那条腿；区间翻倍，割只多约两条腿；两段区间靠得够近、够长时，一起割比分开割省。跨过一道割的秩不超过被割断各腿维数的乘积；把割断的腿数读作 Ryu–Takayanagi 极小曲面的“面积”是文献里的类比，未在本书形式化。绿色只给宽度三桥图上已验证的“秩不超过最小割”。Chapter 19's layered tensor network. Thirty-two boundary sites under a binary MERA-like network (squares are disentanglers, triangles isometries), every bond of the same dimension. Drag the amber interval on the boundary; the page finds by augmenting paths the fewest bonds whose cutting separates it from the rest of the boundary: an interval of one site cuts its own leg; doubling the interval adds only about two legs; two intervals that are close and long enough are cheaper to cut together than apart. The rank across a cut is at most the product of the dimensions of the legs it severs; reading the number of severed legs as the area of a Ryu–Takayanagi minimal surface is an analogy from the literature, not formalized in this book. Green is given only to the verified bound rank ≤ minimal cut on the width-three bridge graph.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="layered-network-cut">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="NETWORK//CUT">NETWORK<b>//</b>CUT</h1>
+      <div class="tagline">
+        <span class="zh">层级网络与割 · <em>把边界上的一段切下来，割要从网络里面穿过；区间翻倍，割只多两三条腿</em></span>
+        <span class="en">The layered network and its cut · <em>to cut a stretch of the boundary off, the cut runs through the inside of the network; double the stretch and the cut grows by only two or three legs</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillWhat"><strong>—</strong></span>
+      <span class="pill hot" id="pillKey"><strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="one" aria-pressed="false"><span class="code">ONE SITE</span><span class="cn zh">一格：割它自己那条腿</span><span class="cn en">One site: cut its own leg</span></button>
+        <button class="preset" data-preset="four" aria-pressed="false"><span class="code">FOUR SITES</span><span class="cn zh">四格：割从网络里穿过，只要 3 条</span><span class="cn en">Four sites: the cut runs inside, 3 legs</span></button>
+        <button class="preset" data-preset="grow" aria-pressed="false"><span class="code">GROW</span><span class="cn zh">区间翻倍，割只多约两条腿</span><span class="cn en">Double the interval, about two more legs</span></button>
+        <button class="preset" data-preset="two" aria-pressed="false"><span class="code">TWO</span><span class="cn zh">两段：长到 7 格，一起割更省</span><span class="cn en">Two intervals: from 7 sites on, cut them together</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+    <section class="panel sec">
+      <h2><span class="zh">区间</span><span class="en">The intervals</span><span class="aside">A · B</span></h2>
+      <p class="note"><span class="zh">在舞台上拖动：按住琥珀色区间的左端或右端改变长度，按住中间整段平移；在空白处按下，区间移到那里。时间轴是区间 A 的长度 L，右端不动。</span><span class="en">Drag on the stage: hold the left or right end of an amber interval to change its length, hold its middle to slide it; press on an empty stretch to move the interval there. The rail is the length L of interval A, with its right end held fixed.</span></p>
+      <p class="note"><span class="zh">舞台右上角切换一段或两段。两段时第二段 B 也可以拖。</span><span class="en">Switch between one and two intervals at the top right of the stage. With two, the second interval B can be dragged too.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage still" id="stage" data-thumb aria-label="舞台：一张层级张量网络，底边的琥珀色区间，以及把它切下来的最小割" data-aria-en="Stage: a layered tensor network, an amber interval on its boundary, and the minimal cut that separates it">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="modeChips" role="group" aria-label="区间个数" data-aria-en="Number of intervals">
+        <button class="chip" data-mode="one" aria-pressed="true"><span class="zh">一段</span><span class="en">One</span></button>
+        <button class="chip" data-mode="two" aria-pressed="false"><span class="zh">两段</span><span class="en">Two</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="pATitle"></h2><span id="pAMeta"></span></div>
+        <canvas id="plotA" aria-label="小图：沿时间轴，割断的腿数随区间长度" data-aria-en="Small plot: along the rail, the legs cut against the length of the interval"></canvas>
+      </section>
+      <section class="panel">
+        <div class="head"><h2 id="pBTitle"></h2><span id="pBMeta"></span></div>
+        <canvas id="plotB" aria-label="小图：这张网络里每一段区间的割" data-aria-en="Small plot: the cut of every interval of this network"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="roKeyL"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div><dt id="roL1"></dt><dd id="ro1">—</dd></div>
+        <div class="m"><dt id="roL2"></dt><dd id="ro2">—</dd></div>
+        <div><dt id="roL3"></dt><dd id="ro3">—</dd></div>
+        <div><dt id="roL4"></dt><dd id="ro4">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+<div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面的计算，不是证明：最小割用增广路在这张图上求出，品红的键就是一组最小割，条数等于找到的路数。这张 32 格网络的 527 段区间逐个算过，每一段都不超过 2·log₂L + 1 条。</span><span class="en">The page's computation, not a proof: the minimal cut is found by augmenting paths on this graph; the magenta bonds are one minimal cut, as many as the paths found. All 527 intervals of this 32-site network have been computed one by one, and none needs more than 2·log₂L + 1 legs.</span></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+<div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">跨过一道割的秩，不超过被割断各腿维数的乘积：每条键维数都是 χ 时，割断 k 条，秩至多 χᵏ。这是线性代数的直接论证，本书只在宽度三桥图上把它形式化；一般网络里，最大秩可以严格小于这个上界。</span><span class="en">The rank across a cut is at most the product of the dimensions of the legs it severs: with every bond of dimension χ, a cut through k legs allows rank at most χᵏ. This is a direct argument of linear algebra that the book formalizes only on the width-three bridge graph; in a general network the greatest rank can be strictly smaller than this bound.</span></span></div>
+<div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：Ryu–Takayanagi 公式 S(A) = Area(γ_A)/(4G_N ħ)；MERA 类网络里割随区间长度按对数增长，并被读作 RT 极小曲面的离散类比（Ryu、Takayanagi 2006；Swingle 2012）。</span><span class="en">Literature results, not formalized in this book: the Ryu–Takayanagi formula S(A) = Area(γ_A)/(4G_N ħ); in MERA-like networks the cut grows with the logarithm of the interval, and is read as a discrete analogue of the RT minimal surface (Ryu and Takayanagi 2006; Swingle 2012).</span></span></div>
+<div class="lean model"><span class="ok">MODEL</span><span><span class="zh">舞台上的网络是为画面选的：32 格、开边界的二元 MERA 式层级网络，方块是解纠缠器，三角是等距器，每条键维数相同，割只数腿的条数。它不是本书形式化的对象。</span><span class="en">The network on the stage is chosen for the picture: a binary MERA-like layered network on 32 sites with open ends, squares for disentanglers and triangles for isometries, every bond of the same dimension; the cut only counts legs. It is not an object formalized in this book.</span></span></div>
+<div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">宽度三桥图（两节点、三条桥）：对一切自然数 a, b, c, d，最大秩 QMaxFlow(a, b, c, d) ≤ QMinCut(a, b, c, d) = min(3ac, min(ad, bc))。这是“秩不超过割”在最简单网络上的已验证版本；本页的层级网络不在它的范围内。已冻结：</span><span class="en">The width-three bridge graph (two nodes, three bridges): for all natural numbers a, b, c, d, the greatest rank QMaxFlow(a, b, c, d) ≤ QMinCut(a, b, c, d) = min(3ac, min(ad, bc)). This is the verified form of “rank does not exceed the cut” on the simplest network; the layered network of this page lies outside its scope. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_le_QMinCut" href="https://github.com/the-omega-institute/trureturing/blob/1d9bf98cab8306e67ec38a739359f2cdae63877a/D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.lean#L140" target="_blank" rel="noopener"><code>QMaxFlow_le_QMinCut</code></a></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到一格" data-aria-en="Back to one site">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="时间轴：区间 A 的长度" data-aria-en="Rail: the length of interval A">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">长度 ±1</span><span class="en">length ±1</span> · <kbd>1</kbd><kbd>2</kbd> <span class="zh">一段 / 两段</span><span class="en">one / two</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">第 19 章说，研究者常借助 MERA 这样的层级张量网络，示意边界区域与网络深处截面之间的瓶颈关系。本页把这张网络画出来，让读者在边界上选一段，看把它切下来最少要割断几条腿。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>网络。</b>底边 32 格，每格一条腿。往上一层先用方块（解纠缠器）把相邻两格搭在一起，再用三角（等距器）把两条腿并成一条；五层之后只剩顶上一个三角。每条键的维数都取同一个 χ。</li>
+        <li><b>割。</b>在底边选一段 A。一道割是一组键：把它们剪断以后，A 的腿与其余底边的腿不再相连。页面用增广路求出最少的条数 k（图上的最大流等于最小割），品红的键是其中一组，青色是割内侧的张量。直接剪断 A 的每条腿总是一道割，所以 k ≤ L。</li>
+        <li><b>秩的上界。</b>把整张网络看成从 A 的腿到其余腿的一个线性映射，它从割断的 k 条键上经过，所以秩至多 χᵏ。这只是上界：第 19 章强调，一般网络里最大秩可以小于最小割；只有宽度三桥图上，Lean 证明了秩的最大值不超过最小割，并在锥域内恰好相等。</li>
+        <li><b>对数增长。</b>区间翻倍时，割往网络里多走一层，两侧大约各多割一条键：页面上 L 从 1 到 16，k 只从 1 长到 8 左右。这张网络的 527 段区间都满足 k ≤ 2·log₂L + 1（页面逐个算过）。在 MERA 类网络里把 k 读作 RT 极小曲面的“面积”，是 Swingle 等人的文献类比，未在本书形式化。</li>
+        <li><b>两段。</b>A、B 两段时，页面直接求 A∪B 的最小割，再与 A、B 各自的割之和比较。最小割常见两种形状：两道各自的割；或一道包住 A、B 与中间空隙的大割，加上把空隙单独切开的一道小割。在 TWO 卡里，A 长到 7 格起，后一种更省。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch19-tensor-networks-and-holography.html#sec-mera-hierarchy" target="_top">第 19 章 · 纠缠层级与有限张量网络</a> · <a href="../../zh/ch19-tensor-networks-and-holography.html#sec-rt-literature-bridge" target="_top">第 19 章 · 从离散桥图到 RT 文献边界</a> · trureturing（所钉提交）：<a data-trureturing-path="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.lean" href="https://github.com/the-omega-institute/trureturing/blob/1d9bf98cab8306e67ec38a739359f2cdae63877a/D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.lean" target="_blank" rel="noopener">QuantumMaxFlowBound.lean</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">Chapter 19 says that hierarchical tensor networks such as MERA are used to picture the bottleneck between a boundary region and a cross-section deep inside the network. This page draws such a network and lets the reader pick a stretch of the boundary, to see how few legs must be cut to separate it. The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>The network.</b> Thirty-two boundary sites, one leg each. Each layer first joins neighbouring legs with a square (a disentangler), then merges two legs into one with a triangle (an isometry); after five layers a single triangle is left at the top. Every bond has the same dimension χ.</li>
+        <li><b>The cut.</b> Pick a stretch A of the boundary. A cut is a set of bonds whose removal disconnects the legs of A from the rest of the boundary. The page finds the least number k by augmenting paths (on a graph the maximal flow equals the minimal cut); the magenta bonds are one such set and the cyan tensors lie on the inner side. Cutting every leg of A is always a cut, so k ≤ L.</li>
+        <li><b>The rank bound.</b> Read the whole network as a linear map from the legs of A to the other legs: it passes through the k severed bonds, so its rank is at most χᵏ. This is only an upper bound: chapter 19 stresses that in a general network the greatest rank can be smaller than the minimal cut; only on the width-three bridge graph has Lean proved that the greatest rank does not exceed the minimal cut, with equality inside the cone.</li>
+        <li><b>Logarithmic growth.</b> When the interval doubles, the cut climbs one more layer into the network and cuts about one more bond on each side: as L runs from 1 to 16 on the page, k grows only from 1 to about 8. Every one of the 527 intervals of this network has k ≤ 2·log₂L + 1 (checked one by one on the page). Reading k as the area of an RT minimal surface in MERA-like networks is an analogy from the literature (Swingle and others), not formalized in this book.</li>
+        <li><b>Two intervals.</b> With two intervals A and B, the page finds the minimal cut of A∪B directly and compares it with the sum of the cuts of A and B. The minimal cut usually takes one of two shapes: two separate cuts; or one large cut around A, B and the gap between them, together with a small cut that separates the gap on its own. On the TWO card the second shape is cheaper once A reaches 7 sites.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch19-tensor-networks-and-holography.html#sec-mera-hierarchy" target="_top">Chapter 19 · Entanglement hierarchies and finite tensor networks</a> · <a href="../../en/ch19-tensor-networks-and-holography.html#sec-rt-literature-bridge" target="_top">Chapter 19 · From the discrete bridge graph to the RT boundary</a> · trureturing (pinned commit): <a data-trureturing-path="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.lean" href="https://github.com/the-omega-institute/trureturing/blob/1d9bf98cab8306e67ec38a739359f2cdae63877a/D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.lean" target="_blank" rel="noopener">QuantumMaxFlowBound.lean</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

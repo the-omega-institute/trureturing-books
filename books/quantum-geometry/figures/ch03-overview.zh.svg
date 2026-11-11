@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch03-overview" data-lang="zh" data-wrap="1" viewBox="0 0 740 262" width="740" height="262" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="三栏。第一栏：琥珀色的箭头投到青色的测量线上，留下青色的影子，品红虚线是被去掉的垂直部分；影子旁的小圈箭头表示再投一次影子不动。第二栏：布洛赫球里竖着一根青色的轴 e₃，赤道上是品红的对偶平面 ⋆e₃；琥珀色的箭头分成沿轴的青色一段和躺在平面里的品红一段。第三栏：一条向右的时间轴上依次是 0°、45°、90° 三片偏振片 τ₁、τ₂、τ₃，每过一片乘 ½，透过的比例依次是 1、½、¼；上方的虚线弧表示不插中间那片时，从 0° 直接到 90° 的透过比例是 0。">
+<title>三栏。第一栏：琥珀色的箭头投到青色的测量线上，留下青色的影子，品红虚线是被去掉的垂直部分；影子旁的小圈箭头表示再投一次影子不动。第二栏：布洛赫球里竖着一根青色的轴 e₃，赤道上是品红的对偶平面 ⋆e₃；琥珀色的箭头分成沿轴的青色一段和躺在平面里的品红一段。第三栏：一条向右的时间轴上依次是 0°、45°、90° 三片偏振片 τ₁、τ₂、τ₃，每过一片乘 ½，透过的比例依次是 1、½、¼；上方的虚线弧表示不插中间那片时，从 0° 直接到 90° 的透过比例是 0。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="236" height="262" viewBox="0 0 236 262">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">I　存在线 <tspan font-style="italic">P</tspan><tspan dy="-0.42em" font-size="72%">2</tspan><tspan dy="0.42em"> = </tspan><tspan font-style="italic">P</tspan></text>
+<line x1="12.09" y1="213.12" x2="216.6" y2="146.67" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<line x1="65.19" y1="59.28" x2="105.33" y2="182.82" class="ts-magenta" stroke-width="1.6" stroke-dasharray="4 3" fill="none"/>
+<path d="M112.94 180.35 L110.47 172.74 L102.86 175.22" class="ts-dim" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<line x1="34" y1="206" x2="105.33" y2="182.82" class="ts-cyan" stroke-width="5" stroke-linecap="round" fill="none"/>
+<line x1="34" y1="206" x2="63.6" y2="66.76" class="ts-amber" stroke-width="2.4" fill="none"/>
+<path d="M65.19 59.28 L67.01 68.87 L59.62 67.3Z" class="tf-amber"/>
+<circle cx="105.33" cy="182.82" r="3.6" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="34" cy="206" r="3" class="tf-dim"/>
+<path d="M100.97 196.4 L99.37 197.75 L98.07 199.32 L97.11 201.06 L96.53 202.91 L96.33 204.82 L96.53 206.73 L97.11 208.59 L98.07 210.32 L99.37 211.89 L100.97 213.25 L102.83 214.35 L104.88 215.16 L107.07 215.66 L109.33 215.82 L111.59 215.66 L113.78 215.16 L115.83 214.35 L117.69 213.25 L119.29 211.89 L120.59 210.32 L121.55 208.59 L122.13 206.73 L122.33 204.82 L122.13 202.91 L121.55 201.06 L120.59 199.32 L119.29 197.75 L117.69 196.4 L115.83 195.3" class="ts-cyan" stroke-width="1.6" stroke-linejoin="round" fill="none"/>
+<path d="M115.83 195.3 L123.35 196.34 L120.35 201.39Z" class="tf-cyan"/>
+<text class="tf-amber" x="73.19" y="61.28" font-size="15"><tspan font-style="italic">x</tspan></text>
+<text class="tf-cyan" x="67.96" y="220.27" font-size="15" text-anchor="middle"><tspan font-style="italic">Px</tspan></text>
+<text class="tf-dim" x="131.33" y="209.82" font-size="13">再投：不动</text>
+<text class="tf-cyan" x="211.7" y="138.29" font-size="13" text-anchor="end" transform="rotate(-18 211.7 138.29)">测量线</text>
+</svg>
+<svg class="tr-fig-panel" x="252" y="0" width="236" height="262" viewBox="0 0 236 262">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">II　线与对偶平面</text>
+<circle cx="118" cy="146" r="82" class="ts-dim tf-cyan" stroke-width="1.5" fill-opacity="0.03"/>
+<path d="M195.05 154.67 L196.72 153.09 L198.06 151.48 L199.05 149.85 L199.69 148.21 L199.98 146.55 L199.92 144.89 L199.51 143.24 L198.75 141.6 L197.65 139.98 L196.2 138.38 L194.42 136.82 L192.32 135.29 L189.89 133.81 L187.16 132.39 L184.13 131.02 L180.82 129.71 L177.23 128.48 L173.4 127.32 L169.33 126.24 L165.03 125.24 L160.54 124.34 L155.86 123.52 L151.03 122.81 L146.05 122.19 L140.95 121.67 L135.75 121.26 L130.47 120.96 L125.15 120.76 L119.79 120.67 L114.42 120.68 L109.07 120.81 L103.76 121.05 L98.51 121.39 L93.34 121.83 L88.28 122.38 L83.35 123.03 L78.56 123.78 L73.94 124.63 L69.51 125.57 L65.29 126.59 L61.3 127.7 L57.54 128.88 L54.05 130.14 L50.83 131.47 L47.9 132.85 L45.27 134.3 L42.94 135.79 L40.95 137.33 L39.28 138.91 L37.94 140.52 L36.95 142.15 L36.31 143.79 L36.02 145.45 L36.08 147.11 L36.49 148.76 L37.25 150.4 L38.35 152.02 L39.8 153.62 L41.58 155.18 L43.68 156.71 L46.11 158.19 L48.84 159.61 L51.87 160.98 L55.18 162.29 L58.77 163.52 L62.6 164.68 L66.67 165.76 L70.97 166.76 L75.46 167.66 L80.14 168.48 L84.97 169.19 L89.95 169.81 L95.05 170.33 L100.25 170.74 L105.53 171.04 L110.85 171.24 L116.21 171.33 L121.58 171.32 L126.93 171.19 L132.24 170.95 L137.49 170.61 L142.66 170.17 L147.72 169.62 L152.65 168.97 L157.44 168.22 L162.06 167.37 L166.49 166.43 L170.71 165.41 L174.7 164.3 L178.46 163.12 L181.95 161.86 L185.17 160.53 L188.1 159.15 L190.73 157.7 L193.06 156.21Z" class="ts-magenta tf-magenta" stroke-width="1.2" stroke-linejoin="round" fill-opacity="0.16"/>
+<line x1="118" y1="238.02" x2="118" y2="53.98" class="ts-cyan" stroke-width="1.6" fill="none"/>
+<line x1="160.03" y1="110.3" x2="160.03" y2="160.43" class="ts-dim" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<line x1="160.03" y1="110.3" x2="118" y2="95.87" class="ts-dim" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<line x1="118" y1="146" x2="118" y2="95.87" class="ts-cyan" stroke-width="5" stroke-linecap="round" fill="none"/>
+<line x1="118" y1="146" x2="160.03" y2="160.43" class="ts-magenta" stroke-width="5" stroke-linecap="round" fill="none"/>
+<line x1="118" y1="146" x2="154.2" y2="115.25" class="ts-amber" stroke-width="2.4" fill="none"/>
+<path d="M160.03 110.3 L155.62 119 L150.73 113.24Z" class="tf-amber"/>
+<text class="tf-cyan" x="128" y="57.98" font-size="15"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-magenta ts-bg" x="118" y="206" font-size="15" text-anchor="middle" stroke-width="4.2" stroke-linejoin="round" paint-order="stroke">⋆<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em"> = </tspan><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">∧</tspan><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-amber" x="168.03" y="108.3" font-size="15"><tspan font-style="italic">r</tspan></text>
+</svg>
+<svg class="tr-fig-panel" x="504" y="0" width="236" height="262" viewBox="0 0 236 262">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">III　记录排成时间轴</text>
+<line x1="14" y1="150" x2="221.2" y2="150" class="ts-dim" stroke-width="1.4" fill="none"/>
+<path d="M228 150 L220 153.36 L220 146.64Z" class="tf-dim"/>
+<text class="tf-dim" x="226" y="170" font-size="14" text-anchor="end"><tspan font-style="italic">τ</tspan></text>
+<circle cx="40" cy="150" r="21" class="ts-edge tf-panel" stroke-width="1.4"/>
+<line x1="25" y1="150" x2="55" y2="150" class="ts-ink" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+<text class="tf-dim" x="40" y="190" font-size="13" text-anchor="middle"><tspan font-style="italic">τ</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">  0°</tspan></text>
+<circle cx="118" cy="150" r="21" class="ts-edge tf-panel" stroke-width="1.4"/>
+<line x1="107.39" y1="160.61" x2="128.61" y2="139.39" class="ts-ink" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+<text class="tf-dim" x="118" y="190" font-size="13" text-anchor="middle"><tspan font-style="italic">τ</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">  45°</tspan></text>
+<circle cx="196" cy="150" r="21" class="ts-edge tf-panel" stroke-width="1.4"/>
+<line x1="196" y1="165" x2="196" y2="135" class="ts-ink" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+<text class="tf-dim" x="196" y="190" font-size="13" text-anchor="middle"><tspan font-style="italic">τ</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">  90°</tspan></text>
+<text class="tf-cyan" x="79" y="138" font-size="14" text-anchor="middle">× ½</text>
+<text class="tf-cyan" x="157" y="138" font-size="14" text-anchor="middle">× ½</text>
+<text class="tf-cyan" x="40" y="216" font-size="15" text-anchor="middle" font-weight="600">1</text>
+<text class="tf-cyan" x="118" y="216" font-size="15" text-anchor="middle" font-weight="600">½</text>
+<text class="tf-cyan" x="196" y="216" font-size="15" text-anchor="middle" font-weight="600">¼</text>
+<path d="M40 120 L43.9 116.39 L47.8 112.8 L51.7 109.26 L55.6 105.79 L59.5 102.4 L63.4 99.12 L67.3 95.97 L71.2 92.96 L75.1 90.13 L79 87.47 L82.9 85.02 L86.8 82.79 L90.7 80.78 L94.6 79.01 L98.5 77.5 L102.4 76.25 L106.3 75.27 L110.2 74.57 L114.1 74.14 L118 74 L121.9 74.14 L125.8 74.57 L129.7 75.27 L133.6 76.25 L137.5 77.5 L141.4 79.01 L145.3 80.78 L149.2 82.79 L153.1 85.02 L157 87.47 L160.9 90.13 L164.8 92.96 L168.7 95.97 L172.6 99.12 L176.5 102.4 L180.4 105.79 L184.3 109.26 L188.2 112.8 L192.1 116.39 L196 120" class="ts-dim" stroke-width="1.3" stroke-dasharray="4 3" stroke-linejoin="round" fill="none"/>
+<text class="tf-dim" x="118" y="66" font-size="13" text-anchor="middle">不插 45°：0</text>
+</svg>
+</svg>
