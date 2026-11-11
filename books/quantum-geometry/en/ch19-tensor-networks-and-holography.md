@@ -12,6 +12,10 @@ In keeping with our three-tier epistemological contract and the discrete facet-s
 2. **Discrete log-capacity polyhedral facets and seam stitching (R3)**: Passing to logarithmic bond-capacity coordinates ([@ex-log-capacity-facets]), we show how the lower envelope of three affine hyperplanes carves out discrete polyhedral facets joined along the bottleneck seam $ad = bc$;
 3. **Literature boundary for continuum holography**: Multi-scale entanglement renormalization ansatz (MERA) schematics and the continuum AdS/CFT Ryu–Takayanagi (RT) minimal-surface formula are confined to an explicit literature remark ([@rem-ryu-takayanagi-literature]), never conflated with our finite-dimensional width-three bridge theorem.
 
+::: {.figure src="ch19-overview"}
+**Figure 19.** The chapter at a glance. Panel I: in a binary layered network, the 4 amber legs along the bottom are cut off by just the 2 bonds marked magenta (a schematic model). Panel II: on the width-three bridge graph $(a, b, c, d) = (2, 3, 2, 3)$, the two magenta min cuts above and below have capacity $ad = bc = 6$, and flow equals cut ([@thm-bridge-quantum-maxflow-mincut]). Panel III: in log capacity, the blue $ad$ facet and the orange $bc$ facet join into one bent line at the dashed vertical seam; the violet tag is the RT formula (literature result, not formalized in this book).
+:::
+
 ## Entanglement hierarchies and finite tensor networks {#sec-mera-hierarchy}
 
 Suppose two composite quantum subsystems — a left boundary and a right boundary — communicate through an intermediate network of contracted tensor legs. If only a single one-dimensional scalar wire links the two sides, the induced linear map across the cut has rank at most $1$ regardless of how large the boundary Hilbert spaces are. When multiple internal bonds bridge the interface in parallel, the operator rank across the cut (the number of nonzero Schmidt singular values) can grow with the product of the bond dimensions.
@@ -19,8 +23,6 @@ Suppose two composite quantum subsystems — a left boundary and a right boundar
 ::: {.viz src="layered-network-cut" preset="one" height="500"}
 **One site: the cut is its own leg.** Site 16 at the bottom of the layered network forms the amber interval on its own, and the magenta minimal cut severs only that one leg. A single bond crosses the cut, so the rank across it is at most the dimension of that bond; only when more bonds are cut does the bound become the product of their dimensions.
 :::
-
-![Hierarchical tensor-network schematic, width-three bridge-graph quantum max-flow min-cut theorem, and discrete log-capacity polyhedral facets alongside the continuum RT literature boundary](../assets/fig-19-mera-bridge-graph-mincut.svg)
 
 As illustrated in Panel I of the figure above, hierarchical tensor networks such as MERA are widely used in the physics literature to motivate a geometric link between boundary entanglement and bulk bottleneck cuts. In general tensor networks, however, the quantum max-flow (the maximum matrix rank achievable by varying local tensors) can be strictly smaller than the quantum min-cut (the minimum product of bond dimensions across a disconnecting cut). To establish a theorem verified by the Lean kernel, we focus on an explicit finite-dimensional bridge network whose parameters and cone domain are completely specified.
 
@@ -74,6 +76,10 @@ $$
 \operatorname{QMinCut}(a, b, c, d) = \min\bigl(3ac,\, \min(ad, bc)\bigr) \in \mathbb{N}.
 $$
 
+::: {.figure src="ch19-three-cuts"}
+**Only three candidate cuts sever the width-three bridge graph, and the min cut is the smallest of them.** For $(a, b, c, d) = (2, 3, 2, 3)$: the upper dashed line crosses legs $a$ and $d$, capacity $ad = 6$; the lower one crosses legs $b$ and $c$, capacity $bc = 6$; the slanting grey line crosses leg $a$, the three bridges and leg $c$, capacity $3ac = 12$. The two magenta outer cuts tie for smallest, so $\operatorname{QMinCut} = 6$.
+:::
+
 Our next proposition shows that for all natural numbers $a, b, c, d \in \mathbb{N}$, with no cone assumptions needed, the quantum max-flow never exceeds the quantum min-cut.
 
 ::: {.proposition #prop-bridge-flow-cut-bound title="Flow is bounded by cut capacity" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_le_QMinCut"}
@@ -125,6 +131,10 @@ Tabulating the six basis pairs of $\operatorname{Fin} 3 \times \operatorname{Fin
 | $r = 2$ | $(2, 1)$ | $(1, 2)$ | $(M_2)_{1,2}(N_2)_{2,1} = 1 \cdot 1 = 1$ |
 
 Together, $\operatorname{flow}(M, N)$ is a $6\times 6$ permutation matrix of rank $6 = \operatorname{QMinCut}(2, 3, 2, 3)$, confirming $\operatorname{QMaxFlow}(2, 3, 2, 3) = 6$ via [@prop-bridge-flow-cut-bound].
+:::
+
+::: {.figure src="ch19-permutation"}
+**Together the three bridges tile a $6 \times 6$ permutation matrix exactly.** The cyan cells are the non-zero entries of $\operatorname{flow}(M, N)$, and the number in each is the bridge $r$ that puts it there: bridge $0$ fills the $4$ cells at the top left, bridges $1$ and $2$ add one cell each; the six cells share no row and no column, so the rank is $6$ ([@ex-bridge-two-three]).
 :::
 
 ## Cone domains and discrete capacity facets {#sec-discrete-facet-stitching}
@@ -194,6 +204,10 @@ $$
 The three candidate cut capacities are now $(3ac, ad, bc) = (12, 8, 6)$, with $\operatorname{QMinCut}(2, 3, 2, 4) = \min(12, \min(8, 6)) = 6 = bc$. Across the three steps $d = 2 \to 3 \to 4$, the candidate cut triple progresses through $(12, 4, 6) \to (12, 6, 6) \to (12, 8, 6)$, crossing from the $ad < bc$ facet through the seam $ad = bc$ into the $ad > bc$ facet and switching the unique controlling bottleneck from the left outer cut $ad$ to the right outer cut $bc$. Keep in mind that our finite-dimensional rank theorems certify only the discrete integer lattice points on these affine facets.
 :::
 
+::: {.figure src="ch19-facet-seam"}
+**The min cut is the lower envelope of three planes, and crossing the seam changes the bottleneck.** With $a = 2, b = 3, c = 2$ and $\ln d$ across: the thick line climbs along the blue $\ln ad$, bends at the dashed vertical $ad = bc$ onto the orange $\ln bc$, and the grey $\ln 3ac$ stays above throughout. The lattice points $d = 2, 3, 4$ carry the candidate cuts $(12, 4, 6)$, $(12, 6, 6)$, $(12, 8, 6)$ ([@ex-log-capacity-facets]); the theorem speaks only about these integer points.
+:::
+
 ## From discrete bridge graphs to the RT literature {#sec-rt-literature-bridge}
 
 Combining the universal upper bound $\operatorname{QMaxFlow} \le \operatorname{QMinCut}$ ([@prop-bridge-flow-cut-bound]) with the cone simplification $\operatorname{QMinCut} = \min(ad, bc)$ ([@cor-bridge-cone-mincut]) leaves the constructive lower bound: on the ordered cone domain $0 < a \le b$, $0 < c \le d$ with $a^2 + b^2 \le 3ab$ and $c^2 + d^2 \le 3cd$, does there always exist a pair $(M, N)$ whose bridge contraction achieves rank $\min(ad, bc)$?
@@ -229,6 +243,10 @@ Respect the exact boundaries of [@thm-bridge-quantum-maxflow-mincut]:
 - No extra geometric structure beyond the matrix contraction `flow` is assumed: the theorem applies to the width-three (`Fin 3`) Kronecker bridge $\sum_{r \in \operatorname{Fin} 3} M_r \otimes N_r$ over $\mathbb{C}$;
 - Every positivity, ordering, and quadratic cone hypothesis ($0 < a \le b$, $0 < c \le d$, $a^2 + b^2 \le 3ab$, $c^2 + d^2 \le 3cd$) is essential;
 - The theorem does **not** generalize unconditionally to arbitrary tensor networks, full MERA hierarchies, continuum AdS/CFT, or the Ryu–Takayanagi formula.
+
+::: {.figure src="ch19-discrete-vs-rt"}
+**What this chapter proves stops on the left.** On the left, the width-three bridge graph, with the green tag for max-flow equal to min-cut in the cone ([@thm-bridge-quantum-maxflow-mincut]); on the right, a disc standing for a slice of continuum spacetime, the cyan arc the boundary region $A$ and the violet arc $\gamma_A$ leaving the ends of $A$ at right angles to the rim, the minimal surface of the RT formula (literature result, not formalized in this book). The crossed-out arrow between them: the continuum limit from left to right is not proved in this book.
+:::
 
 To situate this discrete theorem alongside the high-energy physics literature without overclaiming, we state the continuum Ryu–Takayanagi formula and its scope restrictions in the following remark.
 

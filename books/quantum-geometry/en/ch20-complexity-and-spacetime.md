@@ -10,11 +10,13 @@ Before taking a single step, we state the epistemological status of the opening 
 2. **Tier 2 (Literature remarks)**: In [@rem-complexity-growth-literature] and [@rem-computational-model-literature], we clarify the definitions of state complexity, Nielsen geometry, post-thermalization growth windows, uniform Turing complexity classes, and the accounting of lookup-table preprocessing costs;
 3. **Tier 3 (Red `OPEN`)**: We formulate three celebrated open problems — **Complexity = Volume (CV)** ([@conj-complexity-equals-volume]), **$\mathrm{ER}=\mathrm{EPR}$** ([@conj-er-equals-epr]), and **$\mathrm{P}\neq\mathrm{NP}$** ([@conj-p-neq-np]) — inside `conjecture` environments carrying no `lean` attribute.
 
+::: {.figure src="ch20-overview"}
+**Figure 20.** The chapter at a glance. Panel I, toy schematic curves: the cyan $S(t) = \min(2t, 4)$ runs into the grey dashed level $4$ at $t = 2$ and goes flat, while the magenta $C(t) = 2t$ keeps climbing. Panel II, a schematic Penrose diagram of a two-sided black hole: violet slices pinned to the left and right boundaries stretch as boundary time runs on, and reading them as complexity is the open complexity = volume conjecture ([@conj-complexity-equals-volume]). Panel III: the cyan P sits inside NP, and the red question mark between them is the open $\mathrm{P}\neq\mathrm{NP}$ ([@conj-p-neq-np]).
+:::
+
 ## Gate count, parallel depth, and growth models {#sec-circuit-depth-growth}
 
 Whenever we ask how "complex" a quantum circuit is, our first duty is to keep four distinct notions separate: **total gate count** (the total number of elementary gates in a circuit list), **parallel circuit depth** (the minimum number of time layers required when gates on disjoint sites execute simultaneously), **continuous Nielsen geodesic length** on the unitary group, and laboratory **physical time $t$**.
-
-![Circuit parallel depth and entropy-saturation schematic, open-boundary integrable circuit minimum depth theorem, and the open boundaries of CV, ER=EPR, and P≠NP](../assets/fig-20-complexity-volume-wormhole.svg)
 
 Begin with an exact parallel-depth problem solved completely in the Lean module `D5.S3.Quantum.Dynamics.OpenIntegrableCircuitMinDepth`. Consider a one-dimensional open-boundary chain of $N$ sites $\{1, 2, \dots, N\}$, whose elementary gate alphabet `Gate` has three constructors:
 
@@ -29,6 +31,10 @@ $$
 $$
 
 By packing non-overlapping bulk and boundary gates into parallel layers, our first theorem establishes the exact closed-form formula for $\operatorname{minDepth}(N, \kappa)$.
+
+::: {.figure src="ch20-turning-points"}
+**The turning points cut the chain of gates into $\kappa + 1$ runs, one layer per gate in each run.** $N = 11$, $S = \{4, 8\}$: the $12$ gates are $12$ cyan bricks forming three staircases that step down to the right, four bricks each; grey arrows point from the gate that runs first to the one after it, and magenta triangles mark the turning points $U_4$ and $U_8$. The gate count is $12$, the depth only $4 = \lfloor 11/3\rfloor + 1$ ([@thm-open-circuit-min-depth]).
+:::
 
 ::: {.theorem #thm-open-circuit-min-depth title="Minimum open-boundary circuit depth" lean="D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result"}
 Let $N, \kappa \in \mathbb{N}$ be natural numbers satisfying $1 \le \kappa$ and $2\kappa \le N$. Then the minimum parallel depth over configurations of size $\kappa$ in the open-boundary integrable circuit family is
@@ -184,6 +190,10 @@ Scope and open boundaries: $V_{\mathrm{ren}}(\Sigma_t)$ is the **spatial volume 
 
 While holographic conjectures motivate studying how many gates are needed to build highly entangled states, what can we prove rigorously about worst-case two-qubit gate counts in finite-dimensional circuit synthesis?
 
+::: {.figure src="ch20-cv-slices"}
+**As boundary time runs on, the slice through the black-hole interior stretches; whether it tracks the gate count is open.** A schematic Penrose diagram of a two-sided black hole: the vertical sides are the two boundaries, the zigzags are the singularities, the dashed diagonals the horizons. The violet slices $\Sigma_t$ are pinned at boundary times $t = 0, 1, 2, 3$ and grow longer later on (schematic; no volume is computed). The red tag is the complexity = volume conjecture ([@conj-complexity-equals-volume]), an open problem.
+:::
+
 In the Lean module `D5.S3.Quantum.Magic.ReflectionDiagonalCNOTLowerBound`, fix an even number of qubits $m = 2n$ ($n \ge 1$):
 
 - Write $\operatorname{Qubits}(m) = (\operatorname{Fin} m \to \operatorname{Bool})$ for the $2^m$ computational basis bitstrings;
@@ -252,6 +262,10 @@ Note the exact scope of [@prop-reflection-cnot-lower-bound]:
 
 Alongside circuit synthesis bounds, we record the open $\mathrm{ER}=\mathrm{EPR}$ conjecture on the geometric interpretation of bipartite entanglement in semiclassical gravity.
 
+::: {.figure src="ch20-er-epr"}
+**ER=EPR proposes "entanglement is a bridge" only for heavily entangled semiclassical systems.** Top row: many cyan dashed entangled pairs between the systems $L$ and $R$, set against a side view of an Einstein–Rosen bridge by a red “≟”; the correspondence is an open problem ([@conj-er-equals-epr]). Bottom row: the small bridge a single Bell pair points to is crossed out—one pair of entangled qubits has no smooth wormhole between them. The whole figure is schematic.
+:::
+
 ::: {.conjecture #conj-er-equals-epr title="ER=EPR"}
 In entangled bipartite systems that admit a semiclassical gravitational description (prototypically a two-sided eternal black hole in the thermofield double state), the **$\mathrm{ER}=\mathrm{EPR}$ conjecture** proposes that a non-traversable **Einstein–Rosen (ER) bridge** serves as the bulk geometric description of the **Einstein–Podolsky–Rosen (EPR) entanglement** between the two boundary subsystems.
 
@@ -310,6 +324,10 @@ Finally, let us address the computational question raised by the opening epigrap
 2. **Exponential unitary-synthesis gate bounds do not prove $\mathrm{P} \neq \mathrm{NP}$**: In [@prop-reflection-cnot-lower-bound], any ancilla-free $\{\mathrm{CNOT}, R_z\}$ circuit synthesizing the explicit reflection-symmetric diagonal witness $\operatorname{diag}(e^{i\theta_{\mathrm{hard}}(x)})$ requires at least $2^{2n-1} + 2n - 2$ $\mathrm{CNOT}$ gates because $\theta_{\mathrm{hard}}$ evaluates to $-1$ on all $2^{2n-1} - 1$ nonzero even-weight Walsh–Hadamard characters, forcing the circuit to generate every nonzero even-weight parity output and execute at least $2n - 1$ odd-return steps to restore the terminal wire parities (while in the unformalized circuit-synthesis literature, such as V. V. Shende, S. S. Bullock & I. L. Markov, *Phys. Rev. A* **70**, 012310 (2004), synthesizing generic $m$-qubit unitaries in $\mathrm{U}(2^m)$ also requires $\Omega(4^m)$ two-qubit gates by continuous real parameter-dimension counting over a $4^m$-dimensional manifold). Neither a discrete parity-output counting bound for an explicit $2^{2n}\times 2^{2n}$ diagonal unitary nor generic continuous parameter-dimension counting rules out $\operatorname{poly}(n)$-time algorithms for succinctly encoded decision problems of input bit-length $n = |x|$ in $\mathrm{NP}$, and therefore neither proves $\mathrm{P} \neq \mathrm{NP}$.
 
 See S. A. Cook, "The complexity of theorem-proving procedures," *Proc. 3rd Annual ACM Symposium on Theory of Computing (STOC)*, pp. 151–158 (1971), DOI: `10.1145/800157.805047`; and S. Aaronson, *The Complexity of Quantum States and Transformations: From Quantum Money to Black Holes* (2016), `arXiv:1607.05256`.
+:::
+
+::: {.figure src="ch20-lookup-budget"}
+**A precomputed lookup table soon outgrows any polynomial budget.** On a logarithmic vertical scale, the magenta line is the table's $2^n$ rows and the cyan curve a sample polynomial budget $n^3$; they cross at the dashed vertical $n = 10$, after which the magenta line pulls ever further ahead. Violet tag: literature result, not formalized in this book ([@rem-computational-model-literature]); red tag: $\mathrm{P}\neq\mathrm{NP}$ remains open, and this figure does not answer it.
 :::
 
 ::: {.conjecture #conj-p-neq-np title="P≠NP"}

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch20-er-epr" data-lang="zh" viewBox="0 0 540 320" width="540" height="320" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="上下两行示意图。上一行：左边两列各 6 个点，是左右两套边界系统 L 与 R，每个 L 点与对面的 R 点之间连着一条青色虚线，表示纠缠对；中间一个红色的“≟”与红色标签“ER = EPR 开放”；右边是一座爱因斯坦—罗森桥的侧视图，两端张开、中间收窄。下一行：只有一对点，连着一条青色虚线，箭头指向一座小桥，小桥上打了叉，旁边写着：一对贝尔态，没有光滑的桥。">
+<title>上下两行示意图。上一行：左边两列各 6 个点，是左右两套边界系统 L 与 R，每个 L 点与对面的 R 点之间连着一条青色虚线，表示纠缠对；中间一个红色的“≟”与红色标签“ER = EPR 开放”；右边是一座爱因斯坦—罗森桥的侧视图，两端张开、中间收窄。下一行：只有一对点，连着一条青色虚线，箭头指向一座小桥，小桥上打了叉，旁边写着：一对贝尔态，没有光滑的桥。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<line x1="44" y1="44" x2="164" y2="44" class="ts-cyan" stroke-width="1.8" stroke-dasharray="5 4" fill="none"/>
+<circle cx="44" cy="44" r="5" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="164" cy="44" r="5" class="ts-bg tf-ink" stroke-width="1.4"/>
+<line x1="44" y1="66" x2="164" y2="66" class="ts-cyan" stroke-width="1.8" stroke-dasharray="5 4" fill="none"/>
+<circle cx="44" cy="66" r="5" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="164" cy="66" r="5" class="ts-bg tf-ink" stroke-width="1.4"/>
+<line x1="44" y1="88" x2="164" y2="88" class="ts-cyan" stroke-width="1.8" stroke-dasharray="5 4" fill="none"/>
+<circle cx="44" cy="88" r="5" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="164" cy="88" r="5" class="ts-bg tf-ink" stroke-width="1.4"/>
+<line x1="44" y1="110" x2="164" y2="110" class="ts-cyan" stroke-width="1.8" stroke-dasharray="5 4" fill="none"/>
+<circle cx="44" cy="110" r="5" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="164" cy="110" r="5" class="ts-bg tf-ink" stroke-width="1.4"/>
+<line x1="44" y1="132" x2="164" y2="132" class="ts-cyan" stroke-width="1.8" stroke-dasharray="5 4" fill="none"/>
+<circle cx="44" cy="132" r="5" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="164" cy="132" r="5" class="ts-bg tf-ink" stroke-width="1.4"/>
+<line x1="44" y1="154" x2="164" y2="154" class="ts-cyan" stroke-width="1.8" stroke-dasharray="5 4" fill="none"/>
+<circle cx="44" cy="154" r="5" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="164" cy="154" r="5" class="ts-bg tf-ink" stroke-width="1.4"/>
+<text class="tf-dim" x="44" y="184" font-size="15" text-anchor="middle"><tspan font-style="italic">L</tspan></text>
+<text class="tf-dim" x="164" y="184" font-size="15" text-anchor="middle"><tspan font-style="italic">R</tspan></text>
+<text class="tf-cyan" x="104" y="26" font-size="13" text-anchor="middle">许多纠缠对</text>
+<text class="tf-warn" x="236" y="118.8" font-size="30" text-anchor="middle" font-weight="600">≟</text>
+<rect x="200.2" y="144" width="71.6" height="21" class="ts-warn tf-warn" stroke-width="1.2" fill-opacity="0.12"/>
+<text class="tf-warn tr-fig-mono" x="207.2" y="160" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">ER = EPR</text>
+<text class="tf-warn" x="236" y="186" font-size="13" text-anchor="middle">开放</text>
+<path d="M310 35 L313.33 38.34 L316.67 41.57 L320 44.69 L323.33 47.69 L326.67 50.58 L330 53.36 L333.33 56.02 L336.67 58.57 L340 61.01 L343.33 63.33 L346.67 65.54 L350 67.64 L353.33 69.62 L356.67 71.49 L360 73.25 L363.33 74.89 L366.67 76.42 L370 77.84 L373.33 79.14 L376.67 80.33 L380 81.41 L383.33 82.37 L386.67 83.22 L390 83.96 L393.33 84.58 L396.67 85.09 L400 85.49 L403.33 85.77 L406.67 85.94 L410 86 L413.33 85.94 L416.67 85.77 L420 85.49 L423.33 85.09 L426.67 84.58 L430 83.96 L433.33 83.22 L436.67 82.37 L440 81.41 L443.33 80.33 L446.67 79.14 L450 77.84 L453.33 76.42 L456.67 74.89 L460 73.25 L463.33 71.49 L466.67 69.62 L470 67.64 L473.33 65.54 L476.67 63.33 L480 61.01 L483.33 58.57 L486.67 56.02 L490 53.36 L493.33 50.58 L496.67 47.69 L500 44.69 L503.33 41.57 L506.67 38.34 L510 35" class="ts-ink" stroke-width="2.2" stroke-linejoin="round" fill="none"/>
+<path d="M310 165 L313.33 161.66 L316.67 158.43 L320 155.31 L323.33 152.31 L326.67 149.42 L330 146.64 L333.33 143.98 L336.67 141.43 L340 138.99 L343.33 136.67 L346.67 134.46 L350 132.36 L353.33 130.38 L356.67 128.51 L360 126.75 L363.33 125.11 L366.67 123.58 L370 122.16 L373.33 120.86 L376.67 119.67 L380 118.59 L383.33 117.63 L386.67 116.78 L390 116.04 L393.33 115.42 L396.67 114.91 L400 114.51 L403.33 114.23 L406.67 114.06 L410 114 L413.33 114.06 L416.67 114.23 L420 114.51 L423.33 114.91 L426.67 115.42 L430 116.04 L433.33 116.78 L436.67 117.63 L440 118.59 L443.33 119.67 L446.67 120.86 L450 122.16 L453.33 123.58 L456.67 125.11 L460 126.75 L463.33 128.51 L466.67 130.38 L470 132.36 L473.33 134.46 L476.67 136.67 L480 138.99 L483.33 141.43 L486.67 143.98 L490 146.64 L493.33 149.42 L496.67 152.31 L500 155.31 L503.33 158.43 L506.67 161.66 L510 165" class="ts-ink" stroke-width="2.2" stroke-linejoin="round" fill="none"/>
+<ellipse cx="330" cy="100" rx="10.26" ry="46.64" class="ts-dim" stroke-width="1.2" fill="none"/>
+<ellipse cx="370" cy="100" rx="4.88" ry="22.16" class="ts-dim" stroke-width="1.2" fill="none"/>
+<ellipse cx="410" cy="100" rx="3.08" ry="14" class="ts-dim" stroke-width="1.2" fill="none"/>
+<ellipse cx="450" cy="100" rx="4.88" ry="22.16" class="ts-dim" stroke-width="1.2" fill="none"/>
+<ellipse cx="490" cy="100" rx="10.26" ry="46.64" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="410" y="26" font-size="13" text-anchor="middle">爱因斯坦—罗森桥</text>
+<line x1="20" y1="222" x2="520" y2="222" class="ts-faint" stroke-width="1" fill="none"/>
+<line x1="44" y1="270" x2="164" y2="270" class="ts-cyan" stroke-width="1.8" stroke-dasharray="5 4" fill="none"/>
+<circle cx="44" cy="270" r="5" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="164" cy="270" r="5" class="ts-bg tf-ink" stroke-width="1.4"/>
+<text class="tf-cyan" x="104" y="256" font-size="13" text-anchor="middle">一对贝尔态</text>
+<line x1="198" y1="270" x2="255.2" y2="270" class="ts-dim" stroke-width="1.6" fill="none"/>
+<path d="M262 270 L254 273.36 L254 266.64Z" class="tf-dim"/>
+<path d="M276 244 L277.33 245.31 L278.67 246.58 L280 247.8 L281.33 248.98 L282.67 250.11 L284 251.2 L285.33 252.24 L286.67 253.24 L288 254.2 L289.33 255.11 L290.67 255.98 L292 256.8 L293.33 257.58 L294.67 258.31 L296 259 L297.33 259.64 L298.67 260.24 L300 260.8 L301.33 261.31 L302.67 261.78 L304 262.2 L305.33 262.58 L306.67 262.91 L308 263.2 L309.33 263.44 L310.67 263.64 L312 263.8 L313.33 263.91 L314.67 263.98 L316 264 L317.33 263.98 L318.67 263.91 L320 263.8 L321.33 263.64 L322.67 263.44 L324 263.2 L325.33 262.91 L326.67 262.58 L328 262.2 L329.33 261.78 L330.67 261.31 L332 260.8 L333.33 260.24 L334.67 259.64 L336 259 L337.33 258.31 L338.67 257.58 L340 256.8 L341.33 255.98 L342.67 255.11 L344 254.2 L345.33 253.24 L346.67 252.24 L348 251.2 L349.33 250.11 L350.67 248.98 L352 247.8 L353.33 246.58 L354.67 245.31 L356 244" class="ts-dim" stroke-width="2.2" stroke-linejoin="round" fill="none"/>
+<path d="M276 296 L277.33 294.69 L278.67 293.42 L280 292.2 L281.33 291.02 L282.67 289.89 L284 288.8 L285.33 287.76 L286.67 286.76 L288 285.8 L289.33 284.89 L290.67 284.02 L292 283.2 L293.33 282.42 L294.67 281.69 L296 281 L297.33 280.36 L298.67 279.76 L300 279.2 L301.33 278.69 L302.67 278.22 L304 277.8 L305.33 277.42 L306.67 277.09 L308 276.8 L309.33 276.56 L310.67 276.36 L312 276.2 L313.33 276.09 L314.67 276.02 L316 276 L317.33 276.02 L318.67 276.09 L320 276.2 L321.33 276.36 L322.67 276.56 L324 276.8 L325.33 277.09 L326.67 277.42 L328 277.8 L329.33 278.22 L330.67 278.69 L332 279.2 L333.33 279.76 L334.67 280.36 L336 281 L337.33 281.69 L338.67 282.42 L340 283.2 L341.33 284.02 L342.67 284.89 L344 285.8 L345.33 286.76 L346.67 287.76 L348 288.8 L349.33 289.89 L350.67 291.02 L352 292.2 L353.33 293.42 L354.67 294.69 L356 296" class="ts-dim" stroke-width="2.2" stroke-linejoin="round" fill="none"/>
+<ellipse cx="289.33" cy="270" rx="3.28" ry="14.89" class="ts-dim" stroke-width="1.2" fill="none"/>
+<ellipse cx="316" cy="270" rx="2.5" ry="6" class="ts-dim" stroke-width="1.2" fill="none"/>
+<ellipse cx="342.67" cy="270" rx="3.28" ry="14.89" class="ts-dim" stroke-width="1.2" fill="none"/>
+<line x1="303" y1="257" x2="329" y2="283" class="ts-ink" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+<line x1="303" y1="283" x2="329" y2="257" class="ts-ink" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+<text class="tf-dim" x="370" y="275" font-size="14">没有光滑的桥</text>
+</svg>
