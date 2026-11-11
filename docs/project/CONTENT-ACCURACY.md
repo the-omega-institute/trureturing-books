@@ -588,6 +588,14 @@ EPUB 浏览器预览不等于 Apple Books 原生主题验收，尚未导入 Appl
 
 本次只更新本台账，最终摘要在交付 JSON 中记录；正文、作者题记、ID/GID、媒体顺序、锁、Lean、托管文件、工具、运行时和技能全部保留。未委派或执行 Git/GitHub 生命周期操作；没有开启新批次或终止全目标。**最终候选与此台账补丁的对应、独立 R4、PR #90 的 CI、合入与 Pages 仍由调用方完成。**
 
+## PR90 R4 复审与 61c43de 集成对应
+
+封存候选 `14b57a0779c91322104994eea528f778aac726f8` 的 R4 架构、质量、测试三席均已独立批准，无阻断项。复审覆盖本批第 5–8 章及四个相关实验室、归属修复、本地技能和所记录的输出对应；不是原 35 单元全目标完成，也不批准未审章节或新增第 31–32 章。测试席另新跑两页普通/慢帧共 392 项检查，核对 32 个章节组合、224 次嵌入、32 次依据/抽屉/章节往返，四版受控 PDF 的本批 305 页字体及两份 EPUBCheck 均通过。未变数值、源码和工具套件只按各席实际比较后的依赖范围复用，不冒称全部重跑。
+
+三席终态收齐后，调用方无冲突整合官方主线 `61c43de7517e77bc23357374fd907a65cb3291b6`，集成提交为 `11afeaf05a048d8fd37df38625564dfd6a829c4c`。本批正文、四实验室、技能、工具/主题与相关配置共 226 个路径逐字节不变；锁的原 439 条记录逐项相同，pin 不变，仅主线增加 Birkhoff 定理一条。另有终章、附录 C 和派生计数/声明图的 28 个上游变化路径；它们不继承本批内容批准。此对应支持本批 R4 结论在未变依赖内沿用，不产生额外整书审查或新的实施额度。
+
+集成后新跑 `./tbook check`：1 本可见书、0 错误/0 警告；150 个图脚本时效性检查为 0 过期/0 错误；关闭缓存的中英 HTML 构建均通过。当前站点和声明图检查、集成候选 CI、合入与 Pages 尚待调用方核对。`ac508fe` 输入的四 PDF/两 EPUB 仍保留其历史归属，不能冒称包含本次终章增量的新整书产物；最终 CI 应构建集成输入。受控字体与默认 macOS/CI 不等价、原生 Books/设备和完整音视频未验收等限制继续保留。历史正文覆盖仍为 9/35，其余 26 单元继续待办。
+
 [par-src]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/QuantumContext/ParallelogramNormLaw.lean#L22
 [par-frozen]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/Golden/Frozen/state/D5/S3/QuantumContext/ParallelogramNormLaw.lean.json
 [fin-src]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/Quantum/FiniteDimensional.lean#L24
