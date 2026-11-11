@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch23-overview" data-lang="en" data-wrap="1" viewBox="0 0 740 290" width="740" height="290" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="Three panels. Panel I: the hexagonal Eisenstein lattice; the cyan circle of norm 7 passes through 12 lattice points; two magenta parallelograms are the cells spanned by the two basis vectors at t = −1 and t = 2, one upright, one sheared, with the same area. Panel II: the (g, ḡ) plane with two magenta hyperbolas gḡ = +1 and gḡ = −1; the golden units φⁿ land alternately on the two branches, labelled (2, 0), (1, 1), (3, 1), (4, 2), the Lucas and Fibonacci numbers. Panel III: rational numbers laid out in rows by denominator 1 to 6, denser row by row; the top row of large cyan dots, denominator 1, is the integers. Below, a violet tag gives the literature result (Koenigsmann 2016 defines ℤ with universal quantifiers) and a red tag the open question (whether existential quantifiers alone suffice).">
+<title>Three panels. Panel I: the hexagonal Eisenstein lattice; the cyan circle of norm 7 passes through 12 lattice points; two magenta parallelograms are the cells spanned by the two basis vectors at t = −1 and t = 2, one upright, one sheared, with the same area. Panel II: the (g, ḡ) plane with two magenta hyperbolas gḡ = +1 and gḡ = −1; the golden units φⁿ land alternately on the two branches, labelled (2, 0), (1, 1), (3, 1), (4, 2), the Lucas and Fibonacci numbers. Panel III: rational numbers laid out in rows by denominator 1 to 6, denser row by row; the top row of large cyan dots, denominator 1, is the integers. Below, a violet tag gives the literature result (Koenigsmann 2016 defines ℤ with universal quantifiers) and a red tag the open question (whether existential quantifiers alone suffice).</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="236" height="290" viewBox="0 0 236 290">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">I  Eisenstein: shear-invariant</text>
+<circle cx="4" cy="158" r="2.6" class="tf-faint"/>
+<circle cx="61" cy="59.27" r="2.6" class="tf-faint"/>
+<circle cx="42" cy="158" r="2.6" class="tf-faint"/>
+<circle cx="61" cy="125.09" r="2.6" class="tf-faint"/>
+<circle cx="80" cy="92.18" r="2.6" class="tf-faint"/>
+<circle cx="61" cy="190.91" r="2.6" class="tf-faint"/>
+<circle cx="80" cy="158" r="2.6" class="tf-faint"/>
+<circle cx="99" cy="125.09" r="2.6" class="tf-faint"/>
+<circle cx="118" cy="92.18" r="2.6" class="tf-faint"/>
+<circle cx="61" cy="256.73" r="2.6" class="tf-faint"/>
+<circle cx="80" cy="223.82" r="2.6" class="tf-faint"/>
+<circle cx="99" cy="190.91" r="2.6" class="tf-faint"/>
+<circle cx="118" cy="158" r="2.6" class="tf-faint"/>
+<circle cx="137" cy="125.09" r="2.6" class="tf-faint"/>
+<circle cx="156" cy="92.18" r="2.6" class="tf-faint"/>
+<circle cx="175" cy="59.27" r="2.6" class="tf-faint"/>
+<circle cx="118" cy="223.82" r="2.6" class="tf-faint"/>
+<circle cx="137" cy="190.91" r="2.6" class="tf-faint"/>
+<circle cx="156" cy="158" r="2.6" class="tf-faint"/>
+<circle cx="175" cy="125.09" r="2.6" class="tf-faint"/>
+<circle cx="156" cy="223.82" r="2.6" class="tf-faint"/>
+<circle cx="175" cy="190.91" r="2.6" class="tf-faint"/>
+<circle cx="194" cy="158" r="2.6" class="tf-faint"/>
+<circle cx="175" cy="256.73" r="2.6" class="tf-faint"/>
+<circle cx="232" cy="158" r="2.6" class="tf-faint"/>
+<circle cx="118" cy="158" r="100.54" class="ts-cyan" stroke-width="2" fill="none"/>
+<circle cx="23" cy="125.09" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="42" cy="92.18" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="23" cy="190.91" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="99" cy="59.27" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="42" cy="223.82" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="137" cy="59.27" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="99" cy="256.73" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="194" cy="92.18" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="137" cy="256.73" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="213" cy="125.09" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="194" cy="223.82" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="213" cy="190.91" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<path d="M118 158 L156 158 L175 125.09 L137 125.09Z" class="ts-magenta tf-magenta" stroke-width="1.6" stroke-linejoin="round" fill-opacity="0.22"/>
+<path d="M118 158 L156 158 L61 125.09 L23 125.09Z" class="ts-magenta tf-magenta" stroke-width="1.6" stroke-dasharray="5 3" stroke-linejoin="round" fill-opacity="0.12"/>
+<text class="tf-magenta ts-bg" x="152.2" y="182" font-size="13" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">t</tspan> = −1</text>
+<text class="tf-magenta ts-bg" x="57.2" y="115.09" font-size="13" text-anchor="middle" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">t</tspan> = 2</text>
+<text class="tf-cyan ts-bg" x="190.2" y="74.4" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">N</tspan> = 7</text>
+</svg>
+<svg class="tr-fig-panel" x="252" y="0" width="236" height="290" viewBox="0 0 236 290">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">II  golden units on ±1</text>
+<line x1="30" y1="170" x2="226" y2="170" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="55.79" y1="44" x2="55.79" y2="254" class="ts-faint" stroke-width="1.1" fill="none"/>
+<path d="M73.1 44.86 L74.1 51.69 L75.1 57.81 L76.1 63.33 L77.1 68.34 L78.1 72.89 L79.1 77.05 L80.1 80.88 L81.1 84.39 L82.09 87.65 L83.09 90.66 L84.09 93.46 L85.09 96.07 L86.09 98.51 L87.09 100.79 L88.09 102.93 L89.09 104.95 L90.09 106.84 L91.09 108.63 L92.09 110.32 L93.09 111.92 L94.09 113.43 L95.09 114.87 L96.09 116.24 L97.08 117.54 L98.08 118.78 L99.08 119.96 L100.08 121.09 L101.08 122.17 L102.08 123.2 L103.08 124.19 L104.08 125.14 L105.08 126.05 L106.08 126.92 L107.08 127.76 L108.08 128.57 L109.08 129.35 L110.08 130.1 L111.08 130.82 L112.08 131.51 L113.07 132.18 L114.07 132.83 L115.07 133.46 L116.07 134.06 L117.07 134.65 L118.07 135.22 L119.07 135.77 L120.07 136.3 L121.07 136.81 L122.07 137.32 L123.07 137.8 L124.07 138.27 L125.07 138.73 L126.07 139.17 L127.07 139.61 L128.06 140.03 L129.06 140.44 L130.06 140.83 L131.06 141.22 L132.06 141.6 L133.06 141.96 L134.06 142.32 L135.06 142.67 L136.06 143.01 L137.06 143.34 L138.06 143.67 L139.06 143.98 L140.06 144.29 L141.06 144.59 L142.06 144.89 L143.05 145.18 L144.05 145.46 L145.05 145.73 L146.05 146 L147.05 146.26 L148.05 146.52 L149.05 146.77 L150.05 147.02 L151.05 147.26 L152.05 147.49 L153.05 147.73 L154.05 147.95 L155.05 148.17 L156.05 148.39 L157.05 148.61 L158.04 148.81 L159.04 149.02 L160.04 149.22 L161.04 149.42 L162.04 149.61 L163.04 149.8 L164.04 149.99 L165.04 150.17 L166.04 150.35 L167.04 150.53 L168.04 150.7 L169.04 150.87 L170.04 151.04 L171.04 151.2 L172.04 151.36 L173.03 151.52 L174.03 151.68 L175.03 151.83 L176.03 151.98 L177.03 152.13 L178.03 152.28 L179.03 152.42 L180.03 152.56 L181.03 152.7 L182.03 152.84 L183.03 152.97 L184.03 153.11 L185.03 153.24 L186.03 153.37 L187.03 153.49 L188.03 153.62 L189.02 153.74 L190.02 153.86 L191.02 153.98 L192.02 154.1 L193.02 154.21 L194.02 154.33 L195.02 154.44 L196.02 154.55 L197.02 154.66 L198.02 154.77 L199.02 154.88 L200.02 154.98 L201.02 155.08 L202.02 155.19 L203.02 155.29 L204.01 155.38 L205.01 155.48 L206.01 155.58 L207.01 155.67 L208.01 155.77 L209.01 155.86 L210.01 155.95 L211.01 156.04 L212.01 156.13 L213.01 156.22 L214.01 156.31 L215.01 156.39 L216.01 156.48 L217.01 156.56 L218.01 156.65 L219 156.73 L220 156.81 L221 156.89 L222 156.97 L223 157.04 L224 157.12 L225 157.2 L226 157.27" class="ts-magenta" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+<path d="M82.09 252.35 L83.09 249.34 L84.09 246.54 L85.09 243.93 L86.09 241.49 L87.09 239.21 L88.09 237.07 L89.09 235.05 L90.09 233.16 L91.09 231.37 L92.09 229.68 L93.09 228.08 L94.09 226.57 L95.09 225.13 L96.09 223.76 L97.08 222.46 L98.08 221.22 L99.08 220.04 L100.08 218.91 L101.08 217.83 L102.08 216.8 L103.08 215.81 L104.08 214.86 L105.08 213.95 L106.08 213.08 L107.08 212.24 L108.08 211.43 L109.08 210.65 L110.08 209.9 L111.08 209.18 L112.08 208.49 L113.07 207.82 L114.07 207.17 L115.07 206.54 L116.07 205.94 L117.07 205.35 L118.07 204.78 L119.07 204.23 L120.07 203.7 L121.07 203.19 L122.07 202.68 L123.07 202.2 L124.07 201.73 L125.07 201.27 L126.07 200.83 L127.07 200.39 L128.06 199.97 L129.06 199.56 L130.06 199.17 L131.06 198.78 L132.06 198.4 L133.06 198.04 L134.06 197.68 L135.06 197.33 L136.06 196.99 L137.06 196.66 L138.06 196.33 L139.06 196.02 L140.06 195.71 L141.06 195.41 L142.06 195.11 L143.05 194.82 L144.05 194.54 L145.05 194.27 L146.05 194 L147.05 193.74 L148.05 193.48 L149.05 193.23 L150.05 192.98 L151.05 192.74 L152.05 192.51 L153.05 192.27 L154.05 192.05 L155.05 191.83 L156.05 191.61 L157.05 191.39 L158.04 191.19 L159.04 190.98 L160.04 190.78 L161.04 190.58 L162.04 190.39 L163.04 190.2 L164.04 190.01 L165.04 189.83 L166.04 189.65 L167.04 189.47 L168.04 189.3 L169.04 189.13 L170.04 188.96 L171.04 188.8 L172.04 188.64 L173.03 188.48 L174.03 188.32 L175.03 188.17 L176.03 188.02 L177.03 187.87 L178.03 187.72 L179.03 187.58 L180.03 187.44 L181.03 187.3 L182.03 187.16 L183.03 187.03 L184.03 186.89 L185.03 186.76 L186.03 186.63 L187.03 186.51 L188.03 186.38 L189.02 186.26 L190.02 186.14 L191.02 186.02 L192.02 185.9 L193.02 185.79 L194.02 185.67 L195.02 185.56 L196.02 185.45 L197.02 185.34 L198.02 185.23 L199.02 185.12 L200.02 185.02 L201.02 184.92 L202.02 184.81 L203.02 184.71 L204.01 184.62 L205.01 184.52 L206.01 184.42 L207.01 184.33 L208.01 184.23 L209.01 184.14 L210.01 184.05 L211.01 183.96 L212.01 183.87 L213.01 183.78 L214.01 183.69 L215.01 183.61 L216.01 183.52 L217.01 183.44 L218.01 183.35 L219 183.27 L220 183.19 L221 183.11 L222 183.03 L223 182.96 L224 182.88 L225 182.8 L226 182.73" class="ts-magenta" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+<text class="tf-magenta" x="226" y="125.9" font-size="13" text-anchor="end"><tspan font-style="italic">g</tspan>ḡ = 1</text>
+<text class="tf-magenta" x="226" y="222.5" font-size="13" text-anchor="end"><tspan font-style="italic">g</tspan>ḡ = −1</text>
+<circle cx="75.49" cy="60.04" r="4.4" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="87.67" cy="237.96" r="4.4" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="107.37" cy="128" r="4.4" class="ts-bg tf-ink" stroke-width="1.4"/>
+<text class="tf-ink ts-bg" x="117.37" y="118" font-size="13" text-anchor="middle" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">(2, 0)</text>
+<circle cx="139.25" cy="195.96" r="4.4" class="ts-bg tf-ink" stroke-width="1.4"/>
+<text class="tf-ink ts-bg" x="141.25" y="217.96" font-size="13" text-anchor="middle" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">(1, 1)</text>
+<circle cx="190.82" cy="153.96" r="4.4" class="ts-bg tf-ink" stroke-width="1.4"/>
+<text class="tf-ink ts-bg" x="186.82" y="141.96" font-size="13" text-anchor="middle" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">(3, 1)</text>
+<text class="tf-dim" x="226" y="188" font-size="14" text-anchor="end"><tspan font-style="italic">g</tspan></text>
+<text class="tf-dim" x="47.79" y="54" font-size="14" text-anchor="end">ḡ</text>
+<text class="tf-dim" x="118" y="280" font-size="13" text-anchor="middle">pairs: (<tspan font-style="italic">L</tspan><tspan dy="0.28em" font-size="72%">n</tspan><tspan dy="-0.28em">, </tspan><tspan font-style="italic">F</tspan><tspan dy="0.28em" font-size="72%">n</tspan><tspan dy="-0.28em">)</tspan></text>
+</svg>
+<svg class="tr-fig-panel" x="504" y="0" width="236" height="290" viewBox="0 0 236 290">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">III  ℤ inside ℚ</text>
+<text class="tf-cyan" x="40" y="62.68" font-size="13" text-anchor="end">1</text>
+<circle cx="50" cy="58" r="5.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="93" cy="58" r="5.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="136" cy="58" r="5.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="179" cy="58" r="5.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="222" cy="58" r="5.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-dim" x="40" y="84.68" font-size="13" text-anchor="end">2</text>
+<circle cx="71.5" cy="80" r="2.4" class="tf-dim"/>
+<circle cx="114.5" cy="80" r="2.4" class="tf-dim"/>
+<circle cx="157.5" cy="80" r="2.4" class="tf-dim"/>
+<circle cx="200.5" cy="80" r="2.4" class="tf-dim"/>
+<text class="tf-dim" x="40" y="106.68" font-size="13" text-anchor="end">3</text>
+<circle cx="64.33" cy="102" r="2.4" class="tf-dim"/>
+<circle cx="78.67" cy="102" r="2.4" class="tf-dim"/>
+<circle cx="107.33" cy="102" r="2.4" class="tf-dim"/>
+<circle cx="121.67" cy="102" r="2.4" class="tf-dim"/>
+<circle cx="150.33" cy="102" r="2.4" class="tf-dim"/>
+<circle cx="164.67" cy="102" r="2.4" class="tf-dim"/>
+<circle cx="193.33" cy="102" r="2.4" class="tf-dim"/>
+<circle cx="207.67" cy="102" r="2.4" class="tf-dim"/>
+<text class="tf-dim" x="40" y="128.68" font-size="13" text-anchor="end">4</text>
+<circle cx="60.75" cy="124" r="2.4" class="tf-dim"/>
+<circle cx="82.25" cy="124" r="2.4" class="tf-dim"/>
+<circle cx="103.75" cy="124" r="2.4" class="tf-dim"/>
+<circle cx="125.25" cy="124" r="2.4" class="tf-dim"/>
+<circle cx="146.75" cy="124" r="2.4" class="tf-dim"/>
+<circle cx="168.25" cy="124" r="2.4" class="tf-dim"/>
+<circle cx="189.75" cy="124" r="2.4" class="tf-dim"/>
+<circle cx="211.25" cy="124" r="2.4" class="tf-dim"/>
+<text class="tf-dim" x="40" y="150.68" font-size="13" text-anchor="end">5</text>
+<circle cx="58.6" cy="146" r="2.4" class="tf-dim"/>
+<circle cx="67.2" cy="146" r="2.4" class="tf-dim"/>
+<circle cx="75.8" cy="146" r="2.4" class="tf-dim"/>
+<circle cx="84.4" cy="146" r="2.4" class="tf-dim"/>
+<circle cx="101.6" cy="146" r="2.4" class="tf-dim"/>
+<circle cx="110.2" cy="146" r="2.4" class="tf-dim"/>
+<circle cx="118.8" cy="146" r="2.4" class="tf-dim"/>
+<circle cx="127.4" cy="146" r="2.4" class="tf-dim"/>
+<circle cx="144.6" cy="146" r="2.4" class="tf-dim"/>
+<circle cx="153.2" cy="146" r="2.4" class="tf-dim"/>
+<circle cx="161.8" cy="146" r="2.4" class="tf-dim"/>
+<circle cx="170.4" cy="146" r="2.4" class="tf-dim"/>
+<circle cx="187.6" cy="146" r="2.4" class="tf-dim"/>
+<circle cx="196.2" cy="146" r="2.4" class="tf-dim"/>
+<circle cx="204.8" cy="146" r="2.4" class="tf-dim"/>
+<circle cx="213.4" cy="146" r="2.4" class="tf-dim"/>
+<text class="tf-dim" x="40" y="172.68" font-size="13" text-anchor="end">6</text>
+<circle cx="57.17" cy="168" r="2.4" class="tf-dim"/>
+<circle cx="85.83" cy="168" r="2.4" class="tf-dim"/>
+<circle cx="100.17" cy="168" r="2.4" class="tf-dim"/>
+<circle cx="128.83" cy="168" r="2.4" class="tf-dim"/>
+<circle cx="143.17" cy="168" r="2.4" class="tf-dim"/>
+<circle cx="171.83" cy="168" r="2.4" class="tf-dim"/>
+<circle cx="186.17" cy="168" r="2.4" class="tf-dim"/>
+<circle cx="214.83" cy="168" r="2.4" class="tf-dim"/>
+<text class="tf-dim" x="40" y="44.68" font-size="13" text-anchor="end">den.</text>
+<text class="tf-cyan" x="50" y="46.68" font-size="13" text-anchor="middle">−2</text>
+<text class="tf-cyan" x="93" y="46.68" font-size="13" text-anchor="middle">−1</text>
+<text class="tf-cyan" x="136" y="46.68" font-size="13" text-anchor="middle">0</text>
+<text class="tf-cyan" x="179" y="46.68" font-size="13" text-anchor="middle">1</text>
+<text class="tf-cyan" x="222" y="46.68" font-size="13" text-anchor="middle">2</text>
+<rect x="44.7" y="203" width="146.6" height="22" class="ts-violet tf-violet" stroke-width="1.2" fill-opacity="0.12"/>
+<text class="tf-violet tr-fig-mono" x="51.7" y="220" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">∀-defines ℤ: lit.</text>
+<rect x="60.3" y="239" width="115.4" height="22" class="ts-warn tf-warn" stroke-width="1.2" fill-opacity="0.12"/>
+<text class="tf-warn tr-fig-mono" x="67.3" y="256" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">∃ alone? OPEN</text>
+</svg>
+</svg>
