@@ -80,6 +80,19 @@ await pick('over'); check('OVERSHOOT plays by itself', await plays()); check('OV
 const r8 = run(8, 3);
 check('OVERSHOOT: success drops to 0.330 at step 3; step 2 is the best', close(s.success, r8.states[3][0] ** 2, 1e-12) && close(s.success, 0.3301, 1e-4) && s.best === 2 && bestBrute(8) === 2);
 check('OVERSHOOT: the note says the arrow is past the target', (await page.textContent('#roNote')).includes('转过了头'));
+// past the first peak the success oscillates: the N = 8 rail runs on to step 5, where it climbs back
+const r85 = run(8, 5);
+check('N = 8: the rail runs to step 5', s.nMax === 5 && s.max === 5);
+await seek(4); s = await state();
+check('N = 8, step 4: the success nearly vanishes, 25/2048 = 0.01220703125 (8-dimensional run)', s.n === 4 && close(s.success, r85.states[4][0] ** 2, 1e-12) && close(s.success, 0.01220703125, 1e-12), String(s.success));
+await seek(5); s = await state();
+check('N = 8, step 5: the success climbs back to 4489/8192 = 0.5479736328125 (8-dimensional run)', s.n === 5 && close(s.success, r85.states[5][0] ** 2, 1e-12) && close(s.success, 0.5479736328125, 1e-12) && s.success > 40 * s.probs[4], String(s.success));
+const overNote = (await page.textContent('#roNote')).trim();
+check('N = 8, step 5: the note calls step 2 the first peak and says further iterations oscillate', overNote.includes('转过了头') && overNote.includes('第一个峰在第 2 步') && overNote.includes('继续迭代，成功概率会振荡'), overNote);
+check('the readout and the strip call step 2 the first peak, not the best of all steps', s.best === 2 && (await page.textContent('#ro')).includes('第一个峰的步数与成功概率') && (await page.textContent('#plotTitle')).includes('第一个峰'));
+const drawerZh = await page.textContent('#drawer .sheet > div.zh'), drawerEn = await page.textContent('#drawer .sheet > div.en');
+check('the drawer says further iterations oscillate and defines the first peak within the first half turn (both languages)', drawerZh.includes('继续迭代，成功概率会振荡') && drawerZh.includes('第一个半圈 (2n + 1)θ ≤ π 里成功概率最高的那一步')
+  && drawerEn.includes('Further iterations make the success probability oscillate') && drawerEn.includes('the highest success within the first half turn, (2n + 1)θ ≤ π'));
 
 // ROOT N: N = 256, twelve steps
 await pick('sqrt'); check('ROOT N plays by itself', await plays()); check('ROOT N stops at step 12', await stopsAt(12)); s = await state();
@@ -122,6 +135,10 @@ await page.keyboard.press('Space'); check('Space pauses', !(await state()).playi
 // English
 await page.click('[data-lang-set="en"]'); await pick('four'); await seek(1);
 check('English: the HUD reads “N = 4 · step 1”', (await page.textContent('#hudBig')).trim() === 'N = 4 · step 1');
+await pick('over'); await seek(5);
+const overEn = (await page.textContent('#roNote')).trim();
+check('English, N = 8 step 5: the note names step 2 the first peak and says further iterations oscillate', overEn.includes('first peak was step 2') && overEn.includes('Further iterations make the success probability oscillate'), overEn);
+check('English: the readout names the first peak', (await page.textContent('#ro')).includes('First peak: step count and success'));
 
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();

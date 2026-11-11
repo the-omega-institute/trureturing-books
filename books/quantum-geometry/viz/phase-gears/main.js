@@ -242,7 +242,7 @@
     $('roNote').textContent = res
       ? (S.k % (S.Q / S.r) === 0 ? L(`k 是 Q/r = ${S.Q / S.r} 的倍数：箭头全部同向，链长 ${n}。`, `k is a multiple of Q/r = ${S.Q / S.r}: all arrows point the same way and the chain has length ${n}.`)
         : L(`k 不是 Q/r = ${S.Q / S.r} 的倍数：扫完后链首尾相接，合成为 0。`, `k is not a multiple of Q/r = ${S.Q / S.r}: after the sweep the chain closes and sums to 0.`))
-      : S.Q % S.r === 0 ? L('起点不为 0：每格多一个公共相位，谱的高度不变。', 'A nonzero offset multiplies every arrow by one common phase; the bar heights stay the same.')
+      : S.Q % S.r === 0 ? L('完整陪集的平移只改变每个频率的公共相位，谱高不变；梳子在边界被截短时，谱高会改变。', 'Translating a complete coset changes only a common phase at each frequency; truncating the comb at the register boundary also changes the heights.')
         : L(`r = ${S.r} 不整除 Q = ${S.Q}：品红的 sQ/r 落在整数之间，峰摊开。`, `r = ${S.r} does not divide Q = ${S.Q}: the magenta marks sQ/r fall between integers and the peaks spread.`);
     $('pillQ').querySelector('strong').textContent = `${S.Q} · ${S.r}`;
     $('pillK').querySelector('strong').textContent = `${S.k} · ${fix(prob(S.k, t), 3)}`;

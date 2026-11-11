@@ -310,7 +310,7 @@ SCENES.arc = S => {
   /* the plot */
   apAxes(a);
   apArc(0, arcEnd, a);
-  txt('cos θ · Bell state |Φ⁺⟩', AP.x0 + 20, 214, { size: 24, fam: F.math, w: 700, c: C.cyan, a });
+  txt('cos θ · Bell state |Φ⁺⟩ · ZX plane', AP.x0 + 20, 214, { size: 24, fam: F.math, w: 700, c: C.cyan, a });
   const la = at(S, 1, 0.6, 0.2);
   apLine(lineStart, Math.PI, a * la);
   txt('1 − 2θ/π · toy hidden-direction model', AP.x0 + 20, 250, { size: 24, fam: F.math, w: 700, c: C.white, a: a * la * 0.6 });

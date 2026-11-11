@@ -149,7 +149,7 @@
     if (!TRV.thumbMode) {
       if (boxes.side) tagAt('bT', g, (nM) / 2, 1.08, L('每一步之后的成功概率', 'success probability after each step'), 'raw', 0, -30);
       tagAt('bC', g, cur, M.probs[cur], fix(M.probs[cur], 4), 'num hot', 0, -24);
-      if (M.best !== cur && (boxes.side || Math.abs(M.best - cur) * g.scale > 90)) tagAt('bBest', g, M.best, M.probs[M.best], L(`最佳 n = ${M.best}`, `best n = ${M.best}`), 'raw cy', 0, -14);
+      if (M.best !== cur && (boxes.side || Math.abs(M.best - cur) * g.scale > 90)) tagAt('bBest', g, M.best, M.probs[M.best], L(`第一个峰 n = ${M.best}`, `first peak n = ${M.best}`), 'raw cy', 0, -14);
     }
   }
 
@@ -200,7 +200,7 @@
   /* ---------- strip: the best step count for each N ---------- */
   function drawPlot() {
     const g = kit.plot($('plot'), { x: [2, 1024], y: [0, 27], logX: true, pad: [30, 10, 8, 22] });
-    $('plotTitle').innerHTML = L('逐个比较得到的最佳步数', 'The best step count, found by trying every n');
+    $('plotTitle').innerHTML = L('第一个峰的步数（逐个比较 n）', 'The first-peak step count, found by trying every n');
     g.axes({ yTicks: [[0, '0'], [5, '5'], [10, '10'], [15, '15'], [20, '20'], [25, '25']], xTicks: [[2, '2'], [8, '8'], [32, '32'], [128, '128'], [512, '512']], xLabel: 'N' });
     const steps = [];
     for (let N = 2; N <= 1024; N++) { const b = bestOf(Math.asin(1 / Math.sqrt(N))); if (steps.length) steps.push([N, steps[steps.length - 1][1]]); steps.push([N, b]); }
@@ -210,7 +210,7 @@
     const Nn = clamp(Nof(), 2, 1024);
     g.vline(Nn, P.amber, { alpha: 0.85 });
     g.dot(Nn, bestOf(S.theta), P.amber, 4);
-    g.legend([[P.cyan, L('最佳步数', 'best step count')], [P.ink, 'π√N/4', 'dash']], { right: false });
+    g.legend([[P.cyan, L('第一个峰的步数', 'first-peak step count')], [P.ink, 'π√N/4', 'dash']], { right: false });
     $('plotMeta').textContent = `N = ${nLabel()} · n* = ${M.best}`;
   }
 
@@ -226,11 +226,11 @@
       + row('', 'θ = arcsin(1/√N)', 'θ = arcsin(1/√N)', `${fix(th / DEG, 4)}°`)
       + row('c', '成功振幅 sin((2n + 1)θ)', 'Success amplitude sin((2n + 1)θ)', fix(M.states[n][1], 6))
       + row('m', '失败振幅 cos((2n + 1)θ)', 'Failure amplitude cos((2n + 1)θ)', fix(M.states[n][0], 6))
-      + row('', '最佳步数与它的成功概率', 'Best step count and its success', `${M.best} · ${fix(M.probs[M.best], 6)}`)
+      + row('', '第一个峰的步数与成功概率', 'First peak: step count and success', `${M.best} · ${fix(M.probs[M.best], 6)}`)
       + row('', 'π√N/4', 'π√N/4', fix(PI * Math.sqrt(Nof()) / 4, 3));
     const exact = Math.abs(p - 1) < 1e-12;
     $('roNote').textContent = exact ? L('箭头正好立在目标上：测量必然找到标记项。', 'The arrow stands exactly on the target: a measurement is certain to find the marked item.')
-      : n > M.best ? L(`已经转过了头：第 ${M.best} 步时成功概率最高（${fix(M.probs[M.best], 4)}），再转只会离开目标。`, `Past the target: step ${M.best} had the highest success (${fix(M.probs[M.best], 4)}); turning on only moves away.`)
+      : n > M.best ? L(`已经转过了头：第一个峰在第 ${M.best} 步（${fix(M.probs[M.best], 4)}）。继续迭代，成功概率会振荡。`, `Past the target: the first peak was step ${M.best} (${fix(M.probs[M.best], 4)}). Further iterations make the success probability oscillate.`)
       : L(`每一步转 2θ = ${fix(2 * th / DEG, 3)}°；离竖轴还差 ${fix(Math.abs(90 - ang / DEG), 3)}°。`, `Each step turns 2θ = ${fix(2 * th / DEG, 3)}°; ${fix(Math.abs(90 - ang / DEG), 3)}° to go to the vertical axis.`);
     $('pillN').querySelector('strong').textContent = nLabel();
     $('pillP').querySelector('strong').textContent = fix(p, 4);
@@ -280,7 +280,7 @@
     four: ['N = 4，θ = 30°。只走一步，箭头从 30° 转 60° 到 90°，正好立在目标轴上：青色的影子长 1，品红的影子消失，右边第 1 根柱子顶到 1。', 'N = 4, θ = 30°. One step turns the arrow by 60° from 30° to 90°, exactly onto the target axis: the cyan shadow has length 1, the magenta one vanishes, and bar 1 on the right reaches 1.'],
     eight: ['N = 8。第 1 步后成功概率 25/32 = 0.78125，第 2 步后 121/128 = 0.9453125：箭头停在 5θ ≈ 103.5°，已越过竖轴一点，品红的影子还剩 −0.234。整数步落不到正好 90°。', 'N = 8. After step 1 the success is 25/32 = 0.78125, after step 2 it is 121/128 = 0.9453125: the arrow stops at 5θ ≈ 103.5°, a little past the vertical axis, with a magenta shadow of −0.234 left. Whole steps cannot land exactly on 90°.'],
     over: ['N = 8，再走第 3 步：箭头转到 7θ ≈ 144.9°，青色的影子缩回 0.575，成功概率掉到 0.330。右边的柱子先升后降，第 2 根最高。', 'N = 8, one more step: the arrow turns to 7θ ≈ 144.9°, the cyan shadow shrinks back to 0.575 and the success drops to 0.330. The bars on the right rise and then fall; bar 2 is the highest.'],
-    sqrt: ['N = 256，θ ≈ 3.58°。每一步只转 7.17°，十二段紫色的小弧把箭头从 3.6° 送到 89.6°，成功概率 0.99995。十二正是 π√256/4 ≈ 12.57 取整附近的最佳步数。', 'N = 256, θ ≈ 3.58°. Each step turns only 7.17°; twelve small violet arcs carry the arrow from 3.6° to 89.6°, success 0.99995. Twelve is the best step count, next to π√256/4 ≈ 12.57.']
+    sqrt: ['N = 256，θ ≈ 3.58°。每一步只转 7.17°，十二段紫色的小弧把箭头从 3.6° 送到 89.6°，成功概率 0.99995。十二正是第一个峰的步数，在 π√256/4 ≈ 12.57 附近。', 'N = 256, θ ≈ 3.58°. Each step turns only 7.17°; twelve small violet arcs carry the arrow from 3.6° to 89.6°, success 0.99995. Twelve is the step count of the first peak, next to π√256/4 ≈ 12.57.']
   };
   let booting = true;
   function applyPreset(id) {

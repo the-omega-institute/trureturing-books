@@ -25,6 +25,12 @@ function spectrum(Q, r, x0, t = Q - 1) {
   const F = qft(Q);
   return F.map((row) => { let re = 0, im = 0; row.forEach((f, x) => { re += f[0] * v[x]; im += f[1] * v[x]; }); return re * re + im * im; });
 }
+/** The complex amplitudes α_k of F₊ applied to the whole comb state {x₀ + jr < Q}. */
+function amplitudes(Q, r, x0) {
+  const cells = []; for (let x = x0; x < Q; x += r) cells.push(x);
+  const F = qft(Q), a = 1 / Math.sqrt(cells.length);
+  return F.map((row) => cells.reduce((s, x) => [s[0] + row[x][0] * a, s[1] + row[x][1] * a], [0, 0]));
+}
 /** F₊|x⟩ as the tensor product ⊗ (|0⟩ + e^{2πi·2^j x/Q}|1⟩)/√2, first factor = most significant output bit. */
 function tensor(Q, x) {
   const q = Math.round(Math.log2(Q)); let v = [[1, 0]];
@@ -110,7 +116,7 @@ await page.click('#qChips [data-q="32"]'); s = await state();
 check('the Q chips: Q = 32 leaves the card and gives five gears', s.Q === 32 && s.gears.length === 5 && s.preset === null);
 await setRange('r', 8); await setRange('x0', 3); await setRange('k', 4); s = await state();
 check('the sliders: r = 8, x₀ = 3, k = 4 give the comb {3, 11, 19, 27} and the matrix spectrum', s.r === 8 && s.x0 === 3 && s.k === 4 && s.comb.join() === '3,11,19,27' && worst(s.finalProbs, spectrum(32, 8, 3)) < 1e-12);
-check('an offset only changes phases: the bar heights equal those of offset 0', worst(s.finalProbs, spectrum(32, 8, 0)) < 1e-12);
+check('a complete-coset offset (x₀ = 3 < r = 8) only changes phases: the bar heights equal those of offset 0', worst(s.finalProbs, spectrum(32, 8, 0)) < 1e-12);
 let pt = await page.evaluate(() => window.PHASE_DEBUG.barPoint(12));
 await page.mouse.click(pt[0], pt[1]); s = await state(); check('clicking bar 12 chooses k = 12', s.k === 12);
 pt = await page.evaluate(() => window.PHASE_DEBUG.cellPoint(13));
@@ -127,9 +133,41 @@ await page.keyboard.press('Space');
 check('Space plays', await until(page, () => window.PHASE_DEBUG.state.t > 0));
 await page.keyboard.press('Space'); check('Space pauses', !(await state()).playing);
 
+// the offset slider at Q = 16, r = 4: a complete coset (x₀ < r) against a comb cut short at its start (x₀ ≥ r)
+await page.click('#qChips [data-q="16"]'); await setRange('r', 4); await setRange('k', 4);
+const offs = {};
+for (const x0 of [0, 3, 4]) { await setRange('x0', x0); offs[x0] = { s: await state(), note: (await page.textContent('#roNote')).trim() }; }
+const a0 = amplitudes(16, 4, 0), a3 = amplitudes(16, 4, 3), a4 = amplitudes(16, 4, 4);
+s = offs[0].s;
+check('offset 0 (Q = 16, r = 4): the comb {0, 4, 8, 12}, 1/4 at 0, 4, 8, 12 and 0 elsewhere (16 × 16 matrix)', s.Q === 16 && s.r === 4 && s.x0 === 0 && s.comb.join() === '0,4,8,12'
+  && worst(s.finalProbs, spectrum(16, 4, 0)) < 1e-12 && s.finalProbs.every((p, k) => close(p, k % 4 === 0 ? 0.25 : 0, 1e-12)));
+s = offs[3].s;
+let phaseGap = 0; a3.forEach((z, k) => { const w = cmul(cexp(TAU * k * 3 / 16), a0[k]); phaseGap = Math.max(phaseGap, Math.abs(z[0] - w[0]), Math.abs(z[1] - w[1])); });
+check('offset 3 < r: the complete coset {3, 7, 11, 15}; each α_k is α_k of offset 0 times e^(2πik·3/16) (matrix), so the bars are those of offset 0', s.comb.join() === '3,7,11,15'
+  && phaseGap < 1e-12 && worst(s.finalProbs, spectrum(16, 4, 3)) < 1e-12 && worst(s.finalProbs, offs[0].s.finalProbs) < 1e-12, String(phaseGap));
+const turned = cmul(cexp(TAU * 4 * 3 / 16), offs[0].s.sum);
+check('offset 3 < r, k = 4: the page\'s chain is the offset-0 chain turned by the common phase 3π/2 (4 → −4i)', close(s.sum[0], turned[0], 1e-12) && close(s.sum[1], turned[1], 1e-12) && close(s.sum[1], -4, 1e-12), JSON.stringify(s.sum));
+const OFFSET_NOTE = '完整陪集的平移只改变每个频率的公共相位，谱高不变；梳子在边界被截短时，谱高会改变。';
+check('offset 3 < r: the note says translating a complete coset changes only a common phase', offs[3].note === OFFSET_NOTE, offs[3].note);
+s = offs[4].s;
+check('offset 4 ≥ r: the comb is cut to {4, 8, 12}; peaks 3/16 at 0, 4, 8, 12 and 1/48 on every other bar (matrix)', s.comb.join() === '4,8,12'
+  && worst(s.finalProbs, spectrum(16, 4, 4)) < 1e-12 && a4.every((z, k) => close(z[0] ** 2 + z[1] ** 2, k % 4 === 0 ? 3 / 16 : 1 / 48, 1e-12))
+  && s.finalProbs.every((p, k) => close(p, k % 4 === 0 ? 3 / 16 : 1 / 48, 1e-12)) && s.peaks.join() === '0,4,8,12' && worst(s.finalProbs, offs[0].s.finalProbs) > 0.05);
+check('offset 4 ≥ r: the note says truncating the comb changes the heights', offs[4].note === OFFSET_NOTE && offs[4].note.includes('截短时，谱高会改变'), offs[4].note);
+const drawerZh = await page.textContent('#drawer .sheet > div.zh'), drawerEn = await page.textContent('#drawer .sheet > div.en');
+check('the drawer gives peaks of 1/r only for r | Q and a complete coset (x₀ < r), and says truncation changes the heights (both languages)',
+  drawerZh.includes('r 整除 Q 时它们都落在整数上；此时若梳子是完整的陪集（起点 x₀ < r），每根峰高 1/r') && drawerZh.includes('截短时，谱高会改变') && drawerZh.includes('r 不整除 Q 时')
+  && drawerEn.includes('if the comb is then a complete coset (offset x₀ < r), each peak has height 1/r') && drawerEn.includes('Truncating the comb at the register boundary changes the heights') && drawerEn.includes('When r does not divide Q'));
+
 // English
 await page.click('[data-lang-set="en"]'); await pick('four'); await seek(15);
 check('English: the HUD reads “Q = 16 · period 4 · swept to x = 15”', (await page.textContent('#hudBig')).trim() === 'Q = 16 · period 4 · swept to x = 15');
+await setRange('x0', 3);
+let noteEn = (await page.textContent('#roNote')).trim();
+check('English, offset 3 < r: the note speaks of a common phase at each frequency', noteEn.includes('Translating a complete coset changes only a common phase at each frequency'), noteEn);
+await setRange('x0', 4);
+noteEn = (await page.textContent('#roNote')).trim();
+check('English, offset 4 ≥ r: the note says truncation changes the heights', noteEn.includes('truncating the comb at the register boundary also changes the heights'), noteEn);
 
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();
