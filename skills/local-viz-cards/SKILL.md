@@ -38,7 +38,13 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 | 章节 | 位置 | 引用 |
 | --- | --- | --- |
+| 第一章 | §1.1 末（两子互为尺规） | `qubit-geometry` · `line` |
+| 第二章 | §2.3 半角换算表之后 | `qubit-geometry` · `line` |
 | 第五章 | §5.2 末（旋子） | `qubit-geometry` · `turn1` |
+| 第五章 | §5.3 全局相位与相对相位的对照之后 | `qubit-geometry` · `phase` |
+| 第五章 | §5.4 门图鉴表之前 | `qubit-geometry` · `hadamard` |
+| 第五章 | §5.4 门图鉴算例之后、文献注记之前 | `qubit-geometry` · `hzh` |
+| 第五章 | 章末、转入第六章之前 | `qubit-geometry` 完整实验室 |
 | 第六章 | §6.1 末 | `qubit-geometry` · `half` |
 | 第六章 | §6.3 末 | `qubit-geometry` · `area` |
 | 第六章 | §6.4 | `qubit-geometry` 完整实验室 |

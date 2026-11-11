@@ -200,6 +200,10 @@ $$
 - 当你手里只有**单一一条**量子态 $\lvert\psi\rangle$ 时，它在球面上只是一根孤立的一维方向线。给整条状态乘上一个全局相位因子 $\lvert\psi\rangle \mapsto u\lvert\psi\rangle$（其中 $|u| = 1$），相当于企图让一根没有厚度的几何直线绕着它自己的轴心原地自转——在[第一章](ch01-measurement.md)的射线相位刚性定理（[@thm-ray-phase-rigidity]）和[第二章](ch02-born-rule.md)的玻恩秩一投影 $\lvert\psi\rangle\langle\psi\rvert$ 中，$u\overline{u} = |u|^2 = 1$ 当场抵消，整根方向线在球面上的指向分毫不差；
 - 相反，当你面对**一组（至少两条）**量子态——例如由两个正交分支合成的叠加态，或者两个不同状态之间的内积重叠幅 $z = \langle\phi\mid\psi\rangle \in \mathbb{C}$ 时，这两条线之间张开了一片实实在在的二维夹角平面，相对相位正是这片面积在平面内的取向角！
 
+::: {.viz src="qubit-geometry" preset="phase" height="500"}
+**相对相位转动，影子不动。** 播放时，琥珀色箭头 $B$ 绕青色标尺 $A$ 沿赤道转动，两者的夹角始终为 $90^\circ$；青色的线保持为零，品红的面积大小不变、朝向改变。这张卡展示的是两分支之间相对相位的变化。
+:::
+
 更进一步，在干涉实验或相位锁定（phase-locked）测量中，如果我们用一枚单位相位因子 $u \in \mathbb{C}$（$\|u\| = 1$，例如双臂干涉仪的中心基准相位 $u = e^{i\phi/2}$）去校准两态之间的复内积重叠幅 $z \in \mathbb{C}$，什么时候这个看似复杂的复数重叠幅 $z$ 实际上只是一个沿着基准方向 $u$ 伸缩的**纯实数振幅** $r \in \mathbb{R}$？
 
 在 Lean 模块 `QuantumStates/PhaseLockedOverlap` 中，下面这条命题给出了充要的相位锁定判据：只要复重叠幅 $z$ 的共轭满足相位反射对称性 $\overline{z} = (u^{-1})^2 z$，复平面上的横向虚部就会精确归零，使 $z$ 退化为单位相位方向 $u$ 与实数投影 $r = \operatorname{Re}(u^{-1}z) \in \mathbb{R}$ 的简单乘积！
@@ -242,6 +246,12 @@ $$
 
 那么这扇量子门在三维空间里做的唯一一件事，就是**抓起整颗布洛赫球，绕着单位轴 $\hat{\vv{n}} \in S^2$（即霍奇对偶旋转平面 $\vv{B} = \star\hat{\vv{n}}$）右手刚体旋转整角 $\theta$**！
 
+先看阿达马门怎样把北极态带到赤道，再逐项读下面的旋子参数表。
+
+::: {.viz src="qubit-geometry" preset="hadamard" height="500"}
+**沿斜轴转半圈。** 从北极 $\lvert 0\rangle$ 出发，琥珀色箭头 $B$ 绕紫色的 $\hat h = (\vv{e}_1 + \vv{e}_3)/\sqrt{2}$ 轴转动，终点是赤道上的 $\lvert +\rangle$；青色的线从 $1$ 缩到零，品红的面积从零增到 $1$。实线是已经走过的路，虚线是接下来要走的路。
+:::
+
 ::: {.example #ex-single-qubit-gate-atlas title="单比特六大基础量子门的旋子分解与阿达马门平衡复结构验算"}
 我们将单比特标准门集 $\{X, Y, Z, H, S, T\}$ 的旋子参数、旋转平面二向量、球面转轴与转角汇总如下表，并对最核心的阿达马门 $H$ 做一次逐项对照 [@thm-balanced-sum-skew-adjoint] 与 [@thm-relative-complex-structure-square] 的显式验算：
 
@@ -272,6 +282,12 @@ $$
    验算可知 $J^* = (-iY)^* = +iY = -J$（反自伴），且 $J^2 = (-iY)^2 = -Y^2 = -I_2$！更美妙的是，与之伴生的厄米对合算子 $K = iJ = i(-iY) = +Y$ 恰好就是垂直于 $XZ$ 平面的**第三根正交泡利轴 $Y$**（满足 $Y^* = Y$ 且 $Y^2 = I_2$）！请注意这里的旋量半角与布洛赫球整角的精确对应：两条正交分量 $X$ 与 $Z$ 一旦平衡相加，它们张出的有向面积 $J = XZ = -iY = \bigl(\begin{smallmatrix} 0 & -1 \\ 1 & 0 \end{smallmatrix}\bigr)$ 在**实二维状态振幅平面** $(\psi_0, \psi_1)^{\mathsf{T}}$ 上是旋转**半角 $\frac{\pi}{2} = 90^\circ$** 的正交四分之一转矩阵，恰等于旋量旋子 $R_y(\pi) = \exp(-i\frac{\pi}{2}Y)$；而当它通过双侧三明治积 $J\,\vv{v}\,J^\dagger$ 作用在**三维布洛赫球面 $S^2$** 上时，两个半角叠加为绕 $Y$ 轴旋转**整角 $\pi = 180^\circ$** 的半周翻转（将北极 $\lvert 0\rangle$ 翻转到南极 $\lvert 1\rangle$）！
 :::
 
+单个门看清之后，再依次接上 $H$、$Z$、$H$。沿着同一条时间轴，可以把三次转向一段段拆开来看。
+
+::: {.viz src="qubit-geometry" preset="hzh" height="500"}
+**三个门，三段转向。** 琥珀色箭头 $B$ 依次绕 $H$、$Z$、$H$ 对应的轴转动，紫色虚线标出当前这一步的转轴；左上角同时显示当前门、已转角度和旋子的标量部 $w$。拖动时间轴，可在每一段停下来比较青色的线与品红的面积。
+:::
+
 ::: {.remark #rem-clifford-rotor-literature title="四元数、罗德里格斯半角公式与克利福德旋子双覆盖史话（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 本章的 [@thm-balanced-sum-skew-adjoint]、[@lemma-skew-adjoint-unitary-square] 与 [@thm-relative-complex-structure-square] 在 Lean 4 中形式化了一般 $n \times n$ 复矩阵上平衡幺正和生成反自伴相对复结构 $J^2 = -I_n$ 的代数定理，[@prop-phase-locked-overlap] 形式化了相位锁定复重叠幅的实数分解。关于三维旋转半角公式与克利福德几何代数的历史源流及完整三维旋子定理，来自以下经典数学物理文献：
 
@@ -284,6 +300,10 @@ $$
    由于 $\theta \mapsto \theta + 2\pi$ 使半角旋子变号 $R(\theta + 2\pi) = -R(\theta)$，而双侧夹乘中 $(-R)\vv{v}(-R)^\dagger = R\vv{v}R^\dagger$ 负负得正，旋子群 $\mathrm{Spin}(3) \cong \mathrm{SU}(2) \cong S^3$ 对三维正交旋转群 $\mathrm{SO}(3) \cong \mathbb{RP}^3$ 构成拓扑非平凡的 $2:1$ 泛覆盖（旋量转过 $360^\circ$ 变负号，转满 $720^\circ$ 方才回到自身）。其中固定旋转平面的情形——旋子圆到旋转圆的平方映射——已由 [@thm-circle-double-cover-history-lift] 验证：路径提升唯一、不存在连续的整体截面、整圈使旋子变号；完整的 $\mathrm{Spin}(3) \to \mathrm{SO}(3)$ 覆盖、罗德里格斯公式与 $\mathrm{SO}(3) \cong \mathbb{RP}^3$ 仍属文献结果。
 
 上述历史脉络与三维克利福德三明治展开作为几何背景列出，不计入本书的 Lean 形式化验证账本。
+:::
+
+::: {.viz src="qubit-geometry" height="560"}
+**完整实验室。** 切换实验卡、拖动 $B$ 或追加量子门，把球面上的转向与下方的探测权重、条纹和旋子曲线并排比较。
 :::
 
 告别了神秘的虚数 $i$，看清了二向量有向面积 $\vv{A} \wedge \vv{B}$ 如何驱动量子门转向之后，一个更加宏大的统一图景已经呼之欲出：既然第一部的“内积 $\vv{A}\cdot\vv{B}$”掌管着粒子的投影定音，而本章的“外积 $\vv{A}\wedge\vv{B}$”掌管着波的干涉与转向，那么把这两半拼回同一个几何积 $\vv{A}\vv{B} = \vv{A}\cdot\vv{B} + \vv{A}\wedge\vv{B}$ 里，会发生什么？让我们翻开[第六章](ch06-geometric-product.md)。

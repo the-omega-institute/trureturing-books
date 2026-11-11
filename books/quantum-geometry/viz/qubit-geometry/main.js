@@ -88,13 +88,14 @@
     st.arrow([0, 0, 0], now.r, { color: P.amber, width: 2.6, glow: 12, headSize: 12, fade: false });
     st.dot(now.r, 5.5, P.amber, { glow: 14, fade: false });
     st.tag('A', v3.scale(now.A, 1.1), 'A', 'cy', { dx: 14 });
-    st.tag('B', v3.scale(now.r, 1.13), 'B', 'hot');
-    st.tag('th', v3.scale(v3.slerp(now.A, now.r, 0.5), 0.45), `θ ${fix(now.angle, 0)}°`, 'num');
+    // B's label sits a fixed 18 px beyond the tip on screen, also when B points almost at or away from the viewer
+    const tip = st.p(now.r), ox = tip[0] - st.cx, oy = tip[1] - st.cy, ol = Math.hypot(ox, oy);
+    st.tag('B', now.r, 'B', 'hot', ol > 0.5 ? { dx: 18 * ox / ol, dy: 18 * oy / ol } : { dy: -18 });
     if (Math.abs(now.line) > 0.06) st.tag('ln', v3.scale(now.foot, 0.5), `${L('线', 'line')} ${fix(now.line, 2)}`, 'num c-cy', { dx: -34 });
-    if (now.area > 0.08) st.tag('ar', v3.add(now.foot, v3.scale(now.perp, 0.5)), `${L('面积', 'area')} ${fix(now.area, 2)}`, 'num c-mg', { dy: -12 });
+    if (now.area > 0.08) st.tag('ar', v3.add(now.foot, v3.scale(now.perp, 0.5)), `${L('面积', 'area')} ${fix(now.area, 2)}`, 'num c-mg', { dy: -16 });
     st.end();
     const g = now.k < n ? S.gates[now.k] : null;
-    $('hudBig').textContent = `${L('A 与 B 的夹角', 'ANGLE BETWEEN A AND B')} θ = ${fix(now.angle, 1)}°`;
+    $('hudBig').textContent = `θ(A,B) = ${fix(now.angle, 1)}°`;
     $('hudSub').innerHTML = !n ? (TRV.still ? L(`线 cos θ = ${fix(now.line, 2)} · 面积 sin θ = ${fix(now.area, 2)}`, `line cos θ = ${fix(now.line, 2)} · area sin θ = ${fix(now.area, 2)}`) : L('还没有门：拖动 B，或选一张实验卡', 'No gates yet: drag B, or pick an experiment'))
       : (g ? L(`第 ${now.k + 1} / ${n} 门 ${g.name}：绕 ${AXIS_NAME[g.ax]} 转 ${g.deg}°，已转 ${fix(g.deg * now.f, 0)}°`, `Gate ${now.k + 1} of ${n}, ${g.name}: a ${g.deg}° turn about ${AXIS_NAME[g.ax]}, ${fix(g.deg * now.f, 0)}° done`)
         : L(`线路走完：${n} 个门`, `End of the circuit: ${n} gate${n > 1 ? 's' : ''}`)) + ` · ${L('旋子 w', 'rotor w')} = <b class="c-vi">${sgn(now.q[0], 2)}</b>`;
@@ -228,19 +229,19 @@
     line: { theta: 0, phi: 0, axis: 'z', turns: [] },
     area: { theta: 90, phi: 0, axis: 'z', turns: [] },
     half: { theta: 60, phi: 40, axis: 'z', turns: [] },
-    phase: { theta: 90, phi: 0, axis: 'z', turns: [['z', 360]], play: true, still: 0.7 },
+    phase: { theta: 90, phi: 0, axis: 'z', turns: [['z', 360]], play: true, still: 0.3 },
     hadamard: { theta: 0, phi: 0, axis: 'z', turns: [['h', 180, 'H']], play: true, still: 0.6 },
     hzh: { theta: 60, phi: 40, axis: 'z', turns: [['h', 180, 'H'], ['z', 180, 'Z'], ['h', 180, 'H']], play: true, still: 1.55 },
     turn1: { theta: 60, phi: 40, axis: 'z', turns: [['x', 360]], play: true, still: 1.4 },
     turn2: { theta: 60, phi: 40, axis: 'z', turns: [['x', 720]], play: true, still: 3 }
   };
   const NOTES = {
-    line: ['B 就躺在量尺 A 上：影子等于它自己，面积为零。探测器每次都咔哒在 +A，屏上没有条纹。这是“粒子”的一端。', 'B lies on the ruler A: the shadow is all of it and the area is zero. The detector clicks +A every time and the screen shows no fringes. This is the “particle” end.'],
+    line: ['B 就躺在量尺 A 上：青色的线是 1，整根 B 都是影子；品红的面积是 0，舞台上没有面。这是“粒子”的一端。', 'B lies along the ruler A: the cyan line is 1, all of B is shadow, and the magenta area is 0, so the stage shows no face. This is the “particle” end.'],
     area: ['B 与 A 垂直：影子缩成一个点，面积撑到最大。两种咔哒各占一半，条纹最清楚。这是“波”的一端。', 'B is perpendicular to A: the shadow shrinks to a point and the area is as large as it gets. The clicks are 50 / 50 and the fringes are sharpest. This is the “wave” end.'],
     half: ['夹角 60°：线是 0.5，面积是 0.87。咔哒 75% 偏向 +A，同时条纹还留着 87% 的对比。两个数的平方加起来仍是 1。', 'At 60° the line is 0.5 and the area 0.87. The clicks lean 75% towards +A while the fringes keep 87% of their contrast. The two squares still add up to 1.'],
-    phase: ['绕 A 转一圈：B 的影子一点不变，咔哒的比例也不变，只有条纹在屏上平移。相位改的是面积的朝向，不是线。', 'A full turn about A: the shadow of B does not change and neither do the click odds; only the fringes slide across the screen. A phase changes which way the area faces, not the line.'],
-    hadamard: ['从 |0⟩ 出发加一个 H 门：B 绕 ĥ 轴转 180° 落到 |+⟩，线全部变成面积。', 'Start at |0⟩ and apply H: B turns 180° about ĥ and lands on |+⟩, and all of the line becomes area.'],
-    hzh: ['先 H、再 Z、再 H：终点与单独一个 X 门完全相同，累积旋子却是 −R_X。球面上看不出这个负号。', 'H, then Z, then H: the end point is exactly what a single X gate gives, yet the accumulated rotor is −R_X. The sphere cannot show that minus sign.'],
+    phase: ['B 沿赤道绕 A 转一圈：青色的影子始终为零，品红的面积跟着 B 转向，大小不变。相位改的是面积的朝向，不是线。', 'B goes once round A along the equator: the cyan shadow stays at zero, and the magenta area turns with B without changing size. A phase changes which way the area faces, not the line.'],
+    hadamard: ['从 |0⟩ 出发加一个 H 门：B 绕紫色的 ĥ 轴转 180° 落到 |+⟩，青色的线全部变成品红的面积。', 'Start at |0⟩ and apply H: B turns 180° about the violet ĥ axis and lands on |+⟩, and all of the cyan line becomes magenta area.'],
+    hzh: ['先 H、再 Z、再 H：B 依次绕 ĥ、ẑ、ĥ 各转 180°，紫色虚线是正在转的那根轴。舞台左上角的 w 是累积旋子的标量部，从 +1 出发，每一步都在变。', 'H, then Z, then H: B turns 180° about ĥ, then ẑ, then ĥ again; the violet dashed line is the axis of the turn in progress. The w at the top left of the stage is the scalar part of the accumulated rotor: it starts at +1 and changes at every step.'],
     turn1: ['绕 x̂ 转 360°：B 回到出发点，线和面积都回来了；旋子的标量部 w（舞台左上角）却从 +1 走到 −1。', 'A 360° turn about x̂: B returns to where it started, and so do the line and the area; the scalar part w of the rotor (top left of the stage) goes from +1 to −1.'],
     turn2: ['再转一圈，一共 720°：w 才回到 +1。矢量一圈，旋子两圈。', 'One more turn, 720° in all: only now is w back at +1. One turn for the vector, two for the rotor.']
   };
