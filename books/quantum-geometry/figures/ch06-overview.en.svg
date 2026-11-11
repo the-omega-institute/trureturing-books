@@ -9,7 +9,7 @@
 <line x1="26" y1="200" x2="82" y2="200" class="ts-cyan" stroke-width="6" stroke-linecap="round" fill="none"/>
 <line x1="26" y1="200" x2="130.35" y2="200" class="ts-ink" stroke-width="2.4" fill="none"/>
 <path d="M138 200 L129 203.78 L129 196.22Z" class="tf-ink"/>
-<line x1="26" y1="200" x2="78.18" y2="109.63" class="ts-amber" stroke-width="2.6" fill="none"/>
+<line x1="26" y1="200" x2="78.17" y2="109.63" class="ts-amber" stroke-width="2.6" fill="none"/>
 <path d="M82 103.01 L80.77 112.69 L74.23 108.91Z" class="tf-amber"/>
 <text class="tf-ink" x="140" y="222" font-size="15" text-anchor="middle"><tspan font-style="italic">A</tspan></text>
 <text class="tf-amber" x="76" y="99.01" font-size="15" text-anchor="end"><tspan font-style="italic">B</tspan></text>
