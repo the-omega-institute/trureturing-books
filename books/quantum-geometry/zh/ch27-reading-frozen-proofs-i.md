@@ -2,7 +2,7 @@
 
 > *“构建命题证明通用机器学术理论,定义定理证明”*
 
-在传统数学与理论物理专著里，“证明”往往依赖作者与审稿人的肉眼默契：一句“显然可得”、一处隐去边界条件的指标缩并，或者把“局部连通”悄悄当成“全局常相位”，就可能让整座理论大厦埋下隐蔽的裂缝。而本书自[第一章](ch01-measurement.md)立下的最高契约，正是题记中的这十六个字：**构建命题证明通用机器学术理论，定义、定理、证明**——全书每一条标有绿色 `LEAN ✓` 徽章的 `theorem / lemma / proposition / corollary`，都逐一锚定在 `the-omega-institute/trureturing@dev`（所钉提交 `a660b9333c0f8d25aaa22af1bbbfab43c2f94a46`）中被 Lean 4 类型检查内核验证并冻结的真实声明上！
+在传统数学与理论物理专著里，“证明”往往依赖作者与审稿人的肉眼默契：一句“显然可得”、一处隐去边界条件的指标缩并，或者把“局部连通”悄悄当成“全局常相位”，就可能让整座理论大厦埋下隐蔽的裂缝。而本书自[第一章](ch01-measurement.md)立下的最高契约，正是题记中的这十六个字：**构建命题证明通用机器学术理论，定义、定理、证明**——全书每一条标有绿色 `LEAN ✓` 徽章的 `theorem / lemma / proposition / corollary`，都逐一锚定在 `the-omega-institute/trureturing@dev`（所钉提交 `1d9bf98cab8306e67ec38a739359f2cdae63877a`）中被 Lean 4 类型检查内核验证并冻结的真实声明上！
 
 本章与[第二十八章](ch28-reading-frozen-proofs-ii.md)将带领读者直接走进这座 Lean 4 形式化公理圣殿的源码深处：
 
@@ -46,28 +46,40 @@ theorem inner_product_norm_parallelogram_law {E : Type*} [NormedAddCommGroup E]
 
 > **作者原话**：“毕达哥拉斯 万物皆数 勾股定理”
 
-1. **从一维线段的不可直加性到 0 阶面积度规与 2 阶双向量正反抵消**：设正定欧氏内积空间中两个正交向量 $\vv{a} \perp \vv{b}$ 的标量模长为 $a = \norm{\vv{a}}, b = \norm{\vv{b}}, c = \norm{\vv{a} + \vv{b}}$。当 $\vv{a}$ 与 $\vv{b}$ 互相垂直时，一维长度标量绝不能线性相加（$a + b \neq c$），因为它们指向彼此独立的维度。而在正定欧氏克利福德几何代数中，将合成向量 $\vv{c} = \vv{a} + \vv{b}$ 与自身作几何乘积：
-   $$
-   \vv{c}^2 = (\vv{a} + \vv{b})(\vv{a} + \vv{b}) = \vv{a}^2 + \vv{b}^2 + (\vv{a}\vv{b} + \vv{b}\vv{a}) = a^2 + b^2 + 2(\vv{a}\cdot\vv{b}) + (\vv{a}\wedge\vv{b} + \vv{b}\wedge\vv{a}).
-   $$
-   这里，$\vv{a}^2 = a^2$、$\vv{b}^2 = b^2$ 与 $\vv{c}^2 = c^2$ 是带有平方长度（面积）量纲的 **0 阶标量**，而 $\vv{a}\wedge\vv{b}$ 与 $\vv{b}\wedge\vv{a}$ 是 **2 阶有向面积双向量**。由于正交向量内积 $\vv{a}\cdot\vv{b} = 0$，且一正一反的 2 阶有向面积元满足反对称律 $\vv{b}\wedge\vv{a} = -\vv{a}\wedge\vv{b}$，两个相反旋向的双向量面积 $(\vv{a}\wedge\vv{b} + \vv{b}\wedge\vv{a}) = 0$ 自动相消，遂归约为 0 阶标量勾股定理 $c^2 = a^2 + b^2$！这正是 Mathlib 中 `norm_add_sq_real` 在正交条件 $2\langle x, y\rangle_{\mathbb{R}} = 0$（或 [@thm-audit-parallelogram-law] 中 $\norm{x+y}^2$ 与 $\norm{x-y}^2$ 两支相反交叉项相消）背后的几何本质。
-2. **希帕索斯 $45^\circ$ 等腰直角三角形、$2$-进赋值奇偶矛盾与佩尔（Pell）最佳连分数逼近**：一旦在单位离散格点上取最简单的正交等腰边 $a = 1, b = 1$，勾股面积守恒立即给出 $c^2 = 1^2 + 1^2 = 2$，即对角线长度 $c = \sqrt{2}$。若假设存在正整数 $m, n \in \mathbb{Z}_{>0}$（$n \neq 0$）使有理分数 $\frac{m}{n} \in \mathbb{Q}$ 满足 $m^2 = 2n^2$，则两边关于素数 $2$ 的 $2$-进赋值（2-adic valuation）满足：左端 $v_2(m^2) = 2v_2(m)$ 恒为**偶数**，而右端 $v_2(2n^2) = 2v_2(n) + 1$ 恒为**奇数**——奇偶性正面相撞（$2v_2(m) \neq 2v_2(n) + 1$），彻底击碎了静态有理数网格 $\mathbb{Q}$！虽然十进制截断分数（如 $\lfloor 10^k\sqrt{2}\rfloor / 10^k$）也能在实数拓扑下逼近 $\sqrt{2}$，但在连分数理论中，由 $m_k + n_k\sqrt{2} = (1 + \sqrt{2})^k$（$k \ge 1, n_k > 0$）生成的**佩尔渐近分数（canonical best continued-fraction approximants）**
-   $$
-   \frac{m_k}{n_k} = \frac{1}{1},\; \frac{3}{2},\; \frac{7}{5},\; \frac{17}{12},\; \frac{41}{29},\; \frac{99}{70},\; \dots
-   $$
-   给出了同等分母规模下逼近 $\sqrt{2}$ 的典范最优有理序列，且严格满足交替单位裂隙佩尔方程：
-   $$
-   m_k^2 - 2n_k^2 = (-1)^k = \pm 1 \qquad\Longleftrightarrow\qquad \left(\frac{m_k}{n_k}\right)^2 = 2 + \frac{(-1)^k}{n_k^2}.
-   $$
-   无论 $k$ 推演到多大，离散整数平方 $m_k^2$ 与 $2n_k^2$ 之间永远横亘着一道不可磨灭的单位算术裂隙 $(-1)^k = \pm 1$！在本书的概念与哲学综合中，正是这道 $\pm 1$ 裂隙，促使汉字“**数**”从离散计数的动词算子“**数**（shǔ，$\mathbb{N} \to \mathbb{Q}$）”升华为连续几何坐标的名词“**数**（shù）”，并勾勒出四阶段概念演进图景（注：此四阶段为几何概念的层级演进，而非数域的集合包含链 $\pi \subset \theta^*$；其中满足 $\varphi = 1 + 1/\varphi$ 的代数黄金比 $\varphi = \frac{1+\sqrt{5}}{2} \in \overline{\mathbb{Q}}$ 已属于第二阶段代数数，而第四阶段的 $\theta^* \approx 0.739085$ 特指满足 $\cos\theta^* = \theta^*$ 的超越自指余弦不动点）：
-   $$
-   \begin{aligned}
-   &\mathbb{Q}\text{（有理网格）} \\
-   &\longrightarrow\; \overline{\mathbb{Q}}\text{（代数数：$\sqrt{2}$ 勾股对角线与黄金比 $\varphi$）} \\
-   &\longrightarrow\; \pi\text{（圆周超越旋转）} \\
-   &\longrightarrow\; \theta^*\text{（自指余弦不动点 $\cos\theta^* = \theta^*$）}.
-   \end{aligned}
-   $$
+**从一维线段的不可直加性到 0 阶面积度规与 2 阶双向量正反抵消**：设正定欧氏内积空间中两个正交向量 $\vv{a} \perp \vv{b}$ 的标量模长为 $a = \norm{\vv{a}}, b = \norm{\vv{b}}, c = \norm{\vv{a} + \vv{b}}$。当 $\vv{a}$ 与 $\vv{b}$ 互相垂直时，一维长度标量绝不能线性相加（$a + b \neq c$），因为它们指向彼此独立的维度。而在正定欧氏克利福德几何代数中，将合成向量 $\vv{c} = \vv{a} + \vv{b}$ 与自身作几何乘积：
+
+$$
+\vv{c}^2 = (\vv{a} + \vv{b})(\vv{a} + \vv{b}) = \vv{a}^2 + \vv{b}^2 + (\vv{a}\vv{b} + \vv{b}\vv{a}) = a^2 + b^2 + 2(\vv{a}\cdot\vv{b}) + (\vv{a}\wedge\vv{b} + \vv{b}\wedge\vv{a}).
+$$
+
+这里，$\vv{a}^2 = a^2$、$\vv{b}^2 = b^2$ 与 $\vv{c}^2 = c^2$ 是带有平方长度（面积）量纲的 **0 阶标量**，而 $\vv{a}\wedge\vv{b}$ 与 $\vv{b}\wedge\vv{a}$ 是 **2 阶有向面积双向量**。由于正交向量内积 $\vv{a}\cdot\vv{b} = 0$，且一正一反的 2 阶有向面积元满足反对称律 $\vv{b}\wedge\vv{a} = -\vv{a}\wedge\vv{b}$，两个相反旋向的双向量面积 $(\vv{a}\wedge\vv{b} + \vv{b}\wedge\vv{a}) = 0$ 自动相消，遂归约为 0 阶标量勾股定理 $c^2 = a^2 + b^2$！这正是 Mathlib 中 `norm_add_sq_real` 在正交条件 $2\langle x, y\rangle_{\mathbb{R}} = 0$（或 [@thm-audit-parallelogram-law] 中 $\norm{x+y}^2$ 与 $\norm{x-y}^2$ 两支相反交叉项相消）背后的几何本质。至于该二次恒等式在单位整数格点上引发的数论与概念演进，见如下文献说明：
+
+::: {.remark #rem-ch27-pell-transcendence-literature title="希帕索斯 √2 奇偶矛盾、佩尔最佳连分数渐近与四阶段数系演进（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 下述 $\sqrt{2}$ 的 $2$-进赋值奇偶无理性证明、佩尔（Pell）连分数最佳有理渐近序列以及 $\pi$ 与余弦不动点 $\theta^*$ 的超越性（另参 [@rem-lean-kernel-trust-boundary-literature]、[第二十四章](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature] 与[第二十九章](ch29-timeless-causality-and-gram-space.md) [@rem-ch29-pell-convergents-literature]）均属经典数论文献与本书概念综合（`MODEL`），未包含在本章逐行审计的冻结定理中。
+
+一旦在单位离散格点上取最简单的正交等腰边 $a = 1, b = 1$，勾股面积守恒立即给出 $c^2 = 1^2 + 1^2 = 2$，即对角线长度 $c = \sqrt{2}$。若假设存在正整数 $m, n \in \mathbb{Z}_{>0}$（$n \neq 0$）使有理分数 $\frac{m}{n} \in \mathbb{Q}$ 满足 $m^2 = 2n^2$，则两边关于素数 $2$ 的 $2$-进赋值（2-adic valuation）满足：左端 $v_2(m^2) = 2v_2(m)$ 恒为**偶数**，而右端 $v_2(2n^2) = 2v_2(n) + 1$ 恒为**奇数**——奇偶性正面相撞（$2v_2(m) \neq 2v_2(n) + 1$），彻底击碎了静态有理数网格 $\mathbb{Q}$！虽然十进制截断分数（如 $\lfloor 10^k\sqrt{2}\rfloor / 10^k$）也能在实数拓扑下逼近 $\sqrt{2}$，但在连分数理论中，由 $m_k + n_k\sqrt{2} = (1 + \sqrt{2})^k$（$k \ge 1, n_k > 0$）生成的**佩尔渐近分数（canonical best continued-fraction approximants）**
+
+$$
+\frac{m_k}{n_k} = \frac{1}{1},\; \frac{3}{2},\; \frac{7}{5},\; \frac{17}{12},\; \frac{41}{29},\; \frac{99}{70},\; \dots
+$$
+
+给出了同等分母规模下逼近 $\sqrt{2}$ 的典范最优有理序列，且严格满足交替单位裂隙佩尔方程：
+
+$$
+m_k^2 - 2n_k^2 = (-1)^k = \pm 1 \qquad\Longleftrightarrow\qquad \left(\frac{m_k}{n_k}\right)^2 = 2 + \frac{(-1)^k}{n_k^2}.
+$$
+
+无论 $k$ 推演到多大，离散整数平方 $m_k^2$ 与 $2n_k^2$ 之间永远横亘着一道不可磨灭的单位算术裂隙 $(-1)^k = \pm 1$！在本书的概念与哲学综合（`MODEL`）中，正是这道 $\pm 1$ 裂隙，促使汉字“**数**”从离散计数的动词算子“**数**（shǔ，$\mathbb{N} \to \mathbb{Q}$）”升华为连续几何坐标的名词“**数**（shù）”，并勾勒出四阶段概念演进图景（注：此四阶段为几何概念的层级演进，而非数域的集合包含链 $\pi \subset \theta^*$；其中满足 $\varphi = 1 + 1/\varphi$ 的代数黄金比 $\varphi = \frac{1+\sqrt{5}}{2} \in \overline{\mathbb{Q}}$ 已属于第二阶段代数数，而第四阶段的 $\theta^* \approx 0.739085$ 特指满足 $\cos\theta^* = \theta^*$ 的超越自指余弦不动点）：
+
+$$
+\begin{aligned}
+&\mathbb{Q}\text{（有理网格）} \\
+&\longrightarrow\; \overline{\mathbb{Q}}\text{（代数数：$\sqrt{2}$ 勾股对角线与黄金比 $\varphi$）} \\
+&\longrightarrow\; \pi\text{（圆周超越旋转）} \\
+&\longrightarrow\; \theta^*\text{（自指余弦不动点 $\cos\theta^* = \theta^*$）}.
+\end{aligned}
+$$
+:::
 
 接下来看 `D5/S3/Quantum/FiniteDimensional.lean:78` 中的玻恩概率骨架引理。源码首先对任意有限类型 `n`（`[Fintype n]`）与复方阵 $\rho, P \in M_n(\mathbb{C})$ 定义迹配对映射：
 
@@ -184,7 +196,7 @@ $$
 
 ## 第一至三部冻结声明全景审计表 {#sec-parts-i-to-iii-frozen-audit-table}
 
-下面的审计表列出了本书第一部至第三部所引用的代表性冻结声明在 `trureturing@dev`（提交 `a660b9333c0f8d25aaa22af1bbbfab43c2f94a46`）中的精确源码路径、行号、语句摘要哈希前缀（`statement_id`）以及形式化契约边界。表中任何中文/英文散文标题（如“平行四边形定律”“玻恩概率骨架”“挤压幂等”）仅作导读说明，不附加超出冻结签名本身的额外形式化声明。
+下面的审计表列出了本书第一部至第三部所引用的代表性冻结声明在 `trureturing@dev`（提交 `1d9bf98cab8306e67ec38a739359f2cdae63877a`）中的精确源码路径、行号、语句摘要哈希前缀（`statement_id`）以及形式化契约边界。表中任何中文/英文散文标题（如“平行四边形定律”“玻恩概率骨架”“挤压幂等”）仅作导读说明，不附加超出冻结签名本身的额外形式化声明。
 
 | 所属章节 | 冻结声明 GID | 源码路径与行号 | `statement_id` 前缀 | 精确形式化范围与契约边界 |
 | :---------: | ---------------------------- | ---------------------------- | :------------------: | ----------------------------------------------------- |

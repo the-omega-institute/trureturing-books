@@ -2,7 +2,7 @@
 
 > *"Build an academic theory of a universal machine for proposition proofs: define, state, prove."*
 
-In conventional mathematical physics monographs, a "proof" relies on an unwritten pact between author and reader: a phrase such as *"it is easy to see"*, an implicit assumption that an index set is nonempty, or a quiet slide from coordinate-line invariance to a single global phase can hide subtle gaps. From [Chapter 1](ch01-measurement.md) onward, this book has operated under a stricter contract captured by our opening epigraph — **define, state, prove**: every formal `theorem`, `lemma`, `proposition`, and `corollary` carrying the green `LEAN ✓` badge is anchored to a declaration in `the-omega-institute/trureturing@dev` (pinned at commit `a660b9333c0f8d25aaa22af1bbbfab43c2f94a46`) that has been type-checked by the Lean 4 kernel and frozen without a single `sorry`.
+In conventional mathematical physics monographs, a "proof" relies on an unwritten pact between author and reader: a phrase such as *"it is easy to see"*, an implicit assumption that an index set is nonempty, or a quiet slide from coordinate-line invariance to a single global phase can hide subtle gaps. From [Chapter 1](ch01-measurement.md) onward, this book has operated under a stricter contract captured by our opening epigraph — **define, state, prove**: every formal `theorem`, `lemma`, `proposition`, and `corollary` carrying the green `LEAN ✓` badge is anchored to a declaration in `the-omega-institute/trureturing@dev` (pinned at commit `1d9bf98cab8306e67ec38a739359f2cdae63877a`) that has been type-checked by the Lean 4 kernel and frozen without a single `sorry`.
 
 In this chapter and [Chapter 28](ch28-reading-frozen-proofs-ii.md), we open the actual `.lean` source files of `trureturing@dev` and audit the formal proof scripts line by line:
 
@@ -46,28 +46,40 @@ Why must `parallelogram_law_with_norm` and `norm_add_sq_real` square 1D vectors 
 
 > **Author's original words**: "Pythagoras — all things are number — the Pythagorean theorem (毕达哥拉斯 万物皆数 勾股定理)."
 
-1. **From non-additive 1D lengths to grade-0 area scalars and canceling grade-2 bivector orientations**: In a positive-definite Euclidean inner-product space, let two orthogonal vectors $\vv{a} \perp \vv{b}$ have scalar norms $a = \norm{\vv{a}}, b = \norm{\vv{b}}, c = \norm{\vv{a} + \vv{b}}$. Their 1D lengths cannot add linearly ($a + b \neq c$) because they point along perpendicular axes. In positive-definite Euclidean Clifford geometric algebra, squaring the resultant $\vv{c} = \vv{a} + \vv{b}$ yields
-   $$
-   \vv{c}^2 = (\vv{a} + \vv{b})(\vv{a} + \vv{b}) = \vv{a}^2 + \vv{b}^2 + (\vv{a}\vv{b} + \vv{b}\vv{a}) = a^2 + b^2 + 2(\vv{a}\cdot\vv{b}) + (\vv{a}\wedge\vv{b} + \vv{b}\wedge\vv{a}).
-   $$
-   Here $\vv{a}^2 = a^2$, $\vv{b}^2 = b^2$, and $\vv{c}^2 = c^2$ are **grade-0 scalars** carrying squared-length (area) measure, whereas $\vv{a}\wedge\vv{b}$ and $\vv{b}\wedge\vv{a}$ are **grade-2 oriented-area bivectors**. Since $\vv{a}\cdot\vv{b} = 0$ and the oppositely oriented bivectors anticommute ($\vv{b}\wedge\vv{a} = -\vv{a}\wedge\vv{b}$), the grade-2 oriented areas cancel identically ($\vv{a}\wedge\vv{b} + \vv{b}\wedge\vv{a} = 0$), leaving the grade-0 Pythagorean identity $c^2 = a^2 + b^2$! This is the exact geometric meaning behind the vanishing cross term $2\langle x, y\rangle_{\mathbb{R}} = 0$ in `norm_add_sq_real` and the cancellation between $\norm{x+y}^2$ and $\norm{x-y}^2$ in [@thm-audit-parallelogram-law].
-2. **Hippasus's $45^\circ$ triangle, 2-adic parity contradiction, and the canonical Pell continued-fraction approximants**: Setting $a = 1, b = 1$ on the unit integer lattice forces $c^2 = 1^2 + 1^2 = 2$, so $c = \sqrt{2}$. For any positive integers $m, n \in \mathbb{Z}_{>0}$ ($n \neq 0$), a putative rational solution $c = m/n \in \mathbb{Q}$ ($m^2 = 2n^2$) shatters against 2-adic valuation parity: $v_2(m^2) = 2v_2(m)$ is always **even**, whereas $v_2(2n^2) = 2v_2(n) + 1$ is always **odd** ($2v_2(m) \neq 2v_2(n) + 1$). While arbitrary rational sequences (such as decimal truncations $\lfloor 10^k\sqrt{2}\rfloor / 10^k$) can converge to $\sqrt{2}$, the **canonical best continued-fraction approximants** are the Pell convergents $m_k/n_k$ defined by $m_k + n_k\sqrt{2} = (1 + \sqrt{2})^k$ ($k \ge 1, n_k > 0$),
-   $$
-   \frac{m_k}{n_k} = \frac{1}{1},\; \frac{3}{2},\; \frac{7}{5},\; \frac{17}{12},\; \frac{41}{29},\; \frac{99}{70},\; \dots,
-   $$
-   which satisfy the alternating unit-gap Pell equation:
-   $$
-   m_k^2 - 2n_k^2 = (-1)^k = \pm 1 \qquad\Longleftrightarrow\qquad \left(\frac{m_k}{n_k}\right)^2 = 2 + \frac{(-1)^k}{n_k^2}.
-   $$
-   For every $k \ge 1$, an indestructible unit arithmetic crack $(-1)^k = \pm 1$ separates $m_k^2$ from $2n_k^2$. In this book's conceptual and philosophical synthesis, that unit crack propels the Chinese concept of *number* (`数`) from the discrete counting verb operator (`shǔ`, $\mathbb{N} \to \mathbb{Q}$) to the continuous geometric noun coordinate (`shù`), tracing a four-stage conceptual progression (note that this is a conceptual hierarchy rather than a chain of field inclusions $\pi \subset \theta^*$; the algebraic golden ratio $\varphi = \frac{1+\sqrt{5}}{2} \in \overline{\mathbb{Q}}$ satisfying $\varphi = 1 + 1/\varphi$ belongs to Stage 2, whereas Stage 4's $\theta^* \approx 0.739085$ denotes the transcendental self-referential cosine fixed point $\cos\theta^* = \theta^*$):
-   $$
-   \begin{aligned}
-   &\mathbb{Q}\text{ (rational grid)} \\
-   &\longrightarrow\; \overline{\mathbb{Q}}\text{ (algebraic numbers: $\sqrt{2}$ diagonal \& golden ratio $\varphi$)} \\
-   &\longrightarrow\; \pi\text{ (transcendental circle rotation)} \\
-   &\longrightarrow\; \theta^*\text{ (self-referential cosine fixed point $\cos\theta^* = \theta^*$)}.
-   \end{aligned}
-   $$
+**From non-additive 1D lengths to grade-0 area scalars and canceling grade-2 bivector orientations**: In a positive-definite Euclidean inner-product space, let two orthogonal vectors $\vv{a} \perp \vv{b}$ have scalar norms $a = \norm{\vv{a}}, b = \norm{\vv{b}}, c = \norm{\vv{a} + \vv{b}}$. Their 1D lengths cannot add linearly ($a + b \neq c$) because they point along perpendicular axes. In positive-definite Euclidean Clifford geometric algebra, squaring the resultant $\vv{c} = \vv{a} + \vv{b}$ yields
+
+$$
+\vv{c}^2 = (\vv{a} + \vv{b})(\vv{a} + \vv{b}) = \vv{a}^2 + \vv{b}^2 + (\vv{a}\vv{b} + \vv{b}\vv{a}) = a^2 + b^2 + 2(\vv{a}\cdot\vv{b}) + (\vv{a}\wedge\vv{b} + \vv{b}\wedge\vv{a}).
+$$
+
+Here $\vv{a}^2 = a^2$, $\vv{b}^2 = b^2$, and $\vv{c}^2 = c^2$ are **grade-0 scalars** carrying squared-length (area) measure, whereas $\vv{a}\wedge\vv{b}$ and $\vv{b}\wedge\vv{a}$ are **grade-2 oriented-area bivectors**. Since $\vv{a}\cdot\vv{b} = 0$ and the oppositely oriented bivectors anticommute ($\vv{b}\wedge\vv{a} = -\vv{a}\wedge\vv{b}$), the grade-2 oriented areas cancel identically ($\vv{a}\wedge\vv{b} + \vv{b}\wedge\vv{a} = 0$), leaving the grade-0 Pythagorean identity $c^2 = a^2 + b^2$! This is the exact geometric meaning behind the vanishing cross term $2\langle x, y\rangle_{\mathbb{R}} = 0$ in `norm_add_sq_real` and the cancellation between $\norm{x+y}^2$ and $\norm{x-y}^2$ in [@thm-audit-parallelogram-law]. The classical number-theoretic consequences and conceptual progression triggered when this quadratic identity is evaluated on the unit integer lattice are recorded in the following literature note:
+
+::: {.remark #rem-ch27-pell-transcendence-literature title="Hippasus's √2 Parity Contradiction, Pell Continued-Fraction Convergents, and the Four-Stage Progression of Number (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** The 2-adic valuation parity proof of the irrationality of $\sqrt{2}$, the canonical Pell continued-fraction best rational approximants, and the transcendence of $\pi$ and the cosine fixed point $\theta^*$ below (see also [@rem-lean-kernel-trust-boundary-literature], [Chapter 24](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature], and [Chapter 29](ch29-timeless-causality-and-gram-space.md) [@rem-ch29-pell-convergents-literature]) belong to the classical number-theory literature together with this book's conceptual synthesis (`MODEL`), and are not part of the frozen theorems audited line by line in this chapter.
+
+Setting $a = 1, b = 1$ on the unit integer lattice forces $c^2 = 1^2 + 1^2 = 2$, so $c = \sqrt{2}$. For any positive integers $m, n \in \mathbb{Z}_{>0}$ ($n \neq 0$), a putative rational solution $c = m/n \in \mathbb{Q}$ ($m^2 = 2n^2$) shatters against 2-adic valuation parity: $v_2(m^2) = 2v_2(m)$ is always **even**, whereas $v_2(2n^2) = 2v_2(n) + 1$ is always **odd** ($2v_2(m) \neq 2v_2(n) + 1$). While arbitrary rational sequences (such as decimal truncations $\lfloor 10^k\sqrt{2}\rfloor / 10^k$) can converge to $\sqrt{2}$, the **canonical best continued-fraction approximants** are the Pell convergents $m_k/n_k$ defined by $m_k + n_k\sqrt{2} = (1 + \sqrt{2})^k$ ($k \ge 1, n_k > 0$),
+
+$$
+\frac{m_k}{n_k} = \frac{1}{1},\; \frac{3}{2},\; \frac{7}{5},\; \frac{17}{12},\; \frac{41}{29},\; \frac{99}{70},\; \dots,
+$$
+
+which satisfy the alternating unit-gap Pell equation:
+
+$$
+m_k^2 - 2n_k^2 = (-1)^k = \pm 1 \qquad\Longleftrightarrow\qquad \left(\frac{m_k}{n_k}\right)^2 = 2 + \frac{(-1)^k}{n_k^2}.
+$$
+
+For every $k \ge 1$, an indestructible unit arithmetic crack $(-1)^k = \pm 1$ separates $m_k^2$ from $2n_k^2$. In this book's conceptual and philosophical synthesis (`MODEL`), that unit crack propels the Chinese concept of *number* (`数`) from the discrete counting verb operator (`shǔ`, $\mathbb{N} \to \mathbb{Q}$) to the continuous geometric noun coordinate (`shù`), tracing a four-stage conceptual progression (note that this is a conceptual hierarchy rather than a chain of field inclusions $\pi \subset \theta^*$; the algebraic golden ratio $\varphi = \frac{1+\sqrt{5}}{2} \in \overline{\mathbb{Q}}$ satisfying $\varphi = 1 + 1/\varphi$ belongs to Stage 2, whereas Stage 4's $\theta^* \approx 0.739085$ denotes the transcendental self-referential cosine fixed point $\cos\theta^* = \theta^*$):
+
+$$
+\begin{aligned}
+&\mathbb{Q}\text{ (rational grid)} \\
+&\longrightarrow\; \overline{\mathbb{Q}}\text{ (algebraic numbers: $\sqrt{2}$ diagonal \& golden ratio $\varphi$)} \\
+&\longrightarrow\; \pi\text{ (transcendental circle rotation)} \\
+&\longrightarrow\; \theta^*\text{ (self-referential cosine fixed point $\cos\theta^* = \theta^*$)}.
+\end{aligned}
+$$
+:::
 
 Next we inspect `born_probability_skeleton` in `D5/S3/Quantum/FiniteDimensional.lean:78`. For any finite index type `n` (`[Fintype n]`) and matrices $\rho, P \in M_n(\mathbb{C})$, the trace pairing is defined as
 
@@ -182,7 +194,7 @@ Across the four proofs above, four recurring Lean 4 proof engineering patterns s
 
 ## Comprehensive Audit Table of Frozen Declarations Across Parts I–III {#sec-parts-i-to-iii-frozen-audit-table}
 
-The table below audits representative frozen declarations cited across Parts I through III at commit `a660b9333c0f8d25aaa22af1bbbfab43c2f94a46`. As required by our verification contract, prose labels such as "parallelogram law", "probability skeleton", or "pinching idempotence" are descriptive titles only and carry no formal claim beyond the exact Lean signature.
+The table below audits representative frozen declarations cited across Parts I through III at commit `1d9bf98cab8306e67ec38a739359f2cdae63877a`. As required by our verification contract, prose labels such as "parallelogram law", "probability skeleton", or "pinching idempotence" are descriptive titles only and carry no formal claim beyond the exact Lean signature.
 
 | Chapter | Frozen GID | Source File & Line | `statement_id` Prefix | Exact Formal Scope & Contract |
 | :---------: | ---------------------------- | ---------------------------- | :------------------: | ----------------------------------------------------- |

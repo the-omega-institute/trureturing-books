@@ -277,7 +277,7 @@ $$
 
 - **第九章**从三维空间任意两向量的公共单位法向量（[@lemma-three-axis-normal]）出发，阐明了北极两角寻址 $R_z(\varphi)R_y(\theta)N$，证明了任意两不共线轴生成 $\mathrm{SO}(3)$ 的有限旋转字存在性（[@thm-two-axis-finite-word]），并用有理六轴构造（[@prop-rational-six-axis-cover]）与拓扑六色下界（[@cor-six-colors-necessary]）锁定了球面无正交对开覆盖的最小块数 $6$；
 - **第十章**区分了物理操作的时间非对易性（[@prop-static-sequential-separation]）、二维球面毛球/霍普障碍与三维旋转器球 $S^3$ 的全局标架，证明了完整复格拉姆矩阵 $B^*B = A^*A$ 在差一个公共外围幺正变换 $U$ 下唯一重构整族状态（[@thm-gram-unitary-reconstruction]、[@lemma-unit-gram-equality]），并用同纬度复内积公式（[@cor-latitude-complex-overlap]）将八分球贝里立体角直接写进了格拉姆矩阵元；
-- **第十一章**证明了本征线指数演化（[@lemma-exponential-on-eigenline]）与能量本征态定态不变性（[@thm-hermitian-eigenstate-stationary]），在旋转参考系下将横向微波门还原为脉冲包络积分面积 $\theta = \int_0^T \Omega(t)\,dt$，给出了有序三脉冲积分核的二次迹误差界（[@prop-ordered-pulse-error]），并用信道—海森堡迹拉回恒等式（[@cor-frame-pullback-readout]）诠释了零附加模拟时长的虚拟 $Z$ 门；
+- **第十一章**证明了本征线指数演化（[@lemma-exponential-on-eigenline]）与能量本征态定态不变性（[@thm-hermitian-eigenstate-stationary]），对照旋转参考系与旋波近似下的微波脉冲面积模型（[第十一章](ch11-pulses-and-virtual-z.md) `#rem-rwa-pulse-area-literature`），给出了有序三脉冲积分核的二次迹误差界（[@prop-ordered-pulse-error]），并用信道—海森堡迹拉回恒等式（[@cor-frame-pullback-readout]）衔接了被动虚拟 $Z$ 相位参考更新（[第十一章](ch11-pulses-and-virtual-z.md) `#rem-virtual-z-scheduling-literature`）；
 - **第十二章**从记录测量的分支迹守恒（[@lemma-measurement-branch-sum]）与投影概率的对易子导数流（[@prop-measurement-gradient-flow]）出发，解析了基于测量的量子计算（MBQC）与正交参数位移律，建立了黎曼流形负梯度流的精确能量耗散恒等式（[@thm-riemannian-gradient-dissipation]），并界定了高维赤道集中与有限迹谱模式计数界（[@cor-finite-trace-mode-budget]）。
 
 在接下来的**第四部《交织·多球共振》**中，我们将正式跨出单颗布洛赫球的边界，看两颗、三颗乃至 $n$ 颗球如何通过张量积关联平面交织成贝尔纠缠、CHSH $45^\circ$ 余弦破缺、拓扑纠错码与量子算法大一统！
