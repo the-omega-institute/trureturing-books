@@ -6,6 +6,11 @@
 
 1. **基于测量的单向量子计算（MBQC）**：如果预先制备好一张多比特纠缠簇态（cluster state），我们甚至不需要在计算过程中再施加任何幺正双比特门——仅仅通过一步步在球面赤道上选择不同的测量基角 $\alpha$（转移观察者的注意力焦点），并把前一步的测量结果通过经典前馈（feedforward）修正下一步的测量轴，就能在未测量的输出节点上驱动出任意量子逻辑门！
 2. **泡利参数位移律（Parameter-Shift Rule）**：当观察者想要在参数化量子电路里顺着期望值曲面求导数 $\partial_\theta f(\theta)$ 时，他不需要像经典微积分那样取极小步长 $\delta\theta \to 0$ 去做容易放大散粒噪声的有限差分近似；因为在单次泡利旋转下球面截面天然是纯粹的一阶正余弦波，只需把参数精确拨到左右**正交 $90^\circ$** 的两个位移设置点 $\theta \pm \frac{\pi}{2}$ 分别求取（或通过重复采样估计）期望值 $f(\theta \pm \frac{\pi}{2})$，两者的差商就给出**零有限差分截断误差的精确解析导数恒等式**（尽管有限次采样估计期望值时仍保留常规统计散粒噪声）！
+
+::: {.viz src="parameter-shift" preset="noise" height="500"}
+**同样多的测量次数，两种算法的散布差十几倍。** $\theta = 60^\circ$，每个取值点只测 100 发：每次试验在量尺上落一个青色的点（左右各 $90^\circ$ 两值之差的一半）和一个品红的点（$\pm 6^\circ$ 的小步长差分）。青色的点挤在切线斜率的虚线旁，宽约 0.035；品红的点散开约 0.58，有的落出量尺。两种散布都来自散粒噪声，小步长把它放大了（[@rem-parameter-shift-rule-literature]）。
+:::
+
 3. **黎曼自然梯度与高维赤道集中**：在弯曲球面与射影流形上，沿着内蕴黎曼度量（如球面诱导度量或 Fubini–Study 度量）的负梯度流下滑，势能的减少量精确等于切速度模长平方的时间积分（[@thm-riemannian-gradient-dissipation]）；然而一旦维度随比特数 $n$ 指数暴涨到 $d = 2^n$，高维球面上几乎所有的测度都会死死挤压在垂直于任一固定测量轴的**赤道窄带**内，在满足特定随机电路设计假设时构成变分量子算法“贫瘠高原（barren plateau）”现象的几何背景；与此同时，作为一条独立于球面测度与电路梯度的纯谱分析工具，当非负可和本征值序列满足有限迹预算等式 $\sum_j \lambda_j = RW/\pi$ 时，其超过任意正阈值 $\tau > 0$ 的模式个数满足一个充分的有限计数上界（[@cor-finite-trace-mode-budget]）。
 
 ![簇态测量传态与自适应前馈、单次泡利旋转的正交参数位移律，以及受限实振幅高维球面的赤道集中与有限迹谱模式界](../assets/fig-12-mbqc-parameter-shift-barren.svg)
@@ -110,6 +115,10 @@ $$
 
 当电路中的参数仅出现在单扇对合泡利旋转门中时，[@prop-measurement-gradient-flow] 的无穷小导数与有限移位两采样公式之间的文献关系汇总如下（图 12 中栏；[@rem-parameter-shift-rule-literature]）。
 
+::: {.viz src="parameter-shift" preset="shift" height="500"}
+**左右各转 $90^\circ$，两值之差的一半就是斜率。** $f = \cos\theta$，琥珀色的点在 $\theta = 60^\circ$，两个青色的点在 $-30^\circ$ 与 $150^\circ$，高 $0.866$ 与 $-0.866$；两值之差的一半 $-0.866$ 正是虚线切线的斜率，而切线斜率是按 [@prop-measurement-gradient-flow] 的对易子公式算出的。圆里两支青色箭头与琥珀色的箭头垂直，它们在测量轴上的高度就是这两个值。
+:::
+
 ::: {.remark #rem-parameter-shift-rule-literature title="单次对合泡利旋转的两采样参数位移律（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 在**单次泡利旋转门** $R_P(\theta) = \exp(-i\theta P_{\mathrm{gen}}/2)$（其中生成元满足自伴对合条件 $P_{\mathrm{gen}}^* = P_{\mathrm{gen}}$ 且 $P_{\mathrm{gen}}^2 = I$，对应 $H = \frac{1}{2}P_{\mathrm{gen}}$）下，由于 $P_{\mathrm{gen}}^2 = I$，传播子精确展开为 $R_P(\theta) = \cos(\theta/2) I - i\sin(\theta/2) P_{\mathrm{gen}}$。因此，对任意固定初态与固定测量算符，期望值函数 $f(\theta)$ 作为 $\theta$ 的函数**只含有零频常数项与一倍角基频谐波**：
 
@@ -124,6 +133,14 @@ $$
 $$
 
 （职责边界：[@prop-measurement-gradient-flow] 经 Lean 内核验证的是无穷小对易子导数公式与纯实性；上述两采样点有限位移恒等式额外依赖“参数 $\theta$ 仅在单扇对合泡利门 $e^{-i\theta P_{\mathrm{gen}}/2}$ 中出现一次”的二能级频率结构，作为手算与文献结果列入 [@ex-cluster-shift-and-gradient] 与 [@rem-mbqc-gradients-literature]。）
+:::
+
+::: {.viz src="parameter-shift" preset="anywhere" height="500"}
+**换一个角度、换一条曲线，仍然精确。** 倾斜的态与测量轴给出抬高了常数 $c$、错开了相位的曲线 $f = c + a\cos\theta + b\sin\theta$。$\theta$ 扫过一整圈，量尺上青色的条始终停在切线的虚线上，品红的条（$\pm 30^\circ$ 的小步长差分）始终短一截；常数 $c$ 在相减时消掉（[@rem-parameter-shift-rule-literature]）。
+:::
+
+::: {.viz src="parameter-shift" height="560"}
+**参数位移：完整实验室。** 两个场景共用一条时间轴：曲线（拖动曲线或圆里的箭头改角度，换曲线、改小步长 $h$）与采样（改每个取值点的发数 $N$，看两种算法的散布怎样随 $N$ 与 $h$ 变化）。
 :::
 
 ## 黎曼梯度与能量耗散 {#sec-riemannian-natural-gradient}

@@ -6,6 +6,11 @@ At the end of [Chapter 11](ch11-pulses-and-virtual-z.md), we saw a striking reve
 
 1. **Measurement-Based Quantum Computing (MBQC)**: Once an entangled cluster resource state is prepared, no further unitary gates need to be applied during the computation. By sequentially choosing equatorial measurement angles $\alpha$ (steering the observer's attention) and feeding classical measurement outcomes forward to adapt later measurement axes, projective measurements alone drive universal quantum logic!
 2. **The Pauli Parameter-Shift Rule**: When optimizing a parametrized quantum circuit, evaluating the analytical gradient $\partial_\theta f(\theta)$ of an expectation value with respect to a single Pauli rotation angle $\theta$ requires no finite-difference limit $\delta\theta \to 0$. Because a single Pauli rotation slices a pure first-order sinusoid on the sphere, evaluating (or estimating from repeated measurement shots) the expectation value at two **orthogonal $\pm 90^\circ$ parameter settings** $\theta \pm \frac{\pi}{2}$ yields the exact analytical derivative with zero finite-difference truncation error (while finite-shot estimation retains ordinary statistical sampling uncertainty)!
+
+::: {.viz src="parameter-shift" preset="noise" height="500"}
+**The same number of shots, scatters more than ten times apart.** At $\theta = 60^\circ$ with only 100 shots per setting, each trial drops one cyan dot (half the difference a quarter turn each way) and one magenta dot (the $\pm 6^\circ$ small-step difference) on the gauge. The cyan dots crowd the dashed tangent slope with a width of about 0.035; the magenta dots spread about 0.58, some of them off the gauge. Both scatters are shot noise, and the small step magnifies it ([@rem-parameter-shift-rule-literature]).
+:::
+
 3. **Riemannian Natural Gradients and Equatorial Concentration**: Along a negative Riemannian gradient flow on a manifold, potential energy dissipates at a rate equal to the integrated squared norm of the velocity ([@thm-riemannian-gradient-dissipation]). Yet as qubit count $n$ grows and ambient dimension scales as $d = 2^n$, measure on high-dimensional spheres concentrates overwhelmingly into a narrow **equatorial belt** orthogonal to any fixed measurement axis — setting the geometric stage (under specific random-circuit design assumptions) for barren plateaus; separately, as a standalone spectral counting result for nonnegative summable sequences, a finite trace identity $\sum_j \lambda_j = RW/\pi$ supplies a sufficient upper bound on the number of modes above any threshold $\tau > 0$ ([@cor-finite-trace-mode-budget]).
 
 ![MBQC cluster measurement teleportation and adaptive corrections, the exact plus/minus pi over two parameter-shift rule for a single Pauli rotation, and equatorial concentration on the restricted real-amplitude sphere](../assets/fig-12-mbqc-parameter-shift-barren.svg)
@@ -86,6 +91,10 @@ Positivity and Hermiticity of $\rho_t$ and $P$ ensure that $\Tr(\rho_t P)$ is re
 
 When a circuit parameter $\theta$ enters a single occurrence of an involutory Pauli rotation, the classical two-sample shift formula paired with [@prop-measurement-gradient-flow] is recorded below (Panel II of Figure 12; [@rem-parameter-shift-rule-literature]).
 
+::: {.viz src="parameter-shift" preset="shift" height="500"}
+**A quarter turn each way: half the difference is the slope.** With $f = \cos\theta$ the amber point sits at $\theta = 60^\circ$ and the two cyan points at $-30^\circ$ and $150^\circ$, at heights $0.866$ and $-0.866$; half their difference, $-0.866$, is exactly the slope of the dashed tangent, which is computed from the commutator formula of [@prop-measurement-gradient-flow]. In the dial the two cyan arrows are perpendicular to the amber one, and their heights on the measured axis are these two values.
+:::
+
 ::: {.remark #rem-parameter-shift-rule-literature title="Two-Sample Parameter-Shift Rule for a Single Involutory Pauli Rotation (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** For a **single occurrence** of a Pauli rotation $R_P(\theta) = e^{-i\theta P_{\mathrm{gen}}/2}$ with $P_{\mathrm{gen}}^* = P_{\mathrm{gen}}$ and $P_{\mathrm{gen}}^2 = I$, the involution $P_{\mathrm{gen}}^2 = I$ collapses the matrix exponential into Euler's formula $R_P(\theta) = \cos(\theta/2)I - i\sin(\theta/2)P_{\mathrm{gen}}$. Conjugating any observable $O$ by $R_P(\theta)$ produces products of $\cos(\theta/2)$ and $\sin(\theta/2)$ of degree two, which by double-angle trigonometry contain only the zeroth and first harmonics $1, \cos\theta, \sin\theta$:
 
@@ -100,6 +109,14 @@ $$
 $$
 
 Geometrically, instead of nudging the sphere by a tiny angle $\delta\theta \ll 1$, the observer evaluates the expectation value at two **orthogonal $90^\circ$ shifts** on the sphere. Keep the boundary explicit: [@prop-measurement-gradient-flow] certifies the infinitesimal commutator derivative and its realness, whereas the finite $\pm\pi/2$ shift rule relies additionally on the single-gate involutory Pauli frequency expansion ([@rem-mbqc-gradients-literature]).
+:::
+
+::: {.viz src="parameter-shift" preset="anywhere" height="500"}
+**Another angle, another curve: still exact.** A tilted state and measured axis give the curve $f = c + a\cos\theta + b\sin\theta$, raised by the constant $c$ and shifted in phase. As $\theta$ sweeps a full turn, the cyan bar on the gauge stays on the dashed tangent line while the magenta bar (the $\pm 30^\circ$ small-step difference) always falls short; the constant $c$ cancels in the difference ([@rem-parameter-shift-rule-literature]).
+:::
+
+::: {.viz src="parameter-shift" height="560"}
+**The parameter-shift rule: the full lab.** Two scenes on one rail: the curve (drag the curve or the arrow in the dial to set the angle, switch the curve, change the small step $h$) and the shots (change the number of shots $N$ per setting and watch how the two scatters change with $N$ and $h$).
 :::
 
 ## Riemannian Gradients and Dissipation {#sec-riemannian-natural-gradient}

@@ -878,6 +878,52 @@
           "gid": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation"
         }
       ]
+    },
+    {
+      "id": "parameter-shift",
+      "code": "SHIFT//RULE",
+      "title": "参数位移",
+      "title_en": "The parameter-shift rule",
+      "summary": "单扇泡利旋转门 R_y(θ) 下，期望值 f(θ) = c + a cos θ + b sin θ 是一条余弦型曲线，圆里转动的箭头在测量轴上的影子就是它。把角度左右各转 90° 取两个值，两值之差的一半正好等于由对易子公式算出的切线斜率：换一个角度、换一条这样的曲线都精确。小步长差分总比斜率短 sin h / h；有限次采样时，它把同样的散粒噪声除以 2h，散布宽十几倍。四张实验卡可以在第十二章正文里单独引用。",
+      "summary_en": "Under a single Pauli rotation R_y(θ) the expectation value f(θ) = c + a cos θ + b sin θ is a cosine-shaped curve: the shadow on the measured axis of an arrow turning in the dial. Turn the angle a quarter turn each way and read two values: half their difference equals the tangent slope given by the commutator formula, at any angle and for any such curve. A small-step difference always falls short by sin h / h, and with finitely many shots it divides the same shot noise by 2h and scatters more than ten times wider. Each of the four experiment cards can be cited on its own from Chapter 12.",
+      "path": "parameter-shift/",
+      "thumbnail": "parameter-shift/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "参数位移",
+        "期望值曲线",
+        "对易子导数",
+        "有限差分",
+        "散粒噪声",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Parameter shift",
+        "Expectation curve",
+        "Commutator derivative",
+        "Finite difference",
+        "Shot noise",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第十二章 · 泡利转角与精确参数位移",
+          "label_en": "Chapter 12 · Pauli angles and exact parameter shift",
+          "href": "../zh/ch12-measurement-computation-and-gradients.html#sec-pauli-parameter-shift",
+          "href_en": "../en/ch12-measurement-computation-and-gradients.html#sec-pauli-parameter-shift"
+        },
+        {
+          "label": "Lean · Quantum/Dynamics/ProjectionProbabilityFlow",
+          "label_en": "Lean · Quantum/Dynamics/ProjectionProbabilityFlow",
+          "href": "{trureturing}/D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.projection_probability_flow"
+        }
+      ]
     }
   ]
 }
