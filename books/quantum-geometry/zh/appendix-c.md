@@ -355,7 +355,8 @@
 
 ## C.3 开放猜想与未形式化前沿问题登记表（全书 8 项：6 项 `OPEN` 猜想 + 2 项文献边界——零 `lean` 属性） {#sec-appendix-c-open-register}
 
-遵照本书规则 1 与规则 2，凡尚未解决的数学或物理猜想以及尚未在本仓库完成形式化的前沿问题，一律使用无 `lean` 属性的 `conjecture` 环境（渲染为红色 `OPEN` 徽章）或带明确文献说明的 `remark` 环境，绝不携带任何 `lean="..."` 属性：
+::: {.remark #rem-appendix-c-open-literature-register title="开放猜想与外部文献边界登记表（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化（针对下表 `O6`、`O7` 等外部文献边界条目；`O1`–`O5` 与 `O8` 为尚未解决的 `OPEN` 开放猜想）。** 遵照本书规则 1 与规则 2，凡尚未解决的数学或物理猜想以及尚未在本仓库完成形式化的前沿问题，一律使用无 `lean` 属性的 `conjecture` 环境（渲染为红色 `OPEN` 徽章）或带明确文献说明的 `remark` 环境，绝不携带任何 `lean="..."` 属性：
 
 | # | 环境锚点 ID | 所在章节 | 猜想 / 开放问题名称 | 核心数学或物理陈述摘要 | Lean 属性 | 徽章状态 |
 | :---: | :--- | :---: | :--- | :--- | :---: | :---: |
@@ -367,6 +368,8 @@
 | O6 | `#rem-ryu-takayanagi-literature` | `CH19` | 连续 AdS/CFT 笠—高柳（Ryu–Takayanagi）全息纠缠熵公式 | 连续反德西特时空极小曲面面积 $S(A) = \operatorname{Area}(\gamma_A)/(4G_N)$ 的完整泛函与量子极值曲面证明（本书仅形式化离散桥图最大流最小割定理） | 无（文献） | `文献结果` |
 | O7 | `#rem-diophantine-z-in-q-literature` | `CH23` | 有理数域上的希尔伯特第十问题 $H_{10}(\mathbb{Q})$ 与 $\mathbb{Z} \subset \mathbb{Q}$ 存在性定义 | $\mathbb{Z}$ 在 $\mathbb{Q}$ 中是否存在纯存在量词（$\exists$）丢番图定义及 $H_{10}(\mathbb{Q})$ 的可判定性（Koenigsmann 2016 给出 $\forall\exists$ 一阶刻画，但 $H_{10}(\mathbb{Q})$ 仍开放） | 无（文献） | `OPEN / 文献` |
 | O8 | `#conj-coda-navier-stokes-regularity` | `CH30` | 无外力三维不可压缩纳维—斯托克斯全局光滑性猜想（克雷千禧年陈述 A / B） | 给定正粘性 $\nu > 0$ 与恒零外力 $\mathbf{f} \equiv \mathbf{0}$，对 $\mathbb{R}^3$（或 $\mathbb{T}^3$）上任意光滑无散度速降（或周期）初值 $\mathbf{u}_0$，自治流体是否在 $[0, \infty)$ 上恒存在有限动能全局光滑解，抑或发生有限时间爆破（受迫陈述 C / D 爆破文献另见 `#rem-ch30-navier-stokes-forced-literature`） | 无（严禁） | `OPEN`（红） |
+
+:::
 
 ---
 

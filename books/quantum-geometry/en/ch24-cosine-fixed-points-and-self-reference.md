@@ -27,7 +27,7 @@ $$
 \psi = \psi(\psi).
 $$
 
-In this chapter we unfold this self-referential closure across four rigorous mathematical levels: **the Lean-verified stabilization theorem for contracting updates on finite sets**, **single-step context-relative interpretation fixed points and contextual non-uniqueness**, **the unique positive algebraic fixed point $\varphi = \frac{1+\sqrt{5}}{2}$ of the golden reciprocal map $x = 1 + 1/x$**, and the classical analysis and transcendental number theory of **the Dottie cosine fixed point $\theta^*$, its nonzero algebraic residuals $|\cos q - q| > 0$, and the Hairy Ball fixed/antipodal alternative on even spheres**.
+In this chapter we unfold this self-referential closure across four mathematical levels: **the Lean-verified stabilization theorem for contracting updates on finite sets**, **single-step context-relative interpretation fixed points and contextual non-uniqueness**, **the unique positive algebraic fixed point $\varphi = \frac{1+\sqrt{5}}{2}$ of the golden reciprocal map $x = 1 + 1/x$**, and **the classical analytic and number-theoretic background of cosine self-reference $\cos\theta^* = \theta^*$** recorded in the literature remarks [@rem-banach-dottie-hairy-ball-literature] and [@rem-dottie-angle-incommensurable].
 
 ![Cosine fixed points and self-referential closure: the Dottie cobweb spiral attractor cos θ* = θ*, finite contracting set stabilization, adjacent-step agreement, contextual non-uniqueness, and the unique golden reciprocal fixed point collapsing into ψ = ψ(ψ)](../assets/fig-24-dottie-spiral-attractor.svg)
 
@@ -247,7 +247,7 @@ where $\varphi$ is Mathlib's `Real.goldenRatio`.
 First extract the identity $\varphi - 1 = \varphi^{-1}$ from `golden_transfer_triangle`. Forward direction: since $x > 0$ we have $x + 1 \neq 0$, so $\frac{1}{x+1} = x$ is equivalent to $1 = x\,(x + 1)$; together with $\varphi^2 = \varphi + 1$ (`Real.goldenRatio_sq`) and $\varphi > 1$ (`Real.one_lt_goldenRatio`), nonlinear arithmetic yields $x = \varphi - 1 = \varphi^{-1}$. Reverse direction: substituting $x = \varphi^{-1}$ and using $\varphi^{-1} + 1 = \varphi$ gives $\frac{1}{\varphi^{-1} + 1} = \frac{1}{\varphi} = \varphi^{-1}$. The full proof is checked by the Lean kernel.
 :::
 
-Up to this point, golden self-reference is a purely algebraic matter: addition, division, one quadratic equation. Section 24.4 will contrast it with the cosine self-reference $\cos\theta = \theta$ and stress that the former stops at an algebraic number while the latter leaps into the transcendental ones. Yet the two kinds of self-reference are not unrelated. The golden ratio is itself a cosine reading, taken at the angles of the regular pentagon.
+Up to this point, golden self-reference is a purely algebraic matter: addition, division, one quadratic equation. Section 24.4 will place it alongside the cosine self-reference $\cos\theta = \theta$ (whose classical analytic and number-theoretic properties are recorded in the literature remarks of Section 24.4). Yet the two kinds of self-reference are not unrelated. The golden ratio is itself a cosine reading, taken at the angles of the regular pentagon.
 
 ::: {.proposition #prop-pentagon-golden-cosines title="The Doubled Pentagon Cosines Read the Golden Ratio, Its Inverse, and √5" lean="D5/S3/Constants/PentagonCosines.pentagon_golden_cosines"}
 Let $\varphi$ denote Mathlib's `Real.goldenRatio`. All four of the following hold:
@@ -268,7 +268,7 @@ $$
 1 + 2\cos\frac{2\pi}{5} \;=\; 2\cos\frac{\pi}{5}.
 $$
 
-Golden self-reference is a length relation inside the regular pentagon: a regular pentagon of unit side has diagonals of length $2\cos\frac{\pi}{5} = \varphi$. The difference between algebraic and cosine self-reference can therefore be stated more precisely. $\varphi$ is a cosine reading too, but one taken at an angle such as $\frac{\pi}{5}$ that is commensurable with $\pi$, and the cosine of every angle commensurable with $\pi$ is algebraic; the cosine of $\theta^*$ is transcendental, so $\theta^*$ must be incommensurable with $\pi$ — which is exactly what [@rem-dottie-angle-incommensurable] proves below.
+Golden self-reference is a length relation inside the regular pentagon: a regular pentagon of unit side has diagonals of length $2\cos\frac{\pi}{5} = \varphi$. Thus $\varphi$ is a cosine reading as well, taken at $\frac{\pi}{5}$ and landing in the quadratic field $\mathbb{Q}(\sqrt{5})$; what happens arithmetically when an angle equals its own cosine ($\cos\theta^* = \theta^*$), and whether such an angle can be commensurable with $\pi$, are established in the literature remarks [@rem-banach-dottie-hairy-ball-literature] and [@rem-dottie-angle-incommensurable] of Section 24.4.
 
 ## 24.4 From $\cos\theta^* = \theta^*$ to $\psi = \psi(\psi)$: Transcendence, Remainder Seams, and the Hairy Ball Fixed/Antipodal Alternative {#sec-ch24-4}
 
@@ -278,7 +278,7 @@ $$
 \cos\theta^* = \theta^*.
 $$
 
-Why does upgrading the self-referential operator from a one-dimensional rational fraction $1 + 1/x$ to the two-dimensional cosine projection $\cos\theta$ propel its unique fixed point $\theta^* \approx 0.7390851332\dots$ (the **Dottie number**) completely outside the field of algebraic numbers $\overline{\mathbb{Q}}$ into the **transcendental numbers**?
+When the self-referential operator upgrades from a one-dimensional rational fraction $1 + 1/x$ to the two-dimensional cosine projection $\cos\theta$, how do classical analysis and transcendental number theory characterize the existence, uniqueness, and arithmetic status of its real root $\theta^* \approx 0.7390851332\dots$ (the **Dottie number**)?
 
 The following literature note synthesizes Banach's contraction principle on $[0, 1]$, the Lindemann–Weierstrass transcendence proof, the Lagrange Taylor remainder bound $|R_{2N}(\theta)|$, and the Hairy Ball fixed/antipodal theorem on even-dimensional spheres.
 
@@ -336,7 +336,7 @@ Starting from the unit seed $1$ (or a three-element initial set), compare how th
    $$
 
    converging to the unique positive quadratic algebraic root $\varphi \in \overline{\mathbb{Q}}$ of $\varphi^2 - \varphi - 1 = 0$.
-3. **Two-dimensional rotational cosine loop ($\theta_{k+1} = \cos\theta_k$, [@rem-banach-dottie-hairy-ball-literature])**: Starting from $\theta_0 = 1$ radian, repeated cosine evaluation yields
+3. **Two-dimensional rotational cosine loop ($\theta_{k+1} = \cos\theta_k$, **literature result, not formalized in this book**; see [@rem-banach-dottie-hairy-ball-literature])**: Starting from $\theta_0 = 1$ radian, repeated cosine evaluation yields
 
    $$
    \begin{aligned}
@@ -367,6 +367,9 @@ The aphorism is stated; now let us do the arithmetic. The cosine table in [@ex-d
 1. Close to $\theta^*$, by how much does one press of the cosine key actually shrink the error?
 2. If the ruler reads not only the projection $\cos\theta$ but also the orthogonal component $\sin\theta$, how much faster does the loop close?
 3. How close to $\cos q = q$ can a ruler with finitely many rational tick marks get?
+
+::: {.remark #rem-dottie-convergent-residual-literature title="Asymptotic Contraction Rate, Newton's Quadratic Speed-Up, and Continued-Fraction Convergent Residual Bounds for θ* (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.**
 
 **First question: position and rate lie on one unit circle.** Write the error as $\delta_k = \theta_k - \theta^*$, expand $\cos$ about $\theta^*$, and cancel the zeroth-order term with $\cos\theta^* = \theta^*$:
 
@@ -414,16 +417,17 @@ $$
 \lvert q - \theta^*\rvert \;\le\; \lvert\cos q - q\rvert \;\le\; (1 + \sin 1)\,\lvert q - \theta^*\rvert, \qquad 1 + \sin 1 \approx 1.8414710,
 $$
 
-and the ratio $\lvert\cos q - q\rvert / \lvert q - \theta^*\rvert$ tends to $1 + \sin\theta^* = 1 + \lambda \approx 1.6736120$ as $q \to \theta^*$. So "how small can the residual of a finite-precision reading be" and "how well can rationals approximate $\theta^*$" are the same question, and the second is answered by the continued fraction of $\theta^*$. Since $\theta^*$ is irrational (item 2 of [@rem-banach-dottie-hairy-ball-literature]), every one of its convergents $a/b$ satisfies $\lvert\theta^* - a/b\rvert < 1/b^2$, and hence
+and the ratio $\lvert\cos q - q\rvert / \lvert q - \theta^*\rvert$ tends to $1 + \sin\theta^* = 1 + \lambda \approx 1.6736120$ as $q \to \theta^*$. So "how small can the residual of a finite-precision reading be" and "how well can rationals approximate $\theta^*$" are the same question. Furthermore, because $\theta^*$ is irrational (item 2 of [@rem-banach-dottie-hairy-ball-literature], by the Lindemann–Weierstrass theorem), standard Diophantine approximation guarantees that every continued-fraction convergent $a/b$ of $\theta^*$ satisfies $0 < \lvert\theta^* - a/b\rvert < 1/b^2$, and combining this with the mean-value bound above yields
 
 $$
 0 \;<\; \Bigl\lvert\cos\frac{a}{b} - \frac{a}{b}\Bigr\rvert \;<\; \frac{1 + \sin 1}{b^2}
 $$
 
-holds for infinitely many denominators $b$: the seam narrows like the square of the denominator, yet never closes.
+for infinitely many denominators $b$: the seam narrows like the square of the denominator, yet never closes.
+:::
 
 ::: {.example #ex-dottie-rate-newton-rational title="Numerical Check of the True Contraction Rate, Newton's Quadratic Closure, and the Residuals of the Best Rational Readings"}
-All values below were recomputed at 50 decimal digits and rounded to the digits shown; the partial quotients of the continued fraction are numerical observations, not theorems.
+**Literature result, not formalized in this book (all values below were recomputed at 50 decimal digits and rounded to the digits shown; the partial quotients of the continued fraction are numerical observations, not theorems).**
 
 **Successive error ratios tend to $-\sin\theta^*$.** Starting from $\theta_0 = 1$, with $\delta_k = \theta_k - \theta^*$:
 
@@ -502,10 +506,8 @@ where $\rho + i\alpha$ stands for its image in $\mathbb{R}/\mathbb{Z}$ and $\mu$
 The continuous functions for which the conclusion holds form a complex linear subspace $S$. First, every character $x \mapsto e^{2\pi i m x}$ lies in $S$: for $m = 0$ both sides equal $1$; for $m \neq 0$ the orbit average is a geometric sum with ratio $e^{2\pi i m\alpha}$ divided by $N$, and since $\alpha$ is irrational the ratio is not $1$, the geometric sum is bounded, the average tends to $0$, and the Haar integral of the character is $0$ as well (`fourier_average_tendsto`). Second, $S$ is closed under uniform convergence: the averaging functionals have norm at most $\lVert f\rVert_\infty$, so they form an equicontinuous family of linear functionals and pointwise limits are preserved on closed sets. Third, the linear span of the characters is dense in the space of continuous functions (`span_fourier_closure_eq_top`). Together the three steps show that $S$ consists of all continuous functions. The full proof is checked by the Lean kernel.
 :::
 
-Applying [@lem-irrational-rotation-equidistribution] to $\alpha = \frac{\theta^*}{2\pi}$, the required irrationality comes from [@rem-dottie-angle-incommensurable] (which depends on the Lindemann–Weierstrass theorem, a literature result); the equidistribution step itself no longer depends on the literature.
-
 ::: {.example #ex-dottie-orbit-seventeen title="The Orbit with Step θ*: Seventeen Steps Nearly Close It, Yet It Eventually Covers the Circle"}
-The values below were computed from closed-form geometric sums and checked by direct summation; the partial quotients of the continued fraction are numerical observations.
+(When instantiating [@lem-irrational-rotation-equidistribution] at $\alpha = \frac{\theta^*}{2\pi}$, the equidistribution theorem itself is kernel-verified, whereas the irrationality input $\alpha \notin \mathbb{Q}$ from [@rem-dottie-angle-incommensurable] is a **literature result, not formalized in this book**.) The values below were computed from closed-form geometric sums and checked by direct summation; the partial quotients of the continued fraction are numerical observations.
 
 **The near-closure after seventeen steps.** The continued fraction of $\frac{\theta^*}{2\pi} \approx 0.1176290523$ is $[0; 8, 1, 1, 191, 1, 1, \dots]$. The unusually large partial quotient $191$ makes the convergent $\frac{2}{17}$ exceptionally accurate:
 
@@ -534,13 +536,15 @@ Within a thousand steps, the orbit with step $\theta^*$ looks almost indistingui
 
 The question in the author's notes, *"Is $\pi$ a projection of $\theta$?"*, received at [@conj-schanuel-dottie] a conditional answer in the negative direction: under Schanuel's conjecture, no polynomial relation with integer coefficients holds between $\theta^*$ and $\pi$. But "no algebraic relation" is not "no relation". The answer in the positive direction is already inside the fixed-point equation and can be read off in one step.
 
-**The fixed point cuts the right angle in two.** For $x \in [0, 1]$, the unique solution of $\cos\theta = x$ on $[0, \pi/2]$ is $\theta = \arccos x = \frac{\pi}{2} - \arcsin x$. Substituting $x = \theta = \theta^*$:
+::: {.remark #rem-dottie-right-angle-split-literature title="The Fixed Point Cuts the Right Angle into Two Complementary Arcs (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** For $x \in [0, 1]$, the unique solution of $\cos\theta = x$ on $[0, \pi/2]$ is $\theta = \arccos x = \frac{\pi}{2} - \arcsin x$. Substituting $x = \theta = \theta^*$:
 
 $$
 \cos\theta^* = \theta^* \quad\Longleftrightarrow\quad \frac{\pi}{2} \;=\; \theta^* + \arcsin\theta^* .
 $$
 
 On the unit circle, the point $P = (\cos\theta^*, \sin\theta^*) = (\theta^*, \lambda)$ cuts the quarter arc of the first quadrant into two pieces. The lower piece, from $(1, 0)$ to $P$, has length $\theta^*$, which is exactly the abscissa of $P$; the upper piece, from $P$ to $(0, 1)$, has length $\arcsin\theta^*$. $P$ is the only point of this arc whose arc length equals its own abscissa.
+:::
 
 To express this arc as a rational power series, first expand its integral kernel.
 
@@ -554,8 +558,8 @@ $$
 Here $\operatorname{HasSum}$ specifies both convergence of the series and its sum.
 :::
 
-::: {.remark #rem-arcsin-series-derivation title="Integrating the Binomial Kernel: The Arcsine Series Including Its Endpoints"}
-Set
+::: {.remark #rem-arcsin-series-derivation title="Integrating the Binomial Kernel: The Arcsine Series Including Its Endpoints (Literature result, not formalized in this book)"}
+**Literature result, not formalized in this book.** Set
 
 $$
 c_n = \frac{\binom{2n}{n}}{4^n(2n+1)} \in \mathbb{Q}.
@@ -599,11 +603,6 @@ $$
 \qquad(\lvert x\rvert\le1).
 \end{aligned}
 $$
-:::
-
-[^arcsin-ftc]: Continuity and differentiation use Mathlib's `Real.continuous_arcsin` and `Real.hasDerivAt_arcsin`. The latter requires $t\ne-1$ and $t\ne1$, which hold for $0<t<y\le1$. Automatic integrability uses `intervalIntegral.intervalIntegrable_deriv_of_nonneg`, which requires continuity on the closed interval, the derivative on the open interval, and nonnegativity of that derivative. The integral identity uses `intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le`, requiring $0\le y$, the same continuity and open-interval derivative, and the interval integrability established in the previous step. Neither theorem requires a derivative at an endpoint.
-
-[^arcsin-dct]: Termwise integration uses Mathlib's `intervalIntegral.hasSum_integral_of_dominated_convergence`: each term is a measurable polynomial, bounded on the open interval by the nonnegative term $b_nt^{2n}$ itself. The sum of these bounds equals the integrable $g(t)$ almost everywhere. Integrating each finite polynomial gives the coefficient $b_n/(2n+1)=c_n$.
 
 Hence $\pi$ is the value at $\theta^*$ of a power series with rational coefficients:
 
@@ -612,9 +611,14 @@ $$
 $$
 
 The fixed-point hypotheses used here are $\theta^*\in[0,1]$ and $\cos\theta^*=\theta^*$. They supply the branch conditions $0\le\theta^*\le\pi$ required by `Real.arccos_cos`. Combining it with `Real.arccos_eq_pi_div_two_sub_arcsin` gives $\theta^*=\pi/2-\arcsin\theta^*$, hence $\pi=A(\theta^*)$.
+:::
 
-::: {.remark #rem-arcsin-interior-tail title="Geometric Truncation Bounds on Interior Intervals"}
-For every $N\in\mathbb{N}$, define
+[^arcsin-ftc]: Continuity and differentiation use Mathlib's `Real.continuous_arcsin` and `Real.hasDerivAt_arcsin`. The latter requires $t\ne-1$ and $t\ne1$, which hold for $0<t<y\le1$. Automatic integrability uses `intervalIntegral.intervalIntegrable_deriv_of_nonneg`, which requires continuity on the closed interval, the derivative on the open interval, and nonnegativity of that derivative. The integral identity uses `intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le`, requiring $0\le y$, the same continuity and open-interval derivative, and the interval integrability established in the previous step. Neither theorem requires a derivative at an endpoint.
+
+[^arcsin-dct]: Termwise integration uses Mathlib's `intervalIntegral.hasSum_integral_of_dominated_convergence`: each term is a measurable polynomial, bounded on the open interval by the nonnegative term $b_nt^{2n}$ itself. The sum of these bounds equals the integrable $g(t)$ almost everywhere. Integrating each finite polynomial gives the coefficient $b_n/(2n+1)=c_n$.
+
+::: {.remark #rem-arcsin-interior-tail title="Geometric Truncation Bounds on Interior Intervals (Literature result, not formalized in this book)"}
+**Literature result, not formalized in this book.** For every $N\in\mathbb{N}$, define
 
 $$
 \begin{aligned}
@@ -636,16 +640,10 @@ $$
 \end{aligned}
 $$
 
-These bounds include $N=0$, when the partial sum is empty, and $q=0$, when $x=0$ and both the remainder and the bound are zero. Convergence at $x=\pm1$ comes from the integral argument in [@rem-arcsin-series-derivation]; the geometric bound here applies only to $q<1$.
+These bounds include $N=0$, when the partial sum is empty, and $q=0$, when $x=0$ and both the remainder and the bound are zero. Convergence at $x=\pm1$ comes from the integral argument in [@rem-arcsin-series-derivation]; the geometric bound here applies only to $q<1$. For this chapter's $\theta^*\in(0,1)$, choose $\theta^*\le q<1$: for every tolerance $\varepsilon>0$, some $N$ makes $2q^{2N+1}/(1-q^2)<\varepsilon$, and hence $|\pi-A_N(\theta^*)|<\varepsilon$. The rational polynomial $A_N$ takes finitely many additions and multiplications to evaluate. This controls series truncation for an exact input; an actual computation also needs bounds for the input error in $\theta^*$, rounding, and computational resources.
 :::
 
-This gives “arbitrary precision” a precise truncation meaning. For this chapter's $\theta^*\in(0,1)$, choose $\theta^*\le q<1$. For every tolerance $\varepsilon>0$, some $N$ makes $2q^{2N+1}/(1-q^2)<\varepsilon$, and hence $|\pi-A_N(\theta^*)|<\varepsilon$. The rational polynomial $A_N$ takes finitely many additions and multiplications to evaluate. This controls series truncation for an exact input; an actual computation also needs bounds for the input error in $\theta^*$, rounding, and computational resources.
-
-**The reverse direction: reading $\theta^*$ from $\pi$.** The linear coefficient of $A$ at $0$ is $4 \neq 0$, so $A$ has a formal inverse $B = A^{-1}$, again an odd power series with rational coefficients. Order-by-order reversion gives
-
-$$
-B(y) \;=\; \frac{y}{4} - \frac{y^3}{768} - \frac{y^5}{61440} - \frac{43\,y^7}{165150720} - \frac{223\,y^9}{47563407360} - \cdots .
-$$
+**The reverse direction: reading $\theta^*$ from $\pi$.** The prescribed inverse series converges absolutely at $y=\pi$ with the exact sum given by [@thm-dottie-rational-inverse-endpoint]; its classical expansion and numerical partial sums are presented in [@ex-dottie-pi-series].
 
 ::: {.definition #def-dottie-rational-inverse title="The Prescribed Rational Arcsine Series and Its Formal Compositional Inverse" lean="D5/S3/Analytic/PowerSeries/DottieInverseSeries.alpha D5/S3/Analytic/PowerSeries/DottieInverseSeries.arcsine D5/S3/Analytic/PowerSeries/DottieInverseSeries.forward D5/S3/Analytic/PowerSeries/DottieInverseSeries.inverse"}
 For every $k\in\mathbb{N}$, define the rational coefficients
@@ -726,6 +724,12 @@ Finally, put $x=G(\pi/2)\in(-1,1)$. The equation $x+\sin x=\pi/2>0$ forces $x>0$
 :::
 
 ::: {.example #ex-dottie-pi-series title="Two Mutually Inverse Rational Series Linking π and θ*: Numerical Check of the Partial Sums"}
+**Literature result, not formalized in this book: the classical arcsine expansion, numerical partial sums, and term-ratio comparison in this example.** Because the linear coefficient of $A$ at $0$ is $4 \neq 0$, order-by-order reversion of $A$ gives the odd rational power series
+
+$$
+B(y) \;=\; \frac{y}{4} - \frac{y^3}{768} - \frac{y^5}{61440} - \frac{43\,y^7}{165150720} - \frac{223\,y^9}{47563407360} - \cdots .
+$$
+
 The series $B$ and the identity $\theta^* = B(\pi)$ are described by Kaplan (2007, *Mathematics Magazine* 80, "The Dottie Number"); [@thm-dottie-rational-inverse-endpoint] gives absolute convergence and the exact sum of this prescribed series at $\pi$. The expansion of $A$ is the classical arcsine series. The coefficients in the table were obtained by order-by-order reversion in exact rational arithmetic; the partial sums were computed at 50 digits and rounded to the digits shown. These table entries and the term ratios below remain numerical checks; the endpoint theorem does not certify their rounding accuracy or the comparison of convergence speeds.
 
 | truncation order | partial sum of $A$ (tends to $\pi$) | difference from $\pi$ | partial sum of $B$ (tends to $\theta^*$) | difference from $\theta^*$ |
@@ -741,18 +745,12 @@ The series $B$ and the identity $\theta^* = B(\pi)$ are described by Kaplan (200
 The ratio of successive terms of $A$ tends to $(\theta^*)^2 \approx 0.546$. The ratio of successive nonzero terms of $B$ rises from $0.12$ (order $5$) to $0.22$ (order $21$) and numerically approaches $1/4$: reading $\theta^*$ from $\pi$ converges faster than reading $\pi$ from $\theta^*$.
 :::
 
-So two statements hold together without contradiction: analytically, each of $\pi$ and $\theta^*$ is the value of a rational power series at the other; algebraically, under Schanuel's conjecture, no polynomial relation holds between them. $A$ and $B$ are infinite series, not polynomials; the finite truncations listed in the table all leave a nonzero difference. Nonvanishing of general truncation tails, a pattern of coefficient signs, and computational resource bounds are outside the endpoint theorem.
+So two statements hold together without contradiction: analytically, each of $\pi$ and $\theta^*$ is the value of a rational power series at the other ([@thm-dottie-rational-inverse-endpoint], [@ex-dottie-pi-series]); algebraically, under Schanuel's conjecture ([@conj-schanuel-dottie]), no polynomial relation holds between them. $A$ and $B$ are infinite series, not polynomials; the finite truncations listed in the table all leave a nonzero difference. Nonvanishing of general truncation tails, a pattern of coefficient signs, and computational resource bounds are outside the endpoint theorem.
 
-**Where the fixed point lives: the half-time of a cycloid.** The auxiliary equation $\eta + \sin\eta = \pi/2$ above does not come from nowhere. With $E = \pi - \eta$ it becomes
-
-$$
-E - \sin E \;=\; \frac{\pi}{2},
-$$
-
-which is Kepler's equation $M = E - e\sin E$ with eccentricity $e = 1$ and mean anomaly $M = \pi/2$, solved by $E = \frac{\pi}{2} + \theta^* \approx 132.35^\circ$. A Kepler orbit of eccentricity $1$ degenerates into a radial segment, and motion along it is free fall.
+**Where the fixed point lives: the half-time of a cycloid.** How the auxiliary equation $\eta + \sin\eta = \pi/2$ appears in Kepler's equation and Newtonian radial free fall is worked out in [@ex-dottie-free-fall].
 
 ::: {.example #ex-dottie-free-fall title="Half-Time Free Fall: When Half the Fall Time Has Elapsed, the Distance Remaining Is (1 + sin θ*)/2"}
-In Newtonian mechanics, a particle falls radially from rest at distance $r_0$ in the field of a central mass $M$. Energy conservation gives $\dot{r}^2 = 2GM\left(\frac{1}{r} - \frac{1}{r_0}\right)$, whose solution is the cycloid parametrization (a classical result):
+**Literature result, not formalized in this book.** Substituting $E = \pi - \eta$ into $\eta + \sin\eta = \pi/2$ from [@ex-dottie-pi-series] yields Kepler's equation $E - \sin E = \frac{\pi}{2}$ at eccentricity $e = 1$ and mean anomaly $M = \pi/2$, solved by $E = \frac{\pi}{2} + \theta^* \approx 132.35^\circ$. A Kepler orbit of eccentricity $1$ degenerates into a radial segment, corresponding in Newtonian mechanics to a particle falling radially from rest at distance $r_0$ in the gravitational field of a central mass $M$. Energy conservation gives $\dot{r}^2 = 2GM\left(\frac{1}{r} - \frac{1}{r_0}\right)$, whose solution is the cycloid parametrization:
 
 $$
 r(\eta) \;=\; \frac{r_0}{2}\,(1 + \cos\eta), \qquad t(\eta) \;=\; \frac{t_{\mathrm{ff}}}{\pi}\,(\eta + \sin\eta), \qquad \eta \in [0, \pi],
@@ -775,9 +773,9 @@ $$
 **Comparison and check.** At $t/t_{\mathrm{ff}} = \frac14, \frac12, \frac34$ the ratio $r/r_0$ equals $0.960937$, $0.836806$, $0.597150$ respectively; only the middle one has a closed form in terms of $\theta^*$. Numerical integration of $t(r) = \int_r^{r_0} \frac{\mathrm{d}r'}{\sqrt{2GM\left(\frac{1}{r'} - \frac{1}{r_0}\right)}}$ gives $t(0.836806\,r_0)/t_{\mathrm{ff}} = 0.500000$, in agreement with the closed form.
 
 The same parametric equations describe the closed dust Friedmann universe, with $r$ replaced by the scale factor and time reversed (literature result, not formalized in this book): halfway through its expansion phase in time, such a universe has already reached $83.68\%$ of its maximum size.
-:::
 
 Half the time is spent, yet less than one sixth of the distance is covered: the fall starts slowly, and most of the distance is travelled in the second half. And "half", the plainest of all division points, lands at a position given exactly by $\theta^*$. The cosine fixed point does not live only on the cosine key of a calculator; every process governed by the cycloid law — a radial Kepler orbit, free-fall collapse, a closed dust universe — reads it at the instant when half of its time has elapsed.
+:::
 
 
 ## 24.7 Where the Chase Stops: A Diagonal Landing Is a Fixed Point, and Existence Without Contraction {#sec-ch24-7}
@@ -841,7 +839,7 @@ Claim 3 of [@thm-self-application-fragment-package] is the skeleton of Cantor's 
 - when the twist has no fixed point, the chase never stops, and every listing is escaped;
 - once the chase stops, the value that the stopping row takes at its own address is a fixed point of the twist.
 
-Conversely, as soon as the twist $f$ has a fixed point $y^*$ and $A$ is nonempty, the listing that is constantly $y^*$ captures its own twisted diagonal (this step is a manual verification by direct substitution). Take $f = \cos$ and $Y = \mathbb{R}$: for any real-valued listing that captures its own cosine-twisted diagonal, the self-application value at the landing address satisfies $\cos y = y$, and by uniqueness of the real fixed point (item 1 of [@rem-banach-dottie-hairy-ball-literature], a literature result) it can only be $\theta^*$.
+Conversely, as soon as the twist $f$ has a fixed point $y^*$ and $A$ is nonempty, the listing that is constantly $y^*$ captures its own twisted diagonal (this step is a manual verification by direct substitution). Take $f = \cos$ and $Y = \mathbb{R}$: for any real-valued listing that captures its own cosine-twisted diagonal, the self-application value at the landing address satisfies the cosine fixed-point equation $\cos y = y$ (for its classical real-analytic properties, see [@rem-banach-dottie-hairy-ball-literature]).
 
 In the finite case, the shares of escape and capture can be counted exactly.
 
@@ -901,9 +899,9 @@ The two mechanisms divide the work cleanly, and the diagonal adds a third piece.
 
 Across the four chapters of Part VI, backed by **thirty-three Lean-verified theorem blocks** (seven in Chapter 21, eight in Chapter 22, four in Chapter 23, and fourteen in Chapter 24), we have brought mathematical logic, prime spectral theory, Diophantine norm locks, and self-referential fixed points under one geometric roof:
 
-- **Chapter 21** proved that any complete decoder catalog produces a relative semantic diagonal that is discontinuous in the latent partition topology ([@thm-complete-diagonal-not-continuous]), has a nonempty separation deficit ([@lem-complete-diagonal-separation-deficit]), and forces strict observation-topology refinement when adjoined ([@prop-complete-diagonal-strict-refinement], [@cor-complete-diagonal-topological-settlement]), gave the factorial remainder bound for the exponential series in a complete normed algebra ([@lem-exp-tail-le]) and the strictly positive cosine lower bound on the recovery error of a finite-record channel ([@lem-finite-support-autocorrelation-cosine], [@thm-finite-record-cosine-obstruction]), paired with Taylor remainder seams $R_{2N}(\theta)$, Descartes's $12 \times 60^\circ = 720^\circ = 4\pi$ polyhedral angular defect, the Hairy Ball Theorem, and Adams's parallelizable spheres $S^0, S^1, S^3, S^7$ ([@rem-hairy-ball-adams-literature]);
-- **Chapter 22** revealed primes as the orthogonal basis of arithmetic and established on the explicit half-plane $\operatorname{Re}(s) > 1$ the unit residue at $s = 1$ ([@lem-riemann-zeta-residue-one]), the Dirichlet series ([@prop-riemann-zeta-dirichlet-sum]), the Euler prime product ([@thm-riemann-zeta-euler-product]), their direct equality ([@cor-dirichlet-sum-eq-euler-product]), the entirety and reflection symmetry $\xi(1 - s) = \xi(s)$ of the completed xi reading ([@thm-xi-reading-entire-reflection]) together with its conjugation covariance ([@prop-zeta-conjugation-covariance]), the rolling of the critical line into the unit circle with a radial equivalent of the Riemann Hypothesis ([@thm-cayley-critical-line-criterion]), and a quartic polynomial showing that full symmetry does not pin zeros to the critical line ([@thm-full-symmetry-not-localization]), alongside the polyhedral prime-sieve remainder and the epistemic boundary of the open Riemann Hypothesis ([@conj-riemann-hypothesis], [@rem-euler-zeta-literature]);
-- **Chapter 23** showed how quadratic norms and traces isolate discrete integer lattices, proving unimodular shear reduction, constant discriminant $\Delta = -3$, and range invariance for the Eisenstein crossing family ([@thm-qform-eq-eisnorm], [@lem-qform-discriminant], [@cor-qform-range-eq-eisnorm]) together with the $\Delta = +5$ Golden Pell trace–norm identity ([@prop-pell-form-eq-four-mul-norm]), and auditing Koenigsmann's 2016 $\forall$/$\forall\exists$ first-order definition of $\mathbb{Z}$ in $\mathbb{Q}$ vs. the open existential problem $\mathrm{H10}(\mathbb{Q})$ ([@rem-diophantine-z-in-q-literature]);
-- **Chapter 24** proved finite contracting set stabilization and strict-change bounds ([@thm-finite-contracting-updates-stabilize]), adjacent-step agreement and static contextual non-uniqueness (identical text and interpretation rule under two distinct static contexts yield different fixed Boolean meanings, [@lem-conceptual-equivalence-stability-fixed-point], [@prop-context-parameters-distinct-fixed-points]), uniqueness of the positive golden fixed point ([@cor-golden-fixed-point-unique]), the four self-application fates of nondegenerate binary fractional maps with the $\varphi$-family as the only live one ([@thm-self-application-four-fates], [@lem-golden-inverse-branch-fixed-point]), the golden cosines of the regular pentagon ([@prop-pentagon-golden-cosines]), the diagonal landing as a fixed point of the twist together with universal escape for fixed-point-free twists and its finite count ([@lem-diagonal-landing-fixed], [@thm-self-application-fragment-package], [@prop-escaped-listing-card]), Brouwer's fixed-point theorem on the standard simplex ([@thm-brouwer-standard-simplex]), the convergence of orbit averages of an irrational rotation to the Haar average ([@lem-irrational-rotation-equidistribution]), and the normalized central-binomial coefficient bounds and binomial-kernel series used in the arcsine expansion ([@lem-arcsin-binomial-kernel]), established absolute convergence and the signed sum of the prescribed rational compositional inverse at $\pi$, together with uniqueness of the cosine fixed point among all positive reals ([@thm-dottie-rational-inverse-endpoint]), culminating in Banach contraction on $[0, 1]$, Lindemann–Weierstrass transcendence ($|\cos q - q| > 0$), Schanuel's conjecture ([@conj-schanuel-dottie], [@rem-banach-dottie-hairy-ball-literature]), and the self-referential synthesis $\psi = \psi(\psi)$.
+- **Chapter 21** proved that any complete decoder catalog produces a relative semantic diagonal that is discontinuous in the latent partition topology ([@thm-complete-diagonal-not-continuous]), has a nonempty separation deficit ([@lem-complete-diagonal-separation-deficit]), and forces strict observation-topology refinement when adjoined ([@prop-complete-diagonal-strict-refinement], [@cor-complete-diagonal-topological-settlement]), gave the factorial remainder bound for the exponential series in a complete normed algebra ([@lem-exp-tail-le]) and the strictly positive cosine lower bound on the recovery error of a finite-record channel ([@lem-finite-support-autocorrelation-cosine], [@thm-finite-record-cosine-obstruction]), paired with the classical analytic-remainder and spherical-topology literature remarks ([@rem-lagrange-taylor-remainder-literature], [@rem-hairy-ball-adams-literature]);
+- **Chapter 22** revealed primes as the orthogonal basis of arithmetic and established on the explicit half-plane $\operatorname{Re}(s) > 1$ the unit residue at $s = 1$ ([@lem-riemann-zeta-residue-one]), the Dirichlet series ([@prop-riemann-zeta-dirichlet-sum]), the Euler prime product ([@thm-riemann-zeta-euler-product]), their direct equality ([@cor-dirichlet-sum-eq-euler-product]), the entirety and reflection symmetry $\xi(1 - s) = \xi(s)$ of the completed xi reading ([@thm-xi-reading-entire-reflection]) together with its conjugation covariance ([@prop-zeta-conjugation-covariance]), the rolling of the critical line into the unit circle with a radial equivalent of the Riemann Hypothesis ([@thm-cayley-critical-line-criterion]), and a quartic polynomial showing that full symmetry does not pin zeros to the critical line ([@thm-full-symmetry-not-localization]), alongside the polyhedral prime-sieve remainder and the epistemic boundary of the open Riemann Hypothesis and classical zeta literature ([@conj-riemann-hypothesis], [@rem-euler-zeta-literature]);
+- **Chapter 23** showed how quadratic norms and traces isolate discrete integer lattices, proving unimodular shear reduction, constant discriminant $\Delta = -3$, and range invariance for the Eisenstein crossing family ([@thm-qform-eq-eisnorm], [@lem-qform-discriminant], [@cor-qform-range-eq-eisnorm]) together with the $\Delta = +5$ Golden Pell trace–norm identity ([@prop-pell-form-eq-four-mul-norm]), and delineating in [@rem-diophantine-z-in-q-literature] the boundary between first-order definability literature over $\mathbb{Q}$ and the open existential problem $\mathrm{H10}(\mathbb{Q})$;
+- **Chapter 24** proved finite contracting set stabilization and strict-change bounds ([@thm-finite-contracting-updates-stabilize]), adjacent-step agreement and static contextual non-uniqueness (identical text and interpretation rule under two distinct static contexts yield different fixed Boolean meanings, [@lem-conceptual-equivalence-stability-fixed-point], [@prop-context-parameters-distinct-fixed-points]), uniqueness of the positive golden fixed point ([@cor-golden-fixed-point-unique]), the four self-application fates of nondegenerate binary fractional maps with the $\varphi$-family as the only live one ([@thm-self-application-four-fates], [@lem-golden-inverse-branch-fixed-point]), the golden cosines of the regular pentagon ([@prop-pentagon-golden-cosines]), the diagonal landing as a fixed point of the twist together with universal escape for fixed-point-free twists and its finite count ([@lem-diagonal-landing-fixed], [@thm-self-application-fragment-package], [@prop-escaped-listing-card]), Brouwer's fixed-point theorem on the standard simplex ([@thm-brouwer-standard-simplex]), the convergence of orbit averages of an irrational rotation to the Haar average ([@lem-irrational-rotation-equidistribution]), and the normalized central-binomial coefficient bounds and binomial-kernel series used in the arcsine expansion ([@lem-arcsin-binomial-kernel]), established absolute convergence and the signed sum of the prescribed rational compositional inverse at $\pi$, together with uniqueness of the cosine fixed point among all positive reals ([@thm-dottie-rational-inverse-endpoint]), culminating — alongside the classical fixed-point and transcendence literature remark ([@rem-banach-dottie-hairy-ball-literature]) and Schanuel's conjecture ([@conj-schanuel-dottie]) — in $\cos\theta^* = \theta^*$ and the self-referential synthesis $\psi = \psi(\psi)$.
 
 With the theoretical arch of Parts I–VI in place, **Part VII (*Construction and Verification — XOR Algebra, Rotor Compilation, and the Lean 4 Axiom Sanctuary*)** turns these geometric laws into executable matrix-free bitmask Clifford engines and ZYZ rotor compilers, and steps inside the Lean 4 formal sanctuary to audit the frozen proof architecture before **Part VIII** and the **Coda** bring the entire eight-part monograph together.

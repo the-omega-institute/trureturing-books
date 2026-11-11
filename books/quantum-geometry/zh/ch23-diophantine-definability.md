@@ -8,9 +8,9 @@
 
 如果只允许你使用有理数的加法 $+$、乘法 $\times$、常数 $0, 1$ 以及逻辑量词（即一阶域语言 $\mathcal{L}_{\mathrm{ring}} = \{+, -, \times, 0, 1\}$），完全不准事先偷看“分子分母是否整除”的外部标签，你能不能仅凭多项式方程在有理数大海 $\mathbb{Q}$ 里把整数集 $\mathbb{Z}$ 精准地筛选出来？
 
-更令人拍案叫绝的是：当数学家从 Julia Robinson（1949）、Bjorn Poonen（2009）一路探索到 Jochen Koenigsmann（2016）的里程碑工作时，用来在有理数域 $\mathbb{Q}$ 中给整数 $\mathbb{Z}$“上锁”的核心几何工具，竟然恰恰是我们全书反复锤炼的老朋友——**四元数代数（quaternion algebras）的约化范数球面 $\operatorname{Nrd}(\alpha)$ 与约化迹投影 $\operatorname{Trd}(\alpha)$**，以及二元二次范数型的判别式不变量！
+更令人拍案叫绝的是：在现代算术几何的一阶可定义性文献中（见章末 [@rem-diophantine-z-in-q-literature]），数学家用来在有理数域 $\mathbb{Q}$ 中刻画整数骨架的核心几何工具，恰恰是我们全书反复锤炼的老朋友——**四元数代数（quaternion algebras）的约化范数球面 $\operatorname{Nrd}(\alpha)$ 与约化迹投影 $\operatorname{Trd}(\alpha)$**，以及二元二次范数型的判别式不变量！
 
-本章将沿着“范数球面与迹投影如何锁住离散整格”这一主线，首先在 Lean 4 中严格建立两条最核心的二次代数整数范数锁——判别式恒为 $\Delta = -3$ 的**艾森斯坦（Eisenstein / Löschian）六角交越范数型**与判别式为 $\Delta = +5$ 的**黄金整数佩尔（Pell）迹—范数恒等式**；随后在第三层认识论边界审计中，精确剖析 Koenigsmann（2016）关于 $\mathbb{Z}$ 在 $\mathbb{Q}$ 中的一阶可定义性定理、量词前缀（$\forall$、$\forall\exists$ 与存在性丢番图 $\exists$）的本质分野，以及它与希尔伯特第十问题 $\mathrm{H10}(\mathbb{Q})$ 的深刻关联。
+本章将沿着“范数球面与迹投影如何锁住离散整格”这一主线，首先在 Lean 4 中严格建立两条最核心的二次代数整数范数锁——判别式恒为 $\Delta = -3$ 的**艾森斯坦（Eisenstein / Löschian）六角交越范数型**与判别式为 $\Delta = +5$ 的**黄金整数佩尔（Pell）迹—范数恒等式**；随后在第三层认识论边界审计框（[@rem-diophantine-z-in-q-literature]）中，剖析有理数域中一阶定义整数集的文献脉络、量词前缀（$\forall$、$\forall\exists$ 与存在性丢番图 $\exists$）的本质分野，以及它与希尔伯特第十问题 $\mathrm{H10}(\mathbb{Q})$ 的关联。
 
 ![有理数中的整数骨架与范数锁：艾森斯坦交越二次型剪切不变性（Δ = -3）、黄金整数佩尔双曲线迹—范数桥（Δ = +5）与四元数范数在 ℚ 中定义 ℤ 的文献全景](../assets/fig-23-quaternion-norm-lattice.svg)
 
@@ -199,15 +199,10 @@ $$
 \operatorname{Nrd}(\alpha) = \alpha\bar{\alpha} = x_0^2 - a x_1^2 - b x_2^2 + ab x_3^2.
 $$
 
-为什么四元数范数 $\operatorname{Nrd}(\alpha)$ 能够胜任二元二次型做不到的全局锁定工作？
-
-1. **Hasse–Minkowski 局部—整体原理与有限素数分歧集**：根据代数数论中的 Hasse–Minkowski 定理，一个四元二次型在 $\mathbb{Q}$ 上是否有非零解，完全取决于它在实数域 $\mathbb{R}$ 以及每一个素数 $p$ 对应的 $p$-进数域 $\mathbb{Q}_p$（局部完备化球面）上是否都有解。通过调节四元数代数的参数 $(a, b)$，我们可以控制该四元数代数恰好在指定的素数集合上“分歧”（ramify，成为除法代数，其范数球面退化为无非平凡零点），从而把单个素数 $p$ 处的**局部整性条件**（即有理数在素数 $p$ 处分母不含 $p$，属于局部整环 $\mathbb{Z}_{(p)}$）编码进四元数范数与迹构成的二次型可解性条件中！
-2. **用迹与范数一次性扫过全部素数 $p$**：如果对每一个素数 $p$ 单独写一条局部整性条件，需要无穷多条公式；但利用二次互反律与四元数序的迹—范数配对，Julia Robinson（1949）、Bjorn Poonen（2009）与 Jochen Koenigsmann（2016）证明了：可以用有限个有理参数遍历所有四元数代数，并通过 $\bigcap_{p \text{ prime}} \mathbb{Z}_{(p)} = \mathbb{Z}$ 将所有素数处的局部整锁合拢为全局整数集 $\mathbb{Z}$！
-
-在这里，我们必须以最严苛的数学诚实，讲清楚**“丢番图（Diophantine / 存在性 $\exists$）”**与**“一阶可定义（first-order definable / 全称 $\forall$ 或 $\forall\exists$）”**之间生死攸关的量词边界。请仔细阅读下面的文献边界审计。
+四元数范数 $\operatorname{Nrd}(\alpha)$ 如何在 $\mathbb{Q}$ 上完成局部—整体锁定，以及“存在性丢番图（$\exists$）”与“一阶可定义（$\forall$ 或 $\forall\exists$）”之间的量词边界，全部汇总于下面的文献边界审计框中（[@rem-diophantine-z-in-q-literature]）。
 
 ::: {.remark #rem-diophantine-z-in-q-literature title="Koenigsmann (2016) 在 ℚ 中一阶定义 ℤ 的量词结构、四元数范数锁与希尔伯特第十问题边界审计（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 关于“在有理数域 $\mathbb{Q}$ 中定义整数集 $\mathbb{Z}$”的研究脉络、量词复杂度及与本章四个冻结 Lean 定理的严格边界如下：
+**文献结果，未在本书形式化。** 四元数约化范数 $\operatorname{Nrd}(\alpha)$ 之所以能胜任二元二次型做不到的全局锁定工作，核心依赖两条代数数论机制：(a) **Hasse–Minkowski 局部—整体原理与有限素数分歧集**——四元二次型在 $\mathbb{Q}$ 上有非零解当且仅当它在 $\mathbb{R}$ 与每个 $p$-进数域 $\mathbb{Q}_p$ 上都有解，调节参数 $(a, b)$ 可控制四元数代数在指定素数集合上分歧，把单个素数 $p$ 处的局部整性条件 $t \in \mathbb{Z}_{(p)}$ 编码进迹—范数二次型可解性；(b) **二次互反律与四元数序遍历全部素数**——由 Robinson（1949）、Poonen（2009）与 Koenigsmann（2016）建立的参数化技巧，可用有限个有理参数同时扫过全部素数，经 $\bigcap_{p \text{ prime}} \mathbb{Z}_{(p)} = \mathbb{Z}$ 合拢为全局整数集。关于该研究脉络、量词复杂度及与本章四个冻结 Lean 定理的严格边界如下：
 
 1. **概念澄清：丢番图定义（$\exists$）与一般一阶可定义性（$\forall, \forall\exists, \dots$）的严格区分**：
    - 在数理逻辑与算术几何中，域 $K$ 的一个子集 $S \subseteq K$ 称为在 $K$ 中是**丢番图的（Diophantine，即存在性可定义的 $\exists$）**，是指存在整系数（或 $K$-系数）多项式 $P(t, x_1, \dots, x_m)$，使得
@@ -240,4 +235,4 @@ $$
 
 至此，在第六部的前三章里，我们已经走过了逻辑的逃逸（第 21 章）、素数的正交基（第 22 章）与整数的范数骨架（第 23 章）。现在，整部《量子计算的几何直觉》前六部的全部线索，终于要在第六部的压轴之章——[第二十四章](ch24-cosine-fixed-points-and-self-reference.md)——汇聚成那道终极的闪电：
 
-当丈量的算子（$\cos$）不再向外寻找别的刻度，而是拿自己丈量出的相融投影当场作为下一轮张开的角度（$\cos\theta = \theta$），那个名叫 $\cos$ 的外衣究竟是从哪里生出来的？为什么它会收敛到唯一的超越数不动点 $\theta^* \approx 0.7390851332$，并在自指的尽头化作 $\psi = \psi(\psi)$？让我们翻开[第二十四章](ch24-cosine-fixed-points-and-self-reference.md)。
+当丈量的算子（$\cos$）不再向外寻找别的刻度，而是拿自己丈量出的相融投影当场作为下一轮张开的角度（$\cos\theta = \theta$），那个名叫 $\cos$ 的外衣究竟是从哪里生出来的？余弦自指不动点 $\theta^* \approx 0.7390851332$（其经典分析与超越数论性质见第二十四章文献注记）又是如何在自指的尽头化作 $\psi = \psi(\psi)$ 的？让我们翻开[第二十四章](ch24-cosine-fixed-points-and-self-reference.md)。

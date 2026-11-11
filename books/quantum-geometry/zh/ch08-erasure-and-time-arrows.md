@@ -13,7 +13,7 @@
 作为第二部《展翼·从线到面》的收官之章，本章将用四条经 Lean 4 内核验证的形式化定理，彻底算清这笔“从二维面积压扁成一维线”的信息与热力学总账：
 
 1. **幺正旋转不产熵，唯有基捏合抹除面积才产熵**：每一步“幺正旋转 $U$ $+$ 计算基对角捏合 $\Pi$”所产生的系统冯·诺依曼熵增 $\Delta S_{\mathrm{pinch}} = S(\Pi(U\rho U^*)) - S(\rho)$，一分不差地等于被抹除的横向相干面积的量子相对熵 $D(U\rho U^* \,\|\, \Pi(U\rho U^*)) \ge 0$；
-2. **抹平 $1$ 比特正交面积产生 $\ln 2$ 奈特熵增，而将混合态重置回纯态则触发兰道尔热耗散**：在相互无偏基（MUB）下将 $d$ 维记录态保单位捏合抹平到最大混合态 $I_d/d$，系统的相对熵代价与冯·诺依曼熵增恒为 $\ln d - S(\rho)$（对单比特纯态恰为 $\ln 2 \approx 0.6931\text{ nats} = 1\text{ bit}$）；而在随后的非保单位重置步骤中，将这 $\ln 2$ 奈特的混合熵压缩回纯参考态 $\lvert 0\rangle\langle 0\rvert$，按经典与量子热力学文献（[@rem-landauer-thermodynamic-bridge-literature]）至少必须向温度为 $T$ 的热浴排放 $\Delta Q \ge k_B T \ln 2$ 的热量；
+2. **抹平 $1$ 比特正交面积产生 $\ln 2$ 奈特系统熵增，并与非保单位兰道尔热浴重置严格区分**：在相互无偏基（MUB）下将 $d$ 维记录态保单位捏合抹平到最大混合态 $I_d/d$，系统的相对熵代价与冯·诺依曼熵增恒为 $\ln d - S(\rho)$（对单比特纯态恰为 $\ln 2 \approx 0.6931\text{ nats} = 1\text{ bit}$）；至于随后的非保单位逻辑重置如何将系统混合熵排入外部热浴，则见热力学文献注记 [@rem-landauer-stage-b-statement-literature] 与 [@rem-landauer-thermodynamic-bridge-literature]；
 3. **连观察者结构都没有任何例外**：哪怕观察者拥有通天神通，把环境中绝大多数纠缠副本都做了相干逆转，只要茫茫宇宙里还漏掉**唯一一份**未逆转的幸存环境副本 $k$（其记录重叠度 $\neq 1$，且其余已逆转副本具幺模重叠度），初始非零相干面积就绝不可能复原！
 
 ## 8.1 幺正旋转的可逆性 vs. 信息擦除的不可逆性 {#sec-unitary-reversibility-vs-erasure}
@@ -57,14 +57,15 @@ $$
 \Delta S_{\mathrm{pinch}} = S(\sigma) - S(\rho) = D(\rho \,\|\, \omega) = \ln 2 \text{ nats} \;\;(\text{即整整 } 1\text{ bit})!
 $$
 
-## 8.2 相干擦除产熵与兰道尔原理（$\Delta Q \ge k_B T \ln 2$）的两阶段几何图景 {#sec-landauer-principle-geometry}
+## 8.2 相干擦除产熵与兰道尔原理的两阶段几何图景 {#sec-landauer-principle-geometry}
 
-1961 年，IBM 物理学家罗尔夫·兰道尔（Rolf Landauer）提出了一条震撼计算机科学与热力学的著名原理——**兰道尔原理（Landauer's principle）**：“信息是物理的（Information is physical）”，在温度为 $T$ 的环境中每不可逆地擦除 $1$ 比特信息，至少必须向环境排放 $\Delta Q \ge k_B T \ln 2$ 的热量。
+从纯量子叠加态出发完成一次完整的“未读测量 $+$ 寄存器重置”包含两个截然不同但首尾相接的阶段，必须将本书形式化的**阶段 A（保单位基捏合 / 相干面积抹除）**与外部物理文献中的**阶段 B（非保单位逻辑重置 / 热浴排热）**严格区分：
 
-在量子热力学与信息论中，从纯量子叠加态出发完成一次完整的“未读测量 $+$ 寄存器重置”包含两个截然不同但首尾相接的阶段，必须严格区分：
+- **阶段 A（保单位基捏合 / 相干面积抹除，在本书 Lean 模块中严格形式化）**：可逆的幺正门 $U$ 先把状态旋转为 $\rho_U := U\rho U^*$（[`unitaryConjugateState`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.unitaryConjugateState)），此时本征值谱不变、冯·诺依曼熵一丝未增（$S(\rho_U) = S(\rho)$）；紧接着执行计算基对角捏合 $\Pi(\rho_U) := \operatorname{basisPinchingState}(\rho_U)$（[`basisPinchingState`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.basisPinchingState)，其对角香农熵公式见 [`von_neumann_entropy_basisPinchingState`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.von_neumann_entropy_basisPinchingState)），把横向副对角相干面积拍扁到对角线上。阶段 A（[@thm-entropy-production-coherence-deletion]，[`entropy_production_coherence_deletion_identity`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity)）严格证明的是计算基保单位捏合（$\Pi(I_n) = I_n$）下的**无量纲系统冯·诺依曼熵增** $\Delta S_{\mathrm{pinch}} = S(\Pi(\rho_U)) - S(\rho) = D(\rho_U \,\|\, \Pi(\rho_U)) \ge 0$（对单比特 $\lvert +\rangle\langle +\rvert \mapsto \frac{1}{2}I_2$ 恰为 $+\ln 2$ 奈特），该形式化定理本身不指定系统哈密顿量、外部热浴或兰道尔重置热耗（见 [@rem-landauer-thermodynamic-bridge-literature]）。
 
-1. **阶段 A（保单位基捏合 / 相干面积抹除，在本书 Lean 模块中严格形式化）**：可逆的幺正门 $U$ 先把状态旋转为 $\rho_U := U\rho U^*$（[`unitaryConjugateState`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.unitaryConjugateState)），此时本征值谱不变、冯·诺依曼熵一丝未增（$S(\rho_U) = S(\rho)$）；紧接着执行计算基对角捏合 $\Pi(\rho_U) := \operatorname{basisPinchingState}(\rho_U)$（[`basisPinchingState`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.basisPinchingState)，其对角香农熵公式见 [`von_neumann_entropy_basisPinchingState`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.von_neumann_entropy_basisPinchingState)），把横向副对角相干面积拍扁到对角线上。阶段 A（[@thm-entropy-production-coherence-deletion]，[`entropy_production_coherence_deletion_identity`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity)）严格证明的是计算基保单位捏合（$\Pi(I_n) = I_n$）下的**无量纲系统冯·诺依曼熵增** $\Delta S_{\mathrm{pinch}} = S(\Pi(\rho_U)) - S(\rho) = D(\rho_U \,\|\, \Pi(\rho_U)) \ge 0$（对单比特 $\lvert +\rangle\langle +\rvert \mapsto \frac{1}{2}I_2$ 恰为 $+\ln 2$ 奈特），该形式化定理本身不指定系统哈密顿量、外部热浴或兰道尔重置热耗（在物理文献与模型层面，若要将去相干实现为零热量交换过程，还需额外假设简并系统哈密顿量 $H_S \propto I_n$，见 [@rem-landauer-thermodynamic-bridge-literature]）；
-2. **阶段 B（非保单位逻辑重置 / 兰道尔热浴排热，作为物理文献结果在 [@rem-landauer-thermodynamic-bridge-literature] 中引述）**：要想把已被捏合混化的寄存器状态（如 $\frac{1}{2}I_2$，$S = \ln 2$）重新清洗回纯参考态 $\lvert 0\rangle\langle 0\rvert$（$S = 0$）以便下一轮计算复用，必须把阶段 A 累积在系统内部的混合熵压缩掉（$\Delta S_S := S(\rho_{\mathrm{init}}) - S(\rho_{\mathrm{final}}) = +\ln 2$）。根据兰道尔原理与 Reeb–Wolf 有限热浴恒等式 $\beta\Delta Q_{\mathrm{bath}} = \Delta S_S + I(S':E') + D(\rho_E'\,\|\,\rho_E) \ge \Delta S_S$，这笔在阶段 A 中由相干面积转化而来的 $\ln 2$ 奈特熵增，最终在阶段 B 的重置过程中必须化作至少 $\Delta Q_{\min} = k_B T \ln 2$ 的焦耳热量排入温度为 $T$ 的环境热浴！
+::: {.remark #rem-landauer-stage-b-statement-literature title="阶段 B：兰道尔原理与有限热浴重置排热（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 1961 年，IBM 物理学家罗尔夫·兰道尔（Rolf Landauer）提出计算热力学的基本原理——**兰道尔原理（Landauer's principle）**：“信息是物理的（Information is physical）”，在温度为 $T$ 的环境中每不可逆地擦除 $1$ 比特信息，至少必须向环境排放 $\Delta Q \ge k_B T \ln 2$ 的热量。在**阶段 B（非保单位逻辑重置 / 兰道尔热浴排热，详注见 [@rem-landauer-thermodynamic-bridge-literature]）**中，要想把已被阶段 A 捏合混化的寄存器状态（如 $\frac{1}{2}I_2$，$S = \ln 2$）重新清洗回纯参考态 $\lvert 0\rangle\langle 0\rvert$（$S = 0$）以便下一轮计算复用，必须把阶段 A 累积在系统内部的混合熵压缩掉（$\Delta S_S := S(\rho_{\mathrm{init}}) - S(\rho_{\mathrm{final}}) = +\ln 2$）。根据兰道尔原理与 Reeb–Wolf 有限热浴恒等式 $\beta\Delta Q_{\mathrm{bath}} = \Delta S_S + I(S':E') + D(\rho_E'\,\|\,\rho_E) \ge \Delta S_S$，这笔在阶段 A 中由相干面积转化而来的 $\ln 2$ 奈特熵增，最终在阶段 B 的重置过程中必须化作至少 $\Delta Q_{\min} = k_B T \ln 2$ 的焦耳热量排入温度为 $T$ 的环境热浴。
+:::
 
 在 Lean 模块 `Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity` 中，由对角函数演算定理 [`cfc_diagonal`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.cfc_diagonal)、[`cfc_log_diagonal`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.cfc_log_diagonal) 与捏合态熵展开 [`von_neumann_entropy_basisPinchingState`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.von_neumann_entropy_basisPinchingState) 汇成了下面这条主定理：**沿着任意由“幺正旋转 $U$ $+$ 计算基对角捏合 $\Pi$”迭代生成的离散演化序列 $\rho(k+1) = \Pi(U\rho(k)U^*)$，每一步的系统冯·诺依曼熵增都精确等于该步被抹除的横向相干面积相对熵 $D\bigl(\rho_U(k) \,\big\|\, \Pi(\rho_U(k))\bigr) \ge 0$，且前 $N$ 步的累积总熵增精确等于各步相干擦除相对熵之和！**
 
@@ -107,20 +108,22 @@ $$
      $$
      \Delta S_{\mathrm{pinch}} = S\bigl(\Pi(\rho_H)\bigr) - S(\rho_0) = D\Bigl(\lvert +\rangle\langle +\rvert \,\Big\|\, \frac{1}{2}I_2\Bigr) = \ln 2 \approx 0.693147\text{ nats} = 1\text{ bit}.
      $$
-3. **阶段 B（非保单位逻辑重置 $\frac{1}{2}I_2 \mapsto \lvert 0\rangle\langle 0\rvert$ 与室温热浴排热 $T = 300\text{ K}$，文献结果参见 [@rem-landauer-thermodynamic-bridge-literature]）**：
+3. **阶段 B（非保单位逻辑重置 $\frac{1}{2}I_2 \mapsto \lvert 0\rangle\langle 0\rvert$ 与室温热浴排热 $T = 300\text{ K}$；文献结果，未在本书形式化，参见 [@rem-landauer-thermodynamic-bridge-literature]）**：
    要将阶段 A 产生的最大混合态 $\frac{1}{2}I_2$（$S = \ln 2$）重新擦除重置回纯态 $\lvert 0\rangle\langle 0\rvert$（$S = 0$），必须把系统的熵压缩掉 $\Delta S_S = S(\frac{1}{2}I_2) - S(\lvert 0\rangle\langle 0\rvert) = +\ln 2$。按兰道尔原理与 Reeb–Wolf 有限热浴不等式 $\beta\Delta Q_{\mathrm{bath}} \ge \Delta S_S = \ln 2$，乘以玻尔兹曼常数 $k_B \approx 1.380649 \times 10^{-23}\text{ J/K}$ 与室温 $T = 300\text{ K}$，向环境热浴排出的最小物理热量为
    $$
    \Delta Q_{\min} = k_B T \ln 2 \approx (1.380649 \times 10^{-23}\text{ J/K}) \times (300\text{ K}) \times 0.693147 \approx 2.87 \times 10^{-21}\text{ J}\;(\approx 17.9\text{ meV}).
    $$
 :::
 
-[@ex-landauer-one-bit-ledger] 的阶段 B 直接引用了不等式 $\beta\Delta Q_{\mathrm{bath}} \ge \Delta S_S$。这条不等式并不是一步得来的，它背后有一张三行的账。前两行是物理输入，第三行是由它们推出的结论：
+::: {.remark #rem-density-matrix-balance-inputs-literature title="密度矩阵层面的热浴平衡与幺正平衡（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** [@ex-landauer-one-bit-ledger] 的阶段 B 引用了不等式 $\beta\Delta Q_{\mathrm{bath}} \ge \Delta S_S$，其背后是一张三行的账单（密度矩阵层面的物理背景详见 [@rem-landauer-thermodynamic-bridge-literature]）：
 
-- **热浴平衡**：热浴吸收的热量（乘以逆温度）等于热浴的熵变加上热浴被推离平衡的相对熵，$\beta Q = \Delta S_{\mathrm{res}} + D$；
-- **幺正平衡**：系统与热浴初始无关联、联合演化是幺正的，所以末态互信息等于两边熵变之和，$I = \Delta S_{\mathrm{sys}} + \Delta S_{\mathrm{res}}$；
-- **结论**：消去 $\Delta S_{\mathrm{res}}$，得 $\beta Q = -\Delta S_{\mathrm{sys}} + I + D$。
+- **热浴平衡（文献输入）**：热浴吸收的热量（乘以逆温度）等于热浴的熵变加上热浴被推离平衡的相对熵，$\beta Q = \Delta S_{\mathrm{res}} + D$；
+- **幺正平衡（文献输入）**：系统与热浴初始无关联、联合演化是幺正的，所以末态互信息等于两边熵变之和，$I = \Delta S_{\mathrm{sys}} + \Delta S_{\mathrm{res}}$；
+- **代数推论**：消去 $\Delta S_{\mathrm{res}}$，得 $\beta Q = -\Delta S_{\mathrm{sys}} + I + D$（其中 $\Delta S_{\mathrm{sys}}$ 为末减初的系统熵变化量，故 $-\Delta S_{\mathrm{sys}}$ 即 [@ex-landauer-one-bit-ledger] 中的系统熵减 $\Delta S_S$）。
+:::
 
-这里 $\Delta S_{\mathrm{sys}}$ 是系统熵的**变化量**（末减初），所以擦除时它是负的，$-\Delta S_{\mathrm{sys}}$ 就是 [@ex-landauer-one-bit-ledger] 里的系统熵减 $\Delta S_S$。前两行本身是关于密度矩阵的命题，属于文献结果（见 [@rem-landauer-thermodynamic-bridge-literature]）。从前两行到第三行、再到下界与取等条件的这段推理，则已冻结在 Lean 里。
+将 [@rem-density-matrix-balance-inputs-literature] 中的前两条平衡式作为实数公理假设，从前两行到第三行、再到下界与取等条件的纯实数推理已冻结在 Lean 里。
 
 ::: {.proposition #prop-landauer-identity-from-balances title="由热浴平衡与幺正平衡推出热量—熵—信息恒等式" lean="D5/S3/DivergenceSupport/LandauerIdentity.landauer_identity_from_balances"}
 设 $\beta$、$Q$、$\Delta S_{\mathrm{sys}}$、$\Delta S_{\mathrm{res}}$、$I$、$D$ 为实数（Lean 中依次为 `beta`、`heat`、`systemEntropyChange`、`reservoirEntropyChange`、`mutualInformation`、`reservoirDivergence`）。若
@@ -161,7 +164,7 @@ $$
 兰道尔界什么时候取不到等号？[@cor-landauer-bound-saturation] 的结论 2 给了判据：要么系统与热浴之间留下了关联（$I > 0$），要么热浴被推离了平衡（$D > 0$）。下面用能想到的最小热浴把这笔账算一遍。
 
 ::: {.example #ex-one-qubit-reservoir-swap-erasure title="用一个热浴量子比特擦除：有限热浴的超额热量"}
-本例中的两条平衡式是密度矩阵层面的文献结果（未在本书形式化）；各项数值由定义直接计算，并用 [@prop-landauer-identity-from-balances] 的恒等式交叉核对。熵以奈特为单位。
+本例中的两条密度矩阵平衡式属于**文献结果，未在本书形式化**；各项数值由定义直接计算，并用 [@prop-landauer-identity-from-balances] 的恒等式交叉核对。熵以奈特为单位。
 
 **模型。** 系统是最大混合的单比特 $\rho_S = \frac12 I_2$。热浴也是一个量子比特，处于吉布斯态 $\rho_E = \operatorname{diag}(p,\, 1 - p)$，其中 $p > \frac12$ 是基态布居数，能级间隔 $E$ 满足 $\beta E = \ln\frac{p}{1-p}$。联合幺正取交换门 SWAP：演化之后系统拿到 $\operatorname{diag}(p, 1-p)$，热浴拿到 $\frac12 I_2$，两者仍是直积态。
 

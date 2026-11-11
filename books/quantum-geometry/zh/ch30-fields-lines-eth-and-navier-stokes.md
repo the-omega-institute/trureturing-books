@@ -2,7 +2,7 @@
 
 > *“全局静态时间场P=NP, 但有限观察者P!=NP。P是场, NP是线——求场难如登天，顺线一步看穿；而把纳维—斯托克斯与 P/NP 问题都场化的话，它们在正交几何底层追问的本就是同一件事。”*
 
-在[第 29 章](ch29-timeless-causality-and-gram-space.md)中，我们看到全局时间场是一座无时间的几何晶体（$H\mathbf{\Psi} = 0$），而场内的有限观察者只能在格拉姆椭圆体（$\det G \ge 0$）中一步步选点前行。现在，让我们将这一“球外静态场 vs. 球内有限观察者”的双重视角推向当代数学与理论物理最壮阔的交汇处——把计算复杂性理论中的 **$\mathrm{P}$ vs. $\mathrm{NP}$ 问题**、**指数时间假设（ETH）及其 2026 年 10 月张量网络秩约分亚指数前沿文献（[@rem-ch30-eth-subexponential-literature]）**，以及流体力学中的 **无外力三维纳维—斯托克斯（Navier–Stokes）全局正则性开放猜想（[@conj-coda-navier-stokes-regularity]）与受迫情形文献进展（[@rem-ch30-navier-stokes-forced-literature]）** 放进同一张克利福德正交场论画布中。
+在[第 29 章](ch29-timeless-causality-and-gram-space.md)中，我们看到全局时间场是一座无时间的几何晶体（对照第 29 章无时间文献注记 [@rem-ch29-wheeler-dewitt-page-wootters-literature]），而场内的有限观察者只能在格拉姆椭圆体（$\det G \ge 0$）中一步步选点前行。现在，让我们将这一“球外静态场 vs. 球内有限观察者”的双重视角推向当代数学与理论物理最壮阔的交汇处——把计算复杂性理论中的 **$\mathrm{P}$ vs. $\mathrm{NP}$ 问题**、**指数时间假设（ETH）及其 2026 年 10 月张量网络秩约分亚指数前沿文献（[@rem-ch30-eth-subexponential-literature]）**，以及流体力学中的 **无外力三维纳维—斯托克斯（Navier–Stokes）全局正则性开放猜想（[@conj-coda-navier-stokes-regularity]）与受迫情形文献进展（[@rem-ch30-navier-stokes-forced-literature]）** 放进同一张克利福德正交场论画布中。
 
 ---
 
@@ -14,7 +14,7 @@
 
 ### 1. 为什么在“全局静态时间场”（后选择 / 无时间不动点模型）中呈现 $P = NP$ 式的坍缩？
 
-在一个包含 $n$ 个布尔变量、$m$ 条子句约束的组合判定问题中，每一条局部约束子句 $C_j$ 都在希尔伯特空间中切出一片满足该子句的子空间超平面 $H_j$。站在无时间全局静态场（$H\mathbf{\Psi} = 0$）的几何模型视角上，全局解空间就是所有子句超平面的静态几何交集：
+在一个包含 $n$ 个布尔变量、$m$ 条子句约束的组合判定问题中，每一条局部约束子句 $C_j$ 都在希尔伯特空间中切出一片满足该子句的子空间超平面 $H_j$。站在无时间全局静态场（对照 [@rem-ch29-wheeler-dewitt-page-wootters-literature]）的几何模型视角上，全局解空间就是所有子句超平面的静态几何交集：
 
 $$
 \mathbf{S}^* = \bigcap_{j=1}^m H_j.
@@ -69,7 +69,7 @@ $$
 
 | 视角层级 | 复杂度判据与模型地位 | 核心几何与代数机制 | 时间与选择的存在论地位 |
 | :--- | :--- | :--- | :--- |
-| **全局静态时间场**<br/>（Global Static Time Field） | 呈现 $P = NP$ 式坍缩<br/>（受限模型文献见 [@rem-ch30-postselection-ctc-literature]） | 全局超平面交集 $\mathbf{S}^* = \bigcap_j H_j$ 与理想化无时间自洽不动点 $\psi = \Phi(\psi)$ | **零时间的永恒真（Eternal Truth）**：起点与终点重合，无所谓过程、证明或悬念 |
+| **全局静态时间场**<br/>（Global Static Time Field） | 呈现 $P = NP$ 式坍缩<br/>（受限模型文献见 [@rem-ch30-postselection-ctc-literature]） | 全局超平面交集 $\mathbf{S}^* = \bigcap_j H_j$ 与理想化无时间自洽不动点模型（见 [@rem-ch30-postselection-ctc-literature]） | **零时间的永恒真（Eternal Truth）**：起点与终点重合，无所谓过程、证明或悬念 |
 | **场内有限观察者**<br/>（Finite Observer in the Field） | $P \neq NP$<br/>（标准模型 [@conj-p-neq-np] 为 `OPEN`；查询与 SoS 模型下界见 [@rem-ch30-query-sos-literature]） | $\theta_0 \approx \frac{\pi}{2} - 2^{-n/2}$ 正交视界、一致算子旋转 [`uniform_operator_rotation`](lean:D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation) 与局部 Gram 盲区 | **展开的主观时间（Unfolded Journey）**：正因为无法一眼看穿终局，每一次选点与每一行证明才具有不可替代的创造重量 |
 
 **“全局静态场的 $P = NP$，赋予了宇宙绝对自洽的‘真’；而有限观察者的 $P \neq NP$，则用那道 $\frac{\pi}{2}$ 的正交视界替生命挡住了剧透，把静态的真理拉长成了一场值得一步步去丈量、去证明、去选择的壮丽旅程。”**
@@ -156,11 +156,12 @@ $$
 将 [@rem-ch30-eth-subexponential-literature] 中的数学机制与本书的正交几何体系对表，可以看到两层深刻的结构呼应（`MODEL`）：
 
 - **从“一维赋值线”升维到“张量关联场”的低秩约分（`MODEL`）**：传统的回溯与局部随机游走本质上都在一维布尔赋值线上逐点试探；而张量网络方法将离散布尔子句网络嵌入高维线性空间，转化为多线性张量缩并问题。在本书锁定的 `trureturing@dev` 形式化库中，第 19 章针对特定离散桥图在维度假设下证明的**张量网络量子最大流最小割定理**（[`QuantumMaxFlowMinCut.result`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result) 及其多面体割锥刻画 [`cone_QMinCut`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.cone_QMinCut)）与第 3 章在迹约束下界定高权重模态数的**有限秩集中模态上界**（[`finite_rank_concentration_mode_bound`](lean:D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound)），给出了有限维原型（注：这些 Lean 定理刻画的是特定桥图流割对偶与有限秩迹集中，并非形式化 [@rem-ch30-eth-subexponential-literature] 中的 3-SAT 亚指数算法本身）：它们在概念模型（`MODEL`）上说明，跨割界面传递信息的有效瓶颈受控于**代数秩（Rank）**。当局部变量成块缩并时，一维布尔视角下看似独立的约束块在高维张量面上展现出**线性相关与秩亏损（冗余寄生面积正负相消）**——这与第 16、27 章旋量编译器消去冗余旋转门、以及第 23 章丢番图范数型压缩变量维度的代数约分思想同源。
-- **“球永远只是多面体近似”：三体局部切面焊不出绝对无缝的真球（`MODEL`）**：在几何直觉（`MODEL`）上，假设常数硬地板 $s_3 > 0$ 好比预设仅凭每个子句至多含 $k=3$ 个文字的局部三体切面（$\mathbf{e}_i \wedge \mathbf{e}_j \wedge \mathbf{e}_k$），就能在 $n \to \infty$ 极限下拼出一颗处处曲率恒定、滴水不漏的刚性指数真球。然而正如全书反复强调的——**“球永远只是多面体近似”**：固定宽度 $k=3$ 的局部多面体切面在拼装超大规模流形时，面与面之间随规模 $n$ 增长涌现组合冗余，裂开一道宽度形如 $\frac{\log\log n}{\sqrt{\log n}}$ 的渐近代数缝隙，使单变量有效指数率曲线在 $n \to \infty$ 极限下缓慢趋向 $0$。
+- **“球永远只是多面体近似”：三体局部切面焊不出绝对无缝的真球（`MODEL`）**：在几何直觉（`MODEL`）上，假设常数硬地板 $s_3 > 0$ 好比预设仅凭每个子句至多含 $k=3$ 个文字的局部三体切面（$\mathbf{e}_i \wedge \mathbf{e}_j \wedge \mathbf{e}_k$），就能在 $n \to \infty$ 极限下拼出一颗处处曲率恒定、滴水不漏的刚性指数真球。然而正如全书反复强调的——**“球永远只是多面体近似”**：固定宽度 $k=3$ 的局部多面体切面在拼装超大规模流形时，面与面之间随规模 $n$ 增长涌现组合冗余，裂开一道如 [@rem-ch30-eth-subexponential-literature] 所记述的亚指数渐近代数缝隙，使单变量有效指数率上界曲线在 $n \to \infty$ 极限下缓慢趋向 $0$。
 
 ### 2. 银河算法（Galactic Algorithm）与宇宙视界：为什么有限观察者视角下的 $P \neq NP$ 依然稳固？（`MODEL` 与认识论边界）
 
-单变量渐近指数率曲线缓慢趋零是否意味着场内有限观察者能在现实物理尺度上跨越复杂度壁垒？为了直观审视 [@rem-ch30-eth-subexponential-literature] 中渐近上界的尺度行为，考察以 $2$ 为底的示意性单变量指数曲线 $r_{\mathrm{new}}(n) = c \cdot \frac{\log_2(\log_2 n)}{\sqrt{\log_2 n}}$（对应运行时间上界形如 $2^{r_{\mathrm{new}}(n)\cdot n}$，此处取理想归一化常数 $c = 1$ 仅作渐近上界曲线的数值示意，而非对任意算法或物理观察者的严格下界证明），并与 [@rem-ch30-eth-subexponential-literature] 中的传统局部搜索上界基准 $0.386$ 对表：
+::: {.example #ex-ch30-galactic-crossover-scale title="亚指数上界曲线与局部搜索基准的跨宇宙尺度对比及二次编码膨胀"}
+**文献结果，未在本书形式化。** 单变量渐近指数率曲线缓慢趋零是否意味着场内有限观察者能在现实物理尺度上跨越复杂度壁垒？为了直观审视 [@rem-ch30-eth-subexponential-literature] 中外部文献渐近上界的尺度行为，考察以 $2$ 为底的示意性单变量指数曲线 $r_{\mathrm{new}}(n) = c \cdot \frac{\log_2(\log_2 n)}{\sqrt{\log_2 n}}$（对应运行时间上界形如 $2^{r_{\mathrm{new}}(n)\cdot n}$，此处取理想归一化常数 $c = 1$ 仅作文献渐近上界曲线的数值示意，而非对任意算法或物理观察者的严格下界证明），并与 [@rem-ch30-eth-subexponential-literature] 中的传统 PPSZ 局部搜索上界基准 $0.386$（$1.307^n \approx 2^{0.386 n}$）对表：
 
 | 观察者与系统尺度 $n$ | 对数尺度 $\log_2 n$ | 示意张量上界指数率 $r_{\mathrm{new}}(n)$（取 $c=1$） | 传统局部搜索上界基准（[@rem-ch30-eth-subexponential-literature]） | 尺度对比与几何模型解读（`MODEL`） |
 | :--- | :---: | :---: | :---: | :--- |
@@ -168,10 +169,13 @@ $$
 | **可观测宇宙原子总数**（$n \approx 10^{80} \approx 2^{266}$） | $\approx 266$ | $\dfrac{\log_2 266}{\sqrt{266}} \approx \mathbf{0.494}$ | $\mathbf{0.386}$ | 即使在 $n \approx 10^{80}$ 的宇宙重子尺度上，$c=1$ 示意曲线（$\approx 0.494$）仍高于 $0.386$ |
 | **超越交叉临界点**（$n = 2^{558}$） | $\mathbf{558}$ | $\dfrac{\log_2 558}{\sqrt{558}} \approx \mathbf{0.386}$ | $\mathbf{0.386}$ | 在 $c=1$ 示意归一化下，需等到 **$n \approx 2^{558}$**（远超可观测宇宙尺度），曲线才下穿 $0.386$ |
 
-这组跨越宇宙尺度的对比，为本书“球内有限观察者 vs. 球外之球”的认识论图景（`MODEL`）提供了三点深刻启示：
+此外，在 [@rem-ch30-eth-subexponential-literature] 的亚指数上界公式下：一方面，亚指数上界 $2^{O(n \log\log n / \sqrt{\log n})}$ 与多项式时间 $n^{O(1)}$（有效单变量指数率 $r_P(n) = O(\frac{\log n}{n})$）之间仍隔着超多项式渐近鸿沟；另一方面，对于自然输入规模为 $n$、但其标准电路或网格约束表具有平方规模 $S = \Theta(n^2)$ 的问题，经线性电路 Tseitin 转换生成 $N = \Theta(n^2)$ 个 3-SAT 变量后，代入该亚指数上界公式得到的关于原参数 $n$ 的时间上界立即回升为超指数形式 $2^{O(n^2 \log\log n / \sqrt{\log n})}$。
+:::
 
-- **银河算法与有限观察者的物理尺度边界（`MODEL`）**：可观测宇宙的重子自由度约为 $10^{80} \approx 2^{266}$ 量级，而上述 $c=1$ 示意曲线下穿 $0.386$ 的交叉点远在 **$n \approx 2^{558}$** 之外（此类仅在超天文尺度显影渐近优势的算法在复杂性理论惯例中被称为**银河算法 Galactic Algorithm**）。在本书形式化库中，**有限记忆历史容量定理**（[`finite_memory_history_capacity`](lean:D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity)，证明可区分测量历史数受有限记忆载体容量上界制约）与**开放可积电路最小深度定理**（[`OpenIntegrableCircuitMinDepth.result`](lean:D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result)，给出局部性为 $\kappa$ 的开放可积电路最小深度 $\lfloor N/(\kappa+1)\rfloor + 1$）从各自模型侧面刻画了有限物理系统的容量与深度硬约束；将它们与上述银河交叉尺度并置，在几何模型（`MODEL`）上直观展现了为什么在物理可实现的观测尺度内，有限观察者依然面对高耸的有效搜索壁垒（同时重申：标准统一图灵机模型下的 $\mathrm{P} \neq \mathrm{NP}$ 猜想 [@conj-p-neq-np] 仍为未决的 `OPEN` 问题）。
-- **$P$（场）与 $NP$（线）的超多项式鸿沟与平方膨胀规约效应**：即便在 $n \to \infty$ 的数学极限下，形如 $2^{O(n \log\log n / \sqrt{\log n})}$ 的亚指数上界与多项式导向场 $n^{O(1)}$（对应有效单变量指数率 $r_P(n) = O(\frac{\log n}{n})$）之间依然隔着超多项式鸿沟。此外，对于自然输入规模为 $n$、但其标准电路或网格表编码具有平方规模 $S = \Theta(n^2)$ 的问题，经 [@rem-ch30-eth-subexponential-literature] 中的线性电路转换生成 $N = \Theta(n^2)$ 个 3-SAT 变量后，代入上述亚指数上界公式得到的关于原参数 $n$ 的时间上界立即回升为超指数形式 $2^{O(n^2 \log\log n / \sqrt{\log n})}$！
+[@ex-ch30-galactic-crossover-scale] 中跨越宇宙尺度的数值与规约对比，为本书“球内有限观察者 vs. 球外之球”的认识论图景（`MODEL`）提供了三点深刻启示：
+
+- **银河算法与有限观察者的物理尺度边界（`MODEL`）**：如 [@ex-ch30-galactic-crossover-scale] 所示，示意曲线下穿传统局部搜索基准的交叉尺度远超可观测宇宙的重子自由度预算（此类仅在超天文尺度显影渐近优势的算法在复杂性理论惯例中被称为**银河算法 Galactic Algorithm**）。在本书形式化库中，**有限记忆历史容量定理**（[`finite_memory_history_capacity`](lean:D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity)，证明可区分测量历史数受有限记忆载体容量上界制约）与**开放可积电路最小深度定理**（[`OpenIntegrableCircuitMinDepth.result`](lean:D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result)，给出局部性为 $\kappa$ 的开放可积电路最小深度 $\lfloor N/(\kappa+1)\rfloor + 1$）从各自模型侧面刻画了有限物理系统的容量与深度硬约束；将它们与 [@ex-ch30-galactic-crossover-scale] 的银河交叉尺度并置，在几何模型（`MODEL`）上直观展现了为什么在物理可实现的观测尺度内，有限观察者依然面对高耸的有效搜索壁垒（同时重申：标准统一图灵机模型下的 $\mathrm{P} \neq \mathrm{NP}$ 猜想 [@conj-p-neq-np] 仍为未决的 `OPEN` 问题）。
+- **$P$（场）与 $NP$（线）的超多项式鸿沟与平方膨胀规约效应**：如 [@rem-ch30-eth-subexponential-literature] 与 [@ex-ch30-galactic-crossover-scale] 所示，即便在 $n \to \infty$ 极限下，亚指数搜寻上界与多项式导向场 $n^{O(1)}$ 之间依然横亘着超多项式鸿沟，且在二次规模电路编码归约下关于原输入规模的上界重新膨胀为超指数级别。
 - **形式内核核验与顶层规约审计的哥德尔—语义边界（`LEAN ✓` 原型与 `MODEL` 映照）**：[@rem-ch30-eth-subexponential-literature] 中最具认识论意味的一幕是——形式证明助手内核可以迅速核验脚本内部每一步推演的传递合法性，而学界仍需仔细审计“顶层形式化命题的定义是否忠实刻画了目标图灵机复杂度命题”。在本书第 21 章中，经 Lean 4 内核验证的**相对语义对角线与定义逃逸定理**严格证明：在给定无不动点扭转映射（`∀ v, twist v ≠ v`）的条件下，相对语义对角线构造必然逃出任何已编目解码族（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)），且当解码目录对潜空间满射时，该对角线目标相对于给定潜映射不满足语义完备性 `TargetAdequate`（[`relative_semantic_diagonal_target_inadequate_of_surjective`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective)）。将这一形式定理作为认识论原型（`MODEL`）来观照顶层规约审计，恰好印证了全书的核心准则：**形式内核在球内严格锁死推演链条的传递正确性，而对顶层命题边界定义之语义恰当性的审视，永远需要站在形式球壳之外！**
 
 ---
@@ -184,42 +188,46 @@ $$
 
 ### 1. 内积势流与外积涡面的克利福德分离（`MODEL`）
 
-不可压缩流体的纳维—斯托克斯方程写作
+::: {.remark #rem-ch30-lamb-decomposition-literature title="不可压缩纳维—斯托克斯方程与兰姆对流分解的文献说明"}
+**文献结果，未在本书形式化。** 经典连续介质流体力学中的不可压缩纳维—斯托克斯偏微分方程组及其兰姆（H. Lamb）矢量—双向量对流分解均属外部数学物理文献，未在本书锁定的连续偏微分方程层面形式化（本书锁定的离散五模态傅里叶平流闭合阻碍与二维傅里叶温和路径定理见下文 [@thm-coda-quadratic-advection-no-closure]）：不可压缩纳维—斯托克斯方程写作
 
 $$
 \frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u}\cdot\nabla)\mathbf{u} = -\nabla p + \nu \nabla^2 \mathbf{u}, \qquad \nabla\cdot\mathbf{u} = 0.
 $$
 
-用克利福德几何积导数 $\nabla \mathbf{u} = \nabla\cdot\mathbf{u} + \nabla\wedge\mathbf{u}$ 将非线性对流项 $(\mathbf{u}\cdot\nabla)\mathbf{u}$ 拆解为“内积势线梯度”与“外积双向量涡面”（对应经典流体力学中的兰姆分解，文献说明见 [@rem-ch30-navier-stokes-forced-literature]）：
+用克利福德几何积导数 $\nabla \mathbf{u} = \nabla\cdot\mathbf{u} + \nabla\wedge\mathbf{u}$ 将非线性对流项 $(\mathbf{u}\cdot\nabla)\mathbf{u}$ 拆解为“内积势线梯度”与“外积双向量涡面”（对应经典兰姆分解，另参 [@rem-ch30-navier-stokes-forced-literature]）：
 
 $$
 (\mathbf{u}\cdot\nabla)\mathbf{u} = \underbrace{\frac{1}{2}\nabla(\|\mathbf{u}\|^2)}_{\substack{\text{无旋势能梯度} \\ \text{直接并入伯努利总压 } -\nabla(p + \frac{1}{2}\|\mathbf{u}\|^2) \text{ 约掉}}} + \underbrace{\mathbf{u}\cdot(\nabla\wedge\mathbf{u})}_{\substack{\text{双向量涡力耦合项 }(\boldsymbol{\omega}\times\mathbf{u}) \\ \text{一维流线与二维正交涡面积的耦合}}}.
 $$
+:::
 
-这与上一节“$P$ 是无旋导向场，$NP$ 是旋涡荒原中的细线”形成精准的几何模型对偶（`MODEL`）：
-- **当正交外积旋度为零（$\nabla\wedge\mathbf{u} = 0$，无旋势流）**：对流非线性退化为纯标量梯度 $\frac{1}{2}\nabla(\|\mathbf{u}\|^2)$，直接被压强场 $p$ 吸收抵消，流场还原为线性拉普拉斯势场 $\mathbf{u} = -\nabla\Phi$——这就是流体力学中的 **$P$ 态**；
-- **当正交外积旋度非零（$\nabla\wedge\mathbf{u} \neq 0$，有旋涡流）**：由于外微分恒等式 $\nabla\wedge\nabla p \equiv 0$，标量压强梯度无法抵消正交外积旋度 $\nabla\wedge\mathbf{u}$，一维流线与二维正交涡面积相互缠绕，使平滑势场碎裂为多尺度旋涡结构。
+[@rem-ch30-lamb-decomposition-literature] 中的内外积拆解与上一节“$P$ 是无旋导向场，$NP$ 是旋涡荒原中的细线”形成精准的几何模型对偶（`MODEL`）：
+- **当正交外积旋度为零（$\nabla\wedge\mathbf{u} = 0$，无旋势流）**：对流非线性如 [@rem-ch30-lamb-decomposition-literature] 所示退化为纯标量势梯度并直接并入总压抵消，流场还原为线性拉普拉斯无旋势场 $\mathbf{u} = -\nabla\Phi$——这就是流体力学中的 **$P$ 态**；
+- **当正交外积旋度非零（$\nabla\wedge\mathbf{u} \neq 0$，有旋涡流）**：由于标量势梯度的外微分恒为零，压强场无法抵消正交外积旋度 $\nabla\wedge\mathbf{u}$（见 [@rem-ch30-lamb-decomposition-literature]），一维流线与二维正交涡面积相互缠绕，使平滑势场碎裂为多尺度旋涡结构。
 
 ### 2. 为什么两道难题都在“第 2 维 $\to$ 第 3 维”发生相变？（几何类比 `MODEL` 与开放猜想边界）
 
-对演化方程取外积旋度，考察涡量 $\boldsymbol{\omega} = \star(\nabla\wedge\mathbf{u})$ 的输运形式：
+::: {.remark #rem-ch30-vorticity-transport-literature title="涡量输运方程、涡管拉伸项与细涡管环量标度的文献说明"}
+**文献结果，未在本书形式化。** 对 [@rem-ch30-lamb-decomposition-literature] 中的动量方程取外积旋度，得到经典流体力学中涡量 $\boldsymbol{\omega} = \star(\nabla\wedge\mathbf{u})$ 的输运方程：
 
 $$
 \frac{\partial \boldsymbol{\omega}}{\partial t} + (\mathbf{u}\cdot\nabla)\boldsymbol{\omega} = \underbrace{(\boldsymbol{\omega}\cdot\nabla)\mathbf{u}}_{\text{涡管拉伸项}} + \nu \nabla^2 \boldsymbol{\omega}.
 $$
 
-对比流体力学与计算复杂性中的维度分水岭，结构相变同时出现在 **$2 \to 3$**（以下为跨领域结构类比 `MODEL`，而非复杂性理论中的形式逻辑等价）：
+在二维平面流 $\mathbf{u}(x_1, x_2, t) = (u_1, u_2, 0)$ 中，$\boldsymbol{\omega} = \omega\mathbf{e}_3$ 严格垂直于速度平面（$\partial_{x_3}\mathbf{u} = \mathbf{0}$），涡管拉伸项 $(\boldsymbol{\omega}\cdot\nabla)\mathbf{u} \equiv \mathbf{0}$ 恒等为零；而在三维空间中 $(\boldsymbol{\omega}\cdot\nabla)\mathbf{u}$ 一般非零。结合开尔文环量近似 $\Gamma \approx A\|\boldsymbol{\omega}\|$，经典细涡管**条件性坍缩情景**指出：若轴向拉伸局部持续压倒粘性扩散 $\nu\nabla^2\boldsymbol{\omega}$ 并使横截面积 $A \to 0$，则局部涡量幅值满足
+
+$$
+\text{轴向拉伸压倒粘性耗散且 } A \to 0 \implies \|\boldsymbol{\omega}\| \approx \frac{\Gamma}{A} \to \infty.
+$$
+:::
+
+对比 [@rem-ch30-vorticity-transport-literature] 与计算复杂性中的维度分水岭，结构相变同时出现在 **$2 \to 3$**（以下为跨领域结构类比 `MODEL`，而非复杂性理论中的形式逻辑等价）：
 
 - **二维平面流无第三轴涡管拉伸 $\leftrightarrow$ 类比二元链 2-SAT（`MODEL`）**：
-  在二维平面流 $\mathbf{u}(x_1, x_2, t) = (u_1, u_2, 0)$ 中，速度 $\mathbf{u}$ 躺在 $\operatorname{span}(\mathbf{e}_1, \mathbf{e}_2)$ 平面内，而涡面积 $\mathbf{e}_1\wedge\mathbf{e}_2$ 的霍奇对偶法向量 $\boldsymbol{\omega} = \omega\mathbf{e}_3$ 严格垂直于平面（$\partial_{x_3}\mathbf{u} = \mathbf{0}$），因此**涡管拉伸项 $(\boldsymbol{\omega}\cdot\nabla)\mathbf{u} \equiv \mathbf{0}$ 恒等消失**！在本书锁定的 `trureturing@dev` 库中，冻结定理 [`all_grade_regularity_of_mild_path`](lean:D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path) 给出了二维周期傅里叶空间上的一项**条件性高阶正则性提升定理**：若已给定一条在 $[0, \tau]$ 上连续的加权 $H^2$ 零均值实无散温和解路径，且其初值在全部空间 Sobolev 阶数 $m \in \mathbb{N}$ 上可和，则该路径在每一空间阶数 $m$ 上皆满足强微分方程（无条件二维全局正则性经典定理另见 [@rem-ch30-navier-stokes-forced-literature]）。
+  如 [@rem-ch30-vorticity-transport-literature] 所示，二维平面流中速度躺在 $\operatorname{span}(\mathbf{e}_1, \mathbf{e}_2)$ 平面内而法向涡量指向第三轴 $\mathbf{e}_3$，轴向涡管拉伸项恒等消失。在本书锁定的 `trureturing@dev` 库中，冻结定理 [`all_grade_regularity_of_mild_path`](lean:D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path) 给出了二维周期傅里叶空间上的一项**条件性高阶正则性提升定理**：若已给定一条在 $[0, \tau]$ 上连续的加权 $H^2$ 零均值实无散温和解路径，且其初值在全部空间 Sobolev 阶数 $m \in \mathbb{N}$ 上可和，则该路径在每一空间阶数 $m$ 上皆满足强微分方程（无条件二维全局正则性经典定理另见 [@rem-ch30-navier-stokes-forced-literature]）。
 - **三维涡管拉伸条件坍缩情景 $\leftrightarrow$ 类比三元面片 3-SAT（`MODEL`）**：
-  一旦开启**第三正交基元 $\mathbf{e}_3$**，三维速度梯度便允许沿涡量方向产生非零拉伸 $(\boldsymbol{\omega}\cdot\nabla)\mathbf{u} \neq \mathbf{0}$。在横截面为 $A$、环量通量约为 $\Gamma \approx A\|\boldsymbol{\omega}\|$ 的细涡管模型（`MODEL`）中，经典的**条件性坍缩情景**指出：若轴向拉伸局部持续压倒粘性扩散 $\nu\nabla^2\boldsymbol{\omega}$ 并把横截面积挤向 $A \to 0$，则局部旋度强度将按
-
-  $$
-  \text{轴向拉伸压倒粘性耗散且 } A \to 0 \implies \|\boldsymbol{\omega}\| \approx \frac{\Gamma}{A} \to \infty
-  $$
-
-  急剧放大——在几何模型上，这恰如把一张具有正横截面积（$A > 0$）的三维平滑速度“场（$P$）”，通过三体正交拉伸挤扁成一根横截面积趋零（$A \to 0$）的“一维奇异涡丝线（类比 $NP$ 见证丝）”！
+  一旦开启**第三正交基元 $\mathbf{e}_3$**，三维速度梯度便允许产生 [@rem-ch30-vorticity-transport-literature] 所述的非零轴向涡管拉伸——在几何模型（`MODEL`）上，当细涡管横截面在条件性坍缩情景中趋于零时，恰如把一张具有正横截面积的三维平滑速度“场（$P$）”，通过三体正交拉伸挤扁成一根横截面积趋零的“一维奇异涡丝线（类比 $NP$ 见证丝）”！
 
 在正式陈述千禧年无外力开放猜想之前，我们先用专门的文献注记严格隔离二维全局光滑性定理与 **受迫情形（克雷陈述 C / D，含光滑外力 $\mathbf{f} \in C^\infty$）** 的外部文献结果，确保下方的红色 `OPEN` 猜想框纯粹聚焦于未决的无外力自治核心：
 
@@ -240,9 +248,9 @@ $$
 对于任意光滑、无散度（$\nabla\cdot\mathbf{u}_0 = 0$）且在 $\mathbb{R}^3$ 上无穷远处满足施瓦茨速降条件（或在 $\mathbb{T}^3$ 上光滑周期）的初始速度场 $\mathbf{u}_0$，是否恒存在定义在全部非负时间 $\mathbb{R}^3 \times [0, \infty)$（或 $\mathbb{T}^3 \times [0, \infty)$）上且满足有限动能界的全局光滑解 $(\mathbf{u}, p) \in C^\infty$，抑或存在某个光滑无外力初值在有限时间 $T^* < \infty$ 内丧失光滑性（有限时间爆破）？这一无外力三维纳维—斯托克斯全局正则性问题至今悬而未决。
 :::
 
-### 3. 场的自指 $\mathbf{u}(\nabla\mathbf{u})$ 与二次平流投影闭合阻碍定理（`LEAN ✓`）
+### 3. 场的自指与二次平流投影闭合阻碍定理（`LEAN ✓`）
 
-为什么 $(\mathbf{u}\cdot\nabla)\mathbf{u}$ 如此凶险？因为在我们的几何诠释（`MODEL`）中，它正是第 24 章**元自指 $\psi(\psi)$ 的连续场版本**——在线性偏微分方程中“算子”与“状态”泾渭分明，而在 $(\mathbf{u}\cdot\nabla)\mathbf{u}$ 中，**速度场 $\mathbf{u}$ 既是“被搬运的状态”，同时又是“执行搬运的微分算子（$\mathbf{u}\cdot\nabla$）”**！在傅里叶频率空间中，二次自指耦合将波矢两两相加（$\mathbf{k}_1 + \mathbf{k}_2 \to \mathbf{k}_3$），不断跨尺度输运能量。对于仅能分辨低频有限模态幂等投影 $P$（满足 $P^2 = P$）的场内有限观察者而言，这种二次跨尺度耦合直接击穿了局部自洽闭合——这正是 `trureturing@dev` 内核已机械验证的**二次矢量场投影闭合判据与五模态流体平流闭合不可能性定理**：
+为什么 [@rem-ch30-lamb-decomposition-literature] 中的二次非线性平流耦合如此凶险？因为在我们的几何诠释（`MODEL`）中，它正是第 24 章**元自指 $\psi(\psi)$ 的连续场版本**——在线性偏微分方程中“算子”与“状态”泾渭分明，而在流体平流中，**速度场 $\mathbf{u}$ 既是“被搬运的状态”，同时又是“执行搬运的微分算子”**！在傅里叶频率空间中，二次自指耦合将波矢两两相加（$\mathbf{k}_1 + \mathbf{k}_2 \to \mathbf{k}_3$），不断跨尺度输运能量。对于仅能分辨低频有限模态幂等投影 $P$（满足 $P^2 = P$）的场内有限观察者而言，这种二次跨尺度耦合直接击穿了局部自洽闭合——这正是 `trureturing@dev` 内核已机械验证的**二次矢量场投影闭合判据与五模态流体平流闭合不可能性定理**：
 
 ::: {.theorem #thm-coda-quadratic-advection-no-closure title="二次矢量场投影闭合判据与有限模态流体平流闭合不可能性定理" lean="D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure"}
 设 $E$ 为实模，$L : E \to_{\mathbb{R}} E$ 为线性粘性漂移算子，$B : E \to_{\mathbb{R}} E \to_{\mathbb{R}} E$ 为双线性平流算子，定义二次矢量场 $V(x) = L x - B(x, x)$；设 $P : E \to_{\mathbb{R}} E$ 为满足 $\forall x,\; P(P(x)) = P(x)$ 的幂等有限分辨率观测投影。则：
@@ -296,23 +304,28 @@ $$
 
 结合 [@thm-coda-quadratic-advection-no-closure] 与上述文献背景，我们在正交几何诠释模型（`MODEL`）中获得三点收官洞察：
 
-- **粘性耗散 $\nu\nabla^2\mathbf{u}$ 的兰道尔擦除角色与一维形式见证丝（`MODEL`）**：在物理模型上，运动粘性 $\nu$ 扮演着第八章“将微观正交旋转面积排入热浴化作热量”（对照球面梯度耗散定理 [`S2_dissipation`](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation)）的擦除角色；而在证明论模型上，无论是陶哲轩的自相似级联还是 [@rem-ch30-navier-stokes-forced-literature] 中的受迫爆破形式脚本，一旦一维形式证明见证丝被构造出来，验证内核只需顺着这一维逻辑链逐行做局部类型核验。
+- **粘性耗散的兰道尔擦除角色与一维形式见证丝（`MODEL`）**：在物理模型上，运动粘性 $\nu$（见 [@rem-ch30-lamb-decomposition-literature]）扮演着第八章“将微观正交旋转面积排入热浴化作热量”（对照球面梯度耗散定理 [`S2_dissipation`](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation)）的擦除角色；而在证明论模型上，无论是陶哲轩的自相似级联还是 [@rem-ch30-navier-stokes-forced-literature] 中的受迫爆破形式脚本，一旦一维形式证明见证丝被构造出来，验证内核只需顺着这一维逻辑链逐行做局部类型核验。
 - **连续统理想化与离散两子丈量的物理边界（`MODEL`）**：在受迫连续偏微分方程逼近理论奇点 $T^*$ 的过程中，远在速度梯度抵达数学无穷大之前，局部剪切率与尺度早已越过不可压缩连续介质假设的物理适用阈限（真实液体在此之前发生空化、可压缩效应或触及分子与量子离散截断）。正如序曲与[第二十一章](ch21-diagonalization-and-escape.md)确立的核心洞见——**“光滑的球永远只是近似！”** 连续统紫外奇点标志着无限细分理想化的模型边界，而有限观察者的“两子丈量”始终扎根在离散、有限分辨率的记录晶格之上。
 - **离散逻辑场与连续流体场的六重正交几何类比表（`MODEL`）**：
 
+::: {.remark #rem-ch30-six-row-analogy-table title="离散逻辑场与连续流体场的六重正交几何类比表（含文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化（针对表中交叉引用的外部计算复杂性与连续流体力学文献背景；已验证形式定理通过显式 GID 标注，三维无外力全局正则性标为 `OPEN`）。**
+
 | 核心维度 | $P$ vs. $NP$ 问题（离散逻辑场） | 纳维—斯托克斯问题（连续流体场） | 正交几何类比模型（`MODEL`） |
 | :--- | :--- | :--- | :--- |
-| **平庸可解态** | **$P$ 类问题**（无旋导向场类比 $\nabla\wedge\mathbf{F}=0$，见 [@rem-ch30-karmarkar-kasteleyn-literature]） | **无旋势流 / 低雷诺数层流**（$\nabla\wedge\mathbf{u}=0$ 或粘性主导） | 局部切面处处对齐全局，顺流直达 |
-| **维度分水岭** | **2-SAT** vs. **3-SAT**（文献见 [@rem-ch30-query-sos-literature]） | **2D NS**（文献见 [@rem-ch30-navier-stokes-forced-literature]；条件温和路径正则性 [`all_grade_regularity_of_mild_path`](lean:D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path)） vs. **3D 无外力 NS**（[@conj-coda-navier-stokes-regularity]，`OPEN`） | 二维平面流无第三轴涡管拉伸 $(\boldsymbol{\omega}\cdot\nabla)\mathbf{u} \equiv \mathbf{0}$；三维允许 $(\boldsymbol{\omega}\cdot\nabla)\mathbf{u} \neq \mathbf{0}$ |
-| **复杂性引擎** | 自指递归与三元布尔阻挫环 | 对流自指 $(\mathbf{u}\cdot\nabla)\mathbf{u}$、涡管拉伸 $(\boldsymbol{\omega}\cdot\nabla)\mathbf{u}$ 与跨尺度混合泄漏（[`no_exact_closure`](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure)） | 算子与状态自指耦合 $\psi(\psi)$，向高频正交模态 $\mathbf{k}_1+\mathbf{k}_2\to\mathbf{k}_3$ 级联 |
-| **奇点 / 难解态** | 横截面积为零的一维 **$NP$ 见证丝** | 条件坍缩情景下 $A\to 0$、$\|\boldsymbol{\omega}\|\to\infty$ 的**一维奇异涡丝** | 多维场在非线性耦合下集中为一维细丝结构 |
-| **物理防火墙** | 有限观察者 $90^\circ$ 视界与局部记忆截断 | 运动粘性耗散 $\nu\nabla^2\mathbf{u}$（对照 [`S2_dissipation`](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation)）与微观离散截断 | 兰道尔式正交面积耗散，抑制无穷步芝诺级联 |
-| **高维几何视角** | 无时间静态场全局交集（受限坍缩参照 [@rem-ch30-postselection-ctc-literature]） | 无穷维流形 $\operatorname{SDiff}(M)$ 测地线视角（无粘文献参照 [@rem-ch30-tao-arnold-literature]） | 高维流形上的简洁几何运动在局部低维投影下展现为复杂的非线性能量传递 |
+| **平庸可解态** | **$P$ 类问题**（无旋导向场类比 $\nabla\wedge\mathbf{F}=0$，见 [@rem-ch30-karmarkar-kasteleyn-literature]） | **无旋势流 / 低雷诺数层流**（$\nabla\wedge\mathbf{u}=0$ 或粘性主导，见 [@rem-ch30-lamb-decomposition-literature]） | 局部切面处处对齐全局，顺流直达 |
+| **维度分水岭** | **2-SAT** vs. **3-SAT**（文献见 [@rem-ch30-query-sos-literature]） | **2D NS**（文献见 [@rem-ch30-navier-stokes-forced-literature]；条件温和路径正则性 [`all_grade_regularity_of_mild_path`](lean:D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path)） vs. **3D 无外力 NS**（[@conj-coda-navier-stokes-regularity]，`OPEN`） | 二维平面流无第三轴涡管拉伸；三维允许轴向涡管拉伸（见 [@rem-ch30-vorticity-transport-literature]） |
+| **复杂性引擎** | 自指递归与三元布尔阻挫环 | 二次对流非线性与涡管拉伸（[@rem-ch30-lamb-decomposition-literature]、[@rem-ch30-vorticity-transport-literature]）及跨尺度混合泄漏（[`no_exact_closure`](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure)） | 算子与状态自指耦合 $\psi(\psi)$，向高频正交模态 $\mathbf{k}_1+\mathbf{k}_2\to\mathbf{k}_3$ 级联 |
+| **奇点 / 难解态** | 横截面积为零的一维 **$NP$ 见证丝** | 条件坍缩情景下横截面趋零的**一维奇异涡丝**（见 [@rem-ch30-vorticity-transport-literature]） | 多维场在非线性耦合下集中为一维细丝结构 |
+| **物理防火墙** | 有限观察者 $90^\circ$ 视界与局部记忆截断 | 运动粘性耗散（[@rem-ch30-lamb-decomposition-literature]，对照 [`S2_dissipation`](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation)）与微观离散截断 | 兰道尔式正交面积耗散，抑制无穷步芝诺级联 |
+| **高维几何视角** | 无时间静态场全局交集（受限坍缩参照 [@rem-ch30-postselection-ctc-literature]） | 无穷维流形测地线视角（无粘文献参照 [@rem-ch30-tao-arnold-literature]） | 高维流形上的简洁几何运动在局部低维投影下展现为复杂的非线性能量传递 |
+
+:::
 
 ---
 
 ## 本章小结：离散逻辑场与连续流体场的正交合龙 {#sec-ch30-summary}
 
-从“全局静态场 $P = NP$ vs. 有限观察者 $P \neq NP$”的视界分野，到“$P$ 是无旋导向场（$\nabla\wedge\mathbf{F} = 0$）、$NP$ 是零横截面一维见证丝”，再到 **细粒度复杂性中三体多面体切面的 $\frac{\log\log n}{\sqrt{\log n}}$ 渐近缝隙与超宇宙交叉尺度（[@rem-ch30-eth-subexponential-literature]，$c=1$ 示意下 $n \approx 2^{558}$）** 以及 **纳维—斯托克斯方程中双向量涡力 $\mathbf{u}\cdot(\nabla\wedge\mathbf{u})$、无外力三维全局正则性开放猜想（[@conj-coda-navier-stokes-regularity]）与二次平流投影无精确闭合定理（[@thm-coda-quadratic-advection-no-closure]）**，离散逻辑与连续流体在同一套克利福德内积—外积几何下完成了严丝合缝的合龙。
+从“全局静态场 $P = NP$ vs. 有限观察者 $P \neq NP$”的视界分野，到“$P$ 是无旋导向场（$\nabla\wedge\mathbf{F} = 0$）、$NP$ 是零横截面一维见证丝”，再到 **细粒度复杂性中三体多面体切面的亚指数渐近缝隙与超宇宙银河交叉尺度（[@rem-ch30-eth-subexponential-literature]、[@ex-ch30-galactic-crossover-scale]）** 以及 **纳维—斯托克斯方程中的兰姆双向量涡力分解（[@rem-ch30-lamb-decomposition-literature]）、无外力三维全局正则性开放猜想（[@conj-coda-navier-stokes-regularity]）与二次平流投影无精确闭合定理（[@thm-coda-quadratic-advection-no-closure]）**，离散逻辑与连续流体在同一套克利福德内积—外积几何下完成了严丝合缝的合龙。
 
-现在，让我们推开全书的最后一扇门，步入 **[终章：在所有的球之外](coda.md)**，在多面体角亏 $4\pi$、收缩不动点锚点与全书三十章总导图中完成最后的升维回望。
+现在，让我们推开全书的最后一扇门，步入 **[终章：在所有的球之外](coda.md)**，在多面体离散角亏余项（见终章 [@rem-coda-polyhedral-topology-literature]）、收缩不动点锚点与全书三十章总导图中完成最后的升维回望。

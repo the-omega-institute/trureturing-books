@@ -2,11 +2,13 @@
 
 > *"Even the concept of 'quantum' is a particle, and even the concept of 'existence' is a particle."*
 
-Across the first two chapters we saw that a solitary monad cannot define a direction and two states need no external reference point $C$ to compare themselves; meanwhile, within the convex interval of general yes/no effects $0 \le E \le I$, **sharp, repeatable (extremal projective) yes/no questions** $P$ both guarantee real nonnegativity $\Tr(\rho P) \in [0, 1]$ in [@thm-born-probability-skeleton] and owe their noiseless, once-and-for-all repeatability to a single algebraic law — **self-adjoint idempotence**:
+Across the first two chapters we saw that a solitary monad cannot define a direction and two states need no external reference point $C$ to compare themselves; meanwhile, **sharp orthogonal projectors** $P$ (whose relation to general POVM effects is recorded in [Chapter 2](ch02-born-rule.md), [@rem-povm-effect-converse-literature]) guarantee real probabilities $\Tr(\rho P) \in [0, 1]$ in [@thm-born-probability-skeleton] through a single core algebraic law — **self-adjoint idempotence**:
 
 $$
 P^* = P, \qquad P^2 = P.
 $$
+
+This chapter uses the Lüders state update: for an outcome of nonzero weight, the conditional state is $P_k\rho P_k/\Tr(\rho P_k)$. With no intervening evolution, this update guarantees immediate confirmation of the same outcome; effects alone do not specify the post-measurement state.
 
 Linear-algebra textbooks routinely treat $P^2 = P$ as a dry technical definition ("a matrix whose eigenvalues are $0$ and $1$"). Yet in the genealogical interpretation developed in this book, examining the operational structure of "being," "substance," "logical concepts," and "sequential classical records" brings an illuminating thread into focus: **across these seemingly disparate classical categories runs the shared algebraic signature $P^2 = P$.**
 
@@ -16,7 +18,7 @@ Ask a deceptively simple operational question: **what does it actually take for 
 
 Imagine an ocean of continuously turning phases. If you point at a region and declare, "Here is an electron," or "Here is a white cat," yet a microsecond later an identical check under the exact same criterion yields something altogether unrelated — if the phenomenon cannot survive a second look and confirm itself upon immediate re-examination — human language cannot coin a noun for it, and physics cannot register it as a "particle."
 
-More than two millennia ago, Aristotle laid down the **law of identity** ($A = A$) as the first axiom of rational thought. In 1854, George Boole founded symbolic logic on the algebraic equation $x^2 = x$: selecting "all cats" twice in succession ("all cats among all cats") isolates the exact same class as selecting once. In 1932, John von Neumann identified every sharp physical proposition in quantum mechanics with an orthogonal projection operator $P^2 = P$.
+In modern logical notation, the **law of identity** is written $A = A$. In 1854, George Boole founded symbolic logic on the algebraic equation $x^2 = x$: selecting "all cats" twice in succession ("all cats among all cats") isolates the exact same class as selecting once. In 1932, John von Neumann identified every sharp physical proposition in quantum mechanics with an orthogonal projection operator $P^2 = P$.
 
 In the geometric interpretation of this book, these three insights share **one and the same idempotent operational structure**. On a smooth isotropic sphere there are no pre-cut "particles" or pre-drawn conceptual fences. When a measurement apparatus selects a one-dimensional discrimination axis $P$ through the sphere, whatever component $Px$ passes the slit on the first check is guaranteed to pass a second identical check unchanged — $P(Px) = P^2 x = Px$! From this interpretive standpoint, **a "particle" may be understood as a stable fixed point condensed out of continuous geometry by an idempotent projection; even the operational concept of "existence" itself (Latin *ex-sistere*, "to stand out") corresponds geometrically to an idempotent discrimination line $P^2 = P$.**
 
@@ -75,7 +77,7 @@ $$
 Summing over all $k \in \kappa$ shows $\operatorname{unreadState}(P, \operatorname{unreadState}(P, \rho)) = \operatorname{unreadState}(P, \rho)$ for every $\rho$, establishing the composition identity by function extensionality. The full proof is checked by the Lean kernel.
 :::
 
-Which states $\rho$ pass through this pinching sieve completely unscathed ($\operatorname{unreadState}(P, \rho) = \rho$), qualifying as "classical objective states" relative to the conceptual frame $P$? The next theorem provides an exact block-diagonal characterization.
+Which states $\rho$ pass through this pinching sieve completely unscathed ($\operatorname{unreadState}(P, \rho) = \rho$), with no coherence between branches of the record $P$? The next theorem provides an exact block-diagonal characterization.
 
 ::: {.theorem #thm-unread-fixed-iff title="Block-Diagonal Criterion for Fixed Points of the Unread State" lean="D5/S3/Observer/Conditioning.unreadState_fixed_iff"}
 Let $n$ and $\kappa$ be finite index types (with decidable equality on $n$), let $P : \kappa \to M_n(\mathbb{C})$ satisfy `IsRecordMeasurement P`, and let $\rho \in M_n(\mathbb{C})$. Then $\rho$ is fixed by the unread-state map if and only if all off-diagonal coherence blocks between distinct branches vanish:
@@ -97,7 +99,7 @@ $$
 The full proof is checked by the Lean kernel.
 :::
 
-[@thm-unread-fixed-iff] exposes the birth of classical probability inside quantum geometry: once a record frame $P$ is chosen, matrices with vanishing inter-branch coherence $P_k \rho P_l = 0$ ($k \neq l$) behave as non-interfering classical ledgers. Classicality is not a separate realm of nature — it is the **fixed-point subspace** of an idempotent pinching map $\operatorname{unreadState}(P)$.
+[@thm-unread-fixed-iff] shows how a classical record emerges from quantum geometry: once a record measurement $P$ is chosen, the fixed points have no inter-branch coherence, $P_k \rho P_l = 0$ ($k \neq l$). The branch labels go into a classical ledger without interference, but a branch of rank greater than one can still retain internal quantum coherence. Refining the record to rank-one projections makes the unread state fully diagonal in the corresponding basis, leaving only classical probabilities.
 
 A record measurement cuts a $d$-dimensional space into non-interfering channels. Turn the question around: how many records can a $d$-dimensional system hold if each must be read back **without any error**? If one is allowed to encode in non-orthogonal states, and to read out by something more general than a projective measurement, could three or four records be squeezed into one qubit? The module `D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity` at the pinned commit answers no, under generous hypotheses: the records may be mixed states and the readout may be any family of positive semidefinite matrices summing to the identity.
 
@@ -176,7 +178,7 @@ $$
 Stripped of century-old mystification, **wave–particle duality** is simply Hodge duality on the sphere:
 
 - When your apparatus locks onto a one-dimensional normal axis $\vv{e}_3$ to extract idempotent clicks, what registers along the line is discrete **particle** bias ($r_z$);
-- What lies hidden in the orthogonal complement of that slit is the entire two-dimensional equatorial plane $\vv{e}_1 \wedge \vv{e}_2 = \star\vv{e}_3$, where continuous phase rotation $\phi$ and interference amplitude $r_x^2 + r_y^2$ — **wave** behavior — reside!
+- What lies hidden in the orthogonal complement of that slit is the entire two-dimensional equatorial plane $\vv{e}_1 \wedge \vv{e}_2 = \star\vv{e}_3$, where continuous phase rotation $\phi$ and the squared transverse coherence length $r_x^2 + r_y^2$ (the squared fringe visibility below) — **wave** behavior — reside!
 
 Without erecting the particle line, no orthogonal wave plane is defined; once the particle line is erected, the wave plane automatically retreats into its orthogonal blind spot $V^\perp$. Better still, in any complete inner-product space, the visible particle deviation along $V$ and the invisible wave coherence in $V^\perp$ obey an exact **Pythagorean conservation law**. In the Lean module `ComplementaryContextProbabilityPythagoras`, the squared norm in the orthogonal complement of a closed subspace $V \subseteq E$ is defined as [`residualMass`](lean:D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.residualMass): $\operatorname{residualMass}(V, s) = \norm{P_{V^\perp}(s)}^2$.
 
@@ -275,7 +277,9 @@ where $H$ is the Shannon entropy in nats (`shannonEntropy` in Lean, with $0\ln 0
 Two applications of Jensen's inequality. The first uses $p_b$ itself as weights: $-\ln$ is convex, so $H(p_b) = \sum_i p_{b,i}\,(-\ln p_{b,i}) \ge -\ln\bigl(\sum_i p_{b,i}^2\bigr)$; the Shannon entropy is at least the collision entropy. The second averages over the $d + 1$ contexts with uniform weights $\frac{1}{d+1}$: $\frac{1}{d+1}\sum_b -\ln c_b \ge -\ln\bigl(\frac{1}{d+1}\sum_b c_b\bigr)$, where $c_b = \sum_i p_{b,i}^2$. Substituting $\sum_b c_b = 1 + P$ from hypothesis 2 gives the claim. The full proof is checked by the Lean kernel.
 :::
 
+::: {.remark #rem-complete-mub-collision-sum title="The Collision Probability Sum for Complete Mutually Unbiased Bases"}
 [@prop-collision-entropy-uncertainty] is by itself an inequality about tables of numbers; all the quantum mechanics sits in hypothesis 2. For the three Pauli contexts of a qubit, hypothesis 2 is the identity derived above from the tomography table, with $P = \Tr(\rho_{\vv{r}}^2)$. For general $d$, if the $d + 1$ contexts are mutually unbiased, one likewise has $\sum_b\sum_i p_{b,i}^2 = 1 + \Tr(\rho^2)$ (a literature result, not formalized in this book: I. D. Ivanović, *J. Phys. A* **25**, L363, 1992; such $d + 1$ contexts are known to exist when $d$ is a prime power).
+:::
 
 ::: {.example #ex-three-pauli-entropy-sum title="The Entropy Sum of the Three Pauli Contexts: No State Makes All Three Readings Definite"}
 For a qubit state with Bloch vector $\vv{r}$, the two outcome probabilities in context $b \in \{X, Y, Z\}$ are $\frac{1 \pm r_b}{2}$. By [@prop-collision-entropy-uncertainty] with $d = 2$ and $P = \frac{1 + \norm{\vv{r}}^2}{2}$:
