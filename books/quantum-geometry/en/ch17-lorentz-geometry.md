@@ -304,4 +304,8 @@ Segment-by-segment invariance of $q$ guarantees that every inertial frame comput
 The full rapidity-and-light-cone lab: four scenes (compare, boost, caliper, worldlines) on one rail; the green boxes are reserved for the three Lean-verified results of this chapter ([@thm-hyperbolic-norm], [@lemma-null-cone-spatial], [@prop-null-cone-rigidity]).
 :::
 
+::: {.film src="005-hyperbolic-rotation"}
+**Hyperbolic rotation: the light cone stays, rapidities add (1 min 53 s).** The same event $(5, 3)$, turned, rides the magenta circle out through the light cone; boosted, it slides along the cyan hyperbola. A boost by $\eta = \ln 2$ has $\cosh\eta = 5/4$ and $\sinh\eta = 3/4$ ([@thm-hyperbolic-norm]) and carries it to $(4, 0)$. Then the white beads only slide along the light cone, and a scale $k = 3/2$ keeps the cone but moves $\tau = 4$ to $6$ ([@prop-null-cone-rigidity]); two boosts by $\ln 2$ multiply into one by $\ln 4$, the two magenta hyperbolic sectors each have area $\ln 2 / 2$, while the velocities compose to $15/17$ (for the velocity reading, see [@rem-lorentz-rotor-literature]); finally, in the outbound traveller's frame, the bent and resting worldlines still tick $8$ and $10$.
+:::
+
 With the hyperbolic identity $|\cosh r|^2 - |\sinh r|^2 = 1$ ([@thm-hyperbolic-norm]) and the null-cone rigidity chain ([@lemma-null-cone-spatial], [@prop-null-cone-rigidity], and [@cor-null-cone-proportionality]) in place, the metric skeleton of special relativity is fully demystified. In the next chapter ([Dirac Spinors and Gauge Fields](ch18-spinors-and-gauge-curvature.md)), we take the matrix square root of relativistic dispersion and trace how anticommuting Pauli operators and closed-loop phases on graphs give rise to spinor coupling and gauge holonomy.

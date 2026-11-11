@@ -40,6 +40,10 @@ The eight-dimensional algebra decomposes into four grade subspaces of dimensions
 
 :::
 
+::: {.figure src="appb-grades"}
+**The eight blades split by grade into $1 + 3 + 3 + 1$: a point, three lines, three planes, one volume.** Grade $0$ is the scalar $1$; grade $1$ is the three cyan arrows $e_1, e_2, e_3$; grade $2$ is the three magenta faces $e_{12}, e_{13}, e_{23}$, each spanned by two coordinate axes; grade $3$ is the violet unit cube $e_{123} = I_3$. Under each panel are the dimension and the square: $+1$ for the first two, $-1$ for the last two, as in the table above. Literature result, not formalized in this book.
+:::
+
 ---
 
 ## B.2 3-Bit XOR Rule and Complete $8\times 8$ Blade Multiplication Table for $\mathcal{Cl}_{3,0}(\mathbb{R})$ {#sec-appendix-b-cayley-table}
@@ -64,6 +68,10 @@ The complete $8\times 8$ multiplication Cayley table for the canonical basis bla
 | **$e_{23}$ (`110`)** | $+e_{23}$ | $+e_{123}$ | $-e_3$ | $+e_2$ | $-e_{13}$ | $+e_{12}$ | $-1$ | $-e_1$ |
 | **$e_{123}$ (`111`)** | $+e_{123}$ | $+e_{23}$ | $-e_{13}$ | $+e_{12}$ | $-e_3$ | $+e_2$ | $-e_1$ | $-1$ |
 
+:::
+
+::: {.figure src="appb-cayley"}
+**Which blade a product lands on is the XOR of the masks; its sign is the parity of the inversions.** Rows are the left factor $E_a$, columns the right factor $E_b$, each blade with its three-bit mask; each cell is $E_a E_b$, cyan where the sign is $+$ and magenta where it is $-$. The first row and column are all cyan; on the diagonal, $1, e_1, e_2, e_3$ square to $+1$ and $e_{12}, e_{13}, e_{23}, e_{123}$ to $-1$; $40$ of the $64$ cells are positive and $24$ negative. Every cell is computed as $(-1)^{\operatorname{inv}(a, b)} E_{a \oplus b}$ and checked cell by cell against the table above. Literature result, not formalized in this book.
 :::
 
 ---
@@ -172,6 +180,10 @@ $$
    $$
 
    The third bracket $[K_i, K_j] = -\varepsilon_{ijk} J_k$ is the geometric origin of Thomas precession under non-collinear Lorentz boosts.
+:::
+
+::: {.figure src="appb-spacetime-split"}
+**The even part of the spacetime algebra matches the eight blades of $\mathcal{Cl}_{3,0}(\mathbb{R})$ one for one.** On top are the squares of the generators, $\gamma_0^2 = +1$ and $\gamma_1^2 = \gamma_2^2 = \gamma_3^2 = -1$. The left column holds the blades of the even part of $\mathcal{Cl}_{1,3}(\mathbb{R})$, the right column those of $\mathcal{Cl}_{3,0}(\mathbb{R})$; the small numbers beside each line are the grades on the two sides, and the last column is the square, the same on both. Cyan lines: the time–space bivectors $\boldsymbol{\sigma}_k = \gamma_k\gamma_0$ (grade $2$) go to the vectors $e_k$ (grade $1$), square $+1$; magenta lines: the purely spatial bivectors $\boldsymbol{\sigma}_j\boldsymbol{\sigma}_k$ go to $e_{jk}$, square $-1$; violet line: $\boldsymbol{\sigma}_1\boldsymbol{\sigma}_2\boldsymbol{\sigma}_3 = \gamma_0\gamma_1\gamma_2\gamma_3$ (grade $4$) goes to $e_{123}$ (grade $3$), square $-1$. The script checks that this correspondence preserves the multiplication table of B.2 cell by cell. Literature result, not formalized in this book.
 :::
 
 ---
