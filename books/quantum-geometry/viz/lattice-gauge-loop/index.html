@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="GAUGE//LOOP · Lattice gauge and the loop phase">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GAUGE//LOOP 格点规范与回路相位</title>
+<meta name="description" content="格点规范与回路相位 · Lattice gauge and the loop phase">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="lattice-gauge-loop">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="GAUGE//LOOP">GAUGE<b>//</b>LOOP</h1>
+      <div class="tagline">
+        <span class="zh">格点规范与回路相位 · <em>一条边上的相位可以拧成任意值；绕方格一圈的相位，顶点怎么拧都不动</em></span>
+        <span class="en">Lattice gauge and the loop phase · <em>the phase on one edge can be twisted to anything; the phase once around a square stays put however the corners turn</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill hot" id="pillLoop"><span class="zh">回路</span><span class="en">LOOP</span> <strong>—</strong></span>
+      <span class="pill" id="pillInv"><span class="zh">不变量</span><span class="en">INVARIANTS</span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="twist" aria-pressed="false"><span class="code">TWIST</span><span class="cn zh">拧一个顶点</span><span class="cn en">Twist one corner</span></button>
+        <button class="preset" data-preset="chord" aria-pressed="false"><span class="code">CHORD</span><span class="cn zh">弦与它的基本回路</span><span class="cn en">A chord and its loop</span></button>
+        <button class="preset" data-preset="anchor" aria-pressed="false"><span class="code">ANCHOR</span><span class="cn zh">两个锚点之间的路径</span><span class="cn en">The path between two anchors</span></button>
+        <button class="preset" data-preset="tree" aria-pressed="false"><span class="code">TREE-GAUGE</span><span class="cn zh">沿生成树拧平</span><span class="cn en">Iron the tree flat</span></button>
+        <button class="preset" data-preset="two" aria-pressed="false"><span class="code">TWO-SQUARES</span><span class="cn zh">相邻两格</span><span class="cn en">Two neighbouring squares</span></button>
+        <button class="preset" data-preset="plaquette" aria-pressed="false"><span class="code">PLAQUETTE</span><span class="cn zh">例题：边场 (1, 1, 1, i)</span><span class="cn en">Worked example: (1, 1, 1, i)</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+    <section class="panel sec">
+      <h2><span class="zh">格子与锚点</span><span class="en">Lattice and anchors</span><span class="aside">V · E · R</span></h2>
+      <div class="chips" id="latChips" role="group" aria-label="方格数" data-aria-en="Number of squares">
+        <button class="chip" data-lat="1" aria-pressed="true"><span class="zh">1 格</span><span class="en">1 square</span></button><button class="chip" data-lat="2" aria-pressed="false"><span class="zh">2 格</span><span class="en">2 squares</span></button><button class="chip" data-lat="4" aria-pressed="false"><span class="zh">4 格</span><span class="en">4 squares</span></button>
+      </div>
+      <div class="chips" id="ancChips" role="group" aria-label="锚点" data-aria-en="Anchors">
+        <button class="chip" data-anc="root" aria-pressed="true"><span class="zh">锚点：只有根 r</span><span class="en">Anchors: root r only</span></button><button class="chip" data-anc="far" aria-pressed="false"><span class="zh">再锁远角 a</span><span class="en">Also lock corner a</span></button>
+      </div>
+      <p class="note"><span class="zh">拖动边上的指针改边相位；拖动顶点的紫色指针做规范变换。</span><span class="en">Drag a hand on an edge to change its phase; drag the violet hand at a corner to make a gauge transformation.</span></p>
+      <div class="chips" role="group" aria-label="操作" data-aria-en="Actions">
+        <button class="chip" id="btnGauge"><span class="zh">随机规范</span><span class="en">Random gauge</span></button><button class="chip" id="btnTree"><span class="zh">沿树拧平</span><span class="en">Iron the tree</span></button><button class="chip" id="btnField"><span class="zh">随机边相位</span><span class="en">Random edges</span></button>
+      </div>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage still" id="stage" data-thumb aria-label="一小块格点：每条边上一枚相位指针，每个方格中心是绕它一圈的回路相位" data-aria-en="A small lattice: a phase hand on every edge, and at the centre of every square the phase once around it">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-bl">
+        <span><i class="sw cy"></i><span class="zh">生成树 T</span><span class="en">spanning tree T</span></span>
+        <span><i class="sw mg"></i><span class="zh">回路相位</span><span class="en">loop phase</span></span>
+        <span><i class="sw vi"></i><span class="zh">顶点规范 g</span><span class="en">corner gauge g</span></span>
+        <span><i class="sw am"></i><span class="zh">此刻在拧的</span><span class="en">being turned now</span></span>
+      </div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2><span class="zh">边在转，回路不动</span><span class="en">Edges turn, loops stay</span></h2><span id="plotMeta"></span></div>
+        <canvas id="plot" aria-label="沿时间轴每条边的相位与每个回路的相位" data-aria-en="The phase of every edge and of every loop along the rail"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">U(1)</span></h2>
+      <dl class="ro">
+        <div class="key"><dt><span class="zh">回路相位（各方格）</span><span class="en">loop phase (each square)</span></dt><dd><b id="roLoop">—</b><span id="roLoopSub"></span></dd></div>
+        <div><dt><span class="zh">顶点 n · 边 m · 锚点 k</span><span class="en">corners n · edges m · anchors k</span></dt><dd id="roCount">—</dd></div>
+        <div class="m"><dt><span class="zh">弦 c = m + 1 − n</span><span class="en">chords c = m + 1 − n</span></dt><dd id="roC">—</dd></div>
+        <div class="c"><dt><span class="zh">非根锚点 a = k − 1</span><span class="en">non-root anchors a = k − 1</span></dt><dd id="roA">—</dd></div>
+        <div><dt><span class="zh">不变的相位个数 c + a</span><span class="en">phases that cannot change c + a</span></dt><dd id="roInv">—</dd></div>
+      </dl>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">有限图上，锚点 R（含根 r）处不动的规范变换不改变 χ：每条弦的基本回路相位与根到每个非根锚点的树路径相位；两个边场的 χ 相同，当且仅当它们差一个这样的规范变换；独立坐标共 c + a = m + k − n 个。已冻结：</span><span class="en">On a finite graph, gauge transformations that fix the anchors R (root r included) leave χ unchanged: the fundamental loop phase of every chord and the tree-path phase from the root to every other anchor; two edge fields have the same χ exactly when such a transformation carries one to the other; there are c + a = m + k − n independent coordinates. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.lean" target="_blank" rel="noopener"><code>anchored_phase_classification</code></a></span></div>
+      <p class="note" id="roNote"></p>
+    </section>
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">选定生成树 T 与根 r 后，树输运相位在根处为 1；沿树边 e 有 rootPhase(t(e)) = u(e)·rootPhase(s(e))；规范 g 下它变为 g(a)·rootPhase(a)·g(r)⁻¹。已冻结：</span><span class="en">With a spanning tree T and a root r chosen, the tree transport phase is 1 at the root; along a tree edge e, rootPhase(t(e)) = u(e)·rootPhase(s(e)); under a gauge g it becomes g(a)·rootPhase(a)·g(r)⁻¹. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.lean" target="_blank" rel="noopener"><code>selected_tree_transport</code></a></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">边相位、回路相位、树输运相位与计数都由页面按双精度实算：相位以角度记（90° 即 i），回路按逆时针方向取乘积。</span><span class="en">Edge phases, loop phases, tree transport phases and the counts are computed live in double precision: a phase is written as an angle (90° is i), and a loop is multiplied counter-clockwise.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">格子的画法、边的方向、生成树的选法（全部横边加最左一列）与时间轴上从 1 走到 g 的中间路径 g<sub>s</sub>(v) = e<sup>i s θ(v)</sup> 都是页面的选择。</span><span class="en">How the lattice is drawn, the directions of its edges, the choice of tree (every horizontal edge and the leftmost column) and the path g<sub>s</sub>(v) = e<sup>i s θ(v)</sup> from 1 to g along the rail are choices of the page.</span></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">把方格的回路相位读作穿过方格的磁通（阿哈罗诺夫—玻姆、威尔逊圈、连续极限下的场强）是文献结果，未在本书形式化；页面只算离散的 U(1) 相位。</span><span class="en">Reading the loop phase of a square as the flux through it (Aharonov–Bohm, Wilson loops, the field strength in the continuum limit) is a literature result, not formalized in this book; the page computes discrete U(1) phases only.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="从变换前到变换后" data-aria-en="From before the change to after it">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">每次 ¼</span><span class="en">a quarter at a time</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">舞台是一小块格点：每条有向边上有一个单位圆相位 u(e)（边上的指针），每个顶点可以做规范变换 g(v)（紫色指针），边相位随之变为 g(t(e))·u(e)·g(s(e))⁻¹。时间轴从变换前走到变换后：边上的指针都在转，方格中心品红的回路相位却不动。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>依据的章节。</b><a href="../../zh/ch18-spinors-and-gauge-curvature.html#sec-tree-gauge-transport" target="_top">第十八章 · 选定生成树上的相位输运</a>与<a href="../../zh/ch18-spinors-and-gauge-curvature.html#sec-gauge-loop-coordinates" target="_top">闭合回路相位与锚定规范等价</a>，例题 <a href="../../zh/ch18-spinors-and-gauge-curvature.html#ex-plaquette-phase" target="_top">四顶点单方格</a>。</li>
+        <li><b>已验证的定理。</b>树输运相位的根点归一、树边重建与端点规范协变：<a class="leanref" data-lean-gid="D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.lean" target="_blank" rel="noopener"><code>selected_tree_transport</code></a>（LEAN ✓）。有限图上锚定规范下 χ 不变、χ 相同当且仅当规范等价、截面 σ 与 c + a = m + k − n：<a class="leanref" data-lean-gid="D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.lean" target="_blank" rel="noopener"><code>anchored_phase_classification</code></a>（LEAN ✓）。</li>
+        <li><b>页面算的是什么。</b>“沿树拧平”取 g(v) = rootPhase(v)⁻¹：树边全变成 1，每条弦上剩下 χ 的回路坐标，这正是截面 σ 的形状（单锚点时）。方格的回路相位是逆时针四条边的乘积；在这里的生成树下，中间一列的弦围住它左边一格，右边一列的弦围住同一行的两格，所以它的回路相位是两格之积。这些等式由页面数值核对（NUM）。</li>
+        <li><b>示意与简化。</b>格子、边的方向、生成树与时间轴上的中间路径是页面的选择（MODEL）。把回路相位读作磁通、连续极限下的场强与非阿贝尔威尔逊圈是文献结果，未在本书形式化（ARGUED）；本页只处理离散阿贝尔 U(1) 相位。</li>
+      </ol>
+    </div>
+    <div class="en">
+      <p class="lede">The stage is a small lattice: every directed edge carries a unit-circle phase u(e) (the hand on the edge), and every corner can make a gauge transformation g(v) (the violet hand), which turns the edge phase into g(t(e))·u(e)·g(s(e))⁻¹. The rail runs from before the change to after it: every hand on an edge turns, yet the magenta loop phase at the centre of each square stays still. The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>The chapter behind it.</b> <a href="../../en/ch18-spinors-and-gauge-curvature.html#sec-tree-gauge-transport" target="_top">Chapter 18 · Phase transport on a selected spanning tree</a> and <a href="../../en/ch18-spinors-and-gauge-curvature.html#sec-gauge-loop-coordinates" target="_top">Loop phases and anchored gauge equivalence</a>, with the worked example <a href="../../en/ch18-spinors-and-gauge-curvature.html#ex-plaquette-phase" target="_top">of a four-vertex plaquette</a>.</li>
+        <li><b>Verified theorems.</b> Root normalization, tree-edge reconstruction and endpoint gauge covariance of the tree transport phase: <a class="leanref" data-lean-gid="D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.lean" target="_blank" rel="noopener"><code>selected_tree_transport</code></a> (LEAN ✓). On a finite graph, χ is unchanged by anchored gauge transformations, equal χ means gauge equivalent, the section σ, and c + a = m + k − n: <a class="leanref" data-lean-gid="D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.lean" target="_blank" rel="noopener"><code>anchored_phase_classification</code></a> (LEAN ✓).</li>
+        <li><b>What the page computes.</b> “Iron the tree” takes g(v) = rootPhase(v)⁻¹: every tree edge becomes 1 and each chord keeps its loop coordinate of χ, which is the shape of the section σ (with a single anchor). The loop phase of a square is the product of its four edges taken counter-clockwise; with the tree used here, a chord in the middle column encloses the square to its left and a chord in the right column encloses both squares of its row, so its loop phase is the product of the two. These identities are checked numerically by the page (NUM).</li>
+        <li><b>Models and simplifications.</b> The lattice, the edge directions, the tree and the path along the rail are choices of the page (MODEL). Reading a loop phase as a flux, the field strength of the continuum limit and non-abelian Wilson loops are literature results, not formalized in this book (ARGUED); the page handles discrete abelian U(1) phases only.</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

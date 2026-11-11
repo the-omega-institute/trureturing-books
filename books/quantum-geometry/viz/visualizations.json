@@ -1619,6 +1619,61 @@
           "gid": "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null"
         }
       ]
+    },
+    {
+      "id": "lattice-gauge-loop",
+      "code": "GAUGE//LOOP",
+      "title": "格点规范与回路相位",
+      "title_en": "Lattice gauge and the loop phase",
+      "summary": "一小块格点，每条有向边上一枚单位圆相位指针 u(e)，每个顶点一枚紫色的规范指针 g(v)，边相位按 g(t(e))·u(e)·g(s(e))⁻¹ 变换；每个方格中心是品红的回路相位，即逆时针四条边的乘积。时间轴从变换前走到变换后：拧一个顶点，相邻两条边的指针转遍所有值，回路相位却纹丝不动；青色的生成树（全部横边加最左一列）把每条弦对应到一个基本回路，锚住远角后根到锚点的树路径相位也不动；沿树拧平时树边全变成 1，弦上剩下的正是回路坐标，独立的不变相位共 c + a = m + k − n 个。第十八章的例题（边场 (1, 1, 1, i)、规范 (1, i, −1, −i)、回路始终为 i）是其中一张卡。六张实验卡可以在第十八章正文里单独引用。",
+      "summary_en": "A small lattice with a unit-circle phase u(e) on every directed edge, drawn as a hand on a dial, and a violet gauge hand g(v) at every corner; edge phases transform as g(t(e))·u(e)·g(s(e))⁻¹. At the centre of each square sits the magenta loop phase, the product of its four edges taken counter-clockwise. The rail runs from before a change to after it: twist one corner and the hands on its two edges pass through every value while the loop phase does not move; the cyan spanning tree (every horizontal edge and the leftmost column) assigns each chord a fundamental loop, and once a far corner is anchored the tree-path phase from the root to it stays put too; ironing the tree flat turns every tree edge to 1 and leaves exactly the loop coordinates on the chords, c + a = m + k − n phases that no anchored gauge can change. The worked example of Chapter 18 (edges (1, 1, 1, i), gauge (1, i, −1, −i), loop i throughout) is one of the cards. Each of the six experiment cards can be cited on its own from Chapter 18.",
+      "path": "lattice-gauge-loop/",
+      "thumbnail": "lattice-gauge-loop/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "规范场",
+        "格点",
+        "回路相位",
+        "生成树",
+        "U(1)",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Gauge fields",
+        "Lattice",
+        "Loop phase",
+        "Spanning tree",
+        "U(1)",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第十八章 · 选定生成树上的相位输运",
+          "label_en": "Chapter 18 · Phase transport on a selected spanning tree",
+          "href": "../zh/ch18-spinors-and-gauge-curvature.html#sec-tree-gauge-transport",
+          "href_en": "../en/ch18-spinors-and-gauge-curvature.html#sec-tree-gauge-transport"
+        },
+        {
+          "label": "第十八章 · 闭合回路相位与锚定规范等价",
+          "label_en": "Chapter 18 · Loop phases and anchored gauge equivalence",
+          "href": "../zh/ch18-spinors-and-gauge-curvature.html#sec-gauge-loop-coordinates",
+          "href_en": "../en/ch18-spinors-and-gauge-curvature.html#sec-gauge-loop-coordinates"
+        },
+        {
+          "label": "Lean 源码 · AnchoredPhaseClassification",
+          "label_en": "Lean source · AnchoredPhaseClassification",
+          "href": "{trureturing}/D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification"
+        },
+        {
+          "gid": "D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport"
+        }
+      ]
     }
   ]
 }

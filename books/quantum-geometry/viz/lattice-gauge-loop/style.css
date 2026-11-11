@@ -1,0 +1,5 @@
+/* GAUGE//LOOP: the shared lab layout (../assets/theme.css) carries the page. Put here only what belongs to this
+   visualization alone; colours come from the tokens (var(--cyan) …), never from hex values. */
+#cv { touch-action: none; }
+.stage .tag.num { font-size: 11px; white-space: nowrap; }
+.deck .chips + .chips, .deck .note + .chips { margin-top: 6px; }
