@@ -246,7 +246,7 @@ The table below lists in alphabetical module order all **227 unique frozen theor
 
 ## C.2 Formal Definitions, Structures, and Inductive Types (95 Unique Declarations) {#sec-appendix-c-definitions}
 
-The table below lists all **95 unique foundational definitions, algebraic structures, and inductive types** bound to `definition` environments and media components (together with the 227 theorems of Section C.1, these form the **309 core environment and media declarations** of the monograph):
+The table below lists all **95 unique foundational definitions, algebraic structures, and inductive types** bound to `definition` environments and media components (together with the 227 theorems of Section C.1, these form the **322 core environment and media declarations** of the monograph):
 
 | ID | Lean Declaration (Click for Source) | Module Path & Line | Kind | Chapters & Environment IDs |
 | :--- | :--- | :--- | :--- | :--- |
@@ -350,7 +350,7 @@ The table below lists all **95 unique foundational definitions, algebraic struct
 
 ## C.2.1 Inline-Referenced Auxiliary Theorems and Definitions (119 Unique Declarations) {#sec-appendix-c-inline}
 
-In addition to the 309 declarations bound to formal environments or media anchors in Sections C.1 and C.2, the main text, proof explanations, and appendix tables reference **119 auxiliary theorems and definitions** via inline `[name](lean:GID)` links. Including these 119 inline declarations, this appendix accounts for all **441 unique locked declarations** in `trureturing.lock.json` (`227 + 95 + 119 = 441`):
+In addition to the 322 declarations bound to formal environments or media anchors in Sections C.1 and C.2, the main text, proof explanations, and appendix tables reference **119 auxiliary theorems and definitions** via inline `[name](lean:GID)` links. Including these 119 inline declarations, this appendix accounts for all **441 unique locked declarations** in `trureturing.lock.json` (`227 + 95 + 119 = 441`):
 
 | ID | Lean Declaration (Click for Source) | Module Path & Line | Kind | Inline Reference Chapters |
 | :--- | :--- | :--- | :--- | :--- |
