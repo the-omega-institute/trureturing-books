@@ -51,10 +51,12 @@
 - [第二十七章 走进 Lean 4 公理圣殿（上）：从平行四边形恒等式到有限记录挤压](ch27-reading-frozen-proofs-i.md)
 - [第二十八章 走进 Lean 4 公理圣殿（下）：从秩一玻恩归约到 $\psi = \psi(\psi)$ 的终极合拢](ch28-reading-frozen-proofs-ii.md)
 
-# 第八部 贯通·无时间因果、复杂性视界与流体涡丝
+# 第八部 贯通·无时间因果、复杂性视界、量子公平与元统一
 
 - [第二十九章 无时间因果与格拉姆相容空间：从毕达哥拉斯佩尔接缝到椭圆曲线环面](ch29-timeless-causality-and-gram-space.md)
 - [第三十章 场（$P$）与线（$NP$）：从指数时间假设（ETH）到纳维—斯托克斯涡丝](ch30-fields-lines-eth-and-navier-stokes.md)
+- [第三十一章 量子的本质是公平：五重几何特权的废除与遍历统计全息](ch31-quantum-fairness.md)
+- [第三十二章 正交自指统一场与万流归宗：人类大一统纲领的元统一](ch32-unified-field-and-meta-unification.md)
 
 # 终章与附录
 

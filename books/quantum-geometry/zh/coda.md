@@ -48,9 +48,11 @@
 ---
 
 
-在 **[第 29 章](ch29-timeless-causality-and-gram-space.md)** 与 **[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)** 中，我们已经看到这道“多面体分片近似与光滑球面之间的非零余项”如何在算术、时间、计算复杂性与流体力学中掀起两场壮丽的交响：
+在第八部 **[第 29 章](ch29-timeless-causality-and-gram-space.md)** 至 **[第 32 章](ch32-unified-field-and-meta-unification.md)** 中，我们已经看到这道“多面体分片近似与光滑球面之间的非零余项”如何在算术、时间、计算复杂性、流体力学、量子公平与统一场论中掀起四场壮丽的交响：
 - **从算术佩尔接缝到无时间因果晶体（[第 29 章](ch29-timeless-causality-and-gram-space.md)）**：勾股定理的双向量手性对消与希帕索斯的佩尔余项（[@thm-ch29-silver-pell-remainder]）驱动了从有理数到余弦自指不动点（[@rem-banach-dottie-hairy-ball-literature]）的四级数系突围，并结合已由 Lean 验证的素数模四分裂（[@thm-ch29-face-prime-two-squares]、[@thm-ch29-two-squares-classification]）与文献注记 [@rem-ch29-pell-primes-hilbert-literature]、[@rem-ch29-elliptic-torus-literature]、[@rem-ch29-hasse-gauss-literature]、[@rem-ch29-arithmetic-geometry-literature] 中的同余数椭圆曲线环面及佐藤—泰特分布建立起跨数论呼应；而 Gram 矩阵半正定刚性 $\det G \ge 0$ 则在与 [@rem-ch29-wheeler-dewitt-page-wootters-literature] 无时间图景呼应的同时，为有限观察者撑开了二面角 $\phi$ 的因果相容椭圆体。
 - **从“$P$ 是场，$NP$ 是线”到 ETH 张量缝隙与纳维—斯托克斯涡丝（[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)）**：场内有限观察者受 $90^\circ$ 正交视界与局部 Gram 盲区阻隔而面对 $P \neq NP$（[@conj-p-neq-np]）的防火墙；文献注记 [@rem-ch30-eth-subexponential-literature] 与银河尺度例示 [@ex-ch30-galactic-crossover-scale] 所刻画的三体局部切面亚指数渐近缝隙虽在 $n \to \infty$ 极限下冲击指数时间假设（ETH），其超越局部搜索的交叉点却远在可观测宇宙视界之外；而在连续流体力学中，二次平流投影无精确闭合定理（[@thm-coda-quadratic-advection-no-closure]）与文献注记 [@rem-ch30-lamb-decomposition-literature]、[@rem-ch30-navier-stokes-forced-literature]、[@rem-ch30-tao-arnold-literature] 展示了同一正交几何张力的连续统化身。
+- **从五重几何特权废除到遍历统计全息（[第 31 章](ch31-quantum-fairness.md)）**：秩一玻恩配对互易、互补语境纯度勾股、不可克隆内积锁与贝尔纯态混态边缘（[@thm-ch31-seat-pythagorean-monogamy-fairness]）连同兰道尔热力学平衡下界、相干一致平面旋转及紧致环面闭子群轨道均匀分布与有界间隙回归（[@thm-ch31-horizon-landauer-ergodic-fairness]），配对文献注记 [@rem-ch31-haar-isotropy-landauer-literature]、[@rem-ch31-ckw-monogamy-literature]、[@rem-ch31-weyl-window-equidistribution-literature] 与五重公平对照表 [@rem-ch31-fivefold-fairness-table]，阐明“量子的本质是公平”这一几何本体模型（`MODEL`）。
+- **从正交自指统一场到八大纲领元统一（[第 32 章](ch32-unified-field-and-meta-unification.md)）**：反自伴幺正复结构平方、有限状态单调收缩、黄金倒数不动点与齐肯多夫无相邻禁戒律（[@thm-ch32-generative-self-reference-and-zeckendorf]）连同闵可夫斯基零光锥刚性、锚定规范环路和乐分类及桥图量子最大流最小割（[@thm-ch32-null-cone-holonomy-and-holographic-cut]），配对文献注记 [@rem-ch32-generative-laws-dottie-literature]、[@rem-ch32-dirac-yang-mills-jacobson-literature]、[@rem-ch32-icosian-e8-literature]、[@rem-ch32-eight-programs-literature] 与综合总表 [@rem-ch32-six-domain-isomorphism-table]、[@rem-ch32-meta-unification-table]，在三维认知罗盘下完成正交自指统一场与基础大一统纲领的元统一模型（`MODEL`）。
 
 现在，站在全书最后的收官高地上，让我们把“近似之球的几何余项”与“无时间场中的有限观察者”合拢为最后一个关于人自身的追问：**当一位有限观察者一轮又一轮地在无时间晶体中经历遗忘初始化并重新选点时，是什么在定义“同一个灵魂”？为什么现实中的历史遗迹会成为跨越千年的空间吸引子，让同一个灵魂在似曾相识（Déjà vu）的震颤中一轮又一轮走过熟悉的地方？**
 
@@ -354,11 +356,11 @@ $$
    - 素数在高斯整数中的分裂与惰性、奇素数负佩尔方程 $m^2 - p\,n^2 = -1$ 在 $p \equiv 1 \pmod 4$ 时的可解性定理、类域论中的希尔伯特互反律 $\prod_{v \le \infty} (a, b)_v = +1$（[@rem-ch29-pell-primes-hilbert-literature]），同余数椭圆曲线 $E_d : dy^2 = x^3 - x$ 的双有理等价与亏格 $1$ 环面拓扑 $\chi(T^2) = 0$（[@rem-ch29-elliptic-torus-literature]）、有限域椭圆曲线的哈塞（Hasse）定理 $|a_p| \le 2\sqrt{p}$、高斯关于 $y^2 = x^3 - x$ 模 $p$ 点数迹的精确公式与特征和推导（[@rem-ch29-hasse-gauss-literature]、[@rem-ch29-gauss-character-application]），以及非复乘椭圆曲线的佐藤—泰特（Sato–Tate）定理（Barnet-Lamb, Geraghty, Harris, Taylor 2011，[@rem-ch29-arithmetic-geometry-literature]）；
    - 笛卡尔多面体总角亏定理 $\sum_v \delta_v = 4\pi$、高斯—博内定理、庞加莱—布劳威尔偶维球面毛球定理 $\chi(S^{2n}) = 2$，以及亚当斯（Adams, 1960）关于仅有 $S^0, S^1, S^3, S^7$ 可平行化的拓扑定理（[@rem-coda-polyhedral-topology-literature]、[@rem-hairy-ball-adams-literature]）；
    - 动力系统中的洛伦兹奇异吸引子（Lorenz 1963，相空间体积散度 $-(\sigma+1+\beta) = -41/3 < 0$ 与数值李雅普诺夫谱给出的卡普兰—约克维数估计 $D_{\mathrm{KY}} \approx 2.06$）、洛伦兹吸引子支撑的遍历西奈—吕埃勒—鲍恩（SRB）物理不变测度（Tucker 1999；Luzzatto–Melbourne–Pugh 2005）与庞加莱回归定理（Poincaré 1890，[@rem-coda-lorenz-srb-literature]），以及准晶几何中的 Meyer 规则模型集一致重复性定理（1972）、六维超立方晶格 $\mathbb{Z}^6 \subset E_\parallel^3 \oplus E_\perp^3$ 的正二十面体投影与菱形三十面体（Rhombic Triacontahedron，$30$ 面、$60$ 棱、$32$ 顶点，$6$ 条五次轴）接受窗 $W$（Kramer & Neri 1984；Duneau & Katz 1985）、彭罗斯—康威准晶拼砖的“帝国效应”（Conway's Empire Effect，Grünbaum & Shephard 1987）与比内斜率渐近公式（[@rem-coda-quasicrystal-empire-literature]）；
-   - 量子引力中的惠勒—德维特（Wheeler–DeWitt）无时间方程 $H\mathbf{\Psi} = 0$、佩奇—伍特斯（Page–Wootters, 1983）条件纠缠时钟切片机制（[@rem-ch29-wheeler-dewitt-page-wootters-literature]）与费曼路径积分振荡相位驻相条件 $\delta S = 0$（[@rem-ch29-feynman-stationary-phase-literature]），计算复杂度理论中的阿伦森后选择定理 $\mathrm{PostBQP} = \mathrm{PP}$（2005）、闭合类时曲线不动点定理 $\mathrm{P}_{\mathrm{CTC}} = \mathrm{PSPACE}$（Aaronson–Watrous 2009）、无结构黑盒搜索 $\Omega(2^{n/2})$ 下界（BBBV 1997）、格里戈里耶夫—舍内贝克（Grigoriev–Schoenebeck）平方和半正定松弛下界、卡马卡（Karmarkar 1984）线性规划内点法、卡斯特莱因（Kasteleyn 1961）平面图 Pfaffian 匹配定理、因帕利亚佐—帕图里—赞恩（Impagliazzo–Paturi–Zane 1999, 2001）指数时间假设（ETH/SETH）与稀疏化引理、PPSZ $k$-SAT 算法及 2026 年 10 月张量网络缩并 $2^{O(n\log\log n/\sqrt{\log n})}$ 亚指数预印本与学界规约审计（[@rem-ch30-eth-subexponential-literature]），以及流体力学中的兰姆（Lamb）矢量恒等式、开尔文（Kelvin）环量守恒定理、拉季任斯卡娅（Ladyzhenskaya 1969）二维纳维—斯托克斯全局正则性定理、2026 年受迫三维纳维—斯托克斯（克雷陈述 C / D）有限时间爆破解析构造与外部形式化证明（[@rem-ch30-navier-stokes-forced-literature]）、柯尔莫哥洛夫（Kolmogorov 1941）$k^{-5/3}$ 级联与耗散微尺度 $\eta = (\nu^3/\varepsilon)^{1/4}$、阿诺德（Arnold 1966）保体积微分同胚群 $\operatorname{SDiff}(M)$ 测地线定理与陶哲轩（Tao 2016）平均化三维纳维—斯托克斯方程有限时间爆破定理（[@rem-ch30-tao-arnold-literature]）。
+   - 量子引力中的惠勒—德维特（Wheeler–DeWitt）无时间方程 $H\mathbf{\Psi} = 0$、佩奇—伍特斯（Page–Wootters, 1983）条件纠缠时钟切片机制（[@rem-ch29-wheeler-dewitt-page-wootters-literature]）与费曼路径积分振荡相位驻相条件 $\delta S = 0$（[@rem-ch29-feynman-stationary-phase-literature]），计算复杂度理论中的阿伦森后选择定理 $\mathrm{PostBQP} = \mathrm{PP}$（2005）、闭合类时曲线不动点定理 $\mathrm{P}_{\mathrm{CTC}} = \mathrm{PSPACE}$（Aaronson–Watrous 2009）、无结构黑盒搜索 $\Omega(2^{n/2})$ 下界（BBBV 1997）、格里戈里耶夫—舍内贝克（Grigoriev–Schoenebeck）平方和半正定松弛下界、卡马卡（Karmarkar 1984）线性规划内点法、卡斯特莱因（Kasteleyn 1961）平面图 Pfaffian 匹配定理、因帕利亚佐—帕图里—赞恩（Impagliazzo–Paturi–Zane 1999, 2001）指数时间假设（ETH/SETH）与稀疏化引理、PPSZ $k$-SAT 算法及 2026 年 10 月张量网络缩并 $2^{O(n\log\log n/\sqrt{\log n})}$ 亚指数预印本与学界规约审计（[@rem-ch30-eth-subexponential-literature]），流体力学中的兰姆（Lamb）矢量恒等式、开尔文（Kelvin）环量守恒定理、拉季任斯卡娅（Ladyzhenskaya 1969）二维纳维—斯托克斯全局正则性定理、2026 年受迫三维纳维—斯托克斯（克雷陈述 C / D）有限时间爆破解析构造与外部形式化证明（[@rem-ch30-navier-stokes-forced-literature]）、柯尔莫哥洛夫（Kolmogorov 1941）$k^{-5/3}$ 级联与耗散微尺度 $\eta = (\nu^3/\varepsilon)^{1/4}$、阿诺德（Arnold 1966）保体积微分同胚群 $\operatorname{SDiff}(M)$ 测地线定理与陶哲轩（Tao 2016）平均化三维纳维—斯托克斯方程有限时间爆破定理（[@rem-ch30-tao-arnold-literature]），以及量子信息与基础统一文献中的球面哈尔均匀测度与兰道尔 $k_B T \ln 2$ 擦除界（[@rem-ch31-haar-isotropy-landauer-literature]）、Coffman–Kundu–Wootters（2000）与 Osborne–Verstraete（2006）量子纠缠单配性不等式 $\tau_{A|B}+\tau_{A|C}\le\tau_{A|BC}$（[@rem-ch31-ckw-monogamy-literature]）、雅各布森（Jacobson 1995）视界热力学状态方程（[@rem-ch32-dirac-yang-mills-jacobson-literature]）、康威—斯隆（Conway–Sloane 1988）黄金域艾柯西安环 $(\mathcal{I}, Q)\subset\mathbb{H}$（$Q(q)=2(a+b)$）至 $E_8$ 根格等距同构（[@rem-ch32-icosian-e8-literature]）与八大现代基础统一纲领综述（[@rem-ch32-eight-programs-literature]）。
 3. **尚未解决的开放猜想（红色 `OPEN`，无 `lean` 属性）**：
    - 标准统一图灵机计算模型下的 $\mathrm{P} \neq \mathrm{NP}$ 猜想（[@conj-p-neq-np]）、无外力三维不可压缩纳维—斯托克斯方程全局光滑性猜想（克雷千禧年陈述 A / B，[@conj-coda-navier-stokes-regularity]）、沙努埃尔（Schanuel）猜想及其在 Dottie 不动点 $\theta^*$ 上的应用（[@conj-schanuel-dottie]，以及 Timothy Chow 证明的在沙努埃尔猜想成立前提下 $\theta^*$ 不属于初等封闭数域 $\mathrm{EL}$ 的条件性文献结论），以及全书在附录 C 第 C.3 节汇总的开放问题。
 4. **哲学与几何模型综合（`MODEL`，不作为形式定理宣称）**：
-   - 休谟因果怀疑论与斯宾诺莎《伦理学》三角形几何必然性的哲学对照、双向量手性对消 $+\mathbf{\Omega} - \mathbf{\Omega} = 0$ 对驻相干涉的几何诠释、“$P$ 是无旋导向场（$\nabla \wedge \mathbf{F} = 0$）、$NP$ 是零横截面一维见证丝、三元阻挫旋度 $\nabla \wedge \mathbf{F} \neq 0$ 撕裂全局场”以及“三维纳维—斯托克斯涡管拉伸 $A \to 0$ 与 $P$ vs. $NP$ 的连续—离散场化同构”类比模型、“历史遗迹作为零相子应变空间吸引子（$\|\pi_\perp(z)-u\|\to 0$）、灵魂作为内部正交相位锚点 $u \in E_\perp^3$、遗忘初始化作为齐肯多夫高位截断、似曾相识（Déjà vu）作为分形薄层/卡西尼 $(-1)^{k+1}$ 偏移下的跨轮次内积共振 $\cos\delta\theta \to 1$”的概念映射、决定论与目的论在无时间自指中的和解、记号 $\psi = \psi(\psi)$ 以及“点 $\to$ 线 $\to$ 面 $\to$ 球 $\to$ 球外之球”的认识论图景，是对上述形式化锚点与经典文献定理的跨学科概念提炼；本书始终坚持“书负责解释直觉，Lean 内核负责裁决形式真伪”的铁律。
+   - 休谟因果怀疑论与斯宾诺莎《伦理学》三角形几何必然性的哲学对照、双向量手性对消 $+\mathbf{\Omega} - \mathbf{\Omega} = 0$ 对驻相干涉的几何诠释、“$P$ 是无旋导向场（$\nabla \wedge \mathbf{F} = 0$）、$NP$ 是零横截面一维见证丝、三元阻挫旋度 $\nabla \wedge \mathbf{F} \neq 0$ 撕裂全局场”以及“三维纳维—斯托克斯涡管拉伸 $A \to 0$ 与 $P$ vs. $NP$ 的连续—离散场化同构”类比模型、“量子公平五重铁律与遍历统计全息”（[@rem-ch31-fivefold-fairness-table]）、“正交自指统一场六域同构与八大纲领三维认知罗盘元统一”（[@rem-ch32-six-domain-isomorphism-table]、[@rem-ch32-meta-unification-table]）、“历史遗迹作为零相子应变空间吸引子（$\|\pi_\perp(z)-u\|\to 0$）、灵魂作为内部正交相位锚点 $u \in E_\perp^3$、遗忘初始化作为齐肯多夫高位截断、似曾相识（Déjà vu）作为分形薄层/卡西尼 $(-1)^{k+1}$ 偏移下的跨轮次内积共振 $\cos\delta\theta \to 1$”的概念映射、决定论与目的论在无时间自指中的和解、记号 $\psi = \psi(\psi)$ 以及“点 $\to$ 线 $\to$ 面 $\to$ 球 $\to$ 球外之球”的认识论图景，是对上述形式化锚点与经典文献定理的跨学科概念提炼；本书始终坚持“书负责解释直觉，Lean 内核负责裁决形式真伪”的铁律。
 :::
 
 ---
@@ -387,14 +389,16 @@ $$
 | **克利福德基片（Blade）** | Clifford Blade | 3 比特掩码 $m \in \operatorname{Fin} 8$ 索引的八维基底 $\{1, e_1, e_2, e_3, e_{12}, e_{13}, e_{23}, e_{123}\}$，乘法由按位异或与逆序符号决定 | 第 25 章与附录 B；[`qubit_weyl_star`](lean:D5/S3/Quantum/FiniteDimensional.qubit_weyl_star), [`B_formula_core`](lean:D5/S3/Quantum/Measurement/Bloch/QubitBloch.B_formula_core) (`LEAN ✓`) |
 | **泡利词与辛内积相表** | Pauli Word & Symplectic Phase Table | 2 比特编码 $(x, z) \in \mathbb{F}_2^2$ 将泡利群乘法化为异或加法与辛相位 $(-1)^{x_2 z_1}$ | 第 14、26 章与附录 B；[`pauli_word_mul`](lean:D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank.pauli_word_mul) (`LEAN ✓`) |
 | **ZYZ 欧拉角编译器** | ZYZ Euler Compiler | 单量子比特任意旋转分解为 $R_z(\alpha)R_y(\beta)R_z(\gamma)$，配合双轴有限字合成与虚拟 $Z$ 门帧追踪 | 第 9、11、16、27 章；[`two_axis_finite_word`](lean:D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word) (`LEAN ✓`) |
+| **量子公平与纠缠单配性** | Quantum Fairness & Entanglement Monogamy | 玻恩配对互易、互补纯度勾股、不可克隆与贝尔混态边缘、兰道尔热界及环面闭子群均匀分布与有界回归（`LEAN ✓`），配对 CKW 单配性不等式 $\tau_{A|B}+\tau_{A|C}\le\tau_{A|BC}$（`文献结果`，[@rem-ch31-ckw-monogamy-literature]）与五重公平诠释（`MODEL`） | 第 31 章；[`no_cloning_inner_product_criterion`](lean:D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion), [`TorusOrbitEquidistribution.result`](lean:D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result) (`LEAN ✓` / `文献结果` / `MODEL`) |
+| **艾柯西安 $E_8$ 黄金桥与元统一** | Icosian–$E_8$ Golden Bridge & Meta-Unification | 复结构平方、离散收缩、黄金与齐肯多夫自指、零光锥刚性、锚定环路和乐与桥图最小割（`LEAN ✓`），配对康威—斯隆艾柯西安环至 $E_8$ 根格同构（`文献结果`，[@rem-ch32-icosian-e8-literature]）及统一场与八大纲领元统一罗盘（`MODEL`） | 第 32 章；[`base_success_iff_noAdjacentOnes`](lean:D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes), [`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null) (`LEAN ✓` / `文献结果` / `MODEL`) |
 | **`LEAN ✓` / `OPEN` 语义徽章** | `LEAN ✓` / `OPEN` Epistemic Badges | 绿色 `LEAN ✓` 仅授予 `trureturing.lock.json` 中 `kind="theorem"` 的冻结声明；红色 `OPEN` 专用于无 `lean` 属性的开放猜想 | 全书与附录 C；由 `./tbook check` 机械强制校验 |
 :::
 
 ---
 
-## 全书八部曲三十章阅读与依赖导图 {#sec-coda-reading-map}
+## 全书八部曲三十二章阅读与依赖导图 {#sec-coda-reading-map}
 
-全书由 **[序曲](README.md)**、**八部曲（共 30 章）**、**终章** 与 **[附录 A](appendix-a.md)–[附录 C](appendix-c.md)** 构成。下图展示了从第一部到第八部的概念演进脉络与形式化模块依赖关系：
+全书由 **[序曲](README.md)**、**八部曲（共 32 章）**、**终章** 与 **[附录 A](appendix-a.md)–[附录 C](appendix-c.md)** 构成。下图展示了从第一部到第八部的概念演进脉络与形式化模块依赖关系：
 
 ```
                         ┌──────────────────────────────────────────┐
@@ -438,7 +442,7 @@ $$
             └────────────────────────────────┬────────────────────────────────┘
                                              ▼
             ┌─────────────────────────────────────────────────────────────────┐
-            │ 第八部：无时间因果、ETH 视界与流体涡丝 (Ch 29–30) → 终章与附录   │
+            │ 第八部：无时间因果、视界、公平与元统一(Ch29–32) → 终章与附录    │
             │  • 多面体离散角亏与毛球文献对照 • 勾股守恒与四级“球外之球”突围   │
             │  • 概念对照词典 (A) • 克利福德速查表 (B) • 439 项锁定声明索引 (C)│
             └─────────────────────────────────────────────────────────────────┘
@@ -457,17 +461,17 @@ $$
 读者可以根据自身背景选择四条切入路径：
 
 1. **物理与几何直觉路径（零前置门槛）**：
-   [序曲](README.md) $\to$ [第 1 章](ch01-measurement.md)–[第 4 章](ch04-decoherence.md)（第一部：从尺子比对到退相干）$\to$ 第 5–12 章（第二、三部：从外积面积到布洛赫球面）$\to$ 第 17–19 章（第五部：光锥与全息极小割）$\to$ 终章与 [附录 A](appendix-a.md)。
+   [序曲](README.md) $\to$ [第 1 章](ch01-measurement.md)–[第 4 章](ch04-decoherence.md)（第一部：从尺子比对到退相干）$\to$ 第 5–12 章（第二、三部：从外积面积到布洛赫球面）$\to$ 第 17–19 章（第五部：光锥与全息极小割）$\to$ [第 31 章](ch31-quantum-fairness.md)–[第 32 章](ch32-unified-field-and-meta-unification.md) $\to$ 终章与 [附录 A](appendix-a.md)。
 2. **量子计算与算法编译路径**：
    [第 2 章](ch02-born-rule.md) $\to$ 第 6–8 章（泡利代数、量子门与纠缠）$\to$ 第 11 章（微波脉冲与虚拟 $Z$ 门）$\to$ 第 13–16 章（CHSH 博弈、稳定子、Grover/QFT/QSVT、ZYZ 与 Solovay–Kitaev 编译）$\to$ 第 20 章（电路深度与 CNOT 奇偶下界）$\to$ 第 25–27 章与 [附录 B](appendix-b.md)。
 3. **数理逻辑、数论与认识论路径**：
-   [序曲](README.md) $\to$ 第 10 章（Gram 矩阵与顺序无关性）$\to$ 第 19–20 章（离散多面体分片锥与开放猜想边界）$\to$ 第 21–24 章（对角线逃逸、欧拉乘积、四元数丢番图范数、余弦自指不动点）$\to$ [第 29 章](ch29-timeless-causality-and-gram-space.md)–[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)（毕达哥拉斯四级数系突围、无时间因果、ETH 视界与流体涡丝）$\to$ 终章（黄金切投空间吸引子与 [@thm-coda-fixed-point-anchor]）。
+   [序曲](README.md) $\to$ 第 10 章（Gram 矩阵与顺序无关性）$\to$ 第 19–20 章（离散多面体分片锥与开放猜想边界）$\to$ 第 21–24 章（对角线逃逸、欧拉乘积、四元数丢番图范数、余弦自指不动点）$\to$ [第 29 章](ch29-timeless-causality-and-gram-space.md)–[第 32 章](ch32-unified-field-and-meta-unification.md)（毕达哥拉斯四级数系突围、无时间因果、ETH 视界与流体涡丝、量子公平与大一统元统一）$\to$ 终章（黄金切投空间吸引子与 [@thm-coda-fixed-point-anchor]）。
 4. **Lean 4 形式化验证与内核审计路径**：
    [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 与 `FiniteRecordCosineObstruction` 的逐行形式化剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对 `trureturing@dev` 提交 `1d9bf98cab83` 下全部 $227$ 条环境/媒体冻结定理、$89$ 项环境辅助定义与 $123$ 项行内引用声明，共计 $439$ 项唯一锁定声明）。
 
-### 第六至第八部（第 21–30 章）36 项核心章节冻结定理锚点速览 {#sec-coda-part6-part7-register}
+### 第六至第八部（第 21–32 章）41 项核心章节冻结定理锚点速览 {#sec-coda-part6-part7-register}
 
-作为连接全书收官三部曲与 [附录 C](appendix-c.md) 完整索引的桥梁，下表列出第六部（第 21–24 章）与第七部（第 25–28 章）每章 $4$ 条代表定理、以及第八部（第 29–30 章）每章 $2$ 条核心定理，共计 $36$ 项章节定理锚点（涵盖 $35$ 个不同 GID，其中 `pell_form_eq_four_mul_norm` 在第 23 章与第 29 章首尾呼应）：
+作为连接全书收官三部曲与 [附录 C](appendix-c.md) 完整索引的桥梁，下表列出第六部（第 21–24 章）与第七部（第 25–28 章）每章 $4$ 条代表定理、第 29 章 $2$ 条核心定理、第 30 章 $3$ 条核心定理、以及第 31–32 章每章 $2$ 条核心定理，共计 $41$ 项章节定理锚点（涵盖 $40$ 个不同 GID，其中 `pell_form_eq_four_mul_norm` 在第 23 章与第 29 章首尾呼应）：
 
 | 章节 | 定理序号 | 冻结声明 GID (`trureturing@dev`) | 核心数学内容与几何角色 |
 | :--- | :---: | :--- | :--- |
@@ -508,5 +512,9 @@ $$
 | **第 30 章**<br/>场线分野、ETH 与流体涡丝 | T30.1 | `D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff` | 二次矢量场有限分辨率幂等投影精确闭合的充要代数判据 |
 | **第 30 章** | T30.2 | `D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure` | 五模态勒雷投影平流对任意粘性系数 $\nu \in \mathbb{R}$ 均无精确闭合映射 |
 | **第 30 章** | T30.3 | `D5/S3/Combinatorics/Graph/Walks/GallaiRoy.colorable_iff_exists_orientation` | Gallai–Hasse–Roy–Vitaver 定理：有限简单图可 $k$ 着色，当且仅当存在一个定向，其有向路都不超过 $k$ 个顶点 |
+| **第 31 章**<br/>量子公平与遍历全息 | T31.1 | `D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion` | 保内积等距映射同时克隆两归一化态则两态必相等或正交 |
+| **第 31 章** | T31.2 | `D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result` | 紧致环面生成元闭子群 $G = \overline{\langle g\rangle}$ 上轨道时间平均收敛于哈尔积分 |
+| **第 32 章**<br/>统一场论与元统一 | T32.1 | `D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes` | 二进制齐肯多夫有限自动机接受字当且仅当满足无相邻 `11` 禁戒律 `NoAdjacentOnes` |
+| **第 32 章** | T32.2 | `D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null` | 在全部闵可夫斯基零光锥向量上取零的实二次型必为标准闵氏度规的标量倍 |
 
 在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，并在 [附录 C](appendix-c.md) 中核验全书锁定的全部 $316$ 项 `trureturing@dev` 正式环境与媒体声明（含行内共 $439$ 项唯一锁定声明）。
