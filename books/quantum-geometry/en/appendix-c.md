@@ -1,9 +1,9 @@
 # Appendix C: Master Index of Verified Lean 4 Theorems and Open Problems Register
 
-This appendix is the **Master Audit Ledger** of the book's epistemic boundaries. Under the Epistemic Contract established in the Prelude, every mathematical statement in this monograph belongs to one of three strictly separated classes and is mechanically audited against `trureturing.lock.json` (pinned to `trureturing@dev` commit `38196c62e121b0a334b903eea2a513bb2587e41c`):
+This appendix is the **Master Audit Ledger** of the book's epistemic boundaries. Under the Epistemic Contract established in the Prelude, every mathematical statement in this monograph belongs to one of three strictly separated classes and is mechanically audited against `trureturing.lock.json` (pinned to `trureturing@dev` commit `a660b9333c0f8d25aaa22af1bbbfab43c2f94a46`):
 
 1. **C.1 Master Index of Frozen Theorems (166 Unique `theorem` Declarations)**: Every proposition placed inside a `theorem`, `lemma`, `proposition`, or `corollary` environment or bound to a visualization/film/slide `lean:` anchor must resolve to a sorry-free `theorem` declaration in `Golden/Frozen/state/<module>.lean.json` verified by the Lean 4 kernel;
-2. **C.2 Formal Definitions and Algebraic Carriers (53 Unique `definition` / `structure` / `inductive` Declarations)**: Foundational algebraic structures, rotor types, and state-space definitions bound to `definition` environments or media manifests; together with **C.2.1 Inline-Referenced Auxiliary Theorems and Definitions (91 Unique Inline Declarations)**, these account for all **310 unique locked declarations** in `trureturing.lock.json` (`166 + 53 + 91 = 310`);
+2. **C.2 Formal Definitions and Algebraic Carriers (53 Unique `definition` / `structure` / `inductive` Declarations)**: Foundational algebraic structures, rotor types, and state-space definitions bound to `definition` environments or media manifests; together with **C.2.1 Inline-Referenced Auxiliary Theorems and Definitions (94 Unique Inline Declarations)**, these account for all **313 unique locked declarations** in `trureturing.lock.json` (`166 + 53 + 94 = 313`);
 3. **C.3 Open Problems and Unformalized Frontier Register (8 Entries: 6 `conjecture` / `OPEN` Environments + 2 Frontier Literature `remark` Entries)**: Propositions that remain unformalized in `trureturing` or represent open frontier problems in mathematics and physics, isolated throughout the book inside `conjecture` environments (red `OPEN` badges) or explicitly tagged literature `remark` blocks with zero `lean` attributes.
 
 ---
@@ -245,9 +245,9 @@ The table below lists all **53 unique foundational definitions, algebraic struct
 
 ---
 
-## C.2.1 Inline-Referenced Auxiliary Theorems and Definitions (91 Unique Declarations) {#sec-appendix-c-inline}
+## C.2.1 Inline-Referenced Auxiliary Theorems and Definitions (94 Unique Declarations) {#sec-appendix-c-inline}
 
-In addition to the 219 declarations bound to formal environments or media anchors in Sections C.1 and C.2, the main text, proof explanations, and appendix tables reference **91 auxiliary theorems and definitions** via inline `[name](lean:GID)` links. Including these 91 inline declarations, this appendix accounts for all **310 unique locked declarations** in `trureturing.lock.json` (`166 + 53 + 91 = 310`):
+In addition to the 219 declarations bound to formal environments or media anchors in Sections C.1 and C.2, the main text, proof explanations, and appendix tables reference **94 auxiliary theorems and definitions** via inline `[name](lean:GID)` links. Including these 94 inline declarations, this appendix accounts for all **313 unique locked declarations** in `trureturing.lock.json` (`166 + 53 + 94 = 313`):
 
 | ID | Lean Declaration (Click for Source) | Module Path & Line | Kind | Inline Reference Chapters |
 | :--- | :--- | :--- | :--- | :--- |
@@ -342,6 +342,9 @@ In addition to the 219 declarations bound to formal environments or media anchor
 | `R89` | [`D5.S3.QuantumChannels.PinchingProjection.pinching_hilbert_schmidt_orthogonal`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_orthogonal) | `D5/S3/QuantumChannels/PinchingProjection.lean:48` | `theorem` | Ch 06 |
 | `R90` | [`D5.S3.Weil.Convention.criticalAbscissa`](lean:D5/S3/Weil/Convention.criticalAbscissa) | `D5/S3/Weil/Convention.lean:42` | `def` | Ch 22 |
 | `R91` | [`D5.S3.Zeros.ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one`](lean:D5/S3/Zeros/ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one) | `D5/S3/Zeros/ZetaUpgrade.lean:36` | `theorem` | Ch 22 |
+| `R92` | [`D5.S3.CharacterSums.Fermat.CharacterPointCount.norm_jacobiSum`](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.norm_jacobiSum) | `D5/S3/CharacterSums/Fermat/CharacterPointCount.lean:533` | `theorem` | Ch 29 |
+| `R93` | [`D5.S3.CharacterSums.Fermat.CharacterPointCount.power_fiber_card_eq_one_add_character_sum`](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.power_fiber_card_eq_one_add_character_sum) | `D5/S3/CharacterSums/Fermat/CharacterPointCount.lean:197` | `theorem` | Ch 29 |
+| `R94` | [`D5.S3.ConceptDynamics.Coding.ResetNativeIntegerChart.gaussian_unit`](lean:D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart.gaussian_unit) | `D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart.lean:816` | `theorem` | Ch 29 |
 
 ---
 
@@ -369,11 +372,11 @@ Every build and release of this book mechanically enforces the following five ve
 | Verification Gate | Target Parameter / Contract Value | Toolchain Mechanism | Status |
 | :--- | :--- | :--- | :---: |
 | **Upstream Repository & Branch** | `the-omega-institute/trureturing` branch `dev` | `site.toml` `[trureturing]` config & `git merge-base --is-ancestor` check | `PASS` |
-| **Pinned Commit SHA** | `38196c62e121b0a334b903eea2a513bb2587e41c` | Locked in `trureturing.lock.json` `commit` field | `PASS` |
-| **Frozen Theorem Count** | `166` environment/media theorems (`217` total `kind == "theorem"` with inline refs) | Verified against `Golden/Frozen/state/<module>.lean.json` state slices & `statement_id` digests | `PASS` |
+| **Pinned Commit SHA** | `a660b9333c0f8d25aaa22af1bbbfab43c2f94a46` | Locked in `trureturing.lock.json` `commit` field | `PASS` |
+| **Frozen Theorem Count** | `166` environment/media theorems (`220` total `kind == "theorem"` with inline refs) | Verified against `Golden/Frozen/state/<module>.lean.json` state slices & `statement_id` digests | `PASS` |
 | **Auxiliary Definition / Structure Count** | `53` environment definitions (`93` total `kind` in `def`, `inductive` with inline refs) | Segregated into Section C.2 and never counted as `theorem / lemma / proposition / corollary` boxes | `PASS` |
 | **Bilingual Structural Alignment** | 100% parity between `zh` and `en` chapter order, env IDs, and Lean citations | Checked item-by-item by `./tbook check` (`0 error(s), 0 warning(s)`) | `PASS` |
 
 ::: {.remark #rem-appendix-c-epistemic-boundary title="Verification Boundary Note for the Complete Declaration Index"}
-Literature result, not formalized in this book: All 166 formal environment/media theorems in Section C.1, all 53 environment definitions/structures in Section C.2, and all 91 inline cross-referenced declarations in Section C.2.1 (310 locked declarations in total: 217 theorems + 93 definitions/structures) are verified by the Lean 4 kernel at `trureturing@dev` commit `38196c62e121b0a334b903eea2a513bb2587e41c` and locked in `trureturing.lock.json`. By contrast, the open conjectures (`OPEN`) and classical literature results (Literature result, not formalized in this book) registered in Section C.3 are strictly excluded from the formal theorem count, ensuring that every `LEAN ✓` badge in this book is backed by an unambiguous kernel proof.
+Literature result, not formalized in this book: All 166 formal environment/media theorems in Section C.1, all 53 environment definitions/structures in Section C.2, and all 94 inline cross-referenced declarations in Section C.2.1 (313 locked declarations in total: 220 theorems + 93 definitions/structures) are verified by the Lean 4 kernel at `trureturing@dev` commit `a660b9333c0f8d25aaa22af1bbbfab43c2f94a46` and locked in `trureturing.lock.json`. By contrast, the open conjectures (`OPEN`) and classical literature results (Literature result, not formalized in this book) registered in Section C.3 are strictly excluded from the formal theorem count, ensuring that every `LEAN ✓` badge in this book is backed by an unambiguous kernel proof.
 :::

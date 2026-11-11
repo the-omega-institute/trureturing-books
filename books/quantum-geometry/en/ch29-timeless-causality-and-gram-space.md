@@ -254,7 +254,25 @@ $$
 
 This explains the adjacent-leg projection: $J$ has length $\sqrt p$, and its absolute real part is precisely the odd leg $|a|$. No sign for $T$ is chosen, and no restriction modulo $8$ is imposed on $p$. For example, at $p=5=1^2+2^2$, the values of $\phi(x^3-x)$ for $x=0,1,2,3,4$ are $0,0,1,1,0$. There are seven affine points and the point $O$, so $N=8$, $T=-2$, and the absolute cosine is $1/\sqrt5$.
 
-The component results and their complete application must be distinguished. The existing `power_fiber_card_eq_one_add_character_sum`, with finite field $F=\mathbb{F}_p$, exponent $d=2$, and quadratic character $\phi$ viewed as complex-valued, gives the individual square-fiber count above. The existing `norm_jacobiSum`, applied to $\chi,\phi$ under the three stated nontriviality conditions, gives $|J|=\sqrt p$. The quartic integrality congruence corresponds to Mathlib's `exists_jacobiSum_eq_neg_one_add`, with $n=4$, primitive fourth root $i$, and $4\mid p-1$. Each component has its own hypotheses and conclusion. The complete derivation above, connecting the actual curve's point count, Jacobi sums, Gaussian primes, and the normalized cosine, remains a **literature application, not formalized in this book**. It also supplies no formal proof of the adjacent inert-prime cancellation, the general Hasse bound, or the non-CM Sato–Tate distribution.
+The three algebraic results used here have distinct scopes. The [power-fiber counting formula](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.power_fiber_card_eq_one_add_character_sum) applies to every finite field $K$, positive integer $d$, and complex multiplicative character $\eta:K\to\mathbb{C}$ of exact order $d$. For every $t\in K$, it states, in $\mathbb{C}$,
+
+$$
+\#\{x\in K:x^d=t\}
+=1+\sum_{j=1}^{d-1}\eta^j(t).
+$$
+
+Characters are extended by zero at zero, and the natural-number count on the left is embedded in $\mathbb{C}$ in the usual way. Taking $K=\mathbb{F}_p$, $d=2$, and $\eta=\phi$ gives the square-fiber formula above, including at $t=0$.
+
+The [Jacobi-sum norm formula](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.norm_jacobiSum) applies to complex multiplicative characters $\alpha,\beta$ on any finite field $K$, under all three hypotheses $\alpha\ne1$, $\beta\ne1$, and $\alpha\beta\ne1$. Its conclusion is
+
+$$
+\left|\sum_{t\in K}\alpha(t)\beta(1-t)\right|
+=\sqrt{\#K}.
+$$
+
+Here $1$ denotes the trivial multiplicative character, equal to $1$ away from zero and $0$ at zero. For $K=\mathbb{F}_p$, $\alpha=\chi$, and $\beta=\phi$, the exact orders are four for $\chi$, two for $\phi$, and four for $\chi\phi=\chi^{-1}$, so all three nontriviality hypotheses hold. The [classification of Gaussian units](lean:D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart.gaussian_unit) states that every invertible Gaussian integer $u\in\mathbb{Z}[i]^\times$ satisfies $u=1$, $u=i$, $u=-1$, or $u=-i$: precisely the four possibilities used above to rule out exchanging the two legs.
+
+The quartic integrality congruence corresponds to Mathlib's `exists_jacobiSum_eq_neg_one_add`, with $n=4$, primitive fourth root $i$, and $4\mid p-1$. The three algebraic results respectively control an individual fiber, the length of a Jacobi sum, and the units of the Gaussian integers; none assumes the curve's trace formula. The complete derivation connecting the actual curve's point count, Jacobi sums, Gaussian primes, and the normalized cosine remains a **literature application, not formalized in this book**. It supplies no formal proof of the adjacent inert-prime cancellation, the general Hasse bound, or the non-CM Sato–Tate distribution.
 :::
 
 [^gauss-count-background]: René Schoof, “Counting points on elliptic curves over finite fields”, *Journal de Théorie des Nombres de Bordeaux* 7 (1995), §§1, 3. Cited here only for background on standard Weierstrass point counts and Gaussian complex multiplication.

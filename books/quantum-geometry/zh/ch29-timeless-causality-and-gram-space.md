@@ -254,7 +254,25 @@ $$
 
 这就是邻边投影的几何来源：$J$ 的长度是 $\sqrt p$，而它的实部绝对值正是奇数边 $|a|$。全程不选取 $T$ 的正负，也不对 $p$ 加入模 $8$ 的限制。例如 $p=5=1^2+2^2$ 时，按 $x=0,1,2,3,4$ 排列的 $\phi(x^3-x)$ 为 $0,0,1,1,0$；仿射点数是 $7$，加上 $O$ 得 $N=8$，所以 $T=-2$，绝对余弦为 $1/\sqrt5$。
 
-这里须区分组成结果与完整应用。原有 `power_fiber_card_eq_one_add_character_sum` 取有限域 $F=\mathbb{F}_p$、指数 $d=2$ 和二次特征 $\phi$（视为复值特征），给出上面的单个平方纤维计数。原有 `norm_jacobiSum` 取特征 $\chi,\phi$，在已说明的三个非平凡条件下给出 $|J|=\sqrt p$。四阶整性同余则对应 Mathlib 的 `exists_jacobiSum_eq_neg_one_add`，参数为 $n=4$、本原四次单位根 $i$ 以及 $4\mid p-1$。这些组成声明各有自己的前提和结论；上面把实际曲线点数、Jacobi 和、高斯素元与归一化余弦连接起来的完整推导，仍是**文献性应用说明，未在本书形式化**。相邻的惰性素数抵消、一般哈塞界和非复乘佐藤—泰特分布也不因此获得形式化证明。
+这里用到的三个代数结果各有明确的适用范围。[幂纤维计数公式](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.power_fiber_card_eq_one_add_character_sum)适用于任意有限域 $K$、正整数 $d$ 及恰好 $d$ 阶的复值乘法特征 $\eta:K\to\mathbb{C}$：对每个 $t\in K$，在复数中有
+
+$$
+\#\{x\in K:x^d=t\}
+=1+\sum_{j=1}^{d-1}\eta^j(t).
+$$
+
+特征在零处延拓为零，左边的自然数点数按通常方式嵌入复数。取 $K=\mathbb{F}_p$、$d=2$、$\eta=\phi$，便得到前面的平方纤维公式，包括 $t=0$。
+
+[Jacobi 和范数公式](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.norm_jacobiSum)适用于任意有限域 $K$ 上的复值乘法特征 $\alpha,\beta$，前提是 $\alpha\ne1$、$\beta\ne1$ 且 $\alpha\beta\ne1$；结论为
+
+$$
+\left|\sum_{t\in K}\alpha(t)\beta(1-t)\right|
+=\sqrt{\#K}.
+$$
+
+这里的 $1$ 是非零处恒为 $1$、零处为 $0$ 的平凡乘法特征。取 $K=\mathbb{F}_p$、$\alpha=\chi$、$\beta=\phi$，恰好四阶的 $\chi$、二阶的 $\phi$ 及四阶的 $\chi\phi=\chi^{-1}$ 满足全部三个非平凡条件。[高斯整数单位分类](lean:D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart.gaussian_unit)则对每个可逆高斯整数 $u\in\mathbb{Z}[i]^\times$ 给出 $u=1$、$u=i$、$u=-1$ 或 $u=-i$，正是上面排除直角边互换时所用的四种可能。
+
+四阶整性同余对应 Mathlib 的 `exists_jacobiSum_eq_neg_one_add`，参数为 $n=4$、本原四次单位根 $i$ 以及 $4\mid p-1$。上述三个代数结果分别控制单个纤维、Jacobi 和的长度及高斯整数的单位；它们都不以曲线的迹公式为前提。把实际曲线点数、Jacobi 和、高斯素元与归一化余弦连接起来的完整推导，仍是**文献性应用说明，未在本书形式化**。相邻的惰性素数抵消、一般哈塞界和非复乘佐藤—泰特分布也不因此获得形式化证明。
 :::
 
 [^gauss-count-background]: René Schoof, “Counting points on elliptic curves over finite fields”, *Journal de Théorie des Nombres de Bordeaux* 7 (1995), §§1、3。此处仅用作标准 Weierstrass 点数与高斯复乘背景的参考。
