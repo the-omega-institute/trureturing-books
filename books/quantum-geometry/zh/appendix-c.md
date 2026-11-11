@@ -1,16 +1,16 @@
 # 附录 C：Lean 4 形式化定理总索引与开放问题台账
 
-本附录是全书认识论边界的**总账本（Master Audit Ledger）**。根据本书序曲确立的“认识论契约”，全书所有数学陈述严格划分为三类，并在机器锁定的 `trureturing.lock.json`（钉死于 `trureturing@dev` 提交 `a660b9333c0f8d25aaa22af1bbbfab43c2f94a46`）中接受逐条核验：
+本附录是全书认识论边界的**总账本（Master Audit Ledger）**。根据本书序曲确立的“认识论契约”，全书所有数学陈述严格划分为三类，并在机器锁定的 `trureturing.lock.json`（钉死于 `trureturing@dev` 提交 `1d9bf98cab8306e67ec38a739359f2cdae63877a`）中接受逐条核验：
 
-1. **C.1 冻结定理总索引（166 条唯一 `theorem` 声明）**：凡在正文中置于 `theorem`、`lemma`、`proposition`、`corollary` 环境或交互沙盒/短片/讲义 `lean:` 锚点中的命题，其 `lean="<GID>"` 必须解析为 `trureturing` 仓库 `Golden/Frozen/state/<module>.lean.json` 中已由 Lean 4 内核验证且无 `sorry` 的 `theorem` 声明；
-2. **C.2 形式化定义与代数载体总索引（53 项唯一 `definition` / `structure` / `inductive` 声明）**：置于 `definition` 环境或媒体锚点中的核心代数构造、旋量类型与状态空间定义；以及 **C.2.1 行内辅助引理与构造索引（94 项行内引用声明）**，与 C.1、C.2 共同构成 `trureturing.lock.json` 中锁定的全部 **313 项唯一声明**（`166 + 53 + 94 = 313`）；
+1. **C.1 冻结定理总索引（167 条唯一 `theorem` 声明）**：凡在正文中置于 `theorem`、`lemma`、`proposition`、`corollary` 环境或交互沙盒/短片/讲义 `lean:` 锚点中的命题，其 `lean="<GID>"` 必须解析为 `trureturing` 仓库 `Golden/Frozen/state/<module>.lean.json` 中已由 Lean 4 内核验证且无 `sorry` 的 `theorem` 声明；
+2. **C.2 形式化定义与代数载体总索引（57 项唯一 `definition` / `structure` / `inductive` 声明）**：置于 `definition` 环境或媒体锚点中的核心代数构造、旋量类型与状态空间定义；以及 **C.2.1 行内辅助引理与构造索引（94 项行内引用声明）**，与 C.1、C.2 共同构成 `trureturing.lock.json` 中锁定的全部 **318 项唯一声明**（`167 + 57 + 94 = 318`）；
 3. **C.3 开放问题与未形式化前沿边界台账（8 项：6 个 `conjecture` / `OPEN` 环境 + 2 项前沿文献边界 `remark`）**：尚未在 `trureturing` 中完成内核形式化或属于数学物理前沿未决猜想的命题，在全书中一律以无 `lean` 属性的 `conjecture`（红色 `OPEN` 徽章）或带明确文献说明的 `remark` 环境隔离呈现，绝不冒充已验证定理。
 
 ---
 
-## C.1 已验证并冻结的 Lean 4 定理总索引（166 条唯一 `theorem` GID） {#sec-appendix-c-theorems}
+## C.1 已验证并冻结的 Lean 4 定理总索引（167 条唯一 `theorem` GID） {#sec-appendix-c-theorems}
 
-下表按模块路径字母顺序列出全书正式数学环境与媒体组件引用的全部 **166 条唯一冻结定理**（跨章节环境复用后共构成 186 处定理级形式化锚点）。点击每条声明名称可直接跳转至对应的 Lean 4 源码树与冻结状态摘要：
+下表按模块路径字母顺序列出全书正式数学环境与媒体组件引用的全部 **167 条唯一冻结定理**（跨章节环境复用后共构成 187 处定理级形式化锚点）。点击每条声明名称可直接跳转至对应的 Lean 4 源码树与冻结状态摘要：
 
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 引用章节与环境 ID |
 | :--- | :--- | :--- | :--- | :--- |
@@ -34,6 +34,7 @@
 | `T018` | [`D5.S3.Analytic.OriginalHalfBinomialIntegral.b_le_one`](lean:D5/S3/Analytic/OriginalHalfBinomialIntegral.b_le_one) | `D5/S3/Analytic/OriginalHalfBinomialIntegral.lean:31` | `theorem` | Ch 24 `#lem-arcsin-binomial-kernel` |
 | `T019` | [`D5.S3.Analytic.OriginalHalfBinomialIntegral.b_nonneg`](lean:D5/S3/Analytic/OriginalHalfBinomialIntegral.b_nonneg) | `D5/S3/Analytic/OriginalHalfBinomialIntegral.lean:29` | `theorem` | Ch 24 `#lem-arcsin-binomial-kernel` |
 | `T020` | [`D5.S3.Analytic.OriginalHalfBinomialIntegral.binomial_hasSum`](lean:D5/S3/Analytic/OriginalHalfBinomialIntegral.binomial_hasSum) | `D5/S3/Analytic/OriginalHalfBinomialIntegral.lean:76` | `theorem` | Ch 24 `#lem-arcsin-binomial-kernel` |
+| `T167` | [`D5.S3.Analytic.PowerSeries.DottieInverseSeries.rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint) | `D5/S3/Analytic/PowerSeries/DottieInverseSeries.lean:545` | `theorem` | Ch 24 `#thm-dottie-rational-inverse-endpoint` |
 | `T021` | [`D5.S3.Arith.GoldenPell.pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm) | `D5/S3/Arith/GoldenPell.lean:83` | `theorem` | Ch 23 `#prop-pell-form-eq-four-mul-norm`, Ch 29 `#thm-ch29-gram-rigidity-and-pell` |
 | `T022` | [`D5.S3.Combinatorics.Graph.Walks.WeightedCycleWalk.circuit_length`](lean:D5/S3/Combinatorics/Graph/Walks/WeightedCycleWalk.circuit_length) | `D5/S3/Combinatorics/Graph/Walks/WeightedCycleWalk.lean:77` | `theorem` | Ch 20 `#cor-even-cycle-length` |
 | `T023` | [`D5.S3.ConceptDynamics.DefinitionEscape.RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode) | `D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.lean:48` | `theorem` | `viz/sphere-escape`（Ch 21, Ch 30 行内） |
@@ -183,9 +184,9 @@
 
 ---
 
-## C.2 形式化定义、结构与归纳类型索引（53 项唯一声明） {#sec-appendix-c-definitions}
+## C.2 形式化定义、结构与归纳类型索引（57 项唯一声明） {#sec-appendix-c-definitions}
 
-下表列出全书 `definition` 环境与媒体组件锁定的 **53 项唯一基础定义、代数结构与归纳类型**（它们与 C.1 的 166 条定理共同构成全书正式环境与媒体锁定的 **219 项核心声明**）：
+下表列出全书 `definition` 环境与媒体组件锁定的 **57 项唯一基础定义、代数结构与归纳类型**（它们与 C.1 的 167 条定理共同构成全书正式环境与媒体锁定的 **224 项核心声明**）：
 
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 引用章节与环境 ID |
 | :--- | :--- | :--- | :--- | :--- |
@@ -202,6 +203,10 @@
 | `D11` | [`D5.S0.Diagonal.SelfApplicationFates.discriminant`](lean:D5/S0/Diagonal/SelfApplicationFates.discriminant) | `D5/S0/Diagonal/SelfApplicationFates.lean:30` | `def` | Ch 24 `#def-binary-fractional-map-fates` |
 | `D12` | [`D5.S0.Diagonal.SelfApplicationFates.fixedCoefficients`](lean:D5/S0/Diagonal/SelfApplicationFates.fixedCoefficients) | `D5/S0/Diagonal/SelfApplicationFates.lean:27` | `def` | Ch 24 `#def-binary-fractional-map-fates` |
 | `D13` | [`D5.S1.FixedPoints.Algebraic.GoldenFixedPoint.goldenReciprocalMap`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.goldenReciprocalMap) | `D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean:35` | `def` | Ch 24 `#def-golden-reciprocal-map` |
+| `D54` | [`D5.S3.Analytic.PowerSeries.DottieInverseSeries.alpha`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.alpha) | `D5/S3/Analytic/PowerSeries/DottieInverseSeries.lean:29` | `def` | Ch 24 `#def-dottie-rational-inverse` |
+| `D55` | [`D5.S3.Analytic.PowerSeries.DottieInverseSeries.arcsine`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.arcsine) | `D5/S3/Analytic/PowerSeries/DottieInverseSeries.lean:34` | `def` | Ch 24 `#def-dottie-rational-inverse` |
+| `D56` | [`D5.S3.Analytic.PowerSeries.DottieInverseSeries.forward`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.forward) | `D5/S3/Analytic/PowerSeries/DottieInverseSeries.lean:36` | `def` | Ch 24 `#def-dottie-rational-inverse` |
+| `D57` | [`D5.S3.Analytic.PowerSeries.DottieInverseSeries.inverse`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.inverse) | `D5/S3/Analytic/PowerSeries/DottieInverseSeries.lean:38` | `def` | Ch 24 `#def-dottie-rational-inverse` |
 | `D14` | [`D5.S3.ConceptDynamics.DefinitionEscape.RelativeSemanticDiagonal.relativeSemanticDiagonal`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relativeSemanticDiagonal) | `D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.lean:38` | `def` | Ch 21 `#def-relative-semantic-diagonal` |
 | `D15` | [`D5.S3.ConceptDynamics.Interpretation.InterpretationFixedPoint.InterpretationContext`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.InterpretationContext) | `D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.lean:36` | `inductive` | Ch 24 `#def-relative-interpretation-fixed-point` |
 | `D16` | [`D5.S3.ConceptDynamics.Interpretation.InterpretationFixedPoint.IsBinaryFixedMeaning`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.IsBinaryFixedMeaning) | `D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.lean:100` | `def` | Ch 24 `#def-relative-interpretation-fixed-point` |
@@ -247,7 +252,7 @@
 
 ## C.2.1 行内引用的辅助定理与定义索引（94 项唯一声明） {#sec-appendix-c-inline}
 
-除上述 C.1 与 C.2 中绑定于正式数学环境或媒体锚点的 219 项声明外，正文、证明解析与附录对照表中还通过 `[name](lean:GID)` 行内链接直接引用了 **94 项辅助定理与构造定义**。将这 94 项行内声明纳入总账后，本附录完整覆盖了 `trureturing.lock.json` 中的全部 **313 项唯一锁定声明**（`166 + 53 + 94 = 313`）：
+除上述 C.1 与 C.2 中绑定于正式数学环境或媒体锚点的 224 项声明外，正文、证明解析与附录对照表中还通过 `[name](lean:GID)` 行内链接直接引用了 **94 项辅助定理与构造定义**。将这 94 项行内声明纳入总账后，本附录完整覆盖了 `trureturing.lock.json` 中的全部 **318 项唯一锁定声明**（`167 + 57 + 94 = 318`）：
 
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 行内引用章节 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -372,11 +377,11 @@
 | 核验项 | 目标参数 / 契约值 | 核验命令 / 工具链机制 | 状态 |
 | :--- | :--- | :--- | :---: |
 | **上游仓库与分支** | `the-omega-institute/trureturing` 分支 `dev` | `site.toml` `[trureturing]` 配置与 `git merge-base --is-ancestor` | `PASS` |
-| **所钉提交 SHA** | `a660b9333c0f8d25aaa22af1bbbfab43c2f94a46` | `trureturing.lock.json` `commit` 字段精确锁定 | `PASS` |
-| **冻结定理总数** | `166` 项环境/媒体定理（含行内共 `220` 项 `kind == "theorem"`） | 核对 `Golden/Frozen/state/<module>.lean.json` 中每项状态片与 `statement_id` 哈希 | `PASS` |
-| **辅助定义与结构数** | `53` 项环境定义（含行内共 `93` 项 `kind` 为 `def` 或 `inductive`） | 单独归入第 C.2 节，绝不与 `theorem / lemma / proposition / corollary` 混计 | `PASS` |
+| **所钉提交 SHA** | `1d9bf98cab8306e67ec38a739359f2cdae63877a` | `trureturing.lock.json` `commit` 字段精确锁定 | `PASS` |
+| **冻结定理总数** | `167` 项环境/媒体定理（含行内共 `221` 项 `kind == "theorem"`） | 核对 `Golden/Frozen/state/<module>.lean.json` 中每项状态片与 `statement_id` 哈希 | `PASS` |
+| **辅助定义与结构数** | `57` 项环境定义（含行内共 `97` 项 `kind` 为 `def` 或 `inductive`） | 单独归入第 C.2 节，绝不与 `theorem / lemma / proposition / corollary` 混计 | `PASS` |
 | **多语言结构对齐** | `zh` 与 `en` 章节序列、环境 ID、Lean 引用序列 100% 一致 | `./tbook check` 跨版本逐项比对（`0 error(s), 0 warning(s)`） | `PASS` |
 
 ::: {.remark #rem-appendix-c-epistemic-boundary title="完整声明索引的验证边界说明"}
-文献结果，未在本书形式化：本附录第 C.1 节所列的 166 条正式环境与媒体定理、第 C.2 节所列的 53 项环境定义/结构以及第 C.2.1 节所列的 94 项行内交叉引用声明（总计 313 项形式化声明：220 项定理 + 93 项定义/结构）均已在 `trureturing@dev` 提交 `a660b9333c0f8d25aaa22af1bbbfab43c2f94a46` 下由 Lean 4 内核验证并写入 `trureturing.lock.json`；而第 C.3 节登记的开放猜想（`OPEN`）与经典文献定理（文献结果，未在本书形式化）则严格排除在形式化定理计数之外，确保全书的每一枚 `LEAN ✓` 徽章均具备零歧义的内核证明背书。
+文献结果，未在本书形式化：本附录第 C.1 节所列的 167 条正式环境与媒体定理、第 C.2 节所列的 57 项环境定义/结构以及第 C.2.1 节所列的 94 项行内交叉引用声明（总计 318 项形式化声明：221 项定理 + 97 项定义/结构）均已在 `trureturing@dev` 提交 `1d9bf98cab8306e67ec38a739359f2cdae63877a` 下由 Lean 4 内核验证并写入 `trureturing.lock.json`；而第 C.3 节登记的开放猜想（`OPEN`）与经典文献定理（文献结果，未在本书形式化）则严格排除在形式化定理计数之外，确保全书的每一枚 `LEAN ✓` 徽章均具备零歧义的内核证明背书。
 :::
