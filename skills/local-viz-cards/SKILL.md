@@ -111,6 +111,10 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `norm-lattice` 与 `pythagoras-number-escape` 的 `golden`、`minus`、`locked` 分工：那几张讲渐近分数逼近 √d 与 ±1 的接缝，本页讲整数格与范数等值线：艾森斯坦格画在复平面 x + y·e^{iπ/3}，换成整数坐标 (P, Q) = (x + (t + 1)y, y) 读出 Qform(t, ·, ·)；黄金整数画在 (g, ḡ) 平面，范数是矩形面积。绿色框只给第二十三章用 `lean=` 引用的四条定理（`Qform_eq_eisNorm`、`Qform_discriminant`、`Qform_range_eq_eisNorm`、`pell_form_eq_four_mul_norm`）；正文以行内链接提到的 `pell_pm_four_iff_signed_lucas_fib` 不在页面上标绿，`units` 卡只展示 φᵏ 的 (2a + b, b) = (Lₖ, Fₖ) 与范数 (−1)ᵏ（`NUM`），不声称它们是全部解。格子面积 √3/2、系数是基矢的内积、判别式 = −4 × 面积²、“取到的值”逐点代入都标 `NUM`；非整数 t 的中间帧、两种坐标之间的过渡与两次乘 φ 之间的滑动标 `MODEL`；四元数范数在 ℚ 中定义 ℤ 标 `ARGUED`。这一页的青色是当前点所在的那条范数等值线及其上的格点、黄金场景里迹的对角线与影子，品红是格子（面积）与黄金范数的矩形和它那一级的双曲线，琥珀只给当前的点与正在滑动的基矢 u₂，其余等值线是中性灰（虚线上没有格点）。
 `euler-product-sieve` 与 `sphere-escape` 的 `euclid`、`thirteen` 分工：那两张讲“乘起来加一”找到清单外的素数，本页讲有限个素数的欧拉乘积怎样逼近 ζ(s) 以及筛的余项。舞台上方是实轴 1 < s ≤ 4 上墨色的 ζ(s)、青色的前 K 个素数的乘积与其间品红的缺口（纵轴按“值 − 1”取对数，刻度写值本身），品红虚线是乘积加上下一个素数的 p⁻ˢ，右边的放大镜把当前 s 处的缺口按品红格的 n⁻ˢ 自下而上拆开；下方是整数 1 到 96，青色在乘积的展开里，品红带着清单外的素因子；琥珀只给当前的 s 与刚加进的素数的格子。绿色框只给第二十二章用 `lean=` 引用的三条：`riemann_zeta_euler_product`、`riemann_zeta_dirichlet_sum_eq_euler_product` 与 `riemann_zeta_residue_one`（Lean 对复数 s 陈述，页面只取实数 s）；余项等于最大素因子大于 p<sub>K</sub> 的整数之和、在实数 s > 1 上大于 p<sub>K+1</sub>⁻ˢ 与 ζ(2) = π²/6 按该章例题标 `ARGUED`；ζ(s)、乘积、放大镜各段与“差不到 1% 要几个素数”实算（`NUM`）；黎曼猜想只在抽屉里标 `OPEN`，页面不画临界带。路线图候选里的“只用 2”“用到 5”“用到 31”“s 越靠近 1 需要的素数越多”“筛的余项”依次做成 `two`、`five`、`thirtyone`、`near`、`remainder`，另加 `all`（到 97 格子全青、缺口仍在）配推论 `cor-dirichlet-sum-eq-euler-product`。
 
+| `zyz-compile` | 绕 z、绕 y、再绕 z 转三段，乘出来只是一枚旋子：绕一根轴的一次转动 | `sandwich` `chain` `t` `h` `fold` |
+
+`zyz-compile` 与 `qubit-geometry` 的 `hadamard`、`turn2` 及 `two-angle-addressing` 的 `address` 分工：那几张讲 H 门绕对角轴的 180°、旋子转两整圈变号、从北极出发的两角寻址，本页讲第二十六章的正向编译：三段 R_z(α) R_y(β) R_z(γ)（γ 先作用）在八个刀片掩码上按异或乘成一枚旋子，并用夹心积转动箭头与整个三脚架。舞台上琥珀是当前的箭头 v，紫色是固定的 z、y 转轴（这一段加粗）与旋子自己的转轴 n（虚线），青色是 v 在这一段转轴上的影子（不动），品红是 v⊥ 绕轴扫过的扇形（虚线分成左右两个半角），白色是三脚架 Re₁、Re₂、Re₃ 与走过的路。第二十六章用 `lean=` 引用的四条冻结定理都在状态一侧（`blochMatrix_trace`、`bloch_blochMatrix`、`bloch_geometry_of_isHermitian`、`norm_bloch_le_trace_of_posSemidef`），页面只在箭头的纯态 ρ = blochMatrix(1, v) 上标绿并当场核对，抽屉里的声明地图恰是这四条；旋子编译本身没有冻结定理，乘积、三列、转轴与转角标 `NUM`；任意 U(2) 的 ZYZ 分解、Spin(3) → SO(3) 二对一与“单位旋子即一次绕轴转动”按该章文献注记标 `ARGUED`。路线图候选“X 门”正文没有对应的句子，未做；“任意轴”做成 `fold`（单一转轴），“中间一段为零的退化情形”由 `t`（T 门，(π/4, 0, 0)）承担，“夹心作用”做成 `sandwich`，另加 `chain`（例题的三元组 (0.37, −0.81, 0.52)）。
+
 ## 正文里的引用（中英文版本位置与卡名相同）
 
 | 章节 | 位置 | 引用 |
@@ -308,6 +312,10 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十二章 | 例 `ex-prime-log-orthogonality-and-sieve` 之后 | `euler-product-sieve` · `five`、`remainder` |
 | 第二十二章 | §22.3 “首项裂缝……生长之门”一段之后、`sphere-escape` · `thirteen` 之前 | `euler-product-sieve` · `thirtyone` |
 | 第二十二章 | `sphere-escape` · `thirteen` 之后、§22.3 格言之前 | `euler-product-sieve` 完整实验室 |
+| 第二十六章 | 夹心积一节两条列表（$v_\parallel$ 不动、$v_\perp$ 合成整角）之后、“更美妙的是”之前 | `zyz-compile` · `sandwich` |
+| 第二十六章 | 夹心积一节末（“折叠成唯一一枚四分量偶多重向量”）之后、Python 一节之前 | `zyz-compile` · `chain` |
+| 第二十六章 | 例 `ex-zyz-compilation-trace` 之后、文献注记 `rem-zyz-euler-compilation-literature` 之前 | `zyz-compile` · `t`、`h` |
+| 第二十六章 | 文献注记 `rem-zyz-euler-compilation-literature` 之后、章末收束段之前 | `zyz-compile` · `fold`，随后完整实验室 |
 
 ## 增删或修改一张卡之后
 

@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ZYZ//COMPILE · Compiling to ZYZ">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ZYZ//COMPILE ZYZ 编译</title>
+<meta name="description" content="绕 z、绕 y、再绕 z 的三段转动，在偶子代数里乘成一枚四个分量的旋子 R；夹心积 v ↦ R v R̃ 把轴上的影子留在原地，把平面里的那一份转过整角。三段走到的地方，就是绕 R 自己的那根轴一次转到的地方。Three turns, about z, about y and about z again, multiply in the even subalgebra into one rotor R with four components; the sandwich v ↦ R v R̃ leaves the shadow on the axis in place and turns the part in the plane by the whole angle. Where the three turns arrive is where a single turn about the rotor's own axis arrives.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="zyz-compile">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ZYZ//COMPILE">ZYZ<b>//</b>COMPILE</h1>
+      <div class="tagline">
+        <span class="zh">ZYZ 编译 · <em>绕 z、绕 y、再绕 z 转三段，乘出来只是一枚旋子：绕一根轴的一次转动</em></span>
+        <span class="en">Compiling to ZYZ · <em>three turns, about z, y and z again, multiply into a single rotor: one turn about one axis</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillSeg"><span class="zh">段</span><span class="en">SEGMENT</span> <strong>—</strong></span>
+      <span class="pill" id="pillNorm"><span class="zh">RR̃</span><span class="en">RR̃</span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="sandwich" aria-pressed="false"><span class="code">SANDWICH</span><span class="cn zh">夹心：影子不动，平面里转整角</span><span class="cn en">Sandwich: the shadow stays, the plane turns in full</span></button>
+        <button class="preset" data-preset="chain" aria-pressed="false"><span class="code">Z·Y·Z</span><span class="cn zh">三段乘成一枚旋子</span><span class="cn en">Three turns multiply into one rotor</span></button>
+        <button class="preset" data-preset="t" aria-pressed="false"><span class="code">T-GATE</span><span class="cn zh">T 门：中间一段为零</span><span class="cn en">The T gate: the middle turn is zero</span></button>
+        <button class="preset" data-preset="h" aria-pressed="false"><span class="code">HADAMARD</span><span class="cn zh">H 门：(0, π/2, π)</span><span class="cn en">The H gate: (0, π/2, π)</span></button>
+        <button class="preset" data-preset="fold" aria-pressed="false"><span class="code">ONE-AXIS</span><span class="cn zh">三段等于绕一根轴转一次</span><span class="cn en">Three turns equal one turn about one axis</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">欧拉角</span><span class="en">Euler angles</span><span class="aside">R<sub>z</sub>(α) R<sub>y</sub>(β) R<sub>z</sub>(γ)</span></h2>
+      <div class="field">
+        <label for="gamma"><span class="zh">γ：第一段，绕 z</span><span class="en">γ: first turn, about z</span><small class="zh">最右边的因子最先作用</small><small class="en">the rightmost factor acts first</small></label><output id="oGamma" for="gamma">0°</output>
+        <input type="range" id="gamma" min="-180" max="180" step="any" value="0">
+      </div>
+      <div class="field">
+        <label for="beta"><span class="zh">β：第二段，绕 y</span><span class="en">β: second turn, about y</span></label><output id="oBeta" for="beta">0°</output>
+        <input type="range" id="beta" min="-180" max="180" step="any" value="0">
+      </div>
+      <div class="field">
+        <label for="alpha"><span class="zh">α：第三段，绕 z</span><span class="en">α: third turn, about z</span></label><output id="oAlpha" for="alpha">0°</output>
+        <input type="range" id="alpha" min="-180" max="180" step="any" value="0">
+      </div>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">箭头与转轴</span><span class="en">Arrow and axis</span><span class="aside">v · n</span></h2>
+      <div class="chips" id="vecChips" role="group" aria-label="箭头 v 从哪里出发" data-aria-en="Where the arrow v starts">
+        <button class="chip" data-vec="e1" aria-pressed="false">e₁</button><button class="chip" data-vec="e2" aria-pressed="false">e₂</button><button class="chip" data-vec="e3" aria-pressed="false">e₃</button>
+      </div>
+      <p class="note"><span class="zh">也可以在球上直接拖白色的起点圈。拖空白处旋转视角，滚轮缩放。</span><span class="en">Or drag the white start ring on the sphere. Drag empty space to turn the view, scroll to zoom.</span></p>
+      <div class="chips" id="foldChips" role="group" aria-label="是否画出旋子自己的转轴" data-aria-en="Whether to draw the rotor's own axis">
+        <button class="chip" data-fold="off" aria-pressed="true"><span class="zh">只看三段</span><span class="en">Three turns only</span></button>
+        <button class="chip" data-fold="on" aria-pressed="false"><span class="zh">加上单一转轴 n</span><span class="en">Add the single axis n</span></button>
+      </div>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="单位球：琥珀色的箭头 v 依次绕紫色的 z 轴、y 轴、z 轴转三段；青色是 v 在当前转轴上的影子，品红的扇形是 v 绕轴扫过的面积；白色的三脚架是 e₁、e₂、e₃ 被转到的地方；紫色虚线是乘完的旋子自己的转轴" data-aria-en="Unit sphere: the amber arrow v turns three times, about the violet z, y and z axes; cyan is the shadow of v on the current axis, the magenta fan the area v sweeps round it; the white tripod is where e₁, e₂, e₃ are carried; the violet dashed line is the compiled rotor's own axis">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-bl" id="legend">
+        <span><i class="sw am"></i><span class="zh">箭头 v（当前）</span><span class="en">the arrow v (now)</span></span>
+        <span><i class="sw vi"></i><span class="zh">转轴：这一段加粗</span><span class="en">axes: this turn's in bold</span></span>
+        <span><i class="sw cy"></i><span class="zh">轴上的影子：不动</span><span class="en">shadow on the axis: stays</span></span>
+        <span><i class="sw mg"></i><span class="zh">绕轴扫过的面积</span><span class="en">area swept round the axis</span></span>
+        <span><i class="sw ik"></i><span class="zh">三脚架 Re₁ Re₂ Re₃ · 走过的路</span><span class="en">tripod Re₁ Re₂ Re₃ · road travelled</span></span>
+        <span id="legFold" hidden><i class="sw vi"></i><span class="zh">虚线：旋子自己的轴 n 与一次转到的弧</span><span class="en">dashed: the rotor's own axis n and its one-turn arc</span></span>
+      </div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel" id="normPanel">
+        <div class="head"><h2><span class="zh">标量² + 面积²：分量在变，和不变</span><span class="en">Scalar² + area²: the parts change, the sum does not</span></h2><span id="normMeta"></span></div>
+        <canvas id="normPlot" aria-label="沿时间轴，乘到此刻的旋子的标量部分的平方（青色）与三个面积分量的平方和（品红）叠在一起，总高一直是 1" data-aria-en="Along the rail, the square of the scalar part of the rotor so far (cyan) and the sum of the squares of its three area parts (magenta), stacked; the total stays at 1"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt><span class="zh">三段乘完的旋子 R = s + b₁₂e₁₂ + b₁₃e₁₃ + b₂₃e₂₃</span><span class="en">the rotor of all three turns R = s + b₁₂e₁₂ + b₁₃e₁₃ + b₂₃e₂₃</span></dt><dd><b id="roRotor">—</b><span id="roRotorSub"></span></dd></div>
+        <div class="a"><dt><span class="zh">箭头 v（此刻）</span><span class="en">arrow v (now)</span></dt><dd id="roV">—</dd></div>
+        <div><dt><span class="zh">这一段转过</span><span class="en">this turn so far</span></dt><dd id="roSeg">—</dd></div>
+        <div class="wide"><dt><span class="zh">三列 Re₁ · Re₂ · Re₃（三段乘完）</span><span class="en">columns Re₁ · Re₂ · Re₃ (all three turns)</span></dt><dd id="roM">—</dd></div>
+        <div><dt><span class="zh">单一转轴 n</span><span class="en">single axis n</span></dt><dd id="roN">—</dd></div>
+        <div><dt><span class="zh">绕 n 的转角 2·atan2(|B|, s)</span><span class="en">angle about n, 2·atan2(|B|, s)</span></dt><dd id="roPhi">—</dd></div>
+        <div class="wide"><dt><span class="zh">箭头的 2 × 2 矩阵 ρ = blochMatrix(1, v)</span><span class="en">the arrow's 2 × 2 matrix ρ = blochMatrix(1, v)</span></dt><dd id="roRho">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean" id="leanRho"><span class="ok">LEAN ✓</span><span><span class="zh">对任意实数 a 与 r ∈ ℝ³：Tr blochMatrix(a, r) = a，bloch(blochMatrix(a, r)) = r。上面的 ρ 取 a = 1、r = v。已冻结：</span><span class="en">For every real a and r ∈ ℝ³: Tr blochMatrix(a, r) = a and bloch(blochMatrix(a, r)) = r. The ρ above takes a = 1, r = v. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Information/ActualPureQubitGeometry.blochMatrix_trace" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Information/ActualPureQubitGeometry.lean" target="_blank" rel="noopener"><code>blochMatrix_trace</code></a> · <a class="leanref" data-lean-gid="D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_blochMatrix" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Information/ActualPureQubitGeometry.lean" target="_blank" rel="noopener"><code>bloch_blochMatrix</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">厄米的 2 × 2 矩阵 M 等于 blochMatrix(Re Tr M, bloch M)；若再有 Tr M = 1 且 M·M = M，则 ‖bloch M‖ = 1。已冻结：</span><span class="en">A Hermitian 2 × 2 matrix M equals blochMatrix(Re Tr M, bloch M); if moreover Tr M = 1 and M·M = M, then ‖bloch M‖ = 1. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Information/ActualPureQubitGeometry.lean" target="_blank" rel="noopener"><code>bloch_geometry_of_isHermitian</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">正半定的 2 × 2 矩阵 M 满足 ‖bloch M‖ ≤ Re Tr M。页面上的箭头都是纯态，取等号。已冻结：</span><span class="en">A positive-semidefinite 2 × 2 matrix M has ‖bloch M‖ ≤ Re Tr M. Every arrow on this page is a pure state, where equality holds. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Information/ActualPureQubitGeometry.norm_bloch_le_trace_of_posSemidef" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Information/ActualPureQubitGeometry.lean" target="_blank" rel="noopener"><code>norm_bloch_le_trace_of_posSemidef</code></a></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">任意单比特幺正门都有 ZYZ 欧拉角（差一个整体相位），单位旋子经夹心积给出 SO(3) 的二对一满射（R 与 −R 是同一个转动），一枚单位旋子就是绕一根轴的一次转动：文献结果，未在本书形式化（第二十六章文献注记）。</span><span class="en">Every single-qubit unitary has ZYZ Euler angles (up to a global phase), unit rotors map two-to-one onto SO(3) through the sandwich (R and −R give the same turn), and a unit rotor is one turn about one axis: literature results, not formalized in this book (the literature remark of Chapter 26).</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">旋子由页面在八个刀片掩码上按异或与换位符号相乘（与第二十六章的 Python 编译器同一规则），夹心积、三列、转轴与 ρ 都按双精度当场算出：是演示，不是证明。</span><span class="en">The page multiplies rotors on the eight blade masks by XOR and the reordering sign (the rule of the Python compiler in Chapter 26); the sandwich, the columns, the axis and ρ are computed live in double precision: an illustration, not a proof.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="3" step="any" value="0" aria-label="三段转动走到哪里" data-aria-en="How far along the three turns">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">一次一段</span><span class="en">one turn at a time</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">舞台是单位球。琥珀色的箭头 v 依次转三段：先绕 z 转 γ，再绕 y 转 β，最后绕 z 转 α，对应旋子 R(α, β, γ) = R<sub>z</sub>(α) R<sub>y</sub>(β) R<sub>z</sub>(γ) 里从右到左的三个因子；时间轴一单位走一段。白色三脚架是 e₁、e₂、e₃ 被同一串转动带到的地方。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>基本旋子与夹心积。</b>绕 u 轴右手转 θ 的旋子是 R<sub>u</sub>(θ) = cos(θ/2) − sin(θ/2) B<sub>u</sub>，B<sub>z</sub> = e₁e₂、B<sub>y</sub> = e₃e₁ = −e₁e₃、B<sub>x</sub> = e₂e₃。夹心积 v ↦ R v R̃ 中，与轴平行的分量 v∥ 与 B<sub>u</sub> 可交换，留在原地（青色）；平面里的分量 v⊥ 与 B<sub>u</sub> 反对易，左右两个半角合成整角（品红的扇形，“θ/2 + θ/2”）。这是第二十六章的手算。</li>
+        <li><b>三段乘成一枚旋子。</b>页面把三个因子在八个刀片掩码上按异或乘起来，得到只在掩码 0、3、5、6 上有分量的 R = s + b₁₂e₁₂ + b₁₃e₁₃ + b₂₃e₂₃，并核对 RR̃ = 1。三列 Re₁、Re₂、Re₃ 就是正文的 zyz_matrix。条带小图是乘到此刻的旋子：s² 与 b₁₂² + b₁₃² + b₂₃² 此消彼长，和恒为 1。</li>
+        <li><b>一根轴、一次转。</b>把 R 写成 cos(φ/2) − sin(φ/2)(n₁e₂e₃ + n₂e₃e₁ + n₃e₁e₂)，就读出转轴 n = (−b₂₃, b₁₃, −b₁₂)/|B| 与转角 φ = 2·atan2(|B|, s)；绕 n 一次转 φ 与三段走到同一点。单位旋子就是一次绕轴转动、R 与 −R 给同一个转动、任意单比特门都有 ZYZ 欧拉角，是文献结果，未在本书形式化。页面只做正文的正向编译：给定 (α, β, γ)，算出 R。</li>
+        <li><b>箭头就是纯态。</b>v 对应 2 × 2 矩阵 ρ = blochMatrix(1, v)。页面当场核对 Tr ρ = 1、bloch(ρ) = v、ρ² = ρ、‖bloch ρ‖ = 1。</li>
+      </ol>
+      <p class="lede"><b>声明地图。</b>第二十六章用 <code>lean=</code> 引用的冻结声明（都在 <code>ActualPureQubitGeometry</code>，种类都是定理）：</p>
+      <ul class="claims">
+        <li><a class="leanref" data-lean-gid="D5/S3/Quantum/Information/ActualPureQubitGeometry.blochMatrix_trace" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Information/ActualPureQubitGeometry.lean" target="_blank" rel="noopener"><code>blochMatrix_trace</code></a>（LEAN ✓）：Tr blochMatrix(a, r) = a。</li>
+        <li><a class="leanref" data-lean-gid="D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_blochMatrix" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Information/ActualPureQubitGeometry.lean" target="_blank" rel="noopener"><code>bloch_blochMatrix</code></a>（LEAN ✓）：bloch(blochMatrix(a, r)) = r。</li>
+        <li><a class="leanref" data-lean-gid="D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Information/ActualPureQubitGeometry.lean" target="_blank" rel="noopener"><code>bloch_geometry_of_isHermitian</code></a>（LEAN ✓）：厄米重构与迹一幂等矩阵的 ‖bloch M‖ = 1。</li>
+        <li><a class="leanref" data-lean-gid="D5/S3/Quantum/Information/ActualPureQubitGeometry.norm_bloch_le_trace_of_posSemidef" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Information/ActualPureQubitGeometry.lean" target="_blank" rel="noopener"><code>norm_bloch_le_trace_of_posSemidef</code></a>（LEAN ✓）：正半定矩阵 ‖bloch M‖ ≤ Re Tr M。</li>
+      </ul>
+      <p class="lede">这四条讲的是状态一侧（矩阵与球）；旋子编译本身没有冻结定理，页面上它只标 NUM 与 ARGUED。</p>
+      <p class="lede refs">书中：<a href="../../zh/ch26-single-qubit-rotor-compilation.html#sec-even-rotor-sandwich-action" target="_top">偶子代数双矢量与双侧夹心积</a> · <a href="../../zh/ch26-single-qubit-rotor-compilation.html#ex-zyz-compilation-trace" target="_top">编译核验的例题</a> · <a href="../../zh/ch26-single-qubit-rotor-compilation.html#rem-zyz-euler-compilation-literature" target="_top">文献注记</a> · <a href="../../zh/ch26-single-qubit-rotor-compilation.html#sec-bloch-matrix-trace-and-recovery" target="_top">布洛赫矩阵的迹与坐标还原</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">The stage is the unit sphere. The amber arrow v makes three turns: first by γ about z, then by β about y, and last by α about z, the three factors of the rotor R(α, β, γ) = R<sub>z</sub>(α) R<sub>y</sub>(β) R<sub>z</sub>(γ) read from right to left; the rail advances one turn per unit. The white tripod is where e₁, e₂, e₃ are carried by the same turns. The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>Elementary rotors and the sandwich.</b> The rotor of a right-handed turn by θ about the axis u is R<sub>u</sub>(θ) = cos(θ/2) − sin(θ/2) B<sub>u</sub>, with B<sub>z</sub> = e₁e₂, B<sub>y</sub> = e₃e₁ = −e₁e₃, B<sub>x</sub> = e₂e₃. In the sandwich v ↦ R v R̃ the part v∥ along the axis commutes with B<sub>u</sub> and stays put (cyan); the part v⊥ in the plane anticommutes with B<sub>u</sub>, and the two half-angles on the left and on the right add up to the whole angle (the magenta fan, “θ/2 + θ/2”). This is the hand computation of Chapter 26.</li>
+        <li><b>Three turns, one rotor.</b> The page multiplies the three factors on the eight blade masks by XOR and obtains R = s + b₁₂e₁₂ + b₁₃e₁₃ + b₂₃e₂₃, supported on masks 0, 3, 5, 6, and checks RR̃ = 1. The columns Re₁, Re₂, Re₃ are the text's zyz_matrix. The strip shows the rotor multiplied so far: s² and b₁₂² + b₁₃² + b₂₃² trade off against each other, and their sum stays 1.</li>
+        <li><b>One axis, one turn.</b> Writing R as cos(φ/2) − sin(φ/2)(n₁e₂e₃ + n₂e₃e₁ + n₃e₁e₂) gives the axis n = (−b₂₃, b₁₃, −b₁₂)/|B| and the angle φ = 2·atan2(|B|, s); one turn by φ about n arrives where the three turns arrive. That a unit rotor is one turn about an axis, that R and −R give the same turn, and that every single-qubit gate has ZYZ Euler angles are literature results, not formalized in this book. The page only runs the text's forward compiler: given (α, β, γ), compute R.</li>
+        <li><b>The arrow is a pure state.</b> v corresponds to the 2 × 2 matrix ρ = blochMatrix(1, v). The page checks Tr ρ = 1, bloch(ρ) = v, ρ² = ρ and ‖bloch ρ‖ = 1 on the spot.</li>
+      </ol>
+      <p class="lede"><b>Claim map.</b> The frozen declarations Chapter 26 cites with <code>lean=</code> (all in <code>ActualPureQubitGeometry</code>, all of kind theorem):</p>
+      <ul class="claims">
+        <li><a class="leanref" data-lean-gid="D5/S3/Quantum/Information/ActualPureQubitGeometry.blochMatrix_trace" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Information/ActualPureQubitGeometry.lean" target="_blank" rel="noopener"><code>blochMatrix_trace</code></a> (LEAN ✓): Tr blochMatrix(a, r) = a.</li>
+        <li><a class="leanref" data-lean-gid="D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_blochMatrix" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Information/ActualPureQubitGeometry.lean" target="_blank" rel="noopener"><code>bloch_blochMatrix</code></a> (LEAN ✓): bloch(blochMatrix(a, r)) = r.</li>
+        <li><a class="leanref" data-lean-gid="D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Information/ActualPureQubitGeometry.lean" target="_blank" rel="noopener"><code>bloch_geometry_of_isHermitian</code></a> (LEAN ✓): Hermitian reconstruction, and ‖bloch M‖ = 1 for trace-one idempotents.</li>
+        <li><a class="leanref" data-lean-gid="D5/S3/Quantum/Information/ActualPureQubitGeometry.norm_bloch_le_trace_of_posSemidef" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Information/ActualPureQubitGeometry.lean" target="_blank" rel="noopener"><code>norm_bloch_le_trace_of_posSemidef</code></a> (LEAN ✓): ‖bloch M‖ ≤ Re Tr M for positive-semidefinite M.</li>
+      </ul>
+      <p class="lede">These four concern the state side (matrices and the ball); the rotor compiler itself has no frozen theorem, and on the page it is labelled NUM and ARGUED only.</p>
+      <p class="lede refs">In the book: <a href="../../en/ch26-single-qubit-rotor-compilation.html#sec-even-rotor-sandwich-action" target="_top">even-subalgebra bivectors and the sandwich</a> · <a href="../../en/ch26-single-qubit-rotor-compilation.html#ex-zyz-compilation-trace" target="_top">the worked example</a> · <a href="../../en/ch26-single-qubit-rotor-compilation.html#rem-zyz-euler-compilation-literature" target="_top">the literature remark</a> · <a href="../../en/ch26-single-qubit-rotor-compilation.html#sec-bloch-matrix-trace-and-recovery" target="_top">trace and coordinate recovery of the Bloch matrix</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
