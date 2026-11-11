@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+### 变更
+
+- CI 的可视化浏览器测试从 `media` 作业移到新的 `viz` 作业，分 4 片并行运行（`tools/node/viz-test.mjs --shard i/4` 早已支持分片，工作流此前没有用）。下游《量子计算的几何直觉》的页面由 8 个增到 36 个之后，串行跑一轮要四五十分钟，默认分支上后续的运行都排在它后面被取代。`media` 作业改名为 “Slides and films”，只构建幻灯片与视频。**需要手动操作（仅当分支保护按名字要求了旧的检查）**：把必需检查 “Visualizations, slides and films” 换成 “Slides and films” 与四个 “Visualization browser tests (i/4)”。
+
 ### 新增
 
 - 静态图的标准、工具与检查（`skills/book-figure`）。此前模板对静态图只有 `![图注](../assets/x.svg)` 一种写法，没有标准、工具与检查；下游《量子计算的几何直觉》的 29 张图因此全部把深色底写死在文件里、两种语言共用一个文件、四章的图注只有“图 13”这样的编号。现在：
