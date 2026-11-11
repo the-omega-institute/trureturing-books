@@ -66,6 +66,9 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 `equator-concentration` 不引用任何 Lean 定理（第十二章引用的冻结定理与球面测度集中无关，正文强调它们相互独立）：E[x₁²] = 1/d、马尔可夫上界、x₁ 的密度 ∝ (1 − x²)^{(d−3)/2} 与贫瘠高原都是文献结果（`ARGUED`）；带内外的精确份额由不完全贝塔函数算出、舞台上的点是精确分布的分位数（`NUM`）。页面不画梯度。青色是赤道带里的点与带内密度，品红是带外的点与带外密度。
 | `pairwise-shutter` | 快门每次只报“过”或“不过”；按得越多，“过”的比例越贴近两支箭头的夹角定下的权重 | `clicks` `sixty` `right` `same` `opposite` `turn` `random` |
+| `syndrome-decoding` | 校验只问相邻两个比特一不一致：亮起的灯指出翻了哪一个，翻回去，叠加原样回来；翻两个或翻相位，灯就指错或者不亮 | `single` `rooms` `mix` `two` `phase` |
+
+`syndrome-decoding` 的绿色框只给第十四章用 `lean=` 引用的两条：`orthogonal_syndrome_recovery`（解码(编码(σ, ρ)) = Tr(σ)·ρ）与 `pauli_word_mul`（泡利字乘法的交叉相位；“灯亮不亮看模 2 辛奇偶”是正文由它推出的读法，页面照此写明）。三比特码只纠一个 X、纠任意单比特错误要更大的码与 Knill–Laflamme 条件标 `ARGUED`；“量校验再查表翻回”的解码器与柱子在房间之间滑动的画法标 `MODEL`；振幅、综合征、解码后的 2 × 2 矩阵与重合度实算（`NUM`）。这一页的青色是振幅柱子与码空间那间房，品红是错误与亮起的校验，琥珀只给解码器这一步翻回的比特，虚线是原来的态。
 
 `pairwise-shutter` 的青色是已知态 $A$、它那条直径上从 $-1$ 端到 $B$ 的垂足的一段（长度占直径的 $p$）、权重的虚线与“过”的方块；琥珀色是目标态 $B$ 与当前的比例；细曲线（墨色）是数出来的比例 $k/N$；紫色只在 `turn` 卡里出现，是两支共用的转轴。绿色框只给第二章用 `lean=` 引用的两条定理：`born_probability_skeleton`（过与不过两份权重非负、相加为 1）与 `rank_one_born_pairing_weight`（$\lvert\langle\phi\mid\psi\rangle\rvert^2 = \Tr(\rho P_k)$）；半角公式 $(1 + \cos\theta)/2$ 与随机方向上权重均匀是第二章例题的手算，页面三路数值核对标 `NUM`；快门计数是固定种子的抽样模型，比例趋向权重是大数定律（本书未形式化），浅色带 $p \pm 2\sqrt{p(1-p)/N}$ 只是参考尺度，一并标 `MODEL`。这一页不画 `qubit-geometry` · `line` 的“影子长 $\cos\theta$”，只画计数。
 
@@ -196,6 +199,11 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二章 | §2.3 `qubit-geometry` · `line` 之后、“上面的表是逐个角度算的”之前 | `pairwise-shutter` · `right` |
 | 第二章 | §2.3 “单比特是唯一‘公平’的情形”一段之后 | `pairwise-shutter` · `random` |
 | 第二章 | 文献注记 `rem-gleason-literature` 之后、转入第三章之前 | `pairwise-shutter` 完整实验室 |
+| 第十四章 | Pauli 字一节末（辛奇偶校验和那一条之后、“正交综合征”一节之前） | `syndrome-decoding` · `single` |
+| 第十四章 | 正交综合征一节 `OrthogonalSyndromes` 条件的解读段（“绝不串门”）之后 | `syndrome-decoding` · `rooms` |
+| 第十四章 | 命题 `prop-orthogonal-syndrome-recovery` 后边界列表第 1 条之后、第 2 条之前 | `syndrome-decoding` · `mix` |
+| 第十四章 | 例 `ex-repetition-code-syndrome` 之后、文献注记 `rem-error-correction-anyons-literature` 之前 | `syndrome-decoding` · `two`、`phase` |
+| 第十四章 | 文献注记 `rem-error-correction-anyons-literature` 之后、转入第十五章之前 | `syndrome-decoding` 完整实验室 |
 
 ## 增删或修改一张卡之后
 

@@ -197,6 +197,10 @@ Two critical points in [@lemma-pauli-word-phase] must be observed:
 
    which determines whether a stabilizer check $a$ commutes ($+1$) or anticommutes ($-1$) with a Pauli error $b$. Note that [@lemma-pauli-word-phase] itself is the operator multiplication identity; turning syndromes into guaranteed logical recovery requires the orthogonal-syndrome decoding structure developed next.
 
+::: {.viz src="syndrome-decoding" preset="single" height="500"}
+**One light points at the flipped qubit.** The two checks of the three-qubit repetition code, $g_1 = Z_1Z_2$ and $g_2 = Z_2Z_3$, sit over neighbouring pairs of qubits. When the first qubit flips (the magenta X), only $g_1$, which sits over it, lights up (magenta) and $g_2$ stays dark: $X_1$ anticommutes with $g_1$ and commutes with $g_2$, exactly the parity mod $2$ above, with the cross phase coming from [@lemma-pauli-word-phase]. The decoder follows the light and flips the first qubit back (amber); the cyan bars return to the code space and land on the dashed outline.
+:::
+
 ## Logical Recovery from Orthogonal Syndromes {#sec-orthogonal-syndrome-recovery}
 
 Once environmental errors kick an encoded logical state $\rho \in M_d(\mathbb{C})$ into distinct error channels, how does recovery strip away the error matrix $\sigma$ and restore $\rho$ intact?
@@ -208,6 +212,10 @@ $$
 $$
 
 Each $S_i$ isometrically embeds the $d$-dimensional logical space into the $i$-th syndrome subspace ($S_i^* S_i = I_d$), while distinct syndrome subspaces are strictly orthogonal ($S_i^* S_j = 0$ for $i \neq j$).
+
+::: {.viz src="syndrome-decoding" preset="rooms" height="500"}
+**An error moves the state, whole, into another room.** Below, the eight basis states fall into four rooms $S_j = E_jV$ ($E \in \{I, X_1, X_2, X_3\}$) according to the readings of the two checks. The middle qubit flips and both lights go on; the two cyan bars of $\alpha\lvert 000\rangle + \beta\lvert 111\rangle$ move unchanged into room $(-1,-1)$, onto $\lvert 010\rangle$ and $\lvert 101\rangle$, and the other three rooms stay empty.
+:::
 
 For any syndrome coefficient matrix $\sigma \in M_s(\mathbb{C})$ and any logical matrix $\rho \in M_d(\mathbb{C})$, the **syndrome encoding map** is
 
@@ -245,6 +253,11 @@ By `OrthogonalSyndromes S`, $S_i^* S_j = \delta_{ij} I_d$ and $S_k^* S_i = (S_i^
 Two important domain boundaries apply to [@prop-orthogonal-syndrome-recovery]:
 
 1. **No positivity, unit-trace, or diagonality assumption on $\sigma$ or $\rho$**: The identity holds for **arbitrary** complex matrices $\sigma \in M_s(\mathbb{C})$ and $\rho \in M_d(\mathbb{C})$. In particular, off-diagonal coherent error superpositions $\sigma_{jk}$ ($j \neq k$) between distinct syndrome subspaces are automatically annihilated by $S_i^* S_j = \delta_{ij}I_d$ and $S_k^* S_i = \delta_{ik}I_d$, and when $\Tr(\sigma) = 1$, exact unscaled recovery $\mathrm{syndromeDecoding}(S, \mathrm{syndromeEncoding}(S, \sigma, \rho)) = \rho$ follows as a special case.
+
+::: {.viz src="syndrome-decoding" preset="mix" height="500"}
+**Four branches each come back and add up to the state.** Take $\sigma = \operatorname{diag}\bigl(\frac{1}{2}, \frac{1}{4}, \frac{1}{8}, \frac{1}{8}\bigr)$ (step 4 of [@ex-repetition-code-syndrome]) and $\rho = \lvert +\rangle\langle +\rvert$: four branches, no error and a flip of the first, second or third qubit, each cyan bar as wide as its weight and each branch in its own room. Decoding pulls every branch back into the code space, where they line up side by side into one whole bar that fills the dashed outline exactly: $\Tr(\sigma)\,\rho = \rho$, which is [@prop-orthogonal-syndrome-recovery].
+:::
+
 2. **Algebraic decoding on the syndrome support versus a globally trace-preserving channel**: $\mathrm{syndromeDecoding}(S, \cdot) = \sum_{i \in s} S_i^* (\cdot) S_i$ is an algebraic recovery formula on the direct sum $\bigoplus_{i \in s} \operatorname{range}(S_i)$. Whenever $|s|d < n$ so that $\sum_{i \in s} S_i S_i^* \neq I_n$, one cannot unconditionally claim that $\{S_i^*\}_{i \in s}$ alone defines a trace-preserving (CPTP) channel on the entire physical space $M_n(\mathbb{C})$; a full physical channel requires completing the Kraus operators on the orthogonal complement $I_n - \sum_{i \in s} S_i S_i^*$.
 
 ## Planar Braids and the Third Orthogonal Direction {#sec-braids-and-third-axis}
@@ -514,6 +527,14 @@ $$
 Note the scope of this code: it corrects only single $X$ bit-flip errors; a single phase flip $Z_1 = Z \otimes I \otimes I$ commutes with both $g_1$ and $g_2$ and acts as an undetected logical phase error $\bar{Z}\lvert +_L\rangle = \lvert -_L\rangle$, so this code does not correct arbitrary single-qubit noise (correcting arbitrary single-qubit errors requires at least the five-qubit code, or the seven-qubit Steane or nine-qubit Shor code; cf. [@rem-error-correction-anyons-literature]).
 :::
 
+::: {.viz src="syndrome-decoding" preset="two" height="500"}
+**Flip two, and the lights point the wrong way.** In the logical state $\lvert 000\rangle$ the first and second qubits flip together (two magenta X's): only $g_2$ lights up, exactly as if the third qubit alone had flipped. The decoder follows the light and flips the third qubit back (amber); together that is $X_1X_2X_3$, a logical flip, and the cyan bar lands on $\lvert 111\rangle$ while the dashed outline stands on $\lvert 000\rangle$. This code corrects at most one $X$ flip.
+:::
+
+::: {.viz src="syndrome-decoding" preset="phase" height="500"}
+**Flip a phase: no light, yet the state has changed.** In the logical state $\lvert +_L\rangle$ the first qubit has its phase flipped (the magenta Z): $Z_1$ commutes with both $g_1$ and $g_2$, neither light goes on, the bars never leave the code space and the decoder does nothing; yet the cyan bar on $\lvert 111\rangle$ has flipped below the axis, exactly opposite the dashed outline, and the state has become the orthogonal $\lvert -_L\rangle$.
+:::
+
 ::: {.remark #rem-error-correction-anyons-literature title="Knill–Laflamme Conditions, Stabilizer Codes, and Anyonic Braiding (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** Beyond the frozen algebraic results of this chapter ([@thm-no-cloning-overlap], [@lemma-pauli-word-phase], [@prop-orthogonal-syndrome-recovery], and [@cor-braid-yang-baxter]), four foundational results from the quantum error-correction and topological physics literature should be noted:
 
@@ -521,6 +542,10 @@ Note the scope of this code: it corrects only single $X$ bit-flip errors; a sing
 2. **Stabilizer codes** (D. Gottesman, *Stabilizer Codes and Quantum Error Correction*, Caltech Ph.D. thesis, 1997, arXiv:quant-ph/9705052): An Abelian subgroup $\mathcal{S} \subset \mathcal{P}_N$ of cardinality $|\mathcal{S}| = 2^{N-k}$ generated by $N - k$ independent commuting Pauli operators and not containing $-I^{\otimes N}$ defines a $2^k$-dimensional code space $\mathcal{C}$ via its joint $+1$ eigenspace. Pauli errors anticommuting with at least one generator of $\mathcal{S}$ are diagnosed via the binary symplectic inner product; quotienting out the central scalar phase subgroup $\langle i I^{\otimes N}\rangle = \{\pm I^{\otimes N}, \pm i I^{\otimes N}\}$, operators in $N(\mathcal{S}) \setminus (\langle i I^{\otimes N}\rangle \cdot \mathcal{S})$ represent nontrivial logical classes in $N(\mathcal{S}) / (\langle i I^{\otimes N}\rangle \cdot \mathcal{S})$ (excluding central scalar multiples such as $-I^{\otimes N}$ of weight $0$), and the code distance $d_{\mathrm{code}}$ is the minimum Pauli weight among all $E \in N(\mathcal{S}) \setminus (\langle i I^{\otimes N}\rangle \cdot \mathcal{S})$.
 3. **Configuration-space braid groups in 2D versus 3D** (J. M. Leinaas and J. Myrheim, *On the theory of identical particles*, Nuovo Cimento B **37**, 1–23, 1977, doi:10.1007/BF02727953): For $n$ indistinguishable non-colliding point particles in $\mathbb{R}^d$, the fundamental group of configuration space is the symmetric group $S_n$ for $d \ge 3$ (permitting only bosons and fermions), but expands to the infinite Artin braid group $B_n$ for $d = 2$.
 4. **Non-Abelian anyons and physical limits of topological protection** (C. Nayak, S. H. Simon, A. Stern, M. Freedman, and S. Das Sarma, *Non-Abelian anyons and topological quantum computation*, Rev. Mod. Phys. **80**, 1083–1159, 2008, doi:10.1103/RevModPhys.80.1083): In gapped 2D topological phases, braiding non-Abelian anyons induces unitary transformations on degenerate fusion spaces protected against local perturbations up to exponentially small splitting $\propto e^{-L/\xi}$. As emphasized in the text, the triviality of point-particle double exchange in $\mathbb{R}^3$ does not mean closed $1$-dimensional knots in $\mathbb{R}^3$ untie themselves, nor does topological protection imply strictly zero error in finite-temperature hardware subject to thermally excited quasiparticles.
+:::
+
+::: {.viz src="syndrome-decoding" height="560"}
+The full syndrome-decoding lab: click qubits on the stage to add $X$ or $Z$ errors and watch which of the two checks light up, which qubit the decoder flips back, and whether the bars land back on the dashed outline; you can also change the logical state or switch to the four-branch mixture $\sigma$.
 :::
 
 With our logical states shielded inside higher-dimensional error-correcting subspaces, we are ready to put those fault-tolerant registers to work. **How do flagship quantum algorithms harness invariant-plane rotations and Fourier phase gears to find targets and hidden periods across exponentially large state spaces?** Let us proceed to [Chapter 15](ch15-grover-qft-and-period-finding.md).
