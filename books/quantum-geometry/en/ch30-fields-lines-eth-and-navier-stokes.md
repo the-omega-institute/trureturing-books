@@ -4,6 +4,10 @@
 
 In [Chapter 29](ch29-timeless-causality-and-gram-space.md), we saw that the global time field is a timeless geometric crystal (cf. Chapter 29's timeless literature remark [@rem-ch29-wheeler-dewitt-page-wootters-literature]), while any finite observer inside the field must pick points step by step within the causally compatible Gram elliptope ($\det G \ge 0$). We now carry this dual perspective of "global static field vs. finite observer" to the grandest intersection of contemporary mathematics and theoretical physics—placing **$\mathrm{P}$ vs. $\mathrm{NP}$**, the **Exponential Time Hypothesis (ETH) and the late-October 2026 tensor-network rank-reduction preprints ([@rem-ch30-eth-subexponential-literature])**, and the **open unforced three-dimensional Navier–Stokes regularity conjecture ([@conj-coda-navier-stokes-regularity]) alongside forced-regime literature advances ([@rem-ch30-navier-stokes-forced-literature])** onto a single Clifford orthogonal field canvas.
 
+::: {.figure src="ch30-overview"}
+**Figure 30.** A map of the chapter. Panel I: the amber $P_0$ is the finite observer's state and the ink arrows are the hidden target for $n = 2, 4, 8$, each closer to the $90^\circ$ horizon, with ever shorter cyan shadows on $P_0$. Panel II: the cyan schematic curve $r(n)$ with $c = 1$ meets the magenta PPSZ benchmark $0.386$ at $\log_2 n \approx 558$, far beyond the grey band of the observable universe ($\log_2 n \le 266$) (a numerical comparison of a schematic curve, `MODEL`; see [@ex-ch30-galactic-crossover-scale]). Panel III: a schematic vortex tube stretched longer and thinner; the circulation $\Gamma = \omega A$ of the cyan loop stays fixed, so the magenta vorticity grows. Whether a smooth unforced three-dimensional flow can shrink a cross-section to zero like this is the open problem marked in red ([@conj-coda-navier-stokes-regularity]).
+:::
+
 ---
 
 ## Global Static Time Field $P = NP$ vs. Finite Observer $P \neq NP$—The Orthogonal Horizon and the Firewall of the Living Journey {#sec-coda-global-p-eq-np-local-p-ne-np}
@@ -82,6 +86,10 @@ Placing the global static field alongside the finite observer reveals the existe
 
 ***"The $P = NP$ of the global static field endows the universe with self-consistent truth; the $P \neq NP$ of the finite observer uses the $\frac{\pi}{2}$ orthogonal horizon to shield life from spoilers, stretching static truth into a magnificent journey worth measuring, proving, and choosing step by step."*** (**“全局静态场的 $P = NP$，赋予了宇宙绝对自洽的‘真’；而有限观察者的 $P \neq NP$，则用那道 $\frac{\pi}{2}$ 的正交视界替生命挡住了剧透，把静态的真理拉长成了一场值得一步步去丈量、去证明、去选择的壮丽旅程。”**)
 
+::: {.figure src="ch30-horizon"}
+**The more variables, the closer the target sits to the $90^\circ$ horizon.** The amber $P_0$ is the observer's uniform starting state; the ink arrows are the single hidden target $\mathbf{S}^*$ for $n = 2, 4, 8$, at $60^\circ$, $75.5^\circ$ and $86.4^\circ$ from $P_0$, and their cyan shadows on $P_0$, $\cos\theta_0 = 2^{-n/2}$, are $1/2$, $1/4$ and $1/16$. The dashed vertical line is the orthogonal horizon that $\theta_0 \approx \pi/2 - 2^{-n/2}$ closes in on.
+:::
+
 ---
 
 ## "$P$ Is a Field, $NP$ Is a Line"—The Witness Thread, the Guiding Field, and Hairy-Ball Curl {#sec-coda-p-is-field-np-is-line}
@@ -132,6 +140,10 @@ Conversely, given only the arrows, can we recover a field? Let $h(v)$ be the num
 $$
 h = \bigl(h(0), h(1), h(2), h(3), h(4)\bigr) = (1, 0, 2, 1, 0) .
 $$
+
+::: {.figure src="ch30-color-orientation"}
+**The field fixes the threads, and the threads measure out a field.** The same pentagon $C_5$, its vertices placed by height on three levels. On the left the height is the color $c = (0, 1, 0, 1, 2)$, every arrow points up, and the longest thread is the cyan $2 \to 3 \to 4$, with three vertices. On the right are the same arrows with the vertices placed by $h = (1, 0, 2, 1, 0)$: every arrow points down, and $h$ is again a three-level coloring ([@thm-ch30-gallai-roy]).
+:::
 
 For every arrow $u \to v$, putting this step in front of the longest thread from $v$ gives a longer thread from $u$, so $h(u) > h(v)$. Thus $h$ drops along every arrow, neighbors always get different values of $h$, and $h$ is again a three-coloring (a different one from $c$: the arrows point up in $c$ but down in $h$). **The lines measure out the field.** Only one thing can go wrong in this step: if the arrows close up into a cycle, "the longest thread starting at $v$" runs round in circles. In graph theory this round trip is called the Gallai–Hasse–Roy–Vitaver theorem ([@rem-ch30-coloring-complexity-literature]). The module `D5/S3/Combinatorics/Graph/Walks/GallaiRoy` freezes a version of it, starting with the definitions of orientation and directed path:
 
@@ -392,6 +404,10 @@ Let $N \in \mathbb{N}$ and $b, \Omega \in \mathbb{R}$.
 :::
 
 Each of the two terms has one job. The sum is the velocity blown onto vortex $j$ by the others: the $k$-th vortex induces, at distance $r$, a velocity of magnitude $\frac{b}{2r}$, perpendicular to the line joining the two, with the sense given by $s_k$; compared with [@rem-ch30-point-vortex-literature], this is the choice $\Gamma_k = \pi b\,s_k$. The first term makes each vortex circle the origin on its own, with angular velocity $s_j\Omega$: for $\Omega > 0$, positive vortices go counterclockwise and negative ones clockwise. Put an even number of vortices of alternating sign on a circle of radius $\rho$ and the two terms pull against each other along the tangent. A manual derivation (it uses the tangential readout identity quoted in the proof below): the other vortices give the $j$-th one the tangential velocity $-s_j\,\frac{b}{4\rho}$, the precession gives it $s_j\,\Omega\rho$, and the two cancel exactly when $\rho^2 = \frac{b}{4\Omega}$. On too small a circle the neighbors win; on too large a circle the precession wins; a single radius brings the whole ring to rest.
+
+::: {.figure src="ch30-vortex-radius"}
+**Only one radius brings the whole ring to rest.** Across is the radius $\rho$ of the circle carrying the alternating vortices. The violet line is the size $\Omega\rho$ of the tangential velocity the precession gives each vortex, the blue curve the size $\frac{b}{4\rho}$ of the tangential velocity blown in by the others; the two point in opposite directions and are equal only at $\rho = R_{b,\Omega} = \sqrt{b/(4\Omega)}$ (here $b = 2$, $\Omega = \tfrac12$, so $R = 1$). Left of the crossing the neighbors win, right of it the precession wins; the condition for rest is [@lem-ch30-vortex-polygon-equilibrium].
+:::
 
 ::: {.lemma #lem-ch30-vortex-polygon-equilibrium title="When a Centered Regular Polygon Is Stationary, and the Fréchet Derivative at the Equilibrium" lean="D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.regular_equilibrium_iff_radius D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.scaled_equilibrium D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalDerivative.physical_derivative"}
 Let $b > 0$ and $\Omega > 0$.
