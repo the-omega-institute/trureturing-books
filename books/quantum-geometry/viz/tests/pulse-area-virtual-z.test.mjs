@@ -131,6 +131,55 @@ check('CARRIER: lab frame, no drive: |+⟩ has turned 1.5 times about z to −x 
 check('CARRIER: the two poles stay put (eigenstates of H₀)', vdist(s.labPoles[0], [0, 0, 1]) < 1e-12 && vdist(s.labPoles[1], [0, 0, -1]) < 1e-12);
 check('CARRIER: the rail runs 0.4 ns, two carrier periods', close(s.max, 0.4));
 
+// the area law is for one resonant axis: two ordinary pulses about X then Y, reached through the controls
+const lang = async (l) => { await page.click(`[data-lang-set="${l}"]`); await settle(page); };
+const words = async () => ({ sub: await page.textContent('#hudSub'), note: await page.textContent('#roNote') });
+await pick('quarter'); await chip('#twoChips [data-two="1"]');
+s = await seek(50);
+const area2 = 2 * simpson((t) => s.peak * SHAPE.square(t, 25), 0, 25), ang2 = 2 * Math.acos(Math.max(-1, Math.min(1, traceHalf(s, 50))));
+check('two quarter pulses, X then Y: the areas add up to π (Simpson) while the RK4 propagator turns only 2π/3, and the page agrees', s.two && close(s.phi, 0) && close(s.phi2, 90) && close(area2, PI, 1e-12) && close(s.area, area2, 1e-12)
+  && close(ang2, 2 * PI / 3, 1e-6) && close(s.angle, ang2, 1e-6) && err(s) < 1e-8, `area ${s.area}, angle ${s.angle}, rk4 ${ang2}`);
+let w = await words();
+check('two pulses (zh): the HUD gives area 1.00π and angle 0.67π apart and does not equate them; the note says so', w.sub.includes('面积 1.00π') && w.sub.includes('转角 0.67π') && !w.sub.includes('= 转过') && w.note.includes('面积合计 1.00π') && w.note.includes('0.67π'), `${w.sub} | ${w.note}`);
+await lang('en'); w = await words();
+check('two pulses (en): the same, in English', w.sub.includes('area 1.00π') && w.sub.includes('angle 0.67π') && !w.sub.includes('turned') && w.note.includes('add up to 1.00π') && w.note.includes('0.67π'), `${w.sub} | ${w.note}`);
+s = await seek(25); w = await words();
+check('…while only the first pulse has acted, one resonant axis: area = angle, and the HUD equates them (en)', close(s.angle, s.area, 1e-9) && close(s.area, PI / 2, 1e-12) && w.sub.includes('area swept 0.50π = 90.0° turned'), w.sub);
+await lang('zh'); w = await words();
+check('…and in Chinese', w.sub.includes('扫过面积 0.50π = 转过 90.0°'), w.sub);
+// the same axis twice is still two pulses: once the second has begun the HUD keeps area and angle apart
+await pick('quarter'); await chip('#twoChips [data-two="1"]'); await setRange('phase2', 0); await setRange('area', 1.5);
+s = await seek(50);
+const area3 = 2 * simpson((t) => s.peak * SHAPE.square(t, 25), 0, 25), ang3 = 2 * Math.acos(Math.max(-1, Math.min(1, traceHalf(s, 50))));
+check('two pulses of area 1.5π about X: the areas add up to 3π (Simpson), the RK4 propagator\'s principal angle is π, and the page agrees', s.two && close(s.phi, 0) && close(s.phi2, 0) && close(area3, 3 * PI, 1e-12) && close(s.area, area3, 1e-12)
+  && close(ang3, PI, 1e-6) && close(s.angle, ang3, 1e-6) && err(s) < 1e-8, `area ${s.area}, angle ${s.angle}, rk4 ${ang3}`);
+const ro = async () => (await page.textContent('#roArea')).replace(/\s+/g, ' ');
+w = await words(); let roA = await ro();
+check('same phases, after the second pulse (zh): the readout gives 3.00π · 1.00π and the HUD the same two numbers apart, not 3π = 540°', roA.includes('3.00π · 1.00π') && w.sub.includes('面积 3.00π') && w.sub.includes('转角 1.00π') && !w.sub.includes('= 转过') && !w.sub.includes('540'), `${w.sub} | ${roA}`);
+await lang('en'); w = await words(); roA = await ro();
+check('same phases, after the second pulse (en): the same, in English', roA.includes('3.00π · 1.00π') && w.sub.includes('area 3.00π') && w.sub.includes('angle 1.00π') && !w.sub.includes('turned') && !w.sub.includes('540'), `${w.sub} | ${roA}`);
+s = await seek(25); w = await words();
+check('…while only the first of them has acted, the HUD equates area and angle: 1.50π = 270.0° (en)', close(s.area, 1.5 * PI, 1e-12) && close(s.angle, 1.5 * PI, 1e-9) && w.sub.includes('area swept 1.50π = 270.0° turned'), w.sub);
+await lang('zh');
+
+// no drive: the rotating-frame state stays only on resonance or on a pole; detuned, it precesses at Δ
+await pick('carrier'); await chip('#frameChips [data-frame="rot"]'); await setRange('dur', 25); await setRange('det', 10);
+s = await seek(25);
+const free = run(s, 'main', 25);
+check('no drive, detuned 10 MHz for 25 ns: RK4 turns |+⟩ by Δt = π/2 about z to +y, and so does the page', close(s.area, 0) && s.det === 10 && s.frame === 'rot' && vdist(s.r0, [1, 0, 0]) < 1e-12
+  && vdist(free, rotZ([1, 0, 0], 10 * MHZ * 25)) < 1e-9 && vdist(free, [0, 1, 0]) < 1e-9 && vdist(s.r, free) < 1e-9 && err(s) < 1e-9);
+w = await words();
+check('no drive, detuned (zh): the HUD and the note say the state precesses (100 ns a turn), not that nothing moves', w.sub.includes('进动') && !w.sub.includes('一动不动') && w.note.includes('进动') && w.note.includes('100 ns'), `${w.sub} | ${w.note}`);
+await lang('en'); w = await words();
+check('no drive, detuned (en): the same, in English', w.sub.includes('precesses') && !w.sub.includes('nothing moves') && w.note.includes('precesses') && w.note.includes('100 ns'), `${w.sub} | ${w.note}`);
+await lang('zh');
+await setRange('det', 0); s = await seek(25);
+check('no drive on resonance: nothing moves in the rotating frame, and the HUD says so', vdist(s.r, [1, 0, 0]) < 1e-12 && vdist(run(s, 'main', 25), [1, 0, 0]) < 1e-9 && (await page.textContent('#hudSub')).includes('一动不动'));
+await pick('quarter'); await setRange('area', 0); await setRange('det', 10); s = await seek(25);
+check('no drive, detuned, from the north pole: the longitudinal state stays (RK4), and the HUD says so', vdist(s.r0, [0, 0, 1]) < 1e-12 && vdist(run(s, 'main', 25), [0, 0, 1]) < 1e-9 && vdist(s.r, [0, 0, 1]) < 1e-12 && (await page.textContent('#hudSub')).includes('极点'));
+const stat = await page.evaluate(() => ({ lean: document.getElementById('leanStationary').textContent, tag: document.querySelector('.tagline').textContent }));
+check('the Lean stationarity box is scoped to the free evolution by H₀, and the tagline to one resonant pulse of fixed phase (both languages)', stat.lean.includes('不加驱动') && stat.lean.includes('no drive') && stat.tag.includes('共振、相位固定') && stat.tag.includes('one resonant pulse of fixed phase'));
+
 // free play: random settings against Runge–Kutta, rotating and lab frame, the angle of the propagator
 const rnd = (() => { let a = 7; return () => { a = (a * 1103515245 + 12345) % 2147483648; return a / 2147483648; }; })();
 let worst = 0, worstAng = 0, worstLab = 0, zSame = 0;

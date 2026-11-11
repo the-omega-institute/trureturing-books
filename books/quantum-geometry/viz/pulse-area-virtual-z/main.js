@@ -349,15 +349,24 @@
   };
   function drawText(now, C) {
     const pr = C.main, end = pr.end, area = pr.pulses.reduce((s, p) => s + p.A * SHAPES[p.shape].cum(p.T, p.T), 0), ang = qangle(now.q), P0 = (1 + now.r[2]) / 2;
-    const leg = [['mg box', '包络下的面积 = 转过的角', 'area under the envelope = angle turned'], ['vi', '转轴', 'the axis'], ['am', '当前的态', 'the current state'], ['cy', '在 Z 轴上的影子：P(0)', 'shadow on the Z axis: P(0)']];
+    // area = angle holds pulse by pulse only at resonance (each pulse a turn about its own fixed equatorial axis)
+    const leg = [S.det === 0 ? ['mg box', '包络下的面积 = 每个脉冲转过的角', 'area under the envelope = angle each pulse turns'] : ['mg box', '包络下的面积', 'area under the envelope'], ['vi', '转轴', 'the axis'], ['am', '当前的态', 'the current state'], ['cy', '在 Z 轴上的影子：P(0)', 'shadow on the Z axis: P(0)']];
     if (C.kind) leg.push(['dash', GHOST_WORDS[C.kind][0], GHOST_WORDS[C.kind][1]]);
     const html = leg.map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
     if ($('legend')._h !== html) { $('legend').innerHTML = html; $('legend')._h = html; }
     const noDrive = area < 1e-12;
+    // the HUD equates the area swept with the angle turned only while a single resonant pulse has acted so far: no
+    // detuning, and no second pulse begun, whatever its phase (the angle shown is the principal angle of the propagator)
+    const oneAxis = S.det === 0 && (!S.two || now.t <= S.T + 1e-9);
+    const onPole = Math.hypot(S.r0[0], S.r0[1]) < 1e-9;
     $('hudBig').textContent = noDrive ? L('没有驱动', 'No drive') : `${S.two ? '2 × ' : ''}${shapeName(S.shape)} · ${S.two ? '2 × ' : ''}${fmtPi(S.area)}`;
     let sub = `t = ${fmtNs(now.t)} / ${fmtNs(end)}`;
-    if (noDrive) sub += S.frame === 'lab' ? L(` · 赤道上的态转了 ${fix(now.t * W0 / TAU, 2)} 圈`, ` · the equator has turned ${fix(now.t * W0 / TAU, 2)} times`) : L(' · 旋转系里一动不动', ' · nothing moves in the rotating frame');
-    else if (S.det !== 0) sub += L(` · 面积 ${fmtPi(now.area)}，转角 ${fmtPi(ang)}`, ` · area ${fmtPi(now.area)}, angle ${fmtPi(ang)}`);
+    if (noDrive) {
+      if (S.frame === 'lab') sub += L(` · 赤道上的态转了 ${fix(now.t * W0 / TAU, 2)} 圈`, ` · the equator has turned ${fix(now.t * W0 / TAU, 2)} times`);
+      else if (S.det === 0) sub += L(' · 共振：旋转系里一动不动', ' · on resonance: nothing moves in the rotating frame');
+      else if (onPole) sub += L(' · 失谐，但态在极点上：不动', ' · detuned, but the state sits on a pole: it stays');
+      else sub += L(` · 失谐 ${fix(S.det, 1)} MHz：旋转系里绕 z 轴进动`, ` · detuned ${fix(S.det, 1)} MHz: it precesses about z in the rotating frame`);
+    } else if (!oneAxis) sub += L(` · 面积 ${fmtPi(now.area)}，转角 ${fmtPi(ang)}`, ` · area ${fmtPi(now.area)}, angle ${fmtPi(ang)}`);
     else sub += L(` · 扫过面积 ${fmtPi(now.area)} = 转过 ${fix(now.area / DEG, 1)}°`, ` · area swept ${fmtPi(now.area)} = ${fix(now.area / DEG, 1)}° turned`);
     if (Math.abs(S.lam) > 1e-9) sub += L(` · Z(${fmtDeg(S.lam)}) 用时 0 ns`, ` · Z(${fmtDeg(S.lam)}) takes 0 ns`);
     $('hudSub').textContent = sub;
@@ -369,9 +378,13 @@
     $('roTime').textContent = `${fmtNs(end)}` + (Math.abs(S.lam) > 1e-9 ? L(' · 其中 Z：0 ns', ' · of which Z: 0 ns') : '');
     $('roAside').textContent = S.frame === 'lab' ? L('实验室系', 'lab frame') : L('旋转系', 'rotating frame');
     let note;
-    if (noDrive) note = L('没有驱动时，旋转系里什么都不动；实验室系里赤道上的态绕 z 轴每 0.2 ns 转一圈，两极（白点）不动。', 'With no drive nothing moves in the rotating frame; in the lab frame a state on the equator goes round z every 0.2 ns, and the poles (white dots) stay put.');
+    if (noDrive) note = S.det === 0
+      ? L('没有驱动，只剩 H₀ 的自由演化：共振的旋转系里什么都不动；实验室系里赤道上的态绕 z 轴每 0.2 ns 转一圈，两极（白点）不动。', 'With no drive only the free evolution by H₀ is left: on resonance nothing moves in the rotating frame; in the lab frame a state on the equator goes round z every 0.2 ns, and the poles (white dots) stay put.')
+      : L(`没有驱动，只剩 H₀ 的自由演化：实验室系里赤道上的态绕 z 轴每 0.2 ns 转一圈，两极（白点）不动；旋转系跟着 ω_d 转，与 ω₀ 差了 Δ，所以旋转系里的态仍绕 z 轴进动，每 ${fix(1000 / Math.abs(S.det), 0)} ns 一圈，只有两极不动。`, `With no drive only the free evolution by H₀ is left: in the lab frame a state on the equator goes round z every 0.2 ns, and the poles (white dots) stay put; the rotating frame turns at ω_d, Δ away from ω₀, so a state there still precesses about z, once every ${fix(1000 / Math.abs(S.det), 0)} ns, and only the poles stay put.`);
     else if (C.kind === 'lam') note = S.sign > 0 ? L(`实线与虚线终点高度相同：P(0) 一样，只差绕 z 的 ${fmtDeg(S.lam)}。`, `The solid and dashed ends have the same height: the same P(0), only ${fmtDeg(S.lam)} apart about z.`) : L('相位改错了符号：实线的终点高度与虚线不同，读数变了。', 'The phase shift has the wrong sign: the solid end sits at another height, and the readout changes.');
-    else if (C.kind === 'two') note = L('两个同面积的脉冲，换个次序，终点不同：绕不同轴的转动不对易。', 'Two pulses of the same area end elsewhere when swapped: turns about different axes do not commute.');
+    else if (C.kind === 'two') note = nrm(S.phi - S.phi2) === 0 ? L('两个脉冲完全相同：换个次序，终点不变。', 'The two pulses are identical: swapped, they end at the same point.')
+      : L('两个同面积的脉冲，换个次序，终点不同：绕不同轴的转动不对易。', 'Two pulses of the same area end elsewhere when swapped: turns about different axes do not commute.')
+        + (S.det === 0 ? L(`面积合计 ${fmtPi(area)}，合成的转角却是 ${fmtPi(qangle(evaluate(pr, end).q))}。`, ` Their areas add up to ${fmtPi(area)}, yet the combined turn is ${fmtPi(qangle(evaluate(pr, end).q))}.`) : '');
     else if (C.kind === 'det') note = L(`失谐时转轴随包络晃动：面积还是 ${fmtPi(area)}，终点离虚线 ${fix(Math.acos(clamp(v3.dot(evaluate(pr, end).r, evaluate(C.ghost, end).r), -1, 1)) / DEG, 1)}°。`, `Detuned, the axis sways with the envelope: the area is still ${fmtPi(area)}, yet the end lies ${fix(Math.acos(clamp(v3.dot(evaluate(pr, end).r, evaluate(C.ghost, end).r), -1, 1)) / DEG, 1)}° from the dashed one.`);
     else note = L(`面积 ${fmtPi(area)} 转 ${fix(area / DEG, 1)}°；包络的形状不改变终点。`, `An area of ${fmtPi(area)} turns ${fix(area / DEG, 1)}°; the shape of the envelope does not change the end point.`);
     $('roNote').textContent = note;

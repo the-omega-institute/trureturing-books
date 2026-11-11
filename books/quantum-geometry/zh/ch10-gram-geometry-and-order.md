@@ -104,7 +104,7 @@ $$
 
 在进入全局格拉姆重构之前，我们必须立下一块醒目的警示牌：**“两两比较顺序无关”绝不意味着可以把不同时刻的物理测量仪器随意颠倒，或者只凭单次测量的静态概率分布（POVM 效应元）就抹去测量后的状态更新机制！**
 
-在量子测量理论中，一个双结果测量仪器由一族克劳修斯（Kraus）算符 $K_b \in M_2(\mathbb{C})$（$b \in \mathrm{Bool} = \{\mathrm{true}, \mathrm{false}\}$）描述：
+在量子测量理论中，一个双结果测量仪器由一族克劳斯（Kraus）算符 $K_b \in M_2(\mathbb{C})$（$b \in \mathrm{Bool} = \{\mathrm{true}, \mathrm{false}\}$）描述：
 
 1. **静态效应元（单次概率）**：只看第一次测量出结果 $b$ 的概率时，玻恩定则只关心正算符 $E_b = K_b^* K_b$（满足完备性 $\sum_b E_b = I$）；
 2. **动态分支更新（序贯联合概率）**：一旦紧接着要做第二次测量（探测效应元 $F$），状态已经发生了依赖于具体仪器算符 $K_b$ 的分支演化 $\rho \mapsto K_b \rho K_b^*$，两步联合玻恩权重为 $\operatorname{bornProbability}(K_b \rho K_b^*, F) = \Tr(K_b \rho K_b^* F)$。
