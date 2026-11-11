@@ -69,7 +69,7 @@ $$
   \vv{r}(\theta, \varphi) = R_z(\varphi) R_y(\theta) N = (\sin\theta\cos\varphi,\; \sin\theta\sin\varphi,\; \cos\theta) \in S^2.
   $$
 
-为什么不需要“正交三次”来定位球面上的一个点？因为单位球面 $S^2 \subset \mathbb{R}^3$ 是二维流形：第一步极角 $\theta \in [0, \pi]$ 选定纬度圈，第二步方位角 $\varphi \in [0, 2\pi)$ 选定经度线，两步正交合起来已经覆盖了 $S^2$ 上的每一个方向！（当然，如果目标不是仅仅把北极点送到某个态方向 $\vv{r}$，而是要合成 $\mathrm{SO}(3)$ 或 $\mathrm{SU}(2)$ 中的**任意单比特量子门**，那么在把北极送到 $\vv{r}$ 之后，还允许绕目标轴自身再自转第三个欧拉角 $\psi$，并在旋量层面计入全局相位；详见章末 [@rem-axes-literature]。）
+为什么不需要“正交三次”来定位球面上的一个点？因为单位球面 $S^2 \subset \mathbb{R}^3$ 是二维流形：第一步极角 $\theta \in [0, \pi]$ 选定纬度圈，第二步方位角 $\varphi \in [0, 2\pi)$ 选定经度线，两步正交合起来已经覆盖了 $S^2$ 上的每一个方向！（至于在 $\mathrm{SO}(3)$ 或 $\mathrm{SU}(2)$ 中合成**任意单比特量子门**而非仅仅寻址单个球面态方向，详见章末 [@rem-axes-literature] 以及[第二十六章](ch26-single-qubit-rotor-compilation.md)经内核验证的 ZYZ 旋转器编译。）
 
 同时，在阅读这组球面两角公式时，有两处极易混淆的几何细节必须当场辨明：
 

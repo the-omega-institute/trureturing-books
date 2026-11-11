@@ -27,7 +27,7 @@ $$
 \psi = \psi(\psi).
 $$
 
-在本章中，我们将用最严密的数学与 Lean 4 形式化定理，把这幅自指画卷拆解为四个相互辉映的层次：**有限状态空间上的单调收缩稳定化定理**、**相邻步解释语境相对不动点与语境非唯一性定理**、**正实数上黄金连分数自指映射 $x = 1 + 1/x$ 的唯一代数不动点定理**，以及经典分析与超越数论中**余弦压缩不动点 $\theta^*$（Dottie 数）的唯一性、超越性与有限精度残差裂缝**。
+在本章中，我们将用严密的数学与 Lean 4 形式化定理，把这幅自指画卷拆解为四个相互辉映的层次：**有限状态空间上的单调收缩稳定化定理**、**相邻步解释语境相对不动点与语境非唯一性定理**、**正实数上黄金连分数自指映射 $x = 1 + 1/x$ 的唯一代数不动点定理**，以及收录在文献注记 [@rem-banach-dottie-hairy-ball-literature] 与 [@rem-dottie-angle-incommensurable] 中的**Dottie 余弦自指 $\cos\theta^* = \theta^*$ 的经典分析与超越数论背景**。
 
 ![余弦不动点与自指闭环：Dottie 蛛网螺旋吸引子 cos θ* = θ*、有限集合单调收缩稳定化、相邻步贴合及语境非唯一性，以及黄金倒数唯一不动点与 ψ = ψ(ψ)](../assets/fig-24-dottie-spiral-attractor.svg)
 
@@ -249,7 +249,7 @@ $$
 先从 `golden_transfer_triangle` 取出恒等式 $\varphi - 1 = \varphi^{-1}$。正向：由 $x > 0$ 知 $x + 1 \neq 0$，于是 $\frac{1}{x+1} = x$ 等价于 $1 = x\,(x + 1)$；结合 $\varphi^2 = \varphi + 1$（`Real.goldenRatio_sq`）与 $\varphi > 1$（`Real.one_lt_goldenRatio`），非线性算术给出 $x = \varphi - 1 = \varphi^{-1}$。反向：代入 $x = \varphi^{-1}$，由 $\varphi^{-1} + 1 = \varphi$ 得 $\frac{1}{\varphi^{-1} + 1} = \frac{1}{\varphi} = \varphi^{-1}$。完整证明由 Lean 内核检查。
 :::
 
-到这里，黄金自指还是一件纯代数的事：加法、除法、一个二次方程。§24.4 将把它与余弦自指 $\cos\theta = \theta$ 对比，并强调前者停在代数数、后者跃入超越数。但这两种自指并非互不相干。黄金比本身就是一个余弦读数，读的是正五边形的角。
+到这里，黄金自指还是一件纯代数的事：加法、除法、一个二次方程。§24.4 将把它与余弦自指 $\cos\theta = \theta$ 放在一起对比（后者的经典分析与超越数论性质见 §24.4 的文献注记）。但这两种自指并非互不相干。黄金比本身就是一个余弦读数，读的是正五边形的角。
 
 ::: {.proposition #prop-pentagon-golden-cosines title="正五边形的倍余弦读出黄金比、它的倒数与 √5" lean="D5/S3/Constants/PentagonCosines.pentagon_golden_cosines"}
 记 $\varphi$ 为 Mathlib 的 `Real.goldenRatio`。以下四项同时成立：
@@ -270,7 +270,7 @@ $$
 1 + 2\cos\frac{2\pi}{5} \;=\; 2\cos\frac{\pi}{5}.
 $$
 
-黄金自指是正五边形里的一条长度关系：单位边长的正五边形，对角线长为 $2\cos\frac{\pi}{5} = \varphi$。于是代数自指与余弦自指的差别可以说得更准：$\varphi$ 也是余弦读数，但读的是 $\frac{\pi}{5}$ 这样与 $\pi$ 可公度的角，而凡与 $\pi$ 可公度的角，余弦必是代数数；$\theta^*$ 的余弦是超越数，所以它必与 $\pi$ 不可公度——这正是后面 [@rem-dottie-angle-incommensurable] 要证明的事。
+黄金自指是正五边形里的一条长度关系：单位边长的正五边形，对角线长为 $2\cos\frac{\pi}{5} = \varphi$。于是 $\varphi$ 也是余弦读数，读在 $\frac{\pi}{5}$ 处并落在二次代数数域 $\mathbb{Q}(\sqrt{5})$ 内；至于当角本身等于自己的余弦（$\cos\theta^* = \theta^*$）时，其算术性质与是否与 $\pi$ 可公度，将在下一节的文献注记 [@rem-banach-dottie-hairy-ball-literature] 与 [@rem-dottie-angle-incommensurable] 中给出。
 
 ## 24.4 从 $\cos\theta^* = \theta^*$ 到 $\psi = \psi(\psi)$：超越性、截断裂缝与毛球对跖不动点 {#sec-ch24-4}
 
@@ -280,7 +280,7 @@ $$
 \cos\theta^* = \theta^*
 $$
 
-放在一起对比！为什么当自指算子从一维有理分式 $1 + 1/x$ 升级为二维旋转投影 $\cos\theta$ 时，它的唯一实不动点 $\theta^* \approx 0.7390851332\dots$（**Dottie 数**）会一举跃出全部代数数域 $\overline{\mathbb{Q}}$，成为一颗真正的**超越数（transcendental number）**？
+放在一起对比！当自指算子从一维有理分式 $1 + 1/x$ 升级为二维旋转投影 $\cos\theta$ 时，实不动点 $\theta^* \approx 0.7390851332\dots$（**Dottie 数**）在经典分析与超越数论中具有怎样的存在唯一性与算术地位？
 
 让我们在下面的经典文献审计中，把巴拿赫压缩唯一性、林德曼—魏尔斯特拉斯超越性证明、泰勒余项 $R_{2N}(\theta)$ 与毛球定理的球面不动点/对跖点二分法一次尽收眼底。
 

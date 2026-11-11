@@ -27,7 +27,7 @@ $$
 \psi = \psi(\psi).
 $$
 
-In this chapter we unfold this self-referential closure across four rigorous mathematical levels: **the Lean-verified stabilization theorem for contracting updates on finite sets**, **single-step context-relative interpretation fixed points and contextual non-uniqueness**, **the unique positive algebraic fixed point $\varphi = \frac{1+\sqrt{5}}{2}$ of the golden reciprocal map $x = 1 + 1/x$**, and the classical analysis and transcendental number theory of **the Dottie cosine fixed point $\theta^*$, its nonzero algebraic residuals $|\cos q - q| > 0$, and the Hairy Ball fixed/antipodal alternative on even spheres**.
+In this chapter we unfold this self-referential closure across four mathematical levels: **the Lean-verified stabilization theorem for contracting updates on finite sets**, **single-step context-relative interpretation fixed points and contextual non-uniqueness**, **the unique positive algebraic fixed point $\varphi = \frac{1+\sqrt{5}}{2}$ of the golden reciprocal map $x = 1 + 1/x$**, and **the classical analytic and number-theoretic background of cosine self-reference $\cos\theta^* = \theta^*$** recorded in the literature remarks [@rem-banach-dottie-hairy-ball-literature] and [@rem-dottie-angle-incommensurable].
 
 ![Cosine fixed points and self-referential closure: the Dottie cobweb spiral attractor cos θ* = θ*, finite contracting set stabilization, adjacent-step agreement, contextual non-uniqueness, and the unique golden reciprocal fixed point collapsing into ψ = ψ(ψ)](../assets/fig-24-dottie-spiral-attractor.svg)
 
@@ -247,7 +247,7 @@ where $\varphi$ is Mathlib's `Real.goldenRatio`.
 First extract the identity $\varphi - 1 = \varphi^{-1}$ from `golden_transfer_triangle`. Forward direction: since $x > 0$ we have $x + 1 \neq 0$, so $\frac{1}{x+1} = x$ is equivalent to $1 = x\,(x + 1)$; together with $\varphi^2 = \varphi + 1$ (`Real.goldenRatio_sq`) and $\varphi > 1$ (`Real.one_lt_goldenRatio`), nonlinear arithmetic yields $x = \varphi - 1 = \varphi^{-1}$. Reverse direction: substituting $x = \varphi^{-1}$ and using $\varphi^{-1} + 1 = \varphi$ gives $\frac{1}{\varphi^{-1} + 1} = \frac{1}{\varphi} = \varphi^{-1}$. The full proof is checked by the Lean kernel.
 :::
 
-Up to this point, golden self-reference is a purely algebraic matter: addition, division, one quadratic equation. Section 24.4 will contrast it with the cosine self-reference $\cos\theta = \theta$ and stress that the former stops at an algebraic number while the latter leaps into the transcendental ones. Yet the two kinds of self-reference are not unrelated. The golden ratio is itself a cosine reading, taken at the angles of the regular pentagon.
+Up to this point, golden self-reference is a purely algebraic matter: addition, division, one quadratic equation. Section 24.4 will place it alongside the cosine self-reference $\cos\theta = \theta$ (whose classical analytic and number-theoretic properties are recorded in the literature remarks of Section 24.4). Yet the two kinds of self-reference are not unrelated. The golden ratio is itself a cosine reading, taken at the angles of the regular pentagon.
 
 ::: {.proposition #prop-pentagon-golden-cosines title="The Doubled Pentagon Cosines Read the Golden Ratio, Its Inverse, and √5" lean="D5/S3/Constants/PentagonCosines.pentagon_golden_cosines"}
 Let $\varphi$ denote Mathlib's `Real.goldenRatio`. All four of the following hold:
@@ -268,7 +268,7 @@ $$
 1 + 2\cos\frac{2\pi}{5} \;=\; 2\cos\frac{\pi}{5}.
 $$
 
-Golden self-reference is a length relation inside the regular pentagon: a regular pentagon of unit side has diagonals of length $2\cos\frac{\pi}{5} = \varphi$. The difference between algebraic and cosine self-reference can therefore be stated more precisely. $\varphi$ is a cosine reading too, but one taken at an angle such as $\frac{\pi}{5}$ that is commensurable with $\pi$, and the cosine of every angle commensurable with $\pi$ is algebraic; the cosine of $\theta^*$ is transcendental, so $\theta^*$ must be incommensurable with $\pi$ — which is exactly what [@rem-dottie-angle-incommensurable] proves below.
+Golden self-reference is a length relation inside the regular pentagon: a regular pentagon of unit side has diagonals of length $2\cos\frac{\pi}{5} = \varphi$. Thus $\varphi$ is a cosine reading as well, taken at $\frac{\pi}{5}$ and landing in the quadratic field $\mathbb{Q}(\sqrt{5})$; what happens arithmetically when an angle equals its own cosine ($\cos\theta^* = \theta^*$), and whether such an angle can be commensurable with $\pi$, are established in the literature remarks [@rem-banach-dottie-hairy-ball-literature] and [@rem-dottie-angle-incommensurable] of Section 24.4.
 
 ## 24.4 From $\cos\theta^* = \theta^*$ to $\psi = \psi(\psi)$: Transcendence, Remainder Seams, and the Hairy Ball Fixed/Antipodal Alternative {#sec-ch24-4}
 
@@ -278,7 +278,7 @@ $$
 \cos\theta^* = \theta^*.
 $$
 
-Why does upgrading the self-referential operator from a one-dimensional rational fraction $1 + 1/x$ to the two-dimensional cosine projection $\cos\theta$ propel its unique fixed point $\theta^* \approx 0.7390851332\dots$ (the **Dottie number**) completely outside the field of algebraic numbers $\overline{\mathbb{Q}}$ into the **transcendental numbers**?
+When the self-referential operator upgrades from a one-dimensional rational fraction $1 + 1/x$ to the two-dimensional cosine projection $\cos\theta$, how do classical analysis and transcendental number theory characterize the existence, uniqueness, and arithmetic status of its real root $\theta^* \approx 0.7390851332\dots$ (the **Dottie number**)?
 
 The following literature note synthesizes Banach's contraction principle on $[0, 1]$, the Lindemann–Weierstrass transcendence proof, the Lagrange Taylor remainder bound $|R_{2N}(\theta)|$, and the Hairy Ball fixed/antipodal theorem on even-dimensional spheres.
 

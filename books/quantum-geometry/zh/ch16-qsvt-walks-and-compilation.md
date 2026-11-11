@@ -9,7 +9,7 @@
 1. **切比雪夫（Chebyshev）多项式递推的代数母体**：在任意交换环 $R$ 中，任何满足 $ab = 1$ 的互逆对 $(a, b)$ 的幂和 $t_m = a^m + b^m$ 都天然服从二阶线性递推 $t_{m+2} = (a+b)t_{m+1} - t_m$；把这根标量脊梁放进 $\mathrm{SU}(2)$ 二维信号块 $W(x)$，便是量子奇异值变换（QSVT）用旋转门拼出多项式滤波器的代数起点；
 2. **离散量子游走的对称硬币极值与适用边界**：在循环图 $\mathrm{ZMod}\,p$ 的 Hadamard 量子游走中，正交对称硬币 $c_* = (1, i)/\sqrt{2}$ 在一切步数 $n$ 与圈长 $p$ 下最大化全体模式的单激发 W 态几何纠缠；但相干游走的加速严格依赖于图对称性与问题结构，绝非对任意迷宫都能消除所有回头路；
 3. **两轴连续旋转生成与离散 $\{H, T\}$ 门集的三维割圆多面体**：在连续正交群 $\mathrm{SO}(3)$ 中，绕两根不共线轴的连续轴圆经有限步乘积即可精确到达任意三维旋转；然而一旦落回真实量子计算机的有限离散门集 $\{H, T\}$，在任意有限门长预算 $L < \infty$ 下，固定初态的可达点集 $\mathcal{S}_L \subset S^2$ 张成的凸包 $P_L = \operatorname{conv}(\mathcal{S}_L)$ 永远只是一座由平直弦面拼接而成的**三维割圆多面体**，球皮与弦面之间恒存在严格为正的逼近残差 $\varepsilon_L > 0$；
-4. **精确振幅放大的源查询计数与渐近门编译的区分**：当已知初始成功概率 $p$ 时，借助辅助硬币旋转调慢步长，可以用至多 $\frac{\pi/2 + 2}{\sqrt{p}}$ 次源算子查询实现零残差的精确振幅放大；同时我们将严格区分这一“源查询次数（`sourceQueries`）”与 Solovay–Kitaev 离散门编译的渐近字长 $O(\log^c(1/\varepsilon))$。
+4. **精确振幅放大的源查询计数与渐近门编译的区分**：当已知初始成功概率 $p$ 时，借助辅助硬币旋转调慢步长，可以用至多 $\frac{\pi/2 + 2}{\sqrt{p}}$ 次源算子查询实现零残差的精确振幅放大；同时我们将严格区分这一“源查询次数（`sourceQueries`）”与 $\{H, T\}$ 离散门集的渐近门编译字长（详见章末 [@rem-solovay-kitaev-literature]）。
 
 ![图 16](../assets/fig-16-qsvt-solovay-kitaev-polytope.svg)
 
@@ -57,7 +57,7 @@ $$
 
 它的两个特征值恰为 $a = e^{i\theta}$ 与 $b = e^{-i\theta}$（满足 $\det W(x) = ab = 1$，$\Tr W(x) = a + b = 2x$），因此每将 $W(x)$ 迭代乘 $m$ 次，其左上角矩阵元便直接吐出 $T_m(x) = \cos(m\theta)$！
 
-**严格的理论边界**：必须明确指出，[@thm-chebyshev-trace-recurrence] 的前提仅涉及任意交换环 $R$ 中的标量对 $ab = 1$，完全不包含矩阵块编码、奇异值谱或相位角序列的假设；将标量递推接到二维旋转块 $W(x) \in \mathrm{SU}(2)$ 是上述显式手算桥接，而非由 [@thm-chebyshev-trace-recurrence] 直接证出完整的量子奇异值变换（QSVT）定理。尤其不能误以为仅凭该递推就能把“任意多项式”塞进量子电路——在完整 QSVT 中，一个实多项式 $P(x)$ 要能嵌入单比特幺正块，至少必须同时满足度数 $d$、确定的奇偶性（与 $d \bmod 2$ 一致）以及区间范数上界 $\max_{x \in [-1, 1]} |P(x)| \le 1$ 等可实现性条件（详见下文 [@rem-qsvt-walks-literature]）。
+**严格的理论边界**：必须明确指出，[@thm-chebyshev-trace-recurrence] 的前提仅涉及任意交换环 $R$ 中的标量对 $ab = 1$，完全不包含矩阵块编码、奇异值谱或相位角序列的假设；将标量递推接到二维旋转块 $W(x) \in \mathrm{SU}(2)$ 是上述显式手算桥接，而非由 [@thm-chebyshev-trace-recurrence] 直接证出完整的量子奇异值变换（QSVT）定理。尤其不能误以为仅凭该递推就能把“任意多项式”塞进量子电路（完整 QSVT 的多项式可实现性定理详见下文 [@rem-qsvt-walks-literature]）。
 
 ## 图上游走：相干叠加与适用边界 {#sec-quantum-walk-interference}
 
@@ -192,7 +192,7 @@ $$
    $$
 
    **严格大于零**（且随 $L$ 增大单调不增 $\varepsilon_{L+1} \le \varepsilon_L$；至于离散通用门集在渐近编译层面的文献条件见章末 [@rem-solovay-kitaev-literature]，不能从连续轴圆定理 [@prop-two-axis-finite-word] 直接推出）。
-   从微分几何看，光滑单位球面处处具有常高斯曲率 $K = 1$，而欧氏凸多面体 $P_L$ 的平直弦面内部内禀曲率为 $K = 0$（凸多面体的内禀曲率集中为顶点处的离散角亏，而外禀法向突变集中于棱上——切勿声称每一条棱都携带相同的内禀高斯曲率！）。对于任意单位外法向为 $\vv{n} \in S^2$ 的平直弦面，其支持高度 $h = \max_{\vv{s} \in \mathcal{S}_L} (\vv{n} \cdot \vv{s}) < 1$ 与球面支持高度 $1$ 之间恒隔着一道严格为正的**径向支撑间隙** $1 - h > 0$（尽管落在 $\mathcal{S}_L$ 上的顶点本身在球面上并可被相应门字精确命中）。
+   对于任意不落在有限点集 $\mathcal{S}_L$ 中的单位外法向 $\vv{n} \in S^2$，平直弦面的欧氏支持高度 $h = \max_{\vv{s} \in \mathcal{S}_L} (\vv{n} \cdot \vv{s}) < 1$ 与球面支持高度 $1$ 之间恒隔着一道严格为正的**径向支撑间隙** $1 - h > 0$（尽管落在 $\mathcal{S}_L$ 上的顶点本身在球面上并可被相应门字精确命中；关于圆球面曲率与多面体离散角亏的经典微分几何与拓扑文献对照，详见[第二十一章](ch21-diagonalization-and-escape.md) [@rem-hairy-ball-adams-literature]）。
 5. **刘徽“三维割圆术”的教学类比与单态/全门误差区分**：公元三世纪中国数学家刘徽在《九章算术注》中创立“割圆术”，用内接正多边形的平直弦段逼近圆周（“割之弥细，所失弥少，割之又割，以至于不可割”）。在三维量子门编译中，随着门字预算 $L$ 递增，有限顶点层 $\mathcal{S}_L$、内接平直弦面层 $P_L$ 与外包光滑球面层 $S^2$ 构成了鲜明的**三维割圆术**图像（注：这纯粹是“用越来越细的离散弦面逼近光滑曲面”的几何教学类比，绝非声称古代割圆术已证明现代量子编译或给出 Solovay–Kitaev 误差指数）。最后务必牢记：单态球面覆盖误差 $\varepsilon_L$ 会放过绕初态 $\vv{r}_0$ 旋转的稳定子相位，因此不能直接代替整个门算子在 $\mathrm{PU}(2)/\mathrm{SU}(2)$ 上的算子范数编译误差 $\delta(U, V) = \min_{\varphi \in \mathbb{R}}\norm{U - e^{i\varphi}V}_{\mathrm{op}}$。
 
 ## 编译误差、查询计数与渐近门长 {#sec-compilation-error-and-count}
@@ -279,7 +279,7 @@ $$
 当 $0 < p < 1$ 时，取非负整数天花板 $n = \lceil \frac{\pi}{4\arcsin\sqrt{p}} - \frac{1}{2}\rceil_+$，保证 $\frac{\pi}{4n + 2} \le \arcsin\sqrt{p} < \frac{\pi}{2}$，从而修饰后的有效成功概率 $r = \sin^2(\frac{\pi}{4n + 2})$ 满足 $0 < r \le p < 1$，比例 $q = r/p$ 满足 $0 < q \le 1$，且 $\mathrm{coinRotation}(q)$ 为实正交（从而复幺正）分块矩阵。将复合制备算子取为 $U_q = (\mathrm{coinRotation}(q)\cdot\mathrm{coinLift}(C))\cdot\mathrm{coinEmbed}(J)$，它在扩展目标投影 $\mathrm{coinGood}(P)$ 下的成功格拉姆矩阵恰为 $(\sqrt{q})^2 p I_s = q p I_s = r I_s$，且归一化成功块保持为 $\mathrm{coinEmbed}(\mathrm{success}(CJ, P, p))$。由于 $\theta_r = \arcsin\sqrt{r} = \frac{\pi}{4n + 2}$ 满足 $(2n + 1)\theta_r = \frac{\pi}{2}$，将 [@thm-grover-uniform-rotation] 应用于 $U_q$ 与步数 $n$，即得 $\sin((2n+1)\theta_r) = \sin(\pi/2) = 1$、$\cos((2n+1)\theta_r) = \cos(\pi/2) = 0$，从而 $V$ 精确等于 $\mathrm{coinEmbed}(\mathrm{success}(CJ, P, p))$，失败分量 $(1 - \mathrm{coinGood}(P))V = 0$。最后，门字 $\mathrm{amplificationWord}(n)$ 包含初始 $1$ 次 `.source` 与 $n$ 个 `reflectionBlock` 中各 $2$ 次源调用（`.source` 与 `.sourceAdjoint`），故 $\mathrm{sourceQueries}(w) = 2n + 1$；利用天花板下界 $n < \frac{\pi}{4\arcsin\sqrt{p}} + \frac{1}{2}$ 及 $\arcsin\sqrt{p} \ge \sqrt{p}$，即得 $2n + 1 \le \frac{\pi/2}{\arcsin\sqrt{p}} + 2 \le \frac{\pi/2 + 2}{\sqrt{p}}$。完整证明由 Lean 内核检查。
 :::
 
-**重要概念区分（见图 16 面板 III）**：[@cor-exact-source-query-count] 中的 `sourceQueries(w)` **仅仅统计门字 $w$ 中调用 `.source` 与 `.sourceAdjoint` 的次数**（在 $p < 1$ 时等于 $2n + 1 \le \frac{\pi/2 + 2}{\sqrt{p}}$），而且该构造假设已知成功概率 $p$ 并直接使用了依赖 $q = r/p$ 的连续硬币旋转门 `coinRotation q`。因此，`sourceQueries(w)` 既不是门字 $w$ 的全部门数，**更绝不是把连续门 `coinRotation q` 编译成离散 $\{H, T\}$ 门序列所需的 Solovay–Kitaev 编译门长**！在图 16 面板 III 中，经过 Lean 验证的源查询计数上界 $Q \le \frac{\pi/2 + 2}{\sqrt{p}}$ 与未形式化的 Solovay–Kitaev 编译门长曲线 $L = O(\log^c(1/\varepsilon))$ 被严格分列展示，绝不能混为一谈。
+**重要概念区分（见图 16 面板 III）**：[@cor-exact-source-query-count] 中的 `sourceQueries(w)` **仅仅统计门字 $w$ 中调用 `.source` 与 `.sourceAdjoint` 的次数**（在 $p = 1$ 时为 $1$，在 $p < 1$ 时等于 $2n + 1 \le \frac{\pi/2 + 2}{\sqrt{p}}$），而且该构造假设已知成功概率 $p$ 并直接使用了依赖 $q = r/p$ 的连续硬币旋转门 `coinRotation q`。因此，`sourceQueries(w)` 既不是门字 $w$ 的全部门数，**更绝不能与离散 $\{H, T\}$ 门集的渐近门编译字长（见章末 [@rem-solovay-kitaev-literature]）混为一谈**。
 
 现在，让我们通过一个四步综合算例，把切比雪夫递推在 $x = 1/2$ 处的数值、$\{H, T\}$ 门集在 $L = 0, 1, 2, 3$ 下的精确球面顶点与三维割圆多面体支撑间隙，以及 $p = 1/4, 1/16, 1/64$ 下的精确源查询计数逐一复核。
 
