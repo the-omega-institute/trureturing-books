@@ -328,7 +328,7 @@ $$
 
 ### 第三部小结：单球已合拢，多球待交织
 
-回望第三部《合拢·从面到球》（[第九章](ch09-axes-and-state-addressing.md)至第十二章），我们用十八条经 Lean 4 内核验证的冻结定理，把单量子比特球面从局部坐标轴一路合拢到了硬件脉冲与注意力计算：
+回望第三部《合拢·从面到球》（[第九章](ch09-axes-and-state-addressing.md)至第十二章），我们用十八条经 Lean 4 内核验证的定理级结论，把单量子比特球面从局部坐标轴一路合拢到了硬件脉冲与注意力计算：
 
 - **第九章**从三维空间任意两向量的公共单位法向量（[@lemma-three-axis-normal]）出发，阐明了北极两角寻址 $R_z(\varphi)R_y(\theta)N$，证明了任意两不共线轴生成 $\mathrm{SO}(3)$ 的有限旋转字存在性（[@thm-two-axis-finite-word]），用 Lie–Trotter 公式（[@thm-lie-trotter]）说明两轴极小转动交替进行的极限是生成元相加后的那一次转动，并用有理六轴构造（[@prop-rational-six-axis-cover]）与拓扑六色下界（[@cor-six-colors-necessary]）锁定了球面无正交对开覆盖的最小块数 $6$；
 - **第十章**区分了物理操作的时间非对易性（[@prop-static-sequential-separation]）、二维球面毛球/霍普障碍与三维旋转器球 $S^3$ 的全局标架，证明了完整复格拉姆矩阵 $B^*B = A^*A$ 在差一个公共外围幺正变换 $U$ 下唯一重构整族状态（[@thm-gram-unitary-reconstruction]、[@lemma-unit-gram-equality]），用同纬度复内积公式（[@cor-latitude-complex-overlap]）将八分球贝里立体角直接写进了格拉姆矩阵元，并证明三点巴格曼迹等于标量部分加三根布洛赫向量的有向体积（[@thm-qubit-bargmann-bloch]）；
