@@ -452,6 +452,10 @@ This monograph consists of the **[Prelude](README.md)**, **Eight Parts (30 Chapt
 **Which chapter rests on which.** The thirty dots, top to bottom, are chapters 1 to 30, banded on the left by part. The arc arrow into each chapter comes from the earlier chapter it refers back to most often in its own text (a chapter link or a "Chapter N" mention); the more mentions, the thicker the arrow. Chapter 1 sends six arrows, chapter 3 three, and chapter 21 two thick ones into chapters 22 and 24; chapter 11 never refers back to an earlier chapter and is a hollow dot.
 :::
 
+::: {.slides src="overview"}
+An overview slide deck of the whole book in 39 slides: the four blind spots and the dimensional ladder; each part's core picture, main theorems, literature results and open problems; the counts of the three tiers of warrant and the dependency map.
+:::
+
 ### Four Recommended Reading Tracks {#sec-coda-reading-tracks}
 
 Readers can navigate the book along four self-contained tracks tailored to their background:
