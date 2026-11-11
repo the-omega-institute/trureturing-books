@@ -1674,6 +1674,58 @@
           "gid": "D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport"
         }
       ]
+    },
+    {
+      "id": "layered-network-cut",
+      "code": "NETWORK//CUT",
+      "title": "层级网络与割",
+      "title_en": "The layered network and its cut",
+      "summary": "第 19 章的层级张量网络：底边 32 格，上面是一张开边界的二元 MERA 式网络（方块是解纠缠器，三角是等距器），每条键维数相同。拖动底边的琥珀色区间，页面用增广路求出把它与其余底边分开最少要割断几条键，品红画出这道最小割，青色是割内侧的张量。一格的区间割它自己那条腿；四格时割钻进网络，只要 3 条；区间从 1 格长到 16 格，割只从 1 条长到 8 条，527 段区间都不超过 2·log₂L + 1；两段区间相隔 2 格时，A 长到 7 格起，一起割比分开割省。跨过割的秩不超过 χᵏ 与 MERA/RT 的类比按第 19 章标为文献结果；绿色只给宽度三桥图上已验证的“秩不超过最小割”。四张实验卡各讲其中一件事，可以在正文里单独引用。",
+      "summary_en": "Chapter 19's layered tensor network: thirty-two boundary sites under a binary MERA-like network with open ends (squares are disentanglers, triangles isometries), every bond of the same dimension. Drag the amber interval on the boundary; the page finds by augmenting paths the fewest bonds whose cutting separates it from the rest of the boundary, draws that minimal cut in magenta and the tensors inside it in cyan. One site cuts its own leg; four sites are cut off by 3 bonds running inside the network; as the interval grows from 1 site to 16 the cut grows only from 1 bond to 8, and none of the 527 intervals needs more than 2·log₂L + 1; for two intervals two sites apart, cutting them together is cheaper once A reaches 7 sites. The rank bound χᵏ across a cut and the MERA/RT analogy are marked as literature results, as in chapter 19; green is given only to the verified bound rank ≤ minimal cut on the width-three bridge graph. Each of the four experiment cards makes one of these points and can be cited on its own from the text.",
+      "path": "layered-network-cut/",
+      "thumbnail": "layered-network-cut/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "张量网络",
+        "MERA",
+        "最小割",
+        "Ryu–Takayanagi",
+        "全息",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Tensor network",
+        "MERA",
+        "Minimal cut",
+        "Ryu–Takayanagi",
+        "Holography",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第十九章 · 纠缠层级与有限张量网络",
+          "label_en": "Chapter 19 · Entanglement hierarchies and finite tensor networks",
+          "href": "../zh/ch19-tensor-networks-and-holography.html#sec-mera-hierarchy",
+          "href_en": "../en/ch19-tensor-networks-and-holography.html#sec-mera-hierarchy"
+        },
+        {
+          "label": "第十九章 · 从离散桥图到 RT 文献边界",
+          "label_en": "Chapter 19 · From the discrete bridge graph to the RT literature boundary",
+          "href": "../zh/ch19-tensor-networks-and-holography.html#sec-rt-literature-bridge",
+          "href_en": "../en/ch19-tensor-networks-and-holography.html#sec-rt-literature-bridge"
+        },
+        {
+          "label": "Lean 源码 · QuantumMaxFlowBound",
+          "label_en": "Lean source · QuantumMaxFlowBound",
+          "href": "{trureturing}/D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_le_QMinCut"
+        }
+      ]
     }
   ]
 }
