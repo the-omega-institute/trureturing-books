@@ -10,13 +10,13 @@ deck:
   book: "Geometric Intuition of Quantum Computing"
   title: "Overview"
   version: "0.1.0"
-  blurb: "From pairwise measurement to spheres beyond spheres: the core pictures, main theorems and three tiers of warrant of all eight parts and thirty chapters, in thirty-nine slides."
+  blurb: "From pairwise measurement to spheres beyond spheres: the core pictures, main theorems and three tiers of warrant of all eight parts and thirty-two chapters, in thirty-nine slides."
 layout: cover
 ---
 
 <p class="kicker">Geometric Intuition of Quantum Computing · Overview</p>
 <h1 class="display">From pairwise measurement<br>to <em>ψ = ψ(ψ)</em></h1>
-<p class="lead">Eight parts, thirty chapters, climbing the ladder point → line → plane → sphere → the sphere beyond, rebuild quantum computing as geometry you can work by hand. The book explains why; the Lean kernel guarantees that.</p>
+<p class="lead">Eight parts, thirty-two chapters, climbing the ladder point → line → plane → sphere → the sphere beyond, rebuild quantum computing as geometry you can work by hand. The book explains why; the Lean kernel guarantees that.</p>
 
 ---
 # 02 The book in one sentence
@@ -53,10 +53,10 @@ section: "Reader's guide"
 ---
 
 <div class="body">
-  <p class="kicker">Eight parts, thirty chapters</p>
+  <p class="kicker">Eight parts, thirty-two chapters</p>
   <h2 class="t">Eight parts form a staircase, <em>each one dimension higher</em></h2>
   <img src="./img/prelude-eight-parts.en.svg" alt="Eight bars, one per part, each spanning its chapters and one step above the last." style="display: block; height: 600px; max-width: 100%; margin: 20px auto 0;">
-  <p class="lead mt-s">Four chapters apiece for the first seven parts, two for the eighth: point → line, line → plane, plane → sphere, entangled spheres, spacetime sphere, beyond the sphere, construction, synthesis.</p>
+  <p class="lead mt-s">Four chapters apiece across all eight parts: point → line, line → plane, plane → sphere, entangled spheres, spacetime sphere, beyond the sphere, construction, synthesis.</p>
 </div>
 <Source>Prelude, “Reader's Guide and Formal Verification Contract” (prelude-eight-parts)</Source>
 
@@ -588,13 +588,13 @@ chapter: "08"
 section: "Part VIII"
 ---
 
-<p class="kicker">Part VIII · Chapters 29–30</p>
-<h2 class="t">Synthesis: <em>timeless causality, complexity horizons and fluid vortex filaments</em></h2>
-<p class="lead">The integer grid can only approach <Tex t="\sqrt2" /> step by step, its error flipping sign and shrinking but never vanishing; a finite-resolution observation cannot close exactly under quadratic advection.</p>
+<p class="kicker">Part VIII · Chapters 29–32</p>
+<h2 class="t">Synthesis: <em>causality, horizons, quantum fairness and meta-unification</em></h2>
+<p class="lead">Pell errors flip sign and shrink without vanishing; quadratic advection never closes; fivefold symmetry bars geometric privilege and aligns unification programs.</p>
 <div class="card mt">
   <ul class="plain">
-    <li>Ch. 29 Timeless causality and Gram-compatible space</li>
-    <li>Ch. 30 Fields (P) and lines (NP): from ETH to Navier–Stokes vortex filaments</li>
+    <li>Ch. 29 Timeless causality and Gram space · Ch. 30 Fields (P) and lines (NP)</li>
+    <li>Ch. 31 Quantum essence is fairness · Ch. 32 Unified field and meta-unification</li>
   </ul>
 </div>
 
@@ -665,11 +665,11 @@ section: "Three tiers"
   <p class="kicker">Three tiers of warrant</p>
   <h2 class="t">Three tiers of warrant, <em>three colours</em>, never mixed</h2>
   <div class="split mt">
-    <img src="./img/prelude-three-tiers.en.svg" alt="Three bars: green 180, violet 117, red 6; under the green bar, 308 theorem declarations in the lock file." style="display: block; width: 900px; max-width: 100%;">
+    <img src="./img/prelude-three-tiers.en.svg" alt="Three bars: green 184, violet 127, red 6; under the green bar, 308 theorem declarations in the lock file." style="display: block; width: 900px; max-width: 100%;">
     <div>
       <div class="g3">
-        <Stat value="180" label="theorems, lemmas, propositions and corollaries with lean=" tone="ok" />
-        <Stat value="117" label="remarks and examples marked “literature result, not formalized”" tone="violet" />
+        <Stat value="184" label="theorems, lemmas, propositions and corollaries with lean=" tone="ok" />
+        <Stat value="127" label="remarks and examples marked “literature result, not formalized”" tone="violet" />
         <Stat value="6" label="open conjectures, marked OPEN, with no Lean reference" tone="warn" />
       </div>
       <p class="lead mt">The lock file <span class="mono">trureturing.lock.json</span> pins <span class="mono">dev@1d9bf98cab83</span>: 439 declarations, 308 of them Lean theorems.</p>
@@ -693,13 +693,13 @@ section: "Dependency map"
       <ul class="plain mt">
         <li><b>Physical intuition:</b> Prelude → Ch. 1–12 → Ch. 17–19</li>
         <li><b>Algorithms and compilation:</b> Ch. 2 → Ch. 13–16 → Ch. 25–27</li>
-        <li><b>Logic and number theory:</b> Ch. 10 → Ch. 21–24 → Ch. 29–30</li>
+        <li><b>Logic and number theory:</b> Ch. 10 → Ch. 21–24 → Ch. 29–32</li>
         <li><b>Kernel audit:</b> Prelude → Ch. 25–28 → Appendix C</li>
       </ul>
     </div>
   </div>
 </div>
-<Source>Coda, “Eight-Part, Thirty-Chapter Reading and Dependency Map” (coda-dependency-tree)</Source>
+<Source>Coda, “Eight-Part, Thirty-Two-Chapter Reading and Dependency Map” (coda-dependency-tree)</Source>
 
 ---
 # 39 Closing
@@ -708,5 +708,5 @@ layout: cover
 
 <p class="kicker">Read · Verify · Watch</p>
 <h1 class="display">The book explains,<br><em>Lean</em> decides</h1>
-<p class="lead">Read online or as PDF and EPUB; 150 static figures, 36 interactive labs, one film for each of the eight parts; check every theorem at the pinned trureturing commit.</p>
+<p class="lead">Read online or as PDF and EPUB; 152 static figures, 36 interactive labs, one film for each of the eight parts; check every theorem at the pinned trureturing commit.</p>
 <p class="lead mt mono hl-cyan">Prelude → Ch. 1 · Appendix C: locked index</p>
