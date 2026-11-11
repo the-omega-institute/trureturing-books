@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch30-color-orientation" data-lang="zh" data-wrap="1" viewBox="0 0 560 262" width="560" height="262" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="两栏，同一个五边形 0—1—2—3—4—0，顶点按高度摆在三条横线上。左栏：顶点的高度是颜色 c = (0, 1, 0, 1, 2)，每条边的箭头都朝上，指向颜色大的一端，青色标出最长的一根线 2 → 3 → 4，三个顶点。右栏：同样的箭头，顶点的高度换成 h，即从该顶点出发顺着箭头最多能走几步，h = (1, 0, 2, 1, 0)；这回每条箭头都朝下，又是一个三层的着色，青色的线仍是 2 → 3 → 4。">
+<title>两栏，同一个五边形 0—1—2—3—4—0，顶点按高度摆在三条横线上。左栏：顶点的高度是颜色 c = (0, 1, 0, 1, 2)，每条边的箭头都朝上，指向颜色大的一端，青色标出最长的一根线 2 → 3 → 4，三个顶点。右栏：同样的箭头，顶点的高度换成 h，即从该顶点出发顺着箭头最多能走几步，h = (1, 0, 2, 1, 0)；这回每条箭头都朝下，又是一个三层的着色，青色的线仍是 2 → 3 → 4。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="272" height="262" viewBox="0 0 272 262">
+<text class="tf-ink" x="136" y="22" font-size="14" text-anchor="middle" font-weight="600">颜色 <tspan font-style="italic">c</tspan> 定下箭头</text>
+<line x1="26" y1="206" x2="262" y2="206" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 4" fill="none"/>
+<text class="tf-dim" x="18" y="210.68" font-size="13" text-anchor="end">0</text>
+<line x1="26" y1="144" x2="262" y2="144" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 4" fill="none"/>
+<text class="tf-dim" x="18" y="148.68" font-size="13" text-anchor="end">1</text>
+<line x1="26" y1="82" x2="262" y2="82" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 4" fill="none"/>
+<text class="tf-dim" x="18" y="86.68" font-size="13" text-anchor="end">2</text>
+<text class="tf-dim" x="18" y="56" font-size="14" text-anchor="middle"><tspan font-style="italic">c</tspan></text>
+<line x1="99.65" y1="198.99" x2="132.29" y2="158.52" class="ts-ink" stroke-width="1.8" fill="none"/>
+<path d="M137.09 152.56 L134.39 161.94 L128.5 157.2Z" class="tf-ink"/>
+<line x1="188.35" y1="198.99" x2="155.71" y2="158.52" class="ts-ink" stroke-width="1.8" fill="none"/>
+<path d="M150.91 152.56 L159.5 157.2 L153.61 161.94Z" class="tf-ink"/>
+<line x1="199.65" y1="198.99" x2="232.29" y2="158.52" class="ts-cyan" stroke-width="3.2" fill="none"/>
+<path d="M237.09 152.56 L234.39 161.94 L228.5 157.2Z" class="tf-cyan"/>
+<path d="M244 144 L239 138.7 L234 133.59 L229 128.67 L224 123.94 L219 119.41 L214 115.06 L209 110.92 L204 106.96 L199 103.2 L194 99.62 L189 96.25 L184 93.06 L179 90.07 L174 87.27 L169 84.66 L164 82.24 L159 80.02 L154 77.99 L149 76.15 L144 74.5 L139 73.05 L134 71.78 L129 70.72 L124 69.84 L119 69.16 L114 68.66 L109 68.37 L104 68.26 L99 68.35 L94 68.62 L89 69.1 L84 69.76 L79 70.62 L74 71.66 L69 72.91 L64 74.34" class="ts-cyan" stroke-width="3.2" stroke-linejoin="round" fill="none"/>
+<path d="M64 74.34 L71.61 68.23 L73.69 75.49Z" class="tf-cyan"/>
+<line x1="90.63" y1="197.65" x2="50.97" y2="99.3" class="ts-ink" stroke-width="1.8" fill="none"/>
+<path d="M48.11 92.2 L54.99 99.14 L47.97 101.96Z" class="tf-ink"/>
+<circle cx="94" cy="206" r="9" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="94" y="210.68" font-size="13" text-anchor="middle" font-weight="600">0</text>
+<circle cx="144" cy="144" r="9" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="144" y="148.68" font-size="13" text-anchor="middle" font-weight="600">1</text>
+<circle cx="194" cy="206" r="9" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="194" y="210.68" font-size="13" text-anchor="middle" font-weight="600">2</text>
+<circle cx="244" cy="144" r="9" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="244" y="148.68" font-size="13" text-anchor="middle" font-weight="600">3</text>
+<circle cx="44" cy="82" r="9" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="44" y="86.68" font-size="13" text-anchor="middle" font-weight="600">4</text>
+</svg>
+<svg class="tr-fig-panel" x="288" y="0" width="272" height="262" viewBox="0 0 272 262">
+<text class="tf-ink" x="136" y="22" font-size="14" text-anchor="middle" font-weight="600">箭头量出高度 <tspan font-style="italic">h</tspan></text>
+<line x1="26" y1="206" x2="262" y2="206" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 4" fill="none"/>
+<text class="tf-dim" x="18" y="210.68" font-size="13" text-anchor="end">0</text>
+<line x1="26" y1="144" x2="262" y2="144" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 4" fill="none"/>
+<text class="tf-dim" x="18" y="148.68" font-size="13" text-anchor="end">1</text>
+<line x1="26" y1="82" x2="262" y2="82" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 4" fill="none"/>
+<text class="tf-dim" x="18" y="86.68" font-size="13" text-anchor="end">2</text>
+<text class="tf-dim" x="18" y="56" font-size="14" text-anchor="middle"><tspan font-style="italic">h</tspan></text>
+<line x1="99.65" y1="151.01" x2="132.29" y2="191.48" class="ts-ink" stroke-width="1.8" fill="none"/>
+<path d="M137.09 197.44 L128.5 192.8 L134.39 188.06Z" class="tf-ink"/>
+<line x1="190.63" y1="90.35" x2="150.97" y2="188.7" class="ts-ink" stroke-width="1.8" fill="none"/>
+<path d="M148.11 195.8 L147.97 186.04 L154.99 188.86Z" class="tf-ink"/>
+<line x1="199.65" y1="89.01" x2="232.29" y2="129.48" class="ts-cyan" stroke-width="3.2" fill="none"/>
+<path d="M237.09 135.44 L228.5 130.8 L234.39 126.06Z" class="tf-cyan"/>
+<path d="M244 144 L239 151.16 L234 158.03 L229 164.61 L224 170.9 L219 176.91 L214 182.62 L209 188.06 L204 193.2 L199 198.06 L194 202.62 L189 206.91 L184 210.9 L179 214.61 L174 218.02 L169 221.16 L164 224 L159 226.56 L154 228.83 L149 230.81 L144 232.5 L139 233.91 L134 235.03 L129 235.86 L124 236.4 L119 236.66 L114 236.62 L109 236.31 L104 235.7 L99 234.81 L94 233.62 L89 232.16 L84 230.4 L79 228.36 L74 226.02 L69 223.41 L64 220.5" class="ts-cyan" stroke-width="3.2" stroke-linejoin="round" fill="none"/>
+<path d="M64 220.5 L73.68 221.75 L69.88 228.29Z" class="tf-cyan"/>
+<line x1="88.35" y1="151.01" x2="55.71" y2="191.48" class="ts-ink" stroke-width="1.8" fill="none"/>
+<path d="M50.91 197.44 L53.61 188.06 L59.5 192.8Z" class="tf-ink"/>
+<circle cx="94" cy="144" r="9" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="94" y="148.68" font-size="13" text-anchor="middle" font-weight="600">0</text>
+<circle cx="144" cy="206" r="9" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="144" y="210.68" font-size="13" text-anchor="middle" font-weight="600">1</text>
+<circle cx="194" cy="82" r="9" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="194" y="86.68" font-size="13" text-anchor="middle" font-weight="600">2</text>
+<circle cx="244" cy="144" r="9" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="244" y="148.68" font-size="13" text-anchor="middle" font-weight="600">3</text>
+<circle cx="44" cy="206" r="9" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="44" y="210.68" font-size="13" text-anchor="middle" font-weight="600">4</text>
+</svg>
+</svg>
