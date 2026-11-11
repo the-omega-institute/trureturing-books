@@ -105,6 +105,84 @@ In our geometric interpretation (`MODEL`), geometric or algebraic structure used
 3. **Poincaré–Brouwer Hairy Ball Theorem (H. Poincaré, 1885; L. E. J. Brouwer, 1912)**: Because the 2-sphere has Euler characteristic $\chi(S^2) = 2 \neq 0$, every continuous tangent vector field on $S^2$ must vanish at least at one point (a topological vortex).
 :::
 
+The three items of [@rem-ch30-karmarkar-kasteleyn-literature] are literature only. There is, however, a small discrete problem in which both the "field" and the "line" can be written down as exact mathematics and handed to the kernel: coloring the vertices of a graph.
+
+Start with the smallest odd cycle, the pentagon $C_5$: vertices $0, 1, 2, 3, 4$, edges $01, 12, 23, 34, 40$. Paint the vertices with the colors $c = (0, 1, 0, 1, 2)$; no two neighbors share a color. Read the color as a height, and this is a three-level field on the vertices. Now let every edge point towards its higher-colored end:
+
+$$
+0 \to 1, \qquad 2 \to 1, \qquad 2 \to 3, \qquad 3 \to 4, \qquad 0 \to 4 .
+$$
+
+Neighbors have different colors, so every edge receives a direction. Walking along the arrows, the color rises strictly at every step, so a thread visits each level at most once: three colors, at most three vertices on any thread. The longest thread here is $2 \to 3 \to 4$, with exactly three. **The field puts a ceiling on the length of every line.**
+
+Conversely, given only the arrows, can we recover a field? Let $h(v)$ be the number of edges on the longest thread that starts at $v$ and follows the arrows:
+
+$$
+h = \bigl(h(0), h(1), h(2), h(3), h(4)\bigr) = (1, 0, 2, 1, 0) .
+$$
+
+For every arrow $u \to v$, putting this step in front of the longest thread from $v$ gives a longer thread from $u$, so $h(u) > h(v)$. Thus $h$ drops along every arrow, neighbors always get different values of $h$, and $h$ is again a three-coloring (a different one from $c$: the arrows point up in $c$ but down in $h$). **The lines measure out the field.** Only one thing can go wrong in this step: if the arrows close up into a cycle, "the longest thread starting at $v$" runs round in circles. In graph theory this round trip is called the Gallai–Hasse–Roy–Vitaver theorem ([@rem-ch30-coloring-complexity-literature]). The module `D5/S3/Combinatorics/Graph/Walks/GallaiRoy` freezes a version of it, starting with the definitions of orientation and directed path:
+
+::: {.definition #def-ch30-orientation-directed-path title="Orientations and directed paths of a graph" lean="D5/S3/Combinatorics/Graph/Walks/GallaiRoy.IsOrientation D5/S3/Combinatorics/Graph/Walks/GallaiRoy.IsDirectedPath"}
+Let $V$ be a type, $G$ a simple graph on $V$ (Mathlib's `SimpleGraph V`: a symmetric adjacency relation without loops), and $o$ a binary relation on $V$. When $o(u, v)$ holds we say there is an **arc** from $u$ to $v$ and write $u \to v$.
+
+1. $o$ is an **orientation** of $G$ (`IsOrientation G o`) if both of the following hold: for all $u, v$ adjacent in $G$, at least one of $o(u, v)$ and $o(v, u)$ holds (both may hold); for all $u, v$, $o(u, v)$ implies that $u$ and $v$ are adjacent in $G$.
+2. Let $m \in \mathbb{N}$. A map $f : \{0, 1, \dots, m-1\} \to V$ (in Lean, `Fin m → V`) is a **directed path of $o$ with $m$ vertices** (`IsDirectedPath o f`) if $f$ is injective and $o\bigl(f(i), f(i+1)\bigr)$ holds for every natural number $i$ with $i + 1 < m$.
+:::
+
+This notion of orientation is looser than the textbook one: an edge may carry arcs in both directions. A directed path, on the other hand, must have pairwise distinct vertices, so going round a directed cycle again and again does not produce ever longer paths; and $m$ counts vertices, not edges.
+
+::: {.theorem #thm-ch30-gallai-roy title="Gallai–Hasse–Roy–Vitaver theorem: $k$-colorable if and only if some orientation has no directed path with more than $k$ vertices" lean="D5/S3/Combinatorics/Graph/Walks/GallaiRoy.colorable_iff_exists_orientation"}
+Let $V$ be a finite type, $G$ a simple graph on $V$, and $k \in \mathbb{N}$. The following are equivalent:
+
+1. $G$ is $k$-colorable (Mathlib's `G.Colorable k`): there is a map $c : V \to \{0, 1, \dots, k-1\}$ with $c(u) \neq c(v)$ for all $u, v$ adjacent in $G$;
+2. there is an orientation $o$ of $G$ ([@def-ch30-orientation-directed-path]) such that $m \le k$ for every $m \in \mathbb{N}$ and every directed path of $o$ with $m$ vertices.
+:::
+
+::: proof
+**From a coloring to an orientation.** Given a coloring $c$, let $o(u, v)$ hold exactly when $u, v$ are adjacent and $c(u) < c(v)$: every edge points towards its higher-colored end. Neighbors have different colors, so every edge receives exactly one direction, and every arc is an edge. Along a directed path $f$ with $m \ge 1$ vertices the color rises strictly at each step, so $i \mapsto c(f(i))$ is a strictly monotone map from $\{0, \dots, m-1\}$ to $\{0, \dots, k-1\}$, hence injective, and $m \le k$; for $m = 0$ there is nothing to prove.
+
+**From an orientation to a coloring.** Let $o$ be an orientation whose directed paths all have at most $k$ vertices. It may contain directed cycles and two-way edges, so the proof first deletes arcs: among the relations $D$ contained in $o$ along which one can never return to the starting point in one or more steps, it takes one that is maximal under inclusion. Since $V$ is finite there are only finitely many binary relations on $V$, and the empty relation belongs to the family, so a maximal one exists; Lean proves that it exists without constructing it. A chain $v_0 \to v_1 \to \dots \to v_\ell$ along $D$ never repeats a vertex (a repetition would be a cycle), so it is a directed path of $o$ with $\ell + 1$ vertices, and $\ell + 1 \le k$. Let $h(v)$ be the largest number of edges of a $D$-chain starting at $v$ (Lean takes it with `Nat.findGreatest` among $0, \dots, k$); then $h(v) \le k - 1$. If one can walk from $a$ to $b$ along $D$ in one or more steps, placing that walk in front of a longest chain from $b$ gives a longer chain from $a$, so $h(a) > h(b)$. The key step: let $o(u, v)$ with $u \neq v$. If $D(u, v)$, then $h(u) > h(v)$. If not, consider the relation obtained by adding the arc $u \to v$ to $D$. It is contained in $o$ and strictly larger than $D$; were it acyclic, it would contradict the maximality of $D$. So it has a cycle, and that cycle must use the new arc, which means that $D$ already leads from $v$ back to $u$ (in at least one step, since $u \neq v$); hence $h(v) > h(u)$. In both cases $h(u) \neq h(v)$. Every edge of $G$ carries an arc in at least one direction, and adjacent vertices of a simple graph are distinct, so $v \mapsto h(v)$ is a coloring with colors $0, \dots, k-1$. The full proof is checked by the Lean kernel.
+:::
+
+The equivalence can be read in three ways.
+
+First, two-way arcs change nothing (a manual derivation). Delete one of the two directions on every edge that carries both; the result is an orientation with exactly one direction per edge, its directed paths are directed paths of the original one, and the bound $k$ still holds. So item 2 of the theorem may just as well be searched for among orientations with exactly one direction per edge.
+
+Second, try $k = 0, 1, 2, \dots$ in turn (a manual derivation). For finite $V$, giving every vertex its own color shows that $G$ is $\lvert V\rvert$-colorable, so there is a least $k$ for which $G$ is $k$-colorable: the chromatic number $\chi(G)$. Directed paths have distinct vertices, so every directed path of an orientation $o$ has at most $\lvert V\rvert$ vertices, and the number $L(o)$ of vertices on a longest one exists. Item 2 of the theorem holds exactly when $\min_o L(o) \le k$, and [@thm-ch30-gallai-roy] holds for every $k$, so items 1 and 2 hold for the same values of $k$ and the least such values agree:
+
+$$
+\chi(G) = \min_{o}\, L(o),
+$$
+
+the minimum ranging over all orientations of $G$. This is how the graph-theory literature usually states the theorem.
+
+Third, back in this chapter's analogy (`MODEL`): a coloring is a layered field on the vertices, and a directed path is a line that follows the directions. A field with at most $k$ levels exists exactly when the edges can be given directions so that every line has at most $k$ vertices; and the field $h$ built from an orientation reads, at each vertex, "how many steps one can walk from here along the arcs that survive the deletion". Both sides of the theorem, however, assert that some object exists. The theorem trades one kind of witness for another; it provides no way of finding either, and it says nothing about which is easier to find. A given coloring is verified by comparing the two end colors of every edge; how fast a coloring can be found is a different question, taken up in [@rem-ch30-coloring-complexity-literature].
+
+::: {.example #ex-ch30-gallai-roy-orientation-census title="The pentagon, $K_4$ and the Petersen graph: enumerating every orientation and measuring the longest directed path"}
+Every number in the table comes from exhaustive enumeration: choose a direction for each edge and find the number of vertices on a longest directed path by depth-first search (directed paths have distinct vertices, as in [@def-ch30-orientation-directed-path]). The Petersen graph is taken with an outer pentagon $0, \dots, 4$, an inner pentagram $5, \dots, 9$ ($5 + i$ adjacent to $5 + ((i + 2) \bmod 5)$), and five spokes ($i$ adjacent to $i + 5$).
+
+| Graph | Vertices / edges | Chromatic number | Orientations with one direction per edge | Vertices on a longest directed path: number of orientations |
+| :---: | :---: | :---: | :---: | :---: |
+| Pentagon $C_5$ | $5$ / $5$ | $3$ | $32$ | $3$: $10$, $4$: $10$, $5$: $12$ |
+| Complete graph $K_4$ | $4$ / $6$ | $4$ | $64$ | $4$: $64$ |
+| Petersen graph | $10$ / $15$ | $3$ | $32768$ | minimum $3$, attained $80$ times |
+
+With two-way arcs allowed, $C_5$ has $3^5 = 243$ orientations and the least number of vertices on a longest directed path is still $3$ (attained $20$ times); $K_4$ has $3^6 = 729$ orientations, each containing a directed path with $4$ vertices. For $C_5$ and $K_4$ the program also checks both sides of [@thm-ch30-gallai-roy] for $k = 0, 1, \dots, \lvert V\rvert$ (on the coloring side by enumerating every map $c$). For all three graphs the minimum equals the chromatic number, in agreement with $\chi(G) = \min_o L(o)$ above.
+
+Among the $12$ orientations of $C_5$ whose longest directed path has $5$ vertices, $2$ are directed cycles (one for each sense of rotation). For the directed cycle $0 \to 1 \to 2 \to 3 \to 4 \to 0$, the maximal acyclic sub-relation $D$ of the proof deletes exactly one arc of the cycle (there are $5$ ways, and Lean does not say which); deleting $4 \to 0$ gives $h = (4, 3, 2, 1, 0)$, a five-coloring, as the theorem predicts for $k = 5$.
+
+Two rows can be done by hand. $C_5$ with $k = 2$: suppose every edge has exactly one direction and every directed path has at most $2$ vertices. A vertex with both an incoming and an outgoing arc would have them on two different edges, and its two neighbors would be joined through it into a directed path with $3$ vertices; so every vertex either only sends or only receives. Each arc runs from a sender to a receiver, so around the pentagon the two kinds must alternate, and $5$ is odd: a contradiction. By the first reading the same holds with two-way arcs allowed; this is "the pentagon is not $2$-colorable" translated through the theorem. $K_4$: its four vertices are pairwise adjacent, so with three colors two of them would share a color, and $K_4$ is not $3$-colorable; by the theorem every orientation of $K_4$ has a directed path with at least $4$, hence exactly all $4$, vertices, as all $64$ orientations in the table do. Replacing $K_4$ by the complete graph $K_n$ on $n$ vertices, the same manual derivation shows that every orientation of $K_n$ has a directed path through all of its vertices.
+:::
+
+::: {.remark #rem-ch30-coloring-complexity-literature title="The computational complexity of coloring and the history of the theorem (literature result, not formalized in this book)"}
+**Literature result, not formalized in this book.** [@thm-ch30-gallai-roy] is an equivalence between two existence statements and says nothing about computational complexity. How hard colorings are to find is recorded in the external literature:
+
+1. Whether a finite graph is $2$-colorable can be decided in linear time: run a breadth-first search in each connected component and color by the parity of the level; two neighbors receive the same color exactly when the graph contains an odd cycle (a graph is $2$-colorable if and only if it has no odd cycle, D. Kőnig, 1936).
+2. Given a graph $G$ and a positive integer $k$, deciding whether $G$ is $k$-colorable is $\mathrm{NP}$-complete (R. M. Karp, *Reducibility among combinatorial problems*, 1972); for fixed $k = 3$ it remains $\mathrm{NP}$-complete even for planar graphs of maximum degree at most $4$ (M. R. Garey, D. S. Johnson & L. Stockmeyer, *Theor. Comput. Sci.* **1**, 237–267, 1976). Consequently $3$-coloring has a polynomial-time algorithm if and only if $\mathrm{P} = \mathrm{NP}$, while $\mathrm{P} \neq \mathrm{NP}$ remains an open conjecture ([@conj-p-neq-np]).
+3. The equivalence between colorings and orientations was published independently by T. Gallai, M. Hasse, B. Roy and L. M. Vitaver in the 1960s; its special case for complete graphs, that every tournament has a directed path through all of its vertices, was proved earlier by L. Rédei (1934).
+:::
+
 ### 3. Hairy-Ball Curl ($\nabla \wedge \mathbf{F}$) as a Geometric Analogy for $P \neq NP$: Why One Line Cannot Hold Up a Field
 
 Why is it so difficult to construct such a polynomial-time guiding field for $\mathrm{NP}$-complete problems like 3-SAT? Expressed as a continuous differential-geometric analogy (`MODEL`, intended as geometric intuition rather than a formal proof of [@conj-p-neq-np]):
@@ -493,6 +571,6 @@ Combining [@thm-coda-quadratic-advection-no-closure] with the literature context
 
 ## Chapter Summary: The Orthogonal Convergence of Discrete Logic and Continuum Fluids {#sec-ch30-summary}
 
-The chapter connects discrete logic and continuum fluids through the author's aphorisms about the global static field, finite observers, “fields,” and “lines.” Mathematically, static satisfying subspaces, complexity equalities with extra resources, restricted-model lower bounds, and the open standard $P\neq NP$ question have distinct boundaries. The galactic crossover table compares illustrative upper bounds ([@ex-ch30-galactic-crossover-scale]), not universal search lower bounds. The fluid discussion juxtaposes **Lamb's decomposition ([@rem-ch30-lamb-decomposition-literature]), the open unforced 3D global regularity conjecture ([@conj-coda-navier-stokes-regularity]), and the quadratic advection projection closure obstruction ([@thm-coda-quadratic-advection-no-closure])**. These results offer points of reference for the author's geometric interpretation, without establishing mathematical equivalence between the two open problems.
+The chapter connects discrete logic and continuum fluids through the author's aphorisms about the global static field, finite observers, “fields,” and “lines.” Mathematically, static satisfying subspaces, complexity equalities with extra resources, restricted-model lower bounds, and the open standard $P\neq NP$ question have distinct boundaries. In the finite-graph coloring example, the Gallai–Hasse–Roy–Vitaver theorem gives an exact equivalence between $k$-colorability and the existence of an orientation whose directed paths have at most $k$ vertices ([@thm-ch30-gallai-roy]); it exchanges two existence witnesses without providing an algorithm or settling the general $P$ vs. $NP$ question. The galactic crossover table compares illustrative upper bounds ([@ex-ch30-galactic-crossover-scale]), not universal search lower bounds. The fluid discussion juxtaposes **Lamb's decomposition ([@rem-ch30-lamb-decomposition-literature]), the open unforced 3D global regularity conjecture ([@conj-coda-navier-stokes-regularity]), and the quadratic advection projection closure obstruction ([@thm-coda-quadratic-advection-no-closure])**. These results offer points of reference for the author's geometric interpretation, without establishing mathematical equivalence between the two open problems.
 
 We now open the final door of the monograph and enter the **[Coda: Outside All Spheres](coda.md)** to survey polyhedral angular-defect remainders (see Coda [@rem-coda-polyhedral-topology-literature]), the contracting fixed-point anchor, and the complete thirty-chapter dependency map.

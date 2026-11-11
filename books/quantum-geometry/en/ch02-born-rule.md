@@ -270,13 +270,108 @@ $$
 
 The single qubit is the only "fair" case: point in an arbitrary direction, and the compatibility weight is equally likely to take any value between $0$ and $1$. Once the dimension is large, a randomly chosen direction is, with overwhelming probability, nearly orthogonal to the reference state. The equatorial concentration and the barren plateaus discussed in [Chapter 12](ch12-measurement-computation-and-gradients.md) start from this fact.
 
+So far we have always run in the forward direction: first a state $\rho$ and a shutter $P$ are given, then the weight $\Tr(\rho P)$ is computed. Now turn the question around. Suppose all we have is a family of **probes**, each a pure-state direction that can be confirmed with certainty, together with pairwise measurement itself. Can these alone split the reading of an arbitrary detector into mutually exclusive "confirmations"? And do the probes that come out line up, of their own accord, into a complete record measurement like the one in [@thm-rank-one-born-pairing]?
+
+The key notion is **least confirmation**. For each probe $p$, among all nonnegative readings that pass $p$ with certainty and never exceed $1$ on any probe, take the stingiest one and call it $e_p$. On a qubit, $e_p(q) = \Tr(pq) = \frac{1 + \cos\theta}{2}$ (checked by hand in [@ex-qubit-confirmation-peel] below) is exactly the table of [@ex-bloch-half-angle]: $p$ is used to measure $q$, the two arrows and nothing else, with no third party as referee. The next definition carries this structure over to an arbitrary real vector space.
+
+::: {.definition #def-confirmation-system title="Positivity on Probes and Confirmation Systems" lean="D5/S3/Quantum/Foundation/LeastConfirmationGeneration.Positive D5/S3/Quantum/Foundation/LeastConfirmationGeneration.ConfirmationSystem"}
+Let $A$ be a real vector space and $P \subseteq A$ an arbitrary set of **probes**. A linear functional $f : A \to \mathbb{R}$ is **positive on $P$** (`Positive P f` in Lean) if $f(p) \ge 0$ for every $p \in P$. A **confirmation system** on $P$ (`ConfirmationSystem P`) consists of the following seven items:
+
+1. a linear functional $u : A \to \mathbb{R}$, the unit (`unit`);
+2. normalization (`normalized`): $u(p) = 1$ for every $p \in P$;
+3. for each $p \in P$, a linear functional $e_p : A \to \mathbb{R}$, the confirming effect of $p$ (`effect`);
+4. properness (`proper`): $0 \le e_p(q) \le 1$ for all $p, q \in P$;
+5. confirmation (`confirms`): $e_p(p) = 1$ for every $p \in P$;
+6. leastness (`least`): for every $p \in P$ and every linear functional $f$, if $f$ is positive on $P$, $f(q) \le 1$ for all $q \in P$, and $f(p) = 1$, then $e_p(q) \le f(q)$ for all $q \in P$;
+7. maximum attainment (`maximum`): for every linear functional $f$ that is positive on $P$ and not identically zero, there is $p \in P$ with $f(p) > 0$ and $f(q) \le f(p)$ for all $q \in P$.
+:::
+
+The first five items are bookkeeping: $u$ gives every probe total mass $1$, and $e_p$ is a proper reading that passes $p$ with certainty. The content sits in the last two. Leastness says that $e_p$ gives no probe any more weight than it must: any other proper reading that passes $p$ with certainty gives every probe at least as much as $e_p$ does. Maximum attainment says that every nonzero positive reading attains its largest value at some probe; Lean makes it a field of the structure, an assumption rather than a consequence of compactness. A one-line manual derivation shows that this field forces $P$ to span $A$: otherwise a nonzero functional vanishing on $P$ would be positive on $P$, yet no probe would give it a positive value.
+
+::: {.theorem #thm-positive-dual-generation title="Least Confirmations Generate the Positive Dual" lean="D5/S3/Quantum/Foundation/LeastConfirmationGeneration.positive_dual_generation"}
+Let $A$ be a finite-dimensional real vector space, $P \subseteq A$, and fix a confirmation system on $P$ ([@def-confirmation-system]) with unit $u$ and confirming effects $p \mapsto e_p$. If a linear functional $f : A \to \mathbb{R}$ is positive on $P$, then there is a finite list $(m_1, p_1), \dots, (m_\ell, p_\ell)$ (with $\ell \ge 0$, $m_i \in \mathbb{R}$, $p_i \in P$) such that:
+
+1. $m_i > 0$ for every $i$;
+2. $f = \sum_{i=1}^{\ell} m_i\, e_{p_i}$;
+3. for all $i < j$, $e_{p_j}(p_i) = 0$ and $e_{p_i}(p_j) = 0$;
+4. $\sum_{i=1}^{\ell} e_{p_i}(q) \le u(q)$ for every $q \in P$;
+5. $\ell \le \dim A$;
+6. if $f = u$, then $m_i = 1$ for every $i$.
+:::
+
+::: proof
+The proof peels $f$ layer by layer. If $f = 0$, take the empty list. Otherwise maximum attainment yields a probe $p$ at which $f$ is largest; put $m = f(p) > 0$. The functional $m^{-1}f$ is positive on $P$, at most $1$ there, and equal to $1$ at $p$, so leastness gives $e_p \le m^{-1}f$ on $P$; hence the remainder $r = f - m\,e_p$ is still positive on $P$, and $r(p) = 0$. Let $Z(f)$ be the subspace spanned by the probes that $f$ sends to zero ([`zeroSpan`](lean:D5/S3/Quantum/Foundation/LeastConfirmationGeneration.zeroSpan) in Lean). If a probe $x$ has $f(x) = 0$, then $0 \le r(x) = -m\,e_p(x) \le 0$, so $Z(f) \subseteq Z(r)$; and $p \in Z(r)$ lies outside $Z(f)$, because $Z(f) \subseteq \ker f$ while $f(p) = m > 0$. Each layer therefore raises the dimension of $Z$ by at least one; strong induction on $\dim A - \dim Z(f)$ stops the peeling after at most $\dim A$ layers and delivers the expansion together with the length bound. The remainder $r$ of each layer is the positively weighted sum of the later layers, every term is nonnegative on probes, and $r(p) = 0$, so every effect peeled later vanishes on every probe peeled earlier: $e_{p_j}(p_i) = 0$ for $i < j$. The reverse direction comes from leastness: if $e_q(p) = 0$, the functional $u - e_q$ is positive on $P$, at most $1$ there, and equal to $1$ at $p$, so $e_p(q) \le u(q) - e_q(q) = 0$, and since $e_p(q) \ge 0$, $e_p(q) = 0$. The sum bound is an induction on the list: the sum $t$ of the tail lies between $0$ and $1$ on $P$ and vanishes at the head probe $a$, so $u - t$ meets the hypotheses of leastness and gives $e_a(q) + t(q) \le 1 = u(q)$. Finally, exclusion in both directions gives $\bigl(\sum_j m_j e_{p_j}\bigr)(p_i) = m_i$; when $f = u$ the left side is $u(p_i) = 1$, so $m_i = 1$. The full proof is checked by the Lean kernel.
+:::
+
+Start with the most transparent model, an $n$-sided die (a manual derivation). Take $A = \mathbb{R}^n$, the probes the standard basis vectors $\delta_1, \dots, \delta_n$ ("face $k$ comes up for certain"), the unit $u(x) = x_1 + \cdots + x_n$, and the confirming effects the coordinate readings $e_{\delta_k}(x) = x_k$. All seven items can be read off at a glance: $e_{\delta_k}(\delta_j)$ is $1$ for $j = k$ and $0$ otherwise; if $f$ is nonnegative on the probes and $f(\delta_k) = 1$, then $f(\delta_j) \ge 0 = e_{\delta_k}(\delta_j)$ for $j \ne k$, which is leastness; a nonzero positive reading $f(x) = c_1 x_1 + \cdots + c_n x_n$ has coefficients $c_j = f(\delta_j) \ge 0$, not all zero, and the largest one is the maximum. The coordinate readings are linearly independent, and mutual exclusion rules out repeated probes, so the expansion that [@thm-positive-dual-generation] provides can only be the split into coordinates; the peeling in its proof takes the terms off one at a time, largest coefficient first. For instance, with $n = 3$ and $f(x) = 0.5\,x_1 + 0.3\,x_3$ the peeling gives $0.5\,e_{\delta_1} + 0.3\,e_{\delta_3}$, two layers, within $\dim A = 3$. A die has only $n$ probes, so there is no suspense. The probes of a qubit cover the whole sphere, and which of them get peeled off is for the reading itself to choose.
+
+::: {.example #ex-qubit-confirmation-peel title="Peeling on the Bloch Sphere: The Spectral Decomposition of an Unsharp Effect"}
+This example is a **manual derivation**: that a qubit satisfies the seven items of [@def-confirmation-system], and each layer of the peeling below, are computed with the matrices of this chapter; they are not the content of the cited Lean declarations.
+
+**The instance.** Take $A$ to be the real vector space of Hermitian $2\times 2$ matrices (basis $I, \sigma_X, \sigma_Y, \sigma_Z$, so $\dim A = 4$), the probes all pure-state projectors $\rho_{\vv{a}} = \frac{1}{2}(I + B(\vv{a}))$ with $\vv{a} \in S^2$, the unit $u = \Tr$, and the confirming effects $e_p(X) = \Tr(pX)$, so that $e_{\rho_{\vv{a}}}(\rho_{\vv{b}}) = \frac{1 + \vv{a}\cdot\vv{b}}{2}$. Normalization, properness and confirmation hold at once: $\Tr p = 1$, $0 \le \Tr(pq) \le 1$, $\Tr(pp) = \Tr p = 1$. Every linear functional on $A$ can be written uniquely as $f(X) = \Tr(FX)$ with $F$ Hermitian; positivity on the probes means $F \ge 0$, and being at most $1$ on the probes means $F \le I$. If moreover $f(p) = 1$ with $p = \lvert\psi\rangle\langle\psi\rvert$, then $\langle\psi\rvert(I - F)\lvert\psi\rangle = 0$ with $I - F \ge 0$, which forces $F\lvert\psi\rangle = \lvert\psi\rangle$; hence $F = p + \lambda(I - p)$ with $0 \le \lambda \le 1$, and $f(q) \ge \Tr(pq) = e_p(q)$. That is leastness. Maximum attainment comes from an eigenvector of the largest eigenvalue $\lambda_{\max} > 0$ of $F$, since $f(\lvert\phi\rangle\langle\phi\rvert) = \langle\phi\rvert F\lvert\phi\rangle \le \lambda_{\max}$.
+
+**An unsharp detector.** Let the click effect of a detector be
+
+$$
+E = \begin{pmatrix} 3/5 & 1/5 \\ 1/5 & 3/10 \end{pmatrix} = 0.45\,I + 0.2\,\sigma_X + 0.15\,\sigma_Z ,
+$$
+
+so the reading $f(q) = \Tr(Eq)$ is the probability that the pure state $q$ makes it click. Substituting $\rho_{\vv{a}}$ gives
+
+$$
+\begin{aligned}
+f(\rho_{\vv{a}}) &= 0.45 + 0.2\,a_0 + 0.15\,a_2 \\
+&= 0.45 + 0.25\,\vv{a}\cdot\vv{s}, \qquad \vv{s} = (0.8,\ 0,\ 0.6).
+\end{aligned}
+$$
+
+On the sphere, $f$ is a "height function" tilted towards $\vv{s}$: brightest at $\vv{s}$ (polar angle $\arccos 0.6 \approx 53.13^\circ$), darkest at the antipode $-\vv{s}$.
+
+**First layer.** The maximum sits at the pure state $p_1 = \lvert\psi_1\rangle\langle\psi_1\rvert$ belonging to $\vv{s}$, with $\lvert\psi_1\rangle = \frac{1}{\sqrt{5}}\binom{2}{1}$, and the weight is $m_1 = f(p_1) = 0.7$. Peel it off:
+
+$$
+\begin{aligned}
+E - 0.7\,p_1 &= \begin{pmatrix} 3/5 & 1/5 \\ 1/5 & 3/10 \end{pmatrix} - \frac{7}{10}\begin{pmatrix} 4/5 & 2/5 \\ 2/5 & 1/5 \end{pmatrix} \\
+&= \begin{pmatrix} 1/25 & -2/25 \\ -2/25 & 4/25 \end{pmatrix} = 0.2\,p_2 ,
+\end{aligned}
+$$
+
+where $p_2 = \lvert\psi_2\rangle\langle\psi_2\rvert$ with $\lvert\psi_2\rangle = \frac{1}{\sqrt{5}}\binom{-1}{2}$, whose Bloch vector is $-\vv{s}$. The remainder $r_1 = f - 0.7\,e_{p_1}$ is still nonnegative and vanishes only at $p_1$. Since $f$ is at least $0.2$ on every pure state, the probes it sends to zero span $\{0\}$; the probes $r_1$ sends to zero span the line $\operatorname{span}\{p_1\}$. The dimension has gone from $0$ to $1$.
+
+**Second layer.** The maximum of $r_1$ sits at $p_2$ with weight $m_2 = 0.2$; the remainder is zero, the probes sent to zero by the zero functional span all of $A$ (dimension $4$), and the peeling ends:
+
+$$
+\begin{aligned}
+f &= 0.7\,e_{p_1} + 0.2\,e_{p_2}, \\
+E &= 0.7\,p_1 + 0.2\,p_2 .
+\end{aligned}
+$$
+
+| pure-state probe $q$ | Bloch vector | $f(q) = \Tr(Eq)$ | $e_{p_1}(q)$ | remainder $r_1(q)$ |
+| :---: | :---: | :---: | :---: | :---: |
+| $\lvert 0\rangle$ | $(0, 0, 1)$ | $0.6$ | $0.8$ | $0.04$ |
+| $\lvert 1\rangle$ | $(0, 0, -1)$ | $0.3$ | $0.2$ | $0.16$ |
+| $\lvert +\rangle$ | $(1, 0, 0)$ | $0.65$ | $0.9$ | $0.02$ |
+| $\lvert +i\rangle$ | $(0, 1, 0)$ | $0.45$ | $0.5$ | $0.1$ |
+| $\lvert\psi_1\rangle$ | $(0.8, 0, 0.6)$ | $0.7$ | $1$ | $0$ |
+| $\lvert\psi_2\rangle$ | $(-0.8, 0, -0.6)$ | $0.2$ | $0$ | $0.2$ |
+
+**Checking the six conclusions of the theorem.** The weights $0.7, 0.2$ are positive; $e_{p_2}(p_1) = e_{p_1}(p_2) = \Tr(p_1 p_2) = 0$ (antipodal Bloch vectors); $e_{p_1}(q) + e_{p_2}(q) = \Tr\bigl((p_1 + p_2)q\bigr) = \Tr q = 1 = u(q)$, so the sum bound holds with equality; the length is $2 \le \dim A = 4$. If the reading is the unit $f = \Tr$ instead, every pure state attains the maximum $1$ and the peeling may start at any $p$: $\Tr = e_p + e_{I - p}$ with both weights equal to $1$, that is, $I = p + (I - p)$ — a complete record measurement, along any axis whatever.
+:::
+
+The outcome of the peeling is precisely the spectral decomposition of $E$: the two probes are its eigendirections and the two weights its eigenvalues. Yet the peeling itself solves no eigenvalue equation and needs no external basis $\{\lvert 0\rangle, \lvert 1\rangle\}$ (the matrices above are written out only as a check). The first probe is the brightest direction of the reading, the second the brightest direction of the remainder, and every step is a pairwise measurement.
+
+> Do not erect coordinates before you measure: the brightest direction of a reading is the axis the reading chooses for itself.
+
+Three boundaries need to be drawn. First, the length bound of [@thm-positive-dual-generation] is $\dim A$, which is $4$ for a qubit. Only two layers appear because $\mathbb{C}^2$ holds at most two mutually orthogonal unit vectors ($\Tr(p_i p_j) = 0$ means $\langle\psi_i\mid\psi_j\rangle = 0$); this sharper bound of $2$ is a manual observation about the example, not a conclusion of the theorem. Second, that a qubit satisfies the seven items is the manual derivation above; the header of the cited Lean file states that the application to a compact normalized base and the state-side spectral bridge are separate mathematical obligations, outside this theorem. Third, the theorem decomposes readings that are positive on probes; it answers "what is a reading made of", and it does not assert that every additive probability assignment takes the trace-pairing form. That uniqueness question is the subject of Gleason's and Busch's theorems, discussed in [@rem-gleason-literature] below.
+
 ::: {.remark #rem-gleason-literature title="Gleason's Theorem and Busch's Theorem (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** In this chapter, [@thm-born-probability-skeleton] proves **sufficiency**: every positive semidefinite trace-one matrix $\rho$ defines, via the canonical basis-free trace pairing $P \mapsto \Tr(\rho P)$, a normalized, finitely additive, nonnegative measure on projections. Establishing **uniqueness** (that every probability assignment obeying suitable additivity axioms must take the trace-pairing form) requires classical converse theorems and their exact dimensional and domain hypotheses:
 
 - **Gleason's theorem** (A. M. Gleason, *Measures on the closed subspaces of a Hilbert space*, J. Math. Mech. **6**, 885–893, 1957): Requires Hilbert-space dimension **$\dim\mathcal{H} \ge 3$**. On any separable Hilbert space of dimension $\dim\mathcal{H} \ge 3$, every countably additive probability measure $\mu$ on the lattice of orthogonal projections (reducing to finite additivity on pairwise orthogonal projections when $3 \le \dim\mathcal{H} < \infty$) has the form $\mu(P) = \Tr(\rho P)$ for a unique density operator $\rho$. **Gleason's theorem fails on the projection lattice alone when $\dim\mathcal{H} = 2$**: because each two-dimensional orthonormal basis consists solely of an antipodal pair $\{P_{\vv{n}}, P_{-\vv{n}}\}$ sharing no common rank-one projectors with other bases, non-Born frame functions on $S^2$ satisfying $\mu(P_{\vv{n}}) + \mu(P_{-\vv{n}}) = 1$ exist in abundance.
 - **Busch's theorem** (P. Busch, *Quantum states and generalized observables: A simple proof of Gleason's theorem*, Phys. Rev. Lett. **91**, 120403, 2003): Extending additivity from sharp projections to positive POVM effects ($0 \le E_i \le I$ with $\mu(\sum_i E_i) = \sum_i \mu(E_i)$ whenever $\sum_i E_i \le I$) restores uniqueness for **all $\dim\mathcal{H} \ge 2$** (including a single qubit, $\dim\mathcal{H} = 2$): every generalized probability measure has the form $E \mapsto \Tr(\rho E)$ for a unique density operator $\rho$.
 
-Our pinned repository focuses on constructive finite-dimensional matrix reductions ([@thm-born-probability-skeleton], [@thm-born-modulus-square], and [@thm-rank-one-born-pairing]); these converse uniqueness theorems are cited from the classical literature and are not claimed in the book's Lean verification ledger.
+Our pinned repository focuses on constructive finite-dimensional matrix reductions ([@thm-born-probability-skeleton], [@thm-born-modulus-square], and [@thm-rank-one-born-pairing]) and freezes the structural decomposition by least confirmations, [@thm-positive-dual-generation]; these converse uniqueness theorems are cited from the classical literature and are not claimed in the book's Lean verification ledger.
 :::
 
 Having eliminated the external third point $C$ and derived $\cos^2(\theta/2) = \frac{1 + \cos\theta}{2}$ from pure trace geometry, we now turn the spotlight onto the ruler itself — the **idempotent projector** $P^2 = P$ that appeared in every theorem of this chapter. Why do "detecting a particle," "naming a logical concept," and "experiencing a tick of classical linear time" all reduce to the single equation $P^2 = P$? Let us step into [Chapter 3](ch03-projectors-and-duality.md).
