@@ -76,7 +76,7 @@ $$
   \Tr(\rho_1 Z) = -1 < 0!
   $$
 
-这里值得精确区分一般广义测量与锐利投影测量的算子边界：对任意算子 $E \in M_n(\mathbb{C})$ 而言，对一切密度态 $\rho$ 恒有 $\Tr(\rho E) \in [0, 1]$ 的充要条件是 $E$ 满足自伴正半定**效应界** $0 \le E \le I$（即广义 POVM 效应元；例如无偏抛币效应 $E = \frac{1}{2}I$ 虽不幂等 $E^2 = \frac{1}{4}I \neq E$，仍恒给出合法概率权重 $\Tr(\rho E) = \frac{1}{2} \in [0, 1]$，详见章末 [@rem-gleason-literature]）。而在凸效应集 $\{E : 0 \le E \le I\}$ 内部，自伴律 $P^* = P$ 加上幂等律 $P^2 = P$（谱值严格落于 $\{0, 1\}$）不仅自动蕴涵 $0 \le P \le I$，更精准刻画了其中无内在模糊度、立即复核绝不改口的一类极值边界——**锐利可重复投影效应**。
+这里值得精确区分一般广义测量与锐利投影测量的算子边界：对任意算子 $E \in M_n(\mathbb{C})$ 而言，对一切密度态 $\rho$ 恒有 $\Tr(\rho E) \in [0, 1]$ 的充要条件是 $E$ 满足自伴正半定**效应界** $0 \le E \le I$（即广义 POVM 效应元；例如无偏抛币效应 $E = \frac{1}{2}I$ 虽不幂等 $E^2 = \frac{1}{4}I \neq E$，仍恒给出合法概率权重 $\Tr(\rho E) = \frac{1}{2} \in [0, 1]$，详见章末 [@rem-gleason-literature]）。而在凸效应集 $\{E : 0 \le E \le I\}$ 内部，自伴律 $P^* = P$ 加上幂等律 $P^2 = P$（谱值严格落于 $\{0, 1\}$）不仅自动蕴涵 $0 \le P \le I$，更精准刻画了其中无内在模糊度的一类极值边界——**锐利投影效应**。在本书采用的吕德斯（Lüders）测后更新下，若两次测量之间没有额外演化，就能保证立即复核同一结果；效应元只确定结果概率，并不单独确定测后态。
 
 ## 2.2 到底什么是“点 C”？ {#sec-ch02-2}
 
@@ -104,8 +104,10 @@ $$
 
 现在，让我们把“垂足投影长度的平方”放回任意有限维复希尔伯特空间 $\mathbb{C}^n$ 中核验。当准备态是一个秩一纯态投影 $\rho = \psi\psi^* = \lvert\psi\rangle\langle\psi\rvert$，而探测分支也是一根秩一纯态方向线 $P_k = \phi\phi^* = \lvert\phi\rangle\langle\phi\rvert$（Lean 中用外积 `Matrix.vecMulVec u (star u)` 表示，记记录分支权重 [`recordWeight`](lean:D5/S3/Observer/Conditioning.recordWeight) 为 `recordWeight P rho k := bornProbability rho (P k)`）时，[@def-born-probability] 中抽象的矩阵迹 $\Tr(\rho P_k)$ 会算出什么？
 
-::: {.theorem #thm-born-modulus-square title="秩一纯态与秩一投影分支的模平方归约" lean="D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction"}
-设 $n$ 为有限指标类型，$\kappa$ 为结果指标类型，$P : \kappa \to M_n(\mathbb{C})$ 为矩阵族，$\rho \in M_n(\mathbb{C})$，$k \in \kappa$，$\phi, \psi \in \mathbb{C}^n$。若第 $k$ 个分支投影与状态矩阵分别具有秩一外积表示
+上述物理情形取 $\phi,\psi$ 为单位向量；下面的代数恒等式只需要两条外积等式，也允许未归一化向量和零向量。
+
+::: {.theorem #thm-born-modulus-square title="外积矩阵的记录权重模平方归约" lean="D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction"}
+设 $n$ 为有限指标类型，$\kappa$ 为结果指标类型，$P : \kappa \to M_n(\mathbb{C})$ 为矩阵族，$\rho \in M_n(\mathbb{C})$，$k \in \kappa$，$\phi, \psi \in \mathbb{C}^n$ 为任意向量。若矩阵 $P_k$ 与 $\rho$ 满足
 
 $$
 P_k = \phi\phi^* = \lvert\phi\rangle\langle\phi\rvert, \qquad \rho = \psi\psi^* = \lvert\psi\rangle\langle\psi\rvert,

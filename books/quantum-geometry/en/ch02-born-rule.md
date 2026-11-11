@@ -76,7 +76,7 @@ Two quick $2\times 2$ counterexamples illustrate why property 3 of [@thm-born-pr
   \Tr(\rho_1 Z) = -1 < 0!
   $$
 
-To state the exact converse boundary: for a general operator $E \in M_n(\mathbb{C})$, $\Tr(\rho E) \in [0, 1]$ holds across all density states $\rho$ if and only if $E$ is a self-adjoint **POVM effect** obeying the operator bound $0 \le E \le I$ (for instance, the unsharp fair-coin effect $E = \frac{1}{2}I$ is non-idempotent, $E^2 = \frac{1}{4}I \neq E$, yet still yields $\Tr(\rho E) = \frac{1}{2} \in [0, 1]$ for every state, as discussed in [@rem-gleason-literature]). Within the convex effect interval $\{E : 0 \le E \le I\}$, self-adjointness $P^* = P$ paired with idempotence $P^2 = P$ (restricting eigenvalues strictly to $\{0, 1\}$) both guarantees $0 \le P \le I$ and characterizes **sharp, repeatable (extremal projective) yes/no questions** — tests free of intrinsic noise that confirm the exact same answer upon immediate repetition.
+To state the exact converse boundary: for a general operator $E \in M_n(\mathbb{C})$, $\Tr(\rho E) \in [0, 1]$ holds across all density states $\rho$ if and only if $E$ is a self-adjoint **POVM effect** obeying the operator bound $0 \le E \le I$ (for instance, the unsharp fair-coin effect $E = \frac{1}{2}I$ is non-idempotent, $E^2 = \frac{1}{4}I \neq E$, yet still yields $\Tr(\rho E) = \frac{1}{2} \in [0, 1]$ for every state, as discussed in [@rem-gleason-literature]). Within the convex effect interval $\{E : 0 \le E \le I\}$, self-adjointness $P^* = P$ paired with idempotence $P^2 = P$ (restricting eigenvalues strictly to $\{0, 1\}$) both guarantees $0 \le P \le I$ and characterizes **sharp projective effects**, the extreme points free of intrinsic fuzziness. With the Lüders state update used in this book and no intervening evolution, immediate repetition confirms the same outcome; effects determine outcome probabilities without specifying the post-measurement state.
 
 ## 2.2 What Is "Point C" Really? {#sec-ch02-2}
 
@@ -104,8 +104,10 @@ This also resolves the dimensional question posed in our opening epigraph about 
 
 Let us verify how this squared projection shadow appears in arbitrary finite dimension $\mathbb{C}^n$. When a pure state is represented by the rank-one outer product $\rho = \psi\psi^* = \lvert\psi\rangle\langle\psi\rvert$ and outcome branch $k$ is represented by the rank-one projector $P_k = \phi\phi^* = \lvert\phi\rangle\langle\phi\rvert$ (`Matrix.vecMulVec u (star u)` in Lean, with branch weight [`recordWeight`](lean:D5/S3/Observer/Conditioning.recordWeight) defined as `recordWeight P rho k := bornProbability rho (P k)`), what does the coordinate-free trace $\Tr(\rho P_k)$ evaluate to?
 
-::: {.theorem #thm-born-modulus-square title="Rank-One Pure-State Reduction to Squared Overlap Modulus" lean="D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction"}
-Let $n$ be a finite index type, $\kappa$ an outcome index type, $P : \kappa \to M_n(\mathbb{C})$ a family of matrices, $\rho \in M_n(\mathbb{C})$, $k \in \kappa$, and $\phi, \psi \in \mathbb{C}^n$. If branch $k$ and state $\rho$ admit the rank-one outer-product representations
+The physical case above takes $\phi,\psi$ to be unit vectors; the algebraic identity below requires only the two outer-product equalities and also allows unnormalized and zero vectors.
+
+::: {.theorem #thm-born-modulus-square title="Squared-Modulus Reduction of Record Weights for Outer-Product Matrices" lean="D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction"}
+Let $n$ be a finite index type, $\kappa$ an outcome index type, $P : \kappa \to M_n(\mathbb{C})$ a family of matrices, $\rho \in M_n(\mathbb{C})$, $k \in \kappa$, and $\phi, \psi \in \mathbb{C}^n$ arbitrary vectors. If the matrices $P_k$ and $\rho$ satisfy
 
 $$
 P_k = \phi\phi^* = \lvert\phi\rangle\langle\phi\rvert, \qquad \rho = \psi\psi^* = \lvert\psi\rangle\langle\psi\rvert,
