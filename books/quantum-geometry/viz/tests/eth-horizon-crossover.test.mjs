@@ -75,7 +75,7 @@ const checkInstance = (st) => {
 };
 await pick('bridge'); s = await state(); let q = checkInstance(s);
 check('BRIDGE: (2, 3, 2, 3), flow = Σ M_r ⊗ N_r rebuilt here from the page’s matrices, 6 × 6', s.scene === 'cut' && s.dims.join() === '2,3,2,3' && q.same && q.shape && q.small);
-check('BRIDGE: the three cuts are 6, 6 and 12; the rank is 6 = the minimal cut, as the theorem says inside the cone', s.cuts.rows === 6 && s.cuts.cols === 6 && s.cuts.bridges === 12 && s.cuts.min === 6 && q.minCut === 6 && s.rank === 6 && q.rank === 6 && s.cone && q.svOK);
+check('BRIDGE: the three cuts are 6, 6 and 12; draw 0 has rank 6, reaching the minimal cut, the greatest rank the theorem gives inside the cone', s.cuts.rows === 6 && s.cuts.cols === 6 && s.cuts.bridges === 12 && s.cuts.min === 6 && q.minCut === 6 && s.rank === 6 && q.rank === 6 && s.cone && q.svOK);
 await pick('narrow'); s = await state(); q = checkInstance(s);
 check('NARROW: (1, 5, 1, 5), the bridges carry only 3 and the rank of the 5 × 5 flow matrix is 3', s.dims.join() === '1,5,1,5' && s.cuts.min === 3 && s.cuts.bridges === 3 && s.rank === 3 && q.rank === 3 && !s.cone && q.svOK && s.sv.length === 5 && s.sv[3] < 1e-6 * s.sv[0]);
 let allOK = true, bad = '', coneEq = true, seen = 0, cones = 0;
@@ -91,8 +91,23 @@ for (let a = 1; a <= 4; a++) for (let b = 1; b <= 4; b++) for (let c = 1; c <= 3
 }
 check(`${seen} instances: the page’s exact rank equals the rank found here, never exceeds min(3ac, ad, bc), and the cone test is right`, allOK, bad);
 check(`inside the cone (${cones} sets of dimensions) the best of three draws attains min(a·d, b·c)`, coneEq && cones > 8);
-await pick('bridge'); const r0 = (await state()).rank; await page.click('body', { position: { x: 5, y: 5 } }); await page.keyboard.press('ArrowRight'); s = await state();
-check('→ draws another instance: other matrices, the same rank', s.seed === 1 && s.rank === r0 && /第 1 次抽样/.test(await page.textContent('#hudBig')));
+await pick('bridge'); const b0 = await state(); await page.click('body', { position: { x: 5, y: 5 } }); await page.keyboard.press('ArrowRight'); s = await state();
+check('→ draws another instance: other matrices; this draw happens to reach the same rank', s.seed === 1 && JSON.stringify(s.flow) !== JSON.stringify(b0.flow) && s.rank === b0.rank && checkInstance(s).rank === s.rank && /第 1 次抽样/.test(await page.textContent('#hudBig')));
+// an ordinary draw below the theorem's maximum: (1, 1, 1, 1) lies in the cone, where the greatest rank is 1, yet draw 4 has rank 0
+await setRange('da', 1); await setRange('db', 1); await setRange('dc', 1); await setRange('dd', 1); await setRange('now', 4); s = await state(); q = checkInstance(s);
+const m4 = s.M.map((m) => m[0][0]), n4 = s.N.map((n) => n[0][0]), f4 = m4.reduce((t, v, r) => t + v * n4[r], 0);
+check('(1, 1, 1, 1), draw 4, set with the dimension sliders and the rail: M = (0, 1, 2), N = (−1, 2, −1), flow = 0·(−1) + 1·2 + 2·(−1) = 0, rank 0', s.dims.join() === '1,1,1,1' && s.seed === 4 && s.preset === null
+  && m4.join() === '0,1,2' && n4.join() === '-1,2,-1' && f4 === 0 && q.same && q.shape && q.rank === 0 && s.rank === 0 && q.svOK, JSON.stringify([m4, n4, s.flow, s.rank]));
+check('(1, 1, 1, 1) lies in the cone with minimal cut min(3, 1, 1) = 1: the theorem’s greatest rank is 1, and this draw falls short of it', s.cone && s.cuts.min === 1 && q.minCut === 1 && s.rank < s.cuts.min);
+let w = { sub: await page.textContent('#hudSub'), note: await page.textContent('#roNote'), key: await page.textContent('#roKeyL') };
+check('the readouts keep this draw apart from the theorem (zh): instance rank 0, greatest attainable rank 1', /实例的秩 0/.test(w.sub) && /最小割 1/.test(w.sub) && /秩更小/.test(w.sub) && /随机实例/.test(w.key)
+  && /最大秩恰好是 min\(a·d, b·c\) = 1/.test(w.note) && /这一次抽样的秩是 0，没有达到它/.test(w.note), JSON.stringify(w));
+await page.click('[data-lang-set="en"]'); await settle(page, 60);
+w = { sub: await page.textContent('#hudSub'), note: await page.textContent('#roNote') };
+check('…and in English', /rank of this instance 0/.test(w.sub) && /minimal cut 1/.test(w.sub) && /greatest attainable rank is exactly min\(a·d, b·c\) = 1/.test(w.note) && /this draw has rank 0, short of it/.test(w.note), JSON.stringify(w));
+await page.click('[data-lang-set="zh"]'); await settle(page, 60);
+const cutNote = await D(() => document.querySelector('[data-scenes="cut"] .note').textContent);
+check('the bridge controls do not claim one rank for every draw (both languages)', !/不随抽样改变/.test(cutNote) && !/does not change with the draw/.test(cutNote) && /不会超过最小割/.test(cutNote) && /never exceeds the minimal cut/.test(cutNote), cutNote);
 
 /* ---------- the modes ---------- */
 await pick('plateau'); s = await state();
