@@ -173,6 +173,10 @@ $$
 由实数域无零因子性知 $x - \varphi = 0$ 或 $x + \varphi - 1 = 0$。但因 $x > 0$ 且 $\varphi > 1$（`Real.one_lt_goldenRatio`），第二个因子严格为正：$x + \varphi - 1 > 0 + 1 - 1 = 0$，绝不可能为零！故必有 $x = \varphi = \frac{1 + \sqrt{5}}{2}$。完整证明由 Lean 内核检查。
 :::
 
+::: {.viz src="fixed-point-convergence" preset="golden" height="500"}
+**一左一右，夹住 φ。** 从 $x_0 = 1$ 反复按 $1 + 1/x$，折线依次落在 $2, \frac{3}{2}, \frac{5}{3}, \frac{8}{5}, \dots$，左右交替地收进青色曲线 $y = 1 + 1/x$ 与灰线 $y = x$ 的交点 $\varphi$；每一圈的宽度约为上一圈的 $1/\varphi^2 \approx 0.382$ 倍，正是品红虚线（不动点处的切线）斜率的大小。交点是唯一的正不动点，由 [@cor-golden-fixed-point-unique] 保证；收敛与速率是页面的数值演示。
+:::
+
 [@cor-golden-fixed-point-unique] 回答了“$1 + 1/x$ 的不动点是什么”，却绕过了一个更靠前的问题：**为什么是 $1 + 1/x$？** 说它是“最简单的加一与取倒数的组合”只是印象。要把印象变成定理，就得把同类映射全部列出来，逐个检查。
 
 “同类”指系数只取 $0$ 与 $1$ 的分式线性映射 $x \mapsto \frac{ax + b}{cx + d}$。令它等于 $x$ 并通分，得到不动点方程
@@ -448,6 +452,18 @@ $$
 对无穷多个分母 $b$ 成立：裂缝可以按分母的平方收窄，却永不为零。
 :::
 
+::: {.viz src="fixed-point-convergence" preset="rate" height="500"}
+**每按一次，误差乘以 −0.674。** 从 $\theta_0 = 1$ 反复取余弦，画面跟着误差放大：放大之后青色曲线贴在品红的切线上，每一圈的形状都一样，相邻两圈之比趋于切线的斜率 $-\sin\theta^* \approx -0.674$，比灰色虚线代表的全局常数 $-\sin 1 \approx -0.84$ 平缓（文献结果，见 [@rem-dottie-convergent-residual-literature]）。
+:::
+
+::: {.viz src="fixed-point-convergence" preset="circle" height="500"}
+**停在哪里，合拢多快。** 同一张蛛网图加上单位圆：圆上的点 $P = (\theta^*, \sin\theta^*)$，青色的横坐标 $\theta^*$ 是蛛网收进去的位置，品红的高度 $\lambda = \sin\theta^* \approx 0.674$ 是每步缩小的比例，也就是品红切线斜率的大小；$(\theta^*)^2 + \lambda^2 = 1$。$\theta^*$ 的存在与唯一见 [@thm-dottie-rational-inverse-endpoint]。
+:::
+
+::: {.viz src="fixed-point-convergence" preset="newton" height="500"}
+**沿切线走，位数翻倍。** 同样从 $\theta_0 = 1$ 出发，每一步先竖着读曲线的高度，再沿品红的切线走到灰线 $y = x$。画面跟着放大：四步之内视野宽从约 $0.6$ 缩到 $10^{-20}$ 量级，误差大约每步平方一次；单纯迭代要走 $115$ 步才到第 $4$ 步的精度（数值核对见 [@ex-dottie-rate-newton-rational]）。
+:::
+
 ::: {.example #ex-dottie-rate-newton-rational title="真实压缩率、牛顿二次闭合与最佳有理读数残差的数值核对"}
 **文献结果，未在本书形式化（以下数值均以 50 位十进制精度复算，四舍五入到所示位数；连分数的部分商是数值观察，不是定理）。**
 
@@ -493,7 +509,19 @@ $$
 末列全部小于 $1 + \sin 1 \approx 1.84$，与上面的上界一致。部分商 $40$ 异常地大，使 $17/23$ 成为格外好的读数：穷举表明，分母小于 $502$ 的任何分数都不比它更接近 $\theta^*$，第一个超过它的是 $371/502$。一把十进制千分尺读出的 $739/1000$ 残差为 $1.42\times10^{-4}$，接近 $17/23$ 的两倍。
 :::
 
+::: {.viz src="fixed-point-convergence" preset="rational" height="500"}
+**缝收窄，却不合上。** $\theta^*$ 的渐近分数 $2/3, 3/4, 14/19, 17/23, 694/939, \dots$ 依次落在灰线上（琥珀色是当前这一个），品红竖线是它到余弦曲线的落差，即残差 $\lvert\cos q - q\rvert$。竖线始终停在两条灰色虚线（斜率 $0$ 与 $-\sin 1$）张成的楔形里；画面放大了千万倍，它仍然在。
+:::
+
 [@ex-dottie-rate-newton-rational] 的最后一张表说明：把刻度加密并不自动换来更好的读数。决定裂缝宽度的不是分母有多大，而是分母与 $\theta^*$ 之间的算术关系；二十三等分的尺子在第十七格上碰巧几乎对准，而一千等分的尺子没有。
+
+::: {.viz src="fixed-point-convergence" preset="ruler" height="500"}
+**二十三等分胜过千分尺。** 琥珀色的 $17/23$ 与虚线标出的尺子读数 $739/1000$ 并排：千分尺上离 $\theta^*$ 最近的一格，残差约为 $17/23$ 的两倍（$1.42\times10^{-4}$ 对 $7.58\times10^{-5}$）。
+:::
+
+::: {.viz src="fixed-point-convergence" height="560"}
+**不动点的收束：完整实验室。** 三个场景画在同一张蛛网图上：迭代（$\cos x$ 或 $1 + 1/x$，可拖动起点、切换镜头）、牛顿、有理读数（可调尺子的分母）。收敛、速率与残差界是文献结果，未在本书形式化；绿色框只给 [@cor-golden-fixed-point-unique] 与 [@thm-dottie-rational-inverse-endpoint]。
+:::
 
 有理读数永远对不准，那么换一种闭合方式——不让投影回到自己，而让旋转回到起点——行不行？答案同样是否定的，而且这一次不需要任何猜想。
 
