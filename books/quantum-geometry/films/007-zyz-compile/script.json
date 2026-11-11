@@ -34,7 +34,7 @@
       ["Every arrow on these paths names a pure state: rho is the Bloch matrix of one and v.", "这些路径上的每一根箭头都对应一个纯态：ρ = blochMatrix(1, v)。"],
       ["Lean checks that its trace is one, and that reading off its Bloch vector gives v back.", "Lean 检验了：它的迹为 1，读出的布洛赫向量正是 v。"],
       ["A Hermitian matrix of trace one that squares to itself has a Bloch vector of length exactly one.", "迹为 1、自乘不变的厄米矩阵，布洛赫向量的长度恰为 1。"],
-      ["And a positive semidefinite one stays inside the ball.", "正半定矩阵则留在球内：‖bloch M‖ ≤ Re Tr M。"]
+      ["And a trace-one positive semidefinite matrix stays inside the unit ball.", "迹为 1 的正半定矩阵则留在单位球内：‖bloch M‖ ≤ Re Tr M = 1。"]
     ], "cues": [{"line": 2, "at": 3.8, "kind": "stamp"}]},
     {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
       ["Geometric Intuition of Quantum Computing, chapter twenty-six.", "《量子计算的几何直觉》· 第二十六章"]

@@ -14,7 +14,7 @@
    并通过双侧夹心积 $v \mapsto R v \widetilde{R}$ 一步算出三维方向向量 $v \in \mathbb{R}^3$ 的精确转向？
 
 ::: {.figure src="ch26-overview"}
-**图 26。** 本章地图：左栏，绿色的布洛赫球，琥珀色的纯态箭头伸到球面 $\lvert r\rvert = 1$，墨色的点在球内，正半定的矩阵都落在这里（[@prop-hermitian-bloch-geometry]、[@cor-psd-bloch-ball-bound]）；中栏，夹心积绕紫色的 $z$ 轴转 $90^\circ$，青色的影子留在轴上，品红的扇形被虚线分成两个半角；右栏，$e_1$ 依次绕 $z$、$y$、$z$ 转过 $(\alpha, \beta, \gamma) = (0.37, -0.81, 0.52)$，琥珀色的三段路停在 $R e_1 \widetilde{R}$（旋子编译是数值演示，没有冻结定理）。
+**图 26。** 本章地图：左栏，绿色的布洛赫球，琥珀色的纯态箭头伸到球面 $\lvert r\rvert = 1$，墨色的点在球内，迹为 $1$ 的正半定矩阵都落在这里（[@prop-hermitian-bloch-geometry]、[@cor-psd-bloch-ball-bound]）；中栏，夹心积绕紫色的 $z$ 轴转 $90^\circ$，青色的影子留在轴上，品红的扇形被虚线分成两个半角；右栏，$e_1$ 依次绕 $z$、$y$、$z$ 转过 $(\alpha, \beta, \gamma) = (0.37, -0.81, 0.52)$，琥珀色的三段路停在 $R e_1 \widetilde{R}$（旋子编译是数值演示，没有冻结定理）。
 :::
 
 ## 布洛赫矩阵的迹与坐标还原 {#sec-bloch-matrix-trace-and-recovery}
@@ -418,7 +418,7 @@ self_test()
 :::
 
 ::: {.film src="007-zyz-compile"}
-**把一个旋转编译成三段：ZYZ 与夹心作用（2 分 3 秒）。** 绕紫色 $z$ 轴转动时，青色的影子 $\tfrac{1}{2}e_3$ 不动，品红的那一份扫过整角，而旋转器在小圆盘上只走半角；接着琥珀色的箭头依次绕 $z$、$y$、$z$ 转过 $\gamma$、$\beta$、$\alpha$，三枚旋转器乘成一枚四系数的旋转器 $0.830 - 0.396\,e_1e_2 - 0.393\,e_1e_3 + 0.030\,e_2e_3$，夹住三根基向量即得 ZYZ 矩阵的三列；绕它自己的轴转一次 $67.9^\circ$ 落在同一点（单一转轴属于 [@rem-zyz-euler-compilation-literature] 的文献结果，旋转器编译是数值演示）；随后演示 $T$ 门与阿达玛门，最后在纯态 $\rho = \operatorname{blochMatrix}(1, v)$ 上引用本章四条冻结定理（[@thm-bloch-matrix-trace]、[@lemma-bloch-coordinate-recovery]、[@prop-hermitian-bloch-geometry]、[@cor-psd-bloch-ball-bound]）。
+**把一个旋转编译成三段：ZYZ 与夹心作用（2 分 5 秒）。** 绕紫色 $z$ 轴转动时，青色的影子 $\tfrac{1}{2}e_3$ 不动，品红的那一份扫过整角，而旋转器在小圆盘上只走半角；接着琥珀色的箭头依次绕 $z$、$y$、$z$ 转过 $\gamma$、$\beta$、$\alpha$，三枚旋转器乘成一枚四系数的旋转器 $0.830 - 0.396\,e_1e_2 - 0.393\,e_1e_3 + 0.030\,e_2e_3$，夹住三根基向量即得 ZYZ 矩阵的三列；绕它自己的轴转一次 $67.9^\circ$ 落在同一点（单一转轴属于 [@rem-zyz-euler-compilation-literature] 的文献结果，旋转器编译是数值演示）；随后演示 $T$ 门与阿达玛门，最后在纯态 $\rho = \operatorname{blochMatrix}(1, v)$ 上引用本章四条冻结定理（[@thm-bloch-matrix-trace]、[@lemma-bloch-coordinate-recovery]、[@prop-hermitian-bloch-geometry]、[@cor-psd-bloch-ball-bound]）。
 :::
 
 至此，我们已经亲手建造并运行了第七部的前两章工程构件（`GeometricState` 与 `RotorCompiler`）。从下一章开始，我们将进入第七部最庄严的收官双章——**直接打开 `trureturing@dev` 的冻结 Lean 4 源码卷宗，逐行精读并审计支撑起整部专著的公理圣殿**！让我们迈入[第二十七章](ch27-reading-frozen-proofs-i.md)。

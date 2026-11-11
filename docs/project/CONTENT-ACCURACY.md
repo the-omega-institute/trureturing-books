@@ -623,3 +623,20 @@ EPUB 浏览器预览不等于 Apple Books 原生主题验收，尚未导入 Appl
 [qg-born-reduction]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/Observer/BornReduction.lean#L27
 [qg-conditional-state]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/Observer/Conditioning.lean#L137
 [qg-trace-contract]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/Quantum/Foundation/FiniteTraceDistance.lean#L505
+
+## 第 25–28 章：迹一单位球条件的有限实施（待 initialR1）
+
+输入为 `504d7468e87214892faf0f6fadfe4724a42ef205`，pin 保持 `1d9bf98cab8306e67ec38a739359f2cdae63877a`。本次只修复确认的 `ch26-psd-unit-ball-scope`：一般正半定矩阵满足 `‖bloch M‖ ≤ Re Tr M`，单位球结论还需迹为 1；`diag(2,0)` 的 Bloch 范数和迹均为 2，是本次构造的可达性验算。第 26 章中英总览图注、图内标签/ALT、视频 007 的双语对应行现补上迹一条件，通用冻结陈述和证明保持不变。按实际 124.89 秒时间线，将视频元数据及中英视频图注仅从 2:03 对齐到 2:05；场景原有迹一混态例子、海报和算法未改。
+
+前次完整 intake 与当前修复前输入的 125 路径中 106 相同、19 改变；本批八份章节、图稿脚本、视频源码和 25 个环境 GID 的锁记录可按未变依赖保留前次源码/验算证据。改变的声明图与第 28 章派生计数已按当前规则独立核对：441 条声明、37 出版单元，数据与图稿相符；第 31–32 章只作出版依赖，不计入原 35 单元内容批准。
+
+本次实际检查包括 `./tbook check` 0 错误/0 警告、150 图完整断言/时效门禁、40 份本批 SVG XML、三个现有实验室套件 103/103、101/101、91/91（声明图慢帧另 91/91），以及新的双语 HTML/site、四版受控字体 PDF、两份 EPUBCheck 和视频 007 严格渲染/代表帧/解码/页面播放。32 个站点章节组合的 136 次嵌入载入；当前下载和媒体摘要与本次产物对应。当前总览图及声明分布图、实验室官方截图、相关 PDF 页与 EPUB 浏览器预览均已实际查看。输出身份、复用边界和未完限制详见[本批实施记录](CONTENT-ACCURACY-CH25-CH28-20261112.md)，本地证据根为 `build/accuracy-ch25-ch28-504d746/`。
+
+| 原审计集合单元 | 本次实施状态 |
+| --- | --- |
+| ch25 | 未变双语源码 intake 按依赖保留；当前媒体/输出检查完成，待 initialR1。 |
+| ch26 | 单位球缺失迹一条件已最小同步修复；当前输出检查完成，待 initialR1。 |
+| ch27 | 未变双语源码 intake 按依赖保留；当前输出检查完成，待 initialR1。 |
+| ch28 | 未变双语源码 intake 按依赖保留；当前声明图/派生计数/输出检查完成，待 initialR1。 |
+
+手机 EPUB 的公式/表格溢出、实验室固定夜间配色、受控字体与默认命令/CI 不等价、原始手稿题记出处、人工音频/完整连续字幕及原生 Apple Books/iOS/设备检查的限制均保留。本次没有批准全 35 单元或新增两章，也不变更其他批次/PR 状态。初轮三席独立审查、最终候选摘要对应和后续 Git/GitHub、CI、合入、Pages 由调用方负责；本次未执行生命周期操作或委派。
