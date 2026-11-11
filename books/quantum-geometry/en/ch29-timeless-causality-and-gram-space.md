@@ -48,21 +48,103 @@ Take the simplest isosceles right triangle: $a = 1, b = 1$, sitting along the sy
 
 Under the early Pythagorean dogma that "all is a ratio of whole numbers," there should exist positive integers $m, n$ with $(m/n)^2 = 2$, or $m^2 = 2n^2$. Placed inside the prime orthogonal coordinate lattice of Part VI (Chapter 22), the fundamental theorem of arithmetic renders an immediate verdict: each prime $p$ spans an independent orthogonal axis in $\mathbb{Q}_{>0}^\times \cong \bigoplus_p \mathbb{Z}\,\mathbf{e}_p$; along the $p = 2$ axis, the $2$-adic valuation $v_2(m^2) = 2v_2(m)$ is always **even**, whereas $v_2(2n^2) = 2v_2(n) + 1$ is always **odd**. Because an even integer can never equal an odd integer, $m^2 = 2n^2$ has no nonzero integer solution!
 
-::: {.remark #rem-ch29-pell-convergents-literature title="Continued-Fraction Convergents of the Square Root of 2 and the Unit Pell Remainder (Literature result, not formalized in this book)"}
-**Literature result, not formalized in this book.** In classical continued-fraction and quadratic Diophantine theory (outside the `trureturing@dev` formalization locked by this book), when we approximate the $45^\circ$ diagonal $\sqrt{2}$ on the discrete integer grid $\mathbb{Z}^2$, the continued-fraction convergents
+Since no ratio of whole numbers ever reaches $\sqrt{2}$, all the integer grid can still do is count in the verbal sense of `shǔ`: approach step by step and write down how far off each step remains. Strip off the integer part of $\sqrt{2}$ and what is left, $s = \sqrt{2} - 1 \approx 0.414$, is the amount by which the $45^\circ$ diagonal exceeds the unit side; read as a slope, it is the "silver slope" defined below. Line up its multiples against the integer marks: $1\cdot s \approx 0.414$ misses $0$ by $+0.414$; $2s \approx 0.828$ misses $1$ by $-0.172$; $5s \approx 2.071$ misses $2$ by $+0.071$; $12s \approx 4.971$ misses $5$ by $-0.029$. Try $m = 1, 2, 3, \dots$ in turn and keep only the multiples that come closer to an integer than every multiple before them: you get exactly $1, 2, 5, 12, \dots$ (checked by script for $m < 3000$). Each is twice its predecessor plus the one before that, and the integers they approach, $0, 1, 2, 5, \dots$, are the same sequence shifted back by one. At every step the error changes sign and shrinks by a factor of $s$: smaller and smaller, but never zero. The frozen definitions and theorems below turn this counting machine into exact statements.
+
+::: {.definition #def-ch29-pell-silver-slope title="Pell Numbers, Companion Pell Numbers, and the Silver Slope" lean="D5/S1/Recurrence/PellCompanionGcd.P D5/S1/Recurrence/PellCompanionGcd.Q D5/S1/Words/Mechanical/SilverSlopeAbelianPeriodDefs.silverSlope"}
+The Pell numbers $P : \mathbb{N} \to \mathbb{N}$ and the companion Pell numbers $Q : \mathbb{N} \to \mathbb{N}$ obey the same second-order recurrence with different initial values:
 
 $$
-\frac{m_k}{n_k} = \frac{1}{1},\; \frac{3}{2},\; \frac{7}{5},\; \frac{17}{12},\; \frac{41}{29},\; \frac{99}{70},\; \dots
+\begin{aligned}
+&P_0 = 0,\quad P_1 = 1,\quad P_{n+2} = 2P_{n+1} + P_n,\\
+&Q_0 = 1,\quad Q_1 = 1,\quad Q_{n+2} = 2Q_{n+1} + Q_n.
+\end{aligned}
 $$
 
-leave at every stage $k$ an indestructible unit arithmetic crack governed by **Pell's equation**:
+The silver slope is the real number $s = \sqrt{2} - 1$.
+:::
+
+Thus $P = 0, 1, 2, 5, 12, 29, 70, 169, \dots$ and $Q = 1, 1, 3, 7, 17, 41, 99, 239, \dots$.
+
+::: {.lemma #lem-ch29-pell-companion-step title="First-Order Cross Recurrence and Coprimality of Pell and Companion Pell Numbers" lean="D5/S1/Recurrence/PellCompanionGcd.pell_companion_step D5/S1/Recurrence/PellCompanionGcd.pell_companion_coprime"}
+For every natural number $n$,
 
 $$
-1^2 - 2(1^2) = -1,\quad 3^2 - 2(2^2) = +1,\quad 7^2 - 2(5^2) = -1,\quad 17^2 - 2(12^2) = +1,\quad \dots,\quad m_k^2 - 2n_k^2 = (-1)^k.
+P_{n+1} = P_n + Q_n,\qquad Q_{n+1} = 2P_n + Q_n,
+$$
+
+and $P_n$ and $Q_n$ are coprime: $\gcd(P_n, Q_n) = 1$.
+:::
+
+::: proof
+Both recurrences are proved together by induction on $n$. For $n = 0$, $P_1 = 1 = P_0 + Q_0$ and $Q_1 = 1 = 2P_0 + Q_0$. The inductive step unfolds $P_{n+2}$ and $Q_{n+2}$ by definition and substitutes the induction hypothesis; both sides become the same linear combination of $P_n$ and $Q_n$, and linear arithmetic (`omega`) closes the goal. Coprimality is again an induction on $n$: $\gcd(0, 1) = 1$; in the inductive step the recurrence just proved writes the pair as $\bigl(P_n + Q_n,\ P_n + (P_n + Q_n)\bigr)$, and subtracting the first number from the second, then $P_n$ from the first, leaves the gcd unchanged, so the goal falls back to $\gcd(Q_n, P_n) = 1$. This is the Euclidean algorithm run one step backwards. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-ch29-silver-pell-remainder title="The Pell Remainder of the Silver Slope: Exact Error, $\pm 1$ Determinant, and Phase Mass" lean="D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silverPell_error_formula D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silverPell_determinant D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silver_phase_mass"}
+For every natural number $k$:
+
+1. in $\mathbb{R}$, $P_{k+1}\,s - P_k = (-1)^k\,s^{k+1}$;
+2. in $\mathbb{Z}$, $P_{k+2}\,P_k - P_{k+1}^2 = (-1)^{k+1}$;
+3. in $\mathbb{R}$, $\bigl(P_{k+2} + s\,P_{k+1}\bigr)\,s^{k+1} = 1$.
+:::
+
+::: proof
+All three use only two facts: the recurrence $P_{n+2} = 2P_{n+1} + P_n$, and the quadratic relation $s^2 + 2s = 1$, which follows from $(\sqrt{2})^2 = 2$. For item 1, Lean first proves the two-step recurrence $P_{k+3}\,s - P_{k+2} = s^2\,(P_{k+1}\,s - P_k)$, unfolding the recurrence and simplifying with $s^2 = 1 - 2s$ and $s^3 = 5s - 2$. Strong induction on $k$ then finishes: for $k = 0$, $1\cdot s - 0 = s$; for $k = 1$, $2s - 1 = -s^2$; after that, every two steps multiply the error by $s^2$ and leave the sign $(-1)^k$ unchanged. Item 2 is an induction on $k$: for $k = 0$, $P_2P_0 - P_1^2 = -1$; in the inductive step, substituting the recurrence for $P_{k+3}$ and $P_{k+2}$ shows by ring arithmetic that the new determinant is exactly the negative of the old one, so the sign flips at every step. Item 3 is also an induction on $k$: for $k = 0$, $(2 + s)\,s = 1$; after substituting $P_{k+3} = 2P_{k+2} + P_{k+1}$, the inductive step differs from the previous one by $P_{k+2}\,s^{k+1}(s^2 + 2s - 1) = 0$, so the left side falls back to the previous value $1$. The full proof is checked by the Lean kernel.
+:::
+
+**From the error to the unit remainder (a manual derivation).** By [@lem-ch29-pell-companion-step], $Q_{k+1} = 2P_k + Q_k = P_k + P_{k+1}$, so item 1 is the error of $\sqrt{2}$ itself: $P_{k+1}\,s - P_k = P_{k+1}\sqrt{2} - Q_{k+1}$. Likewise $P_{k+2} - P_{k+1} = Q_{k+1}$, so the bracket in item 3 is $P_{k+2} + s\,P_{k+1} = Q_{k+1} + P_{k+1}\sqrt{2}$. Multiplying the two:
+
+$$
+\begin{aligned}
+Q_{k+1}^2 - 2P_{k+1}^2
+&= \bigl(Q_{k+1} - P_{k+1}\sqrt{2}\bigr)\bigl(Q_{k+1} + P_{k+1}\sqrt{2}\bigr)\\
+&= -(-1)^k\,s^{k+1}\bigl(P_{k+2} + s\,P_{k+1}\bigr) = (-1)^{k+1}.
+\end{aligned}
+$$
+
+With $n = k + 1$ this is the unit Pell remainder $Q_n^2 - 2P_n^2 = (-1)^n$ for $n \ge 1$: $1^2 - 2\cdot 1^2 = -1$, $3^2 - 2\cdot 2^2 = +1$, $7^2 - 2\cdot 5^2 = -1$, …, $99^2 - 2\cdot 70^2 = 9801 - 9800 = +1$. The narrow side $Q_n - P_n\sqrt{2} = (-1)^n s^n$ measures how far the lattice point $(P_n, Q_n)$ sits off the line $Q = \sqrt{2}\,P$; it changes sign and shrinks by a factor of $s$ at each step. The wide side $Q_n + P_n\sqrt{2} = s^{-n} = (1 + \sqrt{2})^n$ (item 3, using $s\,(1 + \sqrt{2}) = 1$) grows by a factor of $1 + \sqrt{2}$ at each step. Their product is always $\pm 1$: the error cannot vanish, because multiplied by a finite wide side it must still give $\pm 1$. Without items 1 and 3, item 2 together with [@lem-ch29-pell-companion-step] leads to the same conclusion: substituting $Q_n = P_{n+1} - P_n$ and $P_{n+2} = 2P_{n+1} + P_n$ gives $Q_n^2 - 2P_n^2 = -\bigl(P_{n+2}P_n - P_{n+1}^2\bigr) = (-1)^n$, and this route covers $n = 0$ as well ($1^2 - 2\cdot 0^2 = 1$).
+
+The error never vanishes, but is it the smallest possible? The next theorem says yes: until the next Pell number, no multiple comes closer to an integer.
+
+::: {.theorem #thm-ch29-silver-best-approximation title="Best-Approximation Lower Bound for the Silver Slope" lean="D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silver_best_approximation"}
+Let $k, m$ be natural numbers with $0 < m < P_{k+2}$. Then for every integer $z$, in $\mathbb{R}$,
+
+$$
+s^{k+1} \le |m\,s - z|.
 $$
 :::
 
-The classical continued-fraction phenomenon in [@rem-ch29-pell-convergents-literature] echoes the golden-integer Pell identity $(2a + b)^2 - 5b^2 = 4\operatorname{norm}(g)$ proved in Chapter 23 ([`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)): any attempt to stitch a $90^\circ$ orthogonal area rotation onto a one-dimensional integer grid leaves an irreducible unit arithmetic seam. What Hippasus uncovered was not the failure of mathematics, but **the first seam of a larger sphere breaking through the static rational sphere**.
+::: proof
+The core is an integer-lattice lemma that knows nothing about $\sqrt{2}$ (`unimodular_opposite_error_bound`): let $\alpha, d, e$ be real numbers and let the integer pairs $(q, p)$ and $(q', p')$ satisfy $qp' - pq' = 1$, $q' > 0$, $0 < m < q$, and have errors of opposite signs, $q\alpha - p = d > 0$ and $q'\alpha - p' = -e < 0$; then $e \le |m\alpha - z|$ for every integer $z$. The reason is that an integer matrix of determinant $1$ is invertible over the integers: $(m, z) = a\,(q, p) + b\,(q', p')$ with integers $a = mp' - zq'$ and $b = zq - mp$, and the errors combine with the same coefficients, $m\alpha - z = ad - be$. Since $0 < m = aq + bq' < q$, $a \ge 1$ forces $b \le -1$, and $a \le 0$ forces $b \ge 1$. In both cases $ad$ and $-be$ never have opposite signs, so they cannot cancel, and $|be| \ge e$; hence the absolute value is at least $e$. For the silver slope, take the neighbouring pairs $(P_{k+2}, P_{k+1})$ and $(P_{k+1}, P_k)$: item 1 of [@thm-ch29-silver-pell-remainder] gives the opposite errors $(-1)^{k+1}s^{k+2}$ and $(-1)^k s^{k+1}$, and item 2 gives the determinant $(-1)^{k+1}$. For odd $k$ the lemma applies directly; for even $k$ the determinant is $-1$, and Lean negates $s$, the second entries of both pairs, and $z$ before applying it, then restores the original quantity with $|-x| = |x|$. The positivity $P_{k+1}, P_{k+2} > 0$ comes from $P_{n+1} = P_n + Q_n$ together with the oddness of $Q_n$ (`companion_odd`). The full proof is checked by the Lean kernel.
+:::
+
+(A manual derivation.) Because $m\,s - z = m\sqrt{2} - (m + z)$ and $m + z$ runs over all integers as $z$ does, [@thm-ch29-silver-best-approximation] says: for $0 < m < P_{k+2}$, the distance from $m\sqrt{2}$ to the nearest integer is at least $s^{k+1}$. By the error formula, $m = P_{k+1}$ and $z = P_k$ attain this bound exactly (and $0 < P_{k+1} < P_{k+2}$, so this $m$ is admissible); hence no denominator in this range approximates better than $P_{k+1}$, and the first denominator that does better is the next Pell number $P_{k+2}$, whose error is $s^{k+2}$.
+
+::: {.example #ex-ch29-silver-pell-table title="Counting Out the First Six Steps"}
+Let $\delta_k$ be the minimum of $|m\,s - z|$ over $0 < m < P_{k+2}$ and $z \in \mathbb{Z}$, found by a script that runs through every $m$. Decimals are rounded to the digits shown:
+
+| $k$ | $Q_{k+1}/P_{k+1}$ | $P_{k+1}\,s - P_k$ | $Q_{k+1}^2 - 2P_{k+1}^2$ | $P_{k+2}$ | $\delta_k$ |
+| :-: | :-: | --: | :-: | --: | --: |
+| $0$ | $1/1$ | $+0.41421356$ | $-1$ | $2$ | $0.41421356$ |
+| $1$ | $3/2$ | $-0.17157288$ | $+1$ | $5$ | $0.17157288$ |
+| $2$ | $7/5$ | $+0.071067812$ | $-1$ | $12$ | $0.071067812$ |
+| $3$ | $17/12$ | $-0.029437252$ | $+1$ | $29$ | $0.029437252$ |
+| $4$ | $41/29$ | $+0.012193309$ | $-1$ | $70$ | $0.012193309$ |
+| $5$ | $99/70$ | $-0.0050506339$ | $+1$ | $169$ | $0.0050506339$ |
+
+The error column alternates in sign, and its absolute value shrinks by a factor of $s \approx 0.414$ from row to row; the fourth column takes only the values $\pm 1$; the last column equals the absolute error, and in these six rows the minimum is attained only at $m = P_{k+1}$ (the uniqueness is an observation from the enumeration; the two theorems guarantee only that the minimum equals $s^{k+1}$ and is attained at $m = P_{k+1}$). For $k = 1$, for instance, only $m = 1, 2, 3, 4$ are allowed, at distances $0.41421356$, $0.17157288$, $0.24264069$ and $0.34314575$, and the smallest is exactly $m = P_2 = 2$. The row $k = 5$ can also be checked in integers: the determinant is $P_7P_5 - P_6^2 = 169\cdot 29 - 70^2 = 4901 - 4900 = 1$, and the phase-mass bracket $P_7 + s\,P_6 = 99 + 70\sqrt{2} \approx 197.99495$ times $s^6 \approx 0.0050506339$ is exactly $1$.
+:::
+
+::: {.remark #rem-ch29-pell-convergents-literature title="$Q_n/P_n$ and the Continued-Fraction Convergents of $\sqrt{2}$ (Literature result, not formalized in this book)"}
+**Literature result, not formalized in this book.** Classical continued-fraction theory gives
+
+$$
+\sqrt{2} = 1 + \dfrac{1}{2 + \dfrac{1}{2 + \dfrac{1}{2 + \cdots}}},
+$$
+
+whose convergents are $1/1,\ 3/2,\ 7/5,\ 17/12,\ 41/29,\ 99/70,\ \dots$; counting from $1/1$, the $n$-th convergent is exactly $Q_n/P_n$. Lagrange's theorem from the general theory adds that every best approximation of the second kind of an irrational number $\alpha$ (a fraction $p/q$ with $|q\alpha - p| < |q'\alpha - p'|$ for every other fraction $p'/q'$ whose denominator does not exceed $q$) is a convergent. The pinned Lean library proves [@lem-ch29-pell-companion-step], [@thm-ch29-silver-pell-remainder] and [@thm-ch29-silver-best-approximation] from the recurrence alone and does not match $P, Q$ with Mathlib's continued-fraction expansion (the source file states that this identification is unproved). The identification "$Q_n/P_n$ are the continued-fraction convergents of $\sqrt{2}$" and the general theory of best approximation therefore remain literature results; the unit remainder $Q_n^2 - 2P_n^2 = (-1)^n$ and the best-approximation lower bound above do not depend on them.
+:::
+
+The determinant $P_{k+2}P_k - P_{k+1}^2 = (-1)^{k+1}$ of [@thm-ch29-silver-pell-remainder] has exactly the shape of the Fibonacci–Cassini identity $F_kF_{k+2} - F_{k+1}^2 = (-1)^{k+1}$ of the [Coda](coda.md), and its unit remainder echoes the golden-integer Pell identity $(2a + b)^2 - 5b^2 = 4\operatorname{norm}(g)$ proved in Chapter 23 ([`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)): any attempt to stitch a $90^\circ$ orthogonal area rotation onto a one-dimensional integer grid leaves an irreducible unit arithmetic seam. What Hippasus uncovered was not the failure of mathematics, but **the first seam of a larger sphere breaking through the static rational sphere**.
 
 ::: {.viz src="pythagoras-number-escape" preset="hippasus" height="500"}
 **Always one cell off.** The convergents $1/1, 3/2, 7/5, 17/12, \dots$ hug the line $m = \sqrt{2}\,n$ ever more closely; the two bands on the right are the cell counts $m^2$ and $2n^2$, and in the magnifier they are always one cell apart.
@@ -84,7 +166,7 @@ When "number" is reduced to a static noun (`shù`), every number system is inevi
 
 | Sphere Tier | Number Domain & Landmark Constants | Generative Geometric / Algebraic Operator (Verb `shǔ`) | Internal Closure Law (Noun `shù`) | The Crack & Remainder Forcing Escape to the Next Sphere |
 | :--- | :--- | :--- | :--- | :--- |
-| **Tier 1 Sphere** | Integers $\mathbb{Z}$ & Rationals $\mathbb{Q}$<br/>(ratio marks $m/n$) | $0^\circ$ collinear Euclidean algorithm and linear addition/subtraction | Finite commensurable closure on a 1D rational ruler: $n \cdot (m/n) = m$ | $90^\circ$ orthogonal Pythagorean squaring $1^2 + 1^2 = 2$ triggers a $2$-adic parity clash (for the continued-fraction Pell seam, see [@rem-ch29-pell-convergents-literature]) |
+| **Tier 1 Sphere** | Integers $\mathbb{Z}$ & Rationals $\mathbb{Q}$<br/>(ratio marks $m/n$) | $0^\circ$ collinear Euclidean algorithm and linear addition/subtraction | Finite commensurable closure on a 1D rational ruler: $n \cdot (m/n) = m$ | $90^\circ$ orthogonal Pythagorean squaring $1^2 + 1^2 = 2$ triggers a $2$-adic parity clash (for the Pell remainder, see [@thm-ch29-silver-pell-remainder]; for the continued-fraction identification, [@rem-ch29-pell-convergents-literature]) |
 | **Tier 2 Sphere** | Algebraic Irrationals $\overline{\mathbb{Q}}$<br/>(diagonal $\sqrt{2}$, golden ratio $\varphi = \frac{1+\sqrt{5}}{2}$) | Finite-dimensional orthogonal Pythagorean area conservation $a^2 + b^2 = c^2$ and polynomial root extraction | Finite algebraic polyhedral closure: $x^2 - 2 = 0$, $x^2 - x - 1 = 0$ ([`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique)) | Infinite $2^k$-gon cyclotomic halving limit (for classical arc-transcendence literature notes, see [@rem-banach-dottie-hairy-ball-literature]) |
 | **Tier 3 Sphere** | Elementary Period Constants<br/>(circle constant $\pi$, natural base $e$) | Infinite Pythagorean half-angle iteration $\sin(\theta/2) = \sqrt{(1-\cos\theta)/2}$ and exponential map $e^{i\theta} = \cos\theta + i\sin\theta$ | Static unit-circle and spherical period closure: $e^{i\pi} + 1 = 0$, $\cos(\pi/2) = 0$ | Arc input $\theta$ and chord projection $\cos\theta$ remain split across the operator (for nonzero algebraic residuals, see [@rem-banach-dottie-hairy-ball-literature]) |
 | **Tier 4 Sphere** | Self-Referential Cosine Fixed Point<br/>(Dottie constant $\theta^*$) | Self-referential feedback $\theta_{k+1} = \cos(\theta_k)$ equating the Pythagorean leg projection $\cos\theta$ with the arc angle $\theta$ itself | Operator-coordinate unification: $\cos(\theta^*) = \theta^*$ (the real-axis projection of $\psi = \psi(\psi)$) | Classical transcendence literature in [@rem-banach-dottie-hairy-ball-literature]; algebraic-independence frontier with $\pi, e$ in open conjecture [@conj-schanuel-dottie] (`OPEN`) |
@@ -101,7 +183,7 @@ Seen through this four-tier table, Pythagoras and the overarching thesis of this
 
 ## The $\pm 1$ Arithmetic Seam, Prime Duality, and the $S^3$ Projection on Elliptic Curve Tori {#sec-coda-primes-elliptic-curves}
 
-When we look closely at the Pell remainder $m^2 - 2n^2 = \pm 1$ left by Hippasus on the integer grid, a deeper arithmetic question immediately arises: **is this oscillation between $+1$ and $-1$ an isolated quirk of $\sqrt{2}$, or does the $\pm 1$ seam govern the splitting of prime numbers, the topology of elliptic curves, and the $\cos\theta$ projection that runs through the entire book?**
+When we look closely at the Pell remainder $m^2 - 2n^2 = \pm 1$ ([@thm-ch29-silver-pell-remainder]) left by Hippasus on the integer grid, a deeper arithmetic question immediately arises: **is this oscillation between $+1$ and $-1$ an isolated quirk of $\sqrt{2}$, or does the $\pm 1$ seam govern the splitting of prime numbers, the topology of elliptic curves, and the $\cos\theta$ projection that runs through the entire book?**
 
 Following this $\pm 1$ crack uncovers three structural bridges uniting number theory, algebraic geometry, and quantum spinor geometry.
 
@@ -119,29 +201,108 @@ $$
 m^2 - p\,n^2 = \pm 1.
 $$
 
-At first glance, the right-hand side is merely a sign choice between $+1$ and $-1$. Yet in the two-dimensional Clifford exterior plane, $-1$ is the square of the skew-adjoint unitary complex structure (the bivector imaginary generator) $\hat{\mathbf{I}}$, namely $\hat{\mathbf{I}}^2 = -1$ ([`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary))! Depending on whether $\sqrt{-1}$ exists modulo $p$—that is, whether the Legendre symbol $\left(\frac{-1}{p}\right) = (-1)^{(p-1)/2}$ equals $+1$ or $-1$—the $\pm 1$ seam splits all odd primes into two families of distinct geometric dimension:
+At first glance, the right-hand side is merely a sign choice between $+1$ and $-1$. Yet in the two-dimensional Clifford exterior plane, $-1$ is the square of the skew-adjoint unitary complex structure (the bivector imaginary generator) $\hat{\mathbf{I}}$, namely $\hat{\mathbf{I}}^2 = -1$ ([`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary))! Depending on whether $\sqrt{-1}$ exists modulo $p$—that is, whether the Legendre symbol $\left(\frac{-1}{p}\right) = (-1)^{(p-1)/2}$ equals $+1$ or $-1$, a dividing line that manual derivation 2 below obtains from frozen theorems—the $\pm 1$ seam splits all odd primes into two families of distinct geometric dimension:
 
-::: {.remark #rem-ch29-pell-primes-hilbert-literature title="Fermat's Two-Square Prime Splitting, the Odd-Prime Negative Pell Equation, and Hilbert Reciprocity (Literature result, not formalized in this book)"}
-**Literature result, not formalized in this book.** In classical algebraic number theory and class field theory, the mod-$4$ quadratic-residue bifurcation of odd primes and the local-to-global conservation of quadratic Hilbert symbols are given by the following literature theorems (outside the `trureturing@dev` formalization locked by this book):
+**Plane primes** are the odd primes with $p \equiv 1 \pmod 4$ ($5, 13, 17, 29, 37, \dots$); **line primes** are the odd primes with $p \equiv 3 \pmod 4$ ($3, 7, 11, 19, 23, \dots$). The core of this dichotomy is frozen at the pinned `trureturing@dev` commit, and each of the two lemmas and two theorems below is checked by the Lean kernel. Start with the plainest mechanism: put the squares of the integers on a clock face with only four slots, the residues modulo $4$. The square of an even number $2k$ is $4k^2$ and lands in slot $0$; the square of an odd number $2k + 1$ is $4(k^2 + k) + 1$ and lands in slot $1$. A sum of two squares can therefore only land in slots $0$, $1$ or $2$; slot $3$ stays empty forever.
 
-1. **Split "Plane Primes" ($p \equiv 1 \pmod 4$, such as $5, 13, 17, 29, 37, \dots$; while the even prime $p = 2 = -i(1+i)^2 = 1^2 + 1^2$ is the ramified bridge prime)**:
-   For odd primes $p \equiv 1 \pmod 4$, $\left(\frac{-1}{p}\right) = +1$, so $x^2 \equiv -1 \pmod p$ is solvable and mod-$p$ arithmetic admits the 2D rotation generator $\hat{\mathbf{I}}^2 = -1$. By Fermat's two-square theorem, every such odd prime splits in the Gaussian integer plane $\mathbb{Z}[i]$ into a pair of distinct conjugate Gaussian primes (while $p = 2 = (1+i)(1-i)$ ramifies):
+::: {.lemma #lem-ch29-square-residues-mod-four title="Squares Are 0 or 1 Modulo 4, and a Sum of Two Squares Is Never 3 Modulo 4" lean="D5/S3/PrimeForms/QuadraticResidues.square_residues_and_sum_obstruction"}
+For every natural number $n$, either $n^2 \bmod 4 = 0$ or $n^2 \bmod 4 = 1$; and for all natural numbers $a, b$, $(a^2 + b^2) \bmod 4 \neq 3$.
+:::
 
-   $$
-   p = a^2 + b^2 = (a + b\hat{\mathbf{I}})(a - b\hat{\mathbf{I}}),
-   $$
+::: proof
+The Lean proof is the clock face above. Write $n = r + 2k$, where $r \in \{0, 1\}$ is the remainder of $n$ on division by $2$; expand the square in the cases $r = 0$ and $r = 1$ (`ring_nf`) and read off the remainders $0$ and $1$ (`omega`). For the second part, the residues of $a^2$ and $b^2$ each take one of two values, and the four combinations sum to $0, 1, 1, 2$, never to $3$. The full proof is checked by the Lean kernel.
+:::
 
-   admitting the geometric reading of a **two-dimensional Pythagorean hypotenuse square (a Plane Prime)**. Consequently, in the real quadratic field $\mathbb{Q}(\sqrt{p})$, the **negative Pell equation $m^2 - p\,n^2 = -1$ is always solvable in integers** (for instance, $2^2 - 5\cdot 1^2 = -1$ for $p=5$; $18^2 - 13\cdot 5^2 = -1$ for $p=13$; $4^2 - 17\cdot 1^2 = -1$ for $p=17$). Its fundamental unit has norm $-1$ (an orientation-reversing glide reflection) whose square $(-1)^2 = +1$ restores pure rotation.
-2. **Inert "Line Primes" ($p \equiv 3 \pmod 4$, such as $3, 7, 11, 19, 23, \dots$)**:
-   Here $\left(\frac{-1}{p}\right) = -1$, so no $90^\circ$ rotation operator $\sqrt{-1}$ exists modulo $p$. Such a prime cannot be written as a sum of two squares and remains an indecomposable **one-dimensional rigid scalar (a Line Prime)** in $\mathbb{Z}[i]$. Because $m^2 - p\,n^2 \equiv m^2 \pmod p$ can never be congruent to $-1$, the **negative Pell equation $m^2 - p\,n^2 = -1$ has no integer solutions**, locking all lattice approximations to $\sqrt{p}$ onto the $+1$ branch $m^2 - p\,n^2 = +1$ (e.g., $2^2 - 3\cdot 1^2 = +1$ for $p=3$, $8^2 - 7\cdot 3^2 = +1$ for $p=7$).
+The clock face shows at once that a line prime **cannot** be a sum of two squares: $p \bmod 4 = 3$ is exactly the empty slot. The converse direction, that a plane prime **always** is one, cannot be read off the clock face; it requires that arithmetic modulo $p$ really contain a $90^\circ$ rotation.
 
-3. **Hilbert Reciprocity Law**: Globally across all prime places $v = p$ and the real archimedean place $v = \infty$ of $\mathbb{Q}$, class field theory establishes that for any nonzero rationals $a, b \in \mathbb{Q}^\times$, the product of the local Hilbert symbols $(a, b)_v \in \{+1, -1\}$ over all places equals $+1$:
+::: {.theorem #thm-ch29-face-prime-two-squares title="A Prime Congruent to 1 Modulo 4 Is a Sum of Two Squares; a Gaussian Integer Times Its Conjugate Is a Sum of Two Squares" lean="D5/S3/PrimeForms/SumTwoSquares.prime_eq_sq_add_sq_of_mod_four_eq_one D5/S3/PrimeForms/GaussianIntegers/GaussianIntegerNorm.gaussian_integer_mul_conj_eq_sq_add_sq"}
+1. Let $p$ be a prime natural number with $p \bmod 4 = 1$. Then there are natural numbers $a, b$ with $p = a^2 + b^2$.
+2. For all integers $a, b$, in the complex numbers $\mathbb{C}$, $(a + bi)\,\overline{(a + bi)} = a^2 + b^2$.
+:::
+
+::: proof
+In the Lean file, part 1 is a single wrapper: $p \bmod 4 = 1$ gives $p \bmod 4 \neq 3$, and Mathlib's version of Fermat's two-square theorem, `Nat.Prime.sq_add_sq`, does the rest. Mathlib argues in the Gaussian integers $\mathbb{Z}[i]$. Since $p \bmod 4 \neq 3$, $-1$ is a square modulo $p$ (`ZMod.exists_sq_eq_neg_one_iff`), so there is $0 \le k < p$ with $p \mid k^2 + 1 = (k + i)(k - i)$. Both factors have norm $k^2 + 1$, smaller than the norm $p^2$ of $p$, so $p$ divides neither of them, and $p$ is not a prime element of $\mathbb{Z}[i]$. In the Euclidean ring $\mathbb{Z}[i]$ this means $p$ is reducible: $p = uv$ with neither $u$ nor $v$ a unit. Taking norms, $N(u)\,N(v) = p^2$ with neither factor equal to $1$, which forces $N(u) = p$; taking $a$ and $b$ to be the absolute values of the real and imaginary parts of $u$ gives $p = a^2 + b^2$. Part 2 rewrites $z\,\overline{z}$ as the squared modulus with `Complex.mul_conj` and evaluates the squared modulus of $z = a + bi$ as $a^2 + b^2$ (`norm_num`). The full proof is checked by the Lean kernel.
+:::
+
+Geometrically, $p = a^2 + b^2$ says that the circle of radius $\sqrt{p}$ passes through the lattice point $(a, b)$; part 2 writes this as the product of a conjugate pair of vectors in the Gaussian plane, $p = (a + bi)(a - bi)$. Read $i$ as the bivector generator $\hat{\mathbf{I}}$ introduced above, and the prime $p$ spans an orthogonal face: hence the name "plane prime." A line prime, in turn, has an even stronger rigidity: not only is it not a sum of two squares itself, but as soon as it divides a sum of two squares it must divide both legs.
+
+::: {.lemma #lem-ch29-line-prime-descent title="A Prime Congruent to 3 Modulo 4 That Divides a Sum of Two Squares Divides Both Bases" lean="D5/S3/PrimeForms/ThreeModFourDescent.prime_dvd_dvd_of_dvd_sq_add_sq"}
+Let $q$ be a prime with $q \bmod 4 = 3$, and let $a, b$ be natural numbers. If $q \mid a^2 + b^2$, then $q \mid a$ and $q \mid b$.
+:::
+
+::: proof
+Move the divisibility into the finite field $\mathbb{Z}/q\mathbb{Z}$ (`ZMod q` in Lean), where it reads $a^2 + b^2 = 0$. If $b \neq 0$, then $b$ is invertible and $a^2 = -b^2$ gives $(a\,b^{-1})^2 = -1$, so $-1$ is a square modulo $q$; Mathlib's `ZMod.mod_four_ne_three_of_sq_eq_neg_sq'` then yields $q \bmod 4 \neq 3$, contradicting the hypothesis. Hence $b = 0$, so $a^2 = 0$, and since a field has no zero divisors, $a = 0$. Finally $a = 0$ and $b = 0$ translate back to $q \mid a$ and $q \mid b$. The full proof is checked by the Lean kernel.
+:::
+
+Putting the behaviour of the two kinds of prime together yields a criterion for every natural number: plane primes and $2 = 1^2 + 1^2$ may be multiplied in freely, while line primes can only enter in pairs.
+
+::: {.theorem #thm-ch29-two-squares-classification title="The Prime-Factorization Criterion for Sums of Two Squares" lean="D5/S3/PrimeForms/SumTwoSquaresClassification.eq_sq_add_sq_iff_even_factorization"}
+For a natural number $n$ and a prime $q$, let $v_q(n)$ denote the exponent of $q$ in the prime factorization of $n$ ($0$ when $q \nmid n$; by Lean's convention, every exponent of $n = 0$ is $0$). Then for every natural number $n$: there are natural numbers $a, b$ with $n = a^2 + b^2$ if and only if $v_q(n)$ is even for every prime $q$ with $q \bmod 4 = 3$.
+:::
+
+::: proof
+The Lean file only changes the form of the statement. Mathlib's `Nat.eq_sq_add_sq_iff` states the condition only for the primes dividing $n$ and measures exponents with the $p$-adic valuation `padicValNat`; the wrapper restates it for all primes: for a prime dividing $n$ the two exponents agree (`Nat.factorization_def`), a prime not dividing $n$ has exponent $0$ (`Nat.factorization_eq_zero_of_not_dvd`), and for $n = 0$ both sides hold. The mathematics lives in Mathlib's proof, which passes through the intermediate form "$n = g^2 m$ with $-1$ a square modulo $m$." For $\Rightarrow$: if $n = x^2 + y^2 > 0$, pull out $g = \gcd(x, y)$; in the remaining $m = x_1^2 + y_1^2$ the numbers $x_1, y_1$ are coprime and $-1$ is a square modulo $m$. A prime congruent to $3$ modulo $4$ dividing $m$ would make $-1$ a square modulo that prime, which is impossible, so $v_q(n) = 2v_q(g)$. For $\Leftarrow$: write $n$ as a square times a squarefree $m$. The exponent condition leaves $m$ with no prime factor congruent to $3$ modulo $4$, so $-1$ is a square modulo each prime factor of $m$, and by the Chinese remainder theorem also modulo $m$. Induction over the prime factors of $m$ then finishes: each prime factor is a sum of two squares (Fermat's theorem), and a product of sums of two squares is again one,
+
+$$
+(x^2 + y^2)(u^2 + v^2) = (xu - yv)^2 + (xv + yu)^2,
+$$
+
+after which the square factor is multiplied back in. The full proof is checked by the Lean kernel.
+:::
+
+**Three manual derivations.** The following three statements are not frozen as such; apart from elementary congruence arithmetic, they use only the lemmas and theorems above (the derivations themselves are this book's manual derivations):
+
+1. **An odd prime $p$ is a sum of two squares if and only if $p \equiv 1 \pmod 4$.** Sufficiency is part 1 of [@thm-ch29-face-prime-two-squares]; necessity comes from [@lem-ch29-square-residues-mod-four]: an odd prime leaves remainder $1$ or $3$ modulo $4$, and slot $3$ is empty.
+2. **For an odd prime $p$, the congruence $x^2 \equiv -1 \pmod p$ is solvable if and only if $p \equiv 1 \pmod 4$.** If $p \equiv 1$, take $p = a^2 + b^2$. Here $b = 0$ would make the prime $p = a^2$ a perfect square, and $b^2 \le p < p^2$ gives $b < p$; so $0 < b < p$ and $b$ is invertible modulo $p$. From $a^2 \equiv -b^2$, the residue $x \equiv a\,b^{-1}$ satisfies $x^2 \equiv -1$. If $p \equiv 3$ and $x^2 \equiv -1$ with $0 \le x < p$, then $p \mid x^2 + 1^2$, and [@lem-ch29-line-prime-descent] gives $p \mid 1$, a contradiction. This is precisely the dividing line, drawn above, between primes modulo which $\sqrt{-1}$ exists and those modulo which it does not.
+3. **For a line prime the negative Pell equation has no solution: if $p \equiv 3 \pmod 4$, then $m^2 - p\,n^2 = -1$ has no integer solution.** Otherwise $m^2 + 1 = p\,n^2$, so $p \mid \lvert m\rvert^2 + 1^2$, and [@lem-ch29-line-prime-descent] again gives $p \mid 1$. The value $+1$, on the other hand, is reached, for instance $2^2 - 3 \cdot 1^2 = +1$ and $8^2 - 7 \cdot 3^2 = +1$.
+
+::: {.example #ex-ch29-face-and-line-primes title="The Two Legs of a Plane Prime, the 90° Rotation Modulo p, and the Four Years 2024 to 2027"}
+For the first five plane primes, here are the decomposition, the $\sqrt{-1}$ built by manual derivation 2, and, for comparison with the literature remark below, the least positive solution of the negative Pell equation (the one with the smallest $n \ge 1$; every entry can be checked directly in exact integer arithmetic):
+
+| $p$ | $p = a^2 + b^2$ | $p = (a + bi)(a - bi)$ | $x \equiv \pm a\,b^{-1}$, $x < p/2$ | $x^2 + 1$ | least negative-Pell $(m, n)$ |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| $5$ | $1^2 + 2^2$ | $(1 + 2i)(1 - 2i)$ | $2$ | $5 = 1 \cdot 5$ | $(2, 1)$ |
+| $13$ | $2^2 + 3^2$ | $(2 + 3i)(2 - 3i)$ | $5$ | $26 = 2 \cdot 13$ | $(18, 5)$ |
+| $17$ | $1^2 + 4^2$ | $(1 + 4i)(1 - 4i)$ | $4$ | $17 = 1 \cdot 17$ | $(4, 1)$ |
+| $29$ | $2^2 + 5^2$ | $(2 + 5i)(2 - 5i)$ | $12$ | $145 = 5 \cdot 29$ | $(70, 13)$ |
+| $37$ | $1^2 + 6^2$ | $(1 + 6i)(1 - 6i)$ | $6$ | $37 = 1 \cdot 37$ | $(6, 1)$ |
+
+For the line primes $3, 7, 11, 19, 23$ not a single row can be filled in: the second column is blocked by [@lem-ch29-square-residues-mod-four], and the fourth and last columns are ruled out by manual derivations 2 and 3.
+
+Now apply [@thm-ch29-two-squares-classification] to a few specific numbers:
+
+| $n$ | $n \bmod 4$ | factorization | exponents at primes $\equiv 3 \pmod 4$ | as two squares |
+| :---: | :---: | :---: | :---: | :---: |
+| $45$ | $1$ | $3^2 \cdot 5$ | $v_3 = 2$ | $3^2 + 6^2$ |
+| $2024$ | $0$ | $2^3 \cdot 11 \cdot 23$ | $v_{11} = 1$, $v_{23} = 1$ | no |
+| $2025$ | $1$ | $3^4 \cdot 5^2$ | $v_3 = 4$ | $0^2 + 45^2 = 27^2 + 36^2$ |
+| $2026$ | $2$ | $2 \cdot 1013$ | no such prime factor | $1^2 + 45^2$ |
+| $2027$ | $3$ | $2027$ (prime) | $v_{2027} = 1$ | no |
+
+The clock face already stops $2027$. It cannot stop $2024$, which is $0$ modulo $4$; what excludes $2024$ is the pair of odd exponents $v_{11} = v_{23} = 1$. The number $45$ shows the descent at work: $3 \mid 3^2 + 6^2$, so by [@lem-ch29-line-prime-descent] it divides both $3$ and $6$; cancelling $3^2$ leaves $5 = 1^2 + 2^2$, and the exponent $v_3$ drops by $2$ in one step. In $2026 = 2 \cdot 1013$ the factor $1013$ is $1$ modulo $4$, a plane prime with $1013 = 22^2 + 23^2$, and the product identity above gives
+
+$$
+\begin{aligned}
+2026 &= (1^2 + 1^2)(22^2 + 23^2) \\
+&= (22 - 23)^2 + (23 + 22)^2 = 1^2 + 45^2,
+\end{aligned}
+$$
+
+which are exactly the two legs read off from the Gaussian product $(1 + i)(22 + 23i) = -1 + 45i$.
+:::
+
+::: {.remark #rem-ch29-pell-primes-hilbert-literature title="Splitting and Inertia of Primes in the Gaussian Integers, the Negative Pell Equation for Plane Primes, and Hilbert Reciprocity (Literature result, not formalized in this book)"}
+**Literature result, not formalized in this book.** The boxes and manual derivations above stop at "is a sum of two squares" and "descends under division." The following three classical results lie outside the frozen declarations of the `trureturing@dev` commit locked by this book:
+
+1. **Splitting, inertia and ramification in the Gaussian integers.** In the ring $\mathbb{Z}[i]$ of Gaussian integers, for $p \equiv 1 \pmod 4$ the factors $a + bi$ and $a - bi$ are two non-associate Gaussian primes ($p$ splits); for $p \equiv 3 \pmod 4$ the prime $p$ remains a Gaussian prime ($p$ is inert); and $2 = -i(1 + i)^2$ is the only ramified prime.
+2. **The negative Pell equation for plane primes.** For every prime $p \equiv 1 \pmod 4$ the negative Pell equation $m^2 - p\,n^2 = -1$ has an integer solution (the last column of the table above shows the first five cases), so the fundamental unit of the real quadratic field $\mathbb{Q}(\sqrt{p})$ has norm $-1$. In this book's geometric reading, a unit of norm $-1$ is a glide reflection that flips orientation, and only its square, with $(-1)^2 = +1$, returns to the branch of pure rotations. The "no solution" half on the side of line primes has already been obtained from a frozen lemma in manual derivation 3.
+3. **Hilbert reciprocity.** For all nonzero rationals $a, b \in \mathbb{Q}^\times$, the local Hilbert symbol $(a, b)_v \in \{+1, -1\}$ equals $-1$ at only finitely many places $v$, and its product over all prime places and the real place at infinity equals $+1$:
 
    $$
    \prod_{v \le \infty} (a, b)_v = +1.
    $$
 
-   In our geometric reading, a $-1$ chiral twist can never arise in isolation at a single prime axis; it cancels pairwise across places—echoing Chapter 10's principle that "pairwise comparison is always consistent and order-independent."
+   In this book's geometric reading, a $-1$ chiral twist can never arise in isolation on a single prime axis; it must cancel in pairs across places, an arithmetic echo of the principle of Chapter 10 that "pairwise comparison is always consistent and order-independent."
 :::
 
 ::: {.viz src="pythagoras-number-escape" preset="five" height="500"}
@@ -197,7 +358,7 @@ which is governed by two foundational theorems:
    \cos\theta_p := \frac{a_p}{2\sqrt{p}} \in [-1, +1].
    $$
 
-2. **Gauss's CM Point-Count Formula and the Line/Plane Prime Dichotomy**: On the Pythagorean congruent curve $y^2 = x^3 - x$ (which has complex multiplication by $\mathbb{Z}[i]$), the two odd-prime families of Pillar 1 ([@rem-ch29-pell-primes-hilbert-literature]) separate cleanly under $\cos\theta_p$:
+2. **Gauss's CM Point-Count Formula and the Line/Plane Prime Dichotomy**: On the Pythagorean congruent curve $y^2 = x^3 - x$ (which has complex multiplication by $\mathbb{Z}[i]$), the two odd-prime families of Pillar 1 ([@thm-ch29-face-prime-two-squares], [@lem-ch29-line-prime-descent]) separate cleanly under $\cos\theta_p$:
    - **At inert "Line Primes" $p \equiv 3 \pmod 4$**: because $(-x)^3 - (-x) = -(x^3 - x)$ and $\left(\frac{-1}{p}\right) = -1$, the spins at $+x$ and $-x$ cancel pairwise, forcing
 
      $$
@@ -312,13 +473,13 @@ $$
 
 Geometrically, on the three-dimensional unit quaternion rotor sphere $S^3 \cong \mathrm{SU}(2)$—the parallelizable hypersphere defined by $s^2 + x^2 + y^2 + z^2 = 1$ with $\chi(S^3) = 0$ (cf. [@rem-hairy-ball-adams-literature])—the two-dimensional latitude sphere at polar angle $\theta \in [0, \pi]$ has radius $\sin\theta$ and surface area proportional to $\sin^2\theta$; projecting the uniform Haar measure of $S^3 \cong \mathrm{SU}(2)$ onto the normalized trace diameter $u = \frac{1}{2}\operatorname{Tr}(U) = \cos\theta \in [-1, +1]$ yields $\frac{2}{\pi}\sin^2\theta\,d\theta$.
 
-Across the first two sections of this chapter, the Lindemann–Weierstrass theorem and T. Y. Chow's (1999) elementary-field theorem conditional on Schanuel's conjecture ([@conj-schanuel-dottie]), Fermat's two-square prime splitting / odd-prime negative Pell solvability / Hilbert's reciprocity law in [@rem-ch29-pell-primes-hilbert-literature], the complex elliptic-curve torus topology and abelian group law in [@rem-ch29-elliptic-torus-literature], Hasse's bound and Gauss's CM point-count derivation in [@rem-ch29-hasse-gauss-literature] and [@rem-ch29-gauss-character-application], and the Sato–Tate equidistribution theorem in the present remark are classical mathematical literature results outside the `trureturing@dev` formalization locked by this book; kernel-verified results in these sections are strictly those carrying explicit `lean:` citations (such as [`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm), [`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique), [`power_fiber_card_eq_one_add_character_sum`](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.power_fiber_card_eq_one_add_character_sum), [`norm_jacobiSum`](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.norm_jacobiSum), and [`gaussian_unit`](lean:D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart.gaussian_unit)).
+Across the first two sections of this chapter, the Lindemann–Weierstrass theorem and T. Y. Chow's (1999) elementary-field theorem conditional on Schanuel's conjecture ([@conj-schanuel-dottie]), the splitting and inertia of primes in the Gaussian integers / negative Pell solvability for primes $p \equiv 1 \pmod 4$ / Hilbert's reciprocity law in [@rem-ch29-pell-primes-hilbert-literature], the complex elliptic-curve torus topology and abelian group law in [@rem-ch29-elliptic-torus-literature], Hasse's bound and Gauss's CM point-count derivation in [@rem-ch29-hasse-gauss-literature] and [@rem-ch29-gauss-character-application], and the Sato–Tate equidistribution theorem in the present remark are classical mathematical literature results outside the `trureturing@dev` formalization locked by this book; kernel-verified results in these sections are strictly the boxes with a `lean` attribute (such as [@lem-ch29-square-residues-mod-four], [@thm-ch29-face-prime-two-squares], [@lem-ch29-line-prime-descent], [@thm-ch29-two-squares-classification], [@thm-ch29-silver-pell-remainder], and [@thm-ch29-silver-best-approximation]) and the statements carrying explicit `lean:` citations (such as [`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm), [`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique), [`power_fiber_card_eq_one_add_character_sum`](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.power_fiber_card_eq_one_add_character_sum), [`norm_jacobiSum`](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.norm_jacobiSum), and [`gaussian_unit`](lean:D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart.gaussian_unit)).
 :::
 
-In the overarching geometric synthesis of this book, starting from the Pell seam cracked open by Hippasus's right triangle ([@rem-ch29-pell-convergents-literature]) and reading across the arithmetic-geometry literature remarks above ([@rem-ch29-pell-primes-hilbert-literature], [@rem-ch29-elliptic-torus-literature], [@rem-ch29-hasse-gauss-literature], and [@rem-ch29-arithmetic-geometry-literature]), the point-count oscillations along the prime axes align visually with the cosine shadow cast by the quantum spinor sphere $S^3 \cong \mathrm{SU}(2)$ onto its diameter $[-1, +1]$.
+In the overarching geometric synthesis of this book, starting from the Pell seam cracked open by Hippasus's right triangle ([@thm-ch29-silver-pell-remainder]) and reading across the arithmetic-geometry literature remarks above ([@rem-ch29-pell-primes-hilbert-literature], [@rem-ch29-elliptic-torus-literature], [@rem-ch29-hasse-gauss-literature], and [@rem-ch29-arithmetic-geometry-literature]), the point-count oscillations along the prime axes align visually with the cosine shadow cast by the quantum spinor sphere $S^3 \cong \mathrm{SU}(2)$ onto its diameter $[-1, +1]$.
 
 ::: {.viz src="pythagoras-number-escape" height="640"}
-**Interactive laboratory `ORTHO//PYTHAGORAS`**: three scenes along the $\pm 1$ seam. The Pell seam: the convergents of $\sqrt{d}$ hug the line ever more closely while $m^2 - d\,n^2$ is a nonzero integer (for $d = 5$ the green rings mark all the $\pm 4$ solutions, as verified in Lean); line primes and plane primes: whether the circle of radius $\sqrt{p}$ passes through lattice points; points mod $p$: for the curve $y^2 = x^3 - x$, $a_p$ is held inside Hasse's bound, line primes sit exactly at zero, and the Frobenius cosine of a plane prime equals the cosine of its Gaussian triangle. Fermat's two-square theorem, Hasse's theorem and the Sato–Tate distribution are literature results, not formalized in this book.
+**Interactive laboratory `ORTHO//PYTHAGORAS`**: three scenes along the $\pm 1$ seam. The Pell seam: the convergents of $\sqrt{d}$ hug the line ever more closely while $m^2 - d\,n^2$ is a nonzero integer (for $d = 5$ the green rings mark all the $\pm 4$ solutions, as verified in Lean); line primes and plane primes: whether the circle of radius $\sqrt{p}$ passes through lattice points; points mod $p$: for the curve $y^2 = x^3 - x$, $a_p$ is held inside Hasse's bound, line primes sit exactly at zero, and the Frobenius cosine of a plane prime equals the cosine of its Gaussian triangle. That plane primes are sums of two squares and line primes are not is verified in Lean ([@thm-ch29-face-prime-two-squares], [@lem-ch29-square-residues-mod-four]); Hasse's theorem and the Sato–Tate distribution are literature results, not formalized in this book.
 :::
 
 ---
@@ -491,6 +652,6 @@ Part 1 expands $(2a + b)^2 - 5b^2 = 4a^2 + 4ab + b^2 - 5b^2 = 4(a^2 + ab - b^2) 
 
 ## Chapter Summary: From the Arithmetic Seam to the Timeless Causal Crystal {#sec-ch29-summary}
 
-This chapter has unified Pythagorean area conservation, the golden-integer Pell norm identity, and unit-vector Gram overlap equivalence ([@thm-ch29-gram-rigidity-and-pell])—alongside the Pell-convergent and arithmetic-geometry literature remarks ([@rem-ch29-pell-convergents-literature], [@rem-ch29-pell-primes-hilbert-literature], [@rem-ch29-elliptic-torus-literature], [@rem-ch29-hasse-gauss-literature], [@rem-ch29-arithmetic-geometry-literature]) and the timeless-constraint and stationary-phase literature remarks ([@rem-ch29-wheeler-dewitt-page-wootters-literature], [@rem-ch29-feynman-stationary-phase-literature])—with Spinoza's geometric necessity and the finite observer's Gram elliptope ($\det G \ge 0$): **because the global field is timeless, truth endures forever; because the observer is finite, every step is new.**
+This chapter has unified Pythagorean area conservation, the Pell remainder and best-approximation lower bound of the silver slope $\sqrt{2} - 1$ ([@thm-ch29-silver-pell-remainder], [@thm-ch29-silver-best-approximation]), the golden-integer Pell norm identity, unit-vector Gram overlap equivalence ([@thm-ch29-gram-rigidity-and-pell]), and the plane-prime and two-squares criteria ([@thm-ch29-face-prime-two-squares], [@thm-ch29-two-squares-classification])—alongside the continued-fraction and arithmetic-geometry literature remarks ([@rem-ch29-pell-convergents-literature], [@rem-ch29-pell-primes-hilbert-literature], [@rem-ch29-elliptic-torus-literature], [@rem-ch29-hasse-gauss-literature], [@rem-ch29-arithmetic-geometry-literature]) and the timeless-constraint and stationary-phase literature remarks ([@rem-ch29-wheeler-dewitt-page-wootters-literature], [@rem-ch29-feynman-stationary-phase-literature])—with Spinoza's geometric necessity and the finite observer's Gram elliptope ($\det G \ge 0$): **because the global field is timeless, truth endures forever; because the observer is finite, every step is new.**
 
 In [Chapter 30](ch30-fields-lines-eth-and-navier-stokes.md), we carry this tension between the global static field and the finite observer to the twin peaks of computational complexity and continuum fluid dynamics—examining **$\mathrm{P}$ vs. $\mathrm{NP}$**, the **Exponential Time Hypothesis (ETH) and 2026 tensor-network rank reduction**, and **three-dimensional Navier–Stokes vortex filaments**.

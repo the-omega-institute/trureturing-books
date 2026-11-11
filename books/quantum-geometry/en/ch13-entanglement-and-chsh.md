@@ -243,7 +243,115 @@ $$
 S^2 = 4 I_4 + 4\bigl((\vv{a}_0 \times \vv{a}_1)\cdot\vv{\sigma}\bigr) \otimes_{\mathrm{K}} \bigl((\vv{b}_0 \times \vv{b}_1)\cdot\vv{\sigma}\bigr)!
 $$
 
-(Note that this Pauli cross-product expansion is an explicit hand calculation for $2\times 2$ Pauli directions and does not alter the general hypotheses of [@prop-landau-area-square]; likewise, [@prop-landau-area-square] itself is an operator identity, not the classical hidden-variable probability bound.) Geometrically, if either Alice's two axes are collinear ($\vv{a}_0 \times \vv{a}_1 = \vv{0}$, zero area) or Bob's two axes are collinear ($\vv{b}_0 \times \vv{b}_1 = \vv{0}$, zero area), the commutator area term $C$ vanishes and $S^2 = 4I_4$. Only when Alice spans a unit orthogonal square ($\vv{a}_0 \perp \vv{a}_1$) **and** Bob spans a unit orthogonal square ($\vv{b}_0 \perp \vv{b}_1$) does their joint area product boost the top eigenvalue of $S^2$ from $4$ to $4 + 4 = 8 = (2\sqrt{2})^2$!
+(This Pauli cross-product expansion is a hand calculation for $2\times 2$ Pauli directions and does not alter the general hypotheses of [@prop-landau-area-square]; likewise, [@prop-landau-area-square] itself is an operator identity, not the classical hidden-variable probability bound.) Read geometrically, the part of $S^2$ beyond $4$ is Alice's oriented area multiplied by Bob's. Three questions follow at once. If one side spans no area, what is $S^2$? If both sides open their area only partway, where do the eigenvalues of $S$ sit? And when the area is fully open, is there a ceiling? The next three frozen theorems answer all three in every finite dimension, with no Pauli matrices in sight.
+
+**One side spans no area.** In the single-qubit picture, Alice asking along collinear axes ($\vv{a}_0 \parallel \vv{a}_1$) means $A_1 = \pm A_0$: her two rulers commute, and the commutator vanishes on the spot. In general dimension, "collinear" becomes "commuting", and the conclusion survives.
+
+::: {.corollary #cor-chsh-local-commuting-collapse title="The CHSH Operator Squares to 4I When One Local Pair Commutes" lean="D5/S3/QuantumBounds/LandauCommutingCollapse.chsh_square_eq_four_of_local_pair_commutes"}
+Let $m, n$ be finite index types with decidable equality, let $A_0, A_1 \in M_m(\mathbb{C})$ and $B_0, B_1 \in M_n(\mathbb{C})$ each be Hermitian with square equal to the identity (the four hypotheses of [@prop-landau-area-square]), and let $S = A_0 \otimes_{\mathrm{K}} B_0 + A_0 \otimes_{\mathrm{K}} B_1 + A_1 \otimes_{\mathrm{K}} B_0 - A_1 \otimes_{\mathrm{K}} B_1$. If
+
+$$
+A_0 A_1 = A_1 A_0 \qquad \text{or} \qquad B_0 B_1 = B_1 B_0,
+$$
+
+then
+
+$$
+S^2 = 4 \cdot (1 : M_{m \times n}(\mathbb{C})).
+$$
+:::
+
+::: proof
+The source first rewrites $S^2$ as $4 \cdot 1 + C$ using [@prop-landau-area-square], then splits into the two cases. If $A_0 A_1 = A_1 A_0$, Alice's commutator $A_0 A_1 - A_1 A_0$ becomes $A_1 A_0 - A_1 A_0 = 0$; if $B_0 B_1 = B_1 B_0$, Bob's commutator vanishes in the same way. The Kronecker product of the zero matrix with anything is zero, and so is its negative; hence $C = 0$ and $S^2 = 4 \cdot 1$. The full proof is checked by the Lean kernel.
+:::
+
+This corollary is an operator identity, and the Lean file says explicitly that it states no expectation bound. Getting from it to the "classical threshold" takes one more step, a manual derivation: $S$ is a sum and difference of Kronecker products of Hermitian matrices, hence Hermitian; $S^2 = 4I$ forces every eigenvalue $\lambda$ to satisfy $\lambda^2 = 4$, so $\lambda = \pm 2$; therefore $2I - S$ and $2I + S$ are both positive semidefinite, and $-2 \le \operatorname{Re}\Tr(\rho S) \le 2$ for every density matrix $\rho$. **If either party's two questions can be asked in either order, quantum correlation cannot cross the classical threshold.**
+
+**Both sides open their area partway.** Back to qubits: let Alice's two axes meet at angle $\alpha$ and Bob's at angle $\beta$, so that $\norm{\vv{a}_0 \times \vv{a}_1} = \sin\alpha$ and $\norm{\vv{b}_0 \times \vv{b}_1} = \sin\beta$. A Pauli direction operator $\vv{u}\cdot\vv{\sigma}$ has eigenvalues $\pm\norm{\vv{u}}$, so by the hand formula above $C$ has exactly two eigenvalues, $\pm 4\sin\alpha\sin\beta$ (a manual derivation). The commutator term takes one pair of opposite values, which is precisely the hypothesis of the next proposition.
+
+::: {.proposition #prop-chsh-four-point-spectrum title="If the Commutator Term Has Spectrum in ±N, the Real Spectrum of the CHSH Operator Lies on Four Square Roots" lean="D5/S3/QuantumBounds/CHSHSpectrum.chsh_spectrum"}
+Let $N \in \mathbb{R}$ with $0 < N < 4$; let $m, n$ be finite index types with decidable equality, and let $A_0, A_1 \in M_m(\mathbb{C})$ and $B_0, B_1 \in M_n(\mathbb{C})$ each be Hermitian with square equal to the identity. Let $S$ and $C$ be as in [@prop-landau-area-square]:
+
+$$
+\begin{aligned}
+S &= A_0 \otimes_{\mathrm{K}} B_0 + A_0 \otimes_{\mathrm{K}} B_1 + A_1 \otimes_{\mathrm{K}} B_0 - A_1 \otimes_{\mathrm{K}} B_1, \\
+C &= -\bigl((A_0 A_1 - A_1 A_0) \otimes_{\mathrm{K}} (B_0 B_1 - B_1 B_0)\bigr).
+\end{aligned}
+$$
+
+For a complex square matrix $M$, write $\operatorname{spectrum}_{\mathbb{R}} M$ for the set of real numbers $r$ such that $r \cdot 1 - M$ is not invertible. If $\operatorname{spectrum}_{\mathbb{R}} C \subseteq \{N, -N\}$, then
+
+$$
+\operatorname{spectrum}_{\mathbb{R}} S \subseteq \bigl\{\sqrt{4 + N},\; -\sqrt{4 + N},\; \sqrt{4 - N},\; -\sqrt{4 - N}\bigr\}.
+$$
+:::
+
+::: proof
+The source first shows that $S$ is Hermitian: a Kronecker product of Hermitian matrices is Hermitian (the private lemma `hermitian_kronecker`), and so are sums and differences of Hermitian matrices. Hence the real spectrum of $S$ is exactly its set of eigenvalues. Take an eigenvalue $x$. By the power rule for spectra (Mathlib's `spectrum.pow_mem_pow`), $x^2$ lies in the spectrum of $S^2$; by [@prop-landau-area-square], $S^2 = 4 \cdot 1 + C$, and a scalar shift moves the whole spectrum (`spectrum.add_mem_add_iff`), so $x^2 - 4$ lies in the spectrum of $C$. By hypothesis $x^2 - 4 = N$ or $x^2 - 4 = -N$, that is, $x^2 = 4 + N$ or $x^2 = 4 - N$; both numbers are positive, so $x$ is plus or minus the corresponding square root. The full proof is checked by the Lean kernel.
+:::
+
+Two points in this proposition need careful reading. First, it gives only an inclusion: the eigenvalues of $S$ cannot escape these four points, but it does not say that all four occur. Second, the hypothesis is the strict $0 < N < 4$. For qubits $N = 4\sin\alpha\sin\beta$, so the hypothesis says that neither pair of axes is collinear and that the two pairs are not both orthogonal. When both pairs are orthogonal, $N = 4$ and the proposition does not apply. A hand computation then gives the eigenvalues $8, 8, 0, 0$ for $S^2$ (the proof of [@cor-fixed-chsh-tsirelson] in the next section finds the same values for the fixed operator) and the spectrum $\{2\sqrt{2}, -2\sqrt{2}, 0\}$ for $S$.
+
+::: {.example #ex-chsh-spectrum-angle-table title="The Area Parameter N, the CHSH Spectrum, and the Bell-State Expectation at Five Angle Pairs"}
+Put all four axes in the $(Z, X)$ plane and measure angles from the $Z$ axis. Alice takes $A_0 = Z$ and $A_1 = \cos\alpha\,Z + \sin\alpha\,X$; Bob takes $B_0 = Z$ and $B_1 = \cos\beta\,Z - \sin\beta\,X$ (turning the other way). A manual derivation: from $[Z, X] = 2iY$ we get $[A_0, A_1] = 2i\sin\alpha\,Y$ and $[B_0, B_1] = -2i\sin\beta\,Y$, hence
+
+$$
+C = -(2i\sin\alpha)(-2i\sin\beta)\,Y \otimes_{\mathrm{K}} Y = -4\sin\alpha\sin\beta\;Y \otimes_{\mathrm{K}} Y.
+$$
+
+Since $Y \otimes_{\mathrm{K}} Y$ takes the value $-1$ on $\lvert\Phi^+\rangle, \lvert\Psi^-\rangle$ and $+1$ on $\lvert\Phi^-\rangle, \lvert\Psi^+\rangle$, the spectrum of $C$ is $\{N, -N\}$ with $N = 4\sin\alpha\sin\beta$.
+
+Take $\alpha = \beta = 60^\circ$: then $A_1 = \frac{1}{2}Z + \frac{\sqrt{3}}{2}X$, $B_1 = \frac{1}{2}Z - \frac{\sqrt{3}}{2}X$, $[A_0, A_1] = i\sqrt{3}\,Y$, $[B_0, B_1] = -i\sqrt{3}\,Y$, $C = -3\,Y \otimes_{\mathrm{K}} Y$, and $N = 3$. [@prop-chsh-four-point-spectrum] confines the spectrum of $S$ to $\{\pm\sqrt{7}, \pm 1\}$; expanding the characteristic polynomial of the $4\times 4$ matrix $S$ directly gives $(\lambda - 1)(\lambda + 1)(\lambda^2 - 7)$, so each of the four points occurs once. In the Bell state $\lvert\Phi^+\rangle$, the correlation of two axes in this plane is the cosine of the angle between them: $E_{00} = 1$, $E_{01} = \cos 60^\circ = \frac{1}{2}$, $E_{10} = \frac{1}{2}$, $E_{11} = \cos 120^\circ = -\frac{1}{2}$, so $\langle S\rangle_{\Phi^+} = 1 + \frac{1}{2} + \frac{1}{2} + \frac{1}{2} = \frac{5}{2}$. That is past $2$, but short of $\sqrt{7} \approx 2.6458$. The maximum hides in $\operatorname{span}\{\lvert\Phi^+\rangle, \lvert\Psi^-\rangle\}$, where $S$ acts by the matrix
+
+$$
+\begin{pmatrix} 5/2 & -\sqrt{3}/2 \\ -\sqrt{3}/2 & -5/2 \end{pmatrix},
+$$
+
+with eigenvalues $\pm\sqrt{25/4 + 3/4} = \pm\sqrt{7}$.
+
+The five angle pairs are summarized below. The last column is $\langle S\rangle_{\Phi^+} = 1 + \cos\beta + \cos\alpha - \cos(\alpha + \beta)$; numbers are rounded to four decimal places:
+
+| $\alpha$ | $\beta$ | $N = 4\sin\alpha\sin\beta$ | spectrum of $S$ | frozen result | $\langle S\rangle_{\Phi^+}$ |
+| :---: | :---: | :---: | :--- | :--- | :---: |
+| $0^\circ$ | $60^\circ$ | $0$ | $\pm 2$ (each twice) | [@cor-chsh-local-commuting-collapse] | $2$ |
+| $30^\circ$ | $30^\circ$ | $1$ | $\pm\sqrt{5} \approx \pm 2.2361$, $\pm\sqrt{3} \approx \pm 1.7321$ | [@prop-chsh-four-point-spectrum] | $\frac{1}{2} + \sqrt{3} \approx 2.2321$ |
+| $60^\circ$ | $60^\circ$ | $3$ | $\pm\sqrt{7} \approx \pm 2.6458$, $\pm 1$ | [@prop-chsh-four-point-spectrum] | $\frac{5}{2} = 2.5$ |
+| $90^\circ$ | $30^\circ$ | $2$ | $\pm\sqrt{6} \approx \pm 2.4495$, $\pm\sqrt{2} \approx \pm 1.4142$ | [@prop-chsh-four-point-spectrum] | $\frac{3}{2} + \frac{\sqrt{3}}{2} \approx 2.3660$ |
+| $90^\circ$ | $90^\circ$ | $4$ | $\pm 2\sqrt{2} \approx \pm 2.8284$, $0$ (twice) | none ($N = 4$ lies outside the proposition; hand computation from [@prop-landau-area-square]) | $2$ |
+
+The "frozen result" column only names the frozen result that confines the spectrum to the listed points (the first row also needs the manual $\lambda^2 = 4$ step above); whether every listed point occurs, with which multiplicity, and the last column are manual derivations, checked numerically. The spectrum depends on the two angles only through $N$, and as soon as both areas are nonzero the top eigenvalue $\sqrt{4 + N}$ exceeds $2$. In the last row the spectrum already reaches $2\sqrt{2}$, yet the Bell-state expectation is only $2$: Bob's cross is in the wrong place. Where to put it is the $45^\circ$ question of the next section.
+:::
+
+**The ceiling when the area is fully open.** The largest number in the table is $2\sqrt{2}$. Could other dimensions or other observables do better? The module `PeritoTsirelson` proves a more general upper bound: Alice has two settings, Bob has $d$ settings, and the observables are only required to be unitary; for $d = 2$ this is exactly CHSH.
+
+::: {.theorem #thm-unitary-bell-bound title="The Bell-Value Bound $2/\sin(\pi/(2d))$ for Finite-Dimensional Unitary Strategies" lean="D5/S3/QuantumBounds/PeritoTsirelson.bell_value_le"}
+Let $d, n, m \in \mathbb{N}$ with $d \ge 2$. Let $A_0, A_1$ be $n \times n$ complex unitary matrices and $B_0, \dots, B_{d-1}$ be $m \times m$ complex unitary matrices (with rows and columns indexed by $\mathrm{Fin}\,n$ and $\mathrm{Fin}\,m$ respectively), and let $\rho$ be a density state `DensityState` on $\mathrm{Fin}\,n \times \mathrm{Fin}\,m$ (positive semidefinite with $\Tr\rho = 1$). Write $\omega_d = \exp(2\pi i/d)$ ($\mathrm{windowRoot}\,d$ in the source) and define
+
+$$
+\begin{aligned}
+\mathrm{bellOperator}_d(A, B) &= \sum_{x = 0}^{1}\sum_{y = 0}^{d - 1} \omega_d^{\,xy}\, A_x \otimes_{\mathrm{K}} B_y, \\
+\mathrm{bellValue}_d(A, B, \rho) &= \operatorname{Re}\Tr\bigl(\rho \cdot \mathrm{bellOperator}_d(A, B)\bigr).
+\end{aligned}
+$$
+
+Then
+
+$$
+\mathrm{bellValue}_d(A, B, \rho) \le \frac{2}{\sin\bigl(\pi/(2d)\bigr)}.
+$$
+:::
+
+::: proof
+The source proceeds in four steps. First (the private lemma `density_trace_re_le_norm`): for a density state $\rho$ and any matrix $M$, $\operatorname{Re}\Tr(\rho M) \le \norm{M}$ (operator norm). Replace $M$ by its Hermitian part $H = \frac{1}{2}(M + M^*)$, which has the same real trace against $\rho$ and no larger norm; $\norm{H} \cdot 1 - H$ is positive semidefinite, its trace against $\rho$ is nonnegative, and $\Tr\rho = 1$. Second (the private lemma `bell_operator_factor`): pull $A_0 \otimes_{\mathrm{K}} 1$ out on the left,
+
+$$
+\mathrm{bellOperator}_d(A, B) = (A_0 \otimes_{\mathrm{K}} 1) \sum_{y = 0}^{d - 1} \bigl(1 + \omega_d^{\,y}\, U\bigr) \otimes_{\mathrm{K}} B_y, \qquad U = A_0^* A_1,
+$$
+
+and left multiplication by a unitary does not change the operator norm. Third (`PeritoTensorBlockBound.tensor_block_bound`): diagonalize the unitary $U$ as $\operatorname{diag}(z_1, \dots, z_n)$ with $\lvert z_i\rvert = 1$; after conjugating by $P \otimes_{\mathrm{K}} 1$ the operator splits into $n$ mutually orthogonal Bob blocks $\sum_y (1 + \omega_d^{\,y} z_i) B_y$. By the triangle inequality and the unitarity of the $B_y$, each block has norm at most $\sum_y \lvert 1 + \omega_d^{\,y} z_i\rvert$, so the whole operator is bounded by any common bound for these block sums. Fourth (`PeritoUnitCircleSum.unit_circle_sum_le`): writing $z = e^{2is}$ gives $\lvert 1 + \omega_d^{\,y} z\rvert = 2\lvert\cos(s + \pi y/d)\rvert$, and the absolute values of $d$ equally spaced cosines sum to at most $1/\sin(\pi/(2d))$. The full proof is checked by the Lean kernel.
+:::
+
+Setting $d = 2$ is a manual derivation: $\omega_2 = e^{i\pi} = -1$, the four coefficients are $1, 1, 1, -1$, so $\mathrm{bellOperator}_2$ is exactly the CHSH operator $S$, and the bound is $2/\sin(\pi/4) = 2\sqrt{2}$. Hermitian involutions are unitary ($A^* A = A^2 = 1$); negating both $A_0$ and $A_1$ keeps them unitary and flips the sign of $S$. Hence $\lvert\operatorname{Re}\Tr(\rho S)\rvert \le 2\sqrt{2}$ in every finite dimension, for any four Hermitian involutions and any density state: this is the Tsirelson bound for finite-dimensional tensor-product strategies. The infinite-dimensional form, which assumes only commuting observables, remains in [@rem-bell-chsh-literature] at the end of the chapter. For $d = 2$ the fourth step reads $\lvert 1 + z\rvert + \lvert 1 - z\rvert \le 2\sqrt{2}$, with equality only at $z = \pm i$. For single-qubit Pauli directions, $U = A_0^* A_1 = A_0 A_1 = \cos\alpha\, I + i(\vv{a}_0 \times \vv{a}_1)\cdot\vv{\sigma}$ has eigenvalues $e^{\pm i\alpha}$, and the block bound becomes $2\lvert\cos(\alpha/2)\rvert + 2\lvert\sin(\alpha/2)\rvert = 2\sqrt{1 + \sin\alpha}$ ($0^\circ \le \alpha \le 180^\circ$). Compared with the largest eigenvalue $\sqrt{4 + N} = 2\sqrt{1 + \sin\alpha\sin\beta}$ allowed by [@prop-chsh-four-point-spectrum], it simply inflates Bob's $\sin\beta$ to $1$. It reaches $2\sqrt{2}$ at $\alpha = 90^\circ$: the ceiling is nailed exactly where Alice opens a full orthogonal cross.
 
 ## The 45° Cosine and the Fixed CHSH Maximum {#sec-bell-45-tsirelson}
 
@@ -284,7 +392,7 @@ In Mathlib, `IsGreatest s a` means $a \in s \land \forall x \in s,\, x \le a$. T
 2. **Upper bound over all states ($\le 2\sqrt{2}$)**: For every $\rho \in \mathcal{S}_2$, because $Z \otimes_{\mathrm{K}} Z$ and $X \otimes_{\mathrm{K}} X$ are Hermitian involutions, the upper-bound difference matrix decomposes as a sum of positive semidefinite operators $2\sqrt{2}I_4 - \mathrm{chshOperator} = \sqrt{2}(I_4 - Z\otimes_{\mathrm{K}} Z) + \sqrt{2}(I_4 - X\otimes_{\mathrm{K}} X) \ge 0$ (meanwhile, by [@prop-landau-area-square] with $[Z, X] = 2iY$ and $[B_0, B_1] = -2iY$, the exact operator square is $(\mathrm{chshOperator})^2 = 4(I_4 - Y \otimes_{\mathrm{K}} Y) \le 8I_4$ with spectrum $\{8, 8, 0, 0\}$, taking eigenvalue $8$ on $\operatorname{span}\{\lvert\Phi^+\rangle, \lvert\Psi^-\rangle\}$ and $0$ on $\operatorname{span}\{\lvert\Phi^-\rangle, \lvert\Psi^+\rangle\}$). Pairing any positive semidefinite state $\rho$ of trace $1$ with this positive semidefinite difference yields $\operatorname{Re}\Tr(\rho \cdot \mathrm{chshOperator}) \le 2\sqrt{2}\operatorname{Re}\Tr(\rho) = 2\sqrt{2}$. The full proof is checked by the Lean kernel.
 :::
 
-Observe the exact quantifier scope of [@cor-fixed-chsh-tsirelson]: the frozen theorem optimizes over all $4\times 4$ positive semidefinite trace-one density matrices $\rho$ for the **fixed** operator `CHSHWitness.chshOperator` (with Alice's observables fixed at $Z, X$ and Bob's at $(Z\pm X)/\sqrt{2}$). It does not quantify over arbitrary measurement directions or arbitrary Hilbert spaces; the general Tsirelson bound across arbitrary observables is placed in [@rem-bell-chsh-literature].
+Observe the exact quantifier scope of [@cor-fixed-chsh-tsirelson]: the frozen theorem optimizes over all $4\times 4$ positive semidefinite trace-one density matrices $\rho$ for the **fixed** operator `CHSHWitness.chshOperator` (with Alice's observables fixed at $Z, X$ and Bob's at $(Z\pm X)/\sqrt{2}$). It does not quantify over arbitrary measurement directions or arbitrary Hilbert spaces; the upper bound for arbitrary observables in every finite dimension is [@thm-unitary-bell-bound] at $d = 2$, and the general Tsirelson theorem for infinite-dimensional, commuting-operator settings is placed in [@rem-bell-chsh-literature].
 
 [@cor-fixed-chsh-tsirelson] pins the quantum summit at $2\sqrt{2}$. To call this a defeat of the classical side, the classical ceiling has to be pinned just as firmly. The rules for the classical opponent are these: Alice and Bob share a hidden variable $\lambda$ in advance (called a fiber address, `Fiber`, in Lean); afterwards each of them looks only at their own measurement setting and at $\lambda$ and answers $\pm 1$, and neither sees which setting the other chose.
 
@@ -343,7 +451,7 @@ Bob's two answers stand in one of only two relations:
 In each row the product that decides the sign takes the values $+1$ and $-1$ in half of the combinations each, so exactly eight of the sixteen combinations give $+2$ and eight give $-2$; none lies outside $[-2, 2]$ and none lies strictly inside. Any probabilistic mixture merely takes a weighted average between $-2$ and $+2$, hence $\lvert S\rvert \le 2$, in agreement with [@thm-classical-chsh-bound-exact].
 :::
 
-Both ends are now pinned: the CHSH value of a finite deterministic local model cannot leave the segment $[-2, 2]$ ([@thm-classical-chsh-bound-exact]), while the expectation of the fixed CHSH operator on quantum states reaches $2\sqrt{2}$ ([@cor-fixed-chsh-tsirelson]). Their ratio is $\sqrt{2}$, the factor by which the $45^\circ$ arc exceeds the polyline. Mind the quantifier scope of each theorem: the classical side concerns deterministic $\pm 1$ answer tables over a finite set of fibers, and the quantum side concerns one fixed two-qubit operator; for the general forms see [@rem-bell-chsh-literature] at the end of the chapter.
+Both ends are now pinned: the CHSH value of a finite deterministic local model cannot leave the segment $[-2, 2]$ ([@thm-classical-chsh-bound-exact]), while the expectation of the fixed CHSH operator on quantum states reaches $2\sqrt{2}$ ([@cor-fixed-chsh-tsirelson]). Their ratio is $\sqrt{2}$, the factor by which the $45^\circ$ arc exceeds the polyline. Mind the quantifier scope of each theorem: the classical side concerns deterministic $\pm 1$ answer tables over a finite set of fibers, and on the quantum side attainment concerns one fixed two-qubit operator, while the upper bound $2\sqrt{2}$ holds for every finite-dimensional unitary strategy ([@thm-unitary-bell-bound] at $d = 2$); for the general forms see [@rem-bell-chsh-literature] at the end of the chapter.
 
 Why is $\theta = 45^\circ$ the symmetric CHSH working angle? In a symmetric four-setting configuration (three adjacent pairs separated by $\theta$ and one pair separated by $3\theta$), the four-correlator combination is $3\cos\theta - \cos(3\theta)$, whose derivative $-3\sin\theta + 3\sin(3\theta) = 0$ attains its global maximum $2\sqrt{2}$ at $\theta = 45^\circ$ ($\pi/4$)! (Keep this four-setting optimization distinct from maximizing the single-chord pointwise difference $g(\theta) = \cos\theta - (1 - 2\theta/\pi)$ against the linear toy model: the pointwise derivative $-\sin\theta + 2/\pi = 0$ peaks at $\theta = \arcsin(2/\pi) \approx 39.5402^\circ$ with a single-chord gap of $\approx 0.2105$, whereas at the symmetric CHSH working angle $\theta = 45^\circ$ each single-chord gap is $\frac{\sqrt{2}-1}{2} \approx 0.2071$, four of which sum to $2\sqrt{2} - 2 \approx 0.8284$.) Let us now work through the complete numerical checklist connecting $\rho_{\Phi^+}$, $\rho_{\Psi^-}$, the four $45^\circ$ CHSH correlators, and the comparison between the cosine arc and a specific linear toy model.
 
@@ -416,7 +524,7 @@ At the cardinal angles $0^\circ, 90^\circ, 180^\circ$, both curves coincide at $
 **Literature result, not formalized in this book.** To situate the frozen theorems of this chapter within the broader foundations literature, three classical results and physical boundaries should be kept distinct:
 
 1. **The classical CHSH bound $|S_{\mathrm{LHV}}| \le 2$ as the convex hull of deterministic models** (J. F. Clauser, M. A. Horne, A. Shimony, and R. A. Holt, *Proposed experiment to test local hidden-variable theories*, Phys. Rev. Lett. **23**, 880–884, 1969, doi:10.1103/PhysRevLett.23.880): The linear sawtooth $C_{\mathrm{cl}}(\theta) = 1 - 2\theta/\pi$ in [@ex-bell-chsh-45deg] is a specific illustrative toy model, not Bell's theorem itself. The general CHSH inequality holds for **every** local stochastic hidden-variable model $\int \bar{A}_i(\lambda)\bar{B}_j(\lambda)\,d\mu(\lambda)$ with $\bar{A}_i(\lambda), \bar{B}_j(\lambda) \in [-1, 1]$: because a multilinear expression on $[-1, 1]^4$ attains its extrema at the vertices $a_0, a_1, b_0, b_1 \in \{\pm 1\}$ where one of $b_0 \pm b_1$ is $\pm 2$ and the other is $0$, every deterministic assignment satisfies $a_0(b_0 + b_1) + a_1(b_0 - b_1) = \pm 2$, and convex averaging over any probability distribution $\mu$ enforces $|S_{\mathrm{LHV}}| \le 2$. The case of a finite set of hidden variables with deterministic $\pm 1$ responses is verified by [@thm-classical-chsh-bound-exact]; the general form, with an arbitrary probability measure and stochastic response functions valued in $[-1, 1]$, remains a literature result: passing from the former to the latter requires writing stochastic responses as convex combinations of deterministic ones and replacing finite sums by integrals, and neither step is formalized in this book.
-2. **The general Tsirelson bound $|\langle S\rangle| \le 2\sqrt{2}$ for arbitrary observables and Hilbert spaces** (B. S. Cirel'son, *Quantum generalizations of Bell's inequality*, Lett. Math. Phys. **4**, 93–100, 1980, doi:10.1007/BF00417500): Whereas [@cor-fixed-chsh-tsirelson] proves that $2\sqrt{2}$ is the greatest expectation value of the **fixed** two-qubit operator `CHSHWitness.chshOperator`, Cirel'son's general theorem holds over any Hilbert space $\mathcal{H}$, any state $\rho$, and **any** four Hermitian involutions $A_0, A_1, B_0, B_1$ with $[A_i, B_j] = 0$: bounding the commutator norms by $\norm{[A_0, A_1]}_{\mathrm{op}} \le 2$ and $\norm{[B_0, B_1]}_{\mathrm{op}} \le 2$ in Landau's identity $S^2 = 4I - [A_0, A_1][B_0, B_1]$ gives $\norm{S^2}_{\mathrm{op}} \le 8$, hence $|\langle S\rangle| \le 2\sqrt{2}$ universally.
+2. **The general Tsirelson bound for arbitrary Hilbert spaces and commuting observables** (B. S. Cirel'son, *Quantum generalizations of Bell's inequality*, Lett. Math. Phys. **4**, 93–100, 1980, doi:10.1007/BF00417500): The finite-dimensional tensor-product case is formalized. [@thm-unitary-bell-bound] bounds the Bell value for any finite dimensions $n, m$, any unitary observables (Hermitian involutions are a special case), and any density state; setting $d = 2$ and negating both $A_0$ and $A_1$ gives $\lvert\operatorname{Re}\Tr(\rho S)\rvert \le 2\sqrt{2}$ (these two steps are manual derivations), and [@cor-fixed-chsh-tsirelson] shows that the fixed two-qubit operator `CHSHWitness.chshOperator` reaches $2\sqrt{2}$ on the Bell state. What remains a literature result is the general form of Cirel'son's theorem: the Hilbert space $\mathcal{H}$ may be infinite-dimensional, and Alice's and Bob's observables act on the same $\mathcal{H}$, subject only to $A_i^* = A_i$, $B_j^* = B_j$, $A_i^2 = I$, $B_j^2 = I$, and $[A_i, B_j] = 0$, with no tensor-product structure. A short argument: bounding the commutator norms by $\norm{[A_0, A_1]}_{\mathrm{op}} \le 2\norm{A_0}\norm{A_1} = 2$ and $\norm{[B_0, B_1]}_{\mathrm{op}} \le 2$ in Landau's identity $S^2 = 4I - [A_0, A_1][B_0, B_1]$ gives $\norm{S^2}_{\mathrm{op}} \le 8$, hence $|\langle S\rangle| \le 2\sqrt{2}$. Neither this general form nor this argument is formalized in this book ([@prop-landau-area-square] holds only for finite-dimensional Kronecker products).
 3. **No controllable superluminal signaling**: Violation of the CHSH inequality (verified across loophole-free Bell experiments) manifests only in joint correlation statistics when Alice's and Bob's records are brought together afterward. As shown in [@thm-local-correlation-sectors] and [@lemma-bell-mixed-marginal], Bob's local reduced state remains fixed at $\frac{1}{2}I_2$ regardless of Alice's measurement choice, so quantum entanglement never permits controllable faster-than-light communication.
 :::
 

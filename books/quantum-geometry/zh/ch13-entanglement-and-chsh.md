@@ -243,10 +243,115 @@ $$
 S^2 = 4 I_4 + 4\bigl((\vv{a}_0 \times \vv{a}_1)\cdot\vv{\sigma}\bigr) \otimes_{\mathrm{K}} \bigl((\vv{b}_0 \times \vv{b}_1)\cdot\vv{\sigma}\bigr)!
 $$
 
-看！这句话把量子破缺的几何机制交代得一清二楚（注意：此泡利叉积展开是针对单比特泡利方向的手算几何解释，并不改写 [@prop-landau-area-square] 对任意有限维厄米对合矩阵的一般假设；同时 [@prop-landau-area-square] 本身是算子代数恒等式，而非经典局域隐变量概率上界的证明）：
+看！这句话把量子破缺的几何机制交代得一清二楚（注意：此泡利叉积展开是针对单比特泡利方向的手算几何解释，并不改写 [@prop-landau-area-square] 对任意有限维厄米对合矩阵的一般假设；同时 [@prop-landau-area-square] 本身是算子代数恒等式，而非经典局域隐变量概率上界的证明）：$S^2$ 超出 $4$ 的那一部分，是 Alice 的有向面积乘以 Bob 的有向面积。于是立刻冒出三个问题：一侧面积为零时，$S^2$ 是什么？两侧面积都只张开一部分时，$S$ 的特征值落在哪里？面积张满时，有没有天花板？下面三条冻结定理在任意有限维上回答这三个问题，用不着泡利矩阵。
 
-- 倘若 Alice 的两次提问共线（$\vv{a}_0 \parallel \vv{a}_1$，张不开面积，$\vv{a}_0 \times \vv{a}_1 = \vv{0}$），或者 Bob 的两次提问共线（$\vv{b}_0 \parallel \vv{b}_1$，$\vv{b}_0 \times \vv{b}_1 = \vv{0}$），换位子面积项 $C$ 当场归零，$S^2 = 4I_4$，最高期望值永远跨不过经典门槛 $2$；
-- 唯有当 Alice 用两根正交轴（$\vv{a}_0 \perp \vv{a}_1$，$\norm{\vv{a}_0 \times \vv{a}_1} = 1$）撑开最大单位面积，**并且** Bob 也用两根正交轴（$\vv{b}_0 \perp \vv{b}_1$，$\norm{\vv{b}_0 \times \vv{b}_1} = 1$）撑开最大单位面积时，两片面积的克罗内克乘积才给 $S^2$ 注入额外的 $+4$，把 $S^2$ 的最高特征值从 $4$ 一举推高到 $4 + 4 = 8 = (2\sqrt{2})^2$！
+**一侧面积为零。** 在单比特图像里，Alice 的两次提问共线（$\vv{a}_0 \parallel \vv{a}_1$）意味着 $A_1 = \pm A_0$，两把尺子可交换，换位子当场归零。一般维数下，“共线”换成“可交换”，结论照样成立。
+
+::: {.corollary #cor-chsh-local-commuting-collapse title="一侧局域观测量可交换时 CHSH 算子的平方为 4I" lean="D5/S3/QuantumBounds/LandauCommutingCollapse.chsh_square_eq_four_of_local_pair_commutes"}
+设 $m, n$ 为有限可判等指标类型，$A_0, A_1 \in M_m(\mathbb{C})$ 与 $B_0, B_1 \in M_n(\mathbb{C})$ 均为厄米矩阵且平方为单位阵（即 [@prop-landau-area-square] 的四条假设），$S = A_0 \otimes_{\mathrm{K}} B_0 + A_0 \otimes_{\mathrm{K}} B_1 + A_1 \otimes_{\mathrm{K}} B_0 - A_1 \otimes_{\mathrm{K}} B_1$。若
+
+$$
+A_0 A_1 = A_1 A_0 \qquad \text{或} \qquad B_0 B_1 = B_1 B_0,
+$$
+
+则
+
+$$
+S^2 = 4 \cdot (1 : M_{m \times n}(\mathbb{C})).
+$$
+:::
+
+::: proof
+源码先用 [@prop-landau-area-square] 把 $S^2$ 改写为 $4 \cdot 1 + C$，再分两种情形：若 $A_0 A_1 = A_1 A_0$，Alice 的换位子 $A_0 A_1 - A_1 A_0$ 化为 $A_1 A_0 - A_1 A_0 = 0$；若 $B_0 B_1 = B_1 B_0$，Bob 的换位子同样为零。零矩阵与任何矩阵的克罗内克积为零，取负仍为零，于是 $C = 0$，只剩 $S^2 = 4 \cdot 1$。完整证明由 Lean 内核检查。
+:::
+
+这条推论是算子恒等式；Lean 文件的说明明确写着，它不陈述任何期望值上界。要由它走到“经典门槛”，还需一段手工推导：$S$ 是厄米矩阵的克罗内克积之和与差，本身厄米；$S^2 = 4I$ 迫使每个特征值 $\lambda$ 满足 $\lambda^2 = 4$，即 $\lambda = \pm 2$；于是 $2I - S$ 与 $2I + S$ 都半正定，对任意密度矩阵 $\rho$ 有 $-2 \le \operatorname{Re}\Tr(\rho S) \le 2$。**只要有一方的两次提问不分先后，量子关联就跨不过经典门槛。**
+
+**两侧面积都只张开一部分。** 回到单比特：设 Alice 两轴的夹角为 $\alpha$、Bob 两轴的夹角为 $\beta$，则 $\norm{\vv{a}_0 \times \vv{a}_1} = \sin\alpha$，$\norm{\vv{b}_0 \times \vv{b}_1} = \sin\beta$。泡利方向算子 $\vv{u}\cdot\vv{\sigma}$ 的特征值是 $\pm\norm{\vv{u}}$，所以由上面的手算公式，$C$ 只有两个特征值 $\pm 4\sin\alpha\sin\beta$（手工推导）。换位子项只取一对相反的值，这正是下面这条命题的前提。
+
+::: {.proposition #prop-chsh-four-point-spectrum title="换位子项的谱落在 ±N 上时 CHSH 算子的实谱落在四个平方根上" lean="D5/S3/QuantumBounds/CHSHSpectrum.chsh_spectrum"}
+设 $N \in \mathbb{R}$ 满足 $0 < N < 4$；$m, n$ 为有限可判等指标类型，$A_0, A_1 \in M_m(\mathbb{C})$ 与 $B_0, B_1 \in M_n(\mathbb{C})$ 均为厄米矩阵且平方为单位阵；$S$ 与 $C$ 同 [@prop-landau-area-square]：
+
+$$
+\begin{aligned}
+S &= A_0 \otimes_{\mathrm{K}} B_0 + A_0 \otimes_{\mathrm{K}} B_1 + A_1 \otimes_{\mathrm{K}} B_0 - A_1 \otimes_{\mathrm{K}} B_1, \\
+C &= -\bigl((A_0 A_1 - A_1 A_0) \otimes_{\mathrm{K}} (B_0 B_1 - B_1 B_0)\bigr).
+\end{aligned}
+$$
+
+对复方阵 $M$，记 $\operatorname{spectrum}_{\mathbb{R}} M$ 为使 $r \cdot 1 - M$ 不可逆的全体实数 $r$。若 $\operatorname{spectrum}_{\mathbb{R}} C \subseteq \{N, -N\}$，则
+
+$$
+\operatorname{spectrum}_{\mathbb{R}} S \subseteq \bigl\{\sqrt{4 + N},\; -\sqrt{4 + N},\; \sqrt{4 - N},\; -\sqrt{4 - N}\bigr\}.
+$$
+:::
+
+::: proof
+源码先证 $S$ 是厄米矩阵：厄米矩阵的克罗内克积仍是厄米的（私有引理 `hermitian_kronecker`），厄米矩阵的和与差也是。于是 $S$ 的实谱恰好是它的特征值集合。任取特征值 $x$：由谱的幂映射（Mathlib 的 `spectrum.pow_mem_pow`），$x^2$ 属于 $S^2$ 的谱；由 [@prop-landau-area-square]，$S^2 = 4 \cdot 1 + C$，标量平移把谱整体平移（`spectrum.add_mem_add_iff`），故 $x^2 - 4$ 属于 $C$ 的谱。按假设 $x^2 - 4 = N$ 或 $x^2 - 4 = -N$，即 $x^2 = 4 + N$ 或 $x^2 = 4 - N$；两数都为正，所以 $x$ 是对应平方根的正值或负值。完整证明由 Lean 内核检查。
+:::
+
+这条命题有两处要读准。其一，它只给包含关系：$S$ 的特征值逃不出这四个点，但它没有说四个点都会出现。其二，前提是严格的 $0 < N < 4$。单比特情形 $N = 4\sin\alpha\sin\beta$，前提等于说两侧都不共线、且两侧不同时正交；两侧都正交时 $N = 4$，落在命题之外。那时手算得 $S^2$ 的特征值为 $8, 8, 0, 0$（下一节 [@cor-fixed-chsh-tsirelson] 的证明对固定算子算出的也是这组值），$S$ 的谱为 $\{2\sqrt{2}, -2\sqrt{2}, 0\}$。
+
+::: {.example #ex-chsh-spectrum-angle-table title="五组夹角下的面积参数 N、CHSH 谱与贝尔态上的期望值"}
+四根轴都放在 $(Z, X)$ 平面内，角度从 $Z$ 轴量起。Alice 取 $A_0 = Z$、$A_1 = \cos\alpha\,Z + \sin\alpha\,X$；Bob 取 $B_0 = Z$、$B_1 = \cos\beta\,Z - \sin\beta\,X$（向另一侧转）。手工推导：由 $[Z, X] = 2iY$ 得 $[A_0, A_1] = 2i\sin\alpha\,Y$、$[B_0, B_1] = -2i\sin\beta\,Y$，故
+
+$$
+C = -(2i\sin\alpha)(-2i\sin\beta)\,Y \otimes_{\mathrm{K}} Y = -4\sin\alpha\sin\beta\;Y \otimes_{\mathrm{K}} Y.
+$$
+
+$Y \otimes_{\mathrm{K}} Y$ 在 $\lvert\Phi^+\rangle, \lvert\Psi^-\rangle$ 上取 $-1$，在 $\lvert\Phi^-\rangle, \lvert\Psi^+\rangle$ 上取 $+1$，所以 $C$ 的谱是 $\{N, -N\}$，其中 $N = 4\sin\alpha\sin\beta$。
+
+以 $\alpha = \beta = 60^\circ$ 为例：$A_1 = \frac{1}{2}Z + \frac{\sqrt{3}}{2}X$，$B_1 = \frac{1}{2}Z - \frac{\sqrt{3}}{2}X$，$[A_0, A_1] = i\sqrt{3}\,Y$，$[B_0, B_1] = -i\sqrt{3}\,Y$，$C = -3\,Y \otimes_{\mathrm{K}} Y$，$N = 3$。[@prop-chsh-four-point-spectrum] 把 $S$ 的谱关进 $\{\pm\sqrt{7}, \pm 1\}$；直接展开 $4\times 4$ 矩阵 $S$ 的特征多项式得 $(\lambda - 1)(\lambda + 1)(\lambda^2 - 7)$，四个点各出现一次。贝尔态 $\lvert\Phi^+\rangle$ 上，两根同平面轴的关联就是夹角余弦：$E_{00} = 1$，$E_{01} = \cos 60^\circ = \frac{1}{2}$，$E_{10} = \frac{1}{2}$，$E_{11} = \cos 120^\circ = -\frac{1}{2}$，于是 $\langle S\rangle_{\Phi^+} = 1 + \frac{1}{2} + \frac{1}{2} + \frac{1}{2} = \frac{5}{2}$：已越过 $2$，但没到 $\sqrt{7} \approx 2.6458$。最大值藏在 $\operatorname{span}\{\lvert\Phi^+\rangle, \lvert\Psi^-\rangle\}$ 里，$S$ 在这个平面上的矩阵是
+
+$$
+\begin{pmatrix} 5/2 & -\sqrt{3}/2 \\ -\sqrt{3}/2 & -5/2 \end{pmatrix},
+$$
+
+特征值为 $\pm\sqrt{25/4 + 3/4} = \pm\sqrt{7}$。
+
+五组夹角汇总如下。末列按 $\langle S\rangle_{\Phi^+} = 1 + \cos\beta + \cos\alpha - \cos(\alpha + \beta)$ 计算，数值四舍五入到四位小数：
+
+| $\alpha$ | $\beta$ | $N = 4\sin\alpha\sin\beta$ | $S$ 的谱 | 冻结依据 | $\langle S\rangle_{\Phi^+}$ |
+| :---: | :---: | :---: | :--- | :--- | :---: |
+| $0^\circ$ | $60^\circ$ | $0$ | $\pm 2$（各两重） | [@cor-chsh-local-commuting-collapse] | $2$ |
+| $30^\circ$ | $30^\circ$ | $1$ | $\pm\sqrt{5} \approx \pm 2.2361$，$\pm\sqrt{3} \approx \pm 1.7321$ | [@prop-chsh-four-point-spectrum] | $\frac{1}{2} + \sqrt{3} \approx 2.2321$ |
+| $60^\circ$ | $60^\circ$ | $3$ | $\pm\sqrt{7} \approx \pm 2.6458$，$\pm 1$ | [@prop-chsh-four-point-spectrum] | $\frac{5}{2} = 2.5$ |
+| $90^\circ$ | $30^\circ$ | $2$ | $\pm\sqrt{6} \approx \pm 2.4495$，$\pm\sqrt{2} \approx \pm 1.4142$ | [@prop-chsh-four-point-spectrum] | $\frac{3}{2} + \frac{\sqrt{3}}{2} \approx 2.3660$ |
+| $90^\circ$ | $90^\circ$ | $4$ | $\pm 2\sqrt{2} \approx \pm 2.8284$，$0$（两重） | 无（$N = 4$ 超出命题前提；由 [@prop-landau-area-square] 手算） | $2$ |
+
+“冻结依据”一栏只说明哪条冻结结论把谱限制在所列的点上（第一行还要接上前面 $\lambda^2 = 4$ 那段手工推导）；所列的点是否都出现、出现几重，以及末列，都是手工推导，并经数值核对。谱只通过 $N$ 依赖两个夹角；只要两侧面积都不为零，最大特征值 $\sqrt{4 + N}$ 就超过 $2$。末行的谱已经顶到 $2\sqrt{2}$，贝尔态上的期望值却只有 $2$：Bob 的十字架摆错了位置。怎么摆，是下一节 $45^\circ$ 的问题。
+:::
+
+**面积张满时的天花板。** 上表中最大的数是 $2\sqrt{2}$。换别的维数、别的观测量，能不能更大？模块 `PeritoTsirelson` 证明了一条更一般的上界：Alice 两个设置、Bob $d$ 个设置，观测量只要求是幺正矩阵；$d = 2$ 时正是 CHSH。
+
+::: {.theorem #thm-unitary-bell-bound title="有限维幺正策略的贝尔值上界 $2/\sin(\pi/(2d))$" lean="D5/S3/QuantumBounds/PeritoTsirelson.bell_value_le"}
+设 $d, n, m \in \mathbb{N}$，$d \ge 2$。设 $A_0, A_1$ 为 $n \times n$ 复幺正矩阵，$B_0, \dots, B_{d-1}$ 为 $m \times m$ 复幺正矩阵（行列指标分别为 $\mathrm{Fin}\,n$ 与 $\mathrm{Fin}\,m$），$\rho$ 为 $\mathrm{Fin}\,n \times \mathrm{Fin}\,m$ 上的密度态 `DensityState`（半正定且 $\Tr\rho = 1$）。记 $\omega_d = \exp(2\pi i/d)$（源码中的 $\mathrm{windowRoot}\,d$），定义
+
+$$
+\begin{aligned}
+\mathrm{bellOperator}_d(A, B) &= \sum_{x = 0}^{1}\sum_{y = 0}^{d - 1} \omega_d^{\,xy}\, A_x \otimes_{\mathrm{K}} B_y, \\
+\mathrm{bellValue}_d(A, B, \rho) &= \operatorname{Re}\Tr\bigl(\rho \cdot \mathrm{bellOperator}_d(A, B)\bigr).
+\end{aligned}
+$$
+
+则
+
+$$
+\mathrm{bellValue}_d(A, B, \rho) \le \frac{2}{\sin\bigl(\pi/(2d)\bigr)}.
+$$
+:::
+
+::: proof
+源码分四步。第一步（私有引理 `density_trace_re_le_norm`）：对密度态 $\rho$ 与任意矩阵 $M$，$\operatorname{Re}\Tr(\rho M) \le \norm{M}$（算子范数）。做法是把 $M$ 换成厄米部分 $H = \frac{1}{2}(M + M^*)$，实部迹不变、范数不增；$\norm{H} \cdot 1 - H$ 半正定，与 $\rho$ 配对的迹非负，再用 $\Tr\rho = 1$。第二步（私有引理 `bell_operator_factor`）：从左边提出 $A_0 \otimes_{\mathrm{K}} 1$，
+
+$$
+\mathrm{bellOperator}_d(A, B) = (A_0 \otimes_{\mathrm{K}} 1) \sum_{y = 0}^{d - 1} \bigl(1 + \omega_d^{\,y}\, U\bigr) \otimes_{\mathrm{K}} B_y, \qquad U = A_0^* A_1,
+$$
+
+左乘幺正矩阵不改变算子范数。第三步（`PeritoTensorBlockBound.tensor_block_bound`）：把幺正矩阵 $U$ 酉对角化为 $\operatorname{diag}(z_1, \dots, z_n)$，$\lvert z_i\rvert = 1$；用 $P \otimes_{\mathrm{K}} 1$ 共轭后，算子拆成 $n$ 个互相正交的 Bob 块 $\sum_y (1 + \omega_d^{\,y} z_i) B_y$，由三角不等式与 $B_y$ 的幺正性，每块的范数不超过 $\sum_y \lvert 1 + \omega_d^{\,y} z_i\rvert$，整个算子的范数也就不超过这些块界的公共上界。第四步（`PeritoUnitCircleSum.unit_circle_sum_le`）：写 $z = e^{2is}$，则 $\lvert 1 + \omega_d^{\,y} z\rvert = 2\lvert\cos(s + \pi y/d)\rvert$，而 $d$ 个等距余弦的绝对值之和不超过 $1/\sin(\pi/(2d))$。完整证明由 Lean 内核检查。
+:::
+
+取 $d = 2$ 是一段手工推导：$\omega_2 = e^{i\pi} = -1$，四个系数依次为 $1, 1, 1, -1$，$\mathrm{bellOperator}_2$ 正是 CHSH 算子 $S$，上界为 $2/\sin(\pi/4) = 2\sqrt{2}$。厄米对合矩阵是幺正的（$A^* A = A^2 = 1$）；把 $A_0, A_1$ 同时取负，它们仍是幺正的，而 $S$ 变号。所以对任意有限维、任意四个厄米对合观测量与任意密度态，都有 $\lvert\operatorname{Re}\Tr(\rho S)\rvert \le 2\sqrt{2}$：这就是有限维张量积情形的 Tsirelson 界；无穷维与只要求对易的一般形式仍见章末 [@rem-bell-chsh-literature]。证明第四步在 $d = 2$ 时是 $\lvert 1 + z\rvert + \lvert 1 - z\rvert \le 2\sqrt{2}$，等号只在 $z = \pm i$ 时成立。对单比特泡利方向，$U = A_0^* A_1 = A_0 A_1 = \cos\alpha\, I + i(\vv{a}_0 \times \vv{a}_1)\cdot\vv{\sigma}$ 的特征值是 $e^{\pm i\alpha}$，块界成为 $2\lvert\cos(\alpha/2)\rvert + 2\lvert\sin(\alpha/2)\rvert = 2\sqrt{1 + \sin\alpha}$（$0^\circ \le \alpha \le 180^\circ$）；与 [@prop-chsh-four-point-spectrum] 允许的最大特征值 $\sqrt{4 + N} = 2\sqrt{1 + \sin\alpha\sin\beta}$ 相比，只是把 Bob 的 $\sin\beta$ 放大成了 $1$。它在 $\alpha = 90^\circ$ 时达到 $2\sqrt{2}$：天花板，就钉在 Alice 张满一个正交十字架的地方。
 
 ## 45° 余弦与固定 CHSH 极值 {#sec-bell-45-tsirelson}
 
@@ -287,7 +392,7 @@ $$
 2. **全体量子态上的上界（$\le 2\sqrt{2}$）**：对任意 $\rho \in \mathcal{S}_2$，源码直接利用半正定上界差矩阵分解 $2\sqrt{2}I_4 - \mathrm{chshOperator} = \sqrt{2}(I_4 - Z\otimes_{\mathrm{K}} Z) + \sqrt{2}(I_4 - X\otimes_{\mathrm{K}} X) \ge 0$（因为 $Z \otimes_{\mathrm{K}} Z$ 与 $X \otimes_{\mathrm{K}} X$ 均为厄米对合矩阵，故 $I_4 - Z\otimes_{\mathrm{K}} Z \ge 0$ 且 $I_4 - X\otimes_{\mathrm{K}} X \ge 0$；与此同时，由 [@prop-landau-area-square] 的 Landau 平方公式，由于 $[Z, X] = 2iY$ 且 $[B_0, B_1] = -2iY$，该算子的平方精确等于 $(\mathrm{chshOperator})^2 = 4(I_4 - Y \otimes_{\mathrm{K}} Y) \le 8 I_4$，本征谱为 $\{8, 8, 0, 0\}$——在 $\operatorname{span}\{\lvert\Phi^+\rangle, \lvert\Psi^-\rangle\}$ 上取本征值 $8$，而在 $\operatorname{span}\{\lvert\Phi^-\rangle, \lvert\Psi^+\rangle\}$ 上取本征值 $0$）。半正定态 $\rho$ 与半正定差算子乘积的实迹非负，故 $\operatorname{Re}\Tr(\rho \cdot \mathrm{chshOperator}) \le 2\sqrt{2}\operatorname{Re}\Tr(\rho) = 2\sqrt{2}$。完整证明由 Lean 内核检查。
 :::
 
-请注意 [@cor-fixed-chsh-tsirelson] 的精确量词边界：该冻结声明固定了具体的双比特算子 `CHSHWitness.chshOperator`（即固定 Alice 为 $Z, X$、Bob 为 $(Z\pm X)/\sqrt{2}$），并在全体 $4\times 4$ 半正定迹一密度矩阵 $\rho$ 上求极值，**并未包含对任意可变测量方向的量词，也未在任意维希尔伯特空间上作全称量化**（一般可变算子下的 Tsirelson 定理归入章末 [@rem-bell-chsh-literature]）。
+请注意 [@cor-fixed-chsh-tsirelson] 的精确量词边界：该冻结声明固定了具体的双比特算子 `CHSHWitness.chshOperator`（即固定 Alice 为 $Z, X$、Bob 为 $(Z\pm X)/\sqrt{2}$），并在全体 $4\times 4$ 半正定迹一密度矩阵 $\rho$ 上求极值，**并未包含对任意可变测量方向的量词，也未在任意维希尔伯特空间上作全称量化**（可变观测量、任意有限维下的上界见 [@thm-unitary-bell-bound] 取 $d = 2$；无穷维与对易算子框架下的一般 Tsirelson 定理归入章末 [@rem-bell-chsh-literature]）。
 
 [@cor-fixed-chsh-tsirelson] 把量子一侧的山顶钉在了 $2\sqrt{2}$。要说这是“击败”，还得把经典一侧的天花板同样钉死。经典对手的规则是：Alice 与 Bob 事先共享一个隐变量 $\lambda$（Lean 中称为纤维地址 `Fiber`），此后各自只看自己的测量设置与 $\lambda$，给出答案 $\pm 1$；谁也看不到对方选了哪个设置。
 
@@ -346,7 +451,7 @@ Bob 的两个答案只有两种关系：
 每一行里，决定符号的那个乘积取 $+1$ 与 $-1$ 的组合各占一半，所以十六种组合中恰有八种取 $+2$、八种取 $-2$，没有任何一种落在闭区间 $[-2, 2]$ 之外，也没有任何一种落在它的内部。任何概率混合都只是在 $-2$ 与 $+2$ 之间取加权平均，于是 $\lvert S\rvert \le 2$，与 [@thm-classical-chsh-bound-exact] 一致。
 :::
 
-现在两端都钉住了：有限确定性局域模型的 CHSH 值出不了线段 $[-2, 2]$（[@thm-classical-chsh-bound-exact]），而固定 CHSH 算子在量子态上的期望值可以到达 $2\sqrt{2}$（[@cor-fixed-chsh-tsirelson]）。两者之比为 $\sqrt{2}$，这就是 $45^\circ$ 圆弧超出折线的倍数。需要留意两条定理各自的量词范围：经典一侧针对的是有限纤维集合上的确定性 $\pm 1$ 应答表，量子一侧针对的是一个固定的双比特算子；一般形式见章末 [@rem-bell-chsh-literature]。
+现在两端都钉住了：有限确定性局域模型的 CHSH 值出不了线段 $[-2, 2]$（[@thm-classical-chsh-bound-exact]），而固定 CHSH 算子在量子态上的期望值可以到达 $2\sqrt{2}$（[@cor-fixed-chsh-tsirelson]）。两者之比为 $\sqrt{2}$，这就是 $45^\circ$ 圆弧超出折线的倍数。需要留意各条定理的量词范围：经典一侧针对的是有限纤维集合上的确定性 $\pm 1$ 应答表；量子一侧的可达性针对的是一个固定的双比特算子，上界 $2\sqrt{2}$ 则对一切有限维幺正策略成立（[@thm-unitary-bell-bound] 取 $d = 2$）；一般形式见章末 [@rem-bell-chsh-literature]。
 
 为什么 CHSH 实验偏偏选定 $\theta = 45^\circ$ 作为对称工作角？在对称四方向设置（三段相邻夹角为 $\theta$、第四段跨越角为 $3\theta$）下，四项余弦组合为 $3\cos\theta - \cos(3\theta)$，其一阶导数 $-3\sin\theta + 3\sin(3\theta) = 0$ 恰在 $\theta = 45^\circ$（$\pi/4$）处取得全局最大值 $2\sqrt{2}$！（注意区分两个不同的优化问题：$\theta = 45^\circ$ 最大化的是四项对称 CHSH 组合 $3\cos\theta - \cos(3\theta)$；若单独考察单根弦上的差函数 $g(\theta) = \cos\theta - (1 - 2\theta/\pi)$，其逐点导数 $-\sin\theta + 2/\pi = 0$ 的极大值点在 $\theta = \arcsin(2/\pi) \approx 39.5402^\circ$ 处，单弦差约为 $0.2105$，而在对称 CHSH 工作角 $\theta = 45^\circ$ 处单弦差为 $\frac{\sqrt{2}-1}{2} \approx 0.2071$，四段累加得 $2\sqrt{2} - 2 \approx 0.8284$。）让我们通过下面的综合算例，把 $\rho_{\Phi^+}$ 与 $\rho_{\Psi^-}$ 的关联张量、四项 CHSH 期望值以及 $45^\circ$ 余弦与特定玩具模型的几何对比逐一算清。
 
@@ -419,7 +524,7 @@ $$
 **文献结果，未在本书形式化。** 在将本章的形式化定理与量子基础物理文献对照时，应当严格区分以下三个层面的经典与量子结论：
 
 1. **一般经典局域隐变量模型的 $|S_{\mathrm{LHV}}| \le 2$ 凸包定理**（J. F. Clauser, M. A. Horne, A. Shimony, and R. A. Holt, *Proposed experiment to test local hidden-variable theories*, Phys. Rev. Lett. **23**, 880–884, 1969, doi:10.1103/PhysRevLett.23.880）：[@ex-bell-chsh-45deg] 第三步中的折线 $C_{\mathrm{cl}}(\theta) = 1 - 2\theta/\pi$ 仅是一个特定的均匀隐方向玩具模型，其本身并不等同于贝尔定理。真正的贝尔—CHSH 定理对**任意**局域随机隐变量分布 $p(\lambda)$ 及任意局域响应函数 $\bar{A}_i(\lambda), \bar{B}_j(\lambda) \in [-1, 1]$ 成立：因为区间 $[-1, 1]^4$ 上的双线性泛函在极点 $a_0, a_1, b_0, b_1 \in \{\pm 1\}$ 处达到极值，而对任意 $\pm 1$ 赋值，$b_0 + b_1$ 与 $b_0 - b_1$ 中必有一项为 $0$、另一项为 $\pm 2$，故确定性组合 $a_0(b_0 + b_1) + a_1(b_0 - b_1) \in \{-2, +2\}$；对任意隐变量概率测度求凸平均后，必然服从 $|S_{\mathrm{LHV}}| \le 2$。其中有限隐变量集合、确定性 $\pm 1$ 应答的情形已由 [@thm-classical-chsh-bound-exact] 验证；任意概率测度 $p(\lambda)$ 与取值于 $[-1, 1]$ 的随机应答函数的一般形式仍属文献结果：从前者到后者需要把随机应答写成确定性应答的凸组合，并把有限和换成积分，这两步未在本书形式化。
-2. **任意维希尔伯特空间与任意可变观测量下的一般 Tsirelson 界**（B. S. Cirel'son, *Quantum generalizations of Bell's inequality*, Lett. Math. Phys. **4**, 93–100, 1980, doi:10.1007/BF00417500）：本章 [@cor-fixed-chsh-tsirelson] 证明的是**固定**双比特算子 `CHSHWitness.chshOperator` 在全体双比特态上的最大值为 $2\sqrt{2}$。而在 Cirel'son (1980) 的一般定理中，对任意希尔伯特空间 $\mathcal{H}$、任意量子态 $\rho$ 以及满足 $A_i^* = A_i$、$B_j^* = B_j$、$A_i^2 = I$、$B_j^2 = I$ 且 $[A_i, B_j] = 0$ 的**任意**四个二值可观测量，利用算子范数估计 $\norm{[A_0, A_1]}_{\mathrm{op}} \le 2\norm{A_0}\norm{A_1} = 2$ 与 $\norm{[B_0, B_1]}_{\mathrm{op}} \le 2$ 代入 Landau 恒等式 $S^2 = 4I - [A_0, A_1][B_0, B_1]$，可得 $\norm{S^2}_{\mathrm{op}} \le 4 + 4 = 8$，从而对一切空间维数与测量方向均有 $|\langle S\rangle| \le 2\sqrt{2}$。
+2. **任意希尔伯特空间与对易观测量框架下的一般 Tsirelson 界**（B. S. Cirel'son, *Quantum generalizations of Bell's inequality*, Lett. Math. Phys. **4**, 93–100, 1980, doi:10.1007/BF00417500）：有限维张量积情形已经形式化。[@thm-unitary-bell-bound] 对任意有限维 $n, m$、任意幺正观测量（厄米对合矩阵是其特例）与任意密度态给出贝尔值上界；取 $d = 2$ 并对 $A_0, A_1$ 同时取负，得 $\lvert\operatorname{Re}\Tr(\rho S)\rvert \le 2\sqrt{2}$（这两步是手工推导）；[@cor-fixed-chsh-tsirelson] 说明固定双比特算子 `CHSHWitness.chshOperator` 在贝尔态上达到 $2\sqrt{2}$。仍属文献结果的是 Cirel'son (1980) 定理的一般形式：希尔伯特空间 $\mathcal{H}$ 可以是无穷维的，Alice 与 Bob 的观测量作用在同一个 $\mathcal{H}$ 上，只要求 $A_i^* = A_i$、$B_j^* = B_j$、$A_i^2 = I$、$B_j^2 = I$ 与 $[A_i, B_j] = 0$，不要求张量积结构。一条简短的论证是：把算子范数估计 $\norm{[A_0, A_1]}_{\mathrm{op}} \le 2\norm{A_0}\norm{A_1} = 2$ 与 $\norm{[B_0, B_1]}_{\mathrm{op}} \le 2$ 代入 Landau 恒等式 $S^2 = 4I - [A_0, A_1][B_0, B_1]$，得 $\norm{S^2}_{\mathrm{op}} \le 8$，从而 $|\langle S\rangle| \le 2\sqrt{2}$。这一一般形式与这条论证都未在本书形式化（[@prop-landau-area-square] 只对有限维克罗内克积成立）。
 3. **非定域关联绝不蕴涵可控超光速通信（无信令原则）**：贝尔不等式的违背以及实验上的无漏洞贝尔检验，揭示的是联合测量结果在事后放到一起比对时呈现的非经典关联面积；正如 [@thm-local-correlation-sectors] 与 [@lemma-bell-mixed-marginal] 所示，无论 Alice 选择哪一个测量基（甚至无论她是否执行测量），只要她不通过经典信道把测量结果告诉 Bob，Bob 局部的约化密度矩阵始终纹丝不动地停留在球心 $\mathrm{traceFirstFactor}(\mathrm{bellDensity}) = \frac{1}{2}I_2$，因此量子纠缠绝不能用于传递可控超光速信号。
 :::
 
