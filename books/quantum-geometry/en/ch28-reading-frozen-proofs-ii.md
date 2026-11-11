@@ -8,7 +8,9 @@ In the operator geometry of quantum measurement, a projective record measurement
 
 In this concluding chapter of Part VII, we audit four frozen declarations from `D5/S3/Observer/` line by line — **the rank-one pure-state Born modulus-squared reduction**, **the three-conjunct Born pairing and ensemble bridge**, **validity of Lüders conditional states**, and **the unread fixed-point equivalence** — and conclude with a **comprehensive audit table of frozen declarations across Parts IV–VI**.
 
-![Lean 4 kernel proof audit for Parts IV to VI: rank-one pure-state Born modulus-squared reduction, the three-conjunct Born pairing bridge, Lüders conditional state validity, and the unread fixed-point equivalence](../assets/fig-28-lean-kernel-audit-part4-6.svg)
+::: {.figure src="ch28-overview"}
+**Figure 28.** The chapter at a glance. Left panel: the amber arrow $\psi$ casts a cyan shadow $\lvert\langle\phi\mid\psi\rangle\rvert = 3/5$ on the cyan line $\phi$, and the cyan square on that shadow is the record weight $9/25$ ([@thm-audit-rank-one-born]). Middle panel, upper half: a bar of length $1$ split by the weights $w_0 = 9/25$ and $w_1 = 16/25$, which together make the unread state ([@lemma-audit-born-pairing-weight]); lower half: each piece divided by its own weight fills a whole bar, so each conditional state has trace $1$ again ([@prop-audit-conditional-state]). Right panel: $\rho$ with magenta cross blocks is changed by the pinching, while $\rho'$ with its cross blocks struck out is a fixed point ([@cor-audit-unread-fixed-iff]). The numbers come from the worked example at the end of the chapter.
+:::
 
 ## Source Anatomy of the Rank-One Born Reduction and Three-Conjunct Pairing Bridge {#sec-audit-rank-one-born-and-pairing}
 
@@ -63,6 +65,10 @@ Tracing the nine rewrites inside `rw [...]` step by step:
 The full proof is checked by the Lean kernel.
 :::
 
+::: {.figure src="ch28-rank-one-chain"}
+**The rank-one reduction is a chain of six rewrites.** Read from the top; beside each arrow is the lemma the proof uses for that step. The trace is first split into the two outer products $\lvert\psi\rangle\langle\psi\rvert$ and $\lvert\phi\rangle\langle\phi\rvert$; multiplying them contracts out one inner product, taking the trace contracts out another, the two are complex conjugates of each other, and their product is the cyan $\lvert z\rvert^2$ with $z = \langle\phi\mid\psi\rangle$. The chain ends in the green [@thm-audit-rank-one-born].
+:::
+
 Next, `D5/S3/Observer/Conditioning/RankOneBornPairingWeight.lean:36` links this single-branch modulus-squared identity to the trace pairing and the full weighted ensemble decomposition of `unreadState P rho` (upper-middle panel of Figure 28).
 
 ::: {.lemma #lemma-audit-born-pairing-weight title="Three-Conjunct Bridge for Rank-One Born Pairing and Unread Ensemble Decomposition (Kernel Audit)" lean="D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight"}
@@ -92,6 +98,10 @@ In `RankOneBornPairingWeight.lean:36`, `refine ⟨?_, ?_, ?_⟩` splits the goal
   - When $w_j = 0$, the left-hand side is $0 \bullet \operatorname{conditionalState}(P, \rho, j) = 0$, while on the right-hand side `compressed_eq_zero_of_recordWeight_eq_zero` proves $P_j \rho P_j = 0$ by combining positive semidefiniteness `(P j * rho * P j).PosSemidef` with $\Tr(P_j \rho P_j) = w_j = 0$ and applying Mathlib's `PosSemidef.trace_eq_zero_iff.mp` (**a positive-semidefinite matrix with zero trace is identically the zero matrix**).
 
 Lines 57–91 of `RankOneBornPairingWeight.lean` also include three anonymous `example` probes (at lines 57, 72, and 88): Probe 1 (`line 57`) projects `.2.1` (the trace-pairing identity $\operatorname{recordWeight}(P, \rho, k) = \Tr(\rho P_k)$), Probe 2 (`line 72`) projects `.2.2` (the weighted-ensemble reconstruction $\operatorname{unreadState}(P, \rho) = \sum_j \operatorname{recordWeight}(P, \rho, j)\bullet\operatorname{conditionalState}(P, \rho, j)$), and Probe 3 (`line 88`) proves `Matrix.trace (0 : Matrix n n ℂ) ≠ 1` ($\Tr(0) \neq 1$), verifying that the zero matrix $\rho = 0$ is excluded by the trace-one state hypothesis $\Tr(\rho) = 1$. The full proof is checked by the Lean kernel.
+:::
+
+::: {.figure src="ch28-bridge-skeleton"}
+**The three-conjunct bridge: one conjunct borrows the previous theorem, one holds by definition, one splits each term into two cases.** The green "① rank one" is [@thm-audit-rank-one-born]; ② is `rfl`; ③ is `unread_eq_weighted_ensemble`, which branches for each $j$ on whether $w_j$ vanishes — if not, the scalar factors cancel; if so, the dashed hypothesis $\rho \succeq 0$ forces $P_j \rho P_j = 0$. All three meet in the green [@lemma-audit-born-pairing-weight]; in the figure $\rho_j$ stands for $\operatorname{conditionalState}(P, \rho, j)$.
 :::
 
 ## Lüders Conditional State Validity and the Unread Fixed-Point Equivalence {#sec-audit-conditional-state-and-fixed-point}
@@ -128,7 +138,15 @@ In `D5/S3/Observer/Conditioning.lean:143` (prefixed with `omit decEqKappa in`), 
 The full proof is checked by the Lean kernel.
 :::
 
+::: {.figure src="ch28-conditional-skeleton"}
+**Four steps make a conditional state a state, and the third borrows the Born skeleton of Chapter 27.** The right-hand column lists the four steps from top to bottom, each with its lemma; each dashed hypothesis on the left feeds one step, and the green [@lemma-audit-born-skeleton] feeds step ③ with the nonnegativity of the weight. The chain ends in the green [@prop-audit-conditional-state]; in the figure $\rho_k$ stands for $\operatorname{conditionalState}(P, \rho, k)$ and $w_k$ for $\operatorname{recordWeight}(P, \rho, k)$.
+:::
+
 Finally, we audit `unreadState_fixed_iff` at `D5/S3/Observer/Conditioning.lean:108`, which gives the exact algebraic criterion for a state $\rho$ to be a fixed point of unread measurement $\operatorname{unreadState}(P, \rho) = \rho$.
+
+::: {.figure src="ch28-fixed-skeleton"}
+**The fixed-point criterion, both directions in three steps each.** The left column, "⇒", starts from $U(\rho) = \rho$: replace $\rho$ by $U(\rho)$, let the left projection absorb it, and orthogonality sends the block to zero. The right column, "⇐", starts from vanishing cross blocks: completeness expands $P_k\rho$ into a sum, the sum keeps only its diagonal term, and summing over $k$ returns $\rho$. Both columns meet in the green [@cor-audit-unread-fixed-iff]; in the figure $U(\rho)$ stands for $\operatorname{unreadState}(P, \rho)$.
+:::
 
 ::: {.corollary #cor-audit-unread-fixed-iff title="Necessary and Sufficient Off-Diagonal Block Criterion for Unread Measurement Fixed Points (Kernel Audit)" lean="D5/S3/Observer/Conditioning.unreadState_fixed_iff"}
 Let $n$ be a finite index type with decidable equality (`[Fintype n] [DecidableEq n]`), let $\kappa$ be a finite outcome type (`[Fintype kappa]`), let $P : \kappa \to M_n(\mathbb{C})$ satisfy `hP : IsRecordMeasurement P`, and let $\rho \in M_n(\mathbb{C})$ be any square complex matrix. Then $\rho$ is a fixed point of the unread measurement map if and only if all off-diagonal projection blocks vanish:
@@ -161,6 +179,10 @@ The full proof is checked by the Lean kernel.
 ## Comprehensive Audit Table of Frozen Declarations Across Parts IV–VI {#sec-parts-iv-to-vi-frozen-audit-table}
 
 Completing the audit table begun in [Chapter 27](ch27-reading-frozen-proofs-i.md), the table below records the exact source files, line numbers, `statement_id` prefixes, and formal contracts for the declarations audited in this chapter together with representative frozen declarations across Parts IV, V, and VI at commit `1d9bf98cab8306e67ec38a739359f2cdae63877a`.
+
+::: {.figure src="ch28-declaration-parts"}
+**How many frozen declarations each of the eight parts cites.** A bar is the number of distinct declarations the chapters of that part cite with `lean=` (a declaration cited in two parts counts once in each), with the total on top; green below is the declarations of kind theorem in the lock, grey above the definitions and inductive types. The two braces mark the parts each audit table covers: Parts I–III for Chapter 27, Parts IV–VI for this chapter. The script computes the figure from `trureturing.lock.json` and the Chinese chapters.
+:::
 
 | Chapter | Frozen GID | Source File & Line | `statement_id` Prefix | Exact Formal Scope & Contract |
 | :---------: | ---------------------------- | ---------------------------- | :------------------: | ----------------------------------------------------- |

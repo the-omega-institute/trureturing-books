@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch28-overview" data-lang="zh" data-wrap="1" viewBox="0 0 740 280" width="740" height="280" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="三栏。第一栏：青色的线 φ 水平向右，琥珀色的箭头 ψ 斜向上；从 ψ 的尖端向 φ 作垂线，落下青色的影子 |⟨φ|ψ⟩| = 3/5，影子下方是以它为边的青色正方形，面积 |⟨φ|ψ⟩|² = 9/25。第二栏：上半，一根长为 1 的横条分成青色深浅两段，w₀ = 9/25 与 w₁ = 16/25，合起来是未读态；下半，两段各除以自己的权重，各自撑满一整根横条，标着 ρ₀ 与 ρ₁ 的迹为 1。第三栏：上面是带品红交叉块的 2 × 2 块矩阵 ρ，旁注 U(ρ) ≠ ρ；下面是交叉块已划掉的 ρ′，带一个回到自身的小圈箭头，旁注 U(ρ′) = ρ′。">
+<title>三栏。第一栏：青色的线 φ 水平向右，琥珀色的箭头 ψ 斜向上；从 ψ 的尖端向 φ 作垂线，落下青色的影子 |⟨φ|ψ⟩| = 3/5，影子下方是以它为边的青色正方形，面积 |⟨φ|ψ⟩|² = 9/25。第二栏：上半，一根长为 1 的横条分成青色深浅两段，w₀ = 9/25 与 w₁ = 16/25，合起来是未读态；下半，两段各除以自己的权重，各自撑满一整根横条，标着 ρ₀ 与 ρ₁ 的迹为 1。第三栏：上面是带品红交叉块的 2 × 2 块矩阵 ρ，旁注 U(ρ) ≠ ρ；下面是交叉块已划掉的 ρ′，带一个回到自身的小圈箭头，旁注 U(ρ′) = ρ′。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="236" height="280" viewBox="0 0 236 280">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">I　秩一：权重 = 影子²</text>
+<path d="M162 170 L161.67 160.81 L160.68 151.67 L159.04 142.62 L156.75 133.71 L153.82 124.99 L150.28 116.5 L146.14 108.29 L141.42 100.4 L136.15 92.86 L130.34 85.73 L124.04 79.03 L117.28 72.8 L110.08 67.07 L102.5 61.87 L94.56 57.23 L86.3 53.17 L77.78 49.72" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 4" stroke-linejoin="round" fill="none"/>
+<line x1="34" y1="170" x2="188" y2="170" class="ts-cyan" stroke-width="1.6" fill="none"/>
+<text class="tf-cyan" x="186" y="160" font-size="15" text-anchor="middle"><tspan font-style="italic">φ</tspan></text>
+<path d="M34 170 L110.8 170 L110.8 246.8 L34 246.8Z" class="ts-cyan tf-cyan" stroke-width="1.3" stroke-linejoin="round" fill-opacity="0.18"/>
+<line x1="110.8" y1="67.6" x2="110.8" y2="170" class="ts-dim" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<path d="M101.8 170 L101.8 179 L110.8 179" class="ts-dim" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<line x1="34" y1="170" x2="110.8" y2="170" class="ts-cyan" stroke-width="5" stroke-linecap="round" fill="none"/>
+<line x1="34" y1="170" x2="106.21" y2="73.72" class="ts-amber" stroke-width="2.4" fill="none"/>
+<path d="M110.8 67.6 L108.42 77.07 L102.38 72.53Z" class="tf-amber"/>
+<text class="tf-amber" x="118.8" y="71.6" font-size="15"><tspan font-style="italic">ψ</tspan></text>
+<path d="M68 170 L67.91 167.58 L67.65 165.17 L67.22 162.78 L66.63 160.43 L65.86 158.13 L64.93 155.89 L63.85 153.72 L62.61 151.63 L61.23 149.64 L59.71 147.75 L58.06 145.98 L56.29 144.32 L54.4 142.8" class="ts-dim" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+<text class="tf-dim" x="75.05" y="154.51" font-size="14" text-anchor="middle"><tspan font-style="italic">θ</tspan></text>
+<text class="tf-cyan" x="72.4" y="202.4" font-size="14" text-anchor="middle">|⟨<tspan font-style="italic">φ</tspan>|<tspan font-style="italic">ψ</tspan>⟩|<tspan dy="-0.42em" font-size="72%">2</tspan><tspan dy="0.42em">​</tspan></text>
+<text class="tf-cyan" x="72.4" y="222.4" font-size="13" text-anchor="middle">= 9/25</text>
+<text class="tf-cyan" x="118.8" y="192" font-size="13">|⟨<tspan font-style="italic">φ</tspan>|<tspan font-style="italic">ψ</tspan>⟩| = 3/5</text>
+</svg>
+<svg class="tr-fig-panel" x="252" y="0" width="236" height="280" viewBox="0 0 236 280">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">II　按权重混合，各自归一</text>
+<text class="tf-dim" x="18" y="62" font-size="13">未读态 <tspan font-style="italic">U</tspan>(<tspan font-style="italic">ρ</tspan>) = Σ <tspan font-style="italic">w</tspan><tspan dy="0.28em" font-size="72%">j</tspan><tspan dy="-0.28em" font-style="italic">ρ</tspan><tspan dy="0.28em" font-size="72%">j</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="18" y="72" width="72" height="26" class="ts-cyan tf-cyan" stroke-width="1.3" fill-opacity="0.42"/>
+<text class="tf-ink" x="54" y="89.68" font-size="13" text-anchor="middle"><tspan font-style="italic">w</tspan><tspan dy="0.28em" font-size="72%">0</tspan><tspan dy="-0.28em"> = 9/25</tspan></text>
+<rect x="90" y="72" width="128" height="26" class="ts-cyan tf-cyan" stroke-width="1.3" fill-opacity="0.16"/>
+<text class="tf-ink" x="154" y="89.68" font-size="13" text-anchor="middle"><tspan font-style="italic">w</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em"> = 16/25</tspan></text>
+<text class="tf-dim" x="18" y="150" font-size="13">条件态 <tspan font-style="italic">ρ</tspan><tspan dy="0.28em" font-size="72%">k</tspan><tspan dy="-0.28em"> = </tspan><tspan font-style="italic">P</tspan><tspan dy="0.28em" font-size="72%">k</tspan><tspan dy="-0.28em" font-style="italic">ρP</tspan><tspan dy="0.28em" font-size="72%">k</tspan><tspan dy="-0.28em"> ÷ </tspan><tspan font-style="italic">w</tspan><tspan dy="0.28em" font-size="72%">k</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="18" y="160" width="200" height="26" class="ts-cyan tf-cyan" stroke-width="1.3" fill-opacity="0.42"/>
+<text class="tf-ink" x="118" y="177.68" font-size="13" text-anchor="middle"><tspan font-style="italic">ρ</tspan><tspan dy="0.28em" font-size="72%">0</tspan><tspan dy="-0.28em">：Tr = 1</tspan></text>
+<rect x="18" y="204" width="200" height="26" class="ts-cyan tf-cyan" stroke-width="1.3" fill-opacity="0.16"/>
+<text class="tf-ink" x="118" y="221.68" font-size="13" text-anchor="middle"><tspan font-style="italic">ρ</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">：Tr = 1</tspan></text>
+</svg>
+<svg class="tr-fig-panel" x="504" y="0" width="236" height="280" viewBox="0 0 236 280">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">III　不动点 ⟺ 交叉块为 0</text>
+<rect x="30" y="64" width="28" height="28" rx="3" class="ts-cyan tf-cyan" stroke-width="1.3" fill-opacity="0.3"/>
+<rect x="62" y="64" width="28" height="28" rx="3" class="ts-magenta tf-magenta" stroke-width="1.3" fill-opacity="0.24"/>
+<rect x="30" y="96" width="28" height="28" rx="3" class="ts-magenta tf-magenta" stroke-width="1.3" fill-opacity="0.24"/>
+<rect x="62" y="96" width="28" height="28" rx="3" class="ts-cyan tf-cyan" stroke-width="1.3" fill-opacity="0.3"/>
+<path d="M30 60 L24 60 L24 128 L30 128" class="ts-ink" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+<path d="M90 60 L96 60 L96 128 L90 128" class="ts-ink" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+<text class="tf-ink" x="16" y="99.4" font-size="15" text-anchor="end"><tspan font-style="italic">ρ</tspan></text>
+<text class="tf-ink" x="136" y="99.04" font-size="14"><tspan font-style="italic">U</tspan>(<tspan font-style="italic">ρ</tspan>) ≠ <tspan font-style="italic">ρ</tspan></text>
+<rect x="30" y="172" width="28" height="28" rx="3" class="ts-cyan tf-cyan" stroke-width="1.3" fill-opacity="0.3"/>
+<rect x="62" y="172" width="28" height="28" rx="3" class="ts-faint" stroke-width="1.1" stroke-dasharray="3 3" fill="none"/>
+<rect x="30" y="204" width="28" height="28" rx="3" class="ts-faint" stroke-width="1.1" stroke-dasharray="3 3" fill="none"/>
+<rect x="62" y="204" width="28" height="28" rx="3" class="ts-cyan tf-cyan" stroke-width="1.3" fill-opacity="0.3"/>
+<path d="M30 168 L24 168 L24 236 L30 236" class="ts-ink" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+<path d="M90 168 L96 168 L96 236 L90 236" class="ts-ink" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+<text class="tf-ink" x="16" y="207.4" font-size="15" text-anchor="end"><tspan font-style="italic">ρ</tspan>′</text>
+<line x1="69" y1="179" x2="83" y2="193" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<line x1="69" y1="193" x2="83" y2="179" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<line x1="37" y1="211" x2="51" y2="225" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<line x1="37" y1="225" x2="51" y2="211" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<path d="M103 188.21 L105 186.41 L107.21 185.09 L109.57 184.27 L112 184 L114.43 184.27 L116.79 185.09 L119 186.41 L121 188.21 L122.72 190.43 L124.12 193 L125.16 195.84 L125.79 198.87 L126 202 L125.79 205.13 L125.16 208.16 L124.12 211 L122.72 213.57 L121 215.79 L119 217.59 L116.79 218.91 L114.43 219.73 L112 220 L109.57 219.73 L107.21 218.91 L105 217.59 L103 215.79" class="ts-ink" stroke-width="1.6" stroke-linejoin="round" fill="none"/>
+<path d="M103 215.79 L110.17 218.29 L106.24 222.66Z" class="tf-ink"/>
+<text class="tf-ink" x="136" y="207.04" font-size="14"><tspan font-style="italic">U</tspan>(<tspan font-style="italic">ρ</tspan>′) = <tspan font-style="italic">ρ</tspan>′</text>
+</svg>
+</svg>

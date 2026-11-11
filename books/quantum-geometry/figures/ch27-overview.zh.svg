@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch27-overview" data-lang="zh" data-wrap="1" viewBox="0 0 740 262" width="740" height="262" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="三栏。第一栏：两支墨色箭头 x、y 撑开一个平行四边形，两条青色的对角线是 x + y 与 x − y，下方写着两条对角线的平方和等于四条边的平方和。第二栏：四个坐标排成一行，每个圆里一支紫色的相位箭头，四支方向相同；三条青色的弧各连起相邻的两个坐标，表示某个测试态在这两格上同时不为零，弧连成一条链，下方写着 A = c · 1。第三栏：左边是 3 × 3 的块矩阵 ρ，对角块青色，非对角块品红；箭头“挤压”指向右边只剩青色对角块的矩阵，它下方的小圈箭头表示再挤压一次，矩阵不动。">
+<title>三栏。第一栏：两支墨色箭头 x、y 撑开一个平行四边形，两条青色的对角线是 x + y 与 x − y，下方写着两条对角线的平方和等于四条边的平方和。第二栏：四个坐标排成一行，每个圆里一支紫色的相位箭头，四支方向相同；三条青色的弧各连起相邻的两个坐标，表示某个测试态在这两格上同时不为零，弧连成一条链，下方写着 A = c · 1。第三栏：左边是 3 × 3 的块矩阵 ρ，对角块青色，非对角块品红；箭头“挤压”指向右边只剩青色对角块的矩阵，它下方的小圈箭头表示再挤压一次，矩阵不动。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="236" height="262" viewBox="0 0 236 262">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">I　平行四边形恒等式</text>
+<path d="M30 196 L166 178 L218 74 L82 92Z" class="tf-cyan" fill-opacity="0.05"/>
+<line x1="166" y1="178" x2="218" y2="74" class="ts-faint" stroke-width="1.3" stroke-dasharray="4 3" fill="none"/>
+<line x1="82" y1="92" x2="218" y2="74" class="ts-faint" stroke-width="1.3" stroke-dasharray="4 3" fill="none"/>
+<line x1="30" y1="196" x2="211.58" y2="78.16" class="ts-cyan" stroke-width="2.4" fill="none"/>
+<path d="M218 74 L212.51 82.07 L208.39 75.73Z" class="tf-cyan"/>
+<line x1="82" y1="92" x2="160.65" y2="172.53" class="ts-cyan" stroke-width="2.4" fill="none"/>
+<path d="M166 178 L157.01 174.2 L162.42 168.92Z" class="tf-cyan"/>
+<line x1="30" y1="196" x2="158.42" y2="179" class="ts-ink" stroke-width="2.2" fill="none"/>
+<path d="M166 178 L157.57 182.93 L156.58 175.43Z" class="tf-ink"/>
+<line x1="30" y1="196" x2="78.58" y2="98.84" class="ts-ink" stroke-width="2.2" fill="none"/>
+<path d="M82 92 L81.36 101.74 L74.59 98.36Z" class="tf-ink"/>
+<circle cx="30" cy="196" r="3.2" class="tf-ink"/>
+<text class="tf-ink" x="104.8" y="204.1" font-size="15" text-anchor="middle"><tspan font-style="italic">x</tspan></text>
+<text class="tf-ink" x="44" y="149.4" font-size="15" text-anchor="end"><tspan font-style="italic">y</tspan></text>
+<text class="tf-cyan ts-bg" x="159.36" y="100.16" font-size="14" text-anchor="end" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">x</tspan> + <tspan font-style="italic">y</tspan></text>
+<text class="tf-cyan ts-bg" x="145.44" y="142.76" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">x</tspan> − <tspan font-style="italic">y</tspan></text>
+<text class="tf-ink" x="118" y="238" font-size="13" text-anchor="middle">|<tspan font-style="italic">x</tspan>+<tspan font-style="italic">y</tspan>|<tspan dy="-0.42em" font-size="72%">2</tspan><tspan dy="0.42em"> + |</tspan><tspan font-style="italic">x</tspan>−<tspan font-style="italic">y</tspan>|<tspan dy="-0.42em" font-size="72%">2</tspan><tspan dy="0.42em"> = 2(|</tspan><tspan font-style="italic">x</tspan>|<tspan dy="-0.42em" font-size="72%">2</tspan><tspan dy="0.42em"> + |</tspan><tspan font-style="italic">y</tspan>|<tspan dy="-0.42em" font-size="72%">2</tspan><tspan dy="0.42em">)</tspan></text>
+</svg>
+<svg class="tr-fig-panel" x="252" y="0" width="236" height="262" viewBox="0 0 236 262">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">II　支撑连通 ⇒ 同一相位</text>
+<path d="M36 119 L36.14 115.86 L36.57 112.76 L37.27 109.73 L38.25 106.8 L39.48 104 L40.97 101.37 L42.68 98.93 L44.6 96.71 L46.72 94.73 L49 93.02 L51.42 91.59 L53.97 90.47 L56.59 89.66 L59.28 89.16 L62 89 L64.72 89.16 L67.41 89.66 L70.03 90.47 L72.58 91.59 L75 93.02 L77.28 94.73 L79.4 96.71 L81.32 98.93 L83.03 101.37 L84.52 104 L85.75 106.8 L86.73 109.73 L87.43 112.76 L87.86 115.86 L88 119" class="ts-cyan" stroke-width="2.2" stroke-linejoin="round" fill="none"/>
+<text class="tf-cyan" x="62" y="81" font-size="14" text-anchor="middle"><tspan font-style="italic">x</tspan></text>
+<path d="M88 119 L88.14 115.86 L88.57 112.76 L89.27 109.73 L90.25 106.8 L91.48 104 L92.97 101.37 L94.68 98.93 L96.6 96.71 L98.72 94.73 L101 93.02 L103.42 91.59 L105.97 90.47 L108.59 89.66 L111.28 89.16 L114 89 L116.72 89.16 L119.41 89.66 L122.03 90.47 L124.58 91.59 L127 93.02 L129.28 94.73 L131.4 96.71 L133.32 98.93 L135.03 101.37 L136.52 104 L137.75 106.8 L138.73 109.73 L139.43 112.76 L139.86 115.86 L140 119" class="ts-cyan" stroke-width="2.2" stroke-linejoin="round" fill="none"/>
+<text class="tf-cyan" x="114" y="81" font-size="14" text-anchor="middle"><tspan font-style="italic">x</tspan>′</text>
+<path d="M140 119 L140.14 115.86 L140.57 112.76 L141.27 109.73 L142.25 106.8 L143.48 104 L144.97 101.37 L146.68 98.93 L148.6 96.71 L150.72 94.73 L153 93.02 L155.42 91.59 L157.97 90.47 L160.59 89.66 L163.28 89.16 L166 89 L168.72 89.16 L171.41 89.66 L174.03 90.47 L176.58 91.59 L179 93.02 L181.28 94.73 L183.4 96.71 L185.32 98.93 L187.03 101.37 L188.52 104 L189.75 106.8 L190.73 109.73 L191.43 112.76 L191.86 115.86 L192 119" class="ts-cyan" stroke-width="2.2" stroke-linejoin="round" fill="none"/>
+<text class="tf-cyan" x="166" y="81" font-size="14" text-anchor="middle"><tspan font-style="italic">x</tspan>″</text>
+<circle cx="36" cy="142" r="21" class="ts-edge tf-panel" stroke-width="1.4"/>
+<line x1="36" y1="142" x2="42.8" y2="133.29" class="ts-violet" stroke-width="2.2" fill="none"/>
+<path d="M46.47 128.6 L44.47 135.93 L39.84 132.31Z" class="tf-violet"/>
+<text class="tf-ink" x="36" y="183" font-size="14" text-anchor="middle"><tspan font-style="italic">A</tspan><tspan dy="0.28em" font-size="72%">11</tspan><tspan dy="-0.28em">​</tspan></text>
+<circle cx="88" cy="142" r="21" class="ts-edge tf-panel" stroke-width="1.4"/>
+<line x1="88" y1="142" x2="94.8" y2="133.29" class="ts-violet" stroke-width="2.2" fill="none"/>
+<path d="M98.47 128.6 L96.47 135.93 L91.84 132.31Z" class="tf-violet"/>
+<text class="tf-ink" x="88" y="183" font-size="14" text-anchor="middle"><tspan font-style="italic">A</tspan><tspan dy="0.28em" font-size="72%">22</tspan><tspan dy="-0.28em">​</tspan></text>
+<circle cx="140" cy="142" r="21" class="ts-edge tf-panel" stroke-width="1.4"/>
+<line x1="140" y1="142" x2="146.8" y2="133.29" class="ts-violet" stroke-width="2.2" fill="none"/>
+<path d="M150.47 128.6 L148.47 135.93 L143.84 132.31Z" class="tf-violet"/>
+<text class="tf-ink" x="140" y="183" font-size="14" text-anchor="middle"><tspan font-style="italic">A</tspan><tspan dy="0.28em" font-size="72%">33</tspan><tspan dy="-0.28em">​</tspan></text>
+<circle cx="192" cy="142" r="21" class="ts-edge tf-panel" stroke-width="1.4"/>
+<line x1="192" y1="142" x2="198.8" y2="133.29" class="ts-violet" stroke-width="2.2" fill="none"/>
+<path d="M202.47 128.6 L200.47 135.93 L195.84 132.31Z" class="tf-violet"/>
+<text class="tf-ink" x="192" y="183" font-size="14" text-anchor="middle"><tspan font-style="italic">A</tspan><tspan dy="0.28em" font-size="72%">44</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-ink" x="118" y="220" font-size="14" text-anchor="middle">四格相位相同：<tspan font-style="italic">A</tspan> = <tspan font-style="italic">c</tspan> · 1</text>
+</svg>
+<svg class="tr-fig-panel" x="504" y="0" width="236" height="262" viewBox="0 0 236 262">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">III　挤压两次 = 一次</text>
+<rect x="18" y="72" width="18" height="18" rx="3" class="ts-cyan tf-cyan" stroke-width="1.3" fill-opacity="0.3"/>
+<rect x="40" y="72" width="18" height="18" rx="3" class="ts-magenta tf-magenta" stroke-width="1.3" fill-opacity="0.24"/>
+<rect x="62" y="72" width="18" height="18" rx="3" class="ts-magenta tf-magenta" stroke-width="1.3" fill-opacity="0.24"/>
+<rect x="18" y="94" width="18" height="18" rx="3" class="ts-magenta tf-magenta" stroke-width="1.3" fill-opacity="0.24"/>
+<rect x="40" y="94" width="18" height="18" rx="3" class="ts-cyan tf-cyan" stroke-width="1.3" fill-opacity="0.3"/>
+<rect x="62" y="94" width="18" height="18" rx="3" class="ts-magenta tf-magenta" stroke-width="1.3" fill-opacity="0.24"/>
+<rect x="18" y="116" width="18" height="18" rx="3" class="ts-magenta tf-magenta" stroke-width="1.3" fill-opacity="0.24"/>
+<rect x="40" y="116" width="18" height="18" rx="3" class="ts-magenta tf-magenta" stroke-width="1.3" fill-opacity="0.24"/>
+<rect x="62" y="116" width="18" height="18" rx="3" class="ts-cyan tf-cyan" stroke-width="1.3" fill-opacity="0.3"/>
+<path d="M18 68 L12 68 L12 138 L18 138" class="ts-ink" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+<path d="M80 68 L86 68 L86 138 L80 138" class="ts-ink" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+<rect x="156" y="72" width="18" height="18" rx="3" class="ts-cyan tf-cyan" stroke-width="1.3" fill-opacity="0.3"/>
+<rect x="178" y="72" width="18" height="18" rx="3" class="ts-faint" stroke-width="1.1" stroke-dasharray="3 3" fill="none"/>
+<rect x="200" y="72" width="18" height="18" rx="3" class="ts-faint" stroke-width="1.1" stroke-dasharray="3 3" fill="none"/>
+<rect x="156" y="94" width="18" height="18" rx="3" class="ts-faint" stroke-width="1.1" stroke-dasharray="3 3" fill="none"/>
+<rect x="178" y="94" width="18" height="18" rx="3" class="ts-cyan tf-cyan" stroke-width="1.3" fill-opacity="0.3"/>
+<rect x="200" y="94" width="18" height="18" rx="3" class="ts-faint" stroke-width="1.1" stroke-dasharray="3 3" fill="none"/>
+<rect x="156" y="116" width="18" height="18" rx="3" class="ts-faint" stroke-width="1.1" stroke-dasharray="3 3" fill="none"/>
+<rect x="178" y="116" width="18" height="18" rx="3" class="ts-faint" stroke-width="1.1" stroke-dasharray="3 3" fill="none"/>
+<rect x="200" y="116" width="18" height="18" rx="3" class="ts-cyan tf-cyan" stroke-width="1.3" fill-opacity="0.3"/>
+<path d="M156 68 L150 68 L150 138 L156 138" class="ts-ink" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+<path d="M218 68 L224 68 L224 138 L218 138" class="ts-ink" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+<text class="tf-ink" x="49" y="58" font-size="15" text-anchor="middle"><tspan font-style="italic">ρ</tspan></text>
+<text class="tf-ink" x="187" y="58" font-size="14" text-anchor="middle">Σ <tspan font-style="italic">P</tspan><tspan dy="0.28em" font-size="72%">k</tspan><tspan dy="-0.28em" font-style="italic">ρP</tspan><tspan dy="0.28em" font-size="72%">k</tspan><tspan dy="-0.28em">​</tspan></text>
+<line x1="90" y1="103" x2="137.2" y2="103" class="ts-ink" stroke-width="1.8" fill="none"/>
+<path d="M144 103 L136 106.36 L136 99.64Z" class="tf-ink"/>
+<text class="tf-dim" x="117" y="94" font-size="13" text-anchor="middle">挤压</text>
+<path d="M164.45 152.26 L165.25 154.68 L166.22 157 L167.34 159.21 L168.61 161.28 L170.03 163.21 L171.57 164.98 L173.23 166.57 L175 167.98 L176.86 169.19 L178.79 170.19 L180.79 170.98 L182.83 171.54 L184.91 171.89 L187 172 L189.09 171.89 L191.17 171.54 L193.21 170.98 L195.21 170.19 L197.14 169.19 L199 167.98 L200.77 166.57 L202.43 164.98 L203.97 163.21 L205.39 161.28 L206.66 159.21 L207.78 157 L208.75 154.68 L209.55 152.26" class="ts-ink" stroke-width="1.6" stroke-linejoin="round" fill="none"/>
+<path d="M209.55 152.26 L210.14 159.83 L204.56 157.98Z" class="tf-ink"/>
+<text class="tf-dim" x="187" y="198" font-size="13" text-anchor="middle">再挤压：不动</text>
+</svg>
+</svg>
