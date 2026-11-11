@@ -79,6 +79,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `walk-spreading` | 带着硬币相干地走，宽度按步数长大；掷硬币乱走，宽度只按步数的平方根长大 | `ten` `fifty` `width` `coin` `ring` |
 | `gate-word-polytope` | 门字越长，落点越密，最大的缺口一级级缩小，却永远补不上 | `one` `three` `six` `nearest` `shrink` |
 | `lattice-gauge-loop` | 一条边上的相位可以拧成任意值；绕方格一圈的相位，顶点怎么拧都不动 | `twist` `chord` `anchor` `tree` `two` `plaquette` |
+| `euler-product-sieve` | 有限个素数乘起来总比 ζ 少一截：少的正是带着清单外素因子的整数，s 越靠近 1 少得越多 | `two` `near` `all` `five` `remainder` `thirtyone` |
 
 `chsh-dial` 的绿色框只引用第十三章正文用 `lean=` 引用的五条定理：经典上界（`classical_chsh_abs_le_two`，“隐方向”场景的 360 个等距隐方向、权重各 1/360 正是一个有限确定性纤维模型）、一侧可交换时 S² = 4I、四点谱、固定算子的 2√2 与幺正策略的贝尔值上界（取 d = 2 为手工推导）。贝尔态上的同平面关联 cos(夹角)、N = 4|sin α sin β| 与“转动 Bob 的一对方向，⟨S⟩ 最高恰为 √(4 + 4 sin α sin β)”是页面的数值（`NUM`）；均匀隐方向玩具模型与它的折线标 `MODEL`；一般隐变量测度下的 |S| ≤ 2 与无穷维 Tsirelson 界标 `ARGUED`。这一页的青色是四个余弦（量尺上一段段叠起来的四项、余弦弧）与给 +2 的隐方向，品红是两侧张开的面积、谱点 ±√(4 ± N)、弧与折线之差与给 −2 的隐方向；Alice 是实线箭头，Bob 是虚线箭头，时间轴转动 Bob 的一对方向 φ。
 
@@ -97,6 +98,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `rapidity-lightcone` 的舞台是时空图本身（横轴 x、竖轴 t、两轴等比）。白色（墨色）是光锥、零向量与光锥上的珠子，也是“世界线”场景里的静止世界线（粗线）与因果菱形；青色是闵可夫斯基一侧：双曲线 t² − x² = 常数、被推动的点、经 A 的折线与它的固有时刻度；品红只在“对照”场景里出现，是欧氏转动走的圆 t² + x² = 34；琥珀只给当前事件、被推动的两根轴与单位刻度、空间位移 (0, w) 与折返点 A。绿色框只给第十七章用 `lean=` 引用的三条：`bogoliubov_norm_conservation`（推动保持 t² − x² 由它一步代数得出，页面照此写明）、`null_cone_spatial_rigidity`（卡尺场景）、`eq_smul_minkowski_of_null`（比例场景，取 S(v) = minkowski(kBv)）；把 B(η) 读作速度 β = tanh η 的洛伦兹推动、Δτ ≤ Δt 与零线上 Δτ = 0 按该章文献注记标 `ARGUED`；推动、转动、珠子与各段固有时实算（`NUM`）。路线图候选里的“两次变换快度相加”与“同时线倾斜”正文没有对应的句子，未做成卡。
 
 `lattice-gauge-loop` 的绿色框只给第十八章用 `lean=` 引用的两条：`selected_tree_transport`（树输运相位的根点归一、树边重建、端点规范协变）与 `anchored_phase_classification`（锚定规范下 χ 不变、χ 相同当且仅当规范等价、c + a = m + k − n）；边相位、回路相位、树输运相位与计数实算（`NUM`），“沿树拧平”取 g = rootPhase⁻¹、弦的回路相位等于所围方格之积也是数值核对；格子画法、边的方向、生成树（全部横边加最左一列）与时间轴上的中间路径 e^{isθ} 标 `MODEL`；回路相位读作磁通、连续极限与非阿贝尔威尔逊圈标 `ARGUED`。单格的边方向与生成树照例题 `ex-plaquette-phase`（0 → 1 → 2 → 3 → 0，T = {e₀, e₁, e₂}）。这一页的青色是生成树、根到锚点的树路径与它的相位，品红是方格与弦的回路相位，紫色是顶点规范，琥珀只给此刻在拧的顶点或边；边上的相位指针是中性墨色。`two` 卡改的是边相位本身，不是规范变换，页面读数里写明。
+
+`euler-product-sieve` 与 `sphere-escape` 的 `euclid`、`thirteen` 分工：那两张讲“乘起来加一”找到清单外的素数，本页讲有限个素数的欧拉乘积怎样逼近 ζ(s) 以及筛的余项。舞台上方是实轴 1 < s ≤ 4 上墨色的 ζ(s)、青色的前 K 个素数的乘积与其间品红的缺口（纵轴按“值 − 1”取对数，刻度写值本身），品红虚线是乘积加上下一个素数的 p⁻ˢ，右边的放大镜把当前 s 处的缺口按品红格的 n⁻ˢ 自下而上拆开；下方是整数 1 到 96，青色在乘积的展开里，品红带着清单外的素因子；琥珀只给当前的 s 与刚加进的素数的格子。绿色框只给第二十二章用 `lean=` 引用的三条：`riemann_zeta_euler_product`、`riemann_zeta_dirichlet_sum_eq_euler_product` 与 `riemann_zeta_residue_one`（Lean 对复数 s 陈述，页面只取实数 s）；余项等于最大素因子大于 p<sub>K</sub> 的整数之和、在实数 s > 1 上大于 p<sub>K+1</sub>⁻ˢ 与 ζ(2) = π²/6 按该章例题标 `ARGUED`；ζ(s)、乘积、放大镜各段与“差不到 1% 要几个素数”实算（`NUM`）；黎曼猜想只在抽屉里标 `OPEN`，页面不画临界带。路线图候选里的“只用 2”“用到 5”“用到 31”“s 越靠近 1 需要的素数越多”“筛的余项”依次做成 `two`、`five`、`thirtyone`、`near`、`remainder`，另加 `all`（到 97 格子全青、缺口仍在）配推论 `cor-dirichlet-sum-eq-euler-product`。
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
@@ -272,6 +275,12 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第十八章 | 推论 `cor-anchored-phase-classification` 的证明之后、格言之前 | `lattice-gauge-loop` · `two` |
 | 第十八章 | 格言（“未受锚点锁定的自由树枝相位可由局部规范变换抹平”）之后 | `lattice-gauge-loop` · `tree` |
 | 第十八章 | 例 `ex-plaquette-phase` 之后、章末收束段之前 | `lattice-gauge-loop` · `plaquette`，随后完整实验室 |
+| 第二十二章 | §22.1 单根素数轴的等比级数一段（“合二为一”）之后、`classicalZeta` 约定之前 | `euler-product-sieve` · `two` |
+| 第二十二章 | §22.2 “s → 1⁺ 时放大因子 p/(p − 1) 累积发散”一段之后、引理 `lem-riemann-zeta-residue-one` 之前 | `euler-product-sieve` · `near` |
+| 第二十二章 | 推论 `cor-dirichlet-sum-eq-euler-product` 的证明之后、`sphere-escape` · `euclid` 之前 | `euler-product-sieve` · `all` |
+| 第二十二章 | 例 `ex-prime-log-orthogonality-and-sieve` 之后 | `euler-product-sieve` · `five`、`remainder` |
+| 第二十二章 | §22.3 “首项裂缝……生长之门”一段之后、`sphere-escape` · `thirteen` 之前 | `euler-product-sieve` · `thirtyone` |
+| 第二十二章 | `sphere-escape` · `thirteen` 之后、§22.3 格言之前 | `euler-product-sieve` 完整实验室 |
 
 ## 增删或修改一张卡之后
 
