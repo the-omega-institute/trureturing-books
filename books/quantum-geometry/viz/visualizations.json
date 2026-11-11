@@ -558,6 +558,56 @@
           "gid": "D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result"
         }
       ]
+    },
+    {
+      "id": "repeated-projection",
+      "code": "IDEMPOTENT//LINE",
+      "title": "反复投影",
+      "title_en": "Projecting again and again",
+      "summary": "布洛赫球里的一支箭头、一条测量线和与它垂直的对偶平面。按一次“投一次”，就是沿这条线测量而不读结果（P₊ρP₊ + P₋ρP₋，用 2×2 复矩阵实算）：箭头落到它在线上的影子，面上的那一份消失，箭头变短；再投多少次，影子都一动不动。箭头本来在线上就投不动，整个躺在对偶平面里就投成零；线上一份加面上一份拼回原箭头，纯度盈余等于概率偏离加剩余质量。五张实验卡各讲一件事，可以在第三章正文里单独引用。",
+      "summary_en": "Inside the Bloch ball: an arrow, a measurement line and the dual plane perpendicular to it. One press of “Project” is a measurement along the line whose result is not read (P₊ρP₊ + P₋ρP₋, computed with 2×2 complex matrices): the arrow drops to its shadow on the line, its part in the plane is gone and it gets shorter; press again as often as you like and the shadow does not move. An arrow already on the line cannot be moved, an arrow lying in the dual plane projects to zero, and the line part plus the plane part rebuild the arrow, so that the purity surplus is the probability deviation plus the residual mass. Each of the five experiment cards makes one of these points and can be cited on its own from Chapter 3.",
+      "path": "repeated-projection/",
+      "thumbnail": "repeated-projection/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "幂等投影",
+        "未读态",
+        "霍奇对偶",
+        "布洛赫球",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Idempotent projection",
+        "Unread state",
+        "Hodge duality",
+        "Bloch sphere",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第三章 §3.1 · 为什么说“连‘存在’本身都是一颗粒子”",
+          "label_en": "Chapter 3 §3.1 · Why even “existence” itself is a particle",
+          "href": "../zh/ch03-projectors-and-duality.html#sec-ch03-1",
+          "href_en": "../en/ch03-projectors-and-duality.html#sec-ch03-1"
+        },
+        {
+          "label": "第三章 §3.2 · 线与面的伴生宿命（霍奇对偶）",
+          "label_en": "Chapter 3 §3.2 · The inseparable fate of line and plane (Hodge duality)",
+          "href": "../zh/ch03-projectors-and-duality.html#sec-ch03-2",
+          "href_en": "../en/ch03-projectors-and-duality.html#sec-ch03-2"
+        },
+        {
+          "label": "Blueprint · Observer/Conditioning",
+          "label_en": "Blueprint · Observer/Conditioning",
+          "href": "{trureturing}/D5/S3/Observer/Conditioning.lean"
+        }
+      ],
+      "lean": [
+        { "gid": "D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent" },
+        { "gid": "D5/S3/Observer/Conditioning.unreadState_fixed_iff" },
+        { "gid": "D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras" }
+      ]
     }
   ]
 }
