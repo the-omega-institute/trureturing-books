@@ -25,7 +25,15 @@ Compare the two routes on a concrete classroom calculation. Suppose two arrows l
 **The same pair of arrows: two angles, or one.** On the left, the grey dashed ceiling $Z$ plays the third point $C$: the cyan $A$ is $60^\circ$ from it and the amber $B$ is $120^\circ$ from it, and both angles must be turned into coordinates and multiplied out. On the right, the ceiling is gone and the cyan $A$ is its own axis: $B$ is a single angle $\theta = 60^\circ$ away, giving the weight $\cos^2 30^\circ = \frac{3}{4}$, the same number as on the left.
 :::
 
+::: {.viz src="pairwise-shutter" preset="sixty" height="500"}
+**Run the worked example through the shutter and count.** The cyan $A$ and the amber $B$ are a single angle $\theta = 60^\circ$ apart; the dashed cyan line is the weight $\frac{3}{4}$, the thin curve is the share of passes $k/N$, and the horizontal axis counts shots on a log scale. The share jumps about for the first few shots and hugs the line by four thousand; the pale band is the reference scale $p \pm 2\sqrt{p(1-p)/N}$. A sampling demonstration; for the weight itself see [@thm-rank-one-born-pairing].
+:::
+
 In finite-dimensional matrix algebra, which operation natively erases every trace of an external basis $C$? Literally the **matrix trace** ($\Tr X = \sum_i X_{ii}$). By cyclicity, $\Tr(U^{-1} X U) = \Tr(X U U^{-1}) = \Tr(X)$ for every invertible basis change $U$: twist the external scaffolding $C$ however you please, and the trace pairing $\Tr(\rho P)$ between a state $\rho$ and a projector $P$ never flickers! Zero-redundancy comparison between $\rho$ and $P$ is therefore naturally expressed via the canonical basis-free trace pairing.
+
+::: {.viz src="pairwise-shutter" preset="turn" height="500"}
+**Turn both arrows together and the weight stays put.** The same pair and the same random numbers as in the previous figure, except that before each shot $A$ and $B$ turn a little together about the violet axis; the dashed paths are where the tips have been. The angle stays $60^\circ$, the dashed cyan line stays at $\frac{3}{4}$, and the thin curve is exactly the one without turning.
+:::
 
 ::: {.definition #def-born-probability title="Finite-Dimensional Born Trace Weight" lean="D5/S3/Quantum/FiniteDimensional.bornProbability"}
 Let $n$ be a finite index type. For any complex square matrices $\rho, P \in M_n(\mathbb{C})$, the **Born trace weight** assigned by $\rho$ to $P$ (`bornProbability rho P` in Lean) is the trace of their matrix product:
@@ -257,6 +265,10 @@ For ready reference in later chapters, the benchmark angles across both pictures
 **Start with the first row of the table.** The amber arrow $B$ points along the cyan ruler $A$: the cyan line has length $1$ and the magenta area is zero, matching $\theta = 0^\circ$ and weight $1$. Drag $B$ to the equator and then to the south pole, and compare the displayed angle with the $90^\circ$ and $180^\circ$ rows above.
 :::
 
+::: {.viz src="pairwise-shutter" preset="right" height="500"}
+**The $90^\circ$ row of the table, counted with the shutter.** The amber $B$ is perpendicular to the cyan $A$, the cyan stretch is exactly half the diameter, and the weight is $\frac{1}{2}$. The white curve wobbles around $\frac{1}{2}$ more than at $60^\circ$ and the pale band is at its widest, yet it narrows all the way.
+:::
+
 The table above goes angle by angle. Ask a different question: if the direction of the target state $\vv{b}$ is random, uniformly distributed on the sphere, how is the compatibility weight $p = \cos^2\frac{\theta}{2}$ distributed? Intuition may guess that it favours the middle, or the two ends. Neither is right.
 
 ::: {.example #ex-uniform-born-weight title="The Born Weight in a Random Direction Is Uniformly Distributed: Archimedes' Hat-Box Theorem"}
@@ -287,6 +299,10 @@ $$
 :::
 
 The single qubit is the only "fair" case: point in an arbitrary direction, and the compatibility weight is equally likely to take any value between $0$ and $1$. Once the dimension is large, a randomly chosen direction is, with overwhelming probability, nearly orthogonal to the reference state. The equatorial concentration and the barren plateaus discussed in [Chapter 12](ch12-measurement-computation-and-gradients.md) start from this fact.
+
+::: {.viz src="pairwise-shutter" preset="random" height="500"}
+**On random directions the weights flatten out.** For each shot the amber $B$ takes a fresh uniformly random direction on the sphere; the grey dots are the directions so far. On the right their weights $p$ are counted in ten bins: ragged at first, flatter as they fill, each bin closing in on the dashed cyan line at $\frac{1}{10}$ (the single-qubit part of [@ex-uniform-born-weight], a sampling demonstration).
+:::
 
 So far we have always run in the forward direction: first a state $\rho$ and a shutter $P$ are given, then the weight $\Tr(\rho P)$ is computed. Now turn the question around. Suppose all we have is a family of **probes**, each a pure-state direction that can be confirmed with certainty, together with pairwise measurement itself. Can these alone split the reading of an arbitrary detector into mutually exclusive "confirmations"? And do the probes that come out line up, of their own accord, into a complete record measurement like the one in [@thm-rank-one-born-pairing]?
 
@@ -390,6 +406,10 @@ Three boundaries need to be drawn. First, the length bound of [@thm-positive-dua
 - **Busch's theorem** (P. Busch, *Quantum states and generalized observables: A simple proof of Gleason's theorem*, Phys. Rev. Lett. **91**, 120403, 2003): Extending additivity from sharp projections to positive POVM effects ($0 \le E_i \le I$ with $\mu(\sum_i E_i) = \sum_i \mu(E_i)$ whenever $\sum_i E_i \le I$) restores uniqueness for **all $\dim\mathcal{H} \ge 2$** (including a single qubit, $\dim\mathcal{H} = 2$): every generalized probability measure has the form $E \mapsto \Tr(\rho E)$ for a unique density operator $\rho$.
 
 Our pinned repository focuses on constructive finite-dimensional matrix reductions ([@thm-born-probability-skeleton], [@thm-born-modulus-square], and [@thm-rank-one-born-pairing]) and freezes the structural decomposition by least confirmations, [@thm-positive-dual-generation]; these converse uniqueness theorems are cited from the classical literature and are not claimed in the book's Lean verification ledger.
+:::
+
+::: {.viz src="pairwise-shutter" height="560"}
+The full lab: drag the amber $B$ or the cyan $A$ and watch the cyan stretch and the weight change together while the share of passes follows; draw new random numbers and the curve changes while the dashed cyan line does not; “both turn together” and “a random direction each shot” are in the left column.
 :::
 
 Having eliminated the external third point $C$ and derived $\cos^2(\theta/2) = \frac{1 + \cos\theta}{2}$ from pure trace geometry, we now turn the spotlight onto the ruler itself — the **idempotent projector** $P^2 = P$ that appeared in every theorem of this chapter. Why do "detecting a particle," "naming a logical concept," and "experiencing a tick of classical linear time" all reduce to the single equation $P^2 = P$? Let us step into [Chapter 3](ch03-projectors-and-duality.md).

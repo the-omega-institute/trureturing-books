@@ -87,6 +87,10 @@ When you **measure** (*liáng*) a continuous wheel through a one-dimensional bin
 **A continuous direction leaves a two-outcome shutter as one of two records.** The wheel on the left is ticked all the way round, and the amber arrow can stop at any angle; the shutter in the middle splits along $\vv{e}_3$ into an upper and a lower channel; on the right there are only two cyan dots, $+1$ for the upper channel and $-1$ for the lower. A schematic.
 :::
 
+::: {.viz src="pairwise-shutter" preset="clicks" height="500"}
+**The arrow may point anywhere; the shutter reports only the two ends.** The amber $B$ is $70^\circ$ from the cyan $A$; each shot lands at one end of $A$'s diameter, $+1$ “pass” at $A$ and $-1$ “fail” at the far end. The row of squares at the top right is shot by shot, solid cyan for a pass and hollow grey for a fail; which shot passes cannot be foretold. A sampling demonstration.
+:::
+
 Suppose we make the further assumption that prior to measurement the system carries an omniscient hidden ledger $\chi$ assigning a definite complex value $\chi(A)$ to every complex matrix $A$, preserving the identity, addition, complex scalar multiplication, and multiplication on all matrices, including products of noncommuting matrices. What happens then?
 
 No philosophical debate is needed to test that hypothesis — three lines of $2\times 2$ matrix arithmetic shatter it completely. Inside the qubit matrix algebra $M_2(\mathbb{C})$ ([`QubitMatrix`](lean:D5/S3/Quantum/FiniteDimensional.QubitMatrix) in Lean), examine the two fundamental orthogonal shutters, the Pauli bit-flip matrix $X$ and phase-flip matrix $Z$:

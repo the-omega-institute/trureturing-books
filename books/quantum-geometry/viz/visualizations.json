@@ -1146,6 +1146,63 @@
         }
       ],
       "lean": []
+    },
+    {
+      "id": "pairwise-shutter",
+      "code": "PAIR//SHUTTER",
+      "title": "两子丈量与快门计数",
+      "title_en": "Pairwise measurement and shutter counts",
+      "summary": "布洛赫球上两支箭头：青色的 A 是已知态，琥珀色的 B 是目标态，两者之间只有一个角 θ。快门每次只报“过”（+1）或“不过”（−1），一次过不过说不准；按得越多，“过”的比例 k/N 越贴近权重 p = Tr(ρ_A P_B) = (1 + cos θ)/2：B 向 A 的直径作垂线，垂足把直径分出的青色一段就是 p。共线时每次都过，对跖时一次也不过，90° 时一半一半而晃得最厉害；两支一起转，权重与计数都不变；B 每次取随机方向时，权重在 [0, 1] 上均匀分布。七张实验卡各讲其中一件事，可以在正文里单独引用。",
+      "summary_en": "Two arrows on the Bloch sphere: the cyan A is the known state, the amber B the target, and between them there is just one angle θ. Each shot of the shutter reports only “pass” (+1) or “fail” (−1), and no single shot can be foretold; the more shots, the closer the share of passes k/N comes to the weight p = Tr(ρ_A P_B) = (1 + cos θ)/2, which is the cyan stretch cut off on A's diameter by the foot of B's perpendicular. Collinear arrows pass every time, antipodal ones never, at 90° it is half and half with the widest wobble; turning both together changes neither the weight nor the counts; with a random direction for B at every shot the weight is uniform on [0, 1]. Each of the seven experiment cards makes one of these points and can be cited on its own from the text.",
+      "path": "pairwise-shutter/",
+      "thumbnail": "pairwise-shutter/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "两子丈量",
+        "快门计数",
+        "玻恩权重",
+        "半角公式",
+        "大数定律",
+        "帽盒定理",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Pairwise measurement",
+        "Shutter counts",
+        "Born weight",
+        "Half-angle formula",
+        "Law of large numbers",
+        "Hat-box theorem",
+        "Proved in Lean 4"
+      ],
+      "theory": [
+        {
+          "label": "本书第一章 §1.2",
+          "label_en": "Chapter 1 §1.2",
+          "href": "../zh/ch01-measurement.html#sec-ch01-2",
+          "href_en": "../en/ch01-measurement.html#sec-ch01-2"
+        },
+        {
+          "label": "本书第二章",
+          "label_en": "Chapter 2",
+          "href": "../zh/ch02-born-rule.html",
+          "href_en": "../en/ch02-born-rule.html"
+        },
+        {
+          "label": "Lean：玻恩配对权重",
+          "label_en": "Lean: Born pairing weight",
+          "href": "{trureturing}/D5/S3/Observer/Conditioning/RankOneBornPairingWeight.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/FiniteDimensional.born_probability_skeleton"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight"
+        }
+      ]
     }
   ]
 }
