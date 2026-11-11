@@ -66,13 +66,13 @@
 
     <rect x="316" y="224" width="288" height="116" rx="8" fill="#050c16" stroke="#1f4260" stroke-width="1.2"/>
     <text x="460" y="246" text-anchor="middle" font-size="9.2" font-weight="600" fill="#46ffb2">LEAN ✓ S(Π(UρU†)) − S(ρ) = D(UρU† ‖ Π(UρU†))</text>
-    <text x="460" y="270" text-anchor="middle" font-size="9.8" fill="#46ffb2">LEAN ✓ MUB 双账本: σ = Π_X(ρ) = I/d</text>
+    <text x="460" y="270" text-anchor="middle" font-size="9.3" fill="#46ffb2">LEAN ✓ MUB 账本：Π_Z(ρ)=ρ、完备秩一 ⇒ σ=Π_X(ρ)=I/d</text>
     <text x="460" y="294" text-anchor="middle" font-size="9.8" fill="#d4efff">D(ρ ‖ I/d) = ln d − S(ρ) = S(σ) − S(ρ)</text>
-    <text x="460" y="318" text-anchor="middle" font-size="9.5" fill="#19f0ff">阶段A 捏合 ΔS=ln 2 · 阶段B 重置 ΔQ ≥ k_B T ln 2</text>
+    <text x="460" y="318" text-anchor="middle" font-size="9.0" fill="#19f0ff">阶段A 纯比特例 ΔS=ln 2 · 阶段B 理想下界 Q_L=k_B T ln 2</text>
 
     <!-- PANEL III: Observer Memory & Single Surviving Copy Blocks Reversal -->
     <text x="765" y="38" text-anchor="middle" font-size="12" font-weight="600" fill="#9d8cff">III · SURVIVING COPY BLOCKS REVERSAL</text>
-    <text x="765" y="56" text-anchor="middle" font-size="11" fill="#6f8ea5">漏掉唯一幸存环境副本 k 即锁死时间之箭</text>
+    <text x="765" y="56" text-anchor="middle" font-size="9.2" fill="#6f8ea5">指定共轭重叠协议：|c_l|=1(l≠k)、c_k≠1、ρ_ij≠0</text>
 
     <!-- System node on left, 3 environmental copies on right -->
     <circle cx="666" cy="164" r="24" fill="#050c16" stroke="#19f0ff" stroke-width="1.8"/>
@@ -94,8 +94,8 @@
     <text x="835" y="229" text-anchor="middle" font-size="10" font-weight="600" fill="#ffc83d">Copy k: 幸存未逆!</text>
 
     <text x="760" y="276" text-anchor="middle" font-size="8.0" fill="#46ffb2">LEAN ✓ reverseChannelOn(univ\k, multiRecordChannel(ρ))_ij</text>
-    <text x="760" y="298" text-anchor="middle" font-size="8.8" fill="#d4efff">= recordOverlap(records k, i, j) · ρ_ij ≠ ρ_ij</text>
-    <text x="764" y="322" text-anchor="middle" font-size="10.5" fill="#6f8ea5">全逆转还原初态；唯留单份副本 k 即阻断相干恢复</text>
+    <text x="760" y="298" text-anchor="middle" font-size="8.2" fill="#d4efff">= c_k · ρ_ij ≠ ρ_ij（在上述协议与条件下）</text>
+    <text x="764" y="322" text-anchor="middle" font-size="9.4" fill="#6f8ea5">全逆转可还原；受限共轭协议中幸存副本阻断所选相干元</text>
 
     <!-- Bottom Lean-verified bar -->
     <rect x="24" y="358" width="872" height="42" rx="6" fill="#050c16" stroke="#1f5d7c" stroke-width="1"/>

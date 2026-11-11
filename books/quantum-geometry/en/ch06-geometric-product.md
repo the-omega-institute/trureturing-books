@@ -189,7 +189,7 @@ Both terms on the right are nonnegative, which proves the inequality once more, 
 The first three rows are pure states: the slack comes from the covariance alone, and the first two rows attain equality. The last three rows are mixed states: in the fourth row the state has moved inward along the $z$ axis, the commutator expectation has dropped from $1$ to $0.6$, and the product of the two standard deviations is still $1$; the last row is the centre of the ball, where the commutator expectation vanishes and the inequality becomes $1 \ge 0$.
 :::
 
-On the sphere the uncertainty relation can be attained. Toward the centre the variances do not shrink, while the commutator expectation shortens together with $r_z$; the gap between their squares is filled by the mixedness plus the squared covariance (by the mixedness alone when $r_x r_y = 0$).
+Along a fixed Bloch direction toward the centre, the variances do not decrease; the squared slack above consists of mixedness together with squared covariance (with only the mixedness term when $r_x r_y = 0$).
 
 ## 6.3 Pure Geometric Dissection of Double-Slit Interference and Wheeler's Delayed Choice: Discarding or Preserving the Area? {#sec-double-slit-delayed-choice}
 
@@ -199,7 +199,7 @@ When a quantum passes through a left path $\lvert L\rangle$ and a right path $\l
 
 Examine the complex overlap $c := \langle r_L, r_R\rangle_{\mathbb{C}}$ between the two environmental record arrows:
 
-- **Coherence visibility** $V := \|c\| = |\langle r_L, r_R\rangle_{\mathbb{C}}| = \cos\alpha \in [0, 1]$ is the **inner-product cosine** measuring how collinear the two environmental records remain;
+- For **equal-weight pure paths with ideal balanced recombination and a scanned reference phase**, set $\alpha := \arccos |c| \in [0, \pi/2]$. The record-overlap visibility is $V := \|c\| = |\langle r_L, r_R\rangle_{\mathbb{C}}| = \cos\alpha \in [0, 1]$;
 - **Record distinguishability** $D := \sqrt{1 - V^2} = \sin\alpha \in [0, 1]$ is the **exterior-product sine area** measuring how orthogonally separated the two records are!
 
 In the Lean module `Quantum/PureState/RecordCoherenceComplementarity`, the following theorem proves the exact Pythagorean conservation law $D^2 + V^2 = 1$ together with the extreme particle and wave endpoints.
@@ -247,7 +247,7 @@ By [`pinching_hilbert_schmidt_orthogonal`](lean:D5/S3/QuantumChannels/PinchingPr
 With [@thm-record-coherence-complementarity] and [@cor-pinching-pythagorean] in hand, Wheeler's delayed-choice experiment loses all retrocausal mystery:
 
 ::: {.example #ex-wheeler-delayed-choice-tradeoff title="Quantitative Ledger of a Two-Path Interferometer and Wheeler's Delayed Choice at α = 0, π/3, π/2"}
-Consider a two-path interferometer preparing the joint state $\frac{1}{\sqrt{2}}(\lvert 0\rangle\otimes\lvert r_L\rangle + \lvert 1\rangle\otimes\lvert r_R\rangle)$ where the unit environmental record states meet at angle $\alpha \in [0, \pi/2]$ with overlap $c = \langle r_L, r_R\rangle = \cos\alpha$. Tracing out the environment leaves the reduced qubit density matrix
+Consider a two-path interferometer preparing the joint state $\frac{1}{\sqrt{2}}(\lvert 0\rangle\otimes\lvert r_L\rangle + \lvert 1\rangle\otimes\lvert r_R\rangle)$. For the real matrix example below, take the unit environmental record states to have real nonnegative overlap $c = \langle r_L, r_R\rangle = \cos\alpha$ with $\alpha \in [0, \pi/2]$; this is the equal-weight, ideal balanced-recombination model with a scanned reference phase. Tracing out the environment leaves the reduced qubit density matrix
 
 $$
 \rho(\alpha) = \frac{1}{2}\begin{pmatrix} 1 & \cos\alpha \\ \cos\alpha & 1 \end{pmatrix}.
