@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch10-shutter-order" data-lang="en" data-wrap="1" viewBox="0 0 540 280" width="540" height="280" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="Two panels showing the real plane of state vectors. Each has two cyan lines, the horizontal |0⟩ and |+⟩ at 45°, and the same grey arrow v. Left, “P₊ first, then P₀”: v drops perpendicularly onto the |+⟩ line, then from there onto the |0⟩ line, and the amber arrow ends on the horizontal line. Right, “P₀ first, then P₊”: v drops onto the |0⟩ line, then onto the |+⟩ line, and the amber arrow ends on the slanted line, much shorter.">
+<title>Two panels showing the real plane of state vectors. Each has two cyan lines, the horizontal |0⟩ and |+⟩ at 45°, and the same grey arrow v. Left, “P₊ first, then P₀”: v drops perpendicularly onto the |+⟩ line, then from there onto the |0⟩ line, and the amber arrow ends on the horizontal line. Right, “P₀ first, then P₊”: v drops onto the |0⟩ line, then onto the |+⟩ line, and the amber arrow ends on the slanted line, much shorter.</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="262" height="280" viewBox="0 0 262 280">
+<text class="tf-ink" x="131" y="22" font-size="14" text-anchor="middle" font-weight="600"><tspan font-style="italic">P</tspan>₊ first, then <tspan font-style="italic">P</tspan><tspan dy="0.28em" font-size="72%">0</tspan><tspan dy="-0.28em">​</tspan></text>
+<line x1="22.88" y1="224" x2="241.12" y2="224" class="ts-cyan" stroke-width="1.8" fill="none"/>
+<text class="tf-cyan" x="237.12" y="244" font-size="14" text-anchor="end">|0⟩</text>
+<line x1="29.07" y1="238.93" x2="183.38" y2="84.62" class="ts-cyan" stroke-width="1.8" fill="none"/>
+<text class="tf-cyan" x="191.38" y="88.62" font-size="14">|+⟩</text>
+<line x1="118.38" y1="64.49" x2="160.95" y2="107.05" class="ts-dim" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<line x1="160.95" y1="107.05" x2="160.95" y2="224" class="ts-dim" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<line x1="44" y1="224" x2="115.15" y2="71.42" class="ts-dim" stroke-width="2" fill="none"/>
+<path d="M118.38 64.49 L118 74.24 L111.15 71.05Z" class="tf-dim"/>
+<line x1="44" y1="224" x2="155.54" y2="112.46" class="ts-dim" stroke-width="1.4" stroke-dasharray="4 3" fill="none"/>
+<path d="M160.95 107.05 L157.25 116.09 L151.91 110.75Z" class="tf-dim"/>
+<line x1="44" y1="224" x2="153.3" y2="224" class="ts-amber" stroke-width="2.8" fill="none"/>
+<path d="M160.95 224 L151.95 227.78 L151.95 220.22Z" class="tf-amber"/>
+<circle cx="160.95" cy="107.05" r="3" class="tf-dim"/>
+<text class="tf-dim" x="126.38" y="68.49" font-size="15"><tspan font-style="italic">v</tspan></text>
+<text class="tf-amber ts-bg" x="166.95" y="248" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">P</tspan><tspan dy="0.28em" font-size="72%">0</tspan><tspan dy="-0.28em" font-style="italic">P</tspan>₊<tspan font-style="italic">v</tspan></text>
+</svg>
+<svg class="tr-fig-panel" x="278" y="0" width="262" height="280" viewBox="0 0 262 280">
+<text class="tf-ink" x="131" y="22" font-size="14" text-anchor="middle" font-weight="600"><tspan font-style="italic">P</tspan><tspan dy="0.28em" font-size="72%">0</tspan><tspan dy="-0.28em"> first, then </tspan><tspan font-style="italic">P</tspan>₊</text>
+<line x1="22.88" y1="224" x2="241.12" y2="224" class="ts-cyan" stroke-width="1.8" fill="none"/>
+<text class="tf-cyan" x="237.12" y="244" font-size="14" text-anchor="end">|0⟩</text>
+<line x1="29.07" y1="238.93" x2="183.38" y2="84.62" class="ts-cyan" stroke-width="1.8" fill="none"/>
+<text class="tf-cyan" x="191.38" y="88.62" font-size="14">|+⟩</text>
+<line x1="118.38" y1="64.49" x2="118.38" y2="224" class="ts-dim" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<line x1="118.38" y1="224" x2="81.19" y2="186.81" class="ts-dim" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<line x1="44" y1="224" x2="115.15" y2="71.42" class="ts-dim" stroke-width="2" fill="none"/>
+<path d="M118.38 64.49 L118 74.24 L111.15 71.05Z" class="tf-dim"/>
+<line x1="44" y1="224" x2="110.73" y2="224" class="ts-dim" stroke-width="1.4" stroke-dasharray="4 3" fill="none"/>
+<path d="M118.38 224 L109.38 227.78 L109.38 220.22Z" class="tf-dim"/>
+<line x1="44" y1="224" x2="75.78" y2="192.22" class="ts-amber" stroke-width="2.8" fill="none"/>
+<path d="M81.19 186.81 L77.5 195.85 L72.15 190.5Z" class="tf-amber"/>
+<circle cx="118.38" cy="224" r="3" class="tf-dim"/>
+<text class="tf-dim" x="126.38" y="68.49" font-size="15"><tspan font-style="italic">v</tspan></text>
+<text class="tf-amber ts-bg" x="73.19" y="176.81" font-size="14" text-anchor="end" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">P</tspan>₊<tspan font-style="italic">P</tspan><tspan dy="0.28em" font-size="72%">0</tspan><tspan dy="-0.28em" font-style="italic">v</tspan></text>
+</svg>
+</svg>

@@ -13,7 +13,9 @@
 3. **为什么局部球面坐标卡总显得依赖路径？** 二维基球面 $S^2$ 上的切丛/主圆丛拓扑障碍与三维旋转器球 $S^3$ 全局左不变标架的对比归纳于文献注记 [@rem-hopf-dirac-monopole-literature] 与 [@rem-gram-hairy-ball-literature]；
 4. **什么才是真正的“两两比较，永远一致，顺序无关”？** 当我们保留带标签的**完整复格拉姆内积矩阵** $G_{ij} = \langle\psi_i, \psi_j\rangle$（连同复相位，而非仅仅模平方 $|G_{ij}|^2$）时，无论按什么下标顺序去读取或核对这张两两比较表，它都在差一个公共外围幺正变换 $U$ 的意义下唯一重构出整族量子态的全局几何配置（[@thm-gram-unitary-reconstruction] 与 [@lemma-unit-gram-equality]），而三点循环内积乘积 $\Delta = G_{01}G_{12}G_{20}$ 的复相位本身也直接保存在 $G$ 中（与贝里相位的对照见 [@rem-berry-pancharatnam-holonomy-literature]）！
 
-![球面旋转顺序与贝里立体角、二维球面毛球/霍普障碍与三维旋转器球全局标架，以及完整复格拉姆矩阵的幺正重构](../assets/fig-10-gram-matrix-hairy-ball.svg)
+::: {.figure src="ch10-overview"}
+**图 10。** 本章地图：第 I 栏，从北极 $N$ 出发的两条琥珀色弧，先绕 $Y$ 再绕 $X$ 落到 $+X$，先绕 $X$ 再绕 $Y$ 落到 $-Y$，两个终点相隔 $90^\circ$；第 II 栏，左边球面上青色的小箭头在南北两极缩成零（紫色的圈，文献结果，未在本书形式化），右边虚线的小圆示意旋转器球 $S^3$，处处带着紫色的标架；第 III 栏，[@ex-octant-berry-gram] 中三个态的完整复格拉姆表，青色的格子是两两复内积（[@thm-gram-unitary-reconstruction]）。
+:::
 
 ## 球面转序与贝里立体角 {#sec-spherical-order-and-berry}
 
@@ -42,6 +44,10 @@
 $$
 P_0 P_+ = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 0 & 0 \end{pmatrix} \neq \frac{1}{2}\begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix} = P_+ P_0.
 $$
+
+::: {.figure src="ch10-shutter-order"}
+**两道快门换个次序，箭头停在不同的线上。** 画的是态矢所在的实平面，青色的 $\lvert 0\rangle$ 与 $\lvert +\rangle$ 两条线相差 $45^\circ$（在布洛赫球上相差 $90^\circ$）。同一支灰色的 $v$，左栏先投到 $\lvert +\rangle$ 线、再投到 $\lvert 0\rangle$ 线，琥珀色的 $P_0P_+v$ 停在水平线上；右栏次序相反，琥珀色的 $P_+P_0v$ 停在斜线上，而且短得多。
+:::
 
 更进一步，闭合球面回路上的几何和乐与三顶点复内积不变量之间的经典对应关系汇总如下（[@rem-berry-pancharatnam-holonomy-literature]）。
 
@@ -175,6 +181,10 @@ $$
 
 > 二维球面因降维投射而生出极点奇弦；三维旋转器球因保留完整相位纤维而处处平滑。
 
+::: {.figure src="ch10-gauge-winding"}
+**北极规范的相位绕南极转满一圈，南极上没有它的值。** 从上往下看南半球，南极在中心。两圈纬线上，每个表盘里青色的指针是北极规范代表元 $\psi_N = \bigl(\cos\frac{\theta}{2}, e^{i\varphi}\sin\frac{\theta}{2}\bigr)$ 的 $\langle 1\mid\psi_N\rangle$ 的相位：沿纬线走一圈，指针也转满一圈；内圈离南极更近，仍是一圈，所以紫色虚线圈处的南极取不到值。霍普夫丛没有全局截面是文献结果，未在本书形式化（[@rem-hopf-dirac-monopole-literature]）。
+:::
+
 ## 完整复格拉姆矩阵重构 {#sec-complex-gram-reconstruction}
 
 现在，让我们正面回答章首的核心命题：**既然局部坐标卡在 $S^2$ 上必有奇点、物理旋转操作又依赖于先后顺序，究竟在什么精确数学意义下，量子态满足“两两比较，永远一致，顺序无关”？**
@@ -189,6 +199,10 @@ $$
 
 - 在计算任意一项 $G_{ij} = \langle\psi_i, \psi_j\rangle$ 时，只是拿第 $i$ 个态与第 $j$ 个态做一次两两内积比量；你先算 $(1, 2)$ 还是先算 $(0, 2)$，或者把状态标签整体重排（对应 $G \mapsto P^* G P$），表里的每一条两两关系都丝毫不随读取顺序而变；
 - 更关键的是，下面的冻结定理证明：**这张两两内积表 $A^* A$ 已经完备地锁死了整族态矢在希尔伯特空间中的全部刚体几何！** 任何另一组态矢 $B \in \mathbb{C}^{m \times n}$，只要它给出的两两复内积表与 $A$ 完全一致（$B^* B = A^* A$），就必然存在外围空间 $\mathbb{C}^m$ 上的**同一个公共幺正变换** $U \in U(m)$，把 $A$ 中的每一根态矢同时刚体旋转为 $B$ 中的对应态矢（$B = UA$）！
+
+::: {.figure src="ch10-common-turn"}
+**两两内积表相同，就只差一个公共的转动。** 灰色的三角形 $A$ 连着 $N, +X, +Y$（[@ex-octant-berry-gram] 的三个态），墨色的三角形 $B = UA$（$U = \operatorname{diag}(1, i)$）连着 $N, +Y, -X$；两支紫色的弧箭头是同一个绕竖轴 $90^\circ$ 的转动，它把整块三角形刚性地搬过去，两组态的复格拉姆矩阵逐项相等（[@thm-gram-unitary-reconstruction]）。
+:::
 
 ::: {.theorem #thm-gram-unitary-reconstruction title="复格拉姆矩阵相等下的公共外围幺正重构定理" lean="D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq"}
 设 $m$ 为具有可判等性的有限指标类型（`Fintype m`、`DecidableEq m`），$n$ 为任意有限指标类型（`Finite n`）。对任意两个复矩阵 $B, A \in M_{m \times n}(\mathbb{C})$，若它们的复格拉姆矩阵相等：
