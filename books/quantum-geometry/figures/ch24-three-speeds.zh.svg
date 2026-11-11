@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch24-three-speeds" data-lang="zh" data-wrap="1" viewBox="0 0 600 300" width="600" height="300" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="两栏，纵轴都是误差的常用对数。左栏横轴是步数 k：青色的点是反复取余弦，排成一条斜直线，每一步只往下走同样的一小格，沿着斜率 lg 0.674 的虚线，到第 55 步才过 10⁻¹⁰；品红的点是牛顿迭代，第 1、2、3、4 步分别落到 10⁻²、10⁻⁵、10⁻¹⁰、10⁻²¹，一步比一步陡。右栏横轴是分母 b 的常用对数：七个点是 θ* 的渐近分数 2/3、3/4、14/19、17/23、694/939、711/962、7093/9597 的残差 |cos q − q|，全部在虚线 (1 + sin 1)/b² 之下，随着分母变大一路下降，却始终大于零。">
+<title>两栏，纵轴都是误差的常用对数。左栏横轴是步数 k：青色的点是反复取余弦，排成一条斜直线，每一步只往下走同样的一小格，沿着斜率 lg 0.674 的虚线，到第 55 步才过 10⁻¹⁰；品红的点是牛顿迭代，第 1、2、3、4 步分别落到 10⁻²、10⁻⁵、10⁻¹⁰、10⁻²¹，一步比一步陡。右栏横轴是分母 b 的常用对数：七个点是 θ* 的渐近分数 2/3、3/4、14/19、17/23、694/939、711/962、7093/9597 的残差 |cos q − q|，全部在虚线 (1 + sin 1)/b² 之下，随着分母变大一路下降，却始终大于零。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="292" height="300" viewBox="0 0 292 300">
+<text class="tf-ink" x="146" y="20" font-size="14" text-anchor="middle" font-weight="600">按步数：单纯迭代与牛顿</text>
+<line x1="52" y1="246" x2="276" y2="246" class="ts-dim" stroke-width="1.3" fill="none"/>
+<line x1="52" y1="246" x2="52" y2="251" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="52" y="264" font-size="13" text-anchor="middle">0</text>
+<line x1="126.67" y1="246" x2="126.67" y2="251" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="126.67" y="264" font-size="13" text-anchor="middle">20</text>
+<line x1="201.33" y1="246" x2="201.33" y2="251" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="201.33" y="264" font-size="13" text-anchor="middle">40</text>
+<line x1="276" y1="246" x2="276" y2="251" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="276" y="264" font-size="13" text-anchor="middle">60</text>
+<line x1="52" y1="40" x2="52" y2="246" class="ts-dim" stroke-width="1.3" fill="none"/>
+<line x1="47" y1="40" x2="52" y2="40" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="44" y="44.68" font-size="13" text-anchor="end">1</text>
+<line x1="47" y1="86.82" x2="52" y2="86.82" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="44" y="91.5" font-size="13" text-anchor="end">10⁻⁵</text>
+<line x1="47" y1="133.64" x2="52" y2="133.64" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="44" y="138.32" font-size="13" text-anchor="end">10⁻¹⁰</text>
+<line x1="47" y1="180.45" x2="52" y2="180.45" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="44" y="185.13" font-size="13" text-anchor="end">10⁻¹⁵</text>
+<line x1="47" y1="227.27" x2="52" y2="227.27" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="44" y="231.95" font-size="13" text-anchor="end">10⁻²⁰</text>
+<line x1="52" y1="86.82" x2="276" y2="86.82" class="ts-faint" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+<line x1="52" y1="133.64" x2="276" y2="133.64" class="ts-faint" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+<line x1="52" y1="180.45" x2="276" y2="180.45" class="ts-faint" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+<line x1="52" y1="227.27" x2="276" y2="227.27" class="ts-faint" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+<path d="M52 45.46 L53.4 46.07 L54.8 46.67 L56.2 47.27 L57.6 47.87 L59 48.48 L60.4 49.08 L61.8 49.68 L63.2 50.28 L64.6 50.89 L66 51.49 L67.4 52.09 L68.8 52.69 L70.2 53.3 L71.6 53.9 L73 54.5 L74.4 55.1 L75.8 55.71 L77.2 56.31 L78.6 56.91 L80 57.51 L81.4 58.12 L82.8 58.72 L84.2 59.32 L85.6 59.92 L87 60.53 L88.4 61.13 L89.8 61.73 L91.2 62.33 L92.6 62.94 L94 63.54 L95.4 64.14 L96.8 64.74 L98.2 65.35 L99.6 65.95 L101 66.55 L102.4 67.15 L103.8 67.76 L105.2 68.36 L106.6 68.96 L108 69.56 L109.4 70.17 L110.8 70.77 L112.2 71.37 L113.6 71.97 L115 72.58 L116.4 73.18 L117.8 73.78 L119.2 74.38 L120.6 74.99 L122 75.59 L123.4 76.19 L124.8 76.79 L126.2 77.4 L127.6 78 L129 78.6 L130.4 79.2 L131.8 79.81 L133.2 80.41 L134.6 81.01 L136 81.61 L137.4 82.22 L138.8 82.82 L140.2 83.42 L141.6 84.02 L143 84.63 L144.4 85.23 L145.8 85.83 L147.2 86.43 L148.6 87.04 L150 87.64 L151.4 88.24 L152.8 88.84 L154.2 89.45 L155.6 90.05 L157 90.65 L158.4 91.25 L159.8 91.86 L161.2 92.46 L162.6 93.06 L164 93.66 L165.4 94.27 L166.8 94.87 L168.2 95.47 L169.6 96.07 L171 96.68 L172.4 97.28 L173.8 97.88 L175.2 98.49 L176.6 99.09 L178 99.69 L179.4 100.29 L180.8 100.9 L182.2 101.5 L183.6 102.1 L185 102.7 L186.4 103.31 L187.8 103.91 L189.2 104.51 L190.6 105.11 L192 105.72 L193.4 106.32 L194.8 106.92 L196.2 107.52 L197.6 108.13 L199 108.73 L200.4 109.33 L201.8 109.93 L203.2 110.54 L204.6 111.14 L206 111.74 L207.4 112.34 L208.8 112.95 L210.2 113.55 L211.6 114.15 L213 114.75 L214.4 115.36 L215.8 115.96 L217.2 116.56 L218.6 117.16 L220 117.77 L221.4 118.37 L222.8 118.97 L224.2 119.57 L225.6 120.18 L227 120.78 L228.4 121.38 L229.8 121.98 L231.2 122.59 L232.6 123.19 L234 123.79 L235.4 124.39 L236.8 125 L238.2 125.6 L239.6 126.2 L241 126.8 L242.4 127.41 L243.8 128.01 L245.2 128.61 L246.6 129.21 L248 129.82 L249.4 130.42 L250.8 131.02 L252.2 131.62 L253.6 132.23 L255 132.83 L256.4 133.43 L257.8 134.03 L259.2 134.64 L260.6 135.24 L262 135.84 L263.4 136.44 L264.8 137.05 L266.2 137.65 L267.6 138.25 L269 138.85 L270.4 139.46 L271.8 140.06 L273.2 140.66 L274.6 141.26 L276 141.87" class="ts-cyan" stroke-width="1.2" stroke-dasharray="4 3" stroke-linejoin="round" fill="none"/>
+<circle cx="52" cy="45.46" r="2.6" class="tf-cyan"/>
+<circle cx="55.73" cy="46.57" r="2.6" class="tf-cyan"/>
+<circle cx="59.47" cy="48.67" r="2.6" class="tf-cyan"/>
+<circle cx="63.2" cy="50.03" r="2.6" class="tf-cyan"/>
+<circle cx="66.93" cy="51.84" r="2.6" class="tf-cyan"/>
+<circle cx="70.67" cy="53.33" r="2.6" class="tf-cyan"/>
+<circle cx="74.4" cy="55.02" r="2.6" class="tf-cyan"/>
+<circle cx="78.13" cy="56.57" r="2.6" class="tf-cyan"/>
+<circle cx="81.87" cy="58.22" r="2.6" class="tf-cyan"/>
+<circle cx="85.6" cy="59.8" r="2.6" class="tf-cyan"/>
+<circle cx="89.33" cy="61.42" r="2.6" class="tf-cyan"/>
+<circle cx="93.07" cy="63.02" r="2.6" class="tf-cyan"/>
+<circle cx="96.8" cy="64.63" r="2.6" class="tf-cyan"/>
+<circle cx="100.53" cy="66.24" r="2.6" class="tf-cyan"/>
+<circle cx="104.27" cy="67.85" r="2.6" class="tf-cyan"/>
+<circle cx="108" cy="69.45" r="2.6" class="tf-cyan"/>
+<circle cx="111.73" cy="71.06" r="2.6" class="tf-cyan"/>
+<circle cx="115.47" cy="72.66" r="2.6" class="tf-cyan"/>
+<circle cx="119.2" cy="74.27" r="2.6" class="tf-cyan"/>
+<circle cx="122.93" cy="75.88" r="2.6" class="tf-cyan"/>
+<circle cx="126.67" cy="77.48" r="2.6" class="tf-cyan"/>
+<circle cx="130.4" cy="79.09" r="2.6" class="tf-cyan"/>
+<circle cx="134.13" cy="80.7" r="2.6" class="tf-cyan"/>
+<circle cx="137.87" cy="82.3" r="2.6" class="tf-cyan"/>
+<circle cx="141.6" cy="83.91" r="2.6" class="tf-cyan"/>
+<circle cx="145.33" cy="85.52" r="2.6" class="tf-cyan"/>
+<circle cx="149.07" cy="87.12" r="2.6" class="tf-cyan"/>
+<circle cx="152.8" cy="88.73" r="2.6" class="tf-cyan"/>
+<circle cx="156.53" cy="90.34" r="2.6" class="tf-cyan"/>
+<circle cx="160.27" cy="91.94" r="2.6" class="tf-cyan"/>
+<circle cx="164" cy="93.55" r="2.6" class="tf-cyan"/>
+<circle cx="167.73" cy="95.16" r="2.6" class="tf-cyan"/>
+<circle cx="171.47" cy="96.76" r="2.6" class="tf-cyan"/>
+<circle cx="175.2" cy="98.37" r="2.6" class="tf-cyan"/>
+<circle cx="178.93" cy="99.98" r="2.6" class="tf-cyan"/>
+<circle cx="182.67" cy="101.58" r="2.6" class="tf-cyan"/>
+<circle cx="186.4" cy="103.19" r="2.6" class="tf-cyan"/>
+<circle cx="190.13" cy="104.8" r="2.6" class="tf-cyan"/>
+<circle cx="193.87" cy="106.41" r="2.6" class="tf-cyan"/>
+<circle cx="197.6" cy="108.01" r="2.6" class="tf-cyan"/>
+<circle cx="201.33" cy="109.62" r="2.6" class="tf-cyan"/>
+<circle cx="205.07" cy="111.23" r="2.6" class="tf-cyan"/>
+<circle cx="208.8" cy="112.83" r="2.6" class="tf-cyan"/>
+<circle cx="212.53" cy="114.44" r="2.6" class="tf-cyan"/>
+<circle cx="216.27" cy="116.05" r="2.6" class="tf-cyan"/>
+<circle cx="220" cy="117.65" r="2.6" class="tf-cyan"/>
+<circle cx="223.73" cy="119.26" r="2.6" class="tf-cyan"/>
+<circle cx="227.47" cy="120.87" r="2.6" class="tf-cyan"/>
+<circle cx="231.2" cy="122.47" r="2.6" class="tf-cyan"/>
+<circle cx="234.93" cy="124.08" r="2.6" class="tf-cyan"/>
+<circle cx="238.67" cy="125.69" r="2.6" class="tf-cyan"/>
+<circle cx="242.4" cy="127.29" r="2.6" class="tf-cyan"/>
+<circle cx="246.13" cy="128.9" r="2.6" class="tf-cyan"/>
+<circle cx="249.87" cy="130.51" r="2.6" class="tf-cyan"/>
+<circle cx="253.6" cy="132.11" r="2.6" class="tf-cyan"/>
+<circle cx="257.33" cy="133.72" r="2.6" class="tf-cyan"/>
+<circle cx="261.07" cy="135.33" r="2.6" class="tf-cyan"/>
+<circle cx="264.8" cy="136.93" r="2.6" class="tf-cyan"/>
+<circle cx="268.53" cy="138.54" r="2.6" class="tf-cyan"/>
+<circle cx="272.27" cy="140.15" r="2.6" class="tf-cyan"/>
+<circle cx="276" cy="141.75" r="2.6" class="tf-cyan"/>
+<path d="M52 45.46 L55.73 58.24 L59.47 82.67 L63.2 131.48 L66.93 229.09" class="ts-magenta" stroke-width="1.6" stroke-linejoin="round" fill="none"/>
+<circle cx="52" cy="45.46" r="4.4" class="ts-bg tf-magenta" stroke-width="1.4"/>
+<circle cx="55.73" cy="58.24" r="4.4" class="ts-bg tf-magenta" stroke-width="1.4"/>
+<circle cx="59.47" cy="82.67" r="4.4" class="ts-bg tf-magenta" stroke-width="1.4"/>
+<circle cx="63.2" cy="131.48" r="4.4" class="ts-bg tf-magenta" stroke-width="1.4"/>
+<circle cx="66.93" cy="229.09" r="4.4" class="ts-bg tf-magenta" stroke-width="1.4"/>
+<text class="tf-cyan ts-bg" x="149.07" y="147.68" font-size="13" text-anchor="middle" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">反复取余弦</text>
+<text class="tf-magenta ts-bg" x="70.67" y="232.89" font-size="13" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">牛顿</text>
+<text class="tf-dim" x="276" y="290" font-size="14" text-anchor="end"><tspan font-style="italic">k</tspan></text>
+</svg>
+<svg class="tr-fig-panel" x="308" y="0" width="292" height="300" viewBox="0 0 292 300">
+<text class="tf-ink" x="146" y="20" font-size="14" text-anchor="middle" font-weight="600">按分母：有理读数</text>
+<line x1="52" y1="246" x2="276" y2="246" class="ts-dim" stroke-width="1.3" fill="none"/>
+<line x1="52" y1="246" x2="52" y2="251" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="52" y="264" font-size="13" text-anchor="middle">1</text>
+<line x1="105.33" y1="246" x2="105.33" y2="251" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="105.33" y="264" font-size="13" text-anchor="middle">10</text>
+<line x1="158.67" y1="246" x2="158.67" y2="251" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="158.67" y="264" font-size="13" text-anchor="middle">10²</text>
+<line x1="212" y1="246" x2="212" y2="251" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="212" y="264" font-size="13" text-anchor="middle">10³</text>
+<line x1="265.33" y1="246" x2="265.33" y2="251" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="265.33" y="264" font-size="13" text-anchor="middle">10⁴</text>
+<line x1="52" y1="40" x2="52" y2="246" class="ts-dim" stroke-width="1.3" fill="none"/>
+<line x1="47" y1="50.3" x2="52" y2="50.3" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="44" y="54.98" font-size="13" text-anchor="end">1</text>
+<line x1="47" y1="112.1" x2="52" y2="112.1" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="44" y="116.78" font-size="13" text-anchor="end">10⁻³</text>
+<line x1="47" y1="173.9" x2="52" y2="173.9" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="44" y="178.58" font-size="13" text-anchor="end">10⁻⁶</text>
+<line x1="47" y1="235.7" x2="52" y2="235.7" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="44" y="240.38" font-size="13" text-anchor="end">10⁻⁹</text>
+<line x1="52" y1="112.1" x2="276" y2="112.1" class="ts-faint" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+<line x1="52" y1="173.9" x2="276" y2="173.9" class="ts-faint" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+<line x1="52" y1="235.7" x2="276" y2="235.7" class="ts-faint" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+<path d="M52 44.84 L53.4 45.92 L54.8 47 L56.2 48.08 L57.6 49.16 L59 50.25 L60.4 51.33 L61.8 52.41 L63.2 53.49 L64.6 54.57 L66 55.65 L67.4 56.73 L68.8 57.82 L70.2 58.9 L71.6 59.98 L73 61.06 L74.4 62.14 L75.8 63.22 L77.2 64.3 L78.6 65.39 L80 66.47 L81.4 67.55 L82.8 68.63 L84.2 69.71 L85.6 70.79 L87 71.88 L88.4 72.96 L89.8 74.04 L91.2 75.12 L92.6 76.2 L94 77.28 L95.4 78.36 L96.8 79.45 L98.2 80.53 L99.6 81.61 L101 82.69 L102.4 83.77 L103.8 84.85 L105.2 85.93 L106.6 87.02 L108 88.1 L109.4 89.18 L110.8 90.26 L112.2 91.34 L113.6 92.42 L115 93.51 L116.4 94.59 L117.8 95.67 L119.2 96.75 L120.6 97.83 L122 98.91 L123.4 99.99 L124.8 101.08 L126.2 102.16 L127.6 103.24 L129 104.32 L130.4 105.4 L131.8 106.48 L133.2 107.56 L134.6 108.65 L136 109.73 L137.4 110.81 L138.8 111.89 L140.2 112.97 L141.6 114.05 L143 115.14 L144.4 116.22 L145.8 117.3 L147.2 118.38 L148.6 119.46 L150 120.54 L151.4 121.62 L152.8 122.71 L154.2 123.79 L155.6 124.87 L157 125.95 L158.4 127.03 L159.8 128.11 L161.2 129.19 L162.6 130.28 L164 131.36 L165.4 132.44 L166.8 133.52 L168.2 134.6 L169.6 135.68 L171 136.77 L172.4 137.85 L173.8 138.93 L175.2 140.01 L176.6 141.09 L178 142.17 L179.4 143.25 L180.8 144.34 L182.2 145.42 L183.6 146.5 L185 147.58 L186.4 148.66 L187.8 149.74 L189.2 150.82 L190.6 151.91 L192 152.99 L193.4 154.07 L194.8 155.15 L196.2 156.23 L197.6 157.31 L199 158.4 L200.4 159.48 L201.8 160.56 L203.2 161.64 L204.6 162.72 L206 163.8 L207.4 164.88 L208.8 165.97 L210.2 167.05 L211.6 168.13 L213 169.21 L214.4 170.29 L215.8 171.37 L217.2 172.45 L218.6 173.54 L220 174.62 L221.4 175.7 L222.8 176.78 L224.2 177.86 L225.6 178.94 L227 180.03 L228.4 181.11 L229.8 182.19 L231.2 183.27 L232.6 184.35 L234 185.43 L235.4 186.51 L236.8 187.6 L238.2 188.68 L239.6 189.76 L241 190.84 L242.4 191.92 L243.8 193 L245.2 194.08 L246.6 195.17 L248 196.25 L249.4 197.33 L250.8 198.41 L252.2 199.49 L253.6 200.57 L255 201.66 L256.4 202.74 L257.8 203.82 L259.2 204.9 L260.6 205.98 L262 207.06 L263.4 208.14 L264.8 209.23 L266.2 210.31 L267.6 211.39 L269 212.47 L270.4 213.55 L271.8 214.63 L273.2 215.71 L274.6 216.8 L276 217.88" class="ts-dim" stroke-width="1.4" stroke-dasharray="5 4" stroke-linejoin="round" fill="none"/>
+<text class="tf-dim" x="72" y="59.02" font-size="13">(1 + sin 1)/<tspan font-style="italic">b</tspan>²</text>
+<circle cx="77.45" cy="69.33" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="84.11" cy="86.09" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="120.2" cy="100.27" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="124.63" cy="135.18" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="210.54" cy="169.28" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="211.1" cy="189.38" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="264.38" cy="223.09" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<text class="tf-ink ts-bg" x="116.63" y="143.86" font-size="13" text-anchor="end" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">17/23</text>
+<text class="tf-ink ts-bg" x="256.38" y="231.77" font-size="13" text-anchor="end" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">7093/9597</text>
+<text class="tf-dim" x="276" y="290" font-size="14" text-anchor="end"><tspan font-style="italic">b</tspan></text>
+</svg>
+</svg>

@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch24-diagonal-landing" data-lang="en" data-wrap="1" viewBox="0 0 560 300" width="560" height="300" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="Two panels, each the same three-by-three listing g: row 0 is 0 1 2, row 1 is 1 2 2, row 2 is 2 2 2, with the three diagonal cells 0, 2, 2 outlined. The row under the table is the twisted diagonal. Left, with f₁ (0→1, 1→2, 2→2): the twisted diagonal is 1 2 2, exactly row 1; row 1 and it are cyan, and the landing spot is row 1, column 1, whose value 2 is the fixed point of f₁. Right, with the cycle f₂ (0→1→2→0): the twisted diagonal is 1 0 0, in magenta; every row differs from it at its diagonal cell (crossed), so it is no row at all.">
+<title>Two panels, each the same three-by-three listing g: row 0 is 0 1 2, row 1 is 1 2 2, row 2 is 2 2 2, with the three diagonal cells 0, 2, 2 outlined. The row under the table is the twisted diagonal. Left, with f₁ (0→1, 1→2, 2→2): the twisted diagonal is 1 2 2, exactly row 1; row 1 and it are cyan, and the landing spot is row 1, column 1, whose value 2 is the fixed point of f₁. Right, with the cycle f₂ (0→1→2→0): the twisted diagonal is 1 0 0, in magenta; every row differs from it at its diagonal cell (crossed), so it is no row at all.</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="272" height="300" viewBox="0 0 272 300">
+<text class="tf-ink" x="136" y="22" font-size="14" text-anchor="middle" font-weight="600"><tspan font-style="italic">f</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">: 0→1, 1→2, 2→2</tspan></text>
+<text class="tf-dim" x="90" y="75.04" font-size="14" text-anchor="end"><tspan font-style="italic">g</tspan> 0</text>
+<text class="tf-dim" x="124" y="42" font-size="13" text-anchor="middle">0</text>
+<rect x="104" y="50" width="40" height="40" class="ts-edge" stroke-width="1" fill="none"/>
+<text class="tf-ink" x="124" y="75.76" font-size="16" text-anchor="middle">0</text>
+<rect x="144" y="50" width="40" height="40" class="ts-edge" stroke-width="1" fill="none"/>
+<text class="tf-ink" x="164" y="75.76" font-size="16" text-anchor="middle">1</text>
+<rect x="184" y="50" width="40" height="40" class="ts-edge" stroke-width="1" fill="none"/>
+<text class="tf-ink" x="204" y="75.76" font-size="16" text-anchor="middle">2</text>
+<rect x="106" y="52" width="36" height="36" class="ts-ink" stroke-width="1.8" fill="none"/>
+<text class="tf-dim" x="90" y="115.04" font-size="14" text-anchor="end"><tspan font-style="italic">g</tspan> 1</text>
+<text class="tf-dim" x="164" y="42" font-size="13" text-anchor="middle">1</text>
+<rect x="104" y="90" width="40" height="40" class="ts-edge tf-cyan" stroke-width="1" fill-opacity="0.14"/>
+<text class="tf-cyan" x="124" y="115.76" font-size="16" text-anchor="middle">1</text>
+<rect x="144" y="90" width="40" height="40" class="ts-edge tf-cyan" stroke-width="1" fill-opacity="0.14"/>
+<text class="tf-cyan" x="164" y="115.76" font-size="16" text-anchor="middle">2</text>
+<rect x="184" y="90" width="40" height="40" class="ts-edge tf-cyan" stroke-width="1" fill-opacity="0.14"/>
+<text class="tf-cyan" x="204" y="115.76" font-size="16" text-anchor="middle">2</text>
+<rect x="146" y="92" width="36" height="36" class="ts-ink" stroke-width="1.8" fill="none"/>
+<text class="tf-dim" x="90" y="155.04" font-size="14" text-anchor="end"><tspan font-style="italic">g</tspan> 2</text>
+<text class="tf-dim" x="204" y="42" font-size="13" text-anchor="middle">2</text>
+<rect x="104" y="130" width="40" height="40" class="ts-edge" stroke-width="1" fill="none"/>
+<text class="tf-ink" x="124" y="155.76" font-size="16" text-anchor="middle">2</text>
+<rect x="144" y="130" width="40" height="40" class="ts-edge" stroke-width="1" fill="none"/>
+<text class="tf-ink" x="164" y="155.76" font-size="16" text-anchor="middle">2</text>
+<rect x="184" y="130" width="40" height="40" class="ts-edge" stroke-width="1" fill="none"/>
+<text class="tf-ink" x="204" y="155.76" font-size="16" text-anchor="middle">2</text>
+<rect x="186" y="132" width="36" height="36" class="ts-ink" stroke-width="1.8" fill="none"/>
+<text class="tf-cyan" x="90" y="220.68" font-size="13" text-anchor="end">twisted</text>
+<rect x="104" y="196" width="40" height="40" class="ts-cyan tf-cyan" stroke-width="1.6" fill-opacity="0.14"/>
+<text class="tf-cyan" x="124" y="221.76" font-size="16" text-anchor="middle" font-weight="600">1</text>
+<rect x="144" y="196" width="40" height="40" class="ts-cyan tf-cyan" stroke-width="1.6" fill-opacity="0.14"/>
+<text class="tf-cyan" x="164" y="221.76" font-size="16" text-anchor="middle" font-weight="600">2</text>
+<rect x="184" y="196" width="40" height="40" class="ts-cyan tf-cyan" stroke-width="1.6" fill-opacity="0.14"/>
+<text class="tf-cyan" x="204" y="221.76" font-size="16" text-anchor="middle" font-weight="600">2</text>
+<circle cx="164" cy="110" r="17" class="ts-ink" stroke-width="2.2" fill="none"/>
+<text class="tf-cyan" x="136" y="266" font-size="13" text-anchor="middle">= row 1; landing value 2 = <tspan font-style="italic">f</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">(2)</tspan></text>
+</svg>
+<svg class="tr-fig-panel" x="288" y="0" width="272" height="300" viewBox="0 0 272 300">
+<text class="tf-ink" x="136" y="22" font-size="14" text-anchor="middle" font-weight="600"><tspan font-style="italic">f</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">: 0→1→2→0</tspan></text>
+<text class="tf-dim" x="90" y="75.04" font-size="14" text-anchor="end"><tspan font-style="italic">g</tspan> 0</text>
+<text class="tf-dim" x="124" y="42" font-size="13" text-anchor="middle">0</text>
+<rect x="104" y="50" width="40" height="40" class="ts-edge" stroke-width="1" fill="none"/>
+<text class="tf-ink" x="124" y="75.76" font-size="16" text-anchor="middle">0</text>
+<rect x="144" y="50" width="40" height="40" class="ts-edge" stroke-width="1" fill="none"/>
+<text class="tf-ink" x="164" y="75.76" font-size="16" text-anchor="middle">1</text>
+<rect x="184" y="50" width="40" height="40" class="ts-edge" stroke-width="1" fill="none"/>
+<text class="tf-ink" x="204" y="75.76" font-size="16" text-anchor="middle">2</text>
+<rect x="106" y="52" width="36" height="36" class="ts-ink" stroke-width="1.8" fill="none"/>
+<line x1="131" y1="53" x2="141" y2="63" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<line x1="131" y1="63" x2="141" y2="53" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<text class="tf-dim" x="90" y="115.04" font-size="14" text-anchor="end"><tspan font-style="italic">g</tspan> 1</text>
+<text class="tf-dim" x="164" y="42" font-size="13" text-anchor="middle">1</text>
+<rect x="104" y="90" width="40" height="40" class="ts-edge" stroke-width="1" fill="none"/>
+<text class="tf-ink" x="124" y="115.76" font-size="16" text-anchor="middle">1</text>
+<rect x="144" y="90" width="40" height="40" class="ts-edge" stroke-width="1" fill="none"/>
+<text class="tf-ink" x="164" y="115.76" font-size="16" text-anchor="middle">2</text>
+<rect x="184" y="90" width="40" height="40" class="ts-edge" stroke-width="1" fill="none"/>
+<text class="tf-ink" x="204" y="115.76" font-size="16" text-anchor="middle">2</text>
+<rect x="146" y="92" width="36" height="36" class="ts-ink" stroke-width="1.8" fill="none"/>
+<line x1="171" y1="93" x2="181" y2="103" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<line x1="171" y1="103" x2="181" y2="93" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<text class="tf-dim" x="90" y="155.04" font-size="14" text-anchor="end"><tspan font-style="italic">g</tspan> 2</text>
+<text class="tf-dim" x="204" y="42" font-size="13" text-anchor="middle">2</text>
+<rect x="104" y="130" width="40" height="40" class="ts-edge" stroke-width="1" fill="none"/>
+<text class="tf-ink" x="124" y="155.76" font-size="16" text-anchor="middle">2</text>
+<rect x="144" y="130" width="40" height="40" class="ts-edge" stroke-width="1" fill="none"/>
+<text class="tf-ink" x="164" y="155.76" font-size="16" text-anchor="middle">2</text>
+<rect x="184" y="130" width="40" height="40" class="ts-edge" stroke-width="1" fill="none"/>
+<text class="tf-ink" x="204" y="155.76" font-size="16" text-anchor="middle">2</text>
+<rect x="186" y="132" width="36" height="36" class="ts-ink" stroke-width="1.8" fill="none"/>
+<line x1="211" y1="133" x2="221" y2="143" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<line x1="211" y1="143" x2="221" y2="133" class="ts-magenta" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<text class="tf-magenta" x="90" y="220.68" font-size="13" text-anchor="end">twisted</text>
+<rect x="104" y="196" width="40" height="40" class="ts-magenta tf-magenta" stroke-width="1.6" fill-opacity="0.14"/>
+<text class="tf-magenta" x="124" y="221.76" font-size="16" text-anchor="middle" font-weight="600">1</text>
+<rect x="144" y="196" width="40" height="40" class="ts-magenta tf-magenta" stroke-width="1.6" fill-opacity="0.14"/>
+<text class="tf-magenta" x="164" y="221.76" font-size="16" text-anchor="middle" font-weight="600">0</text>
+<rect x="184" y="196" width="40" height="40" class="ts-magenta tf-magenta" stroke-width="1.6" fill-opacity="0.14"/>
+<text class="tf-magenta" x="204" y="221.76" font-size="16" text-anchor="middle" font-weight="600">0</text>
+<text class="tf-magenta" x="136" y="266" font-size="13" text-anchor="middle">no row at all: escaped</text>
+</svg>
+</svg>

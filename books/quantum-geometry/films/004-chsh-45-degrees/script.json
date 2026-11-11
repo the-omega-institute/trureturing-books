@@ -1,0 +1,42 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen", "CHSH": "C H S H", "theta": "thayta", "phi": "fye", "qubit": "cue-bit"},
+  "music": {"bpm": 76, "progression": "d-minor"},
+  "scenes": [
+    {"id": "arc", "name": "ARC AND LINE", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["On the Bell state, two measuring directions at an angle theta agree with correlation cosine theta.", "贝尔态上，两个测量方向夹角为 θ，两边读数的关联就是 cos θ。"],
+      ["A toy classical model, hiding a random direction in each pair, draws a straight line instead.", "一个经典玩具模型：每对粒子藏一个随机方向，画出来的却是一条直线 1 − 2θ/π。"],
+      ["The two meet at zero, ninety and one hundred eighty degrees.", "两者在 0°、90°、180° 处重合。"],
+      ["Halfway between, at forty-five degrees, the arc stands higher by about zero point two oh seven.", "走到半途的 45°，弧比折线高出约 0.207。"]
+    ], "cues": [{"line": 3, "at": 2.6, "kind": "chime"}]},
+    {"id": "four", "name": "FOUR PAIRS", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.6, 0.6, 0.0, 0.2], "lines": [
+      ["Alice measures along Z or X. Bob turns his right-angled pair by forty-five degrees.", "Alice 沿 Z 或 X 测量；Bob 把自己那对直角方向整体转过 45°。"],
+      ["Three pairs sit forty-five degrees apart; the last, one hundred thirty-five.", "三对方向相隔 45°，最后一对相隔 135°。"],
+      ["Add the four, minus the last. Its cosine is negative, so it stacks upward too.", "四项相加，最后一项带减号；它的余弦是负的，负负得正，也往上叠。"],
+      ["The arc stacks to two root two, about two point eight three. The line stacks to exactly two.", "弧叠到 2√2 ≈ 2.828，折线恰好叠到 2。"]
+    ], "cues": [{"line": 3, "at": 1.6, "kind": "chime"}]},
+    {"id": "sweep", "name": "TURN BOB", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.8, 0.7, 0.3, 0.3], "lines": [
+      ["Now turn Bob's pair slowly, from zero to ninety degrees.", "现在慢慢转动 Bob 的这对方向，从 0° 转到 90°。"],
+      ["On the Bell state, the CHSH value is two root two, times cosine of phi minus forty-five degrees.", "贝尔态上，CHSH 值等于 2√2 cos(φ − 45°)。"],
+      ["It starts at two, touches two root two only at forty-five degrees, and falls back to two.", "它从 2 出发，只在 45° 碰到 2√2，又落回 2。"],
+      ["The toy model stays flat at two the whole way.", "玩具模型一路平躺在 2 上。"]
+    ], "cues": [{"line": 2, "at": 2.4, "kind": "chime"}]},
+    {"id": "tables", "name": "SIXTEEN TABLES", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.8, 0.4, 0.4], "lines": [
+      ["Can a cleverer classical model do better? Fix the hidden variable: every answer is plus or minus one.", "更聪明的经典模型能不能做得更好？固定隐变量，每个答案都只是 +1 或 −1。"],
+      ["Write the sum as a nought times b nought plus b one, plus a one times b nought minus b one.", "把四项之和写成 a₀(b₀ + b₁) + a₁(b₀ − b₁)。"],
+      ["One bracket is always zero, the other plus or minus two. All sixteen tables give exactly plus or minus two.", "两个括号总有一个是 0，另一个是 ±2：十六张应答表，每张都恰好给出 ±2。"],
+      ["Averaging over hidden variables never leaves minus two to two. Lean checks this bound.", "对隐变量加权平均，永远出不了 [−2, 2]。这条上界由 Lean 内核检验。"]
+    ], "cues": [{"line": 3, "at": 4.4, "kind": "stamp"}]},
+    {"id": "ceiling", "name": "CEILING", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.5, 0.4], "lines": [
+      ["Where does the extra room come from? Square the CHSH operator.", "多出来的空间从哪里来？把 CHSH 算子平方。"],
+      ["Lean checks that the square is four, plus a cross term of the two sides' commutators.", "Lean 内核检验：平方等于 4，再加一个由两侧换位子相乘而成的交叉项。"],
+      ["For qubits, each commutator is an oriented area. Open both to right angles, and the square reaches eight.", "对单比特方向，每个换位子都是一块有向面积；两侧都张成直角，平方就到 8。"],
+      ["So the ceiling is root eight. Lean checks that the forty-five degree operator reaches two root two, and no state goes higher.", "所以天花板是 √8。Lean 内核检验：这个 45° 算子恰好达到 2√2，任何态都超不过。"],
+      ["Classical answers stop at two, the cosine arc at two root two: a factor of root two.", "经典应答停在 2，余弦弧停在 2√2：相差 √2 倍。"]
+    ], "cues": [{"line": 1, "at": 2.8, "kind": "stamp"}, {"line": 3, "at": 3.4, "kind": "stamp"}]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, chapter thirteen.", "《量子计算的几何直觉》· 第十三章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}
