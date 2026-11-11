@@ -797,6 +797,334 @@
       "line": 28,
       "signature": "theorem all_grade_regularity_of_mild_path : (∀ (ν τ : ℝ), 0 < ν → 0 < τ → let K"
     },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonCartesianChain.cartesian_chain": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonCartesianChain",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonCartesianChain.cartesian_chain",
+      "kind": "theorem",
+      "statement_id": "sha256:738b9ec376753f44a385f42d528c0fee54a236bc0bcbc4cc9a3bd9d1c9203590",
+      "line": 89,
+      "signature": "theorem cartesian_chain (m : ℕ) (hm : 1 ≤ m) : realOperator m (cartesian0 m) = 0 ∧ realOperator m (cartesian1 m) = cartesian0 m"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonCartesianChain.unbounded_linear_drift": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonCartesianChain",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonCartesianChain.unbounded_linear_drift",
+      "kind": "theorem",
+      "statement_id": "sha256:738b9ec376753f44a385f42d528c0fee54a236bc0bcbc4cc9a3bd9d1c9203590",
+      "line": 117,
+      "signature": "theorem unbounded_linear_drift (m : ℕ) (hm : 1 ≤ m) : (∀ t : ℝ, HasDerivAt (fun τ : ℝ => cartesian1 m + τ • cartesian0 m) (realOperator m (cartesian1 m + t • cartesian0 m)) t) ∧ ¬ Bornology.IsBounded (Set.range (fun t : ℝ => cartesian1 m + t • cartesian0 m))"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonDecomposition.geometric_eq_algebraic": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonDecomposition",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonDecomposition.geometric_eq_algebraic",
+      "kind": "theorem",
+      "statement_id": "sha256:e0f3a1ee2a22374a44dbf0bdac2fe5f9d91db9fc8fa2eecbb9e24f15ed63e2fd",
+      "line": 75,
+      "signature": "theorem geometric_eq_algebraic (m : ℕ) [NeZero (2 * m)] (hm : 1 ≤ m) {μ : ℂ} (hμ : μ ≠ 0) : Module.finrank ℂ ((actualOperator m).eigenspace μ) = (((jacobian (2 * m)).map Complex.ofRealHom).charpoly).rootMultiplicity μ"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonJordan.actual_normal_form": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonJordan",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonJordan.actual_normal_form",
+      "kind": "theorem",
+      "statement_id": "sha256:c4540a5b195af8d8d6c009dc3fdd0e80dd1678ff4a34fba5cf82cf5d0d0b8ee8",
+      "line": 46,
+      "signature": "theorem actual_normal_form (m : ℕ) [NeZero (2 * m)] (hm : 1 ≤ m) (v : Cartesian m) : cartesianCoordinates m (actualOperator m v) = modeOperator m (cartesianCoordinates m v)"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonModes.charpoly_factored": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonModes",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonModes.charpoly_factored",
+      "kind": "theorem",
+      "statement_id": "sha256:27b2bb824512bac66c12e94d2148c30cfbe517bc0a45bf0b6b440ebd7b3d6ef3",
+      "line": 229,
+      "signature": "theorem charpoly_factored (m : ℕ) (hm : 3 ≤ m) : (jacobian (2 * m)).charpoly = X ^ 2 * (X ^ 2 + C ((m : ℝ) ^ 2 / 2)) * (X ^ 2 + C (((m : ℝ) - 1) ^ 2 / 4)) ^ 2 * ∏ r ∈ Finset.Ico 2 m, (X ^ 2 - C (((m : ℝ) - r) ^ 2 * ((r : ℝ) ^ 2 - 2) / 4)) ^ 2"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonModes.charpoly_folded": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonModes",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonModes.charpoly_folded",
+      "kind": "theorem",
+      "statement_id": "sha256:27b2bb824512bac66c12e94d2148c30cfbe517bc0a45bf0b6b440ebd7b3d6ef3",
+      "line": 193,
+      "signature": "theorem charpoly_folded (m : ℕ) (hm : 1 ≤ m) : (jacobian (2 * m)).charpoly = X ^ 2 * (X ^ 2 + C ((m : ℝ) ^ 2 / 2)) * ∏ r ∈ Finset.Ico 1 m, (X ^ 2 - C (((m : ℝ) - r) ^ 2 * ((r : ℝ) ^ 2 - 2) / 4)) ^ 2"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonNeutral.neutral_generalized_finrank": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonNeutral",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonNeutral.neutral_generalized_finrank",
+      "kind": "theorem",
+      "statement_id": "sha256:902ef321bab9a22210c107a41b876e852648b7b402502dfee1a32d9e08865e51",
+      "line": 184,
+      "signature": "theorem neutral_generalized_finrank (m : ℕ) [NeZero (2 * m)] (hm : 1 ≤ m) : Module.finrank ℂ ((actualOperator m).maxGenEigenspace 0) = 2"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonNeutral.neutral_geometric_finrank": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonNeutral",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonNeutral.neutral_geometric_finrank",
+      "kind": "theorem",
+      "statement_id": "sha256:902ef321bab9a22210c107a41b876e852648b7b402502dfee1a32d9e08865e51",
+      "line": 224,
+      "signature": "theorem neutral_geometric_finrank (m : ℕ) [NeZero (2 * m)] (hm : 1 ≤ m) : Module.finrank ℂ ((actualOperator m).eigenspace 0) = 1"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.CollisionFree": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonParameters.CollisionFree",
+      "kind": "def",
+      "statement_id": "sha256:a5dfb3469e4aadcef14867705212ccc9da75822e703bad1365523d0d94eb0b4f",
+      "line": 27,
+      "signature": "def CollisionFree {N : ℕ} (z : Configuration N) : Prop"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.angular_readout": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonParameters.angular_readout",
+      "kind": "theorem",
+      "statement_id": "sha256:a5dfb3469e4aadcef14867705212ccc9da75822e703bad1365523d0d94eb0b4f",
+      "line": 339,
+      "signature": "theorem angular_readout {N : ℕ} (b Ω ρ : ℝ) {z : Configuration N} (hz : CollisionFree z) (hn : ∀ j : Fin N, z (.inl j) ^ 2 + z (.inr j) ^ 2 = ρ ^ 2) (j : Fin N) : z (.inl j) * field N b Ω z (.inr j) - z (.inr j) * field N b Ω z (.inl j) = charge N j * Ω * ρ ^ 2 + (b / 4) * ((∑ k : Fin N, charge N k) - charge N j)"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.field": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonParameters.field",
+      "kind": "def",
+      "statement_id": "sha256:a5dfb3469e4aadcef14867705212ccc9da75822e703bad1365523d0d94eb0b4f",
+      "line": 32,
+      "signature": "def field (N : ℕ) (b Ω : ℝ) (z : Configuration N) : Configuration N"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.field_differentiable_at": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonParameters.field_differentiable_at",
+      "kind": "theorem",
+      "statement_id": "sha256:a5dfb3469e4aadcef14867705212ccc9da75822e703bad1365523d0d94eb0b4f",
+      "line": 50,
+      "signature": "theorem field_differentiable_at {N : ℕ} (b Ω : ℝ) {z : Configuration N} (hz : CollisionFree z) : DifferentiableAt ℝ (field N b Ω) z"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.field_scaling": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonParameters.field_scaling",
+      "kind": "theorem",
+      "statement_id": "sha256:a5dfb3469e4aadcef14867705212ccc9da75822e703bad1365523d0d94eb0b4f",
+      "line": 159,
+      "signature": "theorem field_scaling (N : ℕ) {b Ω R : ℝ} (hR : R ≠ 0) (hb : b = 4 * Ω * R ^ 2) (w : Configuration N) (_hw : CollisionFree w) : field N b Ω (R • w) = (2 * Ω * R) • AlternatingPolygonSpectrum.field N w"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.jacobian_scaling": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonParameters.jacobian_scaling",
+      "kind": "theorem",
+      "statement_id": "sha256:a5dfb3469e4aadcef14867705212ccc9da75822e703bad1365523d0d94eb0b4f",
+      "line": 176,
+      "signature": "theorem jacobian_scaling (N : ℕ) {b Ω R : ℝ} (hR : R ≠ 0) (hb : b = 4 * Ω * R ^ 2) : jacobian N b Ω (R • polygon N) = (2 * Ω) • AlternatingPolygonSpectrum.jacobian N"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.normalized_field": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonParameters.normalized_field",
+      "kind": "theorem",
+      "statement_id": "sha256:a5dfb3469e4aadcef14867705212ccc9da75822e703bad1365523d0d94eb0b4f",
+      "line": 152,
+      "signature": "theorem normalized_field (N : ℕ) : field N 2 (1 / 2) = AlternatingPolygonSpectrum.field N"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.radius": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonParameters.radius",
+      "kind": "def",
+      "statement_id": "sha256:a5dfb3469e4aadcef14867705212ccc9da75822e703bad1365523d0d94eb0b4f",
+      "line": 48,
+      "signature": "def radius (b Ω : ℝ) : ℝ"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.regular": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonParameters.regular",
+      "kind": "def",
+      "statement_id": "sha256:a5dfb3469e4aadcef14867705212ccc9da75822e703bad1365523d0d94eb0b4f",
+      "line": 235,
+      "signature": "def regular (N : ℕ) (ρ θ : ℝ) : Configuration N"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.regular_equilibrium_iff_radius": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonParameters.regular_equilibrium_iff_radius",
+      "kind": "theorem",
+      "statement_id": "sha256:a5dfb3469e4aadcef14867705212ccc9da75822e703bad1365523d0d94eb0b4f",
+      "line": 436,
+      "signature": "theorem regular_equilibrium_iff_radius {N : ℕ} (hN : 3 ≤ N) {b Ω ρ : ℝ} (hb : 0 < b) (hΩ : 0 < Ω) (hρ : 0 < ρ) (θ : ℝ) : field N b Ω (regular N ρ θ) = 0 ↔ Even N ∧ ρ = radius b Ω"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.rotate": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonParameters.rotate",
+      "kind": "def",
+      "statement_id": "sha256:a5dfb3469e4aadcef14867705212ccc9da75822e703bad1365523d0d94eb0b4f",
+      "line": 229,
+      "signature": "def rotate {N : ℕ} (θ : ℝ) (z : Configuration N) : Configuration N"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.scaled_equilibrium": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonParameters.scaled_equilibrium",
+      "kind": "theorem",
+      "statement_id": "sha256:a5dfb3469e4aadcef14867705212ccc9da75822e703bad1365523d0d94eb0b4f",
+      "line": 215,
+      "signature": "theorem scaled_equilibrium (m : ℕ) (hm : 1 ≤ m) {b Ω : ℝ} (hb : 0 < b) (hΩ : 0 < Ω) : CollisionFree ((radius b Ω) • polygon (2 * m)) ∧ field (2 * m) b Ω ((radius b Ω) • polygon (2 * m)) = 0"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalDerivative.physical_cartesian_chain": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalDerivative",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonPhysicalDerivative.physical_cartesian_chain",
+      "kind": "theorem",
+      "statement_id": "sha256:10390e51aca35e15d3d1f77b7dee8f0d3ee5d738e3744479e4b625809897f55b",
+      "line": 35,
+      "signature": "theorem physical_cartesian_chain (m : ℕ) (hm : 1 ≤ m) {b Ω : ℝ} (hb : 0 < b) (hΩ : 0 < Ω) : physicalRealOperator m b Ω (cartesian0 m) = 0 ∧ physicalRealOperator m b Ω ((2 * Ω)⁻¹ • cartesian1 m) = cartesian0 m"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalDerivative.physical_derivative": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalDerivative",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonPhysicalDerivative.physical_derivative",
+      "kind": "theorem",
+      "statement_id": "sha256:10390e51aca35e15d3d1f77b7dee8f0d3ee5d738e3744479e4b625809897f55b",
+      "line": 20,
+      "signature": "theorem physical_derivative (N : ℕ) {b Ω : ℝ} (hb : 0 < b) (hΩ : 0 < Ω) : HasFDerivAt (AlternatingPolygonParameters.field N b Ω) (((2 * Ω) • jacobian N).toLin'.toContinuousLinearMap) (AlternatingPolygonParameters.radius b Ω • polygon N)"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physicalRealOperator": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonPhysicalSpectrum.physicalRealOperator",
+      "kind": "def",
+      "statement_id": "sha256:167dbfa72d9cec7bc62b1ec52ceef26caf00a27a4a062c8da424d50ab151f3d5",
+      "line": 61,
+      "signature": "def physicalRealOperator (m : ℕ) (b Ω : ℝ) : Module.End ℝ (RealCartesian m)"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physicalRealOperator_eq": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonPhysicalSpectrum.physicalRealOperator_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:167dbfa72d9cec7bc62b1ec52ceef26caf00a27a4a062c8da424d50ab151f3d5",
+      "line": 65,
+      "signature": "theorem physicalRealOperator_eq (m : ℕ) {b Ω : ℝ} (hb : 0 < b) (hΩ : 0 < Ω) : physicalRealOperator m b Ω = (2 * Ω) • realOperator m"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physical_negative_eigenvalue_iff": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonPhysicalSpectrum.physical_negative_eigenvalue_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:167dbfa72d9cec7bc62b1ec52ceef26caf00a27a4a062c8da424d50ab151f3d5",
+      "line": 99,
+      "signature": "theorem physical_negative_eigenvalue_iff (m : ℕ) (hm : 3 ≤ m) {b Ω μ : ℝ} (hb : 0 < b) (hΩ : 0 < Ω) (hμ : μ < 0) : (physicalRealOperator m b Ω).HasEigenvalue μ ↔ ∃ k : Fin (m - 2), μ = 2 * Ω * (-positiveRoot m (k.val + 2))"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physical_positive_eigenvalue_iff": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonPhysicalSpectrum.physical_positive_eigenvalue_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:167dbfa72d9cec7bc62b1ec52ceef26caf00a27a4a062c8da424d50ab151f3d5",
+      "line": 80,
+      "signature": "theorem physical_positive_eigenvalue_iff (m : ℕ) (hm : 3 ≤ m) {b Ω μ : ℝ} (hb : 0 < b) (hΩ : 0 < Ω) (hμ : 0 < μ) : (physicalRealOperator m b Ω).HasEigenvalue μ ↔ ∃ k : Fin (m - 2), μ = 2 * Ω * positiveRoot m (k.val + 2)"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physical_real_dimensions": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonPhysicalSpectrum.physical_real_dimensions",
+      "kind": "theorem",
+      "statement_id": "sha256:167dbfa72d9cec7bc62b1ec52ceef26caf00a27a4a062c8da424d50ab151f3d5",
+      "line": 204,
+      "signature": "theorem physical_real_dimensions (m : ℕ) [NeZero (2 * m)] (hm : 3 ≤ m) {b Ω : ℝ} (hb : 0 < b) (hΩ : 0 < Ω) : Module.finrank ℝ (physicalStableSpace m b Ω) = 2 * (m - 2) ∧ Module.finrank ℝ (physicalUnstableSpace m b Ω) = 2 * (m - 2)"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physical_stable_exhaustive": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonPhysicalSpectrum.physical_stable_exhaustive",
+      "kind": "theorem",
+      "statement_id": "sha256:167dbfa72d9cec7bc62b1ec52ceef26caf00a27a4a062c8da424d50ab151f3d5",
+      "line": 151,
+      "signature": "theorem physical_stable_exhaustive (m : ℕ) (hm : 3 ≤ m) {b Ω : ℝ} (hb : 0 < b) (hΩ : 0 < Ω) : physicalStableSpace m b Ω = ⨆ μ : ℝ, ⨆ _ : μ < 0, (physicalRealOperator m b Ω).eigenspace μ"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physical_unstable_exhaustive": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonPhysicalSpectrum.physical_unstable_exhaustive",
+      "kind": "theorem",
+      "statement_id": "sha256:167dbfa72d9cec7bc62b1ec52ceef26caf00a27a4a062c8da424d50ab151f3d5",
+      "line": 175,
+      "signature": "theorem physical_unstable_exhaustive (m : ℕ) (hm : 3 ≤ m) {b Ω : ℝ} (hb : 0 < b) (hΩ : 0 < Ω) : physicalUnstableSpace m b Ω = ⨆ μ : ℝ, ⨆ _ : 0 < μ, (physicalRealOperator m b Ω).eigenspace μ"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonRealBoundary.off_axis_is_real": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonRealBoundary",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonRealBoundary.off_axis_is_real",
+      "kind": "theorem",
+      "statement_id": "sha256:72294caf3e1d06c5f04bbcaffda5a99f98c6791acf5a4c05cb14f3e87770af7f",
+      "line": 56,
+      "signature": "theorem off_axis_is_real (m : ℕ) [NeZero (2 * m)] (hm : 1 ≤ m) {μ : ℂ} (hμ : (actualOperator m).HasEigenvalue μ) (hre : μ.re ≠ 0) : μ.im = 0"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonRealSpaces.real_geometric_multiplicity": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonRealSpaces",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonRealSpaces.real_geometric_multiplicity",
+      "kind": "theorem",
+      "statement_id": "sha256:8761c39ae3bc54b88708b5959054fd48ebee56714a6e73955f5318f05ce04be2",
+      "line": 76,
+      "signature": "theorem real_geometric_multiplicity (m : ℕ) [NeZero (2 * m)] (hm : 3 ≤ m) {r : ℕ} (hr : 2 ≤ r) (hrm : r < m) (μ : ℝ) (hμ : μ = positiveRoot m r ∨ μ = -positiveRoot m r) : Module.finrank ℝ ((realOperator m).eigenspace μ) = 2"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSmallCases.dipole": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSmallCases",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonSmallCases.dipole",
+      "kind": "theorem",
+      "statement_id": "sha256:4f1efa32565542d76c788c5cf06ed802b61b264f821326ba088b3fd12a5763fc",
+      "line": 30,
+      "signature": "theorem dipole (μ : ℂ) : (jacobian 2).charpoly = X ^ 2 * (X ^ 2 + C (1 / 2 : ℝ)) ∧ ((actualOperator 1).HasEigenvalue μ ↔ μ = 0 ∨ μ = Complex.I / (Real.sqrt 2 : ℂ) ∨ μ = -(Complex.I / (Real.sqrt 2 : ℂ)))"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSmallCases.square": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSmallCases",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonSmallCases.square",
+      "kind": "theorem",
+      "statement_id": "sha256:4f1efa32565542d76c788c5cf06ed802b61b264f821326ba088b3fd12a5763fc",
+      "line": 53,
+      "signature": "theorem square (μ : ℂ) : (jacobian 4).charpoly = X ^ 2 * (X ^ 2 + C (2 : ℝ)) * (X ^ 2 + C (1 / 4 : ℝ)) ^ 2 ∧ ((actualOperator 2).HasEigenvalue μ ↔ μ = 0 ∨ μ = Complex.I * (Real.sqrt 2 : ℂ) ∨ μ = -(Complex.I * (Real.sqrt 2 : ℂ)) ∨ μ = Complex.I / 2 ∨ μ = -(Complex.I / 2))"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.charge": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonSpectrum.charge",
+      "kind": "def",
+      "statement_id": "sha256:266214d897ca3a8fe20fcdbf28c06261e02cc42cb2a32b19ea7fc7a480f5cc42",
+      "line": 25,
+      "signature": "def charge (N : ℕ) (j : Fin N) : ℝ"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.charpoly_mode_product": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonSpectrum.charpoly_mode_product",
+      "kind": "theorem",
+      "statement_id": "sha256:266214d897ca3a8fe20fcdbf28c06261e02cc42cb2a32b19ea7fc7a480f5cc42",
+      "line": 686,
+      "signature": "theorem charpoly_mode_product (m : ℕ) [NeZero (2 * m)] (hm : 1 ≤ m) : (jacobian (2 * m)).charpoly = ∏ k : ZMod (2 * m), (X ^ 2 - C (gamma m k))"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.distinctness_certificate": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonSpectrum.distinctness_certificate",
+      "kind": "theorem",
+      "statement_id": "sha256:266214d897ca3a8fe20fcdbf28c06261e02cc42cb2a32b19ea7fc7a480f5cc42",
+      "line": 53,
+      "signature": "lemma distinctness_certificate (m k l : ℕ) (hk : 2 ≤ k) (hkl : k < l) (hlm : l < m) : ((m : ℝ) - k) ^ 2 * ((k : ℝ) ^ 2 - 2) ≠ ((m : ℝ) - l) ^ 2 * ((l : ℝ) ^ 2 - 2)"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.equilibrium_all": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonSpectrum.equilibrium_all",
+      "kind": "theorem",
+      "statement_id": "sha256:266214d897ca3a8fe20fcdbf28c06261e02cc42cb2a32b19ea7fc7a480f5cc42",
+      "line": 314,
+      "signature": "theorem equilibrium_all (m : ℕ) (hm : 1 ≤ m) : field (2 * m) (polygon (2 * m)) = 0"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.jacobian": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonSpectrum.jacobian",
+      "kind": "def",
+      "statement_id": "sha256:266214d897ca3a8fe20fcdbf28c06261e02cc42cb2a32b19ea7fc7a480f5cc42",
+      "line": 50,
+      "signature": "def jacobian (N : ℕ) : Matrix (Fin N ⊕ Fin N) (Fin N ⊕ Fin N) ℝ"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.polygon": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonSpectrum.polygon",
+      "kind": "def",
+      "statement_id": "sha256:266214d897ca3a8fe20fcdbf28c06261e02cc42cb2a32b19ea7fc7a480f5cc42",
+      "line": 44,
+      "signature": "def polygon (N : ℕ) : Fin N ⊕ Fin N → ℝ"
+    },
+    "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.rotated_jacobian_all": {
+      "module": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum",
+      "name": "D5.S3.FluidDynamics.Vortices.AlternatingPolygonSpectrum.rotated_jacobian_all",
+      "kind": "theorem",
+      "statement_id": "sha256:266214d897ca3a8fe20fcdbf28c06261e02cc42cb2a32b19ea7fc7a480f5cc42",
+      "line": 615,
+      "signature": "theorem rotated_jacobian_all (m : ℕ) (hm : 1 ≤ m) : (rotation (2 * m)).transpose * jacobian (2*m) * rotation (2*m) = Matrix.fromBlocks 0 (blockB m) (blockC m) 0"
+    },
+    "D5/S3/FluidDynamics/Vortices/InverseChordCirculant.chordWeight_dft": {
+      "module": "D5/S3/FluidDynamics/Vortices/InverseChordCirculant",
+      "name": "D5.S3.FluidDynamics.Vortices.InverseChordCirculant.chordWeight_dft",
+      "kind": "theorem",
+      "statement_id": "sha256:e8719a3e6738f6c2b6406faa186b33f7c382e2e73a7d9543762eee075182c85c",
+      "line": 231,
+      "signature": "theorem chordWeight_dft (N : ℕ) [NeZero N] (k : ZMod N) : ZMod.dft (fun l => (chordWeight N l : ℂ)) k = ((((N : ℝ) ^ 2 - 1) / 12 - (k.val : ℝ) * ((N : ℝ) - k.val) / 2 : ℝ) : ℂ)"
+    },
     "D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result": {
       "module": "D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns",
       "name": "D5.S3.Fourier.Asymptotics.TorusObservationWindowReturns.result",
@@ -1212,6 +1540,62 @@
       "statement_id": "sha256:70b7fbd2597a0dc19c76a7b19d7d76c6677882724bdf45769d54164b356a2ab9",
       "line": 43,
       "signature": "theorem exists_unitary_mul_eq_of_conjTranspose_mul_eq {m n : Type*} [Fintype m] [DecidableEq m] [Finite n] (B A : Matrix m n ℂ) (hGram : Bᴴ * B = Aᴴ * A) : ∃ U : Matrix.unitaryGroup m ℂ, B = (U : Matrix m m ℂ) * A"
+    },
+    "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.Artin": {
+      "module": "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation",
+      "name": "D5.S3.Quantum.Algebra.Knot.WeightedPathArtinRepresentation.Artin",
+      "kind": "def",
+      "statement_id": "sha256:d690034462a903f43cda84a1ed0a8daa2541fde1a5a681ff62956b7de6eda8de",
+      "line": 43,
+      "signature": "abbrev Artin (n : ℕ)"
+    },
+    "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.MarkovEquivalent": {
+      "module": "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation",
+      "name": "D5.S3.Quantum.Algebra.Knot.WeightedPathArtinRepresentation.MarkovEquivalent",
+      "kind": "def",
+      "statement_id": "sha256:d690034462a903f43cda84a1ed0a8daa2541fde1a5a681ff62956b7de6eda8de",
+      "line": 298,
+      "signature": "abbrev MarkovEquivalent"
+    },
+    "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.MarkovStep": {
+      "module": "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation",
+      "name": "D5.S3.Quantum.Algebra.Knot.WeightedPathArtinRepresentation.MarkovStep",
+      "kind": "inductive",
+      "statement_id": "sha256:d690034462a903f43cda84a1ed0a8daa2541fde1a5a681ff62956b7de6eda8de",
+      "line": 287,
+      "signature": "inductive MarkovStep : PositiveBraid → PositiveBraid → Prop | conjugation (n : ℕ) (hn : 0 < n) (b c : Artin n) : MarkovStep ⟨⟨n, hn⟩, b⟩ ⟨⟨n, hn⟩, c * b * c⁻¹⟩ | positive (n : ℕ) (hn : 0 < n) (b : Artin n) : MarkovStep ⟨⟨n, hn⟩, b⟩ ⟨⟨n + 1, by omega⟩, strandInclusion n b * lastGenerator n hn⟩ | negative (n : ℕ) (hn : 0 < n) (b : Artin n) : MarkovStep ⟨⟨n, hn⟩, b⟩ ⟨⟨n + 1, by omega⟩, strandInclusion n b * (lastGenerator n hn)⁻¹⟩ /-- Finite equivalence chains of the actual algebraic Markov moves. -/ abbrev MarkovEquivalent"
+    },
+    "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.PositiveBraid": {
+      "module": "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation",
+      "name": "D5.S3.Quantum.Algebra.Knot.WeightedPathArtinRepresentation.PositiveBraid",
+      "kind": "def",
+      "statement_id": "sha256:d690034462a903f43cda84a1ed0a8daa2541fde1a5a681ff62956b7de6eda8de",
+      "line": 284,
+      "signature": "abbrev PositiveBraid"
+    },
+    "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.artinRelators": {
+      "module": "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation",
+      "name": "D5.S3.Quantum.Algebra.Knot.WeightedPathArtinRepresentation.artinRelators",
+      "kind": "def",
+      "statement_id": "sha256:d690034462a903f43cda84a1ed0a8daa2541fde1a5a681ff62956b7de6eda8de",
+      "line": 38,
+      "signature": "def artinRelators (n : ℕ) : Set (FreeGroup (Fin (n - 1)))"
+    },
+    "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.lastGenerator": {
+      "module": "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation",
+      "name": "D5.S3.Quantum.Algebra.Knot.WeightedPathArtinRepresentation.lastGenerator",
+      "kind": "def",
+      "statement_id": "sha256:d690034462a903f43cda84a1ed0a8daa2541fde1a5a681ff62956b7de6eda8de",
+      "line": 280,
+      "signature": "def lastGenerator (n : ℕ) (hn : 0 < n) : Artin (n + 1)"
+    },
+    "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.strandInclusion": {
+      "module": "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation",
+      "name": "D5.S3.Quantum.Algebra.Knot.WeightedPathArtinRepresentation.strandInclusion",
+      "kind": "def",
+      "statement_id": "sha256:d690034462a903f43cda84a1ed0a8daa2541fde1a5a681ff62956b7de6eda8de",
+      "line": 224,
+      "signature": "def strandInclusion (n : ℕ) : Artin n →* Artin (n + 1)"
     },
     "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure": {
       "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure",
@@ -2364,6 +2748,70 @@
       "statement_id": "sha256:a9a068c585f43a7aa355619c8fc899910e973d9b857f76930d832b94cb89b559",
       "line": 20,
       "signature": "theorem phase_locked_overlap_is_rotated_real (phase overlap : ℂ) (hphase : ‖phase‖ = 1) (hlock : star overlap = (phase⁻¹) ^ 2 * overlap) : ∃ r : ℝ, overlap = phase * r"
+    },
+    "D5/S3/Topology/QuandleMarkovColoring.ClosedColorings": {
+      "module": "D5/S3/Topology/QuandleMarkovColoring",
+      "name": "D5.S3.Topology.QuandleMarkovColoring.ClosedColorings",
+      "kind": "def",
+      "statement_id": "sha256:71065f90b3cba3d696f6a07136a92d1b5873cd3b7cb2017a635ae0ccc46934de",
+      "line": 249,
+      "signature": "abbrev ClosedColorings (Q : Type*) [Rack Q] {n : ℕ} (b : Artin n)"
+    },
+    "D5/S3/Topology/QuandleMarkovColoring.Colors": {
+      "module": "D5/S3/Topology/QuandleMarkovColoring",
+      "name": "D5.S3.Topology.QuandleMarkovColoring.Colors",
+      "kind": "def",
+      "statement_id": "sha256:71065f90b3cba3d696f6a07136a92d1b5873cd3b7cb2017a635ae0ccc46934de",
+      "line": 25,
+      "signature": "abbrev Colors (n : ℕ)"
+    },
+    "D5/S3/Topology/QuandleMarkovColoring.braidAction": {
+      "module": "D5/S3/Topology/QuandleMarkovColoring",
+      "name": "D5.S3.Topology.QuandleMarkovColoring.braidAction",
+      "kind": "def",
+      "statement_id": "sha256:71065f90b3cba3d696f6a07136a92d1b5873cd3b7cb2017a635ae0ccc46934de",
+      "line": 153,
+      "signature": "def braidAction (n : ℕ) : Artin n →* Equiv.Perm (Colors Q n)"
+    },
+    "D5/S3/Topology/QuandleMarkovColoring.coloringCount": {
+      "module": "D5/S3/Topology/QuandleMarkovColoring",
+      "name": "D5.S3.Topology.QuandleMarkovColoring.coloringCount",
+      "kind": "def",
+      "statement_id": "sha256:71065f90b3cba3d696f6a07136a92d1b5873cd3b7cb2017a635ae0ccc46934de",
+      "line": 338,
+      "signature": "noncomputable def coloringCount (Q : Type*) [Rack Q] [Finite Q] (b : PositiveBraid) : ℕ"
+    },
+    "D5/S3/Topology/QuandleMarkovColoring.conjugationEquiv": {
+      "module": "D5/S3/Topology/QuandleMarkovColoring",
+      "name": "D5.S3.Topology.QuandleMarkovColoring.conjugationEquiv",
+      "kind": "def",
+      "statement_id": "sha256:71065f90b3cba3d696f6a07136a92d1b5873cd3b7cb2017a635ae0ccc46934de",
+      "line": 325,
+      "signature": "def conjugationEquiv (n : ℕ) (b c : Artin n) : ClosedColorings Q b ≃ ClosedColorings Q (c * b * c⁻¹) where toFun d"
+    },
+    "D5/S3/Topology/QuandleMarkovColoring.negativeStabilizationEquiv": {
+      "module": "D5/S3/Topology/QuandleMarkovColoring",
+      "name": "D5.S3.Topology.QuandleMarkovColoring.negativeStabilizationEquiv",
+      "kind": "def",
+      "statement_id": "sha256:71065f90b3cba3d696f6a07136a92d1b5873cd3b7cb2017a635ae0ccc46934de",
+      "line": 305,
+      "signature": "def negativeStabilizationEquiv (n : ℕ) (hn : 0 < n) (b : Artin n) : ClosedColorings Q b ≃ ClosedColorings Q (strandInclusion n b * (lastGenerator n hn)⁻¹) where toFun c"
+    },
+    "D5/S3/Topology/QuandleMarkovColoring.positiveStabilizationEquiv": {
+      "module": "D5/S3/Topology/QuandleMarkovColoring",
+      "name": "D5.S3.Topology.QuandleMarkovColoring.positiveStabilizationEquiv",
+      "kind": "def",
+      "statement_id": "sha256:71065f90b3cba3d696f6a07136a92d1b5873cd3b7cb2017a635ae0ccc46934de",
+      "line": 285,
+      "signature": "def positiveStabilizationEquiv (n : ℕ) (hn : 0 < n) (b : Artin n) : ClosedColorings Q b ≃ ClosedColorings Q (strandInclusion n b * lastGenerator n hn) where toFun c"
+    },
+    "D5/S3/Topology/QuandleMarkovColoring.quandle_coloring_markov_invariant": {
+      "module": "D5/S3/Topology/QuandleMarkovColoring",
+      "name": "D5.S3.Topology.QuandleMarkovColoring.quandle_coloring_markov_invariant",
+      "kind": "theorem",
+      "statement_id": "sha256:71065f90b3cba3d696f6a07136a92d1b5873cd3b7cb2017a635ae0ccc46934de",
+      "line": 342,
+      "signature": "theorem quandle_coloring_markov_invariant [Finite Q] {b c : PositiveBraid} (h : MarkovEquivalent b c) : coloringCount Q b = coloringCount Q c"
     },
     "D5/S3/Topology/SphereOrthogonalityCover.sphere_two_open_orthogonality_free_cover_lower_six": {
       "module": "D5/S3/Topology/SphereOrthogonalityCover",

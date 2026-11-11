@@ -246,6 +246,144 @@ Comparing [@rem-ch30-vorticity-transport-literature] with the dimensional waters
 - **Conditional 3D Slender-Tube Scenario ([@rem-ch30-vorticity-transport-literature]) $\leftrightarrow$ Analogy to Three-Body 3-SAT (`MODEL`)**:
   Juxtaposing the conditional 3D slender-tube scenario recorded in [@rem-ch30-vorticity-transport-literature] with three-body 3-SAT, in our geometric analogy (`MODEL`) that conditional scenario pictures compressing a smooth 3D "field (analogous to $P$)" toward a "1D filament (analogous to an $NP$ witness thread)"!
 
+**One specimen on the two-dimensional side that can be computed to the end: all the vorticity on finitely many points.** In a planar flow the vortex-stretching term vanishes identically ([@rem-ch30-vorticity-transport-literature]), and a straight filament perpendicular to the plane is, in the plane, just a point being carried along. Push this picture to its cleanest extreme: a planar flow that is irrotational everywhere except at $N$ points, each pierced by such a filament. In this classical picture ([@rem-ch30-point-vortex-literature]) the field has no degrees of freedom of its own; the whole dynamics is the motion of the $N$ piercing points, a system of ordinary differential equations on $\mathbb{R}^{2N}$. The pinned `trureturing@dev` library freezes the complete linear theory of one version of these equations (each vortex carries an extra precession about the origin): $2m$ vortices of alternating sign on a regular polygon, the radius at which the polygon stands still, and, for the linearization there, every eigenvalue, its multiplicity, and the number of directions along which perturbations grow.
+
+::: {.remark #rem-ch30-point-vortex-literature title="Point-Vortex Equations and the Precession Term of Trapped Condensates (Literature result, not formalized in this book)"}
+**Literature result, not formalized in this book.** In a two-dimensional ideal incompressible flow, vorticity is carried along by the fluid (H. von Helmholtz, 1858). Concentrate it on $N$ points, the $k$-th with circulation $\Gamma_k$, and each point moves with the velocity that the others induce at its position (G. Kirchhoff, 1876):
+
+$$
+\begin{aligned}
+\dot{x}_j &= -\frac{1}{2\pi}\sum_{k \neq j}\Gamma_k\,\frac{y_j - y_k}{d_{jk}},\\
+\dot{y}_j &= \frac{1}{2\pi}\sum_{k \neq j}\Gamma_k\,\frac{x_j - x_k}{d_{jk}},\\
+d_{jk} &= (x_j - x_k)^2 + (y_j - y_k)^2 .
+\end{aligned}
+$$
+
+Particle models for a few quantized vortices in a trapped Bose–Einstein condensate add to each vortex a precession about the trap center whose sense is set by the sign of that vortex. The equations of [@def-ch30-alternating-vortex-polygon] and the alternating polygon are taken from A. M. Barry and P. G. Kevrekidis, *Few-particle vortex cluster equilibria in Bose–Einstein condensates: existence and stability* (arXiv:1306.1545, 2013). What is frozen below is a set of properties of this system of ordinary differential equations; how it relates to solutions of the Gross–Pitaevskii equation or of the Navier–Stokes equations lies outside what this book formalizes.
+:::
+
+::: {.definition #def-ch30-alternating-vortex-polygon title="Point-Vortex Field with Precession, Collision-Free Configurations, the Alternating Regular Polygon, and the Normalized Jacobian" lean="D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.CollisionFree D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.charge D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.field D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.polygon D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.rotate D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.regular D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.radius D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.jacobian"}
+Let $N \in \mathbb{N}$ and $b, \Omega \in \mathbb{R}$.
+
+1. A **configuration** is $z = (x_1, \dots, x_N;\, y_1, \dots, y_N) \in \mathbb{R}^{2N}$, where $(x_j, y_j)$ is the position of the $j$-th vortex (in Lean, `Fin N ⊕ Fin N → ℝ` with indices starting at $0$, so that Lean's index is $j - 1$). The **sign** of the $j$-th vortex is $s_j = (-1)^{j+1}$.
+2. Write $d_{jk} = (x_j - x_k)^2 + (y_j - y_k)^2$. A configuration is **collision-free** if $d_{jk} \neq 0$ for all $j \neq k$.
+3. The **field** $F_{b,\Omega} : \mathbb{R}^{2N} \to \mathbb{R}^{2N}$ has, in the coordinates $x_j$ and $y_j$, the components
+
+   $$
+   \begin{aligned}
+   F_{b,\Omega}(z)_{x_j} &= -s_j\,\Omega\,y_j - \frac{b}{2}\sum_{k \neq j} s_k\,\frac{y_j - y_k}{d_{jk}},\\
+   F_{b,\Omega}(z)_{y_j} &= s_j\,\Omega\,x_j + \frac{b}{2}\sum_{k \neq j} s_k\,\frac{x_j - x_k}{d_{jk}} .
+   \end{aligned}
+   $$
+
+   Division in Lean is a total function (division by zero gives zero), so $F_{b,\Omega}$ is defined for every $z$; the equation of motion $\dot{z} = F_{b,\Omega}(z)$ is meaningful only on collision-free configurations, and every statement below is made at a collision-free configuration.
+4. The **unit regular polygon** $P_N$ has vertices $x_j = \cos(2\pi j/N)$, $y_j = \sin(2\pi j/N)$. For $\rho, \theta \in \mathbb{R}$, $P_N(\rho, \theta)$ is the configuration obtained by rotating every vertex of $P_N$ about the origin through the angle $\theta$ and then multiplying by $\rho$. The **equilibrium radius** is $R_{b,\Omega} = \sqrt{b/(4\Omega)}$ (used below only for $b > 0$ and $\Omega > 0$).
+5. The **normalized Jacobian** $J_N$ is the matrix of partial derivatives of $F_{2,1/2}$ at $P_N$: $(J_N)_{pq}$ is the derivative at $t = 0$ of the function $t \mapsto F_{2,1/2}(P_N + t\,e_q)_p$, where $e_q$ is the unit vector of the $q$-th coordinate direction (Lean writes the field with $b = 2$, $\Omega = \tfrac12$ out separately, and [`normalized_field`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.normalized_field) proves that it equals $F_{2,1/2}$).
+:::
+
+Each of the two terms has one job. The sum is the velocity blown onto vortex $j$ by the others: the $k$-th vortex induces, at distance $r$, a velocity of magnitude $\frac{b}{2r}$, perpendicular to the line joining the two, with the sense given by $s_k$; compared with [@rem-ch30-point-vortex-literature], this is the choice $\Gamma_k = \pi b\,s_k$. The first term makes each vortex circle the origin on its own, with angular velocity $s_j\Omega$: for $\Omega > 0$, positive vortices go counterclockwise and negative ones clockwise. Put an even number of vortices of alternating sign on a circle of radius $\rho$ and the two terms pull against each other along the tangent. A manual derivation (it uses the tangential readout identity quoted in the proof below): the other vortices give the $j$-th one the tangential velocity $-s_j\,\frac{b}{4\rho}$, the precession gives it $s_j\,\Omega\rho$, and the two cancel exactly when $\rho^2 = \frac{b}{4\Omega}$. On too small a circle the neighbors win; on too large a circle the precession wins; a single radius brings the whole ring to rest.
+
+::: {.lemma #lem-ch30-vortex-polygon-equilibrium title="When a Centered Regular Polygon Is Stationary, and the Fréchet Derivative at the Equilibrium" lean="D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.regular_equilibrium_iff_radius D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.scaled_equilibrium D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalDerivative.physical_derivative"}
+Let $b > 0$ and $\Omega > 0$.
+
+1. For $N \ge 3$, $\rho > 0$ and every $\theta \in \mathbb{R}$:
+
+   $$
+   F_{b,\Omega}\bigl(P_N(\rho, \theta)\bigr) = 0 \iff N \text{ is even and } \rho = R_{b,\Omega} .
+   $$
+
+2. For every $m \ge 1$, the configuration $R_{b,\Omega}\,P_{2m}$ is collision-free and $F_{b,\Omega}(R_{b,\Omega}\,P_{2m}) = 0$.
+3. For every $N \in \mathbb{N}$, $F_{b,\Omega}$ is Fréchet differentiable at $R_{b,\Omega}\,P_N$, and its derivative is the linear map represented by the matrix $2\Omega\,J_N$.
+:::
+
+::: proof
+The "only if" half of item 1 comes from a tangential readout ([`angular_readout`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.angular_readout)): if all vortices of a collision-free configuration $z$ lie at the same distance $\rho$ from the origin, then for every $j$
+
+$$
+x_j\,F_{b,\Omega}(z)_{y_j} - y_j\,F_{b,\Omega}(z)_{x_j} = s_j\,\Omega\,\rho^2 + \frac{b}{4}\Bigl(\sum_{k} s_k - s_j\Bigr),
+$$
+
+because at equal distances $x_j(x_j - x_k) + y_j(y_j - y_k) = d_{jk}/2$, so that each interaction term contributes exactly $\frac{b}{4}s_k$. For odd $N$ one has $\sum_k s_k = 1$, and $j = 1$ gives the right-hand side $\Omega\rho^2 \neq 0$; for even $N$ one has $\sum_k s_k = 0$, and the right-hand side is $s_j(\Omega\rho^2 - b/4)$. The "if" half first uses the scaling identity $F_{b,\Omega}(R\,w) = 2\Omega R\,F_{2,1/2}(w)$ (for $R \neq 0$, $b = 4\Omega R^2$ and $w$ collision-free, [`field_scaling`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.field_scaling)) and the covariance of the field under a common rotation to reduce to $P_{2m}$; on $P_{2m}$, pair the $k$-th vortex with its mirror image across the diameter through the $j$-th vertex: the two have the same sign, a pair contributes $s_k$ times the coordinates of the $j$-th vortex itself, and the total cancels the precession term exactly ([`equilibrium_all`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.equilibrium_all), for every $m \ge 1$). Item 3: at a collision-free point $F_{b,\Omega}$ is a rational expression with nonzero denominators, hence differentiable, and the matrix of partial derivatives is the matrix of the Fréchet derivative; differentiating the scaling identity along the coordinate directions multiplies the outer factor $2\Omega R$ by the inner factor $1/R$ and yields $2\Omega\,J_N$ ([`jacobian_scaling`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.jacobian_scaling)). The full proof is checked by the Lean kernel.
+:::
+
+Item 3 fixes what "spectrum" means from here on: the spectrum of the Fréchet derivative of the field $F_{b,\Omega}$ itself at the equilibrium, not of some matrix reduced by hand beforehand. It also separates the roles of the two parameters: $b$ appears only in the radius $R_{b,\Omega}$ and never enters the derivative; $\Omega$, besides its effect on the radius, only multiplies the derivative by $2\Omega$, which amounts to a change of the unit of time. So it is enough to study one parameter-free real $4m \times 4m$ matrix, $J_{2m}$.
+
+::: {.theorem #thm-ch30-vortex-polygon-spectrum title="Complete Characteristic Polynomial of the Alternating Vortex Polygon and Its Stable and Unstable Spaces of Dimension $2(m-2)$" lean="D5/S3/FluidDynamics/Vortices/AlternatingPolygonModes.charpoly_factored D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physicalRealOperator_eq D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physical_positive_eigenvalue_iff D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physical_negative_eigenvalue_iff D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physical_unstable_exhaustive D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physical_stable_exhaustive D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physical_real_dimensions"}
+Let $m \ge 3$.
+
+1. The characteristic polynomial $\chi_{2m}(X) = \det(X\,I - J_{2m})$ of $J_{2m}$ is
+
+   $$
+   \begin{aligned}
+   \chi_{2m}(X) &= X^2\,\Bigl(X^2 + \frac{m^2}{2}\Bigr)\Bigl(X^2 + \frac{(m-1)^2}{4}\Bigr)^{2}\\
+   &\quad\times \prod_{r=2}^{m-1}\Bigl(X^2 - \frac{(m-r)^2\,(r^2-2)}{4}\Bigr)^{2} .
+   \end{aligned}
+   $$
+
+2. Let $b > 0$, $\Omega > 0$, and let $A_{b,\Omega}$ be the linear operator on $\mathbb{R}^{4m}$ whose matrix is the matrix of partial derivatives of $F_{b,\Omega}$ at $R_{b,\Omega}\,P_{2m}$ ([`physicalRealOperator`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physicalRealOperator)). Then $A_{b,\Omega} = 2\Omega\,J_{2m}$. Write
+
+   $$
+   \lambda_r = \Omega\,(m - r)\sqrt{r^2 - 2}, \qquad r = 2, \dots, m-1 .
+   $$
+
+   For every real $\mu > 0$: $\mu$ is an eigenvalue of $A_{b,\Omega}$ if and only if $\mu = \lambda_r$ for some $r \in \{2, \dots, m-1\}$. For every real $\mu < 0$: $\mu$ is an eigenvalue of $A_{b,\Omega}$ if and only if $\mu = -\lambda_r$ for some $r \in \{2, \dots, m-1\}$.
+3. Under the assumptions of item 2, let $E^{u}$ be the sum of the eigenspaces of all positive real eigenvalues of $A_{b,\Omega}$ and $E^{s}$ the sum of the eigenspaces of all negative real eigenvalues. Then
+
+   $$
+   \dim_{\mathbb{R}} E^{u} = \dim_{\mathbb{R}} E^{s} = 2(m - 2) .
+   $$
+:::
+
+::: proof
+Split the displacement of each vortex into its radial and its tangential component; this is an orthogonal change of coordinates. In these coordinates $J_{2m}$ becomes the block anti-diagonal matrix $\begin{pmatrix} 0 & B \\ C & 0 \end{pmatrix}$ with $B = (\delta\,I - W)\,S$ and $C = ((\delta + 1)\,I - W)\,S$, where the off-diagonal entries of $W$ are the inverse squared chord lengths $1/d_{jk}$ of $P_{2m}$, its diagonal is zero, $S = \operatorname{diag}(s_j)$ and $\delta = \frac{(2m)^2 - 1}{12} - \frac{m^2}{2}$ ([`rotated_jacobian_all`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.rotated_jacobian_all)). For $x \neq 0$ a Schur complement gives $\chi_{2m}(x) = \det(x^2 I - CB)$. The matrix $W$ is circulant, the discrete Fourier transform diagonalizes it, and its $k$-th eigenvalue is $\frac{(2m)^2 - 1}{12} - \frac{k(2m - k)}{2}$ ([`chordWeight_dft`](lean:D5/S3/FluidDynamics/Vortices/InverseChordCirculant.chordWeight_dft)); the alternating signs $S$ shift the frequency $k$ by $m$. Hence $\det(y\,I - CB) = \prod_{k=0}^{2m-1}(y - \gamma_k)$ with $\gamma_k = (m - r)^2(r^2 - 2)/4$ and $r = \min(k, 2m - k)$. Two polynomials that agree at infinitely many points are equal, so $\chi_{2m}(X) = \prod_k (X^2 - \gamma_k)$ ([`charpoly_mode_product`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.charpoly_mode_product)). The values $r = 0$ and $r = m$ each come from one $k$, every other $r$ from two; these are the exponents in item 1. One has $\gamma_k > 0$ only for $2 \le r \le m - 1$, and different $r$ give different values: $(m-k)^2(k^2-2) \neq (m-l)^2(l^2-2)$ for integers $2 \le k < l < m$ ([`distinctness_certificate`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.distinctness_certificate)). Each such real root has a $2$-dimensional eigenspace in $\mathbb{R}^{4m}$ ([`real_geometric_multiplicity`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonRealSpaces.real_geometric_multiplicity)), eigenspaces of different eigenvalues are linearly independent, and adding $m - 2$ spaces of dimension $2$ gives item 3. Passing to general $b$ and $\Omega$ only multiplies by $2\Omega$: the eigenspaces stay the same and every eigenvalue is multiplied by $2\Omega$. The full proof is checked by the Lean kernel.
+:::
+
+The four factors are four kinds of motion. $X^2$ is the eigenvalue zero, treated separately below. The two factors with a plus sign give the purely imaginary roots $\pm i\,m/\sqrt{2}$ and $\pm i\,(m-1)/2$: oscillations about the equilibrium that neither grow nor decay. The factors with a minus sign give pairs of real roots: the positive one grows, the negative one decays. The library holds one more frozen theorem ([`off_axis_is_real`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonRealBoundary.off_axis_is_real)): a complex eigenvalue of $J_{2m}$ with nonzero real part is real, so $E^{u}$ and $E^{s}$ already contain every growing and every decaying eigendirection. The hexagon ($m = 3$) is the first polygon with a growing direction, and each further pair of vortices adds two more.
+
+::: {.proposition #prop-ch30-vortex-polygon-neutral-drift title="Semisimple Nonzero Eigenvalues, a Jordan Block of Size Two at Zero, and Unbounded Linear Drift; Dipole and Square" lean="D5/S3/FluidDynamics/Vortices/AlternatingPolygonDecomposition.geometric_eq_algebraic D5/S3/FluidDynamics/Vortices/AlternatingPolygonNeutral.neutral_generalized_finrank D5/S3/FluidDynamics/Vortices/AlternatingPolygonNeutral.neutral_geometric_finrank D5/S3/FluidDynamics/Vortices/AlternatingPolygonCartesianChain.cartesian_chain D5/S3/FluidDynamics/Vortices/AlternatingPolygonCartesianChain.unbounded_linear_drift D5/S3/FluidDynamics/Vortices/AlternatingPolygonSmallCases.dipole D5/S3/FluidDynamics/Vortices/AlternatingPolygonSmallCases.square"}
+Let $m \ge 1$. Items 1, 2 and 4 regard $J_{2m}$ as a linear operator on $\mathbb{C}^{4m}$.
+
+1. For every nonzero complex number $\mu$, the complex dimension of the eigenspace of $\mu$ equals the multiplicity of $\mu$ as a root of the characteristic polynomial of $J_{2m}$.
+2. The generalized eigenspace of the eigenvalue $0$ has dimension $2$, and its eigenspace has dimension $1$.
+3. Let $(x_j, y_j)$ be the vertices of $P_{2m}$, let $\delta_m = 1 - m^2/2$, and take the vectors of $\mathbb{R}^{4m}$
+
+   $$
+   \begin{aligned}
+   c_0 &= (-y_1, \dots, -y_{2m};\; x_1, \dots, x_{2m}),\\
+   c_1 &= \frac{1}{\delta_m}\,(s_1 x_1, \dots, s_{2m} x_{2m};\; s_1 y_1, \dots, s_{2m} y_{2m}) .
+   \end{aligned}
+   $$
+
+   Then $J_{2m}\,c_0 = 0$ and $J_{2m}\,c_1 = c_0$; the curve $v(t) = c_1 + t\,c_0$ satisfies $v'(t) = J_{2m}\,v(t)$ for every $t \in \mathbb{R}$, and the set $\{v(t) : t \in \mathbb{R}\}$ is unbounded.
+4. The characteristic polynomial of $J_2$ is $X^2\bigl(X^2 + \tfrac12\bigr)$, and its complex eigenvalues are exactly $0$ and $\pm i/\sqrt{2}$; the characteristic polynomial of $J_4$ is $X^2\bigl(X^2 + 2\bigr)\bigl(X^2 + \tfrac14\bigr)^2$, and its complex eigenvalues are exactly $0$, $\pm i\sqrt{2}$ and $\pm i/2$.
+:::
+
+::: proof
+A discrete Fourier transform on top of the radial and tangential coordinates splits $\mathbb{C}^{4m}$ into $2m$ invariant blocks of dimension two. On the $q$-th block the operator has the matrix $\begin{pmatrix} 0 & \ell_q \\ \ell_{q+m} + 1 & 0 \end{pmatrix}$, where $\ell_q = -(m - q)^2/2$ and indices are taken modulo $2m$ in $\{0, \dots, 2m-1\}$ ([`actual_normal_form`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonJordan.actual_normal_form)); the product of the two off-diagonal entries is the $\gamma_q$ of the previous proof. For nonzero $\mu$, a direct computation on each block shows that $(T - \mu)^2 v = 0$ implies $(T - \mu)v = 0$ (with $T$ this operator): a nonzero eigenvalue has no Jordan chain, its generalized eigenspace equals its eigenspace, and the dimension of a generalized eigenspace is the multiplicity of the root, which is item 1. On the $q$-th block $T^2$ is multiplication by $\gamma_q$, so the generalized eigenspace of $0$ is exactly the sum of the blocks with $\gamma_q = 0$; this happens only for $q = m$. There $\ell_m = 0$, while the other off-diagonal entry is $\ell_0 + 1 = \delta_m$, which is nonzero because $m^2 = 2$ has no integer solution. That block is a nilpotent Jordan block of size two, which is item 2. Item 3 is checked directly in radial and tangential coordinates: $c_0$ displaces every vortex tangentially by $1$ and radially by $0$, while $c_1$ displaces it radially by $s_j/\delta_m$ and tangentially by $0$; in the notation of the previous proof, the row sums $\sum_k W_{jk} = \frac{(2m)^2 - 1}{12}$ and the alternating row sums $\sum_k s_k W_{jk} = s_j\,\delta$ give $B\,\mathbf{1} = 0$ and $C\,(s/\delta_m) = \mathbf{1}$ (here $\mathbf{1}$ is the all-ones vector and $s/\delta_m$ has $j$-th component $s_j/\delta_m$), that is, $J_{2m}c_0 = 0$ and $J_{2m}c_1 = c_0$. Then $J_{2m}(c_1 + t\,c_0) = c_0 = v'(t)$, and unboundedness follows from $c_0 \neq 0$. Item 4 substitutes $m = 1, 2$ into the folded formula $\chi_{2m}(X) = X^2\bigl(X^2 + \tfrac{m^2}{2}\bigr)\prod_{r=1}^{m-1}\bigl(X^2 - \tfrac{(m-r)^2(r^2-2)}{4}\bigr)^2$, valid for every $m \ge 1$ ([`charpoly_folded`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonModes.charpoly_folded)). The full proof is checked by the Lean kernel.
+:::
+
+The vector $c_0$ is an infinitesimal rotation of the whole polygon about the origin: the field is covariant under a common rotation (as used in the proof of [@lem-ch30-vortex-polygon-equilibrium]), the rotated polygon is still at rest, and so this direction lies in the kernel of $J_{2m}$. The vector $c_1$ moves the positive vortices along their radii by $1/\delta_m$ and the negative ones by the same distance the other way. Once the two kinds of vortex sit at slightly different radii, the solution of the linearized equation does not oscillate; the whole ring turns away along $c_0$ at constant speed. The spectrum does not show this: zero and purely imaginary numbers both count as "no growth", and yet a Jordan block of size two makes the solution grow linearly in time. For the dipole ($m = 1$) and the square ($m = 2$) every eigenvalue lies on the imaginary axis, and their linearized equations have such an unbounded solution all the same. For general $b, \Omega > 0$ it suffices to divide $c_1$ by $2\Omega$ ([`physical_cartesian_chain`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalDerivative.physical_cartesian_chain)).
+
+::: {.example #ex-ch30-vortex-octagon-spectrum title="The Sixteen Eigenvalues of the Regular Octagon: Computed Numerically from the Equations, Then Compared Item by Item with the Frozen Multiplicities"}
+Take $m = 4$, $b = 2$, $\Omega = \tfrac12$, so that $R_{b,\Omega} = 1$: eight vortices on the unit circle, with phase space $\mathbb{R}^{16}$. The numbers below use only the equations of [@def-ch30-alternating-vortex-polygon] and no closed form: the field is typed in term by term, its $16 \times 16$ matrix of partial derivatives at $P_8$ is obtained by symbolic differentiation (it differs entrywise by at most $3 \times 10^{-24}$ from central differences with step $10^{-12}$), and the eigenvalues are computed with $40$ decimal digits; the algebraic multiplicity is the number of numerically coincident eigenvalues and the geometric multiplicity is $16 - \operatorname{rank}(J_8 - \lambda I)$. The largest component of the field at $P_8$ is $8 \times 10^{-41}$. The label $r$ is that of the proof of [@thm-ch30-vortex-polygon-spectrum]: $r = 0, 1$ belong to the two factors with a plus sign and $r = m$ to $X^2$. Eigenvalues are rounded to the digits shown:
+
+| Label $r$ | Root given by the frozen declarations | Numerical eigenvalue | Algebraic multiplicity | Geometric multiplicity |
+| :---: | :---: | :---: | :---: | :---: |
+| $0$ | $\pm 2\sqrt{2}\,i$ | $\pm 2.828427\,i$ | $1$ | $1$ |
+| $1$ | $\pm \tfrac32\,i$ | $\pm 1.500000\,i$ | $2$ | $2$ |
+| $2$ | $\pm\sqrt{2}$ | $\pm 1.414214$ | $2$ | $2$ |
+| $3$ | $\pm\tfrac12\sqrt{7}$ | $\pm 1.322876$ | $2$ | $2$ |
+| $4$ | $0$ | $0$ (modulus below $2 \times 10^{-20}$) | $2$ | $1$ |
+
+The multiplicities add up to $2 + 4 + 4 + 4 + 2 = 16$. Counted with multiplicity there are $4 = 2(m - 2)$ positive real eigenvalues and likewise $4$ negative ones. $\operatorname{rank} J_8 = 15$ and $\operatorname{rank} J_8^2 = \operatorname{rank} J_8^3 = 14$: the eigenvalue zero carries exactly one Jordan block of size two. The two positive roots $1.414214$ and $1.322876$ lie close together but do not coincide: different $r$ give different roots, so every real root has multiplicity exactly $2$ and none has more. The hexagon ($m = 3$), treated the same way, gives $\pm 0.707107$ (each double), $\pm 1.000000\,i$ (each double), $\pm 2.121320\,i$ (each simple) and a double eigenvalue zero of geometric multiplicity $1$, with $2 = 2(m - 2)$ positive real eigenvalues.
+
+**Other parameters.** For $b = 1$, $\Omega = 1$ ($R_{b,\Omega} = 0.5$) the two positive real eigenvalues of the octagon become $2.828427$ and $2.645751$; for $b = 1.35$, $\Omega = 0.25$ ($R_{b,\Omega} = 1.161895$) they become $0.707107$ and $0.661438$. Both pairs are the table values times $2\Omega$, whatever $b$ is.
+
+**Back to the nonlinear equations.** Everything above concerns the linearization. The following two numerical experiments integrate $\dot{z} = F_{2,1/2}(z)$ directly (fourth-order Runge–Kutta with $30$ digits; halving the step leaves the digits shown unchanged). First, the hexagon: starting from $P_6 + 10^{-9}u$, with $u$ a unit eigenvector for the eigenvalue $1/\sqrt{2}$, the distance from $P_6$ at $t = 10$ has grown to about $1177.4$ times its initial value, within a relative $10^{-6}$ of $e^{10/\sqrt{2}} = 1177.405$ (the eigenspace is two-dimensional, and this holds whichever unit vector of it is taken). Second, the square: starting from $P_4 + 10^{-3}c_1$ (positive vortices at radius $0.999$, negative ones at radius $1.001$), the four vortices have turned about the origin by $0.0100001$ radians on average at $t = 10$ and by $0.100001$ radians at $t = 100$; the linearized solution $10^{-3}(c_1 + t\,c_0)$ predicts the angle $10^{-3}t$. The linearized solution runs off along the tangent without bound; in the nonlinear equations, what one sees over this time span is the whole ring turning slowly about the origin. These two experiments are numerical observations, not frozen declarations.
+:::
+
+This specimen separates three things that are easily run together. The right-hand side of the equations is differentiable at collision-free configurations ([`field_differentiable_at`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.field_differentiable_at)), the equilibrium is such a configuration, and nothing is singular there; yet from the hexagon on, the linearization has growing directions spanning exactly $2(m - 2)$ dimensions; and for the spectrally neutral dipole and square the linearized equations still have an unbounded solution. Differentiable does not mean stable, and spectrally neutral does not mean bounded. Back in this chapter's analogy (`MODEL`): the "lines" here have already shrunk to points in the plane, with nothing between them to entangle, and yet the growing directions are all there; none of them needs vortex stretching. The three-dimensional question lies elsewhere: there a filament is no longer just a point being carried along; it can also be stretched.
+
 Before stating the open unforced Clay Millennium conjecture, we strictly isolate the classical 2D regularity theorem and the **forced regime (Clay Statements C / D, with smooth external forcing $\mathbf{f} \in C^\infty$)** inside a dedicated literature remark so that the red `OPEN` conjecture box below states purely the unresolved autonomous unforced problem:
 
 ::: {.remark #rem-ch30-navier-stokes-forced-literature title="Literature Note on Lamb's Identity, 2D Global Regularity, and the 2026 Forced Blow-Up of Statements C / D"}

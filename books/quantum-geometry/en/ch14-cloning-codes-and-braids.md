@@ -314,9 +314,145 @@ The trailing pairs $(x \star y, x)$ are identical on both sides, and the leading
 **Literature result, not formalized in this book.** Three theoretical boundaries govern how [@cor-braid-yang-baxter] connects to the low-dimensional topology and condensed-matter literature (see also [@rem-error-correction-anyons-literature] below; both the dimensional dichotomy between $B_n$ and $S_n$ on configuration spaces and the nontrivial knottedness of closed knots such as the trefoil in $\mathbb{R}^3$ are external literature results not formalized in this book):
 
 1. **Algebraic coloring realization versus full topological classification**: [@cor-braid-yang-baxter] is an algebraic rack-coloring realization of the three-strand braid relation on an arbitrary `Rack Q` (with no topological space, spacetime dimension, or particle statistics in its hypotheses). It does not prove that all planar braids are nontrivial, nor does it classify the full fundamental group of configuration space.
-2. **Distinguishing point-particle exchange paths from closed knots in $\mathbb{R}^3$**: As shown in Figure 14, Panel III, adding a third spatial axis $e_3$ allows a point-particle **exchange loop** (a path in configuration space where one point particle loops around another) to detour along $e_3$, reducing the exchange group from the braid group $B_n$ to the symmetric group $S_n$. **This is completely different from a closed $1$-dimensional knot embedded in $\mathbb{R}^3$** (such as a trefoil knot), which still cannot pass through itself and remains knotted in three dimensions (indeed, rack and quandle colorings are classical algebraic invariants for distinguishing nontrivial 3D knots)!
+2. **Distinguishing point-particle exchange paths from closed knots in $\mathbb{R}^3$**: As shown in Figure 14, Panel III, adding a third spatial axis $e_3$ allows a point-particle **exchange loop** (a path in configuration space where one point particle loops around another) to detour along $e_3$, reducing the exchange group from the braid group $B_n$ to the symmetric group $S_n$. **This is completely different from a closed $1$-dimensional knot embedded in $\mathbb{R}^3$** (such as a trefoil knot), which still cannot pass through itself and remains knotted in three dimensions (indeed, rack and quandle colorings are classical algebraic invariants for distinguishing nontrivial 3D knots; see [@thm-quandle-coloring-markov-invariant] and [@ex-fox-three-colorings-markov] below)!
 3. **Anyonic statistics and topological fault-tolerance belong to the physics literature**: Configuration-space homotopy groups, non-Abelian anyons, and physical error bounds are summarized in [@rem-error-correction-anyons-literature].
 :::
+
+## Closing the Braid: Markov Stabilization and Coloring Counts {#sec-markov-stabilization-coloring-count}
+
+Item 2 of [@rem-braid-knot-topology-literature] says that a trefoil in three-dimensional space stays knotted, and that colorings are the classical tool for telling it apart. How is the tool used? [@cor-braid-yang-baxter] is about a piece of braid: a row of loose ends on top, a row below, and colors carried from one row to the other. A knot has no loose ends. Bend the braid around and join the $k$-th bottom end to the $k$-th top end; only then do the strands form closed loops. This is the **closure** of the braid. Once the ends are joined, "the color at the top" and "the color at the bottom" are colors of one and the same piece of string, so a coloring of the closed braid has a single condition left to meet: carried once through the braid, the colors must come back unchanged. **A coloring of a closed braid is a fixed point of the coloring transport.**
+
+The module `D5/S3/Topology/QuandleMarkovColoring` turns this sentence into a definition. It does not speak of strings drawn on paper: a braid is an element of a group given by generators and relations, and the coloring transport is the action of that group on sequences of colors.
+
+::: {.definition #def-closed-braid-colorings title="The Artin Braid Group by Generators and Relations, the Rack Coloring Action, Closed Colorings, and the Coloring Count" lean="D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.artinRelators D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.Artin D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.PositiveBraid D5/S3/Topology/QuandleMarkovColoring.Colors D5/S3/Topology/QuandleMarkovColoring.braidAction D5/S3/Topology/QuandleMarkovColoring.ClosedColorings D5/S3/Topology/QuandleMarkovColoring.coloringCount"}
+Let $n \in \mathbb{N}$, let $Q$ be a type with `[Rack Q]`, and let $\star$ be its rack operation.
+
+1. The **Artin braid group** [`Artin`](lean:D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.Artin) $n$ is the group given by generators $\sigma_1, \dots, \sigma_{n-1}$ and the set of relators [`artinRelators`](lean:D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.artinRelators) $n$ (a `PresentedGroup`: the free group modulo the normal subgroup generated by the relators), with relations
+
+   $$
+   \sigma_j\sigma_k = \sigma_k\sigma_j \quad (j + 1 < k \ \text{or}\ k + 1 < j), \qquad
+   \sigma_k\sigma_{k+1}\sigma_k = \sigma_{k+1}\sigma_k\sigma_{k+1}.
+   $$
+
+   In Lean the generators are indexed by $i : \mathrm{Fin}\,(n - 1)$, that is $i = 0, \dots, n - 2$; this book writes $\sigma_{i+1}$. Subtraction of natural numbers truncates, so for $n \le 1$ there are no generators and the group is trivial.
+2. A **coloring** is an element of [`Colors`](lean:D5/S3/Topology/QuandleMarkovColoring.Colors) $Q\ n = (\mathrm{Fin}\,n \to Q)$, written $c = (c_1, \dots, c_n)$ (so $c_k$ is the component with Lean index $k - 1$).
+3. The **coloring action** [`braidAction`](lean:D5/S3/Topology/QuandleMarkovColoring.braidAction) $Q\ n$ is a group homomorphism from $\mathrm{Artin}\,n$ to the group of permutations (`Equiv.Perm`) of $\mathrm{Colors}\ Q\ n$, determined by its values on the generators: $\sigma_k$ replaces the components $(c_k,\ c_{k+1})$ in positions $k$ and $k + 1$ by $(c_k \star c_{k+1},\ c_k)$ and leaves every other component alone. Write $b \cdot c = \operatorname{braidAction}\ Q\ n\ b\ c$; the product of permutations is composition, $(b\,b') \cdot c = b \cdot (b' \cdot c)$.
+4. The **closed colorings** of $b \in \mathrm{Artin}\,n$ are [`ClosedColorings`](lean:D5/S3/Topology/QuandleMarkovColoring.ClosedColorings) $Q\ b = \{\,c : \mathrm{Colors}\ Q\ n \mid b \cdot c = c\,\}$.
+5. A **braid with positive strand count** [`PositiveBraid`](lean:D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.PositiveBraid) is a pair $(n, b)$ with $n > 0$ and $b \in \mathrm{Artin}\,n$ (the name refers to the number of strands, not to the signs of the crossings). If moreover `[Finite Q]`, the **coloring count** [`coloringCount`](lean:D5/S3/Topology/QuandleMarkovColoring.coloringCount) is $\operatorname{coloringCount}\ Q\ (n, b) = \operatorname{Nat.card}\bigl(\mathrm{ClosedColorings}\ Q\ b\bigr)$.
+:::
+
+"Determined by its values on the generators" in item 3 does not come for free: the images of the generators must satisfy the Artin relations before the action can descend from the free group to the quotient. The adjacent relation $\sigma_k\sigma_{k+1}\sigma_k = \sigma_{k+1}\sigma_k\sigma_{k+1}$ is exactly where [@cor-braid-yang-baxter] is used (in Lean this step is the private lemma `generator_adjacent`); two crossings that are not adjacent change different components and therefore commute (`generator_distant`).
+
+Counting the fixed points looks like counting a property of the closed loop itself. But a braid carries information the loop does not need: where it was cut open, and how many strands were used. This surplus is exhausted by exactly three rewriting steps: that is Markov's theorem, a literature result recorded in [@rem-alexander-markov-literature]. The Lean file defines these three steps as a purely algebraic relation between braids.
+
+::: {.definition #def-algebraic-markov-moves title="Strand Inclusion, the Last Generator, and Algebraic Markov Equivalence" lean="D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.strandInclusion D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.lastGenerator D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.MarkovStep D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.MarkovEquivalent"}
+Keep the notation of [@def-closed-braid-colorings].
+
+1. The **strand inclusion** [`strandInclusion`](lean:D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.strandInclusion) $n$, written $\iota_n : \mathrm{Artin}\,n \to \mathrm{Artin}\,(n + 1)$, is the group homomorphism sending each generator $\sigma_k$ to the generator of the same name (Lean does not claim that it is injective).
+2. The **last generator** [`lastGenerator`](lean:D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.lastGenerator) $n\ hn$ (with $hn : 0 < n$) is $\sigma_n$ in $\mathrm{Artin}\,(n + 1)$: the crossing between strand $n$ and the newly added strand $n + 1$.
+3. A **Markov step** [`MarkovStep`](lean:D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.MarkovStep) is an inductive relation between braids with positive strand count, with exactly three constructors: for $n > 0$ and $b, g \in \mathrm{Artin}\,n$,
+
+   $$
+   \begin{aligned}
+   \text{conjugation:}\quad & (n,\ b) \longrightarrow (n,\ g\,b\,g^{-1}), \\
+   \text{positive stabilization:}\quad & (n,\ b) \longrightarrow \bigl(n + 1,\ \iota_n(b)\,\sigma_n\bigr), \\
+   \text{negative stabilization:}\quad & (n,\ b) \longrightarrow \bigl(n + 1,\ \iota_n(b)\,\sigma_n^{-1}\bigr).
+   \end{aligned}
+   $$
+
+4. **Markov equivalence** [`MarkovEquivalent`](lean:D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.MarkovEquivalent) is `Relation.EqvGen MarkovStep`: the smallest equivalence relation containing the Markov steps.
+:::
+
+In a picture: conjugation cuts the closed loop open at a different place; stabilization adds one new strand on the far right and lets it cross the old last strand exactly once, so that the closure gains one small loop that disappears with a single twist (these two sentences are geometric pictures; their precise form belongs to Markov's theorem in [@rem-alexander-markov-literature]). The algebraic question is: does the number of fixed points survive these three steps?
+
+Conjugation is easy: carry all the colors along. Stabilization is the hard one, because it changes even the number of strands. Let the new strand have color $z$. By the product convention of [@def-closed-braid-colorings], $\iota_n(b)\,\sigma_n$ lets $\sigma_n$ act first, turning the last two strands $(c_n,\ z)$ into $(c_n \star z,\ c_n)$; after that $\iota_n(b)$ touches only the first $n$ strands. The new strand meets no further crossing, so it comes back unchanged only if $z = c_n$. Strand $n$ therefore receives $c_n \star c_n$. Is that equal to $c_n$? No rack axiom says so. A rack with the additional axiom $x \star x = x$ is called a **quandle** (`Quandle Q` in Mathlib). With that axiom the small loop has no effect on the colors at all: the new strand merely copies $c_n$, and the condition on the first $n$ strands is untouched. This hand computation is the central step of the Lean proof, and the module turns it into an explicit one-to-one correspondence.
+
+::: {.definition #def-markov-coloring-equivs title="Three Equivalences of Closed-Coloring Spaces under Stabilization and Conjugation" lean="D5/S3/Topology/QuandleMarkovColoring.positiveStabilizationEquiv D5/S3/Topology/QuandleMarkovColoring.negativeStabilizationEquiv D5/S3/Topology/QuandleMarkovColoring.conjugationEquiv"}
+Let $Q$ be a type with `[Quandle Q]` (not assumed finite), $n \in \mathbb{N}$ and $b \in \mathrm{Artin}\,n$. The module defines three equivalences (Lean's `Equiv`: a pair of maps together with the proofs that they are mutually inverse):
+
+1. [`positiveStabilizationEquiv`](lean:D5/S3/Topology/QuandleMarkovColoring.positiveStabilizationEquiv) $n\ hn\ b$ (with $hn : 0 < n$): $\mathrm{ClosedColorings}\ Q\ b \simeq \mathrm{ClosedColorings}\ Q\ \bigl(\iota_n(b)\,\sigma_n\bigr)$. The forward map copies the last color once more, $(c_1, \dots, c_n) \mapsto (c_1, \dots, c_n, c_n)$; the backward map deletes the last component.
+2. [`negativeStabilizationEquiv`](lean:D5/S3/Topology/QuandleMarkovColoring.negativeStabilizationEquiv) $n\ hn\ b$ (with $hn : 0 < n$): $\mathrm{ClosedColorings}\ Q\ b \simeq \mathrm{ClosedColorings}\ Q\ \bigl(\iota_n(b)\,\sigma_n^{-1}\bigr)$, with the same forward and backward maps as in item 1.
+3. [`conjugationEquiv`](lean:D5/S3/Topology/QuandleMarkovColoring.conjugationEquiv) $n\ b\ g$ (with $g \in \mathrm{Artin}\,n$): $\mathrm{ClosedColorings}\ Q\ b \simeq \mathrm{ClosedColorings}\ Q\ \bigl(g\,b\,g^{-1}\bigr)$. The forward map is $d \mapsto g \cdot d$, the backward map $d \mapsto g^{-1} \cdot d$.
+:::
+
+::: {.theorem #thm-quandle-coloring-markov-invariant title="The Closed-Coloring Count of a Finite Quandle Is Invariant under Algebraic Markov Equivalence" lean="D5/S3/Topology/QuandleMarkovColoring.quandle_coloring_markov_invariant"}
+Let $Q$ be a type with `[Quandle Q]` and `[Finite Q]`, and let $\beta, \beta'$ be two braids with positive strand count (`PositiveBraid`). If $\beta$ and $\beta'$ are Markov equivalent (`MarkovEquivalent β β'`), then
+
+$$
+\operatorname{coloringCount}\ Q\ \beta = \operatorname{coloringCount}\ Q\ \beta'.
+$$
+:::
+
+::: proof
+`MarkovEquivalent` is a `Relation.EqvGen`, and the proof is by induction on how the equivalence was generated. The reflexive, symmetric and transitive cases follow from reflexivity, symmetry and transitivity of equality. What remains is a single `MarkovStep`, split by its three constructors; each case applies `Nat.card_congr` to the corresponding equivalence of [@def-markov-coloring-equivs].
+
+The two stabilization equivalences rest on two private lemmas (`positive_fixed_iff` and `negative_fixed_iff`): for $c = (c_1, \dots, c_n)$ and $z \in Q$,
+
+$$
+\bigl(\iota_n(b)\,\sigma_n^{\pm 1}\bigr) \cdot (c_1, \dots, c_n, z) = (c_1, \dots, c_n, z)
+\iff
+b \cdot c = c \ \land\ z = c_n.
+$$
+
+Positive sign: $\sigma_n$ sends $(c_1, \dots, c_n, z)$ to $(c_1, \dots, c_{n-1},\ c_n \star z,\ c_n)$, and $\iota_n(b)$ acts as $b$ on the first $n$ components and leaves the last one alone (checked on generators and extended to the whole group by `PresentedGroup.ext`). Comparing last components gives $z = c_n$; substituting back, $c_n \star c_n = c_n$ (`Quandle.fix`) reduces the condition on the first $n$ components to $b \cdot c = c$. Negative sign: $\sigma_n^{-1}$ sends the same tuple to $(c_1, \dots, c_{n-1},\ z,\ z \star^{-1} c_n)$; the last component gives $z \star^{-1} c_n = z = z \star^{-1} z$ (`Quandle.fix_inv`), and cancelling $z \star^{-1}$ (`Rack.left_cancel_inv`) gives $c_n = z$; the rest is the same. Hence "copy the last color" and "delete the last component" are mutually inverse. The conjugation case uses only that the coloring action is a group homomorphism: if $b \cdot d = d$, then $(g\,b\,g^{-1}) \cdot (g \cdot d) = g \cdot (b \cdot d) = g \cdot d$. The full proof is checked by the Lean kernel.
+:::
+
+Three boundaries apply whenever [@thm-quandle-coloring-markov-invariant] is cited:
+
+1. **It is a theorem of algebra, not of geometry.** Its statement contains only the group $\mathrm{Artin}\,n$, defined by generators and relations, and the inductive relation `MarkovStep`; the geometric sentence "these two braids close up to the same link" does not occur in Lean. Reading the count as an invariant of knots and links takes the three literature theorems of [@rem-alexander-markov-literature].
+2. **An invariant can only say "different".** If the counts differ, the two braids are not Markov equivalent; if the counts agree, nothing follows.
+3. **The idempotence axiom cannot be dropped.** `coloringCount` is defined for every finite rack, but the theorem asks for `[Quandle Q]`. The last step of [@ex-fox-three-colorings-markov] exhibits a rack with three elements whose count drops from $3$ to $0$ under a single stabilization.
+
+::: {.example #ex-fox-three-colorings-markov title="Three Colors Count 3, 3, 9: Closed Colorings of $\sigma_1$, $\sigma_1^2$, $\sigma_1^3$ and the Same Number before and after Stabilization (With Literature Context, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** The column "closure, as a picture" in the table below (which braid closes up to which knot or link) is a geometric identification and belongs to classical knot theory. Every count in this example comes from exhaustive enumeration (each one can be checked by hand); it is a manual derivation, not a Lean result. What Lean verifies is the equality asserted by [@thm-quandle-coloring-markov-invariant].
+
+**Colors and rule.** Take $Q = \mathbb{Z}/3 = \{0, 1, 2\}$ with $x \star y = 2x - y \pmod 3$ (Mathlib's `Quandle.Dihedral 3`). Modulo $3$ one has $2x - y \equiv -(x + y) \equiv 2y - x$, so the operation is symmetric in $x$ and $y$ and the rule reads: two equal colors give the same color again; two different colors give the third. Checking all $27$ triples confirms self-distributivity; every left translation $y \mapsto x \star y$ is an involution; and $x \star x = x$. The three colors $x$, $y$, $x \star y$ involved in a crossing $(x, y) \mapsto (x \star y,\ x)$ are either all equal or pairwise different: this is Fox's three-coloring rule.
+
+**Two strands.** $\sigma_1 \cdot (x, y) = (x \star y,\ x) = (-x - y,\ x)$ modulo $3$. The nine colorings fall into five orbits:
+
+$$
+\begin{aligned}
+&(0,0), \qquad (1,1), \qquad (2,2), \\
+&(0,1) \to (2,0) \to (1,2) \to (0,1), \qquad (0,2) \to (1,0) \to (2,1) \to (0,2).
+\end{aligned}
+$$
+
+The three one-color colorings are fixed and the other six form two $3$-cycles. So $\sigma_1$ and $\sigma_1^2$ have $3$ fixed points each, and $\sigma_1^3$ returns all nine colorings to themselves. In the table, $e$ is the identity element (the braid without crossings).
+
+| Braid $(n, b)$ | Coloring count | Closed colorings | Closure, as a picture (geometric identification) |
+| :---: | :---: | :---: | :---: |
+| $(1, e)$ | $3$ | all $(x)$ | unknot |
+| $(2, e)$ | $9$ | all $(x, y)$ | two unlinked circles |
+| $(2, \sigma_1)$ | $3$ | $(x, x)$ | unknot |
+| $(2, \sigma_1^2)$ | $3$ | $(x, x)$ | Hopf link |
+| $(2, \sigma_1^3)$ | $9$ | all $(x, y)$ | trefoil |
+
+**Adding a strand.** For $b = \sigma_1^k$ with $k = 1, 2, 3$, enumerate all $27$ colorings of three strands:
+
+| $b$ on two strands | Count of $(2, b)$ | Count of $\bigl(3,\ \iota_2(b)\,\sigma_2\bigr)$ | Count of $\bigl(3,\ \iota_2(b)\,\sigma_2^{-1}\bigr)$ | Closed colorings on three strands |
+| :---: | :---: | :---: | :---: | :---: |
+| $\sigma_1$ | $3$ | $3$ | $3$ | $(x, x, x)$ |
+| $\sigma_1^2$ | $3$ | $3$ | $3$ | $(x, x, x)$ |
+| $\sigma_1^3$ | $9$ | $9$ | $9$ | all $(x, y, y)$ |
+
+In every row the three counts agree, and the closed colorings on three strands are exactly the closed colorings on two strands with the last color copied once more, as items 1 and 2 of [@def-markov-coloring-equivs] say. The two unknots of the first table are the same phenomenon: $(2, \sigma_1)$ is the positive stabilization $\bigl(2,\ \iota_1(e)\,\sigma_1\bigr)$ of $(1, e)$, and $3 = 3$. One conjugation for good measure: with $b = \iota_2(\sigma_1^3)\,\sigma_2$ and $g = \sigma_1\sigma_2^{-1}$, the count of $g\,b\,g^{-1}$ is still $9$.
+
+**Reading the numbers.** Feed the enumerated counts into [@thm-quandle-coloring-markov-invariant] (this substitution is a manual derivation). Since $9 \ne 3$, the contrapositive of the theorem shows that $(2, \sigma_1^3)$ and $(2, \sigma_1)$ are not Markov equivalent; likewise $(2, \sigma_1^2)$ (count $3$) and $(2, e)$ (count $9$) are not Markov equivalent. The counts of $(2, \sigma_1)$ and $(2, \sigma_1^2)$ are both $3$, and nothing follows from that: three colors cannot tell them apart.
+
+**The idempotence axiom cannot be dropped.** Take $Q' = \mathbb{Z}/3$ with $x \star y = y + 1$. It is a rack: every left translation is a bijection, and both sides of the self-distributive law equal $z + 2$. But $x \star x = x + 1 \ne x$, so it is not a quandle. The braid $(1, e)$ has $3$ closed colorings; its positive stabilization $(2, \sigma_1)$ sends $(x, y)$ to $(y + 1,\ x)$, and a fixed point would need $x = y$ and $y + 1 = x$: there is none. The count drops from $3$ to $0$.
+:::
+
+::: {.remark #rem-alexander-markov-literature title="Artin, Alexander, and Markov: From Algebraic Markov Classes to Link Invariants (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** The statement of [@thm-quandle-coloring-markov-invariant] contains no geometric object. Reading it as an invariant of links takes three classical theorems (braids and links below are smooth or piecewise linear):
+
+1. **Artin's theorem** (E. Artin, *Theorie der Zöpfe*, Abh. Math. Sem. Univ. Hamburg **4**, 47–72, 1925; *Theory of braids*, Ann. of Math. **48**, 101–126, 1947): the group of isotopy classes of geometric braids on $n$ strands is isomorphic to the group $\mathrm{Artin}\,n$ of [@def-closed-braid-colorings], given by generators and relations ($n \ge 1$).
+2. **Alexander's theorem** (J. W. Alexander, *A lemma on systems of knotted curves*, Proc. Natl. Acad. Sci. USA **9**, 93–95, 1923): every oriented link in $\mathbb{R}^3$ is isotopic to the closure of some braid.
+3. **Markov's theorem** (A. Markoff, *Über die freie Äquivalenz der geschlossenen Zöpfe*, Mat. Sbornik **1(43)**, 73–78, 1936; for a complete proof see J. S. Birman, *Braids, Links, and Mapping Class Groups*, Princeton University Press, 1974): the closures of two braids are isotopic as oriented links if and only if the two braids are related by a finite sequence of conjugations, positive and negative stabilizations, and their inverses, that is, after the isomorphism of item 1, if and only if they are Markov equivalent in the sense of [@def-algebraic-markov-moves]. The easy direction is the pair of pictures in the main text: neither conjugation nor stabilization changes the isotopy class of the closure.
+
+Taken together: the closed-coloring count of a finite quandle is an isotopy invariant of oriented links. Combined with the counts of [@ex-fox-three-colorings-markov] and the geometric identification "the closure of $\sigma_1^3$ is the trefoil, the closure of $\sigma_1$ is the unknot", this shows that the trefoil is not isotopic to the unknot; in the same way, the Hopf link is not isotopic to two unlinked circles. Closed colorings can also be described without braids: they correspond to the homomorphisms from the fundamental quandle of the link to $Q$ (D. Joyce, *A classifying invariant of knots, the knot quandle*, J. Pure Appl. Algebra **23**, 37–65, 1982; S. V. Matveev, *Distributive groupoids in knot theory*, Mat. Sb. **119(161)**, 78–88, 1982), and for $Q = \mathbb{Z}/3$ they are Fox's three-colorings. For a rack that fails the idempotence axiom, the coloring count is only an invariant of framed links (R. Fenn and C. Rourke, *Racks and links in codimension two*, J. Knot Theory Ramifications **1**, 343–406, 1992).
+:::
+
+A braid has a beginning and an end; a knot has neither. Once the ends are joined, the colors have to come back unchanged; as long as the colors come from a quandle, add a strand, or cut the loop open somewhere else, and exactly as many colorings come back as before. That half is verified by Lean.
 
 Let us now work through the four-part numerical and matrix calculation connecting no-cloning, the three-qubit bit-flip code, local Bloch expectations, and $8\times 2$ orthogonal syndrome recovery.
 

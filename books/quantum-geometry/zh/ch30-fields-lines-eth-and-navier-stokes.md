@@ -245,6 +245,144 @@ $$
 - **三维细涡管条件坍缩情景（[@rem-ch30-vorticity-transport-literature]）$\leftrightarrow$ 类比三元面片 3-SAT（`MODEL`）**：
   将 [@rem-ch30-vorticity-transport-literature] 所载的三维条件性细涡管情景与三元面片 3-SAT 并置对照，在几何类比模型（`MODEL`）上，该条件坍缩图景好比把一张平滑三维“场（类比 $P$）”挤压向“一维细丝（类比 $NP$ 见证丝）”！
 
+**二维这一侧能算到底的一个样本：把旋度压到有限个点上。** 二维平面流里涡管拉伸项恒为零（[@rem-ch30-vorticity-transport-literature]），一根垂直于平面的直涡丝在平面上只是一个被搬运的点。把这幅图像推到最干净的极端：平面流处处无旋，只在 $N$ 个点上各有这样一根涡丝穿过。在这幅经典图像里（[@rem-ch30-point-vortex-literature]），场没有独立的自由度，全部动力学就是这 $N$ 个穿孔点的运动，即 $\mathbb{R}^{2N}$ 上的一个常微分方程组。所钉的 `trureturing@dev` 库冻结了这类方程的一个版本（每个涡旋另带一项绕原点的进动）的完整线性理论：$2m$ 个涡旋正负相间排成正多边形，它在哪个半径上静止，静止点处的线性化有哪些本征值、各有几重、沿多少个方向发散。
+
+::: {.remark #rem-ch30-point-vortex-literature title="点涡方程与囚禁凝聚体中的进动项（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 在二维理想不可压缩流中，涡量随流体搬运（H. von Helmholtz, 1858）；把涡量集中到 $N$ 个点上，第 $k$ 个点带环量 $\Gamma_k$，则每个点以其余各点在该处诱导的速度运动（G. Kirchhoff, 1876）：
+
+$$
+\begin{aligned}
+\dot{x}_j &= -\frac{1}{2\pi}\sum_{k \neq j}\Gamma_k\,\frac{y_j - y_k}{d_{jk}},\\
+\dot{y}_j &= \frac{1}{2\pi}\sum_{k \neq j}\Gamma_k\,\frac{x_j - x_k}{d_{jk}},\\
+d_{jk} &= (x_j - x_k)^2 + (y_j - y_k)^2 .
+\end{aligned}
+$$
+
+囚禁玻色—爱因斯坦凝聚体中少数几个量子化涡旋的粒子模型，在此之外给每个涡旋加上一项绕阱心的进动，转向由涡旋自身的符号决定。[@def-ch30-alternating-vortex-polygon] 的方程与交错多边形构型取自 A. M. Barry 与 P. G. Kevrekidis 的论文 *Few-particle vortex cluster equilibria in Bose–Einstein condensates: existence and stability*（arXiv:1306.1545，2013）。下文冻结的是这组常微分方程本身的性质；它与 Gross–Pitaevskii 方程或纳维—斯托克斯方程的解之间的关系，不在本书的形式化范围内。
+:::
+
+::: {.definition #def-ch30-alternating-vortex-polygon title="带进动项的点涡场、无碰撞构型、交错正多边形与归一化雅可比矩阵" lean="D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.CollisionFree D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.charge D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.field D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.polygon D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.rotate D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.regular D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.radius D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.jacobian"}
+设 $N \in \mathbb{N}$，$b, \Omega \in \mathbb{R}$。
+
+1. **构型**是 $z = (x_1, \dots, x_N;\, y_1, \dots, y_N) \in \mathbb{R}^{2N}$，其中 $(x_j, y_j)$ 是第 $j$ 个涡旋的位置（Lean 中为 `Fin N ⊕ Fin N → ℝ`，下标从 $0$ 起，对应这里的 $j - 1$）。第 $j$ 个涡旋的**符号**是 $s_j = (-1)^{j+1}$。
+2. 记 $d_{jk} = (x_j - x_k)^2 + (y_j - y_k)^2$。构型**无碰撞**，指对一切 $j \neq k$ 有 $d_{jk} \neq 0$。
+3. **场** $F_{b,\Omega} : \mathbb{R}^{2N} \to \mathbb{R}^{2N}$ 在坐标 $x_j$ 与 $y_j$ 上的分量分别是
+
+   $$
+   \begin{aligned}
+   F_{b,\Omega}(z)_{x_j} &= -s_j\,\Omega\,y_j - \frac{b}{2}\sum_{k \neq j} s_k\,\frac{y_j - y_k}{d_{jk}},\\
+   F_{b,\Omega}(z)_{y_j} &= s_j\,\Omega\,x_j + \frac{b}{2}\sum_{k \neq j} s_k\,\frac{x_j - x_k}{d_{jk}} .
+   \end{aligned}
+   $$
+
+   Lean 的除法是全函数（除以零得零），所以 $F_{b,\Omega}$ 对一切 $z$ 有定义；运动方程 $\dot{z} = F_{b,\Omega}(z)$ 只在无碰撞构型上有意义，下文的结论都在无碰撞构型处陈述。
+4. **单位正多边形** $P_N$ 的顶点是 $x_j = \cos(2\pi j/N)$，$y_j = \sin(2\pi j/N)$。对 $\rho, \theta \in \mathbb{R}$，$P_N(\rho, \theta)$ 表示把 $P_N$ 的每个顶点绕原点转过角 $\theta$、再乘以 $\rho$ 所得的构型。**平衡半径**是 $R_{b,\Omega} = \sqrt{b/(4\Omega)}$（下文只在 $b > 0$、$\Omega > 0$ 时用到它）。
+5. **归一化雅可比矩阵** $J_N$ 是 $F_{2,1/2}$ 在 $P_N$ 处的偏导数矩阵：$(J_N)_{pq}$ 是函数 $t \mapsto F_{2,1/2}(P_N + t\,e_q)_p$ 在 $t = 0$ 处的导数，$e_q$ 是第 $q$ 个坐标方向的单位向量（Lean 把 $b = 2$、$\Omega = \tfrac12$ 的场单独写出，[`normalized_field`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.normalized_field) 证明它等于 $F_{2,1/2}$）。
+:::
+
+两项各管一件事。求和项是其余涡旋吹过来的速度：第 $k$ 个涡旋在距离 $r$ 处诱导的速度大小为 $\frac{b}{2r}$，方向垂直于连线，转向由 $s_k$ 决定；对照 [@rem-ch30-point-vortex-literature]，这相当于取 $\Gamma_k = \pi b\,s_k$。第一项让每个涡旋自己绕原点转，角速度为 $s_j\Omega$：$\Omega > 0$ 时正涡旋逆时针，负涡旋顺时针。把偶数个涡旋正负相间摆在半径 $\rho$ 的圆上，两项在切向上对着干。手工推导（用到下面证明里的切向读数恒等式）：其余涡旋给第 $j$ 个涡旋的切向速度是 $-s_j\,\frac{b}{4\rho}$，进动给它的切向速度是 $s_j\,\Omega\rho$，两者相消当且仅当 $\rho^2 = \frac{b}{4\Omega}$。圆太小，邻居的推动占上风；圆太大，进动占上风；只有一个半径能让整圈停住。
+
+::: {.lemma #lem-ch30-vortex-polygon-equilibrium title="居中正多边形的静止条件与平衡点处的弗雷歇导数" lean="D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.regular_equilibrium_iff_radius D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.scaled_equilibrium D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalDerivative.physical_derivative"}
+设 $b > 0$，$\Omega > 0$。
+
+1. 对 $N \ge 3$、$\rho > 0$ 与任意 $\theta \in \mathbb{R}$：
+
+   $$
+   F_{b,\Omega}\bigl(P_N(\rho, \theta)\bigr) = 0 \iff N \text{ 为偶数且 } \rho = R_{b,\Omega} .
+   $$
+
+2. 对一切 $m \ge 1$，构型 $R_{b,\Omega}\,P_{2m}$ 无碰撞，且 $F_{b,\Omega}(R_{b,\Omega}\,P_{2m}) = 0$。
+3. 对一切 $N \in \mathbb{N}$，$F_{b,\Omega}$ 在 $R_{b,\Omega}\,P_N$ 处弗雷歇可微，其导数是矩阵 $2\Omega\,J_N$ 所表示的线性映射。
+:::
+
+::: proof
+第 1 条的“仅当”来自一个切向读数（[`angular_readout`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.angular_readout)）：若无碰撞构型 $z$ 的各涡旋到原点的距离同为 $\rho$，则对每个 $j$
+
+$$
+x_j\,F_{b,\Omega}(z)_{y_j} - y_j\,F_{b,\Omega}(z)_{x_j} = s_j\,\Omega\,\rho^2 + \frac{b}{4}\Bigl(\sum_{k} s_k - s_j\Bigr),
+$$
+
+因为等距时 $x_j(x_j - x_k) + y_j(y_j - y_k) = d_{jk}/2$，每个相互作用项恰好贡献 $\frac{b}{4}s_k$。$N$ 为奇数时 $\sum_k s_k = 1$，取 $j = 1$ 得右端为 $\Omega\rho^2 \neq 0$；$N$ 为偶数时 $\sum_k s_k = 0$，右端为 $s_j(\Omega\rho^2 - b/4)$。“当”的方向先用缩放恒等式 $F_{b,\Omega}(R\,w) = 2\Omega R\,F_{2,1/2}(w)$（其中 $R \neq 0$、$b = 4\Omega R^2$、$w$ 无碰撞，[`field_scaling`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.field_scaling)）和场对公共转动的协变性把问题化到 $P_{2m}$；在 $P_{2m}$ 上，把第 $k$ 个涡旋与它关于过第 $j$ 个顶点的直径的镜像配成一对，两者符号相同，一对合起来贡献的是 $s_k$ 乘以第 $j$ 个涡旋自身的坐标，求和后恰好抵消进动项（[`equilibrium_all`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.equilibrium_all)，对一切 $m \ge 1$）。第 3 条：$F_{b,\Omega}$ 在无碰撞点处是分母不为零的有理式，因而可微，偏导数矩阵就是弗雷歇导数的矩阵；对缩放恒等式沿坐标方向求导，外层因子 $2\Omega R$ 与内层因子 $1/R$ 相乘，得到 $2\Omega\,J_N$（[`jacobian_scaling`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.jacobian_scaling)）。完整证明由 Lean 内核检查。
+:::
+
+第 3 条说明后面的“谱”指什么：它是场 $F_{b,\Omega}$ 本身在平衡点处的弗雷歇导数的谱，不是某个事先约化好的矩阵的谱。它也分清了两个参数的角色：$b$ 只出现在半径 $R_{b,\Omega}$ 里，不进入导数；$\Omega$ 除了影响半径，只给导数乘上因子 $2\Omega$，相当于换一个时间单位。于是只需研究一个不含参数的 $4m \times 4m$ 实矩阵 $J_{2m}$。
+
+::: {.theorem #thm-ch30-vortex-polygon-spectrum title="交错涡旋多边形的完整特征多项式与 $2(m-2)$ 维的稳定、不稳定空间" lean="D5/S3/FluidDynamics/Vortices/AlternatingPolygonModes.charpoly_factored D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physicalRealOperator_eq D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physical_positive_eigenvalue_iff D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physical_negative_eigenvalue_iff D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physical_unstable_exhaustive D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physical_stable_exhaustive D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physical_real_dimensions"}
+设 $m \ge 3$。
+
+1. $J_{2m}$ 的特征多项式 $\chi_{2m}(X) = \det(X\,I - J_{2m})$ 为
+
+   $$
+   \begin{aligned}
+   \chi_{2m}(X) &= X^2\,\Bigl(X^2 + \frac{m^2}{2}\Bigr)\Bigl(X^2 + \frac{(m-1)^2}{4}\Bigr)^{2}\\
+   &\quad\times \prod_{r=2}^{m-1}\Bigl(X^2 - \frac{(m-r)^2\,(r^2-2)}{4}\Bigr)^{2} .
+   \end{aligned}
+   $$
+
+2. 设 $b > 0$，$\Omega > 0$，$A_{b,\Omega}$ 是 $\mathbb{R}^{4m}$ 上以 $F_{b,\Omega}$ 在 $R_{b,\Omega}\,P_{2m}$ 处的偏导数矩阵为矩阵的线性算子（[`physicalRealOperator`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physicalRealOperator)）。则 $A_{b,\Omega} = 2\Omega\,J_{2m}$。记
+
+   $$
+   \lambda_r = \Omega\,(m - r)\sqrt{r^2 - 2}, \qquad r = 2, \dots, m-1 .
+   $$
+
+   对每个实数 $\mu > 0$：$\mu$ 是 $A_{b,\Omega}$ 的本征值，当且仅当存在 $r \in \{2, \dots, m-1\}$ 使 $\mu = \lambda_r$。对每个实数 $\mu < 0$：$\mu$ 是 $A_{b,\Omega}$ 的本征值，当且仅当存在 $r \in \{2, \dots, m-1\}$ 使 $\mu = -\lambda_r$。
+3. 在第 2 条的假设下，记 $E^{u}$ 为 $A_{b,\Omega}$ 的全部正实本征值的本征空间之和，$E^{s}$ 为全部负实本征值的本征空间之和。则
+
+   $$
+   \dim_{\mathbb{R}} E^{u} = \dim_{\mathbb{R}} E^{s} = 2(m - 2) .
+   $$
+:::
+
+::: proof
+把每个涡旋的位移分解成径向分量与切向分量，这是一个正交的坐标变换。在这组坐标下 $J_{2m}$ 变成反对角分块 $\begin{pmatrix} 0 & B \\ C & 0 \end{pmatrix}$，其中 $B = (\delta\,I - W)\,S$，$C = ((\delta + 1)\,I - W)\,S$；$W$ 的非对角元是 $P_{2m}$ 上弦长平方的倒数 $1/d_{jk}$，对角元为零，$S = \operatorname{diag}(s_j)$，$\delta = \frac{(2m)^2 - 1}{12} - \frac{m^2}{2}$（[`rotated_jacobian_all`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.rotated_jacobian_all)）。对 $x \neq 0$，舒尔补给出 $\chi_{2m}(x) = \det(x^2 I - CB)$。$W$ 是循环矩阵，离散傅里叶变换把它对角化，第 $k$ 个本征值是 $\frac{(2m)^2 - 1}{12} - \frac{k(2m - k)}{2}$（[`chordWeight_dft`](lean:D5/S3/FluidDynamics/Vortices/InverseChordCirculant.chordWeight_dft)）；交错符号 $S$ 把频率 $k$ 平移 $m$。于是 $\det(y\,I - CB) = \prod_{k=0}^{2m-1}(y - \gamma_k)$，其中 $\gamma_k = (m - r)^2(r^2 - 2)/4$，$r = \min(k, 2m - k)$。两个多项式在无穷多个点上取值相同，因而相等，故 $\chi_{2m}(X) = \prod_k (X^2 - \gamma_k)$（[`charpoly_mode_product`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.charpoly_mode_product)）。$r = 0$ 与 $r = m$ 各由一个 $k$ 给出，其余的 $r$ 各由两个 $k$ 给出，这就是第 1 条中的指数。$\gamma_k > 0$ 只发生在 $2 \le r \le m - 1$，而且不同的 $r$ 给出不同的值：对整数 $2 \le k < l < m$ 有 $(m-k)^2(k^2-2) \neq (m-l)^2(l^2-2)$（[`distinctness_certificate`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonSpectrum.distinctness_certificate)）。每个这样的实根在 $\mathbb{R}^{4m}$ 中有 $2$ 维的本征空间（[`real_geometric_multiplicity`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonRealSpaces.real_geometric_multiplicity)），不同本征值的本征空间线性无关，$m - 2$ 个 $2$ 维空间相加得到第 3 条。换到一般的 $b$、$\Omega$ 只是乘以 $2\Omega$：本征空间不变，本征值各乘 $2\Omega$。完整证明由 Lean 内核检查。
+:::
+
+四个因子是四类运动。$X^2$ 是零本征值，下面单独处理。两个带加号的因子给出纯虚根 $\pm i\,m/\sqrt{2}$ 与 $\pm i\,(m-1)/2$：围绕平衡位置的振荡，不增不减。带减号的因子给出实根对：正的一支发散，负的一支收缩。库里另有一条冻结定理（[`off_axis_is_real`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonRealBoundary.off_axis_is_real)）：$J_{2m}$ 的复本征值只要实部非零就是实数，所以 $E^{u}$ 与 $E^{s}$ 已经收尽全部增长与衰减的本征方向。六边形（$m = 3$）是第一个出现发散方向的多边形，此后每添两个涡旋，发散方向多两个。
+
+::: {.proposition #prop-ch30-vortex-polygon-neutral-drift title="非零本征值半单、零本征值的二阶若尔当块与无界的线性漂移；偶极与正方形" lean="D5/S3/FluidDynamics/Vortices/AlternatingPolygonDecomposition.geometric_eq_algebraic D5/S3/FluidDynamics/Vortices/AlternatingPolygonNeutral.neutral_generalized_finrank D5/S3/FluidDynamics/Vortices/AlternatingPolygonNeutral.neutral_geometric_finrank D5/S3/FluidDynamics/Vortices/AlternatingPolygonCartesianChain.cartesian_chain D5/S3/FluidDynamics/Vortices/AlternatingPolygonCartesianChain.unbounded_linear_drift D5/S3/FluidDynamics/Vortices/AlternatingPolygonSmallCases.dipole D5/S3/FluidDynamics/Vortices/AlternatingPolygonSmallCases.square"}
+设 $m \ge 1$。第 1、2、4 条把 $J_{2m}$ 看作 $\mathbb{C}^{4m}$ 上的线性算子。
+
+1. 对每个非零复数 $\mu$，$\mu$ 的本征空间的复维数等于 $\mu$ 作为 $J_{2m}$ 的特征多项式之根的重数。
+2. 本征值 $0$ 的广义本征空间是 $2$ 维的，本征空间是 $1$ 维的。
+3. 设 $(x_j, y_j)$ 为 $P_{2m}$ 的顶点，$\delta_m = 1 - m^2/2$，并取 $\mathbb{R}^{4m}$ 中的向量
+
+   $$
+   \begin{aligned}
+   c_0 &= (-y_1, \dots, -y_{2m};\; x_1, \dots, x_{2m}),\\
+   c_1 &= \frac{1}{\delta_m}\,(s_1 x_1, \dots, s_{2m} x_{2m};\; s_1 y_1, \dots, s_{2m} y_{2m}) .
+   \end{aligned}
+   $$
+
+   则 $J_{2m}\,c_0 = 0$，$J_{2m}\,c_1 = c_0$；曲线 $v(t) = c_1 + t\,c_0$ 对一切 $t \in \mathbb{R}$ 满足 $v'(t) = J_{2m}\,v(t)$，且集合 $\{v(t) : t \in \mathbb{R}\}$ 无界。
+4. $J_2$ 的特征多项式是 $X^2\bigl(X^2 + \tfrac12\bigr)$，其复本征值恰为 $0$ 与 $\pm i/\sqrt{2}$；$J_4$ 的特征多项式是 $X^2\bigl(X^2 + 2\bigr)\bigl(X^2 + \tfrac14\bigr)^2$，其复本征值恰为 $0$、$\pm i\sqrt{2}$ 与 $\pm i/2$。
+:::
+
+::: proof
+在径向与切向坐标上再作离散傅里叶变换，$\mathbb{C}^{4m}$ 分成 $2m$ 个二维不变块。第 $q$ 块上算子的矩阵是 $\begin{pmatrix} 0 & \ell_q \\ \ell_{q+m} + 1 & 0 \end{pmatrix}$，其中 $\ell_q = -(m - q)^2/2$，下标模 $2m$ 取在 $\{0, \dots, 2m-1\}$ 中（[`actual_normal_form`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonJordan.actual_normal_form)）；两个非对角元之积就是上一个证明里的 $\gamma_q$。对非零的 $\mu$，在每个二维块上直接计算可知 $(T - \mu)^2 v = 0$ 推出 $(T - \mu)v = 0$（$T$ 记这个算子）：非零本征值没有若尔当链，广义本征空间等于本征空间，而广义本征空间的维数就是根的重数，由此得第 1 条。$T^2$ 在第 $q$ 块上是数乘 $\gamma_q$，所以本征值 $0$ 的广义本征空间恰是 $\gamma_q = 0$ 的那些块之和；这只发生在 $q = m$。那里 $\ell_m = 0$，另一个非对角元是 $\ell_0 + 1 = \delta_m$，它不为零，因为 $m^2 = 2$ 没有整数解。这一块是幂零的二阶若尔当块，由此得第 2 条。第 3 条在径向与切向坐标里直接验证：$c_0$ 是每个涡旋切向位移 $1$、径向位移 $0$，$c_1$ 是径向位移 $s_j/\delta_m$、切向位移 $0$；用上一个证明的记号，$W$ 的行和 $\sum_k W_{jk} = \frac{(2m)^2 - 1}{12}$ 与交错行和 $\sum_k s_k W_{jk} = s_j\,\delta$ 给出 $B\,\mathbf{1} = 0$ 与 $C\,(s/\delta_m) = \mathbf{1}$（$\mathbf{1}$ 为全一向量，$s/\delta_m$ 的第 $j$ 个分量是 $s_j/\delta_m$），即 $J_{2m}c_0 = 0$ 与 $J_{2m}c_1 = c_0$。于是 $J_{2m}(c_1 + t\,c_0) = c_0 = v'(t)$，无界性来自 $c_0 \neq 0$。第 4 条是把 $m = 1, 2$ 代入对一切 $m \ge 1$ 成立的折叠公式 $\chi_{2m}(X) = X^2\bigl(X^2 + \tfrac{m^2}{2}\bigr)\prod_{r=1}^{m-1}\bigl(X^2 - \tfrac{(m-r)^2(r^2-2)}{4}\bigr)^2$（[`charpoly_folded`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonModes.charpoly_folded)）。完整证明由 Lean 内核检查。
+:::
+
+$c_0$ 是整个多边形绕原点的无穷小转动：场对公共转动协变（[@lem-ch30-vortex-polygon-equilibrium] 的证明用过这一点），转过去的多边形仍然静止，所以这个方向落在 $J_{2m}$ 的核里。$c_1$ 让正涡旋沿半径移动 $1/\delta_m$，负涡旋反向移动同样的距离。把两种涡旋的半径这样错开之后，线性化方程的解不是振荡，而是整圈涡旋沿 $c_0$ 方向匀速转走。谱看不见这件事：零与纯虚数都算“不增长”，一个二阶若尔当块却让解随时间线性增大。偶极（$m = 1$）与正方形（$m = 2$）的全部本征值都在虚轴上，它们的线性化方程同样有这样一个无界的解。换回一般的 $b, \Omega > 0$，只需把 $c_1$ 除以 $2\Omega$（[`physical_cartesian_chain`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalDerivative.physical_cartesian_chain)）。
+
+::: {.example #ex-ch30-vortex-octagon-spectrum title="正八边形的十六个本征值：从方程数值求出，再与冻结的重数逐项对照"}
+取 $m = 4$、$b = 2$、$\Omega = \tfrac12$，于是 $R_{b,\Omega} = 1$，八个涡旋位于单位圆上，相空间是 $\mathbb{R}^{16}$。下面的数值只用到 [@def-ch30-alternating-vortex-polygon] 中的方程，不用任何闭式：把场逐项键入，用符号求导得到 $P_8$ 处的 $16 \times 16$ 偏导数矩阵（与步长 $10^{-12}$ 的中心差分逐元相差不超过 $3 \times 10^{-24}$），以 $40$ 位十进制精度求本征值；代数重数取数值上重合的本征值个数，几何重数取 $16 - \operatorname{rank}(J_8 - \lambda I)$。场在 $P_8$ 处的最大分量为 $8 \times 10^{-41}$。标号 $r$ 与 [@thm-ch30-vortex-polygon-spectrum] 的证明相同：$r = 0, 1$ 对应两个带加号的因子，$r = m$ 对应 $X^2$。本征值四舍五入到所示位数：
+
+| 标号 $r$ | 冻结声明给出的根 | 数值本征值 | 代数重数 | 几何重数 |
+| :---: | :---: | :---: | :---: | :---: |
+| $0$ | $\pm 2\sqrt{2}\,i$ | $\pm 2.828427\,i$ | $1$ | $1$ |
+| $1$ | $\pm \tfrac32\,i$ | $\pm 1.500000\,i$ | $2$ | $2$ |
+| $2$ | $\pm\sqrt{2}$ | $\pm 1.414214$ | $2$ | $2$ |
+| $3$ | $\pm\tfrac12\sqrt{7}$ | $\pm 1.322876$ | $2$ | $2$ |
+| $4$ | $0$ | $0$（模小于 $2 \times 10^{-20}$） | $2$ | $1$ |
+
+重数合计 $2 + 4 + 4 + 4 + 2 = 16$。正实本征值连重数共 $4 = 2(m - 2)$ 个，负实本征值同样 $4$ 个。$\operatorname{rank} J_8 = 15$，$\operatorname{rank} J_8^2 = \operatorname{rank} J_8^3 = 14$：零本征值恰有一个二阶若尔当块。两个正根 $1.414214$ 与 $1.322876$ 靠得很近但不相等：不同的 $r$ 给出不同的根，所以每个实根的重数恰好是 $2$，没有更大的。六边形（$m = 3$）用同样的办法得到 $\pm 0.707107$（各二重）、$\pm 1.000000\,i$（各二重）、$\pm 2.121320\,i$（各一重）与一个二重、几何重数为 $1$ 的零本征值，正实本征值共 $2 = 2(m - 2)$ 个。
+
+**换参数。** 取 $b = 1$、$\Omega = 1$（$R_{b,\Omega} = 0.5$），八边形的两个正实本征值变为 $2.828427$ 与 $2.645751$；取 $b = 1.35$、$\Omega = 0.25$（$R_{b,\Omega} = 1.161895$），变为 $0.707107$ 与 $0.661438$。两组都是上表数值乘以 $2\Omega$，与 $b$ 无关。
+
+**回到非线性方程。** 以上是线性化的结论。下面两个数值实验直接积分 $\dot{z} = F_{2,1/2}(z)$（四阶龙格—库塔法，$30$ 位精度；步长减半后所示数字不变）。其一，六边形：从 $P_6 + 10^{-9}u$ 出发，$u$ 是本征值 $1/\sqrt{2}$ 的一个单位本征向量，到 $t = 10$ 时与 $P_6$ 的距离增长到初始值的约 $1177.4$ 倍，与 $e^{10/\sqrt{2}} = 1177.405$ 的相对偏差小于 $10^{-6}$（这个本征空间是二维的，取其中哪一个单位向量都是如此）。其二，正方形：从 $P_4 + 10^{-3}c_1$ 出发（正涡旋半径 $0.999$，负涡旋半径 $1.001$），到 $t = 10$ 四个涡旋绕原点平均转过 $0.0100001$ 弧度，到 $t = 100$ 平均转过 $0.100001$ 弧度；线性化解 $10^{-3}(c_1 + t\,c_0)$ 给出的转角是 $10^{-3}t$。线性化解沿切线无界地走远；在非线性方程里，这段时间内看到的是整个环绕原点缓慢转动。这两个实验是数值观察，不是冻结声明。
+:::
+
+这个样本把三件容易混在一起的事分开了。方程右端在无碰撞构型处可微（[`field_differentiable_at`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.field_differentiable_at)），平衡点正是这样的构型，那里没有任何奇异；可是从六边形起，线性化恰有 $2(m - 2)$ 维的发散方向；而谱上中性的偶极与正方形，线性化方程照样有无界的解。可微不等于稳定，谱中性不等于有界。放回本章的类比（`MODEL`）：这里的“线”已经缩成平面上的点，点与点之间没有可供缠绕的结构，发散方向却一个不少，它们不需要涡管拉伸。三维的问题在别处：那里的涡丝不只是被搬运的点，还会被拉长。
+
 在正式陈述千禧年无外力开放猜想之前，我们先用专门的文献注记严格隔离二维全局光滑性定理与 **受迫情形（克雷陈述 C / D，含光滑外力 $\mathbf{f} \in C^\infty$）** 的外部文献结果，确保下方的红色 `OPEN` 猜想框纯粹聚焦于未决的无外力自治核心：
 
 ::: {.remark #rem-ch30-navier-stokes-forced-literature title="兰姆恒等式、二维全局正则性与 2026 年受迫陈述 C / D 有限时间爆破的文献说明"}

@@ -412,7 +412,7 @@ This monograph consists of the **[Prelude](README.md)**, **Eight Parts (30 Chapt
             ┌─────────────────────────────────────────────────────────────────┐
             │ Part VIII: Timeless Causality, ETH & Fluids (Ch 29–30) → Coda   │
             │  • Polyhedral defect & Hairy Ball lit. • Pythagorean 4-tier arc │
-            │  • Concept Dictionary (A) • Clifford Sheet (B) • 318 Index (C)  │
+            │  • Concept Dictionary (A) • Clifford Sheet (B) • 374 Index (C)  │
             └─────────────────────────────────────────────────────────────────┘
 ```
 
