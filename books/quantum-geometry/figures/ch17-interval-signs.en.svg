@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch17-interval-signs" data-lang="en" viewBox="0 0 440 330" width="440" height="330" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="A spacetime diagram with x to the right and t up; the two white light lines t = ±x cross at the origin and cut the plane into four wedges. The upper and lower wedges (inside the cone) are pale cyan, t² − x² &gt; 0; the left and right wedges (outside) are pale magenta, t² − x² &lt; 0; on the light lines t² − x² = 0. Three arrows leave the origin, written as (t, x): the cyan one to (2, 1) reads 3, the magenta one to (1, 2) reads −3, the white one along the cone to (1.5, 1.5) reads 0.">
+<title>A spacetime diagram with x to the right and t up; the two white light lines t = ±x cross at the origin and cut the plane into four wedges. The upper and lower wedges (inside the cone) are pale cyan, t² − x² &gt; 0; the left and right wedges (outside) are pale magenta, t² − x² &lt; 0; on the light lines t² − x² = 0. Three arrows leave the origin, written as (t, x): the cyan one to (2, 1) reads 3, the magenta one to (1, 2) reads −3, the white one along the cone to (1.5, 1.5) reads 0.</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<path d="M220 168 L74.3 22.3 L365.7 22.3Z" class="tf-cyan" fill-opacity="0.12"/>
+<path d="M220 168 L365.7 22.3 L406 22.3 L406 313.7 L365.7 313.7Z" class="tf-magenta" fill-opacity="0.1"/>
+<path d="M220 168 L74.3 313.7 L365.7 313.7Z" class="tf-cyan" fill-opacity="0.12"/>
+<path d="M220 168 L74.3 22.3 L34 22.3 L34 313.7 L74.3 313.7Z" class="tf-magenta" fill-opacity="0.1"/>
+<line x1="18.5" y1="168" x2="415.55" y2="168" class="ts-dim" stroke-width="1.3" fill="none"/>
+<path d="M421.5 168 L414.5 170.94 L414.5 165.06Z" class="tf-dim"/>
+<line x1="220" y1="319.9" x2="220" y2="15.85" class="ts-dim" stroke-width="1.3" fill="none"/>
+<path d="M220 9.9 L222.94 16.9 L217.06 16.9Z" class="tf-dim"/>
+<text class="tf-dim" x="419.5" y="186" font-size="14" text-anchor="end"><tspan font-style="italic">x</tspan></text>
+<text class="tf-dim" x="229" y="15.9" font-size="14"><tspan font-style="italic">t</tspan></text>
+<line x1="74.3" y1="313.7" x2="365.7" y2="22.3" class="ts-ink" stroke-width="2" fill="none"/>
+<line x1="365.7" y1="313.7" x2="74.3" y2="22.3" class="ts-ink" stroke-width="2" fill="none"/>
+<line x1="220" y1="168" x2="278.58" y2="50.84" class="ts-cyan" stroke-width="2.6" fill="none"/>
+<path d="M282 44 L281.36 53.74 L274.59 50.36Z" class="tf-cyan"/>
+<line x1="220" y1="168" x2="337.16" y2="109.42" class="ts-magenta" stroke-width="2.6" fill="none"/>
+<path d="M344 106 L337.64 113.41 L334.26 106.64Z" class="tf-magenta"/>
+<line x1="220" y1="168" x2="307.59" y2="80.41" class="ts-ink" stroke-width="2.6" fill="none"/>
+<path d="M313 75 L309.31 84.04 L303.96 78.69Z" class="tf-ink"/>
+<text class="tf-cyan ts-bg" x="263" y="42" font-size="13" text-anchor="end" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">(2, 1)</text>
+<text class="tf-cyan ts-bg" x="263" y="60" font-size="14" text-anchor="end" font-weight="600" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">q</tspan> = 3</text>
+<text class="tf-magenta" x="352" y="112" font-size="13">(1, 2)</text>
+<text class="tf-magenta" x="352" y="130" font-size="14" font-weight="600"><tspan font-style="italic">q</tspan> = −3</text>
+<text class="tf-ink" x="323" y="77" font-size="14" font-weight="600"><tspan font-style="italic">q</tspan> = 0</text>
+<text class="tf-cyan ts-bg" x="232" y="276.5" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">inside  <tspan font-style="italic">q</tspan> &gt; 0</text>
+<text class="tf-magenta ts-bg" x="61.9" y="202.1" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">outside  <tspan font-style="italic">q</tspan> &lt; 0</text>
+<text class="tf-dim" x="78.3" y="14.3" font-size="13">light cone  <tspan font-style="italic">q</tspan> = 0</text>
+</svg>
