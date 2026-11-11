@@ -185,7 +185,7 @@ This quartet captures the pure abstract diagonal skeleton in observation topolog
 :::
 
 ::: {.remark #rem-godel-tarski-comparison-literature title="Hypothesis Boundary Between Abstract Diagonal Escape and Gödel–Tarski Metamathematics (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** Corollary [@cor-complete-diagonal-topological-settlement] captures the abstract set-theoretic and observation-topological diagonal pattern (echoing Georg Cantor's diagonal argument and F. W. Lawvere, *Diagonal arguments and cartesian closed categories*, 1969). By contrast, in formal mathematical logic, **Gödel's first incompleteness theorem** (K. Gödel, 1931) and **Tarski's undefinability of truth** (A. Tarski, 1933/1936) do not assume a surjection onto all semantic functions, but instead require effective arithmetic axiomatization, Gödel numbering, syntactic provability predicates, and consistency (or $\omega$-consistency) hypotheses.
+**Literature result, not formalized in this book.** Corollary [@cor-complete-diagonal-topological-settlement] captures the abstract set-theoretic and observation-topological diagonal pattern (echoing Georg Cantor's diagonal argument and F. W. Lawvere, *Diagonal arguments and cartesian closed categories*, 1969). By contrast, in formal mathematical logic, **Gödel's first incompleteness theorem** (K. Gödel, 1931) uses effective axiomatization, sufficiently strong arithmetic, Gödel coding, a provability predicate, and the appropriate consistency hypothesis; **Tarski's undefinability of truth** (A. Tarski, 1933/1936) uses enough syntactic coding and diagonal self-reference to rule out an internal arithmetic truth definition, without requiring effective axiomatization or a provability predicate.
 :::
 
 > A complete catalog necessarily cracks its own shell; whoever tries to exhaust the world from inside a single sphere is thrust outward along the diagonal normal.
@@ -430,7 +430,7 @@ Reading items 3 and 4 together illuminates the topological backdrop of [Chapter 
 :::
 
 ::: {.figure src="ch21-angle-defect"}
-**For flat triangles to close into a sphere, every vertex must leave a gap.** On the left, five equilateral triangles laid flat around one vertex: five corners of $60^\circ$ make only $300^\circ$, and the magenta gap below is the $60^\circ$ angular defect. On the right, each of the icosahedron's twelve magenta vertices is short by $60^\circ$, for a total of $12 \times 60^\circ = 720^\circ = 4\pi$ (literature result, not formalized in this book; see [@rem-hairy-ball-adams-literature]).
+**Every vertex of the regular icosahedron leaves a gap.** On the left, five equilateral triangles laid flat around one vertex: five corners of $60^\circ$ make only $300^\circ$, and the magenta gap below is the $60^\circ$ angular defect. On the right, each of the icosahedron's twelve magenta vertices is short by $60^\circ$, for a total of $12 \times 60^\circ = 720^\circ = 4\pi$ (literature result, not formalized in this book; see [@rem-hairy-ball-adams-literature]).
 :::
 
 Reading these classical topological results ([@rem-hairy-ball-adams-literature]) alongside our kernel-verified relative semantic diagonal settlement ([@cor-complete-diagonal-topological-settlement]) highlights a shared structural motif: **singularities and incompleteness inside a sphere can be resolved only from a sphere beyond the sphere.**

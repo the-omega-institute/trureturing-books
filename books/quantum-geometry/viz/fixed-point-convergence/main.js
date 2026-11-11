@@ -291,7 +291,7 @@
         set(3, L('正确的十进制位数', 'correct decimal digits'), String(digits));
         set(4, L('单纯迭代要走几步', 'plain iteration needs'), ps[kk] == null ? '> 300' : `${ps[kk]}${L(' 步', ' steps')}`);
         set(5, L(`切线的斜率 f′(x${sub(kk)})`, `slope of the tangent, f′(x${sub(kk)})`), fix(num(MAPS[S.map].fp(O.xs[kk])), 6));
-        $('roNote').textContent = L('牛顿每一步除了读曲线的高度，还读它的斜率（对余弦就是 sin xₖ）；沿切线走到直线 y = x，正确位数每步约翻一倍。', 'Besides the height of the curve, each Newton step reads its slope (sin xₖ for the cosine); following the tangent to the line y = x roughly doubles the correct digits at each step.');
+        $('roNote').textContent = L('牛顿每一步除了读曲线的高度，还读它的斜率（对余弦就是 −sin xₖ）；沿切线走到直线 y = x，正确位数每步约翻一倍。', 'Besides the height of the curve, each Newton step reads its slope (−sin xₖ for the cosine); following the tangent to the line y = x roughly doubles the correct digits at each step.');
       }
       pill = sci(e);
     }
@@ -432,7 +432,7 @@
     rate: ['从 θ₀ = 1 反复取余弦，画面跟着误差放大。放大之后曲线与品红切线重合，每一圈的形状都一样：误差每步乘以约 −0.674，比灰色虚线（最陡的 −sin 1 ≈ −0.84）平缓。', 'Take the cosine again and again from θ₀ = 1 while the view zooms with the error. Zoomed in, the curve lies on the magenta tangent and every turn has the same shape: the error is multiplied by about −0.674 per step, gentler than the dashed grey line (the steepest, −sin 1 ≈ −0.84).'],
     circle: ['同一张图加上单位圆。圆上的点 P = (θ*, sin θ*)：青色的横坐标是蛛网收进去的位置 θ*，品红的高度 λ = sin θ* ≈ 0.674 是每步缩小的比例，也是品红切线斜率的大小。', 'The same plane with the unit circle. The point P = (θ*, sin θ*) on it: its cyan abscissa is θ*, where the cobweb closes in, and its magenta height λ = sin θ* ≈ 0.674 is the ratio by which each step shrinks the error, the size of the slope of the magenta tangent.'],
     newton: ['同样从 θ₀ = 1 出发，每一步先竖着读曲线的高度，再沿品红切线走到灰线。画面跟着放大：四步之内视野宽从约 0.6 缩到 10⁻²⁰ 量级，误差约每步平方一次。', 'Again from θ₀ = 1: each step reads the height of the curve, then follows the magenta tangent to the grey line. The view zooms along: within four steps its width falls from about 0.6 to the order of 10⁻²⁰, the error roughly squared at each step.'],
-    rational: ['θ* 的渐近分数 2/3、3/4、14/19、17/23、694/939……一个个落在灰线上（琥珀色是当前这个）。品红竖线是到余弦曲线的落差，即残差 |cos q − q|：它总停在两条灰色虚线张成的楔形里，画面放大了千万倍，它仍在。', 'The convergents of θ*, 2/3, 3/4, 14/19, 17/23, 694/939, …, land one by one on the grey line (amber is the current one). The magenta upright is the drop to the cosine curve, the residual |cos q − q|: it always stays inside the wedge of the two dashed grey lines, and with the view magnified ten million times it is still there.'],
+    rational: ['θ* 的渐近分数 2/3、3/4、14/19、17/23、694/939……一个个落在灰线上（琥珀色是当前这个）。品红竖线是到余弦曲线的落差，即残差 |cos q − q|：它在余弦曲线上的端点总停在两条灰色虚线张成的楔形里，画面放大了千万倍，它仍在。', 'The convergents of θ*, 2/3, 3/4, 14/19, 17/23, 694/939, …, land one by one on the grey line (amber is the current one). The magenta upright is the drop to the cosine curve, the residual |cos q − q|: its endpoint on the cosine curve always stays inside the wedge of the two dashed grey lines, and with the view magnified ten million times it is still there.'],
     ruler: ['琥珀色的 17/23 与虚线标出的尺子读数 739/1000 并排：一千等分的尺子离 θ* 最近的一格，残差约是二十三等分那一格的两倍。', 'The amber 17/23 next to the dashed ruler reading 739/1000: the tick nearest θ* on a ruler of a thousand divisions leaves about twice the residual of the tick on a ruler of twenty-three.']
   };
   let booting = true;

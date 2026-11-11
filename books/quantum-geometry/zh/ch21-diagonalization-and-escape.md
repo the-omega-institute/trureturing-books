@@ -185,7 +185,7 @@ $$
 :::
 
 ::: {.remark #rem-godel-tarski-comparison-literature title="康托尔、Lawvere、哥德尔与塔斯基对角线定理的前提边界（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** [@cor-complete-diagonal-topological-settlement] 刻画的是集合与观测拓扑层面的抽象相对对角线骨架（呼应 Georg Cantor 的对角线构造与 F. W. Lawvere, *Diagonal arguments and cartesian closed categories*, 1969 的范畴不动点模式）；而在经典数理逻辑文献中，**哥德尔第一不完备定理**（K. Gödel, 1931）与**塔斯基真值不可定义定理**（A. Tarski, 1933/1936）并非直接假定任意语义函数目录满射，而是需要额外构造递归公理化算术、哥德尔配数编码、语法可证性谓词，并在系统相容性（或 $\omega$-相容性）假设下运作。
+**文献结果，未在本书形式化。** [@cor-complete-diagonal-topological-settlement] 刻画的是集合与观测拓扑层面的抽象相对对角线骨架（呼应 Georg Cantor 的对角线构造与 F. W. Lawvere, *Diagonal arguments and cartesian closed categories*, 1969 的范畴不动点模式）；而在经典数理逻辑文献中，**哥德尔第一不完备定理**（K. Gödel, 1931）使用有效公理化、足够强的算术、哥德尔编码与可证性谓词及相应的相容性假设；**塔斯基真值不可定义定理**（A. Tarski, 1933/1936）使用足够的语法编码与对角自指来排除在算术内部定义自身真值谓词，不要求递归公理化或语法可证性谓词。
 :::
 
 > 完备的目录必自裂其壳；凡想在球内穷尽一切者，必被对角线顺着法向顶出球外。
@@ -430,7 +430,7 @@ $$
 :::
 
 ::: {.figure src="ch21-angle-defect"}
-**平坦的三角形要合成球，每个顶点都得留一道缝。** 左边是一个顶点周围摊平的五个等边三角形，五个 $60^\circ$ 只凑出 $300^\circ$，下方品红的缺口就是 $60^\circ$ 的角亏；右边正二十面体的十二个品红顶点各缺 $60^\circ$，合起来 $12 \times 60^\circ = 720^\circ = 4\pi$（文献结果，未在本书形式化，见 [@rem-hairy-ball-adams-literature]）。
+**正二十面体的每个顶点都留着一道缝。** 左边是一个顶点周围摊平的五个等边三角形，五个 $60^\circ$ 只凑出 $300^\circ$，下方品红的缺口就是 $60^\circ$ 的角亏；右边正二十面体的十二个品红顶点各缺 $60^\circ$，合起来 $12 \times 60^\circ = 720^\circ = 4\pi$（文献结果，未在本书形式化，见 [@rem-hairy-ball-adams-literature]）。
 :::
 
 把上述微分拓扑文献注记（[@rem-hairy-ball-adams-literature]）与本章经内核验证的相对语义对角线拓扑安顿推论（[@cor-complete-diagonal-topological-settlement]）对照阅读，可以看到同一条结构脉络：**球内的奇点与不完备，唯有借球外之球方能安顿。**

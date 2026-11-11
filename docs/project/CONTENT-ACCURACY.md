@@ -29,10 +29,10 @@
 | 18 | ch18-spinors-and-gauge-curvature.md | 待核对 | — |
 | 19 | ch19-tensor-networks-and-holography.md | 待核对 | — |
 | 20 | ch20-complexity-and-spacetime.md | 待核对 | — |
-| 21 | ch21-diagonalization-and-escape.md | 待核对 | — |
-| 22 | ch22-primes-euler-products-and-zeros.md | 待核对 | — |
-| 23 | ch23-diophantine-definability.md | 待核对 | — |
-| 24 | ch24-cosine-fixed-points-and-self-reference.md | 待核对 | — |
+| 21 | ch21-diagonalization-and-escape.md | 已修复，待独立复审 | 本轮 F1–F2；当前候选 8ca77e |
+| 22 | ch22-primes-euler-products-and-zeros.md | 已修复，待独立复审 | 本轮 F3；当前候选 8ca77e |
+| 23 | ch23-diophantine-definability.md | 仅共享媒体修复，待独立复审 | 本轮 F8–F9；正文未改 |
+| 24 | ch24-cosine-fixed-points-and-self-reference.md | 已修复，待独立复审 | 本轮 F4–F7；当前候选 8ca77e |
 | 25 | ch25-rewriting-and-xor.md | 待核对 | — |
 | 26 | ch26-single-qubit-rotor-compilation.md | 待核对 | — |
 | 27 | ch27-reading-frozen-proofs-i.md | 待核对 | — |
@@ -587,6 +587,21 @@ EPUB 浏览器预览不等于 Apple Books 原生主题验收，尚未导入 Appl
 本次 PDF 配置有**新的当前发布地址**，与前次空 `online_url/repo_url` 的 35 单元受控 PDF 配置分开记录；11 份受控字体摘要仍相同。原默认 macOS 字体的 LastResort 问题及默认/CI 不等价限制继续保留，本次没有重跑默认字体导出，也不声称与默认 CI 字节等同。原生 Apple Books/其他阅读器、实体设备、完整视频/音频和整书逐页版式均未验收。一次性证据脚本的路径、选择器和目录/ID 假设纠正保留在证据目录，未改变产品源码、现有套件或断言。
 
 本次只更新本台账，最终摘要在交付 JSON 中记录；正文、作者题记、ID/GID、媒体顺序、锁、Lean、托管文件、工具、运行时和技能全部保留。未委派或执行 Git/GitHub 生命周期操作；没有开启新批次或终止全目标。**最终候选与此台账补丁的对应、独立 R4、PR #90 的 CI、合入与 Pages 仍由调用方完成。**
+
+## ch21–24 内容准确性最小修复（8ca77e2，待独立复审）
+
+本轮输入为 `8ca77e2f381d189607a1c2ee8f3c1431f0d8f8a2`，工作目标为 ch21–24 双语正文及其已引用的三个共享实验室。`/tmp/qg-accuracy-resume-20261112/ch21-ch24-current-correspondence-8ca77e2.json` 证明当前候选的 168 个原始出版/媒体/锁路径与准备好的 `61c43de` 输入逐字相同；`...-61c43de.json` 记录原 439 条锁记录、pin `1d9bf98cab8306e67ec38a739359f2cdae63877a` 与工具/主题/配置未变，唯一新增锁项为与本批无关的 Birkhoff 条目。它们是输入对应证据，不是最终批准或输出验收。
+
+确认并作最小双语修复的九个家族：F1 拆开 Gödel/Tarski 前提；F2 将角亏图注限定为正二十面体顶点；F3 将完备 ζ 的“全纯延拓”改为“亚纯延拓”；F4 将余弦有限步不到达限定到显示起点/`[0,1]` 有理起点并保留全局收敛；F5 只对余弦曲线端点给楔形界；F6 将 `e → 1` 限定为束缚椭圆的零角动量退化极限；F7 更正余弦导数符号；F8 把偶周期限制为目标值 `±1` 中只出现 `+1`；F9 删除未实现的 `d ≤ 37` 三角形目录声称。ch23 正文未改，只有其共享 Pell/同余数媒体说明按 F8–F9 修复。作者题记、稳定 ID、GID、形式块边界、媒体顺序、Film006 源码、锁文件、Lean、托管文件、工具和主题均未改。
+
+独立计算记录在 `build/content-accuracy/repair-ch21-ch24-20261112/independent-checks.json`：核对角亏反例、余弦种子与有限步范围、`17/23` 的楔形端点、`e=1` 轨道分类、导数/牛顿符号、`d=3,7` Pell 差值与 F9 声称删除。技能只在 `local-content-accuracy` 第 3 步增加一条可复用的域追踪指导：量化断言须覆盖实际支持的控制域和所有现有读者消费者，不能把 preset 或显示范围当作数学域；`quick_validate.py` 已通过。技能的精确差异与摘要由交付信封记录。
+
+| 本轮检查 | 结果与边界 |
+| --- | --- |
+| 内容/源码核对 | 当前候选复读 F1–F9 的双语稳定位置；ch21/ch22/ch24 正文与 ch23 共享媒体逐项对照。未新增 Lean、未刷新锁，也未把未核对的 31–32 章计入原 35 单元覆盖。 |
+| 实验室浏览器与静态图 | 直接命令行 Claude CLI 运行三个变更实验室的普通/`VIZ_SLOW_FRAMES=1000` 套件：sphere 105/105、fixed-point 114/114、Pell 95/95，两个帧率均全通过；官方 `viz-shots` 写出 21 张双语四视图 PNG，`viz-thumbs` 写出 47 张 JPEG 后逐张抽看。静态舞台几何未变，跟踪 JPEG 已恢复，完整记录见 `build/content-accuracy/repair-ch21-ch24-20261112/viz-validation.json`。 |
+| 出版输出 | 当前候选 `TBOOK_CACHE=0 ./tbook build html pdf epub site --book quantum-geometry` 成功；中英 HTML、四版 PDF（zh 775/807 页，en 817/845 页）、两版 EPUB 与 site 均生成。`./tbook check` 为 0 错误/0 警告；中英 × dark/light × desktop/mobile 的 32 个改动章页面组合均 HTTP 200、无页面/控制台错误、无图片错误或整页横溢，变更文本均出现。四版 PDF 的 16 个变更段页已渲染查看，六份 EPUB XML 均可解析且改动文本存在；两份 EPUBCheck 5.3.0 均 valid、0 错误、0 警告（`epubcheck.json`、`pdf-epub-check.json`、`browser-check.json`）。当前 `ignore_system_fonts=True`/本地受控字体证据不等同默认 CI；Noto CJK SC 缺失、已知 EPUB 手机溢出/未知字体限制仍保留。 |
+| 生命周期 | 本轮无暂存、提交、合并、变基、贮藏、推送、PR、CI 或 Pages 操作。架构/质量/测试三席独立复审、PR/CI/Pages 及最终覆盖台账由调用方负责；原 35 单元仍未批准，当前仅留下 ch21–24 的“修复待复审”状态。 |
 
 ## PR90 R4 复审与 61c43de 集成对应
 

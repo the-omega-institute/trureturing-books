@@ -340,7 +340,7 @@ The following literature note records four classical theorems governing $\cos\th
 :::
 
 ::: {.viz src="sphere-escape" preset="far" height="500"}
-**Another start, the same end.** Starting far out at $x_0 = 3$, the amber cobweb drops into $[-1, 1]$ on its first step and from there winds in towards the magenta fixed point $x^* = \theta^* \approx 0.739$. The end does not depend on the start, and neither does the fact that no step ever lands on it exactly (global convergence is the literature result of item 1 above).
+**Another start, the same end.** Starting far out at $x_0 = 3$, the amber cobweb drops into $[-1, 1]$ on its first step and from there winds in towards the magenta fixed point $x^* = \theta^* \approx 0.739$. The end does not depend on the start; the claim that no finite step reaches it is made here only for the displayed start $x_0 = 3$ (global convergence is the literature result of item 1 above).
 :::
 
 Pushing one step further from the number-theoretic context of [@rem-banach-dottie-hairy-ball-literature], the author's foundational notes ask: *"What are the relations among transcendental numbers? Is $\pi$ a projection of $\theta$? Is $\theta$ the ultimate transcendental number?"* In modern number theory, the algebraic independence of $\theta^*$ and $\pi$ is governed by **Schanuel's Conjecture**, which we record as an open conjecture (`OPEN`, carrying no `lean` attribute).
@@ -534,7 +534,7 @@ Every entry of the last column is below $1 + \sin 1 \approx 1.84$, in agreement 
 :::
 
 ::: {.viz src="fixed-point-convergence" preset="rational" height="500"}
-**The seam narrows but never closes.** The convergents $2/3, 3/4, 14/19, 17/23, 694/939, \dots$ of $\theta^*$ land one by one on the grey line (amber marks the current one), and the magenta upright is the drop from there to the cosine curve, the residual $\lvert\cos q - q\rvert$. The upright always stays inside the wedge of the two dashed grey lines (slopes $0$ and $-\sin 1$); with the view magnified ten million times, it is still there.
+**The seam narrows but never closes.** The convergents $2/3, 3/4, 14/19, 17/23, 694/939, \dots$ of $\theta^*$ land one by one on the grey line (amber marks the current one), and the magenta upright is the drop from there to the cosine curve, the residual $\lvert\cos q - q\rvert$. Its endpoint on the cosine curve always stays inside the wedge of the two dashed grey lines (slopes $0$ and $-\sin 1$); with the view magnified ten million times, it is still there.
 :::
 
 The last table of [@ex-dottie-rate-newton-rational] shows that refining the tick marks does not automatically buy a better reading. What sets the width of the seam is not the size of the denominator but its arithmetic relation to $\theta^*$: a ruler with twenty-three divisions happens to line up almost exactly at its seventeenth mark, and a ruler with a thousand divisions does not.
@@ -828,7 +828,7 @@ So two statements hold together without contradiction: analytically, each of $\p
 **Where the fixed point lives: the half-time of a cycloid.** How the auxiliary equation $\eta + \sin\eta = \pi/2$ appears in Kepler's equation and Newtonian radial free fall is worked out in [@ex-dottie-free-fall].
 
 ::: {.example #ex-dottie-free-fall title="Half-Time Free Fall: When Half the Fall Time Has Elapsed, the Distance Remaining Is (1 + sin θ*)/2"}
-**Literature result, not formalized in this book.** Substituting $E = \pi - \eta$ into $\eta + \sin\eta = \pi/2$ from [@ex-dottie-pi-series] yields Kepler's equation $E - \sin E = \frac{\pi}{2}$ at eccentricity $e = 1$ and mean anomaly $M = \pi/2$, solved by $E = \frac{\pi}{2} + \theta^* \approx 132.35^\circ$. A Kepler orbit of eccentricity $1$ degenerates into a radial segment, corresponding in Newtonian mechanics to a particle falling radially from rest at distance $r_0$ in the gravitational field of a central mass $M$. Energy conservation gives $\dot{r}^2 = 2GM\left(\frac{1}{r} - \frac{1}{r_0}\right)$, whose solution is the cycloid parametrization:
+**Literature result, not formalized in this book.** Substituting $E = \pi - \eta$ into $\eta + \sin\eta = \pi/2$ from [@ex-dottie-pi-series] yields Kepler's equation $E - \sin E = \frac{\pi}{2}$ at eccentricity $e = 1$ and mean anomaly $M = \pi/2$, solved by $E = \frac{\pi}{2} + \theta^* \approx 132.35^\circ$. Here we take the zero-angular-momentum limit of a bound ellipse ($e \to 1$), which degenerates into a radial segment; the motion along it is the Newtonian radial free fall from rest at distance $r_0$ in the gravitational field of a central mass $M$. Energy conservation gives $\dot{r}^2 = 2GM\left(\frac{1}{r} - \frac{1}{r_0}\right)$, whose solution is the cycloid parametrization:
 
 $$
 r(\eta) \;=\; \frac{r_0}{2}\,(1 + \cos\eta), \qquad t(\eta) \;=\; \frac{t_{\mathrm{ff}}}{\pi}\,(\eta + \sin\eta), \qquad \eta \in [0, \pi],
