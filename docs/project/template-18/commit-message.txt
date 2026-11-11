@@ -1,0 +1,30 @@
+Static figures: a standard, a drawing kit, ./tbook fig, checks and the book-figure skill
+
+Closes #18.
+
+The template had skills, scaffolding and quality gates for visualizations, films and slides, but for
+static figures only the Markdown image syntax. The downstream book measured in the issue shows what that
+leaves: every figure hard-codes a dark ground, two languages share one file, four chapters caption their
+figure "图 13", and four files in assets/ are referenced nowhere.
+
+- tools/tbook/figkit.py: a drawing kit (lines, arrows, faces, text with sub/superscripts, axes, an
+  orthographic sphere, panels). Scripts name colour roles from theme/tokens.json, never values. The kit
+  rejects text under 12 units, strokes under 1, labels that run off the canvas, unknown roles and figures
+  wider than the text column; output is byte-reproducible.
+- tools/tbook/figure.py: books/<slug>/figures/<name>.py draws one committed SVG per edition language.
+  A new media block, ::: {.figure src="<name>"} with a Markdown caption, shows it: inlined in the HTML
+  edition, where the roles take the page tokens (theme switch, browser print) and panels stack on a
+  phone; with the screen or the paper palette written in for the two PDF variants; with the paper palette
+  on an opaque ground in the EPUB.
+- ./tbook fig new|build|list|shots (tools/node/fig-shots.mjs: dark, light, phone and print views plus
+  contact sheets); ./tbook build redraws figures before the editions.
+- ./tbook check: a figure block without a caption, a caption or image description that is only a number,
+  and a committed SVG that differs from what its script draws are errors; files in assets/ that nothing
+  uses and SVGs without a script are warnings. Figure blocks take part in the per-edition parity check.
+- skills/book-figure, templates/figure, docs (ARCHITECTURE, AUTHORING, CHANGELOG), the skills table;
+  tools/tests/test_figure.py (18 tests).
+- The example monograph's two figures are drawn by scripts; its chapters cite them as figure blocks.
+
+Existing ![caption](../assets/x.svg) images build as before. Developed and exercised first in
+trureturing-books (the-omega-institute/trureturing-books#67).
+
