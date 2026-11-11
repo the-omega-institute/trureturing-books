@@ -36,7 +36,7 @@ await stageFirstChecks(T, BOOK, ID);
 const page = await T.goto(BOOK, ID, '?lang=zh');
 await page.waitForTimeout(300);
 const state = async () => { await settle(page); return page.evaluate(() => window.QUBIT_DEBUG.state); };
-const pick = async (id, wait = 560) => { await page.click(`[data-preset="${id}"]`); await settle(page, wait); };   // a card glides B to its start (420 ms) before it applies
+const pick = async (id) => { await page.click(`[data-preset="${id}"]`); await settle(page); };   // a card glides B to its start before it applies; settle lands that glide instead of waiting for it
 const end = async () => { await page.evaluate(() => { const d = window.QUBIT_DEBUG; d.seek(d.state.n); }); return state(); };
 const setRange = async (id, v) => { await page.evaluate(([i, val]) => { const el = document.getElementById(i); el.value = String(val); el.dispatchEvent(new Event('input', { bubbles: true })); }, [id, v]); await page.waitForTimeout(40); };
 
@@ -144,7 +144,7 @@ const box = await page.locator('#stage').boundingBox();
 await page.mouse.move(box.x + 60, box.y + box.height - 90); await page.mouse.down(); await page.mouse.move(box.x + 160, box.y + box.height - 130, { steps: 4 }); await page.mouse.up();
 const cam1 = await page.evaluate(() => window.QUBIT_DEBUG.camera());
 check('dragging empty space orbits the camera and leaves the state alone', cam1.yaw !== cam0.yaw && cam1.pitch !== cam0.pitch && close((await state()).theta, s.theta));
-await page.click('#camChips [data-cam="top"]'); await page.waitForTimeout(1500);
+await page.click('#camChips [data-cam="top"]'); await settle(page);
 check('the Top view looks down the z axis', (await page.evaluate(() => window.QUBIT_DEBUG.camera())).pitch > 1.5);
 
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
