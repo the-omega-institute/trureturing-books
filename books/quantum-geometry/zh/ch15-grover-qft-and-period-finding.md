@@ -9,7 +9,9 @@
 - **Grover 搜索是“两次正交反射合成一次不变平面旋转”**：在各向同性的高维草堆里，初始叠加态与目标态之间张开一个二维公共平面；先对目标正交子空间作一次镜像反射（正交一次），再对初始子空间作第二次镜像反射（正交两次），两次反射自动把状态向量沿着这个二维平面向目标稳步拨转 $2\theta$ 角！
 - **QFT 与周期寻找是“赤道相位齿轮上的正交字符干涉”**：通过有限 Weyl 位移算子的共轭相位反冲，把算术周期性刻进一套按二进制分母咬合的赤道相位齿轮；当对整个有限群求字符和时，非共振频率在单位圆上两两正交相消归零，唯独对偶零化子格点（共振频率）同相累加，一举锁定隐藏周期！
 
-![Grover 两次反射合成的平面旋转、量子傅里叶变换的二进制相位齿轮，以及 Q = 16、r = 4 时相消频率留下的四个等高峰](../assets/fig-15-grover-qft-shor.svg)
+::: {.figure src="ch15-overview"}
+**图 15。** 本章地图：面板 I，$N = 4$ 时一步 Grover 迭代把箭头 $U$ 转过紫色的 $2\theta = 60^\circ$，琥珀色的 $QU$ 正好落在成功方向 $W$ 上；面板 II，$x = 5 = (101)_2$ 的三只相位齿轮，齿数 $2$、$4$、$8$，琥珀色的指针依次指向 $\pi$、$\pi/2$、$5\pi/4$；面板 III，$Q = 16$、$r = 4$ 的周期态做完 QFT 后，只有 $k = 0, 4, 8, 12$ 四处留下高 $1/4$ 的青色柱。
+:::
 
 ## Grover：两次反射的共同不变平面 {#sec-grover-invariant-plane}
 
@@ -41,6 +43,10 @@ $$
 $$
 
 记初始成功倾角为 $\theta = \arcsin(\sqrt{p})$（故 $\sin\theta = \sqrt{p}$，$\cos\theta = \sqrt{1 - p}$）。下面的定理证明：无论迭代多少步 $n \in \mathbb{N}$，甚至无论外部再张量耦合任何参考系统 $R$，演化始终严丝合缝地锁在由 $W$ 与 $B$ 张成的二维块平面内，每次精确旋转 $2\theta$ 角！
+
+::: {.figure src="ch15-two-reflections"}
+**两面镜子合成一次转动。** 取 $N = 8$：墨色的箭头 $U$ 与失败方向 $B$ 成 $\theta$。第一面镜子是 $B$ 轴（$I - 2P$），把 $U$ 翻到下方的灰色虚线箭头；第二面镜子是 $U$ 所在的线（$2UU^* - I$），再把它翻上去，成为琥珀色的 $QU$。两次翻折之后，箭头净转过紫色的 $2\theta$，见 [@thm-grover-uniform-rotation]。
+:::
 
 ::: {.theorem #thm-grover-uniform-rotation title="相干均匀振幅放大的不变平面算子旋转定理" lean="D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation"}
 设 $s, l$ 为有限可判等指标类型，$J \in M_{l \times s}(\mathbb{C})$、$C, P \in M_{l \times l}(\mathbb{C})$、$p \in \mathbb{R}$，满足
@@ -96,6 +102,10 @@ $$
 1. **必须保留 $p = 1$ 的独立分支**：当初始状态已经百分之百落在目标子空间内（$p = 1$）时，失败分母 $\sqrt{1 - p} = 0$，此时无须定义失败基向量 $B$，定理直接给出 $U = W$；而当 $0 < p < 1$ 时，$n = 0$ 自动还原初始正交分解 $U = \sin\theta\,W + \cos\theta\,B$。
 2. **多源列时的块平面几何**：当源空间只有一列（$|s| = 1$，标准单初态 Grover 搜索）时，$W$ 与 $B$ 是两根正交单位列向量，张成一个二维平面；当 $|s| > 1$ 时，$W, B \in M_{l \times s}(\mathbb{C})$ 各自包含 $|s|$ 根正交列向量，第 $j$ 列的成功分量 $W_{\cdot, j}$ 与失败分量 $B_{\cdot, j}$ 张成属于该列的二维不变平面，全部 $|s|$ 个二维平面在 $\mathrm{iterate}(U, P)$ 下以完全相同的角速度 $2\theta$ 同步旋转（绝非把整个多列算子压进单一的二维希尔伯特空间）。
 3. **整数步数 $n \in \mathbb{N}$ 的离散过冲（overshoot）**：因为步数 $n$ 只能取自然数，转角 $(2n + 1)\theta$ 是离散跳变的。当 $p = 1/N \ll 1$ 时，$\theta = \arcsin(1/\sqrt{N}) \approx 1/\sqrt{N}$，令 $(2n + 1)\theta \approx \pi/2$ 给出著名的 $n \approx \frac{\pi}{4}\sqrt{N}$ 步复杂度；但除 $N = 4$（$p = 1/4, \theta = \pi/6, n = 1$）等极少数特殊有理角外，整数步 $n$ 只能逼近 $\pi/2$ 而无法对任意 $N$ 精确命中 $\sin((2n+1)\theta) = 1$（如何在已知 $p$ 时借辅助硬币旋转彻底消除这一过冲残差，将在[第十六章](ch16-qsvt-walks-and-compilation.md) [@cor-exact-source-query-count] 中严格解决）。
+
+::: {.figure src="ch15-overshoot"}
+**整数步只能逼近，碰不到 1。** $N = 8$ 时成功概率 $\sin^2((2n+1)\theta)$ 随步数 $n$ 的变化：细曲线在 $n \approx 1.67$ 处碰到 $1$，那里不是整数；青色的点是整数步，$n = 1$ 为 $25/32$；琥珀色的 $n = 2$ 最接近，停在 $121/128$，与虚线 $1$ 之间留着品红的 $7/128$；再走下去，点又掉了下来。数值由 [@thm-grover-uniform-rotation] 的公式算出。
+:::
 
 ## 相位反冲与 QFT 二进制齿轮 {#sec-qft-phase-gears}
 
@@ -168,6 +178,10 @@ $$
 - 当 $x \notin H$ 时，各频率分量 $\chi_k(x)$ 在复平面单位圆上均匀散开、两两抵消，合振幅精确归零（**相消干涉**）；
 - 当 $x \in H$ 时，所有频率分量全部指向正实轴 $+1$，合振幅同相叠加为 $|\mathrm{annihilator}(H)|$（**相长干涉**）。
 
+::: {.figure src="ch15-character-sum"}
+**不在 $H$ 里绕回原点，在 $H$ 里排成一线。** 在 $\mathrm{ZMod}\,16$ 中取 $H = H^\perp = \{0, 4, 8, 12\}$，把四个特征标值 $\chi_k(x)$ 画成首尾相接的青色单位箭头：左栏 $x = 1$，四支箭头 $1, i, -1, -i$ 围成正方形回到原点，和为 $0$；右栏 $x = 4$，四支箭头都是 $1$，排成长 $4 = |H^\perp|$ 的直线。见 [@prop-finite-character-cancellation]。
+:::
+
 **重要规范提醒**：[@prop-finite-character-cancellation] 右端在 $x \in H$ 时给出的是**未归一化**的子群基数 $|\mathrm{annihilator}(H)|$，绝不能把这股未归一化的代数和直接称作“概率 $1$”！在实际量子电路中，必须除以初态归一化因子 $\sqrt{|H|}$ 与幺正 QFT 的归一化因子 $\sqrt{m}$，才能把振幅转化为满足玻恩法则的单位概率分布。
 
 ## 有限周期采样与 Shor 阶重建 {#sec-shor-order-reconstruction}
@@ -212,6 +226,10 @@ $$
 
 1. **有限泊松恒等式不等于完整 Shor 算法的成功概率或多项式复杂度定理**：[@cor-finite-poisson-period] 是 $\mathrm{ZMod}\,m$ 上的精确调和分析恒等式，它本身并不包含模幂电路构造、连分数有理逼近恢复定理、欧拉函数互素概率下界或大数分解的多项式门复杂度（这些完整算法环节列于 [@rem-grover-qft-shor-literature]）。
 2. **整除情形（$r \mid Q$）与一般非整除情形（$r \nmid Q$）的本质区别**：唯有当待求周期 $r$ 恰好整除量子寄存器容量 $m = Q$ 时，周期采样点才构成 $\mathrm{ZMod}\,Q$ 的真子群 $H$，使非共振频点按 [@prop-finite-character-cancellation] **精确为零**；而在 Shor 算法的一般情形中，$r$ 是未知奇偶整数而 $Q = 2^q$ 是 $2$ 的幂（通常 $r \nmid Q$），此时非共振频点的振幅并不精确为零，而是呈狄利克雷（Dirichlet / Fejér）核尖峰分布集中在最接近 $\frac{s Q}{r}$ 的整数频点周围，必须借助连分数展开（continued fractions）从有理逼近中还原分母 $r$。
+:::
+
+::: {.figure src="ch15-leaky-peaks"}
+**周期不整除寄存器时，峰两旁会漏。** 数值结果：$Q = 16$、$r = 3$，周期态 $\{0, 3, 6, \dots, 15\}$ 做完 QFT 后的采样概率。虚线是理想位置 $0$、$16/3$、$32/3$，后两条落在整数之间；青色的高柱落在离它们最近的 $5$ 与 $11$，旁边的频率也都留着矮柱，不再像图 15 面板 III 那样精确为零。峰的集中与连分数恢复是 [@rem-shor-divisibility-boundary-literature] 的文献结果，未在本书形式化。
 :::
 
 下面，让我们通过一个四步完整手算算例，把 $N=4$ 与 $N=8$ 的 Grover 搜索、$3$ 比特 QFT 的二进制相位齿轮、$N=15$ 的 Shor 周期寻找以及 $\mathrm{ZMod}\,16$ 上的字符和与泊松公式逐一验算到底。

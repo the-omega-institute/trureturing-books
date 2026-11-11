@@ -9,7 +9,9 @@ When stripped of circuit notation, the two flagship families of quantum algorith
 - **Grover search composes two reflections into an invariant-plane rotation**: Inside an isotropic $l$-dimensional search space, the prepared state and the target projection span a common two-dimensional block plane; reflecting first across the target subspace ("one orthogonal step") and then across the prepared subspace ("two orthogonal steps") rotates the state vector by $2\theta$ straight toward the target!
 - **QFT and period finding harness character orthogonality across binary phase gears**: Conjugating Weyl shift and clock operators kicks back symplectic phases that wind binary equatorial gears; summing characters over the dual annihilator subgroup cancels every non-resonant frequency to zero while constructively reinforcing the hidden period!
 
-![Grover's two reflections composing into a rotation of a plane; the binary-fraction phase gears of the quantum Fourier transform; and the four equal peaks that cancelling frequencies leave when Q = 16 and r = 4](../assets/fig-15-grover-qft-shor.svg)
+::: {.figure src="ch15-overview"}
+**Figure 15.** The chapter at a glance. Panel I: for $N = 4$, one Grover step turns the arrow $U$ through the violet $2\theta = 60^\circ$, and the amber $QU$ lands exactly on the success direction $W$. Panel II: the three phase gears for $x = 5 = (101)_2$, with $2$, $4$ and $8$ teeth; their amber pointers sit at $\pi$, $\pi/2$ and $5\pi/4$. Panel III: after the QFT of the $Q = 16$, $r = 4$ period state, only $k = 0, 4, 8, 12$ keep a cyan bar, each of height $1/4$.
+:::
 
 ## Grover: The Common Invariant Plane of Two Reflections {#sec-grover-invariant-plane}
 
@@ -39,6 +41,10 @@ B &= \mathrm{failure}(U, P, p) = (\sqrt{1 - p})^{-1}\,(I_l - P) U, \\
 $$
 
 The following theorem establishes that for every $n \in \mathbb{N}$ — and under arbitrary Kronecker tensoring with any reference matrix $R$ — the $n$-step state remains locked inside the $\{W, B\}$ plane at angle $(2n + 1)\theta$.
+
+::: {.figure src="ch15-two-reflections"}
+**Two mirrors make one turn.** For $N = 8$ the ink arrow $U$ makes the angle $\theta$ with the failure direction $B$. The first mirror is the $B$ axis ($I - 2P$): it flips $U$ down to the grey dashed arrow. The second mirror is the line of $U$ ($2UU^* - I$): it flips that arrow back up to the amber $QU$. After both flips the arrow has turned through the violet $2\theta$; see [@thm-grover-uniform-rotation].
+:::
 
 ::: {.theorem #thm-grover-uniform-rotation title="Uniform Operator Rotation in Coherent Amplitude Amplification" lean="D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation"}
 Let $s, l$ be finite index types with decidable equality, and let $J \in M_{l \times s}(\mathbb{C})$, $C, P \in M_{l \times l}(\mathbb{C})$, and $p \in \mathbb{R}$ satisfy
@@ -94,6 +100,10 @@ Three boundaries in [@thm-grover-uniform-rotation] must be kept explicit (Figure
 1. **Retaining the $p = 1$ branch**: Because $B$ divides by $\sqrt{1 - p}$, the case $p = 1$ is handled by the explicit branch $U = W$, while for $0 < p < 1$ the $n = 0$ case recovers $U = \sin\theta\,W + \cos\theta\,B$.
 2. **Column-wise two-dimensional planes for general $s$**: When $|s| = 1$, $W$ and $B$ are two orthonormal vectors spanning a single $2$-dimensional plane. When $|s| > 1$, each source column $j \in s$ spans its own $2$-dimensional plane $\operatorname{span}\{W_{\cdot, j}, B_{\cdot, j}\}$ orthogonal to the planes of all other columns, and all $|s|$ planes rotate in lockstep by $2\theta$ (rather than confining the entire multi-column operator to a single $2$-dimensional Hilbert space).
 3. **Discrete integer-step overshoot**: Because $n \in \mathbb{N}$ is an integer, $(2n + 1)\theta$ steps discretely. For small $p = 1/N$, choosing $n \approx \frac{\pi}{4}\sqrt{N}$ brings $(2n + 1)\theta$ close to $\pi/2$, but except for special angles such as $p = 1/4$ ($\theta = \pi/6, n = 1$), standard integer-step Grover iteration cannot hit $\sin((2n + 1)\theta) = 1$ exactly for arbitrary $N$ (an exact coin-assisted remedy for known $p$ is proved in [Chapter 16](ch16-qsvt-walks-and-compilation.md), [@cor-exact-source-query-count]).
+
+::: {.figure src="ch15-overshoot"}
+**Whole steps come close but never touch 1.** The success probability $\sin^2((2n+1)\theta)$ for $N = 8$ against the step count $n$: the thin curve touches $1$ at $n \approx 1.67$, which is not a whole number. The cyan dots are whole steps, $25/32$ at $n = 1$; the amber $n = 2$ comes closest at $121/128$, leaving a magenta gap of $7/128$ below the dashed line at $1$; further steps fall back down. The values follow from the formula in [@thm-grover-uniform-rotation].
+:::
 
 ## Phase Kickback and the Binary Gears of the QFT {#sec-qft-phase-gears}
 
@@ -158,6 +168,10 @@ $$
 If $x \in H$, then $\mathrm{character}(k.1)(x) = 1$ for every $k \in \mathrm{annihilator}(H)$ by definition, so the sum of $1$ over $\mathrm{annihilator}(H)$ equals $(\mathrm{Fintype.card}(\mathrm{annihilator}(H)) : \mathbb{C})$. If $x \notin H$, Pontryagin duality for the finite cyclic group $\mathrm{ZMod}\,m$ provides $k_0 \in \mathrm{annihilator}(H)$ with $\mathrm{character}(k_0.1)(x) \neq 1$. Reindexing the finite sum by the translation bijection $k \mapsto k + k_0$ on $\mathrm{annihilator}(H)$ gives $\mathrm{character}(k_0.1)(x) \cdot S = S$, hence $(\mathrm{character}(k_0.1)(x) - 1)S = 0$ and $S = 0$. The full proof is checked by the Lean kernel.
 :::
 
+::: {.figure src="ch15-character-sum"}
+**Off $H$ the arrows close up; on $H$ they line up.** In $\mathrm{ZMod}\,16$ take $H = H^\perp = \{0, 4, 8, 12\}$ and draw the four character values $\chi_k(x)$ as cyan unit arrows placed head to tail. Left, $x = 1$: the arrows $1, i, -1, -i$ go round a square back to the origin, so the sum is $0$. Right, $x = 4$: all four arrows are $1$ and line up to length $4 = |H^\perp|$. See [@prop-finite-character-cancellation].
+:::
+
 Note the normalization boundary in [@prop-finite-character-cancellation]: for $x \in H$, the sum equals the **unnormalized** cardinality $|\mathrm{annihilator}(H)|$; one must divide by the state and QFT normalization factors ($\sqrt{|H|}$ and $\sqrt{m}$) before interpreting the result as a quantum amplitude or probability.
 
 ## Finite Period Sampling and Order Reconstruction in Shor’s Algorithm {#sec-shor-order-reconstruction}
@@ -196,6 +210,10 @@ Since negation $k \mapsto -k$ is a bijection on the subgroup $\mathrm{annihilato
 
 1. **Finite Poisson summation is not the full Shor factoring theorem**: [@cor-finite-poisson-period] is an algebraic identity on $\mathrm{ZMod}\,m$, not a formalization of Shor's full success probability, continued-fraction recovery theorem, or polynomial gate complexity (which are detailed in [@rem-grover-qft-shor-literature]).
 2. **Exact divisibility ($r \mid Q$) versus general non-divisibility ($r \nmid Q$)**: Non-resonant frequencies vanish identically only when the period $r$ divides the register size $m = Q$. When $r \nmid Q$, the Fourier transform exhibits a peaked Dirichlet/Fejér kernel around multiples of $Q/r$ rather than exact zeros, requiring continued-fraction rounding to extract $r$.
+:::
+
+::: {.figure src="ch15-leaky-peaks"}
+**When the period does not divide the register, the peaks leak.** A numerical result: the sampling probabilities after the QFT of the period state $\{0, 3, 6, \dots, 15\}$ for $Q = 16$, $r = 3$. The dashed lines mark the ideal positions $0$, $16/3$ and $32/3$; the last two fall between integers. The tall cyan bars sit at the nearest integers $5$ and $11$, and the neighbouring frequencies keep short bars instead of vanishing exactly as in Figure 15, Panel III. Peak concentration and continued-fraction recovery are the literature results of [@rem-shor-divisibility-boundary-literature], not formalized in this book.
 :::
 
 Let us now work through the four-part calculation covering Grover search at $N = 4$ and $N = 8$, the $3$-qubit QFT phase gears at $x = 5$, Shor order finding for $N = 15$, and the finite Poisson cross-check on $\mathrm{ZMod}\,16$.
