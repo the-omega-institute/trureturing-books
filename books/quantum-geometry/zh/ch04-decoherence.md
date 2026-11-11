@@ -6,9 +6,9 @@
 
 但在真实的超导芯片、离子阱与室温凝聚态实验室里，实验物理学家最常打交道的却不是球皮上的纯态，而是缩进了球体肚子里的**混合态**（mixed state）：布洛赫向量 $\vv{r}$ 的长度不再等于 $1$，而是变成了一根截短的线段 $\norm{\vv{r}} < 1$，甚至一步步萎缩成球心正中央那个毫无方向可言的死点 $\vv{r} = \vv{0}$。
 
-那截原本好端端的长度 $1 - \norm{\vv{r}}$ 究竟被谁偷走了？“退相干（decoherence）”真的是微观世界在某种神秘摩擦下发生了不可逆的本体毁灭吗？作为第一部“从点到线”的收官之章，我们将揭开混合态的几何机制：**任何局部量子信道与混合态收缩，均可经由等距或幺正扩张（Stinespring 扩张，详见 [@rem-stinespring-literature]）嵌入更高维的系统—环境联合演化之中——球肚子里变短的线段，可精确实现为一根斜刺进环境空间的单位长矛在三维局部子空间里投下的截短余弦影**。
+那截原本好端端的长度 $1 - \norm{\vv{r}}$ 究竟被谁偷走了？“退相干（decoherence）”真的是微观世界在某种神秘摩擦下发生了不可逆的本体毁灭吗？作为第一部“从点到线”的收官之章，我们将揭开混合态的几何机制：**局部量子信道可由更高维的系统—环境联合演化与环境偏迹实现**（Stinespring 扩张，详见 [@rem-stinespring-literature]）。不妨借斜刺的长矛和它截短的影子来想象局部布洛赫向量的缩短；实际求偏迹的是联合密度算子。
 
-## 4.1 纯态是球皮（$\|\vv{r}\| = 1$），混合态是球肚子里截短的线（$\|\vv{r}\| = \cos\theta_{\mathrm{env}} < 1$） {#sec-ch04-1}
+## 4.1 纯态是球皮（$\|\vv{r}\| = 1$），混合态是球肚子里截短的线（$\|\vv{r}\| < 1$） {#sec-ch04-1}
 
 让我们先做一次三行就能算清的费曼式手算实验。假设你的单量子比特原本稳稳指向布洛赫球正东赤道极 $+\vv{e}_1$，即纯叠加态 $\lvert +\rangle = \frac{1}{\sqrt{2}}(\lvert 0\rangle + \lvert 1\rangle)$，此时横向相干长度 $r_x = 1$，箭头顶端紧贴在球皮上。
 
@@ -24,7 +24,7 @@ $$
 \rho_{\mathrm{S}} = \frac{1}{2}\begin{pmatrix} \langle e_0\mid e_0\rangle & \langle e_1\mid e_0\rangle \\ \langle e_0\mid e_1\rangle & \langle e_1\mid e_1\rangle \end{pmatrix} = \frac{1}{2}\begin{pmatrix} 1 & \cos\theta_{\mathrm{env}} \\ \cos\theta_{\mathrm{env}} & 1 \end{pmatrix}!
 $$
 
-对照[第一章](ch01-measurement.md)的 [@prop-qubit-bloch-core]，这正是布洛赫向量 $\vv{r} = (\cos\theta_{\mathrm{env}},\, 0,\, 0)$！看清楚发生什么了吗？没有任何非幺正的神秘妖魔剪断过你的箭头：联合长矛 $\lvert\Psi_{\mathrm{SE}}\rangle$ 在高维空间里依然足斤足两长 $1$ 尺；只因为它往环境维度里斜翘起了 $\theta_{\mathrm{env}}$ 角，当你贴着局部系统这间低维暗室的地板往上看它的影子时，它的可视长度自然按余弦律截短成了 $\|\vv{r}\| = \cos\theta_{\mathrm{env}} < 1$！
+对照[第一章](ch01-measurement.md)的 [@prop-qubit-bloch-core]，这正是布洛赫向量 $\vv{r} = (\cos\theta_{\mathrm{env}},\, 0,\, 0)$！联合态依然是模长为 $1$ 的纯态。在这个等权叠加、环境记录内积为实且非负的例子里，局部布洛赫向量的长度是 $\|\vv{r}\| = \cos\theta_{\mathrm{env}}$；两条环境记录的夹角越大，“影子”就越短。这个角度是环境记录之间的夹角，偏迹并不是把联合态向量正交投影到某个三维局部子空间。
 
 ![球皮纯态与球内截短之线：环境纠缠偏迹压缩、三种典型量子噪声对布洛赫球的几何形变，以及球心最大混合死点](../assets/fig-04-bloch-decoherence.svg)
 
@@ -141,7 +141,7 @@ $$
 
 ## 4.2 不用背 Kraus 算符看懂三种量子噪声 {#sec-ch04-2}
 
-理解了“退相干就是联合长矛在局部三维球里的投影收缩”之后，传统量子信息教科书里令人生畏的一大串信道 Kraus 算符公式（$\mathcal{E}(\rho) = \sum_k E_k \rho E_k^*$），瞬间退去了神秘面纱。不用死记硬背任何抽象矩阵，每一种常见的单比特量子噪声，在几何上都不过是**把单位布洛赫球皮往不同方向挤压或平移成一颗椭球**！
+看清了环境偏迹如何在上例中缩短局部布洛赫向量之后，传统量子信息教科书里令人生畏的一大串信道 Kraus 算符公式（$\mathcal{E}(\rho) = \sum_k E_k \rho E_k^*$），瞬间退去了神秘面纱。不用死记硬背任何抽象矩阵，每一种常见的单比特量子噪声，在几何上都不过是**把单位布洛赫球皮往不同方向挤压或平移成一颗椭球**！
 
 首先看最纯粹的横向去相干极限——**标准基捏合投影** $\mathcal{P}(\rho)$（Lean 模块 `QuantumChannels/Pinching` 中定义为 [`pinching`](lean:D5/S3/QuantumChannels/Pinching.pinching)，保留对角元 $\rho_{00}, \rho_{11}$、抹零副对角元 $\rho_{01}, \rho_{10}$）。在矩阵希尔伯特—施密特内积（[`hilbertSchmidtInner`](lean:D5/S3/QuantumChannels/Pinching.hilbertSchmidtInner) $\langle A, B\rangle_{\mathrm{HS}} = \Tr(A^* B)$）下，捏合不是粗暴的涂改，而是一次精确的正交勾股投影：整颗布洛赫球被垂直压扁到南北极直径线段 $[-\vv{e}_3, +\vv{e}_3]$ 上，而被压掉的水平赤道质量恰好等于两个副对角相干元的模平方之和！
 
@@ -415,7 +415,7 @@ $$
 
 回望第一部走过的四章征程，我们用经 Lean 4 内核逐条核验的定理级结论及其锁定的形式化声明，完成了量子几何地基的第一轮重塑；各条对应关系列在本书的形式化验证账本中：
 
-- **第一章**拆穿了孤立单子与外部第 3 点 $C$ 的双重幻觉，证明单比特矩阵代数无特征标（[@thm-qubit-no-character]），并用幺正射线刚性（[@thm-ray-phase-rigidity]）与布洛赫展开（[@prop-qubit-bloch-core]）把四维复列向量还原为球面上的三维实单位线 $\vv{a} \in S^2$；
+- **第一章**拆穿了孤立单子与外部第 3 点 $C$ 的双重幻觉，证明单比特矩阵代数无特征标（[@thm-qubit-no-character]），并用幺正射线刚性（[@thm-ray-phase-rigidity]）与布洛赫展开（[@prop-qubit-bloch-core]）把双分量复列向量（四个实坐标）还原为球面上的三维实单位线 $\vv{a} \in S^2$；
 - **第二章**以已知态自身为基，把“点 $C$”还原为内生相融影子 $\vv{c} = (\vv{a}\cdot\vv{b})\vv{a}$，从迹配对与勾股模长守恒严格导出玻恩模平方定则（[@thm-born-modulus-square]、[@thm-rank-one-born-pairing]）及半角换算 $\cos^2(\theta/2) = \frac{1 + \cos\theta}{2}$；
 - **第三章**指出粒子、概念与经典时间刻度全都是幂等投影线 $P^2 = P$ 的不动点（[@thm-pinching-idempotent]、[@thm-unread-fixed-iff]、[@thm-conditional-state-valid]），用互补勾股定理（[@thm-complementary-pythagoras]）揭示了粒子轴与霍奇对偶波平面的伴生宿命，并给出 $d$ 维系统的记录容量上界 $N \le d$（[@prop-record-capacity]）与互补语境的熵不确定关系（[@prop-collision-entropy-uncertainty]）；
 - **第四章**追踪了视线移开后的偏迹边缘化（[@thm-nonselective-marginal]），证明局部不可逆只是环境访问缺陷（[@thm-reduced-access-defect]），给出了相位阻尼、振幅阻尼与捏合投影的完整几何收缩图像（[@thm-pinching-pythagorean]、[@prop-phase-damping-decay]、[@prop-amplitude-damping-contraction]、[@cor-pinching-zero-offdiag]），并以 Stinespring 扩张（[@thm-stinespring-dilation]）与迹距离在任意信道下的收缩（[@prop-trace-distance-metric-contraction]）为“信道只会让球缩小”提供了一般依据。

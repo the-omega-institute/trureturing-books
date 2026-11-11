@@ -6,9 +6,9 @@ Throughout our first three chapters, the single-qubit arrow $\vv{a}$ stood proud
 
 Walk into an actual superconducting-qubit lab, ion-trap chamber, or NMR spectrometer, however, and pure shell states are the exception rather than the rule. Real experimental states live inside the **interior** of the Bloch ball as **mixed states**: their Bloch vector $\vv{r}$ shrinks into a truncated chord $\norm{\vv{r}} < 1$, often collapsing all the way to the featureless dead center $\vv{r} = \vv{0}$.
 
-Who stole the missing length $1 - \norm{\vv{r}}$? Does "decoherence" mean that nature suffers an irreversible ontological decay? Closing Part I, this chapter explains the geometric mechanism of mixed states: **any local quantum channel or mixed-state contraction can be embedded via an isometric or unitary dilation (Stinespring dilation; see [@rem-stinespring-literature]) into a higher-dimensional system–environment evolution — a shortened chord inside the Bloch ball is realized as the foreshortened cosine shadow cast onto a three-dimensional local slice by a unit spear tilted into an auxiliary environment space**.
+Who stole the missing length $1 - \norm{\vv{r}}$? Does "decoherence" mean that nature suffers an irreversible ontological decay? Closing Part I, this chapter explains the geometric mechanism of mixed states: **a local quantum channel can be realized by joint system–environment evolution in a larger space followed by a partial trace over the environment** (Stinespring dilation; see [@rem-stinespring-literature]). Picture a tilted spear casting a shorter shadow to get a feel for the shortening of the local Bloch vector; the partial trace itself acts on the joint density operator.
 
-## 4.1 Pure States Are the Spherical Shell ($\|\vv{r}\| = 1$), Mixed States Are Truncated Chords Inside ($\|\vv{r}\| = \cos\theta_{\mathrm{env}} < 1$) {#sec-ch04-1}
+## 4.1 Pure States Are the Spherical Shell ($\|\vv{r}\| = 1$), Mixed States Are Truncated Chords Inside ($\|\vv{r}\| < 1$) {#sec-ch04-1}
 
 Start with a three-line Feynman calculation. Prepare a qubit pointing due east on the Bloch equator ($\vv{r} = +\vv{e}_1$), the pure superposition $\lvert +\rangle = \frac{1}{\sqrt{2}}(\lvert 0\rangle + \lvert 1\rangle)$ of unit transverse coherence $r_x = 1$.
 
@@ -24,7 +24,7 @@ $$
 \rho_{\mathrm{S}} = \frac{1}{2}\begin{pmatrix} \langle e_0\mid e_0\rangle & \langle e_1\mid e_0\rangle \\ \langle e_0\mid e_1\rangle & \langle e_1\mid e_1\rangle \end{pmatrix} = \frac{1}{2}\begin{pmatrix} 1 & \cos\theta_{\mathrm{env}} \\ \cos\theta_{\mathrm{env}} & 1 \end{pmatrix}!
 $$
 
-Compare this with [@prop-qubit-bloch-core] from [Chapter 1](ch01-measurement.md): its Bloch vector is $\vv{r} = (\cos\theta_{\mathrm{env}},\, 0,\, 0)$! Nothing non-unitary clipped your arrow. The joint spear $\lvert\Psi_{\mathrm{SE}}\rangle$ still has full length $1$ in the higher-dimensional joint space; because it tilted upward by $\theta_{\mathrm{env}}$ into the environment register, viewing its shadow flat on the floor of the single-qubit subspace foreshortens its apparent length to $\|\vv{r}\| = \cos\theta_{\mathrm{env}} < 1$!
+Compare this with [@prop-qubit-bloch-core] from [Chapter 1](ch01-measurement.md): its Bloch vector is $\vv{r} = (\cos\theta_{\mathrm{env}},\, 0,\, 0)$! The joint state remains a pure vector of unit norm. In this equal-weight example with real, nonnegative overlap between the environment records, the local Bloch vector has length $\|\vv{r}\| = \cos\theta_{\mathrm{env}}$: the greater the angle between those two records, the shorter the "shadow." The partial trace is not an orthogonal projection of the joint ket onto a three-dimensional local subspace.
 
 ![Pure spherical shell versus truncated interior chords: environmental partial-trace foreshortening, geometric deformations under quantum noise channels, and the maximally mixed dead center](../assets/fig-04-bloch-decoherence.svg)
 
@@ -141,7 +141,7 @@ Look at the four corners on the right: the coherence sign $\pm\frac{1}{2}$ was n
 
 ## 4.2 Understanding Quantum Noise Geometrically Without Memorizing Kraus Operators {#sec-ch04-2}
 
-Once decoherence is understood as projection foreshortening of the Bloch ball, the intimidating zoo of Kraus operator sums ($\mathcal{E}(\rho) = \sum_k E_k \rho E_k^*$) in quantum-information textbooks turns completely transparent. Without memorizing a single Kraus matrix, every standard single-qubit noise channel is simply an **affine compression and shift of the unit sphere into an interior ellipsoid**!
+Once we see how the partial trace shortens the local Bloch vector in this example, the intimidating zoo of Kraus operator sums ($\mathcal{E}(\rho) = \sum_k E_k \rho E_k^*$) in quantum-information textbooks turns completely transparent. Without memorizing a single Kraus matrix, every standard single-qubit noise channel is simply an **affine compression and shift of the unit sphere into an interior ellipsoid**!
 
 Start with complete transverse dephasing — **standard-basis pinching** $\mathcal{P}(\rho)$ ([`pinching`](lean:D5/S3/QuantumChannels/Pinching.pinching) in Lean, preserving diagonal entries $\rho_{00}, \rho_{11}$ and zeroing off-diagonal entries $\rho_{01}, \rho_{10}$). Under the Hilbert–Schmidt inner product ([`hilbertSchmidtInner`](lean:D5/S3/QuantumChannels/Pinching.hilbertSchmidtInner) $\langle A, B\rangle_{\mathrm{HS}} = \Tr(A^* B)$), pinching is an exact orthogonal projection flattening the Bloch sphere onto its vertical diameter $[-\vv{e}_3, +\vv{e}_3]$, and the discarded equatorial mass equals the sum of squared moduli of the two off-diagonal entries!
 
