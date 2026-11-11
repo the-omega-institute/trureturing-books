@@ -412,7 +412,7 @@ This monograph consists of the **[Prelude](README.md)**, **Eight Parts (30 Chapt
             ┌─────────────────────────────────────────────────────────────────┐
             │ Part VIII: Timeless Causality, ETH & Fluids (Ch 29–30) → Coda   │
             │  • Polyhedral defect & Hairy Ball lit. • Pythagorean 4-tier arc │
-            │  • Concept Dictionary (A) • Clifford Sheet (B) • 432 Index (C)  │
+            │  • Concept Dictionary (A) • Clifford Sheet (B) • 441 Index (C)  │
             └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -427,7 +427,7 @@ Readers can navigate the book along four self-contained tracks tailored to their
 3. **Mathematical Logic, Number Theory, and Epistemology Track**:
    [Prelude](README.md) $\to$ Chapter 10 (Gram matrices and order independence) $\to$ Chapters 19–20 (discrete polyhedral facet cones and open-conjecture boundaries) $\to$ Chapters 21–24 (diagonal escape, Euler products, quaternion Diophantine norms, and cosine self-reference) $\to$ [Chapter 29](ch29-timeless-causality-and-gram-space.md)–[Chapter 30](ch30-fields-lines-eth-and-navier-stokes.md) (the four-tier Pythagorean escape of number, timeless causality, the ETH horizon, and fluid vortex filaments) $\to$ Coda (golden cut-and-project spatial attractors and [@thm-coda-fixed-point-anchor]).
 4. **Lean 4 Formal Verification and Kernel Audit Track**:
-   [Prelude](README.md) §Epistemic Contract $\to$ Chapters 25–28 (Part VII: line-by-line formal tour of `Cl3`, `PauliSymplectic`, `ZYZ`, and `FiniteRecordCosineObstruction`) $\to$ [Appendix B](appendix-b.md) $\to$ [Appendix C](appendix-c.md) (auditing all $220$ environment/media frozen theorems, $89$ auxiliary definitions, and $123$ inline declarations — $432$ unique locked declarations in total — at `trureturing@dev` commit `1d9bf98cab83`).
+   [Prelude](README.md) §Epistemic Contract $\to$ Chapters 25–28 (Part VII: line-by-line formal tour of `Cl3`, `PauliSymplectic`, `ZYZ`, and `FiniteRecordCosineObstruction`) $\to$ [Appendix B](appendix-b.md) $\to$ [Appendix C](appendix-c.md) (auditing all $227$ environment/media frozen theorems, $95$ environment/media definitions and algebraic carriers, and $119$ inline-only declarations — $441$ unique locked declarations in total — at `trureturing@dev` commit `6cfcf785096782b15084d719ec73c2ca16b6ed29`).
 
 ### Quick Register of the 36 Core Chapter Theorem Anchors in Parts VI–VIII (Chapters 21–30) {#sec-coda-part6-part7-register}
 
@@ -473,4 +473,4 @@ As a bridge between the closing three parts of the monograph and the complete le
 | **Chapter 30** | T30.2 | `D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure` | Impossibility of exact projection closure for 5-mode Leray-projected advection at every viscosity $\nu \in \mathbb{R}$ |
 | **Chapter 30** | T30.3 | `D5/S3/Combinatorics/Graph/Walks/GallaiRoy.colorable_iff_exists_orientation` | Gallai–Hasse–Roy–Vitaver: a finite simple graph is $k$-colorable iff some orientation has no directed path with more than $k$ vertices |
 
-Outside all spheres lies not emptiness, but **the unending act of measurement and counting itself**. Turn next to [Appendix A](appendix-a.md) for the complete dictionary translating conventional quantum mechanics into geometric language, [Appendix B](appendix-b.md) for the Clifford algebra and rotor cheat sheet, and [Appendix C](appendix-c.md) for the complete index of all $309$ formal environment and media `trureturing@dev` declarations ($432$ unique locked declarations including inline references).
+Outside all spheres lies not emptiness, but **the unending act of measurement and counting itself**. Turn next to [Appendix A](appendix-a.md) for the complete dictionary translating conventional quantum mechanics into geometric language, [Appendix B](appendix-b.md) for the Clifford algebra and rotor cheat sheet, and [Appendix C](appendix-c.md) for the complete index of all $322$ formal environment and media `trureturing@dev` declarations ($227$ theorems and $95$ definitions/carriers, plus $119$ inline-only declarations, making $441$ unique locked declarations).
