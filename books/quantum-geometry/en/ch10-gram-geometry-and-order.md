@@ -33,6 +33,10 @@ Take the Bloch sphere in Panel I of Figure 10 and apply active right-hand rotati
   R_y(\pi/2)\,R_x(\pi/2)\,\vv{e}_3 = -\vv{e}_2 \neq \vv{e}_1!
   $$
 
+::: {.viz src="berry-loop" preset="order" height="500"}
+**The same two turns in the other order end somewhere else.** From the North Pole, the amber point turned about $Y$ and then $X$ ends at $+X$; the one turned about $X$ and then $Y$ ends at $-Y$, $90^\circ$ away. In the second step neither point moves, yet the amber arrow attached to each turns by $90^\circ$.
+:::
+
 Likewise, the north projector $P_0 = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$ and east projector $P_+ = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$ do not commute:
 
 $$
@@ -57,6 +61,10 @@ $$
 is invariant under independent vertex phase rephasings $\psi_k \mapsto e^{i\alpha_k}\psi_k$, and its complex phase encodes the solid angle directly via $\gamma_B \equiv -\arg\Delta = -\frac{\Omega}{2} \pmod{2\pi}$ (see [@rem-gram-hairy-ball-literature] at the end of the chapter for full differential-topological details).
 :::
 
+::: {.viz src="berry-loop" preset="octant" height="500"}
+**An eighth of the sphere.** The cyan loop $N \to +X \to +Y \to N$ encloses a magenta area $\Omega = \frac{\pi}{2}$. Carried once round, the amber arrow comes back to $N$ turned by $\frac{\pi}{2}$ from the dashed direction it set out in; the cyan needle at the lower right is the phase $\frac{\pi}{4}$ of the product of neighbouring inner products, $\Delta = \frac{1+i}{4}$ — exactly half the area. The general link between turn, phase and area is the literature result above, not formalized in this book.
+:::
+
 To compute complex overlaps along any latitude circle cleanly, the Lean module `BargmannImaginaryMaximizers` defines, for $t \in \mathbb{R}$ and $z \in \mathbb{C}$, the two-component complex vector
 
 $$
@@ -77,6 +85,10 @@ Expanding the dot product over `Fin 2`, the first component contributes $\overli
 :::
 
 Note the exact contract of [@cor-latitude-complex-overlap]: it holds for all complex $z, w \in \mathbb{C}$ without assuming $|z| = |w| = 1$ (unit normalization of `latitude t z` requires $|z| = 1$ unless $t = 0$), and it computes inner-product overlaps rather than Berry holonomy itself. On the equator $t = \frac{1}{2}$ with $z = 1$ ($+X$) and $w = i$ ($+Y$), [@cor-latitude-complex-overlap] immediately evaluates the overlap $\langle\psi_1, \psi_2\rangle = \frac{1 + i}{2} = \frac{1}{\sqrt{2}}e^{i\pi/4}$, exhibiting the angle $\frac{\pi}{4}$ directly inside the pairwise Gram entry.
+
+::: {.viz src="berry-loop" preset="equator" height="500"}
+**Once round the equator.** The four corners $+X, +Y, -X, -Y$ all lie on the latitude $t = \frac{1}{2}$, so by [@cor-latitude-complex-overlap] each neighbouring inner product is $\frac{1+i}{2}$; their product is $-\frac{1}{4}$ and the cyan needle at the lower right stops at $\pi$. The magenta area is the whole northern hemisphere, $2\pi$. The amber arrow returns to $+X$ on top of the dashed one, as if it had not turned; the full magenta disc beside it shows that it has in fact turned a whole circle.
+:::
 
 ## Keeping Instruments and Time Order {#sec-instruments-preserve-order}
 
@@ -143,6 +155,10 @@ Panel II of Figure 10 contrasts the two distinct topological obstructions on the
    $$
 
    Remember two essential distinctions: the homomorphism $\mathrm{SU}(2) \to \mathrm{SO}(3)$ is a $2:1$ double cover rather than an isomorphism, and global parallelizability of the total space $S^3$ trivializes $TS^3$ without providing a global section over the base sphere $S^2$.
+:::
+
+::: {.viz src="berry-loop" preset="comb" height="500"}
+**The point that cannot be combed.** The small cyan arrows are $v(p) = \vv{e}_3 - (p\cdot\vv{e}_3)p$, the shadow of the vertical on each tangent plane. The amber point walks north from $+X$ along a meridian; its arrow, of length $\sin\theta$, shrinks and vanishes at the North Pole. The two poles circled in violet are the only zeros of this field, each of index $+1$ (a literature result, not formalized in this book).
 :::
 
 > Singularities arise when we try to flatten the phase fiber onto $S^2$; on the rotor sphere $S^3$, the global frame never vanishes.
@@ -236,6 +252,14 @@ Notice that [@lemma-unit-gram-equality] requires overlap equal to $1$, not modul
 3. **Noncommuting rotations and projectors**: Active right-hand rotations obey $R_x(\pi/2)R_y(\pi/2)\vv{e}_3 = \vv{e}_1$ whereas $R_y(\pi/2)R_x(\pi/2)\vv{e}_3 = -\vv{e}_2$. Likewise $P_0 P_+ \neq P_+ P_0$ for $P_0 = \operatorname{diag}(1, 0)$ and $P_+ = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$.
 4. **Sequential instrument counterexample**: For $K_0 = P_0$, $K_1 = I - P_0$, and $L_j = X K_j$, both instruments share identical static effects $K_j^* K_j = L_j^* L_j = P_j$. Starting at $\rho = P_0$, conditioning on first outcome $0$, and reading second effect $P_1$, the unnormalized joint Born weights are $0$ for $K$ and $1$ for $L$.
 5. **Hairy-ball zeros and global rotor frame**: On $S^2$, $v(p) = \vv{e}_3 - (p\cdot\vv{e}_3)p$ is tangent, equals $\vv{e}_3$ at $p = \vv{e}_1$, and vanishes only at $p = \pm\vv{e}_3$, where both isolated zeros have index $+1$, totaling $2 = \chi(S^2)$. On the unit quaternion/rotor sphere $S^3$, $(pI_x, pI_y, pI_z)$ forms a global nowhere-vanishing tangent frame.
+:::
+
+::: {.viz src="berry-loop" preset="reverse" height="500"}
+**Walked the other way, the handedness flips.** The same triangle taken as $N \to +Y \to +X \to N$: the magenta area is just as large, but the amber arrow turns $\frac{\pi}{2}$ the other way and the cyan needle at the lower right stops at $-\frac{\pi}{4}$. The three neighbouring squared moduli are still all $\frac{1}{2}$: squared moduli alone cannot tell the two walks apart.
+:::
+
+::: {.viz src="berry-loop" height="560"}
+The full lab: drag the cyan corners, add a corner on an edge or reverse the loop, and compare the magenta area, the turn of the amber arrow and the phase on the cyan needle at the lower right; the “Order” and “Comb” scenes are one click away.
 :::
 
 ### The Ultimate Truth of Order-Independence: Why Sequential Time Does Not Exist at the Base Layer, Yet Causality Is Gram Geometric Rigidity {#sec-timeless-gram-causality}

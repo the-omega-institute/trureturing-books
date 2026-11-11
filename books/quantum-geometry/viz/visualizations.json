@@ -738,6 +738,58 @@
           "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass"
         }
       ]
+    },
+    {
+      "id": "berry-loop",
+      "code": "BERRY//LOOP",
+      "title": "球面回路与贝里相位",
+      "title_en": "Loops on the sphere and the Berry phase",
+      "summary": "布洛赫球面上一条由大圆弧连成、顶点可拖动的闭合回路。琥珀色的箭头沿回路平行移动，与沿“起点 → 内点 → 当前点”搬来的虚线参照相比，随时多转出品红扇形已扫过的面积；走回起点时，它转过的角正好是回路圈住的立体角 Ω。相邻顶点复内积的连乘积 Δ 的相位只记下一半：八分之一球 N → +X → +Y 的 Ω = π/2、arg Δ = π/4；赤道一圈 Ω = 2π，箭头看似没转、实则转满一周，四个相邻内积都是 (1 + i)/2，相位为 π；反着走，角与相位都变号而模平方一个不变。另有两种转序的对照（先 Y 后 X 停在 +X，先 X 后 Y 停在 −Y）与只在两极为零的箭头场。五张实验卡可以在第十章正文里单独引用。",
+      "summary_en": "A closed loop of great-circle arcs with draggable corners on the Bloch sphere. The amber arrow is carried along it; compared with the dashed reference carried along start → inside point → current point, it gets ahead by exactly the magenta area the fan has swept, and back at the start it has turned by the solid angle Ω the loop encloses. The product Δ of the complex inner products of neighbouring corners keeps half of that in its phase: the octant N → +X → +Y has Ω = π/2 and arg Δ = π/4; once round the equator Ω = 2π, the arrow seems not to have turned yet has turned a full circle, all four neighbouring inner products are (1 + i)/2 and the phase is π; walked backwards, the angle and the phase flip sign while not one squared modulus changes. Two rotation orders (Y then X ends at +X, X then Y at −Y) and a tangent field that vanishes only at the poles complete the page. Each of the five experiment cards can be cited on its own from Chapter 10.",
+      "path": "berry-loop/",
+      "thumbnail": "berry-loop/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "贝里相位",
+        "巴格曼不变量",
+        "平行移动",
+        "毛球定理",
+        "布洛赫球",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Berry phase",
+        "Bargmann invariant",
+        "Parallel transport",
+        "Hairy ball theorem",
+        "Bloch sphere",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第十章 · 球面转序与贝里立体角",
+          "label_en": "Chapter 10 · Rotation order and the Berry solid angle",
+          "href": "../zh/ch10-gram-geometry-and-order.html#sec-spherical-order-and-berry",
+          "href_en": "../en/ch10-gram-geometry-and-order.html#sec-spherical-order-and-berry"
+        },
+        {
+          "label": "第十章 · 毛球、霍普纤维与旋转器球",
+          "label_en": "Chapter 10 · Hairy ball, Hopf fibres and the rotor sphere",
+          "href": "../zh/ch10-gram-geometry-and-order.html#sec-hairy-ball-hopf-rotors",
+          "href_en": "../en/ch10-gram-geometry-and-order.html#sec-hairy-ball-hopf-rotors"
+        },
+        {
+          "label": "trureturing · BargmannImaginaryMaximizers.lean",
+          "label_en": "trureturing · BargmannImaginaryMaximizers.lean",
+          "href": "{trureturing}/D5/S3/Quantum/Information/BargmannImaginaryMaximizers.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Information/BargmannImaginaryMaximizers.Latitude.latitude_dot"
+        }
+      ]
     }
   ]
 }
