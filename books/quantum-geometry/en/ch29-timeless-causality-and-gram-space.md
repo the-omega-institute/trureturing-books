@@ -595,6 +595,10 @@ This single equation exhibits two inseparable faces:
 **At the edge: all three coplanar.** Turn $\mathbf{C}$ to its nearest position to $\mathbf{A}$: the three vectors fall into one plane, the violet volume collapses to zero, and the amber $c_{AC}$ is exactly $\cos(60^\circ - 45^\circ)$, the minus-sign branch of the locus above.
 :::
 
+::: {.film src="008-gram-window"}
+**Two cosines lock the third: the Gram window (1:39).** With $\theta_1 = 60^\circ$ and $\theta_2 = 45^\circ$ fixed, $\mathbf{C}$ goes once round $\mathbf{B}$: $c_{AC}$ swings through $[\cos 105^\circ, \cos 15^\circ]$, the violet volume collapses to zero at the edges, and a cosine outside the window would make $\det G$ negative. Then $\theta_2$ runs from $0^\circ$ to $180^\circ$ and the windows fill the slice of the Gram ellipse. Where the top edge reaches $1$, $\mathbf{C}$ lands exactly on $\mathbf{A}$, which is the second part of [@thm-ch29-gram-rigidity-and-pell]; every other number in the film is computed on screen.
+:::
+
 ### Level 3: Feynman Stationary-Phase Cancellation, the Bivector Chirality Model ($+\mathbf{\Omega} - \mathbf{\Omega} = 0$), and the Reconciliation of Determinism and Teleology in $\psi = \psi(\psi)$ {#sec-coda-stationary-phase-reconciliation}
 
 From the standpoint of path integrals and the bivector chirality model, why does nature display only the causally necessary trajectory?
