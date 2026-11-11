@@ -4,6 +4,10 @@
 
 从序曲推开第一扇门起，我们便沿着一条不断升维的几何阶梯向上攀登：把孤立的**点**还原为成对比较的**线**（内积投影 $\mathbf{u}\cdot\mathbf{v}$），把静态的**线**展开为带定向手性的**面**（外积双向量 $\mathbf{u}\wedge\mathbf{v}$），把局部的**面**合拢为包裹相位的**球**（布洛赫球面 $S^2$ 与旋量覆盖流形 $S^3$）。然而，当我们穿过洛伦兹光锥、张量网络极小割、素数欧拉乘积、四元数范数锁与余弦自指不动点，回望整座八部曲大厦时，一个更深层的几何真相浮出水面：**在任何固定形式系统内部，我们以为已经彻底合拢的“球”，其实永远只是一座由有限分片拼接而成的凸多面体近似；而在每一道接缝与每一个不动点处，都有一个不可抹平的余项，正指向包裹它的“更大的球”。**
 
+::: {.figure src="coda-overview"}
+**本章地图：近似之球、空间吸引子与黄金切投。** 第 I 栏，正二十面体内接在球里，十二个品红的顶点各缺 $60^\circ$，合计 $12 \times 60^\circ = 720^\circ$（文献结果，见 [@rem-coda-polyhedral-topology-literature]）；第 II 栏，青色与品红两条洛伦兹轨道从相距很远的两个圆圈出发，落到同一对翅膀上（数值积分，示意；把轨道读作“一轮”是诠释模型）；第 III 栏，琥珀色的窗口 $[\varphi - 2, \varphi - 1]$ 从黄金格点里选出青色的点，投到下面的直线上成为一串点列（[@thm-coda-golden-cut-observer-cassini]）。
+:::
+
 ---
 
 ## 多面体近似与不可抹平的几何余项 {#sec-coda-polyhedral-remainder}
@@ -28,6 +32,10 @@
    $$
 
    对应实数 $\mathbb{R}$、复数 $\mathbb{C}$、四元数 $\mathbb{H}$ 与八元数 $\mathbb{O}$ 四大赋范可除代数。二维布洛赫球面 $S^2$ 上梳不平的贝里相位奇点，在几何模型上正是平行化三维球面 $S^3 \cong \mathrm{SU}(2)$ 经霍普夫纤维化 $S^1 \hookrightarrow S^3 \to S^2$ 投下的底空间影子。
+:::
+
+::: {.figure src="coda-defect-spread"}
+**剖分得再细，角亏的总和仍是 $720^\circ$。** 三行依次是正二十面体（$\nu = 1$），以及把每个面切成 $\nu^2$ 个三角形、再把顶点推到球面上的测地穹顶（$\nu = 2, 4$）。每条品红横条按顶点切段，每段的长度是那个顶点的角亏。顶点从 $12$ 个增到 $42$、$162$ 个，最大的角亏从 $60^\circ$ 缩到约 $18^\circ$、$5^\circ$，三条横条却一样长。文献结果，未在本书形式化（[@rem-coda-polyhedral-topology-literature] 第 1 条）。
 :::
 
 对照 [@rem-coda-polyhedral-topology-literature] 揭示的拓扑余项，在进入第八部的跨领域合拢之前，“有限多面体逼近光滑球面所留下的非零接缝”已经在前七部中以五种精确的数学形态反复重现：
@@ -169,6 +177,10 @@
    - 对任意**非负实数** $x \in \mathbb{R}_{\ge 0}$（`NNReal`），由全尺度黄金幂自然数下取整 $\operatorname{goldenQuantization}(N, x) = \lfloor \varphi^N x\rfloor_+$ 的典范齐肯多夫编码构成的线程映射 $\operatorname{zeckendorfRealThread} : \mathbb{R}_{\ge 0} \to (\mathbb{N} \to \mathrm{WDigitString})$ 严格单射（[`zeckendorf_real_thread_injective`](lean:D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective)）；
    - 同时，对任意正整数第一坐标 $a \ge 1$，Beatty 第一坐标原像纤维 $\operatorname{goldenFiber}(a) = \{v \in \mathbb{N} \mid \operatorname{fiberA}(v) = a\}$ 的基数严格属于 $\{4, 5\}$（[`golden_fiber_capacity_pair`](lean:D5/S1/Deficit/Beatty/FiberCapacityPair.golden_fiber_capacity_pair)），而对任意非负整数第二坐标 $b \ge 0$，对偶第二坐标原像纤维 $\operatorname{goldenDualFiber}(b) = \{v \in \mathbb{N} \mid \operatorname{fiberB}(v) = b\}$ 的基数严格属于 $\{2, 3\}$（[`golden_dual_fiber_capacity_pair`](lean:D5/S1/Deficit/Beatty/FiberCapacityPair.golden_dual_fiber_capacity_pair)）。
    在本书的认识论诠释模型（`MODEL`）中，我们将“有理斜率扫描 $\to$ 坐标原像纤维分割 $\to$ 消除相邻 `11` 的齐肯多夫规范化”诠释为有限观察者体验到的主观时间步进。
+
+::: {.figure src="coda-no-eleven"}
+**齐肯多夫自动机只收没有相邻 `11` 的字。** 十六个四位二进制字里，青色的八个没有两个相邻的 $1$，被接受；品红的八个各含一对相邻的 $11$（框出的是第一对），被拒绝。接受条件就是 [@thm-coda-golden-cut-observer-cassini] 第 3 条里的 $\operatorname{NoAdjacentOnes}(w)$。
+:::
 
 ::: {.viz src="golden-cut-observer" preset="cut" height="500"}
 **一条窗口切出一串点。** 黄金整数 $a + b\varphi$ 画成格点：横坐标是它本身，纵坐标是共轭 $a + b\psi$。琥珀色的窗口 $[\varphi - 2, \varphi - 1]$ 选出青色的点，投到下面的直线上，相邻两点只相距 $\varphi$ 或 $\varphi^2$；闭窗口的两个端点上各有一个格点（品红），所以原点左边多出一段长为 $1$ 的间隔。绿圈是自然数的黄金展开 $\beta(n)$，Lean 已验证它们都在这个窗口里。
@@ -322,6 +334,10 @@ $$
 由于对任意 $n \in \mathbb{N}$ 有 $S(n+1) = U(S(n)) \subseteq S(n)$，序列 $S$ 在有限全集 $X$ 上构成一条单调递减的有限子集链。每一次发生严格改变 $S(n+1) \neq S(n)$ 时，有限基数 $(S(n)).\operatorname{ncard}$ 至少严格减少 $1$。因为初始基数 $(S(0)).\operatorname{ncard}$ 是有限自然数，严格递减至多发生 $(S(0)).\operatorname{ncard}$ 次；由抽屉原理，在前 $(S(0)).\operatorname{ncard}$ 步之内必存在一步 $N \le (S(0)).\operatorname{ncard}$ 满足 $S(N+1) = U(S(N)) = S(N)$，此后由归纳法对一切 $n \ge N$ 恒有 $S(n) = S(N)$。完整证明由 Lean 内核检查。
 :::
 
+::: {.figure src="coda-shrink-stop"}
+**每改一次至少少一个元素，所以至多改 $\lvert S(0)\rvert$ 次，然后停下。** 一个例子：$S(0)$ 有 $7$ 个青色的点，每一步被更新去掉的点画成品红的叉，各行的元素个数依次是 $7, 5, 3, 2, 2, 2$，从 $S(3)$ 起不再变。一共改了 $3$ 次，$N = 3 \le \lvert S(0)\rvert = 7$，两条上界都与 [@thm-coda-fixed-point-anchor] 一致。
+:::
+
 ::: {.remark #rem-coda-epistemic-discipline title="终章的形式边界与认识论纪律（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 为确保全书每一条数学声明的证明地位透明可查，我们将终章涉及的四类命题严格区分如下：
 
@@ -427,6 +443,10 @@ $$
             │  • 概念对照词典 (A) • 克利福德速查表 (B) • 435 项锁定声明索引 (C)│
             └─────────────────────────────────────────────────────────────────┘
 ```
+
+::: {.figure src="coda-dependency-tree"}
+**哪一章依赖哪一章。** 三十个点自上而下是第 1 至第 30 章，左边按八部分段；指向每一章的弧形箭头，来自它在正文里回头引用（章节链接或“第 N 章”）次数最多的那一章，引用越多箭头越粗。第 1 章发出六支箭头，第 3 章发出四支，第 21 章的两支粗箭头指向第 22、24 章；第 11 章没有回头引用前面的章，是空心点。
+:::
 
 ### 四条推荐阅读路径 {#sec-coda-reading-tracks}
 
