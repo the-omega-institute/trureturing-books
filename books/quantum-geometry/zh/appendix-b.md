@@ -179,7 +179,7 @@ $$
 ## B.6 核心恒等式与形式化状态总览表 {#sec-appendix-b-identity-catalog}
 
 ::: {.remark #rem-appendix-b-epistemic-boundary title="克利福德速查手册的形式化边界声明"}
-文献结果，未在本书形式化：本速查手册中凡标注 `LEAN ✓` 并附有具体 GID 链接的恒等式（下表 B.1–B.10），均直接对应 `trureturing@dev` 提交 `a660b9333c0f8d25aaa22af1bbbfab43c2f94a46` 下经由 Lean 4 内核验证并冻结的定理（详见 [附录 C](appendix-c.md)）。而一般维数克利福德代数 $\mathcal{Cl}_{p,q}(\mathbb{R})$ 的通用分级公理、3 比特掩码 $8\times 8$ 展开表的显式枚举以及四维时空代数 $\mathcal{Cl}_{1,3}(\mathbb{R})$ 的连续李代数括号（下表 B.11，标注为 `definition` 或 `文献结果`）则作为服务读者计算演练的经典代数参考工具呈现：
+文献结果，未在本书形式化：本速查手册中凡标注 `LEAN ✓` 并附有具体 GID 链接的恒等式（下表 B.1–B.10），均直接对应 `trureturing@dev` 提交 `1d9bf98cab8306e67ec38a739359f2cdae63877a` 下经由 Lean 4 内核验证并冻结的定理（详见 [附录 C](appendix-c.md)）。而一般维数克利福德代数 $\mathcal{Cl}_{p,q}(\mathbb{R})$ 的通用分级公理、3 比特掩码 $8\times 8$ 展开表的显式枚举以及四维时空代数 $\mathcal{Cl}_{1,3}(\mathbb{R})$ 的连续李代数括号（下表 B.11，标注为 `definition` 或 `文献结果`）则作为服务读者计算演练的经典代数参考工具呈现：
 
 | 序号 | 代数体系 | 恒等式 / 定律名称 | 精确公式 | 认识论标签与 `trureturing@dev` 锚点 |
 | :---: | :---: | :--- | :--- | :--- |

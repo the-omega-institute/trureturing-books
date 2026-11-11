@@ -179,7 +179,7 @@ $$
 [@ex-ch30-galactic-crossover-scale] 中跨越宇宙尺度的数值与规约对比，为本书“球内有限观察者 vs. 球外之球”的认识论图景（`MODEL`）提供了三点深刻启示：
 
 - **银河算法与有限观察者的物理尺度边界（`MODEL`）**：如 [@ex-ch30-galactic-crossover-scale] 所示，示意曲线下穿传统局部搜索基准的交叉尺度远超可观测宇宙的重子自由度预算（此类仅在超天文尺度显影渐近优势的算法在复杂性理论惯例中被称为**银河算法 Galactic Algorithm**）。在本书形式化库中，**有限记忆历史容量定理**（[`finite_memory_history_capacity`](lean:D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity)，证明可区分测量历史数受有限记忆载体容量上界制约）与**开放可积电路最小深度定理**（[`OpenIntegrableCircuitMinDepth.result`](lean:D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result)，给出局部性为 $\kappa$ 的开放可积电路最小深度 $\lfloor N/(\kappa+1)\rfloor + 1$）从各自模型侧面刻画了有限物理系统的容量与深度硬约束；将它们与 [@ex-ch30-galactic-crossover-scale] 的银河交叉尺度并置，在几何模型（`MODEL`）上直观展现了为什么在物理可实现的观测尺度内，有限观察者依然面对高耸的有效搜索壁垒（同时重申：标准统一图灵机模型下的 $\mathrm{P} \neq \mathrm{NP}$ 猜想 [@conj-p-neq-np] 仍为未决的 `OPEN` 问题）。
-- **$P$（场）与 $NP$（线）的超多项式鸿沟与平方膨胀规约效应**：如 [@rem-ch30-eth-subexponential-literature] 与 [@ex-ch30-galactic-crossover-scale] 所示，即便在 $n \to \infty$ 极限下，亚指数搜寻上界与多项式导向场 $n^{O(1)}$ 之间依然横亘着超多项式鸿沟，且在二次规模电路编码归约下关于原输入规模的上界重新膨胀为超指数级别。
+- **$P$（场）与 $NP$（线）的认识论对照（`MODEL`）**：结合 [@rem-ch30-eth-subexponential-literature] 与 [@ex-ch30-galactic-crossover-scale] 中的渐近与电路编码尺度对比，在本书几何模型（`MODEL`）中，沿全局光滑导向场的局部松弛（类比 $P$）与沿见证丝的离散组合搜寻（类比 $NP$）依然代表两类截然不同的几何机制。
 - **形式内核核验与顶层规约审计的哥德尔—语义边界（`LEAN ✓` 原型与 `MODEL` 映照）**：[@rem-ch30-eth-subexponential-literature] 中最具认识论意味的一幕是——形式证明助手内核可以迅速核验脚本内部每一步推演的传递合法性，而学界仍需仔细审计“顶层形式化命题的定义是否忠实刻画了目标图灵机复杂度命题”。在本书第 21 章中，经 Lean 4 内核验证的**相对语义对角线与定义逃逸定理**严格证明：在给定无不动点扭转映射（`∀ v, twist v ≠ v`）的条件下，相对语义对角线构造必然逃出任何已编目解码族（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)），且当解码目录对潜空间满射时，该对角线目标相对于给定潜映射不满足语义完备性 `TargetAdequate`（[`relative_semantic_diagonal_target_inadequate_of_surjective`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective)）。将这一形式定理作为认识论原型（`MODEL`）来观照顶层规约审计，恰好印证了全书的核心准则：**形式内核在球内严格锁死推演链条的传递正确性，而对顶层命题边界定义之语义恰当性的审视，永远需要站在形式球壳之外！**
 
 ::: {.viz src="eth-horizon-crossover" preset="atoms" height="500"}
@@ -212,11 +212,11 @@ $$
 $$
 (\mathbf{u}\cdot\nabla)\mathbf{u} = \underbrace{\frac{1}{2}\nabla(\|\mathbf{u}\|^2)}_{\substack{\text{无旋势能梯度} \\ \text{直接并入伯努利总压 } -\nabla(p + \frac{1}{2}\|\mathbf{u}\|^2) \text{ 约掉}}} + \underbrace{\mathbf{u}\cdot(\nabla\wedge\mathbf{u})}_{\substack{\text{双向量涡力耦合项 }(\boldsymbol{\omega}\times\mathbf{u}) \\ \text{一维流线与二维正交涡面积的耦合}}}.
 $$
+
+在经典连续介质流体力学中，由此可区分两类区域：当正交外积旋度为零（$\nabla\wedge\mathbf{u} = 0$，无旋势流）时，对流非线性退化为纯标量势梯度并直接并入伯努利总压抵消，单连通域上无散无旋流场归约为线性拉普拉斯势场 $\mathbf{u} = -\nabla\Phi$；当正交外积旋度非零（$\nabla\wedge\mathbf{u} \neq 0$，有旋涡流）时，由于标量势梯度的外微分恒为零，标量压强梯度无法抵消外积旋度 $\nabla\wedge\mathbf{u}$，流线与正交涡面发生非线性耦合。
 :::
 
-[@rem-ch30-lamb-decomposition-literature] 中的内外积拆解与上一节“$P$ 是无旋导向场，$NP$ 是旋涡荒原中的细线”形成精准的几何模型对偶（`MODEL`）：
-- **当正交外积旋度为零（$\nabla\wedge\mathbf{u} = 0$，无旋势流）**：对流非线性如 [@rem-ch30-lamb-decomposition-literature] 所示退化为纯标量势梯度并直接并入总压抵消，流场还原为线性拉普拉斯无旋势场 $\mathbf{u} = -\nabla\Phi$——这就是流体力学中的 **$P$ 态**；
-- **当正交外积旋度非零（$\nabla\wedge\mathbf{u} \neq 0$，有旋涡流）**：由于标量势梯度的外微分恒为零，压强场无法抵消正交外积旋度 $\nabla\wedge\mathbf{u}$（见 [@rem-ch30-lamb-decomposition-literature]），一维流线与二维正交涡面积相互缠绕，使平滑势场碎裂为多尺度旋涡结构。
+将 [@rem-ch30-lamb-decomposition-literature] 所载的无旋势流相与有旋涡流相映射回上一节“$P$ 是无旋导向场，$NP$ 是旋涡荒原中的细线”的几何类比模型（`MODEL`），无旋相在概念上对应光滑全局导向场（类比流体中的 $P$ 态），而有旋相则对应多尺度旋涡缠绕。
 
 ::: {.viz src="navier-stokes-p-np" preset="vortex" height="500"}
 **对流项的两半。** 平面流 $\mathbf{u} = (1 - s)(x, -y) + s(-y, x)$ 在 $s = 0.8$ 时的流线，涡度 $\omega = 2s = 1.6$。琥珀色探针处，白色箭头是对流项 $(\mathbf{u}\cdot\nabla)\mathbf{u}$，它是青色的梯度那一半 $\nabla(\|\mathbf{u}\|^2/2)$ 与品红的兰姆那一半 $\boldsymbol{\omega}\times\mathbf{u}$ 之和；把 $s$ 调回 $0$，品红箭头消失。探针可以拖动。
@@ -240,10 +240,10 @@ $$
 
 对比 [@rem-ch30-vorticity-transport-literature] 与计算复杂性中的维度分水岭，结构相变同时出现在 **$2 \to 3$**（以下为跨领域结构类比 `MODEL`，而非复杂性理论中的形式逻辑等价）：
 
-- **二维平面流无第三轴涡管拉伸 $\leftrightarrow$ 类比二元链 2-SAT（`MODEL`）**：
-  如 [@rem-ch30-vorticity-transport-literature] 所示，二维平面流中速度躺在 $\operatorname{span}(\mathbf{e}_1, \mathbf{e}_2)$ 平面内而法向涡量指向第三轴 $\mathbf{e}_3$，轴向涡管拉伸项恒等消失。在本书锁定的 `trureturing@dev` 库中，冻结定理 [`all_grade_regularity_of_mild_path`](lean:D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path) 给出了二维周期傅里叶空间上的一项**条件性高阶正则性提升定理**：若已给定一条在 $[0, \tau]$ 上连续的加权 $H^2$ 零均值实无散温和解路径，且其初值在全部空间 Sobolev 阶数 $m \in \mathbb{N}$ 上可和，则该路径在每一空间阶数 $m$ 上皆满足强微分方程（无条件二维全局正则性经典定理另见 [@rem-ch30-navier-stokes-forced-literature]）。
-- **三维涡管拉伸条件坍缩情景 $\leftrightarrow$ 类比三元面片 3-SAT（`MODEL`）**：
-  一旦开启**第三正交基元 $\mathbf{e}_3$**，三维速度梯度便允许产生 [@rem-ch30-vorticity-transport-literature] 所述的非零轴向涡管拉伸——在几何模型（`MODEL`）上，当细涡管横截面在条件性坍缩情景中趋于零时，恰如把一张具有正横截面积的三维平滑速度“场（$P$）”，通过三体正交拉伸挤扁成一根横截面积趋零的“一维奇异涡丝线（类比 $NP$ 见证丝）”！
+- **二维平面情形（[@rem-ch30-vorticity-transport-literature]）$\leftrightarrow$ 类比二元链 2-SAT（`MODEL`）**：
+  将 [@rem-ch30-vorticity-transport-literature] 所载的二维平面流情形与二元链 2-SAT 并置对照（`MODEL`），在本书锁定的 `trureturing@dev` 库中，冻结定理 [`all_grade_regularity_of_mild_path`](lean:D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path) 给出了二维周期傅里叶空间上的一项**条件性高阶正则性提升定理**：若已给定一条在 $[0, \tau]$ 上连续的加权 $H^2$ 零均值实无散温和解路径，且其初值在全部空间 Sobolev 阶数 $m \in \mathbb{N}$ 上可和，则该路径在每一空间阶数 $m$ 上皆满足强微分方程（无条件二维全局正则性经典定理另见 [@rem-ch30-navier-stokes-forced-literature]）。
+- **三维细涡管条件坍缩情景（[@rem-ch30-vorticity-transport-literature]）$\leftrightarrow$ 类比三元面片 3-SAT（`MODEL`）**：
+  将 [@rem-ch30-vorticity-transport-literature] 所载的三维条件性细涡管情景与三元面片 3-SAT 并置对照，在几何类比模型（`MODEL`）上，该条件坍缩图景好比把一张平滑三维“场（类比 $P$）”挤压向“一维细丝（类比 $NP$ 见证丝）”！
 
 在正式陈述千禧年无外力开放猜想之前，我们先用专门的文献注记严格隔离二维全局光滑性定理与 **受迫情形（克雷陈述 C / D，含光滑外力 $\mathbf{f} \in C^\infty$）** 的外部文献结果，确保下方的红色 `OPEN` 猜想框纯粹聚焦于未决的无外力自治核心：
 

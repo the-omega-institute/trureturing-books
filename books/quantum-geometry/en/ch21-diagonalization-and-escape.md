@@ -196,7 +196,7 @@ At the close of the [Prelude](README.md), we stated the book's central anti-Plat
    R_{2N}(\theta) = \cos\theta - \sum_{k=0}^{N-1} (-1)^k \frac{\theta^{2k}}{(2k)!}.
    $$
 
-   The polynomial represents what finitely many internal ring operations can close, whereas $R_{2N}(\theta)$ is the analytic escape seam separating any finite polynomial cage from the transcendental circle (its classical Lagrange bound and nonvanishing on $(0, 2]$ are recorded in [@rem-lagrange-taylor-remainder-literature], while the kernel-verified bound in complete normed algebras is proved in [@lem-exp-tail-le]).
+   The polynomial represents what finitely many internal ring operations can close, whereas $R_{2N}(\theta)$ is the analytic escape seam separating any finite polynomial cage from the smooth circular cosine curve (its classical Lagrange bound and nonvanishing on $(0, 2]$ are recorded in [@rem-lagrange-taylor-remainder-literature], while the kernel-verified bound in complete normed algebras is proved in [@lem-exp-tail-le]).
 2. **Inscribed convex polytopes at finite gate count $L$**: In fault-tolerant quantum synthesis over a finite discrete gate alphabet $\mathcal{G}$ (such as $\{H, T\}$), at any finite gate count $L < \infty$ the reachable set $\mathcal{S}_L \subset S^2$ from $\lvert 0\rangle$ is a finite point set whose Euclidean convex hull $\operatorname{conv}(\mathcal{S}_L) \subset \mathbb{R}^3$ is an **inscribed convex polyhedron** rather than a smooth sphere — leaving curved spherical caps outside every flat facet until $L$ is increased.
 3. **The open ascending helix projected as a circle**: Viewed heuristically, if each topological refinement $\operatorname{conceptJoin}(\operatorname{latent}, g)$ in [@prop-complete-diagonal-strict-refinement] is pictured as an ascent along a newly adjoined normal axis $\vv{e}_{n+1} = \star I_n$, then what looks to a flatland observer like a closed periodic circle $(\cos t, \sin t)$ is the axial shadow of an **open ascending helix** $(\cos t, \sin t, c\,t)$ in the ambient space: returning to $(\cos 2\pi, \sin 2\pi) = (1, 0)$ in the base plane actually lands one turn higher at $(1, 0, 2\pi c)$!
 
@@ -206,14 +206,14 @@ At the close of the [Prelude](README.md), we stated the book's central anti-Plat
 
 So far the three claims are only words. The first two will now be replaced by numbers that can be checked and by theorems that are already frozen.
 
-**Liu Hui's circle cutting first.** Take the regular $n$-gon inscribed in the unit circle. Its half-perimeter $n\sin\frac{\pi}{n}$ approaches $\pi$ from below; the distance from the centre to the midpoint of each side (the apothem) is $\cos\frac{\pi}{n}$; the gap between the midpoint of a side and the arc (the sagitta) is
+**Liu Hui's circle cutting first.** Take the regular $n$-gon inscribed in the unit circle: its half-perimeter is $n\sin\frac{\pi}{n}$, the distance from the centre to the midpoint of each side (the apothem) is $\cos\frac{\pi}{n}$, and the gap between the midpoint of a side and the arc (the sagitta) is
 
 $$
 1 - \cos\frac{\pi}{n} \;=\; 2\sin^2\frac{\pi}{2n} .
 $$
 
-::: {.example #ex-liu-hui-polygon-sagitta title="Liu Hui's Circle Cutting in Numbers: Half-Perimeter, Apothem, and Sagitta"}
-The values below were computed at 40 digits and rounded to the digits shown.
+::: {.example #ex-liu-hui-polygon-sagitta title="Liu Hui's Circle Cutting in Numbers: Half-Perimeter, Apothem, and Sagitta (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** That the inscribed regular-$n$-gon half-perimeter $n\sin\frac{\pi}{n}$ approaches $\pi$ monotonically from below, together with the second-order Taylor asymptotics and Liu Hui's $2n$-gon area identity below, belongs to the classical geometry and real-analysis literature and is not locked as a standalone theorem in this book's formalization. The values below were computed at 40 digits and rounded to the digits shown.
 
 | $n$ | half-perimeter $n\sin\frac{\pi}{n}$ | $\pi - n\sin\frac{\pi}{n}$ | apothem $\cos\frac{\pi}{n}$ | sagitta $1 - \cos\frac{\pi}{n}$ |
 | :---: | :---: | :---: | :---: | :---: |

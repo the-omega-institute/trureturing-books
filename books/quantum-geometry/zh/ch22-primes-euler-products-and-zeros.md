@@ -116,11 +116,17 @@ $$
 p^{-s} = p^{-\sigma - it} = p^{-\sigma} e^{-i t \ln p} = p^{-\sigma}\bigl(\cos(t\ln p) - i\sin(t\ln p)\bigr).
 $$
 
-在复平面上，每一个素数 $p$ 都是一只以固有对数频率 $\omega_p = \ln p$ 匀速旋转的**独立相位振子（时钟）**！因为不同素数的对数频率 $\ln 2, \ln 3, \ln 5, \dots$ 在 $\mathbb{Q}$ 上线性无关，这无穷多只素数时钟的旋转周期彼此不可公度（incommensurable）——就像无穷多根彼此正交的陀螺轴，无论时间 $t$ 走多久，它们在单位圆周上的相位角 $(t\ln 2 \bmod 2\pi,\, t\ln 3 \bmod 2\pi,\, \dots)$ 都会按克罗内克（Kronecker）稠密流遍历高维环面！
+在复平面上，每一个素数 $p$ 都可看作一只以固有对数角频率 $\omega_p = \ln p$ 匀速旋转的**相位指针（素数时钟）**！不同素数时钟的旋转周期为何彼此不可公度、其联合相位又如何在高维环面上演化，见如下文献说明：
+
+::: {.remark #rem-kronecker-prime-torus-literature title="素数对数的有理线性无关性与克罗内克环面稠密流（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 由算术基本定理（素因子分解唯一性），不同素数的自然对数 $\ln 2, \ln 3, \ln 5, \dots$ 在有理数域 $\mathbb{Q}$ 上线性无关，故其旋转周期彼此不可公度（incommensurable）；进而由克罗内克逼近定理（L. Kronecker, 1884）的连续时间环面流推论，对任意前 $K$ 个素数 $\{p_1, \dots, p_K\}$，随实参数 $t \in \mathbb{R}$ 演化的联合相位轨道 $(t\ln p_1 \bmod 2\pi,\, \dots,\, t\ln p_K \bmod 2\pi)$ 在 $K$ 维环面 $\mathbb{T}^K = (\mathbb{R}/2\pi\mathbb{Z})^K$ 中处处稠密。上述有理线性无关性与克罗内克环面稠密流定理均属经典数论与遍历理论文献，未包含在本书锁定的 `trureturing@dev` 形式化声明集中。
+:::
 
 更进一步，如果我们像[序曲](README.md)和[第二十一章](ch21-diagonalization-and-escape.md)讨论“有限门计数多面体”与“有限阶泰勒余项 $R_{2N}(\theta)$”那样，只用**前 $K$ 个素数** $\{p_1, p_2, \dots, p_K\}$ 搭建一座有限维的“**算术多面体素数筛**”，会发生什么？让我们在下面的具体算例中亲手展开前三个素数 $p \in \{2, 3, 5\}$，看看漏网的第一个余项是谁！
 
-::: {.example #ex-prime-log-orthogonality-and-sieve title="前三个素数 (2, 3, 5) 的欧拉乘积有限筛展开与首项漏网素数 7"}
+::: {.example #ex-prime-log-orthogonality-and-sieve title="前三个素数 (2, 3, 5) 的欧拉乘积有限筛展开与首项漏网素数 7（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 下述半平面 $\operatorname{Re}(s) > 1$ 上的截断欧拉乘积余项展开及 $s = 2$ 处引用的欧拉巴塞尔恒等式 $\zeta(2) = \frac{\pi^2}{6}$（另参 [@ex-xi-mirror-values] 与 [@rem-euler-zeta-literature]）属经典解析数论文献算例，未作为独立定理包含在本书锁定的形式化声明集中。
+
 设 $\operatorname{Re}(s) > 1$，取前 $K = 3$ 个素数 $p_1 = 2, p_2 = 3, p_3 = 5$（即只开启 $\ln 2, \ln 3, \ln 5$ 三根正交算术轴），计算截断欧拉乘积 $P_{\le 5}(s)$：
 
 $$
@@ -159,7 +165,7 @@ $$
 
 ## 22.4 临界对称轴 $\sigma = 1/2$ 与黎曼猜想的认识论边界 {#sec-ch22-4}
 
-在半平面 $\operatorname{Re}(s) > 1$ 内，由于欧拉乘积 $\prod_p (1 - p^{-s})^{-1}$ 的每一个因子都不为零且绝对收敛，$\zeta(s)$ 在 $\operatorname{Re}(s) > 1$ 内没有任何零点。然而，当通过解析延拓穿过 $s = 1$ 极点（[@lem-riemann-zeta-residue-one]）、踏入**临界带** $0 < \operatorname{Re}(s) < 1$ 时，级数与欧拉乘积不再直接绝对收敛，无穷多只素数相位时钟 $p^{-\sigma} e^{-it\ln p}$ 的相干叠加开始产生剧烈的相消干涉——在特定的复频率 $\rho = \sigma + it$ 处，所有素数模式的振幅彻底相消归零：$\zeta(\rho) = 0$！
+如后文文献说明 [@rem-zeta-zero-free-region-literature] 与 [@rem-euler-zeta-literature] 所载，在经典解析数论中，$\zeta(s)$ 在欧拉乘积绝对收敛半平面 $\operatorname{Re}(s) > 1$ 内没有零点，而越过 $s = 1$ 一阶极点（其留数定理已冻结为上文 [@lem-riemann-zeta-residue-one]）向**临界带** $0 < \operatorname{Re}(s) < 1$ 解析延拓后，级数与欧拉乘积不再直接绝对收敛，无穷多只素数相位指针 $p^{-\sigma} e^{-it\ln p}$ 的叠加会在特定的复频率 $\rho = \sigma + it$ 处发生相消归零：$\zeta(\rho) = 0$！
 
 为什么所有已被算出的非平凡零点，全都像被无形的几何准星锁死了一样，齐刷刷地排列在实部恰好等于二分之一的**临界线（critical line）** $\operatorname{Re}(s) = \frac{1}{2}$（即 Lean 模块 `D5/S3/Weil/Convention` 中定义的自对偶横坐标 [`criticalAbscissa`](lean:D5/S3/Weil/Convention.criticalAbscissa) $= 1/2$）上？
 

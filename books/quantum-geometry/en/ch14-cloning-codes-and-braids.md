@@ -251,9 +251,9 @@ Two important domain boundaries apply to [@prop-orthogonal-syndrome-recovery]:
 
 Beyond active syndrome measurement, nature offers a passive topological mechanism for fault-tolerant gates: **braiding particle worldlines in $(2+1)$-dimensional spacetime**.
 
-Why does exchanging two particles twice in a two-dimensional plane $(e_1, e_2)$ trace a nontrivial braid in $(2+1)$ dimensions, whereas exchanging two point particles twice in three-dimensional space $(e_1, e_2, e_3)$ can be smoothly untangled?
+In the intuitive picture of low-dimensional topology and anyon physics (recorded in [@rem-error-correction-anyons-literature] below), a natural question arises: why does confining particle worldlines to a two-dimensional plane $(e_1, e_2)$ yield a braid exchange structure qualitatively distinct from three-dimensional space?
 
-As illustrated in Figure 14, Panel III, the difference is the **third orthogonal spatial axis $e_3$**! When non-colliding point particles are confined to a plane, their worldlines in $(x, t)$ spacetime behave like taut strands: passing strand $1$ over strand $2$ ($\mathrm{crossing}$) is topologically distinct from passing it under ($\mathrm{crossingInv}$). On three strands $(x, (y, z))$, sliding the middle strand past the crossing of the outer two yields the fundamental **three-strand braid relation (the Yang–Baxter equation)** $\sigma_1 \sigma_2 \sigma_1 = \sigma_2 \sigma_1 \sigma_2$.
+Diagrammatically (as illustrated in Figure 14, Panel III), the clue points to the **third orthogonal spatial axis $e_3$**! For non-intersecting strands arranged in a row, passing strand $1$ over strand $2$ ($\mathrm{crossing}$) and passing it under ($\mathrm{crossingInv}$) define inverse elementary crossings. On three strands $(x, (y, z))$, sliding the middle strand past the crossing of the outer two motivates the fundamental **three-strand braid relation (the Yang–Baxter equation)** $\sigma_1 \sigma_2 \sigma_1 = \sigma_2 \sigma_1 \sigma_2$.
 
 In the source module `D5/S0/Certificates/Quandles/BraidColoringTransport.lean`, this braid invariance is formalized algebraically via rack-coloring transport. Let $Q$ be any type equipped with a `Rack Q` instance, providing a binary operation $\star : Q \to Q \to Q$ (`act`) and inverse operation $\star^{-1} : Q \to Q \to Q$ (`invAct`) that is left-action bijective — for each fixed first argument $x \in Q$, the left translation map $L_x : y \mapsto x \star y$ is a bijection with inverse $L_x^{-1} : y \mapsto x \star^{-1} y$ (`Function.LeftInverse (invAct x) (act x)` and `Function.RightInverse (invAct x) (act x)`, so $x \star^{-1}(x \star y) = y$ and $x \star (x \star^{-1} y) = y$) — and obeys left self-distributivity:
 
@@ -310,15 +310,19 @@ $$
 The trailing pairs $(x \star y, x)$ are identical on both sides, and the leading entries $(x \star y) \star (x \star z)$ and $x \star (y \star z)$ agree by the rack self-distributivity axiom. The full proof is checked by the Lean kernel.
 :::
 
-Three boundaries must be respected when interpreting [@cor-braid-yang-baxter]:
+::: {.remark #rem-braid-knot-topology-literature title="Scope Boundaries Between Rack Colorings, Configuration-Space Braids, and 3D Knots (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** Three theoretical boundaries govern how [@cor-braid-yang-baxter] connects to the low-dimensional topology and condensed-matter literature (see also [@rem-error-correction-anyons-literature] below; both the dimensional dichotomy between $B_n$ and $S_n$ on configuration spaces and the nontrivial knottedness of closed knots such as the trefoil in $\mathbb{R}^3$ are external literature results not formalized in this book):
 
 1. **Algebraic coloring realization versus full topological classification**: [@cor-braid-yang-baxter] is an algebraic rack-coloring realization of the three-strand braid relation on an arbitrary `Rack Q` (with no topological space, spacetime dimension, or particle statistics in its hypotheses). It does not prove that all planar braids are nontrivial, nor does it classify the full fundamental group of configuration space.
-2. **Distinguishing point-particle exchange paths from closed knots in $\mathbb{R}^3$**: As shown in Figure 14, Panel III, adding a third spatial axis $e_3$ allows a point-particle **exchange loop** (a path in configuration space where one point particle loops around another) to detour along $e_3$, reducing the exchange group from the braid group $B_n$ to the symmetric group $S_n$. **This is completely different from a closed $1$-dimensional knot embedded in $\mathbb{R}^3$** (such as a trefoil knot), which still cannot pass through itself and remains knotted in three dimensions!
+2. **Distinguishing point-particle exchange paths from closed knots in $\mathbb{R}^3$**: As shown in Figure 14, Panel III, adding a third spatial axis $e_3$ allows a point-particle **exchange loop** (a path in configuration space where one point particle loops around another) to detour along $e_3$, reducing the exchange group from the braid group $B_n$ to the symmetric group $S_n$. **This is completely different from a closed $1$-dimensional knot embedded in $\mathbb{R}^3$** (such as a trefoil knot), which still cannot pass through itself and remains knotted in three dimensions (indeed, rack and quandle colorings are classical algebraic invariants for distinguishing nontrivial 3D knots)!
 3. **Anyonic statistics and topological fault-tolerance belong to the physics literature**: Configuration-space homotopy groups, non-Abelian anyons, and physical error bounds are summarized in [@rem-error-correction-anyons-literature].
+:::
 
 Let us now work through the four-part numerical and matrix calculation connecting no-cloning, the three-qubit bit-flip code, local Bloch expectations, and $8\times 2$ orthogonal syndrome recovery.
 
-::: {.example #ex-repetition-code-syndrome title="Numerical No-Cloning Gap, Three-Qubit Repetition Syndromes, and 8×2 Orthogonal Recovery"}
+::: {.example #ex-repetition-code-syndrome title="Numerical No-Cloning Gap, Three-Qubit Repetition Syndromes, and 8×2 Orthogonal Recovery (With Literature Context, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** Steps 1, 2, and 4 below instantiate this chapter's kernel-verified [@thm-no-cloning-overlap], [@lemma-pauli-word-phase], and [@prop-orthogonal-syndrome-recovery], whereas the general criterion in Step 3 for single-qubit marginals of pure distance-$d_{\mathrm{code}} \ge 2$ stabilizer codes and the single-error-correcting five-qubit, seven-qubit Steane, and nine-qubit Shor codes contrasted at the end of Step 4 belong to the quantum error-correction literature (see [@rem-error-correction-anyons-literature] below) and are not formalized in this book.
+
 This example verifies the four concrete calculations of Chapter 14:
 
 **Step 1: Numerical no-cloning gap at $45^\circ$ versus exact CNOT copying of an orthogonal pair.**
@@ -371,7 +375,7 @@ $$
 \end{aligned}
 $$
 
-Note the scope of this code: it corrects only single $X$ bit-flip errors; a single phase flip $Z_1 = Z \otimes I \otimes I$ commutes with both $g_1$ and $g_2$ and acts as an undetected logical phase error $\bar{Z}\lvert +_L\rangle = \lvert -_L\rangle$, so this code does not correct arbitrary single-qubit noise.
+Note the scope of this code: it corrects only single $X$ bit-flip errors; a single phase flip $Z_1 = Z \otimes I \otimes I$ commutes with both $g_1$ and $g_2$ and acts as an undetected logical phase error $\bar{Z}\lvert +_L\rangle = \lvert -_L\rangle$, so this code does not correct arbitrary single-qubit noise (correcting arbitrary single-qubit errors requires at least the five-qubit code, or the seven-qubit Steane or nine-qubit Shor code; cf. [@rem-error-correction-anyons-literature]).
 :::
 
 ::: {.remark #rem-error-correction-anyons-literature title="Knill–Laflamme Conditions, Stabilizer Codes, and Anyonic Braiding (Literature Result, Not Formalized in This Book)"}

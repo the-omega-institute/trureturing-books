@@ -1,16 +1,16 @@
 # Appendix C: Master Index of Verified Lean 4 Theorems and Open Problems Register
 
-This appendix is the **Master Audit Ledger** of the book's epistemic boundaries. Under the Epistemic Contract established in the Prelude, every mathematical statement in this monograph belongs to one of three strictly separated classes and is mechanically audited against `trureturing.lock.json` (pinned to `trureturing@dev` commit `a660b9333c0f8d25aaa22af1bbbfab43c2f94a46`):
+This appendix is the **Master Audit Ledger** of the book's epistemic boundaries. Under the Epistemic Contract established in the Prelude, every mathematical statement in this monograph belongs to one of three strictly separated classes and is mechanically audited against `trureturing.lock.json` (pinned to `trureturing@dev` commit `1d9bf98cab8306e67ec38a739359f2cdae63877a`):
 
-1. **C.1 Master Index of Frozen Theorems (166 Unique `theorem` Declarations)**: Every proposition placed inside a `theorem`, `lemma`, `proposition`, or `corollary` environment or bound to a visualization/film/slide `lean:` anchor must resolve to a sorry-free `theorem` declaration in `Golden/Frozen/state/<module>.lean.json` verified by the Lean 4 kernel;
-2. **C.2 Formal Definitions and Algebraic Carriers (53 Unique `definition` / `structure` / `inductive` Declarations)**: Foundational algebraic structures, rotor types, and state-space definitions bound to `definition` environments or media manifests; together with **C.2.1 Inline-Referenced Auxiliary Theorems and Definitions (94 Unique Inline Declarations)**, these account for all **313 unique locked declarations** in `trureturing.lock.json` (`166 + 53 + 94 = 313`);
+1. **C.1 Master Index of Frozen Theorems (167 Unique `theorem` Declarations)**: Every proposition placed inside a `theorem`, `lemma`, `proposition`, or `corollary` environment or bound to a visualization/film/slide `lean:` anchor must resolve to a sorry-free `theorem` declaration in `Golden/Frozen/state/<module>.lean.json` verified by the Lean 4 kernel;
+2. **C.2 Formal Definitions and Algebraic Carriers (57 Unique `definition` / `structure` / `inductive` Declarations)**: Foundational algebraic structures, rotor types, and state-space definitions bound to `definition` environments or media manifests; together with **C.2.1 Inline-Referenced Auxiliary Theorems and Definitions (94 Unique Inline Declarations)**, these account for all **318 unique locked declarations** in `trureturing.lock.json` (`167 + 57 + 94 = 318`);
 3. **C.3 Open Problems and Unformalized Frontier Register (8 Entries: 6 `conjecture` / `OPEN` Environments + 2 Frontier Literature `remark` Entries)**: Propositions that remain unformalized in `trureturing` or represent open frontier problems in mathematics and physics, isolated throughout the book inside `conjecture` environments (red `OPEN` badges) or explicitly tagged literature `remark` blocks with zero `lean` attributes.
 
 ---
 
-## C.1 Verified and Frozen Lean 4 Theorems (166 Unique `theorem` GIDs) {#sec-appendix-c-theorems}
+## C.1 Verified and Frozen Lean 4 Theorems (167 Unique `theorem` GIDs) {#sec-appendix-c-theorems}
 
-The table below lists in alphabetical module order all **166 unique frozen theorems** referenced by formal mathematical environments and media components across the book (forming 186 theorem-level formal anchors including cross-chapter reuse). Clicking any declaration name jumps to the corresponding Lean 4 source file and frozen state summary:
+The table below lists in alphabetical module order all **167 unique frozen theorems** referenced by formal mathematical environments and media components across the book (forming 187 theorem-level formal anchors including cross-chapter reuse). Clicking any declaration name jumps to the corresponding Lean 4 source file and frozen state summary:
 
 | ID | Lean Declaration (Click for Source) | Module Path & Line | Kind | Chapters & Environment IDs |
 | :--- | :--- | :--- | :--- | :--- |
@@ -34,6 +34,7 @@ The table below lists in alphabetical module order all **166 unique frozen theor
 | `T018` | [`D5.S3.Analytic.OriginalHalfBinomialIntegral.b_le_one`](lean:D5/S3/Analytic/OriginalHalfBinomialIntegral.b_le_one) | `D5/S3/Analytic/OriginalHalfBinomialIntegral.lean:31` | `theorem` | Ch 24 `#lem-arcsin-binomial-kernel` |
 | `T019` | [`D5.S3.Analytic.OriginalHalfBinomialIntegral.b_nonneg`](lean:D5/S3/Analytic/OriginalHalfBinomialIntegral.b_nonneg) | `D5/S3/Analytic/OriginalHalfBinomialIntegral.lean:29` | `theorem` | Ch 24 `#lem-arcsin-binomial-kernel` |
 | `T020` | [`D5.S3.Analytic.OriginalHalfBinomialIntegral.binomial_hasSum`](lean:D5/S3/Analytic/OriginalHalfBinomialIntegral.binomial_hasSum) | `D5/S3/Analytic/OriginalHalfBinomialIntegral.lean:76` | `theorem` | Ch 24 `#lem-arcsin-binomial-kernel` |
+| `T167` | [`D5.S3.Analytic.PowerSeries.DottieInverseSeries.rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint) | `D5/S3/Analytic/PowerSeries/DottieInverseSeries.lean:545` | `theorem` | Ch 24 `#thm-dottie-rational-inverse-endpoint` |
 | `T021` | [`D5.S3.Arith.GoldenPell.pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm) | `D5/S3/Arith/GoldenPell.lean:83` | `theorem` | Ch 23 `#prop-pell-form-eq-four-mul-norm`, Ch 29 `#thm-ch29-gram-rigidity-and-pell` |
 | `T022` | [`D5.S3.Combinatorics.Graph.Walks.WeightedCycleWalk.circuit_length`](lean:D5/S3/Combinatorics/Graph/Walks/WeightedCycleWalk.circuit_length) | `D5/S3/Combinatorics/Graph/Walks/WeightedCycleWalk.lean:77` | `theorem` | Ch 20 `#cor-even-cycle-length` |
 | `T023` | [`D5.S3.ConceptDynamics.DefinitionEscape.RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode) | `D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.lean:48` | `theorem` | `viz/sphere-escape` (Ch 21, Ch 30 inline) |
@@ -183,9 +184,9 @@ The table below lists in alphabetical module order all **166 unique frozen theor
 
 ---
 
-## C.2 Formal Definitions, Structures, and Inductive Types (53 Unique Declarations) {#sec-appendix-c-definitions}
+## C.2 Formal Definitions, Structures, and Inductive Types (57 Unique Declarations) {#sec-appendix-c-definitions}
 
-The table below lists all **53 unique foundational definitions, algebraic structures, and inductive types** bound to `definition` environments and media components (together with the 166 theorems of Section C.1, these form the **219 core environment and media declarations** of the monograph):
+The table below lists all **57 unique foundational definitions, algebraic structures, and inductive types** bound to `definition` environments and media components (together with the 167 theorems of Section C.1, these form the **224 core environment and media declarations** of the monograph):
 
 | ID | Lean Declaration (Click for Source) | Module Path & Line | Kind | Chapters & Environment IDs |
 | :--- | :--- | :--- | :--- | :--- |
@@ -202,6 +203,10 @@ The table below lists all **53 unique foundational definitions, algebraic struct
 | `D11` | [`D5.S0.Diagonal.SelfApplicationFates.discriminant`](lean:D5/S0/Diagonal/SelfApplicationFates.discriminant) | `D5/S0/Diagonal/SelfApplicationFates.lean:30` | `def` | Ch 24 `#def-binary-fractional-map-fates` |
 | `D12` | [`D5.S0.Diagonal.SelfApplicationFates.fixedCoefficients`](lean:D5/S0/Diagonal/SelfApplicationFates.fixedCoefficients) | `D5/S0/Diagonal/SelfApplicationFates.lean:27` | `def` | Ch 24 `#def-binary-fractional-map-fates` |
 | `D13` | [`D5.S1.FixedPoints.Algebraic.GoldenFixedPoint.goldenReciprocalMap`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.goldenReciprocalMap) | `D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean:35` | `def` | Ch 24 `#def-golden-reciprocal-map` |
+| `D54` | [`D5.S3.Analytic.PowerSeries.DottieInverseSeries.alpha`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.alpha) | `D5/S3/Analytic/PowerSeries/DottieInverseSeries.lean:29` | `def` | Ch 24 `#def-dottie-rational-inverse` |
+| `D55` | [`D5.S3.Analytic.PowerSeries.DottieInverseSeries.arcsine`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.arcsine) | `D5/S3/Analytic/PowerSeries/DottieInverseSeries.lean:34` | `def` | Ch 24 `#def-dottie-rational-inverse` |
+| `D56` | [`D5.S3.Analytic.PowerSeries.DottieInverseSeries.forward`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.forward) | `D5/S3/Analytic/PowerSeries/DottieInverseSeries.lean:36` | `def` | Ch 24 `#def-dottie-rational-inverse` |
+| `D57` | [`D5.S3.Analytic.PowerSeries.DottieInverseSeries.inverse`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.inverse) | `D5/S3/Analytic/PowerSeries/DottieInverseSeries.lean:38` | `def` | Ch 24 `#def-dottie-rational-inverse` |
 | `D14` | [`D5.S3.ConceptDynamics.DefinitionEscape.RelativeSemanticDiagonal.relativeSemanticDiagonal`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relativeSemanticDiagonal) | `D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.lean:38` | `def` | Ch 21 `#def-relative-semantic-diagonal` |
 | `D15` | [`D5.S3.ConceptDynamics.Interpretation.InterpretationFixedPoint.InterpretationContext`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.InterpretationContext) | `D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.lean:36` | `inductive` | Ch 24 `#def-relative-interpretation-fixed-point` |
 | `D16` | [`D5.S3.ConceptDynamics.Interpretation.InterpretationFixedPoint.IsBinaryFixedMeaning`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.IsBinaryFixedMeaning) | `D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.lean:100` | `def` | Ch 24 `#def-relative-interpretation-fixed-point` |
@@ -247,7 +252,7 @@ The table below lists all **53 unique foundational definitions, algebraic struct
 
 ## C.2.1 Inline-Referenced Auxiliary Theorems and Definitions (94 Unique Declarations) {#sec-appendix-c-inline}
 
-In addition to the 219 declarations bound to formal environments or media anchors in Sections C.1 and C.2, the main text, proof explanations, and appendix tables reference **94 auxiliary theorems and definitions** via inline `[name](lean:GID)` links. Including these 94 inline declarations, this appendix accounts for all **313 unique locked declarations** in `trureturing.lock.json` (`166 + 53 + 94 = 313`):
+In addition to the 224 declarations bound to formal environments or media anchors in Sections C.1 and C.2, the main text, proof explanations, and appendix tables reference **94 auxiliary theorems and definitions** via inline `[name](lean:GID)` links. Including these 94 inline declarations, this appendix accounts for all **318 unique locked declarations** in `trureturing.lock.json` (`167 + 57 + 94 = 318`):
 
 | ID | Lean Declaration (Click for Source) | Module Path & Line | Kind | Inline Reference Chapters |
 | :--- | :--- | :--- | :--- | :--- |
@@ -375,11 +380,11 @@ Every build and release of this book mechanically enforces the following five ve
 | Verification Gate | Target Parameter / Contract Value | Toolchain Mechanism | Status |
 | :--- | :--- | :--- | :---: |
 | **Upstream Repository & Branch** | `the-omega-institute/trureturing` branch `dev` | `site.toml` `[trureturing]` config & `git merge-base --is-ancestor` check | `PASS` |
-| **Pinned Commit SHA** | `a660b9333c0f8d25aaa22af1bbbfab43c2f94a46` | Locked in `trureturing.lock.json` `commit` field | `PASS` |
-| **Frozen Theorem Count** | `166` environment/media theorems (`220` total `kind == "theorem"` with inline refs) | Verified against `Golden/Frozen/state/<module>.lean.json` state slices & `statement_id` digests | `PASS` |
-| **Auxiliary Definition / Structure Count** | `53` environment definitions (`93` total `kind` in `def`, `inductive` with inline refs) | Segregated into Section C.2 and never counted as `theorem / lemma / proposition / corollary` boxes | `PASS` |
+| **Pinned Commit SHA** | `1d9bf98cab8306e67ec38a739359f2cdae63877a` | Locked in `trureturing.lock.json` `commit` field | `PASS` |
+| **Frozen Theorem Count** | `167` environment/media theorems (`221` total `kind == "theorem"` with inline refs) | Verified against `Golden/Frozen/state/<module>.lean.json` state slices & `statement_id` digests | `PASS` |
+| **Auxiliary Definition / Structure Count** | `57` environment definitions (`97` total `kind` in `def`, `inductive` with inline refs) | Segregated into Section C.2 and never counted as `theorem / lemma / proposition / corollary` boxes | `PASS` |
 | **Bilingual Structural Alignment** | 100% parity between `zh` and `en` chapter order, env IDs, and Lean citations | Checked item-by-item by `./tbook check` (`0 error(s), 0 warning(s)`) | `PASS` |
 
 ::: {.remark #rem-appendix-c-epistemic-boundary title="Verification Boundary Note for the Complete Declaration Index"}
-Literature result, not formalized in this book: All 166 formal environment/media theorems in Section C.1, all 53 environment definitions/structures in Section C.2, and all 94 inline cross-referenced declarations in Section C.2.1 (313 locked declarations in total: 220 theorems + 93 definitions/structures) are verified by the Lean 4 kernel at `trureturing@dev` commit `a660b9333c0f8d25aaa22af1bbbfab43c2f94a46` and locked in `trureturing.lock.json`. By contrast, the open conjectures (`OPEN`) and classical literature results (Literature result, not formalized in this book) registered in Section C.3 are strictly excluded from the formal theorem count, ensuring that every `LEAN ✓` badge in this book is backed by an unambiguous kernel proof.
+Literature result, not formalized in this book: All 167 formal environment/media theorems in Section C.1, all 57 environment definitions/structures in Section C.2, and all 94 inline cross-referenced declarations in Section C.2.1 (318 locked declarations in total: 221 theorems + 97 definitions/structures) are verified by the Lean 4 kernel at `trureturing@dev` commit `1d9bf98cab8306e67ec38a739359f2cdae63877a` and locked in `trureturing.lock.json`. By contrast, the open conjectures (`OPEN`) and classical literature results (Literature result, not formalized in this book) registered in Section C.3 are strictly excluded from the formal theorem count, ensuring that every `LEAN ✓` badge in this book is backed by an unambiguous kernel proof.
 :::

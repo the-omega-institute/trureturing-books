@@ -6,8 +6,8 @@ Across our first ten chapters, we stripped away matrix mystique and restored eve
 
 **In real hardware, the epigraph's intuition — that a quantum gate is a geometric structure with area — turns out to be literal in two complementary ways:**
 
-1. To rotate a qubit state about an equatorial axis ($X$ or $Y$) by angle $\theta$, engineers apply a microwave drive resonant with the qubit transition; in the frame rotating with the carrier and under the rotating-wave approximation (RWA), the Bloch rotation angle $\theta$ is literally the **integrated pulse area under the envelope**, $\theta = \int_0^T \Omega(t)\,dt$!
-2. Conversely, to rotate the state about the vertical energy axis ($Z$) by angle $\lambda$, how many nanoseconds of analog microwave pulse must be applied? **Zero!** Because the energy eigenaxis defines the rotating frame's own phase reference, a $Z$ rotation requires no physical microwave pulse on the qubit at all — only an instantaneous update $\phi_{\mathrm{frame}} \mapsto \phi_{\mathrm{frame}} + \lambda$ to the passive software phase register (which, when commuting a preceding $R_z(\lambda)$ forward toward final $Z$-basis readout, shifts the physical drive phase of subsequent equatorial pulses by $\varphi_{\mathrm{phys}} = \varphi - \phi_{\mathrm{frame}}$, i.e. $\varphi \mapsto \varphi - \lambda$). This is the celebrated **zero-duration virtual $Z$ gate**.
+1. To rotate a qubit state about an equatorial axis ($X$ or $Y$), engineers apply a microwave drive resonant with the qubit transition; in the standard rotating-frame and rotating-wave physical model, the Bloch rotation angle is governed by the **pulse area under the microwave envelope** (see [@rem-rwa-pulse-area-literature] and [@rem-pulses-literature] below)!
+2. Conversely, to rotate around the vertical energy axis ($Z$), how many nanoseconds of additional analog microwave pulse are needed in ideal pulse scheduling? **Zero!** Because the energy eigenaxis serves as the rotating frame's own phase reference, control software simply updates a passive phase register and offsets the drive phases of subsequent equatorial pulses — the **virtual $Z$ gate** scheduling protocol in superconducting hardware (see [@rem-virtual-z-scheduling-literature] and [@rem-pulses-literature] below).
 
 This chapter builds the bridge between exact formal dynamics and hardware pulse physics: from matrix exponentials on eigenlines and the stationarity of energy eigenstates, through rotating-frame carrier cancellation and resonant pulse area, to an explicit trace error bound for ordered three-pulse kernels and the trace-duality pullback identity linking state evolution to reference-frame updates.
 
@@ -69,47 +69,53 @@ $$
 The full proof is checked by the Lean kernel.
 :::
 
-[@thm-hermitian-eigenstate-stationary] motivates the transition to the **rotating frame** (Panel I of Figure 11). Under $H_0 = \frac{1}{2}\omega_0 Z$, the basis states $\lvert 0\rangle$ and $\lvert 1\rangle$ are stationary rays while equatorial states precess at angular frequency $\omega_0$. Defining the rotating-frame state $\lvert\psi_{\mathrm{rot}}(t)\rangle = V(t)\lvert\psi_{\mathrm{lab}}(t)\rangle$ with $V(t) = e^{+i\omega_0 t Z / 2}$, the Schrödinger equation transforms to
+[@thm-hermitian-eigenstate-stationary] provides the stationary eigenstate anchor motivating the **rotating frame** in hardware control (Panel I of Figure 11; the standard continuous-time rotating-frame Hamiltonian reduction is recorded in [@rem-rotating-frame-carrier-literature]).
+
+::: {.remark #rem-rotating-frame-carrier-literature title="Rotating-Frame Transformation and Carrier Cancellation (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** In the continuous-time Schrödinger model (see [@rem-pulses-literature]), under $H_0 = \frac{1}{2}\omega_0 Z$ the basis states $\lvert 0\rangle$ and $\lvert 1\rangle$ are stationary rays with eigenvalues $\pm\omega_0/2$ while equatorial states precess at angular frequency $\omega_0$. Defining the rotating-frame state via
+
+$$
+V(t) = e^{+i\omega_0 t Z / 2}, \qquad \lvert\psi_{\mathrm{rot}}(t)\rangle = V(t)\lvert\psi_{\mathrm{lab}}(t)\rangle,
+$$
+
+substituting $i\partial_t \lvert\psi_{\mathrm{lab}}\rangle = H_{\mathrm{lab}}(t)\lvert\psi_{\mathrm{lab}}\rangle$ yields the effective rotating-frame Hamiltonian
 
 $$
 H_{\mathrm{rot}}(t) = V(t) H_{\mathrm{lab}}(t) V(t)^* + i\dot{V}(t) V(t)^* = V(t) H_{\mathrm{lab}}(t) V(t)^* - \frac{1}{2}\omega_0 Z,
 $$
 
-canceling the $5\,\mathrm{GHz}$ carrier Hamiltonian $H_0 = \frac{1}{2}\omega_0 Z$ identically.
+where the frame term $-\frac{1}{2}\omega_0 Z = -H_0$ cancels the $5\,\mathrm{GHz}$ carrier Hamiltonian $H_0$ identically.
+:::
 
 ## Resonant Drives and Pulse Area {#sec-resonant-pulse-area}
 
-Now apply a resonant transverse microwave drive ($\omega_d = \omega_0$) with real envelope $\Omega(t)$ and phase $\varphi$:
+With the background carrier removed, the standard reduction of a resonant transverse microwave drive under the rotating-wave approximation (RWA) to a fixed-axis pulse-area integral is recorded below (Panel II of Figure 11; [@rem-rwa-pulse-area-literature]).
+
+::: {.remark #rem-rwa-pulse-area-literature title="Resonant Microwave Drive and the RWA Pulse-Area Law (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** In an isolated two-level model (for modeling premises and citations, see [@rem-pulses-literature]), apply a resonant transverse microwave drive ($\omega_d = \omega_0$) with real envelope $\Omega(t)$ and phase $\varphi$:
 
 $$
 H_{\mathrm{drive}}^{\mathrm{lab}}(t) = \Omega(t)\cos(\omega_0 t + \varphi)\,X.
 $$
 
-Conjugating by $V(t) = e^{+i\omega_0 t Z/2}$ uses $V(t) X V(t)^* = \cos(\omega_0 t) X - \sin(\omega_0 t) Y$. Applying the product-to-sum identities splits the drive into two parts: a counter-rotating term oscillating at $2\omega_0 / (2\pi) \approx 10\,\mathrm{GHz}$ that averages out over tens of nanoseconds, and a co-rotating term that stands still at azimuth $\varphi$ on the equator of the rotating frame. Under resonance ($\omega_d = \omega_0$), an isolated two-level model, and the **rotating-wave approximation (RWA)**, dropping the rapid $2\omega_0$ oscillation yields the effective rotating-frame Hamiltonian (Panel II of Figure 11):
+Conjugating by $V(t) = e^{+i\omega_0 t Z/2}$ via $V(t) X V(t)^* = \cos(\omega_0 t) X - \sin(\omega_0 t) Y$ and expanding product-to-sum identities splits the drive into a counter-rotating term oscillating at $2\omega_0 / (2\pi) \approx 10\,\mathrm{GHz}$ and a co-rotating term fixed at azimuth $\varphi$ on the equator. Under resonance ($\omega_d = \omega_0$), two-level isolation, and the **rotating-wave approximation (RWA)**, dropping the rapid $2\omega_0$ oscillation gives the effective rotating-frame Hamiltonian:
 
 $$
 H_{\mathrm{rot}}(t) = \frac{1}{2}\Omega(t)\bigl(\cos\varphi\, X + \sin\varphi\, Y\bigr).
 $$
 
-(Writing the in-phase and quadrature envelopes as $I(t) = \Omega(t)\cos\varphi$ and $Q(t) = \Omega(t)\sin\varphi$ alongside a general detuning $\Delta(t) = \omega_0 - \omega_d$, the linear combination $\frac{1}{2}(I\sigma_x + Q\sigma_y + \Delta\sigma_z)$ expands entrywise in the $2\times 2$ complex matrix ring — `ext i j; fin_cases i <;> fin_cases j` — as $\frac{1}{2}\begin{pmatrix} \Delta & I - iQ \\ I + iQ & -\Delta \end{pmatrix}$, whose diagonal vanishes at exact resonance $\Delta = 0$.)
+(Writing $I(t) = \Omega(t)\cos\varphi$ and $Q(t) = \Omega(t)\sin\varphi$ alongside a general detuning $\Delta(t) = \omega_0 - \omega_d$, the linear combination $\frac{1}{2}(I\sigma_x + Q\sigma_y + \Delta\sigma_z)$ expands entrywise in $M_2(\mathbb{C})$ as $\frac{1}{2}\begin{pmatrix} \Delta & I - iQ \\ I + iQ & -\Delta \end{pmatrix}$, whose diagonal vanishes at exact resonance $\Delta = 0$.)
 
-Inspect what happens whenever the drive phase $\varphi$ is held constant during the pulse window $t \in [0, T]$:
+Whenever the drive phase $\varphi$ is held constant over $t \in [0, T]$, the generator $H_{\mathrm{rot}}(t)$ points along the **same fixed equatorial axis** $\vv{n}_\varphi = (\cos\varphi, \sin\varphi, 0)$ at every instant, so $[H_{\mathrm{rot}}(t_1), H_{\mathrm{rot}}(t_2)] = 0$ for all $t_1, t_2 \in [0, T]$. No Dyson time-ordering series is needed, and the propagator integrates directly to
 
-- Even though the envelope amplitude $\Omega(t)$ rises and falls over time (whether shaped as a rectangular pulse, a Gaussian, or a raised-cosine envelope), the generator $H_{\mathrm{rot}}(t)$ points along the **same fixed equatorial axis** $\vv{n}_\varphi = (\cos\varphi, \sin\varphi, 0)$ at every instant $t \in [0, T]$;
-- Because scalar multiples of a single fixed matrix commute with one another, the Hamiltonians at any two times commute:
-  $$
-  \bigl[H_{\mathrm{rot}}(t_1),\, H_{\mathrm{rot}}(t_2)\bigr] = 0 \qquad (\forall\, t_1, t_2 \in [0, T]);
-  $$
-- Consequently, no Dyson time-ordering series is needed, and the time-evolution propagator integrates directly to
-  $$
-  U_{\mathrm{rot}}(T) = \exp\Bigl(-i\int_0^T H_{\mathrm{rot}}(t)\,dt\Bigr) = \exp\Bigl(-\frac{i}{2}\theta\bigl(\cos\varphi\, X + \sin\varphi\, Y\bigr)\Bigr) = R_\varphi(\theta),
-  $$
-  where the rotation angle on the Bloch sphere is given by the **pulse area**:
-  $$
-  \theta = \int_0^T \Omega(t)\,dt.
-  $$
+$$
+U_{\mathrm{rot}}(T) = \exp\Bigl(-i\int_0^T H_{\mathrm{rot}}(t)\,dt\Bigr) = \exp\Bigl(-\frac{i}{2}\theta\bigl(\cos\varphi\, X + \sin\varphi\, Y\bigr)\Bigr) = R_\varphi(\theta), \qquad \theta = \int_0^T \Omega(t)\,dt,
+$$
 
-In this idealized fixed-axis RWA model, the Bloch rotation angle $\theta$ is governed solely by the **integrated area** $\int_0^T \Omega(t)\,dt$ under the microwave envelope! An area of $\pi/2$ executes a quarter-turn (carrying the North Pole $\lvert 0\rangle$ to the equator), while an area of $\pi$ executes a half-turn bit flip ($\lvert 0\rangle \to \lvert 1\rangle$).
+so in this idealized fixed-axis RWA model the Bloch rotation angle $\theta$ equals the **integrated pulse area** under the envelope (an area of $\pi/2$ executes a quarter-turn, and an area of $\pi$ executes a half-turn bit flip).
+:::
+
+This effective hardware picture echoes the epigraph's geometric intuition (`MODEL`): a quantum state is a spherical direction, while a resonant control pulse acts in the time domain through an envelope of definite integrated area ([@rem-rwa-pulse-area-literature]).
 
 ## Ordered Pulses and an Error Bound {#sec-ordered-pulse-control}
 
@@ -159,32 +165,32 @@ Notice the geometric reason why the trace error scales as $O(t^2)$ rather than $
 
 ## Virtual Z and Phase-Reference Updates {#sec-virtual-z-phase-reference}
 
-Whereas an equatorial rotation $R_\varphi(\theta) = \exp\bigl[-\frac{i}{2}\theta(\cos\varphi\, X + \sin\varphi\, Y)\bigr]$ requires a physical microwave pulse of nonzero duration, a vertical rotation $R_z(\lambda) = \exp(-i\lambda Z/2)$ obeys both the exact conjugation identity and the right-commutation identity (Panel III of Figure 11):
+In contrast to equatorial rotations implemented via nonzero-duration microwave envelopes ([@rem-rwa-pulse-area-literature]), superconducting hardware executes **virtual $Z$ gates** with zero additional analog pulse duration via axial conjugation and a software phase register (Panel III of Figure 11; the conjugation identities and sign conventions are recorded in [@rem-virtual-z-scheduling-literature]).
+
+::: {.remark #rem-virtual-z-scheduling-literature title="Single-Qubit Axial Conjugation Identity and Passive Virtual-Z Phase-Register Scheduling (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** For an axial rotation $R_z(\lambda) = \exp(-i\lambda Z/2) = \operatorname{diag}(e^{-i\lambda/2}, e^{+i\lambda/2})$ and an equatorial drive gate $R_\varphi(\theta) = \exp\bigl[-\frac{i}{2}\theta(\cos\varphi\, X + \sin\varphi\, Y)\bigr]$, the relations $R_z(\lambda) X R_z(-\lambda) = \cos\lambda\, X + \sin\lambda\, Y$ and $R_z(\lambda) Y R_z(-\lambda) = -\sin\lambda\, X + \cos\lambda\, Y$ yield both the axial conjugation identity and the right-commutation identity (for hardware scheduling citations, see [@rem-pulses-literature]):
 
 $$
 R_z(\lambda)\,R_\varphi(\theta)\,R_z(-\lambda) = R_{\varphi + \lambda}(\theta) \quad\Longleftrightarrow\quad R_\varphi(\theta)\,R_z(\lambda) = R_z(\lambda)\,R_{\varphi - \lambda}(\theta).
 $$
 
-To implement virtual $Z$ gates without sign ambiguity, we must sharply distinguish the **passive frame offset** from the **physical drive phase replacement**:
+To implement virtual $Z$ gates without sign ambiguity, control software distinguishes the **passive frame offset** from the **physical drive phase replacement**:
 
 1. **Conjugation identity and the passive frame register $\phi_{\mathrm{frame}}$**: The conjugation identity $R_z(\lambda) R_\varphi(\theta) R_z(-\lambda) = R_{\varphi + \lambda}(\theta)$ shows that rotating the reference frame actively by $+\lambda$ around $Z$ carries an axis at azimuth $\varphi$ to azimuth $\varphi + \lambda$ (for instance, at $\lambda = \pi/2$ and $\varphi = 0$, conjugating $R_0(\theta) = R_x(\theta)$ yields $R_{\pi/2}(\theta) = R_y(\theta)$). In control software, each virtual $R_z(\lambda)$ instruction increments a **passive frame phase register** by
    $$
    \phi_{\mathrm{frame}} \longmapsto \phi_{\mathrm{frame}} + \lambda.
    $$
-2. **Commuting a preceding $R_z(\lambda)$ to final $Z$ readout uses $\varphi_{\mathrm{phys}} = \varphi - \phi_{\mathrm{frame}}$**: When an active gate $R_z(\lambda)$ precedes a subsequent equatorial pulse $R_\varphi(\theta)$ in a circuit (acting first on the ket from the right), omitting the physical $Z$ pulse and pushing $R_z(\lambda)$ to the left past $R_\varphi(\theta)$ toward a final $Z$-basis measurement uses the right-commutation identity
-   $$
-   R_\varphi(\theta)\,R_z(\lambda) = R_z(\lambda)\,R_{\varphi - \lambda}(\theta).
-   $$
-   Under our fixed physical drive convention $R_\varphi(\theta) = \exp\bigl[-\frac{i}{2}\theta(\cos\varphi\, X + \sin\varphi\, Y)\bigr]$, incrementing the passive frame register by $\phi_{\mathrm{frame}} \mapsto \phi_{\mathrm{frame}} + \lambda$ therefore maps a logical gate angle $\varphi$ to the **physical microwave drive phase**
+2. **Commuting a preceding $R_z(\lambda)$ to final $Z$ readout uses $\varphi_{\mathrm{phys}} = \varphi - \phi_{\mathrm{frame}}$**: When an active gate $R_z(\lambda)$ precedes a subsequent equatorial pulse $R_\varphi(\theta)$ in a circuit (acting first on the ket from the right), omitting the physical $Z$ pulse and pushing $R_z(\lambda)$ to the left past $R_\varphi(\theta)$ toward a final $Z$-basis measurement uses the right-commutation identity $R_\varphi(\theta)\,R_z(\lambda) = R_z(\lambda)\,R_{\varphi - \lambda}(\theta)$. Under the fixed physical drive convention $R_\varphi(\theta) = \exp\bigl[-\frac{i}{2}\theta(\cos\varphi\, X + \sin\varphi\, Y)\bigr]$, incrementing $\phi_{\mathrm{frame}} \mapsto \phi_{\mathrm{frame}} + \lambda$ maps a logical gate angle $\varphi$ to the **physical microwave drive phase**
    $$
    \varphi_{\mathrm{phys}} = \varphi - \phi_{\mathrm{frame}} \qquad (\text{a single-step shift }\varphi \longmapsto \varphi - \lambda),
    $$
-   while the accumulated $R_z(\phi_{\mathrm{frame}})$ pushed to the end of the circuit is absorbed by the final $Z$-basis projective readout $\lvert 0\rangle\langle 0\rvert, \lvert 1\rangle\langle 1\rvert$ (since $R_z(-\phi_{\mathrm{frame}})\lvert b\rangle\langle b\rvert R_z(\phi_{\mathrm{frame}}) = \lvert b\rangle\langle b\rvert$ by [@thm-hermitian-eigenstate-stationary]), executing a **virtual $Z$ gate** with **zero additional analog pulse duration** ($\Delta t_{\mathrm{analog}} = 0$) in ideal pulse scheduling!
-3. **Observable sign check on $\lvert +\rangle$**: Suppose we prepare $\lvert +\rangle = (\lvert 0\rangle + \lvert 1\rangle)/\sqrt{2}$, apply $R_z(\pi/2)$ followed by $R_x(\pi/2) = R_0(\pi/2)$, and measure in the $Z$ basis. By the commutation identity,
+   while rotating subsequent equatorial readout axes by the same relative shift; the accumulated $R_z(\phi_{\mathrm{frame}})$ pushed to the end of the circuit leaves final $Z$-basis projectors $\lvert b\rangle\langle b\rvert$ ($b \in \{0, 1\}$) invariant (compare [@thm-hermitian-eigenstate-stationary]), realizing **zero additional analog pulse duration** ($\Delta t_{\mathrm{analog}} = 0$) in ideal pulse scheduling.
+3. **Observable sign check on $\lvert +\rangle$**: Preparing $\lvert +\rangle = (\lvert 0\rangle + \lvert 1\rangle)/\sqrt{2}$, applying $R_z(\pi/2)$ followed by $R_x(\pi/2) = R_0(\pi/2)$, and measuring in the $Z$ basis gives
    $$
    R_x(\pi/2)\,R_z(\pi/2)\lvert +\rangle = R_z(\pi/2)\,R_{-\pi/2}(\pi/2)\lvert +\rangle = e^{-i\pi/4}\lvert 0\rangle,
    $$
-   yielding outcome $\lvert 0\rangle$ with probability $P(0) = 1$: omitting $R_z(\pi/2)$ and shifting the physical drive phase by $-\lambda = -\pi/2$ (an $R_{-\pi/2}(\pi/2) = R_{-y}(\pi/2)$ pulse) rotates $\lvert +\rangle$ to the North Pole $\lvert 0\rangle$ and reproduces $P(0) = 1$, whereas shifting the physical drive phase by $+\pi/2$ ($+Y$ pulse) would rotate $\lvert +\rangle$ to the South Pole $\lvert 1\rangle$ and give the wrong probability $P(0) = 0$.
+   with outcome probability $P(0) = 1$: omitting $R_z(\pi/2)$ and setting $\varphi_{\mathrm{phys}} = -\pi/2$ ($-Y$ pulse) rotates $\lvert +\rangle$ to $\lvert 0\rangle$ ($P(0) = 1$), whereas $+\pi/2$ ($+Y$ pulse) would rotate $\lvert +\rangle$ to $\lvert 1\rangle$ ($P(0) = 0$).
+:::
 
 At the operator-algebraic level, pushing a state forward by $t$ discrete channel steps (Schrödinger picture) versus pulling the measurement effect back by $t$ adjoint iterates (Heisenberg reference-frame update) is certified by the frozen trace-duality identity in `ObserverPullbackTraceIdentity`. Here `MatrixAlgebra d` is the complex square CStar-matrix algebra, `DensityState d` is its positive trace-one subtype, `QuantumChannel d d` carries a completely positive trace-preserving map, and `evolvedState channel t rho` iterates `QuantumChannel.mapState` $t \in \mathbb{N}$ times.
 
@@ -210,15 +216,19 @@ By induction on $t \in \mathbb{N}$. The base case $t = 0$ is immediate. For the 
 
 Note that in [@cor-frame-pullback-readout], $t \in \mathbb{N}$ counts discrete channel iterations rather than physical seconds, and the theorem certifies trace-dual readout under the explicit `hduality` premise (of which unitary frame conjugation is a special case); it makes no claim about analog pulse duration or hardware error rates.
 
-We can now compare the three elementary single-qubit rotations in superconducting hardware side by side:
+Let us compare the three elementary single-qubit rotations in superconducting hardware and check all four numerical aspects — $5\,\mathrm{GHz}$ carrier removal, a $25\,\mathrm{ns}$ quarter-turn pulse, a virtual-$Z$ phase shift, and the dimensionless `pulse0` trace bound — in a single concrete example.
 
-1. **Rotation $R_x(\theta)$ about the $X$ axis**: Executed by a resonant microwave pulse at phase $\varphi = 0$ (in-phase channel $I$), with rotation angle set by the envelope area $\theta = \int_0^T \Omega(t)\,dt$ over a typical analog duration $T \approx 10\text{–}40\,\mathrm{ns}$;
-2. **Rotation $R_y(\theta)$ about the $Y$ axis**: Executed by a resonant microwave pulse at phase $\varphi = \pi/2$ (quadrature channel $Q$, shifted by a quarter carrier cycle relative to $I$), with rotation angle $\theta = \int_0^T \Omega(t)\,dt$ over $T \approx 10\text{–}40\,\mathrm{ns}$;
-3. **Rotation $R_z(\lambda)$ about the $Z$ axis (Virtual $Z$ gate)**: Executed by updating the passive software frame register $\phi_{\mathrm{frame}} \mapsto \phi_{\mathrm{frame}} + \lambda$ (and, when commuting a preceding $R_z(\lambda)$ to final $Z$-basis readout, shifting the physical drive phase of subsequent equatorial pulses to $\varphi_{\mathrm{phys}} = \varphi - \phi_{\mathrm{frame}}$, i.e. $\varphi \mapsto \varphi - \lambda$ via $R_\varphi(\theta)R_z(\lambda) = R_z(\lambda)R_{\varphi-\lambda}(\theta)$), requiring **zero additional analog pulse duration** ($\Delta t_{\mathrm{analog}} = 0$) in ideal pulse scheduling!
+::: {.example #ex-five-ghz-pi-over-two title="A 25 ns Quarter-Turn on a 5 GHz Carrier and a Virtual Z (With Literature Context, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** The superconducting hardware comparison of $R_x, R_y, R_z$ below together with the rotating-wave-approximation (RWA) pulse-area law $\theta = \int_0^T \Omega(t)\,dt$ and passive zero-analog-duration virtual-$Z$ scheduling in Steps 1–3 belong to the quantum-engineering literature (see [@rem-pulses-literature] below) and are not formalized in this book, whereas Step 4 instantiates this chapter's kernel-verified dimensionless bound [@prop-ordered-pulse-error].
 
-Let us check all four aspects — $5\,\mathrm{GHz}$ carrier removal, a $25\,\mathrm{ns}$ quarter-turn pulse, a virtual-$Z$ phase shift, and the dimensionless `pulse0` trace bound — in a single concrete numerical example.
+First compare the three elementary single-qubit rotations across physical mechanism, control parameter, and analog duration:
 
-::: {.example #ex-five-ghz-pi-over-two title="A 25 ns Quarter-Turn on a 5 GHz Carrier and a Virtual Z"}
+- **Rotation $R_x(\theta)$ about the $X$ axis**: Executed by a resonant microwave pulse at phase $\varphi = 0$ (in-phase channel $I$), with rotation angle set by the envelope area $\theta = \int_0^T \Omega(t)\,dt$ over a typical analog duration $T \approx 10\text{–}40\,\mathrm{ns}$;
+- **Rotation $R_y(\theta)$ about the $Y$ axis**: Executed by a resonant microwave pulse at phase $\varphi = \pi/2$ (quadrature channel $Q$, shifted by a quarter carrier cycle relative to $I$), with rotation angle $\theta = \int_0^T \Omega(t)\,dt$ over $T \approx 10\text{–}40\,\mathrm{ns}$;
+- **Rotation $R_z(\lambda)$ about the $Z$ axis (Virtual $Z$ gate)**: Executed by updating the passive software frame register $\phi_{\mathrm{frame}} \mapsto \phi_{\mathrm{frame}} + \lambda$ (and, when commuting a preceding $R_z(\lambda)$ to final $Z$-basis readout, shifting the physical drive phase of subsequent equatorial pulses to $\varphi_{\mathrm{phys}} = \varphi - \phi_{\mathrm{frame}}$, i.e. $\varphi \mapsto \varphi - \lambda$ via $R_\varphi(\theta)R_z(\lambda) = R_z(\lambda)R_{\varphi-\lambda}(\theta)$), requiring **zero additional analog pulse duration** ($\Delta t_{\mathrm{analog}} = 0$) in ideal pulse scheduling!
+
+Next verify the four concrete numerical items:
+
 1. **Carrier cancellation at $5\,\mathrm{GHz}$**: Set $\hbar = 1$, $H_0 = \omega_0 Z/2$, and $\omega_0 = 2\pi\,(5 \times 10^9)\,\mathrm{rad\,s}^{-1}$ (carrier period $T_0 = 0.2\,\mathrm{ns}$). With $\lvert\psi_{\mathrm{rot}}\rangle = V\lvert\psi_{\mathrm{lab}}\rangle$ and $V = e^{+i\omega_0 t Z/2}$, the transformed Hamiltonian $H_{\mathrm{rot}} = V H_{\mathrm{lab}} V^* + i\dot{V}V^*$ cancels $H_0$ exactly, while the drive reduction uses resonance and the rotating-wave approximation.
 2. **A $25\,\mathrm{ns}$ quarter-turn pulse**: For fixed drive phase $\varphi$, the ideal effective Hamiltonian $H_{\mathrm{rot}}(t) = \Omega(t)(\cos\varphi\, X + \sin\varphi\, Y)/2$ commutes across times, giving $U = \exp[-i\theta(\cos\varphi\, X + \sin\varphi\, Y)/2]$ with $\theta = \int_0^T \Omega(t)\,dt$. Choosing rectangular $\Omega = 2\pi\,(10 \times 10^6)\,\mathrm{rad\,s}^{-1}$ and $T = 25\,\mathrm{ns}$ gives
 

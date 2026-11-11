@@ -129,7 +129,7 @@ $$
 
 ## 24.3 代数自指的唯一黄金锁：$x = 1 + 1/x$ 与 $\varphi = \frac{1+\sqrt{5}}{2}$ {#sec-ch24-3}
 
-在进入超越函数 $\cos\theta = \theta$ 之前，让我们先在实数轴 $(0, +\infty)$ 上看清最纯粹的**有理分式自指不动点**：
+在进入余弦自指方程 $\cos\theta = \theta$（§24.4）之前，让我们先在实数轴 $(0, +\infty)$ 上看清最纯粹的**有理分式自指不动点**：
 
 把最简单的算术操作“加 $1$”与“取倒数 $1/x$”组合成一架自指反馈机：
 
@@ -249,7 +249,7 @@ $$
 先从 `golden_transfer_triangle` 取出恒等式 $\varphi - 1 = \varphi^{-1}$。正向：由 $x > 0$ 知 $x + 1 \neq 0$，于是 $\frac{1}{x+1} = x$ 等价于 $1 = x\,(x + 1)$；结合 $\varphi^2 = \varphi + 1$（`Real.goldenRatio_sq`）与 $\varphi > 1$（`Real.one_lt_goldenRatio`），非线性算术给出 $x = \varphi - 1 = \varphi^{-1}$。反向：代入 $x = \varphi^{-1}$，由 $\varphi^{-1} + 1 = \varphi$ 得 $\frac{1}{\varphi^{-1} + 1} = \frac{1}{\varphi} = \varphi^{-1}$。完整证明由 Lean 内核检查。
 :::
 
-到这里，黄金自指还是一件纯代数的事：加法、除法、一个二次方程。§24.4 将把它与余弦自指 $\cos\theta = \theta$ 放在一起对比（后者的经典分析与超越数论性质见 §24.4 的文献注记）。但这两种自指并非互不相干。黄金比本身就是一个余弦读数，读的是正五边形的角。
+到这里，黄金自指还是一件纯代数的事：加法、除法、一个二次方程。§24.4 将把它与余弦自指 $\cos\theta = \theta$ 放在一起对比（后者的经典分析与算术性质见 §24.4 的文献注记）。但这两种自指并非互不相干。黄金比本身就是一个余弦读数，读的是正五边形的角。
 
 ::: {.proposition #prop-pentagon-golden-cosines title="正五边形的倍余弦读出黄金比、它的倒数与 √5" lean="D5/S3/Constants/PentagonCosines.pentagon_golden_cosines"}
 记 $\varphi$ 为 Mathlib 的 `Real.goldenRatio`。以下四项同时成立：
@@ -272,7 +272,7 @@ $$
 
 黄金自指是正五边形里的一条长度关系：单位边长的正五边形，对角线长为 $2\cos\frac{\pi}{5} = \varphi$。于是 $\varphi$ 也是余弦读数，读在 $\frac{\pi}{5}$ 处并落在二次代数数域 $\mathbb{Q}(\sqrt{5})$ 内；至于当角本身等于自己的余弦（$\cos\theta^* = \theta^*$）时，其算术性质与是否与 $\pi$ 可公度，将在下一节的文献注记 [@rem-banach-dottie-hairy-ball-literature] 与 [@rem-dottie-angle-incommensurable] 中给出。
 
-## 24.4 从 $\cos\theta^* = \theta^*$ 到 $\psi = \psi(\psi)$：超越性、截断裂缝与毛球对跖不动点 {#sec-ch24-4}
+## 24.4 从 $\cos\theta^* = \theta^*$ 到 $\psi = \psi(\psi)$：经典分析、截断裂缝与球面不动点二分 {#sec-ch24-4}
 
 现在，把 [@cor-golden-fixed-point-unique] 中的代数自指 $x = 1 + 1/x$（只涉及一维有理加除，锁在二次代数数 $\varphi = \frac{1+\sqrt{5}}{2}$ 上），与球面内积投影的**余弦自指**
 
@@ -280,9 +280,9 @@ $$
 \cos\theta^* = \theta^*
 $$
 
-放在一起对比！当自指算子从一维有理分式 $1 + 1/x$ 升级为二维旋转投影 $\cos\theta$ 时，实不动点 $\theta^* \approx 0.7390851332\dots$（**Dottie 数**）在经典分析与超越数论中具有怎样的存在唯一性与算术地位？
+放在一起对比！当自指算子从一维有理分式 $1 + 1/x$ 升级为二维旋转投影 $\cos\theta$ 时，实不动点 $\theta^* \approx 0.7390851332\dots$（**Dottie 数**）在经典分析与数论中具有怎样的存在唯一性与算术地位？
 
-让我们在下面的经典文献审计中，把巴拿赫压缩唯一性、林德曼—魏尔斯特拉斯超越性证明、泰勒余项 $R_{2N}(\theta)$ 与毛球定理的球面不动点/对跖点二分法一次尽收眼底。
+下面的文献说明集中记录围绕 $\cos\theta = \theta$ 与偶维球面连续自映射的四项经典定理。
 
 ::: {.remark #rem-banach-dottie-hairy-ball-literature title="巴拿赫压缩映射、Dottie 数的超越性、泰勒余项界与偶维球面不动点/对跖点定理（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 围绕余弦自指方程 $\cos\theta = \theta$ 与高维球面自映射，经典实分析、超越数论与代数拓扑给出以下四项严格定理（与本章的冻结 Lean 定理共同构成完整图景）：
@@ -317,7 +317,7 @@ $$
    回到[第二十一章](ch21-diagonalization-and-escape.md) [@rem-hairy-ball-adams-literature] 中的庞加莱—布劳威尔毛球定理：在任意偶数维球面 $S^{2n}$（如单量子比特布洛赫球面 $S^2$）上，**任何连续自映射 $f : S^{2n} \to S^{2n}$ 必然至少在某一点 $x \in S^{2n}$ 处满足正演不动点 $f(x) = +x$ 或对跖反射点 $f(x) = -x$**！证明极其优美：若对一切 $x \in S^{2n}$ 均有 $f(x) \neq x$ 且 $f(x) \neq -x$，则 $f(x)$ 与 $x$ 处处不共线，将其正交投影到 $x$ 处的切平面即可构造出处处非零的连续切向量场 $v(x) = f(x) - \langle f(x), x\rangle x \neq 0$，直接违背毛球定理！与此同时，若把视野扩展到包含球心混合态的闭布洛赫球体 $B^{n+1} = \{\vv{r} \in \mathbb{R}^{n+1} \mid \|\vv{r}\| \le 1\}$，布劳威尔不动点定理（Brouwer Fixed-Point Theorem）保证任何连续信道映射 $\Phi : B^{n+1} \to B^{n+1}$ 必在球体内部或球皮上拥有至少一个真正的不动点 $\Phi(\vv{r}^*) = \vv{r}^*$。（标准单纯形上的布劳威尔定理已由 Lean 验证，见 [@thm-brouwer-standard-simplex]；闭球与单纯形同胚，但把结论从单纯形转移到闭球的这一步未在本书形式化。）
 :::
 
-更进一步，在超越数论的最前沿，作者在手稿中曾追问：*“超越数之间的关系？$\pi$ 是 $\theta$ 的一个投影？$\theta$ 是终极超越数？”* 这一关于 Dottie 数 $\theta^*$ 与圆周率 $\pi$ 之间代数独立性的深刻追问，在现代超越数论中直接通向尚未解决的**沙努埃尔猜想（Schanuel's Conjecture）**。我们按第三层认识论规范（`OPEN`）将其记录如下。
+更进一步，围绕 [@rem-banach-dottie-hairy-ball-literature] 所记录的数论背景，作者在手稿中曾追问：*“超越数之间的关系？$\pi$ 是 $\theta$ 的一个投影？$\theta$ 是终极超越数？”* 这一关于 Dottie 数 $\theta^*$ 与圆周率 $\pi$ 之间代数独立性的深刻追问，在数论中直接通向尚未解决的**沙努埃尔猜想（Schanuel's Conjecture）**。我们按第三层认识论规范（`OPEN`）将其记录如下。
 
 ::: {.conjecture #conj-schanuel-dottie title="沙努埃尔猜想在余弦不动点 θ* 与圆周率 π 上的代数无关性推论"}
 设沙努埃尔猜想成立（即对任意在 $\mathbb{Q}$ 上线性无关的复数 $z_1, \dots, z_m \in \mathbb{C}$，域扩张 $\mathbb{Q}(z_1, \dots, z_m, e^{z_1}, \dots, e^{z_m})$ 在 $\mathbb{Q}$ 上的超越次数至少为 $m$）。将其应用于在 $\mathbb{Q}$ 上线性无关的纯虚指数对 $z_1 = i\theta^*$ 与 $z_2 = i\pi$（线性无关性即 $\theta^*/\pi \notin \mathbb{Q}$，无条件成立，见 [@rem-dottie-angle-incommensurable]）：由于 $e^{i\pi} = -1 \in \mathbb{Q}$，且 $u = e^{i\theta^*}$ 满足二次代数方程 $u^2 - 2\theta^* u + 1 = 0$（即 $e^{i\theta^*}$ 在 $\mathbb{Q}(\theta^*)$ 上是二次代数元，与 $\theta^*$ **代数相关**，添加 $e^{i\theta^*}$ 与 $i$ 不增加超越次数），域扩张 $\mathbb{Q}(i\theta^*, i\pi, e^{i\theta^*}, e^{i\pi}) \subseteq \overline{\mathbb{Q}(\theta^*, \pi)}$ 的超越次数至少为 $2$ 直接导出：**Dottie 余弦不动点 $\theta^*$ 与圆周率 $\pi$ 在有理数域 $\mathbb{Q}$ 上代数无关**（$\operatorname{tr.deg}_{\mathbb{Q}}\mathbb{Q}(\theta^*, \pi) = 2$）。
@@ -325,9 +325,11 @@ $$
 （本条目为**尚未解决的开放猜想**，故依规不附加 `lean` 形式化属性。）
 :::
 
-让我们用一个具体的数值手算算例，把本章中**离散集合收缩**（[@thm-finite-contracting-updates-stabilize]）、**代数黄金不动点**（[@cor-golden-fixed-point-unique]）与**超越余弦不动点**（[@rem-banach-dottie-hairy-ball-literature]）三条收敛轨道放在同一张桌面上对比。
+让我们用一个具体的数值手算算例，把本章中**离散集合收缩**（[@thm-finite-contracting-updates-stabilize]）、**代数黄金不动点**（[@cor-golden-fixed-point-unique]）与 **Dottie 余弦自指螺旋**（[@rem-banach-dottie-hairy-ball-literature]）三条收敛轨道放在同一张桌面上对比。
 
-::: {.example #ex-dottie-and-golden-iterations title="三类自指迭代的显式手算对比：有限集合筛除、黄金连分数与 Dottie 余弦螺旋"}
+::: {.example #ex-dottie-and-golden-iterations title="三类自指迭代的显式手算对比：有限集合筛除、黄金连分数与 Dottie 余弦螺旋（含文献说明，未在本书形式化）"}
+**文献结果，未在本书形式化。** 本例第 1、2 项具体验算本章经内核验证的 [@thm-finite-contracting-updates-stabilize] 与 [@cor-golden-fixed-point-unique]；第 3 项中余弦迭代 $\theta_{k+1} = \cos\theta_k$ 向唯一实不动点 $\theta^*$ 的收敛属于经典实分析文献结论（详见上文 [@rem-banach-dottie-hairy-ball-literature]），未在本书形式化。
+
 从同一个初始刻度 $1$（或三元初始候选集）出发，观察三种不同维度的自指算子如何各自锁定自己的不动点：
 
 1. **离散有限集收缩（$S_{n+1} = U(S_n)$，[@thm-finite-contracting-updates-stabilize]）**：设 $X = \{0, 1, 2\}$，初始集 $S_0 = \{0, 1, 2\}$（基数 $|S_0| = 3$），收缩规则每步删去当前集合中大于 $0$ 的最大元：$S_0 = \{0, 1, 2\} \to S_1 = \{0, 1\} \to S_2 = \{0\} \to S_3 = \{0\} = S_2$。在 $N = 2 \le 3$ 步内精确抵达集合不动点 $\{0\}$，严格变化步数恰好为 $|\{0, 1\}| = 2 \le 3$。
@@ -649,16 +651,94 @@ $$
 这些界对 $N=0$ 也成立，此时部分和为空；对 $q=0$ 也成立，此时 $x=0$，余项和上界均为零。端点 $x=\pm1$ 的收敛来自 [@rem-arcsin-series-derivation] 的积分论证；此处的几何界只用于 $q<1$。对本章的 $\theta^*\in(0,1)$，选取 $\theta^*\le q<1$；给定任意误差容限 $\varepsilon>0$，总能选 $N$ 使 $2q^{2N+1}/(1-q^2)<\varepsilon$，于是 $|\pi-A_N(\theta^*)|<\varepsilon$。$A_N$ 是有理系数多项式，可用有限次加乘求值。这个结论约束的是精确输入下的级数截断误差；实际计算还需另给 $\theta^*$ 的输入误差、舍入控制与计算资源界。
 :::
 
-**反方向：从 $\pi$ 读出 $\theta^*$。** 将 $A(x)$ 在原点附近作反演所得的有理系数奇次幂级数 $B = A^{-1}$ 及其在 $y = \pi$ 处的收敛算例汇总如下（[@ex-dottie-pi-series]）。
+**反方向：从 $\pi$ 读出 $\theta^*$。** 指定反级数在 $y=\pi$ 处的绝对收敛与精确和由 [@thm-dottie-rational-inverse-endpoint] 给出；经典展开与部分和的数值核对见 [@ex-dottie-pi-series]。
+
+::: {.definition #def-dottie-rational-inverse title="指定的有理反正弦级数与形式复合逆" lean="D5/S3/Analytic/PowerSeries/DottieInverseSeries.alpha D5/S3/Analytic/PowerSeries/DottieInverseSeries.arcsine D5/S3/Analytic/PowerSeries/DottieInverseSeries.forward D5/S3/Analytic/PowerSeries/DottieInverseSeries.inverse"}
+对每个 $k\in\mathbb{N}$，定义有理系数
+
+$$
+\alpha(2k)=0,\qquad
+\alpha(2k+1)=\frac{\binom{2k}{k}}{4^k(2k+1)}=c_k.
+$$
+
+在形式幂级数环 $\mathbb{Q}[[X]]$ 中，令
+
+$$
+\begin{aligned}
+S&=\operatorname{mk}(\alpha)
+  =\sum_{n\ge0}\alpha(n)X^n,\\
+A&=2X+2S,\\
+B&=A^{\langle-1\rangle}.
+\end{aligned}
+$$
+
+这里 $B$ 是由 $A$ 的一次系数 $4$ 为单位元所指定的形式复合逆，满足 $B(0)=0$ 与 $A(B(X))=X$。记 $\beta_n=[X^n]B\in\mathbb{Q}$（$n\in\mathbb{N}$）；在下面的实数级数中，$\beta_n$ 表示这一有理数在 $\mathbb{R}$ 中的像。
+:::
+
+这里保留前文的 $A$、$B$ 记号：形式级数 $A$ 正是函数 $2x+2\arcsin x$ 在原点的展开，$B$ 是它的形式复合逆。前文 $c_k$ 仍只表示反正弦的第 $2k+1$ 次系数；$\beta_n$ 则按每一个自然数次数标记逆级数的系数。
+
+$B$ 有一个不含级数的等价描述：先解 $\eta + \sin\eta = y/2$，再取 $B(y) = \sin\eta$。事实上若 $x = \sin\eta$ 且 $\eta \in [-\pi/2, \pi/2]$，则 $A(x) = 2\sin\eta + 2\eta = y$。取 $y = \pi$，方程 $\eta + \sin\eta = \pi/2$ 的解是 $\eta = \frac{\pi}{2} - \theta^* = \arcsin\theta^*$（代入即得 $\frac{\pi}{2} - \theta^* + \cos\theta^* = \frac{\pi}{2}$），于是 $B(\pi) = \sin\eta = \cos\theta^* = \theta^*$。要把这个函数值同时读成原来那条有理系数级数的和，还须证明级数确实收敛到这里；下面的定理给出绝对收敛与精确的和。
+
+::: {.theorem #thm-dottie-rational-inverse-endpoint title="有理复合逆在 π 处绝对收敛到唯一正余弦不动点" lean="D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"}
+对 [@def-dottie-rational-inverse] 指定的系数 $\beta_n$，存在实数 $\theta^*$，使以下各项同时成立：
+
+1. $0<\theta^*<1$ 且 $\cos\theta^*=\theta^*$；
+2. 对每个实数 $t$，若 $0<t$ 且 $\cos t=t$，则 $t=\theta^*$；
+3. $\operatorname{Summable}\bigl(n\mapsto|\beta_n|\pi^n\bigr)$；
+4. $\operatorname{HasSum}\bigl(n\mapsto\beta_n\pi^n,\;\theta^*\bigr)$。
+
+两条级数都取遍 $n\in\mathbb{N}$，包括 $n=0$。第三项是绝对收敛，第四项保留每个系数的符号并指定其和。
+:::
+
+::: proof
+先给所有系数找一个共同的解析函数。考虑复函数 $f(z)=z+\sin z$；求 $f(z)=w$ 等价于求
+
+$$
+\Phi_w(z)=\frac{w+z-\sin z}{2}
+$$
+
+的不动点。在闭圆盘 $|z|\le1$ 上，正弦与余弦的余项界给出
+
+$$
+|\sin z-z|\le\frac15,\qquad
+|\cos z-1|\le\frac35.
+$$
+
+因此当 $|w|<7/4$ 时，$|\Phi_w(z)|\le(|w|+1/5)/2<1$，而 $|\Phi_w'(z)|\le3/10$。闭圆盘完备，巴拿赫压缩原理在其中给出唯一解 $G(w)$，且 $|G(w)|<1$、$G(w)+\sin G(w)=w$。同一余弦界保证 $f'(G(w))=1+\cos G(w)\ne0$；解析局部反函数与这一唯一解在各点附近相同，于是 $G$ 在整个 $|w|<7/4$ 上解析。共轭保持方程和圆盘，唯一性遂使实数 $w$ 对应实数 $G(w)$，并给出 $G(0)=0$。
+
+令
+
+$$
+H(Y)=\sin G(Y/2).
+$$
+
+它在 $|Y|<7/2$ 上解析，在该圆盘的实轴部分取实值，且 $H(0)=0$。柯西公式因而在半径 $13/4<7/2$ 的圆周上给出同一个 $H$ 的原点幂级数展开。
+
+还须认出这个展开的每一项。对实数 $y$，$|y|<7/2$ 时记 $x=G(y/2)\in(-1,1)$，则 $H(y)=\sin x$，且主支恒等式 $\arcsin(\sin x)=x$ 给出
+
+$$
+2H(y)+2\arcsin H(y)=2\sin x+2x=y.
+$$
+
+在原点附近，反正弦的展开正是 $S$。把上式写成泰勒级数的复合，$H$ 在实轴上的泰勒级数 $T$ 满足 $T(0)=0$ 与 $A(T)=X$。一次系数为 $4$ 的形式级数只有一个零常数项复合逆，故 $T$ 就是 $B$ 的实系数像。由于 $H$ 在实轴附近取实值，实、复泰勒系数相同，于是对每个 $n\ge0$，
+
+$$
+\frac{H^{(n)}(0)}{n!}=\beta_n
+$$
+
+（右端在此取复数像）。这把全部原有理系数，包括零次系数，与同一个柯西展开逐项相连。因 $\pi<13/4$，圆盘内的绝对收敛给出 $\sum_{n\ge0}|\beta_n|\pi^n<\infty$；在 $Y=\pi$ 处求和再取实部，得到有符号级数的和 $H(\pi)$。
+
+最后，令 $x=G(\pi/2)\in(-1,1)$。由 $x+\sin x=\pi/2>0$ 知 $x>0$：若 $x\le0$，这个区间内的 $\sin x$ 也非正。于是 $\theta^*=\sin x$ 满足 $0<\theta^*<x<1$，且 $\theta^*=\pi/2-x$，从而 $\cos\theta^*=\sin x=\theta^*$。任意正实数竞争者 $t=\cos t$ 先由 $\cos t\le1$ 落在 $(0,1]$，再由余弦在 $[0,\pi]$ 上严格递减排除 $t=1$；同一单调性使两个正不动点不可能互异。因此唯一性覆盖全部正实数 $t$。完整证明由 Lean 内核检查。
+:::
 
 ::: {.example #ex-dottie-pi-series title="π 与 θ* 互逆的两条有理系数级数：部分和的数值核对"}
-**文献结果，未在本书形式化。** $A$ 在 $0$ 处的一阶系数是 $4 \neq 0$，其形式反函数 $B = A^{-1}$ 逐阶反演给出有理系数奇次幂级数
+**文献结果，未在本书形式化：本例的经典反正弦展开、部分和表值与项比值比较。** $A$ 在 $0$ 处的一阶系数是 $4 \neq 0$，其形式反函数 $B = A^{-1}$ 逐阶反演给出有理系数奇次幂级数
 
 $$
 B(y) \;=\; \frac{y}{4} - \frac{y^3}{768} - \frac{y^5}{61440} - \frac{43\,y^7}{165150720} - \frac{223\,y^9}{47563407360} - \cdots .
 $$
 
-$B$ 有一个不含级数的等价描述：先解 $\eta + \sin\eta = y/2$，再取 $B(y) = \sin\eta$（若 $x = \sin\eta$ 且 $\eta \in [-\pi/2, \pi/2]$，则 $A(x) = 2\sin\eta + 2\eta = y$）。取 $y = \pi$，方程 $\eta + \sin\eta = \pi/2$ 的解是 $\eta = \frac{\pi}{2} - \theta^* = \arcsin\theta^*$，于是 $B(\pi) = \sin\eta = \cos\theta^* = \theta^*$。级数 $B$ 的收敛性与等式 $\theta^* = B(\pi)$ 见 Kaplan（2007，*Mathematics Magazine* 第 80 卷，“The Dottie Number”）。$A$ 的展开是经典的反正弦级数。下表的系数用精确有理数算术逐阶反演得到，部分和以 50 位精度计算，四舍五入到所示位数。
+级数 $B$ 及等式 $\theta^* = B(\pi)$ 见 Kaplan（2007，*Mathematics Magazine* 第 80 卷，“The Dottie Number”）；[@thm-dottie-rational-inverse-endpoint] 给出了这条指定级数在 $\pi$ 处的绝对收敛与精确和。$A$ 的展开是经典的反正弦级数。下表的系数用精确有理数算术逐阶反演得到，部分和以 50 位精度计算，四舍五入到所示位数；这些表值与下述项比值仍是数值核对，端点定理不认证其舍入精度或收敛速度比较。
 
 | 截断阶数 | $A$ 的部分和（趋于 $\pi$） | 与 $\pi$ 的差 | $B$ 的部分和（趋于 $\theta^*$） | 与 $\theta^*$ 的差 |
 | :---: | :---: | :---: | :---: | :---: |
@@ -673,7 +753,7 @@ $B$ 有一个不含级数的等价描述：先解 $\eta + \sin\eta = y/2$，再�
 $A$ 的相邻项之比趋于 $(\theta^*)^2 \approx 0.546$。$B$ 的相邻非零项之比从 $0.12$（第 $5$ 阶）升到 $0.22$（第 $21$ 阶），数值上趋向 $1/4$：从 $\pi$ 读出 $\theta^*$ 比从 $\theta^*$ 读出 $\pi$ 收敛得快。
 :::
 
-所以两句话同时成立，并不矛盾：解析上，$\pi$ 与 $\theta^*$ 互为对方的有理系数幂级数的值（[@ex-dottie-pi-series]）；代数上，在沙努埃尔猜想（[@conj-schanuel-dottie]）之下，二者之间没有任何多项式关系。$A$ 与 $B$ 是无穷级数，不是多项式，任何有限截断都留下非零的差，正如上表每一行的差都不为零。
+所以两句话同时成立，并不矛盾：解析上，$\pi$ 与 $\theta^*$ 互为对方的有理系数幂级数的值（[@thm-dottie-rational-inverse-endpoint]、[@ex-dottie-pi-series]）；代数上，在沙努埃尔猜想（[@conj-schanuel-dottie]）之下，二者之间没有任何多项式关系。$A$ 与 $B$ 是无穷级数，不是多项式；上表列出的有限截断都留下非零的差。一般截断余项的非零性、系数符号规律及计算资源界均不包含在端点定理中。
 
 **不动点住在哪里：摆线的半程。** 辅助方程 $\eta + \sin\eta = \pi/2$ 在天体力学开普勒方程与径向自由落体中的物理化身汇总于下例（[@ex-dottie-free-fall]）。
 
@@ -825,11 +905,11 @@ $$
 
 ### 第六部小结：从球外之球回到自指原点，下一步铸造机械法典
 
-回望第六部《越界·球外之球》的四章征程，我们用经 Lean 4 内核逐条验证的**三十二条正式定理级结论**（第二十一章七条，第二十二章八条，第二十三章四条，第二十四章十三条，涵盖相对语义对角线拓扑逃逸、黎曼 $\zeta$ 函数留数与狄利克雷—欧拉乘积恒等式、艾森斯坦交越二次型剪切不变性与黄金佩尔迹—范数恒等式、以及有限收缩稳定化、解释语境相对不动点与黄金倒数唯一不动点），完成了从数理逻辑、算术频谱到自指不动点的跨界合拢：
+回望第六部《越界·球外之球》的四章征程，我们用经 Lean 4 内核逐条验证的**三十三条正式定理级结论**（第二十一章七条，第二十二章八条，第二十三章四条，第二十四章十四条，涵盖相对语义对角线拓扑逃逸、黎曼 $\zeta$ 函数留数与狄利克雷—欧拉乘积恒等式、艾森斯坦交越二次型剪切不变性与黄金佩尔迹—范数恒等式、以及有限收缩稳定化、解释语境相对不动点与黄金倒数唯一不动点），完成了从数理逻辑、算术频谱到自指不动点的跨界合拢：
 
 - **第二十一章**证明了完备解码目录诱导的相对语义对角线在潜划分拓扑下必不连续（[@thm-complete-diagonal-not-continuous]）、必具非空分离亏损（[@lem-complete-diagonal-separation-deficit]），且并入对角线后观测拓扑严格加细（[@prop-complete-diagonal-strict-refinement]、[@cor-complete-diagonal-topological-settlement]），给出了完备赋范代数中指数级数的阶乘余项界（[@lem-exp-tail-le]）与有限记录信道恢复误差的严格正余弦下界（[@lem-finite-support-autocorrelation-cosine]、[@thm-finite-record-cosine-obstruction]），并与经典分析余项与球面拓扑文献评注（[@rem-lagrange-taylor-remainder-literature]、[@rem-hairy-ball-adams-literature]）交相印证；
 - **第二十二章**将素数还原为算术对数空间的正交基，在绝对收敛半平面 $\operatorname{Re}(s) > 1$ 上严格建立了 $s=1$ 留数（[@lem-riemann-zeta-residue-one]）、狄利克雷级数（[@prop-riemann-zeta-dirichlet-sum]）、欧拉乘积（[@thm-riemann-zeta-euler-product]）及两者的直接恒等（[@cor-dirichlet-sum-eq-euler-product]），给出完备化 $\xi$ 读数的整函数性与反射对称 $\xi(1 - s) = \xi(s)$（[@thm-xi-reading-entire-reflection]）及共轭协变（[@prop-zeta-conjugation-covariance]），把临界线卷成单位圆并得到黎曼猜想的径向等价形式（[@thm-cayley-critical-line-criterion]），用一个四次多项式说明完全对称性不足以把零点锁在临界线上（[@thm-full-symmetry-not-localization]），剖析了有限素数筛的多面体余项裂缝，并严格划定了它们与开放黎曼猜想及经典文献背景（[@conj-riemann-hypothesis]、[@rem-euler-zeta-literature]）的认识论边界；
 - **第二十三章**揭示了二次范数与迹投影如何在连续有理数中锁定离散整格，形式化证明了 $\Delta = -3$ 艾森斯坦交越二次型的幺模剪切归约、常数判别式与值域等同（[@thm-qform-eq-eisnorm]、[@lem-qform-discriminant]、[@cor-qform-range-eq-eisnorm]）以及 $\Delta = +5$ 黄金整数的佩尔恒等式（[@prop-pell-form-eq-four-mul-norm]），并在文献评注（[@rem-diophantine-z-in-q-literature]）中划定了有理数域一阶可定义性文献与开放问题 $\mathrm{H10}(\mathbb{Q})$ 的精确边界；
-- **第二十四章**证明了有限状态收缩更新的稳定化与变化步数界（[@thm-finite-contracting-updates-stabilize]）、相对解释不动点的相邻步贴合与静态语境非唯一性（相同的文本与解释规则在两个不同静态语境下给出不同的布尔意义，[@lem-conceptual-equivalence-stability-fixed-point]、[@prop-context-parameters-distinct-fixed-points]）、正实数上黄金倒数映射的唯一不动点（[@cor-golden-fixed-point-unique]）、非退化二元分式映射的四种自作用命运及其中唯一“活着”的 $\varphi$ 族（[@thm-self-application-four-fates]、[@lem-golden-inverse-branch-fixed-point]）、正五边形的黄金余弦（[@prop-pentagon-golden-cosines]）、对角线落点即扭转不动点与无不动点扭转的普遍逃逸及其有限计数（[@lem-diagonal-landing-fixed]、[@thm-self-application-fragment-package]、[@prop-escaped-listing-card]）、标准单纯形上的布劳威尔不动点定理（[@thm-brouwer-standard-simplex]）、无理旋转轨道平均趋于 Haar 平均（[@lem-irrational-rotation-equidistribution]），以及反正弦展开所用的归一化中心二项系数界与二项核级数（[@lem-arcsin-binomial-kernel]），并在经典不动点与超越数文献评注（[@rem-banach-dottie-hairy-ball-literature]）及开放沙努埃尔猜想（[@conj-schanuel-dottie]）的映照下，将全书几何直觉收束于 $\cos\theta^* = \theta^*$ 与 $\psi = \psi(\psi)$。
+- **第二十四章**证明了有限状态收缩更新的稳定化与变化步数界（[@thm-finite-contracting-updates-stabilize]）、相对解释不动点的相邻步贴合与静态语境非唯一性（相同的文本与解释规则在两个不同静态语境下给出不同的布尔意义，[@lem-conceptual-equivalence-stability-fixed-point]、[@prop-context-parameters-distinct-fixed-points]）、正实数上黄金倒数映射的唯一不动点（[@cor-golden-fixed-point-unique]）、非退化二元分式映射的四种自作用命运及其中唯一“活着”的 $\varphi$ 族（[@thm-self-application-four-fates]、[@lem-golden-inverse-branch-fixed-point]）、正五边形的黄金余弦（[@prop-pentagon-golden-cosines]）、对角线落点即扭转不动点与无不动点扭转的普遍逃逸及其有限计数（[@lem-diagonal-landing-fixed]、[@thm-self-application-fragment-package]、[@prop-escaped-listing-card]）、标准单纯形上的布劳威尔不动点定理（[@thm-brouwer-standard-simplex]）、无理旋转轨道平均趋于 Haar 平均（[@lem-irrational-rotation-equidistribution]），指定有理复合逆在 $\pi$ 处的绝对收敛及唯一正实余弦不动点值（[@thm-dottie-rational-inverse-endpoint]），以及反正弦展开所用的归一化中心二项系数界与二项核级数（[@lem-arcsin-binomial-kernel]），并在经典不动点与数论文献评注（[@rem-banach-dottie-hairy-ball-literature]）及开放沙努埃尔猜想（[@conj-schanuel-dottie]）的映照下，将全书几何直觉收束于 $\cos\theta^* = \theta^*$ 与 $\psi = \psi(\psi)$。
 
 既然前六部的几何直觉与理论大厦已经合拢，在接下来的**第七部《铸器·构造与验证：异或代数、旋子编译与 Lean 4 公理圣殿》**中，我们将把这一切几何定理直接铸造成可运行、零复数矩阵黑箱的位掩码克利福德引擎与 ZYZ 旋转器编译器，并走进 Lean 4 形式化公理圣殿的内部，对支撑全书的机器形式化声明展开逐行审计，随后在**第八部**与**终章**中完成全书八部曲的总合拢！

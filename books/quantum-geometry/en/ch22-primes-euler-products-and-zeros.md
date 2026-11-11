@@ -116,11 +116,17 @@ $$
 p^{-s} = p^{-\sigma - it} = p^{-\sigma} e^{-i t \ln p} = p^{-\sigma}\bigl(\cos(t\ln p) - i\sin(t\ln p)\bigr).
 $$
 
-In the complex plane, each prime $p$ is an **independent phase clock** spinning at its intrinsic logarithmic angular frequency $\omega_p = \ln p$! Because the prime logarithms $\ln 2, \ln 3, \ln 5, \dots$ are linearly independent over $\mathbb{Q}$, their periods are mutually incommensurable — like an infinite gyroscope whose orthogonal rings wind densely across a high-dimensional torus by Kronecker's theorem.
+In the complex plane, each prime $p$ acts as a **phase pointer (prime clock)** rotating uniformly at its intrinsic logarithmic angular frequency $\omega_p = \ln p$! Why distinct prime clocks have mutually incommensurable periods and how their joint phases evolve on a high-dimensional torus is recorded in the following literature note:
+
+::: {.remark #rem-kronecker-prime-torus-literature title="Rational Linear Independence of Prime Logarithms and Kronecker's Dense Torus Flow (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** By the fundamental theorem of arithmetic (unique prime factorization), the natural logarithms $\ln 2, \ln 3, \ln 5, \dots$ of distinct primes are linearly independent over $\mathbb{Q}$, so their periods are mutually incommensurable; consequently, by the continuous-time torus-flow corollary of Kronecker's approximation theorem (L. Kronecker, 1884), for any finite set of $K$ primes $\{p_1, \dots, p_K\}$ the joint phase trajectory $(t\ln p_1 \bmod 2\pi,\, \dots,\, t\ln p_K \bmod 2\pi)$ as $t \in \mathbb{R}$ varies winds densely across the $K$-torus $\mathbb{T}^K = (\mathbb{R}/2\pi\mathbb{Z})^K$. Both the $\mathbb{Q}$-linear independence of prime logarithms and Kronecker's dense torus-flow theorem belong to the classical number-theory and ergodic-theory literature outside the `trureturing@dev` declarations locked in this book.
+:::
 
 Now apply the anti-Platonic lens of the [Prelude](README.md) and [Chapter 21](ch21-diagonalization-and-escape.md): what happens when a finite algorithm retains only the **first $K$ prime axes** $\{p_1, p_2, \dots, p_K\}$, building a finite-dimensional "**polyhedral prime sieve**" $P_K(s) = \prod_{k=1}^K (1 - p_k^{-s})^{-1}$? Let us work out the $K = 3$ sieve ($p \in \{2, 3, 5\}$) by hand and watch the first unfactored prime leak through the seam.
 
-::: {.example #ex-prime-log-orthogonality-and-sieve title="Hand Calculation of the 3-Prime Euler Sieve (2, 3, 5) and the First Leaked Prime 7"}
+::: {.example #ex-prime-log-orthogonality-and-sieve title="Hand Calculation of the 3-Prime Euler Sieve (2, 3, 5) and the First Leaked Prime 7 (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** The truncated Euler-product remainder expansion on $\operatorname{Re}(s) > 1$ and Euler's Basel identity $\zeta(2) = \frac{\pi^2}{6}$ invoked at $s = 2$ below (see also [@ex-xi-mirror-values] and [@rem-euler-zeta-literature]) belong to the classical analytic number-theory literature and are not locked as standalone theorems in this book's formalization.
+
 For $\operatorname{Re}(s) > 1$, retain only the first $K = 3$ primes $p_1 = 2, p_2 = 3, p_3 = 5$ (the three orthogonal logarithmic axes $\ln 2, \ln 3, \ln 5$) and expand the truncated Euler product $P_{\le 5}(s)$:
 
 $$
@@ -159,7 +165,7 @@ Notice the exact structural parallel between [@ex-prime-log-orthogonality-and-si
 
 ## 22.4 The Critical Symmetry Line $\sigma = 1/2$ and the Epistemic Boundary of the Riemann Hypothesis {#sec-ch22-4}
 
-Inside the half-plane $\operatorname{Re}(s) > 1$, absolute convergence of the Euler product $\prod_p (1 - p^{-s})^{-1}$ ensures that $\zeta(s)$ never vanishes. Once $\zeta(s)$ is analytically continued leftward across the simple pole at $s = 1$ ([@lem-riemann-zeta-residue-one]) into the **critical strip** $0 < \operatorname{Re}(s) < 1$, however, the Dirichlet series and Euler product no longer converge absolutely; instead, coherent interference among the prime phase oscillators $p^{-\sigma} e^{-it\ln p}$ produces points of complete destructive cancellation where $\zeta(\rho) = 0$.
+As recorded in the literature notes [@rem-zeta-zero-free-region-literature] and [@rem-euler-zeta-literature] below, in classical analytic number theory $\zeta(s)$ has no zeros inside the half-plane $\operatorname{Re}(s) > 1$ of absolute Euler-product convergence, whereas once $\zeta(s)$ is analytically continued leftward across the simple pole at $s = 1$ (whose residue theorem is frozen in [@lem-riemann-zeta-residue-one] above) into the **critical strip** $0 < \operatorname{Re}(s) < 1$, the Dirichlet series and Euler product no longer converge absolutely and interference among the prime phase pointers $p^{-\sigma} e^{-it\ln p}$ produces nontrivial zeros $\zeta(\rho) = 0$ at specific complex frequencies $\rho = \sigma + it$.
 
 Why does every nontrivial zero ever computed lie on the vertical **critical line** $\operatorname{Re}(s) = \frac{1}{2}$ (recorded in `D5/S3/Weil/Convention` as the self-dual abscissa [`criticalAbscissa`](lean:D5/S3/Weil/Convention.criticalAbscissa) $= 1/2$)?
 
