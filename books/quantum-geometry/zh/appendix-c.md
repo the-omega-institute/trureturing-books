@@ -16,6 +16,10 @@
 
 下表按模块路径字母顺序列出全书正式数学环境与媒体组件引用的全部 **223 条唯一冻结定理**（跨章节环境复用后共构成 244 处定理级形式化锚点）。点击每条声明名称可直接跳转至对应的 Lean 4 源码树与冻结状态摘要：
 
+::: {.figure src="appc-theorems-by-chapter"}
+**每一章的定理环境用 `lean=` 引用了多少条冻结定理。** 横轴是第一章到第三十章与终章，浅色底纹按部分组（I–VIII）；每根绿色柱子是这一章引用的已验证定理条数，同一条定理在几章各被引用就各计一次。第二十二章最高，$34$ 条；其次第三十章 $20$ 条，第四章与第二十四章各 $16$ 条，第二十九章 $13$ 条；其余各章 $4$ 到 $10$ 条。柱高合计 $243$，由脚本从 `trureturing.lock.json` 与中文章节算出，并与下表最后一栏逐章核对；表中 `T036` 只出现在可视化页面与行内链接里，不在任何一根柱子中。
+:::
+
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 引用章节与环境 ID |
 | :--- | :--- | :--- | :--- | :--- |
 | `T001` | [`D5.S0.Automata.BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes`](lean:D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes) | `D5/S0/Automata/BinaryZeckendorfLanguage.lean:45` | `theorem` | 终章 `#thm-coda-golden-cut-observer-cassini` |
