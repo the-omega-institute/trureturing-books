@@ -77,6 +77,7 @@
    - **节内图**命名 `chNN-<主题>`（序曲 `prelude-…`，终章 `coda-…`，附录 `appa-…`、`appb-…`、`appc-…`），用 `::: {.figure src="…"}` 放在讲到它的那句话之后、两个段落之间，中英文版本位置与 `src` 相同。图注先用一句加粗的话说出这张图讲的那件事，再只说图里看得见的东西，用与图上相同的颜色词和符号；涉及的定理用 `[@thm-…]` 指过去。图不新增任何定理级断言：文献结果、示意模型与开放问题在图注里照正文的分层写明。
    - **章首总览图**命名 `chNN-overview`，是三栏的“本章地图”（脚本里 `WRAP = True`，手机上三栏叠放）。正文以“图 N 第 I、II、III 栏”引用它（N 为章号），所以三栏的主题与次序以正文的引用为准，图注以“**图 N。**”开头；每一栏只画那一节最要紧的一个图景，不堆公式。
    - 与同章的实验卡分工：实验卡给能亲手推的情形，静态图给印刷版与 EPUB 也要看得见的构造；两者紧邻时不画同一个画面。
+6. **锁文件或 `lean=` 引用变动后要重出的东西**：`lean-declaration-map` 页面的数据由脚本从 `trureturing.lock.json` 与中文章节生成并写进它的 `main.js`；`./tbook pin`、`./tbook pin --refresh` 或增删章节里的 `lean=` 引用之后，运行 `python3 books/quantum-geometry/viz/lean-declaration-map/gen-data.py`，再 `node tools/node/viz-thumbs.mjs quantum-geometry lean-declaration-map` 重新出图并提交（它的浏览器测试会核对条目数与锁文件一致，数据过期时失败）。由锁文件算数的静态图（声明分布图）同样会被 `./tbook check` 判为过期：运行 `./tbook fig build --book quantum-geometry` 后提交。
 
 ## 7. 多智能体协同分工与五路并行工作流
 
