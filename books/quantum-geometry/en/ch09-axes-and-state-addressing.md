@@ -12,7 +12,9 @@ Start with an elementary geometric question. If an observer commands only a sing
 
 This chapter turns that intuitive maxim into four precise geometric and topological results: from the existence of a unit normal perpendicular to any pair of vectors in $\mathbb{R}^3$, through two-angle addressing from the North Pole and finite-word generation of $\mathrm{SO}(3)$ from any two noncollinear axes, to an explicit rational six-axis open cover of $S^2$ free of orthogonal pairs (where each strict superlevel condition $2\langle x, a_i\rangle_{\mathbb{R}}^2 > 5\norm{x}^2$ defines a pair of antipodal open spherical caps around $\pm a_i/\norm{a_i}$, giving 6 antipodal pairs = 12 open caps on $S^2$) and its matching topological six-color lower bound.
 
-![Three orthogonal axes and Pauli bivector planes, two-angle Bloch-sphere addressing from the north pole, and a frozen rational six-axis open cover](../assets/fig-09-three-axis-addressing.svg)
+::: {.figure src="ch09-overview"}
+**Figure 9.** The chapter at a glance. Panel I: three violet axes $\vv{e}_1, \vv{e}_2, \vv{e}_3$, mutually perpendicular, and the three magenta discs they span in pairs, the rotation planes $I_x, I_y, I_z$. Panel II: the amber point leaves the North Pole $N$, tilts by $\theta$ along a meridian, then twists by $\varphi$ along the dashed latitude circle. Panel III: each of the six rational axes carries a cyan $45^\circ$ cap at both ends, and the twelve caps cover the whole sphere ([@prop-rational-six-axis-cover]).
+:::
 
 ## Three Axes and Three Bivector Planes {#sec-three-axis-pauli-bivectors}
 
@@ -33,6 +35,10 @@ Let $W = \operatorname{span}_{\mathbb{R}}\{a, b\} \subseteq \mathbb{R}^3$ be the
 :::
 
 Notice the exact scope of [@lemma-three-axis-normal]: no normalization, nonzero, or pairwise-orthogonality hypothesis is imposed on the inputs $a, b \in \mathbb{R}^3$. When $a$ and $b$ are collinear and not both zero ($\dim_{\mathbb{R}}\operatorname{span}\{a, b\} = 1$), the common unit normals form a unit circle $S^1$ in the orthogonal plane; when $a = b = 0$, the orthogonality constraints are vacuous and the common unit normals form the entire unit sphere $S^2$. The lemma asserts the existence of at least one unit vector perpendicular to both without selecting an orientation.
+
+::: {.figure src="ch09-common-normal"}
+**Any two vectors share a unit normal.** Left: $a$ and $b$ differ in length and are not perpendicular; the violet $n$ stands perpendicular to the magenta disc they span, with $-n$ dashed at the other end. Right: $a$ and $b$ are collinear, and the unit vectors perpendicular to both fill a whole violet circle ([@lemma-three-axis-normal]).
+:::
 
 Once we fix the standard orthonormal triad $\vv{e}_1 = (1, 0, 0)$, $\vv{e}_2 = (0, 1, 0)$, $\vv{e}_3 = (0, 0, 1)$, this duality between pairs of axes and normal directions locks into a clean geometric architecture:
 
@@ -152,6 +158,10 @@ Keep the mathematical contract of [@thm-two-axis-finite-word] exact:
 Because two-angle coordinates $(\theta, \varphi)$ become singular at the poles and any single reference axis $\vv{a}$ leaves an orthogonal equator $\{x \in S^2 \mid \langle x, \vv{a}\rangle_{\mathbb{R}} = 0\}$ where inner-product overlap vanishes ([Chapter 1](ch01-measurement.md) and [Chapter 2](ch02-born-rule.md)), a natural topological question arises:
 
 **What is the minimum number of relatively open sets $U_0, \dots, U_{k-1} \subseteq S^2$ required to cover the entire unit two-sphere $S^2$ so that no single open set $U_i$ contains an orthogonal pair of vectors ($\langle x, y\rangle_{\mathbb{R}} \neq 0$ for all $x, y \in U_i$)?**
+
+::: {.figure src="ch09-antipodal-caps"}
+**One colour is a pair of antipodal caps, and no right angle fits inside it.** This is the cross-section of the sphere through the axis $\pm\hat{a}$: the cyan arcs at top and bottom are the two caps within $45^\circ$ of the axis, and the grey arcs at the sides are gaps. $x$ and $y$ in the same cap are less than $90^\circ$ apart; $x$ and $z$ in opposite caps are more than $90^\circ$ apart; a pair exactly $90^\circ$ apart never occurs.
+:::
 
 Can we construct such an orthogonality-free open atlas explicitly using only axes with integer coordinates? Panel III of Figure 09 shows that **six rational axes** suffice. In the Lean module `RationalSixAxisCover`, let $\mathrm{UnitSphere} = \{x \in \mathbb{R}^3 \mid \norm{x} = 1\}$ and define the six rational vectors `axis` in exact index order $i \in \{0, 1, 2, 3, 4, 5\}$:
 
