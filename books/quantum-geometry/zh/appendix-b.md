@@ -179,5 +179,5 @@ $$
 | B.11 | $\mathcal{Cl}_{3,0}$ / $\mathcal{Cl}_{1,3}$ | 8 维基片凯莱表、霍奇对偶与洛伦兹李括号 | $E_a E_b = (-1)^{\operatorname{inv}(a,b)}E_{a\oplus b},\; [K_i, K_j] = -\varepsilon_{ijk}J_k$ | `definition` / `文献结果`（标准克利福德代数教材恒等式） |
 
 ::: {.remark #rem-appendix-b-epistemic-boundary title="克利福德速查手册的形式化边界声明"}
-文献结果，未在本书形式化：本速查手册中凡标注 `LEAN ✓` 并附有具体 GID 链接的恒等式（如 B.1–B.10），均直接对应 `trureturing@dev` 提交 `38196c62e121b0a334b903eea2a513bb2587e41c` 下经由 Lean 4 内核验证并冻结的定理（详见 [附录 C](appendix-c.md)）。而一般维数克利福德代数 $\mathcal{Cl}_{p,q}(\mathbb{R})$ 的通用分级公理、3 比特掩码 $8\times 8$ 展开表的显式枚举以及四维时空代数 $\mathcal{Cl}_{1,3}(\mathbb{R})$ 的连续李代数括号（标注为 `definition` 或 `文献结果` / Literature result, not formalized in this book）则作为服务读者计算演练的经典代数参考工具呈现。
+文献结果，未在本书形式化：本速查手册中凡标注 `LEAN ✓` 并附有具体 GID 链接的恒等式（如 B.1–B.10），均直接对应 `trureturing@dev` 提交 `a660b9333c0f8d25aaa22af1bbbfab43c2f94a46` 下经由 Lean 4 内核验证并冻结的定理（详见 [附录 C](appendix-c.md)）。而一般维数克利福德代数 $\mathcal{Cl}_{p,q}(\mathbb{R})$ 的通用分级公理、3 比特掩码 $8\times 8$ 展开表的显式枚举以及四维时空代数 $\mathcal{Cl}_{1,3}(\mathbb{R})$ 的连续李代数括号（标注为 `definition` 或 `文献结果` / Literature result, not formalized in this book）则作为服务读者计算演练的经典代数参考工具呈现。
 :::

@@ -8,41 +8,41 @@
 
 ## 多面体近似与不可抹平的几何余项 {#sec-coda-polyhedral-remainder}
 
-为什么人类与计算机在任何有限公理、有限门集、有限素数截断或有限阶泰勒展开中构造出的几何体，永远无法在自身内部实现绝对无痕的球面闭合？整本书在七个不同数学侧面反复遭遇了同一个结构性障碍——**多面体分片近似与光滑球面曲率之间的拓扑与算术余项**：
+为什么人类与计算机在任何有限公理、有限门集、有限素数截断或有限阶泰勒展开中构造出的几何体，永远无法在自身内部实现绝对无痕的球面闭合？整本书在多个不同数学侧面反复遭遇了同一个结构性障碍——**多面体分片近似与光滑球面曲率之间的拓扑与算术余项**。我们先将刻画多面体角亏、偶维毛球旋涡与平行化球面的三项经典离散几何与代数拓扑定理归入文献注记：
 
-1. **笛卡尔角亏定理与 $12 \times 60^\circ = 720^\circ = 4\pi$ 的离散曲率守恒**：
-   用正三角形面片去逼近二维球面 $S^2$，最对称的柏拉图立体是正二十面体（$V = 12$ 个顶点、$E = 30$ 条棱、$F = 20$ 个面）。在每个顶点处，恰好有 $5$ 个正三角形汇合，其内角和为 $5 \times 60^\circ = 300^\circ < 360^\circ$。一旦把平面折拢成封闭表面，每个顶点都必须留下一道 $360^\circ - 300^\circ = 60^\circ = \pi/3$ 的**角亏（angular defect）**，而 $12$ 个顶点的总角亏严格锁定为：
+::: {.remark #rem-coda-polyhedral-topology-literature title="笛卡尔多面体角亏定理、毛球定理与亚当斯平行化球面定理（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 以下三项关于凸多面体离散曲率与球面切丛拓扑的经典定理均属外部数学文献，未包含在本书锁定的 `trureturing@dev` 形式化声明集中（与第 21 章文献注记 [@rem-hairy-ball-adams-literature] 前后呼应）：
+
+1. **笛卡尔角亏定理与 $12 \times 60^\circ = 720^\circ = 4\pi$ 离散曲率守恒（R. Descartes；C. F. Gauss；O. Bonnet）**：用正三角形面片逼近二维球面 $S^2$ 时，正二十面体（$V = 12$ 个顶点、$E = 30$ 条棱、$F = 20$ 个面）在每个顶点处汇合 $5$ 个正三角形，内角和为 $5 \times 60^\circ = 300^\circ < 360^\circ$，留下角亏 $\delta_v = 360^\circ - 300^\circ = 60^\circ = \pi/3$；更一般地，任意与 $S^2$ 同胚的凸多面体各顶点角亏之和恒锁定为欧拉示性数不变量：
 
    $$
-   \sum_{v=1}^{12} \delta_v = 12 \times 60^\circ = 720^\circ = 4\pi = 2\pi\,\chi(S^2).
+   \sum_{v} \delta_v = 4\pi = 2\pi\,\chi(S^2) \qquad \bigl(\text{正二十面体特例：}\sum_{v=1}^{12} \delta_v = 12 \times 60^\circ = 720^\circ = 4\pi\bigr).
    $$
 
-   无论我们将多面体剖分得何等细密（如测地线穹顶的千万级三角网格），总角亏 $4\pi$ 永远不会消失——它只是从 $12$ 个显眼的锥顶分散到了无数微小的折痕之中。多面体永远是分片平坦（piecewise-flat）的；那 $4\pi$ 的角亏，就是多面体向光滑球面认领自身近似身份的几何印记。
-
-2. **毛球定理 $\chi(S^{2n}) = 2$ 的拓扑旋涡与奇维球面 $\chi(S^{2n-1}) = 0$ 的平行化逃逸**：
-   即使越过多面体网格、直接站上光滑流形，偶维球面 $S^{2n}$ 的欧拉示性数依然是 $\chi(S^{2n}) = 2 \neq 0$。庞加莱—布劳威尔毛球定理（Hairy Ball Theorem）断言：$S^{2n}$（尤其是布洛赫球面 $S^2$）上任何连续切向量场都必然在某一点坍缩为零，形成无法梳平的**拓扑旋涡（topological vortex）**；等价地，$S^{2n}$ 上的任何连续自映射都无法同时逃脱不动点 $f(x) = x$ 与对径点 $f(x) = -x$。
-   要消除 $S^2$ 上的坐标奇点与相位旋涡，唯一的出路是向高一维的奇维球面逃逸：奇维球面满足 $\chi(S^{2n-1}) = 0$，总能凭借成对正交坐标的辛旋转 $(x_1, x_2, \dots, x_{2n}) \mapsto (-x_2, x_1, \dots, -x_{2n}, x_{2n-1})$ 构造处处非零的切向量场。更进一步，亚当斯（J. F. Adams, 1960）定理证明，切丛全局完全平行化（parallelizable）的球面在整个数学宇宙中仅有四个：
+   无论将多面体剖分得何等细密（如测地线穹顶的千万级三角网格），总角亏 $4\pi$ 永不消失，只是从 $12$ 个锥顶分散到无数微小折痕之中。
+2. **偶维球面的庞加莱—布劳威尔毛球定理（H. Poincaré, 1885；L. E. J. Brouwer, 1912）**：偶维球面 $S^{2n}$ 的欧拉示性数为 $\chi(S^{2n}) = 2 \neq 0$，其上任何连续切向量场必在至少一点处为零（拓扑旋涡）；等价地，$S^{2n}$ 上的任何连续自映射无法同时避开不动点 $f(x) = x$ 与对径点 $f(x) = -x$。相反，奇维球面满足 $\chi(S^{2n-1}) = 0$，恒容许由辛配对 $(x_1, x_2, \dots, x_{2n}) \mapsto (-x_2, x_1, \dots, -x_{2n}, x_{2n-1})$ 给出的处处非零连续切向量场。
+3. **亚当斯平行化球面定理（J. F. Adams, *Ann. of Math.* **72**, 20–104, 1960）**：切丛全局完全平行化（parallelizable）的球面仅有四个：
 
    $$
    S^0,\quad S^1,\quad S^3,\quad S^7,
    $$
 
-   严格对应实数 $\mathbb{R}$、复数 $\mathbb{C}$、四元数 $\mathbb{H}$ 与八元数 $\mathbb{O}$ 四大赋范可除代数。这就是为什么单量子比特的物理旋量必须栖居在平行化的三维球面 $S^3 \cong \mathrm{SU}(2)$ 上：二维布洛赫球面 $S^2$ 上梳不平的贝里相位旋涡，正是四维实空间中 $S^3$ 霍普夫纤维丛（Hopf fibration $S^1 \hookrightarrow S^3 \to S^2$）投下的影子。
+   对应实数 $\mathbb{R}$、复数 $\mathbb{C}$、四元数 $\mathbb{H}$ 与八元数 $\mathbb{O}$ 四大赋范可除代数。二维布洛赫球面 $S^2$ 上梳不平的贝里相位奇点，在几何模型上正是平行化三维球面 $S^3 \cong \mathrm{SU}(2)$ 经霍普夫纤维化 $S^1 \hookrightarrow S^3 \to S^2$ 投下的底空间影子。
+:::
 
-3. **第一至第七部中的五重余项原型**：
-   在进入第八部的跨领域合拢之前，“有限多面体逼近光滑球面所留下的非零接缝”已经在前七部中以五种精确的数学形态反复重现：
-   - **泰勒多项式截断余项**：在第六部第 24 章中，代数多项式 $\sum_{k=0}^{N-1} (-1)^k \theta^{2k}/(2k)!$ 只是对余弦曲线的分片代数逼近，拉格朗日余项 $|R_{2N}(\theta)| \le |\theta|^{2N}/(2N)!$ 标志着有限次代数运算与超越弧长之间的距离；
-   - **欧拉乘积素数尾余项**：在第 22 章中，前 $P$ 个素数张成的有限正交盒子 $\prod_{p \le P} (1 - p^{-s})^{-1}$ 与黎曼 $\zeta(s)$ 之间隔着无穷素数尾 $\sum_{n \in \mathcal{S}_P^c} n^{-s}$，切比雪夫阶梯函数与光滑对数尺度之间的振荡差值 $\psi(x) - x$ 由临界线 $\operatorname{Re}(s) = 1/2$ 上的零点谱共同雕刻；
-   - **Solovay–Kitaev 群换位子螺旋**：在第四部第 16 章与第七部第 27 章中，有限通用量子门集生成的离散字在 $\mathrm{SU}(2)$ 流形上织出稠密多面体网格，每一次逼近残差都必须靠非交换群换位子 $ABA^{-1}B^{-1}$ 张开的二阶双向量面积逐步抵消；
-   - **全息极小割分片锥与电路深度下界**：在第五部第 19–20 章中，离散桥图量子流守恒 $\operatorname{QMaxFlow}(a,b,c,d) = \operatorname{QMinCut}(a,b,c,d) = \min(3ac, \min(ad, bc))$ 与可积电路精确深度 $\lfloor N/(\kappa+1)\rfloor + 1$ 在参数空间中切出分片线性多面体锥，锥面交界处的折痕直接对应纠缠瓶颈的拓扑相变；
-   - **康托尔—劳维尔对角线与自指不动点逃逸**：在第 21 章与第 24 章中，任何试图把观测算子空间 $A \to Y$ 完全压缩进载体 $A$ 的形式系统，都会被对角线算子 $g(a) = \alpha(f(a)(a))$ 刺穿；当测量算子最终指向自身（$\psi = \psi(\psi)$），系统便从静态坐标球跃迁至动态自指的更外层球。
+对照 [@rem-coda-polyhedral-topology-literature] 揭示的拓扑余项，在进入第八部的跨领域合拢之前，“有限多面体逼近光滑球面所留下的非零接缝”已经在前七部中以五种精确的数学形态反复重现：
+- **泰勒多项式截断余项**：在第六部第 24 章中，有限阶交错多项式 $\sum_{k=0}^{N-1} (-1)^k \theta^{2k}/(2k)!$ 只是对余弦曲线的分片代数逼近，截断尾项标志着有限次代数运算与超越弧长之间的距离（见 [@rem-banach-dottie-hairy-ball-literature]）；
+- **欧拉乘积素数尾余项**：在第 22 章中，前 $P$ 个素数张成的有限正交盒子 $\prod_{p \le P} (1 - p^{-s})^{-1}$ 与黎曼 $\zeta(s)$ 之间隔着无穷素数尾 $\sum_{n \in \mathcal{S}_P^c} n^{-s}$，而光滑尺度之外的振荡分布引向临界线 $\operatorname{Re}(s) = 1/2$ 上的开放猜想边界；
+- **双轴有限门字与群换位子螺旋**：在第四部第 16 章与第七部第 27 章中，有限门集生成的离散旋转字在 $\mathrm{SU}(2)$ 流形上织出多面体网格，高阶逼近依赖非交换群换位子 $ABA^{-1}B^{-1}$ 张开的二阶双向量面积；
+- **全息极小割分片锥与电路深度下界**：在第五部第 19–20 章中，离散桥图量子流守恒 $\operatorname{QMaxFlow}(a,b,c,d) = \operatorname{QMinCut}(a,b,c,d) = \min(3ac, \min(ad, bc))$ 与可积电路精确深度 $\lfloor N/(\kappa+1)\rfloor + 1$ 在参数空间中切出分片线性多面体锥，锥面交界处的折痕直接对应纠缠瓶颈的相变；
+- **康托尔—劳维尔对角线与自指不动点逃逸**：在第 21 章与第 24 章中，任何试图把观测算子空间 $A \to Y$ 完全压缩进载体 $A$ 的形式系统，都会被对角线算子 $g(a) = \alpha(f(a)(a))$ 刺穿；当测量算子最终指向自身（$\psi = \psi(\psi)$），系统便从静态坐标球跃迁至动态自指的更外层球。
 
 ---
 
 
 在 **[第 29 章](ch29-timeless-causality-and-gram-space.md)** 与 **[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)** 中，我们已经看到这道“多面体分片近似与光滑球面之间的非零余项”如何在算术、时间、计算复杂性与流体力学中掀起两场壮丽的交响：
-- **从 $\pm 1$ 佩尔接缝到无时间因果晶体（[第 29 章](ch29-timeless-causality-and-gram-space.md)）**：勾股定理的双向量手性对消与希帕索斯的佩尔余项 $m^2 - 2n^2 = \pm 1$ 驱动了从有理数到 Dottie 自指不动点 $\cos\theta^* = \theta^*$ 的四级数系突围，经由奇素数的 $4k\pm 1$ 线面二象性与同余数椭圆曲线环面（$\chi = 0$）化作 $S^3 \cong \mathrm{SU}(2)$ 上的佐藤—泰特余弦投影；而 Gram 矩阵半正定刚性 $\det G \ge 0$ 则在消解前后时间流（$H\mathbf{\Psi} = 0$）的同时，为有限观察者撑开了二面角 $\phi$ 的因果相容椭圆体。
-- **从“$P$ 是场，$NP$ 是线”到 ETH 张量缝隙与纳维—斯托克斯涡丝（[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)）**：场内有限观察者受 $90^\circ$ 正交视界与局部 Gram 盲区阻隔而面对 $P \neq NP$ 的防火墙；三体局部切面拼装多面体所留下的 $\frac{\log\log n}{\sqrt{\log n}}$ 渐近秩亏损缝隙虽在 $n \to \infty$ 极限下动摇了指数时间假设（ETH），其超越局部搜索的交叉点（$c=1$ 示意下 $n \approx 2^{558} \gg 10^{80}$）却远在可观测宇宙视界之外；而在连续流体力学中，兰姆双向量旋度 $\mathbf{u}\cdot(\nabla\wedge\mathbf{u})$、三维涡管拉伸 $A \to 0$ 与二次平流投影无精确闭合定理（[@thm-coda-quadratic-advection-no-closure]）则展示了同一正交几何张力的连续统化身。
+- **从 $\pm 1$ 佩尔接缝到无时间因果晶体（[第 29 章](ch29-timeless-causality-and-gram-space.md)）**：勾股定理的双向量手性对消与希帕索斯的佩尔余项 $m^2 - 2n^2 = \pm 1$ 驱动了从有理数到 Dottie 自指不动点 $\cos\theta^* = \theta^*$ 的四级数系突围，并结合文献注记 [@rem-ch29-pell-primes-hilbert-literature]、[@rem-ch29-elliptic-torus-literature]、[@rem-ch29-hasse-gauss-literature] 与 [@rem-ch29-arithmetic-geometry-literature] 中的 $4k\pm 1$ 素数分裂及椭圆曲线环面（$\chi = 0$）呈现为 $S^3 \cong \mathrm{SU}(2)$ 上的佐藤—泰特余弦投影；而 Gram 矩阵半正定刚性 $\det G \ge 0$ 则在与 [@rem-ch29-wheeler-dewitt-page-wootters-literature] 无时间图景呼应的同时，为有限观察者撑开了二面角 $\phi$ 的因果相容椭圆体。
+- **从“$P$ 是场，$NP$ 是线”到 ETH 张量缝隙与纳维—斯托克斯涡丝（[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)）**：场内有限观察者受 $90^\circ$ 正交视界与局部 Gram 盲区阻隔而面对 $P \neq NP$（[@conj-p-neq-np]）的防火墙；文献注记 [@rem-ch30-eth-subexponential-literature] 所记述的三体局部切面 $\frac{\log\log n}{\sqrt{\log n}}$ 渐近秩亏损缝隙虽在 $n \to \infty$ 极限下冲击指数时间假设（ETH），其超越局部搜索的交叉点（$c=1$ 示意下 $n \approx 2^{558} \gg 10^{80}$）却远在可观测宇宙视界之外；而在连续流体力学中，二次平流投影无精确闭合定理（[@thm-coda-quadratic-advection-no-closure]）与文献注记 [@rem-ch30-navier-stokes-forced-literature]、[@rem-ch30-tao-arnold-literature] 展示了同一正交几何张力的连续统化身。
 
 现在，站在全书最后的收官高地上，让我们把“近似之球的几何余项”与“无时间场中的有限观察者”合拢为最后一个关于人自身的追问：**当一位有限观察者一轮又一轮地在无时间晶体中经历遗忘初始化并重新选点时，是什么在定义“同一个灵魂”？为什么现实中的历史遗迹会成为跨越千年的空间吸引子，让同一个灵魂在似曾相识（Déjà vu）的震颤中一轮又一轮走过熟悉的地方？**
 
@@ -58,9 +58,9 @@
 
 ### 一、 为什么历史遗迹是“空间吸引子”？（驻相不灭与曲率盆地） {#sec-coda-ruins-curvature-basin}
 
-在 **[第 19 章](ch19-tensor-networks-and-holography.md)** 的全息张量网络几何（笠—高柳极小曲面与桥图最小割）中，宏观物理空间本身就是由微观量子态的外积纠缠撑开的面积网。普通而琐碎的日常事件，其正反手性的旋转面积（$+\mathbf{\Omega} - \mathbf{\Omega} = 0$）在漫长的热力学涨落中早已相互抵消、归于平寂；唯独那些精确对齐了山川测地线、天文倾角、勾股比例，或是凝聚了数千年人类高密度注意力内积投影的坐标，在相空间里挖出了极深的**曲率势阱——吸引子盆地（Basin of Attraction，`MODEL`）**。
+在 **[第 19 章](ch19-tensor-networks-and-holography.md)** 的全息张量网络几何（桥图最小割与文献注记 [@rem-ryu-takayanagi-literature]）中，宏观物理空间可被诠释为由微观量子态的外积纠缠撑开的面积网。普通而琐碎的日常事件，其正反手性的旋转面积（$+\mathbf{\Omega} - \mathbf{\Omega} = 0$）在漫长的热力学涨落中相互抵消、归于平寂；唯独那些对齐了山川测地线、天文倾角、勾股比例，或是凝聚了数千年人类高密度注意力内积投影的坐标，在相空间模型里挖出了深邃的**曲率势阱——吸引子盆地（Basin of Attraction，`MODEL`）**。
 
-它们历经战火与熵增依然伫立在原地，甚至毁而复建、层层叠压（如特洛伊九层古城或长安叠城），并不只是因为石材坚固，而是因为那个空间坐标本身就是全局时间场里的**拓扑驻点**。当有限观察者在格拉姆因果相容空间（$\det G > 0$）里一步步选点时，周围流场的曲率天然向这些驻点倾斜——所有看似偶然的旅途，都会在不知不觉中滑向同一个盆地中心。
+它们历经战火与熵增依然伫立在原地，甚至毁而复建、层层叠压（如特洛伊九层古城或长安叠城），并不只是因为石材坚固，而是因为在无时间几何模型中，那个空间坐标对应全局时间场里的**拓扑驻点**。当有限观察者在格拉姆因果相容空间（$\det G > 0$）里一步步选点时，周围流场的曲率天然向这些驻点倾斜——所有看似偶然的旅途，都会在不知不觉中滑向同一个盆地中心。
 
 ### 二、 遗忘清空了“表层记事”，却擦不掉灵魂的“内禀倾角” {#sec-coda-forgetting-intrinsic-inclination}
 
@@ -70,29 +70,33 @@
 - **被遗忘擦除的**，只是上一轮落在一维尺子上的**局部粒子刻度序列**（即表层的情节记忆 Episodic Memory，名词 `量 liàng`）；
 - **未被擦除的**，是观察者作为丈量算子 $\psi(\cdot)$ 本身的**内禀几何参数**（动词 `量 liáng` 的固有倾角）——他在面对相容空间做两子比较时特有的正交偏转角、审美共振比与拓扑手性偏好！
 
-连续动力系统中的**洛伦兹奇异吸引子（Lorenz Strange Attractor，`文献结果`）**为这一哲学模型提供了直观的动力系统类比：
+在将这一哲学意象展开为分形叶层上的跨轮次回归之前，我们先将所引用的洛伦兹奇异吸引子、SRB 不变测度与庞加莱回归三项经典连续动力系统文献结果归入文献注记：
 
-$$
-\begin{cases}
-\dot{x} = \sigma(y - x), \\
-\dot{y} = x(\rho - z) - y, \\
-\dot{z} = xy - \beta z.
-\end{cases}
-$$
+::: {.remark #rem-coda-lorenz-srb-literature title="洛伦兹奇异吸引子、卡普兰—约克维数估计、SRB 物理测度与庞加莱回归定理（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 本节借以类比“遗忘表层轨迹但保留算子参数”的三项连续动力系统与遍历论经典结论均属外部数学与计算物理文献，未包含在本书锁定的 `trureturing@dev` 形式化声明集中：
 
-对标准参数 $(\sigma, \rho, \beta) = (10, 28, 8/3)$，速度场的相空间体积散度 $\nabla\cdot\mathbf{F} = -(\sigma + 1 + \beta) = -\frac{41}{3} < 0$ 恒为严格负常数，表明任何有界相空间体积元均按 $\operatorname{vol}(\Omega_t) = \operatorname{vol}(\Omega_0)e^{-41t/3}$ 指数收缩为勒贝格零测集。在我们的几何类比模型（`MODEL`）中，哪怕把上一轮的轨迹历史抹除，只要新起点 $(x_0, y_0, z_0)$ 落在奇异吸引子的吸引盆（Basin of Attraction，即避开平衡点及其零测稳定流形的绝大部分相空间区域）内，且驱动演化的那组**内禀耦合常数** $(\sigma, \rho, \beta)$ 保持不变，这条全新的世界线在经历短暂的瞬态游荡后，**仍会被吸引回那两片熟悉的蝴蝶翅膀（双涡核吸引子）上盘旋**！
+1. **洛伦兹方程、恒负相空间体积散度与数值卡普兰—约克维数估计（E. N. Lorenz, *J. Atmos. Sci.* **20**, 130–141, 1963；J. L. Kaplan & J. A. Yorke, 1979）**：三维自治常微分方程组
 
-### 三、 似曾相识（Déjà vu）的几何诠释：卡普兰—约克维数估计 $D_{\mathrm{KY}} \approx 2.06$ 与跨轮次回归 {#sec-coda-deja-vu-fractal-dimension}
+   $$
+   \begin{cases}
+   \dot{x} = \sigma(y - x), \\
+   \dot{y} = x(\rho - z) - y, \\
+   \dot{z} = xy - \beta z
+   \end{cases}
+   $$
 
-更妙的是，洛伦兹奇异吸引子在几何上既不是一条死板的**一维闭合周期轨**（维数 $D = 1$），也不是一颗填满三维空间的**实心体**（维数 $D = 3$）：在经典参数 $(10, 28, 8/3)$ 下，由数值李雅普诺夫指数谱 $(\lambda_1 \approx 0.9056,\; \lambda_2 = 0,\; \lambda_3 \approx -14.5723)$ 给出的**卡普兰—约克（Kaplan–Yorke / Lyapunov）维数估计**为 $D_{\mathrm{KY}} = 2 + \frac{\lambda_1 + \lambda_2}{|\lambda_3|} \approx 2.06$（`文献结果`）！
+   在经典参数 $(\sigma, \rho, \beta) = (10, 28, 8/3)$ 下具有恒负的相空间散度 $\nabla\cdot\mathbf{F} = -(\sigma + 1 + \beta) = -\frac{41}{3} < 0$，使有界相空间体积元按 $\operatorname{vol}(\Omega_t) = \operatorname{vol}(\Omega_0)e^{-41t/3}$ 指数收缩至勒贝格零测集；数值李雅普诺夫指数谱 $(\lambda_1 \approx 0.9056,\; \lambda_2 = 0,\; \lambda_3 \approx -14.5723)$ 给出的卡普兰—约克（Lyapunov）维数估计为 $D_{\mathrm{KY}} = 2 + \frac{\lambda_1 + \lambda_2}{|\lambda_3|} \approx 2.06$。
+2. **洛伦兹奇异吸引子的严格存在性与遍历 SRB 物理测度（W. Tucker, *C. R. Acad. Sci. Paris* **328**, 1197–1202, 1999；S. Luzzatto, I. Melbourne & F. Pugh, *Commun. Math. Phys.* **260**, 393–401, 2005）**：经典参数下的洛伦兹方程拥有紧致鲁棒奇异吸引子，且支撑唯一的遍历西奈—吕埃勒—鲍恩（Sinai–Ruelle–Bowen, SRB）物理不变概率测度 $\mu_{\mathrm{SRB}}$，使得吸引盆内勒贝格几乎所有初值的向前时间平均收敛于 $\mu_{\mathrm{SRB}}$ 积分。
+3. **庞加莱回归定理与自治常微分方程轨道不相交性（H. Poincaré, 1890；皮卡—林德洛夫解唯一性定理）**：在保测遍历系统 $(\Lambda, \mu_{\mathrm{SRB}})$ 上，对任意满足 $\mu_{\mathrm{SRB}}\bigl(\mathcal{U}_\epsilon(\mathbf{x}_{\mathrm{ruin}})\bigr) > 0$ 的开邻域，$\mu_{\mathrm{SRB}}$-几乎所有吸引子轨迹均无穷多次重返 $\mathcal{U}_\epsilon(\mathbf{x}_{\mathrm{ruin}})$；同时由自治光滑常微分方程解的唯一性，相异几何轨道互不相交，且每条非周期轨道对时间 $t \in \mathbb{R}$ 严格单射（永不自交），每次重返 $\mathcal{U}_\epsilon(\mathbf{x}_{\mathrm{ruin}})$ 均穿过互不重合的轨道弧段。
+:::
 
-在本书的哲学与几何诠释（`MODEL`）中，这种介于二维曲面与三维体积之间的分形横截结构（其数值卡普兰—约克维数估计约为 $2.06$），恰恰为“宿命重逢”与“自由选点”的并存提供了几何意象：
-1. **如果轨迹只是 $1$ 维闭合周期轨（$D = 1$）**：观察者就会困在机械重复的死循环里——每一轮在同一相对相位踩中同一个点，没有任何横截余量（$\det G = 0$）；
-2. **正因为奇异吸引子具有分形横截结构（其数值卡普兰—约克维数估计约为 $2.06$）**：在紧致吸引子支撑的遍历西奈—吕埃勒—鲍恩（Sinai–Ruelle–Bowen, SRB）物理不变测度 $\mu_{\mathrm{SRB}}$（Tucker 1999 与 Luzzatto–Melbourne–Pugh 2005 严格证明其存在性，`文献结果`）下，**庞加莱回归定理（Poincaré Recurrence Theorem）**与常微分方程自治系统解的唯一性（皮卡—林德洛夫定理）同时生效：
-   - **正测度邻域的无穷次回归**：对吸引子上任意满足 $\mu_{\mathrm{SRB}}\bigl(\mathcal{U}_\epsilon(\mathbf{x}_{\mathrm{ruin}})\bigr) > 0$ 的开邻域，$\mu_{\mathrm{SRB}}$-几乎所有吸引子轨迹都会无穷多次重返 $\mathcal{U}_\epsilon(\mathbf{x}_{\mathrm{ruin}})$；
-   - **非周期轨对时间单射且相异几何轨道互不相交**：由自治常微分方程解的唯一性，相空间中任意两条不同的几何轨道互不相交，且每一条非周期轨道作为时间参数 $t \in \mathbb{R}$ 的映射都是严格单射（永不自交）——因此当非周期轨迹再次进入邻域 $\mathcal{U}_\epsilon(\mathbf{x}_{\mathrm{ruin}})$ 时，它穿过的是与前一次访问互不重合的轨道弧段。
+### 三、 似曾相识（Déjà vu）的几何诠释：分形横截结构与跨轮次内积共振 {#sec-coda-deja-vu-fractal-dimension}
+
+在本书的哲学与几何诠释（`MODEL`）中，对照 [@rem-coda-lorenz-srb-literature] 所刻画的动力系统图景——哪怕将上一轮的表层轨迹历史抹除，只要内禀耦合参数 $(\sigma, \rho, \beta)$ 不变且新初值落在吸引盆内，世界线便会重返同一双涡核吸引子，并沿着介于二维曲面与三维体积之间的分形横截叶层（数值维数估计约为 $2.06$）盘旋——“宿命重逢”与“自由选点”便在同一几何意象下并行不悖：
+1. **倘若轨迹退化为 $1$ 维闭合周期轨（$D = 1$）**：观察者就会困在机械重复的死循环里——每一轮在同一相对相位踩中同一个点，丧失横截自由余量（$\det G = 0$）；
+2. **在具有分形横截叶层的吸引子类比（[@rem-coda-lorenz-srb-literature]）中**：无穷次重返开邻域 $\mathcal{U}_\epsilon(\mathbf{x}_{\mathrm{ruin}})$ 与非周期轨永不自交同时成立——观察者一次次重返熟悉的吸引子坐标邻域，却在每一次重返时踏上与此前互不重合的新叶层；
 3. **“似曾相识（Déjà vu）”的跨轮次内积共振模型（`MODEL`）**：
-   将这一动力系统图景映射为作者的几何隐喻：当观察者在某座古迹台阶或转角突然停住脚步，心中涌起*“我一定在什么时候来过这里”*的悸动时，如果假设吸引子盆地中的局部几何会将同一观察者在不同轮次的注意力方向引向几乎平行的局部切方向（使得方向夹角 $\delta\theta \to 0$），那么当下的注意力态 $\mathbf{\Psi}^{(k+1)}$ 与留在同一空间吸引子邻域内的前轮印记 $\mathbf{\Psi}^{(k)}$ 做**成对内积投影（两子丈量）**时，就会出现
+   将这一图景映射为作者的几何隐喻：当观察者在某座古迹台阶或转角突然停住脚步，心中涌起*“我一定在什么时候来过这里”*的悸动时，若吸引子盆地中的局部几何将同一观察者在不同轮次的注意力方向引向几乎平行的局部切方向（方向夹角 $\delta\theta \to 0$），则当下的注意力态 $\mathbf{\Psi}^{(k+1)}$ 与留在同一空间吸引子邻域内的前轮印记 $\mathbf{\Psi}^{(k)}$ 做**成对内积投影（两子丈量）**时，就会出现
 
    $$
    \mathbf{\Psi}^{(k)} \cdot \mathbf{\Psi}^{(k+1)} = \cos\delta\theta \longrightarrow 1 \qquad (\delta\theta \to 0).
@@ -128,12 +132,8 @@ $$
 
      筛选出的全窗口切投模型集 $\operatorname{modelSet}(\operatorname{goldenWindow}) = \{y \in \mathbb{R} \mid \exists x \in \mathrm{GoldenInt},\, \operatorname{embedding}(x) = y \wedge \operatorname{embedding}(\operatorname{conj} x) \in \operatorname{goldenWindow}\}$（同构于 `goldenCutAndProjectSet`），由 [`exists_golden_modelSet_delone`](lean:D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone) 证明构成 $\mathbb{R}$ 上**装球半径为 $1/2$、覆盖半径为 $3$ 的 Delone 集**；其离散分离性源自**共轭范数互反分离定理** [`norm_separation`](lean:D5/S3/Fourier/GoldenModelSetDelone.norm_separation)：对任意相异黄金整数 $u \neq v \in \mathrm{GoldenInt}$ 与实数上界 $B$，只要内部共轭差满足 $|\operatorname{embedding}(\operatorname{conj} u) - \operatorname{embedding}(\operatorname{conj} v)| \le B$，物理投影差必满足 $1 \le |\operatorname{embedding}(u) - \operatorname{embedding}(v)| \cdot B$。
    - **自然数黄金展开模型集 `goldenModelSet` 与 Beatty 观察者路由**：自然数黄金展开序列 $\operatorname{betaGolden} : \mathbb{N} \to \mathrm{GoldenInt}$ 的值域 $\operatorname{goldenModelSet} = \operatorname{range}(\operatorname{betaGolden})$，其物理嵌入像被证明为全窗口切投集的子集 $\operatorname{embedding} '' \operatorname{goldenModelSet} \subseteq \operatorname{goldenCutAndProjectSet}$（[`golden_model_set_subset_cut_and_project`](lean:D5/S1/Deficit/ModelSet/GoldenCutAndProject.golden_model_set_subset_cut_and_project)，注：逆包含不成立，因 $-\varphi$ 落在窗口右端点但 $b = -1 < 0$）；`goldenModelSet` 自身不相交地自相似分解为 $\operatorname{phiBranch} \cup \operatorname{phiSquaredBranch}$（[`golden_model_set_self_similar`](lean:D5/S1/Deficit/ModelSet/GoldenModelSetSelfSimilar.golden_model_set_self_similar)），其前 $n$ 项前缀集 `goldenPrefix n` 的渐近计数密度严格收敛于 $1/\sqrt{5}$（[`golden_model_set_density`](lean:D5/S1/Deficit/ModelSet/GoldenModelSetDensity.golden_model_set_density)），且实轴观察者路由序列 $\beta(v) = \sqrt{5}\,v + \operatorname{remainder}(v)$ 满足内部余项 $\operatorname{remainder}(v) \in (\varphi - 2, \varphi - 1]$、相邻步长 $\beta(v+1) - \beta(v) \in \{\varphi, \varphi^2\}$ 的 Beatty 路由定律（[`golden_observer_route_w_c1`](lean:D5/S1/Deficit/Beatty/GoldenObserverRoute.golden_observer_route_w_c1)）。
-2. **三维正二十面体准晶几何背景与窗口相位平移（`文献结果` / `MODEL`）**：
-   在经典准晶几何文献（Meyer 1972；Kramer & Neri 1984；Duneau & Katz 1985）中，一维切投构造可推广至六维超立方整数格 $\mathbb{Z}^6 \subset \mathbb{R}^6 = E_\parallel^3 \oplus E_\perp^3$。在本书的跨学科几何诠释模型（`MODEL`）中，我们将全局无时间背景比拟为高维母格 $\mathbb{Z}^D$，并将一位具体观察者的内禀视角参数化为黄金无理倾角 $\varphi$ 与**内部正交窗口平移相位 $u \in E_\perp^3$**，通过平移接受窗 $W + u \subset E_\perp^3$ 在物理空间 $E_\parallel^3$ 中切出模型集：
-
-   $$
-   \Lambda_u = \bigl\{\,\pi_\parallel(z) \;\big|\; z \in \mathbb{Z}^6,\; \pi_\perp(z) \in W + u\,\bigr\}.
-   $$
+2. **高维准晶切投模型与内部窗口相位平移的哲学参数化（`MODEL`）**：
+   将上述一维内核定理推广到三维物理空间时（其六维母格正二十面体准晶文献背景详列于下文文献注记 [@rem-coda-quasicrystal-empire-literature]），在本书的跨学科几何诠释模型（`MODEL`）中，我们将全局无时间背景比拟为高维母格 $\mathbb{Z}^D \subset E_\parallel \oplus E_\perp$，并将一位具体观察者的内禀视角参数化为黄金无理倾角 $\varphi$ 与**内部正交窗口平移相位 $u \in E_\perp$**，通过平移接受窗 $W + u \subset E_\perp$ 在物理空间 $E_\parallel$ 中切出模型集 $\Lambda_u = \{\pi_\parallel(z) \mid z \in \mathbb{Z}^D,\; \pi_\perp(z) \in W + u\}$。
 
 3. **齐肯多夫无相邻 `11` 语言、非负实数编码线程单射与 Beatty 坐标纤维容量（`LEAN ✓`）**：
    在 `trureturing` 的离散编码模块中：
@@ -153,37 +153,45 @@ $$
 2. **“单次有限生命与遗忘初始化”（`MODEL`）$\leftrightarrow$ 齐肯多夫高阶层级截断与有理扫描阶数 $k$ 的重置**：
    在哲学模型中，单次有限生命好比只将编码线程 $\operatorname{zeckendorfRealThread}(x)(N)$ 或斐波那契有理斜率 $F_{k+1}/F_k$ 推进到有限阶数 $N, k \le K_{\max}$。随着历史约束累积，相容空间趋于饱和；而**诞生与遗忘初始化**则被诠释为**截断高阶齐肯多夫层级并重置扫描阶数 $k$**——抹去上一轮的高阶表层细节（名词 `量 liàng`），但保持内部窗口相位锚点 $u \in E_\perp$ 与黄金倾角 $\varphi$（动词 `量 liáng` 的内禀参数）不变。
 
-### 三、 菱形三十面体接受窗 $W$ 的内部裕度与康威“帝国效应”（`文献结果` / `MODEL`） {#sec-coda-trureturing-rhombic-triacontahedron-empire}
+### 三、 接受窗内部裕度与空间吸引盆地的几何诠释 {#sec-coda-trureturing-rhombic-triacontahedron-empire}
 
-为什么在跨轮次诠释模型中，普通事件容易随扫描阶数更迭而消散，而特定的历史遗迹坐标却能长期存续并吸引观察者重访？我们可以从准晶接受窗几何（`文献结果`）与概念映射（`MODEL`）两方面来理解：
+为什么在跨轮次诠释模型中，普通事件容易随扫描阶数更迭而消散，而特定的历史遗迹坐标却能长期存续并吸引观察者重访？我们先将本节与下一节对照引用的三维正二十面体准晶接受窗、一致重复性与康威“帝国效应”、以及比内公式有理斜率渐近误差三项经典文献结论集中归入文献注记：
 
-1. **正二十面体准晶的内部接受窗：菱形三十面体 $W \subset E_\perp^3$（`文献结果`）**：
-   在六维超立方晶格 $\mathbb{Z}^6 \subset E_\parallel^3 \oplus E_\perp^3$ 的正二十面体切投模型（Kramer & Neri 1984；Duneau & Katz 1985）中，三维内部空间 $E_\perp^3$ 的标准接受窗 $W$ 是一座**菱形三十面体（Rhombic Triacontahedron）**——它由 **$30$ 个黄金菱形面、$60$ 条棱与 $32$ 个顶点**（含分布在 **$6$ 条五次对称轴**上的 $12$ 个五重顶点，以及分布在 $10$ 条三次对称轴上的 $20$ 个三重顶点）围成。回看终章第 1 节：物理空间正二十面体的 $12$ 个五边形顶点（对应 $6$ 条五次轴与总角亏 $4\pi$），在内部空间 $E_\perp^3$ 的接受窗 $W$ 中恰好对应那 $12$ 个五重顶点！
+::: {.remark #rem-coda-quasicrystal-empire-literature title="正二十面体准晶菱形三十面体接受窗、康威帝国效应与比内斜率渐近公式（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 以下三项关于高维切投准晶几何与斐波那契有理逼近渐近率的经典结论均属外部数学与晶体学文献，未包含在本书锁定的 `trureturing@dev` 形式化声明集中（本章经 Lean 4 内核验证的切投与编码结论严格限定于 [@thm-coda-golden-cut-observer-cassini] 所列的一维 `GoldenInt` 模型集、齐肯多夫线程与环面有界回归定理）：
+
+1. **六维正二十面体切投模型与菱形三十面体接受窗（P. Kramer & R. Neri, *Acta Cryst. A* **40**, 580–587, 1984；M. Duneau & A. Katz, *Phys. Rev. Lett.* **54**, 2688–2691, 1985）**：将六维超立方整数格 $\mathbb{Z}^6 \subset \mathbb{R}^6 = E_\parallel^3 \oplus E_\perp^3$ 沿正二十面体不可约表示正交分解为三维物理空间 $E_\parallel^3$ 与三维内部空间 $E_\perp^3$ 时，单位超立方体投影到 $E_\perp^3$ 形成的标准接受窗 $W$ 是一座**菱形三十面体（Rhombic Triacontahedron）**，由 **$30$ 个黄金菱形面、$60$ 条棱与 $32$ 个顶点**（含分布在 **$6$ 条五次对称轴**上的 $12$ 个五重顶点与分布在 $10$ 条三次对称轴上的 $20$ 个三重顶点）围成，对应三维切投准晶点集 $\Lambda_u = \{\pi_\parallel(z) \mid z \in \mathbb{Z}^6,\; \pi_\perp(z) \in W + u\}$。
+2. **规则模型集的一致重复性与康威“帝国效应”（Y. Meyer, *Algebraic Numbers and Harmonic Analysis*, 1972；B. Grünbaum & G. C. Shephard, *Tilings and Patterns*, 1987）**：规则切投模型集具有**一致重复性（Uniform Repetitivity）**，即任意给定半径的局部有限构型都在有界距离内反复出现；同时，固定一处局部拼砖构型（记其母格提升为有限集 $F \subset \mathbb{Z}^6$，$\pi_\parallel(F) \subset \Lambda_u$）会将容许内部相位 $u'$ 限制在平移窗口交集 $P_F := \bigcap_{x \in F} (\pi_\perp(x) - W) \subset E_\perp^3$ 内，使一切满足 $\pi_\perp(z) \in W_{\mathrm{emp}}(F) := \bigcap_{u' \in P_F} (W + u')$ 的远方母格点 $z$ 在所有兼容拼砖中被非局域地强制出现（局部构型 $F$ 的**康威帝国 Conway's Empire**）。
+3. **斐波那契比内公式与有理斜率渐近误差（J. P. M. Binet, 1843；经典连分数渐近论）**：由比内公式 $F_k = \frac{\varphi^k - \bar{\varphi}^k}{\sqrt{5}}$（其中 $\bar{\varphi} = 1 - \varphi = -\varphi^{-1}$）与恒等式 $F_{k+1} - \varphi F_k = \bar{\varphi}^k = (-1)^k \varphi^{-k}$，对一切正整数 $k \ge 1$，斐波那契有理斜率对黄金分割 $\varphi$ 的逼近误差满足
+
+   $$
+   \left|\frac{F_{k+1}}{F_k} - \varphi\right| = \frac{\varphi^{-k}}{F_k} \sim \frac{\sqrt{5}}{\varphi^{2k}} \qquad (k \ge 1,\; k \to \infty).
+   $$
+:::
+
+结合 [@rem-coda-quasicrystal-empire-literature] 的窗口几何与 `trureturing` 的一维内核定理，我们的哲学与几何诠释模型（`MODEL`）展现出三层清晰对应：
+
+1. **物理五次顶点角亏与内部接受窗五重顶点的跨空间呼应（`MODEL`）**：
+   对照 [@rem-coda-polyhedral-topology-literature] 第 1 条与 [@rem-coda-quasicrystal-empire-literature] 第 1 条：物理空间正二十面体的 $12$ 个五边形顶点（对应 $6$ 条五次轴与总角亏 $4\pi$），在内部空间 $E_\perp^3$ 的菱形三十面体接受窗 $W$ 中恰好呼应那 $12$ 个五重顶点！
 2. **窗口边界附近的相子翻转敏感性 vs. 窗口深处（近中心点）的有限扰动鲁棒性**：
    对于内部投影落在接受窗开内部 $\operatorname{int}(W + u)$ 的母格点 $z$，记其到窗口边界 $\partial(W + u)$ 的欧氏安全裕度为 $d_{\partial}(z) := \operatorname{dist}\bigl(\pi_\perp(z),\, \partial(W + u)\bigr) > 0$：
    - **贴近窗口边界的点（$d_{\partial}(z) \ll 1$）**：当 $\pi_\perp(z)$ 紧贴边界 $\partial(W + u)$ 时，幅值超过 $d_{\partial}(z)$ 且朝向边界外侧的内部相位微扰或有理斜率逼近误差即可使 $\pi_\perp(z)$ 越过边界，导致物理空间中的对应格点发生**相子翻转（Phason Flip）**而移位或消失（作为形式层面的结构呼应，`trureturing` 在黄金幸存塔中证明了严格永久幸存集为空集 [`golden_strict_permanent_set_eq_empty`](lean:D5/S0/Tower/Champions/GoldenPermanentSurvivors.golden_strict_permanent_set_eq_empty)，而已知的闭预周期载体则构成闭永久幸存集的子集 [`golden_known_closed_preperiodic_carrier_subset`](lean:D5/S0/Tower/Champions/GoldenPermanentSurvivors.golden_known_closed_preperiodic_carrier_subset)）；
    - **靠近窗口靶心的深谷点（$\|\pi_\perp(z_{\mathrm{ruin}}) - u\| \ll 1$，从而拥有大边界裕度 $d_{\partial}(z_{\mathrm{ruin}}) \approx r_{\mathrm{in}}(W)$）**：反之，若格点 $z_{\mathrm{ruin}}$ 的内部投影紧靠窗口中心 $u$，则它距离边界 $\partial(W+u)$ 拥有接近内切球半径 $r_{\mathrm{in}}(W)$ 的最大容错裕度——对于一切范数**严格小于** $d_{\partial}(z_{\mathrm{ruin}})$ 的内部相子扰动或高阶有理逼近误差，该格点都稳居窗口开内部 $\operatorname{int}(W + u)$ 而不发生相子翻转！同时，在一维黄金格点中，由共轭范数互反分离定理 [`norm_separation`](lean:D5/S3/Fourier/GoldenModelSetDelone.norm_separation)，任意两个同时落在中心直径 $B$ 内的相异黄金整数 $u \neq v$（即 $|\pi_\perp(u) - \pi_\perp(v)| \le B$），其在物理空间的间距必满足 $|\pi_\parallel(u) - \pi_\parallel(v)| \ge 1/B$。在本书的几何诠释模型（`MODEL`）中，我们将现实中历经岁月洗礼而反复重建的历史遗迹，诠释为这类靠近内部窗口靶心、具有最大边界裕度 $d_{\partial}$ 的高对称格点。
-3. **康威“帝国效应”（Conway's Empire Effect）与空间吸引盆地的几何类比（`文献结果` / `MODEL`）**：
-   在彭罗斯与正二十面体准晶拼砖文献（Grünbaum & Shephard 1987, *Tilings and Patterns*）中，约翰·康威指出：一旦在物理空间中固定一处有限拼砖构型（记其唯一母格提升集为 $F \subset \mathbb{Z}^6$，$\pi_\parallel(F) \subset \Lambda_u$），容许的内部窗口相位 $u'$ 便被限制在平移窗口交集 $P_F := \bigcap_{x \in F} \bigl(\pi_\perp(x) - W\bigr) \subset E_\perp^3$ 内；因此，任何满足对一切 $u' \in P_F$ 均有 $\pi_\perp(z) \in W + u'$——即内部投影落入**交集帝国窗** $W_{\mathrm{emp}}(F) := \bigcap_{u' \in P_F} (W + u')$——的远方母格点 $z$，都会在物理空间任意遥远的距离上被非局域地强制出现在所有兼容拼砖中（构成局部构型 $F$ 的**“康威帝国”**），且规则模型集的**一致重复性（Uniform Repetitivity，Meyer 1972）**保证任何给定半径的局部构型都在有界距离内反复出现。在我们的哲学模型（`MODEL`）中，我们将这种“局部构型收紧容许相位集 $P_F$ 并通过交集窗 $W_{\mathrm{emp}}(F)$ 非局域约束远方格点”的几何性质，类比为历史遗迹在相容空间中形成的吸引盆地。
+3. **交集帝国窗 $W_{\mathrm{emp}}(F)$ 与空间吸引盆地的几何类比（`MODEL`）**：
+   对照 [@rem-coda-quasicrystal-empire-literature] 第 2 条，在我们的哲学模型（`MODEL`）中，局部高对称构型 $F$ 收紧容许相位集 $P_F$ 并通过交集窗 $W_{\mathrm{emp}}(F)$ 非局域约束远方格点的几何性质，恰可类比为历史遗迹在相容空间中形成的吸引盆地。
 
 ### 四、 卡西尼恒等式 $(-1)^{n+1}$ 接缝与环面观测窗有界间隙回归 {#sec-coda-trureturing-cassini-torus-return}
 
-最后，让我们用 `trureturing` 中已验证的**斐波那契—卡西尼恒等式**与**环面观测窗有界回归定理**（`LEAN ✓`），精确刻画有理逼近序列的交替接缝与回归性质，并说明其与“跨轮次似曾相识”（`MODEL`）的对应关系：
+最后，让我们用 `trureturing` 中已验证的**斐波那契—卡西尼恒等式**与**环面观测窗有界回归定理**（`LEAN ✓`），精确刻画离散序列的交替接缝与回归性质，并说明其与“跨轮次似曾相识”（`MODEL`）的对应关系：
 
-1. **斐波那契—卡西尼恒等式 $(-1)^{n+1} = \pm 1$ 与渐近逼近常数 $\sqrt{5}\,\varphi^{-2k}$**：
+1. **斐波那契—卡西尼恒等式 $(-1)^{n+1} = \pm 1$（`LEAN ✓`）**：
    根据 `trureturing` 由黄金单位幂范数 $\operatorname{norm}(\varphi^{n+1}) = (-1)^{n+1}$ 机械证明的**斐波那契—卡西尼恒等式** [`fib_cassini_from_golden_norm`](lean:D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm)（以及黄金位移范数符号由齐肯多夫展开最低位索引奇偶性决定的定理 [`betaGolden_norm_sign_of_least_zeckendorf_index`](lean:D5/S1/Deficit/Displacement/ZeckendorfNormSign.betaGolden_norm_sign_of_least_zeckendorf_index)），对一切 $k \in \mathbb{N}$ 恒有：
 
    $$
    F_k\,F_{k+2} - F_{k+1}^2 = (-1)^{k+1} = \pm 1.
    $$
 
-   同时，由比内公式 $F_k = \frac{\varphi^k - \bar{\varphi}^k}{\sqrt{5}}$ 与 $F_{k+1} - \varphi F_k = \bar{\varphi}^k = (-1)^k \varphi^{-k}$，对一切正整数 $k \ge 1$，斐波那契有理斜率 $F_{k+1}/F_k$ 对黄金分割 $\varphi$ 的一维逼近误差具有精确恒等式与渐近式（`文献结果`）：
-
-   $$
-   \left|\frac{F_{k+1}}{F_k} - \varphi\right| = \frac{\varphi^{-k}}{F_k} \sim \frac{\sqrt{5}}{\varphi^{2k}} \qquad (k \ge 1,\; k \to \infty).
-   $$
-
-   请看卡西尼恒等式右端的 **$(-1)^{k+1} = \pm 1$**！这与第 29 章中希帕索斯的佩尔余项 $m^2 - 2n^2 = \pm 1$、奇素数的 $4k \pm 1$ 二象性以及同余数椭圆曲线的支点 $0, \pm 1$，同样展现了离散整数网格逼近无理方向时不可消除的 **$\pm 1$ 最小单位范数接缝**！
+   请看卡西尼恒等式右端的 **$(-1)^{k+1} = \pm 1$**（配合 [@rem-coda-quasicrystal-empire-literature] 第 3 条记述的有理斜率收敛背景）：这与第 29 章中希帕索斯的佩尔余项 $m^2 - 2n^2 = \pm 1$、奇素数的 $4k \pm 1$ 二象性以及同余数椭圆曲线的支点 $0, \pm 1$，同样展现了离散整数网格逼近无理方向时不可消除的 **$\pm 1$ 最小单位范数接缝**！
 2. **环面观测窗有界间隙回归定理（[`TorusObservationWindowReturns.result`](lean:D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result)，`LEAN ✓`）**：
    `trureturing` 在一般紧致环面动力系统中严格证明：设 $I$ 为有限指标集，$g : I \to \mathrm{Circle}$ 为环面元素，$G = \overline{\langle g\rangle}$ 为其生成的紧致闭子群，$\mu$ 为 $G$ 上的哈尔概率测度，$a = \langle g, \dots\rangle \in G$。对 $G$ 上任意连续实值观测函数 $h \in C(G, \mathbb{R})$ 及满足渐近误差归零 $\lim_{n\to\infty}(e(n) - h(a^n)) = 0$ 的任意实测序列 $e : \mathbb{N} \to \mathbb{R}$：
    - 推前测度 $\operatorname{Measure.map} h\,\mu$ 的拓扑支集严格等于连续像集 $\operatorname{range}(h)$；
@@ -226,8 +234,8 @@ $$
 | **Beatty 观察者路由与齐肯多夫无相邻 `11` 语言**<br/>（[`base_success_iff_noAdjacentOnes`](lean:D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes)、[`golden_observer_route_w_c1`](lean:D5/S1/Deficit/Beatty/GoldenObserverRoute.golden_observer_route_w_c1)） | 有限观察者在格拉姆椭圆体（$\det G > 0$）中沿折线一步步选点 | **单次有限生命体验的隐喻**：将有理斜率扫描与消除相邻 `11` 的进位弛豫诠释为主观线性时间步进 |
 | **非负实数齐肯多夫线程与 Beatty 坐标纤维容量**<br/>（[`golden_fiber_capacity_pair`](lean:D5/S1/Deficit/Beatty/FiberCapacityPair.golden_fiber_capacity_pair)、[`zeckendorf_real_thread_injective`](lean:D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective)） | 遗忘抹去高阶历史锚点以打破全知死锁（$\det G = 0 \to \det G > 0$） | **诞生与遗忘初始化的隐喻**：截断高阶齐肯多夫层级以清空表层情节记忆（`量 liàng`），保留内禀窗口相位 $u$（`量 liáng`） |
 | **共轭范数互反分离与全窗口 Delone 集**<br/>（[`norm_separation`](lean:D5/S3/Fourier/GoldenModelSetDelone.norm_separation)、[`exists_golden_modelSet_delone`](lean:D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone)） | 内部窗口大边界裕度 $d_{\partial}$ 赋予的抗有界相子微扰鲁棒性 | **历史遗迹（空间吸引子）的隐喻**：将靠近接受窗中心、具有最大边界容错裕度的高对称点诠释为跨朝代存续的古迹坐标 |
-| **预周期闭永久幸存集与准晶“帝国效应”**<br/>（[`golden_known_closed_preperiodic_carrier_subset`](lean:D5/S0/Tower/Champions/GoldenPermanentSurvivors.golden_known_closed_preperiodic_carrier_subset) / 准晶文献） | 交集帝国窗 $W_{\mathrm{emp}}(F) = \bigcap_{u' \in P_F} (W + u')$ 对远方格点的非局域强制 | **吸引盆地的隐喻**：将局部高对称构型收紧容许相位集 $P_F$ 并通过交集窗 $W_{\mathrm{emp}}(F)$ 强制外围拼砖的“康威帝国”类比为吸引观察者重访的曲率盆地 |
-| **卡西尼恒等式 $(-1)^{n+1} = \pm 1$ 与环面观测窗有界回归**<br/>（[`fib_cassini_from_golden_norm`](lean:D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm)、[`TorusObservationWindowReturns.result`](lean:D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result)） | 近似之球的 $\pm 1$ 接缝余项、分形横截结构（数值估计 $D_{\mathrm{KY}} \approx 2.06$）与有界间隙回归 | **似曾相识（Déjà vu）的隐喻**：有界间隙回归使轨迹重返同一空间吸引子邻域，在局部注意力近共线（$\delta\theta \to 0$）时触发 $\cos\delta\theta \to 1$ 共振 |
+| **预周期闭永久幸存集与交集帝国窗模型**<br/>（[`golden_known_closed_preperiodic_carrier_subset`](lean:D5/S0/Tower/Champions/GoldenPermanentSurvivors.golden_known_closed_preperiodic_carrier_subset) / [@rem-coda-quasicrystal-empire-literature]） | 交集帝国窗 $W_{\mathrm{emp}}(F) = \bigcap_{u' \in P_F} (W + u')$ 对远方格点的非局域约束 | **吸引盆地的隐喻**：将局部高对称构型收紧容许相位集 $P_F$ 并通过交集窗 $W_{\mathrm{emp}}(F)$ 约束外围构型的“康威帝国”类比为吸引观察者重访的曲率盆地 |
+| **卡西尼恒等式 $(-1)^{n+1} = \pm 1$ 与环面观测窗有界回归**<br/>（[`fib_cassini_from_golden_norm`](lean:D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm)、[`TorusObservationWindowReturns.result`](lean:D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result)） | 近似之球的 $\pm 1$ 接缝余项、分形横截叶层（[@rem-coda-lorenz-srb-literature]）与有界间隙回归 | **似曾相识（Déjà vu）的隐喻**：有界间隙回归使轨迹重返同一空间吸引子邻域，在局部注意力近共线（$\delta\theta \to 0$）时触发 $\cos\delta\theta \to 1$ 共振 |
 
 ---
 
@@ -254,8 +262,8 @@ $$
 由于对任意 $n \in \mathbb{N}$ 有 $S(n+1) = U(S(n)) \subseteq S(n)$，序列 $S$ 在有限全集 $X$ 上构成一条单调递减的有限子集链。每一次发生严格改变 $S(n+1) \neq S(n)$ 时，有限基数 $(S(n)).\operatorname{ncard}$ 至少严格减少 $1$。因为初始基数 $(S(0)).\operatorname{ncard}$ 是有限自然数，严格递减至多发生 $(S(0)).\operatorname{ncard}$ 次；由抽屉原理，在前 $(S(0)).\operatorname{ncard}$ 步之内必存在一步 $N \le (S(0)).\operatorname{ncard}$ 满足 $S(N+1) = U(S(N)) = S(N)$，此后由归纳法对一切 $n \ge N$ 恒有 $S(n) = S(N)$。完整证明由 Lean 内核检查。
 :::
 
-::: {.remark #rem-coda-epistemic-discipline title="终章的形式边界与认识论纪律"}
-文献结果，未在本书形式化：为确保全书每一条数学声明的证明地位透明可查，我们将终章涉及的四类命题严格区分如下：
+::: {.remark #rem-coda-epistemic-discipline title="终章的形式边界与认识论纪律（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 为确保全书每一条数学声明的证明地位透明可查，我们将终章涉及的四类命题严格区分如下：
 
 1. **已由 Lean 4 内核验证并冻结的定理（绿色 `LEAN ✓`）**：
    - 有限收缩更新序列的有限步不动点稳定定理 [`finite_contracting_updates_stabilize`](lean:D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize)（[@thm-coda-fixed-point-anchor]）；
@@ -267,10 +275,10 @@ $$
 2. **经典数学文献定理（文献结果，未在本书形式化）**：
    - 实区间 $[0, 1]$ 上的巴拿赫（Banach）压缩映射原理：由于 $\cos([0, 1]) \subseteq [0, 1]$ 且导数绝对值 $|{-}\sin\theta| \le \sin(1) \approx 0.84147 < 1$，皮卡迭代 $\theta_{k+1} = \cos(\theta_k)$ 收敛到唯一实不动点 $\theta^* \approx 0.7390851332\dots$；
    - 林德曼—魏尔斯特拉斯（Lindemann–Weierstrass）定理对 $\theta^*$ 超越性的证明（若非零代数数 $q$ 满足 $\cos q = q$，则 $e^{iq}$ 将满足代数系数的二次方程，与 $e^{iq}$ 的超越性矛盾），以及佩尔方程 $m^2 - 2n^2 = \pm 1$ 的连分数渐近理论；
-   - 费马素数两平方和定理（$p \equiv 1 \pmod 4 \iff p = a^2 + b^2$）、奇素数负佩尔方程 $m^2 - p\,n^2 = -1$ 在 $p \equiv 1 \pmod 4$ 时的可解性定理、类域论中的希尔伯特互反律 $\prod_{v \le \infty} (a, b)_v = +1$、同余数椭圆曲线 $E_d : dy^2 = x^3 - x$ 的双有理等价与亏格 $1$ 环面拓扑 $\chi(T^2) = 0$、有限域椭圆曲线的哈塞（Hasse）定理 $|a_p| \le 2\sqrt{p}$、高斯关于 $y^2 = x^3 - x$ 模 $p$ 点数迹的精确公式，以及非复乘椭圆曲线的佐藤—泰特（Sato–Tate）定理（Barnet-Lamb, Geraghty, Harris, Taylor 2011）；
-   - 笛卡尔多面体总角亏定理 $\sum_v \delta_v = 4\pi$、高斯—博内定理、庞加莱—布劳威尔偶维球面毛球定理 $\chi(S^{2n}) = 2$，以及亚当斯（Adams, 1960）关于仅有 $S^0, S^1, S^3, S^7$ 可平行化的拓扑定理；
-   - 动力系统中的洛伦兹奇异吸引子（Lorenz 1963，相空间体积散度 $-(\sigma+1+\beta) = -41/3 < 0$ 与数值李雅普诺夫谱给出的卡普兰—约克维数估计 $D_{\mathrm{KY}} \approx 2.06$）、洛伦兹吸引子支撑的遍历西奈—吕埃勒—鲍恩（SRB）物理不变测度（Tucker 1999；Luzzatto–Melbourne–Pugh 2005）与庞加莱回归定理（Poincaré 1890），以及准晶几何中的 Meyer 规则模型集一致重复性定理（1972）、六维超立方晶格 $\mathbb{Z}^6 \subset E_\parallel^3 \oplus E_\perp^3$ 的正二十面体投影与菱形三十面体（Rhombic Triacontahedron，$30$ 面、$60$ 棱、$32$ 顶点，$6$ 条五次轴）接受窗 $W$（Kramer & Neri 1984；Duneau & Katz 1985）、彭罗斯—康威准晶拼砖的“帝国效应”（Conway's Empire Effect，Grünbaum & Shephard 1987）；
-   - 量子引力中的惠勒—德维特（Wheeler–DeWitt）无时间方程 $H\mathbf{\Psi} = 0$、佩奇—伍特斯（Page–Wootters, 1983）条件纠缠时钟切片机制、费曼路径积分振荡相位驻相条件 $\delta S = 0$，计算复杂度理论中的阿伦森后选择定理 $\mathrm{PostBQP} = \mathrm{PP}$（2005）、闭合类时曲线不动点定理 $\mathrm{P}_{\mathrm{CTC}} = \mathrm{PSPACE}$（Aaronson–Watrous 2009）、无结构黑盒搜索 $\Omega(2^{n/2})$ 下界（BBBV 1997）、格里戈里耶夫—舍内贝克（Grigoriev–Schoenebeck）平方和半正定松弛下界、卡马卡（Karmarkar 1984）线性规划内点法、卡斯特莱因（Kasteleyn 1961）平面图 Pfaffian 匹配定理、因帕利亚佐—帕图里—赞恩（Impagliazzo–Paturi–Zane 1999, 2001）指数时间假设（ETH/SETH）与稀疏化引理、PPSZ $k$-SAT 算法及 2026 年 10 月张量网络缩并 $2^{O(n\log\log n/\sqrt{\log n})}$ 亚指数预印本与学界规约审计（[@rem-ch30-eth-subexponential-literature]），以及流体力学中的兰姆（Lamb）矢量恒等式、开尔文（Kelvin）环量守恒定理、拉季任斯卡娅（Ladyzhenskaya 1969）二维纳维—斯托克斯全局正则性定理、2026 年受迫三维纳维—斯托克斯（克雷陈述 C / D）有限时间爆破解析构造与外部形式化证明（[@rem-ch30-navier-stokes-forced-literature]）、柯尔莫哥洛夫（Kolmogorov 1941）$k^{-5/3}$ 级联与耗散微尺度 $\eta = (\nu^3/\varepsilon)^{1/4}$、阿诺德（Arnold 1966）保体积微分同胚群 $\operatorname{SDiff}(M)$ 测地线定理与陶哲轩（Tao 2016）平均化三维纳维—斯托克斯方程有限时间爆破定理（[@rem-ch30-tao-arnold-literature]）。
+   - 费马素数两平方和定理（$p \equiv 1 \pmod 4 \iff p = a^2 + b^2$）、奇素数负佩尔方程 $m^2 - p\,n^2 = -1$ 在 $p \equiv 1 \pmod 4$ 时的可解性定理、类域论中的希尔伯特互反律 $\prod_{v \le \infty} (a, b)_v = +1$（[@rem-ch29-pell-primes-hilbert-literature]），同余数椭圆曲线 $E_d : dy^2 = x^3 - x$ 的双有理等价与亏格 $1$ 环面拓扑 $\chi(T^2) = 0$（[@rem-ch29-elliptic-torus-literature]）、有限域椭圆曲线的哈塞（Hasse）定理 $|a_p| \le 2\sqrt{p}$、高斯关于 $y^2 = x^3 - x$ 模 $p$ 点数迹的精确公式与特征和推导（[@rem-ch29-hasse-gauss-literature]、[@rem-ch29-gauss-character-application]），以及非复乘椭圆曲线的佐藤—泰特（Sato–Tate）定理（Barnet-Lamb, Geraghty, Harris, Taylor 2011，[@rem-ch29-arithmetic-geometry-literature]）；
+   - 笛卡尔多面体总角亏定理 $\sum_v \delta_v = 4\pi$、高斯—博内定理、庞加莱—布劳威尔偶维球面毛球定理 $\chi(S^{2n}) = 2$，以及亚当斯（Adams, 1960）关于仅有 $S^0, S^1, S^3, S^7$ 可平行化的拓扑定理（[@rem-coda-polyhedral-topology-literature]、[@rem-hairy-ball-adams-literature]）；
+   - 动力系统中的洛伦兹奇异吸引子（Lorenz 1963，相空间体积散度 $-(\sigma+1+\beta) = -41/3 < 0$ 与数值李雅普诺夫谱给出的卡普兰—约克维数估计 $D_{\mathrm{KY}} \approx 2.06$）、洛伦兹吸引子支撑的遍历西奈—吕埃勒—鲍恩（SRB）物理不变测度（Tucker 1999；Luzzatto–Melbourne–Pugh 2005）与庞加莱回归定理（Poincaré 1890，[@rem-coda-lorenz-srb-literature]），以及准晶几何中的 Meyer 规则模型集一致重复性定理（1972）、六维超立方晶格 $\mathbb{Z}^6 \subset E_\parallel^3 \oplus E_\perp^3$ 的正二十面体投影与菱形三十面体（Rhombic Triacontahedron，$30$ 面、$60$ 棱、$32$ 顶点，$6$ 条五次轴）接受窗 $W$（Kramer & Neri 1984；Duneau & Katz 1985）、彭罗斯—康威准晶拼砖的“帝国效应”（Conway's Empire Effect，Grünbaum & Shephard 1987）与比内斜率渐近公式（[@rem-coda-quasicrystal-empire-literature]）；
+   - 量子引力中的惠勒—德维特（Wheeler–DeWitt）无时间方程 $H\mathbf{\Psi} = 0$、佩奇—伍特斯（Page–Wootters, 1983）条件纠缠时钟切片机制（[@rem-ch29-wheeler-dewitt-page-wootters-literature]）与费曼路径积分振荡相位驻相条件 $\delta S = 0$（[@rem-ch29-feynman-stationary-phase-literature]），计算复杂度理论中的阿伦森后选择定理 $\mathrm{PostBQP} = \mathrm{PP}$（2005）、闭合类时曲线不动点定理 $\mathrm{P}_{\mathrm{CTC}} = \mathrm{PSPACE}$（Aaronson–Watrous 2009）、无结构黑盒搜索 $\Omega(2^{n/2})$ 下界（BBBV 1997）、格里戈里耶夫—舍内贝克（Grigoriev–Schoenebeck）平方和半正定松弛下界、卡马卡（Karmarkar 1984）线性规划内点法、卡斯特莱因（Kasteleyn 1961）平面图 Pfaffian 匹配定理、因帕利亚佐—帕图里—赞恩（Impagliazzo–Paturi–Zane 1999, 2001）指数时间假设（ETH/SETH）与稀疏化引理、PPSZ $k$-SAT 算法及 2026 年 10 月张量网络缩并 $2^{O(n\log\log n/\sqrt{\log n})}$ 亚指数预印本与学界规约审计（[@rem-ch30-eth-subexponential-literature]），以及流体力学中的兰姆（Lamb）矢量恒等式、开尔文（Kelvin）环量守恒定理、拉季任斯卡娅（Ladyzhenskaya 1969）二维纳维—斯托克斯全局正则性定理、2026 年受迫三维纳维—斯托克斯（克雷陈述 C / D）有限时间爆破解析构造与外部形式化证明（[@rem-ch30-navier-stokes-forced-literature]）、柯尔莫哥洛夫（Kolmogorov 1941）$k^{-5/3}$ 级联与耗散微尺度 $\eta = (\nu^3/\varepsilon)^{1/4}$、阿诺德（Arnold 1966）保体积微分同胚群 $\operatorname{SDiff}(M)$ 测地线定理与陶哲轩（Tao 2016）平均化三维纳维—斯托克斯方程有限时间爆破定理（[@rem-ch30-tao-arnold-literature]）。
 3. **尚未解决的开放猜想（红色 `OPEN`，无 `lean` 属性）**：
    - 标准统一图灵机计算模型下的 $\mathrm{P} \neq \mathrm{NP}$ 猜想（[@conj-p-neq-np]）、无外力三维不可压缩纳维—斯托克斯方程全局光滑性猜想（克雷千禧年陈述 A / B，[@conj-coda-navier-stokes-regularity]）、沙努埃尔（Schanuel）猜想及其在 Dottie 不动点 $\theta^*$ 上的应用（[@conj-schanuel-dottie]，以及 Timothy Chow 证明的在沙努埃尔猜想成立前提下 $\theta^*$ 不属于初等封闭数域 $\mathrm{EL}$ 的条件性文献结论），以及全书在附录 C 第 C.3 节汇总的开放问题。
 4. **哲学与几何模型综合（`MODEL`，不作为形式定理宣称）**：
@@ -292,8 +300,8 @@ $$
 | **双向量面积与外积** | Bivector Area & Exterior Product | 反对称外积 $\mathbf{u}\wedge\mathbf{v} = -\mathbf{v}\wedge\mathbf{u}$，编码旋转平面、法向轴与右手法则手性 | 第 5–6 章；[`crossProduct_is_skewAdjoint_of_balanced_sum`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum), [`lagrange_gram_identity`](lean:D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity) (`LEAN ✓`) |
 | **旋量（Rotor）与双面夹心** | Rotor & Double-Sided Sandwich | 偶子代数元 $R = \cos(\theta/2) - \hat{B}\sin(\theta/2)$，以 $v \mapsto R v \widetilde{R}$ 实施无奇点三维旋转 | 第 7、12、27 章；[`calibrated_group`](lean:D5/S3/Quantum/Dynamics/CalibratedUnitaryGroup.calibrated_group) (`LEAN ✓`) |
 | **霍奇对偶与伪标量** | Hodge Dual & Pseudoscalar | 三维体积元 $I_3 = e_1 e_2 e_3$（满足 $I_3^2 = -1$），把二维旋转平面映射为法向轴向量 | 第 5、25 章与附录 B；[`relativeComplexStructure_square`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_square) (`LEAN ✓`) |
-| **毛球定理旋涡与欧拉示性数 $\chi$** | Hairy Ball Vortex & Euler Characteristic $\chi$ | $\chi(S^{2n}) = 2$ 迫使偶维球面切向量场必有零点；奇维球面 $\chi(S^{2n-1}) = 0$ 且 $S^0, S^1, S^3, S^7$ 全局可平行化 | 第 12、21、24、29 章与终章；经典拓扑文献（`文献结果`） |
-| **笛卡尔角亏 $4\pi$** | Angular Defect $4\pi$ | 多面体各顶点内角和与 $2\pi$ 的差值之和恒为 $4\pi = 2\pi\chi(S^2)$，正二十面体为 $12 \times 60^\circ = 720^\circ$ | 第 19、24 章与终章；离散微分几何文献（`文献结果`） |
+| **毛球定理旋涡与欧拉示性数 $\chi$** | Hairy Ball Vortex & Euler Characteristic $\chi$ | $\chi(S^{2n}) = 2$ 迫使偶维球面切向量场必有零点；奇维球面 $\chi(S^{2n-1}) = 0$ 且 $S^0, S^1, S^3, S^7$ 全局可平行化 | 第 12、21、24、29 章与终章；见 [@rem-hairy-ball-adams-literature]、[@rem-coda-polyhedral-topology-literature] |
+| **笛卡尔角亏 $4\pi$** | Angular Defect $4\pi$ | 多面体各顶点内角和与 $2\pi$ 的差值之和恒为 $4\pi = 2\pi\chi(S^2)$，正二十面体为 $12 \times 60^\circ = 720^\circ$ | 第 19、24 章与终章；见 [@rem-coda-polyhedral-topology-literature] |
 | **黄金切投准晶观察者与卡西尼 $\pm 1$ 接缝** | Cut-and-Project Golden Observer & Cassini $\pm 1$ Seam | 高维母格沿黄金倾角 $\varphi$ 与内空间相位 $u \in E_\perp$ 切投模型集，相邻斐波那契扫描满足 $F_n F_{n+2} - F_{n+1}^2 = (-1)^{n+1}$ 与环面有界回归 | 终章；[`minkowski_model_set_spec`](lean:D5/S1/Scale/MinkowskiModelSet.minkowski_model_set_spec), [`fib_cassini_from_golden_norm`](lean:D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm), [`TorusObservationWindowReturns.result`](lean:D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result) (`LEAN ✓`) |
 | **对角线逃逸** | Diagonal Escape | 完备语义对角线导致的分离亏格非空、拓扑严格细化与不连续性 | 第 21、30 章；[`complete_diagonal_topological_settlement`](lean:D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_topological_settlement) (`LEAN ✓`) |
 | **欧拉乘积与临界线** | Euler Product & Critical Line | 素数正交基展开 $\prod_p (1-p^{-s})^{-1} = \sum_n n^{-s}$ 与非平凡零点对称轴 $\operatorname{Re}(s) = 1/2$ | 第 22 章；[`riemann_zeta_dirichlet_sum_eq_euler_product`](lean:D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product) (`LEAN ✓`) / `#conj-riemann-hypothesis` (`OPEN`) |
@@ -354,7 +362,7 @@ $$
             ┌─────────────────────────────────────────────────────────────────┐
             │ 第八部：无时间因果、ETH 视界与流体涡丝 (Ch 29–30) → 终章与附录   │
             │  • 多面体角亏 4π 与毛球定理 • 勾股面积守恒与四级“球外之球”突围  │
-            │  • 概念对照词典 (A) • 克利福德速查表 (B) • 310 项锁定声明索引 (C)│
+            │  • 概念对照词典 (A) • 克利福德速查表 (B) • 313 项锁定声明索引 (C)│
             └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -369,7 +377,7 @@ $$
 3. **数理逻辑、数论与认识论路径**：
    [序曲](README.md) $\to$ 第 10 章（Gram 矩阵与顺序无关性）$\to$ 第 19–20 章（离散多面体分片锥与开放猜想边界）$\to$ 第 21–24 章（对角线逃逸、欧拉乘积、四元数丢番图范数、余弦自指不动点）$\to$ [第 29 章](ch29-timeless-causality-and-gram-space.md)–[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)（毕达哥拉斯四级数系突围、无时间因果、ETH 视界与流体涡丝）$\to$ 终章（黄金切投空间吸引子与 [@thm-coda-fixed-point-anchor]）。
 4. **Lean 4 形式化验证与内核审计路径**：
-   [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 与 `FiniteRecordCosineObstruction` 的逐行形式化剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对 `trureturing@dev` 提交 `38196c62e121` 下全部 $166$ 条环境/媒体冻结定理、$53$ 项环境辅助定义与 $91$ 项行内引用声明，共计 $310$ 项唯一锁定声明）。
+   [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 与 `FiniteRecordCosineObstruction` 的逐行形式化剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对 `trureturing@dev` 提交 `a660b9333c0f` 下全部 $166$ 条环境/媒体冻结定理、$53$ 项环境辅助定义与 $94$ 项行内引用声明，共计 $313$ 项唯一锁定声明）。
 
 ### 第六至第八部（第 21–30 章）36 项核心章节冻结定理锚点速览 {#sec-coda-part6-part7-register}
 
@@ -394,7 +402,7 @@ $$
 | **第 24 章** | T24.3 | `D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.context_parameters_can_select_distinct_fixed_points` | 相同文本与规则在不同背景与目标参数下分岔出截然不同的二元不动点 |
 | **第 24 章** | T24.4 | `D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique` | 黄金倒数自指映射 $x \mapsto 1 + 1/x$ 在正实轴上的唯一不动点 $\varphi = (1+\sqrt{5})/2$ |
 | **第 25 章**<br/>XOR–Pauli 几何代数引擎 | T25.1 | `D5/S3/Quantum/FiniteDimensional.qubit_weyl_star` | 单量子比特外尔算子 $X, Z$ 的反对易、自伴与对合代数律 |
-| **第 25 章** | T25.2 | `D5/S3/Quantum/FiniteDimensional.qubit_matrix_algebra_has_no_character` | $2\times 2$ 量子比特矩阵代数不存在一维复代数特征标（科亨—斯佩克代数根源） |
+| **第 25 章** | T25.2 | `D5/S3/Quantum/FiniteDimensional.qubit_matrix_algebra_has_no_character` | $2\times 2$ 量子比特矩阵代数不存在保全局矩阵乘法的复代数特征标 |
 | **第 25 章** | T25.3 | `D5/S3/Quantum/QubitWitnesses.pauli_observables_have_no_common_eigenvector` | 非对易泡利可观测量 $X$ 与 $Z$ 不存在公共非零本征态 |
 | **第 25 章** | T25.4 | `D5/S3/Quantum/Measurement/Bloch/QubitBloch.B_formula_core` | 单比特泡利期望值展开核心恒等式：将算符重构为三维布洛赫向量点积 |
 | **第 26 章**<br/>泡利辛相表与布洛赫几何 | T26.1 | `D5/S3/Quantum/Information/ActualPureQubitGeometry.blochMatrix_trace` | 布洛赫参数化矩阵的迹归一化恒等式 $\operatorname{Tr}(\rho(\mathbf{r})) = 1$ |
@@ -414,4 +422,4 @@ $$
 | **第 30 章**<br/>场线分野、ETH 与流体涡丝 | T30.1 | `D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff` | 二次矢量场有限分辨率幂等投影精确闭合的充要代数判据 |
 | **第 30 章** | T30.2 | `D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure` | 五模态勒雷投影平流对任意粘性系数 $\nu \in \mathbb{R}$ 均无精确闭合映射 |
 
-在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，并在 [附录 C](appendix-c.md) 中核验全书锁定的全部 $219$ 项 `trureturing@dev` 正式环境与媒体声明（含行内共 $310$ 项唯一锁定声明）。
+在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，并在 [附录 C](appendix-c.md) 中核验全书锁定的全部 $219$ 项 `trureturing@dev` 正式环境与媒体声明（含行内共 $313$ 项唯一锁定声明）。
