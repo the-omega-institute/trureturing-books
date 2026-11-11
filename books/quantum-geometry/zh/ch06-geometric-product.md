@@ -18,6 +18,10 @@ $$
 
 在这行只有六个符号的恒等式面前，困惑物理学界百年的波粒二象性、罗伯逊—薛定谔不确定性原理、双缝干涉与惠勒延迟选择实验，乃至传统量子力学教材里互不统属的“五大公设”，都将水落石出地收束为同一条初等几何铁律——**余弦粒子线与正弦波动面的勾股守恒 $\cos^2\theta + \sin^2\theta = 1$**。
 
+::: {.figure src="ch06-overview"}
+**图 6。** 本章地图：第 I 栏，琥珀色的 $\vv{B}$ 落在 $\vv{A}$ 上的青色影子是 $\cos\theta$，两者张出的品红平行四边形是 $\sin\theta$；第 II 栏，四分之一圆 $D^2 + V^2 = 1$，琥珀色的点在 $\alpha = 60^\circ$ 处，由品红的 $D \approx 0.87$ 与青色的 $V = 0.5$ 拼成，圆弧两端分别是“只有路径”与“只有条纹”（[@thm-record-coherence-complementarity]）；第 III 栏，[@ex-wheeler-delayed-choice-tradeoff] 中 $\alpha = 60^\circ$ 的 $\rho$，青色的对角部分 $\Pi(\rho)$ 与品红的副对角部分 $\rho - \Pi(\rho)$ 是直角三角形的两条直角边，斜边是 $\rho$（[@cor-pinching-pythagorean]）。
+:::
+
 ## 6.1 内积 $\vv{A}\cdot\vv{B}$ 为何是“粒子”？外积 $\vv{A}\wedge\vv{B}$ 为何是“波”？ {#sec-inner-particle-outer-wave}
 
 让我们顺着作者的一句直觉洞察，把“两子相遇”时发生的一切放到放大镜下重新审视：
@@ -36,6 +40,10 @@ $$
 $$
 \vv{A}\vv{B} = \underbrace{\frac{\vv{A}\vv{B} + \vv{B}\vv{A}}{2}}_{\vv{A}\cdot\vv{B}\text{（共线粒子标量）}} + \underbrace{\frac{\vv{A}\vv{B} - \vv{B}\vv{A}}{2}}_{\vv{A}\wedge\vv{B}\text{（正交波动面积）}}.
 $$
+
+::: {.figure src="ch06-swap"}
+**交换次序，线不变，面积翻面。** 两栏画的是同样两支单位箭头 $\vv{A}$ 与琥珀色的 $\vv{B}$：青色的影子一样长，都是 $\vv{A}\cdot\vv{B} = \vv{B}\cdot\vv{A} = \cos\theta$；品红的平行四边形一样大，但紫色的弧箭头方向相反，左栏是 $\vv{A}\wedge\vv{B} = +\sin\theta\,\vv{I}$，右栏是 $\vv{B}\wedge\vv{A} = -\sin\theta\,\vv{I}$。对称的一半留下线，反对称的一半留下有向的面积。
+:::
 
 为什么作者说*“那面积与线、波与粒子,本质上就是一种场呀”*？因为没有脱离外积面积而孤立存在的内积线，也没有脱离内积线而悬空漂浮的外积面积——它们本来就是**同一个几何积多向量（multivector）场 $\vv{A}\vv{B}$ 在零阶标量扇区与二阶二向量扇区上的两个正交投影切片**！当你只拿对角粒子计数器去读它时，你只看见了实部 $\cos\theta$；当你让两条路径交汇做干涉实验时，你才看见了虚部二向量 $\sin\theta\,\vv{I}$。
 
@@ -81,7 +89,9 @@ $$
 
 特别地，当 $\vv{u}, \vv{v}$ 为单位向量（$\|\vv{u}\| = \|\vv{v}\| = 1$）时，上式立刻化为三角学第一恒等式 $\cos^2\theta + \sin^2\theta = 1$；同时因为右端外积平方和恒非负（$\|\vv{u}\wedge\vv{v}\|^2 \ge 0$），移项便立即给出柯西—施瓦茨不等式 $(\vv{u}\cdot\vv{v})^2 \le \|\vv{u}\|^2\|\vv{v}\|^2$——**原来柯西—施瓦茨不等式两边相差的那个“非负亏量”，不多不少，正是两根向量撑开的外积面积平方 $\|\vv{u}\wedge\vv{v}\|^2$！**
 
-![几何积 AB = A·B + A∧B 的内积粒子线与外积波动面分解、纯态记录互补勾股圆 D² + V² = 1，以及希尔伯特—施密特捏合正交勾股分解](../assets/fig-06-geometric-product-pythagoras.svg)
+::: {.figure src="ch06-gram-deficit"}
+**柯西—施瓦茨两边差的那一块，正是面积的平方。** 左边，灰色的 $\vv{u}$ 与琥珀色的 $\vv{v}$ 张出品红的平行四边形，面积是 $\lvert\vv{u}\wedge\vv{v}\rvert$。右边的直角三角形，两条直角边是 $\lvert\vv{u}\cdot\vv{v}\rvert$ 与 $\lvert\vv{u}\wedge\vv{v}\rvert$，斜边是 $\lvert\vv{u}\rvert\lvert\vv{v}\rvert$：青色的正方形 $(\vv{u}\cdot\vv{v})^2$ 加品红的正方形 $\lvert\vv{u}\wedge\vv{v}\rvert^2$，恰好等于斜边上的 $\lvert\vv{u}\rvert^2\lvert\vv{v}\rvert^2$（[@thm-lagrange-gram-identity]）。
+:::
 
 现在，把这套拉格朗日—格拉姆勾股分解直接搬进复内积空间 $E$（Lean 模块 `QuantumBounds/RobertsonSchrodinger`）。对于任意两根复向量 $u, v \in E$，前置引理 [`gram_wedge_identity`](lean:D5/S3/QuantumBounds/RobertsonSchrodinger.gram_wedge_identity) 证明了模方乘积分解为复内积模方与非负格拉姆楔积亏量 $G := \|u\|^2\|v\|^2 - \|\langle u, v\rangle_{\mathbb{C}}\|^2 \ge 0$ 之和：
 
@@ -196,6 +206,10 @@ $$
 现在，让我们带着这把锋利的几何手术刀，走进费曼口中“包含了量子力学唯一真正奥秘”的**双缝干涉实验（double-slit interference）**与约翰·惠勒（John Archibald Wheeler）提出的**延迟选择思想实验（delayed-choice experiment）**。
 
 当一颗光子或电子穿过左缝 $\lvert L\rangle$ 与右缝 $\lvert R\rangle$ 时，如果在狭缝后方有某个环境自由度（或者路径探测器）试图记录“粒子到底走了哪条缝”，那么左缝分支会耦合到单位环境记录态 $r_L \in E$（$\|r_L\| = 1$），右缝分支会耦合到单位环境记录态 $r_R \in E$（$\|r_R\| = 1$）。
+
+::: {.figure src="ch06-three-markers"}
+**标记的两支箭头决定屏上有没有条纹。** 每行左边是标记的两支箭头，灰色的 $r_L$ 与琥珀色的 $r_R$，右边是屏上落点的分布。不标记（$\alpha = 0$）：两支箭头重合，屏上是对比度满格的青色条纹。标记路径（$\alpha = 90^\circ$）：两支箭头垂直，品红的竖线是可区分度 $D = 1$，屏上只剩一个没有条纹的鼓包。擦除标记：箭头仍然垂直，改沿紫色的斜线读标记，按读数分出的两行是青色的条纹与错开半格的虚线反条纹，合起来仍是那个鼓包。包络是示意。
+:::
 
 请盯住这两根环境记录箭头 $r_L$ 与 $r_R$ 之间的复内积重叠幅 $c := \langle r_L, r_R\rangle_{\mathbb{C}}$：
 

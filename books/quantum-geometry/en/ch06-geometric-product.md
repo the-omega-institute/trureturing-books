@@ -18,6 +18,10 @@ $$
 
 Before this six-symbol identity, wave–particle duality, the Robertson–Schrödinger uncertainty relation, double-slit interference, Wheeler's delayed-choice experiment, and the five disconnected postulates of textbook quantum mechanics all collapse into a single elementary geometric law: **Pythagorean conservation $\cos^2\theta + \sin^2\theta = 1$ between the cosine particle line and the sine wave area**.
 
+::: {.figure src="ch06-overview"}
+**Figure 6.** The chapter at a glance. Panel I: the cyan shadow of the amber $\vv{B}$ on $\vv{A}$ is $\cos\theta$, and the magenta parallelogram they span is $\sin\theta$. Panel II: the quarter circle $D^2 + V^2 = 1$; the amber point at $\alpha = 60^\circ$ is made of the magenta $D \approx 0.87$ and the cyan $V = 0.5$, and the ends of the arc are “path only” and “fringes only” ([@thm-record-coherence-complementarity]). Panel III: the $\rho$ of [@ex-wheeler-delayed-choice-tradeoff] at $\alpha = 60^\circ$; its cyan diagonal part $\Pi(\rho)$ and magenta off-diagonal part $\rho - \Pi(\rho)$ are the two legs of a right triangle whose hypotenuse is $\rho$ ([@cor-pinching-pythagorean]).
+:::
+
 ## 6.1 Why Is the Inner Product $\vv{A}\cdot\vv{B}$ the "Particle" and the Exterior Product $\vv{A}\wedge\vv{B}$ the "Wave"? {#sec-inner-particle-outer-wave}
 
 Follow the author's intuition as we place the meeting of two quantum states under a geometric magnifying glass:
@@ -36,6 +40,10 @@ Adding the symmetric collinear particle part and the antisymmetric orthogonal wa
 $$
 \vv{A}\vv{B} = \underbrace{\frac{\vv{A}\vv{B} + \vv{B}\vv{A}}{2}}_{\vv{A}\cdot\vv{B}\text{ (collinear particle scalar)}} + \underbrace{\frac{\vv{A}\vv{B} - \vv{B}\vv{A}}{2}}_{\vv{A}\wedge\vv{B}\text{ (orthogonal wave bivector)}}.
 $$
+
+::: {.figure src="ch06-swap"}
+**Swap the order: the line stays, the area flips.** Both panels show the same two unit arrows, $\vv{A}$ and the amber $\vv{B}$. The cyan shadows are equally long, $\vv{A}\cdot\vv{B} = \vv{B}\cdot\vv{A} = \cos\theta$, and the magenta parallelograms are equally large, but the violet curved arrows turn opposite ways: $\vv{A}\wedge\vv{B} = +\sin\theta\,\vv{I}$ on the left, $\vv{B}\wedge\vv{A} = -\sin\theta\,\vv{I}$ on the right. The symmetric half keeps the line; the antisymmetric half keeps the oriented area.
+:::
 
 Why does the author remark, *"Then area and line, wave and particle, are in essence a single field"*? Because no inner-product line exists in isolation from its exterior wedge area, and no wedge area floats free of its inner-product line — they are simply **the grade-0 scalar slice and the grade-2 bivector slice of one and the same multivector field $\vv{A}\vv{B}$**! Read out diagonal populations alone, and you see the cosine line $\cos\theta$; recombine two branches in an interferometer, and you see the sine bivector area $\sin\theta\,\vv{I}$.
 
@@ -81,7 +89,9 @@ $$
 
 For unit vectors ($\|\vv{u}\| = \|\vv{v}\| = 1$), this is literally $\cos^2\theta + \sin^2\theta = 1$; and because the sum of squares $\|\vv{u}\wedge\vv{v}\|^2 \ge 0$ on the right is manifestly nonnegative, dropping it immediately yields the Cauchy–Schwarz inequality $(\vv{u}\cdot\vv{v})^2 \le \|\vv{u}\|^2\|\vv{v}\|^2$ — **the nonnegative "slack" in the Cauchy–Schwarz inequality is nothing other than the squared exterior bivector area $\|\vv{u}\wedge\vv{v}\|^2$!**
 
-![Decomposition of the geometric product AB = A·B + A∧B into particle inner line and wave wedge area, the Pythagorean complementarity circle D² + V² = 1, and the Hilbert–Schmidt orthogonal pinching split](../assets/fig-06-geometric-product-pythagoras.svg)
+::: {.figure src="ch06-gram-deficit"}
+**The gap in Cauchy–Schwarz is the square of the area.** Left: the grey $\vv{u}$ and the amber $\vv{v}$ span a magenta parallelogram of area $\lvert\vv{u}\wedge\vv{v}\rvert$. Right: a right triangle with legs $\lvert\vv{u}\cdot\vv{v}\rvert$ and $\lvert\vv{u}\wedge\vv{v}\rvert$ and hypotenuse $\lvert\vv{u}\rvert\lvert\vv{v}\rvert$; the cyan square $(\vv{u}\cdot\vv{v})^2$ and the magenta square $\lvert\vv{u}\wedge\vv{v}\rvert^2$ together make exactly the square $\lvert\vv{u}\rvert^2\lvert\vv{v}\rvert^2$ on the hypotenuse ([@thm-lagrange-gram-identity]).
+:::
 
 Now lift this exact Lagrange–Gram decomposition into a complex inner-product space $E$ (Lean module `QuantumBounds/RobertsonSchrodinger`). For any two vectors $u, v \in E$, the helper theorem [`gram_wedge_identity`](lean:D5/S3/QuantumBounds/RobertsonSchrodinger.gram_wedge_identity) proves that the product of squared norms splits into the squared modulus of the complex inner product plus a nonnegative Gram wedge defect $G := \|u\|^2\|v\|^2 - \|\langle u, v\rangle_{\mathbb{C}}\|^2 \ge 0$:
 
@@ -196,6 +206,10 @@ On the sphere the uncertainty relation can be attained. Toward the centre the va
 Equipped with this Pythagorean decomposition, let us step into the **double-slit experiment** and John Archibald Wheeler's **delayed-choice thought experiment**.
 
 When a quantum passes through a left path $\lvert L\rangle$ and a right path $\lvert R\rangle$ while an environmental register (or which-way detector) couples to the two paths, the left branch prepares a unit environmental record vector $r_L \in E$ ($\|r_L\| = 1$) and the right branch prepares a unit environmental record vector $r_R \in E$ ($\|r_R\| = 1$).
+
+::: {.figure src="ch06-three-markers"}
+**The two marker arrows decide whether the screen shows fringes.** On the left of each row are the marker arrows, grey $r_L$ and amber $r_R$; on the right, the distribution of hits on the screen. No marker ($\alpha = 0$): the arrows coincide and the screen shows cyan fringes at full contrast. Path marker ($\alpha = 90^\circ$): the arrows are perpendicular, the magenta vertical is the distinguishability $D = 1$, and the screen shows a single bump without fringes. Erased marker: the arrows are still perpendicular, but the marker is read along the violet diagonals; sorting by that reading gives two rows, cyan fringes and dashed anti-fringes half a fringe apart, which add up to the same bump. The envelope is schematic.
+:::
 
 Examine the complex overlap $c := \langle r_L, r_R\rangle_{\mathbb{C}}$ between the two environmental record arrows:
 
