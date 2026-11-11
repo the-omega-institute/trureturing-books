@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="prelude-edge-on" data-lang="zh" viewBox="0 0 420 330" width="420" height="330" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="上方是从上往下看的转盘：品红的圆盘逆时针转，琥珀色的方向 b 画了两个时刻，θ = 90°（圆顶）与 θ = 270°（圆底），各带一支切向的速度小箭头，一支向左、一支向右。两条虚线把它们向下投到底部青色的线段上，都落在正中 0 处；那里有两支小箭头，上面一支向左标着 cos 90° = 0，下面一支向右标着 cos 270° = 0。">
+<title>上方是从上往下看的转盘：品红的圆盘逆时针转，琥珀色的方向 b 画了两个时刻，θ = 90°（圆顶）与 θ = 270°（圆底），各带一支切向的速度小箭头，一支向左、一支向右。两条虚线把它们向下投到底部青色的线段上，都落在正中 0 处；那里有两支小箭头，上面一支向左标着 cos 90° = 0，下面一支向右标着 cos 270° = 0。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<circle cx="210" cy="122" r="88" class="ts-magenta tf-magenta" stroke-width="1.4" fill-opacity="0.12"/>
+<path d="M296.6 172 L299.1 167.4 L301.35 162.67 L303.36 157.84 L305.11 152.9 L306.59 147.88 L307.81 142.79 L308.77 137.64 L309.45 132.45 L309.86 127.23 L310 122 L309.86 116.77 L309.45 111.55 L308.77 106.36 L307.81 101.21 L306.59 96.12 L305.11 91.1 L303.36 86.16 L301.35 81.33 L299.1 76.6 L296.6 72" class="ts-magenta" stroke-width="1.6" stroke-linejoin="round" fill="none"/>
+<path d="M296.6 72 L303.37 77.43 L297.47 80.63Z" class="tf-magenta"/>
+<text class="tf-magenta" x="322" y="126" font-size="14"><tspan font-style="italic">ω</tspan></text>
+<circle cx="210" cy="122" r="3" class="tf-dim"/>
+<line x1="122" y1="292" x2="298" y2="292" class="ts-cyan" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+<line x1="210" y1="122" x2="210" y2="41.65" class="ts-amber" stroke-width="2.4" fill="none"/>
+<path d="M210 34 L213.78 43 L206.22 43Z" class="tf-amber"/>
+<line x1="210" y1="34" x2="175.95" y2="34" class="ts-amber" stroke-width="1.8" fill="none"/>
+<path d="M170 34 L177 31.06 L177 36.94Z" class="tf-amber"/>
+<text class="tf-amber" x="220" y="24" font-size="13"><tspan font-style="italic">θ</tspan> = 90°</text>
+<line x1="210" y1="278" x2="182.8" y2="278" class="ts-cyan" stroke-width="2" fill="none"/>
+<path d="M176 278 L184 274.64 L184 281.36Z" class="tf-cyan"/>
+<text class="tf-cyan" x="170" y="283" font-size="13" text-anchor="end">cos 90° = 0</text>
+<line x1="210" y1="122" x2="210" y2="202.35" class="ts-amber" stroke-width="2.4" fill="none"/>
+<path d="M210 210 L206.22 201 L213.78 201Z" class="tf-amber"/>
+<line x1="210" y1="210" x2="244.05" y2="210" class="ts-amber" stroke-width="1.8" fill="none"/>
+<path d="M250 210 L243 212.94 L243 207.06Z" class="tf-amber"/>
+<text class="tf-amber" x="200" y="232" font-size="13" text-anchor="end"><tspan font-style="italic">θ</tspan> = 270°</text>
+<line x1="210" y1="306" x2="237.2" y2="306" class="ts-cyan" stroke-width="2" fill="none"/>
+<path d="M244 306 L236 309.36 L236 302.64Z" class="tf-cyan"/>
+<text class="tf-cyan" x="250" y="311" font-size="13">cos 270° = 0</text>
+<line x1="210" y1="214" x2="210" y2="288" class="ts-dim" stroke-width="1.1" stroke-dasharray="3 4" fill="none"/>
+<circle cx="210" cy="292" r="5" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-dim" x="114" y="126" font-size="13" text-anchor="end">从上看</text>
+<text class="tf-dim" x="114" y="297" font-size="13" text-anchor="end">贴桌看</text>
+</svg>

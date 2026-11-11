@@ -153,6 +153,39 @@ Keep the mathematical contract of [@thm-two-axis-finite-word] exact:
 **The smaller the angle, the more the turns.** With the violet axes only $10^\circ$ apart, each turn about $b$ pushes the point at most $20^\circ$ further out, and the cyan dashed circle creeps outward one step at a time; the same target, $110^\circ$ from $N$, now takes twelve turns. This is the page's construction, not a shortest word.
 :::
 
+**Cut the rotations fine and alternate them: the Lie–Trotter formula.** [@thm-two-axis-finite-word] only says that finite words in two axes exist; it does not say how to build them. One construction needs no thought at all: cut the rotation about $a$ and the rotation about $b$ into $n$ small rotations each, and alternate them for $n$ rounds. As $n \to \infty$, the product converges to the single rotation obtained by simply adding the two "generators". This is not special to rotations: it holds in every complete normed algebra.
+
+::: {.theorem #thm-lie-trotter title="The Lie–Trotter Product Formula" lean="D5/S3/Quantum/Analysis/TrotterProduct.trotter_product"}
+Let $\mathcal{A}$ be a complete normed algebra over the real numbers whose unit has norm $\lVert 1\rVert = 1$. Then for all $A, B \in \mathcal{A}$, as $n \to \infty$,
+
+$$
+\bigl(e^{A/n}\,e^{B/n}\bigr)^n \;\longrightarrow\; e^{A + B}.
+$$
+:::
+
+::: proof
+The Lean proof has three steps. (1) Term-by-term estimates of the exponential series give $\lVert e^X\rVert \le e^{\lVert X\rVert}$ and $\lVert e^X - 1 - X\rVert \le \lVert X\rVert^2 e^{\lVert X\rVert}$, and from these the one-step error $\lVert e^X e^Y - e^{X+Y}\rVert \le (\lVert X\rVert + \lVert Y\rVert)^2\,\bigl(3 + \lVert X\rVert + \lVert Y\rVert\bigr)\,e^{\lVert X\rVert + \lVert Y\rVert}$: the first-order terms $X + Y$ agree on both sides, so the error starts at second order. (2) If $\lVert S\rVert, \lVert T\rVert \le C$ with $C \ge 1$, then $\lVert S^n - T^n\rVert \le n\,C^n\,\lVert S - T\rVert$ (induction on $n$, splitting the difference into $n$ terms that differ in one factor only). (3) Take $X = A/n$, $Y = B/n$, $S = e^{A/n}e^{B/n}$ and $T = e^{(A+B)/n}$, and use $T^n = e^{A+B}$: the one-step error is of order $1/n^2$, after $n$ factors it is of order $1/n$, and $C^n \le e^{\lVert A\rVert + \lVert B\rVert}$ stays bounded, so the difference tends to zero. The full proof is checked by the Lean kernel.
+:::
+
+**Rotations about two axes add like vectors.** In the algebra of real $3\times 3$ matrices with the operator norm, let $K_x, K_y, K_z$ be the generators of rotations about the three coordinate axes ($e^{\theta K_x}$ is the rotation by $\theta$ about the $x$ axis). The generator is linear in the axis: $\theta K_x + \theta K_y = \sqrt{2}\,\theta\,K_{\hat{n}}$ with $\hat{n} = (1, 1, 0)/\sqrt{2}$ (a manual derivation). So [@thm-lie-trotter] says: turning by $\theta/n$ about $x$ and about $y$ alternately for $n$ rounds tends to a rotation by $\sqrt{2}\,\theta$ about the diagonal axis $\hat{n}$. The two angles combine by Pythagoras, and the axis lies on the bisector of the two axes.
+
+::: {.example #ex-trotter-two-quarter-turns title="Two Quarter Turns, Cut Ever Finer, Approach One Rotation by 127.28°"}
+Take $\theta = \frac{\pi}{2}$ and compare $P_n = \bigl(e^{\theta K_x/n}\,e^{\theta K_y/n}\bigr)^n$ with the target $e^{\theta(K_x + K_y)}$, the rotation by $\sqrt{2}\cdot 90^\circ = 127.28^\circ$ about $\hat{n} = (1, 1, 0)/\sqrt{2}$. The error in the table is the operator norm of the difference; the angle and axis are read off $P_n$ itself. Values are rounded to the digits shown.
+
+| $n$ | error $\lVert P_n - e^{\theta(K_x + K_y)}\rVert$ | $n \times$ error | angle of $P_n$ | axis of $P_n$ |
+| ---: | ---: | ---: | ---: | :--- |
+| $1$ | $1.0353$ | $1.0353$ | $120.00^\circ$ | $(0.5774, 0.5774, 0.5774)$ |
+| $2$ | $0.5037$ | $1.0075$ | $125.60^\circ$ | $(0.6786, 0.6786, 0.2811)$ |
+| $4$ | $0.2496$ | $0.9984$ | $126.87^\circ$ | $(0.7002, 0.7002, 0.1393)$ |
+| $16$ | $0.0622$ | $0.9954$ | $127.25^\circ$ | $(0.7067, 0.7067, 0.0347)$ |
+| $256$ | $0.0039$ | $0.9952$ | $127.28^\circ$ | $(0.7071, 0.7071, 0.0022)$ |
+| $1024$ | $0.0010$ | $0.9952$ | $127.28^\circ$ | $(0.7071, 0.7071, 0.0005)$ |
+
+The row $n = 1$ deserves a second look: a quarter turn about $y$ followed by a quarter turn about $x$ is a rotation by $120^\circ$ about the body diagonal $(1, 1, 1)/\sqrt{3}$, with an axis tilted well out of the horizontal plane. The finer the cut, the further the axis sinks towards the bisector of the two axes, and the angle grows from $120^\circ$ to $127.28^\circ$. The error times $n$ settles near $0.995$, so the error falls like $1/n$, the order found in step (3) of the proof; the theorem itself asserts only the convergence and gives no constant.
+:::
+
+> Two rotations do not commute, but cut fine enough, the order hardly matters: what non-commutation leaves behind fades like $1/n$.
+
 ## A Rational Six-Axis Cover and the Six-Color Lower Bound {#sec-rational-six-axis-atlas}
 
 Because two-angle coordinates $(\theta, \varphi)$ become singular at the poles and any single reference axis $\vv{a}$ leaves an orthogonal equator $\{x \in S^2 \mid \langle x, \vv{a}\rangle_{\mathbb{R}} = 0\}$ where inner-product overlap vanishes ([Chapter 1](ch01-measurement.md) and [Chapter 2](ch02-born-rule.md)), a natural topological question arises:

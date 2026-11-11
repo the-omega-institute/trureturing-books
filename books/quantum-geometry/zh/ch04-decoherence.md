@@ -207,6 +207,54 @@ $$
 结论 1 对自然数 $N$ 归纳：$N = 0$ 时 $c^0 = 1$ 为恒等映射；由 $N$ 到 $N+1$ 时，对角位置 $(i = j)$ 保持不变，副对角位置 $(i \neq j)$ 再乘一次因子 $c$，得到 $c \cdot (c^N \rho_{ij}) = c^{N+1}\rho_{ij}$。结论 2 将 $\rho_+$ 代入结论 1，得第 $(0, 1)$ 元为 $\frac{1}{2}c^N$；因 $0 \le c < 1$，实数（及嵌入复数后）的模长满足 $|c| < 1$，故几何级数项 $c^N \to 0$，乘以常数 $\frac{1}{2}$ 后仍收敛于 $0$。完整证明由 Lean 内核检查。
 :::
 
+**衰减到零，还算可逆吗？** [@prop-phase-damping-decay] 里的相干元每一步乘以 $c$，$N$ 步后只剩 $c^N\rho_{01}$，最终归零。4.1 节说过，单步退相干可以看成一次可逆耦合之后丢掉环境（[@thm-stinespring-dilation]、[@thm-reduced-access-defect]）。可“每一步都能这样看”与“所有步数合起来仍是同一个可逆演化的影子”是两回事：前者允许每一步各换一个扩张，后者要求一个酉算子 $U$ 一次管住全部的 $T^n$。下面的定理说，后者对任何压缩算子都成立。
+
+::: {.theorem #thm-unitary-power-dilation title="Sz.-Nagy 酉幂扩张：压缩算子的每一次幂都是同一个酉算子的影子" lean="D5/S3/HilbertOperators/UnitaryPowerDilation.exists_unitary_power_dilation"}
+设 $E$ 为复希尔伯特空间（完备的复内积空间），$T : E \to E$ 为有界线性算子，且 $\lVert T\rVert \le 1$。则存在复希尔伯特空间 $H$、有界线性算子 $V : E \to H$ 与 $H$ 上的酉算子 $U$，使得：
+
+1. $V$ 保内积：对一切 $x, y \in E$，$\langle Vx, Vy\rangle = \langle x, y\rangle$；
+2. 对一切 $n \in \mathbb{N}$ 与 $x \in E$，$V^{\dagger}\,U^n\,V x = T^n x$。
+:::
+
+::: proof
+Lean 的证明分两步，第二步正是“碰撞模型”。
+
+（1）一步：Halmos 扩张。在 $E \oplus E$ 上取自伴分块算子 $a = \begin{pmatrix} 0 & T \\ T^{\dagger} & 0 \end{pmatrix}$，其范数不超过 $\lVert T\rVert \le 1$；用连续函数演算构造 $\sqrt{I - a^2}$，则 $a + i\sqrt{I - a^2}$ 是酉算子，再乘以交换两个分量的置换，得到酉算子 $J$。由于 $a^2$ 是分块对角的，$\sqrt{I - a^2}$ 也是分块对角的，所以从 $(x, 0)$ 出发，$J$ 输出的第一分量恰是 $Tx$。
+
+（2）全部步数：碰撞模型。取 $H = \ell^2(\mathbb{Z};\, E \oplus E)$，每个整数格点上有一份系统、一份环境。$U$ 先在每个格点上同时做一次 $J$，再让所有环境分量向右移一格；两个酉算子之积仍是酉算子。$V$ 把 $x$ 放进第 0 格的系统分量，$V^{\dagger}$ 读回第 0 格的系统分量。对 $n$ 归纳：$n$ 步之后，第 0 格的系统分量是 $T^n x$，第 0 格的环境分量为零，负号格点全为零。原因是第 0 格的系统每一步都迎来从左边移来的空白环境，用过的环境向右离开，再也不回来。完整证明由 Lean 内核检查。
+:::
+
+**为什么环境必须无穷大。** 证明里构造的 $H$ 是无穷维的，这并非偷懒（手工推导）：若对某个单位向量 $x$ 有 $\lVert T^n x\rVert \to 0$，则任何有限维的 $H$ 都满足不了 [@thm-unitary-power-dilation]。有限维空间上的酉算子构成紧集，序列 $U^n$ 有收敛子列 $U^{n_k} \to W$；把子列取得使间隔 $m_k = n_{k+1} - n_k$ 趋于无穷，就有 $U^{m_k} = U^{n_{k+1}}(U^{n_k})^{-1} \to W W^{-1} = I$。于是
+
+$$
+\langle x, T^{m_k}x\rangle = \langle Vx, U^{m_k}Vx\rangle \to \langle Vx, Vx\rangle = 1,
+$$
+
+可左边的模不超过 $\lVert T^{m_k}x\rVert \to 0$，矛盾。有限的环境迟早会把漏出去的振幅送回来；一去不返的衰减，要一个无穷大的环境来装。
+
+::: {.example #ex-halmos-one-step-recurrence title="一步扩张只管一步：c = 0.8 时，漏出去的振幅会回来"}
+取最简单的压缩：$E = \mathbb{C}$、$T = c = 0.8$，它就是 [@prop-phase-damping-decay] 里相干元每步所乘的那个因子。记 $s = \sqrt{1 - c^2} = 0.6$，证明第（1）步的 Halmos 构造给出
+
+$$
+J = \begin{pmatrix} c & i s \\ i s & c \end{pmatrix} = \begin{pmatrix} 0.8 & 0.6\,i \\ 0.6\,i & 0.8 \end{pmatrix}.
+$$
+
+第一步它确实把振幅 $1$ 送成 $0.8$，漏进环境的是 $0.6\,i$。若反复使用同一个 $J$、同一份环境，那么 $J = \cos\varphi\, I + i\sin\varphi\,\sigma_x$（$\varphi = \arccos 0.8 = 36.87^\circ$）只是绕 $x$ 轴的转动，$(J^n)_{00} = \cos n\varphi$。下表第四列是对碰撞模型的数值模拟（第 0 格每一步迎来新环境），数值四舍五入到所示位数：
+
+| $n$ | $c^n$（应得） | $(J^n)_{00}$（同一份环境反复用） | 碰撞模型第 0 格 | 漏出的概率 $1 - c^{2n}$ |
+| ---: | ---: | ---: | ---: | ---: |
+| $1$ | $0.8000$ | $0.8000$ | $0.8000$ | $0.3600$ |
+| $2$ | $0.6400$ | $0.2800$ | $0.6400$ | $0.5904$ |
+| $3$ | $0.5120$ | $-0.3520$ | $0.5120$ | $0.7379$ |
+| $4$ | $0.4096$ | $-0.8432$ | $0.4096$ | $0.8322$ |
+| $5$ | $0.3277$ | $-0.9971$ | $0.3277$ | $0.8926$ |
+| $6$ | $0.2621$ | $-0.7522$ | $0.2621$ | $0.9313$ |
+
+从第二步起，单份环境就把漏出去的振幅送了回来；到 $n = 39$，$(J^{39})_{00} = 0.99934$，几乎完全复原，而 $c^{39} = 0.00017$。碰撞模型的第 0 格逐行恰是 $c^n$，与证明里的归纳结论一致。漏出的概率 $1 - c^{2n}$ 并没有消失，它散在第 $1, 2, \dots, n$ 格上，总范数始终是 $1$。
+:::
+
+> 漏出去的振幅不回来，不是因为它消失了，而是因为迎面来的环境永远是新的。
+
 除了“只收腰、不掉高”的相位阻尼外，实验室里还有另一类截然不同的能量耗散过程——**振幅阻尼信道**（amplitude damping，对应自发辐射能量弛豫时间 $T_1$）：处于激发态（南极 $-1$）的量子比特会向低温环境吐出一颗能量光子而跌回基态（北极 $+1$）。因此，在几何上，整颗布洛赫球不仅在往里收缩，而且球心还在往北极 $u = +1$ 方向**整体上漂**：轴向坐标按仿射律 [`dampedAxis`](lean:D5/S3/QuantumChannels/AmplitudeDampingContraction.dampedAxis) $u \mapsto u' = (1 - \gamma)u + \gamma$（阻尼率 $0 \le \gamma < 1$）向 $+1$ 聚拢！
 
 ::: {.viz src="bloch-noise" preset="amp" height="500"}
@@ -470,6 +518,6 @@ $$
 - **第一章**拆穿了孤立单子与外部第 3 点 $C$ 的双重幻觉，证明单比特矩阵代数无特征标（[@thm-qubit-no-character]），并用幺正射线刚性（[@thm-ray-phase-rigidity]）与布洛赫展开（[@prop-qubit-bloch-core]）把双分量复列向量（四个实坐标）还原为球面上的三维实单位线 $\vv{a} \in S^2$；
 - **第二章**以已知态自身为基，把“点 $C$”还原为内生相融影子 $\vv{c} = (\vv{a}\cdot\vv{b})\vv{a}$，从迹配对与勾股模长守恒严格导出玻恩模平方定则（[@thm-born-modulus-square]、[@thm-rank-one-born-pairing]）及半角换算 $\cos^2(\theta/2) = \frac{1 + \cos\theta}{2}$，并证明在探针上为正的读数可由最小确认逐层剥出（[@thm-positive-dual-generation]），以及有限维里效应上可加的概率必是某个密度矩阵的迹配对（[@thm-busch-effect-density]）；
 - **第三章**指出粒子、概念与经典时间刻度全都是幂等投影线 $P^2 = P$ 的不动点（[@thm-pinching-idempotent]、[@thm-unread-fixed-iff]、[@thm-conditional-state-valid]），用互补勾股定理（[@thm-complementary-pythagoras]）揭示了粒子轴与霍奇对偶波平面的伴生宿命，并给出 $d$ 维系统的记录容量上界 $N \le d$（[@prop-record-capacity]）与互补语境的熵不确定关系（[@prop-collision-entropy-uncertainty]）；
-- **第四章**追踪了视线移开后的偏迹边缘化（[@thm-nonselective-marginal]），证明局部不可逆只是环境访问缺陷（[@thm-reduced-access-defect]），给出了相位阻尼、振幅阻尼与捏合投影的几何收缩图像（[@thm-pinching-pythagorean]、[@prop-phase-damping-decay]、[@prop-amplitude-damping-contraction]、[@cor-pinching-zero-offdiag]），以 Stinespring 扩张（[@thm-stinespring-dilation]）说明表示压缩的结构，并由迹距离在同一有限指标类型上的量子信道下不增（[@prop-trace-distance-metric-contraction]）刻画两态可分辨性的限制。
+- **第四章**追踪了视线移开后的偏迹边缘化（[@thm-nonselective-marginal]），证明局部不可逆只是环境访问缺陷（[@thm-reduced-access-defect]），给出了相位阻尼、振幅阻尼与捏合投影的几何收缩图像（[@thm-pinching-pythagorean]、[@prop-phase-damping-decay]、[@prop-amplitude-damping-contraction]、[@cor-pinching-zero-offdiag]），以 Stinespring 扩张（[@thm-stinespring-dilation]）说明表示压缩的结构，以 Sz.-Nagy 酉幂扩张（[@thm-unitary-power-dilation]）说明任意多步的压缩仍是同一个酉演化的影子，并由迹距离在同一有限指标类型上的量子信道下不增（[@prop-trace-distance-metric-contraction]）刻画两态可分辨性的限制。
 
 至此，第一重帷幕“从点到线”已彻底落下。在接下来的**第二部《展翼·从线到面》**中，我们将把目光从静态的一维投影线 $\vv{a} \cdot \vv{b} = \cos\theta$ 抬高三寸，正面迎向那片在第一部里已经频频显露锋芒的**二维有向面积** $\vv{a} \wedge \vv{b} = \sin\theta\,\hat{I}$——看清虚数单位 $i$ 为什么其实就是平面 $90^\circ$ 正交转向算子，并用一行克利福德几何积恒等式 $AB = A\cdot B + A\wedge B$ 将全部单比特量子门与量子力学五大公理一举合拢！
