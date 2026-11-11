@@ -69,6 +69,10 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 `pairwise-shutter` 的青色是已知态 $A$、它那条直径上从 $-1$ 端到 $B$ 的垂足的一段（长度占直径的 $p$）、权重的虚线与“过”的方块；琥珀色是目标态 $B$ 与当前的比例；细曲线（墨色）是数出来的比例 $k/N$；紫色只在 `turn` 卡里出现，是两支共用的转轴。绿色框只给第二章用 `lean=` 引用的两条定理：`born_probability_skeleton`（过与不过两份权重非负、相加为 1）与 `rank_one_born_pairing_weight`（$\lvert\langle\phi\mid\psi\rangle\rvert^2 = \Tr(\rho P_k)$）；半角公式 $(1 + \cos\theta)/2$ 与随机方向上权重均匀是第二章例题的手算，页面三路数值核对标 `NUM`；快门计数是固定种子的抽样模型，比例趋向权重是大数定律（本书未形式化），浅色带 $p \pm 2\sqrt{p(1-p)/N}$ 只是参考尺度，一并标 `MODEL`。这一页不画 `qubit-geometry` · `line` 的“影子长 $\cos\theta$”，只画计数。
 
+| `grover-reflections` | 照两面镜子，态就在同一个平面里朝目标转 2θ；整数步只能逼近，走多了会转过头 | `mirrors` `four` `eight` `over` `sqrt` |
+
+`grover-reflections` 的舞台是目标轴 $W$（竖）与失败轴 $B$（横）张成的平面：琥珀色是当前的态与当前这一步的柱子，青色是态在 $W$ 上的影子（成功振幅）与每一步的成功概率柱，品红是在 $B$ 上的影子，紫色是每一步转过的 $2\theta$；两面镜子（失败轴与 $\lvert s\rangle$ 那条线）用中性灰虚线。绿色框只给第十五章用 `lean=` 引用的 `uniform_operator_rotation`（页面取单列、$p = 1/N$）；查询下界 $\Omega(\sqrt{N})$ 标 `ARGUED`；镜像逐次作用、最佳步数逐个比较（只在第一个半圈 $(2n+1)\theta \le \pi$ 里比）标 `NUM`，两次镜像之间箭头尖沿垂线滑过镜面只是动画。
+
 ## 正文里的引用（中英文版本位置与卡名相同）
 
 | 章节 | 位置 | 引用 |
@@ -196,6 +200,9 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二章 | §2.3 `qubit-geometry` · `line` 之后、“上面的表是逐个角度算的”之前 | `pairwise-shutter` · `right` |
 | 第二章 | §2.3 “单比特是唯一‘公平’的情形”一段之后 | `pairwise-shutter` · `random` |
 | 第二章 | 文献注记 `rem-gleason-literature` 之后、转入第三章之前 | `pairwise-shutter` 完整实验室 |
+| 第十五章 | Grover 一节定理 `thm-grover-uniform-rotation` 的证明之后、三条边界之前 | `grover-reflections` · `mirrors` |
+| 第十五章 | Grover 一节末（三条边界列表之后、相位反冲一节之前） | `grover-reflections` · `over`、`sqrt`，随后完整实验室 |
+| 第十五章 | 例 `ex-grover-four-shor-fifteen` 之后、文献注记 `rem-grover-qft-shor-literature` 之前 | `grover-reflections` · `four`、`eight` |
 
 ## 增删或修改一张卡之后
 
