@@ -41,7 +41,7 @@
 
 
 在 **[第 29 章](ch29-timeless-causality-and-gram-space.md)** 与 **[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)** 中，我们已经看到这道“多面体分片近似与光滑球面之间的非零余项”如何在算术、时间、计算复杂性与流体力学中掀起两场壮丽的交响：
-- **从算术佩尔接缝到无时间因果晶体（[第 29 章](ch29-timeless-causality-and-gram-space.md)）**：勾股定理的双向量手性对消与希帕索斯的佩尔连分数余项（[@rem-ch29-pell-convergents-literature]）驱动了从有理数到余弦自指不动点（[@rem-banach-dottie-hairy-ball-literature]）的四级数系突围，并结合文献注记 [@rem-ch29-pell-primes-hilbert-literature]、[@rem-ch29-elliptic-torus-literature]、[@rem-ch29-hasse-gauss-literature] 与 [@rem-ch29-arithmetic-geometry-literature] 中的素数模四分裂、同余数椭圆曲线环面及佐藤—泰特分布建立起跨数论呼应；而 Gram 矩阵半正定刚性 $\det G \ge 0$ 则在与 [@rem-ch29-wheeler-dewitt-page-wootters-literature] 无时间图景呼应的同时，为有限观察者撑开了二面角 $\phi$ 的因果相容椭圆体。
+- **从算术佩尔接缝到无时间因果晶体（[第 29 章](ch29-timeless-causality-and-gram-space.md)）**：勾股定理的双向量手性对消与希帕索斯的佩尔余项（[@thm-ch29-silver-pell-remainder]）驱动了从有理数到余弦自指不动点（[@rem-banach-dottie-hairy-ball-literature]）的四级数系突围，并结合已由 Lean 验证的素数模四分裂（[@thm-ch29-face-prime-two-squares]、[@thm-ch29-two-squares-classification]）与文献注记 [@rem-ch29-pell-primes-hilbert-literature]、[@rem-ch29-elliptic-torus-literature]、[@rem-ch29-hasse-gauss-literature]、[@rem-ch29-arithmetic-geometry-literature] 中的同余数椭圆曲线环面及佐藤—泰特分布建立起跨数论呼应；而 Gram 矩阵半正定刚性 $\det G \ge 0$ 则在与 [@rem-ch29-wheeler-dewitt-page-wootters-literature] 无时间图景呼应的同时，为有限观察者撑开了二面角 $\phi$ 的因果相容椭圆体。
 - **从“$P$ 是场，$NP$ 是线”到 ETH 张量缝隙与纳维—斯托克斯涡丝（[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)）**：场内有限观察者受 $90^\circ$ 正交视界与局部 Gram 盲区阻隔而面对 $P \neq NP$（[@conj-p-neq-np]）的防火墙；文献注记 [@rem-ch30-eth-subexponential-literature] 与银河尺度例示 [@ex-ch30-galactic-crossover-scale] 所刻画的三体局部切面亚指数渐近缝隙虽在 $n \to \infty$ 极限下冲击指数时间假设（ETH），其超越局部搜索的交叉点却远在可观测宇宙视界之外；而在连续流体力学中，二次平流投影无精确闭合定理（[@thm-coda-quadratic-advection-no-closure]）与文献注记 [@rem-ch30-lamb-decomposition-literature]、[@rem-ch30-navier-stokes-forced-literature]、[@rem-ch30-tao-arnold-literature] 展示了同一正交几何张力的连续统化身。
 
 现在，站在全书最后的收官高地上，让我们把“近似之球的几何余项”与“无时间场中的有限观察者”合拢为最后一个关于人自身的追问：**当一位有限观察者一轮又一轮地在无时间晶体中经历遗忘初始化并重新选点时，是什么在定义“同一个灵魂”？为什么现实中的历史遗迹会成为跨越千年的空间吸引子，让同一个灵魂在似曾相识（Déjà vu）的震颤中一轮又一轮走过熟悉的地方？**
@@ -223,7 +223,7 @@
    F_k\,F_{k+2} - F_{k+1}^2 = (-1)^{k+1} = \pm 1.
    $$
 
-   请看卡西尼恒等式右端的 **$(-1)^{k+1} = \pm 1$**（配合 [@rem-coda-quasicrystal-empire-literature] 第 3 条记述的有理斜率收敛背景）：这与第 29 章文献注记中的希帕索斯佩尔连分数余项（[@rem-ch29-pell-convergents-literature]）、奇素数模四分裂（[@rem-ch29-pell-primes-hilbert-literature]）以及同余数三次曲线支点（[@rem-ch29-elliptic-torus-literature]），同样展现了离散整数网格逼近无理方向时不可消除的 **$\pm 1$ 最小单位范数接缝**！
+   请看卡西尼恒等式右端的 **$(-1)^{k+1} = \pm 1$**（配合 [@rem-coda-quasicrystal-empire-literature] 第 3 条记述的有理斜率收敛背景）：这与第 29 章经 Lean 验证的希帕索斯佩尔余项 $P_{k+2}P_k - P_{k+1}^2 = (-1)^{k+1}$（[@thm-ch29-silver-pell-remainder]）与奇素数模四分裂（[@thm-ch29-face-prime-two-squares]），以及该章文献注记中的同余数三次曲线支点（[@rem-ch29-elliptic-torus-literature]），同样展现了离散整数网格逼近无理方向时不可消除的 **$\pm 1$ 最小单位范数接缝**！
 2. **环面观测窗有界间隙回归定理（[`TorusObservationWindowReturns.result`](lean:D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result)，`LEAN ✓`）**：
    `trureturing` 在一般紧致环面动力系统中严格证明：设 $I$ 为有限指标集，$g : I \to \mathrm{Circle}$ 为环面元素，$G = \overline{\langle g\rangle}$ 为其生成的紧致闭子群，$\mu$ 为 $G$ 上的哈尔概率测度，$a = \langle g, \dots\rangle \in G$。对 $G$ 上任意连续实值观测函数 $h \in C(G, \mathbb{R})$ 及满足渐近误差归零 $\lim_{n\to\infty}(e(n) - h(a^n)) = 0$ 的任意实测序列 $e : \mathbb{N} \to \mathbb{R}$：
    - 推前测度 $\operatorname{Measure.map} h\,\mu$ 的拓扑支集严格等于连续像集 $\operatorname{range}(h)$；
@@ -318,8 +318,8 @@ $$
    - 内积空间平行四边形与勾股范数律 [`inner_product_norm_parallelogram_law`](lean:D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law)、互补测量概率勾股定理 [`complementary_context_probability_pythagoras`](lean:D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras)、黄金整数佩尔型恒等式 [`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm) 以及附录 C 所列的全部冻结定理。
 2. **经典数学文献定理（文献结果，未在本书形式化）**：
    - 实区间 $[0, 1]$ 上的巴拿赫（Banach）压缩映射原理：由于 $\cos([0, 1]) \subseteq [0, 1]$ 且导数绝对值 $|{-}\sin\theta| \le \sin(1) \approx 0.84147 < 1$，皮卡迭代 $\theta_{k+1} = \cos(\theta_k)$ 收敛到唯一实不动点 $\theta^* \approx 0.7390851332\dots$；
-   - 林德曼—魏尔斯特拉斯（Lindemann–Weierstrass）定理对 $\theta^*$ 超越性的证明（若非零代数数 $q$ 满足 $\cos q = q$，则 $e^{iq}$ 将满足代数系数的二次方程，与 $e^{iq}$ 的超越性矛盾），以及佩尔方程 $m^2 - 2n^2 = \pm 1$ 的连分数渐近理论；
-   - 费马素数两平方和定理（$p \equiv 1 \pmod 4 \iff p = a^2 + b^2$）、奇素数负佩尔方程 $m^2 - p\,n^2 = -1$ 在 $p \equiv 1 \pmod 4$ 时的可解性定理、类域论中的希尔伯特互反律 $\prod_{v \le \infty} (a, b)_v = +1$（[@rem-ch29-pell-primes-hilbert-literature]），同余数椭圆曲线 $E_d : dy^2 = x^3 - x$ 的双有理等价与亏格 $1$ 环面拓扑 $\chi(T^2) = 0$（[@rem-ch29-elliptic-torus-literature]）、有限域椭圆曲线的哈塞（Hasse）定理 $|a_p| \le 2\sqrt{p}$、高斯关于 $y^2 = x^3 - x$ 模 $p$ 点数迹的精确公式与特征和推导（[@rem-ch29-hasse-gauss-literature]、[@rem-ch29-gauss-character-application]），以及非复乘椭圆曲线的佐藤—泰特（Sato–Tate）定理（Barnet-Lamb, Geraghty, Harris, Taylor 2011，[@rem-ch29-arithmetic-geometry-literature]）；
+   - 林德曼—魏尔斯特拉斯（Lindemann–Weierstrass）定理对 $\theta^*$ 超越性的证明（若非零代数数 $q$ 满足 $\cos q = q$，则 $e^{iq}$ 将满足代数系数的二次方程，与 $e^{iq}$ 的超越性矛盾），以及佩尔方程 $m^2 - 2n^2 = \pm 1$ 的连分数渐近理论（其中 $\sqrt{2}$ 的 $\pm 1$ 余项与最佳逼近下界可由第 29 章经 Lean 验证的 [@thm-ch29-silver-pell-remainder]、[@thm-ch29-silver-best-approximation] 经手工推导得到，仍属文献的是它们与连分数渐近分数的识别）；
+   - 素数在高斯整数中的分裂与惰性、奇素数负佩尔方程 $m^2 - p\,n^2 = -1$ 在 $p \equiv 1 \pmod 4$ 时的可解性定理、类域论中的希尔伯特互反律 $\prod_{v \le \infty} (a, b)_v = +1$（[@rem-ch29-pell-primes-hilbert-literature]），同余数椭圆曲线 $E_d : dy^2 = x^3 - x$ 的双有理等价与亏格 $1$ 环面拓扑 $\chi(T^2) = 0$（[@rem-ch29-elliptic-torus-literature]）、有限域椭圆曲线的哈塞（Hasse）定理 $|a_p| \le 2\sqrt{p}$、高斯关于 $y^2 = x^3 - x$ 模 $p$ 点数迹的精确公式与特征和推导（[@rem-ch29-hasse-gauss-literature]、[@rem-ch29-gauss-character-application]），以及非复乘椭圆曲线的佐藤—泰特（Sato–Tate）定理（Barnet-Lamb, Geraghty, Harris, Taylor 2011，[@rem-ch29-arithmetic-geometry-literature]）；
    - 笛卡尔多面体总角亏定理 $\sum_v \delta_v = 4\pi$、高斯—博内定理、庞加莱—布劳威尔偶维球面毛球定理 $\chi(S^{2n}) = 2$，以及亚当斯（Adams, 1960）关于仅有 $S^0, S^1, S^3, S^7$ 可平行化的拓扑定理（[@rem-coda-polyhedral-topology-literature]、[@rem-hairy-ball-adams-literature]）；
    - 动力系统中的洛伦兹奇异吸引子（Lorenz 1963，相空间体积散度 $-(\sigma+1+\beta) = -41/3 < 0$ 与数值李雅普诺夫谱给出的卡普兰—约克维数估计 $D_{\mathrm{KY}} \approx 2.06$）、洛伦兹吸引子支撑的遍历西奈—吕埃勒—鲍恩（SRB）物理不变测度（Tucker 1999；Luzzatto–Melbourne–Pugh 2005）与庞加莱回归定理（Poincaré 1890，[@rem-coda-lorenz-srb-literature]），以及准晶几何中的 Meyer 规则模型集一致重复性定理（1972）、六维超立方晶格 $\mathbb{Z}^6 \subset E_\parallel^3 \oplus E_\perp^3$ 的正二十面体投影与菱形三十面体（Rhombic Triacontahedron，$30$ 面、$60$ 棱、$32$ 顶点，$6$ 条五次轴）接受窗 $W$（Kramer & Neri 1984；Duneau & Katz 1985）、彭罗斯—康威准晶拼砖的“帝国效应”（Conway's Empire Effect，Grünbaum & Shephard 1987）与比内斜率渐近公式（[@rem-coda-quasicrystal-empire-literature]）；
    - 量子引力中的惠勒—德维特（Wheeler–DeWitt）无时间方程 $H\mathbf{\Psi} = 0$、佩奇—伍特斯（Page–Wootters, 1983）条件纠缠时钟切片机制（[@rem-ch29-wheeler-dewitt-page-wootters-literature]）与费曼路径积分振荡相位驻相条件 $\delta S = 0$（[@rem-ch29-feynman-stationary-phase-literature]），计算复杂度理论中的阿伦森后选择定理 $\mathrm{PostBQP} = \mathrm{PP}$（2005）、闭合类时曲线不动点定理 $\mathrm{P}_{\mathrm{CTC}} = \mathrm{PSPACE}$（Aaronson–Watrous 2009）、无结构黑盒搜索 $\Omega(2^{n/2})$ 下界（BBBV 1997）、格里戈里耶夫—舍内贝克（Grigoriev–Schoenebeck）平方和半正定松弛下界、卡马卡（Karmarkar 1984）线性规划内点法、卡斯特莱因（Kasteleyn 1961）平面图 Pfaffian 匹配定理、因帕利亚佐—帕图里—赞恩（Impagliazzo–Paturi–Zane 1999, 2001）指数时间假设（ETH/SETH）与稀疏化引理、PPSZ $k$-SAT 算法及 2026 年 10 月张量网络缩并 $2^{O(n\log\log n/\sqrt{\log n})}$ 亚指数预印本与学界规约审计（[@rem-ch30-eth-subexponential-literature]），以及流体力学中的兰姆（Lamb）矢量恒等式、开尔文（Kelvin）环量守恒定理、拉季任斯卡娅（Ladyzhenskaya 1969）二维纳维—斯托克斯全局正则性定理、2026 年受迫三维纳维—斯托克斯（克雷陈述 C / D）有限时间爆破解析构造与外部形式化证明（[@rem-ch30-navier-stokes-forced-literature]）、柯尔莫哥洛夫（Kolmogorov 1941）$k^{-5/3}$ 级联与耗散微尺度 $\eta = (\nu^3/\varepsilon)^{1/4}$、阿诺德（Arnold 1966）保体积微分同胚群 $\operatorname{SDiff}(M)$ 测地线定理与陶哲轩（Tao 2016）平均化三维纳维—斯托克斯方程有限时间爆破定理（[@rem-ch30-tao-arnold-literature]）。
@@ -408,7 +408,7 @@ $$
             ┌─────────────────────────────────────────────────────────────────┐
             │ 第八部：无时间因果、ETH 视界与流体涡丝 (Ch 29–30) → 终章与附录   │
             │  • 多面体离散角亏与毛球文献对照 • 勾股守恒与四级“球外之球”突围   │
-            │  • 概念对照词典 (A) • 克利福德速查表 (B) • 374 项锁定声明索引 (C)│
+            │  • 概念对照词典 (A) • 克利福德速查表 (B) • 432 项锁定声明索引 (C)│
             └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -423,7 +423,7 @@ $$
 3. **数理逻辑、数论与认识论路径**：
    [序曲](README.md) $\to$ 第 10 章（Gram 矩阵与顺序无关性）$\to$ 第 19–20 章（离散多面体分片锥与开放猜想边界）$\to$ 第 21–24 章（对角线逃逸、欧拉乘积、四元数丢番图范数、余弦自指不动点）$\to$ [第 29 章](ch29-timeless-causality-and-gram-space.md)–[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)（毕达哥拉斯四级数系突围、无时间因果、ETH 视界与流体涡丝）$\to$ 终章（黄金切投空间吸引子与 [@thm-coda-fixed-point-anchor]）。
 4. **Lean 4 形式化验证与内核审计路径**：
-   [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 与 `FiniteRecordCosineObstruction` 的逐行形式化剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对 `trureturing@dev` 提交 `1d9bf98cab83` 下全部 $167$ 条环境/媒体冻结定理、$57$ 项环境辅助定义与 $94$ 项行内引用声明，共计 $318$ 项唯一锁定声明）。
+   [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 与 `FiniteRecordCosineObstruction` 的逐行形式化剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对 `trureturing@dev` 提交 `1d9bf98cab83` 下全部 $220$ 条环境/媒体冻结定理、$89$ 项环境辅助定义与 $123$ 项行内引用声明，共计 $432$ 项唯一锁定声明）。
 
 ### 第六至第八部（第 21–30 章）36 项核心章节冻结定理锚点速览 {#sec-coda-part6-part7-register}
 
@@ -467,5 +467,6 @@ $$
 | **第 29 章** | T29.2 | `D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization` | 单位向量族 Gram 重叠等价关系定理：锁定无时间成对内积刚性 |
 | **第 30 章**<br/>场线分野、ETH 与流体涡丝 | T30.1 | `D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff` | 二次矢量场有限分辨率幂等投影精确闭合的充要代数判据 |
 | **第 30 章** | T30.2 | `D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure` | 五模态勒雷投影平流对任意粘性系数 $\nu \in \mathbb{R}$ 均无精确闭合映射 |
+| **第 30 章** | T30.3 | `D5/S3/Combinatorics/Graph/Walks/GallaiRoy.colorable_iff_exists_orientation` | Gallai–Hasse–Roy–Vitaver 定理：有限简单图可 $k$ 着色，当且仅当存在一个定向，其有向路都不超过 $k$ 个顶点 |
 
-在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，并在 [附录 C](appendix-c.md) 中核验全书锁定的全部 $224$ 项 `trureturing@dev` 正式环境与媒体声明（含行内共 $318$ 项唯一锁定声明）。
+在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，并在 [附录 C](appendix-c.md) 中核验全书锁定的全部 $309$ 项 `trureturing@dev` 正式环境与媒体声明（含行内共 $432$ 项唯一锁定声明）。
