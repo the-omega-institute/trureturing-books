@@ -514,7 +514,7 @@ $$
             ┌─────────────────────────────────────────────────────────────────┐
             │ 第八部：无时间因果、视界、公平与元统一(Ch29–32) → 终章与附录    │
             │  • 多面体离散角亏与毛球文献对照 • 勾股守恒与四级“球外之球”突围   │
-            │  • 概念对照词典 (A) • 克利福德速查表 (B) • 440 项锁定声明索引 (C)│
+            │  • 概念对照词典 (A) • 克利福德速查表 (B) • 441 项锁定声明索引 (C)│
             └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -537,7 +537,7 @@ $$
 3. **数理逻辑、数论与认识论路径**：
    [序曲](README.md) $\to$ 第 10 章（Gram 矩阵与顺序无关性）$\to$ 第 19–20 章（离散多面体分片锥与开放猜想边界）$\to$ 第 21–24 章（对角线逃逸、欧拉乘积、四元数丢番图范数、余弦自指不动点）$\to$ [第 29 章](ch29-timeless-causality-and-gram-space.md)–[第 32 章](ch32-unified-field-and-meta-unification.md)（毕达哥拉斯四级数系突围、无时间因果、ETH 视界与流体涡丝、量子公平与大一统元统一）$\to$ 终章（黄金切投空间吸引子与 [@thm-coda-fixed-point-anchor]）。
 4. **Lean 4 形式化验证与内核审计路径**：
-   [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 与 `FiniteRecordCosineObstruction` 的逐行形式化剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对 `trureturing@dev` 提交 `1d9bf98cab83` 下全部 $228$ 条环境/媒体冻结定理、$89$ 项环境辅助定义与 $123$ 项行内引用声明，共计 $440$ 项唯一锁定声明）。
+   [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 与 `FiniteRecordCosineObstruction` 的逐行形式化剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对 `trureturing@dev` 提交 `1d9bf98cab83` 下全部 $229$ 条环境/媒体冻结定理、$89$ 项环境辅助定义与 $123$ 项行内引用声明，共计 $441$ 项唯一锁定声明）。
 
 ### 第六至第八部（第 21–32 章）41 项核心章节冻结定理锚点速览 {#sec-coda-part6-part7-register}
 
@@ -587,4 +587,4 @@ $$
 | **第 32 章**<br/>统一场论与元统一 | T32.1 | `D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes` | 二进制齐肯多夫有限自动机接受字当且仅当满足无相邻 `11` 禁戒律 `NoAdjacentOnes` |
 | **第 32 章** | T32.2 | `D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null` | 在全部闵可夫斯基零光锥向量上取零的实二次型必为标准闵氏度规的标量倍 |
 
-在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，并在 [附录 C](appendix-c.md) 中核验全书锁定的全部 $317$ 项 `trureturing@dev` 正式环境与媒体声明（含行内共 $440$ 项唯一锁定声明）。
+在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，并在 [附录 C](appendix-c.md) 中核验全书锁定的全部 $318$ 项 `trureturing@dev` 正式环境与媒体声明（含行内共 $441$ 项唯一锁定声明）。
