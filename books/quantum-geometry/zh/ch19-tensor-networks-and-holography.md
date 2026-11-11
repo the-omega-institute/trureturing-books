@@ -125,6 +125,10 @@ $$
 
 不妨做一步初等代数检验：当 $a > 0$ 时，不等式 $a^2 + b^2 \le 3ab$ 意味着 $b^2 < a^2 + b^2 \le 3ab$，消去正因子 $b$（若 $b > 0$）即得 $b < 3a$，同理 $c > 0$ 与 $c^2 + d^2 \le 3cd$ 意味着 $d < 3c$。换言之，两个外边界比值 $b/a$ 与 $d/c$ 都被严格关在宽度因子 $3$ 以内：一旦乘上桥宽 $3$，就有 $3ac > bc$ 且 $3ac > ad$！因此，只要参数 $(a, b)$ 与 $(c, d)$ 落在二次锥域 $a^2 + b^2 \le 3ab$ 与 $c^2 + d^2 \le 3cd$（且 $a > 0, c > 0$）之内，中间割 $3ac$ 就永远大于或等于外边界割 $\min(ad, bc)$，从而最小割公式自动脱去外层的 $3ac$！
 
+::: {.viz src="eth-horizon-crossover" preset="narrow" height="500"}
+**桥太窄：三条桥成了瓶颈。** 桥图 $(a, b, c, d) = (1, 5, 1, 5)$：两道外割都是 $5$，三条桥却只能过 $3ac = 3$，琥珀色虚线标出的最小割是中间那道。右边的流矩阵是 $5 \times 5$ 的，青色的奇异值在第三个之后归零，秩只有 $3$。$1^2 + 5^2 = 26 > 3 \cdot 1 \cdot 5$，这组维数在锥域之外（[@prop-bridge-flow-cut-bound]）。
+:::
+
 ::: {.corollary #cor-bridge-cone-mincut title="锥域内最小割" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.cone_QMinCut"}
 设自然数 $a, b, c, d \in \mathbb{N}$ 满足 $0 < a$、$0 < c$，且满足二次锥不等式
 

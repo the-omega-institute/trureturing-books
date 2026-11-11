@@ -224,6 +224,14 @@ $$
 两边同除以正数 $\tau > 0$，即得 $\operatorname{ncard}(S_\tau) \le \frac{R W}{\pi \tau}$。完整证明由 Lean 内核检查。
 :::
 
+::: {.viz src="eth-horizon-crossover" preset="plateau" height="500"}
+**平台谱：承重的模态屈指可数。** 前几个模态接近 $1$，第九个起迅速掉到零。琥珀色的阈值 $\theta = 0.5$ 下，青色的过线模态有 $8$ 个，品红的墙在 $T/\theta = 16$（页面上的 $T$ 即迹预算 $RW/\pi$，$\theta$ 即 $\tau$）：个数不超过墙，就是 [@cor-finite-trace-mode-budget]。
+:::
+
+::: {.viz src="eth-horizon-crossover" preset="tail" height="500"}
+**阈值降低：个数涨，仍不过墙。** 换成拖着长尾的幂律谱，再把琥珀色的阈值一路降低：过线的青色柱子越来越多，品红的墙 $T/\theta$ 也跟着后退，柱子始终到不了墙（$\theta = 0.07$ 时 $6$ 个过线，墙在 $37.4$）。
+:::
+
 请严格区分 [@cor-finite-trace-mode-budget] 与随机电路贫瘠高原的边界：[@cor-finite-trace-mode-budget] 不单独假定 $R > 0$ 或 $W > 0$（由 $\lambda_j \ge 0$ 与 $\sum_j \lambda_j = RW/\pi$ 仅蕴含乘积非负 $R W \ge 0$，而不蕴含 $R \ge 0$ 与 $W \ge 0$ 各自非负，例如 $R = -\pi, W = -1$ 同样满足全部前提），它证明的是**给定非负可和序列迹等式 $\sum_j \lambda_j = RW/\pi$ 下的谱超水平集有限计数上界**（支撑图 12 右下角的绿色徽章框），既不是可学习性的必要条件，也不是均匀球面测度集中或随机量子电路梯度方差定理本身。
 
 现在，让我们在下面的五步综合手算实例中，把一次簇态传态、两次正交参数移位、一次球面黎曼下降、$20$ 比特赤道集中概率与有限迹谱计数逐一算透。

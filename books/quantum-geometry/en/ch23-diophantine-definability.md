@@ -176,6 +176,10 @@ For every $t \in \mathbb{Z}$, the represented values remain locked onto the Lös
 Pinning the golden norm to $\operatorname{norm}(g) = \pm 1$ via [@prop-pell-form-eq-four-mul-norm] locks $(x, y) = (2a + b, b)$ onto the discrete Lucas–Fibonacci lattice $(L_n, F_n)$!
 :::
 
+::: {.viz src="pythagoras-number-escape" preset="golden" height="500"}
+**$d = 5$: Lucas and Fibonacci.** The convergents close in on the line $m = \sqrt{5}\,n$, cyan above it and magenta below. The green rings mark the lattice points $(n, m) = (F_k, L_k)$ with a Fibonacci denominator and a Lucas numerator; all of them lie on $m^2 - 5n^2 = \pm 4$. Up to signs, these pairs are exactly the integer solutions of that equation ([`pell_pm_four_iff_signed_lucas_fib`](lean:D5/S3/Arith/GoldenPell.pell_pm_four_iff_signed_lucas_fib)).
+:::
+
 ## 23.3 From Binary Quadratic Forms to Quaternion Norm Spheres: Defining $\mathbb{Z}$ in $\mathbb{Q}$ {#sec-ch23-3}
 
 How does modern arithmetic geometry scale this norm-and-trace locking mechanism up from two-dimensional quadratic fields to four-dimensional **quaternion algebras** over $\mathbb{Q}$, isolating $\mathbb{Z}$ inside $\mathbb{Q}$?
