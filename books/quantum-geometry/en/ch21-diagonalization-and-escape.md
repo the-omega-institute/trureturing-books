@@ -12,7 +12,9 @@ Recall the foundational geometric principle uncovered in the [Prelude](README.md
 
 In this chapter we prove that this law — *to express the totality of a system as an entity, one must inhabit a larger ambient space* — is far more than a differential-geometric metaphor. At the foundation of set theory and observation topology, its abstract skeleton is captured by the **relative semantic diagonal and observation-topology refinement quartet** (`DiagonalTopologicalEscape`), verified here by the Lean 4 kernel, and compared with classical metamathematical diagonal theorems in [@rem-godel-tarski-comparison-literature]. Whenever a complete decoder catalog over a nonempty address space attempts to exhaust all output maps within the fiber partition of a fixed latent coordinate, any fixed-point-free twist operator immediately rips across the old observation topology along the relative semantic diagonal, forcing the concept readout to refine strictly into a "sphere beyond spheres."
 
-![The topological and geometric triad of spheres beyond spheres: relative semantic diagonal escape and separation deficit, open-helix axial projection and Descartes's 720° polyhedral angular defect, and Adams's parallelizable spheres](../assets/fig-21-diagonal-escape-tower.svg)
+::: {.figure src="ch21-overview"}
+**Figure 21.** The chapter at a glance. Panel I: the two fibers of the latent coordinate; the dashed magenta line splits the left one into $a_0, a_1$ with $g = 1$ and $a_2$ with $g = 0$ ([@ex-cantor-godel-diagonal-table]). Panel II: a magenta open helix climbs around the violet axis $\vv{e}_{n+1}$; its cyan shadow closes after one turn, while the helix already stands $2\pi c$ higher. Panel III: of $S^0$ through $S^8$ only the violet $S^0, S^1, S^3, S^7$ are parallelizable, and every tangent field on $S^2$ vanishes somewhere (literature result, not formalized in this book; see [@rem-hairy-ball-adams-literature]).
+:::
 
 ## 21.1 Why Naming an Area Requires Standing Outside It: Concept Readouts and Partition Topologies {#sec-ch21-1}
 
@@ -25,6 +27,10 @@ X \;\simeq\; \sum_{b : B} \operatorname{ConceptFiber}(q_L, b).
 $$
 
 Geometrically, picture $q_L : X \to B$ as an orthogonal projection from a higher-dimensional sphere onto a lower-dimensional equatorial slice: any two addresses $x, y \in X$ lying on the same vertical projection fiber $q_L^{-1}(b)$ share the exact same coordinate reading $q_L(x) = q_L(y) = b$. To an internal observer who can see only $B$, $x$ and $y$ are **topologically inseparable** twins hiding inside the same blind spot!
+
+::: {.figure src="ch21-fibers"}
+**A concept readout cuts the address space into fibers.** Above each cyan reading $b_i$ stands its fiber, holding every address that $q_L$ sends to $b_i$; in the light-cyan fiber, $x$ and $y$ satisfy $q_L(x) = q_L(y)$, and an observer who sees only $B$ cannot tell them apart.
+:::
 
 To formalize this internal resolution using general topology, equip the coordinate space $B$ with the finest possible topology — the **discrete topology** $\bot$ (in Mathlib's lattice convention on `TopologicalSpace`, $\bot$ is the discrete topology in which every subset is open, meaning coordinate values themselves are sharply distinguishable) — and pull $\bot$ back along $q_L : X \to B$ to obtain the **partition topology** ([`partitionTopology`](lean:D5/S3/ConceptDynamics/Epistemic/PartitionKnowledgeNegativeIntrospection.partitionTopology) $q_L = \operatorname{induced}(q_L, \bot)$) on $X$. In $\tau(q_L)$, a subset $U \subseteq X$ is open if and only if it is a union of complete $q_L$-fibers, $U = q_L^{-1}(S)$ ($S \subseteq B$). Consequently, two addresses $x, y \in X$ are topologically inseparable in $\tau(q_L)$ (written $\operatorname{Inseparable}_{\tau(q_L)}(x, y)$) if and only if they lie in the same fiber: $q_L(x) = q_L(y)$ ([`partition_inseparable_iff_kernel`](lean:D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel)).
 
@@ -206,6 +212,10 @@ At the close of the [Prelude](README.md), we stated the book's central anti-Plat
 
 ::: {.remark #rem-lagrange-taylor-remainder-literature title="Lagrange Remainder Bound and Nonvanishing of the Cosine Truncation Error (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** By Taylor's theorem with Lagrange remainder and the Leibniz alternating-series test, the even cosine remainder satisfies $|R_{2N}(\theta)| \le \frac{|\theta|^{2N}}{(2N)!}$ and is strictly nonzero ($R_{2N}(\theta) \neq 0$) for every $\theta \in (0, 2]$. Lemma [@lem-exp-tail-le] below establishes the kernel-verified exponential tail bound in any complete normed algebra.
+:::
+
+::: {.figure src="ch21-taylor-crack"}
+**One more term pushes the crack further out, but never closes it.** The thick ink curve is $\cos\theta$; the three cyan curves are the cosine polynomials with the first $N = 2, 3, 4$ terms, which hug it for small $\theta$ and peel away one after another. The magenta area is the remainder $R_6(\theta)$ for $N = 3$: too thin to see at the left, ever wider to the right. For bounds on the remainder see [@rem-lagrange-taylor-remainder-literature] (literature result) and [@lem-exp-tail-le].
 :::
 
 So far the three claims are only words. The first two will now be replaced by numbers that can be checked and by theorems that are already frozen.
@@ -417,6 +427,10 @@ The following literature note gathers these three classical pillars of combinato
 4. **Hurwitz's normed division algebras and Adams's parallelizability theorem (Adams, 1962)**: Notice the sharp distinction between admitting a **single** nowhere-zero tangent field (true for all odd-dimensional spheres $S^{2n-1}$) and being **parallelizable** — having a globally trivial tangent bundle $TS^m$ equipped with a **full frame of $m$ everywhere linearly independent continuous tangent vector fields**! For example, $S^5$ admits a nowhere-zero tangent field $v(z) = iz$ but cannot be fitted with $5$ everywhere linearly independent tangent fields. By Hurwitz's theorem, the only finite-dimensional normed division algebras over $\mathbb{R}$ satisfying $\|xy\| = \|x\|\|y\|$ have dimensions $1, 2, 4, 8$: the **reals $\mathbb{R}$, complexes $\mathbb{C}$, quaternions $\mathbb{H}$, and octonions $\mathbb{O}$**. Left multiplication by imaginary units furnishes complete global tangent frames on their unit spheres $S^0 \subset \mathbb{R}$, $S^1 \subset \mathbb{C}$, $S^3 \subset \mathbb{H}$, and $S^7 \subset \mathbb{O}$. In 1960–1962, J. Frank Adams resolved the Hopf-invariant-one problem via topological K-theory, proving that **among all positive-dimensional spheres, only $S^1, S^3$, and $S^7$ (together with the zero-dimensional companion $S^0$) are parallelizable!**
 
 Reading items 3 and 4 together illuminates the topological backdrop of [Chapter 1](ch01-measurement.md): whereas the observable two-sphere $S^2$ (even dimension $2 \notin \{0, 1, 3, 7\}$, $\chi(S^2) = 2$) admits no nowhere-vanishing continuous tangent field, the ambient three-sphere $S^3 \cong \mathrm{SU}(2)$ hovering above it via the Hopf fibration (the unit sphere of $\mathbb{H}$, lying on Adams's parallelizable list $\{S^0, S^1, S^3, S^7\}$; note that $S^3$'s round Riemannian metric still has constant positive sectional curvature $+1$ rather than being flat) has a tangent bundle $TS^3$ globally trivialized by left-invariant quaternion frames.
+:::
+
+::: {.figure src="ch21-angle-defect"}
+**For flat triangles to close into a sphere, every vertex must leave a gap.** On the left, five equilateral triangles laid flat around one vertex: five corners of $60^\circ$ make only $300^\circ$, and the magenta gap below is the $60^\circ$ angular defect. On the right, each of the icosahedron's twelve magenta vertices is short by $60^\circ$, for a total of $12 \times 60^\circ = 720^\circ = 4\pi$ (literature result, not formalized in this book; see [@rem-hairy-ball-adams-literature]).
 :::
 
 Reading these classical topological results ([@rem-hairy-ball-adams-literature]) alongside our kernel-verified relative semantic diagonal settlement ([@cor-complete-diagonal-topological-settlement]) highlights a shared structural motif: **singularities and incompleteness inside a sphere can be resolved only from a sphere beyond the sphere.**
