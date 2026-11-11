@@ -61,14 +61,14 @@ def index_counts():
 ROWS = counts()
 TOTAL = sum(n for _, _, n in ROWS)
 N_INDEX, INDEX = index_counts()
-assert len(ROWS) == 33 and N_INDEX == 231
+assert len(ROWS) == 33 and N_INDEX == 232
 assert {k: n for k, _, n in ROWS} == dict(INDEX), (ROWS, INDEX)
-assert TOTAL == sum(INDEX.values()) == 266
+assert TOTAL == sum(INDEX.values()) == 267
 BY = sorted(ROWS, key=lambda r: -r[2])
 TOP, SECOND, THIRD, FOURTH, FIFTH = BY[:5]
 assert [r[0] for r in BY[:5]] == ["22", "30", "4", "24", "29"] and len({r[2] for r in BY[:5]}) == 5
 CODA = BY[5]
-assert CODA[0] == "coda" and CODA[2] < FIFTH[2]
+assert CODA[0] == "coda" and CODA[2] <= FIFTH[2]
 TYPICAL = sorted(n for _, _, n in ROWS)[:-6]            # every chapter but the five named and the coda
 assert min(TYPICAL) == 4 and max(TYPICAL) == 10 < CODA[2]
 

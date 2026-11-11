@@ -415,10 +415,34 @@ $$
 | $e - 2$ | $7.528$ | $N = 73$ |
 | $\pi - 3$ | $293.6$ | $N = 114$ |
 
-$\pi - 3$ 的大数来自 $355/113$：$113\pi - 355 \approx -3.0 \times 10^{-5}$，所以第 $113$ 个点 $\{113(\pi - 3)\} \approx 1 - 3.0 \times 10^{-5}$ 几乎落回 $0$，在那里切出一段极短的弧（手工推导）。这个比值始终有界当且仅当 $a$ 的连分数部分商有界，而黄金角的部分商全是 $1$；这一般结论，以及向日葵花盘上的小花按黄金角依次排开的叶序模型（H. Vogel，1979），都是**文献结果，未在本书形式化**。
+$\pi - 3$ 的大数来自 $355/113$：$113\pi - 355 \approx -3.0 \times 10^{-5}$，所以第 $113$ 个点 $\{113(\pi - 3)\} \approx 1 - 3.0 \times 10^{-5}$ 几乎落回 $0$，在那里切出一段极短的弧（手工推导）。
 :::
 
-> 时间上有界地回来，空间上只留三种缝。
+**为什么黄金角不会切出极短的弧。** $\pi - 3$ 的毛病是有一个分数离它太近。黄金比恰好相反：没有哪个分数能离它太近，而且这件事已经冻结。
+
+::: {.theorem #thm-coda-golden-hurwitz title="黄金比的赫尔维茨界：没有分数离 φ 太近" lean="D5/S1/Depth/GoldenHurwitzBound.golden_hurwitz_bound"}
+设 $\varphi = (1 + \sqrt{5})/2$。对每个有理数 $r$，记 $d \ge 1$ 为 $r$ 写成既约分数时的分母，则
+
+$$
+\lvert \varphi - r \rvert > \frac{1}{\sqrt{5}\, d^2 + d}.
+$$
+:::
+
+::: proof
+设 $r = p/d$ 为既约分数，$\varepsilon = \lvert \varphi - r\rvert$。（1）$p^2 - pd - d^2$ 是不为零的整数，否则 $r$ 会是 $x^2 - x - 1$ 的有理根，而这个方程的根是无理数 $\varphi$ 与 $\bar\varphi = (1 - \sqrt{5})/2$；所以 $\lvert p^2 - pd - d^2 \rvert \ge 1$。（2）$p^2 - pd - d^2 = d^2 (r - \varphi)(r - \bar\varphi)$，而 $\lvert r - \bar\varphi\rvert \le \varepsilon + (\varphi - \bar\varphi) = \varepsilon + \sqrt{5}$，合起来得 $1 \le d^2 \varepsilon(\varepsilon + \sqrt{5})$。（3）若 $\varepsilon \le 1/(\sqrt{5} d^2 + d)$，右边至多是 $\bigl(\sqrt{5} d^2 + d^2/(\sqrt{5} d^2 + d)\bigr)/(\sqrt{5} d^2 + d)$，而 $d^2/(\sqrt{5} d^2 + d) < d$，所以右边小于 $1$，矛盾。完整证明由 Lean 内核检查。
+:::
+
+**每一段弧都长于 $1/(\sqrt{5} N)$（手工推导）。** 黄金角 $a = 1/\varphi^2 = 2 - \varphi$。两个轨道点 $\{ia\}$、$\{ja\}$ 之间的弧长不小于 $\lVert ma \rVert$，其中 $m = \lvert i - j\rvert$ 满足 $1 \le m \le N - 1$，$\lVert x \rVert$ 是 $x$ 到最近整数的距离。对任意整数 $k$，$\lvert ma - k\rvert = m\,\lvert \varphi - (2m - k)/m \rvert$；分数 $(2m - k)/m$ 约分后的分母 $d \le m$，由 [@thm-coda-golden-hurwitz]，
+
+$$
+\lvert ma - k \rvert > \frac{m}{\sqrt{5}\, d^2 + d} \ge \frac{m}{\sqrt{5}\, m^2 + m} = \frac{1}{\sqrt{5}\, m + 1} \ge \frac{1}{\sqrt{5}(N - 1) + 1} > \frac{1}{\sqrt{5}\, N}.
+$$
+
+$N$ 个点互不相同，平均弧长是 $1/N$；所以对一切 $N$，黄金角切出的每一段弧都超过平均弧长的 $1/\sqrt{5} \approx 0.447$ 倍。数值上，$N \le 2000$ 时 $N \times$ 最短弧的最小值是 $0.44749$（$N = 1598$），几乎贴着 $1/\sqrt{5} = 0.44721$。而 $\pi - 3$ 在 $N = 114$ 时最短弧为 $3.0 \times 10^{-5}$，比 $1/(\sqrt{5} \cdot 114) \approx 0.0039$ 短 $130$ 倍。
+
+沿斐波那契分数 $F_{k+1}/F_k$，乘积 $\sqrt{5}\, F_k^2 \lvert \varphi - F_{k+1}/F_k \rvert$ 依次为 $0.9787$（$5/3$）、$0.9969$（$13/8$）、$1.00017$（$55/34$）、$1.0000037$（$377/233$），趋于 $1$（数值计算），所以 [@thm-coda-golden-hurwitz] 里的 $\sqrt{5}$ 不能再加大。以下是**文献结果，未在本书形式化**：$\sqrt{5}$ 对一切无理数都是最优常数（赫尔维茨定理，1891）；“最长弧与最短弧之比始终有界”当且仅当 $a$ 的连分数部分商有界，而黄金角的部分商全是 $1$；向日葵花盘上的小花按黄金角依次排开的叶序模型（H. Vogel，1979）。
+
+> 时间上有界地回来，空间上只留三种缝；黄金角连最窄的那一种也不让它太窄。
 
 ::: {.viz src="golden-cut-observer" height="640"}
 **交互实验室 `ORTHO//CUT`**：本节的四个场景。切投：上下拖动窗口，看贴边的点翻转、深处的点不动，再固定中间一小片；卡西尼：$\varphi$ 的幂与面积为 $\pm 1$ 的矩形；回归：改变观测窗的位置与宽度，等待变长但仍有上界；接受窗：把点从菱形三十面体的中心推向边界，$d_\partial$ 归零时它翻出窗口。绿色依据框对应 Lean 已验证的定理；三十面体与“帝国”是文献结果，灵魂与遗迹的说法是诠释模型（`MODEL`）。
@@ -474,6 +498,7 @@ $$
    - 有限收缩更新序列的有限步不动点稳定定理 [`finite_contracting_updates_stabilize`](lean:D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize)（[@thm-coda-fixed-point-anchor]）；
    - 伯克霍夫逐点遍历定理 [`birkhoff_pointwise_ergodic`](lean:D5/S3/Analytic/Probability/BirkhoffPointwise.birkhoff_pointwise_ergodic)（[@thm-coda-birkhoff-ergodic]）；
    - 圆周旋转的三距离定理 [`three_gap_card_le_three`](lean:D5/S1/Phase/ThreeGap/Main.three_gap_card_le_three) 与 [`three_gap_lengths_eq`](lean:D5/S1/Phase/ThreeGap/Main.three_gap_lengths_eq)（[@thm-coda-three-gap]）；
+   - 黄金比的赫尔维茨界 [`golden_hurwitz_bound`](lean:D5/S1/Depth/GoldenHurwitzBound.golden_hurwitz_bound)（[@thm-coda-golden-hurwitz]）；
    - 黄金切投模型集、卡西尼 $\pm 1$ 范数恒等式、齐肯多夫非负实数线程与环面观测窗有界回归定理（[@thm-coda-golden-cut-observer-cassini]）：包括黄金整数闵可夫斯基嵌入与模型集特征化 [`minkowski_model_set_spec`](lean:D5/S1/Scale/MinkowskiModelSet.minkowski_model_set_spec)、自然数黄金展开模型集包含于切投集 [`golden_model_set_subset_cut_and_project`](lean:D5/S1/Deficit/ModelSet/GoldenCutAndProject.golden_model_set_subset_cut_and_project)、接受窗单位体积 [`golden_window_volume`](lean:D5/S1/Deficit/ModelSet/GoldenModelSetSelfSimilar.golden_window_volume)、不相交自相似分支分解 [`golden_model_set_self_similar`](lean:D5/S1/Deficit/ModelSet/GoldenModelSetSelfSimilar.golden_model_set_self_similar)、前缀计数密度极限 $1/\sqrt{5}$ [`golden_model_set_density`](lean:D5/S1/Deficit/ModelSet/GoldenModelSetDensity.golden_model_set_density)、Beatty 观察者路由 [`golden_observer_route_w_c1`](lean:D5/S1/Deficit/Beatty/GoldenObserverRoute.golden_observer_route_w_c1)、斐波那契—卡西尼 $\pm 1$ 黄金范数恒等式 [`fib_cassini_from_golden_norm`](lean:D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm)、齐肯多夫最低位奇偶符号定理 [`betaGolden_norm_sign_of_least_zeckendorf_index`](lean:D5/S1/Deficit/Displacement/ZeckendorfNormSign.betaGolden_norm_sign_of_least_zeckendorf_index)、无相邻 `11` 正则语言等价性 [`base_success_iff_noAdjacentOnes`](lean:D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes)、非负实数（`NNReal`）全尺度齐肯多夫线程单射 [`zeckendorf_real_thread_injective`](lean:D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective)、Beatty 坐标原像纤维容量对 [`golden_fiber_capacity_pair`](lean:D5/S1/Deficit/Beatty/FiberCapacityPair.golden_fiber_capacity_pair) 与 [`golden_dual_fiber_capacity_pair`](lean:D5/S1/Deficit/Beatty/FiberCapacityPair.golden_dual_fiber_capacity_pair)、共轭范数互反分离与全窗口模型集 Delone 定理 [`norm_separation`](lean:D5/S3/Fourier/GoldenModelSetDelone.norm_separation) 及 [`exists_golden_modelSet_delone`](lean:D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone)、环面闭子群轨道哈尔均匀分布 [`TorusOrbitEquidistribution.result`](lean:D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result)、黄金幸存包壳遍历桥 [`golden_ergodic_bridge`](lean:D5/S0/Tower/ErgodicBridge/Golden.golden_ergodic_bridge) 以及环面连续观测窗有界间隙回归定理 [`TorusObservationWindowReturns.result`](lean:D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result)；
    - 二次矢量场有限分辨率投影闭合充要判据 [`quadratic_closure_iff`](lean:D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff)、五模态傅里叶—伽辽金流体平流无精确闭合定理 [`no_exact_closure`](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure)（[@thm-coda-quadratic-advection-no-closure]）与二维周期傅里叶温和路径全阶正则性定理 [`all_grade_regularity_of_mild_path`](lean:D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path)；
    - 黄金分割连分数自指映射 $x \mapsto 1 + 1/x$ 在正实轴上的唯一不动点定理 [`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique)；
@@ -573,7 +598,7 @@ $$
             ┌─────────────────────────────────────────────────────────────────┐
             │ 第八部：无时间因果、视界、公平与元统一(Ch29–32) → 终章与附录    │
             │  • 多面体离散角亏与毛球文献对照 • 勾股守恒与四级“球外之球”突围   │
-            │  • 概念对照词典 (A) • 克利福德速查表 (B) • 443 项锁定声明索引 (C)│
+            │  • 概念对照词典 (A) • 克利福德速查表 (B) • 444 项锁定声明索引 (C)│
             └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -596,7 +621,7 @@ $$
 3. **数理逻辑、数论与认识论路径**：
    [序曲](README.md) $\to$ 第 10 章（Gram 矩阵与顺序无关性）$\to$ 第 19–20 章（离散多面体分片锥与开放猜想边界）$\to$ 第 21–24 章（对角线逃逸、欧拉乘积、四元数丢番图范数、余弦自指不动点）$\to$ [第 29 章](ch29-timeless-causality-and-gram-space.md)–[第 32 章](ch32-unified-field-and-meta-unification.md)（毕达哥拉斯四级数系突围、无时间因果、ETH 视界与流体涡丝、量子公平与大一统元统一）$\to$ 终章（黄金切投空间吸引子与 [@thm-coda-fixed-point-anchor]）。
 4. **Lean 4 形式化验证与内核审计路径**：
-   [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 与 `FiniteRecordCosineObstruction` 的逐行形式化剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对 `trureturing@dev` 提交 `1d9bf98cab83` 下全部 $231$ 条环境/媒体冻结定理、$89$ 项环境辅助定义与 $123$ 项行内引用声明，共计 $443$ 项唯一锁定声明）。
+   [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 与 `FiniteRecordCosineObstruction` 的逐行形式化剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对 `trureturing@dev` 提交 `1d9bf98cab83` 下全部 $232$ 条环境/媒体冻结定理、$89$ 项环境辅助定义与 $123$ 项行内引用声明，共计 $444$ 项唯一锁定声明）。
 
 ### 第六至第八部（第 21–32 章）41 项核心章节冻结定理锚点速览 {#sec-coda-part6-part7-register}
 
@@ -646,4 +671,4 @@ $$
 | **第 32 章**<br/>统一场论与元统一 | T32.1 | `D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes` | 二进制齐肯多夫有限自动机接受字当且仅当满足无相邻 `11` 禁戒律 `NoAdjacentOnes` |
 | **第 32 章** | T32.2 | `D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null` | 在全部闵可夫斯基零光锥向量上取零的实二次型必为标准闵氏度规的标量倍 |
 
-在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，并在 [附录 C](appendix-c.md) 中核验全书锁定的全部 $320$ 项 `trureturing@dev` 正式环境与媒体声明（含行内共 $443$ 项唯一锁定声明）。
+在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，并在 [附录 C](appendix-c.md) 中核验全书锁定的全部 $321$ 项 `trureturing@dev` 正式环境与媒体声明（含行内共 $444$ 项唯一锁定声明）。

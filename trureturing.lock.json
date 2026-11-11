@@ -285,6 +285,14 @@
       "line": 182,
       "signature": "theorem golden_window_volume : volume goldenWindow = 1"
     },
+    "D5/S1/Depth/GoldenHurwitzBound.golden_hurwitz_bound": {
+      "module": "D5/S1/Depth/GoldenHurwitzBound",
+      "name": "D5.S1.Depth.golden_hurwitz_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:cf0763f662c3655d58498aab971b6b3dffda7be473d5796c52d3433acb494308",
+      "line": 46,
+      "signature": "theorem golden_hurwitz_bound (q : ℚ) : 1 / (Real.sqrt 5 * (q.den : ℝ) ^ 2 + q.den) < |Real.goldenRatio - q|"
+    },
     "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.goldenReciprocalMap": {
       "module": "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint",
       "name": "D5.S1.FixedPoints.Algebraic.GoldenFixedPoint.goldenReciprocalMap",
