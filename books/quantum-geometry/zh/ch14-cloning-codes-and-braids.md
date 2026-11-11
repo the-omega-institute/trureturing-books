@@ -4,7 +4,7 @@
 
 在[第十三章](ch13-entanglement-and-chsh.md)中，我们看到双比特贝尔态把单颗球上的局部方向线缩成了零（$\vv{r} = \vv{s} = \vv{0}$），而在最大混合基线 $\frac{1}{4}I_4$ 之上，把全部非单位纯度盈余 $\Tr(\rho^2) - \frac{1}{4} = \frac{3}{4}$（即 $\frac{1}{4}\norm{T}_{\mathrm{F}}^2 = \frac{3}{4}$）悉数储存在 $9$ 维关联张量扇区 $\mathcal{W}_{\mathrm{corr}}$ 之中。现在，让我们把这一几何洞见转化为量子信息工程中最核心的防御战略：**容错量子纠错与拓扑保护**。
 
-在经典数字电路里，对抗噪声的办法简单粗暴——**备份（克隆）**。怕一根电线上的电压被热涨落掀翻，就把比特 $0$ 复制成三份 $000$，把比特 $1$ 复制成三份 $111$，少数服从多数。然而，在踏入量子纠错的大门之前，一条铁面无私的内积几何定律当头拦住了所有照搬经典备份思路的去路：**未知量子叠加态不可克隆**。既然不能把一根脆弱的局部方向线简单复印成两根独立的局部线，我们唯一的选择就是反其道而行之——不再执着于局部的“线”，而是利用多体泡利稳定子或二维时空中的编织轨迹，把逻辑信息编码进局部噪声无法单独窥探的高维“面”与代数死结之中。
+在经典数字电路里，对抗噪声的办法简单粗暴——**备份（克隆）**。怕一根电线上的电压被热涨落掀翻，就把比特 $0$ 复制成三份 $000$，把比特 $1$ 复制成三份 $111$，少数服从多数。然而，在踏入量子纠错的大门之前，一条铁面无私的内积几何定律当头拦住了所有照搬经典备份思路的去路：**未知量子叠加态不可克隆**。既然不能把一根脆弱的局部方向线简单复印成两根独立的局部线，本章选择反其道而行的编码路线——利用多体泡利稳定子或二维空间中的编织轨迹，把逻辑信息编入高维“面”与代数死结，使其相对于所指定的错误模型受到保护。不可克隆限制了复印，却不唯一选定编码架构，也不保证所有局部方向都消失。
 
 ::: {.figure src="ch14-overview"}
 **图 14。** 本章地图：面板 I，在实重叠截面上，青色的对角线 $y = z$ 是保内积要求的输出，暗色的抛物线 $y = z^2$ 是克隆给出的输出，两者只在 $0$ 与 $1$ 相交，中间夹着品红的缺口；面板 II，三比特码的四间综合征房间，青色的码态住在 $(+,+)$ 那间，品红的 $X_2$ 把它整个搬进 $(-,-)$ 那间，琥珀色的箭头把它翻回；面板 III，平面里绕着一颗粒子的回路（暗色虚线）解不开，借紫色的第三方向 $e_3$ 可以把它抬过去（示意；文献结果，未在本书形式化）。
@@ -520,7 +520,7 @@ $$
 现在，让我们通过一个四步连贯的具体数值与矩阵算例，把不可克隆内积差、三比特重复码的二元辛综合征、编码态局部布洛赫向量的精确行为以及正交综合征矩阵恢复完整地验算一遍。
 
 ::: {.example #ex-repetition-code-syndrome title="不可克隆数值缺口、三比特重复码综合征奇偶校验与 8×2 正交恢复全流程验算（含文献说明，未在本书形式化）"}
-**文献结果，未在本书形式化。** 本例第一步、第二步与第四步具体验算本章经内核验证的 [@thm-no-cloning-overlap]、[@lemma-pauli-word-phase] 与 [@prop-orthogonal-syndrome-recovery]；而第三步关于码距 $d_{\mathrm{code}} \ge 2$ 纯稳定子码单比特约化态的一般判据，以及第四步末尾对比提及的五比特码、七比特 Steane 码与九比特 Shor 码单比特纠错性质，均属量子纠错文献结论（详见下文 [@rem-error-correction-anyons-literature]），未在本书形式化。
+**文献结果，未在本书形式化。** 本例第一步、第二步与第四步具体验算本章经内核验证的 [@thm-no-cloning-overlap]、[@lemma-pauli-word-phase] 与 [@prop-orthogonal-syndrome-recovery]；而第三步关于满足下述条件的稳定子码单比特约化态的一般判据，以及第四步末尾对比提及的五比特码、七比特 Steane 码与九比特 Shor 码单比特纠错性质，均属量子纠错文献结论（详见下文 [@rem-error-correction-anyons-literature]），未在本书形式化。
 
 本例分四步手算验证本章的核心定理与物理边界：
 
@@ -570,7 +570,7 @@ $$
 \langle Z_i\rangle_{\psi_L} = |\alpha|^2 - |\beta|^2 \qquad (i = 1, 2, 3),
 $$
 
-只要 $|\alpha| \neq |\beta|$（例如逻辑北极 $\lvert 0_L\rangle = \lvert 000\rangle$），局部布洛赫向量 $\vv{r}_i = (0, 0, |\alpha|^2 - |\beta|^2)$ 就非零！原因在于三比特重复码只防护 $X$ 翻转（对 $Z$ 错误的码距仅为 $1$，单比特 $Z_1$ 本身就是逻辑算子 $\bar{Z}$）。唯有当稳定子码为**码距 $d_{\mathrm{code}} \ge 2$ 的纯（非退化）稳定子码（即稳定子群 $\mathcal{S}$ 中不含任何权重为 $1$ 的单比特生成元，不同于额外附着固定辅助态 $\lvert 0\rangle$ 使 $Z_i \in \mathcal{S}$ 的退化情形）**时，每个单比特泡利算子 $P_i \in \{X_i, Y_i, Z_i\}$ 才会至少与某个生成元 $g \in \mathcal{S}$ 反对易，从而在码投影下被强制压缩为零（$P_{\mathcal{C}} P_i P_{\mathcal{C}} = 0$），使任意逻辑态的单比特约化态恒等于 $\rho_i = \frac{1}{2}I_2$（局部布洛赫向量恒为零）。
+只要 $|\alpha| \neq |\beta|$（例如逻辑北极 $\lvert 0_L\rangle = \lvert 000\rangle$），局部布洛赫向量 $\vv{r}_i = (0, 0, |\alpha|^2 - |\beta|^2)$ 就非零！原因在于三比特重复码只防护 $X$ 翻转（对 $Z$ 错误的码距仅为 $1$，单比特 $Z_1$ 本身就是逻辑算子 $\bar{Z}$）。一个充分条件是：稳定子码的**码距 $d_{\mathrm{code}} \ge 2$，且整个稳定子群 $\mathcal{S}$ 中不含权重为 $1$ 的元素**。这里必须检查包括生成元乘积在内的全群，而非仅看所选生成元列表。在此条件下，每个单比特泡利算子 $P_i \in \{X_i, Y_i, Z_i\}$ 都至少与某个生成元 $g \in \mathcal{S}$ 反对易，从而在码投影下被强制压缩为零（$P_{\mathcal{C}} P_i P_{\mathcal{C}} = 0$），使任意逻辑态的单比特约化态恒等于 $\rho_i = \frac{1}{2}I_2$（局部布洛赫向量恒为零）。码距至少为 $2$ 的纯码满足这一条件，但纯性一般更强，并非必要；额外附着固定辅助态 $\lvert 0\rangle$ 则使 $Z_i \in \mathcal{S}$，不满足上述无权重 $1$ 元素的条件。
 
 **第四步：按 [@prop-orthogonal-syndrome-recovery] 验算 $8\times 2$ 正交综合征恢复与相位错误边界。**
 令 $s = \mathrm{Fin}\,4$、$n = \mathrm{Fin}\,8$、$d = \mathrm{Fin}\,2$，定义四个 $8\times 2$ 综合征嵌入矩阵为 $S_j = E_j V$（$j \in \{0, 1, 2, 3\}$）。如第二步表格最后一列所示，四个二维子空间 $\operatorname{range}(S_j)$ 恰好将 $\mathbb{C}^8$ 的 $8$ 个标准基向量划分为四组互不相交的正交对，故严格满足 `OrthogonalSyndromes S`：
@@ -611,8 +611,8 @@ $$
 
    将 $\alpha$ 对角化后，即可在可纠子空间上化归为本章 [@prop-orthogonal-syndrome-recovery] 的正交综合征结构 $S_i^* S_j = \delta_{ij} I_d$，并且标量因子 $\alpha_{ij}$ 独立于码空间内的具体逻辑态，从根本上保证了综合征测量不会泄露任何逻辑叠加幅度。
 2. **Gottesman 稳定子码形式体系**（D. Gottesman, *Stabilizer Codes and Quantum Error Correction*, Caltech Ph.D. thesis, 1997, arXiv:quant-ph/9705052）：在 $N$ 比特泡利群 $\mathcal{P}_N$ 中，取由 $N - k$ 个相互独立且两两对易的泡利生成元生成、阶为 $|\mathcal{S}| = 2^{N-k}$ 且不含 $-I^{\otimes N}$ 的阿贝尔子群 $\mathcal{S} \cong (\mathbb{Z}/2\mathbb{Z})^{N-k}$，其公共 $+1$ 特征子空间构成 $2^k$ 维码空间 $\mathcal{C}$。凡与 $\mathcal{S}$ 中某个生成元反对易的泡利错误算子均由二元辛内积唯一标记非零综合征；而在 $\mathcal{S}$ 的正规化子（即中心化子）$N(\mathcal{S})$ 中，商去全局标量相位中心群 $\langle i I^{\otimes N}\rangle = \{\pm I^{\otimes N}, \pm i I^{\otimes N}\}$ 与稳定子群 $\mathcal{S}$ 后，集合 $N(\mathcal{S}) \setminus (\langle i I^{\otimes N}\rangle \cdot \mathcal{S})$ 中的算子代表商群 $N(\mathcal{S}) / (\langle i I^{\otimes N}\rangle \cdot \mathcal{S})$ 中的非平凡逻辑算子（商去标量相位排除了诸如 $-I^{\otimes N}$ 这类仅改变全局相位、泡利权重为 $0$ 的平凡中心元），码距 $d_{\mathrm{code}}$ 则严格定义为全体 $E \in N(\mathcal{S}) \setminus (\langle i I^{\otimes N}\rangle \cdot \mathcal{S})$ 的最小泡利汉明权重。
-3. **二维配置空间辫群与任意子分数统计**（J. M. Leinaas and J. Myrheim, *On the theory of identical particles*, Nuovo Cimento B **37**, 1–23, 1977, doi:10.1007/BF02727953）：对空间流形 $M$ 上 $n$ 个全同不可碰撞点粒子的配置空间 $\mathrm{Conf}_n(M) = \{(x_1, \dots, x_n) \in M^n : i \neq j \Rightarrow x_i \neq x_j\} / S_n$，当空间维数 $\dim M \ge 3$ 时基本群同构于有限对称群 $\pi_1(\mathrm{Conf}_n(\mathbb{R}^d)) \cong S_n$（故仅允许玻色子与费米子）；唯有当 $\dim M = 2$ 时，基本群扩张为无穷阶 Artin 辫群 $\pi_1(\mathrm{Conf}_n(\mathbb{R}^2)) \cong B_n$，允许连续阿贝尔任意子相位或非阿贝尔高维幺正编织表示。
-4. **非阿贝尔任意子与拓扑容错的物理边界**（C. Nayak, S. H. Simon, A. Stern, M. Freedman, and S. Das Sarma, *Non-Abelian anyons and topological quantum computation*, Rev. Mod. Phys. **80**, 1083–1159, 2008, doi:10.1103/RevModPhys.80.1083）：在具有能隙的二维拓扑物相中，非阿贝尔准粒子的简并融合空间对局域微扰具有随准粒子间距 $L$ 指数衰减的分裂保护 $\Delta E \propto e^{-L/\xi}$，世界线编织在简并子空间上诱导出满足 Yang–Baxter 关系的非平凡幺正门。但需注意：首先，如正文所述，三维空间中点粒子交换回路可借第三空间轴解开，绝不意味着三维闭合一维绳结（knots）会自动解开；其次，拓扑保护在真实有限温度硬件中仍受热激发准粒子游走（thermal poisoning）与有限尺寸效应限制，并非在物理实现中绝对零错误。
+3. **二维配置空间辫群与任意子分数统计**（J. M. Leinaas and J. Myrheim, *On the theory of identical particles*, Nuovo Cimento B **37**, 1–23, 1977, doi:10.1007/BF02727953）：对欧氏空间 $M = \mathbb{R}^d$ 上 $n$ 个全同不可碰撞点粒子的配置空间 $\mathrm{Conf}_n(M) = \{(x_1, \dots, x_n) \in M^n : i \neq j \Rightarrow x_i \neq x_j\} / S_n$，当 $d \ge 3$ 时基本群同构于对称群 $\pi_1(\mathrm{Conf}_n(\mathbb{R}^d)) \cong S_n$（在一维幺正交换表示中，单次交换只能给出玻色 $+1$ 或费米 $-1$ 符号）；当 $d = 2$ 时，基本群为 Artin 辫群 $\pi_1(\mathrm{Conf}_n(\mathbb{R}^2)) \cong B_n$，允许连续阿贝尔任意子相位或非阿贝尔高维幺正编织表示。
+4. **非阿贝尔任意子与拓扑容错的物理边界**（C. Nayak, S. H. Simon, A. Stern, M. Freedman, and S. Das Sarma, *Non-Abelian anyons and topological quantum computation*, Rev. Mod. Phys. **80**, 1083–1159, 2008, doi:10.1103/RevModPhys.80.1083）：在具有能隙的二维拓扑物相中，非阿贝尔准粒子的简并融合空间对局域微扰具有随准粒子间距 $L$ 指数衰减的分裂保护 $\Delta E \propto e^{-L/\xi}$，世界线编织在简并子空间上诱导出满足 Yang–Baxter 关系的非平凡幺正门。这里的门操作要求任意子彼此充分分离，运动相对于体能隙保持绝热，同时在操作历时内不分辨有限间距带来的残余能级分裂。但需注意：首先，如正文所述，三维空间中点粒子交换回路可借第三空间轴解开，绝不意味着三维闭合一维绳结（knots）会自动解开；其次，拓扑保护在真实有限温度硬件中仍受热激发准粒子游走（thermal poisoning）与有限尺寸效应限制，并非在物理实现中绝对零错误。
 :::
 
 ::: {.viz src="syndrome-decoding" height="560"}

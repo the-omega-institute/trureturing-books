@@ -65,13 +65,13 @@ $$
    = \frac{1}{\sqrt{2}}\,X^s H \operatorname{diag}(1, e^{-i\alpha})\lvert\psi\rangle!
    $$
 
-3. **经典前馈消去随机副产物 $X^s$**：当输入 $\lvert\psi\rangle$ 归一化时，上下两个测量分支出现的概率各为整整齐齐的 $\frac{1}{2}$（相加为 $1$，印证 [@lemma-measurement-branch-sum]）。由于 $\operatorname{diag}(1, e^{-i\alpha}) = e^{-i\alpha/2} R_z(-\alpha)$，差一个全局相位，第 2 颗比特上的输出态恰好是
+3. **经典前馈与泡利副产物 $X^s$ 的处理**：当输入 $\lvert\psi\rangle$ 归一化时，上下两个测量分支出现的概率各为整整齐齐的 $\frac{1}{2}$（相加为 $1$，印证 [@lemma-measurement-branch-sum]）。由于 $\operatorname{diag}(1, e^{-i\alpha}) = e^{-i\alpha/2} R_z(-\alpha)$，差一个全局相位，第 2 颗比特上的输出态恰好是
 
    $$
    X^s H R_z(-\alpha)\lvert\psi\rangle.
    $$
 
-   你看：观察者在第 1 颗比特上选定的赤道测量角 $\alpha$，已经越过纠缠桥，在第 2 颗比特上精准刻下了单比特旋转门 $H R_z(-\alpha)$！哪怕单次测量结果 $s \in \{0, 1\}$ 是随机的，只要用一根经典导线把比特 $s$ 传给下一步（当 $s = 1$ 时施加泡利修正 $X$，或者在后续节点把测量角自适应反号 $\alpha_{\mathrm{next}} \mapsto (-1)^s \alpha_{\mathrm{next}}$），随机性就被百分之百熨平，留下的完全是确定性的幺正计算！
+   你看：观察者在第 1 颗比特上选定的赤道测量角 $\alpha$，已经越过纠缠桥，在第 2 颗比特上刻下了带泡利副产物的单比特旋转门 $H R_z(-\alpha)$！若当 $s = 1$ 时立即施加 $X$，便得到固定输出参考系中的 $H R_z(-\alpha)\lvert\psi\rangle$。也可把 $s$ 沿经典导线传给后续节点，将下一测量角自适应反号 $\alpha_{\mathrm{next}} \mapsto (-1)^s \alpha_{\mathrm{next}}$，并随每次测量更新已知的泡利参考系（Pauli frame）：这会把副产物传播到输出端，并不让它自动消失。若要交付固定参考系中的量子态，仍须在输出端施加相应泡利修正；若最终只取经典读数，则可将已知副产物吸收到读出测量基或结果重标记中。单次测量结果依然随机，确定的是经过这些修正或读出处理后所实现的逻辑计算。
 
 ::: {.figure src="ch12-feedforward"}
 **测得哪一支都不要紧：$s = 1$ 那一支绕 $x$ 轴转半圈，就和 $s = 0$ 那一支重合。** 布洛赫球上是第 2 颗比特在两种结果下的态：琥珀色的点是 $s = 0$，灰色的点是 $s = 1$，各占一半；琥珀色的弯箭头绕紫色的 $x$ 轴转半圈，就是前馈的 $X$。这里取 $\alpha = 60^\circ$ 与一个一般的输入态；两支的概率各为 $\frac{1}{2}$，与 [@lemma-measurement-branch-sum] 的总和为 $1$ 相符。MBQC 是文献结果，未在本书形式化（[@rem-mbqc-gradients-literature]）。

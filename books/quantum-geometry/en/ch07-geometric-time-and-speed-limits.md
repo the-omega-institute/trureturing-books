@@ -212,7 +212,7 @@ $$
 \tau_\perp = \frac{\pi\hbar}{E} = \frac{1}{2f} = 100\,\mathrm{ps} .
 $$
 
-By the counting bound of [@thm-fubini-study-record-time] with $\mathrm{energy} = \Delta H = \frac{hf}{2}$, within $T = 25\,\mathrm{ns}$ one has $N \le \frac{4\cdot\mathrm{energy}\cdot T}{\pi\hbar} = 4fT = 500$. Under drive the situation differs: [@ex-five-ghz-pi-over-two] of [Chapter 11](ch11-pulses-and-virtual-z.md) removes the carrier in the rotating frame, the energy scale of the effective Hamiltonian is the Rabi frequency $\Omega = 2\pi \times 10\,\mathrm{MHz}$, the initial state $\lvert 0\rangle$ has $\Delta H = \frac{\hbar\Omega}{2}$, and the orthogonalization time is $\tau_\perp = \frac{\pi}{\Omega} = 50\,\mathrm{ns}$, exactly twice the $25\,\mathrm{ns}$ quarter turn computed there. One and the same qubit, viewed in another frame, has a clock five hundred times slower: the spacing of the "ticks" is set by the energy fluctuation in the chosen frame, not by the level splitting itself.
+By the counting bound of [@thm-fubini-study-record-time] with $\mathrm{energy} = \Delta H = \frac{hf}{2}$, within $T = 25\,\mathrm{ns}$ one has $N \le \frac{4\cdot\mathrm{energy}\cdot T}{\pi\hbar} = 4fT = 500$. Under drive the situation differs: [@ex-five-ghz-pi-over-two] of [Chapter 11](ch11-pulses-and-virtual-z.md) removes the carrier in the rotating frame, the energy scale of the effective Hamiltonian is the Rabi frequency $\Omega = 2\pi \times 10\,\mathrm{MHz}$, the initial state $\lvert 0\rangle$ has $\Delta H = \frac{\hbar\Omega}{2}$, and the orthogonalization time is $\tau_\perp = \frac{\pi}{\Omega} = 50\,\mathrm{ns}$, exactly twice the $25\,\mathrm{ns}$ quarter turn computed there. These two preparation-and-evolution protocols have orthogonalization times differing by a factor of five hundred. Each must be evaluated using its evolution generator and specified readout reference.
 :::
 
 ::: {.viz src="speed-limit-zeno" preset="three" height="500"}
@@ -406,7 +406,7 @@ By definition, $0 < \Delta E_{\mathrm{pass}} - \frac{\Delta S}{\beta}$ holds if 
    $$
    \tau_\perp \ge \frac{\pi\hbar}{2\,\langle H\rangle}.
    $$
-3. **Misra–Sudarshan dynamical quantum Zeno theorem (B. Misra & E. C. G. Sudarshan, 1977)**: In *The Zeno's paradox in quantum theory* (J. Math. Phys. **18**, 756–763, 1977), for a self-adjoint Hamiltonian $H$ with finite energy expectation and a projection $P$, the $N$-fold stroboscopic evolution converges in the strong operator topology as $N \to \infty$ to the projected unitary group $\lim_{N\to\infty} (P e^{-iHT/\hbar N} P)^N = P e^{-i(PHP)T/\hbar} P$, halting transitions into $I - P$.
+3. **Misra–Sudarshan dynamical quantum Zeno theorem (B. Misra & E. C. G. Sudarshan, 1977)**: In the bounded special case of finite dimensions (or bounded self-adjoint $H$) with an orthogonal projection $P$, the stroboscopic limit takes the strong form $\lim_{N\to\infty} (P e^{-iHT/\hbar N} P)^N = P e^{-i(PHP)T/\hbar} P$, halting transitions into $I-P$ in that special case. Unbounded Hamiltonians require additional domain, semiboundedness, and strong-limit hypotheses; finite energy expectation alone does not establish the general formula.
 
 These dynamical path-integral bounds and strong-operator limits are cited from the physics literature and are not claimed in the book's Lean verification ledger.
 :::

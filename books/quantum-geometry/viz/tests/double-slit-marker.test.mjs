@@ -30,7 +30,8 @@ const tr = (A) => cadd(A[0][0], A[1][1]);
 const rot = (a) => [[C(Math.cos(a)), C(-Math.sin(a))], [C(Math.sin(a)), C(Math.cos(a))]];
 const I2 = [[C(1), C(0)], [C(0), C(1)]];
 const SIG = 0.45, K = 8 * Math.PI, env = (x) => Math.exp(-x * x / (2 * SIG * SIG));
-/** The marker state (purity λ along e₀) and the two slit unitaries: U_L = 1, U_R = rotation by α. */
+/** The marker state λ|e₀⟩⟨e₀| + (1 − λ)·I/2 (λ is the weight of the pure part; the purity is Tr ρ² = (1 + λ²)/2) and the
+    two slit unitaries: U_L = 1, U_R = rotation by α. */
 const model = (alphaDeg, lam) => ({ rho: [[C((1 + lam) / 2), C(0)], [C(0), C((1 - lam) / 2)]], U: [I2, rot(alphaDeg * Math.PI / 180)] });
 /** P(x, m) = ½ Σ_jk ψ_j(x) ψ_k(x)* ⟨m| U_j ρ U_k† |m⟩ with ψ_L = √env·e^{ikx/2}, ψ_R = √env·e^{−ikx/2}; m a real unit vector. */
 function joint(md, x, m) {
@@ -107,7 +108,7 @@ for (const a of [0, 13, 30, 45, 72, 90]) for (const lam of [1, 0.7, 0.3, 0]) {
   for (const r of ['path', 'erase']) { await page.click(`#readerChips [data-reader="${r}"]`); await settle(page); lawErr = Math.max(lawErr, await lawMatches(await state())); }
   await page.click('#readerChips [data-reader="none"]'); await settle(page);
 }
-check('24 markers (α × λ): V, D, the mass and D² + V² match the matrices; = 1 for pure, < 1 for mixed markers', sweep < 1e-9, `${sweep}`);
+check('24 markers (α × λ): V, D, the mass and D² + V² match the matrices; = 1 for pure, < 1 for mixed markers with α > 0', sweep < 1e-9, `${sweep}`);
 check('…and in every one the drawn rows of both readers equal the law read along the eigenvectors computed here', lawErr < 1e-6, `${lawErr}`);
 check('the sliders leave the card', (await state()).preset === null);
 
@@ -141,6 +142,18 @@ check('ERASER: the two rows add up to every hit', rowsOf(hits, 0).length + rowsO
 await pick('mixed'); s = await seek(NMAX); md = model(60, 0.5);
 check('MIXED: λ = 0.5: V = 0.5 still, D = 0.433, D² + V² = 0.4375 < 1', s.lambda === 0.5 && near(s.V, 0.5, 1e-12) && near(s.D, readers(md).dTrace, 1e-12) && near(s.sum, 0.4375, 1e-12));
 check('MIXED: the path of the point stays inside the circle, on the arc (cos α, λ·sin α)', [10, 40, 80].every((a) => { const m = model(a, 0.5); return visibility(m) ** 2 + readers(m).dTrace ** 2 < 1; }));
+// λ is the weight of the pure part, not the purity: Tr ρ² of the marker, from the matrix here
+const rho5 = model(60, 0.5).rho, purity5 = tr(mmul(rho5, rho5)).re;
+check('MIXED: λ = 0.5 is not the purity; Tr ρ² = (1 + λ²)/2 = 0.625 from the matrix, and the readout shows it', near(purity5, 0.625, 1e-15) && (await page.textContent('#roL')).includes('0.625'));
+const lamText = await page.evaluate(() => document.body.textContent);
+check('no text on the page calls λ the purity (纯度 λ / purity λ)', !/纯度\s*λ|标记的纯度|purity\s+(of the marker\s+)?λ|purity of the marker/i.test(lamText));
+// a mixed marker that has recorded nothing (α = 0) is on the circle, not inside it
+await setRange('alpha', 0); await setRange('purity', 0.5); s = await state(); md = model(0, 0.5);
+const eq0 = visibility(md) ** 2 + readers(md).dTrace ** 2;
+const sub0 = await page.textContent('#roSumSub');
+check('α = 0 with λ = 0.5: D² + V² = 1 from the matrices, the page agrees, and its readout claims neither “below 1” nor “inside”', near(eq0, 1, 1e-12) && near(s.sum, 1, 1e-12) && (await page.textContent('#pillSum strong')) === '1.000' && !/小于|圆内|below|inside/.test(sub0), sub0);
+await setRange('alpha', 60); s = await state(); md = model(60, 0.5);
+check('…and back at α = 60°, λ = 0.5 the same marker is strictly inside: 0.4375 < 1, and the readout says so', near(s.sum, 0.4375, 1e-12) && /小于|圆内/.test(await page.textContent('#roSumSub')));
 await page.click('#readerChips [data-reader="path"]'); await settle(page); s = await state(); hits = await D(() => window.SLIT_DEBUG.hits());
 p1 = mass1(md, readers(md).path[0]); n1 = rowsOf(hits, 0).length;
 check('the reader chips sort at once and leave the card; the row counts follow the law for a mixed marker', s.reader === 'path' && s.split === 1 && s.preset === null && Math.abs(n1 - NMAX * p1) < 4 * Math.sqrt(NMAX * p1 * (1 - p1)) && (await lawMatches(s)) < 1e-12, `${n1} vs ${NMAX * p1}`);

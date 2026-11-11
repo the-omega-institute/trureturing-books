@@ -108,8 +108,10 @@
    $$
 
    在经典参数 $(\sigma, \rho, \beta) = (10, 28, 8/3)$ 下具有恒负的相空间散度 $\nabla\cdot\mathbf{F} = -(\sigma + 1 + \beta) = -\frac{41}{3} < 0$，使有界相空间体积元按 $\operatorname{vol}(\Omega_t) = \operatorname{vol}(\Omega_0)e^{-41t/3}$ 指数收缩至勒贝格零测集；数值李雅普诺夫指数谱 $(\lambda_1 \approx 0.9056,\; \lambda_2 = 0,\; \lambda_3 \approx -14.5723)$ 给出的卡普兰—约克（Lyapunov）维数估计为 $D_{\mathrm{KY}} = 2 + \frac{\lambda_1 + \lambda_2}{|\lambda_3|} \approx 2.06$。
-2. **洛伦兹奇异吸引子的严格存在性与遍历 SRB 物理测度（W. Tucker, *C. R. Acad. Sci. Paris* **328**, 1197–1202, 1999；S. Luzzatto, I. Melbourne & F. Pugh, *Commun. Math. Phys.* **260**, 393–401, 2005）**：经典参数下的洛伦兹方程拥有紧致鲁棒奇异吸引子，且支撑唯一的遍历西奈—吕埃勒—鲍恩（Sinai–Ruelle–Bowen, SRB）物理不变概率测度 $\mu_{\mathrm{SRB}}$，使得吸引盆内勒贝格几乎所有初值的向前时间平均收敛于 $\mu_{\mathrm{SRB}}$ 积分。
+2. **洛伦兹奇异吸引子的严格存在性与遍历 SRB 物理测度（W. Tucker, *C. R. Acad. Sci. Paris* **328**, 1197–1202, 1999；S. Luzzatto, I. Melbourne & F. Paccaut, *Commun. Math. Phys.* **260**, 393–401, 2005）**：经典参数下的洛伦兹方程拥有紧致鲁棒奇异吸引子，且支撑唯一的遍历西奈—吕埃勒—鲍恩（Sinai–Ruelle–Bowen, SRB）物理不变概率测度 $\mu_{\mathrm{SRB}}$，使得吸引盆内勒贝格几乎所有初值的向前时间平均收敛于 $\mu_{\mathrm{SRB}}$ 积分；Luzzatto、Melbourne 与 Paccaut 进一步证明了这个吸引子是混合的。
 3. **庞加莱回归定理与自治常微分方程轨道不相交性（H. Poincaré, 1890；皮卡—林德洛夫解唯一性定理）**：在保测遍历系统 $(\Lambda, \mu_{\mathrm{SRB}})$ 上，对任意满足 $\mu_{\mathrm{SRB}}\bigl(\mathcal{U}_\epsilon(\mathbf{x}_{\mathrm{ruin}})\bigr) > 0$ 的开邻域，$\mu_{\mathrm{SRB}}$-几乎所有吸引子轨迹均无穷多次重返 $\mathcal{U}_\epsilon(\mathbf{x}_{\mathrm{ruin}})$；同时由自治光滑常微分方程解的唯一性，相异几何轨道互不相交，且每条非周期轨道对时间 $t \in \mathbb{R}$ 严格单射（永不自交），每次重返 $\mathcal{U}_\epsilon(\mathbf{x}_{\mathrm{ruin}})$ 均穿过互不重合的轨道弧段。
+
+第 2 项里“遍历测度下，时间平均几乎处处收敛于空间平均”这一一般机制已在本书锁定的提交中冻结，见 [@thm-coda-birkhoff-ergodic]。本注记中仍属文献的是：洛伦兹吸引子与 $\mu_{\mathrm{SRB}}$ 的存在、唯一与混合性，以及从“$\mu_{\mathrm{SRB}}$-几乎所有初值”推到“吸引盆内勒贝格几乎所有初值”的那一步。
 :::
 
 ::: {.viz src="spatial-attractor-deja-vu" preset="forget" height="500"}
@@ -119,6 +121,74 @@
 ::: {.viz src="spatial-attractor-deja-vu" preset="dimension" height="500"}
 **比一张面多一点。** 沿一条长轨道（青色）估计三个李雅普诺夫指数；图上方的读数给出 $\lambda_1 \approx 0.9$、$\lambda_2 \approx 0$、$\lambda_3 \approx -14.6$ 与卡普兰—约克维数的估计 $D_{\mathrm{KY}} \approx 2.06$（数值估计，不是定理）。
 :::
+
+**“忘掉起点”能说到多精确？** 上面那张“忘掉起点”的卡片里，青色与品红两条轨道的起点相距很远，最后却落到同一对翅膀上。“落到同一处”有两种说法。一种是逐点的：两条轨道最终挨在一起。这在混沌系统里恰恰不成立，起点的微小差别会被 $\lambda_1 > 0$ 指数放大。另一种是统计的：两条轨道在各处逗留的时间比例相同。[@rem-coda-lorenz-srb-literature] 第 2 项说的是后者。它背后的一般机制与洛伦兹方程无关，已冻结为下面这条定理。
+
+::: {.theorem #thm-coda-birkhoff-ergodic title="伯克霍夫逐点遍历定理：时间平均几乎处处等于空间平均" lean="D5/S3/Analytic/Probability/BirkhoffPointwise.birkhoff_pointwise_ergodic"}
+设 $\alpha$ 为可测空间，$\mu$ 为 $\alpha$ 上的概率测度，$T : \alpha \to \alpha$ 关于 $\mu$ 遍历，即：
+
+1. $T$ 可测且保持 $\mu$：对每个可测集 $B$，$\mu\bigl(T^{-1}(B)\bigr) = \mu(B)$；
+2. 若 $A$ 是 $\mu$-零可测集（与某个可测集只差一个 $\mu$-零测集），且 $T^{-1}(A)$ 与 $A$ 只差一个 $\mu$-零测集，则 $\mu(A) = 0$ 或 $\mu(A) = 1$。
+
+设 $g : \alpha \to \mathbb{R}$ 关于 $\mu$ 可积，记伯克霍夫平均
+
+$$
+A_n g(x) = \frac{1}{n}\sum_{k=0}^{n-1} g\bigl(T^k x\bigr) \quad (n \ge 1), \qquad A_0 g(x) = 0.
+$$
+
+则对 $\mu$-几乎所有 $x \in \alpha$，当 $n \to \infty$ 时 $A_n g(x) \to \int_\alpha g\,d\mu$。
+:::
+
+::: proof
+Lean 的证明沿用杜雷特教科书的路线（R. Durrett，*Probability: Theory and Examples*，第 5 版，第 6.2 节）。记 $S_n f(x) = \sum_{k=0}^{n-1} f(T^k x)$，证明分三步。
+
+（1）霍普夫极大遍历引理：对可测、可积的 $f$，在“某个 $S_n f(x) > 0$”的点集 $E$ 上有 $\int_E f\,d\mu \ge 0$。看前几个和的最大值 $M_n = \max_{0 \le k \le n} S_k f$。在 $M_n > 0$ 的点上有 $M_n \le f + M_n \circ T$；在这片点集上积分，保测性让 $M_n$ 与 $M_n \circ T$ 的积分相消，剩下 $f$ 的积分非负。再让 $n \to \infty$，这片点集增大到 $E$。
+
+（2）上界。取常数 $c > \int g\,d\mu$，令 $D$ 为“存在有理数 $q > c$，使无穷多个 $n$ 满足 $S_n g(x) > nq$”的点集。$D$ 可测，并且 $T^{-1}(D) = D$：从 $x$ 换到 $Tx$ 只是去掉和式的第一项，改变不了“无穷多次超过”。把（1）用于 $f = \mathbf{1}_D\,(g - c)$：由于 $D$ 不变，$S_n f$ 在 $D$ 上等于 $S_n g - nc$，在 $D$ 外等于 $0$，所以 $E$ 恰是 $D$，于是 $\int_D (g - c)\,d\mu \ge 0$。遍历性让 $\mu(D)$ 只能是 $0$ 或 $1$；若是 $1$，左边就是 $\int g\,d\mu - c < 0$，矛盾。所以 $\mu(D) = 0$：几乎处处，对每个有理数 $q > c$，从某个 $n$ 起 $A_n g(x) \le q$，即 $\limsup_n A_n g(x) \le c$。让 $c$ 取遍 $\int g\,d\mu + 1/m$（可数个），得几乎处处 $\limsup_n A_n g \le \int g\,d\mu$。
+
+（3）下界与收尾。对 $-g$ 做同样的事，得几乎处处 $\liminf_n A_n g \ge \int g\,d\mu$，两者合起来就是收敛。定理只假设 $g$ 可积，不假设 $g$ 处处可测：证明先换成一个几乎处处相等的可测函数 $g'$，积分不变；$T$ 保测，所以对每个 $n$，$A_n g$ 与 $A_n g'$ 几乎处处相等，可数个 $n$ 的例外集合并起来仍是零测集。完整证明由 Lean 内核检查。
+:::
+
+注意定理没有说的几件事：例外的零测集随 $g$ 而变，没有一个对所有 $g$ 共用的例外集；它不给收敛速度；它也不告诉你某一个具体的起点是不是例外。下面这个最简单的混沌映射把这三点都摆到台面上。
+
+::: {.example #ex-coda-doubling-map-averages title="倍乘映射：几乎所有起点的时间平均都是 1/2，而浮点数起点全是例外"}
+取 $\alpha = [0, 1)$，$\mu$ 为长度（勒贝格测度），$T(x) = 2x \bmod 1$。
+
+**保测（手工推导）。** 区间 $[a, b)$ 的原像是两段 $[a/2,\, b/2)$ 与 $[(1+a)/2,\, (1+b)/2)$，长度之和仍是 $b - a$；由区间推到一切可测集是测度论的标准步骤。**遍历（文献结果，未在本书形式化）。** 若 $f \circ T = f$，比较傅里叶系数得 $\hat f(2k) = \hat f(k)$，于是 $\hat f(k) = \hat f(2^m k) \to 0$（黎曼—勒贝格引理），所以 $k \ne 0$ 时系数全为零，$f$ 几乎处处是常数。
+
+把 $x$ 写成二进制 $0.b_1 b_2 b_3 \ldots$（不取以无穷个 $1$ 结尾的写法），$T$ 就是把小数点右移一位：$T^k x = 0.b_{k+1} b_{k+2} \ldots$。取 $g = \mathbf{1}_{[0,1/2)}$，$\int g\,d\mu = 1/2$；$g(T^k x) = 1$ 当且仅当 $b_{k+1} = 0$，所以 $A_N g(x)$ 就是前 $N$ 位数字里 $0$ 所占的比例。[@thm-coda-birkhoff-ergodic] 说的是：几乎所有 $x$ 的二进制数字里，$0$ 的比例趋于 $1/2$。
+
+**例外的起点。** 有理数起点的轨道最终是周期的，时间平均可以在一个周期内精确算出。再取 $h = \mathbf{1}_{[0,1/4)}$，$\int h\,d\mu = 1/4$，$h(T^k x) = 1$ 当且仅当 $b_{k+1} = b_{k+2} = 0$：
+
+| 起点 $x$ | 二进制 | $g = \mathbf{1}_{[0,1/2)}$ 的时间平均 | $h = \mathbf{1}_{[0,1/4)}$ 的时间平均 |
+| :--- | :--- | ---: | ---: |
+| $0$ | $0.000\ldots$ | $1$ | $1$ |
+| $1/7$ | $0.\overline{001}$ | $2/3$ | $1/3$ |
+| $1/3$ | $0.\overline{01}$ | $1/2$ | $0$ |
+| $2/5$ | $0.\overline{0110}$ | $1/2$ | $1/4$ |
+| 空间平均 | | $1/2$ | $1/4$ |
+
+$1/3$ 对 $g$ 给出正确的 $1/2$，对 $h$ 却给出 $0$：例外集合随可观测量而变。全体有理数是零测集（手工推导：把第 $j$ 个有理数用长 $\varepsilon/2^j$ 的区间盖住，总长不超过 $\varepsilon$）。
+
+**浮点数全是例外点。** 双精度浮点数都是二进分数 $m/2^e$，而在 $[0, 1)$ 上 $2x \bmod 1$ 的浮点运算是精确的（乘 $2$ 与减 $1$ 都不舍入），所以浮点模拟就是对一个二进分数做精确移位：从 $0.1$ 出发第 $55$ 步、从 $\sqrt{2}/2$ 出发第 $53$ 步、从 $\pi - 3$ 出发第 $48$ 步，轨道精确地落到 $0$，此后永远停在 $0$，$g$ 的时间平均趋于 $1$ 而不是 $1/2$。（这里的 $0.1$、$\sqrt{2}/2$、$\pi - 3$ 指它们最近的双精度浮点数。）用浮点数直接迭代倍乘映射，落进的恰是定理允许出错的那个零测集。
+
+**一个“看起来一般”的起点。** 绕开浮点，直接生成二进制数字：取 Python 标准库伪随机数生成器（种子 $20261111$）给出的前 $10^6$ 位作为 $b_1 b_2 \ldots$。这是一个确定的数，定理并不保证它不在例外集里，这里只作演示：
+
+| $N$ | 前 $N$ 位中 $0$ 的个数 | $A_N g(x)$ | $A_N g(x) - 1/2$ |
+| ---: | ---: | ---: | ---: |
+| $10$ | $6$ | $0.6$ | $0.1$ |
+| $10^2$ | $60$ | $0.60$ | $0.10$ |
+| $10^3$ | $492$ | $0.492$ | $-0.008$ |
+| $10^4$ | $5006$ | $0.5006$ | $0.0006$ |
+| $10^5$ | $50205$ | $0.50205$ | $0.00205$ |
+| $10^6$ | $499954$ | $0.499954$ | $-0.000046$ |
+
+偏差并不单调变小（$N = 10^5$ 比 $N = 10^4$ 偏得更远）：定理只说极限，不给速度。
+:::
+
+**回到洛伦兹：定理管到哪里。** 要把 [@thm-coda-birkhoff-ergodic] 用在洛伦兹流上，可以取它的时间-$1$ 映射 $T = \varphi_1$，但先得有一个让 $T$ 遍历的不变概率测度。$\mu_{\mathrm{SRB}}$ 的存在、以及流的混合性（混合推出 $T$ 遍历），都是 [@rem-coda-lorenz-srb-literature] 第 2 项里的文献结果。有了它们，定理给出的是：$\mu_{\mathrm{SRB}}$-几乎所有起点的时间平均收敛。可 $\mu_{\mathrm{SRB}}$ 住在吸引子上，而吸引子的体积为零（第 1 项：相空间体积按 $e^{-41t/3}$ 收缩）。“忘掉起点”那张卡里的两个圆圈都不在吸引子上；在相空间里随手取的起点，几乎都不在吸引子上。它们的时间平均为什么也收敛到同一个值，是 SRB 测度比一般遍历测度多出来的那一点（所谓“物理测度”），这一步仍是文献结果。
+
+> 忘掉的是起点，留下的是比例。
 
 ### 三、 似曾相识（Déjà vu）的几何诠释：分形横截结构与跨轮次内积共振 {#sec-coda-deja-vu-fractal-dimension}
 
@@ -355,7 +425,7 @@ $$
    - 林德曼—魏尔斯特拉斯（Lindemann–Weierstrass）定理对 $\theta^*$ 超越性的证明（若非零代数数 $q$ 满足 $\cos q = q$，则 $e^{iq}$ 将满足代数系数的二次方程，与 $e^{iq}$ 的超越性矛盾），以及佩尔方程 $m^2 - 2n^2 = \pm 1$ 的连分数渐近理论（其中 $\sqrt{2}$ 的 $\pm 1$ 余项与最佳逼近下界可由第 29 章经 Lean 验证的 [@thm-ch29-silver-pell-remainder]、[@thm-ch29-silver-best-approximation] 经手工推导得到，仍属文献的是它们与连分数渐近分数的识别）；
    - 素数在高斯整数中的分裂与惰性、奇素数负佩尔方程 $m^2 - p\,n^2 = -1$ 在 $p \equiv 1 \pmod 4$ 时的可解性定理、类域论中的希尔伯特互反律 $\prod_{v \le \infty} (a, b)_v = +1$（[@rem-ch29-pell-primes-hilbert-literature]），同余数椭圆曲线 $E_d : dy^2 = x^3 - x$ 的双有理等价与亏格 $1$ 环面拓扑 $\chi(T^2) = 0$（[@rem-ch29-elliptic-torus-literature]）、有限域椭圆曲线的哈塞（Hasse）定理 $|a_p| \le 2\sqrt{p}$、高斯关于 $y^2 = x^3 - x$ 模 $p$ 点数迹的精确公式与特征和推导（[@rem-ch29-hasse-gauss-literature]、[@rem-ch29-gauss-character-application]），以及非复乘椭圆曲线的佐藤—泰特（Sato–Tate）定理（Barnet-Lamb, Geraghty, Harris, Taylor 2011，[@rem-ch29-arithmetic-geometry-literature]）；
    - 笛卡尔多面体总角亏定理 $\sum_v \delta_v = 4\pi$、高斯—博内定理、庞加莱—布劳威尔偶维球面毛球定理 $\chi(S^{2n}) = 2$，以及亚当斯（Adams, 1960）关于仅有 $S^0, S^1, S^3, S^7$ 可平行化的拓扑定理（[@rem-coda-polyhedral-topology-literature]、[@rem-hairy-ball-adams-literature]）；
-   - 动力系统中的洛伦兹奇异吸引子（Lorenz 1963，相空间体积散度 $-(\sigma+1+\beta) = -41/3 < 0$ 与数值李雅普诺夫谱给出的卡普兰—约克维数估计 $D_{\mathrm{KY}} \approx 2.06$）、洛伦兹吸引子支撑的遍历西奈—吕埃勒—鲍恩（SRB）物理不变测度（Tucker 1999；Luzzatto–Melbourne–Pugh 2005）与庞加莱回归定理（Poincaré 1890，[@rem-coda-lorenz-srb-literature]），以及准晶几何中的 Meyer 规则模型集一致重复性定理（1972）、六维超立方晶格 $\mathbb{Z}^6 \subset E_\parallel^3 \oplus E_\perp^3$ 的正二十面体投影与菱形三十面体（Rhombic Triacontahedron，$30$ 面、$60$ 棱、$32$ 顶点，$6$ 条五次轴）接受窗 $W$（Kramer & Neri 1984；Duneau & Katz 1985）、彭罗斯—康威准晶拼砖的“帝国效应”（Conway's Empire Effect，Grünbaum & Shephard 1987）与比内斜率渐近公式（[@rem-coda-quasicrystal-empire-literature]）；
+   - 动力系统中的洛伦兹奇异吸引子（Lorenz 1963，相空间体积散度 $-(\sigma+1+\beta) = -41/3 < 0$ 与数值李雅普诺夫谱给出的卡普兰—约克维数估计 $D_{\mathrm{KY}} \approx 2.06$）、洛伦兹吸引子支撑的遍历西奈—吕埃勒—鲍恩（SRB）物理不变测度（Tucker 1999；Luzzatto–Melbourne–Paccaut 2005）与庞加莱回归定理（Poincaré 1890，[@rem-coda-lorenz-srb-literature]），以及准晶几何中的 Meyer 规则模型集一致重复性定理（1972）、六维超立方晶格 $\mathbb{Z}^6 \subset E_\parallel^3 \oplus E_\perp^3$ 的正二十面体投影与菱形三十面体（Rhombic Triacontahedron，$30$ 面、$60$ 棱、$32$ 顶点，$6$ 条五次轴）接受窗 $W$（Kramer & Neri 1984；Duneau & Katz 1985）、彭罗斯—康威准晶拼砖的“帝国效应”（Conway's Empire Effect，Grünbaum & Shephard 1987）与比内斜率渐近公式（[@rem-coda-quasicrystal-empire-literature]）；
    - 量子引力中的惠勒—德维特（Wheeler–DeWitt）无时间方程 $H\mathbf{\Psi} = 0$、佩奇—伍特斯（Page–Wootters, 1983）条件纠缠时钟切片机制（[@rem-ch29-wheeler-dewitt-page-wootters-literature]）与费曼路径积分振荡相位驻相条件 $\delta S = 0$（[@rem-ch29-feynman-stationary-phase-literature]），计算复杂度理论中的阿伦森后选择定理 $\mathrm{PostBQP} = \mathrm{PP}$（2005）、闭合类时曲线不动点定理 $\mathrm{P}_{\mathrm{CTC}} = \mathrm{PSPACE}$（Aaronson–Watrous 2009）、无结构黑盒搜索 $\Omega(2^{n/2})$ 下界（BBBV 1997）、格里戈里耶夫—舍内贝克（Grigoriev–Schoenebeck）平方和半正定松弛下界、卡马卡（Karmarkar 1984）线性规划内点法、卡斯特莱因（Kasteleyn 1961）平面图 Pfaffian 匹配定理、因帕利亚佐—帕图里—赞恩（Impagliazzo–Paturi–Zane 1999, 2001）指数时间假设（ETH/SETH）与稀疏化引理、PPSZ $k$-SAT 算法及 2026 年 10 月张量网络缩并 $2^{O(n\log\log n/\sqrt{\log n})}$ 亚指数预印本与学界规约审计（[@rem-ch30-eth-subexponential-literature]），流体力学中的兰姆（Lamb）矢量恒等式、开尔文（Kelvin）环量守恒定理、拉季任斯卡娅（Ladyzhenskaya 1969）二维纳维—斯托克斯全局正则性定理、2026 年受迫三维纳维—斯托克斯（克雷陈述 C / D）有限时间爆破解析构造与外部形式化证明（[@rem-ch30-navier-stokes-forced-literature]）、柯尔莫哥洛夫（Kolmogorov 1941）$k^{-5/3}$ 级联与耗散微尺度 $\eta = (\nu^3/\varepsilon)^{1/4}$、阿诺德（Arnold 1966）保体积微分同胚群 $\operatorname{SDiff}(M)$ 测地线定理与陶哲轩（Tao 2016）平均化三维纳维—斯托克斯方程有限时间爆破定理（[@rem-ch30-tao-arnold-literature]），以及量子信息与基础统一文献中的球面哈尔均匀测度与兰道尔 $k_B T \ln 2$ 擦除界（[@rem-ch31-haar-isotropy-landauer-literature]）、Coffman–Kundu–Wootters（2000）与 Osborne–Verstraete（2006）量子纠缠单配性不等式 $\tau_{A|B}+\tau_{A|C}\le\tau_{A|BC}$（[@rem-ch31-ckw-monogamy-literature]）、雅各布森（Jacobson 1995）视界热力学状态方程（[@rem-ch32-dirac-yang-mills-jacobson-literature]）、康威—斯隆（Conway–Sloane 1988）黄金域艾柯西安环 $(\mathcal{I}, Q)\subset\mathbb{H}$（$Q(q)=2(a+b)$）至 $E_8$ 根格等距同构（[@rem-ch32-icosian-e8-literature]）与八大现代基础统一纲领综述（[@rem-ch32-eight-programs-literature]）。
 3. **尚未解决的开放猜想（红色 `OPEN`，无 `lean` 属性）**：
    - 标准统一图灵机计算模型下的 $\mathrm{P} \neq \mathrm{NP}$ 猜想（[@conj-p-neq-np]）、无外力三维不可压缩纳维—斯托克斯方程全局光滑性猜想（克雷千禧年陈述 A / B，[@conj-coda-navier-stokes-regularity]）、沙努埃尔（Schanuel）猜想及其在 Dottie 不动点 $\theta^*$ 上的应用（[@conj-schanuel-dottie]，以及 Timothy Chow 证明的在沙努埃尔猜想成立前提下 $\theta^*$ 不属于初等封闭数域 $\mathrm{EL}$ 的条件性文献结论），以及全书在附录 C 第 C.3 节汇总的开放问题。
@@ -444,7 +514,7 @@ $$
             ┌─────────────────────────────────────────────────────────────────┐
             │ 第八部：无时间因果、视界、公平与元统一(Ch29–32) → 终章与附录    │
             │  • 多面体离散角亏与毛球文献对照 • 勾股守恒与四级“球外之球”突围   │
-            │  • 概念对照词典 (A) • 克利福德速查表 (B) • 439 项锁定声明索引 (C)│
+            │  • 概念对照词典 (A) • 克利福德速查表 (B) • 441 项锁定声明索引 (C)│
             └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -467,7 +537,7 @@ $$
 3. **数理逻辑、数论与认识论路径**：
    [序曲](README.md) $\to$ 第 10 章（Gram 矩阵与顺序无关性）$\to$ 第 19–20 章（离散多面体分片锥与开放猜想边界）$\to$ 第 21–24 章（对角线逃逸、欧拉乘积、四元数丢番图范数、余弦自指不动点）$\to$ [第 29 章](ch29-timeless-causality-and-gram-space.md)–[第 32 章](ch32-unified-field-and-meta-unification.md)（毕达哥拉斯四级数系突围、无时间因果、ETH 视界与流体涡丝、量子公平与大一统元统一）$\to$ 终章（黄金切投空间吸引子与 [@thm-coda-fixed-point-anchor]）。
 4. **Lean 4 形式化验证与内核审计路径**：
-   [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 与 `FiniteRecordCosineObstruction` 的逐行形式化剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对 `trureturing@dev` 提交 `1d9bf98cab83` 下全部 $227$ 条环境/媒体冻结定理、$89$ 项环境辅助定义与 $123$ 项行内引用声明，共计 $439$ 项唯一锁定声明）。
+   [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 与 `FiniteRecordCosineObstruction` 的逐行形式化剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对 `trureturing@dev` 提交 `1d9bf98cab83` 下全部 $229$ 条环境/媒体冻结定理、$89$ 项环境辅助定义与 $123$ 项行内引用声明，共计 $441$ 项唯一锁定声明）。
 
 ### 第六至第八部（第 21–32 章）41 项核心章节冻结定理锚点速览 {#sec-coda-part6-part7-register}
 
@@ -517,4 +587,4 @@ $$
 | **第 32 章**<br/>统一场论与元统一 | T32.1 | `D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes` | 二进制齐肯多夫有限自动机接受字当且仅当满足无相邻 `11` 禁戒律 `NoAdjacentOnes` |
 | **第 32 章** | T32.2 | `D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null` | 在全部闵可夫斯基零光锥向量上取零的实二次型必为标准闵氏度规的标量倍 |
 
-在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，并在 [附录 C](appendix-c.md) 中核验全书锁定的全部 $316$ 项 `trureturing@dev` 正式环境与媒体声明（含行内共 $439$ 项唯一锁定声明）。
+在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，并在 [附录 C](appendix-c.md) 中核验全书锁定的全部 $318$ 项 `trureturing@dev` 正式环境与媒体声明（含行内共 $441$ 项唯一锁定声明）。
