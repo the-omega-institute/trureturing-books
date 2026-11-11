@@ -16,12 +16,12 @@ SIZE = (380, 540)
 ALT = {
     "zh": "三十个圆点自上而下排成一列，代表第 1 至第 30 章，左边按八部分成八段并写着部名。每个圆点（第 1 章与第 11 章除外）"
           "都有一支向右鼓出的弧形箭头指向它，起点是它回头引用最多的那一章；箭头越粗，引用越多。"
-          "第 1 章发出六支箭头（到第 2、5、9、18、23、28 章），第 3 章发出三支（到第 4、19、21 章），"
+          "第 1 章发出六支箭头（到第 2、5、9、18、23、28 章），第 3 章发出四支（到第 4、10、19、21 章），"
           "第 21 章发出两支粗箭头（到第 22、24 章）；第 11 章是空心圆点，没有箭头指向它。",
     "en": "Thirty dots run down the page for chapters 1 to 30, grouped on the left into the eight parts with their names. "
           "Every dot except chapters 1 and 11 receives one arrow, an arc bulging to the right, from the chapter it refers "
           "back to most; the thicker the arrow, the more mentions. Chapter 1 sends six arrows (to chapters 2, 5, 9, 18, 23 "
-          "and 28), chapter 3 sends three (to 4, 19 and 21), and chapter 21 sends two thick ones (to 22 and 24); "
+          "and 28), chapter 3 sends four (to 4, 10, 19 and 21), and chapter 21 sends two thick ones (to 22 and 24); "
           "chapter 11 is a hollow dot with no arrow.",
 }
 
@@ -35,7 +35,7 @@ EDGES = [
     (2, 7),     # ch07-geometric-time-and-speed-limits.md:88 “第二章”, 4 mentions
     (7, 8),     # ch08-erasure-and-time-arrows.md:9 “第七章”, 3 mentions
     (1, 9),     # ch09-axes-and-state-addressing.md:5 “第一章”, 6 mentions
-    (9, 10),    # ch10-gram-geometry-and-order.md:173 “第九章”, 2 mentions (tied with 第三章)
+    (3, 10),    # ch10-gram-geometry-and-order.md:76 “第 3 章”, 3 mentions
     # ch11-pulses-and-virtual-z.md: no reference back to an earlier chapter
     (11, 12),   # ch12-measurement-computation-and-gradients.md:5 “第十一章”, 7 mentions
     (4, 13),    # ch13-entanglement-and-chsh.md:5 “第四章”, 4 mentions
@@ -52,7 +52,7 @@ EDGES = [
     (21, 24),   # ch24-cosine-fixed-points-and-self-reference.md:12 “第二十一章”, 11 mentions
     (14, 25),   # ch25-rewriting-and-xor.md:239 “第十四章”, 4 mentions
     (25, 26),   # ch26-single-qubit-rotor-compilation.md:5 “第二十五章”, 4 mentions
-    (24, 27),   # ch27-reading-frozen-proofs-i.md:62 “第二十四章”, 2 mentions (tied with 第一、三、四章)
+    (24, 27),   # ch27-reading-frozen-proofs-i.md:64 “第二十四章”, 2 mentions (tied with 第一、三、四章)
     (1, 28),    # ch28-reading-frozen-proofs-ii.md:5 “第一章”, 4 mentions
     (10, 29),   # ch29-timeless-causality-and-gram-space.md:5 “第 10 章”, 4 mentions
     (29, 30),   # ch30-fields-lines-eth-and-navier-stokes.md:5 “第 29 章”, 3 mentions (tied with 第二十一章)
