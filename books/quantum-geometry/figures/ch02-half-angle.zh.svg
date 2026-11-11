@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch02-half-angle" data-lang="zh" data-wrap="1" viewBox="0 0 560 312" width="560" height="312" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="左边是布洛赫球的半个截面：从北极 a 出发顺着球面走到南极，是 θ 从 0° 到 180°，标出 0°、60°、90°、120°、180° 五个点。右边是希尔伯特空间里的四分之一圆：从 |φ⟩ 到与它正交的 |φ⊥⟩，是 θ/2 从 0° 到 90°，五个点依次在 0°、30°、45°、60°、90°，旁边青色的数是玻恩权重 cos²(θ/2)：1、¾、½、¼、0。琥珀色的箭头在两边各指着同一行：球面 120°，希尔伯特 60°，权重 ¼。">
+<title>左边是布洛赫球的半个截面：从北极 a 出发顺着球面走到南极，是 θ 从 0° 到 180°，标出 0°、60°、90°、120°、180° 五个点。右边是希尔伯特空间里的四分之一圆：从 |φ⟩ 到与它正交的 |φ⊥⟩，是 θ/2 从 0° 到 90°，五个点依次在 0°、30°、45°、60°、90°，旁边青色的数是玻恩权重 cos²(θ/2)：1、¾、½、¼、0。琥珀色的箭头在两边各指着同一行：球面 120°，希尔伯特 60°，权重 ¼。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="262" height="312" viewBox="0 0 262 312">
+<text class="tf-ink" x="136" y="26" font-size="14" text-anchor="middle" font-weight="600">布洛赫球面：<tspan font-style="italic">θ</tspan></text>
+<path d="M116 72 L123.39 72.26 L130.75 73.03 L138.04 74.32 L145.22 76.11 L152.25 78.39 L159.11 81.16 L165.76 84.41 L172.17 88.11 L178.31 92.24 L184.14 96.8 L189.63 101.75 L194.77 107.07 L199.53 112.74 L203.88 118.73 L207.8 125 L211.27 131.53 L214.28 138.29 L216.81 145.24 L218.85 152.36 L220.39 159.59 L221.42 166.92 L221.94 174.3 L221.94 181.7 L221.42 189.08 L220.39 196.41 L218.85 203.64 L216.81 210.76 L214.28 217.71 L211.27 224.47 L207.8 231 L203.88 237.27 L199.53 243.26 L194.77 248.93 L189.63 254.25 L184.14 259.2 L178.31 263.76 L172.17 267.89 L165.76 271.59 L159.11 274.84 L152.25 277.61 L145.22 279.89 L138.04 281.68 L130.75 282.97 L123.39 283.74 L116 284" class="ts-dim" stroke-width="1.6" stroke-linejoin="round" fill="none"/>
+<path d="M116 72 L108.61 72.26 L101.25 73.03 L93.96 74.32 L86.78 76.11 L79.75 78.39 L72.89 81.16 L66.24 84.41 L59.83 88.11 L53.69 92.24 L47.86 96.8 L42.37 101.75 L37.23 107.07 L32.47 112.74 L28.12 118.73 L24.2 125 L20.73 131.53 L17.72 138.29 L15.19 145.24 L13.15 152.36 L11.61 159.59 L10.58 166.92 L10.06 174.3 L10.06 181.7 L10.58 189.08 L11.61 196.41 L13.15 203.64 L15.19 210.76 L17.72 217.71 L20.73 224.47 L24.2 231 L28.12 237.27 L32.47 243.26 L37.23 248.93 L42.37 254.25 L47.86 259.2 L53.69 263.76 L59.83 267.89 L66.24 271.59 L72.89 274.84 L79.75 277.61 L86.78 279.89 L93.96 281.68 L101.25 282.97 L108.61 283.74 L116 284" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 4" stroke-linejoin="round" fill="none"/>
+<line x1="116" y1="72" x2="116" y2="284" class="ts-faint" stroke-width="1.1" stroke-dasharray="3 4" fill="none"/>
+<circle cx="116" cy="72" r="5" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-dim" x="116" y="54.68" font-size="13" text-anchor="middle">0°</text>
+<circle cx="207.8" cy="125" r="5" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-dim" x="221.66" y="121.68" font-size="13">60°</text>
+<circle cx="222" cy="178" r="5" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-dim" x="238" y="182.68" font-size="13">90°</text>
+<circle cx="207.8" cy="231" r="4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-dim" x="221.66" y="243.68" font-size="13">120°</text>
+<circle cx="116" cy="284" r="5" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-dim" x="116" y="310.68" font-size="13" text-anchor="middle">180°</text>
+<line x1="116" y1="178" x2="201.17" y2="227.18" class="ts-amber" stroke-width="2.6" fill="none"/>
+<path d="M207.8 231 L198.11 229.77 L201.89 223.23Z" class="tf-amber"/>
+<path d="M141.98 193 L142.96 191.15 L143.82 189.24 L144.53 187.27 L145.11 185.26 L145.54 183.21 L145.84 181.14 L145.98 179.05 L145.98 176.95 L145.84 174.86 L145.54 172.79 L145.11 170.74 L144.53 168.73 L143.82 166.76 L142.96 164.85 L141.98 163 L140.87 161.22 L139.64 159.53 L138.29 157.93 L136.84 156.42 L135.28 155.02 L133.63 153.73 L131.9 152.56 L130.08 151.51 L128.2 150.59 L126.26 149.81 L124.27 149.16 L122.24 148.66 L120.18 148.29 L118.09 148.07 L116 148" class="ts-amber" stroke-width="1.6" stroke-linejoin="round" fill="none"/>
+<text class="tf-cyan" x="106" y="76" font-size="15" text-anchor="end"><tspan font-style="italic">a</tspan></text>
+<circle cx="116" cy="178" r="3" class="tf-dim"/>
+</svg>
+<svg class="tr-fig-panel" x="278" y="0" width="282" height="312" viewBox="0 0 282 312">
+<text class="tf-ink" x="150" y="26" font-size="14" text-anchor="middle" font-weight="600">希尔伯特空间：<tspan font-style="italic">θ</tspan>/2</text>
+<path d="M242 262 L241.52 248.45 L240.07 234.96 L237.66 221.61 L234.3 208.47 L230.02 195.6 L224.83 183.07 L218.76 170.94 L211.84 159.28 L204.1 148.14 L195.59 137.58 L186.35 127.65 L176.42 118.41 L165.86 109.9 L154.72 102.16 L143.06 95.24 L130.93 89.17 L118.4 83.98 L105.53 79.7 L92.39 76.34 L79.04 73.93 L65.55 72.48 L52 72" class="ts-dim" stroke-width="1.6" stroke-linejoin="round" fill="none"/>
+<line x1="52" y1="262" x2="52" y2="64" class="ts-faint" stroke-width="1.1" stroke-dasharray="3 4" fill="none"/>
+<line x1="52" y1="262" x2="250" y2="262" class="ts-faint" stroke-width="1.1" stroke-dasharray="3 4" fill="none"/>
+<circle cx="52" cy="72" r="5" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-cyan" x="52" y="57.4" font-size="15" text-anchor="middle" font-weight="600">1</text>
+<text class="tf-dim" x="74.82" y="104.28" font-size="13" text-anchor="middle">0°</text>
+<circle cx="147" cy="97.46" r="5" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-cyan" x="157" y="85.53" font-size="15" text-anchor="middle" font-weight="600">¾</text>
+<text class="tf-dim" x="152.97" y="137.45" font-size="13" text-anchor="middle">30°</text>
+<circle cx="186.35" cy="127.65" r="5" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-cyan" x="200.49" y="118.91" font-size="15" text-anchor="middle" font-weight="600">½</text>
+<text class="tf-dim" x="182.98" y="167.98" font-size="13" text-anchor="middle">45°</text>
+<circle cx="216.54" cy="167" r="4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-cyan" x="233.87" y="162.4" font-size="15" text-anchor="middle" font-weight="600">¼</text>
+<text class="tf-dim" x="204.06" y="205.24" font-size="13" text-anchor="middle">60°</text>
+<circle cx="242" cy="262" r="5" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-cyan" x="262" y="267.4" font-size="15" text-anchor="middle" font-weight="600">0</text>
+<text class="tf-dim" x="214.4" y="243.86" font-size="13" text-anchor="middle">90°</text>
+<text class="tf-cyan" x="44" y="74" font-size="14" text-anchor="end">|<tspan font-style="italic">φ</tspan>⟩</text>
+<text class="tf-dim" x="250" y="238" font-size="14">|<tspan font-style="italic">φ</tspan><tspan dy="0.28em" font-size="72%">⊥</tspan><tspan dy="-0.28em">⟩</tspan></text>
+<line x1="52" y1="262" x2="209.92" y2="170.82" class="ts-amber" stroke-width="2.6" fill="none"/>
+<path d="M216.54 167 L210.64 174.77 L206.86 168.23Z" class="tf-amber"/>
+<path d="M90.11 240 L88.48 237.4 L86.67 234.91 L84.7 232.56 L82.56 230.35 L80.28 228.29 L77.86 226.4 L75.32 224.69 L72.66 223.15 L69.9 221.8 L67.05 220.65 L64.13 219.7 L61.15 218.96 L58.12 218.43 L55.07 218.11 L52 218" class="ts-amber" stroke-width="1.6" stroke-linejoin="round" fill="none"/>
+<text class="tf-cyan" x="60" y="292" font-size="13">青色的数：权重 cos<tspan dy="-0.42em" font-size="72%">2</tspan><tspan dy="0.42em">(</tspan><tspan font-style="italic">θ</tspan>/2)</text>
+<circle cx="52" cy="262" r="3" class="tf-dim"/>
+</svg>
+</svg>

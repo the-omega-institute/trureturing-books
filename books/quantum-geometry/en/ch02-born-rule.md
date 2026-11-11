@@ -6,6 +6,10 @@ At the close of [Chapter 1](ch01-measurement.md), we liberated the single qubit 
 
 In conventional textbooks, Born's rule ($p = |\langle\phi\mid\psi\rangle|^2$) arrives like a tablet carried down from the mountain: an independent statistical postulate bolted onto linear algebra because "experiments happen to match the modulus squared." In this chapter we take Occam's razor to the redundant "third point $C$" and show that Born's rule is no external patch — it is the **canonical basis-free trace pairing induced by pairwise inner-product projection and Pythagorean norm conservation** (with [@thm-born-probability-skeleton] establishing **sufficiency** of the trace pairing for the probability axioms, while the additional frame- or effect-additivity hypotheses required for **uniqueness** are delineated in [@rem-gleason-literature]).
 
+::: {.figure src="ch02-overview"}
+**Figure 2.** The chapter at a glance. Panel I: the grey dashed external vertical axis $C$ is struck out; the cyan arrow $A$ is its own axis, and the amber arrow $B$ is a single angle $\theta$ away from it. Panel II: the perpendicular from the amber $\vv{b}$ onto the cyan line of $\vv{a}$ lands at the foot $C$; the thick cyan segment is the shadow $\vv{c}$ and the dashed magenta segment is the perpendicular remainder. Panel III: $\lvert 0\rangle$ and $\lvert 1\rangle$, $180^\circ$ apart on the Bloch sphere, are only $90^\circ$ apart in Hilbert space.
+:::
+
 ## 2.1 The Measurement Basis Under Occam's Razor {#sec-ch02-1}
 
 Why do calculations of transition probabilities between two arbitrary states feel so clunky to beginners? Because habit bows before the idol of an **external third point $C$**: students first pick an arbitrary laboratory basis $C = \{\lvert 0\rangle, \lvert 1\rangle\}$ unrelated to the problem, expand state $A$ relative to $C$ via some unitary $U_A\lvert 0\rangle$, expand probe $B$ relative to $C$ via another unitary $U_B\lvert 0\rangle$, and finally multiply the two coordinate matrices back together as $U_B^* U_A$. That is like measuring the angle between two pencils lying on your desk by first surveying the latitude and longitude of each pencil relative to the Greenwich Royal Observatory!
@@ -17,9 +21,11 @@ Compare the two routes on a concrete classroom calculation. Suppose two arrows l
 - **The redundant Point-$C$ coordinate detour**: Treating the ceiling as an external $Z$ axis, you first write $\lvert\psi_A\rangle = \binom{\cos 30^\circ}{\sin 30^\circ} = \binom{\sqrt{3}/2}{1/2}$, next write $\lvert\psi_B\rangle = \binom{\cos 60^\circ}{\sin 60^\circ} = \binom{1/2}{\sqrt{3}/2}$, multiply four components to get $\langle\psi_B\mid\psi_A\rangle = \frac{\sqrt{3}}{4} + \frac{\sqrt{3}}{4} = \frac{\sqrt{3}}{2}$, and square to obtain $\frac{3}{4}$ — and if azimuthal angles $\phi_A, \phi_B$ are nonzero as well, eight trigonometric products and complex exponentials flood the page!
 - **The zero-redundancy self-referential shortcut**: What does the ceiling have to do with these two arrows? When only a known premise state $A$ and a target state $B$ exist, what deserves to serve as the principal axis? **State $A$ itself!** Align your zero-degree reference directly along $A$; then $B$ sits at the single intrinsic angle $\theta = 120^\circ - 60^\circ = 60^\circ$, and half a second of mental arithmetic gives $\cos^2(60^\circ/2) = \cos^2 30^\circ = \frac{3}{4}$!
 
-In finite-dimensional matrix algebra, which operation natively erases every trace of an external basis $C$? Literally the **matrix trace** ($\Tr X = \sum_i X_{ii}$). By cyclicity, $\Tr(U^{-1} X U) = \Tr(X U U^{-1}) = \Tr(X)$ for every invertible basis change $U$: twist the external scaffolding $C$ however you please, and the trace pairing $\Tr(\rho P)$ between a state $\rho$ and a projector $P$ never flickers! Zero-redundancy comparison between $\rho$ and $P$ is therefore naturally expressed via the canonical basis-free trace pairing.
+::: {.figure src="ch02-cut-c"}
+**The same pair of arrows: two angles, or one.** On the left, the grey dashed ceiling $Z$ plays the third point $C$: the cyan $A$ is $60^\circ$ from it and the amber $B$ is $120^\circ$ from it, and both angles must be turned into coordinates and multiplied out. On the right, the ceiling is gone and the cyan $A$ is its own axis: $B$ is a single angle $\theta = 60^\circ$ away, giving the weight $\cos^2 30^\circ = \frac{3}{4}$, the same number as on the left.
+:::
 
-![Eliminating the external third point C: choosing state A itself as the axis, generating the endogenous compatibility shadow c = (a·b)a, and linking Bloch angle θ to Hilbert half-angle θ/2](../assets/fig-02-zero-redundancy-born.svg)
+In finite-dimensional matrix algebra, which operation natively erases every trace of an external basis $C$? Literally the **matrix trace** ($\Tr X = \sum_i X_{ii}$). By cyclicity, $\Tr(U^{-1} X U) = \Tr(X U U^{-1}) = \Tr(X)$ for every invertible basis change $U$: twist the external scaffolding $C$ however you please, and the trace pairing $\Tr(\rho P)$ between a state $\rho$ and a projector $P$ never flickers! Zero-redundancy comparison between $\rho$ and $P$ is therefore naturally expressed via the canonical basis-free trace pairing.
 
 ::: {.definition #def-born-probability title="Finite-Dimensional Born Trace Weight" lean="D5/S3/Quantum/FiniteDimensional.bornProbability"}
 Let $n$ be a finite index type. For any complex square matrices $\rho, P \in M_n(\mathbb{C})$, the **Born trace weight** assigned by $\rho$ to $P$ (`bornProbability rho P` in Lean) is the trace of their matrix product:
@@ -99,6 +105,10 @@ $$
 $$
 
 satisfies $\vv{a} \cdot \vv{b}_\perp = \vv{a}\cdot\vv{b} - (\vv{a}\cdot\vv{b})(\vv{a}\cdot\vv{a}) = 0$ with squared norm $\norm{\vv{b}_\perp}^2 = 1 - \cos^2\theta = \sin^2\theta$ (in Part II, Chapter 5, we will recognize this $\sin\theta$ rejection leg as the generator of the oriented bivector area $\vv{a} \wedge \vv{b}$). "Point $C$" is born on the spot from the encounter of $A$ and $B$. The error of classical coordinate thinking was never drawing the foot of a perpendicular — it was mistaking that relational shadow for an absolute stage existing prior to the actors!
+
+::: {.figure src="ch02-shadow"}
+**"Point $C$" is the shadow of $\vv{b}$ on $\vv{a}$.** The amber unit arrow $\vv{b}$ makes an angle $\theta$ with the cyan line of $\vv{a}$ ($50^\circ$ in the drawing); the perpendicular from its tip lands at the foot marked $C$. The thick cyan segment from the origin to $C$ is $\vv{c} = (\vv{a}\cdot\vv{b})\vv{a}$, of length $\cos\theta$; the dashed magenta segment from $C$ to the tip is $\vv{b}_\perp = \vv{b} - \vv{c}$, of length $\sin\theta$, at a right angle to $\vv{a}$.
+:::
 
 This also resolves the dimensional question posed in our opening epigraph about lines versus areas. A single pure state $A$ fixes only a one-dimensional ray $\vv{a}$. Even two non-collinear states $A$ and $B$ together span only a **planar wedge sector** inside the flat disc of their great circle (whose oriented bivector area $\vv{a} \wedge \vv{b}$ drives planar gate rotations in Part II, Chapter 5); on the spherical shell $S^2$ itself, the geodesic arc joining $A$ and $B$ remains a one-dimensional curve enclosing **zero spherical-triangle surface area** ($\Omega = 0$). A genuine **spherical surface area (solid angle $\Omega$)** emerges only when an external reference axis $C$ (such as the laboratory pole $\lvert 0\rangle$) or a third non-coplanar state direction is introduced so that three non-coplanar rays enclose a spherical triangle on $S^2$ (whose intrinsic multi-state geometry is governed by the Gram matrix in Part III, Chapter 10). That is why dragging an external axis $\lvert 0\rangle$ into a purely pairwise measurement manufactures spurious spherical-triangle phase area out of thin air!
 
@@ -198,6 +208,10 @@ Glance back at the parallelogram and Pythagorean law of [Chapter 1](ch01-measure
 
 Let us now combine [@prop-qubit-bloch-core] and [@thm-rank-one-born-pairing] to fulfill the promise made at the end of Chapter 1 and resolve the factor-of-two relation between the Bloch sphere angle $\theta$ and the Hilbert-space half-angle $\theta/2$.
 
+::: {.figure src="ch02-half-angle"}
+**Half a turn on the sphere is a quarter turn in Hilbert space.** On the left, going along the sphere from the north pole $\vv{a}$ to the south pole takes $\theta$ from $0^\circ$ to $180^\circ$; on the right, going from $\lvert\phi\rangle$ to the orthogonal $\lvert\phi_\perp\rangle$ takes $\theta/2$ from $0^\circ$ to $90^\circ$. The five cyan points on each side are the five rows of the table below, and the cyan numbers on the right are the weights $\cos^2(\theta/2)$: $1$, $\frac{3}{4}$, $\frac{1}{2}$, $\frac{1}{4}$, $0$. The amber arrows on both sides point to the row $\theta = 120^\circ$.
+:::
+
 ::: {.example #ex-bloch-half-angle title="Deriving the Bloch Half-Angle Law: Why Antipodal Means Orthogonal"}
 Let a single qubit be prepared along the real unit vector $\vv{a} = (a_0, a_1, a_2) \in S^2$ and probed along the real unit vector $\vv{b} = (b_0, b_1, b_2) \in S^2$ at spatial angle $\theta \in [0, \pi]$, so that their Euclidean dot product is $\vv{a} \cdot \vv{b} = a_0 b_0 + a_1 b_1 + a_2 b_2 = \cos\theta$.
 
@@ -266,6 +280,10 @@ $$
 **Numerical check.** With one million uniformly random directions: sample mean $0.5001$, sample variance $0.08323$ ($\frac{1}{12} \approx 0.08333$); the frequencies of $p$ falling in $[0, 0.1)$, $[0.25, 0.75)$, $[0.9, 1]$ are $0.0996$, $0.5009$, $0.1004$.
 
 **Comparison with higher dimensions.** For a uniformly random pure state in a $d$-dimensional Hilbert space, its overlap weight with a fixed state satisfies $\Pr[p > t] = (1 - t)^{d-1}$, with mean $\frac{1}{d}$. For $d = 2$ this is the uniform distribution above; for $d = 4$, $\Pr[p > \frac{1}{2}] = \frac{1}{8}$; for $d = 16$, $\Pr[p > \frac{1}{2}] = 2^{-15} \approx 3\times10^{-5}$. A simulation with four hundred thousand samples gives means $0.5000$, $0.2498$, $0.0626$, in agreement with $\frac{1}{d}$.
+:::
+
+::: {.figure src="ch02-hatbox"}
+**For a random direction, the Born weight is uniform on $[0, 1]$.** With the known state $\vv{a}$ at the north pole, four cyan circles of latitude cut the sphere into five zones of equal height; each has the same area as the band of the grey dashed hat box at the same height, $2\pi \times 0.4$. The dashed cyan lines carry each latitude straight across to the weight scale on the right, where $p = \frac{1 + z}{2}$ turns the five zones into five intervals of length $\frac{1}{5}$ (the single-qubit part of [@ex-uniform-born-weight], an elementary computation).
 :::
 
 The single qubit is the only "fair" case: point in an arbitrary direction, and the compatibility weight is equally likely to take any value between $0$ and $1$. Once the dimension is large, a randomly chosen direction is, with overwhelming probability, nearly orthogonal to the reference state. The equatorial concentration and the barren plateaus discussed in [Chapter 12](ch12-measurement-computation-and-gradients.md) start from this fact.

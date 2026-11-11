@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch02-cut-c" data-lang="en" data-wrap="1" viewBox="0 0 560 300" width="560" height="300" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="Both drawings show the same pair of arrows. Left: a grey dashed vertical axis is the external ceiling Z, the third point C; the cyan arrow A is 60° from it and the amber arrow B is 120° from it, and both angles must be measured and combined. Right: the ceiling is gone; the cyan arrow A itself is the vertical axis, and the amber arrow B is a single angle θ = 60° away from it, which gives the weight cos² 30° = ¾ at once.">
+<title>Both drawings show the same pair of arrows. Left: a grey dashed vertical axis is the external ceiling Z, the third point C; the cyan arrow A is 60° from it and the amber arrow B is 120° from it, and both angles must be measured and combined. Right: the ceiling is gone; the cyan arrow A itself is the vertical axis, and the amber arrow B is a single angle θ = 60° away from it, which gives the weight cos² 30° = ¾ at once.</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="272" height="300" viewBox="0 0 272 300">
+<text class="tf-ink" x="136" y="22" font-size="14" text-anchor="middle" font-weight="600">with C: two angles from the ceiling</text>
+<line x1="136" y1="268.8" x2="136" y2="60.32" class="ts-dim" stroke-width="1.4" stroke-dasharray="5 4" fill="none"/>
+<path d="M136 53.52 L139.36 61.52 L132.64 61.52Z" class="tf-dim"/>
+<text class="tf-dim" x="144" y="59.52" font-size="13">ceiling <tspan font-style="italic">Z</tspan> (C)</text>
+<line x1="136" y1="170" x2="219.44" y2="121.83" class="ts-cyan" stroke-width="2.6" fill="none"/>
+<path d="M226.07 118 L220.16 125.77 L216.38 119.23Z" class="tf-cyan"/>
+<line x1="136" y1="170" x2="219.44" y2="218.18" class="ts-amber" stroke-width="2.6" fill="none"/>
+<path d="M226.07 222 L216.38 220.77 L220.16 214.23Z" class="tf-amber"/>
+<path d="M165.44 153 L164.19 150.99 L162.79 149.07 L161.27 147.25 L159.62 145.54 L157.85 143.95 L155.98 142.49 L154.02 141.17 L151.96 139.98 L149.83 138.94 L147.63 138.05 L145.37 137.32 L143.07 136.74 L140.73 136.33 L138.37 136.08 L136 136" class="ts-dim" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+<text class="tf-dim" x="161" y="131.38" font-size="13" text-anchor="middle">60°</text>
+<path d="M186.23 199 L188.13 195.43 L189.78 191.73 L191.16 187.92 L192.28 184.03 L193.12 180.07 L193.68 176.06 L193.96 172.02 L193.96 167.98 L193.68 163.94 L193.12 159.93 L192.28 155.97 L191.16 152.08 L189.78 148.27 L188.13 144.57 L186.23 141 L184.08 137.57 L181.7 134.29 L179.1 131.19 L176.29 128.28 L173.28 125.57 L170.09 123.08 L166.74 120.81 L163.23 118.79 L159.59 117.01 L155.84 115.5 L151.99 114.25 L148.06 113.27 L144.07 112.56 L140.05 112.14 L136 112" class="ts-dim" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+<text class="tf-dim" x="208.38" y="198.87" font-size="13">120°</text>
+<text class="tf-cyan" x="232.07" y="114" font-size="16"><tspan font-style="italic">A</tspan></text>
+<text class="tf-amber" x="232.07" y="234" font-size="16"><tspan font-style="italic">B</tspan></text>
+<circle cx="136" cy="170" r="3" class="tf-dim"/>
+<text class="tf-dim" x="136" y="288" font-size="13" text-anchor="middle">coordinates, four products → ¾</text>
+</svg>
+<svg class="tr-fig-panel" x="288" y="0" width="272" height="300" viewBox="0 0 272 300">
+<text class="tf-ink" x="136" y="22" font-size="14" text-anchor="middle" font-weight="600">without C: one angle from A</text>
+<line x1="116" y1="254.4" x2="116" y2="77.6" class="ts-cyan" stroke-width="1.4" fill="none"/>
+<line x1="116" y1="192" x2="116" y2="95.65" class="ts-cyan" stroke-width="2.8" fill="none"/>
+<path d="M116 88 L119.78 97 L112.22 97Z" class="tf-cyan"/>
+<line x1="116" y1="192" x2="199.44" y2="143.82" class="ts-amber" stroke-width="2.6" fill="none"/>
+<path d="M206.07 140 L200.16 147.77 L196.38 141.23Z" class="tf-amber"/>
+<path d="M150.64 172 L149.16 169.63 L147.52 167.37 L145.73 165.23 L143.79 163.23 L141.71 161.36 L139.51 159.64 L137.2 158.08 L134.78 156.68 L132.27 155.46 L129.68 154.41 L127.03 153.55 L124.32 152.87 L121.57 152.39 L118.79 152.1 L116 152" class="ts-cyan" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+<text class="tf-cyan" x="149" y="139.88" font-size="14" text-anchor="middle"><tspan font-style="italic">θ</tspan> = 60°</text>
+<text class="tf-cyan" x="106" y="94" font-size="16" text-anchor="end"><tspan font-style="italic">A</tspan></text>
+<text class="tf-amber" x="212.07" y="144" font-size="16"><tspan font-style="italic">B</tspan></text>
+<circle cx="116" cy="192" r="3" class="tf-dim"/>
+<text class="tf-cyan" x="136" y="288" font-size="15" text-anchor="middle" font-weight="600">cos<tspan dy="-0.42em" font-size="72%">2</tspan><tspan dy="0.42em"> 30° = ¾</tspan></text>
+</svg>
+</svg>
