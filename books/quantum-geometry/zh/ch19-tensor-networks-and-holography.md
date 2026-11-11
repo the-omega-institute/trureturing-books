@@ -12,6 +12,10 @@
 2. **离散对数容量分片与接缝粘接图像（R3）**：通过对数腿容量坐标下的三张仿射超平面下包络（[@ex-log-capacity-facets]），展示有限维矩阵秩上界如何在离散格点上拼出多面体分片与瓶颈转移接缝；
 3. **连续统全息对偶的文献边界**：将多尺度纠缠重整化拟设（MERA）与连续统 AdS/CFT 中的 Ryu–Takayanagi（RT）极小曲面公式严格置于文献注记（[@rem-ryu-takayanagi-literature]）内，绝不把特定宽度三桥图的有限维矩阵秩定理夸大为任意张量网络或连续时空全息对偶的普遍证明。
 
+::: {.figure src="ch19-overview"}
+**图 19。** 本章地图：第 I 栏，二叉层级网络底边琥珀色的 4 条腿只需割断品红标出的 2 条键就能切下来（示意模型）；第 II 栏，宽度三桥图 $(a, b, c, d) = (2, 3, 2, 3)$ 上下两道品红的最小割 $ad = bc = 6$，流与割相等（[@thm-bridge-quantum-maxflow-mincut]）；第 III 栏，对数容量里蓝色的 $ad$ 分片与橙色的 $bc$ 分片沿竖直虚线的接缝拼成一条折线，紫色标签是 RT 公式（文献结果，未在本书形式化）。
+:::
+
 ## 纠缠层级与有限张量网络 {#sec-mera-hierarchy}
 
 想象你手里有两块相互纠缠的多体量子区域：左边界输入端与右边界输出端。如果它们之间只靠一根一维标量线相连，那么无论两端各自的希尔伯特空间有多大，跨过这道接口的线性映射至多只有秩 $1$，相当于所有信息都被挤进了一根单模光纤。反之，如果接口处由多条内部张量腿（bond indices）并排桥接，跨越接口的算子秩（即施密特分解中非零奇异值的个数）就能够随内部腿维数的乘积而增长。
@@ -19,8 +23,6 @@
 ::: {.viz src="layered-network-cut" preset="one" height="500"}
 **一格的区间，割就是它自己那条腿。** 层级网络底边的第 16 格单独成为琥珀色区间，品红标出的最小割只割断它自己那一条腿。只有这一条键穿过割，跨过它的秩至多是这一条键的维数；割断的键越多，秩的上界才是它们维数的乘积。
 :::
-
-![层级张量网络示意、宽度三桥图量子最大流最小割定理，以及对数容量多面体分片拼接与连续 RT 文献公式边界](../assets/fig-19-mera-bridge-graph-mincut.svg)
 
 如上图左栏（Panel I）所示，在物理文献中，研究者常借助多尺度纠缠重整化拟设（MERA）等层级张量网络来示意边界区域与深层“体空间（bulk）”截面之间的瓶颈关系。然而，在一般张量网络中，量子最大流（跨网络收缩所能达到的最大矩阵秩）甚至**不一定**等于量子最小割（切开网络所需截断的最小腿维数乘积）！因此，要想得到经得起形式化内核检验的精确结论，我们必须先锚定一个结构完全显式、参数边界清清楚楚的有限维桥图模型。
 
@@ -74,6 +76,10 @@ $$
 \operatorname{QMinCut}(a, b, c, d) = \min\bigl(3ac,\, \min(ad, bc)\bigr) \in \mathbb{N}.
 $$
 
+::: {.figure src="ch19-three-cuts"}
+**切断宽度三桥图只有三道候选割，最小割取三者中最小的。** 取 $(a, b, c, d) = (2, 3, 2, 3)$：上面的虚线横切腿 $a$、$d$，容量 $ad = 6$；下面的虚线横切腿 $b$、$c$，容量 $bc = 6$；斜着的灰色虚线切过腿 $a$、三条桥与腿 $c$，容量 $3ac = 12$。两道品红的外割并列最小，$\operatorname{QMinCut} = 6$。
+:::
+
 下面的命题证明了：无需任何额外参数限制，对一切自然数 $a, b, c, d \in \mathbb{N}$，宽度三桥图的量子最大流永远不超过这一最小割容量。
 
 ::: {.proposition #prop-bridge-flow-cut-bound title="秩不超过割容量" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_le_QMinCut"}
@@ -125,6 +131,10 @@ $$
 | $r = 2$ | $(2, 1)$ | $(1, 2)$ | $(M_2)_{1,2}(N_2)_{2,1} = 1 \cdot 1 = 1$ |
 
 三项之和共有 $6$ 个互不同行、互不同列的非零元 $1$，构成一个标准的 $6\times 6$ 置换矩阵，故 $\operatorname{rank}(\operatorname{flow}(M, N)) = 6 = \operatorname{QMinCut}(2, 3, 2, 3)$，结合 [@prop-bridge-flow-cut-bound] 当场证实 $\operatorname{QMaxFlow}(2, 3, 2, 3) = 6$！
+:::
+
+::: {.figure src="ch19-permutation"}
+**三条桥合起来正好铺满一张 $6 \times 6$ 置换矩阵。** 青色的格是 $\operatorname{flow}(M, N)$ 的非零元，格里的数是放下它的桥 $r$：桥 $0$ 铺满左上的 $4$ 格，桥 $1$、桥 $2$ 各补 $1$ 格；六格互不同行、互不同列，秩为 $6$（[@ex-bridge-two-three]）。
 :::
 
 ## 锥域与离散容量分片的拼接 {#sec-discrete-facet-stitching}
@@ -194,6 +204,10 @@ $$
 此时三道候选割容量变为 $(3ac, ad, bc) = (12, 8, 6)$，对数容量下包络给出 $\operatorname{QMinCut}(2, 3, 2, 4) = \min(12, \min(8, 6)) = 6 = bc$。综观 $d = 2 \to 3 \to 4$ 的三步演进，候选割三元组依次走过 $(12, 4, 6) \to (12, 6, 6) \to (12, 8, 6)$，完整展示了格点如何从 $ad < bc$ 分片穿过接缝 $ad = bc$ 跃迁入 $ad > bc$ 分片，使控制全局最大秩的唯一瓶颈割由左边界割 $ad$ 切换为右边界割 $bc$。必须强调的是，本章的有限维秩定理只严格标定这些多面体分片上的离散整数维数格点，而不作连续实数维数插值。
 :::
 
+::: {.figure src="ch19-facet-seam"}
+**最小割是三张平面的下包络，格点越过接缝就换了瓶颈。** 固定 $a = 2, b = 3, c = 2$，横轴是 $\ln d$：粗线先沿蓝色的 $\ln ad$ 上升，在竖直虚线 $ad = bc$ 处折到橙色的 $\ln bc$ 上，灰色的 $\ln 3ac$ 一直在上方。三个格点 $d = 2, 3, 4$ 标着候选割 $(12, 4, 6)$、$(12, 6, 6)$、$(12, 8, 6)$（[@ex-log-capacity-facets]）；定理只标定这些整数格点。
+:::
+
 ## 从离散桥图到 RT 文献边界 {#sec-rt-literature-bridge}
 
 在确立了任意参数下的上界 $\operatorname{QMaxFlow} \le \operatorname{QMinCut}$（[@prop-bridge-flow-cut-bound]）以及锥域内的最小割化简 $\operatorname{QMinCut} = \min(ad, bc)$（[@cor-bridge-cone-mincut]）之后，最后一步硬骨头是反方向的下界：在有序锥域 $0 < a \le b$、$0 < c \le d$ 且 $a^2 + b^2 \le 3ab$、$c^2 + d^2 \le 3cd$ 内，能否总是显式构造出三对矩阵 $(M, N)$，使 $\operatorname{flow}(M, N)$ 的秩精确达到 $\min(ad, bc)$？
@@ -229,6 +243,10 @@ $$
 - 定理中的“桥图”并非附加的抽象几何类型，而是特指由三路克罗内克积求和定义的显式矩阵收缩 $\operatorname{flow}(M, N) = \sum_{r \in \operatorname{Fin} 3} M_r \otimes N_r$；
 - 等式 $\operatorname{QMaxFlow} = \operatorname{QMinCut} = \min(ad, bc)$ 严格依赖于桥宽 $\operatorname{Fin} 3$ 以及显式列出的正性、顺序与二次锥不等式（$0 < a \le b$，$0 < c \le d$，$a^2 + b^2 \le 3ab$，$c^2 + d^2 \le 3cd$）；
 - 该定理**不能**无条件推广到任意拓扑的张量网络、完整的 MERA 多尺度重整化树、连续统 AdS/CFT 对偶或 Ryu–Takayanagi 极小曲面公式。
+
+::: {.figure src="ch19-discrete-vs-rt"}
+**本章证明的只到左边为止。** 左边是宽度三桥图，绿色标签是锥域内的最大流等于最小割（[@thm-bridge-quantum-maxflow-mincut]）；右边圆盘是连续体时空的一张切片，青色的弧是边界区域 $A$，紫色的弧 $\gamma_A$ 从 $A$ 两端垂直于边界伸入内部，是 RT 公式里的极小曲面（文献结果，未在本书形式化）。中间被划掉的箭头：从左到右的连续极限，本书没有证明。
+:::
 
 为了将这一精确的有限维离散定理与高能物理文献中的连续统全息纠缠熵公式清晰对照而不越界，我们在下述文献注记中给出 Ryu–Takayanagi 公式的标准界定。
 

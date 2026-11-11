@@ -159,6 +159,10 @@ $$
 完整证明由 Lean 内核检查。
 :::
 
+::: {.viz src="lean-declaration-map" preset="closure" height="500"}
+**第二十八章解剖的四条。** 青色的线从第二十八章的柱脚连回第二、三章的四个绿色实心格；琥珀色框住的是未读不动点判据（[@cor-audit-unread-fixed-iff]），它第一次出场在第三章，琥珀色的线连到另外引用它的章。
+:::
+
 ## 第四至六部冻结声明全景审计表 {#sec-parts-iv-to-vi-frozen-audit-table}
 
 与上一章的第一至三部审计表相呼应，下表汇总了本书第四部（纠缠、贝尔边界与傅里叶对偶）、第五部（玻戈留波夫双曲变换、闵可夫斯基光锥刚性、规范完整群、张量网络流割与电路深度反例）以及第六部（对角拓扑逃逸、黎曼 $\zeta$ 欧拉乘积、艾森斯坦范数型与收缩不动点）在 `trureturing@dev`（提交 `1d9bf98cab8306e67ec38a739359f2cdae63877a`）中的精确源码坐标、语句摘要哈希前缀（`statement_id`）及形式化边界。
@@ -209,6 +213,10 @@ $$
 | Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm`](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm) | `D5/S3/Quantum/Algebra/WeylDisplacement.lean:174` | `sha256:11f68b71` | $\omega^{da}\,D(a,b)D(c,d) = \omega^{bc}\,D(c,d)D(a,b)$ |
 | Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation`](lean:D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation) | `D5/S3/Quantum/Algebra/WeylDisplacementConjugation.lean:94` | `sha256:075eec65` | $D(a,b)\,D(c,d)\,D(a,b)^{\dagger} = \omega^{bc-ad}\,D(c,d)$ |
 | Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute`](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute) | `D5/S3/Quantum/Algebra/WeylDisplacement.lean:182` | `sha256:11f68b71` | $M = 2$：$D(0,1)D(1,0) = -D(1,0)D(0,1)$ |
+
+::: {.viz src="lean-declaration-map" preset="table28" height="500"}
+**审计表伸进第四至六部。** 第二十八章（连同上面的审计表）引用的 44 条声明描了青边：其中 36 条落在第四至六部，其余是第二、三章的四条审计定理与第二十五章的四条外尔位移定律。
+:::
 
 让我们通过一个具体数值算例，把本章的四条审计定理串联在同一个单量子比特态上。
 

@@ -171,6 +171,10 @@ $$
 Since $x > 0$ and $\varphi > 1$ (`Real.one_lt_goldenRatio`), the second factor is strictly positive ($x + \varphi - 1 > 0$), forcing $x - \varphi = 0$, i.e., $x = \frac{1 + \sqrt{5}}{2}$. The full proof is checked by the Lean kernel.
 :::
 
+::: {.viz src="fixed-point-convergence" preset="golden" height="500"}
+**Closing on φ from both sides.** Pressing $1 + 1/x$ again and again from $x_0 = 1$, the path lands on $2, \frac{3}{2}, \frac{5}{3}, \frac{8}{5}, \dots$ and closes in, from alternating sides, on $\varphi$, where the cyan curve $y = 1 + 1/x$ meets the grey line $y = x$; each turn is about $1/\varphi^2 \approx 0.382$ times as wide as the one before, the size of the slope of the dashed magenta line (the tangent at the fixed point). That this crossing is the only positive fixed point is [@cor-golden-fixed-point-unique]; the convergence and its rate are the page's numerical illustration.
+:::
+
 [@cor-golden-fixed-point-unique] answers "what is the fixed point of $1 + 1/x$" but steps around an earlier question: **why $1 + 1/x$?** Calling it "the simplest combination of adding one and taking a reciprocal" is an impression. To turn the impression into a theorem, one has to list every map of the same kind and examine each.
 
 "The same kind" means the fractional linear maps $x \mapsto \frac{ax + b}{cx + d}$ whose coefficients are only $0$ and $1$. Setting the map equal to $x$ and clearing the denominator gives the fixed-point equation
@@ -446,6 +450,18 @@ $$
 for infinitely many denominators $b$: the seam narrows like the square of the denominator, yet never closes.
 :::
 
+::: {.viz src="fixed-point-convergence" preset="rate" height="500"}
+**Each press multiplies the error by −0.674.** Taking the cosine again and again from $\theta_0 = 1$ while the view zooms with the error: zoomed in, the cyan curve lies on the magenta tangent, every turn has the same shape, and the ratio of successive turns tends to the slope of the tangent, $-\sin\theta^* \approx -0.674$, gentler than the global constant $-\sin 1 \approx -0.84$ of the dashed grey line (a literature result; see [@rem-dottie-convergent-residual-literature]).
+:::
+
+::: {.viz src="fixed-point-convergence" preset="circle" height="500"}
+**Where it stops, and how fast it closes.** The same cobweb with the unit circle added. On the circle sits $P = (\theta^*, \sin\theta^*)$: its cyan abscissa $\theta^*$ is where the cobweb closes in, and its magenta height $\lambda = \sin\theta^* \approx 0.674$ is the ratio by which each step shrinks the error, the size of the slope of the magenta tangent; $(\theta^*)^2 + \lambda^2 = 1$. For the existence and uniqueness of $\theta^*$ see [@thm-dottie-rational-inverse-endpoint].
+:::
+
+::: {.viz src="fixed-point-convergence" preset="newton" height="500"}
+**Follow the tangent, double the digits.** Again from $\theta_0 = 1$, each step reads the height of the curve and then follows the magenta tangent to the grey line $y = x$. The view zooms along: within four steps its width falls from about $0.6$ to the order of $10^{-20}$, the error being roughly squared at each step; the plain iteration needs $115$ steps to match step $4$ (numerical check in [@ex-dottie-rate-newton-rational]).
+:::
+
 ::: {.example #ex-dottie-rate-newton-rational title="Numerical Check of the True Contraction Rate, Newton's Quadratic Closure, and the Residuals of the Best Rational Readings"}
 **Literature result, not formalized in this book (all values below were recomputed at 50 decimal digits and rounded to the digits shown; the partial quotients of the continued fraction are numerical observations, not theorems).**
 
@@ -491,7 +507,19 @@ Picard iteration needs $54$ steps to match the accuracy of Newton's step $3$, an
 Every entry of the last column is below $1 + \sin 1 \approx 1.84$, in agreement with the upper bound above. The unusually large partial quotient $40$ makes $17/23$ an exceptionally good reading: an exhaustive search shows that no fraction with denominator below $502$ is closer to $\theta^*$, and the first one to beat it is $371/502$. The reading $739/1000$ of a three-decimal ruler leaves a residual of $1.42\times10^{-4}$, nearly twice that of $17/23$.
 :::
 
+::: {.viz src="fixed-point-convergence" preset="rational" height="500"}
+**The seam narrows but never closes.** The convergents $2/3, 3/4, 14/19, 17/23, 694/939, \dots$ of $\theta^*$ land one by one on the grey line (amber marks the current one), and the magenta upright is the drop from there to the cosine curve, the residual $\lvert\cos q - q\rvert$. The upright always stays inside the wedge of the two dashed grey lines (slopes $0$ and $-\sin 1$); with the view magnified ten million times, it is still there.
+:::
+
 The last table of [@ex-dottie-rate-newton-rational] shows that refining the tick marks does not automatically buy a better reading. What sets the width of the seam is not the size of the denominator but its arithmetic relation to $\theta^*$: a ruler with twenty-three divisions happens to line up almost exactly at its seventeenth mark, and a ruler with a thousand divisions does not.
+
+::: {.viz src="fixed-point-convergence" preset="ruler" height="500"}
+**Twenty-three divisions beat a thousand.** The amber $17/23$ next to the dashed ruler reading $739/1000$: the tick nearest $\theta^*$ on a thousandths ruler leaves about twice the residual of $17/23$ ($1.42\times10^{-4}$ against $7.58\times10^{-5}$).
+:::
+
+::: {.viz src="fixed-point-convergence" height="560"}
+**How fixed points close in: the full lab.** Three scenes on one cobweb plane: iteration ($\cos x$ or $1 + 1/x$, with a draggable start and three cameras), Newton's method, and rational readings (with an adjustable ruler). Convergence, its rate and the residual bounds are literature results, not formalized in this book; the green boxes cite only [@cor-golden-fixed-point-unique] and [@thm-dottie-rational-inverse-endpoint].
+:::
 
 Rational readings never line up. What about a different kind of closure: instead of asking the projection to return to itself, ask a rotation to return to its starting point? The answer is again no, and this time no conjecture is needed.
 
