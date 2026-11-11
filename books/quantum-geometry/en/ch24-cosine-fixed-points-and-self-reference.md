@@ -647,10 +647,86 @@ $$
 B(y) \;=\; \frac{y}{4} - \frac{y^3}{768} - \frac{y^5}{61440} - \frac{43\,y^7}{165150720} - \frac{223\,y^9}{47563407360} - \cdots .
 $$
 
-$B$ has an equivalent description without series: first solve $\eta + \sin\eta = y/2$, then set $B(y) = \sin\eta$. Indeed, if $x = \sin\eta$ with $\eta \in [-\pi/2, \pi/2]$, then $A(x) = 2\sin\eta + 2\eta = y$. For $y = \pi$, the equation $\eta + \sin\eta = \pi/2$ is solved by $\eta = \frac{\pi}{2} - \theta^* = \arcsin\theta^*$ (substitution gives $\frac{\pi}{2} - \theta^* + \cos\theta^* = \frac{\pi}{2}$), so $B(\pi) = \sin\eta = \cos\theta^* = \theta^*$. That the series $B$ converges to this value at $y = \pi$ is a literature result (see the example below).
+::: {.definition #def-dottie-rational-inverse title="The Prescribed Rational Arcsine Series and Its Formal Compositional Inverse" lean="D5/S3/Analytic/PowerSeries/DottieInverseSeries.alpha D5/S3/Analytic/PowerSeries/DottieInverseSeries.arcsine D5/S3/Analytic/PowerSeries/DottieInverseSeries.forward D5/S3/Analytic/PowerSeries/DottieInverseSeries.inverse"}
+For every $k\in\mathbb{N}$, define the rational coefficients
+
+$$
+\alpha(2k)=0,\qquad
+\alpha(2k+1)=\frac{\binom{2k}{k}}{4^k(2k+1)}=c_k.
+$$
+
+In the formal power series ring $\mathbb{Q}[[X]]$, set
+
+$$
+\begin{aligned}
+S&=\operatorname{mk}(\alpha)
+  =\sum_{n\ge0}\alpha(n)X^n,\\
+A&=2X+2S,\\
+B&=A^{\langle-1\rangle}.
+\end{aligned}
+$$
+
+Here $B$ is the formal compositional inverse specified by the fact that the linear coefficient $4$ of $A$ is a unit; it satisfies $B(0)=0$ and $A(B(X))=X$. Write $\beta_n=[X^n]B\in\mathbb{Q}$ for $n\in\mathbb{N}$. In the real series below, $\beta_n$ denotes the image of this rational number in $\mathbb{R}$.
+:::
+
+This preserves the preceding notation $A$, $B$: the formal series $A$ is the expansion of the function $2x+2\arcsin x$ at the origin, and $B$ is its formal compositional inverse. The earlier $c_k$ still denotes only the degree $2k+1$ coefficient of arcsine; $\beta_n$ indexes the inverse coefficients by every natural degree.
+
+$B$ has an equivalent description without series: first solve $\eta + \sin\eta = y/2$, then set $B(y) = \sin\eta$. Indeed, if $x = \sin\eta$ with $\eta \in [-\pi/2, \pi/2]$, then $A(x) = 2\sin\eta + 2\eta = y$. For $y = \pi$, the equation $\eta + \sin\eta = \pi/2$ is solved by $\eta = \frac{\pi}{2} - \theta^* = \arcsin\theta^*$ (substitution gives $\frac{\pi}{2} - \theta^* + \cos\theta^* = \frac{\pi}{2}$), so $B(\pi) = \sin\eta = \cos\theta^* = \theta^*$. To read this function value as the sum of the original rational series, one must also establish convergence to it. The following theorem gives absolute convergence and the exact sum.
+
+::: {.theorem #thm-dottie-rational-inverse-endpoint title="The Rational Compositional Inverse Converges Absolutely at π to the Unique Positive Cosine Fixed Point" lean="D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"}
+For the coefficients $\beta_n$ specified in [@def-dottie-rational-inverse], there exists a real number $\theta^*$ such that all the following hold:
+
+1. $0<\theta^*<1$ and $\cos\theta^*=\theta^*$;
+2. for every real $t$, if $0<t$ and $\cos t=t$, then $t=\theta^*$;
+3. $\operatorname{Summable}\bigl(n\mapsto|\beta_n|\pi^n\bigr)$;
+4. $\operatorname{HasSum}\bigl(n\mapsto\beta_n\pi^n,\;\theta^*\bigr)$.
+
+Both series range over all $n\in\mathbb{N}$, including $n=0$. The third clause asserts absolute convergence; the fourth retains every coefficient's sign and specifies the sum.
+:::
+
+::: proof
+First find one analytic function for all the coefficients. Consider the complex function $f(z)=z+\sin z$. Solving $f(z)=w$ is equivalent to finding a fixed point of
+
+$$
+\Phi_w(z)=\frac{w+z-\sin z}{2}.
+$$
+
+On the closed disk $|z|\le1$, sine and cosine remainder bounds give
+
+$$
+|\sin z-z|\le\frac15,\qquad
+|\cos z-1|\le\frac35.
+$$
+
+Thus, when $|w|<7/4$, we have $|\Phi_w(z)|\le(|w|+1/5)/2<1$ and $|\Phi_w'(z)|\le3/10$. The closed disk is complete, so the Banach contraction principle gives a unique solution $G(w)$ there, with $|G(w)|<1$ and $G(w)+\sin G(w)=w$. The same cosine bound ensures $f'(G(w))=1+\cos G(w)\ne0$. The analytic local inverse agrees with this unique solution near each point, making $G$ analytic throughout $|w|<7/4$. Conjugation preserves the equation and the disk; uniqueness therefore makes $G(w)$ real for real $w$ and gives $G(0)=0$.
+
+Set
+
+$$
+H(Y)=\sin G(Y/2).
+$$
+
+This function is analytic for $|Y|<7/2$, real-valued on its real diameter, and zero at the origin. Cauchy's formula on the circle of radius $13/4<7/2$ therefore supplies an expansion of this same $H$ at the origin.
+
+Every coefficient must now be identified. For real $y$ with $|y|<7/2$, write $x=G(y/2)\in(-1,1)$. Then $H(y)=\sin x$, and the principal-branch identity $\arcsin(\sin x)=x$ gives
+
+$$
+2H(y)+2\arcsin H(y)=2\sin x+2x=y.
+$$
+
+Near zero, the arcsine expansion is precisely $S$. Expressing this identity as a composition of Taylor series shows that the Taylor series $T$ of the real restriction of $H$ satisfies $T(0)=0$ and $A(T)=X$. A formal series with linear coefficient $4$ has only one compositional inverse with zero constant term, so $T$ is the real image of $B$. Since $H$ is real on the real axis near zero, its real and complex Taylor coefficients agree. Hence, for every $n\ge0$,
+
+$$
+\frac{H^{(n)}(0)}{n!}=\beta_n,
+$$
+
+where the right side is now embedded in $\mathbb{C}$. This connects every original rational coefficient, including degree zero, to the same Cauchy expansion. Since $\pi<13/4$, absolute convergence inside the disk gives $\sum_{n\ge0}|\beta_n|\pi^n<\infty$. Evaluating at $Y=\pi$ and taking real parts gives the signed sum $H(\pi)$.
+
+Finally, put $x=G(\pi/2)\in(-1,1)$. The equation $x+\sin x=\pi/2>0$ forces $x>0$: if $x\le0$, then $\sin x\le0$ on this interval as well. Thus $\theta^*=\sin x$ satisfies $0<\theta^*<x<1$ and $\theta^*=\pi/2-x$, so $\cos\theta^*=\sin x=\theta^*$. Any positive real competitor $t=\cos t$ first lies in $(0,1]$ by $\cos t\le1$; strict decrease of cosine on $[0,\pi]$ then excludes $t=1$. The same monotonicity prevents two distinct positive fixed points. Uniqueness therefore covers every positive real $t$. The full proof is checked by the Lean kernel.
+:::
 
 ::: {.example #ex-dottie-pi-series title="Two Mutually Inverse Rational Series Linking π and θ*: Numerical Check of the Partial Sums"}
-The series $B$ and the identity $\theta^* = B(\pi)$ are due to Kaplan (2007, *Mathematics Magazine* 80, "The Dottie Number"): **literature result, not formalized in this book.** The expansion of $A$ is the classical arcsine series. The coefficients in the table were obtained by order-by-order reversion in exact rational arithmetic; the partial sums were computed at 50 digits and rounded to the digits shown.
+The series $B$ and the identity $\theta^* = B(\pi)$ are described by Kaplan (2007, *Mathematics Magazine* 80, "The Dottie Number"); [@thm-dottie-rational-inverse-endpoint] gives absolute convergence and the exact sum of this prescribed series at $\pi$. The expansion of $A$ is the classical arcsine series. The coefficients in the table were obtained by order-by-order reversion in exact rational arithmetic; the partial sums were computed at 50 digits and rounded to the digits shown. These table entries and the term ratios below remain numerical checks; the endpoint theorem does not certify their rounding accuracy or the comparison of convergence speeds.
 
 | truncation order | partial sum of $A$ (tends to $\pi$) | difference from $\pi$ | partial sum of $B$ (tends to $\theta^*$) | difference from $\theta^*$ |
 | :---: | :---: | :---: | :---: | :---: |
@@ -665,7 +741,7 @@ The series $B$ and the identity $\theta^* = B(\pi)$ are due to Kaplan (2007, *Ma
 The ratio of successive terms of $A$ tends to $(\theta^*)^2 \approx 0.546$. The ratio of successive nonzero terms of $B$ rises from $0.12$ (order $5$) to $0.22$ (order $21$) and numerically approaches $1/4$: reading $\theta^*$ from $\pi$ converges faster than reading $\pi$ from $\theta^*$.
 :::
 
-So two statements hold together without contradiction: analytically, each of $\pi$ and $\theta^*$ is the value of a rational power series at the other; algebraically, under Schanuel's conjecture, no polynomial relation holds between them. $A$ and $B$ are infinite series, not polynomials, and every finite truncation leaves a nonzero difference, as every row of the table does.
+So two statements hold together without contradiction: analytically, each of $\pi$ and $\theta^*$ is the value of a rational power series at the other; algebraically, under Schanuel's conjecture, no polynomial relation holds between them. $A$ and $B$ are infinite series, not polynomials; the finite truncations listed in the table all leave a nonzero difference. Nonvanishing of general truncation tails, a pattern of coefficient signs, and computational resource bounds are outside the endpoint theorem.
 
 **Where the fixed point lives: the half-time of a cycloid.** The auxiliary equation $\eta + \sin\eta = \pi/2$ above does not come from nowhere. With $E = \pi - \eta$ it becomes
 
@@ -823,11 +899,11 @@ The two mechanisms divide the work cleanly, and the diagonal adds a third piece.
 
 ### Summary of Part VI: From Spheres Beyond Spheres to $\psi = \psi(\psi)$ — Ready to Forge the Mechanical Canon
 
-Across the four chapters of Part VI, backed by **thirty-two Lean-verified theorem blocks** (seven in Chapter 21, eight in Chapter 22, four in Chapter 23, and thirteen in Chapter 24), we have brought mathematical logic, prime spectral theory, Diophantine norm locks, and self-referential fixed points under one geometric roof:
+Across the four chapters of Part VI, backed by **thirty-three Lean-verified theorem blocks** (seven in Chapter 21, eight in Chapter 22, four in Chapter 23, and fourteen in Chapter 24), we have brought mathematical logic, prime spectral theory, Diophantine norm locks, and self-referential fixed points under one geometric roof:
 
 - **Chapter 21** proved that any complete decoder catalog produces a relative semantic diagonal that is discontinuous in the latent partition topology ([@thm-complete-diagonal-not-continuous]), has a nonempty separation deficit ([@lem-complete-diagonal-separation-deficit]), and forces strict observation-topology refinement when adjoined ([@prop-complete-diagonal-strict-refinement], [@cor-complete-diagonal-topological-settlement]), gave the factorial remainder bound for the exponential series in a complete normed algebra ([@lem-exp-tail-le]) and the strictly positive cosine lower bound on the recovery error of a finite-record channel ([@lem-finite-support-autocorrelation-cosine], [@thm-finite-record-cosine-obstruction]), paired with Taylor remainder seams $R_{2N}(\theta)$, Descartes's $12 \times 60^\circ = 720^\circ = 4\pi$ polyhedral angular defect, the Hairy Ball Theorem, and Adams's parallelizable spheres $S^0, S^1, S^3, S^7$ ([@rem-hairy-ball-adams-literature]);
 - **Chapter 22** revealed primes as the orthogonal basis of arithmetic and established on the explicit half-plane $\operatorname{Re}(s) > 1$ the unit residue at $s = 1$ ([@lem-riemann-zeta-residue-one]), the Dirichlet series ([@prop-riemann-zeta-dirichlet-sum]), the Euler prime product ([@thm-riemann-zeta-euler-product]), their direct equality ([@cor-dirichlet-sum-eq-euler-product]), the entirety and reflection symmetry $\xi(1 - s) = \xi(s)$ of the completed xi reading ([@thm-xi-reading-entire-reflection]) together with its conjugation covariance ([@prop-zeta-conjugation-covariance]), the rolling of the critical line into the unit circle with a radial equivalent of the Riemann Hypothesis ([@thm-cayley-critical-line-criterion]), and a quartic polynomial showing that full symmetry does not pin zeros to the critical line ([@thm-full-symmetry-not-localization]), alongside the polyhedral prime-sieve remainder and the epistemic boundary of the open Riemann Hypothesis ([@conj-riemann-hypothesis], [@rem-euler-zeta-literature]);
 - **Chapter 23** showed how quadratic norms and traces isolate discrete integer lattices, proving unimodular shear reduction, constant discriminant $\Delta = -3$, and range invariance for the Eisenstein crossing family ([@thm-qform-eq-eisnorm], [@lem-qform-discriminant], [@cor-qform-range-eq-eisnorm]) together with the $\Delta = +5$ Golden Pell trace–norm identity ([@prop-pell-form-eq-four-mul-norm]), and auditing Koenigsmann's 2016 $\forall$/$\forall\exists$ first-order definition of $\mathbb{Z}$ in $\mathbb{Q}$ vs. the open existential problem $\mathrm{H10}(\mathbb{Q})$ ([@rem-diophantine-z-in-q-literature]);
-- **Chapter 24** proved finite contracting set stabilization and strict-change bounds ([@thm-finite-contracting-updates-stabilize]), adjacent-step agreement and static contextual non-uniqueness (identical text and interpretation rule under two distinct static contexts yield different fixed Boolean meanings, [@lem-conceptual-equivalence-stability-fixed-point], [@prop-context-parameters-distinct-fixed-points]), uniqueness of the positive golden fixed point ([@cor-golden-fixed-point-unique]), the four self-application fates of nondegenerate binary fractional maps with the $\varphi$-family as the only live one ([@thm-self-application-four-fates], [@lem-golden-inverse-branch-fixed-point]), the golden cosines of the regular pentagon ([@prop-pentagon-golden-cosines]), the diagonal landing as a fixed point of the twist together with universal escape for fixed-point-free twists and its finite count ([@lem-diagonal-landing-fixed], [@thm-self-application-fragment-package], [@prop-escaped-listing-card]), Brouwer's fixed-point theorem on the standard simplex ([@thm-brouwer-standard-simplex]), the convergence of orbit averages of an irrational rotation to the Haar average ([@lem-irrational-rotation-equidistribution]), and the normalized central-binomial coefficient bounds and binomial-kernel series used in the arcsine expansion ([@lem-arcsin-binomial-kernel]), culminating in Banach contraction on $[0, 1]$, Lindemann–Weierstrass transcendence ($|\cos q - q| > 0$), Schanuel's conjecture ([@conj-schanuel-dottie], [@rem-banach-dottie-hairy-ball-literature]), and the self-referential synthesis $\psi = \psi(\psi)$.
+- **Chapter 24** proved finite contracting set stabilization and strict-change bounds ([@thm-finite-contracting-updates-stabilize]), adjacent-step agreement and static contextual non-uniqueness (identical text and interpretation rule under two distinct static contexts yield different fixed Boolean meanings, [@lem-conceptual-equivalence-stability-fixed-point], [@prop-context-parameters-distinct-fixed-points]), uniqueness of the positive golden fixed point ([@cor-golden-fixed-point-unique]), the four self-application fates of nondegenerate binary fractional maps with the $\varphi$-family as the only live one ([@thm-self-application-four-fates], [@lem-golden-inverse-branch-fixed-point]), the golden cosines of the regular pentagon ([@prop-pentagon-golden-cosines]), the diagonal landing as a fixed point of the twist together with universal escape for fixed-point-free twists and its finite count ([@lem-diagonal-landing-fixed], [@thm-self-application-fragment-package], [@prop-escaped-listing-card]), Brouwer's fixed-point theorem on the standard simplex ([@thm-brouwer-standard-simplex]), the convergence of orbit averages of an irrational rotation to the Haar average ([@lem-irrational-rotation-equidistribution]), and the normalized central-binomial coefficient bounds and binomial-kernel series used in the arcsine expansion ([@lem-arcsin-binomial-kernel]), established absolute convergence and the signed sum of the prescribed rational compositional inverse at $\pi$, together with uniqueness of the cosine fixed point among all positive reals ([@thm-dottie-rational-inverse-endpoint]), culminating in Banach contraction on $[0, 1]$, Lindemann–Weierstrass transcendence ($|\cos q - q| > 0$), Schanuel's conjecture ([@conj-schanuel-dottie], [@rem-banach-dottie-hairy-ball-literature]), and the self-referential synthesis $\psi = \psi(\psi)$.
 
 With the theoretical arch of Parts I–VI in place, **Part VII (*Construction and Verification — XOR Algebra, Rotor Compilation, and the Lean 4 Axiom Sanctuary*)** turns these geometric laws into executable matrix-free bitmask Clifford engines and ZYZ rotor compilers, and steps inside the Lean 4 formal sanctuary to audit the frozen proof architecture before **Part VIII** and the **Coda** bring the entire eight-part monograph together.
