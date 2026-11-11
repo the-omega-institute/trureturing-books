@@ -395,3 +395,10 @@ EPUB 浏览器预览不等于 Apple Books 原生主题验收，尚未导入 Appl
 [qg-born-reduction]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/Observer/BornReduction.lean#L27
 [qg-conditional-state]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/Observer/Conditioning.lean#L137
 [qg-trace-contract]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/Quantum/Foundation/FiniteTraceDistance.lean#L505
+
+
+## 第 13–16 章实施完成，待独立复审
+
+十一项确认问题和新增 film004 的两项数学限定已作最小双语修订，保持作者题记、形式块、ID/GID 与媒体顺序。完整实施、验证与限制见 [本批记录](CH13-CH16-IMPLEMENTATION-2026-11-12.md)。交付的 56 份文件摘要逐一核对无差异后以 `61447c2` 封存；无冲突整合主线 `d170f2951f2ce463bce823940be66d21353a5a65` 后，56 份交付字节仍相同，锁文件沿用该主线。对应证据在 `build/ch13-ch16-evidence/integration-d170/correspondence.json`。
+
+整合后 `./tbook check` 为 1 本可见书、0 错误、0 警告，`git diff --check` 通过。三个实验室的正常/慢帧测试、双语 HTML、四 PDF、两 EPUB（EPUBCheck 无消息）、site、film004 成片抽帧及静音浏览器播放属于原实施输入上的证据，不替代当前候选的最终独立复审、当前整本导出、CI、合入与 Pages。完整连续审片、人耳听审与原生阅读器/设备检查仍未完成。四个单元记为修复后待复审，不增加全书已批准覆盖。

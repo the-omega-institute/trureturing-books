@@ -402,6 +402,10 @@ Section 24.7 gives a typed reading of this aphorism: the function $\psi$ acts on
 **Cosine again and again.** Starting from $0$, the cobweb winds in on $\theta^* \approx 0.739$ while the view zooms along. Each step is closer, the error multiplied by about $0.67$, yet no step lands exactly.
 :::
 
+::: {.film src="006-sphere-beyond-spheres"}
+**Spheres beyond spheres: the diagonal escape and the cosine fixed point (2:28).** The film plays the whole chase through: flipping the diagonal of a list gives a string that escapes the list; in the four-address catalog it splits an old fiber, and raised as a new axis at right angles it turns two pieces into three ([@cor-complete-diagonal-topological-settlement]); seen from outside, the closed shadow circle is an open helix. The chase stops only where a list catches its own twisted diagonal, and there the landing value is a fixed point of the twist ([@lem-diagonal-landing-fixed]); with cosine as the twist, the cobweb from $1$ radian closes in on the one positive solution $\theta^* \approx 0.739$ ([@thm-dottie-rational-inverse-endpoint]).
+:::
+
 ## 24.5 Carrying the Loop Through: True Convergence Rate, Derivative Speed-Up, and the Width of the Rational Seam {#sec-ch24-5}
 
 The aphorism is stated; now let us do the arithmetic. The cosine table in [@ex-dottie-and-golden-iterations] lists only four rows, and the contraction constant $\sin 1 \approx 0.8415$ of [@rem-banach-dottie-hairy-ball-literature] is the worst case over the whole interval $[0, 1]$. Three questions are still open:

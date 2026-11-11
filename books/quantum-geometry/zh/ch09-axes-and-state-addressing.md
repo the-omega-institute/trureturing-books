@@ -154,6 +154,39 @@ $$
 **夹角越小，转得越多。** 两根紫色转轴只差 $10^\circ$：每次绕 $b$ 只能把点推远至多 $20^\circ$，青色虚线一格一格往外挪；同一个离 $N$ 为 $110^\circ$ 的目标要十二个转动才到。这是页面的构造，不是最短字。
 :::
 
+**把转动切细，交替着做：Lie–Trotter 公式。** [@thm-two-axis-finite-word] 只说两根轴的有限字存在，不说怎么拼。有一种拼法完全不用想：把绕 $a$ 的转动和绕 $b$ 的转动各切成 $n$ 份小转动，交替做 $n$ 轮。$n \to \infty$ 时，乘积收敛到把两个转动的“生成元”直接相加得到的那一次转动。这件事不只对转动成立，对任何完备的赋范代数都成立。
+
+::: {.theorem #thm-lie-trotter title="Lie–Trotter 乘积公式" lean="D5/S3/Quantum/Analysis/TrotterProduct.trotter_product"}
+设 $\mathcal{A}$ 是实数域上的完备赋范代数，且单位元的范数为 $\lVert 1\rVert = 1$。则对任意 $A, B \in \mathcal{A}$，当 $n \to \infty$ 时
+
+$$
+\bigl(e^{A/n}\,e^{B/n}\bigr)^n \;\longrightarrow\; e^{A + B}.
+$$
+:::
+
+::: proof
+Lean 的证明分三步。（1）指数级数逐项估计给出 $\lVert e^X\rVert \le e^{\lVert X\rVert}$ 与 $\lVert e^X - 1 - X\rVert \le \lVert X\rVert^2 e^{\lVert X\rVert}$，由此得到单步误差 $\lVert e^X e^Y - e^{X+Y}\rVert \le (\lVert X\rVert + \lVert Y\rVert)^2\,\bigl(3 + \lVert X\rVert + \lVert Y\rVert\bigr)\,e^{\lVert X\rVert + \lVert Y\rVert}$：一阶项 $X + Y$ 两边相同，误差从二阶开始。（2）若 $\lVert S\rVert, \lVert T\rVert \le C$ 且 $C \ge 1$，则 $\lVert S^n - T^n\rVert \le n\,C^n\,\lVert S - T\rVert$（对 $n$ 归纳，把差拆成 $n$ 个只差一处因子的项）。（3）取 $X = A/n$、$Y = B/n$、$S = e^{A/n}e^{B/n}$、$T = e^{(A+B)/n}$，并用 $T^n = e^{A+B}$：单步误差是 $1/n^2$ 量级，乘上 $n$ 个因子后是 $1/n$ 量级，而 $C^n \le e^{\lVert A\rVert + \lVert B\rVert}$ 有界，所以差趋于零。完整证明由 Lean 内核检查。
+:::
+
+**两根轴的转动，像向量一样相加。** 在 $3\times 3$ 实矩阵配上算子范数构成的代数里，记 $K_x, K_y, K_z$ 为绕三根坐标轴的转动生成元（$e^{\theta K_x}$ 是绕 $x$ 轴转 $\theta$）。生成元对转轴是线性的：$\theta K_x + \theta K_y = \sqrt{2}\,\theta\,K_{\hat{n}}$，其中 $\hat{n} = (1, 1, 0)/\sqrt{2}$（手工推导）。所以 [@thm-lie-trotter] 说：绕 $x$、绕 $y$ 各转 $\theta/n$、交替 $n$ 轮，极限是绕对角轴 $\hat{n}$ 转 $\sqrt{2}\,\theta$。两个角度按勾股定理合成，转轴落在两根轴的角平分线上。
+
+::: {.example #ex-trotter-two-quarter-turns title="两个四分之一转，切得越细越接近一次 127.28° 的转动"}
+取 $\theta = \frac{\pi}{2}$，比较 $P_n = \bigl(e^{\theta K_x/n}\,e^{\theta K_y/n}\bigr)^n$ 与目标 $e^{\theta(K_x + K_y)}$：绕 $\hat{n} = (1, 1, 0)/\sqrt{2}$ 转 $\sqrt{2}\cdot 90^\circ = 127.28^\circ$。下表的误差是两者之差的算子范数；转角与转轴由 $P_n$ 本身读出。数值四舍五入到所示位数。
+
+| $n$ | 误差 $\lVert P_n - e^{\theta(K_x + K_y)}\rVert$ | $n \times$ 误差 | $P_n$ 的转角 | $P_n$ 的转轴 |
+| ---: | ---: | ---: | ---: | :--- |
+| $1$ | $1.0353$ | $1.0353$ | $120.00^\circ$ | $(0.5774, 0.5774, 0.5774)$ |
+| $2$ | $0.5037$ | $1.0075$ | $125.60^\circ$ | $(0.6786, 0.6786, 0.2811)$ |
+| $4$ | $0.2496$ | $0.9984$ | $126.87^\circ$ | $(0.7002, 0.7002, 0.1393)$ |
+| $16$ | $0.0622$ | $0.9954$ | $127.25^\circ$ | $(0.7067, 0.7067, 0.0347)$ |
+| $256$ | $0.0039$ | $0.9952$ | $127.28^\circ$ | $(0.7071, 0.7071, 0.0022)$ |
+| $1024$ | $0.0010$ | $0.9952$ | $127.28^\circ$ | $(0.7071, 0.7071, 0.0005)$ |
+
+$n = 1$ 一行值得多看一眼：先绕 $y$ 转 $90^\circ$、再绕 $x$ 转 $90^\circ$，合起来是绕体对角线 $(1, 1, 1)/\sqrt{3}$ 的 $120^\circ$ 转动，转轴明显翘离水平面。切得越细，转轴越往下落向两根轴的角平分线，转角也从 $120^\circ$ 长到 $127.28^\circ$。误差乘以 $n$ 稳定在 $0.995$ 附近，即误差按 $1/n$ 下降，与证明第（3）步的量级一致；定理本身只断言收敛，不给出常数。
+:::
+
+> 两次转动不能交换，可切得足够细，先后之差就小到可以忽略：不对易留下的痕迹，按 $1/n$ 消退。
+
 ## 有理六轴覆盖与六色下界 {#sec-rational-six-axis-atlas}
 
 既然在南北极处球面两角坐标 $(\theta, \varphi)$ 会发生方位角退化，而在单根观察轴 $\vv{a}$ 下与它成 $90^\circ$ 的赤道大圆 $\{x \in S^2 \mid \langle x, \vv{a}\rangle_{\mathbb{R}} = 0\}$ 又总是落入正交盲区（[第一章](ch01-measurement.md)与[第二章](ch02-born-rule.md)），我们自然要问一个拓扑学问题：
