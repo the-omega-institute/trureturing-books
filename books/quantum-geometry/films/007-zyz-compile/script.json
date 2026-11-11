@@ -1,0 +1,43 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen", "ZYZ": "zee why zee", "rho": "roe", "Bloch": "Block"},
+  "music": {"bpm": 80, "progression": "a-minor"},
+  "scenes": [
+    {"id": "half", "name": "HALF ANGLE", "lead": 2.2, "tail": 0.4, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["A rotor about z is cosine of half the angle, minus sine of half the angle times the plane e one e two.", "绕 z 轴的旋转器是 R_z(θ) = cos(θ/2) − sin(θ/2) e₁e₂：它只记半角。"],
+      ["Sandwich the arrow between the rotor and its reverse.", "把箭头夹在旋转器与它的逆序之间：v ↦ R v R̃。"],
+      ["The shadow on the axis commutes with the plane, so it stays put.", "轴上的影子与平面 e₁e₂ 可交换，原地不动。"],
+      ["The part in the plane anticommutes, and the two half angles close into the whole turn.", "平面里的那一份与它反对易：左右两个半角合拢成整角 θ。"]
+    ], "cues": [{"line": 3, "at": 3.4, "kind": "chime"}]},
+    {"id": "chain", "name": "THREE TURNS", "lead": 0.5, "tail": 0.5, "music": [0.9, 0.6, 0.7, 0.0, 0.3], "lines": [
+      ["Now chain three such turns: about z, then y, then z again.", "现在串接三段：绕 z，再绕 y，再绕 z。"],
+      ["Take alpha zero point three seven, beta minus zero point eight one, gamma zero point five two.", "取欧拉角 (α, β, γ) = (0.37, −0.81, 0.52)。"],
+      ["The arrow turns by gamma first, then beta, then alpha: the rightmost rotor touches it first.", "箭头先转 γ，再转 β，最后转 α：最右边的旋转器最先碰到它。"]
+    ]},
+    {"id": "product", "name": "ONE ROTOR", "lead": 0.5, "tail": 0.5, "music": [0.9, 0.9, 0.8, 0.6, 0.5], "lines": [
+      ["Multiply the three rotors, and one even element with four coefficients is left.", "三枚旋转器相乘，只剩一枚有四个系数的偶元素。"],
+      ["A scalar of zero point eight three and three bivector parts; their squares still sum to one.", "标量 0.830，加三份双矢量；四个系数的平方和仍是 1。"],
+      ["Sandwich the three basis vectors with it, and out come the columns of the ZYZ matrix.", "用它夹住三根基向量，出来的正是 ZYZ 矩阵的三列。"]
+    ], "cues": [{"line": 1, "at": 3.6, "kind": "chime"}]},
+    {"id": "fold", "name": "ONE AXIS", "lead": 0.5, "tail": 0.5, "music": [1.0, 0.8, 0.7, 0.5, 0.4], "lines": [
+      ["The literature says more: every unit rotor is a single turn about a single axis.", "文献结果说得更多：每一枚单位旋转器都是绕一根轴的一次转动。"],
+      ["Here the axis comes from the bivector part, and the angle is twice the arc cosine of the scalar: sixty-seven point nine degrees.", "这里转轴取自双矢量部分，转角是标量的反余弦的两倍：2 arccos 0.830 = 67.9°。"],
+      ["One turn lands exactly where the three turns did.", "这一次转动，正好落在三段转动走到的那一点。"]
+    ], "cues": [{"line": 2, "at": 2.0, "kind": "impact"}]},
+    {"id": "gates", "name": "T AND H", "lead": 0.5, "tail": 0.5, "music": [0.9, 0.9, 0.9, 0.7, 0.6], "lines": [
+      ["Up to a global phase, the T gate is one turn about z by forty-five degrees.", "除去整体相位，T 门就是绕 z 轴转 45°：R_T = 0.924 − 0.383 e₁e₂。"],
+      ["The Hadamard gate is zero, ninety degrees, one eighty: a pure bivector.", "阿达玛门是 (0, π/2, π)：一枚纯双矢量 R_H = −0.707 e₁e₂ − 0.707 e₂e₃。"],
+      ["It swaps e one and e three, and flips e two.", "它交换 e₁ 与 e₃，并把 e₂ 翻成 −e₂。"]
+    ]},
+    {"id": "sphere", "name": "ON THE SPHERE", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.5, 0.4], "lines": [
+      ["Every arrow on these paths names a pure state: rho is the Bloch matrix of one and v.", "这些路径上的每一根箭头都对应一个纯态：ρ = blochMatrix(1, v)。"],
+      ["Lean checks that its trace is one, and that reading off its Bloch vector gives v back.", "Lean 检验了：它的迹为 1，读出的布洛赫向量正是 v。"],
+      ["A Hermitian matrix of trace one that squares to itself has a Bloch vector of length exactly one.", "迹为 1、自乘不变的厄米矩阵，布洛赫向量的长度恰为 1。"],
+      ["And a positive semidefinite one stays inside the ball.", "正半定矩阵则留在球内：‖bloch M‖ ≤ Re Tr M。"]
+    ], "cues": [{"line": 2, "at": 3.8, "kind": "stamp"}]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, chapter twenty-six.", "《量子计算的几何直觉》· 第二十六章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}

@@ -404,6 +404,10 @@ $$
 **反复取余弦。** 从 $0$ 出发，蛛网一圈圈绕向 $\theta^* \approx 0.739$，画面跟着放大。每一步都更近，误差大约乘以 $0.67$，却没有哪一步恰好到达。
 :::
 
+::: {.film src="006-sphere-beyond-spheres"}
+**球外之球：对角线逃逸与余弦不动点（2:28）。** 视频把整条追逐演一遍：翻转清单的对角线，翻出的串逃出清单；在四地址目录里它劈开旧纤维，立成垂直的新轴后两块变成三块（[@cor-complete-diagonal-topological-settlement]），从外面看，闭合的影子圆是一条开口螺旋。追逐只在清单捕获自己扭过的对角线时停下，落点上的值是扭转的不动点（[@lem-diagonal-landing-fixed]）；取余弦作扭转，蛛网从 $1$ 弧度收向唯一的正解 $\theta^* \approx 0.739$（[@thm-dottie-rational-inverse-endpoint]）。
+:::
+
 ## 24.5 把闭环算到底：真实收敛率、导数加速与有理读数的裂缝宽度 {#sec-ch24-5}
 
 格言说完了，现在把账算清。[@ex-dottie-and-golden-iterations] 的余弦表只列了四行，[@rem-banach-dottie-hairy-ball-literature] 给出的压缩常数 $\sin 1 \approx 0.8415$ 则是整个区间 $[0, 1]$ 上最坏的一处。三个问题还悬着：
