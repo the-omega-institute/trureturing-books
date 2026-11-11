@@ -8,7 +8,9 @@ Now suppose the second qubit coupled to our system is not a stray particle lost 
 
 This chapter opens Part IV, *Higher-Dimensional Spheres — Entanglement, Topology, and Quantum Algorithms*. Starting from the orthogonal sector decomposition of bipartite Hermitian operator space, we pass through the central marginal blind spot of Bell states and Landau's commutator-area identity for the squared CHSH operator, culminating in the $2\sqrt{2}$ maximum at the $45^\circ$ ($\pi/4$) symmetric quarter-right angle.
 
-![The 6 + 9 = 15 ledger of local lines and correlation faces; the Bell state, whose two local balls shrink to their centres while the correlation sits between them; and the cosine arc rising above the classical straight line at 45°, where the fixed CHSH witness reaches 2√2](../assets/fig-13-bell-chsh-45deg.svg)
+::: {.figure src="ch13-overview"}
+**Figure 13.** The chapter at a glance. Panel I: on the 4 × 4 board of the two-qubit Pauli ledger, $3 + 3$ cyan local-line cells and $9$ magenta correlation cells. Panel II: in the two balls of the Bell state both amber points sit at the centre ($\vv{r} = \vv{s} = \vv{0}$), and the magenta correlation spans the space between them. Panel III: the cyan cosine arc and the dim toy line meet at $0^\circ$, $90^\circ$ and $180^\circ$; at $45^\circ$ the arc stands a magenta gap above the line.
+:::
 
 ## Local Lines and Correlation Areas: 6 + 9 = 15 {#sec-pauli-local-correlation}
 
@@ -116,6 +118,10 @@ Two strict mathematical boundaries in [@thm-local-correlation-sectors] must be k
 
 1. **The correlation sector includes classical correlations and must not be called an "entanglement subspace"**: $\mathrm{correlationSector}\,m\,n$ is an orthogonal summand of the observable tensor space, not a set of entangled states. Indeed, the separable classical mixture $\mathrm{classicalCorrelatedDensity} = \frac{1}{2}(\lvert 00\rangle\langle 00\rvert + \lvert 11\rangle\langle 11\rvert) = \frac{1}{4}(I_4 + \sigma_Z \otimes \sigma_Z)$ in conjuncts 7 and 8 has zero entanglement, yet its traceless part $\frac{1}{4}\sigma_Z \otimes \sigma_Z$ lies entirely inside the $(Z, Z)$ coordinate of $\mathrm{correlationSector}\,2\,2$!
 2. **The operator tensor sector is not the ordinary outer product of two Bloch vectors in $\mathbb{R}^3$**: for an uncorrelated product state $\rho_A \otimes \rho_B$, the correlation matrix collapses to a rank-at-most-one outer product $T_{ij} = r_i s_j$ determined by the $6$ local coordinates; only general bipartite states can independently populate higher-rank configurations across $\mathrm{correlationSector}\,2\,2$ (such as $\lvert\Phi^+\rangle$, which simultaneously excites $\sigma_X \otimes \sigma_X$, $-\sigma_Y \otimes \sigma_Y$, and $\sigma_Z \otimes \sigma_Z$).
+
+::: {.figure src="ch13-two-states"}
+**Same marginals, different correlation cells.** Each cell holds $\Tr\bigl(\rho(\sigma_p \otimes \sigma_q)\bigr)$, computed from the two $4\times 4$ density matrices. For the classical correlated state on the left and the Bell state $\lvert\Phi^+\rangle$ on the right, all six cyan local cells in the first row and column are empty, so both have marginals $\frac{1}{2}I_2$; among the magenta correlation cells the classical state fills only $(Z, Z)$, while the Bell state fills $(X, X)$, $(Y, Y)$ and $(Z, Z)$ with $+1$, $-1$, $+1$ ([@thm-local-correlation-sectors], items 7 and 8).
+:::
 
 ## Bell States: Central Marginals and Shared Correlations {#sec-bell-local-zero}
 
@@ -295,6 +301,10 @@ The source first shows that $S$ is Hermitian: a Kronecker product of Hermitian m
 :::
 
 Two points in this proposition need careful reading. First, it gives only an inclusion: the eigenvalues of $S$ cannot escape these four points, but it does not say that all four occur. Second, the hypothesis is the strict $0 < N < 4$. For qubits $N = 4\sin\alpha\sin\beta$, so the hypothesis says that neither pair of axes is collinear and that the two pairs are not both orthogonal. When both pairs are orthogonal, $N = 4$ and the proposition does not apply. A hand computation then gives the eigenvalues $8, 8, 0, 0$ for $S^2$ (the proof of [@cor-fixed-chsh-tsirelson] in the next section finds the same values for the fixed operator) and the spectrum $\{2\sqrt{2}, -2\sqrt{2}, 0\}$ for $S$.
+
+::: {.figure src="ch13-spectrum"}
+**The CHSH spectrum follows the area parameter $N$ alone.** The four magenta curves are $\pm\sqrt{4 + N}$ and $\pm\sqrt{4 - N}$: at $N = 0$ they meet at $\pm 2$ on the dim dashed lines; as $N$ grows the outer two open towards $\pm 2\sqrt{2}$ and the inner two close towards $0$. The filled points are the spectra of the rows $N = 1, 2, 3$ of the table below ($\pm\sqrt{7}$ and $\pm 1$ at $N = 3$), lying on the four points of [@prop-chsh-four-point-spectrum]. The hollow points at the ends lie outside its hypothesis $0 < N < 4$: $N = 0$ follows from [@cor-chsh-local-commuting-collapse] with the hand argument $\lambda^2 = 4$, and $N = 4$ is computed by hand from [@prop-landau-area-square].
+:::
 
 ::: {.example #ex-chsh-spectrum-angle-table title="The Area Parameter N, the CHSH Spectrum, and the Bell-State Expectation at Five Angle Pairs"}
 Put all four axes in the $(Z, X)$ plane and measure angles from the $Z$ axis. Alice takes $A_0 = Z$ and $A_1 = \cos\alpha\,Z + \sin\alpha\,X$; Bob takes $B_0 = Z$ and $B_1 = \cos\beta\,Z - \sin\beta\,X$ (turning the other way). A manual derivation: from $[Z, X] = 2iY$ we get $[A_0, A_1] = 2i\sin\alpha\,Y$ and $[B_0, B_1] = -2i\sin\beta\,Y$, hence
@@ -478,6 +488,10 @@ In each row the product that decides the sign takes the values $+1$ and $-1$ in 
 Both ends are now pinned: the CHSH value of a finite deterministic local model cannot leave the segment $[-2, 2]$ ([@thm-classical-chsh-bound-exact]), while the expectation of the fixed CHSH operator on quantum states reaches $2\sqrt{2}$ ([@cor-fixed-chsh-tsirelson]). Their ratio is $\sqrt{2}$, the factor by which the $45^\circ$ arc exceeds the polyline. Mind the quantifier scope of each theorem: the classical side concerns deterministic $\pm 1$ answer tables over a finite set of fibers, and on the quantum side attainment concerns one fixed two-qubit operator, while the upper bound $2\sqrt{2}$ holds for every finite-dimensional unitary strategy ([@thm-unitary-bell-bound] at $d = 2$); for the general forms see [@rem-bell-chsh-literature] at the end of the chapter.
 
 Why is $\theta = 45^\circ$ the symmetric CHSH working angle? In a symmetric four-setting configuration (three adjacent pairs separated by $\theta$ and one pair separated by $3\theta$), the four-correlator combination is $3\cos\theta - \cos(3\theta)$, whose derivative $-3\sin\theta + 3\sin(3\theta) = 0$ attains its global maximum $2\sqrt{2}$ at $\theta = 45^\circ$ ($\pi/4$)! (Keep this four-setting optimization distinct from maximizing the single-chord pointwise difference $g(\theta) = \cos\theta - (1 - 2\theta/\pi)$ against the linear toy model: the pointwise derivative $-\sin\theta + 2/\pi = 0$ peaks at $\theta = \arcsin(2/\pi) \approx 39.5402^\circ$ with a single-chord gap of $\approx 0.2105$, whereas at the symmetric CHSH working angle $\theta = 45^\circ$ each single-chord gap is $\frac{\sqrt{2}-1}{2} \approx 0.2071$, four of which sum to $2\sqrt{2} - 2 \approx 0.8284$.) Let us now work through the complete numerical checklist connecting $\rho_{\Phi^+}$, $\rho_{\Psi^-}$, the four $45^\circ$ CHSH correlators, and the comparison between the cosine arc and a specific linear toy model.
+
+::: {.figure src="ch13-symmetric"}
+**The symmetric four-direction combination reaches $2\sqrt{2}$ only at $45^\circ$.** The horizontal axis is the angle $\theta$ between neighbouring directions; the cyan curve is $3\cos\theta - \cos(3\theta)$ on the Bell state. It starts at $2$ at $\theta = 0^\circ$, rises to $2\sqrt{2}$ at $45^\circ$, falls back to $2$ near $68.5^\circ$ and reaches $0$ at $90^\circ$. The green dashed line is the bound $2$ for finite deterministic local models ([@thm-classical-chsh-bound-exact]); the part of the curve above it is shaded magenta. The curve is computed from the formula.
+:::
 
 ::: {.example #ex-bell-chsh-45deg title="Complete Hand-Calculated Checklist for Bell Marginals, the 45° CHSH Value 2√2, and the Cosine Arc"}
 This example provides a three-part verification checklist for the two-qubit Bell states and the $45^\circ$ CHSH configuration:

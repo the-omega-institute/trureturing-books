@@ -8,7 +8,9 @@
 
 本章开启第四部“高维球体——纠缠、拓扑与量子算法”。我们将从两体厄米算子空间的正交扇区分解出发，穿过贝尔态的球心边缘盲区与 CHSH 算子平方的换位子面积恒等式，最终抵达 $45^\circ$（$\pi/4$）对称四分角下的 $2\sqrt{2}$ 极值定理。
 
-![局域线与关联面的 6 + 9 = 15 维账本、贝尔态的两个局域球都缩到球心而关联留在两球之间，以及 45° 处余弦弧高于经典折线、固定 CHSH 见证取到 2√2](../assets/fig-13-bell-chsh-45deg.svg)
+::: {.figure src="ch13-overview"}
+**图 13。** 本章地图：面板 I，双比特泡利账本的 4 × 4 格子里，青色的局域线 $3 + 3$ 格、品红的关联面 $9$ 格；面板 II，贝尔态的两颗球里，琥珀色的点都在球心（$\vv{r} = \vv{s} = \vv{0}$），品红的关联连在两球之间；面板 III，青色的余弦弧与暗色的玩具折线在 $0^\circ$、$90^\circ$、$180^\circ$ 相交，在 $45^\circ$ 处弧高出一段品红。
+:::
 
 ## 局域线与关联面：6 + 9 = 15 {#sec-pauli-local-correlation}
 
@@ -116,6 +118,10 @@ $$
 
 1. **关联扇区包含经典关联，绝不能笼统改称“纠缠子空间”**：算子扇区 $\mathrm{correlationSector}\,m\,n$ 是测量算子空间的正交直和分量，而不是纯纠缠态的集合。事实上，定理结论 7 与 8 中的经典关联混合态 $\mathrm{classicalCorrelatedDensity} = \frac{1}{2}(\lvert 00\rangle\langle 00\rvert + \lvert 11\rangle\langle 11\rvert) = \frac{1}{4}(I_4 + \sigma_Z \otimes \sigma_Z)$ 没有任何量子纠缠，但它的非平凡无迹部分 $\frac{1}{4}\sigma_Z \otimes \sigma_Z$ 同样百分之百落在 $\mathrm{correlationSector}\,2\,2$ 的 $(Z, Z)$ 格子里！
 2. **算子张量扇区不是两个局部布洛赫向量的普通外积**：如果两颗比特处于无关联乘积态 $\rho_A \otimes \rho_B$，其关联矩阵退化为秩至多为 $1$ 的普通实向量外积 $T_{ij} = r_i s_j$（完全受限于 $6$ 个局域参数）；唯有一般的双体态才能在 $\mathrm{correlationSector}\,2\,2$ 中独立激发秩大于 $1$ 的多维对角元（如 $\lvert\Phi^+\rangle$ 同时激发 $\sigma_X \otimes \sigma_X$、$-\sigma_Y \otimes \sigma_Y$ 与 $\sigma_Z \otimes \sigma_Z$ 三格）。
+
+::: {.figure src="ch13-two-states"}
+**边缘一样，关联格不一样。** 每格是 $\Tr\bigl(\rho(\sigma_p \otimes \sigma_q)\bigr)$，由两个 $4\times 4$ 密度矩阵算出。左边的经典关联态与右边的贝尔态 $\lvert\Phi^+\rangle$，第一行与第一列的六格青色局域格全都空着，两边的边缘态都是 $\frac{1}{2}I_2$；品红的关联格里，经典关联态只占 $(Z, Z)$ 一格，贝尔态占 $(X, X)$、$(Y, Y)$、$(Z, Z)$ 三格，取 $+1$、$-1$、$+1$（[@thm-local-correlation-sectors] 结论 7、8）。
+:::
 
 ## 贝尔态：球心边缘态与共享关联 {#sec-bell-local-zero}
 
@@ -295,6 +301,10 @@ $$
 :::
 
 这条命题有两处要读准。其一，它只给包含关系：$S$ 的特征值逃不出这四个点，但它没有说四个点都会出现。其二，前提是严格的 $0 < N < 4$。单比特情形 $N = 4\sin\alpha\sin\beta$，前提等于说两侧都不共线、且两侧不同时正交；两侧都正交时 $N = 4$，落在命题之外。那时手算得 $S^2$ 的特征值为 $8, 8, 0, 0$（下一节 [@cor-fixed-chsh-tsirelson] 的证明对固定算子算出的也是这组值），$S$ 的谱为 $\{2\sqrt{2}, -2\sqrt{2}, 0\}$。
+
+::: {.figure src="ch13-spectrum"}
+**CHSH 算子的谱只随面积参数 $N$ 走。** 四条品红的曲线是 $\pm\sqrt{4 + N}$ 与 $\pm\sqrt{4 - N}$：$N = 0$ 时汇成暗色虚线上的 $\pm 2$，$N$ 增大时外侧两条张向 $\pm 2\sqrt{2}$，内侧两条收向 $0$。实心点是下例表中 $N = 1, 2, 3$ 三行的谱（$N = 3$ 处是 $\pm\sqrt{7}$ 与 $\pm 1$），落在 [@prop-chsh-four-point-spectrum] 的四个点上；两端的空心点超出命题的前提 $0 < N < 4$，$N = 0$ 由 [@cor-chsh-local-commuting-collapse] 与 $\lambda^2 = 4$ 的手工推导给出，$N = 4$ 由 [@prop-landau-area-square] 手算。
+:::
 
 ::: {.example #ex-chsh-spectrum-angle-table title="五组夹角下的面积参数 N、CHSH 谱与贝尔态上的期望值"}
 四根轴都放在 $(Z, X)$ 平面内，角度从 $Z$ 轴量起。Alice 取 $A_0 = Z$、$A_1 = \cos\alpha\,Z + \sin\alpha\,X$；Bob 取 $B_0 = Z$、$B_1 = \cos\beta\,Z - \sin\beta\,X$（向另一侧转）。手工推导：由 $[Z, X] = 2iY$ 得 $[A_0, A_1] = 2i\sin\alpha\,Y$、$[B_0, B_1] = -2i\sin\beta\,Y$，故
@@ -478,6 +488,10 @@ Bob 的两个答案只有两种关系：
 现在两端都钉住了：有限确定性局域模型的 CHSH 值出不了线段 $[-2, 2]$（[@thm-classical-chsh-bound-exact]），而固定 CHSH 算子在量子态上的期望值可以到达 $2\sqrt{2}$（[@cor-fixed-chsh-tsirelson]）。两者之比为 $\sqrt{2}$，这就是 $45^\circ$ 圆弧超出折线的倍数。需要留意各条定理的量词范围：经典一侧针对的是有限纤维集合上的确定性 $\pm 1$ 应答表；量子一侧的可达性针对的是一个固定的双比特算子，上界 $2\sqrt{2}$ 则对一切有限维幺正策略成立（[@thm-unitary-bell-bound] 取 $d = 2$）；一般形式见章末 [@rem-bell-chsh-literature]。
 
 为什么 CHSH 实验偏偏选定 $\theta = 45^\circ$ 作为对称工作角？在对称四方向设置（三段相邻夹角为 $\theta$、第四段跨越角为 $3\theta$）下，四项余弦组合为 $3\cos\theta - \cos(3\theta)$，其一阶导数 $-3\sin\theta + 3\sin(3\theta) = 0$ 恰在 $\theta = 45^\circ$（$\pi/4$）处取得全局最大值 $2\sqrt{2}$！（注意区分两个不同的优化问题：$\theta = 45^\circ$ 最大化的是四项对称 CHSH 组合 $3\cos\theta - \cos(3\theta)$；若单独考察单根弦上的差函数 $g(\theta) = \cos\theta - (1 - 2\theta/\pi)$，其逐点导数 $-\sin\theta + 2/\pi = 0$ 的极大值点在 $\theta = \arcsin(2/\pi) \approx 39.5402^\circ$ 处，单弦差约为 $0.2105$，而在对称 CHSH 工作角 $\theta = 45^\circ$ 处单弦差为 $\frac{\sqrt{2}-1}{2} \approx 0.2071$，四段累加得 $2\sqrt{2} - 2 \approx 0.8284$。）让我们通过下面的综合算例，把 $\rho_{\Phi^+}$ 与 $\rho_{\Psi^-}$ 的关联张量、四项 CHSH 期望值以及 $45^\circ$ 余弦与特定玩具模型的几何对比逐一算清。
+
+::: {.figure src="ch13-symmetric"}
+**对称四方向的组合只在 $45^\circ$ 顶到 $2\sqrt{2}$。** 横轴是相邻两方向的夹角 $\theta$，青色的曲线是贝尔态上的 $3\cos\theta - \cos(3\theta)$：从 $\theta = 0^\circ$ 的 $2$ 起步，在 $45^\circ$ 升到 $2\sqrt{2}$，约在 $68.5^\circ$ 落回 $2$，到 $90^\circ$ 降为 $0$。绿色虚线是有限确定性局域模型的上界 $2$（[@thm-classical-chsh-bound-exact]），曲线高出它的部分涂成品红；曲线上的数值按公式算出。
+:::
 
 ::: {.example #ex-bell-chsh-45deg title="贝尔态关联张量、CHSH 45° 极值 2√2 与余弦圆弧手算全表"}
 本例分三步给出双比特贝尔态与 $45^\circ$ CHSH 检验的完整手算核对表：

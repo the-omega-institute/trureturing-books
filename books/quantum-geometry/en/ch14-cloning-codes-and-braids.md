@@ -6,7 +6,9 @@ In [Chapter 13](ch13-entanglement-and-chsh.md), we saw how a two-qubit Bell stat
 
 In classical digital hardware, protecting information against noise is straightforward — **copy it**. To guard a classical bit against thermal flips, a repetition circuit duplicates $0 \mapsto 000$ and $1 \mapsto 111$ and takes a majority vote. Before quantum error correction can even begin, however, an uncompromising law of inner-product geometry bars the classical copying strategy: **an unknown quantum superposition cannot be cloned**. Since we cannot duplicate a fragile local direction line into two independent local lines, our only recourse is to evacuate logical information from local lines altogether, encoding it into multi-qubit Pauli stabilizer correlation areas and worldline braids that local noise cannot silently corrupt.
 
-![The overlap rigidity z = z² behind no-cloning; three-qubit stabilizer parity checks with mutually orthogonal syndromes; and planar exchange paths passing around each other through a third spatial axis, with the braid relation](../assets/fig-14-nocloning-stabilizer-braid.svg)
+::: {.figure src="ch14-overview"}
+**Figure 14.** The chapter at a glance. Panel I: on the real overlap slice, the cyan diagonal $y = z$ is what an isometry must output and the dim parabola $y = z^2$ is what cloning outputs; they meet only at $0$ and $1$, with a magenta gap between them. Panel II: the four syndrome rooms of the three-qubit code; the cyan code state lives in the $(+,+)$ room, the magenta $X_2$ carries it whole into the $(-,-)$ room, and the amber arrow brings it back. Panel III: in the plane, a loop around a particle (dim dashed) cannot be undone; through the violet third direction $e_3$ it can be lifted over (a sketch; literature result, not formalized in this book).
+:::
 
 ## No Cloning: Preserving an Overlap and Squaring It {#sec-no-cloning-overlap}
 
@@ -145,11 +147,19 @@ The eigenvalues and the entropy in the machine row are claims 4 and 5 of [@thm-c
 Thus, whereas exact cloning is obstructed by the $z = z^2$ criterion of [@thm-no-cloning-overlap], this approximate cloner shrinks the Bloch vector of each clone uniformly to $\frac{2}{3}$ while the machine qubit carries a reversed Bloch vector of length $\frac{1}{3}$ and an input-independent entropy of $\log_2 3 - \frac{2}{3} \approx 0.918$ bits, with the mixedness of all three marginals arising from tripartite entanglement.
 :::
 
+::: {.figure src="ch14-approx-clone"}
+**The price of approximate cloning: each clone shrinks to 2/3, and the machine carries away 1/3 the other way.** The amber point on the shell is the input $\vv{r}$; the cyan arrow is the Bloch vector $\frac{2}{3}\vv{r}$ of each clone, ending on the cyan dashed circle; the magenta arrow is the machine qubit's $-\frac{1}{3}\vv{r}$. All three vectors are computed by partial traces of the cloning isometry. Literature result, not formalized in this book; for the machine's spectrum see [@thm-cloning-machine-spectrum].
+:::
+
 ## Pauli Words and Stabilizer Syndromes {#sec-pauli-syndrome-parity}
 
 If [@thm-no-cloning-overlap] forbids duplicating an unknown superposition $\alpha\lvert 0\rangle + \beta\lvert 1\rangle$ into $(\alpha\lvert 0\rangle + \beta\lvert 1\rangle)^{\otimes 3}$, how does quantum error correction protect quantum information?
 
 The key is to **embed orthogonal basis states into a multi-body entangled subspace** — for instance extending $\lvert 0\rangle \mapsto \lvert 000\rangle$ and $\lvert 1\rangle \mapsto \lvert 111\rangle$ linearly to $\alpha\lvert 0\rangle + \beta\lvert 1\rangle \mapsto \alpha\lvert 000\rangle + \beta\lvert 111\rangle$ — and then measure only multi-body **Pauli words** that check joint parity without ever probing the single-qubit amplitudes $\alpha, \beta$!
+
+::: {.figure src="ch14-syndrome-table"}
+**The checks read which bit flipped, never $\alpha$ or $\beta$.** The four rows are the errors $I$, $X_1$, $X_2$, $X_3$; each row shows $E\lvert 000\rangle$ on the left and $E\lvert 111\rangle$ on the right, with the flipped bit outlined in magenta, and beside each string the two lamps $g_1 = Z_1Z_2$ and $g_2 = Z_2Z_3$, lit (magenta) when the reading is $-1$. The four errors light four different patterns, and within a row both strings light the same lamps: reading the lamps cannot tell $\lvert 000\rangle$ from $\lvert 111\rangle$, so it never touches $\alpha$ or $\beta$. Which lamps light is the mod-$2$ parity derived after [@lemma-pauli-word-phase] below.
+:::
 
 To formalize this algebra across arbitrary mode count $N \in \mathbb{N}$ and arbitrary local level count $p \in \mathbb{N}$ with `[NeZero p]` (note that **$p$ is not required to be prime, and $N$ may be $0$**), the source module `StabilizerGenuineEntanglementCommutationRank` defines the structure `PauliWord N p` with three fields:
 
@@ -248,6 +258,10 @@ $$
 $$
 
 By `OrthogonalSyndromes S`, $S_i^* S_j = \delta_{ij} I_d$ and $S_k^* S_i = (S_i^* S_k)^* = \delta_{ik} I_d$. For each fixed $i \in s$, every term with $j \neq i$ or $k \neq i$ vanishes, leaving only the $j = k = i$ term $\sigma_{ii}(I_d \rho I_d) = \sigma_{ii}\rho$. Summing over $i \in s$ yields $\bigl(\sum_{i \in s} \sigma_{ii}\bigr)\rho = \Tr(\sigma) \bullet \rho$. The full proof is checked by the Lean kernel.
+:::
+
+::: {.figure src="ch14-trace-survives"}
+**After decoding, only the diagonal of $\sigma$ survives.** On the left is the $4\times 4$ noise matrix $\sigma$: the four cyan diagonal cells take the values $\frac{1}{2}, \frac{1}{4}, \frac{1}{8}, \frac{1}{8}$ from step four of [@ex-repetition-code-syndrome], and the other twelve, the magenta cross-room coherences, are all struck out. The diagonal adds up to $\Tr\sigma = 1$, and decoding outputs $1 \cdot \rho = \rho$ ([@prop-orthogonal-syndrome-recovery]). With non-zero coherences, a numerical check on the three-qubit code returns the same $\rho$.
 :::
 
 Two important domain boundaries apply to [@prop-orthogonal-syndrome-recovery]:

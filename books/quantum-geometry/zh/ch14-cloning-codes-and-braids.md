@@ -6,7 +6,9 @@
 
 在经典数字电路里，对抗噪声的办法简单粗暴——**备份（克隆）**。怕一根电线上的电压被热涨落掀翻，就把比特 $0$ 复制成三份 $000$，把比特 $1$ 复制成三份 $111$，少数服从多数。然而，在踏入量子纠错的大门之前，一条铁面无私的内积几何定律当头拦住了所有照搬经典备份思路的去路：**未知量子叠加态不可克隆**。既然不能把一根脆弱的局部方向线简单复印成两根独立的局部线，我们唯一的选择就是反其道而行之——不再执着于局部的“线”，而是利用多体泡利稳定子或二维时空中的编织轨迹，把逻辑信息编码进局部噪声无法单独窥探的高维“面”与代数死结之中。
 
-![不可克隆背后的内积刚性 z = z²、三比特稳定子奇偶校验与两两正交的综合征，以及二维交换轨迹借第三条空间轴绕行的编织关系](../assets/fig-14-nocloning-stabilizer-braid.svg)
+::: {.figure src="ch14-overview"}
+**图 14。** 本章地图：面板 I，在实重叠截面上，青色的对角线 $y = z$ 是保内积要求的输出，暗色的抛物线 $y = z^2$ 是克隆给出的输出，两者只在 $0$ 与 $1$ 相交，中间夹着品红的缺口；面板 II，三比特码的四间综合征房间，青色的码态住在 $(+,+)$ 那间，品红的 $X_2$ 把它整个搬进 $(-,-)$ 那间，琥珀色的箭头把它翻回；面板 III，平面里绕着一颗粒子的回路（暗色虚线）解不开，借紫色的第三方向 $e_3$ 可以把它抬过去（示意；文献结果，未在本书形式化）。
+:::
 
 ## 不可克隆：保内积与平方内积 {#sec-no-cloning-overlap}
 
@@ -145,11 +147,19 @@ Lean 模块 `D5/S3/Quantum/CloningMachine` 直接把这一候选机器约化态�
 由此可见，精确克隆受 [@thm-no-cloning-overlap] 的 $z = z^2$ 判据阻断；而在上述近似克隆方案中，每个克隆体的布洛赫矢量均匀收缩到 $\frac{2}{3}$，机器比特则携带着长度为 $\frac{1}{3}$ 的反向布洛赫矢量与输入方向无关的熵 $\log_2 3 - \frac{2}{3} \approx 0.918$ 比特，三个边缘态的混合度均源于三体纯态纠缠。
 :::
 
+::: {.figure src="ch14-approx-clone"}
+**近似克隆的代价：克隆体缩到 2/3，机器反向带走 1/3。** 琥珀色的点是球皮上的输入 $\vv{r}$；青色的箭头是每个克隆体的布洛赫矢量 $\frac{2}{3}\vv{r}$，落在青色虚线圆上；品红的箭头是机器比特的 $-\frac{1}{3}\vv{r}$。三个矢量由克隆等距求偏迹算出。文献结果，未在本书形式化；机器比特的谱见 [@thm-cloning-machine-spectrum]。
+:::
+
 ## Pauli 字与稳定子综合征 {#sec-pauli-syndrome-parity}
 
 既然 [@thm-no-cloning-overlap] 禁止我们把任意未知叠加态 $\alpha\lvert 0\rangle + \beta\lvert 1\rangle$ 复制成 $(\alpha\lvert 0\rangle + \beta\lvert 1\rangle)^{\otimes 3}$，量子纠错码究竟靠什么施展魔法？
 
 诀窍在于：**不复制整个叠加态，而是只把正交基嵌入多体纠缠空间**（例如将 $\lvert 0\rangle \mapsto \lvert 000\rangle$、$\lvert 1\rangle \mapsto \lvert 111\rangle$ 线性延拓为 $\alpha\lvert 0\rangle + \beta\lvert 1\rangle \mapsto \alpha\lvert 000\rangle + \beta\lvert 111\rangle$），然后不再测量任何会暴露 $\alpha, \beta$ 的局部单比特方向线，而是专门测量多体**泡利字（Pauli words）**的联合奇偶校验面！
+
+::: {.figure src="ch14-syndrome-table"}
+**校验读出错在哪一位，读不出 $\alpha$、$\beta$。** 四行依次是错误 $I$、$X_1$、$X_2$、$X_3$；每行左边是 $E\lvert 000\rangle$，右边是 $E\lvert 111\rangle$，被翻的那一位描成品红；每串旁的两盏灯是 $g_1 = Z_1Z_2$ 与 $g_2 = Z_2Z_3$，亮起（品红）表示读数 $-1$。四种错误亮四组不同的灯；同一行左右两串亮的灯一样，所以读灯分不出 $\lvert 000\rangle$ 与 $\lvert 111\rangle$，也就碰不到 $\alpha$、$\beta$。灯亮不亮的规则是下文 [@lemma-pauli-word-phase] 之后的模 $2$ 奇偶。
+:::
 
 为了在任意有限模式数 $N \in \mathbb{N}$ 与任意局部能级数 $p \in \mathbb{N}$（满足非零条件 `[NeZero p]`；注意此处 **$p$ 未要求是素数，且 $N$ 允许为 $0$**）的一般框架下刻画这套代数，源码模块 `StabilizerGenuineEntanglementCommutationRank` 定义了 $N$ 模式模 $p$ 泡利字结构 `PauliWord N p`，包含三个字段：
 
@@ -248,6 +258,10 @@ $$
 $$
 
 由前提 `OrthogonalSyndromes S`，左侧内积满足 $S_i^* S_j = \delta_{ij} I_d$，右侧内积满足 $S_k^* S_i = (S_i^* S_k)^* = \delta_{ik} I_d$。因此在固定 $i \in s$ 时，所有 $j \neq i$ 或 $k \neq i$ 的项全部乘以零矩阵而消失，唯独 $j = i$ 且 $k = i$ 的对角项幸存为 $\sigma_{ii} (I_d \rho I_d) = \sigma_{ii} \rho$。对全体 $i \in s$ 求和，即得 $\bigl(\sum_{i \in s} \sigma_{ii}\bigr)\rho = \Tr(\sigma) \bullet \rho$。完整证明由 Lean 内核检查。
+:::
+
+::: {.figure src="ch14-trace-survives"}
+**解码之后，$\sigma$ 只剩对角线。** 左边是 $4\times 4$ 的噪声矩阵 $\sigma$：对角线上青色的四格取例 [@ex-repetition-code-syndrome] 第四步的 $\frac{1}{2}, \frac{1}{4}, \frac{1}{8}, \frac{1}{8}$，其余十二格是品红的跨房间相干项，全部划掉。四个对角数相加得 $\Tr\sigma = 1$，解码输出 $1 \cdot \rho = \rho$（[@prop-orthogonal-syndrome-recovery]）。相干项取非零值时，在三比特码上的数值核对给出同一个 $\rho$。
 :::
 
 [@prop-orthogonal-syndrome-recovery] 的代数结构干净得令人赞叹，在应用时需把握两条精确边界：
