@@ -247,7 +247,7 @@ $$
 现在再看惠勒的“延迟选择实验”，哪里还有半点“现在的测量窜改了光子几亿年前是粒子还是波的历史”的玄学惊悚？
 
 ::: {.example #ex-wheeler-delayed-choice-tradeoff title="双路径干涉仪与惠勒延迟选择的三档角度（α = 0, π/3, π/2）定量账本"}
-设双路径干涉仪中系统初态为等权叠加 $\frac{1}{\sqrt{2}}(\lvert 0\rangle + \lvert 1\rangle)$，与环境记录态耦合为 $\frac{1}{\sqrt{2}}(\lvert 0\rangle\otimes\lvert r_L\rangle + \lvert 1\rangle\otimes\lvert r_R\rangle)$，其中两单位记录态夹角为 $\alpha \in [0, \pi/2]$，即 $c = \langle r_L, r_R\rangle = \cos\alpha$。忽略环境后的单比特约化密度矩阵为
+设双路径干涉仪中系统初态为等权叠加 $\frac{1}{\sqrt{2}}(\lvert 0\rangle + \lvert 1\rangle)$，与环境记录态耦合为 $\frac{1}{\sqrt{2}}(\lvert 0\rangle\otimes\lvert r_L\rangle + \lvert 1\rangle\otimes\lvert r_R\rangle)$。对下方实矩阵例，取两单位环境记录态的重叠为实且非负的 $c = \langle r_L, r_R\rangle = \cos\alpha$，其中 $\alpha \in [0, \pi/2]$；这是等权、理想平衡合束并扫描参考相位的模型。忽略环境后的单比特约化密度矩阵为
 
 $$
 \rho(\alpha) = \frac{1}{2}\begin{pmatrix} 1 & \cos\alpha \\ \cos\alpha & 1 \end{pmatrix}.
