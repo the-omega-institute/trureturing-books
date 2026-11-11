@@ -1,6 +1,6 @@
 # quantum-geometry 内容准确性覆盖与证据
 
-正文核对日期：2026-11-11；记录更新：2026-11-12。中文为权威，英文逐段对照。中英 SUMMARY 共 35 个单元：历史正文内容覆盖为 9/35，其中序曲和第 1 章已独立复审并合入，第 2–4 章的 R1 确认阻断项已修复并通过 R2 三席独立复审且已合入 PR #62；第 5–8 章的旧正文候选 `bf2ed70` 已完成双语全文重审、13 项最小修复并通过 R1 三席复审。PR #90 当前候选为 `HEAD=1d4199c` 加调用方未提交的 `MERGE_HEAD=f04b285` 合并及本轮终章依赖图修复；下文七类媒体问题的未变依赖证据保留，终章新输出验证已完成，两份序曲过期 SVG 也已按现有脚本重生成，全仓源码检查为 0 错误、0 警告，当前源码与已验证输出副本已逐字对应；最终提交对应和 R2 仍待调用方完成，新增媒体尚无独立批准；其余 26 个单元尚未全文核对。本次记录更新不增加内容覆盖。上游新图、实验卡、视频及图注（包括此前已合入单元中的新增媒体）均不继承历史批准。本记录区分内容证据、输出验收与合入状态。各轮候选与输出基线分别保留在下文。
+正文核对日期：2026-11-11；记录更新：2026-11-12。中文为权威，英文逐段对照。当前中英 SUMMARY 为 37 个出版单元；原目标的 35 单元审计集合保持不变，新增第 31–32 章只作出版依赖，未计为已审。历史正文覆盖仍为 9/35，其余 26 单元尚未取得全文内容批准；第 21–24 章的源码核对与九类修复现处于待初始独立复审状态，不增加批准数，第 23 章正文未改。各历史批次的审查、输出和集成对应分别保留在下文；不能把旧候选的整书输出称为当前产物，也不能让新增媒体继承历史批准。本次集成验证输入为 `c64e38d8f9a1010ed8fdffddc960e3fa376a5d69`（含官方主线 `504d746`），实际检查及未关闭的截图检查限制见本页末尾的集成记录；本次仅更新工程台账，独立审查、PR/CI 跟进、合入与 Pages 仍由调用方负责。
 
 ## 全书覆盖
 
@@ -29,10 +29,10 @@
 | 18 | ch18-spinors-and-gauge-curvature.md | 待核对 | — |
 | 19 | ch19-tensor-networks-and-holography.md | 待核对 | — |
 | 20 | ch20-complexity-and-spacetime.md | 待核对 | — |
-| 21 | ch21-diagonalization-and-escape.md | 已修复，待独立复审 | 本轮 F1–F2；当前候选 8ca77e |
-| 22 | ch22-primes-euler-products-and-zeros.md | 已修复，待独立复审 | 本轮 F3；当前候选 8ca77e |
+| 21 | ch21-diagonalization-and-escape.md | 已修复，待独立复审 | F1–F2；集成输入 c64e38d，历史输入 8ca77e |
+| 22 | ch22-primes-euler-products-and-zeros.md | 已修复，待独立复审 | F3；集成输入 c64e38d，新增主线定理按依赖核对 |
 | 23 | ch23-diophantine-definability.md | 仅共享媒体修复，待独立复审 | 本轮 F8–F9；正文未改 |
-| 24 | ch24-cosine-fixed-points-and-self-reference.md | 已修复，待独立复审 | 本轮 F4–F7；当前候选 8ca77e |
+| 24 | ch24-cosine-fixed-points-and-self-reference.md | 已修复，待独立复审 | F4–F7；集成输入 c64e38d，实际总结为 44 条 |
 | 25 | ch25-rewriting-and-xor.md | 待核对 | — |
 | 26 | ch26-single-qubit-rotor-compilation.md | 待核对 | — |
 | 27 | ch27-reading-frozen-proofs-i.md | 待核对 | — |
@@ -588,9 +588,9 @@ EPUB 浏览器预览不等于 Apple Books 原生主题验收，尚未导入 Appl
 
 本次只更新本台账，最终摘要在交付 JSON 中记录；正文、作者题记、ID/GID、媒体顺序、锁、Lean、托管文件、工具、运行时和技能全部保留。未委派或执行 Git/GitHub 生命周期操作；没有开启新批次或终止全目标。**最终候选与此台账补丁的对应、独立 R4、PR #90 的 CI、合入与 Pages 仍由调用方完成。**
 
-## ch21–24 内容准确性最小修复（8ca77e2，待独立复审）
+## ch21–24 首次实施的历史证据（8ca77e2，待独立复审）
 
-本轮输入为 `8ca77e2f381d189607a1c2ee8f3c1431f0d8f8a2`，工作目标为 ch21–24 双语正文及其已引用的三个共享实验室。`/tmp/qg-accuracy-resume-20261112/ch21-ch24-current-correspondence-8ca77e2.json` 证明当前候选的 168 个原始出版/媒体/锁路径与准备好的 `61c43de` 输入逐字相同；`...-61c43de.json` 记录原 439 条锁记录、pin `1d9bf98cab8306e67ec38a739359f2cdae63877a` 与工具/主题/配置未变，唯一新增锁项为与本批无关的 Birkhoff 条目。它们是输入对应证据，不是最终批准或输出验收。
+首次实施的历史输入为 `8ca77e2f381d189607a1c2ee8f3c1431f0d8f8a2`，工作目标为 ch21–24 双语正文及其已引用的三个共享实验室。`/tmp/qg-accuracy-resume-20261112/ch21-ch24-current-correspondence-8ca77e2.json` 证明该输入的 168 个原始出版/媒体/锁路径与准备好的 `61c43de` 输入逐字相同；`...-61c43de.json` 记录原 439 条锁记录、pin `1d9bf98cab8306e67ec38a739359f2cdae63877a` 与工具/主题/配置未变，唯一新增锁项为与本批无关的 Birkhoff 条目。以下构建记录仅归属 `8ca77e2` 加首次修复补丁，不能代表集成 `504d746` 后的整书输出，也不是独立批准。
 
 确认并作最小双语修复的九个家族：F1 拆开 Gödel/Tarski 前提；F2 将角亏图注限定为正二十面体顶点；F3 将完备 ζ 的“全纯延拓”改为“亚纯延拓”；F4 将余弦有限步不到达限定到显示起点/`[0,1]` 有理起点并保留全局收敛；F5 只对余弦曲线端点给楔形界；F6 将 `e → 1` 限定为束缚椭圆的零角动量退化极限；F7 更正余弦导数符号；F8 把偶周期限制为目标值 `±1` 中只出现 `+1`；F9 删除未实现的 `d ≤ 37` 三角形目录声称。ch23 正文未改，只有其共享 Pell/同余数媒体说明按 F8–F9 修复。作者题记、稳定 ID、GID、形式块边界、媒体顺序、Film006 源码、锁文件、Lean、托管文件、工具和主题均未改。
 
@@ -598,9 +598,9 @@ EPUB 浏览器预览不等于 Apple Books 原生主题验收，尚未导入 Appl
 
 | 本轮检查 | 结果与边界 |
 | --- | --- |
-| 内容/源码核对 | 当前候选复读 F1–F9 的双语稳定位置；ch21/ch22/ch24 正文与 ch23 共享媒体逐项对照。未新增 Lean、未刷新锁，也未把未核对的 31–32 章计入原 35 单元覆盖。 |
+| 内容/源码核对 | 历史 `8ca77e2` 加补丁复读 F1–F9 的双语稳定位置；ch21/ch22/ch24 正文与 ch23 共享媒体逐项对照。未新增 Lean、未刷新锁，也未把未核对的 31–32 章计入原 35 单元覆盖。 |
 | 实验室浏览器与静态图 | 直接命令行 Claude CLI 运行三个变更实验室的普通/`VIZ_SLOW_FRAMES=1000` 套件：sphere 105/105、fixed-point 114/114、Pell 95/95，两个帧率均全通过；官方 `viz-shots` 写出 21 张双语四视图 PNG，`viz-thumbs` 写出 47 张 JPEG 后逐张抽看。静态舞台几何未变，跟踪 JPEG 已恢复，完整记录见 `build/content-accuracy/repair-ch21-ch24-20261112/viz-validation.json`。 |
-| 出版输出 | 当前候选 `TBOOK_CACHE=0 ./tbook build html pdf epub site --book quantum-geometry` 成功；中英 HTML、四版 PDF（zh 775/807 页，en 817/845 页）、两版 EPUB 与 site 均生成。`./tbook check` 为 0 错误/0 警告；中英 × dark/light × desktop/mobile 的 32 个改动章页面组合均 HTTP 200、无页面/控制台错误、无图片错误或整页横溢，变更文本均出现。四版 PDF 的 16 个变更段页已渲染查看，六份 EPUB XML 均可解析且改动文本存在；两份 EPUBCheck 5.3.0 均 valid、0 错误、0 警告（`epubcheck.json`、`pdf-epub-check.json`、`browser-check.json`）。当前 `ignore_system_fonts=True`/本地受控字体证据不等同默认 CI；Noto CJK SC 缺失、已知 EPUB 手机溢出/未知字体限制仍保留。 |
+| 历史出版输出 | `8ca77e2` 加补丁的 `TBOOK_CACHE=0 ./tbook build html pdf epub site --book quantum-geometry` 成功；中英 HTML、四版 PDF（zh 775/807 页，en 817/845 页）、两版 EPUB 与 site 均生成。`./tbook check` 为 0 错误/0 警告；中英 × dark/light × desktop/mobile 的 32 个改动章页面组合均 HTTP 200、无页面/控制台错误、无图片错误或整页横溢，变更文本均出现。四版 PDF 的 16 个变更段页已渲染查看，两份 EPUB 的 XML 均可解析且改动文本存在；两份 EPUBCheck 5.3.0 均 valid、0 错误、0 警告（`epubcheck.json`、`pdf-epub-check.json`、`browser-check.json`）。当前 `ignore_system_fonts=True`/本地受控字体证据不等同默认 CI；Noto CJK SC 缺失、已知 EPUB 手机溢出/未知字体限制仍保留。 |
 | 生命周期 | 本轮无暂存、提交、合并、变基、贮藏、推送、PR、CI 或 Pages 操作。架构/质量/测试三席独立复审、PR/CI/Pages 及最终覆盖台账由调用方负责；原 35 单元仍未批准，当前仅留下 ch21–24 的“修复待复审”状态。 |
 
 ## PR90 R4 复审与 61c43de 集成对应
@@ -610,6 +610,27 @@ EPUB 浏览器预览不等于 Apple Books 原生主题验收，尚未导入 Appl
 三席终态收齐后，调用方无冲突整合官方主线 `61c43de7517e77bc23357374fd907a65cb3291b6`，集成提交为 `11afeaf05a048d8fd37df38625564dfd6a829c4c`。本批正文、四实验室、技能、工具/主题与相关配置共 226 个路径逐字节不变；锁的原 439 条记录逐项相同，pin 不变，仅主线增加 Birkhoff 定理一条。另有终章、附录 C 和派生计数/声明图的 28 个上游变化路径；它们不继承本批内容批准。此对应支持本批 R4 结论在未变依赖内沿用，不产生额外整书审查或新的实施额度。
 
 集成后新跑 `./tbook check`：1 本可见书、0 错误/0 警告；150 个图脚本时效性检查为 0 过期/0 错误；关闭缓存的中英 HTML 构建均通过。当前站点和声明图检查、集成候选 CI、合入与 Pages 尚待调用方核对。`ac508fe` 输入的四 PDF/两 EPUB 仍保留其历史归属，不能冒称包含本次终章增量的新整书产物；最终 CI 应构建集成输入。受控字体与默认 macOS/CI 不等价、原生 Books/设备和完整音视频未验收等限制继续保留。历史正文覆盖仍为 9/35，其余 26 单元继续待办。
+
+## ch21–24 最后一次实施检查：集成 official504（c64e38d）
+
+本次输入为 `c64e38d8f9a1010ed8fdffddc960e3fa376a5d69`，分支 `fix/content-accuracy-ch21-ch24-20261112`，已含官方主线 `504d7468e87214892faf0f6fadfe4724a42ef205`。首次修复封存为 `2a65d60d70cdfd83ca5bb1f2b133bfc0bed25d66`；四份 ch22/ch24 双语修复的补丁内容在集成中保留，原改动集合仍恰为 14 路径。本次唯一跟踪文件写入是本工程台账；正文、技能和媒体均未再改。以下证据根目录为 `build/content-accuracy/integration-ch21-ch24-c64e38d/`，输入及最终改动摘要分别保存在 `input-tracked-sha256.json` 与 `final-changed-paths-sha256.json`。
+
+**实施额度为原总数 2，已用 2，剩余 0；没有重置。** 本次完成有限的集成检查与证据交付，未作或委派独立审查。超出原九类问题的修复须由调用方另行裁定，不能因构建或 CI 通过而自行扩展。
+
+| 本次实际工作 | 结果、复用边界与证据 |
+| --- | --- |
+| 输入、风格及源码不变量 | 四章中英环境/ID/GID/标题/题记/媒体顺序与集成官方基线相同，双语序列一致；原九类事实修复保留。锁文件逐字等于 official504：pin 仍为 `1d9bf98cab8306e67ec38a739359f2cdae63877a`，原 440 项不变，仅继承新的彩色分拆定理一项。未写 Lean、锁、工具、主题或托管文件。见 `chapter-structure.json`、`dependency-correspondence.json`、`reuse-record.json`。 |
+| 新 ch22 与 ch24 上下文 | 新定理/证明、福克态解释、数表及文献段与已完成的 official504 有限源码核对逐字对应；本次另读精确 pin 的 `ColouredEulerLedger`、Frozen 状态片及底层 Euler 对象。任意自然数颜色数（含零）、正部件大小、空分拆的零次项与有限类型基数相符，证明对应独立 Sigma/Pi/Sym 计数及逐系数乘积极限。重新用乘积展开和模式占据数递归核对 33 个系数及零颜色边界，并核对四行 Hardy–Ramanujan 精确值/舍入。MacMahon、Hardy–Ramanujan 与 Julia/Spector 的既有有限文献证据只按相同文本复用，未声称取得后两篇全文。福克迹未固定粒子总数，守恒粒子气体的正则/巨正则术语区别仍为既有建议；手工物理解读不升级为形式化结果。见 `sources/`、`delta-math.json`。 |
+| 当前计数与派生产物 | 按原生成器规则独立复算：441 条锁声明为 theorem 310、def 123、inductive 8；正式环境 186、原规则的文献环境 127、开放环境 6。第六部为 7+19+4+14=44，实际 ch24 总结正确。33 根章柱合计 264、索引 229 行，最高 ch22 为 35；声明图临时重生成后与源码逐字相同。150 图脚本为 0 过期/0 错误，300 份图 SVG 的 XML/内部引用有效；没有改断言、计数规则或来源来使检查通过。见 `derived-counts.json`。 |
+| 三实验室及 Film006 对应 | 相对首次封存，225 份相关工具、运行时、测试、包配置、三实验室源码/全部静态图及 Film006 四文件依赖逐字不变；各文件 SHA-256 明列在 `dependency-correspondence.json`、`reuse-record.json`。原普通/慢帧 sphere 105/105、fixed-point 114/114、Pell 95/95，以及 21 PNG/47 JPEG 检查仅在该边界内复用，不冒称重跑或新生成。Film006 的源码与海报对应当前来源，未取得完整视频、音频或字幕同步验收。声明图因继承新数据另经直接命令行执行原套件，报告 91/91；调用与终端结果见 `direct-cli-invocation.json`、`direct-cli-result.json`。 |
+| 当前源码和构建 | 新跑 `./tbook check`：1 本可见书，0 错误/0 警告。关闭缓存重建中英 HTML；通过现有导出函数从实际 37 单元重建四 PDF（zh screen/print 777/809 页；en 820/847 页）及两 EPUB；两份 EPUBCheck 5.3.0 均 valid、0 错误/0 警告、未跳过。PDF 使用 `ignore_system_fonts=True` 与现有字体目录，不能证明默认系统或 CI 字体等价。实际输入、字体/工具版本、产物哈希见 `current-exports.json`、`fonts.json`、`tool-versions.json`。 |
+| 当前 PDF / EPUB 实际查看 | 四 PDF 共 48 个受影响页已渲染查看并做源码泄漏/页外文字扫描，涵盖新定理的跨页证明、两表、福克解释、修订声明及 44 条总结，无可见裁切或重叠。两 EPUB 各 55 份 XML 可解析；按包内 XHTML/样式做中英、深浅偏好、桌面/手机共 24 视图，实际表格数值完整。手机窄公式/表格溢出是已保留的提取 EPUB 限制，不能当作原生 Apple Books 的验收。见 `export-inspection.json`、`pdf-inspection-record.json`、`epub-browser.json` 及对应图像。 |
+| 当前 HTML / site 实际查看 | `TBOOK_FILMS=skip ./tbook build site --book quantum-geometry` 成功，8 视频均为海报回退；既有站点链路同时生成演示文稿，不计为文稿审查。通过 `./tbook serve --port 8892` 检查四章中英 × navy/light × 桌面/手机 32 组合，均 HTTP 200、0 KaTeX/坏图/整页横溢，修订文字与两表存在；手机公式和表格可通过原滚动容器读到末端。**初次截图检查整体失败**，原因见下段，不能写成 32 组合全绿。8 个章节发布页、12 个实验室发布文件和六份下载逐一等于当前来源经既有转换后的字节，见 `site-correspondence.json`、`chapter-browser.json`、`ch22-normal-view.json`。 |
+| CI 的只读状态证据 | 本次只读查询 PR127 与其运行元数据；push CI `43119756125` 在精确 c64e38d 上成功，包含 Check/工具测试、构建及四组浏览器作业；PR 运行 `43119825726` 在记录时尚未全部终态。PR merge 源 `0db9666` 与 c64e38d 的树均为 `6ed77e7483efc9e55fd91d212848372121a9d1fa`。本地构建开始时下载附件尚不可用，故本轮未下载或冒称检查 CI 产物；CI 状态不是内容批准。见 `ci-readonly-metadata.json`。 |
+
+**未关闭的检查限制。** 初次对 ch22 长例子 `#ex-coloured-partitions-small` 做整块元素截图时，8 个组合均触发 `sphere-escape/main.js:177` 的 Canvas 负半径异常 `-89.4118`。逐步定位显示，普通滚动到定理/例子未报错，异常只在长例子的元素截图阶段出现；普通与减少动效的导航探针无错误，后续固定视口截图/滚动的 8 个 ch22 组合亦无错误。源码半径公式在舞台高度为零时给出相同负值，但本轮未把这一推断当作完整根因证明。原失败、堆栈、定位步骤和成功探针分别保留在 `chapter-browser.json`、`browser-blocker-isolate.json`、`browser-blocker-probe.json`、`ch22-normal-view.json`；没有修改几何、控制范围、运行时或源码，也未隐藏失败或宣布该限制已修复。剩余额度为 0，后续是否构成需修复的出版检查阻断由调用方裁定。
+
+原 35 单元仍未完成；历史 9/35 与其余 26 单元的待办身份保持，第 21–24 章待初始 architecture/quality/tests R1，第 23 章未改正文也须接受独立审查。新增 31–32 只作依赖，已知的其他附录/演示消费者队列不在本补丁中重复处理。调用方仍需封存本次元数据并核对候选对应、裁定上述检查限制、完成 R1/后续复审及 PR127 最终 CI、合入和 Pages。本地受控字体、可选 Noto CJK SC 缺失、实验室固定夜色、提取 EPUB 窄屏溢出、原生 Books/设备及完整视频/音频/字幕限制继续保留。没有独立批准或全目标完成结论。
 
 [par-src]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/QuantumContext/ParallelogramNormLaw.lean#L22
 [par-frozen]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/Golden/Frozen/state/D5/S3/QuantumContext/ParallelogramNormLaw.lean.json
