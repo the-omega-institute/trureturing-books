@@ -533,10 +533,10 @@ that is, after seventeen steps and two full turns the orbit is only $0.1102^\cir
 | $10^4$ | $+0.000188$ | $+0.019479$ | $1$ |
 | $10^5$ | $-0.000006$ | $-0.003332$ | $1$ |
 
-The average of $f_1$ tends to $0$ quickly: the geometric sum gives the bound $\frac{1}{N\lvert\sin(\theta^*/2)\rvert} \approx \frac{2.77}{N}$. The average of $f_{17}$ hardly moves for a long time: it is sensitive exactly to the seventeen-step near-closure, the corresponding bound is $\frac{1}{N\lvert\sin(17\theta^*/2)\rvert} \approx \frac{1040}{N}$, and only for $N$ much larger than $1040$ does it become visible that the orbit has not closed. If the angle is replaced by $2\pi\cdot\frac{2}{17}$, which is commensurable with $\pi$, the orbit has only seventeen points and the average of $f_{17}$ is $1$ forever, not the Haar average: the irrationality hypothesis of [@lem-irrational-rotation-equidistribution] cannot be dropped.
+The average of $f_1$ tends to $0$ quickly: the geometric sum gives the bound $\frac{1}{N\lvert\sin(\theta^*/2)\rvert} \approx \frac{2.77}{N}$. The average of $f_{17}$ hardly moves for a long time: it is sensitive exactly to the seventeen-step near-closure, the corresponding bound is $\frac{1}{N\lvert\sin(17\theta^*/2)\rvert} \approx \frac{1040}{N}$, and only for $N$ much larger than $1040$ does the average come close to the Haar average $0$. If the angle is replaced by $2\pi\cdot\frac{2}{17}$, which is commensurable with $\pi$, the orbit has only seventeen points and the average of $f_{17}$ is $1$ forever, not the Haar average: the irrationality hypothesis of [@lem-irrational-rotation-equidistribution] cannot be dropped.
 :::
 
-Within a thousand steps, the orbit with step $\theta^*$ looks almost indistinguishable from a regular heptadecagon; equidistribution shows itself only on a longer time scale. An observer with finitely many steps sees a closed polygon; the whole circle appears only in the limit of infinitely many.
+Within a hundred steps, the orbit with step $\theta^*$ looks almost indistinguishable from a regular heptadecagon; equidistribution shows itself only on a longer time scale. An observer with finitely many steps sees a closed polygon; the whole circle appears only in the limit of infinitely many.
 
 ## 24.6 "Is $\pi$ a Projection of $\theta$?": Two Mutually Inverse Series, Kepler's Equation, and Half-Time Free Fall {#sec-ch24-6}
 
@@ -745,8 +745,8 @@ The series $B$ and the identity $\theta^* = B(\pi)$ are described by Kaplan (200
 | $5$ | $3.1239947$ | $1.76\times10^{-2}$ | $0.7400446$ | $9.59\times10^{-4}$ |
 | $7$ | $3.1347505$ | $6.84\times10^{-3}$ | $0.7392582$ | $1.73\times10^{-4}$ |
 | $9$ | $3.1387490$ | $2.84\times10^{-3}$ | $0.7391185$ | $3.33\times10^{-5}$ |
-| $11$ | $3.1403573$ | $1.24\times10^{-3}$ | $0.7390918$ | $6.71\times10^{-6}$ |
-| $21$ | $3.1415655$ | $2.72\times10^{-5}$ | $0.7390851363$ | $3.11\times10^{-9}$ |
+| $11$ | $3.1403573$ | $1.24\times10^{-3}$ | $0.7390918$ | $6.70\times10^{-6}$ |
+| $21$ | $3.1415655$ | $2.72\times10^{-5}$ | $0.7390851363$ | $3.10\times10^{-9}$ |
 
 The ratio of successive terms of $A$ tends to $(\theta^*)^2 \approx 0.546$. The ratio of successive nonzero terms of $B$ rises from $0.12$ (order $5$) to $0.22$ (order $21$) and numerically approaches $1/4$: reading $\theta^*$ from $\pi$ converges faster than reading $\pi$ from $\theta^*$.
 :::
@@ -786,7 +786,7 @@ Half the time is spent, yet less than one sixth of the distance is covered: the 
 
 ## 24.7 Where the Chase Stops: A Diagonal Landing Is a Fixed Point, and Existence Without Contraction {#sec-ch24-7}
 
-The chapter opened with a question: how can the chase of "spheres beyond spheres" from [Chapter 21](ch21-diagonalization-and-escape.md) ever come to a halt? The preceding sections answered one special case by contraction ($\cos$ squeezes the interval smaller and smaller) and another by enumeration ($1 + 1/x$ is the only live binary fractional map). But the line $\psi = \psi(\psi)$ says something more general: **self-application by itself produces fixed points**. Does this sentence have a precise form that depends on no particular function? It does, and it is already frozen in Lean.
+The chapter opened with a question: how can the chase of "spheres beyond spheres" from [Chapter 21](ch21-diagonalization-and-escape.md) ever come to a halt? The preceding sections answered one special case by contraction ($\cos$ squeezes the interval smaller and smaller) and another by enumeration ($1 + 1/x$ and its conjugate $1/(1+x)$ are the only two live binary fractional maps). But the line $\psi = \psi(\psi)$ says something more general: **self-application by itself produces fixed points**. Does this sentence have a precise form that depends on no particular function? It does, and it is already frozen in Lean.
 
 The setting has only three ingredients: a set of addresses $A$, a set of values $Y$, and a **listing** $g : A \to A \to Y$, which assigns to each address $a$ a row $g\ a : A \to Y$. Take in addition a **twist** $f : Y \to Y$. Twisting the diagonal $a \mapsto g\ a\ a$ of the listing pointwise yields a new row $a \mapsto f(g\ a\ a)$. Every escape phenomenon of Chapter 21 comes from one question: is this twisted diagonal one of the rows already in the listing?
 

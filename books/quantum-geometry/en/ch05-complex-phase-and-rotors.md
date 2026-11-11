@@ -162,7 +162,7 @@ Claim 1 is the path-lifting property of covering maps (Mathlib's `liftPath_lifts
 Translated back into the language of rotors (the dictionary below is a manual derivation):
 
 - **Claim 3.** Turning an object continuously through one full turn about a fixed axis carries the rotor from $1$ to $-1$. This agrees with $R(2\pi) = -1$ but says more: by the uniqueness in Claim 1, any continuous rotor history with the same starting point that induces the same rotation history is the same history. A rotor is determined by the **history** of the rotation, not by where the rotation ends.
-- **Claim 2.** There is no global formula converting "angle of rotation" into "rotor" continuously. Any rule that assigns one rotor to each rotation must jump somewhere on the circle. The half angle is not a blemish of notation.
+- **Claim 2.** There is no global formula converting a rotation (the angle taken modulo $360^\circ$) into a rotor continuously. Any rule that assigns one rotor to each rotation must jump somewhere on the circle. The half angle is not a blemish of notation.
 - **Two full turns.** The loop $t \mapsto e^{4\pi i t}$ lifts to $t \mapsto e^{2\pi i t}$ (it is continuous, squares correctly and starts at $1$, so uniqueness in Claim 1 applies), which ends at $+1$. Only after $720^\circ$ is the rotor restored.
 
 ::: {.example #ex-rotor-two-turns title="Angles from 0° to 720°: the Rotation Goes Around Twice, the Rotor Only Once"}

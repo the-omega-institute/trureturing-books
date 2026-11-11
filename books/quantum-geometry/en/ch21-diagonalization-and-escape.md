@@ -244,15 +244,15 @@ $\exp z$ is the sum of the series $\sum_k z^k/k!$ (`NormedSpace.exp_series_hasSu
 
 Apply [@lem-exp-tail-le] to two concrete algebras (the two substitutions below are manual remarks of this book):
 
-- Take $A = \mathbb{C}$, $z = i\theta$, $n = 2N$. The real part of the partial sum $\sum_{k<2N}(i\theta)^k/k!$ is exactly the even cosine polynomial with $N$ terms, and the absolute value of the real part of a complex number is at most its modulus, so $\lvert R_{2N}(\theta)\rvert \le \frac{\lvert\theta\rvert^{2N}}{(2N)!}\,e^{\lvert\theta\rvert}$. Compared with the Lagrange bound it carries an extra factor $e^{\lvert\theta\rvert}$; what it buys is kernel verification.
+- Take $A = \mathbb{C}$, $z = i\theta$, $n = 2N$. The real part of the partial sum $\sum_{k<2N}(i\theta)^k/k!$ is exactly the even cosine polynomial with $N$ terms, and the absolute value of the real part of a complex number is at most its modulus, so $\lvert R_{2N}(\theta)\rvert \le \frac{\lvert\theta\rvert^{2N}}{(2N)!}\,e^{\lvert\theta\rvert}$. Compared with the Lagrange bound it carries an extra factor $e^{\lvert\theta\rvert}$; what it buys is that it is a direct substitution into a kernel-verified lemma (the two substitution steps themselves are manual).
 - Take $A = M_2(\mathbb{C})$ (operator norm) and $z = -\frac{i\theta}{2}\,\vv{n}\cdot\vv{\sigma}$ with $\vv{n}$ a unit vector, so that $\lVert z\rVert = \frac{\lvert\theta\rvert}{2}$. The $n$-term truncation of the rotor $U = \exp z$ satisfies $\bigl\lVert U - \sum_{k<n} z^k/k!\bigr\rVert \le \frac{(\lvert\theta\rvert/2)^n}{n!}\,e^{\lvert\theta\rvert/2}$.
 
-::: {.example #ex-taylor-remainder-three-bounds title="Truncation Remainders of the Cosine and of a Rotor: Actual Value, Lagrange Bound, and Verified Bound"}
+::: {.example #ex-taylor-remainder-three-bounds title="Truncation Remainders of the Cosine and of a Rotor: Actual Value, Lagrange Bound, and the Bound from the Verified Lemma"}
 (The middle-column Lagrange bound $\frac{(\theta^*)^{2N}}{(2N)!}$ is a **literature result, not formalized in this book**, see [@rem-lagrange-taylor-remainder-literature]; the right-hand column instantiates the frozen lemma [@lem-exp-tail-le].)
 
 **Cosine at $\theta = \theta^* \approx 0.739085$ (the cosine fixed point of Chapter 24).**
 
-| $N$ | actual remainder $\lvert R_{2N}(\theta^*)\rvert$ | Lagrange bound $\frac{(\theta^*)^{2N}}{(2N)!}$ | verified bound $\frac{(\theta^*)^{2N}}{(2N)!}\,e^{\theta^*}$ |
+| $N$ | actual remainder $\lvert R_{2N}(\theta^*)\rvert$ | Lagrange bound $\frac{(\theta^*)^{2N}}{(2N)!}$ | bound from the verified lemma $\frac{(\theta^*)^{2N}}{(2N)!}\,e^{\theta^*}$ |
 | :---: | :---: | :---: | :---: |
 | $1$ | $2.61\times10^{-1}$ | $2.73\times10^{-1}$ | $5.72\times10^{-1}$ |
 | $2$ | $1.22\times10^{-2}$ | $1.24\times10^{-2}$ | $2.60\times10^{-2}$ |
@@ -272,7 +272,7 @@ Apply [@lem-exp-tail-le] to two concrete algebras (the two substitutions below a
 In every row the actual remainder lies within the bound, and it is strictly positive.
 :::
 
-**The sagitta of a finite record.** Item 2 says that finitely many operations produce only an inscribed polytope, with a bow-shaped residual between each flat face and the sphere. The pinned repository holds two frozen theorems that give this sentence a literal version: replace "finite gate count" by "a record pointer with finitely many cells", and the residual is exactly the sagitta of a regular polygon.
+**The sagitta of a finite record.** Item 2 says that finitely many operations produce only an inscribed polytope, with a bow-shaped residual between each flat face and the sphere. The pinned repository holds two frozen theorems that give this sentence a literal version: replace "finite gate count" by "a record pointer with finitely many cells", and the residual is bounded below by exactly the sagitta of a regular polygon (the coherence loss by the sagitta, the recovery error by half of it).
 
 The physical picture is this. A record pointer has $N + 1$ cells with amplitudes $c(0), \dots, c(N)$. The $i$-th branch of the system carries an integer label $q_i$, and recording consists in shifting the pointer by $q_i$ cells. For two branches whose labels differ by $\ell$, the coherence between them is multiplied after the recording by one factor: the overlap of the pointer with itself shifted by $\ell$ cells,
 
@@ -375,7 +375,7 @@ is half the sagitta of the regular $(m+2)$-gon inscribed in the unit circle. For
 
 In [@ex-finite-ht-polytope] of Chapter 16 the $\{H, T\}$ words of length at most $3$ actually reach only $5$ distinct points; by the present example the residual is then at least $2/5$ and the angular radius at least $53.13^\circ$.
 
-**Reading it backwards.** For every point of the sphere to lie within angular distance $\varepsilon$ of the reachable set, one needs $2^{L+1} - 1 \ge \frac{2}{1 - \cos\varepsilon}$, that is, $L \ge \log_2\bigl(\frac{2}{1 - \cos\varepsilon} + 1\bigr) - 1 \approx 2\log_2\frac{1}{\varepsilon} + 1$. For $\varepsilon = 10^{-2}, 10^{-3}, 10^{-6}$ (radians) this gives $L \ge 15, 21, 41$. This is a lower bound obtained by counting alone: the gate length must grow at least linearly in $\log\frac{1}{\varepsilon}$. The Solovay–Kitaev theorem ([@rem-solovay-kitaev-literature], a literature result) supplies the matching upper bound.
+**Reading it backwards.** For every point of the sphere to lie within angular distance $\varepsilon$ of the reachable set, one needs $2^{L+1} - 1 \ge \frac{2}{1 - \cos\varepsilon}$, that is, $L \ge \log_2\bigl(\frac{2}{1 - \cos\varepsilon} + 1\bigr) - 1 \approx 2\log_2\frac{1}{\varepsilon} + 1$. For $\varepsilon = 10^{-2}, 10^{-3}, 10^{-6}$ (radians) this gives $L \ge 15, 21, 41$. This is a lower bound obtained by counting alone: the gate length must grow at least linearly in $\log\frac{1}{\varepsilon}$. The Solovay–Kitaev theorem ([@rem-solovay-kitaev-literature], a literature result) supplies the complementary upper bound, $L = O\bigl(\log^c\frac{1}{\varepsilon}\bigr)$ with $c \approx 3.97$: polynomial, not linear, in $\log\frac{1}{\varepsilon}$.
 :::
 
 Put the four residual scales side by side: the sagitta of the regular $n$-gon is $1 - \cos\frac{\pi}{n} = 2\sin^2\frac{\pi}{2n}$ ([@ex-liu-hui-polygon-sagitta]); the unrecoverable error of a pointer with $N + 1$ cells is at least half the sagitta of the regular $(m+2)$-gon ([@thm-finite-record-cosine-obstruction]); the cap-covering lower bound for an $N$-vertex inscribed polytope is recorded in [@ex-cap-covering-gate-count]; and the remainder of the $N$-term cosine polynomial is controlled by the factorial bound $\frac{|\theta|^{2N}}{(2N)!}e^{|\theta|}$ of [@lem-exp-tail-le] (numerically compared in [@ex-taylor-remainder-three-bounds]). All of them tend to zero as the resource grows, while remaining strictly positive across the finite-record theorems and finite numerical tables. The sentence of the prelude, "we think we have obtained a sphere, but in fact we have only approximately obtained one", has in each of these four settings a number that can be checked.
