@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch22-euler-staircase" data-lang="en" viewBox="0 0 500 300" width="500" height="300" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="A plot with the number K of listed primes across (1 to 25) and values from 1.3 to 1.66 up. The horizontal ink line is ζ(2) = π²/6 ≈ 1.6449. The cyan staircase is the Euler product over the first K primes at s = 2: with 2 alone it is 4/3, and it reaches 25/16 = 1.5625 with 3 and 5, and the steps grow ever shorter. The gap between the staircase and the ink line is shaded magenta: at K = 25 (primes up to 97) it is only 0.0030, and it never closes.">
+<title>A plot with the number K of listed primes across (1 to 25) and values from 1.3 to 1.66 up. The horizontal ink line is ζ(2) = π²/6 ≈ 1.6449. The cyan staircase is the Euler product over the first K primes at s = 2: with 2 alone it is 4/3, and it reaches 25/16 = 1.5625 with 3 and 5, and the steps grow ever shorter. The gap between the staircase and the ink line is shaded magenta: at K = 25 (primes up to 97) it is only 0.0030, and it never closes.</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<line x1="60" y1="187.11" x2="460" y2="187.11" class="ts-faint" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+<line x1="60" y1="128.22" x2="460" y2="128.22" class="ts-faint" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+<line x1="60" y1="69.33" x2="460" y2="69.33" class="ts-faint" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+<line x1="60" y1="246" x2="460" y2="246" class="ts-dim" stroke-width="1.3" fill="none"/>
+<line x1="60" y1="246" x2="60" y2="251" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="60" y="264" font-size="13" text-anchor="middle">1</text>
+<line x1="92" y1="246" x2="92" y2="251" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="92" y="264" font-size="13" text-anchor="middle">3</text>
+<line x1="124" y1="246" x2="124" y2="251" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="124" y="264" font-size="13" text-anchor="middle">5</text>
+<line x1="204" y1="246" x2="204" y2="251" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="204" y="264" font-size="13" text-anchor="middle">10</text>
+<line x1="284" y1="246" x2="284" y2="251" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="284" y="264" font-size="13" text-anchor="middle">15</text>
+<line x1="364" y1="246" x2="364" y2="251" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="364" y="264" font-size="13" text-anchor="middle">20</text>
+<line x1="444" y1="246" x2="444" y2="251" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="444" y="264" font-size="13" text-anchor="middle">25</text>
+<text class="tf-dim" x="460" y="280.25" font-size="13" text-anchor="end">number of listed primes <tspan font-style="italic">K</tspan></text>
+<line x1="60" y1="34" x2="60" y2="246" class="ts-dim" stroke-width="1.3" fill="none"/>
+<line x1="55" y1="246" x2="60" y2="246" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="52" y="250.68" font-size="13" text-anchor="end">1.3</text>
+<line x1="55" y1="187.11" x2="60" y2="187.11" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="52" y="191.79" font-size="13" text-anchor="end">1.4</text>
+<line x1="55" y1="128.22" x2="60" y2="128.22" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="52" y="132.9" font-size="13" text-anchor="end">1.5</text>
+<line x1="55" y1="69.33" x2="60" y2="69.33" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="52" y="74.01" font-size="13" text-anchor="end">1.6</text>
+<path d="M60 226.37 L76 226.37 L76 128.22 L92 128.22 L92 91.42 L108 91.42 L108 72.25 L124 72.25 L124 64.42 L140 64.42 L140 58.78 L156 58.78 L156 55.47 L172 55.47 L172 52.82 L188 52.82 L188 51 L204 51 L204 49.86 L220 49.86 L220 48.86 L236 48.86 L236 48.15 L252 48.15 L252 47.58 L268 47.58 L268 47.06 L284 47.06 L284 46.62 L300 46.62 L300 46.28 L316 46.28 L316 46 L332 46 L332 45.74 L348 45.74 L348 45.53 L364 45.53 L364 45.33 L380 45.33 L380 45.15 L396 45.15 L396 45 L412 45 L412 44.86 L428 44.86 L428 44.74 L444 44.74 L444 44.63 L460 44.63 L460 42.87 L60 42.87Z" class="tf-magenta" fill-opacity="0.22"/>
+<line x1="60" y1="42.87" x2="460" y2="42.87" class="ts-ink" stroke-width="2.2" fill="none"/>
+<path d="M60 226.37 L76 226.37 L76 128.22 L92 128.22 L92 91.42 L108 91.42 L108 72.25 L124 72.25 L124 64.42 L140 64.42 L140 58.78 L156 58.78 L156 55.47 L172 55.47 L172 52.82 L188 52.82 L188 51 L204 51 L204 49.86 L220 49.86 L220 48.86 L236 48.86 L236 48.15 L252 48.15 L252 47.58 L268 47.58 L268 47.06 L284 47.06 L284 46.62 L300 46.62 L300 46.28 L316 46.28 L316 46 L332 46 L332 45.74 L348 45.74 L348 45.53 L364 45.53 L364 45.33 L380 45.33 L380 45.15 L396 45.15 L396 45 L412 45 L412 44.86 L428 44.86 L428 44.74 L444 44.74 L444 44.63 L460 44.63" class="ts-cyan" stroke-width="2.4" stroke-linejoin="round" fill="none"/>
+<text class="tf-ink" x="456" y="33.87" font-size="14" text-anchor="end">ζ(2) = π²/6</text>
+<text class="tf-cyan" x="94.4" y="108.42" font-size="13">25/16</text>
+<text class="tf-magenta ts-bg" x="431.2" y="69.37" font-size="13" text-anchor="end" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">still 0.0030 short</text>
+<line x1="434.4" y1="65.25" x2="448.63" y2="49.06" class="ts-magenta" stroke-width="1.3" fill="none"/>
+<path d="M452 45.23 L449.93 51.4 L446.15 48.07Z" class="tf-magenta"/>
+</svg>

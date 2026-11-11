@@ -12,7 +12,9 @@
 
 在本章中，我们将看到：这种“要表达当前系统的整体存在，就必须跳进更大外围空间”的法向逃逸现象，绝不仅是一则优美的微分几何比喻；在集合论与观测拓扑的底层，它的抽象骨架直接具象化为本书经 Lean 4 内核形式化验证的**相对语义对角线与观测拓扑加细四重奏**（`DiagonalTopologicalEscape`），并与经典元数学中的对角线不完备文献遥相呼应（严格前提对比见 [@rem-godel-tarski-comparison-literature]）。只要一台完备解码器试图在非空地址集与固定潜坐标（latent coordinate）的纤维划分下穷尽所有输出映射，任何无不动点的翻转算子（twist）都会沿着相对语义对角线当场刺穿旧观测拓扑，强迫概念读出向“球外之球”严格加细！
 
-![球外之球的拓扑与几何三重奏：相对语义对角线逃逸与分离亏损、开口螺旋轴向投影与笛卡尔 720° 多面体角亏、以及 Adams 可平行化球面定理](../assets/fig-21-diagonal-escape-tower.svg)
+::: {.figure src="ch21-overview"}
+**图 21。** 本章地图：第 I 栏，潜坐标的两根纤维，品红虚线把左边那根劈成 $g = 1$ 的 $a_0, a_1$ 与 $g = 0$ 的 $a_2$（[@ex-cantor-godel-diagonal-table]）；第 II 栏，品红的开口螺旋绕紫色的轴 $\vv{e}_{n+1}$ 上升，青色的影子绕一圈就闭合，螺旋却已高出 $2\pi c$；第 III 栏，$S^0$ 到 $S^8$ 中只有紫色的 $S^0, S^1, S^3, S^7$ 可平行化，$S^2$ 上的切向量场必有零点（文献结果，未在本书形式化，见 [@rem-hairy-ball-adams-literature]）。
+:::
 
 ## 21.1 为什么表达面积必须站在面外：概念读出与划分拓扑 {#sec-ch21-1}
 
@@ -25,6 +27,10 @@ X \;\simeq\; \sum_{b : B} \operatorname{ConceptFiber}(q_L, b).
 $$
 
 在几何上，你可以把 $q_L : X \to B$ 想象成将高维球面沿着某组选定主轴投射到低维赤道平面上的投影映射：凡是落在同一根垂直投影纤维 $q_L^{-1}(b)$ 上的两个地址 $x, y \in X$，由于满足 $q_L(x) = q_L(y) = b$，在当前坐标表 $B$ 下拥有一模一样的读数——对只看得到 $B$ 的内部观察者而言，它们是**拓扑不可区分**（topologically inseparable）的盲区同胞！
+
+::: {.figure src="ch21-fibers"}
+**一把概念尺子把地址空间切成一根根纤维。** 每个青色的读数 $b_i$ 上方竖着它的纤维，框里是 $q_L$ 送到 $b_i$ 的全部地址；浅青色那根纤维里的 $x$ 与 $y$ 满足 $q_L(x) = q_L(y)$，只看得到 $B$ 的观察者分不开它们。
+:::
 
 为了用严格的一般拓扑学刻画这种“内部视角分辨率”，我们在输出端赋予坐标空间 $B$ 最精细的**离散拓扑** $\bot$（在 Mathlib 的拓扑空间格序约定中，$\bot$ 表示每个子集皆为开集的离散拓扑，即坐标读数本身可以被精确分辨），然后将 $\bot$ 沿着读出映射 $q_L : X \to B$ 拉回到地址空间 $X$ 上，得到 $q_L$ 的**划分拓扑**（[`partitionTopology`](lean:D5/S3/ConceptDynamics/Epistemic/PartitionKnowledgeNegativeIntrospection.partitionTopology) $q_L = \operatorname{induced}(q_L, \bot)$）。在划分拓扑 $\tau(q_L)$ 中，一个子集 $U \subseteq X$ 是开集，当且仅当它是若干条完整余纤维的并集 $U = q_L^{-1}(S)$（$S \subseteq B$）。因此，两个地址 $x, y \in X$ 在 $\tau(q_L)$ 下拓扑不可分（记作 $\operatorname{Inseparable}_{\tau(q_L)}(x, y)$），当且仅当它们落在同一根余纤维上：$q_L(x) = q_L(y)$（[`partition_inseparable_iff_kernel`](lean:D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel)）。
 
@@ -206,6 +212,10 @@ $$
 
 ::: {.remark #rem-lagrange-taylor-remainder-literature title="余弦级数的拉格朗日截断余项界与非零性（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 由实分析中的拉格朗日泰勒余项定理与莱布尼茨交错级数判别法，余弦偶次截断余项满足 $|R_{2N}(\theta)| \le \frac{|\theta|^{2N}}{(2N)!}$，且对一切非零角 $\theta \in (0, 2]$ 严格有 $R_{2N}(\theta) \neq 0$。下文 [@lem-exp-tail-le] 则在任意完备赋范代数上给出了经 Lean 内核验证的指数尾部上界。
+:::
+
+::: {.figure src="ch21-taylor-crack"}
+**多一项，裂缝推远一些，却不合拢。** 墨色的粗曲线是 $\cos\theta$，三条青色曲线是取前 $N = 2, 3, 4$ 项的余弦多项式，在 $\theta$ 小时都贴着它，往右依次离开；品红的面积是 $N = 3$ 时的余项 $R_6(\theta)$，在左端薄得看不见，往右越张越大。余项的界见 [@rem-lagrange-taylor-remainder-literature]（文献结果）与 [@lem-exp-tail-le]。
 :::
 
 三条论断到这里都还只是话。下面把前两条换成可以核对的数字和已经冻结的定理。
@@ -417,6 +427,10 @@ $$
 4. **Hurwitz 赋范除法代数与 Adams 可平行化球面定理（Adams, 1962）**：注意“存在**一根**无奇点切向量场”（所有奇数维球面 $S^{2n-1}$ 均具备）与“存在 **$m$ 根处处线性无关的全局切向量场标架**”（即切丛 $TS^m$ 全局平凡、流形**可平行化** parallelizable）之间的本质区别！例如 $S^5$ 虽有一根无奇点切场，却无法凑齐 $5$ 根处处线性无关的全局切标架。究竟哪些维数的单位球面 $S^m$ 是可平行化的？由 Hurwitz 定理，实数域 $\mathbb{R}$ 上的有限维赋范除法代数（满足乘积模长守恒 $\|xy\| = \|x\|\|y\|$）只有四个：**实数 $\mathbb{R}$（$1$ 维）、复数 $\mathbb{C}$（$2$ 维）、四元数 $\mathbb{H}$（$4$ 维）与八元数 $\mathbb{O}$（$8$ 维）**。它们的单位球面分别是零维球 $S^0 \subset \mathbb{R}^1$、一维圆周 $S^1 \subset \mathbb{C} \cong \mathbb{R}^2$、三维超球面 $S^3 \subset \mathbb{H} \cong \mathbb{R}^4$ 与七维超球面 $S^7 \subset \mathbb{O} \cong \mathbb{R}^8$，利用除法代数的虚部基元左乘即可直接构造出完备的全局正交切标架。J. Frank Adams（1960–1962）利用拓扑 K 理论解决了霍普夫不变量为一（Hopf invariant one）问题，严格证明：**在所有正维数球面中，唯有 $S^1, S^3, S^7$（连同零维伴侣 $S^0$）是可平行化的！**
 
 将本注记的第 3 条与第 4 条并读，便可从经典拓扑视角回望[第一章](ch01-measurement.md)的几何伏笔：单比特观测球面 $S^2$（偶维数 $2 \notin \{0, 1, 3, 7\}$，$\chi(S^2) = 2$）上不存在处处非零的连续切向量场；而通过霍普夫纤维化包覆其外的三维超球面 $S^3 \cong \mathrm{SU}(2)$（四元数单位球面，属于 Adams 可平行化名单 $\{S^0, S^1, S^3, S^7\}$；注意 $S^3$ 的圆球黎曼度规仍具常正截面曲率 $+1$，并非欧氏平坦度规），其切丛 $TS^3$ 则借助四元数左不变标架获得了全局拓扑平凡化。
+:::
+
+::: {.figure src="ch21-angle-defect"}
+**平坦的三角形要合成球，每个顶点都得留一道缝。** 左边是一个顶点周围摊平的五个等边三角形，五个 $60^\circ$ 只凑出 $300^\circ$，下方品红的缺口就是 $60^\circ$ 的角亏；右边正二十面体的十二个品红顶点各缺 $60^\circ$，合起来 $12 \times 60^\circ = 720^\circ = 4\pi$（文献结果，未在本书形式化，见 [@rem-hairy-ball-adams-literature]）。
 :::
 
 把上述微分拓扑文献注记（[@rem-hairy-ball-adams-literature]）与本章经内核验证的相对语义对角线拓扑安顿推论（[@cor-complete-diagonal-topological-settlement]）对照阅读，可以看到同一条结构脉络：**球内的奇点与不完备，唯有借球外之球方能安顿。**

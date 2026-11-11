@@ -16,7 +16,9 @@ $$
 
 本章将沿着这一“素数即算术正交基”的几何直觉，严格建立**狄利克雷（Dirichlet）自然数级数**与**欧拉（Euler）无穷素数乘积**在绝对收敛半平面 $\operatorname{Re}(s) > 1$ 上的机器形式化恒等式，剖析有限素数筛的“多面体截断余项”，并在严谨的三层认识论契约下远眺数论皇冠上的开放猜想——**黎曼猜想（Riemann Hypothesis）**。
 
-![素数正交基、欧拉乘积与黎曼临界线：Re(s) > 1 半平面上的狄利克雷—欧拉恒等式、有限素数筛截断余项与临界带 σ = 1/2 开放猜想](../assets/fig-22-euler-prime-resonator.svg)
+::: {.figure src="ch22-overview"}
+**图 22。** 本章地图：第 I 栏，横走一步乘 $2$、竖走一步乘 $3$，每个整数是素数轴上的一个格点，青色的箭头走到 $12 = 2^2 \times 3$；第 II 栏，$1$ 到 $30$ 中只用 $2, 3, 5$ 乘得出的格子是青色，其余是品红，第一个品红格是 $7$（[@ex-prime-log-orthogonality-and-sieve]）；第 III 栏，临界带 $0 < \operatorname{Re}(s) < 1$ 中央的虚线是 $\sigma = \frac{1}{2}$，前十个零点（数值结果）都落在线上，$s = 1$ 处的叉是极点；红色的问号与标签说的是开放问题：是否所有非平凡零点都在这条线上（[@conj-riemann-hypothesis]）。
+:::
 
 ## 22.1 算术正交基与因式分解消除无穷 {#sec-ch22-1}
 
@@ -96,6 +98,10 @@ $$
 在半平面假设 `hs : 1 < s.re` 下，函数 $n \mapsto (n : \mathbb{C})^{-s}$ 为完全积性函数且级数绝对可和。由唯一素因子分解与完全积性函数的欧拉乘积一般定理，局部几何级数因子 $(1 - p^{-s})^{-1} = \sum_{k=0}^\infty p^{-ks}$ over $p \in \mathrm{Nat.Primes}$ 的无穷乘积收敛于同一极限 `riemannZeta s`（Mathlib 定理 `riemannZeta_eulerProduct_tprod`）。展开 [`classicalZeta`](lean:D5/S3/Weil/Convention.classicalZeta) 即完成证明。完整证明由 Lean 内核检查。
 :::
 
+::: {.figure src="ch22-euler-staircase"}
+**有限个素数的欧拉乘积一级级爬向 $\zeta(2)$，却总差一截。** 青色的阶梯是前 $K$ 个素数的乘积在 $s = 2$ 处的值，$K = 3$ 时是 $\frac{25}{16}$；墨色的线是 $\zeta(2) = \frac{\pi^2}{6}$。两者之间品红的缝越来越窄，用到 $97$ 为止的 $25$ 个素数仍差 $0.0030$；只有乘进全体素数，乘积才等于 $\zeta(s)$（[@thm-riemann-zeta-euler-product]）。图中数值为数值结果。
+:::
+
 现在，消去中间桥梁 $\operatorname{classicalZeta}(s)$，[@prop-riemann-zeta-dirichlet-sum] 与 [@thm-riemann-zeta-euler-product] 在半平面 $\operatorname{Re}(s) > 1$ 上直接会师，给出全书第六部最璀璨的一条算术—几何恒等式：加法端遍历全体自然数，乘法端只遍历素数正交基！
 
 ::: {.corollary #cor-dirichlet-sum-eq-euler-product title="半平面 Re(s) > 1 上自然数狄利克雷级数与素数欧拉乘积的恒等定理" lean="D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product"}
@@ -129,6 +135,10 @@ p^{-s} = p^{-\sigma - it} = p^{-\sigma} e^{-i t \ln p} = p^{-\sigma}\bigl(\cos(t
 $$
 
 在复平面上，每一个素数 $p$ 都可看作一只以固有对数角频率 $\omega_p = \ln p$ 匀速旋转的**相位指针（素数时钟）**！在 $t = 0$ 把所有时钟拨到十二点（读数 $1$）再放手：时钟 $2$ 每隔 $2\pi/\ln 2 \approx 9.0647$ 个时间单位回到十二点，时钟 $3$ 每隔 $2\pi/\ln 3 \approx 5.7192$ 个时间单位回到十二点。时钟 $2$ 走完第 $12$ 圈时，时钟 $3$ 走了 $12\ln 3/\ln 2 \approx 19.01955$ 圈，只越过十二点 $7.04^\circ$，差一点就对齐了。它们会不会在某个时刻 $t \neq 0$ 真正同时回到十二点？
+
+::: {.figure src="ch22-prime-clocks"}
+**两只素数时钟差一点就对齐。** 在 $t = 12 \cdot 2\pi/\ln 2 \approx 108.78$，时钟 $2$ 走完第 $12$ 圈，琥珀色的指针正指十二点；同一时刻时钟 $3$ 走了 $19.02$ 圈，指针越过十二点 $7.04^\circ$，那块品红的小扇形就是没对上的部分。
+:::
 
 假设会：$t\ln 2 = 2\pi a$，$t\ln 3 = 2\pi b$，$a, b$ 为整数。前式乘 $b$、后式乘 $a$ 再相减，得 $t\,(b\ln 2 - a\ln 3) = 0$；因为 $t \neq 0$，所以 $b\ln 2 = a\ln 3$。由于 $\ln 2, \ln 3 > 0$，$a$ 与 $b$ 要么同为零，要么同号；若同号，不妨都为正，两边取指数得 $2^{b} = 3^{a}$，左边是偶数，右边是奇数。所以 $a = b = 0$，于是 $t = 2\pi a/\ln 2 = 0$，与 $t \neq 0$ 矛盾。这里起作用的只有一个机制：取指数把对数之间的整系数关系变成素数幂的乘积等式，而唯一素因子分解不允许两组互不相交的素数幂乘出同一个整数。所钉仓库的模块 `D5/S3/Factorization/PrimeLogIndependence` 对任意有限个素数冻结了这一机制，模块 `D5/S3/Weil/PrimeAddress/PrimeLogIndependence` 再把它改写成 $\mathbb{Q}$ 上的线性无关。
 
@@ -350,6 +360,10 @@ $$
 第四行是 [@thm-xi-reading-entire-reflection] 的结论 4；第五行是镜像的不动点 $s = \frac{1}{2}$ 处的数值。
 
 **沿临界线。** 在 $s = \frac{1}{2} + it$（$t$ 为实数）上 $\xi$ 取实值。数值计算给出 $\xi\bigl(\tfrac{1}{2} + 14i\bigr) \approx +2.01\times10^{-4}$ 与 $\xi\bigl(\tfrac{1}{2} + 15i\bigr) \approx -7.06\times10^{-4}$：符号在两者之间改变，与文献所载的第一个非平凡零点 $\rho_1 \approx \frac{1}{2} + 14.134725\,i$ 相符。由此可见，常被单独拿出来渲染的 $\zeta(-1) = -\frac{1}{12}$ 与巴塞尔问题的 $\zeta(2) = \frac{\pi^2}{6}$，其实是同一个数 $\frac{\pi}{6}$ 在镜子两侧的两个读数。
+:::
+
+::: {.figure src="ch22-critical-line"}
+**沿临界线往上走，$\lvert\zeta\rvert$ 一次次落到零。** 墨色的曲线是 $\lvert\zeta(\frac{1}{2} + it)\rvert$，$0 \le t \le 50$；十个品红的点是它落到零的地方，第一个在 $t \approx 14.13$，与上例中 $\xi$ 在 $t = 14$ 与 $t = 15$ 之间变号相符。曲线与零点位置是数值结果；红色标签问的是开放问题：所有非平凡零点是否都在这条线上（[@conj-riemann-hypothesis]）。
 :::
 
 镜子的位置 $\operatorname{Re}(s) = \frac{1}{2}$ 已由 [@thm-xi-reading-entire-reflection] 的内核证明锁定；所有非平凡零点是否都站在镜面上，则仍然是本节末尾那条开放猜想。

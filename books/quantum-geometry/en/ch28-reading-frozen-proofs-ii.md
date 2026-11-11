@@ -154,6 +154,10 @@ In `D5/S3/Observer/Conditioning.lean:108`:
 The full proof is checked by the Lean kernel.
 :::
 
+::: {.viz src="lean-declaration-map" preset="closure" height="500"}
+**The four theorems Chapter 28 dissects.** Cyan lines run from the foot of Chapter 28 to four filled green cells in Chapters 2 and 3; the amber frame is the unread fixed-point criterion ([@cor-audit-unread-fixed-iff]), which first appears in Chapter 3, and the amber lines go to the other chapters that cite it.
+:::
+
 ## Comprehensive Audit Table of Frozen Declarations Across Parts IV–VI {#sec-parts-iv-to-vi-frozen-audit-table}
 
 Completing the audit table begun in [Chapter 27](ch27-reading-frozen-proofs-i.md), the table below records the exact source files, line numbers, `statement_id` prefixes, and formal contracts for the declarations audited in this chapter together with representative frozen declarations across Parts IV, V, and VI at commit `1d9bf98cab8306e67ec38a739359f2cdae63877a`.
@@ -204,6 +208,10 @@ Completing the audit table begun in [Chapter 27](ch27-reading-frozen-proofs-i.md
 | Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm`](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm) | `D5/S3/Quantum/Algebra/WeylDisplacement.lean:174` | `sha256:11f68b71` | $\omega^{da}\,D(a,b)D(c,d) = \omega^{bc}\,D(c,d)D(a,b)$ |
 | Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation`](lean:D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation) | `D5/S3/Quantum/Algebra/WeylDisplacementConjugation.lean:94` | `sha256:075eec65` | $D(a,b)\,D(c,d)\,D(a,b)^{\dagger} = \omega^{bc-ad}\,D(c,d)$ |
 | Ch 25 | [`D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute`](lean:D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute) | `D5/S3/Quantum/Algebra/WeylDisplacement.lean:182` | `sha256:11f68b71` | $M = 2$: $D(0,1)D(1,0) = -D(1,0)D(0,1)$ |
+
+::: {.viz src="lean-declaration-map" preset="table28" height="500"}
+**The audit table reaches into Parts IV–VI.** The 44 declarations Chapter 28 cites, the table above included, are outlined in cyan: 36 of them land in Parts IV–VI, and the rest are the four audited theorems of Chapters 2 and 3 and the four Weyl displacement laws of Chapter 25.
+:::
 
 Let us trace all four theorems of this chapter on a single concrete qubit state.
 
