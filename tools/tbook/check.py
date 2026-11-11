@@ -149,16 +149,38 @@ def check_captions(model: EditionModel, issues: list[Issue]) -> None:
             problem = figure.caption_problem(inner)
             if problem:
                 _err(issues, doc.path, env.line, f"figure {env.attrs.get('src') or '?'} {problem}")
-        for lineno, line, _role in mdscan.iter_text(doc.blocks):
-            for m in mdscan.find_outside_code(render.LINK_RE, line):
-                if not m.group("bang"):
-                    continue
-                url = mdscan.unangle(m.group("url")).partition("#")[0].partition("?")[0]
-                if not url.lower().endswith(_IMAGE_SUFFIXES):
-                    continue
-                problem = figure.caption_problem(m.group("text"))
-                if problem:
-                    _err(issues, doc.path, lineno, f"image {url} {problem}")
+        for lineno, text, url in _images(doc):
+            problem = figure.caption_problem(text)
+            if problem:
+                _err(issues, doc.path, lineno, f"image {url} {problem}")
+
+
+def _images(doc) -> list[tuple[int, str, str]]:
+    """(line, description, destination) of every image a chapter shows (``![…](file)``, not in code)."""
+    out = []
+    for lineno, line, _role in mdscan.iter_text(doc.blocks):
+        for m in mdscan.find_outside_code(render.LINK_RE, line):
+            url = mdscan.unangle(m.group("url")).partition("#")[0].partition("?")[0]
+            if m.group("bang") and url.lower().endswith(_IMAGE_SUFFIXES):
+                out.append((lineno, m.group("text"), url))
+    return out
+
+
+def check_image_parity(book: config.Book, models: dict[str, EditionModel], issues: list[Issue]) -> None:
+    """Editions show the same pictures: figure blocks are compared one by one with the other media
+    (:func:`check_parity`); plain images may be language-specific files, so only their number per
+    chapter is compared (a warning)."""
+    if len(models) < 2:
+        return
+    primary = models[book.languages[0]]
+    counts = {doc.chapter.path: len(_images(doc)) for doc in primary.chapters}
+    for lang in book.languages[1:]:
+        for doc in models[lang].chapters:
+            n = len(_images(doc))
+            m = counts.get(doc.chapter.path)
+            if m is not None and n != m:
+                _warn(issues, doc.path, 0, f"the {lang} edition shows {n} image(s) in this chapter, the "
+                                           f"{book.languages[0]} edition {m}: editions show the same pictures at the same places")
 
 
 def check_unused_assets(book: config.Book, models: dict[str, EditionModel], site: config.Site, issues: list[Issue]) -> None:
@@ -454,6 +476,7 @@ def run(books: list[config.Book], *, offline: bool = False) -> list[Issue]:
             if model.summary is not None and not model.chapters:
                 _warn(issues, model.edition.summary, 0, "edition has no chapters yet")
         check_parity(book, models, issues)
+        check_image_parity(book, models, issues)
         check_unused_assets(book, models, site, issues)
         for kind in MEDIA:
             try:

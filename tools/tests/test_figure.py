@@ -90,6 +90,8 @@ class KitTests(unittest.TestCase):
             f.text(250, 20, "a label that cannot fit there")
         with self.assertRaisesRegex(figkit.FigureError, "runs past the left edge"):
             f.text(20, 20, "a label that cannot fit there", anchor="end")
+        f.cross(40, 40, 6, "open")
+        self.assertEqual(f.svg().count('class="ts-warn"'), 2, "a cross is two strokes in the role's colour")
         with self.assertRaisesRegex(figkit.FigureError, "exceeds"):
             figkit.Figure("wide", "en", 900, 100, alt="x")
 
@@ -264,6 +266,7 @@ class CheckTests(unittest.TestCase):
             check.check_env_policy(m, out)
             check.check_captions(m, out)
         check.check_parity(book, models, out)
+        check.check_image_parity(book, models, out)
         check.check_unused_assets(book, models, config.load_site(), out)
         return out
 
@@ -298,6 +301,18 @@ class CheckTests(unittest.TestCase):
             chapter(repo, "en", '# One\n\n::: {.figure src="two"}\nTwo panels.\n:::\n\n::: {.figure src="line"}\nA line.\n:::\n')
             errors = [i.message for i in self.issues(book) if i.severity == "error"]
             self.assertTrue(any("differs between editions" in e for e in errors), errors)
+
+    def test_editions_show_the_same_number_of_images(self):
+        with Repo() as repo:
+            book = demo(repo)
+            write(repo.root / "books/demo/assets/a.png", "x")
+            chapter(repo, "zh", "# One\n\n![一张图](../assets/a.png)\n\n![另一张图](../assets/a.png)\n")
+            chapter(repo, "en", "# One\n\n![A picture](../assets/a.png)\n")
+            found = self.issues(book)
+            self.assertEqual([i for i in found if i.severity == "error"], [])
+            warnings = [i.message for i in found if i.severity == "warning"]
+            self.assertEqual(warnings, ["the en edition shows 1 image(s) in this chapter, the zh edition 2: editions show the "
+                                        "same pictures at the same places"])
 
     def test_a_reference_cannot_target_a_figure(self):
         self.assertIn("figure", model.MEDIA)

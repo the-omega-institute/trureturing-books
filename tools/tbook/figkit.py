@@ -375,6 +375,11 @@ class Canvas:
         self.polyline([(x + u[0] * size, y + u[1] * size), (x + (u[0] + v[0]) * size, y + (u[1] + v[1]) * size),
                        (x + v[0] * size, y + v[1] * size)], color, width)
 
+    def cross(self, x: float, y: float, size: float = 8.0, color: str = "dim", width: float = 1.8) -> None:
+        """A cross centred at ``(x, y)``: something struck out or ruled out."""
+        self.line(x - size, y - size, x + size, y + size, color, width, cap="round")
+        self.line(x - size, y + size, x + size, y - size, color, width, cap="round")
+
     def brace(self, x1: float, y1: float, x2: float, y2: float, label: str = "", *, color: str = "dim", size: float = 13.0,
               depth: float = 8.0) -> None:
         """A bracket from ``(x1, y1)`` to ``(x2, y2)`` bulging to its left-hand side, labelled at the tip."""

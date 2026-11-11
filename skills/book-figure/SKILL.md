@@ -45,7 +45,7 @@ def draw(fig):                           # 在 fig 上画；fig.t("中文", "Eng
     ...
 ```
 
-几张图共用的画法（同一颗球、同一套坐标）写进 `figures/_<name>.py`（下划线开头的文件不是图），各图 `import` 它。
+几张图共用的画法（同一颗球、同一套坐标）写进 `figures/_<name>.py`（下划线开头的文件不是图），各图 `import` 它；辅助模块里要用画图库时写 `from tbook import figkit`。
 
 ### 2. 用画图库画（`tools/tbook/figkit.py`）
 
@@ -58,7 +58,7 @@ def draw(fig):                           # 在 fig 上画；fig.t("中文", "Eng
 | 面 | `fig.polygon(pts, "cyan", fill_opacity=0.18)`、`fig.rect(x, y, w, h, color="edge", fill="panel", rx=4)`、`fig.circle(…)`、`fig.ellipse(…)`、`fig.arc(cx, cy, r, a0, a1, …, fill=…)` |
 | 点 | `fig.dot(x, y, 3.6, "cyan", ring="bg")` |
 | 文字 | `fig.text(x, y, "影子 cos θ", size=14, color="line", anchor="middle", middle=True, halo=True)`；`*x*` 斜体，`**b**` 加粗，`_{i}` 下标，`^{2}` 上标；数学写 Unicode 符号（θ、φ、·、∧、√、≤） |
-| 标记 | `fig.angle(cx, cy, r, a0, a1, "θ")`、`fig.right_angle(x, y, 方向)`、`fig.brace(x1, y1, x2, y2, "标签")`、`fig.legend(x, y, [("line", "线"), ("area", "面积")])`、`fig.chip(x, y, "LEAN ✓", "lean")` |
+| 标记 | `fig.angle(cx, cy, r, a0, a1, "θ")`、`fig.right_angle(x, y, 方向)`、`fig.brace(x1, y1, x2, y2, "标签")`、`fig.cross(x, y)`（划掉）、`fig.legend(x, y, [("line", "线"), ("area", "面积")])`、`fig.chip(x, y, "LEAN ✓", "lean")` |
 | 坐标系 | `ax = fig.axes(x, y, w, h, (x0, x1), (y0, y1))`；`ax.frame()`、`ax.xaxis(ticks=…, labels=…, label=…)`、`ax.yaxis(…)`、`ax.grid(…)`、`ax.plot(fn, color="cyan")`、`ax.path(pts)`、`ax.points(pts)`、`ax.area(pts)`、`ax.hline(y)`、`ax.vline(x)`、`ax.text(x, y, …)`、`ax.pt(x, y)` |
 | 球 | `sp = fig.sphere(cx, cy, r)`（+z 向上，+x 朝向读者偏左下，+y 向右）；`sp.outline()`、`sp.great_circle(法向)`、`sp.small_circle(轴, 角)`、`sp.arc(u, v, arrow=True)`、`sp.path([…])`、`sp.arrow(v, "now")`、`sp.dot(v)`、`sp.label(v, "…", dx=…, dy=…)`、`sp.axes(labels=("x", "y", "z"))`、`sp.disc(法向)`、`sp.segment(a, b)`；背面的线自动画成虚线。向量工具：`figkit.sph(θ, φ)`、`slerp`、`rotate`、`cross`、`dot3`、`unit` |
 | 分栏 | `left, right = fig.row([220, 220], 240)`：每一栏是一块自己的画布（方法与 `fig` 相同）；脚本里写 `WRAP = True` 时各栏在宽屏并排、在手机上自动上下叠放，此时所有内容都画在栏里 |
@@ -129,6 +129,9 @@ def draw(fig):                           # 在 fig 上画；fig.t("中文", "Eng
 | `no figure books/<book>/figures/<name>.py` | 章节引用的名字不存在；核对拼写，各语言一致 |
 | `figure … has a placeholder caption` | 图注写成一句说明这张图的话 |
 | 手机上分栏的图挤成一行 | 脚本里加 `WRAP = True`，并把所有内容画进各栏 |
+| 下标里的负号像一条下划线 | 下标、上标里的正负号写 Unicode 的 `₊`、`₋`、`⁺`、`⁻`（`_{−}` 缩小并下移后贴着基线） |
+| `‖r‖`、`⋆` 在图上间距过大或太小 | 范数写单竖线 `|r|`；少见的符号换成文字或常见的记号 |
+| 并排的两栏在手机上缩得太小 | 改成 `WRAP = True` 的分栏图，手机上自动上下叠放 |
 | PDF 里中文标签成了方框 | 构建机器缺中文字体：`./tools/fetch-fonts.sh`（见 `book-export`） |
 
 ## 完成标准
