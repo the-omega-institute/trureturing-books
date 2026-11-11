@@ -105,6 +105,10 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 `complexity-growth` 有两个场景。“增长”是 8 个量子比特、固定种子哈尔随机两比特门的砖墙电路：半链熵（青色）由 16 × 16 约化密度矩阵的本征值逐层实算、门数与跨割门数按门表数出（`NUM`）；熵不超过 4 比特与每道跨割门至多加 2 比特（灰色台阶）、exp(O(N)) 复杂度天花板与热化后预期线性增长按第二十章文献注记标 `ARGUED`；品红的“预期复杂度” min(门数, 2^N) 与天花板的常数是示意模型（`MODEL`），页面不声称算出了复杂度；把品红上升段读成体积的 CV 标 `OPEN`（舞台上的红字与依据框用同一个 `--warn`）。“深度”是第二十章的开放边界链：青色的砖是 N + 1 道门按最早可放的层排好，品红三角是折返点 S，白线是 minDepth(N, κ)，灰色虚线是旧公式；绿色框只给本章用 `lean=` 引用的 `OpenIntegrableCircuitMinDepth.result` 与 `OpenIntegrableCircuitDepthRefutation.result`，CNOT 下界与偶圈长度不上页面。路线图候选“最小深度的下界”做成 `floor`，“增长停在哪里是开放的”改为 `ceiling`（天花板是文献结果）与 `cv`（开放的是 CV 读法），并按正文的两个反例加了 `eight` 与 `eleven`。
 
+| `norm-lattice` | 换一组坐标去读，系数全变了，格点上的范数一个也没动；范数锁在 ±1 的点只能沿双曲线一格一格地跳 | `hex` `skew` `shear` `range` `norm` `pell` `units` |
+
+`norm-lattice` 与 `pythagoras-number-escape` 的 `golden`、`minus`、`locked` 分工：那几张讲渐近分数逼近 √d 与 ±1 的接缝，本页讲整数格与范数等值线：艾森斯坦格画在复平面 x + y·e^{iπ/3}，换成整数坐标 (P, Q) = (x + (t + 1)y, y) 读出 Qform(t, ·, ·)；黄金整数画在 (g, ḡ) 平面，范数是矩形面积。绿色框只给第二十三章用 `lean=` 引用的四条定理（`Qform_eq_eisNorm`、`Qform_discriminant`、`Qform_range_eq_eisNorm`、`pell_form_eq_four_mul_norm`）；正文以行内链接提到的 `pell_pm_four_iff_signed_lucas_fib` 不在页面上标绿，`units` 卡只展示 φᵏ 的 (2a + b, b) = (Lₖ, Fₖ) 与范数 (−1)ᵏ（`NUM`），不声称它们是全部解。格子面积 √3/2、系数是基矢的内积、判别式 = −4 × 面积²、“取到的值”逐点代入都标 `NUM`；非整数 t 的中间帧、两种坐标之间的过渡与两次乘 φ 之间的滑动标 `MODEL`；四元数范数在 ℚ 中定义 ℤ 标 `ARGUED`。这一页的青色是当前点所在的那条范数等值线及其上的格点、黄金场景里迹的对角线与影子，品红是格子（面积）与黄金范数的矩形和它那一级的双曲线，琥珀只给当前的点与正在滑动的基矢 u₂，其余等值线是中性灰（虚线上没有格点）。
+
 ## 正文里的引用（中英文版本位置与卡名相同）
 
 | 章节 | 位置 | 引用 |
@@ -288,6 +292,14 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十章 | 文献注记 `rem-complexity-growth-literature` 之后、猜想 `conj-complexity-equals-volume` 之前 | `complexity-growth` · `saturate`、`ceiling` |
 | 第二十章 | 猜想 `conj-complexity-equals-volume` 之后、§纠缠桥与 ER=EPR 之前 | `complexity-growth` · `cv` |
 | 第二十章 | 例 `ex-cnot-and-cycle-bounds` 之后、P/NP 的提问之前 | `complexity-growth` 完整实验室 |
+| 第二十三章 | §23.1 艾森斯坦整数环引言段（“让我们先考察复平面上最对称的二维晶格”）之后、Lean 模块说明之前 | `norm-lattice` · `hex` |
+| 第二十三章 | §23.1 末段（“同一颗六角范数球在不同斜交基底下的投影”）之后、§23.2 之前 | `norm-lattice` · `skew` |
+| 第二十三章 | 引理 `lem-qform-discriminant` 的证明之后、“由于剪切变换……”一段之前 | `norm-lattice` · `shear` |
+| 第二十三章 | 推论 `cor-qform-range-eq-eisnorm` 的证明之后、转入黄金整数一段之前 | `norm-lattice` · `range` |
+| 第二十三章 | 定义 `def-golden-int-and-norm` 之后、代数迹一段之前 | `norm-lattice` · `norm` |
+| 第二十三章 | 命题 `prop-pell-form-eq-four-mul-norm` 的证明之后 | `norm-lattice` · `pell` |
+| 第二十三章 | 佩尔—卢卡斯—斐波那契锁定一段（“当且仅当……$(\pm L_n, \pm F_n)$”）之后、例 `ex-eisenstein-and-golden-pell-lattice` 引言之前 | `norm-lattice` · `units` |
+| 第二十三章 | §23.2 末（`pythagoras-number-escape` · `golden` 之后、§23.3 之前） | `norm-lattice` 完整实验室 |
 
 ## 增删或修改一张卡之后
 
