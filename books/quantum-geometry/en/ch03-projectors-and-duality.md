@@ -24,6 +24,10 @@ In the geometric interpretation of this book, these three insights share **one a
 
 > To name chaos is to drive a stake $P^2 = P$ into the sphere; "substance" is whatever survives being measured twice by the same rod without flinching.
 
+::: {.viz src="repeated-projection" preset="twice" height="500"}
+**Project again, and nothing moves.** At the first press the amber arrow drops onto the cyan measurement line and the magenta part vanishes; at the second and third presses the arrow stays put, and "this press moved it" at the top left reads 0. A press here is a measurement along the line whose result is not read, so "a second press changes nothing" is exactly [@thm-pinching-idempotent].
+:::
+
 ![Existence as an idempotent line: axial projection P²=P, its inseparable Hodge-dual equatorial plane, and sequential record ticks generating classical time](../assets/fig-03-idempotent-line-hodge.svg)
 
 In an actual laboratory apparatus we rarely erect a single ray in isolation; instead we partition the space into a mutually exclusive, exhaustive family of orthogonal readout ports $\{P_k\}_{k \in \kappa}$ (such as the upper and lower beams of a Stern–Gerlach magnet or a multi-port polarizing splitter). In the Lean module `Observer/Conditioning`, this complete ruler is formalized as a **record measurement**.
@@ -100,6 +104,10 @@ The full proof is checked by the Lean kernel.
 :::
 
 [@thm-unread-fixed-iff] shows how a classical record emerges from quantum geometry: once a record measurement $P$ is chosen, the fixed points have no inter-branch coherence, $P_k \rho P_l = 0$ ($k \neq l$). The branch labels go into a classical ledger without interference, but a branch of rank greater than one can still retain internal quantum coherence. Refining the record to rank-one projections makes the unread state fully diagonal in the corresponding basis, leaving only classical probabilities.
+
+::: {.viz src="repeated-projection" preset="fixed" height="500"}
+**Already on the line, so nothing to move.** The amber arrow lies on the tilted cyan line and has no magenta part; two presses, and it never moves. A single qubit has two branches, and the size of the cross-branch block $P_+\rho P_-$ is exactly half the length of the magenta part, so "no magenta" and "a fixed point" are one and the same ([@thm-unread-fixed-iff]).
+:::
 
 A record measurement cuts a $d$-dimensional space into non-interfering channels. Turn the question around: how many records can a $d$-dimensional system hold if each must be read back **without any error**? If one is allowed to encode in non-orthogonal states, and to read out by something more general than a projective measurement, could three or four records be squeezed into one qubit? The module `D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity` at the pinned commit answers no, under generous hypotheses: the records may be mixed states and the readout may be any family of positive semidefinite matrices summing to the identity.
 
@@ -226,6 +234,10 @@ $$
 $$
 
 On the pure shell $\norm{\vv{r}}^2 = 1$, $r_z^2 + (r_x^2 + r_y^2) = 1$: the sharper the particle bias $|r_z| \to 1$ along the chosen line, the smaller the wave interference $r_x^2 + r_y^2$ left in the equatorial plane, and conversely. **Wave and particle never contradict one another; they are the two orthogonal legs cut from a single unit hypotenuse by an axis $V$ and its Hodge dual $\star V$.**
+
+::: {.viz src="repeated-projection" preset="sum" height="500"}
+**One part on the line, one in the plane.** The cyan shadow lies on the measurement line Z and the magenta part lies in the equatorial dual plane; they are perpendicular and together rebuild the amber arrow, and at the top left line² + plane² equals the arrow's length squared. Halve both sides and you have the single-qubit ledger of [@thm-complementary-pythagoras].
+:::
 
 Translate this single-qubit Pythagorean split into the language of a Mach–Zehnder interferometer, and you obtain at one stroke the celebrated **quantitative path-predictability / fringe-visibility law** of quantum optics:
 
@@ -416,3 +428,11 @@ This classical limit is not formalized in this book and is not part of the finit
 [@ex-malus-three-polarizers] brings out the operational geometry of sequential record conditioning: a chain of recorded laboratory measurements is not a conveyor belt carrying pre-labeled pebbles past passive checkpoints, but a **sequence of conditional idempotent re-basings** $P(\tau_1), P(\tau_2), P(\tau_3)$ in which each retained outcome resets the conditioned state for the next probe (while the global fate of unmonitored branches and the thermodynamic cost of erasing records are established by unitary dilation in Chapter 4 and Landauer's principle in Chapter 8, respectively).
 
 One last mystery of Part I now demands an answer. In [@def-record-measurement] and [@thm-pinching-idempotent], what happens when an interaction *does* record which branch occurred, yet our gaze turns away — when the record flies off into an unmonitored environment so that we retain only the unread mixture $\operatorname{unreadState}(P, \rho)$, whose Bloch vector shrinks inside the ball ($\norm{\vv{r}} < 1$)? Where did the missing length $1 - \norm{\vv{r}}$ go, and is quantum information ever truly destroyed? Let us enter [Chapter 4](ch04-decoherence.md).
+
+::: {.viz src="repeated-projection" preset="once" height="500"}
+**One press, and the arrow is shorter.** The amber arrow starts out pointing at the sphere (dashed); one press along the cyan line, result unread, drops it to its shadow on the line. The magenta part is gone and the tip leaves the sphere for the inside of the ball.
+:::
+
+::: {.viz src="repeated-projection" height="560"}
+The full lab for repeated projection: drag the arrow, change the measurement line, set the arrow's length, and press "Project". Project along Z, then switch to X and project again: the arrow goes to zero.
+:::

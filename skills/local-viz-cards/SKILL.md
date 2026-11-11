@@ -31,8 +31,11 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `eth-horizon-crossover` | 渐近更好的曲线要到视界之外才追上；流矩阵的秩等于最小割；过线的模态数有墙 | `human` `atoms` `cross` `constant` `bridge` `narrow` `plateau` `tail` |
 | `spatial-attractor-deja-vu` | 忘掉起点，轨道还是落回同一对翅膀，一次次经过同一处 | `butterfly` `forget` `return` `shrink` `sheet` `dimension` `fixed` `cycle` |
 | `golden-cut-observer` | 窗口挪一挪，贴边的点翻转，深处的点留在原地 | `cut` `phason` `empire` `cassini` `returns` `narrow` `window` `edge` |
+| `repeated-projection` | 投一次，箭头只剩线上的影子；再投多少次，影子都不再动 | `once` `twice` `fixed` `perp` `sum` |
 
 后四个页面的依据分层要写在页面与图注里：第三十章转述的 2026 年预印本只作为该章的转述出现，页面上的曲线与涡管是示意模型（`MODEL`）；菱形三十面体与“帝国”是文献结果（`ARGUED`）；灵魂、遗迹、似曾相识是诠释模型（`MODEL`）；只有带 Lean 链接的绿色框是已验证定理。`spatial-attractor-deja-vu` 不引用任何 Lean 定理。
+
+`repeated-projection` 的箭头是布洛赫矢量，“投一次”是沿测量线的未读测量 $P_+\rho P_+ + P_-\rho P_-$，不是第三章偏振片例题里的选择性条件更新（那里 $0^\circ$ 与 $90^\circ$ 偏振片在布洛赫球上是同一条线的两端）；“一投等于投到线上的影子”是页面的数值核对（`NUM`），绿色框只给本章引用的三条定理：捏合幂等、不动点判据、互补勾股。
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
@@ -72,6 +75,10 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 终章 | 黄金切投 · 三 末（文献注记 `rem-coda-quasicrystal-empire-literature` 之后） | `golden-cut-observer` · `window`、`empire` |
 | 终章 | 定理 `thm-coda-golden-cut-observer-cassini` 之前 | `golden-cut-observer` · `cassini`、`returns` |
 | 终章 | 该定理的证明之后 | `golden-cut-observer` 完整实验室 |
+| 第三章 | §3.1 题记“给混沌命名……”之后、存在线插图之前 | `repeated-projection` · `twice` |
+| 第三章 | §3.1 定理 `thm-unread-fixed-iff` 之后的解读段末 | `repeated-projection` · `fixed` |
+| 第三章 | §3.2 单比特勾股算例末（“两条直角边”） | `repeated-projection` · `sum` |
+| 第三章 | 章末、转入第四章之前 | `repeated-projection` · `once`，随后完整实验室 |
 
 ## 增删或修改一张卡之后
 
