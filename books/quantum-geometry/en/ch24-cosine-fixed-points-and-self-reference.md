@@ -546,11 +546,68 @@ $$
 
 On the unit circle, the point $P = (\cos\theta^*, \sin\theta^*) = (\theta^*, \lambda)$ cuts the quarter arc of the first quadrant into two pieces. The lower piece, from $(1, 0)$ to $P$, has length $\theta^*$, which is exactly the abscissa of $P$; the upper piece, from $P$ to $(0, 1)$, has length $\arcsin\theta^*$. $P$ is the only point of this arc whose arc length equals its own abscissa.
 
-The power series of the arcsine has rational coefficients only and does not contain $\pi$:
+To express this arc as a rational power series, first expand its integral kernel.
+
+::: {.lemma #lem-arcsin-binomial-kernel title="Normalized Central Binomial Coefficients and the Binomial Kernel" lean="D5/S3/Analytic/OriginalHalfBinomialIntegral.b_nonneg D5/S3/Analytic/OriginalHalfBinomialIntegral.b_le_one D5/S3/Analytic/OriginalHalfBinomialIntegral.binomial_hasSum"}
+For every $n \in \mathbb{N}$, let $b_n = \binom{2n}{n}/4^n \in \mathbb{R}$. Then $0 \le b_n \le 1$. For every real $u$ with $0 \le u < 1$,
 
 $$
-\arcsin x \;=\; \sum_{n \ge 0} \frac{\binom{2n}{n}}{4^n\,(2n+1)}\,x^{2n+1} \;=\; x + \frac{x^3}{6} + \frac{3x^5}{40} + \frac{5x^7}{112} + \cdots \qquad (\lvert x\rvert \le 1).
+\operatorname{HasSum}\left(n \mapsto b_n u^n,\;\frac{1}{\sqrt{1-u}}\right).
 $$
+
+Here $\operatorname{HasSum}$ specifies both convergence of the series and its sum.
+:::
+
+::: {.remark #rem-arcsin-series-derivation title="Integrating the Binomial Kernel: The Arcsine Series Including Its Endpoints"}
+Set
+
+$$
+c_n = \frac{\binom{2n}{n}}{4^n(2n+1)} \in \mathbb{Q}.
+$$
+
+Below, $c_n$ denotes its image in $\mathbb{R}$. Fix any $y \in [0,1]$, and write
+
+$$
+\begin{aligned}
+g(t)&=\frac{1}{\sqrt{1-t^2}},\\
+F_N(t)&=\sum_{n<N}b_n t^{2n}\quad(N\in\mathbb{N}).
+\end{aligned}
+$$
+
+On the open interval $0<t<y$, we have $0\le t^2<1$. Thus [@lem-arcsin-binomial-kernel] gives $F_N(t)\to g(t)$ and $0\le F_N(t)\le g(t)$. When $y=1$, the kernel has a singularity at the right endpoint. The binomial expansion is used only on the open interval; arbitrary finite values may be assigned at the endpoints, since both have Lebesgue measure zero.
+
+Integrability follows from the primitive itself: $\arcsin$ is continuous on $[0,y]$ and has the nonnegative derivative $g(t)$ for $0<t<y$. Automatic integrability of a nonnegative derivative and the fundamental theorem of calculus therefore give[^arcsin-ftc]
+
+$$
+\int_0^y g(t)\,\mathrm{d}t=\arcsin y-\arcsin 0=\arcsin y.
+$$
+
+This includes $y=1$; for $y=0$ the integral is zero. The integrable function $g$ now dominates the nonnegative polynomial partial sums, permitting termwise integration[^arcsin-dct]:
+
+$$
+\begin{aligned}
+\int_0^y F_N(t)\,\mathrm{d}t
+&=\sum_{n<N}\frac{b_n}{2n+1}\,y^{2n+1}\\
+&=\sum_{n<N}c_n y^{2n+1}\\
+&\longrightarrow\arcsin y.
+\end{aligned}
+$$
+
+Convergence at $y=1$ thus follows from the integral argument, without assuming a value for the endpoint series. Finally, $\arcsin(-y)=-\arcsin y$ (`Real.arcsin_neg`) and the oddness of every monomial cover all $x\in[-1,1]$, including $x=-1$. The complete expansion is
+
+$$
+\begin{aligned}
+\arcsin x&=\sum_{n\ge0}c_n x^{2n+1}\\
+&=x+\frac{x^3}{6}+\frac{3x^5}{40}\\
+&\quad+\frac{5x^7}{112}+\cdots
+\qquad(\lvert x\rvert\le1).
+\end{aligned}
+$$
+:::
+
+[^arcsin-ftc]: Continuity and differentiation use Mathlib's `Real.continuous_arcsin` and `Real.hasDerivAt_arcsin`. The latter requires $t\ne-1$ and $t\ne1$, which hold for $0<t<y\le1$. Automatic integrability uses `intervalIntegral.intervalIntegrable_deriv_of_nonneg`, which requires continuity on the closed interval, the derivative on the open interval, and nonnegativity of that derivative. The integral identity uses `intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le`, requiring $0\le y$, the same continuity and open-interval derivative, and the interval integrability established in the previous step. Neither theorem requires a derivative at an endpoint.
+
+[^arcsin-dct]: Termwise integration uses Mathlib's `intervalIntegral.hasSum_integral_of_dominated_convergence`: each term is a measurable polynomial, bounded on the open interval by the nonnegative term $b_nt^{2n}$ itself. The sum of these bounds equals the integrable $g(t)$ almost everywhere. Integrating each finite polynomial gives the coefficient $b_n/(2n+1)=c_n$.
 
 Hence $\pi$ is the value at $\theta^*$ of a power series with rational coefficients:
 
@@ -558,7 +615,35 @@ $$
 \pi \;=\; A(\theta^*), \qquad A(x) \;=\; 2x + 2\arcsin x \;=\; 4x + \frac{x^3}{3} + \frac{3x^5}{20} + \frac{5x^7}{56} + \frac{35x^9}{576} + \cdots .
 $$
 
-This is the positive answer to the question, and it is stronger than "projection": knowing $\theta^*$ alone, one computes $\pi$ to any accuracy using nothing but additions and multiplications.
+The fixed-point hypotheses used here are $\theta^*\in[0,1]$ and $\cos\theta^*=\theta^*$. They supply the branch conditions $0\le\theta^*\le\pi$ required by `Real.arccos_cos`. Combining it with `Real.arccos_eq_pi_div_two_sub_arcsin` gives $\theta^*=\pi/2-\arcsin\theta^*$, hence $\pi=A(\theta^*)$.
+
+::: {.remark #rem-arcsin-interior-tail title="Geometric Truncation Bounds on Interior Intervals"}
+For every $N\in\mathbb{N}$, define
+
+$$
+\begin{aligned}
+S_N(x)&=\sum_{n<N}c_n x^{2n+1},\\
+A_N(x)&=2x+2S_N(x).
+\end{aligned}
+$$
+
+By [@lem-arcsin-binomial-kernel], $0\le c_n=b_n/(2n+1)\le1$. For any real $q,x$ with $0\le q<1$ and $|x|\le q$,
+
+$$
+\begin{aligned}
+\left|\arcsin x-S_N(x)\right|
+&\le\sum_{n=N}^{\infty}c_n|x|^{2n+1}\\
+&\le\sum_{n=N}^{\infty}q^{2n+1}
+=\frac{q^{2N+1}}{1-q^2},\\
+\left|A(x)-A_N(x)\right|
+&\le\frac{2q^{2N+1}}{1-q^2}.
+\end{aligned}
+$$
+
+These bounds include $N=0$, when the partial sum is empty, and $q=0$, when $x=0$ and both the remainder and the bound are zero. Convergence at $x=\pm1$ comes from the integral argument in [@rem-arcsin-series-derivation]; the geometric bound here applies only to $q<1$.
+:::
+
+This gives “arbitrary precision” a precise truncation meaning. For this chapter's $\theta^*\in(0,1)$, choose $\theta^*\le q<1$. For every tolerance $\varepsilon>0$, some $N$ makes $2q^{2N+1}/(1-q^2)<\varepsilon$, and hence $|\pi-A_N(\theta^*)|<\varepsilon$. The rational polynomial $A_N$ takes finitely many additions and multiplications to evaluate. This controls series truncation for an exact input; an actual computation also needs bounds for the input error in $\theta^*$, rounding, and computational resources.
 
 **The reverse direction: reading $\theta^*$ from $\pi$.** The linear coefficient of $A$ at $0$ is $4 \neq 0$, so $A$ has a formal inverse $B = A^{-1}$, again an odd power series with rational coefficients. Order-by-order reversion gives
 
@@ -742,11 +827,11 @@ The two mechanisms divide the work cleanly, and the diagonal adds a third piece.
 
 ### Summary of Part VI: From Spheres Beyond Spheres to $\psi = \psi(\psi)$ — Ready to Forge the Mechanical Canon
 
-Across the four chapters of Part VI, backed by **thirty-one Lean-verified theorem blocks** (seven in Chapter 21, eight in Chapter 22, four in Chapter 23, and twelve in Chapter 24), we have brought mathematical logic, prime spectral theory, Diophantine norm locks, and self-referential fixed points under one geometric roof:
+Across the four chapters of Part VI, backed by **thirty-two Lean-verified theorem blocks** (seven in Chapter 21, eight in Chapter 22, four in Chapter 23, and thirteen in Chapter 24), we have brought mathematical logic, prime spectral theory, Diophantine norm locks, and self-referential fixed points under one geometric roof:
 
 - **Chapter 21** proved that any complete decoder catalog produces a relative semantic diagonal that is discontinuous in the latent partition topology ([@thm-complete-diagonal-not-continuous]), has a nonempty separation deficit ([@lem-complete-diagonal-separation-deficit]), and forces strict observation-topology refinement when adjoined ([@prop-complete-diagonal-strict-refinement], [@cor-complete-diagonal-topological-settlement]), gave the factorial remainder bound for the exponential series in a complete normed algebra ([@lem-exp-tail-le]) and the strictly positive cosine lower bound on the recovery error of a finite-record channel ([@lem-finite-support-autocorrelation-cosine], [@thm-finite-record-cosine-obstruction]), paired with Taylor remainder seams $R_{2N}(\theta)$, Descartes's $12 \times 60^\circ = 720^\circ = 4\pi$ polyhedral angular defect, the Hairy Ball Theorem, and Adams's parallelizable spheres $S^0, S^1, S^3, S^7$ ([@rem-hairy-ball-adams-literature]);
 - **Chapter 22** revealed primes as the orthogonal basis of arithmetic and established on the explicit half-plane $\operatorname{Re}(s) > 1$ the unit residue at $s = 1$ ([@lem-riemann-zeta-residue-one]), the Dirichlet series ([@prop-riemann-zeta-dirichlet-sum]), the Euler prime product ([@thm-riemann-zeta-euler-product]), their direct equality ([@cor-dirichlet-sum-eq-euler-product]), the entirety and reflection symmetry $\xi(1 - s) = \xi(s)$ of the completed xi reading ([@thm-xi-reading-entire-reflection]) together with its conjugation covariance ([@prop-zeta-conjugation-covariance]), the rolling of the critical line into the unit circle with a radial equivalent of the Riemann Hypothesis ([@thm-cayley-critical-line-criterion]), and a quartic polynomial showing that full symmetry does not pin zeros to the critical line ([@thm-full-symmetry-not-localization]), alongside the polyhedral prime-sieve remainder and the epistemic boundary of the open Riemann Hypothesis ([@conj-riemann-hypothesis], [@rem-euler-zeta-literature]);
 - **Chapter 23** showed how quadratic norms and traces isolate discrete integer lattices, proving unimodular shear reduction, constant discriminant $\Delta = -3$, and range invariance for the Eisenstein crossing family ([@thm-qform-eq-eisnorm], [@lem-qform-discriminant], [@cor-qform-range-eq-eisnorm]) together with the $\Delta = +5$ Golden Pell trace–norm identity ([@prop-pell-form-eq-four-mul-norm]), and auditing Koenigsmann's 2016 $\forall$/$\forall\exists$ first-order definition of $\mathbb{Z}$ in $\mathbb{Q}$ vs. the open existential problem $\mathrm{H10}(\mathbb{Q})$ ([@rem-diophantine-z-in-q-literature]);
-- **Chapter 24** proved finite contracting set stabilization and strict-change bounds ([@thm-finite-contracting-updates-stabilize]), adjacent-step agreement and static contextual non-uniqueness (identical text and interpretation rule under two distinct static contexts yield different fixed Boolean meanings, [@lem-conceptual-equivalence-stability-fixed-point], [@prop-context-parameters-distinct-fixed-points]), uniqueness of the positive golden fixed point ([@cor-golden-fixed-point-unique]), the four self-application fates of nondegenerate binary fractional maps with the $\varphi$-family as the only live one ([@thm-self-application-four-fates], [@lem-golden-inverse-branch-fixed-point]), the golden cosines of the regular pentagon ([@prop-pentagon-golden-cosines]), the diagonal landing as a fixed point of the twist together with universal escape for fixed-point-free twists and its finite count ([@lem-diagonal-landing-fixed], [@thm-self-application-fragment-package], [@prop-escaped-listing-card]), Brouwer's fixed-point theorem on the standard simplex ([@thm-brouwer-standard-simplex]), and the convergence of orbit averages of an irrational rotation to the Haar average ([@lem-irrational-rotation-equidistribution]), culminating in Banach contraction on $[0, 1]$, Lindemann–Weierstrass transcendence ($|\cos q - q| > 0$), Schanuel's conjecture ([@conj-schanuel-dottie], [@rem-banach-dottie-hairy-ball-literature]), and the self-referential synthesis $\psi = \psi(\psi)$.
+- **Chapter 24** proved finite contracting set stabilization and strict-change bounds ([@thm-finite-contracting-updates-stabilize]), adjacent-step agreement and static contextual non-uniqueness (identical text and interpretation rule under two distinct static contexts yield different fixed Boolean meanings, [@lem-conceptual-equivalence-stability-fixed-point], [@prop-context-parameters-distinct-fixed-points]), uniqueness of the positive golden fixed point ([@cor-golden-fixed-point-unique]), the four self-application fates of nondegenerate binary fractional maps with the $\varphi$-family as the only live one ([@thm-self-application-four-fates], [@lem-golden-inverse-branch-fixed-point]), the golden cosines of the regular pentagon ([@prop-pentagon-golden-cosines]), the diagonal landing as a fixed point of the twist together with universal escape for fixed-point-free twists and its finite count ([@lem-diagonal-landing-fixed], [@thm-self-application-fragment-package], [@prop-escaped-listing-card]), Brouwer's fixed-point theorem on the standard simplex ([@thm-brouwer-standard-simplex]), the convergence of orbit averages of an irrational rotation to the Haar average ([@lem-irrational-rotation-equidistribution]), and the normalized central-binomial coefficient bounds and binomial-kernel series used in the arcsine expansion ([@lem-arcsin-binomial-kernel]), culminating in Banach contraction on $[0, 1]$, Lindemann–Weierstrass transcendence ($|\cos q - q| > 0$), Schanuel's conjecture ([@conj-schanuel-dottie], [@rem-banach-dottie-hairy-ball-literature]), and the self-referential synthesis $\psi = \psi(\psi)$.
 
-With the theoretical arch of the book complete, **Part VII (*Forging the Blade — Mechanical Canon: Matrix-Free Engines and Formal Proof Libraries*)** turns these geometric laws into executable matrix-free bitmask Clifford engines and ZYZ rotor compilers, and steps inside the Lean 4 formal temple to audit the complete formal verification ledger of the monograph.
+With the theoretical arch of Parts I–VI in place, **Part VII (*Construction and Verification — XOR Algebra, Rotor Compilation, and the Lean 4 Axiom Sanctuary*)** turns these geometric laws into executable matrix-free bitmask Clifford engines and ZYZ rotor compilers, and steps inside the Lean 4 formal sanctuary to audit the frozen proof architecture before **Part VIII** and the **Coda** bring the entire eight-part monograph together.

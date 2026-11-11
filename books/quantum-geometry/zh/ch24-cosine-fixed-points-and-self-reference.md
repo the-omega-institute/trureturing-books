@@ -548,11 +548,68 @@ $$
 
 在单位圆上看：点 $P = (\cos\theta^*, \sin\theta^*) = (\theta^*, \lambda)$ 把第一象限的四分之一圆弧切成两段。下段从 $(1, 0)$ 到 $P$，弧长是 $\theta^*$，恰好等于 $P$ 的横坐标；上段从 $P$ 到 $(0, 1)$，弧长是 $\arcsin\theta^*$。$P$ 是这段圆弧上唯一一个“弧长等于自己横坐标”的点。
 
-反正弦的幂级数只有有理系数，而且不含 $\pi$：
+要把这段圆弧写成有理系数级数，先展开它的积分核。
+
+::: {.lemma #lem-arcsin-binomial-kernel title="归一化中心二项系数与二项核" lean="D5/S3/Analytic/OriginalHalfBinomialIntegral.b_nonneg D5/S3/Analytic/OriginalHalfBinomialIntegral.b_le_one D5/S3/Analytic/OriginalHalfBinomialIntegral.binomial_hasSum"}
+对每个 $n \in \mathbb{N}$，令 $b_n = \binom{2n}{n}/4^n \in \mathbb{R}$，则 $0 \le b_n \le 1$。对每个满足 $0 \le u < 1$ 的实数 $u$，
 
 $$
-\arcsin x \;=\; \sum_{n \ge 0} \frac{\binom{2n}{n}}{4^n\,(2n+1)}\,x^{2n+1} \;=\; x + \frac{x^3}{6} + \frac{3x^5}{40} + \frac{5x^7}{112} + \cdots \qquad (\lvert x\rvert \le 1).
+\operatorname{HasSum}\left(n \mapsto b_n u^n,\;\frac{1}{\sqrt{1-u}}\right).
 $$
+
+这里 $\operatorname{HasSum}$ 同时指定级数收敛及其和。
+:::
+
+::: {.remark #rem-arcsin-series-derivation title="从二项核积分到含端点的反正弦级数"}
+令
+
+$$
+c_n = \frac{\binom{2n}{n}}{4^n(2n+1)} \in \mathbb{Q}.
+$$
+
+下文以 $c_n$ 表示它在 $\mathbb{R}$ 中的像。固定任意 $y \in [0,1]$，并记
+
+$$
+\begin{aligned}
+g(t)&=\frac{1}{\sqrt{1-t^2}},\\
+F_N(t)&=\sum_{n<N}b_n t^{2n}\quad(N\in\mathbb{N}).
+\end{aligned}
+$$
+
+在开区间 $0<t<y$ 上有 $0\le t^2<1$，所以 [@lem-arcsin-binomial-kernel] 给出 $F_N(t)\to g(t)$，并且 $0\le F_N(t)\le g(t)$。当 $y=1$ 时，核在右端点有奇性；这里只在开区间使用二项展开，端点可以任意补上有限值，因为两个端点的勒贝格测度为零。
+
+可积性也能从原函数本身得到：$\arcsin$ 在 $[0,y]$ 上连续，在 $0<t<y$ 上的导数是非负的 $g(t)$。非负导数的自动可积性与微积分基本定理因此给出[^arcsin-ftc]
+
+$$
+\int_0^y g(t)\,\mathrm{d}t=\arcsin y-\arcsin 0=\arcsin y.
+$$
+
+这包括 $y=1$；$y=0$ 时积分为零。于是可用可积的 $g$ 控制非负多项式部分和，逐项积分[^arcsin-dct]：
+
+$$
+\begin{aligned}
+\int_0^y F_N(t)\,\mathrm{d}t
+&=\sum_{n<N}\frac{b_n}{2n+1}\,y^{2n+1}\\
+&=\sum_{n<N}c_n y^{2n+1}\\
+&\longrightarrow\arcsin y.
+\end{aligned}
+$$
+
+因此端点 $y=1$ 的级数收敛由积分论证得到，无需预设端点级数的和。再用 $\arcsin(-y)=-\arcsin y$（`Real.arcsin_neg`）以及每个单项式的奇性，便覆盖所有 $x\in[-1,1]$，包括 $x=-1$。反正弦的完整展开为
+
+$$
+\begin{aligned}
+\arcsin x&=\sum_{n\ge0}c_n x^{2n+1}\\
+&=x+\frac{x^3}{6}+\frac{3x^5}{40}\\
+&\quad+\frac{5x^7}{112}+\cdots
+\qquad(\lvert x\rvert\le1).
+\end{aligned}
+$$
+:::
+
+[^arcsin-ftc]: 连续性与导数使用 Mathlib 的 `Real.continuous_arcsin`、`Real.hasDerivAt_arcsin`；后者要求 $t\ne-1$ 且 $t\ne1$，在 $0<t<y\le1$ 上成立。自动可积性使用 `intervalIntegral.intervalIntegrable_deriv_of_nonneg`，除闭区间连续性与开区间导数外，还使用上述导数的非负性。积分恒等式使用 `intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le`，其前提是 $0\le y$、同样的连续性与开区间导数，以及前一步建立的区间可积性。两者均不要求端点可导。
+
+[^arcsin-dct]: 逐项积分使用 Mathlib 的 `intervalIntegral.hasSum_integral_of_dominated_convergence`：每项是可测多项式，在开区间上以非负项 $b_nt^{2n}$ 自身作界；这些界的和几乎处处等于可积的 $g(t)$。有限多项式的积分给出系数 $b_n/(2n+1)=c_n$。
 
 于是 $\pi$ 是 $\theta^*$ 的一条有理系数幂级数的值：
 
@@ -560,7 +617,35 @@ $$
 \pi \;=\; A(\theta^*), \qquad A(x) \;=\; 2x + 2\arcsin x \;=\; 4x + \frac{x^3}{3} + \frac{3x^5}{20} + \frac{5x^7}{56} + \frac{35x^9}{576} + \cdots .
 $$
 
-这就是对题记追问的肯定回答，而且比“投影”更强：只要知道 $\theta^*$，就能只用加法和乘法把 $\pi$ 算到任意精度。
+这里使用的不动点条件是 $\theta^*\in[0,1]$ 与 $\cos\theta^*=\theta^*$。`Real.arccos_cos` 要求的 $0\le\theta^*\le\pi$ 由此区间条件保证；结合 `Real.arccos_eq_pi_div_two_sub_arcsin`，得到 $\theta^*=\pi/2-\arcsin\theta^*$，从而 $\pi=A(\theta^*)$。
+
+::: {.remark #rem-arcsin-interior-tail title="内部区间上的几何截断误差"}
+对每个 $N\in\mathbb{N}$，定义
+
+$$
+\begin{aligned}
+S_N(x)&=\sum_{n<N}c_n x^{2n+1},\\
+A_N(x)&=2x+2S_N(x).
+\end{aligned}
+$$
+
+由 [@lem-arcsin-binomial-kernel]，$0\le c_n=b_n/(2n+1)\le1$。对任意实数 $q,x$，若 $0\le q<1$ 且 $|x|\le q$，则
+
+$$
+\begin{aligned}
+\left|\arcsin x-S_N(x)\right|
+&\le\sum_{n=N}^{\infty}c_n|x|^{2n+1}\\
+&\le\sum_{n=N}^{\infty}q^{2n+1}
+=\frac{q^{2N+1}}{1-q^2},\\
+\left|A(x)-A_N(x)\right|
+&\le\frac{2q^{2N+1}}{1-q^2}.
+\end{aligned}
+$$
+
+这些界对 $N=0$ 也成立，此时部分和为空；对 $q=0$ 也成立，此时 $x=0$，余项和上界均为零。端点 $x=\pm1$ 的收敛来自 [@rem-arcsin-series-derivation] 的积分论证；此处的几何界只用于 $q<1$。
+:::
+
+这使“任意精度”有了明确的截断含义：对本章的 $\theta^*\in(0,1)$，选取 $\theta^*\le q<1$；给定任意误差容限 $\varepsilon>0$，总能选 $N$ 使 $2q^{2N+1}/(1-q^2)<\varepsilon$，于是 $|\pi-A_N(\theta^*)|<\varepsilon$。$A_N$ 是有理系数多项式，可用有限次加乘求值。这个结论约束的是精确输入下的级数截断误差；实际计算还需另给 $\theta^*$ 的输入误差、舍入控制与计算资源界。
 
 **反方向：从 $\pi$ 读出 $\theta^*$。** $A$ 在 $0$ 处的一阶系数是 $4 \neq 0$，所以它有形式反函数 $B = A^{-1}$，同样是有理系数的奇次幂级数。逐阶反演给出
 
@@ -744,11 +829,11 @@ $$
 
 ### 第六部小结：从球外之球回到自指原点，下一步铸造机械法典
 
-回望第六部《越界·球外之球》的四章征程，我们用经 Lean 4 内核逐条验证的**三十一条正式定理级结论**（第二十一章七条，第二十二章八条，第二十三章四条，第二十四章十二条，涵盖相对语义对角线拓扑逃逸、黎曼 $\zeta$ 函数留数与狄利克雷—欧拉乘积恒等式、艾森斯坦交越二次型剪切不变性与黄金佩尔迹—范数恒等式、以及有限收缩稳定化、解释语境相对不动点与黄金倒数唯一不动点），完成了从数理逻辑、算术频谱到自指不动点的跨界合拢：
+回望第六部《越界·球外之球》的四章征程，我们用经 Lean 4 内核逐条验证的**三十二条正式定理级结论**（第二十一章七条，第二十二章八条，第二十三章四条，第二十四章十三条，涵盖相对语义对角线拓扑逃逸、黎曼 $\zeta$ 函数留数与狄利克雷—欧拉乘积恒等式、艾森斯坦交越二次型剪切不变性与黄金佩尔迹—范数恒等式、以及有限收缩稳定化、解释语境相对不动点与黄金倒数唯一不动点），完成了从数理逻辑、算术频谱到自指不动点的跨界合拢：
 
 - **第二十一章**证明了完备解码目录诱导的相对语义对角线在潜划分拓扑下必不连续（[@thm-complete-diagonal-not-continuous]）、必具非空分离亏损（[@lem-complete-diagonal-separation-deficit]），且并入对角线后观测拓扑严格加细（[@prop-complete-diagonal-strict-refinement]、[@cor-complete-diagonal-topological-settlement]），给出了完备赋范代数中指数级数的阶乘余项界（[@lem-exp-tail-le]）与有限记录信道恢复误差的严格正余弦下界（[@lem-finite-support-autocorrelation-cosine]、[@thm-finite-record-cosine-obstruction]），并与泰勒截断余项 $R_{2N}(\theta)$、笛卡尔 $720^\circ = 4\pi$ 五边形角亏、毛球定理及 Adams 可平行化球面 $S^0, S^1, S^3, S^7$（[@rem-hairy-ball-adams-literature]）交相印证；
 - **第二十二章**将素数还原为算术对数空间的正交基，在绝对收敛半平面 $\operatorname{Re}(s) > 1$ 上严格建立了 $s=1$ 留数（[@lem-riemann-zeta-residue-one]）、狄利克雷级数（[@prop-riemann-zeta-dirichlet-sum]）、欧拉乘积（[@thm-riemann-zeta-euler-product]）及两者的直接恒等（[@cor-dirichlet-sum-eq-euler-product]），给出完备化 $\xi$ 读数的整函数性与反射对称 $\xi(1 - s) = \xi(s)$（[@thm-xi-reading-entire-reflection]）及共轭协变（[@prop-zeta-conjugation-covariance]），把临界线卷成单位圆并得到黎曼猜想的径向等价形式（[@thm-cayley-critical-line-criterion]），用一个四次多项式说明完全对称性不足以把零点锁在临界线上（[@thm-full-symmetry-not-localization]），剖析了有限素数筛的多面体余项裂缝，并严格划定了它们与开放黎曼猜想（[@conj-riemann-hypothesis]、[@rem-euler-zeta-literature]）的认识论边界；
 - **第二十三章**揭示了二次范数与迹投影如何在连续有理数中锁定离散整格，形式化证明了 $\Delta = -3$ 艾森斯坦交越二次型的幺模剪切归约、常数判别式与值域等同（[@thm-qform-eq-eisnorm]、[@lem-qform-discriminant]、[@cor-qform-range-eq-eisnorm]）以及 $\Delta = +5$ 黄金整数的佩尔恒等式（[@prop-pell-form-eq-four-mul-norm]），并系统评述了 Koenigsmann（2016）用四元数范数在 $\mathbb{Q}$ 中给出 $\mathbb{Z}$ 的 $\forall$/$\forall\exists$ 一阶定义与开放问题 $\mathrm{H10}(\mathbb{Q})$ 的精确关系（[@rem-diophantine-z-in-q-literature]）；
-- **第二十四章**证明了有限状态收缩更新的稳定化与变化步数界（[@thm-finite-contracting-updates-stabilize]）、相对解释不动点的相邻步贴合与静态语境非唯一性（相同的文本与解释规则在两个不同静态语境下给出不同的布尔意义，[@lem-conceptual-equivalence-stability-fixed-point]、[@prop-context-parameters-distinct-fixed-points]）正实数上黄金倒数映射的唯一不动点（[@cor-golden-fixed-point-unique]）、非退化二元分式映射的四种自作用命运及其中唯一“活着”的 $\varphi$ 族（[@thm-self-application-four-fates]、[@lem-golden-inverse-branch-fixed-point]）正五边形的黄金余弦（[@prop-pentagon-golden-cosines]）、对角线落点即扭转不动点与无不动点扭转的普遍逃逸及其有限计数（[@lem-diagonal-landing-fixed]、[@thm-self-application-fragment-package]、[@prop-escaped-listing-card]）标准单纯形上的布劳威尔不动点定理（[@thm-brouwer-standard-simplex]）以及无理旋转轨道平均趋于 Haar 平均（[@lem-irrational-rotation-equidistribution]），并在巴拿赫压缩、林德曼—魏尔斯特拉斯超越性（$|\cos q - q| > 0$）与沙努埃尔猜想（[@conj-schanuel-dottie]、[@rem-banach-dottie-hairy-ball-literature]）的映照下，将全书几何直觉收束于 $\cos\theta^* = \theta^*$ 与 $\psi = \psi(\psi)$。
+- **第二十四章**证明了有限状态收缩更新的稳定化与变化步数界（[@thm-finite-contracting-updates-stabilize]）、相对解释不动点的相邻步贴合与静态语境非唯一性（相同的文本与解释规则在两个不同静态语境下给出不同的布尔意义，[@lem-conceptual-equivalence-stability-fixed-point]、[@prop-context-parameters-distinct-fixed-points]）正实数上黄金倒数映射的唯一不动点（[@cor-golden-fixed-point-unique]）、非退化二元分式映射的四种自作用命运及其中唯一“活着”的 $\varphi$ 族（[@thm-self-application-four-fates]、[@lem-golden-inverse-branch-fixed-point]）正五边形的黄金余弦（[@prop-pentagon-golden-cosines]）、对角线落点即扭转不动点与无不动点扭转的普遍逃逸及其有限计数（[@lem-diagonal-landing-fixed]、[@thm-self-application-fragment-package]、[@prop-escaped-listing-card]）标准单纯形上的布劳威尔不动点定理（[@thm-brouwer-standard-simplex]）、无理旋转轨道平均趋于 Haar 平均（[@lem-irrational-rotation-equidistribution]），以及反正弦展开所用的归一化中心二项系数界与二项核级数（[@lem-arcsin-binomial-kernel]），并在巴拿赫压缩、林德曼—魏尔斯特拉斯超越性（$|\cos q - q| > 0$）与沙努埃尔猜想（[@conj-schanuel-dottie]、[@rem-banach-dottie-hairy-ball-literature]）的映照下，将全书几何直觉收束于 $\cos\theta^* = \theta^*$ 与 $\psi = \psi(\psi)$。
 
-既然全书的几何直觉与理论大厦已经合拢，在最后的**第七部《铸剑·机械法典：零矩阵几何引擎与形式化证明库》**中，我们将把这一切几何定理直接铸造成可运行、零复数矩阵黑箱的位掩码克利福德引擎与 ZYZ 旋转器编译器，并走进 Lean 4 形式化公理圣殿的内部，对全书引用的每一条机器形式化声明执行终极审计！
+既然前六部的几何直觉与理论大厦已经合拢，在接下来的**第七部《铸器·构造与验证：异或代数、旋子编译与 Lean 4 公理圣殿》**中，我们将把这一切几何定理直接铸造成可运行、零复数矩阵黑箱的位掩码克利福德引擎与 ZYZ 旋转器编译器，并走进 Lean 4 形式化公理圣殿的内部，对支撑全书的机器形式化声明展开逐行审计，随后在**第八部**与**终章**中完成全书八部曲的总合拢！
