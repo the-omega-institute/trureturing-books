@@ -51,7 +51,7 @@ $$
 
 更进一步，闭合球面回路上的几何和乐与三顶点复内积不变量之间的经典对应关系汇总如下（[@rem-berry-pancharatnam-holonomy-literature]）。
 
-::: {.remark #rem-berry-pancharatnam-holonomy-literature title="八分球贝里几何相位与三点循环巴格曼不变量（文献结果，未在本书形式化）"}
+::: {.remark #rem-berry-pancharatnam-holonomy-literature title="八分球贝里几何相位与巴格曼辐角的立体角解读（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 如果让自旋状态沿着球面八分球大圆三角形 $N(\vv{e}_3) \to +X(\vv{e}_1) \to +Y(\vv{e}_2) \to N(\vv{e}_3)$ 走完一圈闭合回路（立体角 $\Omega = \frac{\pi}{2}$，占整球立体角 $4\pi$ 的八分之一），虽然三维实方向向量 $\vv{r}$ 回到了北极原点 $N$，但悬挂在它头顶的二维复旋量却攒下了一个无法消去的几何和乐角——在自旋朝上本征支的标准约定下，**贝里几何相位**（Berry, 1984；Simon, 1983）等于有向立体角的负一半：
 
 $$
@@ -65,10 +65,79 @@ $$
 $$
 
 在每个顶点各自乘上任意局部相位 $\psi_k \mapsto e^{i\alpha_k}\psi_k$ 时严格保持不变（因为 $e^{-i\alpha_0}e^{i\alpha_1}\cdot e^{-i\alpha_1}e^{i\alpha_2}\cdot e^{-i\alpha_2}e^{i\alpha_0} = 1$），而它的复辐角按 $\gamma_B \equiv -\arg\Delta = -\frac{\Omega}{2} \pmod{2\pi}$ 直接编码了球面测地三角形的几何相位（更多微分拓扑文献细节见章末 [@rem-gram-hairy-ball-literature]）。
+
+其中 $\Delta$ 本身——它的布洛赫形式，以及八分球回路上的值 $\frac{1+i}{4}$——已不是文献结果，见下文 [@thm-qubit-bargmann-bloch]；仍属文献结果的是辐角与立体角、贝里相位之间的对应。
 :::
 
 ::: {.viz src="berry-loop" preset="octant" height="500"}
-**八分之一球。** 青色的回路 $N \to +X \to +Y \to N$ 圈住品红的面积 $\Omega = \frac{\pi}{2}$。琥珀色的箭头沿回路搬运一圈，回到 $N$ 时比虚线的出发方向转了 $\frac{\pi}{2}$；右下角青色的指针是相邻内积连乘积 $\Delta = \frac{1+i}{4}$ 的相位 $\frac{\pi}{4}$，正是这块面积的一半。转角、相位与面积的一般对应是上面的文献结果，未在本书形式化。
+**八分之一球。** 青色的回路 $N \to +X \to +Y \to N$ 圈住品红的面积 $\Omega = \frac{\pi}{2}$。琥珀色的箭头沿回路搬运一圈，回到 $N$ 时比虚线的出发方向转了 $\frac{\pi}{2}$；右下角青色的指针是相邻内积连乘积 $\Delta = \frac{1+i}{4}$ 的相位 $\frac{\pi}{4}$，正是这块面积的一半。转角、相位与面积的一般对应是上面的文献结果，未在本书形式化；$\Delta$ 的值本身见下文 [@thm-qubit-bargmann-bloch]。
+:::
+
+**乘积的模与辐角各从哪里来。** 由第 3 章的 [@thm-rank-one-chain-trace]，三点巴格曼乘积就是三个投影算子按序相乘后的迹：$\Delta = \langle\psi_0, \psi_1\rangle\langle\psi_1, \psi_2\rangle\langle\psi_2, \psi_0\rangle = \Tr(P_0 P_1 P_2)$，其中 $P_k = \lvert\psi_k\rangle\langle\psi_k\rvert$。单比特的每个投影都写成 $P = \frac{1}{2}(I + \vv{r}\cdot\vv{\sigma})$，于是这个迹可以完全用三根布洛赫向量读出来。
+
+::: {.theorem #thm-qubit-bargmann-bloch title="单比特三点巴格曼迹：标量部分加有向体积" lean="D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.explicit_qubit_orientation"}
+对 $\vv{r} = (r_x, r_y, r_z) \in \mathbb{R}^3$，令
+
+$$
+P(\vv{r}) = \frac{1}{2}\begin{pmatrix} 1 + r_z & r_x - i\,r_y \\ r_x + i\,r_y & 1 - r_z \end{pmatrix} = \frac{1}{2}\bigl(I + \vv{r}\cdot\vv{\sigma}\bigr).
+$$
+
+1. 对任意 $\vv{a}, \vv{b}, \vv{c} \in \mathbb{R}^3$，
+
+   $$
+   \Tr\bigl(P(\vv{a})\,P(\vv{b})\,P(\vv{c})\bigr) = \frac{1 + \vv{a}\cdot\vv{b} + \vv{b}\cdot\vv{c} + \vv{c}\cdot\vv{a}}{4} + i\,\frac{\vv{a}\cdot(\vv{b}\times\vv{c})}{4}.
+   $$
+
+2. 特别地，$\Tr\bigl(P(\vv{e}_3)\,P(\vv{e}_1)\,P(\vv{e}_2)\bigr) = \frac{1+i}{4}$，$\Tr\bigl(P(\vv{e}_3)\,P(\vv{e}_1)\,P(-\vv{e}_2)\bigr) = \frac{1-i}{4}$。
+
+结论 1 不要求 $\vv{a}, \vv{b}, \vv{c}$ 是单位向量；只有单位向量给出的 $P(\vv{r})$ 才是投影算子。
+:::
+
+::: proof
+Lean 把三个 $2\times 2$ 矩阵逐项相乘、取迹，再用 $i^2 = -1$ 合并同类项。同一计算可以用泡利乘法表 $\sigma_j\sigma_k = \delta_{jk}I + i\sum_l \varepsilon_{jkl}\sigma_l$ 紧凑地写出（手工推导）：
+
+$$
+\begin{aligned}
+(I + \vv{a}\cdot\vv{\sigma})(I + \vv{b}\cdot\vv{\sigma}) &= (1 + \vv{a}\cdot\vv{b})\,I + \bigl(\vv{a} + \vv{b} + i\,\vv{a}\times\vv{b}\bigr)\cdot\vv{\sigma}, \\
+\Tr\bigl[(I + \vv{a}\cdot\vv{\sigma})(I + \vv{b}\cdot\vv{\sigma})(I + \vv{c}\cdot\vv{\sigma})\bigr] &= 2\bigl[1 + \vv{a}\cdot\vv{b} + (\vv{a} + \vv{b})\cdot\vv{c} + i\,(\vv{a}\times\vv{b})\cdot\vv{c}\bigr],
+\end{aligned}
+$$
+
+第二行用到 $\Tr I = 2$、$\Tr\sigma_k = 0$ 与 $\Tr(\sigma_j\sigma_k) = 2\delta_{jk}$。乘以 $\frac{1}{8}$，再用 $(\vv{a}\times\vv{b})\cdot\vv{c} = \vv{a}\cdot(\vv{b}\times\vv{c})$，就是结论 1。结论 2 是结论 1 在 $\vv{e}_3, \vv{e}_1, \pm\vv{e}_2$ 处的取值：三个两两点积都是 $0$，混合积分别是 $\pm 1$。完整证明由 Lean 内核检查。
+:::
+
+**模记得三条边，辐角记得体积。** 两态重叠的模平方是玻恩权重 $\lvert\langle\psi_j, \psi_k\rangle\rvert^2 = \frac{1 + \vv{r}_j\cdot\vv{r}_k}{2}$（第 2 章 [@ex-bloch-half-angle] 的半角公式），所以记 $p = \vv{a}\cdot\vv{b}$、$q = \vv{b}\cdot\vv{c}$、$s = \vv{c}\cdot\vv{a}$，就有 $\lvert\Delta\rvert^2 = \frac{(1+p)(1+q)(1+s)}{8}$。[@thm-qubit-bargmann-bloch] 给出同一个模：对单位向量，混合积的平方是格拉姆行列式 $1 + 2pqs - p^2 - q^2 - s^2$，代入后得
+
+$$
+(1 + p + q + s)^2 + \bigl(\vv{a}\cdot(\vv{b}\times\vv{c})\bigr)^2 = 2\,(1+p)(1+q)(1+s)
+$$
+
+（手工推导，展开两边即可核对）。所以 $\Delta$ 的模只记得三条边各自的相融度；辐角
+
+$$
+\arg\Delta = \operatorname{atan2}\bigl(\vv{a}\cdot(\vv{b}\times\vv{c}),\; 1 + p + q + s\bigr)
+$$
+
+却多出三条边单独看不见的东西：三根布洛赫向量撑开的有向体积。反着走一圈相当于交换 $\vv{b}$ 与 $\vv{c}$，体积变号，$\Delta$ 变成它的共轭；后面“反着走，手性翻转”那张卡里三个模平方都不变、指针却反向，原因就在这里。把这个辐角读成测地三角形的立体角，$\arg\Delta = \frac{\Omega}{2}$，还要用 Van Oosterom 与 Strackee 的立体角公式 $\tan\frac{\Omega}{2} = \frac{\vv{a}\cdot(\vv{b}\times\vv{c})}{1 + p + q + s}$（文献结果，未在本书形式化，见 [@rem-berry-pancharatnam-holonomy-literature]）。
+
+::: {.example #ex-bargmann-growing-triangles title="越张越大的测地三角形：Δ 的模在缩小，辐角跟着面积长"}
+取 $\vv{a} = \vv{e}_3$、$\vv{b} = (\sin\theta, 0, \cos\theta)$、$\vv{c} = (0, \sin\theta, \cos\theta)$：三角形的一个顶点在北极，另两个顶点在两条相互垂直的经线上、离北极都是 $\theta$。这时 $p = s = \cos\theta$、$q = \cos^2\theta$、$\vv{a}\cdot(\vv{b}\times\vv{c}) = \sin^2\theta$，由 [@thm-qubit-bargmann-bloch]
+
+$$
+\Delta = \frac{(1 + \cos\theta)^2}{4} + i\,\frac{\sin^2\theta}{4}, \qquad \arg\Delta = \arctan\Bigl(\tan^2\frac{\theta}{2}\Bigr).
+$$
+
+下表最后一列用 L'Huilier 公式由三条边长独立算出球面角盈 $\Omega$，与 $\arg\Delta$ 无关；数值四舍五入到所示位数。
+
+| $\theta$ | $\operatorname{Re}\Delta$ | $\operatorname{Im}\Delta$ | $\lvert\Delta\rvert^2$ | $\frac{(1+p)(1+q)(1+s)}{8}$ | $\arg\Delta$ | $\frac{\Omega}{2}$（L'Huilier） |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| $30^\circ$ | $0.8705$ | $0.0625$ | $0.76170$ | $0.76170$ | $4.11^\circ$ | $4.11^\circ$ |
+| $60^\circ$ | $0.5625$ | $0.1875$ | $0.35156$ | $0.35156$ | $18.43^\circ$ | $18.43^\circ$ |
+| $90^\circ$ | $0.2500$ | $0.2500$ | $0.12500$ | $0.12500$ | $45.00^\circ$ | $45.00^\circ$ |
+| $120^\circ$ | $0.0625$ | $0.1875$ | $0.03906$ | $0.03906$ | $71.57^\circ$ | $71.57^\circ$ |
+| $150^\circ$ | $0.0045$ | $0.0625$ | $0.00393$ | $0.00393$ | $85.89^\circ$ | $85.89^\circ$ |
+
+$\theta = 90^\circ$ 一行就是八分球回路：$\Delta = \frac{1+i}{4}$，即结论 2。三角形越张越大，三条边越来越“不相融”，$\lvert\Delta\rvert$ 一路缩小；辐角却一路增大，始终是面积的一半。第五列与第四列逐行相同，是上面的手工推导；最后两列逐行相同，是 Van Oosterom–Strackee 公式在这五个三角形上的数值核对，不是证明。
 :::
 
 为了精确计算任意纬度圈上两个复旋量的两两内积，在 Lean 模块 `BargmannImaginaryMaximizers` 中，对高度参数 $t \in [0, 1]$ 与复数 $z \in \mathbb{C}$，定义二维复向量 `latitude t z` 为

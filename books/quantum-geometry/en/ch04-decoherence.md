@@ -207,6 +207,54 @@ Let $c \in [0, 1]$ be a real coherence-retention coefficient, and let $\mathcal{
 Claim 1 follows by induction on $N$: $N = 0$ is the identity ($c^0 = 1$), and step $N \to N + 1$ leaves diagonal entries $i = j$ untouched while multiplying off-diagonal entries $i \neq j$ by one more factor of $c$ to give $c^{N+1}\rho_{ij}$. For claim 2, evaluating claim 1 on $\rho_+$ at $(0, 1)$ gives $\frac{1}{2}c^N$; since $0 \le c < 1$, $|c| < 1$ implies $c^N \to 0$ as $N \to \infty$, and scaling by $\frac{1}{2}$ preserves convergence to $0$. The full proof is checked by the Lean kernel.
 :::
 
+**Decay to zero: is it still reversible?** In [@prop-phase-damping-decay] the coherence is multiplied by $c$ at each step, leaving $c^N\rho_{01}$ after $N$ steps and finally zero. Section 4.1 showed that one step of decoherence can be seen as a reversible coupling followed by discarding the environment ([@thm-stinespring-dilation], [@thm-reduced-access-defect]). But "each step can be seen this way" and "all the steps together are still the shadow of one reversible evolution" are different claims: the first allows a different dilation at every step, the second asks one unitary $U$ to account for all the powers $T^n$ at once. The next theorem says that the second holds for every contraction.
+
+::: {.theorem #thm-unitary-power-dilation title="Sz.-Nagy Unitary Power Dilation: Every Power of a Contraction Is a Shadow of the Same Unitary" lean="D5/S3/HilbertOperators/UnitaryPowerDilation.exists_unitary_power_dilation"}
+Let $E$ be a complex Hilbert space (a complete complex inner product space), and let $T : E \to E$ be a bounded linear operator with $\lVert T\rVert \le 1$. Then there are a complex Hilbert space $H$, a bounded linear operator $V : E \to H$ and a unitary operator $U$ on $H$ such that:
+
+1. $V$ preserves inner products: $\langle Vx, Vy\rangle = \langle x, y\rangle$ for all $x, y \in E$;
+2. $V^{\dagger}\,U^n\,V x = T^n x$ for all $n \in \mathbb{N}$ and $x \in E$.
+:::
+
+::: proof
+The Lean proof has two steps, and the second is exactly a "collision model".
+
+(1) One step: the Halmos dilation. On $E \oplus E$ take the self-adjoint block operator $a = \begin{pmatrix} 0 & T \\ T^{\dagger} & 0 \end{pmatrix}$, whose norm is at most $\lVert T\rVert \le 1$; with the continuous functional calculus, build $\sqrt{I - a^2}$, so that $a + i\sqrt{I - a^2}$ is unitary, and multiply by the permutation that swaps the two components to get a unitary $J$. Since $a^2$ is block diagonal, so is $\sqrt{I - a^2}$, and therefore the first component of $J$ applied to $(x, 0)$ is exactly $Tx$.
+
+(2) All steps: the collision model. Take $H = \ell^2(\mathbb{Z};\, E \oplus E)$, with one copy of the system and one of the environment at every integer site. $U$ first applies $J$ at every site at once and then moves every environment component one site to the right; a product of two unitaries, it is unitary. $V$ puts $x$ into the system component of site 0, and $V^{\dagger}$ reads back the system component of site 0. Induction on $n$ shows that after $n$ steps the system component of site 0 is $T^n x$, its environment component is zero, and all sites with negative index are zero. The reason is that at every step the system at site 0 meets a blank environment arriving from the left, while the used environment leaves to the right and never comes back. The full proof is checked by the Lean kernel.
+:::
+
+**Why the environment must be infinite.** The space $H$ built in the proof is infinite-dimensional, and this is not laziness (a manual derivation): if $\lVert T^n x\rVert \to 0$ for some unit vector $x$, no finite-dimensional $H$ can satisfy [@thm-unitary-power-dilation]. The unitaries of a finite-dimensional space form a compact set, so the sequence $U^n$ has a convergent subsequence $U^{n_k} \to W$; choosing it so that the gaps $m_k = n_{k+1} - n_k$ tend to infinity gives $U^{m_k} = U^{n_{k+1}}(U^{n_k})^{-1} \to W W^{-1} = I$. Hence
+
+$$
+\langle x, T^{m_k}x\rangle = \langle Vx, U^{m_k}Vx\rangle \to \langle Vx, Vx\rangle = 1,
+$$
+
+while the left side has modulus at most $\lVert T^{m_k}x\rVert \to 0$, a contradiction. A finite environment sooner or later sends the leaked amplitude back; a decay that never returns needs an infinite environment to hold it.
+
+::: {.example #ex-halmos-one-step-recurrence title="A One-Step Dilation Only Covers One Step: at c = 0.8 the Leaked Amplitude Comes Back"}
+Take the simplest contraction, $E = \mathbb{C}$ and $T = c = 0.8$: the factor by which the coherence of [@prop-phase-damping-decay] is multiplied at each step. With $s = \sqrt{1 - c^2} = 0.6$, the Halmos construction of step (1) of the proof gives
+
+$$
+J = \begin{pmatrix} c & i s \\ i s & c \end{pmatrix} = \begin{pmatrix} 0.8 & 0.6\,i \\ 0.6\,i & 0.8 \end{pmatrix}.
+$$
+
+At the first step it indeed sends the amplitude $1$ to $0.8$, and $0.6\,i$ leaks into the environment. If the same $J$ is used again with the same environment, then $J = \cos\varphi\, I + i\sin\varphi\,\sigma_x$ (with $\varphi = \arccos 0.8 = 36.87^\circ$) is just a rotation about the $x$ axis, and $(J^n)_{00} = \cos n\varphi$. The fourth column of the table is a numerical simulation of the collision model (site 0 meets a fresh environment at every step); values are rounded to the digits shown.
+
+| $n$ | $c^n$ (wanted) | $(J^n)_{00}$ (one environment reused) | collision model, site 0 | leaked probability $1 - c^{2n}$ |
+| ---: | ---: | ---: | ---: | ---: |
+| $1$ | $0.8000$ | $0.8000$ | $0.8000$ | $0.3600$ |
+| $2$ | $0.6400$ | $0.2800$ | $0.6400$ | $0.5904$ |
+| $3$ | $0.5120$ | $-0.3520$ | $0.5120$ | $0.7379$ |
+| $4$ | $0.4096$ | $-0.8432$ | $0.4096$ | $0.8322$ |
+| $5$ | $0.3277$ | $-0.9971$ | $0.3277$ | $0.8926$ |
+| $6$ | $0.2621$ | $-0.7522$ | $0.2621$ | $0.9313$ |
+
+From the second step on, a single environment sends the leaked amplitude back; at $n = 39$, $(J^{39})_{00} = 0.99934$, an almost complete recovery, while $c^{39} = 0.00017$. Site 0 of the collision model gives exactly $c^n$ in every row, in agreement with the induction in the proof. The leaked probability $1 - c^{2n}$ has not vanished: it is spread over sites $1, 2, \dots, n$, and the total norm stays $1$.
+:::
+
+> Leaked amplitude does not come back, not because it has vanished, but because the environment that meets the system is always a fresh one.
+
 Alongside energy-conserving $T_2$ dephasing stands energy-relaxing **amplitude damping** ($T_1$ spontaneous emission): an excited state at the south pole ($-1$) emits a quantum of energy into a cold bath and relaxes toward the ground state at the north pole ($+1$). Geometrically, the Bloch ball does not merely shrink around the origin — its center **drifts upward** along the vertical axis via the affine map [`dampedAxis`](lean:D5/S3/QuantumChannels/AmplitudeDampingContraction.dampedAxis) $u \mapsto u' = (1 - \gamma)u + \gamma$ ($0 \le \gamma < 1$).
 
 ::: {.viz src="bloch-noise" preset="amp" height="500"}
@@ -470,6 +518,6 @@ Across the four chapters of Part I, the theorem statements checked by the Lean k
 - **Chapter 1** dismantled both the isolated-particle myth and the external-point-$C$ coordinate scaffolding, proved that $M_2(\mathbb{C})$ admits no algebraic character ([@thm-qubit-no-character]), and used unitary ray rigidity ([@thm-ray-phase-rigidity]) and the Bloch map ([@prop-qubit-bloch-core]) to turn four-parameter complex column vectors into real unit rays $\vv{a} \in S^2$;
 - **Chapter 2** chose the known state itself as basis, identified "point $C$" as the endogenous compatibility shadow $\vv{c} = (\vv{a}\cdot\vv{b})\vv{a}$, and derived Born's squared-modulus rule ([@thm-born-modulus-square], [@thm-rank-one-born-pairing]) and the half-angle identity $\cos^2(\theta/2) = \frac{1 + \cos\theta}{2}$ directly from coordinate-free trace pairing and Pythagoras's theorem; it also proved that a reading positive on probes peels off layer by layer into least confirmations ([@thm-positive-dual-generation]), and that in finite dimension an additive probability on effects is the trace pairing of a density matrix ([@thm-busch-effect-density]);
 - **Chapter 3** revealed particles, concepts, and ticks of classical linear time as fixed points of idempotent lines $P^2 = P$ ([@thm-pinching-idempotent], [@thm-unread-fixed-iff], [@thm-conditional-state-valid]), paired inseparably with their Hodge-dual wave planes via complementary Pythagorean tomography ([@thm-complementary-pythagoras]), and bounded the record capacity of a $d$-dimensional system by $N \le d$ ([@prop-record-capacity]) together with the entropic uncertainty relation for complementary contexts ([@prop-collision-entropy-uncertainty]);
-- **Chapter 4** traced decoherence to partial-trace marginalization ([@thm-nonselective-marginal]), proved that local irreversibility is an environment-access defect rather than ontological loss ([@thm-reduced-access-defect]), described the contraction geometry of phase damping, amplitude damping, and pinching ([@thm-pinching-pythagorean], [@prop-phase-damping-decay], [@prop-amplitude-damping-contraction], [@cor-pinching-zero-offdiag]), used Stinespring's dilation ([@thm-stinespring-dilation]) to explain representation compression, and bounded two-state distinguishability through trace-distance contraction under channels on a fixed finite index type ([@prop-trace-distance-metric-contraction]).
+- **Chapter 4** traced decoherence to partial-trace marginalization ([@thm-nonselective-marginal]), proved that local irreversibility is an environment-access defect rather than ontological loss ([@thm-reduced-access-defect]), described the contraction geometry of phase damping, amplitude damping, and pinching ([@thm-pinching-pythagorean], [@prop-phase-damping-decay], [@prop-amplitude-damping-contraction], [@cor-pinching-zero-offdiag]), used Stinespring's dilation ([@thm-stinespring-dilation]) to explain representation compression, showed with the Sz.-Nagy unitary power dilation ([@thm-unitary-power-dilation]) that all powers of a contraction are shadows of one unitary evolution, and bounded two-state distinguishability through trace-distance contraction under channels on a fixed finite index type ([@prop-trace-distance-metric-contraction]).
 
 With the one-dimensional projection line $\vv{a}\cdot\vv{b} = \cos\theta$ firmly in hand, **Part II (*Unfolding Wings — From Line to Plane*)** raises our gaze to the oriented two-dimensional area $\vv{a} \wedge \vv{b} = \sin\theta\,\hat{I}$ — revealing why the "imaginary unit" is nothing more than a $90^\circ$ planar turn, and unifying quantum gates with all five textbook postulates through the single Clifford geometric product $AB = A\cdot B + A\wedge B$.
