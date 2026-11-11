@@ -157,6 +157,71 @@ check('Space plays', await until(page, () => window.ERASE_DEBUG.state.t > 0));
 await page.keyboard.press('Space'); check('Space pauses', !(await state()).playing);
 await page.click('#rew'); check('⏮ goes back to the start', close((await state()).t, 0));
 
+// between two steps the page interpolates; only whole steps are computed
+await pick('pinch'); await played(2);
+await page.evaluate(() => window.ERASE_DEBUG.seek(1.5)); s = await state();
+const drawnS = Sq(s.now.bloch), mid = { hud: await page.textContent('#hudSub'), note: await page.textContent('#roNote') };
+check('TURN · PINCH at step 1.5: the drawn arrow (0.5, 0) has entropy 0.5623, the interpolated column shows 0.3466', close(s.now.bloch[0], 0.5, 1e-12) && close(s.now.bloch[1], 0, 1e-12) && close(drawnS, 0.5623351446, 1e-9) && close(s.now.S, LN2 / 2, 1e-9) && Math.abs(s.now.S - drawnS) > 0.2);
+check('…and the HUD and the step note say the in-between numbers are interpolated, not the drawn state\'s entropy', /插值/.test(mid.hud) && /插值/.test(mid.note) && (await page.textContent('#roS')).includes('≈'), `${mid.hud} | ${mid.note}`);
+await page.evaluate(() => window.ERASE_DEBUG.seek(2)); s = await state();
+check('at the whole step 2 the entropy is the drawn state\'s, computed, and the interpolation caveat is gone', close(s.now.S, Sq(s.now.bloch), 1e-9) && close(s.now.S, LN2, 1e-9) && !/插值/.test(await page.textContent('#hudSub')) && !(await page.textContent('#roS')).includes('≈'));
+const fig = await T.open(BOOK, ID, '?embed=1&preset=pinch&lang=en');
+// the cited figure plays once it is in view; let that happen first, so that it cannot move the rail after the seek
+const figPlayed = await until(fig, () => { const d = window.ERASE_DEBUG.state; return d.playing || d.t > 0; });
+await fig.evaluate(() => window.ERASE_DEBUG.seek(1.5)); await settle(fig);
+const figHud = await fig.textContent('#hudSub');
+check('the cited figure (embed, English) shows the caveat in its HUD between steps', figPlayed && /interpolat/i.test(figHud) && await fig.locator('#hudSub').isVisible(), figHud);
+await fig.context().close();
+const body = await page.evaluate(() => document.body.textContent);
+check('βQ carries no energy unit: no “单位 k_BT”, “in k_BT” or “βQ (in units of k_BT)” on the page', !/单位\s*k_?BT|in k_?BT\b|βQ\s*[（(](以\s*k_?BT\s*为单位|in units of k_?BT)/.test(body));
+
+// copying a mixed input: global entropy stays ln 2, local entropy does not change
+await page.click('#restart'); await setRange('alpha', 90); await setRange('pop', 0.9);
+await op('rot'); await op('pinch'); await op('copy'); s = await state();
+const Jmix = [[0.5, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0.5]];   // CNOT(½I ⊗ |0⟩⟨0|)
+let c3m = s.hist[3], mixNote = await page.textContent('#roNote');
+check('copy of ½I: the joint state is ½(|00⟩⟨00| + |11⟩⟨11|), whole entropy ln 2 (not 0), local entropy unchanged at ln 2', c3m.J.every((row, i) => row.every((x, j) => close(x, Jmix[i][j], 1e-12))) && close(c3m.Sglob, LN2, 1e-7) && close(c3m.S, LN2, 1e-9) && close(c3m.step.dS, 0, 1e-9) && c3m.heat === 0);
+check('…and the note gives the whole entropy 0.693 instead of calling the whole pure', mixNote.includes('0.693') && !/纯态/.test(mixNote), mixNote);
+
+// undo with a turn in between: the record bit is not blank again
+await page.click('#restart');
+await op('rot'); await op('copy'); await op('rot'); await op('uncopy'); s = await state();
+// state vector: ry(90°)|0⟩ = (|0⟩ + |1⟩)/√2 → CNOT → ry(90°) ⊗ 1 → CNOT
+const r2 = Math.SQRT1_2, ryv = (v) => [r2 * (v[0] - v[2]), r2 * (v[1] - v[3]), r2 * (v[0] + v[2]), r2 * (v[1] + v[3])], cnot = (v) => [v[0], v[1], v[3], v[2]];
+const vU = cnot(ryv(cnot(ryv([1, 0, 0, 0])))), JU = vU.map((x) => vU.map((y) => x * y)), recBlank = JU[0][0] + JU[2][2];
+const undoNote = await page.textContent('#roNote');
+check('turn, copy, turn, undo: the joint state matches the state vector and the record bit is not blank (P(E = 0) = 0.5)', s.hist[4].J.every((row, i) => row.every((x, j) => close(x, JU[i][j], 1e-12))) && close(recBlank, 0.5, 1e-12) && s.hist[4].linked);
+check('…and the note does not say the record bit is blank again', !/记录比特回到空白|blank again/.test(undoNote) && /没有|not/.test(undoNote), undoNote);
+await page.click('#restart'); await op('rot'); await op('copy'); await op('uncopy');
+check('turn, copy, undo right after: the note says the copy is exactly undone', /精确|exactly/.test(await page.textContent('#roNote')) && !(await state()).hist[3].linked);
+
+// a bath swap straight from the pure |0⟩: entropy up, heat negative
+await page.click('#restart'); await op('swap'); s = await state();
+const st0 = s.hist[1].step, Q0 = Math.log(9) * (0 - 0.1), D0 = -Math.log(0.9);
+check('swap from |0⟩ at p = 0.9: ΔS = +0.3250829734 and βQ = −0.2197224577, still above the floor by D = 0.1054', close(st0.dSsys, h2(0.9), 1e-9) && close(h2(0.9), 0.3250829734, 1e-9) && close(st0.Q, Q0, 1e-9) && close(Q0, -0.2197224577, 1e-9) && close(st0.D, D0, 1e-9) && close(s.hist[1].heat - s.hist[1].floor, D0, 1e-9));
+const swapNote = await page.textContent('#roNote');
+check('…and the note neither says the entropy fell nor that the heat paid is positive', swapNote.includes('0.325') && swapNote.includes('−0.220') && !/熵减了|went down|fell/.test(swapNote), swapNote);
+
+// on a 390 px phone the caveat wraps: the disc must start below the HUD as measured, in both languages, and not jump
+for (const lang of ['en', 'zh']) {
+  const ph = await T.open(BOOK, ID, `?lang=${lang}`, { viewport: { width: 390, height: 844 } });
+  await ph.click('[data-preset="pinch"]'); await settle(ph);
+  const phPlayed = await until(ph, () => { const d = window.ERASE_DEBUG.state; return d.n === 2 && (d.playing || d.t > 0); });
+  const measure = async (t) => {
+    await ph.evaluate((x) => window.ERASE_DEBUG.seek(x), t); await settle(ph);
+    // positions relative to the canvas: the page itself may scroll while the side panels change length
+    return ph.evaluate(() => {
+      const y0 = document.getElementById('cv').getBoundingClientRect().top, sub = document.getElementById('hudSub'), r = sub.getBoundingClientRect();
+      const tags = [...document.querySelectorAll('#stage .tags .tag')].filter((e) => !e.hidden && ['|0⟩', 'Z'].includes(e.textContent.trim()));
+      return { hudBottom: r.bottom - y0, hudHeight: r.height, tagTop: Math.min(...tags.map((e) => e.getBoundingClientRect().top)) - y0, n: tags.length, text: sub.textContent };
+    });
+  };
+  const mid = await measure(1.5), whole = await measure(2);
+  check(`phone 390 px (${lang}), between steps: the HUD and its interpolation caveat end above the |0⟩ and Z labels`, phPlayed && mid.n === 2 && /插值|interpolat/i.test(mid.text) && mid.tagTop - mid.hudBottom >= 4, JSON.stringify(mid));
+  check(`phone 390 px (${lang}): at the whole step the labels are clear too, and the disc has not moved`, whole.n === 2 && whole.tagTop - whole.hudBottom >= 4 && Math.abs(whole.tagTop - mid.tagTop) < 0.5, JSON.stringify(whole));
+  await ph.context().close();
+}
+
 // English
 await page.click('[data-lang-set="en"]'); await pick('pinch'); await played(2); await settle(page);
 check('English: the HUD reads “Step 2 · pinch Π”', (await page.textContent('#hudBig')).trim() === 'Step 2 · pinch Π');

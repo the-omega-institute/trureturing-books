@@ -19,7 +19,7 @@ $$
 Before this six-symbol identity, wave–particle duality, the Robertson–Schrödinger uncertainty relation, double-slit interference, Wheeler's delayed-choice experiment, and the five disconnected postulates of textbook quantum mechanics all collapse into a single elementary geometric law: **Pythagorean conservation $\cos^2\theta + \sin^2\theta = 1$ between the cosine particle line and the sine wave area**.
 
 ::: {.figure src="ch06-overview"}
-**Figure 6.** The chapter at a glance. Panel I: the cyan shadow of the amber $\vv{B}$ on $\vv{A}$ is $\cos\theta$, and the magenta parallelogram they span is $\sin\theta$. Panel II: the quarter circle $D^2 + V^2 = 1$; the amber point at $\alpha = 60^\circ$ is made of the magenta $D \approx 0.87$ and the cyan $V = 0.5$, and the ends of the arc are “path only” and “fringes only” ([@thm-record-coherence-complementarity]). Panel III: the $\rho$ of [@ex-wheeler-delayed-choice-tradeoff] at $\alpha = 60^\circ$; its cyan diagonal part $\Pi(\rho)$ and magenta off-diagonal part $\rho - \Pi(\rho)$ are the two legs of a right triangle whose hypotenuse is $\rho$ ([@cor-pinching-pythagorean]).
+**Figure 6.** The chapter at a glance. Panel I: the cyan shadow of the amber $\vv{B}$ on $\vv{A}$ is $\cos\theta$, and the magenta parallelogram they span is $\sin\theta$. Panel II: for equal-weight pure paths with ideal balanced recombination and a scanned reference phase, set $\alpha = \arccos|c|$; the quarter circle $D^2 + V^2 = 1$; the amber point at $\alpha = 60^\circ$ is made of the magenta $D \approx 0.87$ and the cyan $V = 0.5$, and the ends of the arc are “path only” and “fringes only” ([@thm-record-coherence-complementarity]). Panel III: the $\rho$ of [@ex-wheeler-delayed-choice-tradeoff] at $\alpha = 60^\circ$; its cyan diagonal part $\Pi(\rho)$ and magenta off-diagonal part $\rho - \Pi(\rho)$ are the two legs of a right triangle whose hypotenuse is $\rho$ ([@cor-pinching-pythagorean]).
 :::
 
 ## 6.1 Why Is the Inner Product $\vv{A}\cdot\vv{B}$ the "Particle" and the Exterior Product $\vv{A}\wedge\vv{B}$ the "Wave"? {#sec-inner-particle-outer-wave}
@@ -199,7 +199,7 @@ Both terms on the right are nonnegative, which proves the inequality once more, 
 The first three rows are pure states: the slack comes from the covariance alone, and the first two rows attain equality. The last three rows are mixed states: in the fourth row the state has moved inward along the $z$ axis, the commutator expectation has dropped from $1$ to $0.6$, and the product of the two standard deviations is still $1$; the last row is the centre of the ball, where the commutator expectation vanishes and the inequality becomes $1 \ge 0$.
 :::
 
-On the sphere the uncertainty relation can be attained. Toward the centre the variances do not shrink, while the commutator expectation shortens together with $r_z$; the gap between their squares is filled by the mixedness plus the squared covariance (by the mixedness alone when $r_x r_y = 0$).
+Along a fixed Bloch direction toward the centre, the variances do not decrease; the squared slack above consists of mixedness together with squared covariance (with only the mixedness term when $r_x r_y = 0$).
 
 ## 6.3 Pure Geometric Dissection of Double-Slit Interference and Wheeler's Delayed Choice: Discarding or Preserving the Area? {#sec-double-slit-delayed-choice}
 
@@ -208,12 +208,12 @@ Equipped with this Pythagorean decomposition, let us step into the **double-slit
 When a quantum passes through a left path $\lvert L\rangle$ and a right path $\lvert R\rangle$ while an environmental register (or which-way detector) couples to the two paths, the left branch prepares a unit environmental record vector $r_L \in E$ ($\|r_L\| = 1$) and the right branch prepares a unit environmental record vector $r_R \in E$ ($\|r_R\| = 1$).
 
 ::: {.figure src="ch06-three-markers"}
-**The two marker arrows decide whether the screen shows fringes.** On the left of each row are the marker arrows, grey $r_L$ and amber $r_R$; on the right, the distribution of hits on the screen. No marker ($\alpha = 0$): the arrows coincide and the screen shows cyan fringes at full contrast. Path marker ($\alpha = 90^\circ$): the arrows are perpendicular, the magenta vertical is the distinguishability $D = 1$, and the screen shows a single bump without fringes. Erased marker: the arrows are still perpendicular, but the marker is read along the violet diagonals; sorting by that reading gives two rows, cyan fringes and dashed anti-fringes half a fringe apart, which add up to the same bump. The envelope is schematic.
+**The two marker arrows decide whether the screen shows fringes.** The model uses equal-weight pure paths, ideal balanced recombination, and a scanned reference phase. On the left of each row are the marker arrows, grey $r_L$ and amber $r_R$; on the right, the distribution of hits on the screen. No marker ($\alpha = 0$): the arrows coincide and the screen shows cyan fringes at full contrast. Path marker ($\alpha = 90^\circ$): the arrows are perpendicular, the magenta vertical is the distinguishability $D = 1$, and the screen shows a single bump without fringes. Erased marker: the arrows are still perpendicular, but the marker is read along the violet diagonals; sorting by that reading gives two rows, cyan fringes and dashed anti-fringes half a fringe apart, which add up to the same bump. The envelope is schematic.
 :::
 
 Examine the complex overlap $c := \langle r_L, r_R\rangle_{\mathbb{C}}$ between the two environmental record arrows:
 
-- **Coherence visibility** $V := \|c\| = |\langle r_L, r_R\rangle_{\mathbb{C}}| = \cos\alpha \in [0, 1]$ is the **inner-product cosine** measuring how collinear the two environmental records remain;
+- For **equal-weight pure paths with ideal balanced recombination and a scanned reference phase**, set $\alpha := \arccos |c| \in [0, \pi/2]$. The record-overlap visibility is $V := \|c\| = |\langle r_L, r_R\rangle_{\mathbb{C}}| = \cos\alpha \in [0, 1]$;
 - **Record distinguishability** $D := \sqrt{1 - V^2} = \sin\alpha \in [0, 1]$ is the **exterior-product sine area** measuring how orthogonally separated the two records are!
 
 ::: {.viz src="double-slit-marker" preset="partial" height="500"}
@@ -269,7 +269,7 @@ By [`pinching_hilbert_schmidt_orthogonal`](lean:D5/S3/QuantumChannels/PinchingPr
 With [@thm-record-coherence-complementarity] and [@cor-pinching-pythagorean] in hand, Wheeler's delayed-choice experiment loses all retrocausal mystery:
 
 ::: {.example #ex-wheeler-delayed-choice-tradeoff title="Quantitative Ledger of a Two-Path Interferometer and Wheeler's Delayed Choice at α = 0, π/3, π/2"}
-Consider a two-path interferometer preparing the joint state $\frac{1}{\sqrt{2}}(\lvert 0\rangle\otimes\lvert r_L\rangle + \lvert 1\rangle\otimes\lvert r_R\rangle)$ where the unit environmental record states meet at angle $\alpha \in [0, \pi/2]$ with overlap $c = \langle r_L, r_R\rangle = \cos\alpha$. Tracing out the environment leaves the reduced qubit density matrix
+Consider a two-path interferometer preparing the joint state $\frac{1}{\sqrt{2}}(\lvert 0\rangle\otimes\lvert r_L\rangle + \lvert 1\rangle\otimes\lvert r_R\rangle)$. For the real matrix example below, take the unit environmental record states to have real nonnegative overlap $c = \langle r_L, r_R\rangle = \cos\alpha$ with $\alpha \in [0, \pi/2]$; this is the equal-weight, ideal balanced-recombination model with a scanned reference phase. Tracing out the environment leaves the reduced qubit density matrix
 
 $$
 \rho(\alpha) = \frac{1}{2}\begin{pmatrix} 1 & \cos\alpha \\ \cos\alpha & 1 \end{pmatrix}.
@@ -309,7 +309,7 @@ Englert's trace-distance inequality for general mixed environmental states is ci
 :::
 
 ::: {.viz src="double-slit-marker" preset="mixed" height="500"}
-**A mixed marker falls inside the circle.** When the marker itself is noisy (purity $\lambda = 0.5$), the visibility is still $V = 0.5$, but only $0.43$ of trace-distance distinguishability can be read: the point drops inside the circle along the dashed magenta arc, $D^2 + V^2 \approx 0.44 < 1$. This is one instance of Englert's inequality above (a literature result, not formalized in this book).
+**A mixed marker falls inside the circle.** When the marker itself is noisy (pure-state weight $\lambda = 0.5$, purity $\Tr\rho^2 = (1 + \lambda^2)/2 = 0.625$), the visibility is still $V = 0.5$, but only $0.43$ of trace-distance distinguishability can be read: the point drops inside the circle along the dashed magenta arc, $D^2 + V^2 \approx 0.44 < 1$. This is one instance of Englert's inequality above (a literature result, not formalized in this book).
 :::
 
 ::: {.viz src="qubit-geometry" preset="area" height="500"}
@@ -317,7 +317,7 @@ Englert's trace-distance inequality for general mixed environmental states is ci
 :::
 
 ::: {.viz src="double-slit-marker" height="560"}
-Interactive laboratory `SLIT//MARKER`: hits arriving one by one on the screen with their fringes, and the two marker arrows $r_L$ and $r_R$ on the complementarity circle; drag the angle, change how the marker is read, or lower its purity. The numbers on the page are a numerical illustration; $D^2 + V^2 = 1$ is [@thm-record-coherence-complementarity], checked by the Lean kernel.
+Interactive laboratory `SLIT//MARKER`: hits arriving one by one on the screen with their fringes, and the two marker arrows $r_L$ and $r_R$ on the complementarity circle; drag the angle, change how the marker is read, or lower its pure-state weight $\lambda$. The numbers on the page are a numerical illustration; $D^2 + V^2 = 1$ for a pure record marker ($\lambda = 1$) is [@thm-record-coherence-complementarity], checked by the Lean kernel, while a mixed marker, inside the circle for $\alpha > 0$ and on it at $\alpha = 0$, is a case of Englert's inequality (a literature result, not formalized in this book).
 :::
 
 ## 6.4 Interactive Laboratory: Hands-On Exploration of the Pairwise Geometric Product, Particle Inner Line, and Wave Wedge Area {#sec-interactive-qubit-geometry}

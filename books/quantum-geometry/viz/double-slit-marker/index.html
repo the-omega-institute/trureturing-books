@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="zh-CN" data-title-en="SLIT//MARKER · The double slit and the path marker · fringe contrast and path distinguishability on one circle">
+<html lang="zh-CN" data-title-en="SLIT//MARKER · The double slit and the path marker · for a pure marker, fringe contrast and path distinguishability on one circle">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>SLIT//MARKER 双缝与路径标记 · 条纹对比度与路径可辨度落在同一个圆上</title>
-<meta name="description" content="第 6 章 §6.3 的双缝装置。每条缝后面有一个路径标记：左缝把它写成 r_L，右缝写成 r_R，两者夹角 α。屏上的条纹对比度 V = |⟨r_L, r_R⟩| = cos α，路径可辨度 D = √(1 − V²) = sin α，两者落在同一个单位圆上（Lean 已验证）。落点一个个到达屏上；读标记的方式可以留到落点之后再定：按路径读，两行都没有条纹；按擦除方向读，同一批落点分成条纹与反条纹。标记本身是混合态时，点落进圆内（Englert 不等式，文献结果）。The double-slit setup of §6.3 of chapter 6. A path marker sits behind the slits: the left slit writes it as r_L, the right one as r_R, at an angle α. The fringe contrast on the screen is V = |⟨r_L, r_R⟩| = cos α and the path distinguishability is D = √(1 − V²) = sin α; both sit on one unit circle (kernel-verified in Lean). Hits arrive on the screen one by one; how to read the marker can wait until after they land: read for the path and neither row shows fringes; read in the erasing direction and the same hits split into fringes and anti-fringes. When the marker itself is mixed, the point falls inside the circle (Englert's inequality, a literature result).">
+<title>SLIT//MARKER 双缝与路径标记 · 纯态标记的条纹对比度与路径可辨度落在同一个圆上</title>
+<meta name="description" content="第 6 章 §6.3 的双缝装置。每条缝后面有一个路径标记：左缝把它写成 r_L，右缝写成 r_R，两者夹角 α。屏上的条纹对比度 V = |⟨r_L, r_R⟩| = cos α，路径可辨度 D = √(1 − V²) = sin α，纯态标记的两者落在同一个单位圆上（Lean 已验证）。落点一个个到达屏上；读标记的方式可以留到落点之后再定：纯态标记在 α = 90° 时，按路径读，两行都没有条纹；按擦除方向读，同一批落点分成条纹与反条纹。标记本身是混合态且 α > 0 时，点落进圆内，α = 0 时仍在圆上（Englert 不等式，文献结果）。The double-slit setup of §6.3 of chapter 6. A path marker sits behind the slits: the left slit writes it as r_L, the right one as r_R, at an angle α. The fringe contrast on the screen is V = |⟨r_L, r_R⟩| = cos α and the path distinguishability is D = √(1 − V²) = sin α; for a pure marker both sit on one unit circle (kernel-verified in Lean). Hits arrive on the screen one by one; how to read the marker can wait until after they land: for a pure marker at α = 90°, read for the path and neither row shows fringes; read in the erasing direction and the same hits split into fringes and anti-fringes. When the marker itself is mixed and α > 0, the point falls inside the circle, and at α = 0 it stays on it (Englert's inequality, a literature result).">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,8 +21,8 @@
       <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
       <h1 class="logo" data-text="SLIT//MARKER">SLIT<b>//</b>MARKER</h1>
       <div class="tagline">
-        <span class="zh">双缝与路径标记 · <em>路径记得越清，条纹越淡；两者落在同一个圆上，怎么读标记可以等落点到了再定</em></span>
-        <span class="en">The double slit and the path marker · <em>the better the path is recorded, the fainter the fringes; both sit on one circle, and how to read the record can wait until the hits are in</em></span>
+        <span class="zh">双缝与路径标记 · <em>路径记得越清，条纹越淡；标记是纯态时，两者落在同一个圆上；怎么读标记可以等落点到了再定</em></span>
+        <span class="en">The double slit and the path marker · <em>the better the path is recorded, the fainter the fringes; for a pure marker both sit on one circle, and how to read the record can wait until the hits are in</em></span>
       </div>
     </div>
     <div class="status" aria-live="polite">
@@ -53,7 +53,7 @@
         <input type="range" id="alpha" min="0" max="90" step="1" value="60">
       </div>
       <div class="field">
-        <label for="purity"><span class="zh">标记的纯度 λ</span><span class="en">Purity of the marker λ</span><small class="zh">1 是纯态；小于 1 时标记本身带噪声</small><small class="en">1 is a pure state; below 1 the marker itself is noisy</small></label><output id="oPurity" for="purity">1.00</output>
+        <label for="purity"><span class="zh">标记的纯态权重 λ</span><span class="en">Pure-state weight λ of the marker</span><small class="zh">ρ = λ|e₀⟩⟨e₀| + (1 − λ)·I/2：1 是纯态，小于 1 时标记本身带噪声；纯度 Tr ρ² = (1 + λ²)/2</small><small class="en">ρ = λ|e₀⟩⟨e₀| + (1 − λ)·I/2: 1 is a pure state, below 1 the marker itself is noisy; its purity is Tr ρ² = (1 + λ²)/2</small></label><output id="oPurity" for="purity">1.00</output>
         <input type="range" id="purity" min="0" max="1" step="0.05" value="1">
       </div>
     </section>
@@ -102,7 +102,7 @@
         <div class="c"><dt><span class="zh">条纹对比度 V</span><span class="en">fringe contrast V</span></dt><dd id="roV">—</dd></div>
         <div class="m"><dt><span class="zh">路径可辨度 D</span><span class="en">path distinguishability D</span></dt><dd id="roD">—</dd></div>
         <div><dt><span class="zh">标记夹角 α</span><span class="en">marker angle α</span></dt><dd id="roA">—</dd></div>
-        <div><dt><span class="zh">标记的纯度 λ</span><span class="en">purity of the marker λ</span></dt><dd id="roL">—</dd></div>
+        <div><dt><span class="zh">纯态权重 λ · 纯度 Tr ρ²</span><span class="en">pure-state weight λ · purity Tr ρ²</span></dt><dd id="roL">—</dd></div>
         <div class="wide"><dt><span class="zh">相干质量 |ρ₀₁|² + |ρ₁₀|²</span><span class="en">coherence mass |ρ₀₁|² + |ρ₁₀|²</span></dt><dd id="roM">—</dd></div>
       </dl>
       <p class="note" id="roNote"></p>
@@ -112,8 +112,8 @@
 
     <section class="panel sec" id="evidence">
       <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
-      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：标记是混合态时，以迹距离定义的可辨度 D = ½‖ρ_L − ρ_R‖₁ 满足 D² + V² ≤ 1（Englert 1996），纯态标记取等号。本页的混合标记落在圆内，只是这条不等式的一个实例。</span><span class="en">Literature result, not formalized in this book: when the marker is mixed, the distinguishability defined by the trace distance, D = ½‖ρ_L − ρ_R‖₁, satisfies D² + V² ≤ 1 (Englert 1996), with equality for a pure marker. The mixed marker of this page falling inside the circle is one instance of that inequality.</span></span></div>
-      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">为画面选定的模型：屏上的分布取远场双缝 env(x)·(1 + c·cos kx)，包络 env 是高斯形；标记是一个二维实向量，r_R 由 r_L 转过 α 得到；混合标记是纯度 λ 的标记态经同样两次转动。“延迟选择只是决定截取哪一个投影”是第 6 章的诠释。</span><span class="en">A model chosen for the picture: the screen shows the far-field two-slit law env(x)·(1 + c·cos kx) with a Gaussian envelope env; the marker is a real two-dimensional vector, and r_R is r_L turned by α; the mixed marker is a marker state of purity λ put through the same two turns. “Delayed choice only decides which projection is taken” is the reading of chapter 6.</span></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：标记是混合态时，以迹距离定义的可辨度 D = ½‖ρ_L − ρ_R‖₁ 满足 D² + V² ≤ 1（Englert 1996），纯态标记取等号。本页的混合标记在 α > 0 时落在圆内、α = 0 时仍在圆上，都是这条不等式的实例。</span><span class="en">Literature result, not formalized in this book: when the marker is mixed, the distinguishability defined by the trace distance, D = ½‖ρ_L − ρ_R‖₁, satisfies D² + V² ≤ 1 (Englert 1996), with equality for a pure marker. The mixed marker of this page, inside the circle for α > 0 and on it at α = 0, is an instance of that inequality.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">为画面选定的模型：屏上的分布取远场双缝 env(x)·(1 + c·cos kx)，包络 env 是高斯形；标记是一个二维实向量，r_R 由 r_L 转过 α 得到；混合标记是 λ|e₀⟩⟨e₀| + (1 − λ)·I/2（纯态权重 λ，纯度 (1 + λ²)/2）经同样两次转动。“延迟选择只是决定截取哪一个投影”是第 6 章的诠释。</span><span class="en">A model chosen for the picture: the screen shows the far-field two-slit law env(x)·(1 + c·cos kx) with a Gaussian envelope env; the marker is a real two-dimensional vector, and r_R is r_L turned by α; the mixed marker is λ|e₀⟩⟨e₀| + (1 − λ)·I/2 (pure-state weight λ, purity (1 + λ²)/2) put through the same two turns. “Delayed choice only decides which projection is taken” is the reading of chapter 6.</span></span></div>
       <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数值演示，不是证明：落点由带种子的伪随机数按上面的分布抽出；分拣按标记读数的条件概率抽签；“数出的对比度”由已到达落点的 cos kx 平均值反解得到。</span><span class="en">A numerical illustration on the page, not a proof: the hits are drawn from the law above with a seeded pseudo-random generator; sorting draws each hit’s marker reading from its conditional probability; the “counted contrast” is solved back from the average of cos kx over the hits so far.</span></span></div>
       <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
     </section>
@@ -141,22 +141,22 @@
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
     <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
     <div class="zh">
-      <p class="lede">粒子穿过双缝，缝后的标记把“走了哪条缝”写下来：左缝写成 r_L，右缝写成 r_R。左边是屏，右边是两支标记箭头。拖动它们的夹角 α，条纹对比度与路径可辨度此消彼长，点始终在圆上。本页是数值演示，不是证明。</p>
+      <p class="lede">粒子穿过双缝，缝后的标记把“走了哪条缝”写下来：左缝写成 r_L，右缝写成 r_R。左边是屏，右边是两支标记箭头。拖动它们的夹角 α，条纹对比度与路径可辨度此消彼长；标记是纯态时，点始终在圆上。本页是数值演示，不是证明。</p>
       <ol>
-        <li><b>圆。</b>两支箭头都是单位长。r_R 落在 r_L 上的影子是 c = cos α，就是条纹对比度 V；r_R 的高是 sin α，就是路径可辨度 D = √(1 − V²)。Lean 证明了 D² + V² = 1，以及两端：c = 0 时条纹全无、路径全知，V = 1 时路径全无（第 6 章定理 thm-record-coherence-complementarity）。</li>
+        <li><b>圆。</b>纯态标记的两支箭头是两个单位长的记录态。r_R 落在 r_L 上的影子是 c = cos α，就是条纹对比度 V；r_R 的高是 sin α，就是路径可辨度 D = √(1 − V²)。对这样的纯态记录，Lean 证明了 D² + V² = 1，以及两端：c = 0 时条纹全无、路径全知，V = 1 时路径全无（第 6 章定理 thm-record-coherence-complementarity）。</li>
         <li><b>屏。</b>忽略标记后，路径的约化态是 ½(1, c; c, 1)。屏上的分布是 env(x)·(1 + c·cos kx)：c 越小，亮纹越矮、暗纹越亮。副对角元 c/2 的平方和 c²/2 就是捏合会去掉的相干质量（Lean 已验证的恒等式）。</li>
-        <li><b>先落点，后读标记。</b>读标记要选一组方向。按路径读（使 r_L、r_R 最好区分的那组方向），α = 90° 时每个落点都被正确地记作左或右，两行都没有条纹；按擦除方向读（r_L 与 r_R 的角平分线及其垂线），两行分别是条纹与错开半格的反条纹。无论怎样读，两行合起来就是上面那片落点：屏上的分布不因后来的选择而改变。</li>
-        <li><b>混合的标记。</b>标记本身带噪声（纯度 λ &lt; 1）时，条纹对比度仍是 cos α，能读出的可辨度却只有 λ·sin α，点落进圆内，沿一条内弧走。以迹距离定义可辨度时 D² + V² ≤ 1 是 Englert 1996 的文献结果，未在本书形式化。</li>
+        <li><b>先落点，后读标记。</b>读标记要选一组方向。按路径读（使 r_L、r_R 最好区分的那组方向），纯态标记在 α = 90° 时把每个落点都正确地记作左或右（混合标记则不然：λ = 0.5 时 D = 0.5，只有 75% 读对），两行都没有条纹；按擦除方向读（r_L 与 r_R 的角平分线及其垂线），两行分别是条纹与错开半格的反条纹。无论怎样读，两行合起来就是上面那片落点：屏上的分布不因后来的选择而改变。</li>
+        <li><b>混合的标记。</b>标记本身带噪声（纯态权重 λ &lt; 1，纯度 (1 + λ²)/2 &lt; 1）时，条纹对比度仍是 cos α，能读出的可辨度却只有 λ·sin α，于是 D² + V² = 1 − (1 − λ²)·sin²α：α &gt; 0 时点落进圆内，α = 0 时标记什么也没记下，点仍在圆上；内弧 (cos α, λ·sin α) 从 (1, 0) 出发。例如 α = 60°、λ = 0.5 时是 0.4375 &lt; 1。所引的冻结定理假设两支记录是归一化的纯态向量；混合标记在 α = 0 时取等，是本页数值模型里的等式，不是那条纯态记录定理的应用。以迹距离定义可辨度时 D² + V² ≤ 1 是 Englert 1996 的文献结果，未在本书形式化。</li>
       </ol>
       <p class="lede refs">书中：<a href="../../zh/ch06-geometric-product.html#sec-double-slit-delayed-choice" target="_top">第 6 章 §6.3 · 双缝干涉与惠勒延迟选择</a> · trureturing（所钉提交）：<a data-trureturing-path="D5/S3/Quantum/PureState/RecordCoherenceComplementarity.lean" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/PureState/RecordCoherenceComplementarity.lean" target="_blank" rel="noopener">RecordCoherenceComplementarity.lean</a> · <a data-trureturing-path="D5/S3/QuantumChannels/PinchingProjection.lean" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumChannels/PinchingProjection.lean" target="_blank" rel="noopener">PinchingProjection.lean</a></p>
     </div>
     <div class="en">
-      <p class="lede">A particle passes the double slit, and a marker behind the slits writes down which way it went: the left slit writes r_L, the right slit r_R. The screen is on the left, the two marker arrows on the right. Drag the angle α between them: the fringe contrast and the path distinguishability trade places, and the point stays on the circle. The page is a numerical illustration, not a proof.</p>
+      <p class="lede">A particle passes the double slit, and a marker behind the slits writes down which way it went: the left slit writes r_L, the right slit r_R. The screen is on the left, the two marker arrows on the right. Drag the angle α between them: the fringe contrast and the path distinguishability trade places, and for a pure marker the point stays on the circle. The page is a numerical illustration, not a proof.</p>
       <ol>
-        <li><b>The circle.</b> Both arrows have unit length. The shadow of r_R on r_L is c = cos α, the fringe contrast V; the height of r_R is sin α, the path distinguishability D = √(1 − V²). Lean proves D² + V² = 1 and both ends: with c = 0 the fringes are gone and the path is known, with V = 1 the path is unknown (theorem thm-record-coherence-complementarity of chapter 6).</li>
+        <li><b>The circle.</b> For a pure marker the two arrows are two record states of unit length. The shadow of r_R on r_L is c = cos α, the fringe contrast V; the height of r_R is sin α, the path distinguishability D = √(1 − V²). For such pure records Lean proves D² + V² = 1 and both ends: with c = 0 the fringes are gone and the path is known, with V = 1 the path is unknown (theorem thm-record-coherence-complementarity of chapter 6).</li>
         <li><b>The screen.</b> Once the marker is ignored, the reduced path state is ½(1, c; c, 1). The screen shows env(x)·(1 + c·cos kx): the smaller c, the lower the bright fringes and the brighter the dark ones. The squares of the off-diagonal entries c/2 add up to c²/2, the coherence mass that pinching removes (a Lean-verified identity).</li>
-        <li><b>Hits first, reading later.</b> Reading the marker means choosing a pair of directions. Read for the path (the pair that tells r_L from r_R best) and at α = 90° every hit is recorded correctly as left or right, and neither row shows fringes; read to erase (the bisector of r_L and r_R and its perpendicular) and the rows show fringes and anti-fringes shifted by half a period. However the marker is read, the two rows together are the hits above: the screen does not change with the later choice.</li>
-        <li><b>A mixed marker.</b> When the marker itself is noisy (purity λ &lt; 1), the fringe contrast is still cos α but the readable distinguishability is only λ·sin α, and the point falls inside the circle, on an inner arc. With the distinguishability defined by the trace distance, D² + V² ≤ 1 is a literature result of Englert (1996), not formalized in this book.</li>
+        <li><b>Hits first, reading later.</b> Reading the marker means choosing a pair of directions. Read for the path (the pair that tells r_L from r_R best) and, for a pure marker at α = 90°, every hit is recorded correctly as left or right (not so for a mixed marker: at λ = 0.5, D = 0.5 and only 75% are read correctly), and neither row shows fringes; read to erase (the bisector of r_L and r_R and its perpendicular) and the rows show fringes and anti-fringes shifted by half a period. However the marker is read, the two rows together are the hits above: the screen does not change with the later choice.</li>
+        <li><b>A mixed marker.</b> When the marker itself is noisy (pure-state weight λ &lt; 1, purity (1 + λ²)/2 &lt; 1), the fringe contrast is still cos α but the readable distinguishability is only λ·sin α, so D² + V² = 1 − (1 − λ²)·sin²α: for α &gt; 0 the point falls inside the circle, while at α = 0 the marker records nothing and the point stays on it; the inner arc (cos α, λ·sin α) starts at (1, 0). At α = 60° and λ = 0.5, for example, it is 0.4375 &lt; 1. The cited frozen theorem assumes normalized pure record vectors; the equality of a mixed marker at α = 0 is an equality of this page's numerical model, not an application of that pure-record theorem. With the distinguishability defined by the trace distance, D² + V² ≤ 1 is a literature result of Englert (1996), not formalized in this book.</li>
       </ol>
       <p class="lede refs">In the book: <a href="../../en/ch06-geometric-product.html#sec-double-slit-delayed-choice" target="_top">Chapter 6 §6.3 · The double slit and Wheeler’s delayed choice</a> · trureturing (pinned commit): <a data-trureturing-path="D5/S3/Quantum/PureState/RecordCoherenceComplementarity.lean" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/PureState/RecordCoherenceComplementarity.lean" target="_blank" rel="noopener">RecordCoherenceComplementarity.lean</a> · <a data-trureturing-path="D5/S3/QuantumChannels/PinchingProjection.lean" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumChannels/PinchingProjection.lean" target="_blank" rel="noopener">PinchingProjection.lean</a></p>
     </div>
