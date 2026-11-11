@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "38196c62e121b0a334b903eea2a513bb2587e41c",
-  "pinned_at": "2026-11-10T22:06:30Z",
+  "commit": "a660b9333c0f8d25aaa22af1bbbfab43c2f94a46",
+  "pinned_at": "2026-11-11T00:27:31Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -389,6 +389,22 @@
       "line": 101,
       "signature": "theorem pell_pm_four_iff_signed_lucas_fib (x y : ℤ) : (x ^ 2 - 5 * y ^ 2 = 4 ∨ x ^ 2 - 5 * y ^ 2 = -4) ↔ ∃ (s : Bool) (n : ℤ), x = signedInt s (goldenLucasZ n) ∧ y = signedInt s (Int.fib n)"
     },
+    "D5/S3/CharacterSums/Fermat/CharacterPointCount.norm_jacobiSum": {
+      "module": "D5/S3/CharacterSums/Fermat/CharacterPointCount",
+      "name": "D5.S3.CharacterSums.Fermat.CharacterPointCount.norm_jacobiSum",
+      "kind": "theorem",
+      "statement_id": "sha256:06adbb3f4d3939fb35410fe6889c079d1e4cccc07d7e50ba905727637b633ea3",
+      "line": 533,
+      "signature": "lemma norm_jacobiSum {χ ψ : MulChar F ℂ} (hχ : χ ≠ 1) (hψ : ψ ≠ 1) (hχψ : χ * ψ ≠ 1) : ‖jacobiSum χ ψ‖ = Real.sqrt (Fintype.card F)"
+    },
+    "D5/S3/CharacterSums/Fermat/CharacterPointCount.power_fiber_card_eq_one_add_character_sum": {
+      "module": "D5/S3/CharacterSums/Fermat/CharacterPointCount",
+      "name": "D5.S3.CharacterSums.Fermat.CharacterPointCount.power_fiber_card_eq_one_add_character_sum",
+      "kind": "theorem",
+      "statement_id": "sha256:06adbb3f4d3939fb35410fe6889c079d1e4cccc07d7e50ba905727637b633ea3",
+      "line": 197,
+      "signature": "theorem power_fiber_card_eq_one_add_character_sum (χ : MulChar F ℂ) {d : ℕ} (hd : 0 < d) (hχ : orderOf χ = d) (a : F) : (Nat.card {x : F // x ^ d = a} : ℂ) = 1 + ∑ i ∈ Ico 1 d, (χ ^ i) a"
+    },
     "D5/S3/Combinatorics/Graph/Walks/WeightedCycleWalk.circuit_length": {
       "module": "D5/S3/Combinatorics/Graph/Walks/WeightedCycleWalk",
       "name": "D5.S3.Combinatorics.Graph.Walks.WeightedCycleWalk.circuit_length",
@@ -396,6 +412,14 @@
       "statement_id": "sha256:8290384519fabbb47b99d637a47009c4903ac3ed57f4f1bccfa01c7a1cac221e",
       "line": 77,
       "signature": "theorem circuit_length (n : ℕ) : (circuit n).length = 2 * (n + 2)"
+    },
+    "D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart.gaussian_unit": {
+      "module": "D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart",
+      "name": "D5.S3.ConceptDynamics.Coding.ResetNativeIntegerChart.gaussian_unit",
+      "kind": "theorem",
+      "statement_id": "sha256:646bb11535a35e0ec08bf24ba5f70d0ce7ddc9ced418772bbfd43e2ff8591ab8",
+      "line": 816,
+      "signature": "theorem gaussian_unit (u : GaussianIntˣ) : (u : GaussianInt) = 1 ∨ (u : GaussianInt) = Zsqrtd.sqrtd ∨ (u : GaussianInt) = -1 ∨ (u : GaussianInt) = -Zsqrtd.sqrtd"
     },
     "D5/S3/ConceptDynamics/ConceptFiberDecomposition.Concept": {
       "module": "D5/S3/ConceptDynamics/ConceptFiberDecomposition",

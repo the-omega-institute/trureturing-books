@@ -181,11 +181,103 @@ On the Pythagorean congruent curve $y^2 = x^3 - x$ (which has complex multiplica
   a_p = 0 \implies \cos\theta_p = 0 \quad (\theta_p = \pi/2\text{, the orthogonal equator})!
   $$
 
-- **At split "Plane Primes" $p = a^2 + b^2 \equiv 1 \pmod 4$ ($a$ odd, $b$ even)**: Gauss proved that $|a_p| = 2|a|$, so the magnitude of the Frobenius cosine equals the **exact Pythagorean cosine** (adjacent leg over hypotenuse) of the prime's own Gaussian right triangle $(|a|, |b|, \sqrt{p})$:
+- **At split "Plane Primes" $p \equiv 1 \pmod 4$**: for any integers $a,b$ satisfying $p=a^2+b^2$, with $a$ odd and $b$ even, the classical Gauss formula (a literature result; see [@rem-ch29-gauss-character-application]) gives $|a_p|=2|a|$. The magnitude of the Frobenius cosine therefore equals the **Pythagorean cosine** (adjacent leg over hypotenuse) of the prime's own Gaussian right triangle $(|a|, |b|, \sqrt{p})$:
 
   $$
-  |\cos\theta_p| = \frac{|a_p|}{2\sqrt{p}} = \frac{2|a|}{2\sqrt{a^2 + b^2}} = \frac{|a|}{\sqrt{a^2 + b^2}}!
+  |\cos\theta_p| = \frac{|a_p|}{2\sqrt{p}} = \frac{|a|}{\sqrt p} = \frac{|a|}{\sqrt{a^2 + b^2}}.
   $$
+
+::: {.remark #rem-ch29-gauss-character-application title="From Square Fibers to a Gaussian Triangle: Literature Result and Application, Not Formalized in This Book"}
+Why does the same odd leg $|a|$ appear in the curve's point count? The key is to express the deviation as the sum of two conjugate complex numbers. Conjugation cancels their imaginary parts, leaving twice the real part, while their length is the square root of the prime $p$. Here is the classical character-sum derivation. Schoof's survey provides background on point counting and complex multiplication[^gauss-count-background].
+
+Fix any prime $p\equiv1\pmod4$ and any integers $a,b$ with $p=a^2+b^2$, $a$ odd and $b$ even. Throughout, take $F=\mathbb{F}_p$ and the same curve $E:y^2=x^3-x$. Its projective equation is $Y^2Z=X^3-XZ^2$; its discriminant is $64\ne0$, so it is smooth. Setting $Z=0$ shows that its unique point at infinity is $O=[0:1:0]$. Write
+
+$$
+N=\#E(F),\qquad T=p+1-N=a_p.
+$$
+
+Let $\phi(t)=\left(\frac{t}{p}\right)$ be the quadratic character, with $\phi(0)=0$. Each vertical line $x=\text{constant}$ meets the affine curve in zero, one, or two points, since for every $t\in F$,
+
+$$
+\#\{y\in F:y^2=t\}=1+\phi(t).
+$$
+
+A nonzero square has two roots, a nonsquare has none, and zero has one. Thus the actual curve points consist of these vertical fibers together with exactly one $O$:
+
+$$
+N=1+\sum_{x\in F}\bigl(1+\phi(x^3-x)\bigr),\qquad
+T=-\sum_{x\in F}\phi(x^3-x).
+$$
+
+Next record the fibers in the complex plane. The group $F^\times$ is cyclic of order $p-1$, and $4\mid p-1$, so we may choose a multiplicative character $\chi:F\to\mathbb{C}$ of exact order four, again extended by zero at zero. On nonzero elements its values lie in $\{1,i,-1,-i\}$, and its square is the unique nontrivial quadratic character. Hence $\chi^2=\phi$, with the integer values of $\phi$ understood through their usual embedding into $\mathbb{C}$. This auxiliary $\chi$ is constructed from $p$, rather than imposed as an additional assumption. We have $\phi(-1)=1$, and $\chi,\phi,\chi\phi=\chi^{-1}$ are all nontrivial.
+
+Define the Jacobi sum
+
+$$
+J(\chi,\phi)=\sum_{t\in F}\chi(t)\phi(1-t).
+$$
+
+Now group terms by $t=x^2$. Since $\chi(x^2)=\phi(x)$, we have $\phi(x^3-x)=\chi(x^2)\phi(x^2-1)$. The weight is constant on each square fiber, so
+
+$$
+\begin{aligned}
+\sum_{x\in F}\phi(x^3-x)
+&=\sum_{t\in F}\#\{x\in F:x^2=t\}\,\chi(t)\phi(t-1)\\
+&=\sum_{t\in F}(1+\phi(t))\chi(t)\phi(1-t)\\
+&=J(\chi,\phi)+J(\chi^{-1},\phi)\\
+&=J(\chi,\phi)+\overline{J(\chi,\phi)}.
+\end{aligned}
+$$
+
+The second line uses $\phi(-1)=1$, the third uses $\phi\chi=\chi^{-1}$, and the last uses complex conjugation of character values. This grouping includes the zero fiber: $t=0$ has one square root but $\chi(0)=0$; at $t=1$ the weight contains $\phi(0)=0$. Thus $x=0,\pm1$ have not been discarded: each contributes one affine point to the original count. Writing $J=J(\chi,\phi)$ gives $T=-2\operatorname{Re}J$.
+
+All these character values are Gaussian integers, so $J=r+si$ for integers $r,s$. The classical Jacobi-sum norm formula applies when both characters and their product are nontrivial, giving $|J|=\sqrt p$[^gauss-jacobi-background], hence $r^2+s^2=p$. We still need to identify which leg is the real part. The integrality congruence for quartic Jacobi sums gives some $z\in\mathbb{Z}[i]$ such that
+
+$$
+J=-1+z(i-1)^2.
+$$
+
+Writing $z=u+vi$ with $u,v\in\mathbb{Z}$ and using $(i-1)^2=-2i$, we obtain
+
+$$
+J=(-1+2v)-2ui,\qquad r=-1+2v\text{ is odd},\quad s=-2u\text{ is even}.
+$$
+
+Finally compare $r+si$ with the given $a+bi$. The Gaussian norm $N_G(x+yi)=(x+yi)(x-yi)=x^2+y^2$ is multiplicative. Both numbers have norm equal to the prime $p$, ruling out a factorization into nonunits; in the Euclidean ring $\mathbb{Z}[i]$, they are therefore Gaussian primes. Since $p=(a+bi)(a-bi)$, unique factorization in the Gaussian integers makes $r+si$ associate to either $a+bi$ or $a-bi$. A unit must have norm $1$, and the integer equation $x^2+y^2=1$ gives just the units $1,-1,i,-i$. Multiplication by $\pm i$ would put the even imaginary coordinate in the real slot, contradicting the oddness of $r$; multiplication by $\pm1$ only changes the real part's sign. Therefore $|r|=|a|$ for every such pair $a,b$, and
+
+$$
+|T|=2|r|=2|a|,\qquad
+\left|\frac{T}{2\sqrt p}\right|
+=\frac{|a|}{\sqrt p}
+=\frac{|a|}{\sqrt{a^2+b^2}}.
+$$
+
+This explains the adjacent-leg projection: $J$ has length $\sqrt p$, and its absolute real part is precisely the odd leg $|a|$. No sign for $T$ is chosen, and no restriction modulo $8$ is imposed on $p$. For example, at $p=5=1^2+2^2$, the values of $\phi(x^3-x)$ for $x=0,1,2,3,4$ are $0,0,1,1,0$. There are seven affine points and the point $O$, so $N=8$, $T=-2$, and the absolute cosine is $1/\sqrt5$.
+
+The three algebraic results used here have distinct scopes. The [power-fiber counting formula](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.power_fiber_card_eq_one_add_character_sum) applies to every finite field $K$, positive integer $d$, and complex multiplicative character $\eta:K\to\mathbb{C}$ of exact order $d$. For every $t\in K$, it states, in $\mathbb{C}$,
+
+$$
+\#\{x\in K:x^d=t\}
+=1+\sum_{j=1}^{d-1}\eta^j(t).
+$$
+
+Characters are extended by zero at zero, and the natural-number count on the left is embedded in $\mathbb{C}$ in the usual way. Taking $K=\mathbb{F}_p$, $d=2$, and $\eta=\phi$ gives the square-fiber formula above, including at $t=0$.
+
+The [Jacobi-sum norm formula](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.norm_jacobiSum) applies to complex multiplicative characters $\alpha,\beta$ on any finite field $K$, under all three hypotheses $\alpha\ne1$, $\beta\ne1$, and $\alpha\beta\ne1$. Its conclusion is
+
+$$
+\left|\sum_{t\in K}\alpha(t)\beta(1-t)\right|
+=\sqrt{\#K}.
+$$
+
+Here $1$ denotes the trivial multiplicative character, equal to $1$ away from zero and $0$ at zero. For $K=\mathbb{F}_p$, $\alpha=\chi$, and $\beta=\phi$, the exact orders are four for $\chi$, two for $\phi$, and four for $\chi\phi=\chi^{-1}$, so all three nontriviality hypotheses hold. The [classification of Gaussian units](lean:D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart.gaussian_unit) states that every invertible Gaussian integer $u\in\mathbb{Z}[i]^\times$ satisfies $u=1$, $u=i$, $u=-1$, or $u=-i$: precisely the four possibilities used above to rule out exchanging the two legs.
+
+The quartic integrality congruence corresponds to Mathlib's `exists_jacobiSum_eq_neg_one_add`, with $n=4$, primitive fourth root $i$, and $4\mid p-1$. The three algebraic results respectively control an individual fiber, the length of a Jacobi sum, and the units of the Gaussian integers; none assumes the curve's trace formula. The complete derivation connecting the actual curve's point count, Jacobi sums, Gaussian primes, and the normalized cosine remains a **literature application, not formalized in this book**. It supplies no formal proof of the adjacent inert-prime cancellation, the general Hasse bound, or the non-CM Sato–Tate distribution.
+:::
+
+[^gauss-count-background]: René Schoof, “Counting points on elliptic curves over finite fields”, *Journal de Théorie des Nombres de Bordeaux* 7 (1995), §§1, 3. Cited here only for background on standard Weierstrass point counts and Gaussian complex multiplication.
+
+[^gauss-jacobi-background]: Keith Conrad, *Gauss and Jacobi Sums*, author's notes, Theorem 2.4 and Corollary 2.5, on the norm of Gauss sums of nontrivial characters and the Jacobi-sum norm when both characters and their product are nontrivial. This citation supports only the norm step here, not the complete trace derivation for this curve.
 
 And if we pass to a generic elliptic curve over $\mathbb{Q}$ without extra complex-multiplication symmetry (such as $y^2 = x^3 - x + 1$), how are the Frobenius cosines $\cos\theta_p \in [-1, +1]$ distributed as $p \to \infty$ over all primes of good reduction?
 

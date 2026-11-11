@@ -1,9 +1,9 @@
 # 附录 C：Lean 4 形式化定理总索引与开放问题台账
 
-本附录是全书认识论边界的**总账本（Master Audit Ledger）**。根据本书序曲确立的“认识论契约”，全书所有数学陈述严格划分为三类，并在机器锁定的 `trureturing.lock.json`（钉死于 `trureturing@dev` 提交 `38196c62e121b0a334b903eea2a513bb2587e41c`）中接受逐条核验：
+本附录是全书认识论边界的**总账本（Master Audit Ledger）**。根据本书序曲确立的“认识论契约”，全书所有数学陈述严格划分为三类，并在机器锁定的 `trureturing.lock.json`（钉死于 `trureturing@dev` 提交 `a660b9333c0f8d25aaa22af1bbbfab43c2f94a46`）中接受逐条核验：
 
 1. **C.1 冻结定理总索引（166 条唯一 `theorem` 声明）**：凡在正文中置于 `theorem`、`lemma`、`proposition`、`corollary` 环境或交互沙盒/短片/讲义 `lean:` 锚点中的命题，其 `lean="<GID>"` 必须解析为 `trureturing` 仓库 `Golden/Frozen/state/<module>.lean.json` 中已由 Lean 4 内核验证且无 `sorry` 的 `theorem` 声明；
-2. **C.2 形式化定义与代数载体总索引（53 项唯一 `definition` / `structure` / `inductive` 声明）**：置于 `definition` 环境或媒体锚点中的核心代数构造、旋量类型与状态空间定义；以及 **C.2.1 行内辅助引理与构造索引（91 项行内引用声明）**，与 C.1、C.2 共同构成 `trureturing.lock.json` 中锁定的全部 **310 项唯一声明**（`166 + 53 + 91 = 310`）；
+2. **C.2 形式化定义与代数载体总索引（53 项唯一 `definition` / `structure` / `inductive` 声明）**：置于 `definition` 环境或媒体锚点中的核心代数构造、旋量类型与状态空间定义；以及 **C.2.1 行内辅助引理与构造索引（94 项行内引用声明）**，与 C.1、C.2 共同构成 `trureturing.lock.json` 中锁定的全部 **313 项唯一声明**（`166 + 53 + 94 = 313`）；
 3. **C.3 开放问题与未形式化前沿边界台账（8 项：6 个 `conjecture` / `OPEN` 环境 + 2 项前沿文献边界 `remark`）**：尚未在 `trureturing` 中完成内核形式化或属于数学物理前沿未决猜想的命题，在全书中一律以无 `lean` 属性的 `conjecture`（红色 `OPEN` 徽章）或带明确文献说明的 `remark` 环境隔离呈现，绝不冒充已验证定理。
 
 ---
@@ -245,9 +245,9 @@
 
 ---
 
-## C.2.1 行内引用的辅助定理与定义索引（91 项唯一声明） {#sec-appendix-c-inline}
+## C.2.1 行内引用的辅助定理与定义索引（94 项唯一声明） {#sec-appendix-c-inline}
 
-除上述 C.1 与 C.2 中绑定于正式数学环境或媒体锚点的 219 项声明外，正文、证明解析与附录对照表中还通过 `[name](lean:GID)` 行内链接直接引用了 **91 项辅助定理与构造定义**。将这 91 项行内声明纳入总账后，本附录完整覆盖了 `trureturing.lock.json` 中的全部 **310 项唯一锁定声明**（`166 + 53 + 91 = 310`）：
+除上述 C.1 与 C.2 中绑定于正式数学环境或媒体锚点的 219 项声明外，正文、证明解析与附录对照表中还通过 `[name](lean:GID)` 行内链接直接引用了 **94 项辅助定理与构造定义**。将这 94 项行内声明纳入总账后，本附录完整覆盖了 `trureturing.lock.json` 中的全部 **313 项唯一锁定声明**（`166 + 53 + 94 = 313`）：
 
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 行内引用章节 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -342,6 +342,9 @@
 | `R89` | [`D5.S3.QuantumChannels.PinchingProjection.pinching_hilbert_schmidt_orthogonal`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_orthogonal) | `D5/S3/QuantumChannels/PinchingProjection.lean:48` | `theorem` | Ch 06 |
 | `R90` | [`D5.S3.Weil.Convention.criticalAbscissa`](lean:D5/S3/Weil/Convention.criticalAbscissa) | `D5/S3/Weil/Convention.lean:42` | `def` | Ch 22 |
 | `R91` | [`D5.S3.Zeros.ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one`](lean:D5/S3/Zeros/ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one) | `D5/S3/Zeros/ZetaUpgrade.lean:36` | `theorem` | Ch 22 |
+| `R92` | [`D5.S3.CharacterSums.Fermat.CharacterPointCount.norm_jacobiSum`](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.norm_jacobiSum) | `D5/S3/CharacterSums/Fermat/CharacterPointCount.lean:533` | `theorem` | Ch 29 |
+| `R93` | [`D5.S3.CharacterSums.Fermat.CharacterPointCount.power_fiber_card_eq_one_add_character_sum`](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.power_fiber_card_eq_one_add_character_sum) | `D5/S3/CharacterSums/Fermat/CharacterPointCount.lean:197` | `theorem` | Ch 29 |
+| `R94` | [`D5.S3.ConceptDynamics.Coding.ResetNativeIntegerChart.gaussian_unit`](lean:D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart.gaussian_unit) | `D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart.lean:816` | `theorem` | Ch 29 |
 
 ---
 
@@ -369,11 +372,11 @@
 | 核验项 | 目标参数 / 契约值 | 核验命令 / 工具链机制 | 状态 |
 | :--- | :--- | :--- | :---: |
 | **上游仓库与分支** | `the-omega-institute/trureturing` 分支 `dev` | `site.toml` `[trureturing]` 配置与 `git merge-base --is-ancestor` | `PASS` |
-| **所钉提交 SHA** | `38196c62e121b0a334b903eea2a513bb2587e41c` | `trureturing.lock.json` `commit` 字段精确锁定 | `PASS` |
-| **冻结定理总数** | `166` 项环境/媒体定理（含行内共 `217` 项 `kind == "theorem"`） | 核对 `Golden/Frozen/state/<module>.lean.json` 中每项状态片与 `statement_id` 哈希 | `PASS` |
+| **所钉提交 SHA** | `a660b9333c0f8d25aaa22af1bbbfab43c2f94a46` | `trureturing.lock.json` `commit` 字段精确锁定 | `PASS` |
+| **冻结定理总数** | `166` 项环境/媒体定理（含行内共 `220` 项 `kind == "theorem"`） | 核对 `Golden/Frozen/state/<module>.lean.json` 中每项状态片与 `statement_id` 哈希 | `PASS` |
 | **辅助定义与结构数** | `53` 项环境定义（含行内共 `93` 项 `kind` 为 `def` 或 `inductive`） | 单独归入第 C.2 节，绝不与 `theorem / lemma / proposition / corollary` 混计 | `PASS` |
 | **多语言结构对齐** | `zh` 与 `en` 章节序列、环境 ID、Lean 引用序列 100% 一致 | `./tbook check` 跨版本逐项比对（`0 error(s), 0 warning(s)`） | `PASS` |
 
 ::: {.remark #rem-appendix-c-epistemic-boundary title="完整声明索引的验证边界说明"}
-文献结果，未在本书形式化：本附录第 C.1 节所列的 166 条正式环境与媒体定理、第 C.2 节所列的 53 项环境定义/结构以及第 C.2.1 节所列的 91 项行内交叉引用声明（总计 310 项形式化声明：217 项定理 + 93 项定义/结构）均已在 `trureturing@dev` 提交 `38196c62e121b0a334b903eea2a513bb2587e41c` 下由 Lean 4 内核验证并写入 `trureturing.lock.json`；而第 C.3 节登记的开放猜想（`OPEN`）与经典文献定理（文献结果，未在本书形式化）则严格排除在形式化定理计数之外，确保全书的每一枚 `LEAN ✓` 徽章均具备零歧义的内核证明背书。
+文献结果，未在本书形式化：本附录第 C.1 节所列的 166 条正式环境与媒体定理、第 C.2 节所列的 53 项环境定义/结构以及第 C.2.1 节所列的 94 项行内交叉引用声明（总计 313 项形式化声明：220 项定理 + 93 项定义/结构）均已在 `trureturing@dev` 提交 `a660b9333c0f8d25aaa22af1bbbfab43c2f94a46` 下由 Lean 4 内核验证并写入 `trureturing.lock.json`；而第 C.3 节登记的开放猜想（`OPEN`）与经典文献定理（文献结果，未在本书形式化）则严格排除在形式化定理计数之外，确保全书的每一枚 `LEAN ✓` 徽章均具备零歧义的内核证明背书。
 :::
