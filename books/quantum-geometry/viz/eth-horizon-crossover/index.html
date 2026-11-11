@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//HORIZON · A crossover beyond the horizon · a slowly falling exponent rate, the minimal cut of a bridge graph and the few modes that carry the weight">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//HORIZON 视界之外的交叉点 · 一条缓慢下降的指数率、桥图的最小割与少数承重的模态</title>
+<meta name="description" content="第 30 章 ETH 一节的三个场景。指数率：示意曲线 r(n) = c·log₂log₂n/√log₂n 降得很慢，c = 1 时要到 n ≈ 2^558 才低于 PPSZ 的 0.386，远在可观测宇宙的 2^266 之外；常数 c 决定交叉点在视界的哪一边。桥图：宽度为 3 的双节点张量网络，随机实例的流矩阵的秩等于最小割 min(3ac, ad, bc)，锥域内等于 min(ad, bc)（Lean 已验证）。模态：非负且和为 T 的谱里，不小于阈值 θ 的模态至多 T/θ 个（Lean 已验证）。Three scenes for the ETH section of chapter 30. The exponent rate: the schematic curve r(n) = c·log₂log₂n/√log₂n falls so slowly that for c = 1 it drops below the 0.386 of PPSZ only at n ≈ 2^558, far beyond the 2^266 of the observable universe; the constant c decides on which side of the horizon the crossover lies. The bridge graph: a two-node tensor network of width 3 whose random flow matrix has the rank of the minimal cut min(3ac, ad, bc), equal to min(ad, bc) inside the cone (kernel-verified in Lean). The modes: in a nonnegative spectrum of total T at most T/θ modes reach a threshold θ (kernel-verified in Lean).">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="eth-horizon-crossover">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//HORIZON">ORTHO<b>//</b>HORIZON</h1>
+      <div class="tagline">
+        <span class="zh">视界之外的交叉点 · <em>趋于零的指数率，可以在整个宇宙的尺度上都还没有赢</em></span>
+        <span class="en">A crossover beyond the horizon · <em>an exponent rate that tends to zero can still be losing at the scale of the whole universe</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillScene">SCENE <strong>—</strong></span>
+      <span class="pill" id="pillWhat"><strong>—</strong></span>
+      <span class="pill hot" id="pillKey"><strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="human" aria-pressed="false"><span class="code">HUMAN</span><span class="cn zh">2¹⁶ 个变量：指数率才降回 1</span><span class="cn en">2¹⁶ variables: the rate is only back at 1</span></button>
+        <button class="preset" data-preset="atoms" aria-pressed="false"><span class="code">ATOMS</span><span class="cn zh">宇宙原子数：仍高于 0.386</span><span class="cn en">Atoms of the universe: still above 0.386</span></button>
+        <button class="preset" data-preset="cross" aria-pressed="false"><span class="code">CROSSOVER</span><span class="cn zh">交叉点：n ≈ 2⁵⁵⁸</span><span class="cn en">The crossover: n ≈ 2⁵⁵⁸</span></button>
+        <button class="preset" data-preset="constant" aria-pressed="false"><span class="code">CONSTANT</span><span class="cn zh">常数减半：交叉点回到视界内</span><span class="cn en">Half the constant: the crossover comes inside</span></button>
+        <button class="preset" data-preset="bridge" aria-pressed="false"><span class="code">BRIDGE</span><span class="cn zh">桥图 (2, 3, 2, 3)：秩 = 最小割 6</span><span class="cn en">Bridge (2, 3, 2, 3): rank = min cut 6</span></button>
+        <button class="preset" data-preset="narrow" aria-pressed="false"><span class="code">NARROW</span><span class="cn zh">桥太窄：三条桥成了瓶颈</span><span class="cn en">Bridges too narrow: they are the bottleneck</span></button>
+        <button class="preset" data-preset="plateau" aria-pressed="false"><span class="code">PLATEAU</span><span class="cn zh">平台谱：承重的模态屈指可数</span><span class="cn en">A plateau: few modes carry the weight</span></button>
+        <button class="preset" data-preset="tail" aria-pressed="false"><span class="code">TAIL</span><span class="cn zh">阈值降低：个数涨，仍不过墙</span><span class="cn en">Lower threshold: more modes, never past the wall</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+    <section class="panel sec" data-scenes="rates">
+      <h2><span class="zh">示意曲线</span><span class="en">The schematic curve</span><span class="aside">r(n) = c·log₂log₂n / √log₂n</span></h2>
+      <div class="field">
+        <label for="cc"><span class="zh">常数 c</span><span class="en">The constant c</span><small class="zh">大 O 里看不见的那个数</small><small class="en">the number hidden in the big O</small></label><output id="oCC" for="cc">1.00</output>
+        <input type="range" id="cc" min="0.3" max="2" step="0.05" value="1">
+      </div>
+      <p class="note"><span class="zh">时间轴是规模：log₂ n 从 2 走到 800。阴影是可观测宇宙的原子数以内，n ≤ 10⁸⁰ ≈ 2²⁶⁶。</span><span class="en">The rail is the scale: log₂ n from 2 to 800. The shaded part lies within the number of atoms of the observable universe, n ≤ 10⁸⁰ ≈ 2²⁶⁶.</span></p>
+    </section>
+    <section class="panel sec" data-scenes="cut" hidden>
+      <h2><span class="zh">桥图的四个维数</span><span class="en">The four dimensions of the bridge</span><span class="aside">M: a×b · N: d×c</span></h2>
+      <div class="field"><label for="da"><span class="zh">a</span><span class="en">a</span></label><output id="oDA" for="da">2</output><input type="range" id="da" min="1" max="6" step="1" value="2"></div><div class="field"><label for="db"><span class="zh">b</span><span class="en">b</span></label><output id="oDB" for="db">3</output><input type="range" id="db" min="1" max="6" step="1" value="3"></div><div class="field"><label for="dc"><span class="zh">c</span><span class="en">c</span></label><output id="oDC" for="dc">2</output><input type="range" id="dc" min="1" max="6" step="1" value="2"></div><div class="field"><label for="dd"><span class="zh">d</span><span class="en">d</span></label><output id="oDD" for="dd">3</output><input type="range" id="dd" min="1" max="6" step="1" value="3"></div>
+      <p class="note"><span class="zh">时间轴换一组随机整数矩阵。秩不随抽样改变。</span><span class="en">The rail draws another set of random integer matrices. The rank does not change with the draw.</span></p>
+    </section>
+    <section class="panel sec" data-scenes="modes" hidden>
+      <h2><span class="zh">谱的形状</span><span class="en">Shape of the spectrum</span><span class="aside">λⱼ ≥ 0 · Σλⱼ = T</span></h2>
+      <div class="chips" id="profChips" role="group" aria-label="谱的形状" data-aria-en="Shape of the spectrum">
+        <button class="chip" data-prof="plateau" aria-pressed="true"><span class="zh">平台</span><span class="en">Plateau</span></button>
+        <button class="chip" data-prof="geometric" aria-pressed="false"><span class="zh">几何</span><span class="en">Geometric</span></button>
+        <button class="chip" data-prof="power" aria-pressed="false"><span class="zh">幂律</span><span class="en">Power law</span></button>
+      </div>
+      <p class="note"><span class="zh">时间轴把阈值 θ 从 1 降到 0.02。也可以在舞台上直接拖那条琥珀色的线。</span><span class="en">The rail lowers the threshold θ from 1 to 0.02. Or drag the amber line on the stage.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage still" id="stage" data-thumb aria-label="舞台：指数率随规模变化的曲线；桥图、它的三道割与流矩阵；或一条谱与阈值" data-aria-en="Stage: the exponent rate against the scale; the bridge graph with its three cuts and its flow matrix; or a spectrum and a threshold">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+        <button class="chip" data-scene="rates" aria-pressed="true"><span class="zh">指数率</span><span class="en">Rates</span></button>
+        <button class="chip" data-scene="cut" aria-pressed="false"><span class="zh">桥图</span><span class="en">Bridge</span></button>
+        <button class="chip" data-scene="modes" aria-pressed="false"><span class="zh">模态</span><span class="en">Modes</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="pATitle"></h2><span id="pAMeta"></span></div>
+        <canvas id="plotA" aria-label="本场景的小图 A" data-aria-en="Small plot A of the scene"></canvas>
+      </section>
+      <section class="panel">
+        <div class="head"><h2 id="pBTitle"></h2><span id="pBMeta"></span></div>
+        <canvas id="plotB" aria-label="本场景的小图 B" data-aria-en="Small plot B of the scene"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="roKeyL"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div class="c"><dt id="roL1"></dt><dd id="ro1">—</dd></div>
+        <div class="m"><dt id="roL2"></dt><dd id="ro2">—</dd></div>
+        <div><dt id="roL3"></dt><dd id="ro3">—</dd></div>
+        <div><dt id="roL4"></dt><dd id="ro4">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+<div class="lean model" data-scenes="rates"><span class="ok">MODEL</span><span><span class="zh">示意曲线，不是定理：正文引述了 2026 年两份预印本所宣称的 3-SAT 上界 2^{O(n·log log n/√log n)}，并注明其仍在审计中。本页只按这个形状画 r(n) = c·log₂log₂n/√log₂n，常数 c 由读者设定；本页不判断该上界是否成立。</span><span class="en">A schematic curve, not a theorem: the text reports the bound 2^{O(n·log log n/√log n)} for 3-SAT claimed by two preprints of 2026 and notes that they are still under audit. The page only draws r(n) = c·log₂log₂n/√log₂n in that shape, with the constant c set by the reader; it does not judge whether the bound holds.</span></span></div>
+<div class="lean argued" data-scenes="rates"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：PPSZ 类算法在约 1.307ⁿ ≈ 2^{0.386 n} 时间内解 3-SAT（Paturi、Pudlák、Saks、Zane；Hertli）。可观测宇宙的原子数约 10⁸⁰ ≈ 2²⁶⁶。</span><span class="en">Literature results, not formalized in this book: algorithms of the PPSZ family solve 3-SAT in about 1.307ⁿ ≈ 2^{0.386 n} time (Paturi, Pudlák, Saks, Zane; Hertli). The observable universe holds about 10⁸⁰ ≈ 2²⁶⁶ atoms.</span></span></div>
+<div class="lean" data-scenes="cut" hidden><span class="ok">LEAN ✓</span><span><span class="zh">宽度三桥图。对自然数 0 &lt; a ≤ b、0 &lt; c ≤ d，若 a² + b² ≤ 3ab 且 c² + d² ≤ 3cd，则 QMaxFlow(a, b, c, d) = QMinCut(a, b, c, d)，且 QMinCut(a, b, c, d) = min(a·d, b·c)。已冻结：</span><span class="en">The bridge graph of width three. For natural numbers 0 &lt; a ≤ b and 0 &lt; c ≤ d with a² + b² ≤ 3ab and c² + d² ≤ 3cd: QMaxFlow(a, b, c, d) = QMinCut(a, b, c, d), and QMinCut(a, b, c, d) = min(a·d, b·c). Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result" href="https://github.com/the-omega-institute/trureturing/blob/52725b62b659b244d077e29f18a576aa809007b7/D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.lean#L116" target="_blank" rel="noopener"><code>QuantumMaxFlowMinCut.result</code></a></span></div>
+<div class="lean" data-scenes="modes" hidden><span class="ok">LEAN ✓</span><span><span class="zh">设 λⱼ ≥ 0 可和，Σⱼ λⱼ = R·F/π，θ &gt; 0。则 {j : λⱼ ≥ θ} 是有限集，其元素个数不超过 R·F/(π·θ)。页面上的 T 就是 R·F/π。已冻结：</span><span class="en">Let λⱼ ≥ 0 be summable with Σⱼ λⱼ = R·F/π, and θ &gt; 0. Then {j : λⱼ ≥ θ} is finite and has at most R·F/(π·θ) elements. The T of the page is R·F/π. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound" href="https://github.com/the-omega-institute/trureturing/blob/52725b62b659b244d077e29f18a576aa809007b7/D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.lean#L26" target="_blank" rel="noopener"><code>finite_rank_concentration_mode_bound</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+<div class="lean open"><span class="ok">OPEN</span><span><span class="zh">P 对 NP 仍是开放问题。指数时间假设（ETH）的现状见正文：正文引述的预印本尚未通过独立审计，本页不采信任何一方。</span><span class="en">P versus NP is open. For the status of the exponential time hypothesis (ETH) see the text: the preprints it reports have not passed independent audit, and this page takes neither side.</span></span></div>
+<div class="lean model"><span class="ok">MODEL</span><span><span class="zh">“视界”“有限观察者”与“球只是多面体近似”是本书第 30 章的诠释，不是定理。</span><span class="en">“The horizon”, “the finite observer” and “the sphere is only a polyhedral approximation” are interpretations of chapter 30 of this book, not theorems.</span></span></div>
+<div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数值演示，不是证明：交叉点用二分法求出；桥图的流矩阵由带种子的随机整数矩阵生成，秩用 BigInt 无分数消元精确算出，奇异值用雅可比法；谱是三个显式数列。随机实例的秩只说明这一个实例，不超过最小割由 Lean 定理保证。</span><span class="en">A numerical illustration on the page, not a proof: the crossover is found by bisection; the flow matrix of the bridge comes from seeded random integer matrices, its rank is exact (fraction-free elimination with BigInt) and its singular values use the Jacobi method; the spectra are three explicit sequences. The rank of a random instance speaks for that instance only; that it never exceeds the minimal cut is the Lean theorem.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="时间轴：规模 log₂ n、抽样序号或阈值" data-aria-en="Rail: the scale log₂ n, the draw or the threshold">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>1</kbd>–<kbd>3</kbd> <span class="zh">场景</span><span class="en">scene</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">第 30 章用一组跨越宇宙尺度的数字说明：一个渐近意义上更好的上界，可以在一切物理上可及的规模上都还没有赢。本页把这组数字画成曲线，并画出正文拿来对照的两条已验证定理。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>指数率。</b>运行时间写成 2^{r(n)·n}，r(n) 是每个变量付出的指数。PPSZ 的 r ≈ 0.386 是常数；示意曲线 r(n) = c·log₂log₂n/√log₂n 趋于零，但降得极慢：c = 1 时，n = 2¹⁶ 处它才降回 1（与穷举相同），n = 2²⁶⁶（宇宙原子数）处是 0.494，要到 n ≈ 2⁵⁵⁸ 才与 0.386 相交。常数 c 决定一切：c 小于约 0.78 时交叉点落在 2²⁶⁶ 以内，c 小于约 0.364 时曲线处处低于 0.386。</li>
+        <li><b>桥图。</b>两个节点各带三个矩阵：M₀, M₁, M₂ 是 a×b 的，N₀, N₁, N₂ 是 d×c 的，流矩阵 flow = Σᵣ Mᵣ ⊗ Nᵣ 有 a·d 行、b·c 列。它的秩不超过三道割的容量：行数 a·d、列数 b·c、三条桥合计 3·a·c。Lean 证明了秩的最大值不超过最小割，并且在锥域 a² + b² ≤ 3ab、c² + d² ≤ 3cd 内恰好等于 min(a·d, b·c)。舞台上的随机整数实例给出这个秩：流矩阵下方的奇异值在秩之后归零。</li>
+        <li><b>模态。</b>一条非负、总和为 T 的谱里，不小于 θ 的项不可能超过 T/θ 个，否则它们的和就超过 T。舞台上品红的竖墙立在 T/θ 处，青色的柱子永远到不了墙的右边。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch30-fields-lines-eth-and-navier-stokes.html#sec-coda-eth-tensor-rank-and-cosmic-horizon" target="_top">第 30 章 · ETH、张量网络秩约分与宇宙学视界</a> · <a href="../../zh/ch19-tensor-networks-and-holography.html#sec-bridge-flow-cut" target="_top">第 19 章 · 宽度三桥图的秩与割容量</a> · trureturing（所钉提交）：<a data-trureturing-path="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.lean" href="https://github.com/the-omega-institute/trureturing/blob/52725b62b659b244d077e29f18a576aa809007b7/D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.lean" target="_blank" rel="noopener">QuantumMaxFlowMinCut.lean</a> · <a data-trureturing-path="D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.lean" href="https://github.com/the-omega-institute/trureturing/blob/52725b62b659b244d077e29f18a576aa809007b7/D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.lean" target="_blank" rel="noopener">FiniteRankConcentrationModeBound.lean</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">Chapter 30 uses a set of numbers on the scale of the universe to make one point: a bound that is better asymptotically can still be losing at every size that is physically within reach. This page draws those numbers as a curve, and draws the two verified theorems the text sets beside them. The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>The exponent rate.</b> Write the running time as 2^{r(n)·n}, where r(n) is the exponent paid per variable. For PPSZ r ≈ 0.386 is a constant; the schematic curve r(n) = c·log₂log₂n/√log₂n tends to zero, but very slowly: for c = 1 it is back at 1 (the rate of brute force) only at n = 2¹⁶, it is 0.494 at n = 2²⁶⁶ (the atoms of the universe), and it meets 0.386 only at n ≈ 2⁵⁵⁸. The constant c decides everything: below about 0.78 the crossover falls within 2²⁶⁶, and below about 0.364 the curve lies under 0.386 everywhere.</li>
+        <li><b>The bridge graph.</b> Two nodes carry three matrices each: M₀, M₁, M₂ are a×b and N₀, N₁, N₂ are d×c, and the flow matrix flow = Σᵣ Mᵣ ⊗ Nᵣ has a·d rows and b·c columns. Its rank cannot exceed the capacity of three cuts: the a·d rows, the b·c columns, and 3·a·c for the three bridges together. Lean proves that the greatest rank never exceeds the minimal cut, and that inside the cone a² + b² ≤ 3ab, c² + d² ≤ 3cd it is exactly min(a·d, b·c). The random integer instance on the stage shows that rank: the singular values under the flow matrix vanish after it.</li>
+        <li><b>The modes.</b> In a nonnegative spectrum of total T, no more than T/θ terms can reach θ, or their sum would exceed T. On the stage a magenta wall stands at T/θ, and the cyan bars never get to its right.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch30-fields-lines-eth-and-navier-stokes.html#sec-coda-eth-tensor-rank-and-cosmic-horizon" target="_top">Chapter 30 · ETH, tensor-network rank reduction and the cosmic horizon</a> · <a href="../../en/ch19-tensor-networks-and-holography.html#sec-bridge-flow-cut" target="_top">Chapter 19 · Rank and cut capacity of the width-three bridge</a> · trureturing (pinned commit): <a data-trureturing-path="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.lean" href="https://github.com/the-omega-institute/trureturing/blob/52725b62b659b244d077e29f18a576aa809007b7/D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.lean" target="_blank" rel="noopener">QuantumMaxFlowMinCut.lean</a> · <a data-trureturing-path="D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.lean" href="https://github.com/the-omega-institute/trureturing/blob/52725b62b659b244d077e29f18a576aa809007b7/D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.lean" target="_blank" rel="noopener">FiniteRankConcentrationModeBound.lean</a></p>
+    </div>
+    <h3 class="evh"><span class="zh">全部依据</span><span class="en">All evidence</span></h3>
+<div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">对一切自然数 a, b, c, d：QMaxFlow(a, b, c, d) ≤ QMinCut(a, b, c, d)，其中 QMinCut = min(3ac, min(ad, bc))。已冻结：</span><span class="en">For all natural numbers a, b, c, d: QMaxFlow(a, b, c, d) ≤ QMinCut(a, b, c, d), where QMinCut = min(3ac, min(ad, bc)). Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_le_QMinCut" href="https://github.com/the-omega-institute/trureturing/blob/52725b62b659b244d077e29f18a576aa809007b7/D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.lean#L140" target="_blank" rel="noopener"><code>QMaxFlow_le_QMinCut</code></a></span></div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

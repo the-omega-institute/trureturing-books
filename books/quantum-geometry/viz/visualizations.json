@@ -311,6 +311,241 @@
           "gid": "D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation"
         }
       ]
+    },
+    {
+      "id": "navier-stokes-p-np",
+      "code": "ORTHO//VORTEX",
+      "title": "场与涡丝 · 对流项的两半、越拉越细的涡管与算不出下一步的低频观察者",
+      "title_en": "Field and filament · the two halves of advection, a vortex tube drawn thin, and a low-mode observer who cannot predict the next step",
+      "summary": "第 30 章流体一侧的三个场景。对流的两半：(u·∇)u 恒等于梯度 ∇(|u|²/2) 加兰姆项 ω × u，无旋时只剩梯度。涡管：二维里没有拉伸；三维里截面 A 变细而环量 Γ = ωA 不变，涡度按 Γ/A 变大，粘性把它拦在伯格斯截面 4πν/α 上，示意的自拉伸模型在 κΓ > 4πν 时有限时间夹断。闭合：只看得见 x 的观察者能精确预测下一步，当且仅当三条泄漏同时为零（Lean 已验证）；五模态傅里叶实例里的混合项是 i/4。",
+      "summary_en": "Three scenes on the fluid side of chapter 30. The two halves of advection: (u·∇)u is the gradient ∇(|u|²/2) plus the Lamb term ω × u, and without vorticity only the gradient is left. The vortex tube: no stretching in two dimensions; in three the cross-section A shrinks while the circulation Γ = ωA stays, so the vorticity grows like Γ/A; viscosity holds it at the Burgers cross-section 4πν/α, and a schematic self-stretching model pinches in finite time when κΓ > 4πν. Closure: an observer who sees only x can predict the next step exactly iff three leaks vanish together (kernel-verified in Lean); in a five-mode Fourier instance the mixed term is i/4.",
+      "path": "navier-stokes-p-np/",
+      "thumbnail": "navier-stokes-p-np/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-10",
+      "tags": [
+        "纳维—斯托克斯",
+        "兰姆项",
+        "涡管拉伸",
+        "伯格斯涡",
+        "闭合判据",
+        "第 30 章"
+      ],
+      "tags_en": [
+        "Navier–Stokes",
+        "Lamb term",
+        "vortex stretching",
+        "Burgers vortex",
+        "closure criterion",
+        "chapter 30"
+      ],
+      "theory": [
+        {
+          "label": "第 30 章 · 纳维—斯托克斯与 P 对 NP 的场化同构",
+          "label_en": "Chapter 30 · Navier–Stokes and P versus NP as fields",
+          "href": "../zh/ch30-fields-lines-eth-and-navier-stokes.html#sec-coda-navier-stokes-and-p-vs-np",
+          "href_en": "../en/ch30-fields-lines-eth-and-navier-stokes.html#sec-coda-navier-stokes-and-p-vs-np"
+        },
+        {
+          "label": "第 30 章 · 二次平流闭合不可能性定理",
+          "label_en": "Chapter 30 · No closure for quadratic advection",
+          "href": "../zh/ch30-fields-lines-eth-and-navier-stokes.html#thm-coda-quadratic-advection-no-closure",
+          "href_en": "../en/ch30-fields-lines-eth-and-navier-stokes.html#thm-coda-quadratic-advection-no-closure"
+        },
+        {
+          "label": "Lean：二次观测闭合判据",
+          "label_en": "Lean: the quadratic observation closure criterion",
+          "href": "{trureturing}/D5/S3/Observer/Reversal/QuadraticObservationClosure.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff"
+        },
+        {
+          "gid": "D5/S3/Observer/Reversal/QuadraticObservationClosure.observed_increment"
+        },
+        {
+          "gid": "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.mixed_witness"
+        },
+        {
+          "gid": "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure"
+        }
+      ]
+    },
+    {
+      "id": "eth-horizon-crossover",
+      "code": "ORTHO//HORIZON",
+      "title": "视界之外的交叉点 · 一条缓慢下降的指数率、桥图的最小割与少数承重的模态",
+      "title_en": "A crossover beyond the horizon · a slowly falling exponent rate, the minimal cut of a bridge graph and the few modes that carry the weight",
+      "summary": "第 30 章 ETH 一节的三个场景。指数率：示意曲线 r(n) = c·log₂log₂n/√log₂n 趋于零却降得极慢，c = 1 时要到 n ≈ 2⁵⁵⁸ 才低于 PPSZ 的 0.386，远在宇宙原子数 2²⁶⁶ 之外；常数 c 决定交叉点在视界的哪一边。桥图：宽度为 3 的双节点张量网络，随机整数实例的流矩阵的秩等于最小割 min(3ac, ad, bc)；锥域内最大秩等于 min(ad, bc) 已由 Lean 验证。模态：非负且总和为 T 的谱里，不小于阈值 θ 的模态至多 T/θ 个（Lean 已验证）。",
+      "summary_en": "Three scenes for the ETH section of chapter 30. The exponent rate: the schematic curve r(n) = c·log₂log₂n/√log₂n tends to zero but so slowly that for c = 1 it drops below the 0.386 of PPSZ only at n ≈ 2⁵⁵⁸, far beyond the 2²⁶⁶ atoms of the universe; the constant c decides on which side of the horizon the crossover lies. The bridge graph: a two-node tensor network of width 3 whose random integer flow matrix has the rank of the minimal cut min(3ac, ad, bc); that the greatest rank equals min(ad, bc) inside the cone is kernel-verified in Lean. The modes: in a nonnegative spectrum of total T at most T/θ modes reach a threshold θ (kernel-verified in Lean).",
+      "path": "eth-horizon-crossover/",
+      "thumbnail": "eth-horizon-crossover/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-10",
+      "tags": [
+        "指数时间假设",
+        "PPSZ",
+        "张量网络",
+        "最小割",
+        "秩",
+        "第 30 章"
+      ],
+      "tags_en": [
+        "exponential time hypothesis",
+        "PPSZ",
+        "tensor network",
+        "minimal cut",
+        "rank",
+        "chapter 30"
+      ],
+      "theory": [
+        {
+          "label": "第 30 章 · ETH、张量网络秩约分与宇宙学视界",
+          "label_en": "Chapter 30 · ETH, tensor-network rank reduction and the cosmic horizon",
+          "href": "../zh/ch30-fields-lines-eth-and-navier-stokes.html#sec-coda-eth-tensor-rank-and-cosmic-horizon",
+          "href_en": "../en/ch30-fields-lines-eth-and-navier-stokes.html#sec-coda-eth-tensor-rank-and-cosmic-horizon"
+        },
+        {
+          "label": "第 19 章 · 宽度三桥图的秩与割容量",
+          "label_en": "Chapter 19 · Rank and cut capacity of the width-three bridge",
+          "href": "../zh/ch19-tensor-networks-and-holography.html#sec-bridge-flow-cut",
+          "href_en": "../en/ch19-tensor-networks-and-holography.html#sec-bridge-flow-cut"
+        },
+        {
+          "label": "Lean：桥图的量子最大流最小割",
+          "label_en": "Lean: quantum max-flow min-cut of the bridge graph",
+          "href": "{trureturing}/D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result"
+        },
+        {
+          "gid": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_le_QMinCut"
+        },
+        {
+          "gid": "D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound"
+        }
+      ]
+    },
+    {
+      "id": "spatial-attractor-deja-vu",
+      "code": "ORTHO//ATTRACTOR",
+      "title": "空间吸引子 · 忘掉起点，回到同一对翅膀",
+      "title_en": "Spatial attractor · forget the start, return to the same wings",
+      "summary": "终章“历史遗迹作为空间吸引子”一节，用洛伦兹系统演示。两轮：两条起点不同、参数相同的轨道落到同一对翅膀上，一次次回到同一处邻域，经过时方向几乎平行。收缩：相空间体积按 e^(−41t/3) 缩小，500 个点被压成一张薄片。维数：李雅普诺夫指数的数值估计给出卡普兰—约克维数约 2.06；换成 ρ = 14 或 ρ = 160，吸引子变成一个点或一条闭合的环。本页是数值演示与诠释模型，不引用 Lean 定理。",
+      "summary_en": "The coda’s section on historical ruins as spatial attractors, shown with the Lorenz system. Rounds: two orbits with different starts and the same parameters land on the same pair of wings and return again and again to one neighbourhood, passing it in nearly the same direction. Contraction: phase volume shrinks like e^(−41t/3) and 500 points are pressed into a thin sheet. Dimension: numerical Lyapunov exponents give a Kaplan–Yorke dimension of about 2.06; at ρ = 14 or ρ = 160 the attractor becomes a point or a closed loop. The page is a numerical illustration and an interpretive model; it cites no Lean theorem.",
+      "path": "spatial-attractor-deja-vu/",
+      "thumbnail": "spatial-attractor-deja-vu/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-10",
+      "tags": [
+        "洛伦兹吸引子",
+        "回归",
+        "体积收缩",
+        "李雅普诺夫指数",
+        "卡普兰—约克维数",
+        "终章"
+      ],
+      "tags_en": [
+        "Lorenz attractor",
+        "recurrence",
+        "volume contraction",
+        "Lyapunov exponents",
+        "Kaplan–Yorke dimension",
+        "coda"
+      ],
+      "theory": [
+        {
+          "label": "终章 · 历史遗迹作为空间吸引子",
+          "label_en": "Coda · Historical ruins as spatial attractors",
+          "href": "../zh/coda.html#sec-coda-spatial-attractors-deja-vu",
+          "href_en": "../en/coda.html#sec-coda-spatial-attractors-deja-vu"
+        },
+        {
+          "label": "终章 · 似曾相识的几何诠释与维数估计",
+          "label_en": "Coda · The geometry of déjà vu and the dimension estimate",
+          "href": "../zh/coda.html#sec-coda-deja-vu-fractal-dimension",
+          "href_en": "../en/coda.html#sec-coda-deja-vu-fractal-dimension"
+        }
+      ],
+      "lean": []
+    },
+    {
+      "id": "golden-cut-observer",
+      "code": "ORTHO//CUT",
+      "title": "黄金切投 · 一条窗口从格点里切出的准晶、±1 接缝与有界间隙的回归",
+      "title_en": "The golden cut · a quasicrystal cut from a lattice by a window, the ±1 seam and returns with bounded gaps",
+      "summary": "终章“黄金切投”一节的四个场景。切投：黄金整数 a + bφ 画成格点 (a + bφ, a + bψ)，一条长为 1 的窗口选出其中一些，投到直线上，相邻两点只相距 φ 或 φ²；挪动窗口，贴边的点翻转，深处的点不动；固定一小片就定住了远处的点。卡西尼：φ 的幂在同一张格点图里与原点围成的矩形，面积恒为 ±1。回归：按黄金角旋转的轨道以有界的间隔回到观测窗。接受窗：菱形三十面体，点离边界越远越稳。灵魂与遗迹的说法是本书的诠释模型。",
+      "summary_en": "Four scenes for the coda’s section on the golden cut. Cut and project: the golden integers a + bφ are drawn as lattice points (a + bφ, a + bψ), a window of length 1 selects some of them, and projected to a line the neighbours are φ or φ² apart; move the window and points at its edge flip while deep points stay; fixing a small patch fixes distant points. Cassini: in the same lattice, the rectangle between the origin and a power of φ always has area ±1. Returns: an orbit turning by the golden angle comes back to an observation window with bounded gaps. The acceptance window: a rhombic triacontahedron, where a point is the safer the farther it is from the boundary. What the page says about souls and ruins is an interpretive model of this book.",
+      "path": "golden-cut-observer/",
+      "thumbnail": "golden-cut-observer/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-10",
+      "tags": [
+        "切投",
+        "模型集",
+        "相子翻转",
+        "卡西尼恒等式",
+        "有界间隙回归",
+        "菱形三十面体",
+        "终章"
+      ],
+      "tags_en": [
+        "cut and project",
+        "model set",
+        "phason flips",
+        "Cassini identity",
+        "bounded-gap returns",
+        "rhombic triacontahedron",
+        "coda"
+      ],
+      "theory": [
+        {
+          "label": "终章 · 黄金切投模型集与观察者路由定理",
+          "label_en": "Coda · The golden cut-and-project set and the observer route",
+          "href": "../zh/coda.html#sec-coda-trureturing-observer-def",
+          "href_en": "../en/coda.html#sec-coda-trureturing-observer-def"
+        },
+        {
+          "label": "终章 · 菱形三十面体接受窗与“帝国效应”",
+          "label_en": "Coda · The rhombic triacontahedron and the “empire effect”",
+          "href": "../zh/coda.html#sec-coda-trureturing-rhombic-triacontahedron-empire",
+          "href_en": "../en/coda.html#sec-coda-trureturing-rhombic-triacontahedron-empire"
+        },
+        {
+          "label": "终章 · 卡西尼接缝与有界间隙回归",
+          "label_en": "Coda · The Cassini seam and returns with bounded gaps",
+          "href": "../zh/coda.html#sec-coda-trureturing-cassini-torus-return",
+          "href_en": "../en/coda.html#sec-coda-trureturing-cassini-torus-return"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S1/Scale/MinkowskiModelSet.minkowski_model_set_spec"
+        },
+        {
+          "gid": "D5/S1/Deficit/ModelSet/GoldenCutAndProject.golden_model_set_subset_cut_and_project"
+        },
+        {
+          "gid": "D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm"
+        },
+        {
+          "gid": "D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result"
+        },
+        {
+          "gid": "D5/S3/Fourier/GoldenModelSetDelone.norm_separation"
+        },
+        {
+          "gid": "D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone"
+        },
+        {
+          "gid": "D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result"
+        }
+      ]
     }
   ]
 }

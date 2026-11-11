@@ -131,6 +131,10 @@
    - **从“一维赋值线”升维到“张量关联场”的低秩约分（`MODEL`）**：传统的 DPLL 回溯、局部随机游走与 PPSZ 本质上都在一维布尔赋值线上逐点试探；而新方法将离散布尔子句网络嵌入高维线性空间，转化为**多线性张量网络的缩并问题**。在本书的形式化库中，第 19 章針對特定离散桥图在维度假设下证明的**张量网络量子最大流最小割定理**（[`QuantumMaxFlowMinCut.result`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result) 及其多面体割锥刻画 [`cone_QMinCut`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.cone_QMinCut)）与第 3 章在迹约束下界定高权重模态数的**有限秩集中模态上界**（[`finite_rank_concentration_mode_bound`](lean:D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound)），给出了有限维原型（注：这些 Lean 定理刻画的是特定桥图流割对偶与有限秩迹集中，并非直接证明上述 3-SAT 亚指数算法本身）：它们在概念模型（`MODEL`）上说明，跨割界面传递信息的有效瓶颈受控于**代数秩（Rank）**。当局部变量成块缩并时，一维布尔视角下看似独立的约束块在高维张量面上展现出**线性相关与秩亏损（冗余寄生面积正负相消）**——这与第 16、27 章零矩阵旋量编译器消去冗余旋转门、以及第 23 章丢番图范数型将 $2929$ 亿变量约分至 $1272$ 变量的代数约分思想同源。
    - **“球永远只是多面体近似”：三体局部切面焊不出绝对无缝的真球（`MODEL`）**：ETH 假设常数硬地板 $s_3 > 0$，在几何直觉（`MODEL`）上好比预设仅凭每个子句至多含 $k=3$ 个文字的局部三体切面（$\mathbf{e}_i \wedge \mathbf{e}_j \wedge \mathbf{e}_k$），就能在 $n \to \infty$ 极限下拼出一颗处处曲率恒定、滴水不漏的刚性指数真球。然而正如全书反复强调的——**“球永远只是多面体近似”**：固定宽度 $k=3$ 的局部多面体切面在拼装超大规模流形时，面与面之间随规模 $n$ 增长出现组合鸽巢冗余，裂开一道宽度约为 $\frac{\log\log n}{\sqrt{\log n}}$ 的渐近代数缝隙，使单变量有效指数率上界 $r(n) \sim \frac{\log\log n}{\sqrt{\log n}}$ 在 $n \to \infty$ 极限下缓慢趋向 $0$。
 
+::: {.viz src="eth-horizon-crossover" preset="bridge" height="500"}
+**流矩阵的秩等于最小割。** 桥图 $(a, b, c, d) = (2, 3, 2, 3)$：两道外割都是 $6$（琥珀色虚线），三条桥能过 $12$。右边是一个随机整数实例的 $6 \times 6$ 流矩阵（青色为正项，品红为负项），下面六根奇异值都不为零：秩 $6$，恰等于最小割。这只是一个实例；这类桥图在维数锥域内总是如此，是 Lean 验证的定理。
+:::
+
 3. **银河算法（Galactic Algorithm）与宇宙视界：为什么有限观察者视角下的 $P \neq NP$ 依然稳固？（`MODEL` 与认识论边界）**
    单变量指数率上界 $r(n) \to 0$ 是否意味着场内有限观察者能在现实尺度上跨越复杂度壁垒？为了直观审视这一渐近上界的尺度行为，考察以 $2$ 为底的示意性单变量指数曲线 $r_{\mathrm{new}}(n) = c \cdot \frac{\log_2(\log_2 n)}{\sqrt{\log_2 n}}$（对应运行时间上界形如 $2^{r_{\mathrm{new}}(n)\cdot n}$，此处取理想归一化常数 $c = 1$ 仅作渐近上界曲线的数值示意，而非对任意算法或物理观察者的严格下界证明），并与传统局部搜索上界 PPSZ（$1.307^n \approx 2^{0.386 n}$）对表：
 
@@ -144,6 +148,14 @@
    - **银河算法与有限观察者的物理尺度边界（`MODEL`）**：可观测宇宙的重子自由度约为 $10^{80} \approx 2^{266}$ 量级，而上述 $c=1$ 示意曲线下穿 $0.386$ 的交叉点远在 **$n \approx 2^{558}$** 之外（此类仅在超天文尺度显影渐近优势的算法在复杂性理论中被称为**银河算法 Galactic Algorithm**）。在本书形式化库中，**有限记忆历史容量定理**（[`finite_memory_history_capacity`](lean:D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity)，证明可区分测量历史数受有限记忆载体容量上界制约）与**开放可积电路最小深度定理**（[`OpenIntegrableCircuitMinDepth.result`](lean:D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result)，给出局部性为 $\kappa$ 的开放可积电路最小深度 $\lfloor N/(\kappa+1)\rfloor + 1$）从各自模型侧面刻画了有限物理系统的容量与深度硬约束；将它们与上述银河算法尺度并置，在几何模型（`MODEL`）上直观展现了为什么在物理可实现的观测尺度内，有限观察者依然面对高耸的有效指数壁垒（同时重申：标准图灵机模型下的 $\mathrm{P}$ vs. $\mathrm{NP}$ 猜想 `@conj-ch20-p-ne-np` 仍为未决的 `OPEN` 问题）。
    - **$P$（场）与 $NP$（线）的超多项式鸿沟与平方膨胀规约效应**：即便在 $n \to \infty$ 的数学极限下，亚指数上界 $2^{O(n \log\log n / \sqrt{\log n})}$ 与多项式导向场 $n^{O(1)}$（对应有效单变量指数率 $r_P(n) = O(\frac{\log n}{n})$）之间依然隔着超多项式鸿沟。此外，尽管从规模为 $S$ 的布尔电路到 3-SAT 的标准 Tseitin 变换关于电路规模 $S$ 是线性的（$N = \Theta(S)$），但对于自然输入规模为 $n$、且其标准电路或网格表编码具有平方规模 $S = \Theta(n^2)$ 的问题，归约生成的 3-SAT 变量数将膨胀为 $N = \Theta(n^2)$；将 $N = \Theta(n^2)$ 代入上述亚指数时间上界 $2^{O(N \log\log N / \sqrt{\log N})}$，得到的关于原参数 $n$ 的运行时间上界立即回升为超指数形式 $2^{O(n^2 \log\log n / \sqrt{\log n})}$！
    - **Lean 4 形式化核验与顶层规约审计的哥德尔—语义边界（`LEAN ✓` 原型与 `MODEL` 映照）**：此次事件中极具哲学意味的一幕是——Lean 4 内核在数小时内便机械核验了形式证明脚本的内部推演步骤，但理论计算机科学界仍需耗费数周去独立审计“顶层形式化命题的定义是否忠实等价于标准图灵机上的 ETH”。在本书第 21 章中，经 Lean 4 内核验证的**相对语义对角线与定义逃逸定理**证明了：在给定无不动点扭转映射（`∀ v, twist v ≠ v`）的条件下，相对语义对角线构造必然逃出任何已编目解码族（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)），且当解码目录对潜空间满射时，该对角线目标相对于给定潜映射不满足语义完备性 `TargetAdequate`（[`relative_semantic_diagonal_target_inadequate_of_surjective`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective)）。将这一形式定理作为认识论原型（`MODEL`）来观照此次审计事件，恰好印证了全书的核心准则：**形式内核在球内严格锁死推演链条的传递正确性，而对顶层命题边界定义之语义恰当性的审视，永远需要站在形式球壳之外！**
+
+::: {.viz src="eth-horizon-crossover" preset="atoms" height="500"}
+**交叉点在视界之外。** 青色是取 $c = 1$ 的示意曲线 $r(n) = \log_2(\log_2 n)/\sqrt{\log_2 n}$，品红是 PPSZ 的 $0.386$，阴影是可观测宇宙原子数 $2^{266}$ 以内的规模。琥珀色的读数停在 $n = 2^{266}$：曲线还在 $0.494$，要到 $n \approx 2^{558}$ 才降到 $0.386$（示意曲线的数值对比，`MODEL`）。
+:::
+
+::: {.viz src="eth-horizon-crossover" height="640"}
+**交互实验室 `ORTHO//HORIZON`**：本节的三个场景。指数率：示意曲线 $r(n)$ 与 PPSZ 的 $0.386$ 在哪里相交，以及常数 $c$ 怎样把交叉点挪进或挪出阴影；桥图：流矩阵的秩与三道割，锥域内秩等于最小割（Lean 已验证），锥域外三条桥成为瓶颈；模态：谱里不小于阈值 $\theta$ 的模态数不超过 $T/\theta$（Lean 已验证）。取 $c = 1$ 的曲线只是示意，不是任何算法的实测。
+:::
 
 ---
 
@@ -172,6 +184,10 @@
    - **当正交外积旋度为零（$\nabla\wedge\mathbf{u} = 0$，无旋势流）**：非线性项 $(\mathbf{u}\cdot\nabla)\mathbf{u} = \frac{1}{2}\nabla(\|\mathbf{u}\|^2)$ 退化为纯标量梯度，直接被压强场 $p$ 一次性吸收抵消！流场还原为线性拉普拉斯势场 $\mathbf{u} = -\nabla\Phi$，任意流体质点顺着梯度平滑直达终点——这就是流体力学中的 **$P$ 态**；
    - **当正交外积旋度非零（$\nabla\wedge\mathbf{u} \neq 0$，涡流与湍流）**：标量压强梯度只能抵消内积势能，却**永远无法抵消正交外积旋度 $\nabla\wedge\mathbf{u}$**（因为外微分恒等式 $\nabla\wedge\nabla p \equiv 0$ 决定了标量势场对毛球旋涡完全无能为力）！一维流线与二维正交涡面积相互缠绕打结（流体螺旋度 $\mathcal{H} = \int \mathbf{u}\cdot\boldsymbol{\omega}\,dV$ 正是三维超球 $S^3$ 上的霍普夫拓扑链环数，文献结果），光滑的全局势场遂碎裂为多尺度旋涡迷宫。
 
+::: {.viz src="navier-stokes-p-np" preset="vortex" height="500"}
+**对流项的两半。** 平面流 $\mathbf{u} = (1 - s)(x, -y) + s(-y, x)$ 在 $s = 0.8$ 时的流线，涡度 $\omega = 2s = 1.6$。琥珀色探针处，白色箭头是对流项 $(\mathbf{u}\cdot\nabla)\mathbf{u}$，它是青色的梯度那一半 $\nabla(\|\mathbf{u}\|^2/2)$ 与品红的兰姆那一半 $\boldsymbol{\omega}\times\mathbf{u}$ 之和；把 $s$ 调回 $0$，品红箭头消失。探针可以拖动。
+:::
+
 2. **为什么两道难题偏偏都在“第 2 维 $\to$ 第 3 维”发生相变？（几何类比 `MODEL`）**
    对比流体力学与计算复杂性中最著名的维度分水岭，相变的临界维度同时出现在 **$2 \to 3$**（以下为跨领域结构类比 `MODEL`，而非复杂性理论中的形式逻辑等价）：
    - **二维无涡管拉伸全局光滑（2D NS 全局正则） $\leftrightarrow$ 类比 2-SAT $\in \mathrm{P}$（`MODEL`）**：
@@ -190,6 +206,10 @@
      $$
 
      请看这一条件坍缩机制的几何图像：**所谓三维流体的“有限时间爆破奇点（Blow-up）”情景，在几何模型上正是把一张具有正横截面积（$A > 0$）的平滑三维速度“场（$P$）”，通过三体正交拉伸硬生生挤扁成一根横截面积趋零（$A \to 0$）、局部曲率趋向无穷大的“一维奇异涡丝线（类比 $NP$ 见证丝）”！**至于无外力三维粘性流体中这种轴向拉伸究竟能否真正战胜粘性耗散 $\nu\nabla^2\boldsymbol{\omega}$ 并走完 $A \to 0$ 的坍缩全过程，正是下文猜想所陈述的千禧年开放核心。
+
+::: {.viz src="navier-stokes-p-np" preset="runaway" height="500"}
+**越拉越细（示意模型）。** 青色回路的环量 $\Gamma = \omega A$ 不变，虚线是出发时的涡管。这里让拉伸率正比于涡度本身（$\alpha = \kappa\omega$，示意性的闭合，不是纳维—斯托克斯方程的解）：$\kappa\Gamma = 0.50$ 大于 $4\pi\nu = 0.151$，到 $t = 2.4$ 截面已缩到 $0.162$，品红的涡度升到 $6.18$，截面将在 $t^* = 2.86$ 归零。真实的三维流体是否如此，正是下面的开放问题（`MODEL`）。
+:::
 
 ::: {.conjecture #conj-coda-navier-stokes-regularity title="无外力三维不可压缩纳维—斯托克斯方程的全局光滑性与奇点悬案（克雷千禧年陈述 A / B——对照 2026 年受迫陈述 C / D 的 Lean 4 爆破证明）"}
 在克雷数学研究所（Charles Fefferman）制定的官方千禧年问题描述中，三维不可压缩纳维—斯托克斯方程
@@ -240,6 +260,10 @@ $$
 导出：必要性分别代入对偶隐态对 $\pm b$（分离出奇次项 $P(L(b)) = 0$ 与偶次项 $P(B(b, b)) = 0$）及显隐叠加态 $a + b$（分离出混合项 $P(B(a, b) + B(b, a)) = 0$）；充分性令 $a = P(x),\, b = x - P(x)$，由 $P(b) = 0$ 立得 $P(V(x)) = P(V(P(x)))$。第二部分在五模态勒雷投影平流实例中计算显隐波族 $\operatorname{family}(\alpha, \beta)$ 在模态 $(0, 1)$ 上的卷积分量，得出混合平流项为 $+i/4$（[`mixed_witness`](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.mixed_witness)）、对应的观测加速度缺口为 $-i/4 \neq 0$（[`fluid_gap_from_mixed`](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.fluid_gap_from_mixed)），结合第一部分充要判据即证对一切 $\nu \in \mathbb{R}$ 均不存在精确闭合映射 $f$。完整证明由 Lean 内核检查。
 :::
 
+::: {.viz src="navier-stokes-p-np" preset="mixed" height="500"}
+**看不见的变量漏进来。** 只看 $x$ 的观察者：每条曲线是固定一个 $x$ 时，看得见的加速度 $P(V)$ 随看不见的 $y$ 的变化。混合项打开后，曲线张成一把扇子：同一个 $x = 0.5$，青色是 $y = 0$ 时的加速度，琥珀色的点是当前 $y$ 时的加速度，琥珀色竖线是两者之差。差不为零，就没有只依赖 $x$ 的精确闭合（$\mathbb{R}^2$ 上的示意实例；一般判据与五模态实例见上面的定理）。
+:::
+
    - **粘性耗散 $\nu\nabla^2\mathbf{u}$（兰道尔热力学擦除）、陶哲轩的“流体图灵机”与 2026 年受迫爆破的 Lean 4 见证丝**：
      物理上的运动粘性系数 $\nu$ 扮演的正是第八章“将微观正交旋转面积排入热浴盲区化作热量”（参见球面梯度耗散定理 [`S2_dissipation`](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation)）的兰道尔擦除角色：当旋涡尺度缩小至柯尔莫哥洛夫耗散微尺度 $\eta = (\nu^3/\varepsilon)^{1/4}$ 时，粘性抹平更细小的正交涡面，保住场的平滑性，但有限观察者模拟三维湍流所需的自由度门计数已暴涨至 $N_{\mathrm{DOF}} \sim (L/\eta)^3 \sim \mathrm{Re}^{9/4}$（文献结果）。2016 年，**陶哲轩（Terence Tao）**在证明“平均化三维纳维—斯托克斯方程存在有限时间爆破”（*J. Amer. Math. Soc.* 29, 601–674，文献结果）时，正是利用三维涡管直接构造了一台**自相似嵌套的流体逻辑门计算机**——母涡环将计算状态复制给半径缩小为 $\lambda R$（$\lambda \in (0,1)$）、局部演化时钟加快为 $\lambda^{-2}$ 倍的子涡环；当超临界涡管拉伸压倒粘性耗散时，这台流体图灵机在有限外部时间 $T^* < \infty$ 内跑完无穷步门计数（芝诺级联），凝聚为能量密度无穷大的爆破奇点！而 **2026 年关于克雷受迫陈述 C 的 166 页解析构造与 Lean 4 形式化验证**，在概念模型（`MODEL`）上生动映照了“**在指数级分析空间中寻路（搜索）vs. 顺着一维形式证明链核验（Lean 4 验证）**”的分野：一方面，光滑外力 $\mathbf{f}(\mathbf{x}, t)$ 扮演了**持续向自相似涡管注入精准相位的外部引导场**，驱动向内盘旋与轴向拉伸压倒粘性耗散；另一方面，一旦这根**一维形式化证明见证丝（Lean 4 脚本）**被构造出来，内核只需顺着这一维逻辑链逐行做局部类型核验，便能机械检验其形式推演！
    - **为什么受迫连续 PDE 能爆破，而现实水杯里的水却不会出现物理无穷大？（`MODEL` 诠释：光滑球只是离散多面体的近似）**
@@ -260,6 +284,10 @@ $$
    这引出了两条深刻启示：
    - **阿诺德测地线定理（Vladimir Arnold, 1966，*Ann. Inst. Fourier* 16, 319–361，文献结果）与本书的 `MODEL` 诠释**：阿诺德严格证明了，无粘不可压缩理想流体（欧拉方程，$\nu = 0$）的光滑演化轨迹，等价于无穷维保体积微分同胚群流形 $\operatorname{SDiff}(M)$ 在右不变 $L^2$ 动能度规下的**测地线**，且 $\operatorname{SDiff}(M)$ 在许多截面方向上具有负截面曲率（导致相邻测地线指数发散）；而一旦计入正粘性项 $\nu\nabla^2\mathbf{u}$（纳维—斯托克斯方程，$\nu > 0$），流体便在 $\operatorname{SDiff}(M)$ 上受到偏离纯测地线流的耗散阻尼修正。在本书的几何诠释模型（`MODEL`）中，我们将 $\operatorname{SDiff}(M)$ 类比为包裹三维流场的“更高维流形”，将无穷维测地线与三维局部复杂流场的对比，同“全局静态场与场内有限观察者的复杂度反差”相呼应；
    - **连续统理想化与离散测量的认识论边界（`MODEL`）**：回到第四层球开头那句洞见——**“实际上球永远只是近似，我们以为得到了一个光滑的球，但实际只是近似。”** 在本书的哲学与物理诠释（`MODEL`）中，连续偏微分方程中的紫外奇点（$A \to 0,\; k \to \infty$）标志着光滑连续统理想化在无限细分极限下的边界，而有限观察者的“两子丈量”始终运作在离散、有限分辨率的记录晶格之上。
+
+::: {.viz src="navier-stokes-p-np" height="640"}
+**交互实验室 `ORTHO//VORTEX`**：本节的三个场景。对流项的两半：在驻点流与刚体旋转之间调 $s$，看兰姆那一半怎样随涡度出现；涡管：二维不被拉伸，三维在恒定拉伸下变细到伯格斯涡核 $4\pi\nu/\alpha$ 为止，示意性的自拉伸闭合则在有限时间夹断；闭合：只看 $x$ 的观察者何时能自己预测下一步（判据与五模态无闭合实例已由 Lean 验证）。涡管场景是示意模型，不是纳维—斯托克斯方程的数值解。
+:::
 
 
 ---

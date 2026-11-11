@@ -1,0 +1,447 @@
+/* ORTHO//CUT: the coda's golden cut, in four scenes.
+   cut      the golden integers a + bφ as the lattice (a + bφ, a + bψ); the window [φ − 2, φ − 1] + u selects points and
+            their projections are φ or φ² apart; fixing a small patch leaves only a short range of admissible shifts
+   cassini  the powers φᵏ⁺¹ = Fₖ + Fₖ₊₁φ in the same lattice: the rectangle between the origin and (φᵏ⁺¹, ψᵏ⁺¹) has
+            signed area Fₖ·Fₖ₊₂ − Fₖ₊₁² = (−1)ᵏ⁺¹, and no other lattice point lies between the hyperbolas x·x′ = ±1
+   returns  the rotation by the golden angle seen through h(x) = cos 2πx: visits to (u₁, u₂) with bounded gaps
+   window3  the rhombic triacontahedron as the zonohedron of the six fivefold axes; the margin d∂ of a point inside
+   The rail is the shift u (cut), k (cassini), the number of steps N (returns) or the position of the point (window3).
+   Read-only probe for the browser suite: window.CUT_DEBUG. */
+(() => {
+  'use strict';
+  const { kit, L } = TRV, { fix, sgn, clamp, TAU } = kit, P = TRV.palette;
+  const $ = (id) => document.getElementById(id);
+  const PHI = (1 + Math.sqrt(5)) / 2, PSI = 1 - PHI, R5 = Math.sqrt(5), LO = PHI - 2, HI = PHI - 1, MID = (LO + HI) / 2;
+  const EDGE = 0.08, PATCH = 4, KMAX = 6, KN = 12, NMAX = 233, SMAX = 1.2, TOL = 1e-12;
+  const S = { scene: 'cut', patch: null, wc: 0.5, ww: 0.6 };
+  const face = (f) => (f === 'body' ? TRV.fonts.body : f === 'display' ? TRV.fonts.display : TRV.fonts.data);
+  function text(ctx, str, x, y, color, o) {
+    o = o || {};
+    ctx.font = `${o.weight ? o.weight + ' ' : ''}${o.size || 11}px ${face(o.face)}`; ctx.textAlign = o.align || 'left'; ctx.textBaseline = o.base || 'middle'; ctx.globalAlpha = o.alpha == null ? 1 : o.alpha;
+    if (o.halo !== false) { ctx.lineWidth = 4; ctx.lineJoin = 'round'; ctx.strokeStyle = P.stage; ctx.strokeText(str, x, y); }
+    ctx.fillStyle = color; ctx.fillText(str, x, y); ctx.globalAlpha = 1;
+  }
+
+  /* ---------- cut: the lattice of golden integers and the window ---------- */
+  /** The golden integers a + bφ with |a + bφ| ≤ xmax and |a + bψ| ≤ cmax as { a, b, x, c }, sorted by x. */
+  function lattice(xmax, cmax) {
+    const out = [], bmax = Math.ceil((xmax + cmax) / R5);
+    for (let b = -bmax; b <= bmax; b++) for (let a = Math.ceil(-b * PSI - cmax); a <= Math.floor(-b * PSI + cmax); a++) { const x = a + b * PHI; if (Math.abs(x) <= xmax) out.push({ a, b, x, c: a + b * PSI }); }
+    return out.sort((p, q) => p.x - q.x);
+  }
+  const NEAR = lattice(60, 2.3);
+  const inWin = (c, u) => c >= LO + u - TOL && c <= HI + u + TOL;           // the closed window [φ − 2, φ − 1] + u
+  const margin = (c, u) => Math.min(c - LO - u, HI + u - c);
+  /** betaGolden(n): the Zeckendorf digits of n read in base φ, as the golden integer [a, b] (so that b = n). */
+  function beta(n) {
+    const F = [1, 2]; while (F[F.length - 1] <= n) F.push(F[F.length - 1] + F[F.length - 2]);
+    let a = 0, b = 0, r = n;
+    for (let i = F.length - 1; i >= 0; i--) if (F[i] <= r) { r -= F[i]; a += i ? F[i - 1] : 1; b += F[i]; }   // F[i] = F_{i+2} and φ^(i+2) = F_{i+1} + F_{i+2}·φ
+    return [a, b];
+  }
+  /** The shifts that leave the selection among the points with |x| ≤ PATCH as it is at the shift u: the interval (lo, hi). */
+  function patchAt(u) {
+    let lo = -Infinity, hi = Infinity;
+    for (const p of NEAR) {
+      if (Math.abs(p.x) > PATCH) continue;
+      if (inWin(p.c, u)) { lo = Math.max(lo, p.c - HI); hi = Math.min(hi, p.c - LO); } else if (p.c > HI + u) hi = Math.min(hi, p.c - HI); else lo = Math.max(lo, p.c - LO);
+    }
+    return { lo, hi, ref: u };
+  }
+  const uOf = (t) => (S.patch ? S.patch.lo + (S.patch.hi - S.patch.lo) * (0.01 + 0.98 * t) : t - 0.5);
+  const tOf = (u) => (S.patch ? ((u - S.patch.lo) / (S.patch.hi - S.patch.lo) - 0.01) / 0.98 : u + 0.5);
+  const halfX = () => (TRV.thumbMode ? 6.4 : clamp(($('cv').clientWidth || 720) / 76, 5.2, 9.6));
+  function cutState(t) {
+    const u = uOf(t), half = halfX(), sel = NEAR.filter((p) => inWin(p.c, u)), gaps = [];
+    for (let i = 1; i < sel.length; i++) gaps.push(sel[i].x - sel[i - 1].x);
+    const kinds = [...new Set(gaps.map((d) => d.toFixed(6)))].map(Number).sort((a, b) => a - b);
+    const seen = sel.filter((p) => Math.abs(p.x) <= half), deep = seen.reduce((m, p) => (m && margin(m.c, u) >= margin(p.c, u) ? m : p), null);
+    const q = { u, half, sel, gaps, kinds, seen, deep, minGap: Math.min(...gaps), edge: seen.filter((p) => margin(p.c, u) < EDGE).length };
+    if (S.patch) {
+      const a = LO + S.patch.hi, b = HI + S.patch.lo, far = NEAR.filter((p) => Math.abs(p.x) > PATCH && Math.abs(p.x) <= half);
+      q.emp = [a, b];
+      q.forced = far.filter((p) => p.c >= a - TOL && p.c <= b + TOL);
+      q.free = far.filter((p) => (p.c > LO + S.patch.lo && p.c < a - TOL) || (p.c > b + TOL && p.c < HI + S.patch.hi));
+    }
+    return q;
+  }
+  function drawCut(q) {
+    const words = !TRV.thumbMode, u = q.u, K = words ? 1 : 2.2;      // the cover is drawn bolder: it is read at card size
+    const g = kit.plot($('cv'), { x: [-q.half, q.half], y: [MID - 1.9, MID + 1.9], pad: [words ? 30 : 8, 10, box.top, box.bottom + (words ? 46 : 36)] }), ctx = g.ctx; view = g;
+    const lo = LO + u, hi = HI + u, rowY = g.pt + g.ih + 15, rowH = words ? 12 : 22, inView = (p) => p.x >= g.x0 && p.x <= g.x1 && p.c >= g.y0 && p.c <= g.y1;
+    g.rect(g.x0, lo, g.x1, hi, P.amber, { alpha: words ? 0.09 : 0.14 });
+    if (q.emp) g.rect(g.x0, q.emp[0], g.x1, q.emp[1], P.cyan, { alpha: 0.13 });
+    g.hline(lo, P.amber, { width: 1.4 * K }); g.hline(hi, P.amber, { width: 1.4 * K });
+    g.hline(0, P.ink, { alpha: 0.45 }); g.vline(0, P.faint, { alpha: 0.7 });
+    if (S.patch) for (const x of [-PATCH, PATCH]) g.vline(x, P.ink, { dash: [4, 4], alpha: 0.75 });
+    for (const p of NEAR) if (inView(p) && !inWin(p.c, u)) g.dot(p.x, p.c, P.dim, 2.4 * K, { alpha: 0.8 });
+    const flips = (p) => (S.patch ? q.free.includes(p) : margin(p.c, u) < EDGE);
+    if (S.patch) for (const p of q.free) if (!inWin(p.c, u) && inView(p)) g.dot(p.x, p.c, P.magenta, 4.6 * K, { ring: true, width: 1.6 });
+    for (const p of q.sel) {
+      if (p.x < g.x0 || p.x > g.x1) continue;
+      const col = flips(p) ? P.magenta : P.cyan, X = g.X(p.x);
+      ctx.strokeStyle = col; ctx.globalAlpha = words ? 0.3 : 0.45; ctx.lineWidth = K; ctx.beginPath(); ctx.moveTo(X, g.Y(p.c)); ctx.lineTo(X, rowY - rowH / 2); ctx.stroke(); ctx.globalAlpha = 1;
+      g.dot(p.x, p.c, col, 4.6 * K, p === q.deep && !S.patch ? { glow: 12 * K } : null);
+      if (S.patch && q.forced.includes(p)) g.dot(p.x, p.c, P.ink, 8, { ring: true, width: 1.3 });
+    }
+    if (!S.patch && Math.abs(u) < 1e-9) for (let n = 0; n < 12; n++) { const [a, b] = beta(n), x = a + b * PHI; if (x <= g.x1) g.dot(x, a + b * PSI, P.ok, 9, { ring: true, width: 1.8 }); }
+    // the physical line below: the tiles between neighbouring selected points
+    for (let i = 1; i < q.sel.length; i++) {
+      const a = q.sel[i - 1].x, b = q.sel[i].x; if (b < g.x0 || a > g.x1) continue;
+      const x0 = Math.max(g.X(a), g.pl) + 1.5, x1 = Math.min(g.X(b), g.pl + g.iw) - 1.5, d = b - a, kind = d < 1.3 ? '1' : d < 2 ? 'φ' : 'φ²', col = kind === '1' ? P.magenta : P.cyan;
+      if (x1 <= x0) continue;
+      ctx.globalAlpha = kind === 'φ²' ? 0.2 : 0.8; ctx.fillStyle = col; ctx.fillRect(x0, rowY - rowH / 2, x1 - x0, rowH);
+      ctx.globalAlpha = 1; ctx.strokeStyle = col; ctx.lineWidth = 1; ctx.strokeRect(x0 + 0.5, rowY - rowH / 2 + 0.5, x1 - x0 - 1, rowH - 1);
+      if (words && x1 - x0 > 24 && a >= g.x0 && b <= g.x1) text(ctx, kind, (x0 + x1) / 2, rowY + 0.5, kind === 'φ²' ? P.ink : P.stage, { size: 10, align: 'center', halo: false, weight: 600 });
+    }
+    if (!words) return;
+    for (const v of [-1, 0, 1]) text(ctx, String(v).replace('-', '−'), g.pl - 6, g.Y(v), P.dim, { align: 'right', size: 10, halo: false });
+    for (let v = -8; v <= 8; v += 2) if (Math.abs(v) < q.half - 0.3) text(ctx, String(v).replace('-', '−'), g.X(v), rowY + 17, P.dim, { align: 'center', size: 10, halo: false });
+    text(ctx, 'W + u', g.pl + 8, g.Y(hi) - 10, P.amber, { size: 11.5 });
+    text(ctx, L('a + bφ 本身 →', 'a + bφ itself →'), g.pl + g.iw - 6, g.pt + g.ih - 9, P.dim, { align: 'right', size: 10.5, face: 'body' });
+    text(ctx, L('↑ 共轭 a + bψ', '↑ the conjugate a + bψ'), g.X(0) + 6, g.pt + 8, P.dim, { size: 10.5, face: 'body' });
+    if (S.patch) text(ctx, L(`固定的一小片 |x| ≤ ${PATCH}`, `the fixed patch |x| ≤ ${PATCH}`), g.X(0), g.pt + g.ih - 10, P.ink, { align: 'center', size: 11, face: 'body' });
+    else if (q.deep) text(ctx, L(`最深的点 · 离边 ${fix(margin(q.deep.c, u), 2)}`, `deepest point · ${fix(margin(q.deep.c, u), 2)} from the edge`), clamp(g.X(q.deep.x), g.pl + 70, g.pl + g.iw - 70), g.Y(lo) + 12, P.cyan, { align: 'center', size: 11, face: 'body' });
+  }
+
+  /* ---------- cassini: the powers of φ in the same lattice ---------- */
+  const FIB = [0n, 1n]; for (let i = 2; i <= KN + 3; i++) FIB.push(FIB[i - 1] + FIB[i - 2]);
+  const fibN = (i) => Number(FIB[i]);
+  const cassini = (k) => FIB[k] * FIB[k + 2] - FIB[k + 1] * FIB[k + 1];
+  const kOf = (t) => 1 + Math.round(clamp(t, 0, KMAX - 1));
+  const power = (k) => [fibN(k) + fibN(k + 1) * PHI, fibN(k) + fibN(k + 1) * PSI];        // φ^(k+1) = F_k + F_(k+1)·φ as the lattice point (itself, conjugate)
+  const sub = (n) => String(n).replace(/\d/g, (d) => '₀₁₂₃₄₅₆₇₈₉'[d]), sup = (n) => String(n).replace(/\d/g, (d) => '⁰¹²³⁴⁵⁶⁷⁸⁹'[d]);
+  function drawCassini(k) {
+    const words = !TRV.thumbMode, g = kit.plot($('cv'), { x: [-2, 31], y: [-1.3, 1.3], pad: [words ? 30 : 8, 12, box.top, box.bottom + (words ? 20 : 4)] }), ctx = g.ctx; view = g;
+    if (words) g.axes({ xTicks: [0, 5, 10, 15, 20, 25, 30], yTicks: [[-1, '−1'], [0, '0'], [1, '1']], frame: false });
+    g.hline(0, P.ink, { alpha: 0.45 }); g.vline(0, P.faint, { alpha: 0.7 });
+    for (const sg of [1, -1]) { const col = sg > 0 ? P.cyan : P.magenta, right = [], left = []; for (let i = 0; i <= 200; i++) { const x = 1 / 1.3 + (31 - 1 / 1.3) * Math.pow(i / 200, 2); right.push([x, sg / x]); } for (let i = 0; i <= 40; i++) { const x = -2 + (2 - 1 / 1.3) * i / 40; left.push([x, sg / x]); } g.line(right, col, { width: 1.1, alpha: 0.5 }); g.line(left, col, { width: 1.1, alpha: 0.5 }); }
+    for (const p of NEAR) if (p.x >= g.x0 && p.x <= g.x1 && Math.abs(p.c) <= 1.3) g.dot(p.x, p.c, P.dim, 2.4, { alpha: 0.8 });
+    for (let j = 1; j <= k; j++) { const [x, y] = power(j), col = cassini(j) > 0n ? P.cyan : P.magenta, now = j === k; g.rect(0, 0, x, y, col, { alpha: now ? 0.3 : 0.07, stroke: col, strokeAlpha: now ? 1 : 0.55, width: now ? 2 : 1 }); }
+    g.dot(0, 0, P.ink, 3.2);
+    for (let j = 0; j <= k; j++) {
+      const [x, y] = power(j), col = y > 0 ? P.cyan : P.magenta, now = j === k;
+      g.dot(x, y, col, now ? 5.5 : 3.6, now ? { glow: 12 } : null);
+      if (words) text(ctx, now ? `φ${sup(j + 1)} = ${FIB[j]} + ${FIB[j + 1]}φ` : `φ${sup(j + 1)}`, clamp(g.X(x), g.pl + 20, g.pl + g.iw - (now ? 62 : 14)), g.Y(y) + (y > 0 ? -13 : 14), now ? P.ink : col, { align: 'center', size: now ? 12 : 10.5 });
+    }
+    if (!words) return;
+    const [x, y] = power(k), tall = Math.abs(g.Y(y) - g.Y(0)) > 26;
+    text(ctx, `x·x′ = ${cassini(k) > 0n ? '+1' : '−1'}`, g.X(x / 2), tall ? g.Y(y / 2) : g.Y(0) + (y > 0 ? 14 : -13), tall ? P.ink : (y > 0 ? P.cyan : P.magenta), { align: 'center', size: 12, weight: 600 });
+    text(ctx, L('a + bφ 本身 →', 'a + bφ itself →'), g.pl + g.iw - 6, g.pt + g.ih - 8, P.dim, { align: 'right', size: 10.5, face: 'body' });
+    text(ctx, L('↑ 共轭 a + bψ', '↑ the conjugate a + bψ'), g.X(0) + 6, g.pt + 8, P.dim, { size: 10.5, face: 'body' });
+    text(ctx, 'x·x′ = +1', g.X(1.3), g.Y(0.95), P.cyan, { size: 10.5, alpha: 0.9 }); text(ctx, 'x·x′ = −1', g.X(1.3), g.Y(-0.95), P.magenta, { size: 10.5, alpha: 0.9 });
+  }
+
+  /* ---------- returns: the golden rotation through an observation window ---------- */
+  const orbitX = (n) => { const x = n * PHI; return x - Math.floor(x); };
+  const obs = (n) => Math.cos(TAU * orbitX(n));
+  const win = () => [S.wc - S.ww / 2, S.wc + S.ww / 2];
+  function returnsState(t) {
+    const N = 1 + Math.round(clamp(t, 0, NMAX - 1)), [u1, u2] = win(), hits = [];
+    for (let n = 1; n <= N; n++) { const e = obs(n); if (e > u1 && e < u2) hits.push(n); }
+    const waits = []; for (let i = 1; i < hits.length; i++) waits.push(hits[i] - hits[i - 1]);
+    const longest = Math.max(hits.length ? hits[0] : N + 1, N + 1 - (hits.length ? hits[hits.length - 1] : 0), ...waits);   // with the stretches before the first and after the last visit
+    const measure = (Math.acos(clamp(u1, -1, 1)) - Math.acos(clamp(u2, -1, 1))) / Math.PI;
+    return { N, u1, u2, hits, waits, longest, share: hits.length / N, bound: 1 / longest, measure, kinds: [...new Set(waits)].sort((a, b) => a - b) };
+  }
+  function drawReturns(q) {
+    const cv = $('cv'), W = cv.clientWidth, H = cv.clientHeight, words = !TRV.thumbMode;
+    let top = box.top + 6, bottom = box.bottom + 22; const spare = H - top - bottom - 2.3 * W * 0.2;
+    if (spare > 0) { top += spare / 2; bottom += spare / 2; }
+    const R = (H - top - bottom) / 2.3, cx = 14 + R * 1.1, nView = Math.max(55, q.N);
+    const g = kit.plot(cv, { x: [0, nView + 1], y: [-1.15, 1.15], pad: [cx + R * 1.1 + 34, 16, top, bottom] }), ctx = g.ctx, cy = g.Y(0); view = g;
+    const y1 = g.Y(clamp(q.u1, -1.15, 1.15)), y2 = g.Y(clamp(q.u2, -1.15, 1.15));
+    ctx.fillStyle = P.amber; ctx.globalAlpha = 0.11; ctx.fillRect(cx - R - 8, y2, g.pl + g.iw - (cx - R - 8), y1 - y2); ctx.globalAlpha = 1;
+    ctx.strokeStyle = P.amber; ctx.lineWidth = 1.3; for (const y of [y1, y2]) { ctx.beginPath(); ctx.moveTo(cx - R - 8, Math.round(y) + 0.5); ctx.lineTo(g.pl + g.iw, Math.round(y) + 0.5); ctx.stroke(); }
+    g.axes({ yTicks: [-1, 0, 1], xTicks: [1, 21, 55, 89, 144, 233].filter((v) => v <= nView), xLabel: 'n', yLabel: words ? 'e(n) = cos 2πnφ' : '' });
+    const pts = []; for (let n = 1; n <= q.N; n++) pts.push([n, obs(n)]);
+    g.line(pts, P.dim, { width: 1, alpha: 0.28 });
+    const isHit = new Set(q.hits);
+    for (const [n, e] of pts) g.dot(n, e, isHit.has(n) ? P.cyan : P.dim, isHit.has(n) ? 3 : 1.7);
+    for (const n of q.hits) { ctx.fillStyle = P.cyan; ctx.fillRect(Math.round(g.X(n)) - 0.5, g.pt + g.ih - 7, 1.5, 7); }
+    // the circle: the height of the point is the observed value
+    ctx.strokeStyle = P.lineHot; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.arc(cx, cy, R, 0, TAU); ctx.stroke();
+    const at = (n) => { const a = TAU * orbitX(n); return [cx + R * Math.sin(a), cy - R * Math.cos(a)]; };
+    for (let n = 1; n < q.N; n++) { const [x, y] = at(n); ctx.fillStyle = isHit.has(n) ? P.cyan : P.dim; ctx.globalAlpha = isHit.has(n) ? 1 : 0.7; ctx.beginPath(); ctx.arc(x, y, isHit.has(n) ? 2.8 : 1.8, 0, TAU); ctx.fill(); }
+    ctx.globalAlpha = 1;
+    const [px, py] = at(q.N);
+    ctx.strokeStyle = P.amber; ctx.lineWidth = 1.4; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(px, py); ctx.stroke();
+    ctx.setLineDash([3, 4]); ctx.globalAlpha = 0.6; ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(g.X(q.N), py); ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha = 1;
+    ctx.fillStyle = P.amber; ctx.shadowColor = P.amber; ctx.shadowBlur = 10; ctx.beginPath(); ctx.arc(px, py, 5, 0, TAU); ctx.fill(); ctx.shadowBlur = 0;
+    g.dot(q.N, obs(q.N), P.amber, 4.5, { glow: 8 });
+    if (!words) return;
+    text(ctx, `(${fix(q.u1, 2)}, ${fix(q.u2, 2)})`, g.pl + g.iw - 4, y2 - 9, P.amber, { align: 'right', size: 11 });
+    if (q.waits.length) {
+      const i = q.waits.indexOf(Math.max(...q.waits)), a = q.hits[i], b = q.hits[i + 1], y = g.pt + g.ih - 15;
+      ctx.strokeStyle = P.magenta; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(g.X(a), y + 4); ctx.lineTo(g.X(a), y); ctx.lineTo(g.X(b), y); ctx.lineTo(g.X(b), y + 4); ctx.stroke();
+      text(ctx, L(`最长的间隔 ${b - a} 步`, `longest gap: ${b - a} steps`), clamp((g.X(a) + g.X(b)) / 2, g.pl + 56, g.pl + g.iw - 56), y - 10, P.magenta, { align: 'center', size: 11, face: 'body' });
+    }
+  }
+
+  /* ---------- window3: the rhombic triacontahedron ---------- */
+  const v3 = { add: (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]], sub: (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]], scale: (a, s) => [a[0] * s, a[1] * s, a[2] * s], dot: (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2], cross: (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]], unit: (a) => { const n = Math.hypot(a[0], a[1], a[2]); return [a[0] / n, a[1] / n, a[2] / n]; } };
+  /** The zonohedron Σ tᵢ gᵢ, tᵢ ∈ [−½, ½], of the six fivefold axes gᵢ (unit vectors): the shadow of a six-dimensional
+      cube whose edges project to the gᵢ. Faces come in pairs, one pair for each pair of axes. */
+  const TRIA = (() => {
+    const G = [[0, 1, PHI], [0, -1, PHI], [1, PHI, 0], [-1, PHI, 0], [PHI, 0, 1], [PHI, 0, -1]].map(v3.unit), faces = [];
+    for (let i = 0; i < 6; i++) for (let j = i + 1; j < 6; j++) {
+      const n = v3.unit(v3.cross(G[i], G[j])); let c = [0, 0, 0];
+      for (let k = 0; k < 6; k++) if (k !== i && k !== j) c = v3.add(c, v3.scale(G[k], 0.5 * Math.sign(v3.dot(G[k], n))));
+      for (const s of [1, -1]) { const cc = v3.scale(c, s), a = v3.scale(G[i], 0.5), b = v3.scale(G[j], 0.5); faces.push({ n: v3.scale(n, s), c: cc, v: [v3.sub(v3.sub(cc, a), b), v3.sub(v3.add(cc, a), b), v3.add(v3.add(cc, a), b), v3.add(v3.sub(cc, a), b)] }); }
+    }
+    const key = (p) => p.map((x) => Math.round(x * 1e6)).join(','), ids = new Map(), verts = [], edges = new Map();
+    for (const f of faces) {
+      f.i = f.v.map((p) => { const k = key(p); if (!ids.has(k)) { ids.set(k, verts.length); verts.push({ p, deg: 0 }); } return ids.get(k); });
+      f.i.forEach((a, m) => { const b = f.i[(m + 1) % 4], e = a < b ? `${a}-${b}` : `${b}-${a}`; if (!edges.has(e)) edges.set(e, { a, b, faces: [] }); edges.get(e).faces.push(f); });
+    }
+    for (const e of edges.values()) { verts[e.a].deg++; verts[e.b].deg++; }
+    const rin = v3.dot(faces[0].c, faces[0].n), rout = Math.max(...verts.map((v) => Math.hypot(...v.p)));
+    const dir = v3.unit(v3.add(faces[0].c, v3.add(v3.scale(G[0], 0.22), v3.scale(G[1], 0.1))));
+    const exit = Math.min(...faces.map((f) => v3.dot(f.n, dir)).filter((d) => d > 1e-9).map((d) => rin / d));
+    return { G, faces, verts, edges: [...edges.values()], rin, rout, dir, exit };
+  })();
+  /** The signed distance of p to the boundary (negative outside) and the face that realises it. */
+  function depth(p) { let d = Infinity, f = null; for (const g of TRIA.faces) { const e = TRIA.rin - v3.dot(g.n, p); if (e < d) { d = e; f = g; } } return { d, f }; }
+  function windowState(t) {
+    const s = clamp(t, 0, SMAX), p = v3.scale(TRIA.dir, s * TRIA.exit), { d, f } = depth(p);
+    return { s, p, d, face: f, inside: d > 0, share: d > 0 ? Math.pow(1 - d / TRIA.rin, 3) : 1 };
+  }
+  function drawWindow(q) {
+    const ctx = st.begin(), D = st.facing(), k = 1 / TRIA.rout, sc = (p) => v3.scale(p, k), words = !TRV.thumbMode;
+    const front = (f) => v3.dot(f.n, D) > 0;
+    for (const e of TRIA.edges) if (!e.faces.some(front)) st.line(sc(TRIA.verts[e.a].p), sc(TRIA.verts[e.b].p), { color: P.lineHot, width: 1, alpha: 0.32, fade: false });
+    for (const f of TRIA.faces) if (!front(f)) st.poly(f.v.map(sc), { fill: P.cyan, alpha: 0.035 });
+    if (!front(q.face)) st.poly(q.face.v.map(sc), { fill: P.magenta, alpha: 0.22, color: P.magenta, width: 1.5 });
+    const c = st.p(sc(q.p));
+    if (q.inside) {
+      const r = q.d * k * st.unit, foot = v3.add(q.p, v3.scale(q.face.n, q.d));
+      ctx.fillStyle = P.amber; ctx.globalAlpha = 0.14; ctx.beginPath(); ctx.arc(c[0], c[1], r, 0, TAU); ctx.fill();
+      ctx.globalAlpha = 0.9; ctx.strokeStyle = P.amber; ctx.lineWidth = 1.3; ctx.beginPath(); ctx.arc(c[0], c[1], r, 0, TAU); ctx.stroke(); ctx.globalAlpha = 1;
+      st.line(sc(q.p), sc(foot), { color: P.magenta, width: 1.6, dash: [4, 3], fade: false });
+      st.dot(sc(foot), 3, P.magenta, { fade: false });
+    }
+    st.line([0, 0, 0], sc(v3.scale(TRIA.dir, TRIA.exit)), { color: P.ink, width: 1, alpha: 0.35, dash: [2, 4], fade: false });
+    st.dot(sc(q.p), 5.5, q.inside ? P.amber : P.magenta, q.inside ? { glow: 12, fade: false } : { ring: true, width: 2, fade: false });
+    for (const f of TRIA.faces) if (front(f)) st.poly(f.v.map(sc), { fill: P.cyan, alpha: 0.045 });
+    if (front(q.face)) st.poly(q.face.v.map(sc), { fill: P.magenta, alpha: 0.2, color: P.magenta, width: 1.5 });
+    for (const e of TRIA.edges) if (e.faces.some(front)) st.line(sc(TRIA.verts[e.a].p), sc(TRIA.verts[e.b].p), { color: P.lineHot, width: 1.3, alpha: 0.95, fade: false });
+    for (const v of TRIA.verts) if (v3.dot(v.p, D) > -0.05) st.dot(sc(v.p), v.deg === 5 ? 3.6 : 2.2, v.deg === 5 ? P.cyan : P.ink, { fade: false });
+    if (words) st.tag('p', sc(q.p), q.inside ? `d∂ = ${fix(q.d, 3)}` : L('已在窗口之外', 'outside the window'), q.inside ? 'hot raw' : 'mg raw', { dy: -16, fade: false });
+    st.end();
+  }
+
+  /* ---------- the stage ---------- */
+  const box = { top: 70, bottom: 44 };
+  let view = null;
+  const st = kit.stage3($('stage'), { canvas: $('cv'), yaw: -0.5, pitch: 0.32, zoom: 1, radius: 0.4, wheel: false, onChange: () => paint(),
+    onPick: (ev) => { if (S.scene === 'window3') return false; if (S.scene !== 'cassini') { leave(); drag(ev); } return true; }, onDrag: (ev) => { if (S.scene !== 'cassini') drag(ev); } });
+  function drag(ev) {
+    if (!view) return;
+    const y = view.invY(ev.clientY - $('cv').getBoundingClientRect().top);
+    if (S.scene === 'cut') { clock.pause(); clock.set(tOf(clamp(y - MID, -0.5, 0.5))); } else { S.wc = clamp(Math.round(y * 20) / 20, -0.9, 0.9); fWC.set(S.wc); paint(); }
+  }
+  const cassiniState = (t) => { const k = kOf(t), [x, y] = power(k); return { k, x, y, value: Number(cassini(k)) }; };
+  const state = () => (S.scene === 'cut' ? cutState(clock.t) : S.scene === 'cassini' ? cassiniState(clock.t) : S.scene === 'returns' ? returnsState(clock.t) : windowState(clock.t));
+  function drawStage(q) {
+    const sr = $('stage').getBoundingClientRect(), below = (el) => el.getBoundingClientRect().bottom - sr.top;
+    box.top = TRV.thumbMode ? 26 : Math.max(46, below($('hudBig').parentElement), below($('sceneChips'))) + 10; box.bottom = TRV.thumbMode ? 26 : Math.max(18, $('legend').offsetHeight + 20);
+    if (S.scene === 'window3') return drawWindow(q);
+    st.begin(); st.end();
+    if (S.scene === 'cut') drawCut(q); else if (S.scene === 'cassini') drawCassini(q.k); else drawReturns(q);
+  }
+
+  /* ---------- strips ---------- */
+  function drawPlots(q) {
+    if (TRV.still || TRV.figure) return;
+    const A = $('plotA'), B = $('plotB'), title = (a, am, b, bm) => { $('pATitle').textContent = a; $('pAMeta').textContent = am; $('pBTitle').textContent = b; $('pBMeta').textContent = bm; };
+    if (S.scene === 'cut') {
+      // for each lattice point near the window: the shifts u at which it is selected (a bar of length 1 in u)
+      const g = kit.plot(A, { x: [-0.5, 0.5], y: [-q.half, q.half], pad: [30, 10, 8, 20] });
+      g.axes({ xTicks: [-0.5, 0, 0.5], yTicks: [-8, -4, 0, 4, 8].filter((v) => Math.abs(v) <= q.half), xLabel: 'u', yLabel: 'x' });
+      if (S.patch) g.rect(S.patch.lo, -q.half, S.patch.hi, q.half, P.ink, { alpha: 0.14 });
+      for (const p of NEAR) { if (Math.abs(p.x) > q.half) continue; const a = Math.max(-0.5, p.c - HI), b = Math.min(0.5, p.c - LO); if (b > a) g.line([[a, p.x], [b, p.x]], b - a > 0.999 ? P.cyan : P.magenta, { width: 2, alpha: b - a > 0.999 ? 1 : 0.85 }); }
+      g.vline(q.u, P.amber);
+      const h = kit.plot(B, { x: [0, 0.5], y: [0, 1.05], pad: [30, 10, 8, 20] });
+      h.axes({ xTicks: [0, 0.25, 0.5], yTicks: [0, 0.5, 1], xLabel: 'm' }); h.line([[0, 1], [0.5, 0]], P.cyan, { width: 2 });
+      if (q.deep) { const m = margin(q.deep.c, q.u); h.dot(m, 1 - 2 * m, P.cyan, 4.5, { glow: 8 }); }
+      title(L('每个点在哪些平移下被选中', 'The shifts at which each point is selected'), L('整条青色：怎么挪都在', 'full cyan bars never leave'), L('离边至少这么远的点所占份额', 'Share of points at least this far from an edge'), '1 − 2m');
+    } else if (S.scene === 'cassini') {
+      const g = kit.plot(A, { x: [0.4, KN + 0.6], y: [1e-6, 1], pad: [38, 10, 8, 20], logY: true });
+      g.axes({ xTicks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], yTicks: [[1, '1'], [1e-2, '10⁻²'], [1e-4, '10⁻⁴']], xLabel: 'k' });
+      for (let k = 1; k <= KN; k++) { const e = fibN(k + 1) / fibN(k) - PHI; g.line([[k, 1e-6], [k, Math.abs(e)]], e > 0 ? P.cyan : P.magenta, { width: k === q.k ? 5 : 3, alpha: k === q.k ? 1 : 0.7 }); }
+      g.legend([[P.cyan, L('大于 φ', 'above φ')], [P.magenta, L('小于 φ', 'below φ')]], { right: true });
+      const h = kit.plot(B, { x: [0.4, KN + 0.6], y: [-1.5, 1.5], pad: [38, 10, 8, 20] });
+      h.axes({ xTicks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], yTicks: [[-1, '−1'], [0, '0'], [1, '+1']], xLabel: 'k' }); h.hline(0, P.faint);
+      for (let k = 1; k <= KN; k++) { const c = Number(cassini(k)), col = c > 0 ? P.cyan : P.magenta; h.line([[k, 0], [k, c]], col, { width: 2 }); h.dot(k, c, col, k === q.k ? 5.5 : 3.5, k === q.k ? { glow: 8 } : null); }
+      title(L('相邻斐波那契数之比离黄金比多远', 'Distance of the ratio of neighbouring Fibonacci numbers from the golden ratio'), L('对数坐标', 'log scale'), L('卡西尼式的值', 'The value of Cassini’s expression'), L('用大整数逐项算出', 'term by term with big integers'));
+    } else if (S.scene === 'returns') {
+      const n = Math.max(q.waits.length, 12), top = Math.max(8, ...q.waits) * 1.15, g = kit.plot(A, { x: [0, n + 1], y: [0, top], pad: [30, 10, 8, 20] });
+      g.axes({ yTicks: [0, Math.round(top / 2.3), Math.round(top / 1.15)], xTicks: [1, Math.round(n / 2), n], xLabel: L('第几次回来', 'return number') });
+      const big = Math.max(...q.waits, 0); q.waits.forEach((w, i) => g.line([[i + 1, 0], [i + 1, w]], w === big ? P.magenta : P.cyan, { width: Math.max(1.5, Math.min(5, 160 / n)) }));
+      const h = kit.plot(B, { x: [0, Math.max(55, q.N)], y: [0, clamp(q.measure * 2.4, 0.1, 1)], pad: [34, 10, 8, 20] }), run = []; let c = 0, hi = 0;
+      for (let m = 1; m <= q.N; m++) { if (q.hits[hi] === m) { c++; hi++; } run.push([m, Math.min(c / m, h.y1)]); }
+      h.axes({ yTicks: [0, Number((h.y1 / 2).toFixed(2)), Number(h.y1.toFixed(2))], xTicks: [1, 21, 55, 89, 144, 233].filter((v) => v <= Math.max(55, q.N)), xLabel: 'N' });
+      h.hline(q.measure, P.ink, { dash: [4, 3], alpha: 0.7 }); h.hline(q.bound, P.magenta, { dash: [4, 3] }); h.line(run, P.cyan);
+      h.legend([[P.cyan, L('已进入的比例', 'share of steps inside')], [P.ink, L('窗口占圆周的份额', 'the window’s share of the circle'), 'dash'], [P.magenta, '1/(M + 1)', 'dash']], { right: true });
+      title(L('相邻两次回来之间的步数', 'Steps between consecutive returns'), q.kinds.length ? L(`出现过：${q.kinds.join('、')}`, `seen: ${q.kinds.join(', ')}`) : '', L('落在窗口里的比例', 'Share of steps in the window'), `${fix(q.share, 3)} ≥ ${fix(q.bound, 3)}`);
+    } else {
+      const g = kit.plot(A, { x: [0, SMAX], y: [-0.25, 1.05], pad: [34, 10, 8, 20] }), pts = [];
+      for (let i = 0; i <= 120; i++) { const s = SMAX * i / 120; pts.push([s, depth(v3.scale(TRIA.dir, s * TRIA.exit)).d / TRIA.rin]); }
+      g.axes({ yTicks: [0, 0.5, 1], xTicks: [0, 0.5, 1], xLabel: L('走了多远（1 = 边界）', 'how far along (1 = the boundary)') }); g.hline(0, P.magenta, { dash: [4, 3] }); g.line(pts, P.amber, { width: 2 }); g.vline(q.s, P.amber, { alpha: 0.7 });
+      const h = kit.plot(B, { x: [0, 1], y: [0, 1.05], pad: [34, 10, 8, 20] }), cur = [];
+      for (let i = 0; i <= 60; i++) cur.push([i / 60, Math.pow(1 - i / 60, 3)]);
+      h.axes({ yTicks: [0, 0.5, 1], xTicks: [0, 0.5, 1], xLabel: 'd / r' }); h.line(cur, P.cyan, { width: 2 });
+      if (q.inside) h.dot(q.d / TRIA.rin, Math.pow(1 - q.d / TRIA.rin, 3), P.amber, 5, { glow: 8 });
+      title(L('到边界的距离 ÷ 内切球半径', 'Distance to the boundary ÷ the inradius'), L('虚线：边界', 'dashed: the boundary'), L('至少这么深的部分占窗口体积的', 'Share of the window’s volume at least this deep'), '(1 − d/r)³');
+    }
+  }
+
+  /* ---------- words ---------- */
+  const SC = {
+    cut: { name: ['切投', 'CUT'], max: 1, rate: 0.085, step: 0.05, start: 0.5 },
+    cassini: { name: ['卡西尼', 'CASSINI'], max: KMAX - 1, rate: 0.55, step: 1, start: 3 },
+    returns: { name: ['回归', 'RETURNS'], max: NMAX - 1, rate: 13, step: 1, start: 88 },
+    window3: { name: ['接受窗', 'WINDOW'], max: SMAX, rate: 0.1, step: 0.05, start: 0.15 }
+  };
+  const legend = (q) => (S.scene === 'cut'
+    ? (S.patch ? [['am', '窗口 W + u', 'the window W + u'], ['cy', '被这一小片定住的点（带圈）', 'points fixed by the patch (ringed)'], ['mg', '仍未定的点', 'points still undecided']]
+      : [['am', '窗口 W + u', 'the window W + u'], ['cy', '窗口里的点，投到下面的直线上', 'points in the window, projected to the line below'], ['mg', '离边不到 0.08 的点', 'points less than 0.08 from an edge']].concat(Math.abs(q.u) < 1e-9 ? [['ok', '绿圈：自然数的黄金展开 β(n)', 'green rings: the golden expansions β(n)']] : []))
+    : S.scene === 'cassini' ? [['cy', 'x·x′ = +1：点在横轴上方', 'x·x′ = +1: the point lies above the axis'], ['mg', 'x·x′ = −1：点在横轴下方', 'x·x′ = −1: the point lies below the axis'], ['dm', '其余格点，都在两条双曲线之外', 'the other lattice points, all outside the two hyperbolas']]
+      : S.scene === 'returns' ? [['am', '观测窗与此刻的点', 'the window and the current point'], ['cy', '落在窗口里的步', 'steps inside the window'], ['mg', '最长的间隔', 'the longest gap']]
+        : [['cy', '12 个五重顶点', '12 fivefold vertices'], ['am', '窗口里的点与半径 d∂ 的球', 'the point and the ball of radius d∂'], ['mg', '离它最近的面', 'the face nearest to it']]);
+  function drawText(q) {
+    const set = (i, lab, val) => { $(`roL${i}`).textContent = lab; $(`ro${i}`).innerHTML = val; };
+    const keyRO = (lab, val, subText) => { $('roKeyL').textContent = lab; $('roKey').innerHTML = val; $('roKeySub').textContent = subText; };
+    let big, hud, what, key, note;
+    if (S.scene === 'cut') {
+      const u = q.u, names = q.kinds.map((d) => (Math.abs(d - PHI) < 1e-6 ? 'φ' : Math.abs(d - PHI * PHI) < 1e-6 ? 'φ²' : Math.abs(d - 1) < 1e-6 ? '1' : fix(d, 3))).join(L('、', ', ')), only = q.kinds.every((d) => Math.abs(d - PHI) < 1e-6 || Math.abs(d - PHI * PHI) < 1e-6);
+      big = L(`切投 · u = ${sgn(u, 2)}`, `Cut · u = ${sgn(u, 2)}`);
+      hud = S.patch ? L(`窗口平移 u；固定中间一小片后只能取 (${sgn(S.patch.lo, 3)}, ${sgn(S.patch.hi, 3)})；视野里另有 ${q.forced.length} 个点被定住，${q.free.length} 个未定`, `the window is shifted by u; with the middle patch fixed, u is confined to (${sgn(S.patch.lo, 3)}, ${sgn(S.patch.hi, 3)}); ${q.forced.length} further points in view are fixed and ${q.free.length} are undecided`)
+        : L(`窗口平移 u · 视野里选中 ${q.seen.length} 个点 · 相邻间隔：${names} · ${q.edge} 个离边不到 0.08`, `the window is shifted by u · ${q.seen.length} points selected in view · gaps between neighbours: ${names} · ${q.edge} less than 0.08 from an edge`);
+      keyRO(L('相邻两点的间隔', 'gaps between neighbouring points'), `<span class="c-cy">${names}</span>`, only ? L('只有两种', 'two kinds only') : L('闭窗口两端各有一个格点', 'a lattice point on each end of the closed window'));
+      set(1, L('窗口 W + u', 'the window W + u'), `[${fix(LO + u, 3)}, ${fix(HI + u, 3)}]`);
+      set(2, L('最小间隔', 'smallest gap'), `${fix(q.minGap, 3)} <span class="okmark">${q.minGap >= 1 - 1e-9 ? '≥ 1 ✓' : '✗'}</span>`);
+      if (S.patch) { set(3, L('容许的平移', 'admissible shifts'), `(${sgn(S.patch.lo, 3)}, ${sgn(S.patch.hi, 3)})`); set(4, L('小片以外：定住 / 未定', 'beyond the patch: fixed / undecided'), `${q.forced.length} / ${q.free.length}`); }
+      else { set(3, L('视野里选中的点', 'points selected in view'), String(q.seen.length)); set(4, L('最深的点离边', 'deepest point, distance from the edge'), q.deep ? `${fix(margin(q.deep.c, u), 3)} <small>x = ${fix(q.deep.x, 2)}</small>` : '—'); }
+      note = S.patch ? L('带圈的点在容许范围内怎么挪窗口都留在里面：中间这一小片把它们定住了，再远也一样。', 'The ringed points stay inside however the window moves within the admissible range: the small patch in the middle fixes them, however far away they are.')
+        : L('一个点离窗口的边有多远，它就经得起多大的平移；窗口长为 1，所以没有哪个点能超过 0.5。', 'A point withstands exactly as much shift as its distance from the edge of the window; the window has length 1, so no point can exceed 0.5.');
+      what = `u = ${sgn(u, 2)}`; key = S.patch ? L(`定住 ${q.forced.length}`, `${q.forced.length} FIXED`) : names;
+    } else if (S.scene === 'cassini') {
+      const k = q.k, a = FIB[k], b = FIB[k + 1], c = FIB[k + 2], e = fibN(k + 1) / fibN(k) - PHI, sv = q.value > 0 ? '+1' : '−1';
+      big = L(`卡西尼 · k = ${k}`, `Cassini · k = ${k}`);
+      hud = L(`φ${sup(k + 1)} = ${a} + ${b}φ 在格点图里是 (${fix(q.x, 3)}, ${fix(q.y, 4)})：矩形面积 = F${sub(k)}·F${sub(k + 2)} − F${sub(k + 1)}² = ${a}·${c} − ${b}² = ${sv}`, `φ${sup(k + 1)} = ${a} + ${b}φ sits at (${fix(q.x, 3)}, ${fix(q.y, 4)}) in the lattice: area of the rectangle = F${sub(k)}·F${sub(k + 2)} − F${sub(k + 1)}² = ${a}·${c} − ${b}² = ${sv}`);
+      keyRO('Fₖ·Fₖ₊₂ − Fₖ₊₁²', `<span class="${q.value > 0 ? 'c-cy' : 'c-mg'}">${sv}</span>`, `${a}·${c} − ${b}²`);
+      set(1, '(Fₖ, Fₖ₊₁, Fₖ₊₂)', `(${a}, ${b}, ${c})`); set(2, L('本身 × 共轭', 'itself × conjugate'), `${fix(q.x, 3)} × ${fix(q.y, 4)} = ${fix(q.x * q.y, 6)}`);
+      set(3, L('矩形的长', 'length of the rectangle'), fix(q.x, 3)); set(4, 'Fₖ₊₁/Fₖ − φ', sgn(e, 6));
+      note = L('矩形一次在横轴上方，一次在下方，越来越扁长，面积不变。两条双曲线之间除了原点没有别的格点：非零黄金整数的范数至少是 1。', 'The rectangles lie above and below the axis in turn, ever longer and flatter, with the same area. Between the two hyperbolas there is no lattice point but the origin: the norm of a nonzero golden integer is at least 1.');
+      what = `k = ${k}`; key = sv;
+    } else if (S.scene === 'returns') {
+      const none = !q.hits.length;
+      big = L(`回归 · N = ${q.N}`, `Returns · N = ${q.N}`);
+      hud = none ? L(`观测窗 (${fix(q.u1, 2)}, ${fix(q.u2, 2)})：还没有进入过`, `window (${fix(q.u1, 2)}, ${fix(q.u2, 2)}): not entered yet`)
+        : L(`观测窗 (${fix(q.u1, 2)}, ${fix(q.u2, 2)})：进入 ${q.hits.length} 次 · 任何连续 ${q.longest} 步里至少进入一次`, `window (${fix(q.u1, 2)}, ${fix(q.u2, 2)}): entered ${q.hits.length} times · at least once in any ${q.longest} consecutive steps`);
+      keyRO(L('到此为止最长的等待 M + 1', 'longest wait so far, M + 1'), `<span class="c-mg">${q.longest}</span>`, L('步', 'steps'));
+      set(1, L('进入窗口的次数', 'visits to the window'), String(q.hits.length)); set(2, L('所占比例', 'share of the steps'), fix(q.share, 4));
+      set(3, '1/(M + 1)', `${fix(q.bound, 4)} <span class="okmark">${q.hits.length >= Math.floor(q.N / q.longest) ? '✓' : '✗'}</span>`); set(4, L('窗口占圆周的份额', 'the window’s share of the circle'), fix(q.measure, 4));
+      note = L('窗口只要碰得到观测值的取值范围，等待就有上限；窗口越窄，上限越大。', 'As long as the window meets the range of the observable, the waits are bounded; the narrower the window, the larger the bound.');
+      what = `N = ${q.N}`; key = none ? '—' : `M + 1 = ${q.longest}`;
+    } else {
+      const five = TRIA.verts.filter((v) => v.deg === 5).length, three = TRIA.verts.filter((v) => v.deg === 3).length;
+      big = L(`接受窗 · s = ${fix(q.s, 2)}`, `Window · s = ${fix(q.s, 2)}`);
+      hud = q.inside ? L(`菱形三十面体里的点离边界 d∂ = ${fix(q.d, 3)}（棱长为 1）：比这更小的扰动推不出窗口`, `a point in the rhombic triacontahedron, d∂ = ${fix(q.d, 3)} from the boundary (edge length 1): no smaller disturbance takes it out of the window`) : L('点已经越过菱形三十面体最近的那个面：它不在窗口里了', 'the point has crossed the nearest face of the rhombic triacontahedron: it is no longer in the window');
+      keyRO(L('到边界的距离 d∂', 'distance to the boundary, d∂'), q.inside ? `<span class="c-am">${fix(q.d, 3)}</span>` : `<span class="c-mg">${L('窗外', 'outside')}</span>`, q.inside ? `= ${fix(q.d / TRIA.rin, 2)} r` : '');
+      set(1, L('面 · 棱 · 顶点', 'faces · edges · vertices'), `${TRIA.faces.length} · ${TRIA.edges.length} · ${TRIA.verts.length}`); set(2, L('五重 · 三重顶点', 'fivefold · threefold vertices'), `${five} · ${three}`);
+      set(3, L('内切球半径 r', 'inradius r'), fix(TRIA.rin, 4)); set(4, L('至少这么深的部分', 'the part at least this deep'), q.inside ? `${fix(100 * q.share, 1)}%` : '—');
+      note = L('窗口里离边界至少 d 的部分是它自己缩小 1 − d/r 倍的副本，所以深处的点很少：离边界半个 r 以上的只占八分之一。', 'The part of the window at least d from the boundary is a copy of the window shrunk by 1 − d/r, so deep points are few: only one eighth lies more than half of r from the boundary.');
+      what = `s = ${fix(q.s, 2)}`; key = q.inside ? `d∂ = ${fix(q.d, 2)}` : L('窗外', 'OUTSIDE');
+    }
+    $('hudBig').textContent = big; $('hudSub').textContent = hud; $('roNote').textContent = note; $('roAside').textContent = L(SC[S.scene].name[0], SC[S.scene].name[1]);
+    $('pillScene').querySelector('strong').textContent = SC[S.scene].name[1]; $('pillWhat').querySelector('strong').textContent = what; $('pillKey').querySelector('strong').textContent = key;
+    const leg = legend(q).map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
+    if ($('legend')._h !== leg) { $('legend').innerHTML = leg; $('legend')._h = leg; }
+  }
+  const paint = kit.painter(() => { const q = state(); drawText(q); drawStage(q); drawPlots(q); }, [$('stage'), $('plotA'), $('plotB')]);
+
+  /* ---------- controls ---------- */
+  const clock = kit.clock({
+    range: $('now'), play: $('play'), label: $('tau'), speeds: $('speedChips'), max: 1, rate: 0.085, step: 0.05, t: 0.5,
+    format: (t, max) => (S.scene === 'cut' ? `u ${sgn(uOf(t), 2)}` : S.scene === 'cassini' ? `k ${kOf(t)} <small>/ ${KMAX}</small>` : S.scene === 'returns' ? `N ${1 + Math.round(t)} <small>/ ${NMAX}</small>` : `s ${t.toFixed(2)} <small>/ ${max.toFixed(1)}</small>`),
+    onChange: () => paint()
+  });
+  function fitClock(t) { const sc = SC[S.scene]; clock.pause(); clock.rate = sc.rate; clock.step = sc.step; clock.setMax(sc.max, true); clock.set(t == null ? sc.start : t); }
+  function setScene(sc, t) {
+    S.scene = sc; sceneChips.set(sc, true); $('stage').classList.toggle('still', sc !== 'window3');
+    document.querySelectorAll('[data-scenes]').forEach((el) => { el.hidden = !el.dataset.scenes.split(' ').includes(sc); });
+    fitClock(t);
+  }
+  /** Fix (or release) the middle patch at the current shift, keeping the shift where it is. */
+  function setPatch(on, u) {
+    if (u == null) u = uOf(clock.t);
+    S.patch = null;
+    if (on) { for (const du of [0, 0.04, -0.04, 0.09, -0.09]) { const p = patchAt(clamp(u + du, -0.49, 0.49)); if (p.hi - p.lo > 0.03) { S.patch = p; u = p.ref; break; } } }
+    patchChips.set(S.patch ? 'on' : 'off', true); clock.pause(); clock.set(clamp(tOf(clamp(u, -0.5, 0.5)), 0, 1));
+  }
+  const leave = () => cards.mark(null);
+  const sceneChips = kit.chips($('sceneChips'), 'scene', (v) => { leave(); setScene(v); });
+  const patchChips = kit.chips($('patchChips'), 'patch', (v) => { leave(); setPatch(v === 'on'); });
+  const fWC = kit.field($('wc'), { fmt: (v) => sgn(v, 2), onInput: (v) => { S.wc = v; leave(); paint(); } });
+  const fWW = kit.field($('ww'), { fmt: (v) => fix(v, 2), onInput: (v) => { S.ww = v; leave(); paint(); } });
+  $('rew').addEventListener('click', () => { clock.pause(); clock.set(0); });
+  kit.keys({ 1: () => { leave(); setScene('cut'); }, 2: () => { leave(); setScene('cassini'); }, 3: () => { leave(); setScene('returns'); }, 4: () => { leave(); setScene('window3'); } });
+
+  /* ---------- experiment cards ---------- */
+  const PRESETS = {
+    cut: { scene: 'cut', u: 0 }, phason: { scene: 'cut', u: 0.3, play: true }, empire: { scene: 'cut', u: 0.15, patch: true, at: 0.5, play: true },
+    cassini: { scene: 'cassini', at: 3, play: true }, returns: { scene: 'returns', wc: 0.5, ww: 0.6, at: 88, play: true }, narrow: { scene: 'returns', wc: 0.5, ww: 0.1, at: NMAX - 1, play: true },
+    window: { scene: 'window3', at: 0.15 }, edge: { scene: 'window3', at: 0.93, play: true }
+  };
+  const NOTES = {
+    cut: ['黄金整数 a + bφ 画成平面上的格点：横坐标是它本身，纵坐标是共轭 a + bψ。琥珀色的窗口长为 1，选出青色的点，投到下面的直线上，相邻两点只相距 φ 或 φ²。此刻窗口是闭区间 [φ − 2, φ − 1]，两个端点上各有一个格点，所以原点左边多出一段长为 1 的间隔。绿圈是自然数的黄金展开 β(n)。', 'The golden integers a + bφ drawn as lattice points: across, the number itself; up, its conjugate a + bψ. The amber window has length 1; it selects the cyan points, and projected to the line below, neighbours are φ or φ² apart. Here the window is the closed interval [φ − 2, φ − 1] with a lattice point on each end, so one extra gap of length 1 appears left of the origin. The green rings are the golden expansions β(n) of the natural numbers.'],
+    phason: ['窗口从 u = −0.5 挪到 +0.5。贴着边的点（洋红）进进出出，下面那排砖里相邻的一长一短随之对调；离边远的点一直留在原地。', 'The window moves from u = −0.5 to +0.5. Points at its edge (magenta) come and go, and in the row of tiles below a long and a short neighbour swap each time; points far from the edge stay where they are.'],
+    empire: ['把中间一小片（|x| ≤ 4 的点）固定下来：窗口只能在一小段范围里挪动。在这段范围里始终留在窗口内的点都被这一小片定住，包括很远的；只有洋红色的点还悬而未决。', 'Fix the small patch in the middle (the points with |x| ≤ 4): the window can now move only within a short range. Every point that stays inside the window over that whole range is fixed by the patch, however far away; only the magenta points are still undecided.'],
+    cassini: ['还是那张格点图。φ 的幂 φ², φ³, … 一个在横轴上方、一个在下方，越来越贴近横轴；它与原点围成的矩形越来越扁长，面积却永远恰好是 1。这个面积就是卡西尼式 Fₖ·Fₖ₊₂ − Fₖ₊₁²。', 'The same lattice again. The powers φ², φ³, … lie above and below the horizontal axis in turn, ever closer to it; the rectangle each spans with the origin grows longer and flatter, and yet its area is always exactly 1. That area is Cassini’s expression Fₖ·Fₖ₊₂ − Fₖ₊₁².'],
+    returns: ['圆上的点每一步转过黄金角；它的高度 cos 2πnφ 就是观测值。琥珀色的带子是观测窗 (0.2, 0.8)。轨道一次次回到带子里，相邻两次之间的步数有上限。', 'A point on the circle turns by the golden angle at each step; its height cos 2πnφ is what is observed. The amber band is the observation window (0.2, 0.8). The orbit comes back into the band again and again, and the number of steps between two visits is bounded.'],
+    narrow: ['把窗口收窄到 (0.45, 0.55)：每次要等得更久，但等待仍有上限，落在窗口里的步数所占比例也不低于 1/(M + 1)。', 'Narrow the window to (0.45, 0.55): each wait is longer, yet the waits are still bounded, and the share of steps inside the window is no less than 1/(M + 1).'],
+    window: ['菱形三十面体：六条五重轴各出一条棱，拼成 30 个菱形面、60 条棱、32 个顶点。靠近中心的点离每个面都远，球的半径 d∂ 就是它经得起的扰动。拖动可以转动它。', 'The rhombic triacontahedron: each of the six fivefold axes supplies an edge, giving 30 rhombic faces, 60 edges and 32 vertices. A point near the centre is far from every face, and the radius d∂ of the ball is the disturbance it can withstand. Drag to turn it.'],
+    edge: ['把点推向边界：球越缩越小，d∂ 归零的那一刻它碰到最近的面（洋红），再往外就不在窗口里了。', 'Push the point towards the boundary: the ball shrinks, d∂ reaches zero when the point touches the nearest face (magenta), and beyond that it is no longer in the window.']
+  };
+  let booting = true;
+  function applyPreset(id) {
+    const p = PRESETS[id];
+    S.patch = null; patchChips.set('off', true);
+    if (p.wc != null) { S.wc = p.wc; S.ww = p.ww; fWC.set(p.wc); fWW.set(p.ww); }
+    setScene(p.scene, p.scene === 'cut' ? p.u + 0.5 : p.at);
+    if (p.patch) { setPatch(true, p.u); clock.set(p.at); }
+    if (!p.play || TRV.still || (booting && !TRV.embed)) return;
+    clock.set(0);
+    if (booting) kit.autoplay(clock, $('stage')); else clock.play();
+  }
+  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+    idle: ['自由探索：上下拖动窗口，拖时间轴，换场景，固定一小片，或改观测窗。随时可以再选一张卡。', 'Free play: drag the window up and down, scrub the rail, change the scene, fix a patch or change the observation window. Pick a card again at any time.'] });
+
+  TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });
+  TRV.startGlitch(document.querySelector('.brand'));
+
+  window.CUT_DEBUG = {
+    get state() {
+      const q = state(), out = { scene: S.scene, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current };
+      const pt = (p) => ({ a: p.a, b: p.b, x: p.x, c: p.c });
+      if (S.scene === 'cut') Object.assign(out, { u: q.u, window: [LO + q.u, HI + q.u], half: q.half, selected: q.sel.map(pt), kinds: q.kinds, minGap: q.minGap, seen: q.seen.length, edge: q.edge, deep: q.deep && Object.assign(pt(q.deep), { margin: margin(q.deep.c, q.u) }), patch: S.patch && { lo: S.patch.lo, hi: S.patch.hi, ref: S.patch.ref, radius: PATCH, emp: q.emp, forced: q.forced.map(pt), free: q.free.map(pt) }, beta: Array.from({ length: 40 }, (_, n) => beta(n)) });
+      else if (S.scene === 'cassini') Object.assign(out, { k: q.k, fib: [FIB[q.k], FIB[q.k + 1], FIB[q.k + 2]].map(String), value: q.value, point: [q.x, q.y], all: Array.from({ length: KN }, (_, i) => Number(cassini(i + 1))) });
+      else if (S.scene === 'returns') Object.assign(out, { N: q.N, u1: q.u1, u2: q.u2, hits: q.hits, waits: q.waits, longest: q.longest, share: q.share, bound: q.bound, measure: q.measure });
+      else Object.assign(out, { s: q.s, p: q.p, d: q.d, inside: q.inside, share: q.share, rin: TRIA.rin, rout: TRIA.rout, counts: [TRIA.faces.length, TRIA.edges.length, TRIA.verts.length], nearest: q.face.n });
+      return out;
+    },
+    seek: (t) => { clock.pause(); clock.set(t); },
+    /** The polyhedron as the page built it: vertices with their degree, faces as four vertex indices with the outward normal. */
+    solid: () => ({ verts: TRIA.verts.map((v) => ({ p: v.p, deg: v.deg })), faces: TRIA.faces.map((f) => ({ i: f.i, n: f.n })), edges: TRIA.edges.map((e) => [e.a, e.b]) }),
+    /** The orbit point and the observed value at step n. */
+    orbit: (n) => [orbitX(n), obs(n)],
+    /** The lattice points the page works with: every golden integer with |a + bφ| ≤ 60 and |a + bψ| ≤ 2.3. */
+    lattice: () => NEAR.map((p) => ({ a: p.a, b: p.b, x: p.x, c: p.c }))
+  };
+  window.TRV_THUMB = () => { S.patch = null; patchChips.set('off', true); setScene('cut', 0.62); paint.now(); };
+  cards.pick(cards.initial('phason'));
+  booting = false;
+  paint();
+})();

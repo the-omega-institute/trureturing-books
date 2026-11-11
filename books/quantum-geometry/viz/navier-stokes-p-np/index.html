@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//VORTEX · Field and filament · the two halves of advection, a vortex tube drawn thin, and a low-mode observer who cannot predict the next step">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//VORTEX 场与涡丝 · 对流项的两半、越拉越细的涡管与算不出下一步的低频观察者</title>
+<meta name="description" content="对流项 (u·∇)u 恒等于一个梯度加上兰姆项 ω×u：无旋时只剩梯度，被压强吸收。二维里涡管不会被拉伸；三维里拉伸让截面 A 变细，环量 Γ = ωA 不变，涡度按 Γ/A 增大，粘性把它拦在伯格斯涡的截面上，或者拦不住。只看低频的观察者要想精确预测自己的下一步，必须三条泄漏同时为零（Lean 已验证），五模态傅里叶实例中混合项是 i/4。The advection term (u·∇)u is a gradient plus the Lamb term ω×u; without vorticity only the gradient is left and pressure absorbs it. In two dimensions a vortex tube is not stretched; in three, stretching thins the cross-section A while the circulation Γ = ωA stays, so the vorticity grows like Γ/A until viscosity holds it at the Burgers core, or fails to. An observer of the low modes can predict its next step exactly only if three leaks vanish together (kernel-verified in Lean); in a five-mode Fourier instance the mixed term is i/4.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="navier-stokes-p-np">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//VORTEX">ORTHO<b>//</b>VORTEX</h1>
+      <div class="tagline">
+        <span class="zh">场与涡丝 · <em>涡管被拉细，环量不变，涡度就只能变大</em></span>
+        <span class="en">Field and filament · <em>stretch a vortex tube and, with its circulation fixed, the vorticity can only grow</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillScene">SCENE <strong>—</strong></span>
+      <span class="pill" id="pillWhat"><strong>—</strong></span>
+      <span class="pill hot" id="pillKey"><strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="potential" aria-pressed="false"><span class="code">POTENTIAL</span><span class="cn zh">无旋：对流项只是一个梯度</span><span class="cn en">No vorticity: advection is a gradient</span></button>
+        <button class="preset" data-preset="vortex" aria-pressed="false"><span class="code">LAMB</span><span class="cn zh">有旋：多出兰姆项 ω × u</span><span class="cn en">With vorticity: the Lamb term ω × u</span></button>
+        <button class="preset" data-preset="flat" aria-pressed="false"><span class="code">FLAT-2D</span><span class="cn zh">二维：涡管不被拉伸</span><span class="cn en">Two dimensions: no stretching</span></button>
+        <button class="preset" data-preset="strain" aria-pressed="false"><span class="code">STRETCH</span><span class="cn zh">三维：越拉越细，ω = Γ/A</span><span class="cn en">Three dimensions: thinner, ω = Γ/A</span></button>
+        <button class="preset" data-preset="burgers" aria-pressed="false"><span class="code">BURGERS</span><span class="cn zh">粘性拦住：伯格斯涡</span><span class="cn en">Viscosity holds: the Burgers vortex</span></button>
+        <button class="preset" data-preset="runaway" aria-pressed="false"><span class="code">RUNAWAY</span><span class="cn zh">自己拉自己：有限时间夹断</span><span class="cn en">Self-stretching: pinched in finite time</span></button>
+        <button class="preset" data-preset="closed" aria-pressed="false"><span class="code">CLOSED</span><span class="cn zh">没有泄漏：低频自己说了算</span><span class="cn en">No leak: the low modes decide</span></button>
+        <button class="preset" data-preset="mixed" aria-pressed="false"><span class="code">MIXED-LEAK</span><span class="cn zh">混合泄漏：同一个现在，不同的下一步</span><span class="cn en">Mixed leak: one present, different next steps</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+    <section class="panel sec" data-scenes="lamb">
+      <h2><span class="zh">流场</span><span class="en">The flow</span><span class="aside">u = (1 − s)·(x, −y) + s·(−y, x)</span></h2>
+      <p class="note"><span class="zh">时间轴是 s：s = 0 是无旋的驻点流，s = 1 是刚体旋转，涡度 ω = 2s。拖动舞台上的琥珀色探针，在任意一点看对流项怎样拆成两半。</span><span class="en">The rail is s: s = 0 is the irrotational stagnation flow, s = 1 is rigid rotation, and the vorticity is ω = 2s. Drag the amber probe on the stage to see, at any point, how advection splits in two.</span></p>
+    </section>
+    <section class="panel sec" data-scenes="tube" hidden>
+      <h2><span class="zh">涡管</span><span class="en">The vortex tube</span><span class="aside">Γ = ω·A</span></h2>
+      <div class="chips" id="modeChips" role="group" aria-label="拉伸方式" data-aria-en="Kind of stretching">
+        <button class="chip" data-mode="flat" aria-pressed="false"><span class="zh">二维</span><span class="en">2D</span></button>
+        <button class="chip" data-mode="strain" aria-pressed="true"><span class="zh">恒定拉伸</span><span class="en">Steady strain</span></button>
+        <button class="chip" data-mode="self" aria-pressed="false"><span class="zh">自拉伸</span><span class="en">Self-stretching</span></button>
+      </div>
+      <div class="field">
+        <label for="nu"><span class="zh">粘性 ν</span><span class="en">Viscosity ν</span><small class="zh">抹平细小的涡</small><small class="en">smooths small eddies</small></label><output id="oNu" for="nu">0</output>
+        <input type="range" id="nu" min="0" max="0.12" step="0.004" value="0">
+      </div>
+      <p class="note"><span class="zh">时间轴是时间 t。环量 Γ = 1，初始截面 A₀ = 1。</span><span class="en">The rail is the time t. The circulation is Γ = 1 and the initial cross-section A₀ = 1.</span></p>
+    </section>
+    <section class="panel sec" data-scenes="closure" hidden>
+      <h2><span class="zh">三条泄漏</span><span class="en">Three leaks</span><span class="aside">P(V(a + b)) − P(V(a))</span></h2>
+      <div class="field"><label for="lin"><span class="zh">隐态线性泄漏 λ</span><span class="en">Hidden linear leak λ</span></label><output id="oLin" for="lin">0</output><input type="range" id="lin" min="-1" max="1" step="0.1" value="0"></div>
+      <div class="field"><label for="self"><span class="zh">隐态自平流泄漏 η</span><span class="en">Hidden self-advection leak η</span></label><output id="oSelf" for="self">0</output><input type="range" id="self" min="-1" max="1" step="0.1" value="0"></div>
+      <div class="field"><label for="mix"><span class="zh">显隐混合泄漏 μ</span><span class="en">Mixed leak μ</span></label><output id="oMix" for="mix">0</output><input type="range" id="mix" min="-1" max="1" step="0.1" value="0"></div>
+      <p class="note"><span class="zh">观察者只看得见 x，看不见 y。时间轴移动看不见的 y；琥珀色的点是同一个 x 配上这个 y。</span><span class="en">The observer sees x and not y. The rail moves the unseen y; the amber point is the same x with that y.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage still" id="stage" data-thumb aria-label="舞台：平面流的流线与探针处的三支箭头；被拉伸的涡管；或低频观察者看到的加速度随隐变量的变化" data-aria-en="Stage: streamlines of a plane flow with three arrows at the probe; a vortex tube being stretched; or the acceleration a low-mode observer sees as the hidden variable changes">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+        <button class="chip" data-scene="lamb" aria-pressed="true"><span class="zh">对流的两半</span><span class="en">Two halves</span></button>
+        <button class="chip" data-scene="tube" aria-pressed="false"><span class="zh">涡管</span><span class="en">Vortex tube</span></button>
+        <button class="chip" data-scene="closure" aria-pressed="false"><span class="zh">闭合</span><span class="en">Closure</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="pATitle"></h2><span id="pAMeta"></span></div>
+        <canvas id="plotA" aria-label="本场景的小图 A" data-aria-en="Small plot A of the scene"></canvas>
+      </section>
+      <section class="panel">
+        <div class="head"><h2 id="pBTitle"></h2><span id="pBMeta"></span></div>
+        <canvas id="plotB" aria-label="本场景的小图 B" data-aria-en="Small plot B of the scene"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="roKeyL"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div class="c"><dt id="roL1"></dt><dd id="ro1">—</dd></div>
+        <div class="m"><dt id="roL2"></dt><dd id="ro2">—</dd></div>
+        <div><dt id="roL3"></dt><dd id="ro3">—</dd></div>
+        <div><dt id="roL4"></dt><dd id="ro4">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+<div class="lean argued" data-scenes="lamb"><span class="ok">ARGUED</span><span><span class="zh">手工推导（矢量恒等式）：(u·∇)u = ∇(|u|²/2) + ω × u。梯度那一半取旋度后为零，所以它不改变涡度；涡度的搬运与拉伸全部来自 ω × u 的旋度。页面在探针处用差分核对这条恒等式。</span><span class="en">Hand derivation (a vector identity): (u·∇)u = ∇(|u|²/2) + ω × u. The gradient half has zero curl, so it never changes the vorticity; all transport and stretching of vorticity comes from the curl of ω × u. The page checks the identity at the probe by finite differences.</span></span></div>
+<div class="lean model" data-scenes="tube" hidden><span class="ok">MODEL</span><span><span class="zh">恒定拉伸与“拉伸率正比于涡度”（α = κω）都是示意模型：前者是经典的伯格斯涡设定，后者是为了看见有限时间夹断而做的最简闭合，不是纳维—斯托克斯方程的推论。</span><span class="en">Steady strain and “strain proportional to vorticity” (α = κω) are schematic models: the first is the classical Burgers setting, the second the simplest closure that shows a pinch in finite time; it is not a consequence of the Navier–Stokes equations.</span></span></div>
+<div class="lean open" data-scenes="tube" hidden><span class="ok">OPEN</span><span><span class="zh">无外力的三维不可压缩纳维—斯托克斯方程是否总有全局光滑解，仍是开放问题（克雷千禧年问题）。舞台上的夹断只属于上面的示意模型。</span><span class="en">Whether the unforced three-dimensional incompressible Navier–Stokes equations always have global smooth solutions is open (a Clay Millennium problem). The pinch on the stage belongs to the schematic model above only.</span></span></div>
+<div class="lean" data-scenes="closure" hidden><span class="ok">LEAN ✓</span><span><span class="zh">二次观测闭合判据。V(x) = L x − B(x, x)，P 幂等：存在 f 使 P(V(x)) = f(P(x)) 对一切 x 成立，当且仅当三条同时成立：P b = 0 ⟹ P(L b) = 0；P b = 0 ⟹ P(B(b, b)) = 0；P a = a 且 P b = 0 ⟹ P(B(a, b) + B(b, a)) = 0。已冻结：</span><span class="en">The quadratic observation closure criterion. With V(x) = L x − B(x, x) and P idempotent: an f with P(V(x)) = f(P(x)) for all x exists iff three conditions hold together: P b = 0 ⟹ P(L b) = 0; P b = 0 ⟹ P(B(b, b)) = 0; P a = a and P b = 0 ⟹ P(B(a, b) + B(b, a)) = 0. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff" href="https://github.com/the-omega-institute/trureturing/blob/52725b62b659b244d077e29f18a576aa809007b7/D5/S3/Observer/Reversal/QuadraticObservationClosure.lean#L54" target="_blank" rel="noopener"><code>quadratic_closure_iff</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+<div class="lean argued" data-scenes="tube" hidden><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：开尔文环量定理（无粘时 Γ 沿流体回路守恒）；伯格斯涡是纳维—斯托克斯方程的精确定常解，高斯涡核在轴向拉伸率 α 下满足 d(δ²)/dt = 4ν − αδ²，截面停在 4πν/α；二维不可压缩流的全局光滑性（Ladyzhenskaya）。</span><span class="en">Literature results, not formalized in this book: Kelvin’s circulation theorem (Γ is conserved along material loops without viscosity); the Burgers vortex is an exact steady solution of the Navier–Stokes equations, and a Gaussian core under axial strain α obeys d(δ²)/dt = 4ν − αδ², so its cross-section settles at 4πν/α; global smoothness of two-dimensional incompressible flow (Ladyzhenskaya).</span></span></div>
+<div class="lean model"><span class="ok">MODEL</span><span><span class="zh">“P 是场，NP 是线”与“涡丝像见证丝”是本书第 30 章的类比，不是定理；页面上的流体事实各自成立，类比不由它们推出。</span><span class="en">“P is a field, NP is a line” and “the vortex filament is like a witness thread” are analogies of chapter 30 of this book, not theorems; the fluid facts on the page hold on their own and the analogy does not follow from them.</span></span></div>
+<div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数值演示，不是证明：流场与涡管用解析式，探针处的恒等式用中心差分核对，闭合场景是 ℝ² 上的一个显式二次例子。</span><span class="en">A numerical illustration on the page, not a proof: the flow and the tube use closed formulas, the identity at the probe is checked by central differences, and the closure scene is an explicit quadratic example on ℝ².</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="时间轴：涡度的份额、时间或看不见的变量" data-aria-en="Rail: the share of vorticity, the time or the unseen variable">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>1</kbd>–<kbd>3</kbd> <span class="zh">场景</span><span class="en">scene</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">第 30 章把纳维—斯托克斯方程与 P 对 NP 并排来看：光滑的“场”会不会被非线性项拉成一根“线”。本页只画流体这一侧的三件事，每一件都可以亲手验证。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>对流的两半。</b>(u·∇)u = ∇(|u|²/2) + ω × u。舞台上的流场在驻点流（s = 0，无旋）与刚体旋转（s = 1）之间变化，涡度 ω = 2s；探针处白色箭头是对流项，青色是梯度那一半，品红是兰姆项。无旋时品红箭头消失：整个对流项是梯度，并入压强。s 越过 ½ 时流线从双曲线合拢成椭圆。</li>
+        <li><b>涡管。</b>对方程取旋度，梯度全部消失，剩下涡度方程，其中 (ω·∇)u 是拉伸项。平面流里 ω 垂直于平面而 u 不随那个方向变化，这一项恒为零。三维里涡管被轴向拉伸：体积不变，截面 A 变小；无粘时环量 Γ = ωA 不变，所以 ω = Γ/A 变大。粘性让涡核向外扩散，恒定拉伸率 α 下截面停在 4πν/α（伯格斯涡）。如果拉伸率本身正比于涡度（示意模型 α = κω），截面按 dA/dt = 4πν − κΓ 线性变化：κΓ &gt; 4πν 时在有限时间 A₀/(κΓ − 4πν) 夹断。</li>
+        <li><b>闭合。</b>只看得见 x 的观察者想用 x 预测 x 的加速度。把状态拆成看得见的 a 与看不见的 b，看见的加速度之差是 P(L b) − P(B(a, b) + B(b, a)) − P(B(b, b))。三项都为零时，舞台上每条曲线都是水平线：下一步只由 x 决定。任何一项不为零，同一个 x 就对应不同的下一步。Lean 证明了这是充要条件，并在一个五模态傅里叶—伽辽金实例里算出混合项等于 i/4，所以那里不存在精确闭合。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch30-fields-lines-eth-and-navier-stokes.html#sec-coda-navier-stokes-and-p-vs-np" target="_top">第 30 章 · 纳维—斯托克斯与 P 对 NP 的场化同构</a> · <a href="../../zh/ch30-fields-lines-eth-and-navier-stokes.html#thm-coda-quadratic-advection-no-closure" target="_top">二次平流闭合不可能性定理</a> · <a href="../../zh/ch30-fields-lines-eth-and-navier-stokes.html#conj-coda-navier-stokes-regularity" target="_top">三维正则性猜想</a> · trureturing（所钉提交）：<a data-trureturing-path="D5/S3/Observer/Reversal/QuadraticObservationClosure.lean" href="https://github.com/the-omega-institute/trureturing/blob/52725b62b659b244d077e29f18a576aa809007b7/D5/S3/Observer/Reversal/QuadraticObservationClosure.lean" target="_blank" rel="noopener">QuadraticObservationClosure.lean</a> · <a data-trureturing-path="D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.lean" href="https://github.com/the-omega-institute/trureturing/blob/52725b62b659b244d077e29f18a576aa809007b7/D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.lean" target="_blank" rel="noopener">AdvectionClosureInstance.lean</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">Chapter 30 sets the Navier–Stokes equations beside P versus NP: can a smooth “field” be drawn out into a “line” by the nonlinear term? This page draws three things on the fluid side only, each of which can be checked by hand. The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>The two halves of advection.</b> (u·∇)u = ∇(|u|²/2) + ω × u. The flow on the stage goes from the stagnation flow (s = 0, irrotational) to rigid rotation (s = 1), with vorticity ω = 2s; at the probe the white arrow is the advection term, the cyan arrow its gradient half and the magenta arrow the Lamb term. Without vorticity the magenta arrow is gone: the whole advection term is a gradient and joins the pressure. As s passes ½ the streamlines close from hyperbolas into ellipses.</li>
+        <li><b>The vortex tube.</b> Taking the curl of the equation removes every gradient and leaves the vorticity equation, in which (ω·∇)u is the stretching term. In a plane flow ω is normal to the plane and u does not vary in that direction, so the term is identically zero. In three dimensions the tube is stretched along its axis: the volume stays, the cross-section A shrinks; without viscosity the circulation Γ = ωA stays, so ω = Γ/A grows. Viscosity spreads the core, and under a steady strain α the cross-section settles at 4πν/α (the Burgers vortex). If the strain itself is proportional to the vorticity (the schematic model α = κω), the cross-section changes linearly, dA/dt = 4πν − κΓ: for κΓ &gt; 4πν it pinches at the finite time A₀/(κΓ − 4πν).</li>
+        <li><b>Closure.</b> An observer who sees only x wants to predict the acceleration of x from x. Split the state into a seen part a and an unseen part b; the difference of the seen accelerations is P(L b) − P(B(a, b) + B(b, a)) − P(B(b, b)). When all three terms vanish every curve on the stage is a horizontal line: the next step depends on x alone. If any of them is nonzero, one x has different next steps. Lean proves that this is necessary and sufficient, and computes the mixed term in a five-mode Fourier–Galerkin instance: it equals i/4, so no exact closure exists there.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch30-fields-lines-eth-and-navier-stokes.html#sec-coda-navier-stokes-and-p-vs-np" target="_top">Chapter 30 · Navier–Stokes and P versus NP as fields</a> · <a href="../../en/ch30-fields-lines-eth-and-navier-stokes.html#thm-coda-quadratic-advection-no-closure" target="_top">No closure for quadratic advection</a> · <a href="../../en/ch30-fields-lines-eth-and-navier-stokes.html#conj-coda-navier-stokes-regularity" target="_top">The regularity conjecture</a> · trureturing (pinned commit): <a data-trureturing-path="D5/S3/Observer/Reversal/QuadraticObservationClosure.lean" href="https://github.com/the-omega-institute/trureturing/blob/52725b62b659b244d077e29f18a576aa809007b7/D5/S3/Observer/Reversal/QuadraticObservationClosure.lean" target="_blank" rel="noopener">QuadraticObservationClosure.lean</a> · <a data-trureturing-path="D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.lean" href="https://github.com/the-omega-institute/trureturing/blob/52725b62b659b244d077e29f18a576aa809007b7/D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.lean" target="_blank" rel="noopener">AdvectionClosureInstance.lean</a></p>
+    </div>
+    <h3 class="evh"><span class="zh">全部依据</span><span class="en">All evidence</span></h3>
+<div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">观测增量恒等式：P(V(a + b)) − P(V(a)) = P(L b) − P(B(a, b) + B(b, a)) − P(B(b, b))。舞台上琥珀色括号量的就是左边。已冻结：</span><span class="en">The observed increment: P(V(a + b)) − P(V(a)) = P(L b) − P(B(a, b) + B(b, a)) − P(B(b, b)). The amber bracket on the stage measures the left-hand side. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Observer/Reversal/QuadraticObservationClosure.observed_increment" href="https://github.com/the-omega-institute/trureturing/blob/52725b62b659b244d077e29f18a576aa809007b7/D5/S3/Observer/Reversal/QuadraticObservationClosure.lean#L45" target="_blank" rel="noopener"><code>observed_increment</code></a></span></div>
+<div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">五模态实例中的见证：a = family 1 0 满足 P a = a，b = family 0 1 满足 P b = 0，而 P(B(a, b) + B(b, a)) 在第 0 个模态的第 0 个分量上等于 i/4。已冻结：</span><span class="en">The witness in the five-mode instance: a = family 1 0 has P a = a, b = family 0 1 has P b = 0, and P(B(a, b) + B(b, a)) equals i/4 at component 0 of mode 0. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.mixed_witness" href="https://github.com/the-omega-institute/trureturing/blob/52725b62b659b244d077e29f18a576aa809007b7/D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.lean#L234" target="_blank" rel="noopener"><code>mixed_witness</code></a></span></div>
+<div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">五模态傅里叶—伽辽金实例：对任意实数 ν，不存在 f 使 P(vectorField (L ν) B x) = f(P x) 对一切状态 x 成立。已冻结：</span><span class="en">The five-mode Fourier–Galerkin instance: for every real ν there is no f with P(vectorField (L ν) B x) = f(P x) for all states x. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure" href="https://github.com/the-omega-institute/trureturing/blob/52725b62b659b244d077e29f18a576aa809007b7/D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.lean#L276" target="_blank" rel="noopener"><code>no_exact_closure</code></a></span></div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
