@@ -155,11 +155,19 @@ def _cn(s):
 
 def chapter_references():
     """Counter {(cited, citing): mentions} over the Chinese chapters 1–30: a link to chNN-….md or the
-    words “第 N 章” (Arabic or Chinese numerals) inside chapter M ≠ N."""
+    words “第 N 章” (Arabic or Chinese numerals) inside chapter M ≠ N. Captions of figures, lab cards and
+    films are skipped: they describe a picture, not what the chapter builds on."""
     refs = collections.Counter()
     for f in sorted(ZH.glob("ch[0-3][0-9]-*.md")):
         me = int(f.name[2:4])
+        media = False
         for line in f.read_text(encoding="utf-8").splitlines():
+            if re.match(r":::\s*\{\.(figure|viz|film)\b", line):
+                media = True
+                continue
+            if media:
+                media = line.strip() != ":::"
+                continue
             for m in _REF.finditer(line):
                 n = int(m.group(1)) if m.group(1) else _cn(m.group(2))
                 if n != me and 1 <= n <= 30:

@@ -3,7 +3,7 @@ Which chapter rests on which: one arrow into every chapter, from the earlier cha
 most often in its own text.
 
 The 30 chapters run down the page in reading order, grouped into the eight parts of zh/SUMMARY.md.
-A reference is a link to chNN-….md or the words “第 N 章” in chapter M's Chinese text (_coda.chapter_references
+A reference is a link to chNN-….md or the words “第 N 章” in chapter M's Chinese text outside the captions of figures, lab cards and films (_coda.chapter_references
 counts them). For every chapter the arrow comes from the earlier chapter with the most such mentions (ties go
 to the later one); its width grows with that count. The list EDGES below is the data the figure draws; each
 entry names the line of its first mention, and the script recomputes the list from the chapters and asserts
@@ -16,12 +16,12 @@ SIZE = (380, 540)
 ALT = {
     "zh": "三十个圆点自上而下排成一列，代表第 1 至第 30 章，左边按八部分成八段并写着部名。每个圆点（第 1 章与第 11 章除外）"
           "都有一支向右鼓出的弧形箭头指向它，起点是它回头引用最多的那一章；箭头越粗，引用越多。"
-          "第 1 章发出六支箭头（到第 2、5、9、18、23、28 章），第 3 章发出四支（到第 4、19、21、27 章），"
+          "第 1 章发出六支箭头（到第 2、5、9、18、23、28 章），第 3 章发出三支（到第 4、19、21 章），"
           "第 21 章发出两支粗箭头（到第 22、24 章）；第 11 章是空心圆点，没有箭头指向它。",
     "en": "Thirty dots run down the page for chapters 1 to 30, grouped on the left into the eight parts with their names. "
           "Every dot except chapters 1 and 11 receives one arrow, an arc bulging to the right, from the chapter it refers "
           "back to most; the thicker the arrow, the more mentions. Chapter 1 sends six arrows (to chapters 2, 5, 9, 18, 23 "
-          "and 28), chapter 3 sends four (to 4, 19, 21 and 27), and chapter 21 sends two thick ones (to 22 and 24); "
+          "and 28), chapter 3 sends three (to 4, 19 and 21), and chapter 21 sends two thick ones (to 22 and 24); "
           "chapter 11 is a hollow dot with no arrow.",
 }
 
@@ -52,7 +52,7 @@ EDGES = [
     (21, 24),   # ch24-cosine-fixed-points-and-self-reference.md:12 “第二十一章”, 11 mentions
     (14, 25),   # ch25-rewriting-and-xor.md:239 “第十四章”, 4 mentions
     (25, 26),   # ch26-single-qubit-rotor-compilation.md:5 “第二十五章”, 4 mentions
-    (3, 27),    # ch27-reading-frozen-proofs-i.md:13 “第三章”, 3 mentions
+    (24, 27),   # ch27-reading-frozen-proofs-i.md:62 “第二十四章”, 2 mentions (tied with 第一、三、四章)
     (1, 28),    # ch28-reading-frozen-proofs-ii.md:5 “第一章”, 4 mentions
     (10, 29),   # ch29-timeless-causality-and-gram-space.md:5 “第 10 章”, 4 mentions
     (29, 30),   # ch30-fields-lines-eth-and-navier-stokes.md:5 “第 29 章”, 3 mentions (tied with 第二十一章)
