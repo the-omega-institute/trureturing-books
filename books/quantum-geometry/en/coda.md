@@ -108,8 +108,10 @@ Before unfolding this philosophical picture into cross-round recurrence on fract
    $$
 
    at the classical parameters $(\sigma, \rho, \beta) = (10, 28, 8/3)$ has strictly negative constant phase-space divergence $\nabla\cdot\mathbf{F} = -(\sigma + 1 + \beta) = -\frac{41}{3} < 0$, contracting bounded phase-space volumes exponentially via $\operatorname{vol}(\Omega_t) = \operatorname{vol}(\Omega_0)e^{-41t/3}$ onto a set of Lebesgue measure zero; its numerical Lyapunov spectrum $(\lambda_1 \approx 0.9056,\; \lambda_2 = 0,\; \lambda_3 \approx -14.5723)$ yields a Kaplan–Yorke (Lyapunov) dimension estimate of $D_{\mathrm{KY}} = 2 + \frac{\lambda_1 + \lambda_2}{|\lambda_3|} \approx 2.06$.
-2. **Rigorous Existence of the Lorenz Attractor and Ergodic SRB Physical Measure (W. Tucker, *C. R. Acad. Sci. Paris* **328**, 1197–1202, 1999; S. Luzzatto, I. Melbourne & F. Pugh, *Commun. Math. Phys.* **260**, 393–401, 2005)**: At the classical parameters, the Lorenz system possesses a compact robust strange attractor supporting a unique ergodic Sinai–Ruelle–Bowen (SRB) physical invariant probability measure $\mu_{\mathrm{SRB}}$ governing forward time averages of Lebesgue-almost every initial condition in its basin of attraction.
+2. **Rigorous Existence of the Lorenz Attractor and Ergodic SRB Physical Measure (W. Tucker, *C. R. Acad. Sci. Paris* **328**, 1197–1202, 1999; S. Luzzatto, I. Melbourne & F. Paccaut, *Commun. Math. Phys.* **260**, 393–401, 2005)**: At the classical parameters, the Lorenz system possesses a compact robust strange attractor supporting a unique ergodic Sinai–Ruelle–Bowen (SRB) physical invariant probability measure $\mu_{\mathrm{SRB}}$ governing forward time averages of Lebesgue-almost every initial condition in its basin of attraction; Luzzatto, Melbourne and Paccaut further proved that this attractor is mixing.
 3. **Poincaré Recurrence and Autonomous ODE Orbit Disjointness (H. Poincaré, 1890; Picard–Lindelöf uniqueness)**: For the ergodic measure-preserving system $(\Lambda, \mu_{\mathrm{SRB}})$ and any open neighborhood $\mathcal{U}_\epsilon(\mathbf{x}_{\mathrm{ruin}})$ with $\mu_{\mathrm{SRB}}\bigl(\mathcal{U}_\epsilon(\mathbf{x}_{\mathrm{ruin}})\bigr) > 0$, $\mu_{\mathrm{SRB}}$-almost every attractor trajectory returns infinitely often to $\mathcal{U}_\epsilon(\mathbf{x}_{\mathrm{ruin}})$; simultaneously, by autonomous smooth ODE uniqueness, distinct geometric orbits are disjoint and every aperiodic trajectory is injective in $t \in \mathbb{R}$ (never self-intersecting), traversing mutually disjoint orbit segments across successive visits.
+
+The general mechanism in item 2, that time averages converge almost everywhere to space averages under an ergodic measure, is frozen at the commit this book pins: see [@thm-coda-birkhoff-ergodic]. What remains literature here is the existence, uniqueness and mixing of the Lorenz attractor and of $\mu_{\mathrm{SRB}}$, and the step from “$\mu_{\mathrm{SRB}}$-almost every start” to “Lebesgue-almost every start in the basin”.
 :::
 
 ::: {.viz src="spatial-attractor-deja-vu" preset="forget" height="500"}
@@ -119,6 +121,74 @@ Before unfolding this philosophical picture into cross-round recurrence on fract
 ::: {.viz src="spatial-attractor-deja-vu" preset="dimension" height="500"}
 **A little more than a surface.** The three Lyapunov exponents are estimated along one long orbit (cyan); the readout above the figure gives $\lambda_1 \approx 0.9$, $\lambda_2 \approx 0$, $\lambda_3 \approx -14.6$ and the Kaplan–Yorke estimate $D_{\mathrm{KY}} \approx 2.06$ (a numerical estimate, not a theorem).
 :::
+
+**How precise can “forgetting the start” be made?** In the “forget the start” card above, the cyan and magenta orbits begin far apart and still land on the same pair of wings. “Landing in the same place” can mean two things. Pointwise, it would mean the two orbits end up close together. A chaotic system does exactly the opposite: $\lambda_1 > 0$ amplifies any small difference in the starts exponentially. Statistically, it means the two orbits spend the same fractions of time in each region. Item 2 of [@rem-coda-lorenz-srb-literature] is about the statistical sense. The general mechanism behind it has nothing to do with the Lorenz equations, and it is frozen as the following theorem.
+
+::: {.theorem #thm-coda-birkhoff-ergodic title="Birkhoff's Pointwise Ergodic Theorem: Time Averages Equal Space Averages Almost Everywhere" lean="D5/S3/Analytic/Probability/BirkhoffPointwise.birkhoff_pointwise_ergodic"}
+Let $\alpha$ be a measurable space, $\mu$ a probability measure on $\alpha$, and $T : \alpha \to \alpha$ ergodic with respect to $\mu$, that is:
+
+1. $T$ is measurable and preserves $\mu$: $\mu\bigl(T^{-1}(B)\bigr) = \mu(B)$ for every measurable set $B$;
+2. if $A$ is $\mu$-null-measurable (it differs from a measurable set by a $\mu$-null set) and $T^{-1}(A)$ differs from $A$ by a $\mu$-null set, then $\mu(A) = 0$ or $\mu(A) = 1$.
+
+Let $g : \alpha \to \mathbb{R}$ be $\mu$-integrable, and write the Birkhoff averages as
+
+$$
+A_n g(x) = \frac{1}{n}\sum_{k=0}^{n-1} g\bigl(T^k x\bigr) \quad (n \ge 1), \qquad A_0 g(x) = 0.
+$$
+
+Then for $\mu$-almost every $x \in \alpha$, $A_n g(x) \to \int_\alpha g\,d\mu$ as $n \to \infty$.
+:::
+
+::: proof
+The Lean proof follows the textbook route of R. Durrett, *Probability: Theory and Examples*, 5th edition, Section 6.2. Write $S_n f(x) = \sum_{k=0}^{n-1} f(T^k x)$. The proof has three steps.
+
+(1) Hopf's maximal ergodic lemma: for measurable integrable $f$, the integral of $f$ over the set $E$ where some $S_n f(x) > 0$ is nonnegative. Look at the running maximum $M_n = \max_{0 \le k \le n} S_k f$. Wherever $M_n > 0$ we have $M_n \le f + M_n \circ T$. Integrate over that set: measure preservation cancels the integrals of $M_n$ and $M_n \circ T$, leaving a nonnegative integral of $f$. Letting $n \to \infty$ grows the set up to $E$.
+
+(2) The upper bound. Fix $c > \int g\,d\mu$ and let $D$ be the set of $x$ for which some rational $q > c$ has $S_n g(x) > nq$ for infinitely many $n$. $D$ is measurable and $T^{-1}(D) = D$: passing from $x$ to $Tx$ only removes the first term of each sum, which cannot change “exceeds infinitely often”. Apply (1) to $f = \mathbf{1}_D\,(g - c)$. Since $D$ is invariant, $S_n f = S_n g - nc$ on $D$ and $S_n f = 0$ off $D$, so $E$ is exactly $D$ and $\int_D (g - c)\,d\mu \ge 0$. Ergodicity leaves only $\mu(D) = 0$ or $1$; if it were $1$, the left side would be $\int g\,d\mu - c < 0$, a contradiction. So $\mu(D) = 0$: almost everywhere, for every rational $q > c$, eventually $A_n g(x) \le q$, which gives $\limsup_n A_n g(x) \le c$. Running $c$ through the countably many values $\int g\,d\mu + 1/m$ gives $\limsup_n A_n g \le \int g\,d\mu$ almost everywhere.
+
+(3) The lower bound and the finish. The same argument for $-g$ gives $\liminf_n A_n g \ge \int g\,d\mu$ almost everywhere; together these are convergence. The theorem assumes only that $g$ is integrable, not that it is measurable everywhere: the proof first passes to a measurable $g'$ equal to $g$ almost everywhere, which has the same integral. Because $T$ preserves $\mu$, $A_n g$ and $A_n g'$ agree almost everywhere for each $n$, and the exceptional sets for countably many $n$ still union to a null set. The full proof is checked by the Lean kernel.
+:::
+
+Note what the theorem does not say. The exceptional null set depends on $g$; there is no single exceptional set that serves every $g$. It gives no rate of convergence. And it does not tell you whether any particular starting point is exceptional. The simplest chaotic map puts all three on the table.
+
+::: {.example #ex-coda-doubling-map-averages title="The Doubling Map: Almost Every Start Averages to 1/2, and Every Floating-Point Start Is an Exception"}
+Take $\alpha = [0, 1)$, $\mu$ the length (Lebesgue measure), and $T(x) = 2x \bmod 1$.
+
+**Measure preservation (manual derivation).** The preimage of an interval $[a, b)$ is the two pieces $[a/2,\, b/2)$ and $[(1+a)/2,\, (1+b)/2)$, whose lengths still add up to $b - a$; passing from intervals to all measurable sets is a standard step in measure theory. **Ergodicity (literature result, not formalized in this book).** If $f \circ T = f$, comparing Fourier coefficients gives $\hat f(2k) = \hat f(k)$, hence $\hat f(k) = \hat f(2^m k) \to 0$ by the Riemann–Lebesgue lemma. So every coefficient with $k \ne 0$ vanishes and $f$ is constant almost everywhere.
+
+Write $x$ in binary as $0.b_1 b_2 b_3 \ldots$ (never using an expansion that ends in infinitely many $1$s). Then $T$ just moves the binary point one place to the right: $T^k x = 0.b_{k+1} b_{k+2} \ldots$. Take $g = \mathbf{1}_{[0,1/2)}$, with $\int g\,d\mu = 1/2$. Since $g(T^k x) = 1$ exactly when $b_{k+1} = 0$, $A_N g(x)$ is the fraction of zeros among the first $N$ binary digits. [@thm-coda-birkhoff-ergodic] says that for almost every $x$, the fraction of zeros among its binary digits tends to $1/2$.
+
+**Exceptional starts.** A rational start has an eventually periodic orbit, so its time average can be computed exactly over one period. Also take $h = \mathbf{1}_{[0,1/4)}$, with $\int h\,d\mu = 1/4$ and $h(T^k x) = 1$ exactly when $b_{k+1} = b_{k+2} = 0$:
+
+| Start $x$ | Binary | Time average of $g = \mathbf{1}_{[0,1/2)}$ | Time average of $h = \mathbf{1}_{[0,1/4)}$ |
+| :--- | :--- | ---: | ---: |
+| $0$ | $0.000\ldots$ | $1$ | $1$ |
+| $1/7$ | $0.\overline{001}$ | $2/3$ | $1/3$ |
+| $1/3$ | $0.\overline{01}$ | $1/2$ | $0$ |
+| $2/5$ | $0.\overline{0110}$ | $1/2$ | $1/4$ |
+| Space average | | $1/2$ | $1/4$ |
+
+The start $1/3$ gets the right answer $1/2$ for $g$ and the wrong answer $0$ for $h$: the exceptional set changes with the observable. The rationals together form a null set (manual derivation: cover the $j$-th rational by an interval of length $\varepsilon/2^j$; the total length is at most $\varepsilon$).
+
+**Every floating-point number is an exception.** Every double-precision number is a dyadic fraction $m/2^e$, and on $[0, 1)$ the floating-point evaluation of $2x \bmod 1$ is exact (doubling and subtracting $1$ never round). So a floating-point simulation is an exact shift of a dyadic fraction. Starting from $0.1$ the orbit lands exactly on $0$ at step $55$; from $\sqrt{2}/2$, at step $53$; from $\pi - 3$, at step $48$. It then stays at $0$ forever, and the time average of $g$ tends to $1$, not $1/2$. (Here $0.1$, $\sqrt{2}/2$ and $\pi - 3$ mean their nearest double-precision numbers.) Iterating the doubling map in floating point lands you exactly in the null set where the theorem is allowed to fail.
+
+**A start that “looks typical”.** To avoid floating point, generate the binary digits directly: take the first $10^6$ bits produced by the Python standard-library pseudo-random generator with seed $20261111$ as $b_1 b_2 \ldots$. This is one definite number, and the theorem does not promise that it lies outside the exceptional set; it is only an illustration:
+
+| $N$ | Zeros among the first $N$ digits | $A_N g(x)$ | $A_N g(x) - 1/2$ |
+| ---: | ---: | ---: | ---: |
+| $10$ | $6$ | $0.6$ | $0.1$ |
+| $10^2$ | $60$ | $0.60$ | $0.10$ |
+| $10^3$ | $492$ | $0.492$ | $-0.008$ |
+| $10^4$ | $5006$ | $0.5006$ | $0.0006$ |
+| $10^5$ | $50205$ | $0.50205$ | $0.00205$ |
+| $10^6$ | $499954$ | $0.499954$ | $-0.000046$ |
+
+The deviation does not shrink monotonically ($N = 10^5$ is further off than $N = 10^4$): the theorem speaks only of the limit and gives no rate.
+:::
+
+**Back to Lorenz: how far the theorem reaches.** To apply [@thm-coda-birkhoff-ergodic] to the Lorenz flow, one can take its time-$1$ map $T = \varphi_1$, but first one needs an invariant probability measure for which $T$ is ergodic. The existence of $\mu_{\mathrm{SRB}}$, and the mixing of the flow (mixing implies that $T$ is ergodic), are literature results from item 2 of [@rem-coda-lorenz-srb-literature]. Given those, the theorem yields convergence of time averages for $\mu_{\mathrm{SRB}}$-almost every start. But $\mu_{\mathrm{SRB}}$ lives on the attractor, and the attractor has zero volume (item 1: phase-space volume shrinks like $e^{-41t/3}$). The two rings in the “forget the start” card are not on the attractor, and a start picked at random in phase space is almost never on it. Why their time averages converge to the same value as well is exactly what an SRB measure adds to a general ergodic measure (hence the name “physical measure”), and that step remains a literature result.
+
+> What is forgotten is the starting point; what remains is the proportion.
 
 ### 3. The Geometric Interpretation of Déjà Vu: Fractal Transverse Sheets and Cross-Round Inner-Product Resonance {#sec-coda-deja-vu-fractal-dimension}
 
@@ -355,7 +425,7 @@ Because $S(n+1) = U(S(n)) \subseteq S(n)$ for every $n \in \mathbb{N}$, the sequ
    - Transcendence of $\theta^*$ via the Lindemann–Weierstrass theorem (if a nonzero algebraic $q$ satisfied $\cos q = q$, then $e^{iq}$ would satisfy a quadratic equation over $\overline{\mathbb{Q}}$, contradicting its transcendence), together with the continued-fraction theory of Pell's equation $m^2 - 2n^2 = \pm 1$ (for $\sqrt{2}$, the $\pm 1$ remainder and the best-approximation lower bound follow by a manual derivation from the Lean-verified [@thm-ch29-silver-pell-remainder] and [@thm-ch29-silver-best-approximation] of Chapter 29; what remains literature is their identification with continued-fraction convergents);
    - the splitting and inertia of primes in the Gaussian integers, solvability of the negative Pell equation $m^2 - p\,n^2 = -1$ for primes $p \equiv 1 \pmod 4$, and the Hilbert reciprocity law $\prod_{v \le \infty} (a, b)_v = +1$ ([@rem-ch29-pell-primes-hilbert-literature]); birational equivalence and genus-$1$ torus topology $\chi(T^2) = 0$ of the congruent-number elliptic curve $E_d : dy^2 = x^3 - x$ ([@rem-ch29-elliptic-torus-literature]), Hasse's theorem $|a_p| \le 2\sqrt{p}$ for elliptic curves over finite fields, Gauss's point-count formula and character-sum derivation for $y^2 = x^3 - x \pmod p$ ([@rem-ch29-hasse-gauss-literature], [@rem-ch29-gauss-character-application]), and the Sato–Tate theorem for non-CM elliptic curves over $\mathbb{Q}$ (Barnet-Lamb, Geraghty, Harris, and Taylor 2011, [@rem-ch29-arithmetic-geometry-literature]);
    - Descartes's polyhedral angular defect theorem $\sum_v \delta_v = 4\pi$, the Gauss–Bonnet theorem, the Poincaré–Brouwer Hairy Ball Theorem $\chi(S^{2n}) = 2$, and Adams's theorem (1960) on the parallelizability of $S^0, S^1, S^3, S^7$ ([@rem-coda-polyhedral-topology-literature], [@rem-hairy-ball-adams-literature]);
-   - The Lorenz strange attractor in continuous dynamical systems (Lorenz 1963, phase-space volume divergence $-(\sigma+1+\beta) = -41/3 < 0$, and the numerical Kaplan–Yorke dimension estimate $D_{\mathrm{KY}} \approx 2.06$), the ergodic Sinai–Ruelle–Bowen (SRB) physical invariant measure on the Lorenz attractor (Tucker 1999; Luzzatto–Melbourne–Pugh 2005), and the Poincaré Recurrence Theorem (Poincaré 1890, [@rem-coda-lorenz-srb-literature]), together with Meyer's uniform repetitivity theorem for regular model sets (1972), the 6D icosahedral projection of $\mathbb{Z}^6 \subset E_\parallel^3 \oplus E_\perp^3$ with its rhombic triacontahedron acceptance window $W$ ($30$ faces, $60$ edges, $32$ vertices, $6$ five-fold axes; Kramer & Neri 1984; Duneau & Katz 1985), Conway's Empire Effect in Penrose–icosahedral quasicrystal tilings (Grünbaum & Shephard 1987), and Binet's rational-slope asymptotic formula ([@rem-coda-quasicrystal-empire-literature]);
+   - The Lorenz strange attractor in continuous dynamical systems (Lorenz 1963, phase-space volume divergence $-(\sigma+1+\beta) = -41/3 < 0$, and the numerical Kaplan–Yorke dimension estimate $D_{\mathrm{KY}} \approx 2.06$), the ergodic Sinai–Ruelle–Bowen (SRB) physical invariant measure on the Lorenz attractor (Tucker 1999; Luzzatto–Melbourne–Paccaut 2005), and the Poincaré Recurrence Theorem (Poincaré 1890, [@rem-coda-lorenz-srb-literature]), together with Meyer's uniform repetitivity theorem for regular model sets (1972), the 6D icosahedral projection of $\mathbb{Z}^6 \subset E_\parallel^3 \oplus E_\perp^3$ with its rhombic triacontahedron acceptance window $W$ ($30$ faces, $60$ edges, $32$ vertices, $6$ five-fold axes; Kramer & Neri 1984; Duneau & Katz 1985), Conway's Empire Effect in Penrose–icosahedral quasicrystal tilings (Grünbaum & Shephard 1987), and Binet's rational-slope asymptotic formula ([@rem-coda-quasicrystal-empire-literature]);
    - The timeless Wheeler–DeWitt equation $H\mathbf{\Psi} = 0$ of canonical quantum gravity and the Page–Wootters (1983) conditional-time slicing mechanism ([@rem-ch29-wheeler-dewitt-page-wootters-literature]), together with Feynman's path-integral oscillatory stationary-phase principle $\delta S = 0$ ([@rem-ch29-feynman-stationary-phase-literature]), the computational complexity theorems of Aaronson ($\mathrm{PostBQP} = \mathrm{PP}$, 2005), Aaronson–Watrous ($\mathrm{P}_{\mathrm{CTC}} = \mathrm{PSPACE}$, 2009), Bennett–Bernstein–Brassard–Vazirani ($\Omega(2^{n/2})$ black-box query bound, 1997), Grigoriev–Schoenebeck (linear-degree Sum-of-Squares lower bound for random 3-XOR/3-SAT), Karmarkar (1984 interior-point method), Kasteleyn (1961 planar Pfaffian matching theorem), Impagliazzo–Paturi–Zane (1999, 2001 ETH/SETH and the Sparsification Lemma), the PPSZ $k$-SAT framework, and the October 2026 subexponential $2^{O(n\log\log n/\sqrt{\log n})}$ tensor-network preprints and ongoing community specification audit ([@rem-ch30-eth-subexponential-literature]), Lamb's vector identity, Kelvin's circulation theorem, Ladyzhenskaya's (1969) global regularity theorem for 2D Navier–Stokes, the 2026 analytical construction and external formalization of finite-time blow-up for forced 3D Navier–Stokes (Clay Statements C / D, [@rem-ch30-navier-stokes-forced-literature]), Kolmogorov's (1941) $k^{-5/3}$ cascade and dissipation microscale $\eta = (\nu^3/\varepsilon)^{1/4}$, Arnold's (1966) geodesic theorem on $\operatorname{SDiff}(M)$, and Tao's (2016) finite-time blow-up theorem for averaged 3D Navier–Stokes ([@rem-ch30-tao-arnold-literature]), as well as Haar-measure spherical isotropy and Landauer's $k_B T \ln 2$ erasure bound ([@rem-ch31-haar-isotropy-landauer-literature]), the Coffman–Kundu–Wootters (2000) and Osborne–Verstraete (2006) entanglement monogamy inequalities $\tau_{A|B}+\tau_{A|C}\le\tau_{A|BC}$ ([@rem-ch31-ckw-monogamy-literature]), Jacobson's (1995) thermodynamic horizon equation of state ([@rem-ch32-dirac-yang-mills-jacobson-literature]), Conway–Sloane's (1988) golden-field Icosian lattice $(\mathcal{I}, Q)\subset\mathbb{H}$ ($Q(q)=2(a+b)$) to $E_8$ root-lattice isometry ([@rem-ch32-icosian-e8-literature]), and the eight modern foundational unification programs surveyed in [@rem-ch32-eight-programs-literature].
 3. **Unresolved open conjectures (red `OPEN` badge, zero `lean` attributes)**:
    - The standard uniform Turing-machine complexity conjecture $\mathrm{P} \neq \mathrm{NP}$ ([@conj-p-neq-np]), the Clay Millennium unforced 3D incompressible Navier–Stokes global regularity conjecture (Statements A / B, [@conj-coda-navier-stokes-regularity]), Schanuel's conjecture and its application to the Dottie fixed point $\theta^*$ ([@conj-schanuel-dottie], together with Timothy Chow's conditional literature theorem that under Schanuel's conjecture $\theta^*$ lies outside the elementary closed field $\mathrm{EL}$ generated by $\pi$ and $e$), and the open problems cataloged in Appendix C, Section C.3.
@@ -448,7 +518,7 @@ This monograph consists of the **[Prelude](README.md)**, **Eight Parts (32 Chapt
             ┌─────────────────────────────────────────────────────────────────┐
             │ Part VIII: Causality, ETH, Fairness & Meta (Ch 29–32) → Coda    │
             │  • Polyhedral defect & Hairy Ball lit. • Pythagorean 4-tier arc │
-            │  • Concept Dictionary (A) • Clifford Sheet (B) • 439 Index (C)  │
+            │  • Concept Dictionary (A) • Clifford Sheet (B) • 440 Index (C)  │
             └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -471,7 +541,7 @@ Readers can navigate the book along four self-contained tracks tailored to their
 3. **Mathematical Logic, Number Theory, and Epistemology Track**:
    [Prelude](README.md) $\to$ Chapter 10 (Gram matrices and order independence) $\to$ Chapters 19–20 (discrete polyhedral facet cones and open-conjecture boundaries) $\to$ Chapters 21–24 (diagonal escape, Euler products, quaternion Diophantine norms, and cosine self-reference) $\to$ [Chapter 29](ch29-timeless-causality-and-gram-space.md)–[Chapter 32](ch32-unified-field-and-meta-unification.md) (the four-tier Pythagorean escape of number, timeless causality, the ETH horizon, fluid vortex filaments, quantum fairness, and meta-unification) $\to$ Coda (golden cut-and-project spatial attractors and [@thm-coda-fixed-point-anchor]).
 4. **Lean 4 Formal Verification and Kernel Audit Track**:
-   [Prelude](README.md) §Epistemic Contract $\to$ Chapters 25–28 (Part VII: line-by-line formal tour of `Cl3`, `PauliSymplectic`, `ZYZ`, and `FiniteRecordCosineObstruction`) $\to$ [Appendix B](appendix-b.md) $\to$ [Appendix C](appendix-c.md) (auditing all $227$ environment/media frozen theorems, $89$ auxiliary definitions, and $123$ inline declarations — $439$ unique locked declarations in total — at `trureturing@dev` commit [{commit}](trureturing:)).
+   [Prelude](README.md) §Epistemic Contract $\to$ Chapters 25–28 (Part VII: line-by-line formal tour of `Cl3`, `PauliSymplectic`, `ZYZ`, and `FiniteRecordCosineObstruction`) $\to$ [Appendix B](appendix-b.md) $\to$ [Appendix C](appendix-c.md) (auditing all $228$ environment/media frozen theorems, $89$ auxiliary definitions, and $123$ inline declarations — $440$ unique locked declarations in total — at `trureturing@dev` commit [{commit}](trureturing:)).
 
 ### Quick Register of the 41 Core Chapter Theorem Anchors in Parts VI–VIII (Chapters 21–32) {#sec-coda-part6-part7-register}
 
@@ -521,4 +591,4 @@ As a bridge between the closing three parts of the monograph and the complete le
 | **Chapter 32**<br/>Unified Field & Meta-Unification | T32.1 | `D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes` | The binary Zeckendorf finite automaton accepts a binary word iff `NoAdjacentOnes` holds |
 | **Chapter 32** | T32.2 | `D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null` | Every real quadratic form vanishing on all Minkowski null-cone vectors is a scalar multiple of `minkowski d` |
 
-Outside all spheres lies not emptiness, but **the unending act of measurement and counting itself**. Turn next to [Appendix A](appendix-a.md) for the complete dictionary translating conventional quantum mechanics into geometric language, [Appendix B](appendix-b.md) for the Clifford algebra and rotor cheat sheet, and [Appendix C](appendix-c.md) for the complete index of all $316$ formal environment and media `trureturing@dev` declarations ($439$ unique locked declarations including inline references).
+Outside all spheres lies not emptiness, but **the unending act of measurement and counting itself**. Turn next to [Appendix A](appendix-a.md) for the complete dictionary translating conventional quantum mechanics into geometric language, [Appendix B](appendix-b.md) for the Clifford algebra and rotor cheat sheet, and [Appendix C](appendix-c.md) for the complete index of all $317$ formal environment and media `trureturing@dev` declarations ($440$ unique locked declarations including inline references).
