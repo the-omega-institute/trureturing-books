@@ -411,7 +411,7 @@ Let $d$ be a finite index set, let $M_d(\mathbb{C})$ be the set of $d \times d$ 
 ::: proof
 Claim 1: effects span all matrices. Every positive semidefinite matrix becomes an effect after scaling down; every self-adjoint matrix is a difference of two positive semidefinite matrices (positive part minus negative part); every matrix can be written $H_1 + iH_2$ with $H_1, H_2$ self-adjoint. So two trace pairings that agree on effects agree on all matrices, and inserting the matrix units one by one gives $\rho = \sigma$.
 
-Existence in Claim 2 takes four steps, and the first three use only additivity.
+Existence in Claim 2 takes four steps, and the first three use only nonnegativity and finite additivity.
 
 (1) Real multiples. From $p(0) = p(0 + 0) = 2p(0)$ we get $p(0) = 0$; for $A \le B$, $p(B) = p(A) + p(B - A) \ge p(A)$, so $p$ is monotone on effects. Cutting an effect $E$ into $n$ pieces $E/n$, additivity gives $p\bigl(\tfrac{m}{n}E\bigr) = \tfrac{m}{n}\,p(E)$ for $m \le n$. For a real $t \in [0, 1]$, squeezing $t$ between rationals on both sides, monotonicity forces $p(tE) = t\,p(E)$. No continuity is assumed: monotonicity together with rational homogeneity pays for it.
 
@@ -452,7 +452,7 @@ $$
 E = \Bigl(\tfrac{1}{2} + \tfrac{\sqrt{2}}{4}\Bigr) P_{\vv{n}} + \Bigl(\tfrac{1}{2} - \tfrac{\sqrt{2}}{4}\Bigr) P_{-\vv{n}} .
 $$
 
-Here $p(P_{\vv{n}}) = \frac{1}{2}\bigl(1 + \vv{r}\cdot\vv{n}\bigr) = 0.8182$ and $p(P_{-\vv{n}}) = 0.1818$, and $0.8536 \times 0.8182 + 0.1464 \times 0.1818$ equals $29/40 = 0.725$ exactly. Both splittings give the same reading.
+Here $p(P_{\vv{n}}) = \frac{1}{2}\bigl(1 + \vv{r}\cdot\vv{n}\bigr) \approx 0.8182$ and $p(P_{-\vv{n}}) \approx 0.1818$. Using the unrounded values, both splittings give $29/40 = 0.725$ exactly.
 
 The hemisphere frame function cannot do this. Let $f(P_{\vv{n}}) = 1$ if $\vv{n}$ lies in the northern hemisphere ($n_z > 0$; on the equator decide by $n_x > 0$, then by $n_y > 0$), and $f(P_{\vv{n}}) = 0$ otherwise. Every antipodal pair satisfies $f(P_{\vv{n}}) + f(P_{-\vv{n}}) = 1$, so $f$ is a legitimate frame function on projections. If some $p$ satisfying the hypotheses of the theorem agreed with $f$ on projections, the theorem would make $p$ a trace pairing, hence linear on effects, and the two splittings above would have to give the same $p(E)$. But the first gives $\frac{1}{2}\bigl(f(P_{+x}) + f(P_{+z})\bigr) = \frac{1}{2}(1 + 1) = 1$ and the second $0.8536 \times 1 + 0.1464 \times 0 = 0.8536$. The contradiction shows that $f$ does not extend to an additive probability on effects: effects tie different measurement axes together, which the two-dimensional projection lattice cannot do.
 :::
