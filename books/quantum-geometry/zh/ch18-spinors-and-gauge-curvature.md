@@ -9,6 +9,10 @@
 
 章首题记点出了连接这两个问题的几何线索：当我们将“一维幂等判别线（粒子）”与“二维双矢量相位旋转（波与面积）”放到同一个时空网络上考察时，手性旋量耦合与规范联络曲率便显现为同一场论骨架的两个侧面。遵循全书的三层认识论契约，本章将从经 Lean 内核验证的二阶反交换对（[@lemma-qubit-clifford-pair]）与协变交换子恒等式（[@prop-covariant-commutator]）出发，严格证明任意命名图选定生成树上的 $U(1)$ 相位输运定理（[@thm-tree-phase-transport]）及有限图锚定回路相位分类定理（[@cor-anchored-phase-classification]），同时在文献注记中精确界定四维狄拉克方程颤动频率与非阿贝尔连续规范场的适用边界。
 
+::: {.figure src="ch18-overview"}
+**图 18。** 本章地图：第 I 栏，二分量手性模型 $H = pZ + mX$ 的两个分量——蓝色的上分量 $Z = +1$ 与橙色的下分量 $Z = -1$——各自只带对角项 $\pm p$，质量 $m$ 是两者之间唯一的连线；第 II 栏，格点中品红的小方格沿 $0 \to 1 \to 2 \to 3 \to 0$ 绕行一圈；第 III 栏，例题的单个方格在紫色的规范 $g = (1, i, -1, -i)$ 下，四条边中点的相位指针读作 $(i, i, i, -1)$，中心品红的回路相位仍是 $i$（[@cor-anchored-phase-classification]）。
+:::
+
 ## 手性分解与反交换的手算起点 {#sec-chiral-factorization}
 
 让我们从保罗·狄拉克（Paul Dirac）在 1928 年面对的那道代数难题算起。在相对论力学中，一颗静止质量为 $m$、动量为 $p$ 的自由粒子满足二次色散关系 $E^2 = p^2 + m^2$。然而，量子演化方程对时间是一阶导数——要想写出不含根号 $\sqrt{p^2 + m^2}$ 的一阶线性哈密顿量 $H = p\alpha + m\beta$，我们需要让一次式 $p\alpha + m\beta$ 的平方精确还原出二次平方和 $p^2 + m^2$：
@@ -18,8 +22,6 @@ $$
 $$
 
 如果 $\alpha$ 与 $\beta$ 只是普通的实数或复数，交叉项 $2pm\alpha\beta$ 永远消不掉（除非 $p=0$ 或 $m=0$）。怎样才能在保留 $\alpha^2 = I$ 与 $\beta^2 = I$ 的同时，让交叉项 $\alpha\beta + \beta\alpha$ 恒等于零？唯一出路是放弃乘法交换律，令 $\alpha$ 与 $\beta$ 成为一对**反交换**（anticommuting）的对合算子：$\alpha\beta = -\beta\alpha$！
-
-![手性耦合与反交换矩阵、小方格协变平行移动交换子，以及选定生成树上的闭合回路相位规范分类](../assets/fig-18-dirac-spinor-gauge-holonomy.svg)
 
 在有限维复矩阵代数中，实现这一反交换对合关系的最小忠实载体，正是我们在[第一章](ch01-measurement.md)已经结识的单量子比特 $2\times 2$ 复矩阵代数 $\operatorname{QubitMatrix} = M_2(\mathbb{C})$ 中的泡利对 $\operatorname{qubitX}$ 与 $\operatorname{qubitZ}$。此处务必分清三个不同层次的维数：承载旋量态的复希尔伯特空间 $\mathbb{C}^2$ 具有**复维数 $2$**（对应 $4$ 个实振幅坐标）；生成空间旋转的李代数 $\mathfrak{su}(2) \simeq \mathbb{R}^3$（由无迹反厄米泡利生成元张成）具有**实维数 $3$**；而全部 $2\times 2$ 复矩阵构成的矩阵代数 $\operatorname{QubitMatrix} = M_2(\mathbb{C})$ 则具有**复维数 $4$** 与**实维数 $8$**（作为实代数同构于三维欧氏空间的 $8$ 维克利福德代数 $\mathrm{Cl}_{3,0}(\mathbb{R})$）。
 
@@ -65,6 +67,10 @@ $$
 由此当场读出本征能量平方为 $E^2 = 25$，即正负能级 $E = \pm 5$（恰为勾股三元组 $3^2 + 4^2 = 5^2$）！
 
 观察 $H = \begin{pmatrix} 3 & 4 \\ 4 & -3 \end{pmatrix}$ 的矩阵结构：当质量 $m = 0$ 时，$H = 3Z = \operatorname{diag}(3, -3)$ 是对角矩阵，上分量（$Z = +1$ 手性本征模）与下分量（$Z = -1$ 手性本征模）各自独立传播、互不耦合；一旦引入非零质量 $m = 4$，副对角线上的算子 $mX$ 便在两个手性分量之间建立起非对角线性耦合（耦合角频率尺度为 $m/\hbar$）。需要严格区分**算子耦合**与**特定量子态的时间演化**：对于 $H = 3Z + 4X$ 的能量本征态（例如对应 $E = +5$ 的归一化本征矢 $\frac{1}{\sqrt{5}}(2, 1)^\top$ 与对应 $E = -5$ 的本征矢 $\frac{1}{\sqrt{5}}(1, -2)^\top$），左、右手性分量已被锁定为固定比例的平稳叠加，时间演化仅乘以全局相位 $e^{\mp 5it}$，其手性分量概率（分别为 $4/5$ 与 $1/5$）保持恒定不变；只有当系统初态制备在单一手性基矢（如 $(1, 0)^\top$，即正负能本征态的相干叠加）时，两个手性分量的布居数才会随时间发生周期振荡。在此教学模型中，我们只作精确的 $2\times 2$ 厄米矩阵演算，既不把 $m$ 无条件解释为随机测量反射率，也不把这一二维代数模型等同于完整的四维狄拉克旋量动力学。
+:::
+
+::: {.figure src="ch18-chiral-levels"}
+**质量把 $\pm 3$ 两个手性能级推开成 $\pm 5$。** 左列 $m = 0$：$E = +3$ 的横条全蓝（上分量 $Z = +1$），$E = -3$ 的全橙（下分量 $Z = -1$）；右列 $m = 4$：两条横条被推到 $E = \pm 5$，$+5$ 的横条 $4/5$ 蓝、$1/5$ 橙，$-5$ 的横条反过来。每个能量本征态都成了两个手性分量按固定比例的叠加。
 :::
 
 ::: {.remark #rem-dirac-zitterbewegung-literature title="四维狄拉克方程与颤动频率辨析（文献结果，未在本书形式化）"}
@@ -149,6 +155,10 @@ $$
 - 由 $T$ 诱导的简单支撑图 $\operatorname{treeSupport}(s, t, T)$ 是一棵连通无圈树（`IsTree`），而 $T$ 之外的弦边 $e \notin T$ 则完全允许包含平行重边与自环！
 
 在选定生成树 $T$ 与根 $r$ 后，从根 $r$ 到任意顶点 $a \in V$ 在 $\operatorname{treeSupport}(s, t, T)$ 中存在唯一一条简单树路径 $\operatorname{rootPath}(ht, r, a)$。沿着这条唯一树路径把每一步的边相位（顺向乘 $u(e)$、逆向乘 $u(e)^{-1}$）累乘起来，就得到了顶点 $a$ 相对于根 $r$ 的**树输运相位** `rootPhase` $\operatorname{rootPhase}(ht, r, u, a) \in \operatorname{Circle}$。下面的定理一次性确立了树输运相位的六大核心性质。
+
+::: {.figure src="ch18-root-path"}
+**树输运相位沿唯一一条树路径连乘。** 青色的是生成树 $T$，灰色虚线是树外的弦，其中有一条自环、一条与树边平行的重边。从根 $r$ 到 $a$ 的粗青色路径经过 $e_1$、$e_2$、$e_3$：顺着边的箭头走乘 $u(e)$，逆着箭头走（$e_2$）乘 $u(e)^{-1}$，得到 $\operatorname{rootPhase}(a) = u(e_1)\,u(e_2)^{-1}\,u(e_3)$。
+:::
 
 ::: {.theorem #thm-tree-phase-transport title="选定树上的相位输运" lean="D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport"}
 设 $V, E$ 为任意类型，$s, t : E \to V$ 为起点与终点映射，$T \subseteq E$ 为选定边集，$ht : \operatorname{NamedSpanningTree}\;s\;t\;T$ 为命名生成树证明，$r \in V$ 为选定根顶点。则对单位圆群 $\operatorname{Circle}$ 上的边相位场，以下六项性质同时成立：

@@ -9,6 +9,10 @@ In the [previous chapter](ch17-lorentz-geometry.md), we saw how vanishing on the
 
 The opening epigraph points to the common geometric thread linking both questions: when one-dimensional idempotent lines (particles) and two-dimensional bivector phase rotations (waves and areas) are placed on a network, chiral spinor coupling and gauge curvature emerge as two facets of a field. Following our three-tier epistemological contract, this chapter begins with the Lean-verified two-dimensional anticommuting Weyl pair ([@lemma-qubit-clifford-pair]) and the algebraic covariant commutator identity ([@prop-covariant-commutator]), then proves the exact spanning-tree phase transport theorem ([@thm-tree-phase-transport]) and anchored loop-phase classification theorem ([@cor-anchored-phase-classification]) for abelian $U(1)$ (`Circle`) gauge fields on named graphs, while keeping four-dimensional Dirac Zitterbewegung and continuum non-abelian gauge theory within explicitly demarcated literature remarks.
 
+::: {.figure src="ch18-overview"}
+**Figure 18.** A map of the chapter. Panel I: the two components of the two-component chiral model $H = pZ + mX$, the blue upper component $Z = +1$ and the orange lower component $Z = -1$, each carry only their diagonal term $\pm p$, and the mass $m$ is the only link between them. Panel II: a magenta plaquette in the lattice, walked once around $0 \to 1 \to 2 \to 3 \to 0$. Panel III: the single square of the worked example under the violet gauge $g = (1, i, -1, -i)$; the phase pointers at the edge midpoints read $(i, i, i, -1)$, and the magenta loop phase at the centre is still $i$ ([@cor-anchored-phase-classification]).
+:::
+
 ## Chiral decomposition and explicit anticommutation {#sec-chiral-factorization}
 
 Begin with the algebraic puzzle Paul Dirac faced in 1928. A relativistic particle of rest mass $m$ and momentum $p$ obeys the quadratic dispersion relation $E^2 = p^2 + m^2$. Quantum time evolution, however, is first-order in time: to build a linear first-order Hamiltonian $H = p\alpha + m\beta$ free of the square root $\sqrt{p^2 + m^2}$, the square of the linear operator $p\alpha + m\beta$ must reproduce the sum of squares $p^2 + m^2$ identically:
@@ -18,8 +22,6 @@ $$
 $$
 
 If $\alpha$ and $\beta$ were ordinary commuting numbers, the cross term $2pm\alpha\beta$ could never vanish for nonzero $p$ and $m$. To keep $\alpha^2 = I$ and $\beta^2 = I$ while annihilating $\alpha\beta + \beta\alpha = 0$, $\alpha$ and $\beta$ must **anticommute**: $\alpha\beta = -\beta\alpha$.
-
-![Chiral coupling and anticommuting matrices, plaquette covariant transport commutator, and loop-phase gauge classification on a selected spanning tree](../assets/fig-18-dirac-spinor-gauge-holonomy.svg)
 
 In finite-dimensional complex matrix algebra, the smallest faithful carrier of an anticommuting self-adjoint involution pair is the $2\times 2$ qubit matrix algebra $\operatorname{QubitMatrix} = M_2(\mathbb{C})$ equipped with $\operatorname{qubitX}$ and $\operatorname{qubitZ}$ from [Chapter 1](ch01-measurement.md). Keep three dimensions distinct: the spinor state carrier $\mathbb{C}^2$ has **complex dimension $2$** (and **real dimension $4$**); the rotation Lie algebra $\mathfrak{su}(2) \simeq \mathbb{R}^3$ spanned by traceless skew-Hermitian Pauli generators has **real dimension $3$**; and the full $2\times 2$ matrix algebra $\operatorname{QubitMatrix} = M_2(\mathbb{C})$ has **complex dimension $4$** and **real dimension $8$** (isomorphic as a real algebra to the $8$-dimensional Clifford algebra $\mathrm{Cl}_{3,0}(\mathbb{R})$).
 
@@ -65,6 +67,10 @@ $$
 Thus $E^2 = 25$, giving energy eigenvalues $E = \pm 5$ (the Pythagorean triple $3^2 + 4^2 = 5^2$).
 
 Inspect the structure of $H = \begin{pmatrix} 3 & 4 \\ 4 & -3 \end{pmatrix}$: at $m = 0$, $H = 3Z = \operatorname{diag}(3, -3)$ is diagonal and the two chiral eigenstates of $Z$ propagate independently without coupling; turning on $m = 4$ introduces the off-diagonal operator $mX$ that linearly couples the two chiral components (with coupling angular frequency scale $m/\hbar$). Keep **operator coupling** distinct from **mandatory state oscillation**: an energy eigenstate of $H = 3Z + 4X$ — such as $\frac{1}{\sqrt{5}}(2, 1)^\top$ for $E = +5$ or $\frac{1}{\sqrt{5}}(1, -2)^\top$ for $E = -5$ — is a stationary coherent superposition of both chiral components that evolves purely by the phase factor $e^{\mp 5it}$, keeping its chiral probabilities ($4/5$ and $1/5$) constant in time; coherent oscillations between the two chiral populations occur when the state is initialized in a definite-chirality basis vector (such as $(1, 0)^\top$, which superposes the $E = +5$ and $E = -5$ eigenstates). Here we treat $H$ strictly as an exact $2\times 2$ Hermitian matrix model: we do not assign an unconditional stochastic reflection rate to measurements, nor do we conflate this two-dimensional pedagogical matrix with full four-dimensional Dirac dynamics.
+:::
+
+::: {.figure src="ch18-chiral-levels"}
+**The mass pushes the two chiral levels $\pm 3$ apart to $\pm 5$.** Left column, $m = 0$: the bar at $E = +3$ is all blue (upper component, $Z = +1$) and the bar at $E = -3$ all orange (lower component, $Z = -1$). Right column, $m = 4$: the bars are pushed to $E = \pm 5$; the $+5$ bar is $4/5$ blue and $1/5$ orange, and the $-5$ bar the other way round. Each energy eigenstate is now a fixed-ratio mixture of the two chiral components.
 :::
 
 ::: {.remark #rem-dirac-zitterbewegung-literature title="Four-Dimensional Dirac Equation and Zitterbewegung Frequencies (Literature result, not formalized in this book)"}
@@ -149,6 +155,10 @@ Because $g$ can rotate the phase at each endpoint independently, the phase on a 
 - The simple support graph $\operatorname{treeSupport}(s, t, T)$ is a connected acyclic tree (`IsTree`), while non-tree edges $e \notin T$ outside $T$ may freely include parallel edges and self-loops.
 
 In $\operatorname{treeSupport}(s, t, T)$, every vertex $a \in V$ is connected to the root $r$ by a unique simple tree path $\operatorname{rootPath}(ht, r, a)$. Multiplying the edge phases along this unique tree path (multiplying by $u(e)$ along forward steps and $u(e)^{-1}$ along reverse steps) defines the **root-to-vertex tree phase** `rootPhase` $\operatorname{rootPhase}(ht, r, u, a) \in \operatorname{Circle}$. Our next theorem establishes all six fundamental properties of tree phase transport.
+
+::: {.figure src="ch18-root-path"}
+**The tree phase multiplies along the one tree path.** Cyan is the spanning tree $T$; the grey dashed edges are the chords outside it, among them a self-loop and an edge parallel to a tree edge. The thick cyan path from the root $r$ to $a$ runs through $e_1$, $e_2$, $e_3$: walking with an edge's arrow multiplies by $u(e)$, walking against it ($e_2$) by $u(e)^{-1}$, so $\operatorname{rootPhase}(a) = u(e_1)\,u(e_2)^{-1}\,u(e_3)$.
+:::
 
 ::: {.theorem #thm-tree-phase-transport title="Selected-tree phase transport" lean="D5/S3/Observer/AgencyHolonomy/NamedTreePhaseTransport.selected_tree_transport"}
 Let $V$ and $E$ be arbitrary types, $s, t : E \to V$ source and target maps, $T \subseteq E$ a selected subset of edges, $ht : \operatorname{NamedSpanningTree}\;s\;t\;T$ a named spanning tree, and $r \in V$ a root vertex. For edge phase fields valued in $\operatorname{Circle} = U(1)$, all six properties hold simultaneously:
