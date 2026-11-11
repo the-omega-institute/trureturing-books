@@ -473,7 +473,7 @@ $$
 :::
 
 ::: {.film src="002-pairwise-born"}
-**两子丈量：从一对箭头到玻恩权重（约 100 秒）。** 两支相隔 $60^\circ$ 的箭头由平行四边形的两条对角线读出夹角（[@thm-parallelogram-norm-law]）；让 $A$ 自己当轴，垂足 $C$ 成了 $B$ 落在 $A$ 上的青色影子 $\cos\theta$；把影子从 $[-1, 1]$ 压进 $[0, 1]$，就是权重 $\cos^2(\theta/2)$（[@thm-born-modulus-square]）；只有平方能让快门与它的补分完全部权重（[@thm-born-probability-skeleton]）；最后环境记下分支，箭头缩成球内竖轴上的一截短线（[@thm-nonselective-marginal]）。
+**两子丈量：从一对箭头到玻恩权重（1 分 26 秒）。** 两支相隔 $60^\circ$ 的箭头由平行四边形的两条对角线读出夹角（[@thm-parallelogram-norm-law]）；让 $A$ 自己当轴，垂足 $C$ 成了 $B$ 落在 $A$ 上的青色影子 $\cos\theta$；把影子从 $[-1, 1]$ 压进 $[0, 1]$，就是权重 $\cos^2(\theta/2)$（[@thm-born-modulus-square]）；只有平方能让快门与它的补分完全部权重（[@thm-born-probability-skeleton]）；最后环境记下分支，箭头缩成球内竖轴上的一截短线（[@thm-nonselective-marginal]）。
 :::
 
 砍掉了冗余的第 3 点 $C$，看清了相融垂足 $\vv{c} = (\vv{a}\cdot\vv{b})\vv{a}$ 与半角余弦平方 $\cos^2(\theta/2)$ 的几何真相之后，我们的目光自然落到了这章所有公式里反复出现的那把标尺本身——满足 $P^2 = P$ 的**幂等投影算子**。为什么“测量一次”和“说出一个概念”乃至“感知到一秒钟的经典时间流逝”，在底层全都是同一个方程 $P^2 = P$？让我们进入[第三章](ch03-projectors-and-duality.md)。
