@@ -64,20 +64,22 @@ $$
 
 ## 宽度三桥图的秩与割容量 {#sec-bridge-flow-cut}
 
-现在我们来数一数：要想把 $\operatorname{flow}(M, N) = \sum_{r=0}^2 M_r \otimes N_r$ 从左输入端 $(\operatorname{Fin} b \times \operatorname{Fin} c)$ 到右输出端 $(\operatorname{Fin} a \times \operatorname{Fin} d)$ 的信息通道彻底切断，一共有哪几道候选切口（cuts）？
+现在我们来数一数：源码用哪三项割容量上界，来约束 $\operatorname{flow}(M, N) = \sum_{r=0}^2 M_r \otimes N_r$ 从左输入端 $(\operatorname{Fin} b \times \operatorname{Fin} c)$ 到右输出端 $(\operatorname{Fin} a \times \operatorname{Fin} d)$ 的信息通道的秩？
 
 1. **左外边界割（行空间瓶颈）**：矩阵 $\operatorname{flow}(M, N)$ 只有 $|\operatorname{Fin} a \times \operatorname{Fin} d| = ad$ 行，因此其秩绝不可能超过 $ad$；
 2. **右外边界割（列空间瓶颈）**：矩阵 $\operatorname{flow}(M, N)$ 只有 $|\operatorname{Fin} b \times \operatorname{Fin} c| = bc$ 列，因此其秩绝不可能超过 $bc$；
 3. **中间三桥内部割（跨桥瓶颈）**：对每个桥指标 $r \in \operatorname{Fin} 3$，$M_r \in M_{a\times b}(\mathbb{C})$ 的秩至多为 $a$，$N_r \in M_{d\times c}(\mathbb{C})$ 的秩至多为 $c$，故单个克罗内克积 $M_r \otimes N_r$ 的秩至多为 $ac$；将 $r = 0, 1, 2$ 三路相加，由矩阵秩的次可加性知总秩至多为 $3ac$。
 
-把这三道切口的容量取最小值，就是 Lean 模块中定义的**离散量子最小割容量** `QMinCut`：
+把源码采用的这三项割容量上界取最小值，就是 Lean 模块中定义的**离散量子最小割容量** `QMinCut`：
 
 $$
 \operatorname{QMinCut}(a, b, c, d) = \min\bigl(3ac,\, \min(ad, bc)\bigr) \in \mathbb{N}.
 $$
 
+一般维数下，图中另有容量为 $3bd$ 的第四道割；当 $a \le b$ 且 $c \le d$ 时，$3bd \ge 3ac$，这一项冗余。
+
 ::: {.figure src="ch19-three-cuts"}
-**切断宽度三桥图只有三道候选割，最小割取三者中最小的。** 取 $(a, b, c, d) = (2, 3, 2, 3)$：上面的虚线横切腿 $a$、$d$，容量 $ad = 6$；下面的虚线横切腿 $b$、$c$，容量 $bc = 6$；斜着的灰色虚线切过腿 $a$、三条桥与腿 $c$，容量 $3ac = 12$。两道品红的外割并列最小，$\operatorname{QMinCut} = 6$。
+**图中画出源码采用的三项割容量上界，QMinCut 取三者中最小的。** 取 $(a, b, c, d) = (2, 3, 2, 3)$：上面的虚线横切腿 $a$、$d$，容量 $ad = 6$；下面的虚线横切腿 $b$、$c$，容量 $bc = 6$；斜着的灰色虚线切过腿 $a$、三条桥与腿 $c$，容量 $3ac = 12$。两道品红的外割并列最小，$\operatorname{QMinCut} = 6$。
 :::
 
 下面的命题证明了：无需任何额外参数限制，对一切自然数 $a, b, c, d \in \mathbb{N}$，宽度三桥图的量子最大流永远不超过这一最小割容量。
