@@ -17,6 +17,10 @@
 
 ![欧氏圆与闵氏双曲线度规对照、光锥零线与双曲旋转器，以及世界线分段固有时与零锥刚性定理](../assets/fig-17-lorentz-boost-lightcone.svg)
 
+::: {.viz src="rapidity-lightcone" preset="circle" height="500"}
+**转动走圆，推动走双曲线。** 同一个事件 $v = (5, 3)$：品红的点被转动，沿品红的圆 $t^2 + x^2 = 34$ 走，很快穿出白色的光锥；青色的点被推动，沿青色的双曲线 $t^2 - x^2 = 16$ 走，贴着光锥却跨不过去（[@thm-hyperbolic-norm]）。
+:::
+
 在写出任何物理坐标变换之前，我们先在 Lean 的 `BogoliubovNormConservation` 模块中核实这条支撑一切双曲旋转与玻戈留波夫（Bogoliubov）压缩变换的实分析恒等式。
 
 ::: {.theorem #thm-hyperbolic-norm title="实双曲系数保范数" lean="D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation"}
@@ -67,6 +71,10 @@ $$
 在原坐标系中，事件 $v = (5, 3)^\top$ 的闵可夫斯基二次型间隔为 $t^2 - x^2 = 5^2 - 3^2 = 25 - 9 = 16$；在双曲变换后的共动坐标 $(4, 0)^\top$ 中，空间位移归零，间隔化为纯粹的共动固有时平方 $\tau^2 = 4^2 - 0^2 = 16$，从而固有时恰为 $\tau = 4$！
 
 在部分物理教材中，常有人引入辅助角 $\theta \in (-\pi/2, \pi/2)$ 并令 $\sin\theta = \beta = 3/5$，从而写出 $\cos\theta = \sqrt{1 - \beta^2} = 1/\gamma = 4/5$。需要严格说明的是：这种三角代换仅仅是利用 $|\beta| < 1$ 对速度参数所作的代数重写，绝不意味着可以把保持 $t^2 - x^2$ 不变的闵可夫斯基双曲变换误认作保持 $t^2 + x^2$ 不变的欧氏圆旋转。
+:::
+
+::: {.viz src="rapidity-lightcone" preset="boost" height="500"}
+**η = ln 2 把 (5, 3) 推到 (4, 0)。** 琥珀色的点沿青色双曲线 $\tau = 4$ 滑到时间轴上，这时 $\cosh\eta = 5/4$、$\sinh\eta = 3/4$；琥珀色的两根轴像剪刀一样向光锥合拢，灰色虚线是它们原来的位置。
 :::
 
 ## 光锥零线与空间限制 {#sec-null-cone-rigidity}
@@ -128,6 +136,10 @@ $$
 
 请细读 [@lemma-null-cone-spatial] 的证明机制：为什么光锥这一圈“零值边界”能够反过来管住纯空间向量 $(0, w)$？因为任何一根空间向量 $w$，只要在时间方向上垫起与之等长的光程 $\pm\norm{w}$，就会精确踩在未来光锥 $(\norm{w}, w)$ 与过去光锥 $(-\norm{w}, w)$ 这两条零线上！未来与过去两条零线的对称加减，就如同一把双向卡尺，将时空交叉项 $\operatorname{polar}_S((1,0),(0,w))$ 夹死为 $0$，并把空间度规强行绑定在时间刻度 $S(1,0)$ 的相反数上。
 
+::: {.viz src="rapidity-lightcone" preset="caliper" height="500"}
+**零线卡尺。** 琥珀色的空间位移 $(0, w)$ 向上、向下各垫起 $|w|$，两支白色箭头 $(\pm|w|, w)$ 正好落在未来与过去的光锥线上，$t^2 - x^2 = 0$；虚线菱形的两条对角线是 $2(0, w)$ 与 $2|w|(1, 0)$（[@lemma-null-cone-spatial]）。
+:::
+
 ## 洛伦兹变换与尺度归一化 {#sec-lorentz-normalization}
 
 一旦空间限制 $S(0, w)$ 与时空交叉极化 $\operatorname{polar}_S((1, 0), (0, w))$ 均由 [@lemma-null-cone-spatial] 锁定，任意一般时空向量 $v = (t, w) = t(1, 0) + (0, w)$ 上的二次型取值便不再有任何自由逃逸的余地。
@@ -166,6 +178,14 @@ $$
 
 要想由此推出严格的洛伦兹间隔不变性 $\operatorname{minkowski}_d(Bv) = \operatorname{minkowski}_d(v)$，必须**额外独立施加尺度归一化条件** $\operatorname{minkowski}_d(Be_0) = 1$（在物理上对应于运动方向垂直横尺的长度标定或标准原子钟单位固有时的归一化）。
 
+::: {.viz src="rapidity-lightcone" preset="cone" height="500"}
+**推动下光锥不动。** $\eta$ 从 $-0.6$ 扫到 $1$：白色珠子只沿白色光锥滑动，右边一串挤向原点、左边一串散开，没有一颗离开这两条线；琥珀色的点沿青色双曲线走，灰色网格被压成菱形。
+:::
+
+::: {.viz src="rapidity-lightcone" preset="scale" height="500"}
+**乘上比例 k：光锥保住，刻度没保住。** $k = 1.5$、$\eta = \ln 2$：白色珠子仍在光锥上，琥珀色的点却从青色的 $\tau = 4$ 落到青色虚线 $\tau = 6$ 上，单位刻度落在 $\tau = 1.5$ 上；差的正是因子 $\operatorname{minkowski}_1(kBe_0) = k^2$（[@prop-null-cone-rigidity]）。
+:::
+
 > 光锥零线锁死度规的骨架形状，而单位时钟标定最后那一分比例刻度；拆开这两步，狭义相对论就不再有任何神秘的“时空魔法”。
 
 ::: {.remark #rem-lorentz-rotor-literature title="双曲旋转器与克利福德时空代数（文献结果，未在本书形式化）"}
@@ -199,6 +219,10 @@ $$
 \Delta\tau = \sqrt{q(\Delta v)} = \sqrt{\Delta t^2 - \norm{\Delta w}^2} \le \Delta t,
 $$
 其中当且仅当空间位移非零（$\Delta w \neq 0$，一维空间中 $\Delta x \neq 0$）时取**严格不等号** $\Delta\tau < \Delta t$（即“运动时钟变慢”的几何投影效应），而在原地静止世界线（$\Delta w = 0$）上取**等号** $\Delta\tau = \Delta t$；光子沿 $\Delta w \neq 0$ 且 $q(\Delta v) = 0$ 的非零光锥零线传播（$\Delta\tau = 0$），对应 $\eta \to \pm\infty$ 的奇异极限，不存在任何属于光子的静止惯性观察系（因而不能说“在光子看来时间停滞或空间缩成一点”）。参见 R. P. Feynman, R. B. Leighton & M. Sands, *The Feynman Lectures on Physics*, Vol. I, chs. 15–17 (Addison–Wesley, 1963)；以及 D. Hestenes, *Space-Time Algebra* (Gordon and Breach, 1966)。
+:::
+
+::: {.viz src="rapidity-lightcone" preset="light" height="500"}
+**沿光锥走，固有时为零。** 把折返点 $A$ 拖到 $(5, 5)$：青色折线的两段都贴着白色菱形的边，$t^2 - x^2 = 0$，一个刻度也没有，$\tau = 0$；白色粗线（静止世界线）走满 10 个刻度。
 :::
 
 ## 世界线分段与固有时 {#sec-proper-time-segments}
@@ -252,6 +276,18 @@ $$
 $$
 
 逐段 $q$ 不变性只保证“所有惯性观察者算出的 $\tau(\gamma_{\mathrm{bent}})$ 都等于 $8$、算出的 $\tau(\gamma_{\mathrm{rest}})$ 都等于 $10$”，绝不意味着连接同一对时空端点的不同路径具有相等的固有时！在闵可夫斯基度规下，空间位移项带负号 $-\norm{\Delta w}^2$，任何偏离直线惯性轨迹的空间往返都会**削减**而非增加累积固有时。极端情形下，沿光锥零线传播的位移 $v_{\mathrm{null}} = (1, 1)$ 满足 $q(1, 1) = 1^2 - 1^2 = 0$（$\Delta\tau = 0$），光子处于零锥边界上，不具备任何类时静止参考系。
+:::
+
+::: {.viz src="rapidity-lightcone" preset="twins" height="500"}
+**折线 4 + 4 = 8，静止 10。** 折返点 $A$ 从 $(5, 0)$ 移到 $(5, 3)$：青色折线上的刻度从 10 个减到 8 个（每段 4 个），白色粗线（静止世界线）始终 10 个；去程的每个刻度都落在以 $O$ 为心的一条淡青色双曲线上。
+:::
+
+::: {.viz src="rapidity-lightcone" preset="frames" height="500"}
+**换参考系，仍是 8 与 10。** 推到去程旅行者的参考系（$\eta = \ln 2$）：所有事件沿淡青色双曲线滑动，去程变成竖直的 $(4, 0)$，回程变成 $(8.5, -7.5)$，两条世界线都歪了，刻度数却一个不变。
+:::
+
+::: {.viz src="rapidity-lightcone" height="560"}
+快度与光锥的完整实验室：对照、推动、卡尺、世界线四个场景共用一条时间轴；绿色框只给本章用 Lean 验证的三条结论（[@thm-hyperbolic-norm]、[@lemma-null-cone-spatial]、[@prop-null-cone-rigidity]）。
 :::
 
 至此，狭义相对论的度规骨架已完全显影：双曲恒等式 $|\cosh r|^2 - |\sinh r|^2 = 1$（[@thm-hyperbolic-norm]）刻画了单位双曲线上的保范变换，而光锥零集消失条件则通过 [@lemma-null-cone-spatial]、[@prop-null-cone-rigidity] 与 [@cor-null-cone-proportionality] 将时空二次型严格锁定为 $\operatorname{minkowski}_d$ 的标量倍。在下一章（[狄拉克旋量与规范场](ch18-spinors-and-gauge-curvature.md)）中，我们将进一步对这一定号度规作“一阶矩阵开方”，看看反交换泡利矩阵与图上的闭合回路相位如何编织出旋量与规范曲率的几何图景。
