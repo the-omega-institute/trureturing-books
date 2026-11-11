@@ -53,10 +53,10 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十九章 | 第一层末 | `timeless-causal-crystal` · `crystal` |
 | 第二十九章 | 第四层末 | `timeless-causal-crystal` · `window` |
 | 第二十九章 | 定理 `thm-ch29-gram-rigidity-and-pell` 之后 | `timeless-causal-crystal` 完整实验室 |
-| 第三十章 | ETH 一节第 2 点末 | `eth-horizon-crossover` · `bridge` |
+| 第三十章 | ETH 一节 · 1 末（张量关联场） | `eth-horizon-crossover` · `bridge` |
 | 第三十章 | ETH 一节末 | `eth-horizon-crossover` · `atoms`，随后完整实验室 |
-| 第三十章 | 纳维—斯托克斯一节第 1 点末（兰姆恒等式） | `navier-stokes-p-np` · `vortex` |
-| 第三十章 | 猜想 `conj-coda-navier-stokes-regularity` 之前 | `navier-stokes-p-np` · `runaway` |
+| 第三十章 | 纳维—斯托克斯一节 · 1 末（兰姆恒等式） | `navier-stokes-p-np` · `vortex` |
+| 第三十章 | 文献注记 `rem-ch30-navier-stokes-forced-literature` 之后、猜想 `conj-coda-navier-stokes-regularity` 之前 | `navier-stokes-p-np` · `runaway` |
 | 第三十章 | 定理 `thm-coda-quadratic-advection-no-closure` 的证明之后 | `navier-stokes-p-np` · `mixed` |
 | 第三十章 | 纳维—斯托克斯一节末 | `navier-stokes-p-np` 完整实验室 |
 | 终章 | 空间吸引子 · 二 末 | `spatial-attractor-deja-vu` · `forget` |

@@ -207,6 +207,10 @@ Why $\frac{2}{\pi}\sin^2\theta\,d\theta$? Because on the three-dimensional unit 
 
 Thus, starting from the $\pm 1$ Pell seam cracked open by Hippasus's right triangle, passing through the $4k \pm 1$ line/plane duality of primes, the congruent-number elliptic curve torus $y^2 = x(x-1)(x+1)$ ($\chi = 0$), and Hasse's critical-line scaling $\sqrt{p} = p^{1/2}$, the arithmetic oscillations of the primes emerge as **the inner-product cosine shadow $\cos\theta_p$ cast by the combed-flat quantum spinor sphere $S^3 \cong \mathrm{SU}(2)$ onto its diameter $[-1, +1]$**!
 
+::: {.remark #rem-ch29-arithmetic-geometry-literature title="Formalization Boundary for Arithmetic-Geometry and Transcendence Theorems (Literature result, not formalized in this book)"}
+**Literature result, not formalized in this book.** The classical transcendence and arithmetic-geometry theorems cited in the first two sections of this chapter—including the Lindemann–Weierstrass theorem and T. Y. Chow's (1999) elementary-field theorem conditional on Schanuel's conjecture (cf. Chapter 24, [@conj-schanuel-dottie]), Fermat's two-square prime splitting and solvability of the negative Pell equation $m^2 - p n^2 = -1$ for primes $p \equiv 1 \pmod 4$, Hilbert's local-symbol reciprocity law $\prod_{v \le \infty} (a, b)_v = +1$, Hasse's elliptic-curve bound $|a_p| \le 2\sqrt{p}$ (H. Hasse, 1936), Gauss's point-count formula $|a_p| = 2|a|$ on the CM curve $y^2 = x^3 - x$, and the Sato–Tate equidistribution theorem for non-CM elliptic curves over $\mathbb{Q}$ (T. Barnet-Lamb, D. Geraghty, M. Harris & R. Taylor, *Ann. of Math.* **173**, 2011)—are classical mathematical literature results outside the `trureturing@dev` formalization locked by this book; kernel-verified claims in these sections are strictly those carrying explicit `lean:` citations (such as [`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm) and [`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique)).
+:::
+
 ::: {.viz src="pythagoras-number-escape" height="640"}
 **Interactive laboratory `ORTHO//PYTHAGORAS`**: three scenes along the $\pm 1$ seam. The Pell seam: the convergents of $\sqrt{d}$ hug the line ever more closely while $m^2 - d\,n^2$ is a nonzero integer (for $d = 5$ the green rings mark all the $\pm 4$ solutions, as verified in Lean); line primes and plane primes: whether the circle of radius $\sqrt{p}$ passes through lattice points; points mod $p$: for the curve $y^2 = x^3 - x$, $a_p$ is held inside Hasse's bound, line primes sit exactly at zero, and the Frobenius cosine of a plane prime equals the cosine of its Gaussian triangle. Fermat's two-square theorem, Hasse's theorem and the Sato–Tate distribution are literature results, not formalized in this book.
 :::
@@ -347,6 +351,10 @@ If the global time field is a timeless geometric crystal and local causality pos
 :::
 
 
+
+::: {.remark #rem-ch29-wheeler-dewitt-page-wootters-literature title="Formalization Boundary for Timeless Quantum Gravity and Path-Integral Models (Literature result, not formalized in this book)"}
+**Literature result, not formalized in this book.** The canonical Wheeler–DeWitt constraint $H\mathbf{\Psi} = 0$ (B. S. DeWitt, *Phys. Rev.* **160**, 1113, 1967), the Page–Wootters conditional-time mechanism $|\psi_{\mathbf{S}}(\tau)\rangle \propto \langle \mathbf{c}(\tau)\mid\mathbf{\Psi}\rangle$ (D. N. Page & W. K. Wootters, *Phys. Rev. D* **27**, 2885, 1983), and Feynman's path-integral stationary-phase principle $\delta S = 0$ discussed in this section are classical physics literature models not formalized in `trureturing@dev`; the Lean-4-verified results below are strictly the golden-integer Pell norm identity and the unit-vector Gram overlap equivalence theorem.
+:::
 
 ::: {.theorem #thm-ch29-gram-rigidity-and-pell title="Golden-Integer Pell Norm Identity and Unit-Vector Gram Overlap Equivalence" lean="D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm, D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization"}
 Across arithmetic quadratic lattices and inner-product spaces, discrete seam norms and unit-vector overlap equivalence are established by two Lean-4-verified theorems:

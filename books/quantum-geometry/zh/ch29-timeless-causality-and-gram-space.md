@@ -207,6 +207,10 @@ $$
 
 至此，从希帕索斯直角三角形裂开的 $\pm 1$ 佩尔接缝出发，经由素数的 $4k \pm 1$ 线面二象性、同余数椭圆曲线环面 $y^2 = x(x-1)(x+1)$（$\chi = 0$）与哈塞临界线缩放 $\sqrt{p} = p^{1/2}$，全体素数的算术振荡最终化作了**三维平行化量子旋量球面 $S^3 \cong \mathrm{SU}(2)$ 向一维直径 $[-1, +1]$ 投下的内积余弦影子 $\cos\theta_p$**！
 
+::: {.remark #rem-ch29-arithmetic-geometry-literature title="算术几何与超越数论定理的形式化边界说明（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 本章前两节引述的经典超越数论与算术几何定理——包括林德曼—魏尔斯特拉斯定理与 T. Y. Chow (1999) 在沙努埃尔猜想（参见第 24 章 [@conj-schanuel-dottie]）条件下的初等域逃逸定理、奇素数 $p \equiv 1 \pmod 4$ 的费马二平方和分裂与实二次域 $\mathbb{Q}(\sqrt{p})$ 负佩尔方程 $m^2 - p n^2 = -1$ 可解性定理、类域论希尔伯特局部符号互反律 $\prod_{v \le \infty} (a, b)_v = +1$、有限域椭圆曲线哈塞界 $|a_p| \le 2\sqrt{p}$（H. Hasse, 1936）、高斯关于复乘曲线 $y^2 = x^3 - x$ 的点数公式 $|a_p| = 2|a|$，以及有理数域上非复乘椭圆曲线的佐藤—泰特分布定理（T. Barnet-Lamb, D. Geraghty, M. Harris & R. Taylor, *Ann. of Math.* **173**, 2011）——均为外部经典数学文献定理，未包含在本书锁定的 `trureturing@dev` 形式化声明集中；本书内核验证的部分严格限定于行内与下文定理框显式标注 `lean:` 的代数与内积恒等式（如 [`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)、[`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique) 等）。
+:::
+
 ::: {.viz src="pythagoras-number-escape" height="640"}
 **交互实验室 `ORTHO//PYTHAGORAS`**：沿着 $\pm 1$ 接缝走一遍的三个场景。佩尔接缝：$\sqrt{d}$ 的渐近分数沿直线越贴越近，$m^2 - d\,n^2$ 却是非零整数（$d = 5$ 时绿圈标出已由 Lean 验证的全部 $\pm 4$ 解）；线素数与面素数：半径 $\sqrt{p}$ 的圆上有没有格点；模 $p$ 数点：曲线 $y^2 = x^3 - x$ 的 $a_p$ 被哈塞界关住，线素数恰在零上，面素数的弗罗贝尼乌斯余弦等于高斯三角形的余弦。费马二平方和定理、哈塞定理与佐藤—泰特分布是文献结果，未在本书形式化。
 :::
@@ -347,6 +351,10 @@ $$
 :::
 
 
+
+::: {.remark #rem-ch29-wheeler-dewitt-page-wootters-literature title="无时间量子引力与路径积分文献的形式化边界说明（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 本节引用的正则量子引力惠勒—德维特方程 $H\mathbf{\Psi} = 0$（B. S. DeWitt, *Phys. Rev.* **160**, 1113, 1967）、佩奇—伍特斯条件时间机制 $|\psi_{\mathbf{S}}(\tau)\rangle \propto \langle \mathbf{c}(\tau)\mid\mathbf{\Psi}\rangle$（D. N. Page & W. K. Wootters, *Phys. Rev. D* **27**, 2885, 1983）以及费曼路径积分驻相条件 $\delta S = 0$，均属于理论物理经典文献模型，未在本书锁定的 `trureturing@dev` 库中形式化；下文定理框经 Lean 4 内核验证的结论严格限定于黄金整数佩尔范数恒等式与单位向量族 Gram 重叠等价关系判据。
+:::
 
 ::: {.theorem #thm-ch29-gram-rigidity-and-pell title="黄金整数佩尔范数恒等式与单位向量族 Gram 重叠等价关系定理" lean="D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm, D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization"}
 在算术二次格与内积空间几何中，离散接缝范数与单位向量记录的成对重叠判据分别由以下两条经 Lean 4 内核验证的定理给出：
