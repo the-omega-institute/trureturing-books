@@ -191,14 +191,18 @@ $$
 Since negation $k \mapsto -k$ is a bijection on the subgroup $\mathrm{annihilator}(H)$, [@prop-finite-character-cancellation] reduces the inner sum to $|\mathrm{annihilator}(H)|$ for $x \in H$ and $0$ for $x \notin H$. Multiplying by $\frac{|H|}{m}$ and using the cardinality identity $|H| \cdot |\mathrm{annihilator}(H)| = m$ cancels the prefactor to $1$, leaving $\sum_{h : H} f(h.1)$. The full proof is checked by the Lean kernel.
 :::
 
-Two critical boundaries govern how [@cor-finite-poisson-period] connects to Shor's algorithm:
+::: {.remark #rem-shor-divisibility-boundary-literature title="Scope Boundaries Between Finite Poisson Summation and Non-Divisible Shor Order Recovery (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** Two critical boundaries govern how [@cor-finite-poisson-period] connects to Shor's algorithm — in particular, the Dirichlet/Fejér kernel concentration for $r \nmid Q$ and continued-fraction denominator recovery in Item 2 belong to the quantum-algorithms literature (see [@rem-grover-qft-shor-literature] below) and are not formalized in this book:
 
 1. **Finite Poisson summation is not the full Shor factoring theorem**: [@cor-finite-poisson-period] is an algebraic identity on $\mathrm{ZMod}\,m$, not a formalization of Shor's full success probability, continued-fraction recovery theorem, or polynomial gate complexity (which are detailed in [@rem-grover-qft-shor-literature]).
 2. **Exact divisibility ($r \mid Q$) versus general non-divisibility ($r \nmid Q$)**: Non-resonant frequencies vanish identically only when the period $r$ divides the register size $m = Q$. When $r \nmid Q$, the Fourier transform exhibits a peaked Dirichlet/Fejér kernel around multiples of $Q/r$ rather than exact zeros, requiring continued-fraction rounding to extract $r$.
+:::
 
 Let us now work through the four-part calculation covering Grover search at $N = 4$ and $N = 8$, the $3$-qubit QFT phase gears at $x = 5$, Shor order finding for $N = 15$, and the finite Poisson cross-check on $\mathrm{ZMod}\,16$.
 
-::: {.example #ex-grover-four-shor-fifteen title="Grover Search for N=4 and N=8, 3-Qubit QFT Phase Gears, and Shor Order Finding for N=15"}
+::: {.example #ex-grover-four-shor-fifteen title="Grover Search for N=4 and N=8, 3-Qubit QFT Phase Gears, and Shor Order Finding for N=15 (With Literature Context, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** Steps 1 and 4 below instantiate this chapter's kernel-verified [@thm-grover-uniform-rotation], [@prop-finite-character-cancellation], and [@cor-finite-poisson-period], whereas the binary tensor-product QFT decomposition with bit-reversal SWAPs in Step 2 and the Shor order-finding and classical $\gcd(a^{r/2} \pm 1, N)$ factoring reduction in Step 3 belong to the quantum-algorithms literature (see [@rem-grover-qft-shor-literature] below) and are not formalized in this book.
+
 This example provides a four-part hand-calculated verification:
 
 **Step 1: Grover search for $N = 4$ (exact 1-step hit) versus $N = 8$ (integer-step residual).**
@@ -214,7 +218,7 @@ $$
 P_{\mathrm{succ}}(N=8,\, n=1) = \sin^2\Bigl(3\arcsin\frac{1}{\sqrt{8}}\Bigr) = \frac{25}{32} = 0.78125,
 $$
 
-illustrating the integer-step residual when $\frac{\pi}{4\theta} - \frac{1}{2} \notin \mathbb{N}$.
+and after $n = 2$ steps it reaches $\sin^2(5\theta) = \frac{121}{128} = 0.9453125 < 1$, illustrating the integer-step residual when $\frac{\pi}{4\theta} - \frac{1}{2} \notin \mathbb{N}$.
 
 **Step 2: Three-qubit QFT tensor-factor ordering and phase gears at $x = 5 = (101)_2$.**
 We adopt the explicit **most-significant-bit (MSB) to least-significant-bit (LSB) output tensor order**, meaning the circuit includes the final bit-reversal SWAPs. Writing the input as $x = x_2 x_1 x_0 = 4x_2 + 2x_1 + x_0$ and binary fractions as $0.b_1 \cdots b_r = \sum_{j=1}^r b_j 2^{-j}$, the unitary QFT $\mathcal{F}_+|x\rangle = \frac{1}{\sqrt{8}}\sum_{k=0}^7 e^{+2\pi i k x / 8}|k_2 k_1 k_0\rangle$ factors as

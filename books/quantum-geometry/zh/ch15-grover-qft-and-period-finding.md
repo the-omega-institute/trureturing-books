@@ -207,14 +207,18 @@ $$
 最后利用有限循环群子群与零化子的拉格朗日基数恒等式 $\mathrm{Fintype.card}(H) \cdot \mathrm{Fintype.card}(\mathrm{annihilator}(H)) = m$，两边同乘 $\frac{\mathrm{Fintype.card}(H)}{m}$ 消去因子 $\frac{|H| \cdot |H^\perp|}{m} = 1$，即得左端 $\sum_{h : H} f(h.1)$。完整证明由 Lean 内核检查。
 :::
 
-在将 [@cor-finite-poisson-period] 与 Shor 大数分解算法对接时，请牢记两条严格的数学边界：
+::: {.remark #rem-shor-divisibility-boundary-literature title="有限泊松求和与一般非整除 Shor 周期恢复的边界（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 在将 [@cor-finite-poisson-period] 与 Shor 大数分解算法对接时，下述两条边界——尤其是第 2 条中一般非整除情形（$r \nmid Q$）下的狄利克雷/费耶尔（Dirichlet/Fejér）核尖峰集中性与连分数有理逼近恢复定理——属于量子算法文献结论（详见下文 [@rem-grover-qft-shor-literature]），未在本书形式化：
 
 1. **有限泊松恒等式不等于完整 Shor 算法的成功概率或多项式复杂度定理**：[@cor-finite-poisson-period] 是 $\mathrm{ZMod}\,m$ 上的精确调和分析恒等式，它本身并不包含模幂电路构造、连分数有理逼近恢复定理、欧拉函数互素概率下界或大数分解的多项式门复杂度（这些完整算法环节列于 [@rem-grover-qft-shor-literature]）。
 2. **整除情形（$r \mid Q$）与一般非整除情形（$r \nmid Q$）的本质区别**：唯有当待求周期 $r$ 恰好整除量子寄存器容量 $m = Q$ 时，周期采样点才构成 $\mathrm{ZMod}\,Q$ 的真子群 $H$，使非共振频点按 [@prop-finite-character-cancellation] **精确为零**；而在 Shor 算法的一般情形中，$r$ 是未知奇偶整数而 $Q = 2^q$ 是 $2$ 的幂（通常 $r \nmid Q$），此时非共振频点的振幅并不精确为零，而是呈狄利克雷（Dirichlet / Fejér）核尖峰分布集中在最接近 $\frac{s Q}{r}$ 的整数频点周围，必须借助连分数展开（continued fractions）从有理逼近中还原分母 $r$。
+:::
 
 下面，让我们通过一个四步完整手算算例，把 $N=4$ 与 $N=8$ 的 Grover 搜索、$3$ 比特 QFT 的二进制相位齿轮、$N=15$ 的 Shor 周期寻找以及 $\mathrm{ZMod}\,16$ 上的字符和与泊松公式逐一验算到底。
 
-::: {.example #ex-grover-four-shor-fifteen title="Grover N=4/N=8 搜索、3 比特 QFT 相位齿轮与 Shor N=15 阶寻找完整验算"}
+::: {.example #ex-grover-four-shor-fifteen title="Grover N=4/N=8 搜索、3 比特 QFT 相位齿轮与 Shor N=15 阶寻找完整验算（含文献说明，未在本书形式化）"}
+**文献结果，未在本书形式化。** 本例第一步与第四步具体验算本章经内核验证的 [@thm-grover-uniform-rotation]、[@prop-finite-character-cancellation] 与 [@cor-finite-poisson-period]；而第二步中含末端位反转 SWAP 门的二进制张量积 QFT 分解，以及第三步中 Shor 阶寻找与最大公因数分解归约 $\gcd(a^{r/2} \pm 1, N)$，均属量子算法文献内容（详见下文 [@rem-grover-qft-shor-literature]），未在本书形式化。
+
 本例分四步完成本章全部核心公式的具体数值检验：
 
 **第一步：Grover 搜索在 $N = 4$ 上的单步精确命中与 $N = 8$ 的整数步残差。**

@@ -192,7 +192,7 @@ $$
    R_{2N}(\theta) = \cos\theta - \sum_{k=0}^{N-1} (-1)^k \frac{\theta^{2k}}{(2k)!}.
    $$
 
-   多项式代表“球内有限步代数语法所能表达的闭集”，而超越函数 $\cos\theta$ 与有限阶泰勒多项式之间的余项缝隙 $R_{2N}(\theta)$（其经典拉格朗日上界与非零性质归入 [@rem-lagrange-taylor-remainder-literature]，完备赋范代数上的内核验证上界见 [@lem-exp-tail-le]），正是分析学里的“逃逸缝”——有限次代数加乘无法把超越圆弧焊死。
+   多项式代表“球内有限步代数语法所能表达的闭集”，而余弦函数 $\cos\theta$ 与有限阶泰勒多项式之间的余项缝隙 $R_{2N}(\theta)$（其经典拉格朗日上界与非零性质归入 [@rem-lagrange-taylor-remainder-literature]，完备赋范代数上的内核验证上界见 [@lem-exp-tail-le]），正是分析学里的“逃逸缝”——有限次代数加乘无法把光滑圆弧焊死。
 2. **有限门计数下的割圆凸多面体**：在容错量子计算中，工程师手里只有有限离散门集 $\mathcal{G}$（例如克利福德加 $T$ 门 $\{H, T\}$）。在任意有限电路深度（量子门计数）$L < \infty$ 下，从北极初态 $\lvert 0\rangle$ 出发所能抵达的状态集合 $\mathcal{S}_L \subset S^2$ 永远只是球面上的有限离散点集，其欧氏凸包 $\operatorname{conv}(\mathcal{S}_L)$ 仅仅是一颗**内接于布洛赫球的有限凸多面体**——就像刘徽与祖冲之用割圆多边形逼近圆周一样，多面体的每一张平坦切面与真实球皮之间，都留着一弯等待更高门计数去填补的弓形残差。
 3. **开口螺旋的轴向投影意象**：如果把 [@prop-complete-diagonal-strict-refinement] 中每一次并入新对角线坐标 $\operatorname{conceptJoin}(\operatorname{latent}, g)$ 的拓扑加细，直观想象为沿着新增正交法向轴 $\vv{e}_{n+1} = \star I_n$ 的一次垂直抬升，那么低维观察者眼底那条看似首尾咬合、周而复始的闭合圆周 $(\cos t, \sin t)$，在并入了逃逸维度的外围空间里，其实是一条永不封口的**开口上升螺旋线** $(\cos t, \sin t, c\,t)$ 顺着法轴投下的平面阴影！你以为自己绕了一圈回到了原点 $(1, 0, 0)$，实际上高度坐标已经悄然跃迁到了 $(1, 0, 2\pi c)$。
 
@@ -202,14 +202,14 @@ $$
 
 三条论断到这里都还只是话。下面把前两条换成可以核对的数字和已经冻结的定理。
 
-**先看刘徽的割圆。** 取单位圆的内接正 $n$ 边形。它的半周长 $n\sin\frac{\pi}{n}$ 从下方逼近 $\pi$；每条边的中点到圆心的距离（边心距）是 $\cos\frac{\pi}{n}$；边的中点与圆弧之间的缝隙（弓高）是
+**先看刘徽的割圆。** 取单位圆的内接正 $n$ 边形：其半周长为 $n\sin\frac{\pi}{n}$，每条边的中点到圆心的距离（边心距）为 $\cos\frac{\pi}{n}$，边的中点与圆弧之间的缝隙（弓高）为
 
 $$
 1 - \cos\frac{\pi}{n} \;=\; 2\sin^2\frac{\pi}{2n} .
 $$
 
-::: {.example #ex-liu-hui-polygon-sagitta title="刘徽割圆的数值表：半周长、边心距与弓高"}
-以下数值以 40 位精度计算，四舍五入到所示位数。
+::: {.example #ex-liu-hui-polygon-sagitta title="刘徽割圆的数值表：半周长、边心距与弓高（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 单位圆内接正 $n$ 边形半周长 $n\sin\frac{\pi}{n}$ 从下方单调逼近 $\pi$、其与弓高的二阶泰勒渐近式以及刘徽正 $2n$ 边形面积恒等式属经典几何与实分析文献算例，未作为独立定理包含在本书锁定的形式化声明集中。以下数值以 40 位精度计算，四舍五入到所示位数。
 
 | $n$ | 半周长 $n\sin\frac{\pi}{n}$ | $\pi - n\sin\frac{\pi}{n}$ | 边心距 $\cos\frac{\pi}{n}$ | 弓高 $1 - \cos\frac{\pi}{n}$ |
 | :---: | :---: | :---: | :---: | :---: |
@@ -410,7 +410,7 @@ $$
 把上述微分拓扑文献注记（[@rem-hairy-ball-adams-literature]）与本章经内核验证的相对语义对角线拓扑安顿推论（[@cor-complete-diagonal-topological-settlement]）对照阅读，可以看到同一条结构脉络：**球内的奇点与不完备，唯有借球外之球方能安顿。**
 
 ::: {.viz src="sphere-escape" height="640"}
-交互可视化（康托尔对角线、Dottie 余弦迭代与欧几里得素数逃逸在同一条步进轴上联动）：调节枚举维数 $N = 3, \dots, 8$、清单种子 $S$ 与余弦迭代初值 $x_0$，账本逐步读出对角元 $f(k, k)$ 并翻转为 $d(k) = \neg f(k, k)$，每一步都留下一个见证：第 $k$ 行在第 $k$ 位与 $d$ 不同；末行给出完整的逃逸向量 $d$ 与有限步残差 $\lvert \cos x_N - x_N \rvert > 0$。舞台可在三种模式间切换：清单各行画在圆上、$d$ 画在圆外并标出汉明距离；余弦蛛网 $x_{k+1} = \cos x_k \to x^* \approx 0.739085$；素数螺线、$p_1 \cdots p_k + 1$ 不在清单中的最小素因子，以及始终小于 $\pi^2/6$ 的有限欧拉积 $\prod_p (1 - p^{-2})^{-1}$。右栏的 $N \times N$ 对角矩阵可逐格点击翻转，$d$ 始终留在清单之外。这正是 [@def-relative-semantic-diagonal] 取 $\mathrm{Address} = \mathrm{Coordinate} = \{1, \dots, N\}$、$\operatorname{latent} = \mathrm{id}$、$\operatorname{twist} = \neg$ 的情形，对角线与每一行都不同由 [`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode) 保证；依据面板同时列出 [@thm-complete-diagonal-not-continuous]、[@cor-complete-diagonal-topological-settlement] 与第二十四章的两条不动点定理。
+交互可视化（康托尔对角线、Dottie 余弦迭代与欧几里得素数逃逸在同一条步进轴上联动）：调节枚举维数 $N = 3, \dots, 8$、清单种子 $S$ 与余弦迭代初值 $x_0$，账本逐步读出对角元 $f(k, k)$ 并翻转为 $d(k) = \neg f(k, k)$，每一步都留下一个见证：第 $k$ 行在第 $k$ 位与 $d$ 不同；末行给出完整的逃逸向量 $d$ 与有限步残差 $\lvert \cos x_N - x_N \rvert > 0$。舞台可在三种模式间切换：清单各行画在圆上、$d$ 画在圆外并标出汉明距离；余弦蛛网 $x_{k+1} = \cos x_k \to x^* \approx 0.739085$；素数螺线、$p_1 \cdots p_k + 1$ 不在清单中的最小素因子，以及始终小于 $\pi^2/6$（见[第二十二章](ch22-primes-euler-products-and-zeros.md) [@ex-xi-mirror-values]）的有限欧拉积 $\prod_p (1 - p^{-2})^{-1}$。右栏的 $N \times N$ 对角矩阵可逐格点击翻转，$d$ 始终留在清单之外。这正是 [@def-relative-semantic-diagonal] 取 $\mathrm{Address} = \mathrm{Coordinate} = \{1, \dots, N\}$、$\operatorname{latent} = \mathrm{id}$、$\operatorname{twist} = \neg$ 的情形，对角线与每一行都不同由 [`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode) 保证；依据面板同时列出 [@thm-complete-diagonal-not-continuous]、[@cor-complete-diagonal-topological-settlement] 与第二十四章的两条不动点定理。
 :::
 
 那么，在这座无穷无尽的升维阶梯上，算术世界本身的那些“互不相干的正交坐标轴”究竟长什么模样？当我们用“两两比较、顺序无关”的几何眼光去打量全体自然数时，为什么每一个素数 $p = 2, 3, 5, 7, \dots$ 都自动站成了一根独立的正交基准轴？让我们推开[第二十二章](ch22-primes-euler-products-and-zeros.md)的大门。

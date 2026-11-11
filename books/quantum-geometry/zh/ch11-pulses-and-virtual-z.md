@@ -6,8 +6,8 @@
 
 **一句纸面上的“量子门是让量子态转向的有面积几何结构”，到了真实的物理硬件里，竟然变成了一语双关的工程现实：**
 
-1. 要让量子态绕水平赤道轴（$X$ 轴或 $Y$ 轴）转过角度 $\theta$，工程师必须向芯片注入一束与量子比特能级共振的微波脉冲；在跟随便频旋转的参考系与旋波近似（RWA）下，球面转角 $\theta$ 恰恰等于**微波包络曲线下方的积分面积** $\theta = \int_0^T \Omega(t)\,dt$！
-2. 反过来，如果要让量子态绕竖直能量主轴（$Z$ 轴）转过角度 $\lambda$，工程师需要发射多长时间的微波脉冲？答案令人拍案叫绝：**零纳秒！** 因为能量本征轴自身就是旋转参考系的相位基准，绕 $Z$ 轴旋转根本不需要给量子比特施加额外的物理微波脉冲，只需在经典控制软件里把被动参考系相位寄存器更新一个偏移量 $\phi_{\mathrm{frame}} \mapsto \phi_{\mathrm{frame}} + \lambda$（从而在把前置 $R_z(\lambda)$ 推向终端 $Z$ 基读出时，将后续赤道脉冲的物理驱动相位替换为 $\varphi_{\mathrm{phys}} = \varphi - \phi_{\mathrm{frame}}$，单步即 $\varphi \mapsto \varphi - \lambda$）——这就是现代超导量子处理器中大名鼎鼎的**零附加模拟时长“虚拟 $Z$ 门”（Virtual $Z$ gate）**！
+1. 要让量子态绕水平赤道轴（$X$ 轴或 $Y$ 轴）转向，工程师向芯片注入与量子比特能级共振的微波脉冲；在旋转参考系与旋波近似的物理建模下，球面转角由**微波包络曲线下方的脉冲面积**决定（详见下文 [@rem-rwa-pulse-area-literature] 与 [@rem-pulses-literature]）！
+2. 反过来，如果要绕竖直能量主轴（$Z$ 轴）转向，在理想脉冲调度下需要施加多长时间的额外模拟微波脉冲？答案令人拍案叫绝：**零纳秒！** 因为能量本征轴本身充当旋转参考系的相位基准，软件只需更新被动参考系相位寄存器并相应偏置后续赤道脉冲的驱动相位——即超导量子硬件中的**虚拟 $Z$ 门**调度（详见下文 [@rem-virtual-z-scheduling-literature] 与 [@rem-pulses-literature]）！
 
 本章将从矩阵指数在本征线上的精确相位演化与能量本征态定态不变性出发，逐步推演旋转参考系消去载频、共振脉冲面积积分、有序三脉冲核的迹误差界，以及薛定谔状态演化与海森堡效应拉回之间的迹对偶恒等式。
 
@@ -69,51 +69,53 @@ $$
 完整证明由 Lean 内核检查。
 :::
 
-[@thm-hermitian-eigenstate-stationary] 为我们搭建**旋转坐标系（rotating frame）**提供了最坚实的支点（图 11 左栏）。既然北极 $\lvert 0\rangle$ 与南极 $\lvert 1\rangle$ 是 $H_0 = \frac{1}{2}\omega_0 Z$ 的本征态（本征值分别为 $\pm\omega_0/2$），它们在 $H_0$ 下的演化不过是以角速度 $\omega_0$ 累积相对相位。于是，只要观察者自己也跳上那只以角速度 $\omega_0$ 绕 $Z$ 轴同步旋转的转盘——定义旋转参考系变换算符
+[@thm-hermitian-eigenstate-stationary] 为物理控制中引入**旋转坐标系（rotating frame）**提供了定态几何支点（图 11 左栏；连续时间旋转系有效哈密顿量的标准推导汇总于 [@rem-rotating-frame-carrier-literature]）。
+
+::: {.remark #rem-rotating-frame-carrier-literature title="旋转参考系变换与背景载频抵消（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 在连续时间薛定谔方程建模下（物理出处见 [@rem-pulses-literature]），由于北极 $\lvert 0\rangle$ 与南极 $\lvert 1\rangle$ 是 $H_0 = \frac{1}{2}\omega_0 Z$ 的本征态（本征值分别为 $\pm\omega_0/2$），它们在 $H_0$ 下仅以角速度 $\omega_0$ 累积相对相位。定义以角速度 $\omega_0$ 绕 $Z$ 轴同步旋转的参考系变换算符
 
 $$
 V(t) = e^{+i\omega_0 t Z / 2}, \qquad \lvert\psi_{\mathrm{rot}}(t)\rangle = V(t)\lvert\psi_{\mathrm{lab}}(t)\rangle,
 $$
 
-将薛定谔方程 $i\partial_t \lvert\psi_{\mathrm{lab}}\rangle = H_{\mathrm{lab}}(t)\lvert\psi_{\mathrm{lab}}\rangle$ 代入，立即得到旋转坐标系下的有效哈密顿量：
+将含时薛定谔方程 $i\partial_t \lvert\psi_{\mathrm{lab}}\rangle = H_{\mathrm{lab}}(t)\lvert\psi_{\mathrm{lab}}\rangle$ 代入，得到旋转参考系下的有效哈密顿量：
 
 $$
 H_{\mathrm{rot}}(t) = V(t) H_{\mathrm{lab}}(t) V(t)^* + i\dot{V}(t) V(t)^* = V(t) H_{\mathrm{lab}}(t) V(t)^* - \frac{1}{2}\omega_0 Z.
 $$
 
-看！最后那项牵连惯性项 $-\frac{1}{2}\omega_0 Z = -H_0$，把每秒五十亿次的背景载频振荡 $H_0$ **百分之百精确抵消**了！这就像在无穷乘积里把公因子先约掉一样：在旋转参考系里，没有驱动时的布洛赫球瞬间安静下来，静止不动地等待着我们的控制脉冲。
+最后的牵连项 $-\frac{1}{2}\omega_0 Z = -H_0$ 将背景载频项 $H_0$ 精确抵消：在无外加驱动的旋转参考系中，布洛赫向量保持静止。
+:::
 
 ## 共振微波与脉冲面积 {#sec-resonant-pulse-area}
 
-把背景载频 $H_0$ 约掉之后，现在打入一束频率与比特跃迁频率共振（$\omega_d = \omega_0$）、初相位为 $\varphi$、实包络幅度为 $\Omega(t)$ 的横向微波驱动场：
+消去背景载频后，共振横向微波驱动在旋波近似（RWA）下化为固定赤道轴脉冲面积积分的标准物理推导汇总如下（图 11 中栏；[@rem-rwa-pulse-area-literature]）。
+
+::: {.remark #rem-rwa-pulse-area-literature title="共振微波驱动与旋波近似脉冲面积律（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 在孤立二能级模型下（建模前提与文献出处详见 [@rem-pulses-literature]），施加与比特跃迁频率共振（$\omega_d = \omega_0$）、初相位为 $\varphi$、实包络幅度为 $\Omega(t)$ 的横向微波驱动场：
 
 $$
 H_{\mathrm{drive}}^{\mathrm{lab}}(t) = \Omega(t)\cos(\omega_0 t + \varphi)\,X.
 $$
 
-将它变到旋转参考系 $V(t) X V(t)^* = \cos(\omega_0 t) X - \sin(\omega_0 t) Y$ 下，并利用三角积化和差公式，驱动项分裂为两部分：一部分是以二倍频 $2\omega_0 / (2\pi) \approx 10\,\mathrm{GHz}$ 极速打转、在几十纳秒脉冲窗口内平均为零的反向旋转项；另一部分则是与旋转参考系同速同行、稳稳停在赤道平面固定方位角 $\varphi$ 上的共振项。在理想二能级隔离与**旋波近似（rotating-wave approximation, RWA）**下，略去二倍频快变项，旋转系中的有效哈密顿量简化为极其清爽的形式（图 11 中栏）：
+将其变换至旋转参考系 $V(t) X V(t)^* = \cos(\omega_0 t) X - \sin(\omega_0 t) Y$ 并用积化和差展开，驱动项分裂为二倍频 $2\omega_0 / (2\pi) \approx 10\,\mathrm{GHz}$ 的反向快变项与停留在赤道方位角 $\varphi$ 上的同向共振项。在理想二能级隔离与**旋波近似（rotating-wave approximation, RWA）**下略去二倍频快变项，旋转系有效哈密顿量简化为：
 
 $$
 H_{\mathrm{rot}}(t) = \frac{1}{2}\Omega(t)\bigl(\cos\varphi\, X + \sin\varphi\, Y\bigr).
 $$
 
-（若把同相与正交包络分量记作 $I(t) = \Omega(t)\cos\varphi$、$Q(t) = \Omega(t)\sin\varphi$，并允许一般的残余失谐项 $\Delta(t) = \omega_0 - \omega_d$，则生成元 $\frac{1}{2}\bigl(I\sigma_x + Q\sigma_y + \Delta\sigma_z\bigr)$ 在 $2\times 2$ 复矩阵环中按行列指标逐项展开（`ext i j; fin_cases i <;> fin_cases j`）即为 $\frac{1}{2}\begin{pmatrix} \Delta & I - iQ \\ I + iQ & -\Delta \end{pmatrix}$；在严格共振 $\Delta = 0$ 时对角元归零，恰好落在赤道平面内。）
+（若把同相与正交包络分量记作 $I(t) = \Omega(t)\cos\varphi$、$Q(t) = \Omega(t)\sin\varphi$，并允许残余失谐 $\Delta(t) = \omega_0 - \omega_d$，则生成元 $\frac{1}{2}\bigl(I\sigma_x + Q\sigma_y + \Delta\sigma_z\bigr)$ 在 $2\times 2$ 复矩阵环中展开即为 $\frac{1}{2}\begin{pmatrix} \Delta & I - iQ \\ I + iQ & -\Delta \end{pmatrix}$；严格共振 $\Delta = 0$ 时对角元归零，落在赤道平面内。）
 
-请仔细端详这行式子！只要在整段脉冲持续时间 $t \in [0, T]$ 内**保持微波相位 $\varphi$ 恒定不变**，那么无论包络曲线 $\Omega(t)$ 是方波、高斯波还是升余弦波，不同时刻的哈密顿量都指向赤道面内的**同一根固定旋转轴** $\vv{n}_\varphi = (\cos\varphi, \sin\varphi, 0)$，从而在任意两个时刻 $t_1, t_2$ 之间严格对易（$[H_{\mathrm{rot}}(t_1), H_{\mathrm{rot}}(t_2)] = 0$）！
-
-一旦不同时刻的生成元彼此对易，时间演化算符就不需要复杂的戴森（Dyson）时间排序级数，而直接化为普通定积分的矩阵指数：
+只要在脉冲窗口 $t \in [0, T]$ 内**保持驱动相位 $\varphi$ 恒定不变**，无论包络 $\Omega(t)$ 取方波、高斯波还是升余弦波，不同时刻的生成元均沿同一固定赤道轴 $\vv{n}_\varphi = (\cos\varphi, \sin\varphi, 0)$ 彼此对易（$[H_{\mathrm{rot}}(t_1), H_{\mathrm{rot}}(t_2)] = 0$），无需戴森时间排序级数即可直接积分为
 
 $$
-U_{\mathrm{rot}}(T) = \exp\Bigl(-i\int_0^T H_{\mathrm{rot}}(t)\,dt\Bigr) = \exp\Bigl(-\frac{i}{2}\theta\bigl(\cos\varphi\, X + \sin\varphi\, Y\bigr)\Bigr) = R_\varphi(\theta),
+U_{\mathrm{rot}}(T) = \exp\Bigl(-i\int_0^T H_{\mathrm{rot}}(t)\,dt\Bigr) = \exp\Bigl(-\frac{i}{2}\theta\bigl(\cos\varphi\, X + \sin\varphi\, Y\bigr)\Bigr) = R_\varphi(\theta), \qquad \theta = \int_0^T \Omega(t)\,dt,
 $$
 
-其中决定布洛赫球面真实转角 $\theta$ 的唯一几何量，正是**拉比包络曲线下方的脉冲面积（pulse area）**：
+即在该理想固定轴 RWA 模型中，布洛赫球面转角 $\theta$ 由**拉比包络下方的脉冲面积**决定（例如面积 $\pi/2$ 对应四分之一转，面积 $\pi$ 对应半圈翻转）。
+:::
 
-$$
-\theta = \int_0^T \Omega(t)\,dt!
-$$
-
-这就是章首题记在硬件物理中的直接回响：**量子态是球面上的方向，而驱动量子态转向的物理量子门，在时域信号上真真切切就是一块有面积的几何包络！** 面积等于 $\pi/2$ 就是四分之一转（如将北极 $\lvert 0\rangle$ 打到赤道叠加态），面积等于 $\pi$ 就是半圈翻转（如 $\lvert 0\rangle \to \lvert 1\rangle$）。
+这一有效模型从硬件层面呼应了章首题记的几何直觉（`MODEL`）：量子态对应球面方向，而驱动其转向的控制脉冲在时域包络上表现为一个具有明确面积的几何结构（[@rem-rwa-pulse-area-literature]）。
 
 ## 有序脉冲与误差界 {#sec-ordered-pulse-control}
 
@@ -159,42 +161,32 @@ $$
 
 ## 虚拟 Z 与相位参考更新 {#sec-virtual-z-phase-reference}
 
-现在，让我们揭晓本章最令人兴奋的硬件魔术：**零耗时的“虚拟 $Z$ 门”（Virtual $Z$ gate）**（图 11 右栏）。
+与需要非零模拟脉冲时长积累包络面积的赤道驱动门（[@rem-rwa-pulse-area-literature]）相对，超导硬件通过轴向共轭恒等式与软件参考系相位寄存器实现零附加模拟时长的**虚拟 $Z$ 门**调度（图 11 右栏；具体恒等式与符号约定汇总于 [@rem-virtual-z-scheduling-literature]）。
 
-既然横向旋转门 $R_\varphi(\theta) = \exp\bigl[-\frac{i}{2}\theta(\cos\varphi\, X + \sin\varphi\, Y)\bigr]$ 需要实打实地发射几百个载频周期的微波脉冲去积累面积 $\theta = \int_0^T \Omega(t)\,dt$，那么当算法需要执行一次绕竖直能量轴的旋转
-
-$$
-R_z(\lambda) = \exp\Bigl(-\frac{i}{2}\lambda Z\Bigr) = \begin{pmatrix} e^{-i\lambda/2} & 0 \\ 0 & e^{+i\lambda/2} \end{pmatrix}
-$$
-
-时，我们是不是也得去改变约瑟夫森结的磁通偏置、或者再发一串耗时的失谐脉冲？
-
-完全不必！请算一算把任意赤道驱动门 $R_\varphi(\theta)$ 夹在两个相反的 $Z$ 旋转之间会发生什么：由于 $R_z(\lambda) X R_z(-\lambda) = \cos\lambda\, X + \sin\lambda\, Y$ 且 $R_z(\lambda) Y R_z(-\lambda) = -\sin\lambda\, X + \cos\lambda\, Y$，由三角和角公式立得共轭恒等式与右移交换恒等式：
+::: {.remark #rem-virtual-z-scheduling-literature title="单比特轴向共轭恒等式与被动虚拟 Z 相位寄存器调度（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 对绕竖直能量轴旋转 $R_z(\lambda) = \exp\bigl(-\frac{i}{2}\lambda Z\bigr) = \operatorname{diag}(e^{-i\lambda/2}, e^{+i\lambda/2})$ 与赤道驱动门 $R_\varphi(\theta) = \exp\bigl[-\frac{i}{2}\theta(\cos\varphi\, X + \sin\varphi\, Y)\bigr]$，由 $R_z(\lambda) X R_z(-\lambda) = \cos\lambda\, X + \sin\lambda\, Y$ 与 $R_z(\lambda) Y R_z(-\lambda) = -\sin\lambda\, X + \cos\lambda\, Y$ 立得轴向共轭恒等式与右移交换恒等式（工程调度出处见 [@rem-pulses-literature]）：
 
 $$
-R_z(\lambda)\,R_\varphi(\theta)\,R_z(-\lambda) = R_{\varphi + \lambda}(\theta) \quad\Longleftrightarrow\quad R_\varphi(\theta)\,R_z(\lambda) = R_z(\lambda)\,R_{\varphi - \lambda}(\theta)!
+R_z(\lambda)\,R_\varphi(\theta)\,R_z(-\lambda) = R_{\varphi + \lambda}(\theta) \quad\Longleftrightarrow\quad R_\varphi(\theta)\,R_z(\lambda) = R_z(\lambda)\,R_{\varphi - \lambda}(\theta).
 $$
 
-为了在硬件实现中万无一失地使用这组恒等式，必须把**被动参考系相位偏移**与**物理驱动脉冲相位替换**的符号关系严格区分清楚：
+在硬件软件栈实现中，被动参考系相位偏移与物理驱动脉冲相位替换的符号约定如下：
 
-1. **共轭恒等式与被动参考系寄存器 $\phi_{\mathrm{frame}}$**：左边的共轭式 $R_z(\lambda) R_\varphi(\theta) R_z(-\lambda) = R_{\varphi + \lambda}(\theta)$ 表明，若把新参考系的水平基准轴相对原参考系主动旋转 $+\lambda$，则新参考系中方位角为 $\varphi$ 的旋转轴对应原参考系中的方位角 $\varphi + \lambda$（例如 $\lambda = \frac{\pi}{2}, \varphi = 0$ 时，共轭把 $X$ 轴映为 $+Y$ 轴）。在软件栈中，编译器维护一个**被动参考系相位寄存器** $\phi_{\mathrm{frame}}$，每遇到一扇虚拟门 $R_z(\lambda)$ 就将其更新为
+1. **共轭恒等式与被动参考系寄存器 $\phi_{\mathrm{frame}}$**：左边的共轭式 $R_z(\lambda) R_\varphi(\theta) R_z(-\lambda) = R_{\varphi + \lambda}(\theta)$ 表明，若把新参考系的水平基准轴相对原参考系主动旋转 $+\lambda$，则新参考系中方位角为 $\varphi$ 的旋转轴对应原参考系中的方位角 $\varphi + \lambda$（例如 $\lambda = \frac{\pi}{2}, \varphi = 0$ 时，共轭把 $X$ 轴映为 $+Y$ 轴）。编译器维护一个**被动参考系相位寄存器** $\phi_{\mathrm{frame}}$，每遇到一扇虚拟门 $R_z(\lambda)$ 就更新为
    $$
    \phi_{\mathrm{frame}} \longmapsto \phi_{\mathrm{frame}} + \lambda.
    $$
-2. **向前推进 $R_z(\lambda)$ 时的物理驱动相位 $\varphi_{\mathrm{phys}} = \varphi - \phi_{\mathrm{frame}}$**：在实际电路执行中，算符从右向左依次作用于初态。当一扇先作用的 $R_z(\lambda)$ 被省去物理脉冲、向右（朝左端最终 $Z$ 基读出侧）穿过后续赤道门 $R_\varphi(\theta)$ 时，依据的正是右边的交换式
-   $$
-   R_\varphi(\theta)\,R_z(\lambda) = R_z(\lambda)\,R_{\varphi - \lambda}(\theta).
-   $$
-   因此，在保持前文物理驱动约定 $R_\varphi(\theta) = \exp\bigl[-\frac{i}{2}\theta(\cos\varphi\,X + \sin\varphi\,Y)\bigr]$ 不变的前提下，软件寄存器累加 $\phi_{\mathrm{frame}} \mapsto \phi_{\mathrm{frame}} + \lambda$ 后，实际下发给 AWG / IQ 混频器的**物理驱动脉冲相位角必须取反方向偏移**：
+2. **向前推进 $R_z(\lambda)$ 时的物理驱动相位 $\varphi_{\mathrm{phys}} = \varphi - \phi_{\mathrm{frame}}$**：电路算符从右向左依次作用于初态。当先作用的 $R_z(\lambda)$ 被省去物理脉冲、朝左端最终 $Z$ 基读出侧穿过后续赤道门 $R_\varphi(\theta)$ 时，依据右移交换式 $R_\varphi(\theta)\,R_z(\lambda) = R_z(\lambda)\,R_{\varphi - \lambda}(\theta)$，在固定约定 $R_\varphi(\theta) = \exp\bigl[-\frac{i}{2}\theta(\cos\varphi\,X + \sin\varphi\,Y)\bigr]$ 下，软件累加 $\phi_{\mathrm{frame}} \mapsto \phi_{\mathrm{frame}} + \lambda$ 后下发给 AWG / IQ 混频器的**物理驱动脉冲相位角取反方向偏移**：
    $$
    \varphi_{\mathrm{phys}} = \varphi - \phi_{\mathrm{frame}} \qquad (\text{单步即 }\varphi \longmapsto \varphi - \lambda),
    $$
-   同时若后续做赤道面投影读出，读出轴也按同一相对关系同步旋转；而一路穿过所有横向门推到电路最左端（最终时刻）的残余算符 $R_z(\phi_{\mathrm{frame}})$，在最终的 $Z$ 基投影测量 $\lvert 0\rangle\langle 0\rvert, \lvert 1\rangle\langle 1\rvert$ 上由 [@thm-hermitian-eigenstate-stationary] 的对偶相消性质满足 $R_z(-\phi_{\mathrm{frame}})\lvert b\rangle\langle b\rvert R_z(\phi_{\mathrm{frame}}) = \lvert b\rangle\langle b\rvert$（$b \in \{0, 1\}$），对 $Z$ 基测量概率毫无影响，当场免费蒸发（附加模拟脉冲时长 $\Delta t_{\mathrm{analog}} = 0$）！
-3. **可观测测量概率的直接核对**：取初态 $\lvert +\rangle = \frac{1}{\sqrt{2}}(\lvert 0\rangle + \lvert 1\rangle)$，设目标电路先作用 $R_z(\pi/2)$（将布洛赫向量从 $+x$ 旋至 $+y$），再作用 $R_x(\pi/2) = R_0(\pi/2)$（绕 $+x$ 轴将 $+y$ 旋至北极 $+z = \lvert 0\rangle$），最后做 $Z$ 基读出。此时精确演化满足
+   同时后续赤道投影读出轴按同一相对关系旋转；推到电路最左端的残余算符 $R_z(\phi_{\mathrm{frame}})$ 在最终 $Z$ 基投影测量 $\lvert b\rangle\langle b\rvert$（$b \in \{0, 1\}$）上由对角对易（对照 [@thm-hermitian-eigenstate-stationary]）不改变测量概率，在理想脉冲调度下实现零附加模拟脉冲时长（$\Delta t_{\mathrm{analog}} = 0$）。
+3. **可观测测量概率核对**：取初态 $\lvert +\rangle = \frac{1}{\sqrt{2}}(\lvert 0\rangle + \lvert 1\rangle)$，先作用 $R_z(\pi/2)$ 再作用 $R_x(\pi/2) = R_0(\pi/2)$ 并做 $Z$ 基读出，有
    $$
    R_x(\pi/2)\,R_z(\pi/2)\lvert +\rangle = R_z(\pi/2)\,R_{-\pi/2}(\pi/2)\lvert +\rangle = e^{-i\pi/4}\lvert 0\rangle,
    $$
-   测得 $\lvert 0\rangle$ 的玻恩概率为 $P(0) = 1$：省去前置 $R_z(\pi/2)$ 后，将后续脉冲的物理驱动角从 $\varphi = 0$ 替换为 $\varphi_{\mathrm{phys}} = 0 - \frac{\pi}{2} = -\frac{\pi}{2}$（即绕 $-Y$ 轴转 $\frac{\pi}{2}$），直接将 $\lvert +\rangle$ 送达北极 $\lvert 0\rangle$，给出完全一致的 $P(0) = 1$！（反之，若误将物理驱动角替换为 $+\frac{\pi}{2}$ 即 $+Y$ 脉冲，则会把 $\lvert +\rangle$ 推到南极 $\lvert 1\rangle$，得出 $P(0) = 0$ 的相反结果。）
+   测得 $\lvert 0\rangle$ 概率为 $P(0) = 1$：省去前置 $R_z(\pi/2)$ 并将后续脉冲物理驱动角设为 $\varphi_{\mathrm{phys}} = 0 - \frac{\pi}{2} = -\frac{\pi}{2}$（$-Y$ 脉冲）同样将 $\lvert +\rangle$ 送至北极 $\lvert 0\rangle$（$P(0) = 1$），而误取 $+\frac{\pi}{2}$（$+Y$ 脉冲）则会将其送至南极 $\lvert 1\rangle$（$P(0) = 0$）。
+:::
 
 从更一般的算子代数视角看，“推动量子态向前演化（薛定谔图像）”与“保持量子态不动、把测量效应算符向后拉回更新（海森堡参考系更新图像）”之所以给出完全相同的实验读数，源于迹配对的步进拉回恒等式。在 Lean 模块 `ObserverPullbackTraceIdentity` 中，设 $d$ 为有限可判等指标类型，$\mathrm{MatrixAlgebra}\,d$ 为 $d\times d$ 复 $C^*$-矩阵代数，$\mathrm{DensityState}\,d$ 为其正半定迹一状态子类型，$\mathrm{QuantumChannel}\,d\,d$ 为完全正保迹（CPTP）量子信道，而 $\operatorname{evolvedState}(\mathrm{channel}, t, \rho)$ 表示状态映射 $\operatorname{mapState}(\mathrm{channel})$ 在离散步数 $t \in \mathbb{N}$ 下的迭代。
 
@@ -220,15 +212,19 @@ $$
 
 请准确把握 [@cor-frame-pullback-readout] 的形式化边界：这里的 $t \in \mathbb{N}$ 计数的是**信道的离散迭代步数**而非连续物理秒数，且定理以显式迹对偶假设 `hduality` 为前提（幺正参考系共轭 $\rho \mapsto U\rho U^*, E \mapsto U^* E U$ 是满足该前提的特例）。定理本身严格担保状态前推与效应拉回的迹读出等价，而不直接对硬件模拟脉冲时长、相位校准延迟或门错误率作形式化断言。
 
-为了把超导硬件中三种核心单比特旋转操作做一张清晰的工程对照表，我们可以从物理机制、关键控制参数与模拟脉冲耗时三个维度加以总结：
+让我们通过下面的完整数值与工程对照算例，把超导硬件中三种基本旋转的控制机制、$5\,\mathrm{GHz}$ 载频上的 $25\,\mathrm{ns}$ 四分之一转脉冲、虚拟 $Z$ 相位更新与三脉冲迹误差界逐一算清。
 
-1. **绕 $X$ 轴旋转 $R_x(\theta)$**：对应固定相位 $\varphi = 0$（同相通道 $I$）的共振微波脉冲，转角由包络积分面积 $\theta = \int_0^T \Omega(t)\,dt$ 决定，典型模拟脉冲时长 $T \approx 10\text{–}40\,\mathrm{ns}$；
-2. **绕 $Y$ 轴旋转 $R_y(\theta)$**：对应固定相位 $\varphi = \pi/2$（正交通道 $Q$，即相对 $I$ 通道延时四分之一个载频周期）的共振微波脉冲，转角同样由包络面积 $\theta = \int_0^T \Omega(t)\,dt$ 决定，典型模拟脉冲时长 $T \approx 10\text{–}40\,\mathrm{ns}$；
-3. **绕 $Z$ 轴旋转 $R_z(\lambda)$（虚拟 $Z$ 门）**：对应在经典控制软件中将参考系相位寄存器更新为 $\phi_{\mathrm{frame}} \mapsto \phi_{\mathrm{frame}} + \lambda$（当把前置 $R_z(\lambda)$ 交换至终端 $Z$ 基读出时，后续赤道脉冲的物理驱动相位按 $R_\varphi(\theta) R_z(\lambda) = R_z(\lambda) R_{\varphi - \lambda}(\theta)$ 替换为 $\varphi_{\mathrm{phys}} = \varphi - \phi_{\mathrm{frame}}$，单步即 $\varphi \mapsto \varphi - \lambda$），在理想脉冲调度下**附加模拟脉冲时长为 $0\,\mathrm{ns}$**！
+::: {.example #ex-five-ghz-pi-over-two title="5 GHz 载频上的 25 ns 四分之一转与虚拟 Z（含文献说明，未在本书形式化）"}
+**文献结果，未在本书形式化。** 下述超导微波控制中 $R_x, R_y, R_z$ 三种单比特门的工程对照以及第 1–3 步中的旋波近似（RWA）脉冲面积公式 $\theta = \int_0^T \Omega(t)\,dt$ 与被动虚拟 $Z$ 零附加模拟时长调度均属量子硬件工程文献结论（详见下文 [@rem-pulses-literature]），未在本书形式化；第 4 步则具体验算本章经内核验证的无量纲积分核误差界 [@prop-ordered-pulse-error]。
 
-让我们通过下面的完整数值算例，把 $5\,\mathrm{GHz}$ 超导比特上的 $25\,\mathrm{ns}$ 四分之一转脉冲、虚拟 $Z$ 相位更新与三脉冲迹误差界逐一算清。
+首先从物理机制、关键控制参数与模拟脉冲耗时三个维度对照三种核心单比特旋转：
 
-::: {.example #ex-five-ghz-pi-over-two title="5 GHz 载频上的 25 ns 四分之一转与虚拟 Z"}
+- **绕 $X$ 轴旋转 $R_x(\theta)$**：对应固定相位 $\varphi = 0$（同相通道 $I$）的共振微波脉冲，转角由包络积分面积 $\theta = \int_0^T \Omega(t)\,dt$ 决定，典型模拟脉冲时长 $T \approx 10\text{–}40\,\mathrm{ns}$；
+- **绕 $Y$ 轴旋转 $R_y(\theta)$**：对应固定相位 $\varphi = \pi/2$（正交通道 $Q$，即相对 $I$ 通道延时四分之一个载频周期）的共振微波脉冲，转角同样由包络面积 $\theta = \int_0^T \Omega(t)\,dt$ 决定，典型模拟脉冲时长 $T \approx 10\text{–}40\,\mathrm{ns}$；
+- **绕 $Z$ 轴旋转 $R_z(\lambda)$（虚拟 $Z$ 门）**：对应在经典控制软件中将参考系相位寄存器更新为 $\phi_{\mathrm{frame}} \mapsto \phi_{\mathrm{frame}} + \lambda$（当把前置 $R_z(\lambda)$ 交换至终端 $Z$ 基读出时，后续赤道脉冲的物理驱动相位按 $R_\varphi(\theta) R_z(\lambda) = R_z(\lambda) R_{\varphi - \lambda}(\theta)$ 替换为 $\varphi_{\mathrm{phys}} = \varphi - \phi_{\mathrm{frame}}$，单步即 $\varphi \mapsto \varphi - \lambda$），在理想脉冲调度下**附加模拟脉冲时长为 $0\,\mathrm{ns}$**！
+
+接着逐项核对具体数值：
+
 1. **旋转参考系消去 $5\,\mathrm{GHz}$ 载频**：取 $\hbar = 1$，固有哈密顿量 $H_0 = \frac{1}{2}\omega_0 Z$，其中 $\omega_0 = 2\pi \times (5 \times 10^9)\,\mathrm{rad\,s}^{-1}$（载频周期 $T_0 = \frac{1}{5\,\mathrm{GHz}} = 0.2\,\mathrm{ns}$）。定义 $\lvert\psi_{\mathrm{rot}}\rangle = V\lvert\psi_{\mathrm{lab}}\rangle$，$V(t) = e^{+i\omega_0 t Z/2}$，则 $H_{\mathrm{rot}} = V H_{\mathrm{lab}} V^* + i\dot{V}V^*$ 使背景项 $H_0$ 精确相消。
 2. **$25\,\mathrm{ns}$ 共振脉冲面积与四分之一转**：在共振与旋波近似（RWA）下，固定相位 $\varphi$ 的理想有效哈密顿量为 $H_{\mathrm{rot}}(t) = \frac{1}{2}\Omega(t)(\cos\varphi\, X + \sin\varphi\, Y)$。因转轴固定，不同时刻哈密顿量彼此对易，给出 $U = \exp\bigl[-i\frac{\theta}{2}(\cos\varphi\, X + \sin\varphi\, Y)\bigr]$，其中脉冲面积为 $\theta = \int_0^T \Omega(t)\,dt$。取矩形包络 $\Omega = 2\pi \times (10 \times 10^6)\,\mathrm{rad\,s}^{-1}$（拉比频率 $10\,\mathrm{MHz}$）、脉冲时长 $T = 25\,\mathrm{ns}$：包络内共包含 $25 / 0.2 = 125$ 个载频周期，积分面积恰好为
 
