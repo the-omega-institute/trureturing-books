@@ -1,0 +1,7 @@
+/* SYNDROME//DECODE: the shared lab layout (../assets/theme.css) carries the page. Put here only what belongs to this
+   visualization alone; colours come from the tokens (var(--cyan) …), never from hex values. */
+#cv { touch-action: none; }
+/* a lit check is a filled magenta box: its label takes the colour meant for text on accents */
+.tag.chk .on { color: var(--on-accent); font-weight: 600; }
+.tag.ket { font-size: 10.5px; color: var(--dim); }
+.deck .chips + .chips { margin-top: 6px; }

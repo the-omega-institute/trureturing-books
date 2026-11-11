@@ -62,6 +62,10 @@
 
 它们历经战火与熵增依然伫立在原地，甚至毁而复建、层层叠压（如特洛伊九层古城或长安叠城），并不只是因为石材坚固，而是因为在无时间几何模型中，那个空间坐标对应全局时间场里的**拓扑驻点**。当有限观察者在格拉姆因果相容空间（$\det G > 0$）里一步步选点时，周围流场的曲率天然向这些驻点倾斜——所有看似偶然的旅途，都会在不知不觉中滑向同一个盆地中心。
 
+::: {.viz src="spatial-attractor-deja-vu" preset="butterfly" height="500"}
+**两个起点，同一对翅膀。** 洛伦兹系统在 $(\sigma, \rho, \beta) = (10, 28, 8/3)$ 下的两条轨道，青色是第 $k$ 轮，品红是第 $k+1$ 轮，从相距很远的两点出发。短暂游荡之后它们落到同一对翅膀上；琥珀色的小点是每次经过“遗迹”邻域的地方。洛伦兹吸引子是下面注记里的文献结果；把翅膀读作“盆地”、把轨道读作“一轮”是诠释模型（`MODEL`）。
+:::
+
 ### 二、 遗忘清空了“表层记事”，却擦不掉灵魂的“内禀倾角” {#sec-coda-forgetting-intrinsic-inclination}
 
 这就引出了一个最深邃的几何追问：我们在第 29 章看到，有限观察者要想拥有正体积的因果相容空间（$\det G > 0$）以获得自由选择权，每一次生命的初始化（诞生）都必须伴随着一次**历史锚点的截断与清空（遗忘）**。既然前世具体的名字、日期与线性叙事记忆都被清零了，凭什么说下一轮走回这座遗迹的，依然是“同一个灵魂”？
@@ -69,6 +73,14 @@
 在本书的自指几何模型（`MODEL`）中，答案藏在自指方程 $\psi = \psi(\psi)$ 的算子结构里：
 - **被遗忘擦除的**，只是上一轮落在一维尺子上的**局部粒子刻度序列**（即表层的情节记忆 Episodic Memory，名词 `量 liàng`）；
 - **未被擦除的**，是观察者作为丈量算子 $\psi(\cdot)$ 本身的**内禀几何参数**（动词 `量 liáng` 的固有倾角）——他在面对相容空间做两子比较时特有的正交偏转角、审美共振比与拓扑手性偏好！
+
+::: {.viz src="spatial-attractor-deja-vu" preset="fixed" height="500"}
+**换了参数：落进一个点。** 把 $\rho$ 换成 $14$：青色与品红两轮各自螺旋落进一个不动点，然后不再动，那对翅膀不见了。轨道最后落在哪里由方程的参数决定，而不由起点决定；把参数读作“内禀倾角”是诠释模型（`MODEL`）。
+:::
+
+::: {.viz src="spatial-attractor-deja-vu" preset="cycle" height="500"}
+**$\rho = 160$：一条闭合的环。** 两轮落到同一条闭合的环上，每一圈都踩在同一处。这是一维的吸引子：重复，但没有余地，对应下文第三节第 1 条的“$1$ 维死板闭环”（`MODEL`）。
+:::
 
 在将这一哲学意象展开为分形叶层上的跨轮次回归之前，我们先将所引用的洛伦兹奇异吸引子、SRB 不变测度与庞加莱回归三项经典连续动力系统文献结果归入文献注记：
 
@@ -261,6 +273,10 @@
 
 ::: proof
 第 1 部分由 `embedding_injective` 直接导出 `minkowskiEmbedding` 的单射性与模型集特征化，并利用 `betaContraction_mem_window`（即自然数黄金展开的共轭坐标落在 $\operatorname{goldenWindow}$ 内）确立 $\operatorname{embedding} '' \operatorname{goldenModelSet} \subseteq \operatorname{goldenCutAndProjectSet}$。第 2 部分由 $\varphi^{n+1} = F_n + F_{n+1}\varphi$（`golden_phi_pow_eq_fib_pair`）与范数乘性 $\operatorname{norm}(\varphi^{n+1}) = (-1)^{n+1}$ 化简得到卡西尼恒等式。第 3 部分对二进制列表作归纳验证自动机接受条件与 `NoAdjacentOnes` 的等价性，并对满足 $a > b \ge 0$ 的两个非负实数利用 $\varphi^N(a - b) \to +\infty$ 最终超过 $2$ 导出存在层级 $N$ 使 $\lfloor\varphi^N a\rfloor_+ \neq \lfloor\varphi^N b\rfloor_+$，从而证明 `zeckendorfRealThread` 在 `NNReal` 上单射。第 4 部分利用非零黄金整数范数 $|\operatorname{norm}(u - v)| \ge 1$ 导出互反分离不等式，并由特征标几何级数有界估计与紧致群 $G$ 的有限开覆盖导出哈尔均匀分布与有界间隙回归。完整证明由 Lean 内核检查。
+:::
+
+::: {.viz src="golden-cut-observer" preset="narrow" height="500"}
+**窗口变窄：等得久，仍有界。** 把琥珀色的观测窗收窄到 $(0.45, 0.55)$：前 $233$ 步里青色的步只有 $8$ 个，品红标出的最长间隔拉长到 $48$ 步，但间隔仍有上界；页面下方的图里，青色的已进入比例不低于品红虚线的 $1/(M + 1)$。有限步是数值演示；对一切 $n$ 成立的有界回归是上面定理的第 4 条。
 :::
 
 ::: {.viz src="golden-cut-observer" height="640"}

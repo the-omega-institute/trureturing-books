@@ -174,6 +174,10 @@ $$
 
 这正是抽象对角线不动点模式在观测拓扑中的纯粹骨架（与元数学文献的精确边界对照见 [@rem-godel-tarski-comparison-literature]）。在我们的抽象拓扑框架中，每当一个系统把某类候选解码映射装进一部关于当前潜坐标满射的目录 `decoderCatalog`，并用无不动点算子 `twist` 构造自指对角线 $g$ 时，$g$ 必然劈开原系统的某根等价类余纤维。要想给 $g$ 赋予连续的因子分解坐标，就必须引入联合读出 $\operatorname{conceptJoin}(\operatorname{latent}, g)$；而若想在新坐标空间 $\mathrm{Coordinate}_{k+1} = \mathrm{Coordinate}_k \times \mathrm{Output}$ 上继续触发下一轮对角线逃逸 $g'$，则**必须以在新一轮（通常需要扩容的）地址空间 $\mathrm{Address}_{k+1}$ 上重新建立新的满射解码目录 $\operatorname{decoderCatalog}_{k+1} : \mathrm{Address}_{k+1} \twoheadrightarrow (\mathrm{Coordinate}_{k+1} \to \mathrm{Output})$ 为前提**——例如在 [@ex-cantor-godel-diagonal-table] 的四地址布尔模型中，合并后的坐标空间有 $4$ 个坐标对（对应 $2^4 = 16$ 个布尔函数，即便只看实际命中的 $3$ 根非空联合纤维也有 $2^3 = 8 > 4$ 个布尔函数），原来的 $4$ 个地址已不足以构成新阶段的满射目录，唯有连同地址空间一起向外扩容，才能开启下一层“球外之球”的攀升！
 
+::: {.viz src="sphere-escape" preset="absorb" height="500"}
+**收编了，它再逃一次。** 把翻出的品红色串 $d$ 收进清单当第 $7$ 行，再补一列让表保持方形；沿新的对角线读一遍、翻一遍，立刻又拼出一个不在清单里的品红色串。收编多少次都一样（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)）。
+:::
+
 ::: {.remark #rem-godel-tarski-comparison-literature title="康托尔、Lawvere、哥德尔与塔斯基对角线定理的前提边界（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** [@cor-complete-diagonal-topological-settlement] 刻画的是集合与观测拓扑层面的抽象相对对角线骨架（呼应 Georg Cantor 的对角线构造与 F. W. Lawvere, *Diagonal arguments and cartesian closed categories*, 1969 的范畴不动点模式）；而在经典数理逻辑文献中，**哥德尔第一不完备定理**（K. Gödel, 1931）与**塔斯基真值不可定义定理**（A. Tarski, 1933/1936）并非直接假定任意语义函数目录满射，而是需要额外构造递归公理化算术、哥德尔配数编码、语法可证性谓词，并在系统相容性（或 $\omega$-相容性）假设下运作。
 :::

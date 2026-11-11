@@ -9,7 +9,9 @@
 - **Grover 搜索是“两次正交反射合成一次不变平面旋转”**：在各向同性的高维草堆里，初始叠加态与目标态之间张开一个二维公共平面；先对目标正交子空间作一次镜像反射（正交一次），再对初始子空间作第二次镜像反射（正交两次），两次反射自动把状态向量沿着这个二维平面向目标稳步拨转 $2\theta$ 角！
 - **QFT 与周期寻找是“赤道相位齿轮上的正交字符干涉”**：通过有限 Weyl 位移算子的共轭相位反冲，把算术周期性刻进一套按二进制分母咬合的赤道相位齿轮；当对整个有限群求字符和时，非共振频率在单位圆上两两正交相消归零，唯独对偶零化子格点（共振频率）同相累加，一举锁定隐藏周期！
 
-![图 15](../assets/fig-15-grover-qft-shor.svg)
+::: {.figure src="ch15-overview"}
+**图 15。** 本章地图：面板 I，$N = 4$ 时一步 Grover 迭代把箭头 $U$ 转过紫色的 $2\theta = 60^\circ$，琥珀色的 $QU$ 正好落在成功方向 $W$ 上；面板 II，$x = 5 = (101)_2$ 的三只相位齿轮，齿数 $2$、$4$、$8$，琥珀色的指针依次指向 $\pi$、$\pi/2$、$5\pi/4$；面板 III，$Q = 16$、$r = 4$ 的周期态做完 QFT 后，只有 $k = 0, 4, 8, 12$ 四处留下高 $1/4$ 的青色柱。
+:::
 
 ## Grover：两次反射的共同不变平面 {#sec-grover-invariant-plane}
 
@@ -41,6 +43,10 @@ $$
 $$
 
 记初始成功倾角为 $\theta = \arcsin(\sqrt{p})$（故 $\sin\theta = \sqrt{p}$，$\cos\theta = \sqrt{1 - p}$）。下面的定理证明：无论迭代多少步 $n \in \mathbb{N}$，甚至无论外部再张量耦合任何参考系统 $R$，演化始终严丝合缝地锁在由 $W$ 与 $B$ 张成的二维块平面内，每次精确旋转 $2\theta$ 角！
+
+::: {.figure src="ch15-two-reflections"}
+**两面镜子合成一次转动。** 取 $N = 8$：墨色的箭头 $U$ 与失败方向 $B$ 成 $\theta$。第一面镜子是 $B$ 轴（$I - 2P$），把 $U$ 翻到下方的灰色虚线箭头；第二面镜子是 $U$ 所在的线（$2UU^* - I$），再把它翻上去，成为琥珀色的 $QU$。两次翻折之后，箭头净转过紫色的 $2\theta$，见 [@thm-grover-uniform-rotation]。
+:::
 
 ::: {.theorem #thm-grover-uniform-rotation title="相干均匀振幅放大的不变平面算子旋转定理" lean="D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation"}
 设 $s, l$ 为有限可判等指标类型，$J \in M_{l \times s}(\mathbb{C})$、$C, P \in M_{l \times l}(\mathbb{C})$、$p \in \mathbb{R}$，满足
@@ -91,15 +97,35 @@ $$
 对 $n \in \mathbb{N}$ 归纳并应用和角公式 $\sin((2n+1)\theta)\cos(2\theta) + \cos((2n+1)\theta)\sin(2\theta) = \sin((2n+3)\theta)$ 及余弦和角公式，即得 $Q^n U = \sin((2n+1)\theta)W + \cos((2n+1)\theta)B$。最后对等式两端右作 $\otimes_{\mathrm{K}} R$，由克罗内克积的线性分配律立即得出带参考矩阵 $R$ 的扩展恒等式（结论 2）。完整证明由 Lean 内核检查。
 :::
 
+::: {.viz src="grover-reflections" preset="mirrors" height="500"}
+**两面镜子合成一次转动。** $N = 8$ 时 $\theta \approx 20.70^\circ$：琥珀色的箭头先在失败轴 $B$（镜 1）里照一次，箭头尖沿竖直虚线翻到轴下；再在 $\lvert s\rangle$ 那条虚线（镜 2）里照一次，翻回来时比出发处高了 $2\theta \approx 41.41^\circ$，紫色的弧就是这一转。青色的影子是在目标轴 $W$ 上的成功振幅，从 $0.354$ 长到 $0.884$（[@thm-grover-uniform-rotation]，$n = 1$）。
+:::
+
 请结合图 15 面板 I 体会 [@thm-grover-uniform-rotation] 的三条关键边界：
 
 1. **必须保留 $p = 1$ 的独立分支**：当初始状态已经百分之百落在目标子空间内（$p = 1$）时，失败分母 $\sqrt{1 - p} = 0$，此时无须定义失败基向量 $B$，定理直接给出 $U = W$；而当 $0 < p < 1$ 时，$n = 0$ 自动还原初始正交分解 $U = \sin\theta\,W + \cos\theta\,B$。
 2. **多源列时的块平面几何**：当源空间只有一列（$|s| = 1$，标准单初态 Grover 搜索）时，$W$ 与 $B$ 是两根正交单位列向量，张成一个二维平面；当 $|s| > 1$ 时，$W, B \in M_{l \times s}(\mathbb{C})$ 各自包含 $|s|$ 根正交列向量，第 $j$ 列的成功分量 $W_{\cdot, j}$ 与失败分量 $B_{\cdot, j}$ 张成属于该列的二维不变平面，全部 $|s|$ 个二维平面在 $\mathrm{iterate}(U, P)$ 下以完全相同的角速度 $2\theta$ 同步旋转（绝非把整个多列算子压进单一的二维希尔伯特空间）。
 3. **整数步数 $n \in \mathbb{N}$ 的离散过冲（overshoot）**：因为步数 $n$ 只能取自然数，转角 $(2n + 1)\theta$ 是离散跳变的。当 $p = 1/N \ll 1$ 时，$\theta = \arcsin(1/\sqrt{N}) \approx 1/\sqrt{N}$，令 $(2n + 1)\theta \approx \pi/2$ 给出著名的 $n \approx \frac{\pi}{4}\sqrt{N}$ 步复杂度；但除 $N = 4$（$p = 1/4, \theta = \pi/6, n = 1$）等极少数特殊有理角外，整数步 $n$ 只能逼近 $\pi/2$ 而无法对任意 $N$ 精确命中 $\sin((2n+1)\theta) = 1$（如何在已知 $p$ 时借辅助硬币旋转彻底消除这一过冲残差，将在[第十六章](ch16-qsvt-walks-and-compilation.md) [@cor-exact-source-query-count] 中严格解决）。
 
+::: {.viz src="grover-reflections" preset="over" height="500"}
+**整数步会转过头。** $N = 8$ 再走第 $3$ 步：箭头转到 $7\theta \approx 144.9^\circ$，青色的影子缩回 $0.575$，成功概率从 $0.945$ 掉到 $0.330$；右边的柱子先升后降，第 $2$ 根最高。
+:::
+
+::: {.viz src="grover-reflections" preset="sqrt" height="500"}
+**$\frac{\pi}{4}\sqrt{N}$ 步爬到顶。** $N = 256$ 时每一步只转 $2\theta \approx 7.17^\circ$，十二段紫色的小弧把琥珀色的箭头从 $3.6^\circ$ 送到 $89.6^\circ$，成功概率 $0.99995$；十二正是 $\frac{\pi}{4}\sqrt{256} \approx 12.57$ 附近的最佳步数。
+:::
+
+::: {.viz src="grover-reflections" height="560"}
+Grover 两次反射的完整实验室：拖动镜 2 上的初始态改 $\theta$，换 $N$，用 ← → 一面一面地照镜子；右边的柱子是每一步之后的成功概率 $\sin^2((2n+1)\theta)$（[@thm-grover-uniform-rotation]）。查询下界 $\Omega(\sqrt{N})$ 是文献结果，未在本书形式化。
+:::
+
 ## 相位反冲与 QFT 二进制齿轮 {#sec-qft-phase-gears}
 
 如果说 Grover 搜索靠的是在实平面里一步旋转 $2\theta$，那么量子傅里叶变换（QFT）与相位估计靠的就是在复赤道圆周上拧转不同齿比的**相位齿轮**（见图 15 面板 II）。
+
+::: {.viz src="phase-gears" preset="basis" height="500"}
+**一排逐级减半转速的齿轮。** $Q = 8$、只有一格 $x = 5$：时间轴每走一格，三只紫色齿轮分别转 $\frac{1}{2}$、$\frac{1}{4}$、$\frac{1}{8}$ 圈，走到 $5$ 时停在 $\pi$、$\frac{\pi}{2}$、$\frac{5\pi}{4}$；频率 $k = 7$ 用上三只，链上唯一一支青色箭头指向它们的和 $\frac{3\pi}{4}$。谱是平的，每根柱子都是 $\frac{1}{8}$。QFT 的二进制乘积分解是文献结果，未在本书形式化。
+:::
 
 在代数底层，一切离散相位反冲（phase kickback）都源于有限循环群 $\mathrm{ZMod}\,M$（$M \in \mathbb{N}$，带 `[NeZero M]`）上平移算子与时钟算子的共轭对易律。在源码模块 `WeylDisplacementConjugation` 中，记 $M$ 次本原单位根为 $\omega_M = \mathrm{windowRoot}(M) = \exp(2\pi i / M)$，在 $M_{\mathrm{Fin}\,M}(\mathbb{C})$ 上定义：
 
@@ -168,6 +194,10 @@ $$
 - 当 $x \notin H$ 时，各频率分量 $\chi_k(x)$ 在复平面单位圆上均匀散开、两两抵消，合振幅精确归零（**相消干涉**）；
 - 当 $x \in H$ 时，所有频率分量全部指向正实轴 $+1$，合振幅同相叠加为 $|\mathrm{annihilator}(H)|$（**相长干涉**）。
 
+::: {.viz src="phase-gears" preset="cancel" height="500"}
+**不共振的箭头绕成一圈。** $Q = 16$、梳子 $\{0, 4, 8, 12\}$、$k = 1$：只有最慢的那只齿轮亮着，四支青色箭头 $1$、$i$、$-1$、$-i$ 首尾相接围成正方形，回到原点；谱上第 $1$ 根柱子扫描中先长出来，最后缩回 $0$（[@prop-finite-character-cancellation]）。
+:::
+
 **重要规范提醒**：[@prop-finite-character-cancellation] 右端在 $x \in H$ 时给出的是**未归一化**的子群基数 $|\mathrm{annihilator}(H)|$，绝不能把这股未归一化的代数和直接称作“概率 $1$”！在实际量子电路中，必须除以初态归一化因子 $\sqrt{|H|}$ 与幺正 QFT 的归一化因子 $\sqrt{m}$，才能把振幅转化为满足玻恩法则的单位概率分布。
 
 ## 有限周期采样与 Shor 阶重建 {#sec-shor-order-reconstruction}
@@ -212,6 +242,10 @@ $$
 
 1. **有限泊松恒等式不等于完整 Shor 算法的成功概率或多项式复杂度定理**：[@cor-finite-poisson-period] 是 $\mathrm{ZMod}\,m$ 上的精确调和分析恒等式，它本身并不包含模幂电路构造、连分数有理逼近恢复定理、欧拉函数互素概率下界或大数分解的多项式门复杂度（这些完整算法环节列于 [@rem-grover-qft-shor-literature]）。
 2. **整除情形（$r \mid Q$）与一般非整除情形（$r \nmid Q$）的本质区别**：唯有当待求周期 $r$ 恰好整除量子寄存器容量 $m = Q$ 时，周期采样点才构成 $\mathrm{ZMod}\,Q$ 的真子群 $H$，使非共振频点按 [@prop-finite-character-cancellation] **精确为零**；而在 Shor 算法的一般情形中，$r$ 是未知奇偶整数而 $Q = 2^q$ 是 $2$ 的幂（通常 $r \nmid Q$），此时非共振频点的振幅并不精确为零，而是呈狄利克雷（Dirichlet / Fejér）核尖峰分布集中在最接近 $\frac{s Q}{r}$ 的整数频点周围，必须借助连分数展开（continued fractions）从有理逼近中还原分母 $r$。
+:::
+
+::: {.viz src="phase-gears" preset="leak" height="500"}
+**不整除时峰摊开。** $Q = 64$、周期 $6$：品红的 $sQ/r$ 落在 $10.67$、$21.33$ 等整数之间，峰摊到相邻的格，$k = 11$ 高 $0.115$、$k = 10$ 只有 $0.026$，离 $sQ/r$ 最近的六格合计 $0.80$；琥珀色框住的 $k = 11$ 用连分数读出 $\frac{1}{6}$。这种集中与连分数恢复是文献结果，未在本书形式化。
 :::
 
 下面，让我们通过一个四步完整手算算例，把 $N=4$ 与 $N=8$ 的 Grover 搜索、$3$ 比特 QFT 的二进制相位齿轮、$N=15$ 的 Shor 周期寻找以及 $\mathrm{ZMod}\,16$ 上的字符和与泊松公式逐一验算到底。
@@ -314,6 +348,22 @@ $$
    两侧分毫不差！
 :::
 
+::: {.viz src="grover-reflections" preset="four" height="500"}
+**$N = 4$：一步立在目标上。** $\theta = 30^\circ$，一步转 $60^\circ$，琥珀色的箭头正好落在目标轴 $W$ 上：青色的影子长 $1$，品红的影子消失，第 $1$ 根柱子顶到 $1$。
+:::
+
+::: {.viz src="grover-reflections" preset="eight" height="500"}
+**$N = 8$：两步之后还差一点。** 第 $1$ 步后成功概率 $\frac{25}{32}$，第 $2$ 步后 $\frac{121}{128}$：箭头停在 $5\theta \approx 103.5^\circ$，略过竖轴，品红的影子还剩 $-0.234$。
+:::
+
+::: {.viz src="phase-gears" preset="four" height="500"}
+**周期 4 留下四根峰。** $Q = 16$、梳子 $\{0, 4, 8, 12\}$：看 $k = 4$ 时四支青色箭头全部朝右，链长 $4$；扫完之后谱上只剩 $0$、$4$、$8$、$12$ 四根等高的柱子，每根 $\frac{1}{4}$，正落在品红的 $sQ/r$ 上，其余十二根都是 $0$。
+:::
+
+::: {.viz src="phase-gears" preset="read" height="500"}
+**由峰读出阶。** 同一个谱：$k = 4$ 与 $12$ 给出 $\frac{4}{16} = \frac{1}{4}$、$\frac{12}{16} = \frac{3}{4}$，分母是阶 $4$；琥珀色框住的 $k = 8$ 只给出 $\frac{1}{2}$，分母 $2$ 是阶的真因子，要再检验；$k = 0$ 不含信息。
+:::
+
 ::: {.remark #rem-grover-qft-shor-literature title="Grover 查询下界、QFT 电路分解与 Shor 大数分解完整算法定理（文献结果，未在本书形式化）"}
 <!-- alias: #rem-shor-factoring-literature -->
 **文献结果，未在本书形式化。** 本章的形式化定理严格覆盖了均匀振幅放大的不变平面旋转恒等式（[@thm-grover-uniform-rotation]）、有限 Weyl 位移算子的共轭相位反冲（[@lemma-phase-kickback-weyl]）、零化子特征标正交相消（[@prop-finite-character-cancellation]）与有限泊松求和公式（[@cor-finite-poisson-period]）。在量子算法文献中，围绕这四块基石建立的完整算法与复杂度结论如下：
@@ -321,6 +371,10 @@ $$
 1. **Grover 搜索与黑盒查询复杂度下界**（L. K. Grover, *A fast quantum mechanical algorithm for database search*, Proc. 28th ACM STOC, 212–219, 1996, doi:10.1145/237814.237866；G. Brassard, P. Høyer, M. Mosca, and A. Tapp, *Quantum amplitude amplification and estimation*, Contemp. Math. **305**, 53–74, 2002, arXiv:quant-ph/0005055）：在包含 $M$ 个解的 $N$ 元无结构搜索问题中，振幅放大以 $O(\sqrt{N/M})$ 次黑盒查询将成功概率提升至 $\ge 1 - M/N$；同时 Bennett–Bernstein–Brassard–Vazirani (1997) 证明了任何量子黑盒算法要以常数有界误差找到解都必须付出 $\Omega(\sqrt{N/M})$ 次查询，证实二次加速已达量子几何极限。
 2. **量子傅里叶变换（QFT）的多项式门分解**：在 $q$ 比特寄存器（$Q = 2^q$）上，将正指数单位化 QFT 展开为 [@ex-grover-four-shor-fifteen] 第二步中的二进制乘积形式后，每一层输出比特仅需 $1$ 个 Hadamard 门与至多 $q - 1$ 个受控二进相位门 $R_k = \operatorname{diag}(1, e^{2\pi i / 2^k})$，加上末端 $\lfloor q/2\rfloor$ 个 SWAP 门，总门数为 $\frac{q(q+1)}{2} + \lfloor\frac{q}{2}\rfloor = O(q^2) = O((\log Q)^2)$，相比经典快速傅里叶变换（FFT）的 $O(Q \log Q)$ 实现了指数级电路规模压缩。
 3. **Shor 大数分解与阶寻找的完整正确性条件**（P. W. Shor, *Polynomial-time algorithms for prime factorization and discrete logarithms on a quantum computer*, SIAM J. Comput. **26**, 1484–1509, 1997, doi:10.1137/S0097539795293172）：对于一般合数 $N$（非偶、非素数幂）与随机互素底数 $a$，乘法阶 $r$ 通常不整除 $Q = 2^q$。Shor 算法选取 $N^2 \le Q < 2N^2$，通过可逆模幂电路在 $O((\log N)^3)$ 基本门内制备周期叠加态，再经 QFT 采样频点 $k$。利用有限几何级数（Dirichlet 核）下界，落入满足 $\bigl|\frac{k}{Q} - \frac{s}{r}\bigr| \le \frac{1}{2Q} < \frac{1}{2r^2}$ 的最近整数频点 $k$ 的总概率满足常数下界，再由 Hardy–Wright 连分数逼近定理从 $k/Q$ 的渐近分数中唯一恢复既约分式 $s/r$；当 $\gcd(s, r) = 1$（其概率由欧拉函数下界 $\varphi(r)/r = \Omega(1/\log\log r)$ 保证）时即可获得真阶 $r$，结合经典数论引理（奇素因子幂相异时 $\Pr[r \text{ 为偶且 } a^{r/2} \not\equiv -1 \pmod N] \ge 1 - 2^{-(k-1)} \ge 1/2$）完成多项式时间随机化分解。（注：将周期提取比作“把无穷周期因式约分到 $1$”属于启发式几何直觉，绝非已形式化的数学结论。）
+:::
+
+::: {.viz src="phase-gears" height="560"}
+相位齿轮与周期的完整实验室：换寄存器大小 $Q$、周期 $r$ 与起点，点谱上的柱子选频率 $k$，看它的相位箭头首尾相接；$r$ 整除 $Q$ 时不共振的链闭合为零（[@prop-finite-character-cancellation]），不整除时峰摊在 $sQ/r$ 附近（文献结果，未在本书形式化）。
 :::
 
 看着 Grover 的二维平面旋转与 QFT 的傅里叶相消，一个更宏大的问题油然而生：**为什么这两类看似风马牛不相及的量子算法，背后都在反复交替调用“酉算子嵌入”与“相位反射/旋转”？有没有一套更高维的几何母框架，能够把搜索、相位估计、哈密顿量模拟乃至矩阵求逆统统收编为同一个二维块上的切比雪夫多项式递推？而在走下理想算法的云端、把连续旋转编译成有限个离散量子门 $\{H, T\}$ 时，我们手里的球体又会露出怎样棱角分明的多面体真相？** 让我们迈入第四部的收官之章——[第十六章](ch16-qsvt-walks-and-compilation.md)。

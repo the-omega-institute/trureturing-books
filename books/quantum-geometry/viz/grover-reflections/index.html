@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="GROVER//REFLECT · Grover's two reflections">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GROVER//REFLECT Grover 两次反射</title>
+<meta name="description" content="Grover 搜索的每一步是两面镜子：先对失败轴照一次，再对初始态那条线照一次。两次镜像合起来，是在目标与失败两轴张成的平面里转 2θ，第 n 步后态停在 (2n + 1)θ。N = 4 一步正好立在目标上；N = 8 两步还差一点，第三步就转过了头；N 大时最好的步数在 π√N/4 附近。Each Grover step is two mirrors: one across the failure axis, then one across the line of the initial state. Together they turn the state by 2θ in the plane of the target and failure axes, so after n steps it sits at (2n + 1)θ. N = 4 lands exactly on the target in one step; N = 8 falls a little short after two steps and overshoots on the third; for large N the best step count is near π√N/4.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="grover-reflections">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="GROVER//REFLECT">GROVER<b>//</b>REFLECT</h1>
+      <div class="tagline">
+        <span class="zh">Grover 两次反射 · <em>照两面镜子，态就在同一个平面里朝目标转 2θ；整数步只能逼近，走多了会转过头</em></span>
+        <span class="en">Grover's two reflections · <em>two mirrors turn the state by 2θ towards the target in one plane; whole steps only come close, and too many overshoot</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillN">N <strong>—</strong></span>
+      <span class="pill hot" id="pillP"><span class="zh">成功概率</span><span class="en">SUCCESS</span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="mirrors" aria-pressed="false"><span class="code">TWO MIRRORS</span><span class="cn zh">两面镜子合成一次 2θ 的转动</span><span class="cn en">Two mirrors make one turn by 2θ</span></button>
+        <button class="preset" data-preset="four" aria-pressed="false"><span class="code">N = 4</span><span class="cn zh">N = 4：一步正好立在目标上</span><span class="cn en">N = 4: one step lands on the target</span></button>
+        <button class="preset" data-preset="eight" aria-pressed="false"><span class="code">N = 8</span><span class="cn zh">N = 8：两步之后还差一点</span><span class="cn en">N = 8: two steps still fall short</span></button>
+        <button class="preset" data-preset="over" aria-pressed="false"><span class="code">OVERSHOOT</span><span class="cn zh">再走一步：转过了头</span><span class="cn en">One more step: past the target</span></button>
+        <button class="preset" data-preset="sqrt" aria-pressed="false"><span class="code">ROOT N</span><span class="cn zh">N = 256：十二小步爬到顶</span><span class="cn en">N = 256: twelve small steps to the top</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">搜索空间</span><span class="en">The search space</span><span class="aside">p = 1/N</span></h2>
+      <div class="field">
+        <label for="logN"><span class="zh">项数 N（一个标记项）</span><span class="en">Items N (one marked)</span><small class="zh">sin θ = 1/√N</small><small class="en">sin θ = 1/√N</small></label><output id="oN" for="logN">8</output>
+        <input type="range" id="logN" min="1" max="10" step="0.05" value="3">
+      </div>
+      <div class="chips" id="nChips" role="group" aria-label="常用的 N" data-aria-en="Common values of N">
+        <button class="chip" data-n="4" aria-pressed="false">4</button><button class="chip" data-n="8" aria-pressed="true">8</button><button class="chip" data-n="16" aria-pressed="false">16</button><button class="chip" data-n="64" aria-pressed="false">64</button><button class="chip" data-n="256" aria-pressed="false">256</button><button class="chip" data-n="1024" aria-pressed="false">1024</button>
+      </div>
+      <p class="note"><span class="zh">也可以在舞台上拖动镜 2 上的空心圆（初始态 |s⟩），连续改变 θ；或点右边的柱子跳到那一步。← → 每按一次照一面镜子。</span><span class="en">You can also drag the open circle on mirror 2 (the initial state |s⟩) to change θ continuously, or click a bar on the right to jump to that step. Each press of ← → applies one mirror.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="舞台：目标轴与失败轴张成的平面，单位圆上的态箭头、两面镜子与每一步转过的 2θ；右边是每一步的成功概率" data-aria-en="Stage: the plane of the target and failure axes, the state arrow on the unit circle, the two mirrors and the 2θ turned at each step; on the right, the success probability after each step">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="plotTitle"></h2><span id="plotMeta"></span></div>
+        <canvas id="plot" aria-label="小图：每个 N 的最佳步数与 π√N/4" data-aria-en="Small plot: the best step count for each N against π√N/4"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">sin²((2n + 1)θ)</span></h2>
+      <dl class="ro" id="ro"></dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">均匀成功率 p ∈ (0, 1) 时，成功块 W 与失败块 B 正交归一，且对一切自然数 n，iterate(U, P)ⁿ·U = sin((2n + 1)θ)·W + cos((2n + 1)θ)·B，θ = arcsin √p，其中 iterate(U, P) = (2UU* − I)(I − 2P)。页面取单列、p = 1/N，在 W、B 两轴的平面里画出它。已冻结：</span><span class="en">With a uniform success rate p ∈ (0, 1) the success block W and the failure block B are orthonormal, and for every natural number n, iterate(U, P)ⁿ·U = sin((2n + 1)θ)·W + cos((2n + 1)θ)·B with θ = arcsin √p, where iterate(U, P) = (2UU* − I)(I − 2P). The page takes one column and p = 1/N and draws this in the plane of the axes W and B. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Recovery/CoherentUniformAmplification.lean" target="_blank" rel="noopener"><code>uniform_operator_rotation</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">查询下界（Bennett–Bernstein–Brassard–Vazirani，1997）：任何量子黑盒算法要以有界误差找到 N 项中的一个标记项，都至少要 Ω(√N) 次查询，所以 π√N/4 这一量级已到头。文献结果，未在本书形式化；页面只画出 Grover 迭代本身的步数。</span><span class="en">The query lower bound (Bennett, Bernstein, Brassard and Vazirani, 1997): any quantum black-box algorithm that finds one marked item among N with bounded error needs Ω(√N) queries, so the order π√N/4 cannot be beaten. A literature result, not formalized in this book; the page only draws the step counts of Grover's iteration itself.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面把两面镜子逐次作用在平面里的箭头上，双精度算出每一步的位置与成功概率；最佳步数是逐个比较 n 得到的。两次镜像之间箭头尖沿垂线滑过镜面，只是动画。这是数值演示，不是证明。</span><span class="en">The page applies the two mirrors to the arrow in the plane one at a time and computes every position and success probability in double precision; the best step count comes from comparing every n. Between two mirror images the arrow's tip slides across the mirror along a perpendicular: that is animation only. A numerical illustration, not a proof.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="时间轴：Grover 步数，每半步一面镜子" data-aria-en="Rail: Grover steps, one mirror per half step">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">照一面镜子</span><span class="en">one mirror</span> · <span class="zh">拖动初始态改 θ</span><span class="en">drag the initial state to set θ</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">N 项里有一个标记项，初始态是均匀叠加 |s⟩，它落在目标上的概率 p = 1/N。把 |s⟩ 分成目标方向 W 与其余各项的均匀叠加 B，|s⟩ = sin θ·W + cos θ·B，sin θ = 1/√N。整个搜索都发生在 W、B 张成的平面里；舞台上竖轴是 W，横轴是 B。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>第一面镜子 I − 2P。</b>它把 W 方向反号、B 方向不动：箭头关于横轴（失败轴）照一次镜子。动画里箭头尖沿竖直的虚线滑到横轴另一侧。</li>
+        <li><b>第二面镜子 2|s⟩⟨s| − I。</b>它保留 |s⟩ 方向、把与 |s⟩ 垂直的方向反号：箭头关于青色虚线（|s⟩ 那条线）再照一次。</li>
+        <li><b>两面镜子合成转动。</b>两条镜线夹角 θ，先后照两次等于转 2θ（紫色的弧）：与横轴成 α 角的箭头先到 −α，再到 2θ − (−α) = α + 2θ。从 θ 出发，第 n 步后停在 (2n + 1)θ，这正是冻结定理里的 sin((2n + 1)θ)·W + cos((2n + 1)θ)·B。</li>
+        <li><b>影子。</b>箭头在竖轴上的影子（青色）是成功振幅 sin((2n + 1)θ)，它的平方是这一步测到标记项的概率；横轴上的品红是还留在失败方向上的振幅。右边的柱子是每一步的成功概率，琥珀色的框是当前这一步。</li>
+        <li><b>整数步与过冲。</b>步数只能取整数，(2n + 1)θ 一格一格地跳。N = 4 时 θ = 30°，一步到 90°，成功率 1；N = 8 时 θ ≈ 20.70°，一步 25/32 = 0.78125，两步 121/128 = 0.9453125，第三步转到约 144.9°，掉到约 0.33。N 大时 θ ≈ 1/√N，最好的 n 在 π√N/4 附近，下面的小图把逐个比较得到的最佳步数与 π√N/4 画在一起。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch15-grover-qft-and-period-finding.html#sec-grover-invariant-plane" target="_top">第十五章 · 两次反射的共同不变平面</a> · <a href="../../zh/ch15-grover-qft-and-period-finding.html#thm-grover-uniform-rotation" target="_top">不变平面算子旋转定理</a> · <a href="../../zh/ch15-grover-qft-and-period-finding.html#ex-grover-four-shor-fifteen" target="_top">N = 4 与 N = 8 的验算</a> · <a href="../../zh/ch15-grover-qft-and-period-finding.html#rem-grover-qft-shor-literature" target="_top">查询下界（文献结果）</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">Among N items one is marked, and the initial state is the uniform superposition |s⟩, which finds the target with probability p = 1/N. Split |s⟩ into the target direction W and the uniform superposition B of all other items: |s⟩ = sin θ·W + cos θ·B with sin θ = 1/√N. The whole search happens in the plane of W and B; on the stage the vertical axis is W and the horizontal axis is B. The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>The first mirror I − 2P.</b> It flips the W direction and keeps B: the arrow is mirrored in the horizontal (failure) axis. In the animation the tip slides down the vertical dashed line to the other side of the axis.</li>
+        <li><b>The second mirror 2|s⟩⟨s| − I.</b> It keeps the |s⟩ direction and flips the direction perpendicular to it: the arrow is mirrored in the cyan dashed line, the line of |s⟩.</li>
+        <li><b>Two mirrors make a turn.</b> The two mirror lines meet at the angle θ, and two reflections in a row turn by 2θ (the violet arc): an arrow at the angle α from the horizontal axis goes to −α and then to 2θ − (−α) = α + 2θ. Starting from θ, after n steps it sits at (2n + 1)θ, which is the frozen theorem's sin((2n + 1)θ)·W + cos((2n + 1)θ)·B.</li>
+        <li><b>Shadows.</b> The arrow's shadow on the vertical axis (cyan) is the success amplitude sin((2n + 1)θ), and its square is the probability of finding the marked item after this step; the magenta on the horizontal axis is the amplitude still left in the failure direction. The bars on the right are the success probabilities step by step, with the amber frame on the current step.</li>
+        <li><b>Whole steps and overshoot.</b> The step count is a whole number, so (2n + 1)θ jumps. For N = 4, θ = 30° and one step reaches 90°, success 1; for N = 8, θ ≈ 20.70°, one step gives 25/32 = 0.78125, two steps 121/128 = 0.9453125, and the third turns to about 144.9° and drops to about 0.33. For large N, θ ≈ 1/√N and the best n is near π√N/4; the small plot draws the best step count, found by comparing every n, against π√N/4.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch15-grover-qft-and-period-finding.html#sec-grover-invariant-plane" target="_top">Chapter 15 · The common invariant plane of two reflections</a> · <a href="../../en/ch15-grover-qft-and-period-finding.html#thm-grover-uniform-rotation" target="_top">uniform operator rotation</a> · <a href="../../en/ch15-grover-qft-and-period-finding.html#ex-grover-four-shor-fifteen" target="_top">the N = 4 and N = 8 calculation</a> · <a href="../../en/ch15-grover-qft-and-period-finding.html#rem-grover-qft-shor-literature" target="_top">query lower bounds (literature)</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="SPEED//ZENO · Speed limits and the Zeno strobe">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SPEED//ZENO 速度极限与芝诺频闪</title>
+<meta name="description" content="三个场景共用一条时间轴。速度极限：态与起点的夹角随时间上升，青色曲线永远不越过速度线，到 90° 的墙为止；二能级等权叠加贴着速度线撞墙，三能级弯着晚到，不等权叠加到不了墙。芝诺频闪：布洛赫球上的箭头每转一小段就被拉回北极，频闪越密，留在北极的概率越大。首次返回：每一步问一次“回来了吗”，已返回加未返回恒为 1，平均返回时间恒为 2 步。Three scenes on one rail. Speed limit: the angle between the state and its start grows with time, the cyan curve never crosses the speed line and stops at the 90° wall; two even levels run along the speed line into the wall, three even levels bend and arrive late, uneven weights never reach it. Zeno strobe: on the Bloch sphere the arrow is pulled back to the north pole after every short turn, and the denser the strobe the likelier it stays. First return: ask “back yet?” after every step; returned plus not yet returned is always 1, and the mean return time is always 2 steps.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="speed-limit-zeno">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="SPEED//ZENO">SPEED<b>//</b>ZENO</h1>
+      <div class="tagline">
+        <span class="zh">速度极限与芝诺频闪 · <em>翻过 90° 的墙快不过能量涨落；看得越勤越走不掉，可平均还是两步回来一次</em></span>
+        <span class="en">Speed limits and the Zeno strobe · <em>no state crosses the 90° wall faster than its energy spread allows; look more often and it stays put, yet on average it still comes back in two steps</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillScene"><span class="zh">场景</span><span class="en">SCENE</span> <strong>—</strong></span>
+      <span class="pill hot" id="pillKey"><span id="pillKeyName"></span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="equal" aria-pressed="false"><span class="code">TWO-EVEN</span><span class="cn zh">二能级等权：贴着速度线撞墙</span><span class="cn en">Two even levels: along the speed line into the wall</span></button>
+        <button class="preset" data-preset="three" aria-pressed="false"><span class="code">THREE-EVEN</span><span class="cn zh">三能级等权：弯着走，晚到</span><span class="cn en">Three even levels: a bent path, a late arrival</span></button>
+        <button class="preset" data-preset="unequal" aria-pressed="false"><span class="code">UNEVEN</span><span class="cn zh">不等权：到不了墙</span><span class="cn en">Uneven weights: the wall is out of reach</span></button>
+        <button class="preset" data-preset="strobe4" aria-pressed="false"><span class="code">STROBE ×4</span><span class="cn zh">频闪 4 次：一半留下</span><span class="cn en">Four strobes: half of it stays</span></button>
+        <button class="preset" data-preset="strobe16" aria-pressed="false"><span class="code">STROBE ×16</span><span class="cn zh">频闪 16 次：几乎走不掉</span><span class="cn en">Sixteen strobes: it hardly gets away</span></button>
+        <button class="preset" data-preset="mean" aria-pressed="false"><span class="code">RETURN</span><span class="cn zh">首次返回：平均恒为 2 步</span><span class="cn en">First return: always 2 steps on average</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec" data-scenes="speed">
+      <h2><span class="zh">叠加态</span><span class="en">The superposition</span><span class="aside"><span class="zh">能级 0, E, 2E</span><span class="en">levels 0, E, 2E</span></span></h2>
+      <div class="chips" id="levelChips" role="group" aria-label="能级个数" data-aria-en="Number of levels">
+        <button class="chip" data-levels="2" aria-pressed="true"><span class="zh">二能级</span><span class="en">two levels</span></button>
+        <button class="chip" data-levels="3" aria-pressed="false"><span class="zh">三能级等权</span><span class="en">three even levels</span></button>
+      </div>
+      <div class="field">
+        <label for="alpha"><span class="zh">权重角 α</span><span class="en">Weight angle α</span><small class="zh">cos α |0⟩ + sin α |1⟩，45° 为等权</small><small class="en">cos α |0⟩ + sin α |1⟩; 45° is even</small></label><output id="oAlpha" for="alpha">45°</output>
+        <input type="range" id="alpha" min="5" max="45" step="1" value="45">
+      </div>
+    </section>
+
+    <section class="panel sec" data-scenes="zeno" hidden>
+      <h2><span class="zh">频闪</span><span class="en">The strobe</span><span class="aside"><span class="zh">在 ωT = 180° 内测 N 次</span><span class="en">N looks within ωT = 180°</span></span></h2>
+      <div class="chips" id="strobeChips" role="group" aria-label="频闪次数 N" data-aria-en="Number of strobes N">
+        <button class="chip" data-strobes="1" aria-pressed="false">1</button><button class="chip" data-strobes="2" aria-pressed="false">2</button><button class="chip" data-strobes="4" aria-pressed="true">4</button><button class="chip" data-strobes="8" aria-pressed="false">8</button><button class="chip" data-strobes="16" aria-pressed="false">16</button><button class="chip" data-strobes="32" aria-pressed="false">32</button><button class="chip" data-strobes="64" aria-pressed="false">64</button>
+      </div>
+      <p class="note"><span class="zh">每次频闪问一次“还在 |0⟩ 吗”，舞台只跟踪每次都答“是”的那一支。</span><span class="en">Each strobe asks “still in |0⟩?”; the stage follows the branch in which every answer is yes.</span></p>
+    </section>
+
+    <section class="panel sec" data-scenes="return" hidden>
+      <h2><span class="zh">每步转角</span><span class="en">Turn per step</span><span class="aside">δ</span></h2>
+      <div class="field">
+        <label for="delta"><span class="zh">布洛赫角 δ</span><span class="en">Bloch angle δ</span><small class="zh">每步绕 X 轴转 δ</small><small class="en">each step turns δ about X</small></label><output id="oDelta" for="delta">45°</output>
+        <input type="range" id="delta" min="45" max="180" step="1" value="45">
+      </div>
+      <p class="note"><span class="zh">每一步之后问一次“回到 |0⟩ 了吗”：是就停表，否则态落到 |1⟩，继续下一步。</span><span class="en">After every step ask “back at |0⟩?”: yes stops the clock, no leaves the state in |1⟩ for the next step.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="三个场景：夹角随时间上升的曲线与 90° 的墙；布洛赫球上被频闪拉回北极的箭头与留存概率；首次返回的账目柱" data-aria-en="Three scenes: the angle rising with time towards the 90° wall; the arrow on the Bloch sphere pulled back to the north pole by the strobe, with the survival probability; the columns of the first-return ledger">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+        <button class="chip" data-scene="speed" aria-pressed="true"><span class="zh">速度极限</span><span class="en">Speed limit</span></button>
+        <button class="chip" data-scene="zeno" aria-pressed="false"><span class="zh">芝诺频闪</span><span class="en">Zeno strobe</span></button>
+        <button class="chip" data-scene="return" aria-pressed="false"><span class="zh">首次返回</span><span class="en">First return</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="plotTitle"></h2><span id="plotMeta"></span></div>
+        <canvas id="plot" aria-label="本场景的小图" data-aria-en="The small plot of the scene"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro" id="ro"></dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean" data-scenes="speed"><span class="ok">LEAN ✓</span><span><span class="zh">设 a, m₀, m₁ 为单位向量，⟨m₀, m₁⟩ = 0，energy &gt; 0，ħ &gt; 0。若 θ<sub>FS</sub>(a, m₀) ≤ energy·τ/ħ 且 θ<sub>FS</sub>(a, m₁) ≤ energy·τ/ħ，则 τ ≥ πħ/(4·energy)。二能级等权一卡取 m₀ = 起点、m₁ = 撞墙时的态、a = 半途的态、energy = ΔH：两段各 45°，等号成立。已冻结：</span><span class="en">Let a, m₀, m₁ be unit vectors with ⟨m₀, m₁⟩ = 0, energy &gt; 0 and ħ &gt; 0. If θ<sub>FS</sub>(a, m₀) ≤ energy·τ/ħ and θ<sub>FS</sub>(a, m₁) ≤ energy·τ/ħ, then τ ≥ πħ/(4·energy). The two-even-levels card takes m₀ = the start, m₁ = the state at the wall, a = the state half-way and energy = ΔH: each half is 45° and equality holds. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumBounds/FubiniStudyRecordTime.lean" target="_blank" rel="noopener"><code>record_time_lower_bound</code></a></span></div>
+      <div class="lean" data-scenes="return" hidden><span class="ok">LEAN ✓</span><span><span class="zh">对任意线性等距 U 与单位向量 v：s₀ = 1；p<sub>n+1</sub> = s<sub>n</sub> − s<sub>n+1</sub>；p₁ + … + p<sub>N</sub> + s<sub>N</sub> = 1。舞台上每一根柱子的青色加品红都恰好到 1 这条线。已冻结：</span><span class="en">For every linear isometry U and unit vector v: s₀ = 1; p<sub>n+1</sub> = s<sub>n</sub> − s<sub>n+1</sub>; p₁ + … + p<sub>N</sub> + s<sub>N</sub> = 1. On the stage, the cyan and the magenta of every column reach exactly the line at 1. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.lean" target="_blank" rel="noopener"><code>monitored_return_conservation</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean argued" data-scenes="speed"><span class="ok">ARGUED</span><span><span class="zh">Mandelstam–Tamm 界 τ<sub>⊥</sub> ≥ πħ/(2ΔH) 与 Margolus–Levitin 界 τ<sub>⊥</sub> ≥ πħ/(2⟨H⟩)：文献结果，未在本书形式化。舞台上的速度线与墙上的 MT、ML 刻度按这两个公式画出。</span><span class="en">The Mandelstam–Tamm bound τ<sub>⊥</sub> ≥ πħ/(2ΔH) and the Margolus–Levitin bound τ<sub>⊥</sub> ≥ πħ/(2⟨H⟩): literature results, not formalized in this book. The speed line and the MT and ML marks on the wall are drawn from these formulas.</span></span></div>
+      <div class="lean argued" data-scenes="zeno" hidden><span class="ok">ARGUED</span><span><span class="zh">N → ∞ 时频闪把演化冻结在投影子空间里（Misra–Sudarshan 定理）：文献结果，未在本书形式化。舞台只画有限的 N，留存概率 [cos²(π/2N)]<sup>N</sup> 是实算的。</span><span class="en">As N → ∞ the strobe freezes the evolution inside the projected subspace (the Misra–Sudarshan theorem): a literature result, not formalized in this book. The stage draws finite N only, and the survival [cos²(π/2N)]<sup>N</sup> is computed.</span></span></div>
+      <div class="lean num" data-scenes="return" hidden><span class="ok">NUM</span><span><span class="zh">平均返回时间 = 每一步“还没回来”的概率之和 = 品红的总面积。页面迭代 4000 步算出它，对每个 δ 都是 2.000000；这是第七章例子的手算结论，不是引用的定理。</span><span class="en">Mean return time = the sum over steps of the chance of “not back yet” = the total magenta area. The page iterates 4000 steps and gets 2.000000 for every δ; this is the hand computation of the Chapter 7 example, not a cited theorem.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数都是按双精度实时算出的数值演示，不是证明。时间以 ħ/E 为单位。</span><span class="en">Every number on the page is computed live in double precision: an illustration, not a proof. Time is in units of ħ/E.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="时间" data-aria-en="Time">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> <span class="zh">场景</span><span class="en">scenes</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">三个场景共用一条时间轴，时间以 ħ/E 为单位。页面上的每个数都按公式或迭代实时算出；本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>速度极限。</b>能级 0, E（, 2E）上的叠加态 ψ(0) = Σ √w<sub>n</sub> |n⟩，重叠 ⟨ψ(0), ψ(t)⟩ = Σ w<sub>n</sub> e<sup>−inEt/ħ</sup>，夹角 θ<sub>FS</sub> = arccos |重叠|。左边画重叠：每个能级一支青色箭头，首尾相接，琥珀色的点是它们的和；品红的圆心就是 90° 的墙（重叠为零）。右边画夹角随时间的曲线、速度线 ΔH·t/ħ 与墙。Mandelstam–Tamm 界与 Margolus–Levitin 界是文献结果，未在本书形式化（ARGUED）。冻结定理 <a class="leanref" data-lean-gid="D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumBounds/FubiniStudyRecordTime.lean" target="_blank" rel="noopener"><code>record_time_lower_bound</code></a>（LEAN ✓）把“每段角位移不超过 energy·τ/ħ”当作前提，推出 τ ≥ πħ/(4·energy)；二能级等权一卡按第七章的取法让前提与结论同时取等。</li>
+        <li><b>三种情形。</b>二能级等权：夹角就是速度线，t = π 时撞墙，两条界都取等。三能级等权：t = 2π/3 ≈ 2.094 才撞墙，速度线 1.924 已到墙，ML 刻度在 1.571；曲线弯了，走过的弧长 1.710 弧度长于 90° 的测地线。不等权（权重角 α &lt; 45°）：重叠最小是 |cos 2α|，夹角最多 2α，永远到不了墙。</li>
+        <li><b>芝诺频闪。</b>单比特在 H = (ħω/2)σ<sub>x</sub> 下从北极 |0⟩ 出发，绕 X 轴转；ωT = 180° 内等间隔测 N 次“还在 |0⟩ 吗”。每段转过 180°/N，答“是”的概率 cos²(π/2N)，全程留存 P<sub>N</sub> = [cos²(π/2N)]<sup>N</sup>：N = 1, 4, 16, 64 依次是 0、0.5308、0.8569、0.9622。箭头在线上的影子（青色）只损失二阶小量，离开线的那一份（品红）是一阶小量。N → ∞ 的冻结是 Misra–Sudarshan 定理，文献结果，未在本书形式化（ARGUED）。</li>
+        <li><b>首次返回。</b>每步 U = cos(δ/2) I − i sin(δ/2) X，初态 v = |0⟩；每步之后问“回到 v 了吗”，否则投到 v 的正交补。页面迭代这个协议，得到首次返回概率 p<sub>n</sub> 与留存概率 s<sub>n</sub>。冻结定理 <a class="leanref" data-lean-gid="D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.lean" target="_blank" rel="noopener"><code>monitored_return_conservation</code></a>（LEAN ✓）说 s₀ = 1、p<sub>n+1</sub> = s<sub>n</sub> − s<sub>n+1</sub>、Σp + s<sub>N</sub> = 1：每根柱子的青色（已返回）加品红（未返回）恰好是 1。</li>
+        <li><b>平均恒为 2。</b>平均返回时间等于各步 s<sub>n</sub> 之和，也就是品红的总面积。第七章手算：c²·1 + s²·(1 + 1/s²) = 2，与 δ 无关（c = cos(δ/2)，s = sin(δ/2)）。小图画出整个 δ 范围：第一步没回来时还要等的 1 + 1/s² 随 δ 变小而变长，平均值一直是 2。这是页面的数值核对（NUM），不是引用的定理。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch07-geometric-time-and-speed-limits.html#sec-quantum-speed-limit" target="_top">第七章 §7.2 · 量子速度极限</a> · <a href="../../zh/ch07-geometric-time-and-speed-limits.html#ex-orthogonalization-times" target="_top">把速度极限算到底</a> · <a href="../../zh/ch07-geometric-time-and-speed-limits.html#sec-quantum-zeno-effect" target="_top">§7.3 · 量子芝诺效应</a> · <a href="../../zh/ch07-geometric-time-and-speed-limits.html#ex-first-return-qubit" target="_top">旋转比特的首次返回统计</a> · <a href="../../zh/ch07-geometric-time-and-speed-limits.html#rem-qsl-zeno-literature" target="_top">文献注记</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">Three scenes share one rail; time is in units of ħ/E. Every number on the page is computed live from a formula or by iteration; the page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>Speed limit.</b> A superposition ψ(0) = Σ √w<sub>n</sub> |n⟩ on the levels 0, E (, 2E) has the overlap ⟨ψ(0), ψ(t)⟩ = Σ w<sub>n</sub> e<sup>−inEt/ħ</sup> and the angle θ<sub>FS</sub> = arccos |overlap|. The left panel draws the overlap: one cyan arrow per level, head to tail, with their sum as the amber dot; the magenta centre is the 90° wall (zero overlap). The right panel draws the angle against time, the speed line ΔH·t/ħ and the wall. The Mandelstam–Tamm and Margolus–Levitin bounds are literature results, not formalized in this book (ARGUED). The frozen theorem <a class="leanref" data-lean-gid="D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumBounds/FubiniStudyRecordTime.lean" target="_blank" rel="noopener"><code>record_time_lower_bound</code></a> (LEAN ✓) takes “each angular displacement is at most energy·τ/ħ” as a hypothesis and concludes τ ≥ πħ/(4·energy); the two-even-levels card makes the choices of Chapter 7, for which hypothesis and conclusion both hold with equality.</li>
+        <li><b>Three cases.</b> Two even levels: the angle is the speed line and hits the wall at t = π; both bounds are attained. Three even levels: the wall is reached only at t = 2π/3 ≈ 2.094, the speed line reaches it at 1.924 and the ML mark sits at 1.571; the curve bends, and the arc length travelled, 1.710 rad, exceeds the 90° geodesic. Uneven weights (weight angle α &lt; 45°): the smallest overlap is |cos 2α|, the angle reaches at most 2α, and the wall is never reached.</li>
+        <li><b>Zeno strobe.</b> A qubit starts at the north pole |0⟩ and turns about X under H = (ħω/2)σ<sub>x</sub>; within ωT = 180° it is asked N times, evenly spaced, “still in |0⟩?”. Each interval turns 180°/N, a yes has probability cos²(π/2N), and the survival over the whole run is P<sub>N</sub> = [cos²(π/2N)]<sup>N</sup>: 0, 0.5308, 0.8569 and 0.9622 for N = 1, 4, 16 and 64. The arrow's shadow on the line (cyan) loses only a second-order amount, while the part that leaves the line (magenta) is first order. The freezing as N → ∞ is the Misra–Sudarshan theorem, a literature result, not formalized in this book (ARGUED).</li>
+        <li><b>First return.</b> Each step is U = cos(δ/2) I − i sin(δ/2) X, starting from v = |0⟩; after every step ask “back at v?”, and otherwise project onto the orthogonal complement of v. The page iterates this protocol and obtains the first-return probabilities p<sub>n</sub> and the survival probabilities s<sub>n</sub>. The frozen theorem <a class="leanref" data-lean-gid="D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.lean" target="_blank" rel="noopener"><code>monitored_return_conservation</code></a> (LEAN ✓) states s₀ = 1, p<sub>n+1</sub> = s<sub>n</sub> − s<sub>n+1</sub> and Σp + s<sub>N</sub> = 1: the cyan (returned) and the magenta (not yet) of every column add up to exactly 1.</li>
+        <li><b>Always 2 on average.</b> The mean return time is the sum of the s<sub>n</sub>, which is the total magenta area. By the hand computation of Chapter 7, c²·1 + s²·(1 + 1/s²) = 2 whatever δ (c = cos(δ/2), s = sin(δ/2)). The small plot covers the whole range of δ: the further wait 1 + 1/s² after a first miss grows as δ shrinks, and the mean stays at 2. This is a numerical check by the page (NUM), not a cited theorem.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch07-geometric-time-and-speed-limits.html#sec-quantum-speed-limit" target="_top">Chapter 7 §7.2 · quantum speed limits</a> · <a href="../../en/ch07-geometric-time-and-speed-limits.html#ex-orthogonalization-times" target="_top">working the speed limit out</a> · <a href="../../en/ch07-geometric-time-and-speed-limits.html#sec-quantum-zeno-effect" target="_top">§7.3 · the quantum Zeno effect</a> · <a href="../../en/ch07-geometric-time-and-speed-limits.html#ex-first-return-qubit" target="_top">first-return statistics of a rotating qubit</a> · <a href="../../en/ch07-geometric-time-and-speed-limits.html#rem-qsl-zeno-literature" target="_top">literature note</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

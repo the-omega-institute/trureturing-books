@@ -6,9 +6,15 @@
 
 请先问一个最朴素的几何问题：如果观察者手头只有一张平坦的二维转盘（比如固定绕单根轴旋转的相位门），他能抵达三维世界里的每一个方向吗？不能！单张平面只能画出一个一维圆周。要想跳出原有的圆环、走遍三维单位球面 $S^2 \subset \mathbb{R}^3$ 上的每一寸土地，空间至少需要提供几根两两正交的主轴？从北极基准态出发，又为什么恰好只需要**“正交一次、正交两次”**两步转向，就能为整颗球面上的任意纯态方向精准寻址？
 
+::: {.viz src="two-angle-addressing" preset="tilt" height="500"}
+**只转一次，只画得出一个圆。** 只绕 $\vv{e}_2$ 转：琥珀色的点沿紫色虚线的子午圆走一整圈，又回到北极 $N$；白色的线是它走过的路，离不开这一个圆。
+:::
+
 本章将把这句看似直觉的口诀拆解为四层严密的几何与拓扑结构：从三维欧氏空间中任意两向量的公共单位法线存在性出发，经由北极两角球面寻址与双轴连续旋转群的有限字生成定理，最终抵达球面无正交对开覆盖的“有理六轴构造”（其中每个条件 $2\langle x, a_i\rangle_{\mathbb{R}}^2 > 5\norm{x}^2$ 在 $S^2$ 上界定围绕 $\pm a_i/\norm{a_i}$ 的一对对跖开球冠，6 对共 12 个开球冠）与拓扑六色下界。
 
-![三轴与泡利双矢量平面、从北极出发的两角球面寻址，以及有理六轴无正交对开覆盖](../assets/fig-09-three-axis-addressing.svg)
+::: {.figure src="ch09-overview"}
+**图 09。** 本章地图：第 I 栏，三支紫色的轴 $\vv{e}_1, \vv{e}_2, \vv{e}_3$ 两两垂直，三块品红的圆盘是它们两两张成的旋转面 $I_x, I_y, I_z$；第 II 栏，琥珀色的点从北极 $N$ 出发，先沿子午线倾转 $\theta$，再沿虚线的纬度圈拧转 $\varphi$；第 III 栏，六根有理轴两端各套一个 $45^\circ$ 的青色球冠，十二个球冠盖满整颗球（[@prop-rational-six-axis-cover]）。
+:::
 
 ## 三轴与三块正交面 {#sec-three-axis-pauli-bivectors}
 
@@ -29,6 +35,10 @@ $$
 :::
 
 请注意 [@lemma-three-axis-normal] 的边界纪律：定理对输入向量 $a, b \in \mathbb{R}^3$ **不施加任何非零、归一化或线性无关前提**；当 $a, b$ 共线且不全为零（$\dim_{\mathbb{R}}\operatorname{span}\{a, b\} = 1$）时，垂直于它们的单位法向量在正交平面内构成一整圈单位圆 $S^1$，而当 $a = b = 0$ 时，正交约束退化为空条件，公共单位法向量集合就是整颗单位球面 $S^2$。定理只断言存在至少一根这样的单位法向量 $n$，而不依赖右手叉积去挑选特定定向。
+
+::: {.figure src="ch09-common-normal"}
+**任意两根向量都有公共的单位法线。** 左栏，$a$ 与 $b$ 长短不一、也不垂直，紫色的 $n$ 垂直于它们张成的品红圆盘，另一端的虚线是 $-n$；右栏，$a$ 与 $b$ 共线，垂直于它们的单位向量铺满一整个紫色的圆（[@lemma-three-axis-normal]）。
+:::
 
 一旦固定标准正交基 $\vv{e}_1 = (1, 0, 0)$、$\vv{e}_2 = (0, 1, 0)$、$\vv{e}_3 = (0, 0, 1)$，[@lemma-three-axis-normal] 揭示的“两轴立一面、一面配一法线”结构就展现出完美的对偶咬合：
 
@@ -69,6 +79,10 @@ $$
   \vv{r}(\theta, \varphi) = R_z(\varphi) R_y(\theta) N = (\sin\theta\cos\varphi,\; \sin\theta\sin\varphi,\; \cos\theta) \in S^2.
   $$
 
+::: {.viz src="two-angle-addressing" preset="address" height="500"}
+**倾一次、拧一次，到达任一点。** 先绕 $\vv{e}_2$ 倾转 $\theta = 60^\circ$，再绕竖轴 $\vv{e}_3$ 拧转 $\varphi = 45^\circ$：第二步沿紫色虚线的纬度圈走，高度 $\cos\theta = \frac{1}{2}$ 不变，琥珀色的点停在白色的目标圈上，$x = \bigl(\frac{\sqrt{6}}{4}, \frac{\sqrt{6}}{4}, \frac{1}{2}\bigr)$（即 [@ex-two-angle-six-axis] 中的点）。
+:::
+
 为什么不需要“正交三次”来定位球面上的一个点？因为单位球面 $S^2 \subset \mathbb{R}^3$ 是二维流形：第一步极角 $\theta \in [0, \pi]$ 选定纬度圈，第二步方位角 $\varphi \in [0, 2\pi)$ 选定经度线，两步正交合起来已经覆盖了 $S^2$ 上的每一个方向！（至于在 $\mathrm{SO}(3)$ 或 $\mathrm{SU}(2)$ 中合成**任意单比特量子门**而非仅仅寻址单个球面态方向，详见章末 [@rem-axes-literature] 以及[第二十六章](ch26-single-qubit-rotor-compilation.md)经内核验证的 ZYZ 旋转器编译。）
 
 同时，在阅读这组球面两角公式时，有两处极易混淆的几何细节必须当场辨明：
@@ -81,6 +95,10 @@ $$
 
    旋量里的 $\theta/2$ 是二对一双覆盖 $\mathrm{SU}(2) \to \mathrm{SO}(3)$ 的半角投影，切勿与球面向量夹角 $\theta$ 混为一谈。
 2. **南北两极的方位角冗余**：当 $\theta = 0$（北极 $N$）或 $\theta = \pi$（南极 $-N$）时，$\sin\theta = 0$，此时无论 $\varphi \in [0, 2\pi)$ 取何值，$\vv{r}(0, \varphi) = (0, 0, 1)$ 与 $\vv{r}(\pi, \varphi) = (0, 0, -1)$ 都纹丝不动。这说明 $(\theta, \varphi)$ 虽然给出了整颗 $S^2$ 的满射参数化，但在南北两极处发生了坐标退化，**并不是整颗球面上的全局非奇异微分坐标卡**。
+
+::: {.viz src="two-angle-addressing" preset="pole" height="500"}
+**在南极，第二步白拧。** 先倾转 $\theta = 180^\circ$ 到南极，再绕竖轴拧一整圈：琥珀色的点一动不动，只有白色的小旗沿虚线转过一圈。在两极，$\varphi$ 取什么都是同一点。
+:::
 
 ## 初始结构与有限旋转字 {#sec-finite-axis-words}
 
@@ -118,10 +136,23 @@ $$
 条件 $\langle a, b\rangle_{\mathbb{R}}^2 < \norm{a}^2 \norm{b}^2$ 保证 $a \neq 0$、$b \neq 0$ 且单位化方向 $\hat{a} = \norm{a}^{-1}a$ 与 $\hat{b} = \norm{b}^{-1}b$ 满足 $|\langle \hat{a}, \hat{b}\rangle_{\mathbb{R}}| < 1$。在单轴旋转子群 $\operatorname{axisCircle}(a)$ 与 $\operatorname{axisCircle}(b)$ 的交替作用下，$\hat{a}$ 的轨道在球面 $S^2$ 上每次可扩展覆盖半径受 $|\hat{a}\times\hat{b}| = \sqrt{1 - \langle\hat{a},\hat{b}\rangle_{\mathbb{R}}^2} > 0$ 下界控制的球面带，经有限次交替共轭即可将任意单位向量旋转至 $\hat{a}$（并把绕任意第三轴的旋转共轭归约为绕 $a$ 轴的旋转）。由于保定向正交变换 $R$ 由其在标准正交基上的作用唯一确定，将稳定化步与轴上旋转步拼接为有限列表 $l$，即满足列表元素均属于 $\operatorname{axisCircle}(a) \cup \operatorname{axisCircle}(b)$ 且列表乘积 $l.\mathrm{prod} = R$。完整证明由 Lean 内核检查。
 :::
 
+::: {.viz src="two-angle-addressing" preset="skew" height="500"}
+**斜轴也能到，只是多转几次。** 两根紫色转轴只差 $30^\circ$：每次绕 $b$ 最多把点推远 $60^\circ$，青色虚线是到这一步为止能到的最远处。绕 $b$、绕 $a$ 交替转四次，琥珀色的点停在离 $N$ 为 $110^\circ$ 的白色目标圈上。字是页面按一条贪心规则当场构造的；[@thm-two-axis-finite-word] 只保证这样的有限字存在。
+:::
+
 请务必把 [@thm-two-axis-finite-word] 的数学契约读准：
 
 1. **初始结构的门槛与零向量退化分支**：定理只要求严格不等式 $\langle a, b\rangle_{\mathbb{R}}^2 < \norm{a}^2 \norm{b}^2$，输入轴 $a, b$ 既不必是单位向量，也不必互相正交。当柯西—施瓦茨不等式取等号（$\langle a, b\rangle_{\mathbb{R}}^2 = \norm{a}^2 \norm{b}^2$）时，须严格区分两种退化情形：若**两根非零轴共线**（$a \neq 0, b \neq 0$ 且 $a \parallel b$），则两个轴圆坍缩为同一个平面阿贝尔旋转子群 $\operatorname{axisCircle}(a) = \operatorname{axisCircle}(b) \cong \mathrm{SO}(2)$，再长的有限字也永远困在单张平面里而无法生成 $\mathrm{SO}(3)$；反之，若 $a = 0$ 或 $b = 0$，由于源码全定义 $\operatorname{axisCircle}(0) = \{R \in \mathrm{Orthogonal} \mid \operatorname{determinant}(R) = 1 \land R(0) = 0\} = \mathrm{SO}(3)$（任意线性映射均保持零向量不动），零向量的稳定子群直接退化为整个 $\mathrm{SO}(3)$，此时任意 $R \in \mathrm{SO}(3)$ 虽可写成字长为 $1$ 的平凡字，但零向量本身并不给出任何几何旋转轴。
+
+::: {.viz src="two-angle-addressing" preset="collinear" height="500"}
+**两轴共线，困在原地。** $\alpha = 0$ 时紫色的 $a$ 与 $b$ 重合：绕 $a$ 转和绕 $b$ 转是同一种转动，都固定 $N$。琥珀色的点不动，白色的小旗只在水平面里转。
+:::
+
 2. **存在性不等于通用两步或固定门长算法**：[@thm-two-axis-finite-word] 允许从整条连续圆周子群 $\operatorname{axisCircle}(a)$ 与 $\operatorname{axisCircle}(b)$ 中选取任意连续角度的旋转，并断言存在某个有限列表 $l$ 使 $l.\mathrm{prod} = R$。它**并不断言**任意斜交双轴都能像正交欧拉轴那样仅用固定字长 $2$ 或 $3$ 完成分解（当两轴夹角很小时，所需交替步数会随夹角缩小而增长），**也不断言**随意挑两个固定角度的离散门就能遍历球面，更**不提供**求取最短字长或多项式时间门合成的构造性算法。
+
+::: {.viz src="two-angle-addressing" preset="narrow" height="500"}
+**夹角越小，转得越多。** 两根紫色转轴只差 $10^\circ$：每次绕 $b$ 只能把点推远至多 $20^\circ$，青色虚线一格一格往外挪；同一个离 $N$ 为 $110^\circ$ 的目标要十二个转动才到。这是页面的构造，不是最短字。
+:::
 
 ## 有理六轴覆盖与六色下界 {#sec-rational-six-axis-atlas}
 
@@ -130,6 +161,10 @@ $$
 **最少需要多少块相对开集 $U_0, \dots, U_{k-1} \subseteq S^2$ 才能把整颗单位球面 $S^2$ 完全盖住，同时保证每一块开集 $U_i$ 内部都彻底不含正交向量对（即对任意 $x, y \in U_i$ 均有 $\langle x, y\rangle_{\mathbb{R}} \neq 0$）？**
 
 这里必须先破除一个常见的几何误区：“无正交对开集”只要求集合相对开且内部不含夹角恰好为 $90^\circ$ 的点对（$\langle x, y\rangle_{\mathbb{R}} \neq 0$），**并不要求开集本身连通，也不要求其全局角直径小于 $90^\circ$**。事实上，只要围绕某根基准轴 $a_i$ 同时取正负两极的对跖开球冠 $\{x \in S^2 \mid |\langle x, \hat{a}_i\rangle_{\mathbb{R}}| > 1/\sqrt{2}\}$（使落入其中的每个点与 $+\hat{a}_i$ 或 $-\hat{a}_i$ 的夹角严格小于 $45^\circ$），同一球冠内的两点夹角必严格小于 $90^\circ$，而分处南北两个对跖球冠的两点夹角必严格大于 $90^\circ$（甚至包含夹角为 $180^\circ$ 的对跖点对 $\pm\hat{a}_i$），从而整块不连通的双极冠开集内部永远不会出现 $90^\circ$ 正交对！那么，能不能只靠纯有理整数坐标的基准轴，显式造出这样一套覆盖整颗 $S^2$ 的“无正交盲区开图册”？
+
+::: {.figure src="ch09-antipodal-caps"}
+**一种颜色是一对对跖球冠，里面凑不出直角。** 这是球过轴 $\pm\hat{a}$ 的截面：青色的上下两段弧是离轴不到 $45^\circ$ 的两个球冠，左右灰色的是缝。同一个冠里的 $x$ 与 $y$ 夹角小于 $90^\circ$，分处两冠的 $x$ 与 $z$ 夹角大于 $90^\circ$，恰好相差 $90^\circ$ 的一对永远找不到。
+:::
 
 答案是肯定的，而且恰好只需要 **6 根有理轴**（图 09 右栏）！在 Lean 模块 `RationalSixAxisCover` 中，定义 $\mathrm{UnitSphere} = \{x \in \mathbb{R}^3 \mid \norm{x} = 1\}$，并按固定下标顺序 $i \in \{0, 1, 2, 3, 4, 5\}$ 给出六根整数坐标向量 `axis`：
 
@@ -147,6 +182,10 @@ $$
 $$
 
 由于 $\norm{a_i}^2 = 5$ 且球面上 $\norm{x}^2 = 1$，齐次形式 $2\langle x, a_i\rangle_{\mathbb{R}}^2 > 5\norm{x}^2$（即 $5 < 2\langle x, a_i\rangle_{\mathbb{R}}^2$）恰等价于对单位化轴 $\hat{a}_i = a_i / \norm{a_i} = a_i / \sqrt{5}$ 要求 $\langle x, \hat{a}_i\rangle_{\mathbb{R}}^2 > \frac{1}{2}$。在几何上，每个 $\operatorname{color}(i)$ 都是围绕对跖方向 $\pm\hat{a}_i$ 的**一对对跖开球冠**（6 个颜色对应 6 对对跖球冠，共 12 个半顶角为 $45^\circ$ 的开球冠）：它包含对跖钝角对，本身不连通，但同色任意两点的内积必非零。
+
+::: {.viz src="two-angle-addressing" preset="three" height="500"}
+**三根坐标轴的球冠在对角线漏缝。** 只用 $\pm\vv{e}_1, \pm\vv{e}_2, \pm\vv{e}_3$ 的 $45^\circ$ 球冠：琥珀色的点走到卦限对角线 $(1, 1, 1)/\sqrt{3}$ 时，三对灰色的圆都不含它，它落在品红的缝里，那里 $\langle x, \vv{e}_j\rangle_{\mathbb{R}}^2 = 1/3 < 1/2$。品红的点是页面在球面网格上取样找到的缝。
+:::
 
 ::: {.proposition #prop-rational-six-axis-cover title="有理六轴无正交对开覆盖定理" lean="D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover"}
 对上述有理六轴定义的六个球面子集 $\operatorname{color} : \operatorname{Fin} 6 \to \mathcal{P}(\mathrm{UnitSphere})$，同时成立以下三条性质：
@@ -250,12 +289,20 @@ $$
    按严格不等式判据 $5 < 2(x \cdot a_i)^2$，点 $x$ **恰好同时落入第 $0, 2, 4$ 号三个颜色开集**（$x \in \operatorname{color}(0) \cap \operatorname{color}(2) \cap \operatorname{color}(4)$），而不属于第 $1, 3, 5$ 号颜色。
 :::
 
+::: {.viz src="two-angle-addressing" preset="six" height="500"}
+**六根有理轴处处盖住。** 琥珀色的点按两角寻址停在 $x = \bigl(\frac{\sqrt{6}}{4}, \frac{\sqrt{6}}{4}, \frac{1}{2}\bigr)$，被颜色 $0, 2, 4$ 的青色球冠盖住，与上面的手算一致；白色虚线是与 $x$ 正交的大圆，它不进入这三种颜色的任何一个球冠（[@prop-rational-six-axis-cover]）。
+:::
+
 ::: {.remark #rem-axes-literature title="双角参数化、单比特欧拉分解与六轴开覆盖（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 关于本章涉及的经典量子计算参数化与球面正交覆盖背景，须明确区分以下边界：
 
 1. **纯态两角参数化与单比特门三参数欧拉分解**（参见 M. A. Nielsen & I. L. Chuang, *Quantum Computation and Quantum Information*, 10th Anniversary Ed., Cambridge University Press, 2010, §1.2 与 §4.2）：两角公式 $\vv{r}(\theta, \varphi) = (\sin\theta\cos\varphi, \sin\theta\sin\varphi, \cos\theta)$ 与 $\lvert\psi\rangle = \cos(\theta/2)\lvert 0\rangle + e^{i\varphi}\sin(\theta/2)\lvert 1\rangle$ 仅参数化**单比特纯态射线**（从固定北极出发的轨道点）。若要分解任意单比特幺正门 $U \in U(2)$，除将北极送往目标轴的两个角度外，还必须包含绕轴自转的第三个欧拉角以及可能的全局相位因子 $e^{i\alpha}$（即 $U = e^{i\alpha} R_z(\beta) R_y(\gamma) R_z(\delta)$）。
 2. **有限旋转字存在性与门计数复杂度的严格区分**：[@thm-two-axis-finite-word] 仅证明在允许连续轴圆 $\operatorname{axisCircle}(a), \operatorname{axisCircle}(b)$ 的前提下存在某个有限乘积列表表示目标旋转 $R \in \mathrm{SO}(3)$。这一纯存在性定理不给出最短字长上界，不涉及有限离散门集编译（如 Solovay–Kitaev 定理），更不能等同于对计算复杂性问题 $\mathrm{P}$ 与 $\mathrm{NP}$ 的判定。
 3. **有理六轴覆盖的文献来源与几何范畴**：[@prop-rational-six-axis-cover] 中的显式有理六轴构造源自对 D. Feldman & A. Wilce（arXiv:2608.13320v1, Question 3）相关问题的形式化解答，正如源码模块所载，本书不主张该六轴构造的原始发现权。同时，[@prop-rational-six-axis-cover] 与 [@cor-six-colors-necessary] 讨论的是**不含正交向量对的球面开子集覆盖**（$\operatorname{OrthogonalityFree}$），而非微分拓扑中球面切丛的全局光滑标架问题——后者属于下一章将专门剖析的毛球定理与霍普纤维丛范畴。
+:::
+
+::: {.viz src="two-angle-addressing" height="560"}
+**两角寻址与旋转字的完整实验室。** 拖动白色的目标圈、改两根紫色转轴的夹角 $\alpha$，看琥珀色的点按怎样的旋转字走过去，青色虚线圈如何限制它每一步能离开北极多远；换到“覆盖”场景，在同一颗球上比较六根有理轴与三根坐标轴的 $45^\circ$ 球冠。绿色框只给 [@thm-two-axis-finite-word]、[@prop-rational-six-axis-cover] 与 [@cor-six-colors-necessary]；旋转字的构造与球面取样是页面的数值演示。
 :::
 
 现在，我们已经能够用三元正交轴定位球面上的任意方向，并用六块无正交盲区的有理开集覆盖整颗 $S^2$。然而，一旦我们在球面上真正连续走动起来，一个困扰了物理学界整整一百年的幽灵立刻迎面扑来：**既然在球面上“先绕 $X$ 转、再绕 $Y$ 转”和“先绕 $Y$ 转、再绕 $X$ 转”会停在完全不同的终点（$R_x R_y \neq R_y R_x$），为什么作者却说“量子的本质是两两比较，永远一致，顺序无关”？** 让我们翻开[下一章](ch10-gram-geometry-and-order.md)，揭开格拉姆矩阵与贝里相位的几何谜底。

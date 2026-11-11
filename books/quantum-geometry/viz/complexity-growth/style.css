@@ -1,0 +1,7 @@
+/* COMPLEXITY//GROWTH: the shared lab layout (../assets/theme.css) carries the page. Put here only what belongs to this
+   visualization alone; colours come from the tokens (var(--cyan) …), never from hex values. */
+#cv { cursor: pointer; touch-action: none; }
+/* the open-conjecture mark on the stage uses the same red as the OPEN evidence box */
+.tag.wn { color: var(--warn); }
+/* on a phone the two scene buttons share the top row with the title: the title goes below them */
+@media (max-width: 560px) { #stage .hud-tl { top: 46px; } }
