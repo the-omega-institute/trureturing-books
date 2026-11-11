@@ -31,8 +31,11 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `eth-horizon-crossover` | 渐近更好的曲线要到视界之外才追上；流矩阵的秩等于最小割；过线的模态数有墙 | `human` `atoms` `cross` `constant` `bridge` `narrow` `plateau` `tail` |
 | `spatial-attractor-deja-vu` | 忘掉起点，轨道还是落回同一对翅膀，一次次经过同一处 | `butterfly` `forget` `return` `shrink` `sheet` `dimension` `fixed` `cycle` |
 | `golden-cut-observer` | 窗口挪一挪，贴边的点翻转，深处的点留在原地 | `cut` `phason` `empire` `cassini` `returns` `narrow` `window` `edge` |
+| `bloch-noise` | 噪声把球往里压、往北推，却从不把球里的两个点拉开 | `shorten` `pinch` `dephase` `amp` `wide` `depol` `distance` `centre` |
 
 后四个页面的依据分层要写在页面与图注里：第三十章转述的 2026 年预印本只作为该章的转述出现，页面上的曲线与涡管是示意模型（`MODEL`）；菱形三十面体与“帝国”是文献结果（`ARGUED`）；灵魂、遗迹、似曾相识是诠释模型（`MODEL`）；只有带 Lean 链接的绿色框是已验证定理。`spatial-attractor-deja-vu` 不引用任何 Lean 定理。
+
+`bloch-noise` 的绿色框只引用第四章正文已用 `lean=` 引用的定理；三种噪声的布洛赫仿射形式与 $T = \frac{1}{2}\lVert\vv{r} - \vv{s}\rVert$ 按该章例题标 `ARGUED`；时间轴上两个整数步之间取相邻整数步输出的凸组合、把横向剩余读成 $\cos\theta_{\mathrm{env}}$ 标 `MODEL`。`wide` 卡里的映射不是信道，页面只说它刺穿球皮。
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
@@ -72,6 +75,14 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 终章 | 黄金切投 · 三 末（文献注记 `rem-coda-quasicrystal-empire-literature` 之后） | `golden-cut-observer` · `window`、`empire` |
 | 终章 | 定理 `thm-coda-golden-cut-observer-cassini` 之前 | `golden-cut-observer` · `cassini`、`returns` |
 | 终章 | 该定理的证明之后 | `golden-cut-observer` 完整实验室 |
+| 第四章 | §4.1 局部布洛赫向量 $(\cos\theta_{\mathrm{env}}, 0, 0)$ 一段之后 | `bloch-noise` · `shorten` |
+| 第四章 | §4.2 捏合投影一段之后、定理 `thm-pinching-pythagorean` 之前 | `bloch-noise` · `pinch` |
+| 第四章 | §4.2 相位阻尼一段之后、命题 `prop-phase-damping-decay` 之前 | `bloch-noise` · `dephase` |
+| 第四章 | §4.2 振幅阻尼一段之后 | `bloch-noise` · `amp` |
+| 第四章 | §4.2 指数包络 $T_2 \le 2T_1$ 一段之后、文献注记 `rem-relaxation-envelope-literature` 之前 | `bloch-noise` · `wide` |
+| 第四章 | §4.2 末（“可分辨性只会丢”） | `bloch-noise` · `distance` |
+| 第四章 | §4.3 开头一段之后 | `bloch-noise` · `centre` |
+| 第四章 | 例 `ex-maximally-mixed-center` 之后、第一部小结之前 | `bloch-noise` 完整实验室 |
 
 ## 增删或修改一张卡之后
 

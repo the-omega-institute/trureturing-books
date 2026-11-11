@@ -558,6 +558,81 @@
           "gid": "D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result"
         }
       ]
+    },
+    {
+      "id": "bloch-noise",
+      "code": "BLOCH//NOISE",
+      "title": "三种噪声下的布洛赫球",
+      "title_en": "The Bloch ball under three noises",
+      "summary": "让相位阻尼、振幅阻尼与去极化一步步作用在整颗布洛赫球上：相位阻尼只收腰、不掉高，强度为 1 时一步把球压成竖轴（捏合）；振幅阻尼把球缩小并往北极上漂，只有北极不动；去极化让球同心缩向球心。横向寿命超过 2T₁ 时，固定北极的像会刺穿球皮（λ² ≤ a 的判据）。两个态 ρ 与 σ 之间的迹距离一步也不会变长，最后可以落到同一点。八张实验卡各讲其中一件事，可以在正文里单独引用。",
+      "summary_en": "Let phase damping, amplitude damping and depolarizing act step by step on the whole Bloch ball: phase damping narrows the waist and keeps the height, and at strength 1 squashes the ball onto the vertical axis in one step (pinching); amplitude damping shrinks the ball and lifts it towards the north pole, its only fixed point; depolarizing shrinks it evenly towards the centre. With a transverse lifetime beyond 2T₁ the image of a north-pole map pierces the skin (the criterion λ² ≤ a). The trace distance between two states ρ and σ never grows, and they may end on the same point. Each of the eight experiment cards makes one of these points and can be cited on its own from the text.",
+      "path": "bloch-noise/",
+      "thumbnail": "bloch-noise/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "布洛赫球",
+        "退相干",
+        "相位阻尼",
+        "振幅阻尼",
+        "去极化",
+        "迹距离",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Bloch ball",
+        "Decoherence",
+        "Phase damping",
+        "Amplitude damping",
+        "Depolarizing",
+        "Trace distance",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第 4.1 节 · 纯态是球皮，混合态是截短的线",
+          "label_en": "§4.1 · Pure states are the shell, mixed states are shorter chords",
+          "href": "../zh/ch04-decoherence.html#sec-ch04-1",
+          "href_en": "../en/ch04-decoherence.html#sec-ch04-1"
+        },
+        {
+          "label": "第 4.2 节 · 不用背 Kraus 算符看懂三种量子噪声",
+          "label_en": "§4.2 · Quantum noise geometrically, without Kraus operators",
+          "href": "../zh/ch04-decoherence.html#sec-ch04-2",
+          "href_en": "../en/ch04-decoherence.html#sec-ch04-2"
+        },
+        {
+          "label": "第 4.3 节 · 最大混合死点",
+          "label_en": "§4.3 · The maximally mixed dead center",
+          "href": "../zh/ch04-decoherence.html#sec-ch04-3",
+          "href_en": "../en/ch04-decoherence.html#sec-ch04-3"
+        },
+        {
+          "label": "Lean 源码 · NorthPoleBallCriterion.lean",
+          "label_en": "Lean source · NorthPoleBallCriterion.lean",
+          "href": "{trureturing}/D5/S3/QuantumChannels/ContractionGeometry/NorthPoleBallCriterion.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance_contract"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/ContractionGeometry/NorthPoleBallCriterion.north_pole_ball_preserving_iff"
+        },
+        {
+          "gid": "D5/S3/Quantum/QubitWitnesses.phaseDampingIterate_apply"
+        },
+        {
+          "gid": "D5/S3/Quantum/Decoherence/CoherenceDecay.equal_superposition_coherence_tendsto_zero"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/CoherenceMassBridge.pinching_eq_self_iff_offDiag_eq_zero"
+        }
+      ]
     }
   ]
 }
