@@ -21,6 +21,11 @@
     a[0] * b[2] - a[1] * b[3] + a[2] * b[0] + a[3] * b[1], a[0] * b[3] + a[1] * b[2] - a[2] * b[1] + a[3] * b[0]];
   /** Which of ±R: the sign of w, or of the first nonzero component of b when w = 0 (a convention). */
   const sheetOf = (q) => { for (const c of q) if (Math.abs(c) > 1e-9) return c > 0 ? 1 : -1; return 1; };
+  /** Is the whole turn the identity, read off the normalized rotor: +1 or −1 when its vector part vanishes, else 0.
+      B coming back alone does not say this: a B lying on the axis of the combined turn also comes back. */
+  const wholeOf = (q) => { const n = Math.hypot(...q), b = Math.hypot(q[1], q[2], q[3]) / n; return b < 1e-9 ? (q[0] > 0 ? 1 : -1) : 0; };
+  /** The angle of the combined turn on the sphere, in degrees (0 … 180). */
+  const turnDeg = (q) => 2 * Math.acos(Math.min(1, Math.abs(q[0]) / Math.hypot(...q))) / DEG;
   let starts = [{ r: [0, 0, 1], q: [1, 0, 0, 0] }];   // starts[i] = { r, q } before gate i; starts[n] = the end of the circuit
   function rebuild() {
     let r = v3.sph(S.theta * DEG, S.phi * DEG), q = [1, 0, 0, 0];
@@ -158,9 +163,10 @@
     $('circAside').textContent = n ? L(`${n} 个门`, `${n} gate${n > 1 ? 's' : ''}`) : L('空', 'empty');
     const end = starts[n], back = n && v3.len(v3.sub(end.r, starts[0].r)) < 1e-9;
     $('circNote').innerHTML = !n ? L('点上面的门，或选一张实验卡。每个小标记是那一步之后旋子落在 ±R 的哪一叶。', 'Tap a gate above, or pick an experiment. Each small mark is the sheet (which of ±R) reached after that step.')
-      : back ? (sheetOf(end.q) < 0
-        ? L('线路结束时 B 回到了出发点，旋子却是 <b>−1</b> 倍：矢量转了一圈，旋子只走了半圈。', 'At the end B is back where it started, yet the rotor is <b>−1</b> times the identity: the vector made a full turn, the rotor only half of one.')
-        : L('线路结束时 B 回到了出发点，旋子也回到 <b>+1</b>。', 'At the end B is back where it started and the rotor is back at <b>+1</b>.'))
+      : back ? (wholeOf(end.q) < 0
+        ? L('线路结束时 B 回到了出发点，整段布洛赫变换是恒等，旋子却是 <b>−I</b>。', 'At the end B is back where it started and the whole Bloch transformation is the identity, yet the rotor is <b>−I</b>.')
+        : wholeOf(end.q) > 0 ? L('线路结束时 B 回到了出发点，整段转动是恒等，旋子也回到 <b>+1</b>。', 'At the end B is back where it started, the whole turn is the identity, and the rotor is back at <b>+1</b>.')
+          : L(`线路结束时 B 回到了出发点，整段线路却不是恒等：合成的是一个 ${fix(turnDeg(end.q), 0)}° 的转动，B 恰好在它的转轴上；旋子 w = ${sgn(end.q[0], 3)}，不是 ±1。`, `At the end B is back where it started, yet the whole circuit is not the identity: it is a ${fix(turnDeg(end.q), 0)}° turn and B happens to lie on its axis; the rotor has w = ${sgn(end.q[0], 3)}, not ±1.`))
         : compareX().sameTurn ? L(`这条线路走完，终点与单独一个 X 门相同，旋子却是 <b>${compareX().sign > 0 ? '+' : '−'}R<sub>X</sub></b>。`, `This circuit ends where a single X gate would, yet its rotor is <b>${compareX().sign > 0 ? '+' : '−'}R<sub>X</sub></b>.`)
           : L('小标记是每一步之后旋子落在 ±R 的哪一叶；点击任一门跳到它之后。', 'The small marks show the sheet (which of ±R) after each step; click a gate to jump to just after it.');
     const an = { z: L('沿 Z 比量：两种咔哒是 |0⟩ 与 |1⟩。', 'Measuring along Z: the two clicks are |0⟩ and |1⟩.'), x: L('沿 X 比量：同一个态，线和面积重新分配。', 'Measuring along X: the same state, with line and area shared out anew.'), y: L('沿 Y 比量：两种咔哒是 |+i⟩ 与 |−i⟩。', 'Measuring along Y: the two clicks are |+i⟩ and |−i⟩.') };
@@ -187,8 +193,10 @@
   function finished() {
     const n = S.gates.length, end = starts[n];
     if (!n) return;
-    if (v3.len(v3.sub(end.r, starts[0].r)) < 1e-9) TRV.toast($('toast'), sheetOf(end.q) < 0
-      ? L('B 回到原处，旋子 <b>R = −1</b>', 'B is back, the rotor is <b>R = −1</b>') : L('B 回到原处，旋子 <b>R = +1</b>', 'B is back, the rotor is <b>R = +1</b>'));
+    const whole = wholeOf(end.q);
+    if (v3.len(v3.sub(end.r, starts[0].r)) < 1e-9) TRV.toast($('toast'), whole < 0
+      ? L('B 回到原处，旋子 <b>R = −1</b>', 'B is back, the rotor is <b>R = −1</b>') : whole > 0 ? L('B 回到原处，旋子 <b>R = +1</b>', 'B is back, the rotor is <b>R = +1</b>')
+        : L('B 回到原处，旋子却不是 <b>±1</b>：B 在合成转动的轴上', 'B is back, yet the rotor is not <b>±1</b>: B lies on the axis of the combined turn'));
     else if (compareX().sameTurn) TRV.toast($('toast'), L(`与一个 X 门同一个转动，旋子是 <b>${compareX().sign > 0 ? '+' : '−'}R<sub>X</sub></b>`, `The same turn as one X gate; the rotor is <b>${compareX().sign > 0 ? '+' : '−'}R<sub>X</sub></b>`));
   }
   function circuitChanged(tau) {

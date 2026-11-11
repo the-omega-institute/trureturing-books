@@ -10,14 +10,14 @@
 
 然而，只要把这两种时间放到一起，物理学里著名的“洛施密特时间反演佯谬（Loschmidt paradox）”便迎面扑来：**既然底层的幺正旋转 $U(t) = \exp((-it/\hbar)H_{\mathrm{op}})$ 是百分之百双向可逆的——把旋子倒转一个负角 $R(-\theta) = R(\theta)^\dagger$ 就能原路退回——为什么宏观世界与观察者的记忆却拥有一支铁板钉钉、有去无回的“热力学时间箭头”？为什么我们能记住昨天、却记不住明天？**
 
-作为第二部《展翼·从线到面》的收官之章，本章将用四条经 Lean 4 内核验证的形式化定理，彻底算清这笔“从二维面积压扁成一维线”的信息与热力学总账：
+作为第二部《展翼·从线到面》的收官之章，本章将用六条经 Lean 4 内核验证的形式化结论，彻底算清这笔“从二维面积压扁成一维线”的信息与热力学总账：
 
 1. **幺正旋转不产熵，唯有基捏合抹除面积才产熵**：每一步“幺正旋转 $U$ $+$ 计算基对角捏合 $\Pi$”所产生的系统冯·诺依曼熵增 $\Delta S_{\mathrm{pinch}} = S(\Pi(U\rho U^*)) - S(\rho)$，一分不差地等于被抹除的横向相干面积的量子相对熵 $D(U\rho U^* \,\|\, \Pi(U\rho U^*)) \ge 0$；
 2. **抹平 $1$ 比特正交面积产生 $\ln 2$ 奈特系统熵增，并与非保单位兰道尔热浴重置严格区分**：在相互无偏基（MUB）下将 $d$ 维记录态保单位捏合抹平到最大混合态 $I_d/d$，系统的相对熵代价与冯·诺依曼熵增恒为 $\ln d - S(\rho)$（对单比特纯态恰为 $\ln 2 \approx 0.6931\text{ nats} = 1\text{ bit}$）；至于随后的非保单位逻辑重置如何将系统混合熵排入外部热浴，则见热力学文献注记 [@rem-landauer-stage-b-statement-literature] 与 [@rem-landauer-thermodynamic-bridge-literature]；
-3. **连观察者结构都没有任何例外**：哪怕观察者拥有通天神通，把环境中绝大多数纠缠副本都做了相干逆转，只要茫茫宇宙里还漏掉**唯一一份**未逆转的幸存环境副本 $k$（其记录重叠度 $\neq 1$，且其余已逆转副本具幺模重叠度），初始非零相干面积就绝不可能复原！
+3. **连观察者结构都没有任何例外**：在指定的共轭重叠逆转协议、记录不可访问的受限操作，以及其余副本幺模、幸存副本重叠不为 $1$、所选 $\rho_{ij} \neq 0$ 的条件下，漏掉唯一一份幸存副本会阻断该选定相干元的复原。
 
 ::: {.figure src="ch08-overview"}
-**图 8。** 本章地图：第 I 栏，对角元相同、相干元不同的两支箭头 $\rho$ 与 $\sigma$ 高度相同，求偏迹抹掉品红的横向一份后落到竖轴上同一个青色的点；第 II 栏，琥珀色的箭头 $\lvert +\rangle$ 被捏合，品红的横向一份被抹掉，箭头缩成圆心的青色点，熵柱从 $0$ 升到 $\ln 2$；第 III 栏，系统连着五份环境副本，四份倒了带（青色），漏下的一份 $k$ 是品红的，倒带后只得到 $c_k\rho_{01} \neq \rho_{01}$。
+**图 8。** 本章地图：第 I 栏，对角元相同、相干元不同的两支箭头 $\rho$ 与 $\sigma$ 高度相同，求偏迹抹掉品红的横向一份后落到竖轴上同一个青色的点；第 II 栏，琥珀色的箭头 $\lvert +\rangle$ 被捏合，品红的横向一份被抹掉，箭头缩成圆心的青色点，熵柱从 $0$ 升到 $\ln 2$；第 III 栏，在本节指定的共轭重叠逆转协议中，系统连着五份环境副本，四份倒了带（青色），漏下的一份 $k$ 是品红的；其余副本满足 $|c_l| = 1$（$l \neq k$），且 $c_k \neq 1$、$\rho_{01} \neq 0$，倒带后只得到 $c_k\rho_{01} \neq \rho_{01}$。
 :::
 
 ## 8.1 幺正旋转的可逆性 vs. 信息擦除的不可逆性 {#sec-unitary-reversibility-vs-erasure}
@@ -74,7 +74,7 @@ $$
 - **阶段 A（保单位基捏合 / 相干面积抹除，在本书 Lean 模块中严格形式化）**：可逆的幺正门 $U$ 先把状态旋转为 $\rho_U := U\rho U^*$（[`unitaryConjugateState`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.unitaryConjugateState)），此时本征值谱不变、冯·诺依曼熵一丝未增（$S(\rho_U) = S(\rho)$）；紧接着执行计算基对角捏合 $\Pi(\rho_U) := \operatorname{basisPinchingState}(\rho_U)$（[`basisPinchingState`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.basisPinchingState)，其对角香农熵公式见 [`von_neumann_entropy_basisPinchingState`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.von_neumann_entropy_basisPinchingState)），把横向副对角相干面积拍扁到对角线上。阶段 A（[@thm-entropy-production-coherence-deletion]，[`entropy_production_coherence_deletion_identity`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity)）严格证明的是计算基保单位捏合（$\Pi(I_n) = I_n$）下的**无量纲系统冯·诺依曼熵增** $\Delta S_{\mathrm{pinch}} = S(\Pi(\rho_U)) - S(\rho) = D(\rho_U \,\|\, \Pi(\rho_U)) \ge 0$（对单比特 $\lvert +\rangle\langle +\rvert \mapsto \frac{1}{2}I_2$ 恰为 $+\ln 2$ 奈特），该形式化定理本身不指定系统哈密顿量、外部热浴或兰道尔重置热耗（见 [@rem-landauer-thermodynamic-bridge-literature]）。
 
 ::: {.remark #rem-landauer-stage-b-statement-literature title="阶段 B：兰道尔原理与有限热浴重置排热（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 1961 年，IBM 物理学家罗尔夫·兰道尔（Rolf Landauer）提出计算热力学的基本原理——**兰道尔原理（Landauer's principle）**：“信息是物理的（Information is physical）”，在温度为 $T$ 的环境中每不可逆地擦除 $1$ 比特信息，至少必须向环境排放 $\Delta Q \ge k_B T \ln 2$ 的热量。在**阶段 B（非保单位逻辑重置 / 兰道尔热浴排热，详注见 [@rem-landauer-thermodynamic-bridge-literature]）**中，要想把已被阶段 A 捏合混化的寄存器状态（如 $\frac{1}{2}I_2$，$S = \ln 2$）重新清洗回纯参考态 $\lvert 0\rangle\langle 0\rvert$（$S = 0$）以便下一轮计算复用，必须把阶段 A 累积在系统内部的混合熵压缩掉（$\Delta S_S := S(\rho_{\mathrm{init}}) - S(\rho_{\mathrm{final}}) = +\ln 2$）。根据兰道尔原理与 Reeb–Wolf 有限热浴恒等式 $\beta\Delta Q_{\mathrm{bath}} = \Delta S_S + I(S':E') + D(\rho_E'\,\|\,\rho_E) \ge \Delta S_S$，这笔在阶段 A 中由相干面积转化而来的 $\ln 2$ 奈特熵增，最终在阶段 B 的重置过程中必须化作至少 $\Delta Q_{\min} = k_B T \ln 2$ 的焦耳热量排入温度为 $T$ 的环境热浴。
+**文献结果，未在本书形式化。** 1961 年，IBM 物理学家罗尔夫·兰道尔（Rolf Landauer）提出计算热力学的基本原理——**兰道尔原理（Landauer's principle）**：“信息是物理的（Information is physical）”，在温度为 $T$ 的环境中每不可逆地擦除 $1$ 比特信息，至少必须向环境排放 $\Delta Q \ge k_B T \ln 2$ 的热量。在**阶段 B（非保单位逻辑重置 / 兰道尔热浴排热，详注见 [@rem-landauer-thermodynamic-bridge-literature]）**中，要想把已被阶段 A 捏合混化的寄存器状态（如 $\frac{1}{2}I_2$，$S = \ln 2$）重新清洗回纯参考态 $\lvert 0\rangle\langle 0\rvert$（$S = 0$）以便下一轮计算复用，必须把阶段 A 累积在系统内部的混合熵压缩掉（$\Delta S_S := S(\rho_{\mathrm{init}}) - S(\rho_{\mathrm{final}}) = +\ln 2$）。根据兰道尔原理与 Reeb–Wolf 有限热浴恒等式 $\beta\Delta Q_{\mathrm{bath}} = \Delta S_S + I(S':E') + D(\rho_E'\,\|\,\rho_E) \ge \Delta S_S$，这笔在阶段 A 中由相干面积转化而来的 $\ln 2$ 奈特熵增，最终在阶段 B 的重置过程中必须化作至少 $Q_L = k_B T \ln 2$ 的焦耳热量排入温度为 $T$ 的环境热浴。
 :::
 
 在 Lean 模块 `Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity` 中，由对角函数演算定理 [`cfc_diagonal`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.cfc_diagonal)、[`cfc_log_diagonal`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.cfc_log_diagonal) 与捏合态熵展开 [`von_neumann_entropy_basisPinchingState`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.von_neumann_entropy_basisPinchingState) 汇成了下面这条主定理：**沿着任意由“幺正旋转 $U$ $+$ 计算基对角捏合 $\Pi$”迭代生成的离散演化序列 $\rho(k+1) = \Pi(U\rho(k)U^*)$，每一步的系统冯·诺依曼熵增都精确等于该步被抹除的横向相干面积相对熵 $D\bigl(\rho_U(k) \,\big\|\, \Pi(\rho_U(k))\bigr) \ge 0$，且前 $N$ 步的累积总熵增精确等于各步相干擦除相对熵之和！**
@@ -102,7 +102,7 @@ $$
 对任意单步状态 $\sigma = \rho(k)$，首先幺正共轭保持密度矩阵本征值不变，故冯·诺依曼熵守恒 $S(\rho_U(k)) = S(\rho(k))$。其次，由对角对数函数演算 [`cfc_log_diagonal`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.cfc_log_diagonal) 与捏合态冯·诺依曼熵公式 [`von_neumann_entropy_basisPinchingState`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.von_neumann_entropy_basisPinchingState)，计算基对角捏合 $\Pi = \operatorname{basisPinchingState}$ 满足对角投影迹恒等式 $\Tr\bigl(\rho_U(k)\ln\Pi(\rho_U(k))\bigr) = \Tr\bigl(\Pi(\rho_U(k))\ln\Pi(\rho_U(k))\bigr) = -S\bigl(\Pi(\rho_U(k))\bigr)$；代入量子相对熵定义即得 $D\bigl(\rho_U(k) \,\big\|\, \Pi(\rho_U(k))\bigr) = S\bigl(\Pi(\rho_U(k))\bigr) - S(\rho_U(k))$。结合 $S(\rho_U(k)) = S(\rho(k))$ 与迭代律 $\rho(k+1) = \Pi(\rho_U(k))$，立得单步恒等式 $S(\rho(k+1)) - S(\rho(k)) = D\bigl(\rho_U(k) \,\big\|\, \Pi(\rho_U(k))\bigr)$，且由对角对数凹性（克莱因不等式）保证 $0 \le D\bigl(\rho_U(k) \,\big\|\, \Pi(\rho_U(k))\bigr)$（结论 1）。最后，对 $N \in \mathbb{N}$ 施以数学归纳与裂项求和，左端 $\sum_{k=0}^{N-1} \bigl(S(\rho(k+1)) - S(\rho(k))\bigr)$ 首尾相消为 $S(\rho(N)) - S(\rho(0))$，右端逐项累加即得结论 2。完整证明由 Lean 内核检查。
 :::
 
-这就是热力学第二定律在量子几何层面的来龙去脉：**每一次不可逆的捏合熵增，都是把一块二维有向面积 $\vv{A}\wedge\vv{B}$ 强行压扁成一维对角粒子线时切下来的几何余项 $D\bigl(\rho_U(k) \,\big\|\, \Pi(\rho_U(k))\bigr) \ge 0$！**
+在本章的未读捏合模型中，这给出了热力学第二定律在量子几何层面的账本：**每一次不可逆的捏合熵增，都是把一块二维有向面积 $\vv{A}\wedge\vv{B}$ 强行压扁成一维对角粒子线时切下来的几何余项 $D\bigl(\rho_U(k) \,\big\|\, \Pi(\rho_U(k))\bigr) \ge 0$！**
 
 ::: {.viz src="erasure-ledger" preset="steps" height="500"}
 **一步一步捏：每一块熵等于这一步的 D。** 每步转 50° 再捏合，连做三步：琥珀色的箭头一级一级落到青色的记录线上、越来越短；熵那一栏一块一块叠起来，每块标着这一步的 D₁、D₂、D₃，叠起来就是总熵增（[@thm-entropy-production-coherence-deletion]）。
@@ -123,9 +123,9 @@ $$
      \Delta S_{\mathrm{pinch}} = S\bigl(\Pi(\rho_H)\bigr) - S(\rho_0) = D\Bigl(\lvert +\rangle\langle +\rvert \,\Big\|\, \frac{1}{2}I_2\Bigr) = \ln 2 \approx 0.693147\text{ nats} = 1\text{ bit}.
      $$
 3. **阶段 B（非保单位逻辑重置 $\frac{1}{2}I_2 \mapsto \lvert 0\rangle\langle 0\rvert$ 与室温热浴排热 $T = 300\text{ K}$；文献结果，未在本书形式化，参见 [@rem-landauer-thermodynamic-bridge-literature]）**：
-   要将阶段 A 产生的最大混合态 $\frac{1}{2}I_2$（$S = \ln 2$）重新擦除重置回纯态 $\lvert 0\rangle\langle 0\rvert$（$S = 0$），必须把系统的熵压缩掉 $\Delta S_S = S(\frac{1}{2}I_2) - S(\lvert 0\rangle\langle 0\rvert) = +\ln 2$。按兰道尔原理与 Reeb–Wolf 有限热浴不等式 $\beta\Delta Q_{\mathrm{bath}} \ge \Delta S_S = \ln 2$，乘以玻尔兹曼常数 $k_B \approx 1.380649 \times 10^{-23}\text{ J/K}$ 与室温 $T = 300\text{ K}$，向环境热浴排出的最小物理热量为
+   要将阶段 A 产生的最大混合态 $\frac{1}{2}I_2$（$S = \ln 2$）重新擦除重置回纯态 $\lvert 0\rangle\langle 0\rvert$（$S = 0$），必须把系统的熵压缩掉 $\Delta S_S = S(\frac{1}{2}I_2) - S(\lvert 0\rangle\langle 0\rvert) = +\ln 2$。理想单比特重置的兰道尔热下界为 $Q_L = k_B T\ln 2$；纯态重置和达到该下界按理想极限理解，在所述有限吉布斯热浴模型中不能精确实现。取玻尔兹曼常数 $k_B \approx 1.380649 \times 10^{-23}\text{ J/K}$ 与室温 $T = 300\text{ K}$，该下界的数值为
    $$
-   \Delta Q_{\min} = k_B T \ln 2 \approx (1.380649 \times 10^{-23}\text{ J/K}) \times (300\text{ K}) \times 0.693147 \approx 2.87 \times 10^{-21}\text{ J}\;(\approx 17.9\text{ meV}).
+   Q_L = k_B T \ln 2 \approx (1.380649 \times 10^{-23}\text{ J/K}) \times (300\text{ K}) \times 0.693147 \approx 2.87 \times 10^{-21}\text{ J}\;(\approx 17.9\text{ meV}).
    $$
 :::
 
@@ -210,7 +210,7 @@ $$
 
 每一行都满足 $\beta Q = -\Delta S_{\mathrm{sys}} + I + D$，也都满足兰道尔下界，而且都是严格不等：因为 $D > 0$，按 [@cor-landauer-bound-saturation] 的结论 3，等号取不到。
 
-**读法。** 想擦得越干净（$p \to 1$，系统末态越接近纯态 $\lvert 0\rangle\langle 0\rvert$），系统熵减趋于上限 $\ln 2 \approx 0.6931$，而超额项 $D$ 无界增长。只用一个热浴量子比特、一次交换，是做不到以 $k_B T\ln 2$ 的代价擦除一比特的；多付的热量恰好等于热浴被推离平衡的相对熵。要逼近兰道尔界，就得让 $D$ 与 $I$ 都趋于零，这需要更大的热浴和更缓慢的过程。
+**读法。** 想擦得越干净（$p \to 1$，系统末态越接近纯态 $\lvert 0\rangle\langle 0\rvert$），系统熵减趋于上限 $\ln 2 \approx 0.6931$，而超额项 $D$ 无界增长。只用一个热浴量子比特、一次交换，是做不到以 $k_B T\ln 2$ 的代价擦除一比特的；无量纲超额热量 $\beta Q-(\ln 2-h(p))$ 恰好等于 $D$，对应多付的物理热量为 $k_B T D$。要逼近兰道尔界，就得让 $D$ 与 $I$ 都趋于零，这需要更大的热浴和更缓慢的过程。
 :::
 
 ::: {.viz src="erasure-ledger" preset="bath" height="500"}
@@ -249,14 +249,14 @@ $$
 
 因为在一个真实的宏观世界里，系统并不是只和**一份**孤立环境记录打交道，而是像石头砸进池塘一样，瞬间把单比特分支记录扩散拷贝到了由成千上万个环境自由度（光子、声子、空气分子、仪器指针乃至观察者神经元）组成的有限副本集合 $\mathrm{Copy}$ 上！
 
-在 Lean 模块 `ObserverMemory/JointCoherentReversal` 中，我们对这幅多副本环境记忆与相干时间反演图景做了严格的形式化证明。设 $\mathrm{Copy}$ 为有限且具可判等性的副本指标类型（`[Fintype Copy] [DecidableEq Copy]`），每个环境记录副本属于单比特双分支记录类型 $\mathrm{EnvironmentRecord} := \mathrm{Fin}\,2 \to \mathrm{Fin}\,2 \to \mathbb{C}$，$\mathrm{records} : \mathrm{Copy} \to \mathrm{EnvironmentRecord}$ 为记录副本族，$\rho \in M_2(\mathbb{C})$（`QubitMatrix`）为单比特矩阵。前向多副本信道 $\operatorname{multiRecordChannel}(\mathrm{records}, \rho)$ 将第 $(i, j)$ 元乘以全部副本的记录重叠因子之积 $\prod_{l \in \mathrm{Copy}} \operatorname{recordOverlap}(\mathrm{records}(l), i, j)$；而对子集 $S \subseteq \mathrm{Copy}$ 内的副本实施时间反演记录（[`reverseRecord`](lean:D5/S3/ObserverMemory/JointCoherentReversal.reverseRecord)、[`reverseOn`](lean:D5/S3/ObserverMemory/JointCoherentReversal.reverseOn)）后再作用的信道记为 $\operatorname{reverseChannelOn}(S, \mathrm{records}, \cdot)$（[`reverseChannelOn`](lean:D5/S3/ObserverMemory/JointCoherentReversal.reverseChannelOn)）：
+在 Lean 模块 `ObserverMemory/JointCoherentReversal` 中，我们对这套特定的多副本环境记忆与共轭重叠时间反演协议做了严格的形式化证明。设 $\mathrm{Copy}$ 为有限且具可判等性的副本指标类型（`[Fintype Copy] [DecidableEq Copy]`），每个环境记录副本属于单比特双分支记录类型 $\mathrm{EnvironmentRecord} := \mathrm{Fin}\,2 \to \mathrm{Fin}\,2 \to \mathbb{C}$，$\mathrm{records} : \mathrm{Copy} \to \mathrm{EnvironmentRecord}$ 为记录副本族，$\rho \in M_2(\mathbb{C})$（`QubitMatrix`）为单比特矩阵。前向多副本信道 $\operatorname{multiRecordChannel}(\mathrm{records}, \rho)$ 将第 $(i, j)$ 元乘以全部副本的记录重叠因子之积 $\prod_{l \in \mathrm{Copy}} \operatorname{recordOverlap}(\mathrm{records}(l), i, j)$；而对子集 $S \subseteq \mathrm{Copy}$ 内的副本实施时间反演记录（[`reverseRecord`](lean:D5/S3/ObserverMemory/JointCoherentReversal.reverseRecord)、[`reverseOn`](lean:D5/S3/ObserverMemory/JointCoherentReversal.reverseOn)）后再作用的信道记为 $\operatorname{reverseChannelOn}(S, \mathrm{records}, \cdot)$（[`reverseChannelOn`](lean:D5/S3/ObserverMemory/JointCoherentReversal.reverseChannelOn)）：
 
 - 引理 [`reverse_record_overlap`](lean:D5/S3/ObserverMemory/JointCoherentReversal.reverse_record_overlap) 证明：对单个副本执行时间反演 `reverseRecord` 会将其分支重叠因子**取复共轭**：
   $$
   \operatorname{recordOverlap}\bigl(\operatorname{reverseRecord}(r), i, j\bigr) = \overline{\operatorname{recordOverlap}(r, i, j)};
   $$
   因此，当每个已逆转副本 $l$ 在分支 $(i, j)$ 处具有**幺模重叠因子**（$\overline{\operatorname{recordOverlap}(\mathrm{records}(l), i, j)} \cdot \operatorname{recordOverlap}(\mathrm{records}(l), i, j) = 1$）时，前向因子与反演共轭因子相乘恰好抵消为 $1$！若观察者能把宇宙中**全部**副本（$S = \mathrm{Finset.univ}$）悉数逆转，联合相干逆转定理 [`joint_coherent_reversal`](lean:D5/S3/ObserverMemory/JointCoherentReversal.joint_coherent_reversal) 保证初态矩阵元 $\rho_{ij}$ 精确复原；
-- 但哪怕观察者逆转了除 $k$ 以外的**所有其他副本**（即对 $S = \mathrm{Finset.univ.erase}\,k$ 实施相干逆转，且所有 $l \neq k$ 均满足幺模抵消条件 $\overline{c_l} c_l = 1$），只要宇宙角落里还漏掉**唯一一份**未逆转的幸存副本 $k \in \mathrm{Copy}$，且该副本在 $(i, j)$ 处的重叠因子不为 $1$（$\operatorname{recordOverlap}(\mathrm{records}(k), i, j) \neq 1$），那么单幸存副本合成定理 [`one_surviving_copy_composition_apply`](lean:D5/S3/ObserverMemory/JointCoherentReversal.one_surviving_copy_composition_apply) 与下面的命题就铁面无私地宣告：**任何非零相干元 $\rho_{ij} \neq 0$ 都绝不可能复原！（双副本显式充要判据亦见 [`two_copy_joint_reversal_certificate`](lean:D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate)。）**
+- 但哪怕观察者逆转了除 $k$ 以外的**所有其他副本**（即对 $S = \mathrm{Finset.univ.erase}\,k$ 实施相干逆转，且所有 $l \neq k$ 均满足幺模抵消条件 $\overline{c_l} c_l = 1$），只要宇宙角落里还漏掉**唯一一份**未逆转的幸存副本 $k \in \mathrm{Copy}$，且该副本在 $(i, j)$ 处的重叠因子不为 $1$（$\operatorname{recordOverlap}(\mathrm{records}(k), i, j) \neq 1$），那么单幸存副本合成定理 [`one_surviving_copy_composition_apply`](lean:D5/S3/ObserverMemory/JointCoherentReversal.one_surviving_copy_composition_apply) 与下面的命题就在这个指定协议和这些假设下宣告：**任何非零相干元 $\rho_{ij} \neq 0$ 都绝不可能复原！（双副本显式充要判据亦见 [`two_copy_joint_reversal_certificate`](lean:D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate)。）**
 
 ::: {.figure src="ch08-surviving-copy"}
 **倒带只消去幺模的相位，漏下的副本 $k$ 留下它的 $c_k$。** 复平面上，灰色虚线箭头是原来的相干元 $\rho_{01}$。前向时它沿单位圆转过副本 1、2 的相位（青色的弧），再被副本 $k$ 缩短并转一下（品红的段）；倒带时副本 1、2 的相位沿小圆转回来（青色虚线弧），停在琥珀色的箭头 $c_k\rho_{01}$，回不到灰色箭头的尖端（[@prop-surviving-copy-blocks-reversal]）。图中取 $c_1 = e^{i40^\circ}$、$c_2 = e^{i30^\circ}$、$c_k = 0.6\,e^{i25^\circ}$。
@@ -292,7 +292,7 @@ $$
 假若上式左端等于 $\rho_{ij}$，则有 $\operatorname{recordOverlap}(\mathrm{records}(k), i, j) \cdot \rho_{ij} = 1 \cdot \rho_{ij}$。因复数域 $\mathbb{C}$ 无零因子且条件 3 给出 $\rho_{ij} \neq 0$，由右消去律立得 $\operatorname{recordOverlap}(\mathrm{records}(k), i, j) = 1$，与条件 2 的 $\operatorname{recordOverlap}(\mathrm{records}(k), i, j) \neq 1$ 直接矛盾！故相干元严格无法复原。完整证明由 Lean 内核检查。
 :::
 
-[@prop-surviving-copy-blocks-reversal] 道尽了宏观热力学时间箭头的全部秘密：一颗光子飞向夜空深处，就足以充当那枚无人能够追回的幸存证人副本 $k$，把刚才发生过的测量永远锁死在“过去”！而观察者自己的有限记忆寄存器要想在下一刻继续记录新的历史刻度，就必须先经历阶段 A 的保单位捏合（根据 [@thm-entropy-production-coherence-deletion] 产生系统熵增 $\Delta S_{\mathrm{pinch}} = D(\rho_U \,\|\, \Pi(\rho_U)) \ge 0$），再经历阶段 B 的非保单位擦除重置（按 [@rem-landauer-thermodynamic-bridge-literature] 将这笔熵压缩排入热浴并耗散至少 $k_B T \Delta S_S$ 的热量）——这就是为什么任何生命体与计算机“记住过去、迈向未来”都必须源源不断地消耗自由能、向环境排放热量！
+在上述共轭重叠协议及记录不可访问的受限操作下，[@prop-surviving-copy-blocks-reversal] 给出局部不可恢复性：若有一份未逆转的记录副本满足命题条件，所选非零矩阵元不能复原。对于本章所讨论的先未读捏合、再丢弃旧信息并重置的记忆复用协议，阶段 A 产生的熵增与阶段 B 的热代价分别受 [@thm-entropy-production-coherence-deletion] 和 [@rem-landauer-thermodynamic-bridge-literature] 约束；可逆复制或反计算并不属于这个两阶段模型。
 
 ::: {.remark #rem-landauer-thermodynamic-bridge-literature title="兰道尔擦除原理、贝内特可逆计算与 Reeb–Wolf 有限热浴不等式（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 本章的 [@thm-dual-account-full] 与 [@thm-entropy-production-coherence-deletion] 在 Lean 4 中严格证明了**阶段 A（保单位基捏合抹除相干面积）**在无量纲信息论层面的精确恒等式 $S(\Pi(U\rho U^*)) - S(\rho) = D(U\rho U^* \,\|\, \Pi(U\rho U^*)) \ge 0$ 及相互无偏捏合熵增 $\ln d - S(\rho)$（对单比特纯态为 $\ln 2$ 奈特的系统熵增）。而在**阶段 B（非保单位逻辑重置，如将混合态 $\frac{1}{2}I_2$ 压缩回纯参考态 $\lvert 0\rangle\langle 0\rvert$）**中，将系统熵减 $\Delta S_S := S(\rho_S) - S(\rho_S')$ 乘以物理温度 $k_B T$ 换算为热浴焦耳热量 $\Delta Q$ 的热力学桥梁，来自以下经典物理文献：
@@ -308,7 +308,7 @@ $$
 :::
 
 ::: {.viz src="erasure-ledger" height="560"}
-**擦除账本 · 完整实验室。** 按“操作”给一个比特记账：转动、捏合、理想复位、热浴比特复位、拷贝与撤回；左边的圆盘画态，右边两栏记系统的熵与付给环境的热。绿色框只给本章引用的冻结定理，阶段 B 的热量换算标为文献结果。
+**擦除账本 · 完整实验室。** 按“操作”给一个比特记账：转动、捏合、理想复位、热浴比特复位、拷贝与撤回；左边的圆盘画态，右边两栏记系统的熵与付给环境的热。整数步上的熵与热由密度矩阵实算，两步之间的动画只是插值示意，不是中间那个态的熵。绿色框只给本章引用的冻结定理，阶段 B 的热量换算标为文献结果。
 :::
 
 ## 8.4 第二部总结与过渡：当一个平面装不下三次正交分叉，向三维球面跃迁 {#sec-part2-summary-bridge}
