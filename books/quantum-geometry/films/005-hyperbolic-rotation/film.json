@@ -1,0 +1,30 @@
+{
+  "id": "005-hyperbolic-rotation",
+  "title": "Hyperbolic rotation: the light cone stays, rapidities add",
+  "title_zh": "双曲旋转：光锥不动，快度相加",
+  "summary": "The event v = (5, 3) turned about the origin rides the circle t² + x² = 34 and crosses the light cone; boosted, it rides the hyperbola t² − x² = 16 and never does. A boost by rapidity η = ln 2 has cosh η = 5/4 and sinh η = 3/4, whose squares differ by exactly one, as Lean checks for every real r (|cosh r|² − |sinh r|² = 1); it slides (5, 3) down to (4, 0), proper time 4, while the moving frame's axes close toward the cone. Beads on the light cone only slide along it, one branch squeezed by e^−η and the other stretched by e^η; Lean checks the converse, that a quadratic form vanishing on the cone is S(1, 0) times t² − x², and a scale k = 3/2 keeps the cone but moves τ = 4 to 6. Two pushes by ln 2 multiply into one push by ln 4 (cosh 17/8, sinh 15/8): each sweeps a hyperbolic sector of area ln 2 / 2, so rapidities add, while the velocities 3/5 and 3/5 compose to 15/17. Finally the worldlines from (0, 0) to (10, 0), bent at (5, 3) or at rest, tick 4 + 4 = 8 and 10, and still do after a boost into the outbound frame, where the return leg's rapidity becomes −ln 4.",
+  "summary_zh": "事件 v = (5, 3) 被转动时沿圆 t² + x² = 34 走，穿出光锥；被推动时沿双曲线 t² − x² = 16 走，永远跨不过去。快度 η = ln 2 的推动有 cosh η = 5/4、sinh η = 3/4，两者平方差恰为 1，Lean 对一切实数 r 检验了 |cosh r|² − |sinh r|² = 1；它把 (5, 3) 推到 (4, 0)，固有时为 4，运动参考系的两根轴同时向光锥合拢。光锥上的珠子只沿光锥滑动，一支按 e^−η 挤向原点，另一支按 e^η 散开；Lean 检验了反方向：在光锥上为零的二次型是 t² − x² 的 S(1, 0) 倍，而比例 k = 3/2 保住光锥，却把 τ = 4 变成 6。两次 ln 2 的推动相乘正是一次 ln 4 的推动（cosh 17/8，sinh 15/8）：每次扫过面积 ln 2 / 2 的双曲扇形，所以快度相加，速度 3/5 与 3/5 却合成 15/17。最后，从 (0, 0) 到 (10, 0) 的折线与静止世界线分别刻 4 + 4 = 8 与 10，推到去程旅行者的参考系后仍是如此，回程的快度成为 −ln 4。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "subject_commit": "1d9bf98cab8306e67ec38a739359f2cdae63877a",
+  "released": "2026-11-11",
+  "duration": "1:53",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · spacetime diagram, circle against hyperbola, boost of (5, 3) to (4, 0), beads on the light cone, hyperbolic sectors adding, proper-time ticks in two frames",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation",
+    "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_005_720p_narrated.mp4",
+    "cover": "quantum-geometry_005_cover.jpg"
+  }
+}
