@@ -48,21 +48,103 @@ $$
 
 按照毕达哥拉斯学派早期的静态信条，“万物皆（整数之比构成的）有理数”，理应存在正整数 $m, n$ 使得 $(m/n)^2 = 2$，即 $m^2 = 2n^2$。然而，放到第六部第 22 章的素数正交坐标系中审视，算术基本定理立刻给出审判：每个素数 $p$ 都是乘法格 $\mathbb{Q}_{>0}^\times \cong \bigoplus_p \mathbb{Z}\,\mathbf{e}_p$ 的一条独立正交轴；在 $p = 2$ 这条轴上，平方数 $m^2$ 的 $2$-进指数 $v_2(m^2) = 2v_2(m)$ 永远是**偶数**，而 $2n^2$ 的 $2$-进指数 $v_2(2n^2) = 2v_2(n) + 1$ 永远是**奇数**。偶数不可能等于奇数，故 $m^2 = 2n^2$ 在非零整数中绝无可能成立！
 
-::: {.remark #rem-ch29-pell-convergents-literature title="2 的平方根连分数渐近分数与佩尔方程单位余项（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 在经典连分数与二次丢番图方程理论中（未包含在本书锁定的 `trureturing@dev` 形式化声明集中），如果我们强行在离散整数网格 $\mathbb{Z}^2$ 中逼近这条 $45^\circ$ 斜边 $\sqrt{2}$，连分数渐近分数序列
+既然整数之比永远够不着 $\sqrt{2}$，整数网格能做的就只剩动词意义上的“数（shǔ）”：一步一步逼近，同时记下每一步还差多少。拿掉 $\sqrt{2}$ 的整数部分，剩下的 $s = \sqrt{2} - 1 \approx 0.414$ 是这条 $45^\circ$ 斜边比单位边长多出的那一截；把它当作斜率来读，就是下文定义的“银斜率”。用它的整数倍去对齐整数刻度：$1\cdot s \approx 0.414$ 离 $0$ 差 $+0.414$；$2s \approx 0.828$ 离 $1$ 差 $-0.172$；$5s \approx 2.071$ 离 $2$ 差 $+0.071$；$12s \approx 4.971$ 离 $5$ 差 $-0.029$。逐个试 $m = 1, 2, 3, \dots$，只记下比此前所有倍数都更贴近整数的那些，得到的正是 $1, 2, 5, 12, \dots$（脚本核对到 $m < 3000$）：每一项是前一项的两倍再加更前一项，所对的整数 $0, 1, 2, 5, \dots$ 是同一串数退后一格；误差每一步变号，并缩成上一步的 $s$ 倍——越来越小，却从不归零。下面这组冻结的定义与定理把这台计数机写成精确陈述。
+
+::: {.definition #def-ch29-pell-silver-slope title="佩尔数、伴随佩尔数与银斜率" lean="D5/S1/Recurrence/PellCompanionGcd.P D5/S1/Recurrence/PellCompanionGcd.Q D5/S1/Words/Mechanical/SilverSlopeAbelianPeriodDefs.silverSlope"}
+佩尔数 $P : \mathbb{N} \to \mathbb{N}$ 与伴随佩尔数 $Q : \mathbb{N} \to \mathbb{N}$ 由同一条二阶递推、不同的初值定义：
 
 $$
-\frac{m_k}{n_k} = \frac{1}{1},\; \frac{3}{2},\; \frac{7}{5},\; \frac{17}{12},\; \frac{41}{29},\; \frac{99}{70},\; \dots
+\begin{aligned}
+&P_0 = 0,\quad P_1 = 1,\quad P_{n+2} = 2P_{n+1} + P_n,\\
+&Q_0 = 1,\quad Q_1 = 1,\quad Q_{n+2} = 2Q_{n+1} + Q_n.
+\end{aligned}
 $$
 
-给出的分子与分母，对一切阶数 $k$ 恒留有无法抹平的**佩尔方程（Pell's equation）单位余项**：
+银斜率是实数 $s = \sqrt{2} - 1$。
+:::
+
+于是 $P = 0, 1, 2, 5, 12, 29, 70, 169, \dots$，$Q = 1, 1, 3, 7, 17, 41, 99, 239, \dots$。
+
+::: {.lemma #lem-ch29-pell-companion-step title="佩尔数与伴随佩尔数的一阶交叉递推与互素" lean="D5/S1/Recurrence/PellCompanionGcd.pell_companion_step D5/S1/Recurrence/PellCompanionGcd.pell_companion_coprime"}
+对每个自然数 $n$，
 
 $$
-1^2 - 2(1^2) = -1,\quad 3^2 - 2(2^2) = +1,\quad 7^2 - 2(5^2) = -1,\quad 17^2 - 2(12^2) = +1,\quad \dots,\quad m_k^2 - 2n_k^2 = (-1)^k.
+P_{n+1} = P_n + Q_n,\qquad Q_{n+1} = 2P_n + Q_n,
+$$
+
+并且 $P_n$ 与 $Q_n$ 互素：$\gcd(P_n, Q_n) = 1$。
+:::
+
+::: proof
+两条递推一起对 $n$ 归纳。$n = 0$ 时 $P_1 = 1 = P_0 + Q_0$，$Q_1 = 1 = 2P_0 + Q_0$。归纳步先按定义展开 $P_{n+2}$ 与 $Q_{n+2}$，再代入归纳假设，两边化成 $P_n, Q_n$ 的同一个线性组合，由线性算术（`omega`）收尾。互素也对 $n$ 归纳：$\gcd(0, 1) = 1$；归纳步用刚证的递推把这一对数写成 $\bigl(P_n + Q_n,\ P_n + (P_n + Q_n)\bigr)$，从第二个数减去第一个数、再从第一个数减去 $P_n$，最大公因数都不变，问题退回 $\gcd(Q_n, P_n) = 1$——辗转相除倒着走了一步。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch29-silver-pell-remainder title="银斜率的佩尔余项：精确误差、$\pm 1$ 行列式与相位质量" lean="D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silverPell_error_formula D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silverPell_determinant D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silver_phase_mass"}
+对每个自然数 $k$：
+
+1. 在 $\mathbb{R}$ 中，$P_{k+1}\,s - P_k = (-1)^k\,s^{k+1}$；
+2. 在 $\mathbb{Z}$ 中，$P_{k+2}\,P_k - P_{k+1}^2 = (-1)^{k+1}$；
+3. 在 $\mathbb{R}$ 中，$\bigl(P_{k+2} + s\,P_{k+1}\bigr)\,s^{k+1} = 1$。
+:::
+
+::: proof
+三条都只用两样东西：递推 $P_{n+2} = 2P_{n+1} + P_n$，以及由 $(\sqrt{2})^2 = 2$ 得到的二次关系 $s^2 + 2s = 1$。第 1 条先证两步递推 $P_{k+3}\,s - P_{k+2} = s^2\,(P_{k+1}\,s - P_k)$：展开递推后用 $s^2 = 1 - 2s$ 与 $s^3 = 5s - 2$ 化简。再对 $k$ 作强归纳：$k = 0$ 时 $1\cdot s - 0 = s$，$k = 1$ 时 $2s - 1 = -s^2$，此后每前进两步误差乘以 $s^2$，符号 $(-1)^k$ 不变。第 2 条对 $k$ 归纳：$k = 0$ 时 $P_2P_0 - P_1^2 = -1$；归纳步把 $P_{k+3}$ 与 $P_{k+2}$ 按递推代入，环运算显示新行列式恰是旧行列式的相反数，符号每步翻转一次。第 3 条也对 $k$ 归纳：$k = 0$ 时 $(2 + s)\,s = 1$；归纳步代入 $P_{k+3} = 2P_{k+2} + P_{k+1}$ 后，比上一步多出的项是 $P_{k+2}\,s^{k+1}(s^2 + 2s - 1) = 0$，左边退回上一步的值 $1$。完整证明由 Lean 内核检查。
+:::
+
+**从误差到单位余项（手工推导）。** 由 [@lem-ch29-pell-companion-step]，$Q_{k+1} = 2P_k + Q_k = P_k + P_{k+1}$，所以第 1 条就是 $\sqrt{2}$ 自己的误差：$P_{k+1}\,s - P_k = P_{k+1}\sqrt{2} - Q_{k+1}$。又因 $P_{k+2} - P_{k+1} = Q_{k+1}$，第 3 条的括号是 $P_{k+2} + s\,P_{k+1} = Q_{k+1} + P_{k+1}\sqrt{2}$。两者相乘：
+
+$$
+\begin{aligned}
+Q_{k+1}^2 - 2P_{k+1}^2
+&= \bigl(Q_{k+1} - P_{k+1}\sqrt{2}\bigr)\bigl(Q_{k+1} + P_{k+1}\sqrt{2}\bigr)\\
+&= -(-1)^k\,s^{k+1}\bigl(P_{k+2} + s\,P_{k+1}\bigr) = (-1)^{k+1}.
+\end{aligned}
+$$
+
+记 $n = k + 1$，这就是佩尔单位余项 $Q_n^2 - 2P_n^2 = (-1)^n$（$n \ge 1$）：$1^2 - 2\cdot 1^2 = -1$，$3^2 - 2\cdot 2^2 = +1$，$7^2 - 2\cdot 5^2 = -1$，……，$99^2 - 2\cdot 70^2 = 9801 - 9800 = +1$。窄边 $Q_n - P_n\sqrt{2} = (-1)^n s^n$ 量的是格点 $(P_n, Q_n)$ 偏离直线 $Q = \sqrt{2}\,P$ 的程度，每步变号并缩成 $s$ 倍；宽边 $Q_n + P_n\sqrt{2} = s^{-n} = (1 + \sqrt{2})^n$（第 3 条，并用 $s\,(1 + \sqrt{2}) = 1$）每步放大 $1 + \sqrt{2}$ 倍。两边之积永远是 $\pm 1$：误差不能归零，因为它乘上一个有限的宽边必须得到 $\pm 1$。不用第 1、3 条，只凭第 2 条与 [@lem-ch29-pell-companion-step] 也能得到同一结论：把 $Q_n = P_{n+1} - P_n$ 与 $P_{n+2} = 2P_{n+1} + P_n$ 代入，$Q_n^2 - 2P_n^2 = -\bigl(P_{n+2}P_n - P_{n+1}^2\bigr) = (-1)^n$，这条路连 $n = 0$（$1^2 - 2\cdot 0^2 = 1$）也覆盖。
+
+误差不归零，但它是不是“最小”的？下一条定理回答：在下一个佩尔数之前，没有任何倍数能更贴近整数。
+
+::: {.theorem #thm-ch29-silver-best-approximation title="银斜率的最佳逼近下界" lean="D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silver_best_approximation"}
+设 $k, m$ 为自然数，$0 < m < P_{k+2}$。则对每个整数 $z$，在 $\mathbb{R}$ 中
+
+$$
+s^{k+1} \le |m\,s - z|.
 $$
 :::
 
-[@rem-ch29-pell-convergents-literature] 中的经典连分数现象与我们在第 23 章证明的黄金整数佩尔型恒等式 $(2a + b)^2 - 5b^2 = 4\operatorname{norm}(g)$（[`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)）遥相呼应：用一维离散整数网格去缝合二维正交旋转时，网格接缝处永远残留着单位算术裂隙。希帕索斯发现的不是数学的崩塌，而是**第 1 层有理数球面被 $90^\circ$ 正交面积运算撑破时露出的第一道“球外之球”接缝**。
+::: proof
+证明的核心是一条与 $\sqrt{2}$ 无关的整数格引理（`unimodular_opposite_error_bound`）：设 $\alpha, d, e$ 为实数，整数对 $(q, p)$ 与 $(q', p')$ 满足 $qp' - pq' = 1$，$q' > 0$，$0 < m < q$，且两者的误差符号相反：$q\alpha - p = d > 0$，$q'\alpha - p' = -e < 0$；则对每个整数 $z$ 都有 $e \le |m\alpha - z|$。理由是行列式为 $1$ 的整数矩阵在整数上可逆：$(m, z) = a\,(q, p) + b\,(q', p')$，其中 $a = mp' - zq'$、$b = zq - mp$ 都是整数，误差按同样的系数叠加，$m\alpha - z = ad - be$。由 $0 < m = aq + bq' < q$：$a \ge 1$ 时必有 $b \le -1$，$a \le 0$ 时必有 $b \ge 1$。两种情形中 $ad$ 与 $-be$ 都不会异号、绝不相消，而 $|be| \ge e$，所以绝对值至少为 $e$。对银斜率取相邻两对 $(P_{k+2}, P_{k+1})$ 与 $(P_{k+1}, P_k)$：[@thm-ch29-silver-pell-remainder] 第 1 条给出符号相反的误差 $(-1)^{k+1}s^{k+2}$ 与 $(-1)^k s^{k+1}$，第 2 条给出行列式 $(-1)^{k+1}$。$k$ 为奇数时直接套用；$k$ 为偶数时行列式是 $-1$，Lean 把 $s$、两对的第二个分量与 $z$ 一起换号再套用，最后用 $|-x| = |x|$ 还原。所需的正性 $P_{k+1}, P_{k+2} > 0$ 来自 $P_{n+1} = P_n + Q_n$ 与 $Q_n$ 为奇数（`companion_odd`）。完整证明由 Lean 内核检查。
+:::
+
+（手工推导）因为 $m\,s - z = m\sqrt{2} - (m + z)$，而 $z$ 跑遍整数时 $m + z$ 也跑遍整数，[@thm-ch29-silver-best-approximation] 说的是：$0 < m < P_{k+2}$ 时，$m\sqrt{2}$ 到最近整数的距离不小于 $s^{k+1}$。由误差公式，$m = P_{k+1}$、$z = P_k$ 恰好取到这个下界（$0 < P_{k+1} < P_{k+2}$，它在允许范围内），所以在这些分母中没有谁比 $P_{k+1}$ 逼得更近；第一个更好的分母是下一个佩尔数 $P_{k+2}$，其误差为 $s^{k+2}$。
+
+::: {.example #ex-ch29-silver-pell-table title="数出前六步"}
+记 $\delta_k$ 为 $0 < m < P_{k+2}$、$z \in \mathbb{Z}$ 时 $|m\,s - z|$ 的最小值，由脚本逐个枚举 $m$ 求得。小数按所示位数四舍五入：
+
+| $k$ | $Q_{k+1}/P_{k+1}$ | $P_{k+1}\,s - P_k$ | $Q_{k+1}^2 - 2P_{k+1}^2$ | $P_{k+2}$ | $\delta_k$ |
+| :-: | :-: | --: | :-: | --: | --: |
+| $0$ | $1/1$ | $+0.41421356$ | $-1$ | $2$ | $0.41421356$ |
+| $1$ | $3/2$ | $-0.17157288$ | $+1$ | $5$ | $0.17157288$ |
+| $2$ | $7/5$ | $+0.071067812$ | $-1$ | $12$ | $0.071067812$ |
+| $3$ | $17/12$ | $-0.029437252$ | $+1$ | $29$ | $0.029437252$ |
+| $4$ | $41/29$ | $+0.012193309$ | $-1$ | $70$ | $0.012193309$ |
+| $5$ | $99/70$ | $-0.0050506339$ | $+1$ | $169$ | $0.0050506339$ |
+
+误差一列正负交替，绝对值每行缩为上一行的 $s \approx 0.414$ 倍；第四列只取 $\pm 1$；最后一列与误差的绝对值相同，且在这六行里最小值只在 $m = P_{k+1}$ 处取到（唯一性是枚举所见；两条定理只保证最小值等于 $s^{k+1}$ 并在 $m = P_{k+1}$ 处取到）。例如 $k = 1$ 时只能取 $m = 1, 2, 3, 4$，距离依次为 $0.41421356$、$0.17157288$、$0.24264069$、$0.34314575$，最小者正是 $m = P_2 = 2$。$k = 5$ 一行也能用整数核对：行列式 $P_7P_5 - P_6^2 = 169\cdot 29 - 70^2 = 4901 - 4900 = 1$；相位质量的括号 $P_7 + s\,P_6 = 99 + 70\sqrt{2} \approx 197.99495$，乘以 $s^6 \approx 0.0050506339$ 恰为 $1$。
+:::
+
+::: {.remark #rem-ch29-pell-convergents-literature title="$Q_n/P_n$ 与 $\sqrt{2}$ 的连分数渐近分数（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 经典连分数理论给出
+
+$$
+\sqrt{2} = 1 + \dfrac{1}{2 + \dfrac{1}{2 + \dfrac{1}{2 + \cdots}}},
+$$
+
+其渐近分数依次是 $1/1,\ 3/2,\ 7/5,\ 17/12,\ 41/29,\ 99/70,\ \dots$，即从 $1/1$ 数起的第 $n$ 个渐近分数恰为 $Q_n/P_n$。一般理论中的拉格朗日定理还指出，任一无理数 $\alpha$ 的第二类最佳逼近（对每个分母不超过 $q$ 的其他分数 $p'/q'$ 都有 $|q\alpha - p| < |q'\alpha - p'|$ 的分数 $p/q$）都是渐近分数。所钉的 Lean 库只从递推出发证明了 [@lem-ch29-pell-companion-step]、[@thm-ch29-silver-pell-remainder] 与 [@thm-ch29-silver-best-approximation]，没有把 $P, Q$ 与 Mathlib 的连分数展开对应起来（源文件写明这一对应尚未证明）。因此，“$Q_n/P_n$ 就是 $\sqrt{2}$ 的连分数渐近分数”这一识别与一般的最佳逼近理论仍是文献结果；上面的单位余项 $Q_n^2 - 2P_n^2 = (-1)^n$ 与最佳逼近下界并不依赖于它。
+:::
+
+[@thm-ch29-silver-pell-remainder] 的行列式 $P_{k+2}P_k - P_{k+1}^2 = (-1)^{k+1}$ 与[终章](coda.md)的斐波那契—卡西尼恒等式 $F_kF_{k+2} - F_{k+1}^2 = (-1)^{k+1}$ 形状完全相同，它的单位余项也与我们在第 23 章证明的黄金整数佩尔型恒等式 $(2a + b)^2 - 5b^2 = 4\operatorname{norm}(g)$（[`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)）遥相呼应：用一维离散整数网格去缝合二维正交旋转时，网格接缝处永远残留着单位算术裂隙。希帕索斯发现的不是数学的崩塌，而是**第 1 层有理数球面被 $90^\circ$ 正交面积运算撑破时露出的第一道“球外之球”接缝**。
 
 ::: {.viz src="pythagoras-number-escape" preset="hippasus" height="500"}
 **永远差一格。** 渐近分数 $1/1, 3/2, 7/5, 17/12, \dots$ 沿直线 $m = \sqrt{2}\,n$ 越贴越近；右侧两条色带是 $m^2$ 与 $2n^2$ 的格子数，放大镜里它们永远差着一格。
@@ -84,7 +166,7 @@ $$
 
 | 球面层级 | 数系疆域与代表常数 | 驱动跃迁的几何/代数算子（动词 `数 shǔ`） | 球面内部的闭合法则（名词 `数 shù`） | 刺穿当前球面的裂隙与接缝余项 |
 | :--- | :--- | :--- | :--- | :--- |
-| **第 1 层球** | 整数 $\mathbb{Z}$ 与有理数 $\mathbb{Q}$<br/>（比例刻度 $m/n$） | $0^\circ$ 共线轴上的欧几里得辗转相除与线性加减 | 一维有理网格上的有限比例闭合：$n \cdot (m/n) = m$ | $90^\circ$ 正交勾股平方 $1^2 + 1^2 = 2$ 引发 $2$-进奇偶冲突（连分数佩尔接缝见 [@rem-ch29-pell-convergents-literature]） |
+| **第 1 层球** | 整数 $\mathbb{Z}$ 与有理数 $\mathbb{Q}$<br/>（比例刻度 $m/n$） | $0^\circ$ 共线轴上的欧几里得辗转相除与线性加减 | 一维有理网格上的有限比例闭合：$n \cdot (m/n) = m$ | $90^\circ$ 正交勾股平方 $1^2 + 1^2 = 2$ 引发 $2$-进奇偶冲突（佩尔余项见 [@thm-ch29-silver-pell-remainder]，连分数识别见 [@rem-ch29-pell-convergents-literature]） |
 | **第 2 层球** | 代数无理数 $\overline{\mathbb{Q}}$<br/>（勾股斜边 $\sqrt{2}$、黄金分割 $\varphi = \frac{1+\sqrt{5}}{2}$） | 有限维正交勾股面积守恒 $a^2 + b^2 = c^2$ 与整系数多项式求根 | 有限次代数多面体方程闭合：$x^2 - 2 = 0$、$x^2 - x - 1 = 0$（[`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique)） | 正 $2^k$ 边形无穷折半割圆极限（圆弧超越性文献评注见 [@rem-banach-dottie-hairy-ball-literature]） |
 | **第 3 层球** | 初等周期常数<br/>（圆周率 $\pi$、自然底数 $e$） | 无穷次勾股半角迭代 $\sin(\theta/2) = \sqrt{(1-\cos\theta)/2}$ 与指数映射 $e^{i\theta} = \cos\theta + i\sin\theta$ | 静态单位圆与球面周期闭合：$e^{i\pi} + 1 = 0$、$\cos(\pi/2) = 0$ | 弧长输入 $\theta$ 与弦投影输出 $\cos\theta$ 仍分处算子两端（代数点非零残差文献评注见 [@rem-banach-dottie-hairy-ball-literature]） |
 | **第 4 层球** | 自指余弦不动点<br/>（Dottie 常数 $\theta^*$） | 自指反馈迭代 $\theta_{k+1} = \cos(\theta_k)$：令勾股底边投影 $\cos\theta$ 直接等于弧长角 $\theta$ 自身 | 算子与坐标合一的自指闭合：$\cos(\theta^*) = \theta^*$（对应 $\psi = \psi(\psi)$ 的实轴投影） | 经典超越性文献评注见 [@rem-banach-dottie-hairy-ball-literature]；与 $\pi, e$ 的代数无关性前沿见开放猜想 [@conj-schanuel-dottie]（`OPEN`） |
@@ -101,7 +183,7 @@ $$
 
 ## $\pm 1$ 算术接缝、素数二象性与椭圆曲线环面上的 $S^3$ 投影 {#sec-coda-primes-elliptic-curves}
 
-当我们凝视希帕索斯在整数网格上留下的那道佩尔余项 $m^2 - 2n^2 = \pm 1$ 时，一个更深邃的数论追问自然浮现：**这道在 $+1$ 与 $-1$ 之间交替跳荡的算术接缝，难道仅仅是 $\sqrt{2}$ 的孤立巧合吗？它与素数的分布、椭圆曲线的拓扑以及全书反复出现的 $\cos\theta$ 投影究竟有着怎样的关联？**
+当我们凝视希帕索斯在整数网格上留下的那道佩尔余项 $m^2 - 2n^2 = \pm 1$（[@thm-ch29-silver-pell-remainder]）时，一个更深邃的数论追问自然浮现：**这道在 $+1$ 与 $-1$ 之间交替跳荡的算术接缝，难道仅仅是 $\sqrt{2}$ 的孤立巧合吗？它与素数的分布、椭圆曲线的拓扑以及全书反复出现的 $\cos\theta$ 投影究竟有着怎样的关联？**
 
 顺着这道 $\pm 1$ 裂隙向下挖掘，数论、代数几何与量子旋量几何在三座桥梁上轰然汇合。
 
@@ -119,29 +201,108 @@ $$
 m^2 - p\,n^2 = \pm 1.
 $$
 
-表面上看，右边只是 $+1$ 与 $-1$ 的符号之差；但在克利福德二维外积平面中，$-1$ 正是反自伴幺正复结构算子（双向量虚数生成元）$\hat{\mathbf{I}}$ 的平方 $\hat{\mathbf{I}}^2 = -1$（[`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary)）！取决于在模 $p$ 算术下能否开出 $\sqrt{-1}$（即二次剩余勒让德符号 $\left(\frac{-1}{p}\right) = (-1)^{(p-1)/2}$ 取 $+1$ 还是 $-1$），全体奇素数被这道 $\pm 1$ 接缝严格劈成两族几何维度截然不同的素数：
+表面上看，右边只是 $+1$ 与 $-1$ 的符号之差；但在克利福德二维外积平面中，$-1$ 正是反自伴幺正复结构算子（双向量虚数生成元）$\hat{\mathbf{I}}$ 的平方 $\hat{\mathbf{I}}^2 = -1$（[`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary)）！取决于在模 $p$ 算术下能否开出 $\sqrt{-1}$（即二次剩余勒让德符号 $\left(\frac{-1}{p}\right) = (-1)^{(p-1)/2}$ 取 $+1$ 还是 $-1$；这道分界由下文的手工推导 2 从冻结定理得出），全体奇素数被这道 $\pm 1$ 接缝严格劈成两族几何维度截然不同的素数：
 
-::: {.remark #rem-ch29-pell-primes-hilbert-literature title="费马两平方和分裂、奇素数负佩尔方程与希尔伯特互反律（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 在经典代数数论与类域论中，奇素数模 $4$ 的二次剩余分岔及有理数域的局部—全局二次符号守恒由以下文献定理给出（未包含在本书锁定的 `trureturing@dev` 形式化声明集中）：
+**面素数**是 $p \equiv 1 \pmod 4$ 的奇素数（$5, 13, 17, 29, 37, \dots$），**线素数**是 $p \equiv 3 \pmod 4$ 的奇素数（$3, 7, 11, 19, 23, \dots$）。这道分界的主体已冻结在所钉的 `trureturing@dev` 中，下面的两个引理与两个定理都由 Lean 内核检查。先看最朴素的机制：把整数的平方放到只有四格的模 $4$ 表盘上。偶数 $2k$ 的平方是 $4k^2$，落在第 $0$ 格；奇数 $2k + 1$ 的平方是 $4(k^2 + k) + 1$，落在第 $1$ 格。两个平方相加只能落在第 $0$、$1$、$2$ 格，第 $3$ 格永远空着。
 
-1. **分裂型“面素数”（$p \equiv 1 \pmod 4$，如 $5, 13, 17, 29, 37, \dots$；偶素数 $p = 2 = -i(1+i)^2 = 1^2 + 1^2$ 则为分歧型桥接素数）**：
-   对奇素数 $p \equiv 1 \pmod 4$，$\left(\frac{-1}{p}\right) = +1$，同余方程 $x^2 \equiv -1 \pmod p$ 恒有解，意味着模 $p$ 算术内部容纳二维旋转生成元 $\hat{\mathbf{I}}^2 = -1$。由费马平方和定理，这类奇素数在二维高斯整数平面 $\mathbb{Z}[i]$ 中必然分裂为一对互不相同的共轭高斯素数乘积（而 $p = 2 = (1+i)(1-i)$ 分歧）：
+::: {.lemma #lem-ch29-square-residues-mod-four title="平方数模 4 只取 0 或 1，两平方和模 4 不等于 3" lean="D5/S3/PrimeForms/QuadraticResidues.square_residues_and_sum_obstruction"}
+对每个自然数 $n$，有 $n^2 \bmod 4 = 0$ 或 $n^2 \bmod 4 = 1$；对所有自然数 $a, b$，有 $(a^2 + b^2) \bmod 4 \neq 3$。
+:::
 
-   $$
-   p = a^2 + b^2 = (a + b\hat{\mathbf{I}})(a - b\hat{\mathbf{I}}),
-   $$
+::: proof
+Lean 证明就是上面的表盘。把 $n$ 写成 $r + 2k$，其中 $r \in \{0, 1\}$ 是 $n$ 除以 $2$ 的余数；对 $r = 0$ 与 $r = 1$ 分别展开平方（`ring_nf`），读出余数 $0$ 与 $1$（`omega`）。第二部分让 $a^2$、$b^2$ 的余数各取两种可能，四种组合之和是 $0, 1, 1, 2$，没有一个是 $3$。完整证明由 Lean 内核检查。
+:::
 
-   在几何诠释下可视作拥有正交双轴的**二维勾股斜边平方（面素数）**。正因如此，在实二次域 $\mathbb{Q}(\sqrt{p})$ 中，**负佩尔方程 $m^2 - p\,n^2 = -1$ 恒有整数解**（例如 $p=5$ 时 $2^2 - 5\cdot 1^2 = -1$；$p=13$ 时 $18^2 - 13\cdot 5^2 = -1$；$p=17$ 时 $4^2 - 17\cdot 1^2 = -1$）。其基本单位元范数为 $-1$（对应带手性翻转的滑移反射），必须经过成对平方 $(-1)^2 = +1$ 才能回归纯旋转分支。
-2. **惰性型“线素数”（$p \equiv 3 \pmod 4$，如 $3, 7, 11, 19, 23, \dots$）**：
-   此时 $\left(\frac{-1}{p}\right) = -1$，模 $p$ 世界里不存在 $90^\circ$ 旋转算子 $\sqrt{-1}$。这类素数无法拆成两个整数的平方和，在高斯平面 $\mathbb{Z}[i]$ 中保持不可约的**一维刚性标量（线素数）**。由于 $m^2 - p\,n^2 \equiv m^2 \pmod p$ 不可能同余于 $-1$，**负佩尔方程 $m^2 - p\,n^2 = -1$ 绝对无整数解**！整数网格对 $\sqrt{p}$ 的逼近被死死锁在 $+1$ 分支 $m^2 - p\,n^2 = +1$ 上（例如 $p=3$ 时 $2^2 - 3\cdot 1^2 = +1$；$p=7$ 时 $8^2 - 7\cdot 3^2 = +1$）。
+表盘立刻说明线素数**写不成**两平方和：$p \bmod 4 = 3$ 恰是那个空格。反方向——面素数**一定写得成**——却不是表盘能看出来的，它要求模 $p$ 算术里真的住着一个 $90^\circ$ 旋转。
 
-3. **希尔伯特互反律（Hilbert reciprocity law）**：当我们把有理数域 $\mathbb{Q}$ 在所有素数位 $v = p$ 与实无穷位 $v = \infty$ 上的局部二次障碍汇总起来时，经典类域论给出全局守恒律——对任意非零有理数 $a, b \in \mathbb{Q}^\times$，局部希尔伯特符号 $(a, b)_v \in \{+1, -1\}$ 在全体素位与实位上的无穷乘积恒等于 $+1$：
+::: {.theorem #thm-ch29-face-prime-two-squares title="模 4 余 1 的素数是两个平方之和；高斯整数乘以其共轭等于两平方和" lean="D5/S3/PrimeForms/SumTwoSquares.prime_eq_sq_add_sq_of_mod_four_eq_one D5/S3/PrimeForms/GaussianIntegers/GaussianIntegerNorm.gaussian_integer_mul_conj_eq_sq_add_sq"}
+1. 设自然数 $p$ 为素数且 $p \bmod 4 = 1$，则存在自然数 $a, b$ 使 $p = a^2 + b^2$。
+2. 对任意整数 $a, b$，在复数域 $\mathbb{C}$ 中有 $(a + bi)\,\overline{(a + bi)} = a^2 + b^2$。
+:::
+
+::: proof
+第一部分在 Lean 文件里只有一层包装：由 $p \bmod 4 = 1$ 得 $p \bmod 4 \neq 3$，再调用 Mathlib 的费马两平方和定理 `Nat.Prime.sq_add_sq`。后者在高斯整数环 $\mathbb{Z}[i]$ 中论证：$p \bmod 4 \neq 3$ 时 $-1$ 是模 $p$ 的平方（`ZMod.exists_sq_eq_neg_one_iff`），于是有 $0 \le k < p$ 使 $p \mid k^2 + 1 = (k + i)(k - i)$；两个因子的范数 $k^2 + 1$ 都小于 $p$ 的范数 $p^2$，$p$ 哪一个也整除不了，所以 $p$ 不是 $\mathbb{Z}[i]$ 的素元。在欧几里得环 $\mathbb{Z}[i]$ 中这等于说 $p$ 可约：$p = uv$，$u, v$ 都不是单位。范数相乘得 $N(u)\,N(v) = p^2$ 且两者都不为 $1$，只能 $N(u) = p$；取 $a, b$ 为 $u$ 的实部与虚部的绝对值，就得到 $p = a^2 + b^2$。第二部分先用 `Complex.mul_conj` 把 $z\,\overline{z}$ 改写成模长平方，再对 $z = a + bi$ 算出模长平方 $a^2 + b^2$（`norm_num`）。完整证明由 Lean 内核检查。
+:::
+
+几何上，$p = a^2 + b^2$ 说的是半径 $\sqrt{p}$ 的圆穿过格点 $(a, b)$；第二部分把它写成高斯平面上一对共轭向量之积 $p = (a + bi)(a - bi)$。把 $i$ 读成上文的双矢量生成元 $\hat{\mathbf{I}}$，素数 $p$ 便张开了一块正交的面，这正是“面素数”一词的来历。线素数则还有一种更强的刚性：它不但自己写不成两平方和，一旦整除某个两平方和，还必须同时整除两条直角边。
+
+::: {.lemma #lem-ch29-line-prime-descent title="模 4 余 3 的素数整除两平方和时整除两个底数" lean="D5/S3/PrimeForms/ThreeModFourDescent.prime_dvd_dvd_of_dvd_sq_add_sq"}
+设 $q$ 为素数，$q \bmod 4 = 3$，$a, b$ 为自然数。若 $q \mid a^2 + b^2$，则 $q \mid a$ 且 $q \mid b$。
+:::
+
+::: proof
+把整除式搬进有限域 $\mathbb{Z}/q\mathbb{Z}$（Lean 中的 `ZMod q`），得到 $a^2 + b^2 = 0$。若 $b \neq 0$，则 $b$ 可逆，$a^2 = -b^2$ 给出 $(a\,b^{-1})^2 = -1$，即 $-1$ 是模 $q$ 的平方；Mathlib 的 `ZMod.mod_four_ne_three_of_sq_eq_neg_sq'` 断言这时 $q \bmod 4 \neq 3$，与假设矛盾。故 $b = 0$，于是 $a^2 = 0$，域中没有零因子，$a = 0$。最后把 $a = 0$、$b = 0$ 译回 $q \mid a$、$q \mid b$。完整证明由 Lean 内核检查。
+:::
+
+把两种素数的行为拼起来，就得到一切自然数的判据：面素数与 $2 = 1^2 + 1^2$ 可以随意相乘，线素数却只能成对出现。
+
+::: {.theorem #thm-ch29-two-squares-classification title="两平方和的素因子分解判据" lean="D5/S3/PrimeForms/SumTwoSquaresClassification.eq_sq_add_sq_iff_even_factorization"}
+对自然数 $n$ 与素数 $q$，记 $v_q(n)$ 为 $q$ 在 $n$ 的素因子分解中的指数（$q \nmid n$ 时为 $0$；按 Lean 的约定，$n = 0$ 时一切指数都为 $0$）。则对每个自然数 $n$：存在自然数 $a, b$ 使 $n = a^2 + b^2$，当且仅当对每个满足 $q \bmod 4 = 3$ 的素数 $q$，$v_q(n)$ 都是偶数。
+:::
+
+::: proof
+Lean 文件只做形式转换：Mathlib 的 `Nat.eq_sq_add_sq_iff` 只对整除 $n$ 的素数陈述条件，并用 $p$ 进赋值 `padicValNat` 记指数；包装把它改写成对一切素数的形式——整除 $n$ 的素数两种指数相等（`Nat.factorization_def`），不整除 $n$ 的素数指数为 $0$（`Nat.factorization_eq_zero_of_not_dvd`），$n = 0$ 时两边都成立。数学内容在 Mathlib 的证明里，它经过中间形式“$n = g^2 m$，且 $-1$ 是模 $m$ 的平方”。$\Rightarrow$：若 $n = x^2 + y^2 > 0$，提出 $g = \gcd(x, y)$，余下 $m = x_1^2 + y_1^2$ 中 $x_1, y_1$ 互素，$-1$ 是模 $m$ 的平方；模 $4$ 余 $3$ 的素数若整除 $m$，$-1$ 就成了模它的平方，不可能，所以 $v_q(n) = 2v_q(g)$。$\Leftarrow$：把 $n$ 写成平方数乘无平方因子的 $m$；指数条件使 $m$ 不含模 $4$ 余 $3$ 的素因子，$-1$ 是模 $m$ 每个素因子的平方，由中国剩余定理也是模 $m$ 的平方；再对 $m$ 的素因子归纳：每个素因子是两平方和（费马定理），而两平方和之积仍是两平方和，
+
+$$
+(x^2 + y^2)(u^2 + v^2) = (xu - yv)^2 + (xv + yu)^2,
+$$
+
+最后乘回平方因子。完整证明由 Lean 内核检查。
+:::
+
+**三条手工推导。** 下面三条结论没有单独冻结；除初等的同余运算外，它们只用到上面的引理与定理（推导本身是本书的手工推导）：
+
+1. **奇素数 $p$ 是两平方和，当且仅当 $p \equiv 1 \pmod 4$。** 充分性是 [@thm-ch29-face-prime-two-squares] 的第一部分；必要性来自 [@lem-ch29-square-residues-mod-four]：奇素数模 $4$ 只能余 $1$ 或 $3$，而第 $3$ 格是空的。
+2. **对奇素数 $p$，同余方程 $x^2 \equiv -1 \pmod p$ 有解，当且仅当 $p \equiv 1 \pmod 4$。** 若 $p \equiv 1$，取 $p = a^2 + b^2$：$b = 0$ 会使素数 $p = a^2$ 成为平方数，而 $b^2 \le p < p^2$ 给出 $b < p$，所以 $0 < b < p$，$b$ 模 $p$ 可逆；由 $a^2 \equiv -b^2$ 得 $x \equiv a\,b^{-1}$ 满足 $x^2 \equiv -1$。若 $p \equiv 3$ 而 $x^2 \equiv -1$，取 $0 \le x < p$，则 $p \mid x^2 + 1^2$，[@lem-ch29-line-prime-descent] 给出 $p \mid 1$，矛盾。这就是上文“能否在模 $p$ 算术中开出 $\sqrt{-1}$”的分界。
+3. **线素数的负佩尔方程无解：$p \equiv 3 \pmod 4$ 时，$m^2 - p\,n^2 = -1$ 没有整数解。** 否则 $m^2 + 1 = p\,n^2$，于是 $p \mid \lvert m\rvert^2 + 1^2$，[@lem-ch29-line-prime-descent] 再次给出 $p \mid 1$。右边的 $+1$ 却可以达到，例如 $2^2 - 3 \cdot 1^2 = +1$、$8^2 - 7 \cdot 3^2 = +1$。
+
+::: {.example #ex-ch29-face-and-line-primes title="面素数的两条直角边、模 p 的 90° 旋转，以及 2024 至 2027 四个年份"}
+前五个面素数的分解、由手工推导 2 构造的 $\sqrt{-1}$，以及供下面文献评注对照的负佩尔方程最小正解如下（$n \ge 1$ 中最小者；表中每个数都可以用整数运算直接验算）：
+
+| $p$ | $p = a^2 + b^2$ | $p = (a + bi)(a - bi)$ | $x \equiv \pm a\,b^{-1}$，$x < p/2$ | $x^2 + 1$ | 负佩尔方程最小解 $(m, n)$ |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| $5$ | $1^2 + 2^2$ | $(1 + 2i)(1 - 2i)$ | $2$ | $5 = 1 \cdot 5$ | $(2, 1)$ |
+| $13$ | $2^2 + 3^2$ | $(2 + 3i)(2 - 3i)$ | $5$ | $26 = 2 \cdot 13$ | $(18, 5)$ |
+| $17$ | $1^2 + 4^2$ | $(1 + 4i)(1 - 4i)$ | $4$ | $17 = 1 \cdot 17$ | $(4, 1)$ |
+| $29$ | $2^2 + 5^2$ | $(2 + 5i)(2 - 5i)$ | $12$ | $145 = 5 \cdot 29$ | $(70, 13)$ |
+| $37$ | $1^2 + 6^2$ | $(1 + 6i)(1 - 6i)$ | $6$ | $37 = 1 \cdot 37$ | $(6, 1)$ |
+
+线素数 $3, 7, 11, 19, 23$ 一行也填不出来：第二列被 [@lem-ch29-square-residues-mod-four] 挡住，第四列与最后一列分别由手工推导 2 与 3 排除。
+
+再把 [@thm-ch29-two-squares-classification] 用到几个具体的数上：
+
+| $n$ | $n \bmod 4$ | 素因子分解 | 模 $4$ 余 $3$ 的素数的指数 | 两平方和 |
+| :---: | :---: | :---: | :---: | :---: |
+| $45$ | $1$ | $3^2 \cdot 5$ | $v_3 = 2$ | $3^2 + 6^2$ |
+| $2024$ | $0$ | $2^3 \cdot 11 \cdot 23$ | $v_{11} = 1$，$v_{23} = 1$ | 不是 |
+| $2025$ | $1$ | $3^4 \cdot 5^2$ | $v_3 = 4$ | $0^2 + 45^2 = 27^2 + 36^2$ |
+| $2026$ | $2$ | $2 \cdot 1013$ | 没有这样的素因子 | $1^2 + 45^2$ |
+| $2027$ | $3$ | $2027$（素数） | $v_{2027} = 1$ | 不是 |
+
+$2027$ 在表盘上就被拦下；$2024$ 模 $4$ 余 $0$，表盘拦不住它，挡住它的是奇指数 $v_{11} = v_{23} = 1$。$45$ 展示下降：$3 \mid 3^2 + 6^2$，按 [@lem-ch29-line-prime-descent] 它同时整除 $3$ 与 $6$，约去 $3^2$ 剩下 $5 = 1^2 + 2^2$，指数 $v_3$ 一次降 $2$。$2026 = 2 \cdot 1013$ 中的 $1013$ 模 $4$ 余 $1$，是面素数，$1013 = 22^2 + 23^2$；用上面的乘积恒等式，
+
+$$
+\begin{aligned}
+2026 &= (1^2 + 1^2)(22^2 + 23^2) \\
+&= (22 - 23)^2 + (23 + 22)^2 = 1^2 + 45^2,
+\end{aligned}
+$$
+
+这正是高斯整数的乘法 $(1 + i)(22 + 23i) = -1 + 45i$ 读出的两条直角边。
+:::
+
+::: {.remark #rem-ch29-pell-primes-hilbert-literature title="素数在高斯整数中的分裂与惰性、面素数的负佩尔方程与希尔伯特互反律（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 上面的方框与手工推导止步于“写成两平方和”与“整除时的下降”。以下三条经典结论不在本书锁定的 `trureturing@dev` 冻结声明集中：
+
+1. **高斯整数中的分裂、惰性与分歧。** 在高斯整数环 $\mathbb{Z}[i]$ 中，$p \equiv 1 \pmod 4$ 时 $a + bi$ 与 $a - bi$ 是两个互不相伴的高斯素元（分裂）；$p \equiv 3 \pmod 4$ 时 $p$ 本身仍是高斯素元（惰性）；$2 = -i(1 + i)^2$ 是唯一的分歧素数。
+2. **面素数的负佩尔方程。** 对每个素数 $p \equiv 1 \pmod 4$，负佩尔方程 $m^2 - p\,n^2 = -1$ 都有整数解（上表最后一列是前五例），因而实二次域 $\mathbb{Q}(\sqrt{p})$ 的基本单位范数为 $-1$。在本书的几何读法中，范数 $-1$ 的单位是一次带手性翻转的滑移反射，平方 $(-1)^2 = +1$ 之后才回到纯旋转分支。线素数一侧的“无解”已由手工推导 3 从冻结引理得出。
+3. **希尔伯特互反律。** 对任意非零有理数 $a, b \in \mathbb{Q}^\times$，局部希尔伯特符号 $(a, b)_v \in \{+1, -1\}$ 只在有限多个位 $v$ 处等于 $-1$，且在全体素位与实无穷位上的乘积等于 $+1$：
 
    $$
    \prod_{v \le \infty} (a, b)_v = +1.
    $$
 
-   在本书的几何读法中，这意味着 $-1$ 手性扭结绝不可能在单个素数轴上孤立创生，它必须在成对的素数位之间两两配对、正反相消——与第三部第 10 章“两两比较，永远一致，顺序无关”形成算术呼应。
+   在本书的几何读法中，这意味着 $-1$ 手性扭结不会在单个素数轴上孤立出现，它必须在成对的位之间正反相消，与第三部第 10 章“两两比较，永远一致，顺序无关”形成算术呼应。
 :::
 
 ::: {.viz src="pythagoras-number-escape" preset="five" height="500"}
@@ -197,7 +358,7 @@ $$
    \cos\theta_p := \frac{a_p}{2\sqrt{p}} \in [-1, +1], \qquad \alpha_p, \bar{\alpha}_p = \sqrt{p}\,e^{\pm i\theta_p}.
    $$
 
-2. **高斯复乘点数公式与奇素数线/面分野**：在具有 $\mathbb{Z}[i]$ 复乘的勾股同余曲线 $y^2 = x^3 - x$ 上，第一座桥（[@rem-ch29-pell-primes-hilbert-literature]）中的两族奇素数在 $\cos\theta_p$ 下截然分开：
+2. **高斯复乘点数公式与奇素数线/面分野**：在具有 $\mathbb{Z}[i]$ 复乘的勾股同余曲线 $y^2 = x^3 - x$ 上，第一座桥（[@thm-ch29-face-prime-two-squares]、[@lem-ch29-line-prime-descent]）中的两族奇素数在 $\cos\theta_p$ 下截然分开：
    - **在惰性“线素数” $p \equiv 3 \pmod 4$ 上**：由于 $(-x)^3 - (-x) = -(x^3 - x)$ 且 $\left(\frac{-1}{p}\right) = -1$，$+x$ 与 $-x$ 的勒让德符号反号相消，自旋和恒为零：
 
      $$
@@ -312,13 +473,13 @@ $$
 
 从几何上看，三维单位旋量球面 $S^3 \cong \mathrm{SU}(2)$（由四元数范数 $s^2 + x^2 + y^2 + z^2 = 1$ 定义、欧拉示性数 $\chi(S^3) = 0$ 的可平行化超球面，见 [@rem-hairy-ball-adams-literature]）在极角 $\theta \in [0, \pi]$ 处的二维纬球面 $S^2(\sin\theta)$ 面积正比于 $\sin^2\theta$；将 $S^3 \cong \mathrm{SU}(2)$ 上的均匀哈尔测度（Haar measure）向实迹直径 $u = \frac{1}{2}\operatorname{Tr}(U) = \cos\theta \in [-1, +1]$ 作投影，所得密度恰为 $\frac{2}{\pi}\sin^2\theta\,d\theta$。
 
-综观本章前两节，林德曼—魏尔斯特拉斯定理与 T. Y. Chow (1999) 在沙努埃尔猜想（[@conj-schanuel-dottie]）条件下的初等域逃逸定理、[@rem-ch29-pell-primes-hilbert-literature] 中的费马二平方和分裂 / 奇素数负佩尔可解性 / 希尔伯特互反律、[@rem-ch29-elliptic-torus-literature] 中的复椭圆曲线环面拓扑与阿贝尔群律、[@rem-ch29-hasse-gauss-literature] 与 [@rem-ch29-gauss-character-application] 中的哈塞界及高斯复乘点数推导，以及本评注中的佐藤—泰特分布定理，均为外部经典数学文献结果，未包含在本书锁定的 `trureturing@dev` 形式化声明集中；本书内核验证的结论严格限定于显式标注 `lean:` 的代数与内积恒等式（如 [`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)、[`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique)、[`power_fiber_card_eq_one_add_character_sum`](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.power_fiber_card_eq_one_add_character_sum)、[`norm_jacobiSum`](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.norm_jacobiSum) 与 [`gaussian_unit`](lean:D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart.gaussian_unit) 等）。
+综观本章前两节，林德曼—魏尔斯特拉斯定理与 T. Y. Chow (1999) 在沙努埃尔猜想（[@conj-schanuel-dottie]）条件下的初等域逃逸定理、[@rem-ch29-pell-primes-hilbert-literature] 中的素数在高斯整数中的分裂与惰性 / 模 4 余 1 素数的负佩尔可解性 / 希尔伯特互反律、[@rem-ch29-elliptic-torus-literature] 中的复椭圆曲线环面拓扑与阿贝尔群律、[@rem-ch29-hasse-gauss-literature] 与 [@rem-ch29-gauss-character-application] 中的哈塞界及高斯复乘点数推导，以及本评注中的佐藤—泰特分布定理，均为外部经典数学文献结果，未包含在本书锁定的 `trureturing@dev` 形式化声明集中；本书内核验证的结论严格限定于带 `lean` 属性的方框（如 [@lem-ch29-square-residues-mod-four]、[@thm-ch29-face-prime-two-squares]、[@lem-ch29-line-prime-descent]、[@thm-ch29-two-squares-classification]、[@thm-ch29-silver-pell-remainder] 与 [@thm-ch29-silver-best-approximation]）以及显式标注 `lean:` 的代数与内积恒等式（如 [`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)、[`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique)、[`power_fiber_card_eq_one_add_character_sum`](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.power_fiber_card_eq_one_add_character_sum)、[`norm_jacobiSum`](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.norm_jacobiSum) 与 [`gaussian_unit`](lean:D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart.gaussian_unit) 等）。
 :::
 
-在本书的跨学科几何视野下，从希帕索斯直角三角形裂开的佩尔接缝（[@rem-ch29-pell-convergents-literature]）出发，对照上述文献评注（[@rem-ch29-pell-primes-hilbert-literature]、[@rem-ch29-elliptic-torus-literature]、[@rem-ch29-hasse-gauss-literature] 与 [@rem-ch29-arithmetic-geometry-literature]），素数轴上的点数偏差振荡便与三维量子旋量球面 $S^3 \cong \mathrm{SU}(2)$ 向一维直径 $[-1, +1]$ 投下的余弦影子形成了深邃的几何同构意象。
+在本书的跨学科几何视野下，从希帕索斯直角三角形裂开的佩尔接缝（[@thm-ch29-silver-pell-remainder]）出发，对照上述文献评注（[@rem-ch29-pell-primes-hilbert-literature]、[@rem-ch29-elliptic-torus-literature]、[@rem-ch29-hasse-gauss-literature] 与 [@rem-ch29-arithmetic-geometry-literature]），素数轴上的点数偏差振荡便与三维量子旋量球面 $S^3 \cong \mathrm{SU}(2)$ 向一维直径 $[-1, +1]$ 投下的余弦影子形成了深邃的几何同构意象。
 
 ::: {.viz src="pythagoras-number-escape" height="640"}
-**交互实验室 `ORTHO//PYTHAGORAS`**：沿着 $\pm 1$ 接缝走一遍的三个场景。佩尔接缝：$\sqrt{d}$ 的渐近分数沿直线越贴越近，$m^2 - d\,n^2$ 却是非零整数（$d = 5$ 时绿圈标出已由 Lean 验证的全部 $\pm 4$ 解）；线素数与面素数：半径 $\sqrt{p}$ 的圆上有没有格点；模 $p$ 数点：曲线 $y^2 = x^3 - x$ 的 $a_p$ 被哈塞界关住，线素数恰在零上，面素数的弗罗贝尼乌斯余弦等于高斯三角形的余弦。费马二平方和定理、哈塞定理与佐藤—泰特分布是文献结果，未在本书形式化。
+**交互实验室 `ORTHO//PYTHAGORAS`**：沿着 $\pm 1$ 接缝走一遍的三个场景。佩尔接缝：$\sqrt{d}$ 的渐近分数沿直线越贴越近，$m^2 - d\,n^2$ 却是非零整数（$d = 5$ 时绿圈标出已由 Lean 验证的全部 $\pm 4$ 解）；线素数与面素数：半径 $\sqrt{p}$ 的圆上有没有格点；模 $p$ 数点：曲线 $y^2 = x^3 - x$ 的 $a_p$ 被哈塞界关住，线素数恰在零上，面素数的弗罗贝尼乌斯余弦等于高斯三角形的余弦。面素数是两平方和、线素数不是，已由 Lean 验证（[@thm-ch29-face-prime-two-squares]、[@lem-ch29-square-residues-mod-four]）；哈塞定理与佐藤—泰特分布是文献结果，未在本书形式化。
 :::
 
 ---
@@ -491,6 +652,6 @@ $$
 
 ## 本章小结：从算术接缝到无时间因果晶体 {#sec-ch29-summary}
 
-本章将毕达哥拉斯的勾股面积守恒、黄金整数佩尔范数恒等式与单位向量 Gram 重叠等价关系（[@thm-ch29-gram-rigidity-and-pell]），对照佩尔渐近与算术几何文献评注（[@rem-ch29-pell-convergents-literature]、[@rem-ch29-pell-primes-hilbert-literature]、[@rem-ch29-elliptic-torus-literature]、[@rem-ch29-hasse-gauss-literature]、[@rem-ch29-arithmetic-geometry-literature]）、无时间约束与驻相文献评注（[@rem-ch29-wheeler-dewitt-page-wootters-literature]、[@rem-ch29-feynman-stationary-phase-literature]）以及斯宾诺莎三角形因果必然性与有限观察者的格拉姆椭圆体（$\det G \ge 0$）融为一炉：**全局无时间，故万古长存；观察者有限，故步步皆新。**
+本章将毕达哥拉斯的勾股面积守恒、银斜率 $\sqrt{2} - 1$ 的佩尔余项与最佳逼近下界（[@thm-ch29-silver-pell-remainder]、[@thm-ch29-silver-best-approximation]）、黄金整数佩尔范数恒等式与单位向量 Gram 重叠等价关系（[@thm-ch29-gram-rigidity-and-pell]）、面素数与两平方和判据（[@thm-ch29-face-prime-two-squares]、[@thm-ch29-two-squares-classification]），对照连分数识别与算术几何文献评注（[@rem-ch29-pell-convergents-literature]、[@rem-ch29-pell-primes-hilbert-literature]、[@rem-ch29-elliptic-torus-literature]、[@rem-ch29-hasse-gauss-literature]、[@rem-ch29-arithmetic-geometry-literature]）、无时间约束与驻相文献评注（[@rem-ch29-wheeler-dewitt-page-wootters-literature]、[@rem-ch29-feynman-stationary-phase-literature]）以及斯宾诺莎三角形因果必然性与有限观察者的格拉姆椭圆体（$\det G \ge 0$）融为一炉：**全局无时间，故万古长存；观察者有限，故步步皆新。**
 
 下一章（[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)）中，我们将把这一“全局静态场 vs. 场内有限观察者”的几何张力推向计算复杂性与连续流体力学的最高峰——正面审视 **$\mathrm{P}$ vs. $\mathrm{NP}$**、**指数时间假设（ETH）与 2026 张量网络秩约分**以及**三维纳维—斯托克斯（Navier–Stokes）奇异涡丝**的场化同构。

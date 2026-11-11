@@ -200,6 +200,10 @@ Recall the author's observation from the chapter epigraph: *"a single definite q
 - When only a **single** state $\lvert\psi\rangle$ is present, it determines only a one-dimensional ray on the sphere. Multiplying that lone state by a global phase factor $\lvert\psi\rangle \mapsto u\lvert\psi\rangle$ ($|u| = 1$) tries to spin a thickness-free line around its own axis — in both the ray-rigidity theorem [@thm-ray-phase-rigidity] of [Chapter 1](ch01-measurement.md) and the rank-one Born projector $\lvert\psi\rangle\langle\psi\rvert$ of [Chapter 2](ch02-born-rule.md), $u\overline{u} = |u|^2 = 1$ cancels out identically, leaving the ray's direction on $S^2$ unchanged;
 - By contrast, when **two or more** states interact — whether as two orthogonal branches of a superposition or in a pairwise overlap amplitude $z = \langle\phi\mid\psi\rangle \in \mathbb{C}$ — the two lines span a genuine two-dimensional wedge plane, and their relative phase is the orientation angle within that plane!
 
+::: {.viz src="qubit-geometry" preset="phase" height="500"}
+**The relative phase turns; the shadow stays put.** During playback, the amber arrow $B$ travels along the equator about the cyan ruler $A$, keeping their angle at $90^\circ$. The cyan line stays at zero, while the magenta area keeps its size and changes orientation. This card varies the relative phase between the two branches.
+:::
+
 Going one step further, in a phase-locked interferometer where a unit phase reference $u \in \mathbb{C}$ ($\|u\| = 1$) calibrates the overlap amplitude $z \in \mathbb{C}$ between two paths, when does the complex overlap $z$ reduce to a **real** signed amplitude $r \in \mathbb{R}$ carried along $u$?
 
 In the Lean module `QuantumStates/PhaseLockedOverlap`, the following proposition proves that whenever $\overline{z} = (u^{-1})^2 z$, the transverse imaginary component vanishes and $z$ factors as $z = u \cdot r$ with $r = \operatorname{Re}(u^{-1}z) \in \mathbb{R}$.
@@ -242,6 +246,12 @@ $$
 
 its sole geometric action in three-space is to **rotate the Bloch sphere rigidly by angle $\theta$ (right-hand rule) about the unit axis $\hat{\vv{n}} \in S^2$ — that is, within the Hodge-dual bivector plane $\vv{B} = \star\hat{\vv{n}}$**!
 
+First watch Hadamard carry the north-pole state to the equator, then read through the rotor parameters in the table below.
+
+::: {.viz src="qubit-geometry" preset="hadamard" height="500"}
+**A half-turn about a tilted axis.** Starting at the north pole $\lvert 0\rangle$, the amber arrow $B$ turns about the violet axis $\hat h = (\vv{e}_1 + \vv{e}_3)/\sqrt{2}$ and ends at $\lvert +\rangle$ on the equator. The cyan line shrinks from $1$ to zero as the magenta area grows from zero to $1$. The solid path has already been travelled; the dashed path lies ahead.
+:::
+
 ::: {.example #ex-single-qubit-gate-atlas title="Rotor Atlas of the Six Standard Single-Qubit Gates and Explicit Balanced-Sum Verification for Hadamard"}
 The table below compiles the matrix form, $\mathrm{SU}(2)$ rotor decomposition, rotation bivector plane $\vv{B}$, Bloch rotation axis $\hat{\vv{n}}$, and Bloch rotation angle $\theta$ (with spinor half-angle $\theta/2$) for $\{X, Y, Z, H, S, T\}$, followed by an explicit matrix verification of [@thm-balanced-sum-skew-adjoint] and [@thm-relative-complex-structure-square] on the Hadamard gate $H$:
 
@@ -272,6 +282,12 @@ Now let us check [@thm-balanced-sum-skew-adjoint] and [@thm-relative-complex-str
    Indeed, $J^* = (-iY)^* = +iY = -J$ (skew-adjoint) and $J^2 = (-iY)^2 = -Y^2 = -I_2$! Even better, the companion Hermitian involution $K = iJ = i(-iY) = +Y$ is literally the **third Pauli axis $Y$** perpendicular to the $XZ$ plane ($Y^* = Y$, $Y^2 = I_2$)! Note both angles explicitly so the spinor half-angle and the Bloch rotation angle are never conflated: blending the two orthogonal components $X$ and $Z$ in a balanced sum spans the oriented area $J = XZ = -iY = \bigl(\begin{smallmatrix} 0 & -1 \\ 1 & 0 \end{smallmatrix}\bigr)$, which is a **$90^\circ$ ($\pi/2$) quarter-turn on the real two-component state-amplitude plane** $(\psi_0, \psi_1)^{\mathsf{T}}$ and equals the spinor rotor $R_y(\pi) = \exp(-i\frac{\pi}{2}Y)$; when acting via the two-sided sandwich product $J\,\vv{v}\,J^\dagger$ on the **Bloch sphere $S^2$**, the two half-angles add up to a **$180^\circ$ ($\pi$) half-turn about the $Y$ axis** (flipping the north pole $\lvert 0\rangle$ to the south pole $\lvert 1\rangle$)!
 :::
 
+Once a single gate is clear, connect $H$, $Z$, and $H$ in that order. A shared timeline lets you examine the three turns one segment at a time.
+
+::: {.viz src="qubit-geometry" preset="hzh" height="500"}
+**Three gates, three turns.** The amber arrow $B$ turns about the axes of $H$, $Z$, and $H$ in sequence. The violet dashed line marks the axis of the current turn; the upper left shows the current gate, the angle travelled, and the rotor's scalar part $w$. Drag the timeline to pause within each segment and compare the cyan line with the magenta area.
+:::
+
 ::: {.remark #rem-clifford-rotor-literature title="Quaternions, Rodrigues's Half-Angle Formula, and the Clifford Spinor Double Cover (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** In this chapter, [@thm-balanced-sum-skew-adjoint], [@lemma-skew-adjoint-unitary-square], and [@thm-relative-complex-structure-square] formalize the matrix-algebraic construction of the skew-adjoint relative complex structure $J^2 = -I_n$ from a balanced unitary sum, while [@prop-phase-locked-overlap] formalizes the real-amplitude factorization of phase-locked overlaps. The historical lineage and three-dimensional Clifford rotor formulas belong to the classical mathematical-physics literature:
 
@@ -284,6 +300,10 @@ Now let us check [@thm-balanced-sum-skew-adjoint] and [@thm-relative-complex-str
    Because advancing $\theta \mapsto \theta + 2\pi$ negates the half-angle rotor $R(\theta + 2\pi) = -R(\theta)$ while $(-R)\vv{v}(-R)^\dagger = R\vv{v}R^\dagger$, the rotor group $\mathrm{Spin}(3) \cong \mathrm{SU}(2) \cong S^3$ forms the universal $2:1$ double cover of $\mathrm{SO}(3) \cong \mathbb{RP}^3$ (a spinor reverses sign under a $360^\circ$ turn and returns to itself only after $720^\circ$). The case of a fixed plane of rotation — the squaring map from the circle of rotors to the circle of rotations — is verified by [@thm-circle-double-cover-history-lift]: path lifts are unique, there is no continuous global section, and a full turn negates the rotor; the full cover $\mathrm{Spin}(3) \to \mathrm{SO}(3)$, the Rodrigues formula and $\mathrm{SO}(3) \cong \mathbb{RP}^3$ remain literature results.
 
 These classical Clifford-algebraic and historical results provide geometric context and are not claimed in the book's Lean verification ledger.
+:::
+
+::: {.viz src="qubit-geometry" height="560"}
+**Full laboratory.** Switch experiment cards, drag $B$, or append gates to compare the turns on the sphere with the detector weights, fringes, and rotor curves below.
 :::
 
 Having demystified $i$ and seen how oriented bivector area $\vv{A} \wedge \vv{B}$ drives every single-qubit gate, a grand synthesis now beckons: if the inner product $\vv{A}\cdot\vv{B}$ of Part I governs particle projection and the exterior product $\vv{A}\wedge\vv{B}$ of this chapter governs wave rotation and interference, what happens when we weld both halves back together into the single geometric product $\vv{A}\vv{B} = \vv{A}\cdot\vv{B} + \vv{A}\wedge\vv{B}$? Turn to [Chapter 6](ch06-geometric-product.md).

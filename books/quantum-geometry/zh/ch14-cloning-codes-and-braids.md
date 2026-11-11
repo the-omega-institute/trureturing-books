@@ -314,9 +314,145 @@ $$
 **文献结果，未在本书形式化。** 在将 [@cor-braid-yang-baxter] 与物理及低维拓扑文献（另参下文 [@rem-error-correction-anyons-literature]）对接时，必须严格守住三条理论边界（其中配置空间基本群 $B_n$ 与 $S_n$ 的维数二分及三维三叶结的非平凡结拓扑均属外部文献结论，未在本书形式化）：
 
 1. **代数着色实现 vs 完整拓扑基本群分类**：[@cor-braid-yang-baxter] 是在抽象代数结构 `Rack Q` 上对三股编织关系 $\sigma_1 \sigma_2 \sigma_1 = \sigma_2 \sigma_1 \sigma_2$ 的代数着色实现（源码完全不包含拓扑流形、时空维数或量子统计的假设）。它证明了架着色在三股 Reidemeister III / Yang–Baxter 移动下的传输不变性，但并不证明二维平面上一切编织皆非平凡，也不等同于配置空间完整基本群的分类定理。
-2. **严格区分“点粒子的交换轨迹（exchange paths）”与“三维空间中的闭合绳结（knots）”**：如图 14 面板 III 所示，当点粒子拥有第三个空间正交方向 $e_3$ 时，原本在二维平面内绕着另一颗粒子转一圈的双交换轨迹（回路）可以沿着第三空间维 $e_3$ 向上抬起并越过被绕粒子，从而使点粒子交换群从无穷阶辫群 $B_n$ 退化为有限对称群 $S_n$（$\sigma_i^2 = 1$）。**但这绝不意味着三维空间里的闭合一维绳结（如三叶结 trefoil knot）也能自动解开！** 闭合绳结在 $\mathbb{R}^3$ 中禁止自身穿越，依然具有非平凡的结拓扑（事实上，架与双架 quandle 着色正是区分三维非平凡绳结的经典代数工具）。
+2. **严格区分“点粒子的交换轨迹（exchange paths）”与“三维空间中的闭合绳结（knots）”**：如图 14 面板 III 所示，当点粒子拥有第三个空间正交方向 $e_3$ 时，原本在二维平面内绕着另一颗粒子转一圈的双交换轨迹（回路）可以沿着第三空间维 $e_3$ 向上抬起并越过被绕粒子，从而使点粒子交换群从无穷阶辫群 $B_n$ 退化为有限对称群 $S_n$（$\sigma_i^2 = 1$）。**但这绝不意味着三维空间里的闭合一维绳结（如三叶结 trefoil knot）也能自动解开！** 闭合绳结在 $\mathbb{R}^3$ 中禁止自身穿越，依然具有非平凡的结拓扑（事实上，架与幂等架（quandle）着色正是区分三维非平凡绳结的经典代数工具，见下文 [@thm-quandle-coloring-markov-invariant] 与 [@ex-fox-three-colorings-markov]）。
 3. **任意子统计与物理容错边界归入文献**：非阿贝尔任意子的物理实现、配置空间同伦群以及有限温度下的拓扑纠错界限属于凝聚态与量子信息文献结果，详见下文 [@rem-error-correction-anyons-literature]。
 :::
+
+## 把编织首尾相接：Markov 稳定化与着色计数 {#sec-markov-stabilization-coloring-count}
+
+[@rem-braid-knot-topology-literature] 的第 2 条说，三维空间里的三叶结解不开，而着色正是分辨它的经典工具。这件工具怎么用？[@cor-braid-yang-baxter] 管的是一段编织：上面一排线头，下面一排线头，颜色从一排传到另一排。可是结没有线头。把编织弯过来，让第 $k$ 个下端接回第 $k$ 个上端，绳子才成了闭合的圈，这叫编织的**闭合**。接上之后，“上端的颜色”与“下端的颜色”是同一段绳子的颜色，于是闭合编织的着色只剩一个条件：颜色沿编织传一遍，必须原样回来。**闭合编织的着色，就是着色传输的不动点。**
+
+模块 `D5/S3/Topology/QuandleMarkovColoring` 把这句话写成了定义。它不谈画在纸上的绳子：编织是由生成元与关系给出的群里的元素，着色传输是这个群在颜色序列上的作用。
+
+::: {.definition #def-closed-braid-colorings title="按生成元与关系定义的 Artin 辫群、架着色作用、闭合着色与着色计数" lean="D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.artinRelators D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.Artin D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.PositiveBraid D5/S3/Topology/QuandleMarkovColoring.Colors D5/S3/Topology/QuandleMarkovColoring.braidAction D5/S3/Topology/QuandleMarkovColoring.ClosedColorings D5/S3/Topology/QuandleMarkovColoring.coloringCount"}
+设 $n \in \mathbb{N}$，$Q$ 为带 `[Rack Q]` 的类型，$\star$ 为它的架运算。
+
+1. **Artin 辫群** [`Artin`](lean:D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.Artin) $n$：由生成元 $\sigma_1, \dots, \sigma_{n-1}$ 与关系元集合 [`artinRelators`](lean:D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.artinRelators) $n$ 给出的群（`PresentedGroup`，即自由群对关系元生成的正规子群的商），关系为
+
+   $$
+   \sigma_j\sigma_k = \sigma_k\sigma_j \quad (j + 1 < k \ \text{或}\ k + 1 < j), \qquad
+   \sigma_k\sigma_{k+1}\sigma_k = \sigma_{k+1}\sigma_k\sigma_{k+1}.
+   $$
+
+   Lean 中生成元以 $i : \mathrm{Fin}\,(n - 1)$ 编号（$i = 0, \dots, n - 2$），本书记作 $\sigma_{i+1}$；自然数减法截断，所以 $n \le 1$ 时没有生成元，群是平凡群。
+2. **着色** [`Colors`](lean:D5/S3/Topology/QuandleMarkovColoring.Colors) $Q\ n = (\mathrm{Fin}\,n \to Q)$，写作 $c = (c_1, \dots, c_n)$（$c_k$ 是 Lean 中下标为 $k - 1$ 的分量）。
+3. **着色作用** [`braidAction`](lean:D5/S3/Topology/QuandleMarkovColoring.braidAction) $Q\ n$ 是从 $\mathrm{Artin}\,n$ 到 $\mathrm{Colors}\ Q\ n$ 的置换群（`Equiv.Perm`）的群同态，由生成元上的取值确定：$\sigma_k$ 把 $c$ 的第 $k$、$k+1$ 两个分量 $(c_k,\ c_{k+1})$ 换成 $(c_k \star c_{k+1},\ c_k)$，其余分量不动。记 $b \cdot c = \operatorname{braidAction}\ Q\ n\ b\ c$；置换群的乘法是复合，$(b\,b') \cdot c = b \cdot (b' \cdot c)$。
+4. **闭合着色** [`ClosedColorings`](lean:D5/S3/Topology/QuandleMarkovColoring.ClosedColorings) $Q\ b = \{\,c : \mathrm{Colors}\ Q\ n \mid b \cdot c = c\,\}$，其中 $b \in \mathrm{Artin}\,n$。
+5. **正股数编织** [`PositiveBraid`](lean:D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.PositiveBraid) 是二元组 $(n, b)$，其中 $n > 0$，$b \in \mathrm{Artin}\,n$（名称说的是股数为正，与交叉的正负无关）。若再设 `[Finite Q]`，**着色计数** [`coloringCount`](lean:D5/S3/Topology/QuandleMarkovColoring.coloringCount) 定义为 $\operatorname{coloringCount}\ Q\ (n, b) = \operatorname{Nat.card}\bigl(\mathrm{ClosedColorings}\ Q\ b\bigr)$。
+:::
+
+第 3 条里“由生成元上的取值确定”并非白给：生成元的像必须满足 Artin 关系，作用才能从自由群落到商群上。相邻关系 $\sigma_k\sigma_{k+1}\sigma_k = \sigma_{k+1}\sigma_k\sigma_{k+1}$ 的验证用的正是 [@cor-braid-yang-baxter]（在 Lean 中，这一步是私有引理 `generator_adjacent`）；不相邻的两个交叉改动的是不同的分量，自然可交换（`generator_distant`）。
+
+数一数不动点，看起来是在数绳圈本身的某种性质。但编织带着绳圈并不需要的多余信息：从哪里剪开，用了几股。这种多余恰好由三种改写步骤穷尽：这是 Markov 定理，属文献结果，见 [@rem-alexander-markov-literature]。Lean 文件把这三步定义成编织之间的一个纯代数关系。
+
+::: {.definition #def-algebraic-markov-moves title="添股同态、末位生成元与代数 Markov 等价" lean="D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.strandInclusion D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.lastGenerator D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.MarkovStep D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.MarkovEquivalent"}
+沿用 [@def-closed-braid-colorings] 的记号。
+
+1. **添股同态** [`strandInclusion`](lean:D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.strandInclusion) $n$，记作 $\iota_n : \mathrm{Artin}\,n \to \mathrm{Artin}\,(n + 1)$：把每个生成元 $\sigma_k$ 送到同名生成元 $\sigma_k$ 的群同态（Lean 没有断言它是单射）。
+2. **末位生成元** [`lastGenerator`](lean:D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.lastGenerator) $n\ hn$（$hn : 0 < n$）是 $\mathrm{Artin}\,(n + 1)$ 中的 $\sigma_n$，即第 $n$ 股与新添的第 $n + 1$ 股之间的交叉。
+3. **Markov 步** [`MarkovStep`](lean:D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.MarkovStep) 是正股数编织之间的归纳关系，恰有三条构造规则：对 $n > 0$ 与 $b, g \in \mathrm{Artin}\,n$，
+
+   $$
+   \begin{aligned}
+   \text{共轭：}\quad & (n,\ b) \longrightarrow (n,\ g\,b\,g^{-1}), \\
+   \text{正稳定化：}\quad & (n,\ b) \longrightarrow \bigl(n + 1,\ \iota_n(b)\,\sigma_n\bigr), \\
+   \text{负稳定化：}\quad & (n,\ b) \longrightarrow \bigl(n + 1,\ \iota_n(b)\,\sigma_n^{-1}\bigr).
+   \end{aligned}
+   $$
+
+4. **Markov 等价** [`MarkovEquivalent`](lean:D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.MarkovEquivalent) 是 `Relation.EqvGen MarkovStep`：包含 Markov 步的最小等价关系。
+:::
+
+画出来：共轭是把闭合的绳圈换一处剪开；稳定化是在最右边添一股新绳，让它与原来的最后一股只交叉一次，闭合后多出的是一个拧一下就消失的小圈（这两句是几何图像，严格陈述属于 [@rem-alexander-markov-literature] 中的 Markov 定理）。代数问题是：不动点的个数经得起这三步吗？
+
+共轭不难，把颜色整体搬运一下即可。难的是稳定化，它连股数都改了。设新股的颜色是 $z$。按 [@def-closed-braid-colorings] 的乘法约定，$\iota_n(b)\,\sigma_n$ 先让 $\sigma_n$ 作用，把最后两股的 $(c_n,\ z)$ 变成 $(c_n \star z,\ c_n)$；随后 $\iota_n(b)$ 只动前 $n$ 股。新股不再碰到任何交叉，要原样回来就必须 $z = c_n$。于是第 $n$ 股拿到的是 $c_n \star c_n$。它等于 $c_n$ 吗？架的公理里没有这一条。多带公理 $x \star x = x$ 的架叫 quandle（Mathlib 的 `Quandle Q`，下文称**幂等架**）。有了这一条，那个小圈对颜色毫无影响：新股只是把 $c_n$ 抄了一遍，前 $n$ 股的条件原封不动。这段手算正是 Lean 证明的核心一步，模块把它做成了显式的一一对应。
+
+::: {.definition #def-markov-coloring-equivs title="稳定化与共轭下闭合着色空间的三个等价" lean="D5/S3/Topology/QuandleMarkovColoring.positiveStabilizationEquiv D5/S3/Topology/QuandleMarkovColoring.negativeStabilizationEquiv D5/S3/Topology/QuandleMarkovColoring.conjugationEquiv"}
+设 $Q$ 为带 `[Quandle Q]` 的类型（不要求有限），$n \in \mathbb{N}$，$b \in \mathrm{Artin}\,n$。模块定义了三个等价（Lean 的 `Equiv`：一对映射，连同它们互逆的证明）：
+
+1. [`positiveStabilizationEquiv`](lean:D5/S3/Topology/QuandleMarkovColoring.positiveStabilizationEquiv) $n\ hn\ b$（$hn : 0 < n$）：$\mathrm{ClosedColorings}\ Q\ b \simeq \mathrm{ClosedColorings}\ Q\ \bigl(\iota_n(b)\,\sigma_n\bigr)$。正向映射把末位颜色再抄一遍，$(c_1, \dots, c_n) \mapsto (c_1, \dots, c_n, c_n)$；反向映射删去最后一个分量。
+2. [`negativeStabilizationEquiv`](lean:D5/S3/Topology/QuandleMarkovColoring.negativeStabilizationEquiv) $n\ hn\ b$（$hn : 0 < n$）：$\mathrm{ClosedColorings}\ Q\ b \simeq \mathrm{ClosedColorings}\ Q\ \bigl(\iota_n(b)\,\sigma_n^{-1}\bigr)$，正向与反向映射同第 1 条。
+3. [`conjugationEquiv`](lean:D5/S3/Topology/QuandleMarkovColoring.conjugationEquiv) $n\ b\ g$（$g \in \mathrm{Artin}\,n$）：$\mathrm{ClosedColorings}\ Q\ b \simeq \mathrm{ClosedColorings}\ Q\ \bigl(g\,b\,g^{-1}\bigr)$。正向映射为 $d \mapsto g \cdot d$，反向映射为 $d \mapsto g^{-1} \cdot d$。
+:::
+
+::: {.theorem #thm-quandle-coloring-markov-invariant title="有限幂等架的闭合着色数在代数 Markov 等价下不变" lean="D5/S3/Topology/QuandleMarkovColoring.quandle_coloring_markov_invariant"}
+设 $Q$ 为带 `[Quandle Q]` 与 `[Finite Q]` 的类型，$\beta, \beta'$ 为两个正股数编织（`PositiveBraid`）。若 $\beta$ 与 $\beta'$ Markov 等价（`MarkovEquivalent β β'`），则
+
+$$
+\operatorname{coloringCount}\ Q\ \beta = \operatorname{coloringCount}\ Q\ \beta'.
+$$
+:::
+
+::: proof
+`MarkovEquivalent` 是 `Relation.EqvGen`，证明对它的生成方式归纳。自反、对称、传递三种情形分别由等式的自反、对称、传递给出。剩下单独一步 `MarkovStep`，按三条构造规则分情形，每一种都是把 `Nat.card_congr` 用在 [@def-markov-coloring-equivs] 中对应的等价上。
+
+两个稳定化等价的核心是两条私有引理（`positive_fixed_iff` 与 `negative_fixed_iff`）：对 $c = (c_1, \dots, c_n)$ 与 $z \in Q$，
+
+$$
+\bigl(\iota_n(b)\,\sigma_n^{\pm 1}\bigr) \cdot (c_1, \dots, c_n, z) = (c_1, \dots, c_n, z)
+\iff
+b \cdot c = c \ \land\ z = c_n.
+$$
+
+正号情形：$\sigma_n$ 把 $(c_1, \dots, c_n, z)$ 送到 $(c_1, \dots, c_{n-1},\ c_n \star z,\ c_n)$；$\iota_n(b)$ 按 $b$ 作用在前 $n$ 个分量上而不动最后一个（在生成元上验证，再由 `PresentedGroup.ext` 推到整个群）。比较最后一个分量得 $z = c_n$；代回去，$c_n \star c_n = c_n$（`Quandle.fix`）把前 $n$ 个分量的条件化为 $b \cdot c = c$。负号情形：$\sigma_n^{-1}$ 把它送到 $(c_1, \dots, c_{n-1},\ z,\ z \star^{-1} c_n)$；最后一个分量给出 $z \star^{-1} c_n = z = z \star^{-1} z$（`Quandle.fix_inv`），消去 $z \star^{-1}$（`Rack.left_cancel_inv`）得 $c_n = z$，其余相同。于是“抄写末位”与“删去末位”互逆。共轭情形只用到着色作用是群同态：若 $b \cdot d = d$，则 $(g\,b\,g^{-1}) \cdot (g \cdot d) = g \cdot (b \cdot d) = g \cdot d$。完整证明由 Lean 内核检查。
+:::
+
+引用 [@thm-quandle-coloring-markov-invariant] 时守住三条边界：
+
+1. **它是代数定理，不是几何定理。** 陈述里只有按生成元与关系定义的群 $\mathrm{Artin}\,n$ 与归纳关系 `MarkovStep`；“两个编织闭合成同一个链环”这句几何的话没有出现在 Lean 中。把计数读成结与链环的不变量，要借助 [@rem-alexander-markov-literature] 中的三条文献定理。
+2. **不变量只会说“不同”。** 计数不同，两个编织一定不是 Markov 等价的；计数相同，什么也推不出。
+3. **幂等公理省不得。** `coloringCount` 对任意有限的架都有定义，定理却要求 `[Quandle Q]`。[@ex-fox-three-colorings-markov] 的最后一步给出一个三元素的架，它的计数在一次稳定化下从 $3$ 变成 $0$。
+
+::: {.example #ex-fox-three-colorings-markov title="三种颜色数出 3、3、9：$\sigma_1$、$\sigma_1^2$、$\sigma_1^3$ 的闭合着色与稳定化前后的同一个数（含文献说明，未在本书形式化）"}
+**文献结果，未在本书形式化。** 下表“闭合的图形”一列（哪个编织闭合成哪个结或链环）是几何识别，属于经典纽结理论。本例的全部计数由穷举得到（每一个都可以手算核对），属手工推导，不是 Lean 结论；Lean 验证的是 [@thm-quandle-coloring-markov-invariant] 所断言的相等关系。
+
+**颜色与规则。** 取 $Q = \mathbb{Z}/3 = \{0, 1, 2\}$，$x \star y = 2x - y \pmod 3$（Mathlib 的 `Quandle.Dihedral 3`）。模 $3$ 时 $2x - y \equiv -(x + y) \equiv 2y - x$，运算关于 $x$、$y$ 对称，规则是：两色相同，结果还是这一色；两色不同，结果是第三色。逐一核对 $27$ 个三元组，自分配律成立；每个左平移 $y \mapsto x \star y$ 都是对合；$x \star x = x$。一次交叉 $(x, y) \mapsto (x \star y,\ x)$ 涉及的三个颜色 $x$、$y$、$x \star y$ 或者全同，或者两两不同：这就是 Fox 的三染色规则。
+
+**两股。** $\sigma_1 \cdot (x, y) = (x \star y,\ x) = (-x - y,\ x)$（模 $3$）。九个着色分成五条轨道：
+
+$$
+\begin{aligned}
+&(0,0), \qquad (1,1), \qquad (2,2), \\
+&(0,1) \to (2,0) \to (1,2) \to (0,1), \qquad (0,2) \to (1,0) \to (2,1) \to (0,2).
+\end{aligned}
+$$
+
+三个单色着色不动，其余六个排成两个三循环。所以 $\sigma_1$ 与 $\sigma_1^2$ 各有 $3$ 个不动点，$\sigma_1^3$ 把九个着色全部送回原处。下表中 $e$ 是单位元（没有交叉的编织）。
+
+| 正股数编织 $(n, b)$ | 着色计数 | 闭合着色 | 闭合的图形（几何识别） |
+| :---: | :---: | :---: | :---: |
+| $(1, e)$ | $3$ | 全部 $(x)$ | 平凡结 |
+| $(2, e)$ | $9$ | 全部 $(x, y)$ | 两个互不相扣的圈 |
+| $(2, \sigma_1)$ | $3$ | $(x, x)$ | 平凡结 |
+| $(2, \sigma_1^2)$ | $3$ | $(x, x)$ | 霍普夫链环 |
+| $(2, \sigma_1^3)$ | $9$ | 全部 $(x, y)$ | 三叶结 |
+
+**添一股。** 对 $b = \sigma_1^k$（$k = 1, 2, 3$），在三股上穷举全部 $27$ 个着色：
+
+| 两股上的 $b$ | $(2, b)$ 的计数 | $\bigl(3,\ \iota_2(b)\,\sigma_2\bigr)$ 的计数 | $\bigl(3,\ \iota_2(b)\,\sigma_2^{-1}\bigr)$ 的计数 | 三股上的闭合着色 |
+| :---: | :---: | :---: | :---: | :---: |
+| $\sigma_1$ | $3$ | $3$ | $3$ | $(x, x, x)$ |
+| $\sigma_1^2$ | $3$ | $3$ | $3$ | $(x, x, x)$ |
+| $\sigma_1^3$ | $9$ | $9$ | $9$ | 全部 $(x, y, y)$ |
+
+每一行的三个计数相等，三股上的闭合着色恰好是把两股上的闭合着色的末位再抄一遍，与 [@def-markov-coloring-equivs] 的第 1、2 条一致。第一张表里的两个平凡结也是同一回事：$(2, \sigma_1)$ 就是 $(1, e)$ 的正稳定化 $\bigl(2,\ \iota_1(e)\,\sigma_1\bigr)$，计数 $3 = 3$。再试一次共轭：取 $b = \iota_2(\sigma_1^3)\,\sigma_2$ 与 $g = \sigma_1\sigma_2^{-1}$，$g\,b\,g^{-1}$ 的计数仍是 $9$。
+
+**读数。** 把上面穷举的计数代入 [@thm-quandle-coloring-markov-invariant]（这一步代入是手工推导）：$9 \ne 3$，所以按定理的逆否命题，$(2, \sigma_1^3)$ 与 $(2, \sigma_1)$ 不是 Markov 等价的；同理，$(2, \sigma_1^2)$（计数 $3$）与 $(2, e)$（计数 $9$）不是 Markov 等价的。$(2, \sigma_1)$ 与 $(2, \sigma_1^2)$ 的计数同为 $3$，由此推不出任何结论：三种颜色分不开它们。
+
+**幂等公理省不得。** 取 $Q' = \mathbb{Z}/3$，$x \star y = y + 1$。它是架：每个左平移都是双射，自分配律两边都等于 $z + 2$；但 $x \star x = x + 1 \ne x$，它不是幂等架。$(1, e)$ 有 $3$ 个闭合着色；它的正稳定化 $(2, \sigma_1)$ 把 $(x, y)$ 送到 $(y + 1,\ x)$，不动点要求 $x = y$ 且 $y + 1 = x$，一个也没有。计数从 $3$ 变成 $0$。
+:::
+
+::: {.remark #rem-alexander-markov-literature title="Artin、Alexander 与 Markov：从代数 Markov 类到链环不变量（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** [@thm-quandle-coloring-markov-invariant] 的陈述中没有任何几何对象。把它读成链环的不变量，需要三条经典定理（以下的编织与链环都指光滑或分段线性的）：
+
+1. **Artin 定理**（E. Artin, *Theorie der Zöpfe*, Abh. Math. Sem. Univ. Hamburg **4**, 47–72, 1925；*Theory of braids*, Ann. of Math. **48**, 101–126, 1947）：$n$ 股几何编织的同痕类构成的群，同构于 [@def-closed-braid-colorings] 中由生成元与关系给出的群 $\mathrm{Artin}\,n$（$n \ge 1$）。
+2. **Alexander 定理**（J. W. Alexander, *A lemma on systems of knotted curves*, Proc. Natl. Acad. Sci. USA **9**, 93–95, 1923）：$\mathbb{R}^3$ 中每个定向链环都同痕于某个编织的闭合。
+3. **Markov 定理**（A. Markoff, *Über die freie Äquivalenz der geschlossenen Zöpfe*, Mat. Sbornik **1(43)**, 73–78, 1936；完整证明见 J. S. Birman, *Braids, Links, and Mapping Class Groups*, Princeton University Press, 1974）：两个编织的闭合作为定向链环同痕，当且仅当这两个编织可以经有限次共轭、正负稳定化及其逆互相得到，即经第 1 条的同构后，在 [@def-algebraic-markov-moves] 的意义下 Markov 等价。其中容易的方向正是正文的两幅图像：共轭与稳定化都不改变闭合的同痕类。
+
+三条合起来：有限幂等架的闭合着色数是定向链环的同痕不变量。配上 [@ex-fox-three-colorings-markov] 的计数，以及“$\sigma_1^3$ 的闭合是三叶结、$\sigma_1$ 的闭合是平凡结”这一几何识别，就得到三叶结与平凡结不同痕；同理，霍普夫链环与两个互不相扣的圈不同痕。闭合着色也可以不经过编织来描述：它们对应于从链环的基本 quandle 到 $Q$ 的同态（D. Joyce, *A classifying invariant of knots, the knot quandle*, J. Pure Appl. Algebra **23**, 37–65, 1982；S. V. Matveev, *Distributive groupoids in knot theory*, Mat. Sb. **119(161)**, 78–88, 1982），$Q = \mathbb{Z}/3$ 时就是 Fox 的三染色。对不满足幂等公理的架，着色计数只是带标架链环的不变量（R. Fenn 与 C. Rourke, *Racks and links in codimension two*, J. Knot Theory Ramifications **1**, 343–406, 1992）。
+:::
+
+编织有头有尾，结没有。头尾接上之后，颜色还得原样回来；只要颜色取自幂等架，添一股，换一处剪口，回得来的着色就一个不多、一个不少。这一半，Lean 已经验证。
 
 现在，让我们通过一个四步连贯的具体数值与矩阵算例，把不可克隆内积差、三比特重复码的二元辛综合征、编码态局部布洛赫向量的精确行为以及正交综合征矩阵恢复完整地验算一遍。
 

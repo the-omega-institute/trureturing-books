@@ -30,6 +30,18 @@
       ],
       "theory": [
         {
+          "label": "第一章 §1.1 · 两子互为尺规",
+          "label_en": "Chapter 1 §1.1 · Two arrows, each the other's ruler",
+          "href": "../zh/ch01-measurement.html#sec-ch01-1",
+          "href_en": "../en/ch01-measurement.html#sec-ch01-1"
+        },
+        {
+          "label": "第二章 §2.3 · 玻恩权重与半角换算",
+          "label_en": "Chapter 2 §2.3 · Born weights and the half-angle formula",
+          "href": "../zh/ch02-born-rule.html#sec-ch02-3",
+          "href_en": "../en/ch02-born-rule.html#sec-ch02-3"
+        },
+        {
           "label": "第六章 · 几何积 AB = A·B + A∧B",
           "label_en": "Chapter 6 · Geometric Product AB = A·B + A∧B",
           "href": "../zh/ch06-geometric-product.html",
@@ -234,6 +246,15 @@
         },
         {
           "gid": "D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law"
+        },
+        {
+          "gid": "D5/S3/PrimeForms/SumTwoSquares.prime_eq_sq_add_sq_of_mod_four_eq_one"
+        },
+        {
+          "gid": "D5/S3/PrimeForms/QuadraticResidues.square_residues_and_sum_obstruction"
+        },
+        {
+          "gid": "D5/S3/PrimeForms/ThreeModFourDescent.prime_dvd_dvd_of_dvd_sq_add_sq"
         }
       ]
     },

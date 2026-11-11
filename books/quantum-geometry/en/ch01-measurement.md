@@ -63,6 +63,10 @@ $$
 
 Without drawing a single coordinate axis, the $60^\circ$ inclination between $x$ and $y$ steps straight out of the port contrast. Two states meeting in the dark carry their own ruler; every third reference frame $C$ is scaffolding waiting to be dismantled ([Chapter 2](ch02-born-rule.md)).
 
+::: {.viz src="qubit-geometry" preset="line" height="500"}
+**Two arrows, each the other's ruler.** Start with two aligned directions on the qubit Bloch sphere: the amber arrow $B$ lies along the cyan ruler $A$, their angle is $0^\circ$, and the cyan line has length $1$. Drag $B$ to see the angle and its shadow on $A$ change together.
+:::
+
 > One monad alone is mute; three points breed coordinate mirages; two arrows meeting in the dark suffice to measure the world.
 
 ## 1.2 From Measuring (liáng) to Discrete Quanta (liàng) {#sec-ch01-2}
