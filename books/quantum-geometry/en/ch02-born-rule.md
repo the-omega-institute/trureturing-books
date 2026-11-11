@@ -4,7 +4,7 @@
 
 At the close of [Chapter 1](ch01-measurement.md), we liberated the single qubit from complex column vectors with two components (four real coordinates) and restored it to what it truly is: a real unit arrow $\vv{a}$ on the two-sphere $S^2 \subset \mathbb{R}^3$. Now we confront the central quantitative law of quantum mechanics: when a prepared state $\vv{a}$ meets a probing direction $\vv{b}$, why does the detector report agreement with probability equal to the squared cosine of the Hilbert-space half-angle $\cos^2(\theta/2)$ — or equivalently $\frac{1 + \cos\theta}{2}$ on the Bloch sphere?
 
-In conventional textbooks, Born's rule ($p = |\langle\phi\mid\psi\rangle|^2$) arrives like a tablet carried down from the mountain: an independent statistical postulate bolted onto linear algebra because "experiments happen to match the modulus squared." In this chapter we take Occam's razor to the redundant "third point $C$" and show that Born's rule is no external patch — it is the **canonical basis-free trace pairing induced by pairwise inner-product projection and Pythagorean norm conservation** (with [@thm-born-probability-skeleton] establishing **sufficiency** of the trace pairing for the probability axioms, while the additional frame- or effect-additivity hypotheses required for **uniqueness** are delineated in [@rem-gleason-literature]).
+In conventional textbooks, Born's rule ($p = |\langle\phi\mid\psi\rangle|^2$) arrives like a tablet carried down from the mountain: an independent statistical postulate bolted onto linear algebra because "experiments happen to match the modulus squared." In this chapter we take Occam's razor to the redundant "third point $C$" and show that Born's rule is no external patch — it is the **canonical basis-free trace pairing induced by pairwise inner-product projection and Pythagorean norm conservation** (with [@thm-born-probability-skeleton] establishing **sufficiency** of the trace pairing for the probability axioms, while **uniqueness** under effect additivity is given in finite dimension by [@thm-busch-effect-density] at the end of the chapter, and the case of additivity on projections alone is delineated in [@rem-gleason-literature]).
 
 ## 2.1 The Measurement Basis Under Occam's Razor {#sec-ch02-1}
 
@@ -194,7 +194,7 @@ Glance back at the parallelogram and Pythagorean law of [Chapter 1](ch01-measure
 - Fourth powers give $\cos^4(\theta/2) + \sin^4(\theta/2) = \frac{1}{4} + \frac{1}{4} = \frac{1}{2} \neq 1$ at $\theta = 90^\circ$, losing half of reality;
 - **Only the second power** satisfies $\cos^2(\theta/2) + \sin^2(\theta/2) \equiv 1$ identically for every angle $\theta$!
 
-**Born's rule unites Pythagoras's theorem with the canonical basis-free trace pairing.** Among power-law candidates $|\langle\phi\mid\psi\rangle|^p$ of the projection overlap, conservation of total weight $1$ across orthogonal channels singles out the exponent $p = 2$; at the general operator level, [@thm-born-probability-skeleton] establishes **sufficiency** (that $\Tr(\rho P)$ satisfies normalization, additivity, and nonnegativity), whereas ruling out arbitrary non-Born assignments across all frames or effects (**uniqueness**) requires the cross-basis frame- or effect-additivity hypotheses recorded in [@rem-gleason-literature].
+**Born's rule unites Pythagoras's theorem with the canonical basis-free trace pairing.** Among power-law candidates $|\langle\phi\mid\psi\rangle|^p$ of the projection overlap, conservation of total weight $1$ across orthogonal channels singles out the exponent $p = 2$; at the general operator level, [@thm-born-probability-skeleton] establishes **sufficiency** (that $\Tr(\rho P)$ satisfies normalization, additivity, and nonnegativity), whereas ruling out arbitrary non-Born assignments across all frames or effects (**uniqueness**) requires the cross-basis frame- or effect-additivity hypotheses (uniqueness on effects in finite dimension is [@thm-busch-effect-density] below; the projection-lattice case is in [@rem-gleason-literature]).
 
 Let us now combine [@prop-qubit-bloch-core] and [@thm-rank-one-born-pairing] to fulfill the promise made at the end of Chapter 1 and resolve the factor-of-two relation between the Bloch sphere angle $\theta$ and the Hilbert-space half-angle $\theta/2$.
 
@@ -363,15 +363,75 @@ The outcome of the peeling is precisely the spectral decomposition of $E$: the t
 
 > Do not erect coordinates before you measure: the brightest direction of a reading is the axis the reading chooses for itself.
 
-Three boundaries need to be drawn. First, the length bound of [@thm-positive-dual-generation] is $\dim A$, which is $4$ for a qubit. Only two layers appear because $\mathbb{C}^2$ holds at most two mutually orthogonal unit vectors ($\Tr(p_i p_j) = 0$ means $\langle\psi_i\mid\psi_j\rangle = 0$); this sharper bound of $2$ is a manual observation about the example, not a conclusion of the theorem. Second, that a qubit satisfies the seven items is the manual derivation above; the header of the cited Lean file states that the application to a compact normalized base and the state-side spectral bridge are separate mathematical obligations, outside this theorem. Third, the theorem decomposes readings that are positive on probes; it answers "what is a reading made of", and it does not assert that every additive probability assignment takes the trace-pairing form. That uniqueness question is the subject of Gleason's and Busch's theorems, discussed in [@rem-gleason-literature] below.
+Three boundaries need to be drawn. First, the length bound of [@thm-positive-dual-generation] is $\dim A$, which is $4$ for a qubit. Only two layers appear because $\mathbb{C}^2$ holds at most two mutually orthogonal unit vectors ($\Tr(p_i p_j) = 0$ means $\langle\psi_i\mid\psi_j\rangle = 0$); this sharper bound of $2$ is a manual observation about the example, not a conclusion of the theorem. Second, that a qubit satisfies the seven items is the manual derivation above; the header of the cited Lean file states that the application to a compact normalized base and the state-side spectral bridge are separate mathematical obligations, outside this theorem. Third, the theorem decomposes readings that are positive on probes; it answers "what is a reading made of", and it does not assert that every additive probability assignment takes the trace-pairing form. That uniqueness question is answered for effects in finite dimension by [@thm-busch-effect-density] below; Gleason's theorem on the projection lattice is discussed in [@rem-gleason-literature].
 
-::: {.remark #rem-gleason-literature title="Gleason's Theorem and Busch's Theorem (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** In this chapter, [@thm-born-probability-skeleton] proves **sufficiency**: every positive semidefinite trace-one matrix $\rho$ defines, via the canonical basis-free trace pairing $P \mapsto \Tr(\rho P)$, a normalized, finitely additive, nonnegative measure on projections. Establishing **uniqueness** (that every probability assignment obeying suitable additivity axioms must take the trace-pairing form) requires classical converse theorems and their exact dimensional and domain hypotheses:
+**The converse question: must a reading be a trace pairing?** The theorems above say that, given a density matrix $\rho$, the trace pairing $E \mapsto \Tr(\rho E)$ is a legitimate probability assignment. The converse asks: if an instrument reports a probability $p(E)$ for every effect $E$, and these probabilities are additive, must a $\rho$ be hiding behind the instrument? If additivity is required only on projections, the answer in dimension two is no (see [@rem-gleason-literature]). Once additivity is extended to effects, the answer in finite dimension is yes, and it is frozen.
+
+::: {.theorem #thm-busch-effect-density title="Busch's Theorem in Finite Dimension: Additive Probabilities on Effects Are Trace Pairings" lean="D5/S3/Quantum/Foundation/EffectProbabilityExtension.effect_density_representation D5/S3/Quantum/Foundation/EffectProbabilityExtension.effect_trace_unique"}
+Let $d$ be a finite index set, let $M_d(\mathbb{C})$ be the set of $d \times d$ complex matrices, ordered by positive semidefiniteness ($X \le Y$ means that $Y - X$ is positive semidefinite), and let $I$ be the identity matrix. A matrix $E$ with $0 \le E \le I$ is called an **effect**.
+
+1. If $\rho, \sigma \in M_d(\mathbb{C})$ satisfy $\Tr(\rho E) = \Tr(\sigma E)$ for every effect $E$, then $\rho = \sigma$.
+2. Let $p : M_d(\mathbb{C}) \to \mathbb{R}$ satisfy: $p(E) \ge 0$ for every effect $E$; $p(E + F) = p(E) + p(F)$ for all positive semidefinite $E, F$ with $E + F \le I$; and $p(I) = 1$. Then there is a unique $\rho \in M_d(\mathbb{C})$ that is positive semidefinite, has $\Tr\rho = 1$, and satisfies $\Tr(\rho E) = p(E)$ for every effect $E$.
+:::
+
+::: proof
+Claim 1: effects span all matrices. Every positive semidefinite matrix becomes an effect after scaling down; every self-adjoint matrix is a difference of two positive semidefinite matrices (positive part minus negative part); every matrix can be written $H_1 + iH_2$ with $H_1, H_2$ self-adjoint. So two trace pairings that agree on effects agree on all matrices, and inserting the matrix units one by one gives $\rho = \sigma$.
+
+Existence in Claim 2 takes four steps, and the first three use only additivity.
+
+(1) Real multiples. From $p(0) = p(0 + 0) = 2p(0)$ we get $p(0) = 0$; for $A \le B$, $p(B) = p(A) + p(B - A) \ge p(A)$, so $p$ is monotone on effects. Cutting an effect $E$ into $n$ pieces $E/n$, additivity gives $p\bigl(\tfrac{m}{n}E\bigr) = \tfrac{m}{n}\,p(E)$ for $m \le n$. For a real $t \in [0, 1]$, squeezing $t$ between rationals on both sides, monotonicity forces $p(tE) = t\,p(E)$. No continuity is assumed: monotonicity together with rational homogeneity pays for it.
+
+(2) Out to the positive cone. For a positive semidefinite $X$, take $c = \lVert X\rVert + 1$; then $X/c$ is an effect, and we set $f(X) = c\,p(X/c)$. By (1), replacing $c$ by any larger number does not change the result. Hence $f$ is nonnegative, additive and positively homogeneous on the positive semidefinite cone, and agrees with $p$ on effects.
+
+(3) Out to all matrices. Write a self-adjoint $H$ as positive part minus negative part, $H^+ - H^-$, and set $g(H) = f(H^+) - f(H^-)$; if four positive semidefinite matrices satisfy $A - B = C - D$, then $A + D = C + B$, so $g$ is real linear. Then $L(X) = g(\operatorname{Re} X) + i\,g(\operatorname{Im} X)$, with $\operatorname{Re} X$ and $\operatorname{Im} X$ the self-adjoint real and imaginary parts of $X$, is a complex linear functional that is nonnegative on positive semidefinite matrices and equals $p$ on effects.
+
+(4) Reading off $\rho$. Lean views $L$ as a positive map into $1 \times 1$ matrices and takes the value of its dual map at $1$ as $\rho$, so that $\Tr(\rho X) = L(X)$ for every $X$; the dual of a positive map is positive, so $\rho$ is positive semidefinite; and $\Tr\rho = L(I) = p(I) = 1$. Uniqueness is Claim 1. The full proof is checked by the Lean kernel.
+:::
+
+Two remarks. First, $p$ is defined on all matrices, but the hypotheses and the conclusion use only its values on effects; its values elsewhere are unconstrained. Second, the theorem asks for neither countable additivity nor continuity: in finite dimension, finite additivity together with nonnegativity is enough.
+
+::: {.example #ex-qubit-busch-reconstruction title="Three Readings Determine a Qubit Density Matrix; Why the Hemisphere Frame Function Fails"}
+On a qubit, every projection $P_{\vv{n}} = \frac{1}{2}\bigl(I + \vv{n}\cdot\vv{\sigma}\bigr)$ ($\vv{n}$ a unit vector) is an effect. Suppose an instrument satisfies the three hypotheses of [@thm-busch-effect-density] and reports, on the positive projections of the three coordinate axes,
+
+$$
+p(P_{+x}) = 0.8, \qquad p(P_{+y}) = 0.5, \qquad p(P_{+z}) = 0.65 .
+$$
+
+The theorem guarantees a density matrix $\rho$ with $p(E) = \Tr(\rho E)$. Writing $\rho = \frac{1}{2}\bigl(I + \vv{r}\cdot\vv{\sigma}\bigr)$, the identities $\Tr\sigma_k = 0$ and $\Tr(\sigma_j\sigma_k) = 2\delta_{jk}$ give $\Tr(\rho P_{\vv{n}}) = \frac{1}{2}\bigl(1 + \vv{r}\cdot\vv{n}\bigr)$ (a manual derivation), so $r_k = 2p(P_{+k}) - 1$:
+
+$$
+\vv{r} = (0.6,\ 0,\ 0.3), \qquad
+\rho = \begin{pmatrix} 0.65 & 0.3 \\ 0.3 & 0.35 \end{pmatrix}.
+$$
+
+$\lvert\vv{r}\rvert = 0.6708 \le 1$; the eigenvalues of $\rho$, $0.8354$ and $0.1646$, are nonnegative, and the trace is $1$.
+
+Once $\rho$ is known, the instrument's reading of every effect is fixed. Take
+
+$$
+E = \tfrac{1}{2}P_{+x} + \tfrac{1}{2}P_{+z} = \begin{pmatrix} 0.75 & 0.25 \\ 0.25 & 0.25 \end{pmatrix},
+$$
+
+whose eigenvalues $\frac{1}{2} \pm \frac{\sqrt{2}}{4}$, that is $0.8536$ and $0.1464$, show that it is an effect; $\Tr(\rho E) = 0.725 = \frac{1}{2}(0.8 + 0.65)$. The same $E$ also splits along its own eigenaxis $\vv{n} = (1, 0, 1)/\sqrt{2}$:
+
+$$
+E = \Bigl(\tfrac{1}{2} + \tfrac{\sqrt{2}}{4}\Bigr) P_{\vv{n}} + \Bigl(\tfrac{1}{2} - \tfrac{\sqrt{2}}{4}\Bigr) P_{-\vv{n}} .
+$$
+
+Here $p(P_{\vv{n}}) = \frac{1}{2}\bigl(1 + \vv{r}\cdot\vv{n}\bigr) = 0.8182$ and $p(P_{-\vv{n}}) = 0.1818$, and $0.8536 \times 0.8182 + 0.1464 \times 0.1818$ equals $29/40 = 0.725$ exactly. Both splittings give the same reading.
+
+The hemisphere frame function cannot do this. Let $f(P_{\vv{n}}) = 1$ if $\vv{n}$ lies in the northern hemisphere ($n_z > 0$; on the equator decide by $n_x > 0$, then by $n_y > 0$), and $f(P_{\vv{n}}) = 0$ otherwise. Every antipodal pair satisfies $f(P_{\vv{n}}) + f(P_{-\vv{n}}) = 1$, so $f$ is a legitimate frame function on projections. If some $p$ satisfying the hypotheses of the theorem agreed with $f$ on projections, the theorem would make $p$ a trace pairing, hence linear on effects, and the two splittings above would have to give the same $p(E)$. But the first gives $\frac{1}{2}\bigl(f(P_{+x}) + f(P_{+z})\bigr) = \frac{1}{2}(1 + 1) = 1$ and the second $0.8536 \times 1 + 0.1464 \times 0 = 0.8536$. The contradiction shows that $f$ does not extend to an additive probability on effects: effects tie different measurement axes together, which the two-dimensional projection lattice cannot do.
+:::
+
+> A projection asks only "yes or no"; an effect can also ask "how much". Once "how much" can be asked, the trace pairing is the only way left to write a probability.
+
+::: {.remark #rem-gleason-literature title="Gleason's Theorem and Busch's Theorem in Infinite Dimension (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** In this chapter, [@thm-born-probability-skeleton] proves **sufficiency**: every positive semidefinite trace-one matrix $\rho$ defines, via the canonical basis-free trace pairing $P \mapsto \Tr(\rho P)$, a normalized, finitely additive, nonnegative measure on projections. Establishing **uniqueness** (that every probability assignment obeying suitable additivity axioms must take the trace-pairing form) requires classical converse theorems and their exact dimensional and domain hypotheses; the finite-dimensional case on effects is frozen as [@thm-busch-effect-density]:
 
 - **Gleason's theorem** (A. M. Gleason, *Measures on the closed subspaces of a Hilbert space*, J. Math. Mech. **6**, 885–893, 1957): Requires Hilbert-space dimension **$\dim\mathcal{H} \ge 3$**. On any separable Hilbert space of dimension $\dim\mathcal{H} \ge 3$, every countably additive probability measure $\mu$ on the lattice of orthogonal projections (reducing to finite additivity on pairwise orthogonal projections when $3 \le \dim\mathcal{H} < \infty$) has the form $\mu(P) = \Tr(\rho P)$ for a unique density operator $\rho$. **Gleason's theorem fails on the projection lattice alone when $\dim\mathcal{H} = 2$**: because each two-dimensional orthonormal basis consists solely of an antipodal pair $\{P_{\vv{n}}, P_{-\vv{n}}\}$ sharing no common rank-one projectors with other bases, non-Born frame functions on $S^2$ satisfying $\mu(P_{\vv{n}}) + \mu(P_{-\vv{n}}) = 1$ exist in abundance.
-- **Busch's theorem** (P. Busch, *Quantum states and generalized observables: A simple proof of Gleason's theorem*, Phys. Rev. Lett. **91**, 120403, 2003): Extending additivity from sharp projections to positive POVM effects ($0 \le E_i \le I$ with $\mu(\sum_i E_i) = \sum_i \mu(E_i)$ whenever $\sum_i E_i \le I$) restores uniqueness for **all $\dim\mathcal{H} \ge 2$** (including a single qubit, $\dim\mathcal{H} = 2$): every generalized probability measure has the form $E \mapsto \Tr(\rho E)$ for a unique density operator $\rho$.
+- **Busch's theorem** (P. Busch, *Quantum states and generalized observables: A simple proof of Gleason's theorem*, Phys. Rev. Lett. **91**, 120403, 2003): Extending additivity from sharp projections to positive POVM effects ($0 \le E_i \le I$ with $\mu(\sum_i E_i) = \sum_i \mu(E_i)$ whenever $\sum_i E_i \le I$) restores uniqueness for **all $\dim\mathcal{H} \ge 2$** (including a single qubit, $\dim\mathcal{H} = 2$): every generalized probability measure has the form $E \mapsto \Tr(\rho E)$ for a unique density operator $\rho$. The finite-dimensional case is frozen as [@thm-busch-effect-density], which asks only for finite additivity; what remains a literature result is the form on infinite-dimensional Hilbert spaces, where countable additivity is required.
 
-Our pinned repository focuses on constructive finite-dimensional matrix reductions ([@thm-born-probability-skeleton], [@thm-born-modulus-square], and [@thm-rank-one-born-pairing]) and freezes the structural decomposition by least confirmations, [@thm-positive-dual-generation]; these converse uniqueness theorems are cited from the classical literature and are not claimed in the book's Lean verification ledger.
+Our pinned repository focuses on constructive finite-dimensional matrix reductions ([@thm-born-probability-skeleton], [@thm-born-modulus-square], and [@thm-rank-one-born-pairing]) and freezes the structural decomposition by least confirmations, [@thm-positive-dual-generation], and Busch's theorem in finite dimension, [@thm-busch-effect-density]; Gleason's theorem and Busch's theorem in infinite dimension are cited from the classical literature and are not claimed in the book's Lean verification ledger.
 :::
 
 Having eliminated the external third point $C$ and derived $\cos^2(\theta/2) = \frac{1 + \cos\theta}{2}$ from pure trace geometry, we now turn the spotlight onto the ruler itself — the **idempotent projector** $P^2 = P$ that appeared in every theorem of this chapter. Why do "detecting a particle," "naming a logical concept," and "experiencing a tick of classical linear time" all reduce to the single equation $P^2 = P$? Let us step into [Chapter 3](ch03-projectors-and-duality.md).

@@ -13,7 +13,7 @@ Draw straight the single geometric thread that has guided us since page one:
 
 How, then, can that infinite regress of spheres beyond spheres ever come to rest in a self-contained **self-referential fixed point**?
 
-The answer lies in the deceptively simple question posed by our chapter epigraph: with no external notary handing down a ruler from outside the universe, **the compatibility reading $\cos\theta$ produced at one stage of comparison must serve directly as the radian angle $\theta$ opened at the next stage!** When the iteration $\theta_{k+1} = \cos\theta_k$ settles into its unique real fixed point
+The epigraph suggests a particular feedback choice: **use the dimensionless compatibility reading $\cos\theta_k$ from one comparison as the numerical angle in radians for the next**, so that $\theta_{k+1} = \cos\theta_k$. This is the update rule adopted here; pairwise comparison or dispensing with an external ruler does not force it. A different feedback function or angular scale gives a different iteration. For this radian-based rule, a fixed point satisfies
 
 $$
 \cos\theta^* = \theta^* \qquad (\theta^* \approx 0.7390851332\dots),
@@ -21,7 +21,7 @@ $$
 
 ask once more: **in this equation, where did the operator $\cos$ on the left come from? Is there really a bare number $\theta^*$ standing apart from the operation $\cos$?**
 
-No! In the geometric ontology of orthogonal comparison, there is neither a disembodied operator $\cos$ floating prior to measurement, nor an isolated tick mark $\theta^*$ subsisting apart from the act of comparison. The series $\cos(\cdot)$ *is* the law of orthogonal projection (even-order return, sign reversal $\hat{I}^2 = -1$ under every pair of $90^\circ$ turns, and factorial symmetrization), while $\theta^*$ *is* the equilibrium state locked when that operation acts upon itself. At the fixed point where the ruler that measures (the operator $\cos$ / function $\psi$) and the reading that is measured (the state $\theta^*$ / argument $\psi$) dissolve the boundary between subject and object, "$\cos = \theta$" condenses into the emblem on our title page:
+Within the book's geometric ontology of orthogonal comparison, the author reads $\cos(\cdot)$ as the act of projection measurement and $\theta^*$ as the self-consistent equilibrium of this feedback. Mathematically, $\cos : \mathbb{R}\to\mathbb{R}$ is a function and $\theta^*\in\mathbb{R}$ is a scalar: $\cos\theta^*=\theta^*$ equates the output at that input with the input, without identifying the function with a number. The author's interpretation of ruler and reading, and of the dissolution of subject and object, is condensed into the title-page aphorism:
 
 $$
 \psi = \psi(\psi).
@@ -33,9 +33,9 @@ In this chapter we unfold this self-referential closure across four mathematical
 
 ## 24.1 Discrete Contraction Must Stabilize: The Finite Contracting Update Theorem {#sec-ch24-1}
 
-Why does unguarded self-reference — such as the diagonal $g(a) = \neg D_a(q_L(a))$ driven by a fixed-point-free `twist` in [Chapter 21](ch21-diagonalization-and-escape.md) — oscillate or escape across dimensions, whereas other self-referential loops settle calmly into a fixed point?
+In [Chapter 21](ch21-diagonalization-and-escape.md), a diagonal driven by a fixed-point-free `twist` escapes the given catalog, whereas some feedback updates settle at a fixed point. What additional conditions guarantee stability?
 
-The decisive property is **contractivity**. On the continuous interval $[0, 1]$, $\cos$ pulls every initial seed toward a single fixed point $\theta^*$ because its derivative obeys $|\cos'\theta| = |\sin\theta| \le \sin 1 < 1$, shrinking distances at every step; in a discrete finite state space, the exact counterpart is a **pointwise contracting set update** $U : \mathcal{P}(X) \to \mathcal{P}(X)$ satisfying $U(A) \subseteq A$ for every subset $A \subseteq X$.
+First compare two different stabilization mechanisms. On $[0,1]$, the derivative bound $|\cos'\theta|=|\sin\theta|\le\sin1<1$ makes $\cos$ contract distances between any two points, and iteration converges to a unique fixed point. A finite-set update instead requires only **that no candidates be added**: $U : \mathcal{P}(X)\to\mathcal{P}(X)$ satisfies $U(A)\subseteq A$ for every $A\subseteq X$. This pruning condition concerns order rather than metric contraction; it does not even require $U$ to preserve inclusion between arbitrary pairs of sets. Finiteness makes the pruning stop.
 
 In the Lean module `D5/S1/FixedPoints/FiniteContractingStability`, we establish this discrete stabilization law. Note carefully every hypothesis retained in the theorem box — finiteness of the ambient type (`[Finite X]`), pointwise subset contraction (`hU : ∀ A, U A ⊆ A`), and the recursive update equation (`hS : ∀ n, S (n + 1) = U (S n)`) — together with both parts of its conclusion: eventual stabilization by step $N \le |S_0|$ *and* the sharp cardinality bound on the set of all strict changes across time.
 
@@ -64,7 +64,7 @@ Then both statements hold (writing `.ncard` for natural-number set cardinality):
 Combining `hS` and `hU` shows $S(n+1) = U(S(n)) \subseteq S(n)$ for every $n \in \mathbb{N}$, so the set sequence $S$ is antitone (`Antitone S`) and its natural-number cardinality sequence $n \mapsto (S(n)).\mathrm{ncard}$ is antitone as well. Whenever two consecutive cardinalities agree, $(S(n)).\mathrm{ncard} = (S(n+1)).\mathrm{ncard}$, equality of cardinalities for a finite subset $S(n+1) \subseteq S(n)$ forces set equality $S(n+1) = S(n)$ (`Set.eq_of_subset_of_ncard_le`); applying $U$ and `hS` then gives $S(n+2) = U(S(n+1)) = U(S(n)) = S(n+1)$, locking all subsequent sets and cardinalities. Applying Mathlib's `Nat.stabilises_of_antitone` to the cardinality sequence yields $N \le (S(0)).\mathrm{ncard}$ with $S(n) = S(N)$ for all $n \ge N$ (claim 1). For claim 2, any index $n$ with $S(n+1) \neq S(n)$ must satisfy $n < N$ (since $n \ge N$ implies $S(n+1) = S(N) = S(n)$), embedding $\{n \in \mathbb{N} \mid S(n+1) \neq S(n)\}$ into $\operatorname{Set.Iio}(N) = \{0, \dots, N-1\}$, whose cardinality is $N \le (S(0)).\mathrm{ncard}$. The full proof is checked by the Lean kernel.
 :::
 
-[@thm-finite-contracting-updates-stabilize] provides the discrete foundation for self-referential fixed points in finite-state verification and concept pruning: any iterative refinement that monotonically eliminates incompatible candidates ($U(A) \subseteq A$) must reach a self-consistent fixed core $U(S_N) = S_N$ in at most $|S_0|$ steps.
+[@thm-finite-contracting-updates-stabilize] gives a discrete foundation for finite candidate pruning: its update rule reaches $U(S_N)=S_N$ in at most $|S_0|$ steps. The stable set can depend on the initial set and can be empty. For example, $U(A)=A$ makes every set a fixed point, whereas $U(A)=\varnothing$ deletes all candidates; both satisfy the hypothesis. A unique or nonempty self-consistent core therefore requires additional assumptions.
 
 ## 24.2 Context-Relative Interpretation Fixed Points and Contextual Non-Uniqueness {#sec-ch24-2}
 
@@ -132,8 +132,10 @@ Before stepping into the cosine self-referential equation $\cos\theta = \theta$ 
 Combine the two elementary arithmetic operations "add $1$" and "invert $1/x$" into the continued-fraction feedback loop
 
 $$
-x_{k+1} = 1 + \frac{1}{x_k} = 1 + \frac{1}{1 + \frac{1}{1 + \frac{1}{\ddots}}}.
+x_{k+1} = 1 + \frac{1}{x_k}, \qquad x_0>0.
 $$
+
+A finite expansion has only finitely many fraction layers, with the initial value $x_0$ still at the bottom. The infinite continued fraction $1+1/(1+1/(\cdots))$ denotes the limit of these truncations, whose convergence must be established separately; it is not equal to every finite $x_{k+1}$. The example below gives a direct convergence argument.
 
 In `D5/S1/FixedPoints/Algebraic/GoldenFixedPoint`, this reciprocal residual map is formalized as [`goldenReciprocalMap`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.goldenReciprocalMap).
 
@@ -286,7 +288,7 @@ The following literature note records four classical theorems governing $\cos\th
 **Literature result, not formalized in this book.** Four classical theorems from analysis, transcendental number theory, and algebraic topology complement the frozen Lean declarations of this chapter:
 
 1. **Banach contraction principle on $[0, 1]$ and global Picard convergence**:
-   Whereas [@thm-finite-contracting-updates-stabilize] governs discrete contracting set updates $U(A) \subseteq A$ on a finite type $X$, on the real line $\mathbb{R}$ the cosine map sends $\mathbb{R}$ into $[-1, 1]$ and maps $[-1, 1]$ into the compact invariant interval $[0, 1]$. On $[0, 1]$, the mean value theorem gives the strict Lipschitz bound
+   [@thm-finite-contracting-updates-stabilize] uses finiteness and set pruning to guarantee finite stabilization; here completeness and metric contraction give uniqueness and asymptotic convergence. The hypotheses and conclusions differ. On the real line $\mathbb{R}$, cosine sends $\mathbb{R}$ into $[-1,1]$ and sends $[-1,1]$ to $[\cos1,1]\subset[0,1]$, a compact invariant interval. On $[0,1]$, the mean value theorem gives the strict Lipschitz bound
 
    $$
    |\cos x - \cos y| \;\le\; (\sin 1)\,|x - y|, \qquad \sin 1 \approx 0.84147098 < 1.
@@ -334,10 +336,16 @@ Starting from the unit seed $1$ (or a three-element initial set), compare how th
 2. **One-dimensional algebraic reciprocal loop ($x_{k+1} = 1 + 1/x_k$, [@cor-golden-fixed-point-unique])**: Starting from $x_0 = 1$, rational iteration generates successive Fibonacci ratios $F_{k+2}/F_{k+1}$:
 
    $$
-   x_0 = 1 \;\to\; x_1 = 2 \;\to\; x_2 = \frac{3}{2} = 1.5 \;\to\; x_3 = \frac{5}{3} \approx 1.6667 \;\to\; x_4 = \frac{8}{5} = 1.6 \;\to\; \cdots \;\to\; \varphi = \frac{1+\sqrt{5}}{2} \approx 1.61803399,
+   \begin{aligned}
+   x_0 &= 1,\quad x_1=2,\\
+   x_2 &= \frac32,\quad x_3=\frac53\approx1.6667,\\
+   x_4 &= \frac85=1.6,\\
+   \lim_{k\to\infty}x_k &= \varphi=\frac{1+\sqrt5}{2}\\
+   &\approx1.61803399.
+   \end{aligned}
    $$
 
-   converging to the unique positive quadratic algebraic root $\varphi \in \overline{\mathbb{Q}}$ of $\varphi^2 - \varphi - 1 = 0$.
+   Convergence follows directly from the known identity $1+1/\varphi=\varphi$: $|x_{k+1}-\varphi|=|x_k-\varphi|/(\varphi x_k)$. Here $x_k\ge1$, so each step multiplies the error by at most $1/\varphi<1$. For any positive initial value, $x_k>1$ from the first step onward, and the same estimate gives convergence. This is a manual derivation, not formalized in this book; [@cor-golden-fixed-point-unique] itself characterizes fixed points only. With $x_0=1$, every finite iterate is rational and differs from the irrational $\varphi$. The limit's algebraicity follows from the fixed-point equation, not merely from using rational addition and division at each finite step.
 3. **Two-dimensional rotational cosine loop ($\theta_{k+1} = \cos\theta_k$, **literature result, not formalized in this book**; see [@rem-banach-dottie-hairy-ball-literature])**: Starting from $\theta_0 = 1$ radian, repeated cosine evaluation yields
 
    $$
@@ -354,13 +362,15 @@ Starting from the unit seed $1$ (or a three-element initial set), compare how th
    At the fixed point $\theta^*$, the horizontal inner-product shadow equals $\cos\theta^* = \theta^* \approx 0.739085$, while the orthogonal bivector area is locked by Pythagoras's theorem at $\sin\theta^* = \sqrt{1 - (\theta^*)^2} \approx 0.67361203$!
 :::
 
-Look at the final line of [@ex-dottie-and-golden-iterations]: at $\cos\theta^* = \theta^*$, why did we call the left side $\cos$ and the right side $\theta^*$? Only because dualistic grammar habits split "the ruler that measures" (function $\psi$) from "the tick mark that is measured" (state $\theta$). Once you see that $\cos$ is nothing other than the series of orthogonal comparison, and $\theta^*$ is nothing other than the infinite self-nesting $\cos(\cos(\cos(\cdots)))$ of that very comparison, operator and operand, observer and observed fuse into a single equation:
+Look at the final line of [@ex-dottie-and-golden-iterations]: $\cos\theta^*=\theta^*$ is the self-consistency condition for feedback of the reading. The infinite nesting $\cos(\cos(\cos(\cdots)))$ denotes the limit of iteration from a specified initial value. It remains a scalar, without merging the types of function and number. The author interprets this loop as the ruler measuring itself:
 
 $$
 \psi = \psi(\psi).
 $$
 
 > When the ruler measures another, it is called the operator $\cos$ and the other is called the state $\theta$; when the ruler turns back to measure the angle it opens itself, operator and state become one: $\psi = \psi(\psi)$.
+
+Section 24.7 gives a typed reading of this aphorism: the function $\psi$ acts on its own name $\ulcorner\psi\urcorner$, and, under the capture hypothesis, the resulting value is a fixed point of the twist $f$. Function, name, and value have distinct roles.
 
 ::: {.viz src="sphere-escape" preset="dottie" height="500"}
 **Cosine again and again.** Starting from $0$, the cobweb winds in on $\theta^* \approx 0.739$ while the view zooms along. Each step is closer, the error multiplied by about $0.67$, yet no step lands exactly.
@@ -786,7 +796,7 @@ Half the time is spent, yet less than one sixth of the distance is covered: the 
 
 ## 24.7 Where the Chase Stops: A Diagonal Landing Is a Fixed Point, and Existence Without Contraction {#sec-ch24-7}
 
-The chapter opened with a question: how can the chase of "spheres beyond spheres" from [Chapter 21](ch21-diagonalization-and-escape.md) ever come to a halt? The preceding sections answered one special case by contraction ($\cos$ squeezes the interval smaller and smaller) and another by enumeration ($1 + 1/x$ and its conjugate $1/(1+x)$ are the only two live binary fractional maps). But the line $\psi = \psi(\psi)$ says something more general: **self-application by itself produces fixed points**. Does this sentence have a precise form that depends on no particular function? It does, and it is already frozen in Lean.
+The chapter opened with a question: how can the chase of "spheres beyond spheres" from [Chapter 21](ch21-diagonalization-and-escape.md) ever come to a halt? The preceding sections answered one special case by contraction ($\cos$ squeezes the interval smaller and smaller) and another by enumeration ($1 + 1/x$ and its conjugate $1/(1+x)$ are the only two live binary fractional maps). The general self-referential reading of $\psi = \psi(\psi)$ requires an explicit premise: **if a listing captures its twisted diagonal, the self-application value at the landing address is a fixed point of the twist**. This conditional statement, independent of any particular function, is the Lean lemma below.
 
 The setting has only three ingredients: a set of addresses $A$, a set of values $Y$, and a **listing** $g : A \to A \to Y$, which assigns to each address $a$ a row $g\ a : A \to Y$. Take in addition a **twist** $f : Y \to Y$. Twisting the diagonal $a \mapsto g\ a\ a$ of the listing pointwise yields a new row $a \mapsto f(g\ a\ a)$. Every escape phenomenon of Chapter 21 comes from one question: is this twisted diagonal one of the rows already in the listing?
 
@@ -897,16 +907,16 @@ The standard simplex is not an abstract solid: it is the set of all probability 
 
 Take $n = 2$; the simplex is the segment $\{(p, 1 - p) \mid p \in [0, 1]\}$. Since $\cos p \in [\cos 1, 1] \subset [0, 1]$ for $p \in [0, 1]$, the map $(p, 1 - p) \mapsto (\cos p, 1 - \cos p)$ is a continuous map of this segment into itself, and [@thm-brouwer-standard-simplex] yields $p \in [0, 1]$ with $\cos p = p$. (Substituting $\cos$ into the theorem is a manual remark of this book, not a frozen declaration.) So the **existence** of the cosine fixed point can be obtained without any contraction; what contraction supplies are two other things: **uniqueness**, and the **rate of convergence** computed in Section 24.5.
 
-The two mechanisms divide the work cleanly, and the diagonal adds a third piece. Topology guarantees that there is somewhere to stop; contraction guarantees that there is only one such place and that iteration reaches it; the diagonal says which value sits there: the value of a row applied to its own name.
+The two mechanisms divide the work, and the diagonal adds a third piece. A continuous self-map of the standard simplex has a fixed point; a contraction self-map of a nonempty complete metric space also gives uniqueness and convergence of iteration. If a listing captures its twisted diagonal, the value of the landing row at its own name is fixed by the twist. This last conclusion retains the capture hypothesis and does not guarantee capture for an arbitrary listing.
 
 ---
 
 ### Summary of Part VI: From Spheres Beyond Spheres to $\psi = \psi(\psi)$ — Ready to Forge the Mechanical Canon
 
-Across the four chapters of Part VI, backed by **forty-two Lean-verified theorem blocks** (seven in Chapter 21, seventeen in Chapter 22, four in Chapter 23, and fourteen in Chapter 24), we have brought mathematical logic, prime spectral theory, Diophantine norm locks, and self-referential fixed points under one geometric roof:
+Across the four chapters of Part VI, backed by **forty-three Lean-verified theorem blocks** (seven in Chapter 21, eighteen in Chapter 22, four in Chapter 23, and fourteen in Chapter 24), we have brought mathematical logic, prime spectral theory, Diophantine norm locks, and self-referential fixed points under one geometric roof:
 
 - **Chapter 21** proved that any complete decoder catalog produces a relative semantic diagonal that is discontinuous in the latent partition topology ([@thm-complete-diagonal-not-continuous]), has a nonempty separation deficit ([@lem-complete-diagonal-separation-deficit]), and forces strict observation-topology refinement when adjoined ([@prop-complete-diagonal-strict-refinement], [@cor-complete-diagonal-topological-settlement]), gave the factorial remainder bound for the exponential series in a complete normed algebra ([@lem-exp-tail-le]) and the strictly positive cosine lower bound on the recovery error of a finite-record channel ([@lem-finite-support-autocorrelation-cosine], [@thm-finite-record-cosine-obstruction]), paired with the classical analytic-remainder and spherical-topology literature remarks ([@rem-lagrange-taylor-remainder-literature], [@rem-hairy-ball-adams-literature]);
-- **Chapter 22** revealed primes as the orthogonal basis of arithmetic and established on the explicit half-plane $\operatorname{Re}(s) > 1$ the unit residue at $s = 1$ ([@lem-riemann-zeta-residue-one]), the Dirichlet series ([@prop-riemann-zeta-dirichlet-sum]), the Euler prime product ([@thm-riemann-zeta-euler-product]), their direct equality ([@cor-dirichlet-sum-eq-euler-product]), the linear independence of prime logarithms and the torus density of the joint prime-clock phases ([@thm-prime-log-independence], [@thm-torus-power-orbit-closure]), the entirety and reflection symmetry $\xi(1 - s) = \xi(s)$ of the completed xi reading ([@thm-xi-reading-entire-reflection]) together with its conjugation covariance ([@prop-zeta-conjugation-covariance]), the rolling of the critical line into the unit circle with a radial equivalent of the Riemann Hypothesis ([@thm-cayley-critical-line-criterion]), the sign of $\zeta$ on the real axis from the alternating series ([@lem-alternating-zeta-partial-sums], [@prop-zeta-real-axis-sign]), the identification of the zeros of $\xi$ with the zeros of $\zeta$ in the critical strip ([@prop-xi-zeros-strip-zeros]), the reduction of the Riemann Hypothesis to the right half-strip together with the agreement of its two formulations ([@thm-right-half-strip-rh-forms]), a quartic polynomial showing that full symmetry does not pin zeros to the critical line ([@thm-full-symmetry-not-localization]), Robin's inequality on at most eight prime axes, read from the Euler product at $s = 1$ ([@thm-robin-at-most-eight-primes]), and the theorem that a zero right of the critical line forces some $\operatorname{lcm}(1, \dots, \lfloor t\rfloor)$ to violate Robin's inequality ([@thm-off-line-zero-robin-violation]), alongside the polyhedral prime-sieve remainder and the epistemic boundary of the open Riemann Hypothesis and classical zeta literature ([@conj-riemann-hypothesis], [@rem-euler-zeta-literature]);
+- **Chapter 22** revealed primes as the orthogonal basis of arithmetic and established on the explicit half-plane $\operatorname{Re}(s) > 1$ the unit residue at $s = 1$ ([@lem-riemann-zeta-residue-one]), the Dirichlet series ([@prop-riemann-zeta-dirichlet-sum]), the Euler prime product ([@thm-riemann-zeta-euler-product]), their direct equality ([@cor-dirichlet-sum-eq-euler-product]), the linear independence of prime logarithms and the torus density of the joint prime-clock phases ([@thm-prime-log-independence], [@thm-torus-power-orbit-closure]), the entirety and reflection symmetry $\xi(1 - s) = \xi(s)$ of the completed xi reading ([@thm-xi-reading-entire-reflection]) together with its conjugation covariance ([@prop-zeta-conjugation-covariance]), the rolling of the critical line into the unit circle with a radial equivalent of the Riemann Hypothesis ([@thm-cayley-critical-line-criterion]), the sign of $\zeta$ on the real axis from the alternating series ([@lem-alternating-zeta-partial-sums], [@prop-zeta-real-axis-sign]), the identification of the zeros of $\xi$ with the zeros of $\zeta$ in the critical strip ([@prop-xi-zeros-strip-zeros]), the Prime Number Theorem with an error term, obtained from the absence of zeros on the line $\operatorname{Re}(s) = 1$ ([@thm-medium-pnt]), the reduction of the Riemann Hypothesis to the right half-strip together with the agreement of its two formulations ([@thm-right-half-strip-rh-forms]), a quartic polynomial showing that full symmetry does not pin zeros to the critical line ([@thm-full-symmetry-not-localization]), Robin's inequality on at most eight prime axes, read from the Euler product at $s = 1$ ([@thm-robin-at-most-eight-primes]), and the theorem that a zero right of the critical line forces some $\operatorname{lcm}(1, \dots, \lfloor t\rfloor)$ to violate Robin's inequality ([@thm-off-line-zero-robin-violation]), alongside the polyhedral prime-sieve remainder and the epistemic boundary of the open Riemann Hypothesis and classical zeta literature ([@conj-riemann-hypothesis], [@rem-euler-zeta-literature]);
 - **Chapter 23** showed how quadratic norms and traces isolate discrete integer lattices, proving unimodular shear reduction, constant discriminant $\Delta = -3$, and range invariance for the Eisenstein crossing family ([@thm-qform-eq-eisnorm], [@lem-qform-discriminant], [@cor-qform-range-eq-eisnorm]) together with the $\Delta = +5$ Golden Pell trace–norm identity ([@prop-pell-form-eq-four-mul-norm]), and delineating in [@rem-diophantine-z-in-q-literature] the boundary between first-order definability literature over $\mathbb{Q}$ and the open existential problem $\mathrm{H10}(\mathbb{Q})$;
 - **Chapter 24** proved finite contracting set stabilization and strict-change bounds ([@thm-finite-contracting-updates-stabilize]), adjacent-step agreement and static contextual non-uniqueness (identical text and interpretation rule under two distinct static contexts yield different fixed Boolean meanings, [@lem-conceptual-equivalence-stability-fixed-point], [@prop-context-parameters-distinct-fixed-points]), uniqueness of the positive golden fixed point ([@cor-golden-fixed-point-unique]), the four self-application fates of nondegenerate binary fractional maps with the $\varphi$-family as the only live one ([@thm-self-application-four-fates], [@lem-golden-inverse-branch-fixed-point]), the golden cosines of the regular pentagon ([@prop-pentagon-golden-cosines]), the diagonal landing as a fixed point of the twist together with universal escape for fixed-point-free twists and its finite count ([@lem-diagonal-landing-fixed], [@thm-self-application-fragment-package], [@prop-escaped-listing-card]), Brouwer's fixed-point theorem on the standard simplex ([@thm-brouwer-standard-simplex]), the convergence of orbit averages of an irrational rotation to the Haar average ([@lem-irrational-rotation-equidistribution]), and the normalized central-binomial coefficient bounds and binomial-kernel series used in the arcsine expansion ([@lem-arcsin-binomial-kernel]), established absolute convergence and the signed sum of the prescribed rational compositional inverse at $\pi$, together with uniqueness of the cosine fixed point among all positive reals ([@thm-dottie-rational-inverse-endpoint]), culminating — alongside the classical fixed-point and number-theory literature remark ([@rem-banach-dottie-hairy-ball-literature]) and Schanuel's conjecture ([@conj-schanuel-dottie]) — in $\cos\theta^* = \theta^*$ and the self-referential synthesis $\psi = \psi(\psi)$.
 
