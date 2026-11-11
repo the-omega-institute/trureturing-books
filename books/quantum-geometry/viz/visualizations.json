@@ -1365,6 +1365,110 @@
           "gid": "D5/S3/Topology/QuandleMarkovColoring.quandle_coloring_markov_invariant"
         }
       ]
+    },
+    {
+      "id": "walk-spreading",
+      "code": "WALK//SPREAD",
+      "title": "游走扩散",
+      "title_en": "How walks spread",
+      "summary": "同一条线（一个足够长的圈 ZMod p）上，量子游走与经典随机游走从同一个原点出发，并排画在线的上下两侧。量子的一份按正文的 Hadamard 单步规则带着硬币相干地走，两个尖峰贴着 ±n 往外跑，宽度按步数 n 线性长大；经典的一份每步左右各 ½，宽度只按 √n 长大，走 50 步时两者相差 3.83 倍。硬币取 c* = (1, i)/√2 时每一对镜像模式 (0, x)、(1, −x) 都均分概率，分布左右对称；换成同样一半一半的实硬币 (1, 1)/√2，分布就偏向一边。圈只有 9 个点时游走绕回来，对称仍在。五张实验卡可以在第十六章正文里单独引用。",
+      "summary_en": "On one line (a long enough cycle ZMod p) a quantum walk and a classical random walk start from the same origin, drawn above and below the line. The quantum one follows the text's Hadamard step, moving coherently with its coin: its two peaks run out next to ±n and its width grows linearly in the number of steps n. The classical one steps left or right with probability ½ and widens only like √n; after fifty steps they are 3.83 times apart. With the coin c* = (1, i)/√2 every mirror pair of modes (0, x), (1, −x) splits its probability evenly and the distribution is symmetric; a real coin (1, 1)/√2, half and half as well, tilts it to one side. On a cycle of only nine points the walk wraps round and the symmetry stays. Each of the five experiment cards can be cited on its own from Chapter 16.",
+      "path": "walk-spreading/",
+      "thumbnail": "walk-spreading/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "量子游走",
+        "Hadamard 硬币",
+        "随机游走",
+        "扩散宽度",
+        "对称硬币",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Quantum walk",
+        "Hadamard coin",
+        "Random walk",
+        "Spreading width",
+        "Symmetric coin",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第十六章 · 图上游走：相干叠加与适用边界",
+          "label_en": "Chapter 16 · Walks on graphs: coherence and its limits",
+          "href": "../zh/ch16-qsvt-walks-and-compilation.html#sec-quantum-walk-interference",
+          "href_en": "../en/ch16-qsvt-walks-and-compilation.html#sec-quantum-walk-interference"
+        },
+        {
+          "label": "第十六章 · 对称硬币引理",
+          "label_en": "Chapter 16 · The symmetric-coin lemma",
+          "href": "../zh/ch16-qsvt-walks-and-compilation.html#lemma-symmetric-coin-walk",
+          "href_en": "../en/ch16-qsvt-walks-and-compilation.html#lemma-symmetric-coin-walk"
+        },
+        {
+          "label": "Lean 源码 · SymmetricCoinMaximalWalkEntanglement",
+          "label_en": "Lean source · SymmetricCoinMaximalWalkEntanglement",
+          "href": "{trureturing}/D5/S3/Quantum/Walks/SymmetricCoinMaximalWalkEntanglement.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Walks/SymmetricCoinMaximalWalkEntanglement.result"
+        }
+      ]
+    },
+    {
+      "id": "gate-word-polytope",
+      "code": "GATE//POLYTOPE",
+      "title": "门字多面体",
+      "title_en": "The polytope of gate words",
+      "summary": "从北极出发，用 H 与 T 两个门拼出长度不超过 L 的门字，每个门字把北极送到布洛赫球面上的一点（按第十六章例题的转动 R_H、R_T 逐层算出，每点标出最短门字）。这些点只有有限个：点数 1、2、3、5、8、13、19……远小于 2^(L+1) − 1。它们的凸包是内接于球的平直多面体：门长 1 是一条线段，门长 3 第一次成为立体却不含球心，从门长 5 起包住球心，可把棱投回球皮成为测地网格。拖动琥珀色的目标，品红的弧与半径段给出它到最近可达点的角度与径向间隙 1 − h；切到最坏方向，品红虚线圈出最大的空球冠 ε_L，它随 L 一级级缩小（L = 20 时 971 个点，ε = 9.10°），却在任何有限 L 下都不为零。五张实验卡可以在第十六章正文里单独引用。",
+      "summary_en": "Starting from the north pole, the gates H and T make words of length at most L, and each word carries the pole to a point of the Bloch sphere (computed layer by layer with the rotations R_H, R_T of the worked example in Chapter 16, each point labelled with a shortest word). There are only finitely many: 1, 2, 3, 5, 8, 13, 19, … points, far below 2^(L+1) − 1. Their convex hull is a flat polytope inscribed in the sphere: at length 1 it is a segment, at length 3 it is solid for the first time but misses the centre, and from length 5 on it holds the centre, so that its edges project onto the sphere as a geodesic mesh. Drag the amber target, and the magenta arc and piece of radius give its angle to the nearest reachable point and the radial gap 1 − h; switch to the worst direction, and dashed magenta circles the largest empty cap ε_L, which shrinks step by step with L (971 points and ε = 9.10° at L = 20) yet never vanishes for a finite L. Each of the five experiment cards can be cited on its own from Chapter 16.",
+      "path": "gate-word-polytope/",
+      "thumbnail": "gate-word-polytope/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "门编译",
+        "H 与 T 门",
+        "布洛赫球",
+        "凸包",
+        "覆盖半径",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Gate compilation",
+        "H and T gates",
+        "Bloch sphere",
+        "Convex hull",
+        "Covering radius",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第十六章 · 有限门字与三维割圆多面体",
+          "label_en": "Chapter 16 · Finite gate words and the polytope",
+          "href": "../zh/ch16-qsvt-walks-and-compilation.html#sec-finite-gate-polytope",
+          "href_en": "../en/ch16-qsvt-walks-and-compilation.html#sec-finite-gate-polytope"
+        },
+        {
+          "label": "第十六章 · L ≤ 3 的五顶点验算",
+          "label_en": "Chapter 16 · The five vertices for L ≤ 3",
+          "href": "../zh/ch16-qsvt-walks-and-compilation.html#ex-finite-ht-polytope",
+          "href_en": "../en/ch16-qsvt-walks-and-compilation.html#ex-finite-ht-polytope"
+        },
+        {
+          "label": "Lean 源码 · TwoAxisFiniteRotation",
+          "label_en": "Lean source · TwoAxisFiniteRotation",
+          "href": "{trureturing}/D5/S3/Geometry/TwoAxisFiniteRotation.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word"
+        }
+      ]
     }
   ]
 }

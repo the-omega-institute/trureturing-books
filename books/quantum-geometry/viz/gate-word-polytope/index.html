@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="GATE//POLYTOPE · The polytope of gate words">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GATE//POLYTOPE 门字多面体</title>
+<meta name="description" content="从北极出发，用 H 与 T 两个门拼出长度不超过 L 的门字，每个门字把北极送到布洛赫球面上的一点。这些点是有限个，它们的凸包是一座内接于球的平直多面体：L 越大，点越密，最坏方向离最近可达点的角度 ε_L 一级一级缩小，却在任何有限 L 下都不为零。Starting from the north pole, the gates H and T make words of length at most L, and each word carries the pole to a point of the Bloch sphere. There are finitely many such points, and their convex hull is a flat polytope inscribed in the sphere: the larger L, the denser the points, and the angle ε_L from the worst direction to the nearest reachable point shrinks step by step, yet it is never zero for any finite L.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="gate-word-polytope">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="GATE//POLYTOPE">GATE<b>//</b>POLYTOPE</h1>
+      <div class="tagline">
+        <span class="zh">门字多面体 · <em>门字越长，落点越密，最大的缺口一级级缩小，却永远补不上</em></span>
+        <span class="en">The polytope of gate words · <em>the longer the words, the denser the points; the largest hole shrinks step by step but never closes</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillL"><span class="zh">门长 ≤</span><span class="en">LENGTH ≤</span> <strong>—</strong></span>
+      <span class="pill hot" id="pillEps"><span class="zh">最大缺口</span><span class="en">LARGEST HOLE</span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="one" aria-pressed="false"><span class="code">LENGTH-1</span><span class="cn zh">门长 1：两个点、一条线段</span><span class="cn en">Length 1: two points, one segment</span></button>
+        <button class="preset" data-preset="three" aria-pressed="false"><span class="code">LENGTH-3</span><span class="cn zh">门长 3：五个顶点，球心在外面</span><span class="cn en">Length 3: five vertices, the centre outside</span></button>
+        <button class="preset" data-preset="six" aria-pressed="false"><span class="code">LENGTH-6</span><span class="cn zh">门长 6：包住球心，投回球皮</span><span class="cn en">Length 6: around the centre, projected onto the sphere</span></button>
+        <button class="preset" data-preset="nearest" aria-pressed="false"><span class="code">NEAREST</span><span class="cn zh">离目标最近的点与它的门字</span><span class="cn en">The point nearest the target, and its word</span></button>
+        <button class="preset" data-preset="shrink" aria-pressed="false"><span class="code">SHRINK</span><span class="cn zh">最大的缺口随门长缩小</span><span class="cn en">The largest hole shrinks with the length</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+    <section class="panel sec">
+      <h2><span class="zh">目标方向</span><span class="en">Target direction</span><span class="aside">n</span></h2>
+      <div class="chips" id="modeChips" role="group" aria-label="目标怎么取" data-aria-en="How the target is chosen">
+        <button class="chip" data-mode="free" aria-pressed="true"><span class="zh">自己选</span><span class="en">My choice</span></button>
+        <button class="chip" data-mode="worst" aria-pressed="false"><span class="zh">最坏方向</span><span class="en">Worst direction</span></button>
+      </div>
+      <div class="field">
+        <label for="theta"><span class="zh">极角 θ</span><span class="en">Polar angle θ</span><small class="zh">也可以在球上直接拖动琥珀色的目标</small><small class="en">or drag the amber target on the sphere</small></label><output id="oTheta" for="theta">110°</output>
+        <input type="range" id="theta" min="0" max="180" step="1" value="110">
+      </div>
+      <div class="field">
+        <label for="phi"><span class="zh">方位角 φ</span><span class="en">Azimuth φ</span></label><output id="oPhi" for="phi">200°</output>
+        <input type="range" id="phi" min="0" max="359" step="1" value="200">
+      </div>
+    </section>
+    <section class="panel sec">
+      <h2><span class="zh">画法</span><span class="en">Drawing</span><span class="aside">P<sub>L</sub></span></h2>
+      <div class="chips" id="drawChips" role="group" aria-label="多面体怎么画" data-aria-en="How the polytope is drawn">
+        <button class="chip" data-draw="chord" aria-pressed="true"><span class="zh">平直弦面</span><span class="en">Flat faces</span></button>
+        <button class="chip" data-draw="geo" aria-pressed="false"><span class="zh">投回球皮</span><span class="en">Onto the sphere</span></button>
+      </div>
+      <p class="note"><span class="zh">“投回球皮”把棱沿半径投到球面上，成为大圆弧；只有球心在多面体内部时才这样画。拖空白处旋转视角，滚轮缩放。</span><span class="en">“Onto the sphere” projects the edges radially onto the sphere, as great-circle arcs; it is drawn only when the centre lies inside the polytope. Drag empty space to turn the view, scroll to zoom.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="布洛赫球：青色的点是长度不超过 L 的 H、T 门字从北极送到的地方，青色的面是它们的凸包；琥珀色的箭头是目标方向，品红的弧连到最近的可达点，品红的半径段是平直多面体与球皮之间的间隙；紫色是 H 与 T 的转轴" data-aria-en="Bloch sphere: the cyan points are where the H, T words of length at most L carry the north pole, the cyan faces their convex hull; the amber arrow is the target direction, the magenta arc runs to the nearest reachable point, the magenta piece of radius is the gap between the flat polytope and the sphere; violet marks the axes of H and T">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-bl" id="legend"></div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2><span class="zh">最大的缺口有多大</span><span class="en">How large the largest hole is</span></h2><span id="plotMeta"></span></div>
+        <canvas id="plot" aria-label="每个门长下最坏方向离最近可达点的角度（品红的台阶），当前门长标为琥珀色" data-aria-en="For each word length, the angle from the worst direction to the nearest reachable point (the magenta staircase); the current length is amber"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt><span class="zh">目标到最近可达点的角度</span><span class="en">angle from the target to the nearest reachable point</span></dt><dd><b id="roAngle">—</b><span id="roAngleSub"></span></dd></div>
+        <div class="c"><dt><span class="zh">最近点的门字（最右边的门先作用）</span><span class="en">word of the nearest point (rightmost gate acts first)</span></dt><dd id="roWord">—</dd></div>
+        <div class="m"><dt><span class="zh">径向间隙 1 − h</span><span class="en">radial gap 1 − h</span></dt><dd id="roGap">—</dd></div>
+        <div><dt><span class="zh">可达点数 · 上界 2<sup>L+1</sup> − 1</span><span class="en">reachable points · bound 2<sup>L+1</sup> − 1</span></dt><dd id="roCount">—</dd></div>
+        <div class="m"><dt><span class="zh">最大缺口 ε<sub>L</sub>（最坏方向）</span><span class="en">largest hole ε<sub>L</sub> (worst direction)</span></dt><dd id="roEps">—</dd></div>
+        <div><dt><span class="zh">多面体的形状</span><span class="en">shape of the polytope</span></dt><dd id="roShape">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+    </section>
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">可达点由 R<sub>H</sub>(x, y, z) = (z, −y, x) 与 R<sub>T</sub>(x, y, z) = ((x − y)/√2, (x + y)/√2, z) 逐层作用在北极上得到，门字取最短的一个；凸包、最近点、间隙与 ε<sub>L</sub>（凸包每个面的外法向就是一个空球冠的中心）都按双精度实时算出。这是数值演示，不是证明。</span><span class="en">The reachable points come from applying R<sub>H</sub>(x, y, z) = (z, −y, x) and R<sub>T</sub>(x, y, z) = ((x − y)/√2, (x + y)/√2, z) to the north pole layer by layer, each with a shortest word; the hull, the nearest point, the gap and ε<sub>L</sub> (the outer normal of each face of the hull is the centre of an empty cap) are computed live in double precision. An illustration, not a proof.</span></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">对照：两根不共线的轴 a、b，若每一步都能从整个连续轴圆里任选角度，则每个行列式为 1 的线性等距都是有限个“固定 a 或固定 b”的因子之积。它不给字长，也不涉及 {H, T} 这样的离散门集。已冻结：</span><span class="en">For contrast: for two axes a, b that are not collinear, when every step may take any angle from the whole continuous axis circle, every linear isometry of determinant 1 is a finite product of factors that fix a or fix b. It gives no word length and says nothing about a discrete gate set such as {H, T}. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Geometry/TwoAxisFiniteRotation.lean" target="_blank" rel="noopener"><code>two_axis_finite_word</code></a></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">离散门集的渐近字长 L = O(log<sup>c</sup>(1/ε))（Solovay–Kitaev）是文献结果，未在本书形式化；页面不拟合任何渐近速率，只画出每个 L 的实际缺口。单态球面上的缺口也不等于整个门的算子范数编译误差。</span><span class="en">The asymptotic word length L = O(log<sup>c</sup>(1/ε)) for a discrete gate set (Solovay–Kitaev) is a literature result, not formalized in this book; the page fits no asymptotic rate and only draws the actual hole for each L. A hole on the sphere of one state is not the operator-norm compilation error of a whole gate either.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到门长 0" data-aria-en="Back to length 0">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="20" step="any" value="0" aria-label="门长上限 L" data-aria-en="Word length bound L">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">门长加减 1</span><span class="en">length ± 1</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">舞台是布洛赫球。从北极 e<sub>z</sub> 出发，长度不超过 L 的 {H, T} 门字（含空字）把它送到有限个点 𝒮<sub>L</sub>（青色），时间轴是 L。青色的面是它们的欧氏凸包 P<sub>L</sub> = conv(𝒮<sub>L</sub>)；琥珀色是目标方向，品红是它到 𝒮<sub>L</sub> 的缺口。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>可达点。</b>按正文的转动 R<sub>H</sub>(x, y, z) = (z, −y, x) 与 R<sub>T</sub>(x, y, z) = ((x − y)/√2, (x + y)/√2, z)，逐层得到 𝒮<sub>L</sub> = 𝒮<sub>L−1</sub> ∪ R<sub>H</sub>(𝒮<sub>L−1</sub>) ∪ R<sub>T</sub>(𝒮<sub>L−1</sub>)。点数依次是 1, 2, 3, 5, 8, 13, 19, …，远小于上界 2<sup>L+1</sup> − 1（H² = I、北极是 T 的不动点等关系造成碰撞）。每个点标出它第一次出现时的门字，按算子乘积书写，最右边的门先作用。</li>
+        <li><b>多面体。</b>L = 0, 1, 2 时 P<sub>L</sub> 是单点、线段、三角形；L = 3 第一次是立体，五个顶点都满足 x ≥ 0、z ≥ 0，球心不在里面；L = 4 时球心恰在一个面上；从 L = 5 起球心在内部，这时把棱沿半径投到球面就是一张大圆弧网格（测地多面体）。P<sub>L</sub> 本身的面始终是平直的弦面。</li>
+        <li><b>缺口。</b>目标方向 n 的支撑高度 h = max<sub>s ∈ 𝒮<sub>L</sub></sub> n·s；n 到最近可达点的角度是 arccos h，平直多面体与球皮之间的径向间隙是 1 − h。最坏方向的角度 ε<sub>L</sub> = max<sub>n</sub> arccos h 就是正文的覆盖半径：凸包每个面的外法向是一个不含任何点的球冠中心，ε<sub>L</sub> 取其中最大的一个。ε<sub>L</sub> 随 L 不增，而 𝒮<sub>L</sub> 有限，所以 ε<sub>L</sub> &gt; 0 对一切有限 L 成立。</li>
+        <li><b>与连续两轴定理的分别。</b>连续轴圆上的有限字可以精确到达任意旋转：<a class="leanref" data-lean-gid="D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Geometry/TwoAxisFiniteRotation.lean" target="_blank" rel="noopener"><code>two_axis_finite_word</code></a>（LEAN ✓）；它不给字长，也不能推出离散门集 {H, T} 的任何性质。离散门集的渐近字长 O(log<sup>c</sup>(1/ε)) 是 Solovay–Kitaev 定理，文献结果，未在本书形式化。单态的覆盖缺口会放过绕初态的转动，不能代替整个门的编译误差。</li>
+        <li><b>与割圆的分工。</b>sphere-escape 的割圆卡讲平面里的内接多边形与圆之间的缝；本页讲有限门字在球面上的落点集与离目标的最近距离。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch16-qsvt-walks-and-compilation.html#sec-finite-gate-polytope" target="_top">有限门字与三维割圆多面体</a> · <a href="../../zh/ch16-qsvt-walks-and-compilation.html#ex-finite-ht-polytope" target="_top">L ≤ 3 的五顶点验算</a> · <a href="../../zh/ch16-qsvt-walks-and-compilation.html#rem-solovay-kitaev-literature" target="_top">Solovay–Kitaev 文献注记</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">The stage is the Bloch sphere. From the north pole e<sub>z</sub>, the {H, T} words of length at most L (the empty word included) reach finitely many points 𝒮<sub>L</sub> (cyan), and the rail is L. The cyan faces are their Euclidean convex hull P<sub>L</sub> = conv(𝒮<sub>L</sub>); amber is the target direction and magenta its gap to 𝒮<sub>L</sub>. The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>Reachable points.</b> With the text's rotations R<sub>H</sub>(x, y, z) = (z, −y, x) and R<sub>T</sub>(x, y, z) = ((x − y)/√2, (x + y)/√2, z), layer by layer, 𝒮<sub>L</sub> = 𝒮<sub>L−1</sub> ∪ R<sub>H</sub>(𝒮<sub>L−1</sub>) ∪ R<sub>T</sub>(𝒮<sub>L−1</sub>). The counts are 1, 2, 3, 5, 8, 13, 19, …, far below the bound 2<sup>L+1</sup> − 1 (relations such as H² = I and the pole being fixed by T make words collide). Each point carries the word with which it first appears, written as an operator product: the rightmost gate acts first.</li>
+        <li><b>The polytope.</b> For L = 0, 1, 2, P<sub>L</sub> is a point, a segment and a triangle; at L = 3 it is solid for the first time, its five vertices all with x ≥ 0 and z ≥ 0, so the centre is not inside; at L = 4 the centre lies exactly on a face; from L = 5 on the centre is inside, and projecting the edges radially onto the sphere gives a mesh of great-circle arcs (a geodesic polytope). The faces of P<sub>L</sub> itself are always flat chords.</li>
+        <li><b>The hole.</b> The support height of a target direction n is h = max<sub>s ∈ 𝒮<sub>L</sub></sub> n·s; the angle from n to the nearest reachable point is arccos h, and the radial gap between the flat polytope and the sphere is 1 − h. The angle of the worst direction, ε<sub>L</sub> = max<sub>n</sub> arccos h, is the covering radius of the text: the outer normal of each face of the hull is the centre of a cap that holds no point, and ε<sub>L</sub> is the largest of them. ε<sub>L</sub> does not increase with L, and 𝒮<sub>L</sub> is finite, so ε<sub>L</sub> &gt; 0 for every finite L.</li>
+        <li><b>Not the continuous two-axis theorem.</b> Finite words on continuous axis circles reach every rotation exactly: <a class="leanref" data-lean-gid="D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Geometry/TwoAxisFiniteRotation.lean" target="_blank" rel="noopener"><code>two_axis_finite_word</code></a> (LEAN ✓); it gives no word length and implies nothing about the discrete gate set {H, T}. The asymptotic word length O(log<sup>c</sup>(1/ε)) of a discrete gate set is the Solovay–Kitaev theorem, a literature result not formalized in this book. The covering hole of one state lets rotations about that state through, so it does not stand for the compilation error of a whole gate.</li>
+        <li><b>Not the polygon of Liu Hui.</b> The cards of sphere-escape on cutting the circle show the gap between an inscribed polygon and the circle in the plane; this page shows where finite gate words land on the sphere and how close they come to a target.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch16-qsvt-walks-and-compilation.html#sec-finite-gate-polytope" target="_top">finite gate words and the polytope</a> · <a href="../../en/ch16-qsvt-walks-and-compilation.html#ex-finite-ht-polytope" target="_top">the five vertices for L ≤ 3</a> · <a href="../../en/ch16-qsvt-walks-and-compilation.html#rem-solovay-kitaev-literature" target="_top">the Solovay–Kitaev remark</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

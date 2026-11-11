@@ -84,6 +84,10 @@ $$
 \mathrm{cStar} = c_* = \begin{pmatrix} 1/\sqrt{2} \\ i/\sqrt{2} \end{pmatrix}.
 $$
 
+::: {.viz src="walk-spreading" preset="ten" height="500"}
+**同一个原点，两种走法。** 从原点出发、硬币取 $c_*$，按上面的单步规则走 $10$ 步：上方青色的量子分布左右对称，最高的两根柱在 $\pm 6$，全都落在虚线 $\pm 10$ 之内；下方灰色的经典随机游走堆在中间。青色括号的宽度 $\sigma = 5.47$，灰色的只有 $\sqrt{10} = 3.16$。
+:::
+
 为了衡量 $n$ 步游走波函数在全部位置与硬币模式 $\iota = \mathrm{Fin}\,2 \times \mathrm{ZMod}\,p$ 上展开的多模相干纠缠度，源码将归一化模式振幅 $\lambda : \iota \to \mathbb{C}$ 映射为全体模式上的单激发 W 态 $\mathrm{wState}(\lambda)$（在布尔占据配置 $s : \iota \to \mathrm{Bool}$ 上，当且仅当恰好仅有一个模式 $k \in \iota$ 为 `true` 时取振幅 $\lambda_k$，其余配置取 $0$），定义逐模式乘积态 $\mathrm{productState}(z)(s) = \prod_{k \in \iota} z_k(\text{if } s_k \text{ then } 1 \text{ else } 0)$（其中每个局部因子 $z_k$ 满足 `UnitSpinor (z k)`，记作 `unitFactors z`），并以模式振幅 $\lambda : \iota \to \mathbb{C}$ 为第一宗量、局部旋量族 $z : \iota \to \mathrm{Fin}\,2 \to \mathbb{C}$ 为第二宗量定义内积重叠辅助函数及最大重叠模平方：
 
 $$
@@ -108,10 +112,26 @@ $$
 在源码模块 `SymmetricCoinMaximalWalkEntanglement` 中，首先由线性分解引理 `walk_linearity` 与实反射对称引理 `walk_reflection` 推出 `walk_pair_probabilities`：对任意位置 $x \in \mathrm{ZMod}\,p$ 与任意单位硬币 $c$，镜像配对模式 $(0, x)$ 与 $(1, -x)$ 的占据概率之和保持定值 $|\mathrm{walkState}(p, n, c)(0, x)|^2 + |\mathrm{walkState}(p, n, c)(1, -x)|^2 = a^2 + b^2$，而正交对称硬币 $\mathrm{cStar} = (1/\sqrt{2}, i/\sqrt{2})$ 使每一对镜像模式的概率恰好均分为 $(a^2 + b^2)/2$。随后源码通过固定和配对均衡引理 `pair_balancing` 与有限集归纳引理 `pair_average_le`（逐对作用于 $((0, x), (1, -x))$，利用在两项和固定时相等分配最大化乘积并最小化 $\mathrm{gMax}$），证明 $\mathrm{gMax}\bigl(\mathrm{walkState}(p, n, \mathrm{cStar})\bigr) \le \mathrm{gMax}\bigl(\mathrm{walkState}(p, n, c)\bigr)$，两边同被 $1$ 相减即得 $\mathrm{geometricEntanglement}\bigl(\mathrm{walkState}(p, n, c)\bigr) \le \mathrm{geometricEntanglement}\bigl(\mathrm{walkState}(p, n, \mathrm{cStar})\bigr)$。完整证明由 Lean 内核检查。
 :::
 
+::: {.viz src="walk-spreading" preset="coin" height="500"}
+**一半一半还不够，要那个 $i$。** 换成同样一半一半的实硬币 $(1, 1)/\sqrt{2}$，走 $50$ 步：青色的分布偏向左边，虚线是它的镜像 $P(-x)$ 的轮廓，品红是比镜像多出的部分，合计 $0.51$。硬币取 $c_*$ 时品红消失：镜像对 $(0, x)$ 与 $(1, -x)$ 的概率之和与硬币无关，$c_*$ 把每一对均分（上面证明梗概里的一步）。图里画的是分布，不是 [@lemma-symmetric-coin-walk] 所说的几何纠缠。
+:::
+
+::: {.viz src="walk-spreading" preset="ring" height="500"}
+**绕回来，镜像还在。** 圈上只有 $p = 9$ 个点，硬币取 $c_*$，走 $20$ 步：游走早已绕回来，青色的柱和灰色的柱一样摊满整圈，不再有往外跑的前沿；但青色的柱仍然左右成镜像，没有品红。[@lemma-symmetric-coin-walk] 对一切圈长 $p \ge 1$ 与一切步数 $n$ 成立。
+:::
+
 在理解 [@lemma-symmetric-coin-walk] 时，必须严格划清两条概念边界：
 
 1. **多模单激发 W 态几何纠缠 vs 硬币—位置二分约化熵**：定理中的 `geometricEntanglement` 是把全部 $2p$ 个（硬币 $\times$ 位置）模式视作单粒子占据模，计算单激发 W 态相对于 $2p$ 个模式逐模乘积态的几何纠缠 $1 - \mathrm{gMax}$，**绝不能将其篡改或简写为通常教材里的“硬币对位置求偏迹后的二分冯·诺依曼纠缠熵”**。
 2. **量子游走不等于“无条件消除一切回头路或迷宫指数加速”**：[@lemma-symmetric-coin-walk] 刻画的是有限圈图 $\mathrm{ZMod}\,p$ 上硬币初态相位对模式分布对称性的影响，它**并不证明**量子游走在任意图或迷宫上都具有指数加速，也**不意味着**相消干涉能让任意图上的所有回头路振幅恒等于零，更不是黏合树（glued trees）黑盒分离定理本身。
+
+::: {.viz src="walk-spreading" preset="fifty" height="500"}
+**走 50 步，宽度差近四倍。** 青色的两个尖峰已经跑到 $\pm 34$，灰色的钟形只铺开到 $\pm 7$ 左右：量子宽度 $\sigma = 27.07$，经典 $\sigma = \sqrt{50} = 7.07$。
+:::
+
+::: {.viz src="walk-spreading" preset="width" height="500"}
+**一条直线对一条 $\sqrt{n}$。** 宽度随步数：青色的量子宽度是一条直线（$\sigma / n$ 停在 $0.54$ 附近），灰色的经典宽度是 $\sqrt{n}$；走到 $60$ 步是 $32.5$ 对 $7.75$。在一条线上，两者之差是平方关系，不是指数；黏合树上的指数分离与一般图的界见 [@rem-qsvt-walks-literature] 第 2 条（文献结果，未在本书形式化），图中曲线是页面的数值。
+:::
 
 ::: {.remark #rem-qsvt-walks-literature title="完整 QSVT 多项式可实现性定理与量子游走黏合树黑盒加速（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 关于第一节的量子奇异值变换（QSVT）与第二节的图上量子游走，算法文献中的完整定理及其精确前提如下：
@@ -120,6 +140,10 @@ $$
    - **直接二维复多项式量子信号处理（QSP，Theorem 3）**：复多项式对 $(P_{\mathrm{c}}, Q_{\mathrm{c}}) \in \mathbb{C}[x]^2$ 能直接作为单一交替相位序列算子 $U_{\Phi}(x)$ 的二维矩阵元实现，当且仅当 $\deg(P_{\mathrm{c}}) \le d$、$\deg(Q_{\mathrm{c}}) \le d - 1$，$P_{\mathrm{c}}$ 具有确定奇偶性 $d \bmod 2$，$Q_{\mathrm{c}}$ 具有相反奇偶性 $(d-1) \bmod 2$，且在一切 $x \in [-1, 1]$ 上满足复模方幺正归一恒等式 $|P_{\mathrm{c}}(x)|^2 + (1 - x^2)|Q_{\mathrm{c}}(x)|^2 = 1$。
    - **一般有界实多项式 QSVT 的复补全与实部投影实现（Theorem 17 / Corollary 18）**：对于一般有界实目标多项式 $P_{\mathrm{target}} \in \mathbb{R}[x]$——满足 (i) $\deg(P_{\mathrm{target}}) \le d$；(ii) 具有确定奇偶性 $d \bmod 2$；(iii) 在区间 $[-1, 1]$ 上满足一致范数界 $|P_{\mathrm{target}}(x)| \le 1$（例如奇一次实多项式 $P_{\mathrm{target}}(x) = x/2$，其在端点 $x = 1$ 处 $P_{\mathrm{target}}(1)^2 = 1/4 < 1$，因此不可能直接用实多项式配成 $P_{\mathrm{target}}(x)^2 + (1 - x^2)Q(x)^2 = 1$）——由 Fejér–Riesz 因式分解定理，总存在满足上述 Theorem 3 条件的复多项式补全对 $(P_{\mathrm{c}}, Q_{\mathrm{c}}) \in \mathbb{C}[x]^2$ 使得 $\operatorname{Re} P_{\mathrm{c}}(x) = P_{\mathrm{target}}(x)$ 且 $|P_{\mathrm{c}}(x)|^2 + (1 - x^2)|Q_{\mathrm{c}}(x)|^2 = 1$。在电路上引入一颗额外的 $\lvert +\rangle$ 控制辅助比特，相干叠加正向相位序列 $U_{\Phi}$ 与反向相位序列 $U_{-\Phi}$ 得到实部组合 $\frac{1}{2}(U_{\Phi} + U_{-\Phi})$，最后配合辅助比特向 $\langle +\rvert$ 的投影以及依奇偶性选取的块投影（$d$ 为奇时取 $\tilde{\Pi}(\cdot)\Pi$，$d$ 为偶时取 $\Pi(\cdot)\Pi$），即仅调用 $d$ 次 $U$ 与 $U^*$ 精确实现奇异值实多项式变换 $P_{\mathrm{target}}^{(\mathrm{SV})}(A)$。
 2. **量子游走指数加速的图结构与黑盒边界**（A. M. Childs, R. Cleve, E. Deotto, E. Farhi, S. Gutmann, and D. A. Spielman, *Exponential algorithmic speedup by a quantum walk*, Proc. 35th ACM STOC, 59–68, 2003, doi:10.1145/780542.780552, arXiv:quant-ph/0209131）：在两棵深度为 $n$ 的二叉树在叶节点随机交错黏合而成的“黏合树（glued trees）”图族上，给定邻接表黑盒（oracle）访问，从入口根顶点出发的连续时间量子游走因在每一层等距列子空间上保持对称均匀叠加，把指数多顶点的图坍缩为长度为 $2n+2$ 的一维链，从而在 $\mathrm{poly}(n)$ 时间内以有界概率穿透到出口根顶点 `EXIT`；而 Childs 等人证明，任何最多执行 $2^{n/6}$ 次黑盒查询的经典算法找到 `EXIT` 顶点的概率至多为 $4\cdot 2^{-n/6}$（即要达到常数成功概率必须付出 $2^{\Omega(n)}$ 次经典黑盒查询）。这一指数优势严格依赖于图族的层对称约简、黑盒访问模型与特定穿行任务定义；对于缺乏此类对称结构的任意一般图或无结构迷宫，量子游走的干涉相消并不能自动把所有回头路径清零，通常至多提供二次量级的加速。
+:::
+
+::: {.viz src="walk-spreading" height="560"}
+**游走扩散实验室。** 拖时间轴改步数，改硬币的份额 $w$ 与相位 $\varphi$，或把圈变短：上方青色是量子游走，下方灰色是经典随机游走，品红是量子分布比它的镜像多出的部分。绿色框是 [@lemma-symmetric-coin-walk]；宽度与失衡都是页面的数值。
 :::
 
 ## 有限门字与三维割圆多面体 {#sec-finite-gate-polytope}
@@ -185,6 +209,15 @@ $$
    $$
 
    这是一座内接于单位球体的有限顶点凸多面体。当 $L$ 很小时（如 $L = 0, 1, 2$），$P_L$ 退化为单点、线段或平面多边形（绝不能声称对每一个 $L$，$P_L$ 都已经是满三维多面体！）。当 $P_L$ 达到满三维时，它的每一个二维面（facet）都是削过球体内部的**平直欧氏弦面（flat chordal polygon）**——绝不能把这些欧氏平面多边形称作“球面 $S^2$ 上本身平坦的面”。当 $L$ 足够大使得球心落入多面体内部（$0 \in \operatorname{int} P_L$）时，将 $P_L$ 的棱与面沿径向投影（radial projection）回球皮 $S^2$，平直棱投影为大圆劣弧，便在 $S^2$ 上切出一张球面三角/多边形网格，通常称为“**测地多面体（geodesic polytope）**”（注意该术语仅指径向投影到球面上的大圆弧网格，而 $\operatorname{conv}(\mathcal{S}_L)$ 本身始终是欧氏平直多面体）。
+
+::: {.viz src="gate-word-polytope" preset="one" height="500"}
+**门长 1：一条线段。** 北极是 $T$ 的不动点，只有 $H$ 把它送到 $\vv{e}_x$：两个青色的点只连成一条线段，还谈不上多面体。琥珀色的目标落在 $\vv{e}_x$ 上，门字 $H$ 精确命中，没有品红的缺口；紫色是 $H$ 与 $T$ 的转轴。
+:::
+
+::: {.viz src="gate-word-polytope" preset="six" height="500"}
+**门长 6：包住球心，投回球皮。** $19$ 个可达点的凸包已经包住球心，把它的棱沿半径投到球皮上，就成了一张青色的大圆弧网格（测地多面体）。网格里最大的洞是品红虚线圈住的空球冠，半径 $\varepsilon_6 = 47.27^\circ$，琥珀色的箭头指着它的中心。这里画的是有限门字在球面上的落点，不是 [第二十一章](ch21-diagonalization-and-escape.md) 平面割圆里的多边形。
+:::
+
 4. **有限门长下的正逼近残差 $\varepsilon_L > 0$ 与曲率失配**：对于任何有限门长 $L < \infty$，由于 $S^2$ 是紧致二维连续统而 $\mathcal{S}_L$ 是有限点集，球面上最坏方向离最近可达顶点的测地角距离（覆盖半径）
 
    $$
@@ -193,6 +226,11 @@ $$
 
    **严格大于零**（且随 $L$ 增大单调不增 $\varepsilon_{L+1} \le \varepsilon_L$；至于离散通用门集在渐近编译层面的文献条件见章末 [@rem-solovay-kitaev-literature]，不能从连续轴圆定理 [@prop-two-axis-finite-word] 直接推出）。
    对于任意不落在有限点集 $\mathcal{S}_L$ 中的单位外法向 $\vv{n} \in S^2$，平直弦面的欧氏支持高度 $h = \max_{\vv{s} \in \mathcal{S}_L} (\vv{n} \cdot \vv{s}) < 1$ 与球面支持高度 $1$ 之间恒隔着一道严格为正的**径向支撑间隙** $1 - h > 0$（尽管落在 $\mathcal{S}_L$ 上的顶点本身在球面上并可被相应门字精确命中；关于圆球面曲率与多面体离散角亏的经典微分几何与拓扑文献对照，详见[第二十一章](ch21-diagonalization-and-escape.md) [@rem-hairy-ball-adams-literature]）。
+
+::: {.viz src="gate-word-polytope" preset="nearest" height="500"}
+**离目标最近的点与它的门字。** 门长 $L \le 10$ 时有 $64$ 个可达点。琥珀色的目标在 $\theta = 110^\circ$、$\varphi = 200^\circ$：离它最近的可达点由门字 $HTHTTTTTH$ 到达，相隔 $17.04^\circ$（品红的弧）；平直多面体在这个方向的支持高度 $h = 0.956$，与球皮之间的径向间隙 $1 - h = 0.044$（品红的半径段）。
+:::
+
 5. **刘徽“三维割圆术”的教学类比与单态/全门误差区分**：公元三世纪中国数学家刘徽在《九章算术注》中创立“割圆术”，用内接正多边形的平直弦段逼近圆周（“割之弥细，所失弥少，割之又割，以至于不可割”）。在三维量子门编译中，随着门字预算 $L$ 递增，有限顶点层 $\mathcal{S}_L$、内接平直弦面层 $P_L$ 与外包光滑球面层 $S^2$ 构成了鲜明的**三维割圆术**图像（注：这纯粹是“用越来越细的离散弦面逼近光滑曲面”的几何教学类比，绝非声称古代割圆术已证明现代量子编译或给出 Solovay–Kitaev 误差指数）。最后务必牢记：单态球面覆盖误差 $\varepsilon_L$ 会放过绕初态 $\vv{r}_0$ 旋转的稳定子相位，因此不能直接代替整个门算子在 $\mathrm{PU}(2)/\mathrm{SU}(2)$ 上的算子范数编译误差 $\delta(U, V) = \min_{\varphi \in \mathbb{R}}\norm{U - e^{i\varphi}V}_{\mathrm{op}}$。
 
 ::: {.viz src="sphere-escape" preset="zu" height="500"}
@@ -357,6 +395,10 @@ $$
 表中每一行均严格满足 $0 < q \le 1$、$(2n+1)\arcsin\sqrt{r} = \frac{\pi}{2}$ 以及 $2n + 1 \le \frac{\pi/2 + 2}{\sqrt{p}}$。再次强调：这一阶梯给出的是已知 $p$ 时的振幅放大源算子查询次数，而非离散 $\{H, T\}$ 编译门数。
 :::
 
+::: {.viz src="gate-word-polytope" preset="three" height="500"}
+**门长 3：五个顶点，球心在外。** 例中的五个青色顶点第一次围成立体，但它们都在 $x \ge 0$、$z \ge 0$ 的一侧。琥珀色的目标指向 $-\vv{e}_x$：最近的顶点在 $90^\circ$ 外，支持高度 $h = 0$，品红的径向间隙从球心一直到球皮，整整为 $1$，与第三步的计算一致。
+:::
+
 <!-- alias: #rem-qsvt-solovay-kitaev-literature -->
 ::: {.remark #rem-solovay-kitaev-literature title="Solovay–Kitaev 门编译定理与对数多面体逼近复杂度（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 当我们将目标从连续两轴旋转（[@prop-two-axis-finite-word]）转向离散有限门集编译时，其渐近字长由量子编译理论中的 **Solovay–Kitaev 定理**（参见 C. M. Dawson and M. A. Nielsen, *The Solovay–Kitaev algorithm*, Quantum Inf. Comput. **6**, 81–95, 2006, arXiv:quant-ph/0505030）给出：
@@ -377,6 +419,14 @@ $$
 
    这里要合成步长为 $O(\varepsilon)$ 的微小旋转修正 $\exp([A, B])$，必须取两根步长为 **$O(\sqrt{\varepsilon})$** 的旋转生成元 $A, B$，使换位子主项 $[A, B]$ 落在 $O(\sqrt{\varepsilon})\cdot O(\sqrt{\varepsilon}) = O(\varepsilon)$ 量级，而高阶残差落在 $O\bigl((\sqrt{\varepsilon})^3\bigr) = O(\varepsilon^{3/2})$ 量级（绝不能错写成换位子对原步长呈线性关系）。
 4. **反柏拉图边界重申**：Solovay–Kitaev 定理是一个关于 $\varepsilon \to 0$ 时字长增长率的渐近逼近定理——它**既不意味着**在任何有限字长 $L < \infty$ 下最坏目标门 $U \notin \mathcal{W}_{\le L}$ 的覆盖残差可以归零（虽然恰好已属于有限字集 $\mathcal{W}_{\le L}$ 的离散顶点如 $I, H, T$ 本身具有零误差，但在整个连续群或球面上，最坏覆盖半径 $\varepsilon_L > 0$ 对一切有限 $L$ 恒成立），**也不允许**把固定初态在 $S^2$ 上的单态覆盖误差 $\varepsilon_L$ 直接等同于 $\mathrm{SU}(2)/\mathrm{PU}(2)$ 上的全门编译误差。
+:::
+
+::: {.viz src="gate-word-polytope" preset="shrink" height="500"}
+**最大的缺口一级级缩小，却补不上。** 门长从 $0$ 走到 $20$：青色的可达点一层层变密，品红虚线圈出的最大空球冠从 $180^\circ$ 缩到 $\varepsilon_{20} = 9.10^\circ$，有几层一点也不缩；到 $L = 20$ 有 $971$ 个点，洞仍然在。曲线是页面对每个 $L$ 实算的覆盖半径，不拟合任何渐近速率；渐近字长是 [@rem-solovay-kitaev-literature] 的文献结果。
+:::
+
+::: {.viz src="gate-word-polytope" height="560"}
+**门字多面体实验室。** 拖时间轴改门长 $L$，在球上拖动琥珀色的目标，或换成最坏方向：青色是长度不超过 $L$ 的 $\{H, T\}$ 门字的落点与它们的凸包，品红是到最近可达点的弧、径向间隙与空球冠。绿色框是 [@prop-two-axis-finite-word]，作为连续轴圆的对照；其余都是页面的数值。
 :::
 
 至此，第四部“高维球体——纠缠、拓扑与量子算法”的四章旅程全部合拢：我们从双比特 $6 + 9 = 15$ 的关联扇区与贝尔 $45^\circ$ 余弦破缺（[第十三章](ch13-entanglement-and-chsh.md)）出发，用泡利稳定子与架编织把脆弱的局部线藏进正交综合征子空间（[第十四章](ch14-cloning-codes-and-braids.md)），在不变平面旋转与有限群对偶零化子相消中看清了 Grover 与 Shor 算法的几何引擎（[第十五章](ch15-grover-qft-and-period-finding.md)），最终在切比雪夫递推与三维割圆多面体 $P_L$ 中直面了有限离散门字逼近连续球面的永恒残差 $\varepsilon_L > 0$（本章）。正是这道在任何有限步内都无法彻底抹平的多面体缝隙，为我们打开了通往第五部与第六部——时空与观察者复杂性、不完备性对角线逃逸与余弦自指不动点（其经典分析与算术性质见[第二十四章](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature]）——的深层大门。
