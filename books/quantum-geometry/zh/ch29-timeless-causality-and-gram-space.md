@@ -78,7 +78,7 @@ $$
 | **第 1 层球** | 整数 $\mathbb{Z}$ 与有理数 $\mathbb{Q}$<br/>（比例刻度 $m/n$） | $0^\circ$ 共线轴上的欧几里得辗转相除与线性加减 | 一维有理网格上的有限比例闭合：$n \cdot (m/n) = m$ | $90^\circ$ 正交勾股平方 $1^2 + 1^2 = 2$ 引发 $2$-进奇偶冲突，留下不可磨灭的佩尔余项 $m^2 - 2n^2 = \pm 1$ |
 | **第 2 层球** | 代数无理数 $\overline{\mathbb{Q}}$<br/>（勾股斜边 $\sqrt{2}$、黄金分割 $\varphi = \frac{1+\sqrt{5}}{2}$） | 有限维正交勾股面积守恒 $a^2 + b^2 = c^2$ 与整系数多项式求根 | 有限次代数多面体方程闭合：$x^2 - 2 = 0$、$x^2 - x - 1 = 0$（[`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique)） | 刘徽与阿基米德的 $2^k$ 边形割圆术无穷折半极限，迫使圆周弧长逃出一切有限次代数多项式根轨迹 |
 | **第 3 层球** | 初等周期超越数<br/>（圆周率 $\pi$、自然底数 $e$） | 无穷次勾股半角迭代 $\sin(\theta/2) = \sqrt{(1-\cos\theta)/2}$ 与指数映射 $e^{i\theta} = \cos\theta + i\sin\theta$ | 静态单位圆与球面周期闭合：$e^{i\pi} + 1 = 0$、$\cos(\pi/2) = 0$ | 弧长输入 $\theta$ 与弦投影输出 $\cos\theta$ 仍分处算子两端；泰勒截断在代数点 $q \neq 0$ 处恒留非零残差 $|\cos q - q| > 0$ |
-| **第 4 层球** | 自指超越不动点<br/>（Dottie 常数 $\theta^* \approx 0.7390851332\dots$） | 自指反馈迭代 $\theta_{k+1} = \cos(\theta_k)$：令勾股底边投影 $\cos\theta$ 直接等于弧长角 $\theta$ 自身 | 算子与坐标合一的自指闭合：$\cos(\theta^*) = \theta^*$（对应 $\psi = \psi(\psi)$ 的实轴投影） | 林德曼—魏尔斯特拉斯定理证其超越；沙努埃尔猜想与 Chow 定理预言 $\theta^*$ 甚至逃出由 $\pi, e$ 生成的初等封闭域 |
+| **第 4 层球** | 自指超越不动点<br/>（Dottie 常数 $\theta^* \approx 0.7390851332\dots$） | 自指反馈迭代 $\theta_{k+1} = \cos(\theta_k)$：令勾股底边投影 $\cos\theta$ 直接等于弧长角 $\theta$ 自身 | 算子与坐标合一的自指闭合：$\cos(\theta^*) = \theta^*$（对应 $\psi = \psi(\psi)$ 的实轴投影） | 林德曼—魏尔斯特拉斯定理证其超越（文献结果，见第 24 章评注）；沙努埃尔猜想与 Chow 定理预言 $\theta^*$ 甚至逃出由 $\pi, e$ 生成的初等封闭域（`OPEN` 猜想 [@conj-schanuel-dottie]） |
 
 看清这张四级突围表，毕达哥拉斯与整本书的主线便在此彻底合龙：
 - 在**第 1 层球**里，人们在一条直线上来回丈量，以为有理数比例 $m/n$ 就是宇宙的全部；
@@ -110,6 +110,9 @@ $$
 
 表面上看，右边只是 $+1$ 与 $-1$ 的符号之差；但在克利福德二维外积平面中，$-1$ 正是反自伴幺正复结构算子（双向量虚数生成元）$\hat{\mathbf{I}}$ 的平方 $\hat{\mathbf{I}}^2 = -1$（[`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary)）！取决于在模 $p$ 算术下能否开出 $\sqrt{-1}$（即二次剩余勒让德符号 $\left(\frac{-1}{p}\right) = (-1)^{(p-1)/2}$ 取 $+1$ 还是 $-1$），全体奇素数被这道 $\pm 1$ 接缝严格劈成两族几何维度截然不同的素数：
 
+::: {.remark #rem-ch29-pell-primes-hilbert-literature title="费马两平方和分裂、奇素数负佩尔方程与希尔伯特互反律（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 在经典代数数论与类域论中，奇素数模 $4$ 的二次剩余分岔及有理数域的局部—全局二次符号守恒由以下文献定理给出（未包含在本书锁定的 `trureturing@dev` 形式化声明集中）：
+
 1. **分裂型“面素数”（$p \equiv 1 \pmod 4$，如 $5, 13, 17, 29, 37, \dots$；偶素数 $p = 2 = -i(1+i)^2 = 1^2 + 1^2$ 则为分歧型桥接素数）**：
    对奇素数 $p \equiv 1 \pmod 4$，$\left(\frac{-1}{p}\right) = +1$，同余方程 $x^2 \equiv -1 \pmod p$ 恒有解，意味着模 $p$ 算术内部容纳二维旋转生成元 $\hat{\mathbf{I}}^2 = -1$。由费马平方和定理，这类奇素数在二维高斯整数平面 $\mathbb{Z}[i]$ 中必然分裂为一对互不相同的共轭高斯素数乘积（而 $p = 2 = (1+i)(1-i)$ 分歧）：
 
@@ -117,21 +120,22 @@ $$
    p = a^2 + b^2 = (a + b\hat{\mathbf{I}})(a - b\hat{\mathbf{I}}),
    $$
 
-   它天生是一块拥有正交双轴的**二维勾股斜边平方（面素数）**！正因如此，在实二次域 $\mathbb{Q}(\sqrt{p})$ 中，**负佩尔方程 $m^2 - p\,n^2 = -1$ 恒有整数解**（例如 $p=5$ 时 $2^2 - 5\cdot 1^2 = -1$；$p=13$ 时 $18^2 - 13\cdot 5^2 = -1$；$p=17$ 时 $4^2 - 17\cdot 1^2 = -1$）。其基本单位元范数为 $-1$（对应带手性翻转的滑移反射），必须经过成对平方 $(-1)^2 = +1$ 才能回归纯旋转分支。
+   在几何诠释下可视作拥有正交双轴的**二维勾股斜边平方（面素数）**。正因如此，在实二次域 $\mathbb{Q}(\sqrt{p})$ 中，**负佩尔方程 $m^2 - p\,n^2 = -1$ 恒有整数解**（例如 $p=5$ 时 $2^2 - 5\cdot 1^2 = -1$；$p=13$ 时 $18^2 - 13\cdot 5^2 = -1$；$p=17$ 时 $4^2 - 17\cdot 1^2 = -1$）。其基本单位元范数为 $-1$（对应带手性翻转的滑移反射），必须经过成对平方 $(-1)^2 = +1$ 才能回归纯旋转分支。
 2. **惰性型“线素数”（$p \equiv 3 \pmod 4$，如 $3, 7, 11, 19, 23, \dots$）**：
    此时 $\left(\frac{-1}{p}\right) = -1$，模 $p$ 世界里不存在 $90^\circ$ 旋转算子 $\sqrt{-1}$。这类素数无法拆成两个整数的平方和，在高斯平面 $\mathbb{Z}[i]$ 中保持不可约的**一维刚性标量（线素数）**。由于 $m^2 - p\,n^2 \equiv m^2 \pmod p$ 不可能同余于 $-1$，**负佩尔方程 $m^2 - p\,n^2 = -1$ 绝对无整数解**！整数网格对 $\sqrt{p}$ 的逼近被死死锁在 $+1$ 分支 $m^2 - p\,n^2 = +1$ 上（例如 $p=3$ 时 $2^2 - 3\cdot 1^2 = +1$；$p=7$ 时 $8^2 - 7\cdot 3^2 = +1$）。
 
-而当我们把有理数域 $\mathbb{Q}$ 在所有素数位 $v = p$ 与实无穷位 $v = \infty$ 上的局部二次障碍汇总起来时，经典类域论中的**希尔伯特互反律（Hilbert reciprocity law）**给出了一条令人屏息的全局守恒律：对任意非零有理数 $a, b \in \mathbb{Q}^\times$，局部希尔伯特符号 $(a, b)_v \in \{+1, -1\}$ 在全体素位与实位上的无穷乘积恒等于 $+1$：
+3. **希尔伯特互反律（Hilbert reciprocity law）**：当我们把有理数域 $\mathbb{Q}$ 在所有素数位 $v = p$ 与实无穷位 $v = \infty$ 上的局部二次障碍汇总起来时，经典类域论给出全局守恒律——对任意非零有理数 $a, b \in \mathbb{Q}^\times$，局部希尔伯特符号 $(a, b)_v \in \{+1, -1\}$ 在全体素位与实位上的无穷乘积恒等于 $+1$：
 
-$$
-\prod_{v \le \infty} (a, b)_v = +1.
-$$
+   $$
+   \prod_{v \le \infty} (a, b)_v = +1.
+   $$
 
-这意味着，$-1$ 手性扭结绝不可能在单个素数轴上孤立创生，它必须在成对的素数位之间两两配对、正反相消——这正是第三部第 10 章“两两比较，永远一致，顺序无关”在算术宇宙中的最高回响！
+   在本书的几何读法中，这意味着 $-1$ 手性扭结绝不可能在单个素数轴上孤立创生，它必须在成对的素数位之间两两配对、正反相消——与第三部第 10 章“两两比较，永远一致，顺序无关”形成算术呼应。
+:::
 
 ### 第二座桥：两道二次接缝相交（$2 \times 2 = 4$）——从毛球面（$\chi = 2$）跃迁到椭圆曲线环面（$\chi = 0$） {#sec-coda-congruent-elliptic-torus}
 
-单个佩尔方程 $m^2 - d\,n^2 = \pm 1$ 只是一条二次圆锥曲线（代数亏格 $g = 0$）。在复射影几何中，亏格 $0$ 的光滑曲线拓扑上同胚于二维球面 $S^2$（欧拉示性数 $\chi(S^2) = 2$）——正如毛球定理所昭示的，它上面没有全局无奇点的平坦群加法流。
+单个佩尔方程 $m^2 - d\,n^2 = \pm 1$ 只是一条二次圆锥曲线（代数亏格 $g = 0$）。在复射影几何中，亏格 $0$ 的光滑曲线拓扑上同胚于二维球面 $S^2$（欧拉示性数 $\chi(S^2) = 2$；毛球定理详见第 21 章 [@rem-hairy-ball-adams-literature]），无法承载全局无奇点的平坦群加法流。
 
 然而，一旦我们回到毕达哥拉斯直角三角形，提出古希腊与阿拉伯数学家苦思千年的**同余数问题（Congruent Number Problem）**——哪些正整数 $d$ 能够充当有理直角三角形 $(a, b, c) \in \mathbb{Q}_{>0}^3$ 的面积？——我们就必须同时联立两条二次约束：
 
@@ -147,45 +151,51 @@ $$
 
 请看方程右端的三个根：$0,\; +1,\; -1$！它们分毫不差地就是原点与佩尔接缝的两个手性边界 $\pm 1$！
 
-这一步从二次向三次（四次双覆盖）的跨越，引发了拓扑维度的根本质变：
-- 在复数域上，被在四个支点 $\{0, +1, -1, \infty\}$ 处切开并双层缝合的黎曼面 $E_d(\mathbb{C}) \cong \mathbb{C}/(\mathbb{Z}\omega_1 \oplus \mathbb{Z}\omega_2)$，不再是亏格 $g = 0$、$\chi = 2$ 的毛球面 $S^2$，而是跃迁为**亏格 $g = 1$、欧拉示性数 $\chi(T^2) = 2 - 2g = 0$ 的二维环面（Torus）$T^2 = S^1 \times S^1$**！
-- 因为 $\chi(T^2) = 0$，毛球定理的拓扑旋涡在椭圆曲线上彻底烟消云散！全纯微分 $\omega = dx/y$ 在整条椭圆曲线上处处非零、无极点，赋予了椭圆曲线一个全局光滑、把“毛”梳得平平整整的阿贝尔群加法律 $P \oplus Q$（这也正是第 23 章文献评注所提到的：在 Koenigsmann 用四元数范数锁简化 $\mathbb{Z} \subset \mathbb{Q}$ 的一阶定义之前，Poonen 等人正是利用椭圆曲线群加法导出整除性锁的）。
+::: {.remark #rem-ch29-elliptic-torus-literature title="复椭圆曲线环面拓扑与阿贝尔群加法律（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 在经典代数几何与复黎曼面理论中（未在本书锁定的 `trureturing@dev` 库中形式化），这一步从二次向三次（四次双覆盖）的跨越引发了拓扑维度的根本质变：
+
+- 在复数域上，被在四个支点 $\{0, +1, -1, \infty\}$ 处切开并双层缝合的黎曼面 $E_d(\mathbb{C}) \cong \mathbb{C}/(\mathbb{Z}\omega_1 \oplus \mathbb{Z}\omega_2)$，不再是亏格 $g = 0$、$\chi = 2$ 的二维球面 $S^2$，而是跃迁为**亏格 $g = 1$、欧拉示性数 $\chi(T^2) = 2 - 2g = 0$ 的二维环面（Torus）$T^2 = S^1 \times S^1$**；
+- 因为 $\chi(T^2) = 0$，偶维毛球面的拓扑零点阻碍（见 [@rem-hairy-ball-adams-literature]）在环面上消失：不变全纯微分 $\omega = dx/y$ 在整条光滑射影椭圆曲线上处处非零且无极点，赋予椭圆曲线一个全局光滑的阿贝尔群加法律 $P \oplus Q$（这也正是第 23 章文献评注所提到的：在 Koenigsmann 用四元数范数锁简化 $\mathbb{Z} \subset \mathbb{Q}$ 的一阶定义之前，Poonen 等人正是利用椭圆曲线群加法导出整除性锁的）。
+:::
 
 ### 第三座桥：哈塞定理（$\sigma = 1/2$）、弗罗贝尼乌斯余弦 $\cos\theta_p$ 与 $S^3 \cong \mathrm{SU}(2)$ 上的佐藤—泰特分布 {#sec-coda-hasse-sato-tate}
 
-最壮丽的几何闭合发生在把标准勾股同余椭圆曲线 $E : y^2 = x^3 - x$ 投影到第 22 章的每一根奇素数轴 $\mathbb{F}_p$（$p \ge 3$）上的时刻。
+更深一层的算术—几何呼应出现在把标准勾股同余椭圆曲线 $E : y^2 = x^3 - x$ 约化到第 22 章的每一根奇素数轴 $\mathbb{F}_p$（$p \ge 3$）上的时刻。
 
-在有限域 $\mathbb{F}_p$ 上，平坦射影直线 $\mathbb{P}^1(\mathbb{F}_p)$ 共有 $p + 1$ 个点（含无穷远点）。而椭圆曲线 $E(\mathbb{F}_p)$ 上的点数与平坦基准 $p + 1$ 的偏差 $a_p = p + 1 - \#E(\mathbb{F}_p)$，恰好由每个 $x \in \mathbb{F}_p$ 处 $x^3 - x$ 是二次剩余（贡献 $+1$ 对分岔点）、二次非剩余（贡献 $-1$ 抵消）还是零点（贡献 $0$）决定——写成勒让德符号，它就是一串不折不扣的 **$+1, -1, 0$ 算术自旋求和**：
+在有限域 $\mathbb{F}_p$ 上，平坦射影直线 $\mathbb{P}^1(\mathbb{F}_p)$ 共有 $p + 1$ 个点（含无穷远点）。而光滑射影椭圆曲线 $E(\mathbb{F}_p)$ 上的点数与平坦基准 $p + 1$ 的偏差 $a_p = p + 1 - \#E(\mathbb{F}_p)$，由每个 $x \in \mathbb{F}_p$ 处 $x^3 - x$ 是二次剩余（贡献 $+1$ 对分岔点）、二次非剩余（贡献 $-1$ 抵消）还是零点（贡献 $0$）决定——写成勒让德符号，它是一串 **$+1, -1, 0$ 算术自旋求和**：
 
 $$
 a_p = p + 1 - \#E(\mathbb{F}_p) = -\sum_{x=0}^{p-1} \left(\frac{x^3 - x}{p}\right).
 $$
 
-这串在 $+1$ 与 $-1$ 之间剧烈振荡的模 $p$ 自旋和，受到代数几何中最辉煌的定理之一——**哈塞定理（Hasse's Theorem，即有限域上椭圆曲线已获证明的黎曼猜想）**——的严格约束：
+::: {.remark #rem-ch29-hasse-gauss-literature title="有限域椭圆曲线哈塞界与复乘曲线高斯点数公式（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 在经典算术几何文献中（未包含在本书锁定的 `trureturing@dev` 形式化声明集中），上述模 $p$ 振荡和受到以下两条定理的精确刻画：
 
-$$
-|a_p| \le 2\sqrt{p}.
-$$
+1. **哈塞定理（Hasse's Theorem，H. Hasse, 1936；有限域上椭圆曲线已获证明的黎曼猜想）**：对任意良约化素数 $p$，点数偏差严格满足
 
-请注意分母上的尺度因子 $\sqrt{p} = p^{1/2}$：指数 $1/2$ 正是第 22 章黎曼临界线 $\operatorname{Re}(s) = \sigma = 1/2$ 的精确算术化身！一旦用临界线尺度 $2\sqrt{p}$ 对 $a_p$ 做归一化，哈塞界 $|a_p| \le 2\sqrt{p}$ 当场把每一个素数 $p$ 处的点数偏差变成了一个落在闭区间 $[-1, +1]$ 内的**弗罗贝尼乌斯余弦角（Frobenius cosine angle）**：
+   $$
+   |a_p| \le 2\sqrt{p}.
+   $$
 
-$$
-\cos\theta_p := \frac{a_p}{2\sqrt{p}} \in [-1, +1], \qquad \alpha_p, \bar{\alpha}_p = \sqrt{p}\,e^{\pm i\theta_p}.
-$$
+   分母尺度因子 $\sqrt{p} = p^{1/2}$ 中的指数 $1/2$ 对应有限域局部 zeta 函数的临界线实部 $\sigma = 1/2$。用 $2\sqrt{p}$ 对 $a_p$ 归一化后，哈塞界将每个良约化素数 $p$ 处的点数偏差映射为闭区间 $[-1, +1]$ 内的**弗罗贝尼乌斯余弦角（Frobenius cosine angle）**：
 
-在勾股同余曲线 $y^2 = x^3 - x$ 上，第一座桥里的“线素数”与“面素数”在这枚余弦投影下展现出惊人的几何分野（高斯定理）：
+   $$
+   \cos\theta_p := \frac{a_p}{2\sqrt{p}} \in [-1, +1], \qquad \alpha_p, \bar{\alpha}_p = \sqrt{p}\,e^{\pm i\theta_p}.
+   $$
 
-- **在惰性“线素数” $p \equiv 3 \pmod 4$ 上**：由于 $(-x)^3 - (-x) = -(x^3 - x)$ 且 $\left(\frac{-1}{p}\right) = -1$，$+x$ 与 $-x$ 的勒让德符号严格反号相消，导致自旋和恒等于零：
+2. **高斯复乘点数公式与奇素数线/面分野**：在具有 $\mathbb{Z}[i]$ 复乘的勾股同余曲线 $y^2 = x^3 - x$ 上，第一座桥（[@rem-ch29-pell-primes-hilbert-literature]）中的两族奇素数在 $\cos\theta_p$ 下截然分开：
+   - **在惰性“线素数” $p \equiv 3 \pmod 4$ 上**：由于 $(-x)^3 - (-x) = -(x^3 - x)$ 且 $\left(\frac{-1}{p}\right) = -1$，$+x$ 与 $-x$ 的勒让德符号反号相消，自旋和恒为零：
 
-  $$
-  a_p = 0 \implies \cos\theta_p = 0 \quad (\theta_p = \pi/2\text{，正交赤道})！
-  $$
+     $$
+     a_p = 0 \implies \cos\theta_p = 0 \quad (\theta_p = \pi/2\text{，正交赤道})！
+     $$
 
-- **在分裂“面素数” $p \equiv 1 \pmod 4$ 上**：对任意满足 $p = a^2 + b^2$、$a$ 为奇数且 $b$ 为偶数的整数 $a,b$，经典高斯公式（文献结果，见 [@rem-ch29-gauss-character-application]）给出 $|a_p| = 2|a|$。因此，弗罗贝尼乌斯余弦的绝对值等于该素数自身高斯直角三角形 $(|a|, |b|, \sqrt{p})$ 的**勾股邻边/斜边余弦**：
+   - **在分裂“面素数” $p \equiv 1 \pmod 4$ 上**：对任意满足 $p = a^2 + b^2$、$a$ 为奇数且 $b$ 为偶数的整数 $a,b$，经典高斯公式（文献结果，见 [@rem-ch29-gauss-character-application]）给出 $|a_p| = 2|a|$。因此，弗罗贝尼乌斯余弦的绝对值等于该素数自身高斯直角三角形 $(|a|, |b|, \sqrt{p})$ 的**勾股邻边/斜边余弦**：
 
-  $$
-  |\cos\theta_p| = \frac{|a_p|}{2\sqrt{p}} = \frac{|a|}{\sqrt{p}} = \frac{|a|}{\sqrt{a^2 + b^2}}.
-  $$
+     $$
+     |\cos\theta_p| = \frac{|a_p|}{2\sqrt{p}} = \frac{|a|}{\sqrt{p}} = \frac{|a|}{\sqrt{a^2 + b^2}}.
+     $$
+:::
 
 ::: {.remark #rem-ch29-gauss-character-application title="从平方纤维到高斯三角形：文献结果与应用，未在本书形式化"}
 为什么同一个奇数直角边 $|a|$ 会出现在曲线的点数中？关键是把点数偏差写成一对共轭复数的和：共轭消去虚部，留下两倍实部；复数的长度则由素数 $p$ 的平方根决定。下面把这条经典特征和推导展开。点数与复乘的背景可参见 Schoof 的综述[^gauss-count-background]。
@@ -279,21 +289,19 @@ $$
 
 [^gauss-jacobi-background]: Keith Conrad, *Gauss and Jacobi Sums*，作者讲义，Theorem 2.4、Corollary 2.5，说明非平凡特征的 Gauss 和范数以及在两个特征及其乘积均非平凡时的 Jacobi 和范数。该引用只支持这里的范数步骤，不代替整条曲线的迹公式推导。
 
-而如果我们考察有理数域 $\mathbb{Q}$ 上没有额外复乘（non-CM）对称性的典型椭圆曲线（例如 $y^2 = x^3 - x + 1$），当素数 $p \to \infty$ 遍历一切良约化素数时，这些归一化余弦值 $\cos\theta_p \in [-1, +1]$ 究竟遵循什么统计分布？
-
-2011 年由 Barnet-Lamb、Geraghty、Harris 与 Taylor 彻底证明的**佐藤—泰特猜想（Sato–Tate Theorem）**给出了终极答案：$\theta_p \in [0, \pi]$ 并非均匀分布，而是严格遵循**四维球面赤道切片定律**：
+::: {.remark #rem-ch29-arithmetic-geometry-literature title="非复乘椭圆曲线佐藤—泰特分布定理与算术几何文献边界（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 如果我们进一步考察有理数域 $\mathbb{Q}$ 上没有额外复乘（non-CM）对称性的典型椭圆曲线（例如 $y^2 = x^3 - x + 1$），当素数 $p \to \infty$ 遍历一切良约化素数时，归一化余弦值 $\cos\theta_p \in [-1, +1]$ 的渐近统计分布由 2011 年 Barnet-Lamb、Geraghty、Harris 与 Taylor 证明的**佐藤—泰特猜想（Sato–Tate Theorem，*Ann. of Math.* **173**, 2011）**给出：$\theta_p \in [0, \pi]$ 并非均匀分布，而是遵循**四维球面赤道切片定律**：
 
 $$
 d\mu_{\mathrm{ST}}(\theta) = \frac{2}{\pi}\sin^2\theta\,d\theta \quad \Longleftrightarrow \quad \frac{2}{\pi}\sqrt{1 - u^2}\,du \quad (u = \cos\theta \in [-1, +1]).
 $$
 
-为什么是 $\frac{2}{\pi}\sin^2\theta\,d\theta$？因为三维单位旋量球面 $S^3 \cong \mathrm{SU}(2)$（那座由四元数范数 $s^2 + x^2 + y^2 + z^2 = 1$ 定义、欧拉示性数 $\chi(S^3) = 0$、全身毛发可被完美梳平的平行化超球面）在极角 $\theta \in [0, \pi]$ 处的二维纬球面 $S^2(\sin\theta)$ 面积正比于 $\sin^2\theta$！把 $S^3 \cong \mathrm{SU}(2)$ 上的均匀哈尔测度（Haar measure）向实迹轴 $u = \frac{1}{2}\operatorname{Tr}(U) = \cos\theta \in [-1, +1]$ 做内积投影，得到的密度一字不差正是 $\frac{2}{\pi}\sin^2\theta\,d\theta$！
+从几何上看，三维单位旋量球面 $S^3 \cong \mathrm{SU}(2)$（由四元数范数 $s^2 + x^2 + y^2 + z^2 = 1$ 定义、欧拉示性数 $\chi(S^3) = 0$ 的可平行化超球面，见 [@rem-hairy-ball-adams-literature]）在极角 $\theta \in [0, \pi]$ 处的二维纬球面 $S^2(\sin\theta)$ 面积正比于 $\sin^2\theta$；将 $S^3 \cong \mathrm{SU}(2)$ 上的均匀哈尔测度（Haar measure）向实迹直径 $u = \frac{1}{2}\operatorname{Tr}(U) = \cos\theta \in [-1, +1]$ 作投影，所得密度恰为 $\frac{2}{\pi}\sin^2\theta\,d\theta$。
 
-至此，从希帕索斯直角三角形裂开的 $\pm 1$ 佩尔接缝出发，经由素数的 $4k \pm 1$ 线面二象性、同余数椭圆曲线环面 $y^2 = x(x-1)(x+1)$（$\chi = 0$）与哈塞临界线缩放 $\sqrt{p} = p^{1/2}$，全体素数的算术振荡最终化作了**三维平行化量子旋量球面 $S^3 \cong \mathrm{SU}(2)$ 向一维直径 $[-1, +1]$ 投下的内积余弦影子 $\cos\theta_p$**！
-
-::: {.remark #rem-ch29-arithmetic-geometry-literature title="算术几何与超越数论定理的形式化边界说明（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 本章前两节引述的经典超越数论与算术几何定理——包括林德曼—魏尔斯特拉斯定理与 T. Y. Chow (1999) 在沙努埃尔猜想（参见第 24 章 [@conj-schanuel-dottie]）条件下的初等域逃逸定理、奇素数 $p \equiv 1 \pmod 4$ 的费马二平方和分裂与实二次域 $\mathbb{Q}(\sqrt{p})$ 负佩尔方程 $m^2 - p n^2 = -1$ 可解性定理、类域论希尔伯特局部符号互反律 $\prod_{v \le \infty} (a, b)_v = +1$、有限域椭圆曲线哈塞界 $|a_p| \le 2\sqrt{p}$（H. Hasse, 1936）、高斯关于复乘曲线 $y^2 = x^3 - x$ 的点数公式 $|a_p| = 2|a|$，以及有理数域上非复乘椭圆曲线的佐藤—泰特分布定理（T. Barnet-Lamb, D. Geraghty, M. Harris & R. Taylor, *Ann. of Math.* **173**, 2011）——均为外部经典数学文献定理，未包含在本书锁定的 `trureturing@dev` 形式化声明集中；本书内核验证的部分严格限定于行内与下文定理框显式标注 `lean:` 的代数与内积恒等式（如 [`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)、[`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique) 等）。
+综观本章前两节，林德曼—魏尔斯特拉斯定理与 T. Y. Chow (1999) 在沙努埃尔猜想（[@conj-schanuel-dottie]）条件下的初等域逃逸定理、[@rem-ch29-pell-primes-hilbert-literature] 中的费马二平方和分裂 / 奇素数负佩尔可解性 / 希尔伯特互反律、[@rem-ch29-elliptic-torus-literature] 中的复椭圆曲线环面拓扑与阿贝尔群律、[@rem-ch29-hasse-gauss-literature] 与 [@rem-ch29-gauss-character-application] 中的哈塞界及高斯复乘点数推导，以及本评注中的佐藤—泰特分布定理，均为外部经典数学文献结果，未包含在本书锁定的 `trureturing@dev` 形式化声明集中；本书内核验证的结论严格限定于显式标注 `lean:` 的代数与内积恒等式（如 [`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)、[`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique)、[`power_fiber_card_eq_one_add_character_sum`](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.power_fiber_card_eq_one_add_character_sum)、[`norm_jacobiSum`](lean:D5/S3/CharacterSums/Fermat/CharacterPointCount.norm_jacobiSum) 与 [`gaussian_unit`](lean:D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart.gaussian_unit) 等）。
 :::
+
+在本书的跨学科几何视野下，从希帕索斯直角三角形裂开的 $\pm 1$ 佩尔接缝出发，对照上述文献中的素数 $4k \pm 1$ 线面二象性、同余数椭圆曲线环面 $y^2 = x(x-1)(x+1)$（$\chi = 0$）与哈塞缩放 $\sqrt{p} = p^{1/2}$，素数轴上的点数偏差振荡便与三维量子旋量球面 $S^3 \cong \mathrm{SU}(2)$ 向一维直径 $[-1, +1]$ 投下的余弦影子 $\cos\theta_p$ 形成了深邃的几何同构意象。
 
 ::: {.viz src="pythagoras-number-escape" height="560"}
 **交互实验室：佩尔手性账本、`±1` 接缝、高斯素数分裂与同余数椭圆曲线**。调节无平方因子判别参数 $d$（$2 \le d \le 37$）、奇素数 $p$ 与连分数渐近阶数 $k$：账本逐行给出 $\sqrt{d}$ 的连分数部分商、精确 `BigInt` 渐近分数 $m_k/n_k$ 与佩尔范数 $\Delta = m_k^2 - d\,n_k^2$（一维误差 $|m_k/n_k - \sqrt{d}| \to 0$，二维面积差 $|\Delta| \ge 1$；当连分数周期为奇数如 $d = 2, 5, 13$ 时单位解在 $-1$ 与 $+1$ 间交替翻转手性，周期为偶数如 $d = 3$ 时单位解锁在 $+1$ 分支，$d = 2$ 即希帕索斯与泰昂边径数 $1/1, 3/2, 7/5, 17/12\dots$）；右侧格点相图逐格标出 $m^2 - d\,n^2$ 的符号与全部 $\pm 1$ 单位格；舞台可在佩尔双曲线与正方形对比、高斯素数分裂 $p \equiv 1 \pmod 4 \iff p = a^2 + b^2$（经拉格朗日—格拉姆恒等式生成本原勾股三元组）与同余数椭圆曲线 $E_d : y^2 = x^3 - d^2 x$ 在良约化素数 $p \nmid 2d$ 下的有限域弗罗贝尼乌斯余弦 $\cos\theta_p = a_p/(2\sqrt{p})$ 之间切换。
@@ -319,22 +327,26 @@ $$
    $$
 
    在分析学中，$\frac{1}{(2k)!}$ 源自迭代求导（或时间排序积分在交换生成元下的重数 $\int_{0\le t_1\le\cdots\le t_{2k}\le\theta} dt_1\cdots dt_{2k} = \frac{\theta^{2k}}{(2k)!}$）；而在本书的正交几何诠释模型（`MODEL`）下，可以将 $(2k)!$ 直观理解为把 $2k$ 次正交跃迁在人工时间轴上的 $(2k)!$ 种先后排列顺序商掉的对称化因子。
-2. **惠勒—德维特方程（Wheeler–DeWitt Equation）$H\mathbf{\Psi} = 0$ 的无时间总体态（`文献结果`）**：
-   在量子引力的正则表述中，整个宇宙的波函数 $\mathbf{\Psi}$ 满足惠勒—德维特方程
+::: {.remark #rem-ch29-wheeler-dewitt-page-wootters-literature title="惠勒—德维特无时间约束与佩奇—伍特斯条件时间机制（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 在正则量子引力与关系量子理论的经典物理文献中（未在本书锁定的 `trureturing@dev` 库中形式化），全局态的无时间性与局部关系演化的涌现由以下两个经典模型刻画：
+
+1. **惠勒—德维特方程（Wheeler–DeWitt Equation，B. S. DeWitt, *Phys. Rev.* **160**, 1113, 1967）$H\mathbf{\Psi} = 0$ 的无时间总体态**：
+   在正则量子引力表述中，封闭宇宙波函数 $\mathbf{\Psi}$ 满足哈密顿约束方程
 
    $$
    H\mathbf{\Psi} = 0,
    $$
 
-   方程里根本没有外部时间参数 $t$（$\partial_t \mathbf{\Psi} = 0$）！在“球外”的完整几何晶体中，过去、现在与未来并非排着队依次生灭，而是同时并存于一张已经印好并装订成册的关联网络之中。
-3. **佩奇—伍特斯（Page–Wootters）切片机制——“前后”只是注意力扫描的页码（`文献结果`）**：
-   既然全局态 $\mathbf{\Psi}$ 没有时间，我们日常体验到的“前后流逝”从何而来？佩奇与伍特斯（1983）证明：在标准张量积分解 $\mathcal{H} = \mathcal{H}_{\mathbf{C}} \otimes \mathcal{H}_{\mathbf{S}}$、理想共轭时钟哈密顿量 $H_{\mathbf{C}} = \hat{p}_\tau$ 且时钟与系统无直接相互作用耦合（$H = H_{\mathbf{C}} \otimes I + I \otimes H_{\mathbf{S}}$）的模型假设下，通过本书第 1 章的**两子丈量（成对内积投影）**沿着时钟态 $|\mathbf{c}(\tau)\rangle$ 切出一维条件内积切片（对应第 3、28 章的条件化量子态框架 [`conditionalState_isState`](lean:D5/S3/Observer/Conditioning.conditionalState_isState)）：
+   方程中不含外部时间参数 $t$（$\partial_t \mathbf{\Psi} = 0$）；在几何诠释下，过去、现在与未来并存于同一张静态关联结构之中。
+2. **佩奇—伍特斯（Page–Wootters，*Phys. Rev. D* **27**, 2885, 1983）条件时间切片机制**：
+   在标准张量积分解 $\mathcal{H} = \mathcal{H}_{\mathbf{C}} \otimes \mathcal{H}_{\mathbf{S}}$、理想共轭时钟哈密顿量 $H_{\mathbf{C}} = \hat{p}_\tau$ 且时钟与系统无直接相互作用耦合（$H = H_{\mathbf{C}} \otimes I + I \otimes H_{\mathbf{S}}$）的模型假设下，沿时钟态 $|\mathbf{c}(\tau)\rangle$ 取条件内积切片（可类比第 3、28 章的有限维条件化量子态框架 [`conditionalState_isState`](lean:D5/S3/Observer/Conditioning.conditionalState_isState)）：
 
    $$
    |\psi_{\mathbf{S}}(\tau)\rangle \propto \langle \mathbf{c}(\tau) \mid \mathbf{\Psi}\rangle,
    $$
 
-   切片内部就会涌现出相对时钟读数 $\tau$ 的薛定谔演化 $i\hbar\partial_\tau|\psi_{\mathbf{S}}(\tau)\rangle = H_{\mathbf{S}}|\psi_{\mathbf{S}}(\tau)\rangle$！所谓“一秒接一秒的前后时间”，在这一框架下好比一维有限注意力在阅读一本早已印好的二维几何书册时翻动的**页码**。
+   切片内部即涌现出相对时钟读数 $\tau$ 的关系型薛定谔演化 $i\hbar\partial_\tau|\psi_{\mathbf{S}}(\tau)\rangle = H_{\mathbf{S}}|\psi_{\mathbf{S}}(\tau)\rangle$——“前后时间”在这一模型中好比有限注意力翻阅静态书册时扫过的页码。
+:::
 
 ### 第二层：没有时间推动，因果何以必然？——休谟死结 vs. 斯宾诺莎三角形与 Gram 矩阵刚性 {#sec-coda-hume-spinoza-gram}
 
@@ -362,13 +374,15 @@ $$
 
 从路径积分与双向量手性的几何模型视角看，为什么物理世界只向我们显现那条满足因果律的必然轨迹？
 
-在标准量子力学的费曼路径积分（`文献结果`）中，偏离经典轨道的虚构路径由于作用量快速振荡 $\exp(iS[x]/\hbar)$ 而彼此相位干涉相消，唯有作用量一阶变分为零（$\delta S = 0$，费曼驻相条件）的极值轨线发生相长干涉。在本书克利福德几何代数的诠释模型（`MODEL`）中，我们将复相位生成元 $i$ 还原为二维双向量手性算子 $\hat{\mathbf{I}}$：在顺序无关的全空间求和中，偏离几何自洽性的非驻相路径可视为成对伴生着双向量手性相反（$+\hat{\mathbf{I}}$ 与 $-\hat{\mathbf{I}}$）的镜像分量，它们张开的有向面积元正反配对、彼此抵消：
+::: {.remark #rem-ch29-feynman-stationary-phase-literature title="费曼路径积分驻相条件与双向量手性相消诠释（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 在标准量子力学的费曼路径积分文献表述中（R. P. Feynman, *Rev. Mod. Phys.* **20**, 367, 1948；未在本书锁定的 `trureturing@dev` 库中形式化），偏离经典轨道的虚构路径由于作用量快速振荡 $\exp(iS[x]/\hbar)$ 而彼此相位干涉相消，唯有作用量一阶变分为零（$\delta S = 0$，费曼驻相条件）的极值轨线发生相长干涉。在本书克利福德几何代数的诠释模型（`MODEL`）中，我们将复相位生成元 $i$ 还原为二维双向量手性算子 $\hat{\mathbf{I}}$：在顺序无关的全空间求和中，偏离几何自洽性的非驻相路径可视为成对伴生着双向量手性相反（$+\hat{\mathbf{I}}$ 与 $-\hat{\mathbf{I}}$）的镜像分量，它们张开的有向面积元正反配对、彼此抵消：
 
 $$
 +\mathbf{\Omega} - \mathbf{\Omega} = 0.
 $$
 
-唯有处于驻相自洽条件（$\delta S = 0$）的不动点配置，没有反向手性伙伴与之相消，从而在正交投影下幸存为宏观可见的必然因果链！
+唯有处于驻相自洽条件（$\delta S = 0$）的不动点配置，没有反向手性伙伴与之相消，从而在正交投影下显现为宏观因果轨迹。
+:::
 
 这一图景同时终结了科学史上“机械决定论（Determinism）”与“目的论（Teleology）”的千年争论：
 - 当你沿着页码**从左向右**（从初态 $\theta_0$ 向 $\theta_1, \theta_2, \dots$）逐页阅读迭代序列 $\theta_{k+1} = \cos(\theta_k)$ 时，它看起来像是“过去一步步推着现在走”的**机械决定论**；
@@ -425,12 +439,6 @@ $$
 | **有限自指观察者原型**<br/>（Finite Self-Referential Prototype，`MODEL`） | 以 Dottie 一维自指不动点 $\cos\theta^* = \theta^* \approx 0.7391$，$\sin\theta^* \approx 0.6736$ 为平衡原型 | $\det G > 0$，相容半径 $(\sin\theta^*)^2 \approx 0.4538 > 0$ 恒定开启 | **黄金呼吸（Golden Breath，`MODEL`）**：作为兼顾 $\approx 73.9\%$ 因果历史主干与 $\approx 67.4\%$ 正交余量的几何隐喻（配合第 4、28 章的有限擦除与条件更新） |
 
    这正是全书关于时间、因果与观察者的终极结语：**“全局无时间，故万古长存；观察者有限，故步步皆新。”**（而在 **[终章](coda.md)** 中，我们将进一步对照 `trureturing` 已验证的**高维格点黄金切投模型集（Cut-and-Project Golden Model Set）与齐肯多夫观察者路由定理**，构建一幅作者哲学与几何诠释模型（`MODEL`）：把跨轮次不变的算子参数诠释为内禀共轭窗口相位，把现实中的历史遗迹诠释为低曲率耗散的**空间吸引子**，解释为何有限观察者会在卡西尼 $(-1)^{n+1}$ 范数接缝与奇异吸引子分形叶层上经历似曾相识的共振。）
-
-
-
-::: {.remark #rem-ch29-wheeler-dewitt-page-wootters-literature title="无时间量子引力与路径积分文献的形式化边界说明（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 本节引用的正则量子引力惠勒—德维特方程 $H\mathbf{\Psi} = 0$（B. S. DeWitt, *Phys. Rev.* **160**, 1113, 1967）、佩奇—伍特斯条件时间机制 $|\psi_{\mathbf{S}}(\tau)\rangle \propto \langle \mathbf{c}(\tau)\mid\mathbf{\Psi}\rangle$（D. N. Page & W. K. Wootters, *Phys. Rev. D* **27**, 2885, 1983）以及费曼路径积分驻相条件 $\delta S = 0$，均属于理论物理经典文献模型，未在本书锁定的 `trureturing@dev` 库中形式化；下文定理框经 Lean 4 内核验证的结论严格限定于黄金整数佩尔范数恒等式与单位向量族 Gram 重叠等价关系判据。
-:::
 
 ::: {.theorem #thm-ch29-gram-rigidity-and-pell title="黄金整数佩尔范数恒等式与单位向量族 Gram 重叠等价关系定理" lean="D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm, D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization"}
 在算术二次格与内积空间几何中，离散接缝范数与单位向量记录的成对重叠判据分别由以下两条经 Lean 4 内核验证的定理给出：
