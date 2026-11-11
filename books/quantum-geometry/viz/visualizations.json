@@ -818,6 +818,66 @@
           "gid": "D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.reduced_irreversibility_is_canonical_record_access_defect"
         }
       ]
+    },
+    {
+      "id": "speed-limit-zeno",
+      "code": "SPEED//ZENO",
+      "title": "速度极限与芝诺频闪",
+      "title_en": "Speed limits and the Zeno strobe",
+      "summary": "三个场景共用一条时间轴。速度极限：左边把重叠 ⟨ψ(0), ψ(t)⟩ 画成每个能级一支首尾相接的箭头，圆心就是 90° 的墙；右边画夹角随时间的曲线、速度线 ΔH·t 与墙。二能级等权叠加贴着速度线在 t = π 撞墙，三能级等权叠加弯着走、到 2.094 才撞墙，不等权叠加最多转到 2α。芝诺频闪：布洛赫球上的箭头每转 180°/N 就被拉回 |0⟩，全程留存 [cos²(π/2N)]^N 随 N 增大。首次返回：每一步问一次“回来了吗”，每根账目柱的已返回加未返回恰好是 1，平均返回时间对任何步长都是 2。六张实验卡各讲一件事，可以在第七章正文里单独引用。",
+      "summary_en": "Three scenes on one rail. Speed limit: on the left the overlap ⟨ψ(0), ψ(t)⟩ is drawn as one arrow per level, head to tail, and the centre is the 90° wall; on the right the angle rises against time below the speed line ΔH·t towards the wall. Two even levels run along the speed line into the wall at t = π, three even levels bend and reach it only at 2.094, and uneven weights turn at most 2α. Zeno strobe: on the Bloch sphere the arrow is pulled back to |0⟩ after every 180°/N, and the survival [cos²(π/2N)]^N grows with N. First return: ask “back yet?” after every step; returned plus not yet is exactly 1 on every column of the ledger, and the mean return time is 2 whatever the step. Each of the six experiment cards makes one of these points and can be cited on its own from Chapter 7.",
+      "path": "speed-limit-zeno/",
+      "thumbnail": "speed-limit-zeno/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "量子速度极限",
+        "富比尼—施图迪夹角",
+        "量子芝诺效应",
+        "首次返回",
+        "布洛赫球",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Quantum speed limit",
+        "Fubini–Study angle",
+        "Quantum Zeno effect",
+        "First return",
+        "Bloch sphere",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第七章 §7.2 · 量子速度极限",
+          "label_en": "Chapter 7 §7.2 · Quantum speed limits",
+          "href": "../zh/ch07-geometric-time-and-speed-limits.html#sec-quantum-speed-limit",
+          "href_en": "../en/ch07-geometric-time-and-speed-limits.html#sec-quantum-speed-limit"
+        },
+        {
+          "label": "第七章 §7.3 · 量子芝诺效应与首次返回",
+          "label_en": "Chapter 7 §7.3 · The quantum Zeno effect and first returns",
+          "href": "../zh/ch07-geometric-time-and-speed-limits.html#sec-quantum-zeno-effect",
+          "href_en": "../en/ch07-geometric-time-and-speed-limits.html#sec-quantum-zeno-effect"
+        },
+        {
+          "label": "Blueprint · QuantumBounds/FubiniStudyRecordTime",
+          "label_en": "Blueprint · QuantumBounds/FubiniStudyRecordTime",
+          "href": "{trureturing}/D5/S3/QuantumBounds/FubiniStudyRecordTime.lean"
+        },
+        {
+          "label": "Blueprint · ProjectionDiagnostics/MonitoredReturnConservation",
+          "label_en": "Blueprint · ProjectionDiagnostics/MonitoredReturnConservation",
+          "href": "{trureturing}/D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitored_return_conservation"
+        }
+      ]
     }
   ]
 }

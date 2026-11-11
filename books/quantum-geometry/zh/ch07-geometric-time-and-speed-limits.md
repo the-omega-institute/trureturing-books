@@ -138,6 +138,10 @@ $$
 
 定理里的 $\mathrm{energy}$ 是一个抽象的速度参数。把它换成具体哈密顿量的能量涨落，就可以看到这条界什么时候取等、什么时候不取等，以及一个真实的量子比特翻一次墙要多久。
 
+::: {.viz src="speed-limit-zeno" preset="equal" height="500"}
+**二能级等权叠加：夹角贴着速度线撞墙。** 左边两支青色箭头各长一半，转到首尾相对时和为零，琥珀色的点落进品红的圆心；右边青色的夹角曲线一路贴着虚线速度线 $\Delta H\,t/\hbar$，在 $t = \pi\hbar/E$ 撞上品红的 $90^\circ$ 墙。半途的点把它分成 $45^\circ + 45^\circ$ 两段，正是 [@thm-fubini-study-record-time] 取等的情形（[@ex-orthogonalization-times]）。
+:::
+
 ::: {.example #ex-orthogonalization-times title="把速度极限算到底：二能级取等，三能级不取等，不等权叠加永远到不了墙"}
 本例对具体哈密顿量直接计算。用到的两条一般界——Mandelstam–Tamm 界 $\tau_\perp \ge \frac{\pi\hbar}{2\,\Delta H}$ 与 Margolus–Levitin 界 $\tau_\perp \ge \frac{\pi\hbar}{2\langle H\rangle}$——是文献结果，未在本书形式化（见 [@rem-qsl-zeno-literature]）；其中 $\Delta H$ 是能量标准差，$\langle H\rangle$ 是从基态能量算起的平均能量。
 
@@ -201,6 +205,14 @@ $$
 按 [@thm-fubini-study-record-time] 的计数上界，取 $\mathrm{energy} = \Delta H = \frac{hf}{2}$，在 $T = 25\,\mathrm{ns}$ 内 $N \le \frac{4\cdot\mathrm{energy}\cdot T}{\pi\hbar} = 4fT = 500$。受驱时情形不同：[第十一章](ch11-pulses-and-virtual-z.md) [@ex-five-ghz-pi-over-two] 在旋转参考系里消去了载频，有效哈密顿量的能量尺度是拉比频率 $\Omega = 2\pi \times 10\,\mathrm{MHz}$，对初态 $\lvert 0\rangle$ 有 $\Delta H = \frac{\hbar\Omega}{2}$，正交时间 $\tau_\perp = \frac{\pi}{\Omega} = 50\,\mathrm{ns}$，正好是那里 $25\,\mathrm{ns}$ 四分之一转的两倍。同一个量子比特，换一个参考系，时钟的快慢差了五百倍：决定“滴答”间隔的是所选参考系里的能量涨落，而不是能级差本身。
 :::
 
+::: {.viz src="speed-limit-zeno" preset="three" height="500"}
+**三能级等权叠加：弯着走，晚到。** 左边三支青色箭头在 $t = \frac{2\pi}{3}$ 围成三角形，琥珀色的点回到品红的圆心；右边青色曲线弯到虚线速度线下面，速度线在 MT $1.924$ 已到墙，曲线到 $\tau_\perp = 2.094$ 才碰到品红的墙，ML 刻度在 $1.571$。两条界是文献结果，未在本书形式化。
+:::
+
+::: {.viz src="speed-limit-zeno" preset="unequal" height="500"}
+**不等权叠加：到不了墙。** 权重角 $\alpha = 30^\circ$：左边长 $0.75$、短 $0.25$ 的两支青色箭头怎么转也抵消不完，琥珀色的点离品红的圆心最近 $0.5 = \lvert\cos 2\alpha\rvert$；右边夹角最多升到 $2\alpha = 60^\circ$，碰不到品红的墙。
+:::
+
 ## 7.3 量子芝诺效应：被高频“内积丈量”强行冻结的“外积面积演化” {#sec-quantum-zeno-effect}
 
 反过来问：如果量子态正准备沿着二维平面扫出外积面积 $\vv{A}\wedge\vv{B} = \sin(\omega t/2)\,\vv{I}$，但观察者却像一个焦躁不安的监工，还没等它转满 $90^\circ$ 正交角，就每隔极短的时间 $\delta t = T / N$ 频频掏出初始基准轴 $\vv{A}$ 的幂等投影尺 $P_{\vv{A}}^2 = P_{\vv{A}}$ 对它做一次“内积丈量”，会发生什么？
@@ -208,6 +220,10 @@ $$
 答案就是量子力学中大名鼎鼎的**量子芝诺效应（Quantum Zeno Effect）**——俗称“被盯着的开水永远烧不开”！
 
 用我们的线面几何来看，芝诺效应的机制连半点玄机都没有：**因为在极短时间 $\delta t = T/N \ll 1$ 内，刚体旋转扫过的外积面积高度是弧长的一阶小量 $\sin(\omega\delta t/2) \approx \frac{\omega T}{2N}$，而投影回初始基准线 $\vv{A}$ 时损失的余弦长度却是二阶小量 $1 - \cos^2(\omega\delta t/2) = \sin^2(\omega\delta t/2) \approx \frac{\omega^2 T^2}{4N^2}$！** 当你用高频内积投影一次次把那丁点刚冒头的一阶外积面积强行拍扁回一维基准线上时，$N$ 次二阶小量加起来只有 $N \times O(N^{-2}) = O(N^{-1}) \to 0$，整个量子演化就被你密不透风的视线硬生生钉死在了原地！
+
+::: {.viz src="speed-limit-zeno" preset="strobe16" height="500"}
+**频闪 16 次：几乎走不掉。** 箭头每转 $11.25^\circ$ 就被拉回 $\lvert 0\rangle$：品红的一份（离开线的一阶小量）刚露头就被削掉，青色的影子几乎不短。右边青色的留存几乎铺满，到 $180^\circ$ 还剩 $0.857$；虚线是不看时的路。
+:::
 
 ::: {.example #ex-zeno-strobe-freezing title="量子芝诺频闪观测的解析公式与四档频闪（N = 1, 4, 16, 64）数值验算"}
 设单量子比特从北极初态 $\lvert 0\rangle$ 出发，在哈密顿量 $H = \frac{\hbar\omega}{2}\sigma_x$ 驱动下绕 $X$ 轴以角速度 $\omega$ 匀速旋转。若在总时长 $T = \pi / \omega$（本应恰好翻转 $180^\circ$ 抵达正交南极态 $\lvert 1\rangle$）内，观察者等间隔地插入 $N$ 次沿初始基 $\lvert 0\rangle\langle 0\rvert$ 的投影测量（步长 $\delta t = \frac{T}{N} = \frac{\pi}{\omega N}$）：
@@ -229,6 +245,10 @@ $$
 | **$N = 4$** | $45^\circ$ | $0.8536$ | **$0.5308$（$53.1\%$）** | $0.3831$ | 过半概率被半途拉回北极 $\lvert 0\rangle$ |
 | **$N = 16$** | $11.25^\circ$ | $0.9904$ | **$0.8569$（$85.7\%$）** | $0.8458$ | 外积面积刚露头即被削平，八成以上被冻结 |
 | **$N = 64$** | $2.8125^\circ$ | $0.9994$ | **$0.9622$（$96.2\%$）** | $0.9614$ | 高频内积投影将量子旋转强行锁死在北极线 |
+:::
+
+::: {.viz src="speed-limit-zeno" preset="strobe4" height="500"}
+**频闪 4 次：一半留下。** 箭头每转 $45^\circ$ 被拉回一次，青色的弧是每段走到的地方；右边留下的概率每次测量降一截，到 $180^\circ$ 还剩 $0.531$，而虚线（不看）到 $180^\circ$ 全部走掉。环形标记是 $N = 1, 16, 64$ 的终点（[@ex-zeno-strobe-freezing]）。
 :::
 
 [@ex-zeno-strobe-freezing] 只追踪了一条分支：每次探测都回答“还在 $\lvert 0\rangle$”的那一条。同一台频闪探测器还可以记另一本账。从初态 $v$ 出发，每做一步幺正演化 $U$ 就问一次“回到 $v$ 了吗”：回答“是”就停表；回答“否”，状态被投到 $v$ 的正交补上，继续下一步。于是有两列数：恰在第 $n$ 步首次返回的概率，和前 $n$ 步都没有返回的概率。这本账有一条冻结的 Lean 定理，对任意幺正演化都成立。
@@ -305,7 +325,15 @@ $\delta = \frac{\pi}{4}$ 一行的 $p_1 = 0.853553$ 就是 [@ex-zeno-strobe-free
 **一般情形（文献结果，未在本书形式化）。** Grünbaum、Velázquez、Werner 与 Werner（Commun. Math. Phys. **320**, 543, 2013）证明：对有限维情形，只要返回是必然的，平均首次探测返回时间就取整数值，等于初态在 $U$ 的本征子空间上有非零分量的不同本征值的个数。本例中这个数是 $2$。对 $3$ 维与 $4$ 维的随机幺正所作的数值模拟给出均值 $3.000000$ 与 $4.000000$。
 :::
 
+::: {.viz src="speed-limit-zeno" preset="mean" height="500"}
+**首次返回：平均恒为 2 步。** $\delta = 45^\circ$，每根柱子是又走一步之后的账目：青色是已经返回的概率，品红是还没回来的概率，每一根都恰好到 $1$ 这条线（[@prop-monitored-return-conservation]）。品红的总面积就是平均返回时间，随着步数从 $1$ 涨向 $2$（[@ex-first-return-qubit]）。
+:::
+
 芝诺效应说，看得够勤，状态就走不掉。首次返回的账目补上了另一半：看得再勤，平均两步回来一次这件事也不会变，因为它数的不是时间，而是这只比特一共有几个方向可去。
+
+::: {.viz src="speed-limit-zeno" height="560"}
+**速度极限与芝诺频闪：完整实验室。** 三个场景共用一条时间轴：重叠与夹角（换能级个数与权重）、布洛赫球上的频闪（换 $N$）、首次返回的账目（换步长 $\delta$）。
+:::
 
 ## 7.4 观察者注意力与标量自由能记账判据：何时读出粒子节拍，何时计入热力学代价？ {#sec-observer-attention-freeze}
 

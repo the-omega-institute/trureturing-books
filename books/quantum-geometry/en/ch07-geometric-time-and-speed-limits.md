@@ -138,6 +138,10 @@ Since $\mathrm{energy} > 0$ and $\hbar > 0$, multiplying both sides by $\frac{\h
 
 The $\mathrm{energy}$ of the theorem is an abstract speed parameter. Replacing it by the energy fluctuation of a concrete Hamiltonian shows when the bound is attained, when it is not, and how long a real qubit takes to cross the wall once.
 
+::: {.viz src="speed-limit-zeno" preset="equal" height="500"}
+**Two even levels: the angle runs along the speed line into the wall.** On the left two cyan arrows of length one half; when they point opposite ways their sum vanishes and the amber dot falls into the magenta centre. On the right the cyan angle curve runs along the dashed speed line $\Delta H\,t/\hbar$ all the way and meets the magenta $90^\circ$ wall at $t = \pi\hbar/E$. The half-way point splits it into $45^\circ + 45^\circ$, exactly the case in which [@thm-fubini-study-record-time] holds with equality ([@ex-orthogonalization-times]).
+:::
+
 ::: {.example #ex-orthogonalization-times title="Working the Speed Limit Out: Attained for Two Levels, Not for Three, and Never Reached by an Unequal Superposition"}
 This example computes directly with concrete Hamiltonians. Each of the two general bounds it uses — the Mandelstam–Tamm bound $\tau_\perp \ge \frac{\pi\hbar}{2\,\Delta H}$ and the Margolus–Levitin bound $\tau_\perp \ge \frac{\pi\hbar}{2\langle H\rangle}$ — is a **literature result, not formalized in this book** (see [@rem-qsl-zeno-literature]); here $\Delta H$ is the standard deviation of the energy and $\langle H\rangle$ the mean energy above the ground level.
 
@@ -201,6 +205,14 @@ $$
 By the counting bound of [@thm-fubini-study-record-time] with $\mathrm{energy} = \Delta H = \frac{hf}{2}$, within $T = 25\,\mathrm{ns}$ one has $N \le \frac{4\cdot\mathrm{energy}\cdot T}{\pi\hbar} = 4fT = 500$. Under drive the situation differs: [@ex-five-ghz-pi-over-two] of [Chapter 11](ch11-pulses-and-virtual-z.md) removes the carrier in the rotating frame, the energy scale of the effective Hamiltonian is the Rabi frequency $\Omega = 2\pi \times 10\,\mathrm{MHz}$, the initial state $\lvert 0\rangle$ has $\Delta H = \frac{\hbar\Omega}{2}$, and the orthogonalization time is $\tau_\perp = \frac{\pi}{\Omega} = 50\,\mathrm{ns}$, exactly twice the $25\,\mathrm{ns}$ quarter turn computed there. One and the same qubit, viewed in another frame, has a clock five hundred times slower: the spacing of the "ticks" is set by the energy fluctuation in the chosen frame, not by the level splitting itself.
 :::
 
+::: {.viz src="speed-limit-zeno" preset="three" height="500"}
+**Three even levels: a bent path and a late arrival.** On the left three cyan arrows close into a triangle at $t = \frac{2\pi}{3}$ and the amber dot returns to the magenta centre. On the right the cyan curve bends below the dashed speed line: the speed line reaches the wall at MT $1.924$, the curve touches the magenta wall only at $\tau_\perp = 2.094$, and the ML mark sits at $1.571$. Both bounds are literature results, not formalized in this book.
+:::
+
+::: {.viz src="speed-limit-zeno" preset="unequal" height="500"}
+**Uneven weights: the wall is out of reach.** Weight angle $\alpha = 30^\circ$: on the left a long cyan arrow of $0.75$ and a short one of $0.25$ never cancel, and the amber dot comes no closer to the magenta centre than $0.5 = \lvert\cos 2\alpha\rvert$. On the right the angle rises to $2\alpha = 60^\circ$ at most and never touches the magenta wall.
+:::
+
 ## 7.3 The Quantum Zeno Effect: Exterior-Area Evolution Frozen by High-Frequency Inner-Product Measurements {#sec-quantum-zeno-effect}
 
 Now ask the converse question: what happens if a state begins sweeping out exterior area $\vv{A}\wedge\vv{B} = \sin(\omega t/2)\,\vv{I}$ in a plane, but an impatient observer refuses to wait for it to reach $90^\circ$ — repeatedly projecting the state back onto the initial axis $\vv{A}$ via $P_{\vv{A}}^2 = P_{\vv{A}}$ at tiny intervals $\delta t = T / N$?
@@ -208,6 +220,10 @@ Now ask the converse question: what happens if a state begins sweeping out exter
 The result is the celebrated **Quantum Zeno Effect** — a watched pot never boils!
 
 In our line-and-area geometry, the mechanism is completely elementary: **over a tiny step $\delta t = T/N \ll 1$, the exterior wedge altitude grows at first order as $\sin(\omega\delta t/2) \approx \frac{\omega T}{2N}$, whereas the inner-product survival probability along the initial line $\vv{A}$ drops only at second order as $\cos^2(\omega\delta t/2) = 1 - \sin^2(\omega\delta t/2) \approx 1 - \frac{\omega^2 T^2}{4N^2}$!** When high-frequency inner-product projections repeatedly flatten the incipient first-order wedge area back onto the reference line, $N$ second-order losses accumulate to only $N \times O(N^{-2}) = O(N^{-1}) \to 0$, freezing the state in place!
+
+::: {.viz src="speed-limit-zeno" preset="strobe16" height="500"}
+**Sixteen strobes: it hardly gets away.** The arrow is pulled back to $\lvert 0\rangle$ after every $11.25^\circ$: the magenta part, first order in the step, is cut off as soon as it shows, and the cyan shadow hardly shortens. On the right the cyan survival nearly fills the plot, with $0.857$ left at $180^\circ$; the dashed line is the unwatched path.
+:::
 
 ::: {.example #ex-zeno-strobe-freezing title="Analytical Formula and Numerical Ledger (N = 1, 4, 16, 64) for Stroboscopic Quantum Zeno Freezing"}
 Prepare a single qubit at the north pole $\lvert 0\rangle$ under the Hamiltonian $H = \frac{\hbar\omega}{2}\sigma_x$, which rotates the Bloch vector uniformly about the $X$ axis at angular speed $\omega$. Over total duration $T = \pi / \omega$ (which would flip an unmeasured qubit by $180^\circ$ straight to the orthogonal south pole $\lvert 1\rangle$), insert $N$ equally spaced projective checks onto $\lvert 0\rangle\langle 0\rvert$ at intervals $\delta t = \frac{T}{N} = \frac{\pi}{\omega N}$:
@@ -229,6 +245,10 @@ Evaluating $P_N(T)$ at $N = 1, 4, 16, 64$ shows how rapid inner-product polling 
 | **$N = 4$** | $45^\circ$ | $0.8536$ | **$0.5308$ ($53.1\%$)** | $0.3831$ | Over half the ensemble is pulled back to North $\lvert 0\rangle$ |
 | **$N = 16$** | $11.25^\circ$ | $0.9904$ | **$0.8569$ ($85.7\%$)** | $0.8458$ | Incipient wedge area is sheared off at $11.25^\circ$ steps |
 | **$N = 64$** | $2.8125^\circ$ | $0.9994$ | **$0.9622$ ($96.2\%$)** | $0.9614$ | High-frequency inner-product checks lock the state at $\lvert 0\rangle$ |
+:::
+
+::: {.viz src="speed-limit-zeno" preset="strobe4" height="500"}
+**Four strobes: half of it stays.** The arrow is pulled back after every $45^\circ$; the cyan arc is as far as each turn gets. On the right the chance to stay drops a step at each look and is $0.531$ at $180^\circ$, while the dashed unwatched path has lost everything by then. The ring marks are the end points for $N = 1, 16, 64$ ([@ex-zeno-strobe-freezing]).
 :::
 
 [@ex-zeno-strobe-freezing] follows only one branch: the one in which every probe answers "still in $\lvert 0\rangle$". The same stroboscopic detector can keep a second ledger. Start from the initial state $v$; after each unitary step $U$ ask "has it returned to $v$?". If the answer is yes, stop the clock; if no, the state is projected onto the orthogonal complement of $v$ and the next step begins. This yields two sequences of numbers: the probability of returning for the first time exactly at step $n$, and the probability of not having returned during the first $n$ steps. This ledger has a frozen Lean theorem, valid for every unitary evolution.
@@ -305,7 +325,15 @@ The entry $p_1 = 0.853553$ in the row $\delta = \frac{\pi}{4}$ is the single-ste
 **The general case (literature result, not formalized in this book).** Grünbaum, Velázquez, Werner, and Werner (Commun. Math. Phys. **320**, 543, 2013) proved that in finite dimension, whenever return is certain, the mean first detected return time is an integer, equal to the number of distinct eigenvalues of $U$ on whose eigenspaces the initial state has a nonzero component. Here that number is $2$. Numerical simulation with random unitaries in dimensions $3$ and $4$ gives means $3.000000$ and $4.000000$.
 :::
 
+::: {.viz src="speed-limit-zeno" preset="mean" height="500"}
+**First return: always 2 steps on average.** With $\delta = 45^\circ$ each column is the ledger after one more step: cyan is the probability of having returned, magenta of not yet, and every column reaches exactly the line at $1$ ([@prop-monitored-return-conservation]). The total magenta area is the mean return time; step by step it grows from $1$ towards $2$ ([@ex-first-return-qubit]).
+:::
+
 The Zeno effect says that if one looks often enough, the state cannot leave. The first-return ledger supplies the other half: however often one looks, the fact that it comes back once every two steps on average does not change, because what this number counts is not time but how many directions this qubit has to go.
+
+::: {.viz src="speed-limit-zeno" height="560"}
+**Speed limits and the Zeno strobe: the full lab.** Three scenes on one rail: overlap and angle (change the number of levels and the weights), the strobe on the Bloch sphere (change $N$), and the first-return ledger (change the step $\delta$).
+:::
 
 ## 7.4 Observer Attention and Scalar Free-Energy Accounting: When to Read Out Particle Ticks and When to Audit Thermodynamic Cost {#sec-observer-attention-freeze}
 
