@@ -13,7 +13,9 @@ Not at all! Once we strip away matrix redundancy, the entire algebraic engine re
 
 This chapter establishes four frozen Lean 4 theorems — the qubit Weyl star identities, the no-character theorem, the absence of common Pauli eigenvectors, and the traceless Bloch operator formula — adds a fifth, the composition, adjoint and conjugation laws of Weyl displacement words, as the kernel-checked basis of the "XOR plus sign" multiplication of Pauli words, and then builds the complete runnable zero-dependency Python 3 `GeometricState` engine.
 
-![Three-bit blade XOR multiplication and inversion sign parity, the Pauli Weyl anticommutation and no-character obstruction, and the traceless Bloch operator B(a)](../assets/fig-25-xor-pauli-symplectic-table.svg)
+::: {.figure src="ch25-overview"}
+**Figure 25.** The chapter at a glance. Panel I: the masks $010_2$ and $001_2$ of $e_2 \cdot e_1$ XOR bit by bit into the cyan $011_2$, and two magenta strands cross once, so the result is $-e_{12}$. Panel II: two cyan dashed mirrors in the plane of state vectors; the amber $u$ reflected in $X$ then $Z$, or in $Z$ then $X$, gives two dark arrows at opposite ends ([@thm-qubit-weyl-star]). Panel III: the amber vector $a$ splits into a vertical cyan part and a horizontal part; the vertical $\pm a_2$ goes on the diagonal of the matrix, the horizontal $a_0 \mp i a_1$ in the two corners ([@cor-bloch-operator-core]).
+:::
 
 ## The Weyl Pair, Anticommutation, and the No-Character Theorem {#sec-weyl-pair-no-character}
 
@@ -48,6 +50,10 @@ $$
 $$
 
 while both real symmetric matrices equal their conjugate transposes and square to $I_2$. The full proof is checked by the Lean kernel.
+:::
+
+::: {.figure src="ch25-anticommute"}
+**Swap the two mirrors and the arrow lands at the opposite end.** In the real plane of state vectors, $\operatorname{qubitX}$ is the mirror along the slanted cyan dashed line and $\operatorname{qubitZ}$ the mirror along the horizontal one. The amber $u$ reflected in $X$ and then $Z$ (the dashed jumps) ends at $ZXu$; reflected in $Z$ and then $X$ (the solid jumps) it ends at $XZu$. The two dark arrows make one diameter: $ZX = -XZ$ ([@thm-qubit-weyl-star]).
 :::
 
 Directly from [@thm-qubit-weyl-star], a foundational obstruction follows: **why can no classical valuation assign simultaneous complex numbers to every qubit observable while preserving algebra multiplication and the identity?**
@@ -102,6 +108,10 @@ $$
 First we prove $\psi_0 = 0$ by contradiction (`by_contra hPsi0`): if $\psi_0 \neq 0$, then $\psi_0 = x\psi_1$ forces $\psi_1 \neq 0$; meanwhile $(z - 1)\psi_0 = z\psi_0 - \psi_0 = 0$ with $\psi_0 \neq 0$ implies $z = 1$. Substituting $z = 1$ into $-\psi_1 = z\psi_1$ gives $-\psi_1 = \psi_1$, so multiplying by $-\frac{1}{2}$ (`linear_combination (-1 / 2 : ℂ) * hNeg`) yields $\psi_1 = 0$, contradicting $\psi_1 \neq 0$. Thus $\psi_0 = 0$. Substituting $\psi_0 = 0$ into $\psi_1 = x\psi_0$ gives $\psi_1 = 0$, and function extensionality `funext i` with `fin_cases i` concludes $\psi = 0$. The full proof is checked by the Lean kernel.
 :::
 
+::: {.figure src="ch25-no-common-line"}
+**The eigenlines of $X$ and $Z$ sit $45^\circ$ apart and meet only at the origin.** Drawn in the real plane of state vectors (every eigenvector is a complex multiple of a vector on one of these lines): the solid cyan lines are the two eigenlines of $X$ ($+1$ at $45^\circ$, $-1$ at $135^\circ$), the dashed cyan lines those of $Z$ ($+1$ horizontal, $-1$ vertical). No line belongs to both, and the only common point is the green $\psi = 0$ ([@prop-pauli-no-common-eigenvector]).
+:::
+
 How, then, does a three-dimensional real vector $a = (a_0, a_1, a_2) \in \mathbb{R}^3$ (`EuclideanSpace ℝ (Fin 3)`) embed into $\mathrm{QubitMatrix}$? In `D5/S3/Quantum/Measurement/Bloch/QubitBloch.lean`, the traceless Bloch operator `B a` is defined by
 
 $$
@@ -133,6 +143,10 @@ e_i^2 = +1 \quad (i \in \{1, 2, 3\}), \qquad e_i e_j = -e_j e_i \quad (i \neq j)
 $$
 
 Instead of storing $2\times 2$ matrices, we represent the $2^3 = 8$ basis blades of $\mathcal{Cl}_{3,0}(\mathbb{R})$ by a **3-bit integer blade mask** $m = b_2 b_1 b_0 \in \{0, 1, \dots, 7\}$, where bit $0$ (`1 << 0 = 1`) indicates the presence of $e_1$, bit $1$ (`1 << 1 = 2`) indicates $e_2$, and bit $2$ (`1 << 2 = 4`) indicates $e_3$:
+
+::: {.figure src="ch25-mask-cube"}
+**The eight blades are the corners of a cube, and multiplying by a blade walks one edge along each direction it lights up.** Right is $e_1$ (bit $0$), into the page $e_2$, up $e_3$; each corner carries its blade and mask. The two amber arrows leave $e_{12}$ ($011_2$), walk one edge along $e_2$ and one along $e_3$, and stop at $e_{13}$ ($101_2$): multiplying by $e_{23}$ ($110_2$) lands on $011_2 \oplus 110_2 = 101_2$. The sign of this product is $+$; the figure draws no signs, which come from the inversion count below.
+:::
 
 | Mask $m$ (dec) | Binary $b_2 b_1 b_0$ | Basis Blade $E_m$ | Grade $k = \operatorname{popcount}(m)$ | Square $(E_m)^2$ | Reverse $\widetilde{E}_m = (-1)^{k(k-1)/2} E_m$ | Complex Pauli Image |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -182,6 +196,10 @@ Notice how both conventions in the code fit together with 100% consistency:
 :::
 
 Finally, the **reversion** anti-involution $\widetilde{M}$ (`reverse()`) reverses the order of vector factors in each $k$-blade, multiplying grade $k = \operatorname{popcount}(m)$ by $(-1)^{k(k-1)/2}$ ($+1$ for grades $0, 1$ and $-1$ for grades $2, 3$).
+
+::: {.figure src="ch25-reversion"}
+**Reversing the factors takes $k(k-1)/2$ swaps, and every swap flips the sign.** Each panel has the factors of a grade-$k$ blade on top and the reversed order at the bottom; each swap of neighbours is two crossing magenta strands. Grades $0$ and $1$ need no swap and carry a cyan $+$; grade $2$ needs $1$ swap and grade $3$ needs $3$, and both carry a magenta $-$, as in the “Reverse” column of the table.
+:::
 
 So far, the rule "XOR the indices, then multiply by a sign" has been obtained only by counting swaps against the Clifford axioms. For words built from one pair of generators it has a kernel-checked general form, and not only for two levels: replace "negate" by "multiply by an $M$-th root of unity" and the same rule holds for any $M$-level system. The module `D5/S3/Quantum/Algebra/WeylDisplacement` at the pinned commit, with its two follow-up modules, freezes it.
 

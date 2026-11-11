@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch25-anticommute" data-lang="en" viewBox="0 0 460 330" width="460" height="330" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="The real plane of state vectors, with two cyan dashed mirrors on the unit circle: the horizontal mirror of Z and the mirror of X at 45°. The amber arrow u points at 25°. The dashed jumps reflect in X first, then in Z: u jumps to 65°, then straight down to −65°, ending at ZXu. The solid jumps reflect in Z first, then in X: u jumps straight down to −25°, then across to 115°, ending at XZu. The two dark arrows ZXu and XZu make one diameter through the centre and point at opposite ends.">
+<title>The real plane of state vectors, with two cyan dashed mirrors on the unit circle: the horizontal mirror of Z and the mirror of X at 45°. The amber arrow u points at 25°. The dashed jumps reflect in X first, then in Z: u jumps to 65°, then straight down to −65°, ending at ZXu. The solid jumps reflect in Z first, then in X: u jumps straight down to −25°, then across to 115°, ending at XZu. The two dark arrows ZXu and XZu make one diameter through the centre and point at opposite ends.</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<circle cx="200" cy="168" r="126" class="ts-faint" stroke-width="1.2" fill="none"/>
+<line x1="51.32" y1="168" x2="348.68" y2="168" class="ts-cyan" stroke-width="1.6" stroke-dasharray="6 4" fill="none"/>
+<line x1="94.87" y1="273.13" x2="305.13" y2="62.87" class="ts-cyan" stroke-width="1.6" stroke-dasharray="6 4" fill="none"/>
+<text class="tf-cyan ts-bg" x="51.32" y="160" font-size="13" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">mirror of <tspan font-style="italic">Z</tspan></text>
+<text class="tf-cyan ts-bg" x="106.87" y="277.13" font-size="13" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">mirror of <tspan font-style="italic">X</tspan></text>
+<line x1="309.25" y1="109.8" x2="262.41" y2="62.96" class="ts-dim" stroke-width="1.4" stroke-dasharray="4 3" fill="none"/>
+<path d="M258.2 58.75 L265.23 61.63 L261.07 65.78Z" class="tf-dim"/>
+<line x1="253.25" y1="60.81" x2="253.25" y2="269.24" class="ts-dim" stroke-width="1.4" stroke-dasharray="4 3" fill="none"/>
+<path d="M253.25 275.19 L250.31 268.19 L256.19 268.19Z" class="tf-dim"/>
+<line x1="314.19" y1="121.75" x2="314.19" y2="208.3" class="ts-dim" stroke-width="1.4" fill="none"/>
+<path d="M314.19 214.25 L311.25 207.25 L317.13 207.25Z" class="tf-dim"/>
+<line x1="309.25" y1="216.3" x2="155.91" y2="62.96" class="ts-dim" stroke-width="1.4" fill="none"/>
+<path d="M151.7 58.75 L158.73 61.63 L154.57 65.78Z" class="tf-dim"/>
+<circle cx="253.25" cy="53.81" r="3.4" class="ts-bg tf-dim" stroke-width="1.4"/>
+<circle cx="314.19" cy="221.25" r="3.4" class="ts-bg tf-dim" stroke-width="1.4"/>
+<line x1="200" y1="168" x2="250.02" y2="275.26" class="ts-ink" stroke-width="2.6" fill="none"/>
+<path d="M253.25 282.19 L246.02 275.64 L252.87 272.44Z" class="tf-ink"/>
+<line x1="200" y1="168" x2="149.98" y2="60.74" class="ts-ink" stroke-width="2.6" fill="none"/>
+<path d="M146.75 53.81 L153.98 60.36 L147.13 63.56Z" class="tf-ink"/>
+<line x1="200" y1="168" x2="307.26" y2="117.98" class="ts-amber" stroke-width="2.6" fill="none"/>
+<path d="M314.19 114.75 L307.64 121.98 L304.44 115.13Z" class="tf-amber"/>
+<circle cx="200" cy="168" r="3" class="tf-ink"/>
+<text class="tf-amber ts-bg" x="322.19" y="118.75" font-size="15" font-weight="600" stroke-width="4.2" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">u</tspan></text>
+<text class="tf-ink ts-bg" x="261.25" y="294.19" font-size="15" font-weight="600" stroke-width="4.2" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">ZXu</tspan></text>
+<text class="tf-ink ts-bg" x="138.75" y="47.81" font-size="15" text-anchor="end" font-weight="600" stroke-width="4.2" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">XZu</tspan></text>
+<text class="tf-dim ts-bg" x="261.25" y="51.81" font-size="13" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">Xu</tspan></text>
+<text class="tf-dim ts-bg" x="322.19" y="233.25" font-size="13" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">Zu</tspan></text>
+<line x1="318" y1="258" x2="340" y2="258" class="ts-dim" stroke-width="1.4" stroke-dasharray="4 3" fill="none"/>
+<text class="tf-dim" x="348" y="262" font-size="13"><tspan font-style="italic">X</tspan> first, then <tspan font-style="italic">Z</tspan></text>
+<line x1="318" y1="280" x2="340" y2="280" class="ts-dim" stroke-width="1.4" fill="none"/>
+<text class="tf-dim" x="348" y="284" font-size="13"><tspan font-style="italic">Z</tspan> first, then <tspan font-style="italic">X</tspan></text>
+<text class="tf-ink" x="318" y="318" font-size="14" font-weight="600"><tspan font-style="italic">ZXu</tspan> = −<tspan font-style="italic">XZu</tspan></text>
+</svg>
