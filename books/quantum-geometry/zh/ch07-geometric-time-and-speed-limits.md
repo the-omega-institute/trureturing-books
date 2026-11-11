@@ -234,7 +234,7 @@ $$
 [@ex-zeno-strobe-freezing] 只追踪了一条分支：每次探测都回答“还在 $\lvert 0\rangle$”的那一条。同一台频闪探测器还可以记另一本账。从初态 $v$ 出发，每做一步幺正演化 $U$ 就问一次“回到 $v$ 了吗”：回答“是”就停表；回答“否”，状态被投到 $v$ 的正交补上，继续下一步。于是有两列数：恰在第 $n$ 步首次返回的概率，和前 $n$ 步都没有返回的概率。这本账有一条冻结的 Lean 定理，对任意幺正演化都成立。
 
 ::: {.definition #def-monitored-return title="受监测的单步演化、返回振幅、返回概率与留存概率" lean="D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitoredStep D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitoredHistory D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.returnAmplitude D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.returnProbability D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.survivalProbability"}
-设 $E$ 为完备的复内积空间（`[NormedAddCommGroup E]`、`[InnerProductSpace ℂ E]`、`[CompleteSpace E]`），$U : E \simeq_{\mathrm{li}}[\mathbb{C}] E$ 为线性等距同构，$v \in E$。记 $P_v$ 为到一维子空间 $\mathbb{C} v$ 的正交投影。在模块 `MonitoredReturnConservation` 中：
+设 $E$ 为完备的复内积空间（`[NormedAddCommGroup E]`、`[InnerProductSpace ℂ E]`、`[CompleteSpace E]`），$U : E \simeq_{\mathrm{li}}[\mathbb{C}] E$ 为线性等距同构，$v \in E$。记 $P_v$ 为到子空间 $\mathbb{C} v$（$v \neq 0$ 时为一维）的正交投影。在模块 `MonitoredReturnConservation` 中：
 
 1. **受监测的单步** [`monitoredStep`](lean:D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitoredStep) $U\ v = (\mathrm{id} - P_v) \circ U$：先演化一步，再投到“没有返回”的子空间上；
 2. **监测历史** [`monitoredHistory`](lean:D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitoredHistory) $U\ v\ n = (\operatorname{monitoredStep}\ U\ v)^n\, v$：连续 $n$ 次都回答“否”之后的未归一化状态；
@@ -291,7 +291,7 @@ $$
 
 **数值。**
 
-| 步长 $\delta$ | $p_1$ | $p_2$ | $p_3$ | $s_3$ | $p_1 + p_2 + p_3 + s_3$ | 第一步未返回的概率 $s^2$ | 此后的条件平均返回步数 $1 + \frac{1}{s^2}$ | 平均返回时间 |
+| 步长 $\delta$ | $p_1$ | $p_2$ | $p_3$ | $s_3$ | $p_1 + p_2 + p_3 + s_3$ | 第一步未返回的概率 $s^2$ | 第一步未返回条件下的平均返回时间 $1 + \frac{1}{s^2}$ | 平均返回时间 |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | $\frac{\pi}{16}$ | $0.990393$ | $9.23\times10^{-5}$ | $9.14\times10^{-5}$ | $0.009424$ | $1.000000$ | $0.009607$ | $105.09$ | $2.000000$ |
 | $\frac{\pi}{4}$ | $0.853553$ | $0.021447$ | $0.018306$ | $0.106694$ | $1.000000$ | $0.146447$ | $7.83$ | $2.000000$ |

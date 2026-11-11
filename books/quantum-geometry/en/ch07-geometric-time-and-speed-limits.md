@@ -234,7 +234,7 @@ Evaluating $P_N(T)$ at $N = 1, 4, 16, 64$ shows how rapid inner-product polling 
 [@ex-zeno-strobe-freezing] follows only one branch: the one in which every probe answers "still in $\lvert 0\rangle$". The same stroboscopic detector can keep a second ledger. Start from the initial state $v$; after each unitary step $U$ ask "has it returned to $v$?". If the answer is yes, stop the clock; if no, the state is projected onto the orthogonal complement of $v$ and the next step begins. This yields two sequences of numbers: the probability of returning for the first time exactly at step $n$, and the probability of not having returned during the first $n$ steps. This ledger has a frozen Lean theorem, valid for every unitary evolution.
 
 ::: {.definition #def-monitored-return title="Monitored Step, Return Amplitude, Return Probability, and Survival Probability" lean="D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitoredStep D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitoredHistory D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.returnAmplitude D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.returnProbability D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.survivalProbability"}
-Let $E$ be a complete complex inner-product space (`[NormedAddCommGroup E]`, `[InnerProductSpace ℂ E]`, `[CompleteSpace E]`), $U : E \simeq_{\mathrm{li}}[\mathbb{C}] E$ a linear isometric equivalence, and $v \in E$. Write $P_v$ for the orthogonal projection onto the line $\mathbb{C} v$. In the module `MonitoredReturnConservation`:
+Let $E$ be a complete complex inner-product space (`[NormedAddCommGroup E]`, `[InnerProductSpace ℂ E]`, `[CompleteSpace E]`), $U : E \simeq_{\mathrm{li}}[\mathbb{C}] E$ a linear isometric equivalence, and $v \in E$. Write $P_v$ for the orthogonal projection onto the span $\mathbb{C} v$ (a line when $v \neq 0$). In the module `MonitoredReturnConservation`:
 
 1. The **monitored step** [`monitoredStep`](lean:D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitoredStep) $U\ v = (\mathrm{id} - P_v) \circ U$: evolve one step, then project onto the "no return" subspace;
 2. The **monitored history** [`monitoredHistory`](lean:D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitoredHistory) $U\ v\ n = (\operatorname{monitoredStep}\ U\ v)^n\, v$: the unnormalized state after $n$ consecutive "no" answers;
@@ -291,7 +291,7 @@ The mean first-return time is exactly $2$ steps, independently of $\delta$.
 
 **Numbers.**
 
-| step $\delta$ | $p_1$ | $p_2$ | $p_3$ | $s_3$ | $p_1 + p_2 + p_3 + s_3$ | probability $s^2$ of no return at step one | conditional mean number of steps to return afterwards, $1 + \frac{1}{s^2}$ | mean return time |
+| step $\delta$ | $p_1$ | $p_2$ | $p_3$ | $s_3$ | $p_1 + p_2 + p_3 + s_3$ | probability $s^2$ of no return at step one | conditional mean return time given no return at step one, $1 + \frac{1}{s^2}$ | mean return time |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | $\frac{\pi}{16}$ | $0.990393$ | $9.23\times10^{-5}$ | $9.14\times10^{-5}$ | $0.009424$ | $1.000000$ | $0.009607$ | $105.09$ | $2.000000$ |
 | $\frac{\pi}{4}$ | $0.853553$ | $0.021447$ | $0.018306$ | $0.106694$ | $1.000000$ | $0.146447$ | $7.83$ | $2.000000$ |

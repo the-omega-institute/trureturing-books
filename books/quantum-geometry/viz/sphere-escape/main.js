@@ -1,705 +1,395 @@
-/* ORTHO//ESCAPE · 对角逃逸 — Cantor's diagonal flip, the Dottie cosine iteration and Euclid's prime escape, on one step rail.
-   A list f holds N binary rows f(r, ·), r, c = 1 … N. Step k reads the diagonal entry f(k, k) and flips it: rule D₀
-   (f(k, k) = 0 ↦ d(k) = 1) counts +1, rule D₁ (f(k, k) = 1 ↦ d(k) = 0) counts −1. The flipped diagonal d is trureturing's
-   relativeSemanticDiagonal with Address = Coordinate = {1, …, N}, latent = id and twist = ¬, so it differs from every
-   listed row (D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode).
-   The same step k advances xₖ = cos xₖ₋₁ and lists the k-th prime with the least prime factor of p₁⋯pₖ + 1.
-   Integers are exact; cos, sin and the Euler products are double precision. Colours: cyan f = 1, magenta the flipped
-   diagonal d, amber the current step. Pure maths: window.SE_MATH. Read-only probe for tests: window.SE_DEBUG.
-   Thumbnail hook: window.TRV_THUMB. */
+/* ORTHO//ESCAPE: four scenes of one fact — after finitely many steps something is still outside.
+   diag   flip the diagonal of an N × N list: the string d differs from row k in place k
+   poly   the regular n-gon inscribed in the unit circle, n = 6 · 2^k: the gap 1 − cos(π/n) under the arc
+   cos    x_{k+1} = cos x_k: the residual |cos x_k − x_k| shrinks geometrically and stays positive
+   prime  Q = p_1 ⋯ p_k + 1 leaves remainder 1 on every listed prime: its prime factors are off the list
+   One rail (the step k) drives every scene; the two plots under the stage show what is left outside.
+   Read-only probe for the browser suite: window.ESCAPE_DEBUG. */
 (() => {
   'use strict';
+  const { kit, L } = TRV, { fix } = kit, P = TRV.palette;
   const $ = (id) => document.getElementById(id);
-  const L = TRV.L, esc = TRV.esc;
-  const NMIN = 3, NMAX = 8, SMAX = 63, XMAX = 314, NS = [4, 6, 8], MODES = ['diagonal', 'dottie', 'prime'];
-  const DEFAULT = { N: 6, seed: 11, x0: 100, mode: 'diagonal' };
-  const MINUS = '−';
-  const SUB = '₀₁₂₃₄₅₆₇₈₉', SUP = '⁰¹²³⁴⁵⁶⁷⁸⁹';
-  const sub = (n) => String(n).split('').map((d) => SUB[+d]).join('');
-  const sup = (n) => String(n).split('').map((d) => SUP[+d]).join('');
+  const S = { scene: 'diag', N: 6, seed: 11, rows: [], x0: 0, zoom: 'follow', tpoint: 1 };
+  const sci = (x) => { if (x === 0) return '0'; const e = Math.floor(Math.log10(Math.abs(x))), m = x / Math.pow(10, e); return Math.abs(e) < 3 ? x.toPrecision(3) : `${m.toFixed(2)}×10${String(e).replace('-', '−').split('').map((c) => ({ '−': '⁻', 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹' }[c])).join('')}`; };
 
-  /* ---------- pure mathematics (window.SE_MATH) ---------- */
-  /** The mulberry32 generator (the same as TRV.mulberry32), kept here so the list of a seed depends on nothing else. */
-  function mulberry32(a) {
-    return function () {
-      a |= 0; a = a + 0x6D2B79F5 | 0;
-      let t = Math.imul(a ^ a >>> 15, 1 | a);
-      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
-      return ((t ^ t >>> 14) >>> 0) / 4294967296;
-    };
+  /* ---------- diag: the list and its flipped diagonal ---------- */
+  function makeList(N, seed) { const rng = TRV.mulberry32(seed * 7919 + N * 104729); return Array.from({ length: N }, () => Array.from({ length: N }, () => (rng() < 0.5 ? 1 : 0))); }
+  const dOf = (rows) => rows.map((r, i) => 1 - r[i]);
+  const hamming = (a, b) => a.reduce((s, x, i) => s + (x !== b[i] ? 1 : 0), 0);
+  const toInt = (bits) => bits.reduce((v, b) => v * 2 + b, 0);
+  /** Put d on the list: one more row, and one more column of fresh bits so that the table stays square. */
+  function absorbD() {
+    if (S.N >= 10) return false;
+    const rng = TRV.mulberry32(S.seed * 31 + S.N * 977), d = dOf(S.rows);
+    S.rows.forEach((r) => r.push(rng() < 0.5 ? 1 : 0)); S.rows.push(d.concat([rng() < 0.5 ? 1 : 0])); S.N++;
+    return true;
   }
-  /** The n × n list of seed S: the top-left block of the NMAX × NMAX bits drawn row by row from mulberry32(S). */
-  function matrixFromSeed(n, seed) {
-    const rnd = mulberry32(seed >>> 0), m = [];
-    for (let r = 0; r < NMAX; r++) { const row = []; for (let c = 0; c < NMAX; c++) row.push(rnd() < 0.5 ? 0 : 1); m.push(row); }
-    return m.slice(0, n).map((row) => row.slice(0, n));
+
+  /* ---------- poly: inscribed n-gons; Taylor partial sums of the cosine ---------- */
+  const sides = (k) => 6 * Math.pow(2, k);
+  const gap = (n) => 2 * Math.sin(Math.PI / (2 * n)) ** 2;                 // 1 − cos(π/n), without cancellation
+  const halfPerimeter = (n) => n * Math.sin(Math.PI / n);
+  const piDeficit = (n) => { const x = Math.PI / n; return n * (x ** 3 / 6 - x ** 5 / 120 + x ** 7 / 5040 - x ** 9 / 362880); };  // π − n sin(π/n) as a series (no cancellation)
+  function taylor(theta, m) {   // m terms of the cosine series → { actual remainder, the verified bound θ^{2m}/(2m)!·e^θ }
+    let sum = 0, term = 1;
+    for (let j = 0; j < m; j++) { sum += term; term *= -theta * theta / ((2 * j + 1) * (2 * j + 2)); }
+    let b = 1; for (let i = 1; i <= 2 * m; i++) b *= theta / i;
+    return { actual: Math.abs(Math.cos(theta) - sum), lagrange: b, bound: b * Math.exp(theta) };
   }
-  /** The n × n preset lists: identity basis, alternating (r + c) mod 2 (zero diagonal), dense block (all ones). */
-  function presetMatrix(name, n) {
-    const at = { identity: (r, c) => (r === c ? 1 : 0), alternating: (r, c) => (r + c) % 2, dense: () => 1 }[name];
-    if (!at) return null;
-    return Array.from({ length: n }, (_, r) => Array.from({ length: n }, (__, c) => at(r, c)));
-  }
-  const transpose = (f) => f.map((row, r) => row.map((_, c) => f[c][r]));
-  /** d(r) = ¬f(r, r): the flipped diagonal. */
-  const cantorDiagonal = (f) => f.map((row, r) => 1 - row[r]);
-  function hamming(a, b) { let h = 0; for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) h++; return h; }
-  /** For every row r: the witness column r (d(r) ≠ f(r, r)) and the Hamming distance to d; d is listed iff some distance is 0. */
-  function verifyCantorEscape(f, d = cantorDiagonal(f)) {
-    const witness = f.map((row, r) => row[r] !== d[r]);
-    const ham = f.map((row) => hamming(row, d));
-    const minHam = Math.min(...ham), argmin = ham.indexOf(minHam);
-    const listed = ham.some((h) => h === 0);
-    return { ok: witness.every(Boolean) && !listed && minHam >= 1, witness, ham, minHam, argmin, listed };
-  }
-  /** x₀, x₁ = cos x₀, …, x_k and the residuals |cos xᵢ − xᵢ|. */
-  function dottieTrajectory(x0, k) {
-    const xs = [x0];
-    for (let i = 0; i < k; i++) xs.push(Math.cos(xs[i]));
-    return { xs, res: xs.map((x) => Math.abs(Math.cos(x) - x)) };
-  }
-  /** x* = cos x* by Newton's method from 0.74 (stops when the step no longer moves x). */
-  function dottieStar() {
-    let x = 0.74;
-    for (let i = 0; i < 50; i++) { const nx = x - (Math.cos(x) - x) / (-Math.sin(x) - 1); if (nx === x) break; x = nx; }
-    return x;
-  }
-  /** The worst |sin²x + cos²x − 1| over xs; ok within four ulps of 1. */
-  function verifyDottiePythagorean(xs) {
-    let worst = 0;
-    for (const x of xs) { const s = Math.sin(x), c = Math.cos(x); worst = Math.max(worst, Math.abs(s * s + c * c - 1)); }
-    return { worst, ok: worst <= 4 * Number.EPSILON };
-  }
-  /** The primes ≤ n (sieve of Eratosthenes). */
-  function sievePrimes(n) {
-    if (n < 2) return [];
-    const comp = new Uint8Array(n + 1), out = [];
-    for (let i = 2; i <= n; i++) { if (comp[i]) continue; out.push(i); for (let j = i * i; j <= n; j += i) comp[j] = 1; }
-    return out;
-  }
-  function firstPrimes(k) { for (let lim = 32; ; lim *= 2) { const p = sievePrimes(lim); if (p.length >= k) return p.slice(0, k); } }
-  function leastPrimeFactor(n) {
-    if (n % 2 === 0) return 2;
-    for (let p = 3; p * p <= n; p += 2) if (n % p === 0) return p;
-    return n;
-  }
-  /** Euclid: Q = p₁⋯pₖ + 1 and its least prime factor q, which is never on the list. */
-  function euclidEscape(primes) {
-    const Q = primes.reduce((a, p) => a * p, 1) + 1, q = leastPrimeFactor(Q);
-    return { Q, q, cofactor: Q / q, outside: !primes.includes(q) };
-  }
-  /** ∏ (1 − p^(−s))^(−1) over the given primes. */
-  function eulerProductPartial(primes, s) { let prod = 1; for (const p of primes) prod /= 1 - Math.pow(p, -s); return prod; }
+
+  /* ---------- cos: the orbit of x ↦ cos x ---------- */
+  const KCOS = 40;
+  let XSTAR = 0.7; for (let i = 0; i < 300; i++) XSTAR = Math.cos(XSTAR);
+  const orbit = (x0) => { const xs = [x0]; for (let k = 0; k < KCOS; k++) xs.push(Math.cos(xs[k])); return xs; };
+
+  /* ---------- prime: Euclid's Q for the first k primes ---------- */
+  const PRIMES = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37];
+  function factor(q) { const f = []; for (let p = 2; p * p <= q; p += p === 2 ? 1 : 2) while (q % p === 0) { f.push(p); q /= p; } if (q > 1) f.push(q); return f; }
+  const EUCLID = PRIMES.map((_, k) => k).concat([PRIMES.length]).map((k) => { const prod = PRIMES.slice(0, k).reduce((a, p) => a * p, 1), Q = prod + 1; return { k, prod, Q, factors: factor(Q), euler: PRIMES.slice(0, k).reduce((a, p) => a / (1 - 1 / (p * p)), 1) }; });
   const ZETA2 = Math.PI * Math.PI / 6;
-  const XSTAR = dottieStar();
 
-  window.SE_MATH = Object.freeze({
-    mulberry32, matrixFromSeed, presetMatrix, transpose, cantorDiagonal, hamming, verifyCantorEscape, dottieTrajectory, dottieStar,
-    verifyDottiePythagorean, sievePrimes, firstPrimes, leastPrimeFactor, euclidEscape, eulerProductPartial, ZETA2, XSTAR
-  });
-
-  /* ---------- state ---------- */
-  const q = new URLSearchParams(location.search);
-  const clampInt = (x, lo, hi, dflt) => { const v = Math.round(Number(x)); return Number.isFinite(v) ? Math.max(lo, Math.min(hi, v)) : dflt; };
-  const S = {
-    N: q.has('n') ? clampInt(q.get('n'), NMIN, NMAX, DEFAULT.N) : DEFAULT.N,
-    seed: q.has('seed') ? clampInt(q.get('seed'), 1, SMAX, DEFAULT.seed) : DEFAULT.seed,
-    x0: q.has('x0') ? clampInt(q.get('x0'), 0, XMAX, DEFAULT.x0) : DEFAULT.x0,
-    mode: MODES.includes(q.get('mode')) ? q.get('mode') : DEFAULT.mode,
-    pass: 0, playing: false, hover: null, master: null
+  /* ---------- scenes ---------- */
+  const SC = {
+    diag: { max: () => S.N, rate: 1.5, start: () => S.N, name: ['对角线', 'DIAGONAL'] },
+    poly: { max: () => 12, rate: 1.1, start: () => 4, name: ['割圆', 'POLYGON'] },
+    cos: { max: () => KCOS, rate: 3, start: () => 12, name: ['余弦', 'COSINE'] },
+    prime: { max: () => PRIMES.length, rate: 0.9, start: () => 4, name: ['素数', 'PRIMES'] }
   };
-  S.master = matrixFromSeed(NMAX, S.seed);
-  let R = null; // derived data of the current list and seed angle
-  let frames = 0, pending = false, built = '';
-  const rng = TRV.mulberry32(20261111);
+  const step = () => Math.floor(clock.t + 1e-9), frac = () => clock.t - step();
+  let hit = null;   // layout of the matrix on the stage, for clicks
 
-  const listKey = () => `${S.N}|${S.master.map((row) => row.join('')).join('')}|${S.x0}`;
-  function derive() {
-    const N = S.N, f = S.master.slice(0, N).map((row) => row.slice(0, N));
-    const d = cantorDiagonal(f), v = verifyCantorEscape(f, d), diag = f.map((row, r) => row[r]);
-    const signs = diag.map((x) => (x === 0 ? 1 : -1));
-    const traj = dottieTrajectory(S.x0 / 100, N), pyth = verifyDottiePythagorean(traj.xs);
-    const primes = firstPrimes(N);
-    const escapes = primes.map((_, k) => euclidEscape(primes.slice(0, k + 1)));
-    const euler = primes.map((_, k) => eulerProductPartial(primes.slice(0, k + 1), 2));
-    const trace = diag.reduce((a, b) => a + b, 0), weight = d.reduce((a, b) => a + b, 0);
-    R = { key: listKey(), N, f, d, diag, signs, v, traj, pyth, primes, escapes, euler, trace, weight, total: weight - trace,
-      ones: f.reduce((a, row) => a + row.reduce((x, y) => x + y, 0), 0) };
-  }
-  const fresh = () => { if (!R || R.key !== listKey()) derive(); return R; };
-  const edited = () => { const m = matrixFromSeed(NMAX, S.seed); return S.master.some((row, r) => row.some((x, c) => x !== m[r][c])); };
-  function presetActive(name) {
-    if (name === 'dottie0') return S.x0 === 0 && S.mode === 'dottie';
-    if (name === 'dottie1') return S.x0 === 100 && S.mode === 'dottie';
-    const p = presetMatrix(name, S.N);
-    return !!p && p.every((row, r) => row.every((x, c) => x === S.master[r][c]));
+  function drawDiag(g) {
+    const c = g.ctx, N = S.N, k = step(), f = frac(), d = dOf(S.rows), W = g.W, H = g.H;
+    const s = Math.min(54, (W * 0.56) / (N + 2.4), (H - 130) / (N + 2.1)), gw = N * s, gh = (N + 1.5) * s;
+    const gx = Math.max(54, W * 0.37 - gw / 2), gy = Math.max(66, (H - gh) / 2 + 14);
+    hit = { gx, gy, s, N };
+    const cell = (x, y, v, o) => {
+      const px = gx + x * s, py = gy + y * s, col = o.color;
+      c.globalAlpha = o.alpha == null ? 1 : o.alpha;
+      if (v === 1) { c.fillStyle = TRV.alpha(col, o.fill == null ? 0.78 : o.fill); c.fillRect(px + 2, py + 2, s - 4, s - 4); }
+      c.strokeStyle = TRV.alpha(col, v === 1 ? 0.9 : 0.35); c.lineWidth = 1; c.strokeRect(px + 2.5, py + 2.5, s - 5, s - 5);
+      if (v != null && s >= 15) { c.fillStyle = v === 1 ? P.void : TRV.alpha(col, 0.75); c.font = `600 ${Math.round(s * 0.42)}px ${TRV.fonts.data}`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(String(v), px + s / 2, py + s / 2 + 1); }
+      c.globalAlpha = 1;
+    };
+    const ring = (x, y, col, w, glow) => { c.save(); if (glow) { c.shadowColor = col; c.shadowBlur = glow; } c.strokeStyle = col; c.lineWidth = w; c.strokeRect(gx + x * s + 1, gy + y * s + 1, s - 2, s - 2); c.restore(); };
+    for (let i = 0; i < N; i++) {
+      c.font = `${Math.max(10, Math.round(s * 0.32))}px ${TRV.fonts.data}`; c.textBaseline = 'middle';
+      c.fillStyle = i < k ? P.ink : P.dim; c.textAlign = 'right'; c.fillText(`f${i + 1}`, gx - 8, gy + i * s + s / 2);
+      c.textAlign = 'center'; c.fillStyle = P.dim; c.fillText(String(i + 1), gx + i * s + s / 2, gy - 10);
+      for (let j = 0; j < N; j++) cell(j, i, S.rows[i][j], { color: P.cyan, alpha: i < k || i === j ? 1 : 0.62 });
+    }
+    for (let i = 0; i < N; i++) ring(i, i, i < k ? P.amber : TRV.alpha(P.sigma, 0.5), i < k ? 2 : 1, i === k - 1 ? 12 : 0);
+    // the flip in progress: from the diagonal cell down to its place in d
+    const dy = N + 0.5;
+    if (k < N && f > 0.02) {
+      const x = gx + k * s + s / 2, y0 = gy + k * s + s, y1 = gy + dy * s;
+      c.strokeStyle = P.amber; c.lineWidth = 1.5; c.setLineDash([3, 3]); c.beginPath(); c.moveTo(x, y0); c.lineTo(x, y0 + (y1 - y0) * f); c.stroke(); c.setLineDash([]);
+      ring(k, k, P.amber, 2, 12);
+    }
+    c.fillStyle = P.magenta; c.textAlign = 'right'; c.font = `600 ${Math.max(10, Math.round(s * 0.34))}px ${TRV.fonts.data}`; c.fillText('d', gx - 8, gy + dy * s + s / 2);
+    for (let j = 0; j < N; j++) { cell(j, dy, j < k ? d[j] : null, { color: P.magenta, fill: 0.85 }); if (j === k - 1) ring(j, dy, P.amber, 2, 10); }
+    // witnesses: row i differs from d in place i
+    c.font = `${Math.max(10, Math.round(s * 0.34))}px ${TRV.fonts.data}`; c.textAlign = 'left'; c.fillStyle = P.magenta;
+    for (let i = 0; i < Math.min(k, N); i++) c.fillText('≠ d', gx + gw + 8, gy + i * s + s / 2);
+    // the universe of all 2^N strings: the list, the candidates still compatible with what is known of d, and d
+    const cb = Math.ceil(N / 2), rb = N - cb, cols = 1 << cb, rws = 1 << rb, ux0 = gx + gw + 70, uw = W - ux0 - 26, uh = H - 150;
+    if (uw > 60) {
+      const sp = Math.min(uw / cols, uh / rws, 30), ox = ux0 + (uw - sp * cols) / 2, oy = 84 + (uh - sp * rws) / 2, r = Math.max(1, Math.min(5, sp * 0.2));
+      const pos = (v) => [ox + ((v >> rb) + 0.5) * sp, oy + ((v & (rws - 1)) + 0.5) * sp];
+      const known = toInt(d.slice(0, k)), shift = N - k;
+      for (let v = 0; v < (1 << N); v++) { const q = pos(v), cand = (v >> shift) === known; c.fillStyle = cand ? TRV.alpha(P.magenta, 0.55) : TRV.alpha(P.faint, 0.9); c.beginPath(); c.arc(q[0], q[1], cand ? r : r * 0.7, 0, kit.TAU); c.fill(); }
+      S.rows.forEach((row, i) => { const q = pos(toInt(row)); c.beginPath(); c.arc(q[0], q[1], r + 2.2, 0, kit.TAU); if (i < k) { c.strokeStyle = P.cyan; c.lineWidth = 1.4; c.stroke(); } else { c.fillStyle = P.cyan; c.fill(); } });
+      if (k >= N) { const q = pos(toInt(d)); c.save(); c.shadowColor = P.magenta; c.shadowBlur = 14; c.fillStyle = P.magenta; c.beginPath(); c.arc(q[0], q[1], r + 3, 0, kit.TAU); c.fill(); c.restore(); c.strokeStyle = P.amber; c.lineWidth = 1.5; c.beginPath(); c.arc(q[0], q[1], r + 7, 0, kit.TAU); c.stroke(); }
+      c.fillStyle = P.dim; c.font = `11px ${TRV.fonts.body}`; c.textAlign = 'center'; c.textBaseline = 'bottom';
+      if (!TRV.thumbMode) c.fillText(L(`全部 2^${N} = ${1 << N} 个串`, `all 2^${N} = ${1 << N} strings`), ox + sp * cols / 2, oy - 8);
+    }
+    $('hudBig').textContent = k >= N ? L(`d 与全部 ${N} 行都不同`, `D DIFFERS FROM ALL ${N} ROWS`) : L(`已读对角线 ${k} / ${N} 位`, `DIAGONAL READ: ${k} OF ${N} BITS`);
+    $('hudSub').textContent = k >= N ? L(`d = ${d.join('')}：它是 ${1 << N} 个串之一，却不在清单的 ${N} 行里`, `d = ${d.join('')}: one of the ${1 << N} strings, yet not among the ${N} rows of the list`)
+      : L(`下一步：读第 ${k + 1} 行第 ${k + 1} 位（${S.rows[k][k]}），翻成 ${d[k]}；与 d 的前 ${k} 位相容的串还剩 ${1 << (N - k)} 个`, `Next: read bit ${k + 1} of row ${k + 1} (${S.rows[k][k]}) and flip it to ${d[k]}; ${1 << (N - k)} strings still agree with the first ${k} bits of d`);
   }
 
-  /* ---------- formatting ---------- */
-  const fmtSigned = (x) => (x > 0 ? '+' + x : x < 0 ? MINUS + -x : '0');
-  const signCls = (x) => (x > 0 ? 'vpos' : x < 0 ? 'vneg' : 'vzero');
-  const fx = (x, k = 4) => (x < 0 ? MINUS : '') + Math.abs(x).toFixed(k);
-  /** Compact scientific form 1.2e−3 (0 stays 0). */
-  function fsci(x, k = 1) {
-    if (x === 0) return '0';
-    if (Math.abs(x) >= 1e-3) return fx(x, 4);
-    const [m, e] = Math.abs(x).toExponential(k).split('e');
-    return `${x < 0 ? MINUS : ''}${m}e${e.replace('-', MINUS).replace('+', '')}`;
+  function drawPoly(g) {
+    const c = g.ctx, W = g.W, H = g.H, k = step(), n = sides(k), R = Math.min(W * 0.26, (H - 130) / 2), cx = Math.max(R + 40, W * 0.34), cy = H / 2 + 14;
+    c.strokeStyle = P.sigma; c.lineWidth = 1.4; c.beginPath(); c.arc(cx, cy, R, 0, kit.TAU); c.stroke();
+    c.beginPath();
+    if (n <= 768) for (let j = 0; j < n; j++) { const a = -Math.PI / 2 - Math.PI / n + kit.TAU * j / n, x = cx + R * Math.cos(a), y = cy + R * Math.sin(a); if (j) c.lineTo(x, y); else c.moveTo(x, y); } else c.arc(cx, cy, R * Math.cos(Math.PI / n), 0, kit.TAU);
+    c.closePath(); c.fillStyle = TRV.alpha(P.cyan, 0.1); c.fill(); c.strokeStyle = P.cyan; c.lineWidth = 1.6; c.stroke();
+    if (n <= 96) for (let j = 0; j < n; j++) { const a = -Math.PI / 2 - Math.PI / n + kit.TAU * j / n; c.fillStyle = P.cyan; c.beginPath(); c.arc(cx + R * Math.cos(a), cy + R * Math.sin(a), 2.2, 0, kit.TAU); c.fill(); }
+    // magnifier over the top side: horizontal and vertical scales differ, so the gap always fills the lens
+    const hw = Math.sin(Math.PI / n), sag = gap(n), lx = Math.min(W - 250, cx + R + 60), lw = Math.min(230, W - lx - 24), lh = Math.min(170, H - 190), ly = cy - lh / 2;
+    if (lw > 90) {
+      const X = (x) => lx + lw / 2 + (x / hw) * (lw * 0.42), Y = (y) => ly + lh * 0.82 - ((y - (1 - sag)) / sag) * (lh * 0.58);
+      c.fillStyle = TRV.alpha(P.void, 0.6); c.fillRect(lx, ly, lw, lh); c.strokeStyle = P.amber; c.lineWidth = 1.2; c.strokeRect(lx + 0.5, ly + 0.5, lw - 1, lh - 1);
+      const tx = cx, ty = cy - R; c.strokeStyle = TRV.alpha(P.amber, 0.6); c.setLineDash([3, 4]); c.beginPath(); c.moveTo(tx + 6, ty); c.lineTo(lx, ly); c.moveTo(tx + 6, ty + 3); c.lineTo(lx, ly + lh); c.stroke(); c.setLineDash([]);
+      c.strokeStyle = P.amber; c.strokeRect(tx - 7, ty - 5, 14, 10);
+      c.save(); c.beginPath(); c.rect(lx, ly, lw, lh); c.clip();
+      c.beginPath(); c.moveTo(X(-hw), Y(1 - sag)); for (let i = 0; i <= 60; i++) { const x = -hw + 2 * hw * i / 60; c.lineTo(X(x), Y(1 - 2 * Math.sin(Math.asin(x) / 2) ** 2)); } c.closePath();
+      c.fillStyle = TRV.alpha(P.magenta, 0.35); c.fill();
+      c.strokeStyle = P.sigma; c.lineWidth = 1.6; c.beginPath(); for (let i = -10; i <= 70; i++) { const x = -hw + 2 * hw * i / 60, y = 1 - 2 * Math.sin(Math.asin(Math.max(-1, Math.min(1, x))) / 2) ** 2; if (i === -10) c.moveTo(X(x), Y(y)); else c.lineTo(X(x), Y(y)); } c.stroke();
+      c.strokeStyle = P.cyan; c.lineWidth = 2; c.beginPath(); c.moveTo(X(-hw * 1.3), Y(1 - sag)); c.lineTo(X(hw * 1.3), Y(1 - sag)); c.stroke();
+      c.restore();
+      c.strokeStyle = P.magenta; c.lineWidth = 1.2; c.beginPath(); c.moveTo(X(0), Y(1) + 3); c.lineTo(X(0), Y(1 - sag) - 3); c.stroke();
+      c.font = `11px ${TRV.fonts.data}`; c.textAlign = 'left'; c.fillStyle = P.amber; c.textBaseline = 'top'; c.fillText(`${L('纵向放大', 'vertical zoom')} ×${sci((lh * 0.58 / sag) / R)}`, lx + 8, ly + 7);
+      c.fillStyle = P.magenta; c.fillText(`${L('缝', 'gap')} ${sci(sag)}`, lx + 8, ly + 22);
+      c.fillStyle = P.dim; c.textBaseline = 'bottom'; c.textAlign = 'center'; c.fillText(L('一条边与它上方的圆弧', 'one side and the arc above it'), lx + lw / 2, ly + lh - 6);
+    }
+    c.fillStyle = P.ink; c.font = `600 ${Math.round(R * 0.2)}px ${TRV.fonts.data}`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(String(n), cx, cy - R * 0.06);
+    c.fillStyle = P.dim; c.font = `12px ${TRV.fonts.body}`; c.fillText(L('条边', 'sides'), cx, cy + R * 0.14);
+    $('hudBig').textContent = L(`内接正 ${n} 边形`, `INSCRIBED REGULAR ${n}-GON`);
+    $('hudSub').textContent = L(`半周长 ${halfPerimeter(n).toFixed(10)} < π；每条边的中点离圆弧还有 ${sci(gap(n))}`, `Half-perimeter ${halfPerimeter(n).toFixed(10)} < π; the midpoint of each side is still ${sci(gap(n))} short of the arc`);
   }
-  const bits = (a) => a.join('');
-  const mark = (ok) => `<span class="${ok ? 'okmark' : 'badmark'}">${ok ? '✓' : '✗'}</span>`;
 
-  /* ---------- ledger ---------- */
-  function cells(row, touchCol) {
-    let h = '';
-    for (let c = 0; c < R.N; c++) h += `<span class="${row[c] === 1 ? 'd1' : 'd0'}${c === touchCol ? ' touch' : ''}">${row[c]}</span>`;
-    return `<div class="cells">${h}</div>`;
+  function cosView() {
+    const xs = orbit(S.x0);
+    if (S.zoom === 'whole') { const lo = Math.min(...xs, 0) - 0.25, hi = Math.max(...xs, 1) + 0.25; return { c: (lo + hi) / 2, h: (hi - lo) / 2, xs }; }
+    const hAt = (k) => { let m = 0; for (let j = Math.max(0, k - 2); j <= Math.min(KCOS, k + 2); j++) m = Math.max(m, Math.abs(xs[j] - XSTAR)); return Math.max(m * 1.5, 1e-13); };
+    const k = step(), f = frac(), h = Math.exp(Math.log(hAt(k)) * (1 - f) + Math.log(hAt(Math.min(KCOS, k + 1))) * f);
+    return { c: XSTAR, h, xs };
   }
-  function buildLedger() {
-    const rows = [];
-    let head = '';
-    for (let c = 1; c <= R.N; c++) head += `<span>${c}<small>c${sub(c)}</small></span>`;
-    rows.push(`<div class="drow hdr" aria-hidden="true"><span class="lab">${L('列 c', 'col c')}</span><div class="cells">${head}</div><span class="what"></span></div>`);
-    // input: the diagonal the list reads to itself; sum (step 0): nothing flipped yet, the iteration sits at x₀
-    let diagCells = '';
-    for (let c = 0; c < R.N; c++) diagCells += `<span class="${R.diag[c] ? 'd1' : 'd0'} touch">${R.diag[c]}</span>`;
-    rows.push(`<div class="drow input" role="listitem"><span class="lab">diag</span><div class="cells">${diagCells}</div><span class="what"><code>f(r, r) · tr f = ${R.trace}</code><span class="name">${L('清单在第 r 行读自己的第 r 位', 'row r of the list read at its own place r')}</span></span></div>`);
-    let blank = '';
-    for (let c = 0; c < R.N; c++) blank += '<span class="d0">·</span>';
-    rows.push(`<div class="drow sum" role="listitem" data-pass="0"><span class="lab">k = 0</span><div class="cells">${blank}</div><span class="what"><code>x₀ = ${fx(R.traj.xs[0])}</code><span class="name">${L('第 0 步：尚未翻转，余弦迭代从 x₀ 出发', 'step 0: nothing flipped yet; the cosine iteration starts at x₀')}</span></span></div>`);
-    R.f.forEach((row, r) => {
-      const k = r + 1, s = R.signs[r], zero = R.diag[r] === 0;
-      const name = zero ? L(`D₀ 读到 0，写 d(${k}) = 1`, `D₀ reads 0, writes d(${k}) = 1`) : L(`D₁ 读到 1，写 d(${k}) = 0`, `D₁ reads 1, writes d(${k}) = 0`);
-      rows.push(`<div class="drow pass" role="listitem" data-pass="${k}"><span class="lab">#${k}</span>${cells(row, r)}<span class="what"><span class="sgn ${s > 0 ? 'pos' : 'neg'}">${fmtSigned(s)}</span><code>¬f(${k},${k}) = ${R.d[r]}</code><span class="name">${esc(name)} · x${sub(k)} = ${fx(R.traj.xs[k])}</span></span></div>`);
-    });
-    let dc = '';
-    for (let c = 1; c <= R.N; c++) dc += `<span class="d0" data-c="${c}">·</span>`;
-    const N = R.N;
-    rows.push(`<div class="drow final" role="listitem" data-pass="${N}" data-final="1"><span class="lab">d</span><div class="cells">${dc}</div><span class="what"><code>d = (¬f(1,1), …, ¬f(${N},${N}))</code><span class="name">${L('与每一行都不同', 'differs from every row')} ${mark(R.v.ok)} · |cos x${sub(N)} ${MINUS} x${sub(N)}| = ${fsci(R.traj.res[N])} &gt; 0</span></span></div>`);
-    $('ledger').innerHTML = rows.join('');
-    $('tape').innerHTML = R.signs.map((s, r) => `<i class="${s > 0 ? 'pos' : 'neg'}" data-pass="${r + 1}" title="#${r + 1} ${fmtSigned(s)}"></i>`).join('');
+  function drawCos(g0) {
+    const { c: mid, h, xs } = cosView(), k = step(), f = frac();
+    const g = kit.plot($('cv'), { x: [mid - h, mid + h], y: [mid - h, mid + h], pad: [30, 30, 74, 60], equal: true });
+    const c = g.ctx, lo = g.x0, hi = g.x1, pts = [];
+    c.save(); c.beginPath(); c.rect(g.pl, g.pt, g.iw, g.ih); c.clip();
+    g.line([[lo, lo], [hi, hi]], P.dim, { width: 1.2 });
+    for (let i = 0; i <= 240; i++) { const x = lo + (hi - lo) * i / 240; pts.push([x, Math.cos(x)]); }
+    g.line(pts, P.cyan, { width: 2 });
+    const web = [[xs[0], xs[0]]];
+    for (let j = 0; j < k; j++) { web.push([xs[j], xs[j + 1]]); web.push([xs[j + 1], xs[j + 1]]); }
+    if (k < KCOS && f > 0) { const a = Math.min(1, f * 2), b = Math.max(0, f * 2 - 1); web.push([xs[k], xs[k] + (xs[k + 1] - xs[k]) * a]); if (b > 0) web.push([xs[k] + (xs[k + 1] - xs[k]) * b, xs[k + 1]]); }
+    g.line(web, P.amber, { width: 1.6, alpha: 0.9 });
+    g.dot(XSTAR, XSTAR, P.magenta, 7, { ring: true, width: 2 });
+    const last = web[web.length - 1]; g.dot(last[0], last[1], P.amber, 5, { glow: 12 });
+    c.restore();
+    g.text(lo, lo, 'y = x', P.dim, { align: 'left', base: 'bottom', dx: 26, dy: -6, size: 11.5 });
+    g.text(hi, Math.cos(hi), 'y = cos x', P.cyan, { align: 'right', base: 'bottom', dx: -22, dy: -10, size: 11.5 });
+    g.text(XSTAR, XSTAR, 'x*', P.magenta, { align: 'left', base: 'middle', dx: 14, dy: 0, size: 12.5 });
+    const base = Math.max(Math.abs(S.x0 - XSTAR), 0.74) * 1.5;
+    $('hudBig').textContent = L(`第 ${k} 步 · x = ${xs[k].toFixed(10)}`, `STEP ${k} · x = ${xs[k].toFixed(10)}`);
+    $('hudSub').textContent = (S.zoom === 'follow' ? L(`画面放大 ×${sci(base / h)} · `, `View zoomed ×${sci(base / h)} · `) : '') + L(`离不动点还差 ${sci(Math.abs(xs[k] - XSTAR))}`, `still ${sci(Math.abs(xs[k] - XSTAR))} from the fixed point`);
   }
-  function markLedger() {
-    const K = R.N;
-    $('ledger').querySelectorAll('.drow[data-pass]').forEach((row) => {
-      const k = +row.dataset.pass, fin = row.dataset.final === '1', now = fin ? S.pass === K : k === S.pass;
-      row.classList.toggle('now', now);
-      row.classList.toggle('future', !fin && k > S.pass);
-      row.setAttribute('aria-current', now && !fin ? 'step' : 'false');
-    });
-    // the escape row reveals d(c) once step c has read the diagonal entry f(c, c)
-    $('ledger').querySelectorAll('.drow.final .cells span').forEach((el) => {
-      const c = +el.dataset.c, shown = c <= S.pass;
-      el.textContent = shown ? String(R.d[c - 1]) : '·';
-      el.className = (shown ? 'd2' : 'd0') + (c === S.pass ? ' touch' : '');
-    });
-    $('tape').querySelectorAll('i').forEach((t) => { const k = +t.dataset.pass; t.classList.toggle('now', k === S.pass); t.classList.toggle('future', k > S.pass); });
-    const partial = R.signs.slice(0, S.pass).reduce((a, b) => a + b, 0);
-    $('tapeSum').innerHTML = `${L('至第', 'to step')} ${S.pass}${L(' 步', '')}: <span class="${signCls(partial)}">${fmtSigned(partial)}</span> · ${L('总计', 'total')} <span class="${signCls(R.total)}">${fmtSigned(R.total)}</span> = |d| ${MINUS} tr f`;
-    $('pass').max = String(K);
-    $('pass').value = String(S.pass);
-    $('passLabel').innerHTML = `${L('第', 'STEP ')}${S.pass}${L(' 步', '')} <small>/ ${K}</small>`;
-    $('prev').disabled = $('first').disabled = S.pass === 0;
-    $('next').disabled = $('last').disabled = S.pass >= K;
-    // keep the current row visible inside the ledger's own scroller (never scroll the page)
-    const wrap = $('sheetWrap'), row = $('ledger').querySelector('.drow.now');
-    if (row) {
-      const top = row.offsetTop - 34, bottom = row.offsetTop + row.offsetHeight + 6;
-      if (top < wrap.scrollTop) wrap.scrollTop = top;
-      else if (bottom > wrap.scrollTop + wrap.clientHeight) wrap.scrollTop = bottom - wrap.clientHeight;
+
+  function drawPrime(g) {
+    const c = g.ctx, W = g.W, H = g.H, k = step(), E = EUCLID[k], q = E.factors[0];
+    const cols = Math.max(1, Math.min(k, 6)), rowsN = Math.max(1, Math.ceil(k / 6)), areaW = W - 60, areaH = H - 78 - 150;
+    const r = Math.min(areaW / (cols * 2.5), areaH / (rowsN * 2.55), 74), top = 78 + Math.max(0, (areaH - rowsN * r * 2.55) / 2);
+    const dial = (x, y, rad, p, rem, col, big) => {
+      c.strokeStyle = TRV.alpha(col, 0.55); c.lineWidth = 1.2; c.beginPath(); c.arc(x, y, rad, 0, kit.TAU); c.stroke();
+      if (p <= 64) for (let t = 0; t < p; t++) { const a = -Math.PI / 2 + kit.TAU * t / p; c.fillStyle = t === 0 ? P.warn : TRV.alpha(col, 0.7); c.beginPath(); c.arc(x + rad * Math.cos(a), y + rad * Math.sin(a), t === 0 ? 3 : 1.8, 0, kit.TAU); c.fill(); }
+      else { c.fillStyle = P.warn; c.beginPath(); c.arc(x, y - rad, 3, 0, kit.TAU); c.fill(); }
+      const a = -Math.PI / 2 + kit.TAU * rem / p; c.save(); c.shadowColor = col; c.shadowBlur = 8; c.strokeStyle = col; c.lineWidth = 2.2; c.beginPath(); c.moveTo(x, y); c.lineTo(x + rad * 0.86 * Math.cos(a), y + rad * 0.86 * Math.sin(a)); c.stroke(); c.restore();
+      c.fillStyle = P.void; c.beginPath(); c.arc(x, y, rad * 0.36, 0, kit.TAU); c.fill();
+      c.fillStyle = col; c.font = `600 ${Math.round(rad * (big ? 0.3 : 0.36))}px ${TRV.fonts.data}`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(String(p), x, y + 1);
+      c.fillStyle = rem === 0 ? P.magenta : P.dim; c.font = `11px ${TRV.fonts.data}`; c.textBaseline = 'top'; c.fillText(`${L('余', 'rem')} ${rem}`, x, y + rad + 7);
+    };
+    for (let i = 0; i < k; i++) { const col = i % 6, row = Math.floor(i / 6), n = Math.min(6, k - row * 6); dial(W / 2 + (col - (n - 1) / 2) * r * 2.5, top + r + 6 + row * r * 2.55, r, PRIMES[i], E.Q % PRIMES[i], P.cyan); }
+    if (!k) { c.fillStyle = P.dim; c.font = `13px ${TRV.fonts.body}`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(L('清单是空的：空乘积是 1', 'The list is empty: the empty product is 1'), W / 2, top + areaH / 2); }
+    // Q and its factorization; the least prime factor gets its own dial, hand on 0
+    const by = H - 96, rr = Math.min(36, r);
+    c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = P.ink; c.font = `600 ${W < 520 ? 14 : 18}px ${TRV.fonts.data}`;
+    const prodText = k ? PRIMES.slice(0, k).join('·') : '1', line = `Q = ${k > 7 ? `p₁⋯p${k < 10 ? '₀₁₂₃₄₅₆₇₈₉'[k] : '₁' + '₀₁₂₃₄₅₆₇₈₉'[k - 10]}` : prodText} + 1 = ${E.Q}`;
+    c.fillText(line, W / 2 - rr - 20, by - 14);
+    c.fillStyle = P.magenta; c.font = `600 ${W < 520 ? 13 : 16}px ${TRV.fonts.data}`;
+    c.fillText(E.factors.length === 1 ? L(`${E.Q} 本身是素数`, `${E.Q} is itself prime`) : `= ${E.factors.join(' × ')}`, W / 2 - rr - 20, by + 14);
+    dial(Math.min(W - rr - 30, W / 2 + c.measureText(line).width / 2 + rr + 40), by - 8, rr, q, 0, P.magenta, q > 999);
+    $('hudBig').textContent = L(`清单里有 ${k} 个素数`, `${k} PRIME${k === 1 ? '' : 'S'} ON THE LIST`);
+    $('hudSub').textContent = L(`每只钟的指针都指着 1，没有一只指着红色的 0；Q 的最小素因子 ${q} 不在清单里`, `Every hand points at 1 and none at the red 0; the least prime factor ${q} of Q is not on the list`);
+  }
+
+  /* ---------- the two plots under the stage ---------- */
+  function drawPlots() {
+    const k = step(), A = $('plotA'), B = $('plotB');
+    if (S.scene === 'diag') {
+      const N = S.N, d = dOf(S.rows), hd = S.rows.map((r) => hamming(r, d));
+      const g = kit.plot(A, { x: [0.4, N + 0.6], y: [0, Math.max(...hd, 2) + 0.6], pad: [30, 10, 10, 22] });
+      g.axes({ yTicks: [0, 1, Math.max(...hd, 2)], xTicks: S.rows.map((_, i) => [i + 1, `f${i + 1}`]) });
+      hd.forEach((h, i) => g.rect(i + 0.68, 0, i + 1.32, h, i < k ? P.cyan : P.dim, { alpha: i < k ? 0.8 : 0.4 }));
+      g.hline(1, P.amber, { dash: [4, 3] });
+      $('pATitle').textContent = L('d 与每一行差几位', 'Bits by which d differs'); $('pAMeta').textContent = `min ${Math.min(...hd)} ≥ 1`;
+      const g2 = kit.plot(B, { x: [1, 12], y: [1, 5000], logY: true, pad: [38, 10, 10, 22] });
+      g2.axes({ yTicks: [[1, '1'], [10, '10'], [100, '100'], [1000, '1000']], xTicks: [2, 4, 6, 8, 10, 12] });
+      const all = [], list = []; for (let n = 1; n <= 12; n++) { all.push([n, Math.pow(2, n)]); list.push([n, n]); }
+      g2.line(all, P.magenta); g2.line(list, P.cyan); g2.vline(N, P.amber); g2.dot(N, 1 << N, P.magenta, 4); g2.dot(N, N, P.cyan, 4);
+      g2.legend([[P.magenta, L('全部串 2ᴺ', 'all strings 2ᴺ')], [P.cyan, L('清单 N 行', 'N listed rows')]], { right: false });
+      $('pBTitle').textContent = L('清单装不下多少', 'How much the list cannot hold'); $('pBMeta').textContent = `${(1 << N) - new Set(S.rows.map(toInt)).size} ${L('个在外', 'outside')}`;
+    } else if (S.scene === 'poly') {
+      const g = kit.plot(A, { x: [0, 12], y: [1e-10, 1], logY: true, pad: [42, 24, 10, 22] });
+      g.axes({ yTicks: [[1, '1'], [1e-3, '10⁻³'], [1e-6, '10⁻⁶'], [1e-9, '10⁻⁹']], xTicks: [[0, '6'], [2, '24'], [4, '96'], [6, '384'], [8, '1536'], [10, '6144'], [12, '24576']] });
+      const a = [], b = []; for (let j = 0; j <= 12; j++) { a.push([j, gap(sides(j))]); b.push([j, piDeficit(sides(j))]); }
+      g.line(a, P.magenta); g.line(b, P.cyan, { dash: [5, 3] }); a.forEach((p) => g.dot(p[0], p[1], P.magenta, 2.5)); g.vline(k, P.amber); g.dot(k, gap(sides(k)), P.magenta, 4.5);
+      g.legend([[P.magenta, L('缝 1 − cos(π/n)', 'gap 1 − cos(π/n)')], [P.cyan, L('π − 半周长', 'π − half-perimeter'), 'dash']]);
+      $('pATitle').textContent = L('边数翻倍，缝还剩多少', 'The gap as the sides double'); $('pAMeta').textContent = `n = ${sides(k)}`;
+      const g2 = kit.plot(B, { x: [1, 10], y: [1e-17, 100], logY: true, pad: [42, 10, 10, 22] });
+      g2.axes({ yTicks: [[1, '1'], [1e-5, '10⁻⁵'], [1e-10, '10⁻¹⁰'], [1e-15, '10⁻¹⁵']], xTicks: [1, 2, 4, 6, 8, 10] });
+      const act = [], bnd = []; for (let m = 1; m <= 10; m++) { const t = taylor(S.tpoint, m); act.push(t.actual > 2e-17 ? [m, t.actual] : null); bnd.push([m, t.bound]); }
+      g2.line(bnd, P.ok, { dash: [5, 3] }); g2.line(act, P.cyan); act.forEach((p) => p && g2.dot(p[0], p[1], P.cyan, 2.5));
+      g2.legend([[P.cyan, L('实际余项', 'actual remainder')], [P.ok, L('已验证的界', 'verified bound'), 'dash']]);
+      $('pBTitle').textContent = L('余弦的泰勒部分和', 'Taylor sums of the cosine'); $('pBMeta').textContent = `θ = ${S.tpoint.toFixed(2)}`;
+    } else if (S.scene === 'cos') {
+      const xs = orbit(S.x0), res = xs.map((x, j) => [j, Math.max(Math.abs(Math.cos(x) - x), 1e-17)]);
+      const g = kit.plot(A, { x: [0, KCOS], y: [1e-9, 10], logY: true, pad: [42, 10, 10, 22] });
+      g.axes({ yTicks: [[1, '1'], [1e-3, '10⁻³'], [1e-6, '10⁻⁶'], [1e-9, '10⁻⁹']], xTicks: [0, 10, 20, 30, 40] });
+      g.line(res, P.magenta); g.vline(k, P.amber); g.dot(k, res[k][1], P.magenta, 4.5);
+      $('pATitle').textContent = L('离不动点还差多少', 'How far from the fixed point'); $('pAMeta').textContent = `|cos xₖ − xₖ| = ${sci(Math.abs(Math.cos(xs[k]) - xs[k]))}`;
+      const lo = Math.min(...xs.slice(1, 17), XSTAR) - 0.08, hi = Math.max(...xs.slice(1, 17), XSTAR) + 0.08;
+      const g2 = kit.plot(B, { x: [0, 16], y: [lo, hi], pad: [38, 10, 10, 22] });
+      g2.axes({ yTicks: [[XSTAR, 'x*']], xTicks: [0, 4, 8, 12, 16] });
+      g2.hline(XSTAR, P.magenta, { dash: [4, 3] }); g2.line(xs.slice(0, 17).map((x, j) => (x >= lo && x <= hi ? [j, x] : null)), P.cyan);
+      xs.slice(0, 17).forEach((x, j) => { if (x >= lo && x <= hi) g2.dot(j, x, j === k ? P.amber : P.cyan, j === k ? 4.5 : 2.5); });
+      $('pBTitle').textContent = L('一左一右地靠近', 'Closing in from alternating sides'); $('pBMeta').textContent = `x* = ${XSTAR.toFixed(6)}`;
+    } else {
+      const g = kit.plot(A, { x: [0, 12], y: [1e-3, 1], logY: true, pad: [42, 10, 10, 22] });
+      g.axes({ yTicks: [[1, '1'], [0.1, '0.1'], [0.01, '0.01']], xTicks: [0, 2, 4, 6, 8, 10, 12] });
+      const pts = EUCLID.map((e) => [e.k, ZETA2 - e.euler]); g.line(pts, P.magenta); pts.forEach((p) => g.dot(p[0], p[1], P.magenta, 2.5)); g.vline(k, P.amber); g.dot(k, pts[k][1], P.magenta, 4.5);
+      $('pATitle').textContent = L('欧拉乘积离 π²/6 还差多少', 'Euler product: distance to π²/6'); $('pAMeta').textContent = sci(ZETA2 - EUCLID[k].euler);
+      const g2 = kit.plot(B, { x: [-0.6, 12.6], y: [1, 1e12], logY: true, pad: [42, 10, 10, 22] });
+      g2.axes({ yTicks: [[1, '1'], [1e3, '10³'], [1e6, '10⁶'], [1e9, '10⁹']], xTicks: [0, 2, 4, 6, 8, 10, 12] });
+      EUCLID.forEach((e) => g2.rect(e.k - 0.3, 1, e.k + 0.3, e.factors[0], P.magenta, { alpha: e.k === k ? 0.95 : 0.5 }));
+      g2.line(EUCLID.filter((e) => e.k > 0).map((e) => [e.k, PRIMES[e.k - 1]]), P.cyan); g2.vline(k, P.amber, { alpha: 0.6 });
+      g2.legend([[P.magenta, L('Q 的最小素因子', 'least prime factor of Q')], [P.cyan, L('清单里最大的素数', 'largest prime on the list')]], { right: false });
+      $('pBTitle').textContent = L('逃出清单的素数', 'The prime that escapes'); $('pBMeta').textContent = `q = ${EUCLID[k].factors[0]}`;
     }
   }
 
   /* ---------- readouts ---------- */
-  function readouts() {
-    const { N, v, traj, pyth } = R, k = S.pass;
-    $('roN').innerHTML = `${N}<span class="sub">2${sup(N)} = ${2 ** N} ${L('个串', 'strings')} &gt; ${N} ${L('行', 'rows')}</span>`;
-    $('roTrace').innerHTML = `${bits(R.diag)}<span class="sub">tr f = ${R.trace}</span>`;
-    $('roD').innerHTML = `<span class="vneg">${bits(R.d)}</span><span class="sub">|d| = ${R.weight}</span>`;
-    $('roHam').innerHTML = `${v.minHam}<span class="sub">${L('最近的行', 'nearest row')} #${v.argmin + 1} · ≥ 1 ${mark(v.minHam >= 1)}</span>`;
-    $('roX').innerHTML = `${fx(traj.xs[k], 6)}<span class="sub">k = ${k} · x₀ = ${fx(S.x0 / 100, 2)} rad</span>`;
-    $('roSin').innerHTML = `${fx(Math.sin(XSTAR), 6)}<span class="sub">|cos′(x*)| = sin x* &lt; 1</span>`;
-    $('roHero').className = v.ok ? 'vpos' : 'vneg';
-    $('roHeroSub').textContent = `x* ≈ ${XSTAR.toFixed(6)} · sin²x* + cos²x* = 1`;
-    $('roHeroMark').className = v.ok && pyth.ok ? 'okmark' : 'badmark';
-    $('roHeroMark').textContent = v.ok && pyth.ok ? '✓' : '✗';
-    const wit = v.witness.filter(Boolean).length;
-    $('roCantor').innerHTML = `<b class="${v.ok ? 'vpos' : 'vneg'}">${wit} / ${N}</b> ${L('行在自己的对角位与 d 不同', 'rows differ from d in their own diagonal place')} ${mark(v.ok)}<span class="sub">${L('汉明距离', 'Hamming distances')} ${v.ham.join(' · ')} · ${L('无一为 0', 'none is 0')}</span>`;
-    $('roPyth').innerHTML = `<b class="${pyth.ok ? 'vpos' : 'vneg'}">${fsci(pyth.worst)}</b> = max |sin²xₖ + cos²xₖ ${MINUS} 1| ${mark(pyth.ok)}<span class="sub">k = 0 … ${N}</span>`;
-    const e = R.escapes[N - 1];
-    $('roNote').textContent = L(
-      `对角线上 ${N - R.trace} 个 0 用 D₀ 翻成 1，${R.trace} 个 1 用 D₁ 翻成 0。前 ${N} 个素数之积加 1 得 ${e.Q}，它的最小素因子 ${e.q} 不在清单里。`,
-      `${N - R.trace} diagonal 0${N - R.trace === 1 ? '' : 's'} flip to 1 by D₀ and ${R.trace} diagonal 1${R.trace === 1 ? '' : 's'} flip to 0 by D₁. The first ${N} primes multiplied together plus 1 give ${e.Q}, whose least prime factor ${e.q} is not on the list.`);
-    $('pillN').innerHTML = `N <strong>${N} × ${N}</strong>`;
-    $('pillStep').innerHTML = `${L('步', 'STEP')} <strong>${k} / ${N}</strong>`;
-    $('pillEscape').innerHTML = `d ∉ Im f <strong class="${v.ok ? 'okmark' : 'badmark'}">${v.ok ? '✓' : '✗'}</strong>`;
-  }
-
-  /* ---------- the escape stage ---------- */
-  const stage = $('escapeCanvas');
-  function hud() {
-    const k = S.pass, N = R.N;
-    let big, sub2;
-    if (S.mode === 'diagonal') {
-      big = `d ∉ {f(1,·), …, f(${N},·)}`;
-      sub2 = k ? `#${k}: f(${k},${k}) = ${R.diag[k - 1]} ↦ d(${k}) = ${R.d[k - 1]} · H(d, f(${k},·)) = ${R.v.ham[k - 1]}`
-        : L('第 0 步：尚未读对角线', 'step 0: no diagonal entry read yet');
-    } else if (S.mode === 'dottie') {
-      big = `x* = cos x* ≈ ${XSTAR.toFixed(6)}`;
-      sub2 = `x${sub(k)} = ${fx(R.traj.xs[k], 6)} · |cos x${sub(k)} ${MINUS} x${sub(k)}| = ${fsci(R.traj.res[k])}`;
+  function drawText() {
+    const k = step(), set = (i, lab, val) => { $(`roL${i}`).textContent = lab; $(`ro${i}`).innerHTML = val; };
+    let pill = '';
+    if (S.scene === 'diag') {
+      const N = S.N, d = dOf(S.rows), hd = S.rows.map((r) => hamming(r, d)), distinct = new Set(S.rows.map(toInt)).size;
+      $('roKeyL').textContent = L('d 与清单最近的一行', 'd and the nearest row of the list');
+      $('roKey').innerHTML = L(`差 ${Math.min(...hd)} 位`, `${Math.min(...hd)} bit${Math.min(...hd) === 1 ? '' : 's'} apart`) + ' <span class="okmark">≥ 1 ✓</span>';
+      $('roKeySub').textContent = L('第 k 行至少在第 k 位与 d 不同', 'row k differs from d at least in place k');
+      set(1, L('清单', 'the list'), L(`${N} 行`, `${N} rows`)); set(2, L('逃出的串 d', 'the escaped string d'), k >= N ? d.join('') : d.slice(0, k).join('') + '·'.repeat(N - k));
+      set(3, L('全部串', 'all strings'), `2^${N} = ${1 << N}`); set(4, L('清单之外', 'off the list'), `${(1 << N) - distinct}`);
+      $('roNote').textContent = N < 10 ? L('“把 d 收进清单”会多出一行和一列，新的对角线又翻出一个清单外的串。', '“Put d on the list” adds a row and a column, and the new diagonal again produces a string that is off the list.') : L('N = 10 是本页的上限；道理对任何 N 都一样。', 'N = 10 is the limit of this page; the argument is the same for every N.');
+      pill = `${(1 << N) - distinct}`;
+    } else if (S.scene === 'poly') {
+      const n = sides(k);
+      $('roKeyL').textContent = L('边的中点到圆弧的缝', 'gap between a side and the arc');
+      $('roKey').innerHTML = `${sci(gap(n))} <span class="okmark">&gt; 0 ✓</span>`; $('roKeySub').textContent = '1 − cos(π/n) = 2 sin²(π/2n)';
+      set(1, L('边数 n', 'sides n'), String(n)); set(2, L('半周长 n sin(π/n)', 'half-perimeter n sin(π/n)'), halfPerimeter(n).toFixed(10));
+      set(3, L('π − 半周长', 'π − half-perimeter'), sci(piDeficit(n))); set(4, L('每翻一倍，缝缩到', 'each doubling shrinks the gap to'), k < 12 ? `${fix(gap(sides(k + 1)) / gap(n), 4)}` : '—');
+      $('roNote').textContent = L('刘徽由 192 边形的面积（等于 96 边形的半周长）得 3.1410，祖冲之算到 24576 边得 3.1415926。每翻一倍，缝大约缩到四分之一，却从不为零。', 'Liu Hui got 3.1410 from the area of the 192-gon (which equals the half-perimeter of the 96-gon), and Zu Chongzhi 3.1415926 with 24576 sides. Each doubling shrinks the gap to about a quarter, and it is never zero.');
+      pill = sci(gap(n));
+    } else if (S.scene === 'cos') {
+      const xs = orbit(S.x0), res = Math.abs(Math.cos(xs[k]) - xs[k]);
+      $('roKeyL').textContent = L('这一步离不动点还差', 'still to go at this step');
+      $('roKey').innerHTML = `${sci(res)} <span class="okmark">${res > 0 ? '&gt; 0 ✓' : ''}</span>`; $('roKeySub').textContent = '|cos xₖ − xₖ|';
+      set(1, `x${k < 10 ? '₀₁₂₃₄₅₆₇₈₉'[k] : 'ₖ'}`, xs[k].toFixed(12)); set(2, L('不动点 x*', 'fixed point x*'), XSTAR.toFixed(12));
+      set(3, L('每步误差约乘以', 'error factor per step'), k > 0 && Math.abs(xs[k - 1] - XSTAR) > 1e-13 ? fix(Math.abs(xs[k] - XSTAR) / Math.abs(xs[k - 1] - XSTAR), 4) : '—'); set(4, 'sin x*', Math.sin(XSTAR).toFixed(4));
+      $('roNote').textContent = L('误差按等比缩小：再走多少步都只是乘上一个小于 1 的数，不会变成零。', 'The error shrinks geometrically: however many more steps, it is only multiplied by a number below 1 and never becomes zero.');
+      pill = sci(res);
     } else {
-      if (k) {
-        const e = R.escapes[k - 1];
-        big = `p₁⋯p${sub(k)} + 1 = ${e.Q}`;
-        sub2 = `${e.Q} = ${e.q}${e.cofactor > 1 ? ' · ' + e.cofactor : ''} · ${e.q} ∉ {${R.primes.slice(0, k).join(', ')}} · ∏(1 ${MINUS} p⁻²)⁻¹ = ${fx(R.euler[k - 1], 4)} &lt; π²/6`;
-      } else {
-        big = `p₁⋯pₖ + 1`;
-        sub2 = L('第 0 步：素数清单为空', 'step 0: the prime list is empty');
-      }
+      const E = EUCLID[k];
+      $('roKeyL').textContent = L('Q 的最小素因子', 'least prime factor of Q');
+      $('roKey').innerHTML = `${E.factors[0]} <span class="okmark">${L('不在清单里', 'not on the list')} ✓</span>`; $('roKeySub').textContent = E.factors.length === 1 ? L('Q 本身是素数', 'Q is itself prime') : `Q = ${E.factors.join(' × ')}`;
+      set(1, L('清单', 'the list'), k ? PRIMES.slice(0, k).join(', ') : L('空', 'empty')); set(2, 'Q = p₁⋯pₖ + 1', String(E.Q));
+      set(3, L('欧拉乘积 ∏(1 − p⁻²)⁻¹', 'Euler product ∏(1 − p⁻²)⁻¹'), E.euler.toFixed(6)); set(4, L('π²/6 − 乘积', 'π²/6 − product'), sci(ZETA2 - E.euler));
+      $('roNote').textContent = L('Q 除以清单里每个素数都余 1，所以整除 Q 的素数一定是新的。', 'Q leaves remainder 1 on every listed prime, so any prime that divides Q is new.');
+      pill = String(E.factors[0]);
     }
-    $('hudBig').textContent = big;
-    $('hudSub').innerHTML = sub2;
-  }
-  function drawStage() {
-    const dpr = TRV.fitCanvas(stage), ctx = stage.getContext('2d'), W = stage.width, H = stage.height;
-    const pal = TRV.palette, mono = TRV.fonts.data, u = dpr;
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = pal.stage; ctx.fillRect(0, 0, W, H);
-    // keep the drawing below the HUD text
-    const cr = stage.getBoundingClientRect(), hr = $('hudSub').getBoundingClientRect();
-    const top = Math.max(40, Math.min(cr.height * 0.55, hr.bottom - cr.top + 8)) * dpr;
-    const box = { x: 14 * u, y: top, w: W - 28 * u, h: H - top - 12 * u };
-    if (box.w < 40 * u || box.h < 30 * u) return;
-    if (S.mode === 'diagonal') drawDiagonal(ctx, box, pal, mono, u);
-    else if (S.mode === 'dottie') drawDottie(ctx, box, pal, mono, u);
-    else drawPrimes(ctx, box, pal, mono, u);
-  }
-  /** The listed rows on a circle, d outside it, and the current row against d bit by bit. */
-  function drawDiagonal(ctx, b, pal, mono, u) {
-    const N = R.N, k = S.pass;
-    const Rad = Math.max(16 * u, Math.min(b.h / 2 - 8 * u, b.w * 0.16)), cx = b.x + Rad + 26 * u, cy = b.y + b.h / 2;
-    ctx.strokeStyle = TRV.alpha(pal.cyan, 0.35); ctx.lineWidth = 1.2 * u;
-    ctx.beginPath(); ctx.arc(cx, cy, Rad, 0, 2 * Math.PI); ctx.stroke();
-    const pts = R.f.map((_, r) => { const a = -Math.PI / 2 + (2 * Math.PI * r) / N; return [cx + Rad * Math.cos(a), cy + Rad * Math.sin(a)]; });
-    const ang = -Math.PI / 5, dx = cx + Rad * 1.75 * Math.cos(ang), dy = cy + Rad * 1.75 * Math.sin(ang);
-    // lines from d to every row, labelled with the Hamming distance on the current one
-    pts.forEach(([x, y], r) => {
-      const cur = r === k - 1;
-      ctx.strokeStyle = cur ? pal.amber : TRV.alpha(pal.magenta, 0.25); ctx.lineWidth = (cur ? 1.6 : 1) * u;
-      ctx.setLineDash(cur ? [] : [3 * u, 3 * u]);
-      ctx.beginPath(); ctx.moveTo(dx, dy); ctx.lineTo(x, y); ctx.stroke();
-    });
-    ctx.setLineDash([]);
-    // the normal escape arrow from the circle to d
-    const ex = cx + Rad * Math.cos(ang), ey = cy + Rad * Math.sin(ang);
-    ctx.strokeStyle = pal.magenta; ctx.lineWidth = 1.6 * u;
-    ctx.beginPath(); ctx.moveTo(ex, ey); ctx.lineTo(dx, dy); ctx.stroke();
-    ctx.font = `${10 * u}px ${mono}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    pts.forEach(([x, y], r) => {
-      const cur = r === k - 1;
-      ctx.fillStyle = cur ? pal.amber : pal.cyan;
-      ctx.beginPath(); ctx.arc(x, y, (cur ? 4.5 : 3.2) * u, 0, 2 * Math.PI); ctx.fill();
-      const a = -Math.PI / 2 + (2 * Math.PI * r) / N;
-      ctx.fillStyle = cur ? pal.amber : pal.dim;
-      ctx.fillText('#' + (r + 1), x + 12 * u * Math.cos(a), y + 11 * u * Math.sin(a));
-    });
-    ctx.shadowColor = pal.magenta; ctx.shadowBlur = 12 * u; ctx.fillStyle = pal.magenta;
-    ctx.beginPath(); ctx.arc(dx, dy, 5 * u, 0, 2 * Math.PI); ctx.fill(); ctx.shadowBlur = 0;
-    ctx.font = `600 ${12 * u}px ${mono}`; ctx.fillText('d', dx + 11 * u, dy - 9 * u);
-    if (k) {
-      const [x, y] = pts[k - 1];
-      ctx.font = `${10.5 * u}px ${mono}`; ctx.fillStyle = pal.amber;
-      ctx.fillText(`H = ${R.v.ham[k - 1]}`, (x + dx) / 2 + 12 * u, (y + dy) / 2);
-    }
-    // Hamming distances H(d, f(r, ·)) as bars: every bar clears the floor 0, so d is no listed row
-    const rx = Math.max(cx + Rad * 1.75 + 40 * u, b.x + b.w * 0.42), rw = b.x + b.w - rx;
-    const slot = Math.min(30 * u, rw / N), bw = slot * 0.62, base = b.y + b.h - 4 * u, unit = (b.h - 12 * u) / N;
-    if (slot < 6 * u) return;
-    ctx.strokeStyle = pal.lineHot; ctx.lineWidth = 1 * u;
-    ctx.beginPath(); ctx.moveTo(rx - 6 * u, base); ctx.lineTo(rx + N * slot, base); ctx.stroke();
-    ctx.strokeStyle = TRV.alpha(pal.amber, 0.6); ctx.setLineDash([3 * u, 3 * u]);
-    ctx.beginPath(); ctx.moveTo(rx - 6 * u, base - unit); ctx.lineTo(rx + N * slot, base - unit); ctx.stroke(); ctx.setLineDash([]);
-    R.v.ham.forEach((hv, r) => {
-      const x = rx + r * slot + (slot - bw) / 2, cur = r === k - 1, seen = r < k;
-      ctx.fillStyle = cur ? pal.amber : seen ? pal.cyan : TRV.alpha(pal.cyan, 0.3);
-      if (cur) { ctx.shadowColor = pal.amber; ctx.shadowBlur = 10 * u; }
-      ctx.fillRect(x, base - hv * unit, bw, hv * unit); ctx.shadowBlur = 0;
-      ctx.fillStyle = TRV.alpha(pal.magenta, seen ? 0.95 : 0.35); // the witness: the bottom unit is the diagonal place
-      ctx.fillRect(x, base - unit, bw, Math.max(2 * u, unit * 0.18));
-    });
-    ctx.font = `${9.5 * u}px ${mono}`; ctx.fillStyle = pal.dim; ctx.textAlign = 'right';
-    ctx.fillText('0', rx - 9 * u, base); ctx.fillStyle = pal.amber; ctx.fillText('1', rx - 9 * u, base - unit);
-  }
-  /** The cobweb of x ↦ cos x between y = cos x and y = x, with the unit-circle legs cos xₖ, sin xₖ. */
-  function drawDottie(ctx, b, pal, mono, u) {
-    const k = S.pass, xs = R.traj.xs;
-    // unit circle: the angle xₖ with its cosine and sine legs (sin² + cos² = 1)
-    const ir = Math.min(b.h / 2 - 4 * u, 46 * u), icx = b.x + ir + 4 * u, icy = b.y + b.h / 2;
-    ctx.strokeStyle = TRV.alpha(pal.dim, 0.6); ctx.lineWidth = 1 * u;
-    ctx.beginPath(); ctx.arc(icx, icy, ir, 0, 2 * Math.PI); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(icx - ir, icy); ctx.lineTo(icx + ir, icy); ctx.moveTo(icx, icy - ir); ctx.lineTo(icx, icy + ir); ctx.strokeStyle = TRV.alpha(pal.faint, 0.8); ctx.stroke();
-    const xa = xs[k], px = icx + ir * Math.cos(xa), py = icy - ir * Math.sin(xa);
-    ctx.lineWidth = 2 * u;
-    ctx.strokeStyle = pal.cyan; ctx.beginPath(); ctx.moveTo(icx, icy); ctx.lineTo(px, icy); ctx.stroke();
-    ctx.strokeStyle = pal.magenta; ctx.beginPath(); ctx.moveTo(px, icy); ctx.lineTo(px, py); ctx.stroke();
-    ctx.strokeStyle = pal.amber; ctx.lineWidth = 1.6 * u; ctx.beginPath(); ctx.moveTo(icx, icy); ctx.lineTo(px, py); ctx.stroke();
-    ctx.fillStyle = pal.amber; ctx.beginPath(); ctx.arc(px, py, 3.2 * u, 0, 2 * Math.PI); ctx.fill();
-    // the cobweb plot
-    const X0 = -1.1, X1 = 3.25, Y0 = -1.1, Y1 = 1.25;
-    const pl = icx + ir + 22 * u, pw = b.x + b.w - pl, ph = b.h;
-    if (pw < 60 * u) return;
-    const sx = (x) => pl + ((x - X0) / (X1 - X0)) * pw, sy = (y) => b.y + ph - ((y - Y0) / (Y1 - Y0)) * ph;
-    ctx.strokeStyle = TRV.alpha(pal.faint, 0.9); ctx.lineWidth = 1 * u;
-    ctx.beginPath(); ctx.moveTo(sx(X0), sy(0)); ctx.lineTo(sx(X1), sy(0)); ctx.moveTo(sx(0), sy(Y0)); ctx.lineTo(sx(0), sy(Y1)); ctx.stroke();
-    ctx.strokeStyle = TRV.alpha(pal.dim, 0.8); ctx.setLineDash([4 * u, 3 * u]);
-    ctx.beginPath(); ctx.moveTo(sx(Y0), sy(Y0)); ctx.lineTo(sx(Y1), sy(Y1)); ctx.stroke(); ctx.setLineDash([]);
-    ctx.strokeStyle = pal.cyan; ctx.lineWidth = 1.6 * u; ctx.beginPath();
-    for (let i = 0; i <= 200; i++) { const x = X0 + ((X1 - X0) * i) / 200; if (i) ctx.lineTo(sx(x), sy(Math.cos(x))); else ctx.moveTo(sx(x), sy(Math.cos(x))); }
-    ctx.stroke();
-    // cobweb: (xᵢ, xᵢ) → (xᵢ, xᵢ₊₁) → (xᵢ₊₁, xᵢ₊₁)
-    ctx.lineWidth = 1.4 * u;
-    for (let i = 0; i < k; i++) {
-      ctx.strokeStyle = i === k - 1 ? pal.amber : TRV.alpha(pal.magenta, 0.75);
-      ctx.beginPath(); ctx.moveTo(sx(xs[i]), sy(i ? xs[i] : 0)); ctx.lineTo(sx(xs[i]), sy(xs[i + 1])); ctx.lineTo(sx(xs[i + 1]), sy(xs[i + 1])); ctx.stroke();
-    }
-    ctx.strokeStyle = TRV.alpha(pal.amber, 0.5); ctx.setLineDash([2 * u, 3 * u]);
-    ctx.beginPath(); ctx.moveTo(sx(XSTAR), sy(XSTAR)); ctx.lineTo(sx(XSTAR), sy(0)); ctx.stroke(); ctx.setLineDash([]);
-    ctx.fillStyle = pal.amber; ctx.shadowColor = pal.amber; ctx.shadowBlur = 10 * u;
-    ctx.beginPath(); ctx.arc(sx(k ? xs[k] : xs[0]), sy(k ? xs[k] : 0), 4 * u, 0, 2 * Math.PI); ctx.fill(); ctx.shadowBlur = 0;
-    ctx.font = `${10 * u}px ${mono}`; ctx.textAlign = 'center'; ctx.textBaseline = 'top'; ctx.fillStyle = pal.amber;
-    ctx.fillText('x*', sx(XSTAR), sy(0) + 3 * u);
-    ctx.fillStyle = pal.dim; ctx.fillText('π', sx(Math.PI), sy(0) + 3 * u);
-  }
-  /** Integers 1 … M on a Sacks spiral (r = √n, θ = 2π√n): primes cyan, the listed ones amber, Euclid's escape prime magenta;
-      beside it the partial Euler product against π²/6. */
-  function drawPrimes(ctx, b, pal, mono, u) {
-    const k = S.pass, M = 600, listed = new Set(R.primes.slice(0, k));
-    const e = k ? R.escapes[k - 1] : null;
-    const isPrime = new Uint8Array(M + 1); sievePrimes(M).forEach((p) => { isPrime[p] = 1; });
-    const sr = Math.min(b.h / 2 - 2 * u, b.w * 0.3), cx = b.x + sr + 6 * u, cy = b.y + b.h / 2, sc = sr / Math.sqrt(M);
-    for (let n = 1; n <= M; n++) {
-      const r = Math.sqrt(n) * sc, a = 2 * Math.PI * Math.sqrt(n), x = cx + r * Math.cos(a), y = cy + r * Math.sin(a);
-      if (listed.has(n)) continue;
-      if (e && n === e.q) continue;
-      ctx.fillStyle = isPrime[n] ? pal.cyan : TRV.alpha(pal.faint, 0.9);
-      const s = isPrime[n] ? 1.9 * u : 1.1 * u; ctx.fillRect(x - s / 2, y - s / 2, s, s);
-    }
-    const dot = (n, col, rad) => {
-      const r = Math.sqrt(n) * sc, a = 2 * Math.PI * Math.sqrt(n);
-      ctx.fillStyle = col; ctx.shadowColor = col; ctx.shadowBlur = 8 * u;
-      ctx.beginPath(); ctx.arc(cx + r * Math.cos(a), cy + r * Math.sin(a), rad, 0, 2 * Math.PI); ctx.fill(); ctx.shadowBlur = 0;
-      return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+    $('roAside').textContent = L(SC[S.scene].name[0], SC[S.scene].name[1]);
+    $('pillScene').querySelector('strong').textContent = SC[S.scene].name[1];
+    $('pillStep').querySelector('strong').textContent = String(k);
+    $('pillGap').querySelector('strong').textContent = pill;
+    const LEG = {
+      diag: [['box cy', '清单里的 1', 'a 1 on the list'], ['am', '已读的对角元', 'diagonal bits read'], ['box mg', '翻转得到的 d', 'the flipped string d']],
+      poly: [['dm', '圆', 'the circle'], ['cy', '内接多边形', 'the inscribed polygon'], ['box mg', '缝', 'the gap']],
+      cos: [['cy', 'y = cos x', 'y = cos x'], ['am', '迭代走过的路', 'the path of the iteration'], ['mg', '不动点 x*', 'the fixed point x*']],
+      prime: [['cy', '清单里的素数：余 1', 'listed primes: remainder 1'], ['mg', '新素数：余 0', 'the new prime: remainder 0'], ['wn', '刻度 0 = 整除', 'tick 0 = divides']]
     };
-    listed.forEach((p) => dot(p, pal.amber, 3 * u));
-    ctx.font = `${10 * u}px ${mono}`; ctx.textBaseline = 'middle';
-    if (e) {
-      if (e.q <= M) { const [x, y] = dot(e.q, pal.magenta, 4.2 * u); ctx.fillStyle = pal.magenta; ctx.textAlign = 'left'; ctx.fillText(String(e.q), x + 6 * u, y - 6 * u); }
-      else { ctx.strokeStyle = pal.magenta; ctx.lineWidth = 1.4 * u; ctx.beginPath(); ctx.arc(cx, cy, sr + 3 * u, -0.5, 0.5); ctx.stroke(); ctx.fillStyle = pal.magenta; ctx.textAlign = 'left'; ctx.fillText(`${e.q} > ${M}`, cx + sr + 6 * u, cy); }
-    }
-    // the Euler product bar: ∏ (1 − p⁻²)⁻¹ climbing towards π²/6
-    const bx = cx + sr + 64 * u, bw = b.x + b.w - bx - 8 * u;
-    if (bw < 80 * u) return;
-    const lo = 1, hi = 1.7, X = (v) => bx + ((v - lo) / (hi - lo)) * bw, by = b.y + b.h * 0.62;
-    ctx.strokeStyle = pal.panelEdge; ctx.lineWidth = 6 * u; ctx.lineCap = 'butt';
-    ctx.beginPath(); ctx.moveTo(X(lo), by); ctx.lineTo(X(hi), by); ctx.stroke();
-    R.euler.forEach((v, i) => {
-      if (i >= k) return;
-      ctx.strokeStyle = i === k - 1 ? pal.amber : TRV.alpha(pal.cyan, 0.55); ctx.lineWidth = (i === k - 1 ? 2 : 1.2) * u;
-      ctx.beginPath(); ctx.moveTo(X(v), by - 9 * u); ctx.lineTo(X(v), by + 9 * u); ctx.stroke();
-    });
-    ctx.strokeStyle = pal.ok; ctx.lineWidth = 1.6 * u; ctx.setLineDash([3 * u, 2 * u]);
-    ctx.beginPath(); ctx.moveTo(X(ZETA2), by - 14 * u); ctx.lineTo(X(ZETA2), by + 14 * u); ctx.stroke(); ctx.setLineDash([]);
-    ctx.textAlign = 'center'; ctx.fillStyle = pal.dim;
-    ctx.fillText('1', X(1), by + 18 * u);
-    ctx.fillText('π²/6', X(ZETA2), by - 22 * u);
+    const html = LEG[S.scene].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
+    if ($('legend')._h !== html) { $('legend').innerHTML = html; $('legend')._h = html; }
   }
 
-  /* ---------- the diagonal matrix (right column) ---------- */
-  const heat = $('heat');
-  let geom = null;
-  function rgb255(name) { return TRV.rgb[name].map((x) => Math.round(x * 255)); }
-  const zeroFill = () => { const st = rgb255('stage'), lh = rgb255('lineHot'); return `rgb(${st.map((x, i) => Math.round(x * 0.55 + lh[i] * 0.45))})`; };
-  /** Matrix cells, diagonal outline and the escape row d into the square (ox, oy, s); k = current step (0 = none). */
-  function paintMatrix(ctx, D, ox, oy, s, k, u, opts = {}) {
-    const pal = TRV.palette, N = D.N, gap = Math.max(1, s * 0.08), dy = oy + (N + 0.4) * s, zero = zeroFill(), mono = TRV.fonts.data;
-    const showText = s >= 16 * u && !opts.noText;
-    ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.font = `600 ${Math.min(14 * u, s * 0.42)}px ${mono}`;
-    for (let r = 0; r < N; r++) for (let c = 0; c < N; c++) {
-      const v = D.f[r][c], x = ox + c * s, y = oy + r * s;
-      ctx.fillStyle = v ? pal.cyan : zero; ctx.fillRect(x + gap / 2, y + gap / 2, s - gap, s - gap);
-      if (r === c) { ctx.strokeStyle = TRV.alpha(pal.magenta, 0.85); ctx.lineWidth = Math.max(1, 1.6 * u); ctx.strokeRect(x + gap / 2 + 1 * u, y + gap / 2 + 1 * u, s - gap - 2 * u, s - gap - 2 * u); }
-      if (showText) { ctx.fillStyle = v ? pal.stage : pal.dim; ctx.fillText(String(v), x + s / 2, y + s / 2 + 1 * u); }
-    }
-    for (let c = 0; c < N; c++) {
-      const v = D.d[c], x = ox + c * s, later = opts.revealAll ? false : c >= k;
-      ctx.globalAlpha = later ? 0.35 : 1;
-      ctx.fillStyle = v ? pal.magenta : zero; ctx.fillRect(x + gap / 2, dy + gap / 2, s - gap, s - gap);
-      if (!v) { ctx.strokeStyle = pal.magenta; ctx.lineWidth = Math.max(1, 1.4 * u); ctx.strokeRect(x + gap / 2 + 1 * u, dy + gap / 2 + 1 * u, s - gap - 2 * u, s - gap - 2 * u); }
-      if (showText) { ctx.fillStyle = v ? pal.stage : pal.magenta; ctx.fillText(String(v), x + s / 2, dy + s / 2 + 1 * u); }
-      ctx.globalAlpha = 1;
-    }
-    if (k >= 1 && k <= N) {
-      const px = ox + (k - 0.5) * s, py = oy + (k - 0.5) * s;
-      ctx.strokeStyle = TRV.alpha(pal.amber, 0.45); ctx.lineWidth = Math.max(1, (opts.thick ? 1.5 : 1) * u);
-      ctx.beginPath(); ctx.moveTo(px, oy); ctx.lineTo(px, dy + s); ctx.moveTo(ox, py); ctx.lineTo(ox + N * s, py); ctx.stroke();
-      ctx.strokeStyle = pal.amber; ctx.lineWidth = (opts.thick ? 3 : 2) * u; ctx.shadowColor = pal.amber; ctx.shadowBlur = (opts.thick ? 16 : 10) * u;
-      ctx.strokeRect(px - s * 0.6, py - s * 0.6, s * 1.2, s * 1.2);
-      ctx.strokeRect(px - s * 0.5, dy + gap / 2 - 1 * u, s, s - gap + 2 * u);
-      ctx.shadowBlur = 0;
-    }
-    return { dy, gap };
-  }
-  function drawHeat() {
-    if (TRV.thumbMode) { drawCover(); return; }
-    const dpr = TRV.fitCanvas(heat), ctx = heat.getContext('2d'), Wc = heat.width, Hc = heat.height, pal = TRV.palette;
-    const N = R.N, pad = { l: 28 * dpr, r: 12 * dpr, t: 24 * dpr, b: 10 * dpr }, rowsTotal = N + 1.4;
-    const pw = Wc - pad.l - pad.r, ph = Hc - pad.t - pad.b, s = Math.min(pw / N, ph / rowsTotal);
-    const ox = pad.l + (pw - N * s) / 2, oy = pad.t + (ph - rowsTotal * s) / 2;
-    ctx.clearRect(0, 0, Wc, Hc);
-    ctx.fillStyle = pal.stage; ctx.fillRect(0, 0, Wc, Hc);
-    const { dy } = paintMatrix(ctx, R, ox, oy, s, S.pass, dpr);
-    geom = { ox, oy, s, n: N, dy, dpr };
-    // axis labels: columns on top, rows on the left, d for the escape row
-    ctx.font = `${10 * dpr}px ${TRV.fonts.data}`; ctx.textBaseline = 'middle';
-    ctx.textAlign = 'center';
-    for (let c = 0; c < N; c++) { ctx.fillStyle = c === S.pass - 1 ? pal.amber : pal.dim; ctx.fillText(String(c + 1), ox + (c + 0.5) * s, oy - 10 * dpr); }
-    ctx.textAlign = 'right';
-    for (let r = 0; r < N; r++) { ctx.fillStyle = r === S.pass - 1 ? pal.amber : pal.dim; ctx.fillText(String(r + 1), ox - 8 * dpr, oy + (r + 0.5) * s); }
-    ctx.fillStyle = pal.magenta; ctx.font = `600 ${11 * dpr}px ${TRV.fonts.data}`; ctx.fillText('d', ox - 8 * dpr, dy + s / 2);
-    const h = S.hover;
-    if (h) {
-      const x = ox + h.c * s, y = h.kind === 'd' ? dy : oy + h.r * s;
-      ctx.strokeStyle = pal.ink; ctx.lineWidth = 1 * dpr; ctx.strokeRect(x + 0.5, y + 0.5, s - 1, s - 1);
-    }
-    const zeros = N * N - R.ones;
-    $('heatCounts').innerHTML = `<span class="vpos">1</span>: ${R.ones} · <span class="vzero">0</span>: ${zeros} — `
-      + L(`d 与全部 ${N} 行都不同 `, `d differs from all ${N} rows `) + mark(R.v.ok) + ` · 2${sup(N)} = ${2 ** N} &gt; ${N}`;
-    $('heatRange').textContent = `${N} × ${N}`;
-    if (!h) $('heatHover').innerHTML = '&nbsp;';
-    else if (h.kind === 'd') $('heatHover').innerHTML = `d(${h.c + 1}) = ¬f(${h.c + 1}, ${h.c + 1}) = <span class="vneg">${R.d[h.c]}</span> · ${L('点击跳到这一步', 'click to go to this step')}`;
-    else {
-      const v = R.f[h.r][h.c];
-      $('heatHover').innerHTML = `f(${h.r + 1}, ${h.c + 1}) = <span class="${v ? 'vpos' : 'vzero'}">${v}</span>`
-        + (h.r === h.c ? ` → d(${h.r + 1}) = <span class="vneg">${1 - v}</span>` : '') + ` · ${L('点击翻转', 'click to flip')}`;
-    }
-  }
-  /** Thumbnail cover (?thumb=1): the N × N list with its flipped diagonal row beside the diagonal ledger of the same list.
-      No words, so one cover serves both languages; only digits, row codes and signs. */
-  function drawCover() {
-    const dpr = TRV.fitCanvas(heat), ctx = heat.getContext('2d'), Wc = heat.width, Hc = heat.height;
-    const u = Hc / 720, pal = TRV.palette, mono = TRV.fonts.data;
-    geom = null;
-    ctx.fillStyle = pal.stage; ctx.fillRect(0, 0, Wc, Hc);
-    const glow = ctx.createRadialGradient(Wc * 0.28, Hc * 0.5, 0, Wc * 0.28, Hc * 0.5, Wc * 0.55);
-    glow.addColorStop(0, TRV.alpha(pal.cyan, 0.08)); glow.addColorStop(1, TRV.alpha(pal.cyan, 0));
-    ctx.fillStyle = glow; ctx.fillRect(0, 0, Wc, Hc);
-    // the list and its flipped diagonal
-    const D = fresh(), n = D.N, k = S.pass, side = 600 * u, ox0 = 64 * u, oy = (Hc - side) / 2;
-    const s = side / (n + 1.4), ox = ox0 + (side - n * s) / 2;
-    paintMatrix(ctx, D, ox, oy, s, k, u, { thick: true, revealAll: true, noText: true });
-    // the diagonal ledger
-    const rows = [...D.f.map((row, r) => ({ lab: '#' + (r + 1), d: row, touch: r, sign: D.signs[r], cur: r === k - 1 })), { lab: 'd', d: D.d, last: true }];
-    const rowH = Math.min(50 * u, side / rows.length), cell = rowH * 0.8, x0 = 760 * u, labW = 58 * u;
-    const y0 = oy + (side - rows.length * rowH) / 2;
-    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    rows.forEach((r, i) => {
-      const y = y0 + i * rowH, cy = y + rowH / 2;
-      if (r.last) { ctx.strokeStyle = pal.lineHot; ctx.setLineDash([4 * u, 4 * u]); ctx.beginPath(); ctx.moveTo(x0, y + 1); ctx.lineTo(x0 + labW + n * cell + 90 * u, y + 1); ctx.stroke(); ctx.setLineDash([]); }
-      ctx.font = `${15 * u}px ${mono}`; ctx.fillStyle = r.last ? pal.magenta : r.cur ? pal.amber : pal.dim; ctx.textAlign = 'left';
-      ctx.fillText(r.lab, x0, cy); ctx.textAlign = 'center';
-      for (let c = 0; c < n; c++) {
-        const x = x0 + labW + c * cell, v = r.d[c], t = r.touch === c;
-        const bx = x + 2 * u, by = y + (rowH - cell) / 2 + 2 * u, bw = cell - 4 * u;
-        if (r.last) { ctx.fillStyle = TRV.alpha(pal.magenta, v ? 0.26 : 0.1); ctx.fillRect(bx, by, bw, bw); }
-        else if (v) { ctx.fillStyle = TRV.alpha(pal.cyan, 0.14); ctx.fillRect(bx, by, bw, bw); }
-        if (t) { ctx.strokeStyle = r.cur ? pal.amber : TRV.alpha(pal.magenta, 0.6); ctx.lineWidth = 1.5 * u; ctx.strokeRect(bx, by, bw, bw); }
-        ctx.font = `${r.last || t ? 600 : 400} ${19 * u}px ${mono}`;
-        ctx.fillStyle = r.last ? pal.magenta : t ? (r.cur ? pal.amber : pal.ink) : v ? pal.ink : pal.faint;
-        ctx.fillText(String(v), x + cell / 2, cy + 1 * u);
-      }
-      if (r.sign !== undefined) {
-        const bx = x0 + labW + n * cell + 22 * u, col = r.sign > 0 ? pal.cyan : pal.magenta;
-        ctx.strokeStyle = col; ctx.lineWidth = 1.5 * u; ctx.strokeRect(bx, cy - 13 * u, 56 * u, 26 * u);
-        ctx.font = `600 ${15 * u}px ${mono}`; ctx.fillStyle = col; ctx.fillText(fmtSigned(r.sign), bx + 28 * u, cy + 1 * u);
-      }
-      if (r.last) {
-        ctx.strokeStyle = pal.amber; ctx.lineWidth = 2 * u; ctx.shadowColor = pal.amber; ctx.shadowBlur = 12 * u;
-        ctx.strokeRect(x0 - 12 * u, y + 2 * u, labW + n * cell + 112 * u, rowH - 4 * u); ctx.shadowBlur = 0;
-      }
-    });
-  }
-  function cellAt(ev) {
-    if (!geom) return null;
-    const rc = heat.getBoundingClientRect(), d = geom.dpr;
-    const px = (ev.clientX - rc.left) * d, py = (ev.clientY - rc.top) * d;
-    const c = Math.floor((px - geom.ox) / geom.s);
-    if (c < 0 || c >= geom.n) return null;
-    if (py >= geom.dy && py < geom.dy + geom.s) return { kind: 'd', c };
-    const r = Math.floor((py - geom.oy) / geom.s);
-    return r >= 0 && r < geom.n ? { kind: 'f', r, c } : null;
-  }
-  const sameCell = (a, b) => (!a && !b) || (a && b && a.kind === b.kind && a.r === b.r && a.c === b.c);
-  function activate(cell) {
-    stop();
-    if (cell.kind === 'd') { setPass(cell.c + 1); return; }
-    S.master[cell.r][cell.c] ^= 1;
-    S.pass = cell.r + 1;
-    schedule();
-  }
-  let downAt = null;
-  heat.addEventListener('pointerdown', (ev) => { downAt = [ev.clientX, ev.clientY]; });
-  heat.addEventListener('pointerup', (ev) => {
-    if (downAt && Math.hypot(ev.clientX - downAt[0], ev.clientY - downAt[1]) < 8) { const c = cellAt(ev); if (c) activate(c); }
-    downAt = null;
-  });
-  heat.addEventListener('pointercancel', () => { downAt = null; });
-  heat.addEventListener('pointermove', (ev) => { const c = cellAt(ev); if (!sameCell(c, S.hover)) { S.hover = c; schedule(); } });
-  heat.addEventListener('pointerleave', () => { S.hover = null; schedule(); });
-
-  /* ---------- render loop (batched in one animation frame) ---------- */
-  function render() {
-    pending = false;
-    fresh();
-    S.pass = Math.max(0, Math.min(R.N, S.pass));
-    const key = `${R.key}|${TRV.lang()}`;
-    if (key !== built) { buildLedger(); built = key; }
-    markLedger(); readouts(); hud();
-    for (const [id, v] of [['n', S.N], ['seed', S.seed], ['x0', S.x0]]) $(id).value = $(id + 'Num').value = String(v);
-    $('nDec').disabled = S.N <= NMIN; $('nInc').disabled = S.N >= NMAX;
-    $('seedDec').disabled = S.seed <= 1; $('seedInc').disabled = S.seed >= SMAX;
-    $('x0Dec').disabled = S.x0 <= 0; $('x0Inc').disabled = S.x0 >= XMAX;
-    document.querySelectorAll('#nChips [data-n]').forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.n === S.N)));
-    document.querySelectorAll('#modeChips [data-mode]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === S.mode)));
-    document.querySelectorAll('#presets [data-preset]').forEach((b) => b.setAttribute('aria-pressed', String(presetActive(b.dataset.preset))));
-    $('play').setAttribute('aria-pressed', String(S.playing));
-    $('play').textContent = S.playing ? '❚❚' : '▶';
-    drawStage();
-    drawHeat();
-    frames++;
-  }
-  function schedule() { if (!pending) { pending = true; requestAnimationFrame(render); } }
-
-  const K = () => S.N;
-  function setPass(k) { S.pass = Math.max(0, Math.min(K(), k)); schedule(); }
-  /** A new list or dimension shows the finished ledger; step back with ◀. */
-  function finished() { stop(); S.pass = S.N; schedule(); }
-  function setN(n) { S.N = clampInt(n, NMIN, NMAX, S.N); S.hover = null; finished(); }
-  function setSeed(v) { S.seed = clampInt(v, 1, SMAX, S.seed); S.master = matrixFromSeed(NMAX, S.seed); finished(); }
-  function setX0(v) { S.x0 = clampInt(v, 0, XMAX, S.x0); schedule(); }
-  function setMode(m) { if (MODES.includes(m)) { S.mode = m; schedule(); } }
-  function applyPreset(name) {
-    if (name === 'dottie0' || name === 'dottie1') { S.x0 = name === 'dottie0' ? 0 : 100; S.mode = 'dottie'; finished(); return; }
-    const p = presetMatrix(name, NMAX);
-    if (p) { S.master = p; finished(); }
-  }
-  function swap() { S.master = transpose(S.master); finished(); }
-  function randomSeed() { let v; do v = 1 + Math.floor(rng() * SMAX); while (v === S.seed); setSeed(v); }
-  function reset() { Object.assign(S, { N: DEFAULT.N, seed: DEFAULT.seed, x0: DEFAULT.x0, mode: DEFAULT.mode, hover: null }); S.master = matrixFromSeed(NMAX, S.seed); finished(); }
-
-  /* ---------- playback ---------- */
-  let timer = null;
-  function stop() { if (timer) clearInterval(timer); timer = null; S.playing = false; }
-  function play() {
-    if (S.pass >= K()) S.pass = 0;
-    S.playing = true;
-    timer = setInterval(() => {
-      if (S.pass >= K()) {
-        stop();
-        const N = R.N, res = fsci(R.traj.res[N]);
-        TRV.toast($('toast'), L(`对角逃逸完成：d 与全部 ${N} 行都不同，带符号翻转计数 <b>${fmtSigned(R.total)}</b> = |d| ${MINUS} tr f；x${sub(N)} 的残差 ${res} &gt; 0`,
-          `Diagonal escape complete: d differs from all ${N} rows; signed flip count <b>${fmtSigned(R.total)}</b> = |d| ${MINUS} tr f; residual of x${sub(N)} ${res} &gt; 0`));
-        schedule();
-        return;
-      }
-      S.pass++;
-      schedule();
-    }, TRV.reduceMotion ? 900 : 650);
-    schedule();
-  }
+  const paint = kit.painter(() => {
+    if (S.scene === 'cos') drawCos(); else { const g = kit.plot($('cv'), { x: [0, 1], y: [0, 1], pad: [0, 0, 0, 0] }); ({ diag: drawDiag, poly: drawPoly, prime: drawPrime })[S.scene](g); }
+    drawPlots(); drawText();
+  }, [$('stage'), $('plotA'), $('plotB')]);
 
   /* ---------- controls ---------- */
-  const setters = { n: setN, seed: setSeed, x0: setX0 };
-  const current = { n: () => S.N, seed: () => S.seed, x0: () => S.x0 };
-  for (const k of Object.keys(setters)) {
-    $(k).addEventListener('input', (ev) => setters[k](ev.target.value));
-    $(k + 'Num').addEventListener('change', (ev) => setters[k](ev.target.value));
-    $(k + 'Num').addEventListener('keydown', (ev) => { if (ev.key === 'Enter') ev.target.blur(); });
-    $(k + 'Dec').addEventListener('click', () => setters[k](current[k]() - 1));
-    $(k + 'Inc').addEventListener('click', () => setters[k](current[k]() + 1));
+  const clock = kit.clock({
+    range: $('now'), play: $('play'), label: $('tau'), speeds: $('speedChips'), max: 6, rate: 1.5, step: 1,
+    format: (t, max) => `${L('步', 'step')} ${Math.floor(t + 1e-9)} <small>/ ${max.toFixed(0)}</small>`,
+    onChange: (t, c) => { if (stopAt != null && c.playing && t >= stopAt) { const at = stopAt; stopAt = null; c.pause(); c.set(at); return; } paint(); }
+  });
+  function setScene(sc, t) {
+    S.scene = sc; sceneChips.set(sc, true);
+    document.querySelectorAll('[data-scenes]').forEach((el) => { el.hidden = !el.dataset.scenes.split(' ').includes(sc); });
+    clock.pause(); clock.rate = SC[sc].rate; clock.setMax(SC[sc].max(), true); clock.set(t == null ? SC[sc].start() : t);
   }
-  document.querySelectorAll('#presets [data-preset]').forEach((b) => b.addEventListener('click', () => applyPreset(b.dataset.preset)));
-  $('swap').addEventListener('click', swap);
-  $('random').addEventListener('click', randomSeed);
-  $('reset').addEventListener('click', reset);
-  document.querySelectorAll('#nChips [data-n]').forEach((b) => b.addEventListener('click', () => setN(+b.dataset.n)));
-  document.querySelectorAll('#modeChips [data-mode]').forEach((b) => b.addEventListener('click', () => setMode(b.dataset.mode)));
-  $('first').addEventListener('click', () => { stop(); setPass(0); });
-  $('prev').addEventListener('click', () => { stop(); setPass(S.pass - 1); });
-  $('next').addEventListener('click', () => { stop(); setPass(S.pass + 1); });
-  $('last').addEventListener('click', () => { stop(); setPass(K()); });
-  $('play').addEventListener('click', () => { if (S.playing) { stop(); schedule(); } else play(); });
-  $('pass').addEventListener('input', (ev) => { stop(); setPass(+ev.target.value); });
-  $('ledger').addEventListener('click', (ev) => { const row = ev.target.closest('.drow[data-pass]'); if (row) { stop(); setPass(+row.dataset.pass); } });
-  $('tape').addEventListener('click', (ev) => { const t = ev.target.closest('i[data-pass]'); if (t) { stop(); setPass(+t.dataset.pass); } });
-  document.addEventListener('keydown', (ev) => {
-    if (ev.altKey || ev.ctrlKey || ev.metaKey) return;
-    const t = ev.target;
-    if (t && (t.closest('input, textarea, select, [contenteditable]') || !$('drawer').hidden)) return;
-    if (ev.key === 'ArrowLeft') { stop(); setPass(S.pass - 1); ev.preventDefault(); }
-    else if (ev.key === 'ArrowRight') { stop(); setPass(S.pass + 1); ev.preventDefault(); }
-    else if (ev.key === 'Home') { stop(); setPass(0); ev.preventDefault(); }
-    else if (ev.key === 'End') { stop(); setPass(K()); ev.preventDefault(); }
-    else if (ev.key === ' ' && !(t && t.closest('button, a'))) { if (S.playing) { stop(); schedule(); } else play(); ev.preventDefault(); }
-    else if (ev.key === 's' || ev.key === 'S') swap();
-    else if (ev.key === 'r' || ev.key === 'R') randomSeed();
-    else if (ev.key === 'm' || ev.key === 'M') setMode(MODES[(MODES.indexOf(S.mode) + 1) % MODES.length]);
+  const leave = () => cards.mark(null);
+  const sceneChips = kit.chips($('sceneChips'), 'scene', (v) => { leave(); setScene(v); });
+  function newList(keepStep) { S.rows = makeList(S.N, S.seed); clock.setMax(S.N, true); clock.set(keepStep ? Math.min(clock.t, S.N) : S.N); }
+  const fSize = kit.field($('size'), { onInput: (v) => { S.N = v; leave(); newList(); } });
+  const fSeed = kit.field($('seed'), { onInput: (v) => { S.seed = v; leave(); newList(); } });
+  kit.field($('tpoint'), { fmt: (v) => v.toFixed(2), onInput: (v) => { S.tpoint = v; leave(); paint(); } });
+  const fX0 = kit.field($('x0'), { fmt: (v) => v.toFixed(2), onInput: (v) => { S.x0 = v; leave(); paint(); } });
+  const zoomChips = kit.chips($('zoomChips'), 'zoom', (v) => { S.zoom = v; paint(); });
+  function doAbsorb(quiet) {
+    if (!absorbD()) { TRV.toast($('toast'), L('本页的清单最多 10 行', 'The list on this page holds at most 10 rows')); return false; }
+    fSize.set(S.N); clock.setMax(S.N, true); clock.set(S.N - 1, true);
+    if (!quiet) { TRV.toast($('toast'), L(`d 成了第 ${S.N} 行；新的对角线又翻出一个清单外的串`, `d is now row ${S.N}; the new diagonal flips out another string that is off the list`)); clock.play(); }
+    return true;
+  }
+  $('absorb').addEventListener('click', () => { leave(); doAbsorb(); paint(); });
+  $('identity').addEventListener('click', () => { leave(); S.rows = Array.from({ length: S.N }, (_, i) => Array.from({ length: S.N }, (_, j) => (i === j ? 1 : 0))); clock.set(S.N); });
+  $('rew').addEventListener('click', () => { clock.pause(); clock.set(0); });
+  $('cv').addEventListener('click', (ev) => {
+    if (S.scene !== 'diag' || !hit) return;
+    const b = $('cv').getBoundingClientRect(), j = Math.floor((ev.clientX - b.left - hit.gx) / hit.s), i = Math.floor((ev.clientY - b.top - hit.gy) / hit.s);
+    if (i >= 0 && i < hit.N && j >= 0 && j < hit.N) { S.rows[i][j] = 1 - S.rows[i][j]; leave(); paint(); }
   });
+  kit.keys({ 1: () => { leave(); setScene('diag'); }, 2: () => { leave(); setScene('poly'); }, 3: () => { leave(); setScene('cos'); }, 4: () => { leave(); setScene('prime'); } });
+
+  /* ---------- experiment cards ---------- */
+  const NOTES = {
+    diagonal: ['清单有 6 行。逐行读对角线上的那一位并翻转，拼出 d。d 与第 k 行在第 k 位不同，所以它不是任何一行；右边的点阵里，与 d 相容的候选每步减半，最后剩下的那个不在清单上。', 'The list has 6 rows. Read the diagonal bit of each row and flip it to build d. d differs from row k in place k, so it is none of the rows; in the dot grid the candidates compatible with d halve at each step, and the one that remains is not on the list.'],
+    absorb: ['把逃走的 d 收进清单当第 7 行，再补一列让表保持方形。新的对角线立刻翻出另一个不在清单里的串。收编多少次都一样。', 'Take the escaped d onto the list as row 7 and add a column to keep the table square. The new diagonal at once flips out another string that is off the list. It is the same however often you absorb.'],
+    liuhui: ['刘徽从正 6 边形出发，每次把边数翻倍：6、12、24、48、96、192。多边形越来越像圆，放大镜里的缝却一直在。', 'Liu Hui started from the hexagon and doubled the sides each time: 6, 12, 24, 48, 96, 192. The polygon looks more and more like the circle, yet the gap in the magnifier is always there.'],
+    zu: ['祖冲之算到 24576 边。肉眼早已分不出多边形和圆，缝只有 8×10⁻⁹，但把它放大十亿倍，它和第一步时一模一样。', 'Zu Chongzhi went to 24576 sides. The eye cannot tell polygon from circle any more and the gap is only 8×10⁻⁹, but magnified a billion times it looks exactly as it did at the first step.'],
+    dottie: ['从 0 出发反复取余弦。蛛网一圈圈绕向 x* ≈ 0.739，画面跟着放大。每一步都更近，误差乘以大约 0.67，却没有哪一步恰好到达。', 'Start at 0 and take the cosine again and again. The cobweb winds in on x* ≈ 0.739 while the view zooms along. Each step is closer, the error multiplied by about 0.67, yet no step lands exactly.'],
+    far: ['换一个很远的起点 x₀ = 3：第一步就被拉进 [−1, 1]，之后走向同一个 x*。终点与起点无关，到不了这件事也与起点无关。', 'Take a far start, x₀ = 3: the first step pulls it into [−1, 1] and from there it heads for the same x*. The end does not depend on the start, and neither does the fact that it is never reached.'],
+    euclid: ['清单每多一个素数，就把它们全部乘起来再加一。新数 Q 在每只钟上都指着 1，从不指着 0，所以整除 Q 的素数一定不在清单里。', 'Each time the list gains a prime, multiply them all and add one. The new number Q points at 1 on every dial, never at 0, so any prime dividing Q is not on the list.'],
+    thirteen: ['2·3·5·7·11·13 + 1 = 30031 不是素数，它等于 59 × 509。欧几里得的论证没有说 Q 是素数，只说它的素因子都是新的。', '2·3·5·7·11·13 + 1 = 30031 is not prime: it is 59 × 509. Euclid\'s argument does not say that Q is prime, only that its prime factors are all new.']
+  };
+  let booting = true, stopAt = null;
+  /** Start a card: `to` = where its story ends on the rail (null: the last step), `still` = the frame a still shows. */
+  function run(sc, to, still) {
+    setScene(sc, 0); if (to != null) clock.setMax(SC[sc].max(), true);
+    if (TRV.still || (booting && !TRV.embed)) { clock.set(still == null ? (to == null ? clock.max : to) : still); return; }
+    stopAt = to;
+    if (booting) kit.autoplay(clock, $('stage')); else clock.play();
+  }
+  function applyPreset(id) {
+    stopAt = null;
+    if (id === 'diagonal' || id === 'absorb') { S.N = 6; S.seed = 11; fSize.set(6); fSeed.set(11); S.rows = makeList(6, 11); }
+    if (id === 'diagonal') run('diag');
+    else if (id === 'absorb') { setScene('diag', 6); doAbsorb(true); if (TRV.still || (booting && !TRV.embed)) clock.set(S.N); else if (booting) kit.autoplay(clock, $('stage')); else clock.play(); }
+    else if (id === 'liuhui') run('poly', 5);
+    else if (id === 'zu') setScene('poly', 12);
+    else if (id === 'dottie') { S.x0 = 0; fX0.set(0); S.zoom = 'follow'; zoomChips.set('follow', true); run('cos', null, 9); }
+    else if (id === 'far') { S.x0 = 3; fX0.set(3); S.zoom = 'whole'; zoomChips.set('whole', true); run('cos', 12); }
+    else if (id === 'euclid') run('prime', null, 4);
+    else if (id === 'thirteen') setScene('prime', 6);
+  }
+  const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
+    idle: ['自由探索：换场景、改清单、拖时间轴。随时可以再选一张卡。', 'Free play: switch scenes, edit the list, scrub the rail. Pick a card again at any time.'] });
+
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });
-  TRV.startGlitch($('app'));
-  TRV.onLang(() => { built = ''; schedule(); });
-  window.addEventListener('resize', schedule);
-  if ('ResizeObserver' in window) { const ro = new ResizeObserver(schedule); ro.observe(heat); ro.observe(stage); }
+  TRV.startGlitch(document.querySelector('.brand'));
 
-  /* ---------- start ---------- */
-  S.pass = S.N;
-  schedule();
-
-  /** Thumbnail cover (see drawCover): the 8 × 8 list of the default seed at step 5. */
-  window.TRV_THUMB = () => new Promise((resolve) => {
-    stop();
-    S.N = NMAX; S.seed = DEFAULT.seed; S.master = matrixFromSeed(NMAX, S.seed); S.x0 = DEFAULT.x0; S.pass = 5; built = '';
-    schedule();
-    requestAnimationFrame(() => requestAnimationFrame(resolve));
-  });
-
-  /** Read-only probe for the browser tests (tests/sphere-escape.test.mjs); every call returns a fresh copy. */
-  const copy = (x) => JSON.parse(JSON.stringify(x));
-  window.SE_DEBUG = Object.freeze({
-    frames: () => frames,
-    pending: () => pending,
-    state: () => ({ N: S.N, seed: S.seed, x0: S.x0, mode: S.mode, pass: S.pass, passes: K(), playing: S.playing, edited: edited() }),
-    info: () => {
-      fresh();
-      return copy({
-        N: R.N, f: R.f, d: R.d, diag: R.diag, signs: R.signs, total: R.total, trace: R.trace, weight: R.weight,
-        ok: R.v.ok, witness: R.v.witness, ham: R.v.ham, minHam: R.v.minHam, argmin: R.v.argmin, listed: R.v.listed,
-        xs: R.traj.xs, res: R.traj.res, pythWorst: R.pyth.worst, pythOk: R.pyth.ok, xStar: XSTAR, sinStar: Math.sin(XSTAR),
-        primes: R.primes, escapes: R.escapes, euler: R.euler, zeta2: ZETA2
-      });
+  window.ESCAPE_DEBUG = {
+    get state() {
+      const k = step(), d = dOf(S.rows), xs = orbit(S.x0);
+      return { scene: S.scene, step: k, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, N: S.N, seed: S.seed, rows: S.rows.map((r) => r.join('')), d: d.join(''),
+        hamming: S.rows.map((r) => hamming(r, d)), n: sides(Math.min(k, 12)), gap: gap(sides(Math.min(k, 12))), x0: S.x0, xk: xs[Math.min(k, KCOS)], xstar: XSTAR, zoom: S.zoom, euclid: EUCLID[Math.min(k, PRIMES.length)], tpoint: S.tpoint };
     },
-    master: () => copy(S.master),
-    /** Viewport coordinates of the centre of cell (r, c) (1-based) of the matrix, or of d(c) when r is 'd'. */
-    cellPoint: (r, c) => {
-      if (!geom) return null;
-      const rc = heat.getBoundingClientRect(), d = geom.dpr, y = r === 'd' ? geom.dy : geom.oy + (r - 1) * geom.s;
-      return { x: rc.left + (geom.ox + (c - 0.5) * geom.s) / d, y: rc.top + (y + geom.s / 2) / d };
-    },
-    set: (o = {}) => {
-      if (o.seed !== undefined) { S.seed = clampInt(o.seed, 1, SMAX, S.seed); S.master = matrixFromSeed(NMAX, S.seed); }
-      if (o.N !== undefined) S.N = clampInt(o.N, NMIN, NMAX, S.N);
-      if (o.x0 !== undefined) S.x0 = clampInt(o.x0, 0, XMAX, S.x0);
-      if (o.mode !== undefined && MODES.includes(o.mode)) S.mode = o.mode;
-      stop(); S.pass = o.pass !== undefined ? clampInt(o.pass, 0, S.N, S.N) : S.N; schedule();
-    }
-  });
+    seek: (t) => { clock.pause(); clock.set(t); }, taylor, cell: (i, j) => { const b = $('cv').getBoundingClientRect(); return [b.left + hit.gx + (j + 0.5) * hit.s, b.top + hit.gy + (i + 0.5) * hit.s]; }
+  };
+  window.TRV_THUMB = () => { S.N = 8; S.seed = 5; S.rows = makeList(8, 5); setScene('diag', 8); paint.now(); };
+  S.rows = makeList(S.N, S.seed); cards.pick(cards.initial('diagonal'));
+  booting = false;
+  paint();
 })();

@@ -312,6 +312,10 @@ $$
 - **从“一维赋值线”升维到“张量关联场”的低秩约分（`MODEL`）**：传统的回溯与局部随机游走本质上都在一维布尔赋值线上逐点试探；而张量网络方法将离散布尔子句网络嵌入高维线性空间，转化为多线性张量缩并问题。在本书锁定的 `trureturing@dev` 形式化库中，第 19 章针对特定离散桥图在维度假设下证明的**张量网络量子最大流最小割定理**（[`QuantumMaxFlowMinCut.result`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result) 及其多面体割锥刻画 [`cone_QMinCut`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.cone_QMinCut)）与第 3 章在迹约束下界定高权重模态数的**有限秩集中模态上界**（[`finite_rank_concentration_mode_bound`](lean:D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound)），给出了有限维原型（注：这些 Lean 定理刻画的是特定桥图流割对偶与有限秩迹集中，并非形式化 [@rem-ch30-eth-subexponential-literature] 中的 3-SAT 亚指数算法本身）：它们在概念模型（`MODEL`）上说明，跨割界面传递信息的有效瓶颈受控于**代数秩（Rank）**。当局部变量成块缩并时，一维布尔视角下看似独立的约束块在高维张量面上展现出**线性相关与秩亏损（冗余寄生面积正负相消）**——这与第 16、27 章旋量编译器消去冗余旋转门、以及第 23 章丢番图范数型压缩变量维度的代数约分思想同源。
 - **“球永远只是多面体近似”：三体局部切面焊不出绝对无缝的真球（`MODEL`）**：在几何直觉（`MODEL`）上，假设常数硬地板 $s_3 > 0$ 好比预设仅凭每个子句至多含 $k=3$ 个文字的局部三体切面（$\mathbf{e}_i \wedge \mathbf{e}_j \wedge \mathbf{e}_k$），就能在 $n \to \infty$ 极限下拼出一颗处处曲率恒定、滴水不漏的刚性指数真球。然而正如全书反复强调的——**“球永远只是多面体近似”**：固定宽度 $k=3$ 的局部多面体切面在拼装超大规模流形时，面与面之间随规模 $n$ 增长涌现组合冗余，裂开一道如 [@rem-ch30-eth-subexponential-literature] 所记述的亚指数渐近代数缝隙，使单变量有效指数率上界曲线在 $n \to \infty$ 极限下缓慢趋向 $0$。
 
+::: {.viz src="eth-horizon-crossover" preset="bridge" height="500"}
+**流矩阵的秩等于最小割。** 桥图 $(a, b, c, d) = (2, 3, 2, 3)$：两道外割都是 $6$（琥珀色虚线），三条桥能过 $12$。右边是一个随机整数实例的 $6 \times 6$ 流矩阵（青色为正项，品红为负项），下面六根奇异值都不为零：秩 $6$，恰等于最小割。这只是一个实例；这类桥图在维数锥域内总是如此，是 Lean 验证的定理。
+:::
+
 ### 2. 银河算法（Galactic Algorithm）与宇宙视界：为什么有限观察者视角下的 $P \neq NP$ 依然稳固？（`MODEL` 与认识论边界）
 
 ::: {.example #ex-ch30-galactic-crossover-scale title="亚指数上界曲线与局部搜索基准的跨宇宙尺度对比及二次编码膨胀"}
@@ -331,6 +335,14 @@ $$
 - **银河算法与有限观察者的物理尺度边界（`MODEL`）**：如 [@ex-ch30-galactic-crossover-scale] 所示，示意曲线下穿传统局部搜索基准的交叉尺度远超可观测宇宙的重子自由度预算（此类仅在超天文尺度显影渐近优势的算法在复杂性理论惯例中被称为**银河算法 Galactic Algorithm**）。在本书形式化库中，**有限记忆历史容量定理**（[`finite_memory_history_capacity`](lean:D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity)，证明可区分测量历史数受有限记忆载体容量上界制约）与**开放可积电路最小深度定理**（[`OpenIntegrableCircuitMinDepth.result`](lean:D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result)，给出局部性为 $\kappa$ 的开放可积电路最小深度 $\lfloor N/(\kappa+1)\rfloor + 1$）从各自模型侧面刻画了有限物理系统的容量与深度硬约束；将它们与 [@ex-ch30-galactic-crossover-scale] 的银河交叉尺度并置，在几何模型（`MODEL`）上直观展现了为什么在物理可实现的观测尺度内，有限观察者依然面对高耸的有效搜索壁垒（同时重申：标准统一图灵机模型下的 $\mathrm{P} \neq \mathrm{NP}$ 猜想 [@conj-p-neq-np] 仍为未决的 `OPEN` 问题）。
 - **$P$（场）与 $NP$（线）的认识论对照（`MODEL`）**：结合 [@rem-ch30-eth-subexponential-literature] 与 [@ex-ch30-galactic-crossover-scale] 中的渐近与电路编码尺度对比，在本书几何模型（`MODEL`）中，沿全局光滑导向场的局部松弛（类比 $P$）与沿见证丝的离散组合搜寻（类比 $NP$）依然代表两类截然不同的几何机制。
 - **形式内核核验与顶层规约审计的哥德尔—语义边界（`LEAN ✓` 原型与 `MODEL` 映照）**：[@rem-ch30-eth-subexponential-literature] 中最具认识论意味的一幕是——形式证明助手内核可以迅速核验脚本内部每一步推演的传递合法性，而学界仍需仔细审计“顶层形式化命题的定义是否忠实刻画了目标图灵机复杂度命题”。在本书第 21 章中，经 Lean 4 内核验证的**相对语义对角线与定义逃逸定理**严格证明：在给定无不动点扭转映射（`∀ v, twist v ≠ v`）的条件下，相对语义对角线构造必然逃出任何已编目解码族（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)），且当解码目录对潜空间满射时，该对角线目标相对于给定潜映射不满足语义完备性 `TargetAdequate`（[`relative_semantic_diagonal_target_inadequate_of_surjective`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective)）。将这一形式定理作为认识论原型（`MODEL`）来观照顶层规约审计，恰好印证了全书的核心准则：**形式内核在球内严格锁死推演链条的传递正确性，而对顶层命题边界定义之语义恰当性的审视，永远需要站在形式球壳之外！**
+
+::: {.viz src="eth-horizon-crossover" preset="atoms" height="500"}
+**交叉点在视界之外。** 青色是取 $c = 1$ 的示意曲线 $r(n) = \log_2(\log_2 n)/\sqrt{\log_2 n}$，品红是 PPSZ 的 $0.386$，阴影是可观测宇宙原子数 $2^{266}$ 以内的规模。琥珀色的读数停在 $n = 2^{266}$：曲线还在 $0.494$，要到 $n \approx 2^{558}$ 才降到 $0.386$（示意曲线的数值对比，`MODEL`）。
+:::
+
+::: {.viz src="eth-horizon-crossover" height="640"}
+**交互实验室 `ORTHO//HORIZON`**：本节的三个场景。指数率：示意曲线 $r(n)$ 与 PPSZ 的 $0.386$ 在哪里相交，以及常数 $c$ 怎样把交叉点挪进或挪出阴影；桥图：流矩阵的秩与三道割，锥域内秩等于最小割（Lean 已验证），锥域外三条桥成为瓶颈；模态：谱里不小于阈值 $\theta$ 的模态数不超过 $T/\theta$（Lean 已验证）。取 $c = 1$ 的曲线只是示意，不是任何算法的实测。
+:::
 
 ---
 
@@ -359,6 +371,10 @@ $$
 :::
 
 将 [@rem-ch30-lamb-decomposition-literature] 所载的无旋势流相与有旋涡流相映射回上一节“$P$ 是无旋导向场，$NP$ 是旋涡荒原中的细线”的几何类比模型（`MODEL`），无旋相在概念上对应光滑全局导向场（类比流体中的 $P$ 态），而有旋相则对应多尺度旋涡缠绕。
+
+::: {.viz src="navier-stokes-p-np" preset="vortex" height="500"}
+**对流项的两半。** 平面流 $\mathbf{u} = (1 - s)(x, -y) + s(-y, x)$ 在 $s = 0.8$ 时的流线，涡度 $\omega = 2s = 1.6$。琥珀色探针处，白色箭头是对流项 $(\mathbf{u}\cdot\nabla)\mathbf{u}$，它是青色的梯度那一半 $\nabla(\|\mathbf{u}\|^2/2)$ 与品红的兰姆那一半 $\boldsymbol{\omega}\times\mathbf{u}$ 之和；把 $s$ 调回 $0$，品红箭头消失。探针可以拖动。
+:::
 
 ### 2. 为什么两道难题都在“第 2 维 $\to$ 第 3 维”发生相变？（几何类比 `MODEL` 与开放猜想边界）
 
@@ -390,6 +406,10 @@ $$
 
 1. **兰姆恒等式、螺旋度霍普夫不变量与二维无条件全局正则性**：对流分解 $(\mathbf{u}\cdot\nabla)\mathbf{u} = \frac{1}{2}\nabla(\|\mathbf{u}\|^2) + \boldsymbol{\omega}\times\mathbf{u}$ 源于 H. Lamb（*Hydrodynamics*）、无粘涡通量守恒源于开尔文环量定理（Lord Kelvin, 1869）、无粘流体螺旋度 $\mathcal{H} = \int \mathbf{u}\cdot\boldsymbol{\omega}\,dV$ 与 $S^3$ 霍普夫链环不变量的对应源于 J. J. Moreau（1961）与 H. K. Moffatt（1969）；二维不可压缩纳维—斯托克斯方程在任意时间上的无条件全局光滑解存在唯一性由 O. A. Ladyzhenskaya（*The Mathematical Theory of Viscous Incompressible Flow*, 1969）严格证明（注意：本书行内引用的冻结定理 [`all_grade_regularity_of_mild_path`](lean:D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path) 假设 $[0, \tau]$ 上连续温和解路径已给定，不等同于 Ladyzhenskaya 的无条件全局存在性定理）。
 2. **受迫三维纳维—斯托克斯（克雷陈述 C / D，含光滑外力 $\mathbf{f} \in C^\infty$）的 2026 年有限时间爆破构造与外部 Lean 4 验证**：在克雷数学研究所（C. Fefferman）制定的问题描述中，受迫陈述 C / D 允许施加光滑、紧支且保持总动能一致有界（$\sup_t \|\mathbf{u}(\cdot, t)\|_{L^2} < \infty$）的外力场 $\mathbf{f}(\mathbf{x}, t)$。2026 年公布的 166 页解析构造及其配套外部 Lean 4 形式化证明确认：在受迫情形下，精心设计的光滑外力可持续对齐并泵浦多尺度向内盘旋、轴向拉伸的自相似涡丝结构，使三维涡管拉伸局部压倒粘性耗散 $\nu\nabla^2\mathbf{u}$，在有限时间 $T^* < \infty$ 内产生横截面积 $A(t) \to 0$、$\limsup_{t \nearrow T^*} \|\mathbf{u}(\cdot, t)\|_{L^\infty} = \infty$ 的奇点（相关欧拉与流体奇点文献亦见 T. M. Elgindi, *Ann. of Math.* **194**, 2021；J. Chen & T. Y. Hou, 2022–2023；D. Córdoba & L. Martínez-Zoroa；以及 T. Buckmaster & L. Alpöge, 2026）。这些结果针对含外力或无粘情形，**并未解决**下文无外力（$\mathbf{f} \equiv \mathbf{0}$）粘性陈述 A / B。
+:::
+
+::: {.viz src="navier-stokes-p-np" preset="runaway" height="500"}
+**越拉越细（示意模型）。** 青色回路的环量 $\Gamma = \omega A$ 不变，虚线是出发时的涡管。这里让拉伸率正比于涡度本身（$\alpha = \kappa\omega$，示意性的闭合，不是纳维—斯托克斯方程的解）：$\kappa\Gamma = 0.50$ 大于 $4\pi\nu = 0.151$，到 $t = 2.4$ 截面已缩到 $0.162$，品红的涡度升到 $6.18$，截面将在 $t^* = 2.86$ 归零。真实的三维流体是否如此，正是下面的开放问题（`MODEL`）。
 :::
 
 ::: {.conjecture #conj-coda-navier-stokes-regularity title="无外力三维不可压缩纳维—斯托克斯方程的全局光滑性猜想（克雷千禧年陈述 A / B）"}
@@ -444,6 +464,10 @@ $$
 导出：必要性分别代入对偶隐态对 $\pm b$（分离出奇次项 $P(L(b)) = 0$ 与偶次项 $P(B(b, b)) = 0$）及显隐叠加态 $a + b$（分离出混合项 $P(B(a, b) + B(b, a)) = 0$）；充分性令 $a = P(x),\, b = x - P(x)$，由 $P(b) = 0$ 立得 $P(V(x)) = P(V(P(x)))$。第二部分在五模态勒雷投影平流实例中计算显隐波族 $\operatorname{family}(\alpha, \beta)$ 在模态 $0 = (0, 1)$ 上的卷积分量，得出投影混合平流项为 $+i/4$（[`mixed_witness`](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.mixed_witness)），代入带负号二次场增量恒等式且利用隐态粘性核保持性 $P(L_\nu(b)) = 0$ 即得观测横向流体加速度差为 $-i/4 \neq 0$（[`fluid_gap_from_mixed`](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.fluid_gap_from_mixed)），结合第一部分充要判据即证对一切 $\nu \in \mathbb{R}$ 均不存在精确闭合映射 $f$。完整证明由 Lean 内核检查。
 :::
 
+::: {.viz src="navier-stokes-p-np" preset="mixed" height="500"}
+**看不见的变量漏进来。** 只看 $x$ 的观察者：每条曲线是固定一个 $x$ 时，看得见的加速度 $P(V)$ 随看不见的 $y$ 的变化。混合项打开后，曲线张成一把扇子：同一个 $x = 0.5$，青色是 $y = 0$ 时的加速度，琥珀色的点是当前 $y$ 时的加速度，琥珀色竖线是两者之差。差不为零，就没有只依赖 $x$ 的精确闭合（$\mathbb{R}^2$ 上的示意实例；一般判据与五模态实例见上面的定理）。
+:::
+
 ### 4. 粘性兰道尔擦除、高维测地线视角与连续—离散六重类比总结（`MODEL`）
 
 围绕湍流耗散尺度、平均化流体逻辑门级联与无穷维微分同胚群测地线的三项经典文献定理汇总于以下注记中：
@@ -474,6 +498,10 @@ $$
 | **物理防火墙** | 有限观察者 $90^\circ$ 视界与局部记忆截断 | 运动粘性耗散（[@rem-ch30-lamb-decomposition-literature]，对照 [`S2_dissipation`](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation)）与微观离散截断 | 兰道尔式正交面积耗散，抑制无穷步芝诺级联 |
 | **高维几何视角** | 无时间静态场全局交集（受限坍缩参照 [@rem-ch30-postselection-ctc-literature]） | 无穷维流形测地线视角（无粘文献参照 [@rem-ch30-tao-arnold-literature]） | 高维流形上的简洁几何运动在局部低维投影下展现为复杂的非线性能量传递 |
 
+:::
+
+::: {.viz src="navier-stokes-p-np" height="640"}
+**交互实验室 `ORTHO//VORTEX`**：本节的三个场景。对流项的两半：在驻点流与刚体旋转之间调 $s$，看兰姆那一半怎样随涡度出现；涡管：二维不被拉伸，三维在恒定拉伸下变细到伯格斯涡核 $4\pi\nu/\alpha$ 为止，示意性的自拉伸闭合则在有限时间夹断；闭合：只看 $x$ 的观察者何时能自己预测下一步（判据与五模态无闭合实例已由 Lean 验证）。涡管场景是示意模型，不是纳维—斯托克斯方程的数值解。
 :::
 
 ---

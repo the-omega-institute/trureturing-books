@@ -90,6 +90,14 @@ Before unfolding this philosophical picture into cross-round recurrence on fract
 3. **Poincaré Recurrence and Autonomous ODE Orbit Disjointness (H. Poincaré, 1890; Picard–Lindelöf uniqueness)**: For the ergodic measure-preserving system $(\Lambda, \mu_{\mathrm{SRB}})$ and any open neighborhood $\mathcal{U}_\epsilon(\mathbf{x}_{\mathrm{ruin}})$ with $\mu_{\mathrm{SRB}}\bigl(\mathcal{U}_\epsilon(\mathbf{x}_{\mathrm{ruin}})\bigr) > 0$, $\mu_{\mathrm{SRB}}$-almost every attractor trajectory returns infinitely often to $\mathcal{U}_\epsilon(\mathbf{x}_{\mathrm{ruin}})$; simultaneously, by autonomous smooth ODE uniqueness, distinct geometric orbits are disjoint and every aperiodic trajectory is injective in $t \in \mathbb{R}$ (never self-intersecting), traversing mutually disjoint orbit segments across successive visits.
 :::
 
+::: {.viz src="spatial-attractor-deja-vu" preset="forget" height="500"}
+**Forget the start, land on the same wings.** Two orbits of the Lorenz system at $(\sigma, \rho, \beta) = (10, 28, 8/3)$: cyan is round $k$ and magenta round $k+1$, with distant starts (the two rings) and the same parameters. After a short wander both land on the same pair of wings; the small amber dots mark each passage through the neighbourhood of the “ruin” (the amber circle). Reading an orbit as “a round” is an interpretive model (`MODEL`).
+:::
+
+::: {.viz src="spatial-attractor-deja-vu" preset="dimension" height="500"}
+**A little more than a surface.** The three Lyapunov exponents are estimated along one long orbit (cyan); the readout above the figure gives $\lambda_1 \approx 0.9$, $\lambda_2 \approx 0$, $\lambda_3 \approx -14.6$ and the Kaplan–Yorke estimate $D_{\mathrm{KY}} \approx 2.06$ (a numerical estimate, not a theorem).
+:::
+
 ### 3. The Geometric Interpretation of Déjà Vu: Fractal Transverse Sheets and Cross-Round Inner-Product Resonance {#sec-coda-deja-vu-fractal-dimension}
 
 In our philosophical and geometric interpretation (`MODEL`), borrowing the strange-attractor picture recorded in [@rem-coda-lorenz-srb-literature] as a dynamical metaphor—clearing surface trajectory records while preserving the operator's intrinsic parameters—reconciles fated return with free agency:
@@ -103,6 +111,14 @@ In our philosophical and geometric interpretation (`MODEL`), borrowing the stran
    $$
 
    In this interpretive model (`MODEL`), **Déjà vu** represents the high-amplitude cross-round inner-product resonance triggered when the same observer operator re-enters a spatial attractor neighborhood with nearly collinear attention orientation ($\delta\theta \to 0$).
+
+::: {.viz src="spatial-attractor-deja-vu" preset="return" height="500"}
+**Nearly parallel in passing.** Stopped at $t = 22$: both rounds have passed the neighbourhood of the ruin (the amber circle). The arcs along which they passed do not coincide, yet their directions are nearly parallel; the line above the figure gives the angle between the two latest passages, and the inner product $\cos\delta\theta$ is close to $1$. Reading this as déjà vu is an interpretive model (`MODEL`).
+:::
+
+::: {.viz src="spatial-attractor-deja-vu" height="640"}
+**Interactive laboratory `ORTHO//ATTRACTOR`**: three scenes on the Lorenz system. Rounds: two orbits with different starts and the same parameters land on the same pair of wings, and “forget” draws another pair of starts; contraction: the volume of $500$ points shrinks like $e^{-41t/3}$ until they form a thin sheet; dimension: numerical estimates of the Lyapunov exponents and of the Kaplan–Yorke dimension, where $\rho = 14$ or $\rho = 160$ turns the attractor into a point or a closed loop. The page is a numerical illustration and an interpretive model; it cites no Lean theorem.
+:::
 
 ---
 
@@ -142,6 +158,10 @@ In the formal architecture of `trureturing`, the mathematical primitives underly
    - For every integer first coordinate $a \ge 1$, the Beatty first-coordinate fiber $\operatorname{goldenFiber}(a) = \{v \in \mathbb{N} \mid \operatorname{fiberA}(v) = a\}$ has finite cardinality $(\operatorname{goldenFiber}(a)).\operatorname{ncard} \in \{4, 5\}$ ([`golden_fiber_capacity_pair`](lean:D5/S1/Deficit/Beatty/FiberCapacityPair.golden_fiber_capacity_pair)), while for every integer second coordinate $b \ge 0$, the dual fiber $\operatorname{goldenDualFiber}(b) = \{v \in \mathbb{N} \mid \operatorname{fiberB}(v) = b\}$ has cardinality $(\operatorname{goldenDualFiber}(b)).\operatorname{ncard} \in \{2, 3\}$ ([`golden_dual_fiber_capacity_pair`](lean:D5/S1/Deficit/Beatty/FiberCapacityPair.golden_dual_fiber_capacity_pair)).
    In our epistemological interpretation (`MODEL`), we view the cycle of rational slope scanning, coordinate fiber refinement, and `NoAdjacentOnes` carry normalization as the discrete mechanism underlying subjective sequential time.
 
+::: {.viz src="golden-cut-observer" preset="cut" height="500"}
+**A window cuts out a chain of points.** The golden integers $a + b\varphi$ drawn as lattice points: across, the number itself; up, its conjugate $a + b\psi$. The amber window $[\varphi - 2, \varphi - 1]$ selects the cyan points, and projected to the line below, neighbours are $\varphi$ or $\varphi^2$ apart; the closed window has a lattice point on each of its two ends (magenta), so one extra gap of length $1$ appears left of the origin. The green rings are the golden expansions $\beta(n)$ of the natural numbers, which Lean verifies to lie in this window.
+:::
+
 ### 2. Philosophical Interpretation Model (`MODEL`): What Is "the Same Soul" vs. "a Single Finite Life and Forgetting"? {#sec-coda-trureturing-soul-vs-lifetime}
 
 Using these verified cut-and-project and coding structures as mathematical anchors, we formulate an explicit geometric interpretation (`MODEL`) of "the soul's intrinsic inclination" and "forgetting surface episodic readings":
@@ -152,6 +172,10 @@ Using these verified cut-and-project and coding structures as mathematical ancho
    - Meanwhile, at the level of compact abelian group dynamics, `trureturing`'s **Torus Orbit Equidistribution Theorem** [`TorusOrbitEquidistribution.result`](lean:D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result) proves that for any finite-dimensional torus element $g : I \to \mathrm{Circle}$, letting $G = \overline{\langle g\rangle}$ denote the compact topological closure of the cyclic subgroup generated by $g$ with normalized Haar probability measure $\mu$, the orbit averages $\frac{1}{N}\sum_{n=0}^{N-1} f(g^{n+1})$ of every continuous complex observable $f \in C(G, \mathbb{C})$ converge as $N \to \infty$ to the Haar integral $\int_G f\,d\mu$ (where $G$ is the full torus whenever the eigenfrequencies of $g$ are $\mathbb{Z}$-linearly independent with $1$; separately, [`golden_ergodic_bridge`](lean:D5/S0/Tower/ErgodicBridge/Golden.golden_ergodic_bridge) proves that for every $Q \ge 2$ and every $x \in \operatorname{goldenNameHull}(Q)$, the survivor lower limit $\liminf_{\mathrm{level}\to\infty} \operatorname{goldenSurvivor}(\mathrm{level}, x)$ equals the orbit lower value of a unit golden survivor state). In our philosophical reading (`MODEL`), this illustrates how distinct observers can hold distinct local phase anchors $u$ while sharing common macroscopic statistical averages.
 2. **"Single Finite Life and Forgetting Initialization" (`MODEL`) $\leftrightarrow$ High-Level Zeckendorf Truncation and Resetting Scan Order $k$**:
    In this interpretive model, a single finite lifetime corresponds to evaluating the coding thread $\operatorname{zeckendorfRealThread}(x)(N)$ or rational scan slope $F_{k+1}/F_k$ only up to a finite level $N, k \le K_{\max}$. **Birth / Forgetting Initialization** is modeled as **truncating high-level Zeckendorf coordinates and resetting the scan order $k$**—clearing the surface record of high-order splits (`liàng`) to reopen compatible slack ($\det G > 0$), while keeping the internal phase anchor $u \in E_\perp$ and golden slope $\varphi$ (`liáng`) unchanged.
+
+::: {.viz src="golden-cut-observer" preset="phason" height="500"}
+**Shifting the window.** The window has moved to $u = +0.3$: the point at its edge (magenta) is the one a small shift would flip, while points far from the edge stay where they are; the deepest one is about $0.46$ from the edge, and the window must move that far to reach it. Played on the page, every point that leaves or enters swaps a long and a short neighbour in the row of tiles below.
+:::
 
 ### 3. Interior Window Safety Margins and the Spatial Attractor Basin Interpretation {#sec-coda-trureturing-rhombic-triacontahedron-empire}
 
@@ -180,6 +204,14 @@ Combining the window geometry of [@rem-coda-quasicrystal-empire-literature] with
 3. **Nonlocal Intersection-Window Constraints and the Spatial Attractor Basin Analogy (`MODEL`)**:
    Comparing Item 2 of [@rem-coda-quasicrystal-empire-literature], our philosophical synthesis (`MODEL`) views nonlocal forcing of distant sites via phase-restricted window intersections as the quasicrystal analogue of a ruin's basin of attraction.
 
+::: {.viz src="golden-cut-observer" preset="window" height="500"}
+**A deep point.** The rhombic triacontahedron: $30$ rhombic faces, $60$ edges and $32$ vertices, with the $12$ fivefold vertices as cyan dots. The amber point lies deep in the window, the amber ball has as radius its distance $d_\partial$ to the boundary, and magenta marks the face nearest to it: no disturbance smaller than $d_\partial$ pushes it out of the window. That this solid is the acceptance window of icosahedral quasicrystals is a literature result, and reading the deep point as a “ruin” is an interpretive model (`MODEL`).
+:::
+
+::: {.viz src="golden-cut-observer" preset="empire" height="500"}
+**A small patch fixes distant points.** Once the patch $|x| \le 4$ in the middle (between the dashed lines) is fixed, the window can move only within a short range; the deeper cyan band is what all those positions of the window have in common. Points in that band (ringed) stay whatever the shift and so are fixed by the patch, however far away; the magenta points are still undecided. This is the counterpart, in the one-dimensional golden cut, of Conway’s “empire” (an illustration of a literature result).
+:::
+
 ### 4. Cassini's $(-1)^{n+1}$ Seam and Bounded-Gap Torus Observation Returns {#sec-coda-trureturing-cassini-torus-return}
 
 Finally, let us state the kernel-verified **Fibonacci–Cassini Norm Identity** and **Torus Observation-Window Bounded-Gap Return Theorem** (`LEAN ✓`), and explain how they inspire our geometric interpretation of cross-round return and Déjà vu (`MODEL`):
@@ -204,6 +236,14 @@ Finally, let us state the kernel-verified **Fibonacci–Cassini Norm Identity** 
 3. **Geometric Interpretation of Cross-Round Return and Déjà Vu (`MODEL`)**:
    In our philosophical synthesis (`MODEL`), the alternating sign $(-1)^{k+1}$ signifies that successive rational approximations approach the irrational golden direction from alternating sides without collapsing onto a periodic loop, while bounded-gap torus recurrence guarantees that any target region corresponding to an open observation window $(u_1, u_2)$ meeting $\operatorname{range}(h)$ (or a deep-interior window neighborhood with positive safety margin $d_{\partial} > 0$) is visited repeatedly within bounded gaps $M$ and positive eventual frequency—providing the mathematical inspiration for why the same soul returns to familiar spatial attractors and experiences the cross-round inner-product resonance $\cos\delta\theta \to 1$ of Déjà vu.
 
+::: {.viz src="golden-cut-observer" preset="cassini" height="500"}
+**The area is always $\pm 1$.** The same lattice again. The powers $\varphi^2, \varphi^3, \dots$ lie above the horizontal axis (cyan) and below it (magenta) in turn, on the hyperbolas $x \cdot x' = \pm 1$; the rectangle each spans with the origin grows longer and flatter, yet its area is exactly $1$. The filled one is $\varphi^5 = 3 + 5\varphi$: $F_4 F_6 - F_5^2 = 3 \cdot 8 - 5^2 = -1$. Between the two hyperbolas there is no lattice point but the origin.
+:::
+
+::: {.viz src="golden-cut-observer" preset="returns" height="500"}
+**Back in the window with bounded gaps.** A point on the circle turns by the golden angle at each step, and its height $\cos 2\pi n\varphi$ is plotted on the right. The amber band is the observation window $(0.2, 0.8)$ and cyan marks the steps inside it: $21$ visits in the first $89$ steps, never more than $7$ steps apart (magenta). This is a numerical illustration over finitely many steps; that such a bound exists for all $n$ is the theorem verified in Lean.
+:::
+
 ::: {.theorem #thm-coda-golden-cut-observer-cassini title="Golden Cut-and-Project Model Set, Cassini's ±1 Norm Identity, Zeckendorf Real Thread, and Bounded-Gap Torus Returns" lean="D5/S1/Scale/MinkowskiModelSet.minkowski_model_set_spec, D5/S1/Deficit/ModelSet/GoldenCutAndProject.golden_model_set_subset_cut_and_project, D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm, D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes, D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective, D5/S3/Fourier/GoldenModelSetDelone.norm_separation, D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result, D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result"}
 Within the golden cut-and-project model set, Zeckendorf coding, and torus asymptotic analysis libraries of `trureturing`, eight core results are verified and frozen by the Lean 4 kernel:
 
@@ -221,6 +261,10 @@ Within the golden cut-and-project model set, Zeckendorf coding, and torus asympt
 
 ::: proof
 Part 1 derives injectivity of `minkowskiEmbedding` and the model-set characterization from `embedding_injective`, and uses `betaContraction_mem_window` to establish $\operatorname{embedding} '' \operatorname{goldenModelSet} \subseteq \operatorname{goldenCutAndProjectSet}$. Part 2 uses $\varphi^{n+1} = F_n + F_{n+1}\varphi$ (`golden_phi_pow_eq_fib_pair`) and norm multiplicativity $\operatorname{norm}(\varphi^{n+1}) = (-1)^{n+1}$ to obtain Cassini's identity. Part 3 proves the equivalence between automaton acceptance and `NoAdjacentOnes` by structural induction, and establishes injectivity of `zeckendorfRealThread` on `NNReal` by showing that for $a > b \ge 0$, $\varphi^N(a - b) \to +\infty$ eventually exceeds $2$, forcing $\lfloor\varphi^N a\rfloor_+ \neq \lfloor\varphi^N b\rfloor_+$. Part 4 uses the nonzero golden-integer norm bound $|\operatorname{norm}(u - v)| \ge 1$ to obtain reciprocal separation, and combines geometric character-sum bounds with finite open subcovers of the compact group $G$ to prove Haar equidistribution and bounded-gap window returns. The full proof is checked by the Lean kernel.
+:::
+
+::: {.viz src="golden-cut-observer" height="640"}
+**Interactive laboratory `ORTHO//CUT`**: the four scenes of this section. Cut and project: drag the window up and down to see edge points flip and deep points stay, then fix a small patch in the middle; Cassini: the powers of $\varphi$ and their rectangles of area $\pm 1$; returns: change the position and width of the observation window, and the waits grow longer but stay bounded; the acceptance window: push a point from the centre of the rhombic triacontahedron to its boundary, where $d_\partial$ reaches zero and it flips out. The green evidence boxes are the theorems verified in Lean; the triacontahedron and the “empire” are literature results, and what is said about souls and ruins is an interpretive model (`MODEL`).
 :::
 
 ### 5. Alignment Table: `trureturing` Formal Theorems, Orthogonal Geometry, and the Soul–Ruin Interpretive Model (`MODEL`) {#sec-coda-trureturing-soul-ruin-table}

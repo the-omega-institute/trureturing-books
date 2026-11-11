@@ -64,6 +64,10 @@ $$
 
 The classical continued-fraction phenomenon in [@rem-ch29-pell-convergents-literature] echoes the golden-integer Pell identity $(2a + b)^2 - 5b^2 = 4\operatorname{norm}(g)$ proved in Chapter 23 ([`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)): any attempt to stitch a $90^\circ$ orthogonal area rotation onto a one-dimensional integer grid leaves an irreducible unit arithmetic seam. What Hippasus uncovered was not the failure of mathematics, but **the first seam of a larger sphere breaking through the static rational sphere**.
 
+::: {.viz src="pythagoras-number-escape" preset="hippasus" height="500"}
+**Always one cell off.** The convergents $1/1, 3/2, 7/5, 17/12, \dots$ hug the line $m = \sqrt{2}\,n$ ever more closely; the two bands on the right are the cell counts $m^2$ and $2n^2$, and in the magnifier they are always one cell apart.
+:::
+
 ### Act III: Reclaiming "All Is Number"—From the Verb `shǔ` to the Four-Tier Escape {#sec-coda-pythagoras-act3}
 
 If rational numbers cannot even hold the hypotenuse $\sqrt{2}$ of a unit square, was Pythagoras wrong to proclaim that "All Is Number"?
@@ -138,6 +142,10 @@ At first glance, the right-hand side is merely a sign choice between $+1$ and $-
    $$
 
    In our geometric reading, a $-1$ chiral twist can never arise in isolation at a single prime axis; it cancels pairwise across places—echoing Chapter 10's principle that "pairwise comparison is always consistent and order-independent."
+:::
+
+::: {.viz src="pythagoras-number-escape" preset="five" height="500"}
+**Plane primes and line primes.** When the circle of radius $\sqrt{p}$ passes through a lattice point, $p = a^2 + b^2$ is a plane prime, and squaring $a + bi$ gives an integer right triangle; step through the odd primes with the rail under the figure, and for $p \equiv 3 \pmod 4$ the circle touches no lattice point at all.
 :::
 
 ### Pillar 2: Intersecting Two Quadratic Seams ($2 \times 2 = 4$)—From a Single Quadric to the Congruent-Number Elliptic Curve Torus {#sec-coda-congruent-elliptic-torus}
@@ -309,8 +317,8 @@ Across the first two sections of this chapter, the Lindemann–Weierstrass theor
 
 In the overarching geometric synthesis of this book, starting from the Pell seam cracked open by Hippasus's right triangle ([@rem-ch29-pell-convergents-literature]) and reading across the arithmetic-geometry literature remarks above ([@rem-ch29-pell-primes-hilbert-literature], [@rem-ch29-elliptic-torus-literature], [@rem-ch29-hasse-gauss-literature], and [@rem-ch29-arithmetic-geometry-literature]), the point-count oscillations along the prime axes align visually with the cosine shadow cast by the quantum spinor sphere $S^3 \cong \mathrm{SU}(2)$ onto its diameter $[-1, +1]$.
 
-::: {.viz src="pythagoras-number-escape" height="560"}
-**Interactive Sandbox: Pell Chirality Ledger, the $\pm 1$ Seam, Gaussian Prime Splitting, and Congruent-Number Curves**. Adjust the squarefree parameter $d$ ($2 \le d \le 37$), the odd prime $p$, and the continued-fraction convergent step $k$: the ledger lists the partial quotients of $\sqrt{d}$, the exact `BigInt` convergents $m_k/n_k$, and the Pell norms $\Delta = m_k^2 - d\,n_k^2$ step by step (as the 1D error $|m_k/n_k - \sqrt{d}| \to 0$, the 2D area gap $|\Delta| \ge 1$ never closes; unit norms alternate between $-1$ and $+1$ when $\sqrt{d}$ has an odd continued-fraction period such as $d = 2, 5, 13$, and stay at $+1$ when the period is even such as $d = 3$, reproducing Hippasus's and Theon's side and diagonal numbers $1/1, 3/2, 7/5, 17/12, \dots$ at $d = 2$); the right-hand lattice map marks the sign of $m^2 - d\,n^2$ and every $\pm 1$ unit cell; and the stage switches among the Pell hyperbola and square comparison, Gaussian prime splitting $p \equiv 1 \pmod 4 \iff p = a^2 + b^2$ (producing primitive Pythagorean triples via the Lagrange–Gram identity), and the Frobenius cosine $\cos\theta_p = a_p/(2\sqrt{p})$ of the congruent-number curve $E_d : y^2 = x^3 - d^2 x$ over $\mathbb{F}_p$ at primes of good reduction $p \nmid 2d$.
+::: {.viz src="pythagoras-number-escape" height="640"}
+**Interactive laboratory `ORTHO//PYTHAGORAS`**: three scenes along the $\pm 1$ seam. The Pell seam: the convergents of $\sqrt{d}$ hug the line ever more closely while $m^2 - d\,n^2$ is a nonzero integer (for $d = 5$ the green rings mark all the $\pm 4$ solutions, as verified in Lean); line primes and plane primes: whether the circle of radius $\sqrt{p}$ passes through lattice points; points mod $p$: for the curve $y^2 = x^3 - x$, $a_p$ is held inside Hasse's bound, line primes sit exactly at zero, and the Frobenius cosine of a plane prime equals the cosine of its Gaussian triangle. Fermat's two-square theorem, Hasse's theorem and the Sato–Tate distribution are literature results, not formalized in this book.
 :::
 
 ---
@@ -350,6 +358,10 @@ Analytically, $\frac{1}{(2k)!}$ arises from iterated differentiation (or the sim
    $$
 
    yields relational Schrödinger evolution $i\hbar\partial_\tau|\psi_{\mathbf{S}}(\tau)\rangle = H_{\mathbf{S}}|\psi_{\mathbf{S}}(\tau)\rangle$ across the slices—treating sequential "before and after" like the page number scanned by finite attention across an already bound volume.
+:::
+
+::: {.viz src="timeless-causal-crystal" preset="crystal" height="500"}
+**Every page is there at once.** All twelve pages are on the sphere the whole time and none appears first; when it plays, only the amber reading head moves. Conditioning on the clock reading is what gives the page under the head (a schematic model with a finite clock, `MODEL`).
 :::
 
 ### Level 2: Why Causality Is Necessary Without Temporal Pushing—Hume's Knot vs. Spinoza's Triangle and Gram Matrix Rigidity {#sec-coda-hume-spinoza-gram}
@@ -444,6 +456,10 @@ If the global time field is a timeless geometric crystal and local causality pos
 
    This seals the book's synthesis of time, causality, and agency in a single aphorism: ***"Globally timeless, hence eternal; finitely observed, hence new at every step."*** (**“全局无时间，故万古长存；观察者有限，故步步皆新。”**) (In the **[Coda](coda.md)**, we will pair the Lean-verified **`trureturing` Cut-and-Project Golden Model Set and Zeckendorf Observer Route theorems** with an explicit authorial geometric interpretation (`MODEL`): viewing cross-round invariant operator parameters as internal conjugate-window phase anchors and historical ruins as low-dissipation **spatial attractors**, to illuminate why a finite observer experiences déjà-vu resonance across Cassini's $(-1)^{n+1}$ norm seam and strange-attractor fractal sheets.)
 
+::: {.viz src="timeless-causal-crystal" preset="window" height="500"}
+**The Gram window.** $\mathbf{B}$ stands at the north pole and $\mathbf{C}$ can only go around it: $c_{AC}$ swings inside $[\cos(\theta_1 + \theta_2), \cos(\theta_1 - \theta_2)]$, and the volume spanned by the three vectors is positive inside the window and collapses to zero at its edges. You can also drag $\mathbf{C}$ on the sphere.
+:::
+
 ::: {.theorem #thm-ch29-gram-rigidity-and-pell title="Golden-Integer Pell Norm Identity and Unit-Vector Gram Overlap Equivalence" lean="D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm, D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization"}
 Across arithmetic quadratic lattices and inner-product spaces, discrete seam norms and unit-vector overlap equivalence are established by two Lean-4-verified theorems:
 
@@ -466,8 +482,8 @@ Across arithmetic quadratic lattices and inner-product spaces, discrete seam nor
 Part 1 expands $(2a + b)^2 - 5b^2 = 4a^2 + 4ab + b^2 - 5b^2 = 4(a^2 + ab - b^2) = 4\,\operatorname{norm}(g)$ directly in ring arithmetic. Part 2 applies the Cauchy–Schwarz equality characterization for unit vectors (`inner_eq_one_iff_of_norm_eq_one`) to obtain $\langle \operatorname{record}(i), \operatorname{record}(j)\rangle_{\mathbb{K}} = 1 \iff \operatorname{record}(i) = \operatorname{record}(j)$ and lifts reflexivity, symmetry, and transitivity of equality to prove `Equivalence`. The full proof is checked by the Lean kernel.
 :::
 
-::: {.viz src="timeless-causal-crystal" height="560"}
-**Interactive Sandbox: The Timeless Causal Ledger, the Gram Window, and "$P$ Is a Field, $NP$ Is a Line"**. Given $c_{AB} = \cos\theta_1$ and $c_{BC} = \cos\theta_2$, turn the present choice $\phi$: $c_{AC} = c_1 c_2 + s_1 s_2 \cos\phi$ can only lie in the Gram window $[\cos(\theta_1 + \theta_2), \cos(\theta_1 - \theta_2)]$, with $\det G = s_1^2 s_2^2 \sin^2\phi \ge 0$, the boundary $\det G = 0$ at $\cos\phi = \pm 1$, and $\det G < 0$ outside. The de-ordered ledger adds $(-1)^k \theta^{2k}/(2k)!$ order by order and records how $\det G^{(k)}$ of the truncated cosines crosses the horizon and converges back to its true side; the phase map on the right draws the compatible lens over the whole $(\theta_1, c_{AC})$ plane. The three views are the Gram window, the timeless crystal book with $H\Psi = 0$, and a Klee–Minty log-barrier gradient flow ($P$ is a field) set against amplitude amplification turning by $2\theta$ per step ($NP$ is a line).
+::: {.viz src="timeless-causal-crystal" height="640"}
+**Interactive laboratory `ORTHO//CAUSAL`**: four scenes on one sphere. The window: two cosines fix the range of the third, and $\det G$ is the squared volume the three vectors span; the pages: on a finite clock all pages exist at once, and conditioning picks one; the field: a gradient flow has a slope everywhere, and the potential it loses equals the dissipation it pays; the thread: amplitude amplification turns only $2\theta$ per step and arrives after about $(\pi/4)\sqrt{N}$ steps. Reading these as “choice”, “pages”, “field” and “thread” is this book's interpretation (`MODEL`); whether $\mathrm{P} \neq \mathrm{NP}$ remains an open problem, and nothing drawn on the page settles it.
 :::
 
 

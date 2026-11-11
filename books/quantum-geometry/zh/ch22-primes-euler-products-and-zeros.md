@@ -104,6 +104,10 @@ $$
 在假设 `hs : 1 < s.re` 下，由 [@prop-riemann-zeta-dirichlet-sum] 知左端等于 $\operatorname{classicalZeta}(s)$，再由 [@thm-riemann-zeta-euler-product] 的对称形式将 $\operatorname{classicalZeta}(s)$ 替换为右端的素数无穷乘积即得。完整证明由 Lean 内核检查。
 :::
 
+::: {.viz src="sphere-escape" preset="euclid" height="500"}
+**乘起来加一。** 清单里每多一个素数，就把它们全部乘起来再加一得到 $Q$。每只钟有 $p$ 个刻度，指针指着 $Q$ 除以 $p$ 的余数：全都指着 $1$，没有一只指着红色的 $0$，所以整除 $Q$ 的素数一定不在清单里（欧几里得的论证，文献结果）。全屏打开后，下方的图给出有限个素数的欧拉乘积离 $\zeta(2)$ 还差多少（[@thm-riemann-zeta-euler-product] 取 $s = 2$）。
+:::
+
 ## 22.3 有限素数筛的“多面体截断余项”与相位共振手算 {#sec-ch22-3}
 
 让我们把复变量写成 $s = \sigma + it$（其中实部 $\sigma = \operatorname{Re}(s)$ 控制振幅衰减，虚部 $t = \operatorname{Im}(s)$ 控制旋转角频率），看看 [@cor-dirichlet-sum-eq-euler-product] 中的每一个素数因子在几何上究竟在做什么：
@@ -205,7 +209,7 @@ $$
 结论 1 把 Mathlib 的恒等式 `completedRiemannZeta_eq`（$\Lambda(s) = \Lambda_0(s) - \frac{1}{s} - \frac{1}{1-s}$）代入定义，在 $s \neq 0$、$1 - s \neq 0$ 的前提下通分化简。结论 2 由 $\Lambda_0$ 的整函数性（`differentiable_completedZeta₀`）与多项式因子的可微性得到。结论 3 由 $\Lambda_0$ 的反射对称 `completedRiemannZeta₀_one_sub`（$\Lambda_0(1 - s) = \Lambda_0(s)$）得到，因为因子 $s\,(s - 1)$ 在 $s \mapsto 1 - s$ 下不变。结论 4 在 $s = 0$ 与 $s = 1$ 处因子 $s\,(s - 1)$ 为零，定义直接给出 $\frac{1}{2}$。完整证明由 Lean 内核检查。
 :::
 
-[@thm-xi-reading-entire-reflection] 的结论 3 有一个立即的推论（一行手工推导）：若 $\operatorname{xiReading}\ \rho = 0$，则 $\operatorname{xiReading}\ (1 - \rho) = 0$。映射 $s \mapsto 1 - s$ 是复平面绕点 $s = \frac{1}{2}$ 的半周旋转，所以零点关于这一点成对出现。再加上共轭对称 $\xi(\overline{s}) = \overline{\xi(s)}$（见下文 [@prop-zeta-conjugation-covariance]），零点便按 $\rho,\ \overline{\rho},\ 1 - \rho,\ 1 - \overline{\rho}$ 四个一组出现；这四个点两两重合、缩成一对的充要条件，正是 $\operatorname{Re}(\rho) = \frac{1}{2}$。黎曼猜想说的就是：每一组都缩成了一对。
+[@thm-xi-reading-entire-reflection] 的结论 3 有一个立即的推论（一行手工推导）：若 $\operatorname{xiReading}\ \rho = 0$，则 $\operatorname{xiReading}\ (1 - \rho) = 0$。映射 $s \mapsto 1 - s$ 是复平面绕点 $s = \frac{1}{2}$ 的半周旋转，所以零点关于这一点成对出现。再加上共轭对称 $\xi(\overline{s}) = \overline{\xi(s)}$（见下文 [@prop-zeta-conjugation-covariance]），零点便按 $\rho,\ \overline{\rho},\ 1 - \rho,\ 1 - \overline{\rho}$ 四个一组出现；对非实的 $\rho$，这四个点两两重合、缩成一对的充要条件，正是 $\operatorname{Re}(\rho) = \frac{1}{2}$（非平凡零点都不是实数：见 [@rem-zeta-zero-free-region-literature]）。黎曼猜想说的就是：每一组都缩成了一对。
 
 反射对称把看上去毫不相干的数值配成了镜像对。
 
@@ -290,7 +294,7 @@ $$
 [@thm-cayley-critical-line-criterion] 的结论 2 是黎曼猜想的一种**等价改写，不是证明**：它把“零点在一条直线上”换成“零点在一个圆上”，猜想本身仍然开放。至于 Mathlib 的 `RiemannHypothesis` 与 [@conj-riemann-hypothesis] 在非平凡零点刻画方式上的衔接，单独记录于下框（[@rem-zeta-zero-free-region-literature]）。
 
 ::: {.remark #rem-zeta-zero-free-region-literature title="ζ 的无零点半平面 Re(s) ≥ 1 与平凡零点分布（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** Mathlib 的 `RiemannHypothesis` 用“不是 $-2(n+1)$ 且不等于 $1$ 的零点”刻画非平凡零点，而 [@conj-riemann-hypothesis] 用“临界带 $0 < \operatorname{Re}(s) < 1$ 内的零点”刻画；两种表述外延一致，依赖解析数论中的经典事实：黎曼 $\zeta$ 函数在半平面 $\operatorname{Re}(s) \ge 1$ 内无零点（Hadamard 与 de la Vallée Poussin, 1896），且在半平面 $\operatorname{Re}(s) \le 0$ 内仅有负偶整数平凡零点 $s = -2(n+1)$（$n \in \mathbb{N}$）。
+**文献结果，未在本书形式化。** Mathlib 的 `RiemannHypothesis` 用“不是 $-2(n+1)$ 且不等于 $1$ 的零点”刻画非平凡零点，而 [@conj-riemann-hypothesis] 用“临界带 $0 < \operatorname{Re}(s) < 1$ 内的零点”刻画；两种表述外延一致，依赖解析数论中的经典事实：黎曼 $\zeta$ 函数在半平面 $\operatorname{Re}(s) \ge 1$ 内无零点（Hadamard 与 de la Vallée Poussin, 1896），且在半平面 $\operatorname{Re}(s) \le 0$ 内仅有负偶整数平凡零点 $s = -2(n+1)$（$n \in \mathbb{N}$）。此外，$\zeta$ 在实区间 $0 < s < 1$ 上取负值、没有零点（由 $(1 - 2^{1-s})\zeta(s) = \sum_{n \ge 1} (-1)^{n-1} n^{-s} > 0$ 与 $1 - 2^{1-s} < 0$），所以非平凡零点都不是实数。
 :::
 
 记 $w = \dfrac{s - 1}{s}$。三种对称在 $w$ 坐标里各有一个干净的样子（各一行手工推导）：

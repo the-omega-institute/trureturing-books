@@ -162,7 +162,7 @@ Claim 1 is the path-lifting property of covering maps (Mathlib's `liftPath_lifts
 Translated back into the language of rotors (the dictionary below is a manual derivation):
 
 - **Claim 3.** Turning an object continuously through one full turn about a fixed axis carries the rotor from $1$ to $-1$. This agrees with $R(2\pi) = -1$ but says more: by the uniqueness in Claim 1, any continuous rotor history with the same starting point that induces the same rotation history is the same history. A rotor is determined by the **history** of the rotation, not by where the rotation ends.
-- **Claim 2.** There is no global formula converting "angle of rotation" into "rotor" continuously. Any rule that assigns one rotor to each rotation must jump somewhere on the circle. The half angle is not a blemish of notation.
+- **Claim 2.** There is no global formula converting a rotation (the angle taken modulo $360^\circ$) into a rotor continuously. Any rule that assigns one rotor to each rotation must jump somewhere on the circle. The half angle is not a blemish of notation.
 - **Two full turns.** The loop $t \mapsto e^{4\pi i t}$ lifts to $t \mapsto e^{2\pi i t}$ (it is continuous, squares correctly and starts at $1$, so uniqueness in Claim 1 applies), which ends at $+1$. Only after $720^\circ$ is the rotor restored.
 
 ::: {.example #ex-rotor-two-turns title="Angles from 0° to 720°: the Rotation Goes Around Twice, the Rotor Only Once"}
@@ -183,6 +183,10 @@ Take $\vv{B} = \vv{e}_1 \wedge \vv{e}_2$. The rotation through the angle $\theta
 The second column is back at its starting point at $360^\circ$, when the third column has reached exactly the opposite point; any two rows $360^\circ$ apart (such as $90^\circ$ and $450^\circ$) have the same rotation and opposite rotors. Squaring each point of the third column (doubling its argument) gives the second column.
 
 **One direct check.** $R(90^\circ) = \frac{1}{\sqrt{2}}(1 - \vv{B})$, and with $\vv{B}^2 = -1$: $R(90^\circ)^2 = \frac{1}{2}(1 - 2\vv{B} + \vv{B}^2) = -\vv{B} = R(180^\circ)$; squaring again, $R(180^\circ)^2 = \vv{B}^2 = -1 = R(360^\circ)$. In neutron interferometry the fringes are inverted when the spin has precessed through $360^\circ$ and restored at $720^\circ$ (a literature result, not formalized in this book: H. Rauch et al., *Phys. Lett. A* **54**, 425, 1975; S. A. Werner et al., *Phys. Rev. Lett.* **35**, 1053, 1975).
+:::
+
+::: {.viz src="qubit-geometry" preset="turn1" height="500"}
+**One full turn flips the rotor.** The amber state vector goes $360^\circ$ about $\hat{x}$ and returns to where it started, and so do the line and the area; the scalar part of the accumulated rotor runs from $+1$ to $-1$. Press ▶ under the figure for the next card: only after two full turns is it back at $+1$.
 :::
 
 A lone $-1$ is an overall sign, and by the discussion of the next section it changes no single-branch measurement reading; only when a branch that has been turned through a full turn is brought back together with a branch that has not (as in the interferometric setting at the end of [@ex-rotor-two-turns]) does the sign become an observable relative phase.

@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="zh-CN" data-title-en="ORTHO//QUBIT · Qubit rotor ledger · the Bloch sphere, the Pauli volume element and the spinor double cover">
+<html lang="zh-CN" data-title-en="ORTHO//QUBIT · The line and the area of one qubit: Bloch sphere, rotors and the double cover">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ORTHO//QUBIT 单比特旋子账本 · 布洛赫球、泡利体积元与旋量双覆盖</title>
-<meta name="description" content="选一个初态 |ψ(θ, φ)⟩，逐个追加单比特门；每个门是一枚 SU(2) 旋子 R，账本逐步记下布洛赫矢量 r ↦ R r R† 与累积旋子的四个分量，符号带记下旋量落在哪一叶。页面精确核对 σ₁σ₂σ₃ = i·I₂、H σ₃ H = σ₁ 与 R(2π) = −1，相图画出 (θ, φ) 上的 ⟨σ⟩。所引定理在 trureturing 中已由 Lean 内核验证并冻结。Pick an initial state |ψ(θ, φ)⟩ and append single-qubit gates; each gate is an SU(2) rotor R, the ledger records the Bloch vector r ↦ R r R† and the four components of the accumulated rotor step by step, and the sign tape records which sheet the spinor is on. The page checks σ₁σ₂σ₃ = i·I₂, H σ₃ H = σ₁ and R(2π) = −1, and the phase map draws ⟨σ⟩ over (θ, φ). The cited theorems are kernel-verified in Lean and frozen in trureturing.">
+<title>ORTHO//QUBIT 一个量子比特的线与面积 · 布洛赫球、旋子与双覆盖</title>
+<meta name="description" content="在布洛赫球上拖动态矢量 B，对着量尺 A 看它的两个投影：共线的线 A·B = cos θ 决定探测器的咔哒，垂直撑开的面积 |A∧B| = sin θ 决定干涉条纹，两者平方和恒为 1。再加上量子门：每个门是一枚旋子，矢量转一圈回到原处，旋子要转两圈。Drag the state vector B on the Bloch sphere and read its two projections against the ruler A: the line A·B = cos θ sets the detector clicks, the area |A∧B| = sin θ sets the fringes, and their squares always sum to 1. Then add gates: each gate is a rotor; the vector returns after one turn, the rotor after two.">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,204 +12,198 @@
 <link rel="stylesheet" href="../assets/theme.css">
 <link rel="stylesheet" href="style.css">
 <script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
 </head>
 <body data-viz-id="qubit-geometry">
-<div class="app" id="app">
+<div class="app lab" id="app">
   <header class="top">
     <div class="brand">
       <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
       <h1 class="logo" data-text="ORTHO//QUBIT">ORTHO<b>//</b>QUBIT</h1>
       <div class="tagline">
-        <span class="zh">单比特旋子账本 · <em>逐门作用 r ↦ R r R†；布洛赫矢量转回原处时，旋量可以差一个 −1</em></span>
-        <span class="en">Qubit rotor ledger · <em>gate by gate r ↦ R r R†; when the Bloch vector comes back, the spinor may carry a −1</em></span>
+        <span class="zh">一个量子比特的线与面积 · <em>粒子是线，波是面积，两者是同一个几何积的两个投影</em></span>
+        <span class="en">The line and the area of one qubit · <em>the particle is a line, the wave is an area: two projections of one geometric product</em></span>
       </div>
     </div>
     <div class="status" aria-live="polite">
-      <span class="pill hot" id="pillPair">θ, φ <strong>—</strong></span>
-      <span class="pill" id="pillPasses">— <strong>—</strong></span>
-      <span class="pill" id="pillC">s <strong>—</strong></span>
+      <span class="pill" id="pillLine"><span class="zh">线</span><span class="en">LINE</span> <strong>—</strong></span>
+      <span class="pill" id="pillArea"><span class="zh">面积</span><span class="en">AREA</span> <strong>—</strong></span>
+      <span class="pill hot" id="pillSheet"><span class="zh">旋子</span><span class="en">ROTOR</span> <strong>+1</strong></span>
       <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
     </div>
   </header>
 
-  <aside class="col deck" aria-label="输入与读数" data-aria-en="Inputs and readouts">
-    <section class="panel sec" id="inputs">
-      <h2><span class="zh">输入</span><span class="en">Inputs</span><span class="aside">Cl(3,0) · SU(2) → SO(3)</span></h2>
-      <div class="num-field">
-        <label for="theta"><span class="zh">初态极角 θ°</span><span class="en">Initial polar angle θ°</span></label>
-        <div class="stepper"><button type="button" id="thetaDec" aria-label="θ 减一度" data-aria-en="Decrease θ">−</button><input type="number" id="thetaNum" min="0" max="180" step="1" value="60" inputmode="numeric" aria-label="θ 的度数" data-aria-en="θ in degrees"><button type="button" id="thetaInc" aria-label="θ 加一度" data-aria-en="Increase θ">+</button></div>
-        <input type="range" id="theta" min="0" max="180" step="1" value="60">
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="line" aria-pressed="false"><span class="code">ALL-LINE</span><span class="cn zh">全是线 · 纯粒子</span><span class="cn en">All line · pure particle</span></button>
+        <button class="preset" data-preset="area" aria-pressed="false"><span class="code">ALL-AREA</span><span class="cn zh">全是面积 · 纯波</span><span class="cn en">All area · pure wave</span></button>
+        <button class="preset" data-preset="half" aria-pressed="false"><span class="code">SIXTY</span><span class="cn zh">60° · 线一半，面积 87%</span><span class="cn en">60° · half line, 87% area</span></button>
+        <button class="preset" data-preset="phase" aria-pressed="false"><span class="code">PHASE</span><span class="cn zh">相位只挪条纹</span><span class="cn en">Phase only slides the fringes</span></button>
+        <button class="preset" data-preset="hadamard" aria-pressed="false"><span class="code">HADAMARD</span><span class="cn zh">H 把线翻成面积</span><span class="cn en">H turns line into area</span></button>
+        <button class="preset" data-preset="hzh" aria-pressed="false"><span class="code">H·Z·H = X</span><span class="cn zh">同一个转动，两枚旋子</span><span class="cn en">One turn, two rotors</span></button>
+        <button class="preset" data-preset="turn1" aria-pressed="false"><span class="code">TURN-360</span><span class="cn zh">转一圈：旋子变号</span><span class="cn en">One turn: the rotor flips sign</span></button>
+        <button class="preset" data-preset="turn2" aria-pressed="false"><span class="code">TURN-720</span><span class="cn zh">转两圈才真回来</span><span class="cn en">Two turns to come back</span></button>
       </div>
-      <div class="num-field">
-        <label for="phi"><span class="zh">初态方位角 φ°</span><span class="en">Initial azimuth φ°</span></label>
-        <div class="stepper"><button type="button" id="phiDec" aria-label="φ 减一度" data-aria-en="Decrease φ">−</button><input type="number" id="phiNum" min="0" max="360" step="1" value="36" inputmode="numeric" aria-label="φ 的度数" data-aria-en="φ in degrees"><button type="button" id="phiInc" aria-label="φ 加一度" data-aria-en="Increase φ">+</button></div>
-        <input type="range" id="phi" min="0" max="360" step="1" value="36">
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">量子门</span><span class="en">Gates</span><span class="aside"><span class="zh">每个门是一枚旋子</span><span class="en">every gate is a rotor</span></span></h2>
+      <div class="chips" id="gateChips" role="group" aria-label="追加一个门" data-aria-en="Append a gate">
+        <button class="chip" data-gate="X">X</button><button class="chip" data-gate="Y">Y</button><button class="chip" data-gate="Z">Z</button>
+        <button class="chip" data-gate="H">H</button><button class="chip" data-gate="S">S</button><button class="chip" data-gate="T">T</button>
       </div>
-      <div class="num-field">
-        <label for="alpha"><span class="zh">探针旋子转角 α°（绕轴 n̂）</span><span class="en">Probe rotor angle α° (about n̂)</span></label>
-        <div class="stepper"><button type="button" id="alphaDec" aria-label="α 减一度" data-aria-en="Decrease α">−</button><input type="number" id="alphaNum" min="0" max="360" step="1" value="240" inputmode="numeric" aria-label="α 的度数" data-aria-en="α in degrees"><button type="button" id="alphaInc" aria-label="α 加一度" data-aria-en="Increase α">+</button></div>
-        <input type="range" id="alpha" min="0" max="360" step="1" value="240">
+      <div class="field">
+        <label for="alpha"><span class="zh">自选转角 α</span><span class="en">Custom angle α</span><small class="zh">绕下面选的轴</small><small class="en">about the axis below</small></label><output id="oAlpha" for="alpha">90°</output>
+        <input type="range" id="alpha" min="15" max="720" step="15" value="90">
       </div>
-      <div class="chips presets" id="presets" role="group" aria-label="示例" data-aria-en="Examples">
-        <button class="chip" data-preset="0,0|">|0⟩</button>
-        <button class="chip" data-preset="0,0|H">|+⟩ = H|0⟩</button>
-        <button class="chip" data-preset="0,0|H,S">|+i⟩ = SH|0⟩</button>
-        <button class="chip" data-preset="0,0|H,T">T·H|0⟩</button>
-        <button class="chip" data-preset="0,0|H,Z,H">H·Z·H = X</button>
-        <button class="chip" id="swap"><span class="zh">交换次序</span><span class="en">Swap order</span></button>
-        <button class="chip" id="random"><span class="zh">随机</span><span class="en">Random</span></button>
-        <button class="chip" id="reset"><span class="zh">重置</span><span class="en">Reset</span></button>
+      <div class="chips" id="turnChips" role="group" aria-label="转轴" data-aria-en="Rotation axis">
+        <button class="chip" data-turn="x" aria-pressed="false">x̂</button><button class="chip" data-turn="y" aria-pressed="false">ŷ</button><button class="chip" data-turn="z" aria-pressed="true">ẑ</button><button class="chip" data-turn="h" aria-pressed="false">ĥ</button>
+        <button class="chip" id="addTurn"><span class="zh">+ 加入</span><span class="en">+ Add</span></button>
       </div>
-      <div class="chips gates" id="gates" role="group" aria-label="追加一个门" data-aria-en="Append a gate">
-        <button class="chip" data-gate="I">+I</button>
-        <button class="chip" data-gate="X">+X</button>
-        <button class="chip" data-gate="Y">+Y</button>
-        <button class="chip" data-gate="Z">+Z</button>
-        <button class="chip" data-gate="H">+H</button>
-        <button class="chip" data-gate="S">+S</button>
-        <button class="chip" data-gate="T">+T</button>
+      <div class="chips">
+        <button class="chip" id="undo"><span class="zh">撤销</span><span class="en">Undo</span></button>
+        <button class="chip" id="clear"><span class="zh">清空线路</span><span class="en">Clear circuit</span></button>
       </div>
     </section>
 
-    <section class="panel sec" id="readouts" aria-live="polite">
-      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">r = R e₃ R†</span></h2>
-      <dl class="ro">
-        <div><dt>r_x = ⟨σ_x⟩</dt><dd id="roRx">—</dd></div>
-        <div><dt>r_y = ⟨σ_y⟩</dt><dd id="roRy">—</dd></div>
-        <div><dt>r_z = ⟨σ_z⟩</dt><dd id="roRz">—</dd></div>
-        <div><dt>P(0) = cos²(θ/2)</dt><dd id="roP0">—</dd></div>
-        <div><dt>P(1) = sin²(θ/2)</dt><dd id="roP1">—</dd></div>
-        <div><dt>tr(R) = 2cos(α/2)</dt><dd id="roTr">—</dd></div>
-        <div class="wide deficit"><dt><span class="zh">泡利体积元 / 旋子手性</span><span class="en">Pauli volume / Rotor chirality</span></dt><dd><b id="roHero" class="vpos">σ₁σ₂σ₃ = i · I₂</b><span class="sub" id="roHeroSub">‖r‖² = 1.0000 · R R† = 1</span><span class="okmark" id="roHeroOk">✓</span></dd></div>
-        <div class="wide"><dt><span class="zh">H·Z·H = X：哈达玛共轭把 σ₃ 换成 σ₁</span><span class="en">H·Z·H = X: Hadamard conjugation turns σ₃ into σ₁</span></dt><dd id="roHZH">—</dd></div>
-        <div class="wide"><dt><span class="zh">R(2π) = −1：旋量双覆盖 SU(2) → SO(3)</span><span class="en">R(2π) = −1: the spinor double cover SU(2) → SO(3)</span></dt><dd id="roTwoPi">—</dd></div>
-      </dl>
-      <p class="note" id="roNote"></p>
+    <section class="panel sec">
+      <h2><span class="zh">态矢量 B</span><span class="en">State vector B</span><span class="aside">θ · φ</span></h2>
+      <div class="field">
+        <label for="theta"><span class="zh">极角 θ</span><span class="en">Polar angle θ</span><small class="zh">从 |0⟩ 量起</small><small class="en">from |0⟩</small></label><output id="oTheta" for="theta">60°</output>
+        <input type="range" id="theta" min="0" max="180" step="1" value="60">
+      </div>
+      <div class="field">
+        <label for="phi"><span class="zh">方位角 φ</span><span class="en">Azimuth φ</span><small class="zh">相位</small><small class="en">the phase</small></label><output id="oPhi" for="phi">40°</output>
+        <input type="range" id="phi" min="0" max="360" step="1" value="40">
+      </div>
+      <p class="note"><span class="zh">也可以直接在球上拖动琥珀色箭头；拖空白处旋转视角。</span><span class="en">You can also drag the amber arrow on the sphere; drag empty space to turn the view.</span></p>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">量尺 A</span><span class="en">Ruler A</span><span class="aside"><span class="zh">沿哪根轴比量</span><span class="en">the axis you measure along</span></span></h2>
+      <div class="chips" id="axisChips" role="group" aria-label="量尺方向" data-aria-en="Ruler direction">
+        <button class="chip" data-axis="z" aria-pressed="true">Z · |0⟩</button>
+        <button class="chip" data-axis="x" aria-pressed="false">X · |+⟩</button>
+        <button class="chip" data-axis="y" aria-pressed="false">Y · |+i⟩</button>
+      </div>
+      <p class="note" id="axisNote"></p>
     </section>
   </aside>
 
   <main class="center">
-    <section class="panel ledger" id="ledgerPanel" aria-labelledby="ledgerTitle">
-      <div class="head">
-        <h2 id="ledgerTitle"><span class="zh">旋子作用账本</span><span class="en">Rotor Action Ledger</span></h2>
-        <span class="aside" id="ledgerSub"><span class="zh">每个门左乘一枚旋子 R ↦ G R 并转动 r ↦ G r G†；格子是 r 与 R = w − i b·σ</span><span class="en">each gate left-multiplies a rotor R ↦ G R and turns r ↦ G r G†; the cells are r and R = w − i b·σ</span></span>
+    <div class="stage" id="stage" data-thumb aria-label="布洛赫球：青色量尺 A、琥珀色态矢量 B、青色投影线与品红面积；拖动箭头改变态，拖动空白处旋转，滚轮缩放" data-aria-en="Bloch sphere: the cyan ruler A, the amber state vector B, the cyan projected line and the magenta area; drag the arrow to change the state, drag empty space to rotate, scroll to zoom">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="camChips" role="group" aria-label="视角" data-aria-en="View">
+        <button class="chip" data-cam="iso" aria-pressed="true"><span class="zh">斜视</span><span class="en">ISO</span></button>
+        <button class="chip" data-cam="front" aria-pressed="false"><span class="zh">正视</span><span class="en">Front</span></button>
+        <button class="chip" data-cam="top" aria-pressed="false"><span class="zh">俯视</span><span class="en">Top</span></button>
       </div>
-      <div class="rules" aria-label="旋子规则" data-aria-en="Rotor rules">
-        <span class="rule r0"><b>Rₙ</b> exp(−α/2 · Bₙ) <i>SU(2)</i></span>
-        <span class="rule r1"><b>Ad_R</b> v ↦ R v R† <i>SO(3)</i></span>
-        <span class="rule rj"><b>HZH</b> σ₃ ↦ σ₁ <i>+1</i></span>
-        <span class="rule ra"><b>2π</b> R(2π) = −1 <i>−1</i></span>
-      </div>
-      <div class="stage" id="blochStage">
-        <canvas id="blochCanvas" role="img" aria-label="布洛赫球：琥珀色为当前步的态矢量，青色虚弧为探针旋子 Rₙ(α) 的轨迹，青线与紫面为 A·B 与 A∧B；右侧两只表盘对比矢量转角 α 与旋量转角 α/2" data-aria-en="Bloch sphere: amber is the state at the current step, the dashed cyan arc is the probe rotor Rₙ(α), the cyan line and violet face are A·B and A∧B; the two dials on the right compare the vector angle α with the spinor angle α/2"></canvas>
-        <div class="scan"></div>
-        <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
-        <div class="hud-tl"><span class="big" id="hudBig">—</span><span class="sub" id="hudSub">—</span></div>
-        <div class="hud-tr chips" id="viewChips" role="group" aria-label="探针旋子的轴 n̂" data-aria-en="Axis n̂ of the probe rotor">
-          <button class="chip" data-axis="x">n̂ = x̂</button>
-          <button class="chip" data-axis="y">ŷ</button>
-          <button class="chip" data-axis="z">ẑ</button>
-          <button class="chip" data-axis="h">ĥ</button>
-        </div>
-      </div>
-      <div class="sheetwrap" id="sheetWrap">
-        <div class="digits" id="ledger" role="list" aria-label="逐门的布洛赫矢量与累积旋子" data-aria-en="Bloch vector and accumulated rotor, gate by gate"></div>
-      </div>
-      <div class="tape-row">
-        <span class="tape-label"><span class="zh">符号带</span><span class="en">Sign tape</span></span>
-        <div class="tape" id="tape" aria-hidden="true"></div>
-        <span class="tape-sum" id="tapeSum">—</span>
+      <div class="hud-bl">
+        <span><i class="sw cy"></i><span class="zh">线 A·B：B 落在 A 上的影子</span><span class="en">line A·B: the shadow of B on A</span></span>
+        <span><i class="sw box mg"></i><span class="zh">面积 A∧B：A 与 B 撑开的面</span><span class="en">area A∧B: the face spanned by A and B</span></span>
+        <span><i class="sw am"></i><span class="zh">当前态 B</span><span class="en">the current state B</span></span>
       </div>
       <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    </section>
-
-    <footer class="rail" id="rail">
-      <div class="transport">
-        <button class="tbtn" id="first" aria-label="回到初态" data-aria-en="Back to the initial state">⏮</button>
-        <button class="tbtn" id="prev" aria-label="上一个门" data-aria-en="Previous gate">◀</button>
-        <button class="tbtn" id="play" aria-label="播放/暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
-        <button class="tbtn" id="next" aria-label="下一个门" data-aria-en="Next gate">▶▶</button>
-        <button class="tbtn" id="last" aria-label="跳到线路末态" data-aria-en="Jump to the final state">⏭</button>
-      </div>
-      <div class="clock">
-        <span class="tau" id="passLabel">0</span>
-        <input type="range" id="pass" min="0" max="1" step="1" value="0" aria-label="当前步" data-aria-en="Current step">
-      </div>
-      <div class="keys">
-        <span class="zh"><kbd>←</kbd><kbd>→</kbd> 步 · <kbd>空格</kbd> 播放 · <kbd>H</kbd><kbd>X</kbd>… 加门 · <kbd>⌫</kbd> 撤销 · <kbd>R</kbd> 随机</span>
-        <span class="en"><kbd>←</kbd><kbd>→</kbd> step · <kbd>Space</kbd> play · <kbd>H</kbd><kbd>X</kbd>… add gate · <kbd>⌫</kbd> undo · <kbd>R</kbd> random</span>
-      </div>
-    </footer>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2><span class="zh">探测器看到什么</span><span class="en">What a detector sees</span></h2><span id="detMeta"></span></div>
+        <canvas id="detector" aria-label="左：沿 A 测量的两种咔哒的概率；右：把两条路重新合束后的干涉条纹" data-aria-en="Left: the probabilities of the two clicks when measuring along A; right: the fringes when the two paths are recombined"></canvas>
+      </section>
+      <section class="panel">
+        <div class="head"><h2><span class="zh">矢量一圈，旋子两圈</span><span class="en">Vector one turn, rotor two</span></h2><span id="turnMeta"></span></div>
+        <canvas id="turns" aria-label="沿线路的线 A·B 与旋子标量部 w" data-aria-en="The line A·B and the scalar part w of the rotor along the circuit"></canvas>
+      </section>
+    </div>
   </main>
 
-  <aside class="col side" aria-label="相图与依据" data-aria-en="Phase map and evidence">
-    <section class="panel sec heatpanel" id="heatPanel" data-thumb>
-      <h2 class="thumb-hide"><span class="zh">布洛赫相图 <span class="mth">P(0) = cos²(θ/2)</span></span><span class="en">Bloch Phase Map <span class="mth">(θ, φ)</span></span><span class="aside" id="heatRange">180° × 360°</span></h2>
-      <div class="heatwrap">
-        <canvas id="heat" role="img" aria-label="(θ, φ) 相图：纵轴极角 θ（北极在上），横轴方位角 φ；颜色是所选的 ⟨σ⟩；点击选择初态" data-aria-en="Bloch sphere phase map: polar angle θ down (north pole on top), azimuth φ across; the colour is the chosen ⟨σ⟩; click to pick the initial state"></canvas>
-        <div class="scan"></div>
-      </div>
-      <div class="chips thumb-hide" id="nChips" role="group" aria-label="着色的可观测量" data-aria-en="Observable shown">
-        <button class="chip" data-obs="z">⟨σ_z⟩</button>
-        <button class="chip" data-obs="x">⟨σ_x⟩</button>
-        <button class="chip" data-obs="y">⟨σ_y⟩</button>
-      </div>
-      <ul class="legend thumb-hide">
-        <li><i class="sw pos"></i>⟨σ⟩ = +1</li>
-        <li><i class="sw zero"></i>⟨σ⟩ = 0</li>
-        <li><i class="sw neg"></i>⟨σ⟩ = −1</li>
-        <li><i class="sw cur"></i><span class="zh">当前步的态</span><span class="en">state at the current step</span></li>
-      </ul>
-      <p class="note thumb-hide" id="heatCounts">—</p>
-      <p class="note thumb-hide" id="heatHover">&nbsp;</p>
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside">A·B · A∧B</span></h2>
+      <dl class="ro">
+        <div class="key"><dt><span class="zh">线² + 面积²</span><span class="en">line² + area²</span></dt><dd><b id="roSum">—</b><span id="roSumSub"></span></dd></div>
+        <div class="c"><dt><span class="zh">线 A·B = cos θ</span><span class="en">line A·B = cos θ</span></dt><dd id="roLine">—</dd></div>
+        <div class="m"><dt><span class="zh">面积 |A∧B| = sin θ</span><span class="en">area |A∧B| = sin θ</span></dt><dd id="roArea">—</dd></div>
+        <div><dt><span class="zh">咔哒 +A 的概率</span><span class="en">chance of a +A click</span></dt><dd id="roP0">—</dd></div>
+        <div><dt><span class="zh">条纹可见度</span><span class="en">fringe visibility</span></dt><dd id="roVis">—</dd></div>
+        <div class="wide"><dt><span class="zh">累积旋子 R = w − b·(iσ)</span><span class="en">accumulated rotor R = w − b·(iσ)</span></dt><dd id="roRotor">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">拉格朗日—格拉姆恒等式：‖u‖²‖v‖² − (u·v)² 等于全部 (uᵢvⱼ − uⱼvᵢ)² 之和的一半。取 u = A、v = B，就是上面的 线² + 面积² = 1。已冻结：</span><span class="en">The Lagrange–Gram identity: ‖u‖²‖v‖² − (u·v)² is half the sum of all (uᵢvⱼ − uⱼvᵢ)². With u = A and v = B it is line² + area² = 1 above. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumBounds/LagrangeGramIdentity.lean" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="circuit">
+      <h2><span class="zh">线路</span><span class="en">Circuit</span><span class="aside" id="circAside"></span></h2>
+      <div class="gates" id="gates" role="group" aria-label="线路中的门，点击跳到该门之后" data-aria-en="Gates of the circuit; click to jump to just after a gate"></div>
+      <p class="note" id="circNote"></p>
     </section>
 
     <section class="panel sec" id="evidence">
       <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
-      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">泡利矩阵 X = σ₁ 与 Z = σ₃ 满足 ZX = −XZ、X* = X、Z* = Z、X² = Z² = I。已冻结：</span><span class="en">The Pauli matrices X = σ₁ and Z = σ₃ satisfy ZX = −XZ, X* = X, Z* = Z and X² = Z² = I. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/FiniteDimensional.qubit_weyl_star" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Quantum/FiniteDimensional.lean#L24" target="_blank" rel="noopener"><code>qubit_weyl_star</code></a></span></div>
-      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">复方阵 R 若反自伴（R† = −R）且 RR† = I，则 R² = −I。页面算出体积元 σ₁σ₂σ₃ = i·I₂ 与单位双矢量 Bₙ = i n̂·σ 都满足这两个条件。已冻结：</span><span class="en">A complex square matrix R with R† = −R and RR† = I satisfies R² = −I. The page computes that the volume element σ₁σ₂σ₃ = i·I₂ and every unit bivector Bₙ = i n̂·σ meet both conditions. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.lean#L75" target="_blank" rel="noopener"><code>square_eq_neg_one_of_skewAdjoint_unitary</code></a></span></div>
-      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">每个厄米 2×2 复矩阵 M 都等于 blochMatrix(Re tr M, bloch M)；若 tr M = 1 且 M² = M，则 ‖bloch M‖ = 1：纯态的布洛赫矢量落在单位球面上。已冻结：</span><span class="en">Every Hermitian 2×2 complex matrix M equals blochMatrix(Re tr M, bloch M); if tr M = 1 and M² = M then ‖bloch M‖ = 1: the Bloch vector of a pure state lies on the unit sphere. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Quantum/Information/ActualPureQubitGeometry.lean#L68" target="_blank" rel="noopener"><code>bloch_geometry_of_isHermitian</code></a></span></div>
-      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">对记录测量 P（自伴、幂等、两两正交、∑ₖ Pₖ = I）与任意方阵 ρ，各结果权重 tr(ρPₖ) 之和等于 tr ρ。取 P = {|0⟩⟨0|, |1⟩⟨1|} 且 tr ρ = 1，即 P(0) + P(1) = 1。已冻结：</span><span class="en">For a record measurement P (self-adjoint, idempotent, pairwise orthogonal, ∑ₖ Pₖ = I) and any square matrix ρ, the outcome weights tr(ρPₖ) sum to tr ρ. With P = {|0⟩⟨0|, |1⟩⟨1|} and tr ρ = 1 this is P(0) + P(1) = 1. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning.recordWeight_sum" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Observer/Conditioning.lean#L47" target="_blank" rel="noopener"><code>recordWeight_sum</code></a></span></div>
-      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">拉格朗日—格拉姆恒等式 (∑uᵢ²)(∑vᵢ²) − (∑uᵢvᵢ)² = ½∑ᵢⱼ(uᵢvⱼ − uⱼvᵢ)²。取 u = A = e₃、v = B = r，就是舞台上 A·B 与 A∧B 的勾股守恒。已冻结：</span><span class="en">The Lagrange–Gram identity (∑uᵢ²)(∑vᵢ²) − (∑uᵢvᵢ)² = ½∑ᵢⱼ(uᵢvⱼ − uⱼvᵢ)². With u = A = e₃ and v = B = r it is the Pythagorean balance of A·B and A∧B on the stage. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/QuantumBounds/LagrangeGramIdentity.lean#L17" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a></span></div>
-      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">本页的约定：门画成 SU(2) 旋子 X ≅ R_x̂(π)、Y ≅ R_ŷ(π)、Z ≅ R_ẑ(π)、H ≅ R_ĥ(π)、S ≅ R_ẑ(π/2)、T ≅ R_ẑ(π/4)，与教科书矩阵只差一个全局相位；符号带记累积旋子 R 的标量部 ⟨R⟩₀ = tr(R)/2 的符号，为 0 时取 (b₁, b₂, b₃) 中第一个非零分量的符号。这是选取 ±R 中一个代表的约定，不是 Lean 定理。</span><span class="en">Conventions of the page: gates are drawn as SU(2) rotors X ≅ R_x̂(π), Y ≅ R_ŷ(π), Z ≅ R_ẑ(π), H ≅ R_ĥ(π), S ≅ R_ẑ(π/2), T ≅ R_ẑ(π/4), which differ from the textbook matrices by a global phase; the sign tape records the sign of the scalar part ⟨R⟩₀ = tr(R)/2 of the accumulated rotor R, or, when it is 0, the sign of the first nonzero of (b₁, b₂, b₃). This picks one representative of ±R; it is a convention, not a Lean theorem.</span></span></div>
-      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">本页是数值演示，不是证明：页面按双精度算出布洛赫矢量、旋子乘积、σ₁σ₂σ₃ = i·I₂、H σ₃ H = σ₁、R(2π) = −1 与 37 × 37 格相图。H σ₃ H = σ₁ 可由 qubit_weyl_star 的关系手算得到（H = (X + Z)/√2），这一等式本身不是所引的 Lean 定理。</span><span class="en">A numerical illustration on the page, not a proof: the page computes Bloch vectors, rotor products, σ₁σ₂σ₃ = i·I₂, H σ₃ H = σ₁, R(2π) = −1 and the 37 × 37 phase map in double precision. H σ₃ H = σ₁ follows by hand from the relations of qubit_weyl_star (H = (X + Z)/√2); that equation is not itself one of the cited Lean theorems.</span></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">反自伴的酉矩阵平方为 −I。单位双矢量 Bₙ = i n̂·σ 正是这样的矩阵，所以 exp(−αBₙ/2) = cos(α/2) − Bₙ sin(α/2)。已冻结：</span><span class="en">A skew-adjoint unitary matrix squares to −I. The unit bivector Bₙ = i n̂·σ is such a matrix, so exp(−αBₙ/2) = cos(α/2) − Bₙ sin(α/2). Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.lean" target="_blank" rel="noopener"><code>square_eq_neg_one_of_skewAdjoint_unitary</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">记录测量的各结果权重之和等于 tr ρ：两种咔哒的概率相加为 1。已冻结：</span><span class="en">The outcome weights of a record measurement sum to tr ρ: the two click probabilities add up to 1. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning.recordWeight_sum" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Observer/Conditioning.lean" target="_blank" rel="noopener"><code>recordWeight_sum</code></a></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">“条纹”是把同一个态读成双路干涉仪的示意：两条路取 ±A，可见度取 B 垂直于 A 的分量长度 sin θ，条纹位置取绕 A 的方位角。它不是对某个实验装置的模拟。</span><span class="en">The “fringes” read the same state as a two-path interferometer: the paths are ±A, the visibility is the length sin θ of the part of B perpendicular to A, and the fringe position is the azimuth about A. It is a schematic, not a simulation of an apparatus.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数都是按双精度实时算出的数值演示，不是证明。</span><span class="en">Every number on the page is computed live in double precision: an illustration, not a proof.</span></span></div>
       <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
     </section>
   </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到线路起点" data-aria-en="Back to the start of the circuit">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="线路进度" data-aria-en="Progress through the circuit">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐门</span><span class="en">gate by gate</span> · <kbd>R</kbd> <span class="zh">清空线路</span><span class="en">clear circuit</span>
+    </div>
+  </footer>
 </div>
 
 <div class="drawer" id="drawer" hidden>
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
     <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
     <div class="zh">
-      <p class="lede">把泡利矩阵 σ₁, σ₂, σ₃ 当作三维空间的三根基矢量，单比特态 |ψ⟩ 就是单位球面上的一根布洛赫矢量 r = (⟨σ₁⟩, ⟨σ₂⟩, ⟨σ₃⟩)，单比特门就是旋子 R：它在球面上把 r 转到 R r R†，而在旋量 |ψ⟩ 上只走一半的角度。本页是数值演示，不是证明。</p>
+      <p class="lede">单比特纯态是单位球面上的一根布洛赫矢量 B。拿另一根单位矢量 A 当量尺去比它，两者之间只有两样东西：共线的影子（线）和垂直撑开的面（面积）。几何积 AB = A·B + A∧B 把这两样东西写在一起。本页是数值演示，不是证明。</p>
       <ol>
-        <li><b>布洛赫矢量与玻恩权重。</b>纯态 ρ = |ψ⟩⟨ψ| = (I + r·σ)/2 是厄米、迹为 1 且幂等的 2×2 矩阵，所以 ‖r‖ = 1：<a class="leanref" data-lean-gid="D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Quantum/Information/ActualPureQubitGeometry.lean#L68" target="_blank" rel="noopener"><code>bloch_geometry_of_isHermitian</code></a>（LEAN ✓）。在计算基上测量，P(0) = (1 + r_z)/2 = cos²(θ/2)、P(1) = sin²(θ/2)，两者之和是 tr ρ = 1：<a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning.recordWeight_sum" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Observer/Conditioning.lean#L47" target="_blank" rel="noopener"><code>recordWeight_sum</code></a>（LEAN ✓）。</li>
-        <li><b>泡利代数与体积元。</b>X = σ₁、Z = σ₃ 自伴、平方为 I 且反对易：<a class="leanref" data-lean-gid="D5/S3/Quantum/FiniteDimensional.qubit_weyl_star" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Quantum/FiniteDimensional.lean#L24" target="_blank" rel="noopener"><code>qubit_weyl_star</code></a>（LEAN ✓）。页面精确算出 σ₁σ₂σ₃ = i·I₂：三根基矢量的乘积是体积元 I₃，它是 i 乘单位阵。I₃ 与每个单位双矢量 Bₙ = I₃ n̂ = i n̂·σ 都是反自伴的酉矩阵，因而平方为 −I：<a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.lean#L75" target="_blank" rel="noopener"><code>square_eq_neg_one_of_skewAdjoint_unitary</code></a>（LEAN ✓）。</li>
-        <li><b>旋子与门。</b>因为 Bₙ² = −1，欧拉公式给出 Rₙ(α) = exp(−(α/2)Bₙ) = cos(α/2) − Bₙ sin(α/2) = w − i b·σ，其中 w = cos(α/2)、b = sin(α/2) n̂。伴随作用 r ↦ R r R† 绕 n̂ 右手转 α。账本里每个门都是这样一枚旋子（与教科书矩阵差一个全局相位）：X、Y、Z 绕各自的轴转 π，H 绕 ĥ = (x̂ + ẑ)/√2 转 π，S、T 绕 ẑ 转 π/2、π/4，I 不转。输入行 A = e₃ 与 B = r₀ 是初态的两根矢量；从 #0 起，格子是当前布洛赫矢量 r 与累积旋子 R = Gₖ⋯G₁ 的四个分量 (w, b₁, b₂, b₃)。</li>
-        <li><b>H·Z·H = X。</b>由 qubit_weyl_star 的关系手算：H = (X + Z)/√2，HZH = (XZX + XZZ + ZZX + ZZZ)/2 = (−Z + X + X + Z)/2 = X。这一步是手算与页面的数值核对，不是所引的 Lean 定理。换成旋子，R_H R_Z R_H = (−i)³HZH = iX = −R_X：球面上是同一个转动，旋量却差一个 −1。预设“H·Z·H = X”的符号带因此以 −1 收尾。</li>
-        <li><b>双覆盖与符号带。</b>R(2π) = cos π = −1：矢量转一整圈回到原处，旋量要转两圈才回到自身。左栏的探针旋子 Rₙ(α) 绕舞台右上所选的轴 n̂ 作用在当前步的态上，读数 tr(R) = 2cos(α/2) 在 α = 360° 时等于 −2。符号带记下每一步后累积旋子 R 落在哪一叶：⟨R⟩₀ = tr(R)/2 的符号，为 0 时取 (b₁, b₂, b₃) 第一个非零分量的符号。这是在 ±R 中选代表的约定。</li>
-        <li><b>两子几何积。</b>取 A = e₃、B = r，A·B = r_z = cos θ 是青色投影线，‖A∧B‖ = sin θ 是紫色平行四边形；两者平方和为 1 是 <a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/QuantumBounds/LagrangeGramIdentity.lean#L17" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a>（LEAN ✓）的特例。</li>
-        <li><b>相图。</b>右栏逐格画出 θ ∈ [0°, 180°]（每 5°）× φ ∈ [0°, 360°]（每 10°）上所选的 ⟨σ⟩；琥珀色十字标出当前步的态，白圈是初态，细线是线路经过的态。点击相图选择初态。网格只是有限的检查，结论的一般性来自 Lean 定理。</li>
+        <li><b>线与面积。</b>A·B = cos θ 是 B 在 A 上的影子长度；|A∧B| = sin θ 是 A 与 B 垂直于 A 的分量撑开的矩形面积。舞台上的直角三角形以 B 为斜边：两条直角边就是线和面积，所以 线² + 面积² = 1，这是 <a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumBounds/LagrangeGramIdentity.lean" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a>（LEAN ✓）取 u = A、v = B 的特例。</li>
+        <li><b>线决定咔哒。</b>沿 A 测量，得到 +A 的概率是 (1 + A·B)/2 = cos²(θ/2)，得到 −A 的概率是 sin²(θ/2)；两者之和为 1：<a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning.recordWeight_sum" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Observer/Conditioning.lean" target="_blank" rel="noopener"><code>recordWeight_sum</code></a>（LEAN ✓）。纯态的布洛赫矢量长度为 1：<a class="leanref" data-lean-gid="D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Information/ActualPureQubitGeometry.lean" target="_blank" rel="noopener"><code>bloch_geometry_of_isHermitian</code></a>（LEAN ✓）。</li>
+        <li><b>面积决定条纹。</b>把 ±A 两条路重新合束，条纹的明暗对比（可见度）等于 B 垂直于 A 的分量长度 sin θ，条纹位置由绕 A 的方位角决定。线越长，哪条路越确定，条纹越淡；面积越大则相反。这是示意（MODEL）。第六章对环境记录态给出同形的已冻结定理 D² + V² = 1：<a class="leanref" data-lean-gid="D5/S3/Quantum/PureState/RecordCoherenceComplementarity.pure_record_distinguishability_coherence_complementarity" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/PureState/RecordCoherenceComplementarity.lean" target="_blank" rel="noopener"><code>pure_record_distinguishability_coherence_complementarity</code></a>（LEAN ✓；那里的 V 是两个记录态内积的模，D = √(1 − V²)）。一般混合环境下的 Englert 不等式是文献结果，未在本书形式化。</li>
+        <li><b>门是旋子。</b>X = σ₁、Z = σ₃ 自伴、平方为 I 且反对易：<a class="leanref" data-lean-gid="D5/S3/Quantum/FiniteDimensional.qubit_weyl_star" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/FiniteDimensional.lean" target="_blank" rel="noopener"><code>qubit_weyl_star</code></a>（LEAN ✓）。单位双矢量 Bₙ = i n̂·σ 是反自伴的酉矩阵，平方为 −I：<a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.lean" target="_blank" rel="noopener"><code>square_eq_neg_one_of_skewAdjoint_unitary</code></a>（LEAN ✓）。于是旋子 Rₙ(α) = cos(α/2) − Bₙ sin(α/2) = w − b·(iσ)，其中 w = cos(α/2)、b = sin(α/2) n̂；它把布洛赫矢量绕 n̂ 右手转 α：r ↦ R r R†。本页把 X、Y、Z 画成绕各自的轴转 180°，H 绕 ĥ = (x̂ + ẑ)/√2 转 180°，S、T 绕 ẑ 转 90°、45°，与教科书矩阵只差一个全局相位（约定，不是定理）。</li>
+        <li><b>矢量一圈，旋子两圈。</b>旋子只走一半的角度：α = 360° 时矢量回到原处，R = cos 180° = −1；α = 720° 时 R = +1。H·Z·H 与 X 在球面上是同一个转动，旋子却是 R_H R_Z R_H = −R_X。页面在 ±R 中用标量部 w 的符号（w = 0 时取 b 的第一个非零分量的符号）标出当前落在哪一叶，这是选代表的约定。H·Z·H = X 可由上面的泡利关系手算，页面只做数值核对。</li>
       </ol>
-      <p class="lede refs">书中：<a href="../../zh/ch06-geometric-product.html#thm-lagrange-gram-identity" target="_top">第六章 · 拉格朗日—格拉姆恒等式</a> · <a href="../../zh/ch01-measurement.html#lem-qubit-weyl-star" target="_top">第一章 · 泡利 X 与 Z 的反对易、自伴与对合</a> · <a href="../../zh/ch05-complex-phase-and-rotors.html#lemma-skew-adjoint-unitary-square" target="_top">第五章 · 反自伴酉矩阵的平方为 −I</a> · <a href="../../zh/ch12-measurement-computation-and-gradients.html#lemma-measurement-branch-sum" target="_top">第十二章 · 记录权重之和守恒</a> · <a href="../../zh/ch26-single-qubit-rotor-compilation.html#prop-hermitian-bloch-geometry" target="_top">第二十六章 · 厄米矩阵的布洛赫重构</a> · trureturing（所钉提交）：<a data-trureturing-path="D5/S3/Quantum/FiniteDimensional.lean" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Quantum/FiniteDimensional.lean" target="_blank" rel="noopener">FiniteDimensional.lean</a> · <a data-trureturing-path="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.lean" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.lean" target="_blank" rel="noopener">BalancedUnitaryComplexStructure.lean</a></p>
+      <p class="lede refs">书中：<a href="../../zh/ch06-geometric-product.html#sec-inner-particle-outer-wave" target="_top">第六章 · 内积为何是粒子、外积为何是波</a> · <a href="../../zh/ch06-geometric-product.html#thm-lagrange-gram-identity" target="_top">拉格朗日—格拉姆恒等式</a> · <a href="../../zh/ch06-geometric-product.html#thm-record-coherence-complementarity" target="_top">可区分度与可见度的勾股互补</a> · <a href="../../zh/ch05-complex-phase-and-rotors.html" target="_top">第五章 · 复相位与旋子</a> · trureturing（所钉提交）：<a data-trureturing-path="D5/S3/QuantumBounds/LagrangeGramIdentity.lean" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumBounds/LagrangeGramIdentity.lean" target="_blank" rel="noopener">LagrangeGramIdentity.lean</a></p>
     </div>
     <div class="en">
-      <p class="lede">Treat the Pauli matrices σ₁, σ₂, σ₃ as the three basis vectors of space: a qubit state |ψ⟩ is then a Bloch vector r = (⟨σ₁⟩, ⟨σ₂⟩, ⟨σ₃⟩) on the unit sphere, and a single-qubit gate is a rotor R that turns r into R r R† on the sphere while it turns the spinor |ψ⟩ through only half the angle. The page is a numerical illustration, not a proof.</p>
+      <p class="lede">A pure qubit state is a Bloch vector B on the unit sphere. Hold another unit vector A against it as a ruler and there are exactly two things between them: the collinear shadow (a line) and the perpendicular face they span (an area). The geometric product AB = A·B + A∧B writes the two together. The page is a numerical illustration, not a proof.</p>
       <ol>
-        <li><b>Bloch vector and Born weights.</b> A pure state ρ = |ψ⟩⟨ψ| = (I + r·σ)/2 is a Hermitian, trace-one, idempotent 2×2 matrix, so ‖r‖ = 1: <a class="leanref" data-lean-gid="D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Quantum/Information/ActualPureQubitGeometry.lean#L68" target="_blank" rel="noopener"><code>bloch_geometry_of_isHermitian</code></a> (LEAN ✓). Measured in the computational basis, P(0) = (1 + r_z)/2 = cos²(θ/2) and P(1) = sin²(θ/2), and they sum to tr ρ = 1: <a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning.recordWeight_sum" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Observer/Conditioning.lean#L47" target="_blank" rel="noopener"><code>recordWeight_sum</code></a> (LEAN ✓).</li>
-        <li><b>Pauli algebra and the volume element.</b> X = σ₁ and Z = σ₃ are self-adjoint, square to I and anticommute: <a class="leanref" data-lean-gid="D5/S3/Quantum/FiniteDimensional.qubit_weyl_star" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Quantum/FiniteDimensional.lean#L24" target="_blank" rel="noopener"><code>qubit_weyl_star</code></a> (LEAN ✓). The page computes σ₁σ₂σ₃ = i·I₂ exactly: the product of the three basis vectors is the volume element I₃, which is i times the identity. I₃ and every unit bivector Bₙ = I₃ n̂ = i n̂·σ are skew-adjoint unitary matrices and therefore square to −I: <a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.lean#L75" target="_blank" rel="noopener"><code>square_eq_neg_one_of_skewAdjoint_unitary</code></a> (LEAN ✓).</li>
-        <li><b>Rotors and gates.</b> Since Bₙ² = −1, Euler's formula gives Rₙ(α) = exp(−(α/2)Bₙ) = cos(α/2) − Bₙ sin(α/2) = w − i b·σ with w = cos(α/2) and b = sin(α/2) n̂. The adjoint action r ↦ R r R† turns r right-handedly by α about n̂. Every gate of the ledger is such a rotor (up to a global phase of the textbook matrix): X, Y, Z turn by π about their axes, H by π about ĥ = (x̂ + ẑ)/√2, S and T by π/2 and π/4 about ẑ, and I does not turn. The input rows A = e₃ and B = r₀ are the two vectors of the initial state; from #0 on, the cells are the current Bloch vector r and the four components (w, b₁, b₂, b₃) of the accumulated rotor R = Gₖ⋯G₁.</li>
-        <li><b>H·Z·H = X.</b> By hand from the relations of qubit_weyl_star: H = (X + Z)/√2 and HZH = (XZX + XZZ + ZZX + ZZZ)/2 = (−Z + X + X + Z)/2 = X. This step is a hand computation and a numerical check on the page, not one of the cited Lean theorems. In rotors, R_H R_Z R_H = (−i)³HZH = iX = −R_X: the same turn of the sphere, but the spinor differs by −1, so the sign tape of the “H·Z·H = X” preset ends in −1.</li>
-        <li><b>Double cover and the sign tape.</b> R(2π) = cos π = −1: a vector comes back after one full turn, a spinor only after two. The probe rotor Rₙ(α) of the left column acts on the state of the current step about the axis n̂ chosen at the top right of the stage, and the readout tr(R) = 2cos(α/2) reaches −2 at α = 360°. The sign tape records which sheet the accumulated rotor R is on after each step: the sign of ⟨R⟩₀ = tr(R)/2, or, when that is 0, the sign of the first nonzero of (b₁, b₂, b₃). This is a convention that picks a representative of ±R.</li>
-        <li><b>The pairwise geometric product.</b> With A = e₃ and B = r, A·B = r_z = cos θ is the cyan projection and ‖A∧B‖ = sin θ is the violet parallelogram; that their squares sum to 1 is a case of <a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/QuantumBounds/LagrangeGramIdentity.lean#L17" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a> (LEAN ✓).</li>
-        <li><b>The phase map.</b> The right column draws the chosen ⟨σ⟩ cell by cell over θ ∈ [0°, 180°] (every 5°) × φ ∈ [0°, 360°] (every 10°); the amber cross marks the state at the current step, the white ring the initial state, and the thin line the states the circuit passes through. Click the map to pick the initial state. The grid is a finite check only; the general statements come from the Lean theorems.</li>
+        <li><b>Line and area.</b> A·B = cos θ is the length of the shadow of B on A; |A∧B| = sin θ is the area of the rectangle spanned by A and the part of B perpendicular to A. The right triangle on the stage has B as its hypotenuse and the line and the area as its legs, so line² + area² = 1: the case u = A, v = B of <a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumBounds/LagrangeGramIdentity.lean" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a> (LEAN ✓).</li>
+        <li><b>The line sets the clicks.</b> Measured along A, the outcome +A has probability (1 + A·B)/2 = cos²(θ/2) and −A has sin²(θ/2); they sum to 1: <a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning.recordWeight_sum" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Observer/Conditioning.lean" target="_blank" rel="noopener"><code>recordWeight_sum</code></a> (LEAN ✓). The Bloch vector of a pure state has length 1: <a class="leanref" data-lean-gid="D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Information/ActualPureQubitGeometry.lean" target="_blank" rel="noopener"><code>bloch_geometry_of_isHermitian</code></a> (LEAN ✓).</li>
+        <li><b>The area sets the fringes.</b> Recombine the two paths ±A and the contrast of the fringes (the visibility) is the length sin θ of the part of B perpendicular to A, while their position is the azimuth about A. The longer the line, the more certain the path and the fainter the fringes; the larger the area, the opposite. This is a schematic (MODEL). For environment record states Chapter 6 has a frozen theorem of the same shape, D² + V² = 1: <a class="leanref" data-lean-gid="D5/S3/Quantum/PureState/RecordCoherenceComplementarity.pure_record_distinguishability_coherence_complementarity" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/PureState/RecordCoherenceComplementarity.lean" target="_blank" rel="noopener"><code>pure_record_distinguishability_coherence_complementarity</code></a> (LEAN ✓; there V is the modulus of the inner product of the two record states and D = √(1 − V²)). Englert's inequality for general mixed environments is a literature result, not formalized in this book.</li>
+        <li><b>Gates are rotors.</b> X = σ₁ and Z = σ₃ are self-adjoint, square to I and anticommute: <a class="leanref" data-lean-gid="D5/S3/Quantum/FiniteDimensional.qubit_weyl_star" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/FiniteDimensional.lean" target="_blank" rel="noopener"><code>qubit_weyl_star</code></a> (LEAN ✓). The unit bivector Bₙ = i n̂·σ is a skew-adjoint unitary matrix and squares to −I: <a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.lean" target="_blank" rel="noopener"><code>square_eq_neg_one_of_skewAdjoint_unitary</code></a> (LEAN ✓). Hence the rotor Rₙ(α) = cos(α/2) − Bₙ sin(α/2) = w − b·(iσ) with w = cos(α/2) and b = sin(α/2) n̂; it turns the Bloch vector right-handedly by α about n̂: r ↦ R r R†. The page draws X, Y, Z as 180° turns about their axes, H as a 180° turn about ĥ = (x̂ + ẑ)/√2, and S, T as 90° and 45° turns about ẑ, which differ from the textbook matrices by a global phase (a convention, not a theorem).</li>
+        <li><b>One turn for the vector, two for the rotor.</b> The rotor moves through half the angle: at α = 360° the vector is back and R = cos 180° = −1; at α = 720°, R = +1. H·Z·H and X are the same turn of the sphere, yet the rotors satisfy R_H R_Z R_H = −R_X. Of the pair ±R the page marks the current sheet by the sign of the scalar part w (or, when w = 0, of the first nonzero component of b): a convention for picking a representative. H·Z·H = X follows by hand from the Pauli relations above; the page only checks it numerically.</li>
       </ol>
-      <p class="lede refs">In the book: <a href="../../en/ch06-geometric-product.html#thm-lagrange-gram-identity" target="_top">Chapter 6 · The Lagrange–Gram identity</a> · <a href="../../en/ch01-measurement.html#lem-qubit-weyl-star" target="_top">Chapter 1 · Pauli X and Z anticommute, are self-adjoint and involutive</a> · <a href="../../en/ch05-complex-phase-and-rotors.html#lemma-skew-adjoint-unitary-square" target="_top">Chapter 5 · A skew-adjoint unitary squares to −I</a> · <a href="../../en/ch12-measurement-computation-and-gradients.html#lemma-measurement-branch-sum" target="_top">Chapter 12 · Record weights sum to the trace</a> · <a href="../../en/ch26-single-qubit-rotor-compilation.html#prop-hermitian-bloch-geometry" target="_top">Chapter 26 · Bloch reconstruction of Hermitian matrices</a> · trureturing (pinned commit): <a data-trureturing-path="D5/S3/Quantum/FiniteDimensional.lean" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Quantum/FiniteDimensional.lean" target="_blank" rel="noopener">FiniteDimensional.lean</a> · <a data-trureturing-path="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.lean" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.lean" target="_blank" rel="noopener">BalancedUnitaryComplexStructure.lean</a></p>
+      <p class="lede refs">In the book: <a href="../../en/ch06-geometric-product.html#sec-inner-particle-outer-wave" target="_top">Chapter 6 · why the inner product is the particle and the outer product the wave</a> · <a href="../../en/ch06-geometric-product.html#thm-lagrange-gram-identity" target="_top">the Lagrange–Gram identity</a> · <a href="../../en/ch06-geometric-product.html#thm-record-coherence-complementarity" target="_top">distinguishability–visibility complementarity</a> · <a href="../../en/ch05-complex-phase-and-rotors.html" target="_top">Chapter 5 · complex phase and rotors</a> · trureturing (pinned commit): <a data-trureturing-path="D5/S3/QuantumBounds/LagrangeGramIdentity.lean" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/QuantumBounds/LagrangeGramIdentity.lean" target="_blank" rel="noopener">LagrangeGramIdentity.lean</a></p>
     </div>
   </div>
 </div>
-
 <script src="main.js"></script>
 </body>
 </html>

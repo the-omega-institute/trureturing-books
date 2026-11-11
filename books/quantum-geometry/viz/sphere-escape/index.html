@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="zh-CN" data-title-en="ORTHO//ESCAPE · Diagonal escape, the cosine fixed point and prime escape">
+<html lang="zh-CN" data-title-en="ORTHO//ESCAPE · The sphere beyond the sphere: four ways a finite list never closes">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ORTHO//ESCAPE 对角逃逸、余弦不动点与素数逃逸</title>
-<meta name="description" content="一张清单 f 列出 N 行二进制串；沿对角线读出 f(r, r) 并逐位翻转，得到 d(r) = ¬f(r, r)，d 在第 r 位与第 r 行不同，所以不在清单里（trureturing 中 relative_semantic_diagonal_ne_listed_decode 已由 Lean 内核验证并冻结）。同一条步进轴推进余弦迭代 xₖ₊₁ = cos xₖ → x* ≈ 0.739085，并列出前 k 个素数与 p₁⋯pₖ + 1 的新素因子。A list f holds N binary rows; reading the diagonal f(r, r) and flipping it gives d(r) = ¬f(r, r), which differs from row r in place r and so is not on the list (relative_semantic_diagonal_ne_listed_decode, kernel-verified in Lean and frozen in trureturing). The same step rail advances the cosine iteration xₖ₊₁ = cos xₖ → x* ≈ 0.739085 and lists the first k primes with a new prime factor of p₁⋯pₖ + 1.">
+<title>ORTHO//ESCAPE 球外之球 · 有限的清单总留下一点在外面</title>
+<meta name="description" content="四个场景，同一件事：有限步之后总有东西留在外面。对角线上翻转出的串不在清单里；内接多边形与圆之间永远有一条缝；余弦迭代永远差一点才到不动点；有限个素数乘起来加一，素因子都在清单之外。Four scenes, one fact: after finitely many steps something is always left outside. The flipped diagonal is not on the list; an inscribed polygon always leaves a gap under the circle; the cosine iteration never quite reaches its fixed point; multiply finitely many primes, add one, and every prime factor is off the list.">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,198 +12,198 @@
 <link rel="stylesheet" href="../assets/theme.css">
 <link rel="stylesheet" href="style.css">
 <script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
 </head>
 <body data-viz-id="sphere-escape">
-<div class="app" id="app">
+<div class="app lab" id="app">
   <header class="top">
     <div class="brand">
       <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
       <h1 class="logo" data-text="ORTHO//ESCAPE">ORTHO<b>//</b>ESCAPE</h1>
       <div class="tagline">
-        <span class="zh">对角逃逸 · <em>任何清单都漏掉自己翻转后的对角线 d(r) = ¬f(r, r)</em></span>
-        <span class="en">Diagonal escape · <em>every list misses its own flipped diagonal d(r) = ¬f(r, r)</em></span>
+        <span class="zh">球外之球 · <em>以为把球封住了，总还有一点留在外面</em></span>
+        <span class="en">The sphere beyond the sphere · <em>each time the list looks closed, something is still outside</em></span>
       </div>
     </div>
     <div class="status" aria-live="polite">
-      <span class="pill hot" id="pillN">N <strong>—</strong></span>
-      <span class="pill" id="pillStep">— <strong>—</strong></span>
-      <span class="pill" id="pillEscape">d ∉ Im f <strong>—</strong></span>
+      <span class="pill" id="pillScene">SCENE <strong>—</strong></span>
+      <span class="pill" id="pillStep"><span class="zh">步</span><span class="en">STEP</span> <strong>0</strong></span>
+      <span class="pill hot" id="pillGap"><span class="zh">留在外面</span><span class="en">OUTSIDE</span> <strong>—</strong></span>
       <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
     </div>
   </header>
 
-  <aside class="col deck" aria-label="输入与读数" data-aria-en="Inputs and readouts">
-    <section class="panel sec" id="inputs">
-      <h2><span class="zh">输入</span><span class="en">Inputs</span><span class="aside">Cantor · Dottie · Euler</span></h2>
-      <div class="num-field">
-        <label for="n"><span class="zh">枚举维数 N（N 行 × N 列）</span><span class="en">Enumeration dimension N (N rows × N columns)</span></label>
-        <div class="stepper"><button type="button" id="nDec" aria-label="N 减一" data-aria-en="Decrease N">−</button><input type="number" id="nNum" min="3" max="8" step="1" value="6" inputmode="numeric" aria-label="N 的值" data-aria-en="Value of N"><button type="button" id="nInc" aria-label="N 加一" data-aria-en="Increase N">+</button></div>
-        <input type="range" id="n" min="3" max="8" step="1" value="6">
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="diagonal" aria-pressed="false"><span class="code">DIAGONAL</span><span class="cn zh">对角线翻一遍，逃出清单</span><span class="cn en">Flip the diagonal, leave the list</span></button>
+        <button class="preset" data-preset="absorb" aria-pressed="false"><span class="code">ABSORB</span><span class="cn zh">把逃走的收编，它再逃一次</span><span class="cn en">Absorb the escapee; it escapes again</span></button>
+        <button class="preset" data-preset="liuhui" aria-pressed="false"><span class="code">LIU-HUI</span><span class="cn zh">刘徽割圆：6 边到 192 边</span><span class="cn en">Liu Hui: from 6 sides to 192</span></button>
+        <button class="preset" data-preset="zu" aria-pressed="false"><span class="code">ZU-24576</span><span class="cn zh">祖冲之 24576 边：缝还在</span><span class="cn en">Zu Chongzhi, 24576 sides: the gap is still there</span></button>
+        <button class="preset" data-preset="dottie" aria-pressed="false"><span class="code">COSINE</span><span class="cn zh">反复取余弦：永远差一点</span><span class="cn en">Cosine again and again: never quite there</span></button>
+        <button class="preset" data-preset="far" aria-pressed="false"><span class="code">FAR-START</span><span class="cn zh">换个起点，同一个终点</span><span class="cn en">Another start, the same end</span></button>
+        <button class="preset" data-preset="euclid" aria-pressed="false"><span class="code">EUCLID</span><span class="cn zh">乘起来加一：新素数</span><span class="cn en">Multiply, add one: a new prime</span></button>
+        <button class="preset" data-preset="thirteen" aria-pressed="false"><span class="code">30031</span><span class="cn zh">加一之后不一定是素数</span><span class="cn en">The sum need not be prime itself</span></button>
       </div>
-      <div class="num-field">
-        <label for="seed"><span class="zh">清单种子 S（生成各行 f(r, ·)）</span><span class="en">List seed S (generates the rows f(r, ·))</span></label>
-        <div class="stepper"><button type="button" id="seedDec" aria-label="S 减一" data-aria-en="Decrease S">−</button><input type="number" id="seedNum" min="1" max="63" step="1" value="11" inputmode="numeric" aria-label="S 的值" data-aria-en="Value of S"><button type="button" id="seedInc" aria-label="S 加一" data-aria-en="Increase S">+</button></div>
-        <input type="range" id="seed" min="1" max="63" step="1" value="11">
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec" data-scenes="diag">
+      <h2><span class="zh">清单</span><span class="en">The list</span><span class="aside">N × N</span></h2>
+      <div class="field">
+        <label for="size"><span class="zh">行数 N</span><span class="en">Rows N</span><small class="zh">每行 N 位</small><small class="en">N bits per row</small></label><output id="oSize" for="size">6</output>
+        <input type="range" id="size" min="3" max="10" step="1" value="6">
       </div>
-      <div class="num-field">
-        <label for="x0"><span class="zh">Dottie 初始角 x₀（单位 0.01 rad）</span><span class="en">Dottie seed angle x₀ (units of 0.01 rad)</span></label>
-        <div class="stepper"><button type="button" id="x0Dec" aria-label="x₀ 减 0.01" data-aria-en="Decrease x₀ by 0.01">−</button><input type="number" id="x0Num" min="0" max="314" step="1" value="100" inputmode="numeric" aria-label="x₀ 的值（百分之一弧度）" data-aria-en="Value of x₀ in hundredths of a radian"><button type="button" id="x0Inc" aria-label="x₀ 加 0.01" data-aria-en="Increase x₀ by 0.01">+</button></div>
-        <input type="range" id="x0" min="0" max="314" step="1" value="100">
+      <div class="field">
+        <label for="seed"><span class="zh">种子</span><span class="en">Seed</span><small class="zh">换一张清单</small><small class="en">another list</small></label><output id="oSeed" for="seed">11</output>
+        <input type="range" id="seed" min="1" max="99" step="1" value="11">
       </div>
-      <div class="chips presets" id="presets" role="group" aria-label="示例" data-aria-en="Examples">
-        <button class="chip" data-preset="identity"><span class="zh">单位基 I</span><span class="en">Identity Basis</span></button>
-        <button class="chip" data-preset="alternating"><span class="zh">交错 (r + c) mod 2</span><span class="en">Alternating</span></button>
-        <button class="chip" data-preset="dense"><span class="zh">全 1 稠密块</span><span class="en">Dense Block</span></button>
-        <button class="chip" data-preset="dottie0"><span class="zh">Dottie x₀ = 0</span><span class="en">Dottie x₀ = 0</span></button>
-        <button class="chip" data-preset="dottie1"><span class="zh">Dottie x₀ = 1</span><span class="en">Dottie x₀ = 1</span></button>
-        <button class="chip" id="swap"><span class="zh">转置 fᵀ</span><span class="en">Swap · fᵀ</span></button>
-        <button class="chip" id="random"><span class="zh">随机</span><span class="en">Random</span></button>
-        <button class="chip" id="reset"><span class="zh">重置</span><span class="en">Reset</span></button>
+      <div class="chips">
+        <button class="chip" id="absorb"><span class="zh">把 d 收进清单</span><span class="en">Put d on the list</span></button>
+        <button class="chip" id="identity"><span class="zh">单位阵</span><span class="en">Identity</span></button>
+      </div>
+      <p class="note"><span class="zh">点任意一格可以翻转它。无论怎么改，d 都不在清单里。</span><span class="en">Click any cell to flip it. Whatever you change, d is not on the list.</span></p>
+    </section>
+
+    <section class="panel sec" data-scenes="poly" hidden>
+      <h2><span class="zh">割圆</span><span class="en">Cutting the circle</span><span class="aside">n = 6 · 2ᵏ</span></h2>
+      <p class="note"><span class="zh">底部的时间轴每走一步，边数翻一倍。右侧的放大镜一直把那条缝放大到看得见。</span><span class="en">Each step of the rail doubles the number of sides. The magnifier on the right keeps enlarging the gap until you can see it.</span></p>
+      <div class="field">
+        <label for="tpoint"><span class="zh">泰勒展开的角 θ</span><span class="en">Angle θ for the Taylor sums</span><small class="zh">弧度</small><small class="en">radians</small></label><output id="oTpoint" for="tpoint">1.00</output>
+        <input type="range" id="tpoint" min="0.2" max="3" step="0.05" value="1">
       </div>
     </section>
 
-    <section class="panel sec" id="readouts" aria-live="polite">
-      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">d(n) = ¬f(n,n)</span></h2>
-      <dl class="ro">
-        <div><dt><span class="zh">维数 N</span><span class="en">Dimension N</span></dt><dd id="roN">—</dd></div>
-        <div><dt><span class="zh">对角迹 diag(f)</span><span class="en">Diagonal trace diag(f)</span></dt><dd id="roTrace">—</dd></div>
-        <div><dt><span class="zh">逃逸向量 d(n)</span><span class="en">Escape vector d(n)</span></dt><dd id="roD">—</dd></div>
-        <div><dt><span class="zh">最小汉明距离</span><span class="en">Min Hamming dist</span></dt><dd id="roHam">—</dd></div>
-        <div><dt><span class="zh">Dottie 迭代 xₖ</span><span class="en">Dottie xₖ</span></dt><dd id="roX">—</dd></div>
-        <div><dt><span class="zh">收缩率 |sin x*|</span><span class="en">Contraction |sin x*|</span></dt><dd id="roSin">—</dd></div>
-        <div class="wide deficit"><dt><span class="zh">正交逃逸间隙 / Dottie 不动点</span><span class="en">Orthogonal Escape Gap / Dottie Fixed Point</span></dt><dd><b id="roHero" class="vpos">∀ r, d(r) ≠ f(r, r)</b><span class="sub" id="roHeroSub">x* ≈ 0.739085 · sin²x* + cos²x* = 1</span><span class="okmark" id="roHeroMark">✓</span></dd></div>
-        <div class="wide"><dt><span class="zh">逐行核对 d ≠ f(r, ·)（Lean：relative_semantic_diagonal_ne_listed_decode）</span><span class="en">Row-by-row check d ≠ f(r, ·) (Lean: relative_semantic_diagonal_ne_listed_decode)</span></dt><dd id="roCantor">—</dd></div>
-        <div class="wide"><dt><span class="zh">sin²xₖ + cos²xₖ = 1（页面以双精度逐步核对）</span><span class="en">sin²xₖ + cos²xₖ = 1 (checked by the page in double precision)</span></dt><dd id="roPyth">—</dd></div>
-      </dl>
-      <p class="note" id="roNote"></p>
+    <section class="panel sec" data-scenes="cos" hidden>
+      <h2><span class="zh">余弦迭代</span><span class="en">Cosine iteration</span><span class="aside">xₖ₊₁ = cos xₖ</span></h2>
+      <div class="field">
+        <label for="x0"><span class="zh">起点 x₀</span><span class="en">Start x₀</span><small class="zh">弧度</small><small class="en">radians</small></label><output id="oX0" for="x0">0.00</output>
+        <input type="range" id="x0" min="-3" max="3" step="0.05" value="0">
+      </div>
+      <div class="chips" id="zoomChips" role="group" aria-label="镜头" data-aria-en="Camera">
+        <button class="chip" data-zoom="follow" aria-pressed="true"><span class="zh">跟着放大</span><span class="en">Follow and zoom</span></button>
+        <button class="chip" data-zoom="whole" aria-pressed="false"><span class="zh">看全程</span><span class="en">Whole path</span></button>
+      </div>
+      <p class="note"><span class="zh">每一步都更近，画面跟着放大，看到的却总是同样的螺旋。</span><span class="en">Every step is closer and the view zooms in, yet what you see is always the same spiral.</span></p>
+    </section>
+
+    <section class="panel sec" data-scenes="prime" hidden>
+      <h2><span class="zh">素数清单</span><span class="en">The list of primes</span><span class="aside">Q = p₁⋯pₖ + 1</span></h2>
+      <p class="note"><span class="zh">时间轴每走一步，清单多收一个素数。每只钟有 p 个刻度，指针指着 Q 除以 p 的余数。</span><span class="en">Each step of the rail adds one prime to the list. Every dial has p ticks, and its hand points at the remainder of Q divided by p.</span></p>
     </section>
   </aside>
 
   <main class="center">
-    <section class="panel ledger" id="ledgerPanel" aria-labelledby="ledgerTitle">
-      <div class="head">
-        <h2 id="ledgerTitle"><span class="zh">对角逃逸与自指迭代账本</span><span class="en">Diagonal Escape &amp; Self-Reference Ledger</span></h2>
-        <span class="aside" id="ledgerSub"><span class="zh">第 k 步读对角元 f(k, k) 并翻转，同时推进一次 xₖ = cos xₖ₋₁、列出第 k 个素数</span><span class="en">step k reads the diagonal entry f(k, k) and flips it, advances xₖ = cos xₖ₋₁ once and lists the k-th prime</span></span>
+    <div class="stage still" id="stage" data-thumb aria-label="舞台：对角线翻转的矩阵、圆内接多边形与放大镜、余弦蛛网图，或余数钟" data-aria-en="Stage: the matrix with its flipped diagonal, the inscribed polygon with its magnifier, the cosine cobweb, or the remainder dials">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+        <button class="chip" data-scene="diag" aria-pressed="true"><span class="zh">对角线</span><span class="en">Diagonal</span></button>
+        <button class="chip" data-scene="poly" aria-pressed="false"><span class="zh">割圆</span><span class="en">Polygon</span></button>
+        <button class="chip" data-scene="cos" aria-pressed="false"><span class="zh">余弦</span><span class="en">Cosine</span></button>
+        <button class="chip" data-scene="prime" aria-pressed="false"><span class="zh">素数</span><span class="en">Primes</span></button>
       </div>
-      <div class="rules" aria-label="对角翻转与迭代规则" data-aria-en="Flip and iteration rules">
-        <span class="rule r0"><b>D₀</b> f(n,n)=0 ↦ d(n)=1 <i>+1</i></span>
-        <span class="rule r1"><b>D₁</b> f(n,n)=1 ↦ d(n)=0 <i>−1</i></span>
-        <span class="rule rj"><b>Cₖ</b> xₖ₊₁ = cos xₖ <i>→ 0.739</i></span>
-        <span class="rule ra"><b>⊥</b> d ∉ Im(f) <i>LEAN ✓</i></span>
-      </div>
-      <div class="stage" id="escapeStage">
-        <canvas id="escapeCanvas" role="img" aria-label="逃逸舞台：对角模式画出清单各行与圆外的 d，Dottie 模式画出余弦蛛网，素数模式画出素数螺线与欧几里得逃逸数" data-aria-en="Escape stage: the diagonal mode draws the listed rows and d outside their circle, the Dottie mode the cosine cobweb, the prime mode the prime spiral and Euclid's escape number"></canvas>
-        <div class="scan"></div>
-        <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
-        <div class="hud-tl"><span class="big" id="hudBig">—</span><span class="sub" id="hudSub">—</span></div>
-        <div class="hud-tr chips" id="modeChips" role="group" aria-label="舞台模式" data-aria-en="Stage mode">
-          <button class="chip" data-mode="diagonal"><span class="zh">对角</span><span class="en">Diagonal</span></button>
-          <button class="chip" data-mode="dottie">Dottie</button>
-          <button class="chip" data-mode="prime"><span class="zh">素数</span><span class="en">Prime</span></button>
-        </div>
-      </div>
-      <div class="sheetwrap" id="sheetWrap">
-        <div class="digits" id="ledger" role="list" aria-label="逐行对角翻转" data-aria-en="Diagonal flips, row by row"></div>
-      </div>
-      <div class="tape-row">
-        <span class="tape-label"><span class="zh">符号带</span><span class="en">Sign tape</span></span>
-        <div class="tape" id="tape" aria-hidden="true"></div>
-        <span class="tape-sum" id="tapeSum">—</span>
-      </div>
+      <div class="hud-bl" id="legend"></div>
       <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    </section>
-
-    <footer class="rail" id="rail">
-      <div class="transport">
-        <button class="tbtn" id="first" aria-label="回到第 0 步" data-aria-en="Back to step 0">⏮</button>
-        <button class="tbtn" id="prev" aria-label="上一步" data-aria-en="Previous step">◀</button>
-        <button class="tbtn" id="play" aria-label="播放/暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
-        <button class="tbtn" id="next" aria-label="下一步" data-aria-en="Next step">▶▶</button>
-        <button class="tbtn" id="last" aria-label="跳到最后一步" data-aria-en="Jump to the last step">⏭</button>
-      </div>
-      <div class="clock">
-        <span class="tau" id="passLabel">0</span>
-        <input type="range" id="pass" min="0" max="1" step="1" value="0" aria-label="当前步" data-aria-en="Current step">
-      </div>
-      <div class="keys">
-        <span class="zh"><kbd>←</kbd><kbd>→</kbd> 步 · <kbd>空格</kbd> 播放 · <kbd>S</kbd> 转置 · <kbd>R</kbd> 随机 · <kbd>M</kbd> 模式</span>
-        <span class="en"><kbd>←</kbd><kbd>→</kbd> step · <kbd>Space</kbd> play · <kbd>S</kbd> swap · <kbd>R</kbd> random · <kbd>M</kbd> mode</span>
-      </div>
-    </footer>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="pATitle"></h2><span id="pAMeta"></span></div>
+        <canvas id="plotA" aria-label="留在外面的量随步数的变化" data-aria-en="What is left outside, step by step"></canvas>
+      </section>
+      <section class="panel">
+        <div class="head"><h2 id="pBTitle"></h2><span id="pBMeta"></span></div>
+        <canvas id="plotB" aria-label="同一场景的第二个读数" data-aria-en="A second reading of the same scene"></canvas>
+      </section>
+    </div>
   </main>
 
-  <aside class="col side" aria-label="对角矩阵与依据" data-aria-en="Diagonal matrix and evidence">
-    <section class="panel sec heatpanel" id="heatPanel" data-thumb>
-      <h2 class="thumb-hide"><span class="zh">康托尔对角矩阵 f(r, c)</span><span class="en">Cantor Diagonal Matrix f(r, c)</span><span class="aside" id="heatRange">N × N</span></h2>
-      <div class="heatwrap">
-        <canvas id="heat" role="img" aria-label="康托尔对角矩阵与逃逸行：行 r、列 c；点击一格翻转 f(r, c)" data-aria-en="Cantor diagonal matrix and escape map: row r, column c; click a cell to flip f(r, c)"></canvas>
-        <div class="scan"></div>
-      </div>
-      <div class="chips thumb-hide" id="nChips" role="group" aria-label="维数" data-aria-en="Dimension">
-        <button class="chip" data-n="4">N = 4</button>
-        <button class="chip" data-n="6">N = 6</button>
-        <button class="chip" data-n="8">N = 8</button>
-      </div>
-      <ul class="legend thumb-hide">
-        <li><i class="sw pos"></i>f(r,c) = 1</li>
-        <li><i class="sw zero"></i>f(r,c) = 0</li>
-        <li><i class="sw neg"></i>d(r) = ¬f(r,r)</li>
-        <li><i class="sw cur"></i><span class="zh">当前对角元 (k, k)</span><span class="en">current diagonal cell (k, k)</span></li>
-      </ul>
-      <p class="note thumb-hide" id="heatCounts">—</p>
-      <p class="note thumb-hide" id="heatHover">&nbsp;</p>
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="roKeyL"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div class="c"><dt id="roL1"></dt><dd id="ro1">—</dd></div>
+        <div class="m"><dt id="roL2"></dt><dd id="ro2">—</dd></div>
+        <div><dt id="roL3"></dt><dd id="ro3">—</dd></div>
+        <div><dt id="roL4"></dt><dd id="ro4">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean" data-scenes="diag"><span class="ok">LEAN ✓</span><span><span class="zh">只要翻转没有不动点，对角线 g(x) = twist(D<sub>x</sub>(latent x)) 就不等于清单里的任何一行。本页取 latent = id、twist = ¬。已冻结：</span><span class="en">If the twist has no fixed point, the diagonal g(x) = twist(D<sub>x</sub>(latent x)) differs from every row of the list. The page takes latent = id and twist = ¬. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.lean" target="_blank" rel="noopener"><code>relative_semantic_diagonal_ne_listed_decode</code></a></span></div>
+      <div class="lean" data-scenes="poly" hidden><span class="ok">LEAN ✓</span><span><span class="zh">‖z‖ ≤ r 时，指数级数截到前 n 项的误差不超过 rⁿ/n!·eʳ。取 z = iθ 得到右下图里余弦部分和的已验证界。已冻结：</span><span class="en">For ‖z‖ ≤ r the exponential series cut after n terms is off by at most rⁿ/n!·eʳ. With z = iθ this is the verified bound on the cosine partial sums in the lower right plot. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Observer/Linear/ExactTaylorObservationRemainder.exp_tail_le" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Observer/Linear/ExactTaylorObservationRemainder.lean" target="_blank" rel="noopener"><code>exp_tail_le</code></a></span></div>
+      <div class="lean" data-scenes="poly" hidden><span class="ok">LEAN ✓</span><span><span class="zh">支撑在 0…N 上的单位序列，平移 ℓ ≠ 0 的自相关的模不超过 cos(π/(⌊N/|ℓ|⌋ + 2))：有限记录的重叠被一个内接多边形的余弦挡在 1 以下。已冻结：</span><span class="en">For a unit sequence supported on 0…N, the modulus of its autocorrelation at shift ℓ ≠ 0 is at most cos(π/(⌊N/|ℓ|⌋ + 2)): a finite record's overlap is held below 1 by the cosine of an inscribed polygon. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.coefficient_gamma_le_cosine" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.lean" target="_blank" rel="noopener"><code>coefficient_gamma_le_cosine</code></a></span></div>
+      <div class="lean argued" data-scenes="cos" hidden><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：cos 在 [−1, 1] 上是压缩映射（压缩率 sin 1 &lt; 1），唯一实不动点 x* ≈ 0.739085 是超越数（林德曼—魏尔斯特拉斯），所以从任何有理起点出发的有限步迭代都到不了它。</span><span class="en">Literature result, not formalized in this book: cos is a contraction on [−1, 1] (with rate sin 1 &lt; 1), and its unique real fixed point x* ≈ 0.739085 is transcendental (Lindemann–Weierstrass), so no finite number of steps from a rational start ever lands on it.</span></span></div>
+      <div class="lean" data-scenes="prime" hidden><span class="ok">LEAN ✓</span><span><span class="zh">Re s &gt; 1 时，全体素数上的欧拉乘积 ∏(1 − p⁻ˢ)⁻¹ 等于 ζ(s)。下面的图取 s = 2，只乘清单里的有限个素数。已冻结：</span><span class="en">For Re s &gt; 1 the Euler product ∏(1 − p⁻ˢ)⁻¹ over all primes equals ζ(s). The plot below takes s = 2 and multiplies only the finitely many primes on the list. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Zeros/ZetaIdentities.riemann_zeta_euler_product" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Zeros/ZetaIdentities.lean" target="_blank" rel="noopener"><code>riemann_zeta_euler_product</code></a></span></div>
+      <div class="lean argued" data-scenes="prime" hidden><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：欧几里得的论证（Q = p₁⋯pₖ + 1 除以清单里每个素数都余 1，所以它的素因子都不在清单里），以及巴塞尔恒等式 ζ(2) = π²/6。</span><span class="en">Literature results, not formalized in this book: Euclid's argument (Q = p₁⋯pₖ + 1 leaves remainder 1 on division by every listed prime, so none of its prime factors is on the list), and the Basel identity ζ(2) = π²/6.</span></span></div>
     </section>
 
     <section class="panel sec" id="evidence">
       <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
-      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">对任意无不动点的输出翻转 twist（∀ o, twist o ≠ o）、任意潜读出 latent、任意解码目录 decoderCatalog 与任意地址 a，相对语义对角线 g(x) = twist(decoderCatalog(x, latent(x))) 都不等于 decoderCatalog(a) ∘ latent。本页取 Address = Coordinate = {1, …, N}、latent = id、twist = ¬，于是 d ≠ f(r, ·) 对每一行 r 成立。已冻结：</span><span class="en">For any output twist with no fixed point (∀ o, twist o ≠ o), any latent readout, any decoder catalog and any address a, the relative semantic diagonal g(x) = twist(decoderCatalog(x, latent(x))) differs from decoderCatalog(a) ∘ latent. The page takes Address = Coordinate = {1, …, N}, latent = id and twist = ¬, so d ≠ f(r, ·) for every row r. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.lean#L48" target="_blank" rel="noopener"><code>relative_semantic_diagonal_ne_listed_decode</code></a></span></div>
-      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">设 Address 非空、twist 无不动点、解码目录 decoderCatalog 满射，则相对语义对角线 g 从潜划分拓扑 partitionTopology(latent) 到离散输出拓扑不连续。已冻结：</span><span class="en">If Address is nonempty, twist has no fixed point and the decoder catalog is surjective, the relative semantic diagonal g is not continuous from the latent partition topology to the discrete output topology. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean#L30" target="_blank" rel="noopener"><code>complete_diagonal_not_continuous</code></a></span></div>
-      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">同一假设下四项同时成立：¬Refines(g, latent)；g 在旧拓扑下不连续；separationDeficit(latent, g) 非空；并入 conceptJoin(latent, g) 后观测拓扑严格加细。已冻结：</span><span class="en">Under the same hypotheses four settlements hold at once: ¬Refines(g, latent); g is discontinuous in the old topology; separationDeficit(latent, g) is nonempty; adjoining conceptJoin(latent, g) strictly refines the observation topology. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_topological_settlement" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean#L94" target="_blank" rel="noopener"><code>complete_diagonal_topological_settlement</code></a></span></div>
-      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">X 有限，U(A) ⊆ A 对一切 A 成立，S(n+1) = U(S n)，则存在 N ≤ |S 0| 使 n ≥ N 时 S n = S N，且严格变化步数 #{n | S(n+1) ≠ S n} ≤ |S 0|。已冻结：</span><span class="en">If X is finite, U(A) ⊆ A for every A and S(n+1) = U(S n), then some N ≤ |S 0| has S n = S N for all n ≥ N, and the number of strict changes #{n | S(n+1) ≠ S n} is at most |S 0|. Frozen: </span><a class="leanref" data-lean-gid="D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S1/FixedPoints/FiniteContractingStability.lean#L27" target="_blank" rel="noopener"><code>finite_contracting_updates_stabilize</code></a></span></div>
-      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">φ = (1 + √5)/2 > 0，goldenReciprocalMap(φ) = 1 + 1/φ = φ，且对一切 x > 0 有 1 + 1/x = x ⇔ x = φ。定理断言正实数上不动点唯一，不断言迭代收敛。已冻结：</span><span class="en">φ = (1 + √5)/2 > 0, goldenReciprocalMap(φ) = 1 + 1/φ = φ, and for every x > 0, 1 + 1/x = x ⇔ x = φ. The theorem asserts uniqueness of the positive fixed point, not convergence of the iteration. Frozen: </span><a class="leanref" data-lean-gid="D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean#L40" target="_blank" rel="noopener"><code>golden_fixed_point_unique</code></a></span></div>
-      <div class="lean argued" id="litBox"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：康托尔定理（集合 A 到 A → {0, 1} 没有满射：若 f 满射，d 必等于某一行，与上面第一条 Lean 定理矛盾，这一步推理没有单独冻结）；欧几里得素数无穷（p₁⋯pₖ + 1 的素因子不在清单里）；巴塞尔恒等式 ζ(2) = π²/6；cos 在 [−1, 1] 上以 sin 1 &lt; 1 为压缩率（巴拿赫），唯一实不动点 x* 为超越数（林德曼—魏尔斯特拉斯），故对一切代数数 q 有 |cos q − q| &gt; 0。</span><span class="en">Literature results, not formalized in this book: Cantor's theorem (no set A maps onto A → {0, 1}: if f did, d would equal some row, contradicting the first Lean theorem above; this step is not frozen on its own); Euclid's infinitude of primes (a prime factor of p₁⋯pₖ + 1 is not on the list); the Basel identity ζ(2) = π²/6; cos contracts [−1, 1] with rate sin 1 &lt; 1 (Banach), and its unique real fixed point x* is transcendental (Lindemann–Weierstrass), so |cos q − q| &gt; 0 for every algebraic q.</span></span></div>
-      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">对角模式把 N 行画在一个圆上、把 d 画在圆外，只是“d 不在清单里”的示意图；圆的半径和点的位置不是度量。图中标出的汉明距离是真实计算的。</span><span class="en">The diagonal mode draws the N rows on a circle and d outside it only as a picture of “d is not on the list”; the radius and the positions are not a metric. The Hamming distances it labels are computed.</span></span></div>
-      <div class="lean open"><span class="ok">OPEN</span><span><span class="zh">x* 与 π 在 ℚ 上代数无关吗？这可由尚未解决的沙努埃尔猜想推出，目前仍是开放问题。</span><span class="en">Are x* and π algebraically independent over ℚ? This would follow from Schanuel's conjecture, which remains open.</span></span></div>
-      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数值演示，不是证明：矩阵、对角翻转、汉明距离、素数、逃逸数 Q 与它的最小素因子都是精确整数运算；余弦迭代、sin² + cos² 与欧拉部分积用双精度浮点。页面只检查有限个 N 与有限步，一般结论来自上面的 Lean 定理与文献结果。</span><span class="en">A numerical illustration on the page, not a proof: the matrix, the diagonal flips, the Hamming distances, the primes, the escape number Q and its least prime factor are exact integer arithmetic; the cosine iteration, sin² + cos² and the partial Euler products are double precision. The page checks finitely many N and finitely many steps; the general statements come from the Lean theorems and literature results above.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">四个场景并排，是本书“球外之球”的读法：同一种“有限步封不住”的结构。它们在数学上是四个不同的事实，页面不声称其中一个推出另一个。</span><span class="en">Putting the four scenes side by side is this book's reading of “the sphere beyond the sphere”: the same shape of “finitely many steps do not close it”. Mathematically they are four different facts; the page does not claim that one implies another.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">矩阵、汉明距离、素数、Q 及其分解是精确整数运算；割圆的缝、余弦迭代与欧拉乘积用双精度（缝用 2 sin²(π/2n) 计算以避免相消）。有限的检查不是证明。</span><span class="en">The matrix, Hamming distances, primes, Q and its factorization are exact integer arithmetic; the polygon gap, the cosine iteration and the Euler product use double precision (the gap is computed as 2 sin²(π/2n) to avoid cancellation). Finite checks are not proofs.</span></span></div>
       <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
     </section>
   </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到第 0 步" data-aria-en="Back to step 0">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="步数" data-aria-en="Step">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>1</kbd>–<kbd>4</kbd> <span class="zh">场景</span><span class="en">scene</span>
+    </div>
+  </footer>
 </div>
 
 <div class="drawer" id="drawer" hidden>
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
     <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
     <div class="zh">
-      <p class="lede">一张清单 f 列出 N 行二进制串 f(r, ·)。沿对角线读出 f(r, r) 并逐位翻转，得到 d(r) = ¬f(r, r)：d 在第 r 位与第 r 行不同，所以无论清单怎样排，d 都不在清单里。余弦迭代 xₖ₊₁ = cos xₖ 是同一种“把自己的输出再喂给自己”的操作，它收向不动点 x* = cos x*，但任何有限步都留下非零残差；欧几里得把前 k 个素数相乘再加 1，同样逃出任何有限的素数清单。本页是数值演示，不是证明。</p>
+      <p class="lede">第二十一章的主张是：站在一个系统内部，用有限的手段去穷尽它，总会有东西落在外面；想把它收进来，就得换到更大的系统里，而那里又有新的东西落在外面。本页用四个能亲手算的例子给这句话配上画面。每个场景下面的图都画同一件事：留在外面的量随步数怎样变化，并且从不为零。本页是数值演示，不是证明。</p>
       <ol>
-        <li><b>对角账本。</b>第 k 步读第 k 行的对角元 f(k, k)：为 0 时用规则 D₀ 写 d(k) = 1，符号带记 +1；为 1 时用规则 D₁ 写 d(k) = 0，记 −1。符号带总和等于 |d| − tr f = N − 2·tr f，只用来记账；要紧的是每一步都留下一个见证：第 k 行在第 k 位与 d 不同。账本末行 d 随步数逐位显出。</li>
-        <li><b>为什么 d 不在清单里（LEAN ✓）。</b>把行号当地址、列号当坐标，取 latent = id、twist = ¬，d 就是相对语义对角线 g。<a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.lean#L48" target="_blank" rel="noopener"><code>relative_semantic_diagonal_ne_listed_decode</code></a> 断言 g 与目录中每一个解码 decoderCatalog(a) ∘ latent 都不同，这正是 d ≠ f(r, ·)。页面另外算出 d 与每一行的汉明距离，最小值总是至少为 1。</li>
-        <li><b>康托尔与拓扑逃逸。</b>若 f 是从 {1, …, N}（或任意集合 A）到全体二进制串的满射，d 就必须等于某一行，与上一条矛盾；所以 2ᴺ 个串永远排不进 N 行（这一步推理写在这里，没有单独冻结）。第二十一章的 <a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean#L30" target="_blank" rel="noopener"><code>complete_diagonal_not_continuous</code></a> 与 <a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_topological_settlement" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean#L94" target="_blank" rel="noopener"><code>complete_diagonal_topological_settlement</code></a>（LEAN ✓）在“目录满射”的假设下推出更强的拓扑结论：g 在旧的划分拓扑下不连续，并入 g 后观测拓扑严格加细。坐标集就是地址集本身（本页的情形）时，这个假设不可能成立，这正是康托尔的结论；只有潜坐标把地址粗分时目录才可能完备，定理的拓扑内容才显现（见第二十一章的四地址一比特手算例）。</li>
-        <li><b>对角矩阵。</b>右栏画出 N × N 的 f（青色为 1，暗色为 0），底行是 d（品红）。点击任一格翻转 f(r, c) 并跳到第 r 步：改非对角格不影响 d，改对角格会同时翻转 d(r)；无论怎样改，d 都留在清单之外。转置 fᵀ 不改变对角线，所以 d 不变，但它要躲开的是一批新的行。</li>
-        <li><b>Dottie 余弦迭代。</b>x₀ 取 0 到 3.14 rad，第 k 步给出 xₖ = cos xₖ₋₁。在 x* ≈ 0.7390851332 处 cos x* = x*，且 |cos′(x*)| = sin x* ≈ 0.6736 &lt; 1，所以迭代在 x* 附近收缩；cos 在 [−1, 1] 上以 sin 1 &lt; 1 为压缩率（巴拿赫，文献结果）。账本末行给出 |cos x_N − x_N|，有限步的残差严格为正。页面在每个 xₖ 上以双精度核对 sin²xₖ + cos²xₖ = 1。</li>
-        <li><b>素数逃逸。</b>第 k 步列出前 k 个素数 p₁, …, pₖ，算出 Q = p₁⋯pₖ + 1 并找出它的最小素因子 q；q 不在清单里（欧几里得，文献结果）。页面同时计算有限欧拉积 ∏ (1 − p⁻²)⁻¹，它对每个有限 k 都严格小于 ζ(2) = π²/6（巴塞尔恒等式，文献结果）；无穷乘积在 Re s &gt; 1 上等于 ζ(s)，见第二十二章的欧拉乘积定理。</li>
-        <li><b>两种自指不动点。</b>第二十四章把余弦不动点与两条已冻结的定理并列：<a class="leanref" data-lean-gid="D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean#L40" target="_blank" rel="noopener"><code>golden_fixed_point_unique</code></a>（LEAN ✓）说 φ 是 1 + 1/x = x 在正实数上的唯一解（代数的自指）；<a class="leanref" data-lean-gid="D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S1/FixedPoints/FiniteContractingStability.lean#L27" target="_blank" rel="noopener"><code>finite_contracting_updates_stabilize</code></a>（LEAN ✓）说有限读数网格上的收缩更新至多 |S₀| 步就稳定。x* 是超越数（林德曼—魏尔斯特拉斯，文献结果），任何有限精度的读数都停在 x* 之外。本页不计算这两条定理的实例，只把它们列为依据。</li>
-        <li><b>模型边界。</b>矩阵、对角线、汉明距离、素数与 Q 都是精确整数运算（Q 至多 9699691）；余弦迭代与欧拉积用双精度浮点。对角模式里“圆外”的画法是示意。x* 与 π 是否代数无关是开放问题。</li>
+        <li><b>对角线。</b>一张清单有 N 行，每行 N 位。读出第 k 行的第 k 位再翻转，得到 d 的第 k 位。于是 d 与第 k 行在第 k 位不同，d 不等于任何一行。把 d 收进清单并补上一列，新的对角线又给出一个不在清单里的串。右侧的点阵画出全部 2ᴺ 个串，清单只占其中至多 N 个。</li>
+        <li><b>割圆。</b>单位圆的内接正 n 边形，每条边的中点离圆弧还有 1 − cos(π/n) = 2 sin²(π/2n)。刘徽从 6 边割到 192 边（用 192 边形的面积得 3.1410），祖冲之算到 24576 边；边数每翻一倍，缝大约缩到四分之一，但对任何有限的 n 都大于零。余弦的泰勒部分和也一样：截到有限项总有余项。</li>
+        <li><b>余弦。</b>从任意实数出发反复取余弦，数列交替地从两侧逼近 x* ≈ 0.739085，每步误差大约乘以 sin x* ≈ 0.674。误差按等比缩小，但有限步之后仍大于零。镜头跟着放大时，蛛网图看起来总是同一个螺旋。</li>
+        <li><b>素数。</b>把清单里的前 k 个素数乘起来加一得到 Q。Q 除以清单里每一个素数都余 1（每只钟的指针都指着 1），所以 Q 的素因子都不在清单里。Q 自己不一定是素数：2·3·5·7·11·13 + 1 = 30031 = 59 × 509。有限个素数的欧拉乘积 ∏(1 − p⁻²)⁻¹ 始终小于 π²/6。</li>
       </ol>
-      <p class="lede refs">书中：<a href="../../zh/ch21-diagonalization-and-escape.html#sec-ch21-2" target="_top">第二十一章 §21.2 · 康托尔—哥德尔相对语义对角线</a> · <a href="../../zh/ch21-diagonalization-and-escape.html#thm-complete-diagonal-not-continuous" target="_top">完备解码目录诱导的对角线必不连续</a> · <a href="../../zh/ch21-diagonalization-and-escape.html#ex-cantor-godel-diagonal-table" target="_top">四地址一比特手算例</a> · <a href="../../zh/ch22-primes-euler-products-and-zeros.html#thm-riemann-zeta-euler-product" target="_top">第二十二章 · 欧拉素数乘积</a> · <a href="../../zh/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-4" target="_top">第二十四章 §24.4 · 余弦不动点与 ψ = ψ(ψ)</a> · trureturing（所钉提交）：<a data-trureturing-path="D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.lean" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.lean" target="_blank" rel="noopener">RelativeSemanticDiagonal.lean</a> · <a data-trureturing-path="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean" target="_blank" rel="noopener">DiagonalTopologicalEscape.lean</a> · <a data-trureturing-path="D5/S1/FixedPoints/FiniteContractingStability.lean" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S1/FixedPoints/FiniteContractingStability.lean" target="_blank" rel="noopener">FiniteContractingStability.lean</a> · <a data-trureturing-path="D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean" target="_blank" rel="noopener">GoldenFixedPoint.lean</a></p>
+      <p class="lede refs">书中：<a href="../../zh/ch21-diagonalization-and-escape.html#sec-ch21-2" target="_top">第二十一章 §21.2 · 康托尔—哥德尔相对语义对角线</a> · <a href="../../zh/ch21-diagonalization-and-escape.html#thm-complete-diagonal-not-continuous" target="_top">完备解码目录诱导的对角线必不连续</a> · <a href="../../zh/ch21-diagonalization-and-escape.html#ex-cantor-godel-diagonal-table" target="_top">四地址一比特手算例</a> · <a href="../../zh/ch22-primes-euler-products-and-zeros.html#thm-riemann-zeta-euler-product" target="_top">第二十二章 · 欧拉素数乘积</a> · <a href="../../zh/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-4" target="_top">第二十四章 §24.4 · 余弦不动点与 ψ = ψ(ψ)</a> · trureturing（所钉提交）：<a data-trureturing-path="D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.lean" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.lean" target="_blank" rel="noopener">RelativeSemanticDiagonal.lean</a> · <a data-trureturing-path="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean" target="_blank" rel="noopener">DiagonalTopologicalEscape.lean</a> · <a data-trureturing-path="D5/S1/FixedPoints/FiniteContractingStability.lean" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S1/FixedPoints/FiniteContractingStability.lean" target="_blank" rel="noopener">FiniteContractingStability.lean</a> · <a data-trureturing-path="D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean" target="_blank" rel="noopener">GoldenFixedPoint.lean</a></p>
     </div>
     <div class="en">
-      <p class="lede">A list f holds N binary rows f(r, ·). Reading the diagonal f(r, r) and flipping every entry gives d(r) = ¬f(r, r): d differs from row r in place r, so however the list is arranged, d is not on it. The cosine iteration xₖ₊₁ = cos xₖ is the same move of feeding an output back into itself; it approaches the fixed point x* = cos x*, yet every finite step leaves a nonzero residual. Euclid multiplies the first k primes and adds 1, and so escapes every finite list of primes. The page is a numerical illustration, not a proof.</p>
+      <p class="lede">Chapter 21 claims that from inside a system, exhausting it by finite means always leaves something outside; to take that in you must move to a larger system, where something new is left outside again. The page gives the sentence four pictures you can compute by hand. The plot under each scene draws the same thing: how what is left outside changes with the step count, and that it is never zero. The page is a numerical illustration, not a proof.</p>
       <ol>
-        <li><b>The diagonal ledger.</b> Step k reads the diagonal entry f(k, k) of row k: a 0 fires rule D₀ and writes d(k) = 1, counted +1 on the sign tape; a 1 fires rule D₁ and writes d(k) = 0, counted −1. The tape sums to |d| − tr f = N − 2·tr f and is bookkeeping only; what matters is that every step leaves a witness: row k differs from d in place k. The last ledger row reveals d one entry per step.</li>
-        <li><b>Why d is not on the list (LEAN ✓).</b> Take the row numbers as addresses and the column numbers as coordinates, with latent = id and twist = ¬; then d is the relative semantic diagonal g. <a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.lean#L48" target="_blank" rel="noopener"><code>relative_semantic_diagonal_ne_listed_decode</code></a> states that g differs from every listed decoder decoderCatalog(a) ∘ latent, which is exactly d ≠ f(r, ·). The page also computes the Hamming distance from d to every row; its minimum is always at least 1.</li>
-        <li><b>Cantor and the topological escape.</b> If f mapped {1, …, N} (or any set A) onto all binary strings, d would have to equal some row, contradicting the previous item; so 2ᴺ strings never fit into N rows (this step is argued here and not frozen on its own). In Chapter 21, <a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean#L30" target="_blank" rel="noopener"><code>complete_diagonal_not_continuous</code></a> and <a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_topological_settlement" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean#L94" target="_blank" rel="noopener"><code>complete_diagonal_topological_settlement</code></a> (LEAN ✓) assume a surjective catalog and conclude more: g is discontinuous in the old partition topology, and adjoining g strictly refines the observation topology. When the coordinates are the addresses themselves, as on this page, that hypothesis cannot hold, which is Cantor's conclusion; only when the latent coordinate coarsens the addresses can the catalog be complete and the topological content appear (see the four-address, one-bit hand calculation in Chapter 21).</li>
-        <li><b>The diagonal matrix.</b> The right column draws the N × N list f (cyan for 1, dark for 0) with d in the bottom row (magenta). Clicking a cell flips f(r, c) and moves to step r: an off-diagonal flip leaves d alone, a diagonal flip flips d(r) with it; whatever you change, d stays off the list. The transpose fᵀ keeps the diagonal, so d is unchanged, but the rows it must avoid are new.</li>
-        <li><b>The Dottie cosine iteration.</b> x₀ runs from 0 to 3.14 rad and step k gives xₖ = cos xₖ₋₁. At x* ≈ 0.7390851332, cos x* = x* and |cos′(x*)| = sin x* ≈ 0.6736 &lt; 1, so the iteration contracts near x*; on [−1, 1], cos contracts with rate sin 1 &lt; 1 (Banach, a literature result). The last ledger row shows |cos x_N − x_N|: the residual after finitely many steps is strictly positive. The page checks sin²xₖ + cos²xₖ = 1 in double precision at every xₖ.</li>
-        <li><b>The prime escape.</b> Step k lists the first k primes p₁, …, pₖ, forms Q = p₁⋯pₖ + 1 and finds its least prime factor q, which is not on the list (Euclid, a literature result). The page also computes the finite Euler product ∏ (1 − p⁻²)⁻¹, which stays strictly below ζ(2) = π²/6 for every finite k (the Basel identity, a literature result); the infinite product equals ζ(s) for Re s &gt; 1, see the Euler product theorem of Chapter 22.</li>
-        <li><b>Two kinds of self-referential fixed point.</b> Chapter 24 sets the cosine fixed point beside two frozen theorems: <a class="leanref" data-lean-gid="D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean#L40" target="_blank" rel="noopener"><code>golden_fixed_point_unique</code></a> (LEAN ✓) says φ is the only positive solution of 1 + 1/x = x (algebraic self-reference); <a class="leanref" data-lean-gid="D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S1/FixedPoints/FiniteContractingStability.lean#L27" target="_blank" rel="noopener"><code>finite_contracting_updates_stabilize</code></a> (LEAN ✓) says contracting updates on a finite grid of readings stabilize within |S₀| steps. x* is transcendental (Lindemann–Weierstrass, a literature result), so every finite-precision reading stops short of it. The page computes no instances of these two theorems; it lists them as evidence only.</li>
-        <li><b>Model limits.</b> The matrix, the diagonal, the Hamming distances, the primes and Q are exact integer arithmetic (Q is at most 9699691); the cosine iteration and the Euler products are double precision. Drawing d outside a circle in the diagonal mode is schematic. Whether x* and π are algebraically independent is an open problem.</li>
+        <li><b>The diagonal.</b> A list has N rows of N bits. Read bit k of row k and flip it to get bit k of d. Then d differs from row k in place k, so d equals no row. Put d on the list, add a column, and the new diagonal again gives a string that is not on the list. The dot grid on the right shows all 2ᴺ strings; the list holds at most N of them.</li>
+        <li><b>The polygon.</b> For the regular n-gon inscribed in the unit circle, the midpoint of each side is still 1 − cos(π/n) = 2 sin²(π/2n) short of the arc. Liu Hui went from 6 sides to 192 (and got 3.1410 from the area of the 192-gon) and Zu Chongzhi to 24576; each doubling shrinks the gap to about a quarter, yet it is positive for every finite n. The Taylor partial sums of the cosine behave the same way: cut after finitely many terms, a remainder is left.</li>
+        <li><b>The cosine.</b> Take the cosine again and again from any real start: the sequence closes in on x* ≈ 0.739085 from alternating sides, the error shrinking by about sin x* ≈ 0.674 per step. It shrinks geometrically but is still positive after finitely many steps. With the view zooming in, the cobweb always looks like the same spiral.</li>
+        <li><b>The primes.</b> Multiply the first k primes on the list and add one to get Q. Q leaves remainder 1 on division by every listed prime (every dial's hand points at 1), so no prime factor of Q is on the list. Q itself need not be prime: 2·3·5·7·11·13 + 1 = 30031 = 59 × 509. The Euler product ∏(1 − p⁻²)⁻¹ over finitely many primes always stays below π²/6.</li>
       </ol>
-      <p class="lede refs">In the book: <a href="../../en/ch21-diagonalization-and-escape.html#sec-ch21-2" target="_top">Chapter 21 §21.2 · The Cantor–Gödel relative semantic diagonal</a> · <a href="../../en/ch21-diagonalization-and-escape.html#thm-complete-diagonal-not-continuous" target="_top">A complete catalog forces a discontinuous diagonal</a> · <a href="../../en/ch21-diagonalization-and-escape.html#ex-cantor-godel-diagonal-table" target="_top">The four-address, one-bit hand calculation</a> · <a href="../../en/ch22-primes-euler-products-and-zeros.html#thm-riemann-zeta-euler-product" target="_top">Chapter 22 · The Euler prime product</a> · <a href="../../en/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-4" target="_top">Chapter 24 §24.4 · Cosine fixed points &amp; ψ = ψ(ψ)</a> · trureturing (pinned commit): <a data-trureturing-path="D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.lean" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.lean" target="_blank" rel="noopener">RelativeSemanticDiagonal.lean</a> · <a data-trureturing-path="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean" target="_blank" rel="noopener">DiagonalTopologicalEscape.lean</a> · <a data-trureturing-path="D5/S1/FixedPoints/FiniteContractingStability.lean" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S1/FixedPoints/FiniteContractingStability.lean" target="_blank" rel="noopener">FiniteContractingStability.lean</a> · <a data-trureturing-path="D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean" href="https://github.com/the-omega-institute/trureturing/blob/0932810a77730496eae9b36294d2400f7d1d3b2a/D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean" target="_blank" rel="noopener">GoldenFixedPoint.lean</a></p>
+      <p class="lede refs">In the book: <a href="../../en/ch21-diagonalization-and-escape.html#sec-ch21-2" target="_top">Chapter 21 §21.2 · The Cantor–Gödel relative semantic diagonal</a> · <a href="../../en/ch21-diagonalization-and-escape.html#thm-complete-diagonal-not-continuous" target="_top">A complete catalog forces a discontinuous diagonal</a> · <a href="../../en/ch21-diagonalization-and-escape.html#ex-cantor-godel-diagonal-table" target="_top">The four-address, one-bit hand calculation</a> · <a href="../../en/ch22-primes-euler-products-and-zeros.html#thm-riemann-zeta-euler-product" target="_top">Chapter 22 · The Euler prime product</a> · <a href="../../en/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-4" target="_top">Chapter 24 §24.4 · Cosine fixed points &amp; ψ = ψ(ψ)</a> · trureturing (pinned commit): <a data-trureturing-path="D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.lean" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.lean" target="_blank" rel="noopener">RelativeSemanticDiagonal.lean</a> · <a data-trureturing-path="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean" target="_blank" rel="noopener">DiagonalTopologicalEscape.lean</a> · <a data-trureturing-path="D5/S1/FixedPoints/FiniteContractingStability.lean" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S1/FixedPoints/FiniteContractingStability.lean" target="_blank" rel="noopener">FiniteContractingStability.lean</a> · <a data-trureturing-path="D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean" target="_blank" rel="noopener">GoldenFixedPoint.lean</a></p>
     </div>
+    <h3 class="evh"><span class="zh">全部依据</span><span class="en">All evidence</span></h3>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">对任意无不动点的输出翻转 twist（∀ o, twist o ≠ o）、任意潜读出 latent、任意解码目录 decoderCatalog 与任意地址 a，相对语义对角线 g(x) = twist(decoderCatalog(x, latent(x))) 都不等于 decoderCatalog(a) ∘ latent。本页取 Address = Coordinate = {1, …, N}、latent = id、twist = ¬，于是 d ≠ f(r, ·) 对每一行 r 成立。已冻结：</span><span class="en">For any output twist with no fixed point (∀ o, twist o ≠ o), any latent readout, any decoder catalog and any address a, the relative semantic diagonal g(x) = twist(decoderCatalog(x, latent(x))) differs from decoderCatalog(a) ∘ latent. The page takes Address = Coordinate = {1, …, N}, latent = id and twist = ¬, so d ≠ f(r, ·) for every row r. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.lean" target="_blank" rel="noopener"><code>relative_semantic_diagonal_ne_listed_decode</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">设 Address 非空、twist 无不动点、解码目录 decoderCatalog 满射，则相对语义对角线 g 从潜划分拓扑 partitionTopology(latent) 到离散输出拓扑不连续。已冻结：</span><span class="en">If Address is nonempty, twist has no fixed point and the decoder catalog is surjective, the relative semantic diagonal g is not continuous from the latent partition topology to the discrete output topology. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean" target="_blank" rel="noopener"><code>complete_diagonal_not_continuous</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">同一假设下四项同时成立：¬Refines(g, latent)；g 在旧拓扑下不连续；separationDeficit(latent, g) 非空；并入 conceptJoin(latent, g) 后观测拓扑严格加细。已冻结：</span><span class="en">Under the same hypotheses four settlements hold at once: ¬Refines(g, latent); g is discontinuous in the old topology; separationDeficit(latent, g) is nonempty; adjoining conceptJoin(latent, g) strictly refines the observation topology. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_topological_settlement" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean" target="_blank" rel="noopener"><code>complete_diagonal_topological_settlement</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">X 有限，U(A) ⊆ A 对一切 A 成立，S(n+1) = U(S n)，则存在 N ≤ |S 0| 使 n ≥ N 时 S n = S N，且严格变化步数 #{n | S(n+1) ≠ S n} ≤ |S 0|。已冻结：</span><span class="en">If X is finite, U(A) ⊆ A for every A and S(n+1) = U(S n), then some N ≤ |S 0| has S n = S N for all n ≥ N, and the number of strict changes #{n | S(n+1) ≠ S n} is at most |S 0|. Frozen: </span><a class="leanref" data-lean-gid="D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S1/FixedPoints/FiniteContractingStability.lean" target="_blank" rel="noopener"><code>finite_contracting_updates_stabilize</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">φ = (1 + √5)/2 > 0，goldenReciprocalMap(φ) = 1 + 1/φ = φ，且对一切 x > 0 有 1 + 1/x = x ⇔ x = φ。定理断言正实数上不动点唯一，不断言迭代收敛。已冻结：</span><span class="en">φ = (1 + √5)/2 > 0, goldenReciprocalMap(φ) = 1 + 1/φ = φ, and for every x > 0, 1 + 1/x = x ⇔ x = φ. The theorem asserts uniqueness of the positive fixed point, not convergence of the iteration. Frozen: </span><a class="leanref" data-lean-gid="D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean" target="_blank" rel="noopener"><code>golden_fixed_point_unique</code></a></span></div>
+      <div class="lean argued" id="litBox"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：康托尔定理（集合 A 到 A → {0, 1} 没有满射：若 f 满射，d 必等于某一行，与上面第一条 Lean 定理矛盾，这一步推理没有单独冻结）；欧几里得素数无穷（p₁⋯pₖ + 1 的素因子不在清单里）；巴塞尔恒等式 ζ(2) = π²/6；cos 在 [−1, 1] 上以 sin 1 &lt; 1 为压缩率（巴拿赫），唯一实不动点 x* 为超越数（林德曼—魏尔斯特拉斯），故对一切代数数 q 有 |cos q − q| &gt; 0。</span><span class="en">Literature results, not formalized in this book: Cantor's theorem (no set A maps onto A → {0, 1}: if f did, d would equal some row, contradicting the first Lean theorem above; this step is not frozen on its own); Euclid's infinitude of primes (a prime factor of p₁⋯pₖ + 1 is not on the list); the Basel identity ζ(2) = π²/6; cos contracts [−1, 1] with rate sin 1 &lt; 1 (Banach), and its unique real fixed point x* is transcendental (Lindemann–Weierstrass), so |cos q − q| &gt; 0 for every algebraic q.</span></span></div>
+      <div class="lean open"><span class="ok">OPEN</span><span><span class="zh">x* 与 π 在 ℚ 上代数无关吗？这可由尚未解决的沙努埃尔猜想推出，目前仍是开放问题。</span><span class="en">Are x* and π algebraically independent over ℚ? This would follow from Schanuel's conjecture, which remains open.</span></span></div>
   </div>
 </div>
-
 <script src="main.js"></script>
 </body>
 </html>
