@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "a660b9333c0f8d25aaa22af1bbbfab43c2f94a46",
-  "pinned_at": "2026-11-11T00:27:31Z",
+  "commit": "1d9bf98cab8306e67ec38a739359f2cdae63877a",
+  "pinned_at": "2026-11-11T02:39:46Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -372,6 +372,46 @@
       "statement_id": "sha256:60d38eaca300529aec21cb61b7f4d861c7f369512f0b094c97bc603dc98133c0",
       "line": 76,
       "signature": "theorem binomial_hasSum (u : ℝ) (hu0 : 0 ≤ u) (hu1 : u < 1) : HasSum (fun n : ℕ => b n * u ^ n) (1 / Real.sqrt (1 - u))"
+    },
+    "D5/S3/Analytic/PowerSeries/DottieInverseSeries.alpha": {
+      "module": "D5/S3/Analytic/PowerSeries/DottieInverseSeries",
+      "name": "D5.S3.Analytic.PowerSeries.DottieInverseSeries.alpha",
+      "kind": "def",
+      "statement_id": "sha256:68009262b75a20a6159bd6c19332bbca23a4eaacdf08c25178433927d0eef42c",
+      "line": 29,
+      "signature": "def alpha (n : ℕ) : ℚ"
+    },
+    "D5/S3/Analytic/PowerSeries/DottieInverseSeries.arcsine": {
+      "module": "D5/S3/Analytic/PowerSeries/DottieInverseSeries",
+      "name": "D5.S3.Analytic.PowerSeries.DottieInverseSeries.arcsine",
+      "kind": "def",
+      "statement_id": "sha256:68009262b75a20a6159bd6c19332bbca23a4eaacdf08c25178433927d0eef42c",
+      "line": 34,
+      "signature": "def arcsine : ℚ⟦X⟧"
+    },
+    "D5/S3/Analytic/PowerSeries/DottieInverseSeries.forward": {
+      "module": "D5/S3/Analytic/PowerSeries/DottieInverseSeries",
+      "name": "D5.S3.Analytic.PowerSeries.DottieInverseSeries.forward",
+      "kind": "def",
+      "statement_id": "sha256:68009262b75a20a6159bd6c19332bbca23a4eaacdf08c25178433927d0eef42c",
+      "line": 36,
+      "signature": "def forward : ℚ⟦X⟧"
+    },
+    "D5/S3/Analytic/PowerSeries/DottieInverseSeries.inverse": {
+      "module": "D5/S3/Analytic/PowerSeries/DottieInverseSeries",
+      "name": "D5.S3.Analytic.PowerSeries.DottieInverseSeries.inverse",
+      "kind": "def",
+      "statement_id": "sha256:68009262b75a20a6159bd6c19332bbca23a4eaacdf08c25178433927d0eef42c",
+      "line": 38,
+      "signature": "def inverse : ℚ⟦X⟧"
+    },
+    "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint": {
+      "module": "D5/S3/Analytic/PowerSeries/DottieInverseSeries",
+      "name": "D5.S3.Analytic.PowerSeries.DottieInverseSeries.rational_inverse_endpoint",
+      "kind": "theorem",
+      "statement_id": "sha256:68009262b75a20a6159bd6c19332bbca23a4eaacdf08c25178433927d0eef42c",
+      "line": 545,
+      "signature": "theorem rational_inverse_endpoint : ∃ θ : ℝ, 0 < θ ∧ θ < 1 ∧ Real.cos θ = θ ∧ (∀ t : ℝ, 0 < t → Real.cos t = t → t = θ) ∧ Summable (fun n : ℕ => |((PowerSeries.coeff n inverse : ℚ) : ℝ)| * Real.pi ^ n) ∧ HasSum (fun n : ℕ => ((PowerSeries.coeff n inverse : ℚ) : ℝ) * Real.pi ^ n) θ"
     },
     "D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm": {
       "module": "D5/S3/Arith/GoldenPell",
