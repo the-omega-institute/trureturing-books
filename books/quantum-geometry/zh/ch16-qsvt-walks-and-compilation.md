@@ -11,7 +11,9 @@
 3. **两轴连续旋转生成与离散 $\{H, T\}$ 门集的三维割圆多面体**：在连续正交群 $\mathrm{SO}(3)$ 中，绕两根不共线轴的连续轴圆经有限步乘积即可精确到达任意三维旋转；然而一旦落回真实量子计算机的有限离散门集 $\{H, T\}$，在任意有限门长预算 $L < \infty$ 下，固定初态的可达点集 $\mathcal{S}_L \subset S^2$ 张成的凸包 $P_L = \operatorname{conv}(\mathcal{S}_L)$ 永远只是一座由平直弦面拼接而成的**三维割圆多面体**，球皮与弦面之间恒存在严格为正的逼近残差 $\varepsilon_L > 0$；
 4. **精确振幅放大的源查询计数与渐近门编译的区分**：当已知初始成功概率 $p$ 时，借助辅助硬币旋转调慢步长，可以用至多 $\frac{\pi/2 + 2}{\sqrt{p}}$ 次源算子查询实现零残差的精确振幅放大；同时我们将严格区分这一“源查询次数（`sourceQueries`）”与 $\{H, T\}$ 离散门集的渐近门编译字长（详见章末 [@rem-solovay-kitaev-literature]）。
 
-![二维信号块上的切比雪夫多项式 T₃(x) = 4x³ − 3x、有限门字落点张成的割圆多面体，以及门长随编译精度上升的阶梯与源查询计数界](../assets/fig-16-qsvt-solovay-kitaev-polytope.svg)
+::: {.figure src="ch16-overview"}
+**图 16。** 本章地图：面板 I，区间 $[-1, 1]$ 上青色的切比雪夫多项式 $T_3(x) = 4x^3 - 3x$ 在 $-1$ 与 $1$ 之间来回摆动，灰色的直线是 $T_1(x) = x$；面板 II，从北极出发、长度不超过 $6$ 的 $\{H, T\}$ 门字落在球面上的 $19$ 个青色顶点，它们的凸包用平直的弦面包住球心，与球皮之间留着缝；面板 III，青色的阶梯是精确振幅放大的源查询次数 $2n + 1$，始终在绿色的上界 $(\pi/2 + 2)/\sqrt{p}$ 之下（[@cor-exact-source-query-count]），三个点是本章表格里的 $3$、$7$、$13$。
+:::
 
 ## QSVT：二维块与切比雪夫递推 {#sec-qsvt-chebyshev-blocks}
 
@@ -56,6 +58,10 @@ W(x) = \begin{pmatrix} x & i\sqrt{1 - x^2} \\ i\sqrt{1 - x^2} & x \end{pmatrix} 
 $$
 
 它的两个特征值恰为 $a = e^{i\theta}$ 与 $b = e^{-i\theta}$（满足 $\det W(x) = ab = 1$，$\Tr W(x) = a + b = 2x$），因此每将 $W(x)$ 迭代乘 $m$ 次，其左上角矩阵元便直接吐出 $T_m(x) = \cos(m\theta)$！
+
+::: {.figure src="ch16-chebyshev-shadows"}
+**转 $m$ 次，影子就是 $T_m(x)$。** 取 $x = \cos\theta = \frac{1}{2}$（$\theta = 60^\circ$）：四支箭头依次转过紫色的角 $\theta$，停在 $0^\circ$、$60^\circ$、$120^\circ$ 与琥珀色的 $180^\circ$；它们落在横轴上的青色影子依次是 $T_0 = 1$、$T_1 = \frac{1}{2}$、$T_2 = -\frac{1}{2}$、$T_3 = -1$，与 [@thm-chebyshev-trace-recurrence] 的递推逐项相符。
+:::
 
 **严格的理论边界**：必须明确指出，[@thm-chebyshev-trace-recurrence] 的前提仅涉及任意交换环 $R$ 中的标量对 $ab = 1$，完全不包含矩阵块编码、奇异值谱或相位角序列的假设；将标量递推接到二维旋转块 $W(x) \in \mathrm{SU}(2)$ 是上述显式手算桥接，而非由 [@thm-chebyshev-trace-recurrence] 直接证出完整的量子奇异值变换（QSVT）定理。尤其不能误以为仅凭该递推就能把“任意多项式”塞进量子电路（完整 QSVT 的多项式可实现性定理详见下文 [@rem-qsvt-walks-literature]）。
 
@@ -319,6 +325,10 @@ $$
 当 $p = 1$ 时，$w = [\mathrm{.source}]$，仅调用 $1$ 次 `.source`（故 $\mathrm{sourceQueries}(w) = 1 \le \pi/2 + 2$），且 $\mathrm{coinLift}(C)\cdot\mathrm{coinEmbed}(J) = \mathrm{coinEmbed}(CJ) = \mathrm{coinEmbed}(\mathrm{success}(CJ, P, 1))$，各项直接成立。
 
 当 $0 < p < 1$ 时，取非负整数天花板 $n = \lceil \frac{\pi}{4\arcsin\sqrt{p}} - \frac{1}{2}\rceil_+$，保证 $\frac{\pi}{4n + 2} \le \arcsin\sqrt{p} < \frac{\pi}{2}$，从而修饰后的有效成功概率 $r = \sin^2(\frac{\pi}{4n + 2})$ 满足 $0 < r \le p < 1$，比例 $q = r/p$ 满足 $0 < q \le 1$，且 $\mathrm{coinRotation}(q)$ 为实正交（从而复幺正）分块矩阵。将复合制备算子取为 $U_q = (\mathrm{coinRotation}(q)\cdot\mathrm{coinLift}(C))\cdot\mathrm{coinEmbed}(J)$，它在扩展目标投影 $\mathrm{coinGood}(P)$ 下的成功格拉姆矩阵恰为 $(\sqrt{q})^2 p I_s = q p I_s = r I_s$，且归一化成功块保持为 $\mathrm{coinEmbed}(\mathrm{success}(CJ, P, p))$。由于 $\theta_r = \arcsin\sqrt{r} = \frac{\pi}{4n + 2}$ 满足 $(2n + 1)\theta_r = \frac{\pi}{2}$，将 [@thm-grover-uniform-rotation] 应用于 $U_q$ 与步数 $n$，即得 $\sin((2n+1)\theta_r) = \sin(\pi/2) = 1$、$\cos((2n+1)\theta_r) = \cos(\pi/2) = 0$，从而 $V$ 精确等于 $\mathrm{coinEmbed}(\mathrm{success}(CJ, P, p))$，失败分量 $(1 - \mathrm{coinGood}(P))V = 0$。最后，门字 $\mathrm{amplificationWord}(n)$ 包含初始 $1$ 次 `.source` 与 $n$ 个 `reflectionBlock` 中各 $2$ 次源调用（`.source` 与 `.sourceAdjoint`），故 $\mathrm{sourceQueries}(w) = 2n + 1$；利用天花板下界 $n < \frac{\pi}{4\arcsin\sqrt{p}} + \frac{1}{2}$ 及 $\arcsin\sqrt{p} \ge \sqrt{p}$，即得 $2n + 1 \le \frac{\pi/2}{\arcsin\sqrt{p}} + 2 \le \frac{\pi/2 + 2}{\sqrt{p}}$。完整证明由 Lean 内核检查。
+:::
+
+::: {.figure src="ch16-slowed-steps"}
+**步子调慢一点，整数步正好落在目标上。** 取 $p = 1/16$，$n = 3$：左栏按原步长 $\theta \approx 14.48^\circ$ 走，紫色的三步之后琥珀色的箭头越过成功方向 $W$，品红的弧多转了 $11.3^\circ$；右栏用硬币把每步调慢到 $\theta_r = \pi/14 = 180^\circ/14$，同样三步，琥珀色的箭头正好落在 $W$ 上，即 $(2n+1)\theta_r = \pi/2$，见 [@cor-exact-source-query-count]。
 :::
 
 **重要概念区分（见图 16 面板 III）**：[@cor-exact-source-query-count] 中的 `sourceQueries(w)` **仅仅统计门字 $w$ 中调用 `.source` 与 `.sourceAdjoint` 的次数**（在 $p = 1$ 时为 $1$，在 $p < 1$ 时等于 $2n + 1 \le \frac{\pi/2 + 2}{\sqrt{p}}$），而且该构造假设已知成功概率 $p$ 并直接使用了依赖 $q = r/p$ 的连续硬币旋转门 `coinRotation q`。因此，`sourceQueries(w)` 既不是门字 $w$ 的全部门数，**更绝不能与离散 $\{H, T\}$ 门集的渐近门编译字长（见章末 [@rem-solovay-kitaev-literature]）混为一谈**。
