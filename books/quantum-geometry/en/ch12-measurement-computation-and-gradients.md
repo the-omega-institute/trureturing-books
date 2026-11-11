@@ -12,7 +12,7 @@ At the end of [Chapter 11](ch11-pulses-and-virtual-z.md), we saw a striking reve
 
 ## Cluster Measurements and Classical Feedforward {#sec-cluster-measurement-feedforward}
 
-In the standard circuit model, computation is pictured as unitary gates pushing a state vector forward in time, while measurement merely reads out the final answer at the end. In 2001, R. Raussendorf and H. J. Briegel showed in **one-way quantum computing (MBQC)** that on an entangled cluster state, **the sequence of measurements itself drives the computation**.
+In the standard circuit model, computation is pictured as unitary gates pushing a state vector forward in time, while measurement merely reads out the final answer at the end. In **one-way quantum computing (MBQC)** (for the literature result, see [@rem-mbqc-gradients-literature]), **the sequence of measurements itself drives the computation**.
 
 We begin with the foundational trace-conservation law for projective record measurements in the Lean module `Conditioning`. For a finite decidable index type $n$ and a finite outcome type $\kappa$ (`DecidableEq kappa` is omitted from this theorem), a family $P : \kappa \to M_n(\mathbb{C})$ satisfies `IsRecordMeasurement P` when each $P_k$ is self-adjoint ($P_k^* = P_k$), idempotent ($P_k^2 = P_k$), pairwise orthogonal ($P_k P_l = 0$ for $k \neq l$), and complete ($\sum_k P_k = I$). For any complex matrix $\rho \in M_n(\mathbb{C})$, the outcome weight is $\operatorname{recordWeight}(P, \rho, k) = \operatorname{bornProbability}(\rho, P_k) = \Tr(\rho P_k)$.
 
@@ -84,21 +84,23 @@ Let $n$ be a finite index type with decidable equality, let $H, P \in M_n(\mathb
 Positivity and Hermiticity of $\rho_t$ and $P$ ensure that $\Tr(\rho_t P)$ is real, establishing claim 1. Differentiating $\rho_t = e^{-itH}\rho e^{itH}$ gives $\frac{d}{dt}\rho_t = -i(H\rho_t - \rho_t H)$; multiplying by $P$, taking the trace, and cycling $\Tr(H\rho_t P) = \Tr(\rho_t PH)$ yields $\frac{d}{dt}\Tr(\rho_t P) = i\Tr(\rho_t(HP - PH))$, which is purely real since $i(HP - PH)$ and $\rho_t$ are Hermitian. When $HP - PH = 0$, the derivative vanishes for all $t \in \mathbb{R}$, so the probability remains constant. The full proof is checked by the Lean kernel.
 :::
 
-When a circuit parameter $\theta$ enters a **single occurrence** of a Pauli rotation $R_P(\theta) = e^{-i\theta P_{\mathrm{gen}}/2}$ with $P_{\mathrm{gen}}^* = P_{\mathrm{gen}}$ and $P_{\mathrm{gen}}^2 = I$, why does the derivative with respect to $\theta$ reduce to an exact two-point difference at $\theta \pm \frac{\pi}{2}$?
+When a circuit parameter $\theta$ enters a single occurrence of an involutory Pauli rotation, the classical two-sample shift formula paired with [@prop-measurement-gradient-flow] is recorded below (Panel II of Figure 12; [@rem-parameter-shift-rule-literature]).
 
-Because $P_{\mathrm{gen}}^2 = I$ collapses the matrix exponential into Euler's formula $R_P(\theta) = \cos(\theta/2)I - i\sin(\theta/2)P_{\mathrm{gen}}$. Conjugating any observable $O$ by $R_P(\theta)$ produces products of $\cos(\theta/2)$ and $\sin(\theta/2)$ of degree two, which by double-angle trigonometry contain only the zeroth and first harmonics $1, \cos\theta, \sin\theta$:
+::: {.remark #rem-parameter-shift-rule-literature title="Two-Sample Parameter-Shift Rule for a Single Involutory Pauli Rotation (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** For a **single occurrence** of a Pauli rotation $R_P(\theta) = e^{-i\theta P_{\mathrm{gen}}/2}$ with $P_{\mathrm{gen}}^* = P_{\mathrm{gen}}$ and $P_{\mathrm{gen}}^2 = I$, the involution $P_{\mathrm{gen}}^2 = I$ collapses the matrix exponential into Euler's formula $R_P(\theta) = \cos(\theta/2)I - i\sin(\theta/2)P_{\mathrm{gen}}$. Conjugating any observable $O$ by $R_P(\theta)$ produces products of $\cos(\theta/2)$ and $\sin(\theta/2)$ of degree two, which by double-angle trigonometry contain only the zeroth and first harmonics $1, \cos\theta, \sin\theta$:
 
 $$
 f(\theta) = \Tr\bigl(R_P(\theta)\,\rho\,R_P(\theta)^* O\bigr) = c + a\cos\theta + b\sin\theta.
 $$
 
-On any pure first-harmonic sinusoid $c + a\cos\theta + b\sin\theta$, shifting the angle by $\pm\frac{\pi}{2}$ uses $\cos(\theta \pm \frac{\pi}{2}) = \mp\sin\theta$ and $\sin(\theta \pm \frac{\pi}{2}) = \pm\cos\theta$, canceling the constant $c$ and turning the derivative $\partial_\theta f(\theta) = -a\sin\theta + b\cos\theta$ into the exact two-sample **parameter-shift identity** (Panel II of Figure 12):
+On any pure first-harmonic sinusoid $c + a\cos\theta + b\sin\theta$, shifting the angle by $\pm\frac{\pi}{2}$ uses $\cos(\theta \pm \frac{\pi}{2}) = \mp\sin\theta$ and $\sin(\theta \pm \frac{\pi}{2}) = \pm\cos\theta$, canceling the constant $c$ and turning the derivative $\partial_\theta f(\theta) = -a\sin\theta + b\cos\theta$ into the two-sample **parameter-shift identity** (Schuld et al., 2019; see [@rem-mbqc-gradients-literature]):
 
 $$
 \partial_\theta f(\theta) = \frac{1}{2}\Bigl[f\Bigl(\theta + \frac{\pi}{2}\Bigr) - f\Bigl(\theta - \frac{\pi}{2}\Bigr)\Bigr].
 $$
 
-Geometrically, instead of nudging the sphere by a tiny angle $\delta\theta \ll 1$ and dividing two noisy measurements by $\delta\theta$, the observer evaluates the expectation value at two **orthogonal $90^\circ$ shifts** on the sphere! Keep the boundary explicit: [@prop-measurement-gradient-flow] certifies the infinitesimal commutator derivative and its realness, whereas the finite $\pm\pi/2$ shift rule relies additionally on the single-gate involutory Pauli frequency expansion ([@rem-mbqc-gradients-literature]).
+Geometrically, instead of nudging the sphere by a tiny angle $\delta\theta \ll 1$, the observer evaluates the expectation value at two **orthogonal $90^\circ$ shifts** on the sphere. Keep the boundary explicit: [@prop-measurement-gradient-flow] certifies the infinitesimal commutator derivative and its realness, whereas the finite $\pm\pi/2$ shift rule relies additionally on the single-gate involutory Pauli frequency expansion ([@rem-mbqc-gradients-literature]).
+:::
 
 ## Riemannian Gradients and Dissipation {#sec-riemannian-natural-gradient}
 
@@ -140,15 +142,17 @@ Note the mathematical contract of [@thm-riemannian-gradient-dissipation]: endpoi
 
 ## Equator Concentration and Conditions for Barren Plateaus {#sec-equator-concentration-limits}
 
-When we scale from a single qubit to $n$ qubits with dimension $d = 2^n$, why do high-dimensional state spaces become overwhelmingly orthogonal to any fixed measurement axis (Panel III of Figure 12)?
+When we scale from a single qubit to $n$ qubits with dimension $d = 2^n$, why do high-dimensional state spaces become overwhelmingly orthogonal to any fixed measurement axis (Panel III of Figure 12; [@rem-sphere-equator-markov-literature])?
 
-Consider first the restricted real-amplitude unit sphere $S^{d-1} \subset \mathbb{R}^d$ ($d = 2^n$). For a uniform real unit vector $x = (x_1, \dots, x_d) \in S^{d-1}$, symmetry across the $d$ coordinates gives $\mathbb{E}[x_1^2] = \frac{1}{d}$, so Markov's inequality yields
+::: {.remark #rem-sphere-equator-markov-literature title="Second-Moment and Markov Equatorial Concentration Bound on the Real Unit Sphere (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** On the restricted real-amplitude unit sphere $S^{d-1} \subset \mathbb{R}^d$ ($d = 2^n$), for a uniform real unit vector $x = (x_1, \dots, x_d) \in S^{d-1}$, symmetry across the $d$ coordinates gives $\mathbb{E}[x_1^2] = \frac{1}{d}$, so Markov's inequality yields
 
 $$
 \Pr\bigl(|x_1| \ge \varepsilon\bigr) \le \frac{1}{d\,\varepsilon^2} = \frac{1}{2^n \varepsilon^2}.
 $$
 
-At $n = 20$ qubits ($d = 1{,}048{,}576$) and $\varepsilon = 0.1$, at least $99.9904633\%$ of the sphere lies inside the narrow equatorial band $|x_1| < 0.1$.
+At $n = 20$ qubits ($d = 1{,}048{,}576$) and $\varepsilon = 0.1$, at least $99.9904633\%$ of the sphere lies inside the narrow equatorial band $|x_1| < 0.1$ (for the separate random-circuit barren-plateau hypotheses, see [@rem-mbqc-gradients-literature]).
+:::
 
 Separately from uniform sphere measure and random-circuit gradient laws, when a nonnegative summable sequence $\lambda_j \ge 0$ obeys a finite trace identity $\sum_{j=0}^\infty \lambda_j = \frac{R W}{\pi}$, the frozen theorem in `FiniteRankConcentrationModeBound` provides a **sufficient counting upper bound** on the number of modes above any threshold $\tau > 0$. (Keep its scope exact: summability is a sufficient condition for the upper bound $RW/(\pi\tau)$, not a necessary condition even for finite superlevel sets — for instance, the non-summable harmonic sequence $\lambda_j = 1/(j+1)$ also has finitely many terms above each $\tau > 0$ — and a finite trace budget neither prevents zero gradients nor provides an escape from barren plateaus, as finite-dimensional density matrices already have unit trace.)
 

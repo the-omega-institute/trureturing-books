@@ -275,7 +275,9 @@ $$
 两次詹森不等式。第一次以 $p_b$ 自身为权重：$-\ln$ 是凸函数，故 $H(p_b) = \sum_i p_{b,i}\,(-\ln p_{b,i}) \ge -\ln\bigl(\sum_i p_{b,i}^2\bigr)$，即香农熵不小于碰撞熵。第二次以均匀权重 $\frac{1}{d+1}$ 对 $d + 1$ 个语境取平均：$\frac{1}{d+1}\sum_b -\ln c_b \ge -\ln\bigl(\frac{1}{d+1}\sum_b c_b\bigr)$，其中 $c_b = \sum_i p_{b,i}^2$。代入前提 2 的 $\sum_b c_b = 1 + P$ 即得结论。完整证明由 Lean 内核检查。
 :::
 
+::: {.remark #rem-complete-mub-collision-sum title="完备相互无偏基的碰撞概率和"}
 [@prop-collision-entropy-uncertainty] 本身是一条关于数表的不等式；量子力学的内容全在前提 2 里。对单比特的三个泡利语境，前提 2 就是上面由层析表推出的恒等式，$P = \Tr(\rho_{\vv{r}}^2)$。对一般的 $d$，若 $d + 1$ 个语境两两相互无偏，同样有 $\sum_b\sum_i p_{b,i}^2 = 1 + \Tr(\rho^2)$（文献结果，未在本书形式化：I. D. Ivanović, *J. Phys. A* **25**, L363, 1992；这样的 $d + 1$ 个语境已知在 $d$ 为素数幂时存在）。
+:::
 
 ::: {.example #ex-three-pauli-entropy-sum title="三个泡利语境的熵之和：哪个读数都确定不了三个"}
 对布洛赫向量为 $\vv{r}$ 的单比特态，语境 $b \in \{X, Y, Z\}$ 的两个结果概率是 $\frac{1 \pm r_b}{2}$。由 [@prop-collision-entropy-uncertainty]（$d = 2$，$P = \frac{1 + \norm{\vv{r}}^2}{2}$）：

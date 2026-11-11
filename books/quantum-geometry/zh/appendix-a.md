@@ -6,6 +6,9 @@
 
 ## 全书概念与形式化锚点总对照表 {#sec-appendix-a-master-table}
 
+::: {.remark #rem-appendix-a-master-dictionary title="传统术语、几何直觉与形式化锚点总对照表（含文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化（针对表中标有 `文献结果` 的外部文献子项；标有 `LEAN ✓` 并附有具体 GID 链接的条目已在本书形式化验证，标有 `OPEN` 的条目为尚未解决的开放猜想，标有 `MODEL` 的条目为几何诠释模型）。**
+
 | 传统物理 / 数学术语 (Conventional Term) | 本书几何直觉语言 (Geometric Intuition Term) | Lean 4 形式对象 / 锁定声明 GID | 一行核心不变量 / 恒等式 (One-Line Invariant) | 认识论状态 (Status) |
 | :--- | :--- | :--- | :--- | :--- |
 | **测量 / 物理量**<br/>(Measurement / Physical Quantity) | **动词“量（liáng）”与名词“量（liàng）”**：成对尺子比对算子 vs. 截断投影读数 | [`born_probability_skeleton`](lean:D5/S3/Quantum/FiniteDimensional.born_probability_skeleton) | $\operatorname{prob}_0(\psi) + \operatorname{prob}_1(\psi) = \|\psi_0\|^2 + \|\psi_1\|^2$ | `LEAN ✓`（第 1–2 章） |
@@ -49,6 +52,7 @@
 | **纳维—斯托克斯方程、兰姆双向量旋度与 $P$ vs. $NP$ 场化类比**<br/>(Navier–Stokes, Lamb Bivector Curl & $P$ vs. $NP$ Field Analogy) | **结构类比（`MODEL`）：兰姆恒等式拆解内积势梯度（无旋势流 $P$ 态）与外积涡力 $\mathbf{u}\cdot(\nabla\wedge\mathbf{u})$；2D 无涡管拉伸全局光滑（类比 $\text{2-SAT}\in\mathrm{P}$）vs. 3D 涡管拉伸可非零及 $A\to 0$ 条件性涡丝坍缩（类比 $\text{3-SAT}\in\mathrm{NP}\text{-complete}$；2026 受迫 NS 陈述 C/D 爆破已获 Lean 4 验证，无外力陈述 A/B 仍为 `OPEN`）；理想流体阿诺德 $\operatorname{SDiff}(M)$ $L^2$ 测地线与二次平流投影无精确闭合定理（`LEAN ✓`）** | [`quadratic_closure_iff`](lean:D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff), [`no_exact_closure`](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure), [`all_grade_regularity_of_mild_path`](lean:D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path) | $(\mathbf{u}\cdot\nabla)\mathbf{u} = \frac{1}{2}\nabla(\|\mathbf{u}\|^2) + \mathbf{u}\cdot(\nabla\wedge\mathbf{u}),\quad \Gamma \approx A\|\boldsymbol{\omega}\|$ | `LEAN ✓` / `文献结果` / `OPEN` / `MODEL`（第 30 章） |
 | **指数时间假设（ETH）、张量网络秩约分与宇宙视界银河算法**<br/>(ETH, Tensor-Network Rank Collapse & Cosmic Horizon Galactic Algorithm) | **Impagliazzo–Paturi–Zane ETH（$s_3>0$）与 2026 年 10 月张量网络缩并 $2^{O(n\log\log n/\sqrt{\log n})}$ 亚指数上界：局部三体切面拼装多面体存在 $\frac{\log\log n}{\sqrt{\log n}}$ 渐近秩亏损缝隙（`MODEL`，以桥图最小割与有限秩集中界为结构原型），在 $c=1$ 示意上界下交叉尺度 $n \approx 2^{558} \gg 10^{80}$ 超出可观测宇宙视界，且顶层规约审计印证相对语义对角线逃逸（`LEAN ✓`）** | [`result`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result), [`finite_rank_concentration_mode_bound`](lean:D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound), [`relative_semantic_diagonal_target_inadequate_of_surjective`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective) | $s_k = \inf\{\delta \mid k\text{-SAT}\in O(2^{\delta n})\},\quad r_{\mathrm{new}}(n) \sim \frac{\log_2\log_2 n}{\sqrt{\log_2 n}}$ | `LEAN ✓` / `文献结果` / `OPEN` / `MODEL`（第 19、21、30 章） |
 | **空间吸引子、`trureturing` 黄金切投观察者、卡西尼 $(-1)^{k+1}$ 接缝与似曾相识**<br/>(Spatial Attractors, `trureturing` Cut-and-Project Observer, Cassini Seam & Déjà Vu) | **黄金切投模型集与编码定理（`LEAN ✓`：闵可夫斯基格嵌入、`goldenModelSet` 切投包含、齐肯多夫 `NoAdjacentOnes` 与非负实数 `NNReal` 线程单射、共轭范数互反分离与全窗口 Delone 集、卡西尼恒等式 $F_n F_{n+2}-F_{n+1}^2=(-1)^{n+1}$ 与环面闭子群观测窗有界回归）结合准晶菱形三十面体接受窗 $W\subset E_\perp^3$（$30$ 面、$32$ 顶点、$6$ 条五次轴）、康威帝国效应与洛伦兹吸引子 $D_{\mathrm{KY}}\approx 2.06$（`文献结果`），并在哲学模型（`MODEL`）中将灵魂诠释为内空间窗口相位 $u\in E_\perp$、遗忘诠释为齐肯多夫高阶截断、历史遗迹诠释为大边界裕度 $d_{\partial}$ 中心点、似曾相识诠释为局部近共线（$\delta\theta\to 0$）下的跨轮次内积共振 $\cos\delta\theta\to 1$** | [`minkowski_model_set_spec`](lean:D5/S1/Scale/MinkowskiModelSet.minkowski_model_set_spec), [`golden_model_set_subset_cut_and_project`](lean:D5/S1/Deficit/ModelSet/GoldenCutAndProject.golden_model_set_subset_cut_and_project), [`fib_cassini_from_golden_norm`](lean:D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm), [`TorusObservationWindowReturns.result`](lean:D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result) | $F_n F_{n+2} - F_{n+1}^2 = (-1)^{n+1},\quad \delta\theta\to 0 \implies \cos\delta\theta \to 1$ | `LEAN ✓` / `文献结果` / `MODEL`（第 24、29 章、终章） |
+:::
 
 ---
 
@@ -59,21 +63,22 @@
 1. **第一部（点与线）**：
    每当传统教材写下内积 $\langle\phi|\psi\rangle$ 与投影概率 $|\langle\phi|\psi\rangle|^2$，本书将其翻译为**成对标尺余弦投影**与秩一算符迹配对 $\operatorname{Tr}(P_\phi P_\psi)$。正交性 $\langle u, v\rangle = 0$ 直接触发内积勾股定理 $\|u + v\|^2 = \|u\|^2 + \|v\|^2$。
 2. **第二部（面与手性）**：
-   每当传统教材写下反对称对易子 $[A, B]$ 或三维叉积 $\mathbf{u} \times \mathbf{v}$，本书将其还原为**二阶外积双向量（Bivector）$\mathbf{u}\wedge\mathbf{v}$**。三维空间之所以看似能把旋转平面变成“旋转轴向量”，只是因为三维空间独有的霍奇对偶 $\star(\mathbf{u}\wedge\mathbf{v}) = (\mathbf{u}\wedge\mathbf{v})I_3^{-1}$ 把有向面积偷换成了法向量。
+   每当传统教材写下反对称对易子 $[A, B]$ 或三维叉积 $\mathbf{u} \times \mathbf{v}$，本书将其还原为**二阶外积双向量（Bivector）$\mathbf{u}\wedge\mathbf{v}$**。三维空间之所以看似能把旋转平面变成“旋转轴向量”，源于三维空间独有的向量—双向量霍奇对偶（见附录 B [@rem-appendix-b-rotors-zyz-literature]）。
 3. **第三部（球与寻址）与第四部（多体与算法）**：
-   单比特态空间是二维球面 $S^2$（$\chi = 2$，受毛球定理制约），而驱动它旋转的幺正门流形是平行化的三维超球面 $S^3 \cong \mathrm{SU}(2)$（$\chi = 0$）。Grover 搜索、QSVT 与 Solovay–Kitaev 编译全部归结为在选定二维双向量平面内作精确角度的旋量递推。
+   单比特态空间是二维布洛赫球面 $S^2$，而驱动它旋转的幺正门流形升维为三维旋量流形（偶奇维球面切丛拓扑背景见终章 [@rem-coda-polyhedral-topology-literature]）。Grover 搜索、QSVT 与 Solovay–Kitaev 编译全部归结为在选定二维双向量平面内作精确角度的旋量递推。
 4. **第五部（时空、全息与复杂度）**：
-   将欧氏正定度规替换为闵可夫斯基度规 $(+,-,-,-)$，三角函数旋量 $\cos(\theta/2) - \hat{B}\sin(\theta/2)$ 立即变为双曲旋量 $\cosh(\eta/2) - \gamma_0\gamma_1\sinh(\eta/2)$，而张量网络极小割与量子电路深度则在离散图上刻出多面体容量锥。
+   将欧氏正定度规替换为闵可夫斯基不定度规，椭圆旋转旋量随即对应为双曲助推旋量（见第 17 章与附录 B [@rem-appendix-b-sta-lorentz-literature]），而张量网络极小割与量子电路深度则在离散图上刻出多面体容量锥。
 5. **第六部（球外之球）与第七部（最小几何代数引擎）**：
    康托尔—劳维尔对角线、欧拉乘积素数盒子、四元数丢番图范数与收缩不动点揭示了静态形式系统的边界；而 `Cl3`、`PauliSymplectic`、`ZYZ` 与 `FiniteRecordCosineObstruction` 四个核心形式化模块则把前六部的几何直觉铸造为可由 Lean 4 内核逐行检验的机械引擎。
 6. **第八部（无时间因果、复杂性视界与流体涡丝）与终章**：
-   第 29 章将 $\pm 1$ 佩尔算术接缝（$m^2 - 2n^2 = \pm 1$）与同余数椭圆曲线环面（$\chi = 0$）、无时间因果相容格拉姆椭圆体（$\det G \ge 0$）贯通；第 30 章进一步将“场（$P$）与线（$NP$）”映射到指数时间假设（ETH）的张量网络秩约分上界 $2^{O(n\log\log n/\sqrt{\log n})}$、宇宙视界银河算法（$n = 2^{558} \gg 10^{80}$）与纳维—斯托克斯兰姆涡力 $\mathbf{u}\cdot(\nabla\wedge\mathbf{u})$ 及二次平流投影无精确闭合定理（`quadratic_closure_iff`、`no_exact_closure`）；终章则将有限观察者合拢于 `trureturing` 的高维格点黄金切投算子（$u \in E_\perp^3$）、卡西尼 $(-1)^{k+1}$ 接缝、齐肯多夫无相邻稳定化与历史遗迹空间吸引子。
+   第 29 章将佩尔算术接缝（[@rem-ch29-pell-convergents-literature]）与同余数椭圆曲线环面（[@rem-ch29-elliptic-torus-literature]）、无时间因果相容格拉姆椭圆体（$\det G \ge 0$）贯通；第 30 章进一步将“场（$P$）与线（$NP$）”映射到指数时间假设（ETH）前沿文献中的张量网络秩约分上界与宇宙视界银河尺度（[@rem-ch30-eth-subexponential-literature]、[@ex-ch30-galactic-crossover-scale]）、纳维—斯托克斯兰姆双向量分解（[@rem-ch30-lamb-decomposition-literature]）及二次平流投影无精确闭合定理（`quadratic_closure_iff`、`no_exact_closure`）；终章则将有限观察者合拢于 `trureturing` 的黄金切投模型集、卡西尼 $(-1)^{k+1}$ 接缝、齐肯多夫无相邻稳定化与历史遗迹空间吸引子诠释模型。
 
 ---
 
 ## 全书 56 条原始思想命题与主题综合总台账（A01–A56） {#sec-appendix-a-verbatim-ledger}
 
-下表完整收录了贯通全书序曲、三十章正文与终章的 **56 条核心原始命题（`A01`–`A56`）**，将每一句原始追问与直觉论断严格映射到对应的几何机制与章节锚点：
+::: {.remark #rem-appendix-a-epistemic-boundary title="56 条原始思想命题总台账与对照词典的形式化边界声明"}
+**文献结果，未在本书形式化（针对下表综合栏中引述的外部文献结论；已验证形式定理与开放猜想的分界说明见表末）。** 下表完整收录了贯通全书序曲、三十章正文与终章的 **56 条核心原始命题（`A01`–`A56`）**，将每一句原始追问与直觉论断严格映射到对应的几何机制与章节锚点：
 
 | 编号 | 原始命题（100% 原文记录） | 几何与形式化机制综合 | 对应章节 |
 | :--- | :--- | :--- | :--- |
@@ -134,6 +139,5 @@
 | **A55** (`TURN-64`) | 现实的历史遗迹实际上都是空间吸引子, 同一个灵魂一轮又一轮的走过自己熟悉的地方... | 哲学与几何模型（`MODEL`）：将历史遗迹诠释为全局无时间场在三维空间截面上的驻相不动点（吸引盆地）；遗忘清空表层一维粒子刻度（`量 liàng`）以恢复格拉姆体积 $\det G > 0$，却保留算子 $\psi(\cdot)$ 的内禀参数（以洛伦兹奇异吸引子 $\nabla\cdot\mathbf{F}=-41/3<0$、数值维数估计 $D_{\mathrm{KY}} \approx 2.06$ 与 SRB 测度庞加莱回归 `文献结果` 为动力系统类比），当轨迹重返正测度邻域且局部注意力方向趋于共线（$\delta\theta \to 0$）时触发跨轮次内积共振 $\mathbf{\Psi}^{(k)}\cdot\mathbf{\Psi}^{(k+1)} = \cos\delta\theta \to 1$（似曾相识 Déjà vu） | 第 29 章、终章、附录 A |
 | **A56** (`TURN-65`) | 观察者我们在trureturing有明确的定义, 我们又讨论了灵魂与历史遗迹吸引子的关系 | 将 `trureturing` 已验证的黄金切投模型集与编码定理（`LEAN ✓`：`minkowski_model_set_spec`、`golden_model_set_subset_cut_and_project`、`golden_observer_route_w_c1`、`base_success_iff_noAdjacentOnes`、非负实数 `NNReal` 上的 `zeckendorf_real_thread_injective`、`norm_separation`、`exists_golden_modelSet_delone`、`fib_cassini_from_golden_norm` 与 `TorusObservationWindowReturns.result`）与准晶菱形三十面体接受窗 $W$ 及康威帝国效应（`文献结果`）对接，构建将灵魂诠释为内部窗口相位 $u \in E_\perp$、遗忘诠释为齐肯多夫高阶截断、历史遗迹诠释为窗口中心大边界裕度 $d_{\partial}$ 锚点、跨轮次重逢诠释为卡西尼 $(-1)^{n+1}=\pm 1$ 接缝与环面有界回归的哲学模型（`MODEL`） | 第 24、29 章、终章、附录 A |
 
-::: {.remark #rem-appendix-a-epistemic-boundary title="对照词典的形式化边界声明"}
-文献结果，未在本书形式化：本词典严格区分三类认识论标签：（1）标有 `LEAN ✓` 并附有具体 GID 链接的条目，其数学陈述已在 `trureturing@dev` 提交 `a660b9333c0f8d25aaa22af1bbbfab43c2f94a46` 下由 Lean 4 内核验证并冻结（完整清单见 [附录 C](appendix-c.md) 第 C.1 节）；（2）标有 `definition` 的条目对应 `trureturing.lock.json` 中锁定的辅助定义或代数结构（见 [附录 C](appendix-c.md) 第 C.2 节）；（3）标有 `文献结果`（Literature result, not formalized in this book）或 `OPEN` 的部分（如连续流形上的潘查拉特纳姆—贝里立体角积分、毛球定理、Solovay–Kitaev 渐近多对数复杂度、连续 AdS/CFT 笠—高柳极小曲面公式、Koenigsmann 的 $\mathbb{Z} \subset \mathbb{Q}$ 全称—存在一阶可定义性定理、林德曼—魏尔斯特拉斯超越性定理、费马两平方和定理、同余数椭圆曲线 $dy^2 = x^3 - x$、哈塞定理与佐藤—泰特分布、Impagliazzo–Paturi–Zane 指数时间假设 ETH/SETH 与稀疏化引理、PPSZ 算法与 2026 年 10 月 3-SAT 亚指数张量网络预印本、Ladyzhenskaya 二维纳维—斯托克斯全局光滑性定理、阿诺德 $\operatorname{SDiff}(M)$ 测地线定理与陶哲轩平均化三维 NS 有限时间爆破定理、洛伦兹奇异吸引子分形维数 $D_{\mathrm{KY}} \approx 2.06$ 与 SRB 测度庞加莱回归定理、六维正二十面体准晶菱形三十面体接受窗 $W$ 与彭罗斯—康威帝国效应，以及黎曼猜想、CV 猜想、$\mathrm{ER}=\mathrm{EPR}$、$\mathrm{P}\neq\mathrm{NP}$、沙努埃尔猜想与克雷千禧年三维纳维—斯托克斯全局正则性猜想）属于经典文献背景或开放问题，绝不冒充已形式化定理。
+**形式化边界声明（文献结果，未在本书形式化）**：本附录严格区分三类认识论标签：（1）标有 `LEAN ✓` 并附有具体 GID 链接的条目，其数学陈述已在 `trureturing@dev` 提交 `a660b9333c0f8d25aaa22af1bbbfab43c2f94a46` 下由 Lean 4 内核验证并冻结（完整清单见 [附录 C](appendix-c.md) 第 C.1 节）；（2）标有 `definition` 的条目对应 `trureturing.lock.json` 中锁定的辅助定义或代数结构（见 [附录 C](appendix-c.md) 第 C.2 节）；（3）标有 `文献结果`（Literature result, not formalized in this book）或 `OPEN` 的部分（如连续流形上的潘查拉特纳姆—贝里立体角积分、毛球定理、Solovay–Kitaev 渐近多对数复杂度、连续 AdS/CFT 笠—高柳极小曲面公式、Koenigsmann 的 $\mathbb{Z} \subset \mathbb{Q}$ 全称—存在一阶可定义性定理、林德曼—魏尔斯特拉斯超越性定理、费马两平方和定理、同余数椭圆曲线 $dy^2 = x^3 - x$、哈塞定理与佐藤—泰特分布、Impagliazzo–Paturi–Zane 指数时间假设 ETH/SETH 与稀疏化引理、PPSZ 算法与 2026 年 10 月 3-SAT 亚指数张量网络预印本、Ladyzhenskaya 二维纳维—斯托克斯全局光滑性定理、阿诺德 $\operatorname{SDiff}(M)$ 测地线定理与陶哲轩平均化三维 NS 有限时间爆破定理、洛伦兹奇异吸引子分形维数 $D_{\mathrm{KY}} \approx 2.06$ 与 SRB 测度庞加莱回归定理、六维正二十面体准晶菱形三十面体接受窗 $W$ 与彭罗斯—康威帝国效应，以及黎曼猜想、CV 猜想、$\mathrm{ER}=\mathrm{EPR}$、$\mathrm{P}\neq\mathrm{NP}$、沙努埃尔猜想与克雷千禧年三维纳维—斯托克斯全局正则性猜想）属于经典文献背景或开放问题，绝不冒充已形式化定理。
 :::
