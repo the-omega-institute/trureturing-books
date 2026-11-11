@@ -4,6 +4,10 @@
 
 From the moment the Prelude opened the first door, we have climbed a ladder of ascending geometric dimensions: resolving an isolated **point** into a **line** of pairwise comparison (the inner-product projection $\mathbf{u}\cdot\mathbf{v}$), unfolding a static **line** into an oriented chiral **plane** (the exterior bivector area $\mathbf{u}\wedge\mathbf{v}$), and closing local **planes** into a phase-wrapping **sphere** (the Bloch sphere $S^2$ and its spinor double cover $S^3$). Yet as we look back across the eight-part edifice—after traversing Lorentz lightcones, tensor-network minimum cuts, prime Euler products, quaternion norm locks, and the self-referential cosine fixed point—a deeper geometric truth emerges: **inside any fixed formal system, every "sphere" we think we have completely closed is only a convex polyhedral approximation stitched from finitely many facets; and at every seam and every fixed point, an indestructible remainder points toward the larger sphere that encloses it.**
 
+::: {.figure src="coda-overview"}
+**The coda at a glance: the approximate sphere, spatial attractors, and the golden cut.** Panel I: an icosahedron inscribed in the sphere; each of its twelve magenta vertices falls $60^\circ$ short, $12 \times 60^\circ = 720^\circ$ in all (literature result, see [@rem-coda-polyhedral-topology-literature]). Panel II: a cyan and a magenta Lorenz orbit start from two far-apart circles and settle onto the same pair of wings (numerical integration, schematic; reading an orbit as a "round" is the interpretive model). Panel III: the amber window $[\varphi - 2, \varphi - 1]$ picks the cyan points out of the golden lattice, and they drop onto the line below as a row of points ([@thm-coda-golden-cut-observer-cassini]).
+:::
+
 ---
 
 ## Polyhedral Approximation and the Inescapable Geometric Remainder {#sec-coda-polyhedral-remainder}
@@ -28,6 +32,10 @@ Why can neither human mathematicians nor digital computers ever construct a comp
    $$
 
    corresponding to the four normed division algebras $\mathbb{R}, \mathbb{C}, \mathbb{H}, \mathbb{O}$. In our geometric model, the uncombable Berry-phase singularity on the 2D Bloch sphere $S^2$ is the base-space shadow cast by the parallelizable 3-sphere $S^3 \cong \mathrm{SU}(2)$ across the Hopf fibration $S^1 \hookrightarrow S^3 \to S^2$.
+:::
+
+::: {.figure src="coda-defect-spread"}
+**However finely the polyhedron is cut, its angular defects still add up to $720^\circ$.** The rows are the icosahedron ($\nu = 1$) and the geodesic domes made by cutting every face into $\nu^2$ triangles and pushing the vertices out to the sphere ($\nu = 2, 4$). Each magenta bar is cut into one piece per vertex, as long as that vertex's defect. The vertices grow from $12$ to $42$ and $162$, and the largest defect shrinks from $60^\circ$ to about $18^\circ$ and $5^\circ$, yet the three bars are equally long. Literature result, not formalized in this book (item 1 of [@rem-coda-polyhedral-topology-literature]).
 :::
 
 Alongside the topological obstructions in [@rem-coda-polyhedral-topology-literature], before entering the cross-disciplinary synthesis of Part VIII, the nonzero seam left when a finite polyhedral process approximates a smooth sphere already recurred across Parts I–VII in five precise mathematical forms:
@@ -169,6 +177,10 @@ In the formal architecture of `trureturing`, the mathematical primitives underly
    - For every **nonnegative real number** $x \in \mathbb{R}_{\ge 0}$ (`NNReal`), the multi-scale thread $\operatorname{zeckendorfRealThread} : \mathbb{R}_{\ge 0} \to (\mathbb{N} \to \mathrm{WDigitString})$ mapping each level $N \in \mathbb{N}$ to the canonical Zeckendorf encoding of the natural floor $\operatorname{goldenQuantization}(N, x) = \lfloor \varphi^N x\rfloor_+$ is strictly injective ([`zeckendorf_real_thread_injective`](lean:D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective));
    - For every integer first coordinate $a \ge 1$, the Beatty first-coordinate fiber $\operatorname{goldenFiber}(a) = \{v \in \mathbb{N} \mid \operatorname{fiberA}(v) = a\}$ has finite cardinality $(\operatorname{goldenFiber}(a)).\operatorname{ncard} \in \{4, 5\}$ ([`golden_fiber_capacity_pair`](lean:D5/S1/Deficit/Beatty/FiberCapacityPair.golden_fiber_capacity_pair)), while for every integer second coordinate $b \ge 0$, the dual fiber $\operatorname{goldenDualFiber}(b) = \{v \in \mathbb{N} \mid \operatorname{fiberB}(v) = b\}$ has cardinality $(\operatorname{goldenDualFiber}(b)).\operatorname{ncard} \in \{2, 3\}$ ([`golden_dual_fiber_capacity_pair`](lean:D5/S1/Deficit/Beatty/FiberCapacityPair.golden_dual_fiber_capacity_pair)).
    In our epistemological interpretation (`MODEL`), we view the cycle of rational slope scanning, coordinate fiber refinement, and `NoAdjacentOnes` carry normalization as the discrete mechanism underlying subjective sequential time.
+
+::: {.figure src="coda-no-eleven"}
+**The Zeckendorf automaton accepts exactly the words with no adjacent `11`.** Of the sixteen four-letter binary words, the eight cyan ones have no two adjacent $1$s and are accepted; each of the eight magenta ones contains an adjacent pair $11$ (the first one is boxed) and is rejected. The acceptance condition is $\operatorname{NoAdjacentOnes}(w)$ from item 3 of [@thm-coda-golden-cut-observer-cassini].
+:::
 
 ::: {.viz src="golden-cut-observer" preset="cut" height="500"}
 **A window cuts out a chain of points.** The golden integers $a + b\varphi$ drawn as lattice points: across, the number itself; up, its conjugate $a + b\psi$. The amber window $[\varphi - 2, \varphi - 1]$ selects the cyan points, and projected to the line below, neighbours are $\varphi$ or $\varphi^2$ apart; the closed window has a lattice point on each of its two ends (magenta), so one extra gap of length $1$ appears left of the origin. The green rings are the golden expansions $\beta(n)$ of the natural numbers, which Lean verifies to lie in this window.
@@ -322,6 +334,10 @@ and let $S : \mathbb{N} \to \operatorname{Set} X$ be a sequence satisfying the r
 Because $S(n+1) = U(S(n)) \subseteq S(n)$ for every $n \in \mathbb{N}$, the sequence $S$ forms a monotone descending chain of subsets inside the finite ambient type $X$. At every step where a strict transition $S(n+1) \neq S(n)$ occurs, the finite natural-number cardinality $(S(n)).\operatorname{ncard}$ decreases by at least $1$. Since the initial cardinality $(S(0)).\operatorname{ncard}$ is finite, strict decreases can occur at most $(S(0)).\operatorname{ncard}$ times; by the pigeonhole principle, there exists a stage $N \le (S(0)).\operatorname{ncard}$ with $S(N+1) = U(S(N)) = S(N)$, after which induction gives $S(n) = S(N)$ for all $n \ge N$. The full proof is checked by the Lean kernel.
 :::
 
+::: {.figure src="coda-shrink-stop"}
+**Every change removes at least one element, so there are at most $\lvert S(0)\rvert$ changes before it stops.** An example: $S(0)$ has $7$ cyan dots; the dots each update removes are magenta crosses, and the rows have $7, 5, 3, 2, 2, 2$ elements, with no change from $S(3)$ on. That is $3$ changes and $N = 3 \le \lvert S(0)\rvert = 7$, both within the bounds of [@thm-coda-fixed-point-anchor].
+:::
+
 ::: {.remark #rem-coda-epistemic-discipline title="Formal Boundaries and Epistemic Discipline in the Coda (Literature result, not formalized in this book)"}
 **Literature result, not formalized in this book.** To keep the epistemic status of every mathematical statement transparent and auditable, we classify the propositions synthesized in this Coda into four strict tiers:
 
@@ -428,9 +444,17 @@ This monograph consists of the **[Prelude](README.md)**, **Eight Parts (30 Chapt
             ┌─────────────────────────────────────────────────────────────────┐
             │ Part VIII: Timeless Causality, ETH & Fluids (Ch 29–30) → Coda   │
             │  • Polyhedral defect & Hairy Ball lit. • Pythagorean 4-tier arc │
-            │  • Concept Dictionary (A) • Clifford Sheet (B) • 435 Index (C)  │
+            │  • Concept Dictionary (A) • Clifford Sheet (B) • 439 Index (C)  │
             └─────────────────────────────────────────────────────────────────┘
 ```
+
+::: {.figure src="coda-dependency-tree"}
+**Which chapter rests on which.** The dots, top to bottom, are the chapters of the book, banded on the left by part. The arc arrow into each chapter comes from the earlier chapter it refers back to most often in its own text (a chapter link or a "Chapter N" mention); the more mentions, the thicker the arrow. A hollow dot is a chapter that never refers back to an earlier one. The arrows are counted from the chapters by a script, so each one is a cross-chapter reference that the text contains.
+:::
+
+::: {.slides src="overview"}
+An overview slide deck of the whole book in 39 slides: the four blind spots and the dimensional ladder; each part's core picture, main theorems, literature results and open problems; the counts of the three tiers of warrant and the dependency map.
+:::
 
 ### Four Recommended Reading Tracks {#sec-coda-reading-tracks}
 
@@ -443,7 +467,7 @@ Readers can navigate the book along four self-contained tracks tailored to their
 3. **Mathematical Logic, Number Theory, and Epistemology Track**:
    [Prelude](README.md) $\to$ Chapter 10 (Gram matrices and order independence) $\to$ Chapters 19–20 (discrete polyhedral facet cones and open-conjecture boundaries) $\to$ Chapters 21–24 (diagonal escape, Euler products, quaternion Diophantine norms, and cosine self-reference) $\to$ [Chapter 29](ch29-timeless-causality-and-gram-space.md)–[Chapter 30](ch30-fields-lines-eth-and-navier-stokes.md) (the four-tier Pythagorean escape of number, timeless causality, the ETH horizon, and fluid vortex filaments) $\to$ Coda (golden cut-and-project spatial attractors and [@thm-coda-fixed-point-anchor]).
 4. **Lean 4 Formal Verification and Kernel Audit Track**:
-   [Prelude](README.md) §Epistemic Contract $\to$ Chapters 25–28 (Part VII: line-by-line formal tour of `Cl3`, `PauliSymplectic`, `ZYZ`, and `FiniteRecordCosineObstruction`) $\to$ [Appendix B](appendix-b.md) $\to$ [Appendix C](appendix-c.md) (auditing all $223$ environment/media frozen theorems, $89$ auxiliary definitions, and $123$ inline declarations — $435$ unique locked declarations in total — at `trureturing@dev` commit `1d9bf98cab83`).
+   [Prelude](README.md) §Epistemic Contract $\to$ Chapters 25–28 (Part VII: line-by-line formal tour of `Cl3`, `PauliSymplectic`, `ZYZ`, and `FiniteRecordCosineObstruction`) $\to$ [Appendix B](appendix-b.md) $\to$ [Appendix C](appendix-c.md) (auditing all $227$ environment/media frozen theorems, $89$ auxiliary definitions, and $123$ inline declarations — $439$ unique locked declarations in total — at `trureturing@dev` commit `1d9bf98cab83`).
 
 ### Quick Register of the 36 Core Chapter Theorem Anchors in Parts VI–VIII (Chapters 21–30) {#sec-coda-part6-part7-register}
 
@@ -489,4 +513,4 @@ As a bridge between the closing three parts of the monograph and the complete le
 | **Chapter 30** | T30.2 | `D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure` | Impossibility of exact projection closure for 5-mode Leray-projected advection at every viscosity $\nu \in \mathbb{R}$ |
 | **Chapter 30** | T30.3 | `D5/S3/Combinatorics/Graph/Walks/GallaiRoy.colorable_iff_exists_orientation` | Gallai–Hasse–Roy–Vitaver: a finite simple graph is $k$-colorable iff some orientation has no directed path with more than $k$ vertices |
 
-Outside all spheres lies not emptiness, but **the unending act of measurement and counting itself**. Turn next to [Appendix A](appendix-a.md) for the complete dictionary translating conventional quantum mechanics into geometric language, [Appendix B](appendix-b.md) for the Clifford algebra and rotor cheat sheet, and [Appendix C](appendix-c.md) for the complete index of all $312$ formal environment and media `trureturing@dev` declarations ($435$ unique locked declarations including inline references).
+Outside all spheres lies not emptiness, but **the unending act of measurement and counting itself**. Turn next to [Appendix A](appendix-a.md) for the complete dictionary translating conventional quantum mechanics into geometric language, [Appendix B](appendix-b.md) for the Clifford algebra and rotor cheat sheet, and [Appendix C](appendix-c.md) for the complete index of all $316$ formal environment and media `trureturing@dev` declarations ($439$ unique locked declarations including inline references).

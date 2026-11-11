@@ -10,7 +10,9 @@ This book advances the opposite diagnosis: **nature has never betrayed geometry;
 
 Whenever physics has appeared haunted by paradox, the culprit has almost always been the same cognitive habit: forcing a higher-dimensional motion onto a lower-dimensional ruler, and then inventing mystical dynamical forces to explain why the shadow on the ruler stretches, shrinks, or reverses sign. Before we enter the rigorous algebraic derivations and Lean-verified theorems of the book, let us draw back the four dimensional curtains that stand before the eye.
 
-![The orthogonal ladder of dimensions: from zero-dimensional head-on point, one-dimensional idempotent line, two-dimensional bivector plane, and three-dimensional sphere to the sphere beyond spheres and self-referential closure; direction vectors have unit length and Hodge duals use oriented Euclidean ambient spaces of the indicated dimension](../assets/fig-00-dimensional-ladder.svg)
+::: {.figure src="prelude-overview"}
+**Figure 0.** The chapter at a glance. Panel I: the amber line of sight $O$ and the cyan ray $A$ lie on one straight line, $O \cdot A = 1$, and the eye sees a single point. Panel II: the unit arrow $A$ and the amber $B$ open the directed angle $\theta$ in the orientation of the small loop $\hat{I}$; the magenta parallelogram is $A \wedge B = \sin\theta\,\hat{I}$. Panel III: the old sphere $S^{n-1}$ is the cyan equator of the new sphere $S^n$, whose poles are the violet $\pm\vv{e}_{n+1}$ (drawn for $n = 2$).
+:::
 
 In the figure, $O$, $A$, and $B$ are unit vectors. In the plane panel, $\theta$ is the directed angle from $A$ to $B$ measured in the fixed orientation $\hat{I}$.
 
@@ -24,6 +26,10 @@ Both the physicist's "elementary particle" and the philosopher's "substance" beg
 
 Step half a pace to the side and the dot immediately unfolds into what it always was: a directed one-dimensional ray $\vv{a}$. At the quantum foundation there are no directionless bare marbles. Even a single pure quantum state is geometrically a **unit directional line** piercing an isotropic background, corresponding logically to an idempotent projection $P^2 = P$ — the act of looking again and finding the exact same answer ([Chapter 3](ch03-projectors-and-duality.md)).
 
+::: {.figure src="prelude-head-on"}
+**Step half a pace aside and the bright point unfolds into a ray.** The four circles show one cyan ray of unit length from four angles. With the angle between sight and ray $\alpha = 0^\circ$, only a bright point remains in the middle; as $\alpha$ grows to $20^\circ$, $45^\circ$ and $90^\circ$, the visible length is $\sin\alpha \approx 0.34$, $0.71$ and $1$.
+:::
+
 > A "particle" is merely the bruise left on the retina when a ray meets the eye head-on; "substance" is what grammar invents when the gaze refuses to turn.
 
 ## Second Blind Spot: Mistaking a Plane for a Line {#sec-blindspot-2}
@@ -35,6 +41,10 @@ Now stand a coin upright spinning at constant angular speed on a tabletop — or
 From that edge-on vantage, the broad two-dimensional disc vanishes. All you see is a peg shuttling back and forth along a one-dimensional segment, racing through the center, slowing as if against an invisible spring near the rim, halting, and reversing course according to $\cos(\omega t)$. If you stubbornly deny the existence of the orthogonal depth dimension across the tabletop, you are forced to invent elaborate hidden mechanics for a "one-dimensional particle": why does its speed peak at the origin? And when two pegs cross the center ($\cos 90^\circ = 0$ and $\cos 270^\circ = 0$) at the exact same spot on your line, how does one "know" to move left next while the other moves right? Must each carry a secret metaphysical ledger inside?
 
 Raise your head three inches and the mystery evaporates. There is no invisible spring and no occult ledger — only a unit direction $\vv{b}$ rotating uniformly in the plane. Measured in the fixed orientation $\hat{I}$, the directed angle from the unit reference direction $\vv{a}$ to $\vv{b}$ is $\theta \equiv \omega t \pmod{2\pi}$. The two directions span the **oriented area** $\vv{a} \wedge \vv{b} = \sin\theta\,\hat{I}$: the signed area changes with this angle while the oriented plane $\hat{I}$ stays fixed.
+
+::: {.figure src="prelude-edge-on"}
+**Seen edge-on, the shadows at $90^\circ$ and $270^\circ$ coincide but run opposite ways.** Above is the magenta turntable seen from overhead, with the amber direction $\vv{b}$ at $\theta = 90^\circ$ and $\theta = 270^\circ$, each with a small velocity arrow. Dashed lines drop both onto the cyan segment below, where they land on the same point $\cos\theta = 0$. On the disc one moves left and the other right, and so do their shadows.
+:::
 
 The "complex phase factors," "imaginary unit $i$," and "unitary gate matrices" that intimidate students in standard quantum computing textbooks are nothing more than this spinning platter seen edge-on. The unit bivector $\hat{I}$ satisfies $\hat{I}^2 = -1$ not because nature traffics in "imaginary" numbers, but because two successive $90^\circ$ orthogonal turns within the same plane ($90^\circ + 90^\circ = 180^\circ$) reverse the direction of every vector in that plane. When we peer at two-dimensional quantum gate rotations from the thin edge of our one-dimensional classical timeline, uniform rotation of a direction within the plane masquerades as the waxing and waning of probability amplitudes along a line.
 
@@ -58,6 +68,10 @@ On this single-qubit sphere, a plane through the center cuts out a **great circl
 See H. P. Robertson, *The Uncertainty Principle* (1929, DOI [10.1103/PhysRev.34.163](https://doi.org/10.1103/PhysRev.34.163)), and M. V. Berry, *Quantal phase factors accompanying adiabatic changes* (1984, §4, Eq. (27), DOI [10.1098/rspa.1984.0023](https://doi.org/10.1098/rspa.1984.0023)).
 :::
 
+::: {.figure src="prelude-latitude"}
+**Fix the polar angle, sweep only the phase, and the path is a latitude circle.** The amber state sits at polar angle $\theta = 50^\circ$; as the relative phase $\varphi$ turns, it travels along the cyan latitude circle. Only at $\theta = 90^\circ$ is that circle the magenta equator, the section cut by a plane through the centre.
+:::
+
 None of the three represents a breakdown of logic or a capricious throw of dice — each reflects orthogonal algebra and bundle geometry projected onto local frames.
 
 ## Fourth Blind Spot: The Sphere Beyond Spheres {#sec-blindspot-4}
@@ -72,6 +86,10 @@ Now apply that exact distinction to the oriented three-dimensional space $I_3$ i
 
 Representing a subspace by a normal line requires an ambient space large enough to contain that normal; within a fixed sphere, no single internal vantage captures everything at once. Anchor yourself to one ruler $\vv{o}$, and the orthogonal equator at $90^\circ$ falls into the unbiased horizon $\cos 90^\circ = 0$; abandon every preferred axis and average uniformly over the sphere, and north cancels south, east cancels west, $\frac{1}{4\pi}\int_{S^2} \vv{a}\,d\Omega = \vv{0}$, collapsing the state to the featureless maximally mixed center $\rho_* = \frac{1}{2}I$ ([Chapter 4](ch04-decoherence.md)). Framed explicitly as a **philosophical and structural analogy** — rather than an identity deduced from three-dimensional linear algebra alone — this interplay between internal horizons and ambient lifting parallels Gödelian incompleteness in formal logic (whose exact diagonalization theorems are established formally in Part VI, Chapter 21).
 
+::: {.figure src="prelude-average"}
+**Give up every direction, average over the whole sphere, and the arrows cancel back to the centre.** Twelve cyan arrows point to the twelve vertices of a regular icosahedron, spread evenly in all directions, each paired with one pointing the opposite way; they add up to zero, and the average sits at the centre, the maximally mixed state $\rho_* = \frac{1}{2}I$.
+:::
+
 ## Final Awakening: From Beyond the Sphere Back to $\psi = \psi(\psi)$ {#sec-awakening}
 
 Were the story to end at the fourth blind spot, thought would resemble a Sisyphus beetle climbing an endless tower of ambient embeddings $S^1 \hookrightarrow S^2 \hookrightarrow S^3 \hookrightarrow \cdots$, escaping each shell only by positing another overhead.
@@ -81,6 +99,10 @@ Yet pause and reflect: **how could a creature wholly confined to a single shell 
 In the book's philosophical interpretation, what gets enclosed inside each larger ambient space is always the frozen footprint left a moment ago — the concept already fixed, the detector click already logged, the completed noun-quantum (*liàng*). By contrast, the act of comprehension that perceives the boundary, posits the ambient embedding $\mathbb{R}^n \hookrightarrow \mathbb{R}^{n+1}$, and grasps the generating rule of the entire tower — the measuring verb (*liáng*) — is not exhausted by any single finite shell. **"When one can continually comprehend spheres beyond spheres, one seems, in fact, to stand beyond the sphere."** Whoever recognizes a horizon as a horizon already thinks across it.
 
 Remarkably, this self-referential motif admits a clean counterpart in real analysis: with no external ruler supplied from outside, let the compatibility reading $\cos\theta$ obtained at one stage serve directly as the radian angle $\theta$ fed into the next (whose contraction fixed point and transcendence are summarized in [@rem-prelude-dottie-literature] below).
+
+::: {.figure src="prelude-cos-cobweb"}
+**The reading of one layer becomes the angle of the next.** The amber path starts at $\theta_0 = 1$, rises to the cyan curve $y = \cos\theta$ to take the reading, then moves across to the grey diagonal $y = \theta$ to use it as the next angle: $\theta_1 \approx 0.540$, $\theta_2 \approx 0.858$, … It winds into the crossing $\theta^* \approx 0.739$ and misses it at every step. Literature result, not formalized in this book ([@rem-prelude-dottie-literature]).
+:::
 
 ::: {.remark #rem-prelude-dottie-literature title="Uniqueness and Transcendence of the Cosine Fixed Point (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** Consider the real cosine map $\cos : \mathbb{R} \to [-1, 1]$: it maps $[-1, 1]$ into the compact invariant interval $[0, 1]$, on which its derivative obeys the uniform bound
@@ -137,11 +159,23 @@ The full architecture of *Geometric Intuition of Quantum Computing* comprises **
 | **Part VII** | **Construction and Verification**: Matrix-Free Engines and Formal Proof Libraries | **Chapters 25–28**: Bitmask XOR Clifford engines, a single-qubit ZYZ Euler rotor compiler, Lean 4 formalization architecture, and source-level proof audits. |
 | **Part VIII** | **Synthesis — Timeless Causality, Complexity Horizons, and Fluid Vortex Filaments** | **Chapters 29–30**: Golden Pell identities and the Lean-verified Pell remainder of $\sqrt{2}$, alongside continued-fraction and elliptic-curve literature remarks, with timeless causality interpreted through positive semidefinite completion in the Gram elliptope; the Fields ($P$) and Lines ($NP$) analogy, literature notes on tensor-network rank reduction in fine-grained complexity and cosmic crossover scales, and the five-mode Fourier advection projection closure obstruction alongside continuum fluid-vorticity literature notes. |
 
+::: {.figure src="prelude-eight-parts"}
+**The eight parts form a staircase.** Each bar is one part, spanning its chapters: four apiece for the first seven parts, two for the eighth, each one step above the last: point → line, line → plane, plane → sphere, entangled spheres, spacetime sphere, beyond the sphere, construction, synthesis.
+:::
+
+::: {.slides src="overview"}
+An overview slide deck of the whole book in 39 slides: the four blind spots and the dimensional ladder; each part's core picture, main theorems, literature results and open problems; the counts of the three tiers of warrant and the dependency map.
+:::
+
 Readers may begin directly with [Chapter 1](ch01-measurement.md): no prior familiarity with operator algebras or advanced quantum theory is assumed, and every $2\times 2$ matrix calculation, trace identity, Bloch coordinate map, and partial-trace reduction is worked out explicitly through [Chapter 2](ch02-born-rule.md), [Chapter 3](ch03-projectors-and-duality.md), and [Chapter 4](ch04-decoherence.md).
 
 ### Formal Verification and Epistemic Honesty Contract {#sec-honesty-rules}
 
 While the prose aims for vivid physical clarity, every mathematical claim obeys a strict three-tier formal verification contract: **the book explains why a truth makes sense; the Lean kernel guarantees that it holds.**
+
+::: {.figure src="prelude-three-tiers"}
+**Three tiers of warrant, three colours.** Green (`LEAN ✓`) is the theorems, lemmas, propositions and corollaries carrying `lean=`; violet is the remarks and examples marked "Literature result, not formalized in this book"; red (`OPEN`) is the open conjectures. Each bar ends in its count over the Chinese text, and a note under the green bar gives the number of theorem declarations in the lock file.
+:::
 
 1. **Numbering and Cross-References**: Within each chapter, definitions, theorems, lemmas, propositions, corollaries, examples, and remarks share a single sequential counter (`Theorem 1.1`, `Proposition 4.5`, etc.); items in the Prelude carry prefix `0`, and appendices carry `A, B, …`. All cross-references are live links across HTML, PDF, and EPUB.
 2. **Semantic Badges and Color Discipline**: Colors carry fixed epistemic meanings throughout the book and its diagrams:

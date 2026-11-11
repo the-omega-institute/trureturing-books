@@ -1445,6 +1445,14 @@
       "line": 725,
       "signature": "theorem stinespring_dilation {A H : Type u} [CStarAlgebra A] [PartialOrder A] [StarOrderedRing A] [NormedAddCommGroup H] [InnerProductSpace ℂ H] [CompleteSpace H] (φ : A →CP (H →L[ℂ] H)) : ∃ (K : Type u) (_ : NormedAddCommGroup K) (_ : InnerProductSpace ℂ K) (_ : CompleteSpace K) (π : A →⋆ₐ[ℂ] (K →L[ℂ] K)) (V : H →L[ℂ] K), ∀ (a : A) (x : H), (φ a) x = (V†) ((π a) (V x))"
     },
+    "D5/S3/HilbertOperators/UnitaryPowerDilation.exists_unitary_power_dilation": {
+      "module": "D5/S3/HilbertOperators/UnitaryPowerDilation",
+      "name": "D5.S3.HilbertOperators.UnitaryPowerDilation.exists_unitary_power_dilation",
+      "kind": "theorem",
+      "statement_id": "sha256:0b24c66dfd0fb41da8947e3e6f71c85367246a5dbc85d1d6f46805d7e78f46a0",
+      "line": 533,
+      "signature": "theorem exists_unitary_power_dilation (T : E →L[ℂ] E) (hT : ‖T‖ ≤ 1) : ∃ (H : Type u) (_ : NormedAddCommGroup H) (_ : InnerProductSpace ℂ H) (_ : CompleteSpace H) (V : E →L[ℂ] H) (U : H →L[ℂ] H), (∀ x y : E, ⟪V x, V y⟫_ℂ = ⟪x, y⟫_ℂ) ∧ U ∈ unitary (H →L[ℂ] H) ∧ (∀ (n : ℕ) (x : E), ContinuousLinearMap.adjoint V ((U ^ n) (V x)) = (T ^ n) x)"
+    },
     "D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion": {
       "module": "D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion",
       "name": "D5.S3.Midline.Cayley.CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion",
@@ -2021,6 +2029,14 @@
       "line": 94,
       "signature": "theorem displacement_conjugation (a b c d : ZMod M) : displacement M a b * displacement M c d * star (displacement M a b) = windowRoot M ^ (b * c - a * d).val • displacement M c d"
     },
+    "D5/S3/Quantum/Analysis/TrotterProduct.trotter_product": {
+      "module": "D5/S3/Quantum/Analysis/TrotterProduct",
+      "name": "NormedSpace.trotter_product",
+      "kind": "theorem",
+      "statement_id": "sha256:b78c3ef1a6145974cc609403682884919874724dbc0acea517782732b648a77f",
+      "line": 230,
+      "signature": "theorem trotter_product (A B : 𝔸) : Filter.Tendsto (fun n : ℕ => (exp ((n : ℝ)⁻¹ • A) * exp ((n : ℝ)⁻¹ • B)) ^ n) Filter.atTop (nhds (exp (A + B)))"
+    },
     "D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation": {
       "module": "D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation",
       "name": "D5.S3.Quantum.Bogoliubov.BogoliubovNormConservation.bogoliubov_norm_conservation",
@@ -2548,6 +2564,22 @@
       "statement_id": "sha256:8cf17e20420954cc60be93a175ffb9097332bfd33b9256383e487d679adb3720",
       "line": 750,
       "signature": "theorem bargmann_path_product (n : ℕ) (Ψ : Fin (n+1) → Fin 2 → ℂ) : bargmann Ψ = (∏ j : Fin n, star (Ψ j.castSucc) ⬝ᵥ Ψ j.succ) * (star (Ψ (Fin.last n)) ⬝ᵥ Ψ 0)"
+    },
+    "D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.explicit_qubit_orientation": {
+      "module": "D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann",
+      "name": "D5.S3.Quantum.Information.GroupInvariantPsi.C129QubitBargmann.explicit_qubit_orientation",
+      "kind": "theorem",
+      "statement_id": "sha256:9d24508d35d99b17cb22cc6d691a82d92563c7ffe6fb259bff0b1d3714941555",
+      "line": 62,
+      "signature": "theorem explicit_qubit_orientation : tripleBargmann ![(0 : ℝ), 0, 1] ![1, 0, 0] ![0, 1, 0] = (1 + Complex.I) / 4 ∧ tripleBargmann ![(0 : ℝ), 0, 1] ![1, 0, 0] ![0, -1, 0] = (1 - Complex.I) / 4"
+    },
+    "D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch": {
+      "module": "D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann",
+      "name": "D5.S3.Quantum.Information.GroupInvariantPsi.C129QubitBargmann.triple_bargmann_bloch",
+      "kind": "theorem",
+      "statement_id": "sha256:9d24508d35d99b17cb22cc6d691a82d92563c7ffe6fb259bff0b1d3714941555",
+      "line": 52,
+      "signature": "theorem triple_bargmann_bloch (r₁ r₂ r₃ : Fin 3 → ℝ) : tripleBargmann r₁ r₂ r₃ = (((1 + r₁ ⬝ᵥ r₂ + r₂ ⬝ᵥ r₃ + r₃ ⬝ᵥ r₁ : ℝ) : ℂ) / 4) + (((r₁ ⬝ᵥ (r₂ ⨯₃ r₃) : ℝ) : ℂ) * Complex.I / 4)"
     },
     "D5/S3/Quantum/Magic/ReflectionDiagonalCNOTLowerBound.result": {
       "module": "D5/S3/Quantum/Magic/ReflectionDiagonalCNOTLowerBound",

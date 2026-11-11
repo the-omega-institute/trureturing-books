@@ -430,3 +430,10 @@ EPUB 浏览器预览不等于 Apple Books 原生主题验收，尚未导入 Appl
 输出验收限制另记：抽取的 EPUB XHTML 共查 32 组双语／主题／桌面手机组合，改文与图片均存在，未见损坏图片或页面脚本错误；16 组手机宽度整章预览仍有横向公式溢出。所探测到的溢出公式已逐项与输入候选的原文导出匹配，未在本次准确性修复中改写；故不声称 EPUB 窄屏排版全面通过，也未作 Apple Books 原生验收。影片渲染与配音依赖不齐，站点使用既有海报回退，完整成片、音频与字幕验收仍未完成。
 
 最终输出证据为同目录的 `html/report.json`、`html/embed-report.json`、`exports.json`、`epubcheck.json`、`epub-browser/report.json`、`epub-overflow-scope.json` 与 `site-artifacts.json`；`scope-preservation.json` 记录最终改动清单及形式块保留。独立复审、PR、合入、CI 与 Pages 由调用方继续；历史 9/35、本批四章待复审、其余 22 单元待全文核对保持区分，本次不执行 Git/GitHub 生命周期。
+
+
+## 第 9–12 章：d170f29 主线整合（待最终复审）
+
+原修复候选 `31830c85f717234bd0148fa905be0a25f9e8bff8` 已作为草稿 PR #114 推送；随后无冲突整合主线 `d170f2951f2ce463bce823940be66d21353a5a65`。原交付清单的 81 份文件中，77 份摘要不变；另四份章节因主线新增段落或小结而变化，但相对各自主线的实际增删行与原修复完全相同。锁文件逐字沿用新主线，pin 仍为 `1d9bf98cab8306e67ec38a739359f2cdae63877a`，没有手改锁。对应证据在 `build/content-accuracy/ch09-ch12-integration-d170/correspondence.json`。
+
+整合后 `./tbook check` 为 1 本可见书、0 错误、0 警告，`git diff --check` 通过。原候选的五实验室正常/慢帧测试、浏览与导出证据保持其历史输入归属，不等同于当前整本导出或最终独立批准。主线新增的 Lie–Trotter 与巴格曼形式陈述及上下文、当前输出与最终三席复审仍需核对；PR #114 保持草稿，CI、合入和 Pages 待完成。本节不增加全书已批准单元数。
