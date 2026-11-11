@@ -57,6 +57,10 @@ $$
 \Delta S_{\mathrm{pinch}} = S(\sigma) - S(\rho) = D(\rho \,\|\, \omega) = \ln 2 \text{ nats} \;\;(\text{即整整 } 1\text{ bit})!
 $$
 
+::: {.viz src="erasure-ledger" preset="pinch" height="500"}
+**先转，再捏合：熵多出 ln 2。** 转 90° 时，琥珀色的箭头从 |0⟩ 转到横躺，右边“系统的熵”一栏纹丝不动；捏合时，品红的横着的一份被抹掉，箭头缩成圆心，熵那一栏升到 ln 2 的虚线，“付给环境的热”仍是 0（[@thm-dual-account-full]）。
+:::
+
 ## 8.2 相干擦除产熵与兰道尔原理的两阶段几何图景 {#sec-landauer-principle-geometry}
 
 从纯量子叠加态出发完成一次完整的“未读测量 $+$ 寄存器重置”包含两个截然不同但首尾相接的阶段，必须将本书形式化的**阶段 A（保单位基捏合 / 相干面积抹除）**与外部物理文献中的**阶段 B（非保单位逻辑重置 / 热浴排热）**严格区分：
@@ -94,6 +98,10 @@ $$
 
 这就是热力学第二定律在量子几何层面的来龙去脉：**每一次不可逆的捏合熵增，都是把一块二维有向面积 $\vv{A}\wedge\vv{B}$ 强行压扁成一维对角粒子线时切下来的几何余项 $D\bigl(\rho_U(k) \,\big\|\, \Pi(\rho_U(k))\bigr) \ge 0$！**
 
+::: {.viz src="erasure-ledger" preset="steps" height="500"}
+**一步一步捏：每一块熵等于这一步的 D。** 每步转 50° 再捏合，连做三步：琥珀色的箭头一级一级落到青色的记录线上、越来越短；熵那一栏一块一块叠起来，每块标着这一步的 D₁、D₂、D₃，叠起来就是总熵增（[@thm-entropy-production-coherence-deletion]）。
+:::
+
 ::: {.example #ex-landauer-one-bit-ledger title="单比特阿达马造波、计算基保单位捏合与非保单位兰道尔重置的两阶段 1 比特（ln 2）详单"}
 让我们把单量子比特从纯态 $\rho_0 = \lvert 0\rangle\langle 0\rvert$ 出发、经阿达马门 $H = \frac{1}{\sqrt{2}}(X + Z)$ 旋转到赤道叠加态 $\rho_H = H\rho_0 H^* = \lvert +\rangle\langle +\rvert$、经计算基保单位捏合变为 $\Pi(\rho_H) = \frac{1}{2}I_2$，最后在室温热浴中非保单位重置回 $\lvert 0\rangle\langle 0\rvert$ 的完整循环列成一张两阶段对账单：
 
@@ -113,6 +121,10 @@ $$
    $$
    \Delta Q_{\min} = k_B T \ln 2 \approx (1.380649 \times 10^{-23}\text{ J/K}) \times (300\text{ K}) \times 0.693147 \approx 2.87 \times 10^{-21}\text{ J}\;(\approx 17.9\text{ meV}).
    $$
+:::
+
+::: {.viz src="erasure-ledger" preset="cycle" height="500"}
+**两阶段：熵先记进系统，再付成热。** 阶段 A（转 90° 再捏合）里，熵那一栏升到 ln 2，热为 0；阶段 B 的理想复位把箭头拉回 |0⟩，熵那一栏回到 0，“付给环境的热”升到 ln 2，正好碰到“下界”那条横线。阶段 B 的热量是文献结果，“理想复位”是取等的理想极限，见 [@rem-landauer-thermodynamic-bridge-literature]。
 :::
 
 ::: {.remark #rem-density-matrix-balance-inputs-literature title="密度矩阵层面的热浴平衡与幺正平衡（文献结果，未在本书形式化）"}
@@ -191,6 +203,10 @@ $$
 **读法。** 想擦得越干净（$p \to 1$，系统末态越接近纯态 $\lvert 0\rangle\langle 0\rvert$），系统熵减趋于上限 $\ln 2 \approx 0.6931$，而超额项 $D$ 无界增长。只用一个热浴量子比特、一次交换，是做不到以 $k_B T\ln 2$ 的代价擦除一比特的；多付的热量恰好等于热浴被推离平衡的相对熵。要逼近兰道尔界，就得让 $D$ 与 $I$ 都趋于零，这需要更大的热浴和更缓慢的过程。
 :::
 
+::: {.viz src="erasure-ledger" preset="bath" height="500"}
+**一个热浴比特：多付的就是 D。** 先把箭头捏成圆心，再与 p = 0.9 的热浴比特交换：箭头只回到 0.8 高，熵减 0.368；“付给环境的热”是 0.879，比“下界”横线高出斜线的一截 0.511，那是小圆里的热浴比特从平衡位置（空心圈）被推到圆心的 D。拖动布居数 p，可以逐行重现上表（[@cor-landauer-bound-saturation]）。
+:::
+
 ## 8.3 观察者记忆与时间之箭：为什么“记住过去”必须消耗自由能？ {#sec-observer-memory-time-arrow}
 
 现在，让我们把手术刀对准站在实验台前的**观察者自己**，印证本章开篇的第二句名言：*“所以一切都结束了,没有任何例外,连观察者结构都是这样的”*。
@@ -213,6 +229,10 @@ $$
 
 ::: proof
 由 [`canonical_copied_address_record_eq_prior`](lean:D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.canonical_copied_address_record_eq_prior)，典范拷贝地址记录 `copiedAddressRecord` 与受控置换拷贝记录 `priorCopiedRecord` 完全相等，故可直接重写并调用 [@thm-reduced-access-defect]（`reduced_state_irreversibility_is_record_access_defect`）得出全部八个合取结论。特别地，对结论 3，因为 `copiedAddressRecord` 的两个分支地址正交（克罗内克 $\delta_{ij}$ 重叠），求偏迹 $\Tr_{\mathrm{env}}(R_{\mathrm{canon}}(\tau))$ 恰好抹去副对角相干元而保留对角元 $\tau_{ii}$（即等于标准基对角捏合 $\Pi(\tau)$），再由题设对角元相等 $\rho_{ii} = \sigma_{ii}$ 立得 $\Tr_{\mathrm{env}}(R_{\mathrm{canon}}(\rho)) = \Tr_{\mathrm{env}}(R_{\mathrm{canon}}(\sigma))$；而因全局状态 $R_{\mathrm{canon}}(\rho) \neq R_{\mathrm{canon}}(\sigma)$，任何单值函数 $\mathcal{R}$ 都不可能把同一个约化输入映成两个不同的全局输出（结论 4 与结论 5）。完整证明由 Lean 内核检查。
+:::
+
+::: {.viz src="erasure-ledger" preset="copy" height="500"}
+**拷贝：局部的熵涨了，热一分没付，还能撤回。** 转 90° 后拷贝进记录比特 E：系统这一侧的琥珀色箭头缩成圆心，熵那一栏升到 ln 2（斜线表示这只是局部的熵），“付给环境的热”是 0；下一步撤回拷贝，箭头回到横躺，熵回到 0（[@thm-reduced-irreversibility-access-defect]）。
 :::
 
 有人可能会问：“既然全局受控拷贝 $U_{\mathrm{copy}}$ 是可逆的（结论 6），那我们在宏观实验室里为什么不能像电影倒放一样，随手把已经发生的退相干倒转回来？”
@@ -271,6 +291,10 @@ $$
    其中联合互信息 $I(S' : E') \ge 0$ 与热浴相对熵 $D(\rho_E' \,\|\, \rho_E) \ge 0$ 均非负，从而在微观量子力学框架下无需热力学极限假设即严格导出 $\Delta Q_{\mathrm{bath}} \ge k_B T \Delta S_S$。
 
 上述涉及物理玻尔兹曼常数 $k_B$、热浴哈密顿量 $H_E$ 与焦耳热量 $\Delta Q_{\mathrm{bath}}$ 的阶段 B 热力学重置换算作为物理背景引述。其中有一层已由 Lean 验证：只要承认热浴平衡 $\beta Q = \Delta S_{\mathrm{res}} + D$ 与幺正平衡 $I = \Delta S_{\mathrm{sys}} + \Delta S_{\mathrm{res}}$ 这两条实数等式，第 2 条中的恒等式、下界及其取等条件就由 [@prop-landauer-identity-from-balances] 与 [@cor-landauer-bound-saturation] 给出。这两条平衡式本身（它们是关于吉布斯态、联合幺正演化与冯·诺依曼熵的命题）以及 $I \ge 0$、$D \ge 0$ 的非负性，仍属文献结果，不计入本书的 Lean 形式化验证账本。
+:::
+
+::: {.viz src="erasure-ledger" height="560"}
+**擦除账本 · 完整实验室。** 按“操作”给一个比特记账：转动、捏合、理想复位、热浴比特复位、拷贝与撤回；左边的圆盘画态，右边两栏记系统的熵与付给环境的热。绿色框只给本章引用的冻结定理，阶段 B 的热量换算标为文献结果。
 :::
 
 ## 8.4 第二部总结与过渡：当一个平面装不下三次正交分叉，向三维球面跃迁 {#sec-part2-summary-bridge}

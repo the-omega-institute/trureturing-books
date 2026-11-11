@@ -57,6 +57,10 @@ $$
 \Delta S_{\mathrm{pinch}} = S(\sigma) - S(\rho) = D(\rho \,\|\, \omega) = \ln 2 \text{ nats} \;\;(1\text{ bit})!
 $$
 
+::: {.viz src="erasure-ledger" preset="pinch" height="500"}
+**Turn, then pinch: ln 2 more entropy.** During the 90° turn the amber arrow swings from |0⟩ to lying flat and the “system S” column on the right does not move; at the pinch the magenta sideways part is wiped out, the arrow shrinks to the centre, the entropy column rises to the dashed ln 2 line, and the heat paid is still 0 ([@thm-dual-account-full]).
+:::
+
 ## 8.2 Two-Stage Geometric Picture of Coherence-Deletion Entropy Production and Landauer's Principle {#sec-landauer-principle-geometry}
 
 A complete cycle of "unread measurement followed by register reset" starting from a pure superposition comprises two distinct stages, separating **Stage A (unital basis pinching / coherence deletion, formalized in this book)** cleanly from **Stage B (non-unital logical reset / bath heat dissipation in the physics literature)**:
@@ -94,6 +98,10 @@ For any step state $\sigma = \rho(k)$, unitary conjugation preserves the eigenva
 
 Here lies the geometric origin of the Second Law in quantum mechanics: **every irreversible pinching entropy increase is the exact geometric remainder $D\bigl(\rho_U(k) \,\big\|\, \Pi(\rho_U(k))\bigr) \ge 0$ sliced off when a two-dimensional oriented area $\vv{A}\wedge\vv{B}$ is flattened onto a one-dimensional diagonal line!**
 
+::: {.viz src="erasure-ledger" preset="steps" height="500"}
+**Pinching step by step: each block of entropy is that step's D.** Turn by 50° and pinch, three times over: the amber arrow drops step by step onto the cyan record line and gets shorter; the entropy column stacks up block by block, each block marked D₁, D₂, D₃, and together they make the total rise ([@thm-entropy-production-coherence-deletion]).
+:::
+
 ::: {.example #ex-landauer-one-bit-ledger title="Two-Stage 1-Bit (ln 2) Ledger: Hadamard Wave Creation, Unital Z-Basis Pinching, and Non-Unital Landauer Reset"}
 Follow a single qubit starting at the pure north pole $\rho_0 = \lvert 0\rangle\langle 0\rvert$, rotated by Hadamard $H = \frac{1}{\sqrt{2}}(X + Z)$ to the equatorial superposition $\rho_H = H\rho_0 H^* = \lvert +\rangle\langle +\rvert$, pinched in the computational $Z$ basis to $\Pi(\rho_H) = \frac{1}{2}I_2$, and finally reset to $\lvert 0\rangle\langle 0\rvert$ in a room-temperature bath:
 
@@ -113,6 +121,10 @@ Follow a single qubit starting at the pure north pole $\rho_0 = \lvert 0\rangle\
    $$
    \Delta Q_{\min} = k_B T \ln 2 \approx (1.380649 \times 10^{-23}\text{ J/K}) \times (300\text{ K}) \times 0.693147 \approx 2.87 \times 10^{-21}\text{ J}\;(\approx 17.9\text{ meV}).
    $$
+:::
+
+::: {.viz src="erasure-ledger" preset="cycle" height="500"}
+**Two stages: entropy goes into the system, then out as heat.** In stage A (turn by 90°, then pinch) the entropy column rises to ln 2 while the heat stays 0; in stage B the ideal reset pulls the arrow back to |0⟩, the entropy column drops to 0, and the heat paid rises to ln 2, just touching the “floor” line. The heat of stage B is a literature result, and the “ideal reset” is the limit in which the bound is attained; see [@rem-landauer-thermodynamic-bridge-literature].
 :::
 
 ::: {.remark #rem-density-matrix-balance-inputs-literature title="Density-Matrix Reservoir and Unitary Balances (Literature Result, Not Formalized in This Book)"}
@@ -191,6 +203,10 @@ Every row satisfies $\beta Q = -\Delta S_{\mathrm{sys}} + I + D$ and the Landaue
 **Reading.** The cleaner the erasure is meant to be ($p \to 1$, the final system state approaching the pure state $\lvert 0\rangle\langle 0\rvert$), the closer the entropy decrease comes to its ceiling $\ln 2 \approx 0.6931$, while the excess term $D$ grows without bound. With one reservoir qubit and one swap, a bit cannot be erased at the price $k_B T\ln 2$; the extra heat paid is exactly the relative entropy by which the reservoir is pushed out of equilibrium. Approaching the Landauer bound requires both $D$ and $I$ to tend to zero, which calls for a larger reservoir and a slower process.
 :::
 
+::: {.viz src="erasure-ledger" preset="bath" height="500"}
+**One reservoir qubit: the extra is D.** The arrow is first pinched to the centre, then swapped with a bath qubit at p = 0.9: it climbs back only to height 0.8, an entropy decrease of 0.368; the heat paid is 0.879, above the “floor” line by the hatched piece of 0.511, the D by which the bath qubit in the small disc is pushed from its equilibrium (the open ring) to the centre. Dragging the population p reproduces the table above row by row ([@cor-landauer-bound-saturation]).
+:::
+
 ## 8.3 Observer Memory and the Arrow of Time: Why "Remembering the Past" Must Consume Free Energy {#sec-observer-memory-time-arrow}
 
 Now turn the lens onto the **observer's own memory register**, confirming the second epigraph of this chapter: *"So everything is settled, without a single exception — even the structure of the observer works this way."*
@@ -213,6 +229,10 @@ Let $\rho, \sigma \in M_2(\mathbb{C})$ (`QubitMatrix`) be two single-qubit matri
 
 ::: proof
 By [`canonical_copied_address_record_eq_prior`](lean:D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.canonical_copied_address_record_eq_prior), the canonical copied-address record `copiedAddressRecord` coincides with the permutation-copy record `priorCopiedRecord` of [@thm-reduced-access-defect] (`reduced_state_irreversibility_is_record_access_defect`), from which all eight conjuncts follow directly by rewriting. In particular, for claim 3, because the two branch records of `copiedAddressRecord` are orthogonal (Kronecker-delta overlap $\delta_{ij}$), tracing out the environment $\Tr_{\mathrm{env}}(R_{\mathrm{canon}}(\tau))$ zeroes out off-diagonal entries and retains the diagonal $\tau_{ii}$ (equaling standard-basis pinching $\Pi(\tau)$); since $\rho_{ii} = \sigma_{ii}$, we obtain $\Tr_{\mathrm{env}}(R_{\mathrm{canon}}(\rho)) = \Tr_{\mathrm{env}}(R_{\mathrm{canon}}(\sigma))$, whereas $R_{\mathrm{canon}}(\rho) \neq R_{\mathrm{canon}}(\sigma)$ precludes any single-valued map $\mathcal{R}$ from recovering both global states from the same reduced input (claims 4 and 5). The full proof is checked by the Lean kernel.
+:::
+
+::: {.viz src="erasure-ledger" preset="copy" height="500"}
+**Copying: the local entropy rises, no heat is paid, and it can be undone.** After a 90° turn the state is copied into the record bit E: on the system's side the amber arrow shrinks to the centre, the entropy column rises to ln 2 (hatched: only the local entropy), and the heat paid is 0; the next step undoes the copy, the arrow lies flat again and the entropy is back to 0 ([@thm-reduced-irreversibility-access-defect]).
 :::
 
 Why, then, can't a macroscopic observer simply apply $U_{\mathrm{copy}}^*$ (claim 6) to run time backward? Because in the real world a system does not copy its record into a single isolated ancilla; it broadcasts redundant records across a finite copy family $\mathrm{Copy}$ of environmental degrees of freedom (photons, phonons, air molecules, detector pointers, and the observer's own memory cells)!
@@ -269,6 +289,10 @@ If the left-hand side equaled $\rho_{ij}$, then $\operatorname{recordOverlap}(\m
    where both the final mutual information $I(S' : E') \ge 0$ and bath relative entropy $D(\rho_E' \,\|\, \rho_E) \ge 0$ are nonnegative, implying $\Delta Q_{\mathrm{bath}} \ge k_B T \Delta S_S$ without any thermodynamic-limit approximation.
 
 These Stage B physical conversion formulas involving $k_B$, bath Hamiltonians $H_E$, and joules of heat $\Delta Q_{\mathrm{bath}}$ are cited from the physics literature and are not claimed in the book's Lean verification ledger. One layer of it is verified in Lean: once the two real-number equations are granted, the reservoir balance $\beta Q = \Delta S_{\mathrm{res}} + D$ and the unitary balance $I = \Delta S_{\mathrm{sys}} + \Delta S_{\mathrm{res}}$, the identity of item 2, the lower bound and its equality condition are given by [@prop-landauer-identity-from-balances] and [@cor-landauer-bound-saturation]. The two balances themselves (statements about Gibbs states, joint unitary evolution and von Neumann entropy) and the nonnegativity $I \ge 0$, $D \ge 0$ remain literature results.
+:::
+
+::: {.viz src="erasure-ledger" height="560"}
+**The erasure ledger · full lab.** Keep the books of one bit with the operations: turn, pinch, ideal reset, reset with a bath qubit, copy and undo; the disc on the left draws the state, the two columns on the right record the system's entropy and the heat paid to the environment. Green boxes go only to the frozen theorems this chapter cites; the heat of stage B is marked as a literature result.
 :::
 
 ## 8.4 Part II Summary and Bridge: When a Single Plane Cannot Hold Three Orthogonal Bifurcations, Leap to the Three-Dimensional Sphere {#sec-part2-summary-bridge}
