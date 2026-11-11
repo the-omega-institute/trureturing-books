@@ -291,6 +291,10 @@ $$
 
 至此，从希帕索斯直角三角形裂开的 $\pm 1$ 佩尔接缝出发，经由素数的 $4k \pm 1$ 线面二象性、同余数椭圆曲线环面 $y^2 = x(x-1)(x+1)$（$\chi = 0$）与哈塞临界线缩放 $\sqrt{p} = p^{1/2}$，全体素数的算术振荡最终化作了**三维平行化量子旋量球面 $S^3 \cong \mathrm{SU}(2)$ 向一维直径 $[-1, +1]$ 投下的内积余弦影子 $\cos\theta_p$**！
 
+::: {.remark #rem-ch29-arithmetic-geometry-literature title="算术几何与超越数论定理的形式化边界说明（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 本章前两节引述的经典超越数论与算术几何定理——包括林德曼—魏尔斯特拉斯定理与 T. Y. Chow (1999) 在沙努埃尔猜想（参见第 24 章 [@conj-schanuel-dottie]）条件下的初等域逃逸定理、奇素数 $p \equiv 1 \pmod 4$ 的费马二平方和分裂与实二次域 $\mathbb{Q}(\sqrt{p})$ 负佩尔方程 $m^2 - p n^2 = -1$ 可解性定理、类域论希尔伯特局部符号互反律 $\prod_{v \le \infty} (a, b)_v = +1$、有限域椭圆曲线哈塞界 $|a_p| \le 2\sqrt{p}$（H. Hasse, 1936）、高斯关于复乘曲线 $y^2 = x^3 - x$ 的点数公式 $|a_p| = 2|a|$，以及有理数域上非复乘椭圆曲线的佐藤—泰特分布定理（T. Barnet-Lamb, D. Geraghty, M. Harris & R. Taylor, *Ann. of Math.* **173**, 2011）——均为外部经典数学文献定理，未包含在本书锁定的 `trureturing@dev` 形式化声明集中；本书内核验证的部分严格限定于行内与下文定理框显式标注 `lean:` 的代数与内积恒等式（如 [`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm)、[`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique) 等）。
+:::
+
 ::: {.viz src="pythagoras-number-escape" height="560"}
 **交互实验室：佩尔手性账本、`±1` 接缝、高斯素数分裂与同余数椭圆曲线**。调节无平方因子判别参数 $d$（$2 \le d \le 37$）、奇素数 $p$ 与连分数渐近阶数 $k$：账本逐行给出 $\sqrt{d}$ 的连分数部分商、精确 `BigInt` 渐近分数 $m_k/n_k$ 与佩尔范数 $\Delta = m_k^2 - d\,n_k^2$（一维误差 $|m_k/n_k - \sqrt{d}| \to 0$，二维面积差 $|\Delta| \ge 1$；当连分数周期为奇数如 $d = 2, 5, 13$ 时单位解在 $-1$ 与 $+1$ 间交替翻转手性，周期为偶数如 $d = 3$ 时单位解锁在 $+1$ 分支，$d = 2$ 即希帕索斯与泰昂边径数 $1/1, 3/2, 7/5, 17/12\dots$）；右侧格点相图逐格标出 $m^2 - d\,n^2$ 的符号与全部 $\pm 1$ 单位格；舞台可在佩尔双曲线与正方形对比、高斯素数分裂 $p \equiv 1 \pmod 4 \iff p = a^2 + b^2$（经拉格朗日—格拉姆恒等式生成本原勾股三元组）与同余数椭圆曲线 $E_d : y^2 = x^3 - d^2 x$ 在良约化素数 $p \nmid 2d$ 下的有限域弗罗贝尼乌斯余弦 $\cos\theta_p = a_p/(2\sqrt{p})$ 之间切换。
 :::
@@ -423,6 +427,10 @@ $$
    这正是全书关于时间、因果与观察者的终极结语：**“全局无时间，故万古长存；观察者有限，故步步皆新。”**（而在 **[终章](coda.md)** 中，我们将进一步对照 `trureturing` 已验证的**高维格点黄金切投模型集（Cut-and-Project Golden Model Set）与齐肯多夫观察者路由定理**，构建一幅作者哲学与几何诠释模型（`MODEL`）：把跨轮次不变的算子参数诠释为内禀共轭窗口相位，把现实中的历史遗迹诠释为低曲率耗散的**空间吸引子**，解释为何有限观察者会在卡西尼 $(-1)^{n+1}$ 范数接缝与奇异吸引子分形叶层上经历似曾相识的共振。）
 
 
+
+::: {.remark #rem-ch29-wheeler-dewitt-page-wootters-literature title="无时间量子引力与路径积分文献的形式化边界说明（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 本节引用的正则量子引力惠勒—德维特方程 $H\mathbf{\Psi} = 0$（B. S. DeWitt, *Phys. Rev.* **160**, 1113, 1967）、佩奇—伍特斯条件时间机制 $|\psi_{\mathbf{S}}(\tau)\rangle \propto \langle \mathbf{c}(\tau)\mid\mathbf{\Psi}\rangle$（D. N. Page & W. K. Wootters, *Phys. Rev. D* **27**, 2885, 1983）以及费曼路径积分驻相条件 $\delta S = 0$，均属于理论物理经典文献模型，未在本书锁定的 `trureturing@dev` 库中形式化；下文定理框经 Lean 4 内核验证的结论严格限定于黄金整数佩尔范数恒等式与单位向量族 Gram 重叠等价关系判据。
+:::
 
 ::: {.theorem #thm-ch29-gram-rigidity-and-pell title="黄金整数佩尔范数恒等式与单位向量族 Gram 重叠等价关系定理" lean="D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm, D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization"}
 在算术二次格与内积空间几何中，离散接缝范数与单位向量记录的成对重叠判据分别由以下两条经 Lean 4 内核验证的定理给出：
