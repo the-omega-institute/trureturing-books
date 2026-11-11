@@ -4,6 +4,10 @@
 
 在传统数学与理论物理专著里，“证明”往往依赖作者与审稿人的肉眼默契：一句“显然可得”、一处隐去边界条件的指标缩并，或者把“局部连通”悄悄当成“全局常相位”，就可能让整座理论大厦埋下隐蔽的裂缝。而本书自[第一章](ch01-measurement.md)立下的最高契约，正是题记中的这十六个字：**构建命题证明通用机器学术理论，定义、定理、证明**——全书每一条标有绿色 `LEAN ✓` 徽章的 `theorem / lemma / proposition / corollary`，都逐一锚定在 `the-omega-institute/trureturing@dev`（所钉提交 `6cfcf785096782b15084d719ec73c2ca16b6ed29`）中被 Lean 4 类型检查内核验证并冻结的真实声明上！
 
+::: {.figure src="ch27-overview"}
+**图 27。** 本章地图：左栏，墨色箭头 $x$、$y$ 撑开的平行四边形，两条青色对角线 $x + y$ 与 $x - y$ 的平方和等于四条边的平方和（[@thm-audit-parallelogram-law]）；中栏，四个坐标连成一条链，每条青色的弧是一个在相邻两格上同时不为零的测试态，四个对角元里紫色的相位箭头指向同一方向，$A = c \cdot 1$（[@prop-audit-ray-phase-rigidity]）；右栏，挤压去掉 $3 \times 3$ 块矩阵 $\rho$ 品红的非对角块、只留青色的对角块，再挤压一次矩阵不动（[@cor-audit-pinching-idempotent]）。
+:::
+
 本章与[第二十八章](ch28-reading-frozen-proofs-ii.md)将带领读者直接走进这座 Lean 4 形式化公理圣殿的源码深处：
 
 1. 在本章（上篇）中，我们逐行解剖支撑起第一部至第三部的四块基石证明：**实内积空间的平行四边形范数恒等式**、**正半定迹一矩阵的玻恩概率三公理骨架**、**支撑连通射线测试下的幺正全局相位刚性定理**，以及**有限完备正交记录测量的挤压算符幂等定理**；
@@ -12,8 +16,6 @@
 ::: {.viz src="lean-declaration-map" preset="bedrock" height="500"}
 **第二十七章解剖的四条，回到它们出场的地方。** 青色的线从第二十七章的柱脚连回四个绿色实心格，它们第一次出场都在第一至第三章；琥珀色框住的是平行四边形恒等式（[@thm-audit-parallelogram-law]），琥珀色的线连到另外引用它的几章。
 :::
-
-![第一至三部 Lean 4 内核证明审计架构：平行四边形范数律与玻恩概率骨架、支撑链射线相位刚性归纳，以及有限记录挤压幂等性](../assets/fig-27-lean-kernel-audit-part1-3.svg)
 
 ## 定义、定理与证明：走进 Lean 4 内核审计 {#sec-lean-kernel-audit-architecture}
 
@@ -121,6 +123,10 @@ $$
 完整证明由 Lean 内核检查。
 :::
 
+::: {.figure src="ch27-born-skeleton"}
+**玻恩骨架的证明分三路，只有第三路要绕道。** 虚线圈是前提，方框是证明里写到的步骤与所用的引理：①、② 各一步；③ 先由 $\rho \succeq 0$ 得到三明治 $P\rho P^* \succeq 0$，再借 $P^* = P$、$P^2 = P$ 用迹的循环律把它的迹换回 $\Tr(\rho P)$，最后取迹非负。三路汇入绿色的 [@lemma-audit-born-skeleton]。
+:::
+
 ## 支撑链射线相位刚性与有限记录挤压幂等 {#sec-audit-ray-rigidity-and-pinching}
 
 现在我们转向两道在几何与观察者条件化中最具代表性的结构性定理（图 27 中栏与右栏）。
@@ -157,6 +163,10 @@ $$
 完整证明由 Lean 内核检查。
 :::
 
+::: {.figure src="ch27-ray-skeleton"}
+**相位刚性的证明：先压成对角，再沿支撑链传成同一个相位。** 虚线大框是私有引理 `coordinate_shape_of_connected_ray_tests` 的三步，左边三个虚线圈里的前提各喂进一步；框下按 $\iota$ 是否为空分成两支，非空的一支借“$A$ 幺正”得到 $\lvert c\rvert = 1$。两支汇入绿色的 [@prop-audit-ray-phase-rigidity]。
+:::
+
 第二道结构定理来自 `D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.lean:30`，它把[第三章](ch03-projectors-and-duality.md)与[第四章](ch04-decoherence.md)中的“未读测量（吕德斯挤压信道）做两次等于做一次”提升为任意有限结果集 $\kappa$ 上的算子函数复合等式。
 
 在母模块 `D5/S3/Observer/Conditioning.lean` 中，记录测量 `IsRecordMeasurement P` 包含四条公理：`selfAdjoint`（$\forall k, P_k^* = P_k$）、`idempotent`（$\forall k, P_k^2 = P_k$）、`orthogonal`（$\forall k \neq l, P_k P_l = 0$）与 `complete`（$\sum_k P_k = 1$）；未读测量映射定义为
@@ -187,6 +197,10 @@ $$
 $$
 
 完整证明由 Lean 内核检查。
+:::
+
+::: {.figure src="ch27-pinching-skeleton"}
+**挤压幂等的证明是一条直链。** 虚线圈里的正交与幂等两条前提先让左投影吸收整个和式，$P_k \cdot U(\rho) = P_k \rho P_k$；右乘 $P_k$ 再吸收一次，得到逐点幂等；最后用函数外延性推到每个 $\rho$，到达绿色的 [@cor-audit-pinching-idempotent]。图中 $U(\rho)$ 即 $\operatorname{unreadState}(P, \rho)$。
 :::
 
 ## 逐行源码解剖：从 Mathlib 引理到图归纳与矩阵块消去 {#sec-line-by-line-proof-anatomy-i}

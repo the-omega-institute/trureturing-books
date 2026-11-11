@@ -29,7 +29,9 @@ $$
 
 In this chapter we unfold this self-referential closure across four mathematical levels: **the Lean-verified stabilization theorem for contracting updates on finite sets**, **single-step context-relative interpretation fixed points and contextual non-uniqueness**, **the unique positive algebraic fixed point $\varphi = \frac{1+\sqrt{5}}{2}$ of the golden reciprocal map $x = 1 + 1/x$**, and **the classical analytic and number-theoretic background of cosine self-reference $\cos\theta^* = \theta^*$** recorded in the literature remarks [@rem-banach-dottie-hairy-ball-literature] and [@rem-dottie-angle-incommensurable].
 
-![Cosine fixed points and self-referential closure: the Dottie cobweb spiral attractor cos θ* = θ*, finite contracting set stabilization, adjacent-step agreement, contextual non-uniqueness, and the unique golden reciprocal fixed point collapsing into ψ = ψ(ψ)](../assets/fig-24-dottie-spiral-attractor.svg)
+::: {.figure src="ch24-overview"}
+**Figure 24.** The chapter at a glance. Panel I: the cyan cosine curve and the grey diagonal $y = x$, with the cobweb from $0$ winding into $\theta^* \approx 0.739$ (convergence is a literature result, see [@rem-banach-dottie-hairy-ball-literature]). Panel II: the candidate set $\{0, 1, 2\}$ loses one element per step and stops changing at $\{0\}$ ([@thm-finite-contracting-updates-stabilize]). Panel III: the cyan curve $y = 1 + 1/x$ meets the diagonal on the positive half-line only at the green point $\varphi \approx 1.618$ ([@cor-golden-fixed-point-unique]).
+:::
 
 ## 24.1 Discrete Contraction Must Stabilize: The Finite Contracting Update Theorem {#sec-ch24-1}
 
@@ -65,6 +67,10 @@ Combining `hS` and `hU` shows $S(n+1) = U(S(n)) \subseteq S(n)$ for every $n \in
 :::
 
 [@thm-finite-contracting-updates-stabilize] gives a discrete foundation for finite candidate pruning: its update rule reaches $U(S_N)=S_N$ in at most $|S_0|$ steps. The stable set can depend on the initial set and can be empty. For example, $U(A)=A$ makes every set a fixed point, whereas $U(A)=\varnothing$ deletes all candidates; both satisfy the hypothesis. A unique or nonempty self-consistent core therefore requires additional assumptions.
+
+::: {.figure src="ch24-three-stops"}
+**They all stop, but not necessarily at the same place.** All three rows start from $S_0 = \{0, 1, 2\}$ and apply the update once per step to the right until two neighbours agree; the box where a row stops is outlined in cyan, and the small loop says one more step gives it again. Row one is the text's example, 'drop the largest element above $0$', stopping at $\{0\}$; row two, $U(A) = A$, stops at once at $\{0, 1, 2\}$; row three, $U(A) = \varnothing$, stops at the empty set. All three meet the hypotheses of [@thm-finite-contracting-updates-stabilize] and stop within $|S_0| = 3$ steps.
+:::
 
 ## 24.2 Context-Relative Interpretation Fixed Points and Contextual Non-Uniqueness {#sec-ch24-2}
 
@@ -121,6 +127,10 @@ For [`baselineContext`](lean:D5/S3/ConceptDynamics/Interpretation/Interpretation
 
 ::: proof
 Conjuncts 1 and 2 hold by `rfl` on `Unit`; conjuncts 3, 4, and 5 follow from `Bool.false_ne_true`; conjuncts 6 and 7 hold by `rfl` upon unfolding [`IsBinaryFixedMeaning`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.IsBinaryFixedMeaning); and conjunct 8 applies `congrArg Prod.fst` to reduce tuple equality to `false = true`, which contradicts `Bool.false_ne_true`. The full proof is checked by the Lean kernel.
+:::
+
+::: {.figure src="ch24-two-contexts"}
+**Same text, same rule: change three slots and the fixed meaning changes.** The two columns are the five fields of `baselineContext` and `alternateContext`: the text and the interpretation rule are both $()$, joined by dashed lines to show they are equal; the three middle slots are all F on the left and all T on the right. Under the arrows are the fixed meanings $(\mathrm{F}, \mathrm{F}, \mathrm{F}) \neq (\mathrm{T}, \mathrm{T}, \mathrm{T})$ ([@prop-context-parameters-distinct-fixed-points]).
 :::
 
 (Moreover, as shown by [`objective_claim_requires_invariant_common_factor`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor) in the same module, any claim of cross-context objectivity must supply an explicit invariant factor map taking the same value across all contextual fixed meanings — matching our basis-free trace pairing $\Tr(\rho P)$ from [Chapter 2](ch02-born-rule.md)!)
@@ -239,6 +249,10 @@ Every row has exactly one fate, in agreement with claim 1 of [@thm-self-applicat
 
 So $1 + 1/x$ was not picked at random. Among all six nondegenerate fractional maps that can be written with $0$ and $1$, one says nothing, one has nowhere to stop, two stop at rational numbers, and only $1 + 1/x$ and its conjugate $1/(1+x)$ stop where the rationals cannot reach. [@cor-golden-fixed-point-unique] already computed the unique positive fixed point of the former; the corresponding statement for the latter also has a frozen Lean proof.
 
+::: {.figure src="ch24-six-maps"}
+**The six maps and where they meet the diagonal.** Each small plot is one row of the table above: the ink curve is $x \mapsto \frac{ax+b}{cx+d}$, the grey dashed line is $y = x$, and the crossings are the real fixed points. The `empty` curve lies on the diagonal; the `dead` one runs parallel to it; the two `collapse` maps cross it at the cyan rationals $0$ and $\pm 1$; only the two `live` maps cross it at the magenta irrationals $\varphi, -\varphi^{-1}$ and $\varphi^{-1}, -\varphi$ ([@thm-self-application-four-fates]).
+:::
+
 ::: {.lemma #lem-golden-inverse-branch-fixed-point title="The Unique Positive Fixed Point of 1/(1+x) Is the Inverse Golden Ratio" lean="D5/S3/Analytic/Characterizations/GoldenInverseBranchFixedPoint.golden_inverse_branch_positive_fixed_point_iff"}
 For every real number $x$ with $0 < x$,
 
@@ -285,6 +299,10 @@ $$
 $$
 
 When the self-referential operator upgrades from a one-dimensional rational fraction $1 + 1/x$ to the two-dimensional cosine projection $\cos\theta$, how do classical analysis and number theory characterize the existence, uniqueness, and arithmetic status of its real root $\theta^* \approx 0.7390851332\dots$ (the **Dottie number**)?
+
+::: {.figure src="ch24-truncation-crack"}
+**The fixed points of the truncated cosine come ever closer, and every one of them misses.** The horizontal axis is the degree $0, 2, \dots, 10$ of the even Taylor polynomial; each stem is the difference between its fixed point $q$ near $\theta^*$ and $\theta^*$, on a logarithmic scale of the size, cyan upwards for $q > \theta^*$ and magenta downwards for $q < \theta^*$. The difference shrinks from $0.26$ to $3.3 \times 10^{-11}$, alternating in sign, and no stem reaches the centre line. Each $q$ is a root of a polynomial with rational coefficients, hence algebraic; that none equals $\theta^*$ follows from the transcendence in item 2 of the literature note below (literature result, not formalized in this book). The differences are numerical results.
+:::
 
 The following literature note records four classical theorems governing $\cos\theta = \theta$ and continuous self-maps of even-dimensional spheres.
 
@@ -384,6 +402,10 @@ Section 24.7 gives a typed reading of this aphorism: the function $\psi$ acts on
 **Cosine again and again.** Starting from $0$, the cobweb winds in on $\theta^* \approx 0.739$ while the view zooms along. Each step is closer, the error multiplied by about $0.67$, yet no step lands exactly.
 :::
 
+::: {.film src="006-sphere-beyond-spheres"}
+**Spheres beyond spheres: the diagonal escape and the cosine fixed point (2:28).** The film plays the whole chase through: flipping the diagonal of a list gives a string that escapes the list; in the four-address catalog it splits an old fiber, and raised as a new axis at right angles it turns two pieces into three ([@cor-complete-diagonal-topological-settlement]); seen from outside, the closed shadow circle is an open helix. The chase stops only where a list catches its own twisted diagonal, and there the landing value is a fixed point of the twist ([@lem-diagonal-landing-fixed]); with cosine as the twist, the cobweb from $1$ radian closes in on the one positive solution $\theta^* \approx 0.739$ ([@thm-dottie-rational-inverse-endpoint]).
+:::
+
 ## 24.5 Carrying the Loop Through: True Convergence Rate, Derivative Speed-Up, and the Width of the Rational Seam {#sec-ch24-5}
 
 The aphorism is stated; now let us do the arithmetic. The cosine table in [@ex-dottie-and-golden-iterations] lists only four rows, and the contraction constant $\sin 1 \approx 0.8415$ of [@rem-banach-dottie-hairy-ball-literature] is the worst case over the whole interval $[0, 1]$. Three questions are still open:
@@ -391,6 +413,10 @@ The aphorism is stated; now let us do the arithmetic. The cosine table in [@ex-d
 1. Close to $\theta^*$, by how much does one press of the cosine key actually shrink the error?
 2. If the ruler reads not only the projection $\cos\theta$ but also the orthogonal component $\sin\theta$, how much faster does the loop close?
 3. How close to $\cos q = q$ can a ruler with finitely many rational tick marks get?
+
+::: {.figure src="ch24-three-speeds"}
+**The three questions, answered numerically side by side.** Left, by step: the cyan points, repeated cosine, go down one equal notch per step along the dashed line of slope $\lg\lambda$ ($\lambda \approx 0.674$) and pass $10^{-10}$ only at step $55$; the magenta points, Newton's method, reach $10^{-21}$ in four steps. Right, by denominator: seven points are the residuals $\lvert\cos q - q\rvert$ of the convergents of $\theta^*$, all under the dashed bound $(1 + \sin 1)/b^2$, falling but never zero. All are numerical results; the rates and the bound are literature results in the note below, not formalized in this book.
+:::
 
 ::: {.remark #rem-dottie-convergent-residual-literature title="Asymptotic Contraction Rate, Newton's Quadratic Speed-Up, and Continued-Fraction Convergent Residual Bounds for θ* (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.**
@@ -795,6 +821,10 @@ The ratio of successive terms of $A$ tends to $(\theta^*)^2 \approx 0.546$. The 
 
 So two statements hold together without contradiction: analytically, each of $\pi$ and $\theta^*$ is the value of a rational power series at the other ([@thm-dottie-rational-inverse-endpoint], [@ex-dottie-pi-series]); algebraically, under Schanuel's conjecture ([@conj-schanuel-dottie]), no polynomial relation holds between them. $A$ and $B$ are infinite series, not polynomials; the finite truncations listed in the table all leave a nonzero difference. Nonvanishing of general truncation tails, a pattern of coefficient signs, and computational resource bounds are outside the endpoint theorem.
 
+::: {.figure src="ch24-two-series"}
+**$\pi$ and $\theta^*$ are the two coordinates of one point on one curve.** The cyan curve is $A(x) = 2x + 2\arcsin x$. Going up from $\theta^*$ on the horizontal axis and then left reads off $\pi = A(\theta^*)$: the cyan arrows. Going right from $\pi$ on the vertical axis and then down reads back $\theta^* = B(\pi)$: the dashed magenta arrows. The absolute convergence and sum of $B$ at $\pi$ are [@thm-dottie-rational-inverse-endpoint]; the arcsine expansion behind $\pi = A(\theta^*)$ is in [@rem-arcsin-series-derivation] (literature result, not formalized in this book).
+:::
+
 **Where the fixed point lives: the half-time of a cycloid.** How the auxiliary equation $\eta + \sin\eta = \pi/2$ appears in Kepler's equation and Newtonian radial free fall is worked out in [@ex-dottie-free-fall].
 
 ::: {.example #ex-dottie-free-fall title="Half-Time Free Fall: When Half the Fall Time Has Elapsed, the Distance Remaining Is (1 + sin θ*)/2"}
@@ -825,6 +855,10 @@ The same parametric equations describe the closed dust Friedmann universe, with 
 Half the time is spent, yet less than one sixth of the distance is covered: the fall starts slowly, and most of the distance is travelled in the second half. And "half", the plainest of all division points, lands at a position given exactly by $\theta^*$. The cosine fixed point does not live only on the cosine key of a calculator; every process governed by the cycloid law — a radial Kepler orbit, free-fall collapse, a closed dust universe — reads it at the instant when half of its time has elapsed.
 :::
 
+
+::: {.figure src="ch24-half-fall"}
+**Half the time gone, less than a sixth of the way fallen.** The ink curve is the cycloid solution of radial free fall: $t/t_{\mathrm{ff}}$ across, $r/r_0$ up. Three points mark $\frac14, \frac12, \frac34$ of the time, at heights $0.961$, $0.837$ and $0.597$; the cyan half-time point sits at $\frac{1 + \sin\theta^*}{2}$, and the bracket on the right is the $0.163$ fallen by then. Computed from the formulas of the example above; the free-fall model itself is a literature result, not formalized in this book.
+:::
 
 ## 24.7 Where the Chase Stops: A Diagonal Landing Is a Fixed Point, and Existence Without Contraction {#sec-ch24-7}
 
@@ -919,6 +953,10 @@ whose diagonal is $(g\ 0\ 0,\ g\ 1\ 1,\ g\ 2\ 2) = (0, 2, 2)$.
 **A twist without fixed points.** Take the cycle $f_2 : 0 \mapsto 1,\ 1 \mapsto 2,\ 2 \mapsto 0$. The twisted diagonal is $(f_2(0), f_2(2), f_2(2)) = (1, 0, 0)$, which differs from $g\ 0$, $g\ 1$, $g\ 2$ at positions $0, 1, 2$ respectively and is therefore not a row: the listing is escaped, in agreement with claim 3 of [@thm-self-application-fragment-package].
 
 **Counting.** For $\lvert A\rvert = \lvert Y\rvert = 3$ there are $3^9 = 19683$ listings in total. By [@prop-escaped-listing-card]: for $f_2$ (no fixed point) the escaped ones number $(27 - 0)^3 = 19683$, that is, all of them; for $f_1$ (one fixed point) $(27 - 1)^3 = 17576$ are escaped and $19683 - 17576 = 2107$ are captured, about $10.7\%$; for the identity (three fixed points) $(27 - 3)^3 = 13824$ are escaped. All three numbers were confirmed by exhaustive enumeration of the $19683$ listings.
+:::
+
+::: {.figure src="ch24-diagonal-landing"}
+**One table, two twists: one lands back in the table, the other escapes it.** Both panels show the listing $g$ of the example above, with the three diagonal cells outlined and the twisted diagonal underneath. Left, with $f_1$: the twisted diagonal $(1, 2, 2)$ is exactly row $1$ (cyan), and the circled value $2$ at the landing spot is the fixed point of $f_1$ ([@lem-diagonal-landing-fixed]). Right, with the fixed-point-free cycle $f_2$: the twisted diagonal $(1, 0, 0)$, in magenta, differs from every row at that row's diagonal cell (crossed), so it is no row at all (claim 3 of [@thm-self-application-fragment-package]).
 :::
 
 The diagonal mechanism shows that the place where the chase stops must be a fixed point, but it does not guarantee that the twist has one. Where does existence come from? Section 24.4 used contraction. There is an entirely different route that needs no contraction constant at all, only continuity and a stage without holes.

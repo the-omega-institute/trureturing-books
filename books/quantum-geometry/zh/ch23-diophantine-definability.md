@@ -12,7 +12,9 @@
 
 本章将沿着“范数球面与迹投影如何锁住离散整格”这一主线，首先在 Lean 4 中严格建立两条最核心的二次代数整数范数锁——判别式恒为 $\Delta = -3$ 的**艾森斯坦（Eisenstein / Löschian）六角交越范数型**与判别式为 $\Delta = +5$ 的**黄金整数佩尔（Pell）迹—范数恒等式**；随后在第三层认识论边界审计框（[@rem-diophantine-z-in-q-literature]）中，剖析有理数域中一阶定义整数集的文献脉络、量词前缀（$\forall$、$\forall\exists$ 与存在性丢番图 $\exists$）的本质分野，以及它与希尔伯特第十问题 $\mathrm{H10}(\mathbb{Q})$ 的关联。
 
-![有理数中的整数骨架与范数锁：艾森斯坦交越二次型剪切不变性（Δ = -3）、黄金整数佩尔双曲线迹—范数桥（Δ = +5）与四元数范数在 ℚ 中定义 ℤ 的文献全景](../assets/fig-23-quaternion-norm-lattice.svg)
+::: {.figure src="ch23-overview"}
+**图 23。** 本章地图：第 I 栏，艾森斯坦六角格上青色的范数 $7$ 圆穿过 $12$ 个格点，$t = -1$ 与 $t = 2$ 两块品红的格子一正一斜、面积相同（§23.1–§23.2）；第 II 栏，黄金单位 $\varphi^n$ 交替落在 $g\bar{g} = +1$ 与 $-1$ 两支品红双曲线上，点旁是 $(L_n, F_n)$（§23.2）；第 III 栏，按分母排开的有理数里，分母为 $1$ 的青色一行就是 $\mathbb{Z}$，紫色标签是用全称量词定义 $\mathbb{Z}$ 的文献结果，红色标签是“只用存在量词能否定义”这一开放问题（§23.3）。
+:::
 
 ## 23.1 为什么连续有理数里藏着离散晶格：二次范数与迹投影 {#sec-ch23-1}
 
@@ -24,6 +26,10 @@
 2. **范数（Norm）** $\operatorname{N}(g) = g\bar{g}$：元素与其共轭相乘所得的二次模长（对应行列式与旋转器的单位模长锁）。
 
 这两把尺子一旦联手，立刻织成一张刚性的丢番图筛网：当范数 $\operatorname{N}(g)$ 被固定在离散整数值（如单位圆/双曲线 $\operatorname{N}(g) = \pm 1$）时，迹投影 $\operatorname{Tr}(g)$ 便被强行量子化在一族离散的代数整数格点上！
+
+::: {.figure src="ch23-trace-norm"}
+**范数钉住，迹就只剩几个整数。** 以艾森斯坦整数为例：两个青色的圆是范数 $\operatorname{N} = 1$ 与 $\operatorname{N} = 3$，各穿过 $6$ 个格点；从每个格点向下引虚线，落到下面的迹尺 $\operatorname{Tr} = g + \bar{g} = 2\operatorname{Re} g$ 上，$\operatorname{N} = 1$ 的点只落在 $-2, -1, 1, 2$，$\operatorname{N} = 3$ 的点只落在 $-3, 0, 3$。
+:::
 
 让我们先考察复平面上最对称的二维晶格——由三次本原单位根 $\omega = e^{2\pi i/3} = \frac{-1 + i\sqrt{3}}{2}$（满足 $\omega^2 + \omega + 1 = 0$，即 $120^\circ$ 与 $60^\circ$ 六角对称）生成的**艾森斯坦整数环** $\mathbb{Z}[\omega]$。
 
@@ -234,6 +240,10 @@ $$
 \operatorname{Trd}(\alpha) = \alpha + \bar{\alpha} = 2x_0, \qquad
 \operatorname{Nrd}(\alpha) = \alpha\bar{\alpha} = x_0^2 - a x_1^2 - b x_2^2 + ab x_3^2.
 $$
+
+::: {.figure src="ch23-quaternion-norm"}
+**四维里还是同一把锁。** 取 $a = b = -1$（哈密顿四元数），$\operatorname{Nrd}(\alpha) = x_0^2 + x_1^2 + x_2^2 + x_3^2$。横轴是标量部 $x_0$（迹的一半），纵轴是向量部长度 $\lvert v\rvert$；四个青色半圆是 $\operatorname{Nrd} = 1, 2, 3, 4$，点旁的数是落在该点的整四元数个数，四个半圆上分别共 $8, 24, 32, 24$ 个（穷举计数）。半圆之间没有点，迹 $\operatorname{Trd} = 2x_0$ 只取 $-4$ 到 $4$ 的偶数。
+:::
 
 四元数范数 $\operatorname{Nrd}(\alpha)$ 如何在 $\mathbb{Q}$ 上完成局部—整体锁定，以及“存在性丢番图（$\exists$）”与“一阶可定义（$\forall$ 或 $\forall\exists$）”之间的量词边界，全部汇总于下面的文献边界审计框中（[@rem-diophantine-z-in-q-literature]）。
 

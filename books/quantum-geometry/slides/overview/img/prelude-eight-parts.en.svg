@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="prelude-eight-parts" data-lang="en" viewBox="0 0 480 300" width="480" height="300" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="Eight bars form a staircase rising to the upper right. The lowest is Part I (point → line, chapters 1–4); above it come Part II (line → plane, 5–8), Part III (plane → sphere, 9–12), Part IV (entangled spheres, 13–16), Part V (spacetime sphere, 17–20), Part VI (beyond the sphere, 21–24), Part VII (construction, 25–28), and at the top Part VIII (synthesis, 29–30), only two chapters long. Each bar carries its chapter range, with the part&#x27;s name on the left.">
+<title>Eight bars form a staircase rising to the upper right. The lowest is Part I (point → line, chapters 1–4); above it come Part II (line → plane, 5–8), Part III (plane → sphere, 9–12), Part IV (entangled spheres, 13–16), Part V (spacetime sphere, 17–20), Part VI (beyond the sphere, 21–24), Part VII (construction, 25–28), and at the top Part VIII (synthesis, 29–30), only two chapters long. Each bar carries its chapter range, with the part&#x27;s name on the left.</title>
+<style>.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}</style>
+<rect x="166" y="243" width="39.2" height="24" rx="3" class="ts-cyan tf-cyan" stroke-width="1.3" fill-opacity="0.16"/>
+<text class="tf-cyan" x="185.6" y="259.32" font-size="12" text-anchor="middle">1–4</text>
+<line x1="4" y1="270" x2="166" y2="270" class="ts-faint" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+<text class="tf-ink" x="4" y="259.68" font-size="13">I  point → line</text>
+<rect x="205.2" y="213" width="39.2" height="24" rx="3" class="ts-cyan tf-cyan" stroke-width="1.3" fill-opacity="0.16"/>
+<text class="tf-cyan" x="224.8" y="229.32" font-size="12" text-anchor="middle">5–8</text>
+<line x1="4" y1="240" x2="205.2" y2="240" class="ts-faint" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+<text class="tf-ink" x="4" y="229.68" font-size="13">II  line → plane</text>
+<rect x="244.4" y="183" width="39.2" height="24" rx="3" class="ts-cyan tf-cyan" stroke-width="1.3" fill-opacity="0.16"/>
+<text class="tf-cyan" x="264" y="199.32" font-size="12" text-anchor="middle">9–12</text>
+<line x1="4" y1="210" x2="244.4" y2="210" class="ts-faint" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+<text class="tf-ink" x="4" y="199.68" font-size="13">III  plane → sphere</text>
+<rect x="283.6" y="153" width="39.2" height="24" rx="3" class="ts-cyan tf-cyan" stroke-width="1.3" fill-opacity="0.16"/>
+<text class="tf-cyan" x="303.2" y="169.32" font-size="12" text-anchor="middle">13–16</text>
+<line x1="4" y1="180" x2="283.6" y2="180" class="ts-faint" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+<text class="tf-ink" x="4" y="169.68" font-size="13">IV  entangled spheres</text>
+<rect x="322.8" y="123" width="39.2" height="24" rx="3" class="ts-cyan tf-cyan" stroke-width="1.3" fill-opacity="0.16"/>
+<text class="tf-cyan" x="342.4" y="139.32" font-size="12" text-anchor="middle">17–20</text>
+<line x1="4" y1="150" x2="322.8" y2="150" class="ts-faint" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+<text class="tf-ink" x="4" y="139.68" font-size="13">V  spacetime sphere</text>
+<rect x="362" y="93" width="39.2" height="24" rx="3" class="ts-cyan tf-cyan" stroke-width="1.3" fill-opacity="0.16"/>
+<text class="tf-cyan" x="381.6" y="109.32" font-size="12" text-anchor="middle">21–24</text>
+<line x1="4" y1="120" x2="362" y2="120" class="ts-faint" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+<text class="tf-ink" x="4" y="109.68" font-size="13">VI  beyond the sphere</text>
+<rect x="401.2" y="63" width="39.2" height="24" rx="3" class="ts-cyan tf-cyan" stroke-width="1.3" fill-opacity="0.16"/>
+<text class="tf-cyan" x="420.8" y="79.32" font-size="12" text-anchor="middle">25–28</text>
+<line x1="4" y1="90" x2="401.2" y2="90" class="ts-faint" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+<text class="tf-ink" x="4" y="79.68" font-size="13">VII  construction</text>
+<rect x="440.4" y="33" width="19.6" height="24" rx="3" class="ts-cyan tf-cyan" stroke-width="1.3" fill-opacity="0.16"/>
+<text class="tf-cyan ts-bg" x="434.4" y="49.32" font-size="12" text-anchor="end" stroke-width="3.36" stroke-linejoin="round" paint-order="stroke">29–30</text>
+<line x1="4" y1="60" x2="440.4" y2="60" class="ts-faint" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+<text class="tf-ink" x="4" y="49.68" font-size="13">VIII  synthesis</text>
+<line x1="166" y1="270" x2="460" y2="270" class="ts-dim" stroke-width="1.3" fill="none"/>
+<text class="tf-dim" x="313" y="290" font-size="13" text-anchor="middle">chapters 1 to 30</text>
+</svg>

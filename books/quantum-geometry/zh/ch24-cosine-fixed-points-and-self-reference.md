@@ -29,7 +29,9 @@ $$
 
 在本章中，我们将用严密的数学与 Lean 4 形式化定理，把这幅自指画卷拆解为四个相互辉映的层次：**有限状态空间上的单调收缩稳定化定理**、**相邻步解释语境相对不动点与语境非唯一性定理**、**正实数上黄金连分数自指映射 $x = 1 + 1/x$ 的唯一代数不动点定理**，以及收录在文献注记 [@rem-banach-dottie-hairy-ball-literature] 与 [@rem-dottie-angle-incommensurable] 中的**Dottie 余弦自指 $\cos\theta^* = \theta^*$ 的经典分析与超越数论背景**。
 
-![余弦不动点与自指闭环：Dottie 蛛网螺旋吸引子 cos θ* = θ*、有限集合单调收缩稳定化、相邻步贴合及语境非唯一性，以及黄金倒数唯一不动点与 ψ = ψ(ψ)](../assets/fig-24-dottie-spiral-attractor.svg)
+::: {.figure src="ch24-overview"}
+**图 24。** 本章地图：第 I 栏，青色的余弦曲线与灰色对角线 $y = x$，从 $0$ 出发的蛛网一圈圈绕向 $\theta^* \approx 0.739$（收敛是文献结果，见 [@rem-banach-dottie-hairy-ball-literature]）；第 II 栏，候选集 $\{0, 1, 2\}$ 每步删去一个元素，到 $\{0\}$ 后不再变（[@thm-finite-contracting-updates-stabilize]）；第 III 栏，青色的 $y = 1 + 1/x$ 与对角线在正半轴上只交于绿色的 $\varphi \approx 1.618$（[@cor-golden-fixed-point-unique]）。
+:::
 
 ## 24.1 离散收缩的必然收束：有限收缩更新稳定化定理 {#sec-ch24-1}
 
@@ -65,6 +67,10 @@ $$
 :::
 
 [@thm-finite-contracting-updates-stabilize] 为有限候选筛除提供了离散基石：在它的更新律下，至多 $|S_0|$ 步后便有 $U(S_N)=S_N$。这个稳定集可以依赖初始集，也可以为空。例如 $U(A)=A$ 使每个集合都是不动点，$U(A)=\varnothing$ 则将全部候选删空；二者都满足前提。因此，唯一性或非空“自洽内核”都需要额外条件，不能从筛除稳定化推出。
+
+::: {.figure src="ch24-three-stops"}
+**都会停下，停在哪里却不一定。** 三行都从 $S_0 = \{0, 1, 2\}$ 出发，每向右一格作用一次更新，直到相邻两格相同；停下的那一格用青色框出，旁边的小圈箭头表示再作用一次还是它。第一行是正文例子“删去大于 $0$ 的最大元”，停在 $\{0\}$；第二行 $U(A) = A$ 一开始就停在 $\{0, 1, 2\}$；第三行 $U(A) = \varnothing$ 停在空集。三行都满足 [@thm-finite-contracting-updates-stabilize] 的前提，都在 $|S_0| = 3$ 步之内停下。
+:::
 
 ## 24.2 语境相对解释不动点与语境非唯一性 {#sec-ch24-2}
 
@@ -123,6 +129,10 @@ $$
 
 ::: proof
 前两项等式在单位类型 `Unit` 上由自反律 `rfl` 直接成立；第 3、4、5 项不等式由布尔判别定理 `Bool.false_ne_true` 给出；第 6、7 项展开 [`IsBinaryFixedMeaning`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.IsBinaryFixedMeaning) 后由 `rfl` 核验；第 8 项对乘积三元组的第一投影 `Prod.fst` 应用 `congrArg` 归约为 `false = true`，再由 `Bool.false_ne_true` 导出矛盾。完整证明由 Lean 内核检查。
+:::
+
+::: {.figure src="ch24-two-contexts"}
+**同一文本、同一规则，只换三格，固定意义就换了。** 两列是 `baselineContext` 与 `alternateContext` 的五个字段：文本与解释规则都是 $()$，虚线连着表示相同；中间三格左列全是 F、右列全是 T。箭头下方是各自的固定意义 $(\mathrm{F}, \mathrm{F}, \mathrm{F}) \neq (\mathrm{T}, \mathrm{T}, \mathrm{T})$（[@prop-context-parameters-distinct-fixed-points]）。
 :::
 
 （顺带指出，在同一模块中，定理 [`objective_claim_requires_invariant_common_factor`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor) 进一步指出：若要在不同语境的相对不动点之上声称某种跨语境的“客观不变量”，就必须显式提供一把在所有语境不动点上取值恒等的公共不变量投影函数 `factor`——正如我们在[第二章](ch02-born-rule.md)用基无关的迹配对 $\Tr(\rho P)$ 统一不同正交基下的坐标读数！）
@@ -241,6 +251,10 @@ $$
 
 所以 $1 + 1/x$ 不是随手挑的。在用 $0$ 和 $1$ 能写出的全部六个非退化分式映射里，一个什么都没说，一个无处可停，两个停在有理数上，只有 $1 + 1/x$ 和它的共轭 $1/(1+x)$ 停在有理数够不到的地方。[@cor-golden-fixed-point-unique] 已经算出前者在正实数上的唯一不动点；后者的对应结论同样有冻结的 Lean 证明。
 
+::: {.figure src="ch24-six-maps"}
+**六个映射与对角线的交点。** 每个小图是上表的一行：墨色曲线是 $x \mapsto \frac{ax+b}{cx+d}$，灰色虚线是 $y = x$，交点就是实不动点。`empty` 的曲线与对角线重合；`dead` 与它平行；两个 `collapse` 交在青色的有理点 $0$ 与 $\pm 1$；只有两个 `live` 交在品红的无理点 $\varphi, -\varphi^{-1}$ 与 $\varphi^{-1}, -\varphi$（[@thm-self-application-four-fates]）。
+:::
+
 ::: {.lemma #lem-golden-inverse-branch-fixed-point title="映射 1/(1+x) 在正实数上的唯一不动点是黄金比的倒数" lean="D5/S3/Analytic/Characterizations/GoldenInverseBranchFixedPoint.golden_inverse_branch_positive_fixed_point_iff"}
 对任意实数 $x$，若 $0 < x$，则
 
@@ -287,6 +301,10 @@ $$
 $$
 
 放在一起对比！当自指算子从一维有理分式 $1 + 1/x$ 升级为二维旋转投影 $\cos\theta$ 时，实不动点 $\theta^* \approx 0.7390851332\dots$（**Dottie 数**）在经典分析与数论中具有怎样的存在唯一性与算术地位？
+
+::: {.figure src="ch24-truncation-crack"}
+**截断余弦的不动点越来越近，却每一个都差一点。** 横轴是偶次泰勒多项式的次数 $0, 2, \dots, 10$；竖线是它在 $\theta^*$ 附近的不动点 $q$ 与 $\theta^*$ 的差，纵轴按绝对值取对数刻度，青色朝上表示 $q > \theta^*$，品红朝下表示 $q < \theta^*$。差从 $0.26$ 缩到 $3.3 \times 10^{-11}$，符号交替，没有一根落到中线上。这些 $q$ 都是有理系数多项式的根，因而是代数数；它们永远不等于 $\theta^*$ 来自下面文献注记第 2 条的超越性（文献结果，未在本书形式化），图中的差是数值结果。
+:::
 
 下面的文献说明集中记录围绕 $\cos\theta = \theta$ 与偶维球面连续自映射的四项经典定理。
 
@@ -386,6 +404,10 @@ $$
 **反复取余弦。** 从 $0$ 出发，蛛网一圈圈绕向 $\theta^* \approx 0.739$，画面跟着放大。每一步都更近，误差大约乘以 $0.67$，却没有哪一步恰好到达。
 :::
 
+::: {.film src="006-sphere-beyond-spheres"}
+**球外之球：对角线逃逸与余弦不动点（2:28）。** 视频把整条追逐演一遍：翻转清单的对角线，翻出的串逃出清单；在四地址目录里它劈开旧纤维，立成垂直的新轴后两块变成三块（[@cor-complete-diagonal-topological-settlement]），从外面看，闭合的影子圆是一条开口螺旋。追逐只在清单捕获自己扭过的对角线时停下，落点上的值是扭转的不动点（[@lem-diagonal-landing-fixed]）；取余弦作扭转，蛛网从 $1$ 弧度收向唯一的正解 $\theta^* \approx 0.739$（[@thm-dottie-rational-inverse-endpoint]）。
+:::
+
 ## 24.5 把闭环算到底：真实收敛率、导数加速与有理读数的裂缝宽度 {#sec-ch24-5}
 
 格言说完了，现在把账算清。[@ex-dottie-and-golden-iterations] 的余弦表只列了四行，[@rem-banach-dottie-hairy-ball-literature] 给出的压缩常数 $\sin 1 \approx 0.8415$ 则是整个区间 $[0, 1]$ 上最坏的一处。三个问题还悬着：
@@ -393,6 +415,10 @@ $$
 1. 靠近 $\theta^*$ 之后，每按一次余弦键，误差到底缩小多少？
 2. 如果尺子不只读投影 $\cos\theta$，还同时读正交分量 $\sin\theta$，闭合能快多少？
 3. 一把只有有限分母刻度的尺子，读数离 $\cos q = q$ 最近能到多近？
+
+::: {.figure src="ch24-three-speeds"}
+**三个问题的数值答案，并排看。** 左栏按步数：青色的点是反复取余弦，沿斜率 $\lg\lambda$（$\lambda \approx 0.674$）的虚线每步下降同样一小格，第 $55$ 步才过 $10^{-10}$；品红的点是牛顿迭代，四步落到 $10^{-21}$。右栏按分母：七个点是 $\theta^*$ 的渐近分数的残差 $\lvert\cos q - q\rvert$，都在虚线 $(1 + \sin 1)/b^2$ 之下，下降却不归零。全部是数值结果；速率与界是下面注记中的文献结果，未在本书形式化。
+:::
 
 ::: {.remark #rem-dottie-convergent-residual-literature title="θ* 的渐近压缩率、牛顿二次加速与连分数渐近分数残差双边界（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。**
@@ -797,6 +823,10 @@ $A$ 的相邻项之比趋于 $(\theta^*)^2 \approx 0.546$。$B$ 的相邻非零�
 
 所以两句话同时成立，并不矛盾：解析上，$\pi$ 与 $\theta^*$ 互为对方的有理系数幂级数的值（[@thm-dottie-rational-inverse-endpoint]、[@ex-dottie-pi-series]）；代数上，在沙努埃尔猜想（[@conj-schanuel-dottie]）之下，二者之间没有任何多项式关系。$A$ 与 $B$ 是无穷级数，不是多项式；上表列出的有限截断都留下非零的差。一般截断余项的非零性、系数符号规律及计算资源界均不包含在端点定理中。
 
+::: {.figure src="ch24-two-series"}
+**$\pi$ 与 $\theta^*$ 是同一条曲线上同一个点的两个坐标。** 青色曲线是 $A(x) = 2x + 2\arcsin x$；从横轴上的 $\theta^*$ 竖直往上、再向左，读出 $\pi = A(\theta^*)$，这是青色箭头；从纵轴上的 $\pi$ 向右、再竖直往下，读回 $\theta^* = B(\pi)$，这是品红虚线箭头。$B$ 在 $\pi$ 处的绝对收敛与和见 [@thm-dottie-rational-inverse-endpoint]；$\pi = A(\theta^*)$ 用到的反正弦展开见 [@rem-arcsin-series-derivation]（文献结果，未在本书形式化）。
+:::
+
 **不动点住在哪里：摆线的半程。** 辅助方程 $\eta + \sin\eta = \pi/2$ 在天体力学开普勒方程与径向自由落体中的物理化身汇总于下例（[@ex-dottie-free-fall]）。
 
 ::: {.example #ex-dottie-free-fall title="半程落体：下落时间过半时，离中心的距离还剩 (1 + sin θ*)/2"}
@@ -827,6 +857,10 @@ $$
 时间用掉一半，路程只走了不到六分之一：下落开始得很慢，绝大部分距离是在后半程走完的。而“一半”这个最朴素的分割点，落在的位置恰好由 $\theta^*$ 给出。余弦不动点不只住在计算器的余弦键上；凡是服从摆线律的过程——径向开普勒轨道、自由落体塌缩、闭合尘埃宇宙——在时间过半的那一刻，都在读它。
 :::
 
+
+::: {.figure src="ch24-half-fall"}
+**时间过半，只落了不到六分之一。** 墨色曲线是径向自由落体的摆线解：横轴是 $t/t_{\mathrm{ff}}$，纵轴是 $r/r_0$。三个点标在 $\frac14, \frac12, \frac34$ 处，高度 $0.961$、$0.837$、$0.597$；青色的半程点高 $\frac{1 + \sin\theta^*}{2}$，右边的括号是这时落下的 $0.163$。按上例的公式实算；落体模型本身是文献结果，未在本书形式化。
+:::
 
 ## 24.7 追逐在哪里停下：对角线落点即不动点，以及不靠压缩的存在性 {#sec-ch24-7}
 
@@ -921,6 +955,10 @@ $$
 **无不动点的扭转。** 取循环 $f_2 : 0 \mapsto 1,\ 1 \mapsto 2,\ 2 \mapsto 0$。扭转对角线为 $(f_2(0), f_2(2), f_2(2)) = (1, 0, 0)$，它在位置 $0, 1, 2$ 上分别不同于 $g\ 0$、$g\ 1$、$g\ 2$，不是任何一行：列表被逃逸，与 [@thm-self-application-fragment-package] 的结论 3 一致。
 
 **计数。** $\lvert A\rvert = \lvert Y\rvert = 3$ 时共有 $3^9 = 19683$ 张列表。按 [@prop-escaped-listing-card]：对 $f_2$（无不动点），被逃逸的有 $(27 - 0)^3 = 19683$ 张，即全部；对 $f_1$（一个不动点），被逃逸的有 $(27 - 1)^3 = 17576$ 张，被捕获的有 $19683 - 17576 = 2107$ 张，约占 $10.7\%$；对恒等映射（三个不动点），被逃逸的有 $(27 - 3)^3 = 13824$ 张。三个数都已由穷举全部 $19683$ 张列表核对。
+:::
+
+::: {.figure src="ch24-diagonal-landing"}
+**同一张表，两种扭转：一个落回表里，一个逃出表外。** 两栏都是上例的列表 $g$，对角线三格加了粗框，表下是扭过的对角线。左栏用 $f_1$：扭过的对角线 $(1, 2, 2)$ 与第 $1$ 行一模一样（青色），落点圈出的值 $2$ 正是 $f_1$ 的不动点（[@lem-diagonal-landing-fixed]）。右栏用无不动点的循环 $f_2$：扭过的对角线 $(1, 0, 0)$ 是品红的，每一行都在自己的对角线格上与它不同（打叉），它不是任何一行（[@thm-self-application-fragment-package] 结论 3）。
 :::
 
 对角线机制说明了停下的地方必是不动点，却不保证扭转有不动点。存在性从哪里来？§24.4 用的是压缩性。还有一条完全不同的路，不需要任何压缩常数，只需要连续性和一个没有洞的舞台。

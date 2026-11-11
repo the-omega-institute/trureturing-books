@@ -51,7 +51,7 @@ $$
 
 Furthermore, the classical correspondence between closed-loop geometric holonomy on $S^2$ and three-vertex complex overlap invariants is recorded below ([@rem-berry-pancharatnam-holonomy-literature]).
 
-::: {.remark #rem-berry-pancharatnam-holonomy-literature title="Octant Berry Geometric Phase and Cyclic Bargmann Invariant (Literature Result, Not Formalized in This Book)"}
+::: {.remark #rem-berry-pancharatnam-holonomy-literature title="Octant Berry Geometric Phase and the Solid-Angle Reading of the Bargmann Argument (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** If a qubit state traverses the closed octant geodesic triangle $N(\vv{e}_3) \to +X(\vv{e}_1) \to +Y(\vv{e}_2) \to N(\vv{e}_3)$ enclosing oriented solid angle $\Omega = \frac{\pi}{2}$ (one-eighth of the $4\pi$ sphere), the real direction $\vv{r}$ returns to $N$, yet under the standard spin-up eigenline convention its transported spinor acquires **Berry's geometric phase** (Berry, 1984; Simon, 1983) equal to minus one-half of the oriented solid angle:
 
 $$
@@ -65,10 +65,79 @@ $$
 $$
 
 is invariant under independent vertex phase rephasings $\psi_k \mapsto e^{i\alpha_k}\psi_k$, and its complex phase encodes the solid angle directly via $\gamma_B \equiv -\arg\Delta = -\frac{\Omega}{2} \pmod{2\pi}$ (see [@rem-gram-hairy-ball-literature] at the end of the chapter for full differential-topological details).
+
+$\Delta$ itself, however, is no longer a literature result: its Bloch form and its value $\frac{1+i}{4}$ on the octant loop are [@thm-qubit-bargmann-bloch] below. What remains literature is the link between the argument and the solid angle and Berry phase.
 :::
 
 ::: {.viz src="berry-loop" preset="octant" height="500"}
-**An eighth of the sphere.** The cyan loop $N \to +X \to +Y \to N$ encloses a magenta area $\Omega = \frac{\pi}{2}$. Carried once round, the amber arrow comes back to $N$ turned by $\frac{\pi}{2}$ from the dashed direction it set out in; the cyan needle at the lower right is the phase $\frac{\pi}{4}$ of the product of neighbouring inner products, $\Delta = \frac{1+i}{4}$ — exactly half the area. The general link between turn, phase and area is the literature result above, not formalized in this book.
+**An eighth of the sphere.** The cyan loop $N \to +X \to +Y \to N$ encloses a magenta area $\Omega = \frac{\pi}{2}$. Carried once round, the amber arrow comes back to $N$ turned by $\frac{\pi}{2}$ from the dashed direction it set out in; the cyan needle at the lower right is the phase $\frac{\pi}{4}$ of the product of neighbouring inner products, $\Delta = \frac{1+i}{4}$ — exactly half the area. The general link between turn, phase and area is the literature result above, not formalized in this book; the value of $\Delta$ itself is [@thm-qubit-bargmann-bloch] below.
+:::
+
+**Where the modulus and the argument come from.** By [@thm-rank-one-chain-trace] of Chapter 3, the three-point Bargmann product is the trace of the three projectors multiplied in order: $\Delta = \langle\psi_0, \psi_1\rangle\langle\psi_1, \psi_2\rangle\langle\psi_2, \psi_0\rangle = \Tr(P_0 P_1 P_2)$, with $P_k = \lvert\psi_k\rangle\langle\psi_k\rvert$. On a qubit every projector is $P = \frac{1}{2}(I + \vv{r}\cdot\vv{\sigma})$, so this trace can be read off entirely from the three Bloch vectors.
+
+::: {.theorem #thm-qubit-bargmann-bloch title="The Qubit Three-Point Bargmann Trace: a Scalar Part plus an Oriented Volume" lean="D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.explicit_qubit_orientation"}
+For $\vv{r} = (r_x, r_y, r_z) \in \mathbb{R}^3$ let
+
+$$
+P(\vv{r}) = \frac{1}{2}\begin{pmatrix} 1 + r_z & r_x - i\,r_y \\ r_x + i\,r_y & 1 - r_z \end{pmatrix} = \frac{1}{2}\bigl(I + \vv{r}\cdot\vv{\sigma}\bigr).
+$$
+
+1. For all $\vv{a}, \vv{b}, \vv{c} \in \mathbb{R}^3$,
+
+   $$
+   \Tr\bigl(P(\vv{a})\,P(\vv{b})\,P(\vv{c})\bigr) = \frac{1 + \vv{a}\cdot\vv{b} + \vv{b}\cdot\vv{c} + \vv{c}\cdot\vv{a}}{4} + i\,\frac{\vv{a}\cdot(\vv{b}\times\vv{c})}{4}.
+   $$
+
+2. In particular, $\Tr\bigl(P(\vv{e}_3)\,P(\vv{e}_1)\,P(\vv{e}_2)\bigr) = \frac{1+i}{4}$ and $\Tr\bigl(P(\vv{e}_3)\,P(\vv{e}_1)\,P(-\vv{e}_2)\bigr) = \frac{1-i}{4}$.
+
+Claim 1 does not require $\vv{a}, \vv{b}, \vv{c}$ to be unit vectors; $P(\vv{r})$ is a projector only for a unit vector $\vv{r}$.
+:::
+
+::: proof
+Lean multiplies the three $2\times 2$ matrices entry by entry, takes the trace, and collects terms using $i^2 = -1$. The same computation is written compactly with the Pauli multiplication table $\sigma_j\sigma_k = \delta_{jk}I + i\sum_l \varepsilon_{jkl}\sigma_l$ (a manual derivation):
+
+$$
+\begin{aligned}
+(I + \vv{a}\cdot\vv{\sigma})(I + \vv{b}\cdot\vv{\sigma}) &= (1 + \vv{a}\cdot\vv{b})\,I + \bigl(\vv{a} + \vv{b} + i\,\vv{a}\times\vv{b}\bigr)\cdot\vv{\sigma}, \\
+\Tr\bigl[(I + \vv{a}\cdot\vv{\sigma})(I + \vv{b}\cdot\vv{\sigma})(I + \vv{c}\cdot\vv{\sigma})\bigr] &= 2\bigl[1 + \vv{a}\cdot\vv{b} + (\vv{a} + \vv{b})\cdot\vv{c} + i\,(\vv{a}\times\vv{b})\cdot\vv{c}\bigr],
+\end{aligned}
+$$
+
+where the second line uses $\Tr I = 2$, $\Tr\sigma_k = 0$ and $\Tr(\sigma_j\sigma_k) = 2\delta_{jk}$. Multiplying by $\frac{1}{8}$ and using $(\vv{a}\times\vv{b})\cdot\vv{c} = \vv{a}\cdot(\vv{b}\times\vv{c})$ gives Claim 1. Claim 2 is Claim 1 at $\vv{e}_3, \vv{e}_1, \pm\vv{e}_2$: all three pairwise dot products vanish and the triple product is $\pm 1$. The full proof is checked by the Lean kernel.
+:::
+
+**The modulus remembers the three sides; the argument remembers the volume.** The squared modulus of an overlap is the Born weight $\lvert\langle\psi_j, \psi_k\rangle\rvert^2 = \frac{1 + \vv{r}_j\cdot\vv{r}_k}{2}$ (the half-angle formula of [@ex-bloch-half-angle] in Chapter 2), so with $p = \vv{a}\cdot\vv{b}$, $q = \vv{b}\cdot\vv{c}$ and $s = \vv{c}\cdot\vv{a}$ we get $\lvert\Delta\rvert^2 = \frac{(1+p)(1+q)(1+s)}{8}$. [@thm-qubit-bargmann-bloch] gives the same modulus: for unit vectors the square of the triple product is the Gram determinant $1 + 2pqs - p^2 - q^2 - s^2$, and substituting it gives
+
+$$
+(1 + p + q + s)^2 + \bigl(\vv{a}\cdot(\vv{b}\times\vv{c})\bigr)^2 = 2\,(1+p)(1+q)(1+s)
+$$
+
+(a manual derivation; expand both sides to check). So the modulus of $\Delta$ remembers only the compatibility of each side, while the argument
+
+$$
+\arg\Delta = \operatorname{atan2}\bigl(\vv{a}\cdot(\vv{b}\times\vv{c}),\; 1 + p + q + s\bigr)
+$$
+
+holds something no single side can see: the oriented volume spanned by the three Bloch vectors. Walking the loop backwards swaps $\vv{b}$ and $\vv{c}$, which flips the sign of the volume and turns $\Delta$ into its conjugate; this is why, in the card "Walked the other way, the handedness flips" below, the three squared moduli stay the same while the pointer turns the other way. Reading this argument as the solid angle of the geodesic triangle, $\arg\Delta = \frac{\Omega}{2}$, takes in addition the solid-angle formula of Van Oosterom and Strackee, $\tan\frac{\Omega}{2} = \frac{\vv{a}\cdot(\vv{b}\times\vv{c})}{1 + p + q + s}$ (literature result, not formalized in this book; see [@rem-berry-pancharatnam-holonomy-literature]).
+
+::: {.example #ex-bargmann-growing-triangles title="Ever Larger Geodesic Triangles: the Modulus of Δ Shrinks While Its Argument Follows the Area"}
+Take $\vv{a} = \vv{e}_3$, $\vv{b} = (\sin\theta, 0, \cos\theta)$ and $\vv{c} = (0, \sin\theta, \cos\theta)$: one corner of the triangle sits at the north pole, the other two on two perpendicular meridians, both at distance $\theta$ from the pole. Then $p = s = \cos\theta$, $q = \cos^2\theta$ and $\vv{a}\cdot(\vv{b}\times\vv{c}) = \sin^2\theta$, and by [@thm-qubit-bargmann-bloch]
+
+$$
+\Delta = \frac{(1 + \cos\theta)^2}{4} + i\,\frac{\sin^2\theta}{4}, \qquad \arg\Delta = \arctan\Bigl(\tan^2\frac{\theta}{2}\Bigr).
+$$
+
+The last column of the table computes the spherical excess $\Omega$ independently, from the three side lengths by L'Huilier's formula, without using $\arg\Delta$; values are rounded to the digits shown.
+
+| $\theta$ | $\operatorname{Re}\Delta$ | $\operatorname{Im}\Delta$ | $\lvert\Delta\rvert^2$ | $\frac{(1+p)(1+q)(1+s)}{8}$ | $\arg\Delta$ | $\frac{\Omega}{2}$ (L'Huilier) |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| $30^\circ$ | $0.8705$ | $0.0625$ | $0.76170$ | $0.76170$ | $4.11^\circ$ | $4.11^\circ$ |
+| $60^\circ$ | $0.5625$ | $0.1875$ | $0.35156$ | $0.35156$ | $18.43^\circ$ | $18.43^\circ$ |
+| $90^\circ$ | $0.2500$ | $0.2500$ | $0.12500$ | $0.12500$ | $45.00^\circ$ | $45.00^\circ$ |
+| $120^\circ$ | $0.0625$ | $0.1875$ | $0.03906$ | $0.03906$ | $71.57^\circ$ | $71.57^\circ$ |
+| $150^\circ$ | $0.0045$ | $0.0625$ | $0.00393$ | $0.00393$ | $85.89^\circ$ | $85.89^\circ$ |
+
+The row $\theta = 90^\circ$ is the octant loop: $\Delta = \frac{1+i}{4}$, which is Claim 2. As the triangle grows, its three sides become less and less compatible and $\lvert\Delta\rvert$ keeps shrinking, while the argument keeps growing and is always half the area. The fifth column equals the fourth row by row, which is the manual derivation above; the last two columns agree row by row, which is a numerical check of the Van Oosterom–Strackee formula on these five triangles, not a proof.
 :::
 
 To compute complex overlaps along any latitude circle cleanly, the Lean module `BargmannImaginaryMaximizers` defines, for $t \in \mathbb{R}$ and $z \in \mathbb{C}$, the two-component complex vector

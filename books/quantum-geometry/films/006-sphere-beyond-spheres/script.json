@@ -1,0 +1,257 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "psi": "sigh",
+  "theta": "thayta",
+  "pi c": "pie see"
+ },
+ "music": {
+  "bpm": 72,
+  "progression": "d-minor"
+ },
+ "scenes": [
+  {
+   "id": "diag",
+   "name": "DIAGONAL",
+   "lead": 2.2,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Write a list of binary strings, one per row.",
+     "写一张二进制串的清单，一行一串。"
+    ],
+    [
+     "Read down the diagonal, and flip every bit you read.",
+     "沿对角线往下读，读到的每一位都翻过来。"
+    ],
+    [
+     "The flipped string differs from row k at place k, so it sits on no row.",
+     "翻出来的串在第 k 位与第 k 行不同，所以它不在任何一行。"
+    ],
+    [
+     "Lean checks the general rule: a twist with no fixed point escapes every list.",
+     "Lean 内核检验了一般规律：没有不动点的扭转，逃出每一张清单。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 2.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "split",
+   "name": "FIBER SPLIT",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.6,
+    0.0,
+    0.2
+   ],
+   "lines": [
+    [
+     "Now a catalog of four addresses, each naming one of the four functions from a bit to a bit.",
+     "再看一部小目录：四个地址，各自登记一个从比特到比特的函数，四个正好取遍。"
+    ],
+    [
+     "The old coordinate puts three of them on one fiber. From inside, they look alike.",
+     "旧坐标把其中三个放在同一根纤维上；从里面看，它们一模一样。"
+    ],
+    [
+     "Each address feeds its own coordinate to its own decoder, then flips the answer.",
+     "每个地址把自己的坐标喂给自己的解码器，再把答案翻过来。"
+    ],
+    [
+     "The flipped values split that fiber: a one and a zero over the same old reading.",
+     "翻出的值劈开了这根纤维：同一个旧读数上，一边是 1，一边是 0。"
+    ],
+    [
+     "Raise them as a new axis, and the fiber comes apart. Two pieces become three.",
+     "把它们立成一根垂直的新轴，纤维就分开了：两块变成三块。"
+    ],
+    [
+     "Lean checks all four conclusions for every complete catalog.",
+     "对每一部完备目录，这四项结论都由 Lean 内核检验。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 5,
+     "at": 2.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "helix",
+   "name": "SPHERE BEYOND",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.8,
+    0.7,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "To read that new axis, you had to step outside the old space.",
+     "要读出这根新轴，你得先走出旧的空间。"
+    ],
+    [
+     "From inside, one more turn looks like a closed circle, back where it began.",
+     "从里面看，再绕一圈像是一个闭合的圆，回到了起点。"
+    ],
+    [
+     "From outside, it is an open helix. After one turn, it has risen by two pi c.",
+     "从外面看，它是一条开口螺旋：绕完一圈，已经升高了 2πc。"
+    ],
+    [
+     "And the chase goes on: sixteen functions on the joined coordinate, and only four addresses.",
+     "追逐还会继续：合并后的坐标上有 16 个比特函数，地址却只有 4 个。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 2.4,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "land",
+   "name": "LANDING",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.8,
+    0.8,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "Where can the chase stop? Take a three by three list, and twist its diagonal.",
+     "追逐能停在哪里？取一张三乘三的清单，把它的对角线扭一下。"
+    ],
+    [
+     "With this twist, the twisted diagonal is exactly row one. The list has caught it.",
+     "用这个扭转，扭过的对角线恰好就是第 1 行：清单把它捕获了。"
+    ],
+    [
+     "At the landing, the value is two, and the twist leaves two where it is.",
+     "落点上的值是 2，而扭转把 2 留在原地。"
+    ],
+    [
+     "Lean checks it: whenever a list catches its twisted diagonal, the landing value is a fixed point.",
+     "Lean 内核检验：清单一旦捕获自己扭过的对角线，落点上的值就是扭转的不动点。"
+    ],
+    [
+     "Swap in a cycle with no fixed point, and the diagonal escapes again.",
+     "换成没有不动点的循环，对角线又逃了出去。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 3.4,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "cosine",
+   "name": "COSINE",
+   "lead": 0.5,
+   "tail": 0.8,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.5,
+    0.4
+   ],
+   "lines": [
+    [
+     "Now let the twist be cosine, and feed each reading back in as the next angle.",
+     "现在让扭转取余弦，把每次的读数当作下一次的角度喂回去。"
+    ],
+    [
+     "From one radian: point five four, point eight six, point six five, closing in on point seven three nine.",
+     "从 1 弧度出发：0.540、0.858、0.654……一圈圈收向 0.739。"
+    ],
+    [
+     "Lean checks that cosine theta equals theta has exactly one positive solution, between zero and one.",
+     "Lean 内核检验：cos θ = θ 恰有一个正解，落在 0 与 1 之间。"
+    ],
+    [
+     "Near it, each step multiplies the error by about minus point six seven four, so no step lands exactly.",
+     "在它附近，每一步把误差乘以约 −0.674，所以没有哪一步恰好落上。"
+    ],
+    [
+     "Where it stops and how fast it closes form one unit vector.",
+     "停在哪里、合拢多快，是同一根单位向量的两个分量。"
+    ],
+    [
+     "The ruler measures its own angle, and the reading stays put: psi equals psi of psi.",
+     "尺子回过头来量自己张开的角，读数不再改变：ψ = ψ(ψ)。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 2.6,
+     "kind": "stamp"
+    },
+    {
+     "line": 5,
+     "at": 3.0,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.5,
+   "tail": 3.4,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "Geometric Intuition of Quantum Computing, chapters twenty-one and twenty-four.",
+     "《量子计算的几何直觉》· 第二十一章、第二十四章"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ]
+  }
+ ]
+}

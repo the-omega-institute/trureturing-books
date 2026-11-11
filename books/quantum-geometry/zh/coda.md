@@ -4,6 +4,10 @@
 
 从序曲推开第一扇门起，我们便沿着一条不断升维的几何阶梯向上攀登：把孤立的**点**还原为成对比较的**线**（内积投影 $\mathbf{u}\cdot\mathbf{v}$），把静态的**线**展开为带定向手性的**面**（外积双向量 $\mathbf{u}\wedge\mathbf{v}$），把局部的**面**合拢为包裹相位的**球**（布洛赫球面 $S^2$ 与旋量覆盖流形 $S^3$）。然而，当我们穿过洛伦兹光锥、张量网络极小割、素数欧拉乘积、四元数范数锁与余弦自指不动点，回望整座八部曲大厦时，一个更深层的几何真相浮出水面：**在任何固定形式系统内部，我们以为已经彻底合拢的“球”，其实永远只是一座由有限分片拼接而成的凸多面体近似；而在每一道接缝与每一个不动点处，都有一个不可抹平的余项，正指向包裹它的“更大的球”。**
 
+::: {.figure src="coda-overview"}
+**本章地图：近似之球、空间吸引子与黄金切投。** 第 I 栏，正二十面体内接在球里，十二个品红的顶点各缺 $60^\circ$，合计 $12 \times 60^\circ = 720^\circ$（文献结果，见 [@rem-coda-polyhedral-topology-literature]）；第 II 栏，青色与品红两条洛伦兹轨道从相距很远的两个圆圈出发，落到同一对翅膀上（数值积分，示意；把轨道读作“一轮”是诠释模型）；第 III 栏，琥珀色的窗口 $[\varphi - 2, \varphi - 1]$ 从黄金格点里选出青色的点，投到下面的直线上成为一串点列（[@thm-coda-golden-cut-observer-cassini]）。
+:::
+
 ---
 
 ## 多面体近似与不可抹平的几何余项 {#sec-coda-polyhedral-remainder}
@@ -28,6 +32,10 @@
    $$
 
    对应实数 $\mathbb{R}$、复数 $\mathbb{C}$、四元数 $\mathbb{H}$ 与八元数 $\mathbb{O}$ 四大赋范可除代数。二维布洛赫球面 $S^2$ 上梳不平的贝里相位奇点，在几何模型上正是平行化三维球面 $S^3 \cong \mathrm{SU}(2)$ 经霍普夫纤维化 $S^1 \hookrightarrow S^3 \to S^2$ 投下的底空间影子。
+:::
+
+::: {.figure src="coda-defect-spread"}
+**剖分得再细，角亏的总和仍是 $720^\circ$。** 三行依次是正二十面体（$\nu = 1$），以及把每个面切成 $\nu^2$ 个三角形、再把顶点推到球面上的测地穹顶（$\nu = 2, 4$）。每条品红横条按顶点切段，每段的长度是那个顶点的角亏。顶点从 $12$ 个增到 $42$、$162$ 个，最大的角亏从 $60^\circ$ 缩到约 $18^\circ$、$5^\circ$，三条横条却一样长。文献结果，未在本书形式化（[@rem-coda-polyhedral-topology-literature] 第 1 条）。
 :::
 
 对照 [@rem-coda-polyhedral-topology-literature] 揭示的拓扑余项，在进入第八部的跨领域合拢之前，“有限多面体逼近光滑球面所留下的非零接缝”已经在前七部中以五种精确的数学形态反复重现：
@@ -170,6 +178,10 @@
    - 同时，对任意正整数第一坐标 $a \ge 1$，Beatty 第一坐标原像纤维 $\operatorname{goldenFiber}(a) = \{v \in \mathbb{N} \mid \operatorname{fiberA}(v) = a\}$ 的基数严格属于 $\{4, 5\}$（[`golden_fiber_capacity_pair`](lean:D5/S1/Deficit/Beatty/FiberCapacityPair.golden_fiber_capacity_pair)），而对任意非负整数第二坐标 $b \ge 0$，对偶第二坐标原像纤维 $\operatorname{goldenDualFiber}(b) = \{v \in \mathbb{N} \mid \operatorname{fiberB}(v) = b\}$ 的基数严格属于 $\{2, 3\}$（[`golden_dual_fiber_capacity_pair`](lean:D5/S1/Deficit/Beatty/FiberCapacityPair.golden_dual_fiber_capacity_pair)）。
    在本书的认识论诠释模型（`MODEL`）中，我们将“有理斜率扫描 $\to$ 坐标原像纤维分割 $\to$ 消除相邻 `11` 的齐肯多夫规范化”诠释为有限观察者体验到的主观时间步进。
 
+::: {.figure src="coda-no-eleven"}
+**齐肯多夫自动机只收没有相邻 `11` 的字。** 十六个四位二进制字里，青色的八个没有两个相邻的 $1$，被接受；品红的八个各含一对相邻的 $11$（框出的是第一对），被拒绝。接受条件就是 [@thm-coda-golden-cut-observer-cassini] 第 3 条里的 $\operatorname{NoAdjacentOnes}(w)$。
+:::
+
 ::: {.viz src="golden-cut-observer" preset="cut" height="500"}
 **一条窗口切出一串点。** 黄金整数 $a + b\varphi$ 画成格点：横坐标是它本身，纵坐标是共轭 $a + b\psi$。琥珀色的窗口 $[\varphi - 2, \varphi - 1]$ 选出青色的点，投到下面的直线上，相邻两点只相距 $\varphi$ 或 $\varphi^2$；闭窗口的两个端点上各有一个格点（品红），所以原点左边多出一段长为 $1$ 的间隔。绿圈是自然数的黄金展开 $\beta(n)$，Lean 已验证它们都在这个窗口里。
 :::
@@ -268,7 +280,7 @@
 
    且对任意正整数 $v > 0$，黄金位移值 $\operatorname{betaGolden}(v)$ 的二次范数正负号由其齐肯多夫数字集 `wdigits v` 的最小索引 $k$ 的奇偶性唯一决定（$k$ 为偶数时范数 $> 0$，$k$ 为奇数时范数 $< 0$，[`betaGolden_norm_sign_of_least_zeckendorf_index`](lean:D5/S1/Deficit/Displacement/ZeckendorfNormSign.betaGolden_norm_sign_of_least_zeckendorf_index)）。
 3. **齐肯多夫无相邻 `11` 自动机语言与非负实数编码线程单射**（[`base_success_iff_noAdjacentOnes`](lean:D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes)、[`zeckendorf_real_thread_injective`](lean:D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective)）：二进制齐肯多夫基础自动机接受字 $w \in \operatorname{List}(\operatorname{Fin} 2)$ 当且仅当 $\operatorname{NoAdjacentOnes}(w)$ 成立；将非负实数 $x \in \mathbb{R}_{\ge 0}$（`NNReal`）映射为全尺度下取整 $\lfloor\varphi^N x\rfloor_+$ 的典范齐肯多夫编码序列的线程函数 $\operatorname{zeckendorfRealThread} : \mathbb{R}_{\ge 0} \to (\mathbb{N} \to \mathrm{WDigitString})$ 严格单射（此外，Beatty 坐标纤维满足 $\forall a \ge 1,\, (\operatorname{goldenFiber}(a)).\operatorname{ncard} \in \{4, 5\}$ 与 $\forall b \ge 0,\, (\operatorname{goldenDualFiber}(b)).\operatorname{ncard} \in \{2, 3\}$，[`golden_fiber_capacity_pair`](lean:D5/S1/Deficit/Beatty/FiberCapacityPair.golden_fiber_capacity_pair)、[`golden_dual_fiber_capacity_pair`](lean:D5/S1/Deficit/Beatty/FiberCapacityPair.golden_dual_fiber_capacity_pair)）。
-4. **共轭范数互反分离、全窗口 Delone 集与环面閉子群轨道均匀分布及有界间隙回归**（[`norm_separation`](lean:D5/S3/Fourier/GoldenModelSetDelone.norm_separation)、[`TorusOrbitEquidistribution.result`](lean:D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result)、[`TorusObservationWindowReturns.result`](lean:D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result)）：对任意相异黄金整数 $u \neq v \in \mathrm{GoldenInt}$ 及满足 $|\operatorname{embedding}(\operatorname{conj} u) - \operatorname{embedding}(\operatorname{conj} v)| \le B$ 的实数 $B$，必有 $1 \le |\operatorname{embedding}(u) - \operatorname{embedding}(v)| \cdot B$（且全窗口模型集 $\operatorname{modelSet}(\operatorname{goldenWindow})$ 构成装球半径 $1/2$、覆盖半径 $3$ 的 Delone 集，[`exists_golden_modelSet_delone`](lean:D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone)）；同时，对有限维环面元素 $g : I \to \mathrm{Circle}$ 生成的紧致闭子群 $G = \overline{\langle g\rangle}$ 及其哈尔概率测度 $\mu$，任意连续复观测函数 $f \in C(G, \mathbb{C})$ 的轨道平均收敛于 $\int_G f\,d\mu$，且对任意连续实观测函数 $h \in C(G, \mathbb{R})$、渐近误差归零序列 $\lim_{n\to\infty}(e(n) - h(a^n)) = 0$ 及与 $\operatorname{range}(h)$ 相交的开区间 $(u_1, u_2)$，序列 $e(n)$ 必在某起始步 $n_0 \ge 1$ 后以有界步数间隙 $M$ 反复进入 $(u_1, u_2)$，且前 $N$ 步访问计数比最终恒满足 $\ge \frac{1}{M+1} - \varepsilon$。
+4. **共轭范数互反分离、全窗口 Delone 集与环面闭子群轨道均匀分布及有界间隙回归**（[`norm_separation`](lean:D5/S3/Fourier/GoldenModelSetDelone.norm_separation)、[`TorusOrbitEquidistribution.result`](lean:D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result)、[`TorusObservationWindowReturns.result`](lean:D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result)）：对任意相异黄金整数 $u \neq v \in \mathrm{GoldenInt}$ 及满足 $|\operatorname{embedding}(\operatorname{conj} u) - \operatorname{embedding}(\operatorname{conj} v)| \le B$ 的实数 $B$，必有 $1 \le |\operatorname{embedding}(u) - \operatorname{embedding}(v)| \cdot B$（且全窗口模型集 $\operatorname{modelSet}(\operatorname{goldenWindow})$ 构成装球半径 $1/2$、覆盖半径 $3$ 的 Delone 集，[`exists_golden_modelSet_delone`](lean:D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone)）；同时，对有限维环面元素 $g : I \to \mathrm{Circle}$ 生成的紧致闭子群 $G = \overline{\langle g\rangle}$ 及其哈尔概率测度 $\mu$，任意连续复观测函数 $f \in C(G, \mathbb{C})$ 的轨道平均收敛于 $\int_G f\,d\mu$，且对任意连续实观测函数 $h \in C(G, \mathbb{R})$、渐近误差归零序列 $\lim_{n\to\infty}(e(n) - h(a^n)) = 0$ 及与 $\operatorname{range}(h)$ 相交的开区间 $(u_1, u_2)$，序列 $e(n)$ 必在某起始步 $n_0 \ge 1$ 后以有界步数间隙 $M$ 反复进入 $(u_1, u_2)$，且前 $N$ 步访问计数比最终恒满足 $\ge \frac{1}{M+1} - \varepsilon$。
 :::
 
 ::: proof
@@ -320,6 +332,10 @@ $$
 
 ::: proof
 由于对任意 $n \in \mathbb{N}$ 有 $S(n+1) = U(S(n)) \subseteq S(n)$，序列 $S$ 在有限全集 $X$ 上构成一条单调递减的有限子集链。每一次发生严格改变 $S(n+1) \neq S(n)$ 时，有限基数 $(S(n)).\operatorname{ncard}$ 至少严格减少 $1$。因为初始基数 $(S(0)).\operatorname{ncard}$ 是有限自然数，严格递减至多发生 $(S(0)).\operatorname{ncard}$ 次；由抽屉原理，在前 $(S(0)).\operatorname{ncard}$ 步之内必存在一步 $N \le (S(0)).\operatorname{ncard}$ 满足 $S(N+1) = U(S(N)) = S(N)$，此后由归纳法对一切 $n \ge N$ 恒有 $S(n) = S(N)$。完整证明由 Lean 内核检查。
+:::
+
+::: {.figure src="coda-shrink-stop"}
+**每改一次至少少一个元素，所以至多改 $\lvert S(0)\rvert$ 次，然后停下。** 一个例子：$S(0)$ 有 $7$ 个青色的点，每一步被更新去掉的点画成品红的叉，各行的元素个数依次是 $7, 5, 3, 2, 2, 2$，从 $S(3)$ 起不再变。一共改了 $3$ 次，$N = 3 \le \lvert S(0)\rvert = 7$，两条上界都与 [@thm-coda-fixed-point-anchor] 一致。
 :::
 
 ::: {.remark #rem-coda-epistemic-discipline title="终章的形式边界与认识论纪律（文献结果，未在本书形式化）"}
@@ -424,9 +440,17 @@ $$
             ┌─────────────────────────────────────────────────────────────────┐
             │ 第八部：无时间因果、ETH 视界与流体涡丝 (Ch 29–30) → 终章与附录   │
             │  • 多面体离散角亏与毛球文献对照 • 勾股守恒与四级“球外之球”突围   │
-            │  • 概念对照词典 (A) • 克利福德速查表 (B) • 444 项锁定声明索引 (C)│
+            │  • 概念对照词典 (A) • 克利福德速查表 (B) • 448 项锁定声明索引 (C)│
             └─────────────────────────────────────────────────────────────────┘
 ```
+
+::: {.figure src="coda-dependency-tree"}
+**哪一章依赖哪一章。** 圆点自上而下是全书各章，左边按部分段；指向每一章的弧形箭头，来自它在正文里回头引用（章节链接或“第 N 章”）次数最多的那一章，引用越多箭头越粗。空心点是正文里没有回头引用前面任何一章的章。箭头由脚本从各章正文数出，每一支都对应正文里实际出现的跨章引用。
+:::
+
+::: {.slides src="overview"}
+全书概览演示文稿，共 39 页：四重盲区与升维阶梯，八部各自的核心图景、主要定理、文献结果与开放问题，三层依据的条数与全书依赖导图。
+:::
 
 ### 四条推荐阅读路径 {#sec-coda-reading-tracks}
 
@@ -439,7 +463,7 @@ $$
 3. **数理逻辑、数论与认识论路径**：
    [序曲](README.md) $\to$ 第 10 章（Gram 矩阵与顺序无关性）$\to$ 第 19–20 章（离散多面体分片锥与开放猜想边界）$\to$ 第 21–24 章（对角线逃逸、欧拉乘积、四元数丢番图范数、余弦自指不动点）$\to$ [第 29 章](ch29-timeless-causality-and-gram-space.md)–[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)（毕达哥拉斯四级数系突围、无时间因果、ETH 视界与流体涡丝）$\to$ 终章（黄金切投空间吸引子与 [@thm-coda-fixed-point-anchor]）。
 4. **Lean 4 形式化验证与内核审计路径**：
-   [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 与 `FiniteRecordCosineObstruction` 的逐行形式化剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对 `trureturing@dev` 提交 [`6cfcf7850967`](https://github.com/the-omega-institute/trureturing/tree/6cfcf785096782b15084d719ec73c2ca16b6ed29) 下全部 $230$ 条环境／媒体冻结定理、$95$ 项环境／媒体定义与代数载体，以及 $119$ 项仅行内引用的声明，共计 $444$ 项唯一锁定声明）。
+   [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 与 `FiniteRecordCosineObstruction` 的逐行形式化剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对 `trureturing@dev` 提交 [`6cfcf7850967`](https://github.com/the-omega-institute/trureturing/tree/6cfcf785096782b15084d719ec73c2ca16b6ed29) 下全部 $234$ 条环境／媒体冻结定理、$95$ 项环境／媒体定义与代数载体，以及 $119$ 项仅行内引用的声明，共计 $448$ 项唯一锁定声明）。
 
 ### 第六至第八部（第 21–30 章）36 项核心章节冻结定理锚点速览 {#sec-coda-part6-part7-register}
 
@@ -485,4 +509,4 @@ $$
 | **第 30 章** | T30.2 | `D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure` | 五模态勒雷投影平流对任意粘性系数 $\nu \in \mathbb{R}$ 均无精确闭合映射 |
 | **第 30 章** | T30.3 | `D5/S3/Combinatorics/Graph/Walks/GallaiRoy.colorable_iff_exists_orientation` | Gallai–Hasse–Roy–Vitaver 定理：有限简单图可 $k$ 着色，当且仅当存在一个定向，其有向路都不超过 $k$ 个顶点 |
 
-在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，并在 [附录 C](appendix-c.md) 中核验全书锁定的全部 $325$ 项 `trureturing@dev` 正式环境与媒体声明（$230$ 条定理与 $95$ 项定义／载体，加上 $119$ 项仅行内引用的声明，共 $444$ 项唯一锁定声明）。
+在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，并在 [附录 C](appendix-c.md) 中核验全书锁定的全部 $329$ 项 `trureturing@dev` 正式环境与媒体声明（$234$ 条定理与 $95$ 项定义／载体，加上 $119$ 项仅行内引用的声明，共 $448$ 项唯一锁定声明）。

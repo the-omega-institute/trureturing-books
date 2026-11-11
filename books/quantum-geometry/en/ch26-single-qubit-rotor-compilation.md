@@ -13,7 +13,9 @@ In this chapter we complete the single-qubit computational bridge by joining two
    $$
    and rotate any vector $v \in \mathbb{R}^3$ via the two-sided sandwich product $v \mapsto R v \widetilde{R}$?
 
-![Bloch matrix recovery and positive-semidefinite ball bound, the even Clifford rotor sandwich action, and the ZYZ Euler compilation pipeline](../assets/fig-26-zyz-euler-rotor-compiler.svg)
+::: {.figure src="ch26-overview"}
+**Figure 26.** The chapter at a glance. Panel I: the green Bloch ball; the amber pure-state arrow reaches the shell $\lvert r\rvert = 1$, and the dark point lies inside, where every positive semidefinite matrix lands ([@prop-hermitian-bloch-geometry], [@cor-psd-bloch-ball-bound]). Panel II: the sandwich turns by $90^\circ$ about the violet $z$ axis; the cyan shadow stays on the axis, and the magenta fan is split by a dashed line into two half-angles. Panel III: $e_1$ turned about $z$, $y$, $z$ by $(\alpha, \beta, \gamma) = (0.37, -0.81, 0.52)$; the amber path of three legs ends at $R e_1 \widetilde{R}$ (rotor compilation is a numerical illustration with no frozen theorem).
+:::
 
 ## Bloch Matrix Trace and Coordinate Recovery {#sec-bloch-matrix-trace-and-recovery}
 
@@ -66,6 +68,10 @@ In `D5/S3/Quantum/Information/ActualPureQubitGeometry.lean:63`, the proof applie
 Hence $\operatorname{bloch}(\operatorname{blochMatrix}(a, r)) = r$. The full proof is checked by the Lean kernel.
 :::
 
+::: {.figure src="ch26-read-coords"}
+**Reading the trace and the three coordinates back from the matrix.** Take $\operatorname{blochMatrix}(1, r)$ with $r = (0.48, 0.60, 0.64)$: the two cyan diagonal cells add to the trace $1$ and subtract to $z = 0.64$; the dark top-right cell gives $x = 2 \times 0.24$ and $y = -2 \times (-0.30)$; the dashed bottom-left cell is only its conjugate and is not read. What comes back is $r$ ([@thm-bloch-matrix-trace], [@lemma-bloch-coordinate-recovery]).
+:::
+
 ## Hermitian Reconstruction, the Pure-State Sphere, and the Positive-Semidefinite Ball Bound {#sec-hermitian-bloch-and-psd-ball}
 
 Conversely, start with an arbitrary Hermitian $2\times 2$ matrix $M \in M_2(\mathbb{C})$ (`hM : M.IsHermitian`). The next frozen proposition proves both that $M$ is reconstructed identically from its real trace `(Matrix.trace M).re` and its Bloch vector `bloch M`, and that whenever $M$ has unit trace ($\Tr M = 1$) and is idempotent ($M \cdot M = M$), its Bloch vector lies on the unit sphere $\norm{\operatorname{bloch}(M)} = 1$.
@@ -116,6 +122,10 @@ $$
 Since $\operatorname{Re}(\det M) \ge 0$ and both $\operatorname{Re}(\Tr M)$ and $\norm{\operatorname{bloch}(M)}$ are nonnegative, `nlinarith` derives $\norm{\operatorname{bloch}(M)} \le \operatorname{Re}(\Tr M)$. The full proof is checked by the Lean kernel.
 :::
 
+::: {.figure src="ch26-det-sign"}
+**With trace $1$, the sign of the determinant says where the arrow ends.** The $x$–$z$ cross-section of the Bloch ball, with $\det = (1 - \lvert r\rvert^2)/4$: the amber pure state on the green circle has $\det = 0$; the dark point inside has $\det = 0.19 > 0$; the magenta point outside has $\det = -0.17 < 0$ and is not positive semidefinite. The green disc is where positive semidefinite matrices can land ([@cor-psd-bloch-ball-bound]); the circle holds the trace-one idempotent pure states ([@prop-hermitian-bloch-geometry]).
+:::
+
 ## Even-Subalgebra Bivectors and the Rotor Sandwich Action {#sec-even-rotor-sandwich-action}
 
 Now let us see how rotations of the Bloch vector $v = r_0 e_1 + r_1 e_2 + r_2 e_3 \in \mathbb{R}^3 \subset \mathcal{Cl}_{3,0}(\mathbb{R})$ are compiled directly inside the four-dimensional even subalgebra $\mathcal{Cl}^+_{3,0}(\mathbb{R}) = \operatorname{span}_{\mathbb{R}}\{1, e_1 e_2, e_1 e_3, e_2 e_3\}$.
@@ -133,6 +143,10 @@ Because $B_u^2 = -1$ and $\widetilde{B}_u = -B_u$ for each axis $u \in \{x, y, z
 $$
 R_u(\theta) = \exp\Bigl(-\frac{\theta}{2} B_u\Bigr) = \cos\frac{\theta}{2} - \sin\frac{\theta}{2}\,B_u \in \mathcal{Cl}^+_{3,0}(\mathbb{R}),
 $$
+
+::: {.figure src="ch26-half-angle"}
+**The rotor goes half the angle, the arrow the whole of it.** With $\theta = 120^\circ$ about $z$: on the left, the violet point $R_z(\theta)$ sits at $\theta/2 = 60^\circ$ on the unit circle, its scalar $\cos 60^\circ$ across and its $-e_{12}$ coefficient $\sin 60^\circ$ up, and lying on the circle means $R\widetilde{R} = 1$; on the right, the sandwich turns $e_1$ through the full $120^\circ$ of the magenta fan, to the amber $R e_1 \widetilde{R}$.
+:::
 
 with unit norm $R_u(\theta)\widetilde{R}_u(\theta) = \cos^2(\theta/2) + \sin^2(\theta/2) = 1$. Under the two-sided **sandwich product** $v \mapsto R_u(\theta)\,v\,\widetilde{R}_u(\theta)$, components $v_\parallel$ parallel to axis $u$ commute with $B_u$ and remain fixed, whereas components $v_\perp$ lying in the plane $B_u$ anticommute with $B_u$, combining the two half-angles into a full rotation $R_u(\theta)^2 v_\perp = (\cos\theta - \sin\theta\,B_u)v_\perp$.
 
@@ -328,6 +342,10 @@ self_test()
 
 Let us verify the compiled multivector coefficients and rotated basis vectors on the test Euler triple $(\alpha, \beta, \gamma) = (0.37, -0.81, 0.52)$ as well as on the $T$ and Hadamard $H$ gates.
 
+::: {.figure src="ch26-rotor-product"}
+**Three two-term rotors multiply into one four-term rotor.** The four panels share one small chart, with violet bars for the coefficients of $1, e_{12}, e_{13}, e_{23}$: $R_z(0.37)$, $R_y(-0.81)$ and $R_z(0.52)$ have two bars each, the product $R$ has all four nonzero, and in every panel the squares add up to $1$. These are the numbers of the example below; rotor compilation has no frozen theorem.
+:::
+
 ::: {.example #ex-zyz-compilation-trace title="Numerical Verification of (0.37, −0.81, 0.52) and Compilation of T and H"}
 1. **Nontrivial Euler triple $(\alpha, \beta, \gamma) = (0.37, -0.81, 0.52)$**: Calling `RotorCompiler.compile(0.37, -0.81, 0.52)` produces an even multivector supported on masks `0` ($1$), `3` ($e_1 e_2$), `5` ($e_1 e_3$), and `6` ($e_2 e_3$):
    $$
@@ -377,6 +395,10 @@ Let us verify the compiled multivector coefficients and rotated basis vectors on
 
 ::: {.viz src="zyz-compile" height="560"}
 **The ZYZ compilation lab.** Drag the three Euler angles, move the arrow's start, or switch on the single axis $n$: in every turn the cyan shadow stays put while the magenta fan sweeps the whole angle, and in the strip scalar$^2$ and area$^2$ trade off with a sum that stays $1$. The green boxes cite only this chapter's four frozen theorems ([@thm-bloch-matrix-trace], [@lemma-bloch-coordinate-recovery], [@prop-hermitian-bloch-geometry], [@cor-psd-bloch-ball-bound]), which the page checks one by one on the pure state $\rho = \operatorname{blochMatrix}(1, v)$ of the arrow.
+:::
+
+::: {.film src="007-zyz-compile"}
+**Compiling a rotation into three turns: ZYZ and the sandwich action (2 min 3 s).** Turning about the violet $z$ axis, the cyan shadow $\tfrac{1}{2}e_3$ stays put and the magenta part sweeps the whole angle, while on the little dial the rotor moves only half as far; then the amber arrow turns about $z$, $y$ and $z$ by $\gamma$, $\beta$ and $\alpha$, the three rotors multiply into one rotor with four coefficients, $0.830 - 0.396\,e_1e_2 - 0.393\,e_1e_3 + 0.030\,e_2e_3$, and sandwiching the three basis vectors with it gives the columns of the ZYZ matrix; a single $67.9^\circ$ turn about its own axis lands on the same point (the single axis is the literature result of [@rem-zyz-euler-compilation-literature]; the rotor compilation is a numerical demonstration). The $T$ and Hadamard gates follow, and the film ends on the pure state $\rho = \operatorname{blochMatrix}(1, v)$ with this chapter's four frozen theorems ([@thm-bloch-matrix-trace], [@lemma-bloch-coordinate-recovery], [@prop-hermitian-bloch-geometry], [@cor-psd-bloch-ball-bound]).
 :::
 
 With our executable Python 3 geometric algebra and rotor compilation engine complete, we now step directly into the frozen Lean 4 source files of `trureturing@dev` to audit the proof scripts that certify this monograph. Let us open [Chapter 27](ch27-reading-frozen-proofs-i.md).

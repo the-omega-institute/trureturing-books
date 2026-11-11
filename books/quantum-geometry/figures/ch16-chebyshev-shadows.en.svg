@@ -21,7 +21,7 @@
 <circle cx="330" cy="196" r="5.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
 <text class="tf-cyan" x="330" y="220" font-size="14" text-anchor="middle"><tspan font-style="italic">T</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em"> = ½</tspan></text>
 <line x1="170" y1="57.44" x2="170" y2="196" class="ts-dim" stroke-width="1.2" stroke-dasharray="4 3" fill="none"/>
-<line x1="250" y1="196" x2="173.83" y2="64.06" class="ts-ink" stroke-width="2.2" fill="none"/>
+<line x1="250" y1="196" x2="173.82" y2="64.06" class="ts-ink" stroke-width="2.2" fill="none"/>
 <path d="M170 57.44 L177.77 63.34 L171.23 67.12Z" class="tf-ink"/>
 <text class="tf-dim" x="162" y="48.26" font-size="13" text-anchor="middle"><tspan font-style="italic">m</tspan> = 2</text>
 <circle cx="170" cy="196" r="5.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
