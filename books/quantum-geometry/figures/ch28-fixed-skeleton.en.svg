@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch28-fixed-skeleton" data-lang="en" viewBox="0 0 560 352" width="560" height="352" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="A proof skeleton in two columns. Left, &#x27;⇒&#x27;: from the hypothesis U(ρ) = ρ, P_kρP_l = P_k U(ρ) P_l (← hFixed), = P_kρP_k · P_l (left_project_unread), = 0 (hP.orthogonal). Right, &#x27;⇐&#x27;: from the hypothesis P_kρP_l = 0 (k ≠ l), P_kρ = Σ_l P_kρP_l (hP.complete), = P_kρP_k (sum_eq_single), and summing over k gives U(ρ) = ρ (hP.complete). The two columns meet in the green LEAN ✓ unreadState_fixed_iff at the bottom.">
+<title>A proof skeleton in two columns. Left, &#x27;⇒&#x27;: from the hypothesis U(ρ) = ρ, P_kρP_l = P_k U(ρ) P_l (← hFixed), = P_kρP_k · P_l (left_project_unread), = 0 (hP.orthogonal). Right, &#x27;⇐&#x27;: from the hypothesis P_kρP_l = 0 (k ≠ l), P_kρ = Σ_l P_kρP_l (hP.complete), = P_kρP_k (sum_eq_single), and summing over k gives U(ρ) = ρ (hP.complete). The two columns meet in the green LEAN ✓ unreadState_fixed_iff at the bottom.</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<text class="tf-ink" x="140" y="23.76" font-size="16" text-anchor="middle" font-weight="600">⇒</text>
+<text class="tf-ink" x="410" y="23.76" font-size="16" text-anchor="middle" font-weight="600">⇐</text>
+<rect x="107.12" y="34" width="65.76" height="28" rx="14" class="ts-dim" stroke-width="1.2" stroke-dasharray="4 3" fill="none"/>
+<text class="tf-dim" x="140" y="52.68" font-size="13" text-anchor="middle"><tspan font-style="italic">U</tspan>(<tspan font-style="italic">ρ</tspan>) = <tspan font-style="italic">ρ</tspan></text>
+<rect x="351.64" y="34" width="116.72" height="28" rx="14" class="ts-dim" stroke-width="1.2" stroke-dasharray="4 3" fill="none"/>
+<text class="tf-dim" x="410" y="52.68" font-size="13" text-anchor="middle"><tspan font-style="italic">P</tspan><tspan dy="0.28em" font-size="72%">k</tspan><tspan dy="-0.28em" font-style="italic">ρP</tspan><tspan dy="0.28em" font-size="72%">l</tspan><tspan dy="-0.28em"> = 0 (</tspan><tspan font-style="italic">k</tspan> ≠ <tspan font-style="italic">l</tspan>)</text>
+<rect x="71.96" y="88" width="136.08" height="50" rx="6" class="ts-edge tf-panel" stroke-width="1.3"/>
+<text class="tf-ink" x="140" y="109" font-size="14" text-anchor="middle"><tspan font-style="italic">P</tspan><tspan dy="0.28em" font-size="72%">k</tspan><tspan dy="-0.28em" font-style="italic">ρP</tspan><tspan dy="0.28em" font-size="72%">l</tspan><tspan dy="-0.28em"> = </tspan><tspan font-style="italic">P</tspan><tspan dy="0.28em" font-size="72%">k</tspan><tspan dy="-0.28em" font-style="italic">U</tspan>(<tspan font-style="italic">ρ</tspan>)<tspan font-style="italic">P</tspan><tspan dy="0.28em" font-size="72%">l</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim tr-fig-mono" x="140" y="128" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">← hFixed</text>
+<rect x="51.9" y="160" width="176.2" height="50" rx="6" class="ts-edge tf-panel" stroke-width="1.3"/>
+<text class="tf-ink" x="140" y="181" font-size="14" text-anchor="middle">= <tspan font-style="italic">P</tspan><tspan dy="0.28em" font-size="72%">k</tspan><tspan dy="-0.28em" font-style="italic">ρP</tspan><tspan dy="0.28em" font-size="72%">k</tspan><tspan dy="-0.28em"> · </tspan><tspan font-style="italic">P</tspan><tspan dy="0.28em" font-size="72%">l</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim tr-fig-mono" x="140" y="200" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">left_project_unread</text>
+<rect x="75.3" y="232" width="129.4" height="50" rx="6" class="ts-edge tf-panel" stroke-width="1.3"/>
+<text class="tf-ink" x="140" y="253" font-size="14" text-anchor="middle">= 0</text>
+<text class="tf-dim tr-fig-mono" x="140" y="272" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">hP.orthogonal</text>
+<rect x="348.54" y="88" width="122.92" height="50" rx="6" class="ts-edge tf-panel" stroke-width="1.3"/>
+<text class="tf-ink" x="410" y="109" font-size="14" text-anchor="middle"><tspan font-style="italic">P</tspan><tspan dy="0.28em" font-size="72%">k</tspan><tspan dy="-0.28em" font-style="italic">ρ</tspan> = Σ<tspan dy="0.28em" font-size="72%">l</tspan><tspan dy="-0.28em"> </tspan><tspan font-style="italic">P</tspan><tspan dy="0.28em" font-size="72%">k</tspan><tspan dy="-0.28em" font-style="italic">ρP</tspan><tspan dy="0.28em" font-size="72%">l</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim tr-fig-mono" x="410" y="128" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">hP.complete</text>
+<rect x="345.3" y="160" width="129.4" height="50" rx="6" class="ts-edge tf-panel" stroke-width="1.3"/>
+<text class="tf-ink" x="410" y="181" font-size="14" text-anchor="middle">= <tspan font-style="italic">P</tspan><tspan dy="0.28em" font-size="72%">k</tspan><tspan dy="-0.28em" font-style="italic">ρP</tspan><tspan dy="0.28em" font-size="72%">k</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim tr-fig-mono" x="410" y="200" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">sum_eq_single</text>
+<rect x="340.84" y="232" width="138.32" height="50" rx="6" class="ts-edge tf-panel" stroke-width="1.3"/>
+<text class="tf-ink" x="410" y="253" font-size="14" text-anchor="middle"><tspan font-style="italic">U</tspan>(<tspan font-style="italic">ρ</tspan>) = Σ<tspan dy="0.28em" font-size="72%">k</tspan><tspan dy="-0.28em"> </tspan><tspan font-style="italic">P</tspan><tspan dy="0.28em" font-size="72%">k</tspan><tspan dy="-0.28em" font-style="italic">ρ</tspan> = <tspan font-style="italic">ρ</tspan></text>
+<text class="tf-dim tr-fig-mono" x="410" y="272" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">hP.complete</text>
+<line x1="140" y1="62" x2="140" y2="82.05" class="ts-dim" stroke-width="1.4" fill="none"/>
+<path d="M140 88 L137.06 81 L142.94 81Z" class="tf-dim"/>
+<line x1="140" y1="138" x2="140" y2="154.05" class="ts-dim" stroke-width="1.4" fill="none"/>
+<path d="M140 160 L137.06 153 L142.94 153Z" class="tf-dim"/>
+<line x1="140" y1="210" x2="140" y2="226.05" class="ts-dim" stroke-width="1.4" fill="none"/>
+<path d="M140 232 L137.06 225 L142.94 225Z" class="tf-dim"/>
+<line x1="410" y1="62" x2="410" y2="82.05" class="ts-dim" stroke-width="1.4" fill="none"/>
+<path d="M410 88 L407.06 81 L412.94 81Z" class="tf-dim"/>
+<line x1="410" y1="138" x2="410" y2="154.05" class="ts-dim" stroke-width="1.4" fill="none"/>
+<path d="M410 160 L407.06 153 L412.94 153Z" class="tf-dim"/>
+<line x1="410" y1="210" x2="410" y2="226.05" class="ts-dim" stroke-width="1.4" fill="none"/>
+<path d="M410 232 L407.06 225 L412.94 225Z" class="tf-dim"/>
+<rect x="151.5" y="310" width="257" height="34" rx="6" class="ts-ok tf-ok" stroke-width="1.6" fill-opacity="0.1"/>
+<rect x="165.5" y="316" width="57.2" height="21" class="ts-ok tf-ok" stroke-width="1.2" fill-opacity="0.12"/>
+<text class="tf-ok tr-fig-mono" x="172.5" y="332" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">LEAN ✓</text>
+<text class="tf-ok tr-fig-mono" x="230.7" y="332" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace">unreadState_fixed_iff</text>
+<line x1="140" y1="282" x2="163.33" y2="305.75" class="ts-ink" stroke-width="1.4" fill="none"/>
+<path d="M167.5 310 L160.5 307.07 L164.69 302.95Z" class="tf-ink"/>
+<line x1="410" y1="282" x2="395.65" y2="304.95" class="ts-ink" stroke-width="1.4" fill="none"/>
+<path d="M392.5 310 L393.72 302.51 L398.7 305.62Z" class="tf-ink"/>
+</svg>

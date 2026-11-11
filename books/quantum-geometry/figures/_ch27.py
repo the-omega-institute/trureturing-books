@@ -92,22 +92,26 @@ def hyp(p, cx: float, y: float, title: str, *, anchor: str = "middle") -> Box:
     return Box(x, y, w, h)
 
 
-def lean_box(p, cx: float, y: float, gid: str, *, note: str | None = None, w: float | None = None) -> Box:
-    """The frozen declaration the chapter cites with lean= (green; checked against the lock)."""
+def lean_box(p, cx: float, y: float, gid: str, *, note: str | None = None, w: float | None = None,
+             label: str | None = None) -> Box:
+    """The frozen declaration the chapter cites with lean= (green; checked against the lock). ``label``
+    replaces the declaration's name by a short phrase where the name does not fit."""
     kind = lock_kind(gid)
     assert kind == "theorem", f"{gid}: kind {kind!r} in the lock, green is only for theorems"
-    name = gid.rsplit(".", 1)[1]
+    name = label or gid.rsplit(".", 1)[1]
+    mono = label is None
+    nw = figkit.text_width(figkit.plain(name), CODE if mono else TITLE, mono=mono)
     chip = figkit.text_width("LEAN ✓", 12, mono=True) + 14
-    inner = chip + 8 + figkit.text_width(name, CODE, mono=True)
+    inner = chip + 8 + nw
     if note:
         inner = max(inner, figkit.text_width(figkit.plain(note), CODE))
     w = w or inner + 2 * PAD
     h = 52 if note else 34
     x = cx - w / 2
     p.rect(x, y, w, h, color="lean", fill="lean", fill_opacity=0.10, rx=6, width=1.6)
-    x0 = cx - (chip + 8 + figkit.text_width(name, CODE, mono=True)) / 2
+    x0 = cx - (chip + 8 + nw) / 2
     p.chip(x0, y + 22, "LEAN ✓", "lean")
-    p.text(x0 + chip + 8, y + 22, name, size=CODE, color="lean", mono=True)
+    p.text(x0 + chip + 8, y + 22, name, size=CODE if mono else TITLE, color="lean", mono=mono)
     if note:
         p.text(cx, y + 43, note, size=CODE, color="dim", anchor="middle")
     return Box(x, y, w, h)
