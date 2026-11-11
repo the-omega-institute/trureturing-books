@@ -16,17 +16,23 @@
 2. **抹平 $1$ 比特正交面积产生 $\ln 2$ 奈特系统熵增，并与非保单位兰道尔热浴重置严格区分**：在相互无偏基（MUB）下将 $d$ 维记录态保单位捏合抹平到最大混合态 $I_d/d$，系统的相对熵代价与冯·诺依曼熵增恒为 $\ln d - S(\rho)$（对单比特纯态恰为 $\ln 2 \approx 0.6931\text{ nats} = 1\text{ bit}$）；至于随后的非保单位逻辑重置如何将系统混合熵排入外部热浴，则见热力学文献注记 [@rem-landauer-stage-b-statement-literature] 与 [@rem-landauer-thermodynamic-bridge-literature]；
 3. **连观察者结构都没有任何例外**：哪怕观察者拥有通天神通，把环境中绝大多数纠缠副本都做了相干逆转，只要茫茫宇宙里还漏掉**唯一一份**未逆转的幸存环境副本 $k$（其记录重叠度 $\neq 1$，且其余已逆转副本具幺模重叠度），初始非零相干面积就绝不可能复原！
 
+::: {.figure src="ch08-overview"}
+**图 8。** 本章地图：第 I 栏，对角元相同、相干元不同的两支箭头 $\rho$ 与 $\sigma$ 高度相同，求偏迹抹掉品红的横向一份后落到竖轴上同一个青色的点；第 II 栏，琥珀色的箭头 $\lvert +\rangle$ 被捏合，品红的横向一份被抹掉，箭头缩成圆心的青色点，熵柱从 $0$ 升到 $\ln 2$；第 III 栏，系统连着五份环境副本，四份倒了带（青色），漏下的一份 $k$ 是品红的，倒带后只得到 $c_k\rho_{01} \neq \rho_{01}$。
+:::
+
 ## 8.1 幺正旋转的可逆性 vs. 信息擦除的不可逆性 {#sec-unitary-reversibility-vs-erasure}
 
 为什么单纯的量子门旋转永远不会制造时间箭头？因为幺正演化 $\rho \mapsto U\rho U^*$ 只是抓起布洛赫球做刚体旋转：球皮上的纯态依然在球皮上，球肚子里的椭球依然保持原本的三个半轴长度，密度矩阵的本征值谱纹丝不动，冯·诺依曼熵 $S(U\rho U^*) = -\Tr(U\rho U^* \ln(U\rho U^*)) = S(\rho)$ 恒等守恒！
 
 那么，不可逆的熵增究竟是在哪一瞬间诞生的？是在你为了在经典时间轴上写下一枚确定的粒子记录，执行**对角捏合投影** $\Pi_P(\sigma) = \sum_k P_k \sigma P_k$，强行把二维外积相干面积（副对角块 $P_j \sigma P_k,\, j \neq k$）从局部账本上抹除的那一瞬间！
 
-![全局受控拷贝可逆性与局部偏迹访问缺陷、相干面积擦除的相对熵产恒等式与 MUB 双账本 ln 2，以及唯一幸存环境副本阻断时间反演](../assets/fig-08-landauer-erasure-arrow.svg)
-
 让我们先算最彻底的一次正交擦除账本。假设系统原本沿着第一套标准正交记录基 $Z$（比如南北极计算基 $\{\lvert 0\rangle, \lvert 1\rangle\}$）写好了一份对角记录态 $\rho$（满足 $\Pi_Z(\rho) = \rho$）。现在，观察者转过 $90^\circ$，改用一套与 $Z$ **相互无偏（mutually unbiased bases, MUB）**的第二套正交记录基 $X$（比如东西赤道基 $\{\lvert +\rangle, \lvert -\rangle\}$，满足任意两基元重叠度 $|\langle z_j, x_k\rangle|^2 = \frac{1}{d}$）去重新捏合测量它，得到新状态 $\sigma = \Pi_X(\rho)$。
 
 在 Lean 模块 `Quantum/Divergence/DualAccountFull` 中，下面这条“双账本全定理”证明了：正交无偏基 $X$ 的捏合会彻底抹平 $Z$ 基下的全部历史偏置，把状态一步推到熵最大的球心均匀态 $\omega = I_d / d$；而在这一过程中损失的相对于 $\sigma$ 的量子相对熵（Umegaki relative entropy）$D(\rho \,\|\, \sigma) := \Tr(\rho(\ln\rho - \ln\sigma))$，一分不差地等于冯·诺依曼熵的增量 $S(\sigma) - S(\rho) = \ln d - S(\rho)$！
+
+::: {.figure src="ch08-mub-gap"}
+**无偏的捏合把熵一直推到 $\ln 2$，多出的那一截恰好是 $D(\rho \,\|\, \sigma)$。** 取 $d = 2$：横轴是 $Z$ 基对角态 $\rho$ 在竖轴上的高度 $r$，拱形曲线是 $S(\rho)$，顶上的虚线是 $X$ 基捏合后的 $S(\sigma) = \ln 2$；两者之间的品红区域就是 $D(\rho \,\|\, \sigma) = \ln 2 - S(\rho)$。右端琥珀色的点是纯态 $\lvert 0\rangle$，那里品红的一截是整整 $\ln 2$（[@thm-dual-account-full]）。
+:::
 
 ::: {.theorem #thm-dual-account-full title="相互无偏记录基下的双账本相对熵与最大熵增全定理" lean="D5/S3/Quantum/Divergence/DualAccountFull.dual_account_full"}
 设维数 $d \in \mathbb{N}$ 满足 $d \ge 1$（`[NeZero d]`），$Z, X : \mathrm{RankOneContext}\,d$ 为两组秩一测量上下文，其投影族均构成完备正交记录测量（`IsRecordMeasurement Z.projector`、`IsRecordMeasurement X.projector`），且满足相互无偏条件：
@@ -175,6 +181,10 @@ $$
 
 兰道尔界什么时候取不到等号？[@cor-landauer-bound-saturation] 的结论 2 给了判据：要么系统与热浴之间留下了关联（$I > 0$），要么热浴被推离了平衡（$D > 0$）。下面用能想到的最小热浴把这笔账算一遍。
 
+::: {.figure src="ch08-bath-excess"}
+**一个热浴比特擦得越干净，多付的 $D$ 涨得越快，系统熵减却封顶在 $\ln 2$。** 每根柱子是下面例子表中的一行：总高度是热量 $\beta Q$（柱顶的数），灰色的一截是系统熵减 $-\Delta S_{\mathrm{sys}}$，虚线框的一截是热浴相对熵 $D$，互信息 $I = 0$。灰色的一截逼近 $\ln 2$ 那条虚线却不越过它，虚线框却越长越高。数值结果；两条平衡式是文献结果，未在本书形式化，账目恒等式见 [@prop-landauer-identity-from-balances]。
+:::
+
 ::: {.example #ex-one-qubit-reservoir-swap-erasure title="用一个热浴量子比特擦除：有限热浴的超额热量"}
 本例中的两条密度矩阵平衡式属于**文献结果，未在本书形式化**；各项数值由定义直接计算，并用 [@prop-landauer-identity-from-balances] 的恒等式交叉核对。熵以奈特为单位。
 
@@ -248,6 +258,10 @@ $$
   因此，当每个已逆转副本 $l$ 在分支 $(i, j)$ 处具有**幺模重叠因子**（$\overline{\operatorname{recordOverlap}(\mathrm{records}(l), i, j)} \cdot \operatorname{recordOverlap}(\mathrm{records}(l), i, j) = 1$）时，前向因子与反演共轭因子相乘恰好抵消为 $1$！若观察者能把宇宙中**全部**副本（$S = \mathrm{Finset.univ}$）悉数逆转，联合相干逆转定理 [`joint_coherent_reversal`](lean:D5/S3/ObserverMemory/JointCoherentReversal.joint_coherent_reversal) 保证初态矩阵元 $\rho_{ij}$ 精确复原；
 - 但哪怕观察者逆转了除 $k$ 以外的**所有其他副本**（即对 $S = \mathrm{Finset.univ.erase}\,k$ 实施相干逆转，且所有 $l \neq k$ 均满足幺模抵消条件 $\overline{c_l} c_l = 1$），只要宇宙角落里还漏掉**唯一一份**未逆转的幸存副本 $k \in \mathrm{Copy}$，且该副本在 $(i, j)$ 处的重叠因子不为 $1$（$\operatorname{recordOverlap}(\mathrm{records}(k), i, j) \neq 1$），那么单幸存副本合成定理 [`one_surviving_copy_composition_apply`](lean:D5/S3/ObserverMemory/JointCoherentReversal.one_surviving_copy_composition_apply) 与下面的命题就铁面无私地宣告：**任何非零相干元 $\rho_{ij} \neq 0$ 都绝不可能复原！（双副本显式充要判据亦见 [`two_copy_joint_reversal_certificate`](lean:D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate)。）**
 
+::: {.figure src="ch08-surviving-copy"}
+**倒带只消去幺模的相位，漏下的副本 $k$ 留下它的 $c_k$。** 复平面上，灰色虚线箭头是原来的相干元 $\rho_{01}$。前向时它沿单位圆转过副本 1、2 的相位（青色的弧），再被副本 $k$ 缩短并转一下（品红的段）；倒带时副本 1、2 的相位沿小圆转回来（青色虚线弧），停在琥珀色的箭头 $c_k\rho_{01}$，回不到灰色箭头的尖端（[@prop-surviving-copy-blocks-reversal]）。图中取 $c_1 = e^{i40^\circ}$、$c_2 = e^{i30^\circ}$、$c_k = 0.6\,e^{i25^\circ}$。
+:::
+
 ::: {.proposition #prop-surviving-copy-blocks-reversal title="唯一未逆转幸存环境副本阻断相干时间反演定理" lean="D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal"}
 设 $\mathrm{Copy}$ 为有限且具可判等性的副本指标类型（`[Fintype Copy] [DecidableEq Copy]`），$\mathrm{records} : \mathrm{Copy} \to \mathrm{EnvironmentRecord}$ 为单比特环境记录副本族，$\rho \in M_2(\mathbb{C})$（`QubitMatrix`）为单比特矩阵，$i, j \in \mathrm{Fin}\,2$ 为矩阵指标，$k \in \mathrm{Copy}$ 为某一特定环境副本。假设满足以下三条条件：
 
@@ -313,3 +327,7 @@ $$
 > *“这核心是各向同性如何从正交关系到达另外一个点,一个是正交一次,一个是正交两次,因为三元两两正交”*
 
 我们就必须跳出单一平面，让三张两两垂直咬合的二向量平面合拢成一颗完整的**三维单位球面 $S^2$**！在接下来的**第三部《合拢·从面到球》**中，我们将看到三元正交（$X, Y, Z$）如何仅凭“正交一次、正交两次”两步寻址踏遍整颗球面，贝里几何相位如何丈量球面立体角曲率，以及高维球面的赤道测度集中如何决定变分量子算法的命运！
+
+::: {.figure src="ch08-third-direction"}
+**一个平面只装得下一次正交，第二次正交必须离开平面。** 圆盘是 $\vv{e}_1$、$\vv{e}_2$ 张成的平面：青色的弧从 $\vv{e}_1$ 转到 $\vv{e}_2$，是正交一次，仍在盘里；与两者都垂直的只剩品红的 $\vv{e}_3$，品红的弧从 $\vv{e}_2$ 转到 $\vv{e}_3$，是正交两次，离开了平面，三根轴合拢成一颗球。
+:::

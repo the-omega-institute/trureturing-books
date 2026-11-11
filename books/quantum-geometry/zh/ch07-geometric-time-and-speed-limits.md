@@ -15,6 +15,10 @@
 1. **量子时间是二向量有向面积**：连续幺正演化 $U(t) = \exp\bigl((-it/\hbar)H_{\mathrm{op}}\bigr)$ 的无穷小生成元 $G = -(i/\hbar)H_{\mathrm{op}}$ 必为**反自伴算子**（$G^* = -G$），哈密顿量 $H_{\mathrm{op}} = i\hbar G$ 所度量的，恰恰是量子态在单位时间内扫过的**二向量旋转面积率**；
 2. **经典时间是一维幂等投影线**：只有当观察者用幂等投影尺 $P^2 = P$ 去拦截这片旋转面积、每一次翻越 $90^\circ$ 正交墙（$\langle m_0, m_1\rangle = 0$）落下一枚不可混淆的离散记录时，连续扫掠的二维量子面积才被切分成了“滴答、滴答”的一维经典时间刻度！
 
+::: {.figure src="ch07-overview"}
+**图 7。** 本章地图：第 I 栏，琥珀色的箭头从 $m_0$ 转到与它垂直的 $m_1$，扫过一块品红的四分之一圆，两个端点是两声滴答；第 II 栏，横轴是转角 $\omega t$，灰色虚线是不看时留在 $\lvert 0\rangle$ 的概率，青色的线是测 $4$ 次时的概率，到 $180^\circ$ 还剩 $0.531$；第 III 栏，记账余量 $D_{\mathrm{freeze}} = \Delta E_{\mathrm{pass}} - \Delta S/\beta$ 随逆温度 $\beta$ 变化，在 $\beta_c$ 左边是品红的负余量，右边是青色的正余量。
+:::
+
 ## 7.1 薛定谔方程的几何翻译：哈密顿量 $H$ 就是单位时间扫过的二向量面积率 {#sec-schrodinger-bivector-rate}
 
 翻开任何一本大学量子力学课本，薛定谔方程 $i\hbar\partial_t\psi = H\psi$ 总是带着两个令人生疑的特征登场：第一，方程左边为什么要凭空塞进一个虚数单位 $i$？第二，为什么能量算符（哈密顿量 $H$）偏偏要是一个自伴（厄米）算符 $H^* = H$？
@@ -36,6 +40,10 @@ H_{\mathrm{op}} := (i\hbar) G \quad\Longleftrightarrow\quad G = -\frac{i}{\hbar}
 $$
 
 因为 $i$ 和 $G$ 在取共轭伴随时双双变号（$(-i)(-G) = +iG$），两个负号相乘抵消，这才把反自伴的**二向量面积旋转率 $G$** 包装成了自伴的**厄米哈密顿量 $H_{\mathrm{op}}$**！薛定谔方程根本不是一条需要死记硬背的神秘波动方程，它不过是再朴素不过的刚体角速度公式“**瞬时转向率 $=$ 单位时间扫过的二向量面积 $G$**”。
+
+::: {.figure src="ch07-area-rate"}
+**保模长的生成元只把箭头往垂直方向推。** 在琥珀色箭头 $\psi(t)$ 的尖端，紫色的箭头 $G\psi$ 沿切线，与 $\psi$ 成直角，所以箭头只转不伸缩；淡灰的箭头是之前相隔 $\Delta t$ 的位置，每个 $\Delta t$ 扫过一块同样大的品红扇形。示意：把复相位的转动画成实平面上的转动；自伴性与指数律见 [@thm-calibrated-unitary-group]。
+:::
 
 在 Lean 4 形式化模块 `Quantum/Dynamics/CalibratedUnitaryGroup` 中，下面这条定理在完备复内积空间（希尔伯特空间）$H$ 上一次性严格证明了：从单参数保模长群出发，校准后的哈密顿量 $H_{\mathrm{op}} = (i\hbar)G$ 必自伴、有限时间演化必为指数旋子 $U(t) = \exp((-it/\hbar)H_{\mathrm{op}})$，且处处满足算子薛定谔微分方程！
 
@@ -100,9 +108,11 @@ $$
 
 换句话说：**在经典时间轴上每往前迈出一步真正可区分的“滴答”，量子态在射影球面上就必须实打实地翻越一堵 $90^\circ$（$\pi/2$ 弧度）的正交墙！**
 
-![单参数幺正流与富比尼—施图迪量子速度极限、量子芝诺频闪冻结曲线，以及标量自由能记账阈值相图](../assets/fig-07-quantum-speed-limit-zeno.svg)
-
 在 Lean 模块 `QuantumBounds/FubiniStudyRecordTime` 中，我们先证明了任意三根单位态向量 $a, b, c$ 之间的富比尼—施图迪球面三角不等式 $\theta_{\mathrm{FS}}(a, c) \le \theta_{\mathrm{FS}}(a, b) + \theta_{\mathrm{FS}}(b, c)$（[`fs_angle_triangle`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle)）。由此出发，如果从一个锚定中间态 $a$ 到两个正交目标记录态 $m_0, m_1$（$\langle m_0, m_1\rangle_{\mathbb{C}} = 0$）的角位移分别受限于速度上界 $\theta_{\mathrm{FS}}(a, m_k) \le \mathrm{energy}\cdot\tau / \hbar$（$k = 0, 1$），那么两段路程加起来至少要跨过 $\theta_{\mathrm{FS}}(m_0, m_1) = \pi/2$ 的正交鸿沟，从而直接锁死了单步记录时间 $\tau$ 的绝对下界与有限时长 $T$ 内的最大经典记录步数 $N$！
+
+::: {.figure src="ch07-wall"}
+**两段各不超过 $E\tau/\hbar$ 的路，加起来至少要跨过 $90^\circ$。** 赤道上的 $m_0$ 与 $m_1$ 正交，它们之间是品红的 $90^\circ$ 弧；从琥珀色的锚点 $a$ 到两者各有一段青色的弧，每段受速度界 $\le E\tau/\hbar$ 限制（$E$ 即定理中的 $\mathrm{energy}$）。两段青色弧之和不小于品红的弧，于是 $2E\tau/\hbar \ge \frac{\pi}{2}$（[@thm-fubini-study-record-time]）。示意：图中是实单位向量的球面，重叠为正时富比尼—施图迪夹角就是弧长。
+:::
 
 ::: {.theorem #thm-fubini-study-record-time title="正交记录分辨的富比尼—施图迪时间下界与记录计数上界定理" lean="D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound"}
 设 $E$ 为复内积空间，$a, m_0, m_1 \in E$ 为单位向量（$\|a\| = \|m_0\| = \|m_1\| = 1$），其中两个目标记录态正交：$\langle m_0, m_1\rangle_{\mathbb{C}} = 0$。记富比尼—施图迪夹角为 $\theta_{\mathrm{FS}}(x, y) := \arccos\|\langle x, y\rangle_{\mathbb{C}}\|$（[`fsAngle`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.fsAngle)）。设能量尺度参数 $\mathrm{energy} > 0$，普朗克常数 $\hbar > 0$，时间步长 $\tau \in \mathbb{R}$。若从锚定态 $a$ 到 $m_0, m_1$ 的角位移满足单步速度界
@@ -220,6 +230,10 @@ $$
 答案就是量子力学中大名鼎鼎的**量子芝诺效应（Quantum Zeno Effect）**——俗称“被盯着的开水永远烧不开”！
 
 用我们的线面几何来看，芝诺效应的机制连半点玄机都没有：**因为在极短时间 $\delta t = T/N \ll 1$ 内，刚体旋转扫过的外积面积高度是弧长的一阶小量 $\sin(\omega\delta t/2) \approx \frac{\omega T}{2N}$，而投影回初始基准线 $\vv{A}$ 时损失的余弦长度却是二阶小量 $1 - \cos^2(\omega\delta t/2) = \sin^2(\omega\delta t/2) \approx \frac{\omega^2 T^2}{4N^2}$！** 当你用高频内积投影一次次把那丁点刚冒头的一阶外积面积强行拍扁回一维基准线上时，$N$ 次二阶小量加起来只有 $N \times O(N^{-2}) = O(N^{-1}) \to 0$，整个量子演化就被你密不透风的视线硬生生钉死在了原地！
+
+::: {.figure src="ch07-zeno-n"}
+**测得越勤，全程留在 $\lvert 0\rangle$ 的概率越接近 $1$。** 横轴是测量次数 $N$（对数刻度），青色的曲线是 $P_N = \bigl[\cos^2\frac{\pi}{2N}\bigr]^N$，青色的点是 $N = 1, 4, 16, 64$，依次为 $0$、$0.531$、$0.857$、$0.962$；灰色虚线是近似式 $1 - \frac{\pi^2}{4N}$，$N$ 越大越贴近青色曲线，缺口按 $\frac{1}{N}$ 缩小。数值由 [@ex-zeno-strobe-freezing] 的解析式算出。
+:::
 
 ::: {.viz src="speed-limit-zeno" preset="strobe16" height="500"}
 **频闪 16 次：几乎走不掉。** 箭头每转 $11.25^\circ$ 就被拉回 $\lvert 0\rangle$：品红的一份（离开线的一阶小量）刚露头就被削掉，青色的影子几乎不短。右边青色的留存几乎铺满，到 $180^\circ$ 还剩 $0.857$；虚线是不看时的路。
@@ -359,6 +373,10 @@ $$
 $$
 
 下面的定理给出了一个**标量自由能记账阈值判据**：对正标量 $\beta > 0$ 与 $\Delta E_{\mathrm{pass}} > 0$，净自由能余量 $D_{\mathrm{freeze}} = \Delta E_{\mathrm{pass}} - \Delta S/\beta$ 严格为正，当且仅当逆温度 $\beta$ 严格高于临界比值 $\beta_c = \Delta S/\Delta E_{\mathrm{pass}}$。（注：该定理在 Lean 中仅证明这一标量代数等价关系本身；在未额外引入具体热浴动力学或势垒演化模型前，不应单凭该标量不等式宣称系统动力学演化被自动锁死或退相干被动力学抑制。）
+
+::: {.figure src="ch07-freeze-threshold"}
+**记账余量为正，当且仅当 $\beta$ 越过 $\beta_c = \Delta S/\Delta E_{\mathrm{pass}}$。** 取 $\Delta E_{\mathrm{pass}} = 1$：斜线 $\Delta S = \beta\,\Delta E_{\mathrm{pass}}$ 上 $D_{\mathrm{freeze}} = 0$，斜线下方的青色区里 $D_{\mathrm{freeze}} > 0$，上方的品红区里 $D_{\mathrm{freeze}} < 0$。琥珀色的虚线固定 $\Delta S = \frac{1}{2}$ 向右走，在 $\beta_c = \frac{1}{2}$ 穿过斜线进入青色区（[@thm-decoherence-freeze-critical]）。图只画这条标量不等式，不涉及任何动力学。
+:::
 
 ::: {.theorem #thm-decoherence-freeze-critical title="标量自由能记账余量为正的临界逆温度充要判据" lean="D5/S3/QuantumChannels/DecoherenceFreeze.decoherence_freeze_iff_above_critical"}
 设逆温度参数 $\beta \in \mathbb{R}$ 满足 $\beta > 0$，被动能量差 $\Delta E_{\mathrm{pass}} \in \mathbb{R}$ 满足 $\Delta E_{\mathrm{pass}} > 0$，熵税参数为 $\Delta S \in \mathbb{R}$。定义标量记账余量与临界逆温度分别为（[`freezeDeposit`](lean:D5/S3/QuantumChannels/DecoherenceFreeze.freezeDeposit)、[`criticalInverseTemperature`](lean:D5/S3/QuantumChannels/DecoherenceFreeze.criticalInverseTemperature)）
