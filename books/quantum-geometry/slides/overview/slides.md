@@ -498,7 +498,7 @@ section: "第六部 · 依据"
       <p>本书验证的是抽象的对角线逃逸；康托尔、Lawvere、哥德尔与塔斯基定理各自的前提边界只作文献对照，未在本书形式化。</p>
     </div>
     <div>
-      <TheoremCard class="compact" label="猜想22.34" title="黎曼猜想" status="open" cite="conj-riemann-hypothesis">
+      <TheoremCard class="compact" label="猜想22.36" title="黎曼猜想" status="open" cite="conj-riemann-hypothesis">
         <p>ζ 函数位于临界带 <Tex t="0 \lt \operatorname{Re}(s) \lt 1" /> 内的每个零点都在临界线 <Tex t="\operatorname{Re}(s) = 1/2" /> 上。</p>
       </TheoremCard>
       <p class="lead mt-s">第二十四章另有一条：<span class="hl-warn">沙努埃尔猜想</span>推出 <Tex t="\theta^*" /> 与 <Tex t="\pi" /> 代数无关。</p>
@@ -668,11 +668,11 @@ section: "三层依据"
     <img src="./img/prelude-three-tiers.zh.svg" alt="三条横条：绿色 184，紫色 127，红色 6；绿色下注锁文件里 308 条 theorem 声明。" style="display: block; width: 900px; max-width: 100%;">
     <div>
       <div class="g3">
-        <Stat value="184" label="带 lean= 的定理、引理、命题与推论" tone="ok" />
+        <Stat value="186" label="带 lean= 的定理、引理、命题与推论" tone="ok" />
         <Stat value="127" label="写明“文献结果，未在本书形式化”的注记与例" tone="violet" />
         <Stat value="6" label="开放猜想，标为 OPEN，不带 Lean 引用" tone="warn" />
       </div>
-      <p class="lead mt">锁文件 <span class="mono">trureturing.lock.json</span> 钉住 <PinnedCommit />，共 439 项声明，其中 308 项是 Lean theorem。</p>
+      <p class="lead mt">锁文件 <span class="mono">trureturing.lock.json</span> 钉住 <PinnedCommit />，共 441 项声明，其中 310 项是 Lean theorem。</p>
     </div>
   </div>
 </div>

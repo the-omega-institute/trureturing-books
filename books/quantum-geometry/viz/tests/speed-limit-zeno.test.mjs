@@ -111,6 +111,15 @@ await pick('strobe16');
 check('STROBE ×16 plays by itself', await finished());
 s = await state();
 check('STROBE ×16: P₁₆ = 0.8569 from repeated steps', s.N === 16 && close(s.zeno.PN, strobeSurvival(16), 1e-12) && close(strobeSurvival(16), 0.8569, 5e-5));
+// the magenta segment is drawn on the Bloch sphere: at the end of a look it is the Bloch transverse |sin(π/N)|, while
+// the Hilbert-space amplitude off |0⟩ is sin(π/2N); the two are related by sin(π/N) = 2 sin(π/2N) cos(π/2N)
+await seek(PI - 1e-7); s = await state();
+const one = stepU(PI / 16, [[1, 0], [0, 0]]), amp16 = Math.sqrt(cabs2(one[1])), ab16 = cmul(conj(one[0]), one[1]);
+const trans16 = Math.hypot(2 * ab16[0], 2 * ab16[1]);   // |(⟨σx⟩, ⟨σy⟩)| of the state vector after one look's turn
+check('STROBE ×16: at the end of a look the drawn arrow is off the line by the Bloch transverse 0.195090, not the amplitude 0.098017', close(Math.hypot(s.arrow[0], s.arrow[1]), trans16, 1e-6) && close(trans16, 0.195090, 5e-7) && close(amp16, 0.098017, 5e-7) && close(trans16, 2 * amp16 * Math.sqrt(cabs2(one[0])), 1e-12));
+const mRow = await page.evaluate(() => { const r = document.querySelector('#ro .m'); return r ? [r.querySelector('dt').textContent, r.querySelector('dd').textContent.trim()] : null; });
+check('STROBE ×16: the magenta readout gives the drawn length 0.1951 under a formula in π/N, not π/2N', mRow && mRow[1] === trans16.toFixed(4) && !/π\/2N/.test(mRow[0]) && /π\/N/.test(mRow[0]), JSON.stringify(mRow));
+check('STROBE ×16: the survival readouts keep cos²(π/2N): one yes is 0.990393', close(s.zeno.p1, cabs2(one[0]), 1e-12) && close(s.zeno.p1, 0.990393, 5e-7));
 for (const [n, v] of [[1, 0], [64, 0.9622]]) {
   await page.click(`#strobeChips [data-strobes="${n}"]`); s = await state();
   check(`strobe chip N = ${n}: P = ${v} (table of §7.3)`, s.N === n && close(s.zeno.PN, strobeSurvival(n), 1e-12) && close(s.zeno.PN, v, 5e-5) && s.preset === null);
