@@ -6,6 +6,11 @@
 
 1. **基于测量的单向量子计算（MBQC）**：如果预先制备好一张多比特纠缠簇态（cluster state），我们甚至不需要在计算过程中再施加任何幺正双比特门——仅仅通过一步步在球面赤道上选择不同的测量基角 $\alpha$（转移观察者的注意力焦点），并把前一步的测量结果通过经典前馈（feedforward）修正下一步的测量轴，就能在未测量的输出节点上驱动出任意量子逻辑门！
 2. **泡利参数位移律（Parameter-Shift Rule）**：当观察者想要在参数化量子电路里顺着期望值曲面求导数 $\partial_\theta f(\theta)$ 时，他不需要像经典微积分那样取极小步长 $\delta\theta \to 0$ 去做容易放大散粒噪声的有限差分近似；因为在单次泡利旋转下球面截面天然是纯粹的一阶正余弦波，只需把参数精确拨到左右**正交 $90^\circ$** 的两个位移设置点 $\theta \pm \frac{\pi}{2}$ 分别求取（或通过重复采样估计）期望值 $f(\theta \pm \frac{\pi}{2})$，两者的差商就给出**零有限差分截断误差的精确解析导数恒等式**（尽管有限次采样估计期望值时仍保留常规统计散粒噪声）！
+
+::: {.viz src="parameter-shift" preset="noise" height="500"}
+**同样多的测量次数，两种算法的散布差十几倍。** $\theta = 60^\circ$，每个取值点只测 100 发：每次试验在量尺上落一个青色的点（左右各 $90^\circ$ 两值之差的一半）和一个品红的点（$\pm 6^\circ$ 的小步长差分）。青色的点挤在切线斜率的虚线旁，宽约 0.035；品红的点散开约 0.58，有的落出量尺。两种散布都来自散粒噪声，小步长把它放大了（[@rem-parameter-shift-rule-literature]）。
+:::
+
 3. **黎曼自然梯度与高维赤道集中**：在弯曲球面与射影流形上，沿着内蕴黎曼度量（如球面诱导度量或 Fubini–Study 度量）的负梯度流下滑，势能的减少量精确等于切速度模长平方的时间积分（[@thm-riemannian-gradient-dissipation]）；然而一旦维度随比特数 $n$ 指数暴涨到 $d = 2^n$，高维球面上几乎所有的测度都会死死挤压在垂直于任一固定测量轴的**赤道窄带**内，在满足特定随机电路设计假设时构成变分量子算法“贫瘠高原（barren plateau）”现象的几何背景；与此同时，作为一条独立于球面测度与电路梯度的纯谱分析工具，当非负可和本征值序列满足有限迹预算等式 $\sum_j \lambda_j = RW/\pi$ 时，其超过任意正阈值 $\tau > 0$ 的模式个数满足一个充分的有限计数上界（[@cor-finite-trace-mode-budget]）。
 
 ![簇态测量传态与自适应前馈、单次泡利旋转的正交参数位移律，以及受限实振幅高维球面的赤道集中与有限迹谱模式界](../assets/fig-12-mbqc-parameter-shift-barren.svg)
@@ -110,6 +115,10 @@ $$
 
 当电路中的参数仅出现在单扇对合泡利旋转门中时，[@prop-measurement-gradient-flow] 的无穷小导数与有限移位两采样公式之间的文献关系汇总如下（图 12 中栏；[@rem-parameter-shift-rule-literature]）。
 
+::: {.viz src="parameter-shift" preset="shift" height="500"}
+**左右各转 $90^\circ$，两值之差的一半就是斜率。** $f = \cos\theta$，琥珀色的点在 $\theta = 60^\circ$，两个青色的点在 $-30^\circ$ 与 $150^\circ$，高 $0.866$ 与 $-0.866$；两值之差的一半 $-0.866$ 正是虚线切线的斜率，而切线斜率是按 [@prop-measurement-gradient-flow] 的对易子公式算出的。圆里两支青色箭头与琥珀色的箭头垂直，它们在测量轴上的高度就是这两个值。
+:::
+
 ::: {.remark #rem-parameter-shift-rule-literature title="单次对合泡利旋转的两采样参数位移律（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 在**单次泡利旋转门** $R_P(\theta) = \exp(-i\theta P_{\mathrm{gen}}/2)$（其中生成元满足自伴对合条件 $P_{\mathrm{gen}}^* = P_{\mathrm{gen}}$ 且 $P_{\mathrm{gen}}^2 = I$，对应 $H = \frac{1}{2}P_{\mathrm{gen}}$）下，由于 $P_{\mathrm{gen}}^2 = I$，传播子精确展开为 $R_P(\theta) = \cos(\theta/2) I - i\sin(\theta/2) P_{\mathrm{gen}}$。因此，对任意固定初态与固定测量算符，期望值函数 $f(\theta)$ 作为 $\theta$ 的函数**只含有零频常数项与一倍角基频谐波**：
 
@@ -124,6 +133,14 @@ $$
 $$
 
 （职责边界：[@prop-measurement-gradient-flow] 经 Lean 内核验证的是无穷小对易子导数公式与纯实性；上述两采样点有限位移恒等式额外依赖“参数 $\theta$ 仅在单扇对合泡利门 $e^{-i\theta P_{\mathrm{gen}}/2}$ 中出现一次”的二能级频率结构，作为手算与文献结果列入 [@ex-cluster-shift-and-gradient] 与 [@rem-mbqc-gradients-literature]。）
+:::
+
+::: {.viz src="parameter-shift" preset="anywhere" height="500"}
+**换一个角度、换一条曲线，仍然精确。** 倾斜的态与测量轴给出抬高了常数 $c$、错开了相位的曲线 $f = c + a\cos\theta + b\sin\theta$。$\theta$ 扫过一整圈，量尺上青色的条始终停在切线的虚线上，品红的条（$\pm 30^\circ$ 的小步长差分）始终短一截；常数 $c$ 在相减时消掉（[@rem-parameter-shift-rule-literature]）。
+:::
+
+::: {.viz src="parameter-shift" height="560"}
+**参数位移：完整实验室。** 两个场景共用一条时间轴：曲线（拖动曲线或圆里的箭头改角度，换曲线、改小步长 $h$）与采样（改每个取值点的发数 $N$，看两种算法的散布怎样随 $N$ 与 $h$ 变化）。
 :::
 
 ## 黎曼梯度与能量耗散 {#sec-riemannian-natural-gradient}
@@ -181,6 +198,14 @@ $$
 
 几何直觉藏在**高维球面的赤道测度集中现象（concentration of measure）**里（图 12 右栏；受限实振幅模型球面上的二阶矩上界汇总于 [@rem-sphere-equator-markov-literature]）。
 
+::: {.viz src="equator-concentration" preset="three" height="500"}
+**普通的三维球面上，点的高度均匀分布。** $d = 3$：圆上的点上下铺开，右边的精确密度是一条竖直的直线 $1/2$；$\varepsilon = 0.1$ 的赤道带里恰好是 10% 的点（青色），其余 90% 是品红的点。高度均匀是阿基米德的经典结果，未在本书形式化。
+:::
+
+::: {.viz src="equator-concentration" preset="width" height="500"}
+**维数越高，点越挤向赤道。** 时间轴把维数从 $d = 2$ 升到 $d = 2^{10}$：圆上的点挤向垂直于测量轴的赤道，右边的鼓包变窄变高，两道短横线 $\pm 1/\sqrt{d}$ 一起收拢；到 $d = 1024$ 时带外只剩 0.13%。宽度 $1/\sqrt{d}$ 来自 $\mathbb{E}[x_1^2] = 1/d$（[@rem-sphere-equator-markov-literature]）。
+:::
+
 ::: {.remark #rem-sphere-equator-markov-literature title="实单位球面二阶矩与赤道马尔可夫集中上界（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 在受限的实振幅模型球面 $S^{d-1} \subset \mathbb{R}^d$（其中希尔伯特维数 $d = 2^n$）上，设 $x = (x_1, \dots, x_d) \in S^{d-1}$ 是从 $d$ 维单位球面上按旋转不变均匀测度随机抽取的一根单位实向量。由于总模长恒满足 $\sum_{j=1}^d x_j^2 = 1$，且各向同性保证每个坐标分量的平方期望完全相等（$\mathbb{E}[x_1^2] = \cdots = \mathbb{E}[x_d^2]$），故任意单根固定测量轴（如 $x_1$ 轴）上的投影平方期望等于维数的倒数：
 
@@ -195,6 +220,14 @@ $$
 $$
 
 例如 $n = 20$ 颗量子比特（$d = 2^{20} = 1{,}048{,}576$）、带宽 $\varepsilon = 0.1$ 时，$\Pr(|x_1| \ge 0.1) \le \frac{100}{1048576} \approx 9.54 \times 10^{-5}$，即至少 $99.99046\%$ 的高维实球面测度集中在 $|x_1| < 0.1$ 的赤道窄带内，从固定单根测量轴看几乎正交于视线（与随机量子电路贫瘠高原定理的条件边界详见 [@rem-mbqc-gradients-literature]）。
+:::
+
+::: {.viz src="equator-concentration" preset="bound" height="500"}
+**马尔可夫上界总在实际份额之上。** $d = 2^7 = 128$、$\varepsilon = 0.2$：品红的带外份额是 0.023，上界 $1/(d\varepsilon^2) = 0.195$ 在它之上，大了八倍多（[@rem-sphere-equator-markov-literature]）。
+:::
+
+::: {.viz src="equator-concentration" preset="twenty" height="500"}
+**二十个量子比特：所有的点都在赤道窄带里。** $d = 2^{20}$、$\varepsilon = 0.1$：圆上的点全落在赤道上，密度是赤道上的一根细针。马尔可夫上界给出 $9.54 \times 10^{-5}$，页面用不完全贝塔函数算出的精确份额约为 $3 \times 10^{-2291}$。这是受限实振幅模型上的测度集中，不是电路梯度定律（[@rem-mbqc-gradients-literature]）。
 :::
 
 与上述均匀球面测度集中和随机电路梯度定律**完全独立**，在算子层析与时频集中分析中还有另一类常被对比的数学问题：**当一个非负实数列 $\lambda : \mathbb{N} \to \mathbb{R}$ 可和且满足有限迹恒等式 $\sum_{j=0}^\infty \lambda_j = \frac{R W}{\pi}$ 时，如何从上界控制它超过给定阈值 $\tau > 0$ 的模式个数？** 在 Lean 模块 `FiniteRankConcentrationModeBound` 中，下面的冻结推论给出了这一**充分计数上界**：任何超过正阈值 $\tau > 0$ 的超水平集 $S_\tau = \{j \in \mathbb{N} \mid \tau \le \lambda_j\}$ 必然是有限集，且其基数受显式上界 $\frac{R W}{\pi \tau}$ 控制。（请务必注意边界：该定理只是一个关于非负可和序列的**充分计数上界**，既不是超水平集有限的必要条件——例如不可和的调和序列 $\lambda_j = \frac{1}{j+1}$ 总和发散，但对每个正阈值 $\tau > 0$ 同样只有有限项满足 $\lambda_j \ge \tau$——也不提供逃离贫瘠高原或保证电路梯度非零的机制，因为有限维密度矩阵天然迹为 $1$，且有限迹预算丝毫不能阻止常数目标函数的梯度恒为零。）
@@ -258,6 +291,10 @@ $$
 
    即至少 $99.9904633\%$ 的测度集中在 $|x_1| < 0.1$ 的赤道带内（此为经典二阶矩/马尔可夫上界，而非已证电路梯度定律）。
 5. **冻结有限迹谱预算界的显式实例化**：在 [@cor-finite-trace-mode-budget] 中取几何衰减谱 $\lambda_j = 2^{-(j+1)}$（$j \in \mathbb{N}$），区间半径 $R = \pi$，频率测度 $W = 1$，阈值 $\tau = \frac{1}{8}$。此时 $\sum_{j=0}^\infty \lambda_j = 1 = \frac{R W}{\pi}$，满足 $\lambda_j \ge \frac{1}{8}$ 的下标恰好为 $j \in \{0, 1, 2\}$ 共 $3$ 个模式（$\lambda_0 = \frac{1}{2}, \lambda_1 = \frac{1}{4}, \lambda_2 = \frac{1}{8}$），严格符合上界 $3 \le \frac{R W}{\pi \tau} = 8$。
+:::
+
+::: {.viz src="equator-concentration" height="560"}
+**赤道集中：完整实验室。** 时间轴是维数 $d = 2^n$（$n$ 从 1 到 20），可以改带宽 $\varepsilon$、重新抽样；小图在对数坐标上画出宽度 $1/\sqrt{d}$、精确的带外份额与马尔可夫上界 $1/(d\varepsilon^2)$。
 :::
 
 ::: {.remark #rem-mbqc-gradients-literature title="单向量子计算、参数位移、自然梯度与贫瘠高原（文献结果，未在本书形式化）"}

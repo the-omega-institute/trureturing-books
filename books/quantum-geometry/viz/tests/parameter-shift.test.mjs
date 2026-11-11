@@ -1,0 +1,154 @@
+#!/usr/bin/env node
+// Browser regression suite for SHIFT//RULE (books/quantum-geometry/viz/parameter-shift/).
+//   node books/quantum-geometry/viz/tests/parameter-shift.test.mjs      (or: node tools/node/viz-test.mjs quantum-geometry)
+// The page turns a Bloch vector and takes a dot product, and gets the tangent slope from the commutator formula on
+// 2 × 2 density matrices. The suite works with state vectors instead: |ψ₀⟩ from the Bloch vector, U = e^{−iθY/2}
+// applied to it, f = ⟨ψ|m·σ|ψ⟩; slopes come from a Richardson-extrapolated numerical derivative of that f; the shot
+// estimates are recomputed from the page's raw counts and their scatter compared with the binomial variance.
+// It reads the page through window.SHIFT_DEBUG.
+import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
+
+const BOOK = 'quantum-geometry', ID = 'parameter-shift';
+const T = await session();
+const { check } = T;
+const PI = Math.PI, DEG = PI / 180, Q = PI / 2;
+const close = (a, b, eps = 1e-9) => Math.abs(a - b) <= eps;
+
+/* ---------- independent model: state vectors ---------- */
+const cmul = (a, b) => [a[0] * b[0] - a[1] * b[1], a[0] * b[1] + a[1] * b[0]];
+const cadd = (a, b) => [a[0] + b[0], a[1] + b[1]];
+const conj = (a) => [a[0], -a[1]];
+/** The pure state with Bloch vector r (unit). */
+function ket(r) {
+  const al = Math.acos(Math.max(-1, Math.min(1, r[2]))), be = Math.atan2(r[1], r[0]);
+  return [[Math.cos(al / 2), 0], [Math.sin(al / 2) * Math.cos(be), Math.sin(al / 2) * Math.sin(be)]];
+}
+/** e^{−iθY/2} = [[c, −s], [s, c]] (real). */
+const evolve = (v, th) => { const c = Math.cos(th / 2), s = Math.sin(th / 2); return [cadd([c * v[0][0], c * v[0][1]], [-s * v[1][0], -s * v[1][1]]), cadd([s * v[0][0], s * v[0][1]], [c * v[1][0], c * v[1][1]])]; };
+/** ⟨ψ| m·σ |ψ⟩ with m·σ = [[mz, mx − i my], [mx + i my, −mz]]. */
+function expect(v, m) {
+  const A = [[[m[2], 0], [m[0], -m[1]]], [[m[0], m[1]], [-m[2], 0]]];
+  const Av = [cadd(cmul(A[0][0], v[0]), cmul(A[0][1], v[1])), cadd(cmul(A[1][0], v[0]), cmul(A[1][1], v[1]))];
+  return cadd(cmul(conj(v[0]), Av[0]), cmul(conj(v[1]), Av[1]))[0];
+}
+const fOf = (r0, m) => (th) => expect(evolve(ket(r0), th), m);
+/** Richardson-extrapolated central difference. */
+const deriv = (f, x) => { const d = (h) => (f(x + h) - f(x - h)) / (2 * h); return (4 * d(1e-4) - d(2e-4)) / 3; };
+const meanSd = (xs) => { const n = xs.length, m = xs.reduce((a, x) => a + x, 0) / n; return [m, Math.sqrt(xs.reduce((a, x) => a + (x - m) ** 2, 0) / (n - 1))]; };
+
+/* ---------- the gates every stage-first page must pass ---------- */
+await stageFirstChecks(T, BOOK, ID);
+
+/* ---------- page-specific checks ---------- */
+const page = await T.goto(BOOK, ID, '?lang=zh');
+const state = async () => { await settle(page); return page.evaluate(() => window.SHIFT_DEBUG.state); };
+const pick = async (id) => { await page.click(`[data-preset="${id}"]`); await settle(page); };
+const plays = () => until(page, () => { const s = window.SHIFT_DEBUG.state; return s.playing && s.t > 0; });
+const seek = async (t) => { await page.evaluate((x) => window.SHIFT_DEBUG.seek(x), t); await settle(page); };
+const setRange = async (id, v) => { await page.evaluate(([i, val]) => { const el = document.getElementById(i); el.value = String(val); el.dispatchEvent(new Event('input', { bubbles: true })); }, [id, v]); await settle(page); };
+
+// SHIFT ±90°: the example of Chapter 12
+let s = await state();
+const fz = fOf([0, 0, 1], [0, 0, 1]);
+check('opens on SHIFT ±90° with f = cos θ at θ = 60°', s.preset === 'shift' && s.scene === 'curve' && s.model === 'z' && close(s.theta, PI / 3, 1e-12));
+check('SHIFT: f(60°) = 1/2, f(150°) = −√3/2, f(−30°) = √3/2 (state vectors)', close(s.f, 0.5, 1e-12) && close(s.fPlus, -Math.sqrt(3) / 2, 1e-12) && close(s.fMinus, Math.sqrt(3) / 2, 1e-12)
+  && close(fz(PI / 3), s.f, 1e-12) && close(fz(5 * PI / 6), s.fPlus, 1e-12) && close(fz(-PI / 6), s.fMinus, 1e-12));
+check('SHIFT: half the difference is −√3/2 ≈ −0.8660254038', close(s.shift, -0.8660254038, 1e-10));
+check('SHIFT: the commutator slope equals the numerical derivative of the state-vector f', close(s.slope, deriv(fz, PI / 3), 1e-8) && close(s.slope, -Math.sin(PI / 3), 1e-12));
+check('SHIFT: the HUD and the key readout print −0.8660', (await page.textContent('#hudSub')).includes('−0.8660') && (await page.textContent('#ro .key')).includes('−0.866025'));
+await pick('shift');
+check('SHIFT plays by itself when clicked', await plays());
+check('SHIFT stops at θ = 60° by itself', await until(page, () => { const s = window.SHIFT_DEBUG.state; return !s.playing && Math.abs(s.theta - Math.PI / 3) < 1e-9; }));
+
+// ANY ANGLE: the tilted case, a full sweep
+await pick('anywhere');
+check('ANY ANGLE plays by itself', await plays());
+await seek(2 * PI * 0.83); s = await state();
+const ft = fOf(s.r0, s.m);
+check('ANY ANGLE: r₀ = (0.48, 0.60, 0.64), m = (0.80, 0.36, 0.48), unit vectors', s.model === 'tilt' && close(Math.hypot(...s.r0), 1, 1e-12) && close(Math.hypot(...s.m), 1, 1e-12));
+const c0 = (ft(0) + ft(PI)) / 2, a0 = (ft(0) - ft(PI)) / 2, b0 = (ft(Q) - ft(-Q)) / 2;
+check('ANY ANGLE: c, a, b from the state-vector f at 0, ±90°, 180° match the page (0.216, 0.6912, 0.2816)', close(s.coeffs.c, c0, 1e-12) && close(s.coeffs.a, a0, 1e-12) && close(s.coeffs.b, b0, 1e-12) && close(c0, 0.216, 1e-12) && close(a0, 0.6912, 1e-12) && close(b0, 0.2816, 1e-12));
+let worstF = 0; for (let i = 0; i <= 90; i++) { const x = -PI + 2 * PI * i / 90; worstF = Math.max(worstF, Math.abs(ft(x) - (c0 + a0 * Math.cos(x) + b0 * Math.sin(x)))); }
+check('ANY ANGLE: f has only a constant and the first harmonic (91 angles)', worstF < 1e-12, String(worstF));
+const sw = await page.evaluate(() => window.SHIFT_DEBUG.sweep(72));
+let worstShift = 0, worstSlope = 0;
+for (const [x, sh, sl] of sw) { const d = deriv(ft, x); worstShift = Math.max(worstShift, Math.abs(sh - d), Math.abs((ft(x + Q) - ft(x - Q)) / 2 - d)); worstSlope = Math.max(worstSlope, Math.abs(sl - d)); }
+check('ANY ANGLE: half the ±90° difference equals the slope at 73 angles of a full turn', worstShift < 1e-8, String(worstShift));
+check('ANY ANGLE: the commutator slope equals the numerical derivative at the same angles', worstSlope < 1e-8, String(worstSlope));
+check('ANY ANGLE: the page state agrees at the current angle', close(s.shift, deriv(ft, s.theta), 1e-8) && close(s.f, ft(s.theta), 1e-12));
+
+// SMALL STEP: the ±30° chord is short by the factor sin h / h
+await pick('step');
+check('SMALL STEP plays by itself', await plays());
+await seek(PI / 3 + PI); s = await state();
+const h30 = 30 * DEG, fd30 = (fz(PI / 3 + h30) - fz(PI / 3 - h30)) / (2 * h30);
+check('SMALL STEP: h = 30°, the difference −0.8270 is 4.5% short of the slope (sin h / h = 0.9549)', s.h === 30 && close(s.fd, fd30, 1e-12) && close(s.fd, -0.8270, 5e-5) && close(s.fd / s.slope, 0.9549, 5e-5));
+let worstRatio = 0; for (const [x, , sl, fd] of await page.evaluate(() => window.SHIFT_DEBUG.sweep(36))) if (Math.abs(sl) > 1e-3) worstRatio = Math.max(worstRatio, Math.abs(fd / sl - Math.sin(h30) / h30));
+check('SMALL STEP: the same factor at every angle of the sweep', worstRatio < 1e-9, String(worstRatio));
+await setRange('h', 3); s = await state();
+const err3 = Math.abs(s.fd - deriv(fz, s.theta)), err30 = Math.abs(fd30 - deriv(fz, PI / 3));
+const h3 = 3 * DEG, ratioExp = (1 - Math.sin(h30) / h30) / (1 - Math.sin(h3) / h3);
+check('the step slider: h = 3° leaves the card and the error shrinks about 100-fold (like h²), never to zero', s.h === 3 && s.preset === null && err3 > 1e-6 && Math.abs(err30 / err3 / ratioExp - 1) < 1e-3 && err30 / err3 > 95 && err30 / err3 < 101, `${err30 / err3}`);
+await page.click('#modelChips [data-model="tilt"]'); s = await state();
+check('the curve chips switch to the tilted state and axis', s.model === 'tilt' && close(s.f, ft(s.theta), 1e-12));
+await page.click('#modelChips [data-model="z"]');
+
+// SHOTS: the counts, the estimates and their scatter
+await pick('noise');
+check('SHOTS plays by itself', await plays());
+await seek(200); s = await state();
+check('SHOTS: θ = 60°, N = 100, h = 6°, 200 trials', s.scene === 'shots' && close(s.theta, PI / 3, 1e-12) && s.N === 100 && s.h === 6 && s.trials === 200);
+let smp = await page.evaluate(() => window.SHIFT_DEBUG.samples());
+const h6 = 6 * DEG;
+const recon = (k, N) => { const m = k.map((n) => 2 * n / N - 1); return [(m[0] - m[1]) / 2, (m[2] - m[3]) / (2 * h6)]; };
+let worstRec = 0; smp.k.forEach((k, i) => { const [e, d] = recon(k, 100); worstRec = Math.max(worstRec, Math.abs(e - smp.est[i]), Math.abs(d - smp.fd[i])); });
+check('SHOTS: every estimate is recomputed from the raw counts of +1', smp.k.length === 200 && worstRec < 1e-12, String(worstRec));
+const angles = [PI / 3 + Q, PI / 3 - Q, PI / 3 + h6, PI / 3 - h6], pr = angles.map((x) => (1 + fz(x)) / 2);
+let worstFreq = 0; for (let j = 0; j < 4; j++) { const fr = smp.k.reduce((a, k) => a + k[j], 0) / (200 * 100); worstFreq = Math.max(worstFreq, Math.abs(fr - pr[j]) / Math.sqrt(pr[j] * (1 - pr[j]) / 20000)); }
+check('SHOTS: the share of +1 at each setting is (1 + f)/2 within 4 standard errors', worstFreq < 4, String(worstFreq));
+const sdS = Math.sqrt((1 - fz(angles[0]) ** 2) + (1 - fz(angles[1]) ** 2)) / 20, sdF = Math.sqrt((1 - fz(angles[2]) ** 2) + (1 - fz(angles[3]) ** 2)) / (2 * h6 * 10);
+check('SHOTS: predicted widths 0.0354 and 0.5826, ratio 16.5', close(s.shots.sdShift, sdS, 1e-12) && close(s.shots.sdFd, sdF, 1e-12) && close(sdS, 0.0354, 5e-5) && close(sdF, 0.5826, 5e-5) && close(sdF / sdS, 16.5, 0.05));
+const [mS, ssS] = meanSd(smp.est), [mF, ssF] = meanSd(smp.fd);
+check('SHOTS: both clouds centre on the slope −0.866 within 4 standard errors', Math.abs(mS + Math.sqrt(3) / 2) < 4 * sdS / Math.sqrt(200) && Math.abs(mF - (fz(PI / 3 + h6) - fz(PI / 3 - h6)) / (2 * h6)) < 4 * sdF / Math.sqrt(200), `${mS} ${mF}`);
+check('SHOTS: the measured widths are within 20% of the predicted ones, and the page reports the same', Math.abs(ssS / sdS - 1) < 0.2 && Math.abs(ssF / sdF - 1) < 0.2 && close(s.shots.sd, ssS, 1e-12) && close(s.shots.fdSd, ssF, 1e-12), `${ssS} ${ssF}`);
+check('SHOTS: dots that fall off the gauge (|value| > 3.2) are counted', s.offGauge === smp.fd.filter((v) => Math.abs(v) > 3.2).length);
+await page.click('#shotChips [data-shots="1000"]'); s = await state();
+smp = await page.evaluate(() => window.SHIFT_DEBUG.samples());
+check('the shots chips: N = 1000 narrows both predicted widths by √10 and leaves the card', s.N === 1000 && close(s.shots.sdShift, sdS / Math.sqrt(10), 1e-12) && close(s.shots.sdFd, sdF / Math.sqrt(10), 1e-12) && s.preset === null);
+check('N = 1000: the measured width of the ±90° cloud is within 20% of the prediction', Math.abs(meanSd(smp.est)[1] / (sdS / Math.sqrt(10)) - 1) < 0.2);
+const before = smp.k[0].join();
+await page.click('#redraw'); s = await state();
+check('Redraw draws new shots', s.seed === 2 && (await page.evaluate(() => window.SHIFT_DEBUG.samples())).k[0].join() !== before);
+await page.keyboard.press('Home'); s = await state();
+check('Home in the shots scene goes back to 0 trials', s.trials === 0);
+
+// dragging the curve and the dial sets θ
+await page.click('#sceneChips [data-scene="curve"]'); await pick('shift'); await until(page, () => !window.SHIFT_DEBUG.state.playing);
+let pt = await page.evaluate(() => window.SHIFT_DEBUG.curvePoint(-1));
+await page.mouse.move(pt[0], pt[1]); await page.mouse.down(); await page.mouse.up(); s = await state();
+check('clicking the curve at θ = −1 rad moves the angle there', Math.abs(s.theta + 1) < 0.02 && s.preset === null, String(s.theta));
+pt = await page.evaluate(() => window.SHIFT_DEBUG.dialPoint(Math.sin(2), Math.cos(2)));
+await page.mouse.move(pt[0], pt[1]); await page.mouse.down(); await page.mouse.up(); s = await state();
+check('clicking the dial at the arrow direction 2 rad sets θ = 2', Math.abs(s.theta - 2) < 0.02 && close(s.f, Math.cos(s.theta), 1e-12), String(s.theta));
+
+// scenes, rail and keyboard
+await page.locator('body').click({ position: { x: 5, y: 5 } });
+await page.keyboard.press('2'); check('key 2 opens the shots scene', (await state()).scene === 'shots');
+await page.keyboard.press('1'); s = await state(); check('key 1 opens the curve scene and keeps θ', s.scene === 'curve' && Math.abs(s.theta - 2) < 0.02);
+await page.keyboard.press('Home'); check('Home goes to θ = −180°', close((await state()).theta, -PI, 1e-9));
+await page.keyboard.press('ArrowRight'); check('→ steps 15°', close((await state()).theta, -PI + 15 * DEG, 1e-9));
+await page.keyboard.press('End'); check('End goes to θ = 180°', close((await state()).theta, PI, 1e-9));
+await page.click('#rew'); check('⏮ goes back to θ = −180°', close((await state()).theta, -PI, 1e-9));
+await page.locator('body').click({ position: { x: 5, y: 5 } });
+await page.keyboard.press('Space');
+check('Space plays', await until(page, () => window.SHIFT_DEBUG.state.t > 0));
+await page.keyboard.press('Space'); check('Space pauses', !(await state()).playing);
+await setRange('now', PI + 1); s = await state();
+check('the rail sets θ and the readouts follow', close(s.theta, 1, 1e-9) && close(s.shift, -Math.sin(1), 1e-12));
+
+// English
+await page.click('[data-lang-set="en"]'); await pick('noise'); await seek(200);
+check('English: the HUD reads “200 trials · 100 shots each”', (await page.textContent('#hudBig')).trim() === '200 trials · 100 shots each');
+
+check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
+await T.finish();

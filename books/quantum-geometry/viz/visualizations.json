@@ -1060,6 +1060,92 @@
           "gid": "D5/S3/Quantum/Dynamics/ObserverPullbackTraceIdentity.observer_pullback_trace_identity"
         }
       ]
+    },
+    {
+      "id": "parameter-shift",
+      "code": "SHIFT//RULE",
+      "title": "参数位移",
+      "title_en": "The parameter-shift rule",
+      "summary": "单扇泡利旋转门 R_y(θ) 下，期望值 f(θ) = c + a cos θ + b sin θ 是一条余弦型曲线，圆里转动的箭头在测量轴上的影子就是它。把角度左右各转 90° 取两个值，两值之差的一半正好等于由对易子公式算出的切线斜率：换一个角度、换一条这样的曲线都精确。小步长差分总比斜率短 sin h / h；有限次采样时，它把同样的散粒噪声除以 2h，散布宽十几倍。四张实验卡可以在第十二章正文里单独引用。",
+      "summary_en": "Under a single Pauli rotation R_y(θ) the expectation value f(θ) = c + a cos θ + b sin θ is a cosine-shaped curve: the shadow on the measured axis of an arrow turning in the dial. Turn the angle a quarter turn each way and read two values: half their difference equals the tangent slope given by the commutator formula, at any angle and for any such curve. A small-step difference always falls short by sin h / h, and with finitely many shots it divides the same shot noise by 2h and scatters more than ten times wider. Each of the four experiment cards can be cited on its own from Chapter 12.",
+      "path": "parameter-shift/",
+      "thumbnail": "parameter-shift/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "参数位移",
+        "期望值曲线",
+        "对易子导数",
+        "有限差分",
+        "散粒噪声",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Parameter shift",
+        "Expectation curve",
+        "Commutator derivative",
+        "Finite difference",
+        "Shot noise",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第十二章 · 泡利转角与精确参数位移",
+          "label_en": "Chapter 12 · Pauli angles and exact parameter shift",
+          "href": "../zh/ch12-measurement-computation-and-gradients.html#sec-pauli-parameter-shift",
+          "href_en": "../en/ch12-measurement-computation-and-gradients.html#sec-pauli-parameter-shift"
+        },
+        {
+          "label": "Lean · Quantum/Dynamics/ProjectionProbabilityFlow",
+          "label_en": "Lean · Quantum/Dynamics/ProjectionProbabilityFlow",
+          "href": "{trureturing}/D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.projection_probability_flow"
+        }
+      ]
+    },
+    {
+      "id": "equator-concentration",
+      "code": "EQUATOR//CROWD",
+      "title": "赤道集中",
+      "title_en": "Concentration at the equator",
+      "summary": "在 d 维实单位球面上均匀取点，看它们在一根固定测量轴上的坐标 x₁：左边把每个点按 x₁ 放在过测量轴的圆截面上，右边横着画 x₁ 的精确密度与直方图。三维时高度均匀分布；维数 d = 2ⁿ 升高，点挤向垂直于测量轴的赤道，宽度按 1/√d 缩小。马尔可夫上界 1/(dε²) 总在精确的带外份额之上：二十个量子比特、ε = 0.1 时界是 9.54 × 10⁻⁵，精确值约 3 × 10⁻²²⁹¹。赤道集中、马尔可夫上界与贫瘠高原都是文献结果，页面不画梯度。五张实验卡可以在第十二章正文里单独引用。",
+      "summary_en": "Pick points uniformly on the real unit sphere in d dimensions and look at their coordinate x₁ along one fixed measured axis: on the left each point sits at its x₁ on the section of the sphere through the axis, on the right the exact density of x₁ and the histogram are drawn sideways. In three dimensions the heights are spread evenly; as d = 2ⁿ grows the points crowd onto the equator perpendicular to the axis, in a belt that shrinks like 1/√d. The Markov bound 1/(dε²) always lies above the exact outside share: at twenty qubits and ε = 0.1 the bound is 9.54 × 10⁻⁵ and the exact share about 3 × 10⁻²²⁹¹. Equator concentration, the Markov bound and barren plateaus are literature results, and the page draws no gradients. Each of the five experiment cards can be cited on its own from Chapter 12.",
+      "path": "equator-concentration/",
+      "thumbnail": "equator-concentration/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "测度集中",
+        "高维球面",
+        "马尔可夫不等式",
+        "贫瘠高原",
+        "数值演示"
+      ],
+      "tags_en": [
+        "Concentration of measure",
+        "High-dimensional sphere",
+        "Markov inequality",
+        "Barren plateaus",
+        "Numerical illustration"
+      ],
+      "theory": [
+        {
+          "label": "第十二章 · 赤道集中与贫瘠高原的条件",
+          "label_en": "Chapter 12 · Equator concentration and conditions for barren plateaus",
+          "href": "../zh/ch12-measurement-computation-and-gradients.html#sec-equator-concentration-limits",
+          "href_en": "../en/ch12-measurement-computation-and-gradients.html#sec-equator-concentration-limits"
+        },
+        {
+          "label": "McClean 等 · 贫瘠高原（2018）",
+          "label_en": "McClean et al. · Barren plateaus (2018)",
+          "href": "https://doi.org/10.1038/s41467-018-07090-4"
+        }
+      ],
+      "lean": []
     }
   ]
 }
