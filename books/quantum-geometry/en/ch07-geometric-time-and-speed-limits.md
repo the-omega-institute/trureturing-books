@@ -15,6 +15,10 @@ Why does one and the same universe wear two such different faces of time? This c
 1. **Quantum time is oriented bivector area**: The infinitesimal generator $G = -(i/\hbar)H_{\mathrm{op}}$ of any norm-preserving unitary flow $U(t) = \exp\bigl((-it/\hbar)H_{\mathrm{op}}\bigr)$ is necessarily **skew-adjoint** ($G^* = -G$); what the Hamiltonian $H_{\mathrm{op}} = i\hbar G$ measures is the **rate at which bivector rotation area is swept per unit time**;
 2. **Classical time is the one-dimensional idempotent projection line**: Only when an observer intercepts that sweeping area with an idempotent projector $P^2 = P$ — crossing a $90^\circ$ orthogonal wall ($\langle m_0, m_1\rangle = 0$) to register an unmistakable discrete tick — does continuous two-dimensional quantum area condense into a sequential one-dimensional timeline!
 
+::: {.figure src="ch07-overview"}
+**Figure 7.** The chapter at a glance. Panel I: an amber arrow turns from $m_0$ to the perpendicular $m_1$, sweeping a magenta quarter disc; its two end points are two ticks. Panel II: against the turning angle $\omega t$, the grey dashed curve is the chance of still reading $\lvert 0\rangle$ when nobody looks, and the cyan curve the chance when $\lvert 0\rangle$ is measured $4$ times, with $0.531$ left at $180^\circ$. Panel III: the deposit $D_{\mathrm{freeze}} = \Delta E_{\mathrm{pass}} - \Delta S/\beta$ against the inverse temperature $\beta$, negative (magenta) left of $\beta_c$ and positive (cyan) to its right.
+:::
+
 ## 7.1 Geometric Translation of the Schrödinger Equation: The Hamiltonian $H$ as the Bivector Area Swept per Unit Time {#sec-schrodinger-bivector-rate}
 
 Open any standard quantum mechanics textbook and the Schrödinger equation $i\hbar\partial_t\psi = H\psi$ arrives with two seemingly arbitrary features: why does the imaginary unit $i$ sit on the left-hand side, and why must the energy operator (the Hamiltonian $H$) be self-adjoint ($H^* = H$)?
@@ -36,6 +40,10 @@ H_{\mathrm{op}} := (i\hbar) G \quad\Longleftrightarrow\quad G = -\frac{i}{\hbar}
 $$
 
 Because both $i$ and $G$ flip sign under conjugate transposition ($(-i)(-G) = +iG$), the two minus signs cancel, repackaging the skew-adjoint **bivector area rate $G$** as a self-adjoint **Hermitian Hamiltonian $H_{\mathrm{op}}$**! The Schrödinger equation is nothing more than the rigid-body angular-velocity equation: **instantaneous turning rate equals bivector area $G$ swept per unit time**.
+
+::: {.figure src="ch07-area-rate"}
+**A norm-preserving generator only pushes the arrow sideways.** At the tip of the amber arrow $\psi(t)$, the violet arrow $G\psi$ points along the tangent, at a right angle to $\psi$, so the arrow turns without stretching; the faint arrows are earlier positions $\Delta t$ apart, and each $\Delta t$ sweeps an equal magenta sector. Schematic: a complex phase rotation drawn as a turn in the real plane; self-adjointness and the exponential law are [@thm-calibrated-unitary-group].
+:::
 
 In the Lean 4 module `Quantum/Dynamics/CalibratedUnitaryGroup`, the following theorem proves on a complete complex inner-product space $H$ that calibrating the generator $G$ of a one-parameter unitary group by $i\hbar$ yields a self-adjoint Hamiltonian $H_{\mathrm{op}}$, an exponential rotor flow $U(t) = \exp((-it/\hbar)H_{\mathrm{op}})$, and the exact operator Schrödinger equation at every time $t$.
 
@@ -100,9 +108,11 @@ $$
 
 In other words: **every unmistakable tick of classical linear time requires the quantum state to traverse a $90^\circ$ ($\pi/2$ radian) orthogonal wall on the projective sphere!**
 
-![One-parameter unitary flow and the Fubini–Study quantum speed limit, Quantum Zeno stroboscopic freezing curves, and the scalar free-energy accounting threshold diagram](../assets/fig-07-quantum-speed-limit-zeno.svg)
-
 In the Lean module `QuantumBounds/FubiniStudyRecordTime`, we first establish the Fubini–Study spherical triangle inequality $\theta_{\mathrm{FS}}(a, c) \le \theta_{\mathrm{FS}}(a, b) + \theta_{\mathrm{FS}}(b, c)$ for unit vectors ([`fs_angle_triangle`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle)). Whenever the angular displacements from an anchor state $a$ to two orthogonal target records $m_0, m_1$ ($\langle m_0, m_1\rangle_{\mathbb{C}} = 0$) obey the speed-limit bounds $\theta_{\mathrm{FS}}(a, m_k) \le \mathrm{energy}\cdot\tau / \hbar$ ($k = 0, 1$), the two legs must bridge the $\pi/2$ orthogonal separation, locking in both a universal lower bound on the step duration $\tau$ and an upper bound on the number of sequential records $N$ achievable in total time $T$!
+
+::: {.figure src="ch07-wall"}
+**Two legs, each no longer than $E\tau/\hbar$, must together span at least $90^\circ$.** On the equator, $m_0$ and $m_1$ are orthogonal, joined by the magenta $90^\circ$ arc; from the amber anchor $a$ a cyan arc runs to each, and each is capped by the speed bound $\le E\tau/\hbar$ ($E$ is the theorem's $\mathrm{energy}$). The two cyan arcs together are no shorter than the magenta one, so $2E\tau/\hbar \ge \frac{\pi}{2}$ ([@thm-fubini-study-record-time]). Schematic: the sphere of real unit vectors, on which the Fubini–Study angle is the arc length when overlaps are positive.
+:::
 
 ::: {.theorem #thm-fubini-study-record-time title="Fubini–Study Lower Bound on Orthogonal Record Time and Upper Bound on Sequential Record Count" lean="D5/S3/QuantumBounds/FubiniStudyRecordTime.record_time_lower_bound"}
 Let $E$ be a complex inner-product space, and let $a, m_0, m_1 \in E$ be unit vectors ($\|a\| = \|m_0\| = \|m_1\| = 1$) with orthogonal target records $\langle m_0, m_1\rangle_{\mathbb{C}} = 0$. Write $\theta_{\mathrm{FS}}(x, y) := \arccos\|\langle x, y\rangle_{\mathbb{C}}\|$ ([`fsAngle`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.fsAngle)). Let $\mathrm{energy} > 0$, $\hbar > 0$, and $\tau \in \mathbb{R}$. If the Fubini–Study angles from the anchor state $a$ to $m_0$ and $m_1$ satisfy the speed-limit bounds
@@ -220,6 +230,10 @@ Now ask the converse question: what happens if a state begins sweeping out exter
 The result is the celebrated **Quantum Zeno Effect** — a watched pot never boils!
 
 In our line-and-area geometry, the mechanism is completely elementary: **over a tiny step $\delta t = T/N \ll 1$, the exterior wedge altitude grows at first order as $\sin(\omega\delta t/2) \approx \frac{\omega T}{2N}$, whereas the inner-product survival probability along the initial line $\vv{A}$ drops only at second order as $\cos^2(\omega\delta t/2) = 1 - \sin^2(\omega\delta t/2) \approx 1 - \frac{\omega^2 T^2}{4N^2}$!** When high-frequency inner-product projections repeatedly flatten the incipient first-order wedge area back onto the reference line, $N$ second-order losses accumulate to only $N \times O(N^{-2}) = O(N^{-1}) \to 0$, freezing the state in place!
+
+::: {.figure src="ch07-zeno-n"}
+**The more often you measure, the closer the chance of staying in $\lvert 0\rangle$ comes to $1$.** Against the number of measurements $N$ (log scale), the cyan curve is $P_N = \bigl[\cos^2\frac{\pi}{2N}\bigr]^N$, and the cyan points mark $N = 1, 4, 16, 64$ at $0$, $0.531$, $0.857$ and $0.962$; the grey dashed curve is the approximation $1 - \frac{\pi^2}{4N}$, which hugs the cyan curve as $N$ grows: the gap shrinks like $\frac{1}{N}$. The values come from the closed form in [@ex-zeno-strobe-freezing].
+:::
 
 ::: {.viz src="speed-limit-zeno" preset="strobe16" height="500"}
 **Sixteen strobes: it hardly gets away.** The arrow is pulled back to $\lvert 0\rangle$ after every $11.25^\circ$: the magenta part, first order in the step, is cut off as soon as it shows, and the cyan shadow hardly shortens. On the right the cyan survival nearly fills the plot, with $0.857$ left at $180^\circ$; the dashed line is the unwatched path.
@@ -357,6 +371,10 @@ $$
 $$
 
 The theorem below establishes this **scalar free-energy accounting criterion**: for positive scalars $\beta > 0$ and $\Delta E_{\mathrm{pass}} > 0$, the net deposit $D_{\mathrm{freeze}} = \Delta E_{\mathrm{pass}} - \Delta S/\beta$ is strictly positive if and only if $\beta > \beta_c = \Delta S/\Delta E_{\mathrm{pass}}$. (Note that the Lean theorem certifies only this scalar algebraic equivalence; it does not by itself dynamically arrest state evolution or suppress decoherence without an additional physical bath or barrier model.)
+
+::: {.figure src="ch07-freeze-threshold"}
+**The deposit is positive exactly when $\beta$ passes $\beta_c = \Delta S/\Delta E_{\mathrm{pass}}$.** With $\Delta E_{\mathrm{pass}} = 1$: on the line $\Delta S = \beta\,\Delta E_{\mathrm{pass}}$ the deposit $D_{\mathrm{freeze}}$ is $0$; in the cyan region below it $D_{\mathrm{freeze}} > 0$, in the magenta region above it $D_{\mathrm{freeze}} < 0$. The amber dashed line holds $\Delta S = \frac{1}{2}$ and walks right, crossing the line at $\beta_c = \frac{1}{2}$ into the cyan region ([@thm-decoherence-freeze-critical]). The figure draws only this scalar inequality, not any dynamics.
+:::
 
 ::: {.theorem #thm-decoherence-freeze-critical title="Scalar Free-Energy Accounting Criterion for a Positive Deposit Above Critical Inverse Temperature" lean="D5/S3/QuantumChannels/DecoherenceFreeze.decoherence_freeze_iff_above_critical"}
 Let the inverse temperature $\beta \in \mathbb{R}$ satisfy $\beta > 0$, let the passive energy shift $\Delta E_{\mathrm{pass}} \in \mathbb{R}$ satisfy $\Delta E_{\mathrm{pass}} > 0$, and let $\Delta S \in \mathbb{R}$ be the entropy tax. Define the scalar accounting deposit and critical inverse temperature by ([`freezeDeposit`](lean:D5/S3/QuantumChannels/DecoherenceFreeze.freezeDeposit), [`criticalInverseTemperature`](lean:D5/S3/QuantumChannels/DecoherenceFreeze.criticalInverseTemperature))
