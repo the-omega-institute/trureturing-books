@@ -6,6 +6,10 @@
 2. **C.2 形式化定义与代数载体总索引（89 项唯一 `definition` / `structure` / `inductive` 声明）**：置于 `definition` 环境或媒体锚点中的核心代数构造、旋量类型与状态空间定义；以及 **C.2.1 行内辅助引理与构造索引（123 项行内引用声明）**，与 C.1、C.2 共同构成 `trureturing.lock.json` 中锁定的全部 **435 项唯一声明**（`223 + 89 + 123 = 435`）；
 3. **C.3 开放问题与未形式化前沿边界台账（8 项：6 个 `conjecture` / `OPEN` 环境 + 2 项前沿文献边界 `remark`）**：尚未在 `trureturing` 中完成内核形式化或属于数学物理前沿未决猜想的命题，在全书中一律以无 `lean` 属性的 `conjecture`（红色 `OPEN` 徽章）或带明确文献说明的 `remark` 环境隔离呈现，绝不冒充已验证定理。
 
+::: {.viz src="lean-declaration-map" preset="all" height="500"}
+**435 格，一格一条锁定声明。** 时间轴从序曲读到附录 B，每一章第一次引用的声明落进这一章的柱子：绿色是锁文件里种类为 theorem 的定理，灰色是定义，空心的只在行内链接里出现。读完正文，地图上的格数与 `trureturing.lock.json` 的条目数相同。
+:::
+
 ---
 
 ## C.1 已验证并冻结的 Lean 4 定理总索引（223 条唯一 `theorem` GID） {#sec-appendix-c-theorems}
@@ -468,6 +472,10 @@
 | `R122` | [`Zeta23.RvM.completedRiemannZeta_ne_zero_of_re_nonpos`](lean:D5/S3/Weil/ZetaRvm/CountByIntegral.completedRiemannZeta_ne_zero_of_re_nonpos) | `D5/S3/Weil/ZetaRvm/CountByIntegral.lean:67` | `theorem` | Ch 22 |
 | `R123` | [`D5.S3.Zeros.ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one`](lean:D5/S3/Zeros/ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one) | `D5/S3/Zeros/ZetaUpgrade.lean:36` | `theorem` | Ch 22 |
 
+::: {.viz src="lean-declaration-map" preset="inline" height="500"}
+**只靠行内链接出现的那些。** 地图只留 124 个空心格：82 格绿色的定理，42 格灰色的定义。比本节的 123 项多出的一格是 C.1 的 `T036`：它在正文里只有行内链接，因被可视化页面引用而列入 C.1。
+:::
+
 ---
 
 ## C.3 开放猜想与未形式化前沿问题登记表（全书 8 项：6 项 `OPEN` 猜想 + 2 项文献边界——零 `lean` 属性） {#sec-appendix-c-open-register}
@@ -502,6 +510,14 @@
 | **辅助定义与结构数** | `89` 项环境定义（含行内共 `131` 项 `kind` 为 `def` 或 `inductive`） | 单独归入第 C.2 节，绝不与 `theorem / lemma / proposition / corollary` 混计 | `PASS` |
 | **多语言结构对齐** | `zh` 与 `en` 章节序列、环境 ID、Lean 引用序列 100% 一致 | `./tbook check` 跨版本逐项比对（`0 error(s), 0 warning(s)`） | `PASS` |
 
+::: {.viz src="lean-declaration-map" preset="theorems" height="500"}
+**只看定理。** 地图只留锁文件里种类为 theorem 的 304 格，全是绿色：实心的 222 格被定理环境用 `lean=` 引用，空心的 82 格只出现在行内链接里。
+:::
+
 ::: {.remark #rem-appendix-c-epistemic-boundary title="完整声明索引的验证边界说明"}
 本附录第 C.1 节所列的 223 条正式环境与媒体定理、第 C.2 节所列的 89 项环境定义/结构以及第 C.2.1 节所列的 123 项行内交叉引用声明（总计 435 项形式化声明：304 项定理 + 131 项定义/结构）均已在 `trureturing@dev` 提交 `1d9bf98cab8306e67ec38a739359f2cdae63877a` 下由 Lean 4 内核验证并写入 `trureturing.lock.json`；而第 C.3 节登记的开放猜想（`OPEN`）与经典文献定理（文献结果，未在本书形式化）则严格排除在形式化定理计数之外，确保全书的每一枚 `LEAN ✓` 徽章均具备零歧义的内核证明背书。
+:::
+
+::: {.viz src="lean-declaration-map" height="560"}
+完整的声明地图：点一格看它的种类、模块与源码行、在书中出现的每一章与本附录的序号；点一章的柱脚，看那一章引用了哪些；拖动时间轴，看各章依次落定。
 :::
