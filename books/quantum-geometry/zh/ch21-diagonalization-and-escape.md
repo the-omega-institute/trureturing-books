@@ -240,15 +240,15 @@ $\exp z$ 是级数 $\sum_k z^k/k!$ 的和（`NormedSpace.exp_series_hasSum_exp'`
 
 把 [@lem-exp-tail-le] 用到两个具体的代数上（以下两步代入是本书的手工说明）：
 
-- 取 $A = \mathbb{C}$、$z = i\theta$、$n = 2N$。部分和 $\sum_{k<2N}(i\theta)^k/k!$ 的实部正是余弦的前 $N$ 项偶次多项式，而复数实部的绝对值不超过它的模，所以 $\lvert R_{2N}(\theta)\rvert \le \frac{\lvert\theta\rvert^{2N}}{(2N)!}\,e^{\lvert\theta\rvert}$。它比拉格朗日界多一个因子 $e^{\lvert\theta\rvert}$，换来的是内核验证。
+- 取 $A = \mathbb{C}$、$z = i\theta$、$n = 2N$。部分和 $\sum_{k<2N}(i\theta)^k/k!$ 的实部正是余弦的前 $N$ 项偶次多项式，而复数实部的绝对值不超过它的模，所以 $\lvert R_{2N}(\theta)\rvert \le \frac{\lvert\theta\rvert^{2N}}{(2N)!}\,e^{\lvert\theta\rvert}$。它比拉格朗日界多一个因子 $e^{\lvert\theta\rvert}$，换来的是：它是已验证引理的直接代入（代入的这两步是手工推导）。
 - 取 $A = M_2(\mathbb{C})$（算子范数）、$z = -\frac{i\theta}{2}\,\vv{n}\cdot\vv{\sigma}$（$\vv{n}$ 为单位向量，于是 $\lVert z\rVert = \frac{\lvert\theta\rvert}{2}$）。旋转器 $U = \exp z$ 的 $n$ 项截断满足 $\bigl\lVert U - \sum_{k<n} z^k/k!\bigr\rVert \le \frac{(\lvert\theta\rvert/2)^n}{n!}\,e^{\lvert\theta\rvert/2}$。
 
-::: {.example #ex-taylor-remainder-three-bounds title="余弦与旋转器的截断余项：实际值、拉格朗日界与已验证界"}
+::: {.example #ex-taylor-remainder-three-bounds title="余弦与旋转器的截断余项：实际值、拉格朗日界与由已验证引理得到的界"}
 （表中中间一列的拉格朗日界 $\frac{(\theta^*)^{2N}}{(2N)!}$ 属**文献结果，未在本书形式化**，见 [@rem-lagrange-taylor-remainder-literature]；右列已验证界由冻结引理 [@lem-exp-tail-le] 给出。）
 
 **余弦，取 $\theta = \theta^* \approx 0.739085$（第二十四章的余弦不动点）。**
 
-| $N$ | 实际余项 $\lvert R_{2N}(\theta^*)\rvert$ | 拉格朗日界 $\frac{(\theta^*)^{2N}}{(2N)!}$ | 已验证界 $\frac{(\theta^*)^{2N}}{(2N)!}\,e^{\theta^*}$ |
+| $N$ | 实际余项 $\lvert R_{2N}(\theta^*)\rvert$ | 拉格朗日界 $\frac{(\theta^*)^{2N}}{(2N)!}$ | 由已验证引理代入的界 $\frac{(\theta^*)^{2N}}{(2N)!}\,e^{\theta^*}$ |
 | :---: | :---: | :---: | :---: |
 | $1$ | $2.61\times10^{-1}$ | $2.73\times10^{-1}$ | $5.72\times10^{-1}$ |
 | $2$ | $1.22\times10^{-2}$ | $1.24\times10^{-2}$ | $2.60\times10^{-2}$ |
@@ -268,7 +268,7 @@ $\exp z$ 是级数 $\sum_k z^k/k!$ 的和（`NormedSpace.exp_series_hasSum_exp'`
 每一行的实际余项都落在界内，也都严格为正。
 :::
 
-**有限记录的弓形残差。** 第 2 条论断说，有限步操作得到的只是内接多面体，平坦的面与球皮之间留着弓形残差。所钉仓库里有两条冻结定理，给这句话一个字面意义上的版本：把“有限的门计数”换成“只有有限格的记录指针”，残差恰好就是正多边形的弓高。
+**有限记录的弓形残差。** 第 2 条论断说，有限步操作得到的只是内接多面体，平坦的面与球皮之间留着弓形残差。所钉仓库里有两条冻结定理，给这句话一个字面意义上的版本：把“有限的门计数”换成“只有有限格的记录指针”，残差的下界恰好由正多边形的弓高给出（相干损失至少为弓高，恢复误差至少为弓高的一半）。
 
 物理图像是这样的。一台记录指针有 $N + 1$ 格，振幅为 $c(0), \dots, c(N)$。系统的第 $i$ 个分支带一个整数标签 $q_i$，记录的方式是把指针平移 $q_i$ 格。两个标签相差 $\ell$ 的分支，记录之后它们之间的相干项被乘上一个因子：指针与它自己平移 $\ell$ 格之后的重叠
 
@@ -371,7 +371,7 @@ $$
 
 第十六章 [@ex-finite-ht-polytope] 中长度不超过 $3$ 的 $\{H, T\}$ 门字实际只到达 $5$ 个不同的点，按本例残差至少为 $2/5$，角半径至少为 $53.13^\circ$。
 
-**反过来读。** 要让球面上每一点离可达点集的角距离都小于 $\varepsilon$，必须 $2^{L+1} - 1 \ge \frac{2}{1 - \cos\varepsilon}$，即 $L \ge \log_2\bigl(\frac{2}{1 - \cos\varepsilon} + 1\bigr) - 1 \approx 2\log_2\frac{1}{\varepsilon} + 1$。对 $\varepsilon = 10^{-2}, 10^{-3}, 10^{-6}$（弧度）分别给出 $L \ge 15, 21, 41$。这是一个只靠计数得到的下界：门长至少随 $\log\frac{1}{\varepsilon}$ 线性增长。Solovay–Kitaev 定理（[@rem-solovay-kitaev-literature]，文献结果）给出的是与之配对的上界。
+**反过来读。** 要让球面上每一点离可达点集的角距离都小于 $\varepsilon$，必须 $2^{L+1} - 1 \ge \frac{2}{1 - \cos\varepsilon}$，即 $L \ge \log_2\bigl(\frac{2}{1 - \cos\varepsilon} + 1\bigr) - 1 \approx 2\log_2\frac{1}{\varepsilon} + 1$。对 $\varepsilon = 10^{-2}, 10^{-3}, 10^{-6}$（弧度）分别给出 $L \ge 15, 21, 41$。这是一个只靠计数得到的下界：门长至少随 $\log\frac{1}{\varepsilon}$ 线性增长。Solovay–Kitaev 定理（[@rem-solovay-kitaev-literature]，文献结果）给出的是与之配对的上界：$L = O\bigl(\log^c\frac{1}{\varepsilon}\bigr)$，$c \approx 3.97$，关于 $\log\frac{1}{\varepsilon}$ 是多项式而不是线性的。
 :::
 
 把四种残差尺度并排放：正 $n$ 边形的弓高为 $1 - \cos\frac{\pi}{n} = 2\sin^2\frac{\pi}{2n}$（[@ex-liu-hui-polygon-sagitta]）；$N + 1$ 格指针的不可恢复误差至少是正 $(m+2)$ 边形弓高的一半（[@thm-finite-record-cosine-obstruction]）；$N$ 个顶点的内接多面体覆盖下界见 [@ex-cap-covering-gate-count]；前 $N$ 项余弦多项式的余项受 [@lem-exp-tail-le] 的阶乘界 $\frac{|\theta|^{2N}}{(2N)!}e^{|\theta|}$ 控制（数值对照见 [@ex-taylor-remainder-three-bounds]）。它们都随资源增长而趋于零，而对有限记录信道与有限算例均呈严格正残差。序曲里那句“我们以为我们得到了一个球，但实际只是近似得到一个球”，在这四个场合各有一个可以核对的数。
