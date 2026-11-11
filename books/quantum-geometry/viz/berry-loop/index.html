@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="BERRY//LOOP · Loops on the sphere and the Berry phase">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BERRY//LOOP 球面回路与贝里相位</title>
+<meta name="description" content="布洛赫球面上一条可拖动顶点的闭合回路。琥珀色的箭头沿回路平行移动：走回起点时，它相对出发时转过的角正好等于回路圈住的品红面积；相邻两点复内积的连乘积，相位只记下这块面积的一半。另有两种转序的对照与梳不平的箭头场。A closed loop with draggable corners on the Bloch sphere. The amber arrow is carried along it without twisting: back at the start it has turned by exactly the magenta area the loop encloses, while the product of the complex inner products of neighbouring corners keeps only half of that angle in its phase. Two rotation orders and a field of arrows that cannot be combed flat complete the page.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="berry-loop">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="BERRY//LOOP">BERRY<b>//</b>LOOP</h1>
+      <div class="tagline">
+        <span class="zh">球面回路与贝里相位 · <em>走一圈回来，箭头转过圈住的面积，内积的相位只记下一半；整颗球上总有梳不平的一点</em></span>
+        <span class="en">Loops on the sphere and the Berry phase · <em>go once round and the arrow comes back turned by the area enclosed, while the phase of the inner products keeps half of it; on the whole sphere some point cannot be combed</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillArea"><span class="zh">面积</span><span class="en">AREA</span> <strong>—</strong></span>
+      <span class="pill" id="pillTurn"><span class="zh">转角</span><span class="en">TURN</span> <strong>—</strong></span>
+      <span class="pill hot" id="pillPhase"><span class="zh">相位</span><span class="en">PHASE</span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="order" aria-pressed="false"><span class="code">ORDER</span><span class="cn zh">两种转序，两个终点</span><span class="cn en">Two orders, two endpoints</span></button>
+        <button class="preset" data-preset="octant" aria-pressed="false"><span class="code">OCTANT</span><span class="cn zh">八分之一球：转过 π/2</span><span class="cn en">An eighth of the sphere: a quarter turn</span></button>
+        <button class="preset" data-preset="equator" aria-pressed="false"><span class="code">EQUATOR</span><span class="cn zh">赤道一圈：箭头转满一周</span><span class="cn en">Round the equator: a full turn</span></button>
+        <button class="preset" data-preset="reverse" aria-pressed="false"><span class="code">REVERSE</span><span class="cn zh">反着走：角与相位都变号</span><span class="cn en">The other way round: both signs flip</span></button>
+        <button class="preset" data-preset="comb" aria-pressed="false"><span class="code">COMB</span><span class="cn zh">梳不平的一点</span><span class="cn en">The point that cannot be combed</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec" id="loopPanel">
+      <h2><span class="zh">回路</span><span class="en">The loop</span><span class="aside"><span class="zh">大圆弧连成</span><span class="en">great-circle arcs</span></span></h2>
+      <div class="chips" role="group" aria-label="回路操作" data-aria-en="Loop actions">
+        <button class="chip" id="addV"><span class="zh">边上加一点</span><span class="en">Add a corner</span></button>
+        <button class="chip" id="delV"><span class="zh">去掉一点</span><span class="en">Remove a corner</span></button>
+        <button class="chip" id="revV"><span class="zh">反着走</span><span class="en">Reverse</span></button>
+      </div>
+      <p class="note"><span class="zh">拖动青色的顶点改回路；拖空白处转动视角。新加的点落在最后一条边的正中：回路的形状没变，面积与相位也不变。</span><span class="en">Drag a cyan corner to reshape the loop; drag empty space to turn the view. A new corner lands in the middle of the last edge: the loop keeps its shape, and so do the area and the phase.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="布洛赫球面上的青色闭合回路、它圈住的品红面积与沿回路平行移动的琥珀色箭头；右下角的小圆盘是相邻内积连乘积的相位" data-aria-en="The cyan closed loop on the Bloch sphere, the magenta area it encloses and the amber arrow carried along it; the small dial at the lower right is the phase of the product of neighbouring inner products">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+        <button class="chip" data-scene="order" aria-pressed="false"><span class="zh">转序</span><span class="en">Order</span></button>
+        <button class="chip" data-scene="loop" aria-pressed="true"><span class="zh">回路</span><span class="en">Loop</span></button>
+        <button class="chip" data-scene="comb" aria-pressed="false"><span class="zh">梳毛</span><span class="en">Comb</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="plotTitle"></h2><span id="plotMeta"></span></div>
+        <canvas id="plot" aria-label="沿时间轴变化的量" data-aria-en="What changes along the rail"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="dtKey"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div class="m"><dt id="dtA"></dt><dd id="roA">—</dd></div>
+        <div class="c"><dt id="dtB"></dt><dd id="roB">—</dd></div>
+        <div><dt id="dtC"></dt><dd id="roC">—</dd></div>
+        <div><dt id="dtD"></dt><dd id="roD">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">同一纬度上的两点：对 0 ≤ t ≤ 1 与任意复数 z、w，latitude(t, z) = (√(1−t), √t·z) 满足 ⟨latitude(t, z), latitude(t, w)⟩ = (1 − t) + t·z̄w。赤道 t = ½、z = 1（+X）、w = i（+Y）时得 (1 + i)/2：上面赤道上相邻两点的内积就是它。已冻结：</span><span class="en">Two points on one latitude: for 0 ≤ t ≤ 1 and any complex z, w, latitude(t, z) = (√(1−t), √t·z) satisfies ⟨latitude(t, z), latitude(t, w)⟩ = (1 − t) + t·z̄w. On the equator, t = ½, z = 1 (+X) and w = i (+Y) give (1 + i)/2: the inner product of neighbouring corners on the equator above. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Information/BargmannImaginaryMaximizers.Latitude.latitude_dot" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Information/BargmannImaginaryMaximizers.lean" target="_blank" rel="noopener"><code>latitude_dot</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">贝里相位与巴格曼不变量（Berry 1984、Simon 1983、Bargmann 1964、Pancharatnam 1956）：大圆弧围成的回路，相邻内积连乘积的相位等于所围立体角的一半，arg Δ = Ω/2；自旋朝上支的贝里相位按约定 γ<sub>B</sub> = −Ω/2。文献结果，未在本书形式化。</span><span class="en">Berry phase and the Bargmann invariant (Berry 1984, Simon 1983, Bargmann 1964, Pancharatnam 1956): for a loop of great-circle arcs, the phase of the product of neighbouring inner products is half the enclosed solid angle, arg Δ = Ω/2; by convention the spin-up Berry phase is γ<sub>B</sub> = −Ω/2. Literature result, not formalized in this book.</span></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">球面上沿闭合回路平行移动的切向量，回来时转过所围的面积（高斯—博内）；球面上任何连续切向量场都有零点，零点指标之和为 χ(S²) = 2（毛球定理、庞加莱—霍普夫）。文献结果，未在本书形式化。</span><span class="en">A tangent vector carried round a closed loop on the sphere comes back turned by the enclosed area (Gauss–Bonnet); every continuous tangent field on the sphere has a zero, and the indices of the zeros add up to χ(S²) = 2 (hairy ball theorem, Poincaré–Hopf). Literature results, not formalized in this book.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面实算三样东西，各走各的路：面积由一个内点向回路扇形剖分的球面三角形相加；转角由沿每段大圆弧的旋转把箭头真正搬过去再量；相位由二维复旋量的内积相乘。三者对得上，是页面的数值演示，不是证明。</span><span class="en">The page computes three things by three routes: the area by adding the spherical triangles of a fan from an inside point; the turn by actually carrying the arrow along each great-circle arc by a rotation and measuring it; the phase by multiplying inner products of two-component complex spinors. That they agree is a numerical illustration by the page, not a proof.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="沿回路走了多远" data-aria-en="How far along the loop">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐段 / 逐步</span><span class="en">edge by edge / step by step</span> · <kbd>R</kbd> <span class="zh">反着走</span><span class="en">reverse</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">舞台是布洛赫球面。球面上一点 p = (sin θ cos φ, sin θ sin φ, cos θ) 对应二维复旋量 ψ(p) = (cos θ/2, e<sup>iφ</sup> sin θ/2)。青色的回路由大圆弧连成；琥珀色的箭头是贴在球面上的切向量，沿回路“不扭转地”搬运（沿大圆弧就是绕这条弧的转轴旋转）。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>两种转序。</b>从北极出发，先绕 Y 转 90° 再绕 X 转 90°，停在 +X；先绕 X 再绕 Y，停在 −Y（第十章 §10.1）。第二步都不挪动点，却把贴在点上的箭头转了 90°。页面用旋转实算（NUM）。</li>
+        <li><b>面积。</b>回路圈住的有向立体角 Ω：从回路内部一点 c 向回路连扇形，把每个小球面三角形的有向面积相加（NUM）。逆着从外面看的方向走为正。八分之一球是 π/2，赤道圈住的半球是 2π。</li>
+        <li><b>转角。</b>把箭头从起点沿回路搬到当前点，再与“沿 起点 → c → 当前点 两段大圆弧搬过来”的虚线参照比较，两者的夹角随时等于品红扇形已扫过的面积；走回起点时参照就是出发时的箭头。这是高斯—博内定理在球面上的一例：文献结果，未在本书形式化（ARGUED）；页面量出的两数一致（NUM）。</li>
+        <li><b>相位。</b>相邻顶点复内积的连乘积 Δ = ⟨ψ₀, ψ₁⟩⟨ψ₁, ψ₂⟩⋯⟨ψ<sub>n−1</sub>, ψ₀⟩ 不依赖每个旋量各自的相位选择。大圆弧回路的 arg Δ = Ω/2；自旋朝上支的贝里相位按约定是 γ<sub>B</sub> = −Ω/2（Berry 1984、Simon 1983、Bargmann 1964、Pancharatnam 1956；文献结果，未在本书形式化，ARGUED）。八分球三角形 N → +X → +Y 的 Δ = (1 + i)/4，arg Δ = π/4。</li>
+        <li><b>同纬度的内积。</b>赤道上相邻两点的内积由冻结的推论给出：⟨latitude(t, z), latitude(t, w)⟩ = (1 − t) + t·z̄w，<a class="leanref" data-lean-gid="D5/S3/Quantum/Information/BargmannImaginaryMaximizers.Latitude.latitude_dot" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Information/BargmannImaginaryMaximizers.lean" target="_blank" rel="noopener"><code>latitude_dot</code></a>（LEAN ✓）。t = ½、z、w 相差 i 时它是 (1 + i)/2；赤道四点连乘得 −1/4，相位 π，正是半球 2π 的一半。推论本身只给内积公式，不声明和乐定理。</li>
+        <li><b>反着走。</b>同一个三角形反向走，Ω、转角与 arg Δ 都变号，而各内积的模平方 |⟨ψ<sub>i</sub>, ψ<sub>j</sub>⟩|² 一个也不变：只看模平方分不出手性。</li>
+        <li><b>梳不平。</b>切向量场 v(p) = e₃ − (p·e₃)p 是竖直方向在切平面上的影子，在 +X 处是 e₃，长度 sin θ，只在两极为零，两个零点的指标各为 +1，和为 χ(S²) = 2。任何连续切向量场在 S² 上都有零点（毛球定理；文献结果，未在本书形式化，ARGUED）。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch10-gram-geometry-and-order.html#sec-spherical-order-and-berry" target="_top">第十章 · 球面转序与贝里立体角</a> · <a href="../../zh/ch10-gram-geometry-and-order.html#cor-latitude-complex-overlap" target="_top">同纬度共轭点积恒等式</a> · <a href="../../zh/ch10-gram-geometry-and-order.html#sec-hairy-ball-hopf-rotors" target="_top">毛球、霍普纤维与旋转器球</a> · <a href="../../zh/ch10-gram-geometry-and-order.html#ex-octant-berry-gram" target="_top">八分球三角形与复格拉姆矩阵</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">The stage is the Bloch sphere. A point p = (sin θ cos φ, sin θ sin φ, cos θ) corresponds to the two-component complex spinor ψ(p) = (cos θ/2, e<sup>iφ</sup> sin θ/2). The cyan loop is made of great-circle arcs; the amber arrow is a tangent vector on the sphere carried along the loop without twisting (along a great-circle arc that is a rotation about the arc's axis). The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>Two orders.</b> Starting at the North Pole, a 90° turn about Y followed by a 90° turn about X ends at +X; about X first and then about Y ends at −Y (Chapter 10, §10.1). Neither second turn moves the point, but each turns the arrow attached to it by 90°. The page computes the rotations (NUM).</li>
+        <li><b>Area.</b> The oriented solid angle Ω enclosed by the loop: a fan from a point c inside the loop, adding the oriented areas of its small spherical triangles (NUM). Going anticlockwise as seen from outside counts as positive. An eighth of the sphere is π/2; the hemisphere enclosed by the equator is 2π.</li>
+        <li><b>Turn.</b> The arrow carried from the start along the loop to the current point is compared with the dashed reference carried there along the two arcs start → c → current point. Their angle equals, at every moment, the magenta area the fan has swept; back at the start the reference is the arrow as it set out. This is one case of the Gauss–Bonnet theorem on the sphere: a literature result, not formalized in this book (ARGUED); the two numbers the page measures agree (NUM).</li>
+        <li><b>Phase.</b> The product of the complex inner products of neighbouring corners, Δ = ⟨ψ₀, ψ₁⟩⟨ψ₁, ψ₂⟩⋯⟨ψ<sub>n−1</sub>, ψ₀⟩, does not depend on the phase chosen for each spinor. For a loop of great-circle arcs arg Δ = Ω/2; by convention the spin-up Berry phase is γ<sub>B</sub> = −Ω/2 (Berry 1984, Simon 1983, Bargmann 1964, Pancharatnam 1956; a literature result, not formalized in this book, ARGUED). For the octant triangle N → +X → +Y, Δ = (1 + i)/4 and arg Δ = π/4.</li>
+        <li><b>Inner products on one latitude.</b> The inner product of neighbouring points on the equator comes from a frozen corollary: ⟨latitude(t, z), latitude(t, w)⟩ = (1 − t) + t·z̄w, <a class="leanref" data-lean-gid="D5/S3/Quantum/Information/BargmannImaginaryMaximizers.Latitude.latitude_dot" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Information/BargmannImaginaryMaximizers.lean" target="_blank" rel="noopener"><code>latitude_dot</code></a> (LEAN ✓). With t = ½ and w = i·z it is (1 + i)/2; the product round the four equator points is −1/4, of phase π, half the hemisphere's 2π. The corollary itself gives the inner product only; it does not state a holonomy theorem.</li>
+        <li><b>The other way round.</b> Walking the same triangle backwards flips the sign of Ω, of the turn and of arg Δ, while not one squared modulus |⟨ψ<sub>i</sub>, ψ<sub>j</sub>⟩|² changes: squared moduli alone cannot tell the handedness.</li>
+        <li><b>Cannot be combed.</b> The tangent field v(p) = e₃ − (p·e₃)p is the shadow of the vertical direction on the tangent plane: e₃ at +X, of length sin θ, zero only at the two poles, each zero of index +1, adding up to χ(S²) = 2. Every continuous tangent field on S² has a zero (hairy ball theorem; a literature result, not formalized in this book, ARGUED).</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch10-gram-geometry-and-order.html#sec-spherical-order-and-berry" target="_top">Chapter 10 · rotation order and the Berry solid angle</a> · <a href="../../en/ch10-gram-geometry-and-order.html#cor-latitude-complex-overlap" target="_top">the latitude dot-product identity</a> · <a href="../../en/ch10-gram-geometry-and-order.html#sec-hairy-ball-hopf-rotors" target="_top">hairy ball, Hopf fibres and the rotor sphere</a> · <a href="../../en/ch10-gram-geometry-and-order.html#ex-octant-berry-gram" target="_top">the octant triangle and the complex Gram matrix</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
