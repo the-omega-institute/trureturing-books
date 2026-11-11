@@ -1846,6 +1846,58 @@
           "gid": "D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm"
         }
       ]
+    },
+    {
+      "id": "fixed-point-convergence",
+      "code": "FIXED//CONVERGE",
+      "title": "不动点的收束 · 不动点处的斜率定下收束的快慢",
+      "title_en": "How fixed points close in · the slope at the fixed point sets the pace",
+      "summary": "三个场景画在同一张蛛网图上（曲线 y = f(x) 与直线 y = x）。迭代：反复按 1 + 1/x 或 cos，折线一左一右夹住不动点，误差每步乘上不动点处的斜率（−1/φ² ≈ −0.382、−sin θ* ≈ −0.674），而不是全局最坏的 −sin 1；加上单位圆，点 (θ*, sin θ*) 的横坐标是闭环停下的位置，高度是它合拢的速率。牛顿：沿切线走到直线，四步之内误差从 0.26 缩到 6.4×10⁻²¹，单纯迭代要走 115 步。读数：θ* 的渐近分数 2/3、3/4、14/19、17/23……的残差 |cos q − q| 停在斜率 0 与 −sin 1 张成的楔形里，分母² × 残差总低于 1 + sin 1；千分尺的 0.739 不如 17/23。轨道与残差都用 70 位定点整数实算。",
+      "summary_en": "Three scenes on one cobweb plane (the curve y = f(x) and the line y = x). Iterate: pressing 1 + 1/x or cos again and again, the path closes in on the fixed point from alternating sides, and each step multiplies the error by the slope at the fixed point (−1/φ² ≈ −0.382, −sin θ* ≈ −0.674), not by the worst-case −sin 1; with the unit circle added, the point (θ*, sin θ*) has the stopping place as its abscissa and the closing rate as its height. Newton: follow the tangent to the line, and within four steps the error falls from 0.26 to 6.4×10⁻²¹, where the plain iteration needs 115 steps. Readings: the convergents 2/3, 3/4, 14/19, 17/23, … of θ* leave residuals |cos q − q| inside the wedge between slopes 0 and −sin 1, and denominator² × residual stays below 1 + sin 1; the 0.739 of a thousandths ruler is worse than 17/23. Orbits and residuals are computed with 70-digit fixed-point integers.",
+      "path": "fixed-point-convergence/",
+      "thumbnail": "fixed-point-convergence/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "余弦不动点",
+        "黄金比",
+        "蛛网图",
+        "收敛率",
+        "牛顿迭代",
+        "连分数",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Cosine fixed point",
+        "Golden ratio",
+        "Cobweb plot",
+        "Rate of convergence",
+        "Newton's method",
+        "Continued fractions",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第二十四章 §24.3 · 代数自指的唯一黄金锁",
+          "label_en": "Chapter 24 §24.3 · The unique algebraic golden lock",
+          "href": "../zh/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-3",
+          "href_en": "../en/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-3"
+        },
+        {
+          "label": "第二十四章 §24.5 · 真实收敛率、导数加速与有理读数的裂缝",
+          "label_en": "Chapter 24 §24.5 · True rate, derivative speed-up and the rational seam",
+          "href": "../zh/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-5",
+          "href_en": "../en/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-5"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique"
+        },
+        {
+          "gid": "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"
+        }
+      ]
     }
   ]
 }

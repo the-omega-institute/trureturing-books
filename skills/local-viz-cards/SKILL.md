@@ -109,6 +109,10 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 `norm-lattice` 与 `pythagoras-number-escape` 的 `golden`、`minus`、`locked` 分工：那几张讲渐近分数逼近 √d 与 ±1 的接缝，本页讲整数格与范数等值线：艾森斯坦格画在复平面 x + y·e^{iπ/3}，换成整数坐标 (P, Q) = (x + (t + 1)y, y) 读出 Qform(t, ·, ·)；黄金整数画在 (g, ḡ) 平面，范数是矩形面积。绿色框只给第二十三章用 `lean=` 引用的四条定理（`Qform_eq_eisNorm`、`Qform_discriminant`、`Qform_range_eq_eisNorm`、`pell_form_eq_four_mul_norm`）；正文以行内链接提到的 `pell_pm_four_iff_signed_lucas_fib` 不在页面上标绿，`units` 卡只展示 φᵏ 的 (2a + b, b) = (Lₖ, Fₖ) 与范数 (−1)ᵏ（`NUM`），不声称它们是全部解。格子面积 √3/2、系数是基矢的内积、判别式 = −4 × 面积²、“取到的值”逐点代入都标 `NUM`；非整数 t 的中间帧、两种坐标之间的过渡与两次乘 φ 之间的滑动标 `MODEL`；四元数范数在 ℚ 中定义 ℤ 标 `ARGUED`。这一页的青色是当前点所在的那条范数等值线及其上的格点、黄金场景里迹的对角线与影子，品红是格子（面积）与黄金范数的矩形和它那一级的双曲线，琥珀只给当前的点与正在滑动的基矢 u₂，其余等值线是中性灰（虚线上没有格点）。
 
+| `fixed-point-convergence` | 蛛网每绕一圈，误差乘上不动点处的斜率；连斜率一起读，几步就合拢；有理读数却总差一道缝 | `golden` `rate` `circle` `newton` `rational` `ruler` |
+
+`fixed-point-convergence` 与 `sphere-escape` 的 `dottie`、`far` 分工：那两张讲“总有一点留在外面”，本页讲“怎样收束、收得多快”。舞台是蛛网图（曲线 y = f(x) 与直线 y = x），“跟着放大”时以不动点为原点重新标尺。绿色框只给第二十四章用 `lean=` 引用的 `golden_fixed_point_unique`（φ 是 1 + 1/x 唯一的正不动点）与 `rational_inverse_endpoint`（只取其中 θ* 的存在、唯一与 0 < θ* < 1）；压缩映射与全局收敛、渐近压缩率 −sin θ*、牛顿二次收敛、残差双边界与 (1 + sin 1)/b² 界按 §24.4–24.5 的文献注记标 `ARGUED`；轨道、残差、“单纯迭代要走几步”与连分数部分商都以 70 位定点整数实算（`NUM`）。这一页的青色是曲线 y = f(x)（只读投影）与单位圆上 P 的横坐标 θ*，品红是斜率那一半：不动点处的切线、牛顿沿切线走的那一段、λ = sin θ* 的高度与残差竖线；琥珀只给当前这一步或当前读数；走过的折线是中性墨色，灰色虚线是最陡斜率 −sin 1 与残差的楔形边界。路线图候选“开普勒方程”“半程落体”讲的是 θ* 住在哪里，正文那里没有关于收束快慢的句子，未做成卡；正文讲了而候选没有的“单位圆上的线与面”（`circle`）与“十进制千分尺”（`ruler`）补做成卡。
+
 ## 正文里的引用（中英文版本位置与卡名相同）
 
 | 章节 | 位置 | 引用 |
@@ -300,6 +304,10 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十三章 | 命题 `prop-pell-form-eq-four-mul-norm` 的证明之后 | `norm-lattice` · `pell` |
 | 第二十三章 | 佩尔—卢卡斯—斐波那契锁定一段（“当且仅当……$(\pm L_n, \pm F_n)$”）之后、例 `ex-eisenstein-and-golden-pell-lattice` 引言之前 | `norm-lattice` · `units` |
 | 第二十三章 | §23.2 末（`pythagoras-number-escape` · `golden` 之后、§23.3 之前） | `norm-lattice` 完整实验室 |
+| 第二十四章 | §24.3 推论 `cor-golden-fixed-point-unique` 的证明之后、“为什么是 1 + 1/x”一段之前 | `fixed-point-convergence` · `golden` |
+| 第二十四章 | §24.5 文献注记 `rem-dottie-convergent-residual-literature` 之后、例 `ex-dottie-rate-newton-rational` 之前 | `fixed-point-convergence` · `rate`、`circle`、`newton` |
+| 第二十四章 | 例 `ex-dottie-rate-newton-rational` 之后、“最后一张表说明”一段之前 | `fixed-point-convergence` · `rational` |
+| 第二十四章 | “二十三等分的尺子……一千等分的尺子没有”一段之后、“有理读数永远对不准”之前 | `fixed-point-convergence` · `ruler`，随后完整实验室 |
 
 ## 增删或修改一张卡之后
 
