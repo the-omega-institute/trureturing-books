@@ -95,6 +95,20 @@ check('TURN-360: the pill shows the sheet −1', (await page.textContent('#pillS
 await pick('turn2'); s = await end();
 check('TURN-720: B is back and R = +1', vclose(s.r, expected(60, 40, []).r, 1e-12) && vclose(s.q, [1, 0, 0, 0], 1e-12) && s.sheet === 1);
 check('TURN-720 is four half-turns on the rail', s.n === 4 && s.gates.every((g) => g[0] === 'x' && g[1] === 180));
+check('TURN-720: the circuit note says the whole turn is the identity with rotor +1', /\+1/.test(await page.textContent('#circNote')));
+
+// B coming back does not make the circuit the identity: an S gate leaves the north pole where it is
+await pick('line');
+await page.click('#gateChips [data-gate="S"]');
+const toastSaid = await page.waitForFunction(() => /±1/.test(document.getElementById('toast').textContent), null, { timeout: 30000 }).then(() => true, () => false);
+s = await end();
+const US = gate(AX.z, 90), eS = expected(0, 0, [['z', 90]]);
+const offBy = (U, sg) => Math.max(...[0, 1].flatMap((i) => [0, 1].map((j) => Math.hypot(U[i][j][0] - (i === j ? sg : 0), U[i][j][1]))));
+check('S on the north pole: B does not move, yet the matrix is neither I nor −I and the rotor is (√½, 0, 0, √½)', vclose(s.r, [0, 0, 1], 1e-12) && vclose(eS.r, [0, 0, 1], 1e-12) && offBy(US, 1) > 0.5 && offBy(US, -1) > 0.5 && vclose(s.q, [Math.SQRT1_2, 0, 0, Math.SQRT1_2], 1e-12) && vclose(s.q, eS.q, 1e-12));
+const noteS = await page.textContent('#circNote'), toastS = await page.textContent('#toast');
+check('S on the north pole: the circuit note says B is back but the rotor is not ±1, and never that it is back at +1', /±1/.test(noteS) && /不是|not/.test(noteS) && !/回到\s*\+1|back at \+1|R = \+1/.test(noteS), noteS);
+check('S on the north pole: the end-of-circuit toast does not report R = ±1 either', toastSaid && !/R = [+−]1/.test(toastS), toastS);
+check('the header pill names the sheet of ±R, not the rotor itself', /叶|sheet/i.test(await page.textContent('#pillSheet')));
 
 // gates appended by hand, against the matrix product at every step
 await pick('half');
