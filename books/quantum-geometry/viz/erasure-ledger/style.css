@@ -1,0 +1,4 @@
+/* ERASURE//LEDGER: the shared lab layout (../assets/theme.css) carries the page. Put here only what belongs to this
+   visualization alone; colours come from the tokens (var(--cyan) …), never from hex values. */
+.ops { flex-wrap: wrap; }
+.ops .chip:disabled { opacity: 0.35; cursor: not-allowed; }

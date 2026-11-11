@@ -608,6 +608,34 @@
         { "gid": "D5/S3/Observer/Conditioning.unreadState_fixed_iff" },
         { "gid": "D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras" }
       ]
+    },
+    {
+      "id": "erasure-ledger",
+      "code": "ERASURE//LEDGER",
+      "title": "擦除账本",
+      "title_en": "The erasure ledger",
+      "summary": "一个量子比特的布洛赫圆盘与一本两栏账：系统的熵、付给环境的热。转动不记账；捏合抹掉箭头横着的那一份（相干），系统的熵恰好多出这一步的相对熵 D，连做几步就一块块叠起来；理想复位把这笔熵化成热付给环境，正好碰到兰道尔下界；只用一个热浴比特交换复位，多付的一截恰好是热浴被推离平衡的 D，与第八章的数值表一致；拷贝进记录比特让局部的熵涨到 ln 2 却不付热，还能撤回。五张实验卡可以在第八章正文里单独引用。",
+      "summary_en": "The Bloch disc of one qubit and a two-column ledger: the system's entropy and the heat paid to the environment. Turning writes nothing; pinching wipes out the arrow's sideways part (its coherence) and the system's entropy rises by exactly that step's relative entropy D, block by block over several steps; the ideal reset pays the entropy out as heat that just touches the Landauer floor; resetting by a swap with a single bath qubit pays extra, exactly the D by which the bath is pushed off equilibrium, as in Chapter 8's table; copying into a record bit raises the local entropy to ln 2 with no heat at all, and can be undone. Each of the five experiment cards can be cited on its own from Chapter 8.",
+      "path": "erasure-ledger/",
+      "thumbnail": "erasure-ledger/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": ["兰道尔原理", "相干擦除", "熵产生", "有限热浴", "Lean 4 已证"],
+      "tags_en": ["Landauer's principle", "Coherence erasure", "Entropy production", "Finite bath", "Lean 4 verified"],
+      "theory": [
+        { "label": "第八章 §8.1 · 幺正旋转的可逆性与信息擦除的不可逆性", "label_en": "Chapter 8 §8.1 · Unitary reversibility versus the irreversibility of erasure", "href": "../zh/ch08-erasure-and-time-arrows.html#sec-unitary-reversibility-vs-erasure", "href_en": "../en/ch08-erasure-and-time-arrows.html#sec-unitary-reversibility-vs-erasure" },
+        { "label": "第八章 §8.2 · 相干擦除产熵与兰道尔原理的两阶段图景", "label_en": "Chapter 8 §8.2 · The two-stage picture of coherence erasure and Landauer's principle", "href": "../zh/ch08-erasure-and-time-arrows.html#sec-landauer-principle-geometry", "href_en": "../en/ch08-erasure-and-time-arrows.html#sec-landauer-principle-geometry" },
+        { "label": "第八章 §8.3 · 观察者记忆与时间之箭", "label_en": "Chapter 8 §8.3 · Observer memory and the arrow of time", "href": "../zh/ch08-erasure-and-time-arrows.html#sec-observer-memory-time-arrow", "href_en": "../en/ch08-erasure-and-time-arrows.html#sec-observer-memory-time-arrow" },
+        { "label": "Blueprint · EntropyProductionCoherenceDeletionIdentity", "label_en": "Blueprint · EntropyProductionCoherenceDeletionIdentity", "href": "{trureturing}/D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.lean" }
+      ],
+      "lean": [
+        { "gid": "D5/S3/Quantum/Divergence/DualAccountFull.dual_account_full" },
+        { "gid": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity" },
+        { "gid": "D5/S3/DivergenceSupport/LandauerIdentity.landauer_identity_from_balances" },
+        { "gid": "D5/S3/DivergenceSupport/LandauerSaturation.landauer_saturation_iff" },
+        { "gid": "D5/S3/DivergenceSupport/LandauerSaturation.landauer_strict_iff" },
+        { "gid": "D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.reduced_irreversibility_is_canonical_record_access_defect" }
+      ]
     }
   ]
 }
