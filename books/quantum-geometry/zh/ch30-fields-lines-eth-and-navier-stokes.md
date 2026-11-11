@@ -628,4 +628,4 @@ $$
 
 本章以作者关于全局静态场与有限观察者、“场”与“线”的格言连接离散逻辑和连续流体。数学层面，静态满足子空间、额外资源下的复杂度等式、受限模型下界与标准 $P\neq NP$ 开放问题各有边界。在有限图着色这一例子中，Gallai–Hasse–Roy–Vitaver 定理给出“$G$ 可 $k$ 着色”与“存在一种定向，使每条有向路至多含 $k$ 个顶点”之间的精确等价（[@thm-ch30-gallai-roy]）；它只是交换两种存在性见证，不提供算法，也不解决一般的 $P$ vs. $NP$ 问题。银河交叉表比较的是示意上界（[@ex-ch30-galactic-crossover-scale]），不是普遍搜索下界。流体部分则并置 **兰姆分解（[@rem-ch30-lamb-decomposition-literature]）、无外力三维全局正则性开放猜想（[@conj-coda-navier-stokes-regularity]）与二次平流投影无精确闭合定理（[@thm-coda-quadratic-advection-no-closure]）**。这些结果为作者的几何诠释提供参照，并不建立两道开放难题的数学等价。
 
-现在，让我们推开全书的最后一扇门，步入 **[终章：在所有的球之外](coda.md)**，在多面体离散角亏余项（见终章 [@rem-coda-polyhedral-topology-literature]）、收缩不动点锚点与全书三十章总导图中完成最后的升维回望。
+沿着这道正交视界继续向前，我们将在 **[第三十一章：量子的本质是公平](ch31-quantum-fairness.md)** 与 **[第三十二章：正交自指统一场与万流归宗](ch32-unified-field-and-meta-unification.md)** 中揭示五重几何特权的废除、遍历统计全息与跨纲领元统一，并最终步入 **[终章：在所有的球之外](coda.md)**，在多面体离散角亏余项（见终章 [@rem-coda-polyhedral-topology-literature]）、收缩不动点锚点与全书三十二章总导图中完成最后的升维回望。

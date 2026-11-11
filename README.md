@@ -19,7 +19,7 @@ Every formal `theorem`, `lemma`, `proposition`, and `corollary` in this library 
 - **路径 / Path**：[books/quantum-geometry/](books/quantum-geometry/book.toml)（中文权威版 `zh/` · 英文版 `en/`）
 - **文本许可 / Text License**：`CC-BY-4.0`
 
-本书将直观的物理机制推演、概念谱系批判与机器形式化证明熔于一炉，沿着**“点 $\to$ 线 $\to$ 面 $\to$ 球 $\to$ 多球共振 $\to$ 时空之球 $\to$ 球外之球与机械法典 $\to$ 无时间因果、复杂性视界与流体涡丝”**的八部三十章正交阶梯推进：
+本书将直观的物理机制推演、概念谱系批判与机器形式化证明熔于一炉，沿着**“点 $\to$ 线 $\to$ 面 $\to$ 球 $\to$ 多球共振 $\to$ 时空之球 $\to$ 球外之球与机械法典 $\to$ 无时间因果、复杂性视界、量子公平与元统一”**的八部三十二章正交阶梯推进：
 
 | 部次 / Part | 主题 / Theme | 章节范围 / Chapters |
 | :--- | :--- | :--- |
@@ -31,7 +31,7 @@ Every formal `theorem`, `lemma`, `proposition`, and `corollary` in this library 
 | **第五部 / Part V** | 显影·时空之球：相对论度规、规范力场与全息引力 | 第 17–20 章 |
 | **第六部 / Part VI** | 越界·球外之球：哥德尔逃逸、算术频谱与 $\psi = \psi(\psi)$ | 第 21–24 章 |
 | **第七部 / Part VII** | 铸器·构造与验证：异或代数、旋子编译与 Lean 4 公理圣殿 | 第 25–28 章 |
-| **第八部 / Part VIII** | 贯通·时间、复杂性与流体：无时间因果、复杂性视界与涡丝坍缩 | 第 29–30 章 |
+| **第八部 / Part VIII** | 贯通·无时间因果、复杂性视界、量子公平与元统一 | 第 29–32 章 |
 | **终章与附录 / Coda & Appendices** | 球外的人、历史遗迹吸引子与高维黄金切投观察者；概念对照词典、克利福德速查表与锁定声明总索引 | `coda.md`、`appendix-a.md`–`appendix-c.md` |
 
 本书库的文风规范、中英受控术语表与三层认识论诚实契约详见 [PROJECT.md](PROJECT.md)。
