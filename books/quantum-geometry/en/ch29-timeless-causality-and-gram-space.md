@@ -4,6 +4,10 @@
 
 Across the twenty-eight chapters of Parts I–VII, we have traveled from pairwise inner-product projections to mechanical verification inside the Lean 4 kernel. Opening **Part VIII** of the monograph, we now confront two foundational ontological questions at the summit of our geometric architecture: first, how do Pythagoras's theorem and "All Is Number" connect—through the $\pm 1$ Pell arithmetic seam—to prime duality, congruent-number elliptic-curve tori, and the spinor 3-sphere $S^3$? Second, why does the order-independent Gram matrix rigidity of Chapter 10 abolish sequential time while simultaneously grounding Spinozist causal necessity and a finite observer's freedom of choice inside the Gram elliptope?
 
+::: {.figure src="ch29-overview"}
+**Figure 29.** A map of the chapter. Panel I: four steps carrying the cyan $\mathbb{Q}$ and the magenta $\sqrt{2}$, $\pi$ and $\theta^*$; each magenta constant is the one that escaped the step below. Panel II: on the mod $4$ dial a sum of two squares lands only in the cyan cells $0$, $1$, $2$, while cell $3$, outlined in dashed magenta, stays empty ([@lem-ch29-square-residues-mod-four]). Panel III: the Gram window for $c_{AB} = \cos 60^\circ$, violet inside where $\det G > 0$ and $\det G = 0$ on the rim; the amber segment is the range open to $c_{AC}$ when $c_{BC} = \cos 45^\circ$.
+:::
+
 ---
 
 ## Pythagoras, "All Is Number," and the Four-Tier Escape of Number {#sec-coda-pythagoras-all-is-number}
@@ -134,6 +138,10 @@ Let $\delta_k$ be the minimum of $|m\,s - z|$ over $0 < m < P_{k+2}$ and $z \in 
 The error column alternates in sign, and its absolute value shrinks by a factor of $s \approx 0.414$ from row to row; the fourth column takes only the values $\pm 1$; the last column equals the absolute error, and in these six rows the minimum is attained only at $m = P_{k+1}$ (the uniqueness is an observation from the enumeration; the two theorems guarantee only that the minimum equals $s^{k+1}$ and is attained at $m = P_{k+1}$). For $k = 1$, for instance, only $m = 1, 2, 3, 4$ are allowed, at distances $0.41421356$, $0.17157288$, $0.24264069$ and $0.34314575$, and the smallest is exactly $m = P_2 = 2$. The row $k = 5$ can also be checked in integers: the determinant is $P_7P_5 - P_6^2 = 169\cdot 29 - 70^2 = 4901 - 4900 = 1$, and the phase-mass bracket $P_7 + s\,P_6 = 99 + 70\sqrt{2} \approx 197.99495$ times $s^6 \approx 0.0050506339$ is exactly $1$.
 :::
 
+::: {.figure src="ch29-pell-seam"}
+**The error changes sign and shrinks by the factor $s$ at every step, yet never reaches zero; $Q^2 - 2P^2$ stays $\pm 1$.** The stems are the errors $P_{k+1}\,s - P_k$ of the third column above, cyan and upwards when positive, magenta and downwards when negative. The vertical axis is logarithmic in the size of the error, so shrinking by $s \approx 0.414$ is one equal step, and every stem ends on the dashed envelope $\pm s^{k+1}$ (part 1 of [@thm-ch29-silver-pell-remainder]). Each stem carries its convergent $Q_{k+1}/P_{k+1}$; the bottom row is the fourth column, $Q_{k+1}^2 - 2P_{k+1}^2$.
+:::
+
 ::: {.remark #rem-ch29-pell-convergents-literature title="$Q_n/P_n$ and the Continued-Fraction Convergents of $\sqrt{2}$ (Literature result, not formalized in this book)"}
 **Literature result, not formalized in this book.** Classical continued-fraction theory gives
 
@@ -179,6 +187,10 @@ Seen through this four-tier table, Pythagoras and the overarching thesis of this
 - Applying the Pythagorean theorem infinitely many times to inscribed $2^k$-gons bends polygonal chords into circular arcs, crystallizing $\pi$ and closing the static **Tier 3 Sphere**;
 - Finally, when we stop separating the measuring operator $\cos$ from the measured angle $\theta$ as "ruler" versus "reading" and ask what happens when the ruler's projected output equals its own opening angle ($\cos\theta = \theta$), the fixed point $\theta^*$ emerges and carries us into the **Tier 4 Sphere**—where the counting verb **shǔ ($\cos$)** and the counted noun **shù ($\theta$)** become one!
 
+::: {.figure src="ch29-four-tiers"}
+**Four tiers: each is broken open by the next operation.** Tier 1 is the cyan rational points $m/n$ on the number line; the magenta diagonal $\sqrt{2}$ of the unit square breaks it and opens tier 2; the cyan octagon hugging the magenta circle stands for the inscribed polygons whose limit gives tier 3 its $\pi$; the cyan curve $y = \cos\theta$ meets the dashed line $y = \theta$ at the magenta point $\theta^* \approx 0.739$, tier 4. The constants on the steps are the four rows of [@rem-ch29-four-tier-sphere-table]; the transcendence statements behind them are literature results, not formalized in this book.
+:::
+
 ---
 
 ## The $\pm 1$ Arithmetic Seam, Prime Duality, and the $S^3$ Projection on Elliptic Curve Tori {#sec-coda-primes-elliptic-curves}
@@ -204,6 +216,10 @@ $$
 At first glance, the right-hand side is merely a sign choice between $+1$ and $-1$. Yet in the two-dimensional Clifford exterior plane, $-1$ is the square of the skew-adjoint unitary complex structure (the bivector imaginary generator) $\hat{\mathbf{I}}$, namely $\hat{\mathbf{I}}^2 = -1$ ([`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary))! Depending on whether $\sqrt{-1}$ exists modulo $p$—that is, whether the Legendre symbol $\left(\frac{-1}{p}\right) = (-1)^{(p-1)/2}$ equals $+1$ or $-1$, a dividing line that manual derivation 2 below obtains from frozen theorems—the $\pm 1$ seam splits all odd primes into two families of distinct geometric dimension:
 
 **Plane primes** are the odd primes with $p \equiv 1 \pmod 4$ ($5, 13, 17, 29, 37, \dots$); **line primes** are the odd primes with $p \equiv 3 \pmod 4$ ($3, 7, 11, 19, 23, \dots$). The core of this dichotomy is frozen at the pinned `trureturing@dev` commit, and each of the two lemmas and two theorems below is checked by the Lean kernel. Start with the plainest mechanism: put the squares of the integers on a clock face with only four slots, the residues modulo $4$. The square of an even number $2k$ is $4k^2$ and lands in slot $0$; the square of an odd number $2k + 1$ is $4(k^2 + k) + 1$ and lands in slot $1$. A sum of two squares can therefore only land in slots $0$, $1$ or $2$; slot $3$ stays empty forever.
+
+::: {.figure src="ch29-mod-four-dial"}
+**The mod $4$ dial: a sum of two squares lands only in cells $0$, $1$ and $2$; cell $3$ stays empty.** The three cyan cells show which residues of the two squares add up to land there, $0 + 0$, $0 + 1$ and $1 + 1$; cell $3$, outlined in dashed magenta, is empty, and the magenta line primes $3, 7, 11, 19, 23$ on the left point straight into it, while the cyan plane primes $5, 13, 17, 29, 37$ on the right sit in cell $1$ ([@lem-ch29-square-residues-mod-four]).
+:::
 
 ::: {.lemma #lem-ch29-square-residues-mod-four title="Squares Are 0 or 1 Modulo 4, and a Sum of Two Squares Is Never 3 Modulo 4" lean="D5/S3/PrimeForms/QuadraticResidues.square_residues_and_sum_obstruction"}
 For every natural number $n$, either $n^2 \bmod 4 = 0$ or $n^2 \bmod 4 = 1$; and for all natural numbers $a, b$, $(a^2 + b^2) \bmod 4 \neq 3$.
@@ -566,6 +582,10 @@ In particular, whenever $\mathbf{A}, \mathbf{B}, \mathbf{C}$ lie in a common gre
 $$
 c_{AC} = c_{AB}\,c_{BC} \pm \sqrt{(1 - c_{AB}^2)(1 - c_{BC}^2)} = \cos(\theta_{AB} \mp \theta_{BC}).
 $$
+
+::: {.figure src="ch29-gram-window"}
+**Two cosines lock the third: $c_{AC}$ can only fall inside the window.** The figure fixes $c_{AB} = \cos 60^\circ$, with $c_{BC}$ across and $c_{AC}$ up. Inside the violet ellipse $\det G > 0$; its rim is made of the two tracks of the formula above, $\cos(\theta_1 - \theta_2)$ and $\cos(\theta_1 + \theta_2)$ (with $\theta_1 = \theta_{AB}$, $\theta_2 = \theta_{BC}$), and on the rim $\det G = 0$: the three vectors are coplanar. The amber segment is the window at $c_{BC} = \cos 45^\circ$, from $\cos 105^\circ$ to $\cos 15^\circ$. Let $c_{AB}$ vary as well, and these slices stack up into the Gram elliptope of Level 4.
+:::
 
 This single equation exhibits two inseparable faces:
 - **Complete order-independence (timelessness)**: the relation is completely permutation-symmetric in $(A, B, C)$, with no "earlier cause" or "later effect";
