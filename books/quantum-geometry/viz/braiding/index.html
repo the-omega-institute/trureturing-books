@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="BRAID//STRANDS · Braiding">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BRAID//STRANDS 编织</title>
+<meta name="description" content="平面里的粒子随时间往上走出世界线；两颗交换时，谁从前面过、谁从后面过，记在第三个方向上。颜色顺着绳子往上传：交换一次再反着交换一次，颜色原样回来；同向交换两次，回不来；三股的两种顺序落在同一处。把编织首尾接上，数一数回得来的着色。Particles in a plane trace world lines as time goes up; when two of them exchange, which one passes in front is recorded in the third direction. Colors ride up the strands: an exchange undone by the opposite one returns the colors, two exchanges the same way do not, and the two orders on three strands land in the same place. Close the braid and count the colorings that come back.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="braiding">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="BRAID//STRANDS">BRAID<b>//</b>STRANDS</h1>
+      <div class="tagline">
+        <span class="zh">编织 · <em>交换两颗粒子，谁从前面过记在第三个方向上；反着交换一次就回来，同向交换两次回不来，三股的两种顺序落在同一处</em></span>
+        <span class="en">Braiding · <em>exchange two particles and which one passes in front is kept in the third direction; the opposite exchange undoes it, two the same way do not, and the two orders on three strands land in the same place</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillWord"><span class="zh">编织</span><span class="en">BRAID</span> <strong>—</strong></span>
+      <span class="pill hot" id="pillCount"><span class="zh">回得来</span><span class="en">COME BACK</span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="over" aria-pressed="false"><span class="code">σ₁</span><span class="cn zh">一次交换：左边那股从前面过</span><span class="cn en">One exchange: the left strand passes in front</span></button>
+        <button class="preset" data-preset="inverse" aria-pressed="false"><span class="code">σ₁σ₁⁻¹</span><span class="cn zh">反着再交换一次：原样回来</span><span class="cn en">Exchange back the other way: all returns</span></button>
+        <button class="preset" data-preset="twice" aria-pressed="false"><span class="code">σ₁²</span><span class="cn zh">同向交换两次 ≠ 不交换</span><span class="cn en">Two exchanges the same way ≠ none</span></button>
+        <button class="preset" data-preset="yb" aria-pressed="false"><span class="code">YANG–BAXTER</span><span class="cn zh">三股的两种顺序落在同一处</span><span class="cn en">The two orders on three strands agree</span></button>
+        <button class="preset" data-preset="close" aria-pressed="false"><span class="code">CLOSE</span><span class="cn zh">首尾接上：颜色得原样回来</span><span class="cn en">Close it up: the colors must come back</span></button>
+        <button class="preset" data-preset="stabilize" aria-pressed="false"><span class="code">+1 STRAND</span><span class="cn zh">添一股：新股抄一遍末位</span><span class="cn en">Add a strand: it copies the last color</span></button>
+        <button class="preset" data-preset="trefoil" aria-pressed="false"><span class="code">3 ≠ 9</span><span class="cn zh">σ₁ 与 σ₁³ 数出不同的数</span><span class="cn en">σ₁ and σ₁³ count differently</span></button>
+        <button class="preset" data-preset="rack" aria-pressed="false"><span class="code">x⋆x ≠ x</span><span class="cn zh">不幂等的架：添一股就数不出</span><span class="cn en">A rack that is no quandle: one strand more, none left</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+    <section class="panel sec">
+      <h2><span class="zh">编织</span><span class="en">The braid</span><span class="aside"><span class="zh">自下而上</span><span class="en">bottom to top</span></span></h2>
+      <div class="chips" id="nChips" role="group" aria-label="股数" data-aria-en="Number of strands">
+        <button class="chip" data-n="1" aria-pressed="false"><span class="zh">1 股</span><span class="en">1 strand</span></button>
+        <button class="chip" data-n="2" aria-pressed="true"><span class="zh">2 股</span><span class="en">2 strands</span></button>
+        <button class="chip" data-n="3" aria-pressed="false"><span class="zh">3 股</span><span class="en">3 strands</span></button>
+      </div>
+      <div class="chips gens" id="genBtns" role="group" aria-label="在最上面添一个交叉" data-aria-en="Add a crossing on top">
+        <button class="chip" data-gen="1">σ₁</button><button class="chip" data-gen="-1">σ₁⁻¹</button><button class="chip" data-gen="2">σ₂</button><button class="chip" data-gen="-2">σ₂⁻¹</button>
+        <button class="chip" id="undo"><span class="zh">撤销</span><span class="en">undo</span></button><button class="chip" id="clearW"><span class="zh">清空</span><span class="en">clear</span></button>
+      </div>
+      <div class="chips" id="closeChips" role="group" aria-label="敞开还是首尾接上" data-aria-en="Open, or closed up">
+        <button class="chip" data-closed="open" aria-pressed="true"><span class="zh">敞开</span><span class="en">open</span></button>
+        <button class="chip" data-closed="closed" aria-pressed="false"><span class="zh">首尾接上</span><span class="en">closed up</span></button>
+      </div>
+      <p class="note"><span class="zh">σ<sub>k</sub> 交换第 k、k + 1 股：从上往下看逆时针转半圈，左边那股从前面过；σ<sub>k</sub>⁻¹ 反过来。点舞台底部的数字换颜色；拖空白处转动视角。</span><span class="en">σ<sub>k</sub> exchanges strands k and k + 1: half a turn anticlockwise seen from above, the left strand passing in front; σ<sub>k</sub>⁻¹ the other way. Click a number at the bottom of the stage to change that color; drag empty space to turn the view.</span></p>
+    </section>
+    <section class="panel sec">
+      <h2><span class="zh">颜色与规则</span><span class="en">Colors and rule</span><span class="aside">Q = ℤ/3</span></h2>
+      <div class="chips" id="qChips" role="group" aria-label="颜色的运算" data-aria-en="The operation on colors">
+        <button class="chip" data-q="dihedral" aria-pressed="true"><span class="zh">三染色 x⋆y = 2x − y</span><span class="en">three-coloring x⋆y = 2x − y</span></button>
+        <button class="chip" data-q="shift" aria-pressed="false"><span class="zh">架 x⋆y = y + 1</span><span class="en">rack x⋆y = y + 1</span></button>
+      </div>
+      <div class="chips" id="viewChips" role="group" aria-label="视角" data-aria-en="View">
+        <button class="chip" data-view="tilt" aria-pressed="true"><span class="zh">斜看：世界线</span><span class="en">tilted: world lines</span></button>
+        <button class="chip" data-view="front" aria-pressed="false"><span class="zh">正面：编织图</span><span class="en">front: braid diagram</span></button>
+      </div>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="平面里的粒子随时间往上走出的世界线；交换时一股从前面过、一股从后面过；绳子上的数字是颜色" data-aria-en="World lines of particles in a plane, rising with time; at an exchange one strand passes in front and one behind; the numbers on the strands are colors">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-bl">
+        <span><i class="sw dm"></i><span class="zh">世界线（前面那股盖住后面那股）</span><span class="en">world lines (the front strand hides the one behind)</span></span>
+        <span><i class="sw am"></i><span class="zh">此刻的时间与颜色</span><span class="en">the time now, and the colors now</span></span>
+        <span class="lg-closed"><i class="sw cy"></i><span class="zh">接回来，颜色对上</span><span class="en">closed up, colors match</span></span>
+        <span class="lg-closed"><i class="sw mg"></i><span class="zh">接回来，颜色对不上</span><span class="en">closed up, colors clash</span></span>
+      </div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">b · c = c ?</span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="dtKey"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div><dt><span class="zh">编织（乘积）</span><span class="en">braid (product)</span></dt><dd id="roWord">—</dd></div>
+        <div><dt><span class="zh">底端的颜色</span><span class="en">colors at the bottom</span></dt><dd id="roBottom">—</dd></div>
+        <div class="c"><dt><span class="zh">此刻的颜色</span><span class="en">colors now</span></dt><dd id="roNow">—</dd></div>
+        <div><dt><span class="zh">两股绕过的角度</span><span class="en">angle the pair has turned</span></dt><dd id="roTurn">—</dd></div>
+        <div><dt><span class="zh">颜色规则</span><span class="en">color rule</span></dt><dd id="roRule">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">任意架 Q 上，三股的两种交叉顺序给出同一个结果：crossing₁(crossing₂(crossing₁(x, (y, z)))) = crossing₂(crossing₁(crossing₂(x, (y, z))))。已冻结：</span><span class="en">On any rack Q the two orders of crossings on three strands give the same result: crossing₁(crossing₂(crossing₁(x, (y, z)))) = crossing₂(crossing₁(crossing₂(x, (y, z)))). Frozen: </span><a class="leanref" data-lean-gid="D5/S0/Certificates/Quandles/BraidColoringTransport.crossing_yang_baxter" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S0/Certificates/Quandles/BraidColoringTransport.lean" target="_blank" rel="noopener"><code>crossing_yang_baxter</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">Q 是有限的幂等架时，两个 Markov 等价的正股数编织，闭合着色数相等。已冻结：</span><span class="en">For a finite quandle Q, two Markov-equivalent braids with a positive number of strands have the same number of closed colorings. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Topology/QuandleMarkovColoring.quandle_coloring_markov_invariant" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Topology/QuandleMarkovColoring.lean" target="_blank" rel="noopener"><code>quandle_coloring_markov_invariant</code></a></span></div>
+    </section>
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">颜色沿编织的传输与“回得来的着色”个数都由页面逐个穷举（3ⁿ 个着色），与第十四章例题的两张计数表一致。</span><span class="en">The transport of colors along the braid and the number of colorings that come back are enumerated by the page (all 3ⁿ colorings), and agree with the two count tables of Chapter 14's example.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">世界线是本页选定的画法：粒子在平面 (e₁, e₂) 里，时间朝上，每次交换是绕两颗中点转半圈。Lean 里只有代数：生成元、关系与着色作用。</span><span class="en">The world lines are the drawing chosen here: particles in the plane (e₁, e₂), time upward, each exchange half a turn about the pair's midpoint. Lean has only the algebra: generators, relations and the coloring action.</span></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">平面里交换两次回不到原样、空间里却能借第三个方向解开（辫群 Bₙ 与对称群 Sₙ）；Artin、Alexander、Markov 定理；σ₁³ 闭合成三叶结、σ₁ 闭合成平凡结。文献结果，未在本书形式化。</span><span class="en">That two exchanges in a plane cannot be undone while in space they can, using the third direction (the braid group Bₙ versus the symmetric group Sₙ); the theorems of Artin, Alexander and Markov; that σ₁³ closes to a trefoil and σ₁ to an unknot. Literature results, not formalized in this book.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到底端" data-aria-en="Back to the bottom">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="时间：从编织的底端到顶端" data-aria-en="Time: from the bottom of the braid to the top">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">一个交叉</span><span class="en">one crossing</span> · <kbd>F</kbd> <span class="zh">正面 / 斜看</span><span class="en">front / tilted</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">几颗粒子排在平面 (e₁, e₂) 里，时间朝上，每颗走出一条世界线。σ<sub>k</sub> 让第 k、k + 1 颗绕它们的中点逆时针转半圈（从上往下看），左边那颗从前面过；σ<sub>k</sub>⁻¹ 顺时针，右边那颗从前面过。“前面”“后面”就是第三个方向。每股绳子带一个颜色（ℤ/3 的元素），从底端往上传。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>颜色怎样过交叉。</b>σ<sub>k</sub> 把相邻两个颜色 (c<sub>k</sub>, c<sub>k+1</sub>) 换成 (c<sub>k</sub> ⋆ c<sub>k+1</sub>, c<sub>k</sub>)：前面那股带着原色走，后面那股被它改色；σ<sub>k</sub>⁻¹ 把 (u, v) 换成 (v, v ⋆⁻¹ u)。两步互逆：反着再交换一次，颜色原样回来。默认的规则是 Fox 三染色 x ⋆ y = 2x − y（模 3）：两色相同不变，两色不同变成第三色。</li>
+        <li><b>同向交换两次，回不来。</b>σ₁² 的两条世界线互相绕了整整一圈，颜色 (0, 1) 到顶端成了 (1, 2)。在平面里这一圈解不开；粒子若能离开平面，借第三个空间方向可以把这一圈抬过去解开（辫群与对称群之别，文献结果，未在本书形式化）。</li>
+        <li><b>三股的两种顺序。</b>σ₁σ₂σ₁ 与 σ₂σ₁σ₂ 的世界线不一样，顶端的颜色却总相同：<a class="leanref" data-lean-gid="D5/S0/Certificates/Quandles/BraidColoringTransport.crossing_yang_baxter" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S0/Certificates/Quandles/BraidColoringTransport.lean" target="_blank" rel="noopener"><code>crossing_yang_baxter</code></a>（LEAN ✓，对任意架成立）。</li>
+        <li><b>首尾接上，数回得来的着色。</b>把第 k 个顶端接回第 k 个底端，颜色必须原样回来：闭合着色就是着色传输的不动点。三染色下 σ₁ 有 3 个，σ₁³ 有 9 个。在最右边添一股、只与原来最后一股交叉一次，新股只是把末位颜色抄一遍，个数不变；换一处剪开（共轭）也不变：有限幂等架的闭合着色数在 Markov 等价下不变，<a class="leanref" data-lean-gid="D5/S3/Topology/QuandleMarkovColoring.quandle_coloring_markov_invariant" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Topology/QuandleMarkovColoring.lean" target="_blank" rel="noopener"><code>quandle_coloring_markov_invariant</code></a>（LEAN ✓）。3 ≠ 9，所以 σ₁ 与 σ₁³ 不是 Markov 等价的；把它读成“三叶结不是平凡结”，要靠 Artin、Alexander、Markov 三条文献定理。</li>
+        <li><b>幂等公理省不得。</b>换成 x ⋆ y = y + 1：它是架，却不满足 x ⋆ x = x。一股的平凡编织有 3 个闭合着色，添一股之后一个也没有。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch14-cloning-codes-and-braids.html#sec-braids-and-third-axis" target="_top">第十四章 · 二维编织与第三正交方向</a> · <a href="../../zh/ch14-cloning-codes-and-braids.html#cor-braid-yang-baxter" target="_top">三股编织 Yang–Baxter 恒等式</a> · <a href="../../zh/ch14-cloning-codes-and-braids.html#sec-markov-stabilization-coloring-count" target="_top">Markov 稳定化与着色计数</a> · <a href="../../zh/ch14-cloning-codes-and-braids.html#ex-fox-three-colorings-markov" target="_top">三种颜色数出 3、3、9</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">A few particles sit in the plane (e₁, e₂) with time going up, each tracing a world line. σ<sub>k</sub> turns particles k and k + 1 half a turn anticlockwise (seen from above) about their midpoint, the left one passing in front; σ<sub>k</sub>⁻¹ turns them clockwise, the right one passing in front. “In front” and “behind” are the third direction. Each strand carries a color (an element of ℤ/3) from the bottom up. The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>How colors pass a crossing.</b> σ<sub>k</sub> replaces the neighbouring colors (c<sub>k</sub>, c<sub>k+1</sub>) by (c<sub>k</sub> ⋆ c<sub>k+1</sub>, c<sub>k</sub>): the strand in front keeps its color, the one behind is recolored by it; σ<sub>k</sub>⁻¹ replaces (u, v) by (v, v ⋆⁻¹ u). The two steps are inverse: exchanging back the other way returns the colors. The default rule is Fox's three-coloring x ⋆ y = 2x − y (mod 3): equal colors stay, two different colors give the third.</li>
+        <li><b>Two exchanges the same way do not come back.</b> In σ₁² the two world lines wind a full turn around each other, and the colors (0, 1) arrive at the top as (1, 2). In the plane this turn cannot be undone; if the particles could leave the plane, the third spatial direction would let the loop be lifted over and undone (the braid group versus the symmetric group, a literature result not formalized in this book).</li>
+        <li><b>The two orders on three strands.</b> σ₁σ₂σ₁ and σ₂σ₁σ₂ have different world lines, yet the colors at the top always agree: <a class="leanref" data-lean-gid="D5/S0/Certificates/Quandles/BraidColoringTransport.crossing_yang_baxter" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S0/Certificates/Quandles/BraidColoringTransport.lean" target="_blank" rel="noopener"><code>crossing_yang_baxter</code></a> (LEAN ✓, for every rack).</li>
+        <li><b>Close up and count what comes back.</b> Join the k-th top end to the k-th bottom end, and the colors must come back as they were: closed colorings are the fixed points of the transport. With three colors σ₁ has 3 of them and σ₁³ has 9. Add a strand on the right that crosses the old last strand once, and the new strand merely copies the last color, so the count stays; cutting the loop elsewhere (conjugation) keeps it too: for a finite quandle the closed-coloring count is invariant under Markov equivalence, <a class="leanref" data-lean-gid="D5/S3/Topology/QuandleMarkovColoring.quandle_coloring_markov_invariant" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Topology/QuandleMarkovColoring.lean" target="_blank" rel="noopener"><code>quandle_coloring_markov_invariant</code></a> (LEAN ✓). 3 ≠ 9, so σ₁ and σ₁³ are not Markov equivalent; reading that as “the trefoil is not the unknot” takes the three literature theorems of Artin, Alexander and Markov.</li>
+        <li><b>The idempotence axiom cannot be dropped.</b> Switch to x ⋆ y = y + 1: a rack, but x ⋆ x ≠ x. The trivial one-strand braid has 3 closed colorings, and after adding a strand there are none.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch14-cloning-codes-and-braids.html#sec-braids-and-third-axis" target="_top">Chapter 14 · planar braids and the third orthogonal direction</a> · <a href="../../en/ch14-cloning-codes-and-braids.html#cor-braid-yang-baxter" target="_top">the three-strand Yang–Baxter identity</a> · <a href="../../en/ch14-cloning-codes-and-braids.html#sec-markov-stabilization-coloring-count" target="_top">Markov stabilization and coloring counts</a> · <a href="../../en/ch14-cloning-codes-and-braids.html#ex-fox-three-colorings-markov" target="_top">three colors count 3, 3, 9</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

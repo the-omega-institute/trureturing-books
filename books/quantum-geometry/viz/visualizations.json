@@ -1267,6 +1267,104 @@
           "gid": "D5/S3/QuantumBounds/PeritoTsirelson.bell_value_le"
         }
       ]
+    },
+    {
+      "id": "syndrome-decoding",
+      "code": "SYNDROME//DECODE",
+      "title": "综合征解码",
+      "title_en": "Syndrome decoding",
+      "summary": "三比特重复码：两道校验 Z₁Z₂、Z₂Z₃ 只问相邻两个比特一不一致。翻一个比特，亮起的校验指出是哪一个，柱子整个搬进另一间正交的房，翻回去，叠加原样回来；四分支混合按权重拼回原态（Tr σ · ρ）；翻两个时灯指错，翻相位时灯不亮。",
+      "summary_en": "The three-qubit repetition code: the two checks Z₁Z₂ and Z₂Z₃ only ask whether neighbouring qubits agree. Flip one qubit and the lit checks point at it, the bars move whole into another orthogonal room, and flipping back returns the superposition; a four-branch mixture adds back up to the state by weight (Tr σ · ρ); with two flips the lights point wrong, with a phase flip they stay dark.",
+      "path": "syndrome-decoding/",
+      "thumbnail": "syndrome-decoding/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "量子纠错",
+        "综合征",
+        "重复码",
+        "稳定子"
+      ],
+      "tags_en": [
+        "quantum error correction",
+        "syndrome",
+        "repetition code",
+        "stabilizers"
+      ],
+      "theory": [
+        {
+          "label": "本书第十四章 · 正交综合征中的逻辑恢复",
+          "label_en": "Chapter 14 · logical recovery on orthogonal syndromes",
+          "href": "../zh/ch14-cloning-codes-and-braids.html#sec-orthogonal-syndrome-recovery",
+          "href_en": "../en/ch14-cloning-codes-and-braids.html#sec-orthogonal-syndrome-recovery"
+        },
+        {
+          "label": "Blueprint · OrthogonalSyndromeDecoding",
+          "label_en": "Blueprint · OrthogonalSyndromeDecoding",
+          "href": "{trureturing}/D5/S3/Quantum/Recovery/OrthogonalSyndromeDecoding.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Recovery/OrthogonalSyndromeDecoding.orthogonal_syndrome_recovery"
+        },
+        {
+          "gid": "D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank.pauli_word_mul"
+        }
+      ]
+    },
+    {
+      "id": "braiding",
+      "code": "BRAID//STRANDS",
+      "title": "编织",
+      "title_en": "Braiding",
+      "summary": "平面里的粒子随时间往上走出世界线；交换两颗时谁从前面过，记在第三个方向上。颜色顺着绳子往上传：反着再交换一次就回来，同向交换两次回不来，三股的两种顺序落在同一处（Yang–Baxter）。把编织首尾接上，数回得来的着色：σ₁ 有 3 个，σ₁³ 有 9 个，添一股不变；换成不幂等的架，添一股就一个也不剩。",
+      "summary_en": "Particles in a plane trace world lines as time goes up; when two exchange, which one passes in front is kept in the third direction. Colors ride up the strands: the opposite exchange undoes one, two the same way do not, and the two orders on three strands land in the same place (Yang–Baxter). Close the braid and count the colorings that come back: 3 for σ₁, 9 for σ₁³, unchanged when a strand is added; with a rack that is not a quandle, adding a strand leaves none.",
+      "path": "braiding/",
+      "thumbnail": "braiding/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "编织",
+        "世界线",
+        "Yang–Baxter",
+        "架着色",
+        "Markov 稳定化"
+      ],
+      "tags_en": [
+        "braids",
+        "world lines",
+        "Yang–Baxter",
+        "rack colorings",
+        "Markov stabilization"
+      ],
+      "theory": [
+        {
+          "label": "本书第十四章 · 二维编织与第三正交方向",
+          "label_en": "Chapter 14 · planar braids and the third orthogonal direction",
+          "href": "../zh/ch14-cloning-codes-and-braids.html#sec-braids-and-third-axis",
+          "href_en": "../en/ch14-cloning-codes-and-braids.html#sec-braids-and-third-axis"
+        },
+        {
+          "label": "本书第十四章 · Markov 稳定化与着色计数",
+          "label_en": "Chapter 14 · Markov stabilization and coloring counts",
+          "href": "../zh/ch14-cloning-codes-and-braids.html#sec-markov-stabilization-coloring-count",
+          "href_en": "../en/ch14-cloning-codes-and-braids.html#sec-markov-stabilization-coloring-count"
+        },
+        {
+          "label": "Blueprint · BraidColoringTransport",
+          "label_en": "Blueprint · BraidColoringTransport",
+          "href": "{trureturing}/D5/S0/Certificates/Quandles/BraidColoringTransport.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S0/Certificates/Quandles/BraidColoringTransport.crossing_yang_baxter"
+        },
+        {
+          "gid": "D5/S3/Topology/QuandleMarkovColoring.quandle_coloring_markov_invariant"
+        }
+      ]
     }
   ]
 }
