@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="COMPLEXITY//GROWTH · How complexity grows">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>COMPLEXITY//GROWTH 复杂度增长</title>
+<meta name="description" content="两个舞台：一条 8 个量子比特的随机砖墙电路，逐层实算半链纠缠熵与已用门数——熵几层之后就停在 4 比特的天花板下，门数一层层继续往上长，预期的复杂度要到 2^N 量级才封顶，把那条上升的线读成虫洞体积是开放猜想；另一个是第二十章的开放边界可积电路，可以挪动折返点 S，层数永远压不到 ⌊N/(κ+1)⌋ + 1 以下，N = 8 与 N = 11 时比旧公式少一层。Two stages: a random brick-wall circuit on 8 qubits whose half-chain entanglement entropy and gate count are computed layer by layer — the entropy stops under its 4-bit ceiling after a few layers while the gate count keeps climbing, the expected complexity only levels off at the order of 2^N, and reading that rising line as a wormhole volume is an open conjecture; and the open-boundary integrable circuit of Chapter 20, whose turning points S you can move while the number of layers never drops below ⌊N/(κ+1)⌋ + 1, one layer fewer than the old formulas at N = 8 and N = 11.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="complexity-growth">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="COMPLEXITY//GROWTH">COMPLEXITY<b>//</b>GROWTH</h1>
+      <div class="tagline">
+        <span class="zh">复杂度增长 · <em>熵几层就封顶，门数还一层层往上长；电路怎么排，层数都压不到 ⌊N/(κ+1)⌋ + 1 以下</em></span>
+        <span class="en">How complexity grows · <em>entropy tops out within a few layers while the gate count keeps climbing; however the circuit is arranged, its layers never drop below ⌊N/(κ+1)⌋ + 1</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillScene"><span class="zh">场景</span><span class="en">SCENE</span> <strong>—</strong></span>
+      <span class="pill hot" id="pillKey"><span id="pillKeyName"></span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="saturate" aria-pressed="false"><span class="code">ENTROPY CAPS</span><span class="cn zh">熵几层就停在天花板下，门数还在长</span><span class="cn en">Entropy stops under its ceiling; the gate count goes on</span></button>
+        <button class="preset" data-preset="ceiling" aria-pressed="false"><span class="code">2^N CEILING</span><span class="cn zh">门数能一直加，复杂度到 2^N 量级封顶</span><span class="cn en">Gates can always be added; complexity caps near 2^N</span></button>
+        <button class="preset" data-preset="cv" aria-pressed="false"><span class="code">CV · OPEN</span><span class="cn zh">把上升的那条线读成体积：开放猜想</span><span class="cn en">Reading the rising line as a volume: an open conjecture</span></button>
+        <button class="preset" data-preset="floor" aria-pressed="false"><span class="code">DEPTH FLOOR</span><span class="cn zh">挪动折返点：层数降到 ⌊N/(κ+1)⌋ + 1 就停</span><span class="cn en">Move the turning points: layers stop at ⌊N/(κ+1)⌋ + 1</span></button>
+        <button class="preset" data-preset="eight" aria-pressed="false"><span class="code">N 8 · κ 2</span><span class="cn zh">S = {3, 6}：9 道门排成 3 层</span><span class="cn en">S = {3, 6}: 9 gates in 3 layers</span></button>
+        <button class="preset" data-preset="eleven" aria-pressed="false"><span class="code">N 11 · κ 2</span><span class="cn zh">S = {4, 8}：4 层，旧公式说 5 层</span><span class="cn en">S = {4, 8}: 4 layers where the old formula says 5</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec" data-scenes="growth">
+      <h2><span class="zh">读法</span><span class="en">Reading</span><span class="aside">CV</span></h2>
+      <div class="chips"><button class="chip" id="cvBtn" aria-pressed="false"><span class="zh">显示 CV 的读法</span><span class="en">Show the CV reading</span></button></div>
+      <p class="note"><span class="zh">电路是固定种子的随机两比特门，砖墙排布，每层 3 或 4 道门；时间轴是层数。</span><span class="en">The circuit is a fixed-seed brick wall of random two-qubit gates, 3 or 4 gates a layer; the rail counts layers.</span></p>
+    </section>
+
+    <section class="panel sec" data-scenes="depth" hidden>
+      <h2><span class="zh">链与折返点</span><span class="en">Chain and turning points</span><span class="aside">N · κ · S</span></h2>
+      <div class="field">
+        <label for="nSites"><span class="zh">格点数 N</span><span class="en">Sites N</span><small class="zh">换 N 时按定理证明里的构造重排切点</small><small class="en">changing N re-places the cuts by the construction in the proof</small></label><output id="oN" for="nSites">8</output>
+        <input type="range" id="nSites" min="4" max="24" step="1" value="8">
+      </div>
+      <div class="chips" id="kappaChips" role="group" aria-label="折返点个数 κ" data-aria-en="Number of turning points κ">
+        <button class="chip" data-kappa="1" aria-pressed="false">κ = 1</button><button class="chip" data-kappa="2" aria-pressed="true">κ = 2</button><button class="chip" data-kappa="3" aria-pressed="false">κ = 3</button><button class="chip" data-kappa="4" aria-pressed="false">κ = 4</button>
+      </div>
+      <p class="note"><span class="zh">直接点舞台上的格点，把它放进或移出 S（品红三角）。</span><span class="en">Click a site on the stage to put it into S or take it out (magenta triangles).</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="舞台：随机电路的门数、预期复杂度与半链熵随层数的曲线；或开放边界链上的门按层排好的砖墙" data-aria-en="Stage: the gate count, expected complexity and half-chain entropy of a random circuit against the number of layers; or the gates of the open chain stacked into layers">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+        <button class="chip" data-scene="growth" aria-pressed="true"><span class="zh">增长</span><span class="en">Growth</span></button>
+        <button class="chip" data-scene="depth" aria-pressed="false"><span class="zh">深度</span><span class="en">Depth</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="plotTitle"></h2><span id="plotMeta"></span></div>
+        <canvas id="plot" aria-label="本场景的小图" data-aria-en="The small plot of the scene"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro" id="ro"></dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean" data-scenes="depth" hidden><span class="ok">LEAN ✓</span><span><span class="zh">若 1 ≤ κ 且 2κ ≤ N，开放边界可积电路族在 |S| = κ 的全部配置上的最小并行深度是 minDepth(N, κ) = ⌊N/(κ + 1)⌋ + 1：白线就是这个值。已冻结：</span><span class="en">If 1 ≤ κ and 2κ ≤ N, the minimum parallel depth of the open-boundary integrable circuit family over all configurations with |S| = κ is minDepth(N, κ) = ⌊N/(κ + 1)⌋ + 1: the white line is this value. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.lean" target="_blank" rel="noopener"><code>OpenIntegrableCircuitMinDepth.result</code></a></span></div>
+      <div class="lean" data-scenes="depth" hidden><span class="ok">LEAN ✓</span><span><span class="zh">两条旧公式——奇数 N 时 (N + 3)/2 − κ、偶数 N 时 (N + 4)/2 − κ——都不成立（反例 N = 11 与 N = 8，κ = 2）：灰色虚线是它们的预测。已冻结：</span><span class="en">Neither old formula — (N + 3)/2 − κ for odd N, (N + 4)/2 − κ for even N — holds (counterexamples N = 11 and N = 8 at κ = 2): the grey dashed line is their prediction. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Dynamics/OpenIntegrableCircuitDepthRefutation.result" href="https://github.com/the-omega-institute/trureturing/blob/dev/D5/S3/Quantum/Dynamics/OpenIntegrableCircuitDepthRefutation.lean" target="_blank" rel="noopener"><code>OpenIntegrableCircuitDepthRefutation.result</code></a></span></div>
+      <div class="lean open" data-scenes="growth"><span class="ok">OPEN</span><span><span class="zh">复杂度等于体积（CV）是开放猜想：它把边界态的复杂度对应到虫洞内部最大切片的体积。页面不画体积，只在品红的线上标出这一读法。</span><span class="en">Complexity = Volume (CV) is an open conjecture: it matches the complexity of a boundary state with the volume of the maximal slice through the wormhole interior. The page draws no volume; it only marks this reading on the magenta line.</span></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean argued" data-scenes="growth"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：4 比特对 4 比特的半链熵不超过 log₂ 16 = 4 比特；每一道跨过割线的两比特门至多让它多 2 比特；N 比特态的近似复杂度有 exp(O(N)) 的天花板，热化之后预期近似线性增长，更久以后饱和并回归（Susskind 2016；Aaronson 2016）。</span><span class="en">Literature result, not formalized in this book: the entropy of 4 qubits against 4 is at most log₂ 16 = 4 bits; each two-qubit gate across the cut adds at most 2 bits; the approximate complexity of an N-qubit state has an exp(O(N)) ceiling, is expected to grow roughly linearly after thermalization, and saturates and recurs much later (Susskind 2016; Aaronson 2016).</span></span></div>
+      <div class="lean model" data-scenes="growth"><span class="ok">MODEL</span><span><span class="zh">示意模型：随机门取固定种子的哈尔随机两比特酉矩阵；品红的“预期复杂度”画成 min(门数, 2^N)，天花板的常数取 1 只是为了画图，不是计算出的复杂度。</span><span class="en">Illustrative model: the random gates are fixed-seed Haar-random two-qubit unitaries; the magenta “expected complexity” is drawn as min(gate count, 2^N), with the ceiling's constant set to 1 only for the picture; it is not a computed complexity.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数都实时算出：256 维态矢量逐门演化、半链约化密度矩阵的本征值与冯·诺依曼熵、门数、每组切点的层分配与穷举的最少层数。这是数值演示，不是证明。</span><span class="en">Every number on the page is computed live: the 256-dimensional state evolved gate by gate, the eigenvalues and von Neumann entropy of the half-chain reduced density matrix, the gate counts, the layer assignment of each set of cuts and the exhaustive minimum. A numerical illustration, not a proof.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="时间轴：电路已经走过的层数" data-aria-en="Rail: the number of layers the circuit has run">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐层</span><span class="en">layer by layer</span> · <kbd>1</kbd> <kbd>2</kbd> <span class="zh">场景</span><span class="en">scenes</span> · <span class="zh">点格点改 S</span><span class="en">click a site to edit S</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">两个场景共用一条时间轴：电路走过的层数。页面上的每个数都实时算出；本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>增长。</b>8 个量子比特排成一条开放的链，从 |00000000⟩ 出发。奇数层在 (1,2)(3,4)(5,6) 上各放一道两比特门，偶数层在 (0,1)(2,3)(4,5)(6,7) 上各放一道，每道门是固定种子的哈尔随机 4 × 4 酉矩阵（复高斯矩阵做格拉姆—施密特正交化）。割线在第 3 与第 4 个比特之间，只有奇数层的 (3,4) 门跨过它。每层之后算左半 4 个比特的约化密度矩阵 ρ<sub>A</sub>（16 × 16）的本征值 λ<sub>i</sub>，熵 S = −Σ λ<sub>i</sub> log₂ λ<sub>i</sub>（青色）。白线是已经用掉的门数，第 t 层之后是 3⌈t/2⌉ + 4⌊t/2⌋。</li>
+        <li><b>两道天花板。</b>熵不超过 log₂ 16 = 4 比特，也不超过跨割门数的 2 倍（每道跨割门至多把施密特秩乘 4）：这是灰色的台阶。品红的“预期复杂度”是模型 min(门数, 2^N)：门数只是态复杂度的上界；文献预期复杂度在热化之后近似跟着门数线性增长，直到 exp(O(N)) 量级的天花板，更久以后饱和并回归——页面不画回归。</li>
+        <li><b>CV 的读法。</b>复杂度等于体积猜想把品红那段上升的线对应到黑洞内部最大切片的体积。这是开放猜想（第二十章 [conj-complexity-equals-volume]），页面只标出读法。</li>
+        <li><b>深度。</b>第二十章的开放边界链：N 个格点，N + 1 道门 K1、U(1)…U(N − 1)、KN 按下标 k = 0…N 排成一条路径，相邻两道门共用一个格点。切点集 S ⊆ {1…N} 决定每一步的先后：k + 1 ∈ S 时门 k 先于门 k + 1，否则门 k + 1 先于门 k。每道门放在它前面最长依赖链的长度那一层（最早可放的层），层数 = 最长同向段 + 1。κ = |S| 个折返点把 N − κ 个向下的步切成至多 κ + 1 段，所以至少 ⌊N/(κ + 1)⌋ + 1 层；按证明里的递归构造放切点恰好取到。灰色虚线是两条旧公式的预测：奇数 N 为 (N + 3)/2 − κ，偶数 N 为 (N + 4)/2 − κ。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch20-complexity-and-spacetime.html#sec-circuit-depth-growth" target="_top">第二十章 · 门计数与并行深度</a> · <a href="../../zh/ch20-complexity-and-spacetime.html#thm-open-circuit-min-depth" target="_top">开放边界电路的最小深度</a> · <a href="../../zh/ch20-complexity-and-spacetime.html#lemma-open-circuit-depth-refutation" target="_top">两条深度公式的反例</a> · <a href="../../zh/ch20-complexity-and-spacetime.html#rem-complexity-growth-literature" target="_top">复杂度增长的文献注记</a> · <a href="../../zh/ch20-complexity-and-spacetime.html#conj-complexity-equals-volume" target="_top">复杂度等于体积</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">Both scenes share one rail: the number of layers the circuit has run. Every number on the page is computed live; the page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>Growth.</b> Eight qubits in an open chain start from |00000000⟩. Odd layers put a two-qubit gate on each of (1,2)(3,4)(5,6), even layers on each of (0,1)(2,3)(4,5)(6,7); every gate is a fixed-seed Haar-random 4 × 4 unitary (a complex Gaussian matrix put through Gram–Schmidt). The cut lies between qubits 3 and 4, and only the (3,4) gates of the odd layers cross it. After each layer the page takes the eigenvalues λ<sub>i</sub> of the reduced density matrix ρ<sub>A</sub> (16 × 16) of the left four qubits, and the entropy S = −Σ λ<sub>i</sub> log₂ λ<sub>i</sub> (cyan). The white line is the number of gates used so far, 3⌈t/2⌉ + 4⌊t/2⌋ after layer t.</li>
+        <li><b>Two ceilings.</b> The entropy is at most log₂ 16 = 4 bits, and at most twice the number of gates across the cut (each such gate multiplies the Schmidt rank by at most 4): the grey staircase. The magenta “expected complexity” is the model min(gate count, 2^N): the gate count is only an upper bound on the complexity of the state; the literature expects the complexity to follow it roughly linearly after thermalization up to a ceiling of order exp(O(N)), and to saturate and recur much later — the page does not draw the recurrence.</li>
+        <li><b>The CV reading.</b> The complexity = volume conjecture matches the rising part of the magenta line with the volume of the maximal slice through the black-hole interior. It is an open conjecture (Chapter 20, [conj-complexity-equals-volume]); the page only marks the reading.</li>
+        <li><b>Depth.</b> The open chain of Chapter 20: N sites and N + 1 gates K1, U(1)…U(N − 1), KN lined up by index k = 0…N into a path in which neighbouring gates share a site. The set of cuts S ⊆ {1…N} sets each step's order: if k + 1 ∈ S gate k runs before gate k + 1, otherwise gate k + 1 runs before gate k. Each gate sits in the layer given by the longest chain of gates it waits for (the earliest layer it can take), so the number of layers is the longest same-direction run plus 1. The κ = |S| turning points cut the N − κ downward steps into at most κ + 1 runs, hence at least ⌊N/(κ + 1)⌋ + 1 layers; placing the cuts by the recursion in the proof reaches it. The grey dashed line is what the two old formulas predict: (N + 3)/2 − κ for odd N, (N + 4)/2 − κ for even N.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch20-complexity-and-spacetime.html#sec-circuit-depth-growth" target="_top">Chapter 20 · gate count and parallel depth</a> · <a href="../../en/ch20-complexity-and-spacetime.html#thm-open-circuit-min-depth" target="_top">minimum open-boundary circuit depth</a> · <a href="../../en/ch20-complexity-and-spacetime.html#lemma-open-circuit-depth-refutation" target="_top">counterexamples to two depth formulas</a> · <a href="../../en/ch20-complexity-and-spacetime.html#rem-complexity-growth-literature" target="_top">the literature remark on complexity growth</a> · <a href="../../en/ch20-complexity-and-spacetime.html#conj-complexity-equals-volume" target="_top">complexity = volume</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

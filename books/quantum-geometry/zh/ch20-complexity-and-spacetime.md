@@ -68,6 +68,10 @@ $$
 先对前缀长度 $M$ 与剩余分割数 $j$ 递归取得 $(S_0, g_0)$（满足 $g_0(M) = 0$），再将分割点 $M + 1$ 并入 $S_0$（即 $S = S_0 \cup \{M + 1\}$），并定义分段层函数 $g(i) = g_0(i)$（当 $i \le M$）与 $g(i) = n - i \le d \le q$（当 $i > M$）。（例如当 $N = 5, \kappa = 2, q = 1$ 时：外层 $j = 1, n = 5$ 取 $d = \min(1, 5 - 2 - 1) = 1, M = 3$ 并插入分割点 $M + 1 = 4$；内层 $j = 0, n = 3$ 取 $d = \min(1, 3 - 0 - 1) = 1, M = 1$ 并插入分割点 $M + 1 = 2$，得到 $S = \{2, 4\}$ 与合法二层分配 $g = [1, 0, 1, 0, 1, 0] < 2$。）在 $n = N, k = \kappa$ 处实例化该递归，即得取值严格小于 $q + 1 = \lfloor N / (\kappa + 1)\rfloor + 1$ 的合法层分配，证得 $\operatorname{minDepth}(N, \kappa) = \lfloor N / (\kappa + 1)\rfloor + 1$。完整证明由 Lean 内核检查。
 :::
 
+::: {.viz src="complexity-growth" preset="floor" height="500"}
+**挪动折返点，层数停在白线上。** N = 11、κ = 2：品红三角从 {2, 3} 一步步挪到 {4, 8}，青色的砖从 9 层一层层降到 4 层，落在白线 ⌊11/3⌋ + 1 = 4 上，再也降不下去（[@thm-open-circuit-min-depth]）。
+:::
+
 请严格注意 [@thm-open-circuit-min-depth] 的数学含义：$\operatorname{minDepth}(N, \kappa)$ 是在**固定开放边界可积电路族** `circuit N S` 中遍历 $|S| = \kappa$ 配置所得的最优并行层数；它既不是合成任意目标酉矩阵所需的全局最小门数，也不是连续演化的物理时间 $t$。让我们用两组具体数值（$N = 8, \kappa = 2$ 与 $N = 11, \kappa = 2$）把每一道门落在哪一层亲手排出来。
 
 ::: {.example #ex-open-circuit-depths title="κ = 2 下 N = 8 与 N = 11 的显式层调度与最小深度"}
@@ -100,6 +104,10 @@ $$
 精确排入 $4$ 个并行层（层号 $0, 1, 2, 3$）。需要再次提醒的是：这里的层数 $3$ 与 $4$ 是特定可积电路族内部的组合并行调度深度，绝不能被称作黑洞内部体积的物理实测值。
 :::
 
+::: {.viz src="complexity-growth" preset="eight" height="500"}
+**九道门，三层。** N = 8、S = {3, 6}：青色的砖一层层亮起，KN、U5、U2 在第 0 层，U7、U4、U1 在第 1 层，K1、U3、U6 在第 2 层，顶在白线上；灰色虚线是旧公式预测的 4 层（[@ex-open-circuit-depths]）。
+:::
+
 ## 黑洞内部与复杂度—体积猜想 {#sec-complexity-volume-conjecture}
 
 为什么我们要花力气把 [@thm-open-circuit-min-depth] 与 [@ex-open-circuit-depths] 的组合层序交由 Lean 内核逐行核验？因为即便是如此具体的有限门列表深度问题，单凭直觉归纳和手头小样本外推也极易失手！
@@ -129,6 +137,10 @@ $$
 完整证明由 Lean 内核检查。
 :::
 
+::: {.viz src="complexity-growth" preset="eleven" height="500"}
+**旧公式多算了一层。** N = 11、S = {4, 8}：12 道门排成每层 3 道的 4 层，顶在白线上；灰色虚线是奇数 N 的旧公式 (N + 3)/2 − κ 预测的 5 层（[@lemma-open-circuit-depth-refutation]）。
+:::
+
 必须严格声明：[@lemma-open-circuit-depth-refutation] 证伪的仅仅是 `arXiv:2607.02093v1` 中关于特定可积电路族并行深度的两条算术猜想 `conjectureOne` 与 `conjectureTwo`，**绝不是**对全息“复杂度等于体积（CV）”猜想、$\mathrm{ER}=\mathrm{EPR}$ 猜想或 $\mathrm{P}\neq\mathrm{NP}$ 猜想的反例。
 
 在从具体的可积电路深度转向高能物理中的黑洞内部复杂度假说之前，我们先在文献注记中厘清量子态复杂度增长模型的物理前提，随后正式列出带有红色 `OPEN` 徽章的复杂度—体积猜想。
@@ -144,6 +156,14 @@ $$
 在混沌多体量子系统与全息黑洞模型的物理叙述中，当系统演化越过热化时间 $t_{\mathrm{th}}$ 后，子系统纠缠熵 $S(t)$ 已达热平衡饱和值 $S_{\mathrm{th}} \sim O(N)$，而在中间时间窗 $t_{\mathrm{th}} \ll t \ll e^{O(N)}$ 内，$\varepsilon$-近似态复杂度（或连续 Nielsen 复杂度）被预期继续随时间 $t$ 近似线性增长。但在任何具有有限维希尔伯特空间与有界能谱的封闭量子系统中，态复杂度无法跨越 $\exp(O(N))$ 天花板，且在依赖于具体能谱与演化模型的更长时间尺度（典型情形下如双指数级量子庞加莱回归时间）上必然发生饱和与回归，绝不可能对一切 $t \to \infty$ 永远保持单调线性增长。参见 L. Susskind, *Fortschr. Phys.* **64**, 24–43 (2016), DOI: `10.1002/prop.201500092`；以及 S. Aaronson (2016), `arXiv:1607.05256`。
 :::
 
+::: {.viz src="complexity-growth" preset="saturate" height="500"}
+**熵先封顶，门数接着长。** 8 个量子比特的随机砖墙电路走到第 14 层：青色的半链熵沿灰色台阶爬升，第 13 层前后停在 3.18–3.36 比特之间，压在 4 比特的白线下面；同一段里白线（已用门数）一路涨到 49。随机电路是示意模型，熵与门数逐层实算（[@rem-complexity-growth-literature]）。
+:::
+
+::: {.viz src="complexity-growth" preset="ceiling" height="500"}
+**门可以一直加，复杂度有天花板。** 一直走到第 90 层：青色的熵趴在原处，白线涨到 315 道门；品红的预期复杂度（示意模型）跟着白线走，到第 74 层碰上虚线 2^N = 256，此后横着走。
+:::
+
 ::: {.conjecture #conj-complexity-equals-volume title="复杂度等于体积"}
 固定适用的半经典全息引力态、边界参考初态、局域门集以及紫外正则化与精度容限方案。**复杂度等于体积（Complexity = Volume，简称 CV）猜想**断言：在光速 $c = 1$ 的单位制下，边界量子态在边界时刻 $t$ 经重整化后的电路复杂度 $\mathcal{C}_V(\psi(t))$，与高维体时空中锚定于同一边界时刻切片 $t$ 的**最大体积光滑类空余维一超曲面** $\Sigma_t$ 的重整化空间体积 $V_{\mathrm{ren}}(\Sigma_t)$ 成正比：
 
@@ -154,6 +174,10 @@ $$
 其中 $G_N$ 为体时空牛顿引力常数，$\ell_*$ 为用于量纲匹配与归一化的特征体长度尺度（例如在渐近反德西特时空中取曲率半径 $\ell_{\mathrm{AdS}}$）。
 
 适用范围与开放边界说明：上式中的 $V_{\mathrm{ren}}(\Sigma_t)$ 是余维一类空切片的**空间体积**；请勿将其与另一项独立的全息假说——**复杂度等于作用量（Complexity = Action，简称 CA）猜想**——相混淆，后者将态复杂度对应于边界切片所锚定的体时空 **Wheeler–DeWitt（WDW）因果楔形区**上的在壳引力作用量 $\mathcal{C}_A(\psi(t)) = I_{\mathrm{WDW}} / (\pi\hbar)$（包含体时空爱因斯坦—希尔伯特项、类空/类时/零超曲面边界项与拐角项，而非单纯的四维时空体积）。CV 与 CA 的比例系数均依赖于门成本加权与紫外正则化方案的选择，且不声称有限离散电路的精确最小门数与连续体几何量之间存在脱离正则化极限的逐数相等。参见 L. Susskind, *Fortschr. Phys.* **64**, 24–43 (2016), DOI: `10.1002/prop.201500092`；以及 A. R. Brown, D. A. Roberts, L. Susskind, B. Swingle & Y. Zhao, *Phys. Rev. Lett.* **116**, 191301 (2016), DOI: `10.1103/PhysRevLett.116.191301`。
+:::
+
+::: {.viz src="complexity-growth" preset="cv" height="500"}
+**这段上升的线是不是体积，没有人证出来。** 红色标出品红线上升的那一段：熵早已停住，它还在涨。把这一段读成黑洞内部切片的体积，就是复杂度等于体积猜想（[@conj-complexity-equals-volume]）；舞台上没有画任何体积。
 :::
 
 ## 纠缠桥与 ER=EPR 的适用范围 {#sec-er-epr-conjecture}
@@ -271,6 +295,10 @@ $$
 $$
 
 在 $t = 2$ 之后，$S(t)$ 停在天花板 $4$ 上，而 $C(t)$ 在 $t = 3$ 时达到 $6$。必须明确：这组 $(C(t), S(t))$ 仅仅是帮助读者区分“饱和函数与线性函数”的算术示意，绝不宣称真实量子系统的最小电路复杂度必然随时间单调增长。
+:::
+
+::: {.viz src="complexity-growth" height="560"}
+**复杂度增长 · 完整实验室。** 在“增长”里拖时间轴，看青色的熵与白色的门数各自走到哪里，可以打开 CV 的读法；在“深度”里改 N 与 κ，或直接点格点挪动品红的折返点，看青色的砖能不能低过白线。
 :::
 
 最后，让我们回到章首题记所触及的计算复杂性核心问题：如果有人提议“改变初始编码结构，或者把所有难解问题的答案预先算好存进一张巨大的查找表（lookup table），检索时只需一次正交投影就能读出答案”，这能不能证明 $\mathrm{P} = \mathrm{NP}$？反过来，[@prop-reflection-cnot-lower-bound] 证出的指数级门数下界 $2^{2n-1} + 2n - 2$，能不能证明 $\mathrm{P} \neq \mathrm{NP}$？

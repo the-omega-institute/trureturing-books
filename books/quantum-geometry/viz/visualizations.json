@@ -1619,6 +1619,60 @@
           "gid": "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null"
         }
       ]
+    },
+    {
+      "id": "complexity-growth",
+      "code": "COMPLEXITY//GROWTH",
+      "title": "复杂度增长",
+      "title_en": "How complexity grows",
+      "summary": "两个舞台。增长：8 个量子比特的随机砖墙电路，逐层实算半链纠缠熵与已用门数——熵几层之后就停在 4 比特的天花板下，门数一层层继续往上长，预期复杂度（模型）要到 2^N 量级才封顶，把那条上升的线读成虫洞体积是开放猜想（CV）。深度：第二十章的开放边界可积电路，点格点挪动折返点 S，层数永远压不到 ⌊N/(κ+1)⌋ + 1 以下；N = 8 与 N = 11、κ = 2 时比旧公式少一层。",
+      "summary_en": "Two stages. Growth: a random brick-wall circuit on 8 qubits, with the half-chain entanglement entropy and the gate count computed layer by layer — the entropy stops under its 4-bit ceiling after a few layers while the gate count keeps climbing, the expected complexity (a model) only levels off at the order of 2^N, and reading that rising line as a wormhole volume is an open conjecture (CV). Depth: the open-boundary integrable circuit of Chapter 20 — click sites to move the turning points S and the number of layers never drops below ⌊N/(κ+1)⌋ + 1; at N = 8 and N = 11 with κ = 2 it is one layer fewer than the old formulas.",
+      "path": "complexity-growth/",
+      "thumbnail": "complexity-growth/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "电路复杂度",
+        "并行深度",
+        "纠缠熵",
+        "随机电路",
+        "复杂度等于体积",
+        "反例"
+      ],
+      "tags_en": [
+        "circuit complexity",
+        "parallel depth",
+        "entanglement entropy",
+        "random circuit",
+        "complexity = volume",
+        "counterexample"
+      ],
+      "theory": [
+        {
+          "label": "本书第二十章",
+          "label_en": "Chapter 20",
+          "href": "../zh/ch20-complexity-and-spacetime.html",
+          "href_en": "../en/ch20-complexity-and-spacetime.html"
+        },
+        {
+          "label": "Lean：开放边界电路的最小深度",
+          "label_en": "Lean: minimum open-boundary circuit depth",
+          "href": "{trureturing}/D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.lean"
+        },
+        {
+          "label": "Lean：两条深度公式的反例",
+          "label_en": "Lean: counterexamples to two depth formulas",
+          "href": "{trureturing}/D5/S3/Quantum/Dynamics/OpenIntegrableCircuitDepthRefutation.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result"
+        },
+        {
+          "gid": "D5/S3/Quantum/Dynamics/OpenIntegrableCircuitDepthRefutation.result"
+        }
+      ]
     }
   ]
 }
