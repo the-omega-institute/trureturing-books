@@ -1267,6 +1267,58 @@
           "gid": "D5/S3/QuantumBounds/PeritoTsirelson.bell_value_le"
         }
       ]
+    },
+    {
+      "id": "walk-spreading",
+      "code": "WALK//SPREAD",
+      "title": "游走扩散",
+      "title_en": "How walks spread",
+      "summary": "同一条线（一个足够长的圈 ZMod p）上，量子游走与经典随机游走从同一个原点出发，并排画在线的上下两侧。量子的一份按正文的 Hadamard 单步规则带着硬币相干地走，两个尖峰贴着 ±n 往外跑，宽度按步数 n 线性长大；经典的一份每步左右各 ½，宽度只按 √n 长大，走 50 步时两者相差 3.83 倍。硬币取 c* = (1, i)/√2 时每一对镜像模式 (0, x)、(1, −x) 都均分概率，分布左右对称；换成同样一半一半的实硬币 (1, 1)/√2，分布就偏向一边。圈只有 9 个点时游走绕回来，对称仍在。五张实验卡可以在第十六章正文里单独引用。",
+      "summary_en": "On one line (a long enough cycle ZMod p) a quantum walk and a classical random walk start from the same origin, drawn above and below the line. The quantum one follows the text's Hadamard step, moving coherently with its coin: its two peaks run out next to ±n and its width grows linearly in the number of steps n. The classical one steps left or right with probability ½ and widens only like √n; after fifty steps they are 3.83 times apart. With the coin c* = (1, i)/√2 every mirror pair of modes (0, x), (1, −x) splits its probability evenly and the distribution is symmetric; a real coin (1, 1)/√2, half and half as well, tilts it to one side. On a cycle of only nine points the walk wraps round and the symmetry stays. Each of the five experiment cards can be cited on its own from Chapter 16.",
+      "path": "walk-spreading/",
+      "thumbnail": "walk-spreading/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "量子游走",
+        "Hadamard 硬币",
+        "随机游走",
+        "扩散宽度",
+        "对称硬币",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Quantum walk",
+        "Hadamard coin",
+        "Random walk",
+        "Spreading width",
+        "Symmetric coin",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第十六章 · 图上游走：相干叠加与适用边界",
+          "label_en": "Chapter 16 · Walks on graphs: coherence and its limits",
+          "href": "../zh/ch16-qsvt-walks-and-compilation.html#sec-quantum-walk-interference",
+          "href_en": "../en/ch16-qsvt-walks-and-compilation.html#sec-quantum-walk-interference"
+        },
+        {
+          "label": "第十六章 · 对称硬币引理",
+          "label_en": "Chapter 16 · The symmetric-coin lemma",
+          "href": "../zh/ch16-qsvt-walks-and-compilation.html#lemma-symmetric-coin-walk",
+          "href_en": "../en/ch16-qsvt-walks-and-compilation.html#lemma-symmetric-coin-walk"
+        },
+        {
+          "label": "Lean 源码 · SymmetricCoinMaximalWalkEntanglement",
+          "label_en": "Lean source · SymmetricCoinMaximalWalkEntanglement",
+          "href": "{trureturing}/D5/S3/Quantum/Walks/SymmetricCoinMaximalWalkEntanglement.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/Walks/SymmetricCoinMaximalWalkEntanglement.result"
+        }
+      ]
     }
   ]
 }
