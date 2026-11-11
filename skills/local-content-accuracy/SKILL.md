@@ -22,4 +22,6 @@ For each requested unit:
 7. Update `docs/project/CONTENT-ACCURACY.md` with the batch’s pin, exact coverage, confirmed corrections, evidence, review verdicts, and limits. Coverage means both languages, formulas, environments, media, and evidence were examined; it does not mean that `./tbook check` merely passed.
 8. Push the branch and create a PR when the user has requested timely PRs. The PR description should state the concrete content changes, current pin, validation, and remaining coverage. Do not put model or agent identifiers in commits, PRs, or published content.
 
+Classify remote failures by the stage that failed. If a workflow stops while installing a browser, font, package, or other runner dependency before checking repository content, record the exact external error, retry the failed jobs once when it is plausibly transient, and do not change the book to chase that failure. If the retry fails at the same setup stage, leave the PR open with the successful local evidence and an explicit infrastructure blocker.
+
 Use [references/review-protocol.md](references/review-protocol.md) for the review record, finding classification, validation matrix, and PR handoff. After any new upstream commit, conflict resolution, or content fix, repeat the affected review and update the candidate hash in the ledger before reporting approval.
