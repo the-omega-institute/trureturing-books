@@ -1213,6 +1213,62 @@
       "line": 43,
       "signature": "theorem exists_unitary_mul_eq_of_conjTranspose_mul_eq {m n : Type*} [Fintype m] [DecidableEq m] [Finite n] (B A : Matrix m n ℂ) (hGram : Bᴴ * B = Aᴴ * A) : ∃ U : Matrix.unitaryGroup m ℂ, B = (U : Matrix m m ℂ) * A"
     },
+    "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.Artin": {
+      "module": "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation",
+      "name": "D5.S3.Quantum.Algebra.Knot.WeightedPathArtinRepresentation.Artin",
+      "kind": "def",
+      "statement_id": "sha256:d690034462a903f43cda84a1ed0a8daa2541fde1a5a681ff62956b7de6eda8de",
+      "line": 43,
+      "signature": "abbrev Artin (n : ℕ)"
+    },
+    "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.MarkovEquivalent": {
+      "module": "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation",
+      "name": "D5.S3.Quantum.Algebra.Knot.WeightedPathArtinRepresentation.MarkovEquivalent",
+      "kind": "def",
+      "statement_id": "sha256:d690034462a903f43cda84a1ed0a8daa2541fde1a5a681ff62956b7de6eda8de",
+      "line": 298,
+      "signature": "abbrev MarkovEquivalent"
+    },
+    "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.MarkovStep": {
+      "module": "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation",
+      "name": "D5.S3.Quantum.Algebra.Knot.WeightedPathArtinRepresentation.MarkovStep",
+      "kind": "inductive",
+      "statement_id": "sha256:d690034462a903f43cda84a1ed0a8daa2541fde1a5a681ff62956b7de6eda8de",
+      "line": 287,
+      "signature": "inductive MarkovStep : PositiveBraid → PositiveBraid → Prop | conjugation (n : ℕ) (hn : 0 < n) (b c : Artin n) : MarkovStep ⟨⟨n, hn⟩, b⟩ ⟨⟨n, hn⟩, c * b * c⁻¹⟩ | positive (n : ℕ) (hn : 0 < n) (b : Artin n) : MarkovStep ⟨⟨n, hn⟩, b⟩ ⟨⟨n + 1, by omega⟩, strandInclusion n b * lastGenerator n hn⟩ | negative (n : ℕ) (hn : 0 < n) (b : Artin n) : MarkovStep ⟨⟨n, hn⟩, b⟩ ⟨⟨n + 1, by omega⟩, strandInclusion n b * (lastGenerator n hn)⁻¹⟩ /-- Finite equivalence chains of the actual algebraic Markov moves. -/ abbrev MarkovEquivalent"
+    },
+    "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.PositiveBraid": {
+      "module": "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation",
+      "name": "D5.S3.Quantum.Algebra.Knot.WeightedPathArtinRepresentation.PositiveBraid",
+      "kind": "def",
+      "statement_id": "sha256:d690034462a903f43cda84a1ed0a8daa2541fde1a5a681ff62956b7de6eda8de",
+      "line": 284,
+      "signature": "abbrev PositiveBraid"
+    },
+    "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.artinRelators": {
+      "module": "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation",
+      "name": "D5.S3.Quantum.Algebra.Knot.WeightedPathArtinRepresentation.artinRelators",
+      "kind": "def",
+      "statement_id": "sha256:d690034462a903f43cda84a1ed0a8daa2541fde1a5a681ff62956b7de6eda8de",
+      "line": 38,
+      "signature": "def artinRelators (n : ℕ) : Set (FreeGroup (Fin (n - 1)))"
+    },
+    "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.lastGenerator": {
+      "module": "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation",
+      "name": "D5.S3.Quantum.Algebra.Knot.WeightedPathArtinRepresentation.lastGenerator",
+      "kind": "def",
+      "statement_id": "sha256:d690034462a903f43cda84a1ed0a8daa2541fde1a5a681ff62956b7de6eda8de",
+      "line": 280,
+      "signature": "def lastGenerator (n : ℕ) (hn : 0 < n) : Artin (n + 1)"
+    },
+    "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation.strandInclusion": {
+      "module": "D5/S3/Quantum/Algebra/Knot/WeightedPathArtinRepresentation",
+      "name": "D5.S3.Quantum.Algebra.Knot.WeightedPathArtinRepresentation.strandInclusion",
+      "kind": "def",
+      "statement_id": "sha256:d690034462a903f43cda84a1ed0a8daa2541fde1a5a681ff62956b7de6eda8de",
+      "line": 224,
+      "signature": "def strandInclusion (n : ℕ) : Artin n →* Artin (n + 1)"
+    },
     "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure": {
       "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure",
       "name": "D5.S3.Quantum.Algebra.Unitary.BalancedUnitaryComplexStructure.relativeComplexStructure",
@@ -2364,6 +2420,70 @@
       "statement_id": "sha256:a9a068c585f43a7aa355619c8fc899910e973d9b857f76930d832b94cb89b559",
       "line": 20,
       "signature": "theorem phase_locked_overlap_is_rotated_real (phase overlap : ℂ) (hphase : ‖phase‖ = 1) (hlock : star overlap = (phase⁻¹) ^ 2 * overlap) : ∃ r : ℝ, overlap = phase * r"
+    },
+    "D5/S3/Topology/QuandleMarkovColoring.ClosedColorings": {
+      "module": "D5/S3/Topology/QuandleMarkovColoring",
+      "name": "D5.S3.Topology.QuandleMarkovColoring.ClosedColorings",
+      "kind": "def",
+      "statement_id": "sha256:71065f90b3cba3d696f6a07136a92d1b5873cd3b7cb2017a635ae0ccc46934de",
+      "line": 249,
+      "signature": "abbrev ClosedColorings (Q : Type*) [Rack Q] {n : ℕ} (b : Artin n)"
+    },
+    "D5/S3/Topology/QuandleMarkovColoring.Colors": {
+      "module": "D5/S3/Topology/QuandleMarkovColoring",
+      "name": "D5.S3.Topology.QuandleMarkovColoring.Colors",
+      "kind": "def",
+      "statement_id": "sha256:71065f90b3cba3d696f6a07136a92d1b5873cd3b7cb2017a635ae0ccc46934de",
+      "line": 25,
+      "signature": "abbrev Colors (n : ℕ)"
+    },
+    "D5/S3/Topology/QuandleMarkovColoring.braidAction": {
+      "module": "D5/S3/Topology/QuandleMarkovColoring",
+      "name": "D5.S3.Topology.QuandleMarkovColoring.braidAction",
+      "kind": "def",
+      "statement_id": "sha256:71065f90b3cba3d696f6a07136a92d1b5873cd3b7cb2017a635ae0ccc46934de",
+      "line": 153,
+      "signature": "def braidAction (n : ℕ) : Artin n →* Equiv.Perm (Colors Q n)"
+    },
+    "D5/S3/Topology/QuandleMarkovColoring.coloringCount": {
+      "module": "D5/S3/Topology/QuandleMarkovColoring",
+      "name": "D5.S3.Topology.QuandleMarkovColoring.coloringCount",
+      "kind": "def",
+      "statement_id": "sha256:71065f90b3cba3d696f6a07136a92d1b5873cd3b7cb2017a635ae0ccc46934de",
+      "line": 338,
+      "signature": "noncomputable def coloringCount (Q : Type*) [Rack Q] [Finite Q] (b : PositiveBraid) : ℕ"
+    },
+    "D5/S3/Topology/QuandleMarkovColoring.conjugationEquiv": {
+      "module": "D5/S3/Topology/QuandleMarkovColoring",
+      "name": "D5.S3.Topology.QuandleMarkovColoring.conjugationEquiv",
+      "kind": "def",
+      "statement_id": "sha256:71065f90b3cba3d696f6a07136a92d1b5873cd3b7cb2017a635ae0ccc46934de",
+      "line": 325,
+      "signature": "def conjugationEquiv (n : ℕ) (b c : Artin n) : ClosedColorings Q b ≃ ClosedColorings Q (c * b * c⁻¹) where toFun d"
+    },
+    "D5/S3/Topology/QuandleMarkovColoring.negativeStabilizationEquiv": {
+      "module": "D5/S3/Topology/QuandleMarkovColoring",
+      "name": "D5.S3.Topology.QuandleMarkovColoring.negativeStabilizationEquiv",
+      "kind": "def",
+      "statement_id": "sha256:71065f90b3cba3d696f6a07136a92d1b5873cd3b7cb2017a635ae0ccc46934de",
+      "line": 305,
+      "signature": "def negativeStabilizationEquiv (n : ℕ) (hn : 0 < n) (b : Artin n) : ClosedColorings Q b ≃ ClosedColorings Q (strandInclusion n b * (lastGenerator n hn)⁻¹) where toFun c"
+    },
+    "D5/S3/Topology/QuandleMarkovColoring.positiveStabilizationEquiv": {
+      "module": "D5/S3/Topology/QuandleMarkovColoring",
+      "name": "D5.S3.Topology.QuandleMarkovColoring.positiveStabilizationEquiv",
+      "kind": "def",
+      "statement_id": "sha256:71065f90b3cba3d696f6a07136a92d1b5873cd3b7cb2017a635ae0ccc46934de",
+      "line": 285,
+      "signature": "def positiveStabilizationEquiv (n : ℕ) (hn : 0 < n) (b : Artin n) : ClosedColorings Q b ≃ ClosedColorings Q (strandInclusion n b * lastGenerator n hn) where toFun c"
+    },
+    "D5/S3/Topology/QuandleMarkovColoring.quandle_coloring_markov_invariant": {
+      "module": "D5/S3/Topology/QuandleMarkovColoring",
+      "name": "D5.S3.Topology.QuandleMarkovColoring.quandle_coloring_markov_invariant",
+      "kind": "theorem",
+      "statement_id": "sha256:71065f90b3cba3d696f6a07136a92d1b5873cd3b7cb2017a635ae0ccc46934de",
+      "line": 342,
+      "signature": "theorem quandle_coloring_markov_invariant [Finite Q] {b c : PositiveBraid} (h : MarkovEquivalent b c) : coloringCount Q b = coloringCount Q c"
     },
     "D5/S3/Topology/SphereOrthogonalityCover.sphere_two_open_orthogonality_free_cover_lower_six": {
       "module": "D5/S3/Topology/SphereOrthogonalityCover",
