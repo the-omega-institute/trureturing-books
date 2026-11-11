@@ -2,7 +2,7 @@
 
 > *"Even the concept of 'quantum' is a particle, and even the concept of 'existence' is a particle."*
 
-Across the first two chapters we saw that a solitary monad cannot define a direction and two states need no external reference point $C$ to compare themselves; meanwhile, within the convex interval of general yes/no effects $0 \le E \le I$, **sharp projective effects** $P$ guarantee real probabilities $\Tr(\rho P) \in [0, 1]$ in [@thm-born-probability-skeleton] and form its extreme boundary free of intrinsic fuzziness, characterized by a single algebraic law — **self-adjoint idempotence**:
+Across the first two chapters we saw that a solitary monad cannot define a direction and two states need no external reference point $C$ to compare themselves; meanwhile, **sharp orthogonal projectors** $P$ (whose relation to general POVM effects is recorded in [Chapter 2](ch02-born-rule.md), [@rem-povm-effect-converse-literature]) guarantee real probabilities $\Tr(\rho P) \in [0, 1]$ in [@thm-born-probability-skeleton] through a single core algebraic law — **self-adjoint idempotence**:
 
 $$
 P^* = P, \qquad P^2 = P.
