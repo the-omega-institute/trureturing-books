@@ -170,44 +170,50 @@ For the finite $V$, connected simple graph $G$, and rotation $R$ above, assume $
 
    $$
    \begin{aligned}
-   x(f(d))=1\ \land\ x(f(\alpha(d)))=0
-     &\quad\Longleftrightarrow\quad d\in\mathcal D(q),\\
-   x(f(d))=0\ \land\ x(f(\alpha(d)))=1
-     &\quad\Longleftrightarrow\quad d\in\mathcal D(q^{\mathrm{rev}}).
+   &x(f(d))=1\ \land\ x(f(\alpha(d)))=0\\
+   &\quad\Longleftrightarrow\ d\in\mathcal D(q),\\
+   &x(f(d))=0\ \land\ x(f(\alpha(d)))=1\\
+   &\quad\Longleftrightarrow\ d\in\mathcal D(q^{\mathrm{rev}}).
    \end{aligned}
    $$
 
 3. For every $v\in V$, $v\notin C(p)$ if and only if $v\in I\cup J$, and $I\cap J=\varnothing$. Every actual dart with $d.\mathrm{fst}\notin C(p)$ satisfies
 
    $$
-   d.\mathrm{fst}\in I\ \Longleftrightarrow\ x(f(d))=1,
-   \qquad
-   d.\mathrm{fst}\in J\ \Longleftrightarrow\ x(f(d))=0.
+   \begin{aligned}
+   d.\mathrm{fst}\in I&\ \Longleftrightarrow\ x(f(d))=1,\\
+   d.\mathrm{fst}\in J&\ \Longleftrightarrow\ x(f(d))=0.
+   \end{aligned}
    $$
 
    For all $v\in I,w\in J$, $\neg G.\mathrm{Adj}(v,w)$.
 4. For each pair $(S,b)=(I,1)$ or $(J,0)$, there is a connected subgraph $H_S$ of the original graph with vertex set exactly $C(p)\cup S$. For every actual dart $d$,
 
    $$
-   H_S.\mathrm{Adj}(d.\mathrm{fst},d.\mathrm{snd})
-   \quad\Longleftrightarrow\quad
-   e(d)\in E(p)\ \lor\
-   \bigl(x(f(d))=b\ \land\ x(f(\alpha(d)))=b\bigr).
+   \begin{aligned}
+   &H_S.\mathrm{Adj}(d.\mathrm{fst},d.\mathrm{snd})\\
+   &\quad\Longleftrightarrow\ e(d)\in E(p)\\
+   &\qquad\lor\bigl(x(f(d))=b\ \land\\
+   &\qquad\qquad x(f(\alpha(d)))=b\bigr).
+   \end{aligned}
    $$
 
    Let $E_S$ be this subgraph's actual unordered-edge set, and $E_S^\circ=E_S\setminus E(p)$. Both identities hold in $\mathbb Z$:
 
    $$
-   |C(p)\cup S|-|E_S|+|F_b|=1,
-   \qquad
-   |S|-|E_S^\circ|+|F_b|=1.
+   \begin{aligned}
+   |C(p)\cup S|-|E_S|+|F_b|&=1,\\
+   |S|-|E_S^\circ|+|F_b|&=1.
+   \end{aligned}
    $$
 
 5. Let $U=V\setminus C(p)$, and let $\bar G=G[U]$ be the actual vertex-deleted complement. For any perfect-matching subgraph $M$ of this same graph $\bar G$, and every $S\in\{I,J\}$, put $S'=\{u\in U:u.\mathrm{val}\in S\}$. There is a perfect-matching subgraph $N$ of $\bar G[S']$ such that, for all its vertices $v,w$,
 
    $$
-   N.\mathrm{Adj}(v,w)\quad\Longleftrightarrow\quad
-   M.\mathrm{Adj}(v.\mathrm{val},w.\mathrm{val}).
+   \begin{aligned}
+   &N.\mathrm{Adj}(v,w)\\
+   &\quad\Longleftrightarrow\ M.\mathrm{Adj}(v.\mathrm{val},w.\mathrm{val}).
+   \end{aligned}
    $$
 
    In this case both $|I|$ and $|J|$ are even.

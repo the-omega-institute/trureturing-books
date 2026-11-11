@@ -170,44 +170,50 @@ $$
 
    $$
    \begin{aligned}
-   x(f(d))=1\ \land\ x(f(\alpha(d)))=0
-     &\quad\Longleftrightarrow\quad d\in\mathcal D(q),\\
-   x(f(d))=0\ \land\ x(f(\alpha(d)))=1
-     &\quad\Longleftrightarrow\quad d\in\mathcal D(q^{\mathrm{rev}}).
+   &x(f(d))=1\ \land\ x(f(\alpha(d)))=0\\
+   &\quad\Longleftrightarrow\ d\in\mathcal D(q),\\
+   &x(f(d))=0\ \land\ x(f(\alpha(d)))=1\\
+   &\quad\Longleftrightarrow\ d\in\mathcal D(q^{\mathrm{rev}}).
    \end{aligned}
    $$
 
 3. 对每个 $v\in V$，$v\notin C(p)$ 当且仅当 $v\in I\cup J$，且 $I\cap J=\varnothing$。对每个 $d.\mathrm{fst}\notin C(p)$ 的实际 dart，
 
    $$
-   d.\mathrm{fst}\in I\ \Longleftrightarrow\ x(f(d))=1,
-   \qquad
-   d.\mathrm{fst}\in J\ \Longleftrightarrow\ x(f(d))=0.
+   \begin{aligned}
+   d.\mathrm{fst}\in I&\ \Longleftrightarrow\ x(f(d))=1,\\
+   d.\mathrm{fst}\in J&\ \Longleftrightarrow\ x(f(d))=0.
+   \end{aligned}
    $$
 
    任意 $v\in I,w\in J$ 均满足 $\neg G.\mathrm{Adj}(v,w)$。
 4. 对每一对 $(S,b)=(I,1)$ 或 $(J,0)$，存在原图的连通子图 $H_S$，其顶点集恰为 $C(p)\cup S$；对每个实际 dart $d$，
 
    $$
-   H_S.\mathrm{Adj}(d.\mathrm{fst},d.\mathrm{snd})
-   \quad\Longleftrightarrow\quad
-   e(d)\in E(p)\ \lor\
-   \bigl(x(f(d))=b\ \land\ x(f(\alpha(d)))=b\bigr).
+   \begin{aligned}
+   &H_S.\mathrm{Adj}(d.\mathrm{fst},d.\mathrm{snd})\\
+   &\quad\Longleftrightarrow\ e(d)\in E(p)\\
+   &\qquad\lor\bigl(x(f(d))=b\ \land\\
+   &\qquad\qquad x(f(\alpha(d)))=b\bigr).
+   \end{aligned}
    $$
 
    记 $E_S$ 为这个子图的实际无向边集，$E_S^\circ=E_S\setminus E(p)$。以下两式均在 $\mathbb Z$ 中成立：
 
    $$
-   |C(p)\cup S|-|E_S|+|F_b|=1,
-   \qquad
-   |S|-|E_S^\circ|+|F_b|=1.
+   \begin{aligned}
+   |C(p)\cup S|-|E_S|+|F_b|&=1,\\
+   |S|-|E_S^\circ|+|F_b|&=1.
+   \end{aligned}
    $$
 
 5. 令 $U=V\setminus C(p)$，$\bar G=G[U]$ 为实际顶点删除补图。对这个同一图 $\bar G$ 的任意完美匹配子图 $M$，以及每个 $S\in\{I,J\}$，令 $S'=\{u\in U:u.\mathrm{val}\in S\}$。存在 $\bar G[S']$ 的完美匹配子图 $N$，对其所有顶点 $v,w$ 满足
 
    $$
-   N.\mathrm{Adj}(v,w)\quad\Longleftrightarrow\quad
-   M.\mathrm{Adj}(v.\mathrm{val},w.\mathrm{val}).
+   \begin{aligned}
+   &N.\mathrm{Adj}(v,w)\\
+   &\quad\Longleftrightarrow\ M.\mathrm{Adj}(v.\mathrm{val},w.\mathrm{val}).
+   \end{aligned}
    $$
 
    此时 $|I|$ 与 $|J|$ 都为偶数。
