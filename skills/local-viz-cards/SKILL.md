@@ -80,6 +80,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `gate-word-polytope` | 门字越长，落点越密，最大的缺口一级级缩小，却永远补不上 | `one` `three` `six` `nearest` `shrink` |
 | `lattice-gauge-loop` | 一条边上的相位可以拧成任意值；绕方格一圈的相位，顶点怎么拧都不动 | `twist` `chord` `anchor` `tree` `two` `plaquette` |
 | `euler-product-sieve` | 有限个素数乘起来总比 ζ 少一截：少的正是带着清单外素因子的整数，s 越靠近 1 少得越多 | `two` `near` `all` `five` `remainder` `thirtyone` |
+| `blade-multiplication` | 两块刀片相乘：重复的方向成对抵掉，剩下的是掩码的异或；正负号只看排好顺序要交换几次 | `e1e2` `e2e1` `square` `pseudo` `pauli` `vector` |
 
 `chsh-dial` 的绿色框只引用第十三章正文用 `lean=` 引用的五条定理：经典上界（`classical_chsh_abs_le_two`，“隐方向”场景的 360 个等距隐方向、权重各 1/360 正是一个有限确定性纤维模型）、一侧可交换时 S² = 4I、四点谱、固定算子的 2√2 与幺正策略的贝尔值上界（取 d = 2 为手工推导）。贝尔态上的同平面关联 cos(夹角)、N = 4|sin α sin β| 与“转动 Bob 的一对方向，⟨S⟩ 最高恰为 √(4 + 4 sin α sin β)”是页面的数值（`NUM`）；均匀隐方向玩具模型与它的折线标 `MODEL`；一般隐变量测度下的 |S| ≤ 2 与无穷维 Tsirelson 界标 `ARGUED`。这一页的青色是四个余弦（量尺上一段段叠起来的四项、余弦弧）与给 +2 的隐方向，品红是两侧张开的面积、谱点 ±√(4 ± N)、弧与折线之差与给 −2 的隐方向；Alice 是实线箭头，Bob 是虚线箭头，时间轴转动 Bob 的一对方向 φ。
 
@@ -110,6 +111,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 `norm-lattice` 与 `pythagoras-number-escape` 的 `golden`、`minus`、`locked` 分工：那几张讲渐近分数逼近 √d 与 ±1 的接缝，本页讲整数格与范数等值线：艾森斯坦格画在复平面 x + y·e^{iπ/3}，换成整数坐标 (P, Q) = (x + (t + 1)y, y) 读出 Qform(t, ·, ·)；黄金整数画在 (g, ḡ) 平面，范数是矩形面积。绿色框只给第二十三章用 `lean=` 引用的四条定理（`Qform_eq_eisNorm`、`Qform_discriminant`、`Qform_range_eq_eisNorm`、`pell_form_eq_four_mul_norm`）；正文以行内链接提到的 `pell_pm_four_iff_signed_lucas_fib` 不在页面上标绿，`units` 卡只展示 φᵏ 的 (2a + b, b) = (Lₖ, Fₖ) 与范数 (−1)ᵏ（`NUM`），不声称它们是全部解。格子面积 √3/2、系数是基矢的内积、判别式 = −4 × 面积²、“取到的值”逐点代入都标 `NUM`；非整数 t 的中间帧、两种坐标之间的过渡与两次乘 φ 之间的滑动标 `MODEL`；四元数范数在 ℚ 中定义 ℤ 标 `ARGUED`。这一页的青色是当前点所在的那条范数等值线及其上的格点、黄金场景里迹的对角线与影子，品红是格子（面积）与黄金范数的矩形和它那一级的双曲线，琥珀只给当前的点与正在滑动的基矢 u₂，其余等值线是中性灰（虚线上没有格点）。
 `euler-product-sieve` 与 `sphere-escape` 的 `euclid`、`thirteen` 分工：那两张讲“乘起来加一”找到清单外的素数，本页讲有限个素数的欧拉乘积怎样逼近 ζ(s) 以及筛的余项。舞台上方是实轴 1 < s ≤ 4 上墨色的 ζ(s)、青色的前 K 个素数的乘积与其间品红的缺口（纵轴按“值 − 1”取对数，刻度写值本身），品红虚线是乘积加上下一个素数的 p⁻ˢ，右边的放大镜把当前 s 处的缺口按品红格的 n⁻ˢ 自下而上拆开；下方是整数 1 到 96，青色在乘积的展开里，品红带着清单外的素因子；琥珀只给当前的 s 与刚加进的素数的格子。绿色框只给第二十二章用 `lean=` 引用的三条：`riemann_zeta_euler_product`、`riemann_zeta_dirichlet_sum_eq_euler_product` 与 `riemann_zeta_residue_one`（Lean 对复数 s 陈述，页面只取实数 s）；余项等于最大素因子大于 p<sub>K</sub> 的整数之和、在实数 s > 1 上大于 p<sub>K+1</sub>⁻ˢ 与 ζ(2) = π²/6 按该章例题标 `ARGUED`；ζ(s)、乘积、放大镜各段与“差不到 1% 要几个素数”实算（`NUM`）；黎曼猜想只在抽屉里标 `OPEN`，页面不画临界带。路线图候选里的“只用 2”“用到 5”“用到 31”“s 越靠近 1 需要的素数越多”“筛的余项”依次做成 `two`、`five`、`thirtyone`、`near`、`remainder`，另加 `all`（到 97 格子全青、缺口仍在）配推论 `cor-dirichlet-sum-eq-euler-product`。
+
+`blade-multiplication` 的舞台左边是乘法表（8 块刀片、4 个泡利字或向量自乘的 3 × 3 九项），右边把选中的一格拆开：上方三行是左、右掩码与异或（两边都有的位画青色叉），下方一行一步，右因子逐个向左越过较大的左因子，每次交换画成两条交叉的品红线，排好后同号一对汇成青色的 +1；琥珀只给当前一格与当前这一步，紫色只在 `pseudo` 卡里框出 I₃ 的一行与一列（体积）。三维刀片的位运算规则本章没有冻结成 Lean 定理：8 × 8 表与逐步排序标 `NUM`（逐格与泡利矩阵乘积核对），排序的画法标 `MODEL`，Cl(3,0) ≅ M₂(ℂ) 与 Gottesman–Knill 标 `ARGUED`；绿色框只给本章用 `lean=` 引用的定理：泡利字场景的 `displacement_mul`、`qubit_weyl_star`（`displacement_two_anticommute` 在声明地图里），向量场景的 `B_formula_core`（B(3, 4, 12)² = 169·I 的乘法本身是 `NUM`）。抽屉里的“声明地图”列出第二十五章 `lean=` 引用的全部 9 条冻结定理，测试按章节文件与锁文件核对条目数与链接。路线图候选的 e₁e₂、e₂e₁ 变号、e₁₂e₁₂ = −1、伪标量、泡利字依次做成 `e1e2`、`e2e1`、`square`、`pseudo`、`pauli`，另按例 `ex-xor-pauli-table` 第 3 条加了 `vector`。
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
@@ -308,6 +311,12 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十二章 | 例 `ex-prime-log-orthogonality-and-sieve` 之后 | `euler-product-sieve` · `five`、`remainder` |
 | 第二十二章 | §22.3 “首项裂缝……生长之门”一段之后、`sphere-escape` · `thirteen` 之前 | `euler-product-sieve` · `thirtyone` |
 | 第二十二章 | `sphere-escape` · `thirteen` 之后、§22.3 格言之前 | `euler-product-sieve` 完整实验室 |
+| 第二十五章 | §三比特刀片掩码一节的掩码表之后、“在这套 3 比特编码下”之前 | `blade-multiplication` · `square` |
+| 第二十五章 | 两条位运算定律的列表之后、“请特别注意”之前 | `blade-multiplication` · `e1e2`、`e2e1` |
+| 第二十五章 | 伪标量与两比特辛泡利字两条说明之后、逆序共轭一段之前 | `blade-multiplication` · `pseudo` |
+| 第二十五章 | 例 `ex-pauli-words-xor-sign-table` 之后、§零依赖 Python 3 引擎之前 | `blade-multiplication` · `pauli` |
+| 第二十五章 | 例 `ex-xor-pauli-table` 之后、文献注记 `rem-clifford-stabilizer-literature` 之前 | `blade-multiplication` · `vector` |
+| 第二十五章 | 文献注记 `rem-clifford-stabilizer-literature` 之后、转入第二十六章之前 | `blade-multiplication` 完整实验室 |
 
 ## 增删或修改一张卡之后
 
