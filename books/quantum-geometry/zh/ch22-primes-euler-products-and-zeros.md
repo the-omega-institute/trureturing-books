@@ -489,6 +489,59 @@ $\eta$ 在整段上是平稳变化的正数；$\zeta$ 的符号翻转全部来�
 
 由结论 2 与结论 3 可作一行手工推导：若 $\operatorname{Re}(s) \ge 1$ 而 $\zeta(s) = 0$，结论 2 给出 $\Lambda(s) = 0$，与结论 3 矛盾。所以 $\zeta$ 在闭半平面 $\operatorname{Re}(s) \ge 1$ 上没有零点；其中直线 $\operatorname{Re}(s) = 1$ 上的部分，是 Hadamard 与 de la Vallée Poussin（1896）为证明素数定理建立的。这条事实在 Lean 中以 Mathlib 定理的身份进入结论 3 的证明；上面的推导说明，它也能从冻结的陈述直接读出。结论 1 则说明，[@thm-xi-reading-entire-reflection] 与 [@prop-zeta-conjugation-covariance] 为 $\xi$ 给出的四点一组的对称，就是临界带内 $\zeta$ 零点的对称；由 [@prop-zeta-real-axis-sign]，这些零点没有一个是实数。
 
+**从无零点到数素数。** 直线 $\operatorname{Re}(s) = 1$ 上没有零点，为什么能拿来数素数？对欧拉乘积取对数再求导，素数以权重 $\ln p$ 出现（手工推导，在 $\operatorname{Re}(s) > 1$ 上逐项求导）：
+
+$$
+-\frac{\zeta'(s)}{\zeta(s)} = \sum_{p} \frac{\ln p \cdot p^{-s}}{1 - p^{-s}} = \sum_{n \ge 1} \Lambda(n)\, n^{-s} .
+$$
+
+这里的 $\Lambda$ 是冯·曼戈尔特函数：$\Lambda(p^j) = \ln p$（$p$ 为素数，$j \ge 1$），其余为 $0$；它与上面的完备函数 $\Lambda(s)$ 只是同用一个字母。把这些权重累加到 $x$，得到切比雪夫函数 $\psi(x) = \sum_{n \le x} \Lambda(n)$。例如 $\psi(10) = 3\ln 2 + 2\ln 3 + \ln 5 + \ln 7 = \ln 2520$，而 $2520$ 恰是 $1, 2, \dots, 10$ 的最小公倍数：一般地 $\psi(x) = \ln \operatorname{lcm}(1, \dots, \lfloor x\rfloor)$，因为最小公倍数里素数 $p$ 的指数正是满足 $p^j \le x$ 的最大 $j$（手工推导）。“素数铺得均匀”，说的就是 $\psi(x)$ 与 $x$ 一样快地增长。$\zeta$ 在 $s = 1$ 处有单极点（[@lem-riemann-zeta-residue-one]），所以 $-\zeta'/\zeta$ 在那里有留数为 $1$ 的单极点，它贡献主项 $x$；按经典的显式公式（文献结果，未在本书形式化），每个零点 $\rho$ 再贡献一项大小约为 $x^{\operatorname{Re}\rho}$ 的起伏，零点离直线 $\operatorname{Re}(s) = 1$ 越远，起伏越小。所钉仓库冻结了这一机制的一个定量版本。
+
+::: {.theorem #thm-medium-pnt title="带误差项的素数定理（切比雪夫函数形式）" lean="D5/S3/Weil/PrimeNumberTheorem/MediumPNT.MediumPNT"}
+对实数 $x$，记 $\psi(x) = \sum_{1 \le n \le \lfloor x\rfloor} \Lambda(n)$（Mathlib 的 `Chebyshev.psi`；$\lfloor x\rfloor$ 为自然数下取整 `⌊x⌋₊`，$\Lambda$ 为冯·曼戈尔特函数）。存在常数 $c > 0$，使得当 $x \to +\infty$ 时
+
+$$
+\psi(x) - x = O\bigl(x\, e^{-c\,(\ln x)^{1/10}}\bigr),
+$$
+
+即存在常数 $C$ 与 $x_0$，使一切 $x \ge x_0$ 满足 $\lvert\psi(x) - x\rvert \le C\,\bigl\lvert x\, e^{-c\,(\ln x)^{1/10}}\bigr\rvert$。
+:::
+
+::: proof
+Lean 的证明改编自 PrimeNumberTheoremAnd 项目，走经典的围道积分路线，分五步。
+
+（1）平滑。取一个光滑、非负、支撑在 $[\tfrac{1}{2}, 2]$ 内且 $\int_0^\infty \nu(u)\,\tfrac{du}{u} = 1$ 的鼓包 $\nu$，按宽度 $\varepsilon$ 压窄后与 $\psi$ 作梅林卷积，得到平滑的 $\psi_\varepsilon$。存在常数 $C$，使 $X > 3$、$0 < \varepsilon < 1$、$X\varepsilon > 2$ 时 $\lvert\psi_\varepsilon(X) - \psi(X)\rvert \le C\,\varepsilon X \ln X$。
+
+（2）积分表示。$\psi_\varepsilon(X)$ 写成竖直线 $\operatorname{Re}(s) = 1 + 1/\ln X$ 上的围道积分，被积函数是 $-\zeta'(s)/\zeta(s)$、平滑核的梅林变换与 $X^s$ 三者之积。
+
+（3）推移路径。在 $\lvert t\rvert > 3$、$\operatorname{Re}(s) \ge 1 - A/(\ln\lvert t\rvert)^9$ 的区域内 $\lvert\zeta'(s)/\zeta(s)\rvert \le C\,(\ln\lvert t\rvert)^9$，在 $\lvert t\rvert \le 3$ 的一块矩形内 $\zeta'/\zeta$ 除 $s = 1$ 外全纯。这是“直线 $\operatorname{Re}(s) = 1$ 上没有零点”的定量加强（无零区）。把积分路径推进这块区域，越过 $s = 1$ 时拾起留数，它与 $X$ 相差不超过 $c\,\varepsilon X$。
+
+（4）逐段估计。新路径上其余各段的积分逐段估计，用到的只是（3）的界、平滑核梅林变换的衰减，以及 $\lvert X^s\rvert = X^{\operatorname{Re}(s)}$。
+
+（5）选取参数。取 $\varepsilon = e^{-c_1(\ln X)^{1/10}}$、截断高度 $T = e^{c_2(\ln X)^{1/10}}$，各项误差都化为 $X e^{-c(\ln X)^{1/10}}$ 的倍数；指数 $1/10$ 来自无零区宽度中的 $(\ln\lvert t\rvert)^9$。完整证明由 Lean 内核检查。
+:::
+
+两点说明。第一，$c$ 与大 $O$ 里的常数都只断言存在，定理不给出数值；有限的数表检验不了渐近命题，下面的例子只用来看清它说的是什么。第二，由定理可作一行手工推导：$e^{-c(\ln x)^{1/10}} \to 0$，所以 $\psi(x)/x \to 1$。从 $\psi$ 过渡到素数计数函数 $\pi(x) \sim x/\ln x$，经典上用分部求和（文献结果，未在本书形式化）；本书没有引用 $\pi(x)$ 形式的冻结声明。
+
+::: {.example #ex-chebyshev-psi-table title="ψ(x) 贴着 x 走，π(x) ln x / x 慢慢落向 1"}
+下表由逐个累加素数幂的精确计算得出，四舍五入到所示位数。
+
+| $x$ | $\psi(x)$ | $\psi(x)/x$ | $\psi(x) - x$ | $\pi(x)$ | $x/\ln x$ | $\pi(x)\ln x/x$ |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| $10$ | $7.832$ | $0.783201$ | $-2.168$ | $4$ | $4.3$ | $0.9210$ |
+| $10^2$ | $94.045$ | $0.940453$ | $-5.955$ | $25$ | $21.7$ | $1.1513$ |
+| $10^3$ | $996.681$ | $0.996681$ | $-3.319$ | $168$ | $144.8$ | $1.1605$ |
+| $10^4$ | $10013.397$ | $1.001340$ | $13.397$ | $1229$ | $1085.7$ | $1.1320$ |
+| $10^5$ | $100051.564$ | $1.000516$ | $51.564$ | $9592$ | $8685.9$ | $1.1043$ |
+| $10^6$ | $999586.597$ | $0.999587$ | $-413.403$ | $78498$ | $72382.4$ | $1.0845$ |
+
+$\psi(x)/x$ 在 $x = 10^6$ 时与 $1$ 只差 $0.00041$，而 $\pi(x)\ln x/x$ 在同一处还差 $0.08$：用 $\ln p$ 加权的计数比逐个点数的计数更快贴近主项。$\psi(x) - x$ 的符号来回变动（$10^4$、$10^5$ 为正，$10^6$ 为负），按显式公式的经典图像，这正是零点起伏在小范围内的样子。
+
+定理保证的误差界收得极慢。即使取 $c = 1$，$(\ln x)^{1/10}$ 在 $x = 10^6$ 时只有 $1.3003$，相对误差界 $e^{-1.3003} = 0.2725$；到 $x = 10^{100}$ 仍有 $e^{-1.7227} = 0.1786$。实际的相对误差 $\lvert\psi(x)/x - 1\rvert$ 在 $x = 10^6$ 时只有 $0.00041$。作为形状的对照，de la Vallée Poussin 的经典误差项 $x e^{-c\sqrt{\ln x}}$（文献结果，未在本书形式化）取 $c = 1$ 时在 $x = 10^6$ 处的相对值是 $0.0243$。冻结的版本换来的是一份可以逐行检查的证明，而不是最好的误差项。
+:::
+
+素数定理只用到直线 $\operatorname{Re}(s) = 1$ 上没有零点；黎曼猜想问的是更靠里的事：临界带内的零点是否都在 $\operatorname{Re}(s) = \frac{1}{2}$ 上。回到开头那个措辞问题。
+
 ::: {.theorem #thm-right-half-strip-rh-forms title="黎曼猜想只需检查右半带；Mathlib 的非平凡零点都在临界带内，两种表述等价" lean="D5/S3/Weil/ZetaBridge/RightHalfStripRiemannReduction.golden_right_half_strip_implies_rh D5/S3/Zeros/ActualZeroGeometry.rh_iff_nontrivial_zeros_on_line D5/S3/Weil/Mertens/Cryptids/VonMangoldtCount/Foundation.mem_criticalStrip_of_isNontrivialZetaZero"}
 记 `RiemannHypothesis` 为 Mathlib 的命题（内容见 [@thm-cayley-critical-line-criterion] 结论 2），$\zeta$ 是 `riemannZeta`。
 
@@ -745,10 +798,10 @@ $$
 ::: {.remark #rem-euler-zeta-literature title="Re(s) > 1 形式化恒等式与解析延拓、泛函方程及零点分布的边界审计（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 为严守三层认识论诚实标准，读者在阅读本章时须明确区分以下三个层次：
 
-1. **已由本书所钉 Lean 内核验证的冻结定理（第一层 `LEAN ✓`）**：本章的十七条正式结论——$s = 1$ 处的单位留数极限（[@lem-riemann-zeta-residue-one]）、半平面 $\operatorname{Re}(s) > 1$ 上的狄利克雷级数恒等式（[@prop-riemann-zeta-dirichlet-sum]）、半平面 $\operatorname{Re}(s) > 1$ 上的欧拉素数乘积恒等式（[@thm-riemann-zeta-euler-product]）两者的直接相等（[@cor-dirichlet-sum-eq-euler-product]），素数对数在整数与有理数上的线性无关（[@thm-prime-log-independence]）、自然数对数的无理性（[@lem-log-natural-irrational]）、有限维环面幂轨道的闭包与克罗内克稠密性（[@thm-torus-power-orbit-closure]），$\xi$ 读数的整函数性、反射对称 $\xi(1 - s) = \xi(s)$ 与端点值（[@thm-xi-reading-entire-reflection]）、$\zeta$ 与 $\xi$ 的共轭协变（[@prop-zeta-conjugation-covariance]）、凯莱单位圆判据与黎曼猜想的径向等价形式（[@thm-cayley-critical-line-criterion]）、交错部分和收敛到 $(1 - 2^{1-s})\,\zeta(s)$（[@lem-alternating-zeta-partial-sums]）、$\zeta$ 在实轴上的符号与实零点（[@prop-zeta-real-axis-sign]）、$\xi$ 读数的零点恰是临界带内的 $\zeta$ 零点以及完备 $\zeta$ 在 $\operatorname{Re}(s) \ge 1$ 上不为零（[@prop-xi-zeros-strip-zeros]）、右半带归约与 Mathlib 表述和临界带表述的等价（[@thm-right-half-strip-rh-forms]）、完全对称性不蕴含定线局域化的四次反例（[@thm-full-symmetry-not-localization]）、至多八根素数轴上以及 $5040 < n < 223092870$ 范围内的罗宾不等式（[@thm-robin-at-most-eight-primes]），以及临界线右侧的零点迫使某个 $\operatorname{lcm}(1, \dots, \lfloor t\rfloor)$ 违反罗宾不等式（[@thm-off-line-zero-robin-violation]）——严格成立。注意欧拉乘积仅在 Lean 假设显式给出的绝对收敛半平面 `1 < s.re`（$\operatorname{Re}(s) > 1$）内被调用与核验。
+1. **已由本书所钉 Lean 内核验证的冻结定理（第一层 `LEAN ✓`）**：本章的十八条正式结论——$s = 1$ 处的单位留数极限（[@lem-riemann-zeta-residue-one]）、半平面 $\operatorname{Re}(s) > 1$ 上的狄利克雷级数恒等式（[@prop-riemann-zeta-dirichlet-sum]）、半平面 $\operatorname{Re}(s) > 1$ 上的欧拉素数乘积恒等式（[@thm-riemann-zeta-euler-product]）两者的直接相等（[@cor-dirichlet-sum-eq-euler-product]），素数对数在整数与有理数上的线性无关（[@thm-prime-log-independence]）、自然数对数的无理性（[@lem-log-natural-irrational]）、有限维环面幂轨道的闭包与克罗内克稠密性（[@thm-torus-power-orbit-closure]），$\xi$ 读数的整函数性、反射对称 $\xi(1 - s) = \xi(s)$ 与端点值（[@thm-xi-reading-entire-reflection]）、$\zeta$ 与 $\xi$ 的共轭协变（[@prop-zeta-conjugation-covariance]）、凯莱单位圆判据与黎曼猜想的径向等价形式（[@thm-cayley-critical-line-criterion]）、交错部分和收敛到 $(1 - 2^{1-s})\,\zeta(s)$（[@lem-alternating-zeta-partial-sums]）、$\zeta$ 在实轴上的符号与实零点（[@prop-zeta-real-axis-sign]）、$\xi$ 读数的零点恰是临界带内的 $\zeta$ 零点以及完备 $\zeta$ 在 $\operatorname{Re}(s) \ge 1$ 上不为零（[@prop-xi-zeros-strip-zeros]）、切比雪夫函数形式的素数定理及其误差项（[@thm-medium-pnt]）、右半带归约与 Mathlib 表述和临界带表述的等价（[@thm-right-half-strip-rh-forms]）、完全对称性不蕴含定线局域化的四次反例（[@thm-full-symmetry-not-localization]）、至多八根素数轴上以及 $5040 < n < 223092870$ 范围内的罗宾不等式（[@thm-robin-at-most-eight-primes]），以及临界线右侧的零点迫使某个 $\operatorname{lcm}(1, \dots, \lfloor t\rfloor)$ 违反罗宾不等式（[@thm-off-line-zero-robin-violation]）——严格成立。注意欧拉乘积仅在 Lean 假设显式给出的绝对收敛半平面 `1 < s.re`（$\operatorname{Re}(s) > 1$）内被调用与核验。
 2. **经典解析数论文献定理（第二层，已有严格纸面证明但未在本书形式化）**：
    - **黎曼解析延拓与平凡零点（Riemann, 1859）**：$\zeta(s)$ 可全纯延拓至 $\mathbb{C} \setminus \{1\}$，负偶数 $s = -2, -4, -6, \dots$ 为平凡零点（[@rem-zeta-zero-free-region-literature]）。（“临界带 $0 < \operatorname{Re}(s) < 1$ 之外没有其他零点”已不在这一层：它由 [@thm-right-half-strip-rh-forms] 的结论 3 与 [@prop-xi-zeros-strip-zeros] 之后的一行手工推导给出，实轴上的情形见 [@prop-zeta-real-axis-sign]。）（完备化函数 $\xi$ 的整函数性、反射对称 $\xi(s) = \xi(1 - s)$ 与共轭对称 $\xi(\overline{s}) = \overline{\xi(s)}$ 已不在这一层：它们由 [@thm-xi-reading-entire-reflection] 与 [@prop-zeta-conjugation-covariance] 借助 Mathlib 的完备 $\zeta$ 给出。）
-   - **由边界线 $\operatorname{Re}(s) = 1$ 无零点到素数定理（Hadamard, de la Vallée Poussin, 1896）**：$\zeta(1 + it) \neq 0$（$t \neq 0$；$t = 0$ 即 $s = 1$ 处为一阶极点）本身已不在这一层，它由 [@prop-xi-zeros-strip-zeros] 经一行手工推导得到；由它通过围道积分或陶伯（Tauberian）定理导出素数定理 $\pi(x) \sim \frac{x}{\ln x}$ 的这一步，本书没有引用冻结声明；
+   - **素数定理的 $\pi(x)$ 形式（Hadamard, de la Vallée Poussin, 1896）**：$\zeta(1 + it) \neq 0$（$t \neq 0$；$t = 0$ 即 $s = 1$ 处为一阶极点）已不在这一层，它由 [@prop-xi-zeros-strip-zeros] 经一行手工推导得到；切比雪夫函数形式的素数定理连同误差项也已不在这一层，见 [@thm-medium-pnt]。仍在这一层的是由 $\psi(x) \sim x$ 经分部求和得到 $\pi(x) \sim \frac{x}{\ln x}$ 的一步，以及 de la Vallée Poussin 的误差项 $O\bigl(x e^{-c\sqrt{\ln x}}\bigr)$；
    - **显式公式（von Mangoldt, Weil）**：将素数幂对数权重 $\Lambda(n)$ 的求和与 $\zeta(s)$ 非平凡零点 $\rho$ 的频谱求和通过对偶傅里叶变换联系起来。（它的一种积分形式已不在这一层：所钉仓库冻结了 [`actual_integrated_explicit_formula`](lean:D5/S3/Weil/Mertens/IntegratedExplicit/WholeFormula.actual_integrated_explicit_formula)，即对每个实数 $y > 0$，按重数遍历全体非平凡零点的和 $\sum_{\rho} e^{\rho y}/(\rho(1 - \rho))$ 等于 $U(e^y) - \ln(2\pi) + \sum_{n \ge 1} e^{-2ny}/(2n(2n + 1))$，其中 $U$ 见 [@def-divisor-ratio-mertens-error]；[@thm-off-line-zero-robin-violation] 的证明用到它。）
 3. **开放猜想（第三层 `OPEN`）**：[@conj-riemann-hypothesis]（黎曼猜想）断言所有非平凡零点均满足 $\operatorname{Re}(\rho) = 1/2$（等价于素数计数误差项满足平方根界 $\pi(x) = \operatorname{Li}(x) + O(x^{1/2}\ln x)$）。本章的冻结定理证明了 $\operatorname{Re}(s) > 1$ 内的级数—乘积分解、$s = 1$ 留数以及 $\xi$ 的反射对称，**并不证明黎曼猜想**：反射对称只说明零点关于 $s = \frac{1}{2}$ 成对出现，不说明它们落在临界线上；[@thm-cayley-critical-line-criterion] 只是把猜想等价地改写到单位圆上；[@thm-right-half-strip-rh-forms] 只是把猜想归约到右半带，并说明 Mathlib 的表述与临界带表述等价；[@thm-full-symmetry-not-localization] 则表明仅凭反射与共轭两种对称性不可能推出它；[@thm-off-line-zero-robin-violation] 只把一个离线零点变成罗宾不等式的反例，并不排除离线零点。
 :::

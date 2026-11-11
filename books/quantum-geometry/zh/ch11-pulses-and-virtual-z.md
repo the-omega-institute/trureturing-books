@@ -7,7 +7,7 @@
 **一句纸面上的“量子门是让量子态转向的有面积几何结构”，到了真实的物理硬件里，竟然变成了一语双关的工程现实：**
 
 1. 要让量子态绕水平赤道轴（$X$ 轴或 $Y$ 轴）转向，工程师向芯片注入与量子比特能级共振的微波脉冲；在旋转参考系与旋波近似的物理建模下，球面转角由**微波包络曲线下方的脉冲面积**决定（详见下文 [@rem-rwa-pulse-area-literature] 与 [@rem-pulses-literature]）！
-2. 反过来，如果要绕竖直能量主轴（$Z$ 轴）转向，在理想脉冲调度下需要施加多长时间的额外模拟微波脉冲？答案令人拍案叫绝：**零纳秒！** 因为能量本征轴本身充当旋转参考系的相位基准，软件只需更新被动参考系相位寄存器并相应偏置后续赤道脉冲的驱动相位——即超导量子硬件中的**虚拟 $Z$ 门**调度（详见下文 [@rem-virtual-z-scheduling-literature] 与 [@rem-pulses-literature]）！
+2. 反过来，如果要绕竖直能量主轴（$Z$ 轴）转向，在理想脉冲调度下需要施加多长时间的额外模拟微波脉冲？答案令人拍案叫绝：**零纳秒！** 能级劈裂选定了 $Z$ 轴与自由进动频率，赤道零方位则由驱动的相位参考选定；软件只需更新被动参考系相位寄存器并相应偏置后续赤道脉冲的驱动相位——即超导量子硬件中的**虚拟 $Z$ 门**调度（详见下文 [@rem-virtual-z-scheduling-literature] 与 [@rem-pulses-literature]）！
 
 本章将从矩阵指数在本征线上的精确相位演化与能量本征态定态不变性出发，逐步推演旋转参考系消去载频、共振脉冲面积积分、有序三脉冲核的迹误差界，以及薛定谔状态演化与海森堡效应拉回之间的迹对偶恒等式。
 
@@ -23,7 +23,7 @@ $$
 H_0 = \frac{1}{2}\omega_0 Z = \frac{1}{2}\omega_0 \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix},
 $$
 
-其中典型跃迁频率为 $\omega_0 / (2\pi) \approx 5\,\mathrm{GHz}$。在没有外加微波驱动的静置状态下，这颗量子比特在干什么？在实验室坐标系（lab frame）里，它的布洛赫向量正绕着竖直 $Z$ 轴以每秒五十亿圈（周期仅 $T_0 = 0.2\,\mathrm{ns}$）的惊人速度飞旋！
+其中典型跃迁频率为 $\omega_0 / (2\pi) \approx 5\,\mathrm{GHz}$。在没有外加微波驱动的理想自由演化下，这颗量子比特在干什么？在实验室坐标系（lab frame）里，只要布洛赫向量具有非零横向分量，它就绕着竖直 $Z$ 轴以每秒五十亿圈（周期仅 $T_0 = 0.2\,\mathrm{ns}$）的惊人速度进动；若向量落在 $Z$ 轴上（包括两极能量本征态与球心），它便保持不动。
 
 要想在如此高速旋转的靶子上精准雕刻量子门，第一步就是弄清楚算符矩阵指数 $\exp(A)$ 作用在特征向量 $v$（满足 $Av = \mu v$）上时究竟会发生什么。在 Lean 模块 `EnergyEigenstateStationarity` 中，下面的引理在不附加任何厄米性或归一化前提的普遍条件下，直接给出矩阵指数在本征方向上的精确标量指数化。
 
@@ -218,7 +218,7 @@ $$
 **相位改错了符号，就到了对面的极点。** 同一个电路，脉冲却以 $\varphi + \lambda = +90^\circ$（$+Y$）发出：实线绕 $+Y$ 转到南极，$P(0) = 0$；白色虚线（电路本来的意思）仍停在北极。
 :::
 
-从更一般的算子代数视角看，“推动量子态向前演化（薛定谔图像）”与“保持量子态不动、把测量效应算符向后拉回更新（海森堡参考系更新图像）”之所以给出完全相同的实验读数，源于迹配对的步进拉回恒等式。在 Lean 模块 `ObserverPullbackTraceIdentity` 中，设 $d$ 为有限可判等指标类型，$\mathrm{MatrixAlgebra}\,d$ 为 $d\times d$ 复 $C^*$-矩阵代数，$\mathrm{DensityState}\,d$ 为其正半定迹一状态子类型，$\mathrm{QuantumChannel}\,d\,d$ 为完全正保迹（CPTP）量子信道，而 $\operatorname{evolvedState}(\mathrm{channel}, t, \rho)$ 表示状态映射 $\operatorname{mapState}(\mathrm{channel})$ 在离散步数 $t \in \mathbb{N}$ 下的迭代。
+从更一般的算子代数视角看，“推动量子态向前演化（薛定谔图像）”与“保持初态不动、把测量效应算符向后拉回（海森堡图像）”之所以给出完全相同的实验读数，源于迹配对的步进拉回恒等式。这是一般的效应拉回；前述相位参考更新对应其中的幺正共轭特例，不能把任意信道的拉回都当作可由相位寄存器实现的更新。在 Lean 模块 `ObserverPullbackTraceIdentity` 中，设 $d$ 为有限可判等指标类型，$\mathrm{MatrixAlgebra}\,d$ 为 $d\times d$ 复 $C^*$-矩阵代数，$\mathrm{DensityState}\,d$ 为其正半定迹一状态子类型，$\mathrm{QuantumChannel}\,d\,d$ 为完全正保迹（CPTP）量子信道，而 $\operatorname{evolvedState}(\mathrm{channel}, t, \rho)$ 表示状态映射 $\operatorname{mapState}(\mathrm{channel})$ 在离散步数 $t \in \mathbb{N}$ 下的迭代。
 
 ::: {.figure src="ch11-two-pictures"}
 **推态，或把读出方向倒着拉回，夹角一样，读数一样。** 左边：琥珀色的态绕紫色的轴转到新位置，读出方向（北极）不动；右边：琥珀色的态不动，灰色的读出方向倒着转同样的角度。两边青色的弧是同一个夹角 $\alpha$，所以读到 $\lvert 0\rangle$ 的概率相同。这是 [@cor-frame-pullback-readout] 在一次幺正转动下的特例。
@@ -254,7 +254,7 @@ $$
 首先从物理机制、关键控制参数与模拟脉冲耗时三个维度对照三种核心单比特旋转：
 
 - **绕 $X$ 轴旋转 $R_x(\theta)$**：对应固定相位 $\varphi = 0$（同相通道 $I$）的共振微波脉冲，转角由包络积分面积 $\theta = \int_0^T \Omega(t)\,dt$ 决定，典型模拟脉冲时长 $T \approx 10\text{–}40\,\mathrm{ns}$；
-- **绕 $Y$ 轴旋转 $R_y(\theta)$**：对应固定相位 $\varphi = \pi/2$（正交通道 $Q$，即相对 $I$ 通道延时四分之一个载频周期）的共振微波脉冲，转角同样由包络面积 $\theta = \int_0^T \Omega(t)\,dt$ 决定，典型模拟脉冲时长 $T \approx 10\text{–}40\,\mathrm{ns}$；
+- **绕 $Y$ 轴旋转 $R_y(\theta)$**：对应固定相位 $\varphi = \pi/2$（正交通道 $Q$；按本章正相位载波约定，载波相对 $I$ 通道超前四分之一个周期）的共振微波脉冲，转角同样由包络面积 $\theta = \int_0^T \Omega(t)\,dt$ 决定，典型模拟脉冲时长 $T \approx 10\text{–}40\,\mathrm{ns}$；
 - **绕 $Z$ 轴旋转 $R_z(\lambda)$（虚拟 $Z$ 门）**：对应在经典控制软件中将参考系相位寄存器更新为 $\phi_{\mathrm{frame}} \mapsto \phi_{\mathrm{frame}} + \lambda$（当把前置 $R_z(\lambda)$ 交换至终端 $Z$ 基读出时，后续赤道脉冲的物理驱动相位按 $R_\varphi(\theta) R_z(\lambda) = R_z(\lambda) R_{\varphi - \lambda}(\theta)$ 替换为 $\varphi_{\mathrm{phys}} = \varphi - \phi_{\mathrm{frame}}$，单步即 $\varphi \mapsto \varphi - \lambda$），在理想脉冲调度下**附加模拟脉冲时长为 $0\,\mathrm{ns}$**！
 
 接着逐项核对具体数值：
@@ -288,8 +288,8 @@ $$
 ::: {.remark #rem-pulses-literature title="拉比脉冲面积与虚拟 Z 门（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 关于超导与自旋量子硬件中的微波脉冲控制及虚拟 $Z$ 门实现，其物理建模假设与文献出处如下：
 
-1. **虚拟 $Z$ 门与零附加模拟脉冲时长**（D. C. McKay, C. J. Wood, S. Sheldon, J. M. Chow, & J. M. Gambetta, *Efficient Z gates for quantum processors*, Phys. Rev. A **96**, 022330, 2017, DOI `10.1103/PhysRevA.96.022330`；单比特旋转约定参见 M. A. Nielsen & I. L. Chuang, *Quantum Computation and Quantum Information*, 2010, §4.2）：通过更新参考系相位寄存器 $\phi_{\mathrm{frame}} \mapsto \phi_{\mathrm{frame}} + \lambda$（并在把前置 $R_z(\lambda)$ 推向最终 $Z$ 读出时将后续赤道脉冲的物理驱动相位设为 $\varphi_{\mathrm{phys}} = \varphi - \phi_{\mathrm{frame}}$）实现 $Z$ 轴旋转，在理想脉冲调度下具有零附加模拟脉冲时长（$\Delta t_{\mathrm{analog}} = 0$）。这是一项工程调度约定，不等于零经典数字延迟，也不意味着实际硬件中的总物理错误率为绝对的 $0\%$（实际系统仍受相位寄存器有限位数、混频器偏置与背景退相干限制）。
-2. **共振脉冲面积公式的前提条件**：公式 $\theta = \int_0^T \Omega(t)\,dt$ 成立需要同时满足载频共振（$\omega_d = \omega_0$）、单脉冲内驱动相位/转轴固定、理想孤立二能级模型（忽略向高能级 $\lvert 2\rangle$ 的泄漏及 DRAG 修正）以及旋波近似（RWA，$\Omega \ll \omega_0$）。若脉冲相位 $\varphi(t)$ 随时间变化或存在失谐 $\Delta(t) \neq 0$，生成元在不同时刻不再对易，一般须保留时间排序算符 $\mathcal{T}\exp\bigl(-i\int_0^T H_{\mathrm{rot}}(t)\,dt\bigr)$。
+1. **虚拟 $Z$ 门与零附加模拟脉冲时长**（D. C. McKay, C. J. Wood, S. Sheldon, J. M. Chow, & J. M. Gambetta, *Efficient Z gates for quantum computing*, Phys. Rev. A **96**, 022330, 2017, DOI `10.1103/PhysRevA.96.022330`；单比特旋转约定参见 M. A. Nielsen & I. L. Chuang, *Quantum Computation and Quantum Information*, 2010, §4.2）：通过更新参考系相位寄存器 $\phi_{\mathrm{frame}} \mapsto \phi_{\mathrm{frame}} + \lambda$（并在把前置 $R_z(\lambda)$ 推向最终 $Z$ 读出时将后续赤道脉冲的物理驱动相位设为 $\varphi_{\mathrm{phys}} = \varphi - \phi_{\mathrm{frame}}$）实现 $Z$ 轴旋转，在理想脉冲调度下具有零附加模拟脉冲时长（$\Delta t_{\mathrm{analog}} = 0$）。这是一项工程调度约定，不等于零经典数字延迟，也不意味着实际硬件中的总物理错误率为绝对的 $0\%$（实际系统仍受相位寄存器有限位数、混频器偏置与背景退相干限制）。
+2. **共振脉冲面积公式的前提条件**：公式 $\theta = \int_0^T \Omega(t)\,dt$ 成立需要同时满足载频共振（$\omega_d = \omega_0$）、单脉冲内驱动相位/转轴固定、理想孤立二能级模型（忽略向高能级 $\lvert 2\rangle$ 的泄漏及 DRAG 修正）以及旋波近似（RWA，$\Omega \ll \omega_0$）。若脉冲相位 $\varphi(t)$ 随时间变化或存在失谐 $\Delta(t) \neq 0$，生成元在不同时刻一般不再对易，须按具体控制保留时间排序算符 $\mathcal{T}\exp\bigl(-i\int_0^T H_{\mathrm{rot}}(t)\,dt\bigr)$；在相位固定时，恒定包络、恒定失谐则仍给出固定的倾斜转轴，彼此对易，但不再是上述共振赤道轴的面积公式。
 3. **冻结定理的精确职责边界**：本章的 [@cor-frame-pullback-readout] 仅在显式迹对偶假设 `hduality` 下证明离散步数 $t \in \mathbb{N}$ 的薛定谔—海森堡迹读出恒等式，并不对模拟脉冲时长、驱动校准、环境退相干、能级泄漏或门错误率作出形式化证明。
 :::
 

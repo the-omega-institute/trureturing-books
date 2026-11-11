@@ -4,7 +4,7 @@
 
 在第一部（[第一章](ch01-measurement.md)至[第四章](ch04-decoherence.md)）中，我们看清了单颗量子比特的几何全貌：剥去模长归一化与全局相位冗余后，任何单比特纯态都是三维实欧氏空间 $\mathbb{R}^3$ 中单位球面 $S^2$ 上的一根有向箭头 $\vv{r}$；而在[第四章](ch04-decoherence.md)具体的赤道初态与对称受控门/贝尔记录环境耦合模型（或双随机各向同性退极化噪声）中，当局部观察者对环境求偏迹时，这根横向箭头便按环境重叠余弦因子向球心收缩，并在环境记录完全正交时抵达球心最大混合点 $\vv{r} = \vv{0}$（即 $\frac{1}{2}I_2$；注意一般开放系统信道并不总是径向收缩到球心，例如纯退相干仅将 $(r_x, r_y, r_z)$ 压缩为 $(\eta r_x, \eta r_y, r_z)$ 而保留纵向分量，振幅阻尼则将布洛赫球向纯态北极 $\lvert 0\rangle$ 吸引）。
 
-现在，假设那颗与系统耦合的第二颗量子比特并不是飞散在热浴里的未知杂散粒子，而是被另一位实验家妥善保管在远方实验室里的伙伴量子比特。当两位实验家（通常称作 Alice 与 Bob）各自只盯着自己手里的单颗球看时，他们看到的局部布洛赫箭头可能双双缩在球心死点 $\vv{r} = \vv{s} = \vv{0}$；然而一旦他们把各自的测量记录拿到一起做双体比对，除全局单位阵基线贡献的 $\frac{1}{4}$ 之外，原本在两颗局部三维球面上彻底隐形的全部**非单位阵纯度盈余** $\Tr(\rho^2) - \frac{1}{4} = \frac{3}{4}$（即 $\frac{1}{4}\norm{T}_{\mathrm{F}}^2 = \frac{3}{4}$），竟分毫无损地盛放在一片横跨两子的高维**关联张量扇区**之中！
+现在，假设那颗与系统耦合的第二颗量子比特并不是飞散在热浴里的未知杂散粒子，而是被另一位实验家妥善保管在远方实验室里的伙伴量子比特。以本章的贝尔纯态 $\lvert\Phi^+\rangle$ 为例：当两位实验家（通常称作 Alice 与 Bob）各自只盯着自己手里的单颗球看时，他们看到的局部布洛赫箭头双双缩在球心死点 $\vv{r} = \vv{s} = \vv{0}$；然而一旦他们把各自的测量记录拿到一起做双体比对，除全局单位阵基线贡献的 $\frac{1}{4}$ 之外，原本在两颗局部三维球面上彻底隐形的全部**非单位阵纯度盈余** $\Tr(\rho^2) - \frac{1}{4} = \frac{3}{4}$（即 $\frac{1}{4}\norm{T}_{\mathrm{F}}^2 = \frac{3}{4}$），竟分毫无损地盛放在一片横跨两子的高维**关联张量扇区**之中！
 
 本章开启第四部“高维球体——纠缠、拓扑与量子算法”。我们将从两体厄米算子空间的正交扇区分解出发，穿过贝尔态的球心边缘盲区与 CHSH 算子平方的换位子面积恒等式，最终抵达 $45^\circ$（$\pi/4$）对称四分角下的 $2\sqrt{2}$ 极值定理。
 
@@ -180,9 +180,9 @@ $$
 
 ## CHSH 平方：正交面积的换位子项 {#sec-chsh-commutator-area}
 
-既然经典对角混合态 $\mathrm{classicalCorrelatedDensity}$ 也能把局部边缘态缩成 $\frac{1}{2}I_2$ 并在关联扇区里占有一格 $\sigma_Z \otimes \sigma_Z$，我们究竟怎样用实验直接拷问出“纯粹的一维经典相关线”与“高维相干关联面”之间的本质分野？
+既然经典对角混合态 $\mathrm{classicalCorrelatedDensity}$ 也能把局部边缘态缩成 $\frac{1}{2}I_2$ 并在关联扇区里占有一格 $\sigma_Z \otimes \sigma_Z$，我们究竟怎样用 CHSH 实验，比对这个经典态的一维关联线与贝尔态 $\lvert\Phi^+\rangle$ 的多方向相干关联面？
 
-1969 年，Clauser、Horne、Shimony 与 Holt（CHSH）提出了一把极其精巧的四向组合标尺：让 Alice 准备两把二值可观测量快门 $A_0, A_1$（满足自伴性且平方为单位阵 $A_0^2 = A_1^2 = I$），让 Bob 也准备两把二值可观测量快门 $B_0, B_1$（$B_0^2 = B_1^2 = I$），构造 CHSH 算子
+1969 年，Clauser、Horne、Shimony 与 Holt（CHSH）提出了一把极其精巧的四向组合标尺：让 Alice 准备两把二值可观测量快门 $A_0, A_1$（满足自伴性且平方为单位阵 $A_0^2 = A_1^2 = I$），让 Bob 也准备两把二值可观测量快门 $B_0, B_1$（同样自伴且 $B_0^2 = B_1^2 = I$），构造 CHSH 算子
 
 $$
 S = A_0 \otimes_{\mathrm{K}} B_0 + A_0 \otimes_{\mathrm{K}} B_1 + A_1 \otimes_{\mathrm{K}} B_0 - A_1 \otimes_{\mathrm{K}} B_1,
@@ -344,7 +344,7 @@ $$
 **天花板到了顶，CHSH 值还在 2。** 两侧都张成直角，两块品红面积都是整个正方形，品红的刻度升到 $2\sqrt{2}$；可 Bob 的十字架与 Alice 的对齐（$B_0$ 在 $A_0$ 上，$B_1$ 与 $A_1$ 相反），青色的四段只是 $1 + 0 + 0 + 1 = 2$。
 :::
 
-**面积张满时的天花板。** 上表中最大的数是 $2\sqrt{2}$。换别的维数、别的观测量，能不能更大？模块 `PeritoTsirelson` 证明了一条更一般的上界：Alice 两个设置、Bob $d$ 个设置，观测量只要求是幺正矩阵；$d = 2$ 时正是 CHSH。
+**面积张满时的天花板。** 上表中最大的数是 $2\sqrt{2}$。换别的维数、别的观测量，能不能更大？模块 `PeritoTsirelson` 证明了一条更一般的代数上界：Alice 两个设置、Bob $d$ 个设置，局域矩阵只要求幺正；$d = 2$ 时正是 CHSH 的代数组合。
 
 ::: {.theorem #thm-unitary-bell-bound title="有限维幺正策略的贝尔值上界 $2/\sin(\pi/(2d))$" lean="D5/S3/QuantumBounds/PeritoTsirelson.bell_value_le"}
 设 $d, n, m \in \mathbb{N}$，$d \ge 2$。设 $A_0, A_1$ 为 $n \times n$ 复幺正矩阵，$B_0, \dots, B_{d-1}$ 为 $m \times m$ 复幺正矩阵（行列指标分别为 $\mathrm{Fin}\,n$ 与 $\mathrm{Fin}\,m$），$\rho$ 为 $\mathrm{Fin}\,n \times \mathrm{Fin}\,m$ 上的密度态 `DensityState`（半正定且 $\Tr\rho = 1$）。记 $\omega_d = \exp(2\pi i/d)$（源码中的 $\mathrm{windowRoot}\,d$），定义
@@ -373,11 +373,11 @@ $$
 左乘幺正矩阵不改变算子范数。第三步（`PeritoTensorBlockBound.tensor_block_bound`）：把幺正矩阵 $U$ 酉对角化为 $\operatorname{diag}(z_1, \dots, z_n)$，$\lvert z_i\rvert = 1$；用 $P \otimes_{\mathrm{K}} 1$ 共轭后，算子拆成 $n$ 个互相正交的 Bob 块 $\sum_y (1 + \omega_d^{\,y} z_i) B_y$，由三角不等式与 $B_y$ 的幺正性，每块的范数不超过 $\sum_y \lvert 1 + \omega_d^{\,y} z_i\rvert$，整个算子的范数也就不超过这些块界的公共上界。第四步（`PeritoUnitCircleSum.unit_circle_sum_le`）：写 $z = e^{2is}$，则 $\lvert 1 + \omega_d^{\,y} z\rvert = 2\lvert\cos(s + \pi y/d)\rvert$，而 $d$ 个等距余弦的绝对值之和不超过 $1/\sin(\pi/(2d))$。完整证明由 Lean 内核检查。
 :::
 
-取 $d = 2$ 是一段手工推导：$\omega_2 = e^{i\pi} = -1$，四个系数依次为 $1, 1, 1, -1$，$\mathrm{bellOperator}_2$ 正是 CHSH 算子 $S$，上界为 $2/\sin(\pi/4) = 2\sqrt{2}$。厄米对合矩阵是幺正的（$A^* A = A^2 = 1$）；把 $A_0, A_1$ 同时取负，它们仍是幺正的，而 $S$ 变号。所以对任意有限维、任意四个厄米对合观测量与任意密度态，都有 $\lvert\operatorname{Re}\Tr(\rho S)\rvert \le 2\sqrt{2}$：这就是有限维张量积情形的 Tsirelson 界；无穷维与只要求对易的一般形式仍见章末 [@rem-bell-chsh-literature]。证明第四步在 $d = 2$ 时是 $\lvert 1 + z\rvert + \lvert 1 - z\rvert \le 2\sqrt{2}$，等号只在 $z = \pm i$ 时成立。对单比特泡利方向，$U = A_0^* A_1 = A_0 A_1 = \cos\alpha\, I + i(\vv{a}_0 \times \vv{a}_1)\cdot\vv{\sigma}$ 的特征值是 $e^{\pm i\alpha}$，块界成为 $2\lvert\cos(\alpha/2)\rvert + 2\lvert\sin(\alpha/2)\rvert = 2\sqrt{1 + \sin\alpha}$（$0^\circ \le \alpha \le 180^\circ$）；与 [@prop-chsh-four-point-spectrum] 允许的最大特征值 $\sqrt{4 + N} = 2\sqrt{1 + \sin\alpha\sin\beta}$ 相比，只是把 Bob 的 $\sin\beta$ 放大成了 $1$。它在 $\alpha = 90^\circ$ 时达到 $2\sqrt{2}$：天花板，就钉在 Alice 张满一个正交十字架的地方。
+取 $d = 2$ 是一段手工推导：$\omega_2 = e^{i\pi} = -1$，四个系数依次为 $1, 1, 1, -1$，$\mathrm{bellOperator}_2$ 正是 CHSH 算子 $S$，上界为 $2/\sin(\pi/4) = 2\sqrt{2}$。若把局域矩阵解释为结果取 $\pm 1$ 的锐测量可观测量，就须取厄米对合矩阵；这样的矩阵是幺正的（$A^* A = A^2 = 1$）；把 $A_0, A_1$ 同时取负，它们仍是幺正的，而 $S$ 变号。所以对任意有限维、任意四个厄米对合观测量与任意密度态，都有 $\lvert\operatorname{Re}\Tr(\rho S)\rvert \le 2\sqrt{2}$：这就是有限维张量积情形的 Tsirelson 界；无穷维与只要求对易的一般形式仍见章末 [@rem-bell-chsh-literature]。证明第四步在 $d = 2$ 时是 $\lvert 1 + z\rvert + \lvert 1 - z\rvert \le 2\sqrt{2}$，等号只在 $z = \pm i$ 时成立。对单比特泡利方向，$U = A_0^* A_1 = A_0 A_1 = \cos\alpha\, I + i(\vv{a}_0 \times \vv{a}_1)\cdot\vv{\sigma}$ 的特征值是 $e^{\pm i\alpha}$，块界成为 $2\lvert\cos(\alpha/2)\rvert + 2\lvert\sin(\alpha/2)\rvert = 2\sqrt{1 + \sin\alpha}$（$0^\circ \le \alpha \le 180^\circ$）；与 [@prop-chsh-four-point-spectrum] 允许的最大特征值 $\sqrt{4 + N} = 2\sqrt{1 + \sin\alpha\sin\beta}$ 相比，只是把 Bob 的 $\sin\beta$ 放大成了 $1$。它在 $\alpha = 90^\circ$ 时达到 $2\sqrt{2}$：天花板，就钉在 Alice 张满一个正交十字架的地方。
 
 ## 45° 余弦与固定 CHSH 极值 {#sec-bell-45-tsirelson}
 
-为了在双量子比特上真正触及 $\sqrt{8} = 2\sqrt{2}$ 这座山峰，Alice 与 Bob 的两套正交十字架应该以什么相对夹角摆放？
+为了在本章的贝尔态 $\lvert\Phi^+\rangle$ 上，让 $(Z, X)$ 实平面内的测量真正触及正峰值 $\sqrt{8} = 2\sqrt{2}$，固定 Alice 为 $Z, X$ 后，Bob 的正交十字架应该怎样摆放？
 
 ::: {.viz src="chsh-dial" preset="sweep" height="500"}
 **转动 Bob 的十字架，只在 45° 碰到顶。** 两侧都是直角，时间轴把 Bob 的十字架从 $0^\circ$ 转到 $90^\circ$，琥珀色的横线按 $2\sqrt{2}\cos(\varphi - 45^\circ)$ 起落：两端是 $2$，只在 $45^\circ$ 碰到品红的刻度 $2\sqrt{2}$。图停在 $20^\circ$，读数 $2.563$。
@@ -424,7 +424,7 @@ $$
 
 请注意 [@cor-fixed-chsh-tsirelson] 的精确量词边界：该冻结声明固定了具体的双比特算子 `CHSHWitness.chshOperator`（即固定 Alice 为 $Z, X$、Bob 为 $(Z\pm X)/\sqrt{2}$），并在全体 $4\times 4$ 半正定迹一密度矩阵 $\rho$ 上求极值，**并未包含对任意可变测量方向的量词，也未在任意维希尔伯特空间上作全称量化**（可变观测量、任意有限维下的上界见 [@thm-unitary-bell-bound] 取 $d = 2$；无穷维与对易算子框架下的一般 Tsirelson 定理归入章末 [@rem-bell-chsh-literature]）。
 
-[@cor-fixed-chsh-tsirelson] 把量子一侧的山顶钉在了 $2\sqrt{2}$。要说这是“击败”，还得把经典一侧的天花板同样钉死。经典对手的规则是：Alice 与 Bob 事先共享一个隐变量 $\lambda$（Lean 中称为纤维地址 `Fiber`），此后各自只看自己的测量设置与 $\lambda$，给出答案 $\pm 1$；谁也看不到对方选了哪个设置。
+[@cor-fixed-chsh-tsirelson] 把量子一侧的山顶钉在了 $2\sqrt{2}$。要说这是“击败”，还得把经典一侧的天花板同样钉死。经典对手的规则是：Alice 与 Bob 事先共享一个隐变量 $\lambda$（Lean 中称为纤维地址 `Fiber`），四组测量设置使用同一个、不依赖设置的分布 $\mu$；此后各自只看自己的测量设置与 $\lambda$，给出答案 $\pm 1$，谁也看不到对方选了哪个设置。
 
 ::: {.definition #def-deterministic-fiber-model title="确定性局域纤维模型与经典 CHSH 值" lean="D5/S3/QuantumBounds/ClassicalFiberBound.boolValue D5/S3/QuantumBounds/ClassicalFiberBound.DeterministicFiberModel D5/S3/QuantumBounds/ClassicalFiberBound.observable D5/S3/QuantumBounds/ClassicalFiberBound.chshAt D5/S3/QuantumBounds/ClassicalFiberBound.classicalCHSH"}
 在模块 `ClassicalFiberBound` 中：
@@ -565,13 +565,13 @@ $$
 ::: {.remark #rem-bell-chsh-literature title="一般经典局域隐变量上界、一般 Tsirelson 定理与无超光速通信边界（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 在将本章的形式化定理与量子基础物理文献对照时，应当严格区分以下三个层面的经典与量子结论：
 
-1. **一般经典局域隐变量模型的 $|S_{\mathrm{LHV}}| \le 2$ 凸包定理**（J. F. Clauser, M. A. Horne, A. Shimony, and R. A. Holt, *Proposed experiment to test local hidden-variable theories*, Phys. Rev. Lett. **23**, 880–884, 1969, doi:10.1103/PhysRevLett.23.880）：[@ex-bell-chsh-45deg] 第三步中的折线 $C_{\mathrm{cl}}(\theta) = 1 - 2\theta/\pi$ 仅是一个特定的均匀隐方向玩具模型，其本身并不等同于贝尔定理。真正的贝尔—CHSH 定理对**任意**局域随机隐变量分布 $p(\lambda)$ 及任意局域响应函数 $\bar{A}_i(\lambda), \bar{B}_j(\lambda) \in [-1, 1]$ 成立：因为区间 $[-1, 1]^4$ 上的双线性泛函在极点 $a_0, a_1, b_0, b_1 \in \{\pm 1\}$ 处达到极值，而对任意 $\pm 1$ 赋值，$b_0 + b_1$ 与 $b_0 - b_1$ 中必有一项为 $0$、另一项为 $\pm 2$，故确定性组合 $a_0(b_0 + b_1) + a_1(b_0 - b_1) \in \{-2, +2\}$；对任意隐变量概率测度求凸平均后，必然服从 $|S_{\mathrm{LHV}}| \le 2$。其中有限隐变量集合、确定性 $\pm 1$ 应答的情形已由 [@thm-classical-chsh-bound-exact] 验证；任意概率测度 $p(\lambda)$ 与取值于 $[-1, 1]$ 的随机应答函数的一般形式仍属文献结果：从前者到后者需要把随机应答写成确定性应答的凸组合，并把有限和换成积分，这两步未在本书形式化。
-2. **任意希尔伯特空间与对易观测量框架下的一般 Tsirelson 界**（B. S. Cirel'son, *Quantum generalizations of Bell's inequality*, Lett. Math. Phys. **4**, 93–100, 1980, doi:10.1007/BF00417500）：有限维张量积情形已经形式化。[@thm-unitary-bell-bound] 对任意有限维 $n, m$、任意幺正观测量（厄米对合矩阵是其特例）与任意密度态给出贝尔值上界；取 $d = 2$ 并对 $A_0, A_1$ 同时取负，得 $\lvert\operatorname{Re}\Tr(\rho S)\rvert \le 2\sqrt{2}$（这两步是手工推导）；[@cor-fixed-chsh-tsirelson] 说明固定双比特算子 `CHSHWitness.chshOperator` 在贝尔态上达到 $2\sqrt{2}$。仍属文献结果的是 Cirel'son (1980) 定理的一般形式：希尔伯特空间 $\mathcal{H}$ 可以是无穷维的，Alice 与 Bob 的观测量作用在同一个 $\mathcal{H}$ 上，只要求 $A_i^* = A_i$、$B_j^* = B_j$、$A_i^2 = I$、$B_j^2 = I$ 与 $[A_i, B_j] = 0$，不要求张量积结构。一条简短的论证是：把算子范数估计 $\norm{[A_0, A_1]}_{\mathrm{op}} \le 2\norm{A_0}\norm{A_1} = 2$ 与 $\norm{[B_0, B_1]}_{\mathrm{op}} \le 2$ 代入 Landau 恒等式 $S^2 = 4I - [A_0, A_1][B_0, B_1]$，得 $\norm{S^2}_{\mathrm{op}} \le 8$，从而 $|\langle S\rangle| \le 2\sqrt{2}$。这一一般形式与这条论证都未在本书形式化（[@prop-landau-area-square] 只对有限维克罗内克积成立）。
-3. **非定域关联绝不蕴涵可控超光速通信（无信令原则）**：贝尔不等式的违背以及实验上的无漏洞贝尔检验，揭示的是联合测量结果在事后放到一起比对时呈现的非经典关联面积；正如 [@thm-local-correlation-sectors] 与 [@lemma-bell-mixed-marginal] 所示，无论 Alice 选择哪一个测量基（甚至无论她是否执行测量），只要她不通过经典信道把测量结果告诉 Bob，Bob 局部的约化密度矩阵始终纹丝不动地停留在球心 $\mathrm{traceFirstFactor}(\mathrm{bellDensity}) = \frac{1}{2}I_2$，因此量子纠缠绝不能用于传递可控超光速信号。
+1. **一般经典局域隐变量模型的 $|S_{\mathrm{LHV}}| \le 2$ 凸包定理**（J. F. Clauser, M. A. Horne, A. Shimony, and R. A. Holt, *Proposed experiment to test local hidden-variable theories*, Phys. Rev. Lett. **23**, 880–884, 1969, doi:10.1103/PhysRevLett.23.880）：[@ex-bell-chsh-45deg] 第三步中的折线 $C_{\mathrm{cl}}(\theta) = 1 - 2\theta/\pi$ 仅是一个特定的均匀隐方向玩具模型，其本身并不等同于贝尔定理。真正的贝尔—CHSH 定理对**任意**局域随机隐变量分布 $p(\lambda)$ 及任意局域响应函数 $\bar{A}_i(\lambda), \bar{B}_j(\lambda) \in [-1, 1]$ 成立，前提是四组设置使用同一个与设置无关的分布，且给定 $\lambda$ 后联合响应分解为两侧局域响应的乘积：因为区间 $[-1, 1]^4$ 上的双线性泛函在极点 $a_0, a_1, b_0, b_1 \in \{\pm 1\}$ 处达到极值，而对任意 $\pm 1$ 赋值，$b_0 + b_1$ 与 $b_0 - b_1$ 中必有一项为 $0$、另一项为 $\pm 2$，故确定性组合 $a_0(b_0 + b_1) + a_1(b_0 - b_1) \in \{-2, +2\}$；对任意隐变量概率测度求凸平均后，必然服从 $|S_{\mathrm{LHV}}| \le 2$。其中有限隐变量集合、确定性 $\pm 1$ 应答的情形已由 [@thm-classical-chsh-bound-exact] 验证；任意概率测度 $p(\lambda)$ 与取值于 $[-1, 1]$ 的随机应答函数的一般形式仍属文献结果：从前者到后者需要把随机应答写成确定性应答的凸组合，并把有限和换成积分，这两步未在本书形式化。
+2. **任意希尔伯特空间与对易观测量框架下的一般 Tsirelson 界**（B. S. Cirel'son, *Quantum generalizations of Bell's inequality*, Lett. Math. Phys. **4**, 93–100, 1980, doi:10.1007/BF00417500）：有限维张量积情形已经形式化。[@thm-unitary-bell-bound] 对任意有限维 $n, m$、任意局域幺正矩阵（用于二值锐测量的厄米对合矩阵是其特例）与任意密度态给出贝尔值上界；取 $d = 2$ 并对 $A_0, A_1$ 同时取负，得 $\lvert\operatorname{Re}\Tr(\rho S)\rvert \le 2\sqrt{2}$（这两步是手工推导）；[@cor-fixed-chsh-tsirelson] 说明固定双比特算子 `CHSHWitness.chshOperator` 在贝尔态上达到 $2\sqrt{2}$。仍属文献结果的是 Cirel'son (1980) 定理的一般形式：希尔伯特空间 $\mathcal{H}$ 可以是无穷维的，Alice 与 Bob 的观测量作用在同一个 $\mathcal{H}$ 上，只要求 $A_i^* = A_i$、$B_j^* = B_j$、$A_i^2 = I$、$B_j^2 = I$ 与 $[A_i, B_j] = 0$，不要求张量积结构。一条简短的论证是：把算子范数估计 $\norm{[A_0, A_1]}_{\mathrm{op}} \le 2\norm{A_0}\norm{A_1} = 2$ 与 $\norm{[B_0, B_1]}_{\mathrm{op}} \le 2$ 代入 Landau 恒等式 $S^2 = 4I - [A_0, A_1][B_0, B_1]$，得 $\norm{S^2}_{\mathrm{op}} \le 8$，从而 $|\langle S\rangle| \le 2\sqrt{2}$。这一一般形式与这条论证都未在本书形式化（[@prop-landau-area-square] 只对有限维克罗内克积成立）。
+3. **非定域关联绝不蕴涵可控超光速通信（无信令原则）**：贝尔不等式的违背以及实验上的无漏洞贝尔检验，揭示的是联合测量结果在事后放到一起比对时呈现的非经典关联面积。[@thm-local-correlation-sectors] 与 [@lemma-bell-mixed-marginal] 给出这里贝尔态的静态边缘态 $\mathrm{traceFirstFactor}(\mathrm{bellDensity}) = \frac{1}{2}I_2$。测量选择之后的不变性还要用到局域操作的文献结果（J. Watrous, *The Theory of Quantum Information*, 2018, 定理 2.26 与 §2.3.2）：Alice 只在本地施加保迹量子信道；若执行测量，就对全部结果求平均，不按结果筛选。该信道的对偶保持单位算符，因此 Bob 的任意局域读数、从而无条件边缘态保持不变，在这个贝尔例子中仍是 $\frac{1}{2}I_2$。按 Alice 的结果分组得到的条件子样本可以有不同的边缘态（条件导引），但 Bob 需要她传来的经典结果记录才能识别这些子样本。因此量子纠缠绝不能用于传递可控超光速信号。
 :::
 
 ::: {.viz src="chsh-dial" height="560"}
 完整实验室：拖动角度盘上的四支箭头，改两侧的张角，用时间轴转动 Bob 的一对方向；三个场景是角度盘、隐方向、弧与折线。量尺上的虚线 $\pm 2$ 与顶上的 $\pm 2\sqrt{2}$ 分别由 [@thm-classical-chsh-bound-exact] 与 [@thm-unitary-bell-bound]（取 $d = 2$ 为手工推导）担保；页面上的其余数字是数值演示。
 :::
 
-至此，我们看清了纠缠的第一重几何面貌：单比特的局部信息可以被完全掏空（$\vv{r} = \vv{s} = \vv{0}$），而把整整 $100\%$ 的非单位阵纯度盈余（$\Tr(\rho^2) - \frac{1}{4} = \frac{1}{4}\norm{T}_{\mathrm{F}}^2 = \frac{3}{4}$，连同单位阵基线的 $\frac{1}{4}$ 共计纯度 $1$）藏进高维关联扇区 $T_{ij}$ 的“球外之球”里。这立刻启发了一个关乎所有量子计算机生死存亡的工程点子：**既然环境噪声总是像小偷一样挨个袭击局部的“线”（单比特泡利错误），我们能不能故意把宝贵的逻辑量子态从脆弱的局部线上撤下来，藏进多比特纠缠织就的高维关联“面”与拓扑编织死结里？** 让我们进入[第十四章](ch14-cloning-codes-and-braids.md)。
+至此，我们从贝尔纯态看清了纠缠的第一重几何面貌：单比特的局部信息可以被完全掏空（$\vv{r} = \vv{s} = \vv{0}$），而把整整 $100\%$ 的非单位阵纯度盈余（$\Tr(\rho^2) - \frac{1}{4} = \frac{1}{4}\norm{T}_{\mathrm{F}}^2 = \frac{3}{4}$，连同单位阵基线的 $\frac{1}{4}$ 共计纯度 $1$）藏进高维关联扇区 $T_{ij}$ 的“球外之球”里。这立刻启发了一个关乎所有量子计算机生死存亡的工程点子：**如果在局域噪声模型中，环境噪声像小偷一样挨个袭击局部的“线”（单比特泡利错误），我们能不能故意把宝贵的逻辑量子态从脆弱的局部线上撤下来，藏进多比特纠缠织就的高维关联“面”与拓扑编织死结里？** 让我们进入[第十四章](ch14-cloning-codes-and-braids.md)。

@@ -2381,6 +2381,22 @@
       "line": 24,
       "signature": "theorem qubit_weyl_star : qubitZ * qubitX = -(qubitX * qubitZ) ∧ star qubitX = qubitX ∧ star qubitZ = qubitZ ∧ qubitX ^ 2 = 1 ∧ qubitZ ^ 2 = 1"
     },
+    "D5/S3/Quantum/Foundation/EffectProbabilityExtension.effect_density_representation": {
+      "module": "D5/S3/Quantum/Foundation/EffectProbabilityExtension",
+      "name": "D5.S3.Quantum.Foundation.EffectProbabilityExtension.effect_density_representation",
+      "kind": "theorem",
+      "statement_id": "sha256:639121ba69d1e46a2e7b994741420e62f1e0abef50af7f506f52242362d30dab",
+      "line": 324,
+      "signature": "theorem effect_density_representation {d : Type*} [Fintype d] [DecidableEq d] (p : CStarMatrix d d ℂ → ℝ) (hpos : ∀ E, 0 ≤ E → E ≤ 1 → 0 ≤ p E) (hadd : ∀ E F, 0 ≤ E → 0 ≤ F → E + F ≤ 1 → p (E + F) = p E + p F) (hnorm : p 1 = 1) : ∃! ρ : Matrix d d ℂ, ρ.PosSemidef ∧ Matrix.trace ρ = 1 ∧ ∀ E : CStarMatrix d d ℂ, 0 ≤ E → E ≤ 1 → Matrix.trace (ρ * CStarMatrix.ofMatrix.symm E) = (p E : ℂ)"
+    },
+    "D5/S3/Quantum/Foundation/EffectProbabilityExtension.effect_trace_unique": {
+      "module": "D5/S3/Quantum/Foundation/EffectProbabilityExtension",
+      "name": "D5.S3.Quantum.Foundation.EffectProbabilityExtension.effect_trace_unique",
+      "kind": "theorem",
+      "statement_id": "sha256:639121ba69d1e46a2e7b994741420e62f1e0abef50af7f506f52242362d30dab",
+      "line": 46,
+      "signature": "theorem effect_trace_unique {d : Type*} [Fintype d] [DecidableEq d] (ρ σ : Matrix d d ℂ) (h : ∀ E : CStarMatrix d d ℂ, 0 ≤ E → E ≤ 1 → pairing ρ E = pairing σ E) : ρ = σ"
+    },
     "D5/S3/Quantum/Foundation/FiniteTraceDistance.traceDistance": {
       "module": "D5/S3/Quantum/Foundation/FiniteTraceDistance",
       "name": "D5.S3.Quantum.Foundation.FiniteTraceDistance.traceDistance",
@@ -3204,6 +3220,14 @@
       "statement_id": "sha256:055723a8b281d50ffd245e26aa4983c0fd08308fe4b701498ce4ea0184fa09ea",
       "line": 50,
       "signature": "theorem prime_log_rational_independence : LinearIndependent ℚ (fun p : Nat.Primes => Real.log p)"
+    },
+    "D5/S3/Weil/PrimeNumberTheorem/MediumPNT.MediumPNT": {
+      "module": "D5/S3/Weil/PrimeNumberTheorem/MediumPNT",
+      "name": "MediumPNT",
+      "kind": "theorem",
+      "statement_id": "sha256:0a1daefb61e99b32d86497147e861a8f8027f7d9404b1330053923f8dfa45eb5",
+      "line": 32,
+      "signature": "theorem MediumPNT : ∃ c > 0, (ψ - id) =O[atTop] fun (x : ℝ) ↦ x * Real.exp (-c * (Real.log x) ^ ((1 : ℝ) / 10))"
     },
     "D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds.actual_height_gt_ten": {
       "module": "D5/S3/Weil/ZeroData/ActualReciprocalSquareBounds",

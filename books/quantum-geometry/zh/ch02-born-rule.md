@@ -4,7 +4,7 @@
 
 在[第一章](ch01-measurement.md)末尾，我们把单量子比特从双分量复列向量（四个实坐标）的迷雾中解放出来，还原成了三维单位球面 $S^2$ 上的一根实单位向量 $\vv{a}$。现在，让我们面对量子力学最核心的定量问题：当已知状态 $\vv{a}$ 与探测方向 $\vv{b}$ 相遇时，为什么探测器报出“相符”的概率恰好等于希尔伯特空间夹角余弦的平方 $\cos^2(\theta/2)$，换算到布洛赫球面上又恰好等于 $\frac{1 + \cos\theta}{2}$？
 
-在传统教科书里，“玻恩定则（Born's rule，$p = |\langle\phi\mid\psi\rangle|^2$）”往往被当作一条从天而降的独立公设：狄拉克与冯·诺依曼要求你先接受它，因为“实验测出来就是模平方”。本章将用奥卡姆剃刀砍掉冗余的“第 3 点 $C$”，展示玻恩法则并非外加在几何之上的突兀统计补丁，而是**两子零冗余内积投影与勾股模长守恒所诱导的典范无坐标基迹配对**（其中 [@thm-born-probability-skeleton] 严格确立迹配对满足概率公理的**充分性**，而排除其他非标准赋值所需的跨基/效应可加性**唯一性**条件则在章末 [@rem-gleason-literature] 中精确界定）。
+在传统教科书里，“玻恩定则（Born's rule，$p = |\langle\phi\mid\psi\rangle|^2$）”往往被当作一条从天而降的独立公设：狄拉克与冯·诺依曼要求你先接受它，因为“实验测出来就是模平方”。本章将用奥卡姆剃刀砍掉冗余的“第 3 点 $C$”，展示玻恩法则并非外加在几何之上的突兀统计补丁，而是**两子零冗余内积投影与勾股模长守恒所诱导的典范无坐标基迹配对**（其中 [@thm-born-probability-skeleton] 严格确立迹配对满足概率公理的**充分性**，而排除其他非标准赋值所需的效应可加性**唯一性**在有限维由章末 [@thm-busch-effect-density] 给出，只在投影格上要求可加时的情形见 [@rem-gleason-literature]）。
 
 ::: {.figure src="ch02-overview"}
 **图 2。** 本章地图：第 I 栏，灰色虚线的外部竖轴 $C$ 被划掉，青色的箭头 $A$ 自己当轴，琥珀色的箭头 $B$ 与它只隔一个角 $\theta$；第 II 栏，从琥珀色的 $\vv{b}$ 向青色的 $\vv{a}$ 线作垂线，垂足就是 $C$，青色粗线是影子 $\vv{c}$，品红虚线是垂直的剩余；第 III 栏，布洛赫球上相隔 $180^\circ$ 的 $\lvert 0\rangle$ 与 $\lvert 1\rangle$，在希尔伯特空间里只相隔 $90^\circ$。
@@ -212,7 +212,7 @@ $$
 - 四次方之和 $\cos^4(\theta/2) + \sin^4(\theta/2)$ 在 $\theta = 90^\circ$ 时等于 $\frac{1}{4} + \frac{1}{4} = \frac{1}{2} \neq 1$，一半的概率凭空人间蒸发；
 - **唯独二次方之和** $\cos^2(\theta/2) + \sin^2(\theta/2) \equiv 1$ 对宇宙中一切夹角 $\theta$ 恒等于 $1$！
 
-换句话说，**玻恩概率法则在几何上体现为欧几里得—希尔伯特空间勾股定理与典范无坐标基迹配对的自然结合。** 在重叠模长的幂次候选族 $|\langle\phi\mid\psi\rangle|^p$ 之中，正交完备通道总权重恒为 $1$ 的要求唯一挑出了二次幂 $p = 2$；在一般算子层面上，[@thm-born-probability-skeleton] 严格证明了典范迹配对 $\Tr(\rho P)$ 构成合法概率赋值的**充分性**，而若要在任意一般标架函数或广义测量效应中彻底排除非玻恩赋值以获得严格的**唯一性**，则还需补充跨基正交可加或正效应可加前提（详见下文 [@rem-gleason-literature]）。
+换句话说，**玻恩概率法则在几何上体现为欧几里得—希尔伯特空间勾股定理与典范无坐标基迹配对的自然结合。** 在重叠模长的幂次候选族 $|\langle\phi\mid\psi\rangle|^p$ 之中，正交完备通道总权重恒为 $1$ 的要求唯一挑出了二次幂 $p = 2$；在一般算子层面上，[@thm-born-probability-skeleton] 严格证明了典范迹配对 $\Tr(\rho P)$ 构成合法概率赋值的**充分性**，而若要在任意一般标架函数或广义测量效应中彻底排除非玻恩赋值以获得严格的**唯一性**，则还需补充跨基正交可加或正效应可加前提（有限维效应上的唯一性见下文 [@thm-busch-effect-density]，投影格上的情形见 [@rem-gleason-literature]）。
 
 现在，让我们用 [@prop-qubit-bloch-core] 与 [@thm-rank-one-born-pairing] 联手，兑现第一章末尾留下的承诺，亲手揭开布洛赫球面夹角 $\theta$ 与希尔伯特空间半角 $\theta/2$ 的换算关系。
 
@@ -397,15 +397,75 @@ $$
 
 > 不必先立坐标再测量；读数最亮的方向，就是读数自己挑出的坐标轴。
 
-有三条界线要说清。第一，[@thm-positive-dual-generation] 的长度界是 $\dim A$，在单比特上是 $4$；实际只剥出两层，是因为 $\mathbb{C}^2$ 里至多有两个互相正交的单位向量（$\Tr(p_i p_j) = 0$ 即 $\langle\psi_i\mid\psi_j\rangle = 0$），这个更紧的界 $2$ 是本例的手工观察，不是定理的结论。第二，单比特满足七项是上面的手工推导；所引 Lean 文件在文件头写明，紧致归一化基上的应用与状态一侧的谱桥是另外的数学义务，不在这条定理之内。第三，这条定理分解的是在探针上为正的读数，回答“读数由什么组成”；它没有断言“满足可加性的概率赋值必取迹配对形式”。那个唯一性问题是下面 [@rem-gleason-literature] 所讲的格里森定理与布施定理的内容。
+有三条界线要说清。第一，[@thm-positive-dual-generation] 的长度界是 $\dim A$，在单比特上是 $4$；实际只剥出两层，是因为 $\mathbb{C}^2$ 里至多有两个互相正交的单位向量（$\Tr(p_i p_j) = 0$ 即 $\langle\psi_i\mid\psi_j\rangle = 0$），这个更紧的界 $2$ 是本例的手工观察，不是定理的结论。第二，单比特满足七项是上面的手工推导；所引 Lean 文件在文件头写明，紧致归一化基上的应用与状态一侧的谱桥是另外的数学义务，不在这条定理之内。第三，这条定理分解的是在探针上为正的读数，回答“读数由什么组成”；它没有断言“满足可加性的概率赋值必取迹配对形式”。那个唯一性问题在有限维效应上由下面的 [@thm-busch-effect-density] 回答；投影格上的格里森定理见 [@rem-gleason-literature]。
 
-::: {.remark #rem-gleason-literature title="格里森定理与布施定理（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 本章的 [@thm-born-probability-skeleton] 严格证明了“充分性方向”：任何半正定且迹为 $1$ 的密度矩阵 $\rho$，通过典范无坐标基迹配对 $P \mapsto \Tr(\rho P)$ 都会在正交投影算子格上诱导出一个归一化、可加且实非负的概率权重。要反过来确立“唯一性方向”（即任何满足可加性公理的概率赋值必取迹配对形式），则依赖数学物理中的两条经典逆定理及其精确的维数与定义域前提：
+**反过来问：读数一定是迹配对吗？** 前面的定理说，给定密度矩阵 $\rho$，迹配对 $E \mapsto \Tr(\rho E)$ 是合法的概率赋值。反方向的问题是：一台仪器对每个效应 $E$ 报出一个概率 $p(E)$，这些概率可加，那么仪器背后是否一定藏着一个 $\rho$？若只在投影上要求可加，二维时答案是否定的（见 [@rem-gleason-literature]）；把可加性推广到效应，有限维里答案是肯定的，而且已经冻结。
+
+::: {.theorem #thm-busch-effect-density title="有限维布施定理：效应上可加的概率必是迹配对" lean="D5/S3/Quantum/Foundation/EffectProbabilityExtension.effect_density_representation D5/S3/Quantum/Foundation/EffectProbabilityExtension.effect_trace_unique"}
+设 $d$ 为有限指标集，$M_d(\mathbb{C})$ 为 $d \times d$ 复矩阵全体，按半正定序比较（$X \le Y$ 指 $Y - X$ 半正定），$I$ 为单位矩阵。满足 $0 \le E \le I$ 的矩阵 $E$ 称为**效应**。
+
+1. 若 $\rho, \sigma \in M_d(\mathbb{C})$ 对一切效应 $E$ 满足 $\Tr(\rho E) = \Tr(\sigma E)$，则 $\rho = \sigma$。
+2. 设函数 $p : M_d(\mathbb{C}) \to \mathbb{R}$ 满足：对一切效应 $E$ 有 $p(E) \ge 0$；对一切半正定的 $E, F$，只要 $E + F \le I$，就有 $p(E + F) = p(E) + p(F)$；并且 $p(I) = 1$。则存在唯一的 $\rho \in M_d(\mathbb{C})$，使 $\rho$ 半正定、$\Tr\rho = 1$，并且对一切效应 $E$ 有 $\Tr(\rho E) = p(E)$。
+:::
+
+::: proof
+第 1 条：效应张成全部矩阵。每个半正定矩阵缩小后是效应；每个自伴矩阵是两个半正定矩阵之差（正部减负部）；每个矩阵都可写成 $H_1 + iH_2$，其中 $H_1, H_2$ 自伴。所以两个迹配对若在效应上相等，就在一切矩阵上相等；再逐个代入矩阵单位，得 $\rho = \sigma$。
+
+第 2 条的存在性分四步，前三步只用可加性。
+
+（1）实数倍。由 $p(0) = p(0 + 0) = 2p(0)$ 得 $p(0) = 0$；当 $A \le B$ 时 $p(B) = p(A) + p(B - A) \ge p(A)$，即 $p$ 在效应上单调。把效应 $E$ 切成 $n$ 份 $E/n$，可加性给出 $p\bigl(\tfrac{m}{n}E\bigr) = \tfrac{m}{n}\,p(E)$（$m \le n$）。对实数 $t \in [0, 1]$，用两侧的有理数夹住 $t$，单调性迫使 $p(tE) = t\,p(E)$。这里没有假设连续性，连续性是单调性与有理齐次性一起换来的。
+
+（2）推到半正定锥。对半正定矩阵 $X$，取 $c = \lVert X\rVert + 1$，则 $X/c$ 是效应；令 $f(X) = c\,p(X/c)$。由（1），把 $c$ 换成任何更大的数，结果不变。于是 $f$ 在半正定锥上非负、可加、正齐次，并在效应上与 $p$ 一致。
+
+（3）推到全部矩阵。把自伴矩阵 $H$ 写成正部减负部 $H^+ - H^-$，令 $g(H) = f(H^+) - f(H^-)$；若四个半正定矩阵满足 $A - B = C - D$，则 $A + D = C + B$，所以 $g$ 实线性。再令 $L(X) = g(\operatorname{Re} X) + i\,g(\operatorname{Im} X)$（$\operatorname{Re} X$、$\operatorname{Im} X$ 为 $X$ 的自伴实部与虚部），得到复线性泛函 $L$，它在半正定矩阵上非负，在效应上等于 $p$。
+
+（4）读出 $\rho$。Lean 把 $L$ 看作取值于 $1 \times 1$ 矩阵的正映射，取它的对偶映射在 $1$ 处的值作为 $\rho$，于是对一切 $X$ 有 $\Tr(\rho X) = L(X)$；正映射的对偶仍是正映射，所以 $\rho$ 半正定；$\Tr\rho = L(I) = p(I) = 1$。唯一性由第 1 条给出。完整证明由 Lean 内核检查。
+:::
+
+两点说明。第一，$p$ 定义在全部矩阵上，但假设和结论只用到它在效应上的值，效应之外的取值不受约束。第二，定理不要求可数可加，也不要求连续：在有限维里，有限可加加上非负就够了。
+
+::: {.example #ex-qubit-busch-reconstruction title="三次读数定出一个单比特密度矩阵；半球标架函数为什么不行"}
+单比特上，投影 $P_{\vv{n}} = \frac{1}{2}\bigl(I + \vv{n}\cdot\vv{\sigma}\bigr)$（$\vv{n}$ 为单位向量）都是效应。设一台仪器满足 [@thm-busch-effect-density] 的三条假设，在三根坐标轴的正向投影上报出
+
+$$
+p(P_{+x}) = 0.8, \qquad p(P_{+y}) = 0.5, \qquad p(P_{+z}) = 0.65 .
+$$
+
+定理保证存在密度矩阵 $\rho$ 使 $p(E) = \Tr(\rho E)$。把 $\rho$ 写成 $\frac{1}{2}\bigl(I + \vv{r}\cdot\vv{\sigma}\bigr)$，由 $\Tr\sigma_k = 0$ 与 $\Tr(\sigma_j\sigma_k) = 2\delta_{jk}$ 得 $\Tr(\rho P_{\vv{n}}) = \frac{1}{2}\bigl(1 + \vv{r}\cdot\vv{n}\bigr)$（手工推导），所以 $r_k = 2p(P_{+k}) - 1$：
+
+$$
+\vv{r} = (0.6,\ 0,\ 0.3), \qquad
+\rho = \begin{pmatrix} 0.65 & 0.3 \\ 0.3 & 0.35 \end{pmatrix}.
+$$
+
+$\lvert\vv{r}\rvert = 0.6708 \le 1$，$\rho$ 的本征值 $0.8354$ 与 $0.1646$ 都非负，迹为 $1$。
+
+有了 $\rho$，仪器对任何效应的读数都已确定。取
+
+$$
+E = \tfrac{1}{2}P_{+x} + \tfrac{1}{2}P_{+z} = \begin{pmatrix} 0.75 & 0.25 \\ 0.25 & 0.25 \end{pmatrix},
+$$
+
+它的本征值是 $\frac{1}{2} \pm \frac{\sqrt{2}}{4}$，即 $0.8536$ 与 $0.1464$，确是效应；$\Tr(\rho E) = 0.725 = \frac{1}{2}(0.8 + 0.65)$。同一个 $E$ 也能沿它自己的本征轴 $\vv{n} = (1, 0, 1)/\sqrt{2}$ 分解：
+
+$$
+E = \Bigl(\tfrac{1}{2} + \tfrac{\sqrt{2}}{4}\Bigr) P_{\vv{n}} + \Bigl(\tfrac{1}{2} - \tfrac{\sqrt{2}}{4}\Bigr) P_{-\vv{n}} .
+$$
+
+这里 $p(P_{\vv{n}}) = \frac{1}{2}\bigl(1 + \vv{r}\cdot\vv{n}\bigr) = 0.8182$，$p(P_{-\vv{n}}) = 0.1818$，而 $0.8536 \times 0.8182 + 0.1464 \times 0.1818$ 精确等于 $29/40 = 0.725$。两种分解给出同一个读数。
+
+半球标架函数做不到这一点。令 $f(P_{\vv{n}}) = 1$，若 $\vv{n}$ 在北半球（$n_z > 0$；赤道上依次按 $n_x > 0$、$n_y > 0$ 判定）；否则 $f(P_{\vv{n}}) = 0$。每对对跖投影都满足 $f(P_{\vv{n}}) + f(P_{-\vv{n}}) = 1$，所以 $f$ 是投影上合法的标架函数。若有满足定理假设的 $p$ 在投影上与 $f$ 一致，定理会使 $p$ 成为迹配对，因而对效应线性，上面两种分解必须给出同一个 $p(E)$。可第一种给出 $\frac{1}{2}\bigl(f(P_{+x}) + f(P_{+z})\bigr) = \frac{1}{2}(1 + 1) = 1$，第二种给出 $0.8536 \times 1 + 0.1464 \times 0 = 0.8536$。矛盾说明 $f$ 不能延拓为效应上的可加概率：效应把不同测量轴连在了一起，二维投影格做不到。
+:::
+
+> 投影只问“是或否”，效应还能问“多少”；一旦能问“多少”，概率就只剩迹配对这一种写法。
+
+::: {.remark #rem-gleason-literature title="格里森定理与无穷维的布施定理（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 本章的 [@thm-born-probability-skeleton] 严格证明了“充分性方向”：任何半正定且迹为 $1$ 的密度矩阵 $\rho$，通过典范无坐标基迹配对 $P \mapsto \Tr(\rho P)$ 都会在正交投影算子格上诱导出一个归一化、可加且实非负的概率权重。要反过来确立“唯一性方向”（即任何满足可加性公理的概率赋值必取迹配对形式），则依赖数学物理中的两条经典逆定理及其精确的维数与定义域前提；其中有限维效应上的情形已冻结为 [@thm-busch-effect-density]：
 
 - **格里森定理**（A. M. Gleason, *Measures on the closed subspaces of a Hilbert space*, J. Math. Mech. **6**, 885–893, 1957）：要求可分希尔伯特空间维数满足 **$\dim\mathcal{H} \ge 3$**。在此维数前提下，闭子空间（正交投影）格上的任何可数可加概率测度 $\mu$（在有限维 $3 \le \dim\mathcal{H} < \infty$ 下归约为两两正交投影上的有限可加性），必唯一表示为某个半正定迹一算子 $\rho$ 的玻恩迹配对 $\mu(P) = \Tr(\rho P)$。**当 $\dim\mathcal{H} = 2$ 时，格里森定理在纯正交投影格上不成立**：因为二维空间中的每组正交基仅含两个对跖秩一投影 $\{P_{\vv{n}}, P_{-\vv{n}}\}$，不同测量轴之间不存在公共投影元来传递跨基连锁约束，故在 $S^2$ 上可以构造出无穷多满足逐对对跖之和为 $1$ 的非玻恩标架函数（frame functions）。
-- **布施定理**（P. Busch, *Quantum states and generalized observables: A simple proof of Gleason's theorem*, Phys. Rev. Lett. **91**, 120403, 2003）：若将可加性定义域从尖锐正交投影扩展到全体正半定广义测量效应（POVM 效应元 $0 \le E_i \le I$，要求每当 $\sum_i E_i \le I$ 时满足可加性 $\mu(\sum_i E_i) = \sum_i \mu(E_i)$），则对**一切维数 $\dim\mathcal{H} \ge 2$**（包含单量子比特 $\dim\mathcal{H} = 2$）唯一性全面恢复：任何广义概率测度必唯一表示为 $E \mapsto \Tr(\rho E)$。
+- **布施定理**（P. Busch, *Quantum states and generalized observables: A simple proof of Gleason's theorem*, Phys. Rev. Lett. **91**, 120403, 2003）：若将可加性定义域从尖锐正交投影扩展到全体正半定广义测量效应（POVM 效应元 $0 \le E_i \le I$，要求每当 $\sum_i E_i \le I$ 时满足可加性 $\mu(\sum_i E_i) = \sum_i \mu(E_i)$），则对**一切维数 $\dim\mathcal{H} \ge 2$**（包含单量子比特 $\dim\mathcal{H} = 2$）唯一性全面恢复：任何广义概率测度必唯一表示为 $E \mapsto \Tr(\rho E)$。有限维情形已冻结，就是 [@thm-busch-effect-density]，它只要求有限可加；仍属文献结果的是无穷维希尔伯特空间上的形式，那里要求可数可加。
 
-本书所钉仓库聚焦于显式有限维矩阵构造与建设性归约（[@thm-born-probability-skeleton]、[@thm-born-modulus-square] 与 [@thm-rank-one-born-pairing]），并冻结了由最小确认出发的结构分解 [@thm-positive-dual-generation]；上述两条逆向唯一性定理由经典文献给出，不列入本书的 Lean 验证声明账本。
+本书所钉仓库聚焦于显式有限维矩阵构造与建设性归约（[@thm-born-probability-skeleton]、[@thm-born-modulus-square] 与 [@thm-rank-one-born-pairing]），并冻结了由最小确认出发的结构分解 [@thm-positive-dual-generation] 与有限维布施定理 [@thm-busch-effect-density]；格里森定理与无穷维的布施定理由经典文献给出，不列入本书的 Lean 验证声明账本。
 :::
 
 ::: {.viz src="pairwise-shutter" height="560"}

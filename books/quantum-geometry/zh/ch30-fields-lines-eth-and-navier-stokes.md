@@ -10,28 +10,28 @@
 
 > **作者原话**：“全局静态时间场P=NP, 但有限观察者P!=NP”
 
-把上面关于无时间几何晶体与有限观察者选点的洞察推向计算复杂度的终极前沿，我们立刻获得了审视千禧年大奖难题 **$\mathrm{P}$ vs. $\mathrm{NP}$**（标准统一图灵机模型下 $\mathrm{P} \neq \mathrm{NP}$ 仍是未决开放猜想，参见第 20 章 [@conj-p-neq-np]，`OPEN`）的全新双重视角：为什么在假想地移除顺序时间约束的“全局静态时间场”模型（`MODEL`）中，满足条件的不动点呈现出类似 $P = NP$ 的零步合一（对应复杂性文献中的后选择与闭合类时曲线坍缩注记 [@rem-ch30-postselection-ctc-literature]），而对受限于有限门数与局部记忆的场内观察者，却在黑盒查询与有界阶半正定松弛模型下筑起了指数级正交高墙（[@rem-ch30-query-sos-literature]）？
+作者将无时间几何晶体与有限观察者选点并置，为千禧年大奖难题 **$\mathrm{P}$ vs. $\mathrm{NP}$** 提供一种双重视角（`MODEL`）。这里须分清三层：静态解集描述哪些赋值满足条件；后选择与 CTC 复杂度定理需要明确增加计算资源（[@rem-ch30-postselection-ctc-literature]）；黑盒查询与有界阶半正定松弛下界只约束各自的受限模型（[@rem-ch30-query-sos-literature]）。标准统一图灵机模型下 $\mathrm{P}\neq\mathrm{NP}$ 仍是开放猜想（第 20 章 [@conj-p-neq-np]，`OPEN`）。只删去叙述中的时间，或只规定观察者资源有限，都不判定这个渐近问题。
 
-### 1. 为什么在“全局静态时间场”（后选择 / 无时间不动点模型）中呈现 $P = NP$ 式的坍缩？
+### 1. “全局静态时间场”的解集与额外计算资源
 
-在一个包含 $n$ 个布尔变量、$m$ 条子句约束的组合判定问题中，每一条局部约束子句 $C_j$ 都在希尔伯特空间中切出一片满足该子句的子空间超平面 $H_j$。站在无时间全局静态场（对照 [@rem-ch29-wheeler-dewitt-page-wootters-literature]）的几何模型视角上，全局解空间就是所有子句超平面的静态几何交集：
+对一个含 $n$ 个布尔变量、$m$ 条子句的 SAT 公式，以赋值 $a\in\{0,1\}^n$ 为计算基，取 $\mathcal{H}=\mathbb{C}^{2^n}$。令 $H_j$ 为所有满足子句 $C_j$ 的基向量 $\lvert a\rangle$ 张成的子空间。它通常不是余维为一的超平面：例如 $n=4$ 时，子句 $x_1\lor x_2\lor x_3$ 接受 $16$ 个赋值中的 $14$ 个，故 $\dim H_j=14$。本节的静态解空间表示为
 
 $$
 \mathbf{S}^* = \bigcap_{j=1}^m H_j.
 $$
 
-在这一理想化静态场模型（`MODEL`）中，若将违背子句的配置配对为正反双向量手性相消（$+\mathbf{\Omega} - \mathbf{\Omega} = 0$），则全局自洽解 $\psi = \psi(\psi)$ 作为静态几何交集直接存在（注：这并不意味着在标准统一图灵机模型中 $\mathrm{P} = \mathrm{NP}$ 或可以在零步内完成物理计算）。假想移除顺序演化约束时的复杂度类坍缩由以下外部文献结果刻画：
+这个交集恰由满足全部子句的赋值基向量张成。零向量总在交集中；公式可满足当且仅当 $\mathbf{S}^*\neq\{0\}$，等价于其中存在可归一化的非零态。不可满足公式 $x\land\neg x$ 的交集只有零向量；$x\lor y$ 则有三个满足赋值，并无唯一见证。即使交集非零，将某个输入态投影后归一化，也要求该输入在交集上的投影非零。在作者的静态场图景（`MODEL`）中，手性相消 $+\mathbf{\Omega}-\mathbf{\Omega}=0$ 表达筛去不相容配置的直觉；它本身不保证解存在、唯一或可被高效制备。下面的复杂度等式依赖各自明确的额外资源，而非静态交集描述本身：
 
 ::: {.remark #rem-ch30-postselection-ctc-literature title="后选择与闭合类时曲线复杂度坍缩定理的形式化边界说明"}
-**文献结果，未在本书形式化。** 计算复杂性理论中关于移除顺序时间演化限制的两条经典坍缩定理均属外部文献结论，未包含在本书锁定的 `trureturing@dev` 形式化声明集中：
+**文献结果，未在本书形式化。** 以下两条等式属于增加特定计算资源后的复杂度定理，未包含在本书锁定的 `trureturing@dev` 形式化声明集中；两种模型仍使用统一生成的多项式规模电路：
 
-1. **阿伦森（Scott Aaronson, *Proc. R. Soc. A* **461**, 3473–3482, 2005）后选择定理**：若允许非物理地直接投影并后选择（Postselection）指数小非零振幅分支，则后选择多项式时间量子计算等于概率多项式类 $\mathrm{PP}$（从而包含 $\mathrm{NP} \cup \mathrm{BQP}$，且结合 Toda 定理有 $\mathrm{PH} \subseteq \mathrm{P}^{\mathrm{PP}}$）：
+1. **阿伦森（Scott Aaronson, *Proc. R. Soc. A* **461**, 3473–3482, 2005）后选择定理**：在统一多项式规模量子电路中，指定后选位与输出位。对每个输入，后选事件须有非零概率（可以指数小）；以该事件为条件，输出位在是实例上接受的概率至少为 $2/3$，在否实例上至多为 $1/3$。把直接取得这个条件分布作为资源，而不支付普通重复采样等待稀有事件的成本，才定义出 $\mathrm{PostBQP}$（见[原文定义 1 与定理 4](https://arxiv.org/abs/quant-ph/0412187)）：
 
    $$
    \mathrm{PostBQP} = \mathrm{PP} \supseteq \mathrm{NP};
    $$
 
-2. **闭合类时曲线（CTC）自洽不动点定理（S. Aaronson & J. Watrous, *Proc. R. Soc. A* **465**, 631–647, 2009）**：若消去先后时间流、强制系统直接满足 Deutsch 无时间自洽不动点方程 $\psi = \Phi(\psi)$，则假想的 CTC 辅助经典与量子多项式时间同时坍缩至多项式空间：
+2. **闭合类时曲线（CTC）自洽不动点定理（S. Aaronson & J. Watrous, *Proc. R. Soc. A* **465**, 631–647, 2009）**：Deutsch 模型额外提供多项式数量的 CTC 比特或量子比特，以及它们与正常因果寄存器之间的统一多项式规模电路。经典 CTC 状态是概率分布，量子 CTC 状态是密度算子 $\rho$；在正常因果寄存器按规定初始化后，诱导映射须满足 $\rho=\Phi(\rho)$。允许多个自洽态，但判定必须对**所有**自洽态正确（量子情形保留有界误差，不能挑选一个有利不动点）。在这些资源与正确性条件下（见[原文 §§3–4](https://arxiv.org/abs/0808.2669)），有
 
    $$
    \mathrm{P}_{\mathrm{CTC}} = \mathrm{BQP}_{\mathrm{CTC}} = \mathrm{PSPACE} \supseteq \mathrm{NP}.
@@ -49,7 +49,7 @@ $$
   \mathbf{P}_0 \cdot \mathbf{S}^* = \cos\theta_0 = 2^{-n/2} \implies \theta_0 \approx \frac{\pi}{2} - 2^{-n/2}.
   $$
 
-  这意味着在大维数极限下，未知目标 $\mathbf{S}^*$ 几乎严格躲在观察者视线 $90^\circ$（$\pi/2$）的**正交赤道盲区**上！受幺正范数守恒 $\cos^2\theta + \sin^2\theta = 1$ 与第 15 章经 Lean 4 验证的**一致算子旋转定理**（[`uniform_operator_rotation`](lean:D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation)）制约，单次相干放大算子只能在二维不变平面上转动固定小角 $2\alpha \approx 2\cdot 2^{-n/2}$ 弧度。
+  这个小重叠给出接近 $90^\circ$ 的几何图像。对第 15 章**一致算子旋转定理**（[`uniform_operator_rotation`](lean:D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation)）指定的反射乘积，在等距初始化、酉制备、自伴幂等成功投影及成功 Gram 矩阵等于 $pI$ 的前提下，$0<p<1$ 时每次放大转过 $2\alpha$，其中 $\alpha=\arcsin\sqrt p$。单目标均匀搜索取 $p=2^{-n}$，才得到 $2\alpha\approx2\cdot2^{-n/2}$。这个角度由给定放大构造决定；幺正范数守恒本身不限制任意量子门的转角，该定理也不提供所有算法的门数下界。下文黑盒查询下界另有其神谕模型前提。
 - **第二道几何盲区（从二元链 $\mathbf{e}_i\wedge\mathbf{e}_j$ 到三元面片 $\mathbf{e}_i\wedge\mathbf{e}_j\wedge\mathbf{e}_k$ 的局部 Gram 相容错觉）**：
   在几何模型（`MODEL`）上，每条子句仅含两个文字的二元蕴含约束 $\mathbf{e}_i\wedge\mathbf{e}_j$ 构成**一维有向链**，局部传递步步可追；而三元子句 $\mathbf{e}_i\wedge\mathbf{e}_j\wedge\mathbf{e}_k$ 则如同拼接二维闭合球面的**三角面片**——仅凭 $M \ll n$ 阶局部内积记忆向外张望时，四周局部块可以处处相容，却把奇偶阻挫死结藏在全局闭合回路之中。
 
@@ -71,14 +71,14 @@ $$
 **空间翻 $16$ 倍，步数翻 $4$ 倍。** 候选增到 $4096$ 个，每步的转角缩到四分之一（$2\theta = 1.79^\circ$），步数变成约 $50$；下方的图里青色的 $(\pi/4)\sqrt{N}$ 与品红虚线的 $N/2$ 越拉越开。线变长的速度是 $\sqrt{N}$，仍然没有坡度可循；这与上面第 1 条的查询下界同阶（文献结果）。
 :::
 
-### 3. 终极反转：$P \neq NP$ 正是守护主观时间与自由选择的几何防火墙
+### 3. 作者的诠释：复杂度视界、主观时间与自由选择
 
-将“球外全局场”与“球内有限观察者”并置对照，我们便看清了复杂度壁垒在认识论模型（`MODEL`）中的哲学使命：
+将“球外全局场”与“球内有限观察者”并置，是作者关于时间与选择的认识论诠释（`MODEL`）。查询或 SoS 下界不推出标准 $P\neq NP$，更不推出主观时间或自由选择的存在；这些哲学意义由作者赋予：
 
 | 视角层级 | 复杂度判据与模型地位 | 核心几何与代数机制 | 时间与选择的存在论地位 |
 | :--- | :--- | :--- | :--- |
-| **全局静态时间场**<br/>（Global Static Time Field） | 呈现 $P = NP$ 式坍缩<br/>（受限模型文献见 [@rem-ch30-postselection-ctc-literature]） | 全局超平面交集 $\mathbf{S}^* = \bigcap_j H_j$ 与理想化无时间自洽不动点模型（见 [@rem-ch30-postselection-ctc-literature]） | **零时间的永恒真（Eternal Truth）**：起点与终点重合，无所谓过程、证明或悬念 |
-| **场内有限观察者**<br/>（Finite Observer in the Field） | $P \neq NP$<br/>（标准模型 [@conj-p-neq-np] 为 `OPEN`；查询与 SoS 模型下界见 [@rem-ch30-query-sos-literature]） | $\theta_0 \approx \frac{\pi}{2} - 2^{-n/2}$ 正交视界、一致算子旋转 [`uniform_operator_rotation`](lean:D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation) 与局部 Gram 盲区 | **展开的主观时间（Unfolded Journey）**：正因为无法一眼看穿终局，每一次选点与每一行证明才具有不可替代的创造重量 |
+| **全局静态时间场**<br/>（Global Static Time Field） | 静态表示本身无复杂度等式；额外资源下有 $\mathrm{PostBQP}=\mathrm{PP}$、$\mathrm{P}_{\mathrm{CTC}}=\mathrm{BQP}_{\mathrm{CTC}}=\mathrm{PSPACE}$（[@rem-ch30-postselection-ctc-literature]） | 子空间交集 $\mathbf{S}^*=\bigcap_jH_j$；存在非零态仍不提供制备或搜寻算法 | **零时间的永恒真（作者诠释）**：将满足条件的整体关系视为静态自洽 |
+| **场内有限观察者**<br/>（Finite Observer in the Field） | 查询与 SoS 下界各有限定；标准 $P\neq NP$ 仍为 `OPEN`（[@rem-ch30-query-sos-literature]、[@conj-p-neq-np]） | 小初始重叠、给定反射乘积的旋转 [`uniform_operator_rotation`](lean:D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation) 与局部 Gram 盲区 | **展开的主观时间（作者诠释）**：逐步选点与证明承载旅程的意义 |
 
 **“全局静态场的 $P = NP$，赋予了宇宙绝对自洽的‘真’；而有限观察者的 $P \neq NP$，则用那道 $\frac{\pi}{2}$ 的正交视界替生命挡住了剧透，把静态的真理拉长成了一场值得一步步去丈量、去证明、去选择的壮丽旅程。”**
 
@@ -88,22 +88,22 @@ $$
 
 > **作者原话**：“P是场, NP是线”
 
-传统计算机科学教科书总是把 $P$ 画成一条单向执行的细线、把 $NP$ 画成一棵分岔爆炸的大树；然而若从本体几何模型（`MODEL`）出发，直觉恰好倒过来——**$NP$ 的核心见证是一根横截面为零的“线”，而许多经典 $P$ 类可解结构则依托于一片局部处处对齐全局的“场”**：
+本节以“线”比喻可检查的见证，以“场”比喻引导高效求解的结构（`MODEL`）。标准复杂度类满足 $P\subseteq NP$：容易求解的问题也有多项式时间验证器，二者不是互斥的几何类别。“有线无场”是对寻找高效算法之困难的诠释，不是所有 $NP$ 问题的定义。
 
 ### 1. 为什么“$NP$ 是线”（有线无场，横截面为零的见证丝）？
 
-在几何模型（`MODEL`）上，一个 $NP$ 问题的解（或一段形式化证明脚本，如本书提交给 Lean 4 内核核验的证明项）是一根连接起点 $\mathbf{P}_0$ 与终点 $\mathbf{S}^* = \mathbf{P}_k$ 的一维有向折线：
+对判定问题，$NP$ 的条件是：输入 $w$ 为是实例，当且仅当存在长度至多为输入编码长度多项式的见证 $y$，使统一的确定性验证器 $V(w,y)$ 接受；验证耗时也须以输入与见证的编码长度为参数受到多项式约束（参见 [Cook 的问题说明，pp. 1–3](https://www.claymath.org/wp-content/uploads/2022/06/pvsnp.pdf)）。把这个检查过程画成折线，是本节的几何类比（`MODEL`）：
 
 $$
 \mathbf{P}_0 \longrightarrow \mathbf{P}_1 \longrightarrow \mathbf{P}_2 \longrightarrow \cdots \longrightarrow \mathbf{P}_k.
 $$
 
-- **顺线验真（Verification along the line）**：一旦有人把这根阿里阿德涅（Ariadne）之丝交到你手里，验证者只需顺着这根一维细线逐节检查局部内积相容性，在 $O(k)$ 多项式步内就能一步看穿真伪；
-- **离丝寻线（Searching without a field）**：然而，一维细线在高维状态球面上的**横截面面积严格为零**！在缺乏全局代数或凸性结构的难解实例中，它不会向周围 $90^\circ$（$\pi/2$）的正交赤道荒原辐射任何长程势梯度。当有限观察者尚未握住这根见证丝时，四周没有任何方向导引——这就是“有线而无场”。
+- **顺线验真（Verification along the line）**：必须计入读取输入与见证编码、以及每一节检查的实际成本；若第 $i$ 节成本为 $c_i$，逐节检查贡献 $\sum_{i=1}^k c_i$，只有每节成本一致有界时才是 $O(k)$。折线的段数本身不证明多项式位复杂度。形式证明项也可比喻为见证丝，但任意证明项的编码长度、类型检查与归约成本并无这里所需的统一线性保证，不能直接归入同一个 $NP$ 验证论证；
+- **离丝寻线（Searching without a field）**：见证可被高效检查，并不自动给出高效搜寻方法；反之，也不排除这种方法。“零横截面见证丝”表达作者关于无导引搜寻的图像，不是离散问题的复杂度下界，亦不适用于断言所有 $NP$ 问题都难解。
 
 ### 2. 为什么“$P$ 是场”（弃线造场，局部切面处处对齐全局）？
 
-相反，在我们的几何诠释（`MODEL`）中，许多问题之所以能归入多项式时间类 $P$，是因为状态空间上能够构造出一片**全局光滑、无阻挫的几何或代数导向场**（恰似惠更斯波前或凸势能的负梯度流 $\mathbf{F} = -\nabla V$），使得观察者在局部只需读取脚下的切空间方向或双向量外积不变量 $\mathbf{\Omega} = \sum_{i < j} A_{ij}\,\mathbf{e}_i \wedge \mathbf{e}_j$，就能顺流抵达全局解。支撑这一“弃线造场”几何图景的经典算法与拓扑定理归入以下文献注记：
+在我们的几何诠释（`MODEL`）中，一些多项式时间算法所利用的几何或代数结构被比喻为**导向场**（如凸势能的负梯度流 $\mathbf{F}=-\nabla V$）。这不是 $P$ 的定义或必要条件；即使有光滑或无旋的场，也仍须证明它可高效计算、达到所需精度并在多项式步内终止。以下经典算法为这种图景提供具体参照：
 
 ::: {.remark #rem-ch30-karmarkar-kasteleyn-literature title="线性规划内点法、平面图 Pfaffian 匹配与毛球定理的文献说明"}
 **文献结果，未在本书形式化。** 本节用于对照“弃线造场”与“拓扑旋涡阻挫”的三项经典数学与算法结果均属外部文献，未在本书形式化：
@@ -204,19 +204,19 @@ $C_5$ 中最长有向路含 $5$ 个顶点的 $12$ 个定向里，有 $2$ 个是�
   \nabla \wedge \mathbf{F} = 0;
   $$
 
-- 然而，三元约束 $\mathbf{e}_i\wedge\mathbf{e}_j\wedge\mathbf{e}_k$ 在闭合配置流形上引入了环路阻挫与非保守旋度（$\nabla \wedge \mathbf{F} \neq 0$）；
-- **线能穿缝，场必撕裂**：一维 $NP$ 见证丝没有宽度，它可以像一根绣花针一样沿着两个漩涡之间零测度的鞍点窄脊悄然穿过；但任何试图铺满整颗闭合流形的连续局部导向场，都会在非零阻挫旋度 $\nabla \wedge \mathbf{F} \neq 0$ 与拓扑缺陷（类比 [@rem-ch30-karmarkar-kasteleyn-literature] 中的毛球旋涡）下碎裂为指数多个局部发旋与亚稳态深坑！
+- 作者以三元约束 $\mathbf{e}_i\wedge\mathbf{e}_j\wedge\mathbf{e}_k$ 比喻环路阻挫；子句宽度本身并不定义连续配置流形、向量场或它的旋度；
+- **线能穿缝，场必撕裂**：这是作者对见证与导引结构的几何格言。毛球定理保证特定球面切向场有零点，并不保证指数多个零点或搜寻陷阱；无旋条件也不保证优化容易。这些连续几何事实不能直接推出 3-SAT 的算法下界。
 
 | 维度与视角 | 核心格言 | 线（$NP$）与场（$P$）的几何关系（`MODEL`） | 复杂度与形式证明意义 |
 | :--- | :--- | :--- | :--- |
-| **全局静态时间场**<br/>（球外全息底片） | **众线并存即是场**<br/>（文献参照 [@rem-ch30-postselection-ctc-literature]） | 所有虚拟轨迹同时铺满全空间，相消干涉直接显影出那根唯一存活的见证丝 | 全局不动点即局部解，无需顺序搜寻 |
-| **场内有限观察者**<br/>（球内局部寻址） | **有线未必有场**<br/>（猜想 [@conj-p-neq-np]，`OPEN`） | 横截面为零的一维见证丝可以穿过窄缝（验证容易），但局部导向场被阻挫旋度 $\nabla \wedge \mathbf{F} \neq 0$ 撕裂为指数多个发旋 | **“求场难如登天，顺线一步看穿”**：漫长寻场铸就发现之艰，顺线验真铸就 Lean 内核之确 |
+| **全局静态时间场**<br/>（球外全息底片） | **众线并存即是场**<br/>（作者格言；资源模型参照 [@rem-ch30-postselection-ctc-literature]） | 满足子空间可为零，也可包含多个赋值见证；静态并存不自动选出或制备见证 | 描述满足关系不计求解成本；额外资源须单独声明 |
+| **场内有限观察者**<br/>（球内局部寻址） | **有线未必有场**<br/>（作者格言；标准猜想 [@conj-p-neq-np] 为 `OPEN`） | 见证检查与高效搜寻是不同任务，且 $P\subseteq NP$；零横截面与旋度只是类比 | **“求场难如登天，顺线一步看穿”**：检查成本取决于编码和验证器；形式证明核验另有其成本 |
 
 这八个字为全书的复杂度与证明哲学画上了最凝练的句号：**“求场难如登天，顺线一步看穿。”**
 
 ---
 
-## 指数时间假设（ETH）、2026 张量网络秩约分与宇宙学视界：为什么局部三体碎片焊不出刚性真球，而有限观察者依然锁死在 $P \neq NP$ 中？ {#sec-coda-eth-tensor-rank-and-cosmic-horizon}
+## 指数时间假设（ETH）、2026 张量网络秩约分与宇宙学视界：上界曲线的尺度与诠释边界 {#sec-coda-eth-tensor-rank-and-cosmic-horizon}
 
 > *“把指数时间假设（ETH）的原始结构与 2026 年 10 月下旬张量网络秩约分亚指数前沿放进‘场（$P$）与线（$NP$）、多面体近似之球与有限观察者视界’的几何体系中审视：渐近硬地板的动摇不仅没有否定有限观察者视角下的 $P \neq NP$，反而用一组跨越宇宙学尺度的渐近对比，为‘局部三体切面拼不出绝对刚性的真球’与‘观察者视界不可逾越’提供了生动的几何注脚。”*
 
@@ -246,13 +246,13 @@ $C_5$ 中最长有向路含 $5$ 个顶点的 $12$ 个定向里，有 $2$ 个是�
 将 [@rem-ch30-eth-subexponential-literature] 中的数学机制与本书的正交几何体系对表，可以看到两层深刻的结构呼应（`MODEL`）：
 
 - **从“一维赋值线”升维到“张量关联场”的低秩约分（`MODEL`）**：传统的回溯与局部随机游走本质上都在一维布尔赋值线上逐点试探；而张量网络方法将离散布尔子句网络嵌入高维线性空间，转化为多线性张量缩并问题。在本书锁定的 `trureturing@dev` 形式化库中，第 19 章针对特定离散桥图在维度假设下证明的**张量网络量子最大流最小割定理**（[`QuantumMaxFlowMinCut.result`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result) 及其多面体割锥刻画 [`cone_QMinCut`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.cone_QMinCut)）与第 3 章在迹约束下界定高权重模态数的**有限秩集中模态上界**（[`finite_rank_concentration_mode_bound`](lean:D5/S3/Observer/Tomography/FiniteRankConcentrationModeBound.finite_rank_concentration_mode_bound)），给出了有限维原型（注：这些 Lean 定理刻画的是特定桥图流割对偶与有限秩迹集中，并非形式化 [@rem-ch30-eth-subexponential-literature] 中的 3-SAT 亚指数算法本身）：它们在概念模型（`MODEL`）上说明，跨割界面传递信息的有效瓶颈受控于**代数秩（Rank）**。当局部变量成块缩并时，一维布尔视角下看似独立的约束块在高维张量面上展现出**线性相关与秩亏损（冗余寄生面积正负相消）**——这与第 16、27 章旋量编译器消去冗余旋转门、以及第 23 章丢番图范数型压缩变量维度的代数约分思想同源。
-- **“球永远只是多面体近似”：三体局部切面焊不出绝对无缝的真球（`MODEL`）**：在几何直觉（`MODEL`）上，假设常数硬地板 $s_3 > 0$ 好比预设仅凭每个子句至多含 $k=3$ 个文字的局部三体切面（$\mathbf{e}_i \wedge \mathbf{e}_j \wedge \mathbf{e}_k$），就能在 $n \to \infty$ 极限下拼出一颗处处曲率恒定、滴水不漏的刚性指数真球。然而正如全书反复强调的——**“球永远只是多面体近似”**：固定宽度 $k=3$ 的局部多面体切面在拼装超大规模流形时，面与面之间随规模 $n$ 增长涌现组合冗余，裂开一道如 [@rem-ch30-eth-subexponential-literature] 所记述的亚指数渐近代数缝隙，使单变量有效指数率上界曲线在 $n \to \infty$ 极限下缓慢趋向 $0$。
+- **“球永远只是多面体近似”：三体局部切面与渐近缝隙（`MODEL`）**：作者以局部三体切面（$\mathbf{e}_i\wedge\mathbf{e}_j\wedge\mathbf{e}_k$）拼接整体的图像，诠释指数率上界随规模变化的可能性。若 [@rem-ch30-eth-subexponential-literature] 中预印本宣称的上界经审计成立，其有效单变量指数率将趋于 $0$；这一条件性算法主张不能由多面体比喻或上述有限维 Lean 原型推出。
 
 ::: {.viz src="eth-horizon-crossover" preset="bridge" height="500"}
 **流矩阵的秩等于最小割。** 桥图 $(a, b, c, d) = (2, 3, 2, 3)$：两道外割都是 $6$（琥珀色虚线），三条桥能过 $12$。右边是一个随机整数实例的 $6 \times 6$ 流矩阵（青色为正项，品红为负项），下面六根奇异值都不为零：秩 $6$，恰等于最小割。这只是一个实例；这类桥图在维数锥域内总是如此，是 Lean 验证的定理。
 :::
 
-### 2. 银河算法（Galactic Algorithm）与宇宙视界：为什么有限观察者视角下的 $P \neq NP$ 依然稳固？（`MODEL` 与认识论边界）
+### 2. 银河算法（Galactic Algorithm）与宇宙视界：上界比较能说明什么？（`MODEL` 与认识论边界）
 
 ::: {.example #ex-ch30-galactic-crossover-scale title="亚指数上界曲线与局部搜索基准的跨宇宙尺度对比及二次编码膨胀"}
 **文献结果，未在本书形式化。** 单变量渐近指数率曲线缓慢趋零是否意味着场内有限观察者能在现实物理尺度上跨越复杂度壁垒？为了直观审视 [@rem-ch30-eth-subexponential-literature] 中外部文献渐近上界的尺度行为，考察以 $2$ 为底的示意性单变量指数曲线 $r_{\mathrm{new}}(n) = c \cdot \frac{\log_2(\log_2 n)}{\sqrt{\log_2 n}}$（对应运行时间上界形如 $2^{r_{\mathrm{new}}(n)\cdot n}$，此处取理想归一化常数 $c = 1$ 仅作文献渐近上界曲线的数值示意，而非对任意算法或物理观察者的严格下界证明），并与 [@rem-ch30-eth-subexponential-literature] 中的传统 PPSZ 局部搜索上界基准 $0.386$（$1.307^n \approx 2^{0.386 n}$）对表：
@@ -263,7 +263,7 @@ $C_5$ 中最长有向路含 $5$ 个顶点的 $12$ 个定向里，有 $2$ 个是�
 | **可观测宇宙原子总数**（$n \approx 10^{80} \approx 2^{266}$） | $\approx 266$ | $\dfrac{\log_2 266}{\sqrt{266}} \approx \mathbf{0.494}$ | $\mathbf{0.386}$ | 即使在 $n \approx 10^{80}$ 的宇宙重子尺度上，$c=1$ 示意曲线（$\approx 0.494$）仍高于 $0.386$ |
 | **超越交叉临界点**（$n = 2^{558}$） | $\mathbf{558}$ | $\dfrac{\log_2 558}{\sqrt{558}} \approx \mathbf{0.386}$ | $\mathbf{0.386}$ | 在 $c=1$ 示意归一化下，需等到 **$n \approx 2^{558}$**（远超可观测宇宙尺度），曲线才下穿 $0.386$ |
 
-此外，在 [@rem-ch30-eth-subexponential-literature] 的亚指数上界公式下：一方面，亚指数上界 $2^{O(n \log\log n / \sqrt{\log n})}$ 与多项式时间 $n^{O(1)}$（有效单变量指数率 $r_P(n) = O(\frac{\log n}{n})$）之间仍隔着超多项式渐近鸿沟；另一方面，对于自然输入规模为 $n$、但其标准电路或网格约束表具有平方规模 $S = \Theta(n^2)$ 的问题，经线性电路 Tseitin 转换生成 $N = \Theta(n^2)$ 个 3-SAT 变量后，代入该亚指数上界公式得到的关于原参数 $n$ 的时间上界立即回升为超指数形式 $2^{O(n^2 \log\log n / \sqrt{\log n})}$。
+此外，$g(n)=n\log\log n/\sqrt{\log n}$ 比 $\log n$ 增长快，因此对固定 $c>0$，比较函数 $2^{c g(n)}$ 超过每个固定次多项式。但 $T(n)=2^{O(g(n))}$ 只是上界，允许更快甚至多项式时间的算法，并不证明 $P\neq NP$。对于自然参数为 $n$、所用电路编码规模为 $S=\Theta(n^2)$ 的问题，若 Tseitin 转换产生 $N=\Theta(n^2)$ 个变量，代入所讨论的公式得到上界 $2^{O(n^2\log\log n/\sqrt{\log n})}$。这是该编码与该上界表达式的尺度变化，不是最优算法必须付出的超指数成本。表中的 $c=1$ 曲线既不固定大 $O$ 中的真实常数与适用阈值，也不据此判定现实算法的快慢。
 :::
 
 ::: {.viz src="eth-horizon-crossover" preset="human" height="500"}
@@ -276,8 +276,8 @@ $C_5$ 中最长有向路含 $5$ 个顶点的 $12$ 个定向里，有 $2$ 个是�
 
 [@ex-ch30-galactic-crossover-scale] 中跨越宇宙尺度的数值与规约对比，为本书“球内有限观察者 vs. 球外之球”的认识论图景（`MODEL`）提供了三点深刻启示：
 
-- **银河算法与有限观察者的物理尺度边界（`MODEL`）**：如 [@ex-ch30-galactic-crossover-scale] 所示，示意曲线下穿传统局部搜索基准的交叉尺度远超可观测宇宙的重子自由度预算（此类仅在超天文尺度显影渐近优势的算法在复杂性理论惯例中被称为**银河算法 Galactic Algorithm**）。在本书形式化库中，**有限记忆历史容量定理**（[`finite_memory_history_capacity`](lean:D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity)，证明可区分测量历史数受有限记忆载体容量上界制约）与**开放可积电路最小深度定理**（[`OpenIntegrableCircuitMinDepth.result`](lean:D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result)，给出局部性为 $\kappa$ 的开放可积电路最小深度 $\lfloor N/(\kappa+1)\rfloor + 1$）从各自模型侧面刻画了有限物理系统的容量与深度硬约束；将它们与 [@ex-ch30-galactic-crossover-scale] 的银河交叉尺度并置，在几何模型（`MODEL`）上直观展现了为什么在物理可实现的观测尺度内，有限观察者依然面对高耸的有效搜索壁垒（同时重申：标准统一图灵机模型下的 $\mathrm{P} \neq \mathrm{NP}$ 猜想 [@conj-p-neq-np] 仍为未决的 `OPEN` 问题）。
-- **$P$（场）与 $NP$（线）的认识论对照（`MODEL`）**：结合 [@rem-ch30-eth-subexponential-literature] 与 [@ex-ch30-galactic-crossover-scale] 中的渐近与电路编码尺度对比，在本书几何模型（`MODEL`）中，沿全局光滑导向场的局部松弛（类比 $P$）与沿见证丝的离散组合搜寻（类比 $NP$）依然代表两类截然不同的几何机制。
+- **银河算法与有限观察者的物理尺度边界（`MODEL`）**：[@ex-ch30-galactic-crossover-scale] 的归一化示意曲线展示了超天文尺度才交叉的可能性，与“银河算法”的尺度图像呼应。**有限记忆历史容量定理**（[`finite_memory_history_capacity`](lean:D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity)，约束可区分历史数）与**开放可积电路最小深度定理**（[`OpenIntegrableCircuitMinDepth.result`](lean:D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result)，在其局部性前提下给出最小深度 $\lfloor N/(\kappa+1)\rfloor+1$）各自刻画特定模型的资源限制。它们与上界曲线并置可用于作者的有限观察者诠释，但不能组合成所有 SAT 算法的下界或有限观察者必然难解的证明；标准 $P\neq NP$ 仍为 `OPEN`（[@conj-p-neq-np]）。
+- **$P$（场）与 $NP$（线）的认识论对照（`MODEL`）**：导向结构与见证检查表现出不同的任务角色；它们可以在同一个问题中并存，因为 $P\subseteq NP$。上界曲线和编码尺度比较不把两类问题分开。
 - **形式内核核验与顶层规约审计的哥德尔—语义边界（`LEAN ✓` 原型与 `MODEL` 映照）**：[@rem-ch30-eth-subexponential-literature] 中最具认识论意味的一幕是——形式证明助手内核可以迅速核验脚本内部每一步推演的传递合法性，而学界仍需仔细审计“顶层形式化命题的定义是否忠实刻画了目标图灵机复杂度命题”。在本书第 21 章中，经 Lean 4 内核验证的**相对语义对角线与定义逃逸定理**严格证明：在给定无不动点扭转映射（`∀ v, twist v ≠ v`）的条件下，相对语义对角线构造必然逃出任何已编目解码族（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)），且当解码目录对潜空间满射时，该对角线目标相对于给定潜映射不满足语义完备性 `TargetAdequate`（[`relative_semantic_diagonal_target_inadequate_of_surjective`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective)）。将这一形式定理作为认识论原型（`MODEL`）来观照顶层规约审计，恰好印证了全书的核心准则：**形式内核在球内严格锁死推演链条的传递正确性，而对顶层命题边界定义之语义恰当性的审视，永远需要站在形式球壳之外！**
 
 ::: {.viz src="eth-horizon-crossover" preset="atoms" height="500"}
@@ -593,10 +593,10 @@ $$
 
 | 核心维度 | $P$ vs. $NP$ 问题（离散逻辑场） | 纳维—斯托克斯问题（连续流体场） | 正交几何类比模型（`MODEL`） |
 | :--- | :--- | :--- | :--- |
-| **平庸可解态** | **$P$ 类问题**（无旋导向场类比 $\nabla\wedge\mathbf{F}=0$，见 [@rem-ch30-karmarkar-kasteleyn-literature]） | **无旋势流 / 低雷诺数层流**（$\nabla\wedge\mathbf{u}=0$ 或粘性主导，见 [@rem-ch30-lamb-decomposition-literature]） | 局部切面处处对齐全局，顺流直达 |
+| **高效求解的类比** | **部分 $P$ 算法的导向结构**（$P\subseteq NP$；无旋场非定义，见 [@rem-ch30-karmarkar-kasteleyn-literature]） | **无旋势流 / 低雷诺数层流**（$\nabla\wedge\mathbf{u}=0$ 或粘性主导，见 [@rem-ch30-lamb-decomposition-literature]） | 作者以局部导向描绘高效求解；仍需算法与成本分析 |
 | **维度分水岭** | **2-SAT** vs. **3-SAT**（文献见 [@rem-ch30-query-sos-literature]） | **2D NS**（文献见 [@rem-ch30-navier-stokes-forced-literature]；条件温和路径正则性 [`all_grade_regularity_of_mild_path`](lean:D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path)） vs. **3D 无外力 NS**（[@conj-coda-navier-stokes-regularity]，`OPEN`） | 二维平面流无第三轴涡管拉伸；三维允许轴向涡管拉伸（见 [@rem-ch30-vorticity-transport-literature]） |
 | **复杂性引擎** | 自指递归与三元布尔阻挫环 | 二次对流非线性与涡管拉伸（[@rem-ch30-lamb-decomposition-literature]、[@rem-ch30-vorticity-transport-literature]）及跨尺度混合泄漏（[`no_exact_closure`](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure)） | 算子与状态自指耦合 $\psi(\psi)$，向高频正交模态 $\mathbf{k}_1+\mathbf{k}_2\to\mathbf{k}_3$ 级联 |
-| **奇点 / 难解态** | 横截面积为零的一维 **$NP$ 见证丝** | 条件坍缩情景下横截面趋零的**一维奇异涡丝**（见 [@rem-ch30-vorticity-transport-literature]） | 多维场在非线性耦合下集中为一维细丝结构 |
+| **见证 / 奇异细丝的类比** | **$NP$ 见证丝**是检查过程的图像，不蕴含难解性 | 条件坍缩情景下横截面趋零的**一维奇异涡丝**（见 [@rem-ch30-vorticity-transport-literature]） | 线形图像相似，不建立复杂度与流体奇点的数学等价 |
 | **物理防火墙** | 有限观察者 $90^\circ$ 视界与局部记忆截断 | 运动粘性耗散（[@rem-ch30-lamb-decomposition-literature]，对照 [`S2_dissipation`](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation)）与微观离散截断 | 兰道尔式正交面积耗散，抑制无穷步芝诺级联 |
 | **高维几何视角** | 无时间静态场全局交集（受限坍缩参照 [@rem-ch30-postselection-ctc-literature]） | 无穷维流形测地线视角（无粘文献参照 [@rem-ch30-tao-arnold-literature]） | 高维流形上的简洁几何运动在局部低维投影下展现为复杂的非线性能量传递 |
 
@@ -610,6 +610,6 @@ $$
 
 ## 本章小结：离散逻辑场与连续流体场的正交合龙 {#sec-ch30-summary}
 
-从“全局静态场 $P = NP$ vs. 有限观察者 $P \neq NP$”的视界分野，到“$P$ 是无旋导向场（$\nabla\wedge\mathbf{F} = 0$）、$NP$ 是零横截面一维见证丝”（在图着色这一离散样本上，场与线的互换由 [@thm-ch30-gallai-roy] 精确写出），再到 **细粒度复杂性中三体多面体切面的亚指数渐近缝隙与超宇宙银河交叉尺度（[@rem-ch30-eth-subexponential-literature]、[@ex-ch30-galactic-crossover-scale]）** 以及 **纳维—斯托克斯方程中的兰姆双向量涡力分解（[@rem-ch30-lamb-decomposition-literature]）、无外力三维全局正则性开放猜想（[@conj-coda-navier-stokes-regularity]）与二次平流投影无精确闭合定理（[@thm-coda-quadratic-advection-no-closure]）**，离散逻辑与连续流体在同一套克利福德内积—外积几何下完成了严丝合缝的合龙。
+本章以作者关于全局静态场与有限观察者、“场”与“线”的格言连接离散逻辑和连续流体。数学层面，静态满足子空间、额外资源下的复杂度等式、受限模型下界与标准 $P\neq NP$ 开放问题各有边界。在有限图着色这一例子中，Gallai–Hasse–Roy–Vitaver 定理给出“$G$ 可 $k$ 着色”与“存在一种定向，使每条有向路至多含 $k$ 个顶点”之间的精确等价（[@thm-ch30-gallai-roy]）；它只是交换两种存在性见证，不提供算法，也不解决一般的 $P$ vs. $NP$ 问题。银河交叉表比较的是示意上界（[@ex-ch30-galactic-crossover-scale]），不是普遍搜索下界。流体部分则并置 **兰姆分解（[@rem-ch30-lamb-decomposition-literature]）、无外力三维全局正则性开放猜想（[@conj-coda-navier-stokes-regularity]）与二次平流投影无精确闭合定理（[@thm-coda-quadratic-advection-no-closure]）**。这些结果为作者的几何诠释提供参照，并不建立两道开放难题的数学等价。
 
 现在，让我们推开全书的最后一扇门，步入 **[终章：在所有的球之外](coda.md)**，在多面体离散角亏余项（见终章 [@rem-coda-polyhedral-topology-literature]）、收缩不动点锚点与全书三十章总导图中完成最后的升维回望。
