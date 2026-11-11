@@ -1899,6 +1899,87 @@
           "gid": "D5/S3/Zeros/ZetaIdentities.riemann_zeta_residue_one"
         }
       ]
+    },
+    {
+      "id": "blade-multiplication",
+      "code": "BLADE//XOR",
+      "title": "刀片乘法",
+      "title_en": "Multiplying blades",
+      "summary": "Cl(3,0) 的 8 块基刀片记成 3 位掩码，排成 8 × 8 的乘法表：乘积是哪一块只看两个掩码的异或，正负号只看排序时要交换几次。点表里的一格，舞台右边把这一乘积拆开：左右因子拼成一串，右因子逐个向左越过比它大的左因子，每交换一次两条线交叉一次、符号变一次；排好后同号相邻的一对按 eᵢ² = +1 抵掉，剩下的就是异或。e₂ · e₁ = −e₁₂ 交换一次；e₁₂ · e₁₂ = −1；伪标量 I₃ · I₃ 交换 0 + 1 + 2 = 3 次得 −1，I₃ 那一行与那一列逐格相同。只用两位（X、Z）时就是四个泡利字的乘法表，负号恰在左因子含 Z、右因子含 X 的四格，即合成律 D(a, b)·D(c, d) = (−1)^(bc)·D(a ⊕ c, b ⊕ d)。向量场景把 v = 3e₁ + 4e₂ + 12e₃ 自乘的九项逐一加进来：交叉项成对抵消，v² = 169，与 B(3, 4, 12)² = 169·I 一致。每一格都与 2 × 2 复矩阵的乘积核对。六张实验卡可以在第二十五章正文里单独引用。",
+      "summary_en": "The 8 basis blades of Cl(3,0), written as 3-bit masks, fill an 8 × 8 multiplication table: which blade the product is depends only on the XOR of the two masks, and its sign only on how many swaps sorting needs. Click a cell and the right of the stage takes that product apart: the factors are joined into one string, each right factor moves left past the larger left factors, every swap is two crossing lines and one sign flip, and once sorted each adjacent equal pair cancels by eᵢ² = +1, leaving the XOR. e₂ · e₁ = −e₁₂ takes one swap; e₁₂ · e₁₂ = −1; the pseudoscalar I₃ · I₃ takes 0 + 1 + 2 = 3 swaps and gives −1, and the row and the column of I₃ agree cell by cell. With two bits (X, Z) it is the multiplication table of the four Pauli words, with minus signs exactly where the left factor contains Z and the right one X: the composition law D(a, b)·D(c, d) = (−1)^(bc)·D(a ⊕ c, b ⊕ d). The vector scene adds the nine terms of v = 3e₁ + 4e₂ + 12e₃ squared one at a time: the cross terms cancel in pairs and v² = 169, in agreement with B(3, 4, 12)² = 169·I. Every cell is checked against 2 × 2 complex matrices. Each of the six experiment cards can be cited on its own from Chapter 25.",
+      "path": "blade-multiplication/",
+      "thumbnail": "blade-multiplication/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "克利福德代数",
+        "刀片",
+        "异或",
+        "泡利字",
+        "外尔位移",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Clifford algebra",
+        "Blades",
+        "XOR",
+        "Pauli words",
+        "Weyl displacements",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第二十五章 · 三比特刀片掩码、逆序符号与两比特辛泡利字",
+          "label_en": "Chapter 25 · Three-bit blade masks, inversion parity, and two-bit symplectic Pauli words",
+          "href": "../zh/ch25-rewriting-and-xor.html#sec-three-bit-blade-masks-and-symplectic-pauli",
+          "href_en": "../en/ch25-rewriting-and-xor.html#sec-three-bit-blade-masks-and-symplectic-pauli"
+        },
+        {
+          "label": "第二十五章 · 外尔对、反对易与无特征标定理",
+          "label_en": "Chapter 25 · The Weyl pair, anticommutation, and the no-character theorem",
+          "href": "../zh/ch25-rewriting-and-xor.html#sec-weyl-pair-no-character",
+          "href_en": "../en/ch25-rewriting-and-xor.html#sec-weyl-pair-no-character"
+        },
+        {
+          "label": "Lean 源码 · WeylDisplacement",
+          "label_en": "Lean source · WeylDisplacement",
+          "href": "{trureturing}/D5/S3/Quantum/Algebra/WeylDisplacement.lean"
+        },
+        {
+          "label": "Lean 源码 · QubitBloch",
+          "label_en": "Lean source · QubitBloch",
+          "href": "{trureturing}/D5/S3/Quantum/Measurement/Bloch/QubitBloch.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/FiniteDimensional.qubit_weyl_star"
+        },
+        {
+          "gid": "D5/S3/Quantum/FiniteDimensional.qubit_matrix_algebra_has_no_character"
+        },
+        {
+          "gid": "D5/S3/Quantum/QubitWitnesses.pauli_observables_have_no_common_eigenvector"
+        },
+        {
+          "gid": "D5/S3/Quantum/Measurement/Bloch/QubitBloch.B_formula_core"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/WeylDisplacement.displacement_mul"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/WeylDisplacementAdjoint.displacement_adjoint"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/WeylDisplacement.displacement_comm"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/WeylDisplacementConjugation.displacement_conjugation"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/WeylDisplacement.displacement_two_anticommute"
+        }
+      ]
     }
   ]
 }

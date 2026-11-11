@@ -145,6 +145,10 @@ $$
 | `6` | `110₂` | $e_2 e_3$ | $2$（双矢量） | $-1$ | $-e_2 e_3$ | $I_3 e_1 \leftrightarrow iX$ |
 | `7` | `111₂` | $I_3 = e_1 e_2 e_3$ | $3$（伪标量） | $-1$ | $-I_3$ | $i I_2$ |
 
+::: {.viz src="blade-multiplication" preset="square" height="500"}
+**对角线上的颜色。** 选中 e₁₂ · e₁₂：右栏里右边的 e₁ 越过左边的 e₂，两条品红的线交叉一次，随后 e₁e₁、e₂e₂ 各自抵成青色的 +1，结果是 −1。虚线框住的对角线上，1、e₁、e₂、e₃ 的格是青色（平方 +1），e₁₂、e₁₃、e₂₃、I₃ 的格是品红（平方 −1），与上表的“平方”一栏一致。
+:::
+
 在这套 3 比特编码下，$\mathcal{Cl}_{3,0}(\mathbb{R})$ 的全部乘法规则退化为两条极简的位运算定律（图 25 左栏）：
 
 1. **输出刀片掩码 = 按位异或（XOR）**：当左刀片 $E_{\mathrm{left}}$ 与右刀片 $E_{\mathrm{right}}$ 相乘时，同时出现在两边的基向量 $e_i$ 因 $e_i^2 = +1$ 成对湮灭，只出现一次的基向量保留下来。因此乘积刀片的 3 比特掩码精确等于
@@ -156,6 +160,14 @@ $$
    \operatorname{inv}(\mathrm{left}, \mathrm{right}) = \sum_{i=0}^{2} \bigl((\mathrm{left} \gg i)\,\&\,1\bigr)\cdot \operatorname{popcount}\bigl(\mathrm{right}\,\&\,(2^i - 1)\bigr), \qquad
    \operatorname{sign}(\mathrm{left}, \mathrm{right}) = (-1)^{\operatorname{inv}(\mathrm{left}, \mathrm{right})}.
    $$
+
+::: {.viz src="blade-multiplication" preset="e1e2" height="500"}
+**不用交换：e₁ · e₂ = +e₁₂。** 两块刀片各占一位，掩码 001₂ ⊕ 010₂ = 011₂；右栏的两枚因子已经按顺序排好，没有交叉的线，表里这一格是青色。
+:::
+
+::: {.viz src="blade-multiplication" preset="e2e1" height="500"}
+**交换一次，变一次号：e₂ · e₁ = −e₁₂。** 掩码的异或不变，仍是 011₂；右边的 e₁ 要越过左边的 e₂，两条品红的线交叉一次，符号变成 −，表里这一格是品红。
+:::
 
 请特别注意表中两处最容易混淆的对应关系，我们在代码与正文中将它们严格区分、保持百分之百自洽：
 
@@ -172,6 +184,10 @@ $$
   $$
   \operatorname{pauli}(1, 0) \cdot \operatorname{pauli}(0, 1) = e_1 e_2 = -\operatorname{pauli}(0, 1) \cdot \operatorname{pauli}(1, 0)!
   $$
+
+::: {.viz src="blade-multiplication" preset="pseudo" height="500"}
+**伪标量的平方：I₃ · I₃ = −1。** 三位全部抵掉（⊕ 那一行三个青色的叉）；右栏里品红的交叉共 0 + 1 + 2 = 3 次，是奇数，结果是 −1。紫色框住的 I₃ 那一行与那一列逐格相同：I₃ 与每块刀片对易。
+:::
 
 此外，对任意 $k$-阶刀片（$k = \operatorname{popcount}(m)$），把因子顺序完全颠倒的**逆序共轭（reversion）** $\widetilde{E}_m$ 需要做 $\frac{k(k-1)}{2}$ 次相邻对换，符号为 $(-1)^{k(k-1)/2}$：对 $k \in \{0, 1\}$ 为 $+1$，对 $k \in \{2, 3\}$ 为 $-1$。
 
@@ -241,6 +257,10 @@ $$
 **对易表。** 由辛配对 $bc - ad \bmod 2$：$X$ 与 $Z$ 给出 $0\cdot 0 - 1\cdot 1 \equiv 1$，反对易；$X$ 与 $XZ$ 给出 $0\cdot 1 - 1\cdot 1 \equiv 1$，反对易；$Z$ 与 $XZ$ 给出 $1\cdot 1 - 0\cdot 1 \equiv 1$，反对易；每个词与自己配对为 $0$。三个非平凡词两两反对易，与乘法表中对称位置互为相反数一致。
 
 **三能级对照。** $M = 3$ 时 $\omega = e^{2\pi i/3}$，合成律给出 $Z X = \omega\,X Z$：交换一次不再是变号，而是转过 $120^\circ$；两个词对易当且仅当 $bc - ad \equiv 0 \pmod 3$。
+:::
+
+::: {.viz src="blade-multiplication" preset="pauli" height="500"}
+**四个泡利字的乘法表。** 只用两位：第 0 位记 X，第 1 位记 Z。四个品红格正是左因子含 Z、右因子含 X 的那四格；选中的 Z · X 交换一次，得到 −XZ。这正是合成律 [@thm-weyl-displacement-laws] 取 M = 2 时的指数 bc。
 :::
 
 ## 零依赖 Python 3 几何代数引擎实现与自检 {#sec-geometric-state-python-engine}
@@ -358,12 +378,20 @@ class GeometricState:
    完全一致！
 :::
 
+::: {.viz src="blade-multiplication" preset="vector" height="500"}
+**交叉项成对抵消。** v = 3e₁ + 4e₂ + 12e₃ 自乘的九项逐一加进来：对角三项是青色的 9、16、144；交叉项一青一品红，右边的青色条与品红条一样长，净值为 0。最后 v² = 169，与 [@cor-bloch-operator-core] 给出的 B(3, 4, 12) 自乘得 169 I₂ 一致。
+:::
+
 ::: {.remark #rem-clifford-stabilizer-literature title="克利福德代数的博特周期性与稳定子辛编码（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 关于实克利福德代数 $\mathcal{Cl}_{p,q}(\mathbb{R})$ 的矩阵同构分类及多比特泡利群的二元辛表示，其经典文献归属与本书冻结定理的职责边界如下：
 
 1. **$\mathcal{Cl}_{3,0}(\mathbb{R}) \cong M_2(\mathbb{C})$ 与实克利福德代数分类**（参见 P. Lounesto, *Clifford Algebras and Spinors*, 2nd Ed., Cambridge University Press, 2001, Ch. 3 & Ch. 16；以及 H. B. Lawson & M.-L. Michelsohn, *Spin Geometry*, Princeton University Press, 1989, Ch. I）：三维欧氏实克利福德代数 $\mathcal{Cl}_{3,0}(\mathbb{R})$ 作为 8 维实结合代数同构于 $2\times 2$ 复矩阵代数 $M_2(\mathbb{C})$（其中心由 $\{1, I_3 = e_1 e_2 e_3\}$ 张成，同构于 $\mathbb{C}$），而其 4 维偶子代数 $\mathcal{Cl}^+_{3,0}(\mathbb{R})$ 同构于哈密顿四元数代数 $\mathbb{H}$。
 2. **多比特泡利群的二元辛向量空间表示与 Gottesman–Knill 定理**（参见 D. Gottesman, *Stabilizer Codes and Quantum Error Correction*, PhD thesis, Caltech, 1997, arXiv:quant-ph/9705052；以及 S. Aaronson & D. Gottesman, *Improved simulation of stabilizer circuits*, Phys. Rev. A **70**, 052328, 2004, DOI `10.1103/PhysRevA.70.052328`）：$n$ 比特泡利群模去中心相位后同构于二元域上的 $2n$ 维辛向量空间 $\mathbb{F}_2^{2n}$，群乘法化为按位异或（XOR），交换/反对易关系由辛内积决定。其中单个 $M$ 能级系统上位移词的合成相位与共轭相位（$M = 2$ 即单比特泡利词）已由 [@thm-weyl-displacement-laws] 验证，多模泡利字的乘法与交叉相位已由[第十四章](ch14-cloning-codes-and-braids.md) [@lemma-pauli-word-phase] 验证；“模去相位后同构于辛向量空间”的整体表述、稳定子表、克利福德门对辛向量的作用与 Gottesman–Knill 模拟定理仍属文献结果。
 3. **冻结定理的精确边界**：本章经 Lean 4 内核验证的五条定理分别是外尔位移词的合成、伴随、交换与共轭律（[@thm-weyl-displacement-laws]）、单比特外尔星恒等式（[@thm-qubit-weyl-star]）、单比特矩阵代数无特征标定理（[@lemma-qubit-no-character]）、泡利 $X, Z$ 无非零公共特征向量定理（[@prop-pauli-no-common-eigenvector]）以及无迹布洛赫算符 $2\times 2$ 矩阵展开核（[@cor-bloch-operator-core]）。正文中给出的 Python 3 `GeometricState` 3 比特刀片引擎用于展示 $\mathcal{Cl}_{3,0}(\mathbb{R})$ 的可执行计算构造，并不把 $\mathcal{Cl}_{3,0}(\mathbb{R}) \cong M_2(\mathbb{C})$ 的泛性质同构或一般 $n$ 比特 Gottesman–Knill 复杂性定理声明为本章的 Lean 冻结定理。
+:::
+
+::: {.viz src="blade-multiplication" height="560"}
+**刀片乘法实验室。** 点乘法表里的任意一格，右栏把这一乘积拆成一次次交换与抵消；“泡利字”与“向量²”两个场景分别对应例 [@ex-pauli-words-xor-sign-table] 与例 [@ex-xor-pauli-table]。
 :::
 
 既然 3 比特刀片与异或乘法已经把 $\mathcal{Cl}_{3,0}(\mathbb{R})$ 装进了三十行 Python 代码，下一步自然是：**如何在这个偶子代数 $\mathcal{Cl}^+_{3,0}(\mathbb{R})$ 里，把任意单量子比特门 $( \alpha, \beta, \gamma )$ 编译成单位旋转器（rotor），并用双侧夹心积 $v \mapsto R v \widetilde{R}$ 驱动三维布洛赫球面上的精确转向？** 让我们进入[第二十六章](ch26-single-qubit-rotor-compilation.md)。

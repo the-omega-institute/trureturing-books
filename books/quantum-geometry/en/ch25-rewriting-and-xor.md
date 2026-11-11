@@ -145,6 +145,10 @@ Instead of storing $2\times 2$ matrices, we represent the $2^3 = 8$ basis blades
 | `6` | `110₂` | $e_2 e_3$ | $2$ (bivector) | $-1$ | $-e_2 e_3$ | $I_3 e_1 \leftrightarrow iX$ |
 | `7` | `111₂` | $I_3 = e_1 e_2 e_3$ | $3$ (pseudoscalar) | $-1$ | $-I_3$ | $i I_2$ |
 
+::: {.viz src="blade-multiplication" preset="square" height="500"}
+**The colours of the diagonal.** With e₁₂ · e₁₂ chosen, the right panel shows the right e₁ moving past the left e₂: the two magenta lines cross once, then e₁e₁ and e₂e₂ each cancel to a cyan +1, and the result is −1. Along the dashed diagonal the cells of 1, e₁, e₂, e₃ are cyan (square +1) and those of e₁₂, e₁₃, e₂₃, I₃ magenta (square −1), as in the “Square” column of the table above.
+:::
+
 With this 3-bit encoding, the geometric product of any two basis blades $E_{\mathrm{left}}$ and $E_{\mathrm{right}}$ reduces to two bitwise operations (Panel I of Figure 25):
 
 1. **Target blade mask via bitwise XOR**: Whenever a basis vector $e_i$ appears in both $\mathrm{left}$ and $\mathrm{right}$, $e_i^2 = +1$ cancels that bit; basis vectors appearing in only one operand survive. Thus the product blade has mask
@@ -157,6 +161,14 @@ With this 3-bit encoding, the geometric product of any two basis blades $E_{\mat
    \operatorname{sign}(\mathrm{left}, \mathrm{right}) = (-1)^{\operatorname{inv}(\mathrm{left}, \mathrm{right})}.
    $$
 
+::: {.viz src="blade-multiplication" preset="e1e2" height="500"}
+**No swap: e₁ · e₂ = +e₁₂.** Each blade holds one bit, and the masks give 001₂ ⊕ 010₂ = 011₂; the two factors in the right panel are already in order, no lines cross, and the cell is cyan.
+:::
+
+::: {.viz src="blade-multiplication" preset="e2e1" height="500"}
+**One swap, one sign: e₂ · e₁ = −e₁₂.** The XOR of the masks is still 011₂, but the right e₁ has to move past the left e₂: the two magenta lines cross once, the sign becomes −, and the cell is magenta.
+:::
+
 Notice how both conventions in the code fit together with 100% consistency:
 
 - **3-bit $\mathcal{Cl}_{3,0}(\mathbb{R})$ basis blades (`basis(0..2)` at masks `1, 2, 4`) and pseudoscalar $I_3$ (`mask = 7`)**: The three orthogonal spatial axes $e_1, e_2, e_3$ occupy bits $0, 1, 2$ (`masks 1, 2, 4`). The oriented volume pseudoscalar $I_3 = e_1 e_2 e_3$ (`mask = 7`) commutes with every blade and satisfies $I_3^2 = -1$. Under the complex representation $e_1 \mapsto X, e_2 \mapsto Y, e_3 \mapsto Z, I_3 \mapsto i I_2$, the bivector $e_1 e_2$ equals $I_3 e_3 \leftrightarrow iZ$ (and similarly $e_2 e_3 = I_3 e_1 \leftrightarrow iX$, $e_3 e_1 = -e_1 e_3 = I_3 e_2 \leftrightarrow iY$).
@@ -164,6 +176,10 @@ Notice how both conventions in the code fit together with 100% consistency:
   $$
   \operatorname{pauli}(1, 0) \cdot \operatorname{pauli}(0, 1) = e_1 e_2 = -\operatorname{pauli}(0, 1) \cdot \operatorname{pauli}(1, 0).
   $$
+
+::: {.viz src="blade-multiplication" preset="pseudo" height="500"}
+**The square of the pseudoscalar: I₃ · I₃ = −1.** All three bits cancel (three cyan crosses in the ⊕ row); the magenta crossings in the right panel number 0 + 1 + 2 = 3, an odd count, so the result is −1. The violet row and column of I₃ agree cell by cell: I₃ commutes with every blade.
+:::
 
 Finally, the **reversion** anti-involution $\widetilde{M}$ (`reverse()`) reverses the order of vector factors in each $k$-blade, multiplying grade $k = \operatorname{popcount}(m)$ by $(-1)^{k(k-1)/2}$ ($+1$ for grades $0, 1$ and $-1$ for grades $2, 3$).
 
@@ -233,6 +249,10 @@ which is the exponent $bc$ of the composition law ($b = z_{\mathrm{left}}$, $c =
 **Commutation table.** By the symplectic pairing $bc - ad \bmod 2$: $X$ and $Z$ give $0\cdot 0 - 1\cdot 1 \equiv 1$, so they anticommute; $X$ and $XZ$ give $0\cdot 1 - 1\cdot 1 \equiv 1$, anticommute; $Z$ and $XZ$ give $1\cdot 1 - 0\cdot 1 \equiv 1$, anticommute; every word paired with itself gives $0$. The three nontrivial words anticommute pairwise, in agreement with the opposite signs at mirrored positions of the multiplication table.
 
 **Three levels for comparison.** For $M = 3$, $\omega = e^{2\pi i/3}$ and the composition law gives $Z X = \omega\,X Z$: one exchange is no longer a sign flip but a turn through $120^\circ$; two words commute if and only if $bc - ad \equiv 0 \pmod 3$.
+:::
+
+::: {.viz src="blade-multiplication" preset="pauli" height="500"}
+**The multiplication table of the four Pauli words.** Two bits only: bit 0 is X, bit 1 is Z. The four magenta cells are exactly those whose left factor contains Z and right factor contains X; the chosen Z · X takes one swap and gives −XZ. This is the exponent bc of the composition law [@thm-weyl-displacement-laws] for M = 2.
 :::
 
 ## Zero-Dependency Python 3 Geometric Algebra Engine and Self-Test {#sec-geometric-state-python-engine}
@@ -349,12 +369,20 @@ Let us trace the bitwise arithmetic and Bloch-operator correspondence on concret
    $$
 :::
 
+::: {.viz src="blade-multiplication" preset="vector" height="500"}
+**Cross terms cancel in pairs.** The nine terms of v = 3e₁ + 4e₂ + 12e₃ squared come in one at a time: the three diagonal ones are the cyan 9, 16 and 144; each cross term comes once cyan and once magenta, the cyan and magenta bars on the right are equally long, and the net is 0. In the end v² = 169, matching the square 169 I₂ of B(3, 4, 12) from [@cor-bloch-operator-core].
+:::
+
 ::: {.remark #rem-clifford-stabilizer-literature title="Clifford Algebra Classification and Binary Symplectic Stabilizer Encoding (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** Two bodies of classical literature surround the algebraic structures of this chapter:
 
 1. **Isomorphism $\mathcal{Cl}_{3,0}(\mathbb{R}) \cong M_2(\mathbb{C})$ and Clifford algebra classification** (P. Lounesto, *Clifford Algebras and Spinors*, 2nd Ed., Cambridge University Press, 2001, Ch. 3 & Ch. 16; H. B. Lawson & M.-L. Michelsohn, *Spin Geometry*, Princeton University Press, 1989, Ch. I): As an eight-dimensional real associative algebra, $\mathcal{Cl}_{3,0}(\mathbb{R})$ is isomorphic to $M_2(\mathbb{C})$ with center $\operatorname{span}_{\mathbb{R}}\{1, I_3\} \cong \mathbb{C}$, while its four-dimensional even subalgebra $\mathcal{Cl}^+_{3,0}(\mathbb{R})$ is isomorphic to the quaternion division ring $\mathbb{H}$.
 2. **Binary symplectic Pauli representation and the Gottesman–Knill theorem** (D. Gottesman, *Stabilizer Codes and Quantum Error Correction*, PhD thesis, Caltech, 1997, arXiv:quant-ph/9705052; S. Aaronson & D. Gottesman, *Phys. Rev. A* **70**, 052328, 2004, DOI `10.1103/PhysRevA.70.052328`): Modulo central phases, the $n$-qubit Pauli group is isomorphic to the $2n$-dimensional binary symplectic space $\mathbb{F}_2^{2n}$, where group multiplication is bitwise XOR and commutation is governed by the binary symplectic form. For a single $M$-level system, the composition phase and the conjugation phase of displacement words ($M = 2$ being the one-qubit Pauli words) are verified by [@thm-weyl-displacement-laws], and the multiplication of multi-mode Pauli words with its cross phase by [@lemma-pauli-word-phase] in [Chapter 14](ch14-cloning-codes-and-braids.md); the global statement "isomorphic to a symplectic vector space modulo phases", the stabilizer tableau, the action of Clifford gates on symplectic vectors and the Gottesman–Knill simulation theorem remain literature results.
 3. **Exact scope of the frozen theorems**: The five Lean-verified results in this chapter are the composition, adjoint, exchange and conjugation laws of Weyl displacement words ([@thm-weyl-displacement-laws]), the qubit Weyl star identities ([@thm-qubit-weyl-star]), the no-character theorem on $\mathrm{QubitMatrix}$ ([@lemma-qubit-no-character]), the absence of a nonzero common eigenvector of `qubitX` and `qubitZ` ([@prop-pauli-no-common-eigenvector]), and the explicit $2\times 2$ matrix formula for the traceless Bloch operator $B(a)$ ([@cor-bloch-operator-core]). The Python 3 `GeometricState` engine provides an executable computational model of $\mathcal{Cl}_{3,0}(\mathbb{R})$ and does not claim a Lean formalization of the universal Clifford isomorphism or the $n$-qubit Gottesman–Knill complexity theorem.
+:::
+
+::: {.viz src="blade-multiplication" height="560"}
+**The blade-multiplication lab.** Click any cell of the multiplication table and the right panel takes that product apart into swaps and cancellations; the “Pauli” and “Vector²” scenes correspond to [@ex-pauli-words-xor-sign-table] and [@ex-xor-pauli-table].
 :::
 
 With `GeometricState` in hand, we now ask: **how do we compile an arbitrary single-qubit gate $(\alpha, \beta, \gamma)$ into an even-subalgebra rotor $R \in \mathcal{Cl}^+_{3,0}(\mathbb{R})$ and rotate Bloch vectors via the double-sided sandwich product $v \mapsto R v \widetilde{R}$?** Let us turn to [Chapter 26](ch26-single-qubit-rotor-compilation.md).
