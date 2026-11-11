@@ -245,14 +245,14 @@ section: "Part III · theorems"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 9.2 · Theorem 10.5</p>
+  <p class="kicker">Theorem 9.2 · Theorem 10.7</p>
   <h2 class="t">Two axes reach every rotation; the Gram matrix <em>fixes all relative geometry</em></h2>
 <TheoremCard class="compact mt-s" label="Theorem 9.2" title="Finite rotation words from two noncollinear axes" gid="D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word" cite="thm-two-axis-finite-word">
 
 Let $a, b \in \mathbb{R}^3$ satisfy $\langle a, b\rangle^2 < \lVert a\rVert^2 \lVert b\rVert^2$. Then every orthogonal map $R$ of determinant $1$ is the product of a finite word of rotations about the axes $a$ and $b$.
 
 </TheoremCard>
-<TheoremCard class="compact mt-s" label="Theorem 10.5" title="Ambient unitary reconstruction from equal complex Gram matrices" gid="D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq" cite="thm-gram-unitary-reconstruction">
+<TheoremCard class="compact mt-s" label="Theorem 10.7" title="Ambient unitary reconstruction from equal complex Gram matrices" gid="D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq" cite="thm-gram-unitary-reconstruction">
 
 For complex matrices $A, B \in M_{m\times n}(\mathbb{C})$, if $B^*B = A^*A$, there is a unitary $U$ with $B = UA$.
 
@@ -665,14 +665,14 @@ section: "Three tiers"
   <p class="kicker">Three tiers of warrant</p>
   <h2 class="t">Three tiers of warrant, <em>three colours</em>, never mixed</h2>
   <div class="split mt">
-    <img src="./img/prelude-three-tiers.en.svg" alt="Three bars: green 177, violet 117, red 6; under the green bar, 304 theorem declarations in the lock file." style="display: block; width: 900px; max-width: 100%;">
+    <img src="./img/prelude-three-tiers.en.svg" alt="Three bars: green 180, violet 117, red 6; under the green bar, 308 theorem declarations in the lock file." style="display: block; width: 900px; max-width: 100%;">
     <div>
       <div class="g3">
-        <Stat value="177" label="theorems, lemmas, propositions and corollaries with lean=" tone="ok" />
+        <Stat value="180" label="theorems, lemmas, propositions and corollaries with lean=" tone="ok" />
         <Stat value="117" label="remarks and examples marked “literature result, not formalized”" tone="violet" />
         <Stat value="6" label="open conjectures, marked OPEN, with no Lean reference" tone="warn" />
       </div>
-      <p class="lead mt">The lock file <span class="mono">trureturing.lock.json</span> pins <span class="mono">dev@1d9bf98cab83</span>: 435 declarations, 304 of them Lean theorems.</p>
+      <p class="lead mt">The lock file <span class="mono">trureturing.lock.json</span> pins <span class="mono">dev@1d9bf98cab83</span>: 439 declarations, 308 of them Lean theorems.</p>
     </div>
   </div>
 </div>

@@ -245,14 +245,14 @@ section: "第三部 · 定理"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 9.2 · Theorem 10.5</p>
+  <p class="kicker">Theorem 9.2 · Theorem 10.7</p>
   <h2 class="t">两根轴走遍所有旋转；格拉姆矩阵<em>决定一切相对几何</em></h2>
 <TheoremCard class="compact mt-s" label="定理9.2" title="两不共线轴生成特殊正交群的有限旋转字" gid="D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word" cite="thm-two-axis-finite-word">
 
 设 $a, b \in \mathbb{R}^3$ 满足 $\langle a, b\rangle^2 < \lVert a\rVert^2 \lVert b\rVert^2$。则每个行列式为 $1$ 的正交变换 $R$ 都是绕 $a$、$b$ 两轴旋转的某个有限字的乘积。
 
 </TheoremCard>
-<TheoremCard class="compact mt-s" label="定理10.5" title="复格拉姆矩阵相等下的公共外围幺正重构" gid="D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq" cite="thm-gram-unitary-reconstruction">
+<TheoremCard class="compact mt-s" label="定理10.7" title="复格拉姆矩阵相等下的公共外围幺正重构" gid="D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq" cite="thm-gram-unitary-reconstruction">
 
 对复矩阵 $A, B \in M_{m\times n}(\mathbb{C})$，若 $B^*B = A^*A$，则存在幺正矩阵 $U$ 使 $B = UA$。
 
@@ -665,14 +665,14 @@ section: "三层依据"
   <p class="kicker">Three tiers of warrant</p>
   <h2 class="t">三层依据，<em>三种颜色</em>，从不越级</h2>
   <div class="split mt">
-    <img src="./img/prelude-three-tiers.zh.svg" alt="三条横条：绿色 177，紫色 117，红色 6；绿色下注锁文件里 304 条 theorem 声明。" style="display: block; width: 900px; max-width: 100%;">
+    <img src="./img/prelude-three-tiers.zh.svg" alt="三条横条：绿色 180，紫色 117，红色 6；绿色下注锁文件里 308 条 theorem 声明。" style="display: block; width: 900px; max-width: 100%;">
     <div>
       <div class="g3">
-        <Stat value="177" label="带 lean= 的定理、引理、命题与推论" tone="ok" />
+        <Stat value="180" label="带 lean= 的定理、引理、命题与推论" tone="ok" />
         <Stat value="117" label="写明“文献结果，未在本书形式化”的注记与例" tone="violet" />
         <Stat value="6" label="开放猜想，标为 OPEN，不带 Lean 引用" tone="warn" />
       </div>
-      <p class="lead mt">锁文件 <span class="mono">trureturing.lock.json</span> 钉住 <span class="mono">dev@1d9bf98cab83</span>，共 435 项声明，其中 304 项是 Lean theorem。</p>
+      <p class="lead mt">锁文件 <span class="mono">trureturing.lock.json</span> 钉住 <span class="mono">dev@1d9bf98cab83</span>，共 439 项声明，其中 308 项是 Lean theorem。</p>
     </div>
   </div>
 </div>
