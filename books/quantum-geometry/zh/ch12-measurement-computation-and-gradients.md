@@ -12,7 +12,7 @@
 
 ## 簇态测量与经典前馈 {#sec-cluster-measurement-feedforward}
 
-在传统的电路模型里，“计算”被想象成一排排幺正逻辑门像流水线工人一样推着量子态往前走，而“测量”只是剧终落幕时抄写答案的被动读数。2001 年，劳森多夫（R. Raussendorf）与布里格尔（H. J. Briegel）提出的**单向量子计算（one-way quantum computer / MBQC）**彻底颠覆了这一图景：**测量本身就是驱动演化的引擎！**
+在传统的电路模型里，“计算”被想象成一排排幺正逻辑门像流水线工人一样推着量子态往前走，而“测量”只是剧终落幕时抄写答案的被动读数。单向量子计算（MBQC；文献背景见 [@rem-mbqc-gradients-literature]）颠覆了这一图景：**测量本身即可充当驱动演化的引擎！**
 
 为了看清测量如何驱动状态演化，我们首先在 Lean 模块 `Conditioning` 中核实记录测量（`IsRecordMeasurement P`）最基础的代数守恒律。设 $n$ 为有限可判等指标类型，$\kappa$ 为有限结果指标类型（本定理中无需假设 $\kappa$ 上的可判等实例 `DecidableEq kappa`）。一族矩阵 $P : \kappa \to M_n(\mathbb{C})$ 称为**记录测量**，若其满足四条性质：自伴（$\forall k,\; P_k^* = P_k$）、幂等（$\forall k,\; P_k^2 = P_k$）、两两正交（$\forall k \neq l,\; P_k P_l = 0$）以及完备性（$\sum_k P_k = I$）。对任意复方阵 $\rho \in M_n(\mathbb{C})$ 与结果 $k \in \kappa$，其记录权重定义为 $\operatorname{recordWeight}(P, \rho, k) = \operatorname{bornProbability}(\rho, P_k) = \Tr(\rho P_k)$。
 
@@ -108,21 +108,23 @@ $$
 3. 当 $HP - PH = 0$ 时，导数在 $\mathbb{R}$ 上恒等于 $0$，故函数恒等于初值。完整证明由 Lean 内核检查。
 :::
 
-现在，请看 [@prop-measurement-gradient-flow] 中的无穷小对易子导数 $i\Tr(\rho_t[H, P])$ 在**单次泡利旋转门** $R_P(\theta) = \exp(-i\theta P_{\mathrm{gen}}/2)$（其中生成元满足自伴对合条件 $P_{\mathrm{gen}}^* = P_{\mathrm{gen}}$ 且 $P_{\mathrm{gen}}^2 = I$，对应 $H = \frac{1}{2}P_{\mathrm{gen}}$）下会发生怎样奇迹般的简化（图 12 中栏）：
+当电路中的参数仅出现在单扇对合泡利旋转门中时，[@prop-measurement-gradient-flow] 的无穷小导数与有限移位两采样公式之间的文献关系汇总如下（图 12 中栏；[@rem-parameter-shift-rule-literature]）。
 
-由于 $P_{\mathrm{gen}}^2 = I$，传播子精确展开为 $R_P(\theta) = \cos(\theta/2) I - i\sin(\theta/2) P_{\mathrm{gen}}$。因此，对任意固定初态与固定测量算符，期望值函数 $f(\theta)$ 作为 $\theta$ 的函数**只含有零频常数项与一倍角基频谐波**：
+::: {.remark #rem-parameter-shift-rule-literature title="单次对合泡利旋转的两采样参数位移律（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 在**单次泡利旋转门** $R_P(\theta) = \exp(-i\theta P_{\mathrm{gen}}/2)$（其中生成元满足自伴对合条件 $P_{\mathrm{gen}}^* = P_{\mathrm{gen}}$ 且 $P_{\mathrm{gen}}^2 = I$，对应 $H = \frac{1}{2}P_{\mathrm{gen}}$）下，由于 $P_{\mathrm{gen}}^2 = I$，传播子精确展开为 $R_P(\theta) = \cos(\theta/2) I - i\sin(\theta/2) P_{\mathrm{gen}}$。因此，对任意固定初态与固定测量算符，期望值函数 $f(\theta)$ 作为 $\theta$ 的函数**只含有零频常数项与一倍角基频谐波**：
 
 $$
 f(\theta) = c + a\cos\theta + b\sin\theta.
 $$
 
-对这个纯正余弦一阶谐波求导，利用小学校园里的诱导公式 $\cos(\theta + \frac{\pi}{2}) - \cos(\theta - \frac{\pi}{2}) = -2\sin\theta$ 与 $\sin(\theta + \frac{\pi}{2}) - \sin(\theta - \frac{\pi}{2}) = 2\cos\theta$，导数当场化为左右各移位 $\pm\frac{\pi}{2}$（正交 $90^\circ$）的**精确有限差商**——著名的**参数位移律（parameter-shift rule）**：
+对这个纯正余弦一阶谐波求导，利用诱导公式 $\cos(\theta + \frac{\pi}{2}) - \cos(\theta - \frac{\pi}{2}) = -2\sin\theta$ 与 $\sin(\theta + \frac{\pi}{2}) - \sin(\theta - \frac{\pi}{2}) = 2\cos\theta$，导数化为左右各移位 $\pm\frac{\pi}{2}$（正交 $90^\circ$）的有限差商——即**参数位移律（parameter-shift rule）**（Schuld et al., 2019；出处详见 [@rem-mbqc-gradients-literature]）：
 
 $$
-\partial_\theta f(\theta) = -a\sin\theta + b\cos\theta = \frac{1}{2}\Bigl[f\Bigl(\theta + \frac{\pi}{2}\Bigr) - f\Bigl(\theta - \frac{\pi}{2}\Bigr)\Bigr]!
+\partial_\theta f(\theta) = -a\sin\theta + b\cos\theta = \frac{1}{2}\Bigl[f\Bigl(\theta + \frac{\pi}{2}\Bigr) - f\Bigl(\theta - \frac{\pi}{2}\Bigr)\Bigr].
 $$
 
-（请严格遵守诚实边界：[@prop-measurement-gradient-flow] 经 Lean 内核验证的是无穷小对易子导数公式与纯实性；而上述两采样点有限位移恒等式 $\frac{1}{2}[f(\theta+\pi/2)-f(\theta-\pi/2)]$ 则额外依赖“参数 $\theta$ 仅在单扇对合泡利门 $e^{-i\theta P_{\mathrm{gen}}/2}$ 中出现一次”的二能级频率结构，作为手算与文献结果列入 [@ex-cluster-shift-and-gradient] 与 [@rem-mbqc-gradients-literature]。）
+（职责边界：[@prop-measurement-gradient-flow] 经 Lean 内核验证的是无穷小对易子导数公式与纯实性；上述两采样点有限位移恒等式额外依赖“参数 $\theta$ 仅在单扇对合泡利门 $e^{-i\theta P_{\mathrm{gen}}/2}$ 中出现一次”的二能级频率结构，作为手算与文献结果列入 [@ex-cluster-shift-and-gradient] 与 [@rem-mbqc-gradients-literature]。）
+:::
 
 ## 黎曼梯度与能量耗散 {#sec-riemannian-natural-gradient}
 
@@ -177,21 +179,23 @@ $$
 
 既然在单颗三维球面 $S^2$ 上，无论是两角寻址、参数位移还是黎曼梯度下降都如此通畅，为什么当量子比特数 $n$ 增加到几十乃至上百时，随机初始化的深层变分量子电路却会突然撞上一片几乎处处平坦、梯度指数消失的沙漠——**贫瘠高原（barren plateau）**？
 
-几何直觉藏在**高维球面的赤道测度集中现象（concentration of measure）**里（图 12 右栏）。让我们先在受限的实振幅模型球面 $S^{d-1} \subset \mathbb{R}^d$（其中希尔伯特维数 $d = 2^n$）上算一笔最透明的二阶矩账：
+几何直觉藏在**高维球面的赤道测度集中现象（concentration of measure）**里（图 12 右栏；受限实振幅模型球面上的二阶矩上界汇总于 [@rem-sphere-equator-markov-literature]）。
 
-设 $x = (x_1, \dots, x_d) \in S^{d-1}$ 是从 $d$ 维单位球面上按旋转不变均匀测度随机抽取的一根单位实向量。由于总模长恒满足 $\sum_{j=1}^d x_j^2 = 1$，且各向同性保证每个坐标分量的平方期望完全相等（$\mathbb{E}[x_1^2] = \cdots = \mathbb{E}[x_d^2]$），故任意单根固定测量轴（如 $x_1$ 轴）上的投影平方期望精确等于维数的倒数：
+::: {.remark #rem-sphere-equator-markov-literature title="实单位球面二阶矩与赤道马尔可夫集中上界（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 在受限的实振幅模型球面 $S^{d-1} \subset \mathbb{R}^d$（其中希尔伯特维数 $d = 2^n$）上，设 $x = (x_1, \dots, x_d) \in S^{d-1}$ 是从 $d$ 维单位球面上按旋转不变均匀测度随机抽取的一根单位实向量。由于总模长恒满足 $\sum_{j=1}^d x_j^2 = 1$，且各向同性保证每个坐标分量的平方期望完全相等（$\mathbb{E}[x_1^2] = \cdots = \mathbb{E}[x_d^2]$），故任意单根固定测量轴（如 $x_1$ 轴）上的投影平方期望等于维数的倒数：
 
 $$
-\mathbb{E}[x_1^2] = \frac{1}{d} = \frac{1}{2^n}!
+\mathbb{E}[x_1^2] = \frac{1}{d} = \frac{1}{2^n}.
 $$
 
-对任意给定的赤道带宽阈值 $\varepsilon > 0$，直接应用马尔可夫（Markov / Chebyshev）不等式，点 $x$ 偏离赤道超平面 $x_1 = 0$ 超过 $\varepsilon$ 的概率满足上界：
+对任意给定的赤道带宽阈值 $\varepsilon > 0$，应用马尔可夫（Markov / Chebyshev）不等式，点 $x$ 偏离赤道超平面 $x_1 = 0$ 超过 $\varepsilon$ 的概率满足上界：
 
 $$
 \Pr\bigl(|x_1| \ge \varepsilon\bigr) = \Pr\bigl(x_1^2 \ge \varepsilon^2\bigr) \le \frac{\mathbb{E}[x_1^2]}{\varepsilon^2} = \frac{1}{d\,\varepsilon^2} = \frac{1}{2^n \varepsilon^2}.
 $$
 
-算一算 $n = 20$ 颗量子比特（$d = 2^{20} = 1{,}048{,}576$）、带宽 $\varepsilon = 0.1$ 时的数值：$\Pr(|x_1| \ge 0.1) \le \frac{100}{1048576} \approx 9.54 \times 10^{-5}$——也就是说，**至少 $99.99046\%$ 的高维球面面积都死死挤在 $|x_1| < 0.1$ 的赤道窄带里！** 从任何一根孤立的固定测量轴看过去，随机高维态几乎百分之百正交于你的视线（落在[序曲](README.md)与[第一章](ch01-measurement.md)所说的 $90^\circ$ 赤道盲区里）！
+例如 $n = 20$ 颗量子比特（$d = 2^{20} = 1{,}048{,}576$）、带宽 $\varepsilon = 0.1$ 时，$\Pr(|x_1| \ge 0.1) \le \frac{100}{1048576} \approx 9.54 \times 10^{-5}$，即至少 $99.99046\%$ 的高维实球面测度集中在 $|x_1| < 0.1$ 的赤道窄带内，从固定单根测量轴看几乎正交于视线（与随机量子电路贫瘠高原定理的条件边界详见 [@rem-mbqc-gradients-literature]）。
+:::
 
 与上述均匀球面测度集中和随机电路梯度定律**完全独立**，在算子层析与时频集中分析中还有另一类常被对比的数学问题：**当一个非负实数列 $\lambda : \mathbb{N} \to \mathbb{R}$ 可和且满足有限迹恒等式 $\sum_{j=0}^\infty \lambda_j = \frac{R W}{\pi}$ 时，如何从上界控制它超过给定阈值 $\tau > 0$ 的模式个数？** 在 Lean 模块 `FiniteRankConcentrationModeBound` 中，下面的冻结推论给出了这一**充分计数上界**：任何超过正阈值 $\tau > 0$ 的超水平集 $S_\tau = \{j \in \mathbb{N} \mid \tau \le \lambda_j\}$ 必然是有限集，且其基数受显式上界 $\frac{R W}{\pi \tau}$ 控制。（请务必注意边界：该定理只是一个关于非负可和序列的**充分计数上界**，既不是超水平集有限的必要条件——例如不可和的调和序列 $\lambda_j = \frac{1}{j+1}$ 总和发散，但对每个正阈值 $\tau > 0$ 同样只有有限项满足 $\lambda_j \ge \tau$——也不提供逃离贫瘠高原或保证电路梯度非零的机制，因为有限维密度矩阵天然迹为 $1$，且有限迹预算丝毫不能阻止常数目标函数的梯度恒为零。）
 
@@ -245,7 +249,7 @@ $$
    \vv{r}' = \Bigl(\frac{21\sqrt{3}}{2\sqrt{403}},\; 0,\; \frac{17}{2\sqrt{403}}\Bigr) \approx (0.90593576,\; 0,\; 0.42341516),
    $$
 
-   新势能 $V(\vv{r}') \approx 0.42341516 < 0.5$。同时注意，该切空间梯度场 $\operatorname{grad}_{S^2} V(\vv{r}) = \vv{e}_3 - r_z \vv{r}$ 在南北两极 $\vv{r} = \pm \vv{e}_3$（$r_z = \pm 1$）处精确归零，两极孤立驻点指标之和为 $1 + 1 = 2 = \chi(S^2)$——这正是[第十章](ch10-gram-geometry-and-order.md)**庞加莱—霍普夫与偶维球面毛球定理**（文献注记 `#rem-gram-hairy-ball-literature`，未在本书形式化）在球面变分优化中的直接显影：由于偶维球面 $S^2$ 上不存在处处非零的光滑切向量场，任何光滑球面代价函数的负黎曼梯度下降流都必然包含梯度为零的驻点（全局极值、局部陷阱或鞍点奇点），无法在整个球面上构造处处无驻点的光滑下降场。
+   新势能 $V(\vv{r}') \approx 0.42341516 < 0.5$。同时注意，该切空间梯度场 $\operatorname{grad}_{S^2} V(\vv{r}) = \vv{e}_3 - r_z \vv{r}$ 在南北两极 $\vv{r} = \pm \vv{e}_3$（$r_z = \pm 1$）处精确归零，两极孤立驻点指标之和为 $1 + 1 = 2 = \chi(S^2)$——这正是[第十章](ch10-gram-geometry-and-order.md)**庞加莱—霍普夫与偶维球面毛球定理**（文献结果，未在本书形式化；见第十章 `#rem-gram-hairy-ball-literature`）在球面变分优化中的直接显影：由于偶维球面 $S^2$ 上不存在处处非零的光滑切向量场，任何光滑球面代价函数的负黎曼梯度下降流都必然包含梯度为零的驻点（全局极值、局部陷阱或鞍点奇点），无法在整个球面上构造处处无驻点的光滑下降场。
 4. **受限实球面 $S^{2^n - 1}$ 上的二阶矩赤道集中算例**：对 $\mathbb{R}^d$（$d = 2^n$）中均匀分布的实单位向量，对称性给出 $\mathbb{E}[x_1^2] = \frac{1}{d}$，从而 $\Pr(|x_1| \ge \varepsilon) \le \frac{1}{d\varepsilon^2}$。取 $n = 20$（$d = 1{,}048{,}576$）、$\varepsilon = 0.1$，得
 
    $$

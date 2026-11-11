@@ -10,7 +10,7 @@
 
 请回想[序曲](README.md)与[第三章](ch03-projectors-and-duality.md)揭示的那条基本几何铁律：当你在二维赤道平面 $\operatorname{span}\{\vv{e}_1, \vv{e}_2\}$ 内旋转了一块有向面积 $\vv{e}_1 \wedge \vv{e}_2$，并试图把这块“面积”指认为一根确凿无疑的一维“存在轴”（粒子态或已定命题）时，你的目光绝不可能停留在那张二维平面内部——因为平面内的任何向量都与该平面共面，无法充当它的法线。你之所以能把二维面积压缩为一根一维法向箭头 $\vv{e}_3 = \star_3(\vv{e}_1 \wedge \vv{e}_2)$，唯一的原因是你已经站在了**三维外围空间** $\mathbb{R}^3$ 的内部！同样地，在定向三维空间 $\mathbb{R}^3$ 内部，最高阶体积元 $I_3 = \vv{e}_1 \wedge \vv{e}_2 \wedge \vv{e}_3$ 的三维霍奇对偶只是一个零阶标量 $\star_3 I_3 = 1$；要想把整座三维系统本身指认为一根新的正交法向存在线 $\vv{e}_4 = \star_4 I_3$，数学迫使你必须先踏入包含它的**四维外围空间** $\mathbb{R}^4 = \mathbb{R}^3 \oplus \mathbb{R}\vv{e}_4$，从而把原有的二维球面 $S^2$ 变成三维超球面 $S^3$ 的赤道切片！
 
-在本章中，我们将看到：这种“要表达当前系统的整体存在，就必须跳进更大外围空间”的法向逃逸现象，绝不仅是一则优美的微分几何比喻；在集合论与观测拓扑的底层，它的抽象骨架直接具象化为本书经 Lean 4 内核形式化验证的**相对语义对角线与观测拓扑加细四重奏**（`DiagonalTopologicalEscape`），并在经典元数学文献中与**康托尔（Georg Cantor）对角线构造**、**哥德尔（Kurt Gödel）第一不完备定理**及**塔斯基（Alfred Tarski）真值不可定义定理**遥相呼应（后两者在元数学中还需额外引入递归公理化算术编码、可证性谓词与相容性假设，属于经典文献与结构类比层）。只要一台完备解码器试图在非空地址集与固定潜坐标（latent coordinate）的纤维划分下穷尽所有输出映射，任何无不动点的翻转算子（twist）都会沿着相对语义对角线当场刺穿旧观测拓扑，强迫概念读出向“球外之球”严格加细！
+在本章中，我们将看到：这种“要表达当前系统的整体存在，就必须跳进更大外围空间”的法向逃逸现象，绝不仅是一则优美的微分几何比喻；在集合论与观测拓扑的底层，它的抽象骨架直接具象化为本书经 Lean 4 内核形式化验证的**相对语义对角线与观测拓扑加细四重奏**（`DiagonalTopologicalEscape`），并与经典元数学中的对角线不完备文献遥相呼应（严格前提对比见 [@rem-godel-tarski-comparison-literature]）。只要一台完备解码器试图在非空地址集与固定潜坐标（latent coordinate）的纤维划分下穷尽所有输出映射，任何无不动点的翻转算子（twist）都会沿着相对语义对角线当场刺穿旧观测拓扑，强迫概念读出向“球外之球”严格加细！
 
 ![球外之球的拓扑与几何三重奏：相对语义对角线逃逸与分离亏损、开口螺旋轴向投影与笛卡尔 720° 多面体角亏、以及 Adams 可平行化球面定理](../assets/fig-21-diagonal-escape-tower.svg)
 
@@ -172,7 +172,11 @@ $$
 3. **验证并入新轴后的严格拓扑加细**：将 $g$ 并入潜坐标形成二维读出 $\operatorname{conceptJoin}(\operatorname{latent}, g)(a) = (\operatorname{latent}(a), g(a))$，四个地址的联合坐标分别为 $a_0 \mapsto (0, 1)$、$a_1 \mapsto (0, 1)$、$a_2 \mapsto (0, 0)$、$a_3 \mapsto (1, 0)$。原先粘成一团的三元盲区纤维 $\{a_0, a_1, a_2\}$ 被当场劈裂为 $\{a_0, a_1\}$ 与 $\{a_2\}$ 两块正交子纤维，观测拓扑从 $2$ 个非空原子开集严格升维为 $3$ 个非空原子开集！
 :::
 
-这正是康托尔对角线论证与 Lawvere 不动点模式在观测拓扑中的纯粹抽象骨架，也为理解经典元数学中的哥德尔第一不完备定理与塔斯基（Alfred Tarski）真值不可定义定理提供了清晰的几何类比（在经典数理逻辑文献中，哥德尔定理与塔斯基定理并不是直接假定任意语义函数目录满射，而是需要额外构造递归公理化算术、哥德尔配数编码、语法可证性谓词并在系统相容性假设下运作）。在我们的抽象拓扑框架中，每当一个系统把某类候选解码映射装进一部关于当前潜坐标满射的目录 `decoderCatalog`，并用无不动点算子 `twist` 构造自指对角线 $g$ 时，$g$ 必然劈开原系统的某根等价类余纤维。要想给 $g$ 赋予连续的因子分解坐标，就必须引入联合读出 $\operatorname{conceptJoin}(\operatorname{latent}, g)$；而若想在新坐标空间 $\mathrm{Coordinate}_{k+1} = \mathrm{Coordinate}_k \times \mathrm{Output}$ 上继续触发下一轮对角线逃逸 $g'$，则**必须以在新一轮（通常需要扩容的）地址空间 $\mathrm{Address}_{k+1}$ 上重新建立新的满射解码目录 $\operatorname{decoderCatalog}_{k+1} : \mathrm{Address}_{k+1} \twoheadrightarrow (\mathrm{Coordinate}_{k+1} \to \mathrm{Output})$ 为前提**——例如在 [@ex-cantor-godel-diagonal-table] 的四地址布尔模型中，合并后的坐标空间有 $4$ 个坐标对（对应 $2^4 = 16$ 个布尔函数，即便只看实际命中的 $3$ 根非空联合纤维也有 $2^3 = 8 > 4$ 个布尔函数），原来的 $4$ 个地址已不足以构成新阶段的满射目录，唯有连同地址空间一起向外扩容，才能开启下一层“球外之球”的攀升！
+这正是抽象对角线不动点模式在观测拓扑中的纯粹骨架（与元数学文献的精确边界对照见 [@rem-godel-tarski-comparison-literature]）。在我们的抽象拓扑框架中，每当一个系统把某类候选解码映射装进一部关于当前潜坐标满射的目录 `decoderCatalog`，并用无不动点算子 `twist` 构造自指对角线 $g$ 时，$g$ 必然劈开原系统的某根等价类余纤维。要想给 $g$ 赋予连续的因子分解坐标，就必须引入联合读出 $\operatorname{conceptJoin}(\operatorname{latent}, g)$；而若想在新坐标空间 $\mathrm{Coordinate}_{k+1} = \mathrm{Coordinate}_k \times \mathrm{Output}$ 上继续触发下一轮对角线逃逸 $g'$，则**必须以在新一轮（通常需要扩容的）地址空间 $\mathrm{Address}_{k+1}$ 上重新建立新的满射解码目录 $\operatorname{decoderCatalog}_{k+1} : \mathrm{Address}_{k+1} \twoheadrightarrow (\mathrm{Coordinate}_{k+1} \to \mathrm{Output})$ 为前提**——例如在 [@ex-cantor-godel-diagonal-table] 的四地址布尔模型中，合并后的坐标空间有 $4$ 个坐标对（对应 $2^4 = 16$ 个布尔函数，即便只看实际命中的 $3$ 根非空联合纤维也有 $2^3 = 8 > 4$ 个布尔函数），原来的 $4$ 个地址已不足以构成新阶段的满射目录，唯有连同地址空间一起向外扩容，才能开启下一层“球外之球”的攀升！
+
+::: {.remark #rem-godel-tarski-comparison-literature title="康托尔、Lawvere、哥德尔与塔斯基对角线定理的前提边界（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** [@cor-complete-diagonal-topological-settlement] 刻画的是集合与观测拓扑层面的抽象相对对角线骨架（呼应 Georg Cantor 的对角线构造与 F. W. Lawvere, *Diagonal arguments and cartesian closed categories*, 1969 的范畴不动点模式）；而在经典数理逻辑文献中，**哥德尔第一不完备定理**（K. Gödel, 1931）与**塔斯基真值不可定义定理**（A. Tarski, 1933/1936）并非直接假定任意语义函数目录满射，而是需要额外构造递归公理化算术、哥德尔配数编码、语法可证性谓词，并在系统相容性（或 $\omega$-相容性）假设下运作。
+:::
 
 > 完备的目录必自裂其壳；凡想在球内穷尽一切者，必被对角线顺着法向顶出球外。
 
@@ -182,15 +186,19 @@ $$
 
 在[序曲](README.md)末尾，我们曾提出全书最深沉的一条反柏拉图几何洞见：**“实际上球永远只是近似，我们以为我们得到了一个球，但实际只是近似得到一个球。”** 结合本章的对角线逃逸机制，这一反柏拉图视角在连续分析、量子门编译与维度投影三个层面上展现出惊人的一致性：
 
-1. **有限阶泰勒多项式的截断余项裂缝 $R_{2N}(\theta) \neq 0$**：在经典或数字计算机内部，我们永远只能用有限步算术操作（多项式）去逼近连续球面上的余弦投影 $\cos\theta$。将 $\cos\theta$ 展开至第 $N$ 个偶次项（最高次数 $2N-2$），必留下一条有限截断余项裂缝：
+1. **有限阶泰勒多项式的截断余项裂缝 $R_{2N}(\theta)$**：在经典或数字计算机内部，我们永远只能用有限步算术操作（多项式）去逼近连续球面上的余弦投影 $\cos\theta$。将 $\cos\theta$ 展开至第 $N$ 个偶次项（最高次数 $2N-2$），记截断余项为
 
    $$
-   \cos\theta = \sum_{k=0}^{N-1} (-1)^k \frac{\theta^{2k}}{(2k)!} + R_{2N}(\theta), \qquad |R_{2N}(\theta)| \le \frac{|\theta|^{2N}}{(2N)!}.
+   R_{2N}(\theta) = \cos\theta - \sum_{k=0}^{N-1} (-1)^k \frac{\theta^{2k}}{(2k)!}.
    $$
 
-   只要自变量 $\theta \in (0, 2]$ 非零，交错级数余项 $R_{2N}(\theta)$ 就严格非零！多项式代表“球内有限步代数语法所能表达的闭集”，而超越函数 $\cos\theta$ 与有限阶泰勒多项式之间那道永不归零的余项缝隙 $R_{2N}(\theta)$，正是分析学里的“哥德尔逃逸缝”——有限次代数加乘永远无法把超越圆弧焊死。
+   多项式代表“球内有限步代数语法所能表达的闭集”，而超越函数 $\cos\theta$ 与有限阶泰勒多项式之间的余项缝隙 $R_{2N}(\theta)$（其经典拉格朗日上界与非零性质归入 [@rem-lagrange-taylor-remainder-literature]，完备赋范代数上的内核验证上界见 [@lem-exp-tail-le]），正是分析学里的“逃逸缝”——有限次代数加乘无法把超越圆弧焊死。
 2. **有限门计数下的割圆凸多面体**：在容错量子计算中，工程师手里只有有限离散门集 $\mathcal{G}$（例如克利福德加 $T$ 门 $\{H, T\}$）。在任意有限电路深度（量子门计数）$L < \infty$ 下，从北极初态 $\lvert 0\rangle$ 出发所能抵达的状态集合 $\mathcal{S}_L \subset S^2$ 永远只是球面上的有限离散点集，其欧氏凸包 $\operatorname{conv}(\mathcal{S}_L)$ 仅仅是一颗**内接于布洛赫球的有限凸多面体**——就像刘徽与祖冲之用割圆多边形逼近圆周一样，多面体的每一张平坦切面与真实球皮之间，都留着一弯等待更高门计数去填补的弓形残差。
 3. **开口螺旋的轴向投影意象**：如果把 [@prop-complete-diagonal-strict-refinement] 中每一次并入新对角线坐标 $\operatorname{conceptJoin}(\operatorname{latent}, g)$ 的拓扑加细，直观想象为沿着新增正交法向轴 $\vv{e}_{n+1} = \star I_n$ 的一次垂直抬升，那么低维观察者眼底那条看似首尾咬合、周而复始的闭合圆周 $(\cos t, \sin t)$，在并入了逃逸维度的外围空间里，其实是一条永不封口的**开口上升螺旋线** $(\cos t, \sin t, c\,t)$ 顺着法轴投下的平面阴影！你以为自己绕了一圈回到了原点 $(1, 0, 0)$，实际上高度坐标已经悄然跃迁到了 $(1, 0, 2\pi c)$。
+
+::: {.remark #rem-lagrange-taylor-remainder-literature title="余弦级数的拉格朗日截断余项界与非零性（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 由实分析中的拉格朗日泰勒余项定理与莱布尼茨交错级数判别法，余弦偶次截断余项满足 $|R_{2N}(\theta)| \le \frac{|\theta|^{2N}}{(2N)!}$，且对一切非零角 $\theta \in (0, 2]$ 严格有 $R_{2N}(\theta) \neq 0$。下文 [@lem-exp-tail-le] 则在任意完备赋范代数上给出了经 Lean 内核验证的指数尾部上界。
+:::
 
 三条论断到这里都还只是话。下面把前两条换成可以核对的数字和已经冻结的定理。
 
@@ -236,6 +244,8 @@ $\exp z$ 是级数 $\sum_k z^k/k!$ 的和（`NormedSpace.exp_series_hasSum_exp'`
 - 取 $A = M_2(\mathbb{C})$（算子范数）、$z = -\frac{i\theta}{2}\,\vv{n}\cdot\vv{\sigma}$（$\vv{n}$ 为单位向量，于是 $\lVert z\rVert = \frac{\lvert\theta\rvert}{2}$）。旋转器 $U = \exp z$ 的 $n$ 项截断满足 $\bigl\lVert U - \sum_{k<n} z^k/k!\bigr\rVert \le \frac{(\lvert\theta\rvert/2)^n}{n!}\,e^{\lvert\theta\rvert/2}$。
 
 ::: {.example #ex-taylor-remainder-three-bounds title="余弦与旋转器的截断余项：实际值、拉格朗日界与已验证界"}
+（表中中间一列的拉格朗日界 $\frac{(\theta^*)^{2N}}{(2N)!}$ 属**文献结果，未在本书形式化**，见 [@rem-lagrange-taylor-remainder-literature]；右列已验证界由冻结引理 [@lem-exp-tail-le] 给出。）
+
 **余弦，取 $\theta = \theta^* \approx 0.739085$（第二十四章的余弦不动点）。**
 
 | $N$ | 实际余项 $\lvert R_{2N}(\theta^*)\rvert$ | 拉格朗日界 $\frac{(\theta^*)^{2N}}{(2N)!}$ | 已验证界 $\frac{(\theta^*)^{2N}}{(2N)!}\,e^{\theta^*}$ |
@@ -332,7 +342,7 @@ $$
 **有限门计数的硬下界。** 回到第 2 条论断本身。那里只说内接多面体与球皮之间“留着”残差，没有说至少留多少。一行球冠面积就能给出答案。
 
 ::: {.example #ex-cap-covering-gate-count title="球冠覆盖：N 个顶点的内接多面体至少留下 2/N 的残差，以及门计数的下界"}
-本例是初等论证，未在本书形式化。
+**文献结果，未在本书形式化。** 本例调用阿基米德单位球冠面积公式（高为 $\delta$ 的单位球冠面积等于 $2\pi\delta$）给出初等覆盖下界，并与 [@rem-solovay-kitaev-literature] 对照。
 
 **残差的定义。** 设 $S$ 为单位球面 $S^2$ 上的 $N$ 个点，$P = \operatorname{conv}(S)$ 为其凸包。对单位向量 $\vv{u}$，球面在这个方向上伸到 $1$，多面体伸到支撑函数值 $h_P(\vv{u}) = \max_{\vv{s} \in S} \vv{u}\cdot\vv{s}$。称 $1 - h_P(\vv{u})$ 为方向 $\vv{u}$ 上的残差。
 
@@ -364,7 +374,7 @@ $$
 **反过来读。** 要让球面上每一点离可达点集的角距离都小于 $\varepsilon$，必须 $2^{L+1} - 1 \ge \frac{2}{1 - \cos\varepsilon}$，即 $L \ge \log_2\bigl(\frac{2}{1 - \cos\varepsilon} + 1\bigr) - 1 \approx 2\log_2\frac{1}{\varepsilon} + 1$。对 $\varepsilon = 10^{-2}, 10^{-3}, 10^{-6}$（弧度）分别给出 $L \ge 15, 21, 41$。这是一个只靠计数得到的下界：门长至少随 $\log\frac{1}{\varepsilon}$ 线性增长。Solovay–Kitaev 定理（[@rem-solovay-kitaev-literature]，文献结果）给出的是与之配对的上界。
 :::
 
-把四种残差并排放：正 $n$ 边形的弓高约为 $\frac{\pi^2}{2n^2}$；$N + 1$ 格指针的不可恢复误差至少是正 $(m+2)$ 边形弓高的一半；$N$ 个顶点的内接多面体至少留下 $\frac{2}{N}$；前 $N$ 项余弦多项式留下约 $\frac{\theta^{2N}}{(2N)!}$。它们都随资源增长而趋于零，也都对每一份有限的资源严格为正。序曲里那句“我们以为我们得到了一个球，但实际只是近似得到一个球”，在这四个场合各有一个可以核对的数。
+把四种残差尺度并排放：正 $n$ 边形的弓高为 $1 - \cos\frac{\pi}{n} = 2\sin^2\frac{\pi}{2n}$（[@ex-liu-hui-polygon-sagitta]）；$N + 1$ 格指针的不可恢复误差至少是正 $(m+2)$ 边形弓高的一半（[@thm-finite-record-cosine-obstruction]）；$N$ 个顶点的内接多面体覆盖下界见 [@ex-cap-covering-gate-count]；前 $N$ 项余弦多项式的余项受 [@lem-exp-tail-le] 的阶乘界 $\frac{|\theta|^{2N}}{(2N)!}e^{|\theta|}$ 控制（数值对照见 [@ex-taylor-remainder-three-bounds]）。它们都随资源增长而趋于零，而对有限记录信道与有限算例均呈严格正残差。序曲里那句“我们以为我们得到了一个球，但实际只是近似得到一个球”，在这四个场合各有一个可以核对的数。
 
 ## 21.4 毛球定理、笛卡尔 $720^\circ$ 角亏与 Adams 除法代数球面 {#sec-ch21-4}
 

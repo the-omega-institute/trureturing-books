@@ -275,7 +275,9 @@ where $H$ is the Shannon entropy in nats (`shannonEntropy` in Lean, with $0\ln 0
 Two applications of Jensen's inequality. The first uses $p_b$ itself as weights: $-\ln$ is convex, so $H(p_b) = \sum_i p_{b,i}\,(-\ln p_{b,i}) \ge -\ln\bigl(\sum_i p_{b,i}^2\bigr)$; the Shannon entropy is at least the collision entropy. The second averages over the $d + 1$ contexts with uniform weights $\frac{1}{d+1}$: $\frac{1}{d+1}\sum_b -\ln c_b \ge -\ln\bigl(\frac{1}{d+1}\sum_b c_b\bigr)$, where $c_b = \sum_i p_{b,i}^2$. Substituting $\sum_b c_b = 1 + P$ from hypothesis 2 gives the claim. The full proof is checked by the Lean kernel.
 :::
 
+::: {.remark #rem-complete-mub-collision-sum title="The Collision Probability Sum for Complete Mutually Unbiased Bases"}
 [@prop-collision-entropy-uncertainty] is by itself an inequality about tables of numbers; all the quantum mechanics sits in hypothesis 2. For the three Pauli contexts of a qubit, hypothesis 2 is the identity derived above from the tomography table, with $P = \Tr(\rho_{\vv{r}}^2)$. For general $d$, if the $d + 1$ contexts are mutually unbiased, one likewise has $\sum_b\sum_i p_{b,i}^2 = 1 + \Tr(\rho^2)$ (a literature result, not formalized in this book: I. D. Ivanović, *J. Phys. A* **25**, L363, 1992; such $d + 1$ contexts are known to exist when $d$ is a prime power).
+:::
 
 ::: {.example #ex-three-pauli-entropy-sum title="The Entropy Sum of the Three Pauli Contexts: No State Makes All Three Readings Definite"}
 For a qubit state with Bloch vector $\vv{r}$, the two outcome probabilities in context $b \in \{X, Y, Z\}$ are $\frac{1 \pm r_b}{2}$. By [@prop-collision-entropy-uncertainty] with $d = 2$ and $P = \frac{1 + \norm{\vv{r}}^2}{2}$:

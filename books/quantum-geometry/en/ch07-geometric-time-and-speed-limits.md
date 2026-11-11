@@ -139,7 +139,7 @@ Since $\mathrm{energy} > 0$ and $\hbar > 0$, multiplying both sides by $\frac{\h
 The $\mathrm{energy}$ of the theorem is an abstract speed parameter. Replacing it by the energy fluctuation of a concrete Hamiltonian shows when the bound is attained, when it is not, and how long a real qubit takes to cross the wall once.
 
 ::: {.example #ex-orthogonalization-times title="Working the Speed Limit Out: Attained for Two Levels, Not for Three, and Never Reached by an Unequal Superposition"}
-This example computes directly with concrete Hamiltonians. The two general bounds it uses — the Mandelstam–Tamm bound $\tau_\perp \ge \frac{\pi\hbar}{2\,\Delta H}$ and the Margolus–Levitin bound $\tau_\perp \ge \frac{\pi\hbar}{2\langle H\rangle}$ — are literature results, not formalized in this book (see [@rem-qsl-zeno-literature]); here $\Delta H$ is the standard deviation of the energy and $\langle H\rangle$ the mean energy above the ground level.
+This example computes directly with concrete Hamiltonians. Each of the two general bounds it uses — the Mandelstam–Tamm bound $\tau_\perp \ge \frac{\pi\hbar}{2\,\Delta H}$ and the Margolus–Levitin bound $\tau_\perp \ge \frac{\pi\hbar}{2\langle H\rangle}$ — is a **literature result, not formalized in this book** (see [@rem-qsl-zeno-literature]); here $\Delta H$ is the standard deviation of the energy and $\langle H\rangle$ the mean energy above the ground level.
 
 **1. Equal superposition of two levels: attained.** Take levels $0$ and $E$ and the initial state $\psi(0) = \frac{1}{\sqrt{2}}\bigl(\lvert 0\rangle + \lvert 1\rangle\bigr)$. Then $\psi(t) = \frac{1}{\sqrt{2}}\bigl(\lvert 0\rangle + e^{-iEt/\hbar}\lvert 1\rangle\bigr)$ and
 

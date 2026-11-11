@@ -182,10 +182,10 @@ Take $\vv{B} = \vv{e}_1 \wedge \vv{e}_2$. The rotation through the angle $\theta
 
 The second column is back at its starting point at $360^\circ$, when the third column has reached exactly the opposite point; any two rows $360^\circ$ apart (such as $90^\circ$ and $450^\circ$) have the same rotation and opposite rotors. Squaring each point of the third column (doubling its argument) gives the second column.
 
-**One direct check.** $R(90^\circ) = \frac{1}{\sqrt{2}}(1 - \vv{B})$, and with $\vv{B}^2 = -1$: $R(90^\circ)^2 = \frac{1}{2}(1 - 2\vv{B} + \vv{B}^2) = -\vv{B} = R(180^\circ)$; squaring again, $R(180^\circ)^2 = \vv{B}^2 = -1 = R(360^\circ)$.
+**One direct check.** $R(90^\circ) = \frac{1}{\sqrt{2}}(1 - \vv{B})$, and with $\vv{B}^2 = -1$: $R(90^\circ)^2 = \frac{1}{2}(1 - 2\vv{B} + \vv{B}^2) = -\vv{B} = R(180^\circ)$; squaring again, $R(180^\circ)^2 = \vv{B}^2 = -1 = R(360^\circ)$. In neutron interferometry the fringes are inverted when the spin has precessed through $360^\circ$ and restored at $720^\circ$ (a literature result, not formalized in this book: H. Rauch et al., *Phys. Lett. A* **54**, 425, 1975; S. A. Werner et al., *Phys. Rev. Lett.* **35**, 1053, 1975).
 :::
 
-A lone $-1$ is an overall sign, and by the discussion of the next section it changes no measurement reading; only when a branch that has been turned through a full turn is brought back together with a branch that has not does the sign become an observable relative phase. In neutron interferometry the fringes are inverted when the spin has precessed through $360^\circ$ and restored at $720^\circ$ (a literature result, not formalized in this book: H. Rauch et al., *Phys. Lett. A* **54**, 425, 1975; S. A. Werner et al., *Phys. Rev. Lett.* **35**, 1053, 1975).
+A lone $-1$ is an overall sign, and by the discussion of the next section it changes no single-branch measurement reading; only when a branch that has been turned through a full turn is brought back together with a branch that has not (as in the interferometric setting at the end of [@ex-rotor-two-turns]) does the sign become an observable relative phase.
 
 ## 5.3 Global Phase versus Relative Phase: Why Spinning a Single Line Is Invisible, and Only a Pair of Lines Spans an Area {#sec-global-vs-relative-phase}
 

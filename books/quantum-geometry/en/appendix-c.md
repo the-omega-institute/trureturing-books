@@ -350,7 +350,8 @@ In addition to the 219 declarations bound to formal environments or media anchor
 
 ## C.3 Open Conjectures & Unformalized Problems Register (8 Entries: 6 `OPEN` Conjectures + 2 Literature Boundaries — Zero `lean` Attributes) {#sec-appendix-c-open-register}
 
-In accordance with Rules 1 and 2 of this repository, unresolved mathematical or physical conjectures and unformalized frontier problems are presented strictly inside `conjecture` environments with **no `lean` attribute** (rendered with the red `OPEN` badge) or explicitly tagged literature `remark` environments, and never carry a `lean="..."` citation:
+::: {.remark #rem-appendix-c-open-literature-register title="Register of Open Conjectures and External Literature Boundaries (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book (for external literature boundary entries such as `O6` and `O7` below; entries `O1`–`O5` and `O8` are unresolved `OPEN` conjectures).** In accordance with Rules 1 and 2 of this repository, unresolved mathematical or physical conjectures and unformalized frontier problems are presented strictly inside `conjecture` environments with **no `lean` attribute** (rendered with the red `OPEN` badge) or explicitly tagged literature `remark` environments, and never carry a `lean="..."` citation:
 
 | # | Environment Anchor ID | Chapter | Conjecture / Frontier Problem Title | Core Mathematical or Physical Statement Summary | `lean` Attribute | Badge Status |
 | :---: | :--- | :---: | :--- | :--- | :---: | :---: |
@@ -362,6 +363,8 @@ In accordance with Rules 1 and 2 of this repository, unresolved mathematical or 
 | O6 | `#rem-ryu-takayanagi-literature` | `CH19` | Continuous AdS/CFT Ryu–Takayanagi Minimal-Surface Formula | Full continuum gravitational path-integral derivation of $S(A) = \operatorname{Area}(\gamma_A)/(4G_N)$ (this book formalizes only the discrete `BridgeGraph` quantum max-flow min-cut theorem) | None (Literature) | `Literature` |
 | O7 | `#rem-diophantine-z-in-q-literature` | `CH23` | Hilbert's Tenth Problem over $\mathbb{Q}$ ($H_{10}(\mathbb{Q})$) & Existential Definability of $\mathbb{Z} \subset \mathbb{Q}$ | Whether $\mathbb{Z}$ admits a purely existential ($\exists$) Diophantine definition in $\mathbb{Q}$ and whether $H_{10}(\mathbb{Q})$ is decidable (Koenigsmann 2016 proved a $\forall\exists$ first-order characterization, while $H_{10}(\mathbb{Q})$ remains open) | None (Literature) | `OPEN / Lit.` |
 | O8 | `#conj-coda-navier-stokes-regularity` | `CH30` | Unforced 3D Incompressible Navier–Stokes Global Regularity Conjecture (Clay Millennium Statements A / B) | For strictly positive viscosity $\nu > 0$ and identically zero external force $\mathbf{f} \equiv \mathbf{0}$, whether every smooth divergence-free rapidly decaying (on $\mathbb{R}^3$) or periodic (on $\mathbb{T}^3$) initial velocity $\mathbf{u}_0$ admits a global smooth finite-energy solution on $[0, \infty)$ or develops finite-time blow-up (the forced Statements C / D blow-up literature is noted separately in `#rem-ch30-navier-stokes-forced-literature`) | None (Forbidden) | `OPEN` (Red) |
+
+:::
 
 ---
 
