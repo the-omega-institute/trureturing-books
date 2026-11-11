@@ -62,6 +62,24 @@ class KitTests(unittest.TestCase):
     def fig(self, **kw) -> figkit.Figure:
         return figkit.Figure("t", "en", 300, 200, alt="alt", **kw)
 
+    def test_coordinate_rounding_ignores_libm_noise(self):
+        for coordinate in (118.325, 54.075, -118.325, -54.075):
+            with self.subTest(coordinate=coordinate):
+                self.assertEqual(figkit.num(coordinate - 1e-12),
+                                 figkit.num(coordinate + 1e-12))
+        self.assertEqual(figkit.num(-1e-12), "0")
+        self.assertNotEqual(figkit.num(118.32), figkit.num(118.33))
+
+    def test_arc_output_ignores_libm_noise_at_segment_boundary(self):
+        def make(start, end):
+            f = self.fig()
+            f.arc(150, 100, 60, start, end)
+            return f.svg()
+
+        self.assertEqual(make(30 - 1e-12, 90 + 1e-12),
+                         make(30 + 1e-12, 90 - 1e-12))
+        self.assertNotEqual(make(30, 90), make(30, 94))
+
     def test_output_is_deterministic_and_paints_by_role(self):
         def make() -> str:
             f = self.fig()
@@ -217,6 +235,16 @@ class RenderingTests(unittest.TestCase):
             self.assertIn('<div class="tr-fig-row tr-fig-wrap" style="max-width:420px" role="img" aria-label="Two panels.">', two)
             self.assertEqual(two.count('<svg class="tr-fig tr-fig-part" viewBox="0 0 200 160" style="flex-basis:200px"'), 2)
             self.assertEqual(two.count("</svg>"), 2)
+            grid = PANELS.replace("left, right = fig.row([200, 200], 160)",
+                                                "left, right = fig.row([200, 200], 80)\n    more = fig.row([200, 200], 80, y=80)") \
+                .replace("left.circle(100, 80, 40", "left.circle(100, 40, 30").replace("right.rect(60, 40, 80, 80", "right.rect(60, 10, 80, 60") \
+                .replace("right.text(100, 150,", "more[1].line(20, 40, 180, 40, color=\"cyan\")\n    more[0].text(100, 60,")
+            (repo.root / "books/demo/figures/grid.py").write_text(grid, encoding="utf-8")
+            figure.build(book, ["grid"])
+            rows = figure.inline_html(figure.out_path(book, "grid", "en").read_text(encoding="utf-8"))
+            self.assertTrue(rows.startswith('<div class="tr-fig-rows" style="max-width:420px" role="img" aria-label="Two panels.">'), rows[:120])
+            self.assertEqual(rows.count('<div class="tr-fig-row tr-fig-wrap">'), 2, "one flex row per row of panels")
+            self.assertEqual(rows.count('class="tr-fig tr-fig-part"'), 4)
 
     def ctx(self, book: config.Book, lang: str, target: str) -> tuple[render.RenderContext, model.EditionModel]:
         edition = next(e for e in book.editions if e.lang == lang)

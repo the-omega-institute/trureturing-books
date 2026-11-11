@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="appb-spacetime-split" data-lang="en" viewBox="0 0 440 346" width="440" height="346" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="The left column holds the eight blades of the even part of the spacetime algebra Cl₁,₃, the right column the eight blades of Cl₃,₀; a line joins each row, and the last column gives the square, the same on both sides. 1 goes to 1, square +1. The three time–space bivectors σₖ = γₖγ₀ (grade 2 in spacetime) go to the three vectors e₁, e₂, e₃ (grade 1), joined in cyan, square +1. The three purely spatial bivectors σ₁σ₂ = −γ₁γ₂, σ₁σ₃ = −γ₁γ₃, σ₂σ₃ = −γ₂γ₃ go to e₁₂, e₁₃, e₂₃, joined in magenta, square −1. The four-dimensional pseudoscalar σ₁σ₂σ₃ = γ₀γ₁γ₂γ₃ (grade 4) goes to e₁₂₃ (grade 3), joined in violet, square −1. Above, the squares of the generators: γ₀² = +1, γ₁² = γ₂² = γ₃² = −1.">
+<title>The left column holds the eight blades of the even part of the spacetime algebra Cl₁,₃, the right column the eight blades of Cl₃,₀; a line joins each row, and the last column gives the square, the same on both sides. 1 goes to 1, square +1. The three time–space bivectors σₖ = γₖγ₀ (grade 2 in spacetime) go to the three vectors e₁, e₂, e₃ (grade 1), joined in cyan, square +1. The three purely spatial bivectors σ₁σ₂ = −γ₁γ₂, σ₁σ₃ = −γ₁γ₃, σ₂σ₃ = −γ₂γ₃ go to e₁₂, e₁₃, e₂₃, joined in magenta, square −1. The four-dimensional pseudoscalar σ₁σ₂σ₃ = γ₀γ₁γ₂γ₃ (grade 4) goes to e₁₂₃ (grade 3), joined in violet, square −1. Above, the squares of the generators: γ₀² = +1, γ₁² = γ₂² = γ₃² = −1.</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<text class="tf-dim" x="220" y="20" font-size="14" text-anchor="middle">γ<tspan dy="0.28em" font-size="72%">0</tspan><tspan dy="-0.7em" font-size="72%">2</tspan><tspan dy="0.42em"> = +1,   γ</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.7em" font-size="72%">2</tspan><tspan dy="0.42em"> = γ</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.7em" font-size="72%">2</tspan><tspan dy="0.42em"> = γ</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.7em" font-size="72%">2</tspan><tspan dy="0.42em"> = −1</tspan></text>
+<text class="tf-ink" x="214" y="54" font-size="14" text-anchor="end" font-weight="600">even part of <tspan font-style="italic">Cl</tspan><tspan dy="0.28em" font-size="72%">1,3</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-ink" x="296" y="54" font-size="14" font-weight="600"><tspan font-style="italic">Cl</tspan><tspan dy="0.28em" font-size="72%">3,0</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim" x="400" y="54" font-size="13" text-anchor="middle">square</text>
+<text class="tf-ink" x="180" y="89.04" font-size="14" text-anchor="end">1</text>
+<text class="tf-dim" x="210" y="88.32" font-size="12" text-anchor="end">0</text>
+<line x1="218" y1="84" x2="270" y2="84" class="ts-ink" stroke-width="1.4" fill="none"/>
+<text class="tf-dim" x="276" y="88.32" font-size="12">0</text>
+<text class="tf-ink" x="300" y="89.04" font-size="14">1</text>
+<text class="tf-cyan" x="400" y="89.04" font-size="14" text-anchor="middle">+1</text>
+<text class="tf-ink" x="180" y="125.04" font-size="14" text-anchor="end">σ<tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em"> = γ</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">γ</tspan><tspan dy="0.28em" font-size="72%">0</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim" x="210" y="124.32" font-size="12" text-anchor="end">2</text>
+<line x1="218" y1="120" x2="270" y2="120" class="ts-cyan" stroke-width="2" fill="none"/>
+<text class="tf-dim" x="276" y="124.32" font-size="12">1</text>
+<text class="tf-cyan" x="300" y="125.04" font-size="14" font-weight="600"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-cyan" x="400" y="125.04" font-size="14" text-anchor="middle">+1</text>
+<text class="tf-ink" x="180" y="151.04" font-size="14" text-anchor="end">σ<tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em"> = γ</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">γ</tspan><tspan dy="0.28em" font-size="72%">0</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim" x="210" y="150.32" font-size="12" text-anchor="end">2</text>
+<line x1="218" y1="146" x2="270" y2="146" class="ts-cyan" stroke-width="2" fill="none"/>
+<text class="tf-dim" x="276" y="150.32" font-size="12">1</text>
+<text class="tf-cyan" x="300" y="151.04" font-size="14" font-weight="600"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-cyan" x="400" y="151.04" font-size="14" text-anchor="middle">+1</text>
+<text class="tf-ink" x="180" y="177.04" font-size="14" text-anchor="end">σ<tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em"> = γ</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">γ</tspan><tspan dy="0.28em" font-size="72%">0</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim" x="210" y="176.32" font-size="12" text-anchor="end">2</text>
+<line x1="218" y1="172" x2="270" y2="172" class="ts-cyan" stroke-width="2" fill="none"/>
+<text class="tf-dim" x="276" y="176.32" font-size="12">1</text>
+<text class="tf-cyan" x="300" y="177.04" font-size="14" font-weight="600"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-cyan" x="400" y="177.04" font-size="14" text-anchor="middle">+1</text>
+<text class="tf-ink" x="180" y="213.04" font-size="14" text-anchor="end">σ<tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">σ</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em"> = −γ</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">γ</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim" x="210" y="212.32" font-size="12" text-anchor="end">2</text>
+<line x1="218" y1="208" x2="270" y2="208" class="ts-magenta" stroke-width="2" fill="none"/>
+<text class="tf-dim" x="276" y="212.32" font-size="12">2</text>
+<text class="tf-magenta" x="300" y="213.04" font-size="14" font-weight="600"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">12</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-magenta" x="400" y="213.04" font-size="14" text-anchor="middle">−1</text>
+<text class="tf-ink" x="180" y="239.04" font-size="14" text-anchor="end">σ<tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">σ</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em"> = −γ</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">γ</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim" x="210" y="238.32" font-size="12" text-anchor="end">2</text>
+<line x1="218" y1="234" x2="270" y2="234" class="ts-magenta" stroke-width="2" fill="none"/>
+<text class="tf-dim" x="276" y="238.32" font-size="12">2</text>
+<text class="tf-magenta" x="300" y="239.04" font-size="14" font-weight="600"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">13</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-magenta" x="400" y="239.04" font-size="14" text-anchor="middle">−1</text>
+<text class="tf-ink" x="180" y="265.04" font-size="14" text-anchor="end">σ<tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">σ</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em"> = −γ</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">γ</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim" x="210" y="264.32" font-size="12" text-anchor="end">2</text>
+<line x1="218" y1="260" x2="270" y2="260" class="ts-magenta" stroke-width="2" fill="none"/>
+<text class="tf-dim" x="276" y="264.32" font-size="12">2</text>
+<text class="tf-magenta" x="300" y="265.04" font-size="14" font-weight="600"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">23</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-magenta" x="400" y="265.04" font-size="14" text-anchor="middle">−1</text>
+<text class="tf-ink" x="180" y="301.04" font-size="14" text-anchor="end">σ<tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">σ</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">σ</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em"> = γ</tspan><tspan dy="0.28em" font-size="72%">0</tspan><tspan dy="-0.28em">γ</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">γ</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">γ</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim" x="210" y="300.32" font-size="12" text-anchor="end">4</text>
+<line x1="218" y1="296" x2="270" y2="296" class="ts-violet" stroke-width="2" fill="none"/>
+<text class="tf-dim" x="276" y="300.32" font-size="12">3</text>
+<text class="tf-violet" x="300" y="301.04" font-size="14" font-weight="600"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">123</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-magenta" x="400" y="301.04" font-size="14" text-anchor="middle">−1</text>
+<text class="tf-dim" x="210" y="336.32" font-size="12" text-anchor="end">grade</text>
+<text class="tf-dim" x="276" y="336.32" font-size="12">grade</text>
+</svg>

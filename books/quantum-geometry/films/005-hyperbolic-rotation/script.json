@@ -1,0 +1,40 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen", "cosh": "cosh", "sinh": "shine", "Minkowski": "Min-koff-ski"},
+  "music": {"bpm": 80, "progression": "d-minor"},
+  "scenes": [
+    {"id": "circle", "name": "CIRCLE VS HYPERBOLA", "lead": 1.8, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["Take one event: five units of time, three of space.", "取一个事件：时间 5，空间 3，即 v = (5, 3)。"],
+      ["Turn it, and it rides a circle, straight out through the light cone.", "转动它，它沿圆 t² + x² = 34 走，径直穿出光锥。"],
+      ["Boost it, and it rides a hyperbola that hugs the cone but never crosses it.", "推动它，它沿双曲线 t² − x² = 16 走，贴着光锥，却永远跨不过去。"]
+    ]},
+    {"id": "boost", "name": "BOOST BY LN 2", "lead": 0.5, "tail": 0.5, "music": [0.9, 0.6, 0.7, 0.0, 0.3], "lines": [
+      ["Now push with rapidity log two.", "现在以快度 η = ln 2 推动。"],
+      ["Cosh is five quarters, sinh is three quarters, and their squares differ by exactly one.", "cosh η = 5/4，sinh η = 3/4，两者的平方差恰好是 1。"],
+      ["The event slides down its hyperbola to four, zero. Its proper time is four.", "事件沿双曲线滑到 (4, 0)：它的固有时 τ = 4。"],
+      ["Meanwhile the moving frame's axes close like scissors toward the cone.", "同时，运动参考系的两根轴像剪刀一样向光锥合拢。"]
+    ], "cues": [{"line": 1, "at": 3.6, "kind": "chime"}]},
+    {"id": "cone", "name": "THE CONE STAYS", "lead": 0.5, "tail": 1.8, "music": [0.9, 0.8, 0.8, 0.5, 0.5], "lines": [
+      ["Sweep the rapidity, and beads on the light cone only slide along it.", "来回扫动快度，光锥上的珠子只沿光锥滑动。"],
+      ["One branch squeezes toward the origin, the other stretches out. None leaves the cone.", "一支挤向原点，另一支向外散开，没有一颗离开光锥。"],
+      ["Lean checks the converse: a quadratic form that vanishes on the cone is a multiple of t squared minus x squared.", "Lean 检验了反方向：在光锥上处处为零的二次型，一定是 t² − x² 的常数倍。"],
+      ["So the cone fixes the shape. Only a clock fixes the scale.", "所以光锥锁定了形状；比例刻度还要靠一只时钟来标定。"]
+    ], "cues": [{"line": 2, "at": 4.4, "kind": "stamp"}]},
+    {"id": "add", "name": "RAPIDITIES ADD", "lead": 0.5, "tail": 0.5, "music": [1.0, 0.9, 0.9, 0.6, 0.5], "lines": [
+      ["Push by log two, then by log two again.", "先推 ln 2，再推 ln 2。"],
+      ["The two matrices multiply into one boost by log four: cosh seventeen eighths, sinh fifteen eighths.", "两个矩阵相乘，正是一次 ln 4 的推动：cosh = 17/8，sinh = 15/8。"],
+      ["Each push sweeps the same sector of the hyperbola, so rapidities add like areas.", "每次推动扫过双曲线下同样大的扇形，所以快度像面积一样相加。"],
+      ["Velocities do not add: three fifths and three fifths make fifteen seventeenths, still below one.", "速度却不能直接相加：3/5 与 3/5 合成 15/17，仍小于 1。"]
+    ], "cues": [{"line": 2, "at": 3.2, "kind": "chime"}]},
+    {"id": "twins", "name": "SAME COUNT, ANY FRAME", "lead": 0.5, "tail": 1.6, "music": [1.0, 0.8, 0.7, 0.5, 0.4], "lines": [
+      ["Two worldlines from the origin to ten, zero: one stays put, one turns back at five, three.", "从原点到 (10, 0) 的两条世界线：一条原地不动，一条在 (5, 3) 折返。"],
+      ["Each bent leg ticks four, eight in all. The straight line ticks ten.", "折线每段刻 4，共 8；直线刻 10。"],
+      ["Boost into the outbound frame: the return leg's rapidity falls by another log two, to minus log four.", "推到去程旅行者的参考系：回程的快度再减去 ln 2，成为 −ln 4。"],
+      ["Every leg changes shape, yet the counts stay eight and ten.", "每一段都变了样，刻度数仍是 8 与 10。"]
+    ], "cues": [{"line": 3, "at": 1.3, "kind": "stamp"}]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.2, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, chapter seventeen.", "《量子计算的几何直觉》· 第十七章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}

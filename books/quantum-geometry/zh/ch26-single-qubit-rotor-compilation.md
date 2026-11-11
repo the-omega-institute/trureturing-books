@@ -13,7 +13,9 @@
    $$
    并通过双侧夹心积 $v \mapsto R v \widetilde{R}$ 一步算出三维方向向量 $v \in \mathbb{R}^3$ 的精确转向？
 
-![布洛赫矩阵迹与坐标还原及正半定球界、偶子代数旋转器双侧夹心作用，以及 ZYZ 欧拉角旋转器编译流水线](../assets/fig-26-zyz-euler-rotor-compiler.svg)
+::: {.figure src="ch26-overview"}
+**图 26。** 本章地图：左栏，绿色的布洛赫球，琥珀色的纯态箭头伸到球面 $\lvert r\rvert = 1$，墨色的点在球内，正半定的矩阵都落在这里（[@prop-hermitian-bloch-geometry]、[@cor-psd-bloch-ball-bound]）；中栏，夹心积绕紫色的 $z$ 轴转 $90^\circ$，青色的影子留在轴上，品红的扇形被虚线分成两个半角；右栏，$e_1$ 依次绕 $z$、$y$、$z$ 转过 $(\alpha, \beta, \gamma) = (0.37, -0.81, 0.52)$，琥珀色的三段路停在 $R e_1 \widetilde{R}$（旋子编译是数值演示，没有冻结定理）。
+:::
 
 ## 布洛赫矩阵的迹与坐标还原 {#sec-bloch-matrix-trace-and-recovery}
 
@@ -64,6 +66,10 @@ $$
 - 当 $i = 2$ 时，$\frac{a + r_2}{2} - \frac{a - r_2}{2} = r_2$。
 
 三个分量逐一恒等，故 $\operatorname{bloch}(\operatorname{blochMatrix}(a, r)) = r$。完整证明由 Lean 内核检查。
+:::
+
+::: {.figure src="ch26-read-coords"}
+**从矩阵读回迹与三个坐标。** 取 $a = 1$、$r = (0.48, 0.60, 0.64)$ 的 $\operatorname{blochMatrix}(1, r)$：青色的对角两格相加得迹 $1$、相减得 $z = 0.64$；墨色的右上一格给出 $x = 2 \times 0.24$ 与 $y = -2 \times (-0.30)$；虚线框的左下一格只是它的共轭，不必读。读回的正是 $r$（[@thm-bloch-matrix-trace]、[@lemma-bloch-coordinate-recovery]）。
 :::
 
 ## 厄米重构、纯态单位球面与正半定球界 {#sec-hermitian-bloch-and-psd-ball}
@@ -118,6 +124,10 @@ $$
 由于 $\operatorname{Re}(\det M) \ge 0$，必有 $\norm{\operatorname{bloch}(M)}^2 \le \bigl(\operatorname{Re}(\Tr M)\bigr)^2$；再结合 $\operatorname{Re}(\Tr M) \ge 0$ 与 $\norm{\operatorname{bloch}(M)} \ge 0$，由非线性算术决策过程 `nlinarith` 推出 $\norm{\operatorname{bloch}(M)} \le \operatorname{Re}(\Tr M)$（特别地，对迹为 $1$ 的混态密度矩阵有 $\norm{\operatorname{bloch}(\rho)} \le 1$）。完整证明由 Lean 内核检查。
 :::
 
+::: {.figure src="ch26-det-sign"}
+**迹为 $1$ 时，行列式的符号说出箭头在哪。** 布洛赫球的 $x$–$z$ 截面：$\det = (1 - \lvert r\rvert^2)/4$，琥珀色的纯态在绿色的圆周上，$\det = 0$；墨色的点在球内，$\det = 0.19 > 0$；品红的点在球外，$\det = -0.17 < 0$，不是正半定。绿色的圆盘是正半定矩阵所能到达的范围（[@cor-psd-bloch-ball-bound]），圆周是迹一幂等的纯态（[@prop-hermitian-bloch-geometry]）。
+:::
+
 ## 偶子代数双矢量与双侧夹心积 {#sec-even-rotor-sandwich-action}
 
 有了 [@thm-bloch-matrix-trace] 至 [@cor-psd-bloch-ball-bound] 奠定的布洛赫球体状态几何，现在让我们把目光转向**旋转器（Rotor）编译**：当单比特量子门作用在布洛赫向量 $v = r_0 e_1 + r_1 e_2 + r_2 e_3 \in \mathbb{R}^3 \subset \mathcal{Cl}_{3,0}(\mathbb{R})$ 上时，如何完全在实克利福德偶子代数 $\mathcal{Cl}^+_{3,0}(\mathbb{R})$ 内部完成编译与旋转？
@@ -135,6 +145,10 @@ $$
 $$
 R_u(\theta) = \exp\Bigl(-\frac{\theta}{2} B_u\Bigr) = \cos\frac{\theta}{2} - \sin\frac{\theta}{2}\,B_u \in \mathcal{Cl}^+_{3,0}(\mathbb{R}).
 $$
+
+::: {.figure src="ch26-half-angle"}
+**旋子只走半角，箭头走整角。** 取 $\theta = 120^\circ$、绕 $z$ 轴：左栏紫色的点 $R_z(\theta)$ 停在单位圆上 $\theta/2 = 60^\circ$ 处，横坐标是标量 $\cos 60^\circ$，纵坐标是 $-e_{12}$ 的系数 $\sin 60^\circ$，落在圆上即 $R\widetilde{R} = 1$；右栏夹心积把 $e_1$ 转过品红扇形的整角 $120^\circ$，停在琥珀色的 $R e_1 \widetilde{R}$。
+:::
 
 直接用[第二十五章](ch25-rewriting-and-xor.md)的逆序共轭 $\widetilde{R}_u(\theta) = \cos\frac{\theta}{2} + \sin\frac{\theta}{2}\,B_u$ 检验归一化：
 
@@ -343,6 +357,10 @@ self_test()
 ```
 
 让我们在下面的数值实例中，把非平凡欧拉角三元组 $(\alpha, \beta, \gamma) = (0.37, -0.81, 0.52)$ 以及标准量子门 $T$ 与阿达玛门 $H$ 的旋转器编译结果逐位打印核对。
+
+::: {.figure src="ch26-rotor-product"}
+**三枚两项的旋子乘成一枚四项的旋子。** 四栏是同一副小坐标，紫色柱子依次是 $1, e_{12}, e_{13}, e_{23}$ 的系数：$R_z(0.37)$、$R_y(-0.81)$、$R_z(0.52)$ 各只有两根柱子，乘积 $R$ 的四根都不为零，每栏的平方和都是 $1$。这是下面例题的数值，旋子编译没有冻结定理。
+:::
 
 ::: {.example #ex-zyz-compilation-trace title="非平凡欧拉角 (0.37, −0.81, 0.52) 与 H、T 门的旋转器编译核验"}
 1. **编译非平凡欧拉角三元组 $(\alpha, \beta, \gamma) = (0.37, -0.81, 0.52)$**：调用 `RotorCompiler.compile(0.37, -0.81, 0.52)`，三次半角旋转器在 $\mathcal{Cl}^+_{3,0}(\mathbb{R})$ 中相乘后，仅在掩码 `0`（标量 $1$）、`3`（$e_1 e_2$）、`5`（$e_1 e_3$）、`6`（$e_2 e_3$）四个偶阶位上留有非零实系数（保留 6 位小数）：
