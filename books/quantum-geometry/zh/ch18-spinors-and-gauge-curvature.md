@@ -138,6 +138,10 @@ $$
 \operatorname{gauge}(s, t, g, u)(e) = g\bigl(t(e)\bigr) \cdot u(e) \cdot g\bigl(s(e)\bigr)^{-1}.
 $$
 
+::: {.viz src="lattice-gauge-loop" preset="twist" height="500"}
+**拧一个顶点，相邻两条边的相位转遍所有值。** 单个方格上只拧顶点 1 一整圈（琥珀色的规范指针）：$e_0$ 与 $e_1$ 上的指针一个顺转、一个逆转，各自经过 $1, i, -1, -i$；方格中心品红的回路相位始终停在 $i$。
+:::
+
 为什么单个边相位 $u(e)$ 本身不是物理可观测量？因为只要调整端点 $s(e)$ 与 $t(e)$ 的局部相位基准 $g$，就能把一条孤立边上的相位拧成任意值！要在整张图上建立一套统一的相位参照系，最自然的几何操作是在图上选定一棵**命名生成树**（`NamedSpanningTree`）$T \subseteq E$ 与一个参考根顶点 $r \in V$：
 
 - 树边集合 $T$ 中的每条边都不是自环（$\forall e \in T,\; s(e) \neq t(e)$）；
@@ -181,6 +185,11 @@ $$
 仔细端详 [@thm-tree-phase-transport] 的第 3 条性质：当顶点规范变换发生时，从根 $r$ 到顶点 $a$ 的树路径相位变化为 $g(a)\cdot\operatorname{rootPhase}(u, a)\cdot g(r)^{-1}$。这意味着什么？
 
 - 如果我们取一条**不在生成树中**的弦边（chord）$e \notin T$，把“从根 $r$ 沿树走到起点 $s(e)$”、“跨过弦边 $e$ 本身”、再“从终点 $t(e)$ 沿树倒退回根 $r$”这三段合成为一条**基本闭合回路**（fundamental cycle），那么起点与终点的局部规范因子 $g(s(e))$、$g(t(e))$ 就会与弦边自身的规范变换 $g(t(e))u(e)g(s(e))^{-1}$ 严丝合缝地全部抵消！
+
+::: {.viz src="lattice-gauge-loop" preset="chord" height="500"}
+**弦的基本回路不随规范变换而变。** 两格的格点上，青色的生成树是上下两行与最左一列；右边那条弦的基本回路是品红虚线围出的整个长方形。除根以外的顶点一起拧，每条边的指针都在转，两格与外圈的品红指针都不动（[@thm-tree-phase-transport] 第 3 条）。
+:::
+
 - 更进一步，如果观察者在顶点集合中指定了一组不允许随意拧动相位的**参考锚点集** $R \subseteq V$（包含根顶点 $r \in R$），并将允许的规范变换限制在固定所有锚点的子群
 
 $$
@@ -188,6 +197,10 @@ $$
 $$
 
 之内，那么除了每条弦边 $e \notin T$ 对应的基本回路相位之外，从根 $r$ 沿树走到其余每个非根锚点 $a \in R \setminus \{r\}$ 的开放树路径相位 $\operatorname{rootPhase}\;ht\;r\;u\;a$ 也因为首尾两端 $g(a) = g(r) = 1$ 而成为严格的规范不变量！
+
+::: {.viz src="lattice-gauge-loop" preset="anchor" height="500"}
+**两个锚点之间的树路径相位拧不动。** 四格的格点上，根 $r$ 与右上角 $a$ 都是锁住的方块，其余顶点随意拧：青色带子标出的树路径 $r \to a$ 上每条边都在转，右侧青色指针给出的路径相位却不动。
+:::
 
 在有限图（`[Fintype V] [Fintype E]`）情形下，模块 [`AnchoredPhaseClassification`](lean:D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification) 将这两类不变量打包成乘积坐标空间
 
@@ -229,7 +242,15 @@ $$
 由 [@thm-tree-phase-transport] 的端点规范协变性（性质 3），弦边回路坐标中 $g(s(e))$ 与 $g(t(e))$ 成对消去，而锚点 $a \in R$ 满足 $g(a) = g(r) = 1$，故对两分量应用函数外延性（`Prod.ext` 与 `funext`）知 $\chi$ 在锚定规范轨道上恒定；反之，若 $\chi(u) = \chi(w)$，定义以根 $r$ 为基准的顶点树势比值 $g(v) = \operatorname{rootPhase}(w, v) \cdot \operatorname{rootPhase}(u, v)^{-1}$，则由根归一性与非根锚点坐标相等知 $g \in \operatorname{anchoredGroup}(R)$，且在树边（由性质 2 `hedge`）与弦边上逐边（`funext e`）验证 $\operatorname{gauge}(s, t, g, u) = w$。对于截面 $\sigma(z)$，由于 `sectionLoops` 在生成树 $T$ 上恒取 $1$，树支撑图上的边差分核定理给出 $\operatorname{rootPhase}(\operatorname{sectionLoops}(z), v) = 1$，再由端点规范协变性知 $\operatorname{rootPhase}(\sigma(z), v) = \operatorname{sectionPotential}(z, v)$，从而 $\chi(\sigma(z)) = z$（`RightInverse`）且 $\ker(\chi) = N$（结论 1–2）。由于 $\chi$ 与 $\sigma$ 均为紧 Hausdorff 拓扑群之间的连续同态且 $\chi \circ \sigma = \mathrm{id}$，商群诱导双边连续的拓扑群同构 $q$（结论 3）。最后，连通生成树满足树边数 $|T| = n - 1$，弦边数（独立基本回路数）为 $c = m - |T| = m + 1 - n$，非根锚点数为 $a = k - 1$，两者相加即得独立环面坐标维数 $c + a = m + k - n$（结论 4）。完整证明由 Lean 内核检查。
 :::
 
+::: {.viz src="lattice-gauge-loop" preset="two" height="500"}
+**相邻两格的回路相位相乘，就是外圈的回路相位。** 两格的格点上只转中间那条公共边（琥珀色）：左格的品红指针朝一边转，右格朝另一边转，外圈的品红指针不动。公共边在两格里走的方向相反，相乘时抵消，所以三个回路里只有 $c = m + 1 - n = 7 + 1 - 6 = 2$ 个独立（[@cor-anchored-phase-classification] 第 4 条）。
+:::
+
 > 未受锚点锁定的自由树枝相位可由局部规范变换抹平；而基本闭合回路围出的回路相位与连接各参考锚点的树路径相对相位，则是任何锚定规范变换都无法擦除的不变量。
+
+::: {.viz src="lattice-gauge-loop" preset="tree" height="500"}
+**沿生成树拧平：树边全变成 1，弦上只剩回路相位。** 四格的格点上，时间轴把每个顶点拧到它的树输运相位的倒数：青色的 8 条树边全部转到 $1$，4 条弦上剩下各自基本回路的相位——中间一列的弦等于它左边那一格，右边一列的弦等于同一行两格相乘。这正是截面 $\sigma$ 的形状（[@cor-anchored-phase-classification]）。
+:::
 
 让我们用一个四顶点单方格闭合回路的具体算例，亲手体验 [@cor-anchored-phase-classification] 是如何把四条边上的冗余相位洗成唯一一个闭合回路不变量的。
 
@@ -262,6 +283,14 @@ c + a = m + k - n = 4 + 1 - 4 = 1.
 $$
 
 在唯一弦边 $e_3$（从 $s(e_3) = 3$ 到 $t(e_3) = 0$）上，树输运给出 $\operatorname{rootPhase}(u, 3) = 1 \cdot 1 \cdot 1 = 1$ 与 $\operatorname{rootPhase}(u', 3) = i \cdot i \cdot i = -i$，从而坐标映射给出 $\chi(u)(e_3) = 1 \cdot i \cdot 1^{-1} = i$ 且 $\chi(u')(e_3) = (-i) \cdot (-1) \cdot 1^{-1} = i$，精确验证了 $\chi(u) = \chi(u')$。
+:::
+
+::: {.viz src="lattice-gauge-loop" preset="plaquette" height="500"}
+**例题的四条边：相位摊开了，回路还是 $i$。** 边相位从 $(1, 1, 1, i)$ 出发，紫色指针把规范从 $1$ 拧到 $g = (1, i, -1, -i)$；走完时间轴，四条边读作 $(i, i, i, -1)$，方格中心品红的回路相位始终是 $i$。
+:::
+
+::: {.viz src="lattice-gauge-loop" height="560"}
+**格点规范实验室。** 在 1、2、4 个方格之间切换，拖动边上的指针改边相位，拖动顶点的紫色指针做规范变换，或锁住远角 $a$ 作第二个锚点：读数栏随时给出 $c = m + 1 - n$、$a = k - 1$ 与不变相位的个数 $c + a = m + k - n$，而品红的回路相位只在改边相位时才动。
 :::
 
 从二阶反交换矩阵的手性耦合（[@lemma-qubit-clifford-pair]）到闭合回路与参考锚点的相位分类（[@cor-anchored-phase-classification]），我们看到：未锚定顶点上的局部规范冗余可在生成树自由枝条上被抹平，而真正不可磨灭的规范不变内容，则完整驻留在跨越树外弦边的 $c = m + 1 - n$ 个基本闭合回路相位与连接非根参考锚点的 $a = k - 1$ 个根到锚点树路径相位之中（在单锚点 $k = 1$ 情形下，$a = 0$，全部不变量恰由闭合回路和乐给出）。那么，当无数个这样的局部量子态通过张量指标交织成一张庞大的纠缠网络时，网络的“最大信息流”与几何截面的“最小割面积”之间又会涌现出怎样的定量定律？让我们翻开[下一章](ch19-tensor-networks-and-holography.md)。

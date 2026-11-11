@@ -78,12 +78,15 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `chsh-dial` | 四个余弦叠起来能越过 2，却越不过两侧张开的面积给的天花板；经典的隐方向怎么转都停在 2 | `collinear` `sixty` `cross` `sweep` `tsirelson` `hidden` `arc` |
 | `walk-spreading` | 带着硬币相干地走，宽度按步数长大；掷硬币乱走，宽度只按步数的平方根长大 | `ten` `fifty` `width` `coin` `ring` |
 | `gate-word-polytope` | 门字越长，落点越密，最大的缺口一级级缩小，却永远补不上 | `one` `three` `six` `nearest` `shrink` |
+| `lattice-gauge-loop` | 一条边上的相位可以拧成任意值；绕方格一圈的相位，顶点怎么拧都不动 | `twist` `chord` `anchor` `tree` `two` `plaquette` |
 
 `chsh-dial` 的绿色框只引用第十三章正文用 `lean=` 引用的五条定理：经典上界（`classical_chsh_abs_le_two`，“隐方向”场景的 360 个等距隐方向、权重各 1/360 正是一个有限确定性纤维模型）、一侧可交换时 S² = 4I、四点谱、固定算子的 2√2 与幺正策略的贝尔值上界（取 d = 2 为手工推导）。贝尔态上的同平面关联 cos(夹角)、N = 4|sin α sin β| 与“转动 Bob 的一对方向，⟨S⟩ 最高恰为 √(4 + 4 sin α sin β)”是页面的数值（`NUM`）；均匀隐方向玩具模型与它的折线标 `MODEL`；一般隐变量测度下的 |S| ≤ 2 与无穷维 Tsirelson 界标 `ARGUED`。这一页的青色是四个余弦（量尺上一段段叠起来的四项、余弦弧）与给 +2 的隐方向，品红是两侧张开的面积、谱点 ±√(4 ± N)、弧与折线之差与给 −2 的隐方向；Alice 是实线箭头，Bob 是虚线箭头，时间轴转动 Bob 的一对方向 φ。
 
 `walk-spreading` 的绿色框只给第十六章用 `lean=` 引用的对称硬币引理（`SymmetricCoinMaximalWalkEntanglement.result`，关于 2p 个模式上单激发 W 态的几何纠缠）；页面不计算这个纠缠量，只画分布。镜像对 (0, x)、(1, −x) 的概率之和与硬币无关、$c_*$ 把每一对均分，是正文证明梗概里的一步，页面上作数值核对（`NUM`）；线上 Hadamard 游走宽度按 n 线性增长、黏合树指数分离与一般图至多二次加速标 `ARGUED`。这一页的青色是量子游走的分布与宽度，灰色（中性）是经典随机游走，品红只给量子分布比镜像 P(−x) 多出的部分，琥珀只在“宽度”场景标当前步数。
 
 `gate-word-polytope` 与 `sphere-escape` 的 `liuhui`、`zu` 分工：那两张讲平面里的割圆（多边形周长逼近圆、有理读数与 π 之间的缝），本页讲有限 {H, T} 门字从北极出发在布洛赫球面上的落点集 𝒮_L、凸包 P_L 与离目标的最近距离。绿色框只给第十六章用 `lean=` 引用的连续两轴有限字命题（`two_axis_finite_word`），并写明它是连续轴圆的对照、不涉及离散门集；可达点、最短门字、凸包、径向间隙 1 − h 与覆盖半径 ε_L 都是页面实算（`NUM`）；Solovay–Kitaev 渐近字长标 `ARGUED`，页面不拟合速率。这一页的青色是可达点与凸包，琥珀是目标方向（或最坏方向），品红是到最近点的弧、径向间隙与空球冠，紫色是 H 与 T 的转轴。
+
+`lattice-gauge-loop` 的绿色框只给第十八章用 `lean=` 引用的两条：`selected_tree_transport`（树输运相位的根点归一、树边重建、端点规范协变）与 `anchored_phase_classification`（锚定规范下 χ 不变、χ 相同当且仅当规范等价、c + a = m + k − n）；边相位、回路相位、树输运相位与计数实算（`NUM`），“沿树拧平”取 g = rootPhase⁻¹、弦的回路相位等于所围方格之积也是数值核对；格子画法、边的方向、生成树（全部横边加最左一列）与时间轴上的中间路径 e^{isθ} 标 `MODEL`；回路相位读作磁通、连续极限与非阿贝尔威尔逊圈标 `ARGUED`。单格的边方向与生成树照例题 `ex-plaquette-phase`（0 → 1 → 2 → 3 → 0，T = {e₀, e₁, e₂}）。这一页的青色是生成树、根到锚点的树路径与它的相位，品红是方格与弦的回路相位，紫色是顶点规范，琥珀只给此刻在拧的顶点或边；边上的相位指针是中性墨色。`two` 卡改的是边相位本身，不是规范变换，页面读数里写明。
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
@@ -239,6 +242,12 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第十六章 | 有限门字一节列表第 4 条（覆盖半径与径向支撑间隙）之后、第 5 条之前 | `gate-word-polytope` · `nearest` |
 | 第十六章 | 例 `ex-finite-ht-polytope` 之后、文献注记 `rem-solovay-kitaev-literature` 之前 | `gate-word-polytope` · `three` |
 | 第十六章 | 文献注记 `rem-solovay-kitaev-literature` 之后（章末收束段之前） | `gate-word-polytope` · `shrink`，随后完整实验室 |
+| 第十八章 | 选定生成树一节规范变换公式之后、“为什么单个边相位……”一段之前 | `lattice-gauge-loop` · `twist` |
+| 第十八章 | 闭合回路一节列表第 1 条（弦的基本闭合回路）之后、第 2 条之前 | `lattice-gauge-loop` · `chord` |
+| 第十八章 | 闭合回路一节“开放树路径相位也……成为严格的规范不变量”一段之后 | `lattice-gauge-loop` · `anchor` |
+| 第十八章 | 推论 `cor-anchored-phase-classification` 的证明之后、格言之前 | `lattice-gauge-loop` · `two` |
+| 第十八章 | 格言（“未受锚点锁定的自由树枝相位可由局部规范变换抹平”）之后 | `lattice-gauge-loop` · `tree` |
+| 第十八章 | 例 `ex-plaquette-phase` 之后、章末收束段之前 | `lattice-gauge-loop` · `plaquette`，随后完整实验室 |
 
 ## 增删或修改一张卡之后
 

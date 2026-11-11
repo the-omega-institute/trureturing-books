@@ -138,6 +138,10 @@ $$
 \operatorname{gauge}(s, t, g, u)(e) = g\bigl(t(e)\bigr) \cdot u(e) \cdot g\bigl(s(e)\bigr)^{-1}.
 $$
 
+::: {.viz src="lattice-gauge-loop" preset="twist" height="500"}
+**Twist one corner, and the phases on its two edges run through every value.** On a single square only corner 1 turns, a full circle (the amber gauge hand): the hands on $e_0$ and $e_1$ turn opposite ways, each passing $1, i, -1, -i$, while the magenta loop phase at the centre stays at $i$.
+:::
+
 Because $g$ can rotate the phase at each endpoint independently, the phase on a single open edge is never gauge-invariant by itself. To synchronize phases across the graph, we select a **named spanning tree** (`NamedSpanningTree`) $T \subseteq E$ and a reference root vertex $r \in V$:
 
 - Every tree edge $e \in T$ is non-loop ($\forall e \in T,\; s(e) \neq t(e)$);
@@ -181,6 +185,11 @@ In $\operatorname{treeSupport}(s, t, T)$, the unique simple path from $r$ to $r$
 Look closely at property 3 of [@thm-tree-phase-transport]: under a gauge transformation $g$, the tree transport phase to vertex $a$ transforms as $g(a)\cdot\operatorname{rootPhase}(u, a)\cdot g(r)^{-1}$. Two immediate invariants jump out:
 
 - For every **non-tree chord edge** $e \notin T$, traversing the unique tree path from $r$ to $s(e)$, crossing $e$ itself, and returning along the tree from $t(e)$ to $r$ forms a **fundamental closed loop** whose phase $\operatorname{rootPhase}(u, s(e))\,u(e)\,\operatorname{rootPhase}(u, t(e))^{-1}$ cancels both $g(s(e))$ and $g(t(e))$ identically.
+
+::: {.viz src="lattice-gauge-loop" preset="chord" height="500"}
+**The fundamental loop of a chord ignores gauge transformations.** On two squares, the cyan spanning tree is the top and bottom rows and the leftmost column; the fundamental loop of the right-hand chord is the whole rectangle inside the dashed magenta line. Every corner except the root turns: every hand on an edge moves, yet the magenta hands of both squares and of the outer loop stay put (property 3 of [@thm-tree-phase-transport]).
+:::
+
 - Moreover, if we fix a set of **reference anchor vertices** $R \subseteq V$ containing the root $r \in R$ and restrict gauge transformations to the **anchored gauge subgroup**
 
 $$
@@ -188,6 +197,10 @@ $$
 $$
 
 then for every non-root anchor $a \in R \setminus \{r\}$, the root-to-anchor tree phase $\operatorname{rootPhase}(u, a)$ also becomes strictly invariant because $g(a) = g(r) = 1$!
+
+::: {.viz src="lattice-gauge-loop" preset="anchor" height="500"}
+**The tree-path phase between two anchors cannot be twisted.** On four squares, the root $r$ and the top-right corner $a$ are both locked squares and every other corner turns freely: each edge along the tree path $r \to a$ (the cyan band) moves, yet the path phase shown by the cyan hand on the right stays put.
+:::
 
 When $V$ and $E$ are finite (`[Fintype V] [Fintype E]`), [`AnchoredPhaseClassification`](lean:D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification) packages these two families of invariants into the product coordinate space
 
@@ -229,7 +242,15 @@ and $\operatorname{Nonempty}\bigl(\operatorname{Coordinates}(T, R, r) \simeq_{\m
 By endpoint gauge covariance in [@thm-tree-phase-transport], the vertex gauge factors at $s(e)$ and $t(e)$ cancel in every fundamental chord loop $e \notin T$, while $g(a) = g(r) = 1$ at every anchor $a \in R$, so function extensionality (`Prod.ext` and `funext`) establishes $\chi(\operatorname{gauge}\;s\;t\;g\;u) = \chi(u)$; conversely, if $\chi(u) = \chi(w)$, defining the root-referenced vertex potential ratio $g(v) = \operatorname{rootPhase}(w, v)\cdot\operatorname{rootPhase}(u, v)^{-1}$ gives $g \in \operatorname{anchoredGroup}(R)$ (by root normalization and equality of non-root anchor coordinates) and satisfies $\operatorname{gauge}\;s\;t\;g\;u = w$ edge-by-edge (`funext e`, using property 2 `hedge` on tree edges and chord coordinate equality outside $T$). For the canonical section $\sigma(z) = \operatorname{gauge}(s, t, \operatorname{sectionPotential}(z), \operatorname{sectionLoops}(z))$, because `sectionLoops` is identically $1$ on $T$, its tree transport `rootPhase` is identically $1$, so endpoint gauge covariance gives $\operatorname{rootPhase}(\sigma(z), v) = \operatorname{sectionPotential}(z, v)$, proving $\chi(\sigma(z)) = z$ (`RightInverse`) and $\ker(\chi) = N$ (claims 1–2). Because $\chi$ and $\sigma$ are continuous homomorphisms between compact Hausdorff abelian topological groups with $\chi \circ \sigma = \mathrm{id}$, the quotient homomorphism $q$ is a homeomorphic group isomorphism (claim 3). Finally, a spanning tree on $n$ vertices has $|T| = n - 1$ edges, leaving $c = m - |T| = m + 1 - n$ non-tree chords and $a = k - 1$ non-root anchors, so the coordinate torus has dimension $c + a = m + k - n$ (claim 4). The full proof is checked by the Lean kernel.
 :::
 
+::: {.viz src="lattice-gauge-loop" preset="two" height="500"}
+**Multiply the loop phases of two neighbouring squares and you get the outer loop.** On two squares only the shared middle edge turns (amber): the magenta hand of the left square turns one way, the right square the other, and the magenta hand of the outer loop does not move. The shared edge is walked in opposite directions in the two squares and cancels in the product, so only $c = m + 1 - n = 7 + 1 - 6 = 2$ of the three loops are independent (claim 4 of [@cor-anchored-phase-classification]).
+:::
+
 > Phase along an unanchored tree branch can be ironed flat by local gauge choices; the fundamental closed-loop phases and the root-to-anchor tree phases between fixed reference vertices are the exact invariants that no anchored gauge transformation can erase.
+
+::: {.viz src="lattice-gauge-loop" preset="tree" height="500"}
+**Iron the spanning tree flat: tree edges become 1 and only loop phases are left on the chords.** On four squares, the rail turns every corner by the inverse of its tree transport phase: all 8 cyan tree edges turn to $1$, and the 4 chords keep the phases of their fundamental loops — a chord in the middle column equals the square to its left, a chord in the right column the product of the two squares in its row. This is exactly the shape of the section $\sigma$ ([@cor-anchored-phase-classification]).
+:::
 
 Let us verify [@cor-anchored-phase-classification] by hand on a four-vertex plaquette loop.
 
@@ -260,6 +281,14 @@ c + a = m + k - n = 4 + 1 - 4 = 1.
 $$
 
 At the chord $e_3$ ($3 \to 0$), $\operatorname{rootPhase}(u, 3) = 1$ and $\operatorname{rootPhase}(u', 3) = i^3 = -i$, so $\chi(u)(e_3) = 1 \cdot i \cdot 1^{-1} = i$ and $\chi(u')(e_3) = (-i) \cdot (-1) \cdot 1^{-1} = i$, confirming $\chi(u) = \chi(u')$ exactly.
+:::
+
+::: {.viz src="lattice-gauge-loop" preset="plaquette" height="500"}
+**The four edges of the example: the phase spreads out, the loop is still $i$.** The edge phases start at $(1, 1, 1, i)$ and the violet hands turn the gauge from $1$ to $g = (1, i, -1, -i)$; at the end of the rail the four edges read $(i, i, i, -1)$, and the magenta loop phase at the centre is $i$ throughout.
+:::
+
+::: {.viz src="lattice-gauge-loop" height="560"}
+**The lattice gauge lab.** Switch between 1, 2 and 4 squares, drag a hand on an edge to change its phase, drag the violet hand at a corner to make a gauge transformation, or lock the far corner $a$ as a second anchor: the readouts keep track of $c = m + 1 - n$, $a = k - 1$ and the number of invariant phases $c + a = m + k - n$, while the magenta loop phases move only when an edge phase itself is changed.
 :::
 
 From two-by-two anticommuting chiral matrices ([@lemma-qubit-clifford-pair]) to anchored phase classification on graphs ([@cor-anchored-phase-classification]), we see how unanchored local gauge redundancy is absorbed along free spanning-tree branches, while the complete gauge-invariant content resides in the $c = m + 1 - n$ fundamental closed-loop phases across non-tree chords together with the $a = k - 1$ root-to-anchor tree phases between fixed reference vertices (reducing purely to closed-loop holonomies in the single-anchor case $k = 1, a = 0$). What happens when many local quantum degrees of freedom are wired into a tensor network and we ask how much entanglement rank can flow across a bottleneck cut? Let us turn to [Chapter 19](ch19-tensor-networks-and-holography.md).
