@@ -27,6 +27,10 @@
 
 让我们先考察复平面上最对称的二维晶格——由三次本原单位根 $\omega = e^{2\pi i/3} = \frac{-1 + i\sqrt{3}}{2}$（满足 $\omega^2 + \omega + 1 = 0$，即 $120^\circ$ 与 $60^\circ$ 六角对称）生成的**艾森斯坦整数环** $\mathbb{Z}[\omega]$。
 
+::: {.viz src="norm-lattice" preset="hex" height="500"}
+**艾森斯坦整数排成六角格。** 每个格点到原点距离的平方就是它的范数 $x^2 + xy + y^2$：实线圆 1、3、4、7、9、12、13 都穿过格点，虚线圆 2、5、6 一个格点也碰不到。青色的圆是范数 7，上面有 12 个格点，琥珀色的点是 $(-1, 3)$；品红的平行四边形是两根基矢 $u_1$、$u_2$ 张成的格子。
+:::
+
 在 Lean 模块 `D5/S3/PrimeForms/Crossing/CrossingNormForm` 中，我们同时考察主艾森斯坦（Löschian）范数型与一族由整数参数 $t \in \mathbb{Z}$ 标记的**单参数交越二元二次型**（crossing binary quadratic form）。
 
 ::: {.definition #def-qform-and-eisnorm title="单参数交越二次型 Qform 与艾森斯坦主范数型 eisNorm" lean="D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform D5/S3/PrimeForms/Crossing/CrossingNormForm.eisNorm"}
@@ -46,6 +50,10 @@
 :::
 
 表面上看，当整数参数 $t \in \mathbb{Z}$ 跑遍无穷多个整数时，$\operatorname{Qform}(t, P, Q) = P^2 - (2t+1)PQ + (t^2+t+1)Q^2$ 的系数随着 $t$ 剧烈变化，似乎生成了无穷多张彼此不同的二次曲面。然而，只要我们用几何的眼光审视二元二次型的幺模剪切变换（$\mathrm{SL}_2(\mathbb{Z})$ 基变换），就会发现这无穷多张二次型在整数格 $\mathbb{Z}^2$ 上其实是**同一颗六角范数球**在不同斜交基底下的投影！
+
+::: {.viz src="norm-lattice" preset="skew" height="500"}
+**同一批格点，斜着读。** 改用整数坐标 $(P, Q)$、取 $t = 2$，二次型成了 $P^2 - 5PQ + 7Q^2$，范数 7 的圆被拉成一只又细又斜的青色椭圆，琥珀色的点落在 $(8, 3)$；切回复平面，椭圆变回圆，$(8, 3)$ 回到 $(-1, 3)$（[@thm-qform-eq-eisnorm]）。
+:::
 
 ## 23.2 艾森斯坦范数剪切不变性与黄金佩尔恒等式的形式化证明 {#sec-ch23-2}
 
@@ -89,6 +97,10 @@ $$
 将左端按整系数多项式展开：$(4t^2 + 4t + 1) - (4t^2 + 4t + 4) = -3$。二次项 $4t^2$ 与一次项 $4t$ 精确相消。完整证明由 Lean 内核检查。
 :::
 
+::: {.viz src="norm-lattice" preset="shear" height="500"}
+**基矢在滑，格子的面积不动。** 复平面里 $t$ 从 $-1$ 走到 $2$：格点与圆一动不动，只有琥珀色的基矢 $u_2$ 沿琥珀色虚线滑过去，品红的格子被剪斜，面积始终是 $\sqrt{3}/2$；二次型的判别式等于 $-4$ 乘这块面积的平方，所以恒为 $-3$（[@lem-qform-discriminant]）。
+:::
+
 由于剪切变换 $(P, Q) \mapsto (P - (t+1)Q, Q)$ 在整数格 $\mathbb{Z} \times \mathbb{Z}$ 上拥有显式整系数逆变换 $(x, y) \mapsto (x + (t+1)y, y)$，整族无穷多个二次型 $\operatorname{Qform}(t, \cdot, \cdot)$ 在 $\mathbb{Z} \times \mathbb{Z}$ 上所能表出的整数集合，当场坍缩为同一个集合——艾森斯坦主范数型的值域！
 
 ::: {.corollary #cor-qform-range-eq-eisnorm title="单参数交越二次型族的值域恒等于艾森斯坦范数集" lean="D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_range_eq_eisNorm"}
@@ -103,6 +115,10 @@ $$
 
 ::: proof
 对外延相等的两侧包含关系分别取证：（$\subseteq$）若 $n = \operatorname{Qform}(t, P, Q)$，由 [@thm-qform-eq-eisnorm] 知 $n = \operatorname{eisNorm}(P - (t+1)Q, Q)$，故 $n$ 属于右端值域；（$\supseteq$）若 $n = \operatorname{eisNorm}(x, y)$，取整点对 $(P, Q) = (x + (t+1)y,\; y) \in \mathbb{Z} \times \mathbb{Z}$，由 [@thm-qform-eq-eisnorm] 及整环消去 $(x + (t+1)y) - (t+1)y = x$ 知 $\operatorname{Qform}(t, x + (t+1)y, y) = \operatorname{eisNorm}(x, y) = n$，故 $n$ 属于左端值域。完整证明由 Lean 内核检查。
+:::
+
+::: {.viz src="norm-lattice" preset="range" height="500"}
+**每个 $t$ 取到的值都一样。** 整数坐标里 $t$ 从 $-1$ 走到 $2$：每一行格点沿着自己那一行滑动（细线是走过的路），青色椭圆越拉越斜；每到整数 $t$，格点又正好填满整数网格，右下角亮起的值始终是 0、1、3、4、7、9、12、13（[@cor-qform-range-eq-eisnorm]）。
 :::
 
 看过了判别式 $\Delta = -3 < 0$ 的正定椭圆（六角晶格）范数锁，让我们再转向实二次域 $\mathbb{Q}(\sqrt{5})$ 中判别式 $\Delta = +5 > 0$ 的**不定双曲范数锁**——黄金整数环 $\mathbb{Z}[\varphi]$（其中黄金比 $\varphi = \frac{1 + \sqrt{5}}{2}$ 满足自指二次方程 $\varphi^2 = \varphi + 1$，我们将在[第二十四章](ch24-cosine-fixed-points-and-self-reference.md)证明它是正实数上连分数算子 $x \mapsto 1 + 1/x$ 的唯一不动点）。
@@ -121,6 +137,10 @@ $$
 $$
 \operatorname{norm}(g) \;:=\; a^2 + ab - b^2 \in \mathbb{Z}.
 $$
+:::
+
+::: {.viz src="norm-lattice" preset="norm" height="500"}
+**黄金范数是一块矩形的面积。** 把 $g = a + b\varphi$ 画在 $(g, \bar{g})$ 平面上：琥珀色的 $g = 2 + \varphi$ 与原点张成的品红矩形，面积 $g\bar{g} = 2^2 + 2 \cdot 1 - 1^2 = 5$；品红双曲线上每一点张出的矩形面积都是 $\pm 5$，灰色双曲线属于其余的范数。
 :::
 
 在黄金整数 $g = a + b\varphi$ 中，由于 $\varphi + \bar{\varphi} = 1$，其**代数迹**恰好是整数线性组合 $\operatorname{trace}(g) = g + \bar{g} = (a + b\varphi) + (a + b - b\varphi) = 2a + b$！当我们拿迹的平方 $(2a + b)^2$ 减去五倍的副坐标平方 $5b^2$ 时，便得到了连接迹投影与代数范数的**黄金佩尔（Pell）恒等式**。
@@ -143,6 +163,10 @@ $$
 同时展开左端：$(2a + b)^2 - 5b^2 = (4a^2 + 4ab + b^2) - 5b^2 = 4a^2 + 4ab - 4b^2$。两侧整系数多项式恒等。完整证明由 Lean 内核检查。
 :::
 
+::: {.viz src="norm-lattice" preset="pell" height="500"}
+**转 45° 去读：迹与佩尔恒等式。** 青色对角线上的影子是迹 $2a + b = 5$，虚线对角线上的是 $\sqrt{5}\,b$；$5^2 - 5 \cdot 1^2 = 20 = 4 \times 5$，品红双曲线在这对新坐标里就是 $x^2 - 5y^2 = 20$（[@prop-pell-form-eq-four-mul-norm]）。
+:::
+
 请看 [@prop-pell-form-eq-four-mul-norm] 的惊人威力：在同一个模块 `GoldenPell` 中，正是凭借 $(2a + b)^2 - 5b^2 = 4\,\operatorname{norm}(g)$ 这座桥梁，Lean 进一步验证了著名的**佩尔—卢卡斯—斐波那契锁定定理** [`pell_pm_four_iff_signed_lucas_fib`](lean:D5/S3/Arith/GoldenPell.pell_pm_four_iff_signed_lucas_fib)：两个整数 $(x, y) \in \mathbb{Z}^2$ 满足不定二次丢番图方程
 
 $$
@@ -150,6 +174,10 @@ x^2 - 5y^2 = \pm 4,
 $$
 
 **当且仅当** $g = \bigl(\frac{x-y}{2}, y\bigr) \in \mathrm{GoldenInt}$ 是范数为 $\operatorname{norm}(g) = \pm 1$ 的黄金整数可逆单位元（[`isUnit_iff_norm_eq_one_or_neg_one`](lean:D5/S0/Carrier/Units.isUnit_iff_norm_eq_one_or_neg_one)），这又**当且仅当** $(x, y)$ 恰好是同号整指数卢卡斯数（Lucas number $L_n = \operatorname{trace}(\varphi^n)$）与斐波那契数（Fibonacci number $F_n$）的配对 $(\pm L_n, \pm F_n)$！
+
+::: {.viz src="norm-lattice" preset="units" height="500"}
+**乘 $\varphi$：沿双曲线一格一格地跳。** 从 $1$ 出发，每乘一次 $\varphi$，琥珀色的点就在 $g\bar{g} = +1$ 与 $-1$ 两支品红双曲线之间跳一次：矩形越来越细长，面积在 $+1$ 与 $-1$ 之间翻转。点旁的数对 $(2a + b, b)$ 依次是 $(2, 0)$、$(1, 1)$、$(3, 1)$、$(4, 2)$、$(7, 3)$，正是 $(L_n, F_n)$。
+:::
 
 让我们在一个具体的数值算例中亲手体验这两把二次范数锁（$\Delta = -3$ 椭圆六角锁与 $\Delta = +5$ 双曲卢卡斯—斐波那契锁）如何把离散整数点锁死在二次曲线上。
 
@@ -184,6 +212,10 @@ $$
 
 ::: {.viz src="pythagoras-number-escape" preset="golden" height="500"}
 **$d = 5$：卢卡斯与斐波那契。** 渐近分数沿直线 $m = \sqrt{5}\,n$ 越贴越近，青色在线上方、品红在线下方；绿圈标出分母为斐波那契数、分子为卢卡斯数的格点 $(n, m) = (F_k, L_k)$，它们都落在 $m^2 - 5n^2 = \pm 4$ 上。加上正负号，这些配对恰是该方程的全部整数解（[`pell_pm_four_iff_signed_lucas_fib`](lean:D5/S3/Arith/GoldenPell.pell_pm_four_iff_signed_lucas_fib)）。
+:::
+
+::: {.viz src="norm-lattice" height="560"}
+**范数格：完整实验室。** 两个场景共用一条时间轴：艾森斯坦场景推动参数 $t$，可在整数坐标 $(P, Q)$ 与复平面之间切换；黄金场景数乘 $\varphi$ 的次数，可把坐标轴转 45° 读出迹。点任一格点让它成为琥珀色的当前点。
 :::
 
 ## 23.3 从二次型到四元数范数球面：$\mathbb{Z}$ 在 $\mathbb{Q}$ 中的可定义性全景 {#sec-ch23-3}
