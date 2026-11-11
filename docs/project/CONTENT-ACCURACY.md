@@ -567,6 +567,27 @@ EPUB 浏览器预览不等于 Apple Books 原生主题验收，尚未导入 Appl
 
 本次为未提交的有限实施交付，**最终复审待调用方编排**；此前质量/测试批准不是对本次改动的自动批准。调用方还须核对提交与本补丁的对应、PR #90 CI、合入与 Pages。未执行暂存、提交、合并、变基、贮藏、推送、PR 操作或委派；未改锁、Lean、托管路径、工具、正文、图注、登记表或运行时。历史文字覆盖仍为 **9/35**，其余 **26** 个单元待审，全 35 单元目标继续。
 
+## PR90 最后实施批次：当前主线集成验证（待 R4）
+
+本次输入是干净的 `fc9fc6ba7a980f096bee3afffdf6aad4432e6f39`：调用方已将前次四份归属修复文件封存为 `dc74046`，再整合官方主线 `ac508fe`（含 PR #116）。本次读取当前项目、工作流、准确性与导出指引后，只做既有修复的依赖对应、完整图门禁和当前输出验证；没有开展新一轮章节内容审查。证据根为 `build/content-accuracy/integration-fc9fc6b/`。
+
+**出版范围与审计集合分开保留。** 当前中英 SUMMARY 均为 **37 单元：序曲、32 章、终章与附录 A–C**。由 `dc74046` 保存的原 **35 单元审计集合**逐一对应当前目录，唯一新增文件是 `ch31-quantum-fairness.md` 与 `ch32-unified-field-and-meta-unification.md`，两章均未获本目标的内容批准。历史文字覆盖仍为 **9/35**，原集合其余 **26** 单元待全文核对；本次不将新增两章计入已审覆盖。主线改动的序曲、第 20、29、30 章、终章及附录 A/C 只作为当前出版依赖处理，其新增数学、物理和文献主张仍待相应审查。
+
+| 本次实际验证 | 结果与证据边界 |
+| --- | --- |
+| 候选与补丁对应 | 共核对 1,513 个跟踪路径。相对共同祖先 `d170f2951f2ce463bce823940be66d21353a5a65`，PR90 的 63 个补丁路径全部等于封存输入 `dc74046`，主线的 62 个变化路径全部等于 `ac508fe`，两组无重叠。输入四份修复文件均匹配前次交付 SHA-256；本次只追加本台账，另外三份修复文件摘要不变。详见 `identity.json`、`patch-correspondence.json`、`input-tracked-digests.json`。 |
+| 未变证据的复用 | 与封存输入比较，253 份相关工具、运行时、登记、锁、章节与技能依赖全部相同；另列明 8 份 ch05–08 正文、68 份四实验室源码/测试/静态帧、57 份章节图稿/资产与四份技能文件的对应。复用前次两页普通/慢帧 107/107、89/89，及 R3 另外两页 115/115、108/108 的已完成证据和未变正文/源码/验算证据，均不冒称本轮重跑。技能三处本地引用存在，四份技能文件未变，沿用其既有验证；没有新增技能段落或检查框架。旧 874 项工具测试结果只保留历史输入归属，不称为当前 37 单元全套测试通过。详见 `dependency-paths.json`、`evidence-reuse.json`。 |
+| 当前完整源码与图门禁 | `./tbook check` exit 0：**1 本可见书、0 错误、0 警告**；隐藏的两本示例未查。`./tbook fig build --book quantum-geometry --check`：**150 个图脚本、0 过期、0 错误**。按当前中文输入独立枚举并与原生成器核对：正式环境 184、现有规则下的文献环境 127、开放环境 6，锁中 theorem 308；附录 C 柱高合计 262、索引 227 行，八部各四章。所有现有断言保留；没有确认新的陈旧源码产物，因而未修图稿、计数语义、ALT 或图注。326 份源 SVG 的 XML/内部引用有效。见 `derived-correspondence.json`、`figure-initial.txt`、`site-correspondence.json`。 |
+| 主线声明图的受影响验证 | 仅对改变了数据的 `lean-declaration-map` 新跑现有浏览器套件：**91/91**，含 `stageFirstChecks` 与独立读取当前锁、章节的对应核查。没有为新增章节重跑未变的四实验室套件，也未把声明图结构对应当作章节内容批准。见 `declaration-map-test-corrected.txt`。 |
+| 当前 HTML/site/演示文稿 | 关闭产物缓存，以当前来源重建中英 HTML 与 site，均 exit 0；74 份章节发布页等于新 HTML 经既有未建视频海报转换的字节，五份相关实验室发布页等于当前源码经既有 pin-link 转换的字节。site 重建并检查中英概览，各 39 页，并导出各 39 页 PDF；六份书籍下载与新产物摘要相同。八段视频用 `TBOOK_FILMS=skip`，均为海报回退，未验收整片或音频。见 `build-html.txt`、`build-site.txt`、`site-correspondence.json`。 |
+| 当前 37 单元 PDF | 从当前模型的 37 单元重新生成实际 Pandoc/Typst 输入，并直接使用既有导出函数与受控字体配置 `ignore_system_fonts=True` 编译四版 PDF；没有改托管字体工具。zh-screen/print 为 **772/805 页**，en-screen/print 为 **814/841 页**，均含 32 章书签。扫描全部 3,232 页的文本及 ch05–08 的 305 页字体：0 页面边界外文字、0 LastResort、0 未解析/替代标记、0 所查源码泄漏标记，相关字体均嵌入；查看四版选定页面共 55 页。未知字体族警告仍为中文版各 184、英文版各 199。见 `controlled-pdf.json`、`pdf-inspection.json`、`extra-PDF-pages.json`、`contacts/`。 |
+| 当前 37 单元 EPUB 与实际输入 | 中英 EPUB 重新构建 exit 0，另明确运行当前 EPUBCheck：两份均 **valid，0 错误、0 警告、未跳过**。每份 207 个 XML 文件可解析，两新增章的实际导出 ID 存在，所消费的 256 张实验卡 JPEG 均按摘要出现在包内。每个语言/导出配置记录 725 份真实输入，450 份图变体逐份等于当前 SVG 经既有配色函数输出。旧 35 单元 PDF/EPUB 不再作为当前整书产物复用。见 `epub-inspection.json`、`stage-correspondence.json` 及各 `stage-*.json`。 |
+| 实际站点浏览 | 用 `./tbook serve` 的 Pages 子路径浏览 ch05–08 中英 × navy/light × 1440/390 px 共 **32** 组合，**224** 次实验室嵌入均正常；另查序曲、ch28、终章、附录 C 的派生图 **32** 组合，以及新增两章仅可访问性 **8** 组合。72 个页面无页面/控制台/请求错误、KaTeX 错误、坏图或页面/已载入实验室横向溢出。查看全部 80 张截图；派生图与新增章视图有意省略无关实验室运行时，ch05–08 正常载入全部嵌入。未变 Evidence/抽屉的专项交互保留前次相同源码证据，不称为本轮重查。见 `browser-inspection.json`、`visual-inspection.json`、`browser-contact-index.json`。 |
+
+本次 PDF 配置有**新的当前发布地址**，与前次空 `online_url/repo_url` 的 35 单元受控 PDF 配置分开记录；11 份受控字体摘要仍相同。原默认 macOS 字体的 LastResort 问题及默认/CI 不等价限制继续保留，本次没有重跑默认字体导出，也不声称与默认 CI 字节等同。原生 Apple Books/其他阅读器、实体设备、完整视频/音频和整书逐页版式均未验收。一次性证据脚本的路径、选择器和目录/ID 假设纠正保留在证据目录，未改变产品源码、现有套件或断言。
+
+本次只更新本台账，最终摘要在交付 JSON 中记录；正文、作者题记、ID/GID、媒体顺序、锁、Lean、托管文件、工具、运行时和技能全部保留。未委派或执行 Git/GitHub 生命周期操作；没有开启新批次或终止全目标。**最终候选与此台账补丁的对应、独立 R4、PR #90 的 CI、合入与 Pages 仍由调用方完成。**
+
 [par-src]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/QuantumContext/ParallelogramNormLaw.lean#L22
 [par-frozen]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/Golden/Frozen/state/D5/S3/QuantumContext/ParallelogramNormLaw.lean.json
 [fin-src]: https://github.com/the-omega-institute/trureturing/blob/38196c62e121b0a334b903eea2a513bb2587e41c/D5/S3/Quantum/FiniteDimensional.lean#L24
