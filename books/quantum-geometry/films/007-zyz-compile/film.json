@@ -1,0 +1,32 @@
+{
+  "id": "007-zyz-compile",
+  "title": "Compiling a rotation into three turns: ZYZ and the sandwich action",
+  "title_zh": "把一个旋转编译成三段：ZYZ 与夹心作用",
+  "summary": "A rotor about z keeps only half the angle, R_z(θ) = cos(θ/2) − sin(θ/2) e₁e₂; sandwiched as v ↦ R v R̃, the shadow on the axis commutes and stays while the part in the plane anticommutes and turns through the whole angle. Three such turns, z by γ, y by β, z by α at (0.37, −0.81, 0.52), multiply into one even rotor 0.830 − 0.396 e₁e₂ − 0.393 e₁e₃ + 0.030 e₂e₃ of unit norm, whose sandwich gives the columns of the ZYZ matrix; by the literature result Spin(3) → SO(3) it is a single 67.9° turn about one axis. The T gate is one z turn by 45°, the Hadamard gate the pure bivector −(e₁e₂ + e₂e₃)/√2. Every arrow is a pure state ρ = blochMatrix(1, v), and the four Lean theorems of chapter 26 give its trace, its Bloch vector, the unit sphere for trace-one idempotents and the ball bound for positive semidefinite matrices.",
+  "summary_zh": "绕 z 轴的旋转器只记半角：R_z(θ) = cos(θ/2) − sin(θ/2) e₁e₂；以夹心作用 v ↦ R v R̃ 作用时，轴上的影子与平面可交换、原地不动，平面里的那一份反对易、转过整角。三段转动（绕 z 转 γ、绕 y 转 β、绕 z 转 α，取 (0.37, −0.81, 0.52)）乘成一枚单位偶旋转器 0.830 − 0.396 e₁e₂ − 0.393 e₁e₃ + 0.030 e₂e₃，它的夹心作用给出 ZYZ 矩阵的三列；按文献结果 Spin(3) → SO(3)，它就是绕一根轴的一次 67.9° 转动。T 门是绕 z 轴转 45°，阿达玛门是纯双矢量 −(e₁e₂ + e₂e₃)/√2。每根箭头都是纯态 ρ = blochMatrix(1, v)，第二十六章的四条 Lean 定理给出它的迹、布洛赫向量、迹一幂等矩阵的单位球面与正半定矩阵的球界。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "subject_commit": "1d9bf98cab8306e67ec38a739359f2cdae63877a",
+  "released": "2026-11-11",
+  "duration": "2:03",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · Bloch sphere, half-angle rotor dial, sandwich shadow and sector, ZYZ three-turn trail, rotor coefficient bars, single-axis fold, T and H tripods",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/Information/ActualPureQubitGeometry.blochMatrix_trace",
+    "D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_blochMatrix",
+    "D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian",
+    "D5/S3/Quantum/Information/ActualPureQubitGeometry.norm_bloch_le_trace_of_posSemidef"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_007_720p_narrated.mp4",
+    "cover": "quantum-geometry_007_cover.jpg"
+  }
+}
