@@ -115,6 +115,10 @@ The full lab of Grover's two reflections: drag the initial state on mirror 2 to 
 
 Whereas Grover's algorithm rotates states in a real two-dimensional plane, the Quantum Fourier Transform (QFT) and phase estimation wind relative phases around equatorial circles like meshed binary gears (Figure 15, Panel II).
 
+::: {.viz src="phase-gears" preset="basis" height="500"}
+**A row of gears, each half as fast.** $Q = 8$ with the single cell $x = 5$: each cell along the rail turns the three violet gears by $\frac{1}{2}$, $\frac{1}{4}$ and $\frac{1}{8}$ of a turn, and at $5$ they rest at $\pi$, $\frac{\pi}{2}$ and $\frac{5\pi}{4}$; frequency $k = 7$ uses all three, and the one cyan arrow of the chain points at their sum, $\frac{3\pi}{4}$. The spectrum is flat, every bar $\frac{1}{8}$. The binary product form of the QFT is a literature result, not formalized in this book.
+:::
+
 At the algebraic foundation of phase kickback lies the conjugation law of discrete Weyl shift and clock operators on $\mathrm{ZMod}\,M$ ($M \in \mathbb{N}$ with `[NeZero M]`). In `WeylDisplacementConjugation`, with $\omega_M = \mathrm{windowRoot}(M) = \exp(2\pi i / M)$, the $M \times M$ building blocks on $M_{\mathrm{Fin}\,M}(\mathbb{C})$ are:
 
 - **The diagonal clock matrix** $\mathrm{clockMatrix}(M) = \operatorname{diag}\bigl(j \mapsto \omega_M^{j.\mathrm{val}}\bigr)$;
@@ -174,6 +178,10 @@ $$
 If $x \in H$, then $\mathrm{character}(k.1)(x) = 1$ for every $k \in \mathrm{annihilator}(H)$ by definition, so the sum of $1$ over $\mathrm{annihilator}(H)$ equals $(\mathrm{Fintype.card}(\mathrm{annihilator}(H)) : \mathbb{C})$. If $x \notin H$, Pontryagin duality for the finite cyclic group $\mathrm{ZMod}\,m$ provides $k_0 \in \mathrm{annihilator}(H)$ with $\mathrm{character}(k_0.1)(x) \neq 1$. Reindexing the finite sum by the translation bijection $k \mapsto k + k_0$ on $\mathrm{annihilator}(H)$ gives $\mathrm{character}(k_0.1)(x) \cdot S = S$, hence $(\mathrm{character}(k_0.1)(x) - 1)S = 0$ and $S = 0$. The full proof is checked by the Lean kernel.
 :::
 
+::: {.viz src="phase-gears" preset="cancel" height="500"}
+**Off-resonant arrows go round in a loop.** $Q = 16$, comb $\{0, 4, 8, 12\}$, $k = 1$: only the slowest gear is lit, and the four cyan arrows $1$, $i$, $-1$, $-i$ close into a square and return to the start; bar $1$ of the spectrum grows during the sweep and shrinks back to $0$ at the end ([@prop-finite-character-cancellation]).
+:::
+
 Note the normalization boundary in [@prop-finite-character-cancellation]: for $x \in H$, the sum equals the **unnormalized** cardinality $|\mathrm{annihilator}(H)|$; one must divide by the state and QFT normalization factors ($\sqrt{|H|}$ and $\sqrt{m}$) before interpreting the result as a quantum amplitude or probability.
 
 ## Finite Period Sampling and Order Reconstruction in Shor’s Algorithm {#sec-shor-order-reconstruction}
@@ -212,6 +220,10 @@ Since negation $k \mapsto -k$ is a bijection on the subgroup $\mathrm{annihilato
 
 1. **Finite Poisson summation is not the full Shor factoring theorem**: [@cor-finite-poisson-period] is an algebraic identity on $\mathrm{ZMod}\,m$, not a formalization of Shor's full success probability, continued-fraction recovery theorem, or polynomial gate complexity (which are detailed in [@rem-grover-qft-shor-literature]).
 2. **Exact divisibility ($r \mid Q$) versus general non-divisibility ($r \nmid Q$)**: Non-resonant frequencies vanish identically only when the period $r$ divides the register size $m = Q$. When $r \nmid Q$, the Fourier transform exhibits a peaked Dirichlet/Fejér kernel around multiples of $Q/r$ rather than exact zeros, requiring continued-fraction rounding to extract $r$.
+:::
+
+::: {.viz src="phase-gears" preset="leak" height="500"}
+**When the period does not divide, the peaks spread.** $Q = 64$ and period $6$: the magenta marks $sQ/r$ fall between integers at $10.67$, $21.33$ and so on, and each peak spreads over neighbouring cells — $k = 11$ has $0.115$, $k = 10$ only $0.026$, and the six cells nearest $sQ/r$ carry $0.80$ together; the continued fraction of the amber-framed $k = 11$ reads $\frac{1}{6}$. This concentration and the continued-fraction recovery are literature results, not formalized in this book.
 :::
 
 Let us now work through the four-part calculation covering Grover search at $N = 4$ and $N = 8$, the $3$-qubit QFT phase gears at $x = 5$, Shor order finding for $N = 15$, and the finite Poisson cross-check on $\mathrm{ZMod}\,16$.
@@ -270,6 +282,14 @@ In $\mathrm{ZMod}\,16$, let $H = \{0, 4, 8, 12\}$; then $H^\perp = \mathrm{annih
 **$N = 8$: two steps still fall short.** The success probability is $\frac{25}{32}$ after step $1$ and $\frac{121}{128}$ after step $2$: the arrow stops at $5\theta \approx 103.5^\circ$, just past the vertical axis, with a magenta shadow of $-0.234$ left.
 :::
 
+::: {.viz src="phase-gears" preset="four" height="500"}
+**Period 4 leaves four peaks.** $Q = 16$, comb $\{0, 4, 8, 12\}$: following $k = 4$, all four cyan arrows point right and the chain has length $4$; after the sweep only the four bars at $0$, $4$, $8$ and $12$ remain, each $\frac{1}{4}$, right on the magenta marks $sQ/r$, and the other twelve are $0$.
+:::
+
+::: {.viz src="phase-gears" preset="read" height="500"}
+**Reading the order from a peak.** The same spectrum: $k = 4$ and $12$ give $\frac{4}{16} = \frac{1}{4}$ and $\frac{12}{16} = \frac{3}{4}$, whose denominator is the order $4$; the amber-framed $k = 8$ only gives $\frac{1}{2}$, and $2$ is a proper divisor of the order that must be checked again; $k = 0$ carries nothing.
+:::
+
 ::: {.remark #rem-grover-qft-shor-literature title="Grover Query Lower Bounds, QFT Circuit Complexity, and Shor's Factoring Algorithm (Literature Result, Not Formalized in This Book)"}
 <!-- alias: #rem-shor-factoring-literature -->
 **Literature result, not formalized in this book.** To complement the frozen algebraic results of this chapter ([@thm-grover-uniform-rotation], [@lemma-phase-kickback-weyl], [@prop-finite-character-cancellation], and [@cor-finite-poisson-period]), three major results from the quantum algorithms literature should be noted:
@@ -277,6 +297,10 @@ In $\mathrm{ZMod}\,16$, let $H = \{0, 4, 8, 12\}$; then $H^\perp = \mathrm{annih
 1. **Grover's algorithm and query lower bounds** (L. K. Grover, *A fast quantum mechanical algorithm for database search*, Proc. 28th ACM STOC, 212–219, 1996, doi:10.1145/237814.237866; G. Brassard, P. Høyer, M. Mosca, and A. Tapp, *Quantum amplitude amplification and estimation*, Contemp. Math. **305**, 53–74, 2002, arXiv:quant-ph/0005055): Amplitude amplification finds a marked item among $N$ candidates using $O(\sqrt{N})$ oracle queries, matching the $\Omega(\sqrt{N})$ black-box query lower bound proved by Bennett, Bernstein, Brassard, and Vazirani (1997).
 2. **Gate complexity of the QFT circuit**: Expanding the $Q = 2^q$-point QFT into the binary product form of [@ex-grover-four-shor-fifteen] requires $q$ Hadamard gates, $q(q-1)/2$ controlled phase gates, and $\lfloor q/2\rfloor$ SWAP gates, totaling $O(q^2) = O((\log Q)^2)$ elementary gates.
 3. **Shor's factoring algorithm and continued-fraction order recovery** (P. W. Shor, *Polynomial-time algorithms for prime factorization and discrete logarithms on a quantum computer*, SIAM J. Comput. **26**, 1484–1509, 1997, doi:10.1137/S0097539795293172): For a general odd composite $N$ with $r \nmid Q$ ($N^2 \le Q < 2N^2$), Dirichlet-kernel concentration guarantees that QFT sampling lands within $|k/Q - s/r| < \frac{1}{2r^2}$ with constant probability, from which continued-fraction expansion uniquely recovers $s/r$; when $\gcd(s, r) = 1$ (with probability $\varphi(r)/r = \Omega(1/\log\log r)$), testing $r$ and applying the classical randomized reduction from factoring to order finding factors $N$ in polynomial time. (Note that describing period finding as "canceling an infinite period down to $1$" is a heuristic metaphor, not a formalized mathematical claim.)
+:::
+
+::: {.viz src="phase-gears" height="560"}
+The full lab of phase gears and the period: change the register size $Q$, the period $r$ and the offset, and click a bar to choose a frequency $k$ and watch its phase arrows laid head to tail; when $r$ divides $Q$ the off-resonant chains close to zero ([@prop-finite-character-cancellation]), otherwise the peaks spread near $sQ/r$ (a literature result, not formalized in this book).
 :::
 
 Seeing how Grover's planar rotations and the QFT's Fourier cancellation operate, two deeper questions arise: **can we unify search, phase estimation, Hamiltonian simulation, and matrix inversion under a single Chebyshev polynomial recurrence on two-dimensional blocks (Quantum Singular Value Transformation, QSVT)? And when we compile continuous rotations into finite words over a discrete gate set $\{H, T\}$, how do finite-vertex polytopes approximate the sphere?** Let us enter the concluding chapter of Part IV — [Chapter 16](ch16-qsvt-walks-and-compilation.md).

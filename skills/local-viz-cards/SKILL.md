@@ -73,6 +73,10 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 `grover-reflections` 的舞台是目标轴 $W$（竖）与失败轴 $B$（横）张成的平面：琥珀色是当前的态与当前这一步的柱子，青色是态在 $W$ 上的影子（成功振幅）与每一步的成功概率柱，品红是在 $B$ 上的影子，紫色是每一步转过的 $2\theta$；两面镜子（失败轴与 $\lvert s\rangle$ 那条线）用中性灰虚线。绿色框只给第十五章用 `lean=` 引用的 `uniform_operator_rotation`（页面取单列、$p = 1/N$）；查询下界 $\Omega(\sqrt{N})$ 标 `ARGUED`；镜像逐次作用、最佳步数逐个比较（只在第一个半圈 $(2n+1)\theta \le \pi$ 里比）标 `NUM`，两次镜像之间箭头尖沿垂线滑过镜面只是动画。
 
+| `phase-gears` | 逐级减半转速的齿轮给每一格拧出相位；周期梳子上的相位箭头首尾相接，不共振的绕成圈抵消，只剩周期留下的峰 | `basis` `cancel` `four` `read` `leak` |
+
+`phase-gears` 的舞台从上到下是一排相位齿轮（紫色，每只对应 $k$ 的一个二进制位，选中的频率用到的那几只亮着）、选中频率 $k$ 的相位箭头链（青色箭头，墨色合成箭头）、寄存器里的周期梳子（青色格，琥珀色框是扫到的格）与频率谱（青色柱，琥珀色框是选中的 $k$，品红小三角在 $sQ/r$）。绿色框只给第十五章用 `lean=` 引用的 `sum_annihilator_character`：$r \mid Q$、起点为 $0$ 时梳子是 $Q/r$ 的倍数所成子群的零化子，链上的和就是这条命题的和；QFT 的二进制乘积分解（齿轮）、$r \nmid Q$ 时的狄利克雷核集中与连分数读阶标 `ARGUED`；谱由直接求和算出标 `NUM`。页面的“读出阶”取分母不超过 $\sqrt{Q}$ 的最后一个渐近分数。
+
 ## 正文里的引用（中英文版本位置与卡名相同）
 
 | 章节 | 位置 | 引用 |
@@ -203,6 +207,11 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第十五章 | Grover 一节定理 `thm-grover-uniform-rotation` 的证明之后、三条边界之前 | `grover-reflections` · `mirrors` |
 | 第十五章 | Grover 一节末（三条边界列表之后、相位反冲一节之前） | `grover-reflections` · `over`、`sqrt`，随后完整实验室 |
 | 第十五章 | 例 `ex-grover-four-shor-fifteen` 之后、文献注记 `rem-grover-qft-shor-literature` 之前 | `grover-reflections` · `four`、`eight` |
+| 第十五章 | 相位反冲一节开头一段（“相位齿轮”）之后 | `phase-gears` · `basis` |
+| 第十五章 | 命题 `prop-finite-character-cancellation` 的解读（相消与相长两条）之后、归一化提醒之前 | `phase-gears` · `cancel` |
+| 第十五章 | 文献注记 `rem-shor-divisibility-boundary-literature` 之后、四步算例之前 | `phase-gears` · `leak` |
+| 第十五章 | 例 `ex-grover-four-shor-fifteen` 之后（`grover-reflections` · `four`、`eight` 之后） | `phase-gears` · `four`、`read` |
+| 第十五章 | 章末文献注记 `rem-grover-qft-shor-literature` 之后、转入第十六章之前 | `phase-gears` 完整实验室 |
 
 ## 增删或修改一张卡之后
 

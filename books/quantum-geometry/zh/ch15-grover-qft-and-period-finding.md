@@ -117,6 +117,10 @@ Grover 两次反射的完整实验室：拖动镜 2 上的初始态改 $\theta$�
 
 如果说 Grover 搜索靠的是在实平面里一步旋转 $2\theta$，那么量子傅里叶变换（QFT）与相位估计靠的就是在复赤道圆周上拧转不同齿比的**相位齿轮**（见图 15 面板 II）。
 
+::: {.viz src="phase-gears" preset="basis" height="500"}
+**一排逐级减半转速的齿轮。** $Q = 8$、只有一格 $x = 5$：时间轴每走一格，三只紫色齿轮分别转 $\frac{1}{2}$、$\frac{1}{4}$、$\frac{1}{8}$ 圈，走到 $5$ 时停在 $\pi$、$\frac{\pi}{2}$、$\frac{5\pi}{4}$；频率 $k = 7$ 用上三只，链上唯一一支青色箭头指向它们的和 $\frac{3\pi}{4}$。谱是平的，每根柱子都是 $\frac{1}{8}$。QFT 的二进制乘积分解是文献结果，未在本书形式化。
+:::
+
 在代数底层，一切离散相位反冲（phase kickback）都源于有限循环群 $\mathrm{ZMod}\,M$（$M \in \mathbb{N}$，带 `[NeZero M]`）上平移算子与时钟算子的共轭对易律。在源码模块 `WeylDisplacementConjugation` 中，记 $M$ 次本原单位根为 $\omega_M = \mathrm{windowRoot}(M) = \exp(2\pi i / M)$，在 $M_{\mathrm{Fin}\,M}(\mathbb{C})$ 上定义：
 
 - **对角时钟矩阵** $\mathrm{clockMatrix}(M) = \operatorname{diag}\bigl(j \mapsto \omega_M^{j.\mathrm{val}}\bigr)$；
@@ -184,6 +188,10 @@ $$
 - 当 $x \notin H$ 时，各频率分量 $\chi_k(x)$ 在复平面单位圆上均匀散开、两两抵消，合振幅精确归零（**相消干涉**）；
 - 当 $x \in H$ 时，所有频率分量全部指向正实轴 $+1$，合振幅同相叠加为 $|\mathrm{annihilator}(H)|$（**相长干涉**）。
 
+::: {.viz src="phase-gears" preset="cancel" height="500"}
+**不共振的箭头绕成一圈。** $Q = 16$、梳子 $\{0, 4, 8, 12\}$、$k = 1$：只有最慢的那只齿轮亮着，四支青色箭头 $1$、$i$、$-1$、$-i$ 首尾相接围成正方形，回到原点；谱上第 $1$ 根柱子扫描中先长出来，最后缩回 $0$（[@prop-finite-character-cancellation]）。
+:::
+
 **重要规范提醒**：[@prop-finite-character-cancellation] 右端在 $x \in H$ 时给出的是**未归一化**的子群基数 $|\mathrm{annihilator}(H)|$，绝不能把这股未归一化的代数和直接称作“概率 $1$”！在实际量子电路中，必须除以初态归一化因子 $\sqrt{|H|}$ 与幺正 QFT 的归一化因子 $\sqrt{m}$，才能把振幅转化为满足玻恩法则的单位概率分布。
 
 ## 有限周期采样与 Shor 阶重建 {#sec-shor-order-reconstruction}
@@ -228,6 +236,10 @@ $$
 
 1. **有限泊松恒等式不等于完整 Shor 算法的成功概率或多项式复杂度定理**：[@cor-finite-poisson-period] 是 $\mathrm{ZMod}\,m$ 上的精确调和分析恒等式，它本身并不包含模幂电路构造、连分数有理逼近恢复定理、欧拉函数互素概率下界或大数分解的多项式门复杂度（这些完整算法环节列于 [@rem-grover-qft-shor-literature]）。
 2. **整除情形（$r \mid Q$）与一般非整除情形（$r \nmid Q$）的本质区别**：唯有当待求周期 $r$ 恰好整除量子寄存器容量 $m = Q$ 时，周期采样点才构成 $\mathrm{ZMod}\,Q$ 的真子群 $H$，使非共振频点按 [@prop-finite-character-cancellation] **精确为零**；而在 Shor 算法的一般情形中，$r$ 是未知奇偶整数而 $Q = 2^q$ 是 $2$ 的幂（通常 $r \nmid Q$），此时非共振频点的振幅并不精确为零，而是呈狄利克雷（Dirichlet / Fejér）核尖峰分布集中在最接近 $\frac{s Q}{r}$ 的整数频点周围，必须借助连分数展开（continued fractions）从有理逼近中还原分母 $r$。
+:::
+
+::: {.viz src="phase-gears" preset="leak" height="500"}
+**不整除时峰摊开。** $Q = 64$、周期 $6$：品红的 $sQ/r$ 落在 $10.67$、$21.33$ 等整数之间，峰摊到相邻的格，$k = 11$ 高 $0.115$、$k = 10$ 只有 $0.026$，离 $sQ/r$ 最近的六格合计 $0.80$；琥珀色框住的 $k = 11$ 用连分数读出 $\frac{1}{6}$。这种集中与连分数恢复是文献结果，未在本书形式化。
 :::
 
 下面，让我们通过一个四步完整手算算例，把 $N=4$ 与 $N=8$ 的 Grover 搜索、$3$ 比特 QFT 的二进制相位齿轮、$N=15$ 的 Shor 周期寻找以及 $\mathrm{ZMod}\,16$ 上的字符和与泊松公式逐一验算到底。
@@ -338,6 +350,14 @@ $$
 **$N = 8$：两步之后还差一点。** 第 $1$ 步后成功概率 $\frac{25}{32}$，第 $2$ 步后 $\frac{121}{128}$：箭头停在 $5\theta \approx 103.5^\circ$，略过竖轴，品红的影子还剩 $-0.234$。
 :::
 
+::: {.viz src="phase-gears" preset="four" height="500"}
+**周期 4 留下四根峰。** $Q = 16$、梳子 $\{0, 4, 8, 12\}$：看 $k = 4$ 时四支青色箭头全部朝右，链长 $4$；扫完之后谱上只剩 $0$、$4$、$8$、$12$ 四根等高的柱子，每根 $\frac{1}{4}$，正落在品红的 $sQ/r$ 上，其余十二根都是 $0$。
+:::
+
+::: {.viz src="phase-gears" preset="read" height="500"}
+**由峰读出阶。** 同一个谱：$k = 4$ 与 $12$ 给出 $\frac{4}{16} = \frac{1}{4}$、$\frac{12}{16} = \frac{3}{4}$，分母是阶 $4$；琥珀色框住的 $k = 8$ 只给出 $\frac{1}{2}$，分母 $2$ 是阶的真因子，要再检验；$k = 0$ 不含信息。
+:::
+
 ::: {.remark #rem-grover-qft-shor-literature title="Grover 查询下界、QFT 电路分解与 Shor 大数分解完整算法定理（文献结果，未在本书形式化）"}
 <!-- alias: #rem-shor-factoring-literature -->
 **文献结果，未在本书形式化。** 本章的形式化定理严格覆盖了均匀振幅放大的不变平面旋转恒等式（[@thm-grover-uniform-rotation]）、有限 Weyl 位移算子的共轭相位反冲（[@lemma-phase-kickback-weyl]）、零化子特征标正交相消（[@prop-finite-character-cancellation]）与有限泊松求和公式（[@cor-finite-poisson-period]）。在量子算法文献中，围绕这四块基石建立的完整算法与复杂度结论如下：
@@ -345,6 +365,10 @@ $$
 1. **Grover 搜索与黑盒查询复杂度下界**（L. K. Grover, *A fast quantum mechanical algorithm for database search*, Proc. 28th ACM STOC, 212–219, 1996, doi:10.1145/237814.237866；G. Brassard, P. Høyer, M. Mosca, and A. Tapp, *Quantum amplitude amplification and estimation*, Contemp. Math. **305**, 53–74, 2002, arXiv:quant-ph/0005055）：在包含 $M$ 个解的 $N$ 元无结构搜索问题中，振幅放大以 $O(\sqrt{N/M})$ 次黑盒查询将成功概率提升至 $\ge 1 - M/N$；同时 Bennett–Bernstein–Brassard–Vazirani (1997) 证明了任何量子黑盒算法要以常数有界误差找到解都必须付出 $\Omega(\sqrt{N/M})$ 次查询，证实二次加速已达量子几何极限。
 2. **量子傅里叶变换（QFT）的多项式门分解**：在 $q$ 比特寄存器（$Q = 2^q$）上，将正指数单位化 QFT 展开为 [@ex-grover-four-shor-fifteen] 第二步中的二进制乘积形式后，每一层输出比特仅需 $1$ 个 Hadamard 门与至多 $q - 1$ 个受控二进相位门 $R_k = \operatorname{diag}(1, e^{2\pi i / 2^k})$，加上末端 $\lfloor q/2\rfloor$ 个 SWAP 门，总门数为 $\frac{q(q+1)}{2} + \lfloor\frac{q}{2}\rfloor = O(q^2) = O((\log Q)^2)$，相比经典快速傅里叶变换（FFT）的 $O(Q \log Q)$ 实现了指数级电路规模压缩。
 3. **Shor 大数分解与阶寻找的完整正确性条件**（P. W. Shor, *Polynomial-time algorithms for prime factorization and discrete logarithms on a quantum computer*, SIAM J. Comput. **26**, 1484–1509, 1997, doi:10.1137/S0097539795293172）：对于一般合数 $N$（非偶、非素数幂）与随机互素底数 $a$，乘法阶 $r$ 通常不整除 $Q = 2^q$。Shor 算法选取 $N^2 \le Q < 2N^2$，通过可逆模幂电路在 $O((\log N)^3)$ 基本门内制备周期叠加态，再经 QFT 采样频点 $k$。利用有限几何级数（Dirichlet 核）下界，落入满足 $\bigl|\frac{k}{Q} - \frac{s}{r}\bigr| \le \frac{1}{2Q} < \frac{1}{2r^2}$ 的最近整数频点 $k$ 的总概率满足常数下界，再由 Hardy–Wright 连分数逼近定理从 $k/Q$ 的渐近分数中唯一恢复既约分式 $s/r$；当 $\gcd(s, r) = 1$（其概率由欧拉函数下界 $\varphi(r)/r = \Omega(1/\log\log r)$ 保证）时即可获得真阶 $r$，结合经典数论引理（奇素因子幂相异时 $\Pr[r \text{ 为偶且 } a^{r/2} \not\equiv -1 \pmod N] \ge 1 - 2^{-(k-1)} \ge 1/2$）完成多项式时间随机化分解。（注：将周期提取比作“把无穷周期因式约分到 $1$”属于启发式几何直觉，绝非已形式化的数学结论。）
+:::
+
+::: {.viz src="phase-gears" height="560"}
+相位齿轮与周期的完整实验室：换寄存器大小 $Q$、周期 $r$ 与起点，点谱上的柱子选频率 $k$，看它的相位箭头首尾相接；$r$ 整除 $Q$ 时不共振的链闭合为零（[@prop-finite-character-cancellation]），不整除时峰摊在 $sQ/r$ 附近（文献结果，未在本书形式化）。
 :::
 
 看着 Grover 的二维平面旋转与 QFT 的傅里叶相消，一个更宏大的问题油然而生：**为什么这两类看似风马牛不相及的量子算法，背后都在反复交替调用“酉算子嵌入”与“相位反射/旋转”？有没有一套更高维的几何母框架，能够把搜索、相位估计、哈密顿量模拟乃至矩阵求逆统统收编为同一个二维块上的切比雪夫多项式递推？而在走下理想算法的云端、把连续旋转编译成有限个离散量子门 $\{H, T\}$ 时，我们手里的球体又会露出怎样棱角分明的多面体真相？** 让我们迈入第四部的收官之章——[第十六章](ch16-qsvt-walks-and-compilation.md)。

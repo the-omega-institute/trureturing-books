@@ -1249,6 +1249,58 @@
           "gid": "D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation"
         }
       ]
+    },
+    {
+      "id": "phase-gears",
+      "code": "PHASE//GEARS",
+      "title": "相位齿轮与周期",
+      "title_en": "Phase gears and the period",
+      "summary": "量子傅里叶变换给寄存器里的每一格 x 拧一排相位齿轮：第一只每格转半圈，往后每只慢一半；频率 k 的相位是 k 的二进制位选中的那几只齿轮的转角之和，Q = 8、x = 5 时三只齿轮停在 π、π/2、5π/4。把周期梳子上各格的相位箭头首尾相接：r 整除 Q 时不共振的频率绕成闭合的多边形、合成为零（Q = 16、k = 1 正是 1 + i − 1 − i = 0），谱上只剩 r 根等高的峰；不整除时峰摊在 sQ/r 附近，用连分数从峰读出阶。五张实验卡可以在第十五章正文里单独引用。",
+      "summary_en": "The quantum Fourier transform turns a row of phase gears for every cell x of the register: the first turns half a turn per cell and each next one half as fast; the phase of frequency k is the sum of the angles of the gears picked by the binary digits of k, and at Q = 8, x = 5 the three gears rest at π, π/2 and 5π/4. Chain the phase arrows of the cells of a periodic comb head to tail: when r divides Q every off-resonant frequency closes into a polygon and sums to zero (Q = 16, k = 1 is exactly 1 + i − 1 − i = 0), leaving r equal peaks; otherwise the peaks spread near sQ/r, and continued fractions read the order from a peak. Each of the five experiment cards can be cited on its own from Chapter 15.",
+      "path": "phase-gears/",
+      "thumbnail": "phase-gears/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "量子傅里叶变换",
+        "相位齿轮",
+        "特征标相消",
+        "周期寻找",
+        "连分数",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Quantum Fourier transform",
+        "Phase gears",
+        "Character cancellation",
+        "Period finding",
+        "Continued fractions",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第十五章 · 相位反冲与 QFT 二进制齿轮",
+          "label_en": "Chapter 15 · Phase kickback and the binary gears of the QFT",
+          "href": "../zh/ch15-grover-qft-and-period-finding.html#sec-qft-phase-gears",
+          "href_en": "../en/ch15-grover-qft-and-period-finding.html#sec-qft-phase-gears"
+        },
+        {
+          "label": "第十五章 · 有限字符正交与非共振相消",
+          "label_en": "Chapter 15 · Finite character orthogonality and nonresonant cancellation",
+          "href": "../zh/ch15-grover-qft-and-period-finding.html#sec-period-frequency-cancellation",
+          "href_en": "../en/ch15-grover-qft-and-period-finding.html#sec-period-frequency-cancellation"
+        },
+        {
+          "label": "Lean · Fourier/FinitePoisson",
+          "label_en": "Lean · Fourier/FinitePoisson",
+          "href": "{trureturing}/D5/S3/Fourier/FinitePoisson.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Fourier/FinitePoisson.sum_annihilator_character"
+        }
+      ]
     }
   ]
 }
