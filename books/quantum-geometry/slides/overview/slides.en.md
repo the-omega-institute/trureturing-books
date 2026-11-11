@@ -498,7 +498,7 @@ section: "Part VI · warrant"
       <p>The book verifies an abstract diagonal escape; the hypotheses of the Cantor, Lawvere, Gödel and Tarski theorems are compared only as literature, not formalized here.</p>
     </div>
     <div>
-      <TheoremCard class="compact" label="Conjecture 22.34" title="The Riemann Hypothesis" status="open" cite="conj-riemann-hypothesis">
+      <TheoremCard class="compact" label="Conjecture 22.36" title="The Riemann Hypothesis" status="open" cite="conj-riemann-hypothesis">
         <p>Every zero of the zeta function in the critical strip <Tex t="0 \lt \operatorname{Re}(s) \lt 1" /> lies on the critical line <Tex t="\operatorname{Re}(s) = 1/2" />.</p>
       </TheoremCard>
       <p class="lead mt-s">Chapter 24 adds one more: <span class="hl-warn">Schanuel's conjecture</span> would make <Tex t="\theta^*" /> and <Tex t="\pi" /> algebraically independent.</p>
@@ -668,11 +668,11 @@ section: "Three tiers"
     <img src="./img/prelude-three-tiers.en.svg" alt="Three bars: green 184, violet 127, red 6; under the green bar, 308 theorem declarations in the lock file." style="display: block; width: 900px; max-width: 100%;">
     <div>
       <div class="g3">
-        <Stat value="184" label="theorems, lemmas, propositions and corollaries with lean=" tone="ok" />
+        <Stat value="186" label="theorems, lemmas, propositions and corollaries with lean=" tone="ok" />
         <Stat value="127" label="remarks and examples marked “literature result, not formalized”" tone="violet" />
         <Stat value="6" label="open conjectures, marked OPEN, with no Lean reference" tone="warn" />
       </div>
-      <p class="lead mt">The lock file <span class="mono">trureturing.lock.json</span> pins <span class="mono">dev@1d9bf98cab83</span>: 439 declarations, 308 of them Lean theorems.</p>
+      <p class="lead mt">The lock file <span class="mono">trureturing.lock.json</span> pins <span class="mono">dev@1d9bf98cab83</span>: 441 declarations, 310 of them Lean theorems.</p>
     </div>
   </div>
 </div>

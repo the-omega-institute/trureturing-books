@@ -126,6 +126,63 @@ $$
 **乘起来加一。** 清单里每多一个素数，就把它们全部乘起来再加一得到 $Q$。每只钟有 $p$ 个刻度，指针指着 $Q$ 除以 $p$ 的余数：全都指着 $1$，没有一只指着红色的 $0$，所以整除 $Q$ 的素数一定不在清单里（欧几里得的论证，文献结果）。全屏打开后，下方的图给出有限个素数的欧拉乘积离 $\zeta(2)$ 还差多少（[@thm-riemann-zeta-euler-product] 取 $s = 2$）。
 :::
 
+**加法里的同一个窍门。** 欧拉乘积靠的是乘法分解：每个 $n$ 唯一地写成素数幂之积，每根素数轴各自贡献一个等比级数。把“乘”换成“加”，同一个窍门照样成立。把 $N$ 拆成若干正整数部件之和（不计顺序），部件大小 $n$ 就是一根轴，它出现的次数 $m_n$ 是这根轴上的坐标；沿这根轴求和仍是等比级数 $1 + x^n + x^{2n} + \cdots = (1 - x^n)^{-1}$。如果大小为 $n$ 的部件有 $c_n$ 种颜色，同色同大小的部件不加区分，这根轴就分裂成 $c_n$ 根，因子变成 $(1 - x^n)^{-c_n}$。下面这条定理把这件事落在真正的有限集合上：左边是形式幂级数的系数，右边是一个有限类型的元素个数，两边分别定义、互不依赖。
+
+::: {.theorem #thm-coloured-partition-euler-product title="彩色分拆计数：加法型欧拉乘积的系数等于彩色分拆数" lean="D5/S3/Combinatorics/Partitions/ColouredEulerLedger.coloured_coefficient"}
+给定颜色数 $c : \mathbb{N} \to \mathbb{N}$（$c_n$ 可以为 $0$）。对 $N \in \mathbb{N}$，称 $N$ 的一个**彩色分拆**为如下资料：$N$ 的一个整数分拆，连同对其中每个出现的部件大小 $d$（重数记为 $m_d$），从 $c_d$ 种颜色中可重复地选取的一个 $m_d$ 元多重集。在整系数形式幂级数环 $\mathbb{Z}[[x]]$ 中记
+
+$$
+E_c(x) = \prod_{n \ge 1} (1 - x^n)^{-c_n}, \qquad (1 - x^n)^{-c} = \sum_{k \ge 0} \binom{c + k - 1}{k}\, x^{kn},
+$$
+
+其中 $E_c$ 的 $x^N$ 系数取前 $N$ 个因子 $n = 1, \dots, N$ 之积的 $x^N$ 系数（更后面的因子从 $x^{N+1}$ 起才有非常数项，不影响它）。则
+
+$$
+[x^N]\, E_c(x) = \#\{\, N \text{ 的彩色分拆} \,\}.
+$$
+:::
+
+::: proof
+Lean 的证明不从乘积出发去“猜”系数，而是两头各算各的，再在中间相遇。
+
+（1）数右边。彩色分拆的集合是一个依赖和：先选分拆 $p$，再对 $p$ 中每个出现的大小 $d$ 独立地选一个多重集。从 $c$ 种颜色可重复地选 $m$ 个，方法数是 $\binom{c + m - 1}{m}$（隔板法），所以总数是 $\sum_p \prod_d \binom{c_d + m_d - 1}{m_d}$。这正是 Mathlib 中加权分拆生成函数（大小 $d$、重数 $m$ 配权 $\binom{c_d + m - 1}{m}$）的 $x^N$ 系数。
+
+（2）数左边。同一个生成函数又是局部因子 $1 + \sum_{j \ge 1} \binom{c_d + j - 1}{j}\, x^{dj}$ 在逐系数收敛意义下的无穷乘积；逐系数比较可知，这个局部因子就是 $(1 - x^d)^{-c_d}$。无穷乘积的极限唯一，而 $E_c$ 的每个系数已经由前有限个因子决定，于是两边相等。完整证明由 Lean 内核检查。
+:::
+
+**玻色子的态数（手工推导）。** 设想一组彼此独立的谐振模式：频率为 $n\omega$ 的模式有 $c_n$ 个（$n = 1, 2, 3, \dots$），每个模式可以容纳任意多个全同玻色子，每个粒子带能量 $n\hbar\omega$（不计零点能）。一个福克态就是给每个模式指定一个占据数。把频率为 $n\omega$ 的 $c_n$ 个模式看成 $c_n$ 种颜色：这些模式的占据数之和记为 $m_n$，一组占据数恰好就是从 $c_n$ 种颜色可重复地取 $m_n$ 个的一个多重集；总能量是 $\sum_n n\, m_n$ 个 $\hbar\omega$。所以总能量为 $N\hbar\omega$ 的福克态与 $N$ 的彩色分拆一一对应，它们的个数就是 [@thm-coloured-partition-euler-product] 里 $E_c$ 的 $x^N$ 系数。令 $x = e^{-\hbar\omega/k_B T}$，$E_c(x)$ 就是这团玻色气体的正则配分函数。不过定理只管形式幂级数的系数；把 $x$ 换成一个数，还需要乘积收敛（例如 $c_n$ 有界、$0 \le x < 1$ 时，$\sum_n c_n x^n < \infty$，乘积收敛）。
+
+::: {.example #ex-coloured-partitions-small title="一种、两种与 n 种颜色：手算前几项，并与逐个枚举的福克态核对"}
+**一种颜色（$c_n = 1$）。** 这就是普通分拆数 $p(N)$。$N = 4$ 的分拆有 $5$ 个：$4$、$3 + 1$、$2 + 2$、$2 + 1 + 1$、$1 + 1 + 1 + 1$。
+
+**两种颜色（$c_n = 2$）。** 以 $N = 2$ 为例：分拆 $2$ 只有一个部件，颜色有 $2$ 种选法；分拆 $1 + 1$ 要从 $2$ 种颜色可重复地选 $2$ 个，多重集有 $\binom{3}{2} = 3$ 个（两红、两蓝、一红一蓝）。合计 $5$。在物理上，这是每个频率各有两个偏振方向的一维腔：能量 $2\hbar\omega$ 的态有 $5$ 个。
+
+**$n$ 种颜色（$c_n = n$）。** 以 $N = 2$ 为例：部件 $2$ 有 $2$ 种颜色，给出 $2$ 个；$1 + 1$ 只有一种颜色可用，给出 $1$ 个。合计 $3$。
+
+把三个乘积展开到 $x^{10}$：
+
+| $N$ | $0$ | $1$ | $2$ | $3$ | $4$ | $5$ | $6$ | $7$ | $8$ | $9$ | $10$ |
+| :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| $c_n = 1$ | $1$ | $1$ | $2$ | $3$ | $5$ | $7$ | $11$ | $15$ | $22$ | $30$ | $42$ |
+| $c_n = 2$ | $1$ | $2$ | $5$ | $10$ | $20$ | $36$ | $65$ | $110$ | $185$ | $300$ | $481$ |
+| $c_n = n$ | $1$ | $1$ | $3$ | $6$ | $13$ | $24$ | $48$ | $86$ | $160$ | $282$ | $500$ |
+
+表中每一项都用两种互不依赖的办法算过：一是按定理把乘积逐项展开，二是不碰乘积，直接对每个模式枚举占据数，数出总能量为 $N$ 的福克态。对 $N \le 10$ 的三行，两种办法完全一致。
+
+**文献结果，未在本书形式化。** $c_n = n$ 这一行恰是平面分拆的个数（MacMahon，1916），把它与彩色分拆对上的双射不在本书范围之内。普通分拆数的增长由哈代—拉马努金渐近式 $p(N) \sim \dfrac{e^{\pi\sqrt{2N/3}}}{4\sqrt{3}\,N}$ 给出（Hardy & Ramanujan，1918）；下表把主项与精确值作比较，相对误差只像 $1/\sqrt{N}$ 那样缓慢地缩小：
+
+| $N$ | $p(N)$ | 主项 $\dfrac{e^{\pi\sqrt{2N/3}}}{4\sqrt{3}\,N}$ | 主项 $/\, p(N) - 1$ |
+| ---: | ---: | ---: | ---: |
+| $10$ | $42$ | $48.10$ | $+14.5\%$ |
+| $50$ | $204226$ | $2.176 \times 10^{5}$ | $+6.5\%$ |
+| $100$ | $190569292$ | $1.993 \times 10^{8}$ | $+4.6\%$ |
+| $200$ | $3972999029388$ | $4.100 \times 10^{12}$ | $+3.2\%$ |
+:::
+
+**欧拉乘积本身就是一团玻色气体。** 把同一个读法搬回 [@cor-dirichlet-sum-eq-euler-product]：让每个素数 $p$ 成为一个玻色模式，单粒子能量取 $\ln p$。一个福克态给每个素数指定占据数 $a_p$（只有有限个非零），对应整数 $n = \prod_p p^{a_p}$，总能量是 $\sum_p a_p \ln p = \ln n$；唯一素因子分解保证这是一一对应（手工推导）。于是 $\sum_n n^{-s} = \sum_{\text{态}} e^{-s E}$：$\zeta(s)$ 是这团“素数气体”在逆温度 $s$ 下的配分函数，而欧拉乘积就是每个模式各自的等比级数之积。[@lem-riemann-zeta-residue-one] 说 $s \to 1^{+}$ 时 $\zeta(s)$ 像 $1/(s - 1)$ 那样发散：温度升到 $1$ 时配分函数爆掉；温度再高（$s \le 1$），级数 $\sum_n n^{-s}$ 本身就发散（与调和级数比较）。这个物理读法来自文献（B. Julia，1990；D. Spector，1990），本书不对它作任何形式化断言。
+
+> 乘法拆成素数，加法拆成部件；两次都是把一个无穷和拆成许多互不相干的等比级数。
+
 ## 22.3 有限素数筛的“多面体截断余项”与相位共振手算 {#sec-ch22-3}
 
 让我们把复变量写成 $s = \sigma + it$（其中实部 $\sigma = \operatorname{Re}(s)$ 控制振幅衰减，虚部 $t = \operatorname{Im}(s)$ 控制旋转角频率），看看 [@cor-dirichlet-sum-eq-euler-product] 中的每一个素数因子在几何上究竟在做什么：
@@ -812,7 +869,7 @@ $$
 ::: {.remark #rem-euler-zeta-literature title="Re(s) > 1 形式化恒等式与解析延拓、泛函方程及零点分布的边界审计（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 为严守三层认识论诚实标准，读者在阅读本章时须明确区分以下三个层次：
 
-1. **已由本书所钉 Lean 内核验证的冻结定理（第一层 `LEAN ✓`）**：本章的十八条正式结论——$s = 1$ 处的单位留数极限（[@lem-riemann-zeta-residue-one]）、半平面 $\operatorname{Re}(s) > 1$ 上的狄利克雷级数恒等式（[@prop-riemann-zeta-dirichlet-sum]）、半平面 $\operatorname{Re}(s) > 1$ 上的欧拉素数乘积恒等式（[@thm-riemann-zeta-euler-product]）两者的直接相等（[@cor-dirichlet-sum-eq-euler-product]），素数对数在整数与有理数上的线性无关（[@thm-prime-log-independence]）、自然数对数的无理性（[@lem-log-natural-irrational]）、有限维环面幂轨道的闭包与克罗内克稠密性（[@thm-torus-power-orbit-closure]），$\xi$ 读数的整函数性、反射对称 $\xi(1 - s) = \xi(s)$ 与端点值（[@thm-xi-reading-entire-reflection]）、$\zeta$ 与 $\xi$ 的共轭协变（[@prop-zeta-conjugation-covariance]）、凯莱单位圆判据与黎曼猜想的径向等价形式（[@thm-cayley-critical-line-criterion]）、交错部分和收敛到 $(1 - 2^{1-s})\,\zeta(s)$（[@lem-alternating-zeta-partial-sums]）、$\zeta$ 在实轴上的符号与实零点（[@prop-zeta-real-axis-sign]）、$\xi$ 读数的零点恰是临界带内的 $\zeta$ 零点以及完备 $\zeta$ 在 $\operatorname{Re}(s) \ge 1$ 上不为零（[@prop-xi-zeros-strip-zeros]）、切比雪夫函数形式的素数定理及其误差项（[@thm-medium-pnt]）、右半带归约与 Mathlib 表述和临界带表述的等价（[@thm-right-half-strip-rh-forms]）、完全对称性不蕴含定线局域化的四次反例（[@thm-full-symmetry-not-localization]）、至多八根素数轴上以及 $5040 < n < 223092870$ 范围内的罗宾不等式（[@thm-robin-at-most-eight-primes]），以及临界线右侧的零点迫使某个 $\operatorname{lcm}(1, \dots, \lfloor t\rfloor)$ 违反罗宾不等式（[@thm-off-line-zero-robin-violation]）——严格成立。注意欧拉乘积仅在 Lean 假设显式给出的绝对收敛半平面 `1 < s.re`（$\operatorname{Re}(s) > 1$）内被调用与核验。
+1. **已由本书所钉 Lean 内核验证的冻结定理（第一层 `LEAN ✓`）**：本章的十九条正式结论——$s = 1$ 处的单位留数极限（[@lem-riemann-zeta-residue-one]）、半平面 $\operatorname{Re}(s) > 1$ 上的狄利克雷级数恒等式（[@prop-riemann-zeta-dirichlet-sum]）、半平面 $\operatorname{Re}(s) > 1$ 上的欧拉素数乘积恒等式（[@thm-riemann-zeta-euler-product]）两者的直接相等（[@cor-dirichlet-sum-eq-euler-product]）与加法型欧拉乘积的系数等于彩色分拆数（[@thm-coloured-partition-euler-product]），素数对数在整数与有理数上的线性无关（[@thm-prime-log-independence]）、自然数对数的无理性（[@lem-log-natural-irrational]）、有限维环面幂轨道的闭包与克罗内克稠密性（[@thm-torus-power-orbit-closure]），$\xi$ 读数的整函数性、反射对称 $\xi(1 - s) = \xi(s)$ 与端点值（[@thm-xi-reading-entire-reflection]）、$\zeta$ 与 $\xi$ 的共轭协变（[@prop-zeta-conjugation-covariance]）、凯莱单位圆判据与黎曼猜想的径向等价形式（[@thm-cayley-critical-line-criterion]）、交错部分和收敛到 $(1 - 2^{1-s})\,\zeta(s)$（[@lem-alternating-zeta-partial-sums]）、$\zeta$ 在实轴上的符号与实零点（[@prop-zeta-real-axis-sign]）、$\xi$ 读数的零点恰是临界带内的 $\zeta$ 零点以及完备 $\zeta$ 在 $\operatorname{Re}(s) \ge 1$ 上不为零（[@prop-xi-zeros-strip-zeros]）、切比雪夫函数形式的素数定理及其误差项（[@thm-medium-pnt]）、右半带归约与 Mathlib 表述和临界带表述的等价（[@thm-right-half-strip-rh-forms]）、完全对称性不蕴含定线局域化的四次反例（[@thm-full-symmetry-not-localization]）、至多八根素数轴上以及 $5040 < n < 223092870$ 范围内的罗宾不等式（[@thm-robin-at-most-eight-primes]），以及临界线右侧的零点迫使某个 $\operatorname{lcm}(1, \dots, \lfloor t\rfloor)$ 违反罗宾不等式（[@thm-off-line-zero-robin-violation]）——严格成立。注意欧拉乘积仅在 Lean 假设显式给出的绝对收敛半平面 `1 < s.re`（$\operatorname{Re}(s) > 1$）内被调用与核验。
 2. **经典解析数论文献定理（第二层，已有严格纸面证明但未在本书形式化）**：
    - **黎曼解析延拓与平凡零点（Riemann, 1859）**：$\zeta(s)$ 可全纯延拓至 $\mathbb{C} \setminus \{1\}$，负偶数 $s = -2, -4, -6, \dots$ 为平凡零点（[@rem-zeta-zero-free-region-literature]）。（“临界带 $0 < \operatorname{Re}(s) < 1$ 之外没有其他零点”已不在这一层：它由 [@thm-right-half-strip-rh-forms] 的结论 3 与 [@prop-xi-zeros-strip-zeros] 之后的一行手工推导给出，实轴上的情形见 [@prop-zeta-real-axis-sign]。）（完备化函数 $\xi$ 的整函数性、反射对称 $\xi(s) = \xi(1 - s)$ 与共轭对称 $\xi(\overline{s}) = \overline{\xi(s)}$ 已不在这一层：它们由 [@thm-xi-reading-entire-reflection] 与 [@prop-zeta-conjugation-covariance] 借助 Mathlib 的完备 $\zeta$ 给出。）
    - **素数定理的 $\pi(x)$ 形式（Hadamard, de la Vallée Poussin, 1896）**：$\zeta(1 + it) \neq 0$（$t \neq 0$；$t = 0$ 即 $s = 1$ 处为一阶极点）已不在这一层，它由 [@prop-xi-zeros-strip-zeros] 经一行手工推导得到；切比雪夫函数形式的素数定理连同误差项也已不在这一层，见 [@thm-medium-pnt]。仍在这一层的是由 $\psi(x) \sim x$ 经分部求和得到 $\pi(x) \sim \frac{x}{\ln x}$ 的一步，以及 de la Vallée Poussin 的误差项 $O\bigl(x e^{-c\sqrt{\ln x}}\bigr)$；
