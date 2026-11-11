@@ -518,7 +518,7 @@ This monograph consists of the **[Prelude](README.md)**, **Eight Parts (32 Chapt
             ┌─────────────────────────────────────────────────────────────────┐
             │ Part VIII: Causality, ETH, Fairness & Meta (Ch 29–32) → Coda    │
             │  • Polyhedral defect & Hairy Ball lit. • Pythagorean 4-tier arc │
-            │  • Concept Dictionary (A) • Clifford Sheet (B) • 449 Index (C)  │
+            │  • Concept Dictionary (A) • Clifford Sheet (B) • 450 Index (C)  │
             └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -541,7 +541,7 @@ Readers can navigate the book along four self-contained tracks tailored to their
 3. **Mathematical Logic, Number Theory, and Epistemology Track**:
    [Prelude](README.md) $\to$ Chapter 10 (Gram matrices and order independence) $\to$ Chapters 19–20 (discrete polyhedral facet cones and open-conjecture boundaries) $\to$ Chapters 21–24 (diagonal escape, Euler products, quaternion Diophantine norms, and cosine self-reference) $\to$ [Chapter 29](ch29-timeless-causality-and-gram-space.md)–[Chapter 32](ch32-unified-field-and-meta-unification.md) (the four-tier Pythagorean escape of number, timeless causality, the ETH horizon, fluid vortex filaments, quantum fairness, and meta-unification) $\to$ Coda (golden cut-and-project spatial attractors and [@thm-coda-fixed-point-anchor]).
 4. **Lean 4 Formal Verification and Kernel Audit Track**:
-   [Prelude](README.md) §Epistemic Contract $\to$ Chapters 25–28 (Part VII: line-by-line formal tour of `Cl3`, `PauliSymplectic`, `ZYZ`, and `FiniteRecordCosineObstruction`) $\to$ [Appendix B](appendix-b.md) $\to$ [Appendix C](appendix-c.md) (auditing all $235$ environment/media frozen theorems, $95$ environment/media definitions and algebraic carriers, and $119$ inline-only declarations — $449$ unique locked declarations in total — at `trureturing@dev` commit [`6cfcf7850967`](https://github.com/the-omega-institute/trureturing/tree/6cfcf785096782b15084d719ec73c2ca16b6ed29)).
+   [Prelude](README.md) §Epistemic Contract $\to$ Chapters 25–28 (Part VII: line-by-line formal tour of `Cl3`, `PauliSymplectic`, `ZYZ`, and `FiniteRecordCosineObstruction`) $\to$ [Appendix B](appendix-b.md) $\to$ [Appendix C](appendix-c.md) (auditing all $236$ environment/media frozen theorems, $95$ environment/media definitions and algebraic carriers, and $119$ inline-only declarations — $450$ unique locked declarations in total — at `trureturing@dev` commit [`6cfcf7850967`](https://github.com/the-omega-institute/trureturing/tree/6cfcf785096782b15084d719ec73c2ca16b6ed29)).
 
 ### Quick Register of the 41 Core Chapter Theorem Anchors in Parts VI–VIII (Chapters 21–32) {#sec-coda-part6-part7-register}
 
@@ -591,4 +591,4 @@ As a bridge between the closing three parts of the monograph and the complete le
 | **Chapter 32**<br/>Unified Field & Meta-Unification | T32.1 | `D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes` | The binary Zeckendorf finite automaton accepts a binary word iff `NoAdjacentOnes` holds |
 | **Chapter 32** | T32.2 | `D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null` | Every real quadratic form vanishing on all Minkowski null-cone vectors is a scalar multiple of `minkowski d` |
 
-Outside all spheres lies not emptiness, but **the unending act of measurement and counting itself**. Turn next to [Appendix A](appendix-a.md) for the complete dictionary translating conventional quantum mechanics into geometric language, [Appendix B](appendix-b.md) for the Clifford algebra and rotor cheat sheet, and [Appendix C](appendix-c.md) for the complete index of all $330$ formal environment and media `trureturing@dev` declarations ($235$ theorems and $95$ definitions/carriers, plus $119$ inline-only declarations, making $449$ unique locked declarations).
+Outside all spheres lies not emptiness, but **the unending act of measurement and counting itself**. Turn next to [Appendix A](appendix-a.md) for the complete dictionary translating conventional quantum mechanics into geometric language, [Appendix B](appendix-b.md) for the Clifford algebra and rotor cheat sheet, and [Appendix C](appendix-c.md) for the complete index of all $331$ formal environment and media `trureturing@dev` declarations ($236$ theorems and $95$ definitions/carriers, plus $119$ inline-only declarations, making $450$ unique locked declarations).

@@ -212,7 +212,7 @@ $$
 \tau_\perp = \frac{\pi\hbar}{E} = \frac{1}{2f} = 100\,\mathrm{ps} .
 $$
 
-按 [@thm-fubini-study-record-time] 的计数上界，取 $\mathrm{energy} = \Delta H = \frac{hf}{2}$，在 $T = 25\,\mathrm{ns}$ 内 $N \le \frac{4\cdot\mathrm{energy}\cdot T}{\pi\hbar} = 4fT = 500$。受驱时情形不同：[第十一章](ch11-pulses-and-virtual-z.md) [@ex-five-ghz-pi-over-two] 在旋转参考系里消去了载频，有效哈密顿量的能量尺度是拉比频率 $\Omega = 2\pi \times 10\,\mathrm{MHz}$，对初态 $\lvert 0\rangle$ 有 $\Delta H = \frac{\hbar\Omega}{2}$，正交时间 $\tau_\perp = \frac{\pi}{\Omega} = 50\,\mathrm{ns}$，正好是那里 $25\,\mathrm{ns}$ 四分之一转的两倍。同一个量子比特，换一个参考系，时钟的快慢差了五百倍：决定“滴答”间隔的是所选参考系里的能量涨落，而不是能级差本身。
+按 [@thm-fubini-study-record-time] 的计数上界，取 $\mathrm{energy} = \Delta H = \frac{hf}{2}$，在 $T = 25\,\mathrm{ns}$ 内 $N \le \frac{4\cdot\mathrm{energy}\cdot T}{\pi\hbar} = 4fT = 500$。受驱时情形不同：[第十一章](ch11-pulses-and-virtual-z.md) [@ex-five-ghz-pi-over-two] 在旋转参考系里消去了载频，有效哈密顿量的能量尺度是拉比频率 $\Omega = 2\pi \times 10\,\mathrm{MHz}$，对初态 $\lvert 0\rangle$ 有 $\Delta H = \frac{\hbar\Omega}{2}$，正交时间 $\tau_\perp = \frac{\pi}{\Omega} = 50\,\mathrm{ns}$，正好是那里 $25\,\mathrm{ns}$ 四分之一转的两倍。这两种制备与演化协议的正交时间相差五百倍；应以各协议中产生相对于所选读出参考的演化的能量尺度计算。
 :::
 
 ::: {.viz src="speed-limit-zeno" preset="three" height="500"}
@@ -408,7 +408,7 @@ $$
    $$
    \tau_\perp \ge \frac{\pi\hbar}{2\,\langle H\rangle}.
    $$
-3. **Misra–Sudarshan 量子芝诺定理（B. Misra & E. C. G. Sudarshan, 1977）**：在 *The Zeno's paradox in quantum theory*（J. Math. Phys. **18**, 756–763, 1977）中，严格证明了对于定义域稠密且能量期望有限的自伴哈密顿算子 $H$ 与投影算子 $P$，当等间隔投影测量次数 $N \to \infty$ 时，有效演化算子强收敛于投影子空间内的幺正群：$\lim_{N\to\infty} (P e^{-iHT/\hbar N} P)^N = P e^{-i(PHP)T/\hbar} P$，从而彻底阻断向正交补空间 $I - P$ 的跃迁。
+3. **Misra–Sudarshan 量子芝诺定理（B. Misra & E. C. G. Sudarshan, 1977）**：在有限维（或有界自伴 $H$）与正交投影 $P$ 的有界特例中，等间隔投影测量次数 $N \to \infty$ 时可得到强收敛公式 $\lim_{N\to\infty} (P e^{-iHT/\hbar N} P)^N = P e^{-i(PHP)T/\hbar} P$，从而在该特例中阻断向正交补空间 $I-P$ 的跃迁。无界情形需要额外的定义域、半有界性和强极限存在条件；仅有有限能量期望并不足以推出这个一般结论。
 
 上述连续时间积分界与强算子拓扑极限作为物理文献背景列出，不计入本书的 Lean 形式化验证账本。
 :::

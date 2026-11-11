@@ -1,0 +1,4 @@
+interface:
+  display_name: "Content accuracy review"
+  short_description: "Proofread bilingual book chapters against frozen Lean statements"
+  default_prompt: "Review the requested quantum-geometry chapters for content accuracy, preserve the author voice, and prepare a minimal validated PR."

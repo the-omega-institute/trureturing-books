@@ -725,6 +725,14 @@
       "line": 77,
       "signature": "theorem circuit_length (n : ℕ) : (circuit n).length = 2 * (n + 2)"
     },
+    "D5/S3/Combinatorics/Partitions/ColouredEulerLedger.coloured_coefficient": {
+      "module": "D5/S3/Combinatorics/Partitions/ColouredEulerLedger",
+      "name": "D5.S3.Combinatorics.Partitions.ColouredEulerLedger.coloured_coefficient",
+      "kind": "theorem",
+      "statement_id": "sha256:c093d56982a51511137fbec5256046afbce4527120d49576e99425b789d5a110",
+      "line": 73,
+      "signature": "theorem coloured_coefficient (colors : ℕ → ℕ) (n : ℕ) : coeff n (eulerSeries (fun i => (colors (i + 1) : ℤ))) = (Nat.card (ColouredPartition colors n) : ℤ)"
+    },
     "D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart.gaussian_unit": {
       "module": "D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart",
       "name": "D5.S3.ConceptDynamics.Coding.ResetNativeIntegerChart.gaussian_unit",

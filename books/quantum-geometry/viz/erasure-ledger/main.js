@@ -3,8 +3,11 @@
    arrow, its shadow on the record line Z (the diagonal) and its sideways part (the coherence). Right: the system's
    von Neumann entropy S and the heat βQ paid to the environment so far, with the Landauer floor drawn in.
    The ledger is a list of operations (turn, pinch, ideal reset, reset with one bath qubit, copy, undo copy) applied
-   to a real 4 × 4 density matrix of system ⊗ record bit; every entropy, relative entropy, mutual information and
-   heat is computed from matrices. The rail replays the operations one step at a time.
+   to a real 4 × 4 density matrix of system ⊗ record bit; at every whole step each entropy, relative entropy, mutual
+   information and heat is computed from matrices. The rail replays the operations one step at a time; between two
+   steps the arrow and the two columns are each interpolated between the ends (an illustrative glide, not an entropy
+   recomputed for the state in between), and the page says so wherever those in-between numbers show.
+   βQ = Q/(k_B T) is dimensionless and is set beside S in nats.
    Read-only probe for the browser suite: window.ERASE_DEBUG. */
 (() => {
   'use strict';
@@ -142,8 +145,10 @@
   /* ---------- stage ---------- */
   const stage = kit.stage3($('stage'), { canvas: $('cv'), rotate: false, onChange: () => paint() });
   const thick = TRV.thumbMode ? 1.9 : 1;
-  function layout(W, H) {
-    const top = TRV.thumbMode ? 0.06 * H : (TRV.figure || TRV.shot ? 64 : 66), bottom = TRV.thumbMode ? 0.06 * H : (W < 560 ? 64 : 44);
+  /** `hudBottom` is how far down the canvas the HUD reaches (see hud()); the drawing starts 18 px below it, which keeps
+      the |0⟩ and Z labels at the top of the disc clear of a HUD that wraps to two lines on a narrow stage. */
+  function layout(W, H, hudBottom) {
+    const top = TRV.thumbMode ? 0.06 * H : Math.max(TRV.figure || TRV.shot ? 64 : 66, hudBottom + 18), bottom = TRV.thumbMode ? 0.06 * H : (W < 560 ? 64 : 44);
     const h = H - top - bottom;
     if (H > W * 1.1) {   // a tall stage (phone): the disc above, the ledger below
       const R = Math.min(W * 0.33, h * 0.25), cx = W * 0.36, cy = top + 12 + R;
@@ -179,8 +184,23 @@
     for (const h of hist) { hi = Math.max(hi, h.heat * 1.12, h.S * 1.12); lo = Math.min(lo, h.heat * 1.12); }
     return [lo, hi];
   }
+  /** The second HUD line; between two steps it carries the interpolation caveat. */
+  const hudSubHtml = (a, between) => (between
+    ? `${L('熵', 'S')} ≈ ${fix(a.S, 3)} · ${L('热', 'heat')} ≈ ${fix(a.heat, 3)} · ${L('两步之间：插值示意，不是图中态的熵', 'between steps: interpolated, not the drawn state\'s S')}`
+    : `${L('熵', 'S')} ${fix(a.S, 3)} · ${L('已付的热', 'heat paid')} ${fix(a.heat, 3)} · ${L('下界', 'floor')} ${fix(a.floor, 3)}`);
+  /** Write the HUD before the frame is laid out and return how far down the canvas it reaches, measured in this frame:
+      the taller of its two forms (at a whole step, between steps) at the current width and language, so the drawing
+      sits below it and does not jump when a glide starts or ends. */
+  function hud(a) {
+    const cur = a.f > 0 ? a.k + 1 : a.k, op = cur ? hist[cur].step.op : null, sub = $('hudSub');
+    $('hudBig').textContent = cur ? L(`第 ${cur} 步 · ${opName(op)}`, `Step ${cur} · ${opName(op)}`) : L('起点 · |0⟩', 'Start · |0⟩');
+    if (TRV.thumbMode) { sub.innerHTML = hudSubHtml(a, a.f > 0); return 0; }
+    const y0 = $('cv').getBoundingClientRect().top;
+    sub.innerHTML = hudSubHtml(a, !(a.f > 0)); const other = sub.getBoundingClientRect().bottom - y0;
+    sub.innerHTML = hudSubHtml(a, a.f > 0); return Math.max(other, sub.getBoundingClientRect().bottom - y0);
+  }
   function drawStage() {
-    const st = stage, c = st.begin(), W = st.W, H = st.H, Lo = layout(W, H), a = at(clock.t), { R, cx, cy } = Lo;
+    const st = stage, c = st.begin(), W = st.W, H = st.H, a = at(clock.t), Lo = layout(W, H, hud(a)), { R, cx, cy } = Lo;
     const X = (x) => cx + R * x, Y = (z) => cy - R * z, labels = !TRV.thumbMode;
     // the Bloch disc
     c.fillStyle = TRV.alpha(P.cyan, 0.05); c.beginPath(); c.arc(cx, cy, R, 0, 2 * Math.PI); c.fill();
@@ -235,10 +255,6 @@
     }
     drawLedger(c, st, Lo, a, labels);
     st.end();
-    // HUD
-    const cur = a.f > 0 ? a.k + 1 : a.k, op = cur ? hist[cur].step.op : null;
-    $('hudBig').textContent = cur ? L(`第 ${cur} 步 · ${opName(op)}`, `Step ${cur} · ${opName(op)}`) : L('起点 · |0⟩', 'Start · |0⟩');
-    $('hudSub').innerHTML = `${L('熵', 'S')} ${fix(a.S, 3)} · ${L('已付的热', 'heat paid')} ${fix(a.heat, 3)} · ${L('下界', 'floor')} ${fix(a.floor, 3)}`;
   }
   function drawLedger(c, st, Lo, a, labels) {
     const { x1, x2, cw, yTop, yBot } = Lo.led, [lo, hi] = range(), V = (v) => yBot - (v - lo) / (hi - lo) * (yBot - yTop), y0 = V(0);
@@ -273,8 +289,9 @@
     if (labels) {
       st.tag('ln2', [x1 - cw / 2 - 18, V(LN2)], 'ln 2', 'num', { screen: true, fade: false });
       const ys = Math.min(top, y0), yl = V(LN2);   // keep the value clear of the ln 2 line
-      st.tag('vs', [x1, (ys - yl > -2 && ys - yl < 24 ? yl : ys) - 11], fix(a.S, 3), 'num', { screen: true });
-      st.tag('vq', [x2, Math.min(hq, y0) - 11], fix(a.heat, 3), 'num', { screen: true });
+      const ap = a.f > 0 ? '≈ ' : '';   // between two steps the columns are interpolated, not computed
+      st.tag('vs', [x1, (ys - yl > -2 && ys - yl < 24 ? yl : ys) - 11], ap + fix(a.S, 3), 'num', { screen: true });
+      st.tag('vq', [x2, Math.min(hq, y0) - 11], ap + fix(a.heat, 3), 'num', { screen: true });
       const narrow = x2 - x1 < 120;
       st.tag('ts', [x1, yBot + 16], narrow ? L('熵 S', 'S') : L('系统的熵', 'system S'), 'raw', { screen: true });
       st.tag('tq', [x2, yBot + 16], narrow ? L('热 βQ', 'βQ') : L('付给环境的热', 'heat paid βQ'), 'raw', { screen: true });
@@ -294,15 +311,16 @@
     g.vline(clock.t, P.amber, { alpha: 0.8 });
     g.legend([[P.sigma, L('系统的熵', 'system entropy')], [P.dim, L('已付的热', 'heat paid')], [P.ink, L('兰道尔下界', 'Landauer floor'), 'dash']], { right: false });
     const a = at(clock.t);
-    $('plotMeta').textContent = `S ${fix(a.S, 3)} · βQ ${fix(a.heat, 3)}`;
+    $('plotMeta').textContent = a.f > 0 ? `S ≈ ${fix(a.S, 3)} · βQ ≈ ${fix(a.heat, 3)}` : `S ${fix(a.S, 3)} · βQ ${fix(a.heat, 3)}`;
   }
 
   /* ---------- readouts ---------- */
   function drawText() {
     const a = at(clock.t), cur = a.f > 0 ? a.k + 1 : a.k, h = hist[cur], step = cur ? h.step : null;
-    $('roKey').innerHTML = `${fix(a.heat, 3)} = ${fix(a.floor, 3)} + ${fix(a.extra, 3)}`;
-    $('roKeySub').textContent = L('βQ = −ΔS + (I + D)，累计，单位 k_BT', 'βQ = −ΔS + (I + D), running totals, in k_BT');
-    $('roS').textContent = fix(a.S, 3);
+    const ap = a.f > 0 ? '≈ ' : '';
+    $('roKey').innerHTML = `${ap}${fix(a.heat, 3)} = ${fix(a.floor, 3)} + ${fix(a.extra, 3)}`;
+    $('roKeySub').textContent = L('βQ = −ΔS + (I + D)，累计；βQ = Q/(k_BT) 无量纲，与以奈特计的熵直接相比', 'βQ = −ΔS + (I + D), running totals; βQ = Q/(k_BT) is dimensionless, set beside S in nats');
+    $('roS').textContent = ap + fix(a.S, 3);
     $('roX').textContent = fix(Math.abs(a.bloch[0]), 3);
     $('roStep').innerHTML = !step ? '—'
       : step.op === 'pinch' ? `ΔS ${fix(step.dS, 3)} · D ${fix(step.D, 3)}`
@@ -315,15 +333,33 @@
       rot: ['转动：箭头转了，长度没变，熵与热都不动。', 'A turn: the arrow turned, its length did not change, and neither entropy nor heat moved.'],
       pinch: ['捏合：横着的一份抹掉了，熵的增加恰好等于这一步的 D。', 'A pinch: the sideways part is wiped out, and the entropy rises by exactly this step\'s D.'],
       reset: ['理想复位：系统回到 |0⟩，熵减多少，热就付多少，一分不多。', 'Ideal reset: the system is back at |0⟩, and the heat paid equals the entropy removed, not a bit more.'],
-      swap: ['热浴比特复位：系统的熵减了，付的热却更多，多出的是热浴被推离平衡的 D。', 'Reset with a bath qubit: the system\'s entropy went down, but the heat paid is more, and the extra is the D by which the bath was pushed off equilibrium.'],
-      copy: ['拷贝：系统这一侧只剩对角线，局部的熵涨了；整体仍是纯态，熵为 0，没有付热。', 'Copy: only the diagonal is left on the system\'s side and the local entropy rose; the whole is still pure, with entropy 0, and no heat was paid.'],
-      uncopy: ['撤回拷贝：再作用一次受控非门，记录比特回到空白。', 'Undo copy: one more controlled-NOT and the record bit is blank again.']
+      swap: ['热浴比特复位：系统与一个吉布斯态的热浴比特交换。', 'Reset with a bath qubit: the system is swapped with a bath qubit in its Gibbs state.'],
+      copy: ['拷贝：系统这一侧只剩对角线。', 'Copy: only the diagonal is left on the system\'s side.'],
+      uncopy: ['撤回拷贝：再作用一次受控非门。', 'Undo copy: one more controlled-NOT.']
     };
     const nt = notes[step ? step.op : 'start'];
-    $('roNote').textContent = L(nt[0], nt[1]);
+    // what a step did depends on the ledger before it: say only what this ledger shows
+    let more = ['', ''];
+    if (step && step.op === 'copy') {
+      const up = step.dS > 1e-9, pure = h.Sglob < 1e-6;
+      more = [`局部的熵${up ? `涨了 ${fix(step.dS, 3)}` : '没变（拷贝前已经只有对角线）'}；整体（系统 + 记录）的熵与拷贝前相同，${pure ? '仍是纯态，熵为 0' : `仍是 ${fix(h.Sglob, 3)}，不是 0`}；没有付热。`,
+        ` The local entropy ${up ? `rose by ${fix(step.dS, 3)}` : 'stayed the same (only the diagonal was there before the copy)'}; the entropy of the whole (system + record) is what it was before the copy, ${pure ? 'still pure, with entropy 0' : `still ${fix(h.Sglob, 3)}, not 0`}; no heat was paid.`];
+    } else if (step && step.op === 'uncopy') {
+      let c = cur - 1; while (c > 0 && hist[c].step.op !== 'copy') c--;
+      const back = c > 0 && dist(h.J, hist[c - 1].J) < 1e-9;
+      more = back ? ['联合态精确回到拷贝之前，记录比特回到空白。', ' The joint state is exactly what it was before the copy, and the record bit is blank again.']
+        : !h.linked ? ['记录比特回到空白，但联合态不是拷贝之前的那个：拷贝之后系统又被改动过。', ' The record bit is blank again, but the joint state is not the one before the copy: the system was changed after the copy.']
+          : ['记录比特没有回到空白：拷贝之后系统又被改动过，这一次受控非门没有抵消拷贝。紧接着拷贝作用它的伴随（再一次受控非门）一定能精确撤回；拷贝之后若有别的改动，要保证精确撤回，就得把那些改动也撤回。', ' The record bit is not blank: the system was changed after the copy, and this controlled-NOT did not cancel the copy. Applying the adjoint (one more controlled-NOT) right after the copy is guaranteed to undo it exactly; after other changes, a guaranteed exact reversal needs those changes undone as well.'];
+    } else if (step && step.op === 'swap') {
+      const dS = step.dSsys, extra = step.I + step.D;
+      more = [`系统的熵${dS < -1e-9 ? `减了 ${fix(-dS, 3)}` : dS > 1e-9 ? `反而增了 ${fix(dS, 3)}` : '没变'}，下界 −ΔS = ${fix(-dS, 3)}；这一步 βQ = ${fix(step.Q, 3)}${step.Q < -1e-9 ? '，为负：热从热浴流进系统' : ''}，${extra > 1e-9 ? `比下界多出 I + D = ${fix(extra, 3)}，D 是热浴被推离平衡的相对熵` : '正好等于下界（I = D = 0）'}。`,
+        ` The system's entropy ${dS < -1e-9 ? `fell by ${fix(-dS, 3)}` : dS > 1e-9 ? `rose by ${fix(dS, 3)}` : 'did not change'}, so the floor −ΔS is ${fix(-dS, 3)}; this step's βQ is ${fix(step.Q, 3)}${step.Q < -1e-9 ? ', negative: heat flowed from the bath into the system' : ''}, ${extra > 1e-9 ? `above the floor by I + D = ${fix(extra, 3)}, where D is the relative entropy by which the bath was pushed off equilibrium` : 'exactly at the floor (I = D = 0)'}.`];
+    }
+    const glide = a.f > 0 ? ['（两步之间：箭头与两栏的数各自在两端之间插值，只是示意，不是图中这个态的熵；整数步上的数才是实算的。）', ' (Between steps the arrow and both columns are each interpolated between the ends, an illustration only, not the entropy of the state drawn; the numbers at whole steps are the computed ones.)'] : ['', ''];
+    $('roNote').textContent = L(nt[0] + more[0] + glide[0], nt[1] + more[1] + glide[1]);
+    $('pillS').querySelector('strong').textContent = ap + fix(a.S, 3);
+    $('pillQ').querySelector('strong').textContent = ap + fix(a.heat, 3);
     $('pillStep').querySelector('strong').textContent = String(cur);
-    $('pillS').querySelector('strong').textContent = fix(a.S, 3);
-    $('pillQ').querySelector('strong').textContent = fix(a.heat, 3);
     $('rew').disabled = $('play').disabled = $('now').disabled = S.ops.length === 0;
     // which operations the current entry allows
     const here = hist[Math.floor(clock.t + 1e-9)] || hist[hist.length - 1], full = Math.floor(clock.t + 1e-9) >= MAX_OPS;
@@ -331,7 +367,7 @@
       const op = b.dataset.op;
       b.disabled = full || ((op === 'reset' || op === 'swap' || op === 'copy') && here.linked) || (op === 'uncopy' && !here.linked);
     });
-    $('opNote').textContent = here.linked ? L('系统与记录比特还连着：先撤回拷贝，才能复位。', 'The system and the record bit are still linked: undo the copy before resetting.')
+    $('opNote').textContent = here.linked ? L('系统与记录比特还连着：记录比特回到空白之后才能复位（紧接着拷贝撤回一次即可）。', 'The system and the record bit are still linked: a reset needs the record bit blank again (undoing right after the copy does it).')
       : L('从时间轴当前的位置往后记一步；时间轴在中途时，后面的步会被替换。', 'Each press writes one step after the rail\'s current position; with the rail part-way, the later steps are replaced.');
   }
 
