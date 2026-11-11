@@ -1846,6 +1846,59 @@
           "gid": "D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm"
         }
       ]
+    },
+    {
+      "id": "euler-product-sieve",
+      "code": "EULER//SIEVE",
+      "title": "欧拉乘积与筛",
+      "title_en": "The Euler product and the sieve",
+      "summary": "实轴 1 < s ≤ 4 上，墨色的 ζ(s) 与青色的、只用前 K 个素数的欧拉乘积 ∏(1 − p⁻ˢ)⁻¹ 并排画出，两者之间是品红的缺口；放大镜把当前 s 处的缺口按整数拆开，最底下一段总是下一个素数的 p⁻ˢ。下方的整数 1 到 96 按是否出现在乘积的展开里着色：青色的格子素因子全在清单上，品红的格子带着清单外的素因子，第一个就是下一个素数。时间轴把素数一个个加进清单，拖动琥珀色竖线改 s：只用 2 时乘积是 4/3；用到 5 时是 25/16，缺口 0.0824 的领头项是 7⁻²；到 97 时 1 到 96 全变青色，缺口仍在；s 越靠近 1 缺口越宽，s = 1 处乘积停在有限值而 ζ 趋于无穷。六张实验卡可以在第二十二章正文里单独引用。",
+      "summary_en": "On the real axis 1 < s ≤ 4 the ink curve ζ(s) runs beside the cyan Euler product ∏(1 − p⁻ˢ)⁻¹ over the first K primes only, with the magenta gap between them; a magnifier splits the gap at the current s into the integers it is made of, and its lowest slice is always p⁻ˢ of the next prime. Below, the integers 1 to 96 are coloured by whether the product expands into them: cyan cells have every prime factor on the list, magenta cells carry a prime factor off it, the next prime first. The rail puts primes on the list one at a time and the amber line moves s: with 2 alone the product is 4/3; up to 5 it is 25/16 and the gap of 0.0824 is led by 7⁻²; up to 97 every cell from 1 to 96 is cyan and the gap is still there; the closer s is to 1 the wider the gap, and at s = 1 the product stops at a finite value while ζ goes to infinity. Each of the six experiment cards can be cited on its own from Chapter 22.",
+      "path": "euler-product-sieve/",
+      "thumbnail": "euler-product-sieve/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-11",
+      "tags": [
+        "欧拉乘积",
+        "ζ 函数",
+        "素数",
+        "筛法",
+        "余项",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Euler product",
+        "Zeta function",
+        "Primes",
+        "Sieve",
+        "Remainder",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第二十二章 · 极点留数、狄利克雷级数与欧拉乘积",
+          "label_en": "Chapter 22 · The residue, the Dirichlet series and the Euler product",
+          "href": "../zh/ch22-primes-euler-products-and-zeros.html#sec-ch22-2",
+          "href_en": "../en/ch22-primes-euler-products-and-zeros.html#sec-ch22-2"
+        },
+        {
+          "label": "第二十二章 · 有限素数筛的截断余项",
+          "label_en": "Chapter 22 · The remainder of a finite prime sieve",
+          "href": "../zh/ch22-primes-euler-products-and-zeros.html#ex-prime-log-orthogonality-and-sieve",
+          "href_en": "../en/ch22-primes-euler-products-and-zeros.html#ex-prime-log-orthogonality-and-sieve"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Zeros/ZetaIdentities.riemann_zeta_euler_product"
+        },
+        {
+          "gid": "D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product"
+        },
+        {
+          "gid": "D5/S3/Zeros/ZetaIdentities.riemann_zeta_residue_one"
+        }
+      ]
     }
   ]
 }

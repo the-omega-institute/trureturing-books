@@ -32,6 +32,10 @@ $$
 
 你看，单根素数轴上的无穷多项之和 $1 + p^{-s} + p^{-2s} + \cdots$，被等比求和公式一口气“约掉”成了干净利落的单因子 $(1 - p^{-s})^{-1}$！把所有相互正交的素数轴 $p \in \mathrm{Primes}$ 乘在一起，由于乘法分配律在展开时恰好不重不漏地遍历每一个非负整数坐标向量 $(v_2, v_3, v_5, \dots)$（仅有限个坐标非零），全体自然数的狄利克雷级数便与全体素数的欧拉乘积严丝合缝地合二为一。
 
+::: {.viz src="euler-product-sieve" preset="two" height="500"}
+**一根素数轴。** 清单上只有 $2$：青色曲线是等比级数 $1 + 2^{-s} + 4^{-s} + \cdots = (1 - 2^{-s})^{-1}$，在琥珀色竖线 $s = 2$ 处等于 $\frac{4}{3}$，比墨色的 $\zeta(2)$ 低一截。下方的整数里只有 $2$ 的幂 $1, 2, 4, 8, 16, 32, 64$ 是青色，其余都是品红，第一个品红格是 $3$。
+:::
+
 为了在 Lean 4 中把这一经典桥梁铸成零歧义的形式化定理，我们首先对齐 `trureturing` 仓库中模块 `D5/S3/Weil/Convention` 所采用的黎曼 $\zeta$ 函数约定。
 
 ::: {.definition #def-classical-zeta title="黎曼 ζ 函数的形式化约定与简单极点谓词" lean="D5/S3/Weil/Convention.classicalZeta D5/S3/Zeros/ZetaUpgrade.HasUniqueSimplePoleWithResidue"}
@@ -47,6 +51,10 @@ $$
 在进入 $\operatorname{Re}(s) > 1$ 的级数与乘积展开之前，让我们先锁定 $\zeta(s)$ 在复平面上最醒目的地标：位于 $s = 1$ 处的**唯一一阶极点（调和级数发散奇点）**。
 
 从几何上看，当 $s \to 1^+$ 时，调和级数 $\sum_{n=1}^\infty n^{-s}$ 之所以发散，正是因为无穷多根素数正交轴上的放大因子 $(1 - p^{-1})^{-1} = \frac{p}{p-1}$ 源源不断地累积发散；而它发散的速度，恰好由 $(s - 1)^{-1}$ 以单位留数 $1$ 精准标定！
+
+::: {.viz src="euler-product-sieve" preset="near" height="500"}
+**越靠近 1，缺口越宽。** 清单是到 $31$ 为止的 $11$ 个素数，琥珀色竖线在 $s = 1.1$：青色的乘积只有 $4.93$，墨色的 $\zeta(1.1) = 10.58$，品红的缺口比乘积本身还大。往左走缺口只会更宽：在 $s = 1$ 处青色曲线停在有限值 $\prod_{p \le 31} \frac{p}{p-1} \approx 6.54$，墨色的 $\zeta$ 却冲出画面，那里是 [@lem-riemann-zeta-residue-one] 的极点。
+:::
 
 ::: {.lemma #lem-riemann-zeta-residue-one title="黎曼 ζ 函数在 s = 1 处的留数为 1" lean="D5/S3/Zeros/ZetaIdentities.riemann_zeta_residue_one"}
 对 [@def-classical-zeta] 中的黎曼 $\zeta$ 函数 $\operatorname{classicalZeta} : \mathbb{C} \to \mathbb{C}$，当复变量 $s \in \mathbb{C}$ 沿去心邻域滤子 $\mathcal{N}_{\neq}(1)$ 趋近于 $1$ 时，有极限
@@ -102,6 +110,10 @@ $$
 
 ::: proof
 在假设 `hs : 1 < s.re` 下，由 [@prop-riemann-zeta-dirichlet-sum] 知左端等于 $\operatorname{classicalZeta}(s)$，再由 [@thm-riemann-zeta-euler-product] 的对称形式将 $\operatorname{classicalZeta}(s)$ 替换为右端的素数无穷乘积即得。完整证明由 Lean 内核检查。
+:::
+
+::: {.viz src="euler-product-sieve" preset="all" height="500"}
+**格子全青，缺口还在。** 素数一个个加进清单，直到 $97$：下方 $1$ 到 $96$ 的格子全部变成青色，每一个都出现在乘积的展开里；在 $s = 2$ 处青色曲线离墨色的 $\zeta$ 只差 $0.0030$。放大镜里的品红缺口仍在，垫底的一段是 $101^{-s}$。只有把全体素数都乘进来，乘积才等于整个级数（[@cor-dirichlet-sum-eq-euler-product]）。
 :::
 
 ::: {.viz src="sphere-escape" preset="euclid" height="500"}
@@ -236,10 +248,26 @@ $$
 两者的严格正截断差值 $R_{> 5}(2) = \zeta(2) - P_{\le 5}(2) \approx 0.082434 > 0$，其领头项恰恰是第四根正交素数轴投下的平方反比权重 $7^{-2} = \frac{1}{49} \approx 0.020408$（紧接着是 $11^{-2} = \frac{1}{121} \approx 0.008264$、$13^{-2} = \frac{1}{169} \approx 0.005917$ 与混合合数项 $14^{-2} = (2\times 7)^{-2} = \frac{1}{196} \approx 0.005102$）！
 :::
 
+::: {.viz src="euler-product-sieve" preset="five" height="500"}
+**漏网的第一个是 7。** 清单是 $2, 3, 5$：青色格子 $1, 2, 3, 4, 5, 6, 8, 9, 10, 12, \dots$ 是乘积展开出来的项，$7$ 是第一个品红格。在 $s = 2$ 处青色曲线是 $\frac{25}{16} = 1.5625$，墨色的 $\zeta(2) = 1.6449$；放大镜把缺口 $0.0824$ 自下而上拆成 $7^{-2}$、$11^{-2}$、$13^{-2}$ 和更薄的一段段，每一段是一个品红格的 $n^{-2}$。
+:::
+
+::: {.viz src="euler-product-sieve" preset="remainder" height="500"}
+**余项垫底的总是 $7^{-s}$。** 清单仍是 $2, 3, 5$，琥珀色竖线从 $s = 4$ 扫到 $s = 1.3$：品红的缺口越来越宽，放大镜里最底下的一段始终是 $7^{-s}$。墨色与青色之间的品红虚线是乘积加上 $7^{-s}$，缺口从不比它窄，即 $R_{>5}(s) > 7^{-s}$（文献结果，页面只在画出的点上数值核对）。
+:::
+
 请看 [@ex-prime-log-orthogonality-and-sieve] 与[第二十一章](ch21-diagonalization-and-escape.md)欧几里得—哥德尔逃逸的绝妙同构：只要你只握有有限 $K$ 根素数正交轴 $\{p_1, \dots, p_K\}$，你张成的“算术多面体”就必然在 $n = p_{K+1}$ 处留下一道非恒零的狄利克雷余项裂缝（在全体实数 $s > 1$ 上逐点严格大于 $p_{K+1}^{-s} > 0$）；要想把这道首项裂缝补上，你必须把第 $K+1$ 个素数 $p_{K+1}$ 作为一根全新的正交基准轴并入系统——而素数有无穷多个，因此算术球面在有限截断下永远留有通向更高素数维度的生长之门！
+
+::: {.viz src="euler-product-sieve" preset="thirtyone" height="500"}
+**到 31，漏网从 37 起。** 清单是到 $31$ 为止的 $11$ 个素数：$1$ 到 $36$ 全是青色，第一个品红格是 $37$。在 $s = 2$ 处缺口缩到 $0.0102$，放大镜里垫底的仍是 $37^{-2}$：要补上这一段，只能把 $37$ 加进清单。
+:::
 
 ::: {.viz src="sphere-escape" preset="thirteen" height="500"}
 **加一之后不一定是素数。** 清单是 $2, 3, 5, 7, 11, 13$，$Q = 30031$：每只钟的指针都指着 $1$，没有一只指着 $0$。可 $Q = 59 \times 509$ 本身不是素数；欧几里得的论证（文献结果）只说 $Q$ 的素因子都不在清单里，新找到的 $59$ 也不是紧接着的 $17$。
+:::
+
+::: {.viz src="euler-product-sieve" height="560"}
+欧拉乘积与筛的完整实验室：拖动时间轴加减素数，拖动琥珀色竖线改 $s$，点一个品红格把它的最大素因子放进清单。下方第一张小图里，墨色的 $(s - 1)\zeta(s)$ 走向绿色虚线 $1$（[@lem-riemann-zeta-residue-one]），青色的 $(s - 1)$ 乘以乘积走向 $0$；第二张小图是乘积与 $\zeta(s)$ 相差不到 $1\%$ 所需的素数个数。
 :::
 
 > 合数是素数正交轴张成的对角网格；欧拉乘积不过是把纠缠在自然数长线上的无穷和，顺着一根根互不相干的素数主轴正交投影拆解开来。
