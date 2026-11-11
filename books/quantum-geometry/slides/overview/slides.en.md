@@ -672,7 +672,7 @@ section: "Three tiers"
         <Stat value="127" label="remarks and examples marked “literature result, not formalized”" tone="violet" />
         <Stat value="6" label="open conjectures, marked OPEN, with no Lean reference" tone="warn" />
       </div>
-      <p class="lead mt">The lock file <span class="mono">trureturing.lock.json</span> pins <span class="mono">dev@1d9bf98cab83</span>: 439 declarations, 308 of them Lean theorems.</p>
+      <p class="lead mt">The lock file <span class="mono">trureturing.lock.json</span> pins <PinnedCommit />: 439 declarations, 308 of them Lean theorems.</p>
     </div>
   </div>
 </div>

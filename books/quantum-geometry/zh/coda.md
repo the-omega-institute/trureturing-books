@@ -467,7 +467,7 @@ $$
 3. **数理逻辑、数论与认识论路径**：
    [序曲](README.md) $\to$ 第 10 章（Gram 矩阵与顺序无关性）$\to$ 第 19–20 章（离散多面体分片锥与开放猜想边界）$\to$ 第 21–24 章（对角线逃逸、欧拉乘积、四元数丢番图范数、余弦自指不动点）$\to$ [第 29 章](ch29-timeless-causality-and-gram-space.md)–[第 32 章](ch32-unified-field-and-meta-unification.md)（毕达哥拉斯四级数系突围、无时间因果、ETH 视界与流体涡丝、量子公平与大一统元统一）$\to$ 终章（黄金切投空间吸引子与 [@thm-coda-fixed-point-anchor]）。
 4. **Lean 4 形式化验证与内核审计路径**：
-   [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 与 `FiniteRecordCosineObstruction` 的逐行形式化剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对 `trureturing@dev` 提交 `1d9bf98cab83` 下全部 $227$ 条环境/媒体冻结定理、$89$ 项环境辅助定义与 $123$ 项行内引用声明，共计 $439$ 项唯一锁定声明）。
+   [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 与 `FiniteRecordCosineObstruction` 的逐行形式化剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对 `trureturing@dev` 提交 [{commit}](trureturing:) 下全部 $227$ 条环境/媒体冻结定理、$89$ 项环境辅助定义与 $123$ 项行内引用声明，共计 $439$ 项唯一锁定声明）。
 
 ### 第六至第八部（第 21–32 章）41 项核心章节冻结定理锚点速览 {#sec-coda-part6-part7-register}
 
