@@ -141,9 +141,19 @@ $$
 （职责边界：[@prop-measurement-gradient-flow] 经 Lean 内核验证的是无穷小对易子导数公式与纯实性；上述两采样点有限位移恒等式额外依赖“参数 $\theta$ 仅在单扇对合泡利门 $e^{-i\theta P_{\mathrm{gen}}/2}$ 中出现一次”的二能级频率结构，作为手算与文献结果列入 [@ex-cluster-shift-and-gradient] 与 [@rem-mbqc-gradients-literature]。）
 :::
 
+两个取值点一旦不隔 $90^\circ$ 而只隔小步长 $\pm h$，差分就不再精确：对 $f = \cos\theta$，$\theta \pm h$ 两点连成的弦，斜率是切线斜率的 $\sin h / h$ 倍，$h = 30^\circ$ 时短约 $4.5\%$；$h$ 取小，这一截偏差按 $h^2$ 缩小，同样的散粒噪声却被 $2h$ 除得更大（本章开头的对照）。
+
+::: {.viz src="parameter-shift" preset="step" height="500"}
+**小步长的差分总差一截。** 同一条 $f = \cos\theta$，琥珀色的点在 $\theta = 60^\circ$；$\pm 30^\circ$ 两点连成的品红的弦比虚线切线缓，量尺上品红的条比切线短 $4.5\%$（$\sin h / h = 0.955$），青色的条（左右各 $90^\circ$ 两值之差的一半）停在切线上。
+:::
+
+左右各转 $90^\circ$ 的两点公式没有这一截偏差，它对一倍角谐波是恒等式；换一个角度、换一条曲线也是如此。
+
 ::: {.viz src="parameter-shift" preset="anywhere" height="500"}
 **换一个角度、换一条曲线，仍然精确。** 倾斜的态与测量轴给出抬高了常数 $c$、错开了相位的曲线 $f = c + a\cos\theta + b\sin\theta$。$\theta$ 扫过一整圈，量尺上青色的条始终停在切线的虚线上，品红的条（$\pm 30^\circ$ 的小步长差分）始终短一截；常数 $c$ 在相减时消掉（[@rem-parameter-shift-rule-literature]）。
 :::
+
+曲线与采样两个场景合在下面的完整实验室里：$h$ 越小，截断偏差越小，散粒噪声的散布越宽。
 
 ::: {.viz src="parameter-shift" height="560"}
 **参数位移：完整实验室。** 两个场景共用一条时间轴：曲线（拖动曲线或圆里的箭头改角度，换曲线、改小步长 $h$）与采样（改每个取值点的发数 $N$，看两种算法的散布怎样随 $N$ 与 $h$ 变化）。
