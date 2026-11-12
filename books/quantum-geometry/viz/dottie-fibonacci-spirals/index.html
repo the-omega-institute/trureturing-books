@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//SPIRALS · Twin-spiral correspondence: from the golden continued fraction to cosine whirling squares">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//SPIRALS 双螺旋对应 · 从黄金连分数到余弦回旋方格</title>
+<meta name="description" content="反复取余弦逼近 θ* ≈ 0.7391 与黄金倒数连分数 1/(1+x) 逼近 φ⁻¹ ≈ 0.6180 的双螺旋结构对应：负导数对应两次 90° 正交转，蛛网竖横等长折线嵌套出回旋方格与分段 90° 导引弧，对角线顶点与方格边长渐近等比收缩，并由极坐标光滑等角对数螺旋连续插值；平直一维加法守恒 φ⁻¹ + φ⁻² = 1 弯成单位圆上的二维勾股平方守恒 (θ*)² + sin²θ* = 1。Twin-spiral structural correspondence between cosine iteration toward θ* ≈ 0.7391 and golden continued-fraction iteration 1/(1+x) toward φ⁻¹ ≈ 0.6180: negative fixed-point slopes act as two 90° turns, equal-arm cobweb steps nest whirling squares and piecewise 90° guides whose vertices and side lengths contract geometrically, continuously interpolated on the polar stage by smooth equiangular logarithmic spirals, and 1D additive conservation φ⁻¹ + φ⁻² = 1 bends into 2D Pythagorean conservation (θ*)² + sin²θ* = 1.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="dottie-fibonacci-spirals">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//SPIRALS">ORTHO<b>//</b>SPIRALS</h1>
+      <div class="tagline">
+        <span class="zh">双螺旋对应 · <em>蛛网竖横等长绕出回旋方格；平直黄金分割弯上单位圆，化作勾股双螺旋</em></span>
+        <span class="en">Twin spirals · <em>equal cobweb arms nest whirling squares; bending the golden cut onto the unit circle yields a Pythagorean twin spiral</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillScene">SCENE <strong>—</strong></span>
+      <span class="pill" id="pillStep"><span class="zh">步</span><span class="en">STEP</span> <strong>0</strong></span>
+      <span class="pill hot" id="pillAngle"><span class="zh">切角</span><span class="en">ANGLE</span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="whirl" aria-pressed="false"><span class="code">WHIRLING-SQUARES</span><span class="cn zh">回旋方格：竖横等长与分段 90° 弧</span><span class="cn en">Whirling squares: equal arms &amp; 90° guides</span></button>
+        <button class="preset" data-preset="twin" aria-pressed="true"><span class="code">TWIN-SPIRALS</span><span class="cn zh">双螺旋对照：0.6736 对照 0.6180</span><span class="cn en">Twin spirals: 0.6736 alongside 0.6180</span></button>
+        <button class="preset" data-preset="pythagoras" aria-pressed="false"><span class="code">ADD-VS-SQUARE</span><span class="cn zh">一维相加守恒与二维勾股守恒</span><span class="cn en">1D additive vs 2D Pythagorean sum</span></button>
+        <button class="preset" data-preset="tilt" aria-pressed="false"><span class="code">TANGENT-ANGLE</span><span class="cn zh">向心切角：局部似球而整圈内缩</span><span class="cn en">Inward tangent angle: nearly circular, inward turn</span></button>
+        <button class="preset" data-preset="zoom" aria-pressed="false"><span class="code">RESURGO-ZOOM</span><span class="cn zh">渐近放大：第 12 步近似第 4 步</span><span class="cn en">Follow and zoom: step 12 nears step 4</span></button>
+        <button class="preset" data-preset="division" aria-pressed="false"><span class="code">PHI-AND-THETA</span><span class="cn zh">双螺旋分工：黄金铺底与余弦收束</span><span class="cn en">Division of labor: golden stage, cosine lock</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec" data-scenes="duo cobweb">
+      <h2><span class="zh">蛛网与起点</span><span class="en">Cobweb and start</span><span class="aside">MAP · START</span></h2>
+      <div class="chips" id="mapChips" role="group" aria-label="映射选择" data-aria-en="Map choice">
+        <button class="chip" data-map="cos" aria-pressed="true"><span class="m">cos θ</span></button>
+        <button class="chip" data-map="fib" aria-pressed="false"><span class="m">1/(1 + x)</span></button>
+        <button class="chip" data-map="both" aria-pressed="false"><span class="zh">双映射</span><span class="en">Both maps</span></button>
+      </div>
+      <div class="field">
+        <label for="x0"><span class="zh">起点 x₀</span><span class="en">Start x₀</span><small class="zh">蛛网对角线上可直接拖</small><small class="en">or drag along diagonal</small></label><output id="oX0" for="x0">0.00</output>
+        <input type="range" id="x0" min="0" max="1.5" step="0.01" value="0">
+      </div>
+      <div class="chips" id="camChips" role="group" aria-label="镜头模式" data-aria-en="Camera mode">
+        <button class="chip" data-cam="whole" aria-pressed="true"><span class="zh">看全程</span><span class="en">Whole path</span></button>
+        <button class="chip" data-cam="follow" aria-pressed="false"><span class="zh">跟着放大</span><span class="en">Follow and zoom</span></button>
+      </div>
+      <p class="note"><span class="zh">每一步竖走 |f(xₖ) − xₖ| 再横走同样长度（两臂共转 180°；x₀ &lt; x* 起步按 N→E→S→W，x₀ &gt; x* 起步按 S→W→N→E），围出嵌套方格与分段 90° 导引弧。</span><span class="en">Each step moves vertically by |f(xₖ) − xₖ| and horizontally by the same length (180° across two arms; N→E→S→W when x₀ &lt; x*, S→W→N→E when x₀ &gt; x*), nesting squares and piecewise 90° guides.</span></p>
+    </section>
+
+    <section class="panel sec" data-scenes="duo angle">
+      <h2><span class="zh">螺旋与守恒</span><span class="en">Spiral and conservation</span><span class="aside">POLAR · UNIT</span></h2>
+      <div class="chips" id="spiralChips" role="group" aria-label="目标轨迹" data-aria-en="Highlighted trajectory">
+        <button class="chip" data-spiral="clifford" aria-pressed="true"><span class="zh"><span class="m">θ*</span> 正交 75.88°</span><span class="en"><span class="m">θ*</span> spiral 75.88°</span></button>
+        <button class="chip" data-spiral="fib" aria-pressed="false"><span class="zh"><span class="m">φ⁻¹</span> 黄金 72.97°</span><span class="en"><span class="m">φ⁻¹</span> spiral 72.97°</span></button>
+        <button class="chip" data-spiral="cobweb" aria-pressed="false"><span class="zh">蛛网双步 82.83°</span><span class="en">Cobweb 82.83°</span></button>
+        <button class="chip" data-spiral="circle" aria-pressed="false"><span class="zh">闭合圆 90.00°</span><span class="en">Closed circle 90.00°</span></button>
+      </div>
+      <div class="chips" id="focusChips" data-scenes="angle" role="group" aria-label="倾角场景焦点" data-aria-en="Angle scene focus" hidden>
+        <button class="chip" data-focus="tilt" aria-pressed="true"><span class="zh">突出切角楔形</span><span class="en">Focus tangent wedge</span></button>
+        <button class="chip" data-focus="conservation" aria-pressed="false"><span class="zh">突出守恒对偶</span><span class="en">Focus conservation</span></button>
+      </div>
+      <p class="note"><span class="zh">切换光滑等角螺旋模型，比较向心径向射线（指向中心）与前进切线的锐夹角 α = arctan(1/b) 及每转 90° 的缩放因子 κ。</span><span class="en">Switch smooth equiangular spiral models to compare the acute angle α = arctan(1/b) between the inward radial ray and the forward tangent, alongside the per-90° factor κ.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage still" id="stage" data-thumb aria-label="舞台：余弦与黄金倒数蛛网回旋方格、同心对数螺旋切角与勾股守恒对偶" data-aria-en="Stage: cosine and golden reciprocal cobweb whirling squares, concentric logarithmic spiral tangent angles and Pythagorean conservation">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景切换" data-aria-en="Scene switcher">
+        <button class="chip" data-scene="duo" aria-pressed="true"><span class="zh">双栏</span><span class="en">Twin</span></button>
+        <button class="chip" data-scene="cobweb" aria-pressed="false"><span class="zh">方格</span><span class="en">Squares</span></button>
+        <button class="chip" data-scene="angle" aria-pressed="false"><span class="zh">倾角</span><span class="en">Angle</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="pATitle"></h2><span id="pAMeta"></span></div>
+        <canvas id="plotA" aria-label="本场景的第一张小图" data-aria-en="First small plot of the scene"></canvas>
+      </section>
+      <section class="panel">
+        <div class="head"><h2 id="pBTitle"></h2><span id="pBMeta"></span></div>
+        <canvas id="plotB" aria-label="本场景的第二张小图" data-aria-en="Second small plot of the scene"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="roKeyL"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div class="wide"><dt id="roL1"></dt><dd id="ro1">—</dd></div>
+        <div class="wide"><dt id="roL2"></dt><dd id="ro2">—</dd></div>
+        <div><dt id="roL3"></dt><dd id="ro3">—</dd></div>
+        <div><dt id="roL4"></dt><dd id="ro4">—</dd></div>
+        <div class="wide"><dt id="roL5"></dt><dd id="ro5">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">存在唯一正实数 θ* 满足 cos θ* = θ* 且 0 &lt; θ* &lt; 1（同一定理并证有理逆级数在 π 处绝对收敛到 θ*）。已冻结：</span><span class="en">There exists a unique positive real θ* satisfying cos θ* = θ* with 0 &lt; θ* &lt; 1 (the same theorem also proves the rational inverse series converges absolutely to θ* at π). Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint" href="#" target="_blank" rel="noopener"><code>rational_inverse_endpoint</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">对任意正实数 x &gt; 0，倒数分支映射 1/(x + 1) = x 成立当且仅当 x = φ⁻¹。已冻结：</span><span class="en">For every positive real x &gt; 0, the reciprocal branch equation 1/(x + 1) = x holds if and only if x = φ⁻¹. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Analytic/Characterizations/GoldenInverseBranchFixedPoint.golden_inverse_branch_positive_fixed_point_iff" href="#" target="_blank" rel="noopener"><code>golden_inverse_branch_positive_fixed_point_iff</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">斐波那契整数满足卡西尼恒等式 Fₙ·Fₙ₊₂ − Fₙ₊₁² = (−1)ⁿ⁺¹，且黄金比对任意有理数 q 满足赫尔维茨下界 1/(√5·den(q)² + den(q)) &lt; |φ − q|。已冻结：</span><span class="en">Fibonacci numbers obey Cassini's identity Fₙ·Fₙ₊₂ − Fₙ₊₁² = (−1)ⁿ⁺¹, and every rational q obeys the strict Hurwitz bound 1/(√5·den(q)² + den(q)) &lt; |φ − q|. Frozen: </span><a class="leanref" data-lean-gid="D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm" href="#" target="_blank" rel="noopener"><code>fib_cassini_from_golden_norm</code></a> · <a class="leanref" data-lean-gid="D5/S1/Depth/GoldenHurwitzBound.golden_hurwitz_bound" href="#" target="_blank" rel="noopener"><code>golden_hurwitz_bound</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">有限维复矩阵若同时反自伴（Rᴴ = −R）且幺正（R·Rᴴ = I），则平方恒为负单位阵 R² = −I。已冻结：</span><span class="en">Every finite-dimensional complex matrix that is both skew-adjoint (Rᴴ = −R) and unitary (R·Rᴴ = I) satisfies R² = −I. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary" href="#" target="_blank" rel="noopener"><code>square_eq_neg_one_of_skewAdjoint_unitary</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">既有结果的应用（第 33 章例 ex-ch33-mutual-cosine-monotonic-lock 把端点定理与现成实分析结果接起来，没有新增 Lean 定理）：余弦迭代从任何实初值出发都收敛到 θ*；初值在 [0, 1] 内且不是 θ* 时每步严格越过 θ*，误差比趋于 −sin θ* = −√(1 − (θ*)²)。文献结果，未在本书形式化：黄金倒数分支收敛与不动点导数 (1/(1+x))′|_{φ⁻¹} = −φ⁻² ≈ −0.3820；蛛网竖横两臂等长 |Bₖ − Aₖ| = |Aₖ₊₁ − Bₖ| = |f(xₖ) − xₖ| 与逐格分段 90° 圆弧导引线；一维加法守恒 φ⁻¹ + φ⁻² = 1 与二维勾股平方守恒 (θ*)² + sin²θ* = 1；雅各布·伯努利（1692）等角对数螺旋 R(φ) = R₀e⁻ᵇᵠ 的常向心径向切角 α = arctan(1/b)（指向不动点的向心径向射线与前进切线之锐夹角：圆 90.00°、蛛网双步 82.83°、θ* 螺旋 75.88°、黄金螺旋 72.97°）及胡尔维茨（1891）渐近极值定理。</span><span class="en">Application of existing results (Example ex-ch33-mutual-cosine-monotonic-lock of chapter 33 joins the endpoint theorem to existing real-analysis results, with no new Lean theorem): the cosine iteration converges to θ* from every real start; from a start in [0, 1] other than θ* it crosses θ* at every step and the error ratio tends to −sin θ* = −√(1 − (θ*)²). Literature results, not formalized in this book: convergence and fixed-point derivative (1/(1+x))′|_{φ⁻¹} = −φ⁻² ≈ −0.3820; equal cobweb arms |Bₖ − Aₖ| = |Aₖ₊₁ − Bₖ| = |f(xₖ) − xₖ| and piecewise 90° square guides; 1D additive conservation φ⁻¹ + φ⁻² = 1 versus 2D Pythagorean conservation (θ*)² + sin²θ* = 1; Jakob Bernoulli's (1692) logarithmic spiral R(φ) = R₀e⁻ᵇᵠ with constant acute inward-radial tangent angle α = arctan(1/b) between the inward radial ray and the forward tangent (90.00° circle, 82.83° cobweb, 75.88° θ* spiral, 72.97° Fibonacci spiral) and Hurwitz's (1891) asymptotic extremality theorem.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">几何与统一场诠释模型：将负导数的 −1 诠释为二维克利福德平面里两次同向 90° 正交旋转（−1 = Î²），在极坐标舞台上用独立的光滑等角对数螺旋 R(φ) = R₀e⁻ᵇᵠ 连续插值蛛网顶点与方格边长的渐近等比收缩；统一场中 φ 螺旋提供水平准晶反共振底盘，θ* 螺旋承担垂直自指收束。</span><span class="en">Geometric and unified-field model: reading the minus sign −1 of the fixed-point slope as two same-handed 90° orthogonal turns (−1 = Î²) in a 2D Clifford plane, and using a separate smooth logarithmic spiral R(φ) = R₀e⁻ᵇᵠ on the polar stage to continuously interpolate the asymptotic geometric contraction of the cobweb vertices and square side lengths; in the unified field, the φ spiral stages horizontal anti-resonant quasicrystals while the θ* spiral drives vertical self-referential convergence.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数值演示，不是证明：基准常数（θ*、sin θ*、φ⁻¹、φ⁻²）及 k = 0…20 共 21 步余弦轨道（x₀…x₂₁）、黄金渐近分数与方格边长（s₀…s₂₀）均以 70 位十进制定点整数（BigInt）实算，极坐标螺旋采样与向心切角 α = arctan(1/b) 则以 IEEE-754 双精度实算并按显示位数舍入。“跟着放大”按当前误差重标比例尺以展示渐近自相似。</span><span class="en">A numerical illustration on the page, not a proof: reference constants (θ*, sin θ*, φ⁻¹, φ⁻²), the 21-step cosine orbit (x₀…x₂₁ across k = 0…20), golden convergents and square sides (s₀…s₂₀) use 70-digit fixed-point integers (BigInt), while polar spiral coordinates and inward tangent angles α = arctan(1/b) use IEEE-754 double precision rounded to the displayed digits. “Follow and zoom” rescales by the current error to illustrate asymptotic self-similarity.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="20" step="any" value="0" aria-label="时间轴：共用步数指标 k（蛛网每步走两臂转 180°，极坐标模型每步转 90°）" data-aria-en="Rail: shared step index k (180° two-arm cobweb step; 90° polar quarter-turn)">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>1</kbd>–<kbd>3</kbd> <span class="zh">场景</span><span class="en">scene</span> · <kbd>M</kbd> <span class="zh">换映射</span><span class="en">map</span> · <kbd>S</kbd> <span class="zh">换螺旋</span><span class="en">spiral</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 双螺旋结构对应与勾股守恒对偶</span><span class="en">Theory interface · twin-spiral correspondence and Pythagorean conservation</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">为什么一维余弦迭代 θₖ₊₁ = cos θₖ 逼近 Dottie 不动点 θ* ≈ 0.7391 的过程，与黄金倒数连分数 xₖ₊₁ = 1/(1 + xₖ) 逼近 φ⁻¹ ≈ 0.6180 的过程一样在平面上卷出内旋螺旋？本页并置蛛网回旋方格（分段 90° 导引弧）、光滑等角极坐标螺旋模型与单位圆守恒对偶。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>负导数、等臂转向与分段导引弧。</b>在各自的不动点处，(1/(1 + x))′|_{φ⁻¹} = −φ⁻² ≈ −0.3820 &lt; 0（文献结果，未在本书形式化），而余弦迭代从 [0, 1] \ {θ*} 出发严格越过 θ*、误差比趋于 (cos θ)′|_{θ*} = −sin θ* = −√(1 − (θ*)²) ≈ −0.6736 &lt; 0（第 33 章例 ex-ch33-mutual-cosine-monotonic-lock 的既有结果应用）。蛛网平面上从 Aₖ(xₖ, xₖ) 竖直走到 Bₖ(xₖ, f(xₖ))、再水平走到 Aₖ₊₁(f(xₖ), f(xₖ))，竖臂与横臂长度严格相等 sₖ = |f(xₖ) − xₖ|（单步两臂绕不动点转 180°）：当 x₀ &lt; x* 时按“北 → 东 → 南 → 西”进入顺时针循环，当 x₀ &gt; x* 时平移两拍按“南 → 西 → 北 → 东”进入同一循环（x₀ = x* 时 sₖ = 0）。每步围出嵌套正方形 Qₖ = [min(xₖ, xₖ₊₁), max(xₖ, xₖ₊₁)]² 及其分段 90° 圆弧导引线（在每个对角线顶点 Aₖ₊₁ 处切线恒正交，本身并不在曲线形状上收敛为光滑螺旋）；对角线顶点与方格边长按公比 λ 渐近等比收缩，极坐标舞台则以另一条独立的光滑等角对数螺旋 R(φ) = R₀e⁻ᵇᵠ（MODEL）对该离散等比收缩作连续插值。在克利福德几何诠释（MODEL）下，−1 = Î² 正是二维平面里两次同向 90° 正交旋转。</li>
+        <li><b>一维加法守恒与二维勾股守恒。</b>平直一维自相似方程 x + x² = 1 给出 φ⁻¹ + φ⁻² = 0.618034 + 0.381966 = 1（每转 90° 按 √(φ⁻²) = φ⁻¹ ≈ 0.6180 收缩）；把单位尺弯成单位圆弧 cos θ* = θ* 后，正交收缩率变为 λ_θ = sin θ* ≈ 0.6736（比 0.6180 高出约 0.0556，即 5.56 个百分点、相对约 9.0% 的曲率修正），守恒律升维为勾股平方和 (θ*)² + sin²θ* = 0.546247 + 0.453753 = 1。</li>
+        <li><b>常向心径向切角与数值口径。</b>对光滑极坐标等角对数螺旋 R(φ) = R₀e⁻ᵇᵠ（每转 90° 乘以 κ = e⁻ᵇπ/²），指向不动点中心的向心径向单位射线与前进切线的锐夹角恒为 α = arctan(1/b)（雅各布·伯努利 1692，文献结果）：理想闭合圆 κ = 1 对应 α = 90.00°；蛛网双步螺旋模型 κ = √(sin θ*) ≈ 0.8207（单折臂 90°，单步 Picard 迭代占两臂 180°）对应 α = 82.83°；θ* 正交螺旋 κ = sin θ* ≈ 0.6736 对应 α = 75.88°（较圆切线内偏 14.12°）；斐波那契黄金螺旋 κ = φ⁻¹ ≈ 0.6180 对应 α = 72.97°（内偏 17.03°）。常数与离散轨道采用 70 位定点整数实算，极坐标曲线与 α 采用 IEEE-754 双精度实算后按显示位数舍入。</li>
+        <li><b>统一场中的双螺旋分工（MODEL）。</b>黄金比对任意有理数 q 满足赫尔维茨严格有理逼近下界（LEAN ✓；全 1 连分数在无理数中的渐近极值属 Hurwitz 1891 文献结果），支撑切投准晶与齐肯多夫编码的水平抗共振底盘；余弦迭代则在此舞台上将自指残差沿 0.6736 正交螺旋模型垂直收束到 θ*。</li>
+        <li><b>已验证的部分。</b>θ* 的存在唯一性、φ⁻¹ 倒数分支正不动点充要判据、斐波那契—卡西尼 (−1)ⁿ⁺¹ 恒等式、黄金比赫尔维茨下界，以及反自伴幺正矩阵 R² = −I 均为 Lean 4 内核冻结定理（见右侧绿色框）。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-dottie-fibonacci-spirals" target="_top">第二十四章 §24.5 · 双螺旋对应</a> · <a href="../../zh/ch32-unified-field-and-meta-unification.html#sec-ch32-generative-laws" target="_top">第三十二章 §32.1 · 正交自指统一场</a> · <a href="../../zh/coda.html#thm-coda-golden-hurwitz" target="_top">终章 · 黄金比赫尔维茨界</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">Why does iterating θₖ₊₁ = cos θₖ toward Dottie's constant θ* ≈ 0.7391 wind into an inward plane spiral parallel to the golden continued-fraction iteration xₖ₊₁ = 1/(1 + xₖ) → φ⁻¹ ≈ 0.6180? This lab pairs cobweb whirling squares (piecewise 90° guides), smooth equiangular polar spiral models and the unit-circle conservation duality. It is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>Negative slopes, equal arms and piecewise guides.</b> At their fixed points, (1/(1 + x))′|_{φ⁻¹} = −φ⁻² ≈ −0.3820 &lt; 0 (literature result, not formalized in this book), while from [0, 1] \ {θ*} the cosine iteration crosses θ* at every step with error ratio tending to (cos θ)′|_{θ*} = −sin θ* = −√(1 − (θ*)²) ≈ −0.6736 &lt; 0 (application of existing results in Example ex-ch33-mutual-cosine-monotonic-lock of chapter 33). Moving vertically from Aₖ(xₖ, xₖ) to Bₖ(xₖ, f(xₖ)) and horizontally to Aₖ₊₁(f(xₖ), f(xₖ)) gives strictly equal arm lengths sₖ = |f(xₖ) − xₖ| (winding 180° per step): starting below x* enters the clockwise cycle at N → E → S → W, while starting above x* enters two quarter-turns shifted at S → W → N → E (with sₖ = 0 at x₀ = x*). Each step frames a square Qₖ = [min(xₖ, xₖ₊₁), max(xₖ, xₖ₊₁)]² with a piecewise 90° circular guide (retaining perpendicular tangents at every diagonal junction Aₖ₊₁ rather than converging in curve shape to a smooth spiral); the diagonal vertices and square side lengths contract asymptotically at geometric rate λ, while a separate smooth logarithmic spiral R(φ) = R₀e⁻ᵇᵠ (MODEL) on the polar stage continuously interpolates that discrete geometric contraction. In our Clifford model (MODEL), −1 = Î² is two same-handed 90° orthogonal turns in a 2D plane.</li>
+        <li><b>1D additive vs 2D Pythagorean conservation.</b> Flat 1D self-similarity x + x² = 1 yields φ⁻¹ + φ⁻² = 0.618034 + 0.381966 = 1 (scaling by √(φ⁻²) = φ⁻¹ ≈ 0.6180 per quarter-turn); bending the unit ruler onto the unit circle via cos θ* = θ* shifts the orthogonal factor to λ_θ = sin θ* ≈ 0.6736 (higher by about 0.0556, i.e. 5.56 percentage points or roughly 9.0% relative curvature shift), governed by Pythagorean square conservation (θ*)² + sin²θ* = 0.546247 + 0.453753 = 1.</li>
+        <li><b>Inward-radial tangent angle and precision.</b> Along a smooth polar logarithmic spiral R(φ) = R₀e⁻ᵇᵠ with per-90° factor κ = e⁻ᵇπ/², the acute angle between the inward radial unit ray (pointing toward the fixed point) and the forward unit tangent is constant at α = arctan(1/b) (Jakob Bernoulli, 1692; literature result): 90.00° for the closed circle (κ = 1), 82.83° for the cobweb two-step spiral (κ = √(sin θ*) ≈ 0.8207 per 90° arm, 180° per Picard step), 75.88° for the θ* orthogonal spiral (κ = sin θ* ≈ 0.6736, inward tilt 14.12°), and 72.97° for the Fibonacci golden spiral (κ = φ⁻¹ ≈ 0.6180, inward tilt 17.03°). Constants and discrete iterates use 70-digit BigInt arithmetic; polar curves and α use IEEE-754 double precision rounded to displayed digits.</li>
+        <li><b>Division of labor in the unified field (MODEL).</b> Backed by the strict rational lower bound of the golden Hurwitz theorem (LEAN ✓; asymptotic extremality among all irrationals is Hurwitz 1891, literature), φ stages horizontal anti-resonant quasicrystals and Zeckendorf coding, while cos θ contracts self-referential residuals vertically along the 0.6736 spiral model to θ*.</li>
+        <li><b>What is verified.</b> Existence and uniqueness of θ*, the positive fixed-point characterization of φ⁻¹ under 1/(x + 1), Cassini's (−1)ⁿ⁺¹ identity, the golden Hurwitz lower bound, and R² = −I for skew-adjoint unitaries are kernel-verified Lean 4 theorems (the green boxes).</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-dottie-fibonacci-spirals" target="_top">Chapter 24 §24.5 · Twin-spiral correspondence</a> · <a href="../../en/ch32-unified-field-and-meta-unification.html#sec-ch32-generative-laws" target="_top">Chapter 32 §32.1 · Unified field</a> · <a href="../../en/coda.html#thm-coda-golden-hurwitz" target="_top">Coda · Golden Hurwitz bound</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
