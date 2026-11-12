@@ -96,16 +96,14 @@ check('STAIRCASE plays by itself when clicked', await plays());
 const stopS = await stopped('staircase'); s = await state();
 check('STAIRCASE stops at k = 8', stopS && s.k === 8, `${stopS} k = ${s.k}`);
 
-// HORIZON GAP
-await pick('horizon_gap');
-check('HORIZON GAP plays by itself', await plays());
-check('HORIZON GAP stops at k = 10 with Δη = 1.5', await stopped('horizon_gap'));
-s = await state();
+// the staircase card note: a larger step and more steps, and the magnifier keeps narrowing while the gap stays open
+check('the HORIZON GAP card is gone (merged into STAIRCASE)', (await page.locator('[data-preset="horizon_gap"]').count()) === 0);
+s = await setRange('dEta', 1.5);
 const e10 = ETA0 + 15;
-check('HORIZON GAP: gap 2e^{−2η}/(1 + e^{−2η}) ≈ 3.6 × 10⁻¹⁴ at η = η₀ + 15, still > 0 and r < 1', s.dEta === 1.5 && rel(s.curGap, gapK(e10), 1e-6) && close(s.curGap, 3.6e-14, 0.1e-14) && s.cur.rBK < 1, String(s.curGap));
 let zoomOk = true, prevU = Infinity;
 for (let k = 4; k <= 10; k++) { s = await seek(k); zoomOk = zoomOk && s.magU < prevU && s.curGap > 0 && s.curGap <= 0.72 * s.magU; prevU = s.magU; }
-check('HORIZON GAP: from k = 4 to 10 the magnifier field narrows at every step and the gap always shows in it', zoomOk);
+check('Δη = 1.5: from k = 4 to 10 the magnifier field narrows at every step and the gap always shows in it', s.dEta === 1.5 && zoomOk);
+check('Δη = 1.5, k = 10: gap 2e^{−2η}/(1 + e^{−2η}) ≈ 3.6 × 10⁻¹⁴ at η = η₀ + 15, still > 0 and r < 1', rel(s.curGap, gapK(e10), 1e-6) && close(s.curGap, 3.6e-14, 0.1e-14) && s.cur.rBK < 1, String(s.curGap));
 
 // KLEIN → POINCARÉ
 const clickPlays = async (id) => { await page.click(`[data-preset="${id}"]`); return page.evaluate(() => { const s = window.SAMSARA_DEBUG.state; return s.playing && s.preset !== null; }); };
@@ -171,6 +169,15 @@ for (let n = n0; n < pts.length; n++) { const m = n0 + ((n - n0) % pp); fibre = 
 check('FOLD: n and n + p land on the same point and carry the same angle (target constant on fibres of n mod p)', s.fold === 1 && fibre && s.walk.constant);
 check('FOLD: the 25 steps after the first wipe land on exactly p = 5 points', pts.length - n0 === 25 && distinct.size === 5);
 check('FOLD: each position carries 5 visits', s.walk.mult && s.walk.mult.length === 5 && s.walk.mult.every(([, m]) => m === 5));
+{ // the fold drawn as a motion: each later-round state turned along its own circle (same radius) from its unrolled spoke
+  const tr = s.walk.trails || [], step = 2 * Math.PI / 6;
+  let ok = tr.length > 0;
+  for (const t of tr) { const q = pts[t.n], j = Math.round(t.from / step); ok = ok && j >= 1 && close(t.from, j * step, 1e-12) && close(t.to, 0, 1e-12) && close(Math.hypot(q[0], q[1]), t.r, 1e-12) && close(Math.atan2(q[1], q[0]), 0, 1e-9); }
+  check('FOLD: every later-round state has an arc of its own radius from its spoke j·60° to the first spoke', ok, String(tr.length)); }
+s = await setRange('fold', 0.5);
+{ const q = s.walk.points, step = 2 * Math.PI / 6; let ok = s.fold === 0.5 && s.preset === null;
+  for (let n = n0; n < q.length; n++) { const r = Math.hypot(q[n][0], q[n][1]); if (r < 0.02) continue; const j = s.walk.round[n]; ok = ok && close(Math.atan2(q[n][1], q[n][0]), Math.atan2(Math.sin(0.5 * j * step), Math.cos(0.5 * j * step)), 1e-9); }
+  check('the fold slider at f = 0.5 turns round j to half its angle, j·30°, and leaves the card', ok); }
 await page.click('#foldChips [data-fold="0"]'); s = await state();
 check('the fold chips unroll the wheel: rounds on 6 different spokes', s.fold === 0 && new Set(s.walk.points.filter((p) => Math.hypot(...p) > 0.2).map((p) => Math.atan2(p[1], p[0]).toFixed(6))).size === 6);
 

@@ -50,7 +50,7 @@ let seed = 12345;
 const rnd = () => { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; };
 
 /* ---------- the gates every stage-first page must pass ---------- */
-await stageFirstChecks(T, BOOK, ID);
+await stageFirstChecks(T, BOOK, ID, { solid: true });
 
 /* ---------- page-specific checks ---------- */
 const page = await T.goto(BOOK, ID, '?lang=zh');
@@ -66,7 +66,7 @@ function model(P) {
 }
 
 let s = await state();
-check('opens on the WEAVE card at t = 0, not playing, with the reference blades and no band', s.preset === 'weave' && s.t === 0 && !s.playing && s.ref && !s.band);
+check('opens on the WEAVE card at t = 0, not playing, with the reference blades on the closed band (μ = 0), drawn with WebGL', s.preset === 'weave' && s.t === 0 && !s.playing && s.ref && s.band && s.mu === 0 && s.mode === 'webgl');
 check('WEAVE: the reference blades e₃ and e₁e₂ are on the stage', (await page.evaluate(() => [...document.querySelectorAll('#stage .tag')].filter((t) => !t.hidden).map((t) => t.textContent).join('|'))).match(/e₃.*e₁e₂|e₁e₂.*e₃/) !== null);
 check('WEAVE: J points along the chosen slanted direction, length ρ = 1', vclose(s.J, unit([0.53, 0.29, 0.8]), 1e-12) && close(norm(s.J), 1, 1e-12));
 {
@@ -134,11 +134,47 @@ for (const t of [0.3, 1.2, 2.9, 4.4, 6.0]) {
 check('the flag stands at the bearing of J and points along cos(t/2) n + sin(t/2) r, with cos(t/2) = ½Re Tr(ψψ₀†)/ρ', worst < 1e-12, `max error ${worst}`);
 
 s = await pick('seam');
-check('SEAM: flags all the way round, rail capped at 360°, and the card plays', s.fan && close(s.max, TAU) && await until(page, () => window.CLOSURE_DEBUG.state.t > 0));
+check('SEAM: flags all the way round on the unrolled band, rail capped at 360°, and the card plays', s.fan && s.unrolled && close(s.max, TAU) && await until(page, () => window.CLOSURE_DEBUG.state.t > 0));
 s = await seek(TAU);
 const f0 = (await seek(0)).flagDir;
 s = await seek(TAU);
 check('SEAM: back at the start, the last flag is opposite to the first one at the same base point', vclose(f0, [1, 0, 0], 1e-12) && vclose(s.flagDir, [-1, 0, 0], 1e-12) && vclose(s.flagBase, (await seek(0)).flagBase, 1e-12));
+
+/* ---------- the solid band ---------- */
+// one-sidedness, from the page's own geometry by another route: the mid-surface of the slab is the midpoint of its top
+// and bottom faces; its normal (finite differences) carried continuously along the centre line comes back reversed
+// after one round and as it was after two
+{
+  const pts = await page.evaluate(() => { const D = window.CLOSURE_DEBUG, b = D.band(0), out = [];
+    for (let k = 0; k <= 720; k++) { const t = k * Math.PI / 180, pc = t < 2 * Math.PI - 1e-9 ? 0 : 1, row = [];
+      for (const x of [0, 2e-3]) { const v = b.FACE * x; row.push(D.solid(pc, t, v, 0).map((q, i) => (q + D.solid(pc, t, 1 - v, 0)[i]) / 2)); }
+      out.push(row); }
+    return out; });
+  const sub = (a, b) => a.map((x, i) => x - b[i]), cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+  let n = null, n0 = null, at360 = null, ok = true;
+  for (let k = 0; k <= 720; k++) {
+    const r = pts[k], tg = sub(pts[Math.min(720, k + 1)][0], pts[Math.max(0, k - 1)][0]), across = sub(r[1], r[0]);
+    let m = unit(cross(tg, across));
+    if (n && dot(m, n) < 0) m = m.map((x) => -x);      // carry continuously
+    if (n && dot(m, n) < 0.99) ok = false;
+    n = m; if (k === 0) n0 = m; if (k === 360) at360 = m;
+  }
+  check('one-sided: the band’s normal carried once round comes back reversed, twice round as it was (finite differences)', ok && dot(at360, n0) < -0.999 && dot(n, n0) > 0.999, `${dot(at360, n0)} / ${dot(n, n0)}`);
+  // μ is only a transition of the picture: at μ = 0 the two pieces close up into the band along both cuts
+  const seams = await page.evaluate(() => { const D = window.CLOSURE_DEBUG, d = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]); let g0 = 0, g1 = Infinity;
+    for (let k = 0; k <= 72; k++) { const t = k * Math.PI / 36; g0 = Math.max(g0, d(D.solid(0, t, 1, 0), D.solid(1, t + 2 * Math.PI, 0, 0)), d(D.solid(1, t + 2 * Math.PI, 1, 0), D.solid(0, t, 0, 0)));
+      for (let j = 0; j <= 10; j++) for (let i = 0; i <= 10; i++) g1 = Math.min(g1, d(D.solid(0, t, j / 10, 1), D.solid(1, 2 * Math.PI + i * Math.PI / 5, j / 10, 1))); }
+    for (let j = 0; j <= 20; j++) g0 = Math.max(g0, d(D.solid(0, 2 * Math.PI, j / 20, 0), D.solid(1, 2 * Math.PI, j / 20, 0)), d(D.solid(1, 4 * Math.PI, j / 20, 0), D.solid(0, 0, j / 20, 0)));
+    return { g0, g1 }; });
+  check('μ = 0: the two pieces meet along both cuts (one closed band); μ = 1: they are apart', seams.g0 < 1e-12 && seams.g1 > 0.3, JSON.stringify(seams));
+}
+await page.evaluate(() => { const el = document.getElementById('mu'); el.value = '1'; el.dispatchEvent(new Event('input', { bubbles: true })); });
+s = await state();
+check('the μ slider (model) opens the dualist picture and leaves the card', close(s.mu, 1) && s.preset === null && (await page.textContent('#hudBig')).includes('μ'));
+s = await pick('turn360');
+check('every card is on the closed band: picking a card brings μ back to 0', s.mu === 0);
+const tip0 = (await seek(0)).tip, tip360 = (await seek(TAU)).tip;
+check('the flag’s tip (amber) at 360° is on the other edge, not where it started', norm(tip0.map((x, i) => x - tip360[i])) > 0.5);
 
 s = await pick('turn720');
 check('TURN 720°: rail up to 720°, and the card plays', close(s.max, 2 * TAU) && await until(page, () => window.CLOSURE_DEBUG.state.t > 0));
@@ -147,6 +183,7 @@ check('TURN 720° stops by itself at 720°', await until(page, () => { const d =
 s = await state();
 check('TURN 720°: ψ = +ψ₀ (R(4π) = +1), J at e₃, the flag back along +n', vclose(s.psi, [1, 0, 0, 0, 0, 0, 0, 0], 1e-12) && mclose(rotM(2 * TAU, 1, 2), I2, 1e-12) && vclose(s.J, [0, 0, 1], 1e-12) && vclose(s.flagDir, [1, 0, 0], 1e-12));
 check('TURN 720°: the readout says ψ = +ψ₀', (await page.textContent('#roSign')).includes('+ψ₀'));
+check('TURN 720°: the tip is back where it started', norm(s.tip.map((x, i) => x - tip0[i])) < 1e-6, String(norm(s.tip.map((x, i) => x - tip0[i]))));
 
 /* ---------- controls ---------- */
 await page.evaluate(() => { const el = document.getElementById('rho'); el.value = '1.45'; el.dispatchEvent(new Event('input', { bubbles: true })); });
@@ -170,14 +207,18 @@ await page.click('#bandChip'); s = await state();
 check('the band chip hides the band', s.band === false && (await page.getAttribute('#bandChip', 'aria-pressed')) === 'false');
 await page.click('#bandChip'); await page.click('#fanChip'); s = await state();
 check('the band chip shows it again, and the flag chip plants flags all the way', s.band && s.fan);
-// drag the tip of J to another point of the sphere
+// drag the tip of J to another point of the sphere; the tip must be in view (the solid band hides what is behind it):
+// a smaller ρ, looking along the axis n into the hole of the band
+await page.evaluate(() => { const el = document.getElementById('rho'); el.value = '0.8'; el.dispatchEvent(new Event('input', { bubbles: true })); });
+await page.evaluate(() => window.CLOSURE_DEBUG.view([-Math.PI / 2 + 0.25, 0.3, 1]));
 s = await seek(1.0);
+check('the tip of J is not hidden in this view', !(await page.evaluate((v) => window.TRV.solids[0].occluded(v, 0.02), s.J)));
 const from = await page.evaluate((v) => window.CLOSURE_DEBUG.screen(v), s.J);
-const to = await page.evaluate((v) => window.CLOSURE_DEBUG.screen(v), [0.6, -0.6, 0.53]);
+const to = await page.evaluate((v) => window.CLOSURE_DEBUG.screen(v), [0.2, -0.45, 0.5]);
 await page.mouse.move(from[0], from[1]); await page.mouse.down(); await page.mouse.move(to[0], to[1], { steps: 4 }); await page.mouse.up();
 s = await state();
 const aimed = await page.evaluate(([x, y]) => window.CLOSURE_DEBUG.under(x, y), to);
-check('dragging the tip of J points J at the sphere point under the pointer, keeping ρ and the identity', Math.acos(Math.min(1, dot(unit(s.J), unit(aimed)))) < 1e-6 && close(norm(s.J), 1.45, 1e-9) && close(s.J2[0], 1.45 ** 2, 1e-9) && close(s.t, 1.0, 1e-12), `J ${s.J.map((x) => x.toFixed(3))}`);
+check('dragging the tip of J points J at the sphere point under the pointer, keeping ρ and the identity', Math.acos(Math.min(1, dot(unit(s.J), unit(aimed)))) < 1e-6 && close(norm(s.J), 0.8, 1e-9) && close(s.J2[0], 0.8 ** 2, 1e-9) && close(s.t, 1.0, 1e-12), `J ${s.J.map((x) => x.toFixed(3))}`);
 // the rail
 await page.locator('body').click({ position: { x: 5, y: 5 } });
 await seek(PI / 2); await page.keyboard.press('ArrowRight');

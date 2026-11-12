@@ -40,6 +40,8 @@ def draw(fig):
     fig.arc(ox, oy, R, -4, 96, "faint", 1.2, dash="3 4")
     fig.line(ox - 20, oy, ox + R + 14, oy, "faint", 1.1)
     fig.line(ox, oy + 14, ox, oy - R - 14, "faint", 1.1)
+    fig.text(ox + R + 18, oy, "Re", size=13, color="dim", middle=True)
+    fig.text(ox, oy - R - 22, "Im", size=13, color="dim", anchor="middle")
     fig.arrow(ox, oy, *P(rho), "dim", 1.8, dash="5 4")
     a1 = rho * c1
     a2 = a1 * c2

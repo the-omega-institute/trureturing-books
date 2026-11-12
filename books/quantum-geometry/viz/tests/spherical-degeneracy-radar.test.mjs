@@ -6,7 +6,7 @@
 // ½ Tr(M σₖ); the closed forms of Chapter 34 for v₁, v₂, s₁, s₂ and Δ(O); 3 × 3 rotation matrices for the turned frame;
 // and a brute-force search over a grid of observers for the ones that read every pair equally. It reads the page
 // through window.DEGEN_DEBUG.
-import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
+import { session, stageFirstChecks, settle, until, labelOverlaps } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'spherical-degeneracy-radar';
 const T = await session();
@@ -170,6 +170,51 @@ for (let k = 0; k < 16; k++) {
 check('FRAMES: images agree with SU(2) rotors of the turned frame, the pole reads ½ twice, the blind normal is ±(e₁(γ) + e₂(γ))/√2', worst < 1e-12, `max error ${worst}`);
 check('FRAMES: common normal of two blind-circle differences is ±e₃', vclose(s.common.map(Math.abs), [0, 0, 1], 1e-12));
 
+// PULLBACK: turning the states about k equals pulling the observer back; with k = O nothing changes
+s = await pick('pullback');
+check('PULLBACK plays once round and stops', await until(page, () => { const d = window.DEGEN_DEBUG.state; return d.scene === 'pull' && !d.playing && d.t >= 2 * Math.PI - 1e-9; }, null, 120000));
+s = await state();
+const KP = sph(60 * DEG, 220 * DEG), OP = sph(45 * DEG, 90 * DEG), V1 = [Math.sin(PI / 3), 0, Math.cos(PI / 3)], V2 = [0, Math.sin(PI / 3), Math.cos(PI / 3)];
+check('PULLBACK: tilted axis k = (60°, 220°), observer at β = 45° in e₂∧e₃, states v₁, v₂ of θ = 60°, φ = 90°', vclose(s.k, KP, 1e-12) && vclose(s.O, OP, 1e-12) && vclose(s.a0, V1, 1e-12) && vclose(s.b0, V2, 1e-12) && s.axis === 'k');
+const iM = (M) => M.map((r) => r.map((z) => [-z[1], z[0]]));
+const Uk = (k, psi) => madd(msc(I2, Math.cos(psi / 2)), msc(iM(vm(k)), -Math.sin(psi / 2)));   // exp(−iψ k·σ/2)
+const rhoOf = (v) => msc(madd(I2, vm(v)), 0.5);
+worst = 0;
+for (let j = 0; j < 12; j++) {
+  const psi = j * TAU / 12 + 0.05; s = await seek(psi);
+  const U = Uk(KP, psi), E = rhoOf(OP);
+  for (const [v, x, rd, pd] of [[V1, s.a, s.ra, s.pa], [V2, s.b, s.rb, s.pb]]) {
+    const r = rhoOf(v);
+    const fwd = tr(mm(mm(mm(U, r), dag(U)), E)), back = tr(mm(r, mm(mm(dag(U), E), U)));   // Tr(UρU†E) and Tr(ρ U†EU)
+    worst = Math.max(worst, norm(sub(x, actM(U, v))), Math.abs(fwd[0] - back[0]), Math.abs(fwd[1]), Math.abs(fwd[0] - (1 + rd) / 2), Math.abs(back[0] - (1 + pd) / 2));
+  }
+  worst = Math.max(worst, norm(sub(s.Op, actM(dag(U), OP))));
+}
+check('PULLBACK: at 12 angles the turned states match SU(2), and Tr(UρU†E) = Tr(ρ U†EU) equal the two readings (1 + O·Rv)/2, (1 + R⁻¹O·v)/2', worst < 1e-12, `max error ${worst}`);
+s = await seek(2 * PI / 3);
+check('PULLBACK at ψ = 120°: both ways read 0.61 and −0.62 (card note)', close(s.ra, s.pa, 1e-12) && close(s.rb, s.pb, 1e-12) && s.ra.toFixed(2) === '0.61' && s.rb.toFixed(2) === '-0.62', `${s.ra} ${s.rb}`);
+// the R⁻¹O label never sits on the observer's label: near ψ = 0 and 360° the two anchors meet and it must step aside
+{ const visible = () => page.evaluate(() => [...document.querySelectorAll('.stage .tag')].some((el) => !el.hidden && el.offsetParent !== null && el.textContent.trim() === 'R⁻¹O'));
+  for (const lang of ['zh', 'en']) {
+    await page.click(`[data-lang-set="${lang}"]`); await settle(page);
+    const bad = [];
+    for (const deg of [1, 3, 8, 120, 355, 359, 360]) {
+      await seek(deg * DEG);
+      const all = await labelOverlaps(page), any = (await labelOverlaps(page, '.stage .tag', 0)).filter((pr) => pr.includes('R⁻¹O'));
+      if (all.length || any.length) bad.push(`${deg}°: ${JSON.stringify(all.concat(any))}`);
+    }
+    check(`PULLBACK (${lang}): no two stage labels overlap at ψ = 1°, 3°, 8°, 120°, 355°, 359° and 360° (the card's stop), none touches R⁻¹O`, bad.length === 0, bad.join(' | '));
+    await seek(2 * PI / 3);
+    check(`PULLBACK (${lang}): at ψ = 120° the R⁻¹O label is shown`, await visible());
+  }
+  await page.click('[data-lang-set="zh"]'); await settle(page); }
+await page.click('#axisChips [data-axis="O"]'); s = await state();
+worst = 0;
+for (let j = 0; j < 12; j++) { const psi = j * TAU / 12 + 0.05; s = await seek(psi); worst = Math.max(worst, norm(sub(s.Op, OP)), Math.abs(s.ra - dot(OP, V1)), Math.abs(s.rb - dot(OP, V2)), norm(sub(s.k, OP))); }
+check('axis = O: the pulled-back observer stays at O and the readings never change over ψ', s.axis === 'O' && s.preset === null && worst < 1e-12, `max error ${worst}`);
+await page.click('#axisChips [data-axis="k"]'); await settle(page);
+await page.click('#toPole'); await settle(page);   // the later checks read from the pole, where FRAMES left the observer
+
 /* ---------- controls ---------- */
 await page.click('[data-scene="address"]'); s = await state();
 check('scene chip Address: switches and leaves the card', s.scene === 'address' && s.preset === null && close(s.max, TAU));
@@ -179,6 +224,9 @@ await page.click('[data-scene="test"]'); s = await state();
 check('scene chip Test', s.scene === 'test');
 await page.click('[data-scene="frames"]'); s = await state();
 check('scene chip Frames shows the α field', s.scene === 'frames' && await page.isVisible('#alpha'));
+await page.click('[data-scene="pull"]'); s = await state();
+check('scene chip Pull shows the axis chips and runs ψ over 360°', s.scene === 'pull' && close(s.max, TAU) && await page.isVisible('#axisChips'));
+await page.click('[data-scene="frames"]'); s = await state();
 await page.$eval('#alpha', (el) => { el.value = '30'; el.dispatchEvent(new Event('input', { bubbles: true })); }); s = await seek(0.4);
 check('α field: the pole reads cos 30° twice', close(s.alpha, 30 * DEG, 1e-12) && close(s.ra, Math.cos(30 * DEG), 1e-12) && close(s.rb, Math.cos(30 * DEG), 1e-12));
 await page.click('[data-scene="address"]');

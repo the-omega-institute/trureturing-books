@@ -3,7 +3,8 @@ Each of the six gates is one turn about one axis: the axis and angle of X, Y, Z,
 
 The axes and angles are the rows of the chapter's table [@ex-single-qubit-gate-atlas]. Each small sphere turns one
 start point about the gate's axis by the gate's angle (right-handed); the script checks where it lands
-(|0⟩ → |1⟩ for X and Y, |+⟩ → |−⟩ for Z, |0⟩ → |+⟩ for H, |+⟩ → |+i⟩ for S, |+⟩ → 45° on the equator for T).
+(|0⟩ → |1⟩ for X and Y, |+⟩ → |−⟩ for Z, |0⟩ → |+⟩ for H, |+⟩ → |+i⟩ for S, |+⟩ → 45° on the equator for T)
+and names the start and the end beside their dots.
 """
 
 import math
@@ -14,14 +15,14 @@ from _ch05 import rotor_turn
 SIZE = (548, 404)
 WRAP = True
 ALT = {
-    "zh": "六颗同样大小的布洛赫球排成两行，每颗上一根紫色的转轴和一段琥珀色的转动路径，灰点是起点，琥珀色的点是终点。"
+    "zh": "六颗同样大小的布洛赫球排成两行，每颗上一根紫色的转轴和一段琥珀色的转动路径，灰点是起点，琥珀色的点是终点，两点旁各标着态的名字。"
           "X：绕前后的 x 轴转 180°，北极到南极。Y：绕左右的 y 轴转 180°，北极到南极。Z：绕竖直的 z 轴转 180°，赤道上的 |+⟩ 到对面的 |−⟩。"
-          "H：绕 x 与 z 之间 45° 的斜轴转 180°，北极到赤道上的 |+⟩。S：绕 z 轴转 90°，|+⟩ 沿赤道到 |+i⟩。T：绕 z 轴转 45°，|+⟩ 沿赤道走八分之一圈。",
+          "H：绕 x 与 z 之间 45° 的斜轴转 180°，北极到赤道上的 |+⟩。S：绕 z 轴转 90°，|+⟩ 沿赤道到 |+i⟩。T：绕 z 轴转 45°，|+⟩ 沿赤道走八分之一圈到 T|+⟩。",
     "en": "Six Bloch spheres of the same size in two rows, each with a violet axis and an amber path of the turn; the grey dot "
-          "is the start and the amber dot the end. X: 180° about the front-to-back x axis, north pole to south pole. Y: 180° "
+          "is the start and the amber dot the end, each named beside its dot. X: 180° about the front-to-back x axis, north pole to south pole. Y: 180° "
           "about the left-to-right y axis, north pole to south pole. Z: 180° about the vertical z axis, |+⟩ on the equator to "
           "|−⟩ opposite. H: 180° about the axis halfway between x and z, north pole to |+⟩ on the equator. S: 90° about z, "
-          "|+⟩ along the equator to |+i⟩. T: 45° about z, |+⟩ an eighth of the way round the equator.",
+          "|+⟩ along the equator to |+i⟩. T: 45° about z, |+⟩ an eighth of the way round the equator to T|+⟩.",
 }
 
 E1, E2, E3 = (1.0, 0.0, 0.0), (0.0, 1.0, 0.0), (0.0, 0.0, 1.0)
@@ -34,6 +35,14 @@ GATES = [  # name, axis, angle (degrees), start, expected end
     ("S", E3, 90, E1, E2),
     ("T", E3, 45, E1, figkit.unit((1.0, 1.0, 0.0))),
 ]
+NAMES = {  # gate: (start name, end name), each with its canvas offset (dx, dy, anchor)
+    "X": (("|0⟩", 10, -4, "start"), ("|1⟩", 10, 16, "start")),
+    "Y": (("|0⟩", 10, -4, "start"), ("|1⟩", 10, 16, "start")),
+    "Z": (("|+⟩", -8, 18, "end"), ("|−⟩", 6, -10, "start")),
+    "H": (("|0⟩", 10, -4, "start"), ("|+⟩", -8, 18, "end")),
+    "S": (("|+⟩", -8, 18, "end"), ("|+*i*⟩", 6, -10, "start")),
+    "T": (("|+⟩", -8, 18, "end"), ("*T*|+⟩", 4, 20, "start")),
+}
 
 
 def draw(fig):
@@ -50,3 +59,5 @@ def draw(fig):
         sp.segment(tuple(-1.32 * c for c in axis), tuple(1.32 * c for c in axis), "axis", 2.2)
         sp.dot(tuple(1.32 * c for c in axis), "axis", 3.2)
         rotor_turn(sp, axis, start, theta)
+        for v, (s, dx, dy, anchor), role in ((start, NAMES[name][0], "dim"), (want, NAMES[name][1], "now")):
+            sp.label(v, s, dx=dx, dy=dy, size=14, color=role, anchor=anchor, halo=True)

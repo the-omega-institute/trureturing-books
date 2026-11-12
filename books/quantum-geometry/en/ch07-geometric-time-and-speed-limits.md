@@ -96,6 +96,10 @@ Conjugate symmetry of $\rho_t, H, P$ implies that $i\Tr(\rho_t(HP - PH))$ equals
 
 In particular, when $\psi$ is an energy eigenstate ($H\psi = E\psi$), theorems [`energy_eigenstate_stationary`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary) and [`energy_eigenstate_variance_zero`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_variance_zero) in `Quantum/Dynamics/EnergyEigenstateStationarity` prove that its energy variance vanishes and $\psi(t) = e^{-itE/\hbar}\psi$ acquires only an unobservable global phase, leaving its rank-one projector and all expectation values stationary for all $t \in \mathbb{R}$! **Without a nonzero commutator bivector area $[H, P] \neq 0$, no classical tick can ever register along the line $P$!**
 
+::: {.figure src="ch07-commutator-flow"}
+**The shadow moves only when the axis and the ruler are not parallel.** The one-qubit special case: the ruler $P = \lvert 0\rangle\langle 0\rvert$ is the cyan vertical axis, and the violet axis $H$ is tilted $40^\circ$ from the vertical. The amber state starts at the north pole and goes once round a dashed small circle about the violet axis, and its shadow on the cyan axis moves up and down; on the right the cyan curve is the probability $p(t)$ of staying in $\lvert 0\rangle$, swinging between $1$ and $0.59$. When the axis and the ruler coincide, $[H, P] = 0$ and the grey $p(t)$ stays at $1$ ([@prop-projection-probability-flow]; the one-qubit curves are a hand derivation and numerics).
+:::
+
 ## 7.2 Quantum Speed Limits (Mandelstam–Tamm and Margolus–Levitin): The Minimum Time to Cross a $90^\circ$ Orthogonal Wall {#sec-quantum-speed-limit}
 
 If "the line is classical time and the area is quantum time," **what is the minimum duration required to convert continuous two-dimensional quantum rotation into two genuinely distinguishable ticks of a classical clock?**
@@ -219,6 +223,8 @@ By the counting bound of [@thm-fubini-study-record-time] with $\mathrm{energy} =
 **Three even levels: a bent path and a late arrival.** On the left three cyan arrows close into a triangle at $t = \frac{2\pi}{3}$ and the amber dot returns to the magenta centre. On the right the cyan curve bends below the dashed speed line: the speed line reaches the wall at MT $1.924$, the curve touches the magenta wall only at $\tau_\perp = 2.094$, and the ML mark sits at $1.571$. Both bounds are literature results, not formalized in this book.
 :::
 
+The three-level state arrives late but does reach the wall; once the two-level weights leave the even split, say at $\alpha = 30^\circ$, the angle rises no higher than $2\alpha = 60^\circ$.
+
 ::: {.viz src="speed-limit-zeno" preset="unequal" height="500"}
 **Uneven weights: the wall is out of reach.** Weight angle $\alpha = 30^\circ$: on the left a long cyan arrow of $0.75$ and a short one of $0.25$ never cancel, and the amber dot comes no closer to the magenta centre than $0.5 = \lvert\cos 2\alpha\rvert$. On the right the angle rises to $2\alpha = 60^\circ$ at most and never touches the magenta wall.
 :::
@@ -233,10 +239,6 @@ In our line-and-area geometry, the mechanism is completely elementary: **over a 
 
 ::: {.figure src="ch07-zeno-n"}
 **The more often you measure, the closer the chance of staying in $\lvert 0\rangle$ comes to $1$.** Against the number of measurements $N$ (log scale), the cyan curve is $P_N = \bigl[\cos^2\frac{\pi}{2N}\bigr]^N$, and the cyan points mark $N = 1, 4, 16, 64$ at $0$, $0.531$, $0.857$ and $0.962$; the grey dashed curve is the approximation $1 - \frac{\pi^2}{4N}$, which hugs the cyan curve as $N$ grows: the gap shrinks like $\frac{1}{N}$. The values come from the closed form in [@ex-zeno-strobe-freezing].
-:::
-
-::: {.viz src="speed-limit-zeno" preset="strobe16" height="500"}
-**Sixteen strobes: it hardly gets away.** The arrow is pulled back to $\lvert 0\rangle$ after every $11.25^\circ$: the magenta part, first order in the step, is cut off as soon as it shows, and the cyan shadow hardly shortens. The frame stops half-way through the last turn: on the right the cyan survival nearly fills the plot, with $0.863$ left now and $0.857$ at the ring for $N = 16$ at the end; the dashed line is the unwatched path.
 :::
 
 ::: {.example #ex-zeno-strobe-freezing title="Analytical Formula and Numerical Ledger (N = 1, 4, 16, 64) for Stroboscopic Quantum Zeno Freezing"}
@@ -297,6 +299,79 @@ Claim 1: the history after zero probes is $v$ itself, of squared norm $1$. Claim
 
 [@prop-monitored-return-conservation] says that no probability is lost: the probability of a first return within the first $N$ steps, plus the probability of no return so far, is exactly $1$. It does not depend on what $U$ is, nor on the dimension of the space. Applied to the rotating qubit of [@ex-zeno-strobe-freezing], it leads to a conclusion that stands exactly opposite to Zeno freezing.
 
+Before computing a mean return time, ask which directions the initial state can actually visit. In a finite-dimensional complex inner-product space $E$, let $U$ be unitary, take $v\in E$, and write
+
+$$
+C=\operatorname{span}_{\mathbb C}\{U^n v:n\in\mathbb N\},
+\qquad
+P_v=\text{the orthogonal projection onto }\mathbb C v.
+$$
+
+This orbit span is the cyclic space of the initial vector. Two finite-dimensional arguments explain why a direction that never triggers the detector must be treated differently inside and outside $C$.
+
+::: {.remark #rem-monitored-cyclic-observability title="No permanent dark state in the cyclic space: a finite-dimensional derivation"}
+**Literature result, not formalized in this book.** Put $T=(I-P_v)U$. The operator $U$ preserves $C$, and the range of $P_v$ lies in $C$, so both $T$ and $P_vU$ restrict to operators from $C$ to itself:
+
+$$
+A=T|_C,\qquad B=(P_vU)|_C.
+$$
+
+Collect the directions producing no click at any future step:
+
+$$
+K=\bigcap_{n\in\mathbb N}\ker(BA^n).
+$$
+
+For $x\in K$, the equation $Bx=0$ gives $Ax=Ux$. Shifting the click history by one step also gives $Ax\in K$, so $U$ preserves $K$. The restriction $U|_K$ is injective on a finite-dimensional space and hence surjective; therefore $U^{-1}$ preserves $K$ too. Write any $x\in K$ as $x=Uy$ with $y\in K$. Since $By=P_vUy=0$, we have $x\perp v$. Iterating backwards under $U$ now gives $x\perp U^nv$ for every $n\ge0$. Yet $x$ belongs to their span $C$, so
+
+$$
+K=\{0\}.
+$$
+
+No unit-vector assumption is needed: when $v=0$, the cyclic space is zero. Omitting the cyclic restriction would make the conclusion false. With $U=I$ and $v=e_1$, any nonzero vector orthogonal to $e_1$ never clicks. This argument establishes observability within the cyclic space; it does not yet compute an infinite return-probability sum.
+:::
+
+::: {.remark #rem-monitored-cyclic-power-contraction title="Why does the absence of a permanent dark state force strict contraction after finitely many steps?"}
+**Literature result, not formalized in this book.** Now assume $\norm v=1$, and let $d=\dim_{\mathbb C}C\ge1$. Orthogonal projection and the isometry of $U$ give, for $x\in C$,
+
+$$
+\norm{Ax}^2+\norm{Bx}^2=\norm{x}^2.
+$$
+
+Set $K_m=\bigcap_{j=0}^{m-1}\ker(BA^j)$, with $K_0=C$. If $K_m=K_{m+1}$ at any step, shifting the history shows that $A$ preserves $K_m$, so it is already the permanent dark space. The preceding argument makes that space zero. Thus its dimension must decrease strictly whenever $K_m\ne\{0\}$, and $K_d=\{0\}$ after at most $d$ steps.
+
+For each unit vector $x\in C$, finite conservation therefore gives
+
+$$
+\norm{A^d x}^2
+=1-\sum_{j=0}^{d-1}\norm{BA^j x}^2<1.
+$$
+
+The unit sphere is compact in finite dimension, so the continuous function $x\mapsto\norm{A^dx}$ attains its maximum, which is still strictly below one. Choosing $N=d$ and $q=\norm{A^d}_{\mathrm{op}}$ yields
+
+$$
+N\ge1,\qquad 0\le q<1,\qquad \norm{A^N}_{\mathrm{op}}\le q.
+$$
+
+Compactness turns a loss in every direction into one strict loss bound shared by all directions. The bound may depend on $U,v$; it is not a uniform constant across all systems. For monitored-return background, see Grünbaum, Velázquez, Werner and Werner, *Recurrence for discrete time unitary evolutions*, arXiv:1202.3903v3, Theorem 2. These two finite-dimensional derivations are not counted as Lean theorem entries in this book.
+:::
+
+::: {.problem #prob-monitored-spectral-mean title="Formalization gap: from actual monitored histories to occupied spectral points"}
+For every finite-dimensional complex inner-product space, unitary $U$, and unit vector $v$, retain $p_{n+1}=\lvert\langle v,UT^nv\rangle\rvert^2$ from [@def-monitored-return]. Define the occupied spectrum by
+
+$$
+S=\{\lambda\in\mathbb C:\exists w\in E,\ Uw=\lambda w\ \text{and}\ \langle w,v\rangle\ne0\}.
+$$
+
+The formalization target is: if $\sum_{n=0}^{\infty}p_{n+1}=1$, then $S$ is finite and
+
+$$
+\sum_{n=0}^{\infty}(n+1)p_{n+1}=\#S.
+$$
+
+This is a gap in the formalization of a known literature theorem, not an unsolved mathematical conjecture. The cyclic-space and contraction arguments still need a convergent operator-trace sum, the conversion from survival tails to the first-return mean, and the identity $\dim C=\#S$. That identity counts distinct occupied spectral values rather than algebraic eigenvalue multiplicity. Neither finite conservation nor one strictly contracting power alone states this full conclusion.
+:::
+
 ::: {.example #ex-first-return-qubit title="First-Return Statistics of a Rotating Qubit: The Mean Return Time Is Always 2, Whatever the Step"}
 Let a qubit turn through the Bloch angle $\delta$ about the $X$ axis at each step, $U = \cos\frac{\delta}{2}\,I - i\sin\frac{\delta}{2}\,X$, with initial state $v = \lvert 0\rangle$. Write $c = \cos\frac{\delta}{2}$ and $s = \sin\frac{\delta}{2}$, and assume $s \neq 0$.
 
@@ -340,7 +415,7 @@ The entry $p_1 = 0.853553$ in the row $\delta = \frac{\pi}{4}$ is the single-ste
 :::
 
 ::: {.viz src="speed-limit-zeno" preset="mean" height="500"}
-**First return: always 2 steps on average.** With $\delta = 45^\circ$ each column is the ledger after one more step: cyan is the probability of having returned, magenta of not yet, and every column reaches exactly the line at $1$ ([@prop-monitored-return-conservation]). The total magenta area is the mean return time; step by step it grows from $1$ towards $2$ ([@ex-first-return-qubit]).
+**First return: always 2 steps on average.** With $\delta = 45^\circ$ each column is the ledger after one more step: cyan is the probability of having returned, magenta of not yet, and every column reaches exactly the line at $1$ ([@prop-monitored-return-conservation]). The total magenta area is the mean return time; step by step it grows from $1$ towards $2$ ([@ex-first-return-qubit]). The dashed magenta staircase is the same ledger for the step $\delta = 90^\circ$: half comes back at the first step, a quite different shape, yet its magenta area also reaches $2$.
 :::
 
 The Zeno effect says that if one looks often enough, the state cannot leave. The first-return ledger supplies the other half: however often one looks, the fact that it comes back once every two steps on average does not change, because what this number counts is not time but how many directions this qubit has to go.

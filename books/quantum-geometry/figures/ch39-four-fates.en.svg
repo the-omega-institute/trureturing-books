@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch39-four-fates" data-lang="en" viewBox="0 0 360 532" width="360" height="532" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="Sixteen 2 × 2 matrices with entries 0 or 1, in four rows of four. The ten with determinant zero are grey and marked det = 0; the other six are framed in ink and each names its fate: the identity is .empty, the upper triangle (1 1; 0 1) is .dead, the swap with Δ = 4 and the lower triangle with Δ = 0 are .collapse, and the two cyan frames, (1 1; 1 0) and (0 1; 1 1), read .live and Δ = 5. Below: 16 → 6 → 2, the two maps that live are x = 1 + 1/x and x = 1/(x + 1), with a green LEAN ✓ tag.">
+<title>Sixteen 2 × 2 matrices with entries 0 or 1, in four rows of four. The ten with determinant zero are grey and marked det = 0; the other six are framed in ink and each names its fate: the identity is .empty, the upper triangle (1 1; 0 1) is .dead, the swap with Δ = 4 and the lower triangle with Δ = 0 are .collapse, and the two cyan frames, (1 1; 1 0) and (0 1; 1 1), read .live and Δ = 5. Below: 16 → 6 → 2, the two maps that live are x = 1 + 1/x and x = 1/(x + 1), with a green LEAN ✓ tag.</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<text class="tf-ink" x="180" y="22" font-size="15" text-anchor="middle" font-weight="600">The fates of the sixteen binary self-maps</text>
+<rect x="2" y="40" width="82" height="96" rx="5" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<path d="M25 56 L21 56 L21 90 L25 90" class="ts-dim" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<path d="M61 56 L65 56 L65 90 L61 90" class="ts-dim" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<text class="tf-dim tr-fig-mono" x="43" y="70" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0 0</text>
+<text class="tf-dim tr-fig-mono" x="43" y="86" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0 0</text>
+<text class="tf-dim tr-fig-mono" x="43" y="116" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">det = 0</text>
+<rect x="92" y="40" width="82" height="96" rx="5" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<path d="M115 56 L111 56 L111 90 L115 90" class="ts-dim" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<path d="M151 56 L155 56 L155 90 L151 90" class="ts-dim" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<text class="tf-dim tr-fig-mono" x="133" y="70" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0 0</text>
+<text class="tf-dim tr-fig-mono" x="133" y="86" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0 1</text>
+<text class="tf-dim tr-fig-mono" x="133" y="116" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">det = 0</text>
+<rect x="182" y="40" width="82" height="96" rx="5" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<path d="M205 56 L201 56 L201 90 L205 90" class="ts-dim" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<path d="M241 56 L245 56 L245 90 L241 90" class="ts-dim" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<text class="tf-dim tr-fig-mono" x="223" y="70" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0 0</text>
+<text class="tf-dim tr-fig-mono" x="223" y="86" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1 0</text>
+<text class="tf-dim tr-fig-mono" x="223" y="116" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">det = 0</text>
+<rect x="272" y="40" width="82" height="96" rx="5" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<path d="M295 56 L291 56 L291 90 L295 90" class="ts-dim" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<path d="M331 56 L335 56 L335 90 L331 90" class="ts-dim" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<text class="tf-dim tr-fig-mono" x="313" y="70" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0 0</text>
+<text class="tf-dim tr-fig-mono" x="313" y="86" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1 1</text>
+<text class="tf-dim tr-fig-mono" x="313" y="116" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">det = 0</text>
+<rect x="2" y="144" width="82" height="96" rx="5" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<path d="M25 160 L21 160 L21 194 L25 194" class="ts-dim" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<path d="M61 160 L65 160 L65 194 L61 194" class="ts-dim" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<text class="tf-dim tr-fig-mono" x="43" y="174" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0 1</text>
+<text class="tf-dim tr-fig-mono" x="43" y="190" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0 0</text>
+<text class="tf-dim tr-fig-mono" x="43" y="220" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">det = 0</text>
+<rect x="92" y="144" width="82" height="96" rx="5" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<path d="M115 160 L111 160 L111 194 L115 194" class="ts-dim" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<path d="M151 160 L155 160 L155 194 L151 194" class="ts-dim" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<text class="tf-dim tr-fig-mono" x="133" y="174" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0 1</text>
+<text class="tf-dim tr-fig-mono" x="133" y="190" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0 1</text>
+<text class="tf-dim tr-fig-mono" x="133" y="220" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">det = 0</text>
+<rect x="182" y="144" width="82" height="96" rx="5" class="ts-ink tf-panel" stroke-width="1.5"/>
+<path d="M205 160 L201 160 L201 194 L205 194" class="ts-ink" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<path d="M241 160 L245 160 L245 194 L241 194" class="ts-ink" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<text class="tf-ink tr-fig-mono" x="223" y="174" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0 1</text>
+<text class="tf-ink tr-fig-mono" x="223" y="190" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1 0</text>
+<text class="tf-ink tr-fig-mono" x="223" y="214" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle" font-weight="600">.collapse</text>
+<text class="tf-dim" x="223" y="231" font-size="12" text-anchor="middle">Δ = 4</text>
+<rect x="272" y="144" width="82" height="96" rx="5" class="ts-cyan tf-cyan" stroke-width="2.2" fill-opacity="0.14"/>
+<path d="M295 160 L291 160 L291 194 L295 194" class="ts-ink" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<path d="M331 160 L335 160 L335 194 L331 194" class="ts-ink" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<text class="tf-ink tr-fig-mono" x="313" y="174" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0 1</text>
+<text class="tf-ink tr-fig-mono" x="313" y="190" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1 1</text>
+<text class="tf-cyan tr-fig-mono" x="313" y="214" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle" font-weight="600">.live</text>
+<text class="tf-cyan" x="313" y="231" font-size="12" text-anchor="middle">Δ = 5</text>
+<rect x="2" y="248" width="82" height="96" rx="5" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<path d="M25 264 L21 264 L21 298 L25 298" class="ts-dim" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<path d="M61 264 L65 264 L65 298 L61 298" class="ts-dim" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<text class="tf-dim tr-fig-mono" x="43" y="278" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1 0</text>
+<text class="tf-dim tr-fig-mono" x="43" y="294" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0 0</text>
+<text class="tf-dim tr-fig-mono" x="43" y="324" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">det = 0</text>
+<rect x="92" y="248" width="82" height="96" rx="5" class="ts-ink tf-panel" stroke-width="1.5"/>
+<path d="M115 264 L111 264 L111 298 L115 298" class="ts-ink" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<path d="M151 264 L155 264 L155 298 L151 298" class="ts-ink" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<text class="tf-ink tr-fig-mono" x="133" y="278" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1 0</text>
+<text class="tf-ink tr-fig-mono" x="133" y="294" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0 1</text>
+<text class="tf-ink tr-fig-mono" x="133" y="318" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle" font-weight="600">.empty</text>
+<rect x="182" y="248" width="82" height="96" rx="5" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<path d="M205 264 L201 264 L201 298 L205 298" class="ts-dim" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<path d="M241 264 L245 264 L245 298 L241 298" class="ts-dim" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<text class="tf-dim tr-fig-mono" x="223" y="278" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1 0</text>
+<text class="tf-dim tr-fig-mono" x="223" y="294" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1 0</text>
+<text class="tf-dim tr-fig-mono" x="223" y="324" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">det = 0</text>
+<rect x="272" y="248" width="82" height="96" rx="5" class="ts-ink tf-panel" stroke-width="1.5"/>
+<path d="M295 264 L291 264 L291 298 L295 298" class="ts-ink" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<path d="M331 264 L335 264 L335 298 L331 298" class="ts-ink" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<text class="tf-ink tr-fig-mono" x="313" y="278" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1 0</text>
+<text class="tf-ink tr-fig-mono" x="313" y="294" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1 1</text>
+<text class="tf-ink tr-fig-mono" x="313" y="318" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle" font-weight="600">.collapse</text>
+<text class="tf-dim" x="313" y="335" font-size="12" text-anchor="middle">Δ = 0</text>
+<rect x="2" y="352" width="82" height="96" rx="5" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<path d="M25 368 L21 368 L21 402 L25 402" class="ts-dim" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<path d="M61 368 L65 368 L65 402 L61 402" class="ts-dim" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<text class="tf-dim tr-fig-mono" x="43" y="382" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1 1</text>
+<text class="tf-dim tr-fig-mono" x="43" y="398" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0 0</text>
+<text class="tf-dim tr-fig-mono" x="43" y="428" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">det = 0</text>
+<rect x="92" y="352" width="82" height="96" rx="5" class="ts-ink tf-panel" stroke-width="1.5"/>
+<path d="M115 368 L111 368 L111 402 L115 402" class="ts-ink" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<path d="M151 368 L155 368 L155 402 L151 402" class="ts-ink" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<text class="tf-ink tr-fig-mono" x="133" y="382" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1 1</text>
+<text class="tf-ink tr-fig-mono" x="133" y="398" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0 1</text>
+<text class="tf-ink tr-fig-mono" x="133" y="422" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle" font-weight="600">.dead</text>
+<rect x="182" y="352" width="82" height="96" rx="5" class="ts-cyan tf-cyan" stroke-width="2.2" fill-opacity="0.14"/>
+<path d="M205 368 L201 368 L201 402 L205 402" class="ts-ink" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<path d="M241 368 L245 368 L245 402 L241 402" class="ts-ink" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<text class="tf-ink tr-fig-mono" x="223" y="382" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1 1</text>
+<text class="tf-ink tr-fig-mono" x="223" y="398" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1 0</text>
+<text class="tf-cyan tr-fig-mono" x="223" y="422" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle" font-weight="600">.live</text>
+<text class="tf-cyan" x="223" y="439" font-size="12" text-anchor="middle">Δ = 5</text>
+<rect x="272" y="352" width="82" height="96" rx="5" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<path d="M295 368 L291 368 L291 402 L295 402" class="ts-dim" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<path d="M331 368 L335 368 L335 402 L331 402" class="ts-dim" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<text class="tf-dim tr-fig-mono" x="313" y="382" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1 1</text>
+<text class="tf-dim tr-fig-mono" x="313" y="398" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1 1</text>
+<text class="tf-dim tr-fig-mono" x="313" y="428" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">det = 0</text>
+<text class="tf-ink" x="180" y="476" font-size="14" text-anchor="middle">16 maps → 6 non-degenerate → 2 live</text>
+<text class="tf-cyan" x="180" y="498" font-size="14" text-anchor="middle"><tspan font-style="italic">x</tspan> = 1 + 1/<tspan font-style="italic">x</tspan>　　<tspan font-style="italic">x</tspan> = 1/(<tspan font-style="italic">x</tspan> + 1)</text>
+<rect x="149.6" y="509" width="60.8" height="22" class="ts-ok tf-ok" stroke-width="1.2" fill-opacity="0.12"/>
+<text class="tf-ok tr-fig-mono" x="156.6" y="526" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">LEAN ✓</text>
+</svg>

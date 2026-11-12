@@ -179,6 +179,19 @@ await page.keyboard.press('Space');
 check('Space plays', await until(page, () => { const d = window.LEANMAP_DEBUG.state; return d.playing && d.t > 2; }));
 await page.keyboard.press('Space'); check('Space pauses', !(await state()).playing);
 
+// find by name: the matching cells counted here by a plain substring scan of the lock's GIDs, ignoring case
+await page.click('[data-filter="all"]'); await settle(page);
+for (const q of ['pauli_word', 'Born', 'zz_no_such_name']) {
+  await page.fill('#q', q); await settle(page); s = await state();
+  const want = GIDS.filter((g) => g.toLowerCase().indexOf(q.toLowerCase()) !== -1).sort();
+  const out = await page.textContent('#qOut');
+  check(`search “${q}”: the page finds exactly the ${want.length} GIDs that contain it`, JSON.stringify(s.found) === JSON.stringify(want) && (want.length ? out.includes(`命中 ${want.length} 条`) && want.slice(0, 12).every((g) => out.includes(serialOf[g] || g.split('.').pop())) : out.includes('没有命中')), JSON.stringify([s.found.length, want.length, out]));
+}
+await page.fill('#q', 'born'); await page.keyboard.press('Space'); await settle(page);
+check('typing a space in the search box does not start the rail', !(await state()).playing);
+await page.fill('#q', ''); await settle(page); s = await state();
+check('clearing the search shows every cell again', s.q === '' && s.found.length === 0 && (await page.textContent('#qOut')).includes('输入声明名'));
+
 // English
 await page.click('[data-lang-set="en"]'); await pick('table28');
 check('English note of CH28-TABLE carries the same numbers', (await note()).includes(`cites ${a28.length} declarations`) && (await note()).includes(`${in46} of them land in Parts IV–VI`), await note());

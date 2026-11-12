@@ -18,7 +18,7 @@ Closing Part II (*Unfolding Wings — From Line to Plane*), this chapter settles
 4. **Not even the observer is exempt**: Under the specified conjugated-overlap reversal protocol and restricted access, if the other copies are unimodular, the surviving overlap differs from $1$, and the selected $\rho_{ij} \neq 0$, that surviving copy blocks restoration of that selected coherence entry.
 
 ::: {.figure src="ch08-overview"}
-**Figure 8.** The chapter at a glance. Panel I: two arrows $\rho$ and $\sigma$ with the same diagonal but different coherences sit at the same height; the partial trace removes their magenta sideways parts and both land on the same cyan point of the vertical axis. Panel II: the amber arrow $\lvert +\rangle$ is pinched, its magenta sideways part is removed and it shrinks to the cyan point at the centre, while the entropy column rises from $0$ to $\ln 2$. Panel III: under the conjugated-overlap reversal protocol specified in this section, the system is linked to five environment copies; four are rewound (cyan), and the one left over, $k$, is magenta. The other copies satisfy $|c_l| = 1$ ($l \neq k$), with $c_k \neq 1$ and $\rho_{01} \neq 0$, so the rewind gives only $c_k\rho_{01} \neq \rho_{01}$.
+**Figure 8.** The chapter at a glance. Panel I: the amber arrow $\lvert +\rangle$ is pinched, its magenta sideways part is removed and it shrinks to the cyan point at the centre, while the entropy column rises from $0$ to $\ln 2$. Panel II: two pairs of grey columns, the system's entropy $S$ on the left of each pair and the heat paid $\beta Q$ on the right; after the pinch of stage A, $S$ is at $\ln 2$ and the heat is $0$; after the reset of stage B, $S$ is back to $0$ and the heat has risen to $\ln 2$, just touching the line marked “floor”. The heat step is a literature result, and equality is an ideal limit ([@rem-landauer-stage-b-statement-literature]). Panel III: under the conjugated-overlap reversal protocol specified in this section, the system is linked to five environment copies; four are rewound (cyan), and the one left over, $k$, is magenta. The other copies satisfy $|c_l| = 1$ ($l \neq k$), with $c_k \neq 1$ and $\rho_{01} \neq 0$, so the rewind gives only $c_k\rho_{01} \neq \rho_{01}$.
 :::
 
 ## 8.1 Unitary Rotational Reversibility versus the Irreversibility of Information Erasure {#sec-unitary-reversibility-vs-erasure}
@@ -113,6 +113,10 @@ Applying $\Phi_{1/2}$ again and again, $n = 0, 1, 2, 3, 4$ times, gives $0.36806
 **Pinching can erase every difference.** $\lvert +\rangle\langle +\rvert$ and $\lvert -\rangle\langle -\rvert$ are also at $+\infty$; pinched in the $Z$ basis (keeping only the diagonal) both become $I/2$, and the relative entropy is $0$: an observer who records only $Z$-basis readings can no longer tell them apart.
 
 **Rotation keeps it, pinching lowers it.** For two general states with Bloch vectors $(0.3, 0.2, 0.5)$ and $(-0.1, 0.4, 0.2)$, the relative entropy is $0.1602$; after a rotation by $0.7$ radians about the $y$-axis it is still $0.1602$; after pinching in the $Z$ basis it drops to $0.0499$.
+:::
+
+::: {.viz src="erasure-ledger" preset="dpi" height="500"}
+**Two states sent through the same process are only ever pushed closer.** The amber $\rho$ starts at $\lvert 0\rangle$ and the grey dashed $\sigma$ at $\lvert +\rangle$, so at first $D(\rho \,\|\, \sigma) = +\infty$. Depolarizing with $\lambda = 0.5$ shrinks both points together along their radii towards the centre, and $D$ drops to $0.2747$; a turn of $0.7$ rad about $y$ turns both rigidly, and $D$ stays; pinching in the $Z$ basis drops both onto the cyan vertical line, and $D$ falls to $0.258$; two more depolarizations lower it further. The dotted lines are the paths of the two points; on the right there is one bar per step, none taller than the one before ([@thm-channel-data-processing]; the equality across the turn is a hand derivation, and the bars are computed from $2 \times 2$ matrices).
 :::
 
 ::: {.remark #rem-channel-dpi-literature title="Literature result, not formalized in this book"}
@@ -268,7 +272,7 @@ Each of the two density-matrix balances in this example is a **literature result
 
 Every row satisfies $\beta Q = -\Delta S_{\mathrm{sys}} + I + D$ and the Landauer lower bound, and in every row the inequality is strict: since $D > 0$, claim 3 of [@cor-landauer-bound-saturation] rules out equality.
 
-**Reading.** The cleaner the erasure is meant to be ($p \to 1$, the final system state approaching the pure state $\lvert 0\rangle\langle 0\rvert$), the closer the entropy decrease comes to its ceiling $\ln 2 \approx 0.6931$, while the excess term $D$ grows without bound. With one reservoir qubit and one swap, a bit cannot be erased at the price $k_B T\ln 2$; the dimensionless excess heat $\beta Q-(\ln 2-h(p))$ equals $D$, so the corresponding excess physical heat is $k_B T D$. Approaching the Landauer bound requires both $D$ and $I$ to tend to zero, which calls for a larger reservoir and a slower process.
+**Reading.** The cleaner the erasure is meant to be ($p \to 1$, the final system state approaching the pure state $\lvert 0\rangle\langle 0\rvert$), the closer the entropy decrease comes to its ceiling $\ln 2 \approx 0.6931$, while the excess term $D$ grows without bound. With one reservoir qubit and one swap, a bit cannot be erased at the price $k_B T\ln 2$; the dimensionless excess heat $\beta Q-(\ln 2-h(p))$ equals $D$, so the corresponding excess physical heat is $k_B T D$. Approaching the Landauer bound requires both $D$ and $I$ to tend to zero; a larger reservoir and a quasistatic implementation provide a standard route to this limit.
 :::
 
 ::: {.viz src="erasure-ledger" preset="bath" height="500"}
@@ -300,7 +304,7 @@ By [`canonical_copied_address_record_eq_prior`](lean:D5/S3/Quantum/Decoherence/C
 :::
 
 ::: {.viz src="erasure-ledger" preset="copy" height="500"}
-**Copying: the local entropy rises, no heat is paid, and it can be undone.** After a 90° turn the state is copied into the record bit E: on the system's side the amber arrow shrinks to the centre, the entropy column rises to ln 2 (hatched: only the local entropy), and the heat paid is 0; the next step undoes the copy, the arrow lies flat again and the entropy is back to 0 ([@thm-reduced-irreversibility-access-defect]).
+**Copying: the local entropy rises, no heat is paid, and it can be undone.** After a 90° turn the state is copied into the record bit E: on the system's side the amber arrow $\rho$ shrinks to the centre, the entropy column rises to ln 2 (hatched: only the local entropy), and the heat paid is 0. The grey dashed arrow $\sigma$ has the same diagonal as $\rho$ and the opposite sideways part; after the copy it shrinks to the same point at the centre, so locally the two states coincide. The next step undoes the copy: each arrow goes back to where it was, and the entropy is back to 0 ([@thm-reduced-irreversibility-access-defect]).
 :::
 
 Why, then, can't a macroscopic observer simply apply $U_{\mathrm{copy}}^*$ (claim 6) to run time backward? Because in the real world a system does not copy its record into a single isolated ancilla; it broadcasts redundant records across a finite copy family $\mathrm{Copy}$ of environmental degrees of freedom (photons, phonons, air molecules, detector pointers, and the observer's own memory cells)!
