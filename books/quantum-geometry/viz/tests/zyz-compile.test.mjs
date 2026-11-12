@@ -53,6 +53,14 @@ check('Z·Y·Z: … and the chapter\'s 0.829592 − 0.395635 e₁₂ − 0.39291
 check('Z·Y·Z: only the even masks 0, 3, 5, 6 carry anything', [1, 2, 4, 7].every((m) => Math.abs(s.full[m]) < 1e-15));
 const M = rotm(U(0.37, -0.81, 0.52)), EXM = [[0.378188, -0.633230, -0.675273], [0.679631, 0.685203, -0.261913], [0.628550, -0.359884, 0.689498]];
 check('Z·Y·Z: the tripod Re₁, Re₂, Re₃ are the columns of ½Tr(σⱼUσₖU†) and of the chapter\'s matrix', [0, 1, 2].every((k) => vclose(s.frame[k], col(M, k), 1e-12) && vclose(s.columns[k], col(EXM, k), 5e-7)));
+{
+  const lb = await page.evaluate(() => ({ disc: window.ZYZ_DEBUG.disc(), tags: [...document.querySelectorAll('.stage .tag')].filter((e) => !e.hidden)
+    .map((e) => { const r = e.getBoundingClientRect(); return { text: e.textContent.trim(), x0: r.left, x1: r.right, y0: r.top, y1: r.bottom }; }) }));
+  // Re₂ = column 2 of the rotation: in this view it points almost at the reader, so its tip is near the centre
+  const re2 = lb.tags.find((t) => t.text === 'Re₂'), d = lb.disc;
+  const over = lb.tags.filter((a, i) => lb.tags.some((b, j) => j > i && a.x0 < b.x1 && b.x0 < a.x1 && a.y0 < b.y1 && b.y0 < a.y1));
+  check('Z·Y·Z: the Re₂ label is set off the centre where the axes cross, and no two labels overlap', !!re2 && Math.hypot(Math.max(re2.x0 - d.x, 0, d.x - re2.x1), Math.max(re2.y0 - d.y, 0, d.y - re2.y1)) > 0.15 * d.r && over.length === 0, JSON.stringify({ re2, over }));
+}
 check('Z·Y·Z: v = Re₁ and the head-up line shows the rotor', vclose(s.v, col(M, 0), 1e-12) && s.hud.includes('0.830 − 0.396 e₁₂ − 0.393 e₁₃ + 0.030 e₂₃'));
 check('the readout shows the rotor to six places and RR̃ = 1', (await page.textContent('#roRotor')).includes('0.829592 − 0.395635 e₁₂ − 0.392911 e₁₃ + 0.029524 e₂₃') && (await page.textContent('#roRotorSub')).includes('1.000000000000'));
 
@@ -85,6 +93,16 @@ check('SANDWICH: v goes from (√3/2, 0, ½) to (0, √3/2, ½), as SU(2) says',
 const heights = await page.evaluate(() => Array.from({ length: 21 }, (_, i) => window.ZYZ_DEBUG.at(i / 20)));
 check('SANDWICH: the shadow on the axis (½e₃) never moves, the in-plane part keeps its length √3/2', heights.every((p) => close(p[2], 0.5, 1e-12) && close(Math.hypot(p[0], p[1]), Math.sqrt(3) / 2, 1e-12)));
 check('SANDWICH: the fan is split into two halves, 45° + 45°', s.half && (await page.$$eval('.stage .tag', (els) => els.some((e) => !e.hidden && e.textContent.includes('45.0° + 45.0°')))));
+/** Visible stage labels with their viewport boxes, and the sphere's outline on screen. */
+const labels = () => page.evaluate(() => ({ disc: window.ZYZ_DEBUG.disc(), tags: [...document.querySelectorAll('.stage .tag')].filter((e) => !e.hidden)
+  .map((e) => { const r = e.getBoundingClientRect(); return { text: e.textContent.trim(), x0: r.left, x1: r.right, y0: r.top, y1: r.bottom }; }) }));
+const meets = (a, b) => a.x0 < b.x1 && b.x0 < a.x1 && a.y0 < b.y1 && b.y0 < a.y1;
+/** Distance from the disc's centre to the nearest point of a box (0 when the box covers the centre). */
+const gapFromCentre = (b, d) => Math.hypot(Math.max(b.x0 - d.x, 0, d.x - b.x1), Math.max(b.y0 - d.y, 0, d.y - b.y1));
+let lab = await labels();
+const halfTag = lab.tags.find((t) => t.text.includes('° + ')), yTag = lab.tags.find((t) => t.text === 'y');
+check('SANDWICH: the 45.0° + 45.0° reading sits outside the sphere\'s outline, clear of the y label', !!halfTag && !!yTag && gapFromCentre(halfTag, lab.disc) > lab.disc.r + 2 && !meets(halfTag, yTag), JSON.stringify({ halfTag, yTag, disc: lab.disc }));
+check('SANDWICH: the y label is outside the outline (not inside the magenta fan)', !!yTag && gapFromCentre(yTag, lab.disc) > lab.disc.r, JSON.stringify(yTag));
 check('SANDWICH: the rotor is cos 45° − sin 45° e₁₂', vclose([0, 3, 5, 6].map((m) => s.full[m]), [Math.SQRT1_2, -Math.SQRT1_2, 0, 0], 1e-12));
 
 // T
@@ -92,6 +110,13 @@ await pick('t'); s = await seek(3);
 check('T-GATE: (π/4, 0, 0) compiles to 0.923880 − 0.382683 e₁₂', vclose([0, 3, 5, 6].map((m) => s.full[m]), [Math.cos(Math.PI / 8), -Math.sin(Math.PI / 8), 0, 0], 1e-12) && rotorErr(s, 3) < 1e-12);
 const still = await page.evaluate(() => Array.from({ length: 21 }, (_, i) => window.ZYZ_DEBUG.at(2 * i / 20)));
 check('T-GATE: during the two zero turns the arrow does not move', still.every((p) => vclose(p, [1, 0, 0], 1e-12)));
+{
+  // the card's title names exactly the turns whose angle is zero (read from the page's angles, not a fixed string)
+  const zeroNames = [['γ', s.gamma], ['β', s.beta], ['α', s.alpha]].filter(([, a]) => Math.abs(a) < 1e-12).map(([n]) => n);
+  const nonZero = [['γ', s.gamma], ['β', s.beta], ['α', s.alpha]].filter(([, a]) => Math.abs(a) >= 1e-12).map(([n]) => n);
+  const titles = await page.$$eval('[data-preset="t"] .cn', (els) => els.map((e) => e.textContent));
+  check('T-GATE: the card title names the zero turns (γ and β), not the turning one (α)', zeroNames.join() === 'γ,β' && titles.length === 2 && titles.every((t) => zeroNames.every((n) => t.includes(n)) && nonZero.every((n) => !t.includes(n))), titles.join(' | '));
+}
 check('T-GATE: v ends 45° along the equator and Re₃ stays at the pole', vclose(s.v, [Math.SQRT1_2, Math.SQRT1_2, 0], 1e-12) && vclose(s.frame[2], [0, 0, 1], 1e-12) && vclose(s.axis, [0, 0, 1], 1e-12) && close(s.phi, Math.PI / 4, 1e-12));
 
 // H
