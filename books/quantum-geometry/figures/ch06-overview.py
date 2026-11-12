@@ -17,12 +17,12 @@ SIZE = (740, 262)
 WRAP = True
 ALT = {
     "zh": "三栏。第一栏：横放的箭头 A 与琥珀色的箭头 B 夹角 60°，B 落在 A 上的青色影子是 cos θ，两者张出的品红平行四边形是 sin θ。"
-          "第二栏：四分之一圆 D² + V² = 1，横轴是品红的可区分度 D，纵轴是青色的可见度 V；琥珀色的点在 α = 60° 处，(D, V) = (0.87, 0.5)，"
+          "第二栏：四分之一圆 D² + V² = 1，横轴是青色的可见度 V，纵轴是品红的可区分度 D；琥珀色的点在 α = 60° 处，(D, V) = (0.87, 0.5)，"
           "圆的两端分别标“只有路径”与“只有条纹”。第三栏：一个 2×2 密度矩阵，对角两格是青色的 ½，副对角两格是品红的 ¼；"
           "下面一个直角三角形，青色的直角边是对角部分 Π(ρ)，品红的直角边是副对角部分 ρ − Π(ρ)，斜边是 ρ。",
     "en": "Three panels. Panel I: the arrow A lying flat and the amber arrow B at 60°; the cyan shadow of B on A is cos θ and "
-          "the magenta parallelogram they span is sin θ. Panel II: the quarter circle D² + V² = 1 with the magenta "
-          "distinguishability D across and the cyan visibility V up; the amber point sits at α = 60°, (D, V) = (0.87, 0.5), "
+          "the magenta parallelogram they span is sin θ. Panel II: the quarter circle D² + V² = 1 with the cyan "
+          "visibility V across and the magenta distinguishability D up; the amber point sits at α = 60°, (D, V) = (0.87, 0.5), "
           "and the two ends of the arc are marked “path only” and “fringes only”. Panel III: a 2×2 density matrix with cyan ½ "
           "on the diagonal and magenta ¼ off it; below, a right triangle whose cyan leg is the diagonal part Π(ρ), whose "
           "magenta leg is the off-diagonal part ρ − Π(ρ), and whose hypotenuse is ρ.",
@@ -59,17 +59,18 @@ def draw(fig):
     two.line(ox, oy, ox + R + 12, oy, "faint", 1.1)
     two.line(ox, oy, ox, oy - R - 12, "faint", 1.1)
     two.arc(ox, oy, R, 0, 90, "ink", 2.2)
-    px, py = ox + R * d, oy - R * v
+    # as on the double-slit page and in ch06-three-markers: V is the shadow across, D the height up
+    px, py = ox + R * v, oy - R * d
     two.line(px, py, ox, py, "faint", 1.1, dash="3 4")
-    two.line(ox, oy, px, oy, "area", 5, cap="round")
-    two.line(px, oy, px, py, "line", 5, cap="round")
+    two.line(ox, oy, px, oy, "line", 5, cap="round")
+    two.line(px, oy, px, py, "area", 5, cap="round")
     two.dot(px, py, 6, "now", ring="bg")
-    two.text(ox + R * d / 2, oy + 22, "*D*", size=15, color="area", anchor="middle", weight=600)
-    two.text(px - 10, (oy + py) / 2 + 5, "*V*", size=15, color="line", weight=600, anchor="end")
+    two.text(ox + R * v / 2, oy + 22, "*V*", size=15, color="line", anchor="middle", weight=600)
+    two.text(px + 10, (oy + py) / 2 + 5, "*D*", size=15, color="area", weight=600)
     two.dot(ox + R, oy, 3.6, "ink")
     two.dot(ox, oy - R, 3.6, "ink")
-    two.text(ox + R, oy + 22, two.t("只有路径", "path only"), size=13, color="dim", anchor="middle")
-    two.text(ox + 10, oy - R - 8, two.t("只有条纹", "fringes only"), size=13, color="dim")
+    two.text(ox + R, oy + 22, two.t("只有条纹", "fringes only"), size=13, color="dim", anchor="middle")
+    two.text(ox + 10, oy - R - 8, two.t("只有路径", "path only"), size=13, color="dim")
 
     # ---- III: pinching splits at a right angle
     title(three, "III　捏合：对角 ⊥ 副对角", "III  pinching: diagonal ⊥ off", )

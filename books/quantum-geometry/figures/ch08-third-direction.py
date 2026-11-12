@@ -26,7 +26,7 @@ def draw(fig):
     e1, e2 = (1.0, 0.0, 0.0), (0.0, 1.0, 0.0)
     e3 = figkit.cross(e1, e2)
     assert e3 == (0.0, 0.0, 1.0) and figkit.dot3(e3, e1) == 0 and figkit.dot3(e3, e2) == 0
-    sp.disc((0, 0, 1), "panel", fill_opacity=0.9, color="edge", width=1.3)
+    sp.disc((0, 0, 1), "line", fill_opacity=0.1, color="line", width=1.1)   # the plane span{e₁, e₂}, faintly filled
     sp.arc(e1, e2, "line", 2.0, arrow=True)
     sp.arc(e2, e3, "area", 2.0, arrow=True)
     sp.arrow(e1, "line", 2.6, scale=0.98)
