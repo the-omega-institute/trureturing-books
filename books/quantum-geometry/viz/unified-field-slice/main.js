@@ -155,10 +155,10 @@
     if (!thumb) {
       const at = (x, y, dx, dy) => [X(x) + (dx || 0), Y(y) + (dy || 0)];
       const tag = (key, p, html, cls) => st.tag(key, p, html, cls, { screen: true });
-      tag('ax-t', at(g.x1, 0, -12, 13), 't', 'num');
-      tag('ax-x', at(0, g.y1, 12, 10), 'x', 'num');
-      tag('light', at(1.47, 1.47, 36, 0), L('光 t = x', 'light t = x'), 'raw ink');
       const wide = w >= 560;
+      tag('ax-t', at(g.x1, 0, -12, 13), 't', 'num');
+      if (wide) tag('ax-x', at(0, g.y1, 12, 10), 'x', 'num');
+      tag('light', at(1.47, 1.47, 36, 0), L('光 t = x', 'light t = x'), 'raw ink');
       tag('hyp', at(Math.cosh(1.05), Math.sinh(1.05), 44, 8), 't² − x² = 1', 'num');
       if (wide && k.cosh < g.x1 - 0.1 && k.sinh < g.y1 - 0.1) tag('H', at(k.cosh, k.sinh, 66, -4), '(cosh η, sinh η)', 'num c-am');
       if (wide) tag('tanh', at(1, k.tanh, 50, 14), `tanh η = ${fix(k.tanh, 3)}`, 'num c-mg');
