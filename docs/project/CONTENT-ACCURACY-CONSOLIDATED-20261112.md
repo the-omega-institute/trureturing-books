@@ -207,3 +207,29 @@ PDF 三类必须分开：本机默认中文 screen/print 为 888/928 页、英�
 显式 1,895 路径验证副本的 `./tbook check` 为 0 错误、8 条既有 001–008 影片历史 `subject_commit` 警告；7 组常规与 7 组慢帧测试共 2,016 项断言通过，188 张静态图无陈旧输出。7 个受影响实验室的 95 张封面／引用静帧均由当前源码重绘，62 张字节改变，包含全部 10 个二进制冲突与声明地图 15 张图；地图数据重生成字节一致。已查看两语桌面、嵌入、手机、封面与三组静态图四视图。实际检查仍见附录 B 分次图打印预览裁切，以及空间吸引子手机画面顶部标题与场景按钮重叠；未借验证命令退出 0 宣称画面全通过，也未扩大本轮修复范围。
 
 两份账本此前内容、锁、托管字节、索引阶段与双亲保留，源补丁未暂存。本次源整合额度 1/1 已用尽；既有独立复审债务、共享布局／上述可见问题、调用方 PR／CI／合入／Pages 与保留的最终整书输出／模板采用 assignment（剩余 1）继续待办。正式最新已观察 Release 0.6.0 与来稿 0.6.1 的来源限制保留；不构成内容批准、覆盖增加或全目标完成。精确源码、检查与图像对应见 `/tmp/qg-template-v051-sync-evidence/book-current17b-source-integration-20261112/`。
+
+
+## PR157 合入后的当前派生图与续行状态 · 2026-11-12
+
+当前输入为干净 `25b1d938666b420570e920600a36bd4a055db5cd`（tree `919c9c21b5a337410c2f7d94cf1702cec5f37475`），显式清单 1,919 条全部摘要核对通过。实际 PR157 源头为 `afc2be60fa46a43d805b81ef925785e4a75b15ed`，2026-11-12T14:41:55Z 已合入 `2a747c2af562d0d77e5f133ceeb548172f0da7a7`；本节取代此前“PR157 待合入”的当前状态，不改历史记录。合入仅结清该次 merge 生命周期，不代表准确性、独立审查、当前输出或 Pages 接受。所给 CI 注解在该 merge 上记录两份 canonical SVG 陈旧；本次当前全书 figure/source 检查进一步实际复现两语正文与文稿副本共四处陈旧（退出 1，188 张图、0 个绘制错误）。未观察新的远端 CI／Pages 成功，不将本地结果冒作部署结论。
+
+独立词法清点只读清单内 44 份中文单元，排除 SUMMARY，不调用图脚本 tally 或出版解析器：正式 theorem/lemma/proposition/corollary 的起始行含 `lean=` 才计绿色；remark/example 的起始行或紧邻下一行含“文献结果”才计紫色；conjecture/problem 计红色。当前值分别为 **215／165／6**，是中文环境条数，不是双语相加或不同 GID 数。锁中 477 项仍为 **330 theorem／138 def／9 inductive**，绿色下注的 330 是另一统计量。`251f733` 为 215／164／6；合入 `2a747c2` 后唯一计数增量在第十四章 `#rem-jordan-wigner-literature`（当前中文第 397 行）：原散文中的文献归属被明确包进 remark，中英均有该环境，因此按原规则紫色增加 1。`2a747c2` 至当前 `25b1d938` 无进一步计数变化；本次没有改该章或重审其文献结论。
+
+仅用原生产器重出四份 SVG：紫条宽 221.21→222.56、标签横坐标 357.21→358.56、条数 164→165；其余图形、作者措辞与 ALT 均保留。生产器在上述三个提交及本补丁中的 SHA-256 一致：`4faee8673891884588ff7c19942864e837367c72a4db0d598a91dca56ff48e60`，原断言不变。锁 SHA-256 `2e89e5b43498e6552dacc712adc8d5f5ac9d7f853a5aa6a07159d14b6c34fb8a`、pin `a767dce5d7b4a01bd003f8722405c672f4eaaafa/dev` 不变。四份当前输出摘要如下：
+
+| 路径 | SHA-256 |
+| --- | --- |
+| `books/quantum-geometry/figures/prelude-three-tiers.zh.svg` | `142603c8e2319e6d95757784011a672c6f57e97b3b02eaaac0a6a9166c35d06a` |
+| `books/quantum-geometry/figures/prelude-three-tiers.en.svg` | `194530598f92188a96893a8f73397bd86393576908110b6f9fe13cc213a9ba9f` |
+| `books/quantum-geometry/slides/overview/img/prelude-three-tiers.zh.svg` | `57bfdd8ee2dda622ae9840925c9723b9f49d1f4e1cfba950fc966f69b190e21b` |
+| `books/quantum-geometry/slides/overview/img/prelude-three-tiers.en.svg` | `7c833793e135cab36978f352060ae7fbf1d3e693467322ed14d12bc4a3aa5c17` |
+
+新鲜验证副本只由显式追踪清单与命名的 219 份 exact-pin 冻结缓存构成，运行依赖仅借用许可的 node_modules。`./tbook check` 退出 0、**0 错误／8 警告**；八条均为 film001–008 的既有历史 `subject_commit 6cfcf7850967` 与当前 pin 不同，原归属保留。修复后 `./tbook fig build --book quantum-geometry --check` 退出 0，188 张图、0 陈旧、0 绘制错误。12 份 canonical／slide／暂存 SVG 均通过 XML、唯一 ID、内部引用及独立数字／条长核对。首次条长核对脚本误设 0.001px 误差界而退出 1；实物坐标由现有 figkit 保留两位小数，证据脚本改用最近百分位的 0.005px 界后通过，未改生产器或断言；该失败完整保留为检查更正记录。
+
+`./tbook fig shots quantum-geometry prelude-three-tiers` 退出 0；实际查看两语深／浅桌面、390px 手机及打印预览共八图，215／165／6 与 330 注记清楚可读，所看图无可见裁切／遮挡。另实际查看四张 slide SVG 直接 img 消费视图（两语、深浅偏好）：颜色固定为深色，图片正常解码，溢出与页面错误均为 0；这不等于文稿路由／整份导出的验收。当前生产渲染器的序曲 HTML figure 片段与 canonical 内容对应；Pandoc 暂存的 EPUB 纸面图、PDF print/screen 配色图与原变换逐字节对应，slide 副本与 screen 物化逐字节对应。打印预览不是实际完整 PDF。PR185 当前作者配置只发布 **academic／A4**，遵循该选择；暂存 screen 配色不表示重新启用旧变体。没有重复整书最终 HTML/PDF/EPUB、媒体套件、原生阅读器或部署验收；这些仍属保留的 final-output/adoption assignment1。
+
+本地准确性 skill 仅在既有续行段追加用户／外部合入的实际身份、CI／Pages 观察、merge 与准确性接受分离，以及由生命周期负责人按有界可审查批次承接未清义务的要求，不重开综合积压。既有 validator 退出 0；已批准 `review-protocol.md` 保持 `7329a7bd8116d44d106d890f23e3f6ff5f8dac68e9b823990a443ed05626fdc9`，无需重复其指引。最终差异空白检查与六路径最小范围核对见本轮证据；本账本此前完整字节前缀保留。
+
+本轮有限 assignment **total1／used1／remaining0**；旧已用额度不恢复，另行保留的 final-output assignment1 未消费。原 **35** 审计集合、历史 **9/35** 与当前 **44** 出版单元分别保留，不增加覆盖。仍欠 119 R3、127 R3、134／139／141 initial R1、共享布局后 114 R5／118 未完成 R4／130 R2、bridge rerun、第一章当前媒体与第十二章消费者审查，以及本次图／skill 补丁的强制独立复审；提交／后续 PR／CI／合入／Pages 由调用方负责。附录 B 打印预览嵌套 SVG 裁切（未证明整份 PDF 同样失败）、空间吸引子手机 HUD 重叠、历史 PDF 绘制缺字与模板生产器修复的独立 R1 均继续保留，不由本节关闭。未读取保护目标、同轮同行输出、根目录未追踪源或诊断日志，未采用未发布上游文件，未作 Git/GitHub 写操作。
+
+证据位于工作目标的 `build/post157-derived-6af5d1bd/`：`input-identity.json`、`independent-counts.json`、`output-correspondence.json`、`verification-correction.json`、`slide-image-views.json`、`commands-results.json`、`candidate-source-manifest.json`、`candidate-identity.json` 与当前 figure shots。仅交付未暂存的四 SVG、此追加记录与 skill；未作内容批准或全目标完成声明。
