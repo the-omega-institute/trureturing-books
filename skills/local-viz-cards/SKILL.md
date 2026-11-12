@@ -21,7 +21,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 ## 页面与它们的卡
 
-本书有 46 个交互页面，下表按登记表（`books/quantum-geometry/viz/visualizations.json`）的顺序排列。
+本书有 47 个交互页面，下表按登记表（`books/quantum-geometry/viz/visualizations.json`）的顺序排列。
 
 | 页面 | 一句话 | 卡（`preset`） |
 | --- | --- | --- |
@@ -393,6 +393,11 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十二章 | 定理 `thm-ch32-null-cone-holonomy-and-holographic-cut` 的证明之后 | `unified-field-slice` · `abelian` |
 | 第三十二章 | 文献注记 `rem-ch32-dirac-yang-mills-jacobson-literature` 之后 | `unified-field-slice` · `gudermann` |
 | 第三十二章 | §32.2 末（文献注记 `rem-ch32-six-domain-isomorphism-table` 之后、§32.3 之前；上半篇末尾） | `unified-field-slice` 完整实验室 |
+| 第三十二章 | §32.3 三根诊断轴列表之后、“在逐一检阅四大理论阵营之前”之前 | `meta-unification-compass` · `cube` |
+| 第三十二章 | 文献注记 `rem-ch32-icosian-e8-literature` 之后，各隔一句承上启下的话 | `meta-unification-compass` · `icosians`、`e8`、`fold` |
+| 第三十二章 | 文献注记 `rem-ch32-eight-programs-literature` 之后（隔一句话）、“最后，我们将这八条……”之前 | `meta-unification-compass` · `camps` |
+| 第三十二章 | 全章末段“……看见了整座宇宙。”之后、“接下来，第九部……”之前 | `meta-unification-compass` · `crystal` |
+| 第三十二章 | 全章末尾 | `meta-unification-compass` 完整实验室 |
 | 第三十三章 | “互指单调锁死”一节列表第 1 条（独自闭门内省）之后、第 2 条之前 | `mutual-observer-attractors` · `alone` |
 | 第三十三章 | 例 `ex-ch33-mutual-cosine-monotonic-lock` 之后、“对照……轨迹账本”一段之前 | `mutual-observer-attractors` · `round` |
 | 第三十三章 | “两人起点不同时也是如此”一段之后、“接受窗交集”一节之前 | `mutual-observer-attractors` · `apart` |
@@ -443,11 +448,6 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十九章 | 定理 `thm-ch39-double-cover-no-section-and-720-lift` 的证明之后 | `self-sustaining-spinor-flow` · `seam` |
 | 第三十九章 | 该定理之后的“请屏息凝视”一段之后、§39.4 之前 | `self-sustaining-spinor-flow` · `turn720` |
 | 第三十九章 | 章末（最后一段之后） | `self-sustaining-spinor-flow` 完整实验室 |
-| 第三十二章 | §32.3 三根诊断轴列表之后、“在逐一检阅四大理论阵营之前”之前 | `meta-unification-compass` · `cube` |
-| 第三十二章 | 文献注记 `rem-ch32-icosian-e8-literature` 之后，各隔一句承上启下的话 | `meta-unification-compass` · `icosians`、`e8`、`fold` |
-| 第三十二章 | 文献注记 `rem-ch32-eight-programs-literature` 之后（隔一句话）、“最后，我们将这八条……”之前 | `meta-unification-compass` · `camps` |
-| 第三十二章 | 全章末段“……看见了整座宇宙。”之后、“接下来，第九部……”之前 | `meta-unification-compass` · `crystal` |
-| 第三十二章 | 全章末尾 | `meta-unification-compass` 完整实验室 |
 | 终章 | 空间吸引子 · 一 末 | `spatial-attractor-deja-vu` · `butterfly` |
 | 终章 | 空间吸引子 · 二 “内禀几何参数”列表之后 | `spatial-attractor-deja-vu` · `fixed`、`cycle` |
 | 终章 | 空间吸引子 · 二 末（文献注记 `rem-coda-lorenz-srb-literature` 之后） | `spatial-attractor-deja-vu` · `forget`、`dimension` |
