@@ -60,7 +60,7 @@ $$
 has eigenvalues $a = e^{i\theta}$ and $b = e^{-i\theta}$ ($\det W(x) = ab = 1$, $\Tr W(x) = 2x$), so its $m$-th power $W(x)^m$ carries $T_m(x) = \cos(m\theta)$ in its top-left entry!
 
 ::: {.figure src="ch16-chebyshev-shadows"}
-**Turn $m$ times and the shadow is $T_m(x)$.** Take $x = \cos\theta = \frac{1}{2}$ ($\theta = 60^\circ$): four arrows, each turned one more violet angle $\theta$, stop at $0^\circ$, $60^\circ$, $120^\circ$ and the amber $180^\circ$. Their cyan shadows on the axis are $T_0 = 1$, $T_1 = \frac{1}{2}$, $T_2 = -\frac{1}{2}$ and $T_3 = -1$, matching the recurrence of [@thm-chebyshev-trace-recurrence] term by term.
+**Turn $m$ times and the shadow is $T_m(x)$.** Take $x = \cos\theta = \frac{1}{2}$ ($\theta = 60^\circ$): four arrows, each turned one more violet angle $\theta$, stop at $0^\circ$, $60^\circ$, $120^\circ$ and the amber $180^\circ$. Their cyan shadows on the axis are $T_0 = 1$, $T_1 = \frac{1}{2}$, $T_2 = -\frac{1}{2}$ and $T_3 = -1$, matching the recurrence of [@thm-chebyshev-trace-recurrence] term by term. Two violet dashed lines complete arrows $0$ and $2$ into a rhombus whose diagonal is $2\cos\theta = 2x$ times arrow $1$ (here it ends exactly at its tip), so the shadows give $T_0 + T_2 = 2xT_1$, that is $1 - \frac{1}{2} = 2 \cdot \frac{1}{2} \cdot \frac{1}{2}$.
 :::
 
 **Strict mathematical boundary**: [@thm-chebyshev-trace-recurrence] is a scalar recurrence in an arbitrary commutative ring $R$ with $ab = 1$ and makes no assumptions about matrices, singular values, or phase sequences; connecting it to $W(x) \in \mathrm{SU}(2)$ is an explicit hand calculation, not a formalization of the full QSVT theorem. In particular, one cannot realize an arbitrary polynomial from this recurrence alone (the polynomial realizability conditions for full QSVT are recorded in [@rem-qsvt-walks-literature]).
@@ -90,10 +90,9 @@ $$
 \mathrm{cStar} = c_* = \begin{pmatrix} 1/\sqrt{2} \\ i/\sqrt{2} \end{pmatrix}.
 $$
 
-::: {.viz src="walk-spreading" preset="ten" height="500"}
-**One origin, two ways to walk.** From the origin with the coin $c_*$, ten steps of the rule above: the cyan quantum distribution above is symmetric, its two tallest bars at $\pm 6$ and all of it inside the dashed lines $\pm 10$; the grey classical random walk below piles up in the middle. The cyan bracket has width $\sigma = 5.47$, the grey one only $\sqrt{10} = 3.16$.
+::: {.viz src="walk-spreading" preset="fifty" height="500"}
+**One origin, two ways to walk; after fifty steps, nearly four times as wide.** From the origin with the coin $c_*$, fifty steps of the rule above: the cyan quantum distribution above is symmetric, its two peaks already out at $\pm 34$ and all of it inside the dashed lines $\pm 50$; the grey classical random walk below spreads only to about $\pm 7$. Quantum width $\sigma = 27.07$, classical $\sigma = \sqrt{50} = 7.07$.
 :::
-
 To quantify multi-mode entanglement across the entire mode set $\iota = \mathrm{Fin}\,2 \times \mathrm{ZMod}\,p$, the source maps any amplitude profile $\lambda : \iota \to \mathbb{C}$ to the single-excitation W-state `wState(λ)` on Boolean occupation configurations $s : \iota \to \mathrm{Bool}$ (assigning $\lambda_k$ when $s$ is `true` at $k$ alone and $0$ otherwise), defines modewise product states $\mathrm{productState}(z)(s) = \prod_{k \in \iota} z_k(\text{if } s_k \text{ then } 1 \text{ else } 0)$ over tuples of unit spinors `unitFactors z`, and defines the inner-product overlap helper $\mathrm{overlap}(\lambda, z)$ (taking the amplitude profile $\lambda : \iota \to \mathbb{C}$ first and the spinor family $z : \iota \to \mathrm{Fin}\,2 \to \mathbb{C}$ second) and maximum squared overlap:
 
 $$
@@ -105,6 +104,11 @@ $$
 $$
 
 The next lemma (whose source header is `theorem result : claim`) proves that for every $p \ge 1$, every step count $n \in \mathbb{N}$, and every unit coin spinor $c$, the symmetric coin $\mathrm{cStar} = (1, i)/\sqrt{2}$ maximizes `geometricEntanglement`.
+
+::: {.viz src="walk-spreading" preset="ring" height="500"}
+**Wrapped round, still a mirror.** A cycle of only $p = 9$ points, coin $c_*$, twenty steps: the walk has long since wrapped round, and the cyan bars, like the grey ones, cover the whole ring with no front running outwards; yet they are still mirror images of each other, with no magenta. [@lemma-symmetric-coin-walk] holds for every cycle length $p \ge 1$ and every number of steps $n$.
+:::
+
 
 ::: {.lemma #lemma-symmetric-coin-walk title="The Symmetric Coin Maximizes Multi-Mode Geometric Entanglement in the Cycle Hadamard Walk" lean="D5/S3/Quantum/Walks/SymmetricCoinMaximalWalkEntanglement.result"}
 Unfolding `claim` in the declaration `theorem result : claim`: for every $p \in \mathbb{N}$ with $1 \le p$ (supplying `NeZero p`), every step count $n \in \mathbb{N}$, and every coin spinor $c : \mathrm{Fin}\,2 \to \mathbb{C}$ satisfying `UnitSpinor c`,
@@ -119,21 +123,12 @@ In `SymmetricCoinMaximalWalkEntanglement`, `walk_linearity` and `walk_reflection
 :::
 
 ::: {.viz src="walk-spreading" preset="coin" height="500"}
-**Half and half is not enough; it takes the $i$.** A real coin $(1, 1)/\sqrt{2}$, half and half as well, for fifty steps: the cyan distribution leans left, the dashed outline is its mirror image $P(-x)$, and magenta is what it has beyond them, $0.51$ in all. With the coin $c_*$ the magenta is gone: the probabilities of a mirror pair $(0, x)$ and $(1, -x)$ add up to the same total whatever the coin, and $c_*$ splits every pair evenly (a step of the proof sketch above). The figure shows distributions, not the geometric entanglement of [@lemma-symmetric-coin-walk].
+**Half and half is not enough; it needs the $i$.** The pair from the proof sketch: one bar per position $x$, its lower part the probability of the mode $(0, x)$, its upper part that of the mirror mode $(1, -x)$, with a tick at the half. With the real coin $(1, 1)/\sqrt{2}$, half and half as before, after fifty steps every pair still reaches exactly the dashed outline (the same pair's total with the coin $c_*$), but its two parts are unequal: magenta is how far the lower part is from the half, and within a pair the two parts differ by at most $0.145$. With $c_*$ the two parts are equal and the magenta is gone. The figure shows probabilities, not the geometric entanglement of [@lemma-symmetric-coin-walk].
 :::
-
-::: {.viz src="walk-spreading" preset="ring" height="500"}
-**Wrapped round, still a mirror.** A cycle of only $p = 9$ points, coin $c_*$, twenty steps: the walk has long since wrapped round, and the cyan bars, like the grey ones, cover the whole ring with no front running outwards; yet they are still mirror images of each other, with no magenta. [@lemma-symmetric-coin-walk] holds for every cycle length $p \ge 1$ and every number of steps $n$.
-:::
-
 Two strict boundaries apply to [@lemma-symmetric-coin-walk]:
 
 1. **All-mode single-excitation W-state geometric entanglement versus coin–position bipartite entropy**: Here `geometricEntanglement` measures the single-excitation W-state across all $2p$ modes $\iota = \mathrm{Fin}\,2 \times \mathrm{ZMod}\,p$ relative to modewise product states (`1 - gMax`); it is **not** the reduced von Neumann entropy of the coin after tracing out position.
 2. **Scope of quantum-walk interference**: [@lemma-symmetric-coin-walk] analyzes coin-phase symmetry on the cycle $\mathrm{ZMod}\,p$; it does **not** prove exponential speedup on general mazes, does **not** imply that all backtracking paths cancel to zero on arbitrary graphs, and is **not** the glued-trees oracle separation theorem.
-
-::: {.viz src="walk-spreading" preset="fifty" height="500"}
-**Fifty steps, nearly four times as wide.** The two cyan peaks have run out to $\pm 34$, while the grey bell spreads only to about $\pm 7$: quantum width $\sigma = 27.07$, classical $\sigma = \sqrt{50} = 7.07$.
-:::
 
 ::: {.viz src="walk-spreading" preset="width" height="500"}
 **A straight line against a $\sqrt{n}$.** Width against the steps: the cyan quantum width is a straight line ($\sigma / n$ stays near $0.54$), the grey classical width is $\sqrt{n}$; at sixty steps it is $32.5$ against $7.75$. On a line the gap between them is a square, not an exponential; the exponential separation for the specific glued-trees oracle traversal task and its scope are in item 2 of [@rem-qsvt-walks-literature] (literature results, not formalized in this book), and the curves are the page's numbers.
@@ -194,11 +189,12 @@ In [@prop-two-axis-finite-word], each step chooses any continuous angle from $\m
    $$
 
    Note that $\mathcal{S}_L$ is the orbit of a **fixed initial state $\vv{r}_0$**, not the full $3$-parameter gate space; using $|w| \le L$ ensures monotonic nesting $\mathcal{S}_L \subseteq \mathcal{S}_{L+1}$ with $|\mathcal{S}_L| \le \sum_{j=0}^L 2^j = 2^{L+1} - 1$ (collisions can reduce the count).
-3. **The Euclidean convex hull $P_L = \operatorname{conv}(\mathcal{S}_L)$ and geodesic polytopes**: The Euclidean convex hull $P_L = \operatorname{conv}(\mathcal{S}_L) \subset \mathbb{R}^3$ is a finite-vertex convex polytope inscribed in the unit ball. For small $L$ ($L = 0, 1, 2$), $P_L$ degenerates to a point, segment, or planar polygon (do not claim $P_L$ is $3$-dimensional for every $L$!). When $P_L$ is $3$-dimensional, its facets are **flat Euclidean chordal polygons** (never call them intrinsically flat faces of $S^2$). When $0 \in \operatorname{int}(P_L)$, radially projecting the edges and faces of $P_L$ onto $S^2$ yields a spherical mesh of great-circle arcs called a **geodesic polytope** — a term referring strictly to the radial projection mesh on $S^2$, while $P_L = \operatorname{conv}(\mathcal{S}_L)$ itself remains a flat-faced Euclidean polytope.
 
 ::: {.viz src="gate-word-polytope" preset="one" height="500"}
 **Length 1: a segment.** The north pole is fixed by $T$, and only $H$ carries it to $\vv{e}_x$: the two cyan points span a segment, nothing like a polytope yet. The amber target sits on $\vv{e}_x$, the word $H$ hits it exactly, and there is no magenta gap; violet marks the axes of $H$ and $T$.
 :::
+
+3. **The Euclidean convex hull $P_L = \operatorname{conv}(\mathcal{S}_L)$ and geodesic polytopes**: The Euclidean convex hull $P_L = \operatorname{conv}(\mathcal{S}_L) \subset \mathbb{R}^3$ is a finite-vertex convex polytope inscribed in the unit ball. For small $L$ ($L = 0, 1, 2$), $P_L$ degenerates to a point, segment, or planar polygon (do not claim $P_L$ is $3$-dimensional for every $L$!). When $P_L$ is $3$-dimensional, its facets are **flat Euclidean chordal polygons** (never call them intrinsically flat faces of $S^2$). When $0 \in \operatorname{int}(P_L)$, radially projecting the edges and faces of $P_L$ onto $S^2$ yields a spherical mesh of great-circle arcs called a **geodesic polytope** — a term referring strictly to the radial projection mesh on $S^2$, while $P_L = \operatorname{conv}(\mathcal{S}_L)$ itself remains a flat-faced Euclidean polytope.
 
 ::: {.viz src="gate-word-polytope" preset="six" height="500"}
 **Length 6: around the centre, projected onto the sphere.** The hull of the $19$ reachable points now holds the centre, and projecting its edges radially onto the sphere gives a mesh of cyan great-circle arcs (a geodesic polytope). The largest hole in the mesh is the empty cap circled in dashed magenta, of radius $\varepsilon_6 = 47.27^\circ$, with the amber arrow at its centre. What is drawn here is where finite gate words land on the sphere, not the polygon of the planar circle-cutting in [Chapter 21](ch21-diagonalization-and-escape.md).
@@ -347,8 +343,9 @@ Each row satisfies $0 < q \le 1$, $(2n+1)\arcsin\sqrt{r} = \pi/2$, and $2n + 1 \
 **The largest hole shrinks step by step and never closes.** The length runs from $0$ to $20$: the cyan reachable points grow denser layer by layer, and the largest empty cap circled in dashed magenta shrinks from $180^\circ$ to $\varepsilon_{20} = 9.10^\circ$, not at all at some layers; at $L = 20$ there are $971$ points, and the hole is still there. The magenta staircase beside the sphere is the covering radius $\varepsilon_L$ the page computes for each $L$ (amber at $L = 20$), with no asymptotic rate fitted; the asymptotic word length is the literature result of [@rem-solovay-kitaev-literature].
 :::
 
+With this chapter, Part IV (*Higher-Dimensional Spheres — Entanglement, Topology, and Quantum Algorithms*) is complete. Across Chapters 13 through 16, we have traced how quantum geometry rises from single spheres to bipartite correlation sectors, stabilizer subspaces, invariant-plane rotations, Fourier annihilator lattices, and finite-word inscribed polytopes $P_L$ whose positive residual $\varepsilon_L > 0$ leaves the door open to Parts V and VI — spacetime and observer complexity, incompleteness diagonal escape, and self-referential cosine fixed points (whose classical analytic and number-theoretic properties are recorded in [Chapter 24](ch24-cosine-fixed-points-and-self-reference.md), [@rem-banach-dottie-hairy-ball-literature]).
+
 ::: {.viz src="gate-word-polytope" height="560"}
 **The gate-word polytope lab.** Drag the rail to change the length $L$, drag the amber target on the sphere, or switch to the worst direction: cyan is where the $\{H, T\}$ words of length at most $L$ land, and their hull; magenta is the arc to the nearest reachable point, the radial gap and the empty cap. The green box is [@prop-two-axis-finite-word], as the continuous-axis contrast; everything else is the page's numbers.
 :::
 
-With this chapter, Part IV (*Higher-Dimensional Spheres — Entanglement, Topology, and Quantum Algorithms*) is complete. Across Chapters 13 through 16, we have traced how quantum geometry rises from single spheres to bipartite correlation sectors, stabilizer subspaces, invariant-plane rotations, Fourier annihilator lattices, and finite-word inscribed polytopes $P_L$ whose positive residual $\varepsilon_L > 0$ leaves the door open to Parts V and VI — spacetime and observer complexity, incompleteness diagonal escape, and self-referential cosine fixed points (whose classical analytic and number-theoretic properties are recorded in [Chapter 24](ch24-cosine-fixed-points-and-self-reference.md), [@rem-banach-dottie-hairy-ball-literature]).

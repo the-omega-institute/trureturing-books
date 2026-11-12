@@ -295,14 +295,12 @@
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
-    mirrors: { N: 8, to: 1 },
     four: { N: 4, to: 1 },
     eight: { N: 8, to: 2 },
     over: { N: 8, to: 3 },
     sqrt: { N: 256, to: 12 }
   };
   const NOTES = {
-    mirrors: ['N = 8，θ ≈ 20.70°。第一面镜子是失败轴：琥珀色箭头的尖沿竖直虚线翻到轴下；第二面镜子是 |s⟩ 那条虚线：箭头再翻回来，比出发时高了 2θ ≈ 41.41°，紫色的弧就是这一转。青色的影子从 0.354 长到 0.884。', 'N = 8, θ ≈ 20.70°. The first mirror is the failure axis: the tip of the amber arrow drops along the vertical dashed line below the axis; the second mirror is the dashed line of |s⟩: the arrow flips back up, 2θ ≈ 41.41° higher than where it started, and the violet arc is that turn. The cyan shadow grows from 0.354 to 0.884.'],
     four: ['N = 4，θ = 30°。只走一步，箭头从 30° 转 60° 到 90°，正好立在目标轴上：青色的影子长 1，品红的影子消失，右边第 1 根柱子顶到 1。', 'N = 4, θ = 30°. One step turns the arrow by 60° from 30° to 90°, exactly onto the target axis: the cyan shadow has length 1, the magenta one vanishes, and bar 1 on the right reaches 1.'],
     eight: ['N = 8。第 1 步后成功概率 25/32 = 0.78125，第 2 步后 121/128 = 0.9453125：箭头停在 5θ ≈ 103.5°，已越过竖轴一点，品红的影子还剩 −0.234。整数步落不到正好 90°。', 'N = 8. After step 1 the success is 25/32 = 0.78125, after step 2 it is 121/128 = 0.9453125: the arrow stops at 5θ ≈ 103.5°, a little past the vertical axis, with a magenta shadow of −0.234 left. Whole steps cannot land exactly on 90°.'],
     over: ['N = 8，再走第 3 步：箭头转到 7θ ≈ 144.9°，青色的影子缩回 0.575，成功概率掉到 0.330。右边的柱子先升后降，第 2 根最高。', 'N = 8, one more step: the arrow turns to 7θ ≈ 144.9°, the cyan shadow shrinks back to 0.575 and the success drops to 0.330. The bars on the right rise and then fall; bar 2 is the highest.'],
@@ -347,7 +345,7 @@
     barPoint: (n) => { const b = $('cv').getBoundingClientRect(); return barsG ? [b.left + barsG.X(n), b.top + barsG.Y(0.5)] : null; }
   };
   window.TRV_THUMB = () => { applyPreset('eight'); cards.mark('eight'); paint.now(); };
-  cards.pick(cards.initial('mirrors'));
+  cards.pick(cards.initial('eight'));
   booting = false;
   paint();
 })();

@@ -109,16 +109,15 @@ const ev60 = eig(opOf(s.dirs));
 check('60° · 60°: at φ = 0°, ⟨S⟩ = 5/2; spectrum −√7, −1, 1, √7 (Jacobi); N = 3', close(s.S, 2.5, 1e-12) && close(ev60[0], -Math.sqrt(7), 1e-9) && close(ev60[1], -1, 1e-9) && close(ev60[2], 1, 1e-9) && close(ev60[3], Math.sqrt(7), 1e-9) && close(s.N, 3, 1e-12) && close(s.hi, Math.sqrt(7), 1e-12) && close(s.lo, 1, 1e-12));
 check('60° · 60°: the commutator term S² − 4I has spectrum ±3 = ±N', (() => { const e = eig(add(mul(opOf(s.dirs), opOf(s.dirs)), [[4, 0, 0, 0], [0, 4, 0, 0], [0, 0, 4, 0], [0, 0, 0, 4]], -1)); return close(e[0], -3, 1e-9) && close(e[1], -3, 1e-9) && close(e[2], 3, 1e-9) && close(e[3], 3, 1e-9); })());
 
-// CROSS · 0°: ceiling at the top, value on the bound
-await pick('cross'); s = await state();
-check('CROSS: right angles, Bob aligned with Alice: ⟨S⟩ = 1 + 0 + 0 + 1 = 2, ceiling 2√2', close(s.phi, 0) && close(s.S, 2, 1e-12) && close(s.hi, 2 * R2, 1e-12) && agrees(s) && s.E.every((e, i) => close(e, [1, 0, 0, -1][i], 1e-12)));
-
 // TURN BOB: 2√2 cos(φ − 45°)
 await pick('sweep');
 check('TURN BOB plays by itself', await plays());
 check('TURN BOB stops at φ = 90°', await stopsAt(90));
 s = await state();
 check('TURN BOB: ⟨S⟩ = 2 at 90°', close(s.S, 2, 1e-12));
+await seek(0); s = await state();
+check('TURN BOB at φ = 0°: right angles, Bob aligned with Alice: ⟨S⟩ = 1 + 0 + 0 + 1 = 2 under the ceiling 2√2', close(s.phi, 0) && close(s.S, 2, 1e-12) && close(s.hi, 2 * R2, 1e-12) && agrees(s) && s.E.every((e, i) => close(e, [1, 0, 0, -1][i], 1e-12)));
+await seek(90); s = await state();
 sw = await page.evaluate(() => window.CHSH_DEBUG.sweep());
 worst = 0; for (const [phi, v] of sw.q) worst = Math.max(worst, Math.abs(v - 2 * R2 * Math.cos((phi - 45) * DEG)), Math.abs(v - expect(opOf(dirsAt(s, phi)))));
 check('TURN BOB: the strip curve is 2√2 cos(φ − 45°) and matches the matrices at 361 angles', worst < 1e-12, String(worst));
