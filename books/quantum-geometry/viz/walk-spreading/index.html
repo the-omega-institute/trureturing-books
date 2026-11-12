@@ -36,10 +36,9 @@
     <section class="panel sec">
       <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
       <div class="presets cards" id="presets">
-        <button class="preset" data-preset="ten" aria-pressed="false"><span class="code">TEN-STEPS</span><span class="cn zh">走 10 步：两侧各一个尖峰</span><span class="cn en">Ten steps: a peak on either side</span></button>
         <button class="preset" data-preset="fifty" aria-pressed="false"><span class="code">FIFTY-STEPS</span><span class="cn zh">走 50 步：宽度差近四倍</span><span class="cn en">Fifty steps: nearly four times as wide</span></button>
         <button class="preset" data-preset="width" aria-pressed="false"><span class="code">WIDTH</span><span class="cn zh">宽度：一条直线，一条 √n</span><span class="cn en">Width: a straight line and a √n</span></button>
-        <button class="preset" data-preset="coin" aria-pressed="false"><span class="code">REAL-COIN</span><span class="cn zh">硬币 (1, 1)/√2：偏向一边</span><span class="cn en">Coin (1, 1)/√2: tilted to one side</span></button>
+        <button class="preset" data-preset="coin" aria-pressed="false"><span class="code">REAL-COIN</span><span class="cn zh">硬币 (1, 1)/√2：每一对镜像模式一高一低</span><span class="cn en">Coin (1, 1)/√2: each mirror pair split unevenly</span></button>
         <button class="preset" data-preset="ring" aria-pressed="false"><span class="code">RING-9</span><span class="cn zh">九个点的圈：绕回来，仍是镜像</span><span class="cn en">A ring of nine: wrapped round, still a mirror</span></button>
       </div>
       <p class="note" id="presetNote"></p>
@@ -73,6 +72,7 @@
       <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
         <button class="chip" data-scene="dist" aria-pressed="true"><span class="zh">分布</span><span class="en">Spread</span></button>
         <button class="chip" data-scene="width" aria-pressed="false"><span class="zh">宽度</span><span class="en">Width</span></button>
+        <button class="chip" data-scene="pairs" aria-pressed="false"><span class="zh">镜像对</span><span class="en">Pairs</span></button>
       </div>
       <div class="hud-bl" id="legend"></div>
       <div class="toast" id="toast" role="status" aria-live="polite"></div>

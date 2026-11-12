@@ -20,11 +20,12 @@
   /** The representative of x mod p in (−p/2, p/2]. */
   const rep = (x, p) => { const r = ((x % p) + p) % p; return r > p / 2 ? r - p : r; };
 
-  let RUN = null, runKey = '';
+  const RUNS = new Map();
   /** Every step 0 … NMAX for the current p and coin: quantum amplitudes (re, im per coin) and classical probabilities. */
-  function run() {
-    const c = coin(), p = S.p, key = `${p}|${c.join(',')}`;
-    if (key === runKey) return RUN;
+  const run = () => runFor(S.p, coin());
+  function runFor(p, c) {
+    const key = `${p}|${c.join(',')}`;
+    if (RUNS.has(key)) return RUNS.get(key);
     let re0 = new Float64Array(p), im0 = new Float64Array(p), re1 = new Float64Array(p), im1 = new Float64Array(p), cl = new Float64Array(p);
     re0[0] = c[0]; im0[0] = c[1]; re1[0] = c[2]; im1[0] = c[3]; cl[0] = 1;
     const steps = [];
@@ -39,9 +40,16 @@
       }
       re0 = a0; im0 = b0; re1 = a1; im1 = b1; cl = c2;
     }
-    RUN = { p, coin: c, steps };
-    runKey = key;
-    return RUN;
+    const R = { p, coin: c, steps };
+    if (RUNS.size > 24) RUNS.clear();
+    RUNS.set(key, R);
+    return R;
+  }
+  const STAR = [R2, 0, 0, R2];
+  /** The mirror pairs of one step: for each position x, [x, |ψ(0, x)|², |ψ(1, −x)|², the same pair's total under c*]. */
+  function pairsAt(n) {
+    const F = run().steps[n], G = runFor(S.p, STAR).steps[n], p = S.p;
+    return F.xs.map((x, i) => { const j = (p - i) % p; return [x, F.z0[i], F.z1[j], G.z0[i] + G.z1[j]]; });
   }
   /** What the page shows about one step: distributions by position, widths, mirror balance. */
   function facts(p, re0, im0, re1, im1, cl, n) {
@@ -133,6 +141,38 @@
     }
   }
 
+  /* the mirror pairs (0, x) and (1, −x): one bar per x, the two modes stacked, the half marked */
+  function drawPairs(W, H, F) {
+    const p = S.p, half = Math.floor(p / 2) + 0.5, n = F.n, thumb = TRV.thumbMode, pr = pairsAt(n);
+    const ymax = Math.max(1e-3, ...pr.map((r) => Math.max(r[1] + r[2], r[3]))) * 1.15;
+    const g = kit.plot($('cv'), { x: [-half, half], y: [-ymax * 0.06, ymax], pad: frame(W, H), clear: false });
+    const bw = Math.max(1, Math.min(14, g.scale * 0.72)), ctx = g.ctx;
+    g.line([[-half, 0], [half, 0]], P.lineHot, { width: 1.2 * TH });
+    const box = (x, y0, y1, color, alpha, stroke) => {
+      const a = g.Y(y0), b = g.Y(y1), top = Math.min(a, b), h = Math.abs(a - b);
+      if (h < 0.3) return;
+      ctx.globalAlpha = alpha; ctx.fillStyle = color; ctx.fillRect(g.X(x) - bw / 2, top, bw, h);
+      if (stroke) { ctx.globalAlpha = 0.9; ctx.strokeStyle = color; ctx.lineWidth = TH; ctx.strokeRect(g.X(x) - bw / 2 + 0.5, top + 0.5, bw - 1, h - 1); }
+      ctx.globalAlpha = 1;
+    };
+    pr.forEach(([x, a, b]) => {
+      const T = a + b;
+      if (T < 1e-9) return;
+      box(x, 0, a, P.cyan, 0.85);
+      box(x, a, T, P.cyan, 0.25, true);
+      if (Math.abs(a - T / 2) > 1e-9) box(x, a, T / 2, P.magenta, 0.9);
+      const yh = g.Y(T / 2), xc = g.X(x);
+      ctx.strokeStyle = P.ink; ctx.lineWidth = 1.4 * TH; ctx.beginPath(); ctx.moveTo(xc - bw / 2 - 2, yh); ctx.lineTo(xc + bw / 2 + 2, yh); ctx.stroke();
+    });
+    // the totals under c*: the same outline whatever the coin
+    const sil = pr.filter((r) => 2 * n >= p || (Math.abs(r[0]) <= n && (r[0] - n) % 2 === 0)).sort((u, v) => u[0] - v[0]).map((r) => [r[0], r[3]]);
+    g.line(sil, P.ink, { width: 1.3 * TH, dash: [4, 3], alpha: 0.85 });
+    if (!thumb) {
+      tagAt('pl', g, half * 0.45, ymax * 0.9, L('每一对：(0, x) 在下，(1, −x) 在上', 'each pair: (0, x) below, (1, −x) above'), 'raw cy', 0, 0);
+      if (2 * n < p && n > 0) { tagAt('cone', g, n, 0, `+${n}`, 'tick', 0, 14); tagAt('cone-', g, -n, 0, `−${n}`, 'tick', 0, 14); }
+    }
+  }
+
   function drawWidth(W, H) {
     const R = run(), n = stepN(), thumb = TRV.thumbMode;
     const ymax = Math.max(...R.steps.map((s) => Math.max(s.sigmaQ, s.sigmaC))) * 1.12 || 1;
@@ -155,7 +195,7 @@
   function drawStage() {
     const cv = $('cv'), W = cv.clientWidth, H = cv.clientHeight;
     stage.begin();
-    if (S.scene === 'width') drawWidth(W, H); else drawDist(W, H, now());
+    if (S.scene === 'width') drawWidth(W, H); else if (S.scene === 'pairs') drawPairs(W, H, now()); else drawDist(W, H, now());
     stage.end();
   }
 
@@ -173,8 +213,10 @@
   /* ---------- readouts, HUD, legend ---------- */
   function drawText() {
     const F = now(), n = F.n, ratio = n > 0 ? F.sigmaQ / F.sigmaC : null;
-    $('hudBig').innerHTML = S.scene === 'width' ? L(`宽度 · 走到第 ${n} 步`, `Width · step ${n}`) : L(`分布 · 第 ${n} 步`, `Spread · step ${n}`);
-    $('hudSub').innerHTML = S.scene === 'width'
+    $('hudBig').innerHTML = S.scene === 'width' ? L(`宽度 · 走到第 ${n} 步`, `Width · step ${n}`) : S.scene === 'pairs' ? L(`镜像对 · 第 ${n} 步`, `Mirror pairs · step ${n}`) : L(`分布 · 第 ${n} 步`, `Spread · step ${n}`);
+    $('hudSub').innerHTML = S.scene === 'pairs'
+      ? `${L('硬币', 'coin')} ${coinName()} · ${F.pairGap < 1e-12 ? L('每一对都均分', 'every pair split evenly') : `<span class="c-mg">${L('一对里最大的差', 'largest gap in a pair')} ${fix(F.pairGap, 3)}</span>`} · <span class="c-mg">${L('分布失衡', 'spread lopsided')} ${fix(F.imbalance, 2)}</span>`
+      : S.scene === 'width'
       ? `<span class="c-cy">${L('量子', 'quantum')} σ = ${fix(F.sigmaQ, 2)}</span> · ${L('经典', 'classical')} σ = ${fix(F.sigmaC, 2)}${n > 0 ? ` · ${L('比', 'ratio')} ${fix(ratio, 2)}` : ''}`
       : `${L('硬币', 'coin')} ${coinName()} · <span class="c-cy">${L('量子', 'quantum')} σ = ${fix(F.sigmaQ, 2)}</span> · ${L('经典', 'classical')} σ = ${fix(F.sigmaC, 2)}${F.imbalance > 1e-9 ? ` · <span class="c-mg">${L('失衡', 'lopsided')} ${fix(F.imbalance, 3)}</span>` : ''}`;
     $('roRatio').textContent = ratio == null ? '—' : fix(ratio, 2);
@@ -190,7 +232,9 @@
       : L(`这枚硬币没有均分镜像对：最大的一对差 ${fix(F.pairGap, 3)}，分布偏向${F.meanQ < 0 ? '左' : '右'}边，平均位置 ${fix(F.meanQ, 2)}。`, `This coin does not split the mirror pairs evenly: the largest gap is ${fix(F.pairGap, 3)}, and the distribution leans ${F.meanQ < 0 ? 'left' : 'right'}, with mean position ${fix(F.meanQ, 2)}.`);
     $('pillN').querySelector('strong').textContent = String(n);
     $('pillRatio').querySelector('strong').textContent = ratio == null ? '—' : fix(ratio, 2);
-    const items = S.scene === 'width'
+    const items = S.scene === 'pairs'
+      ? [['cy', '镜像对：(0, x) 在下，(1, −x) 在上', 'mirror pair: (0, x) below, (1, −x) above'], ['dm', '短横：一半 · 虚线：c* 下的总高', 'tick: half · dashed: total under c*'], ['mg', '下段离一半的差', 'lower part off the half']]
+      : S.scene === 'width'
       ? [['cy', '量子游走的宽度', 'width of the quantum walk'], ['dm', '经典随机游走的宽度', 'width of the classical walk'], ['am', '当前的步数', 'the current step']]
       : [['cy', '量子游走：P(x) 与宽度 ±σ', 'quantum walk: P(x) and width ±σ'], ['dm', '经典随机游走（向下画）', 'classical random walk (drawn downwards)']]
         .concat(F.imbalance > 1e-9 ? [['mg', '比镜像 P(−x) 多出的部分（虚线）', 'beyond the mirror image P(−x) (dashed)']] : []);
@@ -220,17 +264,15 @@
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
-    ten: { scene: 'dist', p: 121, w: 0.5, phi: 90, n: 10 },
     fifty: { scene: 'dist', p: 121, w: 0.5, phi: 90, n: 50 },
     width: { scene: 'width', p: 121, w: 0.5, phi: 90, n: 60 },
-    coin: { scene: 'dist', p: 121, w: 0.5, phi: 0, n: 50 },
+    coin: { scene: 'pairs', p: 121, w: 0.5, phi: 0, n: 50 },
     ring: { scene: 'dist', p: 9, w: 0.5, phi: 90, n: 20 }
   };
   const NOTES = {
-    ten: ['从原点出发、硬币取 c*，走 10 步：上方青色的量子分布左右对称，最高的两根柱在 ±6，全都落在虚线 ±10 之内；下方灰色的经典分布堆在中间。青色括号 ±σ 的 σ = 5.47，灰色的只有 √10 = 3.16。', 'From the origin with the coin c*, ten steps: above, the cyan quantum distribution is symmetric, its two tallest bars at ±6 and all of it inside the dashed lines ±10; below, the grey classical distribution piles up in the middle. The cyan bracket ±σ has σ = 5.47, the grey one only √10 = 3.16.'],
-    fifty: ['走 50 步：青色的两个尖峰已经跑到 ±34，灰色的钟形只铺开到 ±7 左右。量子宽度 σ = 27.07，经典 σ = √50 = 7.07，差了 3.83 倍。', 'Fifty steps: the two cyan peaks have run out to ±34, while the grey bell spreads only to about ±7. Quantum width σ = 27.07, classical σ = √50 = 7.07: 3.83 times apart.'],
+    fifty: ['从原点出发、硬币取 c*，走 50 步：上方青色的量子分布左右对称，两个尖峰已经跑到 ±34，全都落在虚线 ±50 之内；下方灰色的经典钟形只铺开到 ±7 左右。量子宽度 σ = 27.07，经典 σ = √50 = 7.07，差了 3.83 倍。', 'From the origin with the coin c*, fifty steps: above, the cyan quantum distribution is symmetric, its two peaks already out at ±34 and all of it inside the dashed lines ±50; below, the grey classical bell spreads only to about ±7. Quantum width σ = 27.07, classical σ = √50 = 7.07: 3.83 times apart.'],
     width: ['宽度随步数：青色的量子宽度是一条直线（σ ÷ n 停在 0.54 附近），灰色的经典宽度是 √n 的抛物线。走到 60 步是 32.5 对 7.75：在一条线上，两者之差是平方关系，不是指数。', 'Width against the steps: the cyan quantum width is a straight line (σ ÷ n stays near 0.54), the grey classical width the parabola √n. At 60 steps it is 32.5 against 7.75: on a line the gap between them is a square, not an exponential.'],
-    coin: ['换成实硬币 (1, 1)/√2，同样一半一半，只是没有那个 i：走 50 步，青色的分布偏向左边；虚线是它的镜像 P(−x) 的轮廓，品红是比镜像多出的部分，合计 0.51。', 'A real coin (1, 1)/√2, half and half as before but without the i: after fifty steps the cyan distribution leans left; the dashed outline is its mirror image P(−x), and magenta is what it has beyond them, 0.51 in all.'],
+    coin: ['证明里的那一对：每个位置 x 一根柱，下段是模式 (0, x) 的概率，上段是镜像模式 (1, −x) 的。换成实硬币 (1, 1)/√2，同样一半一半，只是没有那个 i，走 50 步：每一对的总高仍正好落在虚线上（虚线是 c* 下同一对的总高），可两段一高一低，品红是下段离一半的差，最大的一对两段相差 0.145。换回 c* 时两段等高，品红消失。', 'The pair from the proof: one bar per position x, the lower part the probability of the mode (0, x), the upper part that of its mirror mode (1, −x). With the real coin (1, 1)/√2, half and half as before but without the i, after fifty steps every pair still reaches exactly the dashed outline (the same pair\'s total under c*), but its two parts are unequal: magenta is how far the lower part is from the half, and the largest gap within a pair is 0.145. With c* the two parts are equal and the magenta is gone.'],
     ring: ['圈上只有 9 个点，硬币取 c*，走 20 步：游走早已绕回来，青色的柱和灰色的柱一样摊满了整圈，不再有往外跑的前沿；但青色的柱仍然左右成镜像，没有品红。', 'A cycle of only nine points, coin c*, twenty steps: the walk has long since wrapped round, and the cyan bars, like the grey ones, cover the whole ring with no front running outwards; yet the cyan bars are still mirror images of each other, with no magenta.']
   };
   let booting = true;
@@ -260,7 +302,7 @@
       return { scene: S.scene, p: S.p, w: S.w, phi: S.phi, coin: run().coin.slice(), t: clock.t, n: F.n, max: clock.max, playing: clock.playing, preset: cards.current,
         xs: F.xs.slice(), q: F.q.slice(), k: F.k.slice(), z0: F.z0.slice(), z1: F.z1.slice(),
         sigmaQ: F.sigmaQ, sigmaC: F.sigmaC, meanQ: F.meanQ, imbalance: F.imbalance, pairGap: F.pairGap, total: F.total, ctotal: F.ctotal,
-        widths: run().steps.map((s) => [s.sigmaQ, s.sigmaC]), imbalances: run().steps.map((s) => s.imbalance) };
+        widths: run().steps.map((s) => [s.sigmaQ, s.sigmaC]), imbalances: run().steps.map((s) => s.imbalance), pairs: pairsAt(F.n) };
     },
     seek: (t) => { clock.pause(); stopAt = null; clock.set(t); }
   };

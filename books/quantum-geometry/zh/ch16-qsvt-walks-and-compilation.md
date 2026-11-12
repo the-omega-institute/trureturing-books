@@ -60,7 +60,7 @@ $$
 它的两个特征值恰为 $a = e^{i\theta}$ 与 $b = e^{-i\theta}$（满足 $\det W(x) = ab = 1$，$\Tr W(x) = a + b = 2x$），因此每将 $W(x)$ 迭代乘 $m$ 次，其左上角矩阵元便直接吐出 $T_m(x) = \cos(m\theta)$！
 
 ::: {.figure src="ch16-chebyshev-shadows"}
-**转 $m$ 次，影子就是 $T_m(x)$。** 取 $x = \cos\theta = \frac{1}{2}$（$\theta = 60^\circ$）：四支箭头依次转过紫色的角 $\theta$，停在 $0^\circ$、$60^\circ$、$120^\circ$ 与琥珀色的 $180^\circ$；它们落在横轴上的青色影子依次是 $T_0 = 1$、$T_1 = \frac{1}{2}$、$T_2 = -\frac{1}{2}$、$T_3 = -1$，与 [@thm-chebyshev-trace-recurrence] 的递推逐项相符。
+**转 $m$ 次，影子就是 $T_m(x)$。** 取 $x = \cos\theta = \frac{1}{2}$（$\theta = 60^\circ$）：四支箭头依次转过紫色的角 $\theta$，停在 $0^\circ$、$60^\circ$、$120^\circ$ 与琥珀色的 $180^\circ$；它们落在横轴上的青色影子依次是 $T_0 = 1$、$T_1 = \frac{1}{2}$、$T_2 = -\frac{1}{2}$、$T_3 = -1$，与 [@thm-chebyshev-trace-recurrence] 的递推逐项相符。两条紫色虚线把第 $0$ 支与第 $2$ 支箭头补成菱形，对角线是第 $1$ 支箭头的 $2\cos\theta = 2x$ 倍（这里正好落在它的尖端上），影子随之给出 $T_0 + T_2 = 2xT_1$，即 $1 - \frac{1}{2} = 2 \cdot \frac{1}{2} \cdot \frac{1}{2}$。
 :::
 
 **严格的理论边界**：必须明确指出，[@thm-chebyshev-trace-recurrence] 的前提仅涉及任意交换环 $R$ 中的标量对 $ab = 1$，完全不包含矩阵块编码、奇异值谱或相位角序列的假设；将标量递推接到二维旋转块 $W(x) \in \mathrm{SU}(2)$ 是上述显式手算桥接，而非由 [@thm-chebyshev-trace-recurrence] 直接证出完整的量子奇异值变换（QSVT）定理。尤其不能误以为仅凭该递推就能把“任意多项式”塞进量子电路（完整 QSVT 的多项式可实现性定理详见下文 [@rem-qsvt-walks-literature]）。
@@ -90,10 +90,9 @@ $$
 \mathrm{cStar} = c_* = \begin{pmatrix} 1/\sqrt{2} \\ i/\sqrt{2} \end{pmatrix}.
 $$
 
-::: {.viz src="walk-spreading" preset="ten" height="500"}
-**同一个原点，两种走法。** 从原点出发、硬币取 $c_*$，按上面的单步规则走 $10$ 步：上方青色的量子分布左右对称，最高的两根柱在 $\pm 6$，全都落在虚线 $\pm 10$ 之内；下方灰色的经典随机游走堆在中间。青色括号的宽度 $\sigma = 5.47$，灰色的只有 $\sqrt{10} = 3.16$。
+::: {.viz src="walk-spreading" preset="fifty" height="500"}
+**同一个原点，两种走法；走 50 步，宽度差近四倍。** 从原点出发、硬币取 $c_*$，按上面的单步规则走 $50$ 步：上方青色的量子分布左右对称，两个尖峰已经跑到 $\pm 34$，全都落在虚线 $\pm 50$ 之内；下方灰色的经典随机游走只铺开到 $\pm 7$ 左右。量子宽度 $\sigma = 27.07$，经典 $\sigma = \sqrt{50} = 7.07$。
 :::
-
 为了衡量 $n$ 步游走波函数在全部位置与硬币模式 $\iota = \mathrm{Fin}\,2 \times \mathrm{ZMod}\,p$ 上展开的多模相干纠缠度，源码将归一化模式振幅 $\lambda : \iota \to \mathbb{C}$ 映射为全体模式上的单激发 W 态 $\mathrm{wState}(\lambda)$（在布尔占据配置 $s : \iota \to \mathrm{Bool}$ 上，当且仅当恰好仅有一个模式 $k \in \iota$ 为 `true` 时取振幅 $\lambda_k$，其余配置取 $0$），定义逐模式乘积态 $\mathrm{productState}(z)(s) = \prod_{k \in \iota} z_k(\text{if } s_k \text{ then } 1 \text{ else } 0)$（其中每个局部因子 $z_k$ 满足 `UnitSpinor (z k)`，记作 `unitFactors z`），并以模式振幅 $\lambda : \iota \to \mathbb{C}$ 为第一宗量、局部旋量族 $z : \iota \to \mathrm{Fin}\,2 \to \mathbb{C}$ 为第二宗量定义内积重叠辅助函数及最大重叠模平方：
 
 $$
@@ -105,6 +104,11 @@ $$
 $$
 
 下面的引理（在源码中声明头写为 `theorem result : claim`）证明：对一切圈长 $p \ge 1$、一切演化步数 $n \in \mathbb{N}$ 以及一切单位硬币初态 $c$，对称硬币 $\mathrm{cStar} = (1, i)/\sqrt{2}$ 恒使游走态的多模单激发几何纠缠达到最大值！
+
+::: {.viz src="walk-spreading" preset="ring" height="500"}
+**绕回来，镜像还在。** 圈上只有 $p = 9$ 个点，硬币取 $c_*$，走 $20$ 步：游走早已绕回来，青色的柱和灰色的柱一样摊满整圈，不再有往外跑的前沿；但青色的柱仍然左右成镜像，没有品红。[@lemma-symmetric-coin-walk] 对一切圈长 $p \ge 1$ 与一切步数 $n$ 成立。
+:::
+
 
 ::: {.lemma #lemma-symmetric-coin-walk title="循环图 Hadamard 量子游走中对称硬币最大化多模几何纠缠引理" lean="D5/S3/Quantum/Walks/SymmetricCoinMaximalWalkEntanglement.result"}
 源码声明 `theorem result : claim` 中的命题 `claim` 完整展开如下：对任意自然数 $p \in \mathbb{N}$（满足 $1 \le p$，由此赋予 `NeZero p`）、任意步数 $n \in \mathbb{N}$ 以及任意硬币旋量 $c : \mathrm{Fin}\,2 \to \mathbb{C}$，若 $c$ 满足单位归一化条件 `UnitSpinor c`，则恒有
@@ -119,21 +123,12 @@ $$
 :::
 
 ::: {.viz src="walk-spreading" preset="coin" height="500"}
-**一半一半还不够，要那个 $i$。** 换成同样一半一半的实硬币 $(1, 1)/\sqrt{2}$，走 $50$ 步：青色的分布偏向左边，虚线是它的镜像 $P(-x)$ 的轮廓，品红是比镜像多出的部分，合计 $0.51$。硬币取 $c_*$ 时品红消失：镜像对 $(0, x)$ 与 $(1, -x)$ 的概率之和与硬币无关，$c_*$ 把每一对均分（上面证明梗概里的一步）。图里画的是分布，不是 [@lemma-symmetric-coin-walk] 所说的几何纠缠。
+**一半一半还不够，要那个 $i$。** 证明梗概里的那一对：每个位置 $x$ 一根柱，下段是模式 $(0, x)$ 的概率，上段是镜像模式 $(1, -x)$ 的概率，短横标出一半。换成同样一半一半的实硬币 $(1, 1)/\sqrt{2}$，走 $50$ 步：每一对的总高仍正好落在虚线上（虚线是硬币取 $c_*$ 时同一对的总高），两段却一高一低，品红是下段离一半的差，一对里两段最多差 $0.145$。硬币取 $c_*$ 时两段等高，品红消失。图里画的是概率，不是 [@lemma-symmetric-coin-walk] 所说的几何纠缠。
 :::
-
-::: {.viz src="walk-spreading" preset="ring" height="500"}
-**绕回来，镜像还在。** 圈上只有 $p = 9$ 个点，硬币取 $c_*$，走 $20$ 步：游走早已绕回来，青色的柱和灰色的柱一样摊满整圈，不再有往外跑的前沿；但青色的柱仍然左右成镜像，没有品红。[@lemma-symmetric-coin-walk] 对一切圈长 $p \ge 1$ 与一切步数 $n$ 成立。
-:::
-
 在理解 [@lemma-symmetric-coin-walk] 时，必须严格划清两条概念边界：
 
 1. **多模单激发 W 态几何纠缠 vs 硬币—位置二分约化熵**：定理中的 `geometricEntanglement` 是把全部 $2p$ 个（硬币 $\times$ 位置）模式视作单粒子占据模，计算单激发 W 态相对于 $2p$ 个模式逐模乘积态的几何纠缠 $1 - \mathrm{gMax}$，**绝不能将其篡改或简写为通常教材里的“硬币对位置求偏迹后的二分冯·诺依曼纠缠熵”**。
 2. **量子游走不等于“无条件消除一切回头路或迷宫指数加速”**：[@lemma-symmetric-coin-walk] 刻画的是有限圈图 $\mathrm{ZMod}\,p$ 上硬币初态相位对模式分布对称性的影响，它**并不证明**量子游走在任意图或迷宫上都具有指数加速，也**不意味着**相消干涉能让任意图上的所有回头路振幅恒等于零，更不是黏合树（glued trees）黑盒分离定理本身。
-
-::: {.viz src="walk-spreading" preset="fifty" height="500"}
-**走 50 步，宽度差近四倍。** 青色的两个尖峰已经跑到 $\pm 34$，灰色的钟形只铺开到 $\pm 7$ 左右：量子宽度 $\sigma = 27.07$，经典 $\sigma = \sqrt{50} = 7.07$。
-:::
 
 ::: {.viz src="walk-spreading" preset="width" height="500"}
 **一条直线对一条 $\sqrt{n}$。** 宽度随步数：青色的量子宽度是一条直线（$\sigma / n$ 停在 $0.54$ 附近），灰色的经典宽度是 $\sqrt{n}$；走到 $60$ 步是 $32.5$ 对 $7.75$。在一条线上，两者之差是平方关系，不是指数；黏合树上的指数分离与一般图的界见 [@rem-qsvt-walks-literature] 第 2 条（文献结果，未在本书形式化），图中曲线是页面的数值。
@@ -208,6 +203,11 @@ $$
    $$
 
    注意两点：(i) $\mathcal{S}_L$ 只是**固定初态 $\vv{r}_0$ 的单态可达轨迹点集**，而不是三参数门算子全空间；(ii) 采用 $|w| \le L$（而非 $|w| = L$）才保证单调嵌套 $\mathcal{S}_L \subseteq \mathcal{S}_{L+1}$，且点数满足上界 $|\mathcal{S}_L| \le \sum_{j=0}^L 2^j = 2^{L+1} - 1$（由于代数关系如 $H^2 = I$ 及稳定子不动点会产生碰撞重复，实际点数严格小于该上界）。
+
+::: {.viz src="gate-word-polytope" preset="one" height="500"}
+**门长 1：一条线段。** 北极是 $T$ 的不动点，只有 $H$ 把它送到 $\vv{e}_x$：两个青色的点只连成一条线段，还谈不上多面体。琥珀色的目标落在 $\vv{e}_x$ 上，门字 $H$ 精确命中，没有品红的缺口；紫色是 $H$ 与 $T$ 的转轴。
+:::
+
 3. **欧氏凸多面体 $P_L = \operatorname{conv}(\mathcal{S}_L)$ 与测地多面体网格**：取有限点集 $\mathcal{S}_L$ 在 $\mathbb{R}^3$ 中的欧氏凸包
 
    $$
@@ -215,10 +215,6 @@ $$
    $$
 
    这是一座内接于单位球体的有限顶点凸多面体。当 $L$ 很小时（如 $L = 0, 1, 2$），$P_L$ 退化为单点、线段或平面多边形（绝不能声称对每一个 $L$，$P_L$ 都已经是满三维多面体！）。当 $P_L$ 达到满三维时，它的每一个二维面（facet）都是削过球体内部的**平直欧氏弦面（flat chordal polygon）**——绝不能把这些欧氏平面多边形称作“球面 $S^2$ 上本身平坦的面”。当 $L$ 足够大使得球心落入多面体内部（$0 \in \operatorname{int} P_L$）时，将 $P_L$ 的棱与面沿径向投影（radial projection）回球皮 $S^2$，平直棱投影为大圆劣弧，便在 $S^2$ 上切出一张球面三角/多边形网格，通常称为“**测地多面体（geodesic polytope）**”（注意该术语仅指径向投影到球面上的大圆弧网格，而 $\operatorname{conv}(\mathcal{S}_L)$ 本身始终是欧氏平直多面体）。
-
-::: {.viz src="gate-word-polytope" preset="one" height="500"}
-**门长 1：一条线段。** 北极是 $T$ 的不动点，只有 $H$ 把它送到 $\vv{e}_x$：两个青色的点只连成一条线段，还谈不上多面体。琥珀色的目标落在 $\vv{e}_x$ 上，门字 $H$ 精确命中，没有品红的缺口；紫色是 $H$ 与 $T$ 的转轴。
-:::
 
 ::: {.viz src="gate-word-polytope" preset="six" height="500"}
 **门长 6：包住球心，投回球皮。** $19$ 个可达点的凸包已经包住球心，把它的棱沿半径投到球皮上，就成了一张青色的大圆弧网格（测地多面体）。网格里最大的洞是品红虚线圈住的空球冠，半径 $\varepsilon_6 = 47.27^\circ$，琥珀色的箭头指着它的中心。这里画的是有限门字在球面上的落点，不是 [第二十一章](ch21-diagonalization-and-escape.md) 平面割圆里的多边形。
@@ -435,8 +431,9 @@ $$
 **最大的缺口一级级缩小，却补不上。** 门长从 $0$ 走到 $20$：青色的可达点一层层变密，品红虚线圈出的最大空球冠从 $180^\circ$ 缩到 $\varepsilon_{20} = 9.10^\circ$，有几层一点也不缩；到 $L = 20$ 有 $971$ 个点，洞仍然在。旁边品红的台阶是页面对每个 $L$ 实算的覆盖半径 $\varepsilon_L$（琥珀色的是 $L = 20$），不拟合任何渐近速率；渐近字长是 [@rem-solovay-kitaev-literature] 的文献结果。
 :::
 
+至此，第四部“高维球体——纠缠、拓扑与量子算法”的四章旅程全部合拢：我们从双比特 $6 + 9 = 15$ 的关联扇区与贝尔 $45^\circ$ 余弦破缺（[第十三章](ch13-entanglement-and-chsh.md)）出发，用泡利稳定子与架编织把脆弱的局部线藏进正交综合征子空间（[第十四章](ch14-cloning-codes-and-braids.md)），在不变平面旋转与有限群对偶零化子相消中看清了 Grover 与 Shor 算法的几何引擎（[第十五章](ch15-grover-qft-and-period-finding.md)），最终在切比雪夫递推与三维割圆多面体 $P_L$ 中直面了有限离散门字逼近连续球面的永恒残差 $\varepsilon_L > 0$（本章）。正是这道在任何有限步内都无法彻底抹平的多面体缝隙，为我们打开了通往第五部与第六部——时空与观察者复杂性、不完备性对角线逃逸与余弦自指不动点（其经典分析与算术性质见[第二十四章](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature]）——的深层大门。
+
 ::: {.viz src="gate-word-polytope" height="560"}
 **门字多面体实验室。** 拖时间轴改门长 $L$，在球上拖动琥珀色的目标，或换成最坏方向：青色是长度不超过 $L$ 的 $\{H, T\}$ 门字的落点与它们的凸包，品红是到最近可达点的弧、径向间隙与空球冠。绿色框是 [@prop-two-axis-finite-word]，作为连续轴圆的对照；其余都是页面的数值。
 :::
 
-至此，第四部“高维球体——纠缠、拓扑与量子算法”的四章旅程全部合拢：我们从双比特 $6 + 9 = 15$ 的关联扇区与贝尔 $45^\circ$ 余弦破缺（[第十三章](ch13-entanglement-and-chsh.md)）出发，用泡利稳定子与架编织把脆弱的局部线藏进正交综合征子空间（[第十四章](ch14-cloning-codes-and-braids.md)），在不变平面旋转与有限群对偶零化子相消中看清了 Grover 与 Shor 算法的几何引擎（[第十五章](ch15-grover-qft-and-period-finding.md)），最终在切比雪夫递推与三维割圆多面体 $P_L$ 中直面了有限离散门字逼近连续球面的永恒残差 $\varepsilon_L > 0$（本章）。正是这道在任何有限步内都无法彻底抹平的多面体缝隙，为我们打开了通往第五部与第六部——时空与观察者复杂性、不完备性对角线逃逸与余弦自指不动点（其经典分析与算术性质见[第二十四章](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature]）——的深层大门。

@@ -47,10 +47,10 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `chsh-dial` | 四个余弦叠起来能越过 2，却越不过两侧张开的面积给的天花板；经典的隐方向怎么转都越不过 2 | `collinear` `sixty` `sweep` `tsirelson` `hidden` `arc` |
 | `syndrome-decoding` | 校验只问相邻两个比特一不一致：亮起的灯指出翻了哪一个，翻回去，叠加原样回来；翻两个或翻相位，灯就指错或者不亮 | `single` `rooms` `mix` `two` `phase` |
 | `braiding` | 交换两颗粒子，谁从前面过记在第三个方向上；反着交换一次就回来，同向交换两次回不来，三股的两种顺序落在同一处 | `over` `inverse` `twice` `yb` `close` `stabilize` `trefoil` `rack` |
-| `walk-spreading` | 带着硬币相干地走，宽度按步数长大；掷硬币乱走，宽度只按步数的平方根长大 | `ten` `fifty` `width` `coin` `ring` |
+| `walk-spreading` | 带着硬币相干地走，宽度按步数长大；掷硬币乱走，宽度只按步数的平方根长大 | `fifty` `width` `coin` `ring` |
 | `gate-word-polytope` | 门字越长，落点越密，最大的缺口一级级缩小，却永远补不上 | `one` `three` `six` `nearest` `shrink` |
-| `grover-reflections` | 照两面镜子，态就在同一个平面里朝目标转 2θ；整数步只能逼近，走多了会转过头 | `mirrors` `four` `eight` `over` `sqrt` |
-| `phase-gears` | 逐级减半转速的齿轮给每一格拧出相位；周期梳子上的相位箭头首尾相接，不共振的绕成圈抵消，只剩周期留下的峰 | `basis` `cancel` `four` `read` `leak` |
+| `grover-reflections` | 照两面镜子，态就在同一个平面里朝目标转 2θ；整数步只能逼近，走多了会转过头 | `four` `eight` `over` `sqrt` |
+| `phase-gears` | 逐级减半转速的齿轮给每一格拧出相位；周期梳子上的相位箭头首尾相接，不共振的绕成圈抵消，只剩周期留下的峰 | `basis` `cancel` `four` `dual` `read` `leak` |
 | `rapidity-lightcone` | 推动只让事件沿双曲线滑动，光锥一动不动；绕路的世界线攒下的固有时更少 | `circle` `boost` `caliper` `cone` `scale` `light` `twins` `frames` |
 | `lattice-gauge-loop` | 一条边上的相位可以拧成任意值；绕方格一圈的相位，顶点怎么拧都不动 | `twist` `chord` `anchor` `tree` `two` `plaquette` |
 | `layered-network-cut` | 把边界上的一段切下来，割要从网络里面穿过；区间翻倍，割只多两三条腿 | `one` `four` `grow` `two` |
@@ -266,24 +266,28 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第十四章 | Markov 一节末（“这一半，Lean 已经验证”）之后 | `braiding` 完整实验室 |
 | 第十四章 | 例 `ex-repetition-code-syndrome` 之后、文献注记 `rem-error-correction-anyons-literature` 之前 | `syndrome-decoding` · `two`，一句相位翻转的过渡之后是 `phase` |
 | 第十四章 | 文献注记 `rem-error-correction-anyons-literature` 之后、转入第十五章之前 | `syndrome-decoding` 完整实验室 |
-| 第十五章 | Grover 一节定理 `thm-grover-uniform-rotation` 的证明之后、三条边界之前 | `grover-reflections` · `mirrors` |
 | 第十五章 | Grover 一节三条边界列表之后 | `grover-reflections` · `sqrt` |
 | 第十五章 | `sqrt` 之后一句（“整数步只能逼近 π/2”）之后 | `grover-reflections` · `over` |
 | 第十五章 | Grover 一节末（第十六章消除过冲一句之后、相位反冲一节之前） | `grover-reflections` 完整实验室 |
 | 第十五章 | 相位反冲一节开头一段（“相位齿轮”）之后 | `phase-gears` · `basis` |
 | 第十五章 | 命题 `prop-finite-character-cancellation` 的解读（相消与相长两条）之后、归一化提醒之前 | `phase-gears` · `cancel` |
+| 第十五章 | 归一化提醒之后、有限周期采样一节之前 | `phase-gears` · `four` |
+| 第十五章 | 推论 `cor-finite-poisson-period` 的证明之后一句（“$m = 32$、周期 $r = 8$”）之后、文献注记 `rem-shor-divisibility-boundary-literature` 之前 | `phase-gears` · `dual` |
 | 第十五章 | 文献注记 `rem-shor-divisibility-boundary-literature` 之后、四步算例之前 | `phase-gears` · `leak` |
-| 第十五章 | 例 `ex-grover-four-shor-fifteen` 之后，依次在回看第一步（$N = 4$、$N = 8$）、第三步（四根峰）与由峰读阶的四句话之后，文献注记 `rem-grover-qft-shor-literature` 之前 | `grover-reflections` · `four`、`eight`，`phase-gears` · `four`、`read`（各隔一句） |
+| 第十五章 | 例 `ex-grover-four-shor-fifteen` 之后，依次在回看第一步（$N = 4$、$N = 8$）与由峰读阶的句子之后，文献注记 `rem-grover-qft-shor-literature` 之前 | `grover-reflections` · `four`、`eight`，`phase-gears` · `read`（各隔一句；`phase-gears` · `read` 前隔两句） |
 | 第十五章 | 章末文献注记 `rem-grover-qft-shor-literature` 之后、转入第十六章之前 | `phase-gears` 完整实验室 |
-| 第十六章 | 图上游走一节 $c_*$ 定义之后、“为了衡量 $n$ 步游走波函数”之前 | `walk-spreading` · `ten` |
-| 第十六章 | 引理 `lemma-symmetric-coin-walk` 的证明之后、“两条概念边界”列表之前 | `walk-spreading` · `coin`、`ring` |
-| 第十六章 | “两条概念边界”列表之后、文献注记 `rem-qsvt-walks-literature` 之前 | `walk-spreading` · `fifty`、`width` |
+| 第十六章 | 图上游走一节 $c_*$ 定义之后、“为了衡量 $n$ 步游走波函数”之前 | `walk-spreading` · `fifty` |
+| 第十六章 | “下面的引理……证明：对一切圈长 $p \ge 1$”一段之后、引理 `lemma-symmetric-coin-walk` 之前 | `walk-spreading` · `ring` |
+| 第十六章 | 引理 `lemma-symmetric-coin-walk` 的证明之后、“两条概念边界”列表之前 | `walk-spreading` · `coin` |
+| 第十六章 | “两条概念边界”列表之后、文献注记 `rem-qsvt-walks-literature` 之前 | `walk-spreading` · `width` |
 | 第十六章 | 文献注记 `rem-qsvt-walks-literature` 之后（图上游走一节末） | `walk-spreading` 完整实验室 |
-| 第十六章 | 有限门字一节列表第 3 条（凸包与测地多面体）之后、第 4 条之前 | `gate-word-polytope` · `one`、`six` |
+| 第十六章 | 有限门字一节列表第 2 条（固定初态的可达轨道 𝒮_L）之后、第 3 条之前 | `gate-word-polytope` · `one` |
+| 第十六章 | 有限门字一节列表第 3 条（凸包与测地多面体）之后、第 4 条之前 | `gate-word-polytope` · `six` |
 | 第十六章 | 有限门字一节列表第 4 条（覆盖半径与径向支撑间隙）之后、第 5 条之前 | `gate-word-polytope` · `nearest` |
 | 第十六章 | 有限门字一节列表第 5 条（刘徽“三维割圆术”）之后、编译误差一节之前 | `sphere-escape` · `zu` |
 | 第十六章 | 例 `ex-finite-ht-polytope` 之后、文献注记 `rem-solovay-kitaev-literature` 之前 | `gate-word-polytope` · `three` |
-| 第十六章 | 文献注记 `rem-solovay-kitaev-literature` 之后（章末收束段之前） | `gate-word-polytope` · `shrink`，随后完整实验室 |
+| 第十六章 | 文献注记 `rem-solovay-kitaev-literature` 之后、章末收束段之前 | `gate-word-polytope` · `shrink` |
+| 第十六章 | 章末收束段之后（全章最后） | `gate-word-polytope` 完整实验室 |
 | 第十七章 | §17.1 圆与双曲线的对照列表及章图之后、定理 `thm-hyperbolic-norm` 引言之前 | `rapidity-lightcone` · `circle` |
 | 第十七章 | 例 `ex-rapidity-three-fifths` 之后、§17.2 之前 | `rapidity-lightcone` · `boost` |
 | 第十七章 | 引理 `lemma-null-cone-spatial` 证明后的解读段（“双向卡尺”）之后 | `rapidity-lightcone` · `caliper` |
