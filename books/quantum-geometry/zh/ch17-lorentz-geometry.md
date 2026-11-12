@@ -231,10 +231,6 @@ $$
 其中当且仅当空间位移非零（$\Delta w \neq 0$，一维空间中 $\Delta x \neq 0$）时取**严格不等号** $\Delta\tau < \Delta t$（即“运动时钟变慢”的几何投影效应），而在原地静止世界线（$\Delta w = 0$）上取**等号** $\Delta\tau = \Delta t$；光子沿 $\Delta w \neq 0$ 且 $q(\Delta v) = 0$ 的非零光锥零线传播（$\Delta\tau = 0$），对应 $\eta \to \pm\infty$ 的奇异极限，不存在任何属于光子的静止惯性观察系（因而不能说“在光子看来时间停滞或空间缩成一点”）。参见 R. P. Feynman, R. B. Leighton & M. Sands, *The Feynman Lectures on Physics*, Vol. I, chs. 15–17 (Addison–Wesley, 1963)；以及 D. Hestenes, *Space-Time Algebra* (Gordon and Breach, 1966)。
 :::
 
-::: {.viz src="rapidity-lightcone" preset="light" height="500"}
-**沿光锥走，固有时为零。** 把折返点 $A$ 拖到 $(5, 5)$：青色折线的两段都贴着白色菱形的边，$t^2 - x^2 = 0$，一个刻度也没有，$\tau = 0$；白色粗线（静止世界线）走满 10 个刻度。
-:::
-
 ## 世界线分段与固有时 {#sec-proper-time-segments}
 
 在工程检验与公理化文献中，[@prop-null-cone-rigidity] 常被表述为存在性推论：只要二次型 $S$ 在闵可夫斯基零锥上恒为零，就必然存在某个实标量因子 $f \in \mathbb{R}$，使 $S$ 等于 $\operatorname{minkowski}_d$ 的 $f$ 倍。
@@ -296,14 +292,16 @@ $$
 **折线 4 + 4 = 8，静止 10。** 折返点 $A$ 从 $(5, 0)$ 移到 $(5, 3)$：青色折线上的刻度从 10 个减到 8 个（每段 4 个），白色粗线（静止世界线）始终 10 个；去程的每个刻度都落在以 $O$ 为心的一条淡青色双曲线上。
 :::
 
+例末沿光锥零线的那种位移，也可以在同一张时空图上直接摆出来：把折返点 $A$ 推到光锥上，两段折线的 $q$ 都变成 $0$。
+
+::: {.viz src="rapidity-lightcone" preset="light" height="500"}
+**沿光锥走，固有时为零。** 把折返点 $A$ 拖到 $(5, 5)$：青色折线的两段都贴着白色菱形的边，$t^2 - x^2 = 0$，一个刻度也没有，$\tau = 0$；白色粗线（静止世界线）走满 10 个刻度。
+:::
+
 例中说所有惯性观察者算出的都是 $8$ 与 $10$，这一点也可以直接看：推到去程旅行者的参考系，再数一遍刻度。
 
 ::: {.viz src="rapidity-lightcone" preset="frames" height="500"}
 **换参考系，仍是 8 与 10。** 推到去程旅行者的参考系（$\eta = \ln 2$）：所有事件沿淡青色双曲线滑动，去程变成竖直的 $(4, 0)$，回程变成 $(8.5, -7.5)$，两条世界线都歪了，刻度数却一个不变。
-:::
-
-::: {.viz src="rapidity-lightcone" height="560"}
-快度与光锥的完整实验室：对照、推动、卡尺、世界线四个场景共用一条时间轴；绿色框只给本章用 Lean 验证的三条结论（[@thm-hyperbolic-norm]、[@lemma-null-cone-spatial]、[@prop-null-cone-rigidity]）。
 :::
 
 至此，狭义相对论的度规骨架已完全显影：双曲恒等式 $|\cosh r|^2 - |\sinh r|^2 = 1$（[@thm-hyperbolic-norm]）刻画了单位双曲线上的保范变换，而光锥零集消失条件则通过 [@lemma-null-cone-spatial]、[@prop-null-cone-rigidity] 与 [@cor-null-cone-proportionality] 将时空二次型严格锁定为 $\operatorname{minkowski}_d$ 的标量倍。
@@ -313,3 +311,7 @@ $$
 :::
 
 在下一章（[狄拉克旋量与规范场](ch18-spinors-and-gauge-curvature.md)）中，我们将进一步对这一不定号度规作“一阶矩阵开方”，看看反交换泡利矩阵与图上的闭合回路相位如何编织出旋量与规范曲率的几何图景。
+
+::: {.viz src="rapidity-lightcone" height="560"}
+快度与光锥的完整实验室：对照、推动、卡尺、世界线四个场景共用一条时间轴；绿色框只给本章用 Lean 验证的三条结论（[@thm-hyperbolic-norm]、[@lemma-null-cone-spatial]、[@prop-null-cone-rigidity]）。
+:::

@@ -292,9 +292,10 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第十七章 | 引理 `lemma-null-cone-spatial` 证明后的解读段（“双向卡尺”）之后 | `rapidity-lightcone` · `caliper` |
 | 第十七章 | §17.3 边界列表第 2 条的保形比例公式之后、“必须额外独立施加尺度归一化条件”一段之前 | `rapidity-lightcone` · `cone` |
 | 第十七章 | “必须额外独立施加尺度归一化条件”一段之后、格言之前 | `rapidity-lightcone` · `scale` |
-| 第十七章 | 文献注记 `rem-lorentz-rotor-literature` 之后、§17.4 之前 | `rapidity-lightcone` · `light` |
 | 第十七章 | 例 `ex-two-worldline-segments` 之后 | `rapidity-lightcone` · `twins` |
-| 第十七章 | `twins` 之后一句（“推到去程旅行者的参考系，再数一遍刻度”）之后 | `rapidity-lightcone` · `frames`，随后完整实验室 |
+| 第十七章 | `twins` 之后一句（“例末沿光锥零线的那种位移……”）之后 | `rapidity-lightcone` · `light` |
+| 第十七章 | `light` 之后一句（“推到去程旅行者的参考系，再数一遍刻度”）之后 | `rapidity-lightcone` · `frames` |
+| 第十七章 | 章末“在下一章……”一段之后（视频在“至此……”一段之后） | `rapidity-lightcone` 完整实验室 |
 | 第十八章 | 选定生成树一节规范变换公式之后、“为什么单个边相位……”一段之前 | `lattice-gauge-loop` · `twist` |
 | 第十八章 | 闭合回路一节列表第 1 条（弦的基本闭合回路）之后、第 2 条之前 | `lattice-gauge-loop` · `chord` |
 | 第十八章 | 闭合回路一节“开放树路径相位也……成为严格的规范不变量”一段之后 | `lattice-gauge-loop` · `anchor` |
@@ -302,8 +303,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第十八章 | 格言（“未受锚点锁定的自由树枝相位可由局部规范变换抹平”）之后 | `lattice-gauge-loop` · `tree` |
 | 第十八章 | 例 `ex-plaquette-phase` 之后、章末收束段之前 | `lattice-gauge-loop` · `plaquette` |
 | 第十八章 | 章末收束段之后 | `lattice-gauge-loop` 完整实验室 |
-| 第十九章 | 纠缠层级一节首段（“跨越接口的算子秩……随内部腿维数的乘积而增长”）之后、插图之前 | `layered-network-cut` · `one` |
-| 第十九章 | 纠缠层级一节插图解读段（MERA 瓶颈、一般网络最大流不一定等于最小割）之后 | `layered-network-cut` · `four` |
+| 第十九章 | 纠缠层级一节“如上图左栏（Panel I）所示”一段（MERA 瓶颈、一般网络最大流不一定等于最小割）之后 | `layered-network-cut` · `one` |
+| 第十九章 | `one` 之后一句（“把区间从一格加长到连续四格……”）之后 | `layered-network-cut` · `four` |
 | 第十九章 | 锥域一节“最小割公式自动脱去外层的 $3ac$”一段之后、推论 `cor-bridge-cone-mincut` 之前 | `eth-horizon-crossover` · `narrow` |
 | 第十九章 | 文献注记 `rem-ryu-takayanagi-literature` 之后 | `layered-network-cut` · `grow` |
 | 第十九章 | `grow` 之后一句（“区间不止一段时，候选割也不止一道”）之后、章末收束段之前 | `layered-network-cut` · `two` |
@@ -311,7 +312,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十章 | 定理 `thm-open-circuit-min-depth` 的证明之后、“请严格注意”一段之前 | `complexity-growth` · `floor` |
 | 第二十章 | 例 `ex-open-circuit-depths` 之后、§黑洞内部与复杂度—体积猜想之前 | `complexity-growth` · `eight` |
 | 第二十章 | 引理 `lemma-open-circuit-depth-refutation` 的证明之后、“必须严格声明”一段之前 | `complexity-growth` · `eleven` |
-| 第二十章 | 文献注记 `rem-complexity-growth-literature` 之后、猜想 `conj-complexity-equals-volume` 之前 | `complexity-growth` · `saturate`、`ceiling` |
+| 第二十章 | 文献注记 `rem-complexity-growth-literature` 之后 | `complexity-growth` · `saturate` |
+| 第二十章 | `saturate` 之后一句（“把同一个 8 比特随机电路接着往后走……”）之后、猜想 `conj-complexity-equals-volume` 之前 | `complexity-growth` · `ceiling` |
 | 第二十章 | 猜想 `conj-complexity-equals-volume` 之后、§纠缠桥与 ER=EPR 之前 | `complexity-growth` · `cv` |
 | 第二十章 | 例 `ex-cnot-and-cycle-bounds` 之后、P/NP 的提问之前 | `complexity-growth` 完整实验室 |
 | 第二十一章 | §21.2 “对角线 g 的取值永远跟第 a 号解码器算出的结果唱反调”一段之后、“由此，在 Lean 模块 `DiagonalTopologicalEscape` 中”之前 | `sphere-escape` · `diagonal` |

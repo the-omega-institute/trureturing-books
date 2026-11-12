@@ -11,7 +11,7 @@ Before taking a single step, we state the epistemological status of the opening 
 3. **Tier 3 (Red `OPEN`)**: We formulate three celebrated open problems — **Complexity = Volume (CV)** ([@conj-complexity-equals-volume]), **$\mathrm{ER}=\mathrm{EPR}$** ([@conj-er-equals-epr]), and **$\mathrm{P}\neq\mathrm{NP}$** ([@conj-p-neq-np]) — inside `conjecture` environments carrying no `lean` attribute.
 
 ::: {.figure src="ch20-overview"}
-**Figure 20.** The chapter at a glance. Panel I, toy schematic curves: the cyan $S(t) = \min(2t, 4)$ runs into the grey dashed level $4$ at $t = 2$ and goes flat, while the magenta $C(t) = 2t$ keeps climbing. Panel II, a schematic Penrose diagram of a two-sided black hole: violet slices pinned to the left and right boundaries stretch as boundary time runs on, and reading them as complexity is the open complexity = volume conjecture ([@conj-complexity-equals-volume]). Panel III: the cyan P sits inside NP, and the red question mark between them is the open $\mathrm{P}\neq\mathrm{NP}$ ([@conj-p-neq-np]).
+**Figure 20.** The chapter at a glance. Panel I, toy schematic curves: the cyan $S(t) = \min(2t, 4)$ runs into the grey dashed level $4$ at $t = 2$ and goes flat, while the magenta $C(t) = 2t$ keeps climbing. Panel II, a two-qubit circuit: the first $\mathrm{CNOT}$ turns the label of wire 1 from cyan $z_1$ into the magenta even label $z_0 \oplus z_1$ (birth), $R_z$ puts its phase in there, and the second $\mathrm{CNOT}$ returns it to $z_1$ (return), $2$ $\mathrm{CNOT}$s in all; the green tag is the CNOT lower bound ([@prop-reflection-cnot-lower-bound]). Panel III: the cyan P sits inside NP, and the red question mark between them is the open $\mathrm{P}\neq\mathrm{NP}$ ([@conj-p-neq-np]).
 :::
 
 ## Gate count, parallel depth, and growth models {#sec-circuit-depth-growth}
@@ -166,6 +166,8 @@ In chaotic many-body models and holographic black-hole narratives, after subsyst
 **Entropy caps first; the gate count goes on.** A random brick-wall circuit on 8 qubits run to layer 14: the cyan half-chain entropy climbs along the grey staircase, reaches 3.14 bits at layer 13 and is still 3.14 at layer 14, under the white 4-bit line, while the white line (gates used) rises all the way to 49. The faint later stretch (layers 40–90) wanders between 3.18 and 3.36 bits. The random circuit is an illustrative model; its entropy and gate count are computed layer by layer ([@rem-complexity-growth-literature]).
 :::
 
+Run the same $8$-qubit random circuit further: the entropy stays where it is, the gate count keeps adding up layer by layer, and in the illustrative model the expected complexity now meets the $\exp(O(N))$ ceiling of the remark.
+
 ::: {.viz src="complexity-growth" preset="ceiling" height="500"}
 **Gates can always be added; complexity has a ceiling.** Run on to layer 90: the cyan entropy stays put and the white line reaches 315 gates; the magenta expected complexity (an illustrative model) follows the white line until layer 74, meets the dashed 2^N = 256 and runs flat from there.
 :::
@@ -253,6 +255,10 @@ $$
 $$
 
 (For example, at $n = 1$ on $2n = 2$ qubits, the single reflection pair $(0, 1)$ has $2^1 - 1 = 1$ nonzero even parity $z_0 \oplus z_1$, requiring at least $1$ even-birth $\mathrm{CNOT}$ step in `evenOutputs` to generate $z_0 \oplus z_1$ for the $R_z$ phase rotation and at least $2(1) - 1 = 1$ odd-return $\mathrm{CNOT}$ step in `returns` to restore the single-wire parities $[z_0, z_1]$, totaling at least $1 + 1 = 2$ $\mathrm{CNOT}$ gates.) The full proof is checked by the Lean kernel.
+:::
+
+::: {.figure src="ch20-parity-labels"}
+**The CNOT lower bound counts parity labels on the wires: every nonzero even label must be born once, and every birth must be undone by an odd return.** Left, the two-qubit circuit for $n = 1$: wire 0 stays cyan $z_0$; wire 1 starts as cyan $z_1$, becomes magenta $z_0 \oplus z_1$ after the first $\mathrm{CNOT}$ (even birth), where $R_z$ puts in its phase, and returns to cyan $z_1$ after the second $\mathrm{CNOT}$ (odd return), $1 + 1 = 2$ $\mathrm{CNOT}$s in all; the script checks entry by entry that this circuit equals $\operatorname{diag}(e^{i\theta_{\mathrm{hard}}(x)})$ up to a global phase. Right, the $7$ magenta nonzero even parity labels that must appear on a wire for $n = 2$, plus at least $3$ returns, for a bound of $10$; the green tag is [@prop-reflection-cnot-lower-bound]. The figure does not say whether $10$ is reached.
 :::
 
 Note the exact scope of [@prop-reflection-cnot-lower-bound]:
