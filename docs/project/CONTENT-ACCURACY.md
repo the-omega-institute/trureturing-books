@@ -854,3 +854,52 @@ PR120 随后整合官方主线 `504d746` 为 `ccbb16960d6612c3ac028c4dbb66d61d0f
 私有检查中的过程性失败另存汇总：首次源码对象比较因反复读取打包对象而中止，改为只读映射后426/426完成；首次系统解释器未能枚举Typst字体族，改用既有实际构建环境得到450族，无安装。首次媒体检查误从HTML暂存寻找静态消费，0/0不计证据；又把图的原始SVG与EPUB纸面具化字节直接比较，并误猜完整实验室静帧名，按既有 materialize(paper, ground=True)与thumb规则后98+16项通过。全部属于检查器／证据定位纠正，无产品修复。
 
 本轮服务会话32830已exit0、`serve: stopped`，8998端口关闭；EPUB临时服务与浏览器均随命令结束。只追加本台账，最终路径摘要另存清单；既有源、锁、托管文件、技能和共享环境保持。未读／哈希／复制／修改受保护根注记，没有Git/GitHub或目标生命周期动作、委派、额外审查、Heca操作或读取诊断正文。后续强制单次R5及最终候选对应、commit、push、CI、PR #114合入、Pages均归调用方且仍待办；技能owner143的改进在其合入后另按实际依赖处理。本次仅完成该项当前依赖／输出验证，无全书或整章批准。
+
+
+2026-11-12：基于 `57f8a40ff508bf05d0de9ed1cfee112075ea31c4` 的第八章新增 DPI 限定修订与派生计数记录见 [第八章 DPI 修订台账](CONTENT-ACCURACY-CH08-DPI-20261112.md)。双语 Stein 协议限定、文献注记及图表/deck 计数已修，待调用方独立审查与 PR/CI/Pages；不增加原 35 单元覆盖，不批准新增第 31–39 章。
+
+2026-11-12，PR144 当前依赖整合：`0be1501865becdae074b583a560d9ff2446a11ab` 的首轮 architecture/quality/tests 三席均批准其限定候选，无阻塞项。随后调用方整合官方 PR99 为未提交合并（HEAD 同上，MERGE_HEAD `efbdeb52ec4fd7f3e970622a9df5d553a77944bc`）；1,539 路径输入清单逐项相符，不能只以 HEAD 标识输入。当前官方 pin 为 `6cfcf785096782b15084d719ec73c2ca16b6ed29/dev`，457 声明，其中 320 theorem。原 448 项及 426 份源码/状态片未变的对应由调用方回执提供，第八章双语源字节与首轮候选完全相同；旧批准只在这段未变依赖内沿用。新旋转/附录/第 31–39 章依赖不获内容批准。
+
+本次一项必要整合已完成：保持生成规则与断言，从当前双语章节独立核对正式/文献/开放环境为 **215/166/6**，重出双语 prelude-tier SVG 和两份既有 deck 副本，只同步第 37 页过时的文献 Stat/ALT 165→166；正文、作者题记、正式陈述/证明、ID/GID、媒体顺序不改。模板仅用规定 updater 安装官方 0.5.1（`4e47a4b1e2377131253946e91302337a3c655188`），恰好八个预期托管路径、0 冲突，官方清单与全部 206 项托管字节相符，锁与技能不改。细节及历史边界见上述[第八章台账](CONTENT-ACCURACY-CH08-DPI-20261112.md)。
+
+当前新跑 check 为 0 错误/0 警告，150 图无过期/错误，工具 886 项中 836 通过/50 跳过，相关实验室 136/136；双语 HTML/site、四 PDF、两 EPUB、双语 39 页 deck 均成功，EPUBCheck 各 0 错误/0 警告。实际 repo 前缀下中英深浅/1440与390px 页面、引用/完整嵌入及时间轴指针/键盘/读数、deck37，以及当前 PDF/EPUB 目标段落和计数图均已核对；服务器已停止。当前输入与输出摘要在 `/tmp/pr144-current-worker-20261112/`。原生 Books/设备、默认/受控/CI 字体等价、整书逐页和完整音视频均未验收；390px EPUB 整章仍有其他内容溢出，变化注记本身可读且无溢出；八片仅为 poster fallback，旧 film 输出不称当前。首轮三席批准不自动批准这次变化后的全部整合输入。本次额度剩余 0；未提交补丁的最终候选对应、独立复审对应、PR144/CI/合入/Pages 留给调用方，原 35 单元覆盖不增加，全目标与技能迭代仍继续。
+
+## PR #114：e08cda12 合并后的当前出版依赖／输出整合（assignment 1/1，强制 R5 待办）
+
+本项的精确出版输入是调用方已解决的合并：`HEAD=e59b125d2cb7224394ab57e1a7911ca80b30bf45`、`MERGE_HEAD=e08cda12cf9e09a0349eefc03aa694895c8c41f9`，共同基线 `efbdeb52ec4fd7f3e970622a9df5d553a77944bc`。HEAD 单独不代表输入身份；对应关系和冲突处理见调用方清单 `/tmp/qg-template-v051-sync-evidence/pr114-e08-integration/caller-merge-correspondence.json`。本 assignment 为 `1/1`，已用 `1`、剩余 `0`；旧 allowance 与旧 remaining 均保持 `0`，本项不重置、不新增内容修复，也不作批准裁决。当前 pin 为 `the-omega-institute/trureturing@6cfcf785096782b15084d719ec73c2ca16b6ed29/dev`，锁文件 SHA-256 为 `30373b8e656a78532a182a9cbc72f1b45675d080d3feaf9c00980581ed36026b`；官方模板仍为 `0.5.1`，本项未运行 pin 或模板更新。
+
+调用方合并产生的相关路径身份如下；这些是当前输入的已整合路径摘要，不是本项重新批准 Chapter 8 或其它新增单元：
+
+| 路径 | SHA-256 |
+| --- | --- |
+| `books/quantum-geometry/en/ch08-erasure-and-time-arrows.md` | `612e9d931d191f5c9c85639a7993b6cd37dfa800af48b2f6b59c1e858b6a86ac` |
+| `books/quantum-geometry/figures/prelude-three-tiers.en.svg` | `48d57a854cc55a6b81e9e6ff9960d430f9aab3f479ee76470d570e570217d013` |
+| `books/quantum-geometry/figures/prelude-three-tiers.zh.svg` | `cfabc0b8c71c08a76f05ef73a8159882240bc3a3f0fe46065e86f596b953cf19` |
+| `books/quantum-geometry/slides/overview/img/prelude-three-tiers.en.svg` | `5ac82dc632a95fbdf321582aaac018d482680f672db51e06f52de8132918e538` |
+| `books/quantum-geometry/slides/overview/img/prelude-three-tiers.zh.svg` | `8b9d2186e176641b887d577975db030904e40b58da6918e83ddf2a44258b03d8` |
+| `books/quantum-geometry/slides/overview/slides.en.md` | `2373a04b9568223fc6d2a350d4a4e58a7957239212fb5979443afc2bc4b78857` |
+| `books/quantum-geometry/slides/overview/slides.md` | `172510a09166b626b56d4c4e53e0b15cebf0f38fad48ce8ec378021020798817` |
+| `books/quantum-geometry/zh/ch08-erasure-and-time-arrows.md` | `c7ea81e6e63a51f8c5bb803f8d61a92ecf646f176ca77d7cb06cb35513db7602` |
+| `docs/project/CONTENT-ACCURACY-CH08-DPI-20261112.md` | `6d536a10a3d39129d5e3bf089de1d92b5147abad6f040c72a0b3016665251aaa` |
+| `docs/project/CONTENT-ACCURACY.md` (输入摘要，追加本节前) | `2622f3415c1f5713834924d1832197802fa21d4d7334a9e7fbc30c48fc71ff4e` |
+| `skills/local-content-accuracy/references/review-protocol.md` | `e01d59e2a7466d355f0ed73602c4e72e1f37ef25d80c7255694d7da75eb3ac94` |
+
+未变的第 9–12 章八份正文、相关图稿、脉冲核心／静帧、影片 003 的脚本／场景／海报、共享运行时、导出工具、当前 pin 的原 448 条锁记录与此前封存的形式／证明／题记证据，仍只在其已记录的未变依赖闭包内可复用。新 Chapter 8 Stein 文献限定及其六个图／deck 消费者属于当前出版依赖；本项只核对它们的源—生成—输出对应，不把新文本、publication-only 第 31–39 章、incoming 其它路径或整书输出计入原 35 单元覆盖。第 28 章八部分图注不一致仍由调用方 PR130 处理。
+
+未变的 `books/quantum-geometry/figures/prelude-three-tiers.py`（`2333ccd900c912219e03ea08f357687e85598ca63fb50a674012ab2cc050b2c2`）按其原规则从中英文正文独立计数均为 `215 / 166 / 6`（正式／文献／开放）；当前锁为 `457` 条：`320 theorem`、`128 def`、`9 inductive`。`./tbook fig build --check --book quantum-geometry` 通过：`150` 图、`0` stale、`0` error。当前六个 tier SVG／deck 消费者仍为对应输入摘要，均有 `166` 且没有 `165`；四个 SVG 均 XML 可解析。没有重写章节、生成器、工具、测试、实验室、静帧、锁、技能或托管文件。
+
+当前验证结果：
+
+- `./tbook check`：1 本可见书，`0` errors、`0` warnings、exit 0。
+- `TBOOK_CACHE=0 ./tbook build html pdf epub site --book quantum-geometry`：双语 HTML/site、四份 screen/print PDF、两本 EPUB 和双语 39 页 deck 均 exit 0；只保留八部 poster-only film fallback 的已知警告，没有渲染影片或提升旧 MP4。
+- EPUBCheck 5.3.0：中英文 EPUB 均 exit 0，`0` errors、`0` warnings、`0` infos。
+- 真实输出字节（当前构建工具与字体输入）为：中文 screen `887` 页、`49778994` bytes、`1cf5cd4b7f5699d8e9da938f65152c8c22a42f7d2961a21ee02bf1e15bc9102a`；中文 print `926` 页、`49649227` bytes、`495941a5ba9a0199c86edde74065bb2e2b6c7f0893ee9a07968d0737bd1ea265`；中文 EPUB `22174251` bytes、`8bb774f7a21d1f5c5bb26e262b8c21628b766ba1d2346cf008ca88dda577843a`；英文 screen `937` 页、`49779125` bytes、`5799e7cf2b39dca6cecc48db7ee5425ebb8f3e2c9042c4342a590a63041423d6`；英文 print `970` 页、`49446856` bytes、`f35379e8d6ce34bbf925122e1b4aaf9a82b1f45d47534fccb5d829f3ec1bcad5`；英文 EPUB `23342291` bytes、`ba79e7f3618dfad674f607293a6dd83ddc974931b968351f6e650dc31bb2a3c0`。
+- 受影响双语 deck 均为 `39` 页；第 37 页实际抽取文字含 `215`、`166`、`6`、`320`，无 `165`。中文 deck PDF 为 `a4babd42279b0e4c11b99823688fb586b3654f0b6a06a55ef108c2a2851c58e0`，英文 deck PDF 为 `a9f939e8d6ce34bbf925122e1b4aaf9a82b1f45d47534fccb5d829f3ec1bcad5`。
+- 站点下载副本与六个导出文件逐字节相同；双语 Chapter 8 HTML 与站点副本相同；双语 deck PDF 与站点副本相同。当前 HTML 与 EPUB 均含本次 Stein 限定文字。完整源／工具／字体／输出清单及摘要为 `/tmp/pr114-e08-current-worker-20261112/output-correspondence.json`（SHA-256 `f730023b0479d75e8316ee64c6e3becf7d5e5ab02edc124fc200cb9433416c0e`）。实际使用 Pandoc `3.9`（`pandoc`）、Typst Python `0.15.2`、Python `3.12.13`、Java OpenJDK `27.0.1.0.3`、Node `25.8.1`、EPUBCheck jar SHA-256 `f7f96617c929371821609b88c8484d6dc9f24fe916499863c46094c5fb778a65`；11 个 `.cache/fonts` 字体文件按清单记录，Typst 实见 `450` families。doctor 仍提示可选系统 Noto CJK SC 缺失，实际输出字体不等同默认／CI／原生 Books。
+- 实际 Pages 前缀 `./tbook serve --port 18869` 浏览：中英文 × navy/light × 1440/390px 共 8 组，Stein 文字存在，`0` KaTeX errors、`0` broken images，`scrollWidth == innerWidth`；截图与 DOM 指标在 `/tmp/pr114-e08-current-worker-20261112/cdp-view-report.json`（SHA-256 `ee3d8c6ecaf1a4c70569c9673a33a1455a0a9f273a916bd7966847827f79c83e`），联系表已实际查看。服务端口已关闭。
+
+限制继续保留：没有 native Books、真实设备、全书逐页或默认／受控／CI 字体等价验收；EPUB 390px 全章仍有既有公式／表格溢出，本次变化注记本身可读；固定 `1920×1080` deck 画布不构成手机排版批准；八部影片仍是 poster fallback，旧 MP4 不因元数据／缓存键变化而提升。当前输出与对应完成仍不等于原 35 单元内容批准或全目标完成。强制 **R5 三席复审**、最终候选／提交与调用方对应、CI、PR #114 合入及 Pages 仍 pending；本项不执行 Git/GitHub/goal 生命周期，不派发新的审查，不重置任何 allowance。
+
+更正（本节上一行英文 print PDF 摘要的排版笔误）：当前 `quantum-geometry-0.1.0-en-print.pdf` 的实际 SHA-256 是 `f35379ba7b96840acbc542608724cd5d90febcd380e8d8351718a1f38445a161`；以该摘要及 `/tmp/pr114-e08-current-worker-20261112/output-correspondence.json` 为准。
+
+补充对应：按本项要求实读并核对保留的脉冲消费者 `pulse-area-virtual-z`。当前 `index.html`=`aa8d092084363e4a484e1a1999bcb70a0b2ace178600f05a76447feb96f598db`、`main.js`=`0fd8ad3575a06661f4814b3a27c5061c112dd51ecc206624db8914194e4604e5`、`style.css`=`9e9da10d4f91d229b60a9270378b595b655ff774aa0cfea007fc8ca0c10d79c8`、测试=`b792b92c99020834151c15314b99600d1c827ca36542b284d58a761e75b2ebf8`；正文仍明确共振／零失谐条件、完整程序终点、符号错误可改变或保持读数、自由操作清除预设说明，未被本次 Chapter 8／tier 消费者整合改变。既有修复与测试证据按原输入边界保留，本项没有扩展或重跑该不变套件。
