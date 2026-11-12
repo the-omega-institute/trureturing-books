@@ -56,6 +56,13 @@ await pick('impossible'); s = await state();
 const neg = await page.evaluate(() => window.CAUSAL_DEBUG.detFor(-0.5));
 check('IMPOSSIBLE: A·C = −0.5 is outside the window of θ₁ = 30°, θ₂ = 40°, where det G is negative', s.th1 === 30 && s.th2 === 40 && s.wish === -0.5 && s.wish < s.lo && neg < 0 && close(neg, (Math.sin(30 * DEG) * Math.sin(40 * DEG)) ** 2 - (-0.5 - Math.cos(30 * DEG) * Math.cos(40 * DEG)) ** 2, 1e-12));
 check('C waits at the nearest edge and the page says why', close(s.cAC, s.lo, 1e-12) && (await page.textContent('#roNote')).includes('窗口之外'));
+{
+  // the angle labels and the vertex labels near B do not overlap one another on the IMPOSSIBLE still
+  const boxes = await page.evaluate(() => [...document.querySelectorAll('#stage .tags .tag')].filter((t) => !t.hidden && t.textContent.trim())
+    .map((t) => { const r = t.getBoundingClientRect(); return { txt: t.textContent, l: r.left, r: r.right, t: r.top, b: r.bottom }; }));
+  const hits = []; for (let i = 0; i < boxes.length; i++) for (let j = i + 1; j < boxes.length; j++) { const p = boxes[i], q = boxes[j]; if (p.l < q.r - 1 && q.l < p.r - 1 && p.t < q.b - 1 && q.t < p.b - 1) hits.push(`${p.txt} × ${q.txt}`); }
+  check('IMPOSSIBLE: no two stage labels overlap', boxes.length >= 6 && hits.length === 0, hits.join(' | '));
+}
 await setRange('wish', 0.6); s = await state();
 check('asking for a value inside the window moves C there', close(s.cAC, 0.6, 1e-9) && s.det > 0 && !(await page.textContent('#roNote')).includes('窗口之外'));
 await setRange('wish', 0.99); s = await state();
@@ -84,6 +91,8 @@ check('the key readout reports the invariance', (await page.textContent('#roKey'
 /* ---------- field ---------- */
 await pick('field'); s = await seek(1.5);
 check('FIELD: starts 150° from the target', s.scene === 'field' && s.alpha0 === 150);
+check('FIELD: the zero opposite the target is not drawn in the open-problem red, and the card note speaks only of the sphere',
+  !(await page.$('#legend .sw.wn')) && !(await page.textContent('#presetNote')).includes('图') && (await page.evaluate(() => !document.querySelector('#stage .tags .tag.c-wn:not([hidden])'))));
 let flowErr = 0, dissErr = 0;
 for (const a0 of [20, 90, 150, 175]) {
   await setRange('alpha0', a0);

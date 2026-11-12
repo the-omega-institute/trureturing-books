@@ -101,6 +101,10 @@
   const LEGEND = {
     clock: [['cy', '线 cos θ = 1/γ：固有时率', 'line cos θ = 1/γ: proper-time rate'], ['mg', '面积 sin θ = tanh η：速度 v/c', 'area sin θ = tanh η: speed v/c'], ['vi', '弧长 θ', 'arc length θ'], ['am', '当前的点', 'the current point']],
     loop: [['am', '箭头的尖端', 'tip of the arrow'], ['vi', '转轴', 'axis of a turn'], ['mg', '没合上的缺口', 'the gap left open']],
+    // at the fixed point the same stage is read without relativity: the magenta height is the contraction rate, not a speed
+    fixed: [['cy', '影子 cos θ', 'the shadow cos θ'], ['mg', '高 sin θ*：反复取余弦时误差的缩小倍数', 'height sin θ*: the factor the error shrinks by under repeated cosines'], ['vi', '弧长 θ', 'arc length θ'], ['am', '当前的点', 'the current point']],
+    // with no horizon pushed in (λ = 0) only the polytope and its angle deficits are on the stage
+    polytope: [['mg', '每个顶点的角亏 60°', 'the 60° angle deficit at each vertex'], ['dm', '正二十面体的边', 'edges of the icosahedron']],
     horizon: [['cy', '视界以内的边', 'edges inside the horizon'], ['mg', '割断的边 · 角亏', 'cut edges · angle deficits'], ['am', '视界 λ', 'the horizon λ'], ['dm', '视界以外', 'beyond the horizon']]
   };
 
@@ -278,11 +282,14 @@
   const row = (cls, zh, en, val) => `<div class="${cls}"><dt>${L(zh, en)}</dt><dd>${val}</dd></div>`;
   function drawText() {
     const sc = S.scene;
-    let big, sub, key, keyName, rows, note, aside, pill;
+    let big, sub, key, keyName, rows, note, aside, pill, leg = sc;
     if (sc === 'clock') {
       const k = clockAt(S.eta), c2 = k.cos * k.cos, s2 = k.sin * k.sin;
-      big = L(`时钟 · η = ${fix(S.eta, 3)}`, `Clock · η = ${fix(S.eta, 3)}`);
-      sub = `θ = gd(η) = ${fix(k.theta / DEG, 2)}° · <span class="c-cy">cos θ = ${fix(k.cos, 3)}</span> · <span class="c-mg">sin θ = ${fix(k.sin, 3)}</span>`;
+      const fp = Math.abs(k.theta - THETA_STAR) < 5e-4;
+      big = fp ? L(`不动点 · θ* = ${fix(k.theta, 3)}`, `Fixed point · θ* = ${fix(k.theta, 3)}`) : L(`时钟 · η = ${fix(S.eta, 3)}`, `Clock · η = ${fix(S.eta, 3)}`);
+      sub = fp ? `<span class="c-vi">${L('弧长', 'arc')} θ* = ${fix(k.theta, 3)}</span> · <span class="c-cy">cos θ* = ${fix(k.cos, 3)}</span> · <span class="c-mg">sin θ* = ${fix(k.sin, 3)}</span>`
+        : `θ = gd(η) = ${fix(k.theta / DEG, 2)}° · <span class="c-cy">cos θ = ${fix(k.cos, 3)}</span> · <span class="c-mg">sin θ = ${fix(k.sin, 3)}</span>`;
+      if (fp) leg = 'fixed';
       keyName = L('线² + 面积²', 'line² + area²');
       key = `<span class="c-cy">${fix(c2, 3)}</span> + <span class="c-mg">${fix(s2, 3)}</span> = ${fix(c2 + s2, 3)} <span class="okmark">✓</span>`;
       rows = row('', '快度 η · 角 θ = gd(η)', 'rapidity η · angle θ = gd(η)', `${fix(S.eta, 4)} · ${fix(k.theta / DEG, 2)}°`)
@@ -294,7 +301,7 @@
         : S.eta > 2.5 ? L(`时钟只剩 ${fix(100 * k.cos, 1)}% 的速率，速度已是光速的 ${fix(100 * k.sin, 2)}%；η 再大，θ 也只是贴向 90°，到不了。`, `The clock runs at ${fix(100 * k.cos, 1)}% of its rate and the speed is ${fix(100 * k.sin, 2)}% of light; however large η grows, θ only creeps towards 90° and never reaches it.`)
           : L(`同一个角 θ：青色的线是时钟走得多快，品红的高是跑得多快，两者的平方加起来总是 1。`, 'One angle θ: the cyan line is how fast the clock runs, the magenta height how fast the body moves, and their squares always add up to 1.');
       aside = 'sin θ = tanh η';
-      pill = ['v/c', fix(k.sin, 3)];
+      pill = fp ? ['sin θ*', fix(k.sin, 3)] : ['v/c', fix(k.sin, 3)];
     } else if (sc === 'loop') {
       const now = loopAt(S.tau), R = loopU(), done = S.tau >= 4 - 1e-9, b = R.biv;
       const leg = Math.min(3, now.k);
@@ -317,7 +324,10 @@
       pill = ['φ', `${fix(R.phi / DEG, 1)}°`];
     } else {
       const H = horizonAt(S.lam), dsum = ICO.deficit.reduce((a, b) => a + b, 0);
-      big = L(`视界 · λ = ${fix(S.lam, 1)}° · 割断 ${H.cut} 条边`, `Horizon · λ = ${fix(S.lam, 1)}° · ${H.cut} edge${H.cut === 1 ? '' : 's'} cut`);
+      const flat = S.lam < 1e-9;
+      big = flat ? L('多面体 · 12 个顶点各缺 60°', 'Polytope · 12 vertices, 60° missing at each')
+        : L(`视界 · λ = ${fix(S.lam, 1)}° · 割断 ${H.cut} 条边`, `Horizon · λ = ${fix(S.lam, 1)}° · ${H.cut} edge${H.cut === 1 ? '' : 's'} cut`);
+      if (flat) leg = 'polytope';
       sub = S.lam < 1e-9 ? L(`角亏 12 × 60° = ${fix(dsum / DEG, 1)}° = 4π`, `angle deficit 12 × 60° = ${fix(dsum / DEG, 1)}° = 4π`)
         : L(`D = ${S.bond}：跨视界施密特秩 ≤ ${S.bond}<sup>${H.cut}</sup> = ${H.bound.toLocaleString('en-US')}`, `D = ${S.bond}: Schmidt rank across the horizon ≤ ${S.bond}<sup>${H.cut}</sup> = ${H.bound.toLocaleString('en-US')}`);
       keyName = L('割断的边 |∂A|', 'cut edges |∂A|');
@@ -330,14 +340,14 @@
       note = S.lam < 1e-9 ? L('每个顶点挤着 5 个 60° 的角，摊平后缺一个 60°：12 个顶点一共缺 720°，正是一整个球面的 4π。', 'Each vertex holds five 60° corners and, laid flat, misses one 60°: the 12 vertices miss 720° in all, exactly the 4π of a whole sphere.')
         : L(`视界以内 ${H.nA} 个顶点。只有被割断的 ${H.cut} 条边连着两边：无论网络里装着什么，跨视界的纠缠只能从这几条边上过。`, `${H.nA} vertices lie inside the horizon. Only the ${H.cut} cut edges join the two sides: whatever the network holds, entanglement across the horizon can only pass along these edges.`);
       aside = '|∂A|';
-      pill = ['|∂A|', String(H.cut)];
+      pill = flat ? [L('角亏', 'deficit'), `${fix(dsum / DEG, 0)}°`] : ['|∂A|', String(H.cut)];
     }
     $('hudBig').innerHTML = big; $('hudSub').innerHTML = sub;
     $('ro').innerHTML = `<div class="key"><dt>${keyName}</dt><dd><b>${key}</b></dd></div>${rows}`;
     $('roNote').textContent = note; $('roAside').textContent = aside;
     $('pillScene').querySelector('strong').textContent = { clock: L('时钟', 'CLOCK'), loop: L('回路', 'LOOP'), horizon: L('视界', 'HORIZON') }[sc];
     $('pillKeyName').textContent = pill[0]; $('pillKey').querySelector('strong').textContent = pill[1];
-    $('legend').innerHTML = LEGEND[sc].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
+    $('legend').innerHTML = LEGEND[leg].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
   }
 
   function drawStage() { if (S.scene === 'clock') drawClock(); else if (S.scene === 'loop') drawLoop(); else drawHorizon(); }

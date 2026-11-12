@@ -16,6 +16,12 @@
   'use strict';
   const { kit, L } = TRV, { v3, fix } = kit, P = TRV.palette;
   const $ = (id) => document.getElementById(id);
+  /** τ with a real subscript on a canvas chart (no ASCII underscore on the stage): the subscript smaller and lower. */
+  function subText(g, x, y, sub, color, s) {
+    const size = 10.5, small = { ...s, size: 8, dy: (s.dy || 0) + 3 }, right = s.align === 'right';
+    if (right) { g.text(x, y, sub, color, small); const w = g.ctx.measureText(sub).width; g.text(x, y, 'τ', color, { ...s, size, dx: (s.dx || 0) - w }); }
+    else { g.text(x, y, 'τ', color, { ...s, size }); const w = g.ctx.measureText('τ').width; g.text(x, y, sub, color, { ...small, dx: (s.dx || 0) + w }); }
+  }
   const DEG = Math.PI / 180, TAU = 2 * Math.PI;
   const PHI = (1 + Math.sqrt(5)) / 2, ALPHA = PHI - 1, WIN = 2 - PHI;
 
@@ -219,10 +225,10 @@
       bar(c, col.xs[0], col.top, col.bw, col.h, [[R.keep, P.cyan], [R.tAB, P.magenta, 0.95], [R.tAC, P.magenta, 0.5], [R.t3, P.violet, 0.9]], { marks: [[1, P.ink, false]] });
       st.tag('l0', [col.xs[0] + col.bw / 2, col.top + col.h + 16], L('总额 1', 'total 1'), 'num', { screen: true });
       const mid = (lo, v, key, html, cls) => { if (v > 0.06) st.tag(key, [col.xs[0] - 10, col.top + col.h - (lo + v / 2) * col.h], html, 'num ' + cls, { screen: true, dx: -26 }); };
-      mid(0, R.keep, 'l1', '‖r_A‖²', 'c-cy'); mid(R.keep, R.tAB, 'l2', 'τ_AB', 'c-mg'); mid(R.keep + R.tAB, R.tAC, 'l3', 'τ_AC', 'c-mg'); mid(R.keep + R.tAB + R.tAC, R.t3, 'l4', 'τ₃', 'c-vi');
+      mid(0, R.keep, 'l1', '‖r<sub>A</sub>‖²', 'c-cy'); mid(R.keep, R.tAB, 'l2', 'τ<sub>AB</sub>', 'c-mg'); mid(R.keep + R.tAB, R.tAC, 'l3', 'τ<sub>AC</sub>', 'c-mg'); mid(R.keep + R.tAB + R.tAC, R.t3, 'l4', 'τ₃', 'c-vi');
     }
     $('hudBig').textContent = L(`总额 ${fix(R.total, 3)}`, `TOTAL ${fix(R.total, 3)}`);
-    $('hudSub').textContent = L('‖r_A‖² + τ_AB + τ_AC + τ₃，态 ', '‖r_A‖² + τ_AB + τ_AC + τ₃ for ') + `${fix(R.a, 3)}|000⟩ + ${fix(R.b, 3)}|110⟩ + ${fix(R.c, 3)}|101⟩ + ${fix(R.g, 3)}|111⟩`;
+    $('hudSub').innerHTML = L('‖r<sub>A</sub>‖² + τ<sub>AB</sub> + τ<sub>AC</sub> + τ₃，态 ', '‖r<sub>A</sub>‖² + τ<sub>AB</sub> + τ<sub>AC</sub> + τ₃ for ') + `${fix(R.a, 3)}|000⟩ + ${fix(R.b, 3)}|110⟩ + ${fix(R.c, 3)}|101⟩ + ${fix(R.g, 3)}|111⟩`;
   }
 
   function drawCopies(st, c) {
@@ -336,8 +342,8 @@
       const cap = R.tABC; if (cap < 0.999) g2.line([[cap, 0], [0, cap]], P.ink, { dash: [4, 3] });
       const path = []; for (let i = 0; i <= 120; i++) { const r = bondsRead(3 * i / 120); path.push([r.tAB, r.tAC]); }
       g2.line(path, P.dim, { width: 1, dash: [2, 3] }); g2.dot(R.tAB, R.tAC, P.amber, 5, { glow: 8 });
-      g2.text(1.06, 0, 'τ_AB', P.magenta, { align: 'right', base: 'bottom', dy: -3 }); g2.text(0, 1.06, 'τ_AC', P.magenta, { dx: 5, base: 'top' });
-      $('pBTitle').textContent = L('两份二体纠缠不出这条线', 'The two pairwise bonds stay below the line'); $('pBMeta').textContent = 'τ_AB + τ_AC ≤ 4 det ρ_A';
+      subText(g2, 1.06, 0, 'AB', P.magenta, { align: 'right', base: 'bottom', dy: -3 }); subText(g2, 0, 1.06, 'AC', P.magenta, { dx: 5, base: 'top' });
+      $('pBTitle').textContent = L('两份二体纠缠不出这条线', 'The two pairwise bonds stay below the line'); $('pBMeta').innerHTML = 'τ<sub>AB</sub> + τ<sub>AC</sub> ≤ 4 det ρ<sub>A</sub>';
     } else if (S.scene === 'copies') {
       const M = copiesM(), g = kit.plot(A, { x: [0.5, MMAX + 0.5], y: [0.5, 1.04], pad: [34, 10, 10, 22] });
       g.axes({ yTicks: [[0.5, '0.5'], [2 / 3, '2/3'], [1, '1']], xTicks: [1, 2, 4, 6, 8, 10, 12] });
@@ -374,14 +380,14 @@
 
   /* ---------- readouts ---------- */
   function drawText() {
-    const set = (i, lab, val, cls) => { $(`roL${i}`).textContent = lab; $(`ro${i}`).innerHTML = val; $(`ro${i}`).parentElement.className = cls || ''; };
+    const set = (i, lab, val, cls) => { $(`roL${i}`).innerHTML = lab; $(`ro${i}`).innerHTML = val; $(`ro${i}`).parentElement.className = cls || ''; };
     let what = '', key = '';
     if (S.scene === 'seat') {
       const R = seatRead();
       $('roKeyL').textContent = L('拿 ψ 量 φ · 拿 φ 量 ψ', 'φ measured with ψ · ψ measured with φ');
       $('roKey').innerHTML = `<span class="c-cy">${fix(R.wPsiPhi, 4)}</span> = <span class="c-cy">${fix(R.wPhiPsi, 4)}</span> <span class="okmark">✓</span>`; $('roKeySub').textContent = '|⟨φ|ψ⟩|² = |⟨ψ|φ⟩|²';
       set(1, L('球冠里的点', 'points in the cap'), `${fix(100 * R.share, 1)}%`, 'c'); set(2, L('应占 (1 − cos α)/2', 'expected (1 − cos α)/2'), `${fix(100 * R.theory, 1)}%`);
-      set(3, L('质心离球心', 'centroid from centre'), fix(R.cen, 3)); set(4, L('(1 + r_ψ·r_φ)/2', '(1 + r_ψ·r_φ)/2'), fix(R.wBloch, 4));
+      set(3, L('质心离球心', 'centroid from centre'), fix(R.cen, 3)); set(4, L('(1 + r<sub>ψ</sub>·r<sub>φ</sub>)/2', '(1 + r<sub>ψ</sub>·r<sub>φ</sub>)/2'), fix(R.wBloch, 4));
       $('roNote').textContent = L('换一根轴、换一对态：两根柱子永远一样高，球冠永远分到同样的份额。', 'Another axis, another pair of states: the two bars are always equally tall and the cap always gets the same share.');
       what = `N = ${R.n}`; key = `${fix(R.wPsiPhi, 3)} = ${fix(R.wPhiPsi, 3)}`;
     } else if (S.scene === 'gain') {
@@ -396,8 +402,8 @@
     } else if (S.scene === 'bonds') {
       const R = bondsRead();
       $('roKeyL').textContent = L('A 留下的 + 三份纠缠', 'what A keeps + three tangles');
-      $('roKey').innerHTML = `<span class="c-cy">${fix(R.keep, 3)}</span> + <span class="c-mg">${fix(R.tAB, 3)}</span> + <span class="c-mg">${fix(R.tAC, 3)}</span> + <span class="c-vi">${fix(R.t3, 3)}</span> = ${fix(R.total, 3)} <span class="okmark">✓</span>`; $('roKeySub').textContent = '‖r_A‖² + τ_AB + τ_AC + τ₃';
-      set(1, 'τ_AB = 4a²b²', fix(R.tAB, 4), 'm'); set(2, 'τ_AC = 4a²c²', fix(R.tAC, 4), 'm'); set(3, 'τ₃ = 4a²g²', fix(R.t3, 4)); set(4, 'τ_A(BC) = 4 det ρ_A', fix(R.tABC, 4));
+      $('roKey').innerHTML = `<span class="c-cy">${fix(R.keep, 3)}</span> + <span class="c-mg">${fix(R.tAB, 3)}</span> + <span class="c-mg">${fix(R.tAC, 3)}</span> + <span class="c-vi">${fix(R.t3, 3)}</span> = ${fix(R.total, 3)} <span class="okmark">✓</span>`; $('roKeySub').innerHTML = '‖r<sub>A</sub>‖² + τ<sub>AB</sub> + τ<sub>AC</sub> + τ₃';
+      set(1, 'τ<sub>AB</sub> = 4a²b²', fix(R.tAB, 4), 'm'); set(2, 'τ<sub>AC</sub> = 4a²c²', fix(R.tAC, 4), 'm'); set(3, 'τ₃ = 4a²g²', fix(R.t3, 4)); set(4, 'τ<sub>A(BC)</sub> = 4 det ρ<sub>A</sub>', fix(R.tABC, 4));
       $('roNote').textContent = R.keep > 0.999 ? L('直积态：A 留着整支箭头，谁也没分到。', 'A product state: A keeps its whole arrow and shares nothing.')
         : R.tAB > 0.999 ? L('贝尔态：全部预算给了 B，A 的箭头缩回球心，C 分不到。', 'The Bell state: the whole budget goes to B; A\'s arrow shrinks to the centre and C gets nothing.')
           : R.t3 > 0.999 ? L('GHZ 态：两两之间一点也没有，全部交给三方共有。', 'The GHZ state: nothing between any two, everything held by all three.')
@@ -473,9 +479,9 @@
     ergodic: { scene: 'ergodic', at: 0, play: true, still: 233 }
   };
   const NOTES = {
-    haar: ['球面上均匀地撒点：琥珀色轴周围半角 60° 的球冠里总是约四分之一的点，把轴拖到哪里都一样。两根青色的影子一样长：拿 ψ 量 φ 与拿 φ 量 ψ，照见的一样多。', 'Points thrown uniformly on the sphere: the 60° cap around the amber axis always holds about a quarter of them, wherever you drag the axis. The two cyan shadows are equally long: measuring φ with ψ and ψ with φ see exactly as much.'],
+    haar: ['球面上均匀地撒点：琥珀色轴周围半角 60° 的球冠里总是约四分之一的点，把轴拖到哪里都一样。两根青色的影子一样长：拿 ψ 量 φ 与拿 φ 量 ψ，照见的一样多。均匀撒点用的是球面上的均匀测度（哈尔测度），文献结果，未在本书形式化。', 'Points thrown uniformly on the sphere: the 60° cap around the amber axis always holds about a quarter of them, wherever you drag the axis. The two cyan shadows are equally long: measuring φ with ψ and ψ with φ see exactly as much. The points are thrown with the uniform (Haar) measure on the sphere, a literature result not formalized in this book.'],
     tradeoff: ['箭头从测量轴转向赤道：青色的线 D 变短，品红的面积 V 变大，D² + V² 始终是 1。线多一分，面积就少一分。', 'The arrow turns from the measurement axis to the equator: the cyan line D shrinks, the magenta area V grows, and D² + V² stays 1. More line means less area.'],
-    cloning: ['把同一个未知态复制成 M 份：每份的箭头（青色）越来越短，品红是丢掉的部分；保真度从 1 降向 2/3。只有两极这一对正交态能被照抄。', 'Copy one unknown state into M copies: each copy\'s arrow (cyan) gets shorter, the magenta part is what is lost, and the fidelity falls from 1 towards 2/3. Only the orthogonal pair at the poles can be copied exactly.'],
+    cloning: ['把同一个未知态复制成 M 份：每份的箭头（青色）越来越短，品红是丢掉的部分；保真度从 1 降向 2/3（通用对称克隆机，文献结果）。这台机器对每个态一视同仁，两极的态也一样变短。两极的空心圈标的是另一件事：一台机器若能把两个态都照抄，它们的内积只能是 0 或 1，所以像 |0⟩、|1⟩ 这样的一对正交态可以由另一台专为它们造的机器照抄。', 'Copy one unknown state into M copies: each copy\'s arrow (cyan) gets shorter, the magenta part is what is lost, and the fidelity falls from 1 towards 2/3 (the universal symmetric cloner, a literature result). This machine treats every state alike, the poles included. The hollow rings at the poles mark something else: if one machine copies two states exactly, their inner product can only be 0 or 1, so an orthogonal pair such as |0⟩, |1⟩ can be copied exactly by a different machine built for that pair.'],
     bell: ['贝尔态 (|00⟩ + |11⟩)/√2 ⊗ |0⟩：A 与 B 之间的品红纽带满额，A 的箭头缩回球心（½I），与 C 之间一点也没有。', 'The Bell state (|00⟩ + |11⟩)/√2 ⊗ |0⟩: the magenta bond between A and B is full, A\'s arrow shrinks to the centre (½I), and nothing is left for C.'],
     wstate: ['W 型态 (|000⟩ + |110⟩ + |101⟩)/√3：A 的箭头剩下 1/3，长度² 1/9；两条品红纽带各 4/9，加起来 8/9，三体为零。', 'The W-type state (|000⟩ + |110⟩ + |101⟩)/√3: A\'s arrow keeps 1/3, squared 1/9; the two magenta bonds take 4/9 each, 8/9 together, and the three-way part is zero.'],
     ghz: ['从 W 型态走到 GHZ 态 (|000⟩ + |111⟩)/√2：两条纽带断开，紫色的三方面撑满，A 的箭头缩回球心。总额一直是 1。', 'From the W-type state to the GHZ state (|000⟩ + |111⟩)/√2: both pairwise bonds break, the violet three-way face fills up and A\'s arrow shrinks to the centre. The total stays 1.'],

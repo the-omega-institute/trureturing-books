@@ -94,7 +94,7 @@ External continuum geometric-algebra, real-analytic fixed-point, and polyhedral 
 :::
 
 ::: {.viz src="unified-field-slice" preset="fixedpoint" height="500"}
-**The one angle whose arc equals its shadow.** The amber point on the circle stops at θ* ≈ 0.739: the violet arc length θ is exactly as long as the cyan shadow cos θ, and the magenta height sin θ* ≈ 0.674 is the local contraction rate of item 2 in the box above.
+**The one angle whose arc equals its shadow.** The amber point on the circle stops at θ* ≈ 0.739: the violet arc length θ is exactly as long as the cyan shadow cos θ, and the magenta height sin θ* ≈ 0.674 is the local contraction rate of item 2 in the box above, not a speed here; the light line and the hyperbola behind it belong to the Clock scene that shares this stage.
 :::
 
 Crucially, this unified-field interpretive architecture (`MODEL`) maintains an explicit boundary and pairing between machine-checked anchors and attributed literature notes: at the **formal axiomatic layer**, every discrete-automaton, fixed-point, and linear-algebraic backbone is checked with `0 sorry` by the Lean 4 kernel ([Appendix C](appendix-c.md)), while companion algebraic-encoding literature notes and executable reference scripts are archived in [Chapter 25](ch25-rewriting-and-xor.md) ([@rem-clifford-stabilizer-literature]) and [Appendix B](appendix-b.md).

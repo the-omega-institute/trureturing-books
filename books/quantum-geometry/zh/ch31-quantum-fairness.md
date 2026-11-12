@@ -34,7 +34,7 @@
 - **丈量互易（平视的对等性）**：在“两子丈量”中，拿纯态矢 $\psi$ 作尺子去比量 $\phi$ 所得的秩一玻恩跃迁权重 $\|\phi^* \bullet_v \psi\|^2$（下方 [@thm-ch31-seat-pythagorean-monogamy-fairness] 第 1 款），由复内积共轭对称性恒等于反过来拿 $\phi$ 作尺子去比量 $\psi$ 所得的权重 $\|\psi^* \bullet_v \phi\|^2 = |\langle\phi, \psi\rangle|^2 = |\langle\psi, \phi\rangle|^2$。宇宙底层不存在单向的窥探或居高临下的审判——**你照见别人几分，别人就同时照见你几分**。
 
 ::: {.viz src="quantum-fairness-ledger" preset="haar" height="500"}
-**没有北极。** 球面上均匀撒点，琥珀色参考轴周围半角 $60^\circ$ 的球冠里约占四分之一，把轴拖到哪里都一样；两根青色的影子一样长：拿 $\psi$ 量 $\phi$ 与拿 $\phi$ 量 $\psi$ 的权重相等（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 1 款）。
+**没有北极。** 球面上均匀撒点（均匀测度即哈尔测度，文献结果，未在本书形式化），琥珀色参考轴周围半角 $60^\circ$ 的球冠里约占四分之一，把轴拖到哪里都一样；两根青色的影子一样长：拿 $\psi$ 量 $\phi$ 与拿 $\phi$ 量 $\psi$ 的权重相等（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 1 款）。
 :::
 
 紧接着，世间第二大贪婪是“既要绝对的确定，又要无限的自由”。用信息预算账本的比喻来说：虽然归一化态矢模长平方 $\|\psi\|^2 = 1$，但在无偏参照态 $|d|^{-1}I_d$ 之上，当中心化状态算子满足纯度恒等式 $\|\mathrm{state}\|^2 = \operatorname{Re}\operatorname{Tr}(\rho^2) - |d|^{-1}$ 时（一般密度算子的谱纯度上下界见下方 [@rem-ch31-haar-isotropy-landauer-literature]），真正可供分配的区分信息就是这笔**中心化纯度预算** $\|\mathrm{state}\|^2$。**互补语境纯度勾股守恒**（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 2 款）给万物立下了铁面无私的**零免费午餐账本**——在其正交坐标分解假设下，可见测量子空间提取的确定性偏差平方和 $\|\mathrm{visible.starProjection}(\mathrm{state})\|^2$，加上正交补子空间保留的未决残余质量 $\operatorname{residualMass}(\mathrm{visible}, \mathrm{state})$，总和恒等于中心化纯度预算 $\|\mathrm{state}\|^2$：
@@ -74,7 +74,7 @@
 1. **不可克隆内积判据**（[`no_cloning_inner_product_criterion`](lean:D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion)）：若同一个复线性等距算子 $U$ 能把两个归一化纯态 $\psi, \phi$ 同时从空白辅助态 $\mathrm{blank}$ 克隆为 $\psi\otimes\psi$ 与 $\phi\otimes\phi$，则它们的内积被迫满足幂等方程 $\langle\phi, \psi\rangle = \langle\phi, \psi\rangle^2$——从而要么 $\phi = \psi$（根本是同一个态），要么 $\langle\phi, \psi\rangle = 0$（彼此严格正交的经典可区分刻度）！任何处于非正交叠加张力中的未知状态，都绝无可能被通用机器盲目复印。
 
 ::: {.viz src="quantum-fairness-ledger" preset="cloning" height="500"}
-**副本越多，每份越短。** 一个未知态复制成 $M$ 份时，每份的青色箭头只剩 $\eta = (M+2)/(3M)$，品红是丢掉的部分，保真度降向 $2/3$（文献结果，未在本书形式化）；只有两极这一对正交态能被同一台机器照抄（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 3 款）。
+**副本越多，每份越短。** 一个未知态复制成 $M$ 份时，每份的青色箭头只剩 $\eta = (M+2)/(3M)$，品红是丢掉的部分，保真度降向 $2/3$（通用对称克隆机，文献结果，未在本书形式化）。这台机器对每个态一视同仁，两极的态也一样变短。两极的空心圈标的是另一件事：一台机器若能把两个态都照抄，它们的内积只能是 $0$ 或 $1$（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 3 款），所以像 $\lvert 0\rangle$、$\lvert 1\rangle$ 这样的一对正交态可以由另一台专为它们造的机器照抄。
 :::
 
 2. **贝尔纯态边缘最大混态定理**（[`bell_pure_state_has_maximally_mixed_marginal`](lean:D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal)）：当双量子比特结成秩一贝尔最大纠缠纯态 `bellDensity` 时，追踪掉伙伴环境所得的单体约化态 `traceEnvironment bellDensity` 精确等于 $\frac{1}{2}I_2$（且不幂等）——局部布洛赫偏置彻底退回球心零点，一分一毫的局部纯度偏私都不再私藏，全部关联都交给了跨子系统的共享平面！
