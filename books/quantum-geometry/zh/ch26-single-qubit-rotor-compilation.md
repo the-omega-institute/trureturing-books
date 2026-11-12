@@ -19,7 +19,7 @@
 
 ## 布洛赫矩阵的迹与坐标还原 {#sec-bloch-matrix-trace-and-recovery}
 
-在 Lean 4 模块 `D5/S3/Quantum/Information/ActualPureQubitGeometry.lean`（命名空间为 `D5.S3.Quantum.Information.ActualPureQubitCostInfimum`）中，为了建立任意 $2\times 2$ 复矩阵 $M \in M_2(\mathbb{C})$ 与三维欧氏空间 $\operatorname{EuclideanSpace}\,\mathbb{R}\,(\operatorname{Fin} 3)$ 之间的精确双向映射，源码首先给出了两个核心定义：
+在 Lean 4 模块 `D5/S3/Quantum/Information/ActualPureQubitGeometry.lean`（命名空间为 `D5.S3.Quantum.Information.ActualPureQubitCostInfimum`）中，为了建立 $2\times 2$ 厄米矩阵 $M \in M_2(\mathbb{C})$ 与“实迹 $\operatorname{Re}(\Tr M)$、三维实布洛赫向量 $\operatorname{bloch}(M) \in \operatorname{EuclideanSpace}\,\mathbb{R}\,(\operatorname{Fin} 3)$”这一对数据之间的精确双向映射，源码首先给出了两个核心定义：
 
 1. **布洛赫向量提取映射 `bloch`**：对任意 $M \in M_2(\mathbb{C})$，提取其实布洛赫三维坐标向量
    $$
@@ -181,6 +181,8 @@ $$
 :::
 
 ## ZYZ 旋转器编译器 Python 3 实现与数值核验 {#sec-zyz-rotor-compiler-python}
+
+这里沿用前章引擎的实系数范围：编译得到实偶旋转器，单位条件使 `reverse()` 可作逆元，`norm_squared()` 也在这一范围内核验归一化。
 
 下面是紧接在 `GeometricState` 之后的完整 Python 3 `RotorCompiler` 实现与自检函数（取自 `part7_engine.py` 的后半部分）：
 
@@ -367,11 +369,11 @@ self_test()
    $$
    R(0.37, -0.81, 0.52) \approx 0.829592 - 0.395635\,e_1 e_2 - 0.392911\,e_1 e_3 + 0.029524\,e_2 e_3.
    $$
-   在未截断的双精度浮点对象 `rotor` 上直接调用 `rotor.norm_squared()`（即 `(R * R.reverse()).scalar_part().real`），返回值在机器精度下精确为 `1.000000000000`；若用上方保留 6 位小数的展示系数手算平方和，亦满足
+   在未截断的双精度浮点对象 `rotor` 上直接调用 `rotor.norm_squared()`（即 `(R * R.reverse()).scalar_part().real`），返回值四舍五入到小数点后十二位显示为 `1.000000000000`；若用上方保留 6 位小数的展示系数手算平方和，亦满足
    $$
    0.829592^2 + (-0.395635)^2 + (-0.392911)^2 + 0.029524^2 \approx 1.000001 \approx 1.
    $$
-   将 $R$ 通过夹心积 `apply(R, e_k)` 作用在三根基向量 $e_1, e_2, e_3$ 上，得到的三个输出向量恰与正交矩阵 `zyz_matrix(0.37, -0.81, 0.52)` 的三列完全重合：
+   将 $R$ 通过夹心积 `apply(R, e_k)` 作用在三根基向量 $e_1, e_2, e_3$ 上，得到的三个输出向量在机器精度内与正交矩阵 `zyz_matrix(0.37, -0.81, 0.52)` 的三列重合：
    $$
    M_{\mathrm{ZYZ}}(0.37, -0.81, 0.52) \approx \begin{pmatrix}
    0.378188 & -0.633230 & -0.675273 \\
@@ -387,7 +389,7 @@ self_test()
    $$
    R_H = -\frac{1}{\sqrt{2}}\,e_1 e_2 - \frac{1}{\sqrt{2}}\,e_2 e_3 \approx -0.707107\,e_1 e_2 - 0.707107\,e_2 e_3,
    $$
-   直接执行夹心积检验得 $R_H e_1 \widetilde{R}_H = e_3$、$R_H e_2 \widetilde{R}_H = -e_2$、$R_H e_3 \widetilde{R}_H = e_1$，分毫不差！
+   直接执行夹心积，在机器精度内检验得 $R_H e_1 \widetilde{R}_H = e_3$、$R_H e_2 \widetilde{R}_H = -e_2$、$R_H e_3 \widetilde{R}_H = e_1$，分毫不差！
 :::
 
 ::: {.viz src="zyz-compile" preset="h" height="500"}
