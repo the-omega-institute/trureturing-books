@@ -324,7 +324,11 @@
           "href": "{trureturing}/D5/S3/Observer/Conditioning.lean"
         }
       ],
-      "lean": []
+      "lean": [
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        }
+      ]
     },
     {
       "id": "navier-stokes-p-np",
