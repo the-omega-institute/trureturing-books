@@ -1346,3 +1346,17 @@ EPUB、EPUBCheck 与 PDF 阅读尺度子集未完成：本次可用的命名系�
 限制仍保留：本机 PDF 使用现有系统回退字体，不等同 CI 字体；只检查受影响页面，未做整书字形批准。EPUB 390px 浏览器预览的第 32 章中／英整页横溢为 295／225px，第 33 章为 539／442px，新完整 GID 也局部超宽；诊断中暂换回旧显示名不改变第 32 章整页溢出量。深色偏好下 EPUB 背景仍透明，不冒称原生 Apple Books／设备夜间验收。手机 APART 嵌入标签与读数仍拥挤，本批不改共享布局。站点十段影片均为实际海报回退，未验完整影片、音频或整套幻灯片；站点自动生成的双语 48 页文稿只算构建产物。检查辅助脚本的选择器／路径假设失败保留于证据，不当作产品缺陷或通过证据。
 
 本 bounded assignment 总 1／已用 1／剩余 0，含调用方仍须组织的首次 mandatory initial R1；旧额度不重置，最终整书输出保留 1 未用。本次仅交接未暂存的八项修订与生成消费者，不批准整章／整书；候选封存、initial R1、commit／PR／CI／merge／Pages 均由调用方继续。
+
+## 2026-11-13：声明地图在当前主线的生成数据与静帧补完（PR211，待独立审查）
+
+输入 `2b128ac1652ed9fec93b8b73e0bb5d5f72621578`／tree `eadc1dd2f69b714340546b7cf55cc26571c82288`；1968 条追踪源与输入清单逐字节相符。pin `9b6270e9795ed74542ab38e06a271f706174239c/dev`、486 条声明、44 个 SUMMARY 单元、11 部，均以当前锁文件与中文章节为准；旧 483 条输出只作历史，不复制。
+
+只走受支持的生成路径：`gen-data.py` 退出 0，报告 486 条（定理 338／定义 139／归纳类型 9；环境引用 350、仅行内 136；486 条带附录 C 编号）。与输入相比只有两行引用清单变化，声明顺序、首次落章、单元、部与索引位置不变，生成块外的 `main.js` 字节不变：T127 `GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq` 现为第 10 章环境、第 27／32 章行内、附录 C 行内；T188 `UnitGramIndistinguishability.unit_gram_overlap_characterization` 现为第 10 章环境、第 29 章环境、附录 A／C 行内，不再含第 32 章。后者源于输入提交把第 32 章中英第 393 行的完整复 Gram 重构引用由 UnitGram 改为 GramUnitaryExtension；交接说明中“UnitGram 保留第 32 章行内引用”与当前章节不符，故未手改生成数据，按当前源码生成的结果为准，由下述独立测试复核。
+
+`viz-thumbs.mjs quantum-geometry lean-declaration-map` 退出 0，重出原有 14 张卡图与封面，文件名集合不变；已目视核对全书卡图显示 486/486 与封面。声明地图浏览器测试普通模式 128/128、`VIZ_SLOW_FRAMES=1000` 128/128，退出码均为 0；测试以独立扫描逐格核对引用章节，未改测试。运行时为临时链接到本机主仓库已安装的 `node_modules`（与 `package-lock.json` 版本及 integrity 一致，仅缺其他平台的可选二进制），完成后已移除；未安装依赖。
+
+本次未运行 `./tbook check`、整书 HTML／PDF／EPUB 构建或新的准确性审查，不改章节、锁文件、生成器、测试或工具；不作地图之外的验收、整章或整书批准。改动保持未暂存，独立审查、commit／PR／CI、合入与 Pages 由调用方继续办理。
+
+边界与待办（当前候选）：候选仍是未提交的 `2b128ac1652ed9fec93b8b73e0bb5d5f72621578`／tree `eadc1dd2f69b714340546b7cf55cc26571c82288`，权威 pin 为 `9b6270e9795ed74542ab38e06a271f706174239c`／`dev`。当前 486 条声明、44 个单元、11 部的独立中文引用矩阵已与生成数据逐行相等；T127 含 `ch32` 行内引用，UnitGram 的当前行不含 `ch32`；`TwoAnchorGram.twoAnchorGram`、`two_anchor_gram_det_formula`、`two_anchor_gram_det_pos_iff` 三条新声明均保留。历史 483 条地图／静帧及其输出不替代本 486 候选；当前 15 张静帧、HTML/site、六份 PDF 与两份 EPUB 的身份见私有实现证据，不能外推为整书准确性批准。
+
+本候选仍待调用方完成 mandatory FIRST R1、当前候选 CI、Git add/commit/push、PR 审查与合入、Pages 核对；本次不执行 Git/GitHub 生命周期。既有 9 条 check 警告、PDF 回退字体、EPUB 窄屏溢出／深色宿主、实验室手机拥挤、影片海报／整片音频、原生 Apple Books 及完整媒体限制继续有效，不因本批地图输出而关闭。
