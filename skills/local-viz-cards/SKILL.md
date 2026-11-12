@@ -21,7 +21,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 ## 页面与它们的卡
 
-本书有 48 个交互页面，下表按登记表（`books/quantum-geometry/viz/visualizations.json`）的顺序排列。
+本书有 49 个交互页面，下表按登记表（`books/quantum-geometry/viz/visualizations.json`）的顺序排列。
 
 | 页面 | 一句话 | 卡（`preset`） |
 | --- | --- | --- |
@@ -73,6 +73,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `dream-decoherence-unpinning` | 锚点剪掉位置之间的相干，各处的权重一格不动；放松锚点，或把每一份记录都逆转，条纹就回来——记录把两条路完全分开时回不来 | `waking` `blocks` `half_erase` `zero_overlap_fail` `quantum_eraser` `unpin_body` `wake_snap` |
 | `meta-unification-compass` | 八家统一纲领在三根轴上各偏一侧；120 个转动加上它们的黄金缩小版，恰是 E₈ 的 240 个根，Q 全都等于 2 | `cube` `camps` `crystal` `icosians` `e8` `fold` |
 | `hairy-ball-normal-escape` | 球面上贴着的箭头总留一个发旋：两个能合成一个，却消不掉；换成环面，或让箭头沿法向立起一点，才处处不为零 | `merge` `torus` `defect` `escape` |
+| `dottie-fibonacci-spirals` | 负导数把一维递推拧成北东南西的回旋方格；弯曲圆弧把加法守恒换成勾股守恒 | `twin` `whirl` `pythagoras` `tilt` `zoom` `division` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -159,6 +160,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `meta-unification-compass` 只覆盖第三十二章下半篇（§32.3–32.4）。两个场景共用一条时间轴：“罗盘”是立方体 [0, 1]³，三根轴照 §32.3 的定义（θ 阶数：青色的“线”一端到品红的“面积”一端；η 分辨率：光滑到多面体；λ 观察者：球外 C 到场内），八家纲领按 §32.4 总表原话落在每根轴的三段之一（点明哪一端就落在那一端，没点明或两端都有落在中段，同格的在中段里错开），整只立方体与“本书的位置”都标 `MODEL`，页面写明不是测量、不是对学科的评判、本书没有形式化地取代哪一家；时间轴逐个读四大阵营，琥珀色只给正在读的那一对与选中的一家。“黄金桥”在 ℤ[φ] 里精确算 2I 的 120 个元素（去掉实部投到三维，青色）与 φ⁻¹·2I（品红），Q(q) = 2(a + b) = 2 的 240 个根、两两 B ∈ {−2…2}、56 个邻居、𝓘 的格拉姆行列式 1，纯虚的 60 个按带权坐标 (√(2φ/√5) q, √(2φ⁻¹/√5) q^σ) 从 E∥ 转到 E⊥；琥珀色只给选中的元素。纯虚子模配上 Q 的格拉姆行列式是 4（D₆ 格），页面照实写，不称它为带标准内积的 ℤ⁶。绿色框只给本章 `lean=` 引用的 `golden_fixed_point_unique`（页面坐标里的 φ）；2I、(𝓘, Q) ≅ E₈ 与准晶切投母格标 `ARGUED`，ℤ[φ] 里的核对标 `NUM`。路线图候选 `strings_lqg`、`holography_twistor`、`ncg_langlands` 合为一张 `camps`：§32.4 只有一处可引用，且正文把非对易几何与 Wolfram 超图配成一个阵营、朗兰兹与熵引力配成一个阵营。
 
 `hairy-ball-normal-escape` 与 `berry-loop` · `comb`、`unified-field-slice` · `polytope` 及静态图 `ch21-angle-defect`、`coda-defect-spread` 分工：`comb` 已画“两极各一个 +1 的梳不平的场”，本页只把纬向场 (−y, x, 0) 当起点（`merge` 的起始状态，时间轴拨回起点即是），讲 `comb` 没有的四件事：两个 +1 推成偶极切场 w = (((1 − z)² − x² + y²)/2, −xy, x(1 − z)) 的一个 +2（`merge`，中间那一族是立体投影拉回的 e^{iψ}(a − u)/(1 + a)，为画面选定，标 `MODEL`）、环面 ê_φ 处处长 1（`torus`）、测地穹顶 ν = 1…6 的顶点角亏之和恒为 4π（`defect`，`ch21-angle-defect` 只画 ν = 1，`coda-defect-spread` 用横条画同一组数，故本卡只在第二十一章引用、不放进终章）、法向抬升 w̃_λ = (1 − λ)w + λ(1 + z)/2·x（`escape` 停在 λ = ½；把时间轴拨到 λ = 1，南极又成零点，页面如实画出并在抽屉里写明）。这一页品红是零点（发旋）、绕零点的小圈、角亏圆点与沿法向立起的部分；青色是切向箭头与平的三角面；琥珀只给可拖动的零点、环面上当前的点与北极处的箭头；灰色是北极的切平面。绿色框只给第二十一章用 `lean=` 引用的 `complete_diagonal_not_continuous`，页面写明它讲的是对角线在划分拓扑下不连续、与毛球定理不是同一条陈述；路线图候选 `no_continuous_global_section` 只在第五、三十九章引用，未标绿。庞加莱—霍普夫、毛球定理与笛卡尔定理标 `ARGUED`，指标、角亏与最短箭头的长度标 `NUM`。
+
+`dottie-fibonacci-spirals` 与 `fixed-point-convergence` 分工：后一页讲渐近压缩率、牛顿切线加速与有理刻度裂缝，本页讲第二十四章 §24.5 末与第三十二章 §32.1 末的双螺旋结构对应：蛛网等臂回旋方格与分段 90° 圆弧导引线（x₀ < x* 时按北→东→南→西，x₀ > x* 时按南→西→北→东，每步走两臂转 180°）、右栏光滑等角对数螺旋模型（按同一步数指标 k 记 k×90°）、一维平直加法守恒 φ⁻¹ + φ⁻² = 1 对二维单位圆勾股守恒 (θ*)² + sin²θ* = 1，以及伯努利向心径向切角 α = arctan(1/b)（90.00° / 82.83° / 75.88° / 72.97°）。青色给 cos θ 曲线、θ* 正交螺旋（κ = sin θ* ≈ 0.6736）、共线分量 θ* 与静态不动点圆环，品红给 1/(1+x) 曲线、斐波那契黄金螺旋（κ = φ⁻¹ ≈ 0.6180）、正交分量 sin θ* 与内倾偏角 90° − α，紫色给蛛网双步螺旋（κ = √sin θ* ≈ 0.8207），琥珀只给当前步 k 的折步/方格、动态相位射线与步 k 读数点（恒定切角条保持各螺旋自身语义色并用墨色外圈标示当前选择）。绿色框只给五条冻结定理：`rational_inverse_endpoint`、`golden_inverse_branch_positive_fixed_point_iff`、`fib_cassini_from_golden_norm`、`golden_hurwitz_bound`、`square_eq_neg_one_of_skewAdjoint_unitary`；余弦全局收敛、严格交替与误差比极限 −sin θ*（第三十三章例 `ex-ch33-mutual-cosine-monotonic-lock` 的既有结果应用）以及黄金倒数负导数、等臂转向、守恒对偶与向心切角公式（文献结果）标 `ARGUED`；70 位定点整数实算的常数与 k = 0…20 共 21 步递推轨道（x₀…x₂₁ 与方格边长 s₀…s₂₀，独立测试用 90 位对照，极坐标螺旋与切角用双精度计算后按显示位数舍入）标 `NUM`；克利福德 −1 = Î² 双直角转向、离散等比收缩的连续对数螺旋插值与统一场横纵双螺旋分工标 `MODEL`。
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
@@ -341,6 +344,11 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十四章 | 文献注记 `rem-dottie-convergent-residual-literature` 之后“回到第一问的答案”一句之后、例 `ex-dottie-rate-newton-rational` 之前 | `fixed-point-convergence` · `circle` |
 | 第二十四章 | 例 `ex-dottie-rate-newton-rational` 之后、“最后一张表说明”一段之前 | `fixed-point-convergence` · `rational` |
 | 第二十四章 | “二十三等分的尺子……一千等分的尺子没有”一段之后、“有理读数永远对不准”之前 | `fixed-point-convergence` · `ruler`，随后完整实验室 |
+| 第二十四章 | §24.5 双螺旋对应小节 · 等臂转向一段之后、文献注记 `rem-dottie-fibonacci-spiral-literature` 之前 | `dottie-fibonacci-spirals` · `whirl` |
+| 第二十四章 | §24.5 双螺旋对应小节 · 一维加法与二维勾股守恒对偶一段之后 | `dottie-fibonacci-spirals` · `pythagoras` |
+| 第二十四章 | §24.5 双螺旋对应小节 · 向心径向切角 α 一段之后 | `dottie-fibonacci-spirals` · `tilt` |
+| 第二十四章 | §24.5 双螺旋对应小节 · 渐近自相似放大一段之后 | `dottie-fibonacci-spirals` · `zoom` |
+| 第二十四章 | §24.5 末（转入 §24.6 之前） | `dottie-fibonacci-spirals` · `twin`，随后完整实验室 |
 | 第二十五章 | §三比特刀片掩码一节的掩码表之后、“在这套 3 比特编码下”之前 | `blade-multiplication` · `square` |
 | 第二十五章 | 两条位运算定律的列表之后、“请特别注意”之前 | `blade-multiplication` · `e1e2`、`e2e1` |
 | 第二十五章 | “请特别注意”下第一条（伪标量 $I_3$）之后、第二条（两比特辛泡利字）之前 | `blade-multiplication` · `pseudo` |
@@ -399,6 +407,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十一章 | “看清了这一长程图景”一段之后、五重公平总表之前 | `quantum-fairness-ledger` 完整实验室 |
 | 第三十二章 | §32.1 三条创生律列表之后、定理 `thm-ch32-generative-self-reference-and-zeckendorf` 引言之前 | `unified-field-slice` · `polytope` |
 | 第三十二章 | 文献注记 `rem-ch32-generative-laws-dottie-literature` 之后 | `unified-field-slice` · `fixedpoint` |
+| 第三十二章 | §32.1 末（统一场横纵双螺旋分工列表之后、转入 §32.2 之前） | `dottie-fibonacci-spirals` · `division` |
 | 第三十二章 | §32.2 列表第 1 条（物质旋量与狭义相对论）之后、第 2 条之前 | `unified-field-slice` · `photon` |
 | 第三十二章 | §32.2 列表第 2 条（规范相互作用与环路残差）之后、第 3 条之前 | `unified-field-slice` · `plaquette` |
 | 第三十二章 | §32.2 列表第 3 条（全息热力学引力与视界）之后、第 4 条之前 | `unified-field-slice` · `horizon` |
