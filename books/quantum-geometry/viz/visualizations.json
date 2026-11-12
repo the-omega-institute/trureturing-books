@@ -2376,6 +2376,9 @@
         },
         {
           "gid": "D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula"
+        },
+        {
+          "gid": "D5/S3/Quantum/Dynamics/ObserverPullbackTraceIdentity.observer_pullback_trace_identity"
         }
       ]
     },
