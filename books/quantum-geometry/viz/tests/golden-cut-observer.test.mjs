@@ -215,24 +215,61 @@ check('the share of the window at least d∂ deep is (1 − d∂/r)³ (Monte Car
 s = await seek(0); check('at the centre d∂ is the inradius', near(s.d, s.rin, 1e-12) && near(s.share, 0, 1e-12));
 s = await seek(1); check('at s = 1 the point is on the boundary: d∂ = 0', Math.abs(s.d) < 1e-9);
 s = await seek(1.1); check('beyond it the point is outside and the page says so', !s.inside && s.d < 0 && depthOf(s.p) < 0 && /窗外/.test(await page.textContent('#roKey')) && /不在窗口里/.test(await page.textContent('#hudSub')));
-await pick('edge'); s = await state();
-check('EDGE plays the point outwards from the centre', s.preset === 'edge' && (s.playing || s.s > 0)); s = await seek(0.93);
-check('at s = 0.93 the point is still inside, a short distance from the nearest face', s.inside && s.d > 0 && s.d < 0.12 * s.rin);
+await pick('window'); s = await state();
+check('the card EDGE is gone: WINDOW shows the deep point and, on the same ray, a point near the boundary', (await D(() => document.querySelectorAll('[data-preset="edge"]').length)) === 0 && s.preset === 'window' && near(s.s, 0.15) && s.edgePt && near(s.edgePt.s, 0.93));
+{ // the point near the boundary: on the ray of the deep point, inside, with d∂ ≈ 0.10 (recomputed here from the faces)
+  const e = s.edgePt, cross = [e.p[1] * s.p[2] - e.p[2] * s.p[1], e.p[2] * s.p[0] - e.p[0] * s.p[2], e.p[0] * s.p[1] - e.p[1] * s.p[0]];
+  check('WINDOW: the magenta point lies on the same ray, inside, d∂ ≈ 0.10 (computed here), far less than the deep point’s', Math.hypot(...cross) < 1e-9 && near(depthOf(e.p), e.d, 1e-9) && e.d > 0 && Math.abs(e.d - 0.10) < 0.006 && e.d < 0.12 * s.rin && depthOf(s.p) > 5 * e.d, JSON.stringify([e.d, depthOf(s.p)]));
+  check('WINDOW: the magenta point is labelled with its d∂ on the stage', await D(() => [...document.querySelectorAll('#stage .tag')].some((t) => !t.hidden && /d∂ ≈ 0\.10/.test(t.textContent))));
+}
+s = await seek(0.93); check('at s = 0.93 the point itself is still inside, a short distance from the nearest face, and the comparison point is no longer drawn', s.inside && s.d > 0 && s.d < 0.12 * s.rin && !s.edgePt);
+
+/* ---------- gaps on the circle ---------- */
+// the arcs between neighbours, found here by brute force: for each point the next one counterclockwise is the
+// other point at the least positive distance (mod 1); kinds are lengths within 1e-9
+const fr = (x) => x - Math.floor(x);
+function arcsBrute(a, N) {
+  const xs = []; for (let i = 0; i < N; i++) xs.push(fr(i * a));
+  const out = xs.map((x, i) => { let m = 1; xs.forEach((y, j) => { if (j !== i) { const d = fr(y - x); if (d > 0 && d < m) m = d; } }); return m; });
+  const ks = []; for (const g of out.slice().sort((p, q) => p - q)) { const l = ks[ks.length - 1]; if (l && g - l.len < 1e-9) l.n++; else ks.push({ len: g, n: 1 }); }
+  return ks;
+}
+await pick('gaps'); s = await state();
+const GA = 2 - PHI;
+check('GAPS: the golden angle 1/φ², N = 13, two kinds: 5 arcs of φ⁻⁶ and 8 of φ⁻⁵', s.preset === 'gaps' && s.scene === 'gaps' && s.N === 13 && near(s.a, GA, 1e-15) && s.kinds.length === 2 && near(s.kinds[0].len, PHI ** -6, 1e-12) && s.kinds[0].n === 5 && near(s.kinds[1].len, PHI ** -5, 1e-12) && s.kinds[1].n === 8, JSON.stringify(s.kinds));
+let arcOK = true, arcBad = '', twoKinds = [];
+for (let N = 2; N <= 400; N++) {
+  const q = await seek(N - 2), ks = arcsBrute(GA, N);
+  if (q.N !== N || q.kinds.length !== ks.length || !q.kinds.every((k, i) => near(k.len, ks[i].len, 1e-9) && k.n === ks[i].n)) { arcOK = false; arcBad = `N=${N}`; break; }
+  if (ks.length > 3 || (ks.length === 3 && !near(ks[2].len, ks[0].len + ks[1].len, 1e-9))) { arcOK = false; arcBad = `three-gap fails at N=${N}`; break; }
+  if (ks.length === 2) twoKinds.push(N);
+  if (N * ks[0].len <= 1 / Math.sqrt(5)) { arcOK = false; arcBad = `N·min ≤ 1/√5 at N=${N}`; break; }
+}
+check('GAPS: for every N from 2 to 400 the page’s kinds and counts agree with a brute-force search here, never more than three, the longest the sum of the other two, and N × the shortest arc above 1/√5', arcOK, arcBad);
+check('GAPS: two kinds exactly at the twelve Fibonacci numbers 2, 3, 5, …, 377', twoKinds.join() === '2,3,5,8,13,21,34,55,89,144,233,377', twoKinds.join());
+await pick('pi'); s = await state();
+{ const ks = arcsBrute(Math.PI - 3, 114);
+  check('PI: π − 3 at N = 114, at most three kinds, the shortest about 3.0 × 10⁻⁵ next to 0, the longest about 294 times it (computed here)', s.preset === 'pi' && s.N === 114 && near(s.a, Math.PI - 3, 1e-15) && s.kinds.length === ks.length && ks.length <= 3 && near(s.min, ks[0].len, 1e-12) && Math.abs(ks[0].len - 3.0e-5) < 0.05e-5 && Math.abs(ks[ks.length - 1].len / ks[0].len - 294) < 1 && near(1 - fr(113 * (Math.PI - 3)), ks[0].len, 1e-12), JSON.stringify(ks));
+  check('PI: N × the shortest arc is about 0.0034, printed above the figure next to 1/√5', Math.abs(114 * ks[0].len - 0.0034) < 0.0001 && (await page.textContent('#hudSub')).includes('1/√5') && (await page.textContent('#hudSub')).includes(`N × 最短 = ${(114 * ks[0].len).toFixed(4)}`), await page.textContent('#hudSub')); }
+await page.click('#rotChips [data-rot="golden"]'); s = await state();
+check('the rotation chips switch back to the golden angle (and leave the card)', s.rot === 'golden' && s.preset === null && s.kinds.length <= 3);
+await pick('window'); s = await seek(0.93);
 
 /* ---------- camera, keyboard, evidence, language ---------- */
 const shot0 = await D(() => document.getElementById('cv').toDataURL().length);
 await page.mouse.move(stage[0], stage[1]); await page.mouse.down(); await page.mouse.move(stage[0] + 140, stage[1] + 30, { steps: 5 }); await page.mouse.up(); await settle(page);
 check('dragging the stage turns the triacontahedron (the picture changes, the point stays)', (await D(() => document.getElementById('cv').toDataURL().length)) !== shot0 && near((await state()).s, 0.93));
 await page.click('body', { position: { x: 5, y: 5 } });
-for (const [k, sc] of [['2', 'cassini'], ['3', 'returns'], ['4', 'window3'], ['1', 'cut']]) { await page.keyboard.press(k); check(`key ${k} switches to the scene ${sc}`, (await state()).scene === sc); }
+for (const [k, sc] of [['2', 'cassini'], ['3', 'returns'], ['4', 'window3'], ['5', 'gaps'], ['1', 'cut']]) { await page.keyboard.press(k); check(`key ${k} switches to the scene ${sc}`, (await state()).scene === sc); }
 await page.keyboard.press('Home'); await page.keyboard.press('ArrowRight'); check('Home and → step the rail (u from −0.5 to −0.45)', near((await state()).u, -0.45));
 await page.keyboard.press('Space'); await until(() => { const d = window.CUT_DEBUG.state; return d.playing && d.u > -0.45; }); s = await state(); check('Space plays', s.playing && s.u > -0.45); await page.keyboard.press('Space'); check('Space pauses', !(await state()).playing);
 const shown = async () => D(() => [...document.querySelectorAll('#readouts a[data-lean-gid]')].filter((a) => !a.closest('[hidden]')).map((a) => a.dataset.leanGid.split('.').pop()).join());
-const perScene = {}; for (const sc of ['cut', 'cassini', 'returns', 'window3']) { await page.click(`#sceneChips [data-scene="${sc}"]`); await settle(page, 40); perScene[sc] = await shown(); }
-check('each scene shows the theorem it rests on beside the readouts, and the window scene, which rests on the literature, shows none', perScene.cut === 'minkowski_model_set_spec,golden_model_set_subset_cut_and_project' && perScene.cassini === 'fib_cassini_from_golden_norm' && perScene.returns === 'result' && perScene.window3 === '', JSON.stringify(perScene));
-check('the soul-and-ruin reading is labelled as a model, the empire and the triacontahedron as literature', /诠释模型，不是定理/.test(await page.textContent('#evidence')) && (await D(() => [...document.querySelectorAll('.lean.argued')].every((el) => /文献结果，未在本书形式化/.test(el.textContent)))));
+const perScene = {}; for (const sc of ['cut', 'cassini', 'returns', 'window3', 'gaps']) { await page.click(`#sceneChips [data-scene="${sc}"]`); await settle(page, 40); perScene[sc] = await shown(); }
+check('each scene shows the theorem it rests on beside the readouts, and the window scene, which rests on the literature, shows none', perScene.cut === 'minkowski_model_set_spec,golden_model_set_subset_cut_and_project' && perScene.cassini === 'fib_cassini_from_golden_norm' && perScene.returns === 'result' && perScene.window3 === '' && perScene.gaps === 'three_gap_card_le_three,three_gap_lengths_eq,golden_hurwitz_bound', JSON.stringify(perScene));
+check('the soul-and-ruin reading is labelled as a model, the empire and the triacontahedron as literature', /诠释模型，不是定理/.test(await page.textContent('#evidence')) && (await D(() => [...document.querySelectorAll('.lean.argued')].every((el) => /文献结果，未在本书形式化|手工推导/.test(el.textContent)))));
+check('the Delone theorem, cited in the coda only by an inline link, is not shown as a green box', await D(() => !document.querySelector('a[data-lean-gid$="exists_golden_modelSet_delone"]') && !!document.querySelector('a[data-trureturing-path="D5/S3/Fourier/GoldenModelSetDelone.lean"]')));
 await page.click('[data-lang-set="en"]'); await settle(page, 150);
-for (const sc of ['cut', 'cassini', 'returns', 'window3']) { await page.click(`#sceneChips [data-scene="${sc}"]`); await settle(page, 60); const left = await cjkLeftovers(page); check(`English: no Chinese left in the scene ${sc} after free play`, left.length === 0, left.slice(0, 4).join(' | ')); }
+for (const sc of ['cut', 'cassini', 'returns', 'window3', 'gaps']) { await page.click(`#sceneChips [data-scene="${sc}"]`); await settle(page, 60); const left = await cjkLeftovers(page); check(`English: no Chinese left in the scene ${sc} after free play`, left.length === 0, left.slice(0, 4).join(' | ')); }
 await page.click('#sceneChips [data-scene="cut"]'); await page.click('#patchChips [data-patch="on"]'); await settle(page, 60); { const left = await cjkLeftovers(page); check('English: no Chinese left with a patch fixed', left.length === 0, left.slice(0, 4).join(' | ')); }
 
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
