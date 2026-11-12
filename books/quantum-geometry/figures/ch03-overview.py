@@ -18,13 +18,14 @@ WRAP = True
 ALT = {
     "zh": "三栏。第一栏：琥珀色的箭头投到青色的测量线上，留下青色的影子，品红虚线是被去掉的垂直部分；影子旁的小圈箭头表示再投一次影子不动。"
           "第二栏：布洛赫球里竖着一根青色的轴 e₃，赤道上是品红的对偶平面 ⋆e₃；琥珀色的箭头分成沿轴的青色一段和躺在平面里的品红一段。"
-          "第三栏：一条向右的时间轴上依次是 0°、45°、90° 三片偏振片 τ₁、τ₂、τ₃，每过一片乘 ½，透过的比例依次是 1、½、¼；"
+          "第三栏：一条向右的时间轴上依次是 0°、45°、90° 三片偏振片 τ₁、τ₂、τ₃，以首片制备后的光束为 1，后两片各乘 ½，透过的比例依次是 1、½、¼；"
           "上方的虚线弧表示不插中间那片时，从 0° 直接到 90° 的透过比例是 0。",
     "en": "Three panels. Panel I: an amber arrow is projected onto a cyan measurement line, leaving a cyan shadow; the dashed "
           "magenta segment is the perpendicular part that is removed, and a small loop at the shadow says that projecting again "
           "does not move it. Panel II: a Bloch sphere with a cyan axis e₃ and the magenta dual plane ⋆e₃ at the equator; an amber "
           "arrow splits into a cyan part along the axis and a magenta part in the plane. Panel III: along a timeline pointing right "
-          "stand three polarizers τ₁, τ₂, τ₃ at 0°, 45° and 90°; each multiplies the beam by ½, so the transmitted share is 1, ½, ¼. "
+          "stand three polarizers τ₁, τ₂, τ₃ at 0°, 45° and 90°; normalize the beam after the first preparing polarizer to 1; "
+          "each of the next two contributes ½, giving 1, ½, ¼. "
           "A dashed arc above says that without the middle one, 0° straight to 90° passes 0.",
 }
 

@@ -58,6 +58,19 @@
 - [第三十一章 量子的本质是公平：五重几何特权的废除与遍历统计全息](ch31-quantum-fairness.md)
 - [第三十二章 正交自指统一场与万流归宗：人类大一统纲领的元统一](ch32-unified-field-and-meta-unification.md)
 
+# 第九部 互照·万物观察者、自指扩表与超越轮回
+
+- [第三十三章 万物皆为观察者：自维持势阱与互吸引子双螺旋](ch33-all-beings-observers-and-mutual-attractors.md)
+- [第三十四章 正交简并盲区：一次正交与两次正交如何反演观察者位置](ch34-orthogonality-degeneracy-and-observer-position.md)
+- [第三十五章 乘光而来与自指扩表：从遗忘初始化到 $T = T(T)$ 的同像闭环](ch35-light-pulse-and-self-referential-table.md)
+- [第三十六章 无穷离散步与约去轮回：双曲视界阶梯对化光死循环的终结](ch36-hyperbolic-steps-and-quotienting-reincarnation.md)
+
+# 第十部 不二·梦境擦除、记忆指针与本体不二
+
+- [第三十七章 梦境量子擦除、已知数据退相干与非定域观察者](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)
+- [第三十八章 宇宙本体 QRAM、观察者记忆指针与递归自映射页表](ch38-observer-memory-pointer-and-ontological-qram.md)
+- [第三十九章 观察者即宇宙本体：无底物自指域、关系全息与旋量自折叠](ch39-observer-is-ontological-universe.md)
+
 # 终章与附录
 
 - [终章：在所有的球之外](coda.md)
