@@ -4,7 +4,8 @@ dimensions of sphere are parallelizable.
 
 Panel I is the four-address example of §21.2: the latent fiber {a₀, a₁, a₂} over coordinate 0 is cut by
 g = twist ∘ D_a(latent a) into {a₀, a₁} (g = 1) and {a₂} (g = 0); the table is recomputed and checked.
-Panel II is (cos t, sin t, c t) over 2.4 turns above its shadow (cos t, sin t).
+Panel II is (cos t, sin t, c t) over 2.4 turns above its shadow (cos t, sin t); it is the chapter's interpretive
+picture (MODEL), not a theorem, and carries a tag saying so.
 Panel III marks the spheres S⁰ … S⁸; S⁰, S¹, S³, S⁷ (Adams) are violet, a literature result.
 """
 
@@ -17,13 +18,13 @@ WRAP = True
 ALT = {
     "zh": "三栏。第一栏：两个框是潜坐标的两根纤维，左框里竖排着 a₀、a₁、a₂，右框里只有 a₃；一条品红虚线横穿左框，把它劈成"
           "上面的 a₀、a₁（g = 1）与下面的 a₂（g = 0）。第二栏：一条品红的螺旋绕着紫色的竖轴 e_{n+1} 一圈圈升高，底下是它"
-          "青色的影子，一个闭合的圆；从起点绕一圈回到圆上同一点时，螺旋已经高出 2πc。第三栏：S⁰ 到 S⁸ 九个小圆排成三行，"
+          "青色的影子，一个闭合的圆；从起点绕一圈回到圆上同一点时，螺旋已经高出 2πc；这一栏是诠释，标着“诠释”。第三栏：S⁰ 到 S⁸ 九个小圆排成三行，"
           "S⁰、S¹、S³、S⁷ 涂成紫色，分别标着 ℝ、ℂ、ℍ、𝕆；S² 旁注“毛球：必有零点”；这一栏是文献结果。",
     "en": "Three panels. Panel I: two boxes are the two fibers of the latent coordinate; the left one holds a₀, a₁, a₂ in a "
           "column, the right one only a₃. A dashed magenta line cuts across the left box, splitting it into a₀, a₁ above "
           "(g = 1) and a₂ below (g = 0). Panel II: a magenta helix climbs turn after turn around the violet vertical axis "
           "e_{n+1}; beneath it is its cyan shadow, a closed circle. After one turn the shadow is back at its starting point "
-          "while the helix stands 2πc higher. Panel III: nine small circles S⁰ to S⁸ in three rows; S⁰, S¹, S³, S⁷ are "
+          "while the helix stands 2πc higher; this panel is an interpretation and is tagged “interpretation”. Panel III: nine small circles S⁰ to S⁸ in three rows; S⁰, S¹, S³, S⁷ are "
           "violet and labelled ℝ, ℂ, ℍ, 𝕆; S² is marked “hairy ball: must vanish”. This panel is a literature result.",
 }
 
@@ -79,6 +80,7 @@ def draw(fig):
     two.dot(x1, y1, 4.4, "area", ring="bg")
     two.text(x0 + 10, (y0 + y1) / 2, "2π*c*", size=14, color="dim", middle=True)
     two.text(cx, 254, two.t("影子绕一圈就闭合", "the shadow closes after one turn"), size=13, color="line", anchor="middle")
+    two.chip(two.width - 4, 50, two.t("诠释", "interpretation"), "dim", anchor="end")
 
     # ---- III: parallelizable spheres
     title(three, "III　可平行化的球面", "III  parallelizable spheres")

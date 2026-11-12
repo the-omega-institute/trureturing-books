@@ -370,12 +370,8 @@ Let us verify the compiled multivector coefficients and rotated basis vectors on
    satisfying $R_H e_1 \widetilde{R}_H = e_3$, $R_H e_2 \widetilde{R}_H = -e_2$, and $R_H e_3 \widetilde{R}_H = e_1$.
 :::
 
-::: {.viz src="zyz-compile" preset="t" height="500"}
-**The $T$ gate: $\gamma$ and $\beta$ are zero.** For $(\alpha, \beta, \gamma) = (\pi/4, 0, 0)$ the two turns that act first, $\gamma$ and $\beta$, have zero angle, and neither the amber arrow nor the white tripod moves; the last turn is $45^\circ$ about the violet $z$ axis, the arrow runs $45^\circ$ along the equator from $e_1$, $Re_3$ stays at the north pole, and the rotor at the top is $0.924 - 0.383\,e_1e_2$.
-:::
-
 ::: {.viz src="zyz-compile" preset="h" height="500"}
-**The Hadamard gate $(0, \pi/2, \pi)$.** The first turn is $180^\circ$ about $z$: the amber arrow sits at the north pole, on the axis, so only its cyan shadow is left while the tripod's $Re_1$ and $Re_2$ flip over; the second turn is $90^\circ$ about $y$ and brings the arrow down to $e_1$. The violet dashed line is the diagonal axis $(e_1 + e_3)/\sqrt{2}$, and the tripod comes to rest at $Re_1 = e_3$, $Re_2 = -e_2$, $Re_3 = e_1$.
+**The Hadamard gate $(0, \pi/2, \pi)$.** By contrast, the $T$ gate $(\pi/4, 0, 0)$ has only a last turn of $45^\circ$ about $z$, the same kind of picture as the sandwich card above; the Hadamard gate takes two turns. The first is $180^\circ$ about $z$: the amber arrow sits at the north pole, on the axis, so only its cyan shadow is left while the tripod's $Re_1$ and $Re_2$ flip over; the second turn is $90^\circ$ about $y$ and brings the arrow down to $e_1$. The violet dashed line is the diagonal axis $(e_1 + e_3)/\sqrt{2}$, and the tripod comes to rest at $Re_1 = e_3$, $Re_2 = -e_2$, $Re_3 = e_1$.
 :::
 
 ::: {.remark #rem-zyz-euler-compilation-literature title="The SU(2)→SO(3) Double Cover and Universal ZYZ Euler Decomposition (Literature Result, Not Formalized in This Book)"}
@@ -392,6 +388,8 @@ Let us verify the compiled multivector coefficients and rotated basis vectors on
 ::: {.viz src="zyz-compile" preset="fold" height="500"}
 **Three turns equal one turn about one axis.** For the same angles $(0.37, -0.81, 0.52)$, the violet dashed line is the compiled rotor's own axis $n$ and the violet dashed arc a single turn of $67.9^\circ$ about it: leaving the white start ring, it lands exactly where the white road of the three turns ends. That a unit rotor is one turn about one axis belongs to the literature results above and is not formalized in this book; the axis and the angle are computed numerically by the page.
 :::
+
+The $67.9^\circ$ of the violet dashed arc comes from the scalar part of the rotor in the example: the scalar $0.829592$ is the cosine of the half-angle, and $2\arccos 0.829592 \approx 67.9^\circ$.
 
 ::: {.viz src="zyz-compile" height="560"}
 **The ZYZ compilation lab.** Drag the three Euler angles, move the arrow's start, or switch on the single axis $n$: in every turn the cyan shadow stays put while the magenta fan sweeps the whole angle, and in the strip scalar$^2$ and area$^2$ trade off with a sum that stays $1$. The green boxes cite only this chapter's four frozen theorems ([@thm-bloch-matrix-trace], [@lemma-bloch-coordinate-recovery], [@prop-hermitian-bloch-geometry], [@cor-psd-bloch-ball-bound]), which the page checks one by one on the pure state $\rho = \operatorname{blochMatrix}(1, v)$ of the arrow.

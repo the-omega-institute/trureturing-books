@@ -202,8 +202,8 @@
      "Lean 内核检验：cos θ = θ 恰有一个正解，落在 0 与 1 之间。"
     ],
     [
-     "Near it, each step multiplies the error by about minus point six seven four, so no step lands exactly.",
-     "在它附近，每一步把误差乘以约 −0.674，所以没有哪一步恰好落上。"
+     "Starting from one radian, no step lands exactly; once close, each step multiplies the error by about minus point six seven four.",
+     "从 1 弧度出发，没有哪一步恰好落上；靠近之后，每一步把误差乘以约 −0.674。"
     ],
     [
      "Where it stops and how fast it closes form one unit vector.",

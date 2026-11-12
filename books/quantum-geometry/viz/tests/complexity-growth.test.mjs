@@ -219,6 +219,12 @@ s = await state();
 const seq = [[2, 3], [2, 4], [3, 5], [3, 6], [4, 7], [4, 8]].map((c) => asap(11, c).D);
 check('DEPTH FLOOR: the cut sets of the note give 9, 8, 7, 6, 5, 4 layers', seq.join(',') === '9,8,7,6,5,4');
 check('DEPTH FLOOR: it ends on {4, 8} with 4 layers, on the white line', s.depth.cuts.join(',') === '4,8' && s.depth.D === 4 && s.depth.floor === 4);
+{ // the still of the card (a figure shot) keeps the start {2, 3} as faint outlines: the suite's greedy layering gives 9 layers there
+  const fig = await T.newPage(); await T.goto(BOOK, ID, '?lang=zh&preset=floor&shot=1', fig); await settle(fig);
+  const f = await fig.evaluate(() => window.GROWTH_DEBUG.state);
+  check('DEPTH FLOOR still: {4, 8} at 4 layers with the ghost of the start {2, 3} at 9 layers', f.depth.cuts.join(',') === '4,8' && f.depth.D === 4 && JSON.stringify(f.ghost) === '[2,3]' && asap(11, [2, 3]).D === 9 && f.ghostDepth === 9, JSON.stringify([f.ghost, f.ghostDepth]));
+  await fig.close();
+}
 
 // the theorem, by exhaustion
 let thmOk = true, bad = '';

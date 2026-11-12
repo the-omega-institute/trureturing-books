@@ -253,15 +253,13 @@
   const PRESETS = {
     sandwich: { a: 0, b: 0, g: 90 * DEG, v0: [R3, 0, 0.5], fold: false, view: [-0.55, 0.5], still: 1 },
     chain: { a: 0.37, b: -0.81, g: 0.52, v0: [1, 0, 0], vec: 'e1', fold: false, view: [-0.75, 0.32], still: 3 },
-    t: { a: Math.PI / 4, b: 0, g: 0, v0: [1, 0, 0], vec: 'e1', fold: false, view: [-0.62, 0.62], still: 3 },
     h: { a: 0, b: Math.PI / 2, g: Math.PI, v0: [0, 0, 1], vec: 'e3', fold: true, view: [-0.4, 0.28], still: 3 },
     fold: { a: 0.37, b: -0.81, g: 0.52, v0: [1, 0, 0], vec: 'e1', fold: true, view: [-1.15, 0.3], still: 3 }
   };
   const NOTES = {
     sandwich: ['只转第一段：绕紫色的 z 轴转 90°。青色的影子 ½e₃ 留在轴上不动；品红的那一份在 z = ½ 的平面里扫出 90° 的扇形，虚线把它分成左右两半：45° + 45°。后两段角为零。', 'Only the first turn: 90° about the violet z axis. The cyan shadow ½e₃ stays on the axis; the magenta part sweeps a 90° fan in the plane z = ½, and the dashed line splits it into two halves, 45° + 45°. The other two angles are zero.'],
     chain: ['(α, β, γ) = (0.37, −0.81, 0.52)：先绕 z 转 γ，再绕 y 转 β，最后绕 z 转 α。白色三脚架停在 Re₁、Re₂、Re₃，琥珀色的 v = Re₁ = (0.378, 0.680, 0.629)；顶部是乘完的旋子 0.830 − 0.396 e₁₂ − 0.393 e₁₃ + 0.030 e₂₃。', '(α, β, γ) = (0.37, −0.81, 0.52): first γ about z, then β about y, last α about z. The white tripod stops at Re₁, Re₂, Re₃ and the amber v = Re₁ = (0.378, 0.680, 0.629); at the top is the compiled rotor 0.830 − 0.396 e₁₂ − 0.393 e₁₃ + 0.030 e₂₃.'],
-    t: ['T 门 (π/4, 0, 0)：先作用的 γ、β 两段角为零，箭头和三脚架一动不动；最后一段绕 z 转 45°，琥珀色的 v 沿赤道从 e₁ 走过 45°，Re₃ 留在北极。顶部的旋子是 0.924 − 0.383 e₁₂。', 'The T gate (π/4, 0, 0): the two turns that act first, γ and β, have zero angle, and neither the arrow nor the tripod moves; the last turn is 45° about z, the amber v runs 45° along the equator from e₁, and Re₃ stays at the north pole. The rotor at the top is 0.924 − 0.383 e₁₂.'],
-    h: ['H 门 (0, π/2, π)：第一段绕 z 转 180°，v 在北极、就在轴上，只剩青色的影子，三脚架的 Re₁、Re₂ 翻到反面；第二段绕 y 转 90°，v 落到 e₁。紫色虚线是对角轴 (e₁ + e₃)/√2：三脚架停在 Re₁ = e₃、Re₂ = −e₂、Re₃ = e₁。', 'The H gate (0, π/2, π): the first turn is 180° about z; v sits at the north pole, on the axis, so only the cyan shadow is left while the tripod\'s Re₁ and Re₂ flip over; the second turn is 90° about y and v comes down to e₁. The violet dashed line is the diagonal axis (e₁ + e₃)/√2; the tripod stops at Re₁ = e₃, Re₂ = −e₂, Re₃ = e₁.'],
+    h: ['T 门 (π/4, 0, 0) 只有最后一段绕 z 转 45°，与夹心卡同一种画面；H 门 (0, π/2, π) 则走两段。第一段绕 z 转 180°，v 在北极、就在轴上，只剩青色的影子，三脚架的 Re₁、Re₂ 翻到反面；第二段绕 y 转 90°，v 落到 e₁。紫色虚线是对角轴 (e₁ + e₃)/√2：三脚架停在 Re₁ = e₃、Re₂ = −e₂、Re₃ = e₁。', 'The T gate (π/4, 0, 0) is only a last turn of 45° about z, the same kind of picture as the sandwich card; the H gate (0, π/2, π) takes two turns. The first turn is 180° about z; v sits at the north pole, on the axis, so only the cyan shadow is left while the tripod\'s Re₁ and Re₂ flip over; the second turn is 90° about y and v comes down to e₁. The violet dashed line is the diagonal axis (e₁ + e₃)/√2; the tripod stops at Re₁ = e₃, Re₂ = −e₂, Re₃ = e₁.'],
     fold: ['同一组角 (0.37, −0.81, 0.52)：紫色虚线是乘完的旋子自己的转轴 n，紫色虚弧是绕 n 一次转 67.9°；它从白色的起点圈出发，落在白色的路（三段）走到的同一点。', 'The same angles (0.37, −0.81, 0.52): the violet dashed line is the compiled rotor\'s own axis n, and the violet dashed arc is one turn of 67.9° about n; it leaves the white start ring and lands where the white road of the three turns ends.']
   };
   let booting = true;

@@ -262,6 +262,10 @@ Consider $\iota = \operatorname{Fin} 2 = \{0, 1\}$ in [@prop-audit-ray-phase-rig
 2. **Disconnected test support (counterexample blocked by `hconnect`)**: If we drop `hconnect : RaySupportConnected tests` and take $\mathrm{tests} = \{\vv{e}_0, \vv{e}_1\}$, no vector in $\mathrm{tests}$ is simultaneously nonzero at both $0$ and $1$. Then the unitary phase gate $A = \operatorname{diag}(1, i) \in U(2, \mathbb{C})$ satisfies both `hcoord` and `htests`, yet $A$ is not a scalar multiple of $I_2$! In the Lean proof, the induction call `hchain (hconnect i j)` is the exact line that blocks disconnected phase sectors.
 :::
 
+::: {.figure src="ch27-ray-counterexample"}
+**Cut the support graph and the two phases go their own ways.** In both panels the two circles are the two coordinates of $\iota = \operatorname{Fin} 2$, and the violet arrow in each circle is the phase of the diagonal entry $A_{00}$ or $A_{11}$. On the left the only test vector is $x = (1, 1)$, a cyan arc joins the two cells, and both arrows point the same way: $A = c_0 I_2$ ([@prop-audit-ray-phase-rigidity]). On the right the test vectors $\vv{e}_0$ and $\vv{e}_1$ each cover one cell only, and the dashed arc between the cells is struck out; $\operatorname{diag}(1, i)$ keeps both coordinate rays, yet its two arrows are $90^\circ$ apart, so it is not $c I_2$. The right panel is a counterexample once the connectivity hypothesis is dropped, not a conclusion of the theorem.
+:::
+
 ::: {.remark #rem-lean-kernel-trust-boundary-literature title="Dependent Type Theory, the de Bruijn Criterion, and the Modeling Boundary (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** Two foundational principles govern the formal verification architecture audited in this chapter:
 

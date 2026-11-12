@@ -72,7 +72,7 @@ $$
 :::
 
 ::: {.viz src="timeless-causal-crystal" preset="sos" height="500"}
-**两元在阶 2 闭合，三元奇偶没有。** 青色的点：每个 $n$ 取一个随机 2-SAT 公式，两条两元子句消去一个变量，推出的仍至多两个文字，所以消解闭包停在阶 $2$，空子句是否出现就判定了可满足性（页面的数值）。品红的虚线：对随机 3-XOR / 3-SAT，上面第 3 条的文献结果说阶 $o(n)$ 的平方和松弛仍处处相容，这条直线的斜率只是示意（`MODEL`）。琥珀色是观察者的阶 $M$。这些下界只约束这一族松弛，不推出 $\mathrm{P}\neq\mathrm{NP}$（[@conj-p-neq-np]，`OPEN`）。
+**两元在阶 2 闭合，三元奇偶没有。** 青色的点：每个 $n$ 取一个随机 2-SAT 公式，两条两元子句消去一个变量，推出的仍至多两个文字，所以消解闭包停在阶 $2$，空子句是否出现就判定了可满足性：实心点推出了空子句（不可满足），空心圈没有（可满足）（页面的数值）。品红的虚线：对随机 3-XOR / 3-SAT，上面第 3 条的文献结果说阶 $o(n)$ 的平方和松弛仍处处相容，这条直线的斜率只是示意（`MODEL`）。琥珀色是观察者的阶 $M$。这些下界只约束这一族松弛，不推出 $\mathrm{P}\neq\mathrm{NP}$（[@conj-p-neq-np]，`OPEN`）。
 :::
 
 ### 3. 作者的诠释：复杂度视界、主观时间与自由选择
@@ -126,7 +126,7 @@ $$
 :::
 
 ::: {.viz src="timeless-causal-crystal" preset="field" height="500"}
-**场：处处有坡度。** 青色的流线从球上各处出发，每条都只看脚下的坡度，都流到目标；琥珀色是选中的那一条，球的对面那一点场为零。下方的图里，青色的势能降下多少，品红的耗散就付出多少，两者之和（琥珀色虚线）不变（[`S2_dissipation`](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation)）。把它读作“场”是本书的诠释（`MODEL`）。
+**场：处处有坡度。** 青色的流线从球上各处出发，每条都只看脚下的坡度，都流到目标；琥珀色是选中的那一条，球的对面那一点（灰色圈）场为零。把它读作“场”是本书的诠释（`MODEL`）。
 :::
 
 #### 从实际顶点旋转到面奇定向：一个有限组合前提 {#sec-ch30-rotation-parity}
@@ -480,7 +480,7 @@ $C_5$ 中最长有向路含 $5$ 个顶点的 $12$ 个定向里，有 $2$ 个是�
 - **“球永远只是多面体近似”：三体局部切面与渐近缝隙（`MODEL`）**：作者以局部三体切面（$\mathbf{e}_i\wedge\mathbf{e}_j\wedge\mathbf{e}_k$）拼接整体的图像，诠释指数率上界随规模变化的可能性。若 [@rem-ch30-eth-subexponential-literature] 中预印本宣称的上界经审计成立，其有效单变量指数率将趋于 $0$；这一条件性算法主张不能由多面体比喻或上述有限维 Lean 原型推出。
 
 ::: {.viz src="eth-horizon-crossover" preset="bridge" height="500"}
-**流矩阵的秩等于最小割。** 桥图 $(a, b, c, d) = (2, 3, 2, 3)$：两道外割都是 $6$（琥珀色虚线），三条桥能过 $12$。右边是一个随机整数实例的 $6 \times 6$ 流矩阵（青色为正项，品红为负项），下面六根奇异值都不为零：秩 $6$，恰等于最小割。这只是一个实例；Lean 验证的 [@thm-bridge-quantum-maxflow-mincut] 表明：在其完整维数假设下，这类桥图的最大可达秩等于最小割，单次抽样的秩则可能更低。
+**流矩阵的秩等于最小割。** 桥图 $(a, b, c, d) = (2, 3, 2, 3)$：两道外割都是 $6$（琥珀色虚线），三条桥能过 $12$。右边是一个随机整数实例的 $6 \times 6$ 流矩阵（青色为正项，品红为负项），下面六根奇异值都不为零：秩 $6$，恰等于最小割。这只是一个实例；Lean 验证的 [@thm-bridge-quantum-maxflow-mincut] 表明：在其完整维数假设下，这类桥图的最大可达秩等于最小割，单次抽样的秩则可能更低。这条定理只讲桥图上的流与割，与上文转述的亚指数 3-SAT 预印本无关：它既不检验、也不支持那里的算法主张（[@rem-ch30-eth-subexponential-literature]，未经审计）。
 :::
 
 ### 2. 银河算法（Galactic Algorithm）与宇宙视界：上界比较能说明什么？（`MODEL` 与认识论边界）
@@ -521,7 +521,7 @@ $C_5$ 中最长有向路含 $5$ 个顶点的 $12$ 个定向里，有 $2$ 个是�
 :::
 
 ::: {.viz src="eth-horizon-crossover" height="640"}
-**交互实验室 `ORTHO//HORIZON`**：本节的三个场景。指数率：示意曲线 $r(n)$ 与 PPSZ 的 $0.386$ 在哪里相交，以及常数 $c$ 怎样把交叉点挪进或挪出阴影；桥图：单次抽样的流矩阵秩与四道割，冻结量 $\operatorname{QMinCut} = \min(3ac, ad, bc)$，第四道 $3bd$ 割由手工矩阵分解给出；自然数维数满足 $0 < a \le b$、$0 < c \le d$、$a^2 + b^2 \le 3ab$、$c^2 + d^2 \le 3cd$ 时，可达最大秩等于 $\operatorname{QMinCut} = \min(ad, bc)$（Lean 已验证），单次抽样仍可更低，锥域外须比较四道割；模态：谱里不小于阈值 $\theta$ 的模态数不超过 $T/\theta$（Lean 已验证）。取 $c = 1$ 的曲线只是示意，不是任何算法的实测。
+**交互实验室 `ORTHO//HORIZON`**：本节的三个场景。指数率：示意曲线 $r(n)$ 与 PPSZ 的 $0.386$ 在哪里相交，以及常数 $c$ 怎样把交叉点挪进或挪出阴影；桥图：单次抽样的流矩阵秩与四道割，冻结量 $\operatorname{QMinCut} = \min(3ac, ad, bc)$，第四道 $3bd$ 割由手工矩阵分解给出；自然数维数满足 $0 < a \le b$、$0 < c \le d$、$a^2 + b^2 \le 3ab$、$c^2 + d^2 \le 3cd$ 时，可达最大秩等于 $\operatorname{QMinCut} = \min(ad, bc)$（Lean 已验证），单次抽样仍可更低，锥域外须比较四道割；模态：谱里不小于阈值 $\tau$ 的模态数不超过 $RW/(\pi\tau)$（Lean 已验证）。取 $c = 1$ 的曲线只是示意，不是任何算法的实测。
 :::
 
 ---
@@ -629,7 +629,7 @@ $$
 两项各管一件事。求和项是其余涡旋吹过来的速度：第 $k$ 个涡旋在距离 $r$ 处诱导的速度大小为 $\frac{b}{2r}$，方向垂直于连线，转向由 $s_k$ 决定；对照 [@rem-ch30-point-vortex-literature]，这相当于取 $\Gamma_k = \pi b\,s_k$。第一项让每个涡旋自己绕原点转，角速度为 $s_j\Omega$：$\Omega > 0$ 时正涡旋逆时针，负涡旋顺时针。把偶数个涡旋正负相间摆在半径 $\rho$ 的圆上，两项在切向上对着干。手工推导（用到下面证明里的切向读数恒等式）：其余涡旋给第 $j$ 个涡旋的切向速度是 $-s_j\,\frac{b}{4\rho}$，进动给它的切向速度是 $s_j\,\Omega\rho$，两者相消当且仅当 $\rho^2 = \frac{b}{4\Omega}$。圆太小，邻居的推动占上风；圆太大，进动占上风；只有一个半径能让整圈停住。
 
 ::: {.figure src="ch30-vortex-radius"}
-**只有一个半径能让整圈停住。** 横轴是正负相间的涡旋所在圆的半径 $\rho$。紫色的直线是进动给每个涡旋的切向速度大小 $\Omega\rho$，蓝色的曲线是其余涡旋吹来的切向速度大小 $\frac{b}{4\rho}$，两者方向相反，只在 $\rho = R_{b,\Omega} = \sqrt{b/(4\Omega)}$ 处相等（图中取 $b = 2$、$\Omega = \tfrac12$，$R = 1$）。交点左边邻居占上风，右边进动占上风；静止条件见 [@lem-ch30-vortex-polygon-equilibrium]。
+**只有一个半径能让整圈停住。** 横轴是正负相间的涡旋所在圆的半径 $\rho$。紫色的直线是进动给每个涡旋的切向速度大小 $\Omega\rho$，青色的曲线是其余涡旋吹来的切向速度大小 $\frac{b}{4\rho}$，两者方向相反，只在 $\rho = R_{b,\Omega} = \sqrt{b/(4\Omega)}$ 处相等（图中取 $b = 2$、$\Omega = \tfrac12$，$R = 1$）。交点左边邻居占上风，右边进动占上风；静止条件见 [@lem-ch30-vortex-polygon-equilibrium]。
 :::
 
 ::: {.lemma #lem-ch30-vortex-polygon-equilibrium title="居中正多边形的静止条件与平衡点处的弗雷歇导数" lean="D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.regular_equilibrium_iff_radius D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.scaled_equilibrium D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalDerivative.physical_derivative"}

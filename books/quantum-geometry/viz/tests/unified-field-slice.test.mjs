@@ -107,6 +107,10 @@ const tStar = fixedPoint();
 s = await pick('fixedpoint'); await ended(s.clock.etaStar); s = await state();
 check('FIXED POINT: the card stops where cos θ = θ (bisection θ* = 0.7390851332)', close(s.clock.theta, tStar, 1e-10) && close(s.clock.cos, s.clock.theta, 1e-10), `${s.clock.theta}`);
 check('FIXED POINT: |sin θ*| = √(1 − θ*²) ≈ 0.673612 and θ* + arcsin θ* = π/2', close(s.clock.sin, Math.sqrt(1 - tStar ** 2), 1e-10) && close(s.clock.sin, 0.673612, 1e-6) && close(tStar + Math.asin(tStar), Math.PI / 2, 1e-12));
+{
+  const leg = await page.textContent('#legend');
+  check('FIXED POINT: the header and legend read the fixed point, not a speed (no η, no v/c)', /θ\* = 0\.739/.test(s.hud) && !/η/.test(s.hud) && !/v\/c|速度/.test(leg) && leg.includes('sin θ*'), `${s.hud} | ${leg}`);
+}
 
 s = await pick('photon');
 check('PHOTON: a click plays the card', await until(page, () => window.UNIFIED_DEBUG.state.playing || window.UNIFIED_DEBUG.state.t > 1));
@@ -152,6 +156,10 @@ check('at ε = 90° the left-over turn is 120°', close(s.loop.phi * 180 / Math.
 /* ---------- horizon ---------- */
 s = await pick('polytope');
 check('POLYTOPE: horizon scene with λ = 0', s.scene === 'horizon' && s.horizon.lam === 0 && s.horizon.cut === 0);
+{
+  const leg = await page.textContent('#legend');
+  check('POLYTOPE: the header and legend speak of the deficits only, not of a horizon', !/视界|λ/.test(s.hud) && !/视界/.test(leg) && /720/.test(await page.textContent('#hudSub')), `${s.hud} | ${leg}`);
+}
 const V = s.horizon.V, E = s.horizon.E, ed = E.map(([i, j]) => Math.hypot(V[i][0] - V[j][0], V[i][1] - V[j][1], V[i][2] - V[j][2]));
 check('POLYTOPE: 12 unit vertices, 30 edges of length 4/√(10 + 2√5), 20 faces; the observer at the north pole', V.length === 12 && V.every((v) => close(Math.hypot(...v), 1, 1e-12)) && E.length === 30 && ed.every((x) => close(x, ICO.edge, 1e-12)) && s.horizon.F === 20 && vclose(V[0], [0, 0, 1], 1e-15));
 // angle deficits computed here from the independent icosahedron
