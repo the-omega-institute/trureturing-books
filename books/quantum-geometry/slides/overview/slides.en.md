@@ -665,11 +665,11 @@ section: "Three tiers"
   <p class="kicker">Three tiers of warrant</p>
   <h2 class="t">Three tiers of warrant, <em>three colours</em>, never mixed</h2>
   <div class="split mt">
-    <img src="./img/prelude-three-tiers.en.svg" alt="Three bars: green 215, violet 163, red 6; under the green bar, 330 theorem declarations in the lock file." style="display: block; width: 900px; max-width: 100%;">
+    <img src="./img/prelude-three-tiers.en.svg" alt="Three bars: green 215, violet 164, red 6; under the green bar, 330 theorem declarations in the lock file." style="display: block; width: 900px; max-width: 100%;">
     <div>
       <div class="g3">
         <Stat value="215" label="theorems, lemmas, propositions and corollaries with lean=" tone="ok" />
-        <Stat value="163" label="remarks and examples marked “literature result, not formalized”" tone="violet" />
+        <Stat value="164" label="remarks and examples marked “literature result, not formalized”" tone="violet" />
         <Stat value="6" label="open conjectures, marked OPEN, with no Lean reference" tone="warn" />
       </div>
       <p class="lead mt">The lock file <span class="mono">trureturing.lock.json</span> pins <PinnedCommit />: 477 declarations, 330 of them Lean theorems.</p>
