@@ -2173,6 +2173,61 @@
           "gid": "D5/S3/Observer/Conditioning.unreadState_fixed_iff"
         }
       ]
+    },
+    {
+      "id": "self-referential-table",
+      "code": "ORTHO//TABLE",
+      "title": "同像自指表 · 横读是尺子，竖读是状态",
+      "title_en": "The self-reading table · rulers across, states down",
+      "summary": "一张 N × N 的对称幂等方阵 T = Σ vₐvₐᵀ：第 i 行读第 j 列逐项相加正好读回 Tᵢⱼ，对角格自己读自己；一行一行扩表时迹始终等于秩，写满时表成了单位阵；转进正交补的状态读出为零；点一格注入扰动，迭代 3T² − 2T³ 几步就回到一张幂等的表（离原表很近，一般不是原表）。",
+      "summary_en": "An N × N symmetric idempotent matrix T = Σ vₐvₐᵀ: row i reading column j, term by term, gives back exactly Tᵢⱼ, and a diagonal cell reads itself; as rows are added the trace always equals the rank, and the full table is the identity; a state turned into the complement reads out as zero; knock one cell and the iteration 3T² − 2T³ returns in a few steps to an idempotent table (very close to the original, but in general not the original).",
+      "path": "self-referential-table/",
+      "thumbnail": "self-referential-table/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "投影",
+        "幂等",
+        "自指表",
+        "牛顿—舒尔茨迭代"
+      ],
+      "tags_en": [
+        "projection",
+        "idempotent",
+        "self-referential table",
+        "Newton–Schulz iteration"
+      ],
+      "theory": [
+        {
+          "label": "第三十五章 · 乘光而来与自指扩表",
+          "label_en": "Chapter 35 · Arriving on a pulse of light and self-referential table expansion",
+          "href": "../zh/ch35-light-pulse-and-self-referential-table.html",
+          "href_en": "../en/ch35-light-pulse-and-self-referential-table.html"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal"
+        },
+        {
+          "gid": "D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Restoration/TargetRecoveryCriterion.target_recovery_criterion"
+        },
+        {
+          "gid": "D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.canonical_copied_address_record_eq_prior"
+        },
+        {
+          "gid": "D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode"
+        }
+      ]
     }
   ]
 }
