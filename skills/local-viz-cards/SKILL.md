@@ -377,6 +377,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十章 | 文献注记 `rem-ch30-karmarkar-kasteleyn-literature` 之后 | `timeless-causal-crystal` · `field` |
 | 第三十章 | ETH 一节 · 1 末（张量关联场） | `eth-horizon-crossover` · `bridge` |
 | 第三十章 | 例 `ex-ch30-galactic-crossover-scale` 之后 | `eth-horizon-crossover` · `human`、`cross` |
+| 第三十章 | 例 `ex-ch30-galactic-crossover-scale` 后三点启示的第一条（银河算法）之后 | `eth-horizon-crossover` · `constant` |
 | 第三十章 | ETH 一节末 | `eth-horizon-crossover` · `atoms`，随后完整实验室 |
 | 第三十章 | 文献注记 `rem-ch30-lamb-decomposition-literature` 之后 | `navier-stokes-p-np` · `potential` |
 | 第三十章 | 纳维—斯托克斯一节 · 1 末（兰姆恒等式） | `navier-stokes-p-np` · `vortex` |
