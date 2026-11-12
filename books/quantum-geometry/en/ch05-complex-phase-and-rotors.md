@@ -178,7 +178,7 @@ Translated back into the language of rotors (the dictionary below is a manual de
 - **Two full turns.** The loop $t \mapsto e^{4\pi i t}$ lifts to $t \mapsto e^{2\pi i t}$ (it is continuous, squares correctly and starts at $1$, so uniqueness in Claim 1 applies), which ends at $+1$. Only after $720^\circ$ is the rotor restored.
 
 ::: {.viz src="qubit-geometry" preset="turn2" height="500"}
-**Two turns to come back.** The amber state vector $B$ turns twice about $\hat{x}$ (four legs of $180^\circ$ each). The frame stops at the end of the second full turn: $B$ is back where it started, and the rotor's scalar part read out at the top left is back at $w = +1$; at the end of the first turn $B$ was back there too, but $w$ was $-1$. One turn for the vector, two for the rotor (the fixed-plane case is [@thm-circle-double-cover-history-lift]).
+**One turn flips the sign, two bring it back.** The amber state vector $B$ starts at $\lvert +i\rangle$ and goes twice round the great circle in the $yz$ plane about $\hat{x}$ (four legs of $180^\circ$ each). The frame stops at the end of the first full turn: $B$ is back where it started, yet the rotor's scalar part read out at the top left is $w = -1$; the violet curve at the bottom right is $w = \cos(\alpha/2)$, with the amber dot at the present moment, and it returns to $+1$ only at $720^\circ$. One turn for the vector, two for the rotor (the fixed-plane case is [@thm-circle-double-cover-history-lift]).
 :::
 
 ::: {.example #ex-rotor-two-turns title="Angles from 0° to 720°: the Rotation Goes Around Twice, the Rotor Only Once"}
@@ -199,10 +199,6 @@ Take $\vv{B} = \vv{e}_1 \wedge \vv{e}_2$. The rotation through the angle $\theta
 The second column is back at its starting point at $360^\circ$, when the third column has reached exactly the opposite point; any two rows $360^\circ$ apart (such as $90^\circ$ and $450^\circ$) have the same rotation and opposite rotors. Squaring each point of the third column (doubling its argument) gives the second column.
 
 **One direct check.** $R(90^\circ) = \frac{1}{\sqrt{2}}(1 - \vv{B})$, and with $\vv{B}^2 = -1$: $R(90^\circ)^2 = \frac{1}{2}(1 - 2\vv{B} + \vv{B}^2) = -\vv{B} = R(180^\circ)$; squaring again, $R(180^\circ)^2 = \vv{B}^2 = -1 = R(360^\circ)$. In neutron interferometry the fringes are inverted when the spin has precessed through $360^\circ$ and restored at $720^\circ$ (a literature result, not formalized in this book: H. Rauch et al., *Phys. Lett. A* **54**, 425, 1975; S. A. Werner et al., *Phys. Rev. Lett.* **35**, 1053, 1975).
-:::
-
-::: {.viz src="qubit-geometry" preset="turn1" height="500"}
-**One full turn flips the rotor.** The amber state vector goes $360^\circ$ about $\hat{x}$ and returns to where it started, and so do the line and the area; the scalar part of the accumulated rotor, read out at the top left, has run from $+1$ to $w = -1$. Only after two full turns is it back at $+1$; see the card “Two turns to come back” above.
 :::
 
 A lone $-1$ is an overall sign, and by the discussion of the next section it changes no single-branch measurement reading; only when a branch that has been turned through a full turn is brought back together with a branch that has not (as in the interferometric setting at the end of [@ex-rotor-two-turns]) does the sign become an observable relative phase.

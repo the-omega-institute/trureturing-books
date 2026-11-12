@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch01-phase-chain" data-lang="zh" viewBox="0 0 480 316" width="480" height="316" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="两行，每行六个圆形的相位刻盘，编号 0 到 5。上行：相邻两个刻盘之间各有一条青色的边，标着 e_i + e_{i+1}，五条边把六个刻盘连成一串，所有指针指向同一个方向，右边写着 A = cI。下行：2 号与 3 号之间的那条边断开，画成虚线并打叉；左边三个刻盘的指针指一个方向，右边三个指另一个方向，下方写着“两岛各差一个相位，检验察觉不到”。">
+<title>两行，每行六个圆形的相位刻盘，编号 0 到 5。上行：相邻两个刻盘之间各有一条青色的边，标着 e_i + e_{i+1}，五条边把六个刻盘连成一串，所有指针指向同一个方向，右边写着 A = cI。下行：2 号与 3 号之间的那条边断开，画成虚线并打叉；左边三个刻盘的指针指一个方向，右边三个指另一个方向，下方写着“两岛各差一个相位，检验察觉不到”。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<text class="tf-ink" x="16" y="24" font-size="14" font-weight="600">五条测试连成一串</text>
+<line x1="57" y1="74" x2="87" y2="74" class="ts-cyan" stroke-width="3" fill="none"/>
+<line x1="121" y1="74" x2="151" y2="74" class="ts-cyan" stroke-width="3" fill="none"/>
+<line x1="185" y1="74" x2="215" y2="74" class="ts-cyan" stroke-width="3" fill="none"/>
+<line x1="249" y1="74" x2="279" y2="74" class="ts-cyan" stroke-width="3" fill="none"/>
+<line x1="313" y1="74" x2="343" y2="74" class="ts-cyan" stroke-width="3" fill="none"/>
+<text class="tf-cyan" x="72" y="62" font-size="14" text-anchor="middle"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">0</tspan><tspan dy="-0.28em">+</tspan><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
+<circle cx="40" cy="74" r="17" class="ts-dim tf-panel" stroke-width="1.4"/>
+<line x1="40" y1="74" x2="44.25" y2="66.64" class="ts-ink" stroke-width="2" fill="none"/>
+<path d="M46.8 62.22 L45.98 68.68 L41.62 66.16Z" class="tf-ink"/>
+<text class="tf-dim" x="40" y="107" font-size="14" text-anchor="middle">0</text>
+<circle cx="104" cy="74" r="17" class="ts-dim tf-panel" stroke-width="1.4"/>
+<line x1="104" y1="74" x2="108.25" y2="66.64" class="ts-ink" stroke-width="2" fill="none"/>
+<path d="M110.8 62.22 L109.98 68.68 L105.62 66.16Z" class="tf-ink"/>
+<text class="tf-dim" x="104" y="107" font-size="14" text-anchor="middle">1</text>
+<circle cx="168" cy="74" r="17" class="ts-dim tf-panel" stroke-width="1.4"/>
+<line x1="168" y1="74" x2="172.25" y2="66.64" class="ts-ink" stroke-width="2" fill="none"/>
+<path d="M174.8 62.22 L173.98 68.68 L169.62 66.16Z" class="tf-ink"/>
+<text class="tf-dim" x="168" y="107" font-size="14" text-anchor="middle">2</text>
+<circle cx="232" cy="74" r="17" class="ts-dim tf-panel" stroke-width="1.4"/>
+<line x1="232" y1="74" x2="236.25" y2="66.64" class="ts-ink" stroke-width="2" fill="none"/>
+<path d="M238.8 62.22 L237.98 68.68 L233.62 66.16Z" class="tf-ink"/>
+<text class="tf-dim" x="232" y="107" font-size="14" text-anchor="middle">3</text>
+<circle cx="296" cy="74" r="17" class="ts-dim tf-panel" stroke-width="1.4"/>
+<line x1="296" y1="74" x2="300.25" y2="66.64" class="ts-ink" stroke-width="2" fill="none"/>
+<path d="M302.8 62.22 L301.98 68.68 L297.62 66.16Z" class="tf-ink"/>
+<text class="tf-dim" x="296" y="107" font-size="14" text-anchor="middle">4</text>
+<circle cx="360" cy="74" r="17" class="ts-dim tf-panel" stroke-width="1.4"/>
+<line x1="360" y1="74" x2="364.25" y2="66.64" class="ts-ink" stroke-width="2" fill="none"/>
+<path d="M366.8 62.22 L365.98 68.68 L361.62 66.16Z" class="tf-ink"/>
+<text class="tf-dim" x="360" y="107" font-size="14" text-anchor="middle">5</text>
+<text class="tf-ink" x="391" y="79" font-size="15"><tspan font-style="italic">A</tspan> = <tspan font-style="italic">cI</tspan></text>
+<text class="tf-ink" x="16" y="164" font-size="14" font-weight="600">断开一环：两座孤岛</text>
+<line x1="57" y1="214" x2="87" y2="214" class="ts-cyan" stroke-width="3" fill="none"/>
+<line x1="121" y1="214" x2="151" y2="214" class="ts-cyan" stroke-width="3" fill="none"/>
+<line x1="185" y1="214" x2="215" y2="214" class="ts-dim" stroke-width="1.4" stroke-dasharray="4 4" fill="none"/>
+<line x1="193" y1="207" x2="207" y2="221" class="ts-dim" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+<line x1="193" y1="221" x2="207" y2="207" class="ts-dim" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+<line x1="249" y1="214" x2="279" y2="214" class="ts-cyan" stroke-width="3" fill="none"/>
+<line x1="313" y1="214" x2="343" y2="214" class="ts-cyan" stroke-width="3" fill="none"/>
+<circle cx="40" cy="214" r="17" class="ts-dim tf-panel" stroke-width="1.4"/>
+<line x1="40" y1="214" x2="44.25" y2="206.64" class="ts-ink" stroke-width="2" fill="none"/>
+<path d="M46.8 202.22 L45.98 208.68 L41.62 206.16Z" class="tf-ink"/>
+<text class="tf-dim" x="40" y="247" font-size="14" text-anchor="middle">0</text>
+<circle cx="104" cy="214" r="17" class="ts-dim tf-panel" stroke-width="1.4"/>
+<line x1="104" y1="214" x2="108.25" y2="206.64" class="ts-ink" stroke-width="2" fill="none"/>
+<path d="M110.8 202.22 L109.98 208.68 L105.62 206.16Z" class="tf-ink"/>
+<text class="tf-dim" x="104" y="247" font-size="14" text-anchor="middle">1</text>
+<circle cx="168" cy="214" r="17" class="ts-dim tf-panel" stroke-width="1.4"/>
+<line x1="168" y1="214" x2="172.25" y2="206.64" class="ts-ink" stroke-width="2" fill="none"/>
+<path d="M174.8 202.22 L173.98 208.68 L169.62 206.16Z" class="tf-ink"/>
+<text class="tf-dim" x="168" y="247" font-size="14" text-anchor="middle">2</text>
+<circle cx="232" cy="214" r="17" class="ts-dim tf-panel" stroke-width="1.4"/>
+<line x1="232" y1="214" x2="224.64" y2="209.75" class="ts-ink" stroke-width="2" fill="none"/>
+<path d="M220.22 207.2 L226.68 208.02 L224.16 212.38Z" class="tf-ink"/>
+<text class="tf-dim" x="232" y="247" font-size="14" text-anchor="middle">3</text>
+<circle cx="296" cy="214" r="17" class="ts-dim tf-panel" stroke-width="1.4"/>
+<line x1="296" y1="214" x2="288.64" y2="209.75" class="ts-ink" stroke-width="2" fill="none"/>
+<path d="M284.22 207.2 L290.68 208.02 L288.16 212.38Z" class="tf-ink"/>
+<text class="tf-dim" x="296" y="247" font-size="14" text-anchor="middle">4</text>
+<circle cx="360" cy="214" r="17" class="ts-dim tf-panel" stroke-width="1.4"/>
+<line x1="360" y1="214" x2="352.64" y2="209.75" class="ts-ink" stroke-width="2" fill="none"/>
+<path d="M348.22 207.2 L354.68 208.02 L352.16 212.38Z" class="tf-ink"/>
+<text class="tf-dim" x="360" y="247" font-size="14" text-anchor="middle">5</text>
+<text class="tf-ink" x="104" y="266" font-size="15" text-anchor="middle"><tspan font-style="italic">c</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-ink" x="296" y="266" font-size="15" text-anchor="middle"><tspan font-style="italic">c</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em"> ≠ </tspan><tspan font-style="italic">c</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-ink" x="391" y="219" font-size="15"><tspan font-style="italic">A</tspan> ≠ <tspan font-style="italic">cI</tspan></text>
+<text class="tf-dim" x="240" y="300" font-size="14" text-anchor="middle">两岛各差一个相位，检验察觉不到</text>
+</svg>

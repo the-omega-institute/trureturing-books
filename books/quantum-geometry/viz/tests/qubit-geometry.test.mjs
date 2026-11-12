@@ -47,6 +47,7 @@ check('starts on the SIXTY card with no gates', s.preset === 'half' && s.n === 0
 check('line = cos 60° and area = sin 60°', close(s.line, 0.5) && close(s.area, Math.sqrt(3) / 2));
 check('header pills show line and area', (await page.textContent('#pillLine strong')) === '+0.50' && (await page.textContent('#pillArea strong')) === '0.87');
 check('the key readout shows 0.250 + 0.750 = 1.000', (await page.textContent('#roSum')).replace(/\s+/g, ' ').includes('0.250 + 0.750 = 1.000'));
+check('the numerical tick on the key readout is not green (green is kept for Lean)', (await page.$$('#roSum .okmark')).length === 0);
 
 // line² + area² = 1 and the Born weights, over a grid of states and all three rulers
 let worst = 0, born = 0, vsMatrix = 0;
@@ -68,8 +69,15 @@ check('moving a slider leaves the experiment card', (await state()).preset === n
 check('the ruler note follows the chosen axis', (await page.textContent('#axisNote')).includes('Y'));
 
 // experiment cards: end states
-await pick('line'); s = await state();
-check('ALL-LINE: line 1, area 0, every click is +A', close(s.line, 1) && close(s.area, 0) && close(s.p0, 1));
+await pick('poles'); s = await state();
+const diagOf = (th, ph) => { const v = spinor(th, ph); return [v[0][0] ** 2 + v[0][1] ** 2, v[1][0] ** 2 + v[1][1] ** 2]; };   // |psi0|^2, |psi1|^2
+const hudNums = async () => (await page.textContent('#hudSub')).match(/\d+\.\d+/g).map(Number);
+let dg = diagOf(90, 0), hn = await hudNums();
+check('SIX POLES: B stops due east at |+⟩, 90° from A at |0⟩', s.poles && vclose(s.r, [1, 0, 0], 1e-12) && close(Math.acos(s.line) * 180 / Math.PI, 90, 1e-9) && (await page.textContent('#hudBig')).includes('90.0°'));
+check('SIX POLES: the readout gives the diagonal of ρ_B, (1 ± b₂)/2 = 0.50 · 0.50', close(hn[hn.length - 2], dg[0], 0.005) && close(hn[hn.length - 1], dg[1], 0.005), String(hn));
+check('SIX POLES: the pole labels are on the stage (|+⟩ gives way to the label of B, which sits on it)', await page.evaluate(() => ['|0⟩', '|1⟩', '|−⟩', '|+i⟩', '|−i⟩'].every((k) => [...document.querySelectorAll('#stage *')].some((e) => e.children.length === 0 && e.textContent.trim() === k))));
+await setRange('theta', 180); s = await state(); dg = diagOf(180, 0); hn = await hudNums();
+check('SIX POLES: B dragged to |1⟩ is antipodal to A (180°) and the diagonal reads 0.00 · 1.00', s.poles && close(s.line, -1, 1e-12) && close(hn[hn.length - 2], dg[0], 0.005) && close(hn[hn.length - 1], dg[1], 0.005) && (await page.textContent('#hudBig')).includes('180.0°'), String(hn));
 await pick('area'); s = await state();
 check('ALL-AREA: line 0, area 1, clicks 50 / 50', close(s.line, 0) && close(s.area, 1) && close(s.p0, 0.5));
 await pick('hadamard'); s = await state();
@@ -77,6 +85,7 @@ check('HADAMARD starts playing from |0⟩', s.playing && s.n === 1 && s.theta ==
 s = await end();
 check('HADAMARD: H takes |0⟩ to |+⟩ (all line becomes area)', vclose(s.r, [1, 0, 0]) && close(s.line, 0) && close(s.area, 1));
 await pick('phase');
+check('PHASE: the readout above the stage does not show the rotor', !/w\s*=/.test(await page.textContent('#hudSub')));
 const lines = await page.evaluate(() => [0, 0.3, 0.9, 1.4, 2].map((t) => window.QUBIT_DEBUG.at(t)));
 check('PHASE: the line and the area stay put while B goes round A', lines.every((x) => close(x.line, 0) && close(x.area, 1)));
 check('PHASE: B really moves', !vclose(lines[1].r, lines[0].r, 1e-3) && vclose(lines[4].r, lines[0].r));
@@ -89,16 +98,19 @@ check('H·Z·H: the rotor is −R_X', vclose(s.q, viaX.q.map((x) => -x), 1e-12) 
 const cmp = await page.evaluate(() => window.QUBIT_DEBUG.compareX());
 check('H·Z·H: the page reports the same turn with sign −1', cmp.sameTurn && cmp.sign === -1);
 check('H·Z·H: the circuit note says −R_X', (await page.textContent('#circNote')).includes('−R'));
-await pick('turn1'); s = await end();
-check('TURN-360: B is back and R = −1', vclose(s.r, expected(60, 40, []).r, 1e-12) && vclose(s.q, [-1, 0, 0, 0], 1e-12) && s.sheet === -1);
-check('TURN-360: the pill shows the sheet −1', (await page.textContent('#pillSheet strong')) === '−1');
-await pick('turn2'); s = await end();
-check('TURN-720: B is back and R = +1', vclose(s.r, expected(60, 40, []).r, 1e-12) && vclose(s.q, [1, 0, 0, 0], 1e-12) && s.sheet === 1);
+await pick('turn2');
+await page.evaluate(() => window.QUBIT_DEBUG.seek(2)); s = await state();
+check('TURN-720 after 360°: B (from |+i⟩) is back and R = −1', vclose(s.r, [0, 1, 0], 1e-12) && vclose(s.r, expected(90, 90, [['x', 360]]).r, 1e-12) && vclose(s.q, [-1, 0, 0, 0], 1e-12) && s.sheet === -1);
+check('TURN-720 after 360°: the pill shows the sheet −1', (await page.textContent('#pillSheet strong')) === '−1');
+const path = await page.evaluate(() => [0.5, 1, 1.5, 2.5, 3, 3.5].map((t) => window.QUBIT_DEBUG.at(t).r));
+check('TURN-720: B rides the great circle in the yz plane (x stays 0)', path.every((r) => close(r[0], 0, 1e-12) && close(Math.hypot(...r), 1, 1e-12)));
+s = await end();
+check('TURN-720: B is back and R = +1', vclose(s.r, expected(90, 90, []).r, 1e-12) && vclose(s.q, [1, 0, 0, 0], 1e-12) && s.sheet === 1);
 check('TURN-720 is four half-turns on the rail', s.n === 4 && s.gates.every((g) => g[0] === 'x' && g[1] === 180));
 check('TURN-720: the circuit note says the whole turn is the identity with rotor +1', /\+1/.test(await page.textContent('#circNote')));
 
 // B coming back does not make the circuit the identity: an S gate leaves the north pole where it is
-await pick('line');
+await pick('poles'); await setRange('theta', 0);
 await page.click('#gateChips [data-gate="S"]');
 const toastSaid = await page.waitForFunction(() => /±1/.test(document.getElementById('toast').textContent), null, { timeout: 30000 }).then(() => true, () => false);
 s = await end();
@@ -172,10 +184,10 @@ const stillOf = async (card) => {
   return out;
 };
 const wIn = (txt) => { const m = /w\s*=\s*([+−-]?\d+\.\d+)/.exec(txt); return m ? Number(m[1].replace('−', '-')) : NaN; };
-let st = await stillOf('turn1'); e = expected(60, 40, [['x', 360]]);
-check('TURN-360 still: B has gone the full 360° and is back, the readout says w = −1.00', close(st.s.tau, 2) && vclose(st.s.r, expected(60, 40, []).r, 1e-12) && close(wIn(st.sub), Math.round(e.q[0] * 100) / 100) && e.q[0] < -0.999 && /360°/.test(st.sub), st.sub);
-st = await stillOf('turn2'); e = expected(60, 40, [['x', 720]]);
-check('TURN-720 still: B has gone the full 720° and is back, the readout says w = +1.00', close(st.s.tau, 4) && vclose(st.s.r, expected(60, 40, []).r, 1e-12) && close(wIn(st.sub), Math.round(e.q[0] * 100) / 100) && e.q[0] > 0.999 && /720°/.test(st.sub), st.sub);
+let st = await stillOf('turn2'); e = expected(90, 90, [['x', 360]]);
+check('TURN-720 still: stops after the first full turn, B is back, the readout says 360° of 720° and w = −1.00', close(st.s.tau, 2) && vclose(st.s.r, expected(90, 90, []).r, 1e-12) && close(wIn(st.sub), Math.round(e.q[0] * 100) / 100) && e.q[0] < -0.999 && /360°/.test(st.sub) && /720°/.test(st.sub), st.sub);
+st = await stillOf('phase');
+check('PHASE still: no rotor readout', !/w\s*=/.test(st.sub), st.sub);
 st = await stillOf('hadamard'); e = expected(0, 0, [['h', 180]]);
 check('HADAMARD still: the end of the turn, B on |+⟩, line 0 and area 1, θ(A,B) = 90°', close(st.s.tau, 1) && vclose(st.s.r, e.r, 1e-12) && close(st.s.line, e.r[2], 1e-12) && close(st.s.area, Math.hypot(e.r[0], e.r[1]), 1e-12) && st.big.includes(`${(Math.acos(e.r[2]) * 180 / Math.PI).toFixed(1)}°`), st.big);
 
