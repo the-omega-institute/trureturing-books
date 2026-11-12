@@ -191,7 +191,13 @@ The start $1/3$ gets the right answer $1/2$ for $g$ and the wrong answer $0$ for
 The deviation does not shrink monotonically ($N = 10^5$ is further off than $N = 10^4$): the theorem speaks only of the limit and gives no rate.
 :::
 
-**Back to Lorenz: how far the theorem reaches.** To apply [@thm-coda-birkhoff-ergodic] to the Lorenz flow, one can take its time-$1$ map $T = \varphi_1$, but first one needs an invariant probability measure for which $T$ is ergodic. The existence of $\mu_{\mathrm{SRB}}$, and the mixing of the flow (mixing implies that $T$ is ergodic), are literature results from item 2 of [@rem-coda-lorenz-srb-literature]. Given those, the theorem yields convergence of time averages for $\mu_{\mathrm{SRB}}$-almost every start. But $\mu_{\mathrm{SRB}}$ lives on the attractor, and the attractor has zero volume (item 1: phase-space volume shrinks like $e^{-41t/3}$). The two rings in the “forget the start” card are not on the attractor, and a start picked at random in phase space is almost never on it. Why their time averages converge to the same value as well is exactly what an SRB measure adds to a general ergodic measure (hence the name “physical measure”), and that step remains a literature result.
+**Back to Lorenz: how far the theorem reaches.** To apply [@thm-coda-birkhoff-ergodic] to the Lorenz flow, one can take its time-$1$ map $T = \varphi_1$, but first one needs an invariant probability measure for which $T$ is ergodic. The existence of $\mu_{\mathrm{SRB}}$, and the mixing of the flow (mixing implies that $T$ is ergodic), are literature results from item 2 of [@rem-coda-lorenz-srb-literature]. Given those, the theorem yields convergence of time averages for $\mu_{\mathrm{SRB}}$-almost every start. But $\mu_{\mathrm{SRB}}$ lives on the attractor, and the attractor has zero volume (item 1: phase-space volume shrinks like $e^{-41t/3}$).
+
+::: {.viz src="spatial-attractor-deja-vu" preset="shrink" height="500"}
+**A cloud pressed into a sheet.** The Lorenz system at $(\sigma, \rho, \beta) = (10, 28, 8/3)$: $500$ cyan points start inside the dashed cube. The divergence of the velocity field is $-41/3$ everywhere, so the volume shrinks like $e^{-41t/3}$: at $t = 1$ about one millionth is left, and the points already lie on a thin sheet. The step from divergence to volume is a hand derivation (Liouville’s formula); the existence of the attractor itself is a literature result from [@rem-coda-lorenz-srb-literature].
+:::
+
+The two rings in the “forget the start” card are not on the attractor, and a start picked at random in phase space is almost never on it. Why their time averages converge to the same value as well is exactly what an SRB measure adds to a general ergodic measure (hence the name “physical measure”), and that step remains a literature result.
 
 > What is forgotten is the starting point; what remains is the proportion.
 
@@ -211,7 +217,7 @@ In our philosophical and geometric interpretation (`MODEL`), borrowing the stran
    In this interpretive model (`MODEL`), **Déjà vu** represents the high-amplitude cross-round inner-product resonance triggered when the same observer operator re-enters a spatial attractor neighborhood with nearly collinear attention orientation ($\delta\theta \to 0$).
 
 ::: {.viz src="spatial-attractor-deja-vu" preset="return" height="500"}
-**Nearly parallel in passing.** Stopped at $t = 22$: both rounds have passed the neighbourhood of the ruin (the amber circle). The arcs along which they passed do not coincide, yet their directions are nearly parallel; the line above the figure gives the angle between the two latest passages, and the inner product $\cos\delta\theta$ is close to $1$. Reading this as déjà vu is an interpretive model (`MODEL`).
+**Nearly parallel in passing.** Stopped at $t = 22$: both rounds have passed the neighbourhood of the ruin (the amber circle). The arcs along which they passed do not coincide, yet their directions are nearly parallel: the line above the figure gives the angle at the latest return (a passage of each round, the two points less than $\varepsilon$ apart), the short cyan and magenta arrows are the unit tangents there, and their inner product $\cos\delta\theta = \hat{\mathbf{v}}_1\cdot\hat{\mathbf{v}}_2$ is close to $1$ (a number computed on the page). Reading this as déjà vu is an interpretive model (`MODEL`).
 :::
 
 ::: {.viz src="spatial-attractor-deja-vu" height="640"}
