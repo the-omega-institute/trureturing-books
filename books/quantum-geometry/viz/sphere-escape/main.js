@@ -230,9 +230,9 @@
         const cx = tx + v * (cs + 4), read = S.lat[a] === v;
         c.strokeStyle = read ? (now ? P.amber : P.cyan) : TRV.alpha(P.sigma, 0.6); c.lineWidth = read ? 1.8 : 1;
         c.strokeRect(cx + 0.5, y - cs / 2 + 0.5, cs - 1, cs - 1);
-        c.fillStyle = read ? P.ink : P.dim; c.font = `${Math.round(cs * 0.55)}px ${TRV.fonts.data}`; c.textAlign = 'center'; c.fillText(String(DEC[a][v]), cx + cs / 2, y + 1);
+        c.fillStyle = read ? P.ink : P.dim; c.font = `${Math.round(cs * 0.55)}px ${TRV.fonts.data}`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(String(DEC[a][v]), cx + cs / 2, y + 1);
       }
-      if (done || t >= 4) { c.fillStyle = P.magenta; c.font = `600 ${Math.round(cs * 0.62)}px ${TRV.fonts.data}`; c.textAlign = 'left'; c.fillText(`g = ${F.g[a]}`, tx + 2 * cs + 14, y + 1); }
+      if (done || t >= 4) { c.fillStyle = P.magenta; c.font = `600 ${Math.round(cs * 0.62)}px ${TRV.fonts.data}`; c.textAlign = 'left'; c.textBaseline = 'middle'; c.fillText(`g = ${F.g[a]}`, tx + 2 * cs + 14, y + 1); }
     }
     $('hudBig').textContent = t < 4 ? L(`第 ${Math.min(k + 1, 4)} 个地址：读自己的坐标，喂自己的解码器，再翻转`, `ADDRESS ${Math.min(k + 1, 4)}: READ ITS COORDINATE, FEED ITS DECODER, FLIP`)
       : rise < 1 ? L(`同一根纤维里 g 不同的地址：${F.pairs.length} 对`, `${F.pairs.length} PAIR${F.pairs.length === 1 ? '' : 'S'} IN ONE FIBRE WITH DIFFERENT g`)
@@ -263,8 +263,8 @@
     c.fillStyle = P.cyan; c.beginPath(); c.arc(cx, cy, 2.5, 0, kit.TAU); c.fill();
     c.save(); c.shadowColor = P.amber; c.shadowBlur = 10; c.fillStyle = P.amber; c.beginPath(); c.arc(cx, cy - R * gm, 5, 0, kit.TAU); c.fill(); c.restore();
     c.font = `${small ? 11 : 12}px ${TRV.fonts.data}`; c.textBaseline = 'middle';
-    c.textAlign = 'left'; c.fillStyle = P.cyan; c.fillText(`cos(π/${n}) = ${ap.toFixed(4)}`, cx + 10, cy - R * ap + 12);
-    c.textAlign = 'right'; c.fillStyle = P.amber; c.fillText(`|γ(${l})| = ${gm.toFixed(4)}`, cx - 10, cy - R * gm + (gm > ap - 0.03 ? 12 : 0));
+    c.textAlign = 'left'; c.fillStyle = P.cyan; c.fillText(`cos(π/${n}) = ${ap.toFixed(4)}`, cx + 10, cy - R * ap + 26);
+    c.textAlign = 'right'; c.fillStyle = P.amber; c.fillText(`|γ(${l})| = ${gm.toFixed(4)}`, cx - 10, cy - R * gm + (gm > ap - 0.08 ? 26 : 0));
     c.textAlign = 'left'; c.fillStyle = P.magenta; c.fillText(L(`弓高 ${sci(1 - ap)}`, `sagitta ${sci(1 - ap)}`), cx + 10, cy - R - 10);
     $('hudBig').textContent = `|γ(${l})| = ${gm.toFixed(4)} ≤ cos(π/${n}) = ${ap.toFixed(4)} < 1`;
     $('hudSub').textContent = L(`${N + 1} 格的指针平移 ℓ = ${l} 格：m = ⌊${N}/${l}⌋ = ${m}，正 ${n} 边形的边心距；不可恢复的误差至少 ${sci((1 - ap) / 2)}`,

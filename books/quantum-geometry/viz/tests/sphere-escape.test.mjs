@@ -73,7 +73,9 @@ const fibreModel = (lat) => {
   const blocks = (key) => new Set([0, 1, 2, 3].map(key)).size;
   return { g: g.join(''), pairs, before: blocks((a) => lat[a]), after: blocks((a) => lat[a] * 2 + g[a]) };
 };
-await pick('split'); s = await seek(6);
+await pick('split');
+await page.waitForFunction(() => { const d = window.ESCAPE_DEBUG.state; return d.scene === 'fiber' && !d.playing; }, null, { timeout: 120000 }).catch(() => {});
+s = await seek(6);
 check('SPLIT card: latent (0,0,0,1), g = 1100, the pair (a₁, a₂) is split, 2 → 3 blocks', s.scene === 'fiber' && s.lat === '0001' && s.fiber.g.join('') === '1100'
   && s.fiber.pairs.length === 1 && s.fiber.pairs[0].join('') === '12' && s.fiber.before === 2 && s.fiber.after === 3 && s.step === 6);
 let fOk = true, fMin = 9;
@@ -90,7 +92,9 @@ check('every latent map leaves at least one separated pair and strictly more blo
 check('the fibre scene leaves the card when the latents change', s.preset === null);
 const latBefore = s.lat; await page.click('#latChips [data-a="3"]'); s = await state();
 check('a latent chip toggles that address and nothing else', s.lat.slice(0, 3) === latBefore.slice(0, 3) && s.lat[3] !== latBefore[3]);
-await pick('split'); s = await seek(6);
+await pick('split');
+await page.waitForFunction(() => { const d = window.ESCAPE_DEBUG.state; return d.scene === 'fiber' && !d.playing; }, null, { timeout: 120000 }).catch(() => {});
+s = await seek(6);
 const nodeAt = await page.evaluate(() => window.ESCAPE_DEBUG.node(0));
 await page.mouse.click(nodeAt[0], nodeAt[1]); s = await state();
 check('clicking an address on the stage toggles its latent coordinate', s.lat === '1001' && s.fiber.pairs.length >= 1);
