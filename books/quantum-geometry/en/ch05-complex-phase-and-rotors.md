@@ -178,7 +178,7 @@ Translated back into the language of rotors (the dictionary below is a manual de
 - **Two full turns.** The loop $t \mapsto e^{4\pi i t}$ lifts to $t \mapsto e^{2\pi i t}$ (it is continuous, squares correctly and starts at $1$, so uniqueness in Claim 1 applies), which ends at $+1$. Only after $720^\circ$ is the rotor restored.
 
 ::: {.viz src="qubit-geometry" preset="turn2" height="500"}
-**Two turns to come back.** The amber state vector $B$ turns twice about $\hat{x}$ (four legs of $180^\circ$ each). After the first full turn it is back where it started, yet the rotor's scalar part $w$, read out at the top left and drawn as the dashed violet curve below, sits at $-1$; only after $720^\circ$ does $w$ return to $+1$. One turn for the vector, two for the rotor (the fixed-plane case is [@thm-circle-double-cover-history-lift]).
+**Two turns to come back.** The amber state vector $B$ turns twice about $\hat{x}$ (four legs of $180^\circ$ each). The frame stops at the end of the first full turn: $B$ is back where it started, yet the rotor's scalar part read out at the top left is $w = -1$; only after $720^\circ$ does $w$ return to $+1$. One turn for the vector, two for the rotor (the fixed-plane case is [@thm-circle-double-cover-history-lift]).
 :::
 
 ::: {.example #ex-rotor-two-turns title="Angles from 0° to 720°: the Rotation Goes Around Twice, the Rotor Only Once"}
@@ -202,7 +202,7 @@ The second column is back at its starting point at $360^\circ$, when the third c
 :::
 
 ::: {.viz src="qubit-geometry" preset="turn1" height="500"}
-**One full turn flips the rotor.** The amber state vector goes $360^\circ$ about $\hat{x}$ and returns to where it started, and so do the line and the area; the scalar part of the accumulated rotor runs from $+1$ to $-1$. Press ▶ under the figure for the next card: only after two full turns is it back at $+1$.
+**One full turn flips the rotor.** The amber state vector goes $360^\circ$ about $\hat{x}$ and returns to where it started, and so do the line and the area; the scalar part of the accumulated rotor, read out at the top left, has run from $+1$ to $w = -1$. Only after two full turns is it back at $+1$; see the card “Two turns to come back” above.
 :::
 
 A lone $-1$ is an overall sign, and by the discussion of the next section it changes no single-branch measurement reading; only when a branch that has been turned through a full turn is brought back together with a branch that has not (as in the interferometric setting at the end of [@ex-rotor-two-turns]) does the sign become an observable relative phase.
@@ -273,7 +273,7 @@ its sole geometric action in three-space is to **rotate the Bloch sphere rigidly
 First watch Hadamard carry the north-pole state to the equator, then read through the rotor parameters in the table below.
 
 ::: {.viz src="qubit-geometry" preset="hadamard" height="500"}
-**A half-turn about a tilted axis.** Starting at the north pole $\lvert 0\rangle$, the amber arrow $B$ turns about the violet axis $\hat h = (\vv{e}_1 + \vv{e}_3)/\sqrt{2}$ and ends at $\lvert +\rangle$ on the equator. The cyan line shrinks from $1$ to zero as the magenta area grows from zero to $1$. The solid path has already been travelled; the dashed path lies ahead.
+**A half-turn about a tilted axis.** Starting at the north pole $\lvert 0\rangle$, the amber arrow $B$ turns about the violet axis $\hat h = (\vv{e}_1 + \vv{e}_3)/\sqrt{2}$ and ends at $\lvert +\rangle$ on the equator. The cyan line shrinks from $1$ to zero as the magenta area grows from zero to $1$. The frame stops at the end: line $0$, area $1$, and the half-turn travelled drawn solid (during playback the dashed path is the part still ahead).
 :::
 
 ::: {.example #ex-single-qubit-gate-atlas title="Rotor Atlas of the Six Standard Single-Qubit Gates and Explicit Balanced-Sum Verification for Hadamard"}
