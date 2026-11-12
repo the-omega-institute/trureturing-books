@@ -150,6 +150,21 @@ await setRange('now', PI + 1); s = await state();
 check('the rail sets θ and the readouts follow', close(s.theta, 1, 1e-9) && close(s.shift, -Math.sin(1), 1e-12));
 
 // English
+// the printed stills of SHIFT and SMALL STEP (opened as viz-thumbs.mjs does) tell different things: SHIFT hides the
+// small-step chord, which the text has not met yet; SMALL STEP marks the chord and the gap of its bar to the tangent
+{
+  const shot = await T.goto(BOOK, ID, '?shot=1&lang=zh&preset=shift', await T.newPage());
+  const look = async () => { await settle(shot); return shot.evaluate(() => ({ s: window.SHIFT_DEBUG.state, tags: Array.from(document.querySelectorAll('#stage .tag')).filter((e) => !e.hidden).map((e) => e.textContent), legend: document.getElementById('legend').textContent, ticks: null })); };
+  let v = await look();
+  check('SHIFT still: θ = 60°, the two cyan values are labelled, and nothing names the small step', v.s.focus === 'shift' && close(v.s.theta, PI / 3, 1e-12)
+    && v.tags.includes(`f(θ+90°) ${fz(PI / 3 + Q).toFixed(3).replace('-', '−')}`) && v.tags.includes(`f(θ−90°) ${fz(PI / 3 - Q).toFixed(3).replace('-', '−')}`)
+    && !v.tags.some((x) => x.includes('弦') || x.includes('30°')) && !v.legend.includes('小步长'), `${v.tags.join(' | ')} / ${v.legend}`);
+  await T.goto(BOOK, ID, '?shot=1&lang=zh&preset=step', shot); v = await look();
+  const gap = 100 * Math.abs(1 - fd30 / deriv(fz, PI / 3));
+  check('SMALL STEP still: the chord is named and the gauge marks the gap the suite computes (4.5%)', v.s.focus === 'step' && close(v.s.theta, PI / 3, 1e-12)
+    && v.tags.includes('±30° 的弦') && v.tags.includes(`短 ${gap.toFixed(1)}%`) && gap.toFixed(1) === '4.5' && v.legend.includes('小步长'), `${gap} / ${v.tags.join(' | ')}`);
+  await shot.close();
+}
 await page.click('[data-lang-set="en"]'); await pick('noise'); await seek(200);
 check('English: the HUD reads “200 trials · 100 shots each”', (await page.textContent('#hudBig')).trim() === '200 trials · 100 shots each');
 
