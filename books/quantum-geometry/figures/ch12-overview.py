@@ -6,8 +6,8 @@ Panel I: two cluster nodes joined by CZ; node 1 is measured along the equatorial
 goes on a classical wire (dashed) to node 2, which carries the output.
 Panel II: f(θ) = cos θ with the amber point at θ = 60°, the two cyan samples at θ ± 90° and the dashed tangent; the script
 asserts ½[f(θ + 90°) − f(θ − 90°)] = f′(θ) = −√3/2 (example ex-cluster-shift-and-gradient, step 2).
-Panel III: the exact density of x₁ for a uniform point on S^{d−1} for d = 3, 30, 300; the green chip in the lower right
-is the finite-trace mode bound cor-finite-trace-mode-budget, which the chapter cites with a Lean link.
+Panel III: the exact density of x₁ for a uniform point on S^{d−1} for d = 3, 30, 300 (a literature result, so the panel
+carries no Lean chip: the chapter's verified mode bound cor-finite-trace-mode-budget is independent of it).
 """
 
 import math
@@ -22,15 +22,14 @@ ALT = {
           "第二栏：一条余弦曲线 f(θ) = cos θ；琥珀色的点在 θ = 60°，两个青色的点在它左右各 90° 处，青色竖线是它们的高度；"
           "过琥珀色的点有一条虚线切线。两个青色高度之差的一半正是切线的斜率。"
           "第三栏：横轴是坐标 x₁，从 −1 到 1；三条密度曲线，d = 3 时是一条平线，d = 30 时是一个鼓包，d = 300 时是赤道上一个"
-          "又高又窄的青色尖峰。右下角有一个绿色的 LEAN ✓ 小框，只指有限迹模式计数界。",
+          "又高又窄的青色尖峰。",
     "en": "Three panels. Panel I: two round cluster nodes joined by a line marked CZ; the left node holds an amber pointer "
           "marked with the measuring angle α; a dashed arrow marked s carries the outcome from the left node to the right "
           "output node. Panel II: a cosine curve f(θ) = cos θ; the amber point is at θ = 60° and the two cyan points 90° to "
           "either side, with cyan vertical bars for their heights; a dashed tangent passes through the amber point. Half the "
           "difference of the two cyan heights is exactly the slope of the tangent. Panel III: the horizontal axis is the "
           "coordinate x₁ from −1 to 1; three density curves: flat for d = 3, a bump for d = 30, and a tall narrow cyan spike "
-          "at the equator for d = 300. A small green LEAN ✓ chip in the lower right refers only to the finite-trace mode "
-          "count bound.",
+          "at the equator for d = 300.",
 }
 
 
@@ -103,4 +102,3 @@ def draw(fig):
     ax.text(0.24, density(0.24, 30), "*d* = 30", dx=8, dy=-2, size=13, color="dim")
     ax.text(0.06, peak * 0.86, "*d* = 300", size=13, color="line")
     three.text(30, 238, "*x*_{1}", size=13, color="dim", anchor="middle")
-    three.chip(three.width - 4, 246, three.t("LEAN ✓ 谱预算界", "LEAN ✓ mode budget"), "lean", anchor="end")
