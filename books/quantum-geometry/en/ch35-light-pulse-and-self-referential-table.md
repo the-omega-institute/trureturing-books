@@ -105,7 +105,7 @@ We now lock into place the two formal theorems governing lossless table-recovery
 Across the frozen concept-dynamics target-recovery and quantum-decoherence canonical-record modules of `trureturing`, the following two theorems hold simultaneously:
 
 1. **Fourfold Characterization of Lossless Table Recovery on Nonempty State Spaces** ([`target_recovery_criterion`](lean:D5/S3/ConceptDynamics/Restoration/TargetRecoveryCriterion.target_recovery_criterion)): Let $X, \mathrm{ProcessState}, \mathrm{Target}$ be arbitrary types with $X$ nonempty (`[Nonempty X]`), let $\mathrm{process} : \operatorname{Concept}\;X\;\mathrm{ProcessState}$ be a table-indexing process readout and $\mathrm{target} : \operatorname{Concept}\;X\;\mathrm{Target}$ a target readout, and write $\operatorname{defectRelation}(\mathrm{process}, \mathrm{target}) = \{(x, y) \in X \times X \mid \mathrm{process}(x) = \mathrm{process}(y) \land \mathrm{target}(x) \neq \mathrm{target}(y)\}$. Then all four equivalences hold simultaneously:
-   - **(a) Factorization Iff Fiber Constancy**: 
+   - **(a) Factorization Iff Fiber Constancy**:
 
      $$
      \begin{aligned}
@@ -116,7 +116,7 @@ Across the frozen concept-dynamics target-recovery and quantum-decoherence canon
      $$
 
      ;
-   - **(b) Fiber Constancy Iff Empty Defect Relation**: 
+   - **(b) Fiber Constancy Iff Empty Defect Relation**:
 
      $$
      \begin{aligned}
@@ -126,7 +126,7 @@ Across the frozen concept-dynamics target-recovery and quantum-decoherence canon
      $$
 
      ;
-   - **(c) Empty Defect Relation Iff Table Recovery Exists**: 
+   - **(c) Empty Defect Relation Iff Table Recovery Exists**:
 
      $$
      \begin{aligned}
@@ -137,7 +137,7 @@ Across the frozen concept-dynamics target-recovery and quantum-decoherence canon
      $$
 
      ;
-   - **(d) Unrecoverability Iff Nonempty Defect Relation**: 
+   - **(d) Unrecoverability Iff Nonempty Defect Relation**:
 
      $$
      \begin{aligned}
