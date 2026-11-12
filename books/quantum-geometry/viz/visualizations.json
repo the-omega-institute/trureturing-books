@@ -2270,6 +2270,62 @@
           "gid": "D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode"
         }
       ]
+    },
+    {
+      "id": "quantum-fairness-ledger",
+      "code": "ORTHO//FAIRNESS",
+      "title": "量子公平总账本 · 席位、得失、关系、复制与遍历都没有特权",
+      "title_en": "The quantum fairness ledger · no privilege of seat, gain, bond, copy or history",
+      "summary": "同一颗布洛赫球上的五本账，每本旁边一根总额不动的柱子：任何一根轴都分到同样的球冠，拿 ψ 量 φ 与拿 φ 量 ψ 的玻恩权重相等；线² 加面积² 等于纯度预算；沿 a|000⟩ + b|110⟩ + c|101⟩ + g|111⟩ 走过贝尔、W 与 GHZ 态，A 留下的长度² 与三份纠缠加起来恰为 1；未知态复制得越多，每份越短，保真度降向 2/3；黄金步长绕球旋转，两个起点都分到 2 − φ 的份额，偏差始终小于 1。",
+      "summary_en": "Five ledgers on one Bloch sphere, each beside a bar whose total does not move: every axis gets the same cap and the Born weight of ψ on φ equals that of φ on ψ; line² plus area² equals the purity budget; walking a|000⟩ + b|110⟩ + c|101⟩ + g|111⟩ through Bell, W and GHZ states, what A keeps and three tangles add up to exactly 1; the more copies of an unknown state, the shorter each, with fidelity falling to 2/3; a golden rotation gives two different starts the same share 2 − φ with a discrepancy always below 1.",
+      "path": "quantum-fairness-ledger/",
+      "thumbnail": "quantum-fairness-ledger/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "公平",
+        "玻恩互易",
+        "互补勾股",
+        "CKW 单配性",
+        "不可克隆",
+        "黄金旋转"
+      ],
+      "tags_en": [
+        "fairness",
+        "Born reciprocity",
+        "complementary Pythagoras",
+        "CKW monogamy",
+        "no-cloning",
+        "golden rotation"
+      ],
+      "theory": [
+        {
+          "label": "本书第 31 章",
+          "label_en": "Chapter 31",
+          "href": "../zh/ch31-quantum-fairness.html",
+          "href_en": "../en/ch31-quantum-fairness.html"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight"
+        },
+        {
+          "gid": "D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras"
+        },
+        {
+          "gid": "D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal"
+        },
+        {
+          "gid": "D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion"
+        },
+        {
+          "gid": "D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result"
+        },
+        {
+          "gid": "D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result"
+        }
+      ]
     }
   ]
 }
