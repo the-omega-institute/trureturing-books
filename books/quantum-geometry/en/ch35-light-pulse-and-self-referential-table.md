@@ -31,6 +31,10 @@ Popular intuition laments forgetting as a frailty of mortal flesh. Yet the three
 - Second, [`surviving_copy_blocks_reversal`](lean:D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal) proves that, when all other copies satisfy the stated unimodularity condition and undergo the defined conjugate-channel reversal, as long as past interactions leave behind even a single unreversed surviving environmental copy $k$ whose overlap factor differs from $1$, applying coherent conjugate reversal to every other copy still fails to restore a nonzero off-diagonal coherence entry $\rho_{ij} \neq 0$—scattered traces of an old cycle cannot be locally rewound away;
 - Third, [`finite_memory_history_capacity`](lean:D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity) establishes a hard ceiling: inside a $d$-dimensional physical memory space, the number of history density matrices perfectly distinguishable by any single positive operator-valued measure (POVM) is bounded above by $d$ ($N \le d$)!
 
+::: {.viz src="self-referential-table" preset="full" height="500"}
+**A full table.** Eight mutually orthogonal rows take all $N = 8$ addresses: the table is the identity, cyan is left only on the diagonal, all eight address slots on the right are lit, and the amber frame around the sum of the diagonal reads exactly $8$; there is no ninth direction orthogonal to all eight rows (item 3 of [@thm-ch35-null-pulse-and-record-blocking]).
+:::
+
 Here clearing means local re-preparation and release of old constraints in the model; it neither erases surviving environmental records nor names the prescribed coherent reversal above. Picture a notebook with only $d$ pages, used solely to append independent records: if all $d$ orthogonal history anchors from a prior cycle remain welded across every page, not only is the register ceiling $N \le d$ completely saturated, but accumulated anchors also squeeze the compatibility margin for subsequent choices (cf. [Chapter 29](ch29-timeless-causality-and-gram-space.md#sec-coda-finite-observer-time-field) [@thm-ch29-gram-rigidity-and-pell]; explicit two-anchor Gram calculation in [@ex-ch35-two-anchor-gram-corridor] below):
 
 ::: {.example #ex-ch35-two-anchor-gram-corridor title="Two-Anchor 2x2 Gram Compatibility Area and Corridor Reopening (Literature Result, Not Formalized in This Book)"}
@@ -46,6 +50,10 @@ Once historical anchors lock onto the collinear boundary $c = \pm 1$, the compat
 :::
 
 Within our interpretive model (`MODEL`), that pulse at conception—"arriving riding on light"—is therefore a **geometric amnesty that clears the old table ($\lvert T\rvert \to 1$) and reopens the causal selection corridor ([@ex-ch35-two-anchor-gram-corridor])**. Moreover, because the baseline table at life's outset is nearly blank, each newly written experience occupies a large relative share of current table size, resonating directly with psychophysical logarithmic time scaling (for fertilization fluorescence observations, logarithmic perception literature, and the age-time model's quantitative span ratios, see Items 2–3 of [@rem-ch35-fertilization-zinc-spark-literature] below)—the geometric reason why a single childhood summer feels endless while a decade in densely indexed adulthood flashes past in the blink of an eye.
+
+::: {.viz src="self-referential-table" preset="reset" height="500"}
+**Cleared to one row.** The rank-$1$ table holds only the constant vector: every cell is $1/8$, the diagonal adds up to $1$, one of the eight address slots is taken and the other seven directions are free.
+:::
 
 ::: {.theorem #thm-ch35-null-pulse-and-record-blocking title="Null-Cone Metric Rigidity, Surviving-Copy Reversal Blocking, and Finite-Memory History Capacity" lean="D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity"}
 Across the frozen null-cone rigidity certificate, observer-memory coherent reversal, and quantum measurement-capacity modules of `trureturing`, the following three theorems hold simultaneously:
@@ -98,6 +106,10 @@ Yet living minds part company with memoryless black-box searchers at one decisiv
    Before tabulation, re-solving the same problem class forces repeated zigzags across non-commuting intermediate planes, paying parasitic holonomy area each time; once written into $T$, an input landing on an indexed fiber can use an implemented recovery map for algebraic readout. The factorization $\mathrm{target} = \mathrm{recover} \circ \mathrm{process}$ (Conjunct 1 of [@thm-ch35-target-recovery-table-factorization] below) guarantees that a recovery map exists; it supplies neither an evaluation algorithm nor a runtime bound. Executing the pre-aligned projection still belongs to a concrete carrier! What everyday speech calls **intuition, muscle memory, or effortless mastery** is geometrically **replacing online blind search arc-length with pre-compiled table projection**.
 3. **Weaving Lines into a Field (Spanning a Local Smooth Guiding Field from Orthogonal Basis Rows)**:
    A solitary witness thread stands isolated in state space; as growth steadily expands the table, hundreds and thousands of mutually orthogonal basis rows populate the task manifold, and their linear superpositions weave an erstwhile "lines-without-a-field" desert into a **locally smooth guiding field** supplying tangential direction at every point (`MODEL`; for cell-probe space–time trade-offs and non-uniform advice complexity limits, see [@rem-ch35-advice-space-time-tradeoff-literature] below).
+
+::: {.viz src="self-referential-table" preset="expand_table" height="500"}
+**Expanding the table one row at a time.** Each step of the rail writes in one more row orthogonal to all the earlier ones: the sum of the diagonal in the amber frame climbs with the rank, one unit at a time, and the table stays symmetric and idempotent throughout.
+:::
 
 We now lock into place the two formal theorems governing lossless table-recovery factorization and the extensional uniqueness of canonical copied-address records.
 
@@ -188,16 +200,28 @@ Here the deepest stroke in our opening epigraph cuts straight through the knot: 
 
 Encode the addressing, lookup, and compositional compression algorithm directly into **Row $0$ of table $T$**, housing operator (the verb that reads the table) and operand (the rows being read) inside one and the same addressable geometric carrier (`MODEL`; for stored-program architecture, homoiconicity, and reflexive domain isomorphisms in computer science, see [@rem-ch35-homoiconicity-scott-domain-literature] below). The shared representation makes code indexable and rewritable, and self-application expressible; primitive evaluation rules and control hardware must still execute it. Along this route, two qualitative transitions gain a concrete footing:
 
+::: {.viz src="self-referential-table" preset="dual_read" height="500"}
+**Read across, a ruler; read down, the state being measured.** Row $1$ (the horizontal dashed frame) reads column $4$ (the vertical dashed frame) term by term: of the eight products $T_{1k}T_{k4}$ some are cyan and some magenta, and the amber bar that adds them up lands exactly on $T_{14}$ in the hollow frame, that is, $(T^2)_{14} = T_{14}$.
+:::
+
 1. **Rank Collapse and Meta-Learning ("Learning How to Build and Read Tables")**:
    Row $0$ is no longer an isolated datum; it is the **bilinear composition and reduction operator** governing the entire table! For a known parity structure or commuting same-plane rotation family, once Row $0$ stores the corresponding composition rule, $T$ need never tabulate $2^n$ dead entries: it stores just $n$ orthogonal generator rows and synthesizes the answer to any of the $2^n$ queries on the fly via Row $0$ (worked out explicitly in [@ex-ch35-self-indexing-table-rank-collapse] below). Better still, whenever the mind refines the lookup/compression rule in Row $0$, retrieval across thousands of previously stored rows can benefit through the shared rule—the exact geometry of leaping from rote memorization to structural mastery (meta-learning)!
 2. **Bounding Interpreter Regress Under Explicit Evaluation and Convergence Conditions: $T = T(T) \iff \psi = \psi(\psi)$**:
    Examine all four conjuncts of [@thm-ch35-lawvere-diagonal-and-homoiconic-closure] Conjunct 1 below: whenever a modifier $f$ is **fixed-point-free**, the self-application diagonal $\operatorname{diagonal}(f, h)(a) = f(h(a, a))$ escapes every two-argument table $h$ (part (c)); conversely, part (d) exhibits a concrete Boolean witness proving the fixed-point-free hypothesis indispensable—**the moment a table captures its own diagonal row, self-application at the capturing address locks onto a fixed point**! When table $T$ stops appealing to a higher meta-interpreter and instead uses Row $0$ to index and rewrite $T$ itself, and the specified update map actually satisfies the contraction conditions of orthogonal projection damping ([Chapter 32](ch32-unified-field-and-meta-unification.md) [@thm-ch32-generative-self-reference-and-zeckendorf] and [Chapter 24](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature]) and converges to stability, the interpreter question closes within this model into the **homoiconic self-referential loop**:
+
+::: {.viz src="self-referential-table" preset="diagonal" height="500"}
+**A diagonal cell reads itself.** Row $4$ and column $4$ are the same numbers, so the eight products are squares, all cyan; they add up to the squared length of the row, which is exactly the diagonal cell $T_{44}$.
+:::
 
 $$
 T \;=\; T(T) \;\Longleftrightarrow\; \psi \;=\; \psi(\psi).
 $$
 
 Within our one-dimensional real projection model (`MODEL`), this self-consistent equilibrium where operator and table become one corresponds to [Chapter 24](ch24-cosine-fixed-points-and-self-reference.md)'s self-referential cosine equilibrium angle (numerical root and continuum iteration background in [@rem-banach-dottie-hairy-ball-literature]): there, the ruler that reads the table and the table being read admit no subject–object split.
+
+::: {.viz src="self-referential-table" preset="heal" height="500"}
+**Knock one cell, and a few steps restore idempotency.** Add $0.3$ to $(2, 5)$ and $(5, 2)$ and iterate $T_{m+1} = 3T_m^2 - 2T_m^3$: each row on the right holds the eigenvalues of one step, the cyan points are pulled to $1$ and the magenta ones to $0$, and the idempotency error drops to machine precision within a few steps. The table it returns to is another projection very close to the original, in general not the original itself; the convergence threshold and the quadratic convergence are literature results, not formalized in this book.
+:::
 
 ::: {.theorem #thm-ch35-lawvere-diagonal-and-homoiconic-closure title="Self-Application Diagonal Package and Pointwise Escape of the Relative Semantic Diagonal" lean="D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode"}
 Across the frozen qualitative self-application diagonal and concept-definition escape modules of `trureturing`, with no finiteness assumptions required, the following two theorems hold simultaneously:
@@ -290,6 +314,14 @@ $$
 
 If memory is read only through bias on this axis, transverse coherence subsequently undergoes complete unread standard-basis pinching, and environment records are inaccessible, then at $\cos 90^\circ = 0$ this encoding's axial directional reading vanishes, address boundaries separating row from row vaporize on the spot, and even the lookup algorithm stored inside Row $0$ **evaporates along with the entire table $T$ back into memoryless white radiation**! That would not be arriving at supreme consummation with a lifetime's wisdom intact; it would be **incinerating the entire homoiconic table built across a lifetime**, plunging straight back into amnesia and triggering yet another blind $90^\circ \to 0^+$ cycle!
 
+::: {.viz src="self-referential-table" preset="orthogonal_zero" height="500"}
+**Turned into the complement, the reading vanishes.** The state $\psi$ turns from the constant vector, which lies in the table, towards $w$, which is orthogonal to every row of it: the cyan reading $T\psi$ shrinks with $\cos\theta$ while the magenta $\sin\theta$ grows; at $90^\circ$ the table reads nothing at all from $\psi$.
+:::
+
 **Could the entire labor of expanding the table and inscribing the lookup algorithm inside Row $0$ really culminate in burning the table to ashes at $\theta = 90^\circ$? And if "at last becoming light itself" cannot mean table-erasing collapse at $90^\circ$, what exact fixed point in orthogonal geometry preserves $100\%$ of the self-referential skeleton $T = T(T)$ while illuminating the whole field unimpeded like light?**
+
+::: {.viz src="self-referential-table" height="620"}
+The full lab of the self-reading table: change the size $N \in \{4, 8, 12\}$ and the rank, click any cell to read it or knock it, and switch between the rank, read, heal and 90° scenes.
+:::
 
 Carrying this life-or-death geometric cliffhanger, we push open the door to the closing chapter of Part IX—[Chapter 36](ch36-hyperbolic-steps-and-quotienting-reincarnation.md).

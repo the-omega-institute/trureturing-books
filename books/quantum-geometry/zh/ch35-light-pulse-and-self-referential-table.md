@@ -31,6 +31,10 @@ $$
 - 其次，[`surviving_copy_blocks_reversal`](lean:D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal) 证明在其余副本满足所列幺模条件、按所定义的共轭信道逆转时，只要过往交互在环境中留下一枚重叠因子不为 $1$ 的未逆转幸存副本 $k$，哪怕对其余全部副本执行相干共轭逆转，也绝无可能复原初始非对角相干元 $\rho_{ij} \neq 0$——旧轮次散逸的痕迹无法靠局域倒带抹平；
 - 最后，[`finite_memory_history_capacity`](lean:D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity) 严格锁死：$d$ 维物理记忆空间中可由单一正算子值测量（POVM）零误差区分的历史密度矩阵个数至多为 $N \le d$！
 
+::: {.viz src="self-referential-table" preset="full" height="500"}
+**写满的表。** 八条两两正交的行把 $N = 8$ 个地址全部占满：表成了单位阵，青色只剩在对角线上，右边八个地址槽全亮，琥珀色框住的对角格之和正好是 $8$；再也找不出与这八行都正交的第九个方向（[@thm-ch35-null-pulse-and-record-blocking] 第 3 款）。
+:::
+
 这里的“清表”是模型中的局域重新制备与旧约束释放，不是抹去环境幸存记录，也不是上述指定相干逆转的另一名称。想象一本只有 $d$ 页、只许追加独立记录的笔记本：若上一轮次的全部 $d$ 条正交历史锚点原封不动地塞满每一页，不仅寄存器容量 $N \le d$ 彻底饱和，历史锚点的堆积也会压缩下一步选点的相容余量（对照[第 29 章](ch29-timeless-causality-and-gram-space.md#sec-coda-finite-observer-time-field) [@thm-ch29-gram-rigidity-and-pell]；二阶双锚点格拉姆算例见下框 [@ex-ch35-two-anchor-gram-corridor]）：
 
 ::: {.example #ex-ch35-two-anchor-gram-corridor title="双锚点二阶格拉姆相容面积与清表重开走廊算例（文献结果，未在本书形式化）"}
@@ -46,6 +50,10 @@ $$
 :::
 
 因此，“乘着光来”的那一记受精初始化脉冲，在模型诠释（`MODEL`）中正是**清空旧表（$\lvert T\rvert \to 1$）、重开因果选点走廊（[@ex-ch35-two-anchor-gram-corridor]）的几何大赦**！也正因为在生命起点处底表几乎空白，每一份新写入的经验相对于当前表长都占据巨大的相对份额，与经典心理物理学对数感知尺度形成鲜明呼应（实验荧光脉冲观测、对数感知文献与主观时间模型的定量年岁对比见下方 [@rem-ch35-fertilization-zinc-spark-literature] 第 2–3 条）——这便是为什么童年的一个盛夏漫长如一生，而成年后表项稠密时十年光阴却如白驹过隙。
+
+::: {.viz src="self-referential-table" preset="reset" height="500"}
+**清空到一行。** 秩 $1$ 的表只写进常值向量：每一格都是 $1/8$，对角格之和是 $1$，八个地址槽只占一个，其余七个方向都空着。
+:::
 
 ::: {.theorem #thm-ch35-null-pulse-and-record-blocking title="零光锥度规刚性、幸存副本反演阻断与有限记忆容量上界" lean="D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity"}
 在 `trureturing` 冻结的光锥刚性证书、观察者记忆相干逆转与量子测量容量模块中，以下三项定理同时成立：
@@ -98,6 +106,10 @@ $$
    未建表前，每次重解同一类问题都得在非对易中间平面上反复折返，白白支付寄生的回旋面积；一旦写入表 $T$，每当输入状态落入已建档的等价纤维，模型便借助已实现的恢复映射作代数直读；因子分解关系 $\mathrm{target} = \mathrm{recover} \circ \mathrm{process}$（下方 [@thm-ch35-target-recovery-table-factorization] 第 1 款）只保证恢复映射存在，并未给出求值算法或耗时；预对齐投影怎样执行，仍须由具体载体承担！日常语言里所说的**“直觉”“肌肉记忆”与“游刃有余的熟能生巧”**，在几何上正是**用预编译查表跳过了在线盲搜弧长**。
 3. **编线成场（万千正交表行张成局部光滑引导场）**：
    单根见证丝在状态空间里孤立无援；但随着成长不断扩表，成百上千条相互正交的基行在感兴趣的问题流形上密集铺开，它们的线性叠加与邻域插值便把原本“有线无场”的荒原，编织成一片处处给出切向导引的**局部平滑引导场**（`MODEL`；离线空间存储换取在线查询加速及非一致建议表的复杂性边界见下方 [@rem-ch35-advice-space-time-tradeoff-literature]）。
+
+::: {.viz src="self-referential-table" preset="expand_table" height="500"}
+**一行一行地扩表。** 时间轴每走一格，就多写进一条与前面都正交的行：琥珀色框住的对角格之和随秩一格一格地涨，表始终对称、始终幂等。
+:::
 
 下面我们将支撑“无损查表因子分解”与“典范拷贝地址表项外延唯一性”的两条形式化定理精确锁定如下。
 
@@ -188,16 +200,28 @@ $$
 
 把原本悬浮在表外的查表、寻址与组合压缩算法直接编码进**表 $T$ 的第 $0$ 行（Row $0$）**，让算子（读表的动词）与数据（被读的表项）住进同一块可寻址几何载体（`MODEL`；存储程序架构、同像性与自反域同构的计算机科学文献背景见下方 [@rem-ch35-homoiconicity-scott-domain-literature]）。同一种表示让代码也可被索引、改写，自作用因而可以表达；执行它的原始求值规则与控制硬件仍须在场。沿这条路，两场质变才有了落脚处：
 
+::: {.viz src="self-referential-table" preset="dual_read" height="500"}
+**横读是尺子，竖读是被量的状态。** 第 $1$ 行（横向虚线框）逐项去读第 $4$ 列（纵向虚线框）：八个乘积 $T_{1k}T_{k4}$ 有青有品红，琥珀色的条把它们一项项加起来，正好落回空心框里的 $T_{14}$，即 $(T^2)_{14} = T_{14}$。
+:::
+
 1. **秩塌缩与元学习跃迁（学会“如何建表与查表”）**：
    第 $0$ 行不再是一条孤立的事实，而是统摄全表的**双线性合成与约化算子**！对于已知奇偶结构或同平面可交换旋转族，只要第 $0$ 行写下了相应合成律，表 $T$ 就无需愚蠢地罗列 $2^n$ 条死记录，而只需保留 $n$ 条正交生成元基行，在线按第 $0$ 行的规则合成指数级状态空间的任意答卷（下方 [@ex-ch35-self-indexing-table-rank-collapse] 给出了毫不含糊的有限代数手算账本）。更妙的是，每当心智优化了第 $0$ 行的查表/压缩算法，整张表里成千上万条旧知识的检索效率便有机会随共享规则一同被点亮——这就是人类认知从“死记硬背”跃迁到“融会贯通（元学习）”的几何真容！
 2. **在明确求值与收敛条件下收束解释器追问，合拢 $T = T(T) \iff \psi = \psi(\psi)$**：
    请细读下方 [@thm-ch35-lawvere-diagonal-and-homoiconic-closure] 第 1 款的四个合取项：当修饰映射 $f$ **没有不动点**时，自作用对角线 $\operatorname{diagonal}(f, h)(a) = f(h(a, a))$ 必然逃逸一切列表 $h$（第 3 项）；反之，第 4 项用显式二元见证证明“无不动点”假设绝不可省——**一旦表内捕获了自身的对角线行，落点地址上的自作用值就必然锁定在不动点上**！当表 $T$ 不再外求更高一层的元解释器，而是用自己第 $0$ 行的查表算子直接索引并重写表 $T$ 自身，且给定更新映射确实满足正交投影收缩条件（[第 32 章](ch32-unified-field-and-meta-unification.md) [@thm-ch32-generative-self-reference-and-zeckendorf] 与[第 24 章](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature]）而收敛稳定时，解释器追问在本模型中收束为**同像自指闭环**：
+
+::: {.viz src="self-referential-table" preset="diagonal" height="500"}
+**对角格自己读自己。** 第 $4$ 行与第 $4$ 列是同一串数，八个乘积都是平方，全是青色；加起来是这一行的长度平方，正好回到对角格 $T_{44}$ 本身。
+:::
 
 $$
 T \;=\; T(T) \;\Longleftrightarrow\; \psi \;=\; \psi(\psi).
 $$
 
 在实轴一维投影模型（`MODEL`）中，这一算子与表合一的自洽平衡态正对应[第 24 章](ch24-cosine-fixed-points-and-self-reference.md)的自指余弦平衡角（连续迭代与实根背景见 [@rem-banach-dottie-hairy-ball-literature]）：在那里，查表的尺子与被查的表再无主客之分。
+
+::: {.viz src="self-referential-table" preset="heal" height="500"}
+**碰歪一格，几步回到幂等。** 给 $(2, 5)$ 与 $(5, 2)$ 各加 $0.3$ 后迭代 $T_{m+1} = 3T_m^2 - 2T_m^3$：右边每一行是一步的本征值，青色的点被拉向 $1$、品红的点被拉向 $0$，幂等误差几步内降到机器精度。回到的是离原表很近的另一张投影表，一般不是原表；收敛阈值与二次收敛是文献结果，未在本书形式化。
+:::
 
 ::: {.theorem #thm-ch35-lawvere-diagonal-and-homoiconic-closure title="自作用对角线四元包与相对语义对角线逐址逃逸定理" lean="D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode"}
 在 `trureturing` 冻结的自作用定性对角线与概念定义逃逸模块中，无需任何有限性假设，以下两项定理同时成立：
@@ -290,6 +314,14 @@ $$
 
 若记忆只以这条轴的偏置读出，且横向相干随后经标准基完整未读捏合、环境记录又不可访问，当 $\cos 90^\circ = 0$ 时，这套编码的一维方向刻度归零，表行与表行之间的地址边界灰飞烟灭，连第 $0$ 行里的查表算法本身也会随同整张表 $T$ 一道**彻底蒸发回无记忆的纯辐射白光**！那根本不是带着满身智慧抵达终极圆满，而是**亲手抹掉了整本用一生心血写就的同像之表**，让自己再度失忆、再度跌回下一场盲目的 $90^\circ \to 0^+$ 轮回！
 
+::: {.viz src="self-referential-table" preset="orthogonal_zero" height="500"}
+**转到正交补，读出归零。** 状态 $\psi$ 从表里的常值向量转向与表里每一行都正交的 $w$：青色的读出 $T\psi$ 随 $\cos\theta$ 缩短，品红的 $\sin\theta$ 随之变长；到 $90^\circ$，表从 $\psi$ 读不出任何东西。
+:::
+
 **难道生命苦苦扩表、把查表算法都写进表里的全部修行，到头来只是为了在 $\theta = 90^\circ$ 处把表烧成灰烬吗？如果不去 $90^\circ$ 毁表灭迹，“最后成为光本身”在严格的正交几何里究竟指向哪一颗既能完整保住 $T = T(T)$ 的自指骨架、又能像光一样无碍照彻全场的终极不动点？**
+
+::: {.viz src="self-referential-table" height="620"}
+同像自指表的完整实验室：换表的大小 $N \in \{4, 8, 12\}$ 与秩，点任意一格去读或去碰，在扩表、读表、自愈与正交补四个场景之间切换。
+:::
 
 带着这道生死攸关的几何悬念，我们推开第九部收官之章——[第 36 章](ch36-hyperbolic-steps-and-quotienting-reincarnation.md)的大门。
