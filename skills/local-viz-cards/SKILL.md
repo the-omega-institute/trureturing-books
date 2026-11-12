@@ -409,7 +409,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 终章 | 空间吸引子一节末 | `spatial-attractor-deja-vu` · `return`，随后完整实验室 |
 | 终章 | 黄金切投 · 一 末 | `golden-cut-observer` · `cut` |
 | 终章 | 黄金切投 · 二 末 | `golden-cut-observer` · `phason` |
-| 终章 | 黄金切投 · 三 末（文献注记 `rem-coda-quasicrystal-empire-literature` 之后） | `golden-cut-observer` · `window`、`empire` |
+| 终章 | 黄金切投 · 三 第 2 条（贴边与深处的点）之后 | `golden-cut-observer` · `window`、`edge` |
+| 终章 | 黄金切投 · 三 末（第 3 条之后） | `golden-cut-observer` · `empire` |
 | 终章 | 定理 `thm-coda-golden-cut-observer-cassini` 之前 | `golden-cut-observer` · `cassini`、`returns` |
 | 终章 | 定理 `thm-coda-golden-cut-observer-cassini` 的证明之后、完整实验室之前 | `golden-cut-observer` · `narrow` |
 | 终章 | 该定理的证明之后 | `golden-cut-observer` 完整实验室 |
