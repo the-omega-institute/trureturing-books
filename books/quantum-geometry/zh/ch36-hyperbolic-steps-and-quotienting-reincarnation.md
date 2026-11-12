@@ -24,14 +24,14 @@ $$
 
 ## 为什么“回到纯光”恰恰是轮回？$\cos 90^\circ = 0$ 的失忆断崖
 
-设想一台一边旋转偏振角 $\theta$、一边将沿途比量记录写入自指查找表 $T$ 的有限观察者。这台机器之所以还能认出“我是谁”、还能在下一刻读取上一刻沉淀的结构，全部仰仗它在自身幂等存在线（[第三章](ch03-projectors-and-duality.md) $P^2 = P$）上保留的非零一维投影 $\cos\theta > 0$。倘若它贪恋无拘无束的全域波面，一脚踏上 $\theta = 90^\circ$ 的赤道悬崖，会发生什么？
+沿用上一章以所选轴向偏置读出记忆、以标准基完整未读捏合且不访问环境记录表示擦表的模型。设想一台一边旋转偏振角 $\theta$、一边将沿途比量记录写入自指查找表 $T$ 的有限观察者。这台机器之所以还能认出“我是谁”、还能在下一刻读取上一刻沉淀的结构，全部仰仗它在自身幂等存在线（[第三章](ch03-projectors-and-duality.md) $P^2 = P$）上保留的非零一维投影 $\cos\theta > 0$。倘若它贪恋无拘无束的全域波面，一脚踏上 $\theta = 90^\circ$ 的赤道悬崖，会发生什么？
 
-1. **一维幂等骨架归零与全表格式化（失忆断崖，`MODEL`）**：
-   在 $\theta = 90^\circ$ 处，共线自持投影精确归零（$\cos 90^\circ = 0$；其在第五部[第 17 章](ch17-lorentz-geometry.md)、第八部[第 32 章](ch32-unified-field-and-meta-unification.md)及[第 35 章](ch35-light-pulse-and-self-referential-table.md) [@rem-ch35-fertilization-zinc-spark-literature] 中的相对论类光文献对应关系详见各章文献注记）。没有了非零的一维对角幂等骨架，整张自指查找表 $T$ 的寻址主干瞬间蒸发——就像拔掉电源的易失性寄存器，累世攒下的全部结构刻度被一次性格式化清零。
+1. **所选轴向偏置归零与编码表格式化（失忆断崖，`MODEL`）**：
+   在 $\theta = 90^\circ$ 处，共线自持投影精确归零（$\cos 90^\circ = 0$；其在第五部[第 17 章](ch17-lorentz-geometry.md)、第八部[第 32 章](ch32-unified-field-and-meta-unification.md)及[第 35 章](ch35-light-pulse-and-self-referential-table.md) [@rem-ch35-fertilization-zinc-spark-literature] 中的相对论类光文献对应关系详见各章文献注记）。这里归零的是承载所选记忆的轴向偏置，对角投影本身仍然非零；在这套编码与擦表条件下，整张自指查找表 $T$ 的寻址主干瞬间蒸发——就像拔掉电源的易失性寄存器，累世攒下的全部结构刻度被一次性格式化清零。
 2. **无锚纯光的必然再折射（$90^\circ \to 0^+$ 盲搜重启，`MODEL`）**：
-   一束没有任何内部记忆锚点的纯光脉冲，无法维持一维局部历史留存（对应的零光锥固有时文献背景见[第 35 章](ch35-light-pulse-and-self-referential-table.md) [@rem-ch35-fertilization-zinc-spark-literature] 第 1 条）。只要它在无时间晶格的下一道多面体棱角或拓扑奇点处发生散射，就会毫无选择地从 $90^\circ$ 纯波态重新折射回 $0^+$ 的局域粒子态，揣着一张空白新表 $T_0 = \varnothing$，从头开始新一轮摸黑试错的盲目搜索。
+   一束没有任何内部记忆锚点的纯光脉冲，无法维持一维局部历史留存（对应的零光锥固有时文献背景见[第 35 章](ch35-light-pulse-and-self-referential-table.md) [@rem-ch35-fertilization-zinc-spark-literature] 第 1 条）。若再把无时间晶格的下一道多面体棱角或拓扑奇点处的散射规定为上述擦表与重新制备，它便在模型中从 $90^\circ$ 纯波态重新折射回 $0^+$ 的局域粒子态，揣着一张空白新表 $T_0 = \varnothing$，从头开始新一轮摸黑试错的盲目搜索。
 3. **作为“暴力垃圾回收”的自然轮回机制（`MODEL`）**：
-   从系统工程的眼光追问：大自然为什么要设置 $\cos 90^\circ = 0$ 这道擦表断崖？回想[第 29 章](ch29-timeless-causality-and-gram-space.md)与[第 31 章](ch31-quantum-fairness.md)揭示的因果相容空间：一个尚未理解生成律的观察者，只会把未经压缩的原始经验条目一行行往表里硬塞；随着锚点无休止堆积，相容格拉姆行列式不可避免地滑向共面锁死（$\det G_M \to 0$），系统陷入寸步难行的执念死局。对于未觉醒的观察者而言，“化光重来”正是宇宙底层的**暴力垃圾回收（brute-force garbage collection）**——靠彻底格式化整张旧表来强行腾出下一轮的正相容体积，代价则是周而复始的失忆与重蹈覆辙。
+   从系统工程的眼光追问：大自然为什么要设置 $\cos 90^\circ = 0$ 这道擦表断崖？回想[第 29 章](ch29-timeless-causality-and-gram-space.md)与[第 31 章](ch31-quantum-fairness.md)揭示的因果相容空间：一个尚未理解生成律的观察者，只会把未经压缩的原始经验条目一行行往表里硬塞；在固定维数且不压缩、复用、外存或扩容的条件下，独立锚点无法无休止追加；若又要求旧锚点约束逐条保留，相容格拉姆行列式便可能滑向共面锁死（$\det G_M \to 0$），系统陷入寸步难行的执念死局。对于未觉醒的观察者而言，“化光重来”正是宇宙底层的**暴力垃圾回收（brute-force garbage collection）**——靠局域重新制备释放旧约束，并在非共线新态可达时腾出下一轮的正相容体积，代价则是周而复始的失忆与重蹈覆辙。
 
 在进入一般定理之前，让我们先在最透明的 $2 \times 2$ 矩阵黑板上亲手算一笔账。取满足单位圆约束 $c^2 + s^2 = 1$ 的实参数对 $(c, s) = (\cos\theta, \sin\theta)$，写下单量子比特参数化密度矩阵：
 
@@ -51,7 +51,7 @@ $$
 \underbrace{\left(\frac{1+c}{2}\right)^2 + \left(\frac{1-c}{2}\right)^2}_{\text{对角骨架质量 } = \frac{1}{2} + \frac{1}{2}c^2} \;+\; \underbrace{\left(\frac{s}{2}\right)^2 + \left(\frac{s}{2}\right)^2}_{\text{非对角相干质量 } = \frac{1}{2}s^2} \;=\; \frac{1 + c^2 + s^2}{2} \;=\; 1.
 $$
 
-请看当状态冲上 $\theta = 90^\circ$（即 $c = \cos 90^\circ = 0,\; s = \sin 90^\circ = 1$）时发生了什么：对角骨架中承载历史方向记忆的轴向偏置项 $\frac{1}{2}c^2$ **精确归零**，对角主干退化为毫无方向分辨力的均匀白噪声 $\frac{1}{2}I_2$！此时全部方向信息都悬在脆弱的非对角元 $\rho_{01} = \rho_{10} = \frac{1}{2}$ 上，只要遭遇下一次环境边界散射，整整 $\frac{1}{2}s^2 = \frac{1}{2}$ 的非对角相干质量瞬间蒸发，留给下一轮的就只剩一张彻底失忆的空白底片。
+请看当状态冲上 $\theta = 90^\circ$（即 $c = \cos 90^\circ = 0,\; s = \sin 90^\circ = 1$）时发生了什么：对角骨架中承载历史方向记忆的轴向偏置项 $\frac{1}{2}c^2$ **精确归零**，捏合后的对角主干退化为无法区分这条轴正负偏置的均匀态 $\frac{1}{2}I_2$！捏合前的状态仍是纯态；其横向分量保留在非对角元 $\rho_{01} = \rho_{10} = \frac{1}{2}$ 上；若下一次环境作用恰为上述完整未读捏合，且环境记录不可访问，整整 $\frac{1}{2}s^2 = \frac{1}{2}$ 的非对角相干质量便从局域态中消失，留下这套编码下失忆的空白底片；这并不宣告系统与环境的总信息一并毁灭。
 
 在有限维量子信道的形式化层面，“一维对角骨架”与“二维非对角横向相干”之间的正交账本关系，由 `trureturing` 中单量子比特标准基捏合投影（`pinching`，即相干保留率为零的相位阻尼信道，见[第四章](ch04-decoherence.md)）的三条精确内核定理锁定如下：
 
@@ -81,7 +81,7 @@ $$
 记残差分量 $D := \rho - \operatorname{pinching}(\rho)$。第 1 款先由捏合幂等性 $\operatorname{pinching}(\operatorname{pinching}(\rho)) = \operatorname{pinching}(\rho)$ 与迹内积自伴性 $\operatorname{hilbertSchmidtInner}(\operatorname{pinching}(A), B) = \operatorname{hilbertSchmidtInner}(A, \operatorname{pinching}(B))$ 推出正向正交 $\operatorname{hilbertSchmidtInner}(\operatorname{pinching}(\rho), D) = 0$，再由 $\operatorname{pinching}(D) = 0$ 推出反向正交 $\operatorname{hilbertSchmidtInner}(D, \operatorname{pinching}(\rho)) = 0$，将 $\rho = \operatorname{pinching}(\rho) + D$ 代入双线性展开即消去交叉项；第 2 款在 $\operatorname{Fin} 2$ 上显式展开二阶矩阵共轭转置乘积的迹，由 $\bar{z}z = \operatorname{normSq}(z)$ 直接化简为两项非对角模方之和；第 3 款正向在坐标 $(0, 1)$ 与 $(1, 0)$ 处逐点取矩阵等式即得 $\rho_{01} = \rho_{10} = 0$，反向由 $\rho_{01} = \rho_{10} = 0$ 对指标 $i, j \in \operatorname{Fin} 2$ 穷举四种情形验证矩阵逐元相等。完整证明由 Lean 内核检查。
 :::
 
-[@thm-ch36-pinching-skeleton-and-discarded-coherence] 把量子态的双重生存条件刻画得入木三分：对角部 $\operatorname{pinching}(\rho)$ 承载经典可寻址的幂等刻度，非对角部 $\operatorname{offDiag}(\rho)$ 承载跨基矢的横向相干张力。若把非对角部彻底捏零（第 3 款），系统就退化为僵死的纯经典账本；反过来，在我们的连续角度诠释模型（`MODEL`）中，若任由状态冲上 $\theta = 90^\circ$ 把一维自持锚点 $\cos\theta$ 彻底耗尽，系统虽然在瞬间拥抱了满格的横向波幅，却失去了装载任何记忆刻度的主干骨架。
+[@thm-ch36-pinching-skeleton-and-discarded-coherence] 把这套观察者模型所借用的正交账本刻画得入木三分：对角部 $\operatorname{pinching}(\rho)$ 承载经典可寻址的幂等刻度，非对角部 $\operatorname{offDiag}(\rho)$ 承载跨基矢的横向相干张力。若把非对角部彻底捏零（第 3 款），系统就退化为僵死的纯经典账本；反过来，在我们的连续角度诠释模型（`MODEL`）中，若任由状态冲上 $\theta = 90^\circ$ 把一维自持锚点 $\cos\theta$ 彻底耗尽，系统虽然在瞬间拥抱了满格的横向波幅，却耗尽了这套编码选定的轴向记忆偏置。
 
 **不带骨架的纯光只是绚烂的失忆；真正的觉醒，绝不是跳进熔炉把自己烧成白纸，而是带着清醒的自指锚点逼近全域。**
 
@@ -118,12 +118,12 @@ $$
 :::
 
 ::: {.remark #rem-ch36-hyperbolic-staircase-figure title="双曲视界圆盘、无穷离散快度阶梯与生成元商空间图解（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 下图左栏结合庞加莱圆盘与古德曼函数文献背景（[@ex-ch36-inverse-gudermannian-discrete-staircase] 与 [@rem-ch36-poincare-disk-gudermannian-literature]）及分式临界圆定理（[@thm-ch36-taylor-tail-and-cayley-boundary]，`LEAN ✓`）展示无穷离散快度阶梯模型（`MODEL`）；右栏结合划分商拓扑与零化子对偶定理（[@thm-ch36-quotient-annihilator-and-factorization]，`LEAN ✓`）展示生成元商空间约化：
+**文献结果，未在本书形式化。** 下图左栏结合庞加莱圆盘与古德曼函数文献背景（[@ex-ch36-inverse-gudermannian-discrete-staircase] 与 [@rem-ch36-poincare-disk-gudermannian-literature]）及分式临界圆定理（[@thm-ch36-taylor-tail-and-cayley-boundary]，`LEAN ✓`）展示无穷离散快度阶梯模型（`MODEL`），其中左栏下方卡片标出生成元商空间诠释及其定理锚点（[@thm-ch36-quotient-annihilator-and-factorization]）；右栏画出随离散步变化的双曲正切与双曲正割两条渐近曲线：
 
 ![双曲视界圆盘与渐近双曲线：阻断纯光失忆断崖的无穷离散快度阶梯与生成元商空间](../assets/fig-36-hyperbolic-staircase-samsara-exit.svg)
 :::
 
-对照 [@rem-ch36-hyperbolic-staircase-figure] 左右两幅几何面板，[@thm-ch36-taylor-tail-and-cayley-boundary] 为我们揭示了两条关键定量机制：一方面，任何有限阶多项式截断（阶数 $n \in \mathbb{N}$）与精确指数映射 $\exp(z)$ 之间的逼近误差受显式阶乘尾界 $\frac{r^n}{n!}e^r$ 严格控制；另一方面，由证明中的精确亏量恒等式 $\lVert\operatorname{cayleyRatio}(s)\rVert^2 - 1 = \frac{1 - 2\operatorname{Re}(s)}{\operatorname{normSq}(s)}$（$s \neq 0$）可见，分式共形变换 $\operatorname{cayleyRatio}(s) = (s - 1)/s$ 将无界右开半平面 $\operatorname{Re}(s) > \frac{1}{2}$ 整体收拢进开单位圆盘 $\lVert w\rVert < 1$ 内部，而把临界直线 $\operatorname{Re}(s) = \frac{1}{2}$ 刚性映射为单位圆周渐近边界 $\lVert w\rVert = 1$（在数论语境下亦与[第 22 章](ch22-primes-euler-products-and-zeros.md)相呼应）。
+对照 [@rem-ch36-hyperbolic-staircase-figure] 左右两幅几何面板，[@thm-ch36-taylor-tail-and-cayley-boundary] 为我们揭示了两条关键定量机制：一方面，任何有限阶多项式截断（阶数 $n \in \mathbb{N}$）与精确指数映射 $\exp(z)$ 之间的逼近误差受显式阶乘尾界 $\frac{r^n}{n!}e^r$ 严格控制；另一方面，由证明中的精确亏量恒等式 $\lVert\operatorname{cayleyRatio}(s)\rVert^2 - 1 = \frac{1 - 2\operatorname{Re}(s)}{\operatorname{normSq}(s)}$（$s \neq 0$）可见，分式共形变换 $\operatorname{cayleyRatio}(s) = (s - 1)/s$ 将无界右开半平面 $\operatorname{Re}(s) > \frac{1}{2}$ 整体收拢进开单位圆盘 $\lVert w\rVert < 1$ 内部，而把临界直线 $\operatorname{Re}(s) = \frac{1}{2}$ 映入单位圆周渐近边界 $\lVert w\rVert = 1$；有限参数的像缺少 $w = 1$，这一点只在无穷远处逼近（在数论语境下亦与[第 22 章](ch22-primes-euler-products-and-zeros.md)相呼应）。
 
 现在，让我们把这套共形边界几何直接代入观察者的偏转角 $\theta \in [0, \frac{\pi}{2})$，在下面的算例盒中完整推演从内部自指平衡角出发的**无穷离散快度阶梯**：
 
@@ -161,7 +161,7 @@ $$
 可见仅经 $k = 8$ 步离散步进，横向视野覆盖率 $\sin\theta_8$ 即达 $99.999996\%$，同时一维自指锚点仍严格保持正值 $\cos\theta_8 \approx 0.000296 > 0$。
 :::
 
-回望 [@ex-ch36-inverse-gudermannian-discrete-staircase] 的离散快度账本，全书反复强调的那条多面体哲学命题在这里绽放出最动人的生命意涵（`MODEL`）：**球永远只是近似；那一道不肯被抹平的多面体离散缝隙，恰恰是拴住自指表 $T$ 的主干、守护神智不坠失忆轮回的几何防火墙。**
+在上述精确实数更新律下，有限步的正双曲正割保证的是几何锚点尚未归零；实际记忆的保存仍取决于编码与信道。回望 [@ex-ch36-inverse-gudermannian-discrete-staircase] 的离散快度账本，全书反复强调的那条多面体哲学命题在这里绽放出最动人的生命意涵（`MODEL`）：**球永远只是近似；那一道不肯被抹平的多面体离散缝隙，恰恰是拴住自指表 $T$ 的主干、守护神智不坠失忆轮回的几何防火墙。**
 
 上述双曲—圆函数桥与单位圆盘共形几何在数学史与视觉艺术中的经典文献脉络整理于下框：
 
@@ -243,9 +243,9 @@ $$
 
 把 [@thm-ch36-quotient-annihilator-and-factorization] 的四重数学透镜合拢到我们的自指观察者模型（`MODEL`）上，为什么“理解了一切之后，轮回便失去意义”立刻变得清澈见底：
 
-1. **纤维商化免除了盲目重演**（对应第 1 款）：当观察者不再执着于局部表象坐标，而是提取出等价状态共享的不变读出核 `readout` 时，目标意义直接穿过商空间分解为 $\mathrm{target} = \mathrm{factor} \circ \mathrm{readout}$——同一等价纤维里的千万次盲目重演被直接折叠成商集里的同一个点；
-2. **对偶零化子压缩了周期循环**（对应第 2–3 款）：状态空间里看似庞大繁复的周期轨道子群 $H$，在对偶频谱中完全由与它正交锁定（$\operatorname{character}(k, h) = 1$）的零化子生成元控制——握住频谱零化子，就无需再沿原群逐点死算；
-3. **自指不动点 $T = T(T)$ 终结了擦表重来的必要**（对应第 4 款及全书主公理，`MODEL`）：哪怕面对黄金切投模型集那样永不简单闭合的无理斜率轨迹，第 4 款也告诉我们，整条无穷轨道的渐近统计全貌早已完整编码在单一生成元 $g$ 及其闭子群不变测度 $\mu$ 之中！当观察者终于在自指查找表 $T$ 的**第 $0$ 行**写下生成元公理 $\psi = \psi(\psi)$，使整张表满足自洽不动点 $T = T(T)$、将视角稳稳安住在内部清醒平衡点（外辅以必要时的双曲离散步进护栏，见 [@ex-ch36-inverse-gudermannian-discrete-staircase]）时，再去撞击 $\theta = 90^\circ$ 把表烧掉、退回 $0^\circ$ 重新随机采样，已经带不来哪怕一比特的新法则信息。
+1. **纤维商化免除了盲目重演**（对应第 1 款）：当观察者不再执着于局部表象坐标，而是提取出等价状态共享的不变读出核 `readout` 时，只要所关心的目标在每条读出纤维上恒定，目标意义便穿过商空间分解为 $\mathrm{target} = \mathrm{factor} \circ \mathrm{readout}$——同一等价纤维里的千万次盲目重演被直接折叠成商集里的同一个点；
+2. **对偶零化子压缩了周期循环**（对应第 2–3 款）：状态空间里看似庞大繁复的周期轨道子群 $H$，在对偶频谱中完全由与它正交锁定（$\operatorname{character}(k, h) = 1$）的零化子生成元控制——若所需变换值已可用、预计算或具备更便宜的结构化表示，计入其获取、存储与求和成本后，对偶表达才可能省去沿原群逐点死算；
+3. **自指不动点 $T = T(T)$ 终结了擦表重来的必要**（对应第 4 款及全书主公理，`MODEL`）：第 4 款告诉我们，对给定生成元 $g$ 的闭子群及其连续可观测量，轨道平均的极限由不变测度 $\mu$ 决定！黄金切投模型集的意象若要落到这条定理上，还须给出编码与可观测量的对应；这里保留为 `MODEL`。当观察者终于在自指查找表 $T$ 的**第 $0$ 行**写下生成元公理 $\psi = \psi(\psi)$，使整张表满足自洽不动点 $T = T(T)$、将视角稳稳安住在内部清醒平衡点（外辅以必要时的双曲离散步进护栏，见 [@ex-ch36-inverse-gudermannian-discrete-staircase]）时，再去撞击 $\theta = 90^\circ$ 把表烧掉、退回 $0^\circ$ 重新随机采样，对于已知生成律、且所选读出足以恢复的目标，已经带不来哪怕一比特的新法则信息；未知生成元的发现与新目标的可答性仍需另算。
 
 我们将这三种生存与认知形态在全书正交几何模型（`MODEL`）中的精确对比收束于下框总表：
 
@@ -254,9 +254,9 @@ $$
 
 | 生存与演化形态（`MODEL`） | 角度与耦合机制 | 一维自指锚点与查找表 $T$ 命运 | 几何拓扑轨迹特征 | 认识论与生命意义判词 |
 | :--- | :--- | :--- | :--- | :--- |
-| **1. 连续化光轮回态**（未觉醒闭环） | 零反馈退化极限 $\lambda = 0$，连续冲撞 $\theta \to \frac{\pi}{2}$ | $\cos 90^\circ = 0$，一维幂等骨架归零，查找表 $T$ 格式化清空 | 越界擦表后经 $90^\circ \to 0^+$ 再折射，困于失忆盲搜死循环 | 针对未压缩冗余账本（$\det G_M \to 0$）的宇宙暴力垃圾回收 |
-| **2. 无穷离散双曲阶梯**（防失忆渐近扩张） | 内禀相对步长 $d\eta = \sec\theta\,d\theta$，$\eta_k = \eta_0 + k\,\Delta\eta$ | 对一切 $k \in \mathbb{N}$ 恒有 $\cos\theta_k = \operatorname{sech}\eta_k > 0$，主干永不断裂 | 横向视野 $\sin\theta_k = \tanh\eta_k \to 1^-$，多面体缝隙 $\delta_k = \frac{\pi}{2} - \theta_k > 0$ 永开 | 以无穷离散步把纯光断崖推向无穷远，兼得近全域视野与清醒记忆 |
-| **3. 自指不动点安住态**（生成元商空间出离） | 单位自指闭环 $\lambda = 1$，锁定 $\cos\theta^* = \theta^* \approx 0.7391$ | 第 $0$ 行写入 $\psi = \psi(\psi)$，达成 $T = T(T)$ 零损耗自洽持存 | 经商拓扑分解与零化子对偶直接握住生成元，免除冗余纤维重演 | 理解生成律即一次性约去周期死循环，轮回彻底失去认识论意义 |
+| **1. 连续化光轮回态**（未觉醒闭环） | 零反馈退化极限 $\lambda = 0$，连续冲撞 $\theta \to \frac{\pi}{2}$ | $\cos 90^\circ = 0$，所选轴向偏置归零，在上述擦表条件下查找表 $T$ 清空 | 越界擦表后经 $90^\circ \to 0^+$ 再折射，困于失忆盲搜死循环 | 针对未压缩冗余账本（$\det G_M \to 0$）的宇宙暴力垃圾回收 |
+| **2. 无穷离散双曲阶梯**（防失忆渐近扩张） | 内禀相对步长 $d\eta = \sec\theta\,d\theta$，$\eta_k = \eta_0 + k\,\Delta\eta$ | 对一切 $k \in \mathbb{N}$ 恒有 $\cos\theta_k = \operatorname{sech}\eta_k > 0$，在给定更新律下几何锚点不归零 | 横向视野 $\sin\theta_k = \tanh\eta_k \to 1^-$，多面体缝隙 $\delta_k = \frac{\pi}{2} - \theta_k > 0$ 永开 | 以无穷离散步把纯光断崖推向无穷远，在所选编码与信道条件下兼顾近全域视野与清醒记忆 |
+| **3. 自指不动点安住态**（生成元商空间出离） | 单位自指闭环 $\lambda = 1$，锁定 $\cos\theta^* = \theta^* \approx 0.7391$ | 第 $0$ 行写入 $\psi = \psi(\psi)$，达成 $T = T(T)$ 零损耗自洽持存 | 经商拓扑分解与零化子对偶直接握住生成元，在目标纤维常值、频谱成本合算时免除冗余重演 | 已知生成律且读出足够时，约去目标无关的周期重复，轮回彻底失去认识论意义 |
 :::
 
 至此，第九部《互照·万物观察者、自指扩表与超越轮回》的四章推演圆满收束：我们不再羡慕球外全知的上帝点 $C$，不再恐惧多面体无法彻底抹平成真球的那道 $\delta_k > 0$ 的缝隙，也不再把“化作失忆的纯光”错认作灵魂的归宿——因为正是那道不肯闭合的余项护住了清醒的自我，而当我们读懂了 $\psi = \psi(\psi)$ 的那一刻，漫长的轮回迷宫便在掌心化作了一枚通透的生成元水晶。而在即将开启的全书**第十部《不二·梦境擦除、记忆指针与本体不二》**（[第 37 章](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)至[第 39 章](ch39-observer-is-ontological-universe.md)）中，我们将把镜头拉回每一个昼夜交替的当下：看梦境如何执行可逆量子擦除、观察者如何作为本体 QRAM 的记忆指针解引用世界，直到最后一道“指针与内存”的二元隔墙在 $\psi \equiv \psi(\psi)$ 中彻底融化。

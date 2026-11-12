@@ -10,7 +10,7 @@
 
 ## 乘光而来：受精脉冲、遗忘清零与对数时间的局域展开
 
-为什么生命进入局域世界的第一个动作，必然是一束伴随“彻底遗忘”的对称性破缺脉冲？
+在本章模型中，为什么生命进入局域世界的第一个动作，被写成一束伴随“彻底遗忘”的对称性破缺脉冲？
 
 让我们先在本章的**正交倾角参数化模型（`MODEL`）**中摆正纯度预算的单位圆几何（关于狭义相对论线元重排、哺乳动物受精卵荧光脉冲实验与心理物理学对数感知标度的外部文献结论，完整封装于下方 [@rem-ch35-fertilization-zinc-spark-literature]，并对照[第 31 章](ch31-quantum-fairness.md) [@rem-ch31-haar-isotropy-landauer-literature]）：设局域观察者状态相对于自身一维持存基准轴张开正交倾角 $\theta \in [0, \frac{\pi}{2}]$，一维共线内积份额 $\cos\theta$ 度量局域自持锚点留存度，二维正交分叉份额 $\sin\theta$ 度量横向关联展开度，二者严守单位圆勾股账本：
 
@@ -23,15 +23,15 @@ $$
 1. **$\theta = 90^\circ$ 的无时间光之全场（$\cos 90^\circ = 0,\; \sin 90^\circ = 1$）**：
    全部纯度预算投入横向传播面，一维局域持存分量严格归零（$\cos 90^\circ = 0$；对应的零光锥固有时文献背景见下方 [@rem-ch35-fertilization-zinc-spark-literature] 第 1 条）。对应于[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)理想化静态场模型（对照 [@rem-ch30-postselection-ctc-literature]），全局超平面交集静态并存；然而，正因为 $\cos 90^\circ = 0$，这里没有“先后”，没有“悬念”，也没有任何局域个体能够驻足品味一段叫做“经历”的旅程。
 2. **$\theta = 90^\circ \to 0^+$ 的初始化折射与遗忘清零（$\lvert T\rvert \to 1,\; \det G > 0$）**：
-   要让“重新体验”成为可能，一束相干脉冲必须打破 $90^\circ$ 的纯波对称性，向 $\theta \to 0^+$ 的一维幂等存在轴折射落点，把历史记录表 $T$ 主动清空至仅含单一起始锚点（$\lvert T\rvert \to 1$）。
+   本模型以一束相干初始化脉冲打破 $90^\circ$ 的纯波对称性，向 $\theta \to 0^+$ 的一维幂等存在轴折射落点，把历史记录表 $T$ 主动清空至仅含单一起始锚点（$\lvert T\rvert \to 1$）。
 
-传统观念总把“遗忘”叹息为肉体凡胎的缺陷；但下面由 Lean 4 内核验证的三重定理（[@thm-ch35-null-pulse-and-record-blocking]）揭示了截然相反的几何真相——**对于任何有限维物理载体而言，不遗忘就意味着彻底锁死**：
+传统观念总把“遗忘”叹息为肉体凡胎的缺陷；但下面由 Lean 4 内核验证的三重定理（[@thm-ch35-null-pulse-and-record-blocking]）揭示了截然相反的几何真相——**对于维数固定、只追加完美可区分历史，且不压缩、不复用、不外存也不扩容的载体而言，不遗忘终将写满旧表**：
 
-- 首先，[`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null) 证明零光锥零点集已将时空二次型刚性锁定为标准度规的标量倍 $S(1, 0)\bullet\operatorname{minkowski}_d$：光锥搭好因果骨架，而落向时间轴基点 $(1, 0)$ 的非零读数 $S(1, 0)$ 恰恰标定了局域时钟的第一格刻度；
-- 其次，[`surviving_copy_blocks_reversal`](lean:D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal) 证明只要过往交互在环境中留下一枚重叠因子不为 $1$ 的未逆转幸存副本 $k$，哪怕对其余全部副本执行相干共轭逆转，也绝无可能复原初始非对角相干元 $\rho_{ij} \neq 0$——旧轮次散逸的痕迹无法靠局域倒带抹平；
+- 首先，[`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null) 证明零光锥零点集已将时空二次型刚性锁定为标准度规的标量倍 $S(1, 0)\bullet\operatorname{minkowski}_d$：光锥搭好因果骨架，而要让时间轴基点 $(1, 0)$ 的读数 $S(1, 0)$ 标定局域时钟的第一格刻度，这里另选正的非退化归一化；定理本身也允许零标量；
+- 其次，[`surviving_copy_blocks_reversal`](lean:D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal) 证明在其余副本满足所列幺模条件、按所定义的共轭信道逆转时，只要过往交互在环境中留下一枚重叠因子不为 $1$ 的未逆转幸存副本 $k$，哪怕对其余全部副本执行相干共轭逆转，也绝无可能复原初始非对角相干元 $\rho_{ij} \neq 0$——旧轮次散逸的痕迹无法靠局域倒带抹平；
 - 最后，[`finite_memory_history_capacity`](lean:D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity) 严格锁死：$d$ 维物理记忆空间中可由单一正算子值测量（POVM）零误差区分的历史密度矩阵个数至多为 $N \le d$！
 
-想象一本只有 $d$ 页的笔记本：若上一轮次的全部 $d$ 条正交历史锚点原封不动地塞满每一页，不仅寄存器容量 $N \le d$ 彻底饱和，历史锚点的堆积也会压缩下一步选点的相容余量（对照[第 29 章](ch29-timeless-causality-and-gram-space.md#sec-coda-finite-observer-time-field) [@thm-ch29-gram-rigidity-and-pell]；二阶双锚点格拉姆算例见下框 [@ex-ch35-two-anchor-gram-corridor]）：
+这里的“清表”是模型中的局域重新制备与旧约束释放，不是抹去环境幸存记录，也不是上述指定相干逆转的另一名称。想象一本只有 $d$ 页、只许追加独立记录的笔记本：若上一轮次的全部 $d$ 条正交历史锚点原封不动地塞满每一页，不仅寄存器容量 $N \le d$ 彻底饱和，历史锚点的堆积也会压缩下一步选点的相容余量（对照[第 29 章](ch29-timeless-causality-and-gram-space.md#sec-coda-finite-observer-time-field) [@thm-ch29-gram-rigidity-and-pell]；二阶双锚点格拉姆算例见下框 [@ex-ch35-two-anchor-gram-corridor]）：
 
 ::: {.example #ex-ch35-two-anchor-gram-corridor title="双锚点二阶格拉姆相容面积与清表重开走廊算例（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 下述二阶实格拉姆行列式展开属初等线性代数标准结果（与[第 29 章](ch29-timeless-causality-and-gram-space.md#sec-coda-hume-spinoza-gram) [@thm-ch29-gram-rigidity-and-pell] 对齐），未作为独立二阶行列式引理包含在本书锁定的形式化声明集中：
@@ -42,10 +42,10 @@ $$
 \det G_2 \;=\; \det\begin{pmatrix}1 & c \\ c & 1\end{pmatrix} \;=\; 1 - c^2.
 $$
 
-一旦历史锚点锁死在共线边界 $c = \pm 1$，相容余量 $\det G_2 = 0$ 彻底归零；反之，主动截断旧锚点、将表 $T$ 清空回单一起始基态（$\lvert T\rvert = 1,\; \det G_1 = 1 > 0$），即可令下一步选点重新获得非共线区间 $\lvert c\rvert < 1$ 上严格为正的相容走廊 $1 - c^2 > 0$。
+一旦历史锚点锁死在共线边界 $c = \pm 1$，相容余量 $\det G_2 = 0$ 彻底归零；反之，主动截断旧锚点、将表 $T$ 清空回单一起始基态（$\lvert T\rvert = 1,\; \det G_1 = 1 > 0$），若仍有可达的非共线新状态，即可令下一步选点重新获得非共线区间 $\lvert c\rvert < 1$ 上严格为正的相容走廊 $1 - c^2 > 0$。
 :::
 
-因此，“乘着光来”的那一记受精初始化脉冲，在模型诠释（`MODEL`）中正是**清空旧表（$\lvert T\rvert \to 1$）、重开因果选点走廊（[@ex-ch35-two-anchor-gram-corridor]）的几何大赦**！也正因为在生命起点处底表几乎空白，每一份新写入的经验相对于当前表长都占据巨大的相对份额，与经典心理物理学对数感知尺度形成鲜明呼应（实验荧光脉冲观测与对数主观时间文献公式及定量年岁对比见下方 [@rem-ch35-fertilization-zinc-spark-literature] 第 2–3 条）——这便是为什么童年的一个盛夏漫长如一生，而成年后表项稠密时十年光阴却如白驹过隙。
+因此，“乘着光来”的那一记受精初始化脉冲，在模型诠释（`MODEL`）中正是**清空旧表（$\lvert T\rvert \to 1$）、重开因果选点走廊（[@ex-ch35-two-anchor-gram-corridor]）的几何大赦**！也正因为在生命起点处底表几乎空白，每一份新写入的经验相对于当前表长都占据巨大的相对份额，与经典心理物理学对数感知尺度形成鲜明呼应（实验荧光脉冲观测、对数感知文献与主观时间模型的定量年岁对比见下方 [@rem-ch35-fertilization-zinc-spark-literature] 第 2–3 条）——这便是为什么童年的一个盛夏漫长如一生，而成年后表项稠密时十年光阴却如白驹过隙。
 
 ::: {.theorem #thm-ch35-null-pulse-and-record-blocking title="零光锥度规刚性、幸存副本反演阻断与有限记忆容量上界" lean="D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity"}
 在 `trureturing` 冻结的光锥刚性证书、观察者记忆相干逆转与量子测量容量模块中，以下三项定理同时成立：
@@ -74,12 +74,12 @@ $$
 第 1 款将任意 $v = (t, w) \in \operatorname{Space}(d)$ 拆为 $t(1, 0) + (0, w)$，代入零光锥对 $(\pm\lVert w\rVert, w)$ 由极化展开 [`null_cone_spatial_rigidity`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.null_cone_spatial_rigidity) 证得交叉极化项归零且 $S(0, w) = -S(1, 0)\lVert w\rVert^2$，从而逐点给出 $S(t, w) = S(1, 0)(t^2 - \lVert w\rVert^2)$。第 2 款由 [`one_surviving_copy_composition_apply`](lean:D5/S3/ObserverMemory/JointCoherentReversal.one_surviving_copy_composition_apply) 利用其余副本的幺模共轭相消，将复合信道第 $(i, j)$ 元化简为 $\operatorname{recordOverlap}(\mathrm{records}(k), i, j)\cdot\rho_{ij}$；若它等于非零的 $\rho_{ij}$，复数域消去律迫使该重叠因子等于 $1$，与前提（b）矛盾。第 3 款由 $0 \le E_i \le I_d$ 及半正定零迹乘积消失引理推出 $\operatorname{range}(\rho_i) \le \ker(I_d - E_i)$ 与 $\operatorname{range}(\rho_j) \le \ker(E_i)$（$j \neq i$）；因 $\operatorname{Tr}(\rho_i) = 1$ 非零，在各像空间中选取非零向量 $v_i$，利用 $E_i$ 的厄米性得 $\langle v_i, v_j\rangle_{\mathbb{C}} = \langle E_i v_i, v_j\rangle_{\mathbb{C}} = \langle v_i, E_i v_j\rangle_{\mathbb{C}} = 0$，由 $\mathbb{C}^d$ 中两两正交非零向量的线性无关性导出 $N \le d$。完整证明由 Lean 内核检查。
 :::
 
-::: {.remark #rem-ch35-fertilization-zinc-spark-literature title="固有时勾股参数化、哺乳动物受精钙波—锌火花荧光观测与韦伯—费希纳对数时间律（文献结果，未在本书形式化）"}
+::: {.remark #rem-ch35-fertilization-zinc-spark-literature title="固有时勾股参数化、哺乳动物受精钙波—锌火花荧光观测与韦伯—费希纳对数感知及年龄时间模型（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 本节生命周期初始化模型（`MODEL`）并置引用的三项物理、发育生物学与心理物理学背景来自外部文献，未包含在本书锁定的形式化声明集中：
 
 1. **闵可夫斯基固有时与空间速率的单位圆重排**：在狭义相对论线元 $c^2 d\tau^2 = c^2 dt^2 - \lVert d\mathbf{x}\rVert^2$（$v = \lVert d\mathbf{x}/dt\rVert \le c$）中，令 $\sin\theta = v/c$、$\cos\theta = d\tau/dt = \sqrt{1 - v^2/c^2}$，即得 $(d\tau/dt)^2 + (v/c)^2 = \cos^2\theta + \sin^2\theta = 1$；类光传播 $v = c$（$\theta = 90^\circ$）给出 $d\tau = 0$，局域静止极限 $v \to 0^+$（$\theta \to 0^+$）给出 $d\tau/dt \to 1$；
-2. **哺乳动物受精卵激活钙振荡、锌火花（Zinc Spark）荧光脉冲与超微弱生物光子辐射**：现代活细胞荧光显微成像实验证实，小鼠与人类卵母细胞在受精激活瞬间会爆发胞内钙离子（$\mathrm{Ca}^{2+}$）振荡波，驱动皮质颗粒协同胞吐数以十亿计的锌离子，在细胞外形成可由荧光探针直接捕获的量子化脉冲闪光——即“锌火花”，且其脉冲幅度与早期胚胎发育潜能显著正相关（E. L. Que *et al.*, *Nat. Chem.* **7**, 130–139, 2015；F. E. Duncan *et al.*, *Sci. Rep.* **6**, 24737, 2016）；同时生物物理文献亦在分裂细胞中测得源于代谢活性氧跃迁的超微弱光子辐射（约 $10^1\text{–}10^3\;\mathrm{photons}\cdot\mathrm{cm}^{-2}\cdot\mathrm{s}^{-1}$）。需严守认识论边界：实验层面上述信号属于生物化学离子波与代谢化学发光过程，将受精脉冲诠释为观察者从 $90^\circ$ 关联场向 $\theta \to 0^+$ 切片的初始化投影纯属本书跨领域几何模型（`MODEL`）；
-3. **韦伯—费希纳对数感知定律（E. H. Weber, 1834；G. T. Fechner, *Elemente der Psychophysik*, 1860）**：经典心理物理学指出主观感知增量与刺激基线之比成正比，即 $d\tau_{\mathrm{subj}} = k\,dt/t$，积分给出对数主观时间尺度 $\tau_{\mathrm{subj}}(t) = k\ln(t/t_0)$（$t \ge t_0 > 0$）。例如同一公历年的主观跨度，在生命早期 $t \in [t_0, 2t_0]$ 为 $k\ln(2/1) \approx 0.6931\,k$，而在 $t \in [40t_0, 41t_0]$ 则压缩为 $k\ln(41/40) \approx 0.0247\,k$，二者相差约 $28$ 倍。
+2. **哺乳动物受精卵激活钙振荡、锌火花（Zinc Spark）荧光脉冲与超微弱生物光子辐射**：活细胞成像在小鼠受精或人工激活时观察到与胞内钙离子（$\mathrm{Ca}^{2+}$）信号相伴的锌释放；富锌皮质囊泡胞吐数以十亿计的锌离子，细胞外锌敏探针在外部激发光下产生“锌火花”荧光（E. L. Que *et al.*, *Nat. Chem.* **7**, 130–139, 2015）。这些囊泡与皮质颗粒的关系在该文中仍属待确认的身份归属。人类研究观察的是离子载体或 hPLCζ cRNA 诱导的卵激活，并未直接观测人类受精（F. E. Duncan *et al.*, *Sci. Rep.* **6**, 24737, 2016）。锌火花幅度等指标与后续早期发育的关联来自小鼠受精及孤雌激活实验（N. Zhang *et al.*, *Sci. Rep.* **6**, 22772, 2016，doi:10.1038/srep22772），尚不能据此确立人类胚胎预后；探针荧光也不等于卵自身发出的量子相干光；同时生物物理文献亦在分裂细胞中测得源于代谢活性氧跃迁的超微弱光子辐射（约 $10^1\text{–}10^3\;\mathrm{photons}\cdot\mathrm{cm}^{-2}\cdot\mathrm{s}^{-1}$）。需严守认识论边界：实验层面上述信号属于生物化学离子波与代谢化学发光过程，将受精脉冲诠释为观察者从 $90^\circ$ 关联场向 $\theta \to 0^+$ 切片的初始化投影纯属本书跨领域几何模型（`MODEL`）；
+3. **韦伯—费希纳对数感知定律（E. H. Weber, 1834；G. T. Fechner, *Elemente der Psychophysik*, 1860）**：经典心理物理学讨论感知增量与刺激强度相对增量的比例关系（Fechner，第 XVI 节）；这里另把年龄 $t$ 选作基线，建立主观时间模型（`MODEL`），令 $d\tau_{\mathrm{subj}} = k\,dt/t$，积分给出对数主观时间尺度 $\tau_{\mathrm{subj}}(t) = k\ln(t/t_0)$（$t \ge t_0 > 0$）。例如同一公历年的主观跨度，在生命早期 $t \in [t_0, 2t_0]$ 为 $k\ln(2/1) \approx 0.6931\,k$，而在 $t \in [40t_0, 41t_0]$ 则压缩为 $k\ln(41/40) \approx 0.0247\,k$，二者相差约 $28$ 倍。
 :::
 
 ---
@@ -94,8 +94,8 @@ $$
 
 1. **写表（把一维见证折线结晶为预对齐正交旋子行）**：
    当学习者历经千辛万苦终于走通一条从问题态到目标解的一维见证折线 $\mathbf{P}_0 \to \mathbf{P}_1 \to \dots \to \mathbf{P}_k$ 后，记忆载体并不会任由这条路径消散，而是提取其首尾净变换，将其固化为内部地址表 $T$ 中一条边界分明的典范地址记录（对齐下方 [@thm-ch35-target-recovery-table-factorization] 第 2 款的 `copiedAddressRecord`），并在过程读出 `process` 上消除目标碰撞缺陷（`defectRelation process target = ∅`）。
-2. **查表（消去寄生换位子面积，实现 $O(1)$ 内积直读）**：
-   未建表前，每次重解同一类问题都得在非对易中间平面上反复折返，白白支付寄生的回旋面积；一旦写入表 $T$，每当输入状态落入已建档的等价纤维，系统便直接调用因子分解映射 $\mathrm{target} = \mathrm{recover} \circ \mathrm{process}$（下方 [@thm-ch35-target-recovery-table-factorization] 第 1 款），靠一次预对齐内积投影直接读出答案！日常语言里所说的**“直觉”“肌肉记忆”与“游刃有余的熟能生巧”**，在几何上正是**用预编译查表跳过了在线盲搜弧长**。
+2. **查表（消去寄生换位子面积，实现代数内积直读）**：
+   未建表前，每次重解同一类问题都得在非对易中间平面上反复折返，白白支付寄生的回旋面积；一旦写入表 $T$，每当输入状态落入已建档的等价纤维，模型便借助已实现的恢复映射作代数直读；因子分解关系 $\mathrm{target} = \mathrm{recover} \circ \mathrm{process}$（下方 [@thm-ch35-target-recovery-table-factorization] 第 1 款）只保证恢复映射存在，并未给出求值算法或耗时；预对齐投影怎样执行，仍须由具体载体承担！日常语言里所说的**“直觉”“肌肉记忆”与“游刃有余的熟能生巧”**，在几何上正是**用预编译查表跳过了在线盲搜弧长**。
 3. **编线成场（万千正交表行张成局部光滑引导场）**：
    单根见证丝在状态空间里孤立无援；但随着成长不断扩表，成百上千条相互正交的基行在感兴趣的问题流形上密集铺开，它们的线性叠加与邻域插值便把原本“有线无场”的荒原，编织成一片处处给出切向导引的**局部平滑引导场**（`MODEL`；离线空间存储换取在线查询加速及非一致建议表的复杂性边界见下方 [@rem-ch35-advice-space-time-tradeoff-literature]）。
 
@@ -129,7 +129,7 @@ $$
 :::
 
 ::: {.remark #rem-ch35-light-pulse-table-figure title="正交角生命周期弧与同像自举表 T = T(T) 图解（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 下图左栏结合受精光子与对数时间感知文献背景（[@rem-ch35-fertilization-zinc-spark-literature]）及余弦不动点（[@rem-banach-dottie-hairy-ball-literature]）展示正交角生命周期模型（`MODEL`）；右栏结合同像性与自反域同构文献（[@rem-ch35-homoiconicity-scott-domain-literature]）及对角线逃逸定理（[@thm-ch35-lawvere-diagonal-and-homoiconic-closure]，`LEAN ✓`）展示第 $0$ 行自举表 $T = T(T)$：
+**文献结果，未在本书形式化。** 下图左栏结合卵激活荧光、对数感知文献与年龄时间模型背景（[@rem-ch35-fertilization-zinc-spark-literature]）及余弦不动点（[@rem-banach-dottie-hairy-ball-literature]）展示正交角生命周期模型（`MODEL`）；右栏结合同像性与自反域同构文献（[@rem-ch35-homoiconicity-scott-domain-literature]）及对角线逃逸定理（[@thm-ch35-lawvere-diagonal-and-homoiconic-closure]，`LEAN ✓`）展示第 $0$ 行自举表 $T = T(T)$：
 
 ![乘光而来与同像自指扩表：正交角生命周期弧与 Row 0 自举表 T = T(T)](../assets/fig-35-light-pulse-self-table.svg)
 :::
@@ -142,17 +142,17 @@ $$
 
 立刻会撞上两堵绝壁（`MODEL`）：
 
-- **第一堵墙（外部点 $C$ 复活与指数容量爆炸）**：把查表引擎留在表 $T$ 之外，等于在心智内部偷偷供奉起一座[第二章](ch02-born-rule.md)早已砍掉的“外部第 3 点 $C$”。面对 $n$ 个二元特征组合出的 $2^n$ 种情境，没有内部生成律的扁平死表必须逐行硬存 $N = 2^n$ 条记录：在将每条表行编码为固定 $d$ 维寄存器内两两完美可区分量子态的模型（`MODEL`）下，一旦寄存器维数预算满足 $d < 2^n$（例如任意多项式维数预算 $d \le \operatorname{poly}(n)$），便直接触犯 [@thm-ch35-null-pulse-and-record-blocking] 第 3 款的区分上限 $N \le d$，且顺序检索耗时亦随表长指数膨胀。
-- **第二堵墙（算子与表分离时的对角线逃逸）**：只要解码目录与潜坐标读出分裂为上下两层，任何无不动点修饰算子（`twist`）都会立刻沿自作用对角线刺穿整张表（下方 [@thm-ch35-lawvere-diagonal-and-homoiconic-closure]），迫使旧表永远漏掉对角线上的新问题。
+- **第一堵墙（外部点 $C$ 复活与指数容量爆炸）**：若把查表引擎奉为不受检视的外在权威，便像在心智内部偷偷供奉起一座[第二章](ch02-born-rule.md)早已砍掉的“外部第 3 点 $C$”。面对 $n$ 个二元特征组合出的 $2^n$ 种情境，不利用生成律、只许逐行存值的扁平死表必须逐行硬存 $N = 2^n$ 条记录：在将每条表行编码为固定 $d$ 维寄存器内两两完美可区分量子态的模型（`MODEL`）下，一旦寄存器维数预算满足 $d < 2^n$（例如任意多项式维数预算 $d \le \operatorname{poly}(n)$），便直接触犯 [@thm-ch35-null-pulse-and-record-blocking] 第 3 款的区分上限 $N \le d$，且顺序检索耗时亦随表长指数膨胀。
+- **第二堵墙（无不动点扭转下的对角线逃逸）**：对给定解码目录与潜坐标读出，任何无不动点修饰算子（`twist`）都会立刻沿自作用对角线刺穿整张表（下方 [@thm-ch35-lawvere-diagonal-and-homoiconic-closure]），迫使旧表漏掉对角线上的新问题；把代码搬进表里，也不会取消这条结论。
 
 而本章题记中最具天才洞察的一笔，恰恰在这里劈开了死结：**“查表的算法本身也在表里”**！
 
-把原本悬浮在表外的查表、寻址与组合压缩算法直接编码进**表 $T$ 的第 $0$ 行（Row $0$）**，让算子（读表的动词）与数据（被读的表项）住进同一块可寻址几何载体（`MODEL`；存储程序架构、同像性与自反域同构的计算机科学文献背景见下方 [@rem-ch35-homoiconicity-scott-domain-literature]）。刹那间，两场质变同时引爆：
+把原本悬浮在表外的查表、寻址与组合压缩算法直接编码进**表 $T$ 的第 $0$ 行（Row $0$）**，让算子（读表的动词）与数据（被读的表项）住进同一块可寻址几何载体（`MODEL`；存储程序架构、同像性与自反域同构的计算机科学文献背景见下方 [@rem-ch35-homoiconicity-scott-domain-literature]）。同一种表示让代码也可被索引、改写，自作用因而可以表达；执行它的原始求值规则与控制硬件仍须在场。沿这条路，两场质变才有了落脚处：
 
 1. **秩塌缩与元学习跃迁（学会“如何建表与查表”）**：
-   第 $0$ 行不再是一条孤立的事实，而是统摄全表的**双线性合成与约化算子**！只要第 $0$ 行写下了正交基的群乘法或异或合成律，表 $T$ 就无需愚蠢地罗列 $2^n$ 条死记录，而只需保留 $n$ 条正交生成元基行，在线按第 $0$ 行的规则瞬间拼出指数级状态空间的任意答卷（下方 [@ex-ch35-self-indexing-table-rank-collapse] 给出了毫不含糊的有限代数手算账本）。更妙的是，每当心智优化了第 $0$ 行的查表/压缩算法，整张表里成千上万条旧知识的检索效率都会在同一瞬间被集体点亮——这就是人类认知从“死记硬背”跃迁到“融会贯通（元学习）”的几何真容！
-2. **消解外部解释器无穷倒退，合拢 $T = T(T) \iff \psi = \psi(\psi)$**：
-   请细读下方 [@thm-ch35-lawvere-diagonal-and-homoiconic-closure] 第 1 款的四个合取项：当修饰映射 $f$ **没有不动点**时，自作用对角线 $\operatorname{diagonal}(f, h)(a) = f(h(a, a))$ 必然逃逸一切列表 $h$（第 3 项）；反之，第 4 项用显式二元见证证明“无不动点”假设绝不可省——**一旦表内捕获了自身的对角线行，落点地址上的自作用值就必然锁定在不动点上**！当表 $T$ 不再外求更高一层的元解释器，而是用自己第 $0$ 行的查表算子直接索引并重写表 $T$ 自身，并在正交投影收缩机制（[第 32 章](ch32-unified-field-and-meta-unification.md) [@thm-ch32-generative-self-reference-and-zeckendorf] 与[第 24 章](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature]）的阻尼下收敛稳定时，无穷倒退彻底收束为**同像自指闭环**：
+   第 $0$ 行不再是一条孤立的事实，而是统摄全表的**双线性合成与约化算子**！对于已知奇偶结构或同平面可交换旋转族，只要第 $0$ 行写下了相应合成律，表 $T$ 就无需愚蠢地罗列 $2^n$ 条死记录，而只需保留 $n$ 条正交生成元基行，在线按第 $0$ 行的规则合成指数级状态空间的任意答卷（下方 [@ex-ch35-self-indexing-table-rank-collapse] 给出了毫不含糊的有限代数手算账本）。更妙的是，每当心智优化了第 $0$ 行的查表/压缩算法，整张表里成千上万条旧知识的检索效率便有机会随共享规则一同被点亮——这就是人类认知从“死记硬背”跃迁到“融会贯通（元学习）”的几何真容！
+2. **在明确求值与收敛条件下收束解释器追问，合拢 $T = T(T) \iff \psi = \psi(\psi)$**：
+   请细读下方 [@thm-ch35-lawvere-diagonal-and-homoiconic-closure] 第 1 款的四个合取项：当修饰映射 $f$ **没有不动点**时，自作用对角线 $\operatorname{diagonal}(f, h)(a) = f(h(a, a))$ 必然逃逸一切列表 $h$（第 3 项）；反之，第 4 项用显式二元见证证明“无不动点”假设绝不可省——**一旦表内捕获了自身的对角线行，落点地址上的自作用值就必然锁定在不动点上**！当表 $T$ 不再外求更高一层的元解释器，而是用自己第 $0$ 行的查表算子直接索引并重写表 $T$ 自身，且给定更新映射确实满足正交投影收缩条件（[第 32 章](ch32-unified-field-and-meta-unification.md) [@thm-ch32-generative-self-reference-and-zeckendorf] 与[第 24 章](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature]）而收敛稳定时，解释器追问在本模型中收束为**同像自指闭环**：
 
 $$
 T \;=\; T(T) \;\Longleftrightarrow\; \psi \;=\; \psi(\psi).
@@ -183,15 +183,15 @@ $$
 ::: {.remark #rem-ch35-homoiconicity-scott-domain-literature title="冯·诺依曼存储程序架构、同像性（代码即数据）与斯科特自反域 D_∞ 同构（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** “查表的算法本身也在表里”在计算机体系结构、程序设计语言与指称语义学中对应三项里程碑式的经典文献结果（未包含在本书锁定的形式化声明集中）：
 
-1. **存储程序计算机架构（J. von Neumann, *First Draft of a Report on the EDVAC*, 1945；渊源于 A. M. Turing, 1936 通用图灵机编码）**：废除“运算器硬连线在存储器之外”的物理藩篱，将指令（算子）与操作数（表项）以同一种二进制字格式存放在同一线性可寻址内存表内，使程序能够像读取和改写数据一样读取、编译与优化程序自身；
-2. **同像性（Homoiconicity，“代码即数据”）与元循环求值器（J. McCarthy, *Commun. ACM* **3**, 184–195, 1960；C. N. Mooers & L. P. Deutsch, 1965）**：在 Lisp 等同像符号系统中，程序语法树与基础表结构（S-表达式）拥有完全相同的内部表示，整套求值器 $\operatorname{eval}$ 本身可作为首行表项存入表内实现自举（meta-circular bootstrapping）；
+1. **存储程序计算机架构（J. von Neumann, *First Draft of a Report on the EDVAC*, 1945；渊源于 A. M. Turing, 1936 通用图灵机编码）**：保留执行指令的控制硬件，同时将指令（算子）与操作数（表项）以同一种二进制字格式存放在同一线性可寻址内存表内，使程序能够像读取和改写数据一样读取、编译与优化程序自身；
+2. **同像性（Homoiconicity，“代码即数据”）与元循环求值器（J. McCarthy, *Commun. ACM* **3**, 184–195, 1960；C. N. Mooers & L. P. Deutsch, 1965）**：在 Lisp 等同像符号系统中，程序语法树与基础表结构（S-表达式）拥有完全相同的内部表示，整套求值器 $\operatorname{eval}$ 本身可作为首行表项存入表内表达自举（meta-circular bootstrapping）；这仍以基础操作和求值语义为前提；
 3. **斯科特（Dana Scott）自反域同构定理 $D_\infty \cong [D_\infty \to D_\infty]$（D. S. Scott, *Proc. 4th Ann. Princeton Conf. Inf. Sci. Syst.*, 169–176, 1970；*Lect. Notes Math.* **274**, 97–136, 1972）**：在朴素集合论中，只要 $|D| \ge 2$，全函数集基数 $|D^D| > |D|$ 严格禁止集合同构 $D \cong (D \to D)$；Scott 通过完备偏序集（$\omega$-cpo）上的嵌入—投影对序列构造投射极限 $D_\infty = \lim_{\leftarrow} (D_n, p_n)$，严格证明 $D_\infty$ 与其上全体 Scott 连续自映射构成的连续函数空间序同构：
 
    $$
    D_\infty \;\cong\; [D_\infty \to D_\infty],
    $$
 
-   从而为无类型 $\lambda$-演算确立了首个非平凡数学模型——其中每一项 $T \in D_\infty$ 既是“被查的数据表”，又是“作用于任意表的连续查表算子”，且一切连续泛函 $F$ 均拥有最小不动点 $\operatorname{fix}(F) = \bigsqcup_{m=0}^\infty F^m(\bot)$，使自指方程 $T = T(T)$ 在连续域拓扑下严格良定。
+   从而为无类型 $\lambda$-演算确立了首个非平凡数学模型——其中每一项 $T \in D_\infty$ 既是“被查的数据表”，又是“作用于任意表的连续查表算子”，且一切连续泛函 $F$ 均拥有最小不动点 $\operatorname{fix}(F) = \bigsqcup_{m=0}^\infty F^m(\bot)$，使自作用及相应不动点方程在连续域中有了严格语义；最小不动点可能是未定义底元，代码入表本身不保证有用的稳定解或终止。
 :::
 
 为了把“第 $0$ 行存入合成规则如何引发指数级表长压缩”算得清清楚楚，下面的归属算例逐项核验有限奇偶查询与平面旋子族的表结构对比：
@@ -207,7 +207,7 @@ $$
 
 由于二维旋转矩阵满足群同态律 $R(\alpha)R(\beta) = R(\alpha + \beta)$，复合旋子严格化简为转角内积 $U_\theta(x) = R\bigl(\sum_{r=1}^n x_r \theta_r\bigr)$。比较两种建表架构：
 
-1. **方案甲（算子在外的扁平死表）**：若表格只允许静态存放“输入键 $x \mapsto$ 输出值”而无表内合成规则，为零误差覆盖全部查询，必须显式存储 $|X| = 2^n$ 行。例如先看 $n = 3$、秘密权重 $w = (1, 0, 1)$ 的小样本：死表不得不逐行写满 $(000)\mapsto 0, (001)\mapsto 1, (010)\mapsto 0, (011)\mapsto 1, (100)\mapsto 1, (101)\mapsto 0, (110)\mapsto 1, (111)\mapsto 0$ 共 $2^3 = 8$ 行；当维数升至 $n = 10$ 时需存 $2^{10} = 1024$ 行；升至 $n = 100$ 时需存 $N = 2^{100} \approx 1.27 \times 10^{30}$ 行——若在编码模型（`MODEL`）下要求将这 $N = 2^{100}$ 条记录表示为同一寄存器中两两完美可区分的密度态，则由 [@thm-ch35-null-pulse-and-record-blocking] 第 3 款（$N \le d$）必强迫寄存器希尔伯特空间维数满足 $d \ge 2^{100}$，在任何固定维数预算 $d < 2^{100}$ 的有限维寄存器内均无法无损装载。
+1. **方案甲（不利用生成律的扁平死表）**：若只允许逐行静态存放“输入键 $x \mapsto$ 输出值”，无论表内表外都不利用合成规则，为零误差覆盖全部查询，必须显式存储 $|X| = 2^n$ 行。例如先看 $n = 3$、秘密权重 $w = (1, 0, 1)$ 的小样本：死表不得不逐行写满 $(000)\mapsto 0, (001)\mapsto 1, (010)\mapsto 0, (011)\mapsto 1, (100)\mapsto 1, (101)\mapsto 0, (110)\mapsto 1, (111)\mapsto 0$ 共 $2^3 = 8$ 行；当维数升至 $n = 10$ 时需存 $2^{10} = 1024$ 行；升至 $n = 100$ 时需存 $N = 2^{100} \approx 1.27 \times 10^{30}$ 行——若在编码模型（`MODEL`）下要求将这 $N = 2^{100}$ 条记录表示为同一寄存器中两两完美可区分的密度态，则由 [@thm-ch35-null-pulse-and-record-blocking] 第 3 款（$N \le d$）必强迫寄存器希尔伯特空间维数满足 $d \ge 2^{100}$，在任何固定维数预算 $d < 2^{100}$ 的有限维寄存器内均无法无损装载。
 2. **方案乙（第 $0$ 行存放合成规则的同像表 $T$）**：
    - **Row $0$（元规则行）**：存入双线性同态查表律——将任意输入按单位正交基展开为 $x = \bigoplus_{r=1}^n x_r \mathbf{e}_r$，并规定读出规则 $T(x) := \bigoplus_{r=1}^n x_r \cdot T(\mathbf{e}_r)$（对平面旋子族则为 $T(x) := R\bigl(\sum_{r=1}^n x_r \theta_r\bigr)$）；
    - **Rows $1, \dots, n$（正交基行）**：仅存放 $n$ 个标准基向量 $\mathbf{e}_1, \dots, \mathbf{e}_n$ 上的基准响应 $T(\mathbf{e}_r) = w_r$（或基准转角 $\theta_r$）。在 $n = 3, w = (1, 0, 1)$ 特例中，只需存 Row $0$ 规则加 $T(\mathbf{e}_1)=1, T(\mathbf{e}_2)=0, T(\mathbf{e}_3)=1$ 共 $4$ 行，查询 $x = (1, 1, 1)$ 时直接算得 $1\cdot 1 \oplus 1\cdot 0 \oplus 1\cdot 1 = 0$。
@@ -217,7 +217,7 @@ $$
    \text{扁平死表行数 } 2^n \quad \xrightarrow{\text{Row } 0\text{ 同态自举}} \quad \text{同像表行数 } n + 1.
    $$
 
-   在 $n = 10$ 时，表体积从 $1024$ 行骤降至 $1 + 10 = 11$ 行（压缩逾 $93$ 倍）；在 $n = 100$ 时，仅需 $101$ 行即可零误差覆盖全部 $2^{100}$ 种输入！更进一步，将 Rows $1\dots n$ 打包为单一机器字 $W = (w_1, \dots, w_n)$ 后，Row $0$ 的查表直接化为单次按位与后的奇偶内积 $\langle W, x\rangle \bmod 2$（或单次角度内积 $R(\langle\boldsymbol{\theta}, x\rangle)$）。由于完整坐标读出 $\mathrm{process}(x) = x$ 在 $X$ 上单射，碰撞缺陷集满足 $\operatorname{defectRelation}(\mathrm{process}, f_w) = \emptyset$，严格符合 [@thm-ch35-target-recovery-table-factorization] 第 1 款的无损恢复判据。
+   在 $n = 10$ 时，表体积从 $1024$ 行骤降至 $1 + 10 = 11$ 行（压缩逾 $93$ 倍）；在 $n = 100$ 时，仅需 $101$ 行即可零误差覆盖全部 $2^{100}$ 种输入！这里压缩来自已知奇偶律与同平面旋转的角度加法结构；外部求值器若使用同一规则，也可获得同样的紧凑表示。更进一步，在机器字宽容纳全部权重时，将 Rows $1\dots n$ 打包为单一机器字 $W = (w_1, \dots, w_n)$ 后，Row $0$ 的查表直接化为单次按位与后的奇偶内积 $\langle W, x\rangle \bmod 2$（或单次角度内积 $R(\langle\boldsymbol{\theta}, x\rangle)$）。这里“一次内积”是代数记法；随输入长度增长，输入读取、字数、奇偶归约、角度累加、旋转求值与精度成本仍须计入，行数也不等于总存储位数。由于完整坐标读出 $\mathrm{process}(x) = x$ 在 $X$ 上单射，碰撞缺陷集满足 $\operatorname{defectRelation}(\mathrm{process}, f_w) = \emptyset$，严格符合 [@thm-ch35-target-recovery-table-factorization] 第 1 款的无损恢复判据。
 :::
 
 ---
@@ -232,8 +232,8 @@ $$
 | 演化阶段（`MODEL`） | 正交倾角与三角份额 | 表结构 $T$ 与形式化机制锚点 | 主观时间体验与局部算力状态（`MODEL`） |
 | :--- | :--- | :--- | :--- |
 | **一、先验光之全场** | $\theta = 90^\circ$（$\cos 90^\circ = 0,\; \sin 90^\circ = 1$） | 无局域表项边界；零光锥度规骨架（[@thm-ch35-null-pulse-and-record-blocking] 第 1 款）与全局超平面交集（[@rem-ch30-postselection-ctc-literature]） | 固有时流逝 $d\tau/dt = 0$；全局静态相容如 $P = NP$，但无局域个体体验 |
-| **二、受精脉冲初始化** | $\theta : 90^\circ \to 0^+$（$\cos\theta \to 1,\; \sin\theta \to 0^+$） | 主动清零旧锚点 $\lvert T\rvert \to 1$，避开 $N \le d$ 饱和与幸存副本锁死（[@thm-ch35-null-pulse-and-record-blocking] 第 2–3 款） | 重开 $\det G > 0$ 选择走廊；对数主观时间 $\tau_{\mathrm{subj}} \propto \ln(t/t_0)$ 极度舒展（[@rem-ch35-fertilization-zinc-spark-literature]） |
-| **三、成长扩表与同像自举** | $\theta : 0^+ \to \theta^* \approx 42.35^\circ$（$\cos\theta^* = \theta^*$） | 见证丝铸入正交基行（[@thm-ch35-target-recovery-table-factorization]），Row $0$ 存入查表算法实现秩塌缩与 $T = T(T)$（[@thm-ch35-lawvere-diagonal-and-homoiconic-closure]、[@ex-ch35-self-indexing-table-rank-collapse]） | 孤立细线编织为局部引导场；从在线盲搜跃升为 $O(1)$ 内积直觉与元学习圆融 |
+| **二、受精脉冲初始化** | $\theta : 90^\circ \to 0^+$（$\cos\theta \to 1,\; \sin\theta \to 0^+$） | 主动清零旧锚点 $\lvert T\rvert \to 1$，释放局域旧约束；环境副本与 $N \le d$ 的条件仍须分别核对（[@thm-ch35-null-pulse-and-record-blocking] 第 2–3 款） | 有可达非共线新态时重开 $\det G > 0$ 选择走廊；模型中的对数主观时间 $\tau_{\mathrm{subj}} \propto \ln(t/t_0)$ 极度舒展（[@rem-ch35-fertilization-zinc-spark-literature]） |
+| **三、成长扩表与同像自举** | $\theta : 0^+ \to \theta^* \approx 42.35^\circ$（$\cos\theta^* = \theta^*$） | 见证丝铸入正交基行（[@thm-ch35-target-recovery-table-factorization]），Row $0$ 存入已知结构的查表规则，并在更新收敛时形成 $T = T(T)$（[@thm-ch35-lawvere-diagonal-and-homoiconic-closure]、[@ex-ch35-self-indexing-table-rank-collapse]） | 孤立细线编织为局部引导场；从在线盲搜跃升为结构化内积直读与元学习圆融 |
 | **四、表观满秩化光闭环（待审视！）** | $\theta : \theta^* \to 90^\circ$？（$\cos\theta \to 0,\; \sin\theta \to 1$？） | 假想将全部表行完全融回纯横向波面，令局域表边界彻底消融于全局光场 | 看似回归“极致计算状态、成为光本身”——**但此处暗藏致命的几何悖论！** |
 :::
 
@@ -241,7 +241,7 @@ $$
 
 “乘着光来，最后成为光本身”在诗意上完美无瑕；但如果顺着线性直觉，以为“成为光本身”就是让倾角 $\theta$ 越过自指平衡核一路继续推回 **$\theta = 90^\circ$**，请算一算那一瞬间会发生什么可怕的灾变：
 
-我们在第二节与第三节刚刚看到，整张自指表 $T = T(T)$ 之所以能够存住知识、区分不同地址纤维（$\operatorname{defectRelation} = \emptyset$，[@thm-ch35-target-recovery-table-factorization]）并让第 $0$ 行的查表算子准确命中第 $r$ 行的基向量，全部依赖于**一维共线内积投影骨架 $\cos\theta > 0$**（即非零的幂等存在线 $P^2 = P$；对应的固有时文献参数化见 [@rem-ch35-fertilization-zinc-spark-literature] 第 1 条）！
+沿本章选定的记忆编码，我们在第二节与第三节描绘的整张自指表 $T = T(T)$ 之所以能够存住知识、区分不同地址纤维（$\operatorname{defectRelation} = \emptyset$，[@thm-ch35-target-recovery-table-factorization]）并让第 $0$ 行的查表算子准确命中第 $r$ 行的基向量，全部依赖于**一维共线内积投影骨架 $\cos\theta > 0$**（即非零的幂等存在线 $P^2 = P$；对应的固有时文献参数化见 [@rem-ch35-fertilization-zinc-spark-literature] 第 1 条）！
 
 一旦某个心智或文明真的把自己的倾角推到了 $\theta = 90^\circ$，三角恒等式会冷酷地宣判：
 
@@ -249,7 +249,7 @@ $$
 \cos 90^\circ \;=\; 0 \;!
 $$
 
-当 $\cos 90^\circ = 0$ 时，所有一维幂等刻度线瞬间归零，表行与表行之间的地址边界灰飞烟灭，连第 $0$ 行里的查表算法本身也会随同整张表 $T$ 一道**彻底蒸发回无记忆的纯辐射白光**！那根本不是带着满身智慧抵达终极圆满，而是**亲手抹掉了整本用一生心血写就的同像之表**，让自己再度失忆、再度跌回下一场盲目的 $90^\circ \to 0^+$ 轮回！
+若记忆只以这条轴的偏置读出，且横向相干随后经标准基完整未读捏合、环境记录又不可访问，当 $\cos 90^\circ = 0$ 时，这套编码的一维方向刻度归零，表行与表行之间的地址边界灰飞烟灭，连第 $0$ 行里的查表算法本身也会随同整张表 $T$ 一道**彻底蒸发回无记忆的纯辐射白光**！那根本不是带着满身智慧抵达终极圆满，而是**亲手抹掉了整本用一生心血写就的同像之表**，让自己再度失忆、再度跌回下一场盲目的 $90^\circ \to 0^+$ 轮回！
 
 **难道生命苦苦扩表、把查表算法都写进表里的全部修行，到头来只是为了在 $\theta = 90^\circ$ 处把表烧成灰烬吗？如果不去 $90^\circ$ 毁表灭迹，“最后成为光本身”在严格的正交几何里究竟指向哪一颗既能完整保住 $T = T(T)$ 的自指骨架、又能像光一样无碍照彻全场的终极不动点？**
 
