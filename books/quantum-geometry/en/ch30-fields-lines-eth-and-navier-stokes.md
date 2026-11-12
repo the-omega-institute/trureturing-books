@@ -458,7 +458,7 @@ The trans-cosmological scale and reduction comparison in [@ex-ch30-galactic-cros
 :::
 
 ::: {.viz src="eth-horizon-crossover" height="640"}
-**Interactive laboratory `ORTHO//HORIZON`**: the three scenes of this section. Rates: where the schematic curve $r(n)$ meets the $0.386$ of PPSZ, and how the constant $c$ moves the crossover into or out of the shaded part; bridge graph: the rank of the flow matrix against the three cuts, equal to the minimal cut inside the cone (verified in Lean), with the three bridges as the bottleneck outside it; modes: the number of modes of a spectrum that reach the threshold $\theta$ is at most $T/\theta$ (verified in Lean). The curve with $c = 1$ is schematic, not a measurement of any algorithm.
+**Interactive laboratory `ORTHO//HORIZON`**: the three scenes of this section. Rates: where the schematic curve $r(n)$ meets the $0.386$ of PPSZ, and how the constant $c$ moves the crossover into or out of the shaded part; bridge graph: one sampled flow-matrix rank against four cuts, with the frozen quantity $\operatorname{QMinCut} = \min(3ac, ad, bc)$ and the fourth cut $3bd$ derived by hand through matrix factorization; for natural-number dimensions satisfying $0 < a \le b$, $0 < c \le d$, $a^2 + b^2 \le 3ab$ and $c^2 + d^2 \le 3cd$, the greatest attainable rank equals $\operatorname{QMinCut} = \min(ad, bc)$ (verified in Lean), though a single draw can fall lower; outside the cone, the four cuts must be compared; modes: the number of modes of a spectrum that reach the threshold $\theta$ is at most $T/\theta$ (verified in Lean). The curve with $c = 1$ is schematic, not a measurement of any algorithm.
 :::
 
 ---
