@@ -174,5 +174,18 @@ await page.keyboard.press('Space'); check('Space pauses', !(await state()).playi
 await page.click('[data-lang-set="en"]'); await settle(page, 150);
 for (const r of ['none', 'path', 'erase']) { await page.click(`#readerChips [data-reader="${r}"]`); await settle(page); const left = await cjkLeftovers(page); check(`English: no Chinese left with the reader ${r}`, left.length === 0, left.slice(0, 3).join(' | ')); }
 
+// the stills that chapter 6 prints: the reading splits the hits (it does not copy them), and the rows are named as the caption says
+{
+  const shot = await T.newPage();
+  for (const id of ['delayed', 'erase']) {
+    await T.goto(BOOK, ID, `?shot=1&lang=zh&preset=${id}`, shot); await settle(shot, 60);
+    const st = await shot.evaluate(() => window.SLIT_DEBUG.state), hits = await shot.evaluate(() => window.SLIT_DEBUG.hits());
+    const rows = [0, 1].map((r) => hits.filter((h) => h.row === r).length);
+    check(`still ${id}: all ${NMAX} hits are in, and the two rows split them (${rows.join(' + ')} = ${hits.length})`, st.n === NMAX && hits.length === NMAX && rows[0] + rows[1] === NMAX && rows.every((k) => k > 0) && st.reader === (id === 'delayed' ? 'path' : 'erase'));
+    const body = await shot.evaluate(() => document.getElementById('stage').innerText + document.getElementById('legend').innerText);
+    check(`still ${id}: the legend writes r with a subscript R, not r_R`, !/r_[LR]/.test(body) && /rR/.test(await shot.evaluate(() => document.getElementById('legend').textContent)));
+  }
+}
+
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();

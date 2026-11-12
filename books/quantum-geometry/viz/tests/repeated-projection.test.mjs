@@ -180,5 +180,18 @@ check('Restart clears the presses and disables the rail', s.n === 0 && await pag
 await page.click('[data-lang-set="en"]'); await pick('once'); await played(1); await settle(page);
 check('English: the HUD reads “Press 1”', (await page.textContent('#hudBig')).trim() === 'Press 1');
 
+// the AGAIN still printed in chapter 3: three presses, and the readout lists what each one moved
+{
+  const pg = await T.goto(BOOK, ID, '?shot=1&lang=zh&preset=twice', await T.newPage());
+  await settle(pg);
+  const st = await pg.evaluate(() => ({ s: window.PROJECT_DEBUG.state, sub: document.getElementById('hudSub').textContent }));
+  await pg.close();
+  const r0 = sph(52 * DEG, 40 * DEG), z = [0, 0, 1], h = [r0];
+  for (let k = 0; k < 3; k++) h.push(unread(h[k], z));
+  const mv = [1, 2, 3].map((k) => len(h[k].map((x, i) => x - h[k - 1][i])));
+  const shown = mv.map((m) => (Math.abs(m) < 5e-4 ? 0 : m).toFixed(3)).join(' → ');
+  check('AGAIN still: after the third press, the readout lists the three moves, the first nonzero and the other two 0', close(st.s.t, 3) && st.s.done === 3 && mv[0] > 0.5 && mv[1] < 1e-12 && mv[2] < 1e-12 && st.sub.includes(shown), `${st.sub} | expected ${shown}`);
+}
+
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();
