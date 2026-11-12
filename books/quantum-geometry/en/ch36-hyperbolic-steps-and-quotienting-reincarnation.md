@@ -61,13 +61,21 @@ Let `QubitMatrix` denote the $2 \times 2$ complex matrix type $M_{\operatorname{
 1. **Orthogonal Pythagorean Split Between Diagonal Skeleton and Discarded Coherence** ([`pinching_hilbert_schmidt_pythagorean`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean)):
 
    $$
-   \operatorname{hilbertSchmidtInner}(\rho, \rho) \;=\; \operatorname{hilbertSchmidtInner}\bigl(\operatorname{pinching}(\rho), \operatorname{pinching}(\rho)\bigr) + \operatorname{hilbertSchmidtInner}\bigl(\rho - \operatorname{pinching}(\rho), \rho - \operatorname{pinching}(\rho)\bigr);
+   \begin{aligned}
+   &\operatorname{hilbertSchmidtInner}(\rho, \rho) \\
+    &\;=\; \operatorname{hilbertSchmidtInner}\bigl(\operatorname{pinching}(\rho), \operatorname{pinching}(\rho)\bigr) \\
+    &\quad + \operatorname{hilbertSchmidtInner}\bigl(\rho - \operatorname{pinching}(\rho), \rho - \operatorname{pinching}(\rho)\bigr);
+   \end{aligned}
    $$
 
 2. **Exact Off-Diagonal Modulus-Square Formula for Discarded Mass** ([`pinching_discarded_coherence_mass`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass)):
 
    $$
-   \operatorname{hilbertSchmidtInner}\bigl(\rho - \operatorname{pinching}(\rho), \rho - \operatorname{pinching}(\rho)\bigr) \;=\; \bigl(\operatorname{normSq}(\rho_{01}) + \operatorname{normSq}(\rho_{10}) : \mathbb{C}\bigr);
+   \begin{aligned}
+   &\operatorname{hilbertSchmidtInner}\bigl(\rho - \operatorname{pinching}(\rho), \rho - \operatorname{pinching}(\rho)\bigr) \\
+    &\;=\; \bigl(\operatorname{normSq}(\rho_{01}) \\
+    &\quad + \operatorname{normSq}(\rho_{10}) : \mathbb{C}\bigr);
+   \end{aligned}
    $$
 
 3. **Fixed-Point Characterization of Vanishing Off-Diagonal Coherence** ([`pinching_eq_self_iff_offDiag_eq_zero`](lean:D5/S3/QuantumChannels/CoherenceMassBridge.pinching_eq_self_iff_offDiag_eq_zero)):

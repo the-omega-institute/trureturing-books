@@ -5,7 +5,7 @@
   "summary": "One arrow alone has no direction; two arrows x, y at 60° read their own angle from the parallelogram, |x + y|² + |x − y|² = 2(|x|² + |y|²) with 3 + 1 = 4 and ⟨x, y⟩ = (3 − 1)/4 = 1/2. Taking A as its own axis, the point C is B's shadow on A, c = (a·b)a of length cos θ, with the perpendicular rest of length sin θ. Squeezing the shadow from [−1, 1] into [0, 1] gives the Born weight (1 + cos θ)/2 = cos²(θ/2), and the trace pairing of rank-one projections is the squared overlap, Tr(ρP) = |⟨φ|ψ⟩|². Only squares make the two parts of a split arrow add to one for every angle, so a projection and its complement share the whole weight. Finally an environment that records the branch shortens the qubit's sideways part to the records' shadow cos θ_env while its height stays; for orthogonal records the arrow is a short line on the axis, ρ_S = Σ P_a ρ P_a, the weights 3/4 and 1/4 survive and the coherence mass 3/8 is discarded.",
   "summary_zh": "一支箭头孤悬，说不出方向；两支相隔 60° 的箭头 x、y 由平行四边形读出自己的夹角：‖x + y‖² + ‖x − y‖² = 2(‖x‖² + ‖y‖²)，3 + 1 = 4，⟨x, y⟩ = (3 − 1)/4 = 1/2。让 A 自己当轴，点 C 就是 B 落在 A 上的影子 c = (a·b)a，长 cos θ，垂直的剩余长 sin θ。把影子从 [−1, 1] 线性压进 [0, 1]，就是玻恩权重 (1 + cos θ)/2 = cos²(θ/2)；秩一投影的迹配对等于重叠的模平方 Tr(ρP) = |⟨φ|ψ⟩|²。只有平方能让拆开的两段对一切夹角加起来恒为 1，所以快门与它的补恰好分完全部权重。最后，记下分支的环境把比特的横向部分缩成两条记录的影子 cos θ_env，高度不变；记录正交时箭头成了竖轴上的一截短线 ρ_S = Σ P_a ρ P_a：权重 3/4 与 1/4 原样留下，丢掉的是相干质量 3/8。",
   "subject": "https://github.com/the-omega-institute/trureturing",
-  "publication_basis": "pinned",
+  "subject_commit": "6cfcf785096782b15084d719ec73c2ca16b6ed29",
   "released": "2026-11-11",
   "duration": "1:26",
   "resolution": "1280x720@30",
@@ -29,5 +29,6 @@
   "outputs": {
     "narrated_720p": "quantum-geometry_002_720p_narrated.mp4",
     "cover": "quantum-geometry_002_cover.jpg"
-  }
+  },
+  "publication_basis": "pinned"
 }

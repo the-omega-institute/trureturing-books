@@ -99,7 +99,11 @@ Across the frozen finite-contracting-stability and interpretation-fixed-point mo
 3. **Distinct Fixed Points Selected by Observer Context Parameters** ([`context_parameters_can_select_distinct_fixed_points`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.context_parameters_can_select_distinct_fixed_points)): On `BinaryInterpretationContext = InterpretationContext Unit Bool Bool Bool Unit`, `baselineContext` (with `readerAdmission`, `background`, `evaluationGoal` all `false`) and `alternateContext` (all `true`) share identical `text = ()` and `interpretationRule = ()`, differ on all three observer context parameters, and select distinct fixed meanings under `IsBinaryFixedMeaning`:
 
    $$
-   \operatorname{IsBinaryFixedMeaning}\;\mathrm{baselineContext}\;(\mathrm{false}, \mathrm{false}, \mathrm{false}) \;\land\; \operatorname{IsBinaryFixedMeaning}\;\mathrm{alternateContext}\;(\mathrm{true}, \mathrm{true}, \mathrm{true}) \;\land\; (\mathrm{false}, \mathrm{false}, \mathrm{false}) \neq (\mathrm{true}, \mathrm{true}, \mathrm{true});
+   \begin{aligned}
+   &\operatorname{IsBinaryFixedMeaning}\;\mathrm{baselineContext}\;(\mathrm{false}, \mathrm{false}, \mathrm{false}) \\
+    &\;\land\; \operatorname{IsBinaryFixedMeaning}\;\mathrm{alternateContext}\;(\mathrm{true}, \mathrm{true}, \mathrm{true}) \\
+    &\;\land\; (\mathrm{false}, \mathrm{false}, \mathrm{false}) \neq (\mathrm{true}, \mathrm{true}, \mathrm{true});
+   \end{aligned}
    $$
 
 4. **Invariant Common-Factor Requirement for Objective Claims** ([`objective_claim_requires_invariant_common_factor`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor)): For arbitrary types `Context`, `Meaning`, `Factor`, fixed-point predicate $\mathrm{isFixedMeaning} : \mathrm{Context} \to \mathrm{Meaning} \to \mathrm{Prop}$, and projection $\mathrm{factor} : \mathrm{Meaning} \to \mathrm{Factor}$, every proof-carrying `ObjectiveInterpretationClaim isFixedMeaning factor` supplies an invariant common factor shared across all contexts and their fixed meanings:

@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "1d9bf98cab8306e67ec38a739359f2cdae63877a",
-  "pinned_at": "2026-11-11T02:39:46Z",
+  "commit": "6cfcf785096782b15084d719ec73c2ca16b6ed29",
+  "pinned_at": "2026-11-11T15:44:45Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -644,6 +644,78 @@
       "statement_id": "sha256:06adbb3f4d3939fb35410fe6889c079d1e4cccc07d7e50ba905727637b633ea3",
       "line": 197,
       "signature": "theorem power_fiber_card_eq_one_add_character_sum (χ : MulChar F ℂ) {d : ℕ} (hd : 0 < d) (hχ : orderOf χ = d) (a : F) : (Nat.card {x : F // x ^ d = a} : ℂ) = 1 + ∑ i ∈ Ico 1 d, (χ ^ i) a"
+    },
+    "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.Face": {
+      "module": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary",
+      "name": "D5.S3.Combinatorics.Graph.PlanarMatching.Rotation.Face",
+      "kind": "def",
+      "statement_id": "sha256:8a2d0842190b2c8e4cf34e93de62d71b947e16f9fd693da23942857ae7c35185",
+      "line": 43,
+      "signature": "def Face"
+    },
+    "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.Rotation": {
+      "module": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary",
+      "name": "D5.S3.Combinatorics.Graph.PlanarMatching.Rotation",
+      "kind": "inductive",
+      "statement_id": "sha256:8a2d0842190b2c8e4cf34e93de62d71b947e16f9fd693da23942857ae7c35185",
+      "line": 30,
+      "signature": "structure Rotation {V : Type u} (G : SimpleGraph V) where rotor : Equiv.Perm G.Dart same_vertex : ∀ d e, rotor.SameCycle d e ↔ d.fst = e.fst namespace Rotation variable {V : Type u} {G : SimpleGraph V} (R : Rotation G) /-- Reverse a dart, then turn at its new initial vertex. -/ def facePerm : Equiv.Perm G.Dart"
+    },
+    "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.boundary": {
+      "module": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary",
+      "name": "D5.S3.Combinatorics.Graph.PlanarMatching.Rotation.boundary",
+      "kind": "def",
+      "statement_id": "sha256:8a2d0842190b2c8e4cf34e93de62d71b947e16f9fd693da23942857ae7c35185",
+      "line": 72,
+      "signature": "noncomputable def boundary : (R.Face → ZMod 2) →ₗ[ZMod 2] (G.edgeSet → ZMod 2) where toFun x e"
+    },
+    "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face": {
+      "module": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary",
+      "name": "D5.S3.Combinatorics.Graph.PlanarMatching.Rotation.face",
+      "kind": "def",
+      "statement_id": "sha256:8a2d0842190b2c8e4cf34e93de62d71b947e16f9fd693da23942857ae7c35185",
+      "line": 46,
+      "signature": "def face (d : G.Dart) : R.Face"
+    },
+    "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.faceOpposition": {
+      "module": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary",
+      "name": "D5.S3.Combinatorics.Graph.PlanarMatching.Rotation.faceOpposition",
+      "kind": "def",
+      "statement_id": "sha256:8a2d0842190b2c8e4cf34e93de62d71b947e16f9fd693da23942857ae7c35185",
+      "line": 270,
+      "signature": "noncomputable def faceOpposition [Fintype V] [DecidableRel G.Adj] (ε : G.Dart → ZMod 2) (f : R.Face) : ZMod 2"
+    },
+    "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.facePerm": {
+      "module": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary",
+      "name": "D5.S3.Combinatorics.Graph.PlanarMatching.Rotation.facePerm",
+      "kind": "def",
+      "statement_id": "sha256:8a2d0842190b2c8e4cf34e93de62d71b947e16f9fd693da23942857ae7c35185",
+      "line": 39,
+      "signature": "def facePerm : Equiv.Perm G.Dart"
+    },
+    "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact": {
+      "module": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary",
+      "name": "D5.S3.Combinatorics.Graph.PlanarMatching.Rotation.face_cycle_exact",
+      "kind": "theorem",
+      "statement_id": "sha256:8a2d0842190b2c8e4cf34e93de62d71b947e16f9fd693da23942857ae7c35185",
+      "line": 223,
+      "signature": "theorem face_cycle_exact [Fintype V] [DecidableEq V] [DecidableRel G.Adj] (hc : G.Connected) (he : Nonempty G.Dart) (hEuler : (Fintype.card V : ℤ) - (Nat.card G.edgeSet : ℤ) + (Nat.card R.Face : ℤ) = 2) : (∀ (x : R.Face → ZMod 2) (d : G.Dart), R.boundary x ⟨d.edge, d.edge_mem⟩ = x (R.face d) + x (R.face d.symm)) ∧ (∀ x : R.Face → ZMod 2, R.boundary x = 0 ↔ ∃ c, x = fun _ => c) ∧ LinearMap.range R.boundary = D5.S3.Fourier.CharacterSelection.SimpleGraphCycleSpace.simpleCycleSpace G"
+    },
+    "D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.cycle_face_sides": {
+      "module": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces",
+      "name": "D5.S3.Combinatorics.Graph.PlanarMatching.Rotation.cycle_face_sides",
+      "kind": "theorem",
+      "statement_id": "sha256:9032ba075919139f6d3a08f9c89a29531934475a811d90df2fab4d4c4f09d2ff",
+      "line": 731,
+      "signature": "theorem cycle_face_sides [Fintype V] [DecidableEq V] [DecidableRel G.Adj] (hc : G.Connected) (he : Nonempty G.Dart) (hEuler : (Fintype.card V : ℤ) - (Nat.card G.edgeSet : ℤ) + (Nat.card R.Face : ℤ) = 2) (a : V) (p : G.Walk a a) (hp : p.IsCycle) : ∃ (x : R.Face → ZMod 2) (I J : Set V), (∃ f, x f = 1) ∧ (∃ f, x f = 0) ∧ R.boundary x = (fun e : G.edgeSet => if e.val ∈ p.edges then 1 else 0) ∧ (∃ q : G.Walk a a, (q = p ∨ q = p.reverse) ∧ ∀ d : G.Dart, ((x (R.face d) = 1 ∧ x (R.face d.symm) = 0) ↔ d ∈ q.darts) ∧ ((x (R.face d) = 0 ∧ x (R.face d.symm) = 1) ↔ d ∈ q.reverse.darts)) ∧ (∀ v, v ∉ p.suppo"
+    },
+    "D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.face_odd_nice_cycle_orientation": {
+      "module": "D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces",
+      "name": "D5.S3.Combinatorics.Graph.PlanarMatching.Rotation.face_odd_nice_cycle_orientation",
+      "kind": "theorem",
+      "statement_id": "sha256:9032ba075919139f6d3a08f9c89a29531934475a811d90df2fab4d4c4f09d2ff",
+      "line": 886,
+      "signature": "theorem face_odd_nice_cycle_orientation [Fintype V] [DecidableEq V] [DecidableRel G.Adj] (hc : G.Connected) (he : Nonempty G.Dart) (hEuler : (Fintype.card V : ℤ) - (Nat.card G.edgeSet : ℤ) + (Nat.card R.Face : ℤ) = 2) (hEven : Even (Fintype.card V)) : ∃ ε : G.Dart → ZMod 2, (∀ d, ε d.symm = 1 + ε d) ∧ (∀ f, R.faceOpposition ε f = 1) ∧ ∀ (a : V) (p : G.Walk a a), p.IsCycle → Even p.length → ∀ M : (G.induce {v | v ∉ p.support}).Subgraph, M.IsPerfectMatching → (p.darts.map ε).sum = 1"
     },
     "D5/S3/Combinatorics/Graph/Walks/GallaiRoy.IsDirectedPath": {
       "module": "D5/S3/Combinatorics/Graph/Walks/GallaiRoy",
@@ -2204,6 +2276,14 @@
       "statement_id": "sha256:62d42f267c4e451e307d97488260302800a39a5186538134884bc9703e414c45",
       "line": 130,
       "signature": "theorem reduced_irreversibility_is_access_defect (rho sigma : QubitMatrix) (hdiag : ∀ i, rho i i = sigma i i) (hcoherence : ∃ i j, i ≠ j ∧ rho i j ≠ sigma i j) : copyUnitary ∈ Matrix.unitaryGroup (Fin 2 × Fin 2) ℂ ∧ (unitaryEvolution copyUnitary (blankEnvironmentJointState rho) = controlledRecordJointState copiedAddressRecord rho ∧ unitaryEvolution copyUnitary (blankEnvironmentJointState sigma) = controlledRecordJointState copiedAddressRecord sigma) ∧ traceEnvironment (controlledRecordJointState copiedAddressRecord rho) = traceEnvironment (controlledRecordJointState copiedAddressRecord sigma) "
+    },
+    "D5/S3/Quantum/Divergence/CanonicalChannelDPI.extended_quantum_relative_entropy_channel_dpi": {
+      "module": "D5/S3/Quantum/Divergence/CanonicalChannelDPI",
+      "name": "D5.S3.Quantum.Divergence.CanonicalChannelDPI.extended_quantum_relative_entropy_channel_dpi",
+      "kind": "theorem",
+      "statement_id": "sha256:774796337df6c0109376f820de48bf7a93d7e6f1796a0103e39fcfbf9b0bcb9b",
+      "line": 321,
+      "signature": "theorem extended_quantum_relative_entropy_channel_dpi {a : Type u} {b : Type v} [Fintype a] [DecidableEq a] [Nonempty a] [Fintype b] [DecidableEq b] [Nonempty b] (Φ : QuantumChannel a b) (ρ σ : DensityState a) : extendedQuantumRelativeEntropy (Φ.mapState ρ) (Φ.mapState σ) ≤ extendedQuantumRelativeEntropy ρ σ"
     },
     "D5/S3/Quantum/Divergence/DualAccountFull.dual_account_full": {
       "module": "D5/S3/Quantum/Divergence/DualAccountFull",

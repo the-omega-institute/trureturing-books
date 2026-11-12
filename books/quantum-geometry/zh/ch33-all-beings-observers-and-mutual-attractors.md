@@ -99,7 +99,11 @@ $$
 3. **固定文本与规则下观察者语境参数选择相异不动点**（[`context_parameters_can_select_distinct_fixed_points`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.context_parameters_can_select_distinct_fixed_points)）：在二值有限语境族 `BinaryInterpretationContext = InterpretationContext Unit Bool Bool Bool Unit` 上，`baselineContext`（准入、背景、目标均为 `false`）与 `alternateContext`（准入、背景、目标均为 `true`）保持相同的输入文本 `text = ()` 与相同的诠释规则 `interpretationRule = ()`，但三项观察者语境参数两两相异，并在固定意义谓词 `IsBinaryFixedMeaning` 下严格锁定互不相等的不动点：
 
    $$
-   \operatorname{IsBinaryFixedMeaning}\;\mathrm{baselineContext}\;(\mathrm{false}, \mathrm{false}, \mathrm{false}) \;\land\; \operatorname{IsBinaryFixedMeaning}\;\mathrm{alternateContext}\;(\mathrm{true}, \mathrm{true}, \mathrm{true}) \;\land\; (\mathrm{false}, \mathrm{false}, \mathrm{false}) \neq (\mathrm{true}, \mathrm{true}, \mathrm{true});
+   \begin{aligned}
+   &\operatorname{IsBinaryFixedMeaning}\;\mathrm{baselineContext}\;(\mathrm{false}, \mathrm{false}, \mathrm{false}) \\
+    &\;\land\; \operatorname{IsBinaryFixedMeaning}\;\mathrm{alternateContext}\;(\mathrm{true}, \mathrm{true}, \mathrm{true}) \\
+    &\;\land\; (\mathrm{false}, \mathrm{false}, \mathrm{false}) \neq (\mathrm{true}, \mathrm{true}, \mathrm{true});
+   \end{aligned}
    $$
 
 4. **客观诠释主张强制携带跨语境不变公因子**（[`objective_claim_requires_invariant_common_factor`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor)）：对任意类型 `Context`、`Meaning`、`Factor`，语境不动点谓词 $\mathrm{isFixedMeaning} : \mathrm{Context} \to \mathrm{Meaning} \to \mathrm{Prop}$ 及因子提取映射 $\mathrm{factor} : \mathrm{Meaning} \to \mathrm{Factor}$，任何满足客观性定义 `ObjectiveInterpretationClaim isFixedMeaning factor` 的主张，必给出在一切语境及其选定不动点意义上恒取同一值的公共不变量：
