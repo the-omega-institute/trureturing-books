@@ -220,7 +220,6 @@
     dephase: { ch: 'dephase', p: 0.3, ratio: 2, rho: [50, 20], sig: [125, 250], max: 8, still: 2.5 },
     amp: { ch: 'amp', p: 0.3, ratio: 2, rho: [180, 0], sig: [90, 0], max: 8, still: 3.5 },
     wide: { ch: 'amp', p: 0.5, ratio: 6, rho: [40, 0], sig: [90, 180], max: 3, still: 2 },
-    depol: { ch: 'depol', p: 0.3, ratio: 2, rho: [60, 30], sig: [120, 250], max: 8, still: 2 },
     distance: { ch: 'amp', p: 0.5, ratio: 2, rho: [0, 0], sig: [90, 0], max: 1, still: 1 },
     centre: { ch: 'depol', p: 1, ratio: 2, rho: [0, 0], sig: [90, 0], max: 1, still: 1 }
   };
@@ -230,7 +229,6 @@
     dephase: ['每一步横向乘 0.7、高度不动：青色的球收腰成竖直的雪茄，再细成紫色的竖轴；ρ 与 σ 沿水平方向走向轴线。', 'Each step multiplies the sideways part by 0.7 and keeps the height: the cyan ball pinches into an upright cigar and thins towards the violet axis, while ρ and σ move horizontally towards it.'],
     amp: ['振幅阻尼：青色的球一边缩小一边往北极上漂，横向缩得比纵向慢；紫色的北极 |0⟩ 不动，从南极出发的 ρ 一路爬向北极。', 'Amplitude damping: the cyan ball shrinks while it drifts towards the north pole, more slowly across than up; the violet north pole |0⟩ stays put, and ρ climbs all the way from the south pole towards it.'],
     wide: ['横向保留得比 √a 多（T₂ = 6 T₁）：青色的像在北极附近从侧面鼓出球皮，品红的部分已经不在球里。这样的映射不把态送到态。', 'More is kept sideways than √a allows (T₂ = 6 T₁): near the north pole the cyan image bulges out through the skin, and the magenta part is no longer in the ball. Such a map does not send states to states.'],
-    depol: ['去极化：青色的球保持圆形，同心缩向紫色的球心；ρ 与 σ 沿各自的半径走向球心。', 'Depolarizing: the cyan ball stays round and shrinks evenly towards the violet centre; ρ and σ move along their radii towards it.'],
     distance: ['振幅阻尼走一步（γ = ½）：北极的 ρ 不动，+x 上的 σ 被拉向北方；白线标出的距离 T 从虚线的 0.707 缩到 0.433。', 'One step of amplitude damping (γ = ½): ρ at the north pole stays, σ at +x is pulled north, and the distance T on the white line drops from the dashed 0.707 to 0.433.'],
     centre: ['强度 1 的去极化：整颗球缩成紫色的球心一点。北极的 ρ 与 +x 的 σ 落在同一处，距离为零。', 'Depolarizing at strength 1: the whole ball shrinks to the violet centre. ρ from the north pole and σ from +x land on the same spot, at distance zero.']
   };

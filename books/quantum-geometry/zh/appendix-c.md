@@ -3,11 +3,11 @@
 本附录是全书认识论边界的**总账本（Master Audit Ledger）**。根据本书序曲确立的“认识论契约”，全书所有数学陈述严格划分为三类，并在机器锁定的 `trureturing.lock.json`（钉死于 `trureturing@dev` 提交 [{commit}](trureturing:)）中接受逐条核验：
 
 1. **C.1 冻结定理总索引（251 条唯一 `theorem` 声明）**：凡在正文中置于 `theorem`、`lemma`、`proposition`、`corollary` 环境或交互沙盒/短片/讲义 `lean:` 锚点中的命题，其 `lean="<GID>"` 必须解析为 `trureturing` 仓库 `Golden/Frozen/state/<module>.lean.json` 中已由 Lean 4 内核验证且无 `sorry` 的 `theorem` 声明；
-2. **C.2 形式化定义与代数载体总索引（95 项唯一 `definition` / `structure` / `inductive` 声明）**：置于 `definition` 环境或媒体锚点中的核心代数构造、旋量类型与状态空间定义；以及 **C.2.1 行内辅助引理与构造索引（111 项行内引用声明）**，与 C.1、C.2 共同构成 `trureturing.lock.json` 中锁定的全部 **457 项唯一声明**（`251 + 95 + 111 = 457`）；
+2. **C.2 形式化定义与代数载体总索引（95 项唯一 `definition` / `structure` / `inductive` 声明）**：置于 `definition` 环境或媒体锚点中的核心代数构造、旋量类型与状态空间定义；以及 **C.2.1 行内辅助引理与构造索引（131 项行内引用声明）**，与 C.1、C.2 共同构成 `trureturing.lock.json` 中锁定的全部 **477 项唯一声明**（`251 + 95 + 131 = 477`）；
 3. **C.3 开放问题与未形式化前沿边界台账（8 项：6 个 `conjecture` / `OPEN` 环境 + 2 项前沿文献边界 `remark`）**：尚未在 `trureturing` 中完成内核形式化或属于数学物理前沿未决猜想的命题，在全书中一律以无 `lean` 属性的 `conjecture`（红色 `OPEN` 徽章）或带明确文献说明的 `remark` 环境隔离呈现，绝不冒充已验证定理。
 
 ::: {.viz src="lean-declaration-map" preset="all" height="500"}
-**457 格，一格一条锁定声明。** 时间轴从序曲读到附录 B，每一章第一次引用的声明落进这一章的柱子：绿色是锁文件里种类为 theorem 的定理，灰色是定义，空心的只在行内链接里出现。读完正文，地图上的格数与 `trureturing.lock.json` 的条目数相同。
+**477 格，一格一条锁定声明。** 时间轴从序曲读到附录 B，每一章第一次引用的声明落进这一章的柱子：绿色是锁文件里种类为 theorem 的定理，灰色是定义，空心的只在行内链接里出现。读完正文，地图上的格数与 `trureturing.lock.json` 的条目数相同。
 :::
 
 ---
@@ -52,7 +52,7 @@
 | `T028` | [`D5.S3.Analytic.OriginalHalfBinomialIntegral.b_le_one`](lean:D5/S3/Analytic/OriginalHalfBinomialIntegral.b_le_one) | [{source}](lean:D5/S3/Analytic/OriginalHalfBinomialIntegral.b_le_one) | `theorem` | Ch 24 `#lem-arcsin-binomial-kernel` |
 | `T029` | [`D5.S3.Analytic.OriginalHalfBinomialIntegral.b_nonneg`](lean:D5/S3/Analytic/OriginalHalfBinomialIntegral.b_nonneg) | [{source}](lean:D5/S3/Analytic/OriginalHalfBinomialIntegral.b_nonneg) | `theorem` | Ch 24 `#lem-arcsin-binomial-kernel` |
 | `T030` | [`D5.S3.Analytic.OriginalHalfBinomialIntegral.binomial_hasSum`](lean:D5/S3/Analytic/OriginalHalfBinomialIntegral.binomial_hasSum) | [{source}](lean:D5/S3/Analytic/OriginalHalfBinomialIntegral.binomial_hasSum) | `theorem` | Ch 24 `#lem-arcsin-binomial-kernel` |
-| `T031` | [`D5.S3.Analytic.PowerSeries.DottieInverseSeries.rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint) | [{source}](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint) | `theorem` | Ch 24 `#thm-dottie-rational-inverse-endpoint`; media `viz/visualizations.json`, `viz/fixed-point-convergence/index.html`, `films/006-sphere-beyond-spheres/film.json` |
+| `T031` | [`D5.S3.Analytic.PowerSeries.DottieInverseSeries.rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint) | [{source}](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint) | `theorem` | Ch 24 `#thm-dottie-rational-inverse-endpoint`, Ch 33; media `viz/visualizations.json`, `viz/fixed-point-convergence/index.html`, `films/006-sphere-beyond-spheres/film.json` |
 | `T032` | [`D5.S3.Analytic.Probability.BirkhoffPointwise.birkhoff_pointwise_ergodic`](lean:D5/S3/Analytic/Probability/BirkhoffPointwise.birkhoff_pointwise_ergodic) | [{source}](lean:D5/S3/Analytic/Probability/BirkhoffPointwise.birkhoff_pointwise_ergodic) | `theorem` | 终章 `#thm-coda-birkhoff-ergodic` |
 | `T033` | [`D5.S3.Analytic.ShiftedXiPoisson.ShiftedPoissonSemigroup.xiReading_eq_zero_iff_nontrivial`](lean:D5/S3/Analytic/ShiftedXiPoisson/ShiftedPoissonSemigroup.xiReading_eq_zero_iff_nontrivial) | [{source}](lean:D5/S3/Analytic/ShiftedXiPoisson/ShiftedPoissonSemigroup.xiReading_eq_zero_iff_nontrivial) | `theorem` | Ch 22 `#prop-xi-zeros-strip-zeros` |
 | `T034` | [`D5.S3.Arith.GoldenPell.pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm) | [{source}](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm) | `theorem` | Ch 23 `#prop-pell-form-eq-four-mul-norm`, Ch 29 `#thm-ch29-gram-rigidity-and-pell`, 终章, 附录 A; media `viz/visualizations.json`, `viz/norm-lattice/index.html` |
@@ -108,12 +108,12 @@
 | `T084` | [`D5.S3.FluidDynamics.Vortices.AlternatingPolygonSmallCases.square`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonSmallCases.square) | [{source}](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonSmallCases.square) | `theorem` | Ch 30 `#prop-ch30-vortex-polygon-neutral-drift` |
 | `T085` | [`D5.S3.Fourier.Asymptotics.TorusObservationWindowReturns.result`](lean:D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result) | [{source}](lean:D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result) | `theorem` | Ch 31 `#thm-ch31-horizon-landauer-ergodic-fairness`, 终章 `#thm-coda-golden-cut-observer-cassini`, 附录 A; media `viz/visualizations.json`, `viz/golden-cut-observer/index.html` |
 | `T086` | [`D5.S3.Fourier.Asymptotics.TorusOrbitEquidistribution.result`](lean:D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result) | [{source}](lean:D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result) | `theorem` | Ch 31 `#thm-ch31-horizon-landauer-ergodic-fairness`, Ch 36 `#thm-ch36-quotient-annihilator-and-factorization`, 终章 `#thm-coda-golden-cut-observer-cassini`, 附录 A; media `viz/visualizations.json`, `viz/golden-cut-observer/index.html` |
-| `T087` | [`D5.S3.Fourier.BiquadraticKroneckerTimes.dense_circle_sequence`](lean:D5/S3/Fourier/BiquadraticKroneckerTimes.dense_circle_sequence) | [{source}](lean:D5/S3/Fourier/BiquadraticKroneckerTimes.dense_circle_sequence) | `theorem` | Ch 22 `#thm-torus-power-orbit-closure` |
+| `T087` | [`D5.S3.Fourier.BiquadraticKroneckerTimes.dense_circle_sequence`](lean:D5/S3/Fourier/BiquadraticKroneckerTimes.dense_circle_sequence) | [{source}](lean:D5/S3/Fourier/BiquadraticKroneckerTimes.dense_circle_sequence) | `theorem` | Ch 22 `#thm-torus-power-orbit-closure`, Ch 31 |
 | `T088` | [`D5.S3.Fourier.FinitePoisson.finite_poisson_summation`](lean:D5/S3/Fourier/FinitePoisson.finite_poisson_summation) | [{source}](lean:D5/S3/Fourier/FinitePoisson.finite_poisson_summation) | `theorem` | Ch 15 `#cor-finite-poisson-period`, Ch 28, Ch 36 `#thm-ch36-quotient-annihilator-and-factorization`, 附录 A |
 | `T089` | [`D5.S3.Fourier.FinitePoisson.sum_annihilator_character`](lean:D5/S3/Fourier/FinitePoisson.sum_annihilator_character) | [{source}](lean:D5/S3/Fourier/FinitePoisson.sum_annihilator_character) | `theorem` | Ch 15 `#prop-finite-character-cancellation`, Ch 36 `#thm-ch36-quotient-annihilator-and-factorization`, 附录 A; media `viz/visualizations.json`, `viz/phase-gears/index.html` |
 | `T090` | [`D5.S3.Fourier.GoldenModelSetDelone.exists_golden_modelSet_delone`](lean:D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone) | [{source}](lean:D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone) | `theorem` | Ch 37 `#thm-ch37-golden-cut-delone-multilocation`, 终章, 附录 A; media `viz/visualizations.json`, `viz/golden-cut-observer/index.html` |
 | `T091` | [`D5.S3.Fourier.GoldenModelSetDelone.norm_separation`](lean:D5/S3/Fourier/GoldenModelSetDelone.norm_separation) | [{source}](lean:D5/S3/Fourier/GoldenModelSetDelone.norm_separation) | `theorem` | 终章 `#thm-coda-golden-cut-observer-cassini`; media `viz/visualizations.json`, `viz/golden-cut-observer/index.html` |
-| `T092` | [`D5.S3.Fourier.TorusOrbitClosure.result`](lean:D5/S3/Fourier/TorusOrbitClosure.result) | [{source}](lean:D5/S3/Fourier/TorusOrbitClosure.result) | `theorem` | Ch 22 `#thm-torus-power-orbit-closure` |
+| `T092` | [`D5.S3.Fourier.TorusOrbitClosure.result`](lean:D5/S3/Fourier/TorusOrbitClosure.result) | [{source}](lean:D5/S3/Fourier/TorusOrbitClosure.result) | `theorem` | Ch 22 `#thm-torus-power-orbit-closure`, Ch 31 |
 | `T093` | [`D5.S3.Geometry.FixedPoint.Brouwer`](lean:D5/S3/Geometry/FixedPoint/Brouwer.Brouwer) | [{source}](lean:D5/S3/Geometry/FixedPoint/Brouwer.Brouwer) | `theorem` | Ch 24 `#thm-brouwer-standard-simplex`, Ch 28 |
 | `T094` | [`D5.S3.Geometry.Orthogonality.RationalSixAxisCover.rational_six_axis_open_cover`](lean:D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover) | [{source}](lean:D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover) | `theorem` | Ch 9 `#prop-rational-six-axis-cover`, Ch 27, 附录 A; media `viz/visualizations.json`, `viz/two-angle-addressing/index.html` |
 | `T095` | [`Original172.S2_dissipation`](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation) | [{source}](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation) | `theorem` | Ch 12 `#thm-riemannian-gradient-dissipation`, Ch 27, Ch 30; media `viz/visualizations.json`, `viz/timeless-causal-crystal/index.html` |
@@ -380,9 +380,9 @@
 
 ---
 
-## C.2.1 行内引用的辅助定理与定义索引（111 项唯一声明） {#sec-appendix-c-inline}
+## C.2.1 行内引用的辅助定理与定义索引（131 项唯一声明） {#sec-appendix-c-inline}
 
-除上述 C.1 与 C.2 中绑定于正式数学环境或媒体锚点的 346 项声明外，正文、证明解析与附录对照表中还通过 `[name](lean:GID)` 行内链接直接引用了 **111 项辅助定理与构造定义**。将这 111 项行内声明纳入总账后，本附录完整覆盖了 `trureturing.lock.json` 中的全部 **457 项唯一锁定声明**（`251 + 95 + 111 = 457`）：
+除上述 C.1 与 C.2 中绑定于正式数学环境或媒体锚点的 346 项声明外，正文、证明解析与附录对照表中还通过 `[name](lean:GID)` 行内链接直接引用了 **131 项辅助定理与构造定义**。将这 131 项行内声明纳入总账后，本附录完整覆盖了 `trureturing.lock.json` 中的全部 **477 项唯一锁定声明**（`251 + 95 + 131 = 477`）：
 
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 行内引用章节 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -497,9 +497,29 @@
 | `R109` | [`Zeta23.RvM.completedRiemannZeta_eq_zero_iff`](lean:D5/S3/Weil/ZetaRvm/CountByIntegral.completedRiemannZeta_eq_zero_iff) | [{source}](lean:D5/S3/Weil/ZetaRvm/CountByIntegral.completedRiemannZeta_eq_zero_iff) | `theorem` | Ch 22 |
 | `R110` | [`Zeta23.RvM.completedRiemannZeta_ne_zero_of_re_nonpos`](lean:D5/S3/Weil/ZetaRvm/CountByIntegral.completedRiemannZeta_ne_zero_of_re_nonpos) | [{source}](lean:D5/S3/Weil/ZetaRvm/CountByIntegral.completedRiemannZeta_ne_zero_of_re_nonpos) | `theorem` | Ch 22 |
 | `R111` | [`D5.S3.Zeros.ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one`](lean:D5/S3/Zeros/ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one) | [{source}](lean:D5/S3/Zeros/ZetaUpgrade.classical_zeta_unique_simple_pole_residue_one) | `theorem` | Ch 22 |
+| `R112` | [`D5.S0.Certificates.Combinatorics.DeformedJucysMurphyNoncommutation.P`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.P) | [{source}](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.P) | `def` | Ch 30 |
+| `R113` | [`D5.S3.Combinatorics.PerfectMatchings.CanonicalPairListing.canonical_mate`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.canonical_mate) | [{source}](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.canonical_mate) | `theorem` | Ch 30 |
+| `R114` | [`D5.S0.Certificates.Combinatorics.NormalizedPfaffianCount.inversionCrossNestEquiv`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.inversionCrossNestEquiv) | [{source}](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.inversionCrossNestEquiv) | `def` | Ch 30 |
+| `R115` | [`D5.S0.Certificates.Combinatorics.NormalizedPfaffianCount.inversion_card_eq_cross_add_two_nesting_card`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.inversion_card_eq_cross_add_two_nesting_card) | [{source}](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.inversion_card_eq_cross_add_two_nesting_card) | `theorem` | Ch 30 |
+| `R116` | [`D5.S3.Combinatorics.PerfectMatchings.CanonicalPairListing.listingEquiv`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.listingEquiv) | [{source}](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.listingEquiv) | `def` | Ch 30 |
+| `R117` | [`D5.S3.Combinatorics.PerfectMatchings.CanonicalPairListing.listing_value_canonical`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.listing_value_canonical) | [{source}](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.listing_value_canonical) | `theorem` | Ch 30 |
+| `R118` | [`D5.S0.Certificates.IshikawaKoutschanMotzkinPfaffianRefutation.pfaffian`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.pfaffian) | [{source}](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.pfaffian) | `def` | Ch 30 |
+| `R119` | [`D5.S0.Certificates.Combinatorics.NormalizedPfaffianCount.pfaffian_eq_crossing_sum`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.pfaffian_eq_crossing_sum) | [{source}](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.pfaffian_eq_crossing_sum) | `theorem` | Ch 30 |
+| `R120` | [`D5.S3.Combinatorics.PerfectMatchings.AlternatingCyclePfaffian.NiceOdd`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.NiceOdd) | [{source}](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.NiceOdd) | `def` | Ch 30 |
+| `R121` | [`D5.S3.Combinatorics.PerfectMatchings.AlternatingCyclePfaffian.Reverses`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.Reverses) | [{source}](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.Reverses) | `def` | Ch 30 |
+| `R122` | [`D5.S3.Combinatorics.PerfectMatchings.AlternatingCyclePfaffian.alternating_cycle_flip`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.alternating_cycle_flip) | [{source}](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.alternating_cycle_flip) | `theorem` | Ch 30 |
+| `R123` | [`D5.S3.Combinatorics.PerfectMatchings.AlternatingCyclePfaffian.alternating_cycle_transport`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.alternating_cycle_transport) | [{source}](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.alternating_cycle_transport) | `theorem` | Ch 30 |
+| `R124` | [`D5.S3.Combinatorics.PerfectMatchings.CallanA002067Hafnian.matchingEquiv`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.matchingEquiv) | [{source}](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.matchingEquiv) | `def` | Ch 30 |
+| `R125` | [`D5.S3.Combinatorics.PerfectMatchings.AlternatingCyclePfaffian.niceOdd_matching_tau_eq`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.niceOdd_matching_tau_eq) | [{source}](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.niceOdd_matching_tau_eq) | `theorem` | Ch 30 |
+| `R126` | [`D5.S3.Combinatorics.PerfectMatchings.WeightedPfaffianMatching.orientationUnit`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.orientationUnit) | [{source}](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.orientationUnit) | `def` | Ch 30 |
+| `R127` | [`D5.S3.Combinatorics.PerfectMatchings.WeightedPfaffianMatching.weighted_pfaffian_identity`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.weighted_pfaffian_identity) | [{source}](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.weighted_pfaffian_identity) | `theorem` | Ch 30 |
+| `R128` | [`D5.S3.Combinatorics.PerfectMatchings.InvolutionEvenCycles.equivalence`](lean:D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles.equivalence) | [{source}](lean:D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles.equivalence) | `def` | Ch 30 |
+| `R129` | [`D5.S3.Combinatorics.PerfectMatchings.InvolutionEvenCycles.rooted_interlacing`](lean:D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles.rooted_interlacing) | [{source}](lean:D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles.rooted_interlacing) | `theorem` | Ch 30 |
+| `R130` | [`D5.S3.Combinatorics.PerfectMatchings.InvolutionEvenCycles.rooted_reconstruction`](lean:D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles.rooted_reconstruction) | [{source}](lean:D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles.rooted_reconstruction) | `theorem` | Ch 30 |
+| `R131` | [`D5.S3.Zeros.Convolution.PerfectMatchingCount.FixedPointFreeInvolution`](lean:D5/S3/Zeros/Convolution/PerfectMatchingCount.FixedPointFreeInvolution) | [{source}](lean:D5/S3/Zeros/Convolution/PerfectMatchingCount.FixedPointFreeInvolution) | `def` | Ch 30 |
 
 ::: {.viz src="lean-declaration-map" preset="inline" height="500"}
-**只靠行内链接出现的那些。** 地图只留 114 个空心格：72 格绿色的定理，42 格灰色的定义，其中本节列出 111 项；另三格 `T035`、`T066`、`T112` 因有媒体消费者而列在 C.1。
+**只靠行内链接出现的那些。** 地图只留 134 个空心格：82 格绿色的定理，52 格灰色的定义，其中本节列出 131 项；另三格 `T035`、`T066`、`T112` 因有媒体消费者而列在 C.1。
 :::
 
 ---
@@ -532,16 +552,16 @@
 | :--- | :--- | :--- | :---: |
 | **上游仓库与分支** | `the-omega-institute/trureturing` 分支 `dev` | `site.toml` `[trureturing]` 配置与 `git merge-base --is-ancestor` | `PASS` |
 | **所钉提交 SHA** | [{commit}](trureturing:) | `trureturing.lock.json` `commit` 字段精确锁定 | `PASS` |
-| **冻结定理总数** | `251` 项环境/媒体定理（含行内共 `320` 项 `kind == "theorem"`） | 核对 `Golden/Frozen/state/<module>.lean.json` 中每项状态片与 `statement_id` 哈希 | `PASS` |
-| **辅助定义与结构数** | `95` 项环境定义（含行内共 `137` 项 `kind` 为 `def` 或 `inductive`） | 单独归入第 C.2 节，绝不与 `theorem / lemma / proposition / corollary` 混计 | `PASS` |
-| **多语言结构对齐** | `zh` 与 `en` 章节序列、环境 ID、Lean 引用序列 100% 一致 | `./tbook check` 跨版本逐项比对（`0 error(s), 0 warning(s)`） | `PASS` |
+| **冻结定理总数** | `251` 项环境/媒体定理（含行内共 `330` 项 `kind == "theorem"`） | 核对 `Golden/Frozen/state/<module>.lean.json` 中每项状态片与 `statement_id` 哈希 | `PASS` |
+| **辅助定义与结构数** | `95` 项环境定义（含行内共 `147` 项 `kind` 为 `def` 或 `inductive`） | 单独归入第 C.2 节，绝不与 `theorem / lemma / proposition / corollary` 混计 | `PASS` |
+| **多语言结构对齐** | `zh` 与 `en` 章节序列、环境 ID、Lean 引用序列 100% 一致 | `./tbook check` 跨版本逐项比对（`0 error(s)`） | `PASS` |
 
 ::: {.viz src="lean-declaration-map" preset="theorems" height="500"}
-**只看定理。** 地图只留锁文件里种类为 theorem 的 320 格，全是绿色：实心的 248 格被定理环境用 `lean=` 引用，空心的 72 格只出现在行内链接里。
+**只看定理。** 地图只留锁文件里种类为 theorem 的 330 格，全是绿色：实心的 248 格被定理环境用 `lean=` 引用，空心的 82 格只出现在行内链接里。
 :::
 
 ::: {.remark #rem-appendix-c-epistemic-boundary title="完整声明索引的验证边界说明"}
-本附录第 C.1 节所列的 251 条正式环境与媒体定理、第 C.2 节所列的 95 项环境定义/结构以及第 C.2.1 节所列的 111 项行内交叉引用声明（总计 457 项形式化声明：320 项定理 + 137 项定义/结构）均已在 `trureturing@dev` 提交 [{commit}](trureturing:) 下由 Lean 4 内核验证并写入 `trureturing.lock.json`；而第 C.3 节登记的开放猜想（`OPEN`）与经典文献定理（文献结果，未在本书形式化）则严格排除在形式化定理计数之外，确保全书的每一枚 `LEAN ✓` 徽章均具备零歧义的内核证明背书。
+本附录第 C.1 节所列的 251 条正式环境与媒体定理、第 C.2 节所列的 95 项环境定义/结构以及第 C.2.1 节所列的 131 项行内交叉引用声明（总计 477 项形式化声明：330 项定理 + 147 项定义/结构）均已在 `trureturing@dev` 提交 [{commit}](trureturing:) 下由 Lean 4 内核验证并写入 `trureturing.lock.json`；而第 C.3 节登记的开放猜想（`OPEN`）与经典文献定理（文献结果，未在本书形式化）则严格排除在形式化定理计数之外，确保全书的每一枚 `LEAN ✓` 徽章均具备零歧义的内核证明背书。
 :::
 
 ::: {.viz src="lean-declaration-map" height="560"}

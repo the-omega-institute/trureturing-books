@@ -237,7 +237,9 @@
       if (c.N) {
         const sh = K_share(c), yy = g.Y(sh), right = g.X(c.N) > g.X(1) + 0.55 * g.iw;
         const dy = Math.abs(yy - g.Y(p)) > 18 ? 0 : (sh >= p ? -15 : 15);
-        stage.tag('sh', [g.X(c.N), yy], `<span class="c-am">k/N = ${fix(sh, 3)}</span>`, 'num', { screen: true, dx: right ? -50 : 50, dy: right && dy === 0 ? (sh >= p ? -15 : 15) : dy });
+        // at the two ends the share would sit on the row of shots (top) or on the axis title (bottom): keep it inside
+        const edge = sh > 0.9 ? 16 : sh < 0.1 ? -38 : null;
+        stage.tag('sh', [g.X(c.N), yy], `<span class="c-am">k/N = ${fix(sh, 3)}</span>`, 'num', { screen: true, dx: right ? -50 : 50, dy: edge !== null ? edge : right && dy === 0 ? (sh >= p ? -15 : 15) : dy });
       }
     }
   }

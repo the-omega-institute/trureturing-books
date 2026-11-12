@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch36-overview" data-lang="en" data-wrap="1" viewBox="0 0 740 276" width="740" height="276" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="Three panels. Panel I: the memory axis points up; an ink arrow at θ = 40° casts a cyan shadow cos θ on it, while the magenta arrow lies along 90° and its shadow shrinks to a point at the origin, marked cos 90° = 0. Panel II: a disc with cyan points along one radius, one equal rapidity step apart; they and the faint circles through them crowd towards the rim but stay inside it. Panel III: the digits 1, 4, 2, 8, 5, 7 on a loop under 0.142857 142857 …, with an arrow from the loop down to 1/7.">
+<title>Three panels. Panel I: the memory axis points up; an ink arrow at θ = 40° casts a cyan shadow cos θ on it, while the magenta arrow lies along 90° and its shadow shrinks to a point at the origin, marked cos 90° = 0. Panel II: a disc with cyan points along one radius, one equal rapidity step apart; they and the faint circles through them crowd towards the rim but stay inside it. Panel III: the digits 1, 4, 2, 8, 5, 7 on a loop under 0.142857 142857 …, with an arrow from the loop down to 1/7.</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="236" height="276" viewBox="0 0 236 276">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">I  no shadow at 90°</text>
+<path d="M212 236 L211.58 224.16 L210.31 212.38 L208.21 200.71 L205.28 189.23 L201.53 177.99 L197 167.04 L191.69 156.44 L185.65 146.25 L178.89 136.52 L171.45 127.29 L163.38 118.62 L154.71 110.55 L145.48 103.11 L135.75 96.35 L125.56 90.31 L114.96 85 L104.01 80.47 L92.77 76.72 L81.29 73.79 L69.62 71.69 L57.84 70.42 L46 70" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 4" stroke-linejoin="round" fill="none"/>
+<line x1="46" y1="236" x2="46" y2="58" class="ts-dim" stroke-width="1.4" fill="none"/>
+<text class="tf-dim" x="54" y="66" font-size="13">memory axis</text>
+<line x1="152.7" y1="108.84" x2="46" y2="108.84" class="ts-cyan" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<line x1="46" y1="236" x2="46" y2="108.84" class="ts-cyan" stroke-width="5" stroke-linecap="round" fill="none"/>
+<line x1="46" y1="236" x2="147.79" y2="114.7" class="ts-ink" stroke-width="2" fill="none"/>
+<path d="M152.7 108.84 L149.81 118.16 L144.02 113.3Z" class="tf-ink"/>
+<path d="M70.43 206.89 L68.34 205.26 L66.14 203.77 L63.84 202.45 L61.46 201.29 L59 200.29 L56.47 199.47 L53.9 198.83 L51.29 198.37 L48.65 198.09 L46 198" class="ts-dim" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+<text class="tf-dim" x="63.07" y="194.15" font-size="14" text-anchor="middle">θ</text>
+<text class="tf-cyan" x="38" y="177.46" font-size="14" text-anchor="end" transform="rotate(-90 38 172.42)">cos θ</text>
+<line x1="46" y1="236" x2="203.5" y2="236" class="ts-magenta" stroke-width="2.6" fill="none"/>
+<path d="M212 236 L202 240.2 L202 231.8Z" class="tf-magenta"/>
+<text class="tf-magenta" x="210" y="226" font-size="14" text-anchor="end">90°</text>
+<circle cx="46" cy="236" r="4.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-magenta" x="54" y="260" font-size="14" font-weight="600">cos 90° = 0</text>
+<path d="M176.79 118.23 L180.82 122.87 L184.69 127.64 L188.39 132.55 L191.91 137.58 L195.26 142.73 L198.42 148 L201.4 153.37 L204.19 158.85 L206.78 164.41 L209.18 170.07 L211.39 175.8 L213.39 181.61 L215.18 187.49 L216.77 193.42 L218.15 199.41 L219.33 205.44 L220.29 211.51 L221.04 217.6" class="ts-dim" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+<path d="M221.04 217.6 L217.26 211.01 L223.1 210.3Z" class="tf-dim"/>
+</svg>
+<svg class="tr-fig-panel" x="252" y="0" width="236" height="276" viewBox="0 0 236 276">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">II  steps never reach the rim</text>
+<circle cx="118" cy="150" r="100" class="ts-ink" stroke-width="2.2" fill="none"/>
+<circle cx="118" cy="150" r="38.73" class="ts-faint" stroke-width="1" fill="none"/>
+<circle cx="118" cy="150" r="72.05" class="ts-faint" stroke-width="1" fill="none"/>
+<circle cx="118" cy="150" r="88.72" class="ts-faint" stroke-width="1" fill="none"/>
+<circle cx="118" cy="150" r="95.7" class="ts-faint" stroke-width="1" fill="none"/>
+<circle cx="118" cy="150" r="98.4" class="ts-faint" stroke-width="1" fill="none"/>
+<circle cx="118" cy="150" r="99.41" class="ts-faint" stroke-width="1" fill="none"/>
+<circle cx="118" cy="150" r="99.78" class="ts-faint" stroke-width="1" fill="none"/>
+<line x1="118" y1="150" x2="218" y2="150" class="ts-dim" stroke-width="1.2" fill="none"/>
+<circle cx="156.73" cy="150" r="3.6" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="190.05" cy="150" r="3.6" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="206.72" cy="150" r="3.6" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="213.7" cy="150" r="2.6" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="216.4" cy="150" r="2.6" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="217.41" cy="150" r="2.6" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="217.78" cy="150" r="2.6" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-cyan ts-bg" x="156.73" y="170" font-size="13" text-anchor="middle" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">0</text>
+<text class="tf-cyan ts-bg" x="190.05" y="170" font-size="13" text-anchor="middle" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">1</text>
+<text class="tf-cyan ts-bg" x="206.72" y="170" font-size="13" text-anchor="middle" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">2</text>
+<text class="tf-dim ts-bg" x="118" y="170" font-size="13" text-anchor="end" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">k</tspan> =</text>
+<text class="tf-dim" x="190" y="72" font-size="14">90°</text>
+<text class="tf-magenta" x="118" y="270" font-size="14" text-anchor="middle">δ<tspan dy="0.28em" font-size="72%">k</tspan><tspan dy="-0.28em"> &gt; 0</tspan></text>
+</svg>
+<svg class="tr-fig-panel" x="504" y="0" width="236" height="276" viewBox="0 0 236 276">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">III  the loop is one generator</text>
+<text class="tf-dim" x="118" y="52" font-size="14" text-anchor="middle">0.142857 142857 …</text>
+<circle cx="118" cy="128" r="50" class="ts-faint" stroke-width="1.2" fill="none"/>
+<text class="tf-ink ts-bg" x="118" y="83.76" font-size="16" text-anchor="middle" font-weight="600" stroke-width="4.48" stroke-linejoin="round" paint-order="stroke">1</text>
+<text class="tf-ink ts-bg" x="161.3" y="108.76" font-size="16" text-anchor="middle" font-weight="600" stroke-width="4.48" stroke-linejoin="round" paint-order="stroke">4</text>
+<text class="tf-ink ts-bg" x="161.3" y="158.76" font-size="16" text-anchor="middle" font-weight="600" stroke-width="4.48" stroke-linejoin="round" paint-order="stroke">2</text>
+<text class="tf-ink ts-bg" x="118" y="183.76" font-size="16" text-anchor="middle" font-weight="600" stroke-width="4.48" stroke-linejoin="round" paint-order="stroke">8</text>
+<text class="tf-ink ts-bg" x="74.7" y="158.76" font-size="16" text-anchor="middle" font-weight="600" stroke-width="4.48" stroke-linejoin="round" paint-order="stroke">5</text>
+<text class="tf-ink ts-bg" x="74.7" y="108.76" font-size="16" text-anchor="middle" font-weight="600" stroke-width="4.48" stroke-linejoin="round" paint-order="stroke">7</text>
+<path d="M140.57 65.98 L151 70.84 L160.42 77.44 L168.56 85.58 L175.16 95 L180.02 105.43 L183 116.54 L184 128 L183 139.46 L180.02 150.57 L175.16 161 L168.56 170.42 L160.42 178.56 L151 185.16 L140.57 190.02 L129.46 193 L118 194 L106.54 193 L95.43 190.02 L85 185.16 L75.58 178.56 L67.44 170.42 L60.84 161 L55.98 150.57 L53 139.46 L52 128 L53 116.54" class="ts-dim" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+<path d="M53 116.54 L55.32 123.77 L49.46 123.26Z" class="tf-dim"/>
+<line x1="118" y1="202" x2="118" y2="228.35" class="ts-ink" stroke-width="2" fill="none"/>
+<path d="M118 236 L114.22 227 L121.78 227Z" class="tf-ink"/>
+<text class="tf-ink" x="118" y="264" font-size="20" text-anchor="middle" font-weight="700">1/7</text>
+</svg>
+</svg>

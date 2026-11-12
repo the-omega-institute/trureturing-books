@@ -1,0 +1,168 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch39-no-knife" data-lang="en" data-wrap="1" viewBox="0 0 500 286" width="500" height="286" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="Two panels; the same amber blade crosses the plane with slope 1/φ. Left, ‘lattice first’: a full grey grid of lattice points is drawn first, and the blade with its pale cyan strip is laid over it; the points inside the strip light up cyan. Right, ‘no blade, no crystal’: no grid, only the strip and its cyan points; below, the points projected onto the blade form a row of long and short steps in the ratio φ, short marked 1 and long 0, reading 0 1 0 0 1 0 1 0 0 1 0, with no adjacent 11.">
+<title>Two panels; the same amber blade crosses the plane with slope 1/φ. Left, ‘lattice first’: a full grey grid of lattice points is drawn first, and the blade with its pale cyan strip is laid over it; the points inside the strip light up cyan. Right, ‘no blade, no crystal’: no grid, only the strip and its cyan points; below, the points projected onto the blade form a row of long and short steps in the ratio φ, short marked 1 and long 0, reading 0 1 0 0 1 0 1 0 0 1 0, with no adjacent 11.</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="242" height="286" viewBox="0 0 242 286">
+<text class="tf-ink" x="121" y="22" font-size="14" text-anchor="middle" font-weight="600">lattice first</text>
+<circle cx="16" cy="194" r="2.4" class="tf-dim"/>
+<circle cx="33" cy="194" r="2.4" class="tf-dim"/>
+<circle cx="50" cy="194" r="2.4" class="tf-dim"/>
+<circle cx="67" cy="194" r="2.4" class="tf-dim"/>
+<circle cx="84" cy="194" r="2.4" class="tf-dim"/>
+<circle cx="101" cy="194" r="2.4" class="tf-dim"/>
+<circle cx="118" cy="194" r="2.4" class="tf-dim"/>
+<circle cx="135" cy="194" r="2.4" class="tf-dim"/>
+<circle cx="152" cy="194" r="2.4" class="tf-dim"/>
+<circle cx="169" cy="194" r="2.4" class="tf-dim"/>
+<circle cx="186" cy="194" r="2.4" class="tf-dim"/>
+<circle cx="203" cy="194" r="2.4" class="tf-dim"/>
+<circle cx="220" cy="194" r="2.4" class="tf-dim"/>
+<circle cx="16" cy="177" r="2.4" class="tf-dim"/>
+<circle cx="33" cy="177" r="2.4" class="tf-dim"/>
+<circle cx="50" cy="177" r="2.4" class="tf-dim"/>
+<circle cx="67" cy="177" r="2.4" class="tf-dim"/>
+<circle cx="84" cy="177" r="2.4" class="tf-dim"/>
+<circle cx="101" cy="177" r="2.4" class="tf-dim"/>
+<circle cx="118" cy="177" r="2.4" class="tf-dim"/>
+<circle cx="135" cy="177" r="2.4" class="tf-dim"/>
+<circle cx="152" cy="177" r="2.4" class="tf-dim"/>
+<circle cx="169" cy="177" r="2.4" class="tf-dim"/>
+<circle cx="186" cy="177" r="2.4" class="tf-dim"/>
+<circle cx="203" cy="177" r="2.4" class="tf-dim"/>
+<circle cx="220" cy="177" r="2.4" class="tf-dim"/>
+<circle cx="16" cy="160" r="2.4" class="tf-dim"/>
+<circle cx="33" cy="160" r="2.4" class="tf-dim"/>
+<circle cx="50" cy="160" r="2.4" class="tf-dim"/>
+<circle cx="67" cy="160" r="2.4" class="tf-dim"/>
+<circle cx="84" cy="160" r="2.4" class="tf-dim"/>
+<circle cx="101" cy="160" r="2.4" class="tf-dim"/>
+<circle cx="118" cy="160" r="2.4" class="tf-dim"/>
+<circle cx="135" cy="160" r="2.4" class="tf-dim"/>
+<circle cx="152" cy="160" r="2.4" class="tf-dim"/>
+<circle cx="169" cy="160" r="2.4" class="tf-dim"/>
+<circle cx="186" cy="160" r="2.4" class="tf-dim"/>
+<circle cx="203" cy="160" r="2.4" class="tf-dim"/>
+<circle cx="220" cy="160" r="2.4" class="tf-dim"/>
+<circle cx="16" cy="143" r="2.4" class="tf-dim"/>
+<circle cx="33" cy="143" r="2.4" class="tf-dim"/>
+<circle cx="50" cy="143" r="2.4" class="tf-dim"/>
+<circle cx="67" cy="143" r="2.4" class="tf-dim"/>
+<circle cx="84" cy="143" r="2.4" class="tf-dim"/>
+<circle cx="101" cy="143" r="2.4" class="tf-dim"/>
+<circle cx="118" cy="143" r="2.4" class="tf-dim"/>
+<circle cx="135" cy="143" r="2.4" class="tf-dim"/>
+<circle cx="152" cy="143" r="2.4" class="tf-dim"/>
+<circle cx="169" cy="143" r="2.4" class="tf-dim"/>
+<circle cx="186" cy="143" r="2.4" class="tf-dim"/>
+<circle cx="203" cy="143" r="2.4" class="tf-dim"/>
+<circle cx="220" cy="143" r="2.4" class="tf-dim"/>
+<circle cx="16" cy="126" r="2.4" class="tf-dim"/>
+<circle cx="33" cy="126" r="2.4" class="tf-dim"/>
+<circle cx="50" cy="126" r="2.4" class="tf-dim"/>
+<circle cx="67" cy="126" r="2.4" class="tf-dim"/>
+<circle cx="84" cy="126" r="2.4" class="tf-dim"/>
+<circle cx="101" cy="126" r="2.4" class="tf-dim"/>
+<circle cx="118" cy="126" r="2.4" class="tf-dim"/>
+<circle cx="135" cy="126" r="2.4" class="tf-dim"/>
+<circle cx="152" cy="126" r="2.4" class="tf-dim"/>
+<circle cx="169" cy="126" r="2.4" class="tf-dim"/>
+<circle cx="186" cy="126" r="2.4" class="tf-dim"/>
+<circle cx="203" cy="126" r="2.4" class="tf-dim"/>
+<circle cx="220" cy="126" r="2.4" class="tf-dim"/>
+<circle cx="16" cy="109" r="2.4" class="tf-dim"/>
+<circle cx="33" cy="109" r="2.4" class="tf-dim"/>
+<circle cx="50" cy="109" r="2.4" class="tf-dim"/>
+<circle cx="67" cy="109" r="2.4" class="tf-dim"/>
+<circle cx="84" cy="109" r="2.4" class="tf-dim"/>
+<circle cx="101" cy="109" r="2.4" class="tf-dim"/>
+<circle cx="118" cy="109" r="2.4" class="tf-dim"/>
+<circle cx="135" cy="109" r="2.4" class="tf-dim"/>
+<circle cx="152" cy="109" r="2.4" class="tf-dim"/>
+<circle cx="169" cy="109" r="2.4" class="tf-dim"/>
+<circle cx="186" cy="109" r="2.4" class="tf-dim"/>
+<circle cx="203" cy="109" r="2.4" class="tf-dim"/>
+<circle cx="220" cy="109" r="2.4" class="tf-dim"/>
+<circle cx="16" cy="92" r="2.4" class="tf-dim"/>
+<circle cx="33" cy="92" r="2.4" class="tf-dim"/>
+<circle cx="50" cy="92" r="2.4" class="tf-dim"/>
+<circle cx="67" cy="92" r="2.4" class="tf-dim"/>
+<circle cx="84" cy="92" r="2.4" class="tf-dim"/>
+<circle cx="101" cy="92" r="2.4" class="tf-dim"/>
+<circle cx="118" cy="92" r="2.4" class="tf-dim"/>
+<circle cx="135" cy="92" r="2.4" class="tf-dim"/>
+<circle cx="152" cy="92" r="2.4" class="tf-dim"/>
+<circle cx="169" cy="92" r="2.4" class="tf-dim"/>
+<circle cx="186" cy="92" r="2.4" class="tf-dim"/>
+<circle cx="203" cy="92" r="2.4" class="tf-dim"/>
+<circle cx="220" cy="92" r="2.4" class="tf-dim"/>
+<circle cx="16" cy="75" r="2.4" class="tf-dim"/>
+<circle cx="33" cy="75" r="2.4" class="tf-dim"/>
+<circle cx="50" cy="75" r="2.4" class="tf-dim"/>
+<circle cx="67" cy="75" r="2.4" class="tf-dim"/>
+<circle cx="84" cy="75" r="2.4" class="tf-dim"/>
+<circle cx="101" cy="75" r="2.4" class="tf-dim"/>
+<circle cx="118" cy="75" r="2.4" class="tf-dim"/>
+<circle cx="135" cy="75" r="2.4" class="tf-dim"/>
+<circle cx="152" cy="75" r="2.4" class="tf-dim"/>
+<circle cx="169" cy="75" r="2.4" class="tf-dim"/>
+<circle cx="186" cy="75" r="2.4" class="tf-dim"/>
+<circle cx="203" cy="75" r="2.4" class="tf-dim"/>
+<circle cx="220" cy="75" r="2.4" class="tf-dim"/>
+<path d="M14.13 201.65 L227.65 69.69 L227.65 67.35 L203.92 67.35 L8.35 188.22 L8.35 201.65Z" class="tf-cyan" fill-opacity="0.2"/>
+<line x1="8.35" y1="198.73" x2="220.92" y2="67.35" class="ts-amber" stroke-width="2.2" fill="none"/>
+<circle cx="16" cy="194" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="33" cy="177" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="50" cy="177" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="67" cy="160" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="84" cy="143" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="101" cy="143" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="118" cy="126" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="135" cy="126" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="152" cy="109" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="169" cy="92" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="186" cy="92" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="203" cy="75" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-dim" x="121" y="232" font-size="13" text-anchor="middle">the scaffold</text>
+</svg>
+<svg class="tr-fig-panel" x="258" y="0" width="242" height="286" viewBox="0 0 242 286">
+<text class="tf-ink" x="121" y="22" font-size="14" text-anchor="middle" font-weight="600">no blade, no crystal</text>
+<path d="M14.13 201.65 L227.65 69.69 L227.65 67.35 L203.92 67.35 L8.35 188.22 L8.35 201.65Z" class="tf-cyan" fill-opacity="0.2"/>
+<line x1="8.35" y1="198.73" x2="220.92" y2="67.35" class="ts-amber" stroke-width="2.2" fill="none"/>
+<circle cx="16" cy="194" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="33" cy="177" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="50" cy="177" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="67" cy="160" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="84" cy="143" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="101" cy="143" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="118" cy="126" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="135" cy="126" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="152" cy="109" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="169" cy="92" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="186" cy="92" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="203" cy="75" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<line x1="16" y1="232" x2="220" y2="232" class="ts-amber" stroke-width="1.8" fill="none"/>
+<circle cx="16" cy="232" r="3.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="37.54" cy="232" r="3.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="50.85" cy="232" r="3.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="72.38" cy="232" r="3.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="93.92" cy="232" r="3.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="107.23" cy="232" r="3.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="128.77" cy="232" r="3.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="142.08" cy="232" r="3.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="163.62" cy="232" r="3.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="185.15" cy="232" r="3.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="198.46" cy="232" r="3.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="220" cy="232" r="3.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-dim tr-fig-mono" x="26.77" y="254" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0</text>
+<text class="tf-magenta tr-fig-mono" x="44.19" y="254" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1</text>
+<text class="tf-dim tr-fig-mono" x="61.62" y="254" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0</text>
+<text class="tf-dim tr-fig-mono" x="83.15" y="254" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0</text>
+<text class="tf-magenta tr-fig-mono" x="100.58" y="254" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1</text>
+<text class="tf-dim tr-fig-mono" x="118" y="254" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0</text>
+<text class="tf-magenta tr-fig-mono" x="135.42" y="254" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1</text>
+<text class="tf-dim tr-fig-mono" x="152.85" y="254" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0</text>
+<text class="tf-dim tr-fig-mono" x="174.38" y="254" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0</text>
+<text class="tf-magenta tr-fig-mono" x="191.81" y="254" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1</text>
+<text class="tf-dim tr-fig-mono" x="209.23" y="254" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0</text>
+<text class="tf-dim" x="121" y="278" font-size="13" text-anchor="middle">no adjacent 11</text>
+</svg>
+</svg>
