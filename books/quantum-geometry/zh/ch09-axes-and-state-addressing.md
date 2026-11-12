@@ -217,7 +217,7 @@ $$
 由于 $\norm{a_i}^2 = 5$ 且球面上 $\norm{x}^2 = 1$，齐次形式 $2\langle x, a_i\rangle_{\mathbb{R}}^2 > 5\norm{x}^2$（即 $5 < 2\langle x, a_i\rangle_{\mathbb{R}}^2$）恰等价于对单位化轴 $\hat{a}_i = a_i / \norm{a_i} = a_i / \sqrt{5}$ 要求 $\langle x, \hat{a}_i\rangle_{\mathbb{R}}^2 > \frac{1}{2}$。在几何上，每个 $\operatorname{color}(i)$ 都是围绕对跖方向 $\pm\hat{a}_i$ 的**一对对跖开球冠**（6 个颜色对应 6 对对跖球冠，共 12 个半顶角为 $45^\circ$ 的开球冠）：它包含对跖钝角对，本身不连通，但同色任意两点的内积必非零。
 
 ::: {.viz src="two-angle-addressing" preset="three" height="500"}
-**三根坐标轴的球冠在对角线漏缝。** 只用 $\pm\vv{e}_1, \pm\vv{e}_2, \pm\vv{e}_3$ 的 $45^\circ$ 球冠：琥珀色的点走到卦限对角线 $(1, 1, 1)/\sqrt{3}$ 时，三对灰色的圆都不含它，它落在品红的缝里，那里 $\langle x, \vv{e}_j\rangle_{\mathbb{R}}^2 = 1/3 < 1/2$。品红的点是页面在球面网格上取样找到的缝。
+**三根坐标轴的球冠在对角线漏缝。** 只用 $\pm\vv{e}_1, \pm\vv{e}_2, \pm\vv{e}_3$ 的 $45^\circ$ 球冠：琥珀色的点走到卦限对角线 $(1, 1, 1)/\sqrt{3}$ 时，三对灰色的球冠都不含它，它落在露出来的品红缝里，那里 $\langle x, \vv{e}_j\rangle_{\mathbb{R}}^2 = 1/3 < 1/2$。球面上露出品红的地方就是没有球冠盖住的缝。
 :::
 
 ::: {.proposition #prop-rational-six-axis-cover title="有理六轴无正交对开覆盖定理" lean="D5/S3/Geometry/Orthogonality/RationalSixAxisCover.rational_six_axis_open_cover"}

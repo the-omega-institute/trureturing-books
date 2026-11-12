@@ -3,8 +3,9 @@
    a = e3 and b = (0, sin α, cos α), so that α = 90° gives b = e2 and the word [b θ, a φ] is the text's two steps
    R_z(φ) R_y(θ) N. For a target point the page builds a word with a greedy rule (turn about a to set the azimuth, turn
    about b to push the angle from N out by at most 2α, finally turn about a onto the target). The rail advances one
-   turn per unit. The "cover" scene draws, on the same sphere, the antipodal open caps of 45° around six rational axes
-   (or the three coordinate axes) and the great circle orthogonal to the current point. The Lie–Trotter mode plays
+   turn per unit. The "cover" scene draws the sphere as an opaque lit ball with the antipodal open caps of 45° around
+   six rational axes (or the three coordinate axes) as patches on it, and the great circle orthogonal to the current
+   point. The Lie–Trotter mode plays
    (R_a(θ/n) R_b(θ/n))ⁿ with a = e₃, b = e₂ and θ = 90° (the chapter's example with x → a, y → b) next to the target
    rotation about (0, 1, 1)/√2 by √2·θ, and reads the angle and axis of the product and its operator-norm error.
    Read-only probe for the browser suite: window.ANGLES_DEBUG. */
@@ -142,12 +143,18 @@
     SURVEY[set] = { worst, at, gaps };
   }
 
-  /* ---------- stage ---------- */
+  /* ---------- stage ----------
+     One lit-solid stage for both scenes. Addressing: a glass shell, since the axes, the arrow and the turns run through
+     the ball and the ball is only their container. Cover: the subject is a set of regions on the sphere, so the ball is
+     opaque and lit and every 45° cap is a patch growing on it, layered from the ball outwards: the bare ball (magenta,
+     seen only where no cap covers it), the caps that do not hold x (grey), the caps of the colours that hold x (cyan),
+     and the marks on the surface (the great circle orthogonal to x, the road, x itself), each above the last. */
+  const LAYER = { grey: 1.004, greyRim: 1.007, held: 1.012, heldRim: 1.015, mark: 1.02 };
   let grab = false;
-  const stage = kit.stage3($('stage'), {
+  const stage = kit.solid($('stage'), {
     canvas: $('cv'), radius: TRV.thumbMode ? 0.42 : 0.34, cy: TRV.figure ? 0.53 : 0.52, yaw: -2.1, pitch: 0.38,
     onChange: () => paint(),
-    onPick: (ev, st) => { grab = !S.explicit && st.near(ev, target()) < 22; return grab; },
+    onPick: (ev, st) => { const tg = target(), at = S.scene === 'cover' ? v3.scale(tg, LAYER.mark) : tg; grab = !S.explicit && st.near(ev, at) < 22 && !st.occluded(at, 0.02); return grab; },
     onDrag: (ev, st) => {
       if (!grab) return;
       const x = v3.unit(st.pick(ev));
@@ -158,77 +165,104 @@
     },
     onDrop: () => { grab = false; }
   });
-  const circleOf = (p, u, s) => { const c = v3.dot(p, u); stage.circle(v3.scale(u, c), u, Math.sqrt(Math.max(0, 1 - c * c)), s); };
+  /** A right-handed frame (e, f) of the plane orthogonal to the unit vector u. */
+  const frame = (u) => { const e = v3.unit(v3.cross(Math.abs(u[2]) < 0.9 ? [0, 0, 1] : [1, 0, 0], u)); return [e, v3.cross(u, e)]; };
+  /** The point at angle w from the unit vector u, at bearing v round it, on the sphere of radius r. */
+  const capPoint = (u, w, v, r) => { const [e, f] = frame(u); return v3.scale(v3.add(v3.scale(u, Math.cos(w)), v3.add(v3.scale(e, Math.sin(w) * Math.cos(v)), v3.scale(f, Math.sin(w) * Math.sin(v)))), r); };
+  /** The circle of centre c, unit normal n and radius r, as a closed list of points. */
+  const circlePts = (c, n, r, k = 120) => { const [e, f] = frame(n); return Array.from({ length: k + 1 }, (_, i) => { const a = 2 * Math.PI * i / k; return v3.add(c, v3.add(v3.scale(e, r * Math.cos(a)), v3.scale(f, r * Math.sin(a)))); }); };
+  /** A line; with s.back, its part behind the centre plane is drawn at s.alpha × s.back (inside the glass shell). */
+  function seg(pts, s) {
+    if (s.back == null) { stage.line(pts, s); return; }
+    const D = stage.facing(), runs = [];
+    let run = null;
+    for (const q of pts) {   // a run of points on one side; a run that starts after a crossing begins at the last point
+      const f = v3.dot(q, D) >= 0;
+      if (!run || run.f !== f) { run = { f, pts: run ? [run.pts[run.pts.length - 1], q] : [q] }; runs.push(run); } else run.pts.push(q);
+    }
+    for (const r of runs) if (r.pts.length > 1) stage.line(r.pts, Object.assign({}, s, { alpha: (s.alpha == null ? 1 : s.alpha) * (r.f ? 1 : s.back) }));
+  }
+  const circleOf = (p, u, s) => { const c = v3.dot(p, u); seg(circlePts(v3.scale(u, c), u, Math.sqrt(Math.max(0, 1 - c * c))), s); };
   /** The road travelled along the word up to t. */
   function road(t) { const pts = [], n = Math.max(2, Math.ceil(t * 40)); for (let i = 0; i <= n; i++) pts.push(pose(t * i / n).p); return pts; }
+  /** The caps drawn in the cover scene: colour i, side ±1, centre, angular radius, whether its colour holds x. */
+  function capList(x) {
+    const col = colours(x, S.set), out = [];
+    unitAxes(S.set).forEach((a, i) => { for (const s of [1, -1]) out.push({ i, s, c: v3.scale(a, s), w: Math.PI / 4, held: col.held.includes(i) }); });
+    return out;
+  }
+  const capId = (cp) => `cap${cp.i}${cp.s > 0 ? '+' : '-'}`;
   function drawStage() {
-    const st = stage, c = st.begin(), t = clock.t, now = pose(t), B = axisB(), thick = TRV.thumbMode ? 1.5 : 1, cover = S.scene === 'cover';
-    st.sphere(1, { lat: [0], lon: 2, shade: 0.05, alpha: TRV.thumbMode ? 0.7 : 0.38 });
-    st.tag('N', [0, 0, 1.1], 'N', 'num', { dx: -16, dy: -4 });
+    const st = stage, t = clock.t, now = pose(t), B = axisB(), cover = S.scene === 'cover';
+    st.begin();
     const cur = now.cur >= 0 && now.cur < W.length ? W[now.cur] : null, curAx = cur ? (cur.ax === 'a' ? AX_A : B) : null;
+    const lift = (v) => (cover ? v3.scale(v, LAYER.mark) : v);
     if (cover) {
-      const ax = unitAxes(S.set), col = colours(now.p, S.set);
-      // the gap: where no cap reaches (sampled)
-      for (const g of SURVEY[S.set].gaps) if (v3.dot(g, st.facing()) > -0.05) st.dot(g, 1.4 * thick, P.magenta, { alpha: 0.85, fade: false });
-      ax.forEach((a, i) => {
-        const on = col.held.includes(i);
-        for (const s of [1, -1]) {
-          const ctr = v3.scale(a, s);
-          const near = on && s * v3.dot(now.p, a) > 0;   // the cap that holds the point; its antipode is the same colour
-          if (near) { c.save(); c.shadowColor = P.cyan; c.shadowBlur = 8; }
-          st.circle(v3.scale(ctr, Math.SQRT1_2), ctr, Math.SQRT1_2, on ? { color: P.cyan, width: (near ? 2.2 : 1.4) * thick, alpha: near ? 0.95 : 0.55, back: 0.3 } : { color: P.dim, width: 1.1 * thick, alpha: 0.75, back: 0.3 });
-          if (near) c.restore();
-        }
-        if (on) { const side = v3.dot(now.p, a) >= 0 ? 1 : -1; st.tag('cap' + i, v3.scale(a, side * 1.12), NAMES[S.set][i], 'num c-cy', {}); }
-      });
-      // the great circle orthogonal to the current point
-      st.circle([0, 0, 0], now.p, 1, { color: P.ink, width: 1.3 * thick, alpha: 0.85, dash: [5, 5], back: 0.35 });
+      const D = st.facing();
+      // the bare ball: magenta, and seen only where no cap covers it
+      st.surface('ball', (u, v) => capPoint([0, 0, 1], u, v, 1), { u: [0, Math.PI], v: [0, 2 * Math.PI], nu: 48, nv: 96, color: P.magenta });
+      // the caps: grey patches, then the cyan patches of the colours that hold x on top; each with its rim and,
+      // where it faces the viewer, its colour's name at the centre
+      const caps = capList(now.p);
+      for (const cp of caps) {
+        const r = cp.held ? LAYER.held : LAYER.grey;
+        st.surface(capId(cp), (u, v) => capPoint(cp.c, u, v, r), { u: [0, cp.w], v: [0, 2 * Math.PI], nu: 12, nv: 64, color: cp.held ? P.cyan : P.dim, id: capId(cp) });
+        st.line(circlePts(v3.scale(cp.c, Math.cos(cp.w) * (cp.held ? LAYER.heldRim : LAYER.greyRim)), cp.c, Math.sin(cp.w) * (cp.held ? LAYER.heldRim : LAYER.greyRim)), { color: P.ink, width: cp.held ? 1.4 : 1, alpha: cp.held ? 0.85 : 0.55 });
+        if (v3.dot(cp.c, D) > 0.15) st.tag(capId(cp), v3.scale(cp.c, LAYER.mark), NAMES[S.set][cp.i], cp.held ? 'num c-cy' : 'num', {});
+      }
+      // the great circle orthogonal to the current point, on the surface: the ball hides its far half
+      st.line(circlePts([0, 0, 0], now.p, LAYER.mark, 180), { color: P.ink, width: 1.6, alpha: 0.95, dash: [6, 5] });
     } else {
+      st.glass('ball', [0, 0, 0], 1, { color: P.cyan });
+      for (const [c, n] of [[[0, 0, 0], [0, 0, 1]], [[0, 0, 0], [0, 1, 0]], [[0, 0, 0], [1, 0, 0]]]) seg(circlePts(c, n, 1), { color: P.ink, width: 0.8, alpha: 0.22, back: 0.5 });
       // the two axes
       for (const [key, u, name] of [['a', AX_A, S.alpha < 0.5 ? 'a = b' : 'a = e₃'], ['b', B, S.alpha > 89.5 ? 'b = e₂' : 'b']]) {
         if (key === 'b' && S.alpha < 0.5) continue;
         const hot = curAx === u || (cur && cur.ax === key);
-        st.line(v3.scale(u, -1.28), v3.scale(u, 1.28), { color: P.violet, width: (hot ? 2.6 : 1.5) * thick, alpha: hot ? 1 : 0.7, back: 0.5 });
+        seg([v3.scale(u, -1.28), v3.scale(u, 1.28)], { color: P.violet, width: hot ? 2.6 : 1.5, alpha: hot ? 1 : 0.7, back: 0.5 });
         st.tag('ax' + key, v3.scale(u, 1.4), name, 'raw c-vi', {});
       }
       // how far the turns about b made so far can reach from N
       const reach = 2 * S.alpha * DEG * now.bTurns;
       if (!S.trot && S.alpha > 1e-9 && reach > 1e-9 && reach < Math.PI - 1e-6) {
-        st.circle([0, 0, Math.cos(reach)], [0, 0, 1], Math.sin(reach), { color: P.cyan, width: 1.6 * thick, alpha: 0.9, dash: [7, 5], back: 0.35 });
+        seg(circlePts([0, 0, Math.cos(reach)], [0, 0, 1], Math.sin(reach)), { color: P.cyan, width: 1.6, alpha: 0.9, dash: [7, 5], back: 0.35 });
         const D = st.facing(), h = v3.unit(v3.cross(D, [0, 0, 1])), deg = fix(reach / DEG, 0);   // the screen-left end of the circle
-        st.tag('reach', [Math.sin(reach) * h[0], Math.sin(reach) * h[1], Math.cos(reach)], L(`离 N ≤ ${deg}°`, `≤ ${deg}° from N`), 'num c-cy', { dx: -40, dy: 14, fade: false });
+        st.tag('reach', [Math.sin(reach) * h[0], Math.sin(reach) * h[1], Math.cos(reach)], L(`离 N ≤ ${deg}°`, `≤ ${deg}° from N`), 'num c-cy', { dx: -40, dy: 14 });
       }
     }
+    if (!(cover && S.set === 'three')) st.tag('N', [0, 0, 1.1], 'N', 'num', { dx: -16, dy: -4 });   // with the coordinate axes N is the centre of the cap e₃, named there
     if (S.trot) {   // Lie–Trotter: the target rotation's road, the whole zigzag faintly, the axes of P_n
-      st.path(targetRoad(), { color: P.ink, width: 2 * thick, alpha: 0.9, back: 0.35 });
-      st.dot(v3.rot(N, TROT_U, Math.SQRT2 * TROT_THETA), 7.5, P.ink, { ring: true, width: 1.8, alpha: 0.95 });
-      st.path(zigzag(len()), { color: P.amber, width: 1.2 * thick, alpha: 0.35, back: 0.3 });
-      for (const n of TROT_NS) if (n !== S.trot) st.dot(trotInfo(n).axis, 3.2, P.violet, { ring: true, width: 1.4, alpha: 0.75 });
+      seg(targetRoad(), { color: P.ink, width: 2, alpha: 0.9, back: 0.35 });
+      st.ring(v3.rot(N, TROT_U, Math.SQRT2 * TROT_THETA), { r: 7.5, color: P.ink, key: 'trotEnd' });
+      seg(zigzag(len()), { color: P.amber, width: 1.2, alpha: 0.35, back: 0.3 });
+      for (const n of TROT_NS) if (n !== S.trot) st.ring(trotInfo(n).axis, { r: 3.2, color: P.violet, alpha: 0.75, key: 'axis' + n });
       const info = trotInfo(S.trot);
-      st.line([0, 0, 0], info.axis, { color: P.violet, width: 1.4 * thick, alpha: 0.8, dash: [4, 4], back: 0.5 });
-      st.dot(info.axis, 5.5, P.violet, { glow: 10, fade: false });
-      st.tag('trotAxis', info.axis, L(`P<sub>n</sub> 的转轴 · ${fix(info.angle / DEG, 2)}°`, `axis of P<sub>n</sub> · ${fix(info.angle / DEG, 2)}°`), 'raw c-vi', { dx: 0, dy: -18, fade: false });
+      seg([[0, 0, 0], info.axis], { color: P.violet, width: 1.4, alpha: 0.8, dash: [4, 4], back: 0.5 });
+      st.bead(info.axis, { r: 5.5, color: P.violet, key: 'axis' });
+      st.tag('trotAxis', info.axis, L(`P<sub>n</sub> 的转轴 · ${fix(info.angle / DEG, 2)}°`, `axis of P<sub>n</sub> · ${fix(info.angle / DEG, 2)}°`), 'raw c-vi', { dx: 0, dy: -18 });
     }
     // this turn's circle: the point can only move along it
-    if (curAx && !S.trot) circleOf(now.p, curAx, { color: P.violet, width: 1.3 * thick, alpha: 0.85, dash: [3, 4], back: 0.3 });
+    if (curAx && !S.trot && !cover) circleOf(now.p, curAx, { color: P.violet, width: 1.3, alpha: 0.85, dash: [3, 4], back: 0.3 });
     // when the point sits on the axis of this turn it cannot move: show what the turn does to the flag instead
-    if (curAx && Math.abs(v3.dot(now.p, curAx)) > 0.999) {
+    if (curAx && !cover && Math.abs(v3.dot(now.p, curAx)) > 0.999) {
       const f0 = pose(now.cur).f, done = W[now.cur].ang * (t - now.cur), sweep = [];
       for (let i = 0, n = Math.max(2, Math.ceil(Math.abs(done) / (4 * DEG))); i <= n; i++) sweep.push(v3.add(now.p, v3.scale(v3.rot(f0, curAx, done * i / n), 0.34)));
-      st.path(sweep, { color: P.ink, width: 1.3 * thick, alpha: 0.7, dash: [3, 3], back: 0.5 });
+      seg(sweep, { color: P.ink, width: 1.3, alpha: 0.7, dash: [3, 3], back: 0.5 });
       st.tag('spin', sweep[sweep.length - 1], L(`小旗转过 ${fix(Math.abs(done) / DEG, 0)}°`, `flag turned ${fix(Math.abs(done) / DEG, 0)}°`), 'raw ink', { dx: 0, dy: -22 });
     }
-    // the road travelled and the target
-    if (t > 1e-9 && W.length) st.path(S.trot ? zigzag(t) : road(t), { color: S.trot ? P.amber : P.ink, width: 1.8 * thick, alpha: 0.9, back: 0.35 });
+    // the road travelled and the target (in the cover scene both lie on the surface, above the caps)
+    if (t > 1e-9 && W.length) seg((S.trot ? zigzag(t) : road(t)).map(lift), { color: S.trot ? P.amber : P.ink, width: 1.8, alpha: 0.9, back: cover ? undefined : 0.35 });
     if (!S.explicit && !S.trot) {
       const tg = target();
-      st.dot(tg, 7.5, P.ink, { ring: true, width: 1.8, alpha: 0.95 });
+      st.ring(lift(tg), { r: 7.5, color: P.ink, key: 'target', normal: cover ? tg : undefined });
       if (!cover) st.tag('tgt', tg, L('目标', 'target'), 'raw ink', { dx: 0, dy: 20 });
     }
-    // the current point, its arrow and its flag
-    st.arrow([0, 0, 0], now.p, { color: P.amber, width: 2.4 * thick, glow: 10, headSize: 10, fade: false });
-    st.dot(now.p, 5.5, P.amber, { glow: 14, fade: false });
-    st.arrow(now.p, v3.add(now.p, v3.scale(now.f, 0.34)), { color: P.ink, width: 1.8 * thick, headSize: 8, alpha: 0.95 });
+    // the current point: in the glass, its arrow from the centre and its flag; on the opaque ball, a bead on the surface
+    if (!cover) {
+      st.arrow([0, 0, 0], now.p, { color: P.amber, width: 2.4, headSize: 10 });
+      st.arrow(now.p, v3.add(now.p, v3.scale(now.f, 0.34)), { color: P.ink, width: 1.8, headSize: 8, alpha: 0.95 });
+    }
+    st.bead(lift(now.p), { r: cover ? 6 : 5.5, color: P.amber, key: 'x' });
     if (!cover && !S.trot && now.p[2] < 0.97) st.tag('x', now.p, 'x', 'num c-am big', { dx: -14, dy: -12 });
     st.end();
 
@@ -338,7 +372,7 @@
     skew: ['两根紫色转轴只差 30°：每次绕 b 最多把点推离 N 60°，青色虚线是到这一步为止能到的最远处。绕 b、绕 a 交替转四次，点停在离 N 110° 的白色目标圈上，青色虚线停在 120°。', 'The violet axes are only 30° apart: each turn about b pushes the point at most 60° further from N, and the cyan dashed circle is the farthest it can be so far. Four turns, alternating about b and about a, bring it to the white target ring 110° from N; the cyan circle stops at 120°.'],
     narrow: ['两根紫色转轴只差 10°：每次绕 b 只能推远 20°，青色虚线一格一格往外挪。同一个目标要十二个转动才到。夹角再缩小，螺旋越来越密；夹角为 0 时绕 a、绕 b 都固定 N，一步也走不出去。', 'The violet axes are only 10° apart: each turn about b pushes out by just 20°, and the cyan dashed circle creeps outward one step at a time. The same target now takes twelve turns. Shrink the angle further and the spiral winds ever tighter; at 0 both turns fix N and the point cannot take a single step.'],
     trotter: ['Lie–Trotter，n = 4：a = e₃ 扮演例题的 x、b = e₂ 扮演 y，总角 θ = 90°。琥珀色的锯齿交替绕 b、绕 a 各转 4 次 22.5°，白色的弧是目标转动带着 N 走的路。紫色的点是 Pₙ 的转轴（空心的是 n = 1、2、16、256），转角 126.87°；n 越大越贴近两轴的角平分线。', 'Lie–Trotter, n = 4: a = e₃ plays the example\'s x and b = e₂ its y, with total angle θ = 90°. The amber zigzag turns by 22.5° about b and then about a, four times each; the white arc is the road along which the target rotation carries N. The violet point is the axis of Pₙ (hollow: n = 1, 2, 16, 256), with angle 126.87°; the larger n, the closer it moves to the bisector of the two axes.'],
-    three: ['只用三根坐标轴的 45° 球冠：点走到卦限对角线 (1, 1, 1)/√3 时，三对灰色的圆都不含它，它落在品红的缝里。', 'Only the 45° caps of the three coordinate axes: when the point reaches the octant diagonal (1, 1, 1)/√3, none of the three grey pairs of circles holds it, and it sits in the magenta gap.'],
+    three: ['只用三根坐标轴的 45° 球冠：点走到卦限对角线 (1, 1, 1)/√3 时，三对灰色的球冠都不含它，它落在露出来的品红缝里。', 'Only the 45° caps of the three coordinate axes: when the point reaches the octant diagonal (1, 1, 1)/√3, none of the three grey pairs of caps holds it, and it sits in the magenta gap that shows between them.'],
     six: ['六根有理轴的 12 个球冠：点停在 x = (√6/4, √6/4, ½)，被颜色 0、2、4 的青色球冠盖住；白色虚线是与 x 正交的大圆，它不进入这三种颜色的任何一个球冠。', 'The 12 caps of the six rational axes: the point stops at x = (√6/4, √6/4, ½), inside the cyan caps of colours 0, 2 and 4; the white dashed line is the great circle orthogonal to x, and it enters no cap of those three colours.']
   };
   let booting = true;
@@ -372,6 +406,13 @@
     at: (t) => { const s = pose(t); return { p: s.p, polar: s.polar / DEG, bTurns: s.bTurns }; },
     seek: (t) => { clock.pause(); clock.set(t); },
     camera: () => Object.assign({}, stage.cam),
+    /** Turn the camera at once to [yaw, pitch]. */
+    view: (v) => { stage.view(v, 0); paint.now(); },
+    /** The caps of the cover scene as drawn: colour, side, centre, angular radius, whether the colour holds x, surface id. */
+    caps: () => capList(pose(clock.t).p).map((c) => ({ i: c.i, s: c.s, c: c.c, w: c.w, held: c.held, id: capId(c) })),
+    /** The id of the surface the stage shows at the screen point of a world point ('ball', a cap id, or null). */
+    hit: (v) => { const q = stage.p(v), h = stage.hitAt(q[0], q[1]); return h ? h.id : null; },
+    layers: LAYER,
     /** Viewport coordinates of a world point (for pointer tests). */
     screen: (v) => { const q = stage.p(v), b = $('cv').getBoundingClientRect(); return [b.left + q[0], b.top + q[1]]; }
   };
