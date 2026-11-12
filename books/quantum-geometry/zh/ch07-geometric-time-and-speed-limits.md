@@ -148,7 +148,7 @@ $$
 因 $\mathrm{energy} > 0$ 且 $\hbar > 0$，两边同乘 $\frac{\hbar}{2\cdot\mathrm{energy}} > 0$ 即得 $\tau \ge \frac{\pi\hbar}{4\cdot\mathrm{energy}}$。对指标族情形，每一步 $i \in \mathrm{Fin}\,N$ 均由单步定理给出 $\tau(i) \ge \frac{\pi\hbar}{4\cdot\mathrm{energy}}$；对 $N$ 步求和得 $N \cdot \frac{\pi\hbar}{4\cdot\mathrm{energy}} \le \sum_{i \in \mathrm{Fin}\,N} \tau(i) \le T$，两边同乘 $\frac{4\cdot\mathrm{energy}}{\pi\hbar} > 0$ 遂得 [`record_count_upper_bound`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.record_count_upper_bound)：$N \le \frac{4\cdot\mathrm{energy}\cdot T}{\pi\hbar}$。完整证明由 Lean 内核检查。
 :::
 
-[@thm-fubini-study-record-time] 把“经典时间”与“量子时间”的转换关系刻画得力透纸背：二维量子面积以 $\mathrm{energy}/\hbar$ 的角速度在球面上旋转，而一维经典时间刻度 $N$ 不过是这片总扫掠角面积按每 $\frac{\pi}{4}$（或单向直达 $\frac{\pi}{2}$）切下的一枚枚正交筹码！如果系统没有能量（$\mathrm{energy} \to 0$），扫过正交墙所需的时间 $\tau \to \infty$，经典时钟就会彻底停摆。
+[@thm-fubini-study-record-time] 把“经典时间”与“量子时间”的转换关系刻画为一条有条件的几何约束：两段从共同锚态出发的路，各受 $\mathrm{energy}/\hbar$ 的速度界限制，合起来才跨得过正交墙。这里的 $\mathrm{energy}>0$ 是上界参数，不自动等于某个系统的实际能量；只有把制备与演化接上，才能把这幅“正交筹码”的图景用于具体时钟。
 
 定理里的 $\mathrm{energy}$ 是一个抽象的速度参数。把它换成具体哈密顿量的能量涨落，就可以看到这条界什么时候取等、什么时候不取等，以及一个真实的量子比特翻一次墙要多久。
 
@@ -216,7 +216,7 @@ $$
 \tau_\perp = \frac{\pi\hbar}{E} = \frac{1}{2f} = 100\,\mathrm{ps} .
 $$
 
-按 [@thm-fubini-study-record-time] 的计数上界，取 $\mathrm{energy} = \Delta H = \frac{hf}{2}$，在 $T = 25\,\mathrm{ns}$ 内 $N \le \frac{4\cdot\mathrm{energy}\cdot T}{\pi\hbar} = 4fT = 500$。受驱时情形不同：[第十一章](ch11-pulses-and-virtual-z.md) [@ex-five-ghz-pi-over-two] 在旋转参考系里消去了载频，有效哈密顿量的能量尺度是拉比频率 $\Omega = 2\pi \times 10\,\mathrm{MHz}$，对初态 $\lvert 0\rangle$ 有 $\Delta H = \frac{\hbar\Omega}{2}$，正交时间 $\tau_\perp = \frac{\pi}{\Omega} = 50\,\mathrm{ns}$，正好是那里 $25\,\mathrm{ns}$ 四分之一转的两倍。这两种制备与演化协议的正交时间相差五百倍；应以各协议中产生相对于所选读出参考的演化的能量尺度计算。
+按 [@thm-fubini-study-record-time] 的计数上界，取 $\mathrm{energy} = \Delta H = \frac{hf}{2}$，若各步的共同制备、双端位移界与顺序接触预算均满足定理前提，在 $T = 25\,\mathrm{ns}$ 内 $N \le \frac{4\cdot\mathrm{energy}\cdot T}{\pi\hbar} = 4fT = 500$。受驱时情形不同：[第十一章](ch11-pulses-and-virtual-z.md) [@ex-five-ghz-pi-over-two] 在旋转参考系里消去了载频，有效哈密顿量的能量尺度是拉比频率 $\Omega = 2\pi \times 10\,\mathrm{MHz}$，对初态 $\lvert 0\rangle$ 有 $\Delta H = \frac{\hbar\Omega}{2}$，正交时间 $\tau_\perp = \frac{\pi}{\Omega} = 50\,\mathrm{ns}$，正好是那里 $25\,\mathrm{ns}$ 四分之一转的两倍。这两种制备与演化协议的正交时间相差五百倍；应以各协议中产生相对于所选读出参考的演化的能量尺度计算。
 :::
 
 ::: {.viz src="speed-limit-zeno" preset="three" height="500"}
@@ -227,6 +227,120 @@ $$
 
 ::: {.viz src="speed-limit-zeno" preset="unequal" height="500"}
 **不等权叠加：到不了墙。** 权重角 $\alpha = 30^\circ$：左边长 $0.75$、短 $0.25$ 的两支青色箭头怎么转也抵消不完，琥珀色的点离品红的圆心最近 $0.5 = \lvert\cos 2\alpha\rvert$；右边夹角最多升到 $2\alpha = 60^\circ$，碰不到品红的墙。
+:::
+
+::: {.remark #rem-autonomous-mandelstam-tamm title="实际自治哈密顿轨道的全局夹角界（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 上例的二能级轨道已经把机制摆在眼前：在能量基底中，$A=\begin{pmatrix}0&0\\0&E\end{pmatrix}$，初态是等权叠加，演化只是第二个分量乘上 $e^{-iEt/\hbar}$。去掉平均能量 $\mu=E/2$ 产生的共同相位后，两个分量以相反相位转动，涨落为 $\Delta=E/2$。到第一次正交为止，夹角等于 $\Delta t/\hbar$；越过那里，$\arccos|\cos(Et/(2\hbar))|$ 折返，走过的路长却继续增加。全局速度界约束的是任意时刻的端点夹角，不要求夹角永远单调增长。
+
+现在取任意有限维复内积空间 $E$、自伴连续复线性算子 $A:E\to E$、单位初态 $\psi$ 与 $\hbar>0$。这里 $E$ 表示空间，不再表示上例的能级差。内积对第二个变量线性。定义同一次制备中的平均能量、中心涨落及实际演化：
+
+$$
+\begin{aligned}
+\mu&=\operatorname{Re}\langle\psi,A\psi\rangle,\\
+\Delta&=\norm{A\psi-(\mu:\mathbb C)\psi},\\
+\psi_t&=\exp\!\left(\frac{-it}{\hbar}A\right)\psi
+\qquad(t\in\mathbb R).
+\end{aligned}
+$$
+
+自伴性使能量期望为实数，且 $\Delta^2=\langle\psi,A^2\psi\rangle-\mu^2$；因此 $\Delta$ 正是这个哈密顿量在这个初态中的能量标准差，不是算子范数。经典 Mandelstam–Tamm 夹角界为
+
+$$
+\arccos\bigl|\langle\psi,\psi_t\rangle\bigr|
+\le \frac{|t|\Delta}{\hbar}
+\qquad\text{对所有 }t\in\mathbb R.
+$$
+
+这里的射影夹角就是 $\arccos$ 重叠模长，不额外乘 $2$。可参见 S. Deffner 与 S. Campbell，*Quantum speed limits: from Heisenberg's uncertainty principle to optimal quantum control*，J. Phys. A: Math. Theor. **50**, 453001 (2017)，[arXiv:1705.08023v2](https://arxiv.org/abs/1705.08023v2) §2.5，式 (23)、(28)–(33)，[DOI:10.1088/1751-8121/aa86c6](https://doi.org/10.1088/1751-8121/aa86c6)。下面将其自治纯态特例的推导展开，连同端点一并处理。
+
+**去掉不改变射影态的相位。** 令 $I$ 为恒等算子，取
+
+$$
+\begin{aligned}
+B&=A-\mu I,& G&=-iB/\hbar,\\
+v(t)&=e^{tG}\psi,& w(t)&=v'(t)=Gv(t),\\
+c&=\Delta/\hbar.&
+\end{aligned}
+$$
+
+$B$ 自伴，$G^*=-G$，故 $e^{tG}$ 幺正，并且与 $B$ 对易。因此
+
+$$
+\begin{aligned}
+\norm{v(t)}&=1,\\
+\norm{w(t)}&=\norm{e^{tG}G\psi}=c,\\
+\langle v(t),w(t)\rangle
+&=-\frac{i}{\hbar}\langle\psi,B\psi\rangle=0.
+\end{aligned}
+$$
+
+最后一个等式说明速度没有沿态本身的相位分量：这是水平运动；前两个等式说明它在单位球面上以恒速 $c$ 行进。
+
+**把速度投到实重叠上。** 记 $r(t)=\operatorname{Re}\langle\psi,v(t)\rangle$，则 $-1\le r(t)\le1$，$r(0)=1$。把复空间看成实内积空间，$\psi-r(t)v(t)$ 是去掉沿 $v(t)$ 的实投影后的剩余向量，且
+
+$$
+\norm{\psi-r(t)v(t)}^2=1-r(t)^2.
+$$
+
+由于 $\langle v,w\rangle=0$，柯西—施瓦茨不等式给出
+
+$$
+\begin{aligned}
+|r'(t)|
+&=\bigl|\operatorname{Re}\langle\psi-r(t)v(t),w(t)\rangle\bigr|\\
+&\le c\sqrt{1-r(t)^2}.
+\end{aligned}
+$$
+
+**端点也能通过的积分。** 直接对 $\arccos r$ 求导会在 $r=\pm1$ 时出现零分母。先固定 $0\le q<1$，改看 $f_q(t)=\arccos(qr(t))$。分母处处严格为正，且
+
+$$
+\begin{aligned}
+|f_q'(t)|
+&=\frac{q|r'(t)|}{\sqrt{1-q^2r(t)^2}}\\
+&\le c\frac{q\sqrt{1-r(t)^2}}{\sqrt{1-q^2r(t)^2}}
+\le c.
+\end{aligned}
+$$
+
+末步来自 $q^2(1-r^2)\le1-q^2r^2$，即 $q^2\le1$。在 $0$ 与任意实数 $t$ 之间应用中值定理，得
+
+$$
+|f_q(t)-f_q(0)|\le c|t|,
+\qquad f_q(0)=\arccos q.
+$$
+
+取 $q=n/(n+1)$（$n\in\mathbb N$）并令 $n\to\infty$，由 $\arccos$ 在闭区间 $[-1,1]$ 上连续，得 $\arccos r(t)\le c|t|$。这一步没有在球面端点除法，也没有预设要证明的角位移界。
+
+**还原实际哈密顿演化。** 因为 $A=B+\mu I$，
+
+$$
+\begin{aligned}
+\psi_t&=e^{-i\mu t/\hbar}v(t),\\
+r(t)&\le|\langle\psi,v(t)\rangle|
+=|\langle\psi,\psi_t\rangle|.
+\end{aligned}
+$$
+
+标量相位的模为 $1$；再用 $\arccos$ 的单调递减性，便得到所述全局界。它包含 $t=0$、负时间、任意大的实时间以及重叠模长为 $0$ 或 $1$ 的情形。左端始终在 $[0,\pi/2]$ 中；长时间时右端可以超过 $\pi/2$，无须截短时间域。若 $\Delta=0$，则 $B\psi=0$，$v(t)=\psi$，实际演化只剩共同相位，射影夹角恒为零，永远不能正交。若 $\Delta>0$，并在非负物理时长 $\tau_\perp$ 达到正交，则
+
+$$
+\tau_\perp\ge\frac{\pi\hbar}{2\Delta}.
+$$
+
+**怎样接到条件记录时间定理。** [@thm-fubini-study-record-time] 需要从同一个单位锚态 $a$ 到两个正交末态 $m_0,m_1$ 的两条位移界。一个充分的具体实现是：对每个 $k=0,1$，分别指定有限维空间上的自治自伴哈密顿量 $A_k$，从同一次共同制备 $a$ 出发，在时刻 $t_k$ 到达 $m_k$（允许相差单位模相位），并且
+
+$$
+\begin{aligned}
+\mu_k&=\operatorname{Re}\langle a,A_ka\rangle,\\
+\Delta_k&=\norm{A_ka-\mu_k a}\le\mathrm{energy},\\
+|t_k|&\le\tau,\qquad \mathrm{energy}>0.
+\end{aligned}
+$$
+
+本评注的界于是逐端给出 $\theta_{\mathrm{FS}}(a,m_k)\le\mathrm{energy}\cdot\tau/\hbar$。再加上两个末态确实正交，条件定理才给出 $\tau\ge\pi\hbar/(4\cdot\mathrm{energy})$。只把两个公式的符号改成一样，或只挑一个几何中点，并不能保证这些轨道、制备与共同资源界存在。上例的等权二能级轨道提供了这样的特定实现：以轨道中点为锚，两个端点位于相反的半程，$\tau=\tau_\perp/2$；因而半程的 $\pi/4$ 与全程的 $\pi/2$ 相容。
+
+记录计数还独立需要总接触预算 $\sum_i\tau(i)\le T$；物理上用顺序且不重叠的接触区间来保证它时，应另行核对，不能从角位移界推出。这里得到的是给定有限维自治哈密顿量的文献速度界，不是任意开放、受驱或无界动力学的结论，也不是普适时钟滴答律。它不计算受监测的完整首次返回均值，也不补足 [@prob-monitored-spectral-mean] 中的谱计数与算子求和步骤。
 :::
 
 ## 7.3 量子芝诺效应：被高频“内积丈量”强行冻结的“外积面积演化” {#sec-quantum-zeno-effect}
@@ -488,11 +602,7 @@ $$
 ::: {.remark #rem-qsl-zeno-literature title="Mandelstam–Tamm、Margolus–Levitin 动力学速度极限与 Misra–Sudarshan 芝诺定理（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 本章的 [@thm-fubini-study-record-time] 在 Lean 4 中从富比尼—施图迪球面三角不等式 [`fs_angle_triangle`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle) 出发，将单步角位移上界 $\theta_{\mathrm{FS}}(a, m_k) \le \mathrm{energy}\cdot\tau/\hbar$ 作为显式输入条件，严格导出了正交记录分辨时间下界 $\tau \ge \frac{\pi\hbar}{4\cdot\mathrm{energy}}$ 与记录步数上界 $N \le \frac{4\cdot\mathrm{energy}\cdot T}{\pi\hbar}$。在量子动力学文献中，从薛定谔方程直接导出角速度上界及连续芝诺极限的经典定理包括：
 
-1. **Mandelstam–Tamm 能量方差速度极限（L. Mandelstam & I. Tamm, 1945）**：在 *The uncertainty relation between energy and time in non-relativistic quantum mechanics*（J. Phys. USSR **9**, 249–254, 1945）及 Anandan–Aharonov（Phys. Rev. Lett. **65**, 1697, 1990）的射影几何表述中，沿薛定谔演化轨迹的富比尼—施图迪瞬时测地线速度恒等于能量标准差 $\frac{ds_{\mathrm{FS}}}{dt} = \frac{\Delta H}{\hbar}$（其中 $\Delta H = \sqrt{\langle H^2\rangle - \langle H\rangle^2}$）。沿连接初态到正交末态（$\theta_{\mathrm{FS}} = \frac{\pi}{2}$）的测地线积分，即得正交翻转最短时间
-   $$
-   \tau_\perp \ge \frac{\pi\hbar}{2\,\Delta H}.
-   $$
-   若在 [@thm-fubini-study-record-time] 中取 $a$ 为初末态测地线中点（每半段角位移为 $\frac{\pi}{4}$）并以 $\mathrm{energy} = \Delta H$ 代入，两段半程合成恰好还原这一经典常数因子！
+1. **Mandelstam–Tamm 能量方差速度极限（L. Mandelstam & I. Tamm, 1945）**：*The uncertainty relation between energy and time in non-relativistic quantum mechanics*（J. Phys. USSR **9**, 249–254, 1945）及 Anandan–Aharonov 的射影几何表述（Phys. Rev. Lett. **65**, 1697, 1990）给出其经典背景。[@rem-autonomous-mandelstam-tamm] 已展开实际有限维自治轨道的全局界、零涨落与重叠端点：水平轨道的路长速度是 $\Delta H/\hbar$，端点测地线夹角不超过路长，故正交时 $\tau_\perp\ge\pi\hbar/(2\Delta H)$（$\Delta H>0$）。一般轨道并不沿测地线运动；把几何中点接到条件记录定理，还须实际实现同一制备出发的两条轨道及共同资源界，不能仅凭中点位置认定前提成立。综述与精确文献定位见该评注。
 2. **Margolus–Levitin 平均能量速度极限（N. Margolus & L. B. Levitin, 1998）**：在 *The maximum speed of dynamical evolution*（Physica D **120**, 188–195, 1998）中，利用三角不等式 $\cos x \ge 1 - \frac{2}{\pi}(x + \sin x)$ 对谱展开求界，证明了相对于基态零点能 $E_0 = 0$ 的平均能量 $\langle H\rangle$ 同样限制正交演化时间：
    $$
    \tau_\perp \ge \frac{\pi\hbar}{2\,\langle H\rangle}.
