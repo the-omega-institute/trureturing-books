@@ -27,5 +27,6 @@
   "outputs": {
     "narrated_720p": "quantum-geometry_004_720p_narrated.mp4",
     "cover": "quantum-geometry_004_cover.jpg"
-  }
+  },
+  "publication_basis": "pinned"
 }
