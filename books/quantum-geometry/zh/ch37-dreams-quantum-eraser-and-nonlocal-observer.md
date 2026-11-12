@@ -40,6 +40,7 @@ S\bigl(\rho(1)\bigr) - S\bigl(\rho(0)\bigr) \;=\; -\cos^2\theta\ln(\cos^2\theta)
 $$
 
 （在 $\theta = \frac{\pi}{4}$ 等幅分岔处单步熵税取特值 $\ln 2$）。由此，为什么白天的世界显得如此“坚硬、稳定”，却又如此“狭窄、令人疲惫”，在代数上便一目了然：
+
 - **坚硬**，是因为捏合算子满足严格幂等律 $\Pi_{\mathrm{wake}} \circ \Pi_{\mathrm{wake}} = \Pi_{\mathrm{wake}}$：只要你每秒钟用同一套已知数据反复核验世界，一切非对角异端都被压死为零（$P_k \rho P_l = 0$），桌子永远是桌子，墙壁绝不会穿身而过；
 - **狭窄与疲惫**，是因为每经历一轮幺正演化 $U$ 再用已知基捏合锁死一维确定性，被删除的非对角相干性都会一分不少地转化为严格非负的**量子相对熵税**！日复一日的清醒专注，本质上是在不断支付热力学熵账单来维持一条纤细的一维经典铁轨。
 
@@ -63,7 +64,12 @@ $$
 3. **反复幺正演化与基捏合下的相干删除熵产恒等式**（[`entropy_production_coherence_deletion_identity`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity)）：设 $n$ 为有限可判等类型（`[Fintype n] [DecidableEq n]`），$U \in \operatorname{unitaryGroup}(n, \mathbb{C})$ 为幺正矩阵，密度态轨迹 $\rho : \mathbb{N} \to \operatorname{DensityState}(n)$ 满足步进律 $\forall k \in \mathbb{N},\; \rho(k + 1) = \operatorname{basisPinchingState}(\operatorname{unitaryConjugateState}(U, h_U, \rho(k)))$。记第 $k$ 步捏合前演化态为 $\tilde{\rho}_k := \operatorname{unitaryConjugateState}(U, h_U, \rho(k))$，则每一步的冯·诺依曼熵增精确等于删除相干性所对应的非负量子相对熵，且有限 $N$ 步累计熵产等于各步相对熵税的精确总和：
 
    $$
-   \forall k \in \mathbb{N},\quad S\bigl(\rho(k+1)\bigr) - S\bigl(\rho(k)\bigr) = D\bigl(\tilde{\rho}_k \,\big\|\, \operatorname{basisPinchingState}(\tilde{\rho}_k)\bigr) \ge 0, \qquad \forall N \in \mathbb{N},\quad S\bigl(\rho(N)\bigr) - S\bigl(\rho(0)\bigr) = \sum_{k \in \operatorname{Finset.range} N} D\bigl(\tilde{\rho}_k \,\big\|\, \operatorname{basisPinchingState}(\tilde{\rho}_k)\bigr).
+   \begin{aligned}
+   &\forall k \in \mathbb{N},\quad S\bigl(\rho(k+1)\bigr) - S\bigl(\rho(k)\bigr) \\
+    &\quad = D\bigl(\tilde{\rho}_k \,\big\|\, \operatorname{basisPinchingState}(\tilde{\rho}_k)\bigr) \ge 0, \\
+    &\forall N \in \mathbb{N},\quad S\bigl(\rho(N)\bigr) - S\bigl(\rho(0)\bigr) \\
+    &\quad = \sum_{k \in \operatorname{Finset.range} N} D\bigl(\tilde{\rho}_k \,\big\|\, \operatorname{basisPinchingState}(\tilde{\rho}_k)\bigr).
+   \end{aligned}
    $$
 :::
 
@@ -148,7 +154,12 @@ $$
 2. **双副本相位记录上局部擦除失灵与全局联合擦除复原的显式证书**（[`two_copy_joint_reversal_certificate`](lean:D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate)）：取均匀叠加纯态密度矩阵 $\rho = \mathrm{equalSuperpositionDensity} = \begin{pmatrix} 1/2 & 1/2 \\ 1/2 & 1/2 \end{pmatrix}$，定义单模相位记录 $\mathrm{phaseRecord}(i, a)$ 在 $a = 0, i = 0$ 取 $1$、在 $a = 0, i = 1$ 取虚数单位 $i$、在 $a = 1$ 取 $0$，并令双副本族 $\mathrm{records} : \operatorname{Fin} 2 \to \mathrm{EnvironmentRecord}$ 两份皆取 $\mathrm{phaseRecord}$，记单元素子集 $\mathrm{copyZero} = \{0\} \subseteq \operatorname{Fin} 2$。通过选中子集逆转算子 `reverseChannelOn` 检验第 $(0, 1)$ 非对角相干元，以下四重等式同时成立：
 
    $$
-   \rho_{01} = \frac{1}{2}, \quad \operatorname{multiRecordChannel}(\mathrm{records}, \rho)_{01} = -\frac{1}{2}, \quad \operatorname{reverseChannelOn}\bigl(\{0\}, \mathrm{records}, \operatorname{multiRecordChannel}(\mathrm{records}, \rho)\bigr)_{01} = -\frac{i}{2}, \quad \operatorname{reverseChannelOn}\bigl(\operatorname{Finset.univ}, \mathrm{records}, \operatorname{multiRecordChannel}(\mathrm{records}, \rho)\bigr)_{01} = \frac{1}{2}.
+   \begin{aligned}
+   &\rho_{01} = \frac{1}{2}, \\
+    & \operatorname{multiRecordChannel}(\mathrm{records}, \rho)_{01} = -\frac{1}{2}, \\
+    & \operatorname{reverseChannelOn}\bigl(\{0\}, \mathrm{records}, \operatorname{multiRecordChannel}(\mathrm{records}, \rho)\bigr)_{01} = -\frac{i}{2}, \\
+    & \operatorname{reverseChannelOn}\bigl(\operatorname{Finset.univ}, \mathrm{records}, \operatorname{multiRecordChannel}(\mathrm{records}, \rho)\bigr)_{01} = \frac{1}{2}.
+   \end{aligned}
    $$
 :::
 
@@ -218,7 +229,12 @@ $$
 2. **双无限黄金窗口模型集的显式 Delone 集双半径证书**（[`exists_golden_modelSet_delone`](lean:D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone)）：在双无限完整切投载体 $\operatorname{modelSet}(\mathrm{goldenWindow}) = \{y \in \mathbb{R} \mid \exists x \in \mathrm{GoldenInt},\; \operatorname{embedding}(x) = y \land \operatorname{embedding}(\operatorname{conj}(x)) \in \mathrm{goldenWindow}\}$ 上，存在经形式化验证的 Mathlib 德洛内集实例 $D : \operatorname{Delone.DeloneSet}\;\mathbb{R}$，同时满足精确载体等式、显式正填充半径 $1/2$ 与显式有限覆盖半径 $3$：
 
    $$
-   \exists\, D : \operatorname{Delone.DeloneSet}\;\mathbb{R},\qquad D.\mathrm{carrier} = \operatorname{modelSet}(\mathrm{goldenWindow}) \;\land\; D.\mathrm{packingRadius} = \bigl(\tfrac{1}{2} : \mathbb{R}_{\ge 0}\bigr) \;\land\; D.\mathrm{coveringRadius} = \bigl(3 : \mathbb{R}_{\ge 0}\bigr)
+   \begin{aligned}
+   &\exists\, D : \operatorname{Delone.DeloneSet}\;\mathbb{R}, \\
+    &D.\mathrm{carrier} = \operatorname{modelSet}(\mathrm{goldenWindow}) \\
+    &\;\land\; D.\mathrm{packingRadius} = \bigl(\tfrac{1}{2} : \mathbb{R}_{\ge 0}\bigr) \\
+    &\;\land\; D.\mathrm{coveringRadius} = \bigl(3 : \mathbb{R}_{\ge 0}\bigr)
+   \end{aligned}
    $$
 
    （其中填充半径 $1/2$ 反映不同截点满足一致分离下界 $\forall x \neq y \in \operatorname{modelSet}(\mathrm{goldenWindow}),\; \operatorname{dist}(x, y) \ge 1$，覆盖半径 $3$ 反映全直线一致相对稠密性 $\forall x \in \mathbb{R},\; \exists y \in \operatorname{modelSet}(\mathrm{goldenWindow}),\; \operatorname{dist}(x, y) \le 3$）。
@@ -229,6 +245,7 @@ $$
 :::
 
 请体会 [@thm-ch37-golden-cut-delone-multilocation] 在观察者本体论（`MODEL`（模型诠释））上的壮阔意涵。不妨在实轴上直接点算几颗由同一扇窗口 $\mathrm{goldenWindow} = [\varphi - 2, \varphi - 1] \approx [-0.3820, +0.6180]$ 同时选中的切投截点（对 $u = \langle a, b\rangle \in \mathrm{GoldenInt}$，实嵌入为 $a + b\varphi$，共轭内坐标为 $a + b(1 - \varphi)$）：
+
 - 取 $u_{-2} = \langle -1, -1\rangle$ 与 $u_{-1} = \langle 0, -1\rangle$：共轭内坐标分别为 $-1 - (1 - \varphi) = \varphi - 2$（恰踩中窗口左端点）与 $-(1 - \varphi) = \varphi - 1$（恰踩中窗口右端点），同时点亮负半轴截点 $y_{-2} = -1 - \varphi \approx -2.6180$ 与 $y_{-1} = -\varphi \approx -1.6180$，刚性兑现最小分离下界 $y_{-1} - y_{-2} = 1 \ge 1$；
 - 取 $u_0 = \langle 0, 0\rangle$：共轭内坐标为 $0 \in [\varphi - 2, \varphi - 1]$，点亮原点截点 $y_0 = 0$（相邻间距 $y_0 - y_{-1} = \varphi \approx 1.6180 \ge 1$）；
 - 取 $u_1 = \langle 1, 1\rangle$ 与 $u_2 = \langle 1, 2\rangle$：共轭内坐标分别为 $2 - \varphi \approx +0.3820 \in [\varphi - 2, \varphi - 1]$ 与 $3 - 2\varphi \approx -0.2361 \in [\varphi - 2, \varphi - 1]$，点亮截点 $y_1 = 1 + \varphi = \varphi^2 \approx 2.6180$ 与 $y_2 = 1 + 2\varphi \approx 4.2361$（而夹在 $y_0$ 与 $y_1$ 之间的候选格点 $\langle 0, 1\rangle \mapsto \varphi \approx 1.6180$ 因共轭值 $1 - \varphi \approx -0.6180 < \varphi - 2$ 落出窗外被自动筛除，相邻激活点间距 $y_1 - y_0 = \varphi^2 \approx 2.6180 \le 6$ 与 $y_2 - y_1 = \varphi \approx 1.6180 \ge 1$ 严守填充半径 $1/2$ 与覆盖半径 $3$ 的双半径证书）。

@@ -617,14 +617,14 @@ section: "Part VIII · theorems"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 29.4 · Theorem 30.20</p>
+  <p class="kicker">Theorem 29.4 · Theorem 30.26</p>
   <h2 class="t">The silver slope has a <em>best-approximation bound</em>; finite-mode advection <em>never closes</em></h2>
 <TheoremCard class="compact mt-s" label="Theorem 29.4" title="Best-approximation lower bound for the silver slope" gid="D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silver_best_approximation" cite="thm-ch29-silver-best-approximation">
 
 Let $s = \sqrt2 - 1$, $P_k$ the Pell numbers and $0 < m < P_{k+2}$. Then $s^{k+1} \le \lvert m s - z\rvert$ for every integer $z$.
 
 </TheoremCard>
-<TheoremCard class="compact mt-s" label="Theorem 30.20" title="Projection closure criterion and finite-mode advection non-closure" gid="D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff" cite="thm-coda-quadratic-advection-no-closure">
+<TheoremCard class="compact mt-s" label="Theorem 30.26" title="Projection closure criterion and finite-mode advection non-closure" gid="D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff" cite="thm-coda-quadratic-advection-no-closure">
 
 For idempotent $P$ and $V(x) = Lx - B(x, x)$, an exact closure $P(V(x)) = f(P(x))$ exists iff three leakage conditions vanish; in five-mode Fourier advection $P\bigl(B(a, b) + B(b, a)\bigr)_{0,0} = i/4 \neq 0$, so no exact closure exists.
 
@@ -647,7 +647,7 @@ section: "Part VIII · warrant"
       <p>The book verifies the Pell remainder and the best-approximation bound; that these are exactly the continued-fraction convergents of <Tex t="\sqrt2" /> is the classical picture, cited from the literature.</p>
     </div>
     <div>
-      <TheoremCard class="compact" label="Conjecture 30.19" title="Global regularity of the 3D Navier–Stokes equations" status="open" cite="conj-coda-navier-stokes-regularity">
+      <TheoremCard class="compact" label="Conjecture 30.25" title="Global regularity of the 3D Navier–Stokes equations" status="open" cite="conj-coda-navier-stokes-regularity">
         <p>Whether the unforced three-dimensional incompressible Navier–Stokes equations always have a global smooth solution for smooth initial data (Clay Millennium statements A / B).</p>
       </TheoremCard>
       <p class="lead mt-s">Finite-mode non-closure is a verified theorem; it does not settle this conjecture.</p>
@@ -665,14 +665,14 @@ section: "Three tiers"
   <p class="kicker">Three tiers of warrant</p>
   <h2 class="t">Three tiers of warrant, <em>three colours</em>, never mixed</h2>
   <div class="split mt">
-    <img src="./img/prelude-three-tiers.en.svg" alt="Three bars: green 210, violet 164, red 6; under the green bar, 313 theorem declarations in the lock file." style="display: block; width: 900px; max-width: 100%;">
+    <img src="./img/prelude-three-tiers.en.svg" alt="Three bars: green 215, violet 166, red 6; under the green bar, 320 theorem declarations in the lock file." style="display: block; width: 900px; max-width: 100%;">
     <div>
       <div class="g3">
-        <Stat value="211" label="theorems, lemmas, propositions and corollaries with lean=" tone="ok" />
-        <Stat value="164" label="remarks and examples marked “literature result, not formalized”" tone="violet" />
+        <Stat value="215" label="theorems, lemmas, propositions and corollaries with lean=" tone="ok" />
+        <Stat value="166" label="remarks and examples marked “literature result, not formalized”" tone="violet" />
         <Stat value="6" label="open conjectures, marked OPEN, with no Lean reference" tone="warn" />
       </div>
-      <p class="lead mt">The lock file <span class="mono">trureturing.lock.json</span> pins <PinnedCommit />: 447 declarations, 316 of them Lean theorems.</p>
+      <p class="lead mt">The lock file <span class="mono">trureturing.lock.json</span> pins <PinnedCommit />: 457 declarations, 320 of them Lean theorems.</p>
     </div>
   </div>
 </div>

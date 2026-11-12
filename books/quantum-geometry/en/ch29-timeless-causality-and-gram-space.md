@@ -182,6 +182,7 @@ When "number" is reduced to a static noun (`shù`), every number system is inevi
 :::
 
 Seen through this four-tier table, Pythagoras and the overarching thesis of this book converge into a single arc:
+
 - In the **Tier 1 Sphere**, we measure back and forth along a single line and mistake rational ratios $m/n$ for the whole universe;
 - The Pythagorean theorem erects an orthogonal axis and uses area conservation $1^2 + 1^2 = (\sqrt{2})^2$ to propel us into the **Tier 2 Sphere** of algebraic polyhedra;
 - Applying the Pythagorean theorem infinitely many times to inscribed $2^k$-gons bends polygonal chords into circular arcs, crystallizing $\pi$ and closing the static **Tier 3 Sphere**;
@@ -588,6 +589,7 @@ $$
 :::
 
 This single equation exhibits two inseparable faces:
+
 - **Complete order-independence (timelessness)**: the relation is completely permutation-symmetric in $(A, B, C)$, with no "earlier cause" or "later effect";
 - **Absolute causal necessity (zero-degree-of-freedom rigidity)**: once $c_{AB}$ and $c_{BC}$ are fixed, spherical geometry locks $c_{AC}$ with zero slack! Likewise, mathematical deduction ($\text{Axioms} \implies \text{Theorems}$) is timeless crystal facet alignment, where the gate count $L$ of Chapters 9 and 16 merely counts how many steps an observer takes to rotate their measurement ruler into alignment with the target facet.
 
@@ -614,6 +616,7 @@ Only the self-consistent stationary configuration ($\delta S = 0$) lacks an oppo
 :::
 
 This picture simultaneously reconciles the age-old rivalry between **mechanical determinism** and **teleology**:
+
 - Reading the page numbers **left to right** along the Picard iteration $\theta_{k+1} = \cos(\theta_k)$ from an initial state $\theta_0$ looks like **determinism** ("the past pushes the present step by step");
 - Reading the convergence **right to left** from the unique attractor $\theta^* \approx 0.7390851332$ looks like **teleology** ("the future fixed point pulls every trajectory toward itself");
 - Viewed from outside the sphere, in the timeless self-referential equation

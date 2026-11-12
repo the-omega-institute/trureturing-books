@@ -617,14 +617,14 @@ section: "第八部 · 定理"
 ---
 
 <div class="body">
-  <p class="kicker">Theorem 29.4 · Theorem 30.20</p>
+  <p class="kicker">Theorem 29.4 · Theorem 30.26</p>
   <h2 class="t">银斜率有<em>最佳逼近下界</em>；有限模态平流<em>无精确闭合</em></h2>
 <TheoremCard class="compact mt-s" label="定理29.4" title="银斜率的最佳逼近下界" gid="D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silver_best_approximation" cite="thm-ch29-silver-best-approximation">
 
 设 $s = \sqrt2 - 1$，$P_k$ 为佩尔数，$0 < m < P_{k+2}$。则对每个整数 $z$，$s^{k+1} \le \lvert m s - z\rvert$。
 
 </TheoremCard>
-<TheoremCard class="compact mt-s" label="定理30.20" title="二次矢量场投影闭合判据与有限模态平流闭合不可能性" gid="D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff" cite="thm-coda-quadratic-advection-no-closure">
+<TheoremCard class="compact mt-s" label="定理30.26" title="二次矢量场投影闭合判据与有限模态平流闭合不可能性" gid="D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff" cite="thm-coda-quadratic-advection-no-closure">
 
 对幂等投影 $P$ 与 $V(x) = Lx - B(x, x)$，存在精确闭合 $P(V(x)) = f(P(x))$ 当且仅当三项泄漏条件都为零；在五模态傅里叶平流中，跨尺度混合项 $P\bigl(B(a, b) + B(b, a)\bigr)_{0,0} = i/4 \neq 0$，所以没有精确闭合。
 
@@ -647,7 +647,7 @@ section: "第八部 · 依据"
       <p>本书验证了佩尔余项与最佳逼近下界；它们正是 <Tex t="\sqrt2" /> 连分数的渐近分数，这一经典刻画照文献引用。</p>
     </div>
     <div>
-      <TheoremCard class="compact" label="猜想30.19" title="三维纳维—斯托克斯方程的全局光滑性" status="open" cite="conj-coda-navier-stokes-regularity">
+      <TheoremCard class="compact" label="猜想30.25" title="三维纳维—斯托克斯方程的全局光滑性" status="open" cite="conj-coda-navier-stokes-regularity">
         <p>无外力三维不可压缩纳维—斯托克斯方程，对光滑初值是否总有全局光滑解（克雷千禧年陈述 A / B）。</p>
       </TheoremCard>
       <p class="lead mt-s">有限模态无精确闭合是已验证的定理；它不回答这条猜想。</p>
@@ -665,14 +665,14 @@ section: "三层依据"
   <p class="kicker">Three tiers of warrant</p>
   <h2 class="t">三层依据，<em>三种颜色</em>，从不越级</h2>
   <div class="split mt">
-    <img src="./img/prelude-three-tiers.zh.svg" alt="三条横条：绿色 210，紫色 164，红色 6；绿色下注锁文件里 313 条 theorem 声明。" style="display: block; width: 900px; max-width: 100%;">
+    <img src="./img/prelude-three-tiers.zh.svg" alt="三条横条：绿色 215，紫色 166，红色 6；绿色下注锁文件里 320 条 theorem 声明。" style="display: block; width: 900px; max-width: 100%;">
     <div>
       <div class="g3">
-        <Stat value="211" label="带 lean= 的定理、引理、命题与推论" tone="ok" />
-        <Stat value="164" label="写明“文献结果，未在本书形式化”的注记与例" tone="violet" />
+        <Stat value="215" label="带 lean= 的定理、引理、命题与推论" tone="ok" />
+        <Stat value="166" label="写明“文献结果，未在本书形式化”的注记与例" tone="violet" />
         <Stat value="6" label="开放猜想，标为 OPEN，不带 Lean 引用" tone="warn" />
       </div>
-      <p class="lead mt">锁文件 <span class="mono">trureturing.lock.json</span> 钉住 <PinnedCommit />，共 447 项声明，其中 316 项是 Lean theorem。</p>
+      <p class="lead mt">锁文件 <span class="mono">trureturing.lock.json</span> 钉住 <PinnedCommit />，共 457 项声明，其中 320 项是 Lean theorem。</p>
     </div>
   </div>
 </div>

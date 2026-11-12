@@ -65,7 +65,11 @@ Let $\rho, \sigma \in \mathrm{QubitMatrix}$ (i.e., $M_{\operatorname{Fin} 2}(\ma
    $$
 
    $$
-   \neg\,\exists\,\mathrm{recover} : \mathrm{QubitMatrix} \to \mathrm{JointQubitEnvironmentMatrix},\quad \mathrm{recover}\bigl(\operatorname{traceEnvironment}(R_{\mathrm{addr}}(\rho))\bigr) = R_{\mathrm{addr}}(\rho) \;\land\; \mathrm{recover}\bigl(\operatorname{traceEnvironment}(R_{\mathrm{addr}}(\sigma))\bigr) = R_{\mathrm{addr}}(\sigma);
+   \begin{aligned}
+   &\neg\,\exists\,\mathrm{recover} : \mathrm{QubitMatrix} \to \mathrm{JointQubitEnvironmentMatrix}, \\
+    &\quad \mathrm{recover}\bigl(\operatorname{traceEnvironment}(R_{\mathrm{addr}}(\rho))\bigr) = R_{\mathrm{addr}}(\rho) \\
+    &\;\land\; \mathrm{recover}\bigl(\operatorname{traceEnvironment}(R_{\mathrm{addr}}(\sigma))\bigr) = R_{\mathrm{addr}}(\sigma);
+   \end{aligned}
    $$
 
 3. **Lossless Global Adjoint Restoration Under Retained Record Access**: Retaining coherent access to the address record restores both blank-record inputs without loss under the adjoint coupling $\operatorname{star}(\mathrm{copyUnitary})$:

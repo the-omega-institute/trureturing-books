@@ -45,6 +45,7 @@ In twentieth-century computer science, hardware engineering and denotational sem
 Returning to our discrete finite and arithmetic foundation (alongside the continuum domain perspective of [@rem-ch39-von-neumann-scott-reflexive-domain-literature]), when self-application closes directly over the minimal binary alphabet $\{0, 1\}$ (`Fin 2`) without external scaffolding, which self-referential laws actually stay alive instead of collapsing? Let us audit the $2 \times 2$ ledger by hand before stating the formal theorem!
 
 Consider a binary fractional map $m = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$ with entries $a, b, c, d \in \{0, 1\}$: feeding $x$ back into $x = \frac{a x + b}{c x + d}$ yields the quadratic fixed-point equation $c x^2 + (d - a)x - b = 0$, with integer coefficient triple $(c, d - a, -b)$ and discriminant $\Delta(m) = (d - a)^2 + 4 b c$. Filtering all $2^4 = 16$ binary tuples by nondegeneracy $\det(m) = a d - b c \neq 0$ leaves exactly $6$ nonsingular maps:
+
 - The identity matrix $\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$ gives coefficients $(0, 0, 0)$ (vacuous `.empty` tautology);
 - The translation matrix $\begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$ gives $(0, 0, -1)$, i.e., $-1 = 0$ (contradictory `.dead` lockup);
 - The swap $\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$ and triangular shears $\begin{pmatrix} 1 & 0 \\ 1 & 1 \end{pmatrix}$ yield square discriminants $\Delta \in \{0, 4\}$ (rational `.collapse` into trivial integer or repeated roots);
@@ -68,7 +69,11 @@ Across the frozen diagonal-escape and self-application-fate modules of `truretur
    $$
 
    $$
-   \land\; \Bigl(\operatorname{HasFate}(m, \mathrm{.live}) \to \operatorname{fixedCoefficients}(m) = (1, -1, -1) \lor \operatorname{fixedCoefficients}(m) = (1, 1, -1)\Bigr) \;\land\; \Bigl(\operatorname{HasFate}(m, \mathrm{.live}) \to \operatorname{discriminant}(m) = 1^2 + 4\Bigr).
+   \begin{aligned}
+   &\land\; \Bigl(\operatorname{HasFate}(m, \mathrm{.live}) \to \operatorname{fixedCoefficients}(m) = (1, -1, -1) \\
+    &\quad \lor \operatorname{fixedCoefficients}(m) = (1, 1, -1)\Bigr) \\
+    &\;\land\; \Bigl(\operatorname{HasFate}(m, \mathrm{.live}) \to \operatorname{discriminant}(m) = 1^2 + 4\Bigr).
+   \end{aligned}
    $$
 :::
 
@@ -115,7 +120,12 @@ Across the frozen concept-fiber, golden-coding real-thread, and binary-Zeckendor
 2. **Strict Injectivity of the Complete Zeckendorf Readout Thread on $\mathbb{R}_{\ge 0}$** ([`zeckendorf_real_thread_injective`](lean:D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective)): For $x \in \mathbb{R}_{\ge 0}$ (`NNReal`) and resolution $\mathrm{level} \in \mathbb{N}$, define $\operatorname{goldenQuantization}(\mathrm{level}, x) := \lfloor\varphi^{\mathrm{level}} \cdot (x : \mathbb{R})\rfloor_+ \in \mathbb{N}$ ($\varphi = \mathrm{Real.goldenRatio}$) and the canonical Zeckendorf readout thread $\operatorname{zeckendorfRealThread}(x) := (\mathrm{level} \mapsto \operatorname{wEncoding}(\operatorname{goldenQuantization}(\mathrm{level}, x))) : \mathbb{N} \to \mathrm{WDigitString}$, where $\mathrm{WDigitString} = \{\mathrm{digits} : \operatorname{List}\;\mathbb{N} \mathrel{//} \mathrm{digits}.\mathrm{IsZeckendorfRep}\}$ and $\operatorname{wEncoding} : \mathbb{N} \simeq \mathrm{WDigitString}$. Then $\operatorname{zeckendorfRealThread}$ is strictly injective:
 
    $$
-   \operatorname{Function.Injective}(\operatorname{zeckendorfRealThread}), \quad\text{i.e.,}\quad \forall a, b \in \mathbb{R}_{\ge 0},\quad \operatorname{zeckendorfRealThread}(a) = \operatorname{zeckendorfRealThread}(b) \;\Longrightarrow\; a = b;
+   \begin{aligned}
+   &\operatorname{Function.Injective}(\operatorname{zeckendorfRealThread}), \\
+    &\quad\text{i.e.,}\quad \forall a, b \in \mathbb{R}_{\ge 0}, \\
+    &\quad \operatorname{zeckendorfRealThread}(a) = \operatorname{zeckendorfRealThread}(b) \\
+    &\;\Longrightarrow\; a = b;
+   \end{aligned}
    $$
 
 3. **Exact Equivalence Between Base-2 Golden Automaton Acceptance and `NoAdjacentOnes`** ([`base_success_iff_noAdjacentOnes`](lean:D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes)): For every binary word $\mathrm{word} \in \operatorname{List}(\operatorname{Fin} 2)$, writing $\operatorname{NoAdjacentOnes}(\mathrm{word}) := \mathrm{word}.\operatorname{IsChain}(u, v \mapsto u = 0 \lor v = 0)$, the partial deterministic finite automaton `binaryZeckendorfBase` accepts $\mathrm{word}$ if and only if no two adjacent `1`s occur:
@@ -132,6 +142,7 @@ Conjunct 1 composes `Equiv.sigmaCongrRight (fun b => Equiv.psigmaEquivSubtype _)
 Focus all three beams of [@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] onto our cut-and-project cosmos (`MODEL` (interpretive model)), and watch an earlier pedagogical scaffold invert completely!
 
 In preceding chapters, for visual simplicity, we spoke *as though* a static integer crystal $\mathbb{Z}^6 = E_\parallel^3 \oplus E_\perp^3$ sat waiting in the dark first and an observer cut-plane sliced through it afterward. From the summit of [@thm-ch39-fiber-reconstruction-and-zeckendorf-thread], the ontological order reverses—**without the blade there is no crystal; relation is substance!**
+
 - Conjuncts 1 and 2 prove that even an uncountable continuum coordinate $x \in \mathbb{R}_{\ge 0}$ harbors zero private remainder outside its discrete golden-quantized readout thread: matching every discrete Zeckendorf word across scales $\varphi^{\mathrm{level}}$ reconstructs $x$ **uniquely and without residue**;
 - Conjunct 3 unmasks the "crystal" itself: the integer hyperplanes of our lattice were never pre-poured concrete waiting for a knife, but **discrete nodal standing-wave surfaces** (`NoAdjacentOnes`) precipitated wherever self-referential orthogonal comparison enforces idempotence $P^2 = P$ and forbids adjacent high-frequency `11` collisions! Not first a crystal and then a blade—**wherever the blade of self-measurement flashes, the void condenses into crystal**.
 

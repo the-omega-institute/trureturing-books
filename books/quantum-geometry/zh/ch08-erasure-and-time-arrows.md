@@ -10,11 +10,12 @@
 
 然而，只要把这两种时间放到一起，物理学里著名的“洛施密特时间反演佯谬（Loschmidt paradox）”便迎面扑来：**既然底层的幺正旋转 $U(t) = \exp((-it/\hbar)H_{\mathrm{op}})$ 是百分之百双向可逆的——把旋子倒转一个负角 $R(-\theta) = R(\theta)^\dagger$ 就能原路退回——为什么宏观世界与观察者的记忆却拥有一支铁板钉钉、有去无回的“热力学时间箭头”？为什么我们能记住昨天、却记不住明天？**
 
-作为第二部《展翼·从线到面》的收官之章，本章将用六条经 Lean 4 内核验证的形式化结论，彻底算清这笔“从二维面积压扁成一维线”的信息与热力学总账：
+作为第二部《展翼·从线到面》的收官之章，本章将用七条经 Lean 4 内核验证的形式化结论，彻底算清这笔“从二维面积压扁成一维线”的信息与热力学总账：
 
 1. **幺正旋转不产熵，唯有基捏合抹除面积才产熵**：每一步“幺正旋转 $U$ $+$ 计算基对角捏合 $\Pi$”所产生的系统冯·诺依曼熵增 $\Delta S_{\mathrm{pinch}} = S(\Pi(U\rho U^*)) - S(\rho)$，一分不差地等于被抹除的横向相干面积的量子相对熵 $D(U\rho U^* \,\|\, \Pi(U\rho U^*)) \ge 0$；
-2. **抹平 $1$ 比特正交面积产生 $\ln 2$ 奈特系统熵增，并与非保单位兰道尔热浴重置严格区分**：在相互无偏基（MUB）下将 $d$ 维记录态保单位捏合抹平到最大混合态 $I_d/d$，系统的相对熵代价与冯·诺依曼熵增恒为 $\ln d - S(\rho)$（对单比特纯态恰为 $\ln 2 \approx 0.6931\text{ nats} = 1\text{ bit}$）；至于随后的非保单位逻辑重置如何将系统混合熵排入外部热浴，则见热力学文献注记 [@rem-landauer-stage-b-statement-literature] 与 [@rem-landauer-thermodynamic-bridge-literature]；
-3. **连观察者结构都没有任何例外**：在指定的共轭重叠逆转协议、记录不可访问的受限操作，以及其余副本幺模、幸存副本重叠不为 $1$、所选 $\rho_{ij} \neq 0$ 的条件下，漏掉唯一一份幸存副本会阻断该选定相干元的复原。
+2. **任何物理过程都不会让两个态更可区分**：对一切完全正保迹的有限维量子信道 $\Phi$，$D(\Phi\rho \,\|\, \Phi\sigma) \le D(\rho \,\|\, \sigma)$（数据处理不等式）；幺正过程取等号，所以可逆；
+3. **抹平 $1$ 比特正交面积产生 $\ln 2$ 奈特系统熵增，并与非保单位兰道尔热浴重置严格区分**：在相互无偏基（MUB）下将 $d$ 维记录态保单位捏合抹平到最大混合态 $I_d/d$，系统的相对熵代价与冯·诺依曼熵增恒为 $\ln d - S(\rho)$（对单比特纯态恰为 $\ln 2 \approx 0.6931\text{ nats} = 1\text{ bit}$）；至于随后的非保单位逻辑重置如何将系统混合熵排入外部热浴，则见热力学文献注记 [@rem-landauer-stage-b-statement-literature] 与 [@rem-landauer-thermodynamic-bridge-literature]；
+4. **连观察者结构都没有任何例外**：在指定的共轭重叠逆转协议、记录不可访问的受限操作，以及其余副本幺模、幸存副本重叠不为 $1$、所选 $\rho_{ij} \neq 0$ 的条件下，漏掉唯一一份幸存副本会阻断该选定相干元的复原。
 
 ::: {.figure src="ch08-overview"}
 **图 8。** 本章地图：第 I 栏，对角元相同、相干元不同的两支箭头 $\rho$ 与 $\sigma$ 高度相同，求偏迹抹掉品红的横向一份后落到竖轴上同一个青色的点；第 II 栏，琥珀色的箭头 $\lvert +\rangle$ 被捏合，品红的横向一份被抹掉，箭头缩成圆心的青色点，熵柱从 $0$ 升到 $\ln 2$；第 III 栏，在本节指定的共轭重叠逆转协议中，系统连着五份环境副本，四份倒了带（青色），漏下的一份 $k$ 是品红的；其余副本满足 $|c_l| = 1$（$l \neq k$），且 $c_k \neq 1$、$\rho_{01} \neq 0$，倒带后只得到 $c_k\rho_{01} \neq \rho_{01}$。
@@ -66,6 +67,63 @@ $$
 ::: {.viz src="erasure-ledger" preset="pinch" height="500"}
 **先转，再捏合：熵多出 ln 2。** 转 90° 时，琥珀色的箭头从 |0⟩ 转到横躺，右边“系统的熵”一栏纹丝不动；捏合时，品红的横着的一份被抹掉，箭头缩成圆心，熵那一栏升到 ln 2 的虚线，“付给环境的热”仍是 0（[@thm-dual-account-full]）。
 :::
+
+**不只是捏合：任何过程都不会让两个态更可区分。** [@thm-dual-account-full] 算的是一种特定操作（基捏合）的账。把问题放大：给两个态 $\rho$、$\sigma$，让它们经过同一个物理过程，比如噪声、测量后丢掉结果、与环境耦合再丢掉环境，它们之间的相对熵会怎样？答案对**一切**有限维量子信道都一样：只降不升。
+
+::: {.theorem #thm-channel-data-processing title="数据处理不等式：量子信道不增加相对熵" lean="D5/S3/Quantum/Divergence/CanonicalChannelDPI.extended_quantum_relative_entropy_channel_dpi"}
+设 $a$、$b$ 为非空有限指标集，$\Phi$ 为从 $a \times a$ 复矩阵到 $b \times b$ 复矩阵的有限维量子信道，即完全正且保迹的线性映射。对 $a$ 上的密度态（半正定、迹为 $1$ 的矩阵）$\rho$、$\sigma$，记带支撑约定的相对熵为
+
+$$
+D(\rho \,\|\, \sigma) =
+\begin{cases}
+\operatorname{Tr}\bigl(\rho(\log\rho - \log\sigma)\bigr), & \operatorname{supp}\rho \subseteq \operatorname{supp}\sigma, \\
++\infty, & \text{否则},
+\end{cases}
+$$
+
+其中 $\log$ 为自然对数（在零本征值上取 $0$），$\operatorname{supp}\rho \subseteq \operatorname{supp}\sigma$ 指被 $\sigma$ 零化的向量也被 $\rho$ 零化。则
+
+$$
+D\bigl(\Phi(\rho) \,\|\, \Phi(\sigma)\bigr) \le D(\rho \,\|\, \sigma).
+$$
+:::
+
+::: proof
+若 $\rho$ 的支撑不在 $\sigma$ 的支撑之内，右边是 $+\infty$，不等式自动成立。否则，Lean 先把信道写成 Kraus 形式 $\Phi(X) = \sum_c K_c X K_c^\dagger$（$\sum_c K_c^\dagger K_c = I$），再把两个态的谱放在一起，构造 Petz 的“相对模算子”数据：两端的相对熵都写成一个对角“比值算子”（本征值之比）取对数后在一个单位向量上的二次型，再带一个负号；Kraus 算子拼成一个收缩 $V$（$V^\dagger V \le I$），它把一端的单位向量送到另一端的单位向量，并夹着两端的比值算子满足一条算子不等式。对数是算子单调、算子凹的函数，收缩不能让这种二次型越过另一边，取负号即得定理。完整证明由 Lean 内核检查。
+:::
+
+两条推论只用手算就能从定理里读出来：
+
+- **幺正过程不改变相对熵（手工推导）。** $\rho \mapsto U\rho U^\dagger$ 是信道，它的逆 $\rho \mapsto U^\dagger\rho U$ 也是信道。两头各用一次 [@thm-channel-data-processing]，得到 $D(U\rho U^\dagger \,\|\, U\sigma U^\dagger) \le D(\rho \,\|\, \sigma) \le D(U\rho U^\dagger \,\|\, U\sigma U^\dagger)$，只能取等号。可区分度丝毫不损失，正是 8.1 节所说的“可逆”。
+- **量子 H 定理（手工推导）。** 若信道有一个不动态 $\Phi(\sigma) = \sigma$，则对任意 $\rho$，$D(\Phi^{n+1}\rho \,\|\, \sigma) = D(\Phi(\Phi^n\rho) \,\|\, \Phi(\sigma)) \le D(\Phi^n\rho \,\|\, \sigma)$：反复作用同一个过程，态到不动态的相对熵一步也不会回升。
+
+::: {.example #ex-channel-data-processing-qubit title="单比特：去极化、捏合与旋转下的相对熵"}
+以下用自然对数，数值四舍五入到所示位数，均用 $2 \times 2$ 矩阵的本征分解直接算出。
+
+**去极化压向 $I/2$。** 取 $\rho = \operatorname{diag}(0.9, 0.1)$（布洛赫向量 $(0, 0, 0.8)$），$\sigma = I/2$。去极化信道 $\Phi_\lambda(X) = \lambda X + (1 - \lambda)\operatorname{Tr}(X)\, I/2$ 把布洛赫向量缩短为原来的 $\lambda$ 倍，并保持 $I/2$ 不动。$D(\rho \,\|\, I/2) = \ln 2 - S(\rho)$（手工推导），所以
+
+| $\lambda$ | $1$ | $0.75$ | $0.5$ | $0.25$ | $0$ |
+| :--- | ---: | ---: | ---: | ---: | ---: |
+| $D(\Phi_\lambda\rho \,\|\, I/2)$ | $0.3681$ | $0.1927$ | $0.0823$ | $0.0201$ | $0$ |
+
+把 $\Phi_{1/2}$ 反复作用 $n = 0, 1, 2, 3, 4$ 次，相对熵依次为 $0.36806$、$0.08228$、$0.02014$、$0.00501$、$0.00125$，正是上面的量子 H 定理。
+
+**从无穷大到有限。** $\lvert 0\rangle\langle 0\rvert$ 与 $\lvert +\rangle\langle +\rvert$ 是两个不同的纯态，支撑互不包含，相对熵为 $+\infty$。去极化之后两者都满秩，相对熵变为有限：$\lambda = 0.9$ 时为 $1.325$，$\lambda = 0.5$ 时为 $0.2747$，$\lambda = 0.1$ 时为 $0.0100$。
+
+**捏合可以抹平一切差别。** $\lvert +\rangle\langle +\rvert$ 与 $\lvert -\rangle\langle -\rvert$ 也是 $+\infty$；在 $Z$ 基上捏合（只留对角元）之后两者都变成 $I/2$，相对熵为 $0$：只记录 $Z$ 基读数的观察者再也分不出它们。
+
+**旋转不改变，捏合会降低。** 取一般的两个态，布洛赫向量 $(0.3, 0.2, 0.5)$ 与 $(-0.1, 0.4, 0.2)$，相对熵为 $0.1602$；绕 $y$ 轴转 $0.7$ 弧度之后仍是 $0.1602$；在 $Z$ 基上捏合之后降为 $0.0499$。
+:::
+
+::: {.remark #rem-channel-dpi-literature title="文献结果，未在本书形式化"}
+以下是**文献结果，未在本书形式化**：
+
+- 这一单调性最早由 G. Lindblad（1975）对完全正保迹映射、A. Uhlmann（1977）在更一般的框架下证明；
+- 量子 Stein 引理给相对熵以操作意义，即对 $\rho$ 与 $\sigma$ 的独立同分布副本作渐近检验、将第一类错误率限制在固定的 $0 < \epsilon < 1$ 以下时的最优第二类错误率指数，于是“$D$ 只降不升”读作“任何预处理都不会让假设检验更容易”；
+- 单调性对只是正（不必完全正）的保迹映射也成立（A. Müller-Hermes 与 D. Reeb，2017）。
+:::
+
+> 过程只会抹去差别，不会制造差别。
 
 ## 8.2 相干擦除产熵与兰道尔原理的两阶段几何图景 {#sec-landauer-principle-geometry}
 
@@ -313,7 +371,7 @@ $$
 
 ## 8.4 第二部总结与过渡：当一个平面装不下三次正交分叉，向三维球面跃迁 {#sec-part2-summary-bridge}
 
-至此，第二部《展翼·从线到面》的四章画卷已经全部展开。通过二十一条经 Lean 4 内核逐一验证的形式化定理、引理、命题与推论（第五、六、七章各五条，第八章六条），我们彻底打通了二维有向面积的几何脉络：
+至此，第二部《展翼·从线到面》的四章画卷已经全部展开。通过二十二条经 Lean 4 内核逐一验证的形式化定理、引理、命题与推论（第五、六、七章各五条，第八章七条），我们彻底打通了二维有向面积的几何脉络：
 
 - **第五章**拆穿了虚数单位 $i$ 的神秘伪装，从平衡幺正和 $S = A + B$ 出发严格导出反自伴相对复结构 $J := 2AB^*$ 的平方律 $J^2 = -I$（[@thm-balanced-sum-skew-adjoint]、[@lemma-skew-adjoint-unitary-square]、[@thm-relative-complex-structure-square]）与相位锁定实分解（[@prop-phase-locked-overlap]），并以圆的二重覆盖定理（[@thm-circle-double-cover-history-lift]）说明“转一整圈旋子变号”是拓扑事实，将全部单比特量子门还原为三维布洛赫球上的克利福德旋子 $R(\theta) = \cos(\theta/2) - \vv{B}\sin(\theta/2)$；
 - **第六章**用几何积 $\vv{A}\vv{B} = \vv{A}\cdot\vv{B} + \vv{A}\wedge\vv{B}$ 终结了波粒二象性的百年割裂，以拉格朗日—格拉姆恒等式（[@thm-lagrange-gram-identity]）、罗伯逊—薛定谔四项守恒律（[@thm-robertson-schrodinger]）及其混合态不等式（[@thm-mixed-state-robertson]）、纯态记录互补圆 $D^2 + V^2 = 1$（[@thm-record-coherence-complementarity]）与捏合勾股分解（[@cor-pinching-pythagorean]）将教科书五大公设熔铸为一炉，并配以实时交互实验室 `ORTHO//QUBIT`；

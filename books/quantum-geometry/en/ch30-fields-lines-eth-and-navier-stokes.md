@@ -117,12 +117,172 @@ In our geometric interpretation (`MODEL`), geometric or algebraic structure used
 **Literature result, not formalized in this book.** Three classical algorithmic and topological theorems cited in this section to illustrate field construction and topological curl belong to the external literature and are not formalized in this book:
 
 1. **Karmarkar's Interior-Point Algorithm for Linear Programming (N. Karmarkar, *Combinatorica* **4**, 373–395, 1984)**: Whereas Dantzig's simplex method traverses 1D boundary edges and takes $2^n$ steps on worst-case Klee–Minty (1972) deformed cubes, Karmarkar's algorithm enters the interior of the polytope and follows a smooth logarithmic-barrier gradient field to reach the optimum in polynomial time;
-2. **Kasteleyn's Pfaffian Planar-Matching Theorem (P. W. Kasteleyn, *Physica* **27**, 1209–1225, 1961)**: Counting perfect matchings in general bipartite graphs (computing the permanent) is `#P`-complete (L. G. Valiant, 1979); on a planar graph, however, a Kasteleyn orientation assigns signs to edges so that non-planar crossing terms cancel in the skew-symmetric matrix $A_K^T = -A_K$, yielding the weighted dimer partition function $Z = |\operatorname{Pf}(A_K)| = \sqrt{\det A_K}$ in polynomial time via Cayley's identity $[\operatorname{Pf}(A_K)]^2 = \det A_K$;
+2. **Kasteleyn's Pfaffian Planar-Matching Theorem (P. W. Kasteleyn, *Physica* **27**, 1209–1225, 1961)**: Counting perfect matchings in general bipartite graphs (computing the permanent) is `#P`-complete (L. G. Valiant, 1979). For a finite planar graph with nonnegative edge weights $w_e$, the classical method uses a Kasteleyn orientation to form a skew-symmetric weighted adjacency matrix $A_K^T=-A_K$ in which all actual perfect-matching terms in the Pfaffian expansion have the same coefficient sign. Thus the weighted perfect-matching partition function is $Z=\sum_M\prod_{e\in M}w_e=|\operatorname{Pf}(A_K)|$, and Cayley's identity $[\operatorname{Pf}(A_K)]^2=\det A_K$ gives $Z=\sqrt{\det A_K}$. The sign mechanism aligns matching coefficients; nonedges have zero matrix entries. Exact evaluation in polynomial time for nonnegative rational weights encoded in binary is a literature result. If no perfect matching exists, $Z=0$; handling general planar graphs also includes connected components and the zero case caused by an odd-order component. A modern account is D. Cimasoni and N. Reshetikhin (2007), [*Dimers on surface graphs and spin structures. I*](https://arxiv.org/html/math-ph/0608070v2), Section 5.1, Theorem 5.1 and its matching expansion, specialized to the sphere;
 3. **Poincaré–Brouwer Hairy Ball Theorem (H. Poincaré, 1885; L. E. J. Brouwer, 1912)**: Because the 2-sphere has Euler characteristic $\chi(S^2) = 2 \neq 0$, every continuous tangent vector field on $S^2$ must vanish at least at one point (a topological vortex).
 :::
 
 ::: {.viz src="timeless-causal-crystal" preset="field" height="500"}
 **A field: a slope everywhere.** The cyan flow lines start from all over the sphere; each looks only at the slope underfoot, and each flows to the target. The amber line is the chosen one, and the field vanishes at the opposite point. In the plot below, whatever the cyan potential loses, the magenta dissipation pays, and their sum (dashed amber) stays fixed ([`S2_dissipation`](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation)). Reading it as a "field" is this book's interpretation (`MODEL`).
+:::
+
+#### From Actual Vertex Rotations to Face-Odd Orientations: A Finite Combinatorial Prerequisite {#sec-ch30-rotation-parity}
+
+The full planar-matching result above has geometric, combinatorial, algebraic, and algorithmic parts. We first isolate a finite combinatorial question: given the cyclic order of the original graph's edges at each vertex, can one choose a single edge orientation for which every face and every even simple cycle whose deletion leaves a perfect matching has an odd number of opposing darts? A dart is an actual edge with a direction. A bridge, for example, has two reverse darts; a facial traversal that goes out and back along it must count both occurrences. An edge set alone would lose this information.
+
+The results below derive the required sides from vertex rotations and an integer counting condition. Here “sphere rotation” means only the finite data satisfying the Euler condition specified below; obtaining these data from a geometric embedding is a separate step.
+
+::: {.definition #def-ch30-actual-rotation title="Actual Darts, Vertex Rotations, and Complete Face Orbits" lean="D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.Rotation D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.facePerm D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.Face D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face"}
+Let $V$ be an arbitrary finite type with decidable equality, and let $G$ be a simple undirected graph on $V$ with decidable adjacency. Write $D=G.\mathrm{Dart}$ for its actual dart type: a dart $d=(u,v)$ requires $G.\mathrm{Adj}(u,v)$. Write $E=G.\mathrm{edgeSet}$ for the type of actual unordered edges, $e(d)=\{u,v\}\in E$, and $\alpha(d)=(v,u)$.
+
+A vertex rotation $R$ is a permutation $\rho$ of $D$ such that, for all $d,t\in D$,
+
+$$
+\bigl(\exists n\in\mathbb Z,\ \rho^n(d)=t\bigr)
+\quad\Longleftrightarrow\quad d.\mathrm{fst}=t.\mathrm{fst}.
+$$
+
+The facial successor first reverses and then rotates: $\phi(d)=\rho(\alpha(d))$. The face type $F$ is the quotient of $D$ by the orbit relation of $\phi$: $d\sim t$ exactly when $\phi^n(d)=t$ for some $n\in\mathbb Z$. Write $f(d)$ for the class of $d$. Every orbit belongs to $F$, including singleton orbits. The rotation data themselves include no connectedness, geometric realization, or Euler equation.
+:::
+
+All three theorems below assume that $G$ is connected, $D$ is nonempty, and the following Euler equation holds **in the integers**:
+
+$$
+(|V|:\mathbb Z)-(|E|:\mathbb Z)+(|F|:\mathbb Z)=2.
+$$
+
+Each cardinality is cast to an integer before subtraction; no truncated natural-number subtraction is used. In particular, the edgeless one-vertex graph fails the nonempty-dart hypothesis and lies outside these three theorems.
+
+::: {.definition #def-ch30-face-boundary title="Binary Facial Boundary and Opposition Count" lean="D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.boundary D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.faceOpposition"}
+Write $\mathbb F_2=\mathbb Z/2\mathbb Z$. For a face function $x:F\to\mathbb F_2$, the linear boundary map $B:\mathbb F_2^F\to\mathbb F_2^E$ chooses one representative dart $d_e$ for each unordered edge and sets
+
+$$
+(Bx)(e)=x(f(d_e))+x(f(\alpha(d_e))).
+$$
+
+For any dart function $\varepsilon:D\to\mathbb F_2$, define the facial opposition count by
+
+$$
+\operatorname{opp}_F(\varepsilon,f)=\sum_{\substack{d\in D\\f(d)=f}}\varepsilon(d).
+$$
+
+If $\varepsilon(\alpha(d))=1+\varepsilon(d)$, it encodes an edge orientation: $\varepsilon(d)=0$ means that the orientation follows $d$, and $1$ means that it opposes $d$. The face count includes every actual dart in the complete orbit. Both darts of a bridge count separately even when they belong to the same face. Write $\mathcal C(G)\subseteq\mathbb F_2^E$ for the linear span of the unordered-edge indicators of all actual simple cycles.
+:::
+
+::: {.theorem #thm-ch30-face-cycle-exact title="Facial Boundaries Equal the Actual Cycle Space" lean="D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact"}
+For any finite $V$, connected simple graph $G$, and vertex rotation $R$ as above, assume $D\ne\varnothing$ and the integer equation $|V|-|E|+|F|=2$. Then all three statements hold:
+
+1. For every $x:F\to\mathbb F_2$ and $d\in D$, $(Bx)(e(d))=x(f(d))+x(f(\alpha(d)))$.
+2. For every $x:F\to\mathbb F_2$, $Bx=0$ if and only if some $c\in\mathbb F_2$ satisfies $x(f)=c$ for every $f\in F$.
+3. $\operatorname{im}B=\mathcal C(G)$.
+:::
+
+::: proof
+The two representatives of an unordered edge differ only by reversal, so their shore-value sum is independent of the choice. Zero boundary equates the facial values on reverse darts. Facial succession and the vertex rotation propagate this equality around a vertex, and connectedness propagates it to all faces. The kernel therefore consists of constants and has dimension $1$. Reindexing a dart sum by the facial successor shows that every facial boundary has even incidence at every vertex, placing it in the existing actual cycle space. Rank–nullity gives $\dim\operatorname{im}B=|F|-1$, whereas the connected graph's cycle space has dimension $|E|-|V|+1$. The integer Euler equation makes these dimensions equal. The full proof is checked by the Lean kernel.
+:::
+
+Next, take an actual closed walk $p$ in the original graph, based at $a$. A simple cycle satisfies the formal predicate $p.\mathrm{IsCycle}$: no vertex repeats except the starting vertex at closure, and the zero-length walk and degenerate out-and-back traversal of one edge are excluded. Write $C(p)$ for its vertex support, $E(p)$ for its actual unordered-edge set, $\mathcal D(p)$ for its ordered dart list, and $p^{\mathrm{rev}}$ for the reversed walk. Write $G[S]$ for the subgraph induced on a vertex set $S$. Its vertices carry the condition of belonging to $S$; $v.\mathrm{val}$ denotes the original vertex after forgetting this condition. An even simple cycle is called *nice* when deleting $C(p)$ from the original graph leaves an actual induced graph with a perfect matching.
+
+::: {.theorem #thm-ch30-cycle-face-sides title="Actual Simple-Cycle Sides, Regional Euler Identities, and Matching Restrictions" lean="D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.cycle_face_sides"}
+For the finite $V$, connected simple graph $G$, and rotation $R$ above, assume $D\ne\varnothing$ and the integer equation $|V|-|E|+|F|=2$. For every $a\in V$ and actual simple cycle $p:a\leadsto a$, there exist a face function $x:F\to\mathbb F_2$ and vertex sets $I,J\subseteq V$ satisfying all the following statements.
+
+1. The face sets $F_1=\{f\in F:x(f)=1\}$ and $F_0=\{f\in F:x(f)=0\}$ are nonempty complements, and $Bx=\mathbf1_{E(p)}$.
+2. There is a walk $q=p$ or $q=p^{\mathrm{rev}}$ such that, for every actual dart $d$,
+
+   $$
+   \begin{aligned}
+   &x(f(d))=1\ \land\ x(f(\alpha(d)))=0\\
+   &\quad\Longleftrightarrow\ d\in\mathcal D(q),\\
+   &x(f(d))=0\ \land\ x(f(\alpha(d)))=1\\
+   &\quad\Longleftrightarrow\ d\in\mathcal D(q^{\mathrm{rev}}).
+   \end{aligned}
+   $$
+
+3. For every $v\in V$, $v\notin C(p)$ if and only if $v\in I\cup J$, and $I\cap J=\varnothing$. Every actual dart with $d.\mathrm{fst}\notin C(p)$ satisfies
+
+   $$
+   \begin{aligned}
+   d.\mathrm{fst}\in I&\ \Longleftrightarrow\ x(f(d))=1,\\
+   d.\mathrm{fst}\in J&\ \Longleftrightarrow\ x(f(d))=0.
+   \end{aligned}
+   $$
+
+   For all $v\in I,w\in J$, $\neg G.\mathrm{Adj}(v,w)$.
+4. For each pair $(S,b)=(I,1)$ or $(J,0)$, there is a connected subgraph $H_S$ of the original graph with vertex set exactly $C(p)\cup S$. For every actual dart $d$,
+
+   $$
+   \begin{aligned}
+   &H_S.\mathrm{Adj}(d.\mathrm{fst},d.\mathrm{snd})\\
+   &\quad\Longleftrightarrow\ e(d)\in E(p)\\
+   &\qquad\lor\bigl(x(f(d))=b\ \land\\
+   &\qquad\qquad x(f(\alpha(d)))=b\bigr).
+   \end{aligned}
+   $$
+
+   Let $E_S$ be this subgraph's actual unordered-edge set, and $E_S^\circ=E_S\setminus E(p)$. Both identities hold in $\mathbb Z$:
+
+   $$
+   \begin{aligned}
+   |C(p)\cup S|-|E_S|+|F_b|&=1,\\
+   |S|-|E_S^\circ|+|F_b|&=1.
+   \end{aligned}
+   $$
+
+5. Let $U=V\setminus C(p)$, and let $\bar G=G[U]$ be the actual vertex-deleted complement. For any perfect-matching subgraph $M$ of this same graph $\bar G$, and every $S\in\{I,J\}$, put $S'=\{u\in U:u.\mathrm{val}\in S\}$. There is a perfect-matching subgraph $N$ of $\bar G[S']$ such that, for all its vertices $v,w$,
+
+   $$
+   \begin{aligned}
+   &N.\mathrm{Adj}(v,w)\\
+   &\quad\Longleftrightarrow\ M.\mathrm{Adj}(v.\mathrm{val},w.\mathrm{val}).
+   \end{aligned}
+   $$
+
+   In this case both $|I|$ and $|J|$ are even.
+:::
+
+::: proof
+By [@thm-ch30-face-cycle-exact], the cycle's edge indicator has a facial preimage $x$. Its nonzero boundary excludes constant labels, so both face values occur. All incident facial values at an off-cycle vertex agree, determining $I,J$; an original edge cannot join off-cycle vertices of different labels. The regional edge condition retains the cycle edges and edges with both shores on the chosen side. Even a chord whose endpoints both lie on the cycle must be excluded from the opposite region. Following an original graph path until it first reaches the cycle proves that each selected region is connected.
+
+Map functions supported on one facial side into the cycle space of its region. The connected cycle-rank bound gives an Euler inequality for each side. The vertex and edge union/intersection counts, together with the global integer Euler equation, force equality on both sides. A simple cycle has equally many edges and vertices; removing both counts gives the second regional identity. At each cycle vertex, its two actual cycle edges determine two label changes in the vertex rotation, giving the direct boundary equivalences for $q$ and $q^{\mathrm{rev}}$. Finally, the absence of cross edges keeps each edge of the given $M$ on one side. Restricting that same matching to both sides and applying perfect-matching parity makes both side cardinalities even. The full proof is checked by the Lean kernel.
+:::
+
+Both facial sides are nonempty, but an off-cycle vertex side may be empty. The theorem requires no strictly interior vertex on either side and assumes no interior parity. Each region is a connected subgraph selected by its actual edges; these conclusions do not construct a topological disk.
+
+::: {.theorem #thm-ch30-face-odd-nice-cycle-orientation title="One Orientation Is Odd on All Faces and All Nice Even Cycles" lean="D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.face_odd_nice_cycle_orientation"}
+Let $V$ be any finite type with decidable equality, $G$ a connected simple graph with decidable adjacency, and $R$ its vertex rotation. If $D\ne\varnothing$, $|V|$ is even, and $|V|-|E|+|F|=2$ in $\mathbb Z$, there exists **one** function $\varepsilon:D\to\mathbb F_2$ satisfying
+
+$$
+\begin{aligned}
+&\forall d\in D,\quad \varepsilon(\alpha(d))=1+\varepsilon(d),\\
+&\forall f\in F,\quad \operatorname{opp}_F(\varepsilon,f)=1.
+\end{aligned}
+$$
+
+Furthermore, for every $a\in V$, every actual even-length simple cycle $p$ based at $a$, and every perfect-matching subgraph $M$ of the actual complement $G[V\setminus C(p)]$,
+
+$$
+\sum_{d\in\mathcal D(p)}\varepsilon(d)=1\quad\text{in }\mathbb F_2.
+$$
+
+The sum counts the dart list. The existential quantifier $\exists\varepsilon$ precedes the universal quantifiers over all cycles and all complement matchings.
+:::
+
+::: proof
+Start with any edge orientation and record each face's parity defect. Since the facial boundary map has only constants in its kernel, the defects correctable by its transpose are exactly those whose total is zero. The global integer Euler equation and the even vertex count ensure this compatibility condition. Adding the same binary correction to both darts of each edge preserves reversal and makes the opposition count on every facial orbit equal to $1$.
+
+For any given nice even cycle, use one actual side supplied by [@thm-ch30-cycle-face-sides]. Summing the facial opposition counts on that side gives a contribution of $1$ from each selected noncycle edge; the direct boundary equivalence identifies the remaining terms with the dart sum along $q$. The regional Euler identity then gives
+
+$$
+\sum_{d\in\mathcal D(q)}\varepsilon(d)
+  =|F_1|+|E_I^\circ|=1+|I|\quad\text{in }\mathbb F_2.
+$$
+
+The actual restriction of the given complement matching makes $|I|$ even, so the right-hand side is $1$. If $q=p^{\mathrm{rev}}$, the reversal rule changes the sum by the cycle length in $\mathbb F_2$; even length makes this change zero. The single orientation chosen at the outset therefore works for every such cycle and matching. The full proof is checked by the Lean kernel.
+:::
+
+::: {.remark #rem-ch30-rotation-pfaffian-boundary title="The Boundary Between the Finite Rotation Prerequisite and Full Planar Matching"}
+**Literature results: the remaining steps are not formalized in this book.** Section 3.1, Theorem 3.1 and its proof in the paper by Cimasoni and Reshetikhin cited above give the even-order criterion for Kasteleyn orientations on closed oriented surface graphs. Section 5.1, Theorem 5.1 treats the signs of actual matching terms and their Pfaffian expansion. These are established literature results. The three theorems here address only finite combinatorial data with an actual vertex rotation, nonempty darts, connectedness, and the integer Euler equation.
+
+Further bridges are needed from arbitrary geometric planar embeddings to these rotations and complete face orbits, for the edgeless one-vertex graph and other graphs outside the stated hypotheses, and from nice-cycle oddness to a common Pfaffian coefficient sign for every pair of actual perfect matchings. The weighted matching expansion of the skew-symmetric matrix, Cayley's determinant-square identity, $Z=|\operatorname{Pf}(A_K)|=\sqrt{\det A_K}$ for nonnegative weights including zero cases, exact evaluation and bit complexity for rational inputs, and `#P`-completeness of general bipartite counting remain classical literature results under [@rem-ch30-karmarkar-kasteleyn-literature]. Existence of the finite orientation carries none of those algorithmic or complexity conclusions.
 :::
 
 The three items of [@rem-ch30-karmarkar-kasteleyn-literature] are literature only. There is, however, a small discrete problem in which both the "field" and the "line" can be written down as exact mathematics and handed to the kernel: coloring the vertices of a graph.
@@ -210,6 +370,7 @@ Two rows can be done by hand. $C_5$ with $k = 2$: suppose every edge has exactly
 ### 3. Hairy-Ball Curl ($\nabla \wedge \mathbf{F}$) as a Geometric Analogy for $P \neq NP$: Why One Line Cannot Hold Up a Field
 
 Why is it so difficult to construct such a polynomial-time guiding field for $\mathrm{NP}$-complete problems like 3-SAT? Expressed as a continuous differential-geometric analogy (`MODEL`, intended as geometric intuition rather than a formal proof of [@conj-p-neq-np]):
+
 - A conservative gradient field $\mathbf{F} = -\nabla V$ that slides without frustration to a global minimum satisfies the vanishing exterior-curl condition:
 
   $$
