@@ -461,6 +461,22 @@
       "line": 39,
       "signature": "theorem minkowski_model_set_spec (window : Set ℝ) (y : ℝ) (label : JointCoordinates) : Function.Injective minkowskiEmbedding ∧ (goldenLattice : Set (ℝ × ℝ)) = Set.range minkowskiEmbedding ∧ (y ∈ modelSet window ↔ ∃ x : GoldenInt, embedding x = y ∧ embedding (conj x) ∈ window) ∧ ((y, label) ∈ labeledModelSet window ↔ ∃ (x : GoldenInt) (n : ℕ), embedding x = y ∧ embedding (conj x) ∈ window ∧ jointCoordinates x n = label)"
     },
+    "D5/S1/Words/Mechanical/MechanicalBalance.lowerMechanicalWindowTrueCount_eq_floor": {
+      "module": "D5/S1/Words/Mechanical/MechanicalBalance",
+      "name": "D5.S1.Words.Mechanical.lowerMechanicalWindowTrueCount_eq_floor",
+      "kind": "theorem",
+      "statement_id": "sha256:db7434e78bc669a2f0d5711175f8f744fc6dfba359dd5414cc8c05c753ad3399",
+      "line": 62,
+      "signature": "theorem lowerMechanicalWindowTrueCount_eq_floor {alpha rho : Real} (halpha0 : 0 ≤ alpha) (halpha1 : alpha < 1) (i n : Nat) : (lowerMechanicalWindowTrueCount alpha rho i n : Int) = ⌊rho + ((i + n : Nat) : Real) * alpha⌋ - ⌊rho + (i : Real) * alpha⌋"
+    },
+    "D5/S1/Words/Mechanical/MechanicalDensity.lower_mechanical_window_true_discrepancy": {
+      "module": "D5/S1/Words/Mechanical/MechanicalDensity",
+      "name": "D5.S1.Words.Mechanical.lower_mechanical_window_true_discrepancy",
+      "kind": "theorem",
+      "statement_id": "sha256:5f86eb22102404e38bdfe57553697febce5a56282498efc3673d6adf9a3784fb",
+      "line": 13,
+      "signature": "theorem lower_mechanical_window_true_discrepancy {alpha rho : Real} (halpha0 : 0 ≤ alpha) (halpha1 : alpha < 1) (i n : Nat) : |(lowerMechanicalWindowTrueCount alpha rho i n : Real) - (n : Real) * alpha| < 1"
+    },
     "D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic.silverPell_determinant": {
       "module": "D5/S1/Words/Mechanical/SilverSlopeAbelianPellArithmetic",
       "name": "D5.S1.Words.Mechanical.silverPell_determinant",

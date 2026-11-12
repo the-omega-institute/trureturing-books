@@ -154,13 +154,14 @@
     g.vline(th, P.amber, { alpha: 0.35, dash: [3, 4] });
     const fp = f(th + Q), fm = f(th - Q), sl = slopeByCommutator(MODELS[S.model], th);
     g.vline(th + Q, P.cyan, { alpha: 0.35, dash: [2, 4] }); g.vline(th - Q, P.cyan, { alpha: 0.35, dash: [2, 4] });
-    // the small-step chord through θ ± h, drawn over the same run as the tangent
-    const run = 0.95, fd = fdOf(th, hr), f0 = f(th);
+    // the small-step chord: the line through the two sampled points (θ − h, f(θ − h)) and (θ + h, f(θ + h)), whose
+    // midpoint sits at θ with the mean of the two values; drawn at least over the run of the tangent and out to both points
+    const run = 0.95, fd = fdOf(th, hr), f0 = f(th), fHi = f(th + hr), fLo = f(th - hr), mid = (fHi + fLo) / 2, runC = Math.max(run, hr);
     const fo = focus(), chord = fo !== 'shift', cyA = fo === 'step' ? 0.35 : 1;
     g.ctx.save(); g.ctx.beginPath(); g.ctx.rect(g.pl, g.pt, g.iw, g.ih); g.ctx.clip();
     if (chord) {
-      g.line([[th - run, f0 - fd * run], [th + run, f0 + fd * run]], P.magenta, { width: (fo === 'step' ? 2.8 : 1.8) * TH, alpha: 0.9 });
-      g.dot(th + hr, f(th + hr), P.magenta, (fo === 'step' ? 4.4 : 3.4) * TH); g.dot(th - hr, f(th - hr), P.magenta, (fo === 'step' ? 4.4 : 3.4) * TH);
+      g.line([[th - runC, mid - fd * runC], [th + runC, mid + fd * runC]], P.magenta, { width: (fo === 'step' ? 2.8 : 1.8) * TH, alpha: 0.9 });
+      g.dot(th + hr, fHi, P.magenta, (fo === 'step' ? 4.4 : 3.4) * TH); g.dot(th - hr, fLo, P.magenta, (fo === 'step' ? 4.4 : 3.4) * TH);
     }
     g.line([[th - run, f0 - sl * run], [th + run, f0 + sl * run]], P.ink, { width: 1.6 * TH, dash: [6, 4] });
     g.ctx.restore();
@@ -297,6 +298,7 @@
   };
   function drawText() {
     const th = S.theta, hr = S.h * DEG, fp = f(th + Q), fm = f(th - Q), sl = slopeByCommutator(MODELS[S.model], th), est = shiftOf(th), fd = fdOf(th, hr);
+    const flat = Math.abs(sl) < 1e-9;          // at an extremum the difference is 0 too: no ratio to speak of
     let big, sub, key, keyName, rows, note, aside, pill;
     if (S.scene === 'curve') {
       big = `θ = ${fix(th / DEG, 1)}°`;
@@ -305,9 +307,10 @@
       key = `${fix(est, 6)} <small>· ${fix(sl, 6)}</small>`;
       rows = row('', 'f(θ)', 'f(θ)', fix(f(th), 4)) + row('c', 'f(θ + 90°)', 'f(θ + 90°)', fix(fp, 4)) + row('c', 'f(θ − 90°)', 'f(θ − 90°)', fix(fm, 4))
         + row('m', `±${S.h}° 差分`, `±${S.h}° difference`, fix(fd, 4)) + row('m', '差分的误差', 'error of the difference', sgn(fd - sl, 4))
-        + row('', '差分 / 斜率 = sin h / h', 'difference / slope = sin h / h', fix(Math.sin(hr) / hr, 4));
+        + (flat ? row('', 'sin h / h（斜率为 0，没有比值）', 'sin h / h (slope 0: no ratio)', fix(Math.sin(hr) / hr, 4))
+          : row('', '差分 / 斜率 = sin h / h', 'difference / slope = sin h / h', fix(Math.sin(hr) / hr, 4)));
       aside = "f′ = 2 Re(i Tr ρ[H,P])";
-      note = Math.abs(sl) < 1e-9 ? L('此处斜率为 0：两个取值点一样高，弦也是平的。', 'The slope is 0 here: the two settings are level and so is the chord.')
+      note = flat ? L('此处斜率为 0：两个取值点一样高，弦也是平的，差分与斜率同为 0。', 'The slope is 0 here: the two settings are level and so is the chord; the difference and the slope are both 0.')
         : L(`两值之差的一半与切线斜率相差 ${Math.abs(est - sl).toExponential(1)}，只是舍入；±${S.h}° 的弦比切线${Math.abs(fd) < Math.abs(sl) ? '缓' : '陡'} ${fix(100 * Math.abs(1 - fd / sl), 2)}%。`, `Half the difference and the tangent slope differ by ${Math.abs(est - sl).toExponential(1)}, rounding only; the ±${S.h}° chord is ${fix(100 * Math.abs(1 - fd / sl), 2)}% ${Math.abs(fd) < Math.abs(sl) ? 'flatter' : 'steeper'} than the tangent.`);
       pill = [L('斜率', 'SLOPE'), fix(sl, 3)];
     } else {
@@ -379,8 +382,8 @@
   const NOTES = {
     shift: ['f = cos θ，θ = 60°。两个青色的点在 −30° 与 150°，高 0.866 与 −0.866；两值之差的一半是 −0.866，正是虚线切线的斜率。圆里两支青色箭头与琥珀色的箭头垂直，它们的高度就是这两个值。', 'f = cos θ at θ = 60°. The two cyan points sit at −30° and 150°, at heights 0.866 and −0.866; half their difference is −0.866, exactly the slope of the dashed tangent. In the dial the two cyan arrows are perpendicular to the amber one, and their heights are these two values.'],
     anywhere: ['倾斜的态与测量轴：曲线 f = c + a cos θ + b sin θ 抬高了 c、错开了相位。θ 扫过一整圈，量尺上青色的条始终停在切线的虚线上，下面的小图里两条线处处重合；常数 c 在相减时消掉。', 'Tilted state and axis: the curve f = c + a cos θ + b sin θ is raised by c and shifted in phase. As θ sweeps a full turn the cyan bar on the gauge stays on the dashed tangent line, and in the small plot the two lines coincide everywhere; the constant c cancels in the difference.'],
-    step: ['同一条 f = cos θ，用 ±30° 的小步长做差分：品红的弦比虚线切线缓，品红的条比切线短 4.5%（sin h / h = 0.955）。拖小 h，差距按 h² 缩小，但不会消失；青色的条始终精确。', 'The same f = cos θ with a ±30° small-step difference: the magenta chord is flatter than the dashed tangent and the magenta bar is 4.5% short (sin h / h = 0.955). Make h smaller and the gap shrinks like h², but it never vanishes; the cyan bar is always exact.'],
-    noise: ['θ = 60°，每个取值点只测 100 发，小步长 6°。每次试验在量尺上落一个青色点和一个品红点：青色的点挤在切线旁，宽约 0.035；品红的点散开约 0.58，宽 16 倍，有的落出量尺。散布来自散粒噪声，小步长把它放大了。', 'θ = 60°, only 100 shots per setting, a 6° small step. Each trial drops one cyan and one magenta dot on the gauge: the cyan dots crowd the tangent with a width of about 0.035; the magenta dots spread about 0.58, sixteen times wider, some of them off the gauge. The scatter is shot noise, and the small step magnifies it.']
+    step: ['同一条 f = cos θ，用 ±30° 的小步长做差分：差分恰好是斜率乘 sin h / h = 0.955。θ = 60° 时品红的弦比虚线切线缓，品红的条比切线短 4.5%。拖小 h，差距按 h² 缩小，但只要斜率不为零就不会消失；只在 θ = 0° 与 ±180°，斜率为零，弦与切线都是平的。青色的条始终精确。', 'The same f = cos θ with a ±30° small-step difference: the difference is exactly the slope times sin h / h = 0.955. At θ = 60° the magenta chord is flatter than the dashed tangent and the magenta bar is 4.5% short. Make h smaller and the gap shrinks like h², but it never vanishes while the slope is not zero; only at θ = 0° and ±180°, where the slope is zero, are chord and tangent both level. The cyan bar is always exact.'],
+    noise: ['θ = 60°，每个取值点只测 100 发，小步长 6°。每次试验在量尺上落一个青色点和一个品红点：青色的点挤在切线旁，宽约 0.035；品红的点散开约 0.58，宽 16 倍。散布来自散粒噪声，小步长把它放大了。', 'θ = 60°, only 100 shots per setting, a 6° small step. Each trial drops one cyan and one magenta dot on the gauge: the cyan dots crowd the tangent with a width of about 0.035; the magenta dots spread about 0.58, sixteen times wider. The scatter is shot noise, and the small step magnifies it.']
   };
   let booting = true;
   function applyPreset(id) {

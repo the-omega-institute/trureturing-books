@@ -68,7 +68,7 @@ $$
 
 1. **无结构黑盒量子查询下界（C. H. Bennett, E. Bernstein, G. Brassard & U. Vazirani, *SIAM J. Comput.* **26**, 1510–1523, 1997）**：在黑盒神谕（Oracle）查询模型下，从 $N = 2^n$ 个候选中以有界误差定位未知目标至少需要 $L = \Omega(2^{n/2})$ 次量子查询（与 Grover 算法的 $O(2^{n/2})$ 上界共同锁定 $\Theta(2^{n/2})$）；
 2. **2-SAT 与 3-SAT 的经典复杂度分水岭（S. A. Cook, 1971；L. A. Levin, 1973；B. Aspvall, M. F. Plass & R. E. Tarjan, 1979）**：2-SAT 可通过强连通分量传递闭包在 $O(n+m)$ 线性时间内判定（故 $\text{2-SAT} \in \mathrm{P}$），而 3-SAT 为 $\mathrm{NP}$-完全问题；
-3. **有界阶平方和（SoS）半正定松弛下界（D. Grigoriev, *Theor. Comput. Sci.* **259**, 613–622, 2001；G. Schoenebeck, *FOCS*, 593–602, 2008）**：对于存在全局奇偶矛盾而不可满足的随机 3-XOR / 3-SAT 实例，任何阶数 $M = o(n)$ 的局部 Lasserre / Gram 半正定矩阵松弛 $G_M \succeq 0$ 均以高概率保持半正定与局部自洽，无法在亚线性松弛阶数（对应亚指数规模半正定规划）内证伪不可满足性。
+3. **有界阶平方和（SoS）半正定松弛下界（D. Grigoriev, *Theor. Comput. Sci.* **259**, 613–622, 2001；G. Schoenebeck, *FOCS*, 593–602, 2008）**：例如，在固定且充分大的常数子句密度 $m/n = \Delta$ 下，独立均匀抽取三个互异变量与随机文字符号（3-XOR 等价地抽取随机奇偶右端），采用标准布尔多项式编码（3-XOR 的奇偶等式、3-SAT 的子句满足约束），随机实例以高概率不可满足，而其阶数 $M = o(n)$ 的局部 Lasserre / Gram 半正定松弛仍有满足局部约束的可行矩矩阵 $G_M \succeq 0$，无法在该阶数（对应亚指数规模半正定规划）内证伪不可满足性（见 [Schoenebeck 完整版定理 12](https://schoeneb.people.si.umich.edu/papers/LasserreNew.pdf)）。
 :::
 
 ::: {.viz src="timeless-causal-crystal" preset="sos" height="500"}
@@ -349,7 +349,7 @@ $$
 
 [@rem-ch30-karmarkar-kasteleyn-literature] 中的算法与几何推广仍有文献边界；上述条件匹配恒等式则已有精确供应声明。另一个“场”与“线”两边都能写成精确数学的离散问题，是给图的顶点着色。
 
-先看最小的奇圈，五边形 $C_5$：顶点 $0, 1, 2, 3, 4$，边 $01, 12, 23, 34, 40$。依次涂上颜色 $c = (0, 1, 0, 1, 2)$，相邻顶点颜色都不同。把颜色读作高度，这是顶点上一片分三层的场。现在让每条边指向颜色较大的一端：
+先看一个奇圈，五边形 $C_5$：顶点 $0, 1, 2, 3, 4$，边 $01, 12, 23, 34, 40$。依次涂上颜色 $c = (0, 1, 0, 1, 2)$，相邻顶点颜色都不同。把颜色读作高度，这是顶点上一片分三层的场。现在让每条边指向颜色较大的一端：
 
 $$
 0 \to 1, \qquad 2 \to 1, \qquad 2 \to 3, \qquad 3 \to 4, \qquad 0 \to 4 .
@@ -488,7 +488,7 @@ $C_5$ 中最长有向路含 $5$ 个顶点的 $12$ 个定向里，有 $2$ 个是�
 - **“球永远只是多面体近似”：三体局部切面与渐近缝隙（`MODEL`）**：作者以局部三体切面（$\mathbf{e}_i\wedge\mathbf{e}_j\wedge\mathbf{e}_k$）拼接整体的图像，诠释指数率上界随规模变化的可能性。若 [@rem-ch30-eth-subexponential-literature] 中预印本宣称的上界经审计成立，其有效单变量指数率将趋于 $0$；这一条件性算法主张不能由多面体比喻或上述有限维 Lean 原型推出。
 
 ::: {.viz src="eth-horizon-crossover" preset="bridge" height="500"}
-**流矩阵的秩等于最小割。** 桥图 $(a, b, c, d) = (2, 3, 2, 3)$：两道外割都是 $6$（琥珀色虚线），三条桥能过 $12$。右边是一个随机整数实例的 $6 \times 6$ 流矩阵（青色为正项，品红为负项），下面六根奇异值都不为零：秩 $6$，恰等于最小割。这只是一个实例；这类桥图在维数锥域内总是如此，是 Lean 验证的定理。这条定理只讲桥图上的流与割，与上文转述的亚指数 3-SAT 预印本无关：它既不检验、也不支持那里的算法主张（[@rem-ch30-eth-subexponential-literature]，未经审计）。
+**流矩阵的秩等于最小割。** 桥图 $(a, b, c, d) = (2, 3, 2, 3)$：两道外割都是 $6$（琥珀色虚线），三条桥能过 $12$。右边是一个随机整数实例的 $6 \times 6$ 流矩阵（青色为正项，品红为负项），下面六根奇异值都不为零：秩 $6$，恰等于最小割。这只是一个实例；Lean 验证的 [@thm-bridge-quantum-maxflow-mincut] 表明：在其完整维数假设下，这类桥图的最大可达秩等于最小割，单次抽样的秩则可能更低。这条定理只讲桥图上的流与割，与上文转述的亚指数 3-SAT 预印本无关：它既不检验、也不支持那里的算法主张（[@rem-ch30-eth-subexponential-literature]，未经审计）。
 :::
 
 ### 2. 银河算法（Galactic Algorithm）与宇宙视界：上界比较能说明什么？（`MODEL` 与认识论边界）
@@ -518,10 +518,10 @@ $C_5$ 中最长有向路含 $5$ 个顶点的 $12$ 个定向里，有 $2$ 个是�
 :::
 
 - **$P$（场）与 $NP$（线）的认识论对照（`MODEL`）**：导向结构与见证检查表现出不同的任务角色；它们可以在同一个问题中并存，因为 $P\subseteq NP$。上界曲线和编码尺度比较不把两类问题分开。
-- **形式内核核验与顶层规约审计的哥德尔—语义边界（`LEAN ✓` 原型与 `MODEL` 映照）**：[@rem-ch30-eth-subexponential-literature] 中最具认识论意味的一幕是——形式证明助手内核可以迅速核验脚本内部每一步推演的传递合法性，而学界仍需仔细审计“顶层形式化命题的定义是否忠实刻画了目标图灵机复杂度命题”。在本书第 21 章中，经 Lean 4 内核验证的**相对语义对角线与定义逃逸定理**严格证明：在给定无不动点扭转映射（`∀ v, twist v ≠ v`）的条件下，相对语义对角线构造必然逃出任何已编目解码族（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)），且当解码目录对潜空间满射时，该对角线目标相对于给定潜映射不满足语义完备性 `TargetAdequate`（[`relative_semantic_diagonal_target_inadequate_of_surjective`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective)）。将这一形式定理作为认识论原型（`MODEL`）来观照顶层规约审计，恰好印证了全书的核心准则：**形式内核在球内严格锁死推演链条的传递正确性，而对顶层命题边界定义之语义恰当性的审视，永远需要站在形式球壳之外！**
+- **形式内核核验与顶层规约审计的哥德尔—语义边界（`LEAN ✓` 原型与 `MODEL` 映照）**：[@rem-ch30-eth-subexponential-literature] 中最具认识论意味的一幕是——形式证明助手内核可以迅速核验脚本内部每一步推演的传递合法性，而学界仍需仔细审计“顶层形式化命题的定义是否忠实刻画了目标图灵机复杂度命题”。在本书第 21 章中，经 Lean 4 内核验证的**相对语义对角线与定义逃逸定理**严格证明：在给定无不动点扭转映射（`∀ v, twist v ≠ v`）的条件下，相对语义对角线构造必然逃出任何已编目解码族（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)），且当解码目录覆盖潜坐标上的全部解码函数时，该对角线目标相对于给定潜映射不满足语义完备性 `TargetAdequate`（[`relative_semantic_diagonal_target_inadequate_of_surjective`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective)）。将这一形式定理作为认识论原型（`MODEL`）来观照顶层规约审计，恰好印证了全书的核心准则：**形式内核在球内严格锁死推演链条的传递正确性，而对顶层命题边界定义之语义恰当性的审视，永远需要站在形式球壳之外！**
 
 ::: {.viz src="eth-horizon-crossover" height="640"}
-**交互实验室 `ORTHO//HORIZON`**：本节的三个场景。指数率：示意曲线 $r(n)$ 与 PPSZ 的 $0.386$ 在哪里相交，以及常数 $c$ 怎样把交叉点挪进或挪出阴影；桥图：流矩阵的秩与三道割，锥域内秩等于最小割（Lean 已验证），锥域外三条桥成为瓶颈；模态：谱里不小于阈值 $\theta$ 的模态数不超过 $T/\theta$（Lean 已验证）。取 $c = 1$ 的曲线只是示意，不是任何算法的实测。
+**交互实验室 `ORTHO//HORIZON`**：本节的三个场景。指数率：示意曲线 $r(n)$ 与 PPSZ 的 $0.386$ 在哪里相交，以及常数 $c$ 怎样把交叉点挪进或挪出阴影；桥图：单次抽样的流矩阵秩与四道割，冻结量 $\operatorname{QMinCut} = \min(3ac, ad, bc)$，第四道 $3bd$ 割由手工矩阵分解给出；自然数维数满足 $0 < a \le b$、$0 < c \le d$、$a^2 + b^2 \le 3ab$、$c^2 + d^2 \le 3cd$ 时，可达最大秩等于 $\operatorname{QMinCut} = \min(ad, bc)$（Lean 已验证），单次抽样仍可更低，锥域外须比较四道割；模态：谱里不小于阈值 $\tau$ 的模态数不超过 $RW/(\pi\tau)$（Lean 已验证）。取 $c = 1$ 的曲线只是示意，不是任何算法的实测。
 :::
 
 ---
@@ -853,7 +853,7 @@ $$
 
 本章以作者关于全局静态场与有限观察者、“场”与“线”的格言连接离散逻辑和连续流体。数学层面，静态满足子空间、额外资源下的复杂度等式、受限模型下界与标准 $P\neq NP$ 开放问题各有边界。在有限图着色这一例子中，Gallai–Hasse–Roy–Vitaver 定理给出“$G$ 可 $k$ 着色”与“存在一种定向，使每条有向路至多含 $k$ 个顶点”之间的精确等价（[@thm-ch30-gallai-roy]）；它只是交换两种存在性见证，不提供算法，也不解决一般的 $P$ vs. $NP$ 问题。银河交叉表比较的是示意上界（[@ex-ch30-galactic-crossover-scale]），不是普遍搜索下界。流体部分则并置 **兰姆分解（[@rem-ch30-lamb-decomposition-literature]）、无外力三维全局正则性开放猜想（[@conj-coda-navier-stokes-regularity]）与二次平流投影无精确闭合定理（[@thm-coda-quadratic-advection-no-closure]）**。这些结果为作者的几何诠释提供参照，并不建立两道开放难题的数学等价。
 
-沿着这道正交视界继续向前，我们将在 **[第三十一章：量子的本质是公平](ch31-quantum-fairness.md)** 与 **[第三十二章：正交自指统一场与万流归宗](ch32-unified-field-and-meta-unification.md)** 中揭示五重几何特权的废除、遍历统计全息与跨纲领元统一，并最终步入 **[终章：在所有的球之外](coda.md)**，在多面体离散角亏余项（见终章 [@rem-coda-polyhedral-topology-literature]）、收缩不动点锚点与全书三十二章总导图中完成最后的升维回望。
+沿着这道正交视界继续向前，我们将在 **[第三十一章：量子的本质是公平](ch31-quantum-fairness.md)** 与 **[第三十二章：正交自指统一场与万流归宗](ch32-unified-field-and-meta-unification.md)** 中揭示五重几何特权的废除、遍历统计全息与跨纲领元统一，并最终步入 **[终章：在所有的球之外](coda.md)**，在多面体离散角亏余项（见终章 [@rem-coda-polyhedral-topology-literature]）、收缩不动点锚点与全书总导图中完成最后的升维回望。
 
 ::: {.viz src="vortex-polygon" height="640"}
 **交互实验室 `ORTHO//POLYGON`**：$2m$ 个正负相间的点涡排在圆上，每个涡旋另带一项绕原点的进动（$b = 2$，$\Omega = \tfrac12$）。可以换涡旋个数（$2$ 到 $12$）与推法：不推时整圈只在半径 $R = 1$ 上静止，换到半径 $1.2$ 正负涡旋就转开；从六边形起沿发散方向推一下，偏离按 $e^{\lambda t}$ 长大；偶极与正方形沿 $c_1$ 推一下，整圈匀速转走。静止半径、正实本征值与线性漂移是 Lean 已验证的定理（[@lem-ch30-vortex-polygon-equilibrium]、[@thm-ch30-vortex-polygon-spectrum]、[@prop-ch30-vortex-polygon-neutral-drift]）；舞台上的运动是数值积分。
