@@ -146,8 +146,8 @@
     $('roLine').textContent = sgn(now.line, 3); $('roArea').textContent = fix(now.area, 3);
     $('roP0').innerHTML = `${fix(now.p0, 3)} <small>= cos²(θ/2)</small>`; $('roVis').innerHTML = `${fix(now.area, 3)} <small>= sin θ</small>`;
     $('roRotor').innerHTML = `${sgn(now.q[0], 3)} − (${fix(now.q[1], 3)}, ${fix(now.q[2], 3)}, ${fix(now.q[3], 3)})·iσ <small>· ${L('叶', 'sheet')} ${now.sheet > 0 ? '+1' : '−1'}</small>`;
-    const kind = now.area < 0.02 ? L('B 与 A 共线：只有线，没有面积。探测器每次都给同一种咔哒，条纹消失。', 'B is along A: all line, no area. The detector gives the same click every time and the fringes vanish.')
-      : Math.abs(now.line) < 0.02 ? L('B 与 A 垂直：只有面积，没有线。两种咔哒各占一半，条纹最清楚。', 'B is perpendicular to A: all area, no line. The two clicks are 50 / 50 and the fringes are sharpest.')
+    const kind = now.area < 0.02 ? L('B 与 A 共线或几乎共线：几乎全是线，面积不到 0.02。探测器几乎每次都给同一种咔哒，条纹对比不到 2%；恰好共线时没有面积，每次都是同一种咔哒，条纹消失。', 'B is along A or nearly so: almost all line, with area under 0.02. The detector gives the same click almost every time and the fringe contrast is under 2%; exactly along A there is no area, the click is the same every time and the fringes vanish.')
+      : Math.abs(now.line) < 0.02 ? L('B 与 A 垂直或几乎垂直：几乎全是面积，线在 ±0.02 以内。两种咔哒各占 49% 到 51%，条纹接近最清楚；恰好垂直时没有线，两种咔哒各占一半，条纹最清楚。', 'B is perpendicular to A or nearly so: almost all area, with the line within ±0.02. Each of the two clicks comes 49–51% of the time and the fringes are close to their sharpest; exactly perpendicular there is no line, the clicks are 50 / 50 and the fringes are sharpest.')
         : L(`线占 ${fix(100 * l2, 0)}%，面积占 ${fix(100 * a2, 0)}%：咔哒偏向一边，同时还留着 ${fix(100 * now.area, 0)}% 的条纹对比。`, `${fix(100 * l2, 0)}% line and ${fix(100 * a2, 0)}% area: the clicks lean one way while the fringes keep ${fix(100 * now.area, 0)}% of their contrast.`);
     $('roNote').textContent = kind;
     $('pillLine').querySelector('strong').textContent = sgn(now.line, 2);

@@ -49,6 +49,8 @@ Choose checks that match the change, and record the actual result:
 | HTML/PDF/EPUB/site output | affected `./tbook build` targets, EPUBCheck for EPUBs, and browser inspection of changed pages in desktop/mobile and relevant themes |
 | Integration or lock-pin change | explicit dependency comparison, then affected architecture/quality checks and output validation; confirm current pin and historical baseline separately |
 
+When an actual PDF glyph or font concern arises, extracted/`ActualText` strings and font-resource metadata do not establish painted readability. Record reading-scale pixel witnesses for the affected passages against the actual candidate and PDF artifact, stating material correspondence and unknowns about the producing renderer and environment. Successful compilation or extraction, or readable output in another environment, does not discharge the observed concern in the affected environment. Preserve author notation and voice; use [book-export](../../book-export/SKILL.md) for conversion diagnosis and the existing upstream route for shared defects.
+
 ## PR handoff
 
 An implementation handoff includes changed paths, input/candidate identity, `git diff --check`, actual validation, limits and exact remaining review/lifecycle obligations. The lifecycle owner checks the committed candidate against that patch, obtains the required three-seat results, and updates the ledger while leaving unreviewed units pending. Before pushing, check the final commit and worktree state. The PR body states concrete reader-visible changes, pin, validation and remaining coverage, without model or agent identifiers.
