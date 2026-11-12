@@ -55,10 +55,10 @@ section: "Reader's guide"
 <div class="body">
   <p class="kicker">Ten parts, thirty-nine chapters</p>
   <h2 class="t">Ten parts form a staircase, <em>each one dimension higher</em></h2>
-  <img src="./img/prelude-eight-parts.en.svg" alt="Ten bars, one per part, each spanning its chapters and one step above the last." style="display: block; height: 600px; max-width: 100%; margin: 20px auto 0;">
+  <img src="./img/prelude-parts.en.svg" alt="Ten bars, one per part, each spanning its chapters and one step above the last." style="display: block; height: 600px; max-width: 100%; margin: 20px auto 0;">
   <p class="lead mt-s">Four chapters apiece across Parts I–IX and three in Part X: point → line, line → plane, plane → sphere, entangled spheres, spacetime sphere, beyond the sphere, construction, synthesis, mutual illumination, non-duality.</p>
 </div>
-<Source>Prelude, “Reader's Guide and Formal Verification Contract” (prelude-eight-parts)</Source>
+<Source>Prelude, “Reader's Guide and Formal Verification Contract” (prelude-parts)</Source>
 
 ---
 # 05 Part I
