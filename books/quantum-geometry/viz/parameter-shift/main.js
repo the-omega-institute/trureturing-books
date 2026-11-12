@@ -296,6 +296,20 @@
     curve: [['cy', '期望值 f；θ ± 90° 两个取值点', 'expectation f; the two settings θ ± 90°'], ['dm', '切线（对易子公式）', 'tangent (commutator formula)'], ['mg', '小步长的弦', 'small-step chord'], ['am', '当前角度 θ', 'current angle θ']],
     shots: [['cy', '±90° 两值差的一半，每次试验一点', 'half the ±90° difference, one dot per trial'], ['mg', '小步长差分，每次试验一点', 'small-step difference, one dot per trial'], ['dm', '切线斜率', 'tangent slope'], ['am', '当前角度 θ', 'current angle θ']]
   };
+  /** The shots note: each pair of settings has its own shot noise, (1 − f²)/N at each of its own two angles. A pair is
+      "without noise" only when its computed variance is exactly 0 (f is ±1 in double precision, so every simulated shot
+      is the same); a positive width too small for four decimals is still a width, and the ratio is then finite. */
+  const wid = (x) => (x > 0 && x < 5e-5 ? '< 0.0001' : fix(x, 4));
+  function noiseNote(sh, hr, noShift, noFd) {
+    if (noShift && noFd) return L('四个取值点算出的 f 在双精度下都是 ±1，模拟的每一发结果都相同：两种估计的理论宽度都是 0，宽度之比没有定义。', 'At all four settings the computed f is ±1 in double precision, so every simulated shot gives the same result: both estimates have predicted width 0 and the ratio of widths is undefined.');
+    if (noShift) return L(`θ ± 90° 两点算出的 f 在双精度下都是 ±1，模拟的每一发结果都相同，两值之差的一半理论宽度是 0；小步长差分的理论宽度是 ${wid(sh.sdFd)}。除数为 0，宽度之比没有定义。`, `At θ ± 90° the computed f is ±1 in double precision, so every simulated shot gives the same result and half their difference has predicted width 0; the small-step difference has predicted width ${wid(sh.sdFd)}. The ratio of widths would divide by 0 and is undefined.`);
+    if (noFd) return L(`θ ± ${S.h}° 两点算出的 f 在双精度下都是 ±1，小步长差分的理论宽度是 0；两值之差的一半的理论宽度是 ${wid(sh.sdShift)}。`, `At θ ± ${S.h}° the computed f is ±1 in double precision, so the small-step difference has predicted width 0; half the ±90° difference has predicted width ${wid(sh.sdShift)}.`);
+    const r = sh.sdFd / sh.sdShift, near = Math.abs(r - 1) < 5e-4;
+    const cmp = r > 1 ? (near ? L('，略宽', ', so it is slightly wider') : L('，更宽', ', so it is wider')) : r < 1 ? (near ? L('，略窄', ', so it is slightly narrower') : L('，反而更窄', ', so it is narrower')) : '';
+    const tiny = sh.sdShift < 5e-5 ? L('（±90° 估计的宽度不是 0，只是小于 0.0001）', ' (the width of the ±90° estimate is not 0, only below 0.0001)') : '';
+    return L(`两组取值点各有自己的散粒噪声：每点均值的方差是 (1 − f²)/N，取该点的 f。小步长差分还要除以 2h = ${fix(2 * hr, 3)}；在这个 θ 与 h 下，它的理论宽度是 ±90° 估计的 ${fix(r, r < 10 ? 3 : 2)} 倍${cmp}${tiny}。`,
+      `Each pair of settings has its own shot noise: the mean at a setting has variance (1 − f²)/N, with f at that setting. The small-step difference is further divided by 2h = ${fix(2 * hr, 3)}; at this θ and h its predicted width is ${fix(r, r < 10 ? 3 : 2)} times that of the ±90° estimate${cmp}${tiny}.`);
+  }
   function drawText() {
     const th = S.theta, hr = S.h * DEG, fp = f(th + Q), fm = f(th - Q), sl = slopeByCommutator(MODELS[S.model], th), est = shiftOf(th), fd = fdOf(th, hr);
     const flat = Math.abs(sl) < 1e-9;          // at an extremum the difference is 0 too: no ratio to speak of
@@ -315,16 +329,18 @@
       pill = [L('斜率', 'SLOPE'), fix(sl, 3)];
     } else {
       const sh = shots(), n = trialsNow(), a = stats(sh.est.slice(0, n)), b = stats(sh.fd.slice(0, n));
+      // only an exactly zero computed variance means no shot noise; then the ratio would be ∞ or NaN and is not shown
+      const noShift = sh.sdShift === 0, noFd = sh.sdFd === 0;
       big = L(`${n} 次试验 · 每点 ${S.N} 发`, `${n} trials · ${S.N} shots each`);
       sub = `θ = ${fix(th / DEG, 1)}° · ${L('切线斜率', 'tangent slope')} ${fix(sl, 3)} · h = ${S.h}°`;
       keyName = L('散布宽度：±90° · 小步长', 'scatter: ±90° · small step');
       key = n >= 2 ? `${fix(a.sd, 3)} <small>· ${fix(b.sd, 3)}</small>` : '—';
-      rows = row('c', '±90°：平均', '±90°: mean', n ? fix(a.mean, 4) : '—') + row('c', '±90°：理论宽度', '±90°: predicted width', fix(sh.sdShift, 4))
-        + row('m', `±${S.h}°：平均`, `±${S.h}°: mean`, n ? fix(b.mean, 4) : '—') + row('m', `±${S.h}°：理论宽度`, `±${S.h}°: predicted width`, fix(sh.sdFd, 4))
-        + row('', '宽度之比', 'ratio of widths', fix(sh.sdFd / sh.sdShift, 1)) + row('', '量尺外的差分点', 'difference dots off the gauge', String(last.out ? last.out.above + last.out.below : 0));
+      rows = row('c', '±90°：平均', '±90°: mean', n ? fix(a.mean, 4) : '—') + row('c', '±90°：理论宽度', '±90°: predicted width', wid(sh.sdShift))
+        + row('m', `±${S.h}°：平均`, `±${S.h}°: mean`, n ? fix(b.mean, 4) : '—') + row('m', `±${S.h}°：理论宽度`, `±${S.h}°: predicted width`, wid(sh.sdFd))
+        + row('', '宽度之比', 'ratio of widths', noShift ? '—' : fix(sh.sdFd / sh.sdShift, 1)) + row('', '量尺外的差分点', 'difference dots off the gauge', String(last.out ? last.out.above + last.out.below : 0));
       aside = 'Var = (1 − f²)/N';
-      note = L(`散布来自散粒噪声；小步长差分把同样的噪声除以 2h = ${fix(2 * hr, 3)}，宽了 ${fix(sh.sdFd / sh.sdShift, 1)} 倍。`, `The scatter is shot noise; the small-step difference divides the same noise by 2h = ${fix(2 * hr, 3)} and comes out ${fix(sh.sdFd / sh.sdShift, 1)} times wider.`);
-      pill = [L('宽度比', 'RATIO'), fix(sh.sdFd / sh.sdShift, 1)];
+      note = noiseNote(sh, hr, noShift, noFd);
+      pill = [L('宽度比', 'RATIO'), noShift ? '—' : fix(sh.sdFd / sh.sdShift, 1)];
     }
     $('hudBig').innerHTML = big; $('hudSub').innerHTML = sub;
     $('ro').innerHTML = `<div class="key"><dt>${keyName}</dt><dd><b>${key}</b></dd></div>${rows}`;
