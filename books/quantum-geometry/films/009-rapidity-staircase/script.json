@@ -1,0 +1,246 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {
+    "Lean": "Leen",
+    "tanh": "tanch"
+  },
+  "music": {
+    "bpm": 78,
+    "progression": "a-minor"
+  },
+  "scenes": [
+    {
+      "id": "alone",
+      "name": "ALONE",
+      "lead": 2.2,
+      "tail": 0.5,
+      "music": [
+        1.0,
+        0.4,
+        0.3,
+        0.0,
+        0.1
+      ],
+      "lines": [
+        [
+          "Alone, an observer checks itself by one rule: the next reading is the cosine of the last.",
+          "一位观察者独自省察自己，只有一条规则：下一个读数是上一个读数的余弦。"
+        ],
+        [
+          "From zero point one, the readings jump across theta star, zero point seven three nine, and back again.",
+          "从 0.1 出发，读数越过 θ* ≈ 0.739，又跳回来。"
+        ],
+        [
+          "The slope there is minus zero point six seven four, so every step flips the sign of the error.",
+          "那里的斜率是 −0.674：每走一步，误差就换一次符号。"
+        ]
+      ]
+    },
+    {
+      "id": "round",
+      "name": "TWO MIRRORS",
+      "lead": 0.5,
+      "tail": 0.5,
+      "music": [
+        0.9,
+        0.6,
+        0.7,
+        0.0,
+        0.3
+      ],
+      "lines": [
+        [
+          "Now two observers read each other: A takes the cosine of B, and B the cosine of A.",
+          "现在两位观察者互相丈量：A 取 B 的余弦，B 取 A 的余弦。"
+        ],
+        [
+          "Count two readings as one round. The round map is the cosine of the cosine, and its slope is positive.",
+          "两拍算一轮：一轮的映射是 cos(cos x)，它的斜率为正。"
+        ],
+        [
+          "Round by round: zero point five four four, zero point six five six, zero point seven zero two, always from below.",
+          "逐轮取样：0.544、0.656、0.702……始终从下方逼近。"
+        ],
+        [
+          "Each round shrinks the error by about zero point four five four, the square of zero point six seven four.",
+          "每一轮误差约乘 0.454，正是 0.674 的平方。"
+        ],
+        [
+          "A round costs two readings: calm, not speed. These facts apply existing results; the decimals are computed on screen.",
+          "一轮要读两次：平稳，不是更快。这些结论是既有结果的应用，小数是屏幕上算的。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 3,
+          "at": 3.0,
+          "kind": "chime"
+        }
+      ]
+    },
+    {
+      "id": "wall",
+      "name": "ANGLE RULER",
+      "lead": 0.5,
+      "tail": 2.6,
+      "music": [
+        0.9,
+        0.8,
+        0.8,
+        0.5,
+        0.4
+      ],
+      "lines": [
+        [
+          "Both settle at theta star, about forty-two point three degrees. Now climb toward ninety degrees.",
+          "两人都锁在 θ* ≈ 42.3°。现在朝 90° 攀升。"
+        ],
+        [
+          "On the outside angle ruler, every step adds the same twenty-nine point two degrees.",
+          "在外部角度尺上，每一步都加上同样的 29.2°。"
+        ],
+        [
+          "The second step already passes ninety. The cosine, the axial anchor, is zero, and the walk starts over.",
+          "第二步就越过了 90°：余弦，也就是轴向锚点，归零，只好从 0 重走一圈。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 2,
+          "at": 1.4,
+          "kind": "impact"
+        }
+      ]
+    },
+    {
+      "id": "ruler",
+      "name": "RAPIDITY",
+      "lead": 0.5,
+      "tail": 0.5,
+      "music": [
+        1.0,
+        0.8,
+        0.9,
+        0.6,
+        0.5
+      ],
+      "lines": [
+        [
+          "Measure each step against the anchor that is left: d eta equals d theta over cosine theta.",
+          "改用剩下的锚点来量每一步：dη = dθ / cos θ。"
+        ],
+        [
+          "Integrated, sine theta is the hyperbolic tangent of eta, and cosine theta is its hyperbolic secant.",
+          "积分之后，sin θ = tanh η，cos θ = sech η。"
+        ],
+        [
+          "Theta star sits at eta zero point eight one seven. Ninety degrees sits at infinity.",
+          "θ* 落在 η ≈ 0.817；90° 落在无穷远。"
+        ]
+      ]
+    },
+    {
+      "id": "stairs",
+      "name": "STAIRCASE",
+      "lead": 0.5,
+      "tail": 0.6,
+      "music": [
+        1.0,
+        0.8,
+        0.8,
+        0.5,
+        0.4
+      ],
+      "lines": [
+        [
+          "Now take equal steps of one in eta, starting from theta star.",
+          "现在从 θ* 出发，在 η 上等步走，每步 Δη = 1。"
+        ],
+        [
+          "The angle climbs: forty-two, seventy-one and a half, eighty-three, eighty-seven and a half, crowding toward the wall.",
+          "角度一级级上升：42.3°、71.5°、83.2°、87.5°……越来越挤向那道墙。"
+        ],
+        [
+          "The cosine is the secant of eta, positive at every finite step.",
+          "cos θ = sech η，对每一个有限步都严格为正。"
+        ],
+        [
+          "After eight steps, the gap, one minus tanh eta, is four point four times ten to the minus eight. It is still open.",
+          "走到第 8 步，缝 1 − tanh η₈ ≈ 4.4 × 10⁻⁸，依然张开。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 3,
+          "at": 3.2,
+          "kind": "chime"
+        }
+      ]
+    },
+    {
+      "id": "cayley",
+      "name": "UNIT CIRCLE",
+      "lead": 0.5,
+      "tail": 0.8,
+      "music": [
+        1.0,
+        0.8,
+        0.7,
+        0.5,
+        0.4
+      ],
+      "lines": [
+        [
+          "The same edge appears in the complex plane, under w equals s minus one, over s.",
+          "复平面上也有同样的边：w = (s − 1)/s。"
+        ],
+        [
+          "Each line where the real part of s is a fixed c becomes a circle that touches the unit circle at w equals one.",
+          "实部固定为 c 的直线，变成一个在 w = 1 处与单位圆相切的圆。"
+        ],
+        [
+          "Lean has checked it: the modulus is exactly one when, and only when, the real part is one half.",
+          "这一条已由 Lean 内核检验：模长恰为 1，当且仅当实部等于 ½。"
+        ],
+        [
+          "So no c above one half reaches the unit circle, and the far gap, two minus one over c, stays open.",
+          "所以大于 ½ 的 c 都碰不到单位圆，远端的缝 2 − 1/c 依然张开。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 2,
+          "at": 1.0,
+          "kind": "stamp"
+        }
+      ]
+    },
+    {
+      "id": "close",
+      "name": "LEDGER",
+      "lead": 0.5,
+      "tail": 3.2,
+      "music": [
+        1.0,
+        0.6,
+        0.5,
+        0.3,
+        0.2
+      ],
+      "lines": [
+        [
+          "Geometric Intuition of Quantum Computing, part nine, chapters thirty-three to thirty-six.",
+          "《量子计算的几何直觉》· 第九部 · 第三十三至三十六章"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 0,
+          "at": 0.3,
+          "kind": "chime"
+        }
+      ]
+    }
+  ]
+}
