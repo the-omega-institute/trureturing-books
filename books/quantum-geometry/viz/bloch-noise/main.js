@@ -134,6 +134,7 @@
     sc.line([[0, 0, -1.18], [0, 0, 1.18]], { color: P.faint, width: 1, alpha: 0.9 });
     sc.line([[-1.12, 0, 0], [1.12, 0, 0]], { color: P.faint, width: 1, alpha: 0.6 });
     sc.tag('k0', [0, 0, 1.08], '|0⟩', 'num', now.escapes ? { dx: -50, dy: -6 } : { dx: -22 });
+    sc.tag('k1', [0, 0, -1.08], '|1⟩', 'num', { dx: -22 }); sc.tag('kp', [1.24, 0, 0], '|+⟩', 'num');
     const img = drawImage(sc, m);
     // the trace of the solid on the skin: the circle at the image height a z0 + h
     if (img.z0 != null) {
@@ -196,7 +197,9 @@
     st.line([0, 0, -1.18], [0, 0, 1.18], { color: P.faint, width: 1, alpha: 0.9, back: 0.5 });
     st.line([-1.12, 0, 0], [1.12, 0, 0], { color: P.faint, width: 1, alpha: 0.6, back: 0.5 });
     const onNorth = [now.rho, now.sig].some((v) => v3.len(v3.sub(v, [0, 0, 1])) < 0.2);
-    st.tag('k0', [0, 0, 1.08], '|0⟩', 'num', now.escapes ? { dx: -64, dy: -22 } : onNorth ? { dx: -52, dy: -4 } : { dx: -22 });   // above the bulge when the image pierces the skin st.tag('k1', [0, 0, -1.08], '|1⟩', 'num', { dx: -22 }); st.tag('kp', [1.24, 0, 0], '|+⟩', 'num');
+    // |0⟩ sits above the bulge when the image pierces the skin
+    st.tag('k0', [0, 0, 1.08], '|0⟩', 'num', now.escapes ? { dx: -64, dy: -22 } : onNorth ? { dx: -52, dy: -4 } : { dx: -22 });
+    st.tag('k1', [0, 0, -1.08], '|1⟩', 'num', { dx: -22 }); st.tag('kp', [1.24, 0, 0], '|+⟩', 'num');
     // the image of the ball: outline of the spheroid with half-axes (λ, λ, a) centred at (0, 0, h)
     const e1 = v3.unit(v3.cross(D, Math.abs(D[2]) < 0.95 ? [0, 0, 1] : [1, 0, 0])), e2 = v3.cross(D, e1), outline = [];
     for (let i = 0; i < 96; i++) {
