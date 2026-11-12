@@ -5,7 +5,7 @@
   "summary": "Fix two cosines among three unit vectors and the third is locked into a window: C circles B, A·C swings between cos(θ₁ + θ₂) and cos(θ₁ − θ₂), det G is the squared volume and vanishes on the edges, the windows fill an ellipse, and at the top edge an overlap of one forces C = A, as a Lean theorem of chapter 29 states.",
   "summary_zh": "三根单位向量中定下两条余弦，第三条就被锁进窗口：C 绕 B 转一圈，A·C 在 cos(θ₁ + θ₂) 与 cos(θ₁ − θ₂) 之间摆动；det G 是体积的平方，在窗边为零；各个窗口铺满一个椭圆；上沿处内积为 1 迫使 C = A，正如第二十九章的一条 Lean 定理所述。",
   "subject": "https://github.com/the-omega-institute/trureturing",
-  "publication_basis": "pinned",
+  "subject_commit": "6cfcf785096782b15084d719ec73c2ca16b6ed29",
   "released": "2026-11-11",
   "duration": "1:39",
   "resolution": "1280x720@30",
@@ -25,5 +25,6 @@
   "outputs": {
     "narrated_720p": "quantum-geometry_008_720p_narrated.mp4",
     "cover": "quantum-geometry_008_cover.jpg"
-  }
+  },
+  "publication_basis": "pinned"
 }

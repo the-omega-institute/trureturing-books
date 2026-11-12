@@ -68,7 +68,15 @@
 1. **秩一纯态玻恩配对的模方互易律**（[`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight)）：设 $n, \kappa$ 为有限类型（`[Fintype n] [DecidableEq n] [Fintype kappa]`），$P : \kappa \to M_n(\mathbb{C})$ 满足记录测量公理 `IsRecordMeasurement P`，$\rho \in M_n(\mathbb{C})$ 为合法量子态（`rho.PosSemidef ∧ Matrix.trace rho = 1`）。若第 $k$ 个测量投影为秩一外积 $P_k = \phi\phi^*$（`Matrix.vecMulVec phi (star phi)`）且状态为纯态 $\rho = \psi\psi^*$（`Matrix.vecMulVec psi (star psi)`），则记录权重满足
 
    $$
-   \operatorname{recordWeight}(P, \rho, k) = \bigl(\|\phi^* \bullet_v \psi\|^2 : \mathbb{C}\bigr) \;\land\; \operatorname{recordWeight}(P, \rho, k) = \operatorname{Tr}(\rho P_k) \;\land\; \operatorname{unreadState}(P, \rho) = \sum_{j \in \kappa} \operatorname{recordWeight}(P, \rho, j)\bullet \operatorname{conditionalState}(P, \rho, j);
+   \begin{aligned}
+   &\operatorname{recordWeight}(P, \rho, k) \\
+   &\quad = \bigl(\|\phi^* \bullet_v \psi\|^2 : \mathbb{C}\bigr) \\
+   &{}\land\; \operatorname{recordWeight}(P, \rho, k) \\
+   &\quad = \operatorname{Tr}(\rho P_k) \\
+   &{}\land\; \operatorname{unreadState}(P, \rho) \\
+   &\quad = \sum_{j \in \kappa}\Bigl(\operatorname{recordWeight}(P, \rho, j) \\
+   &\qquad \bullet \operatorname{conditionalState}(P, \rho, j)\Bigr);
+   \end{aligned}
    $$
 2. **互补测量语境的中心化纯度勾股守恒**（[`complementary_context_probability_pythagoras`](lean:D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras)）：设 $d, L$ 为有限类型且 $d$ 非空，$E$ 为完备实内积空间，`visible` 为 $E$ 的闭子空间。若量子态 $\rho \in M_d(\mathbb{C})$ 的中心化纯度满足 $\operatorname{Re}\operatorname{Tr}(\rho^2) - |d|^{-1} = \|\mathrm{state}\|^2$，且可见语境正交投影范数平方满足 $\|\mathrm{visible.starProjection}(\mathrm{state})\|^2 = \sum_{l \in L}\sum_{j \in d}\bigl(\mathrm{probability}(l, j) - |d|^{-1}\bigr)^2$，则中心化纯度预算严格分解为可见语境确定度与正交补残余质量之和：
 
