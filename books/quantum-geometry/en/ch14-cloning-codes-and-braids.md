@@ -286,10 +286,6 @@ Diagrammatically (as illustrated in Figure 14, Panel III), the clue points to th
 **One exchange: which strand passes in front is kept in the third direction.** Two particles in a plane trace world lines as time goes up and swap places by half a turn about their midpoint: the left strand passes in front (nearer to you), the right one behind. The numbers on the strands are colors: the front strand carries its $0$ to the right, the one behind is recolored by it, and $1$ becomes $0 \star 1 = 2$, which is $\mathrm{crossing}(x, y) = (x \star y,\, x)$.
 :::
 
-::: {.viz src="braiding" preset="inverse" height="500"}
-**Exchange back the other way, and everything returns.** On the left, one exchange followed by the opposite one (this time the right strand passes in front): both strands are back in place and the colors $(0, 1)$ reach the top as they were, $\mathrm{crossingInv}(\mathrm{crossing}(x, y)) = (x, y)$. On the right, two straight strands with no exchange, also $(0, 1)$ at the top.
-:::
-
 In the source module `D5/S0/Certificates/Quandles/BraidColoringTransport.lean`, this braid invariance is formalized algebraically via rack-coloring transport. Let $Q$ be any type equipped with a `Rack Q` instance, providing a binary operation $\star : Q \to Q \to Q$ (`act`) and inverse operation $\star^{-1} : Q \to Q \to Q$ (`invAct`) that is left-action bijective — for each fixed first argument $x \in Q$, the left translation map $L_x : y \mapsto x \star y$ is a bijection with inverse $L_x^{-1} : y \mapsto x \star^{-1} y$ (`Function.LeftInverse (invAct x) (act x)` and `Function.RightInverse (invAct x) (act x)`, so $x \star^{-1}(x \star y) = y$ and $x \star (x \star^{-1} y) = y$) — and obeys left self-distributivity:
 
 $$
@@ -308,6 +304,10 @@ $$
 \mathrm{crossing}_1\bigl(x, (y, z)\bigr) = \bigl(x \star y,\, (x, z)\bigr), \qquad
 \mathrm{crossing}_2\bigl(x, (y, z)\bigr) = \bigl(x,\, (y \star z,\, y)\bigr).
 $$
+
+::: {.viz src="braiding" preset="inverse" height="500"}
+**Exchange back the other way, and everything returns.** On the left, one exchange followed by the opposite one (this time the right strand passes in front): both strands are back in place and the colors $(0, 1)$ reach the top as they were, $\mathrm{crossingInv}(\mathrm{crossing}(x, y)) = (x, y)$. On the right, two straight strands with no exchange, also $(0, 1)$ at the top.
+:::
 
 The next corollary proves that $\mathrm{crossing}_1$ and $\mathrm{crossing}_2$ satisfy the exact Yang–Baxter braid identity on every rack $Q$.
 
@@ -493,6 +493,10 @@ Three boundaries apply whenever [@thm-quandle-coloring-markov-invariant] is cite
 2. **An invariant can only say "different".** If the counts differ, the two braids are not Markov equivalent; if the counts agree, nothing follows.
 3. **The idempotence axiom cannot be dropped.** `coloringCount` is defined for every finite rack, but the theorem asks for `[Quandle Q]`. The last step of [@ex-fox-three-colorings-markov] exhibits a rack with three elements whose count drops from $3$ to $0$ under a single stabilization.
 
+::: {.viz src="braiding" preset="rack" height="500"}
+**A rack that is not a quandle: add a strand and nothing comes back.** The color rule is now $x \star y = y + 1$. On the left, one strand and no crossing: all three colorings come back. On the right a strand is added with one crossing: the copied $0$ passes the crossing as $0 \star 0 = 1$, the arcs clash (magenta), and none of the nine colorings comes back.
+:::
+
 ::: {.example #ex-fox-three-colorings-markov title="Three Colors Count 3, 3, 9: Closed Colorings of $\sigma_1$, $\sigma_1^2$, $\sigma_1^3$ and the Same Number before and after Stabilization (With Literature Context, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** The column "closure, as a picture" in the table below (which braid closes up to which knot or link) is a geometric identification and belongs to classical knot theory. Every count in this example comes from exhaustive enumeration (each one can be checked by hand); it is a manual derivation, not a Lean result. What Lean verifies is the equality asserted by [@thm-quandle-coloring-markov-invariant].
 
@@ -534,10 +538,6 @@ In every row the three counts agree, and the closed colorings on three strands a
 
 ::: {.viz src="braiding" preset="trefoil" height="500"}
 **$\sigma_1$ and $\sigma_1^3$ count differently.** $\sigma_1$ on the left, $\sigma_1^3$ on the right, both starting from $(0, 1)$: the left one clashes when closed up (magenta), the right one matches (cyan). Colorings that come back: $3$ on the left, $9$ on the right; since $3 \ne 9$, by [@thm-quandle-coloring-markov-invariant] the two are not Markov equivalent.
-:::
-
-::: {.viz src="braiding" preset="rack" height="500"}
-**A rack that is not a quandle: add a strand and nothing comes back.** The color rule is now $x \star y = y + 1$. On the left, one strand and no crossing: all three colorings come back. On the right a strand is added with one crossing: the copied $0$ passes the crossing as $0 \star 0 = 1$, the arcs clash (magenta), and none of the nine colorings comes back.
 :::
 
 ::: {.remark #rem-alexander-markov-literature title="Artin, Alexander, and Markov: From Algebraic Markov Classes to Link Invariants (Literature Result, Not Formalized in This Book)"}

@@ -255,12 +255,14 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第十四章 | Pauli 字一节末（辛奇偶校验和那一条之后、“正交综合征”一节之前） | `syndrome-decoding` · `single` |
 | 第十四章 | 正交综合征一节 `OrthogonalSyndromes` 条件的解读段（“绝不串门”）之后 | `syndrome-decoding` · `rooms` |
 | 第十四章 | 命题 `prop-orthogonal-syndrome-recovery` 后边界列表第 1 条之后、第 2 条之前 | `syndrome-decoding` · `mix` |
-| 第十四章 | 编织一节“三股编织恒等式（Yang–Baxter 方程）”一段之后 | `braiding` · `over`、`inverse` |
+| 第十四章 | 编织一节“三股编织恒等式（Yang–Baxter 方程）”一段之后 | `braiding` · `over` |
+| 第十四章 | 交叉映射的定义里“易见 crossingInv(crossing(x, y)) = (x, y)”及三股提升的公式之后、推论 `cor-braid-yang-baxter` 之前 | `braiding` · `inverse` |
 | 第十四章 | 推论 `cor-braid-yang-baxter` 的证明之后 | `braiding` · `yb` |
 | 第十四章 | 文献注记 `rem-braid-knot-topology-literature` 之后、Markov 一节之前 | `braiding` · `twice` |
 | 第十四章 | Markov 一节首段（“闭合编织的着色，就是着色传输的不动点”）之后 | `braiding` · `close` |
 | 第十四章 | 稳定化手算一段之后、定义 `def-markov-coloring-equivs` 之前 | `braiding` · `stabilize` |
-| 第十四章 | 例 `ex-fox-three-colorings-markov` 之后、文献注记 `rem-alexander-markov-literature` 之前 | `braiding` · `trefoil`、`rack` |
+| 第十四章 | 定理 `thm-quandle-coloring-markov-invariant` 后三条边界的第 3 条（“幂等公理省不得”）之后、例 `ex-fox-three-colorings-markov` 之前 | `braiding` · `rack` |
+| 第十四章 | 例 `ex-fox-three-colorings-markov` 之后、文献注记 `rem-alexander-markov-literature` 之前 | `braiding` · `trefoil` |
 | 第十四章 | Markov 一节末（“这一半，Lean 已经验证”）之后 | `braiding` 完整实验室 |
 | 第十四章 | 例 `ex-repetition-code-syndrome` 之后、文献注记 `rem-error-correction-anyons-literature` 之前 | `syndrome-decoding` · `two`、`phase` |
 | 第十四章 | 文献注记 `rem-error-correction-anyons-literature` 之后、转入第十五章之前 | `syndrome-decoding` 完整实验室 |
