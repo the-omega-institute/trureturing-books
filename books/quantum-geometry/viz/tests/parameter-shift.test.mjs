@@ -88,8 +88,11 @@ async function chord(th, h) {
     msg: `drawn line at θ ∓ h: ${at(pts[0][0]).toFixed(4)}, ${at(pts[1][0]).toFixed(4)}; samples ${fz(th - h).toFixed(4)}, ${fz(th + h).toFixed(4)}` };
 }
 check('the pixel anchors: f(0) = 1 and f(π) = −1 for the state-vector f = cos θ', close(fz(0), 1, 1e-12) && close(fz(PI), -1, 1e-12));
+// the SHIFT card does not draw the small-step chord (the text has not met it yet), so the chord is read on SMALL STEP,
+// which stands at the same θ = 60° with the same h = 30°
+await pick('step'); await seek(PI + PI / 3); s = await state();
 let ch = await chord(s.theta, 30 * DEG);
-check('SHIFT: the magenta chord on the canvas joins the samples (30°, √3/2) and (90°, 0) and reaches both', ch.off < 0.75 && ch.spans && close(fz(PI / 6), Math.sqrt(3) / 2, 1e-12) && close(fz(PI / 2), 0, 1e-12), `${ch.msg}; ${ch.off.toFixed(2)} px off`);
+check('SMALL STEP at θ = 60°: the magenta chord on the canvas joins the samples (30°, √3/2) and (90°, 0) and reaches both', s.focus === 'step' && close(s.theta, PI / 3, 1e-12) && ch.off < 0.75 && ch.spans && close(fz(PI / 6), Math.sqrt(3) / 2, 1e-12) && close(fz(PI / 2), 0, 1e-12), `${ch.msg}; ${ch.off.toFixed(2)} px off`);
 // an extremum: at θ = 0 the slope is 0, and so is the small-step difference f′(θ)·sin h / h
 await seek(PI); s = await state();
 const h30r = 30 * DEG;

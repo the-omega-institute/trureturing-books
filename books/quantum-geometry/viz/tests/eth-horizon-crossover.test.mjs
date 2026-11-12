@@ -255,7 +255,8 @@ check('the bridge controls do not claim one rank for every draw (both languages)
   const sep = await D(() => ({ note: document.getElementById('presetNote').textContent,
     box: Array.from(document.querySelectorAll('.lean[data-scenes="cut"]')).filter((e) => !e.hidden).map((e) => ({ ok: e.querySelector('.ok').textContent, text: e.textContent })) }));
   check('BRIDGE: the card note says the theorem neither tests nor supports the preprint', sep.note.includes('预印本') && sep.note.includes('既不检验也不支持'), sep.note);
-  check('BRIDGE: the green box is the flow–cut theorem alone, and it marks the preprint as unaudited and not formalized', sep.box.length === 1 && sep.box[0].ok === 'LEAN ✓' && sep.box[0].text.includes('未经审计') && sep.box[0].text.includes('未在本书形式化'), JSON.stringify(sep.box));
+  const green = sep.box.filter((b) => b.ok === 'LEAN ✓');
+  check('BRIDGE: the one green box is the flow–cut theorem alone, and it marks the preprint as unaudited and not formalized', green.length === 1 && green[0].text.includes('QMaxFlow') && green[0].text.includes('未经审计') && green[0].text.includes('未在本书形式化'), JSON.stringify(sep.box.map((b) => b.ok)));
 }
 
 /* ---------- the modes ---------- */
