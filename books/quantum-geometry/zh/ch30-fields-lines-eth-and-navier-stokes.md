@@ -686,6 +686,10 @@ $$
 
 四个因子是四类运动。$X^2$ 是零本征值，下面单独处理。两个带加号的因子给出纯虚根 $\pm i\,m/\sqrt{2}$ 与 $\pm i\,(m-1)/2$：围绕平衡位置的振荡，不增不减。带减号的因子给出实根对：正的一支发散，负的一支收缩。库里另有一条冻结定理（[`off_axis_is_real`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonRealBoundary.off_axis_is_real)）：$J_{2m}$ 的复本征值只要实部非零就是实数，所以 $E^{u}$ 与 $E^{s}$ 已经收尽全部增长与衰减的本征方向。六边形（$m = 3$）是第一个出现发散方向的多边形，此后每添两个涡旋，发散方向多两个。
 
+::: {.viz src="vortex-polygon" preset="hexagon" height="500"}
+**六边形：沿发散方向推一下，偏离按 $e^{\lambda t}$ 长大。** 六个涡旋正负相间（青色 $+$、品红 $-$）停在半径 $R = 1$ 的圆上（$b = 2$，$\Omega = \tfrac12$）；沿本征值 $\lambda = 1/\sqrt{2}$ 的一个本征方向推 $10^{-9}$，琥珀色的箭头是放大后的位移，到 $t = 10$ 长到初始的约 $1177$ 倍，与 $e^{10/\sqrt{2}}$ 一致（[@thm-ch30-vortex-polygon-spectrum]）。舞台上的运动是非线性方程的数值积分，不是冻结声明。
+:::
+
 ::: {.proposition #prop-ch30-vortex-polygon-neutral-drift title="非零本征值半单、零本征值的二阶若尔当块与无界的线性漂移；偶极与正方形" lean="D5/S3/FluidDynamics/Vortices/AlternatingPolygonDecomposition.geometric_eq_algebraic D5/S3/FluidDynamics/Vortices/AlternatingPolygonNeutral.neutral_generalized_finrank D5/S3/FluidDynamics/Vortices/AlternatingPolygonNeutral.neutral_geometric_finrank D5/S3/FluidDynamics/Vortices/AlternatingPolygonCartesianChain.cartesian_chain D5/S3/FluidDynamics/Vortices/AlternatingPolygonCartesianChain.unbounded_linear_drift D5/S3/FluidDynamics/Vortices/AlternatingPolygonSmallCases.dipole D5/S3/FluidDynamics/Vortices/AlternatingPolygonSmallCases.square"}
 设 $m \ge 1$。第 1、2、4 条把 $J_{2m}$ 看作 $\mathbb{C}^{4m}$ 上的线性算子。
 
@@ -709,6 +713,10 @@ $$
 :::
 
 $c_0$ 是整个多边形绕原点的无穷小转动：场对公共转动协变（[@lem-ch30-vortex-polygon-equilibrium] 的证明用过这一点），转过去的多边形仍然静止，所以这个方向落在 $J_{2m}$ 的核里。$c_1$ 让正涡旋沿半径移动 $1/\delta_m$，负涡旋反向移动同样的距离。把两种涡旋的半径这样错开之后，线性化方程的解不是振荡，而是整圈涡旋沿 $c_0$ 方向匀速转走。谱看不见这件事：零与纯虚数都算“不增长”，一个二阶若尔当块却让解随时间线性增大。偶极（$m = 1$）与正方形（$m = 2$）的全部本征值都在虚轴上，它们的线性化方程同样有这样一个无界的解。换回一般的 $b, \Omega > 0$，只需把 $c_1$ 除以 $2\Omega$（[`physical_cartesian_chain`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalDerivative.physical_cartesian_chain)）。
+
+::: {.viz src="vortex-polygon" preset="drift" height="500"}
+**正方形：谱全在虚轴上，整圈仍然转走。** 四个涡旋沿若尔当链 $c_1$ 推 $\varepsilon = 0.01$：青色的正涡旋退到半径 $0.99$，品红的负涡旋外移到 $1.01$，灰色的圈是出发的位置；整圈绕原点匀速转动，到 $t = 100$ 琥珀色的角约为 $57^\circ$，即 $1$ 弧度，正是线性化解给出的 $\varepsilon t$（[@prop-ch30-vortex-polygon-neutral-drift]）。转角来自非线性方程的数值积分。
+:::
 
 ::: {.example #ex-ch30-vortex-octagon-spectrum title="正八边形的十六个本征值：从方程数值求出，再与冻结的重数逐项对照"}
 取 $m = 4$、$b = 2$、$\Omega = \tfrac12$，于是 $R_{b,\Omega} = 1$，八个涡旋位于单位圆上，相空间是 $\mathbb{R}^{16}$。下面的数值只用到 [@def-ch30-alternating-vortex-polygon] 中的方程，不用任何闭式：把场逐项键入，用符号求导得到 $P_8$ 处的 $16 \times 16$ 偏导数矩阵（与步长 $10^{-12}$ 的中心差分逐元相差不超过 $3 \times 10^{-24}$），以 $40$ 位十进制精度求本征值；代数重数取数值上重合的本征值个数，几何重数取 $16 - \operatorname{rank}(J_8 - \lambda I)$。场在 $P_8$ 处的最大分量为 $8 \times 10^{-41}$。标号 $r$ 与 [@thm-ch30-vortex-polygon-spectrum] 的证明相同：$r = 0, 1$ 对应两个带加号的因子，$r = m$ 对应 $X^2$。本征值四舍五入到所示位数：
@@ -846,3 +854,7 @@ $$
 本章以作者关于全局静态场与有限观察者、“场”与“线”的格言连接离散逻辑和连续流体。数学层面，静态满足子空间、额外资源下的复杂度等式、受限模型下界与标准 $P\neq NP$ 开放问题各有边界。在有限图着色这一例子中，Gallai–Hasse–Roy–Vitaver 定理给出“$G$ 可 $k$ 着色”与“存在一种定向，使每条有向路至多含 $k$ 个顶点”之间的精确等价（[@thm-ch30-gallai-roy]）；它只是交换两种存在性见证，不提供算法，也不解决一般的 $P$ vs. $NP$ 问题。银河交叉表比较的是示意上界（[@ex-ch30-galactic-crossover-scale]），不是普遍搜索下界。流体部分则并置 **兰姆分解（[@rem-ch30-lamb-decomposition-literature]）、无外力三维全局正则性开放猜想（[@conj-coda-navier-stokes-regularity]）与二次平流投影无精确闭合定理（[@thm-coda-quadratic-advection-no-closure]）**。这些结果为作者的几何诠释提供参照，并不建立两道开放难题的数学等价。
 
 沿着这道正交视界继续向前，我们将在 **[第三十一章：量子的本质是公平](ch31-quantum-fairness.md)** 与 **[第三十二章：正交自指统一场与万流归宗](ch32-unified-field-and-meta-unification.md)** 中揭示五重几何特权的废除、遍历统计全息与跨纲领元统一，并最终步入 **[终章：在所有的球之外](coda.md)**，在多面体离散角亏余项（见终章 [@rem-coda-polyhedral-topology-literature]）、收缩不动点锚点与全书三十二章总导图中完成最后的升维回望。
+
+::: {.viz src="vortex-polygon" height="640"}
+**交互实验室 `ORTHO//POLYGON`**：$2m$ 个正负相间的点涡排在圆上，每个涡旋另带一项绕原点的进动（$b = 2$，$\Omega = \tfrac12$）。可以换涡旋个数（$2$ 到 $12$）与推法：不推时整圈只在半径 $R = 1$ 上静止，换到半径 $1.2$ 正负涡旋就转开；从六边形起沿发散方向推一下，偏离按 $e^{\lambda t}$ 长大；偶极与正方形沿 $c_1$ 推一下，整圈匀速转走。静止半径、正实本征值与线性漂移是 Lean 已验证的定理（[@lem-ch30-vortex-polygon-equilibrium]、[@thm-ch30-vortex-polygon-spectrum]、[@prop-ch30-vortex-polygon-neutral-drift]）；舞台上的运动是数值积分。
+:::

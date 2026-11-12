@@ -74,6 +74,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `meta-unification-compass` | 八家统一纲领在三根轴上各偏一侧；120 个转动加上它们的黄金缩小版，恰是 E₈ 的 240 个根，Q 全都等于 2 | `cube` `camps` `crystal` `icosians` `e8` `fold` |
 | `hairy-ball-normal-escape` | 球面上贴着的箭头总留一个发旋：两个能合成一个，却消不掉；换成环面，或让箭头沿法向立起一点，才处处不为零 | `merge` `torus` `defect` `escape` |
 | `dottie-fibonacci-spirals` | 负导数把一维递推拧成北东南西的回旋方格；弯曲圆弧把加法守恒换成勾股守恒 | `twin` `whirl` `pythagoras` `tilt` `zoom` `division` |
+| `vortex-polygon` | 正负相间的点涡只在一个半径上静止；从六边形起推一下就按 e^(λt) 长大，正方形的谱全在虚轴上，整圈却会匀速转走 | `rest` `radius` `hexagon` `drift` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -395,10 +396,13 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十章 | 纳维—斯托克斯一节 · 1 末（兰姆恒等式） | `navier-stokes-p-np` · `vortex` |
 | 第三十章 | 文献注记 `rem-ch30-vorticity-transport-literature` 之后 | `navier-stokes-p-np` · `strain` |
 | 第三十章 | 纳维—斯托克斯一节 · 2 列表第 1 条（二维平面情形）之后、第 2 条之前 | `navier-stokes-p-np` · `flat` |
+| 第三十章 | 定理 `thm-ch30-vortex-polygon-spectrum` 的证明后“四个因子是四类运动”一段之后 | `vortex-polygon` · `hexagon` |
+| 第三十章 | 命题 `prop-ch30-vortex-polygon-neutral-drift` 的证明后“$c_0$ 是整个多边形绕原点的无穷小转动”一段之后 | `vortex-polygon` · `drift` |
 | 第三十章 | 文献注记 `rem-ch30-navier-stokes-forced-literature` 之后、猜想 `conj-coda-navier-stokes-regularity` 之前 | `navier-stokes-p-np` · `burgers` |
 | 第三十章 | 猜想 `conj-coda-navier-stokes-regularity` 之后 | `navier-stokes-p-np` · `runaway` |
 | 第三十章 | 定理 `thm-coda-quadratic-advection-no-closure` 的证明之后 | `navier-stokes-p-np` · `mixed` |
 | 第三十章 | 纳维—斯托克斯一节末 | `navier-stokes-p-np` 完整实验室 |
+| 第三十章 | 章末（最后一段之后） | `vortex-polygon` 完整实验室 |
 | 第三十一章 | §31.1 “丈量互易”列表之后 | `quantum-fairness-ledger` · `haar` |
 | 第三十一章 | §31.1 零免费午餐账本三项列表之后 | `quantum-fairness-ledger` · `tradeoff` |
 | 第三十一章 | §31.2 列表第 1 项（不可克隆内积判据）之后 | `quantum-fairness-ledger` · `cloning` |
