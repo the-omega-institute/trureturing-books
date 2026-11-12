@@ -178,7 +178,7 @@ Translated back into the language of rotors (the dictionary below is a manual de
 - **Two full turns.** The loop $t \mapsto e^{4\pi i t}$ lifts to $t \mapsto e^{2\pi i t}$ (it is continuous, squares correctly and starts at $1$, so uniqueness in Claim 1 applies), which ends at $+1$. Only after $720^\circ$ is the rotor restored.
 
 ::: {.viz src="qubit-geometry" preset="turn2" height="500"}
-**Two turns to come back.** The amber state vector $B$ turns twice about $\hat{x}$ (four legs of $180^\circ$ each). The frame stops at the end of the first full turn: $B$ is back where it started, yet the rotor's scalar part read out at the top left is $w = -1$; only after $720^\circ$ does $w$ return to $+1$. One turn for the vector, two for the rotor (the fixed-plane case is [@thm-circle-double-cover-history-lift]).
+**Two turns to come back.** The amber state vector $B$ turns twice about $\hat{x}$ (four legs of $180^\circ$ each). The frame stops at the end of the second full turn: $B$ is back where it started, and the rotor's scalar part read out at the top left is back at $w = +1$; at the end of the first turn $B$ was back there too, but $w$ was $-1$. One turn for the vector, two for the rotor (the fixed-plane case is [@thm-circle-double-cover-history-lift]).
 :::
 
 ::: {.example #ex-rotor-two-turns title="Angles from 0° to 720°: the Rotation Goes Around Twice, the Rotor Only Once"}
