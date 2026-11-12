@@ -78,6 +78,10 @@
 
 把 [@thm-ch34-perpendicular-axis-and-pullback] 的三款结论连起来看，观察者反演的底层几何豁然贯通：第 1 款保证只要二次正交转向扫过任意一对独立方向 $a, b$，三维空间必定留出一根与之同时垂直的单位法轴 $n$；第 2 款指出仅凭两根不共线轴的整圆旋转有限字即可无死角覆盖全部三维刚体旋转；而第 3 款则把“被测状态多转了一步”精确翻译为“观察者手里的测量效应 `effect` 被对偶映射往回拉了一步”——对自伴测量效应，若所有输入密度态的迹读数均不变，迹配对的分离性便使该效应成为对偶映射的不动点。要把这个不动效应读成一根轴，还须已知信道来自保定向旋转，且效应的非标量部分与非零探针方向 $\mathbf{O}$ 一一对应并随旋转协变；标量效应本身没有方向。在前述单位探针、非零倾转与全方位角扫描的设置下，这才落回熟悉的几何罗盘：**那族旋转固定探针轴，亦即属于 $\operatorname{axisCircle}(\mathbf{O})$！**
 
+::: {.viz src="spherical-degeneracy-radar" preset="pullback" height="500"}
+**转态一步，等于把观察者拉回一步。** $\theta = 60^\circ$、$\phi = 90^\circ$ 的一次 $\mathbf{v}_1$ 与两次 $\mathbf{v}_2$ 绕紫色的斜轴 $k$ 一起转过 $\psi$（灰色虚线弧），琥珀色的观察者 $\mathbf{O}$ 读它们；墨色虚线是态不动、观察者绕 $k$ 转回 $-\psi$ 得到的 $R^{-1}\mathbf{O}$，它读原来的两个点。两种读法逐位相同，$\psi = 120^\circ$ 时都是 $0.61$ 与 $-0.62$。这是 [@thm-ch34-perpendicular-axis-and-pullback] 第 3 款在单量子比特幺正信道、一步演化上的一个实例；把不动效应读成一根轴，还须上文所写的旋转与协变条件。
+:::
+
 ::: {.remark #rem-ch34-localization-figure title="球面两步正交寻址极轴反演与八分球面旋子盲区图解（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 结合正交法轴与对偶拉回定理（[@thm-ch34-perpendicular-axis-and-pullback]，`LEAN ✓`）的球面两步寻址极轴反演（[@ex-ch34-spherical-addressing-and-octant-rotors]）画在图 34 第 I 栏与本节的 `meridian`、`sweep` 两张实验卡里；八分球面旋子和乐与几何相位文献背景（[@ex-ch34-spherical-addressing-and-octant-rotors] 与 [@rem-ch34-virtual-z-berry-relativity-literature]）画在图 34 第 II 栏、下一节的 `hops`、`equator`、`tilted`、`frames` 四张实验卡，以及后文的八分球面回路卡里。
 :::

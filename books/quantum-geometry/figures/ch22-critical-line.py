@@ -12,9 +12,9 @@ from _ch22 import ZEROS, check_zeta, zeta
 SIZE = (500, 286)
 ALT = {
     "zh": "坐标图，横轴是 t（0 到 50），纵轴是 |ζ(½ + it)|（0 到 4）。墨色曲线从 t = 0 处的 1.46 起伏前进，十次落到横轴上，"
-          "落点是十个品红的点，第一个标着 14.13。右上角的红色标签写着：所有非平凡零点都在这条线上吗？开放问题。",
+          "落点是十个灰色的点，第一个标着 14.13。右上角的红色标签写着：所有非平凡零点都在这条线上吗？开放问题。",
     "en": "A plot with t across (0 to 50) and |ζ(½ + it)| up (0 to 4). The ink curve starts at 1.46 at t = 0 and rises and "
-          "falls, touching the axis ten times; the touch points are ten magenta dots, the first labelled 14.13. A red tag "
+          "falls, touching the axis ten times; the touch points are ten grey dots, the first labelled 14.13. A red tag "
           "in the top right asks whether every nontrivial zero lies on this line: an open problem.",
 }
 
@@ -38,7 +38,7 @@ def draw(fig):
     ax.path(samples, "ink", 2.2)
     for z in ZEROS:
         x, y = ax.pt(z, 0)
-        fig.dot(x, y, 4.4, "area", ring="bg")
-    ax.text(ZEROS[0], 0, "14.13", dx=-9, dy=-8, size=14, color="area", anchor="end", halo=True)
+        fig.dot(x, y, 4.6, "dim", ring="bg")
+    ax.text(ZEROS[0], 0, "14.13", dx=-9, dy=-8, size=14, color="dim", anchor="end", halo=True)
     ax.text(0, 4, "|ζ(½ + *it*)|", dx=8, dy=4, size=14)
     fig.chip(470, 26, t("全都在这条线上？开放问题", "all zeros on this line? open"), "open", size=14, anchor="end")

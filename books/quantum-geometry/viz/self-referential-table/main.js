@@ -368,8 +368,7 @@
     reset: { scene: 'rank', N: 8, r: 1 },
     expand_table: { scene: 'rank', N: 8, r: 1, play: true, still: 4 },
     full: { scene: 'rank', N: 8, r: 8 },
-    dual_read: { scene: 'read', N: 8, r: 3, cell: [0, 3], play: true },
-    diagonal: { scene: 'read', N: 8, r: 3, cell: [3, 3], play: true },
+    dual_read: { scene: 'read', N: 4, r: 2, cell: [0, 3], play: true },
     heal: { scene: 'heal', N: 8, r: 3, kicks: [{ i: 1, j: 4, eps: 0.3 }], play: true },
     orthogonal_zero: { scene: 'perp', N: 8, r: 3, play: true }
   };
@@ -377,8 +376,7 @@
     reset: ['清空到一行：只写进常值向量，T 的每一格都是 1/8，八个对角格加起来是 1。下面八个地址槽只占了一个。', 'Cleared to one row: only the constant vector is written in, every cell of T is 1/8, and the eight diagonal cells add up to 1. Of the eight address slots below, one is taken.'],
     expand_table: ['一行一行写进两两正交的余弦向量：每多一行，对角格的和（琥珀色的框）就多 1，地址槽多占一个；条带里的幂等误差始终贴在机器精度上。', 'Orthogonal cosine vectors are written in one row at a time: each new row adds 1 to the sum of the diagonal (the amber frame) and takes one more address slot; the idempotency error in the strip stays at machine precision.'],
     full: ['r = N = 8：八个地址全被占满，表成了单位阵，青色只剩对角线。再也找不出与这八行都正交的第九个方向。', 'r = N = 8: all eight addresses are taken, the table is the identity, and cyan is left only on the diagonal. There is no ninth direction orthogonal to all eight rows.'],
-    dual_read: ['第 1 行（横读，尺子）去读第 4 列（竖读，被量的状态）：八个乘积 T₁ₖTₖ₄ 有青有品红，逐项加起来（琥珀色的条）正好等于这一格 T₁₄（空心框）。', 'Row 1 (read across, the ruler) reads column 4 (read down, the state being measured): the eight products T₁ₖTₖ₄, some cyan, some magenta, add up term by term (the amber bar) to exactly this cell T₁₄ (the hollow frame).'],
-    diagonal: ['对角格 (4, 4)：第 4 行与第 4 列是同一串数，八个乘积都是平方，全是青色；加起来回到 T₄₄ 本身。这只是 T² = T 落在对角格上的一项，不是 Lawvere 对角线定理（无不动点时对角线逃出列表）的演示。', 'The diagonal cell (4, 4): row 4 and column 4 are the same numbers, so the eight products are squares, all cyan; they add up to T₄₄ itself. This is only T² = T read on a diagonal cell, not a picture of Lawvere’s diagonal theorem (the diagonal escaping every listing when there is no fixed point).'],
+    dual_read: ['第 1 行（横读，尺子）去读第 4 列（竖读，被量的状态）：四个乘积 T₁ₖTₖ₄ 有青有品红，逐项加起来（琥珀色的条）正好等于这一格 T₁₄（空心框）。点一个对角格，第 k 行与第 k 列是同一串数，乘积全是平方、全是青色，加起来回到 Tₖₖ 本身：这只是 T² = T 落在对角格上的一项，不是 Lawvere 对角线定理（无不动点时对角线逃出列表）的演示。', 'Row 1 (read across, the ruler) reads column 4 (read down, the state being measured): the four products T₁ₖTₖ₄, some cyan, some magenta, add up term by term (the amber bar) to exactly this cell T₁₄ (the hollow frame). Click a diagonal cell: row k and column k are the same numbers, so every product is a square, all cyan, and they add up to Tₖₖ itself. This is only T² = T read on a diagonal cell, not a picture of Lawvere’s diagonal theorem (the diagonal escaping every listing when there is no fixed point).'],
     heal: ['往 (2, 5) 与 (5, 2) 各加 0.3，表不再幂等。每迭代一步 3T² − 2T³，右边的本征值就向 0 与 1 靠拢，条带里的误差一步比一步小得多，几步就到机器精度。', 'Add 0.3 to (2, 5) and (5, 2) and the table is no longer idempotent. With each step of 3T² − 2T³ the eigenvalues on the right move towards 0 and 1, and the error in the strip drops much faster each step, reaching machine precision in a few steps.'],
     orthogonal_zero: ['ψ 从表里的常值向量 v₁ 转向与表里每一行都正交的 w：读出 Tψ（青色）随 cos θ 缩短，落在正交补里的 sin θ（品红）随之变长；到 90°，读出归零。', 'ψ turns from the constant vector v₁, which is in the table, towards w, which is orthogonal to every row of it: the reading Tψ (cyan) shrinks with cos θ while the part sin θ in the complement (magenta) grows; at 90° the reading is zero.']
   };

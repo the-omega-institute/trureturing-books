@@ -37,11 +37,11 @@
     <section class="panel sec">
       <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
       <div class="presets cards" id="presets">
-        <button class="preset" data-preset="once" aria-pressed="false"><span class="code">ONCE</span><span class="cn zh">投一次：只剩影子</span><span class="cn en">Once: only the shadow is left</span></button>
         <button class="preset" data-preset="twice" aria-pressed="false"><span class="code">AGAIN</span><span class="cn zh">再投一次：一动不动</span><span class="cn en">Again: nothing moves</span></button>
         <button class="preset" data-preset="fixed" aria-pressed="false"><span class="code">ON-LINE</span><span class="cn zh">本来就在线上</span><span class="cn en">Already on the line</span></button>
         <button class="preset" data-preset="perp" aria-pressed="false"><span class="code">PERP</span><span class="cn zh">躺在对偶平面里：投出零</span><span class="cn en">Lying in the dual plane: zero</span></button>
         <button class="preset" data-preset="sum" aria-pressed="false"><span class="code">LINE + PLANE</span><span class="cn zh">两份拼回原箭头</span><span class="cn en">The two parts rebuild the arrow</span></button>
+        <button class="preset" data-preset="chain" aria-pressed="false"><span class="code">CHAIN</span><span class="cn zh">读结果：态留在皮上，权重相乘</span><span class="cn en">Read it: the state stays on the skin, weights multiply</span></button>
       </div>
       <p class="note" id="presetNote"></p>
     </section>
@@ -54,6 +54,15 @@
         <button class="chip" data-axis="n" aria-pressed="false"><span class="zh">斜线 n̂</span><span class="en">tilted n̂</span></button>
       </div>
       <p class="note"><span class="zh">换一条线，就从箭头此刻的位置重新开始投。先沿 Z 投、再换成 X 投，箭头会被投成零。</span><span class="en">Changing the line starts again from where the arrow is now. Project along Z, switch to X and project again: the arrow goes to zero.</span></p>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">偏振片链</span><span class="en">Polarizer chain</span><span class="aside"><span class="zh">读结果</span><span class="en">result read</span></span></h2>
+      <div class="field">
+        <label for="slits"><span class="zh">中间片数 N</span><span class="en">Middle sheets N</span><small class="zh">0° 与 90° 之间等角插入</small><small class="en">evenly between 0° and 90°</small></label><output id="oSlits" for="slits">3</output>
+        <input type="range" id="slits" min="0" max="12" step="1" value="3">
+      </div>
+      <p class="note"><span class="zh">拖动它就换成另一种操作：读出结果、只留通过的一支（选择性条件更新），态跳到下一条线的端点上。上面换线、下面调长度或按“投一次”，回到不读结果的投影。</span><span class="en">Moving it switches to the other operation: read the result and keep the branch that passed (selective conditional update), so the state jumps to the end of the next line. Changing the line above, the length below or pressing “Project” goes back to the unread projection.</span></p>
     </section>
 
     <section class="panel sec">
@@ -115,6 +124,8 @@
 
     <section class="panel sec" id="evidence">
       <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">偏振片链里每一跳读出通过的一支，条件态 P<sub>k</sub>ρP<sub>k</sub> / Tr(ρP<sub>k</sub>) 只要权重不为零，仍是半正定、迹为 1 的态：琥珀色的态因此留在球皮上。已冻结：</span><span class="en">At every hop of the polarizer chain the branch that passed is read, and as long as its weight is not zero the conditional state P<sub>k</sub>ρP<sub>k</sub> / Tr(ρP<sub>k</sub>) is again positive semidefinite with trace 1: that is why the amber state stays on the skin. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning.conditionalState_isState" href="#" target="_blank" rel="noopener"><code>conditionalState_isState</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">有序外积链的迹等于相邻内积之积再乘闭合因子；取回文链，有限 N 的透过权重就是各跳 cos²(Δα) 之积。N → ∞ 的极限是文献结果，页面不画。已冻结：</span><span class="en">The trace of an ordered chain of outer products is the product of neighbouring inner products times the closing factor; for the palindromic chain the weight passed with finitely many sheets is the product of the cos²(Δα) of the hops. The limit N → ∞ is a literature result and is not drawn. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Information/BargmannImaginaryMaximizers.bargmann_path_product" href="#" target="_blank" rel="noopener"><code>bargmann_path_product</code></a></span></div>
       <div class="lean num"><span class="ok">NUM</span><span><span class="zh">每一投都用 2×2 复矩阵实算 P₊ρP₊ + P₋ρP₋，再读出它的布洛赫箭头。算出的箭头总是落在 (r·n̂)n̂，也就是原箭头在线上的影子：这是页面的数值核对（手算也能得到），不是引用的定理。</span><span class="en">Every press computes P₊ρP₊ + P₋ρP₋ with 2×2 complex matrices and reads off its Bloch arrow. The result always lands on (r·n̂)n̂, the old arrow's shadow on the line: a numerical check by the page (it also follows by hand), not a cited theorem.</span></span></div>
       <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数都是按双精度实时算出的数值演示，不是证明。</span><span class="en">Every number on the page is computed live in double precision: an illustration, not a proof.</span></span></div>
       <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
@@ -151,8 +162,9 @@
         <li><b>线上一份 + 面上一份。</b>箭头 = 线上的影子 + 面上的一份；两份互相垂直，长度平方相加等于箭头长度的平方。写成第三章的账本：纯度盈余 Tr ρ² − ½ = ½|r|² 等于沿线测量的概率偏离 (p₊ − ½)² + (p₋ − ½)² = ½(r·n̂)² 加上剩余质量 ½·面²：<a class="leanref" data-lean-gid="D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras" href="#" target="_blank" rel="noopener"><code>complementary_context_probability_pythagoras</code></a>（LEAN ✓，取 |d| = 2、单个语境、s = r/√2、V 为测量线）。页面的三个数分别从矩阵的迹、玻恩概率和几何长度算出。</li>
         <li><b>投出零。</b>箭头整个躺在对偶平面里时，线上的影子为零，一投之后箭头缩成球心（两种结果各占一半）。先沿 Z 投、再换成 X 投也是这样：第一投之后箭头在 Z 线上，而 Z 线整个躺在 X 的对偶平面里。</li>
         <li><b>投完变短。</b>一投之后箭头的长度从 |r| 变成 |r·n̂|：面上那一份去了哪里，是第四章的问题，本页不回答。</li>
+        <li><b>偏振片链（读结果）。</b>另一种操作：读出结果、只留通过的一支，ρ ↦ PρP / Tr(ρP)。北极是 0° 片、南极是 90° 片，N 片中间片把这段经线等分；态每跳一次落在下一条线的端点上，仍在球皮上（条件态合法），透过的权重每跳乘 cos²(π/(2(N + 1)))，有限 N 的总权重是有序外积链之迹的回文情形。N → ∞ 时趋于 1 是文献结果，页面不画。</li>
       </ol>
-      <p class="lede refs">书中：<a href="../../zh/ch03-projectors-and-duality.html#sec-ch03-1" target="_top">第三章 §3.1 · 存在即幂等线</a> · <a href="../../zh/ch03-projectors-and-duality.html#thm-pinching-idempotent" target="_top">捏合超算子的幂等性</a> · <a href="../../zh/ch03-projectors-and-duality.html#thm-unread-fixed-iff" target="_top">未读态不动点判据</a> · <a href="../../zh/ch03-projectors-and-duality.html#sec-ch03-2" target="_top">§3.2 · 线与面的伴生宿命</a> · trureturing（所钉提交）：<a data-trureturing-path="D5/S3/Observer/Conditioning.lean" href="#" target="_blank" rel="noopener">Conditioning.lean</a></p>
+      <p class="lede refs">书中：<a href="../../zh/ch03-projectors-and-duality.html#sec-ch03-1" target="_top">第三章 §3.1 · 存在即幂等线</a> · <a href="../../zh/ch03-projectors-and-duality.html#thm-pinching-idempotent" target="_top">捏合超算子的幂等性</a> · <a href="../../zh/ch03-projectors-and-duality.html#thm-unread-fixed-iff" target="_top">未读态不动点判据</a> · <a href="../../zh/ch03-projectors-and-duality.html#sec-ch03-2" target="_top">§3.2 · 线与面的伴生宿命</a> · <a href="../../zh/ch03-projectors-and-duality.html#sec-ch03-3" target="_top">§3.3 · 偏振片级联</a> · trureturing（所钉提交）：<a data-trureturing-path="D5/S3/Observer/Conditioning.lean" href="#" target="_blank" rel="noopener">Conditioning.lean</a></p>
     </div>
     <div class="en">
       <p class="lede">The amber arrow is the Bloch vector r of a qubit (length 1 is a pure state, shorter is mixed), ρ = ½(I + r·σ). The cyan line is the measurement direction n̂ with outcomes P<sub>±</sub> = ½(I ± n̂·σ); the magenta disc is the dual plane perpendicular to the line. One press of “Project” is a measurement along n̂ whose result is not read: ρ ↦ P₊ρP₊ + P₋ρP₋. The page is a numerical illustration, not a proof.</p>
@@ -163,8 +175,9 @@
         <li><b>Line part + plane part.</b> The arrow is its shadow on the line plus its part in the plane; the two are perpendicular, so their squared lengths add up to the arrow's. In Chapter 3's ledger: the purity surplus Tr ρ² − ½ = ½|r|² equals the probability deviation of the measurement along the line, (p₊ − ½)² + (p₋ − ½)² = ½(r·n̂)², plus the residual mass ½·plane²: <a class="leanref" data-lean-gid="D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras" href="#" target="_blank" rel="noopener"><code>complementary_context_probability_pythagoras</code></a> (LEAN ✓, with |d| = 2, one context, s = r/√2 and V the measurement line). The page computes the three numbers from the trace of a matrix, from Born probabilities and from geometric lengths.</li>
         <li><b>Projecting to zero.</b> When the whole arrow lies in the dual plane its shadow on the line is zero, and one press shrinks it to the centre of the ball (the two outcomes are 50 / 50). Projecting along Z and then along X does the same: after the first press the arrow lies on the Z line, and the Z line lies wholly in the dual plane of X.</li>
         <li><b>Shorter after a press.</b> One press takes the arrow's length from |r| to |r·n̂|. Where the part in the plane went is the question of Chapter 4; this page does not answer it.</li>
+        <li><b>Polarizer chain (result read).</b> The other operation: read the result and keep the branch that passed, ρ ↦ PρP / Tr(ρP). The north pole is the 0° sheet and the south pole the 90° sheet, and N middle sheets divide the meridian evenly; at every hop the state lands on the end of the next line and stays on the skin (the conditional state is a state), and the weight passed is multiplied by cos²(π/(2(N + 1))); for finitely many sheets the total is the palindromic case of the trace of an ordered chain of outer products. That it tends to 1 as N → ∞ is a literature result and is not drawn.</li>
       </ol>
-      <p class="lede refs">In the book: <a href="../../en/ch03-projectors-and-duality.html#sec-ch03-1" target="_top">Chapter 3 §3.1 · existence as an idempotent line</a> · <a href="../../en/ch03-projectors-and-duality.html#thm-pinching-idempotent" target="_top">idempotence of the pinching superoperator</a> · <a href="../../en/ch03-projectors-and-duality.html#thm-unread-fixed-iff" target="_top">the fixed-point criterion of the unread state</a> · <a href="../../en/ch03-projectors-and-duality.html#sec-ch03-2" target="_top">§3.2 · line and plane</a> · trureturing (pinned commit): <a data-trureturing-path="D5/S3/Observer/Conditioning.lean" href="#" target="_blank" rel="noopener">Conditioning.lean</a></p>
+      <p class="lede refs">In the book: <a href="../../en/ch03-projectors-and-duality.html#sec-ch03-1" target="_top">Chapter 3 §3.1 · existence as an idempotent line</a> · <a href="../../en/ch03-projectors-and-duality.html#thm-pinching-idempotent" target="_top">idempotence of the pinching superoperator</a> · <a href="../../en/ch03-projectors-and-duality.html#thm-unread-fixed-iff" target="_top">the fixed-point criterion of the unread state</a> · <a href="../../en/ch03-projectors-and-duality.html#sec-ch03-2" target="_top">§3.2 · line and plane</a> · <a href="../../en/ch03-projectors-and-duality.html#sec-ch03-3" target="_top">§3.3 · the polarizer cascade</a> · trureturing (pinned commit): <a data-trureturing-path="D5/S3/Observer/Conditioning.lean" href="#" target="_blank" rel="noopener">Conditioning.lean</a></p>
     </div>
   </div>
 </div>

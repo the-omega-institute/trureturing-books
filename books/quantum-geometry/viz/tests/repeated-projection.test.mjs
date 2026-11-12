@@ -49,12 +49,25 @@ await stageFirstChecks(T, BOOK, ID);
 const page = await T.goto(BOOK, ID, '?lang=zh');
 const state = async () => { await settle(page); return page.evaluate(() => window.PROJECT_DEBUG.state); };
 const pick = async (id) => { await page.click(`[data-preset="${id}"]`); await settle(page); };
-const played = (n) => until(page, (k) => { const s = window.PROJECT_DEBUG.state; return !s.playing && s.t >= k - 1e-9; }, n);
+// a card plays by itself: wait until it has started, then take the rail to its end (at one frame a second a full run would outlast the wait)
+const played = async (n) => {
+  const ok = await until(page, () => { const s = window.PROJECT_DEBUG.state; return s.playing && s.t > 0; });
+  await page.evaluate((k) => window.PROJECT_DEBUG.seek(k), n); await settle(page);
+  return ok;
+};
 const setRange = async (id, v) => { await page.evaluate(([i, val]) => { const el = document.getElementById(i); el.value = String(val); el.dispatchEvent(new Event('input', { bubbles: true })); }, [id, v]); await settle(page); };
 
-// opening view: the AGAIN card, shown at its telling frame (three presses done)
+// opening view (no card): just after one unread press, the arrow pulled inside the ball
 let s = await state();
-check('opens on the AGAIN card with three presses done', s.preset === 'twice' && s.n === 3 && close(s.t, 3) && s.axis === 'z');
+check('opens with no card, one press done along Z', s.preset === null && s.mode === 'unread' && s.n === 1 && close(s.t, 1) && s.axis === 'z');
+check('opening view: one press in all, the arrow is the shadow of the start', vclose(s.r, shadow(s.r0, s.line), 1e-12) && vclose(s.r, unread(s.r0, s.line), 1e-12));
+check('opening view: the arrow started on the sphere, is shorter after the press and its plane part is gone', close(len(s.r0), 1) && len(s.r) < 0.7 && close(s.plane, 0, 1e-12));
+check('opening view: the cyan part on the line is the same before and after', close(dot(s.r0, s.line), s.dot, 1e-12));
+
+// AGAIN: three presses, only the first moves the arrow
+await pick('twice');
+check('AGAIN plays its three presses', await played(3));
+s = await state();
 check('AGAIN: the first press lands on the shadow (r·n̂)n̂', vclose(s.hist[1], shadow(s.r0, s.line), 1e-12));
 check('AGAIN: the first press agrees with the eigen-spinor computation of P₊ρP₊ + P₋ρP₋', vclose(s.hist[1], unread(s.r0, s.line), 1e-12));
 check('AGAIN: the second and third presses move nothing', vclose(s.hist[2], s.hist[1], 1e-12) && vclose(s.hist[3], s.hist[1], 1e-12) && close(s.moved, 0, 1e-12));
@@ -62,13 +75,34 @@ check('AGAIN: the first press really moved the arrow', len(s.hist[1].map((x, i) 
 check('AGAIN: the readout “moved by the latest press” is 0.000', (await page.textContent('#roMoved')).trim() === '0.000');
 check('AGAIN: the HUD says the third press moved it 0.000', (await page.textContent('#hudSub')).includes('0.000') && (await page.textContent('#hudBig')).includes('3'));
 
-// ONCE plays one press and stops; the arrow ends shorter, on the line
-await pick('once');
-check('ONCE plays by itself and stops after one press', await played(1));
+// CHAIN: read the result and keep the branch that passed. Independent model: the polarizer angles α_j, the photon
+// polarization vector (cos α, sin α) in the plane, Malus's cos² per hop, and the Bloch direction (sin 2α, 0, cos 2α).
+const malus = (N) => { const m = N + 1; let w = 1; const ws = [1]; for (let j = 1; j <= m; j++) { w *= Math.cos(Math.PI / (2 * m)) ** 2; ws.push(w); } return ws; };
+const blochAt = (a) => [Math.sin(2 * a), 0, Math.cos(2 * a)];
+await pick('chain');
+check('CHAIN plays its four hops', await played(4));
 s = await state();
-check('ONCE: one press in all, the arrow is the shadow of the start', s.n === 1 && vclose(s.r, shadow(s.r0, s.line), 1e-12) && vclose(s.r, unread(s.r0, s.line), 1e-12));
-check('ONCE: the arrow is shorter after the press and its plane part is gone', close(len(s.r0), 1) && len(s.r) < 0.7 && close(s.plane, 0, 1e-12));
-check('ONCE: the cyan part on the line is the same before and after', close(dot(s.r0, s.line), s.dot, 1e-12));
+let ws = malus(3);
+check('CHAIN: three middle sheets, four hops, the state ends on the south pole (90° sheet)', s.mode === 'chain' && s.N === 3 && s.m === 4 && vclose(s.r, [0, 0, -1], 1e-12));
+check('CHAIN: after every hop the state stays on the skin, on the end of that sheet\'s line', s.states.every((r, j) => close(len(r), 1, 1e-12) && vclose(r, blochAt(j * Math.PI / 8), 1e-12)));
+check('CHAIN: each hop passes with cos²(22.5°), and the totals are Malus\'s products', s.factors.every((f) => close(f, Math.cos(Math.PI / 8) ** 2, 1e-12)) && s.totals.every((w, j) => close(w, ws[j], 1e-12)) && close(s.w, Math.cos(Math.PI / 8) ** 8, 1e-12) && s.w.toFixed(3) === '0.531');
+let condOk = true;
+for (let j = 1; j <= s.m; j++) {
+  const R = rhoOf(s.states[j - 1]), Pj = proj(blochAt(j * Math.PI / 8), 1), X = mm(mm(Pj, R), Pj), w = tr(X)[0];
+  if (!close(w, s.factors[j - 1], 1e-12) || !vclose(blochOf(mscale(X, 1 / w)), s.states[j], 1e-12)) condOk = false;
+}
+check('CHAIN: each hop is the conditional state PρP / Tr(ρP) by the independent eigen-spinor projectors', condOk);
+check('CHAIN: the key line says the total weight', (await page.textContent('#hudSub')).includes('0.531'));
+for (const N of [0, 1, 12]) {
+  await setRange('slits', N); s = await state(); ws = malus(N);
+  check(`CHAIN, N = ${N}: the slider leaves the card and the final weight is [cos²(π/(2(N+1)))]^(N+1)`, s.preset === null && s.mode === 'chain' && s.N === N && close(s.totals[s.m], ws[N + 1], 1e-12) && close(s.totals[s.m], Math.cos(Math.PI / (2 * (N + 1))) ** (2 * (N + 1)), 1e-12));
+}
+await setRange('slits', 0); s = await state();
+check('CHAIN, N = 0: one hop of 180° on the sphere, weight 0, the state does not move', s.m === 1 && close(s.factors[0], 0, 1e-12) && close(s.totals[1], 0, 1e-12) && vclose(s.states[1], [0, 0, 1], 1e-12));
+await setRange('slits', 1); s = await state();
+check('CHAIN, N = 1: the 45° sheet gives ¼', close(s.totals[2], 0.25, 1e-12));
+await page.click('#axisChips [data-axis="z"]'); s = await state();
+check('changing the line leaves the chain for the unread projection', s.mode === 'unread' && s.n === 0);
 
 // ON-LINE: an arrow on the line is a fixed point and its cross-branch block is zero
 await pick('fixed');
@@ -113,7 +147,7 @@ await page.click('#press'); s = await state();
 check('projecting along Z and then along X leaves the zero arrow', vclose(s.r, [0, 0, 0], 1e-12) && vclose(unread(onZ, [1, 0, 0]), [0, 0, 0], 1e-12));
 
 // the length slider
-await pick('once');
+await pick('twice');
 await setRange('len', 0.4); s = await state();
 check('the length slider sets |r| and starts again', close(len(s.r0), 0.4, 1e-12) && s.n === 0 && s.preset === null);
 check('a mixed arrow: purity surplus = ½|r|²', close(s.surplus, 0.5 * 0.16, 1e-12));
@@ -177,8 +211,8 @@ await page.click('#restart'); s = await state();
 check('Restart clears the presses and disables the rail', s.n === 0 && await page.evaluate(() => document.getElementById('play').disabled && document.getElementById('now').disabled));
 
 // English
-await page.click('[data-lang-set="en"]'); await pick('once'); await played(1); await settle(page);
-check('English: the HUD reads “Press 1”', (await page.textContent('#hudBig')).trim() === 'Press 1');
+await page.click('[data-lang-set="en"]'); await pick('twice'); await played(3); await settle(page);
+check('English: the HUD reads “Press 3”', (await page.textContent('#hudBig')).trim() === 'Press 3');
 
 // the AGAIN still printed in chapter 3: three presses, and the readout lists what each one moved
 {
@@ -191,6 +225,16 @@ check('English: the HUD reads “Press 1”', (await page.textContent('#hudBig')
   const mv = [1, 2, 3].map((k) => len(h[k].map((x, i) => x - h[k - 1][i])));
   const shown = mv.map((m) => (Math.abs(m) < 5e-4 ? 0 : m).toFixed(3)).join(' → ');
   check('AGAIN still: after the third press, the readout lists the three moves, the first nonzero and the other two 0', close(st.s.t, 3) && st.s.done === 3 && mv[0] > 0.5 && mv[1] < 1e-12 && mv[2] < 1e-12 && st.sub.includes(shown), `${st.sub} | expected ${shown}`);
+}
+
+// the CHAIN still printed in chapter 3: all four hops done, the weight at w₃
+{
+  const pg = await T.goto(BOOK, ID, '?shot=1&lang=zh&preset=chain', await T.newPage());
+  await settle(pg);
+  const st = await pg.evaluate(() => ({ s: window.PROJECT_DEBUG.state, sub: document.getElementById('hudSub').textContent }));
+  await pg.close();
+  const w3 = Math.cos(Math.PI / 8) ** 8;
+  check('CHAIN still: four hops done, the state on the 90° sheet, the readout says w = 0.531', close(st.s.t, 4) && vclose(st.s.r, [0, 0, -1], 1e-12) && st.sub.includes(w3.toFixed(3)), st.sub);
 }
 
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));

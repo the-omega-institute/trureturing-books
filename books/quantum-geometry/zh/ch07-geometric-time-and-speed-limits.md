@@ -96,6 +96,10 @@ $$
 
 特别地，如果初态 $\psi$ 本身就是哈密顿量 $H$ 的能量本征态（$H\psi = E\psi$），那么在 Lean 模块 `Quantum/Dynamics/EnergyEigenstateStationarity` 中，定理 [`energy_eigenstate_stationary`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary) 与 [`energy_eigenstate_variance_zero`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_variance_zero) 严格证明了：它的能量涨落方差恒为零，演化态 $\psi(t) = e^{-itE/\hbar}\psi$ 仅仅在原方向线上乘了一个不可见的全局相位，其秩一密度矩阵与一切可观测量的期望值在所有时刻 $t$ 纹丝不动！**没有非零的对易子外积面积 $[H, P] \neq 0$，就没有一维投影线上可见的经典时间流逝！**
 
+::: {.figure src="ch07-commutator-flow"}
+**转轴与尺子不平行，影子才会动。** 单比特特例：尺子 $P = \lvert 0\rangle\langle 0\rvert$ 是青色的竖轴，紫色的转轴 $H$ 从竖直斜开 $40^\circ$。琥珀色的态从北极出发，绕紫色的轴走一圈虚线小圆，它在青色竖轴上的影子随之上下移动；右边青色的曲线是留在 $\lvert 0\rangle$ 的概率 $p(t)$，在 $1$ 与 $0.59$ 之间起伏。转轴与尺子重合时 $[H, P] = 0$，灰色的 $p(t)$ 一直是 $1$（[@prop-projection-probability-flow]；单比特的曲线是手工推导与数值）。
+:::
+
 ## 7.2 量子速度极限（Mandelstam–Tamm 与 Margolus–Levitin）：翻越 $90^\circ$ 正交墙的最短时间 {#sec-quantum-speed-limit}
 
 既然“线是经典时间，面积是量子时间”，那么**把一团连续旋转的二维量子面积，切分成两声毫不含糊、彼此绝不串扰的经典时钟“滴答”声，最短需要多少时间？**
@@ -219,6 +223,8 @@ $$
 **三能级等权叠加：弯着走，晚到。** 左边三支青色箭头在 $t = \frac{2\pi}{3}$ 围成三角形，琥珀色的点回到品红的圆心；右边青色曲线弯到虚线速度线下面，速度线在 MT $1.924$ 已到墙，曲线到 $\tau_\perp = 2.094$ 才碰到品红的墙，ML 刻度在 $1.571$。两条界是文献结果，未在本书形式化。
 :::
 
+三能级的态虽然晚到，终究碰到了墙；二能级的权重一旦离开等权，比如 $\alpha = 30^\circ$，夹角最多只升到 $2\alpha = 60^\circ$。
+
 ::: {.viz src="speed-limit-zeno" preset="unequal" height="500"}
 **不等权叠加：到不了墙。** 权重角 $\alpha = 30^\circ$：左边长 $0.75$、短 $0.25$ 的两支青色箭头怎么转也抵消不完，琥珀色的点离品红的圆心最近 $0.5 = \lvert\cos 2\alpha\rvert$；右边夹角最多升到 $2\alpha = 60^\circ$，碰不到品红的墙。
 :::
@@ -233,10 +239,6 @@ $$
 
 ::: {.figure src="ch07-zeno-n"}
 **测得越勤，全程留在 $\lvert 0\rangle$ 的概率越接近 $1$。** 横轴是测量次数 $N$（对数刻度），青色的曲线是 $P_N = \bigl[\cos^2\frac{\pi}{2N}\bigr]^N$，青色的点是 $N = 1, 4, 16, 64$，依次为 $0$、$0.531$、$0.857$、$0.962$；灰色虚线是近似式 $1 - \frac{\pi^2}{4N}$，$N$ 越大越贴近青色曲线，缺口按 $\frac{1}{N}$ 缩小。数值由 [@ex-zeno-strobe-freezing] 的解析式算出。
-:::
-
-::: {.viz src="speed-limit-zeno" preset="strobe16" height="500"}
-**频闪 16 次：几乎走不掉。** 箭头每转 $11.25^\circ$ 就被拉回 $\lvert 0\rangle$：品红的一份（离开线的一阶小量）刚露头就被削掉，青色的影子几乎不短。画面停在最后一段的半途，右边青色的留存几乎铺满，此刻还剩 $0.863$，终点 $N = 16$ 的环是 $0.857$；虚线是不看时的路。
 :::
 
 ::: {.example #ex-zeno-strobe-freezing title="量子芝诺频闪观测的解析公式与四档频闪（N = 1, 4, 16, 64）数值验算"}
@@ -297,6 +299,79 @@ $$
 
 [@prop-monitored-return-conservation] 说的是概率一分不少：前 $N$ 步里首次返回的概率，加上至今没有返回的概率，恰好是 $1$。它不依赖 $U$ 是什么，也不依赖空间的维数。把它用到 [@ex-zeno-strobe-freezing] 的那只旋转比特上，会得到一个与芝诺冻结正好相对的结论。
 
+在讨论平均返回时间之前，先看初态究竟能访问哪些方向。有限维复内积空间 $E$ 中，令 $U$ 为幺正算子，$v\in E$，并记
+
+$$
+C=\operatorname{span}_{\mathbb C}\{U^n v:n\in\mathbb N\},
+\qquad
+P_v=\text{到 }\mathbb C v\text{ 的正交投影}.
+$$
+
+$C$ 是这条轨道张成的循环空间。下面两个有限维论证说明：要找永久不响的探测器方向，必须区分 $C$ 内外。
+
+::: {.remark #rem-monitored-cyclic-observability title="循环空间里没有永久暗态：有限维推导"}
+**文献结果，未在本书形式化。** 令 $T=(I-P_v)U$。$U$ 保持 $C$，$P_v$ 的像包含在 $C$ 中，因此 $T$ 与 $P_vU$ 均可限制为 $C\to C$ 上的算子
+
+$$
+A=T|_C,\qquad B=(P_vU)|_C.
+$$
+
+把所有将来都不产生点击的方向放在一起：
+
+$$
+K=\bigcap_{n\in\mathbb N}\ker(BA^n).
+$$
+
+若 $x\in K$，则 $Bx=0$，所以 $Ax=Ux$；把点击历史向前移一步又给出 $Ax\in K$。故 $U$ 保持 $K$。$U|_K$ 是有限维空间上的单射，因而满射，$U^{-1}$ 也保持 $K$。对任意 $x\in K$，可写成 $x=Uy$、$y\in K$，由 $By=P_vUy=0$ 得 $x\perp v$。再沿 $U^{-1}$ 迭代，便有 $x\perp U^nv$ 对每个 $n\ge0$ 成立。$x$ 同时属于这些向量张成的 $C$，只能为零：
+
+$$
+K=\{0\}.
+$$
+
+这段推导不要求 $v$ 是单位向量；$v=0$ 时 $C=\{0\}$。若不限制到实际循环空间，结论会失效：取 $U=I$、$v=e_1$，与 $e_1$ 正交的非零向量永远不会点击。这里讨论的是循环空间内的可观测性，还没有计算返回概率的无穷和。
+:::
+
+::: {.remark #rem-monitored-cyclic-power-contraction title="没有永久暗态，为什么会在有限步后严格收缩？"}
+**文献结果，未在本书形式化。** 再设 $\norm v=1$，记 $d=\dim_{\mathbb C}C\ge1$。对 $x\in C$，投影的勾股分解与 $U$ 的等距性给出
+
+$$
+\norm{Ax}^2+\norm{Bx}^2=\norm{x}^2.
+$$
+
+令 $K_m=\bigcap_{j=0}^{m-1}\ker(BA^j)$，其中 $K_0=C$。若某一步 $K_m=K_{m+1}$，把历史向前移一步可知 $A$ 保持 $K_m$，从而它已是永久暗空间。上一段证明这个空间为零。因此只要 $K_m\ne\{0\}$，它的维数就必须严格下降；至多 $d$ 步便有 $K_d=\{0\}$。
+
+对任意单位向量 $x\in C$，有限守恒式于是给出
+
+$$
+\norm{A^d x}^2
+=1-\sum_{j=0}^{d-1}\norm{BA^j x}^2<1.
+$$
+
+有限维单位球面紧致，连续函数 $x\mapsto\norm{A^dx}$ 能取到最大值，所以这个最大值也严格小于一。取 $N=d$、$q=\norm{A^d}_{\mathrm{op}}$，得到
+
+$$
+N\ge1,\qquad 0\le q<1,\qquad \norm{A^N}_{\mathrm{op}}\le q.
+$$
+
+紧致性在这里把“每个方向都有损失”变成“所有方向共享一个严格损失界”。这个界可以依赖于 $U,v$，并未给出对所有系统统一的收缩常数。关于监测返回的文献背景，见 Grünbaum、Velázquez、Werner 与 Werner，*Recurrence for discrete time unitary evolutions*，arXiv:1202.3903v3，Theorem 2。这两段作为有限维推导列出，不计入本书的 Lean 定理账本。
+:::
+
+::: {.problem #prob-monitored-spectral-mean title="形式化缺口：从实际监测历史到占据谱点数"}
+对任意有限维复内积空间、幺正 $U$ 与单位向量 $v$，沿用 [@def-monitored-return] 的 $p_{n+1}=\lvert\langle v,UT^nv\rangle\rvert^2$。定义占据谱集合
+
+$$
+S=\{\lambda\in\mathbb C:\exists w\in E,\ Uw=\lambda w\ \text{且}\ \langle w,v\rangle\ne0\}.
+$$
+
+需要完成的形式化陈述是：若 $\sum_{n=0}^{\infty}p_{n+1}=1$，则 $S$ 有限，且
+
+$$
+\sum_{n=0}^{\infty}(n+1)p_{n+1}=\#S.
+$$
+
+这是已知文献定理的形式化缺口，数学上不作为未解决猜想。上面的循环空间与收缩论证仍需连接到算子迹的收敛求和、生存概率尾和到首次返回均值的转换，以及 $\dim C=\#S$；最后一式数的是不同占据谱值，并非本征值的代数重数。有限步守恒或某个正次幂严格收缩，都不能单独替代这条完整结论。
+:::
+
 ::: {.example #ex-first-return-qubit title="旋转比特的首次返回统计：平均返回时间恒为 2，与步长无关"}
 设单比特每一步绕 $X$ 轴转过布洛赫角 $\delta$，即 $U = \cos\frac{\delta}{2}\,I - i\sin\frac{\delta}{2}\,X$，初态 $v = \lvert 0\rangle$。记 $c = \cos\frac{\delta}{2}$，$s = \sin\frac{\delta}{2}$，并设 $s \neq 0$。
 
@@ -340,7 +415,7 @@ $\delta = \frac{\pi}{4}$ 一行的 $p_1 = 0.853553$ 就是 [@ex-zeno-strobe-free
 :::
 
 ::: {.viz src="speed-limit-zeno" preset="mean" height="500"}
-**首次返回：平均恒为 2 步。** $\delta = 45^\circ$，每根柱子是又走一步之后的账目：青色是已经返回的概率，品红是还没回来的概率，每一根都恰好到 $1$ 这条线（[@prop-monitored-return-conservation]）。品红的总面积就是平均返回时间，随着步数从 $1$ 涨向 $2$（[@ex-first-return-qubit]）。
+**首次返回：平均恒为 2 步。** $\delta = 45^\circ$，每根柱子是又走一步之后的账目：青色是已经返回的概率，品红是还没回来的概率，每一根都恰好到 $1$ 这条线（[@prop-monitored-return-conservation]）。品红的总面积就是平均返回时间，随着步数从 $1$ 涨向 $2$（[@ex-first-return-qubit]）。品红的虚线台阶是步长 $\delta = 90^\circ$ 的同一本账：第一步就回来一半，形状完全不同，品红面积同样走到 $2$。
 :::
 
 芝诺效应说，看得够勤，状态就走不掉。首次返回的账目补上了另一半：看得再勤，平均两步回来一次这件事也不会变，因为它数的不是时间，而是这只比特一共有几个方向可去。

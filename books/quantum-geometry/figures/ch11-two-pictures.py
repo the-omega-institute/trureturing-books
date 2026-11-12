@@ -24,14 +24,16 @@ ALT = {
           "chance of reading |0⟩ is the same.",
 }
 
-AXIS = figkit.unit((0.5, -0.3, 0.8))
+AXIS = figkit.sph(30, 270)        # chosen so that both moved arrows lie near the picture plane
 TURN = 120.0
-STATE = figkit.sph(100, -30)
+STATE = figkit.sph(130, 345)
 NORTH = (0.0, 0.0, 1.0)
 
 PUSHED = figkit.rotate(STATE, AXIS, TURN)
 PULLED = figkit.rotate(NORTH, AXIS, -TURN)
 ALPHA = math.degrees(math.acos(figkit.dot3(PUSHED, NORTH)))
+_TOWARD = figkit.Sphere(None, 0, 0, 1, 110.0, 18.0).toward
+assert all(0.05 < figkit.dot3(v, _TOWARD) < 0.5 for v in (PUSHED, PULLED, STATE))   # none of them points at the reader
 assert abs(figkit.dot3(PUSHED, NORTH) - figkit.dot3(STATE, PULLED)) < 1e-12
 
 
@@ -59,7 +61,7 @@ def draw(fig):
             sp.dot(STATE, "dim", 4.0, ring="bg")
         else:
             state, readout = STATE, PULLED
-            turn_path(sp, NORTH, -TURN, "dim", 1.8)
+            turn_path(sp, NORTH, -TURN, "dim", 2.0)
             sp.dot(NORTH, "faint", 4.0, ring="bg")
         sp.arc(state, readout, "line", 3.0, n=60)
         mid = figkit.slerp(state, readout, 0.5)
@@ -67,10 +69,10 @@ def draw(fig):
                  anchor="end" if i == 0 else "start", middle=True, halo=True)
         sp.arrow(state, "now", 2.6, head=8)
         sp.dot(state, "now", 4.6, ring="bg")
-        sp.arrow(readout, "dim", 1.8, head=7)
+        sp.arrow(readout, "dim", 2.6, head=8)
         sp.dot(readout, "ink", 4.4, ring="bg")
-        sp.label(readout, fig.t("读出", "readout"), dx=10 if i == 0 else -10, dy=-8 if i == 0 else -12, size=13,
-                 color="dim", anchor="start" if i == 0 else "end", middle=True, halo=True)
+        sp.label(readout, fig.t("读出", "readout"), scale=1.06, dx=8 if i == 0 else 14, dy=-10 if i == 0 else 16, size=13, color="dim", anchor="start", middle=True,
+                 halo=True)
         foot = ("态动，读出不动", "state moves, readout stays") if i == 0 else ("态不动，读出倒着转",
                                                                          "state stays, readout turns back")
         p.text(cx, 280, fig.t(*foot), size=13, color="dim", anchor="middle")

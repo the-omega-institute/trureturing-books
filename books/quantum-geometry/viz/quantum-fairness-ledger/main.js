@@ -399,7 +399,7 @@
     if (S.scene === 'seat') {
       const R = seatRead();
       $('roKeyL').textContent = L('拿 ψ 量 φ · 拿 φ 量 ψ', 'φ measured with ψ · ψ measured with φ');
-      $('roKey').innerHTML = `<span class="c-cy">${fix(R.wPsiPhi, 4)}</span> = <span class="c-cy">${fix(R.wPhiPsi, 4)}</span> <span class="okmark">✓</span>`; $('roKeySub').textContent = '|⟨φ|ψ⟩|² = |⟨ψ|φ⟩|²';
+      $('roKey').innerHTML = `<span class="c-cy">${fix(R.wPsiPhi, 4)}</span> = <span class="c-cy">${fix(R.wPhiPsi, 4)}</span> ✓`; $('roKeySub').textContent = '|⟨φ|ψ⟩|² = |⟨ψ|φ⟩|²';
       set(1, L('球冠里的点', 'points in the cap'), `${fix(100 * R.share, 1)}%`, 'c'); set(2, L('应占 (1 − cos α)/2', 'expected (1 − cos α)/2'), `${fix(100 * R.theory, 1)}%`);
       set(3, L('质心离球心', 'centroid from centre'), fix(R.cen, 3)); set(4, L('(1 + r<sub>ψ</sub>·r<sub>φ</sub>)/2', '(1 + r<sub>ψ</sub>·r<sub>φ</sub>)/2'), fix(R.wBloch, 4));
       $('roNote').textContent = L(`换一对态：两根柱子永远一样高，|⟨φ|ψ⟩|² = |⟨ψ|φ⟩|² 是恒等式。换一根轴：哈尔测度下球冠恰占 (1 − cos α)/2，与轴无关；这 ${R.n} 个固定种子点数出来的份额只围着它起伏，换轴会多几个或少几个点。`, `Another pair of states: the two bars are always equally tall, since |⟨φ|ψ⟩|² = |⟨ψ|φ⟩|² is an identity. Another axis: under the Haar measure the cap holds exactly (1 − cos α)/2 whatever the axis; the count of these ${R.n} fixed-seed points only scatters around it, a few points more or fewer as the axis moves.`);
@@ -407,7 +407,7 @@
     } else if (S.scene === 'gain') {
       const R = gainRead();
       $('roKeyL').textContent = L('线² + 面积²', 'line² + area²');
-      $('roKey').innerHTML = `<span class="c-cy">${fix(R.D * R.D, 3)}</span> + <span class="c-mg">${fix(R.V * R.V, 3)}</span> = ${fix(R.D * R.D + R.V * R.V, 3)} <span class="okmark">✓</span>`; $('roKeySub').textContent = L('无论箭头倾斜多少', 'however the arrow tilts');
+      $('roKey').innerHTML = `<span class="c-cy">${fix(R.D * R.D, 3)}</span> + <span class="c-mg">${fix(R.V * R.V, 3)}</span> = ${fix(R.D * R.D + R.V * R.V, 3)} ✓`; $('roKeySub').textContent = L('无论箭头倾斜多少', 'however the arrow tilts');
       set(1, L('线 D（可区分度）', 'line D (distinguishability)'), fix(R.D, 4), 'c'); set(2, L('面积 V（相干）', 'area V (coherence)'), fix(R.V, 4), 'm');
       set(3, L('中心化纯度 Tr ρ² − ½', 'centred purity Tr ρ² − ½'), fix(R.budget, 4)); set(4, L('确定度 + 残余', 'certainty + residual'), `${fix(R.visible, 4)} + ${fix(R.residual, 4)}`);
       // r = 0 has no direction; otherwise the tilt decides: exact words only at 0°, 90° and 180°, shares of r² elsewhere
@@ -421,7 +421,7 @@
     } else if (S.scene === 'bonds') {
       const R = bondsRead();
       $('roKeyL').textContent = L('A 留下的 + 三份纠缠', 'what A keeps + three tangles');
-      $('roKey').innerHTML = `<span class="c-cy">${fix(R.keep, 3)}</span> + <span class="c-mg">${fix(R.tAB, 3)}</span> + <span class="c-mg">${fix(R.tAC, 3)}</span> + <span class="c-vi">${fix(R.t3, 3)}</span> = ${fix(R.total, 3)} <span class="okmark">✓</span>`; $('roKeySub').innerHTML = '‖r<sub>A</sub>‖² + τ<sub>AB</sub> + τ<sub>AC</sub> + τ₃';
+      $('roKey').innerHTML = `<span class="c-cy">${fix(R.keep, 3)}</span> + <span class="c-mg">${fix(R.tAB, 3)}</span> + <span class="c-mg">${fix(R.tAC, 3)}</span> + <span class="c-vi">${fix(R.t3, 3)}</span> = ${fix(R.total, 3)} ✓`; $('roKeySub').innerHTML = '‖r<sub>A</sub>‖² + τ<sub>AB</sub> + τ<sub>AC</sub> + τ₃';
       set(1, 'τ<sub>AB</sub> = 4a²b²', fix(R.tAB, 4), 'm'); set(2, 'τ<sub>AC</sub> = 4a²c²', fix(R.tAC, 4), 'm'); set(3, 'τ₃ = 4a²g²', fix(R.t3, 4)); set(4, 'τ<sub>A(BC)</sub> = 4 det ρ<sub>A</sub>', fix(R.tABC, 4));
       $('roNote').textContent = R.keep > 0.999 ? L('直积态：A 留着整支箭头，谁也没分到。', 'A product state: A keeps its whole arrow and shares nothing.')
         : R.tAB > 0.999 ? L('贝尔态：全部预算给了 B，A 的箭头缩回球心，C 分不到。', 'The Bell state: the whole budget goes to B; A\'s arrow shrinks to the centre and C gets nothing.')
@@ -439,7 +439,7 @@
     } else {
       const E = ergodicRead(), T = E.T, d1 = T ? E.o1.disc[T - 1] : 0, d2 = T ? E.o2.disc[T - 1] : 0;
       $('roKeyL').textContent = L('命中数 − T(2 − φ)', 'hits − T(2 − φ)');
-      $('roKey').innerHTML = `<span class="c-cy">${kit.sgn(d1, 3)}</span> · ${kit.sgn(d2, 3)} <span class="okmark">|·| &lt; 1 ✓</span>`; $('roKeySub').textContent = L('① 与 ② 两位观察者', 'observers ① and ②');
+      $('roKey').innerHTML = `<span class="c-cy">${kit.sgn(d1, 3)}</span> · ${kit.sgn(d2, 3)} |·| &lt; 1 ✓`; $('roKeySub').textContent = L('① 与 ② 两位观察者', 'observers ① and ②');
       set(1, L('① 的份额', 'share of ①'), T ? fix(E.o1.hits / T, 4) : '—', 'c'); set(2, L('② 的份额', 'share of ②'), T ? fix(E.o2.hits / T, 4) : '—');
       set(3, L('窗口 2 − φ', 'window 2 − φ'), fix(WIN, 4)); set(4, L('最长间隔（前 2000 步）', 'longest gap (first 2000 steps)'), String(E.gapMax));
       $('roNote').textContent = L(`起点相位 0 与 ${fix(S.u2, 2)}：短期各有参差，长程都分到 2 − φ，误差不超过 1/T。`, `Starting phases 0 and ${fix(S.u2, 2)}: uneven in the short run, both get 2 − φ in the long run, off by less than 1/T.`);

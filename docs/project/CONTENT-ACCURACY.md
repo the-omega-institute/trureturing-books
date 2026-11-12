@@ -1297,3 +1297,10 @@ C5/C6 留给现有 PR119 shared optimum/sample/mincut owner，未重复修改正
 完整证据、逐路径摘要、两父版本补丁摘要、直接路线终态／归属与账本前缀保全见 `/tmp/qg-template-v051-sync-evidence/main159-semantic-reconciliation-20261112/` 的 `source-handoff.json`、`source-handoff-preservation.json`、`worker-changed-path-digests.json`、`final-checks-result.json` 与 `direct-route-disposition.json`。八部既有影片32项输入与HEAD精确对应，004／007纠错字节保留；新增010四项输入与来稿一致，仅在第39章嵌入，未继承八影片验收。新增31–39和010只作出版依赖。共享可见性仍由上游受保护工作处理，未读取／复制／修改；实际CI PDF的ch05／ch26每份五次组合附标缺字绘制及独立Mac字体类别限制保留，由别处处理，不改符号。
 
 第2次仍留给完成当前源后、正式模板前置条件就绪时的相关HTML／屏幕与印刷PDF／EPUB／site／deck及双语深浅手机读者验证；旧6fbc产物和CI不等于当前合并输出。仍欠119 R3、127 R3、134／139／141 initial R1，以及共享布局后114 R5／118未完成R4／130 R2和受影响bridge rerun；取消席位与历史9/35不作当前批准。旧原生阅读器／EPUB／整片／音频限制保留。HEAD／MERGE_HEAD、索引条目序列及48条未合并路径保持，但最终发现 `.git/index` 文件字节摘要已由 `4cf036f0652a52b835792cfab344995edf19e7748acd8a9a1571bd0102578143` 变为 `5ed0a32ba49701de36b154155ff5101b05db5dd4235170de1e8d510a9c734e8f`，保全断言失败，原因未独立确定，不回写索引掩盖差异（详见 `preservation-deviation.json`）。源改动不提交、不暂存；调用方负责最终源封存、保留的输出assignment、独立复审、PR157、CI、合入与Pages。本记录不是全书内容、生命周期或全目标完成声明。
+
+
+## 2026-11-13：当前开篇与第八章四项有界事实修订（待 initial R1）
+
+输入 `3d9619fe82304572b1bfc976b0ddd8b57796c754` 的 1920 条显式追踪源均已读取核对；pin `a767dce5d7b4a01bd003f8722405c672f4eaaafa/dev`、479 声明、SUMMARY44、模板0.7.0、academic/A4 保持。仅修正 bloch-noise 强度端点的信道分类及抽屉前提、speed-limit-zeno 条件总返回时间、中文双副本证书归属，以及 SWAP 解读中慢过程的必要性措辞。当前两套浏览器检查普通／慢帧共622/622通过，原生产器被6项端点回归拒绝；源码检查0错误／8条既有影片警告，当前双语HTML及局部像素已核对，28张既有静态图保留原字节。窄卡标签拥挤／截字及北极标签聚集仍记录为限制，不以通过测试关闭。详见[四项修订及证据边界](CONTENT-ACCURACY-FOUR-FACTS-20261113.md)。
+
+本限定 assignment 总1／已用1／剩余0，包含调用方仍须组织的 mandatory INITIAL R1；最终整书输出／采纳保留1未使用。旧额度、历史覆盖与完整单元未审状态不变，无新增整书批准。仅交接未暂存补丁；候选对应、PR／push、独立复审、CI／合入／Pages及最终原生／EPUB／音视频验收继续由调用方负责。

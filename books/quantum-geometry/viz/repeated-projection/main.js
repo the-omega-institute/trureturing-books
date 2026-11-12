@@ -40,7 +40,7 @@
 
   /* ---------- state: a starting arrow, a line, and the presses made so far ---------- */
   const AXES = { z: [0, 0, 1], x: [1, 0, 0], n: v3.sph(45 * DEG, 20 * DEG) };
-  const S = { axis: 'z', line: AXES.z, r0: v3.sph(52 * DEG, 40 * DEG), len: 1, n: 0 };
+  const S = { axis: 'z', line: AXES.z, r0: v3.sph(52 * DEG, 40 * DEG), len: 1, n: 0, mode: 'unread', N: 3 };
   let hist = [S.r0];   // hist[k] = the arrow after k presses
   function rebuild() { hist = [S.r0]; for (let k = 0; k < S.n; k++) hist.push(unread(hist[k], S.line)); }
   /** The arrow at rail time t: between two presses it glides straight from one to the next. */
@@ -56,11 +56,37 @@
     return { done: k, moved: k ? v3.len(v3.sub(hist[k], hist[k - 1])) : null };
   }
 
+  /* ---------- the polarizer chain: read the result and keep the + branch (selective update) ----------
+     N middle polarizers between 0° and 90° at the angles α_j = jπ/(2(N + 1)); on the Bloch sphere the line of α is the
+     direction (sin 2α, 0, cos 2α). Each hop keeps the + result: ρ ↦ PρP / Tr(PρP), and its weight Tr(ρP) multiplies the
+     running total. Computed with the same 2 × 2 complex matrices. */
+  let chain = null;
+  function buildChain() {
+    const m = S.N + 1, lines = [], states = [], factors = [], totals = [1];
+    for (let j = 0; j <= m; j++) { const a = j * Math.PI / (2 * m); lines.push([Math.sin(2 * a), 0, Math.cos(2 * a)]); }
+    let rho = half(lines[0], 1), dead = false;
+    states.push(blochOf(rho));
+    for (let j = 1; j <= m; j++) {
+      const Pj = half(lines[j], 1), X = mmul(mmul(Pj, rho), Pj), w = dead ? 0 : trace(X)[0];
+      factors.push(w);
+      if (w > 1e-12 && !dead) { rho = X.map((row) => row.map((z) => [z[0] / w, z[1] / w])); } else dead = true;
+      states.push(dead ? states[j - 1] : blochOf(rho));
+      totals.push(totals[j - 1] * w);
+    }
+    chain = { m, lines, states, factors, totals, dead, step: 90 / m };
+  }
+  /** The state shown at rail time t in the chain: between two hops it slides along the meridian to the next line. */
+  function chainAt(t) {
+    const m = chain.m, k = Math.max(0, Math.min(m, Math.floor(t + 1e-9))), f = Math.min(1, Math.max(0, t - k));
+    if (k >= m || f < 1e-9 || chain.factors[k] < 1e-12) return { r: chain.states[k], k, f: 0 };
+    return { r: v3.slerp(chain.states[k], chain.states[k + 1], TRV.smooth(f)), k, f };
+  }
+
   /* ---------- stage ---------- */
   const stage = kit.stage3($('stage'), {
     canvas: $('cv'), radius: TRV.thumbMode ? 0.42 : 0.34, cy: TRV.figure ? 0.5 : 0.53, yaw: -0.5, pitch: 0.4,
     onChange: () => paint(),
-    onPick: (ev, st) => st.near(ev, at(clock.t).r) < 26,
+    onPick: (ev, st) => S.mode === 'unread' && st.near(ev, at(clock.t).r) < 26,
     onDrag: (ev, st) => {
       // the pointer holds the tip: the point under it on the sphere of the arrow's current length
       const now = v3.len(at(clock.t).r), rad = now > 0.05 ? now : (S.len > 0.05 ? S.len : 1);
@@ -75,7 +101,52 @@
       cards.mark(null); restart();
     }
   });
+  function drawChain() {
+    const st = stage, c = st.begin(), a = chainAt(clock.t), m = chain.m, cur = Math.min(m, a.f > 0 ? a.k + 1 : a.k);
+    st.sphere(1, { lat: [], lon: 0, shade: 0.08 });
+    st.circle([0, 0, 0], [0, 1, 0], 1, { color: P.faint, width: 1, alpha: 0.8, back: 0.4 });
+    // the measurement lines of the polarizers, the one of the hop in progress (or just made) bright
+    for (let j = 1; j <= m; j++) {
+      const v = chain.lines[j], hot = j === cur;
+      st.line(v3.scale(v, -1.12), v3.scale(v, 1.12), { color: P.cyan, width: hot ? 1.6 : 1, alpha: hot ? 0.9 : 0.28, back: 0.4 });
+      st.dot(v, hot ? 3.4 : 2.4, P.cyan, { alpha: hot ? 0.95 : 0.6 });
+    }
+    // where the state has been: along the meridian, on the skin
+    const done = [];
+    for (let i = 0, n = 48; i <= n; i++) {
+      const tt = clock.t * i / n, q = chainAt(tt);
+      done.push(q.r);
+    }
+    if (clock.t > 1e-6) st.path(done, { color: P.amber, width: 1.6, alpha: 0.7, back: 0.35 });
+    st.dot(chain.states[0], 4, P.sigma, { ring: true });
+    st.arrow([0, 0, 0], a.r, { color: P.amber, width: 2.4, glow: 12, headSize: 12, fade: false });
+    st.dot(a.r, 5.5, P.amber, { glow: 14, fade: false });
+    st.tag('c0', [0, 0, 1.2], L('0° 片', '0° sheet'), 'num c-cy');
+    st.tag('c9', [0, 0, -1.2], L('90° 片', '90° sheet'), 'num c-cy');
+    st.end();
+    // the running weight: a bar that only shrinks, with the final w_N marked
+    const W = c.canvas.clientWidth, H = c.canvas.clientHeight, thumb = TRV.thumbMode;
+    const bw = thumb ? 22 : 16, bh = Math.min(220, H * 0.5), bx = W - bw - 46, by = H / 2 - bh / 2 + 10;
+    const wNow = chain.totals[a.k], wEnd = chain.totals[m];
+    c.save();
+    c.strokeStyle = P.dim; c.lineWidth = 1; c.strokeRect(bx, by, bw, bh);
+    c.fillStyle = P.cyan; c.globalAlpha = 0.75; c.fillRect(bx, by + bh * (1 - wNow), bw, bh * wNow);
+    c.globalAlpha = 1; c.strokeStyle = P.ink; c.setLineDash([3, 3]);
+    c.beginPath(); c.moveTo(bx - 6, by + bh * (1 - wEnd)); c.lineTo(bx + bw + 6, by + bh * (1 - wEnd)); c.stroke(); c.setLineDash([]);
+    if (!thumb) {
+      c.font = '12px "JetBrains Mono", monospace'; c.fillStyle = P.ink; c.textAlign = 'center'; c.textBaseline = 'bottom';
+      c.fillText(L('累计 w', 'total w'), bx + bw / 2, by - 6);
+      c.textBaseline = 'top'; c.fillText(fix(wNow, 3), bx + bw / 2, by + bh + 6);
+      c.textAlign = 'left'; c.textBaseline = 'middle'; c.fillText(`w${String(S.N).replace(/\d/g, (d) => '₀₁₂₃₄₅₆₇₈₉'[d])}`, bx + bw + 9, by + bh * (1 - wEnd));
+    }
+    c.restore();
+    $('hudBig').textContent = a.k || a.f ? L(`第 ${cur} 跳 / 共 ${m} 跳`, `Hop ${cur} of ${m}`) : L(`${S.N} 片中间片 · 出发`, `${S.N} middle sheet${S.N === 1 ? '' : 's'} · start`);
+    const fk = a.k ? chain.factors[a.k - 1] : null;
+    $('hudSub').innerHTML = (fk == null ? L(`每一跳转过 ${fix(chain.step, 1)}°，过的概率 cos²(${fix(chain.step, 1)}°) = ${fix(chain.factors[0], 3)}`, `each hop turns ${fix(chain.step, 1)}°, passing with cos²(${fix(chain.step, 1)}°) = ${fix(chain.factors[0], 3)}`)
+      : L(`这一跳 × ${fix(fk, 3)}`, `this hop × ${fix(fk, 3)}`)) + ` · <span class="c-cy">${L('累计', 'total')} w = ${fix(wNow, 3)}</span>`;
+  }
   function drawStage() {
+    if (S.mode === 'chain') { drawChain(); return; }
     const st = stage, c = st.begin(), a = at(clock.t), m = measure(a.r, S.line), n = S.line, last = latest(clock.t);
     st.sphere(1, { lat: [], lon: 0, shade: 0.08 });
     // the dual plane: a disc perpendicular to the line
@@ -130,6 +201,17 @@
 
   /* ---------- strip: after each press, the two squares ---------- */
   function drawPlot() {
+    if (S.mode === 'chain') {
+      const m = chain.m, g = kit.plot($('plot'), { x: [-0.5, m + 0.5], y: [0, 1.12], pad: [30, 10, 8, 22] }), ticks = [];
+      for (let k = 0; k <= m; k++) if (m <= 8 || k % 2 === 0) ticks.push([k, String(k)]);
+      g.axes({ yTicks: [0, 0.5, 1], xTicks: ticks });
+      for (let k = 0; k <= m; k++) g.rect(k - 0.28, 0, k + 0.28, chain.totals[k], P.cyan, { alpha: 0.75 });
+      g.hline(chain.totals[m], P.ink, { dash: [4, 3], alpha: 0.7 });
+      g.vline(clock.t, P.amber, { alpha: 0.8 });
+      g.legend([[P.cyan, L('累计透过权重 w', 'total weight passed w')]]);
+      $('plotMeta').textContent = `w = ${fix(chain.totals[chainAt(clock.t).k], 3)}`;
+      return;
+    }
     const top = Math.max(3, S.n), g = kit.plot($('plot'), { x: [-0.5, top + 0.5], y: [0, 1.12], pad: [30, 10, 8, 22] });
     const ticks = []; for (let k = 0; k <= top; k++) ticks.push([k, String(k)]);
     g.axes({ yTicks: [0, 0.5, 1], xTicks: ticks });
@@ -149,6 +231,24 @@
 
   /* ---------- readouts ---------- */
   function drawText() {
+    if (S.mode === 'chain') {
+      const a = chainAt(clock.t), m = chain.m, w = chain.totals[a.k], ms = measure(a.r, chain.lines[Math.min(m, a.k)]);
+      $('roSum').innerHTML = `${fix(ms.surplus, 3)} = <span class="c-cy">${fix(ms.deviation, 3)}</span> + <span class="c-mg">${fix(ms.residual, 3)}</span>`;
+      $('roSumSub').textContent = L('读了结果：态仍在球皮上', 'result read: the state stays on the skin');
+      $('roLine').textContent = sgn(ms.dot, 3); $('roPlane').textContent = fix(ms.plane, 3);
+      $('roProb').textContent = `${fix(ms.pp, 3)} / ${fix(ms.pm, 3)}`;
+      $('roCoh').innerHTML = fix(ms.coherence, 3);
+      $('roMoved').textContent = a.k ? fix(v3.len(v3.sub(chain.states[a.k], chain.states[a.k - 1])), 3) : '—';
+      $('roNote').textContent = chain.factors[0] < 1e-12
+        ? L('没有中间片：0° 与 90° 在球面上对跖，第一跳的权重就是 0，一个也透不过。', 'No middle sheet: 0° and 90° are antipodal on the sphere, the first hop has weight 0 and nothing gets through.')
+        : L(`读结果、只留通过的一支：态每跳一次都留在球皮上（长度 ${fix(v3.len(a.r), 3)}），代价记在权重里：w = ${fix(w, 3)}，走完 ${m} 跳是 ${fix(chain.totals[m], 3)}。`, `Read the result and keep the branch that passed: after every hop the state stays on the skin (length ${fix(v3.len(a.r), 3)}), and the price is booked in the weight: w = ${fix(w, 3)}, and ${fix(chain.totals[m], 3)} after all ${m} hops.`);
+      $('pillPress').querySelector('strong').textContent = String(a.k);
+      $('pillLine').querySelector('strong').textContent = sgn(ms.dot, 2);
+      $('pillPlane').querySelector('strong').textContent = fix(ms.plane, 2);
+      $('rew').disabled = $('play').disabled = $('now').disabled = false;
+      $('press').disabled = true;
+      return;
+    }
     const a = at(clock.t), m = measure(a.r, S.line), last = latest(clock.t);
     $('roSum').innerHTML = `${fix(m.surplus, 3)} = <span class="c-cy">${fix(m.deviation, 3)}</span> + <span class="c-mg">${fix(m.residual, 3)}</span>`;
     $('roSumSub').textContent = L('Tr ρ² − ½ = Σ(p − ½)² + ½·面²', 'Tr ρ² − ½ = Σ(p − ½)² + ½·plane²');
@@ -172,14 +272,19 @@
   /* ---------- controls: the rail counts the presses ---------- */
   const clock = kit.clock({
     range: $('now'), play: $('play'), label: $('tau'), speeds: $('speedChips'), max: 1, rate: 1.1, step: 1,
-    format: (t) => L(`第 ${t.toFixed(2)} 投 <small>/ 共 ${S.n} 投</small>`, `press ${t.toFixed(2)} <small>/ ${S.n} in all</small>`),
-    onChange: (t, c) => { if (!S.n && t) c.set(0, true); paint(); }
+    format: (t) => S.mode === 'chain' ? L(`第 ${t.toFixed(2)} 跳 <small>/ 共 ${S.N + 1} 跳</small>`, `hop ${t.toFixed(2)} <small>/ ${S.N + 1} in all</small>`)
+      : L(`第 ${t.toFixed(2)} 投 <small>/ 共 ${S.n} 投</small>`, `press ${t.toFixed(2)} <small>/ ${S.n} in all</small>`),
+    onChange: (t, c) => { if (S.mode === 'unread' && !S.n && t) c.set(0, true); paint(); }
   });
   let pressing = null;
   /** Start again from the starting arrow, with no presses. */
-  function restart() { if (pressing) { pressing.cancel(); pressing = null; } S.n = 0; rebuild(); clock.pause(); clock.setMax(1, true); clock.set(0); }
+  function restart() { if (pressing) { pressing.cancel(); pressing = null; } toUnread(); S.n = 0; rebuild(); clock.pause(); clock.setMax(1, true); clock.set(0); }
+  function toUnread() { if (S.mode === 'chain') { S.mode = 'unread'; S.n = 0; rebuild(); clock.setMax(1, true); clock.set(0, true); } }
+  /** The chain with N middle sheets, from its start. */
+  function toChain(N) { if (pressing) { pressing.cancel(); pressing = null; } S.mode = 'chain'; S.N = N; buildChain(); clock.pause(); clock.setMax(chain.m, true); clock.set(0); }
   /** One more press: from where the rail is now to the next whole press, gliding there. */
   function press() {
+    if (S.mode === 'chain') return;
     if (pressing) { const p = pressing; pressing = null; p.finish(); }
     clock.pause();
     const from = clock.t, to = Math.floor(from + 1e-9) + 1;
@@ -195,9 +300,10 @@
   } });
   const axisChips = kit.chips($('axisChips'), 'axis', (v) => {
     // a new line starts again from where the arrow is now
-    cards.mark(null); const r = at(clock.t).r;
+    cards.mark(null); toUnread(); const r = at(clock.t).r;
     S.axis = v; S.line = AXES[v]; S.r0 = r; S.len = v3.len(r); fLen.set(S.len.toFixed(2)); restart();
   });
+  const fN = kit.field($('slits'), { fmt: (v) => String(v), onInput: (v) => { cards.mark(null); fN.show(); toChain(Math.round(v)); clock.play(); } });
   $('press').addEventListener('click', () => { cards.mark(null); press(); });
   $('restart').addEventListener('click', () => { cards.mark(null); restart(); });
   $('rew').addEventListener('click', () => { clock.pause(); clock.set(0); });
@@ -205,17 +311,19 @@
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
-    once: { axis: 'z', r0: v3.sph(52 * DEG, 40 * DEG), presses: 1, play: true, still: 1 },
+    // the opening view of the whole lab (not a card): just after one unread press, the arrow pulled inside the ball
+    open: { axis: 'z', r0: v3.sph(52 * DEG, 40 * DEG), presses: 1, play: false, still: 1, always: true },
     twice: { axis: 'z', r0: v3.sph(52 * DEG, 40 * DEG), presses: 3, play: true, still: 3 },
     fixed: { axis: 'n', r0: v3.scale(AXES.n, 0.7), presses: 2, play: true, still: 2 },
     perp: { axis: 'z', r0: v3.sph(90 * DEG, 30 * DEG), presses: 1, play: true, still: 1 },
-    sum: { axis: 'z', r0: v3.sph(58 * DEG, -25 * DEG), presses: 0, play: false }
+    sum: { axis: 'z', r0: v3.sph(58 * DEG, -25 * DEG), presses: 0, play: false },
+    chain: { chain: 3, play: true, still: 4 }
   };
   const NOTES = {
-    once: ['投一次：琥珀色的箭头沿着平行于品红平面的方向，落到青色的线上，只剩它在线上的影子；品红的那一份没了。虚线是原来的箭头：投完之后箭头变短，箭尖离开了球面。', 'One press: the amber arrow drops onto the cyan line, moving parallel to the magenta plane, and only its shadow on the line is left; the magenta part is gone. The dashed arrow is where it started: after the press the arrow is shorter and its tip has left the sphere.'],
     twice: ['连投三次：第一次，箭头落到青色的线上，品红的一份消失；第二次、第三次，箭头一动不动：左上角逐投列出的挪动量，第一个不为零，后两个是 0。', 'Three presses in a row: at the first the arrow drops onto the cyan line and the magenta part is gone; at the second and the third it does not move: of the three amounts moved listed at the top left, the first is not zero and the other two are 0.'],
     fixed: ['箭头本来就躺在青色的线上，没有品红的那一份。投两次，它一次也没有动。', 'The arrow already lies on the cyan line and has no magenta part. Two presses, and it never moves.'],
     perp: ['箭头整个躺在品红的对偶平面里，在青色的线上没有影子。投一次，它缩成球心的一个点。', 'The whole arrow lies in the magenta dual plane and casts no shadow on the cyan line. One press shrinks it to a point at the centre.'],
+    chain: ['换一种操作：读结果、只留通过的一支。北极是 0° 片，南极是 90° 片，中间三片把这段经线等分，青色的线是各片的测量线。琥珀色的态每跳一次都落在下一条线的端点上，仍在球皮上；右边青色的竖条是累计透过的权重，每跳乘一次 cos²(22.5°)，走完四跳停在虚线 w₃ = 0.531。', 'A different operation: read the result and keep the branch that passed. The north pole is the 0° sheet and the south pole the 90° sheet; three middle sheets divide the meridian evenly, and the cyan lines are their measurement lines. At every hop the amber state lands on the end of the next line and stays on the skin; the cyan bar on the right is the total weight passed, multiplied by cos²(22.5°) at each hop, and after four hops it stops at the dashed w₃ = 0.531.'],
     sum: ['青色的影子加上品红的那一份，正好拼回琥珀色的箭头。两份互相垂直，左上角：线² + 面² 等于箭头长度的平方。', 'The cyan shadow and the magenta part add up to the amber arrow. They are perpendicular, and at the top left line² + plane² equals the arrow\'s length squared.']
   };
   let booting = true, moving = null;
@@ -223,6 +331,12 @@
     const p = PRESETS[id];
     if (moving) { moving.cancel(); moving = null; }
     if (pressing) { pressing.cancel(); pressing = null; }
+    if (p.chain != null) {
+      fN.set(p.chain); toChain(p.chain);
+      if (TRV.still || (booting && !TRV.embed)) clock.set(p.still); else if (p.play) { if (booting) kit.autoplay(clock, $('stage')); else clock.play(); }
+      return;
+    }
+    if (S.mode === 'chain') { S.mode = 'unread'; S.r0 = p.r0; S.line = AXES[p.axis]; }
     const from = at(clock.t).r, fromLine = S.line, toLine = AXES[p.axis];
     const land = () => {
       moving = null;
@@ -230,7 +344,7 @@
       S.n = p.presses; rebuild(); clock.pause(); clock.setMax(Math.max(1, S.n), true); clock.set(0);
       // a still (cover, cited figure shot) and the opening view of the full page show the card's telling frame;
       // inside a chapter the card plays once the reader has scrolled it into view; a click plays at once
-      if (TRV.still || (booting && !TRV.embed)) { if (p.still != null) clock.set(p.still); } else if (p.play) { if (booting) kit.autoplay(clock, $('stage')); else clock.play(); }
+      if (TRV.still || (booting && !TRV.embed) || p.always) { if (p.still != null) clock.set(p.still); } else if (p.play) { if (booting) kit.autoplay(clock, $('stage')); else clock.play(); }
     };
     if (booting || TRV.still) { land(); return; }
     // carry the arrow and the line to the card's start, so the eye can follow what changed
@@ -251,7 +365,12 @@
   window.PROJECT_DEBUG = {
     get state() {
       const a = at(clock.t), m = measure(a.r, S.line), l = latest(clock.t);
-      return { axis: S.axis, line: S.line.slice(), r0: S.r0.slice(), len: S.len, n: S.n, t: clock.t, playing: clock.playing, preset: cards.current,
+      if (S.mode === 'chain') {
+        const a = chainAt(clock.t);
+        return { mode: 'chain', N: S.N, m: chain.m, t: clock.t, playing: clock.playing, preset: cards.current, r: a.r.slice(), k: a.k,
+          lines: chain.lines.map((v) => v.slice()), states: chain.states.map((v) => v.slice()), factors: chain.factors.slice(), totals: chain.totals.slice(), w: chain.totals[a.k] };
+      }
+      return { mode: 'unread', axis: S.axis, line: S.line.slice(), r0: S.r0.slice(), len: S.len, n: S.n, t: clock.t, playing: clock.playing, preset: cards.current,
         r: a.r.slice(), hist: hist.map((h) => h.slice()), done: l.done, moved: l.moved,
         dot: m.dot, plane: m.plane, purity: m.purity, pp: m.pp, pm: m.pm, surplus: m.surplus, deviation: m.deviation, residual: m.residual, coherence: m.coherence };
     },
@@ -261,7 +380,8 @@
     tip: () => { const q = stage.p(at(clock.t).r), b = $('cv').getBoundingClientRect(); return [b.left + q[0], b.top + q[1]]; }
   };
   window.TRV_THUMB = () => { applyPreset('sum'); cards.mark('sum'); stage.cam.yaw = -0.5; stage.cam.pitch = 0.4; paint.now(); };
-  cards.pick(cards.initial('twice'));
+  const first = cards.initial(null);
+  if (first) cards.pick(first); else { applyPreset('open'); cards.mark(null); }
   booting = false;
   paint();
 })();

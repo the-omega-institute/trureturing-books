@@ -71,7 +71,7 @@ The complete $8\times 8$ multiplication Cayley table for the canonical basis bla
 :::
 
 ::: {.figure src="appb-cayley"}
-**Which blade a product lands on is the XOR of the masks; its sign is the parity of the inversions.** Rows are the left factor $E_a$, columns the right factor $E_b$, each blade with its three-bit mask; each cell is $E_a E_b$, cyan where the sign is $+$ and magenta where it is $-$. The first row and column are all cyan; on the diagonal, $1, e_1, e_2, e_3$ square to $+1$ and $e_{12}, e_{13}, e_{23}, e_{123}$ to $-1$; $40$ of the $64$ cells are positive and $24$ negative. Every cell is computed as $(-1)^{\operatorname{inv}(a, b)} E_{a \oplus b}$ and checked cell by cell against the table above. Literature result, not formalized in this book.
+**Which blade a product lands on is the XOR of the masks; its sign is the parity of the inversions.** Rows are the left factor $E_a$, columns the right factor $E_b$, each blade with its three-bit mask; each cell is $E_a E_b$, cyan where the sign is $+$ and magenta where it is $-$. The first row and column are all cyan; on the diagonal, $1, e_1, e_2, e_3$ square to $+1$ and $e_{12}, e_{13}, e_{23}, e_{123}$ to $-1$; $40$ of the $64$ cells are positive and $24$ negative. Thin lines split the rows and columns by grade into blocks of $1 + 3 + 3 + 1$: two vectors multiply to a scalar or a bivector only, and two blades of even grade multiply to an even grade. Every cell is computed as $(-1)^{\operatorname{inv}(a, b)} E_{a \oplus b}$ and checked cell by cell against the table above. Literature result, not formalized in this book.
 :::
 
 ---

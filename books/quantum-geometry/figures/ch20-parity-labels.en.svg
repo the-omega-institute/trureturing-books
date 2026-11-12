@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch20-parity-labels" data-lang="en" data-wrap="1" viewBox="0 0 716 300" width="716" height="300" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="Two panels. Left: a two-qubit circuit; two horizontal lines are wires 0 and 1, and from left to right come a CNOT (control on wire 0, target on wire 1), an R_z on wire 1, and another CNOT. Above each stretch of wire is its parity label at that moment: wire 0 stays cyan z₀; wire 1 starts as cyan z₁, becomes magenta z₀ ⊕ z₁ after the first CNOT, where R_z puts in its phase, and returns to cyan z₁ after the second. The first CNOT is marked “even birth”, the second “odd return”, and beneath: 1 + 1 = 2 CNOTs. Right: the 7 nonzero even parity labels that must appear on a wire for four qubits, in magenta, from z₀ ⊕ z₁ to z₀ ⊕ z₁ ⊕ z₂ ⊕ z₃ in two columns; below, at least 7 even outputs plus at least 3 returns make 10, with a green LEAN ✓ tag.">
+<title>Two panels. Left: a two-qubit circuit; two horizontal lines are wires 0 and 1, and from left to right come a CNOT (control on wire 0, target on wire 1), an R_z on wire 1, and another CNOT. Above each stretch of wire is its parity label at that moment: wire 0 stays cyan z₀; wire 1 starts as cyan z₁, becomes magenta z₀ ⊕ z₁ after the first CNOT, where R_z puts in its phase, and returns to cyan z₁ after the second. The first CNOT is marked “even birth”, the second “odd return”, and beneath: 1 + 1 = 2 CNOTs. Right: the 7 nonzero even parity labels that must appear on a wire for four qubits, in magenta, from z₀ ⊕ z₁ to z₀ ⊕ z₁ ⊕ z₂ ⊕ z₃ in two columns; below, at least 7 even outputs plus at least 3 returns make 10, with a green LEAN ✓ tag.</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="372" height="300" viewBox="0 0 372 300">
+<text class="tf-ink" x="186" y="22" font-size="14" text-anchor="middle" font-weight="600">two qubits: birth, phase, return</text>
+<line x1="44" y1="104" x2="356" y2="104" class="ts-dim" stroke-width="1.8" fill="none"/>
+<text class="tf-dim" x="36" y="109.04" font-size="14" text-anchor="end">q₀</text>
+<line x1="44" y1="184" x2="356" y2="184" class="ts-dim" stroke-width="1.8" fill="none"/>
+<text class="tf-dim" x="36" y="189.04" font-size="14" text-anchor="end">q₁</text>
+<text class="tf-cyan" x="74" y="92" font-size="14" text-anchor="middle" font-weight="400">z₀</text>
+<text class="tf-cyan" x="74" y="172" font-size="14" text-anchor="middle" font-weight="400">z₁</text>
+<text class="tf-cyan" x="200" y="92" font-size="14" text-anchor="middle" font-weight="400">z₀</text>
+<line x1="110" y1="184" x2="290" y2="184" class="ts-magenta" stroke-width="4" fill="none"/>
+<text class="tf-magenta" x="200" y="154" font-size="14" text-anchor="middle" font-weight="600">z₀ ⊕ z₁</text>
+<text class="tf-cyan" x="326" y="92" font-size="14" text-anchor="middle" font-weight="400">z₀</text>
+<text class="tf-cyan" x="326" y="172" font-size="14" text-anchor="middle" font-weight="400">z₁</text>
+<line x1="104" y1="104" x2="104" y2="197" class="ts-ink" stroke-width="2" fill="none"/>
+<circle cx="104" cy="104" r="5" class="tf-ink"/>
+<circle cx="104" cy="184" r="13" class="ts-ink tf-bg" stroke-width="2"/>
+<line x1="91" y1="184" x2="117" y2="184" class="ts-ink" stroke-width="2" fill="none"/>
+<line x1="296" y1="104" x2="296" y2="197" class="ts-ink" stroke-width="2" fill="none"/>
+<circle cx="296" cy="104" r="5" class="tf-ink"/>
+<circle cx="296" cy="184" r="13" class="ts-ink tf-bg" stroke-width="2"/>
+<line x1="283" y1="184" x2="309" y2="184" class="ts-ink" stroke-width="2" fill="none"/>
+<rect x="178" y="169" width="44" height="30" rx="4" class="ts-ink tf-panel" stroke-width="1.8"/>
+<text class="tf-ink" x="200" y="189.04" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan><tspan dy="0.28em" font-size="72%">z</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-magenta" x="104" y="224" font-size="13" text-anchor="middle">even birth</text>
+<text class="tf-cyan" x="296" y="224" font-size="13" text-anchor="middle">odd return</text>
+<text class="tf-ink" x="186" y="274" font-size="14" text-anchor="middle">CNOTs: 1 + 1 = 2 = 2¹ + 2 − 2</text>
+</svg>
+<svg class="tr-fig-panel" x="388" y="0" width="328" height="300" viewBox="0 0 328 300">
+<text class="tf-ink" x="164" y="22" font-size="14" text-anchor="middle" font-weight="600">four qubits: all 7 even labels</text>
+<text class="tf-magenta" x="28" y="66" font-size="14">z₀ ⊕ z₁</text>
+<text class="tf-magenta" x="28" y="96" font-size="14">z₀ ⊕ z₂</text>
+<text class="tf-magenta" x="28" y="126" font-size="14">z₀ ⊕ z₃</text>
+<text class="tf-magenta" x="178" y="66" font-size="14">z₁ ⊕ z₂</text>
+<text class="tf-magenta" x="178" y="96" font-size="14">z₁ ⊕ z₃</text>
+<text class="tf-magenta" x="178" y="126" font-size="14">z₂ ⊕ z₃</text>
+<text class="tf-magenta" x="164" y="156" font-size="14" text-anchor="middle">z₀ ⊕ z₁ ⊕ z₂ ⊕ z₃</text>
+<text class="tf-ink" x="164" y="204" font-size="14" text-anchor="middle">≥ 7 even outputs + ≥ 3 returns = 10</text>
+<rect x="43.9" y="233" width="240.2" height="22" class="ts-ok tf-ok" stroke-width="1.2" fill-opacity="0.12"/>
+<text class="tf-ok tr-fig-mono" x="50.9" y="250" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">LEAN ✓  CNOT ≥ 2²ⁿ⁻¹ + 2n − 2</text>
+</svg>
+</svg>

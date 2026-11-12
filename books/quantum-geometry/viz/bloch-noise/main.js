@@ -14,9 +14,24 @@
   const DEG = Math.PI / 180;
 
   /* ---------- model ---------- */
-  const S = { ch: 'amp', p: 0.3, ratio: 2, rho0: [0, 0, -1], sig0: [1, 0, 0] };
-  /** Past T₂ = 2 T₁ the north-pole map keeps more sideways than √a and is no longer a channel (nor amplitude damping). */
-  const notChannel = () => S.ch === 'amp' && S.ratio > 2 + 1e-9;
+  const S = { ch: 'amp', p: 0.3, ratio: 2, rho0: [0, 0, -1], sig0: [1, 0, 0], scene: 'noise' };
+  /* The environment scene (§4.1): the rail is the angle θ_env between the two records |e₀⟩, |e₁⟩ of the environment.
+     A pure state a|0⟩ + b|1⟩ is coupled to the environment as a|0⟩|e₀⟩ + b|1⟩|e₁⟩; tracing the environment out gives
+     ρ_S = [[|a|², a b̄ ⟨e₁|e₀⟩], [ā b ⟨e₀|e₁⟩, |b|²]] with e₀ = (1, 0), e₁ = (cos θ, sin θ). */
+  const env = () => S.scene === 'env';
+  function reduced(r, th) {
+    const t = Math.acos(kit.clamp(r[2], -1, 1)) / 2, ph = Math.atan2(r[1], r[0]);
+    const a = [Math.cos(t), 0], b = [Math.sin(t) * Math.cos(ph), Math.sin(t) * Math.sin(ph)];
+    const e0 = [[1, 0], [0, 0]], e1 = [[Math.cos(th), 0], [Math.sin(th), 0]];   // two real record vectors, as complex pairs
+    const ip = (u, v) => [u[0][0] * v[0][0] + u[0][1] * v[0][1] + u[1][0] * v[1][0] + u[1][1] * v[1][1], u[0][0] * v[0][1] - u[0][1] * v[0][0] + u[1][0] * v[1][1] - u[1][1] * v[1][0]];   // ⟨u|v⟩
+    const cm = (x, y) => [x[0] * y[0] - x[1] * y[1], x[0] * y[1] + x[1] * y[0]], cj = (x) => [x[0], -x[1]];
+    const r10 = cm(cm(cj(a), b), ip(e0, e1)), r00 = a[0] * a[0] + a[1] * a[1], r11 = b[0] * b[0] + b[1] * b[1];
+    return [2 * r10[0], 2 * r10[1], r00 - r11];   // x = 2 Re ρ₁₀, y = 2 Im ρ₁₀, z = ρ₀₀ − ρ₁₁
+  }
+  /** One step of the amplitude family breaks the north-pole ball criterion: λ² > a for λ = a^(T₁/T₂), a = 1 − p.
+      For 0 < p < 1 this happens exactly when T₂ > 2 T₁; the map then is no channel (nor amplitude damping). At the
+      endpoints λ² = a for every ratio: p = 0 is the identity and p = 1 resets the whole ball to the north pole. */
+  const notChannel = () => { if (S.ch !== 'amp') return false; const m = whole(1); return m.lam * m.lam > m.a + 1e-12; };
   const chName = (c) => (c === 'amp' && notChannel() ? L('固定北极的仿射映射（不是信道）', 'A map fixing the north pole (not a channel)')
     : c === 'dephase' && S.p > 1 - 1e-12 ? L('捏合（完全去相干）', 'Pinching (complete dephasing)')
       : ({ dephase: L('相位阻尼', 'Phase damping'), amp: L('振幅阻尼', 'Amplitude damping'), depol: L('去极化', 'Depolarizing') })[c]);
@@ -29,6 +44,7 @@
   }
   /** The map at rail position N: whole steps exactly, a convex combination of two neighbouring whole steps between them. */
   function mapAt(N) {
+    if (env()) return { lam: Math.cos(N * DEG), a: 1, h: 0 };   // the reduced map for every input: the overlap ⟨e₀|e₁⟩ = cos θ_env
     const k = Math.floor(N + 1e-12), u = N - k;
     const m0 = whole(k);
     if (u < 1e-12) return m0;
@@ -45,7 +61,7 @@
     return { z: best.z, r: Math.sqrt(Math.max(0, best.g)) };
   }
   function read(N) {
-    const m = mapAt(N), rho = apply(m, S.rho0), sig = apply(m, S.sig0), far = farthest(m);
+    const m = mapAt(N), rho = env() ? reduced(S.rho0, N * DEG) : apply(m, S.rho0), sig = env() ? reduced(S.sig0, N * DEG) : apply(m, S.sig0), far = farthest(m);
     const T0 = v3.len(v3.sub(S.rho0, S.sig0)) / 2, T = v3.len(v3.sub(rho, sig)) / 2;
     return {
       m, rho, sig, T0, T, len: v3.len(rho), far,
@@ -85,7 +101,8 @@
     st.sphere(1, { lat: [0], lon: 2, shade: 0.04, alpha: TRV.thumbMode ? 0.75 : 0.4 });
     st.line([0, 0, -1.18], [0, 0, 1.18], { color: P.faint, width: 1, alpha: 0.9, back: 0.5 });
     st.line([-1.12, 0, 0], [1.12, 0, 0], { color: P.faint, width: 1, alpha: 0.6, back: 0.5 });
-    st.tag('k0', [0, 0, 1.08], '|0⟩', 'num', now.escapes ? { dx: -26, dy: -46 } : { dx: -22 });   // above the bulge when the image pierces the skin st.tag('k1', [0, 0, -1.08], '|1⟩', 'num', { dx: -22 }); st.tag('kp', [1.24, 0, 0], '|+⟩', 'num');
+    const onNorth = [now.rho, now.sig].some((v) => v3.len(v3.sub(v, [0, 0, 1])) < 0.2);
+    st.tag('k0', [0, 0, 1.08], '|0⟩', 'num', now.escapes ? { dx: -64, dy: -22 } : onNorth ? { dx: -52, dy: -4 } : { dx: -22 });   // above the bulge when the image pierces the skin st.tag('k1', [0, 0, -1.08], '|1⟩', 'num', { dx: -22 }); st.tag('kp', [1.24, 0, 0], '|+⟩', 'num');
     // the image of the ball: outline of the spheroid with half-axes (λ, λ, a) centred at (0, 0, h)
     const e1 = v3.unit(v3.cross(D, Math.abs(D[2]) < 0.95 ? [0, 0, 1] : [1, 0, 0])), e2 = v3.cross(D, e1), outline = [];
     for (let i = 0; i < 96; i++) {
@@ -119,6 +136,10 @@
       st.dot(q, 5.5, P.magenta, { glow: 12, fade: false });
       st.tag('esc', q, L(`出界 ‖r‖ = ${fix(now.far.r, 3)}`, `out ‖r‖ = ${fix(now.far.r, 3)}`), 'num c-mg', { dx: 62, dy: -10 });
     }
+    // pinching: the sideways part of each start, the part that is squashed away (its square carries the coherence mass)
+    if (S.ch === 'dephase' && S.p > 1 - 1e-12 && !env() && clock.t > 1e-9) {
+      for (const v of [S.rho0, S.sig0]) st.line([0, 0, v[2]], v, { color: P.magenta, width: 2.6 * thick, alpha: 0.95, back: 0.6 });
+    }
     // the two states: where they started (rings on the skin), the road travelled, where they are now
     const road = (v) => { const pts = [], n = Math.max(2, Math.ceil(clock.t * 24)); for (let i = 0; i <= n; i++) pts.push(apply(mapAt(clock.t * i / n), v)); return pts; };
     if (clock.t > 1e-9) {
@@ -128,7 +149,7 @@
     }
     st.dot(S.sig0, 5, P.ink, { ring: true, alpha: 0.7 });
     st.dot(S.rho0, 5.5, P.amber, { ring: true, alpha: 0.8 });
-    st.line(now.rho, now.sig, { color: P.ink, width: 2.2 * thick, alpha: 0.95, back: 0.7 });
+    if (!notChannel()) st.line(now.rho, now.sig, { color: P.ink, width: 2.2 * thick, alpha: 0.95, back: 0.7 });   // no distance for a map that is not a channel
     st.dot(now.sig, 4.5, P.ink, { fade: false });
     st.arrow([0, 0, 0], now.rho, { color: P.amber, width: 2.6, glow: 12, headSize: 11, fade: false });
     st.dot(now.rho, 5, P.amber, { glow: 14, fade: false });
@@ -143,14 +164,42 @@
     if (dl > 46 && !notChannel()) st.tag('T', v3.scale(v3.add(now.rho, now.sig), 0.5), `T ${fix(now.T, 3)}`, 'num', { dx: 14 * -uy, dy: 14 * ux });
     st.end();
     $('legEsc').hidden = !now.escapes;
+    if (env()) {
+      drawRecords(c, clock.t * DEG);
+      $('hudBig').textContent = L(`偏迹 · θₑₙᵥ = ${fix(clock.t, 1)}°`, `partial trace · θₑₙᵥ = ${fix(clock.t, 1)}°`);
+      $('hudSub').innerHTML = L(`局部箭头长 cos θ<sub>env</sub> = <b class="c-cy">${fix(now.len, 3)}</b> · 两条记录正交（90°）时缩到球心`, `local arrow length cos θ<sub>env</sub> = <b class="c-cy">${fix(now.len, 3)}</b> · at orthogonal records (90°) it reaches the centre`);
+      return;
+    }
     $('hudBig').textContent = `${chName(S.ch)} · N = ${fix(clock.t, 2)}`;
     const k = Math.floor(clock.t + 1e-12), between = clock.t - k > 1e-9;
     let sub;
-    if (S.ch === 'dephase') sub = L(`横向 ×${fix(m.lam, 2)}（= cos θ_env，θ_env = ${fix(Math.acos(kit.clamp(m.lam, -1, 1)) / DEG, 1)}°）· 高度不变 · ρ 的相干质量 ${fix(now.mass0, 3)} → ${fix(now.mass, 3)}`, `across ×${fix(m.lam, 2)} (= cos θ_env, θ_env = ${fix(Math.acos(kit.clamp(m.lam, -1, 1)) / DEG, 1)}°) · height kept · coherence mass of ρ ${fix(now.mass0, 3)} → ${fix(now.mass, 3)}`);
+    if (S.ch === 'dephase') sub = L(`横向 ×${fix(m.lam, 2)}（= cos θ<sub>env</sub>，θ<sub>env</sub> = ${fix(Math.acos(kit.clamp(m.lam, -1, 1)) / DEG, 1)}°）· 高度不变 · ρ 的相干质量 ${fix(now.mass0, 3)} → ${fix(now.mass, 3)}`, `across ×${fix(m.lam, 2)} (= cos θ<sub>env</sub>, θ<sub>env</sub> = ${fix(Math.acos(kit.clamp(m.lam, -1, 1)) / DEG, 1)}°) · height kept · coherence mass of ρ ${fix(now.mass0, 3)} → ${fix(now.mass, 3)}`);
     else if (S.ch === 'depol') sub = L(`整体 ×${fix(m.a, 2)}，球心不动`, `everything ×${fix(m.a, 2)}, the centre stays`);
     else sub = L(`横向 ×${fix(m.lam, 2)} · 纵向 ×${fix(m.a, 2)} · 球心上移 ${fix(m.h, 2)}`, `across ×${fix(m.lam, 2)} · up ×${fix(m.a, 2)} · centre lifted ${fix(m.h, 2)}`)
       + (notChannel() ? L(` · T₂ = ${fix(S.ratio, 1)} T₁ > 2 T₁`, ` · T₂ = ${fix(S.ratio, 1)} T₁ > 2 T₁`) : '');
     $('hudSub').innerHTML = sub + (between ? L(` · 第 ${k} 与第 ${k + 1} 步之间`, ` · between steps ${k} and ${k + 1}`) : '');
+  }
+
+  /** The environment window: the two records |e₀⟩, |e₁⟩ at the angle θ_env, and the cyan shadow ⟨e₀|e₁⟩ = cos θ_env. */
+  function drawRecords(c, th) {
+    const W = c.canvas.clientWidth, H = c.canvas.clientHeight, thumb = TRV.thumbMode;
+    const Lp = Math.min(96, W * 0.16), ox = W - Lp - 70, oy = H - 70;
+    c.save();
+    c.strokeStyle = P.faint; c.lineWidth = 1; c.strokeRect(ox - 16, oy - Lp - 30, Lp + 66, Lp + 52);
+    const tip = [ox + Lp * Math.cos(th), oy - Lp * Math.sin(th)];
+    c.strokeStyle = P.dim; c.setLineDash([3, 3]); c.beginPath(); c.moveTo(tip[0], tip[1]); c.lineTo(tip[0], oy); c.stroke(); c.setLineDash([]);
+    c.strokeStyle = P.cyan; c.lineWidth = thumb ? 8 : 6; c.lineCap = 'round'; c.beginPath(); c.moveTo(ox, oy); c.lineTo(ox + Lp * Math.cos(th), oy); c.stroke();
+    c.strokeStyle = P.ink; c.lineWidth = 2; c.lineCap = 'butt';
+    for (const [x, y] of [[ox + Lp, oy], tip]) { c.beginPath(); c.moveTo(ox, oy); c.lineTo(x, y); c.stroke(); }
+    c.beginPath(); c.arc(ox, oy, 22, -th, 0); c.stroke();
+    if (!thumb) {
+      c.font = '12px "JetBrains Mono", monospace'; c.fillStyle = P.ink; c.textBaseline = 'middle'; c.textAlign = 'left';
+      c.fillText('|e₀⟩', ox + Lp + 4, oy); c.fillText('|e₁⟩', tip[0] + 4, tip[1] - 6);
+      c.fillText('θ', ox + 26 * Math.cos(th / 2) + 2, oy - 26 * Math.sin(th / 2));
+      c.textAlign = 'center'; c.textBaseline = 'top'; c.fillStyle = P.cyan; c.fillText(`cos θ = ${fix(Math.cos(th), 2)}`, ox + Lp / 2, oy + 6);
+      c.fillStyle = P.dim; c.textBaseline = 'bottom'; c.fillText(L('环境的两条记录', 'two records in the environment'), ox + Lp / 2 + 8, oy - Lp - 14);
+    }
+    c.restore();
   }
 
   /* ---------- strip: the half-axes, and the distance, against the steps ---------- */
@@ -206,22 +255,24 @@
   /* ---------- controls ---------- */
   const clock = kit.clock({
     range: $('now'), play: $('play'), label: $('tau'), speeds: $('speedChips'), max: 8, rate: 2, step: 1,
-    format: (t, max) => `N ${t.toFixed(2)} <small>/ ${max.toFixed(0)} ${L('步', max === 1 ? 'step' : 'steps')}</small>`,
+    format: (t, max) => (env() ? `θₑₙᵥ ${t.toFixed(1)}° <small>/ 90°</small>` : `N ${t.toFixed(2)} <small>/ ${max.toFixed(0)} ${L('步', max === 1 ? 'step' : 'steps')}</small>`),
     onChange: () => paint()
   });
   /** The rail length that shows a noise to its end, unless a card says otherwise. */
   const autoMax = (p) => (p >= 0.999 ? 1 : p < 0.01 ? 8 : Math.min(8, Math.max(1, Math.ceil(Math.log(0.05) / Math.log(1 - p)))));
-  function setMax(max) { clock.setMax(max, true); clock.rate = max / 4; clock.set(Math.min(clock.t, max)); }
+  function setMax(max) { clock.setMax(max, true); clock.rate = max / 4; clock.step = env() ? 15 : 1; clock.set(Math.min(clock.t, max)); }
   function touched() { cards.mark(null); paint(); }
-  const fP = kit.field($('strength'), { fmt: (v) => fix(v, 2), onInput: (v) => { S.p = v; setMax(autoMax(v)); touched(); } });
-  const fR = kit.field($('ratio'), { fmt: (v) => fix(v, 1), onInput: (v) => { S.ratio = v; touched(); } });
-  const chChips = kit.chips($('chChips'), 'ch', (v) => { S.ch = v; touched(); });
+  /** The noise controls take the page back from the environment scene to the step-by-step noises. */
+  function toNoise() { if (env()) { S.scene = 'noise'; setMax(autoMax(S.p)); clock.set(0); } }
+  const fP = kit.field($('strength'), { fmt: (v) => fix(v, 2), onInput: (v) => { S.p = v; S.scene = 'noise'; setMax(autoMax(v)); touched(); } });
+  const fR = kit.field($('ratio'), { fmt: (v) => fix(v, 1), onInput: (v) => { S.ratio = v; toNoise(); touched(); } });
+  const chChips = kit.chips($('chChips'), 'ch', (v) => { S.ch = v; toNoise(); touched(); });
   $('rew').addEventListener('click', () => { clock.pause(); clock.set(0); });
 
   /* ---------- experiment cards ---------- */
   const at = (th, ph) => v3.sph(th * DEG, ph * DEG);
   const PRESETS = {
-    shorten: { ch: 'dephase', p: 0.3, ratio: 2, rho: [90, 0], sig: [90, 180], max: 6, still: 2 },
+    shorten: { scene: 'env', ch: 'dephase', p: 0.3, ratio: 2, rho: [90, 0], sig: [90, 180], max: 90, still: 75 },
     pinch: { ch: 'dephase', p: 1, ratio: 2, rho: [60, 30], sig: [60, 210], max: 1, still: 1 },
     dephase: { ch: 'dephase', p: 0.3, ratio: 2, rho: [50, 20], sig: [125, 250], max: 8, still: 2.5 },
     amp: { ch: 'amp', p: 0.3, ratio: 2, rho: [180, 0], sig: [90, 0], max: 8, still: 3.5 },
@@ -230,7 +281,7 @@
     centre: { ch: 'depol', p: 1, ratio: 2, rho: [0, 0], sig: [90, 0], max: 1, still: 1 }
   };
   const NOTES = {
-    shorten: ['相位阻尼一步步作用在赤道两端的 |+⟩ 与 |−⟩ 上：琥珀色的 ρ 与白色的 σ 离开球皮，沿横轴缩向球心。剩下的长度就是第 4.1 节里两条环境记录的内积 cos θ_env，舞台左上角给出这个角度。', 'Phase damping acts step by step on |+⟩ and |−⟩ at the two ends of the equator: the amber ρ and the white σ leave the skin and shrink along the horizontal axis towards the centre. The length left is the overlap cos θ_env of the two environment records of §4.1; the top left of the stage gives that angle.'],
+    shorten: ['右下角是环境的两条记录 |e₀⟩、|e₁⟩，夹角 θₑₙᵥ 沿时间轴从 0° 转到 90°，青色的影子是它们的内积 cos θₑₙᵥ。对环境求偏迹后，从 |+⟩ 出发的琥珀色 ρ（与从 |−⟩ 出发的白色 σ）沿横轴缩短，长度正是 cos θₑₙᵥ；画面停在 75°，箭头只剩 0.26。转到 90°，两条记录正交，箭头缩到球心。', 'At the bottom right are the two records |e₀⟩, |e₁⟩ of the environment; along the rail their angle θₑₙᵥ turns from 0° to 90°, and the cyan shadow is their overlap cos θₑₙᵥ. After the environment is traced out, the amber ρ that started at |+⟩ (and the white σ from |−⟩) shrinks along the horizontal axis to exactly cos θₑₙᵥ; the frame stops at 75°, where the arrow keeps 0.26. At 90° the records are orthogonal and the arrow has shrunk to the centre.'],
     pinch: ['一步完全去相干（捏合）：青色的球被压成竖直的一条线，紫色的竖轴整条不动。ρ 与 σ 高度相同、只差横向部分，落到轴上同一点，白线缩成零。', 'One step of complete dephasing (pinching): the cyan ball is squashed into a vertical line and the violet axis stays put along its whole length. ρ and σ have the same height and differ only sideways, so they land on the same point of the axis and the white line shrinks to nothing.'],
     dephase: ['每一步横向乘 0.7、高度不动：青色的球收腰成竖直的雪茄，再细成紫色的竖轴；ρ 与 σ 沿水平方向走向轴线。', 'Each step multiplies the sideways part by 0.7 and keeps the height: the cyan ball pinches into an upright cigar and thins towards the violet axis, while ρ and σ move horizontally towards it.'],
     amp: ['振幅阻尼：青色的球一边缩小一边往北极上漂，横向缩得比纵向慢；紫色的北极 |0⟩ 不动，从南极出发的 ρ 一路爬向北极。', 'Amplitude damping: the cyan ball shrinks while it drifts towards the north pole, more slowly across than up; the violet north pole |0⟩ stays put, and ρ climbs all the way from the south pole towards it.'],
@@ -242,6 +293,7 @@
   function applyPreset(id) {
     const p = PRESETS[id];
     clock.pause();
+    S.scene = p.scene || 'noise';
     S.ch = p.ch; S.p = p.p; S.ratio = p.ratio; S.rho0 = at(p.rho[0], p.rho[1]); S.sig0 = at(p.sig[0], p.sig[1]);
     chChips.set(p.ch, true); fP.set(p.p); fR.set(p.ratio);
     setMax(p.max); clock.set(0);
@@ -259,7 +311,7 @@
   window.NOISE_DEBUG = {
     get state() {
       const s = read(clock.t);
-      return { ch: S.ch, p: S.p, ratio: S.ratio, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current,
+      return { scene: S.scene, ch: S.ch, p: S.p, ratio: S.ratio, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current,
         rho0: S.rho0.slice(), sig0: S.sig0.slice(), rho: s.rho, sig: s.sig, lam: s.m.lam, a: s.m.a, h: s.m.h,
         T0: s.T0, T: s.T, len: s.len, mass0: s.mass0, mass: s.mass, escapes: s.escapes, farthest: s.far.r };
     },

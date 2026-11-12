@@ -182,6 +182,10 @@ $$
 3. **验证并入新轴后的严格拓扑加细**：将 $g$ 并入潜坐标形成二维读出 $\operatorname{conceptJoin}(\operatorname{latent}, g)(a) = (\operatorname{latent}(a), g(a))$，四个地址的联合坐标分别为 $a_0 \mapsto (0, 1)$、$a_1 \mapsto (0, 1)$、$a_2 \mapsto (0, 0)$、$a_3 \mapsto (1, 0)$。原先粘成一团的三元盲区纤维 $\{a_0, a_1, a_2\}$ 被当场劈裂为 $\{a_0, a_1\}$ 与 $\{a_2\}$ 两块正交子纤维，观测拓扑从 $2$ 个非空原子开集严格升维为 $3$ 个非空原子开集！
 :::
 
+::: {.viz src="sphere-escape" preset="split" height="500"}
+**换一种潜坐标，纤维照样被劈开。** 四个地址的解码器是常零、恒等、取反、常一；潜坐标取 $(0, 0, 0, 1)$ 时，左边那根纤维里 $a_0$、$a_1$ 的 $g$ 是 $1$，$a_2$ 的是 $0$，品红线连起 $g$ 不同的两对 $(a_0, a_2)$、$(a_1, a_2)$；把 $g$ 立成紫色的第二根轴，两块变成三块。点任一地址换它的潜坐标，$16$ 种排法里品红线总在（[@cor-complete-diagonal-topological-settlement]；这四个解码器恰是 $\{0, 1\}$ 上的全部映射，目录满射）。
+:::
+
 这正是抽象对角线不动点模式在观测拓扑中的纯粹骨架（与元数学文献的精确边界对照见 [@rem-godel-tarski-comparison-literature]）。在我们的抽象拓扑框架中，每当一个系统把某类候选解码映射装进一部关于当前潜坐标满射的目录 `decoderCatalog`，并用无不动点算子 `twist` 构造自指对角线 $g$ 时，$g$ 必然劈开原系统的某根等价类余纤维。若要同时保留旧读出并让 $g$ 连续，联合读出 $\operatorname{conceptJoin}(\operatorname{latent}, g)$ 给出所需的最小共同加细，任何同时完成这两项任务的读出都能恢复它；而若想在新坐标空间 $\mathrm{Coordinate}_{k+1} = \mathrm{Coordinate}_k \times \mathrm{Output}$ 上继续触发下一轮对角线逃逸 $g'$，则**必须以在新一轮（通常需要扩容的）地址空间 $\mathrm{Address}_{k+1}$ 上重新建立新的满射解码目录 $\operatorname{decoderCatalog}_{k+1} : \mathrm{Address}_{k+1} \twoheadrightarrow (\mathrm{Coordinate}_{k+1} \to \mathrm{Output})$ 为前提**——例如在 [@ex-cantor-godel-diagonal-table] 的四地址布尔模型中，合并后的坐标空间有 $4$ 个坐标对（对应 $2^4 = 16$ 个布尔函数，即便只看实际命中的 $3$ 根非空联合纤维也有 $2^3 = 8 > 4$ 个布尔函数），原来的 $4$ 个地址已不足以构成新阶段的满射目录，唯有连同地址空间一起向外扩容，才能开启下一层“球外之球”的攀升！
 
 ::: {.viz src="sphere-escape" preset="absorb" height="500"}
@@ -357,6 +361,10 @@ $$
 
 是单位圆内接正 $(m+2)$ 边形弓高的一半。$m = 0$（指针一步就被移出自己的支撑）时它等于 $\frac12$；$m = 1, 2, 4, 10, 98$ 时分别为 $0.2500$、$0.1464$、$0.0670$、$0.0170$、$2.47\times10^{-4}$；$m$ 很大时它按 $\frac{\pi^2}{4(m+2)^2}$ 趋于零。指针越长，记录可以越轻，留下的不可恢复误差越小，但对每个有限的 $N$ 它都严格为正。这条定理只针对这一种平移记录信道与一对标签差非零的分支，并不断言其他编码方式下也有同样的下界。
 
+::: {.viz src="sphere-escape" preset="pointer" height="500"}
+**有限指针的重叠就是多边形的边心距。** 青色是 $9$ 格指针的正弦形振幅，品红的轮廓是它平移 $\ell = 1$ 格的副本；两者的重叠 $\lvert\gamma(1)\rvert = 0.9511$（琥珀色的点）恰好落在正 $10$ 边形的边上，即边心距 $\cos\frac{\pi}{10}$，离圆上的 $1$ 还差一段品红的弓高。换指针的形状与长度、加大 $\ell$，琥珀色的点都越不过那条边（[@lem-finite-support-autocorrelation-cosine]、[@thm-finite-record-cosine-obstruction]；正弦形取到等号是页面的数值结果）。
+:::
+
 **有限门计数的硬下界。** 回到第 2 条论断本身。那里只说内接多面体与球皮之间“留着”残差，没有说至少留多少。一行球冠面积就能给出答案。
 
 ::: {.example #ex-cap-covering-gate-count title="球冠覆盖：N 个顶点的内接多面体至少留下 2/N 的残差，以及门计数的下界"}
@@ -460,7 +468,7 @@ $$
 把上述微分拓扑文献注记（[@rem-hairy-ball-adams-literature]）与本章经内核验证的相对语义对角线拓扑安顿推论（[@cor-complete-diagonal-topological-settlement]）对照阅读，可以看到同一条结构脉络：**球内的奇点与不完备，唯有借球外之球方能安顿。**
 
 ::: {.viz src="sphere-escape" height="640"}
-交互实验室 `ORTHO//ESCAPE`：四个场景画同一件事——有限步之后总有东西留在外面。对角线翻出的串不在清单里（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)）；内接多边形与圆之间的缝永不为零；余弦迭代永远差一点；有限个素数乘起来加一，素因子都在清单之外。舞台下方的两张图画出“留在外面的量”随步数的变化。把四个场景并排是本书的读法（`MODEL`），它们在数学上是四个不同的事实；依据面板同时列出 [@thm-complete-diagonal-not-continuous]、[@cor-complete-diagonal-topological-settlement] 与第二十四章的两条不动点定理。
+交互实验室 `ORTHO//ESCAPE`：六个场景画同一件事——有限步之后总有东西留在外面。对角线翻出的串不在清单里（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)）；完备目录的对角线总劈开一根旧纤维；内接多边形与圆之间的缝永不为零；有限格的记录指针平移后与自己的重叠到不了 $1$；余弦迭代永远差一点；有限个素数乘起来加一，素因子都在清单之外。舞台下方的两张图画出“留在外面的量”随步数的变化。把六个场景并排是本书的读法（`MODEL`），它们在数学上是六个不同的事实；依据面板同时列出 [@thm-complete-diagonal-not-continuous]、[@cor-complete-diagonal-topological-settlement] 与第二十四章的两条不动点定理。
 :::
 
 那么，在这座无穷无尽的升维阶梯上，算术世界本身的那些“互不相干的正交坐标轴”究竟长什么模样？当我们用“两两比较、顺序无关”的几何眼光去打量全体自然数时，为什么每一个素数 $p = 2, 3, 5, 7, \dots$ 都自动站成了一根独立的正交基准轴？让我们推开[第二十二章](ch22-primes-euler-products-and-zeros.md)的大门。
