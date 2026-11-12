@@ -57,7 +57,7 @@ $$
 ::: {.remark #rem-ch33-observer-spectrum-table title="四阶观察者连续谱总表（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 下表在六维切投准晶接受窗文献背景（[@rem-ch32-icosian-e8-literature]）之上，汇总本书四阶观察者连续谱模型（`MODEL`）与记录捏合容量定理（[@thm-ch33-observer-pinching-and-memory-spectrum]，`LEAN ✓`）的对应关系：
 
-| 观察者谱系层级（`MODEL`） | 记忆阶数与窗口特征（$\mathbb{Z}^6 = E_\parallel^3 \oplus E_\perp^3$） | 两子丈量与记录更新机制 | 主观时间质感与存在形态（`MODEL`） |
+| 观察者谱系层级（`MODEL`） | 记忆阶数与窗口特征（$\mathbb{Z}^6 \subset \mathbb{R}^6 = E_\parallel^3 \oplus E_\perp^3$） | 两子丈量与记录更新机制 | 主观时间质感与存在形态（`MODEL`） |
 | :--- | :--- | :--- | :--- |
 | **1. 规范波 / 自由光子** | 零阶记忆 $M = 0$，正交偏转角 $\theta = 90^\circ$（$\cos 90^\circ = 0$） | 纯二维横向外积旋转面传递联络，不留存局部一维对角历史锚点 | 固有时流逝归零（零帧永恒瞬间），充当跨观察者传递相位的纯粹信使 |
 | **2. 基本粒子 / 原子** | 一阶记忆 $M = 1$，单点内禀相位锚 $u_i \in E_\perp^3$ 支撑幂等存在线 | 一阶无后效两子内积更新：每次碰撞以当前自旋或能级投影瞬时响应并覆盖旧态 | 无长程叙事负担的瞬时节拍器，忠实执行局部守恒律与对等玻恩互易 |
@@ -82,9 +82,9 @@ $$
 
 不妨做一个最朴素的物理思想实验。任何身处宇宙内部的有限观察者，每一秒都在遭受海量热涨落、杂散辐射与环境擦除的随机冲刷（热力学擦除下界见[第 31 章](ch31-quantum-fairness.md) [@thm-ch31-horizon-landauer-ergodic-fairness] 第 1 款）。假如一位观察者的内部状态演化在相空间里是**中性漂移**甚或**向外发散**的——就像把一颗弹珠放在平坦桌面或倒扣碗底上——那么只需几次微小的正交扰动，它的窗口相位就会像醉汉游走一样漂离初态，“昨天的我”与“今天的我”将彻底失去内积重叠，瞬间融化在热平衡的背景白噪声里。
 
-因此，任何能够在时间风浪里连续维持“我依然是我”的存在——无论是一颗在高温振动中保持晶格对称的金刚石，还是一个在十年新陈代谢换遍全身原子后依然认得童年故乡的生命体——**其存在本身就等价于在状态空间中挖出了一座围绕接受窗向内聚拢的“自维持收缩势阱”（`MODEL`）**！每当外部微扰把状态推离平衡核，算子自指回路 $\psi_i = \psi_i(\psi_i)$ 就必须持续向内收缩并稳定在局部不动点上（有限单调收缩稳定定理见下方 [@thm-ch33-contextual-attractor-and-common-factor] 第 1 款，实轴余弦互指模型解析见下文 [@ex-ch33-mutual-cosine-monotonic-lock]）。
+因此，任何能够在时间风浪里连续维持“我依然是我”的存在——无论是一颗在高温振动中保持晶格对称的金刚石，还是一个在十年新陈代谢换遍全身原子后依然认得童年故乡的生命体——**其存在本身就等价于在状态空间中挖出了一座围绕接受窗向内聚拢的“自维持收缩势阱”（`MODEL`）**！在这一模型里，我们以算子自指回路 $\psi_i = \psi_i(\psi_i)$ 描画外部微扰后的向内恢复与局部稳定；下方 [@thm-ch33-contextual-attractor-and-common-factor] 第 1 款刻画有限集合删减的稳定化，实轴余弦模型则另见 [@ex-ch33-mutual-cosine-monotonic-lock]。
 
-在 `trureturing` 的不动点稳定性与概念诠释动力学模块中，这一“向内收缩成阱、依语境分化不动点、借不变公因子锚定客观公共世界”的完整逻辑链条，已被精确铸造为四条首尾相接的内核定理：
+在 `trureturing` 的不动点稳定性与概念诠释动力学模块中，四条内核定理为这一图景提供各有边界的结构骨架：固定更新算子在有限集合上只删不增，故有限步稳定；相邻概念的关系与读出相等封装为语境相对不动点谓词；二值语境实例见证固定意义可以相异；客观主张则按定义携带不变公因子的证明。这四款并未给出受扰物理系统的恢复动力学，势阱与收敛仍由上面的 `MODEL` 承担：
 
 ::: {.theorem #thm-ch33-contextual-attractor-and-common-factor title="有限单调收缩稳定化、语境相对不动点分岔与客观主张的不变公因子定理" lean="D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.conceptual_equivalence_and_stability_reach_fixed_point D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.context_parameters_can_select_distinct_fixed_points D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor"}
 在 `trureturing` 冻结的有限不动点稳定性与概念诠释不动点模块中，以下四项定理同时成立：
@@ -95,7 +95,7 @@ $$
    \bigl(\exists N \le (S(0)).\operatorname{ncard},\; \forall n \ge N,\; S(n) = S(N)\bigr) \;\land\; \{n \in \mathbb{N} \mid S(n + 1) \neq S(n)\}.\operatorname{ncard} \le (S(0)).\operatorname{ncard};
    $$
 
-2. **相邻概念等价与诠释稳定抵达语境相对不动点**（[`conceptual_equivalence_and_stability_reach_fixed_point`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.conceptual_equivalence_and_stability_reach_fixed_point)）：对任意类型 `Text`、`ReaderAdmission`、`Background`、`EvaluationGoal`、`Rule`、`Concept`、`Meaning`，等价关系 $\mathrm{conceptuallyEquivalent} : \mathrm{Concept} \to \mathrm{Concept} \to \mathrm{Prop}$，求值映射 $\mathrm{interpret} : \operatorname{InterpretationContext}\;\mathrm{Text}\;\mathrm{ReaderAdmission}\;\mathrm{Background}\;\mathrm{EvaluationGoal}\;\mathrm{Rule} \to \mathrm{Concept} \to \mathrm{Meaning}$，演化序列 $\mathrm{concepts} : \mathbb{N} \to \mathrm{Concept}$，固定语境 $\mathrm{context}$ 与步数 $n \in \mathbb{N}$，只要满足相邻概念等价 $\mathrm{conceptuallyEquivalent}(\mathrm{concepts}(n+1), \mathrm{concepts}(n))$ 与语境读出稳定 $\mathrm{interpret}\;\mathrm{context}\;(\mathrm{concepts}(n+1)) = \mathrm{interpret}\;\mathrm{context}\;(\mathrm{concepts}(n))$，即成立相对诠释不动点谓词 `IsRelativeInterpretationFixedPoint conceptuallyEquivalent interpret concepts context n`；
+2. **相邻概念等价与诠释稳定抵达语境相对不动点**（[`conceptual_equivalence_and_stability_reach_fixed_point`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.conceptual_equivalence_and_stability_reach_fixed_point)）：对任意类型 `Text`、`ReaderAdmission`、`Background`、`EvaluationGoal`、`Rule`、`Concept`、`Meaning`，关系 $\mathrm{conceptuallyEquivalent} : \mathrm{Concept} \to \mathrm{Concept} \to \mathrm{Prop}$，求值映射 $\mathrm{interpret} : \operatorname{InterpretationContext}\;\mathrm{Text}\;\mathrm{ReaderAdmission}\;\mathrm{Background}\;\mathrm{EvaluationGoal}\;\mathrm{Rule} \to \mathrm{Concept} \to \mathrm{Meaning}$，演化序列 $\mathrm{concepts} : \mathbb{N} \to \mathrm{Concept}$，固定语境 $\mathrm{context}$ 与步数 $n \in \mathbb{N}$，只要满足相邻概念等价 $\mathrm{conceptuallyEquivalent}(\mathrm{concepts}(n+1), \mathrm{concepts}(n))$ 与语境读出稳定 $\mathrm{interpret}\;\mathrm{context}\;(\mathrm{concepts}(n+1)) = \mathrm{interpret}\;\mathrm{context}\;(\mathrm{concepts}(n))$，即成立相对诠释不动点谓词 `IsRelativeInterpretationFixedPoint conceptuallyEquivalent interpret concepts context n`；
 3. **固定文本与规则下观察者语境参数选择相异不动点**（[`context_parameters_can_select_distinct_fixed_points`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.context_parameters_can_select_distinct_fixed_points)）：在二值有限语境族 `BinaryInterpretationContext = InterpretationContext Unit Bool Bool Bool Unit` 上，`baselineContext`（准入、背景、目标均为 `false`）与 `alternateContext`（准入、背景、目标均为 `true`）保持相同的输入文本 `text = ()` 与相同的诠释规则 `interpretationRule = ()`，但三项观察者语境参数两两相异，并在固定意义谓词 `IsBinaryFixedMeaning` 下严格锁定互不相等的不动点：
 
    $$
@@ -117,27 +117,29 @@ $$
 第 1 款由 $S(n+1) = U(S(n)) \subseteq S(n)$ 建立自然数基数序列 $n \mapsto (S(n)).\operatorname{ncard}$ 的非增单调性（`Antitone`），当相邻两步基数相等时由有限子集等基数判据 `Set.eq_of_subset_of_ncard_le` 推出 $S(n+1) = S(n)$ 从而后续步步锁死，结合 `Nat.stabilises_of_antitone` 给出稳定时刻 $N \le (S(0)).\operatorname{ncard}$，并由一切严格变化步均落在 `Set.Iio N` 内推出跳变总数上界；第 2 款直接由合取构造子 `And.intro` 将概念等价与固定语境下的像相等封装为 `IsRelativeInterpretationFixedPoint`；第 3 款对 `baselineContext` 与 `alternateContext` 展开记录字段自反性并用 `Bool.false_ne_true` 及首分量投影 `congrArg Prod.fst` 证伪三元组相等；第 4 款展开携带证明的 `ObjectiveInterpretationClaim` 定义直接提取存在见证 `commonFactor`。完整证明由 Lean 内核检查。
 :::
 
-细读 [@thm-ch33-contextual-attractor-and-common-factor] 的第 3 款与第 4 款，观察者势阱的几何品格豁然开朗：在我们的 **`MODEL`（模型诠释）** 中，哪怕面对同一座静态宇宙母格（同一份 `text` 与同一套正交几何 `interpretationRule`），携带不同内部窗口参数 $u_A \neq u_B$（对应不同的 `readerAdmission`、`background` 与 `evaluationGoal`）的两位观察者 $\mathcal{O}_A$ 与 $\mathcal{O}_B$，也会各自收敛到不同的局部不动点切片；而要想在两者之间建立真正的“客观公共事实”，绝不能靠某一方强权宣布自己代表绝对点 $C$，而必须提取出跨越两座势阱依然恒定相等的**不变公因子（`commonFactor`）**！下框图解汇集了双观察者接受窗重联双螺旋与孤立自指对比对称互指的收敛轨迹：
+细读 [@thm-ch33-contextual-attractor-and-common-factor] 的第 3 款与第 4 款，观察者势阱的几何品格豁然开朗：在我们的 **`MODEL`（模型诠释）** 中，哪怕面对同一座静态宇宙母格（同一份 `text` 与同一套正交几何 `interpretationRule`），携带不同内部窗口参数 $u_A \neq u_B$（对应不同的 `readerAdmission`、`background` 与 `evaluationGoal`）的两位观察者 $\mathcal{O}_A$ 与 $\mathcal{O}_B$，可以对应不同的局部不动点切片；而要想在其间建立真正的“客观公共事实”，绝不能靠某一方强权宣布自己代表绝对点 $C$，而须在声明的语境与意义族上选定因子提取映射，证明它对所有入选的不动点意义恒取同一**不变公因子（`commonFactor`）**！下框图解汇集了双观察者接受窗重联双螺旋与孤立自指对比对称互指的收敛轨迹：
 
 ::: {.remark #rem-ch33-mutual-attractor-figure title="互吸引子接受窗重联与余弦互指单调锁死图解（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 下图左栏结合切投准晶接受窗文献背景（[@rem-ch32-icosian-e8-literature]）与桥图极小割定理（[@prop-ch33-bridge-reconnection-mincut]，`LEAN ✓`）展示双观察者吸引子重联模型（`MODEL`）；右栏展示下文实分析算例 [@ex-ch33-mutual-cosine-monotonic-lock] 中孤立余弦迭代与二阶互指复合迭代的蛛网轨迹对比：
+**文献结果，未在本书形式化。** 下图左栏结合切投准晶接受窗文献背景（[@rem-ch32-icosian-e8-literature]）与桥图极小割定理（[@prop-ch33-bridge-reconnection-mincut]，`LEAN ✓`）展示双观察者吸引子重联模型（`MODEL`）；右栏展示下文实分析算例 [@ex-ch33-mutual-cosine-monotonic-lock] 中孤立余弦迭代与二阶互指复合迭代的蛛网轨迹对比：孤立序列按单步计时，互指序列按含两次余弦求值的完整复合轮计时，对应同步互指的偶数拍采样：
 
 ![万物皆为观察者：互吸引子接受窗重联与余弦互指单调锁死](../assets/fig-33-mutual-observer-attractors.svg)
 :::
 
 ---
 
-## 互指单调锁死：两次余弦如何保持同侧误差
+## 互指单调锁死：两面镜子如何在两步一轮中负负得正
 
 既然每位观察者自己已经是一座自维持吸引子，宇宙为什么不让每个灵魂各自关起门来孤芳自赏，却偏偏让万物生出永不停息的相互倾慕、结键与纠缠？
 
 答案就写在 [@rem-ch33-mutual-attractor-figure] 右半幅那两条截然不同的蛛网轨迹里！让我们把观察者的自维持反馈投影到一维余弦切片模型（`MODEL`）上对照孤立内省与平视互指的动力学品格（严格导数估计、中值定理证明与逐步数值账本全部封存于下框 [@ex-ch33-mutual-cosine-monotonic-lock]）：
 
 - **独自闭门内省的宿命（反向摇摆焦虑，`MODEL`）**：当孤立观察者只拿自己当镜子单步省察时，视角犹如缺乏阻尼缓冲的单摆，容易在“自卑低估”与“自负过冲”之间左右交替拉锯（解析机制见下框 [@ex-ch33-mutual-cosine-monotonic-lock] 的严格交替条款）。
-- **平视彼此丈量的奇迹（对称互指共识，`MODEL`）**：当两位观察者 $\mathcal{O}_A$ 与 $\mathcal{O}_B$ 走出孤岛，面对面结成对称互指回路——$\mathcal{O}_A$ 借 $\mathcal{O}_B$ 的目光校准自己，$\mathcal{O}_B$ 同时借 $\mathcal{O}_A$ 的目光校准自己——两面平视之镜的复合会彻底改写收敛轨迹的几何品格，其完整解析推导与逐步数值账本见下框 [@ex-ch33-mutual-cosine-monotonic-lock]：
+- **平视彼此丈量的奇迹（对称互指共识，`MODEL`）**：当两位观察者 $\mathcal{O}_A$ 与 $\mathcal{O}_B$ 走出孤岛，面对面结成对称互指回路——$\mathcal{O}_A$ 借 $\mathcal{O}_B$ 的目光校准自己，$\mathcal{O}_B$ 同时借 $\mathcal{O}_A$ 的目光校准自己——把同步互指的两拍合成一轮，两面平视之镜的复合便显出单侧贴合的几何品格；逐拍与逐轮的时钟区别、完整解析推导与数值账本见下框 [@ex-ch33-mutual-cosine-monotonic-lock]：
 
 ::: {.example #ex-ch33-mutual-cosine-monotonic-lock title="同一余弦端点的定性动力学与独立数值账本"}
 **既有结果的应用；数值与诠释另有边界。** 以下变量全为实数，角度用弧度。令 $f(x)=\cos x$、$g=f\circ f$；$f^{[n]},g^{[n]}$ 表示 $n$ 次复合，零次为恒等映射。始终选择 [@thm-dottie-rational-inverse-endpoint]（[`rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint)）中同一个 $\theta^*$：它满足 $0<\theta^*<1$、$\cos\theta^*=\theta^*$，并等于指定有理逆级数在 $\pi$ 处的有符号和。该端点只直接给出级数与正实竞争者的唯一性；下列 24 项定性结论是将其不动点条款与实分析供应结果结合的推导，不是一个新的动力学定理盒。
+
+**同步互指的时钟（`MODEL`）。** 在平衡方程 $\psi_A=\cos\psi_B,\;\psi_B=\cos\psi_A$ 中消去中间变量得到 $g$。若两者每拍同时用对方的当前值更新，则两拍后每个坐标各完成一次 $g$，下文的 $y_k$ 正是按这两步一轮取样。同初值时，两位观察者在每一拍仍一起遵循 $f$ 的轨迹；逐拍严格交替须满足第 16、17 项的非不动点区间条件，严格单调递增则属于第 14 项起点条件下的完整复合轮。
 
 1. **全实轴唯一性及锐角位置。** 若任意实数 $t=\cos t$，余弦值域先给 $-1\le t\le1$。因 $1<\pi/2$，此区间上余弦严格正，故 $t>0$，端点的正实唯一性才适用，给 $t=\theta^*$；同一点满足 $0<\theta^*<1<\pi/2$。
 2. **精确值域。** `Real.range_cos` 给内层值域 $[-1,1]$，外层偶性将其归到 $[0,1]$，再用该区间上连续严格递减与 `intermediate_value_Icc'` 得到等式 $g(\mathbb R)=[\cos1,1]$，不只是包含关系。
@@ -166,7 +168,7 @@ $$
 
 **独立的数值与文献边界。** 全局压缩只用粗界 $K=\sin1$。局部十进制值 $\theta^*\approx0.73908513$、$f'(\theta^*)\approx-0.673612$、$g'(\theta^*)\approx0.453753$，以及全局最优界约 $0.461063$、最大点约 $0.828132$，都需要独立数值或优化认证；驻点方程 $(1-t^2)\cos t=t\sin t$ 只是求解路线。下列初值 $1/10$、$n=0,\ldots,5$ 的原数值账本及其舍入、有限步误差比较也不由上述定性应用认证。物理、哲学、本体与超越数代数无关性（[@conj-schanuel-dottie]）保持各自边界。
 
-**同初值数值迭代账本（初值 $x_0 = y_0 = 0.100000$，步数 $k = 0 \dots 5$）**：
+**同初值数值迭代账本（初值 $x_0 = y_0 = 0.100000$，步数 $k = 0 \dots 5$）**：表中 $x_k$ 计 $k$ 次单步，$y_k$ 计 $k$ 轮两步复合，故 $y_k = x_{2k}$。相同 $k$ 下的残差对比使用不同的求值次数，每轮的平方线性因子并不构成等成本的加速。
 
 | 步数 $k$ | 孤立自指 $x_k$（$x_{k+1}=\cos x_k$） | 孤立偏差 $x_k - \theta^*$ | 对称互指 $y_k$（$y_{k+1}=\cos(\cos y_k)$） | 互指偏差 $y_k - \theta^*$ | 动力学形态对比 |
 | :---: | :---: | :---: | :---: | :---: | :--- |
@@ -188,15 +190,15 @@ $$
 
 现在，让我们把一维余弦互指提升回六维切投空间 $\mathbb{Z}^6 \subset E_\parallel^3 \oplus E_\perp^3$ 与全息张量网络，揭示“观察者互为吸引子”的空间几何与热力学底座。
 
-当观察者 $\mathcal{O}_A$（持平移接受窗 $W + u_A$）与观察者 $\mathcal{O}_B$（持平移接受窗 $W + u_B$）在宇宙母格中相遇时，前文 [@thm-ch33-contextual-attractor-and-common-factor] 第 4 款所要求的那份跨越个体语境的**客观不变公因子（`commonFactor`）**，在我们的切投 **`MODEL`（模型诠释）** 中立刻显影为两扇内部接受窗的**几何交集**：
+当观察者 $\mathcal{O}_A$（持平移接受窗 $W + u_A$）与观察者 $\mathcal{O}_B$（持平移接受窗 $W + u_B$）在同一宇宙母格与同一对切投映射下相遇时，我们的切投 **`MODEL`（模型诠释）** 先把这一固定配对的共同接受支持，画成两扇内部接受窗的**几何交集**：
 
 $$
 W_{AB} \;:=\; (W + u_A) \cap (W + u_B) \;\subset\; E_\perp^3.
 $$
 
-只要两者的内禀相位差 $\lVert u_A - u_B\rVert$ 足够接近，使得交集体积 $\operatorname{Vol}(W_{AB}) > 0$，每一个内部投影落在 $W_{AB}$ 中的母格点 $z \in \mathbb{Z}^6$，就会**同时**出现在 $\mathcal{O}_A$ 与 $\mathcal{O}_B$ 的三维物理世界切片里，凝结为双方无需言传便共同见证的公共现实！反之，落在对称差 $(W + u_A) \triangle (W + u_B)$ 中的边缘格点，则是双方认知错位、每次核对账本都必须向环境热浴支付热力学擦除热（[第 31 章](ch31-quantum-fairness.md) [@thm-ch31-horizon-landauer-ergodic-fairness] 第 1 款）的摩擦源。因此，**顺着窗口交集体积梯度 $\nabla\operatorname{Vol}(W_{AB})$ 彼此靠拢，本质上就是最小化跨观察者对齐耗散的自由能下山路径（`MODEL`）**！
+只要两者的内禀相位差 $\lVert u_A - u_B\rVert$ 足够接近，使得交集体积 $\operatorname{Vol}(W_{AB}) > 0$，每一个内部投影落在 $W_{AB}$ 中的母格点 $z \in \mathbb{Z}^6$，就会**同时**出现在 $\mathcal{O}_A$ 与 $\mathcal{O}_B$ 的三维物理世界切片里，凝结为双方无需言传便共同见证的公共现实！这份两窗共有的支持，是公共事实的模型图像；要承接 [@thm-ch33-contextual-attractor-and-common-factor] 第 4 款，还须声明语境与不动点意义的范围、固定因子映射，并给出跨该范围恒取同值的见证，单凭两窗交集尚未完成这一步。反之，落在对称差 $(W + u_A) \triangle (W + u_B)$ 中的边缘格点，是双方认知错位的摩擦源；若对齐实际包含降低记录熵的不可逆重置，且热浴与熵平衡条件满足[第 31 章](ch31-quantum-fairness.md) [@thm-ch31-horizon-landauer-ergodic-fairness] 第 1 款的适用假设，才须支付相应的擦除热账单。若进一步在 `MODEL` 中把对齐成本或自由能选为随窗口重叠增大而下降的量，**顺着窗口交集体积梯度 $\nabla\operatorname{Vol}(W_{AB})$ 彼此靠拢，便成为跨观察者对齐的自由能下山路径**！这条通向故乡的坡道，来自所选的成本对应，不能仅由比较账本或兰道尔界推出。
 
-与此同时，在编织空间截面的张量网络层面上，当两片观察者边界区域通过三路内部纠缠桥耦合时，何时极小割会从桥内部瓶颈切换到包裹双侧的外边界割面？`trureturing` 的三宽张量桥图最大流最小割命题给出了精确到任意自然数维数的离散充要刻画：
+与此同时，在编织空间截面的张量网络层面上，当两片观察者边界区域通过三路内部纠缠桥耦合时，何时极小割会从桥内部瓶颈切换到包裹双侧的外边界割面？`trureturing` 的三宽张量桥图最大流最小割命题在任意自然数维数下给出一个由正性与双侧二次锥条件界定的充分区域：
 
 ::: {.proposition #prop-ch33-bridge-reconnection-mincut title="三宽张量桥图的量子最大流最小割与外边界极小割归约命题" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result"}
 对任意自然数边维数 $a, b, c, d \in \mathbb{N}$，记三路克罗内克桥流矩阵为 $\operatorname{flow}(M, N) = \sum_{r \in \operatorname{Fin} 3} M_r \otimes_k N_r$（其中 $M_r \in M_{a\times b}(\mathbb{C}),\, N_r \in M_{d\times c}(\mathbb{C})$），量子最大流 $\operatorname{QMaxFlow}(a, b, c, d)$ 为可实现矩阵秩的上确界，量子最小割定义为 $\operatorname{QMinCut}(a, b, c, d) = \min\bigl(3ac,\, \min(ad, bc)\bigr)$。若维数满足正性与双侧平衡二次锥条件
@@ -221,11 +223,13 @@ $$
 ::: {.remark #rem-ch33-rt-reconnection-ckw-literature title="全息极小曲面互信息重联相变、微观纠缠桥与单配性纠缠预算（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 本节将离散桥图极小割（[@prop-ch33-bridge-reconnection-mincut]）与多体观察者耦合联系于连续全息几何及纠缠分配时，引用的三项定量结论属外部理论物理与量子信息文献，未包含在本书锁定的形式化声明集中：
 
-1. **笠—高柳（Ryu–Takayanagi）全息极小曲面重联相变与正互信息判据（S. Ryu & T. Takayanagi, *Phys. Rev. Lett.* **96**, 181602, 2006；M. Headrick, *Phys. Rev. D* **82**, 126010, 2010）**：在全息对偶中，两个不相交边界观察者区域 $A$ 与 $B$ 的联合纠缠熵 $S(AB) = \frac{\operatorname{Area}(\gamma_{AB})}{4G_N\hbar}$ 在两类拓扑候选曲面间取极小——要么取各自孤立极小曲面的不连通并 $\gamma_A \cup \gamma_B$（面积和 $\operatorname{Area}(\gamma_A) + \operatorname{Area}(\gamma_B)$），要么跨越体空间织出一条连通管道桥曲面 $\gamma_{\mathrm{conn}}$。当两者距离拉近或关联增强时，极小曲面发生一阶几何重联相变，且连通桥胜出的充要条件恰为量子互信息严格为正：
+1. **笠—高柳（Ryu–Takayanagi）全息极小曲面重联相变与正互信息判据（S. Ryu & T. Takayanagi, *Phys. Rev. Lett.* **96**, 181602, 2006；M. Headrick, *Phys. Rev. D* **82**, 126010, 2010）**：在静态、经典爱因斯坦引力的全息对偶中，两个不相交边界观察者区域 $A$ 与 $B$ 的领先阶 RT 熵 $S_{\mathrm{RT}}(AB) = \frac{\operatorname{Area}(\gamma_{AB})}{4G_N\hbar}$，由与 $AB$ 同调的容许候选曲面竞争决定。在不连通并 $\gamma_A \cup \gamma_B$ 与跨区桥接候选 $\gamma_{\mathrm{conn}}$ 竞争的图景里，后者胜出时，与 $AB$ 一同围成的相关体空间区域连通；桥接指的是这个区域的连通性，候选极小曲面本身仍可由多片组成。当距离变化令两者面积交叉，领先阶熵出现一阶重联相变，严格面积优势等价于领先阶互信息为正：
 
    $$
-   \operatorname{Area}(\gamma_{AB}) \;<\; \operatorname{Area}(\gamma_A) + \operatorname{Area}(\gamma_B) \;\Longleftrightarrow\; I(A:B) \;:=\; S(A) + S(B) - S(AB) \;>\; 0;
+   \operatorname{Area}(\gamma_{AB}) \;<\; \operatorname{Area}(\gamma_A) + \operatorname{Area}(\gamma_B) \;\Longleftrightarrow\; I_{\mathrm{RT}}(A:B) \;:=\; S_{\mathrm{RT}}(A) + S_{\mathrm{RT}}(B) - S_{\mathrm{RT}}(AB) \;>\; 0;
    $$
+
+   这里比较的是 $G_N^{-1}$ 领先阶的 $I_{\mathrm{RT}}$；不连通相中它为零，精确量子互信息仍可有 $G_N^0$ 阶贡献，不能据此断言全部量子关联消失。
 
 2. **微观纠缠桥假说 $ER = EPR$（J. Maldacena & L. Susskind, *Fortschr. Phys.* **61**, 781–811, 2013）**：提出任意两子系统之间的量子纠缠对（EPR 关联）在微观量子引力层面等价于连接两者的不可穿越空间虫洞桥（Einstein–Rosen 桥），即共享纠缠直接缩短并缝合体空间几何连通度；
 3. **CKW 多体纠缠单配性稀缺预算（V. Coffman, J. Kundu & W. K. Wootters, *Phys. Rev. A* **61**, 052306, 2000；T. J. Osborne & F. Verstraete, *Phys. Rev. Lett.* **96**, 220503, 2006）**：任意观察者量子比特 $i$（局部布洛赫极化向量为 $\mathbf{r}_i$）分配给周围所有伙伴 $j \neq i$ 的二体平方并发度（2-tangle）$\tau_{ij}$ 之和受单位纯度硬上限约束：

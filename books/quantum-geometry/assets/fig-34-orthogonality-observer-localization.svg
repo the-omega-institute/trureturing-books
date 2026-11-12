@@ -21,7 +21,7 @@
 
   <!-- HEADER -->
   <text x="28" y="34" font-family="JetBrains Mono,monospace" font-size="14" font-weight="600" fill="#19f0ff">CHAPTER 34 · 正交简并盲区与观察者位置反演 / ORTHOGONALITY DEGENERACY &amp; OBSERVER POSITION</text>
-  <text x="28" y="54" font-family="JetBrains Mono,monospace" font-size="10.2" fill="#6f8ea5">一次正交 vs. 两次正交读数简并 ⟺ 观察者立于第二正交面的法向极轴 / Readout collapse of 1-step vs. 2-step orthogonality locks O = ±e₃</text>
+  <text x="28" y="54" font-family="New Computer Modern Math,JetBrains Mono,monospace" font-size="10.2" fill="#6f8ea5">一次正交 vs. 两次正交读数简并 ⟺ 观察者立于第二正交面的法向极轴 / Readout collapse of 1-step vs. 2-step orthogonality locks O = ±e₃</text>
 
   <line x1="480" y1="68" x2="480" y2="380" stroke="#143049" stroke-width="1.4"/>
 
@@ -80,7 +80,7 @@
     <!-- Right-side Analytical Readout Cards in Panel I -->
     <rect x="272" y="110" width="180" height="78" rx="6" fill="#07101b" stroke="#19f0ff" stroke-width="1.2"/>
     <text x="362" y="128" text-anchor="middle" fill="#19f0ff" font-size="9.2" font-weight="600">全角简并 / Full Azimuth ∀φ</text>
-    <text x="362" y="146" text-anchor="middle" fill="#d4efff" font-size="8.8">Δ(O) ≡ 0 ⟺ O₁ = O₂ = 0</text>
+    <text x="362" y="146" text-anchor="middle" fill="#d4efff" font-size="8.8" font-family="New Computer Modern Math,JetBrains Mono,monospace">Δ(O) ≡ 0 ⟺ O₁ = O₂ = 0</text>
     <text x="362" y="163" text-anchor="middle" fill="#cfe3ff" font-size="8.6">唯一锁定 O = ±e₃</text>
     <text x="362" y="179" text-anchor="middle" fill="#6f8ea5" font-size="8.2">O·v₁ = O·v₂ = ±cos θ</text>
 
@@ -145,7 +145,7 @@
 
     <rect x="702" y="204" width="224" height="78" rx="6" fill="#07101b" stroke="#9d8cff" stroke-width="1.2"/>
     <text x="814" y="222" text-anchor="middle" fill="#9d8cff" font-size="9.2" font-weight="600">和乐面隐身 / Holonomy Blindness</text>
-    <text x="814" y="240" text-anchor="middle" fill="#d4efff" font-size="8.6">O = ±e₃ ⟹ O·s_once = O·s_twice</text>
+    <text x="814" y="240" text-anchor="middle" fill="#d4efff" font-size="8.6" font-family="New Computer Modern Math,JetBrains Mono,monospace">O = ±e₃ ⟹ O·s_once = O·s_twice</text>
     <text x="814" y="257" text-anchor="middle" fill="#cfe3ff" font-size="8.4">两者皆读 ±cos α (e₃ ⊥ e₁∧e₂)</text>
     <text x="814" y="273" text-anchor="middle" fill="#6f8ea5" font-size="8">O = e₂ 则分裂为 sin α vs. 0</text>
 
