@@ -448,20 +448,16 @@
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
-    poles: { scene: 'sphere', view: [-0.62, 0.3], start: 0, still: 0 },
     merge: { scene: 'sphere', view: [-0.9, 1.0], start: 0, play: true, still: 1 },
     torus: { scene: 'torus', view: [-0.5, 0.78, 1.22], start: 0, play: true, still: 0.3 },
     defect: { scene: 'defect', view: [-0.5, 0.35], start: 0, play: true, still: 3 },
-    escape: { scene: 'escape', view: [-0.75, 0.3, 0.9], start: 0, play: true, stop: 0.5, still: 0.5 },
-    upright: { scene: 'escape', view: [-0.75, -0.2, 0.9], start: 0.5, play: true, still: 1 }
+    escape: { scene: 'escape', view: [-0.75, 0.3, 0.9], start: 0, play: true, stop: 0.5, still: 0.5 }
   };
   const NOTES = {
-    poles: ['青色的箭头 (−y, x, 0) 绕竖轴打转，越近两极越短；品红的环圈出南北两极，它们是仅有的两个零点，指标各为 +1。', 'The cyan arrows (−y, x, 0) circle the vertical axis and shorten towards the poles; the magenta rings circle the North and South Poles, the only two zeros, each of index +1.'],
     merge: ['琥珀色的零点从南极沿经线爬到北极，箭头场跟着连续地变。到北极时两个 +1 合成一个指标 +2 的零点：箭头在它周围转两圈，别处一个零点也没有。', 'The amber zero climbs a meridian from the South Pole to the North Pole while the field changes continuously. At the pole the two +1 zeros become one zero of index +2: the arrows turn twice round it, and there is no zero anywhere else.'],
     torus: ['环面上的青色箭头都沿大圈的方向，长度处处为 1；琥珀色的点绕大圈走一周，它的箭头一刻也没有缩短，环面上没有品红的环。', 'On the torus every cyan arrow points along the big circle, with length 1 everywhere; the amber point goes once round, its arrow never shortening, and there is no magenta ring on the torus.'],
     defect: ['正二十面体的每个面切成 ν² 个平的三角形，顶点推到球面上。品红圆点的面积是那个顶点的角亏：点越来越多、越来越小，加起来始终是 720°。', 'Each face of the icosahedron is cut into ν² flat triangles and the vertices pushed out to the sphere. The area of each magenta dot is that vertex’s defect: the dots grow in number and shrink in size, and always add up to 720°.'],
     escape: ['偶极场的箭头沿外法向立起一半（λ = ½）：品红的短线是立起的部分，北极处琥珀色的箭头竖出切平面。最短的箭头在品红虚线那一圈，长度仍大于零，球面上不再有零点。', 'The arrows of the dipole field stand half-way up along the outward normal (λ = ½): the short magenta strokes are the standing part, and at the North Pole the amber arrow sticks out of the tangent plane. The shortest arrows lie on the dashed magenta circle and are still longer than zero: no zero is left on the sphere.'],
-    upright: ['再立下去到 λ = 1，箭头全部沿法向朝外，切向的部分没有了，长度 (1 + z)/2 到南极缩成零：品红的环出现在南极。', 'Lifted all the way to λ = 1, every arrow points straight out, nothing tangent is left, and the length (1 + z)/2 shrinks to zero at the South Pole: a magenta ring appears there.']
   };
   let booting = true;
   function applyPreset(id) {

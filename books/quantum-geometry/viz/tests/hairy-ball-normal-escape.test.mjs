@@ -95,10 +95,10 @@ check('opens on the MERGE card, merged, not playing', s.preset === 'merge' && s.
 
 // the sphere: zonal at t = 0, dipole at t = 1, the pull-back in between
 const pts = Array.from({ length: 200 }, randomPoint).filter((x) => x[2] < 0.995);
-await pick('poles'); s = await state();
+await pick('merge'); s = await seek(0);
 let F0 = await fieldAt(pts);
-check('POLES: the field is (−y, x, 0) at 200 random points', pts.every((x, i) => norm(sub(F0[i], zonal(x))) < 1e-12));
-check('POLES: zeros at both poles, index +1 each (page count), sum 2', s.zeros.length === 2 && s.zeros.every((z) => z.index === 1) && s.indexSum === 2
+check('t = 0: the field is (−y, x, 0) at 200 random points', pts.every((x, i) => norm(sub(F0[i], zonal(x))) < 1e-12));
+check('t = 0 (start of MERGE): zeros at both poles, index +1 each (page count), sum 2', s.zeros.length === 2 && s.zeros.every((z) => z.index === 1) && s.indexSum === 2
   && s.zeros.some((z) => close(z.p[2], 1)) && s.zeros.some((z) => close(z.p[2], -1)));
 check('independent winding of (−y, x, 0): +1 at N and +1 at S', close(winding(zonal, [0, 0, 1]), 1, 1e-6) && close(winding(zonal, [0, 0, -1]), 1, 1e-6));
 s = await seek(1);
@@ -126,7 +126,7 @@ for (const t of [0.8, 0.9, 0.97]) { const a = Math.tan(PI * t / 2), sep = Math.a
 check('a loop round both zeros winds +2 for t = 0.8, 0.9, 0.97 (independent)', bigBad === 0);
 
 // drag the moving zero up its meridian
-await pick('poles'); await seek(0.3);
+await pick('merge'); await seek(0.3);
 s = await state();
 const target = [Math.sin(PI / 4), 0, Math.cos(PI / 4)];   // 45° from N on the +X meridian
 await page.evaluate(() => document.getElementById('stage').scrollIntoView());
@@ -196,9 +196,11 @@ for (const l of [0, 0.1, 0.3, 0.5, 0.7, 0.9, 1]) {
 check('w̃_λ = (1 − λ)w + λ(1 + z)/2·x and its smallest length match the closed form for seven λ; zero only at λ = 0, 1', liftBad === 0, `${liftBad} values off`);
 s = await seek(1);
 check('λ = 1: ‖w̃(N)‖ = 1, and the South Pole is a zero again', close(norm(s.north), 1, 1e-12) && close(s.minLength, 0) && close(s.minHeight, -1, 1e-6));
-await pick('upright'); await until(page, () => !window.HAIRY_DEBUG.state.playing, null, 120000);
+await seek(0.5);
+await page.evaluate(() => { const el = document.getElementById('now'); el.value = '1'; el.dispatchEvent(new Event('input', { bubbles: true })); });
 s = await state();
-check('UPRIGHT ends at λ = 1', s.scene === 'escape' && close(s.t, 1));
+check('the rail slider to λ = 1: the South Pole is a zero again, and the note says so', s.scene === 'escape' && close(s.t, 1) && close(s.minLength, 0) && close(s.minHeight, -1, 1e-6)
+  && (await page.textContent('#roNote')).includes('南极'));
 
 // scene chips, keys, rail
 await page.click('[data-scene="torus"]'); s = await state();
