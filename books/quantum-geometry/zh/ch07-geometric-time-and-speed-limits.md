@@ -96,6 +96,10 @@ $$
 
 特别地，如果初态 $\psi$ 本身就是哈密顿量 $H$ 的能量本征态（$H\psi = E\psi$），那么在 Lean 模块 `Quantum/Dynamics/EnergyEigenstateStationarity` 中，定理 [`energy_eigenstate_stationary`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_stationary) 与 [`energy_eigenstate_variance_zero`](lean:D5/S3/Quantum/Dynamics/EnergyEigenstateStationarity.energy_eigenstate_variance_zero) 严格证明了：它的能量涨落方差恒为零，演化态 $\psi(t) = e^{-itE/\hbar}\psi$ 仅仅在原方向线上乘了一个不可见的全局相位，其秩一密度矩阵与一切可观测量的期望值在所有时刻 $t$ 纹丝不动！**没有非零的对易子外积面积 $[H, P] \neq 0$，就没有一维投影线上可见的经典时间流逝！**
 
+::: {.figure src="ch07-commutator-flow"}
+**转轴与尺子不平行，影子才会动。** 单比特特例：尺子 $P = \lvert 0\rangle\langle 0\rvert$ 是青色的竖轴，紫色的转轴 $H$ 从竖直斜开 $40^\circ$。琥珀色的态从北极出发，绕紫色的轴走一圈虚线小圆，它在青色竖轴上的影子随之上下移动；右边青色的曲线是留在 $\lvert 0\rangle$ 的概率 $p(t)$，在 $1$ 与 $0.59$ 之间起伏。转轴与尺子重合时 $[H, P] = 0$，灰色的 $p(t)$ 一直是 $1$（[@prop-projection-probability-flow]；单比特的曲线是手工推导与数值）。
+:::
+
 ## 7.2 量子速度极限（Mandelstam–Tamm 与 Margolus–Levitin）：翻越 $90^\circ$ 正交墙的最短时间 {#sec-quantum-speed-limit}
 
 既然“线是经典时间，面积是量子时间”，那么**把一团连续旋转的二维量子面积，切分成两声毫不含糊、彼此绝不串扰的经典时钟“滴答”声，最短需要多少时间？**
@@ -219,6 +223,8 @@ $$
 **三能级等权叠加：弯着走，晚到。** 左边三支青色箭头在 $t = \frac{2\pi}{3}$ 围成三角形，琥珀色的点回到品红的圆心；右边青色曲线弯到虚线速度线下面，速度线在 MT $1.924$ 已到墙，曲线到 $\tau_\perp = 2.094$ 才碰到品红的墙，ML 刻度在 $1.571$。两条界是文献结果，未在本书形式化。
 :::
 
+三能级的态虽然晚到，终究碰到了墙；二能级的权重一旦离开等权，比如 $\alpha = 30^\circ$，夹角最多只升到 $2\alpha = 60^\circ$。
+
 ::: {.viz src="speed-limit-zeno" preset="unequal" height="500"}
 **不等权叠加：到不了墙。** 权重角 $\alpha = 30^\circ$：左边长 $0.75$、短 $0.25$ 的两支青色箭头怎么转也抵消不完，琥珀色的点离品红的圆心最近 $0.5 = \lvert\cos 2\alpha\rvert$；右边夹角最多升到 $2\alpha = 60^\circ$，碰不到品红的墙。
 :::
@@ -233,10 +239,6 @@ $$
 
 ::: {.figure src="ch07-zeno-n"}
 **测得越勤，全程留在 $\lvert 0\rangle$ 的概率越接近 $1$。** 横轴是测量次数 $N$（对数刻度），青色的曲线是 $P_N = \bigl[\cos^2\frac{\pi}{2N}\bigr]^N$，青色的点是 $N = 1, 4, 16, 64$，依次为 $0$、$0.531$、$0.857$、$0.962$；灰色虚线是近似式 $1 - \frac{\pi^2}{4N}$，$N$ 越大越贴近青色曲线，缺口按 $\frac{1}{N}$ 缩小。数值由 [@ex-zeno-strobe-freezing] 的解析式算出。
-:::
-
-::: {.viz src="speed-limit-zeno" preset="strobe16" height="500"}
-**频闪 16 次：几乎走不掉。** 箭头每转 $11.25^\circ$ 就被拉回 $\lvert 0\rangle$：品红的一份（离开线的一阶小量）刚露头就被削掉，青色的影子几乎不短。画面停在最后一段的半途，右边青色的留存几乎铺满，此刻还剩 $0.863$，终点 $N = 16$ 的环是 $0.857$；虚线是不看时的路。
 :::
 
 ::: {.example #ex-zeno-strobe-freezing title="量子芝诺频闪观测的解析公式与四档频闪（N = 1, 4, 16, 64）数值验算"}
@@ -340,7 +342,7 @@ $\delta = \frac{\pi}{4}$ 一行的 $p_1 = 0.853553$ 就是 [@ex-zeno-strobe-free
 :::
 
 ::: {.viz src="speed-limit-zeno" preset="mean" height="500"}
-**首次返回：平均恒为 2 步。** $\delta = 45^\circ$，每根柱子是又走一步之后的账目：青色是已经返回的概率，品红是还没回来的概率，每一根都恰好到 $1$ 这条线（[@prop-monitored-return-conservation]）。品红的总面积就是平均返回时间，随着步数从 $1$ 涨向 $2$（[@ex-first-return-qubit]）。
+**首次返回：平均恒为 2 步。** $\delta = 45^\circ$，每根柱子是又走一步之后的账目：青色是已经返回的概率，品红是还没回来的概率，每一根都恰好到 $1$ 这条线（[@prop-monitored-return-conservation]）。品红的总面积就是平均返回时间，随着步数从 $1$ 涨向 $2$（[@ex-first-return-qubit]）。品红的虚线台阶是步长 $\delta = 90^\circ$ 的同一本账：第一步就回来一半，形状完全不同，品红面积同样走到 $2$。
 :::
 
 芝诺效应说，看得够勤，状态就走不掉。首次返回的账目补上了另一半：看得再勤，平均两步回来一次这件事也不会变，因为它数的不是时间，而是这只比特一共有几个方向可去。

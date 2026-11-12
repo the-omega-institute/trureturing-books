@@ -768,8 +768,8 @@
       "code": "ERASURE//LEDGER",
       "title": "擦除账本",
       "title_en": "The erasure ledger",
-      "summary": "一个量子比特的布洛赫圆盘与一本两栏账：系统的熵、付给环境的热。转动不记账；捏合抹掉箭头横着的那一份（相干），系统的熵恰好多出这一步的相对熵 D，连做几步就一块块叠起来；理想复位把这笔熵化成热付给环境，正好碰到兰道尔下界；卡 ONE-QUBIT BATH 先把箭头捏成圆心，再只用一个 p = 0.9 的热浴比特交换复位，多付的一截恰好是热浴被推离平衡的 D，与第八章的数值表一致；卡 COPY · UNDO 把转 90° 后横躺的纯态拷贝进记录比特，局部的熵涨到 ln 2 却不付热，紧接着撤回（受控非门就是自己的伴随）便精确回到拷贝之前。五张实验卡可以在第八章正文里单独引用。",
-      "summary_en": "The Bloch disc of one qubit and a two-column ledger: the system's entropy and the heat paid to the environment. Turning writes nothing; pinching wipes out the arrow's sideways part (its coherence) and the system's entropy rises by exactly that step's relative entropy D, block by block over several steps; the ideal reset pays the entropy out as heat that just touches the Landauer floor; in the card ONE-QUBIT BATH, where the arrow is first pinched to the centre, resetting by a swap with a single bath qubit at p = 0.9 pays extra, exactly the D by which the bath is pushed off equilibrium, as in Chapter 8's table; in the card COPY · UNDO, copying the pure state turned flat by 90° into a record bit raises the local entropy to ln 2 with no heat at all, and undoing it right away (the controlled-NOT is its own adjoint) restores the joint state exactly. Each of the five experiment cards can be cited on its own from Chapter 8.",
+      "summary": "一个量子比特的布洛赫圆盘与一本两栏账：系统的熵、付给环境的热。转动不记账；捏合抹掉箭头横着的那一份（相干），系统的熵恰好多出这一步的相对熵 D，连做几步就一块块叠起来；理想复位把这笔熵化成热付给环境，正好碰到兰道尔下界；卡 ONE-QUBIT BATH 先把箭头捏成圆心，再只用一个 p = 0.9 的热浴比特交换复位，多付的一截恰好是热浴被推离平衡的 D，与第八章的数值表一致；卡 COPY · UNDO 把转 90° 后横躺的纯态拷贝进记录比特，局部的熵涨到 ln 2 却不付热，对角相同、相干相反的另一个态在局部与它重合，紧接着撤回（受控非门就是自己的伴随）便精确回到拷贝之前；卡 TWO STATES 把两个态送进同一串去极化、转动与捏合，它们的相对熵一步也不回升（数据处理不等式，Lean 已验证）。六张实验卡可以在第八章正文里单独引用。",
+      "summary_en": "The Bloch disc of one qubit and a two-column ledger: the system's entropy and the heat paid to the environment. Turning writes nothing; pinching wipes out the arrow's sideways part (its coherence) and the system's entropy rises by exactly that step's relative entropy D, block by block over several steps; the ideal reset pays the entropy out as heat that just touches the Landauer floor; in the card ONE-QUBIT BATH, where the arrow is first pinched to the centre, resetting by a swap with a single bath qubit at p = 0.9 pays extra, exactly the D by which the bath is pushed off equilibrium, as in Chapter 8's table; in the card COPY · UNDO, copying the pure state turned flat by 90° into a record bit raises the local entropy to ln 2 with no heat at all, while a second state with the same diagonal and the opposite coherence coincides with it locally, and undoing it right away (the controlled-NOT is its own adjoint) restores the joint state exactly; the card TWO STATES sends two states through one chain of depolarizing, turning and pinching, and their relative entropy never rises (the data-processing inequality, kernel-verified in Lean). Each of the six experiment cards can be cited on its own from Chapter 8.",
       "path": "erasure-ledger/",
       "thumbnail": "erasure-ledger/thumb.jpg",
       "status": "live",
@@ -814,6 +814,9 @@
         }
       ],
       "lean": [
+        {
+          "gid": "D5/S3/Quantum/Divergence/CanonicalChannelDPI.extended_quantum_relative_entropy_channel_dpi"
+        },
         {
           "gid": "D5/S3/Quantum/Divergence/DualAccountFull.dual_account_full"
         },

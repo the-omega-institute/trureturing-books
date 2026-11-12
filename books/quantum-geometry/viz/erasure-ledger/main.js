@@ -70,13 +70,45 @@
   const blank = (J) => dist(J, kron(sysOf(J), BLANK)) < 1e-9;
   const gibbs = (p) => [[p, 0], [0, 1 - p]];
 
+  /* ---------- a second scene: two states sent through the same processes (data processing) ---------- */
+  /** D(ρ ‖ σ) for two qubits given by their Bloch arrows in the x–z plane; +∞ when ρ leaves the support of a pure σ. */
+  function dPair(r, s) {
+    const pureS = 1 - Math.hypot(s[0], s[1]) < 1e-12, same = Math.hypot(r[0] - s[0], r[1] - s[1]) < 1e-12;
+    if (pureS && !same) return Infinity;
+    return Math.max(0, relEnt(qubit(r[0], r[1]), qubit(s[0], s[1])));
+  }
+  const DPI = { lam: 0.5, ang: 0.7, ops: ['dep', 'rot', 'pinch', 'dep', 'dep'] };
+  const turnXZ = ([x, z], a) => [x * Math.cos(a) + z * Math.sin(a), -x * Math.sin(a) + z * Math.cos(a)];
+  function dpiStep([x, z], op) { return op === 'dep' ? [DPI.lam * x, DPI.lam * z] : op === 'rot' ? turnXZ([x, z], DPI.ang) : [0, z]; }
+  let dpiHist = [];
+  function dpiBuild() {
+    let r = [0, 1], sg = [1, 0];
+    dpiHist = [{ r, s: sg, D: dPair(r, sg), op: null }];
+    for (const op of DPI.ops) { r = dpiStep(r, op); sg = dpiStep(sg, op); dpiHist.push({ r, s: sg, D: dPair(r, sg), op }); }
+  }
+  dpiBuild();
+  function dpiAt(t) {
+    const n = DPI.ops.length, k = Math.max(0, Math.min(n, Math.floor(t + 1e-9))), f = k >= n ? 0 : Math.min(1, Math.max(0, t - k));
+    const a = dpiHist[k];
+    if (f < 1e-9) return { k, f: 0, r: a.r, s: a.s };
+    const b = dpiHist[k + 1], e = TRV.smooth(f);
+    const mid = (u, v) => (b.op === 'rot' ? turnXZ(u, DPI.ang * e) : [lerp(u[0], v[0], e), lerp(u[1], v[1], e)]);
+    return { k, f, r: mid(a.r, b.r), s: mid(a.s, b.s) };
+  }
+  const DPINAME = { dep: () => L(`去极化 λ = ${DPI.lam}`, `depolarize, λ = ${DPI.lam}`), rot: () => L(`绕 y 转 ${DPI.ang} 弧度`, `turn ${DPI.ang} rad about y`), pinch: () => L('Z 基捏合', 'pinch in Z') };
+  const fmtD = (d) => (d === Infinity ? '∞' : fix(d, 4));
+
   /* ---------- the ledger: a list of operations and the states after each ---------- */
-  const S = { alpha: 90 * DEG, p: 0.9, ops: [] };
+  const S = { alpha: 90 * DEG, p: 0.9, ops: [], mode: 'ledger' };
   let hist = [];
   const start = () => ({ J: kron(qubit(0, 1), BLANK), heat: 0, floor: 0, extra: 0, step: null, seg: { base: 0, kind: 'start', blocks: [] } });
   /** Fill in what every entry shows, each number from its own route. */
+  /** The mirror of the system: σ has the same diagonal and the opposite coherence (Z on the system). Z commutes with the
+      controlled-NOT, so mirroring every joint state of the ledger gives the ledger σ would have through the copy. */
+  const ZS = [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, -1, 0], [0, 0, 0, -1]];
   function describe(h) {
     const rs = sysOf(h.J), re = recOf(h.J);
+    h.Jm = conj(ZS, h.J); h.blochM = blochOf(sysOf(h.Jm));
     h.sys = rs; h.bloch = blochOf(rs); h.S = entropy(rs); h.Sglob = entropy(h.J); h.linked = !blank(h.J); h.rec = blochOf(re);
     return h;
   }
@@ -127,12 +159,13 @@
   function at(t) {
     const n = S.ops.length, k = Math.max(0, Math.min(n, Math.floor(t + 1e-9))), f = k >= n ? 0 : Math.min(1, Math.max(0, t - k));
     const a = hist[k];
-    if (f < 1e-9) return { k, f: 0, h: a, next: null, bloch: a.bloch, rec: a.rec, S: a.S, heat: a.heat, floor: a.floor, extra: a.extra };
+    if (f < 1e-9) return { k, f: 0, h: a, next: null, bloch: a.bloch, blochM: a.blochM, rec: a.rec, S: a.S, heat: a.heat, floor: a.floor, extra: a.extra };
     const b = hist[k + 1], e = TRV.smooth(f);
     let bloch;
     if (b.step.op === 'rot') { const c = Math.cos(b.step.alpha * e), s = Math.sin(b.step.alpha * e), [x, z] = a.bloch; bloch = [x * c + z * s, -x * s + z * c]; }
     else bloch = [lerp(a.bloch[0], b.bloch[0], e), lerp(a.bloch[1], b.bloch[1], e)];
-    return { k, f, h: a, next: b, bloch, rec: [lerp(a.rec[0], b.rec[0], e), lerp(a.rec[1], b.rec[1], e)],
+    const blochM = [-bloch[0], bloch[1]];
+    return { k, f, h: a, next: b, bloch, blochM, rec: [lerp(a.rec[0], b.rec[0], e), lerp(a.rec[1], b.rec[1], e)],
       S: lerp(a.S, b.S, e), heat: lerp(a.heat, b.heat, e), floor: lerp(a.floor, b.floor, e), extra: lerp(a.extra, b.extra, e), e };
   }
   const OPNAME = {
@@ -199,7 +232,58 @@
     sub.innerHTML = hudSubHtml(a, !(a.f > 0)); const other = sub.getBoundingClientRect().bottom - y0;
     sub.innerHTML = hudSubHtml(a, a.f > 0); return Math.max(other, sub.getBoundingClientRect().bottom - y0);
   }
+  function drawDpi() {
+    const st = stage, c = st.begin(), W = st.W, H = st.H, a = dpiAt(clock.t), labels = !TRV.thumbMode;
+    const cur = a.f > 0 ? a.k + 1 : a.k;
+    $('hudBig').textContent = cur ? L(`第 ${cur} 步 · ${DPINAME[DPI.ops[cur - 1]]()}`, `Step ${cur} · ${DPINAME[DPI.ops[cur - 1]]()}`) : L('起点 · ρ = |0⟩，σ = |+⟩', 'Start · ρ = |0⟩, σ = |+⟩');
+    const prev = a.k > 0 ? dpiHist[a.k - 1].D : null, here = dpiHist[a.k].D;
+    $('hudSub').textContent = a.f > 0 ? L(`D(ρ ‖ σ) 在这一步做完时重算`, 'D(ρ ‖ σ) is recomputed when this step is done')
+      : L(`D(ρ ‖ σ) = ${fmtD(here)}${prev == null ? '' : ` · 上一步 ${fmtD(prev)}`}`, `D(ρ ‖ σ) = ${fmtD(here)}${prev == null ? '' : ` · the step before ${fmtD(prev)}`}`);
+    const y0 = $('cv').getBoundingClientRect().top, hb = TRV.thumbMode ? 0 : $('hudSub').getBoundingClientRect().bottom - y0;
+    const Lo = layout(W, H, hb), { R, cx, cy } = Lo, X = (u) => cx + R * u, Y = (u) => cy - R * u;
+    c.fillStyle = TRV.alpha(P.cyan, 0.05); c.beginPath(); c.arc(cx, cy, R, 0, 2 * Math.PI); c.fill();
+    c.strokeStyle = P.lineHot; c.lineWidth = 1.3 * thick; c.stroke();
+    c.setLineDash([3, 5]); c.strokeStyle = P.faint; c.lineWidth = 1; c.beginPath(); c.moveTo(X(-1), cy); c.lineTo(X(1), cy); c.stroke(); c.setLineDash([]);
+    c.strokeStyle = P.cyan; c.globalAlpha = 0.6; c.lineWidth = 1.3 * thick; c.beginPath(); c.moveTo(cx, Y(1.14)); c.lineTo(cx, Y(-1.14)); c.stroke(); c.globalAlpha = 1;
+    // where both states have been
+    for (const key of ['r', 's']) {
+      c.setLineDash([2, 4]); c.strokeStyle = P.dim; c.lineWidth = 1 * thick; c.beginPath();
+      for (let i = 0; i <= a.k; i++) { const b = dpiHist[i][key]; if (i) c.lineTo(X(b[0]), Y(b[1])); else c.moveTo(X(b[0]), Y(b[1])); }
+      c.lineTo(X(a[key][0]), Y(a[key][1])); c.stroke(); c.setLineDash([]);
+      for (let i = 0; i <= a.k; i++) { const b = dpiHist[i][key]; c.fillStyle = P.dim; c.beginPath(); c.arc(X(b[0]), Y(b[1]), 2.4 * thick, 0, 2 * Math.PI); c.fill(); }
+    }
+    const [sx, sz] = a.s, [rx, rz] = a.r;
+    if (Math.hypot(sx, sz) > 2e-3) { c.save(); c.setLineDash([5 * thick, 4 * thick]); arrow(c, cx, cy, X(sx), Y(sz), P.ink, 2 * thick, 10 * thick); c.restore(); }
+    c.strokeStyle = P.ink; c.lineWidth = 1.8 * thick; c.beginPath(); c.arc(X(sx), Y(sz), 5.5 * thick, 0, 2 * Math.PI); c.stroke();
+    c.save(); c.shadowColor = P.amber; c.shadowBlur = 12;
+    if (Math.hypot(rx, rz) > 2e-3) arrow(c, cx, cy, X(rx), Y(rz), P.amber, 2.4 * thick, 12 * thick);
+    c.fillStyle = P.amber; c.beginPath(); c.arc(X(rx), Y(rz), 4.5 * thick, 0, 2 * Math.PI); c.fill(); c.restore();
+    if (labels) {
+      st.tag('k0', [cx + 16, Y(1.08)], '|0⟩', 'num', { screen: true });
+      st.tag('z', [cx - 14, Y(1.1)], 'Z', 'cy', { screen: true });
+      if (Math.hypot(rx, rz - 1) > 0.3) st.tag('rh', [X(rx) + 14, Y(rz) - 12], 'ρ', 'raw c-am', { screen: true });
+      st.tag('sg', [X(sx) + 14, Y(sz) + 14], 'σ', 'raw', { screen: true });
+    }
+    // the column of D after every step: none ever rises above the one before
+    const { yTop, yBot } = Lo.led, tall = H > W * 1.1, xa = tall ? 24 : Lo.env.cx - Lo.env.r, xb = W - Math.max(16, W * 0.04), n = DPI.ops.length;
+    const hi = 0.32, V = (d) => yBot - Math.min(d, hi * 1.08) / hi * (yBot - yTop - (tall ? 30 : 0)) * 0.86, slot = (xb - xa) / (n + 1), bw = Math.min(40, slot * 0.6);
+    c.strokeStyle = P.lineHot; c.lineWidth = 1.2; c.beginPath(); c.moveTo(xa, yBot); c.lineTo(xb, yBot); c.stroke();
+    for (let i = 0; i <= a.k; i++) {
+      const d = dpiHist[i].D, xm = xa + slot * (i + 0.5), top = V(d);
+      c.fillStyle = TRV.alpha(P.dim, i === a.k && a.f === 0 ? 0.5 : 0.28); c.fillRect(xm - bw / 2, top, bw, yBot - top);
+      c.strokeStyle = i === a.k && a.f === 0 ? P.amber : P.dim; c.lineWidth = (i === a.k && a.f === 0 ? 2 : 1.2) * thick; c.strokeRect(xm - bw / 2, top, bw, yBot - top);
+      if (d === Infinity) { c.fillStyle = P.dim; c.beginPath(); c.moveTo(xm - bw / 2, top); c.lineTo(xm, top - 12); c.lineTo(xm + bw / 2, top); c.fill(); }
+      if (labels) {
+        st.tag(`dv${i}`, [xm, top - (d === Infinity ? 24 : 11)], d === Infinity ? '∞' : fix(d, 3), 'num', { screen: true });
+        st.tag(`dn${i}`, [xm, yBot + 14], String(i), 'num', { screen: true });
+      }
+    }
+    if (labels) st.tag('dt', [(xa + xb) / 2, yTop - 6], L('每一步之后的 D(ρ ‖ σ)', 'D(ρ ‖ σ) after each step'), 'raw', { screen: true });
+    st.end();
+    return a;
+  }
   function drawStage() {
+    if (S.mode === 'dpi') { drawDpi(); return; }
     const st = stage, c = st.begin(), W = st.W, H = st.H, a = at(clock.t), Lo = layout(W, H, hud(a)), { R, cx, cy } = Lo;
     const X = (x) => cx + R * x, Y = (z) => cy - R * z, labels = !TRV.thumbMode;
     // the Bloch disc
@@ -228,6 +312,19 @@
       c.beginPath(); c.arc(X(x + wiped), cy, 4 * thick, 0, 2 * Math.PI); c.stroke(); c.restore();
     }
     if (Math.abs(z) > 2e-3) { c.save(); c.shadowColor = P.cyan; c.shadowBlur = 10; arrow(c, cx, cy, cx, Y(z), P.cyan, 5 * thick, 11 * thick); c.restore(); }
+    // the copy ledger carries a second state σ, the mirror of ρ: same diagonal, opposite coherence (grey, dashed)
+    if (S.ops.includes('copy')) {
+      const [mx, mz] = a.blochM;
+      c.setLineDash([2, 4]); c.strokeStyle = P.dim; c.lineWidth = 1 * thick; c.beginPath();
+      for (let i = 0; i <= a.k; i++) { const b = hist[i].blochM; if (i) c.lineTo(X(b[0]), Y(b[1])); else c.moveTo(X(b[0]), Y(b[1])); }
+      c.lineTo(X(mx), Y(mz)); c.stroke(); c.setLineDash([]);
+      if (Math.hypot(mx, mz) > 2e-3) { c.save(); c.setLineDash([5 * thick, 4 * thick]); arrow(c, cx, cy, X(mx), Y(mz), P.ink, 2 * thick, 10 * thick); c.restore(); }
+      c.strokeStyle = P.ink; c.lineWidth = 1.6 * thick; c.beginPath(); c.arc(X(mx), Y(mz), (Math.hypot(mx - x, mz - z) < 0.05 ? 11 : 5.5) * thick, 0, 2 * Math.PI); c.stroke();
+      if (labels) {
+        if (Math.hypot(mx - x, mz - z) > 0.12) st.tag('sg', [X(mx) - 14, Y(mz) - 14], 'σ', 'raw', { screen: true });
+        else if (a.f === 0) st.tag('same', [cx, cy - 22], L('局部：ρ 与 σ 重合', 'locally: ρ and σ coincide'), 'raw', { screen: true });
+      }
+    }
     c.save(); c.shadowColor = P.amber; c.shadowBlur = 12;
     if (Math.hypot(x, z) > 2e-3) arrow(c, cx, cy, X(x), Y(z), P.amber, 2.4 * thick, 12 * thick);
     c.fillStyle = P.amber; c.beginPath(); c.arc(X(x), Y(z), (Math.hypot(x, z) > 2e-3 ? 4.5 : 6) * thick, 0, 2 * Math.PI); c.fill(); c.restore();
@@ -235,6 +332,7 @@
       st.tag('k0', [cx + 16, Y(1.08)], '|0⟩', 'num', { screen: true });
       st.tag('k1', [cx + 16, Y(-1.08)], '|1⟩', 'num', { screen: true });
       st.tag('z', [cx - 14, Y(1.1)], 'Z', 'cy', { screen: true });
+      if (S.ops.includes('copy') && Math.hypot(x, z) > 0.12 && Math.hypot(x, z - 1) > 0.3) st.tag('rh', [X(x) + 14, Y(z) - 14], 'ρ', 'raw c-am', { screen: true });
       if (Math.abs(x) > 0.22) st.tag('xv', [X(x / 2), cy + 14], `${L('横', 'side')} ${fix(Math.abs(x), 2)}`, 'num c-mg', { screen: true });
       if (Math.abs(wiped) > 0.22) st.tag('xw', [X(x + wiped / 2), cy + 14], `${L('抹掉的横', 'wiped side')} ${fix(Math.abs(wiped), 2)}`, 'num c-mg', { screen: true });
     }
@@ -315,6 +413,14 @@
 
   /* ---------- strip: along the ledger ---------- */
   function drawPlot() {
+    if (S.mode === 'dpi') {
+      const g = kit.plot($('plot'), { x: [0, DPI.ops.length], y: [0, 0.32], pad: [34, 12, 8, 22] });
+      g.axes({ yTicks: [[0, '0'], [0.1, '0.1'], [0.2, '0.2'], [0.3, '0.3']], xTicks: DPI.ops.map((_, k) => [k + 1, String(k + 1)]).concat([[0, '0']]) });
+      g.line(dpiHist.map((h, k) => [k, Math.min(h.D, 0.32)]), P.dim, { width: 2 });
+      g.vline(clock.t, P.amber, { alpha: 0.8 });
+      $('plotMeta').textContent = `D ${fmtD(dpiHist[Math.min(DPI.ops.length, Math.floor(clock.t + 1e-9))].D)}`;
+      return;
+    }
     const n = S.ops.length, [lo, hi] = range(), g = kit.plot($('plot'), { x: [0, Math.max(1, n)], y: [lo, hi], pad: [34, 12, 8, 22] });
     const ticks = []; for (let k = 0; k <= Math.max(1, n); k++) ticks.push([k, String(k)]);
     g.axes({ yTicks: [[0, '0'], [LN2, 'ln 2']], xTicks: ticks });
@@ -331,6 +437,25 @@
 
   /* ---------- readouts ---------- */
   function drawText() {
+    if (S.mode === 'dpi') {
+      const a = dpiAt(clock.t), h = dpiHist[a.k];
+      $('roKey').textContent = `D(ρ ‖ σ) = ${fmtD(h.D)}`;
+      $('roKeySub').textContent = L('两个态经过同一个过程；每一步做完时由 2×2 矩阵的本征分解重算', 'two states through the same process; recomputed from the 2×2 eigendecompositions after every step');
+      $('roS').textContent = fix(entropy(qubit(h.r[0], h.r[1])), 3);
+      $('roX').textContent = fix(Math.abs(h.r[0]), 3);
+      $('roStep').textContent = a.k ? `${DPINAME[DPI.ops[a.k - 1]]()} · D ${fmtD(dpiHist[a.k - 1].D)} → ${fmtD(h.D)}` : '—';
+      $('roGlobal').textContent = '—';
+      $('roNote').textContent = L('转动：两个态一起刚性地转，D 不变。去极化：两个态沿半径一起缩向圆心，D 变小。捏合：两个态都落到青色的竖线上，D 变小。没有一步让 D 变大。', 'A turn: both states turn rigidly together and D stays. Depolarizing: both shrink together along their radii towards the centre and D falls. A pinch: both drop onto the cyan vertical line and D falls. No step makes D larger.');
+      $('pillS').querySelector('strong').textContent = fix(entropy(qubit(h.r[0], h.r[1])), 3);
+      $('pillQ').querySelector('strong').textContent = '0';
+      $('pillStep').querySelector('strong').textContent = String(a.f > 0 ? a.k + 1 : a.k);
+      $('rew').disabled = $('play').disabled = $('now').disabled = false;
+      document.querySelectorAll('#ops [data-op]').forEach((b) => { b.disabled = false; });
+      $('opNote').textContent = L('这一幕是两个态的比较；按任何一个操作就回到单个比特的账本。', 'This scene compares two states; pressing any operation goes back to the ledger of one bit.');
+      legend();
+      return;
+    }
+    legend();
     const a = at(clock.t), cur = a.f > 0 ? a.k + 1 : a.k, h = hist[cur], step = cur ? h.step : null;
     const ap = a.f > 0 ? '≈ ' : '';
     $('roKey').innerHTML = `${ap}${fix(a.heat, 3)} = ${fix(a.floor, 3)} + ${fix(a.extra, 3)}`;
@@ -386,16 +511,21 @@
       : L('从时间轴当前的位置往后记一步；时间轴在中途时，后面的步会被替换。', 'Each press writes one step after the rail\'s current position; with the rail part-way, the later steps are replaced.');
   }
 
+  const LEDGER_LEGEND = document.querySelector('#stage .hud-bl').innerHTML;
+  const DPI_LEGEND = [['am', '当前操作的态 ρ', 'the state ρ'], ['dm', '另一个态 σ（虚线）', 'the other state σ (dashed)'], ['cy', '捏合的记录线 Z', 'the record line Z of the pinch'], ['box dm', '每一步之后的 D(ρ ‖ σ)', 'D(ρ ‖ σ) after each step']]
+    .map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i><span class="zh">${zh}</span><span class="en">${en}</span></span>`).join('');
+  const COPY_LEGEND = LEDGER_LEGEND + '<span><i class="sw dm"></i><span class="zh">σ：对角相同、相干相反（虚线）</span><span class="en">σ: same diagonal, opposite coherence (dashed)</span></span>';
+  function legend() { const el = document.querySelector('#stage .hud-bl'), want = S.mode === 'dpi' ? DPI_LEGEND : S.ops.includes('copy') ? COPY_LEGEND : LEDGER_LEGEND; if (el._h !== want) { el.innerHTML = want; el._h = want; } }
   const paint = kit.painter(() => { drawStage(); drawPlot(); drawText(); }, [$('stage'), $('plot')]);
 
   /* ---------- controls ---------- */
   const clock = kit.clock({
     range: $('now'), play: $('play'), label: $('tau'), speeds: $('speedChips'), max: 1, rate: 0.9, step: 1,
-    format: (t) => L(`第 ${t.toFixed(2)} 步 <small>/ 共 ${S.ops.length} 步</small>`, `step ${t.toFixed(2)} <small>/ ${S.ops.length} in all</small>`),
-    onChange: (t, c) => { if (!S.ops.length && t) c.set(0, true); paint(); }
+    format: (t) => { const n = S.mode === 'dpi' ? DPI.ops.length : S.ops.length; return L(`第 ${t.toFixed(2)} 步 <small>/ 共 ${n} 步</small>`, `step ${t.toFixed(2)} <small>/ ${n} in all</small>`); },
+    onChange: (t, c) => { if (S.mode !== 'dpi' && !S.ops.length && t) c.set(0, true); paint(); }
   });
   let stepping = null;
-  function restart() { if (stepping) { stepping.cancel(); stepping = null; } S.ops = []; rebuild(); clock.pause(); clock.setMax(1, true); clock.set(0); }
+  function restart() { if (stepping) { stepping.cancel(); stepping = null; } S.mode = 'ledger'; S.ops = []; rebuild(); clock.pause(); clock.setMax(1, true); clock.set(0); }
   /** Write one more step after the rail's current position and glide to it. */
   function addOp(op) {
     if (stepping) { const s = stepping; stepping = null; s.finish(); }
@@ -408,11 +538,11 @@
     const run = kit.tween(700, (e) => clock.set(k + e), () => { if (stepping === run) stepping = null; });
     stepping = run; stepping.finish = () => { run.cancel(); clock.set(k + 1); };
   }
-  $('ops').addEventListener('click', (ev) => { const b = ev.target.closest('[data-op]'); if (b && !b.disabled) { cards.mark(null); addOp(b.dataset.op); } });
+  $('ops').addEventListener('click', (ev) => { const b = ev.target.closest('[data-op]'); if (b && !b.disabled) { cards.mark(null); if (S.mode === 'dpi') restart(); addOp(b.dataset.op); } });
   $('restart').addEventListener('click', () => { cards.mark(null); restart(); });
   $('rew').addEventListener('click', () => { clock.pause(); clock.set(0); });
   /** A slider changes every turn (or every bath reset) in the ledger; the rail stays where it is. */
-  const retune = () => { const t = clock.t; rebuild(); clock.setMax(Math.max(1, S.ops.length), true); clock.set(Math.min(t, S.ops.length)); };
+  const retune = () => { if (S.mode === 'dpi') { restart(); return; } const t = clock.t; rebuild(); clock.setMax(Math.max(1, S.ops.length), true); clock.set(Math.min(t, S.ops.length)); };
   const fAlpha = kit.field($('alpha'), { fmt: (v) => `${Math.round(v)}°`, onInput: (v) => { cards.mark(null); S.alpha = v * DEG; retune(); } });
   const fPop = kit.field($('pop'), { fmt: (v) => fix(v, 3), onInput: (v) => { cards.mark(null); S.p = v; retune(); } });
 
@@ -422,14 +552,16 @@
     steps: { alpha: 50, p: 0.9, ops: ['rot', 'pinch', 'rot', 'pinch', 'rot', 'pinch'], still: 6 },
     cycle: { alpha: 90, p: 0.9, ops: ['rot', 'pinch', 'reset'], still: 3 },
     bath: { alpha: 90, p: 0.9, ops: ['rot', 'pinch', 'swap'], still: 3 },
-    copy: { alpha: 90, p: 0.9, ops: ['rot', 'copy', 'uncopy'], still: 2 }
+    copy: { alpha: 90, p: 0.9, ops: ['rot', 'copy', 'uncopy'], still: 2 },
+    dpi: { dpi: true, still: 5 }
   };
   const NOTES = {
     pinch: ['先转 90°：琥珀色的箭头从 |0⟩ 转到横躺，熵那一栏不动。再捏合：品红的横着的一份被抹掉，只剩一道虚线标出它原来的长度，箭头缩成圆心，熵那一栏升到 ln 2 的虚线，付给环境的热仍是 0。', 'Turn by 90° first: the amber arrow swings from |0⟩ to lying flat, and the entropy column does not move. Then pinch: the magenta sideways part is wiped out, leaving only a dashed outline of its old length, the arrow shrinks to the centre, the entropy column rises to the dashed ln 2 line, and the heat paid is still 0.'],
     steps: ['每步转 50°、再捏合，连做三步：箭头一级一级落到青色的线上、越来越短；熵那一栏一块一块叠起来，每一块标着这一步的 D，叠起来正好是总熵。', 'Turn by 50°, then pinch, three times over: the arrow drops step by step onto the cyan line and gets shorter; the entropy column stacks up block by block, each block marked with that step\'s D, and together they make the total.'],
     cycle: ['阶段 A：转 90° 再捏合，熵那一栏升到 ln 2，热为 0。阶段 B：理想复位把箭头拉回 |0⟩，熵那一栏回到 0，付给环境的热升到 ln 2，正好碰到下界的横线。', 'Stage A: turn by 90° and pinch; the entropy column rises to ln 2 and the heat is 0. Stage B: the ideal reset pulls the arrow back to |0⟩, the entropy column drops to 0, and the heat paid rises to ln 2, just touching the floor line.'],
     bath: ['同样先把箭头捏成圆心，再与一个 p = 0.9 的热浴比特交换：箭头只回到 0.8 高，熵减 0.368；热付了 0.879，比下界高出斜线的一截 0.511，那是右边小圆里热浴比特被推离平衡的 D。', 'The arrow is pinched to the centre as before, then swapped with a bath qubit at p = 0.9: it climbs back only to height 0.8, an entropy decrease of 0.368; the heat paid is 0.879, above the floor by the hatched piece of 0.511, the D by which the bath qubit in the small disc was pushed off equilibrium.'],
-    copy: ['转 90° 后拷贝进记录比特 E：系统这一侧的箭头缩成圆心，熵那一栏升到 ln 2（斜线：只是局部的熵），付给环境的热是 0。下一步撤回拷贝，箭头回到横躺，熵回到 0。', 'Turn by 90°, then copy into the record bit E: the system\'s arrow shrinks to the centre, the entropy column rises to ln 2 (hatched: only the local entropy), and the heat paid is 0. The next step undoes the copy: the arrow lies flat again and the entropy is back to 0.']
+    copy: ['转 90° 后拷贝进记录比特 E：系统这一侧的琥珀色箭头 ρ 缩成圆心，熵那一栏升到 ln 2（斜线：只是局部的熵），付给环境的热是 0。灰色虚线箭头 σ 与 ρ 对角相同、横着的一份相反，拷贝后也缩到圆心同一点：局部上两个态重合。下一步撤回拷贝，两支箭头各回各位，熵回到 0。', 'Turn by 90°, then copy into the record bit E: the system\'s amber arrow ρ shrinks to the centre, the entropy column rises to ln 2 (hatched: only the local entropy), and the heat paid is 0. The grey dashed arrow σ has the same diagonal as ρ and the opposite sideways part; after the copy it shrinks to the same point at the centre, so locally the two states coincide. The next step undoes the copy: each arrow goes back to where it was, and the entropy is back to 0.'],
+    dpi: ['两个态经过同一串过程：琥珀色的 ρ 从 |0⟩、灰色虚线的 σ 从 |+⟩ 出发，起初 D(ρ ‖ σ) = ∞。去极化 λ = 0.5：两个点沿半径一起缩向圆心，D 降到 0.275；绕 y 转 0.7 弧度：两个点一起刚性地转，D 不变；Z 基捏合：两个点都落到青色的竖线上，D 降到 0.258；再去极化两次，D 继续变小。右边每一步一根柱，没有一根比前一根高。', 'Two states through the same chain of processes: the amber ρ starts at |0⟩ and the grey dashed σ at |+⟩, and at first D(ρ ‖ σ) = ∞. Depolarize with λ = 0.5: the two points shrink together along their radii towards the centre and D drops to 0.275; turn 0.7 rad about y: the two points turn rigidly together and D stays; pinch in Z: both drop onto the cyan vertical line and D drops to 0.258; depolarize twice more and D keeps falling. On the right one bar per step, none taller than the one before.']
   };
   let booting = true, moving = null;
   function applyPreset(id) {
@@ -438,6 +570,13 @@
     if (stepping) { stepping.cancel(); stepping = null; }
     const land = () => {
       moving = null;
+      if (p.dpi) {
+        if (stepping) { stepping.cancel(); stepping = null; }
+        S.mode = 'dpi'; S.ops = []; rebuild(); clock.pause(); clock.setMax(DPI.ops.length, true); clock.set(0);
+        if (TRV.still || (booting && !TRV.embed)) clock.set(p.still); else if (booting) kit.autoplay(clock, $('stage')); else clock.play();
+        return;
+      }
+      S.mode = 'ledger';
       S.alpha = p.alpha * DEG; S.p = p.p; fAlpha.set(p.alpha); fPop.set(p.p);
       S.ops = p.ops.slice(); rebuild(); clock.pause(); clock.setMax(S.ops.length, true); clock.set(0);
       if (TRV.still || (booting && !TRV.embed)) clock.set(p.still); else if (booting) kit.autoplay(clock, $('stage')); else clock.play();
@@ -454,13 +593,15 @@
   TRV.startGlitch(document.querySelector('.brand'));
 
   /* ---------- probe, cover, start ---------- */
-  const pub = (h) => ({ bloch: h.bloch.slice(), rec: h.rec.slice(), S: h.S, Sglob: h.Sglob, linked: h.linked, heat: h.heat, floor: h.floor, extra: h.extra,
+  const pub = (h) => ({ bloch: h.bloch.slice(), blochM: h.blochM.slice(), rec: h.rec.slice(), S: h.S, Sglob: h.Sglob, linked: h.linked, heat: h.heat, floor: h.floor, extra: h.extra,
     J: h.J.map((r) => r.slice()), step: h.step ? Object.assign({}, h.step) : null, seg: { base: h.seg.base, kind: h.seg.kind, blocks: h.seg.blocks.slice() } });
   window.ERASE_DEBUG = {
     get state() {
       const a = at(clock.t);
-      return { preset: cards.current, t: clock.t, n: S.ops.length, playing: clock.playing, alpha: S.alpha, p: S.p, ops: S.ops.slice(),
-        hist: hist.map(pub), now: { bloch: a.bloch.slice(), S: a.S, heat: a.heat, floor: a.floor, extra: a.extra } };
+      const da = dpiAt(clock.t);
+      return { mode: S.mode, dpi: { lam: DPI.lam, ang: DPI.ang, ops: DPI.ops.slice(), hist: dpiHist.map((h) => ({ r: h.r.slice(), s: h.s.slice(), D: h.D, op: h.op })), now: { k: da.k, f: da.f, r: da.r.slice(), s: da.s.slice() } },
+        preset: cards.current, t: clock.t, n: S.ops.length, playing: clock.playing, alpha: S.alpha, p: S.p, ops: S.ops.slice(),
+        hist: hist.map(pub), now: { bloch: a.bloch.slice(), blochM: a.blochM.slice(), S: a.S, heat: a.heat, floor: a.floor, extra: a.extra } };
     },
     seek: (t) => { clock.pause(); clock.set(t); }
   };
