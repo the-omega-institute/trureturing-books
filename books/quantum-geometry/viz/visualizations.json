@@ -506,8 +506,8 @@
       "code": "ORTHO//CUT",
       "title": "黄金切投 · 一条窗口从格点里切出的准晶、±1 接缝与有界间隙的回归",
       "title_en": "The golden cut · a quasicrystal cut from a lattice by a window, the ±1 seam and returns with bounded gaps",
-      "summary": "终章“黄金切投”一节的四个场景。切投：黄金整数 a + bφ 画成格点 (a + bφ, a + bψ)，一条长为 1 的窗口选出其中一些，投到直线上，相邻两点只相距 φ 或 φ²；挪动窗口，贴边的点翻转，深处的点不动；固定一小片就定住了远处的点。卡西尼：φ 的幂在同一张格点图里与原点围成的矩形，面积恒为 ±1。回归：按黄金角旋转的轨道以有界的间隔回到观测窗。接受窗：菱形三十面体，点离边界越远越稳（三维接受窗与“帝国”是文献结果）。下方条带列出自然数的齐肯多夫码，没有相邻的两个 1。灵魂与遗迹的说法是本书的诠释模型。",
-      "summary_en": "Four scenes for the coda’s section on the golden cut. Cut and project: the golden integers a + bφ are drawn as lattice points (a + bφ, a + bψ), a window of length 1 selects some of them, and projected to a line the neighbours are φ or φ² apart; move the window and points at its edge flip while deep points stay; fixing a small patch fixes distant points. Cassini: in the same lattice, the rectangle between the origin and a power of φ always has area ±1. Returns: an orbit turning by the golden angle comes back to an observation window with bounded gaps. The acceptance window: a rhombic triacontahedron, where a point is the safer the farther it is from the boundary (the three-dimensional window and the “empire” are literature results). A strip lists the Zeckendorf codes of the natural numbers, none with two adjacent 1s. What the page says about souls and ruins is an interpretive model of this book.",
+      "summary": "终章“黄金切投”一节的五个场景。切投：黄金整数 a + bφ 画成格点 (a + bφ, a + bψ)，一条长为 1 的窗口选出其中一些，投到直线上，相邻两点只相距 φ 或 φ²；挪动窗口，贴边的点翻转，深处的点不动；固定一小片就定住了远处的点。卡西尼：φ 的幂在同一张格点图里与原点围成的矩形，面积恒为 ±1。回归：按黄金角旋转的轨道以有界的间隔回到观测窗。接受窗：菱形三十面体，点离边界越远越稳（三维接受窗与“帝国”是文献结果）。缝：旋转的前 N 个点在圆周上切出的弧至多三种长度，黄金角的弧都长于 1/(√5·N)，π − 3 在 N = 114 切出极短的弧。下方条带列出自然数的齐肯多夫码，没有相邻的两个 1。灵魂与遗迹的说法是本书的诠释模型。",
+      "summary_en": "Five scenes for the coda’s section on the golden cut. Cut and project: the golden integers a + bφ are drawn as lattice points (a + bφ, a + bψ), a window of length 1 selects some of them, and projected to a line the neighbours are φ or φ² apart; move the window and points at its edge flip while deep points stay; fixing a small patch fixes distant points. Cassini: in the same lattice, the rectangle between the origin and a power of φ always has area ±1. Returns: an orbit turning by the golden angle comes back to an observation window with bounded gaps. The acceptance window: a rhombic triacontahedron, where a point is the safer the farther it is from the boundary (the three-dimensional window and the “empire” are literature results). Gaps: the first N points of a rotation cut the circle into arcs of at most three lengths; at the golden angle every arc is longer than 1/(√5·N), while π − 3 cuts a tiny arc at N = 114. A strip lists the Zeckendorf codes of the natural numbers, none with two adjacent 1s. What the page says about souls and ruins is an interpretive model of this book.",
       "path": "golden-cut-observer/",
       "thumbnail": "golden-cut-observer/thumb.jpg",
       "status": "live",
@@ -567,13 +567,19 @@
           "gid": "D5/S3/Fourier/GoldenModelSetDelone.norm_separation"
         },
         {
-          "gid": "D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone"
-        },
-        {
           "gid": "D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result"
         },
         {
           "gid": "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes"
+        },
+        {
+          "gid": "D5/S1/Phase/ThreeGap/Main.three_gap_card_le_three"
+        },
+        {
+          "gid": "D5/S1/Phase/ThreeGap/Main.three_gap_lengths_eq"
+        },
+        {
+          "gid": "D5/S1/Depth/GoldenHurwitzBound.golden_hurwitz_bound"
         }
       ]
     },

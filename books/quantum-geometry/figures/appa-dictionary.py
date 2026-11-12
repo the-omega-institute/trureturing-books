@@ -13,17 +13,17 @@ import math
 
 from tbook import figkit
 
-SIZE = (560, 412)
+SIZE = (560, 448)
 WRAP = True
 ALT = {
-    "zh": "六张同样大小的小图，排成两行，每张上面写传统写法，下面写本书的几何说法。纯态 |ψ⟩：球面上一支琥珀色的箭头，即球面上的方向。"
+    "zh": "六张同样大小的小图，排成两行，每张上面写传统写法，下面写本书的几何说法，最下面一行是这一条的认识论状态里列出的章。纯态 |ψ⟩：球面上一支琥珀色的箭头，即球面上的方向。"
           "玻恩法则 |⟨φ|ψ⟩|²：标尺 a 与琥珀色的箭头 b 夹角 θ，b 落在 a 上的青色影子长 cos θ，概率是影子的平方 cos²θ。"
           "密度矩阵 ρ：圆盘里一个琥珀色的点，到圆心的距离小于 1，即球内的点。"
           "退相干：琥珀色的点沿品红的横向虚线移到竖直的青色测量轴上，横着的那一份被抹掉，即捏合到测量轴。"
           "对易子 [A, B]：两支箭头 u、v 张成品红的平行四边形，带一个转向箭头，即有向面积 2 u∧v。"
           "单比特门 U：紫色的转轴，灰色箭头绕它转到琥珀色箭头，即旋转器。",
     "en": "Six cards of the same size in two rows; each names the conventional notation on top and the book's geometric "
-          "reading below. Pure state |ψ⟩: an amber arrow on a sphere, a direction on the sphere. Born rule |⟨φ|ψ⟩|²: a "
+          "reading below, with the chapters listed in that row's status at the foot. Pure state |ψ⟩: an amber arrow on a sphere, a direction on the sphere. Born rule |⟨φ|ψ⟩|²: a "
           "ruler a and an amber arrow b at angle θ; the cyan shadow of b on a has length cos θ, and the probability is the "
           "squared shadow cos²θ. Density matrix ρ: an amber point inside a disc, closer than 1 to the centre, a point "
           "inside the ball. Decoherence: the amber point moves along a magenta dashed transverse segment onto the vertical "
@@ -32,18 +32,35 @@ ALT = {
           "a grey arrow turns about it to the amber arrow, a rotor.",
 }
 
-W, H, GAP = 176, 198, 16
+W, H, GAP = 176, 216, 16
 CX, CY = W / 2, 104          # centre of each picture
 
 
-def card(p, top_zh, top_en, foot_zh, foot_en, foot_role):
+# where each row of the master table is anchored: the chapters in its status column ("认识论状态")
+CHAPTERS = {"pure": (1, 2, 3, 26), "born": (2, 28), "density": (3, 26), "decoherence": (4, 6), "commutator": (5, 6), "gate": (7, 27)}
+
+
+def chapters(p, key):
+    """'第 1–3、26 章' / 'Chapters 1–3, 26' from the chapter list, runs of consecutive numbers joined by a dash."""
+    runs, ns = [], CHAPTERS[key]
+    for n in ns:
+        if runs and n == runs[-1][1] + 1:
+            runs[-1][1] = n
+        else:
+            runs.append([n, n])
+    parts = [f"{a}–{b}" if b > a else str(a) for a, b in runs]
+    return p.t(f"第 {'、'.join(parts)} 章", f"Chapter{'s' if len(ns) > 1 else ''} {', '.join(parts)}")
+
+
+def card(p, top_zh, top_en, foot_zh, foot_en, foot_role, key):
     p.rect(1, 1, W - 2, H - 2, color="edge", width=1.1, rx=8)
     p.text(CX, 24, p.t(top_zh, top_en), size=14, color="dim", anchor="middle")
-    p.text(CX, H - 16, p.t(foot_zh, foot_en), size=14, weight=600, color=foot_role, anchor="middle")
+    p.text(CX, H - 36, p.t(foot_zh, foot_en), size=14, weight=600, color=foot_role, anchor="middle")
+    p.text(CX, H - 13, chapters(p, key), size=13, color="dim", anchor="middle")
 
 
 def pure_state(p):
-    card(p, "纯态 |ψ⟩", "pure state |ψ⟩", "球面上的方向", "direction on the sphere", "now")
+    card(p, "纯态 |ψ⟩", "pure state |ψ⟩", "球面上的方向", "direction on the sphere", "now", "pure")
     sp = p.sphere(CX, CY + 2, 54)
     sp.outline()
     sp.great_circle((0, 0, 1))
@@ -54,7 +71,7 @@ def pure_state(p):
 
 
 def born(p):
-    card(p, "玻恩法则 |⟨φ|ψ⟩|²", "Born rule |⟨φ|ψ⟩|²", "影子的平方 cos²θ", "squared shadow cos²θ", "line")
+    card(p, "玻恩法则 |⟨φ|ψ⟩|²", "Born rule |⟨φ|ψ⟩|²", "影子的平方 cos²θ", "squared shadow cos²θ", "line", "born")
     ox, oy, r, th = 34, 140, 112, 52
     c = math.cos(math.radians(th))
     bx, by = ox + r * c, oy - r * math.sin(math.radians(th))
@@ -77,7 +94,7 @@ def disc(p, R=60):
 
 
 def density(p):
-    card(p, "密度矩阵 ρ", "density matrix ρ", "球内的点", "point inside the ball", "now")
+    card(p, "密度矩阵 ρ", "density matrix ρ", "球内的点", "point inside the ball", "now", "density")
     R = 60
     disc(p, R)
     r, a = 0.58, math.radians(35)
@@ -89,7 +106,7 @@ def density(p):
 
 
 def decoherence(p):
-    card(p, "退相干 Φ(ρ)", "decoherence Φ(ρ)", "捏合到测量轴", "pinch onto the axis", "line")
+    card(p, "退相干 Φ(ρ)", "decoherence Φ(ρ)", "捏合到测量轴", "pinch onto the axis", "line", "decoherence")
     R = 60
     disc(p, R)
     p.line(CX, CY - R, CX, CY + R, "line", 2.2)
@@ -103,7 +120,7 @@ def decoherence(p):
 
 
 def commutator(p):
-    card(p, "对易子 [*A*, *B*]", "commutator [*A*, *B*]", "有向面积 2 *u*∧*v*", "oriented area 2 *u*∧*v*", "area")
+    card(p, "对易子 [*A*, *B*]", "commutator [*A*, *B*]", "有向面积 2 *u*∧*v*", "oriented area 2 *u*∧*v*", "area", "commutator")
     ox, oy = 40, 150
     u = (96, -12)
     v = (30, -78)
@@ -119,7 +136,7 @@ def commutator(p):
 
 
 def gate(p):
-    card(p, "单比特门 *U*", "single-qubit gate *U*", "旋转器", "rotor", "axis")
+    card(p, "单比特门 *U*", "single-qubit gate *U*", "旋转器", "rotor", "axis", "gate")
     sp = p.sphere(CX, CY + 2, 54)
     sp.outline()
     axis = (0.0, 0.0, 1.0)
