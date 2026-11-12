@@ -6,8 +6,6 @@
    (c_k ⋆ c_{k+1}, c_k), σ_k⁻¹ sends (u, v) to (v, v ⋆⁻¹ u). "Closed up" joins the k-th top end to the k-th bottom end
    with an arc on the right; a closed coloring is one that comes back. A card may show a second braid on the right for
    comparison; its bottom colors are those of the first, with the last one copied when it has one strand more.
-   An open braid is drawn as lit tubes (kit.solid), which hide one another where one passes in front; a closed braid
-   is drawn as the plane braid diagram.
    Read-only probe for the browser suite: window.BRAID_DEBUG. */
 (() => {
   'use strict';
@@ -68,7 +66,7 @@
     const half = (b) => ((b.n - 1) / 2) * D + 0.35;
     const reach = (b) => (S.closed ? 0.42 + 0.28 * (b.n - 1) : 0);
     if (B) {
-      const wA = half(A) + reach(A), wB = half(B) + reach(B), gap = S.closed ? 0.6 : 1.6;   // open braids are seen at a slant: room for their floor plates
+      const wA = half(A) + reach(A), wB = half(B) + reach(B), gap = S.closed ? 0.6 : 1.0;
       A.cx = -(gap / 2 + wA) + half(A); B.cx = gap / 2 + half(B);
       const shift = ((A.cx - half(A)) + (B.cx + half(B) + reach(B))) / 2; A.cx -= shift; B.cx -= shift;
     } else A.cx = -reach(A) / 2;
@@ -105,16 +103,10 @@
   }
 
   /* ---------- stage ---------- */
-  /* An open braid is drawn as lit tubes: the strand in front hides the one behind it by being in front, with no break
-     drawn. The radius is a choice of drawing and stands for no quantity; it is small enough that no two tubes meet
-     (within one time slice two world lines stay at least 0.8 apart). A closed braid is the braid diagram and stays in
-     the plane: thin lines, each over a halo of the stage colour set just behind it, so that the line in front cuts the
-     one behind it. */
-  const TR = 0.075;
   const cv = $('cv'), VIEWS = { tilt: [-0.5, 0.24], front: [0, 0] };
   const opts3 = { canvas: cv, radius: 0.3, cx: 0.5, cy: 0.5, yaw: VIEWS.tilt[0], pitch: VIEWS.tilt[1] };
   let M = null, lastFit = null;
-  const stage = kit.solid($('stage'), Object.assign(opts3, {
+  const stage = kit.stage3($('stage'), Object.assign(opts3, {
     onChange: () => paint(),
     onPick: (ev, st) => {
       if (!M) return false;
@@ -126,97 +118,65 @@
     const W = cv.clientWidth || 1, H = cv.clientHeight || 1, thumb = TRV.thumbMode, narrow = W < 560;
     const top = thumb ? 20 : (narrow ? 70 : 64), bottom = thumb ? 20 : (narrow ? 96 : 54);
     let x0 = Infinity, x1 = -Infinity;
-    if (S.closed) {
-      for (const b of M.list) { x0 = Math.min(x0, xOf(b, 0) - 0.45); x1 = Math.max(x1, xOf(b, b.n - 1) + 0.5 + 0.28 * (b.n - 1)); }
-      const zh = Z1 - Z0 + 2 * (0.2 + 0.13 * 2);
-      const unit = Math.min((W - (narrow ? 24 : 70)) / (x1 - x0), (H - top - bottom) / (zh + 0.25));
-      opts3.radius = unit / Math.min(W, H); opts3.cy = (top + (H - bottom)) / 2 / H; opts3.cx = 0.5 - ((x0 + x1) / 2) * unit / W;
-    } else {
-      // an open braid is seen at a slant: fit the screen box of its floor plates, the time axis on the left and the
-      // labels above (seen from the camera of the chosen view, so that turning the stage does not rescale it)
-      const [yaw, pitch] = VIEWS[S.view], cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch);
-      let y0 = Infinity, y1 = -Infinity;
-      for (const b of M.list) for (const x of [xOf(b, 0) - 0.4 - (b === M.A ? 0.2 : 0), xOf(b, b.n - 1) + 0.4]) for (const y of [-0.6, 0.6]) for (const z of [Z0 - 0.2, Z1 + 0.75]) {
-        const sx = cy * x - sy * y, su = sy * sp * x + cy * sp * y + cp * z;
-        x0 = Math.min(x0, sx); x1 = Math.max(x1, sx); y0 = Math.min(y0, su); y1 = Math.max(y1, su);
-      }
-      const lab = thumb ? 0 : 56;      // the label of the time axis, left of it
-      const unit = Math.min((W - (narrow ? 24 : 70) - lab) / (x1 - x0), (H - top - bottom) / (y1 - y0));
-      opts3.radius = unit / Math.min(W, H); opts3.cx = 0.5 + (lab / 2 - ((x0 + x1) / 2) * unit) / W;
-      opts3.cy = ((top + (H - bottom)) / 2 + ((y0 + y1) / 2) * unit) / H;
-    }
+    for (const b of M.list) { x0 = Math.min(x0, xOf(b, 0) - 0.45); x1 = Math.max(x1, xOf(b, b.n - 1) + (S.closed ? 0.5 + 0.28 * (b.n - 1) : 0.45)); }
+    const zh = Z1 - Z0 + (S.closed ? 2 * (0.2 + 0.13 * 2) : 0.4);
+    const unit = Math.min((W - (narrow ? 24 : 70)) / (x1 - x0), (H - top - bottom) / (zh + 0.25));
+    opts3.radius = unit / Math.min(W, H); opts3.cy = (top + (H - bottom)) / 2 / H; opts3.cx = 0.5 - ((x0 + x1) / 2) * unit / W;
     lastFit = { W, H, x0, x1 };
-  }
-  /** The part of a sampled world line below (below = true) or above the height z, cut exactly at z. */
-  function cut(pts, z, below) {
-    const out = [];
-    for (let i = 0; i < pts.length; i++) {
-      const p = pts[i];
-      if (i && pts[i - 1][2] < z && p[2] > z) {
-        const q = pts[i - 1], e = (z - q[2]) / (p[2] - q[2]);
-        out.push([q[0] + (p[0] - q[0]) * e, q[1] + (p[1] - q[1]) * e, z]);
-      }
-      if (below ? p[2] <= z + 1e-9 : p[2] >= z - 1e-9) out.push(p);
-    }
-    return out;
-  }
-  /** A line of the braid diagram: the line and, just behind it, a wider halo of the stage colour. */
-  function diagramLine(st, pts, color, width, alpha) {
-    const D = st.facing(), back = (width + 6) * st.lw / st.unit;
-    st.line(pts.map((p) => [p[0] - D[0] * back, p[1] - D[1] * back, p[2] - D[2] * back]), { color: P.stage, width: width + 5 });
-    st.line(pts, { color, width, alpha });
   }
 
   function drawStage() {
     M = model(); fit();
-    const st = stage, t = clock.t, done = t >= 1 - 1e-9;
-    st.begin();
-    M.list.forEach((b, bi) => {
+    const st = stage, ctx = st.begin(), t = clock.t, lw = st.lw, done = t >= 1 - 1e-9;
+    const segs = [];
+    const push = (pts, color, width, alpha, halo) => { for (let i = 1; i < pts.length; i++) { const a = st.p(pts[i - 1]), b = st.p(pts[i]); segs.push({ a, b, d: (a[2] + b[2]) / 2, color, width, alpha, halo }); } };
+    for (const b of M.list) {
       const zNow = zAt(t), ls = lines(b);
       // the plane the particles live in, at the bottom (open braids only: closed ones have their arcs there)
       if (!S.closed) {
         const xa = xOf(b, 0) - 0.4, xb = xOf(b, b.n - 1) + 0.4;
-        st.line([[xa, -0.6, Z0], [xb, -0.6, Z0], [xb, 0.6, Z0], [xa, 0.6, Z0]], { color: P.lineHot, width: 1, alpha: 0.9, close: true });
+        st.path([[xa, -0.6, Z0], [xb, -0.6, Z0], [xb, 0.6, Z0], [xa, 0.6, Z0]], { color: P.lineHot, width: 1, alpha: 0.9, close: true, fade: false });
       }
-      // world lines: the part already passed is a tube (in the diagram a full line), the part ahead a faint thread
-      ls.forEach((pts, s) => {
-        const past = cut(pts, zNow, true), ahead = cut(pts, zNow, false);
-        if (S.closed) {
-          if (past.length > 1) diagramLine(st, past, P.ink, 2.6, 1);
-          if (ahead.length > 1) diagramLine(st, ahead, P.ink, 2.2, 0.3);
-        } else {
-          if (past.length > 1) st.tube(`w${bi}${s}`, past, { r: TR, color: P.ink, glow: 0.12 });
-          if (ahead.length > 1) st.line(ahead, { color: P.ink, width: 1.6, alpha: 0.32 });
-        }
+      // world lines: the part already passed is solid, the part ahead faint
+      ls.forEach((pts) => {
+        const past = pts.filter((p) => p[2] <= zNow + 1e-9), ahead = pts.filter((p) => p[2] >= zNow - 1e-9);
+        if (past.length > 1) push(past, P.ink, 2.6, 0.95, true);
+        if (ahead.length > 1) push(ahead, P.ink, 2.2, 0.3, true);
       });
       if (S.closed) for (let k = 0; k < b.n; k++) {
         const back = b.cols[b.L][k] === b.cols[0][k];
-        diagramLine(st, arc(b, k), done ? (back ? P.cyan : P.magenta) : P.dim, done ? 2.6 : 1.8, done ? 1 : 0.55);
+        push(arc(b, k), done ? (back ? P.cyan : P.magenta) : P.dim, done ? 2.6 : 1.8, done ? 0.95 : 0.55, true);
       }
-    });
+    }
+    // back to front, each piece over a halo of the stage color: the strand in front cuts the one behind
+    segs.sort((p, q) => p.d - q.d);
+    // (butt caps on the halo, so that a piece never eats into its neighbour on the same strand)
+    for (const s of segs) {
+      if (s.halo) { ctx.lineCap = 'butt'; ctx.globalAlpha = 1; ctx.strokeStyle = P.stage; ctx.lineWidth = (s.width + 5) * lw; ctx.beginPath(); ctx.moveTo(s.a[0], s.a[1]); ctx.lineTo(s.b[0], s.b[1]); ctx.stroke(); }
+      ctx.lineCap = 'round'; ctx.globalAlpha = s.alpha; ctx.strokeStyle = s.color; ctx.lineWidth = s.width * lw; ctx.beginPath(); ctx.moveTo(s.a[0], s.a[1]); ctx.lineTo(s.b[0], s.b[1]); ctx.stroke();
+    }
+    ctx.globalAlpha = 1; ctx.lineCap = 'round';
     // time axis, the readhead plane, the colors now and at the bottom
     M.list.forEach((b, bi) => {
       const zNow = zAt(t), ps = positions(b, t * b.L), cNow = b.cols[Math.min(b.L, Math.floor(t * b.L + 1e-9))];
       const xa = xOf(b, 0) - 0.4, xb = xOf(b, b.n - 1) + 0.4;
       if (bi === 0 && !S.closed) {
-        st.arrow([xa - 0.12, 0, Z0], [xa - 0.12, 0, Z1 + 0.18], { color: P.dim, width: 1.2, headSize: 8 });
-        st.tag('time', [xa - 0.12, 0, 0], L('时间 ↑', 'time ↑'), 'num', { dx: -24 });
+        st.arrow([xa - 0.12, 0, Z0], [xa - 0.12, 0, Z1 + 0.18], { color: P.dim, width: 1.2, headSize: 8, fade: false });
+        st.tag('time', [xa - 0.12, 0, 0], L('时间 ↑', 'time ↑'), 'num', { dx: -24, fade: false });
       }
-      st.line([[xa, -0.6, zNow], [xb, -0.6, zNow], [xb, 0.6, zNow], [xa, 0.6, zNow]], { color: P.amber, width: 1.2, alpha: 0.7, close: true, dash: [5, 4] });
+      st.path([[xa, -0.6, zNow], [xb, -0.6, zNow], [xb, 0.6, zNow], [xa, 0.6, zNow]], { color: P.amber, width: 1.2, alpha: 0.7, close: true, dash: [5, 4], fade: false });
       // the strand at slot s is at ps[perm[s]] (between crossings the slots are where the strands stand)
       const j = Math.min(b.L, Math.floor(t * b.L + 1e-9)), perm = b.perm[Math.min(j, b.L)];
-      // on a tube the bead of the time now is a little wider than the tube, so that it rings it
-      const rNow = S.closed ? 4.5 : 1.3 * TR * st.unit / st.lw, gap = S.closed ? 0 : TR * st.unit;
       for (let s = 0; s < b.n; s++) {
         const p = ps[perm[s]], w = [p[0], p[1], zNow];
-        st.bead(w, { r: rNow, color: P.amber, glow: 0.6, key: `now${bi}${s}` });
-        if (!b.L || t * b.L - j < 0.1 || t * b.L - j > 0.9 || done) st.tag(`now${bi}${s}`, w, `<span class="c-am">${cNow[s]}</span>`, 'num big-c', { dy: -15 - gap * 0.5, dx: 12 + gap });
-        else st.tag(`now${bi}${s}`, w, '', 'num');
-        st.tag(`bot${bi}${s}`, [xOf(b, s), 0, Z0], `${b.cols[0][s]}`, bi === 0 ? 'num big-c pickable' : 'num big-c', { dy: S.closed ? 14 : 22 + gap * 0.5 });
+        st.dot(w, 4.5, P.amber, { glow: 10, fade: false });
+        if (!b.L || t * b.L - j < 0.1 || t * b.L - j > 0.9 || done) st.tag(`now${bi}${s}`, w, `<span class="c-am">${cNow[s]}</span>`, 'num big-c', { dy: -15, dx: 12, fade: false });
+        else st.tag(`now${bi}${s}`, w, '', 'num', { fade: false });
+        st.tag(`bot${bi}${s}`, [xOf(b, s), 0, Z0], `${b.cols[0][s]}`, bi === 0 ? 'num big-c pickable' : 'num big-c', { dy: S.closed ? 14 : 22, fade: false });
       }
       // above each braid: strands, word, and once closed up and run through, how many colorings come back
       const cnt = S.closed && done ? ` · <span class="${b.count ? 'c-cy' : 'c-mg'}">${L('回得来', 'back')} ${b.count}/${3 ** b.n}</span>` : '';
-      st.tag(`w${bi}`, [b.cx + (S.closed ? 0.2 : 0), 0, (S.closed ? Z1 + 0.62 : Z1 + 0.5)], `${b.n}${L(' 股', ' str.')} · ${product(b.word)}${cnt}`, 'num', { dy: -(gap + 6) });   // clear of the colors on the beads
+      st.tag(`w${bi}`, [b.cx + (S.closed ? 0.2 : 0), 0, (S.closed ? Z1 + 0.62 : Z1 + 0.5)], `${b.n}${L(' 股', ' str.')} · ${product(b.word)}${cnt}`, 'num', { fade: false });
     });
     st.end();
     $('stage').classList.toggle('closed', S.closed);
@@ -336,8 +296,7 @@
   window.BRAID_DEBUG = {
     get state() {
       const m = model();
-      return { preset: cards.current, t: clock.t, playing: clock.playing, rule: S.rule, closed: S.closed, view: S.view, A: pub(m.A), B: pub(m.B), camera: Object.assign({}, stage.cam),
-        tube: { r: TR, px: TR * stage.unit }, mode: stage.mode };
+      return { preset: cards.current, t: clock.t, playing: clock.playing, rule: S.rule, closed: S.closed, view: S.view, A: pub(m.A), B: pub(m.B), camera: Object.assign({}, stage.cam) };
     },
     seek: (t) => { clock.pause(); clock.set(t); },
     /** Sampled world lines of the first (0) or second (1) braid: strand → [[x, y, z], …]; and the slot centres. */
