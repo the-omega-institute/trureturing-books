@@ -141,6 +141,14 @@
       "line": 61,
       "signature": "theorem crossing_yang_baxter (x y z : Q) : crossing₁ (crossing₂ (crossing₁ (x, (y, z)))) = crossing₂ (crossing₁ (crossing₂ (x, (y, z))))"
     },
+    "D5/S0/Computability/DescriptionComplexity/LookupProgramUpperBound.lookup_program_upper_bound": {
+      "module": "D5/S0/Computability/DescriptionComplexity/LookupProgramUpperBound",
+      "name": "D5.S0.Computability.DescriptionComplexity.LookupProgramUpperBound.lookup_program_upper_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:0076683db329909e7855327da56533173c6437ef0fc6bbf573cabfca2df1e52e",
+      "line": 47,
+      "signature": "theorem lookup_program_upper_bound {Record TotalProgram : Type*} {consistent : TotalProgram -> Record -> Prop} {programCost : TotalProgram -> Nat} {recordComplexity : Record -> Nat} {overhead : Nat} (compiler : LookupCompiler Record TotalProgram consistent programCost recordComplexity overhead) (record : Record) : spectrumBottom compiler record <= recordComplexity record + overhead"
+    },
     "D5/S0/Diagonal/EscapeCount.IsEscaped": {
       "module": "D5/S0/Diagonal/EscapeCount",
       "name": "D5.S0.Diagonal.EscapeCount.IsEscaped",
@@ -293,6 +301,86 @@
       "line": 47,
       "signature": "theorem golden_strict_permanent_set_eq_empty : goldenStrictPermanentSet = ∅"
     },
+    "D5/S0/Tower/DBonacci/Irreducibility.dbonacciPerronRoot_simple": {
+      "module": "D5/S0/Tower/DBonacci/Irreducibility",
+      "name": "D5.S0.Tower.DBonacci.PerronRoot.dbonacciPerronRoot_simple",
+      "kind": "theorem",
+      "statement_id": "sha256:785f43641b6c0a3a54476f90cbb8c6c5031cc1022cfbdee40d3ea9b280469099",
+      "line": 168,
+      "signature": "theorem dbonacciPerronRoot_simple (q : ℕ) (hq : 2 ≤ q) : (X ^ q - ∑ i ∈ Finset.range q, X ^ i : ℂ[X]).IsRoot (dbonacciPerronRoot q : ℂ) ∧ (X ^ q - ∑ i ∈ Finset.range q, X ^ i : ℂ[X]).derivative.eval (dbonacciPerronRoot q : ℂ) ≠ 0"
+    },
+    "D5/S0/Tower/DBonacci/Irreducibility.dbonacci_complex_root_location": {
+      "module": "D5/S0/Tower/DBonacci/Irreducibility",
+      "name": "D5.S0.Tower.DBonacci.PerronRoot.dbonacci_complex_root_location",
+      "kind": "theorem",
+      "statement_id": "sha256:785f43641b6c0a3a54476f90cbb8c6c5031cc1022cfbdee40d3ea9b280469099",
+      "line": 119,
+      "signature": "theorem dbonacci_complex_root_location (q : ℕ) (hq : 2 ≤ q) {z : ℂ} (hz : (X ^ q - ∑ i ∈ Finset.range q, X ^ i : ℂ[X]).IsRoot z) : 1 ≤ ‖z‖ ↔ z = (dbonacciPerronRoot q : ℂ)"
+    },
+    "D5/S0/Tower/DBonacci/Irreducibility.dbonacci_irreducible": {
+      "module": "D5/S0/Tower/DBonacci/Irreducibility",
+      "name": "D5.S0.Tower.DBonacci.PerronRoot.dbonacci_irreducible",
+      "kind": "theorem",
+      "statement_id": "sha256:785f43641b6c0a3a54476f90cbb8c6c5031cc1022cfbdee40d3ea9b280469099",
+      "line": 260,
+      "signature": "theorem dbonacci_irreducible (q : ℕ) (hq : 2 ≤ q) : Irreducible (X ^ q - ∑ i ∈ Finset.range q, X ^ i : ℤ[X]) ∧ Irreducible (X ^ q - ∑ i ∈ Finset.range q, X ^ i : ℚ[X])"
+    },
+    "D5/S0/Tower/DBonacci/Names.dbonacci_name_card": {
+      "module": "D5/S0/Tower/DBonacci/Names",
+      "name": "D5.S0.Tower.DBonacci.Names.dbonacci_name_card",
+      "kind": "theorem",
+      "statement_id": "sha256:8f3d7f6f38b35c7ea7a601c4a037d90dfd0d926ef07ed37a99d441624715f24a",
+      "line": 245,
+      "signature": "theorem dbonacci_name_card (d Q : Nat) : Fintype.card (DBonacciName d Q) = dbonacci d (Q + 2)"
+    },
+    "D5/S0/Tower/DBonacci/Names.dbonacci_name_card_of_lt": {
+      "module": "D5/S0/Tower/DBonacci/Names",
+      "name": "D5.S0.Tower.DBonacci.Names.dbonacci_name_card_of_lt",
+      "kind": "theorem",
+      "statement_id": "sha256:8f3d7f6f38b35c7ea7a601c4a037d90dfd0d926ef07ed37a99d441624715f24a",
+      "line": 227,
+      "signature": "theorem dbonacci_name_card_of_lt (d Q : Nat) (hlength : Q < d) : Fintype.card (DBonacciName d Q) = 2 ^ Q"
+    },
+    "D5/S0/Tower/DBonacci/PerronRoot.dbonacciPerronRoot_strictMonoOn": {
+      "module": "D5/S0/Tower/DBonacci/PerronRoot",
+      "name": "D5.S0.Tower.DBonacci.PerronRoot.dbonacciPerronRoot_strictMonoOn",
+      "kind": "theorem",
+      "statement_id": "sha256:86171864d0775a2d857dc7ba82df31fd5f95f45eeebb1420c6bd555499db7a4c",
+      "line": 265,
+      "signature": "theorem dbonacciPerronRoot_strictMonoOn : StrictMonoOn dbonacciPerronRoot (Set.Ici 2)"
+    },
+    "D5/S0/Tower/DBonacci/PerronRoot.dbonacciPerronRoot_tendsto_two": {
+      "module": "D5/S0/Tower/DBonacci/PerronRoot",
+      "name": "D5.S0.Tower.DBonacci.PerronRoot.dbonacciPerronRoot_tendsto_two",
+      "kind": "theorem",
+      "statement_id": "sha256:86171864d0775a2d857dc7ba82df31fd5f95f45eeebb1420c6bd555499db7a4c",
+      "line": 294,
+      "signature": "theorem dbonacciPerronRoot_tendsto_two : Tendsto dbonacciPerronRoot atTop (nhds 2)"
+    },
+    "D5/S0/Tower/DBonacci/PerronRoot.dbonacciPerronRoot_three_eq_tribonacciConstant": {
+      "module": "D5/S0/Tower/DBonacci/PerronRoot",
+      "name": "D5.S0.Tower.DBonacci.PerronRoot.dbonacciPerronRoot_three_eq_tribonacciConstant",
+      "kind": "theorem",
+      "statement_id": "sha256:86171864d0775a2d857dc7ba82df31fd5f95f45eeebb1420c6bd555499db7a4c",
+      "line": 283,
+      "signature": "theorem dbonacciPerronRoot_three_eq_tribonacciConstant : dbonacciPerronRoot 3 = D5.S0.Tower.Tribonacci.Values.tribonacciConstant"
+    },
+    "D5/S0/Tower/DBonacci/PerronRoot.dbonacciPerronRoot_two_eq_goldenRatio": {
+      "module": "D5/S0/Tower/DBonacci/PerronRoot",
+      "name": "D5.S0.Tower.DBonacci.PerronRoot.dbonacciPerronRoot_two_eq_goldenRatio",
+      "kind": "theorem",
+      "statement_id": "sha256:86171864d0775a2d857dc7ba82df31fd5f95f45eeebb1420c6bd555499db7a4c",
+      "line": 272,
+      "signature": "theorem dbonacciPerronRoot_two_eq_goldenRatio : dbonacciPerronRoot 2 = Real.goldenRatio"
+    },
+    "D5/S0/Tower/DBonacci/PerronRoot.two_sub_dbonacciPerronRoot_eq_inv_pow": {
+      "module": "D5/S0/Tower/DBonacci/PerronRoot",
+      "name": "D5.S0.Tower.DBonacci.PerronRoot.two_sub_dbonacciPerronRoot_eq_inv_pow",
+      "kind": "theorem",
+      "statement_id": "sha256:86171864d0775a2d857dc7ba82df31fd5f95f45eeebb1420c6bd555499db7a4c",
+      "line": 215,
+      "signature": "theorem two_sub_dbonacciPerronRoot_eq_inv_pow (d : Nat) (hd : 2 ≤ d) : 2 - dbonacciPerronRoot d = (dbonacciPerronRoot d)⁻¹ ^ d"
+    },
     "D5/S0/Tower/ErgodicBridge/Golden.golden_ergodic_bridge": {
       "module": "D5/S0/Tower/ErgodicBridge/Golden",
       "name": "D5.S0.Tower.ErgodicBridge.Golden.golden_ergodic_bridge",
@@ -372,6 +460,22 @@
       "statement_id": "sha256:cf0763f662c3655d58498aab971b6b3dffda7be473d5796c52d3433acb494308",
       "line": 46,
       "signature": "theorem golden_hurwitz_bound (q : ℚ) : 1 / (Real.sqrt 5 * (q.den : ℝ) ^ 2 + q.den) < |Real.goldenRatio - q|"
+    },
+    "D5/S1/Digit/ZeckendorfAvoidanceCount.uniform_avoidance_count": {
+      "module": "D5/S1/Digit/ZeckendorfAvoidanceCount",
+      "name": "D5.S1.Digit.ZeckendorfAvoidanceCount.uniform_avoidance_count",
+      "kind": "theorem",
+      "statement_id": "sha256:23e744990a7fd108acfb1ba5c732033917ea07b8b05cbf88be3d05bcd50ef35e",
+      "line": 43,
+      "signature": "theorem uniform_avoidance_count (H : ℕ) : ((legalWords H 0).filter (fun w => decide (¬ B1 <:+: w))).length ≤ Real.goldenRatio ^ (H + 1) * (1 - (Real.goldenRatio ^ (14 : ℕ))⁻¹) ^ (H / 14)"
+    },
+    "D5/S1/Digit/ZeckendorfCarryBarrier.lower_support_carry_barrier": {
+      "module": "D5/S1/Digit/ZeckendorfCarryBarrier",
+      "name": "D5.S1.Digit.ZeckendorfCarryBarrier.lower_support_carry_barrier",
+      "kind": "theorem",
+      "statement_id": "sha256:ea8a899189d2e4774d88659058663a63e0461381a8c19bd2f2748bb8383724f6",
+      "line": 24,
+      "signature": "theorem lower_support_carry_barrier (P : List ℕ) (m j : ℕ) (hP : P.IsZeckendorfRep) (hm : 4 ≤ m) (hmin : ∀ k ∈ P, m ≤ k) (hj : m - 1 ≤ j) : ∀ k ∈ wdigits ((P.map Nat.fib).sum + Nat.fib j), m - 2 ≤ k"
     },
     "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.goldenReciprocalMap": {
       "module": "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint",
@@ -629,6 +733,46 @@
       "line": 40,
       "signature": "lemma xiReading_eq_zero_iff_nontrivial (rho : ℂ) : xiReading rho = 0 ↔ Zeta23.IsNontrivialZero rho"
     },
+    "D5/S3/Arith/AbsoluteValues/OstrowskiClassification.rational_absolute_value_classification": {
+      "module": "D5/S3/Arith/AbsoluteValues/OstrowskiClassification",
+      "name": "D5.S3.Arith.AbsoluteValues.OstrowskiClassification.rational_absolute_value_classification",
+      "kind": "theorem",
+      "statement_id": "sha256:9253e2b863db0dac4dbd6deccbcec201ace84620d3cbd413467d1290ce2ee6e7",
+      "line": 24,
+      "signature": "theorem rational_absolute_value_classification (f : AbsoluteValue ℚ ℝ) (hf : f.IsNontrivial) : f ≈ Rat.AbsoluteValue.real ∨ ∃! p : ℕ, ∃ (_ : Fact p.Prime), f ≈ Rat.AbsoluteValue.padic p"
+    },
+    "D5/S3/Arith/ChineseRemainder.chinese_remainder_bijective": {
+      "module": "D5/S3/Arith/ChineseRemainder",
+      "name": "D5.S3.Arith.ChineseRemainder.chinese_remainder_bijective",
+      "kind": "theorem",
+      "statement_id": "sha256:046a0b8984ed57e930343d57f66270c94f40b1aef0ff725c6f0be7a03082bda4",
+      "line": 15,
+      "signature": "theorem chinese_remainder_bijective (m n : ℕ) (h : Nat.Coprime m n) : Function.Bijective (ZMod.castHom (show m.lcm n ∣ m * n by simp [Nat.lcm_dvd_iff]) (ZMod m × ZMod n))"
+    },
+    "D5/S3/Arith/Congruence/PadicBallFiberCorrespondence.congruenceFiber_eq_closedBall_inter_range": {
+      "module": "D5/S3/Arith/Congruence/PadicBallFiberCorrespondence",
+      "name": "D5.S3.Arith.Congruence.PadicBallFiberCorrespondence.congruenceFiber_eq_closedBall_inter_range",
+      "kind": "theorem",
+      "statement_id": "sha256:7de42d9d0f6fa8adb1cfe8591727254de8414c98c86c8273350a51ce755110cb",
+      "line": 36,
+      "signature": "theorem congruenceFiber_eq_closedBall_inter_range (p k : ℕ) [Fact p.Prime] (x : ℤ) : congruenceFiber p k x = Metric.closedBall (x : ℚ_[p]) ((p : ℝ) ^ (-k : ℤ)) ∩ Set.range ((↑) : ℤ → ℚ_[p])"
+    },
+    "D5/S3/Arith/Congruence/PadicObservationDistance.observation_distance_eq_padic_valuation": {
+      "module": "D5/S3/Arith/Congruence/PadicObservationDistance",
+      "name": "D5.S3.Arith.Congruence.PadicObservationDistance.observation_distance_eq_padic_valuation",
+      "kind": "theorem",
+      "statement_id": "sha256:a2ee98a226e6879e250d93dcc699664b38c366ebd12fc4fdcbf98e066f397efb",
+      "line": 43,
+      "signature": "theorem observation_distance_eq_padic_valuation (p : Nat) (x y : Int) (hp : p.Prime) (hxy : x ≠ y) : observationDistance p hp x y = (p : ℝ) ^ (-(padicValInt p (x - y) : Int))"
+    },
+    "D5/S3/Arith/Congruence/PadicPrecisionBlindSpot.first_distinguishing_precision": {
+      "module": "D5/S3/Arith/Congruence/PadicPrecisionBlindSpot",
+      "name": "D5.S3.Arith.Congruence.PadicPrecisionBlindSpot.first_distinguishing_precision",
+      "kind": "theorem",
+      "statement_id": "sha256:ced2505033fbc3c54ce3c2d12826f1a89030a1d3ab72d8fd62948368fe3a9a88",
+      "line": 47,
+      "signature": "theorem first_distinguishing_precision (p : Nat) (x y : Int) (hp : p.Prime) (hxy : x ≠ y) : IsLeast {k : Nat | precisionReading p k x ≠ precisionReading p k y} (padicValInt p (x - y) + 1)"
+    },
     "D5/S3/Arith/ExponentExchange/PrefixNormalForm.exists_antitone_exponent_form": {
       "module": "D5/S3/Arith/ExponentExchange/PrefixNormalForm",
       "name": "D5.S3.Arith.ExponentExchange.PrefixNormalForm.exists_antitone_exponent_form",
@@ -724,6 +868,14 @@
       "statement_id": "sha256:b248b6a9786eb684c74b1cf5c1a4415c8327fd1bdfdab8d38211a92e95bc0c63",
       "line": 28,
       "signature": "def divisorRatio (n : ℕ) : ℝ"
+    },
+    "D5/S3/Axis/PrimeAxisEscape.prime_axis_escape": {
+      "module": "D5/S3/Axis/PrimeAxisEscape",
+      "name": "D5.S3.Axis.PrimeAxisEscape.prime_axis_escape",
+      "kind": "theorem",
+      "statement_id": "sha256:48909badd192ab1551ab0f41308c334d02d366927c17054b2cca49887167e6ac",
+      "line": 18,
+      "signature": "theorem prime_axis_escape (S : Finset ℕ) (hS : ∀ p ∈ S, Nat.Prime p) : (∀ p ∈ S, Nat.ModEq p (S.prod id + 1) 1) ∧ ∃ q, Nat.Prime q ∧ q ∣ S.prod id + 1 ∧ q ∉ S"
     },
     "D5/S3/CharacterSums/Fermat/CharacterPointCount.norm_jacobiSum": {
       "module": "D5/S3/CharacterSums/Fermat/CharacterPointCount",
@@ -941,6 +1093,14 @@
       "line": 539,
       "signature": "theorem rooted_reconstruction (q : {q : Perm X // (∀ x, q x ≠ x) ∧ ∀ c ∈ q.cycleFactorsFinset, Even c.support.card}) : forward (recover q) = q ∧ ∀ x, (recover q).1.val x = (if cyclePhase q.val x then q.val x else q.val⁻¹ x) ∧ (recover q).2.val x = (if cyclePhase q.val x then q.val⁻¹ x else q.val x)"
     },
+    "D5/S3/CompletionDynamics/GoldenMobius/GoldenHelixParityReadout.golden_helix_two_step_orientation_complete_state_distinct": {
+      "module": "D5/S3/CompletionDynamics/GoldenMobius/GoldenHelixParityReadout",
+      "name": "D5.S3.CompletionDynamics.GoldenMobius.GoldenHelixParityReadout.golden_helix_two_step_orientation_complete_state_distinct",
+      "kind": "theorem",
+      "statement_id": "sha256:0b0f1704d3585feca90d44bb09e5937a7240b45fe0154767b23d354885778532",
+      "line": 63,
+      "signature": "theorem golden_helix_two_step_orientation_complete_state_distinct (state : GoldenHelixState) : (goldenHelixStep (goldenHelixStep state)).orientation = state.orientation ∧ goldenHelixStep (goldenHelixStep state) ≠ state"
+    },
     "D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart.gaussian_unit": {
       "module": "D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart",
       "name": "D5.S3.ConceptDynamics.Coding.ResetNativeIntegerChart.gaussian_unit",
@@ -1021,6 +1181,14 @@
       "line": 79,
       "signature": "theorem relative_semantic_diagonal_target_inadequate_of_surjective {Address Coordinate Output : Type*} (twist : Output → Output) (latent : Concept Address Coordinate) (decoderCatalog : Address → Coordinate → Output) (fixedPointFree : ∀ output, twist output ≠ output) (complete : Function.Surjective decoderCatalog) : ¬TargetAdequate latent (relativeSemanticDiagonal twist latent decoderCatalog)"
     },
+    "D5/S3/ConceptDynamics/DefinitionEscapeAdjudication/RetrospectiveLookupFailure.lookup_copy_zero_loss_and_nonanticipating_failure": {
+      "module": "D5/S3/ConceptDynamics/DefinitionEscapeAdjudication/RetrospectiveLookupFailure",
+      "name": "D5.S3.ConceptDynamics.DefinitionEscape.Adjudication.lookup_copy_zero_loss_and_nonanticipating_failure",
+      "kind": "theorem",
+      "statement_id": "sha256:ae6abf019d365160f5e1509600b94a2adc5b67136407ba1b0d7a175c17ae913c",
+      "line": 73,
+      "signature": "theorem lookup_copy_zero_loss_and_nonanticipating_failure {Z Answer : Type u} [Fintype Z] [DecidableEq Z] (comparison : CopyComparison Z Answer) (commitment : CopyCommitment Z) (usesCopy : IncorporatesTableCopy commitment) : retrospectiveLoss comparison (tableCopy comparison) = 0 ∧ (∀ z, ¬ NonAnticipating commitment z) ∧ ¬ (retrospectiveLoss comparison (tableCopy comparison) = 0 → ∀ prospectiveGain : (Z → Answer) → Nat, PositiveProspectiveGain prospectiveGain (tableCopy comparison))"
+    },
     "D5/S3/ConceptDynamics/Epistemic/PartitionKnowledgeNegativeIntrospection.partitionTopology": {
       "module": "D5/S3/ConceptDynamics/Epistemic/PartitionKnowledgeNegativeIntrospection",
       "name": "D5.S3.ConceptDynamics.Epistemic.PartitionKnowledgeNegativeIntrospection.partitionTopology",
@@ -1028,6 +1196,62 @@
       "statement_id": "sha256:c034b51365c5a0278a8aa99d7429bcb9b7f0eb6d7eb5304f46bbe9bbc7ffb2d5",
       "line": 32,
       "signature": "@[reducible] def partitionTopology {X B : Type _} (readout : Concept X B) : TopologicalSpace X"
+    },
+    "D5/S3/ConceptDynamics/Information/RefinementImpurityMonotonicity.refinement_impurity_monotone": {
+      "module": "D5/S3/ConceptDynamics/Information/RefinementImpurityMonotonicity",
+      "name": "D5.S3.ConceptDynamics.Information.RefinementImpurityMonotonicity.refinement_impurity_monotone",
+      "kind": "theorem",
+      "statement_id": "sha256:2c70048ce03100ccbb2cd7befe9f7709f4de0319f2455ea3fbf0499e73e34dc4",
+      "line": 536,
+      "signature": "theorem refinement_impurity_monotone {X C D A : Type*} (mu : PMF X) (coarse : Concept X C) (refined : Concept X D) (target : Concept X A) (refinement : Refines coarse refined) : conditionalLogicalImpurity mu refined target ≤ conditionalLogicalImpurity mu coarse target"
+    },
+    "D5/S3/ConceptDynamics/InformationEscape/EscapePairs.escapePairs_without_eq_union": {
+      "module": "D5/S3/ConceptDynamics/InformationEscape/EscapePairs",
+      "name": "D5.S3.ConceptDynamics.InformationEscape.Catalog.escapePairs_without_eq_union",
+      "kind": "theorem",
+      "statement_id": "sha256:b0be43b0e60a919ab3976a977603f2bd3b913f1c87da819ae147a468226dd1f9",
+      "line": 138,
+      "signature": "theorem escapePairs_without_eq_union {arena : Arena.{u}} (catalog : Catalog.{u, v, w} arena) (index : catalog.Index) : catalog.escapePairs (catalog.without index) = catalog.escapePairs catalog.fullIndexSet ∪ catalog.uniqueCapturePairs index"
+    },
+    "D5/S3/ConceptDynamics/InformationEscape/EscapePairs.uniqueCapturePairs_eq_sdiff": {
+      "module": "D5/S3/ConceptDynamics/InformationEscape/EscapePairs",
+      "name": "D5.S3.ConceptDynamics.InformationEscape.Catalog.uniqueCapturePairs_eq_sdiff",
+      "kind": "theorem",
+      "statement_id": "sha256:b0be43b0e60a919ab3976a977603f2bd3b913f1c87da819ae147a468226dd1f9",
+      "line": 64,
+      "signature": "theorem uniqueCapturePairs_eq_sdiff {arena : Arena.{u}} (catalog : Catalog.{u, v, w} arena) (index : catalog.Index) : catalog.uniqueCapturePairs index = catalog.escapePairs (catalog.without index) \\ catalog.escapePairs catalog.fullIndexSet"
+    },
+    "D5/S3/ConceptDynamics/InformationEscape/ExactRate.lowersEscape_iff_uniqueCaptureCount_pos": {
+      "module": "D5/S3/ConceptDynamics/InformationEscape/ExactRate",
+      "name": "D5.S3.ConceptDynamics.InformationEscape.Catalog.lowersEscape_iff_uniqueCaptureCount_pos",
+      "kind": "theorem",
+      "statement_id": "sha256:76e405a82e7b3d3d1897cdfba06c536c57d3784df000bf03d9731c35f2c3259f",
+      "line": 150,
+      "signature": "theorem lowersEscape_iff_uniqueCaptureCount_pos {arena : Arena.{u}} (catalog : Catalog.{u, v, w} arena) (index : catalog.Index) (nondegenerate : arena.Nondegenerate) : catalog.LowersEscape index ↔ 0 < catalog.uniqueCaptureCount index"
+    },
+    "D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty.lowersEscape_iff_not_mem_semanticClosureWithout": {
+      "module": "D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty",
+      "name": "D5.S3.ConceptDynamics.InformationEscape.Catalog.lowersEscape_iff_not_mem_semanticClosureWithout",
+      "kind": "theorem",
+      "statement_id": "sha256:36357323a2c9d6901b7bb61bf4efd25d956ea9a05eae2e6fbde8b6f169fd406d",
+      "line": 210,
+      "signature": "theorem lowersEscape_iff_not_mem_semanticClosureWithout {arena : Arena.{u}} (catalog : Catalog.{u, v, w} arena) (index : catalog.Index) (nondegenerate : arena.Nondegenerate) : catalog.LowersEscape index ↔ (catalog.theoremAt index).primitives.toKernel ∉ catalog.semanticClosureWithout index"
+    },
+    "D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty.lowersEscape_iff_strict_kernel_novelty": {
+      "module": "D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty",
+      "name": "D5.S3.ConceptDynamics.InformationEscape.Catalog.lowersEscape_iff_strict_kernel_novelty",
+      "kind": "theorem",
+      "statement_id": "sha256:36357323a2c9d6901b7bb61bf4efd25d956ea9a05eae2e6fbde8b6f169fd406d",
+      "line": 195,
+      "signature": "theorem lowersEscape_iff_strict_kernel_novelty {arena : Arena.{u}} (catalog : Catalog.{u, v, w} arena) (index : catalog.Index) (nondegenerate : arena.Nondegenerate) : catalog.LowersEscape index ↔ D5.S3.ConceptDynamics.Faithfulness.JointFaithfulnessLeibnizCriterion.jointKernel (fun definition : Set.insert (catalog.taggedQuotientCut index) (catalog.quotientCutsWithout index) => definition.1) ⊂ D5.S3.ConceptDynamics.Faithfulness.JointFaithfulnessLeibnizCriterion.jointKernel (fun definition : catalog.quotientCutsWithout index => definition.1)"
+    },
+    "D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty.structurallyLowersEscape_iff_lowersEscape": {
+      "module": "D5/S3/ConceptDynamics/InformationEscape/StructuralNovelty",
+      "name": "D5.S3.ConceptDynamics.InformationEscape.Catalog.structurallyLowersEscape_iff_lowersEscape",
+      "kind": "theorem",
+      "statement_id": "sha256:36357323a2c9d6901b7bb61bf4efd25d956ea9a05eae2e6fbde8b6f169fd406d",
+      "line": 89,
+      "signature": "theorem structurallyLowersEscape_iff_lowersEscape {arena : Arena.{u}} (catalog : Catalog.{u, v, w} arena) (index : catalog.Index) (nondegenerate : arena.Nondegenerate) : catalog.StructurallyLowersEscape index ↔ catalog.LowersEscape index"
     },
     "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.InterpretationContext": {
       "module": "D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint",
@@ -1173,6 +1397,14 @@
       "line": 73,
       "signature": "theorem target_factors_iff_continuous_partition {X Coordinate Target : Type*} [Nonempty X] (readout : Concept X Coordinate) (target : Concept X Target) : Refines target readout <-> @Continuous X Target (partitionTopology readout) ⊥ target"
     },
+    "D5/S3/ConceptDynamics/RefinementGeometry/RefinementUltrametric.refinementDistance_ultrametric": {
+      "module": "D5/S3/ConceptDynamics/RefinementGeometry/RefinementUltrametric",
+      "name": "D5.S3.ConceptDynamics.RefinementGeometry.RefinementUltrametric.refinementDistance_ultrametric",
+      "kind": "theorem",
+      "statement_id": "sha256:489b97c330f19221fd19b63ff7424508a911bb08caadf2e95818b62a70335713",
+      "line": 196,
+      "signature": "theorem refinementDistance_ultrametric {X : Type*} (Coordinate : Nat → Type*) (readout : (level : Nat) → Concept X (Coordinate level)) (horizon : Nat) (x y z : X) : refinementDistance Coordinate readout horizon x z ≤ max (refinementDistance Coordinate readout horizon x y) (refinementDistance Coordinate readout horizon y z)"
+    },
     "D5/S3/ConceptDynamics/Restoration/TargetRecoveryCriterion.target_recovery_criterion": {
       "module": "D5/S3/ConceptDynamics/Restoration/TargetRecoveryCriterion",
       "name": "D5.S3.ConceptDynamics.Restoration.TargetRecoveryCriterion.target_recovery_criterion",
@@ -1180,6 +1412,14 @@
       "statement_id": "sha256:b00b35b9fad01258b563836e879dfb6cd8370b8d8d4f8c83cfafb011a2cc3a56",
       "line": 37,
       "signature": "theorem target_recovery_criterion {X ProcessState Target : Type*} [Nonempty X] (process : Concept X ProcessState) (target : Concept X Target) : ((∃ recover : ProcessState → Target, target = recover ∘ process) ↔ ∀ ⦃x y : X⦄, process x = process y → target x = target y) ∧ ((∀ ⦃x y : X⦄, process x = process y → target x = target y) ↔ defectRelation process target = ∅) ∧ (defectRelation process target = ∅ ↔ ∃ recover : ProcessState → Target, target = recover ∘ process) ∧ ((¬∃ recover : ProcessState → Target, target = recover ∘ process) ↔ (defectRelation process target).Nonempty)"
+    },
+    "D5/S3/ConceptDynamics/Revision/RevisionConflictNoncommutation.revision_conflict_noncommutation": {
+      "module": "D5/S3/ConceptDynamics/Revision/RevisionConflictNoncommutation",
+      "name": "D5.S3.ConceptDynamics.Revision.RevisionConflictNoncommutation.revision_conflict_noncommutation",
+      "kind": "theorem",
+      "statement_id": "sha256:c730293a4a5199eaaf6a82d8ab56dba5408c8b42370666ab5245a86a28c39941",
+      "line": 37,
+      "signature": "theorem revision_conflict_noncommutation : let A : Set (Fin 3)"
     },
     "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift": {
       "module": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift",
@@ -1204,6 +1444,22 @@
       "statement_id": "sha256:3db5a637014b11d9059db2073522fc8023feb92e90a78d8c3b33c025ce74eed5",
       "line": 130,
       "signature": "theorem irrational_log_natCast (n : ℕ) (hn : 2 ≤ n) : Irrational (Real.log (n : ℝ))"
+    },
+    "D5/S3/Constants/Irrationality/TribonacciTraceLattice.tribonacci_secondary_root_add_conjugate": {
+      "module": "D5/S3/Constants/Irrationality/TribonacciTraceLattice",
+      "name": "D5.S3.Constants.Irrationality.TribonacciTraceLattice.tribonacci_secondary_root_add_conjugate",
+      "kind": "theorem",
+      "statement_id": "sha256:a832146b2b4c48d9109ca16e9da17884e70f51288099d15f33df285b4ab4f582",
+      "line": 145,
+      "signature": "theorem tribonacci_secondary_root_add_conjugate : tribonacciSecondaryRoot.1 + conj tribonacciSecondaryRoot.1 = ((1 - t : Real) : Complex)"
+    },
+    "D5/S3/Constants/Irrationality/TribonacciTraceLattice.tribonacci_secondary_root_mul_conjugate": {
+      "module": "D5/S3/Constants/Irrationality/TribonacciTraceLattice",
+      "name": "D5.S3.Constants.Irrationality.TribonacciTraceLattice.tribonacci_secondary_root_mul_conjugate",
+      "kind": "theorem",
+      "statement_id": "sha256:a832146b2b4c48d9109ca16e9da17884e70f51288099d15f33df285b4ab4f582",
+      "line": 152,
+      "signature": "theorem tribonacci_secondary_root_mul_conjugate : tribonacciSecondaryRoot.1 * conj tribonacciSecondaryRoot.1 = ((t⁻¹ : Real) : Complex)"
     },
     "D5/S3/Constants/PentagonCosines.pentagon_golden_cosines": {
       "module": "D5/S3/Constants/PentagonCosines",
@@ -1244,6 +1500,14 @@
       "statement_id": "sha256:21cfbcef33510168535c20f012b8dedf1af2c2703064bedec1e4717ddfffc433",
       "line": 73,
       "signature": "theorem landauer_strict_iff (beta heat entropyChange mutualInfo divergence : Real) (hbalance : beta * heat = -entropyChange + mutualInfo + divergence) (hmutualInfo : 0 <= mutualInfo) (hdivergence : 0 <= divergence) : -entropyChange < beta * heat ↔ 0 < mutualInfo + divergence"
+    },
+    "D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula": {
+      "module": "D5/S3/Factorization/Embeddings/RationalPadicProductFormula",
+      "name": "D5.S3.Factorization.Embeddings.RationalPadicProductFormula.rational_padic_product_formula",
+      "kind": "theorem",
+      "statement_id": "sha256:04bb4a031fe1f12337b2513c73816c3fb9d8e3bd83255cdda6ed28c96c11e253",
+      "line": 113,
+      "signature": "theorem rational_padic_product_formula (x : ℚ) (hx : x ≠ 0) : |x| * ∏ᶠ p : Nat.Primes, padicNorm p.1 x = 1"
     },
     "D5/S3/Factorization/PrimeLogIndependence.prime_log_indep": {
       "module": "D5/S3/Factorization/PrimeLogIndependence",
@@ -1709,6 +1973,38 @@
       "line": 127,
       "signature": "theorem rational_six_axis_open_cover : (∀ i : Fin 6, IsOpen (color i)) ∧ (∀ (i : Fin 6) (x : UnitSphere), x ∈ color i → ∀ (y : UnitSphere), y ∈ color i → inner ℝ (x : Space) (y : Space) ≠ 0) ∧ (⋃ i : Fin 6, color i) = Set.univ"
     },
+    "D5/S3/Geometry/Rauzy/TribonacciInterior.rauzyFractal_interior_nonempty": {
+      "module": "D5/S3/Geometry/Rauzy/TribonacciInterior",
+      "name": "D5.S3.Geometry.Rauzy.TribonacciInterior.rauzyFractal_interior_nonempty",
+      "kind": "theorem",
+      "statement_id": "sha256:5bc65d912461bfe7e0d735b920f234ce4cae836bbee269ff75f705f4814dfc05",
+      "line": 253,
+      "signature": "theorem rauzyFractal_interior_nonempty {z : Complex} (hz : z ∈ Binet.tribonacciCharacteristicPolynomial.roots) (hz_ne : z ≠ (Values.tribonacciConstant : Complex)) : (interior (RauzyFractal.rauzyFractal z)).Nonempty"
+    },
+    "D5/S3/Geometry/Rauzy/TribonacciNullBoundary.rauzyFractal_frontier_volume_zero": {
+      "module": "D5/S3/Geometry/Rauzy/TribonacciNullBoundary",
+      "name": "D5.S3.Geometry.Rauzy.TribonacciNullBoundary.rauzyFractal_frontier_volume_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:0fd54f69d1ef19cfe06de38b31f3f64b120454fda9a730b10d8fa2fcf7edcc25",
+      "line": 39,
+      "signature": "theorem rauzyFractal_frontier_volume_zero {z : Complex} (hz : z ∈ Binet.tribonacciCharacteristicPolynomial.roots) (hz_ne : z ≠ (Values.tribonacciConstant : Complex)) : volume (frontier (RauzyFractal.rauzyFractal z)) = 0"
+    },
+    "D5/S3/Geometry/Rauzy/TribonacciRegularClosure.rauzyFractal_closure_interior": {
+      "module": "D5/S3/Geometry/Rauzy/TribonacciRegularClosure",
+      "name": "D5.S3.Geometry.Rauzy.TribonacciRegularClosure.rauzyFractal_closure_interior",
+      "kind": "theorem",
+      "statement_id": "sha256:2d4244267ee580101d4938c8f59d145641170f523f340e6b4a6e375640ac7a8d",
+      "line": 117,
+      "signature": "theorem rauzyFractal_closure_interior {z : Complex} (hz : z ∈ Binet.tribonacciCharacteristicPolynomial.roots) (hz_ne : z ≠ (Values.tribonacciConstant : Complex)) : closure (interior (rauzyFractal z)) = rauzyFractal z"
+    },
+    "D5/S3/Geometry/Rauzy/TribonacciRegularClosure.rauzyFractal_prefix_cover": {
+      "module": "D5/S3/Geometry/Rauzy/TribonacciRegularClosure",
+      "name": "D5.S3.Geometry.Rauzy.TribonacciRegularClosure.rauzyFractal_prefix_cover",
+      "kind": "theorem",
+      "statement_id": "sha256:2d4244267ee580101d4938c8f59d145641170f523f340e6b4a6e375640ac7a8d",
+      "line": 87,
+      "signature": "theorem rauzyFractal_prefix_cover {z : Complex} (hz : z ∈ D5.S0.Tower.Tribonacci.Binet.tribonacciCharacteristicPolynomial.roots) (hz_ne : z ≠ (D5.S0.Tower.Tribonacci.Values.tribonacciConstant : Complex)) : zeroPrefixMap z '' rauzyFractal z ∪ oneZeroPrefixMap z '' rauzyFractal z ∪ oneOneZeroPrefixMap z '' rauzyFractal z = rauzyFractal z"
+    },
     "D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation": {
       "module": "D5/S3/Geometry/Riemannian/GradientDissipation",
       "name": "Original172.S2_dissipation",
@@ -1901,6 +2197,14 @@
       "line": 25,
       "signature": "theorem exp_tail_le {𝕜 A : Type*} [RCLike 𝕜] [NormedRing A] [NormedAlgebra 𝕜 A] [CompleteSpace A] [NormOneClass A] (z : A) (r : ℝ) (n : ℕ) (hr : 0 ≤ r) (hz : ‖z‖ ≤ r) : ‖NormedSpace.exp z - ∑ k ∈ range n, ((k.factorial : 𝕜)⁻¹) • z ^ k‖ ≤ r ^ n / (n.factorial : ℝ) * Real.exp r"
     },
+    "D5/S3/Observer/PrimeTimeGeometry/DiscountedPrimeTimeUltrametric.discounted_prime_time_distance_strong_triangle": {
+      "module": "D5/S3/Observer/PrimeTimeGeometry/DiscountedPrimeTimeUltrametric",
+      "name": "D5.S3.Observer.PrimeTimeGeometry.DiscountedPrimeTimeUltrametric.discounted_prime_time_distance_strong_triangle",
+      "kind": "theorem",
+      "statement_id": "sha256:bab6939d17f39cf200971589b5b9971a1edb34f7810727695edb2893232dcd2b",
+      "line": 164,
+      "signature": "theorem discounted_prime_time_distance_strong_triangle {I X : Type*} {O : I -> Type*} (J : Finset I) (weight : I -> Real) (readout : forall i, X -> O i) (update : X -> X) (gamma : Real) (hpositive : ∀ i, 0 < weight i) (hgamma : gamma ∈ Set.Ioc 0 1) (x y z : X) : discountedPrimeTimeDistance J weight readout update gamma x z <= max (discountedPrimeTimeDistance J weight readout update gamma x y) (discountedPrimeTimeDistance J weight readout update gamma y z)"
+    },
     "D5/S3/Observer/Reversal/QuadraticObservationClosure.observed_increment": {
       "module": "D5/S3/Observer/Reversal/QuadraticObservationClosure",
       "name": "D5.S3.Observer.Reversal.QuadraticObservationClosure.observed_increment",
@@ -1925,6 +2229,14 @@
       "line": 26,
       "signature": "theorem finite_rank_concentration_mode_bound (concentrationEigenvalue : ℕ → ℝ) (intervalRadius frequencyMeasure threshold : ℝ) (hNonneg : ∀ j, 0 ≤ concentrationEigenvalue j) (hSummable : Summable concentrationEigenvalue) (hTrace : ∑' j, concentrationEigenvalue j = intervalRadius * frequencyMeasure / Real.pi) (hThreshold : 0 < threshold) : Set.Finite {j | threshold ≤ concentrationEigenvalue j} ∧ (({j | threshold ≤ concentrationEigenvalue j} : Set ℕ).ncard : ℝ) ≤ intervalRadius * frequencyMeasure / (Real.pi * threshold)"
     },
+    "D5/S3/Observer/Tomography/FiniteStageExpansion.finite_stage_expansion": {
+      "module": "D5/S3/Observer/Tomography/FiniteStageExpansion",
+      "name": "D5.S3.Observer.Tomography.FiniteStageExpansion.finite_stage_expansion",
+      "kind": "theorem",
+      "statement_id": "sha256:4d86c1b7ff7c99800f162ac7319bab51d82b516154ca2d39a9a6d4444ebf6a3e",
+      "line": 36,
+      "signature": "theorem finite_stage_expansion (S E : ℕ → ClosedSubmodule ℝ H) (hstep : ∀ k, (S (k + 1)).toSubmodule = (S k).toSubmodule ⊔ (E (k + 1)).toSubmodule) (hshell : ∀ k, (E (k + 1)).toSubmodule ≤ (S k).toSubmoduleᗮ) (n : ℕ) : (S n).toSubmodule = (S 0).toSubmodule ⊔ finiteShellSpan E n ∧ (⊤ : Submodule ℝ H) = (S 0).toSubmodule ⊔ finiteShellSpan E n ⊔ (S n).toSubmoduleᗮ ∧ (S n).toSubmoduleᗮ = (E (n + 1)).toSubmodule ⊔ (S (n + 1)).toSubmoduleᗮ"
+    },
     "D5/S3/Observer/WindowRegister.clockMatrix": {
       "module": "D5/S3/Observer/WindowRegister",
       "name": "D5.S3.Observer.WindowRegister.clockMatrix",
@@ -1948,6 +2260,46 @@
       "statement_id": "sha256:1f03573f26ffc97bee9217cd4164f7e0941cb73ba680130d6cfd2e970fc3554a",
       "line": 22,
       "signature": "noncomputable def windowRoot (M : ℕ) : ℂ"
+    },
+    "D5/S3/ObserverMemory/Dynamics/ObservableKrylovGrowthBound.observable_krylov_strict_growth_bound": {
+      "module": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovGrowthBound",
+      "name": "D5.S3.ObserverMemory.Dynamics.ObservableKrylovGrowthBound.observable_krylov_strict_growth_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:6914ae6164ac66d49bfe3bf54b868f51ab72cd459816ff01d72b605396334505",
+      "line": 108,
+      "signature": "theorem observable_krylov_strict_growth_bound (T : V →ₗ[𝕜] V) (C : V →ₗ[𝕜] Y) : Set.encard {m : ℕ | observableKrylov T C m < observableKrylov T C (m + 1)} ≤ (Module.finrank 𝕜 V - Module.finrank 𝕜 C.range : ℕ)"
+    },
+    "D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently": {
+      "module": "D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability",
+      "name": "D5.S3.ObserverMemory.Dynamics.ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently",
+      "kind": "theorem",
+      "statement_id": "sha256:b6d4bd6cde95c727efecb6595ae12bf4280fef94c483489b44ce60fcbc3b3517",
+      "line": 74,
+      "signature": "theorem observable_krylov_once_stable_permanently (T : V →ₗ[K] V) (C : V →ₗ[K] Y) (m : Nat) (hStable : observableKrylov T C m = observableKrylov T C (m + 1)) : forall r : Nat, observableKrylov T C (m + r) = observableKrylov T C m"
+    },
+    "D5/S3/ObserverMemory/FourierFibers/GoldenScaleCharacterDeckBlindness.golden_helix_fourier_readout_step": {
+      "module": "D5/S3/ObserverMemory/FourierFibers/GoldenScaleCharacterDeckBlindness",
+      "name": "D5.S3.ObserverMemory.FourierFibers.GoldenScaleCharacterDeckBlindness.golden_helix_fourier_readout_step",
+      "kind": "theorem",
+      "statement_id": "sha256:8ffd5271257fcb57f60f34686e893c2a82ca5cb2ca2c70474743d3f4cc2a2fb4",
+      "line": 69,
+      "signature": "theorem golden_helix_fourier_readout_step (mode : ℤ) (state : GoldenHelixState) : goldenHelixFourierReadout mode (goldenHelixStep state) = goldenHelixFourierReadout mode state"
+    },
+    "D5/S3/ObserverMemory/FourierFibers/GoldenScaleCharacterDeckBlindness.golden_helix_step_changes_level": {
+      "module": "D5/S3/ObserverMemory/FourierFibers/GoldenScaleCharacterDeckBlindness",
+      "name": "D5.S3.ObserverMemory.FourierFibers.GoldenScaleCharacterDeckBlindness.golden_helix_step_changes_level",
+      "kind": "theorem",
+      "statement_id": "sha256:8ffd5271257fcb57f60f34686e893c2a82ca5cb2ca2c70474743d3f4cc2a2fb4",
+      "line": 78,
+      "signature": "theorem golden_helix_step_changes_level (state : GoldenHelixState) : (goldenHelixStep state).level ≠ state.level"
+    },
+    "D5/S3/ObserverMemory/FourierFibers/GoldenScaleCharacterDeckBlindness.level_fourier_joint_readout_detects_step": {
+      "module": "D5/S3/ObserverMemory/FourierFibers/GoldenScaleCharacterDeckBlindness",
+      "name": "D5.S3.ObserverMemory.FourierFibers.GoldenScaleCharacterDeckBlindness.level_fourier_joint_readout_detects_step",
+      "kind": "theorem",
+      "statement_id": "sha256:8ffd5271257fcb57f60f34686e893c2a82ca5cb2ca2c70474743d3f4cc2a2fb4",
+      "line": 97,
+      "signature": "theorem level_fourier_joint_readout_detects_step (mode : ℤ) (state : GoldenHelixState) : ((goldenHelixStep state).level, goldenHelixFourierReadout mode (goldenHelixStep state)) ≠ (state.level, goldenHelixFourierReadout mode state)"
     },
     "D5/S3/ObserverMemory/JointCoherentReversal.joint_coherent_reversal": {
       "module": "D5/S3/ObserverMemory/JointCoherentReversal",
@@ -2093,6 +2445,14 @@
       "line": 24,
       "signature": "theorem prime_dvd_dvd_of_dvd_sq_add_sq (q a b : ℕ) (hq : q.Prime) (h3 : q % 4 = 3) (h : q ∣ a ^ 2 + b ^ 2) : q ∣ a ∧ q ∣ b"
     },
+    "D5/S3/Quantum/Algebra/CommonPhasePolynomial.complete_common_phase_polynomial_theorem": {
+      "module": "D5/S3/Quantum/Algebra/CommonPhasePolynomial",
+      "name": "D5.S3.Quantum.Algebra.PhasePolynomial.complete_common_phase_polynomial_theorem",
+      "kind": "theorem",
+      "statement_id": "sha256:554cae5cfdab1173bddb0992c2f20cf2ed64bc08aa13e2a91f86fd3ee591a629",
+      "line": 712,
+      "signature": "theorem complete_common_phase_polynomial_theorem (p : Poly ι) : (∃! q : Poly ι, ∀ z, actual q z = eval (cartesian z) p) ∧ ((toCartesian p).totalDegree = p.totalDegree) ∧ (∀ n, (toCartesian p).IsHomogeneous n ↔ p.IsHomogeneous n) ∧ (Invariant p ↔ Balanced p) ∧ (Invariant p ↔ p ∈ quadraticAlgebra (ι"
+    },
     "D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula": {
       "module": "D5/S3/Quantum/Algebra/CovariantCommutator",
       "name": "D5.S3.Quantum.Algebra.CovariantCommutator.covariant_commutator_formula",
@@ -2100,6 +2460,22 @@
       "statement_id": "sha256:5a2e3c26e6dab3585f60cc6ab0209200ba39d5ba0815c6004a74f5c04e2364f6",
       "line": 32,
       "signature": "theorem covariant_commutator_formula {B : Type*} [Ring B] {U f translated : B} (hcov : SemiconjBy U f translated) : U * f - f * U = (translated - f) * U"
+    },
+    "D5/S3/Quantum/Algebra/DoubleOrthogonalClosure.double_orthogonal_complement_eq_closure": {
+      "module": "D5/S3/Quantum/Algebra/DoubleOrthogonalClosure",
+      "name": "D5.S3.Quantum.Algebra.DoubleOrthogonalClosure.double_orthogonal_complement_eq_closure",
+      "kind": "theorem",
+      "statement_id": "sha256:6b95326104cf1d8257d87fdc69ad7a6e4fcb7e674fea5f53c2770fe65eb3bd60",
+      "line": 26,
+      "signature": "theorem double_orthogonal_complement_eq_closure (M : Submodule 𝕜 E) : Mᗮᗮ = M.topologicalClosure"
+    },
+    "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape": {
+      "module": "D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape",
+      "name": "D5.S3.Quantum.Algebra.FiniteLayerProjectionEscape.finite_layer_projection_escape",
+      "kind": "theorem",
+      "statement_id": "sha256:8d1ffb7dce722cbfbc090063ea1001cdb9a4c3d9318b8bf1654a891ebc60e4fd",
+      "line": 32,
+      "signature": "theorem finite_layer_projection_escape (S : Submodule 𝕜 V) [IsClosed (S : Set V)] (hResidual : Sᗮ ≠ ⊥) : ∃ e : V, e ∈ Sᗮ ∧ ‖e‖ = 1 ∧ S.starProjection e = 0 ∧ Metric.infDist e (S : Set V) = 1 ∧ ‖ContinuousLinearMap.id 𝕜 V - S.starProjection‖ = 1"
     },
     "D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq": {
       "module": "D5/S3/Quantum/Algebra/GramUnitaryExtension",
@@ -2164,6 +2540,14 @@
       "statement_id": "sha256:d690034462a903f43cda84a1ed0a8daa2541fde1a5a681ff62956b7de6eda8de",
       "line": 224,
       "signature": "def strandInclusion (n : ℕ) : Artin n →* Artin (n + 1)"
+    },
+    "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities": {
+      "module": "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement",
+      "name": "D5.S3.Quantum.Algebra.OrthogonalProjectionComplement.orthogonal_complement_projection_identities",
+      "kind": "theorem",
+      "statement_id": "sha256:8b71a66065ac5a972ceede76769582b87af61db062093d9cd77768e52d743e38",
+      "line": 34,
+      "signature": "theorem orthogonal_complement_projection_identities (M : Submodule 𝕜 E) [IsClosed (M : Set E)] : Mᗮ.starProjection = ContinuousLinearMap.id 𝕜 E - M.starProjection ∧ M.starProjection ∘L M.starProjection = M.starProjection ∧ Mᗮ.starProjection ∘L Mᗮ.starProjection = Mᗮ.starProjection ∧ M.starProjection ∘L Mᗮ.starProjection = 0 ∧ Mᗮ.starProjection ∘L M.starProjection = 0 ∧ M.starProjection + Mᗮ.starProjection = ContinuousLinearMap.id 𝕜 E"
     },
     "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure": {
       "module": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure",
@@ -2421,6 +2805,22 @@
       "line": 106,
       "signature": "theorem pauli_word_mul {N p : ℕ} [NeZero p] (a b : PauliWord N p) : pauliWordOperator a * pauliWordOperator b = windowRoot p ^ (∑ n, a.z n * b.x n).val • pauliWordOperator (wordMul a b)"
     },
+    "D5/S3/Quantum/Completion/IncreasingProjectionStrongLimit.increasing_projection_strong_limit": {
+      "module": "D5/S3/Quantum/Completion/IncreasingProjectionStrongLimit",
+      "name": "D5.S3.Quantum.Completion.IncreasingProjectionStrongLimit.increasing_projection_strong_limit",
+      "kind": "theorem",
+      "statement_id": "sha256:f23cae28ce413ce0d6d360159fb7930b753b7db71ea63f07666b359662573f47",
+      "line": 41,
+      "signature": "theorem increasing_projection_strong_limit (S : ℕ -> Submodule 𝕜 H) [forall n, (S n).HasOrthogonalProjection] [(cumulativeSpace S).HasOrthogonalProjection] (hS : Monotone S) : (forall x, Tendsto (fun n => (S n).starProjection x) atTop (𝓝 ((cumulativeSpace S).starProjection x))) /\\ (residualSpace S = ⊥ -> Tendsto (fun n => ContinuousLinearMap.toPointwiseConvergenceCLM 𝕜 (RingHom.id 𝕜) H H (S n).starProjection) atTop (𝓝 (ContinuousLinearMap.toPointwiseConvergenceCLM 𝕜 (RingHom.id 𝕜) H H (ContinuousLinearMap.id 𝕜 H))))"
+    },
+    "D5/S3/Quantum/Completion/UniformCompletionObstruction.uniform_completion_obstruction": {
+      "module": "D5/S3/Quantum/Completion/UniformCompletionObstruction",
+      "name": "D5.S3.Quantum.Completion.UniformCompletionObstruction.uniform_completion_obstruction",
+      "kind": "theorem",
+      "statement_id": "sha256:cbd6cb9c51bba1fdbe3b53de67a7e65bc4016b1a4df3db91911e00d91f68dfee",
+      "line": 38,
+      "signature": "theorem uniform_completion_obstruction (S : I -> Submodule K H) [forall i, (S i).HasOrthogonalProjection] (stageFilter : Filter I) [NeBot stageFilter] (hProper : forall i, S i ≠ ⊤) : (forall i, ‖ContinuousLinearMap.id K H - (S i).starProjection‖ = 1) /\\ (¬ Tendsto (fun i => ‖ContinuousLinearMap.id K H - (S i).starProjection‖) stageFilter (nhds 0))"
+    },
     "D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.canonical_copied_address_record_eq_prior": {
       "module": "D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery",
       "name": "D5.S3.Quantum.Decoherence.CanonicalRecordAccessRecovery.canonical_copied_address_record_eq_prior",
@@ -2652,6 +3052,22 @@
       "statement_id": "sha256:9ef86e623a3b8a4bfc44f4e69b1ec7aa2509d172ceba176d20ab2ba40581a844",
       "line": 83,
       "signature": "theorem bell_pure_state_has_maximally_mixed_marginal : star bellVector ⬝ᵥ bellVector = 1 /\\ bellDensity.PosSemidef /\\ Matrix.trace bellDensity = 1 /\\ Matrix.rank bellDensity = 1 /\\ bellDensity * bellDensity = bellDensity /\\ traceEnvironment bellDensity = (1 / 2 : Complex) • (1 : QubitMatrix) /\\ Not (traceEnvironment bellDensity * traceEnvironment bellDensity = traceEnvironment bellDensity)"
+    },
+    "D5/S3/Quantum/Entanglement/KBonacciDirectRankEntropy.complete_original_direct_rank_entropy": {
+      "module": "D5/S3/Quantum/Entanglement/KBonacciDirectRankEntropy",
+      "name": "D5.S3.Quantum.Entanglement.KBonacciDirectRankEntropy.complete_original_direct_rank_entropy",
+      "kind": "theorem",
+      "statement_id": "sha256:5af0c09aac42c6a2d5e3a9e9c5495f7809356764b8221bcb57fe71d807bdd5a3",
+      "line": 174,
+      "signature": "theorem complete_original_direct_rank_entropy : completeOriginal72"
+    },
+    "D5/S3/Quantum/Entanglement/KBonacciDirectSupportObstruction.actual_encoder_spectral_obstruction": {
+      "module": "D5/S3/Quantum/Entanglement/KBonacciDirectSupportObstruction",
+      "name": "D5.S3.Quantum.Entanglement.KBonacciDirectSupportObstruction.actual_encoder_spectral_obstruction",
+      "kind": "theorem",
+      "statement_id": "sha256:7407a37a5a89105030d45e60cd98481d2d689fe341e26ee23e7bc372806faebd",
+      "line": 34,
+      "signature": "theorem actual_encoder_spectral_obstruction (N k mX mY : ℕ) (hN : 2 ≤ N) (hk : 2 ≤ k) (_hmX : 1 ≤ mX) (_hmY : 1 ≤ mY) : let primeNumbers (N : ℕ) (b : Bool) : Finset (Fin (N + 1))"
     },
     "D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot.local_marginal_correlation_blind_spot": {
       "module": "D5/S3/Quantum/Entanglement/LocalMarginalCorrelationBlindSpot",
@@ -3085,6 +3501,14 @@
       "line": 26,
       "signature": "def residualMass {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] [CompleteSpace E] (visible : Submodule ℝ E) [IsClosed (visible : Set E)] (state : E) : ℝ"
     },
+    "D5/S3/Quantum/Tomography/DiagonalPhaseBlindness.diagonal_prime_observables_cannot_recover_relative_phase": {
+      "module": "D5/S3/Quantum/Tomography/DiagonalPhaseBlindness",
+      "name": "D5.S3.Quantum.Tomography.DiagonalPhaseBlindness.diagonal_prime_observables_cannot_recover_relative_phase",
+      "kind": "theorem",
+      "statement_id": "sha256:ce28ea72058b1d3f0c0e6ae0530285b70b546863db69e1862996e354a11dc053",
+      "line": 38,
+      "signature": "theorem diagonal_prime_observables_cannot_recover_relative_phase {I : Type*} : (forall observable : I -> QubitMatrix, (forall i, (observable i).IsDiag) -> equalSuperpositionDensity ≠ qubitZ * equalSuperpositionDensity * qubitZ /\\ jointReadout (fun i rho => bornProbability rho (observable i)) equalSuperpositionDensity = jointReadout (fun i rho => bornProbability rho (observable i)) (qubitZ * equalSuperpositionDensity * qubitZ)) /\\ (forall interface : QubitMatrix, bornProbability equalSuperpositionDensity interface ≠ bornProbability (qubitZ * equalSuperpositionDensity * qubitZ) interface -> Not "
+    },
     "D5/S3/Quantum/Walks/SymmetricCoinMaximalWalkEntanglement.result": {
       "module": "D5/S3/Quantum/Walks/SymmetricCoinMaximalWalkEntanglement",
       "name": "D5.S3.Quantum.Walks.SymmetricCoinMaximalWalkEntanglement.result",
@@ -3204,6 +3628,14 @@
       "statement_id": "sha256:11e539937522cbc33603e9e316fd8c4cef1113e95b0b82ccefe65fd198bfe13a",
       "line": 59,
       "signature": "theorem record_time_lower_bound (a m₀ m₁ : E) (ha : ‖a‖ = 1) (h₀ : ‖m₀‖ = 1) (h₁ : ‖m₁‖ = 1) (horth : inner ℂ m₀ m₁ = 0) (energy hbar τ : ℝ) (henergy : 0 < energy) (hhbar : 0 < hbar) (speed₀ : fsAngle a m₀ ≤ energy * τ / hbar) (speed₁ : fsAngle a m₁ ≤ energy * τ / hbar) : Real.pi * hbar / (4 * energy) ≤ τ"
+    },
+    "D5/S3/QuantumBounds/GramRealizability.gram_realizability": {
+      "module": "D5/S3/QuantumBounds/GramRealizability",
+      "name": "D5.S3.QuantumBounds.GramRealizability.gram_realizability",
+      "kind": "theorem",
+      "statement_id": "sha256:ade6097b22f442dc2db407cdbcfb3841cc7c197b6f264b5826ca0c981300eb3f",
+      "line": 37,
+      "signature": "theorem gram_realizability {V : Type*} [NormedAddCommGroup V] [InnerProductSpace ℂ V] [CompleteSpace V] (Q : V →L[ℂ] V) : 0 ≤ Q ↔ ∃ O : V →L[ℂ] V, Q = O.adjoint ∘L O ∧ ∀ x y : V, inner ℂ (Q x) y = inner ℂ (O x) (O y)"
     },
     "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity": {
       "module": "D5/S3/QuantumBounds/LagrangeGramIdentity",
@@ -3580,6 +4012,22 @@
       "statement_id": "sha256:4afe43b854e2458ef67f9357e4f8b808f2257340b1afb27d2212da242bca7b99",
       "line": 416,
       "signature": "theorem sphere_two_open_orthogonality_free_cover_lower_six {k : ℕ} (U : Fin k → Set (sphere (0 : EuclideanSpace ℝ (Fin 3)) 1)) (hopen : ∀ i, IsOpen (U i)) (hcover : ∀ x, ∃ i, x ∈ U i) (hfree : ∀ i, OrthogonalityFree (U i)) : 6 ≤ k"
+    },
+    "D5/S3/TotalVariation/ParryBoundaryCylinderBound.parry_boundary_cylinder_bound": {
+      "module": "D5/S3/TotalVariation/ParryBoundaryCylinderBound",
+      "name": "D5.S3.TotalVariation.ParryBoundaryCylinderBound.parry_boundary_cylinder_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:d32add90330c2dba2e88e15d450db491eb328e05574510558ade7841fba4c9d3",
+      "line": 31,
+      "signature": "theorem parry_boundary_cylinder_bound (k : ℕ) (hk : 2 ≤ k) (R n : ℕ) (hn : 1 ≤ n) (C : Finset (List (ℕ × ℕ))) (hlen : ∀ cs ∈ C, cs.length = n) (hvalid : ∀ cs ∈ C, ∀ c ∈ cs, 1 ≤ c.1 ∧ 1 ≤ c.2 ∧ c.2 < k) (hfit : ∀ cs ∈ C, 2 + (cs.map (fun c => c.1 + c.2)).sum ≤ R) : let p"
+    },
+    "D5/S3/TotalVariation/ParryResetLaw.parry_stationary_law": {
+      "module": "D5/S3/TotalVariation/ParryResetLaw",
+      "name": "D5.S3.TotalVariation.ParryResetLaw.parry_stationary_law",
+      "kind": "theorem",
+      "statement_id": "sha256:f1def1d45a7ded5fabde68f7c2080b1b30564fff83957726a06255dc4ca220a4",
+      "line": 51,
+      "signature": "theorem parry_stationary_law (k : ℕ) (hk : 2 ≤ k) : let p"
     },
     "D5/S3/Weil/Convention.classicalZeta": {
       "module": "D5/S3/Weil/Convention",

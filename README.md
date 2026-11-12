@@ -34,7 +34,7 @@ Every formal `theorem`, `lemma`, `proposition`, and `corollary` in this library 
 | **第八部 / Part VIII** | 贯通·无时间因果、复杂性视界、量子公平与元统一 | 第 29–32 章 |
 | **第九部 / Part IX** | 互照·万物观察者、自指扩表与超越轮回 | 第 33–36 章 |
 | **第十部 / Part X** | 不二·梦境擦除、记忆指针与本体不二 | 第 37–39 章 |
-| **终章与附录 / Coda & Appendices** | 球外的人、历史遗迹吸引子与高维黄金切投观察者；概念对照词典、克利福德速查表与锁定声明总索引 | `coda.md`、`appendix-a.md`–`appendix-c.md` |
+| **终章与附录 / Coda & Appendices** | 球外的人、历史遗迹吸引子与高维黄金切投观察者；概念对照词典、克利福德速查表、锁定声明总索引，以及量子六大基础难题与五大学派几何对决 | `coda.md`、`appendix-a.md`–`appendix-d.md` |
 
 本书库的文风规范、中英受控术语表与三层认识论诚实契约详见 [PROJECT.md](PROJECT.md)。
 

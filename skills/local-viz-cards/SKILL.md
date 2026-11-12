@@ -21,7 +21,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 ## 页面与它们的卡
 
-本书有 49 个交互页面，下表按登记表（`books/quantum-geometry/viz/visualizations.json`）的顺序排列。
+本书有 61 个交互页面，下表按登记表（`books/quantum-geometry/viz/visualizations.json`）的顺序排列。
 
 | 页面 | 一句话 | 卡（`preset`） |
 | --- | --- | --- |
@@ -73,9 +73,19 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `dream-decoherence-unpinning` | 锚点剪掉位置之间的相干，各处的权重一格不动；放松锚点，或把每一份记录都逆转，条纹就回来——记录把两条路完全分开时回不来 | `waking` `blocks` `half_erase` `zero_overlap_fail` `quantum_eraser` `unpin_body` `wake_snap` |
 | `meta-unification-compass` | 八家统一纲领在三根轴上各偏一侧；120 个转动加上它们的黄金缩小版，恰是 E₈ 的 240 个根，Q 全都等于 2 | `cube` `camps` `crystal` `icosians` `e8` `fold` |
 | `hairy-ball-normal-escape` | 球面上贴着的箭头总留一个发旋：两个能合成一个，却消不掉；换成环面，或让箭头沿法向立起一点，才处处不为零 | `merge` `torus` `defect` `escape` |
-| `dottie-fibonacci-spirals` | 负导数把一维递推拧成北东南西的回旋方格；弯曲圆弧把加法守恒换成勾股守恒 | `twin` `whirl` `pythagoras` `tilt` `zoom` `division` |
+| `dottie-fibonacci-spirals` | 负导数把一维递推拧成北东南西的回旋方格；弯曲圆弧把加法守恒换成勾股守恒 | `whirl` `twin` `pythagoras` `tilt` `zoom` `division` |
 | `critical-mirror` | 零点四个一组，只有站在镜面上才缩成一对；对称本身锁不住零点 | `quartet` `cayley` `thin` `quartic` |
 | `vortex-polygon` | 正负相间的点涡只在一个半径上静止；从六边形起推一下就按 e^(λt) 长大，正方形的谱全在虚轴上，整圈却会匀速转走 | `rest` `radius` `hexagon` `drift` |
+| `entanglement-entropy-complexity` | 同一把偏迹剪刀切开整态：留在手里的纯度与跨割的纠缠永远勾股相加为 1，割断的键数定出局部还原的门账 | `pythagoras` `dottie` `arealaw` `volumelaw` `bellcut` `globaljoint` |
+| `fairness-square-uncertainty-expansion` | 螺旋投到圆上只露一圈影子；两两比量要公平就得平方，平方折掉单基相位换来测不准，碰壁的余项长成新轴 | `helix-shadow` `horizon-limit` `fair-square` `phase-fold` `uncertainty-wedge` `time-expand` |
+| `padic-prime-table-tree` | 换一株零进位的素数树查表：素数越大，扇出越宽、树越扁；无穷多颗素数把连续进位的悬崖挡在门外 | `cleavage` `hensel` `flatten` `unramified` `adelic` `euclid` |
+| `dream-pre-decoherence-deja-vu` | 先选一把尺子切出未来的截面；夜里把前置逻辑提前捏成块对角，醒来未被新证据冲掉的一格零增熵直接命中 | `choose-context` `dream-precompile` `gram-funnel` `logic-upgrade-flush` `unimodular-reversal` `deja-vu-hit` |
+| `pnp-lookup-degradation` | 把零步全知神谕表一级级加上物理限制：先长出进位延迟，再撑出全息球面、平方根干涉与擦除热，反过来读就是建表的路 | `oracle` `frougny` `bekenstein` `grover` `landauer` `ladder` |
+| `observer-escape-ledger` | 有限引理快表把状态分成原像纤维：关掉冗余引理一根弦不漏，漏掉高阶奇偶就弹出跨格逃逸弦，无邻 1 语法守住黄金容量 | `hilbert` `novelty` `escape` `marginal` `zeckendorf` `dream` |
+| `pisot-clifford-rauzy-sandtable` | 禁止连续满载把纵向的零进位前缀树与横向收缩的劳齐分形锁在同一枚算子上，跨切口的禁令定出纠缠秩与边界熵 | `zeckendorf` `kbonacci` `padic` `rauzy` `clifford` `self-reference` `entanglement` `entropy` |
+| `quantum-interpretations-duel` | 密封的朋友实验室配远距贝尔对：同一组角度、环境规模与洛伦兹推动下，五种视角各自把账记在哪里 | `wigner-cut` `and-to-or` `born-unequal` `bell-epr` `time-horizon` `five-way-duel` |
+| `coherence-handshake-causality` | 零读数是正交或反相相消，单向振幅配共轭回波才成公平握手，未来擦除分拣条纹而不改边缘总和 | `boolean-illusion` `born-handshake` `feynman-stationary` `tsvf-eraser` `gram-symmetry` `paradox-cancel` |
+| `observer-consensus-decoherence` | 同一根轴能留下两端，散开的轴会把球一起压向中心；多份对齐记录在中间拉出平坦的冗余平台 | `isotropic-fog` `axis-consensus` `phase-gauge` `darwinism-plateau` `dual-wigner-bubbles` `new-axis-pioneers` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -137,7 +147,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 `fixed-point-convergence` 讲“怎样收束、收得多快”；第二十四章的余弦蛛网全部用这一页（`far` 从 x₀ = 3 出发、看全程，第一步落进 [−1, 1]），`sphere-escape` 的余弦场景只留在它的完整实验室里，不再被章节按卡引用。舞台是蛛网图（曲线 y = f(x) 与直线 y = x），“跟着放大”时以不动点为原点重新标尺。绿色框只给第二十四章用 `lean=` 引用的 `golden_fixed_point_unique`（φ 是 1 + 1/x 唯一的正不动点）与 `rational_inverse_endpoint`（只取其中 θ* 的存在、唯一与 0 < θ* < 1）；全局收敛、严格交替的条件与误差比极限 −sin θ* 是第三十三章例 `ex-ch33-mutual-cosine-monotonic-lock` 把端点定理与现成实分析结果接起来的既有结果应用，标 `ARGUED`；[0, 1] 上的压缩常数 sin 1、牛顿二次收敛、残差双边界与 (1 + sin 1)/b² 界按 §24.4–24.5 的文献注记标 `ARGUED`；轨道、残差、“单纯迭代要走几步”与连分数部分商都以 70 位定点整数实算（`NUM`）。`newton` 卡停在第 2 步（视野宽约 10⁻⁴，正确位数 0 → 1 → 4），切线这一步还看得见；第 4 步的精度交给静态图 `ch24-three-speeds`。这一页的青色是曲线 y = f(x)（只读投影）与单位圆上 P 的横坐标 θ*，品红是斜率那一半：不动点处的切线、牛顿沿切线走的那一段、λ = sin θ* 的高度与残差竖线；琥珀只给当前这一步或当前读数；走过的折线是中性墨色，灰色虚线是最陡斜率 −sin 1 与残差的楔形边界。路线图候选“开普勒方程”“半程落体”讲的是 θ* 住在哪里，正文那里没有关于收束快慢的句子，未做成卡；正文讲了而候选没有的“单位圆上的线与面”（`circle`）与“十进制千分尺”（`ruler`）补做成卡。
 
-`lean-declaration-map` 的舞台按阅读顺序排开 43 根柱子（序曲、三十九章、终章、附录 A 与 B；附录 C 引用全部条目，不单列一柱，只在读数里给序号），每一格是 `trureturing.lock.json` 的一条声明，落在中文正文第一次引用它的那一章。数据由页面目录里的 `gen-data.py` 从锁文件与中文章节（`:::` 行上的 `lean="…"` 记为环境引用，`(lean:…)` 记为行内引用）生成并写进 `main.js` 的生成段，不手填；锁文件或章节变了要重新运行它并重新出图。绿色只给锁文件里种类为 `theorem` 的格子，灰色是定义，空心是只有行内链接的；青色是某一章引用的那些（从它的柱脚连线），琥珀只给选中的一格、连到另外引用它的章的线与阅读位置。依据框里的绿色只给第二十七、二十八章用 `lean=` 逐行解剖的八条定理；格数、种类与出现的章标 `NUM`，“落在首次出场的章”与柱内次序标 `MODEL`。测试按锁文件核对条目数、种类与源码行，并用另一种扫描重读章节核对每一处引用。路线图候选“一部”改为两张审计表卡 `table27`、`table28`（正文的两张表恰好分别覆盖第一至三部与第四至六部），“正文已解剖的那几条”按两章拆成 `bedrock` 与 `closure`，另按附录 C.2.1 加了 `inline`。
+`lean-declaration-map` 的舞台按阅读顺序排开 44 根柱子（序曲、三十九章、终章、附录 A、B 与 D；附录 C 引用全部条目，不单列一柱，只在读数里给序号），每一格是 `trureturing.lock.json` 的一条声明，落在中文正文第一次引用它的那一章。数据由页面目录里的 `gen-data.py` 从锁文件与中文章节（`:::` 行上的 `lean="…"` 记为环境引用，`(lean:…)` 记为行内引用）生成并写进 `main.js` 的生成段，不手填；锁文件或章节变了要重新运行它并重新出图。绿色只给锁文件里种类为 `theorem` 的格子，灰色是定义，空心是只有行内链接的；青色是某一章引用的那些（从它的柱脚连线），琥珀只给选中的一格、连到另外引用它的章的线与阅读位置。依据框里的绿色只给第二十七、二十八章用 `lean=` 逐行解剖的八条定理；格数、种类与出现的章标 `NUM`，“落在首次出场的章”与柱内次序标 `MODEL`。测试按锁文件核对条目数、种类与源码行，并用另一种扫描重读章节核对每一处引用。路线图候选“一部”改为两张审计表卡 `table27`、`table28`（正文的两张表恰好分别覆盖第一至三部与第四至六部），“正文已解剖的那几条”按两章拆成 `bedrock` 与 `closure`，另按附录 C.2.1 加了 `inline`。
 
 `mutual-observer-attractors` 与 `fixed-point-convergence`、`layered-network-cut` 分工：第二十四章讲单个余弦迭代怎样收束，本页讲两个观察者同时互读 (x, y) ↦ (cos y, cos x)：舞台是两人读数的平面，青色是两人的读法 x = cos y 与 y = cos x，灰色方框是走过的各拍，空心的环是每两拍取一次的样本（同一条轨道的偶数拍，按余弦求值次数计并不更快），琥珀只给这一拍；平面下方的窄条带横轴是余弦求值次数，每根灰色细柱是 A 那一拍的有符号误差 x − θ*（对称对数刻度，朝上高于 θ*），偶数拍带环，`alone` 看见逐拍变号、`round` 看见带环的柱全在一侧；第十九章讲层级网络的离散最小割，本页的“极小割”场景是两段边界区间在静态 AdS₃ 真空里的测地线竞争，品红是较短的割，青色是它围出的纠缠楔，琥珀是两段区间 A、B，虚线是落选的割。依据分层：绿色框只给第三十三章用 `lean=` 引用的 `QuantumMaxFlowMinCut.result`，并写明它是离散桥图、不覆盖舞台上的连续图；Ryu–Takayanagi 两区间相变与 ln 形式的测地线长、g = cos∘cos 的压缩与无二周期、每拍 −sin θ* 与每轮 sin²θ* 是例 `ex-ch33-mutual-cosine-monotonic-lock` 的既有结果应用（第 5–9、12–14、20–23 项），与 Ryu–Takayanagi 一样标 `ARGUED`；轨道与割长标 `NUM`；“观察者”“互为故乡”标 `MODEL`。路线图候选里的 `wells`（势阱变形网格）是纯诠释画面，`pinch` 与 `repeated-projection` 重复，`disconnected` 已由 `transition` 的播放起点覆盖，三者未做成卡；候选里的 `finite_record_pinching_idempotent`、`finite_contracting_updates_stabilize` 舞台上没有对应画面，不标绿。
 
@@ -165,7 +175,25 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 `dottie-fibonacci-spirals` 与 `fixed-point-convergence` 分工：后一页讲渐近压缩率、牛顿切线加速与有理刻度裂缝，本页讲第二十四章 §24.5 末与第三十二章 §32.1 末的双螺旋结构对应：蛛网等臂回旋方格与分段 90° 圆弧导引线（x₀ < x* 时按北→东→南→西，x₀ > x* 时按南→西→北→东，每步走两臂转 180°）、右栏光滑等角对数螺旋模型（按同一步数指标 k 记 k×90°）、一维平直加法守恒 φ⁻¹ + φ⁻² = 1 对二维单位圆勾股守恒 (θ*)² + sin²θ* = 1，以及伯努利向心径向切角 α = arctan(1/b)（90.00° / 82.83° / 75.88° / 72.97°）。青色给 cos θ 曲线、θ* 正交螺旋（κ = sin θ* ≈ 0.6736）、共线分量 θ* 与静态不动点圆环，品红给 1/(1+x) 曲线、斐波那契黄金螺旋（κ = φ⁻¹ ≈ 0.6180）、正交分量 sin θ* 与内倾偏角 90° − α，紫色给蛛网双步螺旋（κ = √sin θ* ≈ 0.8207），琥珀只给当前步 k 的折步/方格、动态相位射线与步 k 读数点（恒定切角条保持各螺旋自身语义色并用墨色外圈标示当前选择）。绿色框只给五条冻结定理：`rational_inverse_endpoint`、`golden_inverse_branch_positive_fixed_point_iff`、`fib_cassini_from_golden_norm`、`golden_hurwitz_bound`、`square_eq_neg_one_of_skewAdjoint_unitary`；余弦全局收敛、严格交替与误差比极限 −sin θ*（第三十三章例 `ex-ch33-mutual-cosine-monotonic-lock` 的既有结果应用）以及黄金倒数负导数、等臂转向、守恒对偶与向心切角公式（文献结果）标 `ARGUED`；70 位定点整数实算的常数与 k = 0…20 共 21 步递推轨道（x₀…x₂₁ 与方格边长 s₀…s₂₀，独立测试用 90 位对照，极坐标螺旋与切角用双精度计算后按显示位数舍入）标 `NUM`；克利福德 −1 = Î² 双直角转向、离散等比收缩的连续对数螺旋插值与统一场横纵双螺旋分工标 `MODEL`。
 
-`sphere-escape` 的六个场景（对角线、纤维、割圆、指针、余弦、素数）共用一条时间轴。“纤维”场景是第二十一章例 `ex-cantor-godel-diagonal-table` 的四地址目录（解码器常零、恒等、取反、常一，恰好满射）：读者点地址改它的潜坐标，时间轴先逐个算出 g，再把同一纤维里 g 不同的点对连成品红线（分离亏损），最后把 g 立成紫色的第二根轴、块数变多；16 种潜坐标都劈开某根纤维，绿色框只给 `complete_diagonal_topological_settlement`。“指针”场景画 N + 1 格的记录指针（青色条）与平移 ℓ 格的副本（品红轮廓），右边是正 (⌊N/ℓ⌋ + 2) 边形的边心距（青色虚线）与弓高（品红），琥珀色的点是 |γ(ℓ)|；正弦形在 ℓ = 1 时恰好取到边心距（页面实算），绿色框给 `coefficient_gamma_le_cosine` 与 `finite_record_cosine_obstruction`。页面读数里“相符”的勾是中性色（`.chk`），不是绿色。
+`entanglement-entropy-complexity` 与 `layered-network-cut`、`complexity-growth` 分工：那两页分别讲层级网络离散极小割与随机电路半链熵增长，本页讲第三十章末节的“偏迹视界同一把剪刀切出纠缠、熵与键维代价”：青色是留在局域边缘里的布洛赫长度平方 ‖r_A‖² = cos²θ 与有能隙面积律割，品红是跨割双向量纠缠并发度平方 τ = sin²θ = S_L(ρ_A)、九维关联盲区与体积律指数键维，紫色是跨割联合旋子，琥珀是当前施密特角 θ（含 Dottie 平衡角 θ* ≈ 42.35°）。绿色框只给该节引用的四条冻结定理：`bell_pure_state_has_maximally_mixed_marginal`、`local_marginal_correlation_blind_spot`、`entropy_production_coherence_deletion_identity` 与 `rational_inverse_endpoint`；Hastings 面积律、Page 体积律、Harlow–Hayden / Susskind 解码复杂度屏障、PostBQP = PP 与 MIP* = RE 标 `ARGUED`；施密特纯度、线性熵、冯·诺依曼熵与割键维 2^{S_cut} 实算标 `NUM`；标准图灵机 P ≠ NP 标 `OPEN`；三位一体视界诠释标 `MODEL`。
+
+`fairness-square-uncertainty-expansion` 与 `quantum-fairness-ledger` 分工：前一页讲五重公平的球面五本账，本页讲第三十一章 §31.4 的四句本体链条（覆叠螺旋投影与截断视界 → 公平迫使二次平方 → 单基对角相位折叠与罗伯逊—薛定谔余项 → 克雷洛夫饱和与素数正交新轴扩张）：青色是圆周投影影子、当前有限子空间内的投影分量与对角读数，品红是层高差、一致完备化单位算子范数缺口 ‖id − P_{S_i}‖ = 1、折叠丢失的相对相位与正交逃逸余项，紫色是双向量对易面积 C 与协方差余项，琥珀是当前螺旋步、测试态与新长出的素数轴。绿色框只给 §31.4 用 `lean=` 引用的二十条冻结定理；约当—冯·诺依曼逆定理、格里森定理（d ≥ 3）、无界正则对易子定义域条件、Balan–Casazza–Edidin 无相位重构、欧几里得 IX.20 与兰佐斯—阿诺德迭代终止标 `ARGUED`；螺旋阴影、w_p(θ) 反例、|0⟩ 上 X/Y 方差积与 30031 = 59 × 509 检核标 `ARGUED` / `NUM`；静动不二与 D → D + 1 时间观标 `MODEL`。
+
+`padic-prime-table-tree` 与 `forgetting-rebirth-attractor`、`euler-product-sieve` 分工：前两页分别讲双曲圆盘快度阶梯与实轴欧拉乘积筛余项，本页讲第三十六章 §36.4 的模 p^k 前缀查表树与素数扩表：青色是同余闭球纤维内已区分的合法分支与亨泽尔唯一提根路径，品红是精度盲区 k < k* = v_p(x − y) + 1 内的碰撞对、p = 2 分歧奇异阻断与 p_∞ 连续进位溢出，琥珀是当前选中的素数基数 p ∈ {2, 7, 31, 1031} 与待查有理数 x = 12/35。绿色框只给 §36.4 用 `lean=` 引用的八条冻结定理（奥斯特洛夫斯基分类、同余纤维闭球对应、首次区分精度、观测距离恒等、两项超度量强三角律、中国剩余双射与有理阿代尔乘积公式）；亨泽尔引理、布吕阿—蒂茨树与 p 进 AdS/CFT、阿拉克洛夫 p_∞ 及欧几里得素数无穷多标 `ARGUED`；树深 ⌈n / log₂ p⌉ 与阿代尔局部范数连乘实算标 `NUM`；“一观察者一素数、扩素数即扩表阻断轮回”标 `MODEL`。
+
+`dream-pre-decoherence-deja-vu` 与 `dream-decoherence-unpinning`、`spatial-attractor-deja-vu` 分工：`dream-decoherence-unpinning` 讲锚点松绑与双副本量子擦除，`spatial-attractor-deja-vu` 讲洛伦兹吸引子跨轮次切向共振，本页讲第三十七章 §37.5 的“选基选择未来、梦境离线幂等预编译、醒后新颖度冲刷与无时间戳快表命中”：青色是选定语境下的块对角投影不动点、格拉姆相容走廊 [0.28, 1] 内的合法落点与零新增熵（ΔH_bits = 0）快表命中，品红是丢弃的跨块相干质量 2|ρ₀₁|²、走廊外的违例格拉姆点与高新颖度事实触发的流水线冲刷作废，琥珀是当前选中的测量尺、候选未来截面与 `Time_Tag = NULL` 命中槽。绿色框只给 §37.5 引用的十八条冻结定理；惠勒延迟选择、超标量分支预测投机冲刷与 TLB/PCID 标签规范、康威帝国效应及 Brown / Moulin 既视感心理学文献标 `ARGUED`；同轴重投影 ΔH_bits = 0 专化、三向量格拉姆走廊与四阶段矩阵元实算标 `ARGUED` / `NUM`；梦境沙盘预编译与既视感快表诠释标 `MODEL`。
+
+`pnp-lookup-degradation` 与 `pointer-ontology-deref`、`eth-horizon-crossover` 分工：后两页讲递归页表槽位自映射与 3-SAT 亚指数交叉尺度，本页讲第三十八章 §38.4 的“全知神谕查表七阶退化阶梯（0 → 6 正向降级派生时空热、6 → 0 逆向建表重返 p = *p）”：青色是快表已驻留的零步命中份额 σ 与相干加速区，品红是受下支撑进位屏障、全息球半径 R = Ω(2^{σn/2}) 光锥线延迟与兰道尔排热支配的退化代价指数 r(σ)，紫色是 σ* = 2/3（r_min = 1/3）全息流水线平衡点，琥珀是当前所处的退化阶（0 至 6）。绿色框只给 §38.4 用 `lean=` 引用的五条冻结定理（`diagonal_landing_fixed`、`lookup_program_upper_bound`、`lookup_copy_zero_loss_and_nonanticipating_failure`、`lower_support_carry_barrier`、`landauer_bound_of_balance`）；PostBQP = PP、P/poly 坍缩、Frougny 向上进位波、贝肯斯坦—霍金熵界、Klauck–Špalek–de Wolf 量子权衡 ST² = Ω(2ⁿ) 与姚期智 ST ≥ 2ⁿ / PPSZ 标 `ARGUED`；标准图灵机 P ≠ NP 标 `OPEN`；各阶指数曲线实算标 `NUM`；双向阶梯诠释标 `MODEL`。
+
+`observer-escape-ledger` 与 `pnp-lookup-degradation` 分工：前一页讲宏观复杂度指数随表容量比例 σ 的退化包络，本页讲第三十八章 §38.5 的有限状态场 S = {0, 1}⁴（16 态、120 条无向弦）五引理快表原像纤维与闭合 Moore/Hilbert 回路账本：青色是快表保留信息 I_ledger(S)、单点/细分原像纤维与齐肯多夫合法脉冲，品红是同纤维不可区分状态间的跨格逃逸弦、Rényi-2 碰撞逃逸熵 H₂^escape 与清醒第 5 阶段兰道尔擦除热，紫色是两比特 9/15 关联盲区扇区与唯一捕获弦高亮，琥珀是闭合回路上的当前指针读头与刚切换的引理开关 L₁…L₅。绿色框只给 §38.5 引用的七条冻结定理（留一逃逸对并分解、唯一捕获差集、两项严格商核新颖度等价、细化不纯度单调不增、十四比特块避碰一致上界与局域边缘关联盲区）；SMB 柱集等分、Parry 黄金移位容量 log₂ φ、Frougny 正规化与 Moore–Hilbert 1/d 局部性界标 `ARGUED`；32 种引理子集的纤维平方和与逃逸率穷举实算标 `NUM`；柱集裁切回弹与梦境零热复相干账本标 `MODEL`。
+
+`pisot-clifford-rauzy-sandtable` 与 `golden-cut-observer`、`padic-prime-table-tree` 分工：`golden-cut-observer` 讲 K = 2 一维内空间区间窗与卡西尼接缝，`padic-prime-table-tree` 讲素数基数树，本页讲第三十九章 §39.5 的广义 K-Bonacci 皮索—克利福德—劳齐八概念综合沙盘：青色是满足无 K 连 `1` 约束的合法字、单位圆内收缩共轭点与三阶劳齐分形内窗 R₃(α) 的三支前缀拼砖 f₀ / f₁₀ / f₁₁₀，品红是跨切口满载禁令剪掉的违例分支、分形边界碰撞对 `EscapePairs` 与谱支撑阻断，紫色是复共轭平面里的阻尼旋子，琥珀是当前阶数 K、切口位置或比对点（含超越数 θ* ≈ 0.739085 对六次代数数 |α|_{K=3} = β₃^(−1/2) ≈ 0.737353 的 0.234% 邻近对照）。绿色框只给 §39.5 用 `lean=` 引用的二十七条冻结定理；劳齐拼砖拓扑圆盘性质与边界维数 dim_H(∂R₃) ≈ 1.09336、斐波那契任意子黄金链与 51 原子里德堡阻塞模拟器、Parry 熵 log₂ β_K 及 Abramov 诱导回归熵公式标 `ARGUED`；根轨迹、拼砖迭代与可达页秩矩形实算标 `NUM`；劳齐分形视界纠缠标度 `prob-ch39-p2e-fractal-horizon` 标 `OPEN`；克利福德线—面词典与八概念闭环标 `MODEL`。
+
+`quantum-interpretations-duel` 对应附录 D 的“维格纳朋友密封实验室 + 远距 EPR 贝尔纠缠对”联合几何对决台：青色是留在局域子空间或对角记录里的投影权重 cos²θ、纯度 r² 与无条件边缘 50%/50%，品红是环境纠缠亏损 τ_{L:E} = 1 − r²、被捏合抹除的跨分支相干、类空同时面倾斜差 Δt′ = −2Γ_β β 与剩余逃逸对，紫色是双比特 CHSH 算符与复结构 J² = −I 平面，琥珀是当前选中的诠释透镜（哥本哈根、多世界、德布罗意—玻姆导航波、GRW–Penrose 客观坍缩、正交自指开维）及共享旋钮（测量角 θ、环境规模 lg N、参考系推动 β）。绿色框只给附录 D D.4 总表列出的二十条冻结定理；冯·诺依曼过程 I/II、Frauchiger–Renner 定理、Zurek / Schlosshauer 退相干评述、Gleason 定理、Renou et al. (2021) 网络实量子证伪、Bell / Eberhard 无信令、Harrigan–Spekkens / PBR 定理、五大流派原始文献及 Pauli / Wheeler–DeWitt / AMPS 视界文献标 `ARGUED`；预示条件 75%/25% 对比无条件 50%/50% 边缘、r² + τ_{L:E} = 1、助推同时面偏移与四比特奇偶捕获算例标 `ARGUED` / `NUM`；协变坍缩与量子引力视界幺正性 `prob-appendix-d-time-horizon` 标 `OPEN`；五视角几何对照标 `MODEL`。
+
+`coherence-handshake-causality` 与 `timeless-causal-crystal`、`gram-causal-elliptope` 分工：前两页分别讲无时间晶体四切面与多步记忆椭圆体收缩，本页讲第二十九章 `#sec-ch29-coherence-handshake-causality` 的相干—去相干逻辑、双端玻恩握手、未来擦除无信令与闭环自洽：青色是轴向可见投影、正向交叠振幅、无条件过去边缘总和与相容闭环通路，品红是正交补分量与双向量面积、共轭回波振幅、被捏合删除的非对角相干与反相分流到互补端口的权重，紫色是双端口合束算符、置换阵 P₁₃ 与格拉姆体积不变量，琥珀是当前选中的角度、斯涅尔驻点 s*、未来标记基角 β 与余弦不动点 θ* ≈ 0.739085（不用红色标零概率或符号翻转）。绿色框只给 `#sec-ch29-coherence-handshake-causality` 用 `lean=` 引用的十四条冻结定理；费曼—希布斯斯涅尔折射有限求积、Cramer (1986) 交易诠释、ABL (1964) / AAV (1988) 双态矢量与弱值在 ⟨Φ|Ψ⟩ = 0 处严格无定义、Scully–Drühl / Kim 延迟选择量子擦除及 Deutsch (1991) 闭合类时曲线混合态不动点标 `ARGUED`；双端口守恒、克劳斯完备性无信令 p(j) = q_j 与 P₁₃GP₁₃ᵀ 置换恒等式标 `ARGUED` / `NUM`；“逻辑只有相干与去相干、双端握手即因果”标 `MODEL`。
+
+`observer-consensus-decoherence` 与 `mutual-observer-attractors`、`bloch-noise`、`quantum-interpretations-duel` 分工：前三页分别讲两人互指蛛网与极小割重联、单通道布洛赫仿射噪声、五种量子诠释账本对照，本页讲第三十三章 `#sec-ch33-consensus-decoherence-pointer` 的多观察者二阶共识张量 M_cons、去相干指针基涌现与无脱观察者绝对客观事实：青色是唯一分辨出的未定向共识指针线（仅当谱隙 Δλ = λ₁ − λ₂ > 10⁻⁸ 时画出；各向同性迷雾 I₃/3 与双正交泡顶层简并 (1/2, 1/2, 0) 均标 `pointerAxis = null`）、纵向存留极化与纯双分支互信息经典冗余平台，品红是横向相干圆盘收缩、未控幸存记录封锁的残余相干与平面外拓荒观察者的正交逃逸余项 sin β，紫色是共同复相位二次厄米配对、双副本四步相位复原轨迹与双实验室真局域友好性关联多胞体，琥珀是当前选中的观察者轴簇、去相干角 α、片段规模 m、白噪声可见度 v 与拓荒倾角 β（不用红色标零读数或旧生成元下最快衰减的核方向）。绿色框只给 `#sec-ch33-consensus-decoherence-pointer` 用 `lean=` 引用的十二条冻结定理；Zurek 环境诱导超选择与量子达尔文主义（含 Blume-Kohout & Zurek 自旋环境模型）、Brukner / Frauchiger–Renner 扩展维格纳朋友定理及 Bong 等人 (2020) 真局域友好性不等式 F_LF ≤ 6（量子违背见证 √5 + 3 + √(2 + √2) ≈ 7.0838，v_crit ≈ 0.8470）标 `ARGUED`；二阶并矢张量符号翻转不变性（严格区分于对径正交纯态）、有序乘积 vs. 系综平均 vs. 弱耦合生成元 I₃ − M_cons、O(N) 纯分支互信息曲线、正交 Z/X 未读对易 vs. 选择性分支不对易及 det M_η = (1 − η)²abη sin²β（并标明旧生成元下 ker M₀ 按 e^(−t) 最快衰减而非无退相干子空间）标 `ARGUED` / `NUM`；Lamport–Shostak–Pease 拜占庭多数派共识类比与“共识决定去相干方向、无绝对客观存在”标 `MODEL`。
 
 `critical-mirror` 的舞台是两个并排的平面：左边是临界带 0 < Re s < 1（纵向压缩），琥珀色的 ρ = ½ ± δ + iγ 与三个品红的伴 ρ̄、1 − ρ、1 − ρ̄，δ = 0 时两两重合成青色的两点；右边是凯莱坐标 w = (s − 1)/s，单位圆是青色，左下的放大镜以辐角为横轴、ln|w| 为纵轴，把高处只偏出圆周万分之几的四个像拉开。“四次式”场景把右边换成同样对称的四次式 F(½ + it)（青色，最低处琥珀色）与 ξ(½ + it)（品红，各用各的标尺；ξ 由欧拉—麦克劳林求 ζ、斯特林求 Γ）。前五个零点是灰色的数值点（与静态图 `ch22-critical-line`、`ch22-overview` 里的零点同为灰色）。时间轴是 ρ 到镜面的距离 δ。绿色框只给第二十二章用 `lean=` 引用的 `xi_reading_reflection`、`xi_reading_one_sub_conj`、`cayley_ratio_norm_one_iff_critical_line` 与 `full_symmetry_not_fixed_line_localization`；零点高度、|w|、F、ξ 标 `NUM`；黎曼猜想只在抽屉里标 `OPEN`，页面不画“全部零点”。
 
@@ -395,6 +423,13 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十九章 | 第四层第 2 条（半正定矩阵补全）之后 | `gram-causal-elliptope` · `narrow` |
 | 第二十九章 | 第四层第 2 条之后、承接句“反过来，若硬把新的内积坐标填到泡泡之外……”之后 | `gram-causal-elliptope` · `violate` |
 | 第二十九章 | 第四层观察者对照表之后、承接句“表的另一端是零记忆的瞬时观察者……”之后 | `timeless-causal-crystal` · `right` |
+| 第二十九章 | 相干与双端握手一节 · 一 定理 `thm-ch29-coherence-complement-and-pinching` 解读段之后 | `coherence-handshake-causality` · `boolean-illusion` |
+| 第二十九章 | 相干与双端握手一节 · 二 定理 `thm-ch29-born-handshake-and-phase-fairness` 解读段之后 | `coherence-handshake-causality` · `born-handshake` |
+| 第二十九章 | 相干与双端握手一节 · 三 文献注记 `rem-ch29-transactional-tsvf-eraser-literature` 后第一段（驻相折射扇）之后 | `coherence-handshake-causality` · `feynman-stationary` |
+| 第二十九章 | 相干与双端握手一节 · 三 第二段（未来选基擦除分拣与弱值边界）之后 | `coherence-handshake-causality` · `tsvf-eraser` |
+| 第二十九章 | 相干与双端握手一节 · 三 第三段（三时刻格拉姆首尾置换）之后 | `coherence-handshake-causality` · `gram-symmetry` |
+| 第二十九章 | 相干与双端握手一节 · 四 定理 `thm-ch29-double-cover-fates-and-dottie` 解读段之后 | `coherence-handshake-causality` · `paradox-cancel` |
+| 第二十九章 | 相干与双端握手一节末（注记 `rem-ch29-coherence-causality-comparison` 之后、本章小结之前） | `coherence-handshake-causality` 完整实验室 |
 | 第二十九章 | 本章小结第一段之后 | `gram-causal-elliptope` 完整实验室 |
 | 第三十章 | 第一节 · 2 列表（两道几何视界）之后 | `timeless-causal-crystal` · `thread` |
 | 第三十章 | 文献注记 `rem-ch30-query-sos-literature` 之后 | `timeless-causal-crystal` · `sos` |
@@ -414,7 +449,14 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十章 | 猜想 `conj-coda-navier-stokes-regularity` 之后 | `navier-stokes-p-np` · `runaway` |
 | 第三十章 | 定理 `thm-coda-quadratic-advection-no-closure` 的证明之后 | `navier-stokes-p-np` · `mixed` |
 | 第三十章 | 纳维—斯托克斯一节末 | `navier-stokes-p-np` 完整实验室 |
-| 第三十章 | 章末（最后一段之后） | `vortex-polygon` 完整实验室 |
+| 第三十章 | 原有场与线讨论末、新增纠缠一节之前 | `vortex-polygon` 完整实验室 |
+| 第三十章 | “量子纠缠、$P=NP$、熵”一节 · 1 末（勾股守恒与偏迹边缘） | `entanglement-entropy-complexity` · `pythagoras` |
+| 第三十章 | “量子纠缠、$P=NP$、熵”一节 · 2 数学边界段之后、拓扑切换对比段之前 | `entanglement-entropy-complexity` · `arealaw` |
+| 第三十章 | “量子纠缠、$P=NP$、熵”一节 · 2 末（双桥对八桥对比段之后） | `entanglement-entropy-complexity` · `volumelaw` |
+| 第三十章 | 文献注记 `rem-ch30-entanglement-entropy-complexity-literature` 后的引出段之后 | `entanglement-entropy-complexity` · `bellcut` |
+| 第三十章 | “量子纠缠、$P=NP$、熵”一节 · 3 末（抬起偏迹刀片辨析段之后） | `entanglement-entropy-complexity` · `globaljoint` |
+| 第三十章 | “量子纠缠、$P=NP$、熵”一节 · 4 特征角度对照表之后 | `entanglement-entropy-complexity` · `dottie` |
+| 第三十章 | “量子纠缠、$P=NP$、熵”一节末（16 比特舞台引出段之后） | `entanglement-entropy-complexity` 完整实验室 |
 | 第三十一章 | §31.1 “丈量互易”列表之后 | `quantum-fairness-ledger` · `haar` |
 | 第三十一章 | §31.1 零免费午餐账本三项列表之后 | `quantum-fairness-ledger` · `tradeoff` |
 | 第三十一章 | §31.2 列表第 1 项（不可克隆内积判据）之后 | `quantum-fairness-ledger` · `cloning` |
@@ -422,6 +464,13 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十一章 | 文献注记 `rem-ch31-ckw-monogamy-literature` 之后 | `quantum-fairness-ledger` · `wstate`，一句过渡，再 `ghz` |
 | 第三十一章 | 文献注记 `rem-ch31-weyl-window-equidistribution-literature` 之后 | `quantum-fairness-ledger` · `ergodic` |
 | 第三十一章 | “看清了这一长程图景”一段之后、五重公平总表之前 | `quantum-fairness-ledger` 完整实验室 |
+| 第三十一章 | §31.4.1 定理 `thm-ch31-helix-readout-progress` 后的同族定理解读段之后 | `fairness-square-uncertainty-expansion` · `helix-shadow` |
+| 第三十一章 | §31.4.1 末（定理 `thm-ch31-truncation-strong-vs-uniform` 后的并置解读段之后） | `fairness-square-uncertainty-expansion` · `horizon-limit` |
+| 第三十一章 | §31.4.2 第一步末（定理 `thm-ch31-phase-polynomial-quadratic` 后的解读段之后） | `fairness-square-uncertainty-expansion` · `fair-square` |
+| 第三十一章 | §31.4.2 第二步末（定理 `thm-ch31-diagonal-phase-blindness` 后的解读段之后） | `fairness-square-uncertainty-expansion` · `phase-fold` |
+| 第三十一章 | §31.4.2 第三步末（文献注记 `rem-ch31-jvn-gleason-robertson-literature` 后的总结段之后） | `fairness-square-uncertainty-expansion` · `uncertainty-wedge` |
+| 第三十一章 | §31.4.3 文献注记 `rem-ch31-krylov-euclid-literature` 后的时间扩张诠释段之后、四命题总表之前 | `fairness-square-uncertainty-expansion` · `time-expand` |
+| 第三十一章 | §31.4 末（全章末尾） | `fairness-square-uncertainty-expansion` 完整实验室 |
 | 第三十二章 | §32.1 三条创生律列表之后、定理 `thm-ch32-generative-self-reference-and-zeckendorf` 引言之前 | `unified-field-slice` · `polytope` |
 | 第三十二章 | 文献注记 `rem-ch32-generative-laws-dottie-literature` 之后 | `unified-field-slice` · `fixedpoint` |
 | 第三十二章 | §32.1 末（统一场横纵双螺旋分工列表之后、转入 §32.2 之前） | `dottie-fibonacci-spirals` · `division` |
@@ -439,8 +488,15 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十三章 | 例 `ex-ch33-mutual-cosine-monotonic-lock` 之后、“对照……轨迹账本”一段之前 | `mutual-observer-attractors` · `round` |
 | 第三十三章 | “两人起点不同时也是如此”一段之后、“接受窗交集”一节之前 | `mutual-observer-attractors` · `apart` |
 | 第三十三章 | 文献注记 `rem-ch33-rt-reconnection-ckw-literature` 之后、“把窗口交集体积……合拢”一段之前 | `mutual-observer-attractors` · `transition` |
-| 第三十三章 | “把窗口交集体积……合拢”一段后的三种相互吸引列表之后、“这便彻底解开”一段之前 | `mutual-observer-attractors` · `connected` |
-| 第三十三章 | 章末 | `mutual-observer-attractors` 完整实验室 |
+| 第三十三章 | 三种相互吸引列表之后、“这便彻底解开”一段之前 | `mutual-observer-attractors` · `connected` |
+| 第三十三章 | “进入下一节审视多观察者群体的去相干共识之前”一段之后、`#sec-ch33-consensus-decoherence-pointer` 之前 | `mutual-observer-attractors` 完整实验室 |
+| 第三十三章 | `#sec-ch33-consensus-tensor-axis` 各向同性迷雾导引段之后、定理 `thm-ch33-consensus-quadratic-and-gram` 之前 | `observer-consensus-decoherence` · `isotropic-fog` |
+| 第三十三章 | `#sec-ch33-consensus-tensor-axis` 末（定理 `thm-ch33-consensus-quadratic-and-gram` 及其证明与规范对照段之后） | `observer-consensus-decoherence` · `phase-gauge` |
+| 第三十三章 | `#sec-ch33-consensus-pinching-pointer` 末（定理 `thm-ch33-consensus-pinching-and-fixed-points` 及适用护栏段之后） | `observer-consensus-decoherence` · `axis-consensus` |
+| 第三十三章 | `#sec-ch33-consensus-darwinism-kernel` 末（定理 `thm-ch33-consensus-redundant-records-and-kernel` 及边界说明段之后） | `observer-consensus-decoherence` · `darwinism-plateau` |
+| 第三十三章 | `#sec-ch33-consensus-wigner-pioneers` 定理 `thm-ch33-consensus-revision-and-escape` 之后、文献注记 `rem-ch33-quantum-darwinism-local-friendliness-literature` 之前 | `observer-consensus-decoherence` · `dual-wigner-bubbles` |
+| 第三十三章 | `#sec-ch33-consensus-wigner-pioneers` 平面外拓荒观察者推导段之后、五维对照注记 `rem-ch33-consensus-vs-absolute-objectivity` 之前 | `observer-consensus-decoherence` · `new-axis-pioneers` |
+| 第三十三章 | 五维对照注记 `rem-ch33-consensus-vs-absolute-objectivity` 导览段之后、全章末转入第三十四章一段之前 | `observer-consensus-decoherence` 完整实验室 |
 | 第三十四章 | 例 `ex-ch34-spherical-addressing-preview` 之后 | `spherical-degeneracy-radar` · `meridian` |
 | 第三十四章 | 该例之后的解读段（“自定位罗盘”）之后 | `spherical-degeneracy-radar` · `sweep` |
 | 第三十四章 | 定理 `thm-ch34-perpendicular-axis-and-pullback` 之后的解读段（“三款结论连起来看”）之后、注记 `rem-ch34-localization-figure` 之前 | `spherical-degeneracy-radar` · `pullback` |
@@ -463,6 +519,13 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十六章 | 文献注记 `rem-ch36-poincare-disk-gudermannian-literature` 之后 | `forgetting-rebirth-attractor` · `klein_vs_poincare` |
 | 第三十六章 | 定理 `thm-ch36-quotient-annihilator-and-factorization` 后的三条解读列表之后 | `forgetting-rebirth-attractor` · `quotient_fold` |
 | 第三十六章 | 注记 `rem-ch36-samsara-exit-table` 之后、第九部收束段之前 | `forgetting-rebirth-attractor` 完整实验室 |
+| 第三十六章 | §36.4 素数扩表四阶段列表第 1 项（$p = 2$ 分歧奇异阻断）末 | `padic-prime-table-tree` · `cleavage` |
+| 第三十六章 | §36.4 素数扩表四阶段列表第 2 项（$p = 7$ 亨泽尔零进位提根）末 | `padic-prime-table-tree` · `hensel` |
+| 第三十六章 | §36.4 素数扩表四阶段列表第 3 项（$p = 31$ 扩表压平树深）末 | `padic-prime-table-tree` · `flatten` |
+| 第三十六章 | §36.4 素数扩表四阶段列表第 4 项（$p = 1031$ 单层直读表）末 | `padic-prime-table-tree` · `unramified` |
+| 第三十六章 | §36.4 定理 `thm-ch36-crt-and-adelic-product-formula` 后的 $x = 12/35$ 算例段之后 | `padic-prime-table-tree` · `adelic` |
+| 第三十六章 | §36.4 连续位 $p_\infty$ 进位轮回对比欧几里得无穷素数梯两项列表之后、文献注记之前 | `padic-prime-table-tree` · `euclid` |
+| 第三十六章 | §36.4 注记 `rem-ch36-prime-table-evolution-summary` 之后、章末收束段之前 | `padic-prime-table-tree` 完整实验室 |
 | 第三十七章 | §37.1 “坚硬 / 狭窄与疲惫”列表之后、定理 `thm-ch37-known-data-pinching-and-entropy-tax` 的引言之前 | `dream-decoherence-unpinning` · `waking` |
 | 第三十七章 | 该定理的证明之后、§37.2 之前 | `dream-decoherence-unpinning` · `blocks` |
 | 第三十七章 | §37.2 双副本相位账本公式之后、定理 `thm-ch37-joint-coherent-record-erasure` 的引言之前 | `dream-decoherence-unpinning` · `half_erase` |
@@ -471,19 +534,49 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十七章 | §37.3 “如果像朴素机械论所断言……”一段之后、“可事实恰恰相反”之前 | `dream-decoherence-unpinning` · `unpin_body` |
 | 第三十七章 | §37.4 “由此可见……”一段之后、总表引言之前 | `dream-decoherence-unpinning` · `wake_snap` |
 | 第三十七章 | “凝视……”一段之后、转入第三十八章一段之前 | `dream-decoherence-unpinning` 完整实验室 |
+| 第三十七章 | §37.5.1 单比特两把尺子手算与克雷洛夫秩增长段之后、文献注记之前 | `dream-pre-decoherence-deja-vu` · `choose-context` |
+| 第三十七章 | §37.5.1 末（多副本幺模相位记录四步逆转段之后） | `dream-pre-decoherence-deja-vu` · `unimodular-reversal` |
+| 第三十七章 | §37.5.2 末（四阶段对比账本表之后） | `dream-pre-decoherence-deja-vu` · `dream-precompile` |
+| 第三十七章 | §37.5.3 第一问格拉姆三层相容带与黄金窗口段之后、帝国效应文献注记之前 | `dream-pre-decoherence-deja-vu` · `gram-funnel` |
+| 第三十七章 | §37.5.3 末（“梦后逻辑升级 / 流水线冲刷”两项列表之后） | `dream-pre-decoherence-deja-vu` · `logic-upgrade-flush` |
+| 第三十七章 | §37.5.4 三种认知相遇对照表之后、既视感心理学文献注记之前 | `dream-pre-decoherence-deja-vu` · `deja-vu-hit` |
+| 第三十七章 | §37.5 末（全章末尾） | `dream-pre-decoherence-deja-vu` 完整实验室 |
 | 第三十八章 | 文献注记 `rem-ch38-qram-page-wootters-literature` 之后、“对照……”一段之前 | `pointer-ontology-deref` · `qram_tree` |
 | 第三十八章 | 38.1 列表第 1 条（`ptr++` 逐帧扫描）之后、第 2 条之前 | `pointer-ontology-deref` · `linear64` |
 | 第三十八章 | 38.2 列表“清醒与梦境的硬件切换”一条之后 | `pointer-ontology-deref` · `superpose` |
-| 第三十八章 | 文献注记 `rem-ch38-x86-recursive-page-table-literature` 之后、“在纯数学底层”一段之前 | `pointer-ontology-deref` · `four_loops` |
+| 第三十八章 | 定理 `thm-ch38-discrete-sech-positive` 之后、“在纯数学底层”一段之前 | `pointer-ontology-deref` · `four_loops` |
 | 第三十八章 | 例 `ex-ch38-recursive-page-table-dereference` 之后 | `pointer-ontology-deref` · `self_map` |
 | 第三十八章 | 38.3 列表第 1 条（查表算法与被查之表合二为一）之后、第 2 条之前 | `pointer-ontology-deref` · `diagonal_hit` |
-| 第三十八章 | 章末 | `pointer-ontology-deref` 完整实验室 |
+| 第三十八章 | §38.3 末 | `pointer-ontology-deref` 完整实验室 |
+| 第三十八章 | §38.4 · 一 末（认识论红线段之后） | `pnp-lookup-degradation` · `oracle` |
+| 第三十八章 | §38.4 · 二 第 2 阶退化项末 | `pnp-lookup-degradation` · `frougny` |
+| 第三十八章 | §38.4 · 二 第 3 阶退化项之后 | `pnp-lookup-degradation` · `bekenstein` |
+| 第三十八章 | §38.4 · 二 第 4 阶退化项之后 | `pnp-lookup-degradation` · `grover` |
+| 第三十八章 | §38.4 · 二 第 5 阶退化项之后 | `pnp-lookup-degradation` · `landauer` |
+| 第三十八章 | §38.4 · 四 开头（双向通读列表之前） | `pnp-lookup-degradation` · `ladder` |
+| 第三十八章 | §38.4 · 四 双向通读列表之后、小节收束段之前 | `pnp-lookup-degradation` 完整实验室 |
+| 第三十八章 | §38.5 四比特 16 态算例第 1 项（五引理全开）之后 | `observer-escape-ledger` · `hilbert` |
+| 第三十八章 | §38.5 四比特 16 态算例第 2 项（关闭冗余引理 $L_5$）之后 | `observer-escape-ledger` · `novelty` |
+| 第三十八章 | §38.5 四比特 16 态算例第 3 项（关闭四体异或 $L_4$）之后 | `observer-escape-ledger` · `escape` |
+| 第三十八章 | §38.5 四比特 16 态算例第 4 项（贝尔边缘盲区同构）之后 | `observer-escape-ledger` · `marginal` |
+| 第三十八章 | §38.5 末小节第 1 项（齐肯多夫黄金容量税与柱集回弹）之后 | `observer-escape-ledger` · `zeckendorf` |
+| 第三十八章 | §38.5 末小节第 2 项（清醒兰道尔擦除热对照梦境零热复相干）之后 | `observer-escape-ledger` · `dream` |
+| 第三十八章 | §38.5 末（章末收束段之前） | `observer-escape-ledger` 完整实验室 |
 | 第三十九章 | §39.3 第二段（“观察者从来没有‘住在时空里’”）之后、“数学物理史上……”一段之前 | `self-sustaining-spinor-flow` · `weave` |
 | 第三十九章 | 文献注记 `rem-ch39-cartan-penrose-hestenes-fierz-literature` 之后 | `self-sustaining-spinor-flow` · `fierz` |
 | 第三十九章 | 例 `ex-ch39-even-clifford-spinor-bilinear-fierz` 之后 | `self-sustaining-spinor-flow` · `turn360` |
 | 第三十九章 | 定理 `thm-ch39-double-cover-no-section-and-720-lift` 的证明之后 | `self-sustaining-spinor-flow` · `seam` |
 | 第三十九章 | 该定理之后的“请屏息凝视”一段之后、§39.4 之前 | `self-sustaining-spinor-flow` · `turn720` |
-| 第三十九章 | 章末（最后一段之后） | `self-sustaining-spinor-flow` 完整实验室 |
+| 第三十九章 | §39.4 末 | `self-sustaining-spinor-flow` 完整实验室 |
+| 第三十九章 | §39.5.1 广义合法字计数公式段之后 | `pisot-clifford-rauzy-sandtable` · `zeckendorf` |
+| 第三十九章 | §39.5.2 定理 `thm-ch39-p2e-kbonacci-pisot` 后的根分布解读段之后 | `pisot-clifford-rauzy-sandtable` · `kbonacci` |
+| 第三十九章 | §39.5.3 定理 `thm-ch39-p2e-padic-readout` 后的跨系统边界说明段之后 | `pisot-clifford-rauzy-sandtable` · `padic` |
+| 第三十九章 | §39.5.4 文献注记 `rem-ch39-p2e-rauzy-literature` 之后 | `pisot-clifford-rauzy-sandtable` · `rauzy` |
+| 第三十九章 | §39.5.5 诠释注记 `rem-ch39-p2e-unification-model` 之后 | `pisot-clifford-rauzy-sandtable` · `clifford` |
+| 第三十九章 | §39.5.6 例 `ex-ch39-p2e-pisot-dottie-numerics` 之后 | `pisot-clifford-rauzy-sandtable` · `self-reference` |
+| 第三十九章 | §39.5.7 文献注记 `rem-ch39-p2e-rydberg-anyon-literature` 之后 | `pisot-clifford-rauzy-sandtable` · `entanglement` |
+| 第三十九章 | §39.5.8 开放问题 `prob-ch39-p2e-fractal-horizon` 之后、八概念总表之前 | `pisot-clifford-rauzy-sandtable` · `entropy` |
+| 第三十九章 | §39.5 末（全章末尾） | `pisot-clifford-rauzy-sandtable` 完整实验室 |
 | 终章 | 空间吸引子 · 二 “内禀几何参数”列表之后 | `spatial-attractor-deja-vu` · `fixed` |
 | 终章 | 空间吸引子 · 二 末（文献注记 `rem-coda-lorenz-srb-literature` 之后） | `spatial-attractor-deja-vu` · `forget` |
 | 终章 | 空间吸引子 · 二 “回到洛伦兹”一段中“吸引子的体积为零”一句之后 | `spatial-attractor-deja-vu` · `shrink` |
@@ -496,7 +589,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 终章 | 黄金切投 · 三 末（第 3 条之后） | `golden-cut-observer` · `empire` |
 | 终章 | 黄金切投 · 四 第 1 条（卡西尼恒等式）之后、第 2 条之前 | `golden-cut-observer` · `cassini` |
 | 终章 | 黄金切投 · 四 第 3 条之后、定理 `thm-coda-golden-cut-observer-cassini` 之前 | `golden-cut-observer` · `returns` |
-| 终章 | 定理 `thm-coda-golden-cut-observer-cassini` 的证明之后、完整实验室之前 | `golden-cut-observer` · `narrow` |
+| 终章 | 定理 `thm-coda-golden-cut-observer-cassini` 的证明之后、例 `ex-coda-golden-three-gap` 之前 | `golden-cut-observer` · `narrow` |
 | 终章 | 例 `ex-coda-golden-three-gap` 之后、“为什么黄金角不会切出极短的弧”之前 | `golden-cut-observer` · `gaps` |
 | 终章 | “每一段弧都长于 1/(√5 N)”之后的数值段落之后 | `golden-cut-observer` · `pi` |
 | 终章 | 黄金切投 · 四 末（格言之后） | `golden-cut-observer` 完整实验室 |
@@ -504,6 +597,12 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 附录 C | C.2.1 行内声明表之后、C.3 之前 | `lean-declaration-map` · `inline` |
 | 附录 C | C.4 核验清单之后、注记 `rem-appendix-c-epistemic-boundary` 之前 | `lean-declaration-map` · `theorems` |
 | 附录 C | 附录末 | `lean-declaration-map` 完整实验室 |
+| 附录 D | D.2.1 测量问题注记 `rem-appendix-d-puzzle-1` 之后 | `quantum-interpretations-duel` · `wigner-cut` |
+| 附录 D | D.2.2 退相干注记 `rem-appendix-d-puzzle-2` 之后 | `quantum-interpretations-duel` · `and-to-or` |
+| 附录 D | D.2.3 玻恩定则注记 `rem-appendix-d-puzzle-3` 之后 | `quantum-interpretations-duel` · `born-unequal` |
+| 附录 D | D.2.4 贝尔与 EPR 注记 `rem-appendix-d-puzzle-4` 之后 | `quantum-interpretations-duel` · `bell-epr` |
+| 附录 D | D.2.6 开放问题 `prob-appendix-d-time-horizon` 之后 | `quantum-interpretations-duel` · `time-horizon` |
+| 附录 D | D.3 五大诠释注记 `rem-appendix-d-interpretations-ledger` 之后 | `quantum-interpretations-duel` · `five-way-duel`，随后完整实验室 |
 
 ## 增删或修改一张卡之后
 

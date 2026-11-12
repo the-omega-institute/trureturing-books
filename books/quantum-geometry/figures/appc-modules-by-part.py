@@ -1,11 +1,11 @@
-"""C.1 的 257 条定理按模块族与部分组：全书站在哪几块模块上（附录 C §C.1）。
-The 257 theorems of C.1 by module family and by part: which parts of trureturing the book stands on.
+"""C.1 的定理按模块族与部分组：全书站在哪几块模块上（附录 C §C.1）。
+The theorems of C.1 by module family and by part: which parts of trureturing the book stands on.
 
 Nothing is typed by hand. The rows of the C.1 index of appendix C (serial T…) give the theorems; a theorem's module
 family is the first three segments of its GID (D5/S3/Quantum, …). Its part is the part of the unit in which it
 first appears, by the rule of the declaration map (viz/lean-declaration-map/gen-data.py): the earliest unit of the
 reading order of zh/SUMMARY.md whose Chinese text cites it by lean= or an inline link, appendix C left out. The
-coda and appendices A and B form the last column. The eleven largest families get a row, the rest one row
+coda and appendices A to D form the last column. The eleven largest families get a row, the rest one row
 together. Only counts are drawn: a cell says how many entries fall in it, not that one module depends on another.
 """
 
@@ -33,6 +33,7 @@ def data():
             units.append(m.group(1))
             part_of[m.group(1)] = part
     first = {}
+    env = set()
     for file in units:
         if file == "appendix-c.md":
             continue
@@ -41,14 +42,19 @@ def data():
         for line in text.splitlines():
             if line.startswith(":::"):
                 for attr in re.findall(r'\slean="([^"]*)"', line):
-                    cited.update(g for g in re.split(r"[\s,]+", attr.strip()) if g)
+                    found = {g for g in re.split(r"[\s,]+", attr.strip()) if g}
+                    cited.update(found)
+                    env.update(found)
         cited |= {m.group(1) or m.group(2) for m in re.finditer(r"\(lean:([^)\s]+)\)|<lean:([^>\s]+)>", text)}
         for g in cited:
             if g in lock and g not in first:
                 first[g] = file
     index = (BOOK / "zh" / "appendix-c.md").read_text(encoding="utf-8")
     gids = re.findall(r"^\| `T\d+` \| \[[^\]]*\]\(lean:([^)\s]+)\)", index, re.M)
-    assert len(gids) == len(set(gids)) == 259 and all(lock[g]["kind"] == "theorem" for g in gids)
+    listed = set(gids)
+    gids += [g for g, d in lock.items() if d["kind"] == "theorem" and g in env and g not in listed]
+    assert len(gids) == len(set(gids))
+    assert set(gids) == {g for g in env if lock[g]["kind"] == "theorem"}
     fam = lambda g: "/".join(g.split(".")[0].split("/")[:3])
     sizes = Counter(fam(g) for g in gids)
     top = [f for f, _ in sizes.most_common(ROWS_SHOWN)]
@@ -61,23 +67,24 @@ def data():
 
 
 TOP, GRID, SIZES = data()
-assert TOP[0] == "D5/S3/Quantum" and SIZES[TOP[0]] == 79 and GRID["D5/S3/FluidDynamics"] == Counter({7: 19})
-assert sum(sum(c.values()) for c in GRID.values()) == 259
+assert TOP[0] == "D5/S3/Quantum" and set(GRID["D5/S3/FluidDynamics"]) == {7}
+TOTAL = sum(sum(c.values()) for c in GRID.values())
+assert TOTAL == sum(SIZES.values())
 COLS = Counter()
 for c in GRID.values():
     COLS.update(c)
-assert COLS.most_common(1)[0] == (5, 69)
+assert sum(COLS.values()) == TOTAL
 
 ALT = {
     "zh": f"一张计数格：行是 trureturing 的模块族，从上到下是 {'、'.join(f.split('/')[-1] for f in TOP)} 与其余各族；"
           f"列是第一至第十部与“终章、附录”。每格写着这一族里在这一部第一次出场的定理条数，底色越深条数越多，空格为零。"
-          f"Quantum 一族最大，{SIZES[TOP[0]]} 条，分布在第一至第七部；FluidDynamics 的 19 条全在第八部；Zeros、Weil 只在第六部。"
-          f"合计 259 条，即附录 C 的 C.1 索引。",
+          f"Quantum 一族最大，{SIZES[TOP[0]]} 条，分布在第一至第八部与第十部；FluidDynamics 的 {SIZES['D5/S3/FluidDynamics']} 条全在第八部；Zeros、Weil 只在第六部。"
+          f"合计 {TOTAL} 条，即附录 C 的 C.1 索引。",
     "en": f"A grid of counts: the rows are module families of trureturing, from top to bottom {', '.join(f.split('/')[-1] for f in TOP)} "
           f"and all others; the columns are Parts I to X and the coda with the appendices. Each cell gives how many theorems of that "
           f"family first appear in that part, the darker the more, blank for none. The Quantum family is the largest, "
-          f"{SIZES[TOP[0]]} theorems, spread over Parts I to VII; all 19 of FluidDynamics are in Part VIII; Zeros and Weil appear "
-          f"only in Part VI. They add up to 259, the C.1 index of appendix C.",
+          f"{SIZES[TOP[0]]} theorems, spread over Parts I to VIII and X; all {SIZES['D5/S3/FluidDynamics']} of FluidDynamics are in Part VIII; Zeros and Weil appear "
+          f"only in Part VI. They add up to {TOTAL}, the C.1 index of appendix C.",
 }
 
 ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
@@ -85,9 +92,9 @@ ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
 
 def draw(fig):
     t = fig.t
-    X0, Y0, CW, CH = 134, 54, 32, 23
+    X0, Y0, CW, CH = 154, 54, 30, 23
     cols = ROMAN + [t("终", "C")]
-    fig.text(8, 18, t("模块族（D5/S3/…）", "module family (D5/S3/…)"), size=15, color="dim")
+    fig.text(8, 18, t("模块族（D5/…）", "module family (D5/…)"), size=15, color="dim")
     fig.text(X0 + 11 * CW, 18, t("第一次出场的部", "part of first appearance"), size=15, color="dim", anchor="end")
     for j, c in enumerate(cols):
         fig.text(X0 + j * CW + CW / 2, Y0 - 10, c, size=15, color="dim", anchor="middle")
@@ -114,4 +121,4 @@ def draw(fig):
     fig.text(X0 - 8, y, "Σ", size=15, color="dim", anchor="end", middle=True)
     for j in range(11):
         fig.text(X0 + j * CW + CW / 2, y, str(COLS[j]), size=15, color="dim", anchor="middle", middle=True)
-    fig.text(X0 + 11 * CW + 8, y, "259", size=15, color="lean", weight=600, middle=True)
+    fig.text(X0 + 11 * CW + 8, y, str(TOTAL), size=15, color="lean", weight=600, middle=True)
