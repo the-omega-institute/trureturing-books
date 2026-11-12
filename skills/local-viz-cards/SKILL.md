@@ -41,7 +41,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `two-angle-addressing` | 先倾一次、再拧一次，就到得了球面上任何一点；两根轴斜着，只是要多转几次 | `tilt` `address` `pole` `skew` `narrow` `trotter` `three` `six` |
 | `berry-loop` | 走一圈回来，箭头转过圈住的面积，内积连乘的相位只记下一半；整颗球上总有梳不平的一点 | `order` `octant` `equator` `reverse` `comb` |
 | `pulse-area-virtual-z` | 包络下有多少面积，态就转多大的角；绕竖轴的那一转不发脉冲，只改后面脉冲的相位 | `carrier` `quarter` `gauss` `detune` `order` `vz` `sign` |
-| `parameter-shift` | 左右各转 90° 取两个值，两值之差的一半正好是这一点的斜率；小步长差分总差一点，还把散粒噪声放大 | `shift` `anywhere` `step` `noise` |
+| `parameter-shift` | 左右各转 90° 取两个值，两值之差的一半正好是这一点的斜率；小步长差分在斜率非零处总差一点；f = cos θ、θ = 60°、h = 6°、每点发数相同时，它的标准差约是 ±90° 估计的 16 倍 | `shift` `anywhere` `step` `noise` |
 | `equator-concentration` | 维数越高，球面上的点越挤在垂直于测量轴的赤道上，宽度按 1/√d 缩小 | `three` `width` `bound` `twenty` |
 | `pairwise-shutter` | 快门每次只报“过”或“不过”；按得越多，“过”的比例越贴近两支箭头的夹角定下的权重 | `clicks` `right` `same` `opposite` `turn` `random` |
 | `chsh-dial` | 四个余弦叠起来能越过 2，却越不过两侧张开的面积给的天花板；经典的隐方向怎么转都越不过 2 | `collinear` `sixty` `sweep` `tsirelson` `hidden` `arc` |
