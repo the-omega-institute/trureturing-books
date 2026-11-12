@@ -16,12 +16,12 @@ SIZE = (520, 280)
 WRAP = True
 ALT = {
     "zh": "两颗同样大小的布洛赫球。左边是实验室系：琥珀色的路径从北极出发，一圈圈绕着紫色的竖直 z 轴盘旋下降，最后落到赤道上，"
-          "是一条螺旋。右边是旋转系：同一个脉冲里，琥珀色的态只沿一条经线从北极走到赤道，扫过一块四分之一圆的品红扇形，"
+          "是一条螺旋。右边是旋转系：同一个脉冲里，琥珀色的态只沿一条经线从北极走到赤道，"
           "转轴是紫色的水平 X 轴。实际的脉冲里有 125 个载频周期，图中只画了 6 圈。",
     "en": "Two Bloch spheres of the same size. Left, the lab frame: the amber path leaves the north pole and spirals down "
           "around the violet vertical z axis, turn after turn, until it reaches the equator. Right, the rotating frame: during "
-          "the same pulse the amber state only runs down one meridian from the north pole to the equator, sweeping a magenta "
-          "quarter-disc sector, about the violet horizontal X axis. The real pulse holds 125 carrier cycles; the picture draws "
+          "the same pulse the amber state only runs down one meridian from the north pole to the equator, "
+          "about the violet horizontal X axis. The real pulse holds 125 carrier cycles; the picture draws "
           "only 6.",
 }
 
@@ -62,8 +62,6 @@ def draw(fig):
     sp.outline()
     sp.great_circle((0, 0, 1), "faint", 1.2)
     sp.segment((0, 0, -1.0), (0, 0, 1.0), "faint", 1.2, dash="3 3")
-    sector = [(0.0, 0.0, 0.0)] + [rot_path(math.pi / 2 * k / 40) for k in range(41)]
-    rot.polygon([sp.xy(v) for v in sector], "area", fill_opacity=0.2, color="area", width=1.2)
     sp.segment((-1.25, 0, 0), (1.25, 0, 0), "axis", 2.2)
     sp.label((1, 0, 0), "*X*", scale=1.38, size=14, color="axis", anchor="middle", middle=True)
     arc = [rot_path(math.pi / 2 * k / 60) for k in range(61)]
@@ -73,6 +71,4 @@ def draw(fig):
     sp.arrow(end_rot, "now", 2.2, head=8)
     sp.dot(north, "dim", 4.0, ring="bg")
     sp.label(end_rot, "−*y*", dx=4, dy=18, size=13, color="dim", middle=True)
-    mid = rot_path(math.pi / 4)
-    sp.label(mid, "π/2", scale=0.5, dx=-4, size=14, color="area", anchor="middle", middle=True, halo=True)
     rot.text(cx, 272, fig.t("一段经线", "one meridian arc"), size=13, color="dim", anchor="middle")

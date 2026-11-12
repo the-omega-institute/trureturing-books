@@ -189,7 +189,7 @@
 
   /** The trail of the axis tip of a detuned pulse up to now, and its point closest to the equator. */
   function swayOf(now) {
-    const p = now.cur, sh = SHAPES[p.shape], pts = [], m = 80;
+    const p = now.cur, sh = SHAPES[p.shape], pts = [], m = 360;
     let low = null, minTilt = 90;
     for (let i = 0; i <= m; i++) {
       const om = p.A * sh.f(now.tau * i / m, p.T), u = v3.unit([om * Math.cos(p.phi), om * Math.sin(p.phi), p.det]), tilt = Math.asin(clamp(Math.abs(u[2]), 0, 1)) / DEG;
@@ -204,6 +204,25 @@
     if (n < 1e-9) return { deg, arc: [], mid: a };
     for (let i = 0; i <= m; i++) arc.push(v3.scale(v3.rot(b, v3.scale(ax, 1 / n), deg * DEG * i / m), 1.02));
     return { deg, arc, mid: arc[m / 2] };
+  }
+
+  /** A dashed path that stays dashed however finely it is sampled: stage paths stroke segment by segment, which
+      restarts a line dash at every sample, so the dashes are cut here along the projected length instead. */
+  function dashPath(pts, s) {
+    const on = s.dash[0], off = s.dash[1], solid = Object.assign({}, s, { dash: null });
+    let chunk = [pts[0]], run = 0, drawing = true;
+    for (let i = 1; i < pts.length; i++) {
+      const a = stage.p(pts[i - 1]), b = stage.p(pts[i]), d = Math.hypot(b[0] - a[0], b[1] - a[1]);
+      let used = 0;
+      while (d - used > (drawing ? on : off) - run) {
+        const f = (used + (drawing ? on : off) - run) / d, mid = v3.add(v3.scale(pts[i - 1], 1 - f), v3.scale(pts[i], f));
+        if (drawing) { chunk.push(mid); if (chunk.length > 1) stage.path(chunk, solid); }
+        used += (drawing ? on : off) - run; run = 0; drawing = !drawing; chunk = [mid];
+      }
+      run += d - used;
+      if (drawing) chunk.push(pts[i]);
+    }
+    if (drawing && chunk.length > 1) stage.path(chunk, solid);
   }
 
   function drawSphere(now, ghostNow, C) {
@@ -223,9 +242,18 @@
     // carries the story; the axis of this instant is drawn faint and the label marks the trail's lowest point
     const sway = !lab && now.cur && now.cur.det !== 0 ? swayOf(now) : null;
     if (sway) {
-      st.path(sway.pts, { color: P.violet, width: 2.2 * thick, alpha: 0.95, dash: [5, 3], back: 0.45 });
+      // the tip runs out and back along the same arc, so the dashes are cut by the tilt (5° on, 3° off), not by the
+      // length travelled: both passes then put their dashes in the same places
+      const runs = []; let cur = null;
+      for (let i = 1; i < sway.pts.length; i++) {
+        const a = sway.pts[i - 1], b = sway.pts[i], el = Math.asin(clamp((a[2] + b[2]) / 2 / 1.18, -1, 1)) / DEG, on = ((el % 8) + 8) % 8 < 5;
+        if (on) { if (!cur) { cur = [a]; runs.push(cur); } cur.push(b); } else cur = null;
+      }
+      for (const r of runs) st.path(r, { color: P.violet, width: 2.2 * thick, alpha: 0.95, back: 0.45 });
       st.dot(sway.low, 3.5, P.violet, { fade: false });
-      if (!TRV.thumbMode) st.tag('axis', sway.low, L(`轴端最低处倾出赤道 ${fix(sway.minTilt, 0)}°`, `lowest tip: ${fix(sway.minTilt, 0)}° off the equator`), 'raw c-vi', { dx: -40, dy: 30 });
+      // on a narrow stage the long label would sit on ψ: a short one goes just above the trail's lowest point
+      const narrow = $('cv').clientWidth < 520;
+      if (!TRV.thumbMode) st.tag('axis', sway.low, narrow ? L(`轴端最低 ${fix(sway.minTilt, 0)}°`, `tip ${fix(sway.minTilt, 0)}° low`) : L(`轴端最低处倾出赤道 ${fix(sway.minTilt, 0)}°`, `lowest tip: ${fix(sway.minTilt, 0)}° off the equator`), 'raw c-vi', narrow ? { dx: 10, dy: -36 } : { dx: -40, dy: 30 });
     }
     if (axis) {
       const c = st.ctx; c.save(); if (!sway) { c.shadowColor = P.violet; c.shadowBlur = 8; }
@@ -253,9 +281,9 @@
     if (C.ghost) {
       if (C.kind === 'lam') {                          // the literal circuit: an instantaneous turn by λ about z first
         const pts = [], m = 40; for (let i = 0; i <= m; i++) pts.push(rotZ(S.r0, S.lam * DEG * i / m));
-        st.path(pts, { color: P.ink, width: 1.4, alpha: 0.7, dash: [5, 4], back: 0.35 });
+        dashPath(pts, { color: P.ink, width: 1.4, alpha: 0.7, dash: [6, 5], back: 0.35 });
       }
-      st.path(path(C.ghost, now.t, lab), { color: P.ink, width: 1.5, alpha: 0.75, dash: [5, 4], back: 0.35 });
+      dashPath(path(C.ghost, now.t, lab), { color: P.ink, width: 1.6 * thick, alpha: 0.8, dash: [6, 5], back: 0.35 });
       const gp = lab ? labOf(ghostNow) : ghostNow.r;
       st.dot(gp, 5.5, P.ink, { ring: true, width: 2, fade: false });
       st.dot([0, 0, gp[2]], 4, P.cyan, { ring: true, width: 1.6, fade: false });

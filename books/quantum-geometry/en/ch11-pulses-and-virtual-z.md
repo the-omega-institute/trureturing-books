@@ -122,7 +122,7 @@ so in this idealized fixed-axis RWA model the Bloch rotation angle $\theta$ equa
 :::
 
 ::: {.figure src="ch11-lab-spiral"}
-**One quarter-turn: a spiral in the lab frame, a single meridian arc in the rotating frame.** Left: the amber path leaves the north pole and winds round the violet $z$ axis, turn after turn, down to the equator. Right: during the same pulse the amber state only runs down a meridian from the north pole to $-y$, sweeping a magenta sector of $\pi/2$ about the violet $X$ axis. Schematic: the $25\,\mathrm{ns}$ pulse holds $125$ carrier cycles, of which the picture draws $6$. The rotating frame and the area law are literature results, not formalized in this book ([@rem-rwa-pulse-area-literature]).
+**One quarter-turn: a spiral in the lab frame, a single meridian arc in the rotating frame.** Left: the amber path leaves the north pole and winds round the violet $z$ axis, turn after turn, down to the equator. Right: during the same pulse the amber state only runs down a meridian from the north pole to $-y$, about the violet $X$ axis. Schematic: the $25\,\mathrm{ns}$ pulse holds $125$ carrier cycles, of which the picture draws $6$. The rotating frame and the area law are literature results, not formalized in this book ([@rem-rwa-pulse-area-literature]).
 :::
 
 This effective hardware picture echoes the epigraph's geometric intuition (`MODEL`): a quantum state is a spherical direction, while a resonant control pulse acts in the time domain through an envelope of definite integrated area ([@rem-rwa-pulse-area-literature]).
@@ -304,8 +304,8 @@ Next verify the four concrete numerical items:
 **Detuned, the area no longer decides.** The same Gaussian envelope of area $\pi/2$, with the drive $5\,\mathrm{MHz}$ off: the violet axis tilts out of the equator and sways with the envelope. The dashed violet trail is where its tip has been: it comes closest to the equator, $12^\circ$ off it, at the envelope's peak, and when the pulse ends the envelope is back at zero and the faint axis is vertical again. The amber state misses the end of the white dashed (undetuned) path; the short white arc between the two marks the miss, about $26^\circ$. The page cuts the pulse into a thousand or more slices and multiplies them in time order: a numerical illustration.
 :::
 
+If a $Z$ gate can be executed simply by shifting the observer's phase reference, can we go one step further and perform **all** quantum computation by shifting the observer's measurement axes across an entangled resource state? Let us enter [Chapter 12](ch12-measurement-computation-and-gradients.md).
+
 ::: {.viz src="pulse-area-virtual-z" height="560"}
 The full lab for pulse area and the virtual $Z$: drag the top and the right end of the envelope to change its area and length, change the drive phase, the detuning and the angle of the virtual $Z$, add a second pulse and swap the two, or switch between the lab and the rotating frame. The green boxes cite only the theorems this chapter verifies in Lean; the area law and virtual-$Z$ scheduling are literature results, not formalized in this book.
 :::
-
-If a $Z$ gate can be executed simply by shifting the observer's phase reference, can we go one step further and perform **all** quantum computation by shifting the observer's measurement axes across an entangled resource state? Let us enter [Chapter 12](ch12-measurement-computation-and-gradients.md).
