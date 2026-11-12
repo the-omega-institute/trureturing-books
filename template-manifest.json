@@ -68,19 +68,23 @@
       "mode": "100644"
     },
     "docs/AUTHORING.md": {
-      "sha256": "1cca66122ad50fe18fce8723ad17d3e710da583efeb29bf0f6e196be9590085d",
+      "sha256": "04636f901b8716eb7136e036b6a017883e368eb3f4a7ee70bd3ddb4d2d93b206",
       "mode": "100644"
     },
     "docs/CHANGELOG.md": {
-      "sha256": "764793d32ed5307eb29168c4d7eec42c6104705bbc16dac11e2041955a7f197b",
+      "sha256": "0e230062835f92a5ba9400d90532ed683db15cc2b93ec6ea0c8be96f31783d34",
       "mode": "100644"
     },
     "docs/CONTAINERS.md": {
       "sha256": "b96a9add0197ed31044d513d6b783f1c980e20e5a8e53257c8f0023fb712d610",
       "mode": "100644"
     },
+    "docs/PDF-TYPOGRAPHY.md": {
+      "sha256": "72c023a69e42e85419ecf3ea736610913bf7246a7abc29876bd0aac894e98bf3",
+      "mode": "100644"
+    },
     "docs/PUBLISHING.md": {
-      "sha256": "4d41df57b3bc183df44af1aefa9bc2e129d8e4eec938bc494791d8212eab6ab1",
+      "sha256": "532a7dcc9a4e366d838280b6882dd75e9636cc08c0c80bfdaaa0abb8141287ec",
       "mode": "100644"
     },
     "docs/UPGRADING.md": {
@@ -104,7 +108,7 @@
       "mode": "100644"
     },
     "skills/book-export/SKILL.md": {
-      "sha256": "7f67efe993cf3789106c235856f39499d0c222069a44cc19dde922bd43993271",
+      "sha256": "03385a430e52b626a1417ebfe2f307ae80ea6d0eca72e63b4260b1cc3dbd8fe7",
       "mode": "100644"
     },
     "skills/book-figure/SKILL.md": {
@@ -156,7 +160,7 @@
       "mode": "100644"
     },
     "templates/book/book.toml": {
-      "sha256": "f679d561f82146d5f755847548689620ed99dd1a1def7304b9650252b27606d8",
+      "sha256": "148e2cb565a43bf6dbe0ca546ce9a7e078cd64c2aebc632d32c17195aa25ca13",
       "mode": "100644"
     },
     "templates/book/en/README.md": {
@@ -328,7 +332,7 @@
       "mode": "100644"
     },
     "theme/i18n/zh.toml": {
-      "sha256": "b77cb12dd30c2e32f4c99f56e3880f34039efc2142f91233329b394372e7c703",
+      "sha256": "ae39e3ae3e0e977d4a7d0e5b5fcbd82f0c4e0de9d819d76e6b4c842bd5067109",
       "mode": "100644"
     },
     "theme/mdbook/favicon.svg": {
@@ -459,12 +463,16 @@
       "sha256": "7fd4bf81b8269d759ef6e43ca4ffb4686f5c2c247c7a8b8233c888825372eafd",
       "mode": "100644"
     },
+    "theme/typst/academic.typ": {
+      "sha256": "6bcccd0618fbf5edd32b467782bf5e379a8d0e623e8a7bdb1ba3e81d64fca110",
+      "mode": "100644"
+    },
     "theme/typst/book.typ": {
-      "sha256": "d9870172322e2a238937d32be426f416c4a1e257603fa7295459baef61020321",
+      "sha256": "48e6ca6add21563a8ffe7a4a71f230b5df5e2d891269fdd20699b82e7c9e74b0",
       "mode": "100644"
     },
     "theme/typst/cover.typ": {
-      "sha256": "1580ef5246b4b632849f0e3da74ed6d02333e9e4af4117af02e55c9b089f47c9",
+      "sha256": "f147d8a509b09ec77d930f623ee6dab1196581c42c0f75052a33ae816aa4b394",
       "mode": "100644"
     },
     "theme/typst/fonts.sha256": {
@@ -640,7 +648,7 @@
       "mode": "100644"
     },
     "tools/tbook/cover.py": {
-      "sha256": "97f8ab07dfa1ceb65b7b37374e48ff323848373a2d56e361bdb827c03245afd3",
+      "sha256": "f4bb1c52cb85fa736b1604718616e7e868278a8c7d353870d31cabcd1b17223e",
       "mode": "100644"
     },
     "tools/tbook/doctor.py": {
@@ -692,7 +700,7 @@
       "mode": "100644"
     },
     "tools/tbook/pandoc.py": {
-      "sha256": "ae326ded387783c1b3fd86bb44dea02b4ab0d0540ce4e29d1c7594bcebac956e",
+      "sha256": "ffe5bb9742c1b33a2cee990348d13e574eae390bb8a3bbee0675fca067d07f9f",
       "mode": "100644"
     },
     "tools/tbook/paths.py": {
@@ -808,7 +816,7 @@
       "mode": "100644"
     },
     "tools/tests/test_pdf_layout.py": {
-      "sha256": "d67633740735f096c446481bb160ffbf0062563add381b5e2e177c7a225e721d",
+      "sha256": "9e7914168f4e23410e403f8dadd9d29393a0eeddf226fc49fe35d165cf688405",
       "mode": "100644"
     },
     "tools/tests/test_pdf_math.py": {
@@ -824,7 +832,7 @@
       "mode": "100644"
     },
     "tools/tests/test_site.py": {
-      "sha256": "2527e6f3606e0c95a4e0bd96d4f75ae6c4153d4311950771480253791ddb9c0b",
+      "sha256": "4965909fbd27da0e4e146c21101fc9808ed0cf0df5499007ba39a8003eff408c",
       "mode": "100644"
     },
     "tools/tests/test_slides.py": {
