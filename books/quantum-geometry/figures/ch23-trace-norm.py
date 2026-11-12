@@ -10,7 +10,7 @@ onto a ruler below, read in units of Tr = 2 Re.
 
 from _ch23 import eis, eis_norm, lattice
 
-SIZE = (520, 334)
+SIZE = (420, 344)
 ALT = {
     "zh": "复平面上的艾森斯坦整数排成六角格（灰点）。两个青色的圆是范数 N = 1 与 N = 3，分别穿过 6 个格点。"
           "每个格点向下引一条虚线，落到下面的两把迹尺上：N = 1 的六个点只落在迹 −2、−1、1、2 上，N = 3 的六个点只落在 −3、0、3 上。"
@@ -21,7 +21,7 @@ ALT = {
           "Once the norm is fixed, the trace can take only a few integers.",
 }
 
-CX, CY, S = 260, 132, 52
+CX, CY, S = 252, 132, 56
 
 
 def P(x, y):
@@ -40,12 +40,12 @@ def draw(fig):
             assert abs(2 * eis(*p)[0] - round(2 * eis(*p)[0])) < 1e-9      # the trace is an integer
     assert traces[1] == [-2, -1, 1, 2] and traces[3] == [-3, 0, 3]
 
-    rows = {1: 252, 3: 300}
+    rows = {1: 264, 3: 314}
     ruler_x = lambda tr: CX + S * tr / 2
 
     # the real axis and the lattice
     fig.line(CX - S * 2.4, CY, CX + S * 2.4, CY, "faint", 1.2)
-    fig.text(CX + S * 2.4 + 4, CY, "Re", size=13, color="dim", middle=True)
+    fig.text(CX + S * 2.4 + 4, CY, "Re", size=14, color="dim", middle=True)
     for p in pts:
         if eis_norm(*p) not in (1, 3):
             fig.dot(*P(*p), 2.6, "faint")
@@ -76,6 +76,6 @@ def draw(fig):
             fig.line(ruler_x(tr), y - 4, ruler_x(tr), y + 4, "faint", 1.2)
         for tr in traces[n]:
             fig.dot(ruler_x(tr), y, 5.0, "line", ring="bg")
-            fig.text(ruler_x(tr), y + 20, str(tr).replace("-", "−"), size=13, color="line", anchor="middle")
-        fig.text(14, y, t(f"*N* = {n} 的迹", f"trace at *N* = {n}"), size=13, color="dim", middle=True)
-    fig.text(ruler_x(3.6) + 6, rows[1], "Tr", size=13, color="dim", middle=True)
+            fig.text(ruler_x(tr), y + 20, str(tr).replace("-", "−"), size=14, color="line", anchor="middle")
+        fig.text(14, y, t(f"*N* = {n} 的迹", f"trace at *N* = {n}"), size=14, color="dim", middle=True)
+    fig.text(ruler_x(3.6) + 6, rows[1], "Tr", size=14, color="dim", middle=True)
