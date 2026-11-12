@@ -49,7 +49,12 @@ await stageFirstChecks(T, BOOK, ID);
 const page = await T.goto(BOOK, ID, '?lang=zh');
 const state = async () => { await settle(page); return page.evaluate(() => window.PROJECT_DEBUG.state); };
 const pick = async (id) => { await page.click(`[data-preset="${id}"]`); await settle(page); };
-const played = (n) => until(page, (k) => { const s = window.PROJECT_DEBUG.state; return !s.playing && s.t >= k - 1e-9; }, n);
+// a card plays by itself: wait until it has started, then take the rail to its end (at one frame a second a full run would outlast the wait)
+const played = async (n) => {
+  const ok = await until(page, () => { const s = window.PROJECT_DEBUG.state; return s.playing && s.t > 0; });
+  await page.evaluate((k) => window.PROJECT_DEBUG.seek(k), n); await settle(page);
+  return ok;
+};
 const setRange = async (id, v) => { await page.evaluate(([i, val]) => { const el = document.getElementById(i); el.value = String(val); el.dispatchEvent(new Event('input', { bubbles: true })); }, [id, v]); await settle(page); };
 
 // opening view (no card): just after one unread press, the arrow pulled inside the ball
