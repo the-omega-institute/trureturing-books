@@ -11,7 +11,7 @@
 不是宇宙本体“拥有”观察者，不是宇宙本体“演化出”观察者，甚至也不止于观察者“指向”宇宙本体；二者之间没有从属的“的”字，没有集合包含的 $\in$，也没有外部投射的 $\to$，唯有零余项、零缝隙的**本体论恒等（$\equiv$）**。在本书三层认识论契约下，我们将沿着四重递进台阶完成这场终极合拢（跨领域的本体论综合标定为 **`MODEL`（模型诠释）**，底层数学骨架由四组共十条冻结的 Lean 4 内核声明严格锚定，计算机域论、范畴论与旋量几何经典文献悉数封存于归属注记框内）：
 
 1. **全域 `p ≡ *p` 与无底物的自指域**：拆除寄存器与被动内存的二元边界，确立点即映射、状态即算子的 $\psi \equiv \psi(\psi)$ 本体恒等，并锁定二元分式自应用唯一“存活（`.live`）”的黄金 $\varphi$ 判别式 $\Delta = 5$；
-2. **终结“物自体”与无刀则无晶**：证明客体完全由指向它的读出纤维与离散黄金量化线程无余项重构，静态晶格本身就是自指正交比量凝结出的无相邻 `11` 驻波节面；
+2. **终结“物自体”与无刀则无晶**：给出源类型的全纤维分解、非负实数的全尺度黄金线程单射，以及有限字接受当且仅当无相邻 `11`；再在 `MODEL` 中将静态晶格读作自指正交比量凝结的驻波节面；
 3. **旋量织空与 $720^\circ$ 单侧双覆叠**：展示一维时间流向量与二维规范双矢量平面如何作为观察者旋量自配对的双线性副产物涌现，并在无全局截面的平方双覆叠上实现 $360^\circ$ 内外换叶与 $720^\circ$ 归家闭环；
 4. **正交自折叠消解唯我论与四阶终局**：阐明唯一全体如何在互补语境纯度勾股守恒（[@prop-ch39-orthogonal-folding-and-objective-common-factor] 第 1 款，`LEAN ✓`）与正交折叠模型（`MODEL`）下拆分为“局部小我栈帧”与“铁律浩瀚宇宙”，在彻底砍净第 3 点 $C$ 的第四阶终局中同时超越机械唯物论与狂妄唯我论。
 
@@ -44,7 +44,7 @@ $$
 
 回到本书的有限组合与算术底层（对照 [@rem-ch39-von-neumann-scott-reflexive-domain-literature] 的连续域背景），当自应用脱离外部底座直接在最简二元字母表 $\{0, 1\}$（即 `Fin 2`）上闭合时，究竟什么样的自指律才不会坍缩成死局？让我们在进入形式化定理前先亲手算清这张 $2\times 2$ 账本！
 
-取系数全部来自二元集 $\{0, 1\}$ 的分式自映射 $m = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$：将输入 $x$ 反馈代入自身 $x = \frac{a x + b}{c x + d}$，移项即得自应用不动点多项式 $c x^2 + (d - a)x - b = 0$，其系数三元组为 $(c, d - a, -b)$，二次判别式为 $\Delta(m) = (d - a)^2 + 4 b c$。在全部 $2^4 = 16$ 个二元矩阵中，筛除非退化条件 $\det(m) = a d - b c \neq 0$，恰好留下 $6$ 个非奇异映射：
+取系数全部来自二元集 $\{0, 1\}$ 的分式自映射 $m = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$：在分母 $cx+d\ne0$ 的定义域上，将输入 $x$ 反馈代入自身 $x = \frac{a x + b}{c x + d}$，移项即得自应用不动点多项式 $c x^2 + (d - a)x - b = 0$，其系数三元组为 $(c, d - a, -b)$，二次判别式为 $\Delta(m) = (d - a)^2 + 4 b c$。在全部 $2^4 = 16$ 个二元矩阵中，筛除非退化条件 $\det(m) = a d - b c \neq 0$，恰好留下 $6$ 个非奇异映射：
 
 - 恒等阵 $\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$ 给出系数 $(0, 0, 0)$（空洞恒等 `.empty`，无独立刻度约束）；
 - 平移阵 $\begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$ 给出系数 $(0, 0, -1)$，即 $-1 = 0$（死锁无解 `.dead`）；
@@ -103,10 +103,10 @@ $$
    \operatorname{Nat}\bigl(\operatorname{Hom}_{\mathcal{C}}(-, X),\; F\bigr) \;\cong\; F(X) \qquad (\text{由 }\alpha \mapsto \alpha_X(\mathrm{id}_X)\text{ 给出}).
    $$
 
-   取 $F = \operatorname{Hom}_{\mathcal{C}}(-, Y)$ 即导出**米田嵌入函子** $y : \mathcal{C} \hookrightarrow [\mathcal{C}^{\mathrm{op}}, \mathbf{Set}]$，$X \mapsto \operatorname{Hom}_{\mathcal{C}}(-, X)$ 是**全忠实（fully faithful）**的，从而 $\operatorname{Hom}_{\mathcal{C}}(-, X) \cong \operatorname{Hom}_{\mathcal{C}}(-, Y) \iff X \cong Y$：在唯一典范同构意义下，对象 $X$ 百分之百由范畴中一切探测对象射向它的态射关系总和所唯一决定，态射关系网之外不存在任何不可观测的私有“物自体残核”。
+   取 $F = \operatorname{Hom}_{\mathcal{C}}(-, Y)$ 即导出**米田嵌入函子** $y : \mathcal{C} \hookrightarrow [\mathcal{C}^{\mathrm{op}}, \mathbf{Set}]$，$X \mapsto \operatorname{Hom}_{\mathcal{C}}(-, X)$ 是**全忠实（fully faithful）**的，从而 $\operatorname{Hom}_{\mathcal{C}}(-, X) \cong \operatorname{Hom}_{\mathcal{C}}(-, Y) \iff X \cong Y$：给定可表函子间的自然同构，它唯一诱导 $X$ 与 $Y$ 间相应的同构；因此在同构意义下，对象 $X$ 百分之百由范畴中一切探测对象射向它的态射关系总和所唯一决定，态射关系网之外不存在任何不可观测的私有“物自体残核”。
 :::
 
-在 `trureturing` 的概念动力学、黄金量化编码与自动机模块中（对照 [@rem-ch39-kant-yoneda-lemma-literature] 的文献背景），我们无需赊借抽象高阶范畴公理，便能直接用三条经过 Lean 4 内核机械检验的定理，把“客体由读出纤维无余项拼回”“连续统非负实数由离散黄金读出全线程唯一单射锁定”与“离散合法编码即无相邻 `11` 驻波节面”铸成严丝合缝的形式化铁三角：
+在 `trureturing` 的概念动力学、黄金量化编码与自动机模块中（对照 [@rem-ch39-kant-yoneda-lemma-literature] 的文献背景），我们无需赊借抽象高阶范畴公理，便能直接用三条经过 Lean 4 内核机械检验的定理，把“客体由读出纤维无余项拼回”“连续统非负实数由离散黄金读出全线程唯一单射锁定”与“有限字被基底自动机接受当且仅当无相邻 `11`”铸成严丝合缝的形式化铁三角：
 
 ::: {.theorem #thm-ch39-fiber-reconstruction-and-zeckendorf-thread title="概念读出依值纤维分解、齐肯多夫实数全线程单射重构与无相邻一自动机定理" lean="D5/S3/ConceptDynamics/ConceptFiberDecomposition.concept_fiber_decomposition D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes"}
 在 `trureturing` 冻结的概念纤维分解、观察者黄金实数线程与二元齐肯多夫自动机模块中，以下三项重构与语法刻画定理同时成立：
@@ -141,10 +141,10 @@ $$
 
 现在，请把 [@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] 的三束强光聚焦回我们的切投模型集宇宙（`MODEL`（模型诠释）），见证全书教学脚手架的一次彻底倒转！
 
-在前面几章里，为了照顾初学者的几何直觉，我们曾采用“先晶后刀”的叙述次序：仿佛虚空里先静静摆着一座六维整数母晶格 $\mathbb{Z}^6 = E_\parallel^3 \oplus E_\perp^3$，然后观察者的黄金切投平面像一把锋利的钢刀切进去，切出满天 Delone 模型集星辰。此刻，站在 [@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] 的峰顶回望，真相恰恰颠倒过来——**无刀则无晶，关系即实体！**
+在前面几章里，为了照顾初学者的几何直觉，我们曾采用“先晶后刀”的叙述次序：仿佛虚空里先静静摆着一座六维整数母晶格 $\mathbb{Z}^6 \hookrightarrow \mathbb{R}^6 = E_\parallel^3 \oplus E_\perp^3$，然后观察者的黄金切投平面像一把锋利的钢刀切进去，切出满天 Delone 模型集星辰。此刻，站在 [@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] 的峰顶回望，真相恰恰颠倒过来——**无刀则无晶，关系即实体！**
 
 - 第 1 款与第 2 款联合宣告：哪怕面对看似深不可测的连续统实数 $x \in \mathbb{R}_{\ge 0}$，只要给定它在每一级黄金放大镜 $\varphi^{\mathrm{level}}$ 下的离散齐肯多夫读出字序列，原实数就被**百分之百唯一重构**，背后连一丝一毫逃逸在读出关系之外的“物自体暗物质”都不存在；
-- 第 3 款则进一步点破了“整数晶格”的身世：所谓高维晶格的离散超平面，根本不是预先浇筑在那里的钢筋水泥，而是自指观察算子在反复执行两子正交比量时，由幂等存在条件 $P^2 = P$ 与禁止相邻 `11` 高频碰撞（`NoAdjacentOnes`）自动干涉沉淀出来的**离散驻波节面（nodal surfaces）**！不是先有水晶再下刀，而是**自我丈量的刀光所到之处，虚空才应声凝结为晶格**。
+- 第 3 款精确刻画有限字的合法语法；将这一语法接到投影与晶格之后，我们在 `MODEL` 中进一步点破“整数晶格”的身世：所谓高维晶格的离散超平面，根本不是预先浇筑在那里的钢筋水泥，而是自指观察算子在反复执行两子正交比量时，由幂等存在条件 $P^2 = P$ 与禁止相邻 `11` 高频碰撞（`NoAdjacentOnes`）自动干涉沉淀出来的**离散驻波节面（nodal surfaces）**！不是先有水晶再下刀，而是**自我丈量的刀光所到之处，虚空才应声凝结为晶格**。
 
 ---
 
@@ -177,8 +177,8 @@ $$
 
 对照 [@rem-ch39-cartan-penrose-hestenes-fierz-literature] 的旋量几何背景，我们在下框中给出三维欧氏偶子代数上旋量双线性自配对与半角双覆叠的显式基片计算示例：
 
-::: {.example #ex-ch39-even-clifford-spinor-bilinear-fierz title="三维偶子代数上旋量双线性自配对织出时流向量与自旋双矢量平面的显式手算核验（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 本例在三维欧氏克利福德偶子代数上显式核算 [@rem-ch39-cartan-penrose-hestenes-fierz-literature] 中的双线性自配对与半角双覆叠关系，该连续旋量代数计算未作为独立声明包含在 `trureturing@dev` 中。取两两正交反交换的标准单位基矢量 $\mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3$，满足 $\mathbf{e}_i^2 = +1$（$i = 1,2,3$）及 $\mathbf{e}_i\mathbf{e}_j = -\mathbf{e}_j\mathbf{e}_i$（$i \neq j$），记反自同构反序运算 $\tilde{(\cdot)}$ 保持标量与基矢量不变（$\tilde{\mathbf{e}}_i = \mathbf{e}_i$）并反转乘积顺序 $\widetilde{AB} = \tilde{B}\tilde{A}$，故单位双矢量满足 $(\mathbf{e}_i\mathbf{e}_j)^2 = \mathbf{e}_i\mathbf{e}_j\mathbf{e}_i\mathbf{e}_j = -\mathbf{e}_i^2\mathbf{e}_j^2 = -1$ 且 $\widetilde{\mathbf{e}_i\mathbf{e}_j} = \mathbf{e}_j\mathbf{e}_i = -\mathbf{e}_i\mathbf{e}_j$。设非负密度 $\rho \ge 0$、倾角 $\vartheta \in \mathbb{R}$，定义偶子代数旋量 $\psi := \sqrt{\rho}\,R$ 及其反序 $\tilde{\psi} = \sqrt{\rho}\,\tilde{R}$，其中半角旋子为
+::: {.example #ex-ch39-even-clifford-spinor-bilinear-fierz title="三维偶子代数上旋量双线性自配对织出欧氏向量与双矢量平面的显式手算核验（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 本例在三维欧氏克利福德偶子代数上显式核算 [@rem-ch39-cartan-penrose-hestenes-fierz-literature] 中的双线性自配对与半角双覆叠关系，该连续旋量代数计算未作为独立声明包含在 `trureturing@dev` 中。这里的 $\mathbf J$ 是欧氏向量、$\mathbf S$ 是欧氏双矢量；把它们读为时流与规范面的图景沿用上文 `MODEL`，此算例本身不构造洛伦兹时间流或规范场。取两两正交反交换的标准单位基矢量 $\mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3$，满足 $\mathbf{e}_i^2 = +1$（$i = 1,2,3$）及 $\mathbf{e}_i\mathbf{e}_j = -\mathbf{e}_j\mathbf{e}_i$（$i \neq j$），记反自同构反序运算 $\tilde{(\cdot)}$ 保持标量与基矢量不变（$\tilde{\mathbf{e}}_i = \mathbf{e}_i$）并反转乘积顺序 $\widetilde{AB} = \tilde{B}\tilde{A}$，故单位双矢量满足 $(\mathbf{e}_i\mathbf{e}_j)^2 = \mathbf{e}_i\mathbf{e}_j\mathbf{e}_i\mathbf{e}_j = -\mathbf{e}_i^2\mathbf{e}_j^2 = -1$ 且 $\widetilde{\mathbf{e}_i\mathbf{e}_j} = \mathbf{e}_j\mathbf{e}_i = -\mathbf{e}_i\mathbf{e}_j$。设非负密度 $\rho \ge 0$、倾角 $\vartheta \in \mathbb{R}$，定义偶子代数旋量 $\psi := \sqrt{\rho}\,R$ 及其反序 $\tilde{\psi} = \sqrt{\rho}\,\tilde{R}$，其中半角旋子为
 
 $$
 R \;:=\; \cos\frac{\vartheta}{2} - \sin\frac{\vartheta}{2}\,\mathbf{e}_2\mathbf{e}_3, \qquad \tilde{R} \;=\; \cos\frac{\vartheta}{2} + \sin\frac{\vartheta}{2}\,\mathbf{e}_2\mathbf{e}_3.
@@ -190,7 +190,7 @@ $$
    R\tilde{R} \;=\; \cos^2\frac{\vartheta}{2} - \sin^2\frac{\vartheta}{2}\,(\mathbf{e}_2\mathbf{e}_3)^2 \;=\; \cos^2\frac{\vartheta}{2} + \sin^2\frac{\vartheta}{2} \;=\; 1 \quad\Longrightarrow\quad \psi\tilde{\psi} = \tilde{\psi}\psi = \rho.
    $$
 
-2. **一维流矢量 $\mathbf{J} := \psi\mathbf{e}_3\tilde{\psi}$ 与正模方 $\mathbf{J}^2 = +\rho^2$**：因 $\mathbf{e}_3(\mathbf{e}_2\mathbf{e}_3) = -\mathbf{e}_2\mathbf{e}_3^2 = -\mathbf{e}_2 = -(\mathbf{e}_2\mathbf{e}_3)\mathbf{e}_3$（基矢量 $\mathbf{e}_3$ 与旋转面 $\mathbf{e}_2\mathbf{e}_3$ 反对易），将 $\mathbf{e}_3$ 左移穿过 $\tilde{R}$ 恰好把 $+\sin\frac{\vartheta}{2}$ 翻号为 $-\sin\frac{\vartheta}{2}$，即 $\mathbf{e}_3\tilde{R} = R\mathbf{e}_3$。由二倍角公式 $R^2 = \cos\vartheta - \sin\vartheta\,\mathbf{e}_2\mathbf{e}_3$ 展开得：
+2. **一维欧氏矢量 $\mathbf{J} := \psi\mathbf{e}_3\tilde{\psi}$ 与正模方 $\mathbf{J}^2 = +\rho^2$**：因 $\mathbf{e}_3(\mathbf{e}_2\mathbf{e}_3) = -\mathbf{e}_2\mathbf{e}_3^2 = -\mathbf{e}_2 = -(\mathbf{e}_2\mathbf{e}_3)\mathbf{e}_3$（基矢量 $\mathbf{e}_3$ 与旋转面 $\mathbf{e}_2\mathbf{e}_3$ 反对易），将 $\mathbf{e}_3$ 左移穿过 $\tilde{R}$ 恰好把 $+\sin\frac{\vartheta}{2}$ 翻号为 $-\sin\frac{\vartheta}{2}$，即 $\mathbf{e}_3\tilde{R} = R\mathbf{e}_3$。由二倍角公式 $R^2 = \cos\vartheta - \sin\vartheta\,\mathbf{e}_2\mathbf{e}_3$ 展开得：
 
    $$
    \mathbf{J} \;=\; \rho\,R\mathbf{e}_3\tilde{R} \;=\; \rho\,R^2\mathbf{e}_3 \;=\; \rho\bigl(\cos\vartheta\,\mathbf{e}_3 - \sin\vartheta\,\mathbf{e}_2\bigr),
@@ -198,7 +198,7 @@ $$
 
    其几何平方由 $\mathbf{e}_3\mathbf{e}_2 + \mathbf{e}_2\mathbf{e}_3 = 0$ 立得 $\mathbf{J}^2 = \rho^2(\cos^2\vartheta\,\mathbf{e}_3^2 + \sin^2\vartheta\,\mathbf{e}_2^2) = +\rho^2$（或直接由结合律 $(\psi\mathbf{e}_3\tilde{\psi})(\psi\mathbf{e}_3\tilde{\psi}) = \psi\mathbf{e}_3(\tilde{\psi}\psi)\mathbf{e}_3\tilde{\psi} = \rho\,\psi\mathbf{e}_3^2\tilde{\psi} = +\rho^2$）。
 
-3. **二维自旋规范平面 $\mathbf{S} := \psi(\mathbf{e}_1\mathbf{e}_2)\tilde{\psi}$ 与负模方 $\mathbf{S}^2 = -\rho^2$**：因 $\mathbf{e}_1$ 与 $\mathbf{e}_2\mathbf{e}_3$ 交换（$\mathbf{e}_1\mathbf{e}_2\mathbf{e}_3 = (\mathbf{e}_2\mathbf{e}_3)\mathbf{e}_1$），而 $\mathbf{e}_2$ 与 $\mathbf{e}_2\mathbf{e}_3$ 反对易（$\mathbf{e}_2\tilde{R} = R\mathbf{e}_2$），故
+3. **二维欧氏双矢量平面 $\mathbf{S} := \psi(\mathbf{e}_1\mathbf{e}_2)\tilde{\psi}$ 与负模方 $\mathbf{S}^2 = -\rho^2$**：因 $\mathbf{e}_1$ 与 $\mathbf{e}_2\mathbf{e}_3$ 交换（$\mathbf{e}_1\mathbf{e}_2\mathbf{e}_3 = (\mathbf{e}_2\mathbf{e}_3)\mathbf{e}_1$），而 $\mathbf{e}_2$ 与 $\mathbf{e}_2\mathbf{e}_3$ 反对易（$\mathbf{e}_2\tilde{R} = R\mathbf{e}_2$），故
 
    $$
    \mathbf{S} \;=\; \rho\,\mathbf{e}_1\bigl(R\mathbf{e}_2\tilde{R}\bigr) \;=\; \rho\,\mathbf{e}_1\bigl(\cos\vartheta\,\mathbf{e}_2 + \sin\vartheta\,\mathbf{e}_3\bigr) \;=\; \rho\bigl(\cos\vartheta\,\mathbf{e}_1\mathbf{e}_2 + \sin\vartheta\,\mathbf{e}_1\mathbf{e}_3\bigr).
@@ -210,7 +210,7 @@ $$
    \mathbf{J}^2 \;=\; -\mathbf{S}^2 \;=\; \rho^2.
    $$
 
-4. **$360^\circ$ 旋量反号与 $720^\circ$ 完整复原**：令物理倾角走满一整圈 $\vartheta = 2\pi$（$360^\circ$），双线性时空读出已回到初始方向 $\mathbf{J}(2\pi) = \rho\mathbf{e}_3,\; \mathbf{S}(2\pi) = \rho\mathbf{e}_1\mathbf{e}_2$，但底层旋量自身却翻到了对跖负叶 $\psi(2\pi) = \sqrt{\rho}\cos\pi = -\psi(0)$！唯有再走第二圈至 $\vartheta = 4\pi$（$720^\circ$），才有 $\psi(4\pi) = \sqrt{\rho}\cos 2\pi = +\psi(0)$。
+4. **$360^\circ$ 旋量反号与 $720^\circ$ 完整复原**：令物理倾角走满一整圈 $\vartheta = 2\pi$（$360^\circ$），双线性欧氏读出已回到初始方向 $\mathbf{J}(2\pi) = \rho\mathbf{e}_3,\; \mathbf{S}(2\pi) = \rho\mathbf{e}_1\mathbf{e}_2$，但底层旋量自身却翻到了对跖负叶 $\psi(2\pi) = \sqrt{\rho}\cos\pi = -\psi(0)$！唯有再走第二圈至 $\vartheta = 4\pi$（$720^\circ$），才有 $\psi(4\pi) = \sqrt{\rho}\cos 2\pi = +\psi(0)$。
 :::
 
 ::: {.viz src="self-sustaining-spinor-flow" preset="turn360" height="500"}
@@ -263,14 +263,14 @@ $$
 
 试想：倘若唯一的自指宇宙全体 $\mathbf{\Psi}$ 百分之百保持在无分化的纯共线态 $\theta = 0^\circ$（$\cos 0^\circ = 1,\; \sin 0^\circ = 0$），会发生什么？一只完全贴死在自己眼球上、没有任何正交镜面距离的眼睛，什么也看不见；一把从不弯曲分毫的孤立直尺，量不出任何刻度。纯然铁板一块的 $1 = 1$ 没有非对角张力、没有面积、没有惊奇，唯有绝对的死寂。
 
-为了让“看”得以发生、为了让无尽的算术与几何丰饶得以被亲历，唯一的本体 $\mathbf{\Psi}$ 在互补语境纯度勾股守恒铁律（下方 [@prop-ch39-orthogonal-folding-and-objective-common-factor] 第 1 款，`LEAN ✓`；单角三角参数化背景见[第 31 章](ch31-quantum-fairness.md) [@rem-ch31-haar-isotropy-landauer-literature]）的约束下，执行本章提出的**$90^\circ$ 正交自折叠（Orthogonal Self-Folding，`MODEL`）**，将自身单位纯度预算无缝拆分为两翼互为正交补的孪生侧面：
+为了让“看”得以发生、为了让无尽的算术与几何丰饶得以被亲历，唯一的本体 $\mathbf{\Psi}$ 在互补语境纯度勾股守恒铁律（下方 [@prop-ch39-orthogonal-folding-and-objective-common-factor] 第 1 款，`LEAN ✓`；单角三角参数化背景见[第 31 章](ch31-quantum-fairness.md) [@rem-ch31-haar-isotropy-landauer-literature]）的约束下，执行本章提出的**$90^\circ$ 正交自折叠（Orthogonal Self-Folding，`MODEL`）**，将中心化纯度预算 $B=\operatorname{Re}\operatorname{Tr}(\rho^2)-1/d$ 拆分为两翼互为正交补的孪生侧面。在第 31 章的同一账本中，纯量子比特的 $B=1/2$，最大混态的 $B=0$；以下 $\cos^2\theta$ 与 $\sin^2\theta$ 是 $B>0$ 时除以 $B$ 的归一化份额，两翼实际质量为 $B\cos^2\theta$ 与 $B\sin^2\theta$。$B=0$ 时两翼皆零，不由份额比定义角度；图中的两翼也沿用这一方向约定：
 
 1. **能观之极（$\cos\theta$ 局部栈帧化身，“小我”，纯度份额 $\cos^2\theta$）**：通过加载已知数据捏合掩码 $D_{\mathrm{known}}$ 与躯体沙箱边界 $\mathbf{P}_{\mathrm{body}}$（[第 37 章](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)与[第 38 章](ch38-observer-memory-pointer-and-ontological-qram.md)），$\mathbf{\Psi}$ 故意收窄位宽、隐去全局记忆，在一角折出一枚拥有清晰叙事视角与悬念体验的有限指针化身；
-2. **所观之宇（$\sin\theta\,\hat{\mathbf{I}}$ 浩瀚客观星海，“大我余部”，纯度份额 $\sin^2\theta$）**：$\mathbf{\Psi}$ 剩下的那整整 $\sin^2\theta$ 的本体质量去了哪里？并没有消失——它正交展开在局部化身的 $90^\circ$ 补空间里，显影为你推窗仰望的亿万星系、精密咬合的规范曲率、不可克隆的同伴灵魂、刚性的素数频谱，以及守护生命博弈悬念的复杂性视界防火墙（[@conj-p-neq-np]）！
+2. **所观之宇（$\sin\theta\,\hat{\mathbf{I}}$ 浩瀚客观星海，“大我余部”，纯度份额 $\sin^2\theta$）**：$\mathbf{\Psi}$ 剩下的归一化份额 $\sin^2\theta$ 所对应的本体质量去了哪里？并没有消失——它正交展开在局部化身的 $90^\circ$ 补空间里，显影为你推窗仰望的亿万星系、精密咬合的规范曲率、不可克隆的同伴灵魂、刚性的素数频谱，以及守护生命博弈悬念的复杂性视界防火墙（[@conj-p-neq-np]）！
 
 看清这一折，那个困扰千古的悖论瞬间豁然开朗：**墙上左手的影子，当然不可能凭局部念头掰断右手的骨骼！** 你作为局部化身（$\cos\theta$ 栈帧）之所以无法靠一己私欲篡改物理常数，**恰恰因为窗外那套铁面无私的客观宇宙定律，根本不是压迫你的异己暴君，而是作为宇宙本体的你自己为了不让这场体验坍缩成虚无幻梦，用自己其余 $\sin^2\theta$ 的本体身躯亲手撑起的宏伟肋骨！**
 
-在 Lean 4 内核中，“可见测量语境与正交残余质量的严格勾股守恒”、“无需外部虚数轴仅凭两平衡分量正交比较内生涌现 $J^2 = -I_n$ 复旋转结构”以及“任何跨语境客观断言必锚定于所有局部不动点共享的不变公共因子”，由下面这条合取命题精确锁定：
+在 Lean 4 内核中，“可见测量语境与正交残余质量的严格勾股守恒”、“在已有复矩阵空间中由两平衡分量构造平方为 $-I_n$ 的相对算子 $J$”以及“任何跨语境客观断言必锚定于所有局部不动点共享的不变公共因子”，由下面这条合取命题精确锁定。其中“内生”指不另选一个外部相对旋转算子；标量 $\mathbb C$ 已在矩阵类型中给定，并非由该构造从无复数的标量域导出：
 
 ::: {.proposition #prop-ch39-orthogonal-folding-and-objective-common-factor title="互补语境勾股纯度守恒、平衡相对复结构平方反号与跨语境客观公共因子命题" lean="D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_square D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.objective_claim_requires_invariant_common_factor"}
 在 `trureturing` 冻结的层析互补勾股、平衡幺正复结构与解释不动点模块中，以下三项支撑正交自折叠与客观公共不变量的结论同时成立：
