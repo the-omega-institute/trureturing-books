@@ -140,6 +140,10 @@ The last column of the table computes the spherical excess $\Omega$ independentl
 The row $\theta = 90^\circ$ is the octant loop: $\Delta = \frac{1+i}{4}$, which is Claim 2. As the triangle grows, its three sides become less and less compatible and $\lvert\Delta\rvert$ keeps shrinking, while the argument keeps growing and is always half the area. The fifth column equals the fourth row by row, which is the manual derivation above; the last two columns agree row by row, which is a numerical check of the Van Oosterom–Strackee formula on these five triangles, not a proof.
 :::
 
+::: {.film src="003-two-angles-berry"}
+**One orthogonal step, then another: two-angle addressing and the Berry phase (1 min 58 s).** Turning about a single axis, the amber point only draws a circle; a tilt of $\theta = 60^\circ$ about $\vv{e}_2$ followed by a twist of $\varphi = 45^\circ$ about $\vv{e}_3$ lands it on $\bigl(\frac{\sqrt{6}}{4}, \frac{\sqrt{6}}{4}, \frac{1}{2}\bigr)$, and two axes only $30^\circ$ apart still reach a target in four alternating turns ([@thm-two-axis-finite-word]). Then two $90^\circ$ turns taken in either order stop at $+X$ and at $-Y$; carried around the octant loop, the arrow comes back turned by the enclosed area $\Omega = \frac{\pi}{2}$; finally the overlap $\frac{1+i}{2}$ of [@cor-latitude-complex-overlap] multiplies out to $\Delta = \frac{1+i}{4}$, whose phase $\frac{\pi}{4}$ stays put when every state is re-phased (for the Berry phase and the area, see [@rem-berry-pancharatnam-holonomy-literature]).
+:::
+
 To compute complex overlaps along any latitude circle cleanly, the Lean module `BargmannImaginaryMaximizers` defines, for $t \in \mathbb{R}$ and $z \in \mathbb{C}$, the two-component complex vector
 
 $$
@@ -163,10 +167,6 @@ Note the exact contract of [@cor-latitude-complex-overlap]: it holds for all com
 
 ::: {.viz src="berry-loop" preset="equator" height="500"}
 **Once round the equator.** The four corners $+X, +Y, -X, -Y$ all lie on the latitude $t = \frac{1}{2}$, so by [@cor-latitude-complex-overlap] each neighbouring inner product is $\frac{1+i}{2}$; their product is $-\frac{1}{4}$ and the cyan needle at the lower right stops at $\pi$. The magenta area is the whole northern hemisphere, $2\pi$. The amber arrow returns to $+X$ on top of the dashed one, as if it had not turned; the full magenta disc beside it shows that it has in fact turned a whole circle.
-:::
-
-::: {.film src="003-two-angles-berry"}
-**One orthogonal step, then another: two-angle addressing and the Berry phase (1 min 58 s).** Turning about a single axis, the amber point only draws a circle; a tilt of $\theta = 60^\circ$ about $\vv{e}_2$ followed by a twist of $\varphi = 45^\circ$ about $\vv{e}_3$ lands it on $\bigl(\frac{\sqrt{6}}{4}, \frac{\sqrt{6}}{4}, \frac{1}{2}\bigr)$, and two axes only $30^\circ$ apart still reach a target in four alternating turns ([@thm-two-axis-finite-word]). Then two $90^\circ$ turns taken in either order stop at $+X$ and at $-Y$; carried around the octant loop, the arrow comes back turned by the enclosed area $\Omega = \frac{\pi}{2}$; finally the overlap $\frac{1+i}{2}$ of [@cor-latitude-complex-overlap] multiplies out to $\Delta = \frac{1+i}{4}$, whose phase $\frac{\pi}{4}$ stays put when every state is re-phased (for the Berry phase and the area, see [@rem-berry-pancharatnam-holonomy-literature]).
 :::
 
 ## Keeping Instruments and Time Order {#sec-instruments-preserve-order}
@@ -202,6 +202,10 @@ $$
 $$
 
 establishing conjuncts 1–3. For the initial state $P_0$ and first outcome $\mathrm{false}$, the projective instrument leaves the branch state $P_0 P_0 P_0^* = P_0$, whose product with $\operatorname{secondEffect} = I - P_0$ has trace $0$; the flipped instrument sends $P_0$ to $X P_0 X = I - P_0$, whose product with $I - P_0$ equals $I - P_0$ and has trace $1$. The full proof is checked by the Lean kernel.
+:::
+
+::: {.figure src="ch10-same-effect-two-exits"}
+**Same effect, different exits.** Both rows start at the north pole $N$ and record the outcome $\mathrm{false}$, and the cyan box in the middle is the same effect $E = P_0$. In the top row the projective instrument $K = P_0$ leaves the amber point at the north pole; in the bottom row the flipped instrument $L = XP_0$ turns it over to the south pole. Far right are the readings of the second shutter $I - P_0$: $0$ and $1$ ([@prop-static-sequential-separation]).
 :::
 
 ## Hairy Ball, Hopf Fibers, and the Rotor Sphere {#sec-hairy-ball-hopf-rotors}
