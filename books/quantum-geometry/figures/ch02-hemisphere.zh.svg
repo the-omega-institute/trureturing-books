@@ -4,7 +4,7 @@
 <svg class="tr-fig-panel" x="0" y="0" width="230" height="270" viewBox="0 0 230 270">
 <path d="M207 140 L206.8 133.98 L206.21 127.99 L205.23 122.05 L203.87 116.19 L202.12 110.43 L200 104.79 L197.51 99.31 L194.67 94 L191.5 88.89 L187.99 83.99 L184.17 79.34 L180.05 74.95 L175.66 70.83 L171.01 67.01 L166.11 63.5 L161 60.33 L155.69 57.49 L150.21 55 L144.57 52.88 L138.81 51.13 L132.95 49.77 L127.01 48.79 L121.02 48.2 L115 48 L108.98 48.2 L102.99 48.79 L97.05 49.77 L91.19 51.13 L85.43 52.88 L79.79 55 L74.31 57.49 L69 60.33 L63.89 63.5 L58.99 67.01 L54.34 70.83 L49.95 74.95 L45.83 79.34 L42.01 83.99 L38.5 88.89 L35.33 94 L32.49 99.31 L30 104.79 L27.88 110.43 L26.13 116.19 L24.77 122.05 L23.79 127.99 L23.2 133.98 L23 140Z" class="tf-cyan" fill-opacity="0.32"/>
 <circle cx="115" cy="140" r="92" class="ts-dim" stroke-width="1.4" fill="none"/>
-<line x1="23" y1="140" x2="207" y2="140" class="ts-cyan" stroke-width="2" fill="none"/>
+<line x1="23" y1="140" x2="207" y2="140" class="ts-dim" stroke-width="1.2" fill="none"/>
 <text class="tf-cyan ts-bg" x="89" y="106" font-size="15" text-anchor="middle" stroke-width="4.2" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">f</tspan> = 1</text>
 <text class="tf-dim" x="123" y="186" font-size="15" text-anchor="middle"><tspan font-style="italic">f</tspan> = 0</text>
 <line x1="115" y1="140" x2="207" y2="140" class="ts-faint" stroke-width="1.1" stroke-dasharray="3 3" fill="none"/>

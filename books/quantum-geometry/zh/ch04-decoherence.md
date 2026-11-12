@@ -9,7 +9,7 @@
 那截原本好端端的长度 $1 - \norm{\vv{r}}$ 究竟被谁偷走了？“退相干（decoherence）”真的是微观世界在某种神秘摩擦下发生了不可逆的本体毁灭吗？作为第一部“从点到线”的收官之章，我们将揭开混合态的几何机制：**正交记录耦合与环境偏迹边缘化如何在更大空间中压短局部状态**（[@thm-nonselective-marginal]、[@thm-reduced-access-defect]，并由 C\*-代数表示压缩 [@thm-stinespring-dilation] 与一般信道薛定谔图景扩张文献 [@rem-stinespring-literature] 对照补充）。不妨借斜刺的长矛和它截短的影子来想象局部布洛赫向量的缩短；实际求偏迹的是联合密度算子。
 
 ::: {.figure src="ch04-overview"}
-**图 4。** 本章地图，三栏都是布洛赫球的竖直截面：第 I 栏，琥珀色的局部箭头朝着球皮上的 $\lvert +\rangle$（虚线），却只到 $\cos\theta_{\mathrm{env}}$ 就停在球里；第 II 栏，相位阻尼一步步把球收成更窄的青色椭圆，高度不变，收向紫色的竖轴；第 III 栏，琥珀色的点先抹掉横向部分、落到竖轴上，再抹掉 $r_z$、落到紫色的球心 $\frac{1}{2}I$。
+**图 4。** 本章地图，三栏都是布洛赫球的竖直截面：第 I 栏，琥珀色的局部箭头朝着球皮上的 $\lvert +\rangle$（虚线），却只到 $\cos\theta_{\mathrm{env}}$ 就停在球里；第 II 栏，振幅阻尼（$\gamma = \frac{1}{2}$）把球缩小并往北推成青色的椭圆，北极的 $\rho$ 不动，$+x$ 上的 $\sigma$ 被拉向北方，两点之间的线从虚线缩成实线，$T$ 从 $0.707$ 降到 $0.433$（[@prop-trace-distance-metric-contraction]；这个信道的布洛赫形式是文献结果，未在本书形式化）；第 III 栏，琥珀色的点先抹掉横向部分、落到竖轴上，再抹掉 $r_z$、落到紫色的球心 $\frac{1}{2}I$。
 :::
 
 ## 4.1 纯态是球皮（$\|\vv{r}\| = 1$），混合态是球肚子里截短的线（$\|\vv{r}\| < 1$） {#sec-ch04-1}
@@ -34,11 +34,11 @@ $$
 **环境里两条记录的影子，就是局部布洛赫箭头的长度。** 左边，环境的两个态 $\lvert e_0\rangle$ 与 $\lvert e_1\rangle$ 夹角 $\theta_{\mathrm{env}}$，$\lvert e_1\rangle$ 落在 $\lvert e_0\rangle$ 上的青色影子长 $\cos\theta_{\mathrm{env}}$；右边是布洛赫球的竖直截面，琥珀色的箭头 $\vv{r}$ 朝着球皮上的 $\lvert +\rangle$（虚线），只走到 $\cos\theta_{\mathrm{env}}$，它下方的青色线段与左边的影子一样长。图中取 $\theta_{\mathrm{env}} = 50^\circ$。
 :::
 
-::: {.viz src="bloch-noise" preset="shorten" height="500"}
-**离开球皮的线。** 相位阻尼一步步作用在赤道两端的 $\lvert +\rangle$ 与 $\lvert -\rangle$ 上：琥珀色的 $\rho$ 与白色的 $\sigma$ 离开细线画的球皮，沿横轴缩向球心，青色的球同时收腰。舞台左上角把横向剩下的比例读成 $\cos\theta_{\mathrm{env}}$ 并给出这个角度；白线是两态之间的距离。
-:::
-
 特别地，当环境彻底分辨了系统的不同分支（$\theta_{\mathrm{env}} = 90^\circ$，环境记录彼此正交 $\cos 90^\circ = 0$），联合演化就成了一次标准的等距记录耦合，而“移开视线忽略环境”在数学上精确等价于[第三章](ch03-projectors-and-duality.md)定义的吕德斯未读捏合 $\sum_a P_a \rho P_a$。下面的定理在任意有限维系统与任意有限结果寄存器上严格证明了这一核心等价。
+
+::: {.viz src="bloch-noise" preset="shorten" height="500"}
+**拖动记录的夹角，局部箭头跟着变短。** 右下角是环境的两条记录 $\lvert e_0\rangle$、$\lvert e_1\rangle$，夹角 $\theta_{\mathrm{env}}$ 沿时间轴从 $0^\circ$ 转到 $90^\circ$，青色的影子是它们的内积 $\cos\theta_{\mathrm{env}}$。对环境求偏迹后，从 $\lvert +\rangle$ 出发的琥珀色 $\rho$（与从 $\lvert -\rangle$ 出发的白色 $\sigma$）沿横轴缩短，长度正是 $\cos\theta_{\mathrm{env}}$。画面停在 $75^\circ$，箭头只剩 $0.26$；转到 $90^\circ$，两条记录正交，箭头缩到球心。
+:::
 
 ::: {.theorem #thm-nonselective-marginal title="等距记录耦合对记录寄存器求偏迹等于非选择性块和" lean="D5/S3/Quantum/Decoherence/NonselectiveMarginalization.nonselective_recording_marginal"}
 设 $\mathrm{System}$ 与 $\mathrm{Outcome}$ 为有限可判等类型，$\{P_a\}_{a \in \mathrm{Outcome}}$ 为 $\mathrm{System}$ 上满足自伴性 $P_a^* = P_a$、正交幂等性 $P_a P_b = \delta_{ab} P_a$ 及完备性 $\sum_{a} P_a = I$ 的投影算子族。定义典范记录矩阵 $V \in M_{(\mathrm{System} \times \mathrm{Outcome}) \times \mathrm{System}}(\mathbb{C})$ 及对结果寄存器的偏迹映射 $\Tr_{\mathrm{Outcome}}$ 为
@@ -147,6 +147,10 @@ $$
 
 请盯住右边那张 $4\times 4$ 矩阵的四个角：区分正号与负号的相干印记 $\pm\frac{1}{2}$ 并没有被抹掉，它们只是从 $(00, 10)$ 搬家到了外侧对角 $(00, 11)$ 与 $(11, 00)$！然而，当你对第二个比特求偏迹 $\Tr_{\mathrm{env}}$ 时，规则要求你把左上 $2\times 2$ 块的迹、右上 $2\times 2$ 块的迹分别加起来：右上 $2\times 2$ 块的主对角元是 $(00, 10)$ 与 $(01, 11)$，那两个位置偏偏都是 $0$，而真正装着 $\pm\frac{1}{2}$ 的右上角 $(00, 11)$ 根本不在环境小块的迹对角线上！于是偏迹交到你手里的只剩一模一样的 $\frac{1}{2}\bigl(\begin{smallmatrix} 1+0 & 0+0 \\ 0+0 & 0+1 \end{smallmatrix}\bigr) = \frac{1}{2}I$。
 
+::: {.figure src="ch04-copy-matrix"}
+**相干没有消失，只是搬到了偏迹够不着的角上。** 两张 $4\times 4$ 方格按 $00, 01, 10, 11$ 排列，细框分出四个 $2\times 2$ 块，偏迹只读每块对角线上的两格（青色的边）。左边是受控拷贝之前的 $B(\lvert\pm\rangle\langle\pm\rvert)$：品红的 $\pm\frac{1}{2}$ 在 $(00, 10)$ 与 $(10, 00)$，落在青色的格里，偏迹读得到；右边是拷贝之后的 $R(\lvert\pm\rangle\langle\pm\rvert)$：$\pm\frac{1}{2}$ 搬到 $(00, 11)$ 与 $(11, 00)$，不在任何一块的对角线上，偏迹交出的都是 $\frac{1}{2}I$，而用 $U_{\mathrm{copy}}^*$ 倒推回去即复原（[@thm-reduced-access-defect] 的结论 2、3、4、6；矩阵元是正文的手算）。
+:::
+
 > 所谓“覆水难收”，只是因为你把目光锁死在了水杯里；对整间屋子而言，每一滴水汽的相位都还写在空气的账本上。
 
 ## 4.2 不用背 Kraus 算符看懂三种量子噪声 {#sec-ch04-2}
@@ -251,6 +255,10 @@ $$
 | $6$ | $0.2621$ | $-0.7522$ | $0.2621$ | $0.9313$ |
 
 从第二步起，单份环境就把漏出去的振幅送了回来；到 $n = 39$，$(J^{39})_{00} = 0.99934$，几乎完全复原，而 $c^{39} = 0.00017$。碰撞模型的第 0 格逐行恰是 $c^n$，与证明里的归纳结论一致。漏出的概率 $1 - c^{2n}$ 并没有消失，它散在第 $1, 2, \dots, n$ 格上，总范数始终是 $1$。
+:::
+
+::: {.figure src="ch04-fresh-environment"}
+**同一份环境会把振幅送回来，新环境才一去不返。** 青色的点列是碰撞模型第 $0$ 格的 $c^n$（$c = 0.8$），每一步迎来一份新环境，一路衰减到零（[@thm-unitary-power-dilation]）；灰色的点列是同一份环境反复使用时的 $(J^n)_{00} = \cos n\varphi$，在 $-1$ 与 $1$ 之间来回摆，到 $n = 39$ 回到 $0.999$（圈出的那一点）。两列数值来自 [@ex-halmos-one-step-recurrence] 的手算；“有限环境必回返”是正文的手工推导，未在本书形式化。
 :::
 
 > 漏出去的振幅不回来，不是因为它消失了，而是因为迎面来的环境永远是新的。
@@ -505,10 +513,6 @@ $$
 **球心不记得自己是怎么混出来的。** 南北两极各取 $\frac{1}{2}$、东西两极各取 $\frac{1}{2}$，或者斜虚线两端的另一对对径点各取 $\frac{1}{2}$，混出的布洛赫向量都是弦的中点，全都落在紫色的球心 $\frac{1}{2}I$（[@ex-maximally-mixed-center] 第 3 条）。
 :::
 
-::: {.viz src="bloch-noise" height="560"}
-**完整实验室。** 切换三种噪声、调每一步的强度与 $T_2 / T_1$，或在球皮上拖动 $\rho$ 与 $\sigma$，沿时间轴看青色的球怎样变形、白线怎样只缩不长。
-:::
-
 ---
 
 ### 第一部小结：从“点”站成“线”，下一步向“面”展翼
@@ -520,4 +524,12 @@ $$
 - **第三章**指出粒子、概念与经典时间刻度全都是幂等投影线 $P^2 = P$ 的不动点（[@thm-pinching-idempotent]、[@thm-unread-fixed-iff]、[@thm-conditional-state-valid]），用互补勾股定理（[@thm-complementary-pythagoras]）揭示了粒子轴与霍奇对偶波平面的伴生宿命，并给出 $d$ 维系统的记录容量上界 $N \le d$（[@prop-record-capacity]）与互补语境的熵不确定关系（[@prop-collision-entropy-uncertainty]）；
 - **第四章**追踪了视线移开后的偏迹边缘化（[@thm-nonselective-marginal]），证明局部不可逆只是环境访问缺陷（[@thm-reduced-access-defect]），给出了相位阻尼、振幅阻尼与捏合投影的几何收缩图像（[@thm-pinching-pythagorean]、[@prop-phase-damping-decay]、[@prop-amplitude-damping-contraction]、[@cor-pinching-zero-offdiag]），以 Stinespring 扩张（[@thm-stinespring-dilation]）说明表示压缩的结构，以 Sz.-Nagy 酉幂扩张（[@thm-unitary-power-dilation]）说明任意多步的压缩仍是同一个酉演化的影子，并由迹距离在同一有限指标类型上的量子信道下不增（[@prop-trace-distance-metric-contraction]）刻画两态可分辨性的限制。
 
+::: {.viz src="bloch-noise" height="560"}
+**完整实验室。** 切换三种噪声、调每一步的强度与 $T_2 / T_1$，或在球皮上拖动 $\rho$ 与 $\sigma$，沿时间轴看青色的球怎样变形、白线怎样只缩不长。
+:::
+
 至此，第一重帷幕“从点到线”已彻底落下。在接下来的**第二部《展翼·从线到面》**中，我们将把目光从静态的一维投影线 $\vv{a} \cdot \vv{b} = \cos\theta$ 抬高三寸，正面迎向那片在第一部里已经频频显露锋芒的**二维有向面积** $\vv{a} \wedge \vv{b} = \sin\theta\,\hat{I}$——看清虚数单位 $i$ 为什么其实就是平面 $90^\circ$ 正交转向算子，并用一行克利福德几何积恒等式 $AB = A\cdot B + A\wedge B$ 将全部单比特量子门与量子力学五大公理一举合拢！
+
+::: {.film src="002-pairwise-born"}
+**两子丈量：从一对箭头到玻恩权重（1 分 26 秒）。** 两支相隔 $60^\circ$ 的箭头由平行四边形的两条对角线读出夹角（[@thm-parallelogram-norm-law]）；让 $A$ 自己当轴，垂足 $C$ 成了 $B$ 落在 $A$ 上的青色影子 $\cos\theta$；把影子从 $[-1, 1]$ 压进 $[0, 1]$，就是权重 $\cos^2(\theta/2)$（[@thm-born-modulus-square]）；只有平方能让快门与它的补分完全部权重（[@thm-born-probability-skeleton]）；最后环境记下分支，箭头缩成球内竖轴上的一截短线（[@thm-nonselective-marginal]）。
+:::

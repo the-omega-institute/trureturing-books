@@ -58,7 +58,7 @@ def draw(fig):
     north = [(cx + R * math.cos(math.pi * k / 48), cy - R * math.sin(math.pi * k / 48)) for k in range(49)]
     left.polygon(north, "cyan", fill_opacity=0.32)
     left.circle(cx, cy, R, color="dim", width=1.4)
-    left.line(cx - R, cy, cx + R, cy, "line", 2.0)
+    left.line(cx - R, cy, cx + R, cy, "dim", 1.2)
     left.text(cx - 26, cy - 34, "*f* = 1", size=15, color="line", anchor="middle", halo=True)
     left.text(cx + 8, cy + 46, "*f* = 0", size=15, color="dim", anchor="middle")
     pts = ((X, "+*x*", -4, 22, "middle"), (Z, "+*z*", 10, -6, "start"), (n, "*n*", 10, -4, "start"),
