@@ -69,7 +69,11 @@ $$
    $$
 
    $$
-   \land\; \Bigl(\operatorname{HasFate}(m, \mathrm{.live}) \to \operatorname{fixedCoefficients}(m) = (1, -1, -1) \lor \operatorname{fixedCoefficients}(m) = (1, 1, -1)\Bigr) \;\land\; \Bigl(\operatorname{HasFate}(m, \mathrm{.live}) \to \operatorname{discriminant}(m) = 1^2 + 4\Bigr).
+   \begin{aligned}
+   &\land\; \Bigl(\operatorname{HasFate}(m, \mathrm{.live}) \to \operatorname{fixedCoefficients}(m) = (1, -1, -1) \\
+    &\quad \lor \operatorname{fixedCoefficients}(m) = (1, 1, -1)\Bigr) \\
+    &\;\land\; \Bigl(\operatorname{HasFate}(m, \mathrm{.live}) \to \operatorname{discriminant}(m) = 1^2 + 4\Bigr).
+   \end{aligned}
    $$
 :::
 
@@ -116,7 +120,12 @@ $$
 2. **齐肯多夫离散黄金读出全线程对连续统非负实数的严格单射重构**（[`zeckendorf_real_thread_injective`](lean:D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective)）：对非负实数 $x \in \mathbb{R}_{\ge 0}$（`NNReal`）与分辨率层级 $\mathrm{level} \in \mathbb{N}$，记黄金幂次量化值为 $\operatorname{goldenQuantization}(\mathrm{level}, x) := \lfloor\varphi^{\mathrm{level}} \cdot (x : \mathbb{R})\rfloor_+ \in \mathbb{N}$（其中 $\varphi = \mathrm{Real.goldenRatio}$），并通过典范齐肯多夫编码双射 $\operatorname{wEncoding} : \mathbb{N} \simeq \mathrm{WDigitString}$（$\mathrm{WDigitString} = \{\mathrm{digits} : \operatorname{List}\;\mathbb{N} \mathrel{//} \mathrm{digits}.\mathrm{IsZeckendorfRep}\}$）定义全尺度读出线程 $\operatorname{zeckendorfRealThread}(x) := (\mathrm{level} \mapsto \operatorname{wEncoding}(\operatorname{goldenQuantization}(\mathrm{level}, x))) : \mathbb{N} \to \mathrm{WDigitString}$。则该读出线程映射严格单射：
 
    $$
-   \operatorname{Function.Injective}(\operatorname{zeckendorfRealThread}), \quad\text{即}\quad \forall a, b \in \mathbb{R}_{\ge 0},\quad \operatorname{zeckendorfRealThread}(a) = \operatorname{zeckendorfRealThread}(b) \;\Longrightarrow\; a = b;
+   \begin{aligned}
+   &\operatorname{Function.Injective}(\operatorname{zeckendorfRealThread}), \\
+    &\quad\text{即}\quad \forall a, b \in \mathbb{R}_{\ge 0}, \\
+    &\quad \operatorname{zeckendorfRealThread}(a) = \operatorname{zeckendorfRealThread}(b) \\
+    &\;\Longrightarrow\; a = b;
+   \end{aligned}
    $$
 
 3. **二元基底自动机接受语言与无相邻 `11` 约束的精确等价**（[`base_success_iff_noAdjacentOnes`](lean:D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes)）：对二元字母表 $\operatorname{Fin} 2$ 上的任意有限字 $\mathrm{word} \in \operatorname{List}(\operatorname{Fin} 2)$，记无相邻一谓词为 $\operatorname{NoAdjacentOnes}(\mathrm{word}) := \mathrm{word}.\operatorname{IsChain}(u, v \mapsto u = 0 \lor v = 0)$。则部分确定性有限自动机 `binaryZeckendorfBase` 成功接受 $\mathrm{word}$ 当且仅当字中不存在相邻的 `11` 位对：

@@ -66,7 +66,12 @@ $$
 3. **反复幺正演化与基捏合下的相干删除熵产恒等式**（[`entropy_production_coherence_deletion_identity`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity)）：设 $n$ 为有限可判等类型（`[Fintype n] [DecidableEq n]`），$U \in \operatorname{unitaryGroup}(n, \mathbb{C})$ 为幺正矩阵，密度态轨迹 $\rho : \mathbb{N} \to \operatorname{DensityState}(n)$ 满足步进律 $\forall k \in \mathbb{N},\; \rho(k + 1) = \operatorname{basisPinchingState}(\operatorname{unitaryConjugateState}(U, h_U, \rho(k)))$。记第 $k$ 步捏合前演化态为 $\tilde{\rho}_k := \operatorname{unitaryConjugateState}(U, h_U, \rho(k))$，则每一步的冯·诺依曼熵增精确等于删除相干性所对应的非负量子相对熵，且有限 $N$ 步累计熵产等于各步相对熵税的精确总和：
 
    $$
-   \forall k \in \mathbb{N},\quad S\bigl(\rho(k+1)\bigr) - S\bigl(\rho(k)\bigr) = D\bigl(\tilde{\rho}_k \,\big\|\, \operatorname{basisPinchingState}(\tilde{\rho}_k)\bigr) \ge 0, \qquad \forall N \in \mathbb{N},\quad S\bigl(\rho(N)\bigr) - S\bigl(\rho(0)\bigr) = \sum_{k \in \operatorname{Finset.range} N} D\bigl(\tilde{\rho}_k \,\big\|\, \operatorname{basisPinchingState}(\tilde{\rho}_k)\bigr).
+   \begin{aligned}
+   &\forall k \in \mathbb{N},\quad S\bigl(\rho(k+1)\bigr) - S\bigl(\rho(k)\bigr) \\
+    &\quad = D\bigl(\tilde{\rho}_k \,\big\|\, \operatorname{basisPinchingState}(\tilde{\rho}_k)\bigr) \ge 0, \\
+    &\forall N \in \mathbb{N},\quad S\bigl(\rho(N)\bigr) - S\bigl(\rho(0)\bigr) \\
+    &\quad = \sum_{k \in \operatorname{Finset.range} N} D\bigl(\tilde{\rho}_k \,\big\|\, \operatorname{basisPinchingState}(\tilde{\rho}_k)\bigr).
+   \end{aligned}
    $$
 :::
 
@@ -151,7 +156,12 @@ $$
 2. **双副本相位记录上局部擦除失灵与全局联合擦除复原的显式证书**（[`two_copy_joint_reversal_certificate`](lean:D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate)）：取均匀叠加纯态密度矩阵 $\rho = \mathrm{equalSuperpositionDensity} = \begin{pmatrix} 1/2 & 1/2 \\ 1/2 & 1/2 \end{pmatrix}$，定义单模相位记录 $\mathrm{phaseRecord}(i, a)$ 在 $a = 0, i = 0$ 取 $1$、在 $a = 0, i = 1$ 取虚数单位 $i$、在 $a = 1$ 取 $0$，并令双副本族 $\mathrm{records} : \operatorname{Fin} 2 \to \mathrm{EnvironmentRecord}$ 两份皆取 $\mathrm{phaseRecord}$，记单元素子集 $\mathrm{copyZero} = \{0\} \subseteq \operatorname{Fin} 2$。通过选中子集逆转算子 `reverseChannelOn` 检验第 $(0, 1)$ 非对角相干元，以下四重等式同时成立：
 
    $$
-   \rho_{01} = \frac{1}{2}, \quad \operatorname{multiRecordChannel}(\mathrm{records}, \rho)_{01} = -\frac{1}{2}, \quad \operatorname{reverseChannelOn}\bigl(\{0\}, \mathrm{records}, \operatorname{multiRecordChannel}(\mathrm{records}, \rho)\bigr)_{01} = -\frac{i}{2}, \quad \operatorname{reverseChannelOn}\bigl(\operatorname{Finset.univ}, \mathrm{records}, \operatorname{multiRecordChannel}(\mathrm{records}, \rho)\bigr)_{01} = \frac{1}{2}.
+   \begin{aligned}
+   &\rho_{01} = \frac{1}{2}, \\
+    & \operatorname{multiRecordChannel}(\mathrm{records}, \rho)_{01} = -\frac{1}{2}, \\
+    & \operatorname{reverseChannelOn}\bigl(\{0\}, \mathrm{records}, \operatorname{multiRecordChannel}(\mathrm{records}, \rho)\bigr)_{01} = -\frac{i}{2}, \\
+    & \operatorname{reverseChannelOn}\bigl(\operatorname{Finset.univ}, \mathrm{records}, \operatorname{multiRecordChannel}(\mathrm{records}, \rho)\bigr)_{01} = \frac{1}{2}.
+   \end{aligned}
    $$
 :::
 
@@ -221,7 +231,12 @@ $$
 2. **双无限黄金窗口模型集的显式 Delone 集双半径证书**（[`exists_golden_modelSet_delone`](lean:D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone)）：在双无限完整切投载体 $\operatorname{modelSet}(\mathrm{goldenWindow}) = \{y \in \mathbb{R} \mid \exists x \in \mathrm{GoldenInt},\; \operatorname{embedding}(x) = y \land \operatorname{embedding}(\operatorname{conj}(x)) \in \mathrm{goldenWindow}\}$ 上，存在经形式化验证的 Mathlib 德洛内集实例 $D : \operatorname{Delone.DeloneSet}\;\mathbb{R}$，同时满足精确载体等式、显式正填充半径 $1/2$ 与显式有限覆盖半径 $3$：
 
    $$
-   \exists\, D : \operatorname{Delone.DeloneSet}\;\mathbb{R},\qquad D.\mathrm{carrier} = \operatorname{modelSet}(\mathrm{goldenWindow}) \;\land\; D.\mathrm{packingRadius} = \bigl(\tfrac{1}{2} : \mathbb{R}_{\ge 0}\bigr) \;\land\; D.\mathrm{coveringRadius} = \bigl(3 : \mathbb{R}_{\ge 0}\bigr)
+   \begin{aligned}
+   &\exists\, D : \operatorname{Delone.DeloneSet}\;\mathbb{R}, \\
+    &D.\mathrm{carrier} = \operatorname{modelSet}(\mathrm{goldenWindow}) \\
+    &\;\land\; D.\mathrm{packingRadius} = \bigl(\tfrac{1}{2} : \mathbb{R}_{\ge 0}\bigr) \\
+    &\;\land\; D.\mathrm{coveringRadius} = \bigl(3 : \mathbb{R}_{\ge 0}\bigr)
+   \end{aligned}
    $$
 
    （其中填充半径 $1/2$ 反映不同截点满足一致分离下界 $\forall x \neq y \in \operatorname{modelSet}(\mathrm{goldenWindow}),\; \operatorname{dist}(x, y) \ge 1$，覆盖半径 $3$ 反映全直线一致相对稠密性 $\forall x \in \mathbb{R},\; \exists y \in \operatorname{modelSet}(\mathrm{goldenWindow}),\; \operatorname{dist}(x, y) \le 3$）。

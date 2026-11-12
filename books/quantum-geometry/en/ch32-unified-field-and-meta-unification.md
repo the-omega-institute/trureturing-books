@@ -146,14 +146,126 @@ Bringing all thirty-two chapters onto a single canvas, one set of orthogonal pri
 ::: {.remark #rem-ch32-six-domain-isomorphism-table title="Six-Domain Holographic Isomorphism Master Ledger of the Orthogonal Self-Referential Unified Field (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** The master table below synthesizes structural correspondences across six domains: sub-items tagged `LEAN ✓` cite frozen theorems in `trureturing@dev`, external equations ($H\mathbf{\Psi}=0$, $F_{\mu\nu}$, RT surfaces, Hilbert reciprocity $\prod_v (a,b)_v = +1$, Arnold geodesics, BBBV/ETH bounds, and $\theta^* \approx 0.739085$) cite chapter literature remarks, unproved problems ($\mathrm{P}\neq\mathrm{NP}$, Critical Line $\sigma=1/2$, unforced 3D NS regularity) carry `OPEN`, and the cross-domain unification architecture constitutes our philosophical–geometric `MODEL`:
 
-| Core Primitive | Pure Geometry & Topology | Quantum & Gauge Fields | Relativity & Holographic Gravity | Arithmetic Geometry & Number Theory | Complexity & Fluid Fields | Observer & Soul Dynamics |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Static Ambient Space** | High-D orthogonal lattice / parallelizable spinor sphere | Timeless constraint $H\mathbf{\Psi}=0$ (`Literature`) & Gram ledger (`LEAN ✓`) | Block-universe holographic bulk (`MODEL`) | Integer lattices & prime orthogonal axes $\{\vv{e}_p\}$ (`Literature`) | Idealized global field $P = NP$ (`MODEL`) / Arnold geodesics (`Literature`) | Timeless causal compatibility crystal (`MODEL`) |
-| **1D Inner Projection ($\mathbf{A}\cdot\mathbf{B}=\cos\theta$)** | Idempotent ray $P^2=P$ (`LEAN ✓`) | Particle reading & rank-one Born weight (`LEAN ✓`) | Proper-time rate $d\tau/dt$ & rest-mass self-locking (`Literature` / `MODEL`) | Quaternion trace filtering $\mathbb{Z}$ & elliptic Hasse trace $\cos\theta_p$ (`Literature`) | Polynomial verification along a 1D witness thread ($NP$ is a line, `MODEL`) | Zeckendorf discrete memory anchors (`LEAN ✓` / `MODEL`) |
-| **2D Exterior Rotation ($\mathbf{A}\wedge\mathbf{B}=\sin\theta\,\hat{\mathbf{I}}$)** | Oriented area & $R^2=-I_n$ (`Literature` / `LEAN ✓`) | Unitary gate rotors & Yang–Mills curvature $F_{\mu\nu}$ (`Literature`) | Spatial velocity share $v/c$ & bridge/RT min-cut area (`LEAN ✓` / `Literature`) | Mod-4 prime splitting $p=a^2+b^2$ & Frobenius rotation (`Literature`) | Irrotational guiding field ($P$ is a field, `MODEL`) & vorticity $\nabla\wedge\mathbf{u}$ (`Literature`) | Orthogonal evolution potential & Landauer bath heat (`LEAN ✓`) |
-| **Topological Seam & Frustration** | Hairy-ball $\chi(S^2)=2$ & $720^\circ$ defect (`Literature`) | Spinor $4\pi$ double cover & monopole charge (`LEAN ✓` / `Literature`) | Black-hole & $90^\circ$ horizon barrier (`MODEL`) | Pell $\pm 1$ seam (`LEAN ✓` / `Literature`) & semantic diagonal escape (`LEAN ✓`) | 3-SAT frustration, local $\mathrm{P} \neq \mathrm{NP}$ & 3D NS vortex stretching (`OPEN` / `LEAN ✓`) | Cassini $(-1)^{k+1}$ cross-round spiral offset (`LEAN ✓` / `MODEL`) |
-| **Finite Slice & Fairness** | Gram elliptope $\det G > 0$ (`Literature`) | Complementary Pythagoras, no-cloning & CKW monogamy (`LEAN ✓` / `Literature`) | Null-cone rigidity & circuit min-depth (`LEAN ✓`) | Hilbert reciprocity $\prod_v (a,b)_v = +1$ (`Literature`) & finite prime sieves | Subexponential tensor seam beyond $2^{558}$ (`Literature`) | Internal phase $u \in E_\perp^3$, forgetting reset & torus ergodic holism (`LEAN ✓` / `MODEL`) |
-| **Ultimate Fixed Core** | Contractive fixed point | Operator = state $\cos\theta^* = \theta^*$ (`Literature` / `MODEL`) | Stationary action $\delta S = 0$ (`Literature`) | Riemann critical line $\sigma = 1/2$ (`OPEN`) | Forced / self-referential equilibrium | Meta-axiom $\psi = \psi(\psi)$, golden $\varphi$ (`LEAN ✓`) & spatial attractors (`MODEL`) |
+**Static Ambient Space**
+
+**Pure Geometry & Topology:**
+High-D orthogonal lattice / parallelizable spinor sphere
+
+**Quantum & Gauge Fields:**
+Timeless constraint $H\mathbf{\Psi}=0$ (`Literature`) & Gram ledger (`LEAN ✓`)
+
+**Relativity & Holographic Gravity:**
+Block-universe holographic bulk (`MODEL`)
+
+**Arithmetic Geometry & Number Theory:**
+Integer lattices & prime orthogonal axes $\{\vv{e}_p\}$ (`Literature`)
+
+**Complexity & Fluid Fields:**
+Idealized global field $P = NP$ (`MODEL`) / Arnold geodesics (`Literature`)
+
+**Observer & Soul Dynamics:**
+Timeless causal compatibility crystal (`MODEL`)
+
+**1D Inner Projection ($\mathbf{A}\cdot\mathbf{B}=\cos\theta$)**
+
+**Pure Geometry & Topology:**
+Idempotent ray $P^2=P$ (`LEAN ✓`)
+
+**Quantum & Gauge Fields:**
+Particle reading & rank-one Born weight (`LEAN ✓`)
+
+**Relativity & Holographic Gravity:**
+Proper-time rate $d\tau/dt$ & rest-mass self-locking (`Literature` / `MODEL`)
+
+**Arithmetic Geometry & Number Theory:**
+Quaternion trace filtering $\mathbb{Z}$ & elliptic Hasse trace $\cos\theta_p$ (`Literature`)
+
+**Complexity & Fluid Fields:**
+Polynomial verification along a 1D witness thread ($NP$ is a line, `MODEL`)
+
+**Observer & Soul Dynamics:**
+Zeckendorf discrete memory anchors (`LEAN ✓` / `MODEL`)
+
+**2D Exterior Rotation ($\mathbf{A}\wedge\mathbf{B}=\sin\theta\,\hat{\mathbf{I}}$)**
+
+**Pure Geometry & Topology:**
+Oriented area & $R^2=-I_n$ (`Literature` / `LEAN ✓`)
+
+**Quantum & Gauge Fields:**
+Unitary gate rotors & Yang–Mills curvature $F_{\mu\nu}$ (`Literature`)
+
+**Relativity & Holographic Gravity:**
+Spatial velocity share $v/c$ & bridge/RT min-cut area (`LEAN ✓` / `Literature`)
+
+**Arithmetic Geometry & Number Theory:**
+Mod-4 prime splitting $p=a^2+b^2$ & Frobenius rotation (`Literature`)
+
+**Complexity & Fluid Fields:**
+Irrotational guiding field ($P$ is a field, `MODEL`) & vorticity $\nabla\wedge\mathbf{u}$ (`Literature`)
+
+**Observer & Soul Dynamics:**
+Orthogonal evolution potential & Landauer bath heat (`LEAN ✓`)
+
+**Topological Seam & Frustration**
+
+**Pure Geometry & Topology:**
+Hairy-ball $\chi(S^2)=2$ & $720^\circ$ defect (`Literature`)
+
+**Quantum & Gauge Fields:**
+Spinor $4\pi$ double cover & monopole charge (`LEAN ✓` / `Literature`)
+
+**Relativity & Holographic Gravity:**
+Black-hole & $90^\circ$ horizon barrier (`MODEL`)
+
+**Arithmetic Geometry & Number Theory:**
+Pell $\pm 1$ seam (`LEAN ✓` / `Literature`) & semantic diagonal escape (`LEAN ✓`)
+
+**Complexity & Fluid Fields:**
+3-SAT frustration, local $\mathrm{P} \neq \mathrm{NP}$ & 3D NS vortex stretching (`OPEN` / `LEAN ✓`)
+
+**Observer & Soul Dynamics:**
+Cassini $(-1)^{k+1}$ cross-round spiral offset (`LEAN ✓` / `MODEL`)
+
+**Finite Slice & Fairness**
+
+**Pure Geometry & Topology:**
+Gram elliptope $\det G > 0$ (`Literature`)
+
+**Quantum & Gauge Fields:**
+Complementary Pythagoras, no-cloning & CKW monogamy (`LEAN ✓` / `Literature`)
+
+**Relativity & Holographic Gravity:**
+Null-cone rigidity & circuit min-depth (`LEAN ✓`)
+
+**Arithmetic Geometry & Number Theory:**
+Hilbert reciprocity $\prod_v (a,b)_v = +1$ (`Literature`) & finite prime sieves
+
+**Complexity & Fluid Fields:**
+Subexponential tensor seam beyond $2^{558}$ (`Literature`)
+
+**Observer & Soul Dynamics:**
+Internal phase $u \in E_\perp^3$, forgetting reset & torus ergodic holism (`LEAN ✓` / `MODEL`)
+
+**Ultimate Fixed Core**
+
+**Pure Geometry & Topology:**
+Contractive fixed point
+
+**Quantum & Gauge Fields:**
+Operator = state $\cos\theta^* = \theta^*$ (`Literature` / `MODEL`)
+
+**Relativity & Holographic Gravity:**
+Stationary action $\delta S = 0$ (`Literature`)
+
+**Arithmetic Geometry & Number Theory:**
+Riemann critical line $\sigma = 1/2$ (`OPEN`)
+
+**Complexity & Fluid Fields:**
+Forced / self-referential equilibrium
+
+**Observer & Soul Dynamics:**
+Meta-axiom $\psi = \psi(\psi)$, golden $\varphi$ (`LEAN ✓`) & spatial attractors (`MODEL`)
+
 :::
 
 ---
@@ -216,16 +328,94 @@ Finally, we assemble the eight programs' partial truths, residual external-frame
 
 ![Orthogonal self-referential unified field and three-axis meta-unification compass](../assets/fig-32-unified-field-meta-compass.svg)
 
-| Historical Program | Partial Geometric Truth Captured (`Literature`) | Residual "Point $C$" or Axis Bias (`MODEL` Diagnosis) | Coordinate & Synthesis in the Orthogonal Self-Referential Field (`MODEL` + `LEAN ✓` + `Literature`) |
-| :--- | :--- | :--- | :--- |
-| **1. String / M-Theory** | Replaces 0D point particles with 2D oriented worldsheets | Assumes smooth continuum spheres, forcing $D=10/11$ anomaly constraints & $10^{500}$ vacua | Polyhedral slicing paired with UV coding cutoff (`MODEL` modeled on Zeckendorf `NoAdjacentOnes`, `LEAN ✓`); vacuum parameters map to internal phases $u \in E_\perp^3$, homogenized by Weyl ergodicity (`Literature`) |
-| **2. Loop Quantum Gravity** | Background-free discrete polyhedra & $\mathrm{SU}(2)$ 2D area quanta | Keeps pure exterior area while lacking co-originating matter & smooth low-energy limit | Restores Grade-0 inner product under complementary Pythagoras (`LEAN ✓`) so proper-time matter and entanglement area co-originate, recovering macroscopic metrics via rational refinement and thermal coarse-graining (`MODEL`) |
-| **3. AdS/CFT Tensor Networks** | Minimal-cut entanglement weaves spatial sections (bridge `LEAN ✓` / RT `Literature`) & depth grows volume | Stations an external observer on the infinity boundary of an $\Lambda < 0$ AdS box | Moves inside a bounded observer slice where the $90^\circ$ orthogonal equator models an endogenous positive-curvature de Sitter horizon ($\Lambda > 0$, `MODEL`) |
-| **4. Twistors & Amplituhedron** | Primacy of null rays & timeless positive-geometry scattering volumes | Restricted to asymptotic scattering boundaries without endogenous causal readout | Ambient parent is the timeless Gram elliptope $\det G \ge 0$ (`Literature`) & null-cone rigidity (`LEAN ✓`); finite memory windows slice out local causal order (`MODEL`) |
-| **5. Noncommutative Geometry & $E_8$** | First-order Dirac operator reconstructs metric; rank-8 even unimodular $E_8$ lattice | Mistakes dropped bivector area for ontological noncommutativity; static $E_8$ lacks observer slicing | Full complex Gram ledger is order-independent (`LEAN ✓`); Conway–Sloane Icosian bridge $2I \subset S^3 \subset \mathbb{H} \cong \mathcal{Cl}_{3,0}^+,\; 2I \subset \mathcal{I},\; (\mathcal{I}, Q) \cong E_8,\; \operatorname{Im}(\mathcal{I}) \subset \mathcal{I}$ (`Literature`) links rotors, $E_8$, and 6D quasicrystals |
-| **6. Wolfram Hypergraphs / Causal Sets** | Confluent causal invariance (order-independence) & bounded-observer coarse-graining | Rule–state split triggers rule-arbitrariness crisis and retreat into the Ruliad | Meta-axiom $\psi = \psi(\psi)$ (`MODEL`) fuses operator and state, paired with $R^2 = -I_n$ and finite contractive stabilization (`LEAN ✓`) plus the continuous cosine fixed-point bridge $\cos\theta^* = \theta^*$ (`Literature` / `MODEL`) |
-| **7. Langlands Program & HoTT** | Arithmetic–automorphic spectral duality; Univalence $(A\simeq B)\simeq(A=B)$ | Pure mathematical frameworks lacking thermodynamic observer realization | Euler prime axes ($\operatorname{Re}(s)>1$, `LEAN ✓`) & Hasse cosine traces link primes to rotations; Univalence encodes point-$C$-free pairwise equivalence (`MODEL`) |
-| **8. Entropic Gravity & Active Inference / Wheeler's `U`** | Horizon $\delta Q = T\delta S$ gravity; Markov blankets minimizing variational free energy | Lacks microscopic Clifford-lattice & no-adjacent-ones discrete coding substrate | Landauer balance (`LEAN ✓`) links orthogonal erasure to horizon thermodynamics; window boundary $\partial(W+u)$ serves as endogenous Markov blanket closing Wheeler's `U` (`MODEL`) |
+**1. String / M-Theory**
+
+**Partial Geometric Truth Captured (`Literature`):**
+Replaces 0D point particles with 2D oriented worldsheets
+
+**Residual "Point $C$" or Axis Bias (`MODEL` Diagnosis):**
+Assumes smooth continuum spheres, forcing $D=10/11$ anomaly constraints & $10^{500}$ vacua
+
+**Coordinate & Synthesis in the Orthogonal Self-Referential Field (`MODEL` + `LEAN ✓` + `Literature`):**
+Polyhedral slicing paired with UV coding cutoff (`MODEL` modeled on Zeckendorf `NoAdjacentOnes`, `LEAN ✓`); vacuum parameters map to internal phases $u \in E_\perp^3$, homogenized by Weyl ergodicity (`Literature`)
+
+**2. Loop Quantum Gravity**
+
+**Partial Geometric Truth Captured (`Literature`):**
+Background-free discrete polyhedra & $\mathrm{SU}(2)$ 2D area quanta
+
+**Residual "Point $C$" or Axis Bias (`MODEL` Diagnosis):**
+Keeps pure exterior area while lacking co-originating matter & smooth low-energy limit
+
+**Coordinate & Synthesis in the Orthogonal Self-Referential Field (`MODEL` + `LEAN ✓` + `Literature`):**
+Restores Grade-0 inner product under complementary Pythagoras (`LEAN ✓`) so proper-time matter and entanglement area co-originate, recovering macroscopic metrics via rational refinement and thermal coarse-graining (`MODEL`)
+
+**3. AdS/CFT Tensor Networks**
+
+**Partial Geometric Truth Captured (`Literature`):**
+Minimal-cut entanglement weaves spatial sections (bridge `LEAN ✓` / RT `Literature`) & depth grows volume
+
+**Residual "Point $C$" or Axis Bias (`MODEL` Diagnosis):**
+Stations an external observer on the infinity boundary of an $\Lambda < 0$ AdS box
+
+**Coordinate & Synthesis in the Orthogonal Self-Referential Field (`MODEL` + `LEAN ✓` + `Literature`):**
+Moves inside a bounded observer slice where the $90^\circ$ orthogonal equator models an endogenous positive-curvature de Sitter horizon ($\Lambda > 0$, `MODEL`)
+
+**4. Twistors & Amplituhedron**
+
+**Partial Geometric Truth Captured (`Literature`):**
+Primacy of null rays & timeless positive-geometry scattering volumes
+
+**Residual "Point $C$" or Axis Bias (`MODEL` Diagnosis):**
+Restricted to asymptotic scattering boundaries without endogenous causal readout
+
+**Coordinate & Synthesis in the Orthogonal Self-Referential Field (`MODEL` + `LEAN ✓` + `Literature`):**
+Ambient parent is the timeless Gram elliptope $\det G \ge 0$ (`Literature`) & null-cone rigidity (`LEAN ✓`); finite memory windows slice out local causal order (`MODEL`)
+
+**5. Noncommutative Geometry & $E_8$**
+
+**Partial Geometric Truth Captured (`Literature`):**
+First-order Dirac operator reconstructs metric; rank-8 even unimodular $E_8$ lattice
+
+**Residual "Point $C$" or Axis Bias (`MODEL` Diagnosis):**
+Mistakes dropped bivector area for ontological noncommutativity; static $E_8$ lacks observer slicing
+
+**Coordinate & Synthesis in the Orthogonal Self-Referential Field (`MODEL` + `LEAN ✓` + `Literature`):**
+Full complex Gram ledger is order-independent (`LEAN ✓`); Conway–Sloane Icosian bridge $2I \subset S^3 \subset \mathbb{H} \cong \mathcal{Cl}_{3,0}^+,\; 2I \subset \mathcal{I},\; (\mathcal{I}, Q) \cong E_8,\; \operatorname{Im}(\mathcal{I}) \subset \mathcal{I}$ (`Literature`) links rotors, $E_8$, and 6D quasicrystals
+
+**6. Wolfram Hypergraphs / Causal Sets**
+
+**Partial Geometric Truth Captured (`Literature`):**
+Confluent causal invariance (order-independence) & bounded-observer coarse-graining
+
+**Residual "Point $C$" or Axis Bias (`MODEL` Diagnosis):**
+Rule–state split triggers rule-arbitrariness crisis and retreat into the Ruliad
+
+**Coordinate & Synthesis in the Orthogonal Self-Referential Field (`MODEL` + `LEAN ✓` + `Literature`):**
+Meta-axiom $\psi = \psi(\psi)$ (`MODEL`) fuses operator and state, paired with $R^2 = -I_n$ and finite contractive stabilization (`LEAN ✓`) plus the continuous cosine fixed-point bridge $\cos\theta^* = \theta^*$ (`Literature` / `MODEL`)
+
+**7. Langlands Program & HoTT**
+
+**Partial Geometric Truth Captured (`Literature`):**
+Arithmetic–automorphic spectral duality; Univalence $(A\simeq B)\simeq(A=B)$
+
+**Residual "Point $C$" or Axis Bias (`MODEL` Diagnosis):**
+Pure mathematical frameworks lacking thermodynamic observer realization
+
+**Coordinate & Synthesis in the Orthogonal Self-Referential Field (`MODEL` + `LEAN ✓` + `Literature`):**
+Euler prime axes ($\operatorname{Re}(s)>1$, `LEAN ✓`) & Hasse cosine traces link primes to rotations; Univalence encodes point-$C$-free pairwise equivalence (`MODEL`)
+
+**8. Entropic Gravity & Active Inference / Wheeler's `U`**
+
+**Partial Geometric Truth Captured (`Literature`):**
+Horizon $\delta Q = T\delta S$ gravity; Markov blankets minimizing variational free energy
+
+**Residual "Point $C$" or Axis Bias (`MODEL` Diagnosis):**
+Lacks microscopic Clifford-lattice & no-adjacent-ones discrete coding substrate
+
+**Coordinate & Synthesis in the Orthogonal Self-Referential Field (`MODEL` + `LEAN ✓` + `Literature`):**
+Landauer balance (`LEAN ✓`) links orthogonal erasure to horizon thermodynamics; window boundary $\partial(W+u)$ serves as endogenous Markov blanket closing Wheeler's `U` (`MODEL`)
+
 :::
 
 What gives this architecture its enduring beauty is **radical parsimony**: not one ad hoc particle or artificial patch was invented along the way—only the single act of "two entities meeting and measuring each other fairly," carried to its ultimate conclusion. Folded inward, it condenses into the serene fixed point of self-reference; unfolded outward, it becomes starlight gravity, gauge waves, prime spectra, and the ten-thousand-mile road walked by every finite soul through the timeless field.
