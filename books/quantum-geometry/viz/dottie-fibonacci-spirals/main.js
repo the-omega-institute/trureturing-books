@@ -707,9 +707,70 @@
   }
 
   /* ---------- Panel: 1D Additive vs 2D Pythagorean Unit-Circle Conservation ---------- */
+  const ONE_D = '1D: φ⁻¹ + φ⁻² = 1';
+  // The exact amber readout above the unit bar: x_k of the reciprocal orbit (a start of 0 reads the orbit started at 1).
+  const barTag = (x0c, k, rat) => (x0c === 0 ? `x${sub(k)}(x₀=1)=${rat}` : `x${sub(k)}=${rat}`);
+  // Widest painted readout over every supported start (the #x0 control's own range) and every step k = 0 … KMAX:
+  // on the bar (right-aligned at its end) and past it (the short "> 1" form). Depends only on the font, so cached by it.
+  const widestTags = new Map();
+  function widestBarTags(ctx) {
+    if (widestTags.has(ctx.font)) return widestTags.get(ctx.font);
+    const el = $('x0'), c0 = Math.round(+el.min * 100), c1 = Math.round(+el.max * 100), dc = Math.max(1, Math.round(+el.step * 100));
+    const w = { on: 0, off: 0 };
+    for (let c = c0; c <= c1; c += dc) {
+      let p = BigInt(c === 0 ? 100 : c), q = 100n;
+      { const g = gcdB(p, q); p /= g; q /= g; }
+      for (let k = 0; k <= KMAX; k++) {
+        const t = barTag(c, k, `${p}/${q}`);
+        if (p > q) w.off = Math.max(w.off, ctx.measureText(`${t} > 1`).width);
+        else w.on = Math.max(w.on, ctx.measureText(t).width);
+        [p, q] = [q, p + q];
+      }
+    }
+    widestTags.set(ctx.font, w);
+    return w;
+  }
+
   function drawConservationPanel(ctx, rect, lw) {
     const pad = TRV.thumbMode ? [18, 18, 18, 18] : [24, 18, 24, 22];
-    const B = equalBox(rect, [-0.08, 1.14], [-0.12, 1.42], pad);
+    const xr = [-0.08, 1.14], yr = [-0.12, 1.42];
+    const barHOf = (b) => Math.max(7 * lw, 0.055 * b.scale);
+    let B = equalBox(rect, xr, yr, pad);
+    // Label lines above the unit bar. Line 1 (bottom baseline 3px above the bar) holds the 1D statement at the bar start
+    // and, when it fits to the right of the statement, the amber readout; a readout that does not fit there goes on
+    // line 2 directly above, so it is never painted over the statement. Every glyph of a line lies inside its 10px data
+    // font box above a 'bottom' baseline, so that box height (lineH) spaces the lines and sizes the room they need.
+    let lineH = 0, twoLines = false, w1D = 0;
+    if (!TRV.thumbMode) {
+      ctx.font = font(10, 'data', 600);
+      ctx.textBaseline = 'bottom';
+      lineH = ctx.measureText('1D').fontBoundingBoxAscent;
+      w1D = ctx.measureText(ONE_D).width;
+      ctx.font = font(9.5, 'data', 600);
+      const wTag = widestBarTags(ctx);
+      // every supported readout fits on line 1 of box b: on the bar it ends at the bar end, past it the right panel edge
+      const oneLine = (b) => {
+        const minLeft = b.X(0) + w1D + 6;
+        return b.X(1) - wTag.on >= minLeft && b.bx + b.bw - 4 * lw - wTag.off >= minLeft;
+      };
+      const room = (b) => b.Y(1.25) - barHOf(b) / 2 - b.by;
+      // The room is a property of the panel and the font, not of the state, so the panel never rescales while stepping.
+      // Where the default window lacks it, the window top is raised just enough (room grows with it), so the shared 1:1
+      // scale shrinks a little instead of the clip cutting the glyph tops.
+      const fit = (need) => {
+        if (room(B) >= need) return B;
+        let lo = yr[1], hi = 2.6;
+        if (room(equalBox(rect, xr, [yr[0], hi], pad)) < need) return B;
+        for (let i = 0; i < 40; i++) {
+          const mid = (lo + hi) / 2;
+          if (room(equalBox(rect, xr, [yr[0], mid], pad)) >= need) hi = mid; else lo = mid;
+        }
+        return equalBox(rect, xr, [yr[0], hi], pad);
+      };
+      const one = fit(3 + lineH + 2 * lw);
+      twoLines = !oneLine(B) || !oneLine(one);
+      B = twoLines ? fit(3 + 2 * lineH + 2 + 2 * lw) : one;
+    }
     const emph = S.focus === 'conservation';
 
     ctx.save();
@@ -732,7 +793,7 @@
     ctx.clip();
 
     // 1. Top 1D flat unit bar at yBar = 1.25, sharing exact x ∈ [0, 1] scale!
-    const yBar = 1.25, barH = Math.max(7 * lw, 0.055 * B.scale);
+    const yBar = 1.25, barH = barHOf(B);
     const pyBar = B.Y(yBar) - barH / 2;
     const x0P = B.X(0), xSplit = B.X(IPHId), x1P = B.X(1);
 
@@ -771,24 +832,24 @@
       ctx.textBaseline = 'bottom';
       ctx.fillStyle = P.ink;
       ctx.textAlign = 'left';
-      ctx.fillText('1D: φ⁻¹ + φ⁻² = 1', x0P, pyBar - 3);
-      const w1D = ctx.measureText('1D: φ⁻¹ + φ⁻² = 1').width;
-      let fibTag = S.x0c === 0
-        ? `x${sub(kBar)}(x₀=1)=${Of.rationals[Math.min(kBar, KMAX)]}`
-        : `x${sub(kBar)}=${Of.rationals[Math.min(kBar, KMAX)]}`;
+      ctx.fillText(ONE_D, x0P, pyBar - 3);
+      const fibTag = barTag(S.x0c, kBar, Of.rationals[Math.min(kBar, KMAX)]);
       ctx.font = font(9.5, 'data', 600);
       ctx.fillStyle = P.amber;
       ctx.textAlign = 'right';
-      // off the bar: the tag says so and ends above the arrow, clear of the 1D statement (short form when cramped)
-      let tagX = x1P;
-      if (offBar) {
-        const minLeft = x0P + w1D + 6, right = B.bx + B.bw - 4 * lw;
+      // On the bar the readout ends at the bar end; off the bar it says so and ends above the arrow (short form when
+      // cramped). It stays on line 1 when it clears the 1D statement there, otherwise it takes line 2 above it.
+      const right = B.bx + B.bw - 4 * lw;
+      const layout = (minLeft) => {
+        if (!offBar) return { t: fibTag, x: x1P, ok: x1P - ctx.measureText(fibTag).width >= minLeft };
         const place = (t) => Math.min(right, Math.max(tipX + 2 * lw, minLeft + ctx.measureText(t).width));
-        const full = `${fibTag} > 1${L(' 尺外', ' off-scale')}`;
-        fibTag = place(full) - ctx.measureText(full).width >= minLeft ? full : `${fibTag} > 1`;
-        tagX = place(fibTag);
-      }
-      ctx.fillText(fibTag, tagX, pyBar - 3);
+        const full = `${fibTag} > 1${L(' 尺外', ' off-scale')}`, short = `${fibTag} > 1`;
+        const t = place(full) - ctx.measureText(full).width >= minLeft ? full : short;
+        return { t, x: place(t), ok: place(t) - ctx.measureText(t).width >= minLeft };
+      };
+      let row = layout(x0P + w1D + 6), yTag = pyBar - 3;
+      if (!row.ok && twoLines) { row = layout(B.bx + 2 * lw); yTag -= lineH + 2; }
+      ctx.fillText(row.t, row.x, yTag);
       ctx.font = font(10, 'data', 600);
       ctx.textBaseline = 'top';
       ctx.fillStyle = P.cyan;
