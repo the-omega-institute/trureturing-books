@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch36-factor-through" data-lang="en" viewBox="0 0 460 300" width="460" height="300" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="Three rows of points. The top row is the twelve digit positions of 0.142857 142857, each labelled with its digit. Grey lines take position n to the class n mod 6 in the middle row; each class catches exactly two positions, and they carry the same digit. The fibre of class 3 (positions 3 and 9, both 2) is amber. Arrows then take each class to one digit in the bottom row. At the top: target = factor ∘ readout.">
+<title>Three rows of points. The top row is the twelve digit positions of 0.142857 142857, each labelled with its digit. Grey lines take position n to the class n mod 6 in the middle row; each class catches exactly two positions, and they carry the same digit. The fibre of class 3 (positions 3 and 9, both 2) is amber. Arrows then take each class to one digit in the bottom row. At the top: target = factor ∘ readout.</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<text class="tf-ink" x="230" y="26" font-size="15" text-anchor="middle" font-weight="600">target = factor ∘ readout</text>
+<text class="tf-dim" x="14" y="88.68" font-size="13">position <tspan font-style="italic">n</tspan></text>
+<text class="tf-dim" x="14" y="182.68" font-size="13"><tspan font-style="italic">n</tspan> mod 6</text>
+<text class="tf-dim" x="14" y="266.68" font-size="13">digit</text>
+<line x1="104" y1="84" x2="104" y2="178" class="ts-dim" stroke-width="1.2" fill="none"/>
+<line x1="134" y1="84" x2="134" y2="178" class="ts-dim" stroke-width="1.2" fill="none"/>
+<line x1="164" y1="84" x2="164" y2="178" class="ts-amber" stroke-width="2.2" fill="none"/>
+<line x1="194" y1="84" x2="194" y2="178" class="ts-dim" stroke-width="1.2" fill="none"/>
+<line x1="224" y1="84" x2="224" y2="178" class="ts-dim" stroke-width="1.2" fill="none"/>
+<line x1="254" y1="84" x2="254" y2="178" class="ts-dim" stroke-width="1.2" fill="none"/>
+<line x1="284" y1="84" x2="104" y2="178" class="ts-dim" stroke-width="1.2" fill="none"/>
+<line x1="314" y1="84" x2="134" y2="178" class="ts-dim" stroke-width="1.2" fill="none"/>
+<line x1="344" y1="84" x2="164" y2="178" class="ts-amber" stroke-width="2.2" fill="none"/>
+<line x1="374" y1="84" x2="194" y2="178" class="ts-dim" stroke-width="1.2" fill="none"/>
+<line x1="404" y1="84" x2="224" y2="178" class="ts-dim" stroke-width="1.2" fill="none"/>
+<line x1="434" y1="84" x2="254" y2="178" class="ts-dim" stroke-width="1.2" fill="none"/>
+<line x1="104" y1="186" x2="104" y2="237.2" class="ts-ink" stroke-width="1.8" fill="none"/>
+<path d="M104 244 L100.64 236 L107.36 236Z" class="tf-ink"/>
+<text class="tf-ink" x="104" y="267.76" font-size="16" text-anchor="middle" font-weight="600">1</text>
+<circle cx="104" cy="178" r="5" class="ts-bg tf-ink" stroke-width="1.4"/>
+<text class="tf-dim ts-bg" x="94" y="184.68" font-size="13" text-anchor="end" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">1</text>
+<line x1="134" y1="186" x2="134" y2="237.2" class="ts-ink" stroke-width="1.8" fill="none"/>
+<path d="M134 244 L130.64 236 L137.36 236Z" class="tf-ink"/>
+<text class="tf-ink" x="134" y="267.76" font-size="16" text-anchor="middle" font-weight="600">4</text>
+<circle cx="134" cy="178" r="5" class="ts-bg tf-ink" stroke-width="1.4"/>
+<text class="tf-dim ts-bg" x="124" y="184.68" font-size="13" text-anchor="end" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">2</text>
+<line x1="164" y1="186" x2="164" y2="237.2" class="ts-amber" stroke-width="1.8" fill="none"/>
+<path d="M164 244 L160.64 236 L167.36 236Z" class="tf-amber"/>
+<text class="tf-amber" x="164" y="267.76" font-size="16" text-anchor="middle" font-weight="600">2</text>
+<circle cx="164" cy="178" r="5" class="ts-bg tf-amber" stroke-width="1.4"/>
+<text class="tf-dim ts-bg" x="154" y="184.68" font-size="13" text-anchor="end" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">3</text>
+<line x1="194" y1="186" x2="194" y2="237.2" class="ts-ink" stroke-width="1.8" fill="none"/>
+<path d="M194 244 L190.64 236 L197.36 236Z" class="tf-ink"/>
+<text class="tf-ink" x="194" y="267.76" font-size="16" text-anchor="middle" font-weight="600">8</text>
+<circle cx="194" cy="178" r="5" class="ts-bg tf-ink" stroke-width="1.4"/>
+<text class="tf-dim ts-bg" x="184" y="184.68" font-size="13" text-anchor="end" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">4</text>
+<line x1="224" y1="186" x2="224" y2="237.2" class="ts-ink" stroke-width="1.8" fill="none"/>
+<path d="M224 244 L220.64 236 L227.36 236Z" class="tf-ink"/>
+<text class="tf-ink" x="224" y="267.76" font-size="16" text-anchor="middle" font-weight="600">5</text>
+<circle cx="224" cy="178" r="5" class="ts-bg tf-ink" stroke-width="1.4"/>
+<text class="tf-dim ts-bg" x="214" y="184.68" font-size="13" text-anchor="end" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">5</text>
+<line x1="254" y1="186" x2="254" y2="237.2" class="ts-ink" stroke-width="1.8" fill="none"/>
+<path d="M254 244 L250.64 236 L257.36 236Z" class="tf-ink"/>
+<text class="tf-ink" x="254" y="267.76" font-size="16" text-anchor="middle" font-weight="600">7</text>
+<circle cx="254" cy="178" r="5" class="ts-bg tf-ink" stroke-width="1.4"/>
+<text class="tf-dim ts-bg" x="244" y="184.68" font-size="13" text-anchor="end" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">0</text>
+<circle cx="104" cy="84" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<text class="tf-ink" x="104" y="68" font-size="14" text-anchor="middle" font-weight="600">1</text>
+<circle cx="134" cy="84" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<text class="tf-ink" x="134" y="68" font-size="14" text-anchor="middle" font-weight="600">4</text>
+<circle cx="164" cy="84" r="4.2" class="ts-bg tf-amber" stroke-width="1.4"/>
+<text class="tf-amber" x="164" y="68" font-size="14" text-anchor="middle" font-weight="600">2</text>
+<circle cx="194" cy="84" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<text class="tf-ink" x="194" y="68" font-size="14" text-anchor="middle" font-weight="600">8</text>
+<circle cx="224" cy="84" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<text class="tf-ink" x="224" y="68" font-size="14" text-anchor="middle" font-weight="600">5</text>
+<circle cx="254" cy="84" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<text class="tf-ink" x="254" y="68" font-size="14" text-anchor="middle" font-weight="600">7</text>
+<circle cx="284" cy="84" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<text class="tf-ink" x="284" y="68" font-size="14" text-anchor="middle" font-weight="600">1</text>
+<circle cx="314" cy="84" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<text class="tf-ink" x="314" y="68" font-size="14" text-anchor="middle" font-weight="600">4</text>
+<circle cx="344" cy="84" r="4.2" class="ts-bg tf-amber" stroke-width="1.4"/>
+<text class="tf-amber" x="344" y="68" font-size="14" text-anchor="middle" font-weight="600">2</text>
+<circle cx="374" cy="84" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<text class="tf-ink" x="374" y="68" font-size="14" text-anchor="middle" font-weight="600">8</text>
+<circle cx="404" cy="84" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<text class="tf-ink" x="404" y="68" font-size="14" text-anchor="middle" font-weight="600">5</text>
+<circle cx="434" cy="84" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<text class="tf-ink" x="434" y="68" font-size="14" text-anchor="middle" font-weight="600">7</text>
+<text class="tf-dim ts-bg" x="438" y="131" font-size="13" text-anchor="end" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">readout</text>
+<text class="tf-dim" x="268" y="224" font-size="13">factor</text>
+</svg>
