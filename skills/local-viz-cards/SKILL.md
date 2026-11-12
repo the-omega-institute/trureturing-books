@@ -34,13 +34,13 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `spatial-attractor-deja-vu` | 忘掉起点，轨道还是落回同一对翅膀，一次次经过同一处 | `butterfly` `forget` `return` `shrink` `sheet` `dimension` `fixed` `cycle` |
 | `golden-cut-observer` | 窗口挪一挪，贴边的点翻转，深处的点留在原地 | `cut` `phason` `empire` `cassini` `returns` `narrow` `window` `edge` |
 | `repeated-projection` | 投一次，箭头只剩线上的影子；再投多少次，影子都不再动 | `once` `twice` `fixed` `perp` `sum` |
-| `bloch-noise` | 噪声把球往里压、往北推，却从不把球里的两个点拉开 | `shorten` `pinch` `dephase` `amp` `wide` `depol` `distance` `centre` |
+| `bloch-noise` | 噪声把球往里压、往北推，却从不把球里的两个点拉开 | `shorten` `pinch` `dephase` `amp` `wide` `distance` `centre` |
 | `double-slit-marker` | 路径记得越清，条纹越淡；两者落在同一个圆上，怎么读标记可以等落点到了再定 | `wave` `partial` `which` `delayed` `erase` `mixed` |
 | `erasure-ledger` | 转动不记账；抹掉横着的那一份，系统的熵就多出这一份；把比特复位，这笔熵要化成热付给环境，只能多付，不能少付 | `pinch` `steps` `cycle` `bath` `copy` |
 | `speed-limit-zeno` | 翻过 90° 的墙快不过能量涨落；看得越勤越走不掉，可平均还是两步回来一次 | `equal` `three` `unequal` `strobe4` `strobe16` `mean` |
 | `two-angle-addressing` | 先倾一次、再拧一次，就到得了球面上任何一点；两根轴斜着，只是要多转几次 | `tilt` `address` `pole` `skew` `collinear` `narrow` `three` `six` |
 | `berry-loop` | 走一圈回来，箭头转过圈住的面积，内积连乘的相位只记下一半；整颗球上总有梳不平的一点 | `order` `octant` `equator` `reverse` `comb` |
-| `pulse-area-virtual-z` | 包络下有多少面积，态就转多大的角；绕竖轴的那一转不发脉冲，只改后面脉冲的相位 | `carrier` `quarter` `gauss` `half` `detune` `order` `vz` `sign` |
+| `pulse-area-virtual-z` | 包络下有多少面积，态就转多大的角；绕竖轴的那一转不发脉冲，只改后面脉冲的相位 | `carrier` `quarter` `gauss` `detune` `order` `vz` `sign` |
 | `parameter-shift` | 左右各转 90° 取两个值，两值之差的一半正好是这一点的斜率；小步长差分总差一点，还把散粒噪声放大 | `shift` `anywhere` `step` `noise` |
 | `equator-concentration` | 维数越高，球面上的点越挤在垂直于测量轴的赤道上，宽度按 1/√d 缩小 | `three` `width` `bound` `twenty` |
 | `pairwise-shutter` | 快门每次只报“过”或“不过”；按得越多，“过”的比例越贴近两支箭头的夹角定下的权重 | `clicks` `sixty` `right` `same` `opposite` `turn` `random` |
@@ -155,12 +155,15 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第一章 | §1.2 快门插图 `ch01-shutter` 之后、“全能属性账本”一段之前 | `pairwise-shutter` · `clicks` |
 | 第二章 | §2.1 插图 `ch02-cut-c` 之后、“矩阵的迹”一段之前 | `pairwise-shutter` · `sixty` |
 | 第二章 | §2.1 “矩阵的迹”一段之后、定义 `def-born-probability` 之前 | `pairwise-shutter` · `turn` |
+| 第二章 | §2.3 “这行等式”之后的列表第 1 条（同向共线）之后、第 2 条之前 | `pairwise-shutter` · `same` |
+| 第二章 | §2.3 同一列表第 3 条（球面反向）之后、“为了方便后续章节随时查核”之前 | `pairwise-shutter` · `opposite` |
 | 第二章 | §2.3 半角换算表之后 | `qubit-geometry` · `line` |
 | 第二章 | §2.3 `qubit-geometry` · `line` 之后、“上面的表是逐个角度算的”之前 | `pairwise-shutter` · `right` |
 | 第二章 | §2.3 “单比特是唯一‘公平’的情形”一段之后 | `pairwise-shutter` · `random` |
 | 第二章 | 文献注记 `rem-gleason-literature` 之后、转入第三章之前 | `pairwise-shutter` 完整实验室 |
 | 第三章 | §3.1 题记“给混沌命名……”之后、存在线插图之前 | `repeated-projection` · `twice` |
 | 第三章 | §3.1 定理 `thm-unread-fixed-iff` 之后的解读段末 | `repeated-projection` · `fixed` |
+| 第三章 | §3.2 单比特勾股算例“反之，当态纯粹躺在赤道平面上……必然归零”之后、“波与粒从不打架”之前 | `repeated-projection` · `perp` |
 | 第三章 | §3.2 单比特勾股算例末（“两条直角边”） | `repeated-projection` · `sum` |
 | 第三章 | 章末、转入第四章之前 | `repeated-projection` · `once`，随后完整实验室 |
 | 第四章 | §4.1 局部布洛赫向量 $(\cos\theta_{\mathrm{env}}, 0, 0)$ 一段之后 | `bloch-noise` · `shorten` |
@@ -180,10 +183,11 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第六章 | §6.1 末 | `qubit-geometry` · `half` |
 | 第六章 | §6.3 可见度 $V$ 与可区分度 $D$ 的两条定义之后 | `double-slit-marker` · `partial` |
 | 第六章 | §6.3 定理 `thm-record-coherence-complementarity` 的证明之后 | `double-slit-marker` · `which` |
+| 第六章 | §6.3 `which` 之后一句（“性质 3 是另一端”）之后 | `double-slit-marker` · `wave` |
+| 第六章 | §6.3 `wave` 之后一句（“回到 6.1 节的那一颗比特”）之后、捏合推论引言之前 | `qubit-geometry` · `area` |
 | 第六章 | §6.3 惠勒延迟选择算例 `ex-wheeler-delayed-choice-tradeoff` 之后、文献注记之前 | `double-slit-marker` · `delayed`、`erase` |
 | 第六章 | §6.3 文献注记 `rem-englert-greenberger-literature` 之后 | `double-slit-marker` · `mixed` |
-| 第六章 | §6.3 末 | `qubit-geometry` · `area` |
-| 第六章 | §6.3 末（`qubit-geometry` · `area` 之后、§6.4 之前） | `double-slit-marker` 完整实验室 |
+| 第六章 | §6.3 末（`mixed` 之后、§6.4 之前） | `double-slit-marker` 完整实验室 |
 | 第六章 | §6.4 | `qubit-geometry` 完整实验室 |
 | 第七章 | §7.2 例 `ex-orthogonalization-times` 之前（“把它换成具体哈密顿量的能量涨落”一段末） | `speed-limit-zeno` · `equal` |
 | 第七章 | §7.2 例 `ex-orthogonalization-times` 之后 | `speed-limit-zeno` · `three`、`unequal` |
@@ -245,12 +249,13 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第十四章 | 例 `ex-repetition-code-syndrome` 之后、文献注记 `rem-error-correction-anyons-literature` 之前 | `syndrome-decoding` · `two`、`phase` |
 | 第十四章 | 文献注记 `rem-error-correction-anyons-literature` 之后、转入第十五章之前 | `syndrome-decoding` 完整实验室 |
 | 第十五章 | Grover 一节定理 `thm-grover-uniform-rotation` 的证明之后、三条边界之前 | `grover-reflections` · `mirrors` |
-| 第十五章 | Grover 一节末（三条边界列表之后、相位反冲一节之前） | `grover-reflections` · `over`、`sqrt`，随后完整实验室 |
+| 第十五章 | Grover 一节三条边界列表之后 | `grover-reflections` · `sqrt` |
+| 第十五章 | `sqrt` 之后一句（“整数步只能逼近 π/2”）之后 | `grover-reflections` · `over` |
+| 第十五章 | Grover 一节末（第十六章消除过冲一句之后、相位反冲一节之前） | `grover-reflections` 完整实验室 |
 | 第十五章 | 相位反冲一节开头一段（“相位齿轮”）之后 | `phase-gears` · `basis` |
 | 第十五章 | 命题 `prop-finite-character-cancellation` 的解读（相消与相长两条）之后、归一化提醒之前 | `phase-gears` · `cancel` |
 | 第十五章 | 文献注记 `rem-shor-divisibility-boundary-literature` 之后、四步算例之前 | `phase-gears` · `leak` |
-| 第十五章 | 例 `ex-grover-four-shor-fifteen` 之后、文献注记 `rem-grover-qft-shor-literature` 之前 | `grover-reflections` · `four`、`eight` |
-| 第十五章 | 例 `ex-grover-four-shor-fifteen` 之后（`grover-reflections` · `four`、`eight` 之后） | `phase-gears` · `four`、`read` |
+| 第十五章 | 例 `ex-grover-four-shor-fifteen` 之后，依次在回看第一步（$N = 4$、$N = 8$）、第三步（四根峰）与由峰读阶的四句话之后，文献注记 `rem-grover-qft-shor-literature` 之前 | `grover-reflections` · `four`、`eight`，`phase-gears` · `four`、`read`（各隔一句） |
 | 第十五章 | 章末文献注记 `rem-grover-qft-shor-literature` 之后、转入第十六章之前 | `phase-gears` 完整实验室 |
 | 第十六章 | 图上游走一节 $c_*$ 定义之后、“为了衡量 $n$ 步游走波函数”之前 | `walk-spreading` · `ten` |
 | 第十六章 | 引理 `lemma-symmetric-coin-walk` 的证明之后、“两条概念边界”列表之前 | `walk-spreading` · `coin`、`ring` |
@@ -266,7 +271,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第十七章 | 引理 `lemma-null-cone-spatial` 证明后的解读段（“双向卡尺”）之后 | `rapidity-lightcone` · `caliper` |
 | 第十七章 | §17.3 边界列表第 2 条（零锥保持与尺度归一化分离）之后、格言之前 | `rapidity-lightcone` · `cone`、`scale` |
 | 第十七章 | 文献注记 `rem-lorentz-rotor-literature` 之后、§17.4 之前 | `rapidity-lightcone` · `light` |
-| 第十七章 | 例 `ex-two-worldline-segments` 之后 | `rapidity-lightcone` · `twins`、`frames`，随后完整实验室 |
+| 第十七章 | 例 `ex-two-worldline-segments` 之后 | `rapidity-lightcone` · `twins` |
+| 第十七章 | `twins` 之后一句（“推到去程旅行者的参考系，再数一遍刻度”）之后 | `rapidity-lightcone` · `frames`，随后完整实验室 |
 | 第十八章 | 选定生成树一节规范变换公式之后、“为什么单个边相位……”一段之前 | `lattice-gauge-loop` · `twist` |
 | 第十八章 | 闭合回路一节列表第 1 条（弦的基本闭合回路）之后、第 2 条之前 | `lattice-gauge-loop` · `chord` |
 | 第十八章 | 闭合回路一节“开放树路径相位也……成为严格的规范不变量”一段之后 | `lattice-gauge-loop` · `anchor` |
@@ -276,7 +282,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第十九章 | 纠缠层级一节首段（“跨越接口的算子秩……随内部腿维数的乘积而增长”）之后、插图之前 | `layered-network-cut` · `one` |
 | 第十九章 | 纠缠层级一节插图解读段（MERA 瓶颈、一般网络最大流不一定等于最小割）之后 | `layered-network-cut` · `four` |
 | 第十九章 | 锥域一节“最小割公式自动脱去外层的 $3ac$”一段之后、推论 `cor-bridge-cone-mincut` 之前 | `eth-horizon-crossover` · `narrow` |
-| 第十九章 | 文献注记 `rem-ryu-takayanagi-literature` 之后、章末收束段之前 | `layered-network-cut` · `grow`、`two`，随后完整实验室 |
+| 第十九章 | 文献注记 `rem-ryu-takayanagi-literature` 之后 | `layered-network-cut` · `grow` |
+| 第十九章 | `grow` 之后一句（“区间不止一段时，候选割也不止一道”）之后、章末收束段之前 | `layered-network-cut` · `two`，随后完整实验室 |
 | 第二十章 | 定理 `thm-open-circuit-min-depth` 的证明之后、“请严格注意”一段之前 | `complexity-growth` · `floor` |
 | 第二十章 | 例 `ex-open-circuit-depths` 之后、§黑洞内部与复杂度—体积猜想之前 | `complexity-growth` · `eight` |
 | 第二十章 | 引理 `lemma-open-circuit-depth-refutation` 的证明之后、“必须严格声明”一段之前 | `complexity-growth` · `eleven` |
@@ -293,8 +300,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十二章 | §22.2 末 | `sphere-escape` · `euclid` |
 | 第二十二章 | 例 `ex-prime-log-orthogonality-and-sieve` 之后 | `euler-product-sieve` · `five`、`remainder` |
 | 第二十二章 | §22.3 “首项裂缝……生长之门”一段之后、`sphere-escape` · `thirteen` 之前 | `euler-product-sieve` · `thirtyone` |
-| 第二十二章 | §22.3 末（“素数有无穷多个”一段之后、格言之前） | `sphere-escape` · `thirteen` |
-| 第二十二章 | `sphere-escape` · `thirteen` 之后、§22.3 格言之前 | `euler-product-sieve` 完整实验室 |
+| 第二十二章 | §22.3 `thirtyone` 之后一句（“欧几里得的那一招”）之后、格言之前 | `sphere-escape` · `thirteen` |
+| 第二十二章 | §22.3 格言之后、§22.4 之前 | `euler-product-sieve` 完整实验室 |
 | 第二十三章 | §23.1 艾森斯坦整数环引言段（“让我们先考察复平面上最对称的二维晶格”）之后、Lean 模块说明之前 | `norm-lattice` · `hex` |
 | 第二十三章 | §23.1 末段（“同一颗六角范数球在不同斜交基底下的投影”）之后、§23.2 之前 | `norm-lattice` · `skew` |
 | 第二十三章 | 引理 `lem-qform-discriminant` 的证明之后、“由于剪切变换……”一段之前 | `norm-lattice` · `shear` |
@@ -307,7 +314,9 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十四章 | §24.3 推论 `cor-golden-fixed-point-unique` 的证明之后、“为什么是 1 + 1/x”一段之前 | `fixed-point-convergence` · `golden` |
 | 第二十四章 | §24.4 文献注记 `rem-banach-dottie-hairy-ball-literature` 之后、猜想 `conj-schanuel-dottie` 之前 | `sphere-escape` · `far` |
 | 第二十四章 | §24.4 末 | `sphere-escape` · `dottie` |
-| 第二十四章 | §24.5 文献注记 `rem-dottie-convergent-residual-literature` 之后、例 `ex-dottie-rate-newton-rational` 之前 | `fixed-point-convergence` · `rate`、`circle`、`newton` |
+| 第二十四章 | §24.5 三个问题列表第 1 条之后、第 2 条之前 | `fixed-point-convergence` · `rate` |
+| 第二十四章 | §24.5 三个问题列表第 2 条之后、第 3 条之前 | `fixed-point-convergence` · `newton` |
+| 第二十四章 | 文献注记 `rem-dottie-convergent-residual-literature` 之后“回到第一问的答案”一句之后、例 `ex-dottie-rate-newton-rational` 之前 | `fixed-point-convergence` · `circle` |
 | 第二十四章 | 例 `ex-dottie-rate-newton-rational` 之后、“最后一张表说明”一段之前 | `fixed-point-convergence` · `rational` |
 | 第二十四章 | “二十三等分的尺子……一千等分的尺子没有”一段之后、“有理读数永远对不准”之前 | `fixed-point-convergence` · `ruler`，随后完整实验室 |
 | 第二十五章 | §三比特刀片掩码一节的掩码表之后、“在这套 3 比特编码下”之前 | `blade-multiplication` · `square` |

@@ -411,7 +411,17 @@ Section 24.7 gives a typed reading of this aphorism: the function $\psi$ acts on
 The aphorism is stated; now let us do the arithmetic. The cosine table in [@ex-dottie-and-golden-iterations] lists only four rows, and the contraction constant $\sin 1 \approx 0.8415$ of [@rem-banach-dottie-hairy-ball-literature] is the worst case over the whole interval $[0, 1]$. Three questions are still open:
 
 1. Close to $\theta^*$, by how much does one press of the cosine key actually shrink the error?
+
+::: {.viz src="fixed-point-convergence" preset="rate" height="500"}
+**Each press multiplies the error by −0.674.** Taking the cosine again and again from $\theta_0 = 1$ while the view zooms with the error: zoomed in, the cyan curve lies on the magenta tangent, every turn has the same shape, and the ratio of successive turns tends to the slope of the tangent, $-\sin\theta^* \approx -0.674$, gentler than the global constant $-\sin 1 \approx -0.84$ of the dashed grey line (a literature result; see [@rem-dottie-convergent-residual-literature]).
+:::
+
 2. If the ruler reads not only the projection $\cos\theta$ but also the orthogonal component $\sin\theta$, how much faster does the loop close?
+
+::: {.viz src="fixed-point-convergence" preset="newton" height="500"}
+**Follow the tangent, double the digits.** Again from $\theta_0 = 1$, each step reads the height of the curve and then follows the magenta tangent to the grey line $y = x$. The view zooms along: within four steps its width falls from about $0.6$ to the order of $10^{-20}$, the error being roughly squared at each step; the plain iteration needs $115$ steps to match step $4$ (numerical check in [@ex-dottie-rate-newton-rational]).
+:::
+
 3. How close to $\cos q = q$ can a ruler with finitely many rational tick marks get?
 
 ::: {.figure src="ch24-three-speeds"}
@@ -476,16 +486,10 @@ $$
 for infinitely many denominators $b$: the seam narrows like the square of the denominator, yet never closes.
 :::
 
-::: {.viz src="fixed-point-convergence" preset="rate" height="500"}
-**Each press multiplies the error by −0.674.** Taking the cosine again and again from $\theta_0 = 1$ while the view zooms with the error: zoomed in, the cyan curve lies on the magenta tangent, every turn has the same shape, and the ratio of successive turns tends to the slope of the tangent, $-\sin\theta^* \approx -0.674$, gentler than the global constant $-\sin 1 \approx -0.84$ of the dashed grey line (a literature result; see [@rem-dottie-convergent-residual-literature]).
-:::
+Back to the answer to the first question: where the fixed point sits and how fast the loop closes are the two coordinates of one point $(\theta^*, \lambda)$ on the unit circle.
 
 ::: {.viz src="fixed-point-convergence" preset="circle" height="500"}
 **Where it stops, and how fast it closes.** The same cobweb with the unit circle added. On the circle sits $P = (\theta^*, \sin\theta^*)$: its cyan abscissa $\theta^*$ is where the cobweb closes in, and its magenta height $\lambda = \sin\theta^* \approx 0.674$ is the ratio by which each step shrinks the error, the size of the slope of the magenta tangent; $(\theta^*)^2 + \lambda^2 = 1$. For the existence and uniqueness of $\theta^*$ see [@thm-dottie-rational-inverse-endpoint].
-:::
-
-::: {.viz src="fixed-point-convergence" preset="newton" height="500"}
-**Follow the tangent, double the digits.** Again from $\theta_0 = 1$, each step reads the height of the curve and then follows the magenta tangent to the grey line $y = x$. The view zooms along: within four steps its width falls from about $0.6$ to the order of $10^{-20}$, the error being roughly squared at each step; the plain iteration needs $115$ steps to match step $4$ (numerical check in [@ex-dottie-rate-newton-rational]).
 :::
 
 ::: {.example #ex-dottie-rate-newton-rational title="Numerical Check of the True Contraction Rate, Newton's Quadratic Closure, and the Residuals of the Best Rational Readings"}

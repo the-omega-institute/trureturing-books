@@ -247,8 +247,17 @@ $$
 Every piece of the puzzle clicks into place:
 
 1. **Collinear alignment ($\theta = 0^\circ$)**: $\vv{a} \cdot \vv{b} = +1$, giving probability $\frac{1 + 1}{2} = 1$ (certain passage);
+
+::: {.viz src="pairwise-shutter" preset="same" height="500"}
+**Aligned: every shot passes.** The amber $B$ coincides with the cyan $A$ and the cyan stretch fills the whole diameter, weight $1$: every press of the shutter is a pass, every square is solid, and the thin curve sits on $1$ from the first shot.
+:::
+
 2. **Spatial orthogonality ($\theta = 90^\circ$, e.g., North $\lvert 0\rangle$ tested along East $\lvert +\rangle$)**: $\vv{a} \cdot \vv{b} = 0$, zero directional bias, giving the fair-coin midpoint $\frac{1 + 0}{2} = \frac{1}{2}$;
 3. **Spatial opposition ($\theta = 180^\circ$, e.g., North $\lvert 0\rangle$ tested along South $\lvert 1\rangle$)**: in three-dimensional space, two opposite outcomes point antipodally ($\theta = 180^\circ$, $\cos 180^\circ = -1$), whereas in probability and inner-product geometry, mutual exclusion requires zero overlap ($\cos 90^\circ = 0$). The affine rescaling $x \mapsto \frac{1 + x}{2}$ maps $[-1, +1]$ onto $[0, 1]$, which trigonometrically halves $\theta$ into $\cos^2(\theta/2)$!
+
+::: {.viz src="pairwise-shutter" preset="opposite" height="500"}
+**Opposite: not a single pass.** The amber $B$ sits opposite the cyan $A$ and the cyan stretch shrinks to a point, weight $0$: the shutter never passes, every square is hollow, and the thin curve sits on $0$ from the first shot.
+:::
 
 For ready reference in later chapters, the benchmark angles across both pictures are collected below:
 
