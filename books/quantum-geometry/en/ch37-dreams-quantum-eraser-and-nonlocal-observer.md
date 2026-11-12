@@ -148,7 +148,12 @@ Across the frozen joint-coherent-reversal observer-memory module of `trureturing
 2. **Explicit Two-Copy Certificate Contrasting Partial Obstruction Against Joint Restoration** ([`two_copy_joint_reversal_certificate`](lean:D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate)): Set $\rho = \mathrm{equalSuperpositionDensity} = \begin{pmatrix} 1/2 & 1/2 \\ 1/2 & 1/2 \end{pmatrix}$, define $\mathrm{phaseRecord}(i, a)$ to take $1$ at $(i=0, a=0)$, $i$ (`Complex.I`) at $(i=1, a=0)$, and $0$ at $a=1$, set $\mathrm{records} : \operatorname{Fin} 2 \to \mathrm{EnvironmentRecord}$ to two identical copies of $\mathrm{phaseRecord}$, and write $\mathrm{copyZero} = \{0\} \subseteq \operatorname{Fin} 2$. Evaluating off-diagonal entry $(0, 1)$ under `reverseChannelOn` yields all four exact identities:
 
    $$
-   \rho_{01} = \frac{1}{2}, \quad \operatorname{multiRecordChannel}(\mathrm{records}, \rho)_{01} = -\frac{1}{2}, \quad \operatorname{reverseChannelOn}\bigl(\{0\}, \mathrm{records}, \operatorname{multiRecordChannel}(\mathrm{records}, \rho)\bigr)_{01} = -\frac{i}{2}, \quad \operatorname{reverseChannelOn}\bigl(\operatorname{Finset.univ}, \mathrm{records}, \operatorname{multiRecordChannel}(\mathrm{records}, \rho)\bigr)_{01} = \frac{1}{2}.
+   \begin{aligned}
+   &\rho_{01} = \frac{1}{2}, \\
+    & \operatorname{multiRecordChannel}(\mathrm{records}, \rho)_{01} = -\frac{1}{2}, \\
+    & \operatorname{reverseChannelOn}\bigl(\{0\}, \mathrm{records}, \operatorname{multiRecordChannel}(\mathrm{records}, \rho)\bigr)_{01} = -\frac{i}{2}, \\
+    & \operatorname{reverseChannelOn}\bigl(\operatorname{Finset.univ}, \mathrm{records}, \operatorname{multiRecordChannel}(\mathrm{records}, \rho)\bigr)_{01} = \frac{1}{2}.
+   \end{aligned}
    $$
 :::
 
