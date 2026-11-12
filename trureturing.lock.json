@@ -3381,6 +3381,22 @@
       "line": 68,
       "signature": "theorem pinching_hilbert_schmidt_pythagorean (rho : QubitMatrix) : hilbertSchmidtInner rho rho = hilbertSchmidtInner (pinching rho) (pinching rho) + hilbertSchmidtInner (rho - pinching rho) (rho - pinching rho)"
     },
+    "D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredContraction.cyclic_future_kernel_eq_bot": {
+      "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredContraction",
+      "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.CyclicMonitoredContraction.cyclic_future_kernel_eq_bot",
+      "kind": "theorem",
+      "statement_id": "sha256:0fb6a694e7796081e5681b95c2177269cd9508ccd0dc04bcc111098f187f4313",
+      "line": 75,
+      "signature": "theorem cyclic_future_kernel_eq_bot (U : E ≃ₗᵢ[ℂ] E) (v : E) : (⨅ n : ℕ, LinearMap.ker ((cyclicClick U v).toLinearMap.comp ((cyclicStep U v).toLinearMap ^ n))) = ⊥"
+    },
+    "D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredPowerBound.cyclic_power_contraction": {
+      "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredPowerBound",
+      "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.CyclicMonitoredPowerBound.cyclic_power_contraction",
+      "kind": "theorem",
+      "statement_id": "sha256:544bab1da74377d730da774b8a4e819c2ae05ed8bd08302690f80efa5203f0e1",
+      "line": 61,
+      "signature": "theorem cyclic_power_contraction (U : E ≃ₗᵢ[ℂ] E) (v : E) (hv : ‖v‖ = 1) : ∃ N : ℕ, 1 ≤ N ∧ ∃ q : ℝ, 0 ≤ q ∧ q < 1 ∧ ‖cyclicStep U v ^ N‖ ≤ q"
+    },
     "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitoredHistory": {
       "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation",
       "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.MonitoredReturnConservation.monitoredHistory",

@@ -309,30 +309,42 @@ $$
 
 $C$ 是这条轨道张成的循环空间。下面两个有限维论证说明：要找永久不响的探测器方向，必须区分 $C$ 内外。
 
-::: {.remark #rem-monitored-cyclic-observability title="循环空间里没有永久暗态：有限维推导"}
-**文献结果，未在本书形式化。** 令 $T=(I-P_v)U$。$U$ 保持 $C$，$P_v$ 的像包含在 $C$ 中，因此 $T$ 与 $P_vU$ 均可限制为 $C\to C$ 上的算子
+::: {.proposition #rem-monitored-cyclic-observability title="循环空间里没有永久暗态" lean="D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredContraction.cyclic_future_kernel_eq_bot"}
+沿用上面的有限维复内积空间 $E$、幺正算子 $U$、任意向量 $v\in E$ 及循环空间 $C$。令 $T=(I-P_v)U$。$U$ 保持 $C$，$P_v$ 的像包含在 $C$ 中，因此 $T$ 与 $P_vU$ 均可限制为 $C\to C$ 上的算子
 
 $$
 A=T|_C,\qquad B=(P_vU)|_C.
 $$
 
-把所有将来都不产生点击的方向放在一起：
+则所有将来都不产生点击的方向组成零子空间：
 
 $$
-K=\bigcap_{n\in\mathbb N}\ker(BA^n).
+K=\bigcap_{n\in\mathbb N}\ker(BA^n)=\{0\}.
 $$
+:::
 
+::: proof
 若 $x\in K$，则 $Bx=0$，所以 $Ax=Ux$；把点击历史向前移一步又给出 $Ax\in K$。故 $U$ 保持 $K$。$U|_K$ 是有限维空间上的单射，因而满射，$U^{-1}$ 也保持 $K$。对任意 $x\in K$，可写成 $x=Uy$、$y\in K$，由 $By=P_vUy=0$ 得 $x\perp v$。再沿 $U^{-1}$ 迭代，便有 $x\perp U^nv$ 对每个 $n\ge0$ 成立。$x$ 同时属于这些向量张成的 $C$，只能为零：
 
 $$
 K=\{0\}.
 $$
 
-这段推导不要求 $v$ 是单位向量；$v=0$ 时 $C=\{0\}$。若不限制到实际循环空间，结论会失效：取 $U=I$、$v=e_1$，与 $e_1$ 正交的非零向量永远不会点击。这里讨论的是循环空间内的可观测性，还没有计算返回概率的无穷和。
+这段推导不要求 $v$ 是单位向量；$v=0$ 时 $C=\{0\}$。若不限制到实际循环空间，结论会失效：取 $U=I$、$v=e_1$，与 $e_1$ 正交的非零向量永远不会点击。这里讨论的是循环空间内的可观测性，还没有计算返回概率的无穷和。完整证明由 Lean 内核检查。
 :::
 
-::: {.remark #rem-monitored-cyclic-power-contraction title="没有永久暗态，为什么会在有限步后严格收缩？"}
-**文献结果，未在本书形式化。** 再设 $\norm v=1$，记 $d=\dim_{\mathbb C}C\ge1$。对 $x\in C$，投影的勾股分解与 $U$ 的等距性给出
+::: {.proposition #rem-monitored-cyclic-power-contraction title="实际循环监测算子的严格幂收缩" lean="D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredPowerBound.cyclic_power_contraction"}
+沿用 [@rem-monitored-cyclic-observability] 的有限维复内积空间 $E$、幺正算子 $U$、循环空间 $C$ 及其上的实际限制算子 $A=((I-P_v)U)|_C$，再设 $\norm v=1$。则存在 $N\in\mathbb N$ 与 $q\in\mathbb R$，使
+
+$$
+N\ge1,\qquad 0\le q<1,\qquad \norm{A^N}_{\mathrm{op}}\le q,
+$$
+
+其中范数是 $C\to C$ 上的算子范数。
+:::
+
+::: proof
+记 $d=\dim_{\mathbb C}C\ge1$。对 $x\in C$，投影的勾股分解与 $U$ 的等距性给出
 
 $$
 \norm{Ax}^2+\norm{Bx}^2=\norm{x}^2.
@@ -353,8 +365,10 @@ $$
 N\ge1,\qquad 0\le q<1,\qquad \norm{A^N}_{\mathrm{op}}\le q.
 $$
 
-紧致性在这里把“每个方向都有损失”变成“所有方向共享一个严格损失界”。这个界可以依赖于 $U,v$，并未给出对所有系统统一的收缩常数。关于监测返回的文献背景，见 Grünbaum、Velázquez、Werner 与 Werner，*Recurrence for discrete time unitary evolutions*，arXiv:1202.3903v3，Theorem 2。这两段作为有限维推导列出，不计入本书的 Lean 定理账本。
+紧致性在这里把“每个方向都有损失”变成“所有方向共享一个严格损失界”。形式证明通过正交坐标把 $A,B$ 化为保守的单通道矩阵系统，复用无暗空间的有限步收缩估计，取同样的 $N=d$ 与 $q=\norm{A^d}_{\mathrm{op}}$。完整证明由 Lean 内核检查。
 :::
+
+这个界可以依赖于 $U,v$，并未给出对所有系统统一的收缩常数。关于监测返回的文献背景，见 Grünbaum、Velázquez、Werner 与 Werner，*Recurrence for discrete time unitary evolutions*，arXiv:1202.3903v3，Theorem 2。
 
 ::: {.problem #prob-monitored-spectral-mean title="形式化缺口：从实际监测历史到占据谱点数"}
 对任意有限维复内积空间、幺正 $U$ 与单位向量 $v$，沿用 [@def-monitored-return] 的 $p_{n+1}=\lvert\langle v,UT^nv\rangle\rvert^2$。定义占据谱集合
