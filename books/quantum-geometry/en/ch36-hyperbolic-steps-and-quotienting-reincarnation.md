@@ -217,6 +217,12 @@ The classical geometric and artistic lineage of this hyperbolic–circular bridg
 **One staircase, two disks.** Stopping at step $3$, swap the Beltrami–Klein disk (radius $\tanh\eta$, geodesics the straight chords shown as grey dashes) for the Poincaré disk (radius $\tanh(\eta/2)$): the cyan chords bend into arcs meeting the white rim at right angles, and in the readouts both proper-time rates equal $\operatorname{sech}\eta$.
 :::
 
+The staircase of this section starts at the same $\theta^*$ that the mutual reference of Chapter 33 locks into; the film below joins the two, step by step.
+
+::: {.film src="009-rapidity-staircase"}
+**From the mutual lock to the rapidity staircase (2:50).** Checking itself by $x \mapsto \cos x$, a lone observer's readings cross $\theta^* \approx 0.739$ at every step; two observers reading each other, sampled two beats to a round, approach it from below only, the error shrinking by about $0.454 = 0.674^2$ per round (clauses 14, 17, 20, 21 and 24 of [@ex-ch33-mutual-cosine-monotonic-lock], an application of existing results). From $\theta^*$, steps of $29.2^\circ$ on the outside angle ruler hit $90^\circ$ on the second step; steps of $1$ in the rapidity $\eta$ give $42.3^\circ$, $71.5^\circ$, $83.2^\circ$, $87.5^\circ$, … crowding toward the wall, and at step $8$ the gap $1 - \tanh\eta_8 \approx 4.4 \times 10^{-8}$ is still open ([@ex-ch36-inverse-gudermannian-discrete-staircase], a literature result). Finally, the image circles of the lines $\operatorname{Re}(s) = c$ under $w = (s - 1)/s$ close in on the unit circle as $c \to \tfrac{1}{2}$, and the modulus is $1$ exactly when $\operatorname{Re}(s) = \tfrac{1}{2}$, by Conjunct 2 of [@thm-ch36-taylor-tail-and-cayley-boundary]; every other number in the film is computed on screen.
+:::
+
 ---
 
 ## Understanding as Liberation: Quotienting Out Reincarnation in Generator Space

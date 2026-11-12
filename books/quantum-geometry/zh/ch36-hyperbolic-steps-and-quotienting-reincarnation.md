@@ -217,6 +217,12 @@ $$
 **同一架阶梯，两种圆盘。** 第 $3$ 级停住，从 Beltrami–Klein 圆盘（半径 $\tanh\eta$，测地线是灰色虚线的直弦）换到庞加莱圆盘（半径 $\tanh(\eta/2)$）：青色的直弦弯成与白色圆周正交的圆弧，读数里两种固有时率都等于 $\operatorname{sech}\eta$。
 :::
 
+这一节的阶梯从第 33 章互指锁定的同一个 $\theta^*$ 出发；下面的视频把两段连起来，一步步演示。
+
+::: {.film src="009-rapidity-staircase"}
+**从互指锁死到快度阶梯（2:50）。** 独自按 $x \mapsto \cos x$ 省察，读数每一步都越过 $\theta^* \approx 0.739$；两人互指、两拍一轮时，逐轮只从下方逼近，每轮误差约乘 $0.454 = 0.674^2$（[@ex-ch33-mutual-cosine-monotonic-lock] 第 14、17、20、21、24 项，既有结果的应用）。从 $\theta^*$ 出发，外部角度尺上每步加 $29.2^\circ$，第二步就撞上 $90^\circ$；在快度 $\eta$ 上每步加 $1$，角度 $42.3^\circ$、$71.5^\circ$、$83.2^\circ$、$87.5^\circ$……挤向墙边，第 $8$ 步的缝 $1 - \tanh\eta_8 \approx 4.4 \times 10^{-8}$ 仍未闭合（[@ex-ch36-inverse-gudermannian-discrete-staircase]，文献结果）。最后，直线 $\operatorname{Re}(s) = c$ 在 $w = (s - 1)/s$ 下的像圆随 $c \to \tfrac{1}{2}$ 贴近单位圆，模长为 $1$ 当且仅当 $\operatorname{Re}(s) = \tfrac{1}{2}$，这由 [@thm-ch36-taylor-tail-and-cayley-boundary] 第 2 款保证；片中其余数字都是屏幕上的计算。
+:::
+
 ---
 
 ## 理解即出离：在生成元商空间里一次性约掉轮回
