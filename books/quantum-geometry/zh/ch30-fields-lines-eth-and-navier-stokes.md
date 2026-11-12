@@ -114,7 +114,7 @@ $$
 在我们的几何诠释（`MODEL`）中，一些多项式时间算法所利用的几何或代数结构被比喻为**导向场**（如凸势能的负梯度流 $\mathbf{F}=-\nabla V$）。这不是 $P$ 的定义或必要条件；即使有光滑或无旋的场，也仍须证明它可高效计算、达到所需精度并在多项式步内终止。以下经典算法为这种图景提供具体参照：
 
 ::: {.remark #rem-ch30-karmarkar-kasteleyn-literature title="线性规划内点法、平面图 Pfaffian 匹配与毛球定理的文献说明"}
-**文献结果，未在本书形式化。** 本节用于对照“弃线造场”与“拓扑旋涡阻挫”的三项经典数学与算法结果均属外部文献，未在本书形式化：
+**文献结果，未在本书形式化。** 本节对照“弃线造场”与“拓扑旋涡阻挫”的三项经典结果；算法、几何推广及复杂度仍属外部文献，条件 Pfaffian 符号恒等式的实际供应与边界见 [@rem-ch30-rotation-pfaffian-boundary]：
 
 1. **卡马卡（N. Karmarkar, *Combinatorica* **4**, 373–395, 1984）线性规划内点法**：单纯形法沿着凸多面体表面的一维棱线折线爬行，在 Klee–Minty（1972）扭曲超立方体最坏实例上需走完指数级 $2^n$ 步；而内点法离开一维边界折线，进入多面体内部沿光滑对数势垒梯度场迭代，在多项式时间内抵达最优解；
 2. **卡斯特莱因（P. W. Kasteleyn, *Physica* **27**, 1209–1225, 1961）平面图 Pfaffian 完美匹配定理**：一般二分图完美匹配计数（永久式 Permanent）经 L. G. Valiant（1979）证明为 `#P`-完全；对于有限平面图及非负边权 $w_e$，经典方法利用 Kasteleyn 定向构造反对称加权邻接矩阵 $A_K^T=-A_K$，使 Pfaffian 展开中各个实际完美匹配项的系数同号。因此，加权完美匹配配分函数为 $Z=\sum_M\prod_{e\in M}w_e=|\operatorname{Pf}(A_K)|$，再由凯莱恒等式 $[\operatorname{Pf}(A_K)]^2=\det A_K$ 得到 $Z=\sqrt{\det A_K}$。这里的符号机制是匹配项的系数对齐；非边对应零矩阵元。非负有理权以二进制编码时，精确求值属于多项式时间算法的文献结论。无完美匹配时 $Z=0$；一般平面图的处理还包括连通分量及奇数阶分量的零值情形。现代出处可参见 D. Cimasoni 与 N. Reshetikhin（2007），[*Dimers on surface graphs and spin structures. I*](https://arxiv.org/html/math-ph/0608070v2)，第 5.1 节、定理 5.1 的匹配展开及其球面特例；
@@ -280,12 +280,66 @@ $$
 :::
 
 ::: {.remark #rem-ch30-rotation-pfaffian-boundary title="有限旋转前提与完整平面匹配结论的边界"}
-**文献结果，未在本书形式化的其余环节。** Cimasoni 与 Reshetikhin 的上述论文第 3.1 节、定理 3.1 及其证明给出闭定向曲面图上 Kasteleyn 定向存在的偶阶判据；第 5.1 节、定理 5.1 讨论实际匹配项的符号与 Pfaffian 展开。这些是成熟的文献结果。这里三个定理只处理已给定实际顶点旋转、dart 非空、连通及整数欧拉式的有限组合情形。
+**既有结果的应用与文献结果的边界。** 上面三个定理仍只处理已给定实际顶点旋转、dart 非空、连通及整数欧拉式的有限组合情形。下面把两种匹配的实际交错、原始 Pfaffian 的符号约定和同一张图上的系数传递逐一接起来；这些解释不另立复合定理盒。
 
-由任意几何平面嵌入取得该旋转及完整面轨道的对应，单顶点无边图与其他不满足上述前提的图，以及从 nice 圈奇性到任意两实际完美匹配的 Pfaffian 系数同号，仍需各自的桥梁。反对称矩阵的加权匹配展开、凯莱行列式平方恒等式、非负权下含零值情形的 $Z=|\operatorname{Pf}(A_K)|=\sqrt{\det A_K}$、有理输入的精确求值与位复杂度，以及一般二分图计数的 `#P`-完全性，均保留为 [@rem-ch30-karmarkar-kasteleyn-literature] 的经典文献结论。有限定向的存在性不包含上述算法或复杂度结论。
+**从两种匹配到有根偶圈。** 设 $X$ 是任意有限线性有序类型，$\mathcal M(X)$ 是原生载体 [`FixedPointFreeInvolution`](lean:D5/S3/Zeros/Convolution/PerfectMatchingCount.FixedPointFreeInvolution)：其元素是满足 $s(s(x))=x$ 且 $s(x)\ne x$ 的置换。对有序输入 $(s,t)$，以两色边 $x\!\leftrightarrow\!s(x)$、$x\!\leftrightarrow\!t(x)$ 的自反传递闭包定义实际连通分量。每个分量各取自己的最小点 $m$，令 $r=t\,s$（先作用 $s$），以 $r$ 的完整整数幂轨道作为第一相位。两种匹配都交换该分量中两个互不相交的 $r$ 轨道；相位由分量最小点决定，与数值标签的奇偶无关。交错置换 $q$ 在第一相位沿 $s$，在另一相位沿 $t$；其前驱反过来选择。于是从每个这样的 $m$ 出发，对所有 $k\in\mathbb N$，
+
+$$
+\begin{aligned}
+q^{2k}(m)&=(ts)^k(m),\\
+q^{2k+1}(m)&=s((ts)^k(m)).
+\end{aligned}
+$$
+
+[`rooted_interlacing`](lean:D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles.rooted_interlacing) 同时给出这些公式、$q$ 的完整圈恰等于原两色分量、最小点性质，以及恢复两个原始匹配的等式。交错覆盖整个分量；每步翻转相位，所以每圈长度为偶数。其输出载体明确要求 **$\forall x,\ q(x)\ne x$，并且 $q.\mathrm{cycleFactorsFinset}$ 的每个成员的支撑基数为偶数**。后一有限集不列出单点圈，不能省去前一条件。
+
+反向从这样的 $q$ 出发，取每个完整 $q$ 圈的最小点 $m$，以 $q^2$ 的完整轨道定义偶相位；在偶相位令 $s(x)=q(x)$、$t(x)=q^{-1}(x)$，在另一相位交换这两个选择。偶圈长度保证后继和前驱都翻转相位，包括末点回到首点的边，所以恢复出的 $s,t$ 都是无不动点对合。[`rooted_reconstruction`](lean:D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles.rooted_reconstruction) 给出点态公式与 $\mathrm{forward}(\mathrm{recover}(q))=q$；另一个复合恢复原来的有序对。实际的 [`equivalence`](lean:D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles.equivalence) 是这两张互逆映射构成的 `Equiv` 定义，不是另一条定理或仅凭基数选出的双射。不要求 $X$ 非空或预先为偶数阶：空类型上是唯一空置换，奇数阶时两边载体皆空；共同匹配边给出真正的二循环，$s=t$ 时 $q=s$，二循环反向恢复的两种匹配相同；不连通分量各自扎根。Eğecioğlu（1990，*Ars Combinatoria* **29**, 107–116）的入边标色约定不在这里冒称为同一个相位约定。这一结构对应不证明加权符号恒等式或行列式平方；源审计 `29209` 仍为 2 项未决、0 项验证。
+
+**保留原始归一化 Pfaffian。** 取 $n\in\mathbb N$ 与任意交换环 $R$。[`P`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.P) 的配对是 $\mathrm{Fin}(2n)$ 上无不动点的对合函数。对每个配对，把较小端点递增排列，再紧接其伙伴，得到规范列举 $c(p)$；[`canonical_mate`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.canonical_mate) 确认相邻槽位确为伙伴。[`listingEquiv`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.listingEquiv) 把所有归一化列举与这些配对互逆地对应：列举共轭相邻槽位配对得到 $p$，再规范列举返回原列举。原定义 [`pfaffian`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.pfaffian) 始终是
+
+$$
+\operatorname{Pf}(A)=\sum_{\sigma\in L(n)}
+\operatorname{sgn}(\sigma)\prod_{i\in\mathrm{Fin}(n)}
+A_{\sigma(2i),\sigma(2i+1)},
+$$
+
+其中 $L(n)$ 要求每对内部递增、各对首端点递增，整数符号再映入 $R$；没有阶乘或 $2$ 的除法。空列举的空积为 $1$。符号是**列举置换**的符号，不是伙伴对合置换的符号。后者与原生 $\mathcal M(\mathrm{Fin}(2n))$ 的对应，是用对合函数的双射性构成置换，再忘掉置换结构；两个复合逐点保留同一个伙伴函数。
+
+对归一化 $\sigma$，令 $p=\mathrm{pairingOfListing}(\sigma)$。逆序对是位置 $u<v$ 且 $\sigma(v)<\sigma(u)$；交叉对以较小端点 $a<c<p(a)<p(c)$ 计一次，嵌套对以 $a<c<p(c)<p(a)$ 计一次。实际的 [`inversionCrossNestEquiv`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.inversionCrossNestEquiv) 把逆序对对应到一个交叉，或一个嵌套加 $\mathrm{Fin}(2)$ 中的方向位：两个不同配对槽中，交叉贡献“后一端—前一端”一个逆序，嵌套再贡献“后一端—后一端”一个逆序。[`inversion_card_eq_cross_add_two_nesting_card`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.inversion_card_eq_cross_add_two_nesting_card) 因而给出
+
+$$
+|\mathrm{Inv}(\sigma)|=|\mathrm{Cross}(p)|+2|\mathrm{Nest}(p)|.
+$$
+
+故列举符号等于 $(-1)^{|\mathrm{Cross}(p)|}$。[`pfaffian_eq_crossing_sum`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.pfaffian_eq_crossing_sum) 将原始和逐项改写为以此符号乘 $\prod_{a<p(a)}A_{a,p(a)}$ 的和，每条配对边恰算一次。该结论对任意矩阵、任意交换环成立，不要求反对称性、除法或消去律；嵌套的两次贡献连同空情形均在对应内。对非规范列举，[`listing_value_canonical`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.listing_value_canonical) 在反向变号的整数单位因子下保证相同有符号值：整对换位的符号是平方 $1$，单对翻转的置换负号与边因子负号相消。
+
+**同一张实际图上的符号传递。** 现在令 $V$ 有限、$G$ 为其上的简单图，给定枚举 $e:V\simeq\mathrm{Fin}(2n)$。实际完美匹配始终是 Mathlib 的 $G.\mathrm{Subgraph}$，每点恰有一个邻点。[`matchingEquiv`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.matchingEquiv) 在完全图上选择唯一邻点得到伙伴函数，反向用 $p(v)=w$ 定义邻接；再经 $e$ 搬运，并仅保留伙伴边全为实际 $G$ 边的配对，便恰好得到 $G$ 的实际完美匹配，没有另造匹配或 Pfaffian 核心。
+
+令 dart 位 $\varepsilon:G.\mathrm{Dart}\to\mathbb Z/2\mathbb Z$ 满足 [`Reverses`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.Reverses)，即 $\varepsilon(\bar d)=1+\varepsilon(d)$；整数单位 $\delta(d)=(-1)^{\varepsilon(d)}$ 因而满足 $\delta(\bar d)=-\delta(d)$。匹配系数 $\tau_e(M)$ 是其规范列举的符号乘列出的实际有向匹配边的 $\delta$ 之积。对任意实际简单闭行走 $p$，记 $C=p.\mathrm{toSubgraph}$；若它对 $M$ 交替，即圈上每点的两条不同圈边恰有一条在 $M$ 中，[`alternating_cycle_flip`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.alternating_cycle_flip) 给出偶长度、仍为实际完美匹配的 $N=M\mathbin{\triangle}C$，以及**同一张 $G$ 删除 $C$ 顶点后的诱导图**上的完美匹配。原因是圈内每点已有圈内伙伴，唯一性禁止匹配边横跨圈内外；限制同一个 $M$ 就给出补图匹配。此翻转结论本身不需要有限性、嵌入、定向或权重。
+
+在上述枚举与反向条件下，[`alternating_cycle_transport`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.alternating_cycle_transport) 对这个实际翻转证明
+
+$$
+\tau_e(M)\tau_e(N)=-\prod_{d\in p.\mathrm{darts}}\delta(d).
+$$
+
+沿圈转动一次并固定圈外顶点的置换具有偶数个支撑点，所以符号为 $-1$。它把圈内匹配送到互补圈边，圈外共同匹配保持原样；即使标签交错也如此。列举归一化把这一新列举的值识别为 $\tau_e(N)$。圈上反向列出的边同时带来两个相消负号，圈外相同单位平方为 $1$，余下恰为实际 dart 乘积。
+
+[`NiceOdd`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.NiceOdd) 要求：对**每条实际偶简单闭行走**，若其实际顶点删除诱导补图有完美匹配，则 $\sum_{d\in p.\mathrm{darts}}\varepsilon(d)=1$。两匹配的对称差各点度为 $0$ 或 $2$；不同时可取其中一条实际交替简单圈，上段的补图匹配使它满足此假设，dart 乘积为 $-1$，翻转保持系数且严格减少分歧边。有限归纳给出 [`niceOdd_matching_tau_eq`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.niceOdd_matching_tau_eq)：任意实际匹配的系数相同，允许共同边、不连通图及 $M=N$。
+
+**一个单位，所有权重与系数环。** 给每条实际无向边权重 $w:G.\mathrm{edgeSet}\to R$，令 $A_{e,\varepsilon,w}$ 在实际边上为 $\delta(x,y)w_{\{x,y\}}$ 映入 $R$，非边及对角元为 $0$。反向条件使之反对称，特征 $2$ 时对角元仍明确为零。$Z(w)$ 是对实际完美匹配求和、对每条实际无向匹配边只乘一次的配分函数。不受实际图支持的配对有零矩阵因子；受支持的配对与实际匹配互逆，规范槽位与匹配边双射。因此原始 Pfaffian 等于 $\sum_M\tau_e(M)\prod_{a\in M}w_a$。[`weighted_pfaffian_identity`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.weighted_pfaffian_identity) 在 `Reverses` 与 `NiceOdd` 下将共同系数提出：
+
+$$
+\operatorname{Pf}(A_{e,\varepsilon,w})=(u_{e,\varepsilon}:R)\,Z(w),
+\qquad u_{e,\varepsilon}\in\mathbb Z^\times.
+$$
+
+[`orientationUnit`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.orientationUnit) 在有匹配时取任一实际匹配的整数单位系数，无匹配时取 $1$；它只依赖图、枚举与定向，独立于 $R,w$。故公式包括负权、零权、零因子环和特征 $2$，不使用除法。空图唯一空匹配使两边为 $1$；无完美匹配时所有配对项为零且 $Z=0$。若进一步 $R=\mathbb R$ 且每个实际边权非负，则 $Z\ge0$、$|u|=1$，取绝对值得 $|\operatorname{Pf}(A)|=Z$；这是上述恒等式的应用，不另有一个绝对值端点定理。
+
+上面的有限旋转定向与此恒等式只有在**同一张实际图**上才能合用：保留原来的连通、dart 非空和整数欧拉假设，将原来的反向 dart 条件识别为 `Reverses`，并将每条偶简单圈的实际顶点删除补图匹配送入原 nice 圈条件，才能取得这里的 `NiceOdd`。从任意几何平面嵌入取得该旋转及完整面轨道的对应、超出旋转前提的图、完整凯莱行列式平方恒等式 `FullCayley`、$\sqrt{\det A}$ 表述、有理输入的精确算法和位复杂度及一般二分计数的 `#P`-完全性仍须分别处理，后者保留为 [@rem-ch30-karmarkar-kasteleyn-literature] 的文献结果。源审计 `29266` 保留 10 项验证、9 项未决；条件符号恒等式不消去这些残余义务。
 :::
 
-[@rem-ch30-karmarkar-kasteleyn-literature] 的三条都只是文献。在一个离散的小问题上，“场”与“线”两边都能写成精确的数学，并交给内核检查：给图的顶点着色。
+[@rem-ch30-karmarkar-kasteleyn-literature] 中的算法与几何推广仍有文献边界；上述条件匹配恒等式则已有精确供应声明。另一个“场”与“线”两边都能写成精确数学的离散问题，是给图的顶点着色。
 
 先看最小的奇圈，五边形 $C_5$：顶点 $0, 1, 2, 3, 4$，边 $01, 12, 23, 34, 40$。依次涂上颜色 $c = (0, 1, 0, 1, 2)$，相邻顶点颜色都不同。把颜色读作高度，这是顶点上一片分三层的场。现在让每条边指向颜色较大的一端：
 

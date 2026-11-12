@@ -30,7 +30,7 @@ $$
 In this chapter we unfold this self-referential closure across four mathematical levels: **the Lean-verified stabilization theorem for contracting updates on finite sets**, **single-step context-relative interpretation fixed points and contextual non-uniqueness**, **the unique positive algebraic fixed point $\varphi = \frac{1+\sqrt{5}}{2}$ of the golden reciprocal map $x = 1 + 1/x$**, and **the classical analytic and number-theoretic background of cosine self-reference $\cos\theta^* = \theta^*$** recorded in the literature remarks [@rem-banach-dottie-hairy-ball-literature] and [@rem-dottie-angle-incommensurable].
 
 ::: {.figure src="ch24-overview"}
-**Figure 24.** The chapter at a glance. Panel I: the cyan cosine curve and the grey diagonal $y = x$, with the cobweb from $0$ winding into $\theta^* \approx 0.739$ (convergence is a literature result, see [@rem-banach-dottie-hairy-ball-literature]). Panel II: the candidate set $\{0, 1, 2\}$ loses one element per step and stops changing at $\{0\}$ ([@thm-finite-contracting-updates-stabilize]). Panel III: the cyan curve $y = 1 + 1/x$ meets the diagonal on the positive half-line only at the green point $\varphi \approx 1.618$ ([@cor-golden-fixed-point-unique]).
+**Figure 24.** The chapter at a glance. Panel I: the cyan cosine curve and the grey diagonal $y = x$, with the cobweb from $0$ winding into $\theta^* \approx 0.739$ (convergence applies existing results; full derivation in [@ex-ch33-mutual-cosine-monotonic-lock]). Panel II: the candidate set $\{0, 1, 2\}$ loses one element per step and stops changing at $\{0\}$ ([@thm-finite-contracting-updates-stabilize]). Panel III: the cyan curve $y = 1 + 1/x$ meets the diagonal on the positive half-line only at the green point $\varphi \approx 1.618$ ([@cor-golden-fixed-point-unique]).
 :::
 
 ## 24.1 Discrete Contraction Must Stabilize: The Finite Contracting Update Theorem {#sec-ch24-1}
@@ -307,7 +307,7 @@ When the self-referential operator upgrades from a one-dimensional rational frac
 The following literature note records four classical theorems governing $\cos\theta = \theta$ and continuous self-maps of even-dimensional spheres.
 
 ::: {.remark #rem-banach-dottie-hairy-ball-literature title="Banach Contraction on [0,1], Transcendence of the Dottie Root, Taylor Remainder Bounds, and the Hairy Ball Fixed/Antipodal Alternative (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** Four classical theorems from analysis, transcendental number theory, and algebraic topology complement the frozen Lean declarations of this chapter:
+**Literature result, not formalized in this book.** Among the four items below, qualitative cosine dynamics follow by applying this chapter's endpoint [@thm-dottie-rational-inverse-endpoint] and existing real-analysis results; [@ex-ch33-mutual-cosine-monotonic-lock] supplies the full hypotheses, strictness exceptions, and derivation. Transcendence, numerical claims, and further topological extensions retain their respective literature boundaries:
 
 1. **Banach contraction principle on $[0, 1]$ and global Picard convergence**:
    [@thm-finite-contracting-updates-stabilize] uses finiteness and set pruning to guarantee finite stabilization; here completeness and metric contraction give uniqueness and asymptotic convergence. The hypotheses and conclusions differ. On the real line $\mathbb{R}$, cosine sends $\mathbb{R}$ into $[-1,1]$ and sends $[-1,1]$ to $[\cos1,1]\subset[0,1]$, a compact invariant interval. On $[0,1]$, the mean value theorem gives the strict Lipschitz bound
@@ -316,7 +316,7 @@ The following literature note records four classical theorems governing $\cos\th
    |\cos x - \cos y| \;\le\; (\sin 1)\,|x - y|, \qquad \sin 1 \approx 0.84147098 < 1.
    $$
 
-   By Banach's contraction theorem on the complete metric space $[0, 1]$, $\cos$ has a **unique real fixed point** $\theta^* \approx 0.73908513321516\dots$ (the Dottie root), and Picard iteration $\theta_{k+1} = \cos\theta_k$ converges geometrically to $\theta^*$ from every real initial seed $\theta_0 \in \mathbb{R}$. Here $\sin 1$ is the worst-case constant over the whole interval; the asymptotic contraction rate at the fixed point is $\lvert\cos'\theta^*\rvert = \sin\theta^* \approx 0.6736$ (checked numerically in [@ex-dottie-rate-newton-rational]). (Symmetrically, the mirror equation $\cos\theta = -\theta$ has unique real root $-\theta^* \approx -0.7390851332\dots$.)
+   By Banach's contraction theorem on the complete metric space $[0, 1]$, $\cos$ has a **unique real fixed point** $\theta^* \approx 0.73908513321516\dots$ (the Dottie root), and Picard iteration $\theta_{k+1} = \cos\theta_k$ converges to $\theta^*$ from every real initial seed $\theta_0 \in \mathbb{R}$. After the second step it lies in $[0,1]$, giving $|\theta_k-\theta^*|\le(\sin1)^{k-2}|\theta_2-\theta^*|$ for $k\ge2$. Here $\sin 1$ is the worst-case constant over the whole interval; the asymptotic contraction rate at the fixed point is $\lvert\cos'\theta^*\rvert = \sin\theta^* \approx 0.6736$ (checked numerically in [@ex-dottie-rate-newton-rational]). (Symmetrically, the mirror equation $\cos\theta = -\theta$ has unique real root $-\theta^* \approx -0.7390851332\dots$.)
 2. **Transcendence of $\theta^*$ and the nonzero algebraic residual $|\cos q - q| > 0$ (Lindemann–Weierstrass theorem)**:
    Suppose a nonzero algebraic number $q \in \overline{\mathbb{Q}} \setminus \{0\}$ satisfied $\cos q = q$. Writing $\cos q = \frac{e^{iq} + e^{-iq}}{2}$ and setting $u = e^{iq}$ yields the quadratic equation
 
@@ -340,7 +340,7 @@ The following literature note records four classical theorems governing $\cos\th
 :::
 
 ::: {.viz src="sphere-escape" preset="far" height="500"}
-**Another start, the same end.** Starting far out at $x_0 = 3$, the amber cobweb drops into $[-1, 1]$ on its first step and from there winds in towards the magenta fixed point $x^* = \theta^* \approx 0.739$. The end does not depend on the start, and neither does the fact that no step ever lands on it exactly (global convergence is the literature result of item 1 above).
+**Another start, the same end.** Starting far out at $x_0 = 3$, the amber cobweb drops into $[-1, 1]$ on its first step and from there winds in towards the magenta fixed point $x^* = \theta^* \approx 0.739$. The limit is independent of the start. Never hitting it at a finite step requires the separate nonfixed interval hypothesis, rather than convergence alone: $-\theta^*$ arrives in one step (full qualitative derivation in [@ex-ch33-mutual-cosine-monotonic-lock]).
 :::
 
 Pushing one step further from the number-theoretic context of [@rem-banach-dottie-hairy-ball-literature], the author's foundational notes ask: *"What are the relations among transcendental numbers? Is $\pi$ a projection of $\theta$? Is $\theta$ the ultimate transcendental number?"* In modern number theory, the algebraic independence of $\theta^*$ and $\pi$ is governed by **Schanuel's Conjecture**, which we record as an open conjecture (`OPEN`, carrying no `lean` attribute).
@@ -354,7 +354,7 @@ Assuming Schanuel's conjecture (for any $\mathbb{Q}$-linearly independent comple
 Let us compare the three self-referential trajectories of this chapter — discrete set contraction ([@thm-finite-contracting-updates-stabilize]), the algebraic golden continued fraction ([@cor-golden-fixed-point-unique]), and the Dottie cosine spiral ([@rem-banach-dottie-hairy-ball-literature]) — side by side in a concrete hand calculation.
 
 ::: {.example #ex-dottie-and-golden-iterations title="Hand Comparison of Three Self-Referential Loops: Finite Set Pruning, Golden Continued Fraction, and Dottie Cosine Spiral (With Literature Context, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** Items 1 and 2 below instantiate this chapter's kernel-verified [@thm-finite-contracting-updates-stabilize] and [@cor-golden-fixed-point-unique], whereas the convergence of the cosine iteration $\theta_{k+1} = \cos\theta_k$ to its unique real fixed point $\theta^*$ in Item 3 belongs to the classical analysis literature (see [@rem-banach-dottie-hairy-ball-literature] above) and is not formalized in this book.
+**Literature result, not formalized in this book.** Items 1 and 2 below instantiate this chapter's kernel-verified [@thm-finite-contracting-updates-stabilize] and [@cor-golden-fixed-point-unique], while Item 3's qualitative convergence applies the endpoint and existing real-analysis results (full derivation in [@ex-ch33-mutual-cosine-monotonic-lock]); the displayed decimals and residuals remain a separate numerical example.
 
 Starting from the unit seed $1$ (or a three-element initial set), compare how three self-referential operators lock onto their respective fixed points:
 
@@ -372,7 +372,7 @@ Starting from the unit seed $1$ (or a three-element initial set), compare how th
    $$
 
    Convergence follows directly from the known identity $1+1/\varphi=\varphi$: $|x_{k+1}-\varphi|=|x_k-\varphi|/(\varphi x_k)$. Here $x_k\ge1$, so each step multiplies the error by at most $1/\varphi<1$. For any positive initial value, $x_k>1$ from the first step onward, and the same estimate gives convergence. This is a manual derivation, not formalized in this book; [@cor-golden-fixed-point-unique] itself characterizes fixed points only. With $x_0=1$, every finite iterate is rational and differs from the irrational $\varphi$. The limit's algebraicity follows from the fixed-point equation, not merely from using rational addition and division at each finite step.
-3. **Two-dimensional rotational cosine loop ($\theta_{k+1} = \cos\theta_k$, **literature result, not formalized in this book**; see [@rem-banach-dottie-hairy-ball-literature])**: Starting from $\theta_0 = 1$ radian, repeated cosine evaluation yields
+3. **Two-dimensional rotational cosine loop ($\theta_{k+1} = \cos\theta_k$, qualitative convergence applies existing results; numerics are separate; see [@ex-ch33-mutual-cosine-monotonic-lock])**: Starting from $\theta_0 = 1$ radian, repeated cosine evaluation yields
 
    $$
    \begin{aligned}
@@ -419,7 +419,7 @@ The aphorism is stated; now let us do the arithmetic. The cosine table in [@ex-d
 :::
 
 ::: {.remark #rem-dottie-convergent-residual-literature title="Asymptotic Contraction Rate, Newton's Quadratic Speed-Up, and Continued-Fraction Convergent Residual Bounds for θ* (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.**
+**Literature result, not formalized in this book.** The exact asymptotic factor and conditional error ratio are applications of existing results in [@ex-ch33-mutual-cosine-monotonic-lock]. The higher-order expansion, Newton method, continued-fraction bounds, and decimals below retain their separate literature or numerical status.
 
 **First question: position and rate lie on one unit circle.** Write the error as $\delta_k = \theta_k - \theta^*$, expand $\cos$ about $\theta^*$, and cancel the zeroth-order term with $\cos\theta^* = \theta^*$:
 
@@ -427,7 +427,7 @@ $$
 \delta_{k+1} \;=\; \cos(\theta^* + \delta_k) - \theta^* \;=\; -\sin\theta^*\,\delta_k \;-\; \frac{\theta^*}{2}\,\delta_k^2 \;+\; O(\delta_k^3).
 $$
 
-The minus sign of the linear coefficient says that the iterates straddle $\theta^*$ alternately from the right and from the left, which is the square spiral of the cobweb diagram. Its modulus
+Strict alternation requires $\theta_0\in[0,1]\setminus\{\theta^*\}$; under that hypothesis the order argument in Chapter 33 makes the iterates straddle $\theta^*$ alternately from the right and from the left, which is the square spiral of the cobweb diagram. Its modulus
 
 $$
 \lambda \;=\; \lvert\cos'\theta^*\rvert \;=\; \sin\theta^* \;=\; \sqrt{1 - (\theta^*)^2} \;\approx\; 0.6736120292
@@ -544,7 +544,7 @@ The last table of [@ex-dottie-rate-newton-rational] shows that refining the tick
 :::
 
 ::: {.viz src="fixed-point-convergence" height="560"}
-**How fixed points close in: the full lab.** Three scenes on one cobweb plane: iteration ($\cos x$ or $1 + 1/x$, with a draggable start and three cameras), Newton's method, and rational readings (with an adjustable ruler). Convergence, its rate and the residual bounds are literature results, not formalized in this book; the green boxes cite only [@cor-golden-fixed-point-unique] and [@thm-dottie-rational-inverse-endpoint].
+**How fixed points close in: the full lab.** Three scenes on one cobweb plane: iteration ($\cos x$ or $1 + 1/x$, with a draggable start and three cameras), Newton's method, and rational readings (with an adjustable ruler). Qualitative cosine convergence and conditional asymptotic factors follow from the reuse derivation in [@ex-ch33-mutual-cosine-monotonic-lock]; Newton's method, numerical values, and residual bounds retain their literature or numerical boundaries; the green boxes cite only [@cor-golden-fixed-point-unique] and [@thm-dottie-rational-inverse-endpoint].
 :::
 
 Rational readings never line up. What about a different kind of closure: instead of asking the projection to return to itself, ask a rotation to return to its starting point? The answer is again no, and this time no conjecture is needed.

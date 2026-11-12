@@ -127,47 +127,46 @@ Conjuncts 3 and 4 of [@thm-ch33-contextual-attractor-and-common-factor] illumina
 
 ---
 
-## Mutual-Reference Monotonic Locking: Why Measuring Each Other Doubles Stability
+## Mutual-Reference Monotonic Locking: How Two Cosine Steps Preserve the Error Side
 
 If each observer already possesses an individual restoring basin $\psi_i = \psi_i(\psi_i)$, why does the universe not leave every being sealed inside solitary contemplation? Why do spins pair into bonds, stars gather into galaxies, and minds seek out resonant companions?
 
 Look at the two cobweb trajectories in the right panel of [@rem-ch33-mutual-attractor-figure]! Projecting self-reference onto our canonical one-dimensional cosine slice (`MODEL`) contrasts the qualitative character of solitary introspection against reciprocal dialogue (with all derivative bounds, Mean Value Theorem proofs, and step-by-step numerical ledgers enclosed in [@ex-ch33-mutual-cosine-monotonic-lock] below):
 
-- **The Anxiety of Solitary Self-Reference (Pendulum Whipsawing, `MODEL`)**: When an isolated observer calibrates itself alone in single steps, perspective behaves like an under-damped pendulum whipsawing between self-doubt and overcompensation (analytical mechanism in [@ex-ch33-mutual-cosine-monotonic-lock], Item 1).
+- **The Anxiety of Solitary Self-Reference (Pendulum Whipsawing, `MODEL`)**: When an isolated observer calibrates itself alone in single steps, perspective behaves like an under-damped pendulum whipsawing between self-doubt and overcompensation (analytical mechanism in [@ex-ch33-mutual-cosine-monotonic-lock], under its strict-alternation hypotheses).
 - **The Miracle of Symmetric Mutual Reference (Reciprocal Consensus, `MODEL`)**: When two observers $\mathcal{O}_A$ and $\mathcal{O}_B$ step out of isolation into symmetric pairwise measurement—$\mathcal{O}_A$ calibrating itself through $\mathcal{O}_B$'s projection while $\mathcal{O}_B$ simultaneously calibrates itself through $\mathcal{O}_A$'s projection—composing the two reciprocal mirrors qualitatively reshapes the convergence trajectory, whose complete analytical derivation and step-by-step numerical ledger are worked out in [@ex-ch33-mutual-cosine-monotonic-lock] below:
 
-::: {.example #ex-ch33-mutual-cosine-monotonic-lock title="Analytical and Numerical Comparison of Solitary Cosine Oscillation vs. Symmetric Mutual Monotonic Locking (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** The derivative bounds, Lagrange Mean Value Theorem argument, and Banach Contraction Mapping analysis below for $f(x) = \cos x$ and $g(x) = \cos(\cos x)$ belong to classical real analysis (aligned with [Chapter 24](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature], with transcendental algebraic-independence frontiers noted in [@conj-schanuel-dottie]) and are not formalized as standalone real-analysis theorems in `trureturing@dev`:
+::: {.example #ex-ch33-mutual-cosine-monotonic-lock title="Qualitative Dynamics of the Same Cosine Endpoint and a Separate Numerical Ledger"}
+**An application of existing results; numerical and interpretive boundaries remain separate.** All variables below are real and angles are in radians. Set $f(x)=\cos x$ and $g=f\circ f$; $f^{[n]},g^{[n]}$ denote $n$-fold composition, with zeroth iterate the identity. Throughout, choose the same $\theta^*$ from [@thm-dottie-rational-inverse-endpoint] ([`rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint)): $0<\theta^*<1$, $\cos\theta^*=\theta^*$, and it is the signed sum of the prescribed rational inverse series at $\pi$. That endpoint directly concerns the series and uniqueness among positive competitors. The following 24 qualitative clauses combine its fixed-point clauses with real-analysis suppliers; they do not constitute a new dynamics theorem box.
 
-1. **Solitary Self-Reference $f(x) = \cos x$ and Alternating Overshoot**: The equation $\cos\theta = \theta$ admits a unique real root (the Dottie constant) $\theta^* \approx 0.73908513\dots \in (0, \pi/2)$, at which the first derivative is strictly negative:
+1. **Uniqueness on the whole real line and acute location.** For any real $t=\cos t$, the cosine range first gives $-1\le t\le1$. Since $1<\pi/2$, cosine is strictly positive there, so $t>0$ and the endpoint's positive uniqueness applies: $t=\theta^*$. The same point satisfies $0<\theta^*<1<\pi/2$.
+2. **Exact range.** `Real.range_cos` gives the inner range $[-1,1]$. Evenness reduces the outer cosine to $[0,1]$, where continuity, strict decrease, and `intermediate_value_Icc'` give equality $g(\mathbb R)=[\cos1,1]$, rather than merely inclusion.
+3. **Trapping after the first step.** Since $\cos1>0$, for every real start $z$ and every $n\in\mathbb N$, $g^{[n+1]}(z)\in[\cos1,1]\subset(0,\pi/2)$. There is no such restriction on $g^{[0]}(z)=z$.
+4. **Differentiability everywhere.** Applying `Real.hasDerivAt_cos` twice and the chain rule cancels the two negative signs. At every real $x$, the derivative exists and is $g'(x)=\sin(\cos x)\sin x$.
+5. **A sufficient global bound.** From $|\cos x|,|\sin x|\le1$ and nonnegative increasing sine on $[0,1]$, $|\sin(\cos x)|=\sin|\cos x|\le\sin1$. Set $K=\sin1$. Then $0<K<1$ and $|g'(x)|\le K$ for every real $x$, without asserting optimality.
+6. **Global Lipschitz estimate.** For [lipschitzWith_of_nnnorm_deriv_le](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Analysis/Calculus/MeanValue.lean#L744), clause 4 supplies differentiability and clause 5 supplies the nonnegative constant and derivative norm bound. Thus $|g(u)-g(v)|\le K|u-v|$ for all real $u,v$.
+7. **The same attracting point.** Completeness of $\mathbb R$ makes $g$ `ContractingWith K`. The endpoint equation gives $g(\theta^*)=\theta^*$, and [ContractingWith.fixedPoint_unique'](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Topology/MetricSpace/Contracting.lean#L259) identifies it as the unique real fixed point of $g$.
+8. **Convergence of $g$ from every real start.** [tendsto_iterate_fixedPoint](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Topology/MetricSpace/Contracting.lean#L302) for this contraction gives $g^{[n]}(z)\to\theta^*$ with no interval assumption on $z$.
+9. **The unique real mutual pair.** If $a=\cos b$ and $b=\cos a$, then $g(a)=a$ and $g(b)=b$, hence $a=b=\theta^*$. Conversely, that pair satisfies both equations.
+10. **Exact iterate correspondence.** `Function.iterate_mul` gives $g^{[n]}(z)=f^{[2n]}(z)$ for every real $z$ and natural $n$; this is an identity, not an approximation.
+11. **Convergence of $f$ from every real start.** Clauses 8 and 10 make the even subsequence tend to $\theta^*$. The odd subsequence is $f(f^{[2n]}(z))$, whose limit by continuity is $f(\theta^*)=\theta^*$. Combining both parities gives $f^{[n]}(z)\to\theta^*$, without a global contraction constant below $1$ for $f$ itself.
+12. **The domain of strict order preservation.** For $x\in(0,\pi/2)$, $\sin x>0$ and $0<\cos x\le1<\pi$, so $g'(x)>0$. Continuity, convexity of this domain, and [strictMonoOn_of_deriv_pos](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Analysis/Calculus/Deriv/MeanValue.lean#L377) make $g$ strictly increasing on this acute interval, without a global order assertion.
+13. **Strict bounds below the fixed point.** If $0<y<\theta^*$, strict increase gives $g(y)<\theta^*$, while contraction gives $\theta^*-g(y)\le K(\theta^*-y)<\theta^*-y$. Hence $y<g(y)$.
+14. **A strictly increasing orbit.** For $0<y_0<\theta^*$ set $y_n=g^{[n]}(y_0)$. Induction gives $0<y_n<y_{n+1}<\theta^*$ for every $n\ge0$; the sequence is strictly increasing and converges to $\theta^*$. Convergence from arbitrary real starts does not imply this order pattern.
+15. **An invariant interval for $f$.** Cosine maps $[0,1]$ into itself, and restricting `Real.strictAntiOn_cos` gives strict decrease there.
+16. **The premise for never hitting the endpoint.** Assume $x_0\in[0,1]$ and $x_0\ne\theta^*$, and put $x_n=f^{[n]}(x_0)$. Injectivity on the interval and $f(\theta^*)=\theta^*$ prevent a nonfixed point from mapping to $\theta^*$. Induction keeps every $x_n\in[0,1]\setminus\{\theta^*\}$.
+17. **Strict alternation.** Under clause 16's hypotheses, for every $n\ge0$, $x_n<\theta^*\iff\theta^*<x_{n+1}$ and $\theta^*<x_n\iff x_{n+1}<\theta^*$. Equivalently, $(x_n-\theta^*)(x_{n+1}-\theta^*)<0$. These strict claims are not extended to arbitrary real starts.
+18. **The positive endpoint exception.** For every $n\in\mathbb N$, $f^{[n]}(\theta^*)=g^{[n]}(\theta^*)=\theta^*$; the orbit is stationary.
+19. **The negative endpoint exception.** Evenness gives $f(-\theta^*)=g(-\theta^*)=\theta^*$, hence $f^{[n+1]}(-\theta^*)=g^{[n+1]}(-\theta^*)=\theta^*$. This start arrives in one application, with zero errors thereafter. Neither endpoint exhibits strict alternation or error ratios with nonzero denominators. No exhaustive classification of real preimages is asserted.
+20. **Exact local factors.** `Real.sin_sq_add_cos_sq`, `Real.sin_eq_sqrt_one_sub_cos_sq`, and acute positivity give $\sin^2\theta^*=1-(\theta^*)^2$ and $\sin\theta^*=\sqrt{1-(\theta^*)^2}$. Thus $f'(\theta^*)=-\sqrt{1-(\theta^*)^2}$, with $-1<f'(\theta^*)<0$.
+21. **The composite derivative.** Clause 4 at the same point gives $g'(\theta^*)=\sin^2\theta^*=1-(\theta^*)^2=(f'(\theta^*))^2$, with $0<g'(\theta^*)<1$. The negative derivative reverses local signed error; the positive derivative preserves its sign.
+22. **Slopes on the full punctured neighborhood.** [HasDerivAt.tendsto_slope](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Analysis/Calculus/Deriv/Slope.lean#L76) converts both derivative-existence statements into limits as $x\to\theta^*$ with $x\ne\theta^*$: $(f(x)-\theta^*)/(x-\theta^*)\to-\sqrt{1-(\theta^*)^2}$ and $(g(x)-\theta^*)/(x-\theta^*)\to1-(\theta^*)^2$. These hold along the full punctured real neighborhood, not just from one side, and are not finite-distance error identities.
+23. **Orbit error ratios.** Under clause 16's starting conditions, every $e_n=x_n-\theta^*$ is nonzero and consecutive errors have negative product. Composing the punctured slope limit with this convergent orbit gives $e_{n+1}/e_n\to-\sqrt{1-(\theta^*)^2}$. For $0<y_0<\theta^*$, every $d_n=y_n-\theta^*<0$ is nonzero, and similarly $d_{n+1}/d_n\to1-(\theta^*)^2$. Neither ratio claim is extended to all real starts.
+24. **Cost per cosine evaluation.** Both factor magnitudes lie strictly between $0$ and $1$, and the second is the square of the first. This compares applications of the selected maps. One $g$ application requires two cosine evaluations, whereas one $f$ application requires one. The exact identity $g^{[n]}(z)=f^{[2n]}(z)$ compares identical orbits from the same start at the same number of cosine evaluations; the squared factor supplies no speedup per evaluation or wall-clock advantage.
 
-   $$
-   f'(\theta^*) \;=\; -\sin\theta^* \;=\; -\sqrt{1 - (\theta^*)^2} \;\approx\; -0.673612 \;<\; 0.
-   $$
+**Separate numerical and literature boundaries.** Global contraction uses only the coarse $K=\sin1$. The decimal values $\theta^*\approx0.73908513$, $f'(\theta^*)\approx-0.673612$, and $g'(\theta^*)\approx0.453753$, as well as a sharp global bound near $0.461063$ and a maximizing argument near $0.828132$, require separate numerical or optimization certificates. The critical equation $(1-t^2)\cos t=t\sin t$ is only a route to that analysis. The original ledger below, starting at $1/10$ for $n=0,\ldots,5$, its rounding, and finite-step error comparisons are likewise not certified by the qualitative application. Physical, philosophical, ontological, and transcendental algebraic-independence claims ([@conj-schanuel-dottie]) retain their respective boundaries.
 
-   Because $-1 < f'(\theta^*) < 0$, linearized errors obey $x_{k+1} - \theta^* \approx (-0.673612)(x_k - \theta^*)$, flipping sign at every single step in an alternating cobweb spiral around $\theta^*$.
-2. **Symmetric Mutual Reference $\psi_A = \cos\psi_B,\; \psi_B = \cos\psi_A$ and Unique Monotonic Locking**: Eliminating $\psi_B$ yields $g(x) := \cos(\cos x)$, which satisfies three global properties:
-   - **One-step trapping inside $(0, \pi/2)$**: Since $\cos x \in [-1, 1]$ for all $x \in \mathbb{R}$ and cosine is even and strictly decreasing on $[0, 1]$, the global image of $\mathbb{R}$ is compressed in a single cycle into
-
-     $$
-     g(\mathbb{R}) \;=\; [\cos 1,\; 1] \;\approx\; [0.540302,\; 1] \;\subset\; (0, \pi/2).
-     $$
-
-   - **Global contraction on $\mathbb{R}$ and impossibility of period-2 disagreement**: By the chain rule, $g'(x) = \sin(\cos x)\sin x$. Since $\lvert\cos x\rvert \le 1 < \pi/2$ everywhere on $\mathbb{R}$, one has $\lvert g'(x)\rvert = \lvert\sin(\cos x)\rvert\,\lvert\sin x\rvert \le \sin(1)\cdot 1 \approx 0.841471 < 1$ (optimizing $g''(x) = 0$ on $(0, \pi/2)$ sharpens the global supremum to $\sup_{x \in \mathbb{R}}\lvert g'(x)\rvert \approx 0.461063 < 1$ at $x \approx 0.828132$). If any distinct real pair $\psi_A \neq \psi_B$ satisfied $\psi_A = \cos\psi_B$ and $\psi_B = \cos\psi_A$, both would be fixed points of $g$, and the Lagrange Mean Value Theorem would give some $\xi$ between them with
-
-     $$
-     \lvert\psi_A - \psi_B\rvert \;=\; \lvert g(\psi_A) - g(\psi_B)\rvert \;=\; \lvert g'(\xi)\rvert\,\lvert\psi_A - \psi_B\rvert \;\le\; (\sin 1)\,\lvert\psi_A - \psi_B\rvert \;<\; \lvert\psi_A - \psi_B\rvert,
-     $$
-
-     a contradiction! Thus **no period-2 disagreement $\psi_A \neq \psi_B$ can exist**: $\psi_A = \psi_B = \theta^*$ is the unique real mutual equilibrium.
-   - **Strictly positive derivative and squared local convergence**: On the invariant interval $(0, \pi/2)$, both $\cos x \in (0, 1)$ and $\sin x \in (0, 1)$ are strictly positive, whence
-
-     $$
-     g'(x) \;=\; +\sin(\cos x)\sin x \;>\; 0 \quad \forall x \in (0, \pi/2), \qquad g'(\theta^*) \;=\; +\sin^2\theta^* \;\approx\; +0.453753 \;>\; 0.
-     $$
-
-     Order-preserving positivity of the composed round $g = f \circ f$ eliminates all overshoot: starting from any $0 < y_0 < \theta^*$, the iterates satisfy $y_k < y_{k+1} < \theta^*$ for every $k \ge 0$, locking monotonically onto $\theta^*$ with per-round factor $\approx 0.4538 = 0.6736^2$ across each two-evaluation mutual round.
-3. **Side-by-Side Numerical Ledger ($x_0 = y_0 = 0.100000$, Steps $k = 0 \dots 5$)**:
+**Side-by-Side Numerical Ledger ($x_0 = y_0 = 0.100000$, Steps $k = 0 \dots 5$)**:
 
 | Step $k$ | Solitary $x_k$ ($x_{k+1}=\cos x_k$) | Error $x_k - \theta^*$ | Mutual $y_k$ ($y_{k+1}=\cos(\cos y_k)$) | Error $y_k - \theta^*$ | Dynamical Regime Comparison |
 | :---: | :---: | :---: | :---: | :---: | :--- |

@@ -510,8 +510,8 @@ $$
    - 黄金分割连分数自指映射 $x \mapsto 1 + 1/x$ 在正实轴上的唯一不动点定理 [`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique)；
    - 概念演化与语境解释下的相对不动点定理 [`conceptual_equivalence_and_stability_reach_fixed_point`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.conceptual_equivalence_and_stability_reach_fixed_point) 与语境分岔定理 [`context_parameters_can_select_distinct_fixed_points`](lean:D5/S3/ConceptDynamics/Interpretation/InterpretationFixedPoint.context_parameters_can_select_distinct_fixed_points)；
    - 内积空间平行四边形与勾股范数律 [`inner_product_norm_parallelogram_law`](lean:D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law)、互补测量概率勾股定理 [`complementary_context_probability_pythagoras`](lean:D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras)、黄金整数佩尔型恒等式 [`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm) 以及附录 C 所列的全部冻结定理。
-2. **经典数学文献定理（文献结果，未在本书形式化）**：
-   - 实区间 $[0, 1]$ 上的巴拿赫（Banach）压缩映射原理：由于 $\cos([0, 1]) \subseteq [0, 1]$ 且导数绝对值 $|{-}\sin\theta| \le \sin(1) \approx 0.84147 < 1$，皮卡迭代 $\theta_{k+1} = \cos(\theta_k)$ 收敛到唯一实不动点 $\theta^* \approx 0.7390851332\dots$；
+2. **经典数学文献与既有结果的应用（逐项保留边界）**：
+   - **既有结果的应用**：[@thm-dottie-rational-inverse-endpoint] 选定同一个余弦端点，[@ex-ch33-mutual-cosine-monotonic-lock] 给出全实轴唯一性、收敛、严格区间条件与例外的完整推导，小数仍属数值。其区间分析使用巴拿赫（Banach）压缩映射原理：由于 $\cos([0, 1]) \subseteq [0, 1]$ 且导数绝对值 $|{-}\sin\theta| \le \sin(1) \approx 0.84147 < 1$，皮卡迭代 $\theta_{k+1} = \cos(\theta_k)$ 收敛到唯一实不动点 $\theta^* \approx 0.7390851332\dots$；
    - 林德曼—魏尔斯特拉斯（Lindemann–Weierstrass）定理对 $\theta^*$ 超越性的证明（若非零代数数 $q$ 满足 $\cos q = q$，则 $e^{iq}$ 将满足代数系数的二次方程，与 $e^{iq}$ 的超越性矛盾），以及佩尔方程 $m^2 - 2n^2 = \pm 1$ 的连分数渐近理论（其中 $\sqrt{2}$ 的 $\pm 1$ 余项与最佳逼近下界可由第 29 章经 Lean 验证的 [@thm-ch29-silver-pell-remainder]、[@thm-ch29-silver-best-approximation] 经手工推导得到，仍属文献的是它们与连分数渐近分数的识别）；
    - 素数在高斯整数中的分裂与惰性、奇素数负佩尔方程 $m^2 - p\,n^2 = -1$ 在 $p \equiv 1 \pmod 4$ 时的可解性定理、类域论中的希尔伯特互反律 $\prod_{v \le \infty} (a, b)_v = +1$（[@rem-ch29-pell-primes-hilbert-literature]），同余数椭圆曲线 $E_d : dy^2 = x^3 - x$ 的双有理等价与亏格 $1$ 环面拓扑 $\chi(T^2) = 0$（[@rem-ch29-elliptic-torus-literature]）、有限域椭圆曲线的哈塞（Hasse）定理 $|a_p| \le 2\sqrt{p}$、高斯关于 $y^2 = x^3 - x$ 模 $p$ 点数迹的精确公式与特征和推导（[@rem-ch29-hasse-gauss-literature]、[@rem-ch29-gauss-character-application]），以及非复乘椭圆曲线的佐藤—泰特（Sato–Tate）定理（Barnet-Lamb, Geraghty, Harris, Taylor 2011，[@rem-ch29-arithmetic-geometry-literature]）；
    - 笛卡尔多面体总角亏定理 $\sum_v \delta_v = 4\pi$、高斯—博内定理、庞加莱—布劳威尔偶维球面毛球定理 $\chi(S^{2n}) = 2$，以及亚当斯（Adams, 1960）关于仅有 $S^0, S^1, S^3, S^7$ 可平行化的拓扑定理（[@rem-coda-polyhedral-topology-literature]、[@rem-hairy-ball-adams-literature]）；
@@ -545,7 +545,7 @@ $$
 | **对角线逃逸** | Diagonal Escape | 完备语义对角线导致的分离亏格非空、拓扑严格细化与不连续性 | 第 21、30 章；[`complete_diagonal_topological_settlement`](lean:D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_topological_settlement) (`LEAN ✓`) |
 | **欧拉乘积与临界线** | Euler Product & Critical Line | 素数正交基展开 $\prod_p (1-p^{-s})^{-1} = \sum_n n^{-s}$ 与非平凡零点对称轴 $\operatorname{Re}(s) = 1/2$ | 第 22 章；[`riemann_zeta_dirichlet_sum_eq_euler_product`](lean:D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product) (`LEAN ✓`) / `#conj-riemann-hypothesis` (`OPEN`) |
 | **丢番图可定义性与范数型** | Diophantine Definability & Norm Form | 艾森斯坦二次范数型 $a^2 - ab + b^2$、黄金佩尔恒等式与四元数范数乘法锁 | 第 23、29 章；[`Qform_range_eq_eisNorm`](lean:D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_range_eq_eisNorm), [`pell_form_eq_four_mul_norm`](lean:D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm) (`LEAN ✓`) |
-| **收缩映射与自指不动点** | Contraction & Fixed Point | 离散单调收缩有限步稳定（`LEAN ✓`）、黄金不动点 $\varphi$（`LEAN ✓`）与实轴余弦不动点 $\cos\theta^* = \theta^*$（文献结果） | 第 24 章与终章；[`finite_contracting_updates_stabilize`](lean:D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize) (`LEAN ✓`) |
+| **收缩映射与自指不动点** | Contraction & Fixed Point | 离散单调收缩有限步稳定（`LEAN ✓`）、黄金不动点 $\varphi$（`LEAN ✓`）与实轴余弦不动点 $\cos\theta^* = \theta^*$（[@thm-dottie-rational-inverse-endpoint]；动力学应用见 [@ex-ch33-mutual-cosine-monotonic-lock]） | 第 24 章与终章；[`finite_contracting_updates_stabilize`](lean:D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize) (`LEAN ✓`) |
 | **克利福德基片（Blade）** | Clifford Blade | 3 比特掩码 $m \in \operatorname{Fin} 8$ 索引的八维基底 $\{1, e_1, e_2, e_3, e_{12}, e_{13}, e_{23}, e_{123}\}$，乘法由按位异或与逆序符号决定 | 第 25 章与附录 B；[`qubit_weyl_star`](lean:D5/S3/Quantum/FiniteDimensional.qubit_weyl_star), [`B_formula_core`](lean:D5/S3/Quantum/Measurement/Bloch/QubitBloch.B_formula_core) (`LEAN ✓`) |
 | **泡利词与辛内积相表** | Pauli Word & Symplectic Phase Table | 2 比特编码 $(x, z) \in \mathbb{F}_2^2$ 将泡利群乘法化为异或加法与辛相位 $(-1)^{x_2 z_1}$ | 第 14、26 章与附录 B；[`pauli_word_mul`](lean:D5/S3/Quantum/Codes/StabilizerGenuineEntanglementCommutationRank.pauli_word_mul) (`LEAN ✓`) |
 | **ZYZ 欧拉角编译器** | ZYZ Euler Compiler | 单量子比特任意旋转分解为 $R_z(\alpha)R_y(\beta)R_z(\gamma)$，配合双轴有限字合成与虚拟 $Z$ 门帧追踪 | 第 9、11、16、27 章；[`two_axis_finite_word`](lean:D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word) (`LEAN ✓`) |
@@ -616,7 +616,7 @@ $$
 │ • 语境不动点、公共因子与互吸引子双螺旋  │   │ • 联合相干记录可逆擦除与黄金 Delone 准晶│
 │ • 一次正交阴影、两次正交换位子与三轴恢复│   │ • 本体 QRAM 复制地址恢复与递归自映射页表│
 │ • 乘光捏合遗忘、目标恢复与 T=T(T) 扩表  │   │ • 概念纤维分解、齐肯多夫线程与 720°自折 │
-│ • 双曲快度阶梯、严格拓扑细化与约去轮回  │   │ • 终章与附录：概念词典(A)・Cl3(B)・457(C)│
+│ • 双曲快度阶梯、严格拓扑细化与约去轮回  │   │ • 终章与附录：概念词典(A)・Cl3(B)・477(C)│
 └─────────────────────────────────────────┘   └─────────────────────────────────────────┘
 ```
 
@@ -639,7 +639,7 @@ $$
 3. **数理逻辑、数论与认识论路径**：
    [序曲](README.md) $\to$ 第 10 章（Gram 矩阵与顺序无关性）$\to$ 第 19–20 章（离散多面体分片锥与开放猜想边界）$\to$ 第 21–24 章（对角线逃逸、欧拉乘积、四元数丢番图范数、余弦自指不动点）$\to$ [第 29 章](ch29-timeless-causality-and-gram-space.md)–[第 39 章](ch39-observer-is-ontological-universe.md)（毕达哥拉斯四级数系突围、无时间因果、ETH 视界与流体涡丝、量子公平、大一统元统一、语境不动点、劳维尔同像扩表 $T = T(T)$、商拓扑约去轮回、概念纤维分解与齐肯多夫线程）$\to$ 终章（黄金切投空间吸引子与 [@thm-coda-fixed-point-anchor]）。
 4. **Lean 4 形式化验证与内核审计路径**：
-   [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 与 `FiniteRecordCosineObstruction` 的逐行形式化剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对 `trureturing@dev` 提交 [{commit}](trureturing:) 下全部 $251$ 条环境/媒体冻结定理、$95$ 项环境辅助定义与 $111$ 项行内引用声明，共计 $457$ 项唯一锁定声明）。
+   [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 与 `FiniteRecordCosineObstruction` 的逐行形式化剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对 `trureturing@dev` 提交 [{commit}](trureturing:) 下全部 $251$ 条环境/媒体冻结定理、$95$ 项环境辅助定义与 $131$ 项行内引用声明，共计 $477$ 项唯一锁定声明）。
 
 ### 第六至第十部（第 21–39 章）55 项核心章节冻结定理锚点速览 {#sec-coda-part6-part7-register}
 
@@ -703,4 +703,4 @@ $$
 | **第 39 章**<br/>观察者即宇宙本体 | T39.1 | `D5/S3/ConceptDynamics/ConceptFiberDecomposition.concept_fiber_decomposition` | 概念状态空间按可观测签名纤维的不相交并重构定理 |
 | **第 39 章** | T39.2 | `D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective` | 非负实数全尺度齐肯多夫编码线程严格单射定理 |
 
-在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，并在 [附录 C](appendix-c.md) 中核验全书锁定的全部 $346$ 项 `trureturing@dev` 正式环境与媒体声明（含行内共 $457$ 项唯一锁定声明）。
+在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，并在 [附录 C](appendix-c.md) 中核验全书锁定的全部 $346$ 项 `trureturing@dev` 正式环境与媒体声明（含行内共 $477$ 项唯一锁定声明）。

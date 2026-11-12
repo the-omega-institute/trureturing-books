@@ -30,7 +30,7 @@ $$
 在本章中，我们将用严密的数学与 Lean 4 形式化定理，把这幅自指画卷拆解为四个相互辉映的层次：**有限状态空间上的单调收缩稳定化定理**、**相邻步解释语境相对不动点与语境非唯一性定理**、**正实数上黄金连分数自指映射 $x = 1 + 1/x$ 的唯一代数不动点定理**，以及收录在文献注记 [@rem-banach-dottie-hairy-ball-literature] 与 [@rem-dottie-angle-incommensurable] 中的**Dottie 余弦自指 $\cos\theta^* = \theta^*$ 的经典分析与超越数论背景**。
 
 ::: {.figure src="ch24-overview"}
-**图 24。** 本章地图：第 I 栏，青色的余弦曲线与灰色对角线 $y = x$，从 $0$ 出发的蛛网一圈圈绕向 $\theta^* \approx 0.739$（收敛是文献结果，见 [@rem-banach-dottie-hairy-ball-literature]）；第 II 栏，候选集 $\{0, 1, 2\}$ 每步删去一个元素，到 $\{0\}$ 后不再变（[@thm-finite-contracting-updates-stabilize]）；第 III 栏，青色的 $y = 1 + 1/x$ 与对角线在正半轴上只交于绿色的 $\varphi \approx 1.618$（[@cor-golden-fixed-point-unique]）。
+**图 24。** 本章地图：第 I 栏，青色的余弦曲线与灰色对角线 $y = x$，从 $0$ 出发的蛛网一圈圈绕向 $\theta^* \approx 0.739$（收敛是既有结果的应用，完整推导见 [@ex-ch33-mutual-cosine-monotonic-lock]）；第 II 栏，候选集 $\{0, 1, 2\}$ 每步删去一个元素，到 $\{0\}$ 后不再变（[@thm-finite-contracting-updates-stabilize]）；第 III 栏，青色的 $y = 1 + 1/x$ 与对角线在正半轴上只交于绿色的 $\varphi \approx 1.618$（[@cor-golden-fixed-point-unique]）。
 :::
 
 ## 24.1 离散收缩的必然收束：有限收缩更新稳定化定理 {#sec-ch24-1}
@@ -309,7 +309,7 @@ $$
 下面的文献说明集中记录围绕 $\cos\theta = \theta$ 与偶维球面连续自映射的四项经典定理。
 
 ::: {.remark #rem-banach-dottie-hairy-ball-literature title="巴拿赫压缩映射、Dottie 数的超越性、泰勒余项界与偶维球面不动点/对跖点定理（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 围绕余弦自指方程 $\cos\theta = \theta$ 与高维球面自映射，经典实分析、超越数论与代数拓扑给出以下四项严格定理（与本章的冻结 Lean 定理共同构成完整图景）：
+**文献结果，未在本书形式化。** 围绕余弦自指方程 $\cos\theta = \theta$ 与高维球面自映射，以下四项中，余弦定性动力学可由本章端点 [@thm-dottie-rational-inverse-endpoint] 与现成实分析结果推出，完整参数、严格性例外和推导见 [@ex-ch33-mutual-cosine-monotonic-lock]；超越性、数值及其余拓扑推广仍按各自文献边界陈述：
 
 1. **紧区间 $[0, 1]$ 上的巴拿赫压缩映射原理与全局收敛（Banach Contraction Principle）**：
    [@thm-finite-contracting-updates-stabilize] 用有限性与集合筛除保证有限步稳定；这里用完备性与度量压缩保证唯一性和渐近收敛，两者的前提与结论不同。余弦函数将全实轴映入 $[-1, 1]$，并将 $[-1, 1]$ 映入紧不变子区间 $[0, 1]$（因 $\cos([-1, 1]) = [\cos 1, 1] \subset [0.54, 1] \subset [0, 1]$）。在 $[0, 1]$ 上，由微分中值定理，对任意 $x, y \in [0, 1]$ 有
@@ -318,7 +318,7 @@ $$
    |\cos x - \cos y| \;\le\; (\sin 1)\,|x - y|, \qquad \sin 1 \approx 0.84147098 < 1.
    $$
 
-   因此 $\cos$ 在完备度量空间 $[0, 1]$ 上是 Lipschitz 常数严格小于 $1$ 的巴拿赫压缩映射，存在**唯一的实不动点** $\theta^* \approx 0.73908513321516\dots$（Dottie 数），且对任意实初值 $\theta_0 \in \mathbb{R}$，Picard 迭代序列 $\theta_{k+1} = \cos\theta_k$ 均按几何级数速率 $|\theta_k - \theta^*| \le (\sin 1)^{k-1}|\theta_1 - \theta^*|$ 全局指数收敛于 $\theta^*$。这里的 $\sin 1$ 是整个区间上的最坏常数；不动点处的渐近压缩率是 $\lvert\cos'\theta^*\rvert = \sin\theta^* \approx 0.6736$（数值核对见 [@ex-dottie-rate-newton-rational]）。（同理，镜像算子 $-\cos\theta$ 在 $[-1, 0]$ 上以同一压缩率 $\sin 1 < 1$ 收敛于镜像方程 $\cos\theta = -\theta$ 的唯一实根 $-\theta^* \approx -0.7390851332\dots$。）
+   因此 $\cos$ 在完备度量空间 $[0, 1]$ 上是 Lipschitz 常数严格小于 $1$ 的巴拿赫压缩映射，存在**唯一的实不动点** $\theta^* \approx 0.73908513321516\dots$（Dottie 数），且对任意实初值 $\theta_0 \in \mathbb{R}$，Picard 迭代序列 $\theta_{k+1} = \cos\theta_k$ 均收敛于 $\theta^*$；从第二步进入 $[0,1]$ 后，对 $k\ge2$ 有几何界 $|\theta_k-\theta^*|\le(\sin1)^{k-2}|\theta_2-\theta^*|$。这里的 $\sin 1$ 是整个区间上的最坏常数；不动点处的渐近压缩率是 $\lvert\cos'\theta^*\rvert = \sin\theta^* \approx 0.6736$（数值核对见 [@ex-dottie-rate-newton-rational]）。（同理，镜像算子 $-\cos\theta$ 在 $[-1, 0]$ 上以同一压缩率 $\sin 1 < 1$ 收敛于镜像方程 $\cos\theta = -\theta$ 的唯一实根 $-\theta^* \approx -0.7390851332\dots$。）
 2. **Dottie 数 $\theta^*$ 的超越性与非零代数读数残差 $|\cos q - q| > 0$（Lindemann–Weierstrass 定理）**：
    为什么 $\theta^*$ 不可能像黄金比 $\varphi = \frac{1+\sqrt{5}}{2}$ 那样是某个整系数多项式方程的代数根？假设存在非零代数数 $q \in \overline{\mathbb{Q}} \setminus \{0\}$ 满足 $\cos q = q$。由欧拉公式 $\cos q = \frac{e^{iq} + e^{-iq}}{2}$，记 $u = e^{iq}$，则 $\frac{u + u^{-1}}{2} = q$ 意味着 $u = e^{iq}$ 满足代数数系数二次方程
 
@@ -342,7 +342,7 @@ $$
 :::
 
 ::: {.viz src="sphere-escape" preset="far" height="500"}
-**换个起点，同一个终点。** 从很远的 $x_0 = 3$ 出发，琥珀色的蛛网第一步就落进 $[-1, 1]$，此后一圈圈绕向品红的不动点 $x^* = \theta^* \approx 0.739$：终点与起点无关，没有哪一步恰好到达这件事也与起点无关（全局收敛是上面第 1 条的文献结果）。
+**换个起点，同一个终点。** 从很远的 $x_0 = 3$ 出发，琥珀色的蛛网第一步就落进 $[-1, 1]$，此后一圈圈绕向品红的不动点 $x^* = \theta^* \approx 0.739$：终点与起点无关；“任何有限步都不命中”须另保留非不动点区间初值条件，不能由全局收敛推出，$-\theta^*$ 一步即达（完整定性推导见 [@ex-ch33-mutual-cosine-monotonic-lock]）。
 :::
 
 更进一步，围绕 [@rem-banach-dottie-hairy-ball-literature] 所记录的数论背景，作者在手稿中曾追问：*“超越数之间的关系？$\pi$ 是 $\theta$ 的一个投影？$\theta$ 是终极超越数？”* 这一关于 Dottie 数 $\theta^*$ 与圆周率 $\pi$ 之间代数独立性的深刻追问，在数论中直接通向尚未解决的**沙努埃尔猜想（Schanuel's Conjecture）**。我们按第三层认识论规范（`OPEN`）将其记录如下。
@@ -356,7 +356,7 @@ $$
 让我们用一个具体的数值手算算例，把本章中**离散集合收缩**（[@thm-finite-contracting-updates-stabilize]）、**代数黄金不动点**（[@cor-golden-fixed-point-unique]）与 **Dottie 余弦自指螺旋**（[@rem-banach-dottie-hairy-ball-literature]）三条收敛轨道放在同一张桌面上对比。
 
 ::: {.example #ex-dottie-and-golden-iterations title="三类自指迭代的显式手算对比：有限集合筛除、黄金连分数与 Dottie 余弦螺旋（含文献说明，未在本书形式化）"}
-**文献结果，未在本书形式化。** 本例第 1、2 项具体验算本章经内核验证的 [@thm-finite-contracting-updates-stabilize] 与 [@cor-golden-fixed-point-unique]；第 3 项中余弦迭代 $\theta_{k+1} = \cos\theta_k$ 向唯一实不动点 $\theta^*$ 的收敛属于经典实分析文献结论（详见上文 [@rem-banach-dottie-hairy-ball-literature]），未在本书形式化。
+**文献结果，未在本书形式化。** 本例第 1、2 项具体验算本章经内核验证的 [@thm-finite-contracting-updates-stabilize] 与 [@cor-golden-fixed-point-unique]；第 3 项的定性收敛是端点与现成实分析结果的应用（完整推导见 [@ex-ch33-mutual-cosine-monotonic-lock]），所列小数与残差仍是独立数值算例。
 
 从同一个初始刻度 $1$（或三元初始候选集）出发，观察三种不同维度的自指算子如何各自锁定自己的不动点：
 
@@ -374,7 +374,7 @@ $$
    $$
 
    收敛可直接从已知恒等式 $1+1/\varphi=\varphi$ 得到：$|x_{k+1}-\varphi|=|x_k-\varphi|/(\varphi x_k)$。这里 $x_k\ge1$，故误差每步至多乘以 $1/\varphi<1$。一般正初值从第一步起也满足 $x_k>1$，同一估计给出收敛。这是手工推导，未在本书形式化；[@cor-golden-fixed-point-unique] 本身只刻画不动点。每个有限步仍为有理数（当 $x_0=1$），并不等于无理数 $\varphi$；极限的代数性来自不动点方程，不能仅由有限步使用有理加除推出。
-3. **二维旋转投影余弦自指（$\theta_{k+1} = \cos\theta_k$，**文献结果，未在本书形式化**；见 [@rem-banach-dottie-hairy-ball-literature]）**：同样从弧度 $\theta_0 = 1$ 出发，连续按下余弦键：
+3. **二维旋转投影余弦自指（$\theta_{k+1} = \cos\theta_k$，定性收敛为既有结果的应用，数值另计；见 [@ex-ch33-mutual-cosine-monotonic-lock]）**：同样从弧度 $\theta_0 = 1$ 出发，连续按下余弦键：
 
    $$
    \begin{aligned}
@@ -421,7 +421,7 @@ $$
 :::
 
 ::: {.remark #rem-dottie-convergent-residual-literature title="θ* 的渐近压缩率、牛顿二次加速与连分数渐近分数残差双边界（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。**
+**文献结果，未在本书形式化。** 渐近因子的精确恒等式与有条件的误差比是 [@ex-ch33-mutual-cosine-monotonic-lock] 的既有结果应用；下述高阶展开、牛顿法、连分数界与十进制值仍另按文献或数值处理。
 
 **第一问：位置与收敛率落在同一个单位圆上。** 记误差 $\delta_k = \theta_k - \theta^*$，把 $\cos$ 在 $\theta^*$ 处展开，并用 $\cos\theta^* = \theta^*$ 消去零阶项：
 
@@ -429,7 +429,7 @@ $$
 \delta_{k+1} \;=\; \cos(\theta^* + \delta_k) - \theta^* \;=\; -\sin\theta^*\,\delta_k \;-\; \frac{\theta^*}{2}\,\delta_k^2 \;+\; O(\delta_k^3).
 $$
 
-一阶系数的负号说明迭代点左右交替地夹住 $\theta^*$，这就是蛛网图上那条方形螺旋；它的模长
+严格交替需 $\theta_0\in[0,1]\setminus\{\theta^*\}$；在此条件下第 33 章的顺序论证保证迭代点左右交替地夹住 $\theta^*$，这就是蛛网图上那条方形螺旋；它的模长
 
 $$
 \lambda \;=\; \lvert\cos'\theta^*\rvert \;=\; \sin\theta^* \;=\; \sqrt{1 - (\theta^*)^2} \;\approx\; 0.6736120292
@@ -546,7 +546,7 @@ $$
 :::
 
 ::: {.viz src="fixed-point-convergence" height="560"}
-**不动点的收束：完整实验室。** 三个场景画在同一张蛛网图上：迭代（$\cos x$ 或 $1 + 1/x$，可拖动起点、切换镜头）、牛顿、有理读数（可调尺子的分母）。收敛、速率与残差界是文献结果，未在本书形式化；绿色框只给 [@cor-golden-fixed-point-unique] 与 [@thm-dottie-rational-inverse-endpoint]。
+**不动点的收束：完整实验室。** 三个场景画在同一张蛛网图上：迭代（$\cos x$ 或 $1 + 1/x$，可拖动起点、切换镜头）、牛顿、有理读数（可调尺子的分母）。定性余弦收敛与有条件的渐近因子见 [@ex-ch33-mutual-cosine-monotonic-lock] 的复用推导；牛顿法、数值与残差界仍保留文献或数值边界；绿色框只给 [@cor-golden-fixed-point-unique] 与 [@thm-dottie-rational-inverse-endpoint]。
 :::
 
 有理读数永远对不准，那么换一种闭合方式——不让投影回到自己，而让旋转回到起点——行不行？答案同样是否定的，而且这一次不需要任何猜想。
