@@ -171,7 +171,8 @@
     f.dot(t, deg(th), P.amber, 6 * TH, { glow: 14 });
     if (!TRV.thumbMode) {
       tagAt('wall', f, TS * 0.06, 95, L('90° 的墙', '90° wall'), 'mg', 18, 0);
-      const sx = Math.min(tEnd, TS) * 0.72, sy = deg(SF.dH * sx);
+      // the label sits on the speed line, clear of the dashed ceiling of an uneven superposition
+      const sx = Math.min(tEnd, TS) * (S.levels === 2 && SF.minOv > 0.01 ? 0.42 : 0.72), sy = deg(SF.dH * sx);
       tagAt('sl', f, sx, sy, L('速度线 ΔH·t', 'speed line ΔH·t'), 'raw ink', -48, -12);
       if (SF.tauMT <= TS + 1e-9) tagAt('mt', f, SF.tauMT, 96, `MT ${fix(SF.tauMT, 3)}`, 'num', SF.tauMT > TS - 0.3 ? -30 : 0, -10);
       if (SF.tauML <= TS + 1e-9 && Math.abs(SF.tauML - SF.tauMT) > 0.05) tagAt('ml', f, SF.tauML, 96, `ML ${fix(SF.tauML, 3)}`, 'num', 0, 13);
@@ -324,7 +325,7 @@
   const LEGEND = {
     speed: [['cy', '到起点的夹角 θ；左边：重叠的各支', 'angle θ to the start; left: the parts of the overlap'], ['dm', '速度线 ΔH·t', 'speed line ΔH·t'], ['mg', '90° 的墙；左边：重叠为 0', 'the 90° wall; left: zero overlap'], ['am', '此刻', 'now']],
     zeno: [['cy', '线上的影子 · 留下的概率', 'shadow on the line · chance to stay'], ['mg', '离开线的一份 · 走掉的概率', 'part off the line · chance gone'], ['dm', '不看时的路', 'the unwatched path'], ['am', '当前的箭头', 'the current arrow']],
-    return: [['cy', '已返回；箭头在线上的影子', 'returned; the arrow\'s shadow on the line'], ['mg', '还没回来；离开线的一份', 'not yet; the part off the line'], ['am', '当前这一步', 'the current step']]
+    return: [['cy', '柱：已返回 · 球：箭头在线上的影子', 'columns: returned · sphere: the arrow\'s shadow on the line'], ['mg', '柱：还没回来 · 球：离开线的一份', 'columns: not yet · sphere: the part off the line'], ['am', '当前这一步 · 还没回来的那一支', 'the current step · the branch not yet back']]
   };
   function drawText() {
     const t = clock.t;
@@ -415,19 +416,19 @@
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
-    equal: { scene: 'speed', levels: 2, alpha: 45, still: PI },
+    equal: { scene: 'speed', levels: 2, alpha: 45, still: 0.9 * PI },   // just before the wall: the two arrows still apart
     three: { scene: 'speed', levels: 3, still: 2 * PI / 3 },
     unequal: { scene: 'speed', levels: 2, alpha: 30, still: PI },
-    strobe4: { scene: 'zeno', N: 4, still: PI },
+    strobe4: { scene: 'zeno', N: 4, still: PI * (1 - 1e-7) },   // the last turn complete, the fourth look not yet made
     strobe16: { scene: 'zeno', N: 16, still: PI * (1 - 1 / 32) },   // half-way through the last turn
     mean: { scene: 'return', delta: 45, still: NR }
   };
   const NOTES = {
-    equal: ['二能级等权叠加：左边两支青色箭头各长一半，转到首尾相对时和为零，琥珀色的点落进品红的圆心。右边青色曲线一路贴着虚线速度线，在 t = π 撞上品红的墙；半途的点把它分成 45° + 45° 两段。', 'Two even levels: on the left two cyan arrows of length one half; when they point opposite ways their sum is zero and the amber dot falls into the magenta centre. On the right the cyan curve runs along the dashed speed line all the way and meets the magenta wall at t = π; the half-way point splits it into 45° + 45°.'],
+    equal: ['二能级等权叠加，停在 t = 0.9π：左边两支各长一半的青色箭头快要首尾相对，琥珀色的点离品红的圆心只剩 0.16。右边青色曲线一路贴着虚线速度线，此刻 81°，到 t = π 撞上品红的墙；半途的点把它分成 45° + 45° 两段。', 'Two even levels, stopped at t = 0.9π: on the left two cyan arrows of length one half are about to point opposite ways, and the amber dot is only 0.16 from the magenta centre. On the right the cyan curve runs along the dashed speed line, at 81° now, and meets the magenta wall at t = π; the half-way point splits it into 45° + 45°.'],
     three: ['三能级等权叠加：左边三支青色箭头在 t = 2π/3 围成一个三角形，琥珀色的点回到圆心。右边青色曲线弯到虚线速度线下面：速度线在 MT 1.924 已到墙，曲线到 τ⊥ 2.094 才碰到品红的墙。', 'Three even levels: on the left three cyan arrows close into a triangle at t = 2π/3 and the amber dot returns to the centre. On the right the cyan curve bends below the dashed speed line: the speed line reaches the wall at MT 1.924, the curve touches the magenta wall only at τ⊥ 2.094.'],
     unequal: ['权重角 α = 30°：左边长箭头 0.75、短箭头 0.25，怎么转也抵消不完，琥珀色的点绕着青色虚线圆走，离品红的圆心最近 0.5。右边夹角最多升到 60°，碰不到品红的墙。', 'Weight angle α = 30°: on the left a long arrow of 0.75 and a short one of 0.25 never cancel; the amber dot circles outside the dashed cyan ring and comes no closer than 0.5 to the magenta centre. On the right the angle rises to 60° at most and never touches the magenta wall.'],
-    strobe4: ['频闪 4 次：箭头每转 45° 就被拉回 |0⟩，青色的弧是每段走到的地方。右边留下的概率每段降一截，到 180° 还剩 0.531；虚线是不看时的路，到 180° 全部走掉。', 'Four strobes: the arrow is pulled back to |0⟩ after every 45° turn; the cyan arc is as far as each turn gets. On the right the chance to stay drops a step per look and is 0.531 at 180°; the dashed line is the unwatched path, which loses everything by 180°.'],
-    strobe16: ['频闪 16 次：每段只转 11.25°，品红的一份刚露头就被拉回，青色的影子几乎不短。右边青色几乎铺满，到 180° 还剩 0.857。', 'Sixteen strobes: each turn is only 11.25°; the magenta part barely shows before the arrow is pulled back, and the cyan shadow hardly shortens. On the right the cyan nearly fills the plot, with 0.857 left at 180°.'],
+    strobe4: ['频闪 4 次，停在第 4 次测量之前：箭头刚转完这一段的 45°（青色的弧），离开线的品红横段长 sin 45° ≈ 0.71，是一阶；青色的影子只短了 1 − cos 45° ≈ 0.29，是二阶。右边留下的概率每测一次降一截，此刻 0.531；虚线是不看时的路，到 180° 全部走掉。', 'Four strobes, stopped before the fourth look: the arrow has just finished this 45° turn (the cyan arc); the magenta part off the line is sin 45° ≈ 0.71 long, first order, while the cyan shadow is only 1 − cos 45° ≈ 0.29 shorter, second order. On the right the chance to stay drops a step at every look and is 0.531 now; the dashed line is the unwatched path, which loses everything by 180°.'],
+    strobe16: ['频闪 16 次，停在最后一段的半途：每段只转 11.25°，品红的一份刚露头就被拉回，青色的影子几乎不短。右边青色几乎铺满，此刻还剩 0.863，终点 N = 16 的环是 0.857。', 'Sixteen strobes, stopped half-way through the last turn: each turn is only 11.25°; the magenta part barely shows before the arrow is pulled back, and the cyan shadow hardly shortens. On the right the cyan nearly fills the plot: 0.863 is left now, and the ring at the end, N = 16, is 0.857.'],
     mean: ['δ = 45°：每一步之后问一次“回来了吗”。第一根之后的柱子青色涨、品红缩，每根都正好到 1 这条线；品红面积从 1 涨向 2。', 'δ = 45°: after every step ask “back yet?”. Past the first column the cyan grows and the magenta shrinks, and every column reaches exactly the line at 1; the magenta area grows from 1 towards 2.']
   };
   let booting = true, moving = null;
@@ -479,7 +480,8 @@
     camera: () => Object.assign({}, stage.cam),
     /** Viewport rectangle of the chart on the right (for pointer tests). */
     chartBox: () => { const b = $('cv').getBoundingClientRect(), B = boxes.b; return [b.left + B.x, b.top + B.y, B.w, B.h]; },
-    chartX: (x) => { const b = $('cv').getBoundingClientRect(); return b.left + chart.X(x); }
+    chartX: (x) => { const b = $('cv').getBoundingClientRect(); return b.left + chart.X(x); },
+    chartY: (y) => { const b = $('cv').getBoundingClientRect(); return b.top + chart.Y(y); }
   };
   window.TRV_THUMB = () => { applyPreset('strobe4'); cards.mark('strobe4'); paint.now(); };
   cards.pick(cards.initial('three'));
