@@ -102,7 +102,7 @@
       for (const s of path) if (s.l < m) dot(ctx, X(s.l, s.p), Y(s.l), rNode * 1.25, P.cyan, treeA, 6);
       if (t < n) {                       // the routing front between two levels, and the switch being set
         const l0 = Math.floor(front), f = front - l0, s0 = path[l0], x0 = X(l0, s0.p), x1 = l0 + 1 === n ? X(n, a) : X(l0 + 1, path[l0 + 1].p);
-        ring(ctx, x0, Y(l0), rNode * 2, P.amber, lw(1.6), treeA);
+        ring(ctx, x0, Y(l0), rNode * 2, P.amber, lw(1.6), treeA); geo.amber++;
         dot(ctx, x0 + (x1 - x0) * f, Y(l0) + (Y(l0 + 1) - Y(l0)) * f, rNode * 1.3, P.amber, treeA, 10);
       }
     }
@@ -120,6 +120,7 @@
     line(ctx, box.x, busY, box.x + box.w, busY, P.lineHot, lw(1), scanA);
     const hx = box.x + Math.min(t, scanSteps()) * cw;
     if (read > 0) line(ctx, box.x, busY, hx, busY, P.ink, lw(2), 0.75 * scanA);
+    geo.amber++;
     if (read >= scanSteps()) { ctx.strokeStyle = P.amber; ctx.lineWidth = lw(2); ctx.shadowColor = P.amber; ctx.shadowBlur = 10; ctx.strokeRect(box.x + S.a * cw + 0.5, rowY - 2.5, cw - 1, rowH + 5); ctx.shadowBlur = 0; }
     ctx.fillStyle = P.amber; ctx.globalAlpha = scanA; ctx.beginPath(); ctx.moveTo(hx, busY - 4); ctx.lineTo(hx - 5, busY + 5); ctx.lineTo(hx + 5, busY + 5); ctx.closePath(); ctx.fill(); ctx.globalAlpha = 1;
     if (words) {
@@ -158,7 +159,7 @@
       const r = blocks[b], y = slotY(k);
       ctx.strokeStyle = P.lineHot; ctx.globalAlpha = 0.7 * A; ctx.lineWidth = lw(1); ctx.strokeRect(r.x + 0.5, y + 0.5, r.w - 1, sh - 1); ctx.globalAlpha = 1;
       if (walked(b, k)) { ctx.fillStyle = P.cyan; ctx.globalAlpha = 0.22 * A; ctx.fillRect(r.x + 1, y + 1, r.w - 2, sh - 2); ctx.globalAlpha = 1; }
-      if (isCur(b, k)) { ctx.globalAlpha = A; ctx.strokeStyle = P.amber; ctx.lineWidth = lw(2); ctx.shadowColor = P.amber; ctx.shadowBlur = 10; ctx.strokeRect(r.x + 1, y + 1, r.w - 2, sh - 2); ctx.shadowBlur = 0; ctx.globalAlpha = 1; }
+      if (isCur(b, k)) { geo.amber++; ctx.globalAlpha = A; ctx.strokeStyle = P.amber; ctx.lineWidth = lw(2); ctx.shadowColor = P.amber; ctx.shadowBlur = 10; ctx.strokeRect(r.x + 1, y + 1, r.w - 2, sh - 2); ctx.shadowBlur = 0; ctx.globalAlpha = 1; }
       if (words) { text(ctx, String(k), r.x + 6, y + sh / 2, P.dim, { size: fs }); text(ctx, hex(MEM[b][k]), r.x + r.w - 6, y + sh / 2, b === B0 && k === 0 ? P.ink : P.dim, { align: 'right', size: fs }); }
     }
     // pointers: P[0] back to P itself, P[i] to Tᵢ, T₁[2] to D₁,₂
@@ -177,14 +178,41 @@
     // the value read at the end of the walk
     if (done >= hops.length && hops.length) {
       const v = hops[hops.length - 1].value, r = blocks[v];
-      if (r) { const hh = MEM[v] ? 22 : r.h; ctx.globalAlpha = focus ? 1 : 0.35; ctx.strokeStyle = P.amber; ctx.lineWidth = lw(2.2); ctx.shadowColor = P.amber; ctx.shadowBlur = 12; ctx.strokeRect(r.x - 2, r.y - 2, r.w + 4, hh + 4); ctx.shadowBlur = 0; ctx.globalAlpha = 1; }
+      if (r) { geo.amber++; const hh = MEM[v] ? 22 : r.h; ctx.globalAlpha = focus ? 1 : 0.35; ctx.strokeStyle = P.amber; ctx.lineWidth = lw(2.2); ctx.shadowColor = P.amber; ctx.shadowBlur = 12; ctx.strokeRect(r.x - 2, r.y - 2, r.w + 4, hh + 4); ctx.shadowBlur = 0; ctx.globalAlpha = 1; }
     }
     geo.table = blocks;
+  }
+
+  /* ---------- the pointer register beside the table: p and *p side by side ---------- */
+  /** For a one-hop walk: the register p (the base the hop reads from) against *p (the value it reads), then an
+      ordinary pointer for contrast, p = addr(T₁) against *p = T₁[0]. Both pairs are looked up in MEM, not typed in. */
+  function drawRegister(ctx, box) {
+    const hop = walk(S.idx)[0], done = hopsDone() >= 1;
+    const other = { base: 0x2000, slot: 0, value: MEM[0x2000][0] };
+    const fs = clamp(box.w / 26, 10, 14), bh = clamp(fs * 2.6, 28, 40), bw = clamp(box.w * 0.36, 86, 170);
+    const cx = box.x + box.w / 2, rows = [];
+    const pair = (y, h, A, cap) => {
+      const same = h.base === h.value, xl = cx - bw - fs * 1.4, xr = cx + fs * 1.4;
+      text(ctx, cap, box.x + 4, y - bh * 0.5 - fs * 2.1, P.dim, { size: fs * 0.85, face: 'body', base: 'bottom' });
+      for (const [x, k, v] of [[xl, 'p', hex(h.base)], [xr, `*p = ${nameOf(h.base)}[${h.slot}]`, done || h !== hop ? hex(h.value) : '?']]) {
+        ctx.globalAlpha = A; ctx.strokeStyle = P.lineHot; ctx.lineWidth = lw(1.2); ctx.strokeRect(x + 0.5, y - bh / 2 + 0.5, bw - 1, bh - 1); ctx.globalAlpha = 1;
+        text(ctx, k, x + bw / 2, y - bh / 2 - 3, A < 1 ? P.faint : P.dim, { align: 'center', base: 'bottom', size: fs * 0.82 });
+        ctx.globalAlpha = A; text(ctx, v, x + bw / 2, y, P.ink, { align: 'center', size: fs * 1.15, weight: 600 }); ctx.globalAlpha = 1;
+      }
+      const eq = done || h !== hop ? (same ? '=' : '≠') : '';
+      ctx.globalAlpha = A; text(ctx, eq, cx, y, same ? P.cyan : P.dim, { align: 'center', size: fs * 1.9, weight: 700 }); ctx.globalAlpha = 1;
+      rows.push({ p: h.base, star: h.value, sign: eq });
+    };
+    const y1 = box.y + Math.max(box.h * 0.3, bh / 2 + fs * 3.4), y2 = Math.min(box.y + box.h - bh / 2 - 2, y1 + bh + fs * 4.2);
+    pair(y1, hop, 1, L('指针寄存器 p 与它读出的 *p', 'the pointer register p and what it reads, *p'));
+    pair(y2, other, 0.55, L('对照：一枚普通指针', 'for contrast: an ordinary pointer'));
+    geo.reg = rows;
   }
 
   /* ---------- the stage ---------- */
   function drawStage() {
     const g0 = kit.plot($('cv'), { x: [0, 1], y: [0, 1], pad: [0, 0, 0, 0] }), ctx = g0.ctx, W = g0.W, H = g0.H;
+    geo.amber = 0;
     if (TRV.thumbMode) {     // wordless cover: the lit routing paths over the memory row, beside the self-mapped directory
       const glow = ctx.createRadialGradient(W * 0.35, H * 0.5, 0, W * 0.35, H * 0.5, W * 0.6);
       glow.addColorStop(0, TRV.alpha(P.cyan, 0.08)); glow.addColorStop(1, TRV.alpha(P.cyan, 0)); ctx.fillStyle = glow; ctx.fillRect(0, 0, W, H);
@@ -195,6 +223,23 @@
     const st = $('stage').getBoundingClientRect(), below = (el) => (el ? el.getBoundingClientRect().bottom - st.top : 0);
     const top = Math.max(46, below($('hudBig').parentElement), below($('sceneChips'))) + 8, bottom = Math.max(18, $('legend').offsetHeight + 18);
     const bx = { x: 18, y: top, w: W - 36, h: Math.max(80, H - top - bottom) };
+    geo.mem = null; geo.reg = null; geo.tree = S.scene !== 'table';
+    if (S.scene === 'table') {         // the page table is a notation of its own: the routing tree and scan bus fold away
+      const one = S.idx.length === 1, wide = bx.w >= 560;
+      if (one && wide) {
+        const rw = bx.w * 0.42;
+        drawRegister(ctx, { x: bx.x, y: bx.y, w: rw, h: bx.h });
+        drawTable(ctx, { x: bx.x + rw + 16, y: bx.y, w: bx.w - rw - 16, h: bx.h }, true);
+      } else if (one) {
+        const rh = Math.min(bx.h * 0.46, 200);
+        drawRegister(ctx, { x: bx.x, y: bx.y, w: bx.w, h: rh });
+        drawTable(ctx, { x: bx.x, y: bx.y + rh + 4, w: bx.w, h: bx.h - rh - 4 }, true);
+      } else {
+        const tw = Math.min(bx.w, 620);
+        drawTable(ctx, { x: bx.x + (bx.w - tw) / 2, y: bx.y, w: tw, h: bx.h }, true);
+      }
+      return;
+    }
     if (bx.w >= 560) {
       const mw = bx.w * 0.6;
       drawMemory(ctx, { x: bx.x, y: bx.y, w: mw, h: bx.h }, true);
@@ -222,6 +267,7 @@
 
   /* ---------- words ---------- */
   const LEGEND = [['cy', '设好的路由开关、走过的跳', 'switches set, hops walked'], ['dm box', '扫描读过的格', 'cells the scan has read'], ['am', '读头：此刻这一步', 'the reader: this step now']];
+  const LEGEND_TABLE = [['cy', '走过的跳', 'hops walked'], ['am', '此刻读到的槽或表', 'the slot or table being read now']];
   const setLabel = (id, zh, en) => { const h = `<span class="zh">${zh}</span><span class="en">${en}</span>`; if ($(id)._h !== h) { $(id).innerHTML = h; $(id)._h = h; } };
   const bin = (a) => a.toString(2).padStart(n, '0');
   const idxStr = () => `[${S.idx.join(', ')}]`;
@@ -255,7 +301,7 @@
     $('ro4').textContent = hops.slice(0, done).map((h) => `${hex(h.base)}[${h.slot}] → ${hex(h.value)}`).join(' · ') || '—';
     $('hudBig').textContent = big; $('hudSub').textContent = hud; $('roNote').textContent = note;
     $('pillSteps').querySelector('strong').textContent = String(s);
-    const leg = LEGEND.map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
+    const leg = (S.scene === 'table' ? LEGEND_TABLE : LEGEND).map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
     if ($('legend')._h !== leg) { $('legend').innerHTML = leg; $('legend')._h = leg; }
     $('oAddr').textContent = String(S.a);
     document.querySelectorAll('[data-scenes]').forEach((el) => { el.hidden = !el.dataset.scenes.split(' ').includes(S.scene); });
@@ -307,7 +353,7 @@
     superpose: ['地址是四个分支的叠加：41、9、33、1。四条青色的路同时往下走，在根开关与第三层开关处分叉，分开后不再共用；到底一共亮 17 个开关，每条路仍只有 6 个。', 'The address is a superposition of four branches: 41, 9, 33 and 1. Four cyan paths run down at once, parting at the root switch and at a third-level switch, never to share again; 17 switches light up in all, and each path still has only 6.'],
     four_loops: ['索引 [0, 0, 0, 0]：四跳都读零号槽，零号槽里写的就是页目录自己的地址 0x1000，箭头四次弯回原处（×4）；读出的仍是页目录 P 自己。', 'Index [0, 0, 0, 0]: all four hops read slot 0, which holds the directory’s own address 0x1000, so the arrow curls back four times (×4); what comes out is still the page directory P itself.'],
     self_map: ['索引 [0, 1]：第一跳踩中零号槽回到 0x1000，第二跳读 P[1] = 0x2000，于是叶页表 T₁ 本身被当作数据读出；对照 [1, 2] 两跳读到的是数据帧 0x9000。', 'Index [0, 1]: the first hop lands on slot 0 and comes back to 0x1000, the second reads P[1] = 0x2000, so the leaf table T₁ itself is read out as data; compare [1, 2], whose two hops reach the data frame 0x9000.'],
-    diagonal_hit: ['p = 0x1000，*p = Mem[0x1000][0] = 0x1000：一次解引用，读出的内容就是地址本身。只有写着自己地址的这一格如此，读别的地址仍要一级一级走。', 'p = 0x1000 and *p = Mem[0x1000][0] = 0x1000: one dereference, and what it reads is the address itself. Only this cell, which holds its own address, does that; any other address still takes every level.']
+    diagonal_hit: ['p = 0x1000，*p = Mem[0x1000][0] = 0x1000：左边指针寄存器 p 与它读出的 *p 并排，中间是青色的“=”——一次解引用，读出的内容就是地址本身。下面对照的普通指针 p = 0x2000 读出 T₁[0] = 0x7000，两数不等：只有写着自己地址的这一格如此，读别的地址仍要一级一级走。', 'p = 0x1000 and *p = Mem[0x1000][0] = 0x1000: on the left the pointer register p and what it reads, *p, stand side by side with a cyan = sign between them; one dereference, and what it reads is the address itself. The ordinary pointer below for contrast, p = 0x2000, reads T₁[0] = 0x7000, and the two differ: only the cell that holds its own address does this; any other address still takes every level.']
   };
   let booting = true;
   function applyPreset(id) {
@@ -333,7 +379,8 @@
     get state() {
       return { scene: S.scene, a: S.a, k: S.k, idx: S.idx.slice(), t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, step: tick(),
         N, depth: depthOf(N), switches: SWITCHES.length, scanSteps: scanSteps(), scanRead: scanRead(), hit: scanRead() >= scanSteps(),
-        levels: levelsSet(), active: activeSwitches(), branches: branches(), pathSwitches: allPathSwitches(), hops: walk(S.idx).slice(0, hopsDone()), result: hopsDone() >= S.idx.length ? pageResult() : null };
+        levels: levelsSet(), active: activeSwitches(), branches: branches(), pathSwitches: allPathSwitches(), hops: walk(S.idx).slice(0, hopsDone()), result: hopsDone() >= S.idx.length ? pageResult() : null,
+        treeShown: !!geo.tree, register: geo.reg ? geo.reg.map((r) => Object.assign({}, r)) : null, amberMarks: geo.amber || 0 };
     },
     switches: () => SWITCHES.map((s) => s.slice()), path: (a) => pathOf(a).map((s) => Object.assign({}, s)), mem: () => JSON.parse(JSON.stringify(MEM)), walk: (idx) => walk(idx),
     seek: (t) => { clock.pause(); clock.set(t); }, scene: (sc, t) => setScene(sc, t), setAddr: (a) => { S.a = a; fAddr.set(a); fitClock(); }, setK: (k) => setK(k), setIdx: (idx) => setIdx(idx),

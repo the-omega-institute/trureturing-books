@@ -82,6 +82,10 @@
   const stats = (xs) => { const n = xs.length; if (!n) return { mean: NaN, sd: NaN }; const m = xs.reduce((a, x) => a + x, 0) / n; return { mean: m, sd: n > 1 ? Math.sqrt(xs.reduce((a, x) => a + (x - m) ** 2, 0) / (n - 1)) : 0 }; };
   const trialsNow = () => (S.scene === 'shots' ? Math.round(clock.t) : 0);
 
+  /** The card on show decides what the stage stresses: `shift` hides the small-step chord (not yet met in the text),
+      `step` stresses the chord and the gap between its bar and the tangent; free play shows everything evenly. */
+  const focus = () => { try { return cards.current === 'shift' || cards.current === 'step' ? cards.current : null; } catch (e) { return null; } };
+
   /* ---------- layout: dial | curve | gauge on a wide stage; dial and gauge above the curve on a narrow one ---------- */
   let boxes = null, curveG = null, dialG = null;
   function layout(W, H) {
@@ -153,16 +157,22 @@
     // the small-step chord: the line through the two sampled points (θ − h, f(θ − h)) and (θ + h, f(θ + h)), whose
     // midpoint sits at θ with the mean of the two values; drawn at least over the run of the tangent and out to both points
     const run = 0.95, fd = fdOf(th, hr), f0 = f(th), fHi = f(th + hr), fLo = f(th - hr), mid = (fHi + fLo) / 2, runC = Math.max(run, hr);
+    const fo = focus(), chord = fo !== 'shift', cyA = fo === 'step' ? 0.35 : 1;
     g.ctx.save(); g.ctx.beginPath(); g.ctx.rect(g.pl, g.pt, g.iw, g.ih); g.ctx.clip();
-    g.line([[th - runC, mid - fd * runC], [th + runC, mid + fd * runC]], P.magenta, { width: 1.8 * TH, alpha: 0.9 });
-    g.dot(th + hr, fHi, P.magenta, 3.4 * TH); g.dot(th - hr, fLo, P.magenta, 3.4 * TH);
+    if (chord) {
+      g.line([[th - runC, mid - fd * runC], [th + runC, mid + fd * runC]], P.magenta, { width: (fo === 'step' ? 2.8 : 1.8) * TH, alpha: 0.9 });
+      g.dot(th + hr, fHi, P.magenta, (fo === 'step' ? 4.4 : 3.4) * TH); g.dot(th - hr, fLo, P.magenta, (fo === 'step' ? 4.4 : 3.4) * TH);
+    }
     g.line([[th - run, f0 - sl * run], [th + run, f0 + sl * run]], P.ink, { width: 1.6 * TH, dash: [6, 4] });
     g.ctx.restore();
-    g.dot(th + Q, fp, P.cyan, 5.5 * TH, { glow: 10 }); g.dot(th - Q, fm, P.cyan, 5.5 * TH, { glow: 10 });
+    g.dot(th + Q, fp, P.cyan, 5.5 * TH, { glow: fo === 'step' ? 0 : 10, alpha: cyA }); g.dot(th - Q, fm, P.cyan, 5.5 * TH, { glow: fo === 'step' ? 0 : 10, alpha: cyA });
     g.dot(th, f0, P.amber, 6.5 * TH, { glow: 14 });
     if (!TRV.thumbMode) {
-      tagAt('cP', g, th + Q, fp, `f(θ+90°) ${fix(fp, 3)}`, 'raw cy', 0, fp > 0.75 ? 14 : -14);
-      tagAt('cM', g, th - Q, fm, `f(θ−90°) ${fix(fm, 3)}`, 'raw cy', 0, fm > 0.75 ? 14 : -14);
+      if (fo !== 'step') {
+        tagAt('cP', g, th + Q, fp, `f(θ+90°) ${fix(fp, 3)}`, 'raw cy', 0, fp > 0.75 ? 14 : -14);
+        tagAt('cM', g, th - Q, fm, `f(θ−90°) ${fix(fm, 3)}`, 'raw cy', 0, fm > 0.75 ? 14 : -14);
+      }
+      if (fo === 'step') tagAt('cH', g, th - hr, f(th - hr), L(`±${S.h}° 的弦`, `the ±${S.h}° chord`), 'raw mg', 66, -2);
       const yIn = (v) => clamp(v, YC[0] + 0.08, YC[1] - 0.08);
       tagAt('cT', g, th + run, yIn(f0 + sl * run), L('切线', 'tangent'), 'raw ink', 26, sl > 0 ? -6 : 6);
       if (Math.abs(C.c) > 1e-9) tagAt('cC', g, XR[0] + 0.25, C.c, 'c', 'tick', 6, -8);
@@ -174,16 +184,24 @@
   function drawGauge(W, H, cur) {
     const b = boxes.g, cv = $('cv'), shotsScene = S.scene === 'shots', y = shotsScene ? YS : YC;
     const g = kit.plot(cv, { x: [0, 3], y, pad: padOf(b, W, H, 30, 4, 6, 18), clear: false });
-    g.axes({ yTicks: shotsScene ? [[-3, '−3'], [-2, '−2'], [-1, '−1'], [0, '0'], [1, '1'], [2, '2'], [3, '3']] : [[-1, '−1'], [0, '0'], [1, '1']], xTicks: TRV.thumbMode ? [] : [[0.5, 'f′'], [1.5, '±90°'], [2.5, `±${S.h}°`]] });
+    const fo = shotsScene ? null : focus();
+    g.axes({ yTicks: shotsScene ? [[-3, '−3'], [-2, '−2'], [-1, '−1'], [0, '0'], [1, '1'], [2, '2'], [3, '3']] : [[-1, '−1'], [0, '0'], [1, '1']], xTicks: TRV.thumbMode ? [] : [[0.5, 'f′'], [1.5, '±90°']].concat(fo === 'shift' ? [] : [[2.5, `±${S.h}°`]]) });
     g.hline(0, P.faint, {});
     g.line([[0.05, cur.sl], [2.95, cur.sl]], P.ink, { width: 1.6 * TH, dash: [6, 4] });
     g.rect(0.3, 0, 0.7, cur.sl, P.ink, { alpha: 0.25 });
     const n = trialsNow(), out = { above: 0, below: 0 };
     if (!shotsScene) {
-      g.rect(1.25, 0, 1.75, cur.shift, P.cyan, { alpha: 0.7 });
-      g.rect(2.25, 0, 2.75, cur.fd, P.magenta, { alpha: 0.6 });
-      g.line([[1.18, cur.shift], [1.82, cur.shift]], P.cyan, { width: 2.6 * TH, glow: 8 });
-      g.line([[2.18, cur.fd], [2.82, cur.fd]], P.magenta, { width: 2.6 * TH });
+      const cyA = fo === 'step' ? 0.35 : 1;
+      g.rect(1.25, 0, 1.75, cur.shift, P.cyan, { alpha: 0.7 * cyA });
+      g.line([[1.18, cur.shift], [1.82, cur.shift]], P.cyan, { width: 2.6 * TH, glow: fo === 'step' ? 0 : 8, alpha: cyA });
+      if (fo !== 'shift') {
+        g.rect(2.25, 0, 2.75, cur.fd, P.magenta, { alpha: 0.6 });
+        g.line([[2.18, cur.fd], [2.82, cur.fd]], P.magenta, { width: 2.6 * TH });
+      }
+      if (fo === 'step' && Math.abs(cur.sl) > 1e-9) {   // the gap between the chord's bar and the tangent, with its size
+        g.line([[2.88, cur.fd], [2.94, cur.fd], [2.94, cur.sl], [2.88, cur.sl]], P.magenta, { width: 1.6 * TH });
+        if (!TRV.thumbMode) tagAt('gGap', g, 2.1, (cur.fd + cur.sl) / 2, L(`短 ${fix(100 * Math.abs(1 - cur.fd / cur.sl), 1)}%`, `${fix(100 * Math.abs(1 - cur.fd / cur.sl), 1)}% short`), 'raw mg', 0, cur.sl < 0 ? 14 : -14);
+      }
     } else {
       const sh = shots();
       const jit = (i) => ((i * 0.6180339887) % 1) - 0.5;
@@ -313,7 +331,7 @@
     $('roNote').textContent = note; $('roAside').textContent = aside;
     $('pillScene').querySelector('strong').textContent = S.scene === 'curve' ? L('曲线', 'CURVE') : L('采样', 'SHOTS');
     $('pillKeyName').textContent = pill[0]; $('pillKey').querySelector('strong').textContent = pill[1];
-    $('legend').innerHTML = LEGEND[S.scene].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
+    $('legend').innerHTML = LEGEND[S.scene].filter(([cl]) => !(S.scene === 'curve' && cl === 'mg' && focus() === 'shift')).map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
     $('modelNote').textContent = S.model === 'z' ? L('r₀ = m = (0, 0, 1)：f = cos θ，第十二章的例子。', 'r₀ = m = (0, 0, 1): f = cos θ, the example of Chapter 12.')
       : L(`r₀ = (0.48, 0.60, 0.64)，m = (0.80, 0.36, 0.48)：c = ${fix(C.c, 4)}，a = ${fix(C.a, 4)}，b = ${fix(C.b, 4)}。`, `r₀ = (0.48, 0.60, 0.64), m = (0.80, 0.36, 0.48): c = ${fix(C.c, 4)}, a = ${fix(C.a, 4)}, b = ${fix(C.b, 4)}.`);
   }
@@ -400,7 +418,7 @@
     get state() {
       const th = S.theta, hr = S.h * DEG, sh = shots(), n = trialsNow();
       return {
-        scene: S.scene, model: S.model, theta: th, h: S.h, N: S.N, seed: S.seed, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current,
+        scene: S.scene, focus: focus(), model: S.model, theta: th, h: S.h, N: S.N, seed: S.seed, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current,
         r0: MODELS[S.model].r0.slice(), m: MODELS[S.model].m.slice(), coeffs: Object.assign({}, C),
         f: f(th), fPlus: f(th + Q), fMinus: f(th - Q), shift: shiftOf(th), slope: slopeByCommutator(MODELS[S.model], th), fd: fdOf(th, hr),
         trials: n, offGauge: last.out ? last.out.above + last.out.below : 0,

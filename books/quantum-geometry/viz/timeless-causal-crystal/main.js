@@ -140,8 +140,15 @@
     st.arrow([0, 0, 0], A, { color: P.cyan, width: 2, headSize: 10 }); st.arrow([0, 0, 0], B, { color: P.sigma, width: 2, headSize: 10 }); st.arrow([0, 0, 0], C, { color: P.amber, width: 2.4, glow: 10, headSize: 11, fade: false });
     st.dot(C, 5.5, P.amber, { glow: 12, fade: false });
     st.tag('A', v3.scale(A, 1.12), 'A', 'cy'); st.tag('B', v3.scale(B, 1.12), 'B', 'ink'); st.tag('C', v3.scale(C, 1.13), 'C', 'hot');
-    st.tag('t1', v3.scale(v3.slerp(A, B, 0.5), 1.13), `θ₁ ${S.th1}°`, 'num c-cy'); st.tag('t2', v3.scale(v3.slerp(B, C, 0.5), 1.13), `θ₂ ${S.th2}°`, 'num c-mg');
-    st.tag('ac', v3.scale(v3.slerp(A, C, 0.5), 1.15), `${fix(g.angle, 0)}°`, 'num c-am');
+    // each angle label sits just outside the middle of its own arc; when the arcs are short and meet near B (as on the
+    // IMPOSSIBLE card: C at an edge of the window, the three coplanar, the A–C arc running through B) the labels would
+    // pile up on B, so θ₁ moves towards A, θ₂ towards C, and the A–C angle goes just inside the amber arc
+    const m1 = v3.scale(v3.slerp(A, B, 0.5), 1.13), m2 = v3.scale(v3.slerp(B, C, 0.5), 1.13), mac = v3.scale(v3.slerp(A, C, 0.5), 1.15);
+    const sB = st.p(B), dist = (u, w) => { const a = st.p(u), b = st.p(w); return Math.hypot(a[0] - b[0], a[1] - b[1]); };
+    const side = (u) => Math.sign(st.p(u)[0] - sB[0]) || 1, crowded = g.vol < 1e-3 && (dist(m1, m2) < 90 || dist(mac, B) < 45);
+    st.tag('t1', m1, `θ₁ ${S.th1}°`, 'num c-cy', crowded ? { dx: 22 * side(A) } : undefined);
+    st.tag('t2', m2, `θ₂ ${S.th2}°`, 'num c-mg', crowded ? { dx: 22 * side(C) } : undefined);
+    st.tag('ac', crowded ? v3.scale(v3.slerp(A, C, 0.5), 0.84) : mac, `${fix(g.angle, 0)}°`, 'num c-am', crowded ? { dx: 18 * side(C) } : undefined);
     $('hudBig').textContent = `A·C = ${sgn(g.cAC, 3)}`;
     $('hudSub').textContent = g.vol < 1e-3 ? L('C 贴在窗边：三根向量共面，体积为零', 'C is at the edge of the window: the three vectors are coplanar and the volume is zero')
       : L(`只能落在 [${sgn(g.lo, 3)}, ${sgn(g.hi, 3)}] 里；三根向量撑开的体积 ${fix(g.vol, 3)}`, `It can only lie in [${sgn(g.lo, 3)}, ${sgn(g.hi, 3)}]; the three vectors span a volume of ${fix(g.vol, 3)}`);
@@ -166,8 +173,8 @@
     }
     const hp = 0.6, pts = []; for (let i = 0; i <= 40; i++) pts.push(v3.sph(F.a0 + (F.a - F.a0) * i / 40, hp));
     st.path(pts, { color: P.amber, width: 2.4, back: 0.4 }); st.dot(v3.sph(F.a0, hp), 4, P.sigma, { ring: true }); st.dot(v3.sph(F.a, hp), 6, P.amber, { glow: 14, fade: false });
-    st.dot(Z, 7, P.sigma, { ring: true, width: 2 }); st.dot([0, 0, -1], 6, P.warn, { ring: true, width: 2 });
-    st.tag('tg', [0, 0, 1.14], L('目标', 'target'), 'raw ink'); st.tag('sg', [0, 0, -1.14], L('场为零', 'field is zero'), 'raw c-wn');
+    st.dot(Z, 7, P.sigma, { ring: true, width: 2 }); st.dot([0, 0, -1], 6, P.dim, { ring: true, width: 2 });
+    st.tag('tg', [0, 0, 1.14], L('目标', 'target'), 'raw ink'); st.tag('sg', [0, 0, -1.14], L('场为零', 'field is zero'), 'raw');
     $('hudBig').textContent = `t = ${fix(t, 2)} · α = ${fix(F.a / DEG, 1)}°`;
     $('hudSub').textContent = L(`从 ${S.alpha0}° 顺着坡度走；此刻的速度 sin α = ${fix(F.speed, 3)}`, `Following the slope from ${S.alpha0}°; the speed right now is sin α = ${fix(F.speed, 3)}`);
   }
@@ -399,9 +406,9 @@
     const LEG = {
       window: [['cy', 'A 到 B：θ₁', 'A to B: θ₁'], ['mg', 'B 到 C：θ₂', 'B to C: θ₂'], ['am', 'A 到 C：被锁住的那条', 'A to C: the one that is fixed'], ['box vi', '三者撑开的体积', 'the volume they span']],
       pages: [['cy', '全部书页', 'all the pages'], ['am', '读头所在的页', 'the page under the head'], ['vi', '翻页轴', 'the paging axis']],
-      field: [['cy', '各处出发的流线', 'flow lines from everywhere'], ['am', '选中的那条', 'the chosen one'], ['wn', '场为零的对面点', 'the opposite point, where the field is zero']],
+      field: [['cy', '各处出发的流线', 'flow lines from everywhere'], ['am', '选中的那条', 'the chosen one'], ['dm', '场为零的对面点', 'the opposite point, where the field is zero']],
       line: [['cy', '走过的每一步', 'every step taken'], ['am', '当前的态', 'the current state'], ['dm', '起点附近的“其余”轴', 'the “rest” axis near the start']],
-      sos: [['cy', '2-SAT：消解闭包的阶', '2-SAT: order of the resolution closure'], ['mg', '3-XOR：示意的阶数阈值', '3-XOR: schematic order threshold'], ['am', '观察者的阶 M', 'the observer\'s order M']],
+      sos: [['cy', '2-SAT：消解闭包的阶（实心：推出空子句；空心：可满足）', '2-SAT: order of the resolution closure (filled: empty clause derived; hollow: satisfiable)'], ['mg', '3-XOR：示意的阶数阈值', '3-XOR: schematic order threshold'], ['am', '观察者的阶 M', 'the observer\'s order M']],
       wild: [['cy', '见证丝与丝上的探针', 'the thread and the probe on it'], ['mg', '涡旋与通道外的探针', 'the vortices and the probes off the channel'], ['am', '探针此刻的位置', 'where the probes are now']]
     };
     const html = LEG[S.scene].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
@@ -453,7 +460,7 @@
     impossible: ['A 与 B 只夹 30°，B 与 C 只夹 40°，却要求 A 与 C 接近反向（A·C = −0.5）。det G 变成负数：没有任何三根向量能做到。', 'A and B are only 30° apart and B and C only 40°, yet A and C are asked to be nearly opposite (A·C = −0.5). det G turns negative: no three vectors can do this.'],
     right: ['两个夹角都是 90° 时，前两条余弦都是 0，对第三条不加任何限制：窗口是整个 [−1, 1]，C 可以沿赤道到任何地方。', 'With both angles at 90° the first two cosines are 0 and put no constraint on the third: the window is all of [−1, 1], and C can go anywhere along the equator.'],
     crystal: ['十二页一直都画在球上，没有哪一页先出现。播放时移动的只有琥珀色的读头：“现在”是读头的位置，不是书的性质。', 'All twelve pages are on the sphere the whole time; none appears first. When it plays, only the amber reading head moves: “now” is where the head is, not a property of the book.'],
-    field: ['每条细线从不同的地方出发，都只看脚下的坡度，都流到目标。下面的图里，降下的势能与走过的耗散始终相等。', 'Each thin line starts somewhere else, looks only at the slope underfoot, and flows to the target. In the plot below the potential lost and the dissipation paid are equal throughout.'],
+    field: ['每条细线从不同的地方出发，都只看脚下的坡度，都流到目标。', 'Each thin line starts somewhere else, looks only at the slope underfoot, and flows to the target.'],
     thread: ['256 个候选里找一个：态从“其余”轴出发，每步向目标转 7.2°，12 步之后几乎对准。逐个试平均要 128 次。', 'One target among 256 candidates: the state starts near the “rest” axis and turns 7.2° towards the target per step, almost aligned after 12 steps. Trying one by one takes 128 tries on average.'],
     sos: ['青色：随机 2-SAT 的两元子句两两消解，推出的子句至多两个文字，n 再大也停在阶 2，并由此判定可满足性。品红：对随机 3-XOR / 3-SAT，文献证明阶 o(n) 的平方和松弛仍处处相容，直线只是示意斜率。琥珀色是观察者的阶 M。这些下界不推出 P ≠ NP，它仍是开放问题。', 'Cyan: resolving the two-literal clauses of random 2-SAT pairwise never yields more than two literals, so it stays at order 2 however large n is, and decides satisfiability that way. Magenta: for random 3-XOR / 3-SAT the literature proves that sum-of-squares relaxations of order o(n) stay consistent; the straight line only shows a schematic slope. Amber is the observer\'s order M. These lower bounds do not imply P ≠ NP, which remains open.'],
     wilderness: ['同一个场、同一个积分器：从丝上 S₀ 出发的青色探针沿 y = h(x) 直达 S*；离丝只差一点、但在通道（|ỹ| < ε）之外出发的三根品红探针被第一个涡旋卷住，到不了目标。示意模型，不是复杂度下界。', 'One field, one integrator: the cyan probe that starts on the thread at S₀ runs along y = h(x) straight to S*; three magenta probes that start only a little off it, but outside the channel (|ỹ| < ε), are caught by the first vortex and never reach the target. A schematic model, not a complexity lower bound.']

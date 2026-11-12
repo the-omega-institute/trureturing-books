@@ -419,7 +419,7 @@ The aphorism is stated; now let us do the arithmetic. The cosine table in [@ex-d
 2. If the ruler reads not only the projection $\cos\theta$ but also the orthogonal component $\sin\theta$, how much faster does the loop close?
 
 ::: {.viz src="fixed-point-convergence" preset="newton" height="500"}
-**Follow the tangent: near the fixed point, digits double asymptotically.** Again from $\theta_0 = 1$, each step reads the height of the curve and then follows the magenta tangent to the grey line $y = x$. Once it is near the fixed point, the view zooms along: within four steps its width falls from about $0.6$ to the order of $10^{-20}$, with the error asymptotically squared at each step; the plain iteration needs $115$ steps to match step $4$ (numerical check in [@ex-dottie-rate-newton-rational]).
+**Follow the tangent: near the fixed point, digits double asymptotically.** Again from $\theta_0 = 1$, each step reads the height of the curve and then follows the magenta tangent to the grey line $y = x$. Once it is near the fixed point, the view zooms along and stops at step $2$, about $10^{-4}$ wide. The amber $x_2$ has just come down the magenta tangent of the previous step onto the grey line, $2.78\times10^{-5}$ from the white ring $\theta^*$; at this magnification the cyan curve is already too straight to tell from its tangent. The correct decimal digits run $0$, $1$, $4$, with the error asymptotically squared at each step; the plain iteration needs $24$ steps to match this step (numerical check in [@ex-dottie-rate-newton-rational]).
 :::
 
 3. How close to $\cos q = q$ can a ruler with finitely many rational tick marks get?
@@ -547,10 +547,6 @@ The last table of [@ex-dottie-rate-newton-rational] shows that refining the tick
 **Twenty-three divisions beat a thousand.** The amber $17/23$ next to the dashed ruler reading $739/1000$: the tick nearest $\theta^*$ on a thousandths ruler leaves about twice the residual of $17/23$ ($1.42\times10^{-4}$ against $7.58\times10^{-5}$).
 :::
 
-::: {.viz src="fixed-point-convergence" height="560"}
-**How fixed points close in: the full lab.** Three scenes on one cobweb plane: iteration ($\cos x$ or $1 + 1/x$, with a draggable start and three cameras), Newton's method, and rational readings (with an adjustable ruler). Qualitative cosine convergence and conditional asymptotic factors follow from the reuse derivation in [@ex-ch33-mutual-cosine-monotonic-lock]; Newton's method, numerical values, and residual bounds retain their literature or numerical boundaries; the green boxes cite only [@cor-golden-fixed-point-unique] and [@thm-dottie-rational-inverse-endpoint].
-:::
-
 Rational readings never line up. What about a different kind of closure: instead of asking the projection to return to itself, ask a rotation to return to its starting point? The answer is again no, and this time no conjecture is needed.
 
 ::: {.remark #rem-dottie-angle-incommensurable title="θ* and π Are Incommensurable: Rotation by the Fixed-Point Angle Never Closes (Corollary of a Literature Result, Not Formalized in This Book)"}
@@ -609,6 +605,10 @@ The average of $f_1$ tends to $0$ quickly: the geometric sum gives the bound $\f
 :::
 
 Within a hundred steps, the orbit with step $\theta^*$ looks almost indistinguishable from a regular heptadecagon; equidistribution shows itself only on a longer time scale. An observer with finitely many steps sees a closed polygon; the whole circle appears only in the limit of infinitely many.
+
+::: {.viz src="fixed-point-convergence" height="560"}
+**How fixed points close in: the full lab.** Three scenes on one cobweb plane: iteration ($\cos x$ or $1 + 1/x$, with a draggable start and three cameras), Newton's method, and rational readings (with an adjustable ruler). Qualitative cosine convergence and conditional asymptotic factors follow from the reuse derivation in [@ex-ch33-mutual-cosine-monotonic-lock]; Newton's method, numerical values, and residual bounds retain their literature or numerical boundaries; the green boxes cite only [@cor-golden-fixed-point-unique] and [@thm-dottie-rational-inverse-endpoint].
+:::
 
 ### Twin-Spiral Correspondence: From the One-Dimensional Golden Continued Fraction to Two-Dimensional Cosine Whirling Squares {#sec-ch24-dottie-fibonacci-spirals}
 
@@ -916,7 +916,7 @@ The ratio of successive terms of $A$ tends to $(\theta^*)^2 \approx 0.546$. The 
 So two statements hold together without contradiction: analytically, each of $\pi$ and $\theta^*$ is the value of a rational power series at the other ([@thm-dottie-rational-inverse-endpoint], [@ex-dottie-pi-series]); algebraically, under Schanuel's conjecture ([@conj-schanuel-dottie]), no polynomial relation holds between them. $A$ and $B$ are infinite series, not polynomials; the finite truncations listed in the table all leave a nonzero difference. Nonvanishing of general truncation tails, a pattern of coefficient signs, and computational resource bounds are outside the endpoint theorem.
 
 ::: {.figure src="ch24-two-series"}
-**$\pi$ and $\theta^*$ are the two coordinates of one point on one curve.** The cyan curve is $A(x) = 2x + 2\arcsin x$. Going up from $\theta^*$ on the horizontal axis and then left reads off $\pi = A(\theta^*)$: the cyan arrows. Going right from $\pi$ on the vertical axis and then down reads back $\theta^* = B(\pi)$: the dashed magenta arrows. The absolute convergence and sum of $B$ at $\pi$ are [@thm-dottie-rational-inverse-endpoint]; the arcsine expansion behind $\pi = A(\theta^*)$ is in [@rem-arcsin-series-derivation] (literature result, not formalized in this book).
+**$\pi$ and $\theta^*$ are the two coordinates of one point on one curve.** The cyan curve is $A(x) = 2x + 2\arcsin x$. Going up from $\theta^*$ on the horizontal axis and then left reads off $\pi = A(\theta^*)$: the cyan arrows. Going right from $\pi$ on the vertical axis and then down reads back $\theta^* = B(\pi)$ along the same path: the dashed magenta arrows laid over the cyan ones. The absolute convergence and sum of $B$ at $\pi$ are [@thm-dottie-rational-inverse-endpoint]; the arcsine expansion behind $\pi = A(\theta^*)$ is in [@rem-arcsin-series-derivation] (literature result, not formalized in this book).
 :::
 
 **Where the fixed point lives: the half-time of a cycloid.** How the auxiliary equation $\eta + \sin\eta = \pi/2$ appears in Kepler's equation and Newtonian radial free fall is worked out in [@ex-dottie-free-fall].

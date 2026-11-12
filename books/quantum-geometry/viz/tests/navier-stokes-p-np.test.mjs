@@ -108,6 +108,14 @@ check('the mode chips switch the kind of stretching and restart the rail', s.mod
 /* ---------- closure ---------- */
 await pick('closed'); s = await seek(1.7);
 check('CLOSED: no leak, the seen acceleration does not depend on the unseen y', s.scene === 'closure' && s.closed && near(s.seen[0], s.seen[1], 1e-12) && /存在精确闭合/.test(await page.textContent('#roKeySub')));
+{
+  // the labels at the right edge: written here from P(V) = −x − x² (no leak, y = 1), every x once, and lines that end at
+  // the same height (x = −1 and x = 0) share one label instead of two printed over each other
+  const lab = s.lineTags, xs = lab.flatMap((e) => e.xs).sort((a, b) => a - b), f = (x) => -x - x * x;
+  const shared = lab.find((e) => e.xs.includes(-1));
+  const apart = lab.every((e, i) => lab.every((q, j) => i === j || Math.abs(e.v - q.v) >= 0.12));
+  check('CLOSED: one label per line height; x = −1 and x = 0 coincide and share a label', JSON.stringify(xs) === JSON.stringify([-1, -0.5, 0, 0.5, 1]) && shared && shared.xs.includes(0) && apart && lab.every((e) => e.xs.every((x) => Math.abs(f(x) - e.v) < 0.12)), JSON.stringify(lab));
+}
 let iffOK = true, iffBad = '', incOK = true;
 for (const lin of [-1, 0, 1]) for (const self of [-1, 0, 1]) for (const mix of [-1, 0, 1]) {
   await setRange('lin', lin); await setRange('self', self); await setRange('mix', mix);

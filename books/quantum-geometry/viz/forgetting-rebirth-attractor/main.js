@@ -236,6 +236,20 @@
     const nNow = S.n, nInt = Math.min(Math.floor(nNow + 1e-9), W.N - 1);
     // spokes of the wheel
     for (let j = 0; j <= ROUNDS; j++) { const a = spokeAngle(j); g.line([[0, 0], [Math.cos(a), Math.sin(a)]], P.dim, { width: TH, alpha: j === 0 ? 0.55 : 0.35, dash: j === 0 ? [] : [3, 5] }); }
+    // the fold as a motion: each visited state of a later round turns along its own circle toward the first spoke;
+    // the grey arc is the way it has turned, the faint ring where it started (unrolled)
+    const trails = [];
+    if (S.fold > 1e-6) {
+      for (let n = 0; n <= nInt; n++) {
+        const j = W.round[n]; if (j === 0) continue;
+        const r = W.light[n] ? 1 : morphR(kleinOfTheta(W.th[n]).r, S.mu); if (r < 0.02) continue;
+        const a0 = j * (2 * Math.PI / (ROUNDS + 1)), a1 = spokeAngle(j), arc = [];
+        for (let i = 0; i <= 40; i++) { const a = a0 + (a1 - a0) * i / 40; arc.push([r * Math.cos(a), r * Math.sin(a)]); }
+        g.line(arc, P.dim, { width: 1.1 * TH, alpha: 0.55, dash: [3, 4] });
+        g.dot(r * Math.cos(a0), r * Math.sin(a0), W.light[n] ? P.magenta : P.cyan, 4 * TH, { ring: true, width: 1.2 * TH, alpha: 0.4 });
+        trails.push({ n, r, from: a0, to: a1 });
+      }
+    }
     // the path walked so far
     for (let n = 0; n < nInt; n++) {
       const a = statePoint(n), b = statePoint(n + 1);
@@ -279,7 +293,7 @@
         }
       }
     }
-    return { pos, gapNow, mag, mult: [...mult.entries()] };
+    return { pos, gapNow, mag, mult: [...mult.entries()], trails };
   }
 
   /* ---------- scene: the fractional map ---------- */
@@ -456,7 +470,8 @@
     $('roNote').textContent = note; $('roAside').textContent = aside;
     $('pillScene').querySelector('strong').textContent = { stair: L('阶梯', 'STAIRCASE'), samsara: L('轮回', 'WHEEL'), cayley: L('分式', 'FRACTIONAL') }[sc];
     $('pillKeyName').textContent = pill[0]; $('pillKey').querySelector('strong').textContent = pill[1];
-    $('legend').innerHTML = LEGEND[sc].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
+    const legend = sc === 'samsara' && S.fold > 1e-6 ? LEGEND.samsara.concat([['dm', '虚线弧：折叠时转过的路；淡圈：展开时的位置', 'dashed arcs: the way each point turns as it folds; faint rings: where it was unrolled']]) : LEGEND[sc];
+    $('legend').innerHTML = legend.map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
   }
 
   const paint = kit.painter(() => { drawText(); drawStage(); drawPlot(); }, [$('stage'), $('plot')]);
@@ -497,16 +512,18 @@
     morphTween = kit.tween(1600, (e) => { S.mu = from + (to - from) * e; paint(); }, () => { morphTween = null; S.mu = to; paint(); if (done) done(); });
   }
   function setFold(f, animate, done) {
-    foldChips.set(String(f), true);
+    foldChips.set(f === 0 || f === 1 ? String(f) : null, true);
     const from = S.fold;
     if (foldTween) foldTween.cancel();
-    if (!animate) { S.fold = f; foldTween = null; paint(); if (done) done(); return; }
-    foldTween = kit.tween(1600, (e) => { S.fold = from + (f - from) * e; paint(); }, () => { foldTween = null; S.fold = f; paint(); if (done) done(); });
+    const show = (v) => { S.fold = v; fFold.set(Math.round(v * 100) / 100); paint(); };
+    if (!animate) { show(f); foldTween = null; if (done) done(); return; }
+    foldTween = kit.tween(1600, (e) => show(from + (f - from) * e), () => { foldTween = null; show(f); if (done) done(); });
   }
   const leave = () => cards.mark(null);
   const sceneChips = kit.chips($('sceneChips'), 'scene', (v) => { leave(); stopTween(); setScene(v); });
   const modelChips = kit.chips($('modelChips'), 'model', (v) => { leave(); setModel(v, true); });
   const foldChips = kit.chips($('foldChips'), 'fold', (v) => { leave(); setFold(Number(v), true); });
+  const fFold = kit.field($('fold'), { fmt: (v) => fix(v, 2), onInput: (v) => { leave(); if (foldTween) { foldTween.cancel(); foldTween = null; } setFold(v, false); } });
   const fD = kit.field($('dEta'), { fmt: (v) => fix(v, 2), onInput: (v) => { leave(); S.dEta = v; refreshWalk(); const cf = SCENES[S.scene]; clock.setMax(cf.max(), true); clock.set(cf.get()); paint(); } });
   $('rew').addEventListener('click', () => { clock.pause(); clock.set(0); });
   kit.keys({
@@ -519,18 +536,16 @@
      instead of the rail (morph: Klein → Poincaré; fold: unrolled → folded). */
   const PRESETS = {
     staircase: { scene: 'stair', model: 'klein', dEta: 1, from: 0, to: 8 },
-    horizon_gap: { scene: 'stair', model: 'klein', dEta: 1.5, from: 4, to: 10 },
     klein_vs_poincare: { scene: 'stair', model: 'poincare', dEta: 1, at: 3, morph: true },
     erase_reset: { scene: 'samsara', model: 'poincare', dEta: 1, fold: 0, from: 0, to: 'round2' },
     quotient_fold: { scene: 'samsara', model: 'poincare', dEta: 1, at: 'end', fold: 1, foldAnim: true },
     cayley: { scene: 'cayley', from: 0, to: 6 }
   };
   const NOTES = {
-    staircase: ['从自指平衡角 θ* 出发（η₀ ≈ 0.817），快度每步加 Δη = 1。青色的点沿射线一级级走向白色的圆周，过每一级的青色直弦都比上一条更挤向边界；走到第 8 级，sin θ = 0.99999996，右边放大镜里品红的缝仍然张开。', 'Starting from the self-referential balance angle θ* (η₀ ≈ 0.817), each step adds Δη = 1 of rapidity. The cyan points walk out along the ray toward the white rim, and each cyan chord through a step crowds closer to the rim than the one before; at step 8, sin θ = 0.99999996, and the magenta gap in the magnifier on the right is still open.'],
-    horizon_gap: ['步长加到 Δη = 1.5，从第 4 级走到第 10 级：琥珀色的点在主图上已经贴住圆周，放大镜却一次次把视野缩小十倍，品红的缝始终撑满视野的一截；到第 10 级，缝只剩约 3.6 × 10⁻¹⁴，仍然不是 0。', 'With the step raised to Δη = 1.5, walk from step 4 to step 10: on the main disk the amber point already hugs the rim, yet the magnifier keeps narrowing its field tenfold and the magenta gap always fills part of it; at step 10 the gap is about 3.6 × 10⁻¹⁴, and still not 0.'],
+    staircase: ['从自指平衡角 θ* 出发（η₀ ≈ 0.817），快度每步加 Δη = 1。青色的点沿射线一级级走向白色的圆周，过每一级的青色直弦都比上一条更挤向边界；走到第 8 级，sin θ = 0.99999996，右边放大镜里品红的缝仍然张开。把步长调大、级数走多，放大镜每一步把视野缩小十倍以上，缝也从不为 0。', 'Starting from the self-referential balance angle θ* (η₀ ≈ 0.817), each step adds Δη = 1 of rapidity. The cyan points walk out along the ray toward the white rim, and each cyan chord through a step crowds closer to the rim than the one before; at step 8, sin θ = 0.99999996, and the magenta gap in the magnifier on the right is still open. Raise the step and walk further, and the magnifier narrows its field tenfold or more at every step; the gap is never 0.'],
     klein_vs_poincare: ['停在第 3 级，把 Beltrami–Klein 圆盘换成庞加莱圆盘：每个点沿射线从 r = tanh η 挪到 ρ = tanh(η/2)，青色的直弦（灰色虚线是它们原来的位置）弯成与白色圆周正交的圆弧。读数里两种算法的固有时率 √(1 − r²) 与 (1 − ρ²)/(1 + ρ²) 一样，都是 sech η。', 'Stop at step 3 and swap the Beltrami–Klein disk for the Poincaré disk: each point moves along the ray from r = tanh η to ρ = tanh(η/2), and the cyan chords (the grey dashed lines are where they were) bend into arcs that meet the white rim at right angles. In the readouts the two proper-time rates √(1 − r²) and (1 − ρ²)/(1 + ρ²) agree: both are sech η.'],
     erase_reset: ['换成外部角度尺：每步把 θ 加上同样的 Δθ（与阶梯的第一步相同）。第二步就越过 90°，点落在圆周上（品红圈），轴向记忆 ½c² 归零；接着沿虚线回到圆心，换一根辐条从 0 开始重新走，又在第 4 步后撞上圆周。', 'Switch to the outside angle ruler: each step adds the same Δθ to θ (the staircase\'s own first step). The second step already passes 90°, the point lands on the rim (magenta ring) and the axial memory ½c² is zero; then it falls back to the centre along the dashed line and starts again from 0 on a new spoke, hitting the rim again after 4 steps.'],
-    quotient_fold: ['走完五圈后，把轮子按周期折叠：五根辐条转到同一个方向，第一次擦表之后的 25 步只落在 5 个位置上，每处叠着 5 次，品红圈全叠在圆周上的同一点；只剩最初从 θ* 出发的那一圈（白点）不在这 5 个位置里。', 'After five rounds, fold the wheel by its period: the five spokes turn to one direction, and the 25 steps after the first wipe land on only 5 positions, 5 times each, the magenta rings all on one point of the rim; only the first walk from θ* (white dots) lies outside these 5 positions.'],
+    quotient_fold: ['走完五圈后，把轮子按周期折叠：五根辐条转到同一个方向，每个点沿自己那一圈的灰色虚线弧转过去（淡色空心圈是它原来的位置），第一次擦表之后的 25 步只落在 5 个位置上，每处叠着 5 次，品红圈全叠在圆周上的同一点；只剩最初从 θ* 出发的那一圈（白点）不在这 5 个位置里。', 'After five rounds, fold the wheel by its period: the five spokes turn to one direction, each point turning along its own grey dashed arc (the faint hollow ring is where it was), and the 25 steps after the first wipe land on only 5 positions, 5 times each, the magenta rings all on one point of the rim; only the first walk from θ* (white dots) lies outside these 5 positions.'],
     cayley: ['分式变换 w = (s − 1)/s 把竖直线 Re s = c 变成圆：c 从 2.5 一步步减到接近 1/2，青色的像圆一个套一个，都在 w = 1 处与白色单位圆相切，并越来越贴近它；左边放大镜里，像圆与单位圆之间品红的缝在缩小，但对每个 c > 1/2 都还在。', 'The fractional map w = (s − 1)/s turns the vertical lines Re s = c into circles: as c steps down from 2.5 toward 1/2, the cyan image circles nest inside one another, all touching the white unit circle at w = 1 and hugging it ever closer; in the magnifier the magenta gap between the image circle and the unit circle shrinks, but is still there for every c > 1/2.']
   };
   let booting = true;
@@ -581,7 +596,7 @@
         steps, cur, curGap: morphGap(cur.rBK, cur.gapBK, S.mu),
         wall: wall(cur.rBK, S.mu, 48), curPoint: [morphR(cur.rBK, S.mu), 0],
         walk: { th: W.th.slice(), light: W.light.slice(), round: W.round.slice(), n0: W.n0, p: W.p, N: W.N, constant: W.constant, dth: gd(ETA0 + S.dEta) - THETA_STAR,
-          points: W.th.map((_, i) => statePoint(i)), mult: last.mult || null },
+          points: W.th.map((_, i) => statePoint(i)), mult: last.mult || null, trails: last.trails || null },
         cayley: { c, centre: circleOfLine(c).centre, radius: circleOfLine(c).radius, samples: last.samples || null },
         magU: last.mag ? last.mag.U : null, magGap: last.gapNow,
         hud: $('hudBig').textContent, key: $('ro').querySelector('.key dd').textContent
