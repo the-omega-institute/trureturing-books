@@ -12,6 +12,7 @@ import math
 from tbook import figkit
 
 SIZE = (520, 290)
+WRAP = True
 ALT = {
     "zh": "两颗同样大小的布洛赫球。左边推态：琥珀色的态绕紫色的转轴从灰点转到新位置，读出方向（北极的 |0⟩）不动；"
           "青色的弧是态与读出方向之间的夹角 α。右边拉回读出：琥珀色的态留在原处，灰色的读出方向倒着转到新位置；"
@@ -44,11 +45,11 @@ def turn_path(sp, start, angle, color, width):
 def draw(fig):
     R = 96
     heads = ((("推态", "push the state")), (("拉回读出方向", "pull the readout back")))
-    for i, (zh, en) in enumerate(heads):
-        fig.text(130 + 260 * i, 24, fig.t(zh, en), size=14, weight=600, anchor="middle")
-    for i in range(2):
-        cx = 130 + 260 * i
-        sp = fig.sphere(cx, 156, R, el=18)
+    panels = fig.row([252, 252], 290, gap=16)
+    cx = 126
+    for i, (p, (zh, en)) in enumerate(zip(panels, heads)):
+        p.text(cx, 24, fig.t(zh, en), size=14, weight=600, anchor="middle")
+        sp = p.sphere(cx, 156, R, el=18)
         sp.outline()
         sp.great_circle((0, 0, 1), "faint", 1.2)
         sp.segment(tuple(-1.18 * c for c in AXIS), tuple(1.18 * c for c in AXIS), "axis", 2.0)
@@ -72,4 +73,4 @@ def draw(fig):
                  color="dim", anchor="start" if i == 0 else "end", middle=True, halo=True)
         foot = ("态动，读出不动", "state moves, readout stays") if i == 0 else ("态不动，读出倒着转",
                                                                          "state stays, readout turns back")
-        fig.text(cx, 280, fig.t(*foot), size=13, color="dim", anchor="middle")
+        p.text(cx, 280, fig.t(*foot), size=13, color="dim", anchor="middle")
