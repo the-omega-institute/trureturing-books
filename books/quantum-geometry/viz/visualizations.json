@@ -2485,6 +2485,48 @@
           "gid": "D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line"
         }
       ]
+    },
+    {
+      "id": "pointer-ontology-deref",
+      "code": "ORTHO//ONTOLOGY",
+      "title": "寻址三条路 · 扫描、路由树与自映射页表",
+      "title_en": "Three ways to address · scan, routing tree and self-mapped page table",
+      "summary": "同一条时间轴上并排走三种寻址：逐格扫描读到第 k 格要 k 步，N = 64 格最坏 64 步；桶链式路由树深 log₂N = 6 层、共 N − 1 = 63 个开关，一个地址只拨动根到叶路上的 6 个，叠加的地址几条路同时亮、分叉后不再共用；第三十八章的二级页表里零号槽写着页目录自己的地址 0x1000，解引用一次就回到自己（p = *p）。",
+      "summary_en": "Three ways of addressing side by side on one rail: scanning reaches cell k in k steps, up to 64 for N = 64; the bucket-brigade routing tree is log₂N = 6 levels deep with N − 1 = 63 switches, and one address sets only the 6 on its root-to-leaf path, while a superposed address lights several paths at once that never share again after they fork; in Chapter 38's two-level page table slot 0 holds the directory's own address 0x1000, so one dereference lands back on itself (p = *p).",
+      "path": "pointer-ontology-deref/",
+      "thumbnail": "pointer-ontology-deref/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "寻址",
+        "桶链式 QRAM",
+        "递归页表",
+        "不动点"
+      ],
+      "tags_en": [
+        "addressing",
+        "bucket-brigade QRAM",
+        "recursive page table",
+        "fixed point"
+      ],
+      "theory": [
+        {
+          "label": "本书第三十八章",
+          "label_en": "Chapter 38",
+          "href": "../zh/ch38-observer-memory-pointer-and-ontological-qram.html",
+          "href_en": "../en/ch38-observer-memory-pointer-and-ontological-qram.html"
+        },
+        {
+          "label": "Lean 源码 · 对角线落点",
+          "label_en": "Lean source · diagonal landing",
+          "href": "{trureturing}/D5/S0/Diagonal/EscapeCount.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S0/Diagonal/EscapeCount.diagonal_landing_fixed"
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//ONTOLOGY · Three ways to address">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//ONTOLOGY 寻址三条路</title>
+<meta name="description" content="寻址三条路：线性扫描逐格走过 N = 64 格；桶链路由树每条分支只拨动根到叶的 log₂N = 6 个开关（共 N − 1 = 63 个）；页目录零号槽写着页目录自己的地址，解引用一次就回到自己。Three ways to address: a linear scan walks cell by cell through N = 64 cells; each branch of a bucket-brigade routing tree sets only the log₂N = 6 switches from root to leaf (of N − 1 = 63); slot 0 of the page directory holds the directory’s own address, so one dereference lands back on itself.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="pointer-ontology-deref">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//ONTOLOGY">ORTHO<b>//</b>ONTOLOGY</h1>
+      <div class="tagline">
+        <span class="zh">寻址三条路 · <em>一格一格扫要走遍全表；路由树每条分支只拨动根到叶的 log₂N 个开关；零号槽里写着页目录自己的地址，解引用一次就回到自己</em></span>
+        <span class="en">Three ways to address · <em>scanning cell by cell walks the whole table; each branch of the routing tree sets only the log₂N switches from root to leaf; slot 0 holds the page directory’s own address, so one dereference lands back on itself</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillN">N <strong>64</strong></span>
+      <span class="pill hot" id="pillSteps"><span class="zh">步数</span><span class="en">STEPS</span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="qram_tree" aria-pressed="false"><span class="code">TREE · 6 / 63</span><span class="cn zh">路由树：一个地址只拨动一条路上的 6 个开关</span><span class="cn en">The routing tree: one address sets the 6 switches on one path</span></button>
+        <button class="preset" data-preset="linear64" aria-pressed="false"><span class="code">SCAN · 64</span><span class="cn zh">逐格扫描：读头走过 64 格才读到最后一格</span><span class="cn en">Scanning: the head passes 64 cells to reach the last one</span></button>
+        <button class="preset" data-preset="superpose" aria-pressed="false"><span class="code">Σ αⱼ |j⟩</span><span class="cn zh">叠加的地址：四条路同时亮，分叉之后各走各的</span><span class="cn en">A superposed address: four paths light up at once and part ways at the forks</span></button>
+        <button class="preset" data-preset="four_loops" aria-pressed="false"><span class="code">[0, 0, 0, 0]</span><span class="cn zh">四级全走零号槽：每一跳都回到页目录自己</span><span class="cn en">Slot 0 at all four levels: every hop comes back to the directory itself</span></button>
+        <button class="preset" data-preset="self_map" aria-pressed="false"><span class="code">[0, 1]</span><span class="cn zh">先踩一次零号槽，叶页表本身被当作数据读出</span><span class="cn en">One step on slot 0 first, and the leaf table itself is read out as data</span></button>
+        <button class="preset" data-preset="diagonal_hit" aria-pressed="false"><span class="code">p = *p</span><span class="cn zh">解引用一次：地址与读出的内容是同一个数</span><span class="cn en">One dereference: the address and what it reads are the same number</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+    <section class="panel sec">
+      <h2><span class="zh">要读的地址</span><span class="en">The address to read</span><span class="aside" id="addrAside">0 … 63</span></h2>
+      <div class="field">
+        <label for="addr"><span class="zh">地址 a（扫描与路由树共用）</span><span class="en">Address a (shared by the scan and the tree)</span><small class="zh">也可以直接点舞台上的格子</small><small class="en">or click a cell on the stage</small></label><output id="oAddr" for="addr">41</output>
+        <input type="range" id="addr" min="0" max="63" step="1" value="41">
+      </div>
+      <div class="chips" id="branchChips" role="group" aria-label="地址叠加的分支数" data-aria-en="Branches in the superposed address">
+        <button class="chip" data-branches="1" aria-pressed="true"><span class="zh">1 个分支</span><span class="en">1 branch</span></button><button class="chip" data-branches="2" aria-pressed="false"><span class="zh">2 个</span><span class="en">2</span></button><button class="chip" data-branches="4" aria-pressed="false"><span class="zh">4 个</span><span class="en">4</span></button><button class="chip" data-branches="8" aria-pressed="false"><span class="zh">8 个</span><span class="en">8</span></button>
+      </div>
+      <h2 class="sub2"><span class="zh">页表的虚拟索引</span><span class="en">Page-table index</span></h2>
+      <div class="chips" id="idxChips" role="group" aria-label="页表的虚拟索引" data-aria-en="Page-table index">
+        <button class="chip" data-idx="1,2" aria-pressed="true">[1, 2]</button><button class="chip" data-idx="0,1" aria-pressed="false">[0, 1]</button><button class="chip" data-idx="0,0" aria-pressed="false">[0, 0]</button><button class="chip" data-idx="0" aria-pressed="false">[0]</button><button class="chip" data-idx="0,0,0,0" aria-pressed="false">[0, 0, 0, 0]</button>
+      </div>
+      <p class="note"><span class="zh">三条路共用底部的时间轴：一拍是一步——扫描读一格，路由树拨一层开关，页表走一跳。</span><span class="en">All three share the rail at the bottom; one tick is one step: the scan reads one cell, the tree sets one level of switches, the page table makes one hop.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage still" id="stage" data-thumb aria-label="舞台：左边是 64 格内存与它上面的二叉路由树，读头沿着内存逐格扫描，路由信号从树根走到叶子；右边是页目录与叶页表，零号槽的箭头弯回页目录自己" data-aria-en="Stage: on the left the 64 memory cells with the binary routing tree above them, a head scanning the cells one by one and a routing signal running from the root to a leaf; on the right the page directory and a leaf table, the arrow from slot 0 curling back to the directory itself">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="看哪一条路" data-aria-en="Which route to follow">
+        <button class="chip" data-scene="scan" aria-pressed="false"><span class="zh">扫描</span><span class="en">Scan</span></button>
+        <button class="chip" data-scene="tree" aria-pressed="true"><span class="zh">路由树</span><span class="en">Tree</span></button>
+        <button class="chip" data-scene="table" aria-pressed="false"><span class="zh">页表</span><span class="en">Table</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2><span class="zh">表越大，读一个地址要走几步</span><span class="en">The bigger the table, how many steps to read one address</span></h2><span id="plotMeta"></span></div>
+        <canvas id="plot" aria-label="横轴是表的大小 N（2 到 1024，对数），纵轴是读一个地址要走的步数（对数）：逐格扫描最坏要 N 步，路由树要 log₂N 层" data-aria-en="Horizontal: the table size N (2 to 1024, log scale); vertical: the steps to read one address (log scale): a scan needs up to N steps, the routing tree log₂N levels"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">N = 64 = 2⁶</span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="roKeyLabel"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div class="wide"><dt id="ro1Label"></dt><dd id="ro1">—</dd></div>
+        <div><dt id="ro2Label"></dt><dd id="ro2">—</dd></div>
+        <div><dt id="ro3Label"></dt><dd id="ro3">—</dd></div>
+        <div class="wide"><dt id="ro4Label"></dt><dd id="ro4">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean argued" data-scenes="scan tree"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：桶链式 QRAM（Giovannetti、Lloyd、Maccone，2008）把 N = 2ⁿ 个存储单元挂在深度 n 的二叉树叶子上，每条寻址分支只沿根到叶的唯一路径激活 O(n) = O(log N) 个路由开关，而扇出解码器每次要动用 Θ(N) 个开关。页面画的是 N = 64 的这棵树，开关数逐个实算。</span><span class="en">Literature result, not formalized in this book: bucket-brigade QRAM (Giovannetti, Lloyd and Maccone, 2008) hangs N = 2ⁿ memory cells on the leaves of a binary tree of depth n; each address branch activates only the O(n) = O(log N) routing switches on its unique root-to-leaf path, where a fan-out decoder engages Θ(N) switches per access. The page draws this tree for N = 64 and counts the switches one by one.</span></span></div>
+      <div class="lean" data-scenes="table" hidden><span class="ok">LEAN ✓</span><span><span class="zh">对角线落点不动点：对任意 f : Y → Y 与表 g : A → A → Y，若第 a₀ 行恰好是扭转对角线 a ↦ f(g(a, a))，则 f(g(a₀, a₀)) = g(a₀, a₀)。页面画的“零号槽读回自己”是这一形状的一个具体例子（MODEL），Lean 证的是一般陈述。已冻结：</span><span class="en">Diagonal landing fixed point: for any f : Y → Y and table g : A → A → Y, if row a₀ is exactly the twisted diagonal a ↦ f(g(a, a)), then f(g(a₀, a₀)) = g(a₀, a₀). The page’s “slot 0 reads back itself” is one concrete instance of this shape (MODEL); Lean proves the general statement. Frozen: </span><a class="leanref" data-lean-gid="D5/S0/Diagonal/EscapeCount.diagonal_landing_fixed" href="#" target="_blank" rel="noopener"><code>diagonal_landing_fixed</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">N = 64、log₂N = 6、开关总数 N − 1 = 63、扫过的格数、亮着的开关数与页表每一跳的读数都由页面逐个数出、逐跳查出。</span><span class="en">N = 64, log₂N = 6, the N − 1 = 63 switches, the cells scanned, the switches lit and every hop of the page walk are counted and looked up by the page one at a time.</span></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：操作系统的递归页表自映射（如 x86-64 四级分页，Intel SDM 卷 3A 第 4 章）——顶层页目录的某个槽写入页目录自己的物理基址，经过这个槽一次就回环一层。页面照第三十八章的二级算例取 N = 4、b₀ = 0x1000、T₁ = 0x2000、D₁,₂ = 0x9000；其余地址是为补全表格而选的。</span><span class="en">Literature result, not formalized in this book: recursive self-mapping of operating-system page tables (e.g. x86-64 four-level paging, Intel SDM Vol. 3A, Ch. 4): one slot of the top-level directory holds the directory’s own physical base, and each pass through that slot loops back one level. The page follows Chapter 38’s two-level example with N = 4, b₀ = 0x1000, T₁ = 0x2000, D₁,₂ = 0x9000; the other addresses are chosen to fill in the tables.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">把观察者读成宇宙本体内存的一枚记忆指针、把零号槽的 p = *p 读成“拆去总线隔墙的本体寻址”，是本书的诠释模型；“一拍走一层”的时间轴也是为画面选的。零号槽一步回到自己，只因为那一格里写的正是它自己的地址；页面不声称这是一种可实现的算法加速：读任何别的地址，仍要走完各级。</span><span class="en">Reading the observer as a memory pointer into the universe’s ontological memory, and slot 0’s p = *p as “ontological addressing with the bus wall torn down”, is this book’s interpretive model; the rail’s “one level per tick” is chosen for the picture. Slot 0 returns to itself in one step only because that cell holds its own address; the page does not claim this is a realizable algorithmic speed-up: reading any other address still takes every level.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="时间轴：走了几步（扫描读一格、路由树拨一层、页表走一跳）" data-aria-en="Rail: steps taken (the scan reads a cell, the tree sets a level, the page table makes a hop)">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>1</kbd>–<kbd>3</kbd> <span class="zh">看哪条路</span><span class="en">route</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">同一条时间轴上并排走三种寻址：在 N = 64 格内存里逐格扫描，最坏要 N = 64 步；桶链式路由树深 log₂N = 6 层，共 N − 1 = 63 个开关，一个地址只拨动根到叶路上的 6 个；页目录的零号槽写着页目录自己的地址，读一次就回到自己。本页是计数与查表的演示，不是证明。</p>
+      <ol>
+        <li><b>依据的章节。</b><a href="../../zh/ch38-observer-memory-pointer-and-ontological-qram.html" target="_top">第三十八章 · 宇宙本体 QRAM、观察者记忆指针与递归自映射页表</a>，特别是注记 <a href="../../zh/ch38-observer-memory-pointer-and-ontological-qram.html#rem-ch38-qram-page-wootters-literature" target="_top">rem-ch38-qram-page-wootters-literature</a>（桶链式 QRAM）、例 <a href="../../zh/ch38-observer-memory-pointer-and-ontological-qram.html#ex-ch38-recursive-page-table-dereference" target="_top">ex-ch38-recursive-page-table-dereference</a>（二级页表步进算例）与定理 <a href="../../zh/ch38-observer-memory-pointer-and-ontological-qram.html#thm-ch38-self-mapped-diagonal-fixed-point" target="_top">thm-ch38-self-mapped-diagonal-fixed-point</a> 第 1 款。</li>
+        <li><b>三条路怎么数。</b>扫描：读头一拍读一格，地址 a 是第 a + 1 格，恰在第 a + 1 拍读到。路由树：开关按“层 ℓ、前缀”编号，地址 a 的第 ℓ 层开关是 a 的前 ℓ 位所指的那一个，按第 ℓ + 1 位拨向左（0）或右（1）；一拍拨一层，6 拍到叶子。叠加地址的几条分支在相同前缀上共用开关，一旦有一位不同就分开，以后不再共用。页表：Walk(b, [i₁, …, i_L]) 一跳读 Mem[b][i₁]，以读出的地址为下一跳的基址。</li>
+        <li><b>已验证的定理。</b>页表场景里只有一条：对角线落点不动点 <code>diagonal_landing_fixed</code>（LEAN ✓）。页面画出的“f = 读零号槽，f(0x1000) = 0x1000”是它的一个具体形状，把这一格读成 p = *p 的本体寻址是本章的诠释（MODEL）。</li>
+        <li><b>不在 Lean 里的。</b>桶链式 QRAM 的 O(log N) 路由深度（Giovannetti–Lloyd–Maccone 2008）与 x86-64 递归页表自映射是文献结果与工程事实（ARGUED）。“观察者是宇宙记忆指针”“拆去总线隔墙的 p ≡ *p”是本书的诠释模型（MODEL）。页面不声称 O(1) 的“本体寻址”是可实现的算法加速：只有写着自己地址的那一格一步就回到自己。</li>
+      </ol>
+    </div>
+    <div class="en">
+      <p class="lede">Three ways of addressing run side by side on one rail: scanning N = 64 memory cells one by one takes up to N = 64 steps; the bucket-brigade routing tree is log₂N = 6 levels deep with N − 1 = 63 switches, and one address sets only the 6 on its root-to-leaf path; slot 0 of the page directory holds the directory’s own address, so one read lands back on itself. The page is a demonstration of counting and lookup, not a proof.</p>
+      <ol>
+        <li><b>The chapter behind it.</b> <a href="../../en/ch38-observer-memory-pointer-and-ontological-qram.html" target="_top">Chapter 38 · Ontological QRAM, the observer memory pointer, and recursive self-mapped page tables</a>, in particular the note <a href="../../en/ch38-observer-memory-pointer-and-ontological-qram.html#rem-ch38-qram-page-wootters-literature" target="_top">rem-ch38-qram-page-wootters-literature</a> (bucket-brigade QRAM), the example <a href="../../en/ch38-observer-memory-pointer-and-ontological-qram.html#ex-ch38-recursive-page-table-dereference" target="_top">ex-ch38-recursive-page-table-dereference</a> (the two-level walk) and item 1 of the theorem <a href="../../en/ch38-observer-memory-pointer-and-ontological-qram.html#thm-ch38-self-mapped-diagonal-fixed-point" target="_top">thm-ch38-self-mapped-diagonal-fixed-point</a>.</li>
+        <li><b>How the three are counted.</b> Scan: the head reads one cell per tick; address a is cell a + 1 and is read at exactly tick a + 1. Tree: switches are numbered by level ℓ and prefix; the level-ℓ switch of address a is the one named by the first ℓ bits of a, and it turns left (0) or right (1) by bit ℓ + 1; one level per tick, the leaf at tick 6. The branches of a superposed address share switches while their prefixes agree, part at the first differing bit, and never share again. Page table: Walk(b, [i₁, …, i_L]) reads Mem[b][i₁] in one hop and uses the address read as the base of the next hop.</li>
+        <li><b>Verified theorems.</b> One, in the page-table scene: the diagonal landing fixed point <code>diagonal_landing_fixed</code> (LEAN ✓). The page’s “f = read slot 0, f(0x1000) = 0x1000” is one concrete shape of it; reading that cell as the ontological addressing p = *p is the chapter’s interpretation (MODEL).</li>
+        <li><b>Not in Lean.</b> The O(log N) routing depth of bucket-brigade QRAM (Giovannetti–Lloyd–Maccone 2008) and x86-64 recursive page-table self-mapping are literature results and engineering facts (ARGUED). “The observer is a memory pointer of the universe” and “p ≡ *p with the bus wall torn down” are this book’s interpretive model (MODEL). The page does not claim that O(1) “ontological addressing” is a realizable algorithmic speed-up: only the cell that holds its own address returns to itself in one step.</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
