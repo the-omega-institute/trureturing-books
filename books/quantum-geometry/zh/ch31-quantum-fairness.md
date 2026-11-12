@@ -15,7 +15,7 @@
 5. **遍历公平（Ergodic Fairness）**：诞生遗忘重置相容自由度（`MODEL`），而紧致环面闭子群轨道均匀分布与有界间隙回归定理（[@thm-ch31-horizon-landauer-ergodic-fairness] 第 3–4 款；窗口应用与边界见 [@rem-ch31-weyl-window-equidistribution-literature]）支撑“长程旅程共享统计全息星光”的本体诠释。
 
 ::: {.figure src="ch31-overview"}
-**图 31。** 本章地图：第 I 栏，墨色的 $\phi$ 与 $\psi$ 互相丈量，各自投到对方上的青色影子一样长，都是 $\cos\theta$，上方的第 3 点 $C$ 被划掉；第 II 栏，墨色对角线 $y = x$ 与青色抛物线 $y = x^2$ 只在 $0$（$\phi \perp \psi$）与 $1$（$\phi = \psi$）相交，这是克隆机强加给内积的锁；第 III 栏，圆上按黄金角排开的 $21$ 个点里有 $8$ 个落进占圆周 $2 - \varphi \approx 0.382$ 的青色窗口，长程份额趋于窗口所占的 $2 - \varphi$（示意；指示函数窗口的等分布见 [@rem-ch31-weyl-window-equidistribution-literature]）。
+**图 31。** 本章地图：第 I 栏，墨色的 $\phi$ 与 $\psi$ 互相丈量，各自投到对方上的青色影子一样长，都是 $\cos\theta$，上方的第 3 点 $C$ 被划掉；第 II 栏，墨色对角线 $y = x$ 与青色抛物线 $y = x^2$ 只在 $0$（$\phi \perp \psi$）与 $1$（$\phi = \psi$）相交，这是克隆机强加给内积的锁；第 III 栏，圆上按黄金角排开的 $21$ 个点里有 $8$ 个落进占圆周 $2 - \varphi \approx 0.382$ 的青色窗口，长程份额趋于窗口所占的 $2 - \varphi$（示意；零边界窗口的频率是既有结果的应用，见 [@rem-ch31-weyl-window-equidistribution-literature]）。
 :::
 
 ---
@@ -257,7 +257,7 @@ $$
 :::
 
 ::: {.viz src="quantum-fairness-ledger" preset="ergodic" height="500"}
-**起点不同，份额相同。** 两个态从不同相位出发，每步绕竖轴转过黄金角；落进青色窗口的步数份额都趋于 $2 - \varphi \approx 0.382$（[@thm-ch31-horizon-landauer-ergodic-fairness] 第 3–4 款），命中数与 $T(2-\varphi)$ 的偏差始终小于 $1$（Hecke–Kesten 有界余项，文献结果，未在本书形式化）。
+**起点不同，份额相同。** 两个态从不同相位出发，每步绕竖轴转过黄金角；落进青色窗口的步数份额都趋于 $2 - \varphi \approx 0.382$（窗口频率是 [@thm-ch31-horizon-landauer-ergodic-fairness] 第 3 款与零边界窗口的既有结果应用，见 [@rem-ch31-weyl-window-equidistribution-literature]；命中之间的间隔有界是第 4 款），命中数与 $T(2-\varphi)$ 的偏差始终小于 $1$（Hecke–Kesten 有界余项，文献结果，未在本书形式化）。
 :::
 
 看清了这一长程图景，短期的一城一池便不再令人绝望：在我们的观察者诠释模型（`MODEL`）中，局部切片的顺逆各有参差，但拉通紧致环面遍历回归的长程画卷，宇宙给每一个灵魂相位分配的吸引子重逢机会、正交旋转预算，以及自指迭代向不动点（见[第 24 章](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature]）收束的引力，**没有一毫一厘的偏私**。
