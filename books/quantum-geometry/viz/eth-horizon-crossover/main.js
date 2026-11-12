@@ -1,8 +1,9 @@
 /* ORTHO//HORIZON: the ETH section of chapter 30, in three scenes.
    rates  the schematic exponent rate r(n) = c·log₂log₂n/√log₂n against the constant rate of PPSZ for k-SAT
           (k = 3 … 6; 0.386 for k = 3), over log₂ n from 2 to 800, with the scale of the observable universe (2^266) shaded
-   cut    the bridge graph of width three: flow = Σ_r M_r ⊗ N_r with M_r of size a×b and N_r of size d×c; its three
-          cuts a·d, b·c and 3·a·c, the exact rank of a random integer instance and its singular values
+   cut    the bridge graph of width three: flow = Σ_r M_r ⊗ N_r with M_r of size a×b and N_r of size d×c; its four
+          cuts a·d, b·c, 3·a·c and 3·b·d (one for each side of the two inner tensors; the frozen QMinCut takes the
+          first three), the exact rank of a random integer instance and its singular values
    modes  a nonnegative spectrum of total RW/π (the trace budget of chapter 12): at most RW/(πτ) of its terms reach the
           threshold τ
    The rail is log₂ n (rates), the draw (cut) or the threshold (modes).
@@ -67,7 +68,7 @@
   }
 
   /* ---------- the bridge graph ---------- */
-  let inst = null;
+  let inst = null, cutGeo = null;
   /** A seeded random instance: M_r (a×b) and N_r (d×c) with entries in {−2 … 2}, and flow = Σ_r M_r ⊗ N_r ((a·d) × (b·c)). */
   function instance(a, b, c, d, seed) {
     const rng = TRV.mulberry32(7919 * (seed + 1) + 31 * a + 131 * b + 17 * c + 257 * d), R = () => Math.floor(rng() * 5) - 2;
@@ -104,30 +105,42 @@
     }
     return G.map((row, i) => Math.sqrt(Math.max(0, row[i]))).sort((x, y) => y - x);
   }
-  const cuts = (a, b, c, d) => ({ rows: a * d, cols: b * c, bridges: 3 * a * c, min: Math.min(3 * a * c, a * d, b * c) });
+  /** The four cuts of the whole graph, one for each way of putting the inner tensors M and N on the input side (with
+      b and c) or the output side (with a and d): both in cut a and d (a·d), both out cut b and c (b·c), M in and N out
+      cut a, the bond of the three bridges and c (3·a·c), M out and N in cut b, the bond and d (3·b·d).
+      min is QMinCut of the frozen theorem, min(3ac, ad, bc); full is the minimal cut of the whole graph. */
+  const cuts = (a, b, c, d) => { const min = Math.min(3 * a * c, a * d, b * c), bd = 3 * b * d; return { rows: a * d, cols: b * c, bridges: 3 * a * c, bridgesBD: bd, min, full: Math.min(min, bd) }; };
   const inCone = (a, b, c, d) => a > 0 && a <= b && c > 0 && c <= d && a * a + b * b <= 3 * a * b && c * c + d * d <= 3 * c * d;
   const draw = () => Math.floor(clock.t + 1e-9);
   function fresh() { const [a, b, c, d] = S.dims, seed = draw(); if (!inst || inst.a !== a || inst.b !== b || inst.c !== c || inst.d !== d || inst.seed !== seed) inst = instance(a, b, c, d, seed); return inst; }
   function drawCut() {
     const g = kit.plot($('cv'), { x: [0, 1], y: [0, 1], pad: [0, 0, 0, 0] }), ctx = g.ctx, W = g.W, H = g.H, I = fresh(), k = cuts(I.a, I.b, I.c, I.d), words = !TRV.thumbMode;
     const x0 = 18, y0 = box.top, w = W - 36, h = H - box.top - box.bottom, wide = w > 560, dw = wide ? w * 0.44 : w, dh = wide ? h : h * 0.42;
-    // the diagram: two nodes, three bridges, four outer legs; the three cuts as dashed lines
-    const mx = x0 + dw * 0.3, nx = x0 + dw * 0.7, cy = y0 + dh * 0.5, r = Math.min(38, dh * 0.13, dw * 0.085);
+    // the diagram: two nodes, the bond of three bridges, four outer legs (a and b on M, d and c on N); the four cuts as dashed lines
+    const mx = x0 + dw * 0.3, nx = x0 + dw * 0.7, cy = y0 + dh * 0.5, r = Math.min(38, dh * 0.13, dw * 0.085), mid = (mx + nx) / 2;
     const leg = (xa, ya, xb, yb, col, wd) => { ctx.strokeStyle = col; ctx.lineWidth = wd; ctx.beginPath(); ctx.moveTo(xa, ya); ctx.lineTo(xb, yb); ctx.stroke(); };
-    for (const dy of [-r * 0.55, 0, r * 0.55]) leg(mx + r, cy + dy, nx - r, cy + dy, P.ink, 1.6);
-    leg(mx - r * 0.7, cy - r * 0.7, mx - r * 2.2, cy - r * 2.4, P.ink, 1.6); leg(mx - r * 0.7, cy + r * 0.7, mx - r * 2.2, cy + r * 2.4, P.ink, 1.6);
-    leg(nx + r * 0.7, cy - r * 0.7, nx + r * 2.2, cy - r * 2.4, P.ink, 1.6); leg(nx + r * 0.7, cy + r * 0.7, nx + r * 2.2, cy + r * 2.4, P.ink, 1.6);
+    const LEGS = { a: [[mx - r * 0.7, cy - r * 0.7], [mx - r * 2.2, cy - r * 2.4]], b: [[mx - r * 0.7, cy + r * 0.7], [mx - r * 2.2, cy + r * 2.4]], d: [[nx + r * 0.7, cy - r * 0.7], [nx + r * 2.2, cy - r * 2.4]], c: [[nx + r * 0.7, cy + r * 0.7], [nx + r * 2.2, cy + r * 2.4]] };
+    const BRIDGES = [-r * 0.55, 0, r * 0.55].map((dy) => [[mx + r, cy + dy], [nx - r, cy + dy]]);
+    for (const [[xa, ya], [xb, yb]] of BRIDGES.concat(Object.values(LEGS))) leg(xa, ya, xb, yb, P.ink, 1.6);
     for (const [x, lab] of [[mx, 'M'], [nx, 'N']]) { ctx.fillStyle = P.stage; ctx.strokeStyle = P.cyan; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(x, cy, r, 0, kit.TAU); ctx.fill(); ctx.stroke(); text(ctx, lab, x, cy + 1, P.ink, { align: 'center', size: 14, weight: 600 }); }
     text(ctx, `a = ${I.a}`, mx - r * 2.3, cy - r * 2.8, P.ink, { align: 'center', size: 12 }); text(ctx, `b = ${I.b}`, mx - r * 2.3, cy + r * 2.8, P.ink, { align: 'center', size: 12 });
     text(ctx, `d = ${I.d}`, nx + r * 2.3, cy - r * 2.8, P.ink, { align: 'center', size: 12 }); text(ctx, `c = ${I.c}`, nx + r * 2.3, cy + r * 2.8, P.ink, { align: 'center', size: 12 });
-    const cutLine = (pts, val, lab, lx, ly, al) => {
-      const hot = val === k.min; ctx.strokeStyle = hot ? P.amber : P.dim; ctx.lineWidth = hot ? 2.2 : 1.2; ctx.setLineDash([5, 4]); if (hot) { ctx.shadowColor = P.amber; ctx.shadowBlur = 8; }
-      ctx.beginPath(); pts.forEach((p, i) => (i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]))); ctx.stroke(); ctx.setLineDash([]); ctx.shadowBlur = 0;
-      text(ctx, lab, lx, ly, hot ? P.amber : P.dim, { align: al, size: 12, weight: hot ? 600 : 0, halo: true });
-    };
-    cutLine([[mx - r * 2.7, cy - r * 1.9], [(mx + nx) / 2, cy - r * 2.9], [nx + r * 2.7, cy - r * 1.9]], k.rows, `a·d = ${k.rows}`, (mx + nx) / 2, cy - r * 3.5, 'center');
-    cutLine([[mx - r * 2.7, cy + r * 1.9], [(mx + nx) / 2, cy + r * 2.9], [nx + r * 2.7, cy + r * 1.9]], k.cols, `b·c = ${k.cols}`, (mx + nx) / 2, cy + r * 3.5, 'center');
-    cutLine([[(mx + nx) / 2, cy - r * 1.5], [(mx + nx) / 2, cy + r * 1.5]], k.bridges, `3·a·c = ${k.bridges}`, (mx + nx) / 2 + 6, cy - r * 1.9, 'center');
+    // every cut runs from the left (between legs a and b) to the right (between legs d and c), leaving the ends of a and d
+    // above it and the ends of b and c below; the two through the bridges pass over one tensor and under the other
+    const flip = ([x, y]) => [x, 2 * cy - y], over = [mx + r * 0.2, cy - r * 1.85];
+    const upper = [[mx - r * 2.7, cy - r * 1.9], [mid, cy - r * 2.9], [nx + r * 2.7, cy - r * 1.9]], ac = [[mx - r * 2.6, cy - r * 0.9], over, [nx - r * 0.2, cy + r * 1.85], [nx + r * 2.6, cy + r * 0.9]];
+    const SEP = [
+      { id: 'ad', value: k.rows, pts: upper, label: `a·d = ${k.rows}`, at: [mid, cy - r * 3.5], align: 'center' },
+      { id: 'bc', value: k.cols, pts: upper.map(flip), label: `b·c = ${k.cols}`, at: [mid, cy + r * 3.5], align: 'center' },
+      { id: 'ac', value: k.bridges, pts: ac, label: `3·a·c = ${k.bridges}`, at: [over[0] + 12, over[1] - 4], align: 'left' },
+      { id: 'bd', value: k.bridgesBD, pts: ac.map(flip), label: `3·b·d = ${k.bridgesBD}`, at: flip([over[0] + 12, over[1] - 4]), align: 'left' }
+    ].map((q) => ({ ...q, hot: q.value === k.full }));
+    for (const q of SEP.filter((z) => !z.hot).concat(SEP.filter((z) => z.hot))) {
+      ctx.strokeStyle = q.hot ? P.amber : P.dim; ctx.lineWidth = q.hot ? 2.2 : 1.2; ctx.setLineDash([5, 4]); if (q.hot) { ctx.shadowColor = P.amber; ctx.shadowBlur = 8; }
+      ctx.beginPath(); q.pts.forEach((p, i) => (i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]))); ctx.stroke(); ctx.setLineDash([]); ctx.shadowBlur = 0;
+      text(ctx, q.label, q.at[0], q.at[1], q.hot ? P.amber : P.dim, { align: q.align, size: 12, weight: q.hot ? 600 : 0, halo: true });
+    }
+    cutGeo = { r, M: [mx, cy], N: [nx, cy], legs: LEGS, bridges: BRIDGES, cuts: SEP.map((q) => ({ id: q.id, value: q.value, hot: q.hot, label: q.label, pts: q.pts.map((p) => p.slice()) })) };
     // the flow matrix and its singular values
     const gx = wide ? x0 + dw + 14 : x0, gy = wide ? y0 + 16 : y0 + dh + 14, gw = wide ? w - dw - 14 : w, gh = (wide ? h : h - dh) - 16 - 54;
     const rows = I.F.length, cols = I.F[0].length, cell = Math.max(3, Math.min(gw / cols, gh / rows, 46)), ox = gx + (gw - cell * cols) / 2, oy = gy + Math.max(0, (gh - cell * rows) / 2);
@@ -152,6 +165,8 @@
   const totals = {};
   const total = () => { if (totals[S.prof] == null) { let s = 0; for (let j = 0; j < 200000; j++) s += lam(j); totals[S.prof] = s; } return totals[S.prof]; };
   const theta = () => clamp(1 - 0.98 * clock.t, 0.02, 1);
+  /** The threshold as printed: three decimals below 0.1, so that the printed τ and the printed wall RW/(πτ) agree. */
+  const fixTau = (x) => fix(x, x < 0.1 - 1e-12 ? 3 : 2);
   const countAbove = (th) => { let n = 0; while (n < 200000 && lam(n) >= th) n++; return n; };   // the three spectra decrease
   let view = null;
   function drawModes() {
@@ -165,7 +180,7 @@
     if (!TRV.thumbMode) {
       // the threshold's label ends short of the wall when the wall stands near the right edge
       const thX = wall <= NM && wall > NM - 10 ? wall : NM;
-      g.text(thX, th, `τ = ${fix(th, 2)}`, P.amber, { align: 'right', base: 'bottom', dx: -8, dy: -5, size: 12, weight: 600 });
+      g.text(thX, th, `τ = ${fixTau(th)}`, P.amber, { align: 'right', base: 'bottom', dx: -8, dy: -5, size: 12, weight: 600 });
       if (wall <= NM) g.text(wall, 1.1, `RW/(πτ) = ${fix(wall, 1)}`, P.magenta, { align: wall > 30 ? 'right' : 'left', base: 'top', dx: wall > 30 ? -7 : 7, dy: 6, size: 12 });
       else g.text(NM, 1.1, L(`墙在 RW/(πτ) = ${fix(wall, 1)}，画面之外`, `the wall is at RW/(πτ) = ${fix(wall, 1)}, off the picture`), P.magenta, { align: 'right', base: 'top', dx: -6, dy: 6, size: 11.5, face: 'body' });
     }
@@ -194,11 +209,13 @@
       for (let kk = 3; kk <= 12; kk++) h.dot(kk, ppsz(kk), kk === S.k ? P.amber : P.magenta, kk === S.k ? 5 : 3, kk === S.k ? { glow: 8 } : undefined);
       $('pBTitle').textContent = L('子句越宽，PPSZ 的指数率越高', 'Wider clauses, a higher PPSZ rate'); $('pBMeta').textContent = L(`虚线 1 − π²/(6k)`, `dashed: 1 − π²/(6k)`);
     } else if (S.scene === 'cut') {
-      const I = fresh(), k = cuts(I.a, I.b, I.c, I.d), g = kit.plot(A, { x: [0, 4], y: [0, Math.max(k.rows, k.cols, k.bridges) * 1.2], pad: [30, 12, 10, 20] });
-      g.axes({ yTicks: [0, k.min], xTicks: [[0.5, 'a·d'], [1.5, 'b·c'], [2.5, '3·a·c'], [3.5, L('秩', 'rank')]] });
-      [[k.rows, 0], [k.cols, 1], [k.bridges, 2]].forEach(([v, i]) => g.rect(i + 0.2, 0, i + 0.8, v, v === k.min ? P.amber : P.dim, { alpha: v === k.min ? 0.9 : 0.5 }));
-      g.rect(3.2, 0, 3.8, I.rank, P.cyan, { alpha: 0.95 }); g.hline(k.min, P.amber, { dash: [4, 3], alpha: 0.8 });
-      $('pATitle').textContent = L('三道割与这个实例的秩', 'Three cuts and the rank of this instance'); $('pAMeta').textContent = `min = ${k.min}`;
+      // a logarithmic axis: 3·b·d can be some twenty times the other cuts, and the rank must stay readable beside it
+      const I = fresh(), k = cuts(I.a, I.b, I.c, I.d), most = Math.max(k.rows, k.cols, k.bridges, k.bridgesBD), floor = 0.8, bar = (v) => Math.max(v, floor);
+      const g = kit.plot(A, { x: [0, 5], y: [floor, most * 1.6], pad: [30, 12, 10, 20], logY: true });
+      g.axes({ yTicks: [...new Set([1, k.full, most])].map((v) => [v, String(v)]), xTicks: [[0.5, 'a·d'], [1.5, 'b·c'], [2.5, '3·a·c'], [3.5, '3·b·d'], [4.5, L('秩', 'rank')]] });
+      [[k.rows, 0], [k.cols, 1], [k.bridges, 2], [k.bridgesBD, 3]].forEach(([v, i]) => g.rect(i + 0.2, floor, i + 0.8, bar(v), v === k.full ? P.amber : P.dim, { alpha: v === k.full ? 0.9 : 0.5 }));
+      g.rect(4.2, floor, 4.8, bar(I.rank), P.cyan, { alpha: 0.95 }); g.hline(k.full, P.amber, { dash: [4, 3], alpha: 0.8 });
+      $('pATitle').textContent = L('四道割与这个实例的秩', 'Four cuts and the rank of this instance'); $('pAMeta').textContent = `min = ${k.full} · QMinCut = ${k.min}`;
       const h = kit.plot(B, { x: [0.9, 6.1], y: [0.9, 6.1], pad: [30, 12, 10, 20], equal: true }), phi2 = (3 + Math.sqrt(5)) / 2;
       h.axes({ xTicks: [1, 2, 3, 4, 5, 6], yTicks: [1, 2, 3, 4, 5, 6], xLabel: 'a', yLabel: 'b' });
       h.poly([[0.9, 0.9], [6.1, 6.1], [6.1 / phi2, 6.1], [0.9, 0.9 * phi2]], P.cyan, { alpha: 0.14 });
@@ -245,20 +262,23 @@
     } else if (S.scene === 'cut') {
       const I = fresh(), k = cuts(I.a, I.b, I.c, I.d), cone = inCone(I.a, I.b, I.c, I.d);
       big = L(`桥图 (${I.a}, ${I.b}, ${I.c}, ${I.d}) · 第 ${I.seed} 次抽样`, `Bridge (${I.a}, ${I.b}, ${I.c}, ${I.d}) · draw ${I.seed}`);
-      hud = L(`这个实例的秩 ${I.rank}，最小割 ${k.min}：${I.rank === k.min ? '相等' : '秩更小'}`, `rank of this instance ${I.rank}, minimal cut ${k.min}: ${I.rank === k.min ? 'equal' : 'the rank is smaller'}`);
-      $('roKeyL').textContent = L('这个随机实例的秩', 'rank of this random instance'); $('roKey').innerHTML = `<span class="c-cy">${I.rank}</span> ${I.rank <= k.min ? `≤ ${k.min}` : '&gt;'}`; $('roKeySub').textContent = L(`最小割 min(3ac, ad, bc) = ${k.min}`, `minimal cut min(3ac, ad, bc) = ${k.min}`);
-      set(1, L('行数 a·d', 'rows a·d'), String(k.rows)); set(2, L('列数 b·c', 'columns b·c'), String(k.cols)); set(3, L('三条桥 3·a·c', 'three bridges 3·a·c'), String(k.bridges));
+      hud = L(`这个实例的秩 ${I.rank}，最小割 ${k.full}：${I.rank === k.full ? '相等' : '秩更小'}`, `rank of this instance ${I.rank}, minimal cut ${k.full}: ${I.rank === k.full ? 'equal' : 'the rank is smaller'}`);
+      // the green mark belongs to the frozen bound QMinCut (QMaxFlow ≤ QMinCut); the fourth cut is shown beside it, not under the mark
+      $('roKeyL').textContent = L('这个随机实例的秩', 'rank of this random instance'); $('roKey').innerHTML = `<span class="c-cy">${I.rank}</span> <span class="okmark">${I.rank <= k.min ? `≤ ${k.min} ✓` : '✗'}</span>`; $('roKeySub').textContent = L(`Lean 的 QMinCut = min(3ac, ad, bc) = ${k.min}；四道割最小 ${k.full}`, `Lean's QMinCut = min(3ac, ad, bc) = ${k.min}; smallest of the four cuts ${k.full}`);
+      set(1, L('行数 a·d', 'rows a·d'), String(k.rows)); set(2, L('列数 b·c', 'columns b·c'), String(k.cols)); set(3, L('穿桥的割 3·a·c、3·b·d', 'cuts through the bridges, 3·a·c and 3·b·d'), L(`${k.bridges}、${k.bridgesBD}`, `${k.bridges}, ${k.bridgesBD}`));
       set(4, L('在定理的锥域内？', 'inside the cone of the theorem?'), cone ? L('是', 'yes') : L('否', 'no'));
-      note = cone ? L('四个维数在锥域内：Lean 定理说最大秩恰好是 min(a·d, b·c)。', 'The four dimensions lie in the cone: the Lean theorem says the greatest rank is exactly min(a·d, b·c).') : L('四个维数不在锥域内：Lean 只保证秩不超过最小割，等号是这个实例的观察。', 'The four dimensions lie outside the cone: Lean only guarantees that the rank does not exceed the minimal cut; equality is an observation on this instance.');
+      // the theorem is about the greatest attainable rank; the draw on the stage is one instance and may fall short
+      note = cone ? L(`四个维数在锥域内：Lean 定理说能达到的最大秩恰好是 min(a·d, b·c) = ${k.min}；这一次抽样的秩是 ${I.rank}${I.rank < k.min ? '，没有达到它' : '，达到了它'}。`, `The four dimensions lie in the cone: the Lean theorem says the greatest attainable rank is exactly min(a·d, b·c) = ${k.min}; this draw has rank ${I.rank}${I.rank < k.min ? ', short of it' : ', reaching it'}.`)
+        : L(`四个维数不在锥域内：Lean 只保证秩不超过 QMinCut = min(3ac, ad, bc) = ${k.min}${k.full < k.min ? `；整张图的最小割是第四道 3bd = ${k.full}（初等的矩阵分解，不在冻结定理里）` : ''}；这一次抽样的秩是 ${I.rank}${I.rank === k.full ? '，等于最小割，等号只是对这个实例的观察' : '，比最小割低'}。`, `The four dimensions lie outside the cone: Lean only guarantees that the rank does not exceed QMinCut = min(3ac, ad, bc) = ${k.min}${k.full < k.min ? `; the minimal cut of the whole graph is the fourth, 3bd = ${k.full} (an elementary matrix factorization, not in the frozen theorem)` : ''}; this draw has rank ${I.rank}${I.rank === k.full ? ', equal to the minimal cut, and the equality is an observation on this instance only' : ', below the minimal cut'}.`);
       what = `(${[I.a, I.b, I.c, I.d].join(', ')})`; key = L(`秩 ${I.rank}`, `RANK ${I.rank}`);
     } else {
       const th = theta(), T = total(), n = countAbove(th);
-      big = L(`模态 · τ = ${fix(th, 2)}`, `Modes · τ = ${fix(th, 2)}`);
+      big = L(`模态 · τ = ${fixTau(th)}`, `Modes · τ = ${fixTau(th)}`);
       hud = L(`不小于 τ 的模态有 ${n} 个，上界 RW/(πτ) = ${fix(T / th, 1)}`, `${n} mode${n === 1 ? '' : 's'} reach τ; the bound is RW/(πτ) = ${fix(T / th, 1)}`);
       $('roKeyL').textContent = L('不小于 τ 的模态个数', 'number of modes that reach τ'); $('roKey').innerHTML = `<span class="c-cy">${n}</span> ${n <= T / th ? `≤ ${fix(T / th, 1)}` : '&gt;'}`; $('roKeySub').textContent = L('否则它们的和就超过 RW/π', 'or their sum would exceed RW/π');
       set(1, L('阈值 τ', 'threshold τ'), fix(th, 3)); set(2, L('墙 RW/(πτ)', 'the wall RW/(πτ)'), fix(T / th, 2)); set(3, L('总和 RW/π = Σλⱼ', 'total RW/π = Σλⱼ'), fix(T, 4)); set(4, L('个数 × τ', 'count × τ'), `${fix(n * th, 3)} ${n * th <= T ? '≤' : '&gt;'} RW/π`);
       note = L('这是马尔可夫不等式的计数形式：谱越集中，承重的模态越少。', 'This is the counting form of Markov’s inequality: the more concentrated the spectrum, the fewer modes carry the weight.');
-      what = `τ = ${fix(th, 2)}`; key = `${n} ≤ ${fix(T / th, 1)}`;
+      what = `τ = ${fixTau(th)}`; key = `${n} ≤ ${fix(T / th, 1)}`;
     }
     $('hudBig').textContent = big; $('hudSub').textContent = hud; $('roNote').textContent = note; $('roAside').textContent = L(SC[S.scene].name[0], SC[S.scene].name[1]);
     $('pillScene').querySelector('strong').textContent = SC[S.scene].name[1]; $('pillWhat').querySelector('strong').textContent = what; $('pillKey').querySelector('strong').textContent = key;
@@ -270,7 +290,7 @@
   /* ---------- controls ---------- */
   const clock = kit.clock({
     range: $('now'), play: $('play'), label: $('tau'), speeds: $('speedChips'), max: LMAX, rate: 60, step: 50, t: 266,
-    format: (t) => (S.scene === 'rates' ? `log₂ n ${clamp(t, 2, LMAX).toFixed(0)} <small>/ ${LMAX}</small>` : S.scene === 'cut' ? `${L('抽样 ', 'DRAW ')}${Math.floor(t + 1e-9)} <small>/ 12</small>` : `τ ${clamp(1 - 0.98 * t, 0.02, 1).toFixed(2)} <small>/ 0.02</small>`),
+    format: (t) => (S.scene === 'rates' ? `log₂ n ${clamp(t, 2, LMAX).toFixed(0)} <small>/ ${LMAX}</small>` : S.scene === 'cut' ? `${L('抽样 ', 'DRAW ')}${Math.floor(t + 1e-9)} <small>/ 12</small>` : `τ ${fixTau(clamp(1 - 0.98 * t, 0.02, 1))} <small>/ 0.02</small>`),
     onChange: () => paint()
   });
   function fitClock(t) { const sc = SC[S.scene]; clock.pause(); clock.rate = sc.rate; clock.step = sc.step; clock.setMax(sc.max(), true); clock.set(t == null ? sc.start : t); }
@@ -305,8 +325,8 @@
     atoms: ['n = 2²⁶⁶，可观测宇宙的原子数：示意曲线是 0.494，仍高于 0.386。阴影以内的任何规模上，它都还没有赢。', 'n = 2²⁶⁶, the number of atoms in the observable universe: the schematic curve stands at 0.494, still above 0.386. At no scale inside the shaded part has it won yet.'],
     cross: ['让规模一路增大：曲线缓缓下降，直到 n ≈ 2⁵⁵⁸ 才与 0.386 相交，远在阴影之外。', 'Let the scale grow: the curve sinks slowly and meets 0.386 only at n ≈ 2⁵⁵⁸, far outside the shaded part.'],
     constant: ['把常数 c 减半：交叉点从 2⁵⁵⁸ 回到 2⁵⁷ 附近，落进阴影里。大 O 记号不告诉我们 c；交叉点在视界的哪一边，全看它。', 'Halve the constant c: the crossover moves from 2⁵⁵⁸ back to about 2⁵⁷, inside the shaded part. The big O does not tell us c, and on which side of the horizon the crossover lies depends on it alone.'],
-    bridge: ['a = c = 2、b = d = 3：两道外割都是 6，三条桥能过 12，不是瓶颈。随机实例的流矩阵有 6 行 6 列，秩是 6，等于最小割；Lean 证明在这个锥域内总是如此。这条定理只讲桥图上的流与割，与第 30 章转述的亚指数 3-SAT 预印本的算法主张无关，既不检验也不支持它。', 'a = c = 2, b = d = 3: both outer cuts are 6 and the three bridges could carry 12, so they are no bottleneck. The flow matrix of the random instance has 6 rows and 6 columns and rank 6, the minimal cut; Lean proves that this always holds inside the cone. The theorem is about flows and cuts on the bridge graph only: it has nothing to do with the algorithmic claim of the sub-exponential 3-SAT preprint that chapter 30 reports, and neither tests nor supports it.'],
-    narrow: ['a = c = 1、b = d = 5：外割都是 5，三条桥却只能过 3。流矩阵是 5 × 5 的，秩只有 3：奇异值在第三个之后归零。这组维数在锥域之外。', 'a = c = 1, b = d = 5: the outer cuts are 5 but the three bridges carry only 3. The flow matrix is 5 × 5 and its rank is just 3: the singular values vanish after the third. These dimensions lie outside the cone.'],
+    bridge: ['a = c = 2、b = d = 3：两道外割都是 6，三条桥能过 12，不是瓶颈。第 0 次抽样的流矩阵有 6 行 6 列，秩是 6，达到了最小割；Lean 证明在这个锥域内能达到的最大秩恰好是最小割，个别抽样仍可能更低。这条定理只讲桥图上的流与割，与第 30 章转述的亚指数 3-SAT 预印本的算法主张无关，既不检验也不支持它。', 'a = c = 2, b = d = 3: both outer cuts are 6 and the three bridges could carry 12, so they are no bottleneck. The flow matrix of draw 0 has 6 rows and 6 columns and rank 6, reaching the minimal cut; Lean proves that inside the cone the greatest attainable rank is exactly the minimal cut, though a single draw can still fall lower. The theorem is about flows and cuts on the bridge graph only: it has nothing to do with the algorithmic claim of the sub-exponential 3-SAT preprint that chapter 30 reports, and neither tests nor supports it.'],
+    narrow: ['a = c = 1、b = d = 5：外割都是 5，三条桥却只能过 3。流矩阵是 5 × 5 的，秩至多是 3；第 0 次抽样恰好是 3：奇异值在第三个之后归零。这组维数在锥域之外。', 'a = c = 1, b = d = 5: the outer cuts are 5 but the three bridges carry only 3. The flow matrix is 5 × 5 and its rank is at most 3; draw 0 has exactly 3: the singular values vanish after the third. These dimensions lie outside the cone.'],
     plateau: ['平台形的谱：前八个模态接近 1，之后迅速掉到零。阈值 τ 取 0.5 时有 8 个模态过线，而墙在 RW/(πτ) = 16：承重的模态屈指可数。', 'A plateau: the first eight modes are close to 1 and then the spectrum drops to zero. At the threshold τ = 0.5 eight modes clear the line while the wall stands at RW/(πτ) = 16: only a handful of modes carry the weight.'],
     tail: ['换成拖着长尾的幂律谱，再把阈值一路降低：过线的模态越来越多，但青色的柱子始终到不了品红的墙。', 'Switch to a power law with a long tail and lower the threshold all the way: more and more modes clear the line, but the cyan bars never reach the magenta wall.']
   };
@@ -335,6 +355,8 @@
         dims: [I.a, I.b, I.c, I.d], seed: I.seed, rank: I.rank, cuts: k, cone: inCone(I.a, I.b, I.c, I.d), sv: I.sv.slice(), flow: I.F.map((r) => r.slice()), M: I.M, N: I.N,
         prof: S.prof, theta: th, total: T, count: countAbove(th), wall: T / th };
     },
+    /** The bridge diagram as last drawn, in CSS pixels of the stage canvas: tensors (centre, radius r), legs, bridges and cuts. */
+    get geometry() { return cutGeo && JSON.parse(JSON.stringify(cutGeo)); },
     seek: (t) => { clock.pause(); clock.set(t); }, rate: (c, l) => rate(c, l), crossoverOf: (c) => crossover(c), ppszOf: (k) => ppsz(k), lambda: (prof, j) => SPEC[prof](j),
     at: (j, v) => { const b = $('cv').getBoundingClientRect(); return [b.left + view.X(j), b.top + view.Y(v)]; }
   };

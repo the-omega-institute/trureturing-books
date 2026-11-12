@@ -256,8 +256,38 @@ $$
 这就精确识别为起点 $x-u$ 的上述轨道计数；同一个 $N_0$ 对所有起点的结论适用，时间仍为 $1,\ldots,N$。轨迹等式是模型须另行建立的假设，不能从环面定理推出，也不对任意物理或切投模型作此断言。该窗口结论本身不分类所有不变测度，亦不推出唯一遍历性的更强陈述；Weyl（1916，*Math. Ann.* **77**, 313–352）的经典理论仍有其独立文献背景。物理公平、内部空间及灵魂相位的诠释仍为 `MODEL`。这是源说明中的有限复用推导，没有新增 Lean 定理，也不作新颖性主张。
 :::
 
+::: {.remark #rem-ch31-circular-window-discrepancy title="互补宽度圆周窗口的有限步误差：既有机械词结果的应用"}
+**既有结果的应用。** 图卡所用的步长与窗宽满足一个特殊关系。取任意 $0<\alpha<1$、初相位 $u\in\mathbb R$、窗口中心 $c\in\mathbb R$，令 $w=1-\alpha$、$a=c-w/2$。记 $\{x\}=x-\lfloor x\rfloor$，按左闭右开的圆周窗口，定义前 $N$ 步的命中数
+
+$$
+H_N=\#\bigl\{1\le n\le N:\{u+n\alpha-a\}<w\bigr\}.
+$$
+
+这里 $N\in\mathbb N$ 允许为零，计数时刻恰好为 $1,\ldots,N$。则所有这些参数同时满足
+
+$$
+\left|H_N-Nw\right|<1.
+$$
+
+**与机械词的精确对应。** 令 $\rho=u-a$，下机械词的第 $n$ 个字母为
+
+$$
+b_n=\lfloor\rho+(n+1)\alpha\rfloor-\lfloor\rho+n\alpha\rfloor\in\{0,1\}.
+$$
+
+进位恰好发生在 $\{\rho+n\alpha\}\ge1-\alpha$ 时。因此窗口命中当且仅当 $b_n=0$；端点等号属于进位，排除在窗口右端之外。令 $C_N=\sum_{n=1}^{N}b_n$，则 $H_N=N-C_N$。这正对应 [`lower_mechanical_window_true_discrepancy`](lean:D5/S1/Words/Mechanical/MechanicalDensity.lower_mechanical_window_true_discrepancy) 中斜率 $\alpha$、截距 $\rho$、起始索引 $i=1$、长度 $N$ 的真字母计数。该结果给出 $|C_N-N\alpha|<1$，取负即得所需界。[`lowerMechanicalWindowTrueCount_eq_floor`](lean:D5/S1/Words/Mechanical/MechanicalBalance.lowerMechanicalWindowTrueCount_eq_floor) 的端点相消还把误差精确写成
+
+$$
+H_N-Nw=\{\rho+(N+1)\alpha\}-\{\rho+\alpha\}.
+$$
+
+两项分数部分都在 $[0,1)$ 内，这也说明严格界为何与初相位、窗口位置和步数无关。对 $N>0$，两边除以 $N$ 得 $|H_N/N-w|<1/N$，从而命中频率趋于 $w$。图卡使用 $\alpha=\varphi-1$、$w=2-\varphi$；其先取轨道分数部分、再取窗口分数部分的写法与上述成员关系相同，因为 $\{\{x\}-a\}=\{x-a\}$。
+
+**适用边界。** 该推导不要求 $\alpha$ 无理，但严格使用窗宽 $1-\alpha$；它不陈述任意独立窗宽的有界余项分类，也不认证图卡的浮点计算或赋予物理公平含义。这里应用已有声明，没有新增 Lean 定理或新颖性主张。
+:::
+
 ::: {.viz src="quantum-fairness-ledger" preset="ergodic" height="500"}
-**起点不同，份额相同。** 两个态从不同相位出发，每步绕竖轴转过黄金角；落进青色窗口的步数份额都趋于 $2 - \varphi \approx 0.382$（窗口频率是 [@thm-ch31-horizon-landauer-ergodic-fairness] 第 3 款与零边界窗口的既有结果应用，见 [@rem-ch31-weyl-window-equidistribution-literature]；命中之间的间隔有界是第 4 款），命中数与 $T(2-\varphi)$ 的偏差始终小于 $1$（Hecke–Kesten 有界余项，文献结果，未在本书形式化）。
+**起点不同，份额相同。** 两个态从不同相位出发，每步绕竖轴转过黄金角；落进青色窗口的步数份额都趋于 $2 - \varphi \approx 0.382$（窗口频率是 [@thm-ch31-horizon-landauer-ergodic-fairness] 第 3 款与零边界窗口的既有结果应用，见 [@rem-ch31-weyl-window-equidistribution-literature]；命中之间的间隔有界是第 4 款），命中数与 $T(2-\varphi)$ 的偏差始终小于 $1$（既有机械词结果的应用，见 [@rem-ch31-circular-window-discrepancy]）。
 :::
 
 看清了这一长程图景，短期的一城一池便不再令人绝望：在我们的观察者诠释模型（`MODEL`）中，局部切片的顺逆各有参差，但拉通紧致环面遍历回归的长程画卷，宇宙给每一个灵魂相位分配的吸引子重逢机会、正交旋转预算，以及自指迭代向不动点（见[第 24 章](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature]）收束的引力，**没有一毫一厘的偏私**。

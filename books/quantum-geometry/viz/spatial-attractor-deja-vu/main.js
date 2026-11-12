@@ -3,7 +3,8 @@
    rounds     two orbits with different starts and the same parameters; visits to the ε-ball around a fixed point of
               the attractor ("the ruin"); the latest return, a passage of each round with ‖x₁(t_a) − x₂(t_b)‖ < ε, and
               the inner product cos δθ = v̂₁·v̂₂ of the unit tangents F/‖F‖ there; the two equilibria
-              C₊ = (+√(β(ρ−1)), +√(β(ρ−1)), ρ−1) and C₋ = (−√(β(ρ−1)), −√(β(ρ−1)), ρ−1) with the eigenvalues of the Jacobian
+              C₊ = (+√(β(ρ−1)), +√(β(ρ−1)), ρ−1) and C₋ = (−√(β(ρ−1)), −√(β(ρ−1)), ρ−1) with the eigenvalues of the Jacobian;
+              where both are stable (ρ = 14), the one each round falls into, which depends on the basin of its start
    shrink     500 points from a cube: phase volume shrinks like e^(−(σ + 1 + β)t) = e^(−41t/3)
    dimension  running Lyapunov exponents along one orbit and the Kaplan–Yorke dimension they give
    The rail is the time t (rounds, shrink) or the integration time T (dimension).
@@ -112,6 +113,7 @@
   }
 
   /* ---------- the stage ---------- */
+  const EQ_R = 4.5, EQ_PAD = 8;   // px: the ring of an equilibrium C₊ or C₋, and the margin its label keeps from the canvas edge
   const st = kit.stage3($('stage'), { canvas: $('cv'), yaw: -0.42, pitch: 0.14, zoom: 1, radius: 0.44, wheel: false, onChange: () => paint() });
   /** An orbit up to step upTo; the steps before `from` (the transient a card wants out of the way) are drawn faint. */
   const trail = (W, pts, upTo, color, width, from = 0) => {
@@ -119,6 +121,20 @@
     if (cut > 1) st.path(out.slice(0, cut + (cut < n ? 1 : 0)), { color, width: width * 0.8, back: 0.45, alpha: 0.16 });
     if (n - cut > 1) st.path(out.slice(cut), { color, width, back: 0.45 });
   };
+  /** Where an equilibrium falls on the canvas: [x, y] in CSS pixels and the side (−1 left, 1 right, 0 neither) on which its ring is not wholly inside. */
+  const eqView = (v) => { const p = st.p(v); return { x: p[0], y: p[1], off: p[0] < EQ_R ? -1 : p[0] > st.W - EQ_R ? 1 : 0 }; };
+  /** The label of the equilibrium e, kept whole inside the canvas: placed by the ring, then moved in by its measured size.
+      When both are stable (ρ = 14) it says so, sits under the ring and takes the colour of the round that falls into it; on a
+      narrow stage the fixed camera leaves the point itself just past the edge, and the label then carries an arrow towards it. */
+  function eqTag(k, e, v, ends) {
+    const stable = !!ends, at = eqView(v), dy = stable ? 26 : -13, key = `eq${k}`;
+    const name = stable ? L(`稳定点 ${e.name}`, `stable point ${e.name}`) : e.name, text = at.off < 0 ? `← ${name}` : at.off > 0 ? `${name} →` : name;
+    const cls = !stable ? 'num ink' : ends[0] === e.name ? 'cy raw' : ends[1] === e.name ? 'mg raw' : 'raw';
+    st.tag(key, v, text, cls, { dy, fade: false });
+    const el = [...$('stage').querySelectorAll('.tags .tag')].find((t) => !t.hidden && t.textContent === text); if (!el) return;
+    const w = el.offsetWidth / 2 + EQ_PAD, h = el.offsetHeight / 2 + EQ_PAD, x = clamp(at.x, w, Math.max(w, st.W - w)), y = clamp(at.y + dy, h, Math.max(h, st.H - h));
+    if (x !== at.x || y !== at.y + dy) st.tag(key, v, text, cls, { dx: x - at.x, dy: y - at.y, fade: false });
+  }
   const state = () => {      // what the current frame shows, for the picture, the words and the probe
     const W = world(S.rho);
     if (S.scene === 'rounds') {
@@ -131,7 +147,9 @@
         if (sep < EPS && (!ret || hi > ret.hi || (hi === ret.hi && lo > ret.lo))) ret = { a: u, b: w, sep, hi, lo };
       }
       const cos = ret ? clamp(ret.a.dir[0] * ret.b.dir[0] + ret.a.dir[1] * ret.b.dir[1] + ret.a.dir[2] * ret.b.dir[2], -1, 1) : null;
-      return { W, R, i, counts: last.map((v) => v.length), latest: [a || null, b || null], ret, cos, angle: cos == null ? null : Math.acos(cos) * 180 / Math.PI, gap: dist(R[0].pts[i], R[1].pts[i]), now: [R[0].pts[i], R[1].pts[i]], eq: equilibria(S.rho) };
+      // when C₊ and C₋ are stable (ρ = 14), the one each round has fallen into by the end of the rail, t = 40
+      const eq = equilibria(S.rho), ends = eq.unstable ? null : R.map((r) => { const e = r.pts[r.pts.length - 1]; return dist(e, eq.pts[0].p) < dist(e, eq.pts[1].p) ? eq.pts[0].name : eq.pts[1].name; });
+      return { W, R, i, counts: last.map((v) => v.length), latest: [a || null, b || null], ret, cos, angle: cos == null ? null : Math.acos(cos) * 180 / Math.PI, gap: dist(R[0].pts[i], R[1].pts[i]), now: [R[0].pts[i], R[1].pts[i]], eq, ends };
     }
     if (S.scene === 'shrink') { const C = cloud(W), t = clamp(clock.t, 0, TS); return { W, C, t, frame: Math.round(t / 0.02), exact: Math.exp(DIV * t), det: C.det[Math.round(t / H)] }; }
     const Ly = lyap(W), T = clamp(clock.t, 0, TD), k = Math.max(1, Math.min(Ly.samples.length - 1, Math.round(T / 0.5))), l = Ly.samples[k].slice(1);
@@ -146,7 +164,7 @@
       q.eq.pts.forEach((e) => st.dot(toStage(W, e.p), 4.5, P.ink, { ring: true, fade: false }));
       if (q.ret) [[q.ret.a, 0], [q.ret.b, 1]].forEach(([v, k]) => { const x = q.R[k].pts[v.i], L0 = 2.5 * EPS; st.arrow(toStage(W, x), toStage(W, [x[0] + L0 * v.dir[0], x[1] + L0 * v.dir[1], x[2] + L0 * v.dir[2]]), { color: k ? P.magenta : P.cyan, width: 2, headSize: 8, fade: false }); });
       q.R.forEach((r, k) => { r.visits.filter((v) => v.i <= q.i).forEach((v) => st.dot(toStage(W, r.pts[v.i]), 2.6, P.amber, { fade: false })); st.dot(toStage(W, r.start), 4, k ? P.magenta : P.cyan, { ring: true, fade: false }); st.dot(toStage(W, q.now[k]), 5, k ? P.magenta : P.cyan, { glow: 12, fade: false }); });
-      if (words) { st.tag('ruin', toStage(W, W.ruin), L('遗迹的邻域', 'around the ruin'), 'hot raw', { dy: -Math.max(rr, 5) - 12 }); st.tag('s0', toStage(W, q.R[0].start), L('第 k 轮起点', 'start of round k'), 'cy raw', { dy: 14 }); st.tag('s1', toStage(W, q.R[1].start), L('第 k+1 轮起点', 'start of round k+1'), 'mg raw', { dy: -14 }); q.eq.pts.forEach((e, k) => st.tag(`eq${k}`, toStage(W, e.p), e.name, 'num ink', { dy: -13 })); }
+      if (words) { st.tag('ruin', toStage(W, W.ruin), L('遗迹的邻域', 'around the ruin'), 'hot raw', { dy: -Math.max(rr, 5) - 12 }); st.tag('s0', toStage(W, q.R[0].start), L('第 k 轮起点', 'start of round k'), 'cy raw', { dy: 14 }); st.tag('s1', toStage(W, q.R[1].start), L('第 k+1 轮起点', 'start of round k+1'), 'mg raw', { dy: -14 }); q.eq.pts.forEach((e, k) => eqTag(k, e, toStage(W, e.p), q.ends)); }
     } else if (S.scene === 'shrink') {
       const c = q.C, s = c.side, corner = (a, b, d) => toStage(W, [W.c[0] + a * s, W.c[1] + b * s, W.c[2] + d * s]);
       for (const [a, b] of [[-1, -1], [-1, 1], [1, -1], [1, 1]]) { st.line(corner(a, b, -1), corner(a, b, 1), { color: P.dim, width: 1, dash: [3, 4], alpha: 0.7 }); st.line(corner(a, -1, b), corner(a, 1, b), { color: P.dim, width: 1, dash: [3, 4], alpha: 0.7 }); st.line(corner(-1, a, b), corner(1, a, b), { color: P.dim, width: 1, dash: [3, 4], alpha: 0.7 }); }
@@ -225,7 +243,7 @@
     shrink: [['cy', '500 个点', '500 points'], ['dm', '出发时的立方体', 'the cube they start in']],
     dimension: [['cy', '一条长轨道', 'one long orbit'], ['am', '此刻', 'now']]
   };
-  const kind = (rho) => (rho === 28 ? L('奇异吸引子', 'a strange attractor') : rho === 14 ? L('不动点', 'a fixed point') : L('闭合的环', 'a closed loop'));
+  const kind = (rho) => (rho === 28 ? L('奇异吸引子', 'a strange attractor') : rho === 14 ? L('两个稳定不动点之一', 'one of two stable fixed points') : L('闭合的环', 'a closed loop'));
   function drawText(q) {
     const set = (i, lab, val) => { $(`roL${i}`).innerHTML = lab; $(`ro${i}`).innerHTML = val; };
     $('ro5w').hidden = S.scene !== 'rounds';
@@ -237,9 +255,11 @@
         : L(`经过遗迹：${q.counts[0]} 次与 ${q.counts[1]} 次 · 最近一次重返的方向夹角 ${fix(q.angle, 1)}°`, `passages by the ruin: ${q.counts[0]} and ${q.counts[1]} · at the latest return the directions differ by ${fix(q.angle, 1)}°`);
       $('roKeyL').textContent = L('重返处两条切向的内积 cos δθ = v̂₁·v̂₂', 'inner product of the two tangents at the return, cos δθ = v̂₁·v̂₂'); $('roKey').innerHTML = q.cos == null ? '—' : `<span class="c-am">${fix(q.cos, 4)}</span>`; $('roKeySub').innerHTML = q.cos == null ? L('还没有一次重返', 'no return yet') : `δθ = ${fix(q.angle, 2)}° · t<sub>a</sub> = ${fix(q.ret.a.t, 2)}, t<sub>b</sub> = ${fix(q.ret.b.t, 2)}`;
       set(1, L('第 k 轮经过次数', 'passages of round k'), String(q.counts[0])); set(2, L('第 k+1 轮经过次数', 'passages of round k+1'), String(q.counts[1]));
-      set(3, L('两轮此刻相距', 'distance between the rounds now'), fix(q.gap, 2)); set(4, L('两个起点相距', 'distance between the starts'), fix(dist(q.R[0].start, q.R[1].start), 1));
+      set(3, L('两轮此刻相距', 'distance between the rounds now'), fix(q.gap, 2));
+      if (q.ends) set(4, L('t = 40 时落到的稳定点', 'stable point reached by t = 40'), `<span class="c-cy">${q.ends[0]}</span> · <span class="c-mg">${q.ends[1]}</span>`); else set(4, L('两个起点相距', 'distance between the starts'), fix(dist(q.R[0].start, q.R[1].start), 1));
       set(5, L('重返处两点相距', 'the two points of the return are apart by'), q.ret ? `${fix(q.ret.sep, 3)} < ε = ${EPS}` : '—');
-      note = S.rho === 28 ? L('两条轨道从不重合，也不同步；它们共享的只是这对翅膀，和每次路过遗迹时的方向。', 'The two orbits never coincide and do not keep step; what they share is the pair of wings, and the direction in which they pass the ruin.') : S.rho === 14 ? L('ρ = 14：两轮各自螺旋落进一个不动点，然后不再动。没有回访，也没有选择。', 'ρ = 14: each round spirals into a fixed point and then stays. No return, and no choice.') : L('ρ = 160：两轮落到同一条闭合的环上，一圈圈重复同样的路。', 'ρ = 160: both rounds land on the same closed loop and repeat the same path, lap after lap.');
+      note = S.rho === 28 ? L('两条轨道从不重合，也不同步；它们共享的只是这对翅膀，和每次路过遗迹时的方向。', 'The two orbits never coincide and do not keep step; what they share is the pair of wings, and the direction in which they pass the ruin.') : S.rho === 14 ? (q.ends[0] !== q.ends[1] ? L(`ρ = 14：参数相同，却有两个稳定点 C₊、C₋；第 k 轮落进 ${q.ends[0]}，第 k+1 轮落进 ${q.ends[1]}，然后不再动。参数只给出可去的吸引子，去哪一个由起点所在的吸引域决定。`, `ρ = 14: the same parameters, yet two stable points C₊ and C₋; round k falls into ${q.ends[0]}, round k+1 into ${q.ends[1]}, and both then stay. The parameters only offer the attractors; which one is reached depends on the basin of the start.`)
+        : L(`ρ = 14：两个稳定点 C₊、C₋；这两轮都落进 ${q.ends[0]}，然后不再动。去哪一个由起点所在的吸引域决定。`, `ρ = 14: two stable points C₊ and C₋; both rounds fall into ${q.ends[0]} and then stay. Which one is reached depends on the basin of the start.`)) : L('ρ = 160：两轮落到同一条闭合的环上，一圈圈重复同样的路。', 'ρ = 160: both rounds land on the same closed loop and repeat the same path, lap after lap.');
       what = `t = ${fix(t, 1)}`; key = q.cos == null ? '—' : `cos δθ = ${fix(q.cos, 3)}`;
     } else if (S.scene === 'shrink') {
       big = L(`体积收缩 · t = ${fix(q.t, 2)}`, `Contraction of volume · t = ${fix(q.t, 2)}`);
@@ -295,7 +315,7 @@
     return: ['停在 t = 22：两轮都已经过遗迹。它们经过时的弧段并不重合，方向却几乎平行，内积 cos δθ 接近 1。', 'Stopped at t = 22: both rounds have passed the ruin. The arcs along which they passed do not coincide, yet their directions are nearly parallel and the inner product cos δθ is close to 1.'],
     shrink: ['500 个点从一个立方体里出发。不到一个时间单位，它们就被压到一张薄片上：体积按 e^(−41t/3) 缩小。', '500 points start inside a cube. In less than one unit of time they are pressed onto a thin sheet: the volume shrinks like e^(−41t/3).'],
     dimension: ['沿一条长轨道估计三个李雅普诺夫指数：一个为正，一个为零，一个约 −14.57。由它们算出的维数约 2.06：比一张面多一点，远不到一块体。', 'Estimate the three Lyapunov exponents along one long orbit: one positive, one zero, one about −14.57. The dimension they give is about 2.06: a little more than a surface, far from a solid.'],
-    fixed: ['把参数换成 ρ = 14：两轮各自螺旋落进一个不动点，然后不再动。换了内禀参数，就不是那对翅膀了。', 'Change the parameter to ρ = 14: each round spirals into a fixed point and then stays. With other intrinsic parameters the wings are gone.'],
+    fixed: ['把参数换成 ρ = 14：翅膀没有了，只剩两个稳定点 C₊ 与 C₋。两轮参数相同，却螺旋落进相反的两个点，然后不再动：参数给出可去的吸引子，起点所在的吸引域决定去哪一个。', 'Change the parameter to ρ = 14: the wings are gone, and only two stable points C₊ and C₋ remain. The two rounds share the parameters yet spiral into opposite points and then stay: the parameters offer the attractors, and the basin of the start decides which one is reached.'],
     cycle: ['ρ = 160：两轮落到同一条闭合的环上，每一圈都踩在同一处。t = 30 之前的过渡画得很淡，亮的是最后十个时间单位。这是一维的吸引子：重复，但没有余地。', 'ρ = 160: both rounds land on the same closed loop and tread the same place on every lap. The transient before t = 30 is drawn faint; the bright part is the last ten units of time. This is a one-dimensional attractor: it repeats, with no room to spare.']
   };
   let booting = true;
@@ -316,9 +336,9 @@
   window.ATTRACTOR_DEBUG = {
     get state() {
       const q = state(), out = { scene: S.scene, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, rho: S.rho, seed: S.seed, settle: S.settle, ruin: q.W.ruin.slice(), half: q.W.half, eps: EPS, div: DIV };
-      if (S.scene === 'rounds') Object.assign(out, { counts: q.counts, cos: q.cos, angle: q.angle, gap: q.gap, now: q.now, starts: q.R.map((r) => r.start), visits: q.R.map((r) => r.visits.map((v) => ({ t: v.t, d: v.d, dir: v.dir }))),
+      if (S.scene === 'rounds') Object.assign(out, { ends: q.ends, eqViews: q.eq.pts.map((e) => eqView(toStage(q.W, e.p))), canvas: [st.W, st.H], counts: q.counts, cos: q.cos, angle: q.angle, gap: q.gap, now: q.now, starts: q.R.map((r) => r.start), visits: q.R.map((r) => r.visits.map((v) => ({ t: v.t, d: v.d, dir: v.dir }))),
         ret: q.ret && { ta: q.ret.a.t, tb: q.ret.b.t, sep: q.ret.sep, dirs: [q.ret.a.dir, q.ret.b.dir] }, equilibria: q.eq.pts.map((e) => ({ name: e.name, p: e.p.slice() })), eig: q.eq.eig, unstable: q.eq.unstable, focus: q.eq.focus,
-        labels: [...document.querySelectorAll('#stage .tag')].filter((t) => !t.hidden && /^C[₊₋]$/.test(t.textContent.trim())).map((t) => t.textContent.trim()) });
+        labels: [...document.querySelectorAll('#stage .tag')].filter((t) => !t.hidden).map((t) => (t.textContent.match(/C[₊₋]/) || [])[0]).filter(Boolean) });
       else if (S.scene === 'shrink') Object.assign(out, { exact: q.exact, det: q.det, frame: q.frame, thickness: q.C.thick[Math.round(q.frame / 2)] / q.C.thick[0] });
       else Object.assign(out, { lyap: q.l, sum: q.sum, dky: q.dky });
       return out;
