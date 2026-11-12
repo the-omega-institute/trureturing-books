@@ -56,11 +56,13 @@ const DATA = {"kinds":["theorem","def","inductive"],"index":43,"units":[{"file":
   const citedBy = (u, mode) => (u == null ? [] : D.filter((d) => d.cites.some((c) => c[0] === u && (mode === 'all' || c[1] === 'e'))));
 
   /* ---------- state ---------- */
-  const S = { filter: 'all', src: null, mode: 'all', sel: null };
+  const S = { filter: 'all', src: null, mode: 'all', sel: null, q: '' };
   let lay = layout('all'), from = null, mix = 1;                         // from: the layout a transition starts from
   const metIn = (d, t) => d.col < Math.floor(t) || (d.col === Math.floor(t) && lay.pos[d.gid] < (t - Math.floor(t)) * lay.cols[d.col].length);
   const visible = () => D.filter(FILTERS[S.filter]);
   const focus = () => new Set(citedBy(S.src, S.mode).map((d) => d.gid));
+  /** Visible declarations whose GID (module path and name) contains the search text, ignoring case. */
+  const found = () => { const q = S.q.trim().toLowerCase(); return q ? visible().filter((d) => d.gid.toLowerCase().includes(q)) : null; };
   const metCount = (t) => visible().filter((d) => metIn(d, t)).length;
 
   /* ---------- stage ---------- */
@@ -73,7 +75,7 @@ const DATA = {"kinds":["theorem","def","inductive"],"index":43,"units":[{"file":
     view = g;
     const ctx = g.ctx, t = clock.t, cw = g.X(1) - g.X(0), rowH = g.Y(0) - g.Y(1);
     const cellW = Math.max(3, Math.min(cw * 0.78, 30)), cellH = Math.max(2, rowH * 0.8);
-    const foc = focus(), hasFocus = S.src != null;
+    const foc = focus(), hasFocus = S.src != null, hits = found(), hitSet = hits && new Set(hits.map((d) => d.gid));
 
     // part bands and column labels
     const partOf = (c) => DATA.units[COLS[c]].part;
@@ -120,7 +122,7 @@ const DATA = {"kinds":["theorem","def","inductive"],"index":43,"units":[{"file":
       if (a <= 0.01) continue;
       const cx = g.X(d.col), cy = g.Y(k + 0.5), x = cx - cellW / 2, y = cy - cellH / 2;
       cellBox[d.gid] = [cx, cy];
-      const met = !on || metIn(d, t), dim = hasFocus && !foc.has(d.gid);
+      const met = !on || metIn(d, t), dim = (hasFocus && !foc.has(d.gid)) || (hitSet && !hitSet.has(d.gid));
       const col = d.kind === 0 ? P.ok : P.dim;
       ctx.globalAlpha = a * (met ? (dim ? 0.22 : 1) : 0.28);
       if (met && d.env) { ctx.fillStyle = col; ctx.fillRect(x, y, cellW, cellH); }
@@ -156,6 +158,8 @@ const DATA = {"kinds":["theorem","def","inductive"],"index":43,"units":[{"file":
       ctx.strokeStyle = P.amber; ctx.lineWidth = 2.4; ctx.shadowColor = P.amber; ctx.shadowBlur = 10;
       ctx.strokeRect(cx - cellW / 2 - 2.5, cy - cellH / 2 - 2.5, cellW + 5, cellH + 5); ctx.shadowBlur = 0;
     }
+    // amber frames: the cells the search text matches
+    if (hitSet) { ctx.strokeStyle = P.amber; ctx.lineWidth = 1.6; for (const gid of hitSet) if (cellBox[gid]) { const [cx, cy] = cellBox[gid]; ctx.strokeRect(cx - cellW / 2 - 1.5, cy - cellH / 2 - 1.5, cellW + 3, cellH + 3); } }
     window.LEANMAP_BOXES = cellBox; window.LEANMAP_ARCS = arcs;   // read by the probe below (pointer tests)
 
     const u = COLS[Math.min(NC - 1, Math.max(0, Math.ceil(t) - 1))], n = visible().length, met = metCount(t);
@@ -198,6 +202,10 @@ const DATA = {"kinds":["theorem","def","inductive"],"index":43,"units":[{"file":
     $('pillRead').querySelector('strong').textContent = t >= NC ? L('全书', 'all') : t <= 0 ? '—' : unitShort(COLS[Math.min(NC - 1, Math.ceil(t) - 1)]);
     $('pillMet').querySelector('strong').textContent = `${met}/${n}`;
     $('oSrc').textContent = S.src == null ? L('无', 'none') : unitName(COLS[S.src]);
+    const hits = found();
+    $('qOut').textContent = hits == null ? L('输入声明名或模块路径的一段：命中的格子框成琥珀色，其余变暗。', 'Type part of a declaration name or module path: the matching cells are framed in amber and the rest dim.')
+      : hits.length === 0 ? L('没有命中。', 'No match.')
+        : L(`命中 ${hits.length} 条：`, `${hits.length} match${hits.length > 1 ? 'es' : ''}: `) + hits.slice(0, 12).map((d) => `${d.serial || '—'} ${d.short}`).join(L('、', ', ')) + (hits.length > 12 ? L(` 等`, ', …') : '');
   }
 
   const paint = kit.painter(() => { drawStage(); drawPlot(); drawText(); }, [$('stage'), $('plot')]);
@@ -220,6 +228,8 @@ const DATA = {"kinds":["theorem","def","inductive"],"index":43,"units":[{"file":
   const fSrc = kit.field($('src'), { fmt: (v) => (v < 0 ? L('无', 'none') : unitName(COLS[v])), onInput: (v) => { cards.mark(null); S.src = v < 0 ? null : v; paint(); } });
   const syncControls = () => { filterChips.set(S.filter, true); modeChips.set(S.mode, true); fSrc.set(S.src == null ? -1 : S.src); };
   $('rew').addEventListener('click', () => { clock.pause(); clock.set(0); });
+  $('q').addEventListener('input', () => { cards.mark(null); S.q = $('q').value; const h = found(); if (S.sel && h && !h.some((d) => d.gid === S.sel)) S.sel = null; paint(); });
+  $('q').addEventListener('keydown', (ev) => ev.stopPropagation());   // typing a space or a digit does not drive the rail
 
   // direct manipulation: click a cell to choose it, the foot of a column to look back from that chapter
   function hit(ev) {
@@ -297,7 +307,7 @@ const DATA = {"kinds":["theorem","def","inductive"],"index":43,"units":[{"file":
     get state() {
       const t = clock.t;
       return { t, max: NC, playing: clock.playing, preset: cards.current, filter: S.filter, src: S.src == null ? null : DATA.units[COLS[S.src]].file, srcCol: S.src, mode: S.mode, sel: S.sel,
-        visible: visible().length, met: metCount(t), focus: [...focus()].sort(), arcs: window.LEANMAP_ARCS && { cyan: [...window.LEANMAP_ARCS.cyan].sort(), amber: window.LEANMAP_ARCS.amber.map((c) => DATA.units[COLS[c]].file).sort() }, landed: visible().filter((d) => metIn(d, t)).map((d) => d.gid) };
+        visible: visible().length, met: metCount(t), q: S.q, found: (found() || []).map((d) => d.gid).sort(), focus: [...focus()].sort(), arcs: window.LEANMAP_ARCS && { cyan: [...window.LEANMAP_ARCS.cyan].sort(), amber: window.LEANMAP_ARCS.amber.map((c) => DATA.units[COLS[c]].file).sort() }, landed: visible().filter((d) => metIn(d, t)).map((d) => d.gid) };
     },
     /** The page's data as drawn: [gid, kind name, line, home unit file, [[unit file, 'e' | 'i'], …], serial]. */
     rows: () => D.map((d) => [d.gid, DATA.kinds[d.kind], d.line, DATA.units[d.home].file, d.cites.map(([u, m]) => [DATA.units[u].file, m]), d.serial]),
