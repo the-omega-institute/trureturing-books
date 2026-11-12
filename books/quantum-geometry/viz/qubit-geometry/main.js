@@ -102,8 +102,13 @@
     const g = now.k < n ? S.gates[now.k] : null;
     $('hudBig').textContent = `θ(A,B) = ${fix(now.angle, 1)}°`;
     $('hudSub').innerHTML = !n ? (TRV.still ? L(`线 cos θ = ${fix(now.line, 2)} · 面积 sin θ = ${fix(now.area, 2)}`, `line cos θ = ${fix(now.line, 2)} · area sin θ = ${fix(now.area, 2)}`) : L('还没有门：拖动 B，或选一张实验卡', 'No gates yet: drag B, or pick an experiment'))
-      : (g ? L(`第 ${now.k + 1} / ${n} 门 ${g.name}：绕 ${AXIS_NAME[g.ax]} 转 ${g.deg}°，已转 ${fix(g.deg * now.f, 0)}°`, `Gate ${now.k + 1} of ${n}, ${g.name}: a ${g.deg}° turn about ${AXIS_NAME[g.ax]}, ${fix(g.deg * now.f, 0)}° done`)
-        : L(`线路走完：${n} 个门`, `End of the circuit: ${n} gate${n > 1 ? 's' : ''}`)) + ` · ${L('旋子 w', 'rotor w')} = <b class="c-vi">${sgn(now.q[0], 2)}</b>`;
+      : (g ? (g.total
+        // a turn longer than 180° rides the rail in pieces: report the whole turn and how much of it is done
+        ? L(`${g.name}：绕 ${AXIS_NAME[g.ax]} 共转 ${fix(g.total, 0)}°，已转 ${fix(g.before + g.deg * now.f, 0)}°`, `${g.name}: a ${fix(g.total, 0)}° turn about ${AXIS_NAME[g.ax]}, ${fix(g.before + g.deg * now.f, 0)}° done`)
+        : L(`第 ${now.k + 1} / ${n} 门 ${g.name}：绕 ${AXIS_NAME[g.ax]} 转 ${g.deg}°，已转 ${fix(g.deg * now.f, 0)}°`, `Gate ${now.k + 1} of ${n}, ${g.name}: a ${g.deg}° turn about ${AXIS_NAME[g.ax]}, ${fix(g.deg * now.f, 0)}° done`))
+        : (S.gates[n - 1].total && Math.abs(S.gates[n - 1].total - n * S.gates[n - 1].deg) < 1e-9
+          ? L(`转完：绕 ${AXIS_NAME[S.gates[0].ax]} 共转 ${fix(S.gates[0].total, 0)}°`, `Turn complete: ${fix(S.gates[0].total, 0)}° about ${AXIS_NAME[S.gates[0].ax]}`)
+          : L(`线路走完：${n} 个门`, `End of the circuit: ${n} gate${n > 1 ? 's' : ''}`))) + ` · ${L('旋子 w', 'rotor w')} = <b class="c-vi">${sgn(now.q[0], 2)}</b>`;
   }
 
   /* ---------- strip: what a detector sees; the line and the rotor along the circuit ---------- */
@@ -209,7 +214,7 @@
   /** Append a turn of `deg` degrees about axis `ax`, in pieces of at most 180° so that the rail moves at an even pace. */
   function addTurn(ax, deg, name) {
     const pieces = Math.ceil(deg / 180 - 1e-9), each = deg / pieces;
-    for (let i = 0; i < pieces; i++) S.gates.push({ name: name || `${AXIS_NAME[ax]}${fix(deg, 0)}°`, label: name || `${AXIS_NAME[ax]} ${fix(each, 0)}°`, ax, n: AXES[ax], deg: each });
+    for (let i = 0; i < pieces; i++) S.gates.push({ name: name || `${AXIS_NAME[ax]}${fix(deg, 0)}°`, label: name || `${AXIS_NAME[ax]} ${fix(each, 0)}°`, ax, n: AXES[ax], deg: each, total: pieces > 1 ? deg : 0, before: i * each });
     return pieces;
   }
   function appendAndPlay(fn) {
@@ -238,10 +243,10 @@
     area: { theta: 90, phi: 0, axis: 'z', turns: [] },
     half: { theta: 60, phi: 40, axis: 'z', turns: [] },
     phase: { theta: 90, phi: 0, axis: 'z', turns: [['z', 360]], play: true, still: 0.3 },
-    hadamard: { theta: 0, phi: 0, axis: 'z', turns: [['h', 180, 'H']], play: true, still: 0.6 },
+    hadamard: { theta: 0, phi: 0, axis: 'z', turns: [['h', 180, 'H']], play: true, still: 1 },
     hzh: { theta: 60, phi: 40, axis: 'z', turns: [['h', 180, 'H'], ['z', 180, 'Z'], ['h', 180, 'H']], play: true, still: 1.55 },
-    turn1: { theta: 60, phi: 40, axis: 'z', turns: [['x', 360]], play: true, still: 1.4 },
-    turn2: { theta: 60, phi: 40, axis: 'z', turns: [['x', 720]], play: true, still: 3 }
+    turn1: { theta: 60, phi: 40, axis: 'z', turns: [['x', 360]], play: true, still: 2 },
+    turn2: { theta: 60, phi: 40, axis: 'z', turns: [['x', 720]], play: true, still: 4 }
   };
   const NOTES = {
     line: ['B 就躺在量尺 A 上：青色的线是 1，整根 B 都是影子；品红的面积是 0，舞台上没有面。这是“粒子”的一端。', 'B lies along the ruler A: the cyan line is 1, all of B is shadow, and the magenta area is 0, so the stage shows no face. This is the “particle” end.'],

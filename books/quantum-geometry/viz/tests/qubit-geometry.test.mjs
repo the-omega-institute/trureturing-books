@@ -163,5 +163,21 @@ check('dragging empty space orbits the camera and leaves the state alone', cam1.
 await page.click('#camChips [data-cam="top"]'); await settle(page);
 check('the Top view looks down the z axis', (await page.evaluate(() => window.QUBIT_DEBUG.camera())).pitch > 1.5);
 
+// the stills the chapters print: each card stops at the moment its caption describes, and the readout says so
+const stillOf = async (card) => {
+  const pg = await T.goto(BOOK, ID, `?shot=1&lang=zh&preset=${card}`, await T.newPage());
+  await settle(pg);
+  const out = await pg.evaluate(() => ({ s: window.QUBIT_DEBUG.state, big: document.getElementById('hudBig').textContent, sub: document.getElementById('hudSub').textContent }));
+  await pg.close();
+  return out;
+};
+const wIn = (txt) => { const m = /w\s*=\s*([+−-]?\d+\.\d+)/.exec(txt); return m ? Number(m[1].replace('−', '-')) : NaN; };
+let st = await stillOf('turn1'); e = expected(60, 40, [['x', 360]]);
+check('TURN-360 still: B has gone the full 360° and is back, the readout says w = −1.00', close(st.s.tau, 2) && vclose(st.s.r, expected(60, 40, []).r, 1e-12) && close(wIn(st.sub), Math.round(e.q[0] * 100) / 100) && e.q[0] < -0.999 && /360°/.test(st.sub), st.sub);
+st = await stillOf('turn2'); e = expected(60, 40, [['x', 720]]);
+check('TURN-720 still: B has gone the full 720° and is back, the readout says w = +1.00', close(st.s.tau, 4) && vclose(st.s.r, expected(60, 40, []).r, 1e-12) && close(wIn(st.sub), Math.round(e.q[0] * 100) / 100) && e.q[0] > 0.999 && /720°/.test(st.sub), st.sub);
+st = await stillOf('hadamard'); e = expected(0, 0, [['h', 180]]);
+check('HADAMARD still: the end of the turn, B on |+⟩, line 0 and area 1, θ(A,B) = 90°', close(st.s.tau, 1) && vclose(st.s.r, e.r, 1e-12) && close(st.s.line, e.r[2], 1e-12) && close(st.s.area, Math.hypot(e.r[0], e.r[1]), 1e-12) && st.big.includes(`${(Math.acos(e.r[2]) * 180 / Math.PI).toFixed(1)}°`), st.big);
+
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();
