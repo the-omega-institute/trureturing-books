@@ -340,10 +340,6 @@ $$
 **两侧各张 60°：越过 2，停在 √7 之下。** 青色的四段 $1 + \frac{1}{2} + \frac{1}{2} + \frac{1}{2}$ 在贝尔态上叠到 $\frac{5}{2}$，越过了虚线 $2$；外侧品红的刻度在 $\pm\sqrt{7}$，内侧的品红点线在 $\pm 1$，正是 [@prop-chsh-four-point-spectrum] 给出的四个点。把 Bob 的一对方向转到约 $19.1^\circ$，琥珀色的横线正好碰到 $\sqrt{7}$。
 :::
 
-::: {.viz src="chsh-dial" preset="cross" height="500"}
-**天花板到了顶，CHSH 值还在 2。** 两侧都张成直角，两块品红面积都是整个正方形，品红的刻度升到 $2\sqrt{2}$；可 Bob 的十字架与 Alice 的对齐（$B_0$ 在 $A_0$ 上，$B_1$ 与 $A_1$ 相反），青色的四段只是 $1 + 0 + 0 + 1 = 2$。
-:::
-
 **面积张满时的天花板。** 上表中最大的数是 $2\sqrt{2}$。换别的维数、别的观测量，能不能更大？模块 `PeritoTsirelson` 证明了一条更一般的代数上界：Alice 两个设置、Bob $d$ 个设置，局域矩阵只要求幺正；$d = 2$ 时正是 CHSH 的代数组合。
 
 ::: {.theorem #thm-unitary-bell-bound title="有限维幺正策略的贝尔值上界 $2/\sin(\pi/(2d))$" lean="D5/S3/QuantumBounds/PeritoTsirelson.bell_value_le"}
@@ -375,12 +371,15 @@ $$
 
 取 $d = 2$ 是一段手工推导：$\omega_2 = e^{i\pi} = -1$，四个系数依次为 $1, 1, 1, -1$，$\mathrm{bellOperator}_2$ 正是 CHSH 算子 $S$，上界为 $2/\sin(\pi/4) = 2\sqrt{2}$。若把局域矩阵解释为结果取 $\pm 1$ 的锐测量可观测量，就须取厄米对合矩阵；这样的矩阵是幺正的（$A^* A = A^2 = 1$）；把 $A_0, A_1$ 同时取负，它们仍是幺正的，而 $S$ 变号。所以对任意有限维、任意四个厄米对合观测量与任意密度态，都有 $\lvert\operatorname{Re}\Tr(\rho S)\rvert \le 2\sqrt{2}$：这就是有限维张量积情形的 Tsirelson 界；无穷维与只要求对易的一般形式仍见章末 [@rem-bell-chsh-literature]。证明第四步在 $d = 2$ 时是 $\lvert 1 + z\rvert + \lvert 1 - z\rvert \le 2\sqrt{2}$，等号只在 $z = \pm i$ 时成立。对单比特泡利方向，$U = A_0^* A_1 = A_0 A_1 = \cos\alpha\, I + i(\vv{a}_0 \times \vv{a}_1)\cdot\vv{\sigma}$ 的特征值是 $e^{\pm i\alpha}$，块界成为 $2\lvert\cos(\alpha/2)\rvert + 2\lvert\sin(\alpha/2)\rvert = 2\sqrt{1 + \sin\alpha}$（$0^\circ \le \alpha \le 180^\circ$）；与 [@prop-chsh-four-point-spectrum] 允许的最大特征值 $\sqrt{4 + N} = 2\sqrt{1 + \sin\alpha\sin\beta}$ 相比，只是把 Bob 的 $\sin\beta$ 放大成了 $1$。它在 $\alpha = 90^\circ$ 时达到 $2\sqrt{2}$：天花板，就钉在 Alice 张满一个正交十字架的地方。
 
+::: {.figure src="ch13-unit-circle-bound"}
+**块界在单位圆的直角处顶到天花板。** 左边是单位圆，琥珀色的点是 $z = e^{i\alpha}$（图中 $\alpha = 60^\circ$），两条青色的弦从它连到 $+1$ 与 $-1$，在 $z$ 处成直角，长度分别是 $\lvert 1 - z\rvert = 2\sin(\alpha/2)$ 与 $\lvert 1 + z\rvert = 2\cos(\alpha/2)$；圆顶的空心点是 $z = i$，两弦在那里等长。右边青色的曲线是两弦长之和 $2\sqrt{1 + \sin\alpha}$：两端是 $2$，琥珀色的点在 $60^\circ$ 处是 $2.732$，只在 $\alpha = 90^\circ$ 碰到绿色虚线 $2\sqrt{2}$。绿色虚线是 [@thm-unitary-bell-bound] 取 $d = 2$ 的上界（代入是手工推导）；曲线是正文的手算。
+:::
 ## 45° 余弦与固定 CHSH 极值 {#sec-bell-45-tsirelson}
 
 为了在本章的贝尔态 $\lvert\Phi^+\rangle$ 上，让 $(Z, X)$ 实平面内的测量真正触及正峰值 $\sqrt{8} = 2\sqrt{2}$，固定 Alice 为 $Z, X$ 后，Bob 的正交十字架应该怎样摆放？
 
 ::: {.viz src="chsh-dial" preset="sweep" height="500"}
-**转动 Bob 的十字架，只在 45° 碰到顶。** 两侧都是直角，时间轴把 Bob 的十字架从 $0^\circ$ 转到 $90^\circ$，琥珀色的横线按 $2\sqrt{2}\cos(\varphi - 45^\circ)$ 起落：两端是 $2$，只在 $45^\circ$ 碰到品红的刻度 $2\sqrt{2}$。图停在 $20^\circ$，读数 $2.563$。
+**转动 Bob 的十字架，只在 45° 碰到顶。** 两侧都是直角，两块品红面积都是整个正方形，品红的刻度在 $2\sqrt{2}$。起点 $\varphi = 0^\circ$ 时 Bob 的十字架与 Alice 的对齐（$B_0$ 在 $A_0$ 上，$B_1$ 与 $A_1$ 相反），青色的四段只是 $1 + 0 + 0 + 1 = 2$：天花板到了顶，CHSH 值还在 $2$。时间轴把 Bob 的十字架从 $0^\circ$ 转到 $90^\circ$，琥珀色的横线按 $2\sqrt{2}\cos(\varphi - 45^\circ)$ 起落：两端是 $2$，只在 $45^\circ$ 碰到品红的刻度 $2\sqrt{2}$。图停在 $20^\circ$，读数 $2.563$。
 :::
 
 答案是 **$45^\circ$（$\pi/4$）**——正交十字架之间的对称四分角！在源码模块 `CHSHWitness` 中，Alice 将两把快门定在正交的 $Z$ 轴与 $X$ 轴上，而 Bob 将自己的正交十字架在 $(Z, X)$ 平面内旋转 $45^\circ$，定在两条对角角平分线上：
@@ -487,6 +486,10 @@ Bob 的两个答案只有两种关系：
 
 现在两端都钉住了：有限确定性局域模型的 CHSH 值出不了线段 $[-2, 2]$（[@thm-classical-chsh-bound-exact]），而固定 CHSH 算子在量子态上的期望值可以到达 $2\sqrt{2}$（[@cor-fixed-chsh-tsirelson]）。两者之比为 $\sqrt{2}$，这就是 $45^\circ$ 圆弧超出折线的倍数。需要留意各条定理的量词范围：经典一侧针对的是有限纤维集合上的确定性 $\pm 1$ 应答表；量子一侧的可达性针对的是一个固定的双比特算子，上界 $2\sqrt{2}$ 则对一切有限维幺正策略成立（[@thm-unitary-bell-bound] 取 $d = 2$）；一般形式见章末 [@rem-bell-chsh-literature]。
 
+::: {.film src="004-chsh-45-degrees"}
+**45°：余弦弧高出玩具经典折线（2 分 20 秒）。** 夹角 $\theta$ 从 $0^\circ$ 扫到 $180^\circ$，青色的余弦弧与玩具模型的折线 $1 - 2\theta/\pi$ 在 $0^\circ$、$90^\circ$、$180^\circ$ 重合，在 $45^\circ$ 弧高出 $0.207$；Bob 的一对方向转过 $45^\circ$，四段余弦一段段叠到 $2\sqrt{2}$，折线只叠到 $2$；再把 Bob 的一对从 $0^\circ$ 转到 $90^\circ$，值按 $2\sqrt{2}\cos(\varphi - 45^\circ)$ 起落。十六张确定性应答表每张都只给 $\pm 2$，加权平均出不了 $[-2, 2]$（[@thm-classical-chsh-bound-exact]）；$S^2$ 多出的那一项来自两侧的换位子（[@prop-landau-area-square]），两侧都张成直角、Bob 转过 $45^\circ$ 时，贝尔态上的值顶到 $2\sqrt{2}$，任何态都超不过（[@cor-fixed-chsh-tsirelson]）。
+:::
+
 为什么 CHSH 实验偏偏选定 $\theta = 45^\circ$ 作为对称工作角？在对称四方向设置（三段相邻夹角为 $\theta$、第四段跨越角为 $3\theta$）下，四项余弦组合为 $3\cos\theta - \cos(3\theta)$，其一阶导数 $-3\sin\theta + 3\sin(3\theta) = 0$ 恰在 $\theta = 45^\circ$（$\pi/4$）处取得全局最大值 $2\sqrt{2}$！（注意区分两个不同的优化问题：$\theta = 45^\circ$ 最大化的是四项对称 CHSH 组合 $3\cos\theta - \cos(3\theta)$；若单独考察单根弦上的差函数 $g(\theta) = \cos\theta - (1 - 2\theta/\pi)$，其逐点导数 $-\sin\theta + 2/\pi = 0$ 的极大值点在 $\theta = \arcsin(2/\pi) \approx 39.5402^\circ$ 处，单弦差约为 $0.2105$，而在对称 CHSH 工作角 $\theta = 45^\circ$ 处单弦差为 $\frac{\sqrt{2}-1}{2} \approx 0.2071$，四段累加得 $2\sqrt{2} - 2 \approx 0.8284$。）让我们通过下面的综合算例，把 $\rho_{\Phi^+}$ 与 $\rho_{\Psi^-}$ 的关联张量、四项 CHSH 期望值以及 $45^\circ$ 余弦与特定玩具模型的几何对比逐一算清。
 
 ::: {.figure src="ch13-symmetric"}
@@ -572,10 +575,6 @@ $$
 
 ::: {.viz src="chsh-dial" height="560"}
 完整实验室：拖动角度盘上的四支箭头，改两侧的张角，用时间轴转动 Bob 的一对方向；三个场景是角度盘、隐方向、弧与折线。量尺上的虚线 $\pm 2$ 与顶上的 $\pm 2\sqrt{2}$ 分别由 [@thm-classical-chsh-bound-exact] 与 [@thm-unitary-bell-bound]（取 $d = 2$ 为手工推导）担保；页面上的其余数字是数值演示。
-:::
-
-::: {.film src="004-chsh-45-degrees"}
-**45°：余弦弧高出经典折线（2 分 20 秒）。** 夹角 $\theta$ 从 $0^\circ$ 扫到 $180^\circ$，青色的余弦弧与玩具模型的折线 $1 - 2\theta/\pi$ 在 $0^\circ$、$90^\circ$、$180^\circ$ 重合，在 $45^\circ$ 弧高出 $0.207$；Bob 的一对方向转过 $45^\circ$，四段余弦一段段叠到 $2\sqrt{2}$，折线只叠到 $2$；再把 Bob 的一对从 $0^\circ$ 转到 $90^\circ$，值按 $2\sqrt{2}\cos(\varphi - 45^\circ)$ 起落。十六张确定性应答表每张都只给 $\pm 2$，加权平均出不了 $[-2, 2]$（[@thm-classical-chsh-bound-exact]）；$S^2$ 多出的那一项来自两侧的换位子（[@prop-landau-area-square]），两侧都张成直角、Bob 转过 $45^\circ$ 时，贝尔态上的值顶到 $2\sqrt{2}$，任何态都超不过（[@cor-fixed-chsh-tsirelson]）。
 :::
 
 至此，我们从贝尔纯态看清了纠缠的第一重几何面貌：单比特的局部信息可以被完全掏空（$\vv{r} = \vv{s} = \vv{0}$），而把整整 $100\%$ 的非单位阵纯度盈余（$\Tr(\rho^2) - \frac{1}{4} = \frac{1}{4}\norm{T}_{\mathrm{F}}^2 = \frac{3}{4}$，连同单位阵基线的 $\frac{1}{4}$ 共计纯度 $1$）藏进高维关联扇区 $T_{ij}$ 的“球外之球”里。这立刻启发了一个关乎所有量子计算机生死存亡的工程点子：**如果在局域噪声模型中，环境噪声像小偷一样挨个袭击局部的“线”（单比特泡利错误），我们能不能故意把宝贵的逻辑量子态从脆弱的局部线上撤下来，藏进多比特纠缠织就的高维关联“面”与拓扑编织死结里？** 让我们进入[第十四章](ch14-cloning-codes-and-braids.md)。
