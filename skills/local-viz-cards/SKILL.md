@@ -306,8 +306,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十章 | 文献注记 `rem-complexity-growth-literature` 之后、猜想 `conj-complexity-equals-volume` 之前 | `complexity-growth` · `saturate`、`ceiling` |
 | 第二十章 | 猜想 `conj-complexity-equals-volume` 之后、§纠缠桥与 ER=EPR 之前 | `complexity-growth` · `cv` |
 | 第二十章 | 例 `ex-cnot-and-cycle-bounds` 之后、P/NP 的提问之前 | `complexity-growth` 完整实验室 |
+| 第二十一章 | §21.2 “对角线 g 的取值永远跟第 a 号解码器算出的结果唱反调”一段之后、“由此，在 Lean 模块 `DiagonalTopologicalEscape` 中”之前 | `sphere-escape` · `diagonal` |
 | 第二十一章 | §21.2 例 `ex-cantor-godel-diagonal-table` 后“连同地址空间一起向外扩容”一段之后 | `sphere-escape` · `absorb` |
-| 第二十一章 | §21.2 末 | `sphere-escape` · `diagonal` |
 | 第二十一章 | §21.3 末 | `sphere-escape` · `liuhui` |
 | 第二十一章 | §21.4 插图 `ch21-angle-defect` 之后“图里只有十二个顶点”一段之后 | `hairy-ball-normal-escape` · `defect` |
 | 第二十一章 | §21.4 “零点可以推着走、可以合并”一段之后 | `hairy-ball-normal-escape` · `merge` |

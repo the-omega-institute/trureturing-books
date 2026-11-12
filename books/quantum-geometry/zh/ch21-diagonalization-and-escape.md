@@ -74,6 +74,10 @@ $$
 
 请看 [@def-relative-semantic-diagonal] 与 [@def-separation-deficit] 联手设下的天罗地网：对任意地址 $a \in \mathrm{Address}$，因为 $\operatorname{twist}$ 无不动点，必有 $g(a) \neq \operatorname{decoderCatalog}(a, \operatorname{latent}(a))$（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)）——在第 $a$ 号地址自己头上，对角线 $g$ 的取值永远跟第 $a$ 号解码器算出的结果唱反调！
 
+::: {.viz src="sphere-escape" preset="diagonal" height="500"}
+**对角线逃出清单。** 逐行读出对角线上的那一位并翻转，拼成品红色的 $d$；$d$ 与第 $k$ 行在第 $k$ 位不同，所以不在清单里（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode) 取 $\operatorname{latent} = \mathrm{id}$、$\operatorname{twist} = \neg$）。右侧的点阵是全部 $2^N$ 个串，与 $d$ 相容的候选每步减半。
+:::
+
 由此，在 Lean 模块 `DiagonalTopologicalEscape` 中，我们迎来了刻画“球内语言必然破裂、概念拓扑被迫升维”的四条核心形式化定理。
 
 ::: {.theorem #thm-complete-diagonal-not-continuous title="完备解码目录诱导的相对语义对角线必不连续" lean="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous"}
@@ -189,10 +193,6 @@ $$
 :::
 
 > 完备的目录必自裂其壳；凡想在球内穷尽一切者，必被对角线顺着法向顶出球外。
-
-::: {.viz src="sphere-escape" preset="diagonal" height="500"}
-**对角线逃出清单。** 逐行读出对角线上的那一位并翻转，拼成品红色的 $d$；$d$ 与第 $k$ 行在第 $k$ 位不同，所以不在清单里（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode) 取 $\operatorname{latent} = \mathrm{id}$、$\operatorname{twist} = \neg$）。右侧的点阵是全部 $2^N$ 个串，与 $d$ 相容的候选每步减半。
-:::
 
 ## 21.3 割圆多面体、泰勒截断裂缝与开口螺旋投影 {#sec-ch21-3}
 

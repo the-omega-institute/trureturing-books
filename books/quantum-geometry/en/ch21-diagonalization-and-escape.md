@@ -74,6 +74,10 @@ $$
 
 Notice the trap sprung by [@def-relative-semantic-diagonal] and [@def-separation-deficit]: at every address $a \in \mathrm{Address}$, because $\operatorname{twist}$ has no fixed points, $g(a) \neq \operatorname{decoderCatalog}(a, \operatorname{latent}(a))$ ([`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)) — at its own address $a$, the diagonal $g$ always disagrees with the $a$-th cataloged decoder!
 
+::: {.viz src="sphere-escape" preset="diagonal" height="500"}
+**The diagonal leaves the list.** Read the diagonal bit of each row and flip it to build the magenta $d$; $d$ differs from row $k$ in place $k$, so it is not on the list ([`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode) with $\operatorname{latent} = \mathrm{id}$ and $\operatorname{twist} = \neg$). The dot grid on the right holds all $2^N$ strings, and the candidates compatible with $d$ halve at every step.
+:::
+
 In the Lean module `DiagonalTopologicalEscape`, this mechanism yields four kernel-verified theorems proving that no complete internal catalog can contain its own diagonal without refining its observation topology.
 
 ::: {.theorem #thm-complete-diagonal-not-continuous title="Discontinuity of the Complete-Catalog Relative Semantic Diagonal" lean="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous"}
@@ -189,10 +193,6 @@ This quartet captures the pure abstract diagonal skeleton in observation topolog
 :::
 
 > A complete catalog necessarily cracks its own shell; whoever tries to exhaust the world from inside a single sphere is thrust outward along the diagonal normal.
-
-::: {.viz src="sphere-escape" preset="diagonal" height="500"}
-**The diagonal leaves the list.** Read the diagonal bit of each row and flip it to build the magenta $d$; $d$ differs from row $k$ in place $k$, so it is not on the list ([`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode) with $\operatorname{latent} = \mathrm{id}$ and $\operatorname{twist} = \neg$). The dot grid on the right holds all $2^N$ strings, and the candidates compatible with $d$ halve at every step.
-:::
 
 ## 21.3 Inscribed Polytopes, Taylor Remainder Seams, and the Open Helix {#sec-ch21-3}
 
