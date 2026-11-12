@@ -99,6 +99,15 @@
 
 尤为关键的是，这套统一场诠释框架（`MODEL`）始终把机器验证内核与外部文献边界做显式分离与锚定：在**形式化公理层**，核心离散自动机、不动点与线性代数骨架全部落定为 `0 sorry` 的 Lean 4 内核定理（[附录 C](appendix-c.md)）；而配套的代数编码文献注记与可执行参考脚本则集中归档于[第 25 章](ch25-rewriting-and-xor.md)（[@rem-clifford-stabilizer-literature]）与[附录 B](appendix-b.md)。
 
+从几何动力学回看 [@thm-ch32-generative-self-reference-and-zeckendorf] 与 [@rem-ch32-generative-laws-dottie-literature] 并置的两枚不动点常数，[第 24 章](ch24-cosine-fixed-points-and-self-reference.md#sec-ch24-dottie-fibonacci-spirals)揭示的双螺旋结构对应在统一场诠释模型（`MODEL`）中恰好承担**一横一纵的互补分工**：
+
+- **横向 $\varphi$ 螺旋（空间准晶底盘与反共振公平）**：黄金比对任意有理数 $q = a/b \in \mathbb{Q}$ 满足严格的丢番图逼近下界 $\lvert\varphi - q\rvert > \frac{1}{\sqrt{5}\,b^2 + b}$（[终章](coda.md) [@thm-coda-golden-hurwitz]，`golden_hurwitz_bound`，`LEAN ✓`；而全 $1$ 连分数 $\varphi = [1; 1, 1, 1, \dots]$ 在全体无理数中达到渐近胡尔维茨最慢逼近极值属经典文献定理，Hurwitz 1891），配合卡西尼范数接缝 $(-1)^{k+1}$、齐肯多夫无相邻 `11` 编码（[@thm-ch32-generative-self-reference-and-zeckendorf] 第 3–4 款）与环面观测窗有界间隙回归（[终章](coda.md) [@thm-coda-golden-cut-observer-cassini]），铺设出既无有理周期共振锁死、又具严格均匀遍历秩序的横向空间底盘；
+- **纵向 $\theta^*$ 螺旋（自指观测不动点收束）**：在这一抗共振底盘之上，当观察者将正交投影算子折回自身（$\psi = \psi(\psi)$，$\cos\theta = \theta$）时，认知残差便沿着每 $90^\circ$ 缩放 $\sin\theta^* \approx 0.6736$（定性余弦收敛见[第 33 章](ch33-all-beings-observers-and-mutual-attractors.md) [@ex-ch33-mutual-cosine-monotonic-lock]，光滑螺旋模型与向心径向切角 $\alpha \approx 75.88^\circ$ 见[第 24 章](ch24-cosine-fixed-points-and-self-reference.md#sec-ch24-dottie-fibonacci-spirals) [@rem-dottie-fibonacci-spiral-literature]）的正交向心螺旋模型稳步收敛，收束于自洽不动点 $\theta^* \approx 0.7391$。
+
+::: {.viz src="dottie-fibonacci-spirals" preset="division" height="500"}
+**黄金有理渐近分数铺底盘，余弦回旋方格收自指。** 共用步指标 $k = 7$：左栏从同一初值 $x_0 = 1$ 同时走出两条蛛网，品红曲线 $y = 1/(1+x)$ 依次踏过斐波那契渐近分数 $1/1, 1/2, 2/3, 3/5, 5/8, 8/13, 13/21, 21/34$ 收向 $\varphi^{-1} \approx 0.6180$，青色曲线 $y = \cos\theta$ 旋向 $\theta^* \approx 0.7391$（已完成 $Q_0 \dots Q_6$ 七次历史递推，琥珀色标出当前递推 $Q_7$）；右栏停在极坐标步指标 $k = 7$（$\phi_7 = 7\pi/2$），对比品红 $\varphi^{-1}$ 螺旋（$0.6180$）与青色 $\theta^*$ 正交螺旋（$0.6736$）的径向收束速度（统一场横纵分工属本书 `MODEL`）。
+:::
+
 ---
 
 ## 32.2 物理场同源导出与六大疆域全息同构总表 {#sec-ch32-physical-fields}

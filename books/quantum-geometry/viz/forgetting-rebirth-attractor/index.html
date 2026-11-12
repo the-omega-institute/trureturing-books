@@ -37,7 +37,6 @@
       <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
       <div class="presets cards" id="presets">
         <button class="preset" data-preset="staircase" aria-pressed="false"><span class="code">STAIRCASE</span><span class="cn zh">快度等步：一格格逼近边界</span><span class="cn en">Equal rapidity steps creep toward the rim</span></button>
-        <button class="preset" data-preset="horizon_gap" aria-pressed="false"><span class="code">HORIZON GAP</span><span class="cn zh">放大镜一直放大，缝一直在</span><span class="cn en">The magnifier keeps zooming; the gap stays open</span></button>
         <button class="preset" data-preset="klein_vs_poincare" aria-pressed="false"><span class="code">KLEIN → POINCARÉ</span><span class="cn zh">直弦弯成正交圆弧，固有时率不变</span><span class="cn en">Straight chords bend into orthogonal arcs; dτ/dt stays</span></button>
         <button class="preset" data-preset="erase_reset" aria-pressed="false"><span class="code">ANGLE RULER</span><span class="cn zh">角度等步：撞上边界，擦表回到圆心</span><span class="cn en">Equal angle steps hit the rim and fall back to the centre</span></button>
         <button class="preset" data-preset="quotient_fold" aria-pressed="false"><span class="code">FOLD THE WHEEL</span><span class="cn zh">按周期折叠：一圈圈只剩几个点</span><span class="cn en">Fold by the period: the rounds leave a few points</span></button>
@@ -64,6 +63,10 @@
       <div class="chips" id="foldChips" role="group" aria-label="展开或折叠" data-aria-en="Unrolled or folded">
         <button class="chip" data-fold="0" aria-pressed="true"><span class="zh">展开：一圈一根辐条</span><span class="en">Unrolled: one spoke per round</span></button>
         <button class="chip" data-fold="1" aria-pressed="false"><span class="zh">按周期折叠</span><span class="en">Folded by the period</span></button>
+      </div>
+      <div class="field">
+        <label for="fold"><span class="zh">折叠程度 f</span><span class="en">How far folded, f</span><small class="zh">每个点沿自己的圆转向第一根辐条，转过原角度的 f 倍</small><small class="en">each point turns along its own circle toward the first spoke, through f of its angle</small></label><output id="oFold" for="fold">0.00</output>
+        <input type="range" id="fold" min="0" max="1" step="0.01" value="0">
       </div>
     </section>
   </aside>
