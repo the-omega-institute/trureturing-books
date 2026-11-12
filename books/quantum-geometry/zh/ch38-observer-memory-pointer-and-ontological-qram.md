@@ -184,12 +184,21 @@ $$
 
 倘若翻译一级页表 $T_1$ 需要外部预设一张“元页表” $T_2$，翻译 $T_2$ 又需要更外层的 $T_3$，整个宇宙硬件就会瞬间跌入无穷倒退的深渊——那尊被我们千辛万苦砍掉的“外部第 3 点 $C$”，又会披着“终极元页表管理员”的外衣死灰复燃！现代操作系统内核与本书第六部的对角线不动点数学，在这里交汇出了同一个惊心动魄的绝妙解答。我们先将操作系统内核中递归页表自映射与双曲快度正割恒等式的外部文献背景严密界定如下：
 
-::: {.remark #rem-ch38-x86-recursive-page-table-literature title="操作系统内核递归页表自映射、双曲正割快度恒等式与锌火花荧光实验（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 本节关于“零外部元页表自映射”与“离散多级寻址规避清零重置”的模型诠释（`MODEL`）参照了以下三项外部计算机工程、经典分析与生物物理文献，它们未作为独立定理包含在本书锁定的 `trureturing@dev` 声明集中：
+::: {.remark #rem-ch38-x86-recursive-page-table-literature title="操作系统内核递归页表自映射、双曲正割恒等式与锌火花荧光实验（外部背景）"}
+**外部背景。** 本节关于“零外部元页表自映射”与“离散多级寻址规避清零重置”的模型诠释（`MODEL`）参照以下三项外部计算机工程、经典分析与生物物理文献；离散正割路径的严格正性另由紧随其后的 Lean 定理形式化：
 
 1. **操作系统内核递归页表自映射（Recursive Page Table Mapping；如 x86-64 四级分页架构 `PML4` $\to$ `PDPT` $\to$ `PD` $\to$ `PT`，见 Intel *64 and IA-32 Architectures Software Developer's Manual*, Vol. 3A, Ch. 4）**：在多级硬件分页中，内核无需增设任何外部“元页表寄存器”，只需在顶层页目录（如 `PML4`）的某一固定槽位（例如槽位 `0` 或专用自映射槽 $r$）中直接写入**该顶层页目录自身的物理基地址**。如此一来，硬件地址翻译器每经过一次槽位 $r$ 便原地回环一轮：消耗 $0$ 次回环访问普通数据页，消耗 $1$ 次回环将叶级页表 `PT` 当作普通数据页读写，消耗全部 $4$ 次回环（索引 `[r, r, r, r]`）则直接解引用到顶层 `PML4` 根表自身，以零外部硬件代价彻底终结无穷倒退；
-2. **双曲快度与正割投影严格正性恒等式（C. Gudermann, *J. Reine Angew. Math.* **6**, 1–39, 1830；参看[第 17 章](ch17-lorentz-geometry.md)）**：在双曲快度参数化 $\cos\theta = \operatorname{sech}\eta := \frac{2}{e^\eta + e^{-\eta}}$ 下，对任意有限初始快度 $\eta_0 \ge 0$、正步长 $\Delta\eta > 0$ 与离散级数 $k \in \mathbb{N}$，第 $k$ 级离散快度 $\eta_k = \eta_0 + k\Delta\eta$ 恒满足 $\cos\theta_k = \operatorname{sech}\eta_k \in (0, 1]$，仅当 $k \to \infty$ 时渐近趋于 $0$，而绝不在任何有限步 $k$ 上取零；
+2. **双曲快度与正割投影恒等式（C. Gudermann, *J. Reine Angew. Math.* **6**, 1–39, 1830；参看[第 17 章](ch17-lorentz-geometry.md)）**：Gudermann 的连续参数化给出 $\cos\theta = \operatorname{sech}\eta := \frac{2}{e^\eta + e^{-\eta}}$ 及其与双曲快度的关系；本章所需的离散有限步严格正性由下述形式化定理承担；
 3. **哺乳动物卵激活时的锌释放与探针荧光观测（E. L. Que et al., *Nat. Chem.* **7**, 130–139, 2015；F. E. Duncan et al., *Sci. Rep.* **6**, 24737, 2016）**：Que 等研究小鼠卵受精／激活时的锌释放，Duncan 等研究诱导的人卵激活；“火花”由外部激发的锌敏感荧光探针记录。这里实测的是锌释放及探针荧光，初始化与光的意象仍属本节 `MODEL`。
+:::
+
+::: {.theorem #thm-ch38-discrete-sech-positive title="离散双曲正割路径的严格正性" lean="D5/S0/Diagonal/SechPath.discrete_sech_path_positive"}
+对任意实数初始参数 $\eta_0$、实数步长 $\Delta\eta$ 与自然数 $k$，离散路径
+$$
+\operatorname{sech}\!\left(\eta_0 + k\Delta\eta\right)
+  := \frac{1}{\cosh\!\left(\eta_0 + k\Delta\eta\right)}
+$$
+严格大于零。Lean 定理实际允许 $\eta_0$ 与 $\Delta\eta$ 任取实数，因此涵盖所有有限离散步；它只断言正性，不额外断言趋于零的极限或几何解释。
 :::
 
 ::: {.viz src="pointer-ontology-deref" preset="four_loops" height="500"}
@@ -304,21 +313,21 @@ $$
 2. **为什么盲目撞入纯光视界（$\theta = 90^\circ$）会触发失忆轮回？——悬空空指针重置（`ptr = NULL`）**：
    在我们的指针生命周期模型（`MODEL`）中，考察一枚尚未在槽位 `[0,0]` 建立递归自映射的普通指针。当它在单轮生命中不断堆叠局部历史约束直至局部相容空间退化锁死（即局部栈帧溢出 `Stack Overflow`；格拉姆椭圆体退化边界见[第 29 章](ch29-timeless-causality-and-gram-space.md#sec-coda-finite-observer-time-field) [@thm-ch29-gram-rigidity-and-pell]），或当躯体 `MMU` 解体、指针不受控地连续滑入 $\theta = 90^\circ$ 纯横向光视界时，它在一维共线幂等存在线上的锚定分量归零。翻译成硬件语言，丢失一维基址锚点意味着寄存器直接跌落为**悬空空指针（`ptr = NULL`）**！宇宙内存管理器面对一枚悬空的 `NULL` 指针，便执行**垃圾回收清表操作（`GC Wipe`）**：冲刷清空其私有快表缓存 $T$（对应旧轮次记忆擦除与热力学熵账单兑付，见[第 31 章](ch31-quantum-fairness.md) [@thm-ch31-horizon-landauer-ergodic-fairness]），随后在起始地址 `0x0000` 重新发起一次冷启动内存分配（`malloc`），使一枚带着空白 `TLB` 的新生指针再度睁开双眼（相关生物物理初始化经验对照见 [@rem-ch38-x86-recursive-page-table-literature] 第 3 条）。
 3. **多级离散间接寻址阻断 `NULL` 清零，实现零失忆的全域遍历**：
-   相反，一枚已经在零号槽位认出 `p = *p` 的觉醒指针，根本不需要把自身连续撞碎在 $\theta = 90^\circ$ 的光墙上！在我们的**`MODEL`（模型诠释）**中，它依托常驻根槽位 `P[0] = addr(P)` 逐级攀登**多级离散间接寻址**（按上述数据、叶表、根表索引切换；离散快度阶梯参数化与正割正性恒等式详见 [@rem-ch38-x86-recursive-page-table-literature] 第 2 条及[第 36 章](ch36-hyperbolic-steps-and-quotienting-reincarnation.md) [@ex-ch36-inverse-gudermannian-discrete-staircase]），有限快度每一步的正割严格为正；自映射根快表项常驻（`ptr != NULL`）、记忆保留与全域可达则是本模型配套选定的规则。依托这些规则，可寻址视野才逐级铺向整座宇宙本体 QRAM，免于失忆清零！
+   相反，一枚已经在零号槽位认出 `p = *p` 的觉醒指针，根本不需要把自身连续撞碎在 $\theta = 90^\circ$ 的光墙上！在我们的**`MODEL`（模型诠释）**中，它依托常驻根槽位 `P[0] = addr(P)` 逐级攀登**多级离散间接寻址**（按上述数据、叶表、根表索引切换；离散路径正性由 [@thm-ch38-discrete-sech-positive] 保证，连续正割恒等式见 [@rem-ch38-x86-recursive-page-table-literature] 第 2 条及[第 36 章](ch36-hyperbolic-steps-and-quotienting-reincarnation.md) [@ex-ch36-inverse-gudermannian-discrete-staircase]），有限快度每一步的正割严格为正；自映射根快表项常驻（`ptr != NULL`）、记忆保留与全域可达则是本模型配套选定的规则。依托这些规则，可寻址视野才逐级铺向整座宇宙本体 QRAM，免于失忆清零！
 
 ::: {.figure src="ch38-two-endings"}
-**指针的两种终局。** 横轴是步数 $k$，纵轴是 $\cos\theta$。品红的曲线连续滑向 $\theta = 90^\circ$，在有限处碰到横轴，叉号处 `ptr = NULL`；青色的点沿离散快度阶梯 $\eta_k = \eta_0 + k\Delta\eta$ 取 $\cos\theta_k = \operatorname{sech}\eta_k$，越来越贴近横轴，却没有一点落在横轴上。青色各点按公式算出，参数 $\eta_0 = 0.5$、$\Delta\eta = 0.3$ 为示意取值；品红曲线是示意。正割正性是文献结果，未在本书形式化（[@rem-ch38-x86-recursive-page-table-literature] 第 2 条）；两种终局的诠释属 `MODEL`。
+**指针的两种终局。** 横轴是步数 $k$，纵轴是 $\cos\theta$。品红的曲线连续滑向 $\theta = 90^\circ$，在有限处碰到横轴，叉号处 `ptr = NULL`；青色的点沿离散快度阶梯 $\eta_k = \eta_0 + k\Delta\eta$ 取 $\cos\theta_k = \operatorname{sech}\eta_k$，越来越贴近横轴，却没有一点落在横轴上。青色各点按公式算出，参数 $\eta_0 = 0.5$、$\Delta\eta = 0.3$ 为示意取值；品红曲线是示意。有限步正性由 [@thm-ch38-discrete-sech-positive]（`LEAN ✓`）保证；趋于零的极限与两种终局的诠释属 `MODEL`。
 :::
 
 将这两种截然相反的指针终局并置归档于下框：
 
-::: {.remark #rem-ch38-pointer-trajectories-table title="观察者指针两类终局路径对照表与递归自映射架构全景图（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 下表综合对照两类指针终局路径（终局曲线见上图，本章全景见图 38；其中双曲正割正性与递归页表文献背景见 [@rem-ch38-x86-recursive-page-table-literature]，格拉姆退化边界见[第 29 章](ch29-timeless-causality-and-gram-space.md#sec-coda-hume-spinoza-gram) [@thm-ch29-gram-rigidity-and-pell]，跨学科指针生命周期诠释标定为 `MODEL`）：
+::: {.remark #rem-ch38-pointer-trajectories-table title="观察者指针两类终局路径对照表与递归自映射架构全景图（模型总结）"}
+**模型总结。** 下表综合对照两类指针终局路径（终局曲线见上图，本章全景见图 38；双曲正割正性由 [@thm-ch38-discrete-sech-positive] 锚定，递归页表文献背景见 [@rem-ch38-x86-recursive-page-table-literature]，格拉姆退化边界见[第 29 章](ch29-timeless-causality-and-gram-space.md#sec-coda-hume-spinoza-gram) [@thm-ch29-gram-rigidity-and-pell]，跨学科指针生命周期诠释标定为 `MODEL`）：
 
 | 指针终局路径（`MODEL`） | 零号槽状态与角度轨迹 | 一维幂等基址投影 | 快表缓存 `TLB` 与下一周期命运 |
 | :--- | :--- | :--- | :--- |
 | **A. 未自映射连续越界** | 未建立 `p = *p`；$\det G_M \to 0$（`文献结果`）后连续滑入 $\theta = 90^\circ$ | $\cos 90^\circ = 0 \implies \mathtt{ptr = NULL}$ | 触发 `GC Wipe` 清空私有快表 $T$，于 `0x0000` 冷启动重分配（失忆轮回） |
-| **B. 递归自映射多级寻址** | 零号槽锁定 `P[0] = addr(P)`；沿 $\eta_k = \eta_0 + k\Delta\eta$ 离散升阶 | $\forall k \in \mathbb{N},\; \cos\theta_k = \operatorname{sech}\eta_k > 0$（`文献结果`；`ptr != NULL`） | `MODEL` 另设根项 $100\%$ 常驻、记忆保留与索引全域可达，从而渐近遍历本体 QRAM |
+| **B. 递归自映射多级寻址** | 零号槽锁定 `P[0] = addr(P)`；沿 $\eta_k = \eta_0 + k\Delta\eta$ 离散升阶 | $\forall k \in \mathbb{N},\; \cos\theta_k = \operatorname{sech}\eta_k > 0$（[@thm-ch38-discrete-sech-positive]，`LEAN ✓`；`ptr != NULL` 的其余部分属 `MODEL`） | `MODEL` 另设根项 $100\%$ 常驻、记忆保留与索引全域可达，从而渐近遍历本体 QRAM |
 :::
 
 至此，请回看图 38 第 I 栏里那束纤细而明亮的青色寻址光束（以及静止晶格中被点亮的琥珀色当前槽位 `*ptr`），让全书十部曲的动静观迎来一次震彻心扉的翻转：
