@@ -26,8 +26,9 @@ assert abs(THETA_STAR - 0.7390851332) < 1e-9 and abs(math.cos(THETA_STAR) - THET
 
 # ---------------------------------------------------------------- the four tiers
 
-def tier_icon(cv, k, cx, cy, s=1.0):
-    """The picture of tier ``k`` (0…3) in a box about 100·s × 70·s centred at (cx, cy).
+def tier_icon(cv, k, cx, cy, s=1.0, fs=13):
+    """The picture of tier ``k`` (0…3) in a box about 100·s × 70·s centred at (cx, cy); ``fs`` is the
+    size of its smallest labels.
     Cyan: what the tier is built from; magenta: the constant that escaped the tier below."""
     w, h = 100 * s, 70 * s
     if k == 0:  # rationals m/n with n ≤ 4 on [0, 2]
@@ -39,32 +40,32 @@ def tier_icon(cv, k, cx, cy, s=1.0):
         for v in fr:
             cv.dot(x0 + v / 2 * w, y, 2.6 * max(s, 0.8), "line")
         for v, lab in ((0, "0"), (1, "1"), (2, "2")):
-            cv.text(x0 + v / 2 * w, y + 18 * s + 4, lab, size=13, color="dim", anchor="middle")
-        cv.text(cx, y - 16 * s, "*m*/*n*", size=14, color="line", anchor="middle")
+            cv.text(x0 + v / 2 * w, y + 18 * s + 4, lab, size=fs, color="dim", anchor="middle")
+        cv.text(cx, y - 16 * s, "*m*/*n*", size=fs + 1, color="line", anchor="middle")
     elif k == 1:  # the unit square and its diagonal √2
         a = 46 * s
         x0, y0 = cx - a / 2, cy + a / 2
         cv.polygon([(x0, y0), (x0 + a, y0), (x0 + a, y0 - a), (x0, y0 - a)], "line", color="line", width=1.6,
                    fill_opacity=0.10)
         cv.line(x0, y0, x0 + a, y0 - a, "area", 2.6, cap="round")
-        cv.text(x0 + a + 8, y0 - a - 2, "√2", size=14, color="area", weight=600)
-        cv.text(x0 + a / 2, y0 + 16, "1", size=13, color="dim", anchor="middle")
-        cv.text(x0 - 6, y0 - a / 2, "1", size=13, color="dim", anchor="end", middle=True)
+        cv.text(x0 + a + 8, y0 - a - 2, "√2", size=fs + 1, color="area", weight=600)
+        cv.text(x0 + a / 2, y0 + 16, "1", size=fs, color="dim", anchor="middle")
+        cv.text(x0 - 6, y0 - a / 2, "1", size=fs, color="dim", anchor="end", middle=True)
     elif k == 2:  # a regular octagon inside its circle
         r = 31 * s
         cv.circle(cx, cy, r, color="area", width=2.2)
         pts = [(cx + r * math.cos(2 * math.pi * j / 8), cy - r * math.sin(2 * math.pi * j / 8)) for j in range(8)]
         cv.polygon(pts, "line", color="line", width=1.3, fill_opacity=0.10)
-        cv.text(cx, cy, "π", size=15, color="area", anchor="middle", middle=True, weight=600)
+        cv.text(cx, cy, "π", size=fs + 2, color="area", anchor="middle", middle=True, weight=600)
     else:  # y = cos θ meets y = θ at θ*
         ax = cv.axes(cx - w / 2 + 6, cy - h / 2 + 4, w - 12, h - 10, (0, 1.4), (0, 1.15))
         ax.plot(math.cos, 0, 1.4, color="line", width=2.0)
         ax.plot(lambda t: t, 0, 1.15, color="dim", width=1.3, dash="4 3")
         ax.cv.line(ax.X(0), ax.Y(0), ax.X(1.4), ax.Y(0), "faint", 1.2)
         ax.points([(THETA_STAR, THETA_STAR)], "area", r=4.6, ring="bg")
-        ax.text(THETA_STAR, THETA_STAR, "θ*", dx=0, dy=22, size=14, color="area", weight=600, anchor="middle",
+        ax.text(THETA_STAR, THETA_STAR, "θ*", dx=0, dy=22, size=fs + 1, color="area", weight=600, anchor="middle",
                 halo=True)
-        ax.text(0, 1, "cos θ", dx=0, dy=-8, size=13, color="line")
+        ax.text(0, 1, "cos θ", dx=0, dy=-8, size=fs, color="line")
 
 
 TIERS = [
@@ -75,8 +76,9 @@ TIERS = [
 ]
 
 
-def stairs(cv, x0, col_w, base, top0, rise, *, icons=True, gap=6):
-    """Four steps rising to the right; step k has its top at ``top0 - k·rise``. Returns the step tops."""
+def stairs(cv, x0, col_w, base, top0, rise, *, icons=True, gap=6, fs=13, icon_s=1.2, icon_dy=58):
+    """Four steps rising to the right; step k has its top at ``top0 - k·rise``. Returns the step tops.
+    ``fs`` is the size of the smallest labels; the icons are drawn at scale ``icon_s``, ``icon_dy`` above the step."""
     tops = []
     for k, (zh, en, czh, cen) in enumerate(TIERS):
         top = top0 - k * rise
@@ -84,11 +86,11 @@ def stairs(cv, x0, col_w, base, top0, rise, *, icons=True, gap=6):
         x = x0 + k * col_w
         cv.rect(x + gap / 2, top, col_w - gap, base - top, color="edge", fill="panel", width=1.2, rx=3)
         cx = x + col_w / 2
-        cv.text(cx, top + 20, cv.t(zh, en), size=13, color="dim", anchor="middle")
-        cv.text(cx, top + 40, cv.t(czh, cen), size=14, color="line" if k == 0 else "area", anchor="middle",
+        cv.text(cx, top + fs + 7, cv.t(zh, en), size=fs, color="dim", anchor="middle")
+        cv.text(cx, top + 2 * fs + 14, cv.t(czh, cen), size=fs + 1, color="line" if k == 0 else "area", anchor="middle",
                 weight=600)
         if icons:
-            tier_icon(cv, k, cx, top - 58, 1.2)
+            tier_icon(cv, k, cx, top - icon_dy, icon_s, fs)
     return tops
 
 

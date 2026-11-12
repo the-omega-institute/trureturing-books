@@ -58,8 +58,8 @@ assert all(abs(p + i) < 1e-12 for _, p, i in tangential_parts(8, R))  # at R the
 def draw(fig):
     t = fig.t
     ax = fig.axes(70, 34, 400, 210, (0, 2.4), (0, 1.5))
-    ax.xaxis(ticks=[0, 1, 2], labels=["0", "*R* = 1", "2"], size=13)
-    ax.yaxis(ticks=[0, 0.5, 1, 1.5], labels=["0", "0.5", "1", "1.5"], size=13)
+    ax.xaxis(ticks=[0, 1, 2], labels=["0", "*R* = 1", "2"], size=14)
+    ax.yaxis(ticks=[0, 0.5, 1, 1.5], labels=["0", "0.5", "1", "1.5"], size=14)
     ax.vline(R, "faint", 1.2, dash="3 4")
     ax.plot(lambda r: B / (4 * r), B / (4 * 1.5), 2.4, color="blue", width=2.6)
     ax.plot(lambda r: OM * r, 0, 2.4, color="violet", width=2.6)
@@ -67,7 +67,7 @@ def draw(fig):
     ax.text(2.35, B / (4 * 2.35), "*b*/(4*ρ*)", dy=-12, size=14, color="blue", anchor="end")
     ax.text(2.35, OM * 2.35, "Ω*ρ*", dy=22, size=14, color="violet", anchor="end")
     ax.text(R, OM * R, t("静止", "at rest"), dx=12, dy=4, size=14, color="ink", weight=600, halo=True)
-    ax.text(0.41, 1.32, t("邻居占上风", "neighbors win"), size=13, color="blue")
-    ax.text(1.75, 1.32, t("进动占上风", "precession wins"), size=13, color="violet", anchor="middle")
-    fig.text(70, 20, t("切向速度", "tangential speed"), size=13, color="dim")
+    ax.text(0.41, 1.32, t("邻居占上风", "neighbors win"), size=14, color="blue")
+    ax.text(1.75, 1.32, t("进动占上风", "precession wins"), size=14, color="violet", anchor="middle")
+    fig.text(70, 20, t("切向速度", "tangential speed"), size=14, color="dim")
     fig.text(470, 290, "*ρ*", size=15, color="dim", anchor="end")

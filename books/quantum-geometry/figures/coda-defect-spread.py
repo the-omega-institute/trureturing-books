@@ -10,7 +10,7 @@ computed from the triangles in _coda and their sum is asserted to be 720° (Desc
 
 from _coda import defects, geodesic, wireframe
 
-SIZE = (480, 270)
+SIZE = (440, 270)
 ALT = {
     "zh": "三行，每行左边是一个多面体的线框，右边是一条同样长的品红横条。第一行是正二十面体，12 个顶点，横条分成 12 段，每段 60°。"
           "第二行把每个面切成 4 块再推到球面上，42 个顶点，横条分成 42 段，最长的一段约 18°。"
@@ -25,7 +25,7 @@ ALT = {
 
 def draw(fig):
     t = fig.t
-    x0, x1 = 108, 452                                   # the bar: 0° … 720°
+    x0, x1 = 104, 420                                   # the bar: 0° … 720°
     scale = (x1 - x0) / 720
     rows = [(1, 72), (2, 152), (4, 232)]
     for freq, y in rows:
@@ -50,4 +50,4 @@ def draw(fig):
     fig.text(28, 30, "*ν*", size=14, color="dim", anchor="middle")
     for freq, y in rows:
         fig.text(8, y + 20, f"{freq}", size=13, color="dim")
-    fig.chip(x1, 262, t("文献结果", "literature"), "argued", anchor="end")
+    fig.chip(x1, 262, t("文献结果", "literature"), "argued", size=13, anchor="end")
