@@ -662,27 +662,39 @@ SCENES.close = S => {
 /* ======================================================================= */
 FILM.poster = () => {
   const t = 60.0;
-  background(t, TL.scenes[3], 3, 6);
+  background(t, TL.scenes[1], 1, 6);
   drawHyper(CUBE4, [[0, 3, t * 0.21], [1, 2, t * 0.13], [2, 3, t * 0.17]], { scale: 1.3, a: 0.2, cx: 1400, cy: 420, camZ: 7, lw: 1.3, dots: false });
-  const P = stg(400, 850, 240, [60, 120, 1110, 880]);
-  drawAdd(P, LN2, LN2, 1, {
-    lx: 600, ly: 700,
-    labels: (P, pc) => {
-      const p1 = P([HQ.val(HX.ch2), HQ.val(HX.sh2)]), p2 = P(pc);
-      dot(p1[0], p1[1], 10, 'c', 1);
-      txt(`(${RS(HX.ch2)}, ${RS(HX.sh2)})`, p1[0] + 18, p1[1] + 28, { size: 28, fam: F.math, w: 700, c: C.cyan });
-      txt(`(${RS(HX.ch4)}, ${RS(HX.sh4)})`, p2[0] + 20, p2[1] + 34, { size: 30, fam: F.math, w: 700, c: C.now });
-    }
+  /* the boost of the chapter's example: (5, 3) slides along τ = 4 to (4, 0); the traveller's axes close on the cone */
+  const P = stg(600, 860, 66, [60, 120, 1110, 880]), c = Math.cosh(LN2), s = Math.sinh(LN2);
+  clipped(P, () => {
+    segTX(P, [0, 0], [9.6, 0], C.dim, 0.7, 1.6, true);
+    segTX(P, [0, -7.5], [0, 7.5], C.dim, 0.7, 1.6, true);
+    lightCone(P, 1, 9);
+    hyper(P, 4, -7.5, 7.5, C.cyan, 0.9, 2.6);
+    segTX(P, [0, 0], [10.2 * c, 10.2 * s], C.now, 1, 3);
+    segTX(P, [-8 * s, -8 * c], [8 * s, 8 * c], C.now, 1, 3);
+    const tl = P([9.2, 9.2 * Math.tanh(LN2)]), xl = P([5.6 * s, 5.6 * c]);
+    txt('t′', tl[0] + 18, tl[1] + 8, { size: 32, fam: F.math, w: 700, c: C.now });
+    txt('x′', xl[0] - 4, xl[1] - 18, { size: 32, fam: F.math, w: 700, c: C.now });
+    const g = P([5, 3]);
+    ring(g[0], g[1], 12, C.dim, 0.8, 1.6);
+    txt('(5, 3)', g[0] + 20, g[1] + 8, { size: 28, fam: F.math, w: 700, c: C.dim });
+    pathTX(P, k => bst(LN2 * k, [5, 3]), 60, C.now, 0.9, 5);
+    const p = P(bst(LN2, [5, 3]));
+    dot(p[0], p[1], 15, 'g', 1);
+    txt('(4, 0)', p[0] - 24, p[1] + 10, { size: 30, fam: F.math, w: 700, align: 'right', c: C.now });
+    txt('τ = 4', p[0] - 24, p[1] + 50, { size: 28, fam: F.math, w: 700, align: 'right', c: C.cyan });
   });
+  legend([['light cone  t² − x² = 0', C.white], ['t² − x² = 16', C.cyan]], 1, 140, 204);
   txt('双曲旋转', 1440, 300, { size: 128, fam: F.zh, w: 900, align: 'center', c: C.white, ab: 4 });
-  txt('光锥不动，快度相加', 1440, 400, { size: 60, fam: F.zh, w: 900, align: 'center', c: C.white, ab: 2 });
+  txt('光锥不动', 1440, 400, { size: 60, fam: F.zh, w: 900, align: 'center', c: C.white, ab: 2 });
   txt('HYPERBOLIC ROTATION', 1440, 490, { size: 50, fam: F.orb, w: 900, align: 'center', c: C.white, ab: 3, ls: 6 });
-  txt('THE LIGHT CONE STAYS · RAPIDITIES ADD', 1440, 540, { size: 26, fam: F.orb, w: 700, align: 'center', c: C.white, ls: 4 });
-  rich([['ln 2 + ln 2 = ', C.white], ['ln 4', C.now], ['   ·   ', C.dim], ['3/5 ⊕ 3/5 = ', C.white], ['15/17', C.now]], 1440, 630, { size: 38, align: 'center', ab: 1 });
+  txt('THE LIGHT CONE STAYS', 1440, 540, { size: 26, fam: F.orb, w: 700, align: 'center', c: C.white, ls: 4 });
+  rich([['η = ln 2:  ', C.white], ['(5, 3) → (4, 0)', C.now], ['   ·   ', C.dim], ['τ = 4', C.cyan]], 1440, 630, { size: 38, align: 'center', ab: 1 });
   bloom(0.6);
   txt(`${DATA.book.code} · FILM ${DATA.film.number}`, 1440, 700, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.cyan, ls: 8 });
   leanList(W / 2, 922, 1, { align: 'center', size: 18, gap: 36 });
   txt(`${DATA.book.title.zh} · ${DATA.book.title.en}`, W / 2, 1018, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.white, a: 0.9 });
-  hud(t, Math.round(t * 30), 3, TL.scenes[3]);
+  hud(t, Math.round(t * 30), 1, TL.scenes[1]);
   post(3);
 };
