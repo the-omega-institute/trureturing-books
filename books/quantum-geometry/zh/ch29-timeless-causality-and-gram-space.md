@@ -362,6 +362,10 @@ $$
 - 因为 $\chi(T^2) = 0$，偶维毛球面的拓扑零点阻碍（见 [@rem-hairy-ball-adams-literature]）在环面上消失：不变全纯微分 $\omega = dx/y$ 在整条光滑射影椭圆曲线上处处非零且无极点，赋予椭圆曲线一个全局光滑的阿贝尔群加法律 $P \oplus Q$（参见第 23 章 [@rem-diophantine-z-in-q-literature] 中关于 Poonen 椭圆曲线整除性锁的文献背景）。
 :::
 
+::: {.viz src="hairy-ball-normal-escape" preset="torus" height="500"}
+**环面上的箭头处处不为零。** 环面 $\bigl((R + r\cos\theta)\cos\phi,\, (R + r\cos\theta)\sin\phi,\, r\sin\theta\bigr)$（$R > r > 0$）上青色的单位切向量 $\hat{\mathbf{e}}_\phi = (-\sin\phi, \cos\phi, 0)$ 都沿大圈的方向，长度处处为 $1$；琥珀色的点绕大圈走一周，它的箭头一刻也不缩短，环面上没有品红的零点环。$\chi(T^2) = 0$，与球面的 $\chi(S^2) = 2$ 相对（文献结果，未在本书形式化，见 [@rem-ch29-elliptic-torus-literature]）。图中只是拓扑上同一种曲面，不是椭圆曲线本身。
+:::
+
 ### 第三座桥：有限域椭圆曲线约化、弗罗贝尼乌斯余弦与 $S^3 \cong \mathrm{SU}(2)$ 投影 {#sec-coda-hasse-sato-tate}
 
 更深一层的算术—几何呼应出现在把标准同余数椭圆曲线 $E : y^2 = x^3 - x$ 约化到第 22 章的每一根奇素数轴 $\mathbb{F}_p$（$p \ge 3$）上的时刻：
