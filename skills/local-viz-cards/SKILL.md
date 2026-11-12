@@ -21,7 +21,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 ## 页面与它们的卡
 
-本书有 41 个交互页面，下表按登记表（`books/quantum-geometry/viz/visualizations.json`）的顺序排列。
+本书有 43 个交互页面，下表按登记表（`books/quantum-geometry/viz/visualizations.json`）的顺序排列。
 
 | 页面 | 一句话 | 卡（`preset`） |
 | --- | --- | --- |
