@@ -119,13 +119,13 @@
     g.dot(O[0].w.re, O[0].w.im, P.amber, 6.5 * k, { glow: TRV.thumbMode ? 0 : 12 });
     g.dot(0, 0, P.dim, 2.5);
     if (TRV.thumbMode) return;
-    g.text(-0.71, -0.71, '|w| = 1', P.cyan, { align: 'right', base: 'top', dx: -6, dy: 4, size: 11 });
+    g.text(-0.71, 0.71, '|w| = 1', P.cyan, { align: 'right', base: 'bottom', dx: -6, dy: -4, size: 11 });
     g.text(O[0].w.re, O[0].w.im, 'w', P.amber, { align: 'left', base: 'bottom', dx: 8, dy: -6, size: 12 });
     g.text(1.25, -1.25, 'w = (s − 1)/s', P.dim, { align: 'right', base: 'bottom', dx: -2, dy: -2, size: 11 });
     // log-polar magnifier: angle across, ln|w| up; the unit circle is the line ln|w| = 0
     const th = Math.abs(Math.atan2(O[0].w.im, O[0].w.re)), lr = Math.abs(Math.log(cabs(O[0].w)));
     const A = Math.max(th * 1.6, 0.02), D = Math.max(lr * 2.4, 2.5e-4);
-    const mw = Math.min(210, g.iw * 0.46), mh = Math.min(130, g.ih * 0.36), mx = g.pl + g.iw - mw - 4, my = g.pt + 4;
+    const mw = Math.min(210, g.iw * 0.46), mh = Math.min(130, g.ih * 0.36), mx = g.pl + 4, my = g.pt + g.ih - mh - 4;
     c.fillStyle = TRV.alpha(P.void, 0.82); c.fillRect(mx, my, mw, mh); c.strokeStyle = P.amber; c.lineWidth = 1; c.strokeRect(mx + 0.5, my + 0.5, mw - 1, mh - 1);
     const m = kit.plot(cv, { x: [-A, A], y: [-D, D], pad: [mx + 8, g.W - mx - mw + 8, my + 22, g.H - my - mh + 8], clear: false });
     m.line([[-A, 0], [A, 0]], P.cyan, { width: 1.6 });
