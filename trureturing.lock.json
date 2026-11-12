@@ -2205,6 +2205,14 @@
       "line": 130,
       "signature": "theorem reduced_irreversibility_is_access_defect (rho sigma : QubitMatrix) (hdiag : ∀ i, rho i i = sigma i i) (hcoherence : ∃ i j, i ≠ j ∧ rho i j ≠ sigma i j) : copyUnitary ∈ Matrix.unitaryGroup (Fin 2 × Fin 2) ℂ ∧ (unitaryEvolution copyUnitary (blankEnvironmentJointState rho) = controlledRecordJointState copiedAddressRecord rho ∧ unitaryEvolution copyUnitary (blankEnvironmentJointState sigma) = controlledRecordJointState copiedAddressRecord sigma) ∧ traceEnvironment (controlledRecordJointState copiedAddressRecord rho) = traceEnvironment (controlledRecordJointState copiedAddressRecord sigma) "
     },
+    "D5/S3/Quantum/Divergence/CanonicalChannelDPI.extended_quantum_relative_entropy_channel_dpi": {
+      "module": "D5/S3/Quantum/Divergence/CanonicalChannelDPI",
+      "name": "D5.S3.Quantum.Divergence.CanonicalChannelDPI.extended_quantum_relative_entropy_channel_dpi",
+      "kind": "theorem",
+      "statement_id": "sha256:774796337df6c0109376f820de48bf7a93d7e6f1796a0103e39fcfbf9b0bcb9b",
+      "line": 321,
+      "signature": "theorem extended_quantum_relative_entropy_channel_dpi {a : Type u} {b : Type v} [Fintype a] [DecidableEq a] [Nonempty a] [Fintype b] [DecidableEq b] [Nonempty b] (Φ : QuantumChannel a b) (ρ σ : DensityState a) : extendedQuantumRelativeEntropy (Φ.mapState ρ) (Φ.mapState σ) ≤ extendedQuantumRelativeEntropy ρ σ"
+    },
     "D5/S3/Quantum/Divergence/DualAccountFull.dual_account_full": {
       "module": "D5/S3/Quantum/Divergence/DualAccountFull",
       "name": "D5.S3.Quantum.Divergence.DualAccountFull.dual_account_full",
