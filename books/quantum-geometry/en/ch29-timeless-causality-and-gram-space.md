@@ -402,7 +402,7 @@ which is governed by two foundational theorems:
 :::
 
 ::: {.viz src="pythagoras-number-escape" preset="count" height="500"}
-**Counting points mod $13$.** Put $y^2 = x^3 - x$ into a grid of only $13$ numbers and check every cell: $4$ cyan lattice points, $3$ amber points with $y = 0$ and the point at infinity make $8$, six fewer than $p + 1 = 14$, so $a_{13} = 6$; the amber cosine on the right is $6/(2\sqrt{13}) \approx 0.832$. Since $13 = 3^2 + 2^2$ and $6 = 2 \cdot 3$, the deficit is twice the odd leg of the Gaussian triangle, as in item 2 above (literature result, not formalized in this book).
+**Counting points mod $13$.** Put $y^2 = x^3 - x$ into a grid of only $13$ numbers and check every cell: $4$ cyan lattice points, $3$ neutral branch points with $y = 0$ and the point at infinity make $8$, six fewer than $p + 1 = 14$, so $a_{13} = 6$. The ring of spins at the upper right places $x = 0, 1, \dots, 12$ on a circle and colours each by the Legendre symbol $\left(\frac{x^3 - x}{13}\right)$: $2$ cyan $+1$ (the column holds a pair of points $\pm y$), $8$ magenta $-1$ (the column is empty) and $3$ neutral $0$, summing to $-6$, which is $-a_{13}$ in the formula above; the amber cosine on the right is $6/(2\sqrt{13}) \approx 0.832$. Since $13 = 3^2 + 2^2$ and $6 = 2 \cdot 3$, the deficit is twice the odd leg of the Gaussian triangle, as in item 2 above (literature result, not formalized in this book).
 :::
 
 ::: {.remark #rem-ch29-gauss-character-application title="From Square Fibers to a Gaussian Triangle (Literature result, not formalized in this book)"}
@@ -510,7 +510,7 @@ Across the first two sections of this chapter, the Lindemann–Weierstrass theor
 :::
 
 ::: {.viz src="pythagoras-number-escape" preset="sato" height="500"}
-**Another curve: the semicircle.** Switch to $y^2 = x^3 - x + 1$ (the violet points): line primes no longer sit at zero, and the Frobenius cosines scatter between $-1$ and $1$; at $p = 53$, for instance, the cosine is $0.137$. The histogram further down the page, over the primes below $3000$, follows the dashed amber semicircle law $\frac{2}{\pi}\sqrt{1 - u^2}$. A histogram over finitely many primes is only a numerical demonstration; the Sato–Tate distribution is the literature result of the remark above.
+**Another curve: the semicircle.** Switch to $y^2 = x^3 - x + 1$ (the cyan points): line primes no longer sit at zero, and the Frobenius cosines scatter between $-1$ and $1$; at $p = 53$, for instance, the cosine is $0.137$. The histogram further down the page, over the primes below $3000$, follows the dashed amber semicircle law $\frac{2}{\pi}\sqrt{1 - u^2}$. A histogram over finitely many primes is only a numerical demonstration; the Sato–Tate distribution is the literature result of the remark above.
 :::
 
 In the overarching geometric synthesis of this book, starting from the Pell seam cracked open by Hippasus's right triangle ([@thm-ch29-silver-pell-remainder]) and reading across the arithmetic-geometry literature remarks above ([@rem-ch29-pell-primes-hilbert-literature], [@rem-ch29-elliptic-torus-literature], [@rem-ch29-hasse-gauss-literature], and [@rem-ch29-arithmetic-geometry-literature]), the point-count oscillations along the prime axes align visually with the cosine shadow cast by the quantum spinor sphere $S^3 \cong \mathrm{SU}(2)$ onto its diameter $[-1, +1]$.
