@@ -11,7 +11,7 @@
 3. **第三层（红色 `OPEN`）**：将全息物理与计算复杂性理论中的三大核心未解问题——**复杂度等于体积（CV）**（[@conj-complexity-equals-volume]）、**$\mathrm{ER}=\mathrm{EPR}$**（[@conj-er-equals-epr]）与 **$\mathrm{P}\neq\mathrm{NP}$**（[@conj-p-neq-np]）——严格标记为不带 `lean` 属性的开放猜想。
 
 ::: {.figure src="ch20-overview"}
-**图 20。** 本章地图：第 I 栏，玩具示意曲线——青色的 $S(t) = \min(2t, 4)$ 在 $t = 2$ 撞上灰色虚线 $4$ 后横着走，品红的 $C(t) = 2t$ 继续上升；第 II 栏，双边黑洞的示意彭罗斯图，紫色的切片两端钉在左右边界上、随边界时间越拉越长，把它读成复杂度是开放的复杂度—体积猜想（[@conj-complexity-equals-volume]）；第 III 栏，青色的 P 套在 NP 里，两者之间红色的问号是开放的 $\mathrm{P}\neq\mathrm{NP}$（[@conj-p-neq-np]）。
+**图 20。** 本章地图：第 I 栏，玩具示意曲线——青色的 $S(t) = \min(2t, 4)$ 在 $t = 2$ 撞上灰色虚线 $4$ 后横着走，品红的 $C(t) = 2t$ 继续上升；第 II 栏，两比特电路里导线 1 的标签经第一个 $\mathrm{CNOT}$ 从青色的 $z_1$ 变成品红的偶标签 $z_0 \oplus z_1$（诞生），$R_z$ 在它上面注入相位，再经第二个 $\mathrm{CNOT}$ 回到 $z_1$（复原），共 $2$ 个 $\mathrm{CNOT}$，绿色标签是 CNOT 下界（[@prop-reflection-cnot-lower-bound]）；第 III 栏，青色的 P 套在 NP 里，两者之间红色的问号是开放的 $\mathrm{P}\neq\mathrm{NP}$（[@conj-p-neq-np]）。
 :::
 
 ## 门计数、并行深度与增长模型 {#sec-circuit-depth-growth}
@@ -166,6 +166,8 @@ $$
 **熵先封顶，门数接着长。** 8 个量子比特的随机砖墙电路走到第 15 层：青色的半链熵沿灰色台阶爬升，从第 15 层起停在 3.18–3.36 比特之间（这一层是 3.20），压在 4 比特的白线下面；同一段里白线（已用门数）一路涨到 52。随机电路是示意模型，熵与门数逐层实算（[@rem-complexity-growth-literature]）。
 :::
 
+把同一个 $8$ 比特随机电路接着往后走，熵仍趴在原处，门数一层层累加，示意模型里的预期复杂度这时撞上注记所说的 $\exp(O(N))$ 量级天花板。
+
 ::: {.viz src="complexity-growth" preset="ceiling" height="500"}
 **门可以一直加，复杂度有天花板。** 一直走到第 90 层：青色的熵趴在原处，白线涨到 315 道门；品红的预期复杂度（示意模型）跟着白线走，到第 74 层碰上虚线 2^N = 256，此后横着走。
 :::
@@ -253,6 +255,10 @@ $$
 $$
 
 （例如当 $n = 1$ 即 $2n = 2$ 比特时，唯一反射配对 $(0, 1)$ 只有 $2^1 - 1 = 1$ 个非零偶奇偶模式 $z_0 \oplus z_1$，至少需要 $1$ 个偶诞生 $\mathrm{CNOT}$ 步在 `evenOutputs` 中生成 $z_0 \oplus z_1$ 供 $R_z$ 门注入相位，随后还必须至少再用 $2(1) - 1 = 1$ 个奇复原 $\mathrm{CNOT}$ 步在 `returns` 中把导线标签拆回单比特奇偶 $[z_0, z_1]$，合计至少 $1 + 1 = 2$ 个 $\mathrm{CNOT}$ 门。）完整证明由 Lean 内核检查。
+:::
+
+::: {.figure src="ch20-parity-labels"}
+**CNOT 下界数的是导线上的奇偶标签：每个非零偶标签都要诞生一次，每次诞生都要一次奇复原来抵消。** 左栏是 $n = 1$ 的两比特电路：导线 0 始终是青色的 $z_0$；导线 1 先是青色的 $z_1$，第一个 $\mathrm{CNOT}$（偶诞生）后变成品红的 $z_0 \oplus z_1$，$R_z$ 在它上面注入相位，第二个 $\mathrm{CNOT}$（奇复原）后又回到青色的 $z_1$，合计 $1 + 1 = 2$ 个 $\mathrm{CNOT}$；脚本逐元核对过这条电路等于 $\operatorname{diag}(e^{i\theta_{\mathrm{hard}}(x)})$ 乘一个全局相位。右栏是 $n = 2$ 时必须在导线上出现的 $7$ 个品红的非零偶奇偶标签，加上至少 $3$ 次复原，合计下界 $10$；绿色标签是 [@prop-reflection-cnot-lower-bound]。图不说明 $10$ 能否达到。
 :::
 
 按照认识论诚实原则，必须指出 [@prop-reflection-cnot-lower-bound] 的三条严格边界：
