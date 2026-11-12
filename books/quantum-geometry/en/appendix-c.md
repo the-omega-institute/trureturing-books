@@ -278,7 +278,7 @@ The table below lists in alphabetical module order all **251 unique frozen theor
 
 ## C.2 Formal Definitions, Structures, and Inductive Types (95 Unique Declarations) {#sec-appendix-c-definitions}
 
-The table below lists all **95 unique foundational definitions, algebraic structures, and inductive types** bound to `definition` environments and media components (together with the 251 theorems of Section C.1, these form the **345 core environment and media declarations** of the monograph):
+The table below lists all **95 unique foundational definitions, algebraic structures, and inductive types** bound to `definition` environments and media components (together with the 251 theorems of Section C.1, these form the **346 core environment and media declarations** of the monograph):
 
 | ID | Lean Declaration (Click for Source) | Module Path & Line | Kind | Chapters & Environment IDs |
 | :--- | :--- | :--- | :--- | :--- |
@@ -382,7 +382,7 @@ The table below lists all **95 unique foundational definitions, algebraic struct
 
 ## C.2.1 Inline-Referenced Auxiliary Theorems and Definitions (111 Unique Declarations) {#sec-appendix-c-inline}
 
-In addition to the 345 declarations bound to formal environments or media anchors in Sections C.1 and C.2, the main text, proof explanations, and appendix tables reference **111 auxiliary theorems and definitions** via inline `[name](lean:GID)` links. Including these 111 inline declarations, this appendix accounts for all **457 unique locked declarations** in `trureturing.lock.json` (`251 + 95 + 111 = 457`):
+In addition to the 346 declarations bound to formal environments or media anchors in Sections C.1 and C.2, the main text, proof explanations, and appendix tables reference **111 auxiliary theorems and definitions** via inline `[name](lean:GID)` links. Including these 111 inline declarations, this appendix accounts for all **457 unique locked declarations** in `trureturing.lock.json` (`251 + 95 + 111 = 457`):
 
 | ID | Lean Declaration (Click for Source) | Module Path & Line | Kind | Inline Reference Chapters |
 | :--- | :--- | :--- | :--- | :--- |
@@ -532,16 +532,16 @@ Every build and release of this book mechanically enforces the following five ve
 | :--- | :--- | :--- | :---: |
 | **Upstream Repository & Branch** | `the-omega-institute/trureturing` branch `dev` | `site.toml` `[trureturing]` config & `git merge-base --is-ancestor` check | `PASS` |
 | **Pinned Commit SHA** | [{commit}](trureturing:) | Locked in `trureturing.lock.json` `commit` field | `PASS` |
-| **Frozen Theorem Count** | `251` environment/media theorems (`319` total `kind == "theorem"` with inline refs) | Verified against `Golden/Frozen/state/<module>.lean.json` state slices & `statement_id` digests | `PASS` |
+| **Frozen Theorem Count** | `251` environment/media theorems (`320` total `kind == "theorem"` with inline refs) | Verified against `Golden/Frozen/state/<module>.lean.json` state slices & `statement_id` digests | `PASS` |
 | **Auxiliary Definition / Structure Count** | `95` environment definitions (`137` total `kind` in `def`, `inductive` with inline refs) | Segregated into Section C.2 and never counted as `theorem / lemma / proposition / corollary` boxes | `PASS` |
 | **Bilingual Structural Alignment** | 100% parity between `zh` and `en` chapter order, env IDs, and Lean citations | Checked item-by-item by `./tbook check` (`0 error(s), 0 warning(s)`) | `PASS` |
 
 ::: {.viz src="lean-declaration-map" preset="theorems" height="500"}
-**Theorems only.** The map keeps the 319 entries of kind theorem in the lock, all green: 248 filled cells cited by a theorem environment with `lean=`, and 72 hollow ones that appear in inline links only.
+**Theorems only.** The map keeps the 320 entries of kind theorem in the lock, all green: 248 filled cells cited by a theorem environment with `lean=`, and 72 hollow ones that appear in inline links only.
 :::
 
 ::: {.remark #rem-appendix-c-epistemic-boundary title="Verification Boundary Note for the Complete Declaration Index"}
-All 251 formal environment/media theorems in Section C.1, all 95 environment definitions/structures in Section C.2, and all 111 inline cross-referenced declarations in Section C.2.1 (457 locked declarations in total: 319 theorems + 137 definitions/structures) are verified by the Lean 4 kernel at `trureturing@dev` commit [{commit}](trureturing:) and locked in `trureturing.lock.json`. By contrast, the open conjectures (`OPEN`) and classical literature results (Literature result, not formalized in this book) registered in Section C.3 are strictly excluded from the formal theorem count, ensuring that every `LEAN ✓` badge in this book is backed by an unambiguous kernel proof.
+All 251 formal environment/media theorems in Section C.1, all 95 environment definitions/structures in Section C.2, and all 111 inline cross-referenced declarations in Section C.2.1 (457 locked declarations in total: 320 theorems + 137 definitions/structures) are verified by the Lean 4 kernel at `trureturing@dev` commit [{commit}](trureturing:) and locked in `trureturing.lock.json`. By contrast, the open conjectures (`OPEN`) and classical literature results (Literature result, not formalized in this book) registered in Section C.3 are strictly excluded from the formal theorem count, ensuring that every `LEAN ✓` badge in this book is backed by an unambiguous kernel proof.
 :::
 
 ::: {.viz src="lean-declaration-map" height="560"}

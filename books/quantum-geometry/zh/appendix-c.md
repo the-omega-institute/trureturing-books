@@ -278,7 +278,7 @@
 
 ## C.2 形式化定义、结构与归纳类型索引（95 项唯一声明） {#sec-appendix-c-definitions}
 
-下表列出全书 `definition` 环境与媒体组件锁定的 **95 项唯一基础定义、代数结构与归纳类型**（它们与 C.1 的 251 条定理共同构成全书正式环境与媒体锁定的 **345 项核心声明**）：
+下表列出全书 `definition` 环境与媒体组件锁定的 **95 项唯一基础定义、代数结构与归纳类型**（它们与 C.1 的 251 条定理共同构成全书正式环境与媒体锁定的 **346 项核心声明**）：
 
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 引用章节与环境 ID |
 | :--- | :--- | :--- | :--- | :--- |
@@ -382,7 +382,7 @@
 
 ## C.2.1 行内引用的辅助定理与定义索引（111 项唯一声明） {#sec-appendix-c-inline}
 
-除上述 C.1 与 C.2 中绑定于正式数学环境或媒体锚点的 345 项声明外，正文、证明解析与附录对照表中还通过 `[name](lean:GID)` 行内链接直接引用了 **111 项辅助定理与构造定义**。将这 111 项行内声明纳入总账后，本附录完整覆盖了 `trureturing.lock.json` 中的全部 **457 项唯一锁定声明**（`251 + 95 + 111 = 457`）：
+除上述 C.1 与 C.2 中绑定于正式数学环境或媒体锚点的 346 项声明外，正文、证明解析与附录对照表中还通过 `[name](lean:GID)` 行内链接直接引用了 **111 项辅助定理与构造定义**。将这 111 项行内声明纳入总账后，本附录完整覆盖了 `trureturing.lock.json` 中的全部 **457 项唯一锁定声明**（`251 + 95 + 111 = 457`）：
 
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 行内引用章节 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -532,16 +532,16 @@
 | :--- | :--- | :--- | :---: |
 | **上游仓库与分支** | `the-omega-institute/trureturing` 分支 `dev` | `site.toml` `[trureturing]` 配置与 `git merge-base --is-ancestor` | `PASS` |
 | **所钉提交 SHA** | [{commit}](trureturing:) | `trureturing.lock.json` `commit` 字段精确锁定 | `PASS` |
-| **冻结定理总数** | `251` 项环境/媒体定理（含行内共 `319` 项 `kind == "theorem"`） | 核对 `Golden/Frozen/state/<module>.lean.json` 中每项状态片与 `statement_id` 哈希 | `PASS` |
+| **冻结定理总数** | `251` 项环境/媒体定理（含行内共 `320` 项 `kind == "theorem"`） | 核对 `Golden/Frozen/state/<module>.lean.json` 中每项状态片与 `statement_id` 哈希 | `PASS` |
 | **辅助定义与结构数** | `95` 项环境定义（含行内共 `137` 项 `kind` 为 `def` 或 `inductive`） | 单独归入第 C.2 节，绝不与 `theorem / lemma / proposition / corollary` 混计 | `PASS` |
 | **多语言结构对齐** | `zh` 与 `en` 章节序列、环境 ID、Lean 引用序列 100% 一致 | `./tbook check` 跨版本逐项比对（`0 error(s), 0 warning(s)`） | `PASS` |
 
 ::: {.viz src="lean-declaration-map" preset="theorems" height="500"}
-**只看定理。** 地图只留锁文件里种类为 theorem 的 319 格，全是绿色：实心的 248 格被定理环境用 `lean=` 引用，空心的 72 格只出现在行内链接里。
+**只看定理。** 地图只留锁文件里种类为 theorem 的 320 格，全是绿色：实心的 248 格被定理环境用 `lean=` 引用，空心的 72 格只出现在行内链接里。
 :::
 
 ::: {.remark #rem-appendix-c-epistemic-boundary title="完整声明索引的验证边界说明"}
-本附录第 C.1 节所列的 251 条正式环境与媒体定理、第 C.2 节所列的 95 项环境定义/结构以及第 C.2.1 节所列的 111 项行内交叉引用声明（总计 457 项形式化声明：319 项定理 + 137 项定义/结构）均已在 `trureturing@dev` 提交 [{commit}](trureturing:) 下由 Lean 4 内核验证并写入 `trureturing.lock.json`；而第 C.3 节登记的开放猜想（`OPEN`）与经典文献定理（文献结果，未在本书形式化）则严格排除在形式化定理计数之外，确保全书的每一枚 `LEAN ✓` 徽章均具备零歧义的内核证明背书。
+本附录第 C.1 节所列的 251 条正式环境与媒体定理、第 C.2 节所列的 95 项环境定义/结构以及第 C.2.1 节所列的 111 项行内交叉引用声明（总计 457 项形式化声明：320 项定理 + 137 项定义/结构）均已在 `trureturing@dev` 提交 [{commit}](trureturing:) 下由 Lean 4 内核验证并写入 `trureturing.lock.json`；而第 C.3 节登记的开放猜想（`OPEN`）与经典文献定理（文献结果，未在本书形式化）则严格排除在形式化定理计数之外，确保全书的每一枚 `LEAN ✓` 徽章均具备零歧义的内核证明背书。
 :::
 
 ::: {.viz src="lean-declaration-map" height="560"}
