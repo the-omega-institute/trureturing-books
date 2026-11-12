@@ -5,7 +5,7 @@
   "summary": "A pure qubit is a unit Bloch vector v = (sin θ cos φ, sin θ sin φ, cos θ) on S², whose Bloch matrix B(v) = vx σx + vy σy + vz σz squares to I₂, and its Born weight on |0⟩ is cos²(θ/2) = (1 + cos θ)/2. The geometric product AB = cos θ + sin θ Î splits into a collinear projection and an oriented bivector area whose squares sum to one. Clifford rotors act two-sidedly with half angles, R(α) v R(α)† = exp(−iα n̂·σ/2) v exp(+iα n̂·σ/2): the axis n̂ commutes and stays fixed, while vector components in the perpendicular plane anticommute with the bivector generator, so the two half-angles add to the rotation angle α. A 2π turn brings the Bloch vector home but flips the spinor sign, R(2π) = −I₂; only a 4π turn returns R(4π) = +I₂. Finally phase damping contracts the transverse chord, (rx, ry, rz) ↦ ((1 − γ)rx, (1 − γ)ry, rz), leaving rz fixed.",
   "summary_zh": "纯量子比特态是 S² 上的单位布洛赫向量 v = (sin θ cos φ, sin θ sin φ, cos θ)，其布洛赫矩阵 B(v) = vx σx + vy σy + vz σz 满足 B(v)² = I₂，落在 |0⟩ 上的玻恩权重为 cos²(θ/2) = (1 + cos θ)/2。几何积 AB = cos θ + sin θ Î 分成共线投影与有向双矢量面积，二者平方和为 1。克利福德转子以半角从两侧作用：R(α) v R(α)† = exp(−iα n̂·σ/2) v exp(+iα n̂·σ/2)；旋转轴 n̂ 与转子对易而保持不动，垂直平面内的向量分量与双矢量生成元反对易，两个半角合成旋转角 α。转过 2π 时布洛赫向量回到原处，旋量却变号 R(2π) = −I₂；要转满 4π 才回到 R(4π) = +I₂。最后，相位阻尼把横向弦收缩为 (rx, ry, rz) ↦ ((1 − γ)rx, (1 − γ)ry, rz)，rz 保持不变。",
   "subject": "https://github.com/the-omega-institute/trureturing",
-  "publication_basis": "pinned",
+  "subject_commit": "6cfcf785096782b15084d719ec73c2ca16b6ed29",
   "released": "2026-11-10",
   "duration": "0:50",
   "resolution": "1280x720@30",
@@ -29,5 +29,6 @@
   "outputs": {
     "narrated_720p": "quantum-geometry_001_720p_narrated.mp4",
     "cover": "quantum-geometry_001_cover.jpg"
-  }
+  },
+  "publication_basis": "pinned"
 }

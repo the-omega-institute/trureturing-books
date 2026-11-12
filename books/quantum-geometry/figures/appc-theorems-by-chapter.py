@@ -61,9 +61,9 @@ def index_counts():
 ROWS = counts()
 TOTAL = sum(n for _, _, n in ROWS)
 N_INDEX, INDEX = index_counts()
-assert len(ROWS) == 40 and N_INDEX == 245
+assert len(ROWS) == 40 and N_INDEX == 251
 assert {k: n for k, _, n in ROWS} == dict(INDEX), (ROWS, INDEX)
-assert TOTAL == sum(INDEX.values()) == 326
+assert TOTAL == sum(INDEX.values()) == 329
 BY = sorted(ROWS, key=lambda r: -r[2])
 TOP, SECOND, THIRD, FOURTH = BY[:4]
 assert [r[0] for r in BY[:4]] == ["22", "30", "4", "24"] and len({r[2] for r in BY[:4]}) == 4

@@ -71,7 +71,11 @@ $$
 2. **被捏合丢弃质量的精确非对角模方公式**（[`pinching_discarded_coherence_mass`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass)）：
 
    $$
-   \operatorname{hilbertSchmidtInner}\bigl(\rho - \operatorname{pinching}(\rho), \rho - \operatorname{pinching}(\rho)\bigr) \;=\; \bigl(\operatorname{normSq}(\rho_{01}) + \operatorname{normSq}(\rho_{10}) : \mathbb{C}\bigr);
+   \begin{aligned}
+   &\operatorname{hilbertSchmidtInner}\bigl(\rho - \operatorname{pinching}(\rho), \rho - \operatorname{pinching}(\rho)\bigr) \\
+    &\;=\; \bigl(\operatorname{normSq}(\rho_{01}) \\
+    &\quad + \operatorname{normSq}(\rho_{10}) : \mathbb{C}\bigr);
+   \end{aligned}
    $$
 
 3. **捏合不动点与零非对角相干的充要刻画**（[`pinching_eq_self_iff_offDiag_eq_zero`](lean:D5/S3/QuantumChannels/CoherenceMassBridge.pinching_eq_self_iff_offDiag_eq_zero)）：

@@ -105,10 +105,49 @@ We now lock into place the two formal theorems governing lossless table-recovery
 Across the frozen concept-dynamics target-recovery and quantum-decoherence canonical-record modules of `trureturing`, the following two theorems hold simultaneously:
 
 1. **Fourfold Characterization of Lossless Table Recovery on Nonempty State Spaces** ([`target_recovery_criterion`](lean:D5/S3/ConceptDynamics/Restoration/TargetRecoveryCriterion.target_recovery_criterion)): Let $X, \mathrm{ProcessState}, \mathrm{Target}$ be arbitrary types with $X$ nonempty (`[Nonempty X]`), let $\mathrm{process} : \operatorname{Concept}\;X\;\mathrm{ProcessState}$ be a table-indexing process readout and $\mathrm{target} : \operatorname{Concept}\;X\;\mathrm{Target}$ a target readout, and write $\operatorname{defectRelation}(\mathrm{process}, \mathrm{target}) = \{(x, y) \in X \times X \mid \mathrm{process}(x) = \mathrm{process}(y) \land \mathrm{target}(x) \neq \mathrm{target}(y)\}$. Then all four equivalences hold simultaneously:
-   - **(a) Factorization Iff Fiber Constancy**: $(\exists\,\mathrm{recover} : \mathrm{ProcessState} \to \mathrm{Target},\; \mathrm{target} = \mathrm{recover} \circ \mathrm{process}) \iff (\forall x, y \in X,\; \mathrm{process}(x) = \mathrm{process}(y) \to \mathrm{target}(x) = \mathrm{target}(y))$;
-   - **(b) Fiber Constancy Iff Empty Defect Relation**: $(\forall x, y \in X,\; \mathrm{process}(x) = \mathrm{process}(y) \to \mathrm{target}(x) = \mathrm{target}(y)) \iff \operatorname{defectRelation}(\mathrm{process}, \mathrm{target}) = \emptyset$;
-   - **(c) Empty Defect Relation Iff Table Recovery Exists**: $\operatorname{defectRelation}(\mathrm{process}, \mathrm{target}) = \emptyset \iff (\exists\,\mathrm{recover} : \mathrm{ProcessState} \to \mathrm{Target},\; \mathrm{target} = \mathrm{recover} \circ \mathrm{process})$;
-   - **(d) Unrecoverability Iff Nonempty Defect Relation**: $(\neg\exists\,\mathrm{recover} : \mathrm{ProcessState} \to \mathrm{Target},\; \mathrm{target} = \mathrm{recover} \circ \mathrm{process}) \iff (\operatorname{defectRelation}(\mathrm{process}, \mathrm{target})).\mathrm{Nonempty}$;
+   - **(a) Factorization Iff Fiber Constancy**:
+
+     $$
+     \begin{aligned}
+     &(\exists\,\mathrm{recover} : \mathrm{ProcessState} \to \mathrm{Target}, \\
+      &\quad \mathrm{target} = \mathrm{recover} \circ \mathrm{process}) \\
+      &\iff (\forall x, y \in X,\; \mathrm{process}(x) = \mathrm{process}(y) \to \mathrm{target}(x) = \mathrm{target}(y))
+     \end{aligned}
+     $$
+
+     ;
+   - **(b) Fiber Constancy Iff Empty Defect Relation**:
+
+     $$
+     \begin{aligned}
+     &(\forall x, y \in X,\; \mathrm{process}(x) = \mathrm{process}(y) \to \mathrm{target}(x) = \mathrm{target}(y)) \\
+      &\iff \operatorname{defectRelation}(\mathrm{process}, \mathrm{target}) = \emptyset
+     \end{aligned}
+     $$
+
+     ;
+   - **(c) Empty Defect Relation Iff Table Recovery Exists**:
+
+     $$
+     \begin{aligned}
+     &\operatorname{defectRelation}(\mathrm{process}, \mathrm{target}) = \emptyset \\
+      &\iff (\exists\,\mathrm{recover} : \mathrm{ProcessState} \to \mathrm{Target}, \\
+      &\quad \mathrm{target} = \mathrm{recover} \circ \mathrm{process})
+     \end{aligned}
+     $$
+
+     ;
+   - **(d) Unrecoverability Iff Nonempty Defect Relation**:
+
+     $$
+     \begin{aligned}
+     &(\neg\exists\,\mathrm{recover} : \mathrm{ProcessState} \to \mathrm{Target}, \\
+      &\quad \mathrm{target} = \mathrm{recover} \circ \mathrm{process}) \\
+      &\iff (\operatorname{defectRelation}(\mathrm{process}, \mathrm{target})).\mathrm{Nonempty}
+     \end{aligned}
+     $$
+
+     ;
 2. **Extensional Identity of Canonical Copied-Address Records** ([`canonical_copied_address_record_eq_prior`](lean:D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.canonical_copied_address_record_eq_prior)): The canonical address-table record $\operatorname{MeasurementMarginal.copiedAddressRecord}(i, a) = (\text{if } i = a \text{ then } 1 \text{ else } 0)$ from the measurement-marginal module and the controlled-permutation record $\operatorname{ReducedRecordAccessDefect.copiedAddressRecord}(i, a) = (\text{if } a = i \text{ then } 1 \text{ else } 0)$ from the reduced-record-access module are identically equal as environment records of type $\operatorname{Fin}\;2 \to \operatorname{Fin}\;2 \to \mathbb{C}$:
 
    $$

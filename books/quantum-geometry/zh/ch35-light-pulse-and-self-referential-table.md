@@ -105,10 +105,49 @@ $$
 在 `trureturing` 冻结的概念动力学目标恢复与量子退相干典范记录模块中，以下两项定理同时成立：
 
 1. **非空状态空间上查表恢复映射存在的四重充要刻画**（[`target_recovery_criterion`](lean:D5/S3/ConceptDynamics/Restoration/TargetRecoveryCriterion.target_recovery_criterion)）：设 $X, \mathrm{ProcessState}, \mathrm{Target}$ 为任意类型且状态空间 $X$ 非空（`[Nonempty X]`），给定表索引过程读出 $\mathrm{process} : \operatorname{Concept}\;X\;\mathrm{ProcessState}$ 与目标读出 $\mathrm{target} : \operatorname{Concept}\;X\;\mathrm{Target}$，记碰撞缺陷关系为 $\operatorname{defectRelation}(\mathrm{process}, \mathrm{target}) = \{(x, y) \in X \times X \mid \mathrm{process}(x) = \mathrm{process}(y) \land \mathrm{target}(x) \neq \mathrm{target}(y)\}$。则以下四组等价式同时成立：
-   - **（a）因子分解与纤维常值性等价**：$(\exists\,\mathrm{recover} : \mathrm{ProcessState} \to \mathrm{Target},\; \mathrm{target} = \mathrm{recover} \circ \mathrm{process}) \iff (\forall x, y \in X,\; \mathrm{process}(x) = \mathrm{process}(y) \to \mathrm{target}(x) = \mathrm{target}(y))$；
-   - **（b）纤维常值性与零碰撞缺陷等价**：$(\forall x, y \in X,\; \mathrm{process}(x) = \mathrm{process}(y) \to \mathrm{target}(x) = \mathrm{target}(y)) \iff \operatorname{defectRelation}(\mathrm{process}, \mathrm{target}) = \emptyset$；
-   - **（c）零碰撞缺陷与查表恢复存在性等价**：$\operatorname{defectRelation}(\mathrm{process}, \mathrm{target}) = \emptyset \iff (\exists\,\mathrm{recover} : \mathrm{ProcessState} \to \mathrm{Target},\; \mathrm{target} = \mathrm{recover} \circ \mathrm{process})$；
-   - **（d）不可查表恢复与非空碰撞缺陷等价**：$(\neg\exists\,\mathrm{recover} : \mathrm{ProcessState} \to \mathrm{Target},\; \mathrm{target} = \mathrm{recover} \circ \mathrm{process}) \iff (\operatorname{defectRelation}(\mathrm{process}, \mathrm{target})).\mathrm{Nonempty}$；
+   - **（a）因子分解与纤维常值性等价**：
+
+     $$
+     \begin{aligned}
+     &(\exists\,\mathrm{recover} : \mathrm{ProcessState} \to \mathrm{Target}, \\
+      &\quad \mathrm{target} = \mathrm{recover} \circ \mathrm{process}) \\
+      &\iff (\forall x, y \in X,\; \mathrm{process}(x) = \mathrm{process}(y) \to \mathrm{target}(x) = \mathrm{target}(y))
+     \end{aligned}
+     $$
+
+     ；
+   - **（b）纤维常值性与零碰撞缺陷等价**：
+
+     $$
+     \begin{aligned}
+     &(\forall x, y \in X,\; \mathrm{process}(x) = \mathrm{process}(y) \to \mathrm{target}(x) = \mathrm{target}(y)) \\
+      &\iff \operatorname{defectRelation}(\mathrm{process}, \mathrm{target}) = \emptyset
+     \end{aligned}
+     $$
+
+     ；
+   - **（c）零碰撞缺陷与查表恢复存在性等价**：
+
+     $$
+     \begin{aligned}
+     &\operatorname{defectRelation}(\mathrm{process}, \mathrm{target}) = \emptyset \\
+      &\iff (\exists\,\mathrm{recover} : \mathrm{ProcessState} \to \mathrm{Target}, \\
+      &\quad \mathrm{target} = \mathrm{recover} \circ \mathrm{process})
+     \end{aligned}
+     $$
+
+     ；
+   - **（d）不可查表恢复与非空碰撞缺陷等价**：
+
+     $$
+     \begin{aligned}
+     &(\neg\exists\,\mathrm{recover} : \mathrm{ProcessState} \to \mathrm{Target}, \\
+      &\quad \mathrm{target} = \mathrm{recover} \circ \mathrm{process}) \\
+      &\iff (\operatorname{defectRelation}(\mathrm{process}, \mathrm{target})).\mathrm{Nonempty}
+     \end{aligned}
+     $$
+
+     ；
 2. **典范拷贝地址记录的外延相等桥接**（[`canonical_copied_address_record_eq_prior`](lean:D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.canonical_copied_address_record_eq_prior)）：观察者测量边缘模块定义的典范地址表记录 $\operatorname{MeasurementMarginal.copiedAddressRecord}(i, a) = (\text{if } i = a \text{ then } 1 \text{ else } 0)$ 与受控置换拷贝模块定义的地址记录 $\operatorname{ReducedRecordAccessDefect.copiedAddressRecord}(i, a) = (\text{if } a = i \text{ then } 1 \text{ else } 0)$ 作为 $\operatorname{Fin}\;2 \to \operatorname{Fin}\;2 \to \mathbb{C}$ 类型的环境记录严格全等：
 
    $$

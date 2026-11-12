@@ -5,7 +5,7 @@
   "summary": "Read down the diagonal of a list of bit strings and flip every bit: the new string differs from row k at place k, and Lean checks that a twist with no fixed point escapes every list. In a four-address catalog the flipped diagonal splits a fiber of the old coordinate; raised as a new axis at right angles it turns two pieces into three, the four conclusions Lean checks for every complete catalog. Seen from outside, the closed shadow circle is an open helix, and the joined coordinate already needs sixteen functions where four addresses remain. The chase stops only where a list catches its twisted diagonal, and Lean checks that the landing value is then a fixed point of the twist. With cosine as the twist, the iterates from one radian close in on θ* ≈ 0.739085, the one positive solution of cos θ = θ that Lean checks; near it each step multiplies the error by about −0.674, and θ*, sin θ* sit on one unit circle.",
   "summary_zh": "沿一张二进制串清单的对角线往下读、逐位翻转：新串在第 k 位与第 k 行不同，Lean 内核检验了没有不动点的扭转逃出每一张清单。在四个地址的小目录里，翻出的对角线劈开旧坐标的一根纤维；把它立成垂直的新轴，两块变成三块，这正是 Lean 对每部完备目录检验过的四项结论。从外面看，闭合的影子圆是一条开口螺旋，合并后的坐标已需要 16 个函数，地址却只有 4 个。追逐只在清单捕获自己扭过的对角线时停下，Lean 检验了此时落点上的值是扭转的不动点。取余弦作扭转，从 1 弧度出发的迭代收向 θ* ≈ 0.739085，即 Lean 检验过的 cos θ = θ 的唯一正解；在它附近每步误差约乘以 −0.674，θ* 与 sin θ* 落在同一个单位圆上。",
   "subject": "https://github.com/the-omega-institute/trureturing",
-  "publication_basis": "pinned",
+  "subject_commit": "6cfcf785096782b15084d719ec73c2ca16b6ed29",
   "released": "2026-11-11",
   "duration": "2:28",
   "resolution": "1280x720@30",
@@ -28,5 +28,6 @@
   "outputs": {
     "narrated_720p": "quantum-geometry_006_720p_narrated.mp4",
     "cover": "quantum-geometry_006_cover.jpg"
-  }
+  },
+  "publication_basis": "pinned"
 }
