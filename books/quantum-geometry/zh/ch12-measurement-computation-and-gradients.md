@@ -8,13 +8,13 @@
 2. **泡利参数位移律（Parameter-Shift Rule）**：当观察者想要在参数化量子电路里顺着期望值曲面求导数 $\partial_\theta f(\theta)$ 时，他不需要像经典微积分那样取极小步长 $\delta\theta \to 0$ 去做容易放大散粒噪声的有限差分近似；因为在单次泡利旋转下球面截面天然是纯粹的一阶正余弦波，只需把参数精确拨到左右**正交 $90^\circ$** 的两个位移设置点 $\theta \pm \frac{\pi}{2}$ 分别求取（或通过重复采样估计）期望值 $f(\theta \pm \frac{\pi}{2})$，两者的差商就给出**零有限差分截断误差的精确解析导数恒等式**（尽管有限次采样估计期望值时仍保留常规统计散粒噪声）！
 
 ::: {.viz src="parameter-shift" preset="noise" height="500"}
-**同样多的测量次数，两种算法的散布差十几倍。** $\theta = 60^\circ$，每个取值点只测 100 发：每次试验在量尺上落一个青色的点（左右各 $90^\circ$ 两值之差的一半）和一个品红的点（$\pm 6^\circ$ 的小步长差分）。青色的点挤在切线斜率的虚线旁，宽约 0.035；品红的点散开约 0.58，有的落出量尺。两种散布都来自散粒噪声，小步长把它放大了（[@rem-parameter-shift-rule-literature]）。
+**同样多的测量次数，两种算法的散布差十几倍。** $\theta = 60^\circ$，每个取值点只测 100 发：每次试验在量尺上落一个青色的点（左右各 $90^\circ$ 两值之差的一半）和一个品红的点（$\pm 6^\circ$ 的小步长差分）。青色的点挤在切线斜率的虚线旁，宽约 0.035；品红的点散开约 0.58。两种散布都来自散粒噪声，小步长把它放大了（[@rem-parameter-shift-rule-literature]）。
 :::
 
 3. **黎曼自然梯度与高维赤道集中**：在弯曲球面与射影流形上，沿着内蕴黎曼度量（如球面诱导度量或 Fubini–Study 度量）的负梯度流下滑，势能的减少量精确等于切速度模长平方的时间积分（[@thm-riemannian-gradient-dissipation]）；然而一旦维度随比特数 $n$ 指数暴涨到 $d = 2^n$，高维球面上几乎所有的测度都会死死挤压在垂直于任一固定测量轴的**赤道窄带**内，在满足特定随机电路设计假设时构成变分量子算法“贫瘠高原（barren plateau）”现象的几何背景；与此同时，作为一条独立于球面测度与电路梯度的纯谱分析工具，当非负可和本征值序列满足有限迹预算等式 $\sum_j \lambda_j = RW/\pi$ 时，其超过任意正阈值 $\tau > 0$ 的模式个数满足一个充分的有限计数上界（[@cor-finite-trace-mode-budget]）。
 
 ::: {.figure src="ch12-overview"}
-**图 12。** 本章地图：第 I 栏是测量的角度变成另一个节点上的门，第 II 栏是左右各转 $90^\circ$ 取出精确斜率，第 III 栏是维数越高、分布越挤向赤道。第 I 栏琥珀色的指针是测量角 $\alpha$，虚线把经典比特 $s$ 送到输出节点；第 II 栏琥珀色的点在 $\theta = 60^\circ$，两个青色的点在左右各 $90^\circ$ 处，虚线是切线；第 III 栏是 $x_1$ 的精确密度，$d = 3$ 时是平线，$d = 300$ 时是赤道上青色的尖峰。MBQC、参数位移律与赤道集中是文献结果，未在本书形式化（[@rem-mbqc-gradients-literature]）；右下角绿色的小框只指 [@cor-finite-trace-mode-budget]。
+**图 12。** 本章地图：第 I 栏是测量的角度变成另一个节点上的门，第 II 栏是左右各转 $90^\circ$ 取出精确斜率，第 III 栏是维数越高、分布越挤向赤道。第 I 栏琥珀色的指针是测量角 $\alpha$，虚线把经典比特 $s$ 送到输出节点；第 II 栏琥珀色的点在 $\theta = 60^\circ$，两个青色的点在左右各 $90^\circ$ 处，虚线是切线；第 III 栏是 $x_1$ 的精确密度，$d = 3$ 时是平线，$d = 300$ 时是赤道上青色的尖峰。MBQC、参数位移律与赤道集中是文献结果，未在本书形式化（[@rem-mbqc-gradients-literature]），所以三栏都不带绿色的框。
 :::
 
 ## 簇态测量与经典前馈 {#sec-cluster-measurement-feedforward}
@@ -45,7 +45,7 @@ $$
 
 现在，让我们在最基本的一维两比特链节上亲手算一遍**测量如何把注意力倾角 $\alpha$ 变成逻辑门**（图 12 左栏）：
 
-1. **制备纠缠链节**：将第 1 颗比特置为任意待处理输入纯态 $\lvert\psi\rangle = a\lvert 0\rangle + b\lvert 1\rangle$，将第 2 颗辅助比特置为赤道正东态 $\lvert +\rangle = \frac{1}{\sqrt{2}}(\lvert 0\rangle + \lvert 1\rangle)$，并对两比特施加受控相位门 $\mathrm{CZ} = \operatorname{diag}(1, 1, 1, -1)$，得到双比特纠缠态：
+1. **制备两比特链节**：将第 1 颗比特置为任意待处理输入纯态 $\lvert\psi\rangle = a\lvert 0\rangle + b\lvert 1\rangle$，将第 2 颗辅助比特置为赤道正东态 $\lvert +\rangle = \frac{1}{\sqrt{2}}(\lvert 0\rangle + \lvert 1\rangle)$，并对两比特施加受控相位门 $\mathrm{CZ} = \operatorname{diag}(1, 1, 1, -1)$，得到双比特态：
 
    $$
    \mathrm{CZ}\bigl(\lvert\psi\rangle \otimes \lvert +\rangle\bigr) = a\lvert 0\rangle \otimes \lvert +\rangle + b\lvert 1\rangle \otimes \lvert -\rangle.
@@ -141,9 +141,19 @@ $$
 （职责边界：[@prop-measurement-gradient-flow] 经 Lean 内核验证的是无穷小对易子导数公式与纯实性；上述两采样点有限位移恒等式额外依赖“参数 $\theta$ 仅在单扇对合泡利门 $e^{-i\theta P_{\mathrm{gen}}/2}$ 中出现一次”的二能级频率结构，作为手算与文献结果列入 [@ex-cluster-shift-and-gradient] 与 [@rem-mbqc-gradients-literature]。）
 :::
 
-::: {.viz src="parameter-shift" preset="anywhere" height="500"}
-**换一个角度、换一条曲线，仍然精确。** 倾斜的态与测量轴给出抬高了常数 $c$、错开了相位的曲线 $f = c + a\cos\theta + b\sin\theta$。$\theta$ 扫过一整圈，量尺上青色的条始终停在切线的虚线上，品红的条（$\pm 30^\circ$ 的小步长差分）始终短一截；常数 $c$ 在相减时消掉（[@rem-parameter-shift-rule-literature]）。
+两个取值点一旦不隔 $90^\circ$ 而只隔小步长 $\pm h$，差分在斜率非零处就不再精确：对 $f = \cos\theta$，$\theta \pm h$ 两点连成的弦，斜率是切线斜率的 $\sin h / h$ 倍，$h = 30^\circ$ 时幅度短约 $4.5\%$，驻点处则两者同为零；$h$ 取小，这一截偏差按 $h^2$ 缩小，同样的散粒噪声却被 $2h$ 除得更大（本章开头的对照）。
+
+::: {.viz src="parameter-shift" preset="step" height="500"}
+**小步长的差分总差一截。** 同一条 $f = \cos\theta$，琥珀色的点在 $\theta = 60^\circ$；$\pm 30^\circ$ 两点连成的品红的弦比虚线切线缓，量尺上品红的条比切线短 $4.5\%$（$\sin h / h = 0.955$），青色的条（左右各 $90^\circ$ 两值之差的一半）停在切线上。
 :::
+
+左右各转 $90^\circ$ 的两点公式没有这一截偏差，它对一倍角谐波是恒等式；换一个角度、换一条曲线也是如此。
+
+::: {.viz src="parameter-shift" preset="anywhere" height="500"}
+**换一个角度、换一条曲线，仍然精确。** 倾斜的态与测量轴给出抬高了常数 $c$、错开了相位的曲线 $f = c + a\cos\theta + b\sin\theta$。$\theta$ 扫过一整圈，量尺上青色的条始终停在切线的虚线上，品红的条（$\pm 30^\circ$ 的小步长差分）在导数非零处短一截，导数为零时两者同为零；常数 $c$ 在相减时消掉（[@rem-parameter-shift-rule-literature]）。
+:::
+
+曲线与采样两个场景合在下面的完整实验室里：$h$ 越小，截断偏差越小，散粒噪声的散布越宽。
 
 ::: {.viz src="parameter-shift" height="560"}
 **参数位移：完整实验室。** 两个场景共用一条时间轴：曲线（拖动曲线或圆里的箭头改角度，换曲线、改小步长 $h$）与采样（改每个取值点的发数 $N$，看两种算法的散布怎样随 $N$ 与 $h$ 变化）。
@@ -209,11 +219,11 @@ $$
 几何直觉藏在**高维球面的赤道测度集中现象（concentration of measure）**里（图 12 右栏；受限实振幅模型球面上的二阶矩上界汇总于 [@rem-sphere-equator-markov-literature]）。
 
 ::: {.viz src="equator-concentration" preset="three" height="500"}
-**普通的三维球面上，点的高度均匀分布。** $d = 3$：圆上的点上下铺开，右边的精确密度是一条竖直的直线 $1/2$；$\varepsilon = 0.1$ 的赤道带里恰好是 10% 的点（青色），其余 90% 是品红的点。高度均匀是阿基米德的经典结果，未在本书形式化。
+**普通的三维球面上，点的高度均匀分布。** $d = 3$：圆上的点上下铺开，右边的精确密度是一条竖直的直线 $1/2$；$\varepsilon = 0.1$ 的赤道带占均匀测度的 10%；图中 1500 个样本里有 142 个青色点（约 9.47%），其余是品红的点。高度均匀是阿基米德的经典结果，未在本书形式化。
 :::
 
 ::: {.viz src="equator-concentration" preset="width" height="500"}
-**维数越高，点越挤向赤道。** 时间轴把维数从 $d = 2$ 升到 $d = 2^{10}$：圆上的点挤向垂直于测量轴的赤道，右边的鼓包变窄变高，两道短横线 $\pm 1/\sqrt{d}$ 一起收拢；到 $d = 1024$ 时带外只剩 0.13%。宽度 $1/\sqrt{d}$ 来自 $\mathbb{E}[x_1^2] = 1/d$（[@rem-sphere-equator-markov-literature]）。
+**维数越高，点越挤向赤道。** 时间轴把维数从 $d = 2$ 升到 $d = 2^{10}$：圆上的点挤向垂直于测量轴的赤道，右边的鼓包变窄变高，两道短横线 $\pm 1/\sqrt{d}$ 一起收拢；到 $d = 1024$ 时带外只剩 0.13%，鼓包薄得看不清，右上角的放大镜把赤道附近放大 32 倍，鼓包在那里仍宽 $\pm 1/\sqrt{d}$。宽度 $1/\sqrt{d}$ 来自 $\mathbb{E}[x_1^2] = 1/d$（[@rem-sphere-equator-markov-literature]）。
 :::
 
 ::: {.remark #rem-sphere-equator-markov-literature title="实单位球面二阶矩与赤道马尔可夫集中上界（文献结果，未在本书形式化）"}
@@ -237,7 +247,7 @@ $$
 :::
 
 ::: {.viz src="equator-concentration" preset="twenty" height="500"}
-**二十个量子比特：所有的点都在赤道窄带里。** $d = 2^{20}$、$\varepsilon = 0.1$：圆上的点全落在赤道上，密度是赤道上的一根细针。马尔可夫上界给出 $9.54 \times 10^{-5}$，页面用不完全贝塔函数算出的精确份额约为 $3 \times 10^{-2291}$。这是受限实振幅模型上的测度集中，不是电路梯度定律（[@rem-mbqc-gradients-literature]）。
+**二十个量子比特：所有的点都在赤道窄带里。** $d = 2^{20}$、$\varepsilon = 0.1$：圆上的点全落在赤道上，密度缩成赤道上的一根细针；右上角的放大镜把赤道附近放大 1024 倍，针原来是一个宽 $\pm 1/\sqrt{d}$ 的鼓包，带边 $\pm\varepsilon$ 远在窗外。马尔可夫上界给出 $9.54 \times 10^{-5}$，页面用不完全贝塔函数算出的精确份额约为 $3 \times 10^{-2291}$。这是受限实振幅模型上的测度集中，不是电路梯度定律（[@rem-mbqc-gradients-literature]）。
 :::
 
 与上述均匀球面测度集中和随机电路梯度定律**完全独立**，在算子层析与时频集中分析中还有另一类常被对比的数学问题：**当一个非负实数列 $\lambda : \mathbb{N} \to \mathbb{R}$ 可和且满足有限迹恒等式 $\sum_{j=0}^\infty \lambda_j = \frac{R W}{\pi}$ 时，如何从上界控制它超过给定阈值 $\tau > 0$ 的模式个数？** 在 Lean 模块 `FiniteRankConcentrationModeBound` 中，下面的冻结推论给出了这一**充分计数上界**：任何超过正阈值 $\tau > 0$ 的超水平集 $S_\tau = \{j \in \mathbb{N} \mid \tau \le \lambda_j\}$ 必然是有限集，且其基数受显式上界 $\frac{R W}{\pi \tau}$ 控制。（请务必注意边界：该定理只是一个关于非负可和序列的**充分计数上界**，既不是超水平集有限的必要条件——例如不可和的调和序列 $\lambda_j = \frac{1}{j+1}$ 总和发散，但对每个正阈值 $\tau > 0$ 同样只有有限项满足 $\lambda_j \ge \tau$——也不提供逃离贫瘠高原或保证电路梯度非零的机制，因为有限维密度矩阵天然迹为 $1$，且有限迹预算丝毫不能阻止常数目标函数的梯度恒为零。）
@@ -268,19 +278,19 @@ $$
 :::
 
 ::: {.viz src="eth-horizon-crossover" preset="plateau" height="500"}
-**平台谱：承重的模态屈指可数。** 前几个模态接近 $1$，第九个起迅速掉到零。琥珀色的阈值 $\theta = 0.5$ 下，青色的过线模态有 $8$ 个，品红的墙在 $T/\theta = 16$（页面上的 $T$ 即迹预算 $RW/\pi$，$\theta$ 即 $\tau$）：个数不超过墙，就是 [@cor-finite-trace-mode-budget]。
+**平台谱：承重的模态屈指可数。** 前几个模态接近 $1$，第九个起迅速掉到零。琥珀色的阈值 $\tau = 0.5$ 下，青色的过线模态有 $8$ 个，品红的墙在 $RW/(\pi\tau) = 16$（页面上这条谱的总和就是迹预算 $RW/\pi$）：个数不超过墙，就是 [@cor-finite-trace-mode-budget]。
 :::
 
 ::: {.viz src="eth-horizon-crossover" preset="tail" height="500"}
-**阈值降低：个数涨，仍不过墙。** 换成拖着长尾的幂律谱，再把琥珀色的阈值一路降低：过线的青色柱子越来越多，品红的墙 $T/\theta$ 也跟着后退，柱子始终到不了墙（$\theta = 0.07$ 时 $6$ 个过线，墙在 $37.4$）。
+**阈值降低：个数涨，仍不过墙。** 换成拖着长尾的幂律谱，再把琥珀色的阈值一路降低：过线的青色柱子越来越多，品红的墙 $RW/(\pi\tau)$ 也跟着后退，柱子始终到不了墙（$\tau = 0.069$ 时 $6$ 个过线，墙在 $37.4$）。
 :::
 
-请严格区分 [@cor-finite-trace-mode-budget] 与随机电路贫瘠高原的边界：[@cor-finite-trace-mode-budget] 不单独假定 $R > 0$ 或 $W > 0$（由 $\lambda_j \ge 0$ 与 $\sum_j \lambda_j = RW/\pi$ 仅蕴含乘积非负 $R W \ge 0$，而不蕴含 $R \ge 0$ 与 $W \ge 0$ 各自非负，例如 $R = -\pi, W = -1$ 同样满足全部前提），它证明的是**给定非负可和序列迹等式 $\sum_j \lambda_j = RW/\pi$ 下的谱超水平集有限计数上界**（支撑图 12 右下角的绿色徽章框），既不是可学习性的必要条件，也不是均匀球面测度集中或随机量子电路梯度方差定理本身。
+请严格区分 [@cor-finite-trace-mode-budget] 与随机电路贫瘠高原的边界：[@cor-finite-trace-mode-budget] 不单独假定 $R > 0$ 或 $W > 0$（由 $\lambda_j \ge 0$ 与 $\sum_j \lambda_j = RW/\pi$ 仅蕴含乘积非负 $R W \ge 0$，而不蕴含 $R \ge 0$ 与 $W \ge 0$ 各自非负，例如 $R = -\pi, W = -1$ 同样满足全部前提），它证明的是**给定非负可和序列迹等式 $\sum_j \lambda_j = RW/\pi$ 下的谱超水平集有限计数上界**，既不是可学习性的必要条件，也不是均匀球面测度集中或随机量子电路梯度方差定理本身。
 
 现在，让我们在下面的五步综合手算实例中，把一次簇态传态、两次正交参数移位、一次球面黎曼下降、$20$ 比特赤道集中概率与有限迹谱计数逐一算透。
 
 ::: {.example #ex-cluster-shift-and-gradient title="一次传态、两次移位与一次球面下降"}
-1. **两比特簇态测量传态与前馈修正**：取输入态 $\lvert\psi\rangle = a\lvert 0\rangle + b\lvert 1\rangle$、辅助态 $\lvert +\rangle$，经 $\mathrm{CZ}$ 纠缠后在第 1 颗比特上按赤道基 $\lvert\pm_\alpha\rangle = (\lvert 0\rangle \pm e^{i\alpha}\lvert 1\rangle)/\sqrt{2}$ 测量。结果 $s \in \{0, 1\}$ 下第 2 颗比特的未归一化分支态为 $\frac{1}{\sqrt{2}} X^s H \operatorname{diag}(1, e^{-i\alpha})\lvert\psi\rangle$（归一化输入下各分支概率均为 $\frac{1}{2}$）。差全局相位，经泡利前馈修正 $X^s$ 后的输出态为 $H R_z(-\alpha)\lvert\psi\rangle$。特别地，取输入 $\lvert\psi\rangle = \lvert 0\rangle$、$\alpha = \frac{\pi}{3}$，则 $\operatorname{diag}(1, e^{-i\pi/3})\lvert 0\rangle = \lvert 0\rangle$，两个分支经 $X^s$ 修正后均精确给出 $H\lvert 0\rangle = \lvert +\rangle$。在多步计算中，由于 $X R_z(-\beta) = e^{i\gamma} R_z(+\beta) X$，后续测量角必须根据前序测量结果 $s$ 自适应调整符号；一维簇链仅能实现单比特旋转传输，而适当的二维簇态（2D cluster state）才是通用量子计算资源。
+1. **两比特簇态测量传态与前馈修正**：取输入态 $\lvert\psi\rangle = a\lvert 0\rangle + b\lvert 1\rangle$、辅助态 $\lvert +\rangle$，施加 $\mathrm{CZ}$ 后在第 1 颗比特上按赤道基 $\lvert\pm_\alpha\rangle = (\lvert 0\rangle \pm e^{i\alpha}\lvert 1\rangle)/\sqrt{2}$ 测量。结果 $s \in \{0, 1\}$ 下第 2 颗比特的未归一化分支态为 $\frac{1}{\sqrt{2}} X^s H \operatorname{diag}(1, e^{-i\alpha})\lvert\psi\rangle$（归一化输入下各分支概率均为 $\frac{1}{2}$）。差全局相位，经泡利前馈修正 $X^s$ 后的输出态为 $H R_z(-\alpha)\lvert\psi\rangle$。特别地，取输入 $\lvert\psi\rangle = \lvert 0\rangle$、$\alpha = \frac{\pi}{3}$，则 $\operatorname{diag}(1, e^{-i\pi/3})\lvert 0\rangle = \lvert 0\rangle$，两个分支经 $X^s$ 修正后均精确给出 $H\lvert 0\rangle = \lvert +\rangle$。在多步计算中，由于 $X R_z(-\beta) = e^{i\gamma} R_z(+\beta) X$，后续测量角必须根据前序测量结果 $s$ 自适应调整符号；一维簇链仅能实现单比特旋转传输，而适当的二维簇态（2D cluster state）才是通用量子计算资源。
 2. **单次泡利旋转的精确参数位移手算**：对电路中仅出现一次的泡利旋转 $R_P(\theta) = e^{-i\theta P/2}$（$P = P^*, P^2 = I$），期望值形如 $f(\theta) = c + a\cos\theta + b\sin\theta$，满足精确位移恒等式 $\partial_\theta f(\theta) = \frac{1}{2}[f(\theta + \pi/2) - f(\theta - \pi/2)]$。取 $f(\theta) = \langle 0\rvert R_y(\theta)^* Z R_y(\theta)\lvert 0\rangle = \cos\theta$，在 $\theta = \frac{\pi}{3}$ 处：$f(\pi/3) = \frac{1}{2}$，正向移位 $f(\frac{5\pi}{6}) = -\frac{\sqrt{3}}{2}$，反向移位 $f(-\frac{\pi}{6}) = \frac{\sqrt{3}}{2}$，位移差商给出
 
    $$

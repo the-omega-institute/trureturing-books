@@ -22,7 +22,7 @@ In this chapter and [Chapter 28](ch28-reading-frozen-proofs-ii.md), we open the 
 In the `trureturing` verification pipeline, every green theorem in this book passes three machine-enforced stages:
 
 1. **Define**: Every mathematical object — such as a real inner-product space `InnerProductSpace ℝ E`, a square complex matrix `Matrix n n ℂ`, the positive-semidefinite predicate `Matrix.PosSemidef`, or a projective record measurement `IsRecordMeasurement P` — is defined unambiguously in dependent type theory;
-2. **State**: The theorem header specifies all typeclass instances and explicit hypotheses, producing a canonical SHA-256 `statement_id` recorded in `Golden/Frozen/state/<module>.lean.json` and locked in `trureturing.lock.json`;
+2. **State**: The theorem header specifies all typeclass instances and explicit hypotheses; the source module produces a module-level SHA-256 `statement_id`, recorded in `Golden/Frozen/state/<module>.lean.json`, which may be shared by several declarations in that module;
 3. **Prove**: The proof term is checked by the Lean 4 kernel with zero `sorry` placeholders and only standard foundational axioms (`propext`, `Classical.choice`, `Quot.sound`, verified in source files via `#print axioms`).
 
 We begin by auditing two cornerstone declarations from Part I: the parallelogram norm identity and the finite-dimensional Born probability skeleton (Panel I of Figure 27).
@@ -52,7 +52,7 @@ Why must `parallelogram_law_with_norm` and `norm_add_sq_real` square 1D vectors 
 
 > **Author's original words**: "Pythagoras — all things are number — the Pythagorean theorem (毕达哥拉斯 万物皆数 勾股定理)."
 
-**From non-additive 1D lengths to grade-0 area scalars and canceling grade-2 bivector orientations**: In a positive-definite Euclidean inner-product space, let two orthogonal vectors $\vv{a} \perp \vv{b}$ have scalar norms $a = \norm{\vv{a}}, b = \norm{\vv{b}}, c = \norm{\vv{a} + \vv{b}}$. Their 1D lengths cannot add linearly ($a + b \neq c$) because they point along perpendicular axes. In positive-definite Euclidean Clifford geometric algebra, squaring the resultant $\vv{c} = \vv{a} + \vv{b}$ yields
+**From non-additive 1D lengths to grade-0 area scalars and canceling grade-2 bivector orientations**: In a positive-definite Euclidean inner-product space, let two orthogonal vectors $\vv{a} \perp \vv{b}$ have scalar norms $a = \norm{\vv{a}}, b = \norm{\vv{b}}, c = \norm{\vv{a} + \vv{b}}$. When both vectors are non-zero, their 1D lengths cannot add linearly ($a + b \neq c$) because they point along perpendicular axes; if one vector is zero, that strict inequality degenerates to equality. In positive-definite Euclidean Clifford geometric algebra, squaring the resultant $\vv{c} = \vv{a} + \vv{b}$ yields
 
 $$
 \vv{c}^2 = (\vv{a} + \vv{b})(\vv{a} + \vv{b}) = \vv{a}^2 + \vv{b}^2 + (\vv{a}\vv{b} + \vv{b}\vv{a}) = a^2 + b^2 + 2(\vv{a}\cdot\vv{b}) + (\vv{a}\wedge\vv{b} + \vv{b}\wedge\vv{a}).
@@ -260,6 +260,10 @@ Consider $\iota = \operatorname{Fin} 2 = \{0, 1\}$ in [@prop-audit-ray-phase-rig
 
 1. **Connected test support**: Take $\mathrm{tests} = \{x\}$ with $x = (1, 1)$, so $x_0 = 1 \neq 0$ and $x_1 = 1 \neq 0$. For any $A \in U(2, \mathbb{C})$ preserving the coordinate rays $\vv{e}_0 = (1, 0)$ and $\vv{e}_1 = (0, 1)$, `hoff` forces $A = \operatorname{diag}(c_0, c_1)$, and `hstep 0 1` cancels $x_0, x_1 \neq 0$ from $A *_{v} (1, 1) = d(1, 1)$ via `mul_right_cancel₀` to lock $c_0 = d = c_1$, yielding $A = c_0 I_2$ ($|c_0| = 1$).
 2. **Disconnected test support (counterexample blocked by `hconnect`)**: If we drop `hconnect : RaySupportConnected tests` and take $\mathrm{tests} = \{\vv{e}_0, \vv{e}_1\}$, no vector in $\mathrm{tests}$ is simultaneously nonzero at both $0$ and $1$. Then the unitary phase gate $A = \operatorname{diag}(1, i) \in U(2, \mathbb{C})$ satisfies both `hcoord` and `htests`, yet $A$ is not a scalar multiple of $I_2$! In the Lean proof, the induction call `hchain (hconnect i j)` is the exact line that blocks disconnected phase sectors.
+:::
+
+::: {.figure src="ch27-ray-counterexample"}
+**Cut the support graph and the two phases go their own ways.** In both panels the two circles are the two coordinates of $\iota = \operatorname{Fin} 2$, and the violet arrow in each circle is the phase of the diagonal entry $A_{00}$ or $A_{11}$. On the left the only test vector is $x = (1, 1)$, a cyan arc joins the two cells, and both arrows point the same way: $A = c_0 I_2$ ([@prop-audit-ray-phase-rigidity]). On the right the test vectors $\vv{e}_0$ and $\vv{e}_1$ each cover one cell only, and the dashed arc between the cells is struck out; $\operatorname{diag}(1, i)$ keeps both coordinate rays, yet its two arrows are $90^\circ$ apart, so it is not $c I_2$. The right panel is a counterexample once the connectivity hypothesis is dropped, not a conclusion of the theorem.
 :::
 
 ::: {.remark #rem-lean-kernel-trust-boundary-literature title="Dependent Type Theory, the de Bruijn Criterion, and the Modeling Boundary (Literature Result, Not Formalized in This Book)"}

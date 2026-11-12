@@ -80,7 +80,7 @@ $$
 :::
 
 ::: {.viz src="rapidity-lightcone" preset="boost" height="500"}
-**η = ln 2 把 (5, 3) 推到 (4, 0)。** 琥珀色的点沿青色双曲线 $\tau = 4$ 滑到时间轴上，这时 $\cosh\eta = 5/4$、$\sinh\eta = 3/4$；琥珀色的两根轴像剪刀一样向光锥合拢，灰色虚线是它们原来的位置。
+**η = ln 2 把 (5, 3) 推到 (4, 0)。** 琥珀色的两根轴是以快度 $\eta$ 运动的旅行者的 $t'$、$x'$ 轴，像剪刀一样向光锥合拢，灰色虚线是原来的 $t$、$x$ 轴；到 $\eta = \ln 2$（$\beta = 3/5$）时，$t'$ 轴正好穿过灰圈里的原事件 $v = (5, 3)$。琥珀色的点 $Bv$ 是 $v$ 在旅行者坐标里的读数，沿青色双曲线 $\tau = 4$ 滑到时间轴上的 $(4, 0)$，这时 $\cosh\eta = 5/4$、$\sinh\eta = 3/4$。
 :::
 
 ## 光锥零线与空间限制 {#sec-null-cone-rigidity}
@@ -186,14 +186,14 @@ $$
 \operatorname{minkowski}_d(Bv) = \operatorname{minkowski}_d(Be_0)\cdot\operatorname{minkowski}_d(v).
 $$
 
-要想由此推出严格的洛伦兹间隔不变性 $\operatorname{minkowski}_d(Bv) = \operatorname{minkowski}_d(v)$，必须**额外独立施加尺度归一化条件** $\operatorname{minkowski}_d(Be_0) = 1$（在物理上对应于运动方向垂直横尺的长度标定或标准原子钟单位固有时的归一化）。
-
 ::: {.viz src="rapidity-lightcone" preset="cone" height="500"}
-**推动下光锥不动。** $\eta$ 从 $-0.6$ 扫到 $1$：白色珠子只沿白色光锥滑动，右边一串挤向原点、左边一串散开，没有一颗离开这两条线；琥珀色的点沿青色双曲线走，灰色网格被压成菱形。
+**推动下光锥不动。** $\eta$ 从 $-0.6$ 扫到 $1$：白色珠子只沿白色光锥滑动，右边一串挤向原点、左边一串散开，没有一颗离开这两条线；空心的淡白珠子是 $\eta = -0.6$ 与 $\eta = 0$ 时它们的位置。琥珀色的点沿青色双曲线走。
 :::
 
+要想由此推出严格的洛伦兹间隔不变性 $\operatorname{minkowski}_d(Bv) = \operatorname{minkowski}_d(v)$，必须**额外独立施加尺度归一化条件** $\operatorname{minkowski}_d(Be_0) = 1$（在物理上对应于运动方向垂直横尺的长度标定或标准原子钟单位固有时的归一化）。
+
 ::: {.viz src="rapidity-lightcone" preset="scale" height="500"}
-**乘上比例 k：光锥保住，刻度没保住。** $k = 1.5$、$\eta = \ln 2$：白色珠子仍在光锥上，琥珀色的点却从青色的 $\tau = 4$ 落到青色虚线 $\tau = 6$ 上，单位刻度落在 $\tau = 1.5$ 上；差的正是因子 $\operatorname{minkowski}_1(kBe_0) = k^2$（[@prop-null-cone-rigidity]）。
+**乘上比例 k：光锥保住，刻度没保住。** $k = 1.5$、$\eta = \ln 2$：白色珠子仍在光锥上，琥珀色的点却从青色的 $\tau = 4$ 落到青色虚线 $\tau = 6$ 上，$t'$ 轴上的单位刻度落在青色细虚线 $\tau = 1.5$ 上；差的正是因子 $\operatorname{minkowski}_1(kBe_0) = k^2$（[@prop-null-cone-rigidity]）。
 :::
 
 > 光锥零线锁死度规的骨架形状，而单位时钟标定最后那一分比例刻度；拆开这两步，狭义相对论就不再有任何神秘的“时空魔法”。
@@ -296,6 +296,8 @@ $$
 **折线 4 + 4 = 8，静止 10。** 折返点 $A$ 从 $(5, 0)$ 移到 $(5, 3)$：青色折线上的刻度从 10 个减到 8 个（每段 4 个），白色粗线（静止世界线）始终 10 个；去程的每个刻度都落在以 $O$ 为心的一条淡青色双曲线上。
 :::
 
+例中说所有惯性观察者算出的都是 $8$ 与 $10$，这一点也可以直接看：推到去程旅行者的参考系，再数一遍刻度。
+
 ::: {.viz src="rapidity-lightcone" preset="frames" height="500"}
 **换参考系，仍是 8 与 10。** 推到去程旅行者的参考系（$\eta = \ln 2$）：所有事件沿淡青色双曲线滑动，去程变成竖直的 $(4, 0)$，回程变成 $(8.5, -7.5)$，两条世界线都歪了，刻度数却一个不变。
 :::
@@ -304,8 +306,10 @@ $$
 快度与光锥的完整实验室：对照、推动、卡尺、世界线四个场景共用一条时间轴；绿色框只给本章用 Lean 验证的三条结论（[@thm-hyperbolic-norm]、[@lemma-null-cone-spatial]、[@prop-null-cone-rigidity]）。
 :::
 
+至此，狭义相对论的度规骨架已完全显影：双曲恒等式 $|\cosh r|^2 - |\sinh r|^2 = 1$（[@thm-hyperbolic-norm]）刻画了单位双曲线上的保范变换，而光锥零集消失条件则通过 [@lemma-null-cone-spatial]、[@prop-null-cone-rigidity] 与 [@cor-null-cone-proportionality] 将时空二次型严格锁定为 $\operatorname{minkowski}_d$ 的标量倍。
+
 ::: {.film src="005-hyperbolic-rotation"}
 **双曲旋转：光锥不动，快度相加（1 分 53 秒）。** 同一个事件 $(5, 3)$ 被转动时沿品红的圆穿出光锥，被推动时沿青色的双曲线滑行；以 $\eta = \ln 2$ 推动，$\cosh\eta = 5/4$、$\sinh\eta = 3/4$（[@thm-hyperbolic-norm]），它滑到 $(4, 0)$。随后白色珠子只沿光锥滑动，比例 $k = 3/2$ 保住光锥却把 $\tau = 4$ 变成 $6$（[@prop-null-cone-rigidity]）；两次 $\ln 2$ 的推动乘成一次 $\ln 4$ 的推动，品红的两块双曲扇形面积各为 $\ln 2 / 2$，速度却合成 $15/17$（速度读法见 [@rem-lorentz-rotor-literature]）；最后推到去程旅行者的参考系，折线与静止世界线的刻度仍是 $8$ 与 $10$。
 :::
 
-至此，狭义相对论的度规骨架已完全显影：双曲恒等式 $|\cosh r|^2 - |\sinh r|^2 = 1$（[@thm-hyperbolic-norm]）刻画了单位双曲线上的保范变换，而光锥零集消失条件则通过 [@lemma-null-cone-spatial]、[@prop-null-cone-rigidity] 与 [@cor-null-cone-proportionality] 将时空二次型严格锁定为 $\operatorname{minkowski}_d$ 的标量倍。在下一章（[狄拉克旋量与规范场](ch18-spinors-and-gauge-curvature.md)）中，我们将进一步对这一定号度规作“一阶矩阵开方”，看看反交换泡利矩阵与图上的闭合回路相位如何编织出旋量与规范曲率的几何图景。
+在下一章（[狄拉克旋量与规范场](ch18-spinors-and-gauge-curvature.md)）中，我们将进一步对这一不定号度规作“一阶矩阵开方”，看看反交换泡利矩阵与图上的闭合回路相位如何编织出旋量与规范曲率的几何图景。

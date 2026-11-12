@@ -1,170 +1,170 @@
-<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="appb-cayley" data-lang="zh" viewBox="0 0 476 404" width="476" height="404" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="一张 8 × 8 的格子：行是左因子，列是右因子，次序都是 1、e₁、e₂、e₃、e₁₂、e₁₃、e₂₃、e₁₂₃，每个基片下方写着它的三位掩码。每格写着乘积，青色的格子符号为正，品红的格子符号为负。第一行与第一列全是青色；对角线上前四格是 +1，后四格是 −1；64 格中 40 格为正，24 格为负。">
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="appb-cayley" data-lang="zh" viewBox="0 0 456 404" width="456" height="404" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="一张 8 × 8 的格子：行是左因子，列是右因子，次序都是 1、e₁、e₂、e₃、e₁₂、e₁₃、e₂₃、e₁₂₃，每个基片下方写着它的三位掩码。每格写着乘积，青色的格子符号为正，品红的格子符号为负。第一行与第一列全是青色；对角线上前四格是 +1，后四格是 −1；64 格中 40 格为正，24 格为负。">
 <title>一张 8 × 8 的格子：行是左因子，列是右因子，次序都是 1、e₁、e₂、e₃、e₁₂、e₁₃、e₂₃、e₁₂₃，每个基片下方写着它的三位掩码。每格写着乘积，青色的格子符号为正，品红的格子符号为负。第一行与第一列全是青色；对角线上前四格是 +1，后四格是 −1；64 格中 40 格为正，24 格为负。</title>
 <style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
 <text class="tf-dim" x="6" y="22" font-size="13">左 ∖ 右</text>
-<text class="tf-ink" x="89.5" y="30" font-size="14" text-anchor="middle">1</text>
-<text class="tf-dim tr-fig-mono" x="89.5" y="45" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">000</text>
-<text class="tf-ink" x="34" y="75.04" font-size="14" text-anchor="end">1</text>
-<text class="tf-dim tr-fig-mono" x="59" y="75.32" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="end">000</text>
-<text class="tf-ink" x="140.5" y="30" font-size="14" text-anchor="middle"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
-<text class="tf-dim tr-fig-mono" x="140.5" y="45" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">001</text>
-<text class="tf-ink" x="34" y="113.04" font-size="14" text-anchor="end"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
-<text class="tf-dim tr-fig-mono" x="59" y="113.32" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="end">001</text>
-<text class="tf-ink" x="191.5" y="30" font-size="14" text-anchor="middle"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
-<text class="tf-dim tr-fig-mono" x="191.5" y="45" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">010</text>
-<text class="tf-ink" x="34" y="151.04" font-size="14" text-anchor="end"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
-<text class="tf-dim tr-fig-mono" x="59" y="151.32" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="end">010</text>
-<text class="tf-ink" x="242.5" y="30" font-size="14" text-anchor="middle"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
-<text class="tf-dim tr-fig-mono" x="242.5" y="45" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">100</text>
-<text class="tf-ink" x="34" y="189.04" font-size="14" text-anchor="end"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
-<text class="tf-dim tr-fig-mono" x="59" y="189.32" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="end">100</text>
-<text class="tf-ink" x="293.5" y="30" font-size="14" text-anchor="middle"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">12</tspan><tspan dy="-0.28em">​</tspan></text>
-<text class="tf-dim tr-fig-mono" x="293.5" y="45" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">011</text>
-<text class="tf-ink" x="34" y="227.04" font-size="14" text-anchor="end"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">12</tspan><tspan dy="-0.28em">​</tspan></text>
-<text class="tf-dim tr-fig-mono" x="59" y="227.32" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="end">011</text>
-<text class="tf-ink" x="344.5" y="30" font-size="14" text-anchor="middle"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">13</tspan><tspan dy="-0.28em">​</tspan></text>
-<text class="tf-dim tr-fig-mono" x="344.5" y="45" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">101</text>
-<text class="tf-ink" x="34" y="265.04" font-size="14" text-anchor="end"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">13</tspan><tspan dy="-0.28em">​</tspan></text>
-<text class="tf-dim tr-fig-mono" x="59" y="265.32" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="end">101</text>
-<text class="tf-ink" x="395.5" y="30" font-size="14" text-anchor="middle"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">23</tspan><tspan dy="-0.28em">​</tspan></text>
-<text class="tf-dim tr-fig-mono" x="395.5" y="45" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">110</text>
-<text class="tf-ink" x="34" y="303.04" font-size="14" text-anchor="end"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">23</tspan><tspan dy="-0.28em">​</tspan></text>
-<text class="tf-dim tr-fig-mono" x="59" y="303.32" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="end">110</text>
-<text class="tf-ink" x="446.5" y="30" font-size="14" text-anchor="middle"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">123</tspan><tspan dy="-0.28em">​</tspan></text>
-<text class="tf-dim tr-fig-mono" x="446.5" y="45" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">111</text>
-<text class="tf-ink" x="34" y="341.04" font-size="14" text-anchor="end"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">123</tspan><tspan dy="-0.28em">​</tspan></text>
-<text class="tf-dim tr-fig-mono" x="59" y="341.32" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="end">111</text>
-<rect x="65.5" y="53.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="89.5" y="76.04" font-size="14" text-anchor="middle">+1</text>
-<rect x="116.5" y="53.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="140.5" y="76.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="167.5" y="53.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="191.5" y="76.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="218.5" y="53.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="242.5" y="76.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="269.5" y="53.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="293.5" y="76.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">12</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="320.5" y="53.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="344.5" y="76.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">13</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="371.5" y="53.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="395.5" y="76.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">23</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="422.5" y="53.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="446.5" y="76.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">123</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="65.5" y="91.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="89.5" y="114.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="116.5" y="91.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="140.5" y="114.04" font-size="14" text-anchor="middle">+1</text>
-<rect x="167.5" y="91.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="191.5" y="114.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">12</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="218.5" y="91.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="242.5" y="114.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">13</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="269.5" y="91.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="293.5" y="114.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="320.5" y="91.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="344.5" y="114.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="371.5" y="91.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="395.5" y="114.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">123</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="422.5" y="91.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="446.5" y="114.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">23</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="65.5" y="129.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="89.5" y="152.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="116.5" y="129.5" width="48" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
-<text class="tf-ink" x="140.5" y="152.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">12</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="167.5" y="129.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="191.5" y="152.04" font-size="14" text-anchor="middle">+1</text>
-<rect x="218.5" y="129.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="242.5" y="152.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">23</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="269.5" y="129.5" width="48" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
-<text class="tf-ink" x="293.5" y="152.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="320.5" y="129.5" width="48" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
-<text class="tf-ink" x="344.5" y="152.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">123</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="371.5" y="129.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="395.5" y="152.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="422.5" y="129.5" width="48" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
-<text class="tf-ink" x="446.5" y="152.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">13</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="65.5" y="167.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="89.5" y="190.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="116.5" y="167.5" width="48" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
-<text class="tf-ink" x="140.5" y="190.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">13</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="167.5" y="167.5" width="48" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
-<text class="tf-ink" x="191.5" y="190.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">23</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="218.5" y="167.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="242.5" y="190.04" font-size="14" text-anchor="middle">+1</text>
-<rect x="269.5" y="167.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="293.5" y="190.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">123</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="320.5" y="167.5" width="48" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
-<text class="tf-ink" x="344.5" y="190.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="371.5" y="167.5" width="48" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
-<text class="tf-ink" x="395.5" y="190.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="422.5" y="167.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="446.5" y="190.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">12</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="65.5" y="205.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="89.5" y="228.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">12</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="116.5" y="205.5" width="48" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
-<text class="tf-ink" x="140.5" y="228.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="167.5" y="205.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="191.5" y="228.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="218.5" y="205.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="242.5" y="228.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">123</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="269.5" y="205.5" width="48" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
-<text class="tf-ink" x="293.5" y="228.04" font-size="14" text-anchor="middle">−1</text>
-<rect x="320.5" y="205.5" width="48" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
-<text class="tf-ink" x="344.5" y="228.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">23</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="371.5" y="205.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="395.5" y="228.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">13</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="422.5" y="205.5" width="48" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
-<text class="tf-ink" x="446.5" y="228.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="65.5" y="243.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="89.5" y="266.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">13</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="116.5" y="243.5" width="48" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
-<text class="tf-ink" x="140.5" y="266.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="167.5" y="243.5" width="48" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
-<text class="tf-ink" x="191.5" y="266.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">123</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="218.5" y="243.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="242.5" y="266.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="269.5" y="243.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="293.5" y="266.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">23</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="320.5" y="243.5" width="48" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
-<text class="tf-ink" x="344.5" y="266.04" font-size="14" text-anchor="middle">−1</text>
-<rect x="371.5" y="243.5" width="48" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
-<text class="tf-ink" x="395.5" y="266.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">12</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="422.5" y="243.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="446.5" y="266.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="65.5" y="281.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="89.5" y="304.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">23</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="116.5" y="281.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="140.5" y="304.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">123</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="167.5" y="281.5" width="48" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
-<text class="tf-ink" x="191.5" y="304.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="218.5" y="281.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="242.5" y="304.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="269.5" y="281.5" width="48" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
-<text class="tf-ink" x="293.5" y="304.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">13</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="320.5" y="281.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="344.5" y="304.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">12</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="371.5" y="281.5" width="48" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
-<text class="tf-ink" x="395.5" y="304.04" font-size="14" text-anchor="middle">−1</text>
-<rect x="422.5" y="281.5" width="48" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
-<text class="tf-ink" x="446.5" y="304.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="65.5" y="319.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="89.5" y="342.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">123</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="116.5" y="319.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="140.5" y="342.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">23</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="167.5" y="319.5" width="48" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
-<text class="tf-ink" x="191.5" y="342.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">13</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="218.5" y="319.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="242.5" y="342.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">12</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="269.5" y="319.5" width="48" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
-<text class="tf-ink" x="293.5" y="342.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="320.5" y="319.5" width="48" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
-<text class="tf-ink" x="344.5" y="342.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="371.5" y="319.5" width="48" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
-<text class="tf-ink" x="395.5" y="342.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
-<rect x="422.5" y="319.5" width="48" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
-<text class="tf-ink" x="446.5" y="342.04" font-size="14" text-anchor="middle">−1</text>
-<rect x="66" y="371.34" width="14" height="12" class="ts-cyan tf-cyan" stroke-width="1.2" fill-opacity="0.3"/>
-<text class="tf-dim" x="90" y="382" font-size="13">符号 +</text>
-<rect x="66" y="391.34" width="14" height="12" class="ts-magenta tf-magenta" stroke-width="1.2" fill-opacity="0.3"/>
-<text class="tf-dim" x="90" y="402" font-size="13">符号 −</text>
-<text class="tf-dim" x="472" y="386.68" font-size="13" text-anchor="end">落点：掩码异或 <tspan font-style="italic">a</tspan> ⊕ <tspan font-style="italic">b</tspan></text>
+<text class="tf-ink" x="90" y="30" font-size="14" text-anchor="middle">1</text>
+<text class="tf-dim tr-fig-mono" x="90" y="45" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">000</text>
+<text class="tf-ink" x="32" y="75.04" font-size="14" text-anchor="end">1</text>
+<text class="tf-dim tr-fig-mono" x="61" y="75.68" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="end">000</text>
+<text class="tf-ink" x="138" y="30" font-size="14" text-anchor="middle"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim tr-fig-mono" x="138" y="45" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">001</text>
+<text class="tf-ink" x="32" y="113.04" font-size="14" text-anchor="end"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim tr-fig-mono" x="61" y="113.68" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="end">001</text>
+<text class="tf-ink" x="186" y="30" font-size="14" text-anchor="middle"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim tr-fig-mono" x="186" y="45" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">010</text>
+<text class="tf-ink" x="32" y="151.04" font-size="14" text-anchor="end"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim tr-fig-mono" x="61" y="151.68" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="end">010</text>
+<text class="tf-ink" x="234" y="30" font-size="14" text-anchor="middle"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim tr-fig-mono" x="234" y="45" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">100</text>
+<text class="tf-ink" x="32" y="189.04" font-size="14" text-anchor="end"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim tr-fig-mono" x="61" y="189.68" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="end">100</text>
+<text class="tf-ink" x="282" y="30" font-size="14" text-anchor="middle"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">12</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim tr-fig-mono" x="282" y="45" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">011</text>
+<text class="tf-ink" x="32" y="227.04" font-size="14" text-anchor="end"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">12</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim tr-fig-mono" x="61" y="227.68" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="end">011</text>
+<text class="tf-ink" x="330" y="30" font-size="14" text-anchor="middle"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">13</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim tr-fig-mono" x="330" y="45" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">101</text>
+<text class="tf-ink" x="32" y="265.04" font-size="14" text-anchor="end"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">13</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim tr-fig-mono" x="61" y="265.68" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="end">101</text>
+<text class="tf-ink" x="378" y="30" font-size="14" text-anchor="middle"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">23</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim tr-fig-mono" x="378" y="45" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">110</text>
+<text class="tf-ink" x="32" y="303.04" font-size="14" text-anchor="end"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">23</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim tr-fig-mono" x="61" y="303.68" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="end">110</text>
+<text class="tf-ink" x="426" y="30" font-size="14" text-anchor="middle"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">123</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim tr-fig-mono" x="426" y="45" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">111</text>
+<text class="tf-ink" x="32" y="341.04" font-size="14" text-anchor="end"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">123</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim tr-fig-mono" x="61" y="341.68" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="end">111</text>
+<rect x="67.5" y="53.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="90" y="76.04" font-size="14" text-anchor="middle">+1</text>
+<rect x="115.5" y="53.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="138" y="76.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="163.5" y="53.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="186" y="76.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="211.5" y="53.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="234" y="76.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="259.5" y="53.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="282" y="76.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">12</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="307.5" y="53.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="330" y="76.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">13</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="355.5" y="53.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="378" y="76.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">23</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="403.5" y="53.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="426" y="76.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">123</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="67.5" y="91.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="90" y="114.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="115.5" y="91.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="138" y="114.04" font-size="14" text-anchor="middle">+1</text>
+<rect x="163.5" y="91.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="186" y="114.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">12</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="211.5" y="91.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="234" y="114.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">13</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="259.5" y="91.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="282" y="114.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="307.5" y="91.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="330" y="114.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="355.5" y="91.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="378" y="114.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">123</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="403.5" y="91.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="426" y="114.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">23</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="67.5" y="129.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="90" y="152.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="115.5" y="129.5" width="45" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
+<text class="tf-ink" x="138" y="152.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">12</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="163.5" y="129.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="186" y="152.04" font-size="14" text-anchor="middle">+1</text>
+<rect x="211.5" y="129.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="234" y="152.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">23</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="259.5" y="129.5" width="45" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
+<text class="tf-ink" x="282" y="152.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="307.5" y="129.5" width="45" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
+<text class="tf-ink" x="330" y="152.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">123</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="355.5" y="129.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="378" y="152.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="403.5" y="129.5" width="45" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
+<text class="tf-ink" x="426" y="152.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">13</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="67.5" y="167.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="90" y="190.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="115.5" y="167.5" width="45" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
+<text class="tf-ink" x="138" y="190.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">13</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="163.5" y="167.5" width="45" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
+<text class="tf-ink" x="186" y="190.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">23</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="211.5" y="167.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="234" y="190.04" font-size="14" text-anchor="middle">+1</text>
+<rect x="259.5" y="167.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="282" y="190.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">123</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="307.5" y="167.5" width="45" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
+<text class="tf-ink" x="330" y="190.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="355.5" y="167.5" width="45" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
+<text class="tf-ink" x="378" y="190.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="403.5" y="167.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="426" y="190.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">12</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="67.5" y="205.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="90" y="228.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">12</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="115.5" y="205.5" width="45" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
+<text class="tf-ink" x="138" y="228.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="163.5" y="205.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="186" y="228.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="211.5" y="205.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="234" y="228.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">123</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="259.5" y="205.5" width="45" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
+<text class="tf-ink" x="282" y="228.04" font-size="14" text-anchor="middle">−1</text>
+<rect x="307.5" y="205.5" width="45" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
+<text class="tf-ink" x="330" y="228.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">23</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="355.5" y="205.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="378" y="228.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">13</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="403.5" y="205.5" width="45" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
+<text class="tf-ink" x="426" y="228.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="67.5" y="243.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="90" y="266.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">13</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="115.5" y="243.5" width="45" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
+<text class="tf-ink" x="138" y="266.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="163.5" y="243.5" width="45" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
+<text class="tf-ink" x="186" y="266.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">123</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="211.5" y="243.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="234" y="266.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="259.5" y="243.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="282" y="266.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">23</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="307.5" y="243.5" width="45" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
+<text class="tf-ink" x="330" y="266.04" font-size="14" text-anchor="middle">−1</text>
+<rect x="355.5" y="243.5" width="45" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
+<text class="tf-ink" x="378" y="266.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">12</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="403.5" y="243.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="426" y="266.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="67.5" y="281.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="90" y="304.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">23</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="115.5" y="281.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="138" y="304.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">123</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="163.5" y="281.5" width="45" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
+<text class="tf-ink" x="186" y="304.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="211.5" y="281.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="234" y="304.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="259.5" y="281.5" width="45" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
+<text class="tf-ink" x="282" y="304.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">13</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="307.5" y="281.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="330" y="304.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">12</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="355.5" y="281.5" width="45" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
+<text class="tf-ink" x="378" y="304.04" font-size="14" text-anchor="middle">−1</text>
+<rect x="403.5" y="281.5" width="45" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
+<text class="tf-ink" x="426" y="304.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="67.5" y="319.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="90" y="342.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">123</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="115.5" y="319.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="138" y="342.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">23</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="163.5" y="319.5" width="45" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
+<text class="tf-ink" x="186" y="342.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">13</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="211.5" y="319.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="234" y="342.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">12</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="259.5" y="319.5" width="45" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
+<text class="tf-ink" x="282" y="342.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="307.5" y="319.5" width="45" height="35" rx="3" class="tf-cyan" fill-opacity="0.16"/>
+<text class="tf-ink" x="330" y="342.04" font-size="14" text-anchor="middle">+<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="355.5" y="319.5" width="45" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
+<text class="tf-ink" x="378" y="342.04" font-size="14" text-anchor="middle">−<tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="403.5" y="319.5" width="45" height="35" rx="3" class="tf-magenta" fill-opacity="0.26"/>
+<text class="tf-ink" x="426" y="342.04" font-size="14" text-anchor="middle">−1</text>
+<rect x="68" y="371.34" width="14" height="12" class="ts-cyan tf-cyan" stroke-width="1.2" fill-opacity="0.3"/>
+<text class="tf-dim" x="92" y="382" font-size="13">符号 +</text>
+<rect x="68" y="391.34" width="14" height="12" class="ts-magenta tf-magenta" stroke-width="1.2" fill-opacity="0.3"/>
+<text class="tf-dim" x="92" y="402" font-size="13">符号 −</text>
+<text class="tf-dim" x="450" y="386.68" font-size="13" text-anchor="end">落点：掩码异或 <tspan font-style="italic">a</tspan> ⊕ <tspan font-style="italic">b</tspan></text>
 </svg>

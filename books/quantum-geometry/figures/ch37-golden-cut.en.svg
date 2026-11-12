@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch37-golden-cut" data-lang="en" viewBox="0 0 460 262" width="460" height="262" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="Top: the golden lattice, with the physical coordinate a + bφ across and the conjugate coordinate a + b(1 − φ) up. A cyan horizontal strip is the window [φ − 2, φ − 1], of width 1. The five lattice points inside it are cyan and drop along dashed verticals onto the real line E∥ below, lighting y₋₂ ≈ −2.62, y₋₁ ≈ −1.62, y₀ = 0, y₁ ≈ 2.62 and y₂ ≈ 4.24, every two neighbours at least 1 apart. The lattice point ⟨0, 1⟩ lies below the strip, and its place φ ≈ 1.62 on the real line is crossed out. The other lattice points, outside the strip, are grey.">
+<title>Top: the golden lattice, with the physical coordinate a + bφ across and the conjugate coordinate a + b(1 − φ) up. A cyan horizontal strip is the window [φ − 2, φ − 1], of width 1. The five lattice points inside it are cyan and drop along dashed verticals onto the real line E∥ below, lighting y₋₂ ≈ −2.62, y₋₁ ≈ −1.62, y₀ = 0, y₁ ≈ 2.62 and y₂ ≈ 4.24, every two neighbours at least 1 apart. The lattice point ⟨0, 1⟩ lies below the strip, and its place φ ≈ 1.62 on the real line is crossed out. The other lattice points, outside the strip, are grey.</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<line x1="196.4" y1="30" x2="196.4" y2="158.8" class="ts-faint" stroke-width="1.2" fill="none"/>
+<line x1="38" y1="96.4" x2="422" y2="96.4" class="ts-faint" stroke-width="1.2" fill="none"/>
+<rect x="38" y="66.73" width="384" height="48" class="ts-cyan tf-cyan" stroke-width="1.2" fill-opacity="0.14"/>
+<text class="tf-dim" x="202.4" y="42" font-size="14">E⊥</text>
+<text class="tf-cyan ts-bg" x="418" y="59.73" font-size="13" text-anchor="end" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">window [φ − 2, φ − 1]</text>
+<circle cx="148.4" cy="144.4" r="2.8" class="tf-faint"/>
+<circle cx="41.07" cy="37.07" r="2.8" class="tf-faint"/>
+<circle cx="274.07" cy="126.07" r="2.8" class="tf-faint"/>
+<circle cx="351.73" cy="155.73" r="2.8" class="tf-faint"/>
+<circle cx="244.4" cy="48.4" r="2.8" class="tf-faint"/>
+<line x1="30" y1="214" x2="423.2" y2="214" class="ts-ink" stroke-width="1.6" fill="none"/>
+<path d="M430 214 L422 217.36 L422 210.64Z" class="tf-ink"/>
+<text class="tf-ink" x="30" y="204" font-size="14">E∥</text>
+<line x1="274.07" y1="126.07" x2="274.07" y2="214" class="ts-faint" stroke-width="1.2" stroke-dasharray="2 4" fill="none"/>
+<circle cx="274.07" cy="126.07" r="3.4" class="tf-dim"/>
+<line x1="268.07" y1="208" x2="280.07" y2="220" class="ts-dim" stroke-width="2" stroke-linecap="round" fill="none"/>
+<line x1="268.07" y1="220" x2="280.07" y2="208" class="ts-dim" stroke-width="2" stroke-linecap="round" fill="none"/>
+<text class="tf-dim" x="274.07" y="238" font-size="14" text-anchor="middle">φ</text>
+<line x1="70.73" y1="114.73" x2="70.73" y2="214" class="ts-cyan" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<circle cx="70.73" cy="114.73" r="4.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="70.73" cy="214" r="5" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-cyan" x="70.73" y="238" font-size="14" text-anchor="middle">y₋₂</text>
+<line x1="118.73" y1="66.73" x2="118.73" y2="214" class="ts-cyan" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<circle cx="118.73" cy="66.73" r="4.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="118.73" cy="214" r="5" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-cyan" x="118.73" y="238" font-size="14" text-anchor="middle">y₋₁</text>
+<line x1="196.4" y1="96.4" x2="196.4" y2="214" class="ts-cyan" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<circle cx="196.4" cy="96.4" r="4.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="196.4" cy="214" r="5" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-cyan" x="196.4" y="238" font-size="14" text-anchor="middle">y₀</text>
+<line x1="322.07" y1="78.07" x2="322.07" y2="214" class="ts-cyan" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<circle cx="322.07" cy="78.07" r="4.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="322.07" cy="214" r="5" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-cyan" x="322.07" y="238" font-size="14" text-anchor="middle">y₁</text>
+<line x1="399.73" y1="107.73" x2="399.73" y2="214" class="ts-cyan" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<circle cx="399.73" cy="107.73" r="4.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="399.73" cy="214" r="5" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-cyan" x="399.73" y="238" font-size="14" text-anchor="middle">y₂</text>
+</svg>

@@ -31,9 +31,9 @@
 <path d="M24 150 L78 150 L106 128 L52 128Z" class="ts-magenta tf-magenta" stroke-width="1.4" stroke-linejoin="round" fill-opacity="0.16"/>
 <path d="M24 150 L78 150 L78 96 L24 96Z" class="ts-magenta tf-magenta" stroke-width="1.4" stroke-linejoin="round" fill-opacity="0.16"/>
 <path d="M24 150 L52 128 L52 74 L24 96Z" class="ts-magenta tf-magenta" stroke-width="1.4" stroke-linejoin="round" fill-opacity="0.16"/>
-<text class="tf-magenta" x="82" y="172" font-size="13" text-anchor="end"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">12</tspan><tspan dy="-0.28em">​</tspan></text>
-<text class="tf-magenta ts-bg" x="64" y="140" font-size="13" text-anchor="middle" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">13</tspan><tspan dy="-0.28em">​</tspan></text>
-<text class="tf-magenta" x="56" y="76" font-size="13"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">23</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-magenta ts-bg" x="100" y="151" font-size="13" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">12</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-magenta ts-bg" x="83" y="112" font-size="13" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">13</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-magenta ts-bg" x="36" y="75" font-size="13" text-anchor="end" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">23</tspan><tspan dy="-0.28em">​</tspan></text>
 <text class="tf-dim" x="64" y="210" font-size="13" text-anchor="middle">维数 3</text>
 <text class="tf-magenta" x="64" y="236" font-size="14" text-anchor="middle" font-weight="600">平方 −1</text>
 </svg>

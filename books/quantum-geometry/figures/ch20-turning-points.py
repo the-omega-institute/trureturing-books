@@ -14,7 +14,7 @@ from _ch20 import gate_name, path_layers, path_order
 
 N, S = 11, {4, 8}
 
-SIZE = (560, 300)
+SIZE = (500, 300)
 ALT = {
     "zh": "一张格子图：横向是 12 道门 K1、U1 到 U10、KN，纵向是层 0 到 3。每道门是一块青色的砖，排成三段向右下降的台阶，每段 4 块，从第 3 层降到第 0 层；"
           "U4 与 U8 上方各有一个品红的小三角，是折返点，台阶在这里跳回第 3 层。相邻两块砖之间的箭头指向先执行的那一块之后执行的那一块。"
@@ -38,20 +38,21 @@ def draw(fig):
     assert L == N // 3 + 1 == 4
     assert best_depth(11, 2) == 4 and best_depth(8, 2) == 3
 
-    x0, dx = 74, 38
+    x0, dx = 66, 36
     ybase, dy = 214, 44
     X = lambda k: x0 + dx * k
     Y = lambda layer: ybase - dy * layer
     for layer in range(L):
         fig.line(X(0) - 22, Y(layer), X(N) + 22, Y(layer), "faint", 1.0, dash="2 4")
-        fig.text(X(0) - 30, Y(layer), t(f"层 {layer}", f"layer {layer}"), size=13, color="dim", anchor="end", middle=True)
+        fig.text(X(0) - 28, Y(layer), f"{layer}", size=14, color="dim", anchor="end", middle=True)
+    fig.text(X(0) - 32, Y(L - 1) - 30, t("层", "layer"), size=14, color="dim", anchor="middle")
     for k in range(N):
         a, b = (k, k + 1) if (k + 1) in S else (k + 1, k)          # a runs first
         sgn = 1 if b > a else -1
         fig.arrow(X(a) + 13 * sgn, Y(g[a]), X(b) - 15 * sgn, Y(g[b]), "dim", 1.5, head=8)
     for k in range(N + 1):
         fig.rect(X(k) - 13, Y(g[k]) - 11, 26, 22, color="line", fill="line", fill_opacity=0.25, width=1.8, rx=4)
-        fig.text(X(k), ybase + 34, gate_name(N, k), size=13, color="dim", anchor="middle")
+        fig.text(X(k), ybase + 34, gate_name(N, k), size=14, color="dim", anchor="middle")
     for k in sorted(S):
         x, y = X(k), Y(g[k]) - 20
         fig.polygon([(x - 7, y - 10), (x + 7, y - 10), (x, y)], "area", fill_opacity=1, color="area", width=1.0)

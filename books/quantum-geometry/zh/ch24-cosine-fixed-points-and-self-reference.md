@@ -30,7 +30,7 @@ $$
 在本章中，我们将用严密的数学与 Lean 4 形式化定理，把这幅自指画卷拆解为四个相互辉映的层次：**有限状态空间上的单调收缩稳定化定理**、**相邻步解释语境相对不动点与语境非唯一性定理**、**正实数上黄金连分数自指映射 $x = 1 + 1/x$ 的唯一代数不动点定理**，以及收录在文献注记 [@rem-banach-dottie-hairy-ball-literature] 与 [@rem-dottie-angle-incommensurable] 中的**Dottie 余弦自指 $\cos\theta^* = \theta^*$ 的经典分析与超越数论背景**。
 
 ::: {.figure src="ch24-overview"}
-**图 24。** 本章地图：第 I 栏，青色的余弦曲线与灰色对角线 $y = x$，从 $0$ 出发的蛛网一圈圈绕向 $\theta^* \approx 0.739$（收敛是文献结果，见 [@rem-banach-dottie-hairy-ball-literature]）；第 II 栏，候选集 $\{0, 1, 2\}$ 每步删去一个元素，到 $\{0\}$ 后不再变（[@thm-finite-contracting-updates-stabilize]）；第 III 栏，青色的 $y = 1 + 1/x$ 与对角线在正半轴上只交于绿色的 $\varphi \approx 1.618$（[@cor-golden-fixed-point-unique]）。
+**图 24。** 本章地图：第 I 栏，青色的余弦曲线与灰色对角线 $y = x$，从 $0$ 出发的蛛网一圈圈绕向 $\theta^* \approx 0.739$（收敛是既有结果的应用，完整推导见 [@ex-ch33-mutual-cosine-monotonic-lock]）；第 II 栏，候选集 $\{0, 1, 2\}$ 每步删去一个元素，到 $\{0\}$ 后不再变（[@thm-finite-contracting-updates-stabilize]）；第 III 栏，青色的 $y = 1 + 1/x$ 与对角线在正半轴上只交于绿色的 $\varphi \approx 1.618$（[@cor-golden-fixed-point-unique]）。
 :::
 
 ## 24.1 离散收缩的必然收束：有限收缩更新稳定化定理 {#sec-ch24-1}
@@ -309,7 +309,7 @@ $$
 下面的文献说明集中记录围绕 $\cos\theta = \theta$ 与偶维球面连续自映射的四项经典定理。
 
 ::: {.remark #rem-banach-dottie-hairy-ball-literature title="巴拿赫压缩映射、Dottie 数的超越性、泰勒余项界与偶维球面不动点/对跖点定理（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 围绕余弦自指方程 $\cos\theta = \theta$ 与高维球面自映射，经典实分析、超越数论与代数拓扑给出以下四项严格定理（与本章的冻结 Lean 定理共同构成完整图景）：
+**文献结果，未在本书形式化。** 围绕余弦自指方程 $\cos\theta = \theta$ 与高维球面自映射，以下四项中，余弦定性动力学可由本章端点 [@thm-dottie-rational-inverse-endpoint] 与现成实分析结果推出，完整参数、严格性例外和推导见 [@ex-ch33-mutual-cosine-monotonic-lock]；超越性、数值及其余拓扑推广仍按各自文献边界陈述：
 
 1. **紧区间 $[0, 1]$ 上的巴拿赫压缩映射原理与全局收敛（Banach Contraction Principle）**：
    [@thm-finite-contracting-updates-stabilize] 用有限性与集合筛除保证有限步稳定；这里用完备性与度量压缩保证唯一性和渐近收敛，两者的前提与结论不同。余弦函数将全实轴映入 $[-1, 1]$，并将 $[-1, 1]$ 映入紧不变子区间 $[0, 1]$（因 $\cos([-1, 1]) = [\cos 1, 1] \subset [0.54, 1] \subset [0, 1]$）。在 $[0, 1]$ 上，由微分中值定理，对任意 $x, y \in [0, 1]$ 有
@@ -318,7 +318,7 @@ $$
    |\cos x - \cos y| \;\le\; (\sin 1)\,|x - y|, \qquad \sin 1 \approx 0.84147098 < 1.
    $$
 
-   因此 $\cos$ 在完备度量空间 $[0, 1]$ 上是 Lipschitz 常数严格小于 $1$ 的巴拿赫压缩映射，存在**唯一的实不动点** $\theta^* \approx 0.73908513321516\dots$（Dottie 数），且对任意实初值 $\theta_0 \in \mathbb{R}$，Picard 迭代序列 $\theta_{k+1} = \cos\theta_k$ 均按几何级数速率 $|\theta_k - \theta^*| \le (\sin 1)^{k-1}|\theta_1 - \theta^*|$ 全局指数收敛于 $\theta^*$。这里的 $\sin 1$ 是整个区间上的最坏常数；不动点处的渐近压缩率是 $\lvert\cos'\theta^*\rvert = \sin\theta^* \approx 0.6736$（数值核对见 [@ex-dottie-rate-newton-rational]）。（同理，镜像算子 $-\cos\theta$ 在 $[-1, 0]$ 上以同一压缩率 $\sin 1 < 1$ 收敛于镜像方程 $\cos\theta = -\theta$ 的唯一实根 $-\theta^* \approx -0.7390851332\dots$。）
+   因此 $\cos$ 在完备度量空间 $[0, 1]$ 上是 Lipschitz 常数严格小于 $1$ 的巴拿赫压缩映射，存在**唯一的实不动点** $\theta^* \approx 0.73908513321516\dots$（Dottie 数），且对任意实初值 $\theta_0 \in \mathbb{R}$，Picard 迭代序列 $\theta_{k+1} = \cos\theta_k$ 均收敛于 $\theta^*$；从第二步进入 $[0,1]$ 后，对 $k\ge2$ 有几何界 $|\theta_k-\theta^*|\le(\sin1)^{k-2}|\theta_2-\theta^*|$。这里的 $\sin 1$ 是整个区间上的最坏常数；不动点处的渐近压缩率是 $\lvert\cos'\theta^*\rvert = \sin\theta^* \approx 0.6736$（数值核对见 [@ex-dottie-rate-newton-rational]）。（同理，镜像算子 $-\cos\theta$ 在 $[-1, 0]$ 上以同一压缩率 $\sin 1 < 1$ 收敛于镜像方程 $\cos\theta = -\theta$ 的唯一实根 $-\theta^* \approx -0.7390851332\dots$。）
 2. **Dottie 数 $\theta^*$ 的超越性与非零代数读数残差 $|\cos q - q| > 0$（Lindemann–Weierstrass 定理）**：
    为什么 $\theta^*$ 不可能像黄金比 $\varphi = \frac{1+\sqrt{5}}{2}$ 那样是某个整系数多项式方程的代数根？假设存在非零代数数 $q \in \overline{\mathbb{Q}} \setminus \{0\}$ 满足 $\cos q = q$。由欧拉公式 $\cos q = \frac{e^{iq} + e^{-iq}}{2}$，记 $u = e^{iq}$，则 $\frac{u + u^{-1}}{2} = q$ 意味着 $u = e^{iq}$ 满足代数数系数二次方程
 
@@ -342,7 +342,7 @@ $$
 :::
 
 ::: {.viz src="sphere-escape" preset="far" height="500"}
-**换个起点，同一个终点。** 从很远的 $x_0 = 3$ 出发，琥珀色的蛛网第一步就落进 $[-1, 1]$，此后一圈圈绕向品红的不动点 $x^* = \theta^* \approx 0.739$：终点与起点无关，没有哪一步恰好到达这件事也与起点无关（全局收敛是上面第 1 条的文献结果）。
+**换个起点，同一个终点。** 从很远的 $x_0 = 3$ 出发，琥珀色的蛛网第一步就落进 $[-1, 1]$，此后一圈圈绕向品红的不动点 $x^* = \theta^* \approx 0.739$：终点与起点无关；“任何有限步都不命中”须另保留非不动点区间初值条件，不能由全局收敛推出，$-\theta^*$ 一步即达（完整定性推导见 [@ex-ch33-mutual-cosine-monotonic-lock]）。
 :::
 
 更进一步，围绕 [@rem-banach-dottie-hairy-ball-literature] 所记录的数论背景，作者在手稿中曾追问：*“超越数之间的关系？$\pi$ 是 $\theta$ 的一个投影？$\theta$ 是终极超越数？”* 这一关于 Dottie 数 $\theta^*$ 与圆周率 $\pi$ 之间代数独立性的深刻追问，在数论中直接通向尚未解决的**沙努埃尔猜想（Schanuel's Conjecture）**。我们按第三层认识论规范（`OPEN`）将其记录如下。
@@ -356,7 +356,7 @@ $$
 让我们用一个具体的数值手算算例，把本章中**离散集合收缩**（[@thm-finite-contracting-updates-stabilize]）、**代数黄金不动点**（[@cor-golden-fixed-point-unique]）与 **Dottie 余弦自指螺旋**（[@rem-banach-dottie-hairy-ball-literature]）三条收敛轨道放在同一张桌面上对比。
 
 ::: {.example #ex-dottie-and-golden-iterations title="三类自指迭代的显式手算对比：有限集合筛除、黄金连分数与 Dottie 余弦螺旋（含文献说明，未在本书形式化）"}
-**文献结果，未在本书形式化。** 本例第 1、2 项具体验算本章经内核验证的 [@thm-finite-contracting-updates-stabilize] 与 [@cor-golden-fixed-point-unique]；第 3 项中余弦迭代 $\theta_{k+1} = \cos\theta_k$ 向唯一实不动点 $\theta^*$ 的收敛属于经典实分析文献结论（详见上文 [@rem-banach-dottie-hairy-ball-literature]），未在本书形式化。
+**文献结果，未在本书形式化。** 本例第 1、2 项具体验算本章经内核验证的 [@thm-finite-contracting-updates-stabilize] 与 [@cor-golden-fixed-point-unique]；第 3 项的定性收敛是端点与现成实分析结果的应用（完整推导见 [@ex-ch33-mutual-cosine-monotonic-lock]），所列小数与残差仍是独立数值算例。
 
 从同一个初始刻度 $1$（或三元初始候选集）出发，观察三种不同维度的自指算子如何各自锁定自己的不动点：
 
@@ -374,7 +374,7 @@ $$
    $$
 
    收敛可直接从已知恒等式 $1+1/\varphi=\varphi$ 得到：$|x_{k+1}-\varphi|=|x_k-\varphi|/(\varphi x_k)$。这里 $x_k\ge1$，故误差每步至多乘以 $1/\varphi<1$。一般正初值从第一步起也满足 $x_k>1$，同一估计给出收敛。这是手工推导，未在本书形式化；[@cor-golden-fixed-point-unique] 本身只刻画不动点。每个有限步仍为有理数（当 $x_0=1$），并不等于无理数 $\varphi$；极限的代数性来自不动点方程，不能仅由有限步使用有理加除推出。
-3. **二维旋转投影余弦自指（$\theta_{k+1} = \cos\theta_k$，**文献结果，未在本书形式化**；见 [@rem-banach-dottie-hairy-ball-literature]）**：同样从弧度 $\theta_0 = 1$ 出发，连续按下余弦键：
+3. **二维旋转投影余弦自指（$\theta_{k+1} = \cos\theta_k$，定性收敛为既有结果的应用，数值另计；见 [@ex-ch33-mutual-cosine-monotonic-lock]）**：同样从弧度 $\theta_0 = 1$ 出发，连续按下余弦键：
 
    $$
    \begin{aligned}
@@ -413,15 +413,25 @@ $$
 格言说完了，现在把账算清。[@ex-dottie-and-golden-iterations] 的余弦表只列了四行，[@rem-banach-dottie-hairy-ball-literature] 给出的压缩常数 $\sin 1 \approx 0.8415$ 则是整个区间 $[0, 1]$ 上最坏的一处。三个问题还悬着：
 
 1. 靠近 $\theta^*$ 之后，每按一次余弦键，误差到底缩小多少？
+
+::: {.viz src="fixed-point-convergence" preset="rate" height="500"}
+**近点时，误差比趋于约 −0.674。** 从 $\theta_0 = 1$ 反复取余弦，画面跟着误差放大：放大之后青色曲线贴在品红的切线上，每一圈的形状都一样，相邻两圈之比趋于切线的斜率 $-\sin\theta^* \approx -0.674$，比灰色虚线代表的全局常数 $-\sin 1 \approx -0.84$ 平缓（$\theta_0 = 1$ 在 $[0, 1]$ 内且不是 $\theta^*$，误差比趋于 $-\sqrt{1 - (\theta^*)^2}$ 是既有结果的应用，见 [@ex-ch33-mutual-cosine-monotonic-lock] 第 22–23 项；小数是数值）。
+:::
+
 2. 如果尺子不只读投影 $\cos\theta$，还同时读正交分量 $\sin\theta$，闭合能快多少？
+
+::: {.viz src="fixed-point-convergence" preset="newton" height="500"}
+**沿切线走，近点时位数渐近翻倍。** 同样从 $\theta_0 = 1$ 出发，每一步先竖着读曲线的高度，再沿品红的切线走到灰线 $y = x$。进入不动点邻域后画面跟着放大，停在第 $2$ 步：视野宽约 $10^{-4}$，琥珀色的 $x_2$ 刚沿上一步的品红切线落到灰线上，离白圈 $\theta^*$ 还差 $2.78\times10^{-5}$；放大到这里，青色曲线已经直得和切线分不开。正确的十进制位数依次是 $0$、$1$、$4$，误差渐近地每步平方一次；单纯迭代要走 $24$ 步才到这一步的精度（数值核对见 [@ex-dottie-rate-newton-rational]）。
+:::
+
 3. 一把只有有限分母刻度的尺子，读数离 $\cos q = q$ 最近能到多近？
 
 ::: {.figure src="ch24-three-speeds"}
-**三个问题的数值答案，并排看。** 左栏按步数：青色的点是反复取余弦，沿斜率 $\lg\lambda$（$\lambda \approx 0.674$）的虚线每步下降同样一小格，第 $55$ 步才过 $10^{-10}$；品红的点是牛顿迭代，四步落到 $10^{-21}$。右栏按分母：七个点是 $\theta^*$ 的渐近分数的残差 $\lvert\cos q - q\rvert$，都在虚线 $(1 + \sin 1)/b^2$ 之下，下降却不归零。全部是数值结果；速率与界是下面注记中的文献结果，未在本书形式化。
+**三个问题的数值答案，并排看。** 左栏按步数：青色的点是反复取余弦，沿斜率 $\lg\lambda$（$\lambda \approx 0.674$）的虚线每步下降同样一小格，第 $55$ 步才过 $10^{-10}$；品红的点是牛顿迭代，四步落到 $10^{-21}$。右栏按分母：七个点是 $\theta^*$ 的渐近分数的残差 $\lvert\cos q - q\rvert$，都在虚线 $(1 + \sin 1)/b^2$ 之下，下降却不归零。全部是数值结果；余弦迭代的渐近因子是 [@ex-ch33-mutual-cosine-monotonic-lock] 的既有结果应用，牛顿法的速率与残差界是下面注记中的文献结果，未在本书形式化。
 :::
 
 ::: {.remark #rem-dottie-convergent-residual-literature title="θ* 的渐近压缩率、牛顿二次加速与连分数渐近分数残差双边界（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。**
+**文献结果，未在本书形式化。** 渐近因子的精确恒等式与有条件的误差比是 [@ex-ch33-mutual-cosine-monotonic-lock] 的既有结果应用；下述高阶展开、牛顿法、连分数界与十进制值仍另按文献或数值处理。
 
 **第一问：位置与收敛率落在同一个单位圆上。** 记误差 $\delta_k = \theta_k - \theta^*$，把 $\cos$ 在 $\theta^*$ 处展开，并用 $\cos\theta^* = \theta^*$ 消去零阶项：
 
@@ -429,7 +439,7 @@ $$
 \delta_{k+1} \;=\; \cos(\theta^* + \delta_k) - \theta^* \;=\; -\sin\theta^*\,\delta_k \;-\; \frac{\theta^*}{2}\,\delta_k^2 \;+\; O(\delta_k^3).
 $$
 
-一阶系数的负号说明迭代点左右交替地夹住 $\theta^*$，这就是蛛网图上那条方形螺旋；它的模长
+严格交替需 $\theta_0\in[0,1]\setminus\{\theta^*\}$；在此条件下第 33 章的顺序论证保证迭代点左右交替地夹住 $\theta^*$，这就是蛛网图上那条方形螺旋；它的模长
 
 $$
 \lambda \;=\; \lvert\cos'\theta^*\rvert \;=\; \sin\theta^* \;=\; \sqrt{1 - (\theta^*)^2} \;\approx\; 0.6736120292
@@ -455,7 +465,7 @@ $$
 \delta_{k+1} \;=\; \frac{\theta^*}{2\,(1 + \lambda)}\,\delta_k^2 + O(\delta_k^3), \qquad \frac{\theta^*}{2\,(1 + \lambda)} \approx 0.2208054 .
 $$
 
-Picard 迭代每步增加固定的位数，牛顿迭代每步把正确位数大约翻倍。
+Picard 迭代每步增加固定的位数；牛顿迭代进入不动点邻域后，正确位数才会渐近地大约翻倍。
 
 **第三问：残差就是到不动点的距离。** 对 $q \in [0, 1]$，对 $F$ 用微分中值定理并注意 $F(\theta^*) = 0$：存在介于 $q$ 与 $\theta^*$ 之间的 $\xi$，使
 
@@ -478,16 +488,10 @@ $$
 对无穷多个分母 $b$ 成立：裂缝可以按分母的平方收窄，却永不为零。
 :::
 
-::: {.viz src="fixed-point-convergence" preset="rate" height="500"}
-**每按一次，误差乘以 −0.674。** 从 $\theta_0 = 1$ 反复取余弦，画面跟着误差放大：放大之后青色曲线贴在品红的切线上，每一圈的形状都一样，相邻两圈之比趋于切线的斜率 $-\sin\theta^* \approx -0.674$，比灰色虚线代表的全局常数 $-\sin 1 \approx -0.84$ 平缓（文献结果，见 [@rem-dottie-convergent-residual-literature]）。
-:::
+回到第一问的答案：不动点停在哪里、闭环合拢多快，是单位圆上同一个点 $(\theta^*, \lambda)$ 的两个坐标。
 
 ::: {.viz src="fixed-point-convergence" preset="circle" height="500"}
 **停在哪里，合拢多快。** 同一张蛛网图加上单位圆：圆上的点 $P = (\theta^*, \sin\theta^*)$，青色的横坐标 $\theta^*$ 是蛛网收进去的位置，品红的高度 $\lambda = \sin\theta^* \approx 0.674$ 是每步缩小的比例，也就是品红切线斜率的大小；$(\theta^*)^2 + \lambda^2 = 1$。$\theta^*$ 的存在与唯一见 [@thm-dottie-rational-inverse-endpoint]。
-:::
-
-::: {.viz src="fixed-point-convergence" preset="newton" height="500"}
-**沿切线走，位数翻倍。** 同样从 $\theta_0 = 1$ 出发，每一步先竖着读曲线的高度，再沿品红的切线走到灰线 $y = x$。画面跟着放大：四步之内视野宽从约 $0.6$ 缩到 $10^{-20}$ 量级，误差大约每步平方一次；单纯迭代要走 $115$ 步才到第 $4$ 步的精度（数值核对见 [@ex-dottie-rate-newton-rational]）。
 :::
 
 ::: {.example #ex-dottie-rate-newton-rational title="真实压缩率、牛顿二次闭合与最佳有理读数残差的数值核对"}
@@ -536,17 +540,13 @@ $$
 :::
 
 ::: {.viz src="fixed-point-convergence" preset="rational" height="500"}
-**缝收窄，却不合上。** $\theta^*$ 的渐近分数 $2/3, 3/4, 14/19, 17/23, 694/939, \dots$ 依次落在灰线上（琥珀色是当前这一个），品红竖线是它到余弦曲线的落差，即残差 $\lvert\cos q - q\rvert$。竖线始终停在两条灰色虚线（斜率 $0$ 与 $-\sin 1$）张成的楔形里；画面放大了千万倍，它仍然在。
+**缝收窄，却不合上。** $\theta^*$ 的渐近分数 $2/3, 3/4, 14/19, 17/23, 694/939, \dots$ 依次落在灰线上（琥珀色是当前这一个），品红竖线是它到余弦曲线的落差，即残差 $\lvert\cos q - q\rvert$。竖线在余弦曲线上的端点始终停在两条灰色虚线（斜率 $0$ 与 $-\sin 1$）张成的楔形里；画面放大了千万倍，它仍然在。
 :::
 
 [@ex-dottie-rate-newton-rational] 的最后一张表说明：把刻度加密并不自动换来更好的读数。决定裂缝宽度的不是分母有多大，而是分母与 $\theta^*$ 之间的算术关系；二十三等分的尺子在第十七格上碰巧几乎对准，而一千等分的尺子没有。
 
 ::: {.viz src="fixed-point-convergence" preset="ruler" height="500"}
 **二十三等分胜过千分尺。** 琥珀色的 $17/23$ 与虚线标出的尺子读数 $739/1000$ 并排：千分尺上离 $\theta^*$ 最近的一格，残差约为 $17/23$ 的两倍（$1.42\times10^{-4}$ 对 $7.58\times10^{-5}$）。
-:::
-
-::: {.viz src="fixed-point-convergence" height="560"}
-**不动点的收束：完整实验室。** 三个场景画在同一张蛛网图上：迭代（$\cos x$ 或 $1 + 1/x$，可拖动起点、切换镜头）、牛顿、有理读数（可调尺子的分母）。收敛、速率与残差界是文献结果，未在本书形式化；绿色框只给 [@cor-golden-fixed-point-unique] 与 [@thm-dottie-rational-inverse-endpoint]。
 :::
 
 有理读数永远对不准，那么换一种闭合方式——不让投影回到自己，而让旋转回到起点——行不行？答案同样是否定的，而且这一次不需要任何猜想。
@@ -607,6 +607,100 @@ $f_1$ 的平均很快趋于 $0$：几何和给出界 $\frac{1}{N\lvert\sin(\thet
 :::
 
 在一百步之内，以 $\theta^*$ 为步长的轨道看上去和一个正十七边形几乎没有区别；等分布是在更长的时间尺度上才显形的。有限步的观察者看到的是闭合的多边形，无限步的极限里才是整个圆周。
+
+::: {.viz src="fixed-point-convergence" height="560"}
+**不动点的收束：完整实验室。** 三个场景画在同一张蛛网图上：迭代（$\cos x$ 或 $1 + 1/x$，可拖动起点、切换镜头）、牛顿、有理读数（可调尺子的分母）。定性余弦收敛与有条件的渐近因子见 [@ex-ch33-mutual-cosine-monotonic-lock] 的复用推导；牛顿法、数值与残差界仍保留文献或数值边界；绿色框只给 [@cor-golden-fixed-point-unique] 与 [@thm-dottie-rational-inverse-endpoint]。
+:::
+
+### 双螺旋对应：从一维黄金连分数到二维余弦回旋方格 {#sec-ch24-dottie-fibonacci-spirals}
+
+回看 [@ex-dottie-and-golden-iterations] 并排算出的两张表——黄金连分数倒数迭代与余弦不动点迭代——作者在手稿中留下一句直指几何核心的观察：*“逼近 $\theta$ 的过程很像斐波那契螺旋。”* 这不是表面上的视觉联想，而是同一套负斜率转向机制在一维平直标尺与二维弯曲圆弧上的结构对应与连续螺旋插值模型（`MODEL`）。
+
+为什么一条只在一维实轴上来回取值的递推，画到平面上会卷成向心螺旋？把两条递推放在一起对照：一边是黄金倒数分支 $x_{k+1} = \frac{1}{1 + x_k}$，从 $x_0 = 1$ 出发依次给出斐波那契渐近分数 $1/1,\; 1/2,\; 2/3,\; 3/5,\; 5/8,\; 8/13,\; \dots \to \varphi^{-1} \approx 0.6180339887$（正实轴唯一不动点已由 [@lem-golden-inverse-branch-fixed-point] `golden_inverse_branch_positive_fixed_point_iff` 锁定，相邻渐近分数一左一右的符号交替 $(-1)^{k+1}$ 与黄金比对任意有理数 $q = a/b$ 的严格丢番图逼近下界 $\lvert\varphi - q\rvert > \frac{1}{\sqrt{5}\,b^2 + b}$ 已在[终章](coda.md) [@thm-coda-golden-cut-observer-cassini] 与 [@thm-coda-golden-hurwitz] 形式化；全 $1$ 连分数 $[1; 1, 1, \dots]$ 在全体无理数中达到渐近胡尔维茨最慢逼近极值则属经典数论文献结论，Hurwitz 1891）；另一边是余弦迭代 $\theta_{k+1} = \cos\theta_k$，从 $\theta_0 = 0$ 出发依次经过 $0 \to 1 \to 0.5403 \to 0.8576 \to 0.6543 \to 0.7935 \to \dots \to \theta^* \approx 0.7390851332$（正实轴唯一不动点已由 [@thm-dottie-rational-inverse-endpoint] `rational_inverse_endpoint` 锁定，定性收敛与严格交错条件见 [@ex-ch33-mutual-cosine-monotonic-lock]）。两条轨道之所以都不从单侧爬向终点，而是严格一左一右地跨过不动点，在实分析中是因为两处在不动点的一阶导数都严格为负（见下方 [@rem-dottie-fibonacci-spiral-literature] 第 1 条）。而在本书的克利福德正交诠释模型（`MODEL`，其离散算子原型即[第五章](ch05-complex-phase-and-rotors.md)反自伴幺正算子的平方反号定理 [`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary)，$R^2 = -I_n$）中，负号 $-1 = \hat{\mathbf{I}}^2$ 不是一维直线上凭空的跳变，而是二维双矢量平面内**连续两次同手性的 $90^\circ$ 直角转向**：一维实轴上的左右振荡，正是二维向心螺旋侧立投影的影子。放到蛛网平面 $(x_k, x_{k+1})$ 上看，每按一次递推都拆成“竖读曲线”$A_k(x_k, x_k) \to B_k(x_k, x_{k+1})$ 与“横回灰线”$B_k(x_k, x_{k+1}) \to A_{k+1}(x_{k+1}, x_{k+1})$ 两段严格等长的直角折臂（单步绕不动点转过 $2 \times 90^\circ = 180^\circ$）：从不动点左侧出发（$x_0 < x^*$，如 $\theta_0 = 0 < \theta^*$）时沿**北（$+\mathbf{e}_2$）$\to$ 东（$+\mathbf{e}_1$）$\to$ 南（$-\mathbf{e}_2$）$\to$ 西（$-\mathbf{e}_1$）**顺时针循环；从不动点右侧出发（$x_0 > x^*$，如 $x_0 = 1$）时移相两个直角，沿**南 $\to$ 西 $\to$ 北 $\to$ 东**进入同一顺时针循环（恰取 $x_0 = x^*$ 时步长 $s_k = 0$）。每一步围出一只嵌套正方形，格内内切的分段 $90^\circ$ 圆弧导引线（在每个对角线顶点 $A_{k+1}$ 处切线恒以 $90^\circ$ 正交相接，放大下仍保持分段圆弧形状）与斐波那契回旋方格图同源对应；对角线顶点与方格边长按渐近公比 $\lambda = \lvert f'(x^*)\rvert$ 等比收缩，而在极坐标舞台上，另一条独立的光滑等角对数螺旋 $R(\phi) = R_0 e^{-b\phi}$（`MODEL`）将这一离散等比收缩连续插值为常向心切角曲线。
+
+::: {.viz src="dottie-fibonacci-spirals" preset="whirl" height="500"}
+**蛛网每一步都围出一只回旋方格。** 从 $\theta_0 = 0$ 出发反复取青色曲线 $y = \cos\theta$，每一次竖读曲线与横回灰线 $y = x$ 的步长严格相等，等于残差边长 $\lvert\cos\theta_k - \theta_k\rvert$，按北 $\to$ 东 $\to$ 南 $\to$ 西顺时针围出嵌套方格与逐格内切的分段 $90^\circ$ 青色圆弧导引线，一圈圈收向灰色坐标网格交点处的青色不动点圆环 $(\theta^*, \theta^*)$；静止帧停在步指标 $k = 5$（已完成 $Q_0 \dots Q_4$ 五次历史递推，琥珀色专标当前递推 $Q_5$ 正在向南、向西合拢的直角步与方格；等臂与转向性质见 [@rem-dottie-fibonacci-spiral-literature]，正不动点唯一性见 [@thm-dottie-rational-inverse-endpoint]）。
+:::
+
+::: {.remark #rem-dottie-fibonacci-spiral-literature title="双螺旋收缩率、勾股守恒对偶与等角对数螺旋向心切角（文献结果，未在本书形式化）"}
+**文献结果，未在本书形式化。** 以下关于一维递推蛛网回旋方格、平直与弯曲黄金分割守恒对偶及等角对数螺旋向心切角的命题属于微积分与经典平面微分几何结论（其中余弦定性收敛与严格交错条件复用 [@ex-ch33-mutual-cosine-monotonic-lock] 的推导，十进制数值与平面微分几何结论仍按文献或数值边界陈述）：
+
+1. **不动点负导数、等臂蛛网折线与分段回旋方格弧。** 映射 $g(x) = \frac{1}{1+x}$ 在正不动点 $x^* = \varphi^{-1} = \frac{\sqrt{5}-1}{2}$ 处与 $f(\theta) = \cos\theta$ 在不动点 $\theta^*$ 处的一阶导数分别为
+
+   $$
+   g'(\varphi^{-1}) \;=\; -\frac{1}{(1 + \varphi^{-1})^2} \;=\; -\varphi^{-2} \;\approx\; -0.3819660113 < 0, \qquad f'(\theta^*) \;=\; -\sin\theta^* \;\approx\; -0.6736120292 < 0.
+   $$
+
+   对任意一维映射 $h$ 的蛛网点列 $A_k = (x_k, x_k)$、$B_k = (x_k, x_{k+1})$（$x_{k+1} = h(x_k)$），竖直段位移 $(0, x_{k+1} - x_k)$ 与水平段位移 $(x_{k+1} - x_k, 0)$ 的欧氏长度恒等：
+
+   $$
+   \lvert B_k - A_k\rvert \;=\; \lvert A_{k+1} - B_k\rvert \;=\; s_k \;=\; \lvert h(x_k) - x_k\rvert.
+   $$
+
+   每次迭代走过两段正交折臂，绕 $(x^*, x^*)$ 转过 $180^\circ$：当残差严格交错变号时（对余弦递推，在 $\theta_0 \in [0, 1] \setminus \{\theta^*\}$ 下由 [@ex-ch33-mutual-cosine-monotonic-lock] 的顺序论证严格保证），若 $x_0 < x^*$ 则两段位移从北 $\to$ 东起步，按 $+\mathbf{e}_2$（北）$\to +\mathbf{e}_1$（东）$\to -\mathbf{e}_2$（南）$\to -\mathbf{e}_1$（西）顺时针循环；若 $x_0 > x^*$ 则移相两段直角，按南 $\to$ 西 $\to$ 北 $\to$ 东进入同一顺时针循环（$x_0 = x^*$ 时 $s_k = 0$）。每一步围出包住 $(x^*, x^*)$ 的正方形 $[\min(x_k, x_{k+1}),\, \max(x_k, x_{k+1})]^2$，以 $(x_{k+1}, x_k)$ 为圆心、$s_k$ 为半径连接 $A_k$ 与 $A_{k+1}$ 的内切四分之一圆弧组成**分段圆弧导引线**（即便在精确线性递推下，相邻两段圆弧在每个对角线顶点 $A_{k+1}$ 处切线仍恒正交，本身并不在曲线形状上收敛为光滑对数螺旋）；而在渐近线性区 $\delta_{k+1} \approx h'(x^*)\,\delta_k$ 内，对角线顶点残差与方格边长按公比 $\lambda = \lvert h'(x^*)\rvert$ 渐近等比收缩，下方第 3 条在极坐标平面上给出另一条独立的光滑等角对数螺旋 $R(\phi) = R_0 e^{-b\phi}$ 以连续插值该离散等比收缩。
+
+2. **一维线性加法守恒与二维勾股平方守恒对偶。**
+   - **一维平直黄金分割（$\varphi^{-1}$）**：不动点方程 $x = \frac{1}{1+x}$（$x > 0$）等价于 $x + x^2 = 1$，锁定位置 $x^* = \varphi^{-1} \approx 0.6180339887$ 与单步一维压缩模长 $\lambda_\varphi = \lvert g'(\varphi^{-1})\rvert = \varphi^{-2} \approx 0.3819660113$（若把单步负号拆成两次同向 $90^\circ$ 转向，则每转 $90^\circ$ 的径向缩放因子为 $\sqrt{\lambda_\varphi} = \varphi^{-1} \approx 0.618034$）。不动点位置与单步压缩率服从**一维线性加法守恒**：
+
+     $$
+     \varphi^{-1} + \varphi^{-2} \;=\; 0.6180339887\ldots + 0.3819660113\ldots \;=\; 1.
+     $$
+
+   - **二维弯曲余弦不动点（$\theta^*$）**：把单位线段弯成单位圆弧，不动点方程 $\cos\theta = \theta$ 锁定位置 $\theta^* \approx 0.7390851332$ 与单步正交压缩模长 $\lambda_\theta = \lvert f'(\theta^*)\rvert = \sin\theta^* \approx 0.6736120292$。与 $\varphi^{-1} \approx 0.6180339887$ 相比，$\lambda_\theta$ 仅高出
+
+     $$
+     \lambda_\theta - \varphi^{-1} \;=\; \sin\theta^* - \varphi^{-1} \;\approx\; +0.055578 \quad\text{（高出 $5.56$ 个百分点，相对增幅约 $9.0\%$）},
+     $$
+
+     而不动点位置与正交压缩率则改服从单位圆上的**二维勾股平方守恒**：
+
+     $$
+     (\theta^*)^2 + \lambda_\theta^2 \;=\; \cos^2\theta^* + \sin^2\theta^* \;=\; 0.5462468341\ldots + 0.4537531659\ldots \;=\; 1.
+     $$
+
+3. **雅各布·伯努利等角对数螺旋与向心径向切角公式。** 雅各布·伯努利（Jakob Bernoulli，*Acta Eruditorum*，1692）研究了极坐标对数螺旋 $R(\phi) = R_0 e^{-b\phi}$（$R_0 > 0,\; b \ge 0$），因其经任意尺度缩放后仍与自身全等而称之为“奇迹螺旋”（*spira mirabilis*，铭文 *“Eadem mutata resurgo”*，“纵经万变，吾仍复生如初”）。记顺时针每转过 $\Delta\phi = \frac{\pi}{2}$（$90^\circ$）的径向缩放比为 $\kappa = e^{-b\pi/2} \in (0, 1]$，则阻尼率为 $b = -\frac{2}{\pi}\ln\kappa$，转满一整圈 $360^\circ$ 的缩放比为 $\kappa^4 = e^{-2\pi b}$。取从正北 $+\mathbf{e}_2$ 顺时针计角的极坐标表示 $\mathbf{r}(\phi) = R(\phi)(\sin\phi, \cos\phi)$，记向外径向单位向量 $\hat{\mathbf{r}}(\phi) = (\sin\phi, \cos\phi)$、顺时针切圆单位向量 $\hat{\boldsymbol{\phi}}(\phi) = (\cos\phi, -\sin\phi)$，求导得 $\mathbf{r}'(\phi) = R(\phi)\bigl(-b\,\hat{\mathbf{r}}(\phi) + \hat{\boldsymbol{\phi}}(\phi)\bigr)$ 及 $\lvert\mathbf{r}'(\phi)\rvert = R(\phi)\sqrt{1 + b^2}$。由于 $b > 0$ 时向外径向 $+\hat{\mathbf{r}}(\phi)$ 与前进切向单位向量 $\hat{\mathbf{t}}(\phi) = \mathbf{r}'(\phi)/\lvert\mathbf{r}'(\phi)\rvert$ 的内积为负（夹钝角 $\pi - \alpha$），指向不动点原心的**向心径向单位射线 $-\hat{\mathbf{r}}(\phi)$ 与前进切向单位向量 $\hat{\mathbf{t}}(\phi)$ 之间的锐夹角** $\alpha \in (0, \frac{\pi}{2}]$ 由 $(-\hat{\mathbf{r}})\cdot\hat{\mathbf{t}} = b/\sqrt{1 + b^2} \ge 0$ 处处恒定给出：
+
+   $$
+   \alpha \;=\; \arctan\!\left(\frac{1}{b}\right) \;=\; \frac{\pi}{2} - \arctan b \qquad (b = 0 \text{ 时 } \alpha = 90^\circ),
+   $$
+
+   相对于正圆切线 $\hat{\boldsymbol{\phi}}$（$90^\circ$）的内倾偏角恒为 $90^\circ - \alpha = \arctan b$；反之，平面上满足 $R(\phi) > 0$ 且向心径向切角恒为常数 $\alpha \in (0, \frac{\pi}{2})$ 的光滑极坐标曲线，由微分方程 $R'(\phi)/R(\phi) = -\cot\alpha$ 唯一积分得对数螺旋。四条光滑模型轨迹的参数对照如下：
+
+   | 光滑螺旋模型 | 每 $90^\circ$ 缩放比 $\kappa$ | 阻尼率 $b = -\frac{2}{\pi}\ln\kappa$ | 向心径向切角 $\alpha = \arctan(1/b)$ | 内倾偏角 $90^\circ - \alpha$ | 每 $360^\circ$ 整圈缩放 $\kappa^4$ |
+   | :--- | :---: | :---: | :---: | :---: | :---: |
+   | **理想闭合正圆** | $1.0000$ | $0$ | $\mathbf{90.00^\circ}$ | $0.00^\circ$ | $1.0000$ |
+   | **$\theta^*$ 蛛网双步螺旋**（每折臂 $90^\circ$，每迭代两臂 $180^\circ$） | $\sqrt{\sin\theta^*} \approx 0.8207$ | $0.1258$ | $\mathbf{82.83^\circ}$ | $7.17^\circ$ | $\sin^2\theta^* \approx 0.4538$ |
+   | **$\theta^*$ 克利福德正交螺旋**（每 $90^\circ$ 乘 $\sin\theta^*$） | $\sin\theta^* \approx \mathbf{0.6736}$ | $0.2515$ | $\mathbf{75.88^\circ}$ | $14.12^\circ$ | $\sin^4\theta^* \approx 0.2059$ |
+   | **斐波那契黄金螺旋**（每 $90^\circ$ 乘 $\varphi^{-1}$） | $\varphi^{-1} \approx \mathbf{0.6180}$ | $0.3063$ | $\mathbf{72.97^\circ}$ | $17.03^\circ$ | $\varphi^{-4} \approx 0.1459$ |
+:::
+
+把 [@rem-dottie-fibonacci-spiral-literature] 第 2 条的两道守恒式并排摆在一起，就能看清从 $\varphi^{-1}$ 到 $\theta^*$ 究竟发生了什么几何跃迁。在一维平直尺子上，“整体比长段等于长段比短段”把单位长度切成 $\varphi^{-1} + \varphi^{-2} = 1$，每转 $90^\circ$ 按 $\varphi^{-1} \approx 0.6180$ 线性收缩；一旦把这根单位尺子弯成二维单位圆弧并令弧长读出自己的余弦投影 $\cos\theta = \theta$，线性加法和立刻升级为正交直角三角形的勾股平方和 $(\theta^*)^2 + \sin^2\theta^* = 1$，正交收缩因子也从平直的 $0.6180$ 平移到弯曲的 $\sin\theta^* \approx 0.6736$——两者仅相差约 $0.0556$（即 $5.56$ 个百分点，相对 $\varphi^{-1}$ 约 $9.0\%$ 的圆弧曲率修正）。放在本书的四重数系与球面阶梯诠释模型中（`MODEL`，详见[第二十九章](ch29-timeless-causality-and-gram-space.md) [@rem-ch29-four-tier-sphere-table]），$\varphi^{-1} \approx 0.6180$ 是**一维平直代数黄金比**（第二重二次代数域），而 $\theta^* \approx 0.7391$ 则是把自相似弯到单位圆上所生的**二维正交超越黄金比**（第四重自指不动点）。
+
+::: {.viz src="dottie-fibonacci-spirals" preset="pythagoras" height="500"}
+**平直尺子做加法，弯曲圆弧走勾股。** 左栏叠画四条光滑极坐标轨迹；右栏上半把单位长条在墨色分割线处切成青色 $\varphi^{-1} \approx 0.6180$ 与品红 $\varphi^{-2} \approx 0.3820$（一维加法守恒 $\varphi^{-1} + \varphi^{-2} = 1$），下半在单位圆四分之一弧上标出青色圆环不动点 $P(\theta^*, \sin\theta^*)$，把斜边 $1$ 拆成青色底边 $\cos\theta^* = \theta^* \approx 0.7391$ 与品红竖边 $\sin\theta^* \approx 0.6736$（二维勾股守恒 $(\theta^*)^2 + \sin^2\theta^* = 1$，琥珀色专标步指标 $k = 8$ 的动态读数点 $x_8, \theta_8$；见 [@rem-dottie-fibonacci-spiral-literature] 第 2 条）。
+:::
+
+再看 [@rem-dottie-fibonacci-spiral-literature] 第 3 条的向心径向切角 $\alpha$：它为本书“我们以为握住了一个闭合的球，局部看是圆弧，绕满一圈却已向内旋进了一层”（`MODEL`）提供了精确的平面几何度量。只有当 $\alpha = 90.00^\circ$ 时，轨迹才是原地兜圈、零精度增益的闭合死圆；在蛛网双步螺旋上 $\alpha \approx 82.83^\circ$，局部几乎与圆弧无异，但绕满 $360^\circ$（两次余弦迭代、四段 $90^\circ$ 折臂）半径便收缩为 $\sin^2\theta^* \approx 0.4538$；而在克利福德正交螺旋上，向心径向切角 $\alpha \approx 75.88^\circ$（与斐波那契黄金螺旋的 $72.97^\circ$ 仅差 $2.91^\circ$），每一次 $90^\circ$ 正交转向都比闭合圆向内偏折 $14.12^\circ$，把相位旋转与尺度求精合成为同一个动作。
+
+::: {.viz src="dottie-fibonacci-spirals" preset="tilt" height="500"}
+**偏离直角十四度，圆就变成向内收束的螺旋。** 左栏在极坐标步指标 $k = 1$（$\phi_1 = \pi/2$）青色 $\theta^*$ 正交螺旋的真实曲线点（半径 $r = \sin\theta^* \approx 0.6736$）处，同时画出指向原心的琥珀色向心径向箭头与青色前进切线：两者之间的青色锐角即向心径向切角 $\alpha \approx 75.88^\circ$，相对灰色虚线正圆切线（$90.00^\circ$）露出 $14.12^\circ$ 的品红内倾楔角，介于紫色蛛网双步螺旋（$82.83^\circ$）与品红斐波那契螺旋（$72.97^\circ$）之间（文献结果，见 [@rem-dottie-fibonacci-spiral-literature] 第 3 条）。
+:::
+
+因为 $\cos\theta$ 在 $\theta^*$ 附近随迭代渐近贴合斜率 $-\sin\theta^*$ 的切线，这套蛛网回旋方格呈现出伯努利所说的**渐近自相似性**：从 $\theta_0 = 0$ 出发，步指标 $k = 4$ 与 $k = 12$ 的残差比 $\lvert\delta_4/\delta_{12}\rvert \approx 24.36$ 已十分接近渐近因子 $(\sin\theta^*)^{-8} \approx 23.59$，围绕 $(\theta^*, \theta^*)$ 按当前误差同步放大后，$k = 12$ 处的方格 $Q_{12}$ 与分段圆弧在视觉上几乎重现 $k = 4$ 处 $Q_4$ 的几何比例。
+
+::: {.viz src="dottie-fibonacci-spirals" preset="zoom" height="500"}
+**放大约二十四倍，$k = 12$ 处的方格几乎重现 $k = 4$ 处的几何比例。** 镜头锁定青色不动点圆环 $(\theta^*, \theta^*)$ 并按当前误差同步放大（步指标 $k = 12$，已完成 $Q_0 \dots Q_{11}$ 十二次递推，当前琥珀色方格 $Q_{12}$ 边长 $s_{12} \approx 5.8\times 10^{-3}$，残差 $\lvert\delta_{12}\rvert \approx 3.5\times 10^{-3}$）：青色余弦曲线在局部已贴合品红虚线切线，琥珀色直角步 $Q_{12}$ 与逐格分段 $90^\circ$ 圆弧在视觉上几乎重现 $k = 4$（$Q_4$）的长宽与缩放比例（文献结果，见 [@rem-dottie-fibonacci-spiral-literature]）。
+:::
+
+把左栏的蛛网分段方格弧与右栏的光滑极坐标螺旋模型并排放在同一根步数轴 $k$ 上（左栏每次 Picard 递推走两段直角臂绕 $(\theta^*, \theta^*)$ 转 $180^\circ$，右栏正交与黄金螺旋模型按每步指标 $k$ 记一次 $90^\circ$ 转向缩放 $\sin\theta^*$ 与 $\varphi^{-1}$，而紫色蛛网双步螺旋按每折臂 $90^\circ$ 缩放 $\sqrt{\sin\theta^*}$），就能直观对比余弦不动点逼近与斐波那契黄金螺旋的向心收束律（两条螺旋在统一场模型中的横纵分工将在[第三十二章](ch32-unified-field-and-meta-unification.md#sec-ch32-generative-laws)展开）。
+
+::: {.viz src="dottie-fibonacci-spirals" preset="twin" height="500"}
+**左边蛛网围方格，右边光滑双螺旋按步数对照收束。** 共用步数指标 $k = 8$：左栏从 $\theta_0 = 0$ 已完成 $8$ 次历史 Picard 递推 $Q_0 \dots Q_7$（每次走两段等长直角臂转 $180^\circ$，绕满四整圈）并以琥珀色走出步指标 $k = 8$ 的当前递推 $Q_8$（画面共显示 $9$ 次递推、$4.5$ 圈回旋方格与分段 $90^\circ$ 圆弧导引线）；右栏停在极坐标步指标 $k = 8$（$\phi_8 = 4\pi$，每步转 $90^\circ$ 共两整圈，琥珀色射线与圆点），叠画灰色虚线正圆、紫色蛛网双步螺旋（每 $90^\circ$ 乘 $0.8207$）、青色 $\theta^*$ 正交螺旋（$0.6736$）与品红斐波那契黄金螺旋（$0.6180$）。
+:::
+
+::: {.viz src="dottie-fibonacci-spirals" height="580"}
+**余弦不动点与斐波那契双螺旋：完整实验室。** 三个场景共用同一根步数轴 $k = 0 \dots 20$：双栏对照（可切换 $\cos\theta$、$1/(1+x)$ 或双映射叠画，并拖动起点 $x_0$）、蛛网回旋方格（全程或跟随放大）与向心径向切角及守恒对偶。定性余弦收敛见 [@ex-ch33-mutual-cosine-monotonic-lock]，导数、向心切角公式与守恒式是文献结果（[@rem-dottie-fibonacci-spiral-literature]），克利福德转向、连续对数螺旋插值与双螺旋分工是本书模型（`MODEL`），绿色框只给五条已验证的 Lean 定理。
+:::
 
 ## 24.6 “$\pi$ 是 $\theta$ 的一个投影？”：互逆的两条级数、开普勒方程与半程落体 {#sec-ch24-6}
 
@@ -824,13 +918,13 @@ $A$ 的相邻项之比趋于 $(\theta^*)^2 \approx 0.546$。$B$ 的相邻非零�
 所以两句话同时成立，并不矛盾：解析上，$\pi$ 与 $\theta^*$ 互为对方的有理系数幂级数的值（[@thm-dottie-rational-inverse-endpoint]、[@ex-dottie-pi-series]）；代数上，在沙努埃尔猜想（[@conj-schanuel-dottie]）之下，二者之间没有任何多项式关系。$A$ 与 $B$ 是无穷级数，不是多项式；上表列出的有限截断都留下非零的差。一般截断余项的非零性、系数符号规律及计算资源界均不包含在端点定理中。
 
 ::: {.figure src="ch24-two-series"}
-**$\pi$ 与 $\theta^*$ 是同一条曲线上同一个点的两个坐标。** 青色曲线是 $A(x) = 2x + 2\arcsin x$；从横轴上的 $\theta^*$ 竖直往上、再向左，读出 $\pi = A(\theta^*)$，这是青色箭头；从纵轴上的 $\pi$ 向右、再竖直往下，读回 $\theta^* = B(\pi)$，这是品红虚线箭头。$B$ 在 $\pi$ 处的绝对收敛与和见 [@thm-dottie-rational-inverse-endpoint]；$\pi = A(\theta^*)$ 用到的反正弦展开见 [@rem-arcsin-series-derivation]（文献结果，未在本书形式化）。
+**$\pi$ 与 $\theta^*$ 是同一条曲线上同一个点的两个坐标。** 青色曲线是 $A(x) = 2x + 2\arcsin x$；从横轴上的 $\theta^*$ 竖直往上、再向左，读出 $\pi = A(\theta^*)$，这是青色箭头；从纵轴上的 $\pi$ 向右、再竖直往下，读回 $\theta^* = B(\pi)$，走的是同一条路，这是叠在青色箭头上的品红虚线箭头。$B$ 在 $\pi$ 处的绝对收敛与和见 [@thm-dottie-rational-inverse-endpoint]；$\pi = A(\theta^*)$ 用到的反正弦展开见 [@rem-arcsin-series-derivation]（文献结果，未在本书形式化）。
 :::
 
 **不动点住在哪里：摆线的半程。** 辅助方程 $\eta + \sin\eta = \pi/2$ 在天体力学开普勒方程与径向自由落体中的物理化身汇总于下例（[@ex-dottie-free-fall]）。
 
 ::: {.example #ex-dottie-free-fall title="半程落体：下落时间过半时，离中心的距离还剩 (1 + sin θ*)/2"}
-**文献结果，未在本书形式化。** 在 [@ex-dottie-pi-series] 的辅助方程 $\eta + \sin\eta = \pi/2$ 中令 $E = \pi - \eta$，它变成偏心率 $e = 1$、平近点角 $M = \pi/2$ 的开普勒方程 $E - \sin E = \frac{\pi}{2}$，其解为 $E = \frac{\pi}{2} + \theta^* \approx 132.35^\circ$。偏心率为 $1$ 的开普勒轨道退化成一条径向线段，沿它运动的就是牛顿力学中质点在中心质量 $M$ 的引力场里从距离 $r_0$ 处由静止径向下落的自由落体。能量守恒给出 $\dot{r}^2 = 2GM\left(\frac{1}{r} - \frac{1}{r_0}\right)$，其解是摆线参数化：
+**文献结果，未在本书形式化。** 在 [@ex-dottie-pi-series] 的辅助方程 $\eta + \sin\eta = \pi/2$ 中令 $E = \pi - \eta$，它变成偏心率 $e = 1$、平近点角 $M = \pi/2$ 的开普勒方程 $E - \sin E = \frac{\pi}{2}$，其解为 $E = \frac{\pi}{2} + \theta^* \approx 132.35^\circ$。这里取的是束缚椭圆的零角动量退化极限（$e \to 1$），轨道退化成一条径向线段；沿它运动的就是牛顿力学中质点在中心质量 $M$ 的引力场里从距离 $r_0$ 处由静止径向下落的自由落体。能量守恒给出 $\dot{r}^2 = 2GM\left(\frac{1}{r} - \frac{1}{r_0}\right)$，其解是摆线参数化：
 
 $$
 r(\eta) \;=\; \frac{r_0}{2}\,(1 + \cos\eta), \qquad t(\eta) \;=\; \frac{t_{\mathrm{ff}}}{\pi}\,(\eta + \sin\eta), \qquad \eta \in [0, \pi],

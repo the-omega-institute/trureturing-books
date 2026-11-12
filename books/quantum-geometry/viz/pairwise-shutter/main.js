@@ -144,6 +144,8 @@
         for (let i = 0; i <= M; i++) { const al = c.alpha * i / M; pa.push(rotA(al)); pb.push(rotB(al)); }
         st.path(pa, { color: P.cyan, width: 1, alpha: 0.55, dash: [3, 4] });
         st.path(pb, { color: P.amber, width: 1, alpha: 0.55, dash: [3, 4] });
+        // where the pair started: two grey dashed arrows, so a still shows that the pair has turned
+        if (c.alpha < 2 * Math.PI - 1e-3) for (const v of [S.A, S.B]) { st.line([0, 0, 0], v, { color: P.dim, width: 1.4, alpha: 0.8, dash: [4, 4] }); st.dot(v, 3, P.dim, { alpha: 0.8 }); }
       }
     }
     // A's diameter: from the −1 end to the foot of B (cyan, length 2p), and on to the +1 end (grey)
@@ -237,7 +239,9 @@
       if (c.N) {
         const sh = K_share(c), yy = g.Y(sh), right = g.X(c.N) > g.X(1) + 0.55 * g.iw;
         const dy = Math.abs(yy - g.Y(p)) > 18 ? 0 : (sh >= p ? -15 : 15);
-        stage.tag('sh', [g.X(c.N), yy], `<span class="c-am">k/N = ${fix(sh, 3)}</span>`, 'num', { screen: true, dx: right ? -50 : 50, dy: right && dy === 0 ? (sh >= p ? -15 : 15) : dy });
+        // at the two ends the share would sit on the row of shots (top) or on the axis title (bottom): keep it inside
+        const edge = sh > 0.9 ? 16 : sh < 0.1 ? -38 : null;
+        stage.tag('sh', [g.X(c.N), yy], `<span class="c-am">k/N = ${fix(sh, 3)}</span>`, 'num', { screen: true, dx: right ? -50 : 50, dy: edge !== null ? edge : right && dy === 0 ? (sh >= p ? -15 : 15) : dy });
       }
     }
   }
@@ -338,7 +342,7 @@
     right: { A: NORTH, B: v3.sph(90 * DEG, 40 * DEG), mode: 'fixed', turn: false, n: 4000, play: true },
     same: { A: NORTH, B: NORTH, mode: 'fixed', turn: false, n: 400, play: true },
     opposite: { A: NORTH, B: [0, 0, -1], mode: 'fixed', turn: false, n: 400, play: true },
-    turn: { A: v3.sph(60 * DEG, 0), B: v3.sph(120 * DEG, 0), mode: 'fixed', turn: true, n: 4000, play: true },
+    turn: { A: v3.sph(60 * DEG, 0), B: v3.sph(120 * DEG, 0), mode: 'fixed', turn: true, n: 4000, play: true, still: 0.85 },
     random: { A: NORTH, B: v3.sph(60 * DEG, 0), mode: 'random', turn: false, n: 4000, play: true }
   };
   const NOTES = {
@@ -347,7 +351,7 @@
     right: ['B 与 A 垂直，权重 1/2：过与不过一样多。浅色带在这里最宽，细曲线在 1/2 上下摆得最厉害，但还是一路收窄。', 'B is perpendicular to A, weight 1/2: as many passes as fails. The pale band is widest here and the thin curve wobbles most around 1/2, yet it still narrows all the way.'],
     same: ['B 与 A 重合，青色的一段占满整条直径，权重 1：每一次都过，方块全是实心，曲线从第一次起就贴在 1 上。', 'B coincides with A and the cyan stretch fills the whole diameter, weight 1: every shot passes, every square is solid, and the curve sits on 1 from the first shot.'],
     opposite: ['B 在 A 的对面，青色的一段缩成一点，权重 0：一次也不过，方块全是空心，曲线从第一次起就贴在 0 上。', 'B is opposite A and the cyan stretch shrinks to a point, weight 0: not a single pass, every square is hollow, and the curve sits on 0 from the first shot.'],
-    turn: ['与 60° 那张卡同一对箭头、同一串随机数，只是每按一次快门之前，两支箭头绕紫色的轴一起转一点。虚线是两支箭尖走过的路；夹角一直是 60°，权重一直是 3/4，数出来的曲线与不转时一模一样。', 'The same pair and the same random numbers as the 60° card, except that before each shot both arrows turn a little about the violet axis. The dashed paths are where the tips have been; the angle stays 60°, the weight stays 3/4, and the counted curve is exactly the one without turning.'],
+    turn: ['与 60° 那张卡同一对箭头、同一串随机数，只是每按一次快门之前，两支箭头绕紫色的轴一起转一点。虚线是两支箭尖走过的路，灰色虚线箭头是出发时的那一对；夹角一直是 60°，权重一直是 3/4，数出来的曲线与不转时一模一样。', 'The same pair and the same random numbers as the 60° card, except that before each shot both arrows turn a little about the violet axis. The dashed paths are where the tips have been and the grey dashed arrows are the pair as it started; the angle stays 60°, the weight stays 3/4, and the counted curve is exactly the one without turning.'],
     random: ['每按一次快门，B 换一个球面上均匀随机的方向，灰点是已经取过的方向。右边把它们的权重分成十段计数：开头高低不齐，越数越平，每段都向 1/10 的青色虚线靠拢。', 'For each shot B takes a fresh uniformly random direction on the sphere; the grey dots are the directions so far. On the right their weights are counted in ten bins: ragged at first, flatter as they fill, each bin closing in on the dashed cyan line at 1/10.']
   };
   let booting = true, moving = null;
@@ -360,9 +364,10 @@
       S.A = p.A.slice(); S.B = p.B.slice(); S.mode = p.mode; S.turn = p.turn; S.seed = 1;
       modeChips.set(p.mode, true); turnChips.set(p.turn ? 'on' : 'off', true);
       setRun(p.n); clock.pause(); clock.set(0);
-      // a still (cover, cited figure shot) and the opening view of the full page show the whole run;
+      // a still (cover, cited figure shot) and the opening view of the full page show the whole run (or the card's
+      // telling moment: the turning pair stops 306° of the way round, clear of where it started);
       // inside a chapter the card plays once the reader has scrolled it into view; a click plays at once
-      if (TRV.still || (booting && !TRV.embed)) clock.set(clock.max); else if (p.play) { if (booting) kit.autoplay(clock, $('stage')); else clock.play(); }
+      if (TRV.still || (booting && !TRV.embed)) clock.set(clock.max * (p.still ?? 1)); else if (p.play) { if (booting) kit.autoplay(clock, $('stage')); else clock.play(); }
     };
     if (booting || TRV.still) { land(); return; }
     // carry the arrows to the card's start, so the eye can follow what changed

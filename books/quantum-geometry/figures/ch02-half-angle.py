@@ -65,8 +65,11 @@ def draw(fig):
         two.dot(p[0], p[1], 5 if th != HI else 4, "line", ring="bg")
         o = along(ox, oy, 90 - h, r + 20)
         two.text(o[0], o[1], w, size=15, color="line", weight=600, anchor="middle", middle=True)
-        q = along(ox, oy, 90 - h - (8 if h < 90 else -8), r - 26)
-        two.text(q[0], q[1], f"{h:g}°", size=13, color="dim", anchor="middle", middle=True)
+        # each half-angle sits beside its own weight, outside the arc, so no angle can be read off a neighbouring point
+        if h < 90:
+            two.text(o[0] + 12, o[1], f"{h:g}°", size=13, color="dim", anchor="start", middle=True)
+        else:
+            two.text(o[0], o[1] + 20, f"{h:g}°", size=13, color="dim", anchor="middle", middle=True)
     two.text(ox - 8, oy - r + 2, "|*φ*⟩", size=14, color="line", anchor="end")
     two.text(ox + r + 8, oy - 24, "|*φ*_{⊥}⟩", size=14, color="dim")
     tip = along(ox, oy, 90 - HI / 2, r)

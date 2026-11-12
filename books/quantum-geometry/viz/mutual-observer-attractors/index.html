@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//MUTUAL · Mutual attractors: two observers measuring each other">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//MUTUAL 互为吸引子 · 两个观察者互相丈量</title>
+<meta name="description" content="两个场景：两段边界区间拉近时，连通的极小割在 d(l₁ + l₂ + d) = l₁l₂ 处胜过各自的割，领先阶互信息从零变正；两个观察者 A、B 同时用对方的读数更新自己，(x, y) ↦ (cos y, cos x)，逐拍左右交替，两拍一轮单侧逼近同一个 (θ*, θ*)，每轮误差约乘 0.454，正是每拍 0.674 的平方。Two scenes: as two boundary intervals come closer, the connected minimal cut beats the separate ones where d(l₁ + l₂ + d) = l₁l₂ and the leading-order mutual information turns positive; two observers A and B update at once from each other's reading, (x, y) ↦ (cos y, cos x), alternating sides beat by beat and closing on the same (θ*, θ*) from one side round by round, each round multiplying the error by about 0.454, the square of the 0.674 of one beat.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="mutual-observer-attractors">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//MUTUAL">ORTHO<b>//</b>MUTUAL</h1>
+      <div class="tagline">
+        <span class="zh">互为吸引子 · <em>两段区间拉近，连通的割突然胜出；两个观察者互相读数，逐拍左右摇摆，两拍一轮却从一侧锁进同一个不动点</em></span>
+        <span class="en">Mutual attractors · <em>bring two intervals closer and the connected cut suddenly wins; let two observers read each other and they swing from side to side beat by beat, yet lock onto one fixed point from one side round by round</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillScene"><span class="zh">场景</span><span class="en">SCENE</span> <strong>—</strong></span>
+      <span class="pill" id="pillNow"><span class="zh">现在</span><span class="en">NOW</span> <strong>—</strong></span>
+      <span class="pill hot" id="pillKey"><span class="zh">关键</span><span class="en">KEY</span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="alone" aria-pressed="false"><span class="code">SAME-START</span><span class="cn zh">同一起点：每拍越过 θ*</span><span class="cn en">Same start: across θ* every beat</span></button>
+        <button class="preset" data-preset="round" aria-pressed="false"><span class="code">ONE-ROUND</span><span class="cn zh">两拍一轮：只从一侧逼近</span><span class="cn en">Two beats a round: from one side</span></button>
+        <button class="preset" data-preset="apart" aria-pressed="false"><span class="code">APART</span><span class="cn zh">起点不同：两条曲线只交于一点</span><span class="cn en">Different starts: the curves meet once</span></button>
+        <button class="preset" data-preset="transition" aria-pressed="false"><span class="code">D-CRIT</span><span class="cn zh">拉近两段：两种割一样长</span><span class="cn en">Closer: the two cuts tie</span></button>
+        <button class="preset" data-preset="connected" aria-pressed="false"><span class="code">CONNECTED</span><span class="cn zh">再近一点：连通的割胜出</span><span class="cn en">Closer still: the connected cut wins</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec" data-scenes="mirror">
+      <h2><span class="zh">两人的起点</span><span class="en">Where they start</span><span class="aside">(x₀, y₀)</span></h2>
+      <div class="field">
+        <label for="x0"><span class="zh">A 的读数 x₀</span><span class="en">A's reading x₀</span><small class="zh">也可以在舞台上直接点</small><small class="en">or press on the stage</small></label><output id="oX0" for="x0">0.10</output>
+        <input type="range" id="x0" min="0" max="1.5" step="0.01" value="0.1">
+      </div>
+      <div class="field">
+        <label for="y0"><span class="zh">B 的读数 y₀</span><span class="en">B's reading y₀</span></label><output id="oY0" for="y0">0.10</output>
+        <input type="range" id="y0" min="0" max="1.5" step="0.01" value="0.1">
+      </div>
+      <div class="chips" id="viewChips" role="group" aria-label="怎样看" data-aria-en="How to look">
+        <button class="chip" data-view="beat" aria-pressed="true"><span class="zh">逐拍看</span><span class="en">Beat by beat</span></button>
+        <button class="chip" data-view="round" aria-pressed="false"><span class="zh">两拍一轮看</span><span class="en">Round by round</span></button>
+      </div>
+      <p class="note"><span class="zh">每一拍两人同时更新：A 取 B 上一拍读数的余弦，B 取 A 上一拍读数的余弦。一轮是两拍，每人求两次余弦。</span><span class="en">At every beat both update at once: A takes the cosine of B's last reading, B the cosine of A's. A round is two beats, two cosines for each of them.</span></p>
+    </section>
+
+    <section class="panel sec" data-scenes="cut" hidden>
+      <h2><span class="zh">两段区间</span><span class="en">Two intervals</span><span class="aside">l₁ · l₂</span></h2>
+      <div class="field">
+        <label for="l1"><span class="zh">A 的长度 l₁</span><span class="en">Length of A, l₁</span></label><output id="oL1" for="l1">1.00</output>
+        <input type="range" id="l1" min="0.3" max="2" step="0.05" value="1">
+      </div>
+      <div class="field">
+        <label for="l2"><span class="zh">B 的长度 l₂</span><span class="en">Length of B, l₂</span></label><output id="oL2" for="l2">1.00</output>
+        <input type="range" id="l2" min="0.3" max="2" step="0.05" value="1">
+      </div>
+      <p class="note"><span class="zh">时间轴把间距 d 从 2.5 拉近到 0.04；也可以在舞台上左右拖。截断 ε = 0.01，熵以 c/3 为单位。</span><span class="en">The rail brings the gap d from 2.5 down to 0.04; you can also drag sideways on the stage. Cutoff ε = 0.01, entropies in units of c/3.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage still" id="stage" data-thumb aria-label="舞台：两个观察者的读数平面，或两段边界区间与它们的极小割" data-aria-en="Stage: the plane of the two observers' readings, or two boundary intervals and their minimal cuts">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+        <button class="chip" data-scene="mirror" aria-pressed="true"><span class="zh">互指</span><span class="en">Mirrors</span></button>
+        <button class="chip" data-scene="cut" aria-pressed="false"><span class="zh">极小割</span><span class="en">Min cut</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="pATitle"></h2><span id="pAMeta"></span></div>
+        <canvas id="plotA" aria-label="本场景的第一张小图" data-aria-en="First small plot of the scene"></canvas>
+      </section>
+      <section class="panel">
+        <div class="head"><h2 id="pBTitle"></h2><span id="pBMeta"></span></div>
+        <canvas id="plotB" aria-label="本场景的第二张小图" data-aria-en="Second small plot of the scene"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="roKeyL"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div><dt id="roL1"></dt><dd id="ro1">—</dd></div>
+        <div><dt id="roL2"></dt><dd id="ro2">—</dd></div>
+        <div class="wide"><dt id="roL3"></dt><dd id="ro3">—</dd></div>
+        <div><dt id="roL4"></dt><dd id="ro4">—</dd></div>
+        <div><dt id="roL5"></dt><dd id="ro5">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">本章的离散版本（不是舞台上的连续图）：宽度三桥图，对自然数 0 &lt; a ≤ b、0 &lt; c ≤ d，若 a² + b² ≤ 3ab 且 c² + d² ≤ 3cd，则 QMaxFlow(a, b, c, d) = QMinCut(a, b, c, d)，且 QMinCut(a, b, c, d) = min(a·d, b·c)：最小割离开桥内的 3ac，落到两侧外边界。已冻结：</span><span class="en">The discrete version in this chapter (not the continuous picture on the stage): for the bridge graph of width three and natural numbers 0 &lt; a ≤ b, 0 &lt; c ≤ d with a² + b² ≤ 3ab and c² + d² ≤ 3cd, QMaxFlow(a, b, c, d) = QMinCut(a, b, c, d), and QMinCut(a, b, c, d) = min(a·d, b·c): the minimal cut leaves the inner 3ac for the outer boundaries. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result" href="#" target="_blank" rel="noopener"><code>QuantumMaxFlowMinCut.result</code></a></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：Ryu–Takayanagi 的两区间极小曲面竞争（Ryu &amp; Takayanagi 2006、Headrick 2010）。舞台取最简单的情形——静态 AdS₃ 真空、一条直线边界上的两段区间——测地线长给出 S_分开 = ln(l₁/ε) + ln(l₂/ε)、S_连通 = ln(d/ε) + ln((l₁ + l₂ + d)/ε)（以 c/3 为单位），取两者较小者；连通的更短当且仅当领先阶互信息 I_RT &gt; 0，交点满足 d(l₁ + l₂ + d) = l₁l₂。不连通相里只是领先阶的 I_RT 为零，精确的量子互信息仍可有次领先贡献。</span><span class="en">Literature result, not formalized in this book: the competition of minimal surfaces for two intervals (Ryu &amp; Takayanagi 2006, Headrick 2010). The stage takes the simplest case, static AdS₃ vacuum with two intervals on a straight boundary, where geodesic lengths give S_separate = ln(l₁/ε) + ln(l₂/ε) and S_connected = ln(d/ε) + ln((l₁ + l₂ + d)/ε) (in units of c/3), and the smaller one counts; the connected one is shorter exactly when the leading-order mutual information I_RT is positive, and the crossing satisfies d(l₁ + l₂ + d) = l₁l₂. In the disconnected phase only the leading-order I_RT vanishes; the exact quantum mutual information can still have subleading contributions.</span></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">既有结果的应用（第 33 章例 ex-ch33-mutual-cosine-monotonic-lock 把第 24 章的余弦端点定理与现成实分析结果接起来，没有新增 Lean 定理）：g(x) = cos(cos x) 在全实轴上以 sin 1 压缩，故 x = cos y、y = cos x 只有一个实解 x = y = θ*，没有二周期的互执解（第 5–9 项）；g 在 (0, π/2) 上严格递增，起点在 (0, θ*) 时按轮取样从下方严格单调递增（第 12–14 项）；每拍的局部因子是 −√(1 − θ*²)，每轮是 1 − θ*²（第 20–23 项）。小数 θ* ≈ 0.739085、0.6736、0.4538 是数值。</span><span class="en">Application of existing results (Example ex-ch33-mutual-cosine-monotonic-lock of chapter 33 joins the cosine endpoint theorem of chapter 24 to existing real-analysis results, with no new Lean theorem): g(x) = cos(cos x) is a contraction with constant sin 1 on the whole real line, so x = cos y, y = cos x has one real solution only, x = y = θ*, with no two-cycle (clauses 5–9); g increases strictly on (0, π/2), so from a start in (0, θ*) the round-by-round samples increase strictly from below (clauses 12–14); the local factor of one beat is −√(1 − θ*²), of one round 1 − θ*² (clauses 20–23). The decimals θ* ≈ 0.739085, 0.6736 and 0.4538 are numerical.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数值演示，不是证明：轨道、误差比、两种割的长度与互信息都按双精度实时算出；d_crit 取二次方程的闭式根。</span><span class="en">A numerical illustration on the page, not a proof: orbits, error ratios, the lengths of both cuts and the mutual information are computed live in double precision; d_crit is the closed-form root of the quadratic.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">把两个坐标读成“两个观察者互相丈量”、把两段边界区间读成两位观察者的窗口、把连通的纠缠楔读成“互为故乡”，都是本书的诠释模型，不是上面任何一条结论推出来的。</span><span class="en">Reading the two coordinates as “two observers measuring each other”, the two boundary intervals as the windows of two observers, and the connected entanglement wedge as “each other's home” is this book's interpretive model, not something any of the results above implies.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="12" step="any" value="0" aria-label="时间轴：第几拍，或两段区间的间距" data-aria-en="Rail: the beat, or the gap between the two intervals">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>1</kbd> <kbd>2</kbd> <span class="zh">场景</span><span class="en">scene</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">两个场景回答第 33 章的同一个问题：两个观察者互相丈量时，会发生什么。“互指”画的是两人读数的平面，“极小割”画的是两段边界区间与它们的极小割。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>互指。</b>横轴是 A 的读数 x，纵轴是 B 的读数 y。两条青色曲线是两人的读法：A 读 B 得 x = cos y，B 读 A 得 y = cos x。每一拍两人同时更新，(x, y) ↦ (cos y, cos x)；琥珀色的矩形是这一拍（灰色的是走过的各拍）：A 横着走到自己的曲线，B 竖着走到自己的曲线，新的点在对角。两条曲线只在 (θ*, θ*) 相交（既有结果的应用：g = cos∘cos 在全实轴上压缩，没有二周期解，见例第 5–9 项）。</li>
+        <li><b>逐拍与逐轮。</b>两人起点相同时，这对读数始终在对角线上，每拍都越过 θ*，与孤立的余弦迭代一模一样。两拍一轮取样（空心的环），每个坐标做一次 g，只从一侧单调逼近。每轮误差约乘 sin²θ* ≈ 0.4538，正是每拍 −sin θ* ≈ −0.6736 的平方：一轮含两次余弦求值，按求值次数算并没有更快。</li>
+        <li><b>极小割。</b>灰线是边界，琥珀色是两段区间 A、B。候选的割是半圆形的测地线：各自的两条（A 上、B 上），或连通的两条（间隙上一条小的，整段上一条大的）。品红是较短的那一组，青色是它围出的纠缠楔；虚线是落选的一组。在 AdS₃ 真空里测地线长换成 S = ln(l/ε)（以 c/3 为单位），交点由 d(l₁ + l₂ + d) = l₁l₂ 给出，d_crit = [√((l₁ + l₂)² + 4l₁l₂) − (l₁ + l₂)]/2；l₁ = l₂ = 1 时 d_crit = √2 − 1 ≈ 0.414。互信息 I = max(0, S_分开 − S_连通) 与 ε 无关。这些是 Ryu–Takayanagi 与 Headrick 的文献结果，未在本书形式化；不连通相里为零的只是领先阶的 I_RT。</li>
+        <li><b>已验证的部分。</b>绿色框是本章引用的宽度三桥图最大流最小割命题：一个离散网络里最小割从桥内落到外边界。它不覆盖舞台上的连续半平面，两者只是同一类问题。</li>
+        <li><b>诠释。</b>“观察者”“互为故乡”“锁进同一个不动点”是本书的诠释模型（MODEL）。页面不声称这些并排的事实互相推出。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch33-all-beings-observers-and-mutual-attractors.html#ex-ch33-mutual-cosine-monotonic-lock" target="_top">第 33 章 · 同一余弦端点的定性动力学与数值账本</a> · <a href="../../zh/ch33-all-beings-observers-and-mutual-attractors.html#prop-ch33-bridge-reconnection-mincut" target="_top">桥图最大流最小割命题</a> · <a href="../../zh/ch33-all-beings-observers-and-mutual-attractors.html#rem-ch33-rt-reconnection-ckw-literature" target="_top">极小曲面重联相变的文献注记</a> · trureturing（所钉提交）：<a data-trureturing-path="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.lean" href="#" target="_blank" rel="noopener">QuantumMaxFlowMinCut.lean</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">Two scenes answer one question of chapter 33: what happens when two observers measure each other. “Mirrors” draws the plane of their two readings; “Min cut” draws two boundary intervals and their minimal cuts. The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>Mirrors.</b> The horizontal axis is A's reading x, the vertical axis B's reading y. The two cyan curves are how each reads the other: A reading B gives x = cos y, B reading A gives y = cos x. At every beat both update at once, (x, y) ↦ (cos y, cos x); the amber rectangle is this beat (grey ones are the beats already walked): A moves across to its curve, B moves up or down to its curve, and the new point is the opposite corner. The two curves meet only at (θ*, θ*) (an application of existing results: g = cos∘cos is a contraction on the whole real line, so there is no two-cycle; clauses 5–9 of the example).</li>
+        <li><b>Beats and rounds.</b> When both start alike, the pair stays on the diagonal and crosses θ* at every beat, exactly like the lone cosine iteration. Sampled every two beats (the hollow rings), each coordinate takes one step of g and closes in monotonically from one side. Each round multiplies the error by about sin²θ* ≈ 0.4538, the square of the −sin θ* ≈ −0.6736 of one beat: a round costs two cosine evaluations, so counted per evaluation it is no faster.</li>
+        <li><b>Min cut.</b> The grey line is the boundary, the amber segments are the two intervals A and B. The candidate cuts are semicircular geodesics: the separate pair (over A and over B) or the connected pair (a small one over the gap and a large one over the whole span). Magenta is the shorter pair, cyan the entanglement wedge it encloses; dashed is the pair that loses. In AdS₃ vacuum geodesic lengths turn into S = ln(l/ε) (in units of c/3), the crossing is d(l₁ + l₂ + d) = l₁l₂, so d_crit = [√((l₁ + l₂)² + 4l₁l₂) − (l₁ + l₂)]/2; for l₁ = l₂ = 1, d_crit = √2 − 1 ≈ 0.414. The mutual information I = max(0, S_separate − S_connected) does not depend on ε. These are literature results of Ryu–Takayanagi and Headrick, not formalized in this book; what vanishes in the disconnected phase is only the leading-order I_RT.</li>
+        <li><b>What is verified.</b> The green box is the max-flow min-cut proposition for the bridge graph of width three cited in this chapter: in a discrete network the minimal cut moves from inside the bridge to the outer boundaries. It does not cover the continuous half-plane on the stage; the two are only problems of the same kind.</li>
+        <li><b>Interpretation.</b> “Observers”, “each other's home” and “locking onto one fixed point” are this book's interpretive model (MODEL). The page does not claim that the facts shown side by side imply one another.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch33-all-beings-observers-and-mutual-attractors.html#ex-ch33-mutual-cosine-monotonic-lock" target="_top">Chapter 33 · Qualitative dynamics of the cosine endpoint and the numerical ledger</a> · <a href="../../en/ch33-all-beings-observers-and-mutual-attractors.html#prop-ch33-bridge-reconnection-mincut" target="_top">The bridge-graph max-flow min-cut proposition</a> · <a href="../../en/ch33-all-beings-observers-and-mutual-attractors.html#rem-ch33-rt-reconnection-ckw-literature" target="_top">The literature note on the reconnection transition of minimal surfaces</a> · trureturing (pinned commit): <a data-trureturing-path="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.lean" href="#" target="_blank" rel="noopener">QuantumMaxFlowMinCut.lean</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

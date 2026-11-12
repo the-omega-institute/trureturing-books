@@ -44,7 +44,12 @@ export const overflowX = (page) => page.evaluate(() => document.documentElement.
     few frames per second, so a suite should settle the page rather than hope that a frame has passed. */
 export async function settle(page, ms = 0) {
   if (ms) await page.waitForTimeout(ms);
-  await page.evaluate(() => { if (window.TRV && window.TRV.kit && window.TRV.kit.flush) window.TRV.kit.flush(); });
+  await page.evaluate(async () => {
+    const kit = window.TRV && window.TRV.kit;
+    if (!kit) return;
+    if (kit.ready) await kit.ready();          // three.js for kit.solid, fetched on its first call
+    if (kit.flush) kit.flush();
+  });
 }
 
 /** Wait until `fn`, evaluated in the page with `arg`, returns something truthy: resolves true as soon as it does and
@@ -65,7 +70,12 @@ export const viewportShare = (page, selector) => page.evaluate((sel) => {
 /** The fraction of a 2D canvas that is drawn on (sampled pixels with non-zero alpha): 0 for a blank canvas. */
 export const inkShare = (page, selector) => page.evaluate((sel) => {
   const cv = document.querySelector(sel); if (!cv || !cv.width || !cv.height) return 0;
-  const data = cv.getContext('2d').getImageData(0, 0, cv.width, cv.height).data;
+  let c2 = cv.getContext('2d');
+  if (!c2) {   // a WebGL canvas (kit.solid draws with preserveDrawingBuffer): read it through a 2D copy
+    const cp = document.createElement('canvas'); cp.width = cv.width; cp.height = cv.height;
+    c2 = cp.getContext('2d'); c2.drawImage(cv, 0, 0);
+  }
+  const data = c2.getImageData(0, 0, cv.width, cv.height).data;
   let drawn = 0, total = 0;
   for (let i = 3; i < data.length; i += 4 * 5) { total++; if (data[i] > 8) drawn++; }
   return total ? drawn / total : 0;
@@ -156,6 +166,82 @@ export async function session(opts = {}) {
   return { page, context, browser, origin, errors, results, check, goto, url, newPage, open, finish };
 }
 
+/** Pixel statistics of the WebGL canvas of the first kit.solid stage on the page: the share of drawn (opaque) pixels,
+    the spread of their luminance, and a 16-bin luminance histogram (for comparing two views). */
+export const solidPixels = (page) => page.evaluate(async () => {
+  const sc = window.TRV && window.TRV.solids && window.TRV.solids[0];
+  if (!sc) return null;
+  await sc.ready; window.TRV.kit.flush();
+  const cv = sc.el.querySelector('canvas.solid-gl');
+  if (!cv) return { share: 0, spread: 0, hist: [] };
+  const cp = document.createElement('canvas'); cp.width = cv.width; cp.height = cv.height;
+  const c = cp.getContext('2d'); c.drawImage(cv, 0, 0);
+  const d = c.getImageData(0, 0, cp.width, cp.height).data, hist = new Array(16).fill(0);
+  let n = 0, all = 0, s1 = 0, s2 = 0;
+  for (let i = 0; i < d.length; i += 4 * 3) {
+    all++;
+    if (d[i + 3] < 250) continue;
+    const y = (0.2126 * d[i] + 0.7152 * d[i + 1] + 0.0722 * d[i + 2]) / 255;
+    n++; s1 += y; s2 += y * y; hist[Math.min(15, Math.floor(y * 16))]++;
+  }
+  const mean = n ? s1 / n : 0;
+  return { share: all ? n / all : 0, spread: n ? Math.sqrt(Math.max(0, s2 / n - mean * mean)) : 0, hist: hist.map((h) => (n ? h / n : 0)) };
+});
+
+/**
+ * The checks of a page that draws a lit solid with kit.solid (stageFirstChecks runs them with { solid: true } or
+ * { solid: { … } }). `page` is open on the visualization.
+ *   lit solid   the stage's WebGL canvas is drawn on over ≥ minShare (0.12) of its pixels, opaquely, and their
+ *               luminance spreads (σ ≥ minSpread, 0.04): a shaded body, not a flat silhouette or a wireframe
+ *   turning     after the camera turns (drag across the stage, or opts.turn(page)) the distribution of light and
+ *               shade changes (histogram distance ≥ 0.05)
+ *   hidden mark a mark (bead or ring) that a solid hides cannot be picked, a visible one can (skipped when the frame
+ *               has no hidden mark, or no visible one)
+ *   resting     inside a book the WebGL context is given back after a rest, the frame stays on the 2D canvas, and a
+ *               touch takes it back (skipped with { rest: false })
+ */
+export async function solidChecks(T, slug, id, page, opts = {}) {
+  const o = { minShare: 0.12, minSpread: 0.04, rest: true, ...opts };
+  const { check } = T;
+  await settle(page);
+  const a = await solidPixels(page);
+  check('solid: the stage draws a solid (kit.solid)', !!a, 'no kit.solid stage on the page');
+  if (!a) return;
+  check(`solid: an opaque body covers ≥ ${Math.round(o.minShare * 100)}% of the stage`, a.share >= o.minShare, `${(a.share * 100).toFixed(1)}%`);
+  check('solid: light and shade spread across the body', a.spread >= o.minSpread, `σ = ${a.spread.toFixed(3)}`);
+  if (o.turn) await o.turn(page);
+  else {
+    const b = await page.evaluate(() => { const r = window.TRV.solids[0].el.getBoundingClientRect(); return [r.left, r.top, r.width, r.height]; });
+    const y = b[1] + b[3] * 0.08;
+    await page.mouse.move(b[0] + b[2] * 0.06, y); await page.mouse.down();
+    for (let k = 1; k <= 6; k++) await page.mouse.move(b[0] + b[2] * (0.06 + 0.05 * k), y);
+    await page.mouse.up();
+  }
+  const c = await solidPixels(page);
+  const dist = c.hist.reduce((s, h, k) => s + Math.abs(h - a.hist[k]), 0) / 2;
+  check('solid: turning the camera changes light and shade', dist >= 0.05, `histogram distance ${dist.toFixed(3)}`);
+  const pick = await page.evaluate(() => {
+    const sc = window.TRV.solids[0], ms = sc.marks(), hid = ms.find((m) => m.hidden), vis = ms.find((m) => !m.hidden);
+    const at = (m) => sc.nearest({ clientX: m.x, clientY: m.y }, [m.p], 6);
+    return { hidden: hid ? at(hid) : null, visible: vis ? at(vis) : null };
+  });
+  if (pick.hidden != null) check('solid: a mark behind the solid cannot be picked', pick.hidden === -1);
+  if (pick.visible != null) check('solid: a visible mark can be picked', pick.visible === 0);
+  if (o.rest) {
+    const em = await T.open(slug, id, '?embed=1&lang=zh', { viewport: { width: 740, height: 620 } });
+    await settle(em);
+    // a card that plays when it scrolls into view keeps the context until it stops: allow for slow frames
+    const parked = await until(em, () => window.TRV.solids && window.TRV.solids[0] && window.TRV.solids[0].parked(), null, 120000);
+    const shown = await em.evaluate(() => { const sc = window.TRV.solids[0], st = sc.el.querySelector('canvas:not(.solid-gl)'); return { gl: !!sc.el.querySelector('canvas.solid-gl'), still: !!st && st.style.visibility === 'visible' }; });
+    check('solid: inside a book the WebGL context is given back after a rest, the frame stays as a picture', parked && !shown.gl && shown.still, JSON.stringify(shown));
+    const box = await em.evaluate(() => { const r = window.TRV.solids[0].el.getBoundingClientRect(); return [r.left + 8, r.top + r.height - 8]; });
+    await em.mouse.move(box[0], box[1]); await em.mouse.down(); await em.mouse.up();
+    await settle(em);
+    check('solid: a touch takes the context back', await em.evaluate(() => !window.TRV.solids[0].parked()));
+    await em.context().close();
+  }
+}
+
 /**
  * Honest labels (skills/book-viz, "如实标注"), checked on the page as served. `page` is open on the visualization.
  *   every Lean link names a theorem of trureturing.lock.json and points at its pinned commit, file and line;
@@ -179,6 +265,159 @@ export async function evidenceChecks(T, slug, id, page) {
   if (drawer != null) check('evidence: the drawer says in both languages that the page is not a proof', /不是证明/.test(drawer) && /not a proof/.test(drawer));
 }
 
+const RAIL_RANGE = 'footer.rail .clock input[type=range]';
+/** Frame widths of the whole lab inside a chapter: phones (a 390px page leaves the frame 334px), and both sides of
+    the 600px breakpoint of theme.css. */
+const RAIL_WIDTHS = [320, 334, 360, 600, 601];
+
+/** The clock rail as laid out now: sideways overflow of the document and of the body (in a book's frame the body is
+    the scroller, so the document alone reports 0 for a rail that sticks out), the slider, and what is wrong with the
+    rendered controls. null when the page has no rail. */
+const railState = (page) => page.evaluate((sel) => {
+  const rail = document.querySelector('footer.rail'); if (!rail) return null;
+  const root = document.documentElement, body = document.body, vw = root.clientWidth, range = document.querySelector(sel);
+  const bad = [];
+  for (const el of rail.querySelectorAll('.transport button, .clock .tau, .clock input')) {
+    if (!el.getClientRects().length) continue;   // not rendered (a cited figure hides the speed chips)
+    const r = el.getBoundingClientRect(), what = el.id || el.dataset.speed || el.className;
+    if (r.width < 1 || r.height < 1 || r.left < -0.5 || r.right > vw + 0.5) bad.push(`${what}: ${r.left.toFixed(0)} … ${r.right.toFixed(0)} × ${r.height.toFixed(0)} of ${vw}`);
+    if (!el.matches('.tau') && !(el.getAttribute('aria-label') || el.textContent).trim()) bad.push(`${what}: no name`);
+  }
+  if (!range) bad.push('no slider');
+  const tau = rail.querySelector('.clock .tau');
+  const num = (s, empty) => (s === '' ? empty : parseFloat(s));   // an absent min is the default 0
+  return {
+    overflow: Math.max(root.scrollWidth - root.clientWidth, body.scrollWidth - body.clientWidth), bad,
+    width: range ? range.getBoundingClientRect().width : 0, value: range ? parseFloat(range.value) : NaN, max: range ? parseFloat(range.max) : NaN,
+    min: range ? num(range.min, 0) : NaN, disabled: !!range && range.matches(':disabled'),
+    focused: !!range && document.activeElement === range, readout: tau ? tau.textContent.trim() : null
+  };
+}, RAIL_RANGE);
+
+/** A range input reports its value as a decimal string, and the browser writes the values it sets itself (End, a
+    drag to the edge) with RANGE_DIGITS significant digits: End on a clock whose max is 2π = 6.283185307179586 reads
+    6.28318530717959. Two readings are the same number when they agree to that precision (one unit in the last
+    serialized digit; the rounding itself moves a value by at most half of it). A clock that stops a keyboard step or
+    a pixel short of its end is many orders of magnitude outside this. */
+const RANGE_DIGITS = 15;
+const sameNumber = (a, b) => Number.isFinite(a) && Number.isFinite(b) && Math.abs(a - b) <= Math.max(Math.abs(a), Math.abs(b)) * 10 ** (1 - RANGE_DIGITS);
+/** The slider runs from 0 over a finite positive range and its value lies in it. */
+const railDomain = (s) => s.min === 0 && Number.isFinite(s.max) && s.max > 0 && Number.isFinite(s.value) && s.value >= 0 && (s.value <= s.max || sameNumber(s.value, s.max));
+
+/** A page may open on a card that has nothing to run (an empty program) and disable its clock until there is
+    something. Do what a reader does then: pick the experiment cards in turn (the card itself where it is rendered,
+    else the ▶ of the tour bar) until one enables the slider. Returns that card, or null when none does. */
+async function enableRail(page, wait) {
+  const disabled = async () => { await settle(page, wait); const s = await railState(page); return !s || s.disabled; };
+  const usable = (sel) => page.evaluate((s) => { const el = document.querySelector(s); return !!el && !el.disabled && el.getClientRects().length > 0; }, sel);
+  const press = (sel) => page.click(sel, { timeout: 5000 }).then(() => true, () => false);
+  const pressed = () => page.evaluate(() => { const b = document.querySelector('[data-preset][aria-pressed="true"]'); return b ? b.dataset.preset : null; });
+  const cards = await page.$$eval('[data-preset]', (els) => els.map((e) => e.dataset.preset));
+  for (const c of cards) {
+    const sel = `[data-preset="${c}"]`;
+    if (!(await usable(sel)) || !(await press(sel))) continue;
+    if (!(await disabled())) return c;
+  }
+  const next = '.tour [data-tour="next"]';
+  for (let i = 0; i < cards.length; i++) {
+    if (!(await usable(next)) || !(await press(next))) break;
+    if (!(await disabled())) return (await pressed()) || 'tour';
+  }
+  return null;
+}
+
+/** The rail of the whole lab in narrow frames of a book, in one language (see stageFirstChecks, "rail"). */
+async function railChecks(T, slug, id, lang, wait = 120) {
+  const { check } = T;
+  const page = await T.open(slug, id, `?embed=1&lang=${lang}`, { viewport: { width: 334, height: 620 }, locale: lang === 'zh' ? 'zh-CN' : 'en-US' });
+  await settle(page, 400);
+  if (!(await railState(page))) { await page.context().close(); return; }
+  const layout = async (state) => {
+    for (const w of RAIL_WIDTHS) {
+      await page.setViewportSize({ width: w, height: 620 }); await settle(page, 60);
+      const g = await railState(page), tag = `rail (${lang}, ${w}px frame${state})`;
+      check(`${tag}: neither the document nor the body scrolls sideways`, g.overflow <= 0, `${g.overflow}px`);
+      check(`${tag}: the transport, the readout and the slider are inside the frame and named`, g.bad.length === 0, g.bad.slice(0, 4).join(' | '));
+    }
+    await page.setViewportSize({ width: 334, height: 620 }); await settle(page, 60);
+  };
+  await layout('');   // as the page opens, whatever its clock has to run
+
+  // use it as a reader does, in the frame of a 390px page: press at a quarter, drag to 70%, then the keyboard
+  const tag = `rail (${lang}, 334px frame)`;
+  const unusable = async (why) => {   // say so instead of waiting for a control that never becomes usable
+    check(`${tag}: dragging the slider moves the clock`, false, why);
+    check(`${tag}: Home, → and End move the clock and the readout`, false, why);
+    await page.context().close();
+  };
+  if ((await railState(page)).disabled) {
+    // nothing to run yet: a reader picks an experiment, and the rail must work then (and still fit)
+    const card = await enableRail(page, wait);
+    check(`${tag}: a slider that starts disabled is enabled by an experiment card`, !!card, card ? `card ${card}` : 'no experiment card enables the slider');
+    if (!card) return unusable('the slider stays disabled');
+    await layout(`, card ${card}`);
+  }
+  const at = await page.evaluate((sel) => {
+    const el = document.querySelector(sel); if (!el) return null;
+    el.scrollIntoView({ block: 'center' });
+    const r = el.getBoundingClientRect(), y = r.top + r.height / 2, x = (f) => r.left + r.width * f;
+    return { x25: x(0.25), x70: x(0.7), y, width: r.width, hit: [0.25, 0.7].every((f) => document.elementFromPoint(x(f), y) === el) };
+  }, RAIL_RANGE);
+  check(`${tag}: the slider can be pressed where it is drawn`, !!at && at.hit, JSON.stringify(at));
+  if (!at || !at.hit) return unusable('the slider cannot be pressed');
+  const start = await railState(page);
+  check(`${tag}: the slider runs from 0 over a finite positive range`, railDomain(start), JSON.stringify({ min: start.min, max: start.max, value: start.value }));
+  await page.mouse.move(at.x25, at.y); await page.mouse.down(); await settle(page);
+  const a = await railState(page);
+  await page.mouse.move(at.x70, at.y, { steps: 6 }); await page.mouse.up(); await settle(page);
+  const b = await railState(page);
+  const near = (s, f) => railDomain(s) && Math.abs(s.value / s.max - f) < 0.08;
+  check(`${tag}: dragging the slider moves the clock`, near(a, 0.25) && near(b, 0.7), `${a.value} → ${b.value} of ${b.max}`);
+  await page.keyboard.press('Home'); await settle(page); const home = await railState(page);
+  await page.keyboard.press('ArrowRight'); await settle(page); const right = await railState(page);
+  await page.keyboard.press('End'); await settle(page); const end = await railState(page);
+  // the end is compared at the precision the browser serializes it with (sameNumber); the start is exactly 0
+  check(`${tag}: Home, → and End move the clock and the readout`,
+    b.focused && [home, right, end].every(railDomain) && home.value === 0 && right.value > 0 && right.value < end.value
+      && !sameNumber(right.value, end.value) && sameNumber(end.value, end.max) && home.readout !== end.readout,
+    JSON.stringify({ focused: b.focused, home: [home.value, home.readout], right: right.value, end: [end.value, end.readout], max: end.max }));
+  await page.context().close();
+}
+
+/** The ▶ / ❚❚ button of the clock (kit.clock sets its aria-pressed to whether the clock plays). */
+const PLAY = 'footer.rail #play';
+
+/** Space right after a card was clicked with the pointer (see stageFirstChecks, "keys"): it must play or pause the
+    clock, not press the card again (which would restart it), so the click must not leave the focus on the card.
+    Skipped on a page without a clock button, and on one where no card leaves that button enabled. `page` is open on
+    the visualization; `wait` is the settle after a click (ms). */
+export async function spaceAfterCard(T, page, wait = 120) {
+  const { check } = T;
+  const state = () => page.evaluate((sel) => { const b = document.querySelector(sel); return b ? b.getAttribute('aria-pressed') : null; }, PLAY);
+  const usable = () => page.evaluate((sel) => { const b = document.querySelector(sel); return !!b && !b.disabled && b.getClientRects().length > 0; }, PLAY);
+  if ((await state()) == null) return;
+  const cards = await page.$$eval('[data-preset]', (els) => els.filter((e) => !e.disabled && e.getClientRects().length > 0).map((e) => e.dataset.preset));
+  let card = null;
+  for (const c of cards) {
+    await page.click(`[data-preset="${c}"]`); await settle(page, wait);
+    if (await usable()) { card = c; break; }
+  }
+  if (!card) return;
+  // the button's state is written synchronously by play() and pause(), so it is read at once after each key: a clock
+  // that runs out by itself turns ▶ off but never on, and pressing the card again leaves both readings alike
+  const run = async () => {
+    await page.click(`[data-preset="${card}"]`); await settle(page, wait);
+    const s0 = await state();
+    await page.keyboard.press(' '); const s1 = await state();
+    await page.keyboard.press(' '); const s2 = await state();
+    return { ok: s0 !== s1 && s1 !== s2, detail: `card ${card}: playing ${s0} → Space → ${s1} → Space → ${s2}` };
+  };
+  let r = await run();
+  if (!r.ok) r = await run();   // once more: a clock may run out between reading it and the key (never twice)
+  check('keyboard: after a card is clicked, Space plays and pauses the clock', r.ok, r.detail);
+  await page.evaluate(() => { if (document.activeElement && document.activeElement.blur) document.activeElement.blur(); });
+}
+
 /**
  * The checks every stage-first page must pass, whatever it shows (skills/book-viz, "质量门"). They cannot tell a good
  * picture from a bad one, but they catch the regressions that make a page unreadable inside a book:
@@ -188,19 +427,30 @@ export async function evidenceChecks(T, slug, id, page) {
  *   English   no Chinese left on screen after going through every card
  *   embed     (740 × 620, ?embed=1) the page chrome is gone, the stage starts at the top and fills most of the first
  *             screen, the tour bar is on that first screen, nothing scrolls sideways
+ *   rail      (?embed=1 in frames 320 … 601 wide, the whole lab inside a chapter on a phone, in both languages)
+ *             neither the document nor the body scrolls sideways; every transport control, the readout and the
+ *             slider are rendered (not collapsed), inside the frame and named; the slider can be pressed, runs from 0
+ *             over a finite positive range, follows a pointer drag and answers Home / → / End (the end compared at
+ *             the precision a range input serializes numbers with), and the readout follows. A page that opens
+ *             with nothing to run and its slider disabled is laid out as it opens, then an experiment card is
+ *             picked as a reader would and the same checks run on the enabled rail; no card enabling it is a failure
  *   figure    (740 × 500, ?embed=1&preset=<card>, what a chapter shows when it cites one card) the page opens on
  *             that card; the stage, the one-sentence note and ◀ ▶ fit the frame and nothing scrolls inside it;
  *             ?shot=1 (the still that PDF/EPUB print) fills the frame on the same card, labels kept, in one language
  *   phone     (390 × 844) nothing scrolls sideways and the stage comes before the control deck
  *   cover     (?thumb=1) [data-thumb] fills 1280 × 720, window.TRV_THUMB runs, and the cover canvas is not blank
+ *   keys      (desktop) right after a card is clicked with the pointer, Space plays and pauses the clock instead of
+ *             pressing the card again (pages without a ▶ button in footer.rail, or none a card enables, skip it)
  *   motion    under prefers-reduced-motion the page loads and a card still applies
  * and no page error, console error or failed request anywhere.
  * opts: stage ('.stage'), cover (selector of the canvas the cover draws on; default '[data-thumb] canvas'),
  *       minShare (0.28), minEmbedShare (0.4), cards (true), tour (true), labels (true), evidence (true),
- *       settle (ms to wait after a click).
+ *       rail (true; a page without footer.rail is not checked), keys (true; false for a page that does not bind
+ *       Space to its clock), settle (ms to wait after a click), solid (false; true or the options of solidChecks for a
+ *       page that draws a lit solid with kit.solid).
  */
 export async function stageFirstChecks(T, slug, id, opts = {}) {
-  const o = { stage: '.stage', cover: '[data-thumb] canvas', minShare: 0.28, minEmbedShare: 0.4, cards: true, tour: true, labels: true, evidence: true, settle: 120, ...opts };
+  const o = { stage: '.stage', cover: '[data-thumb] canvas', solid: false, minShare: 0.28, minEmbedShare: 0.4, cards: true, tour: true, labels: true, evidence: true, rail: true, keys: true, settle: 120, ...opts };
   const { check } = T;
   const cardIds = (page) => page.$$eval('[data-preset]', (els) => els.map((e) => e.dataset.preset));
   const runCards = async (page, tag) => {
@@ -235,6 +485,8 @@ export async function stageFirstChecks(T, slug, id, opts = {}) {
     check('desktop: Escape closes the drawer', await page.evaluate(() => document.getElementById('drawer').hidden));
   }
   if (o.evidence) await evidenceChecks(T, slug, id, page);
+  if (o.solid) await solidChecks(T, slug, id, page, o.solid === true ? {} : o.solid);
+  if (o.cards && o.keys) await spaceAfterCard(T, page, o.settle);
 
   // English
   await page.click('[data-lang-set="en"]'); await settle(page, 150);
@@ -269,6 +521,9 @@ export async function stageFirstChecks(T, slug, id, opts = {}) {
     check('embed: the tour bar names the experiment', (await embed.textContent('.tour .what')).trim().length > 8);
   }
   await embed.context().close();
+
+  // rail: the whole lab in the narrow frame of a chapter read on a phone
+  if (o.rail) for (const lang of ['zh', 'en']) await railChecks(T, slug, id, lang, o.settle);
 
   // cited figure: a chapter cites one card with `::: {.viz src=… preset=…}`
   if (o.cards) {

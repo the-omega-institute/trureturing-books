@@ -1,34 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch24-two-series" data-lang="zh" viewBox="0 0 480 330" width="480" height="330" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="一条青色的曲线 y = A(x) = 2x + 2 arcsin x，从原点升到 x = 1 处的 2 + π。曲线上标出一点 (θ*, π)。从横轴上的 θ* ≈ 0.739 竖直向上走到曲线、再水平向左走到纵轴，读出 π，这是级数 A 的方向；反过来从纵轴上的 π 水平向右走到曲线、再向下走到横轴，读回 θ*，这是复合逆 B 的方向（品红虚线）。">
-<title>一条青色的曲线 y = A(x) = 2x + 2 arcsin x，从原点升到 x = 1 处的 2 + π。曲线上标出一点 (θ*, π)。从横轴上的 θ* ≈ 0.739 竖直向上走到曲线、再水平向左走到纵轴，读出 π，这是级数 A 的方向；反过来从纵轴上的 π 水平向右走到曲线、再向下走到横轴，读回 θ*，这是复合逆 B 的方向（品红虚线）。</title>
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch24-two-series" data-lang="zh" viewBox="0 0 480 330" width="480" height="330" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="一条青色的曲线 y = A(x) = 2x + 2 arcsin x，从原点升到 x = 1 处的 2 + π。曲线上标出一点 (θ*, π)。从横轴上的 θ* ≈ 0.739 竖直向上走到曲线、再水平向左走到纵轴，读出 π，这是级数 A 的方向；反过来沿同一条路，从纵轴上的 π 水平向右走到这一点、再向下走到横轴，读回 θ*，这是复合逆 B 的方向（叠在青线上的品红细虚线）。">
+<title>一条青色的曲线 y = A(x) = 2x + 2 arcsin x，从原点升到 x = 1 处的 2 + π。曲线上标出一点 (θ*, π)。从横轴上的 θ* ≈ 0.739 竖直向上走到曲线、再水平向左走到纵轴，读出 π，这是级数 A 的方向；反过来沿同一条路，从纵轴上的 π 水平向右走到这一点、再向下走到横轴，读回 θ*，这是复合逆 B 的方向（叠在青线上的品红细虚线）。</title>
 <style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
 <line x1="70" y1="280" x2="430" y2="280" class="ts-dim" stroke-width="1.3" fill="none"/>
 <line x1="70" y1="280" x2="70" y2="285" class="ts-dim" stroke-width="1.2" fill="none"/>
-<text class="tf-dim" x="70" y="298" font-size="13" text-anchor="middle">0</text>
+<text class="tf-dim" x="70" y="299" font-size="14" text-anchor="middle">0</text>
 <line x1="236.67" y1="280" x2="236.67" y2="285" class="ts-dim" stroke-width="1.2" fill="none"/>
-<text class="tf-dim" x="236.67" y="298" font-size="13" text-anchor="middle">0.5</text>
+<text class="tf-dim" x="236.67" y="299" font-size="14" text-anchor="middle">0.5</text>
 <line x1="403.33" y1="280" x2="403.33" y2="285" class="ts-dim" stroke-width="1.2" fill="none"/>
-<text class="tf-dim" x="403.33" y="298" font-size="13" text-anchor="middle">1</text>
+<text class="tf-dim" x="403.33" y="299" font-size="14" text-anchor="middle">1</text>
 <line x1="70" y1="28" x2="70" y2="280" class="ts-dim" stroke-width="1.3" fill="none"/>
 <line x1="65" y1="280" x2="70" y2="280" class="ts-dim" stroke-width="1.2" fill="none"/>
-<text class="tf-dim" x="62" y="284.68" font-size="13" text-anchor="end">0</text>
+<text class="tf-dim" x="62" y="285.04" font-size="14" text-anchor="end">0</text>
 <line x1="65" y1="233.33" x2="70" y2="233.33" class="ts-dim" stroke-width="1.2" fill="none"/>
-<text class="tf-dim" x="62" y="238.01" font-size="13" text-anchor="end">1</text>
+<text class="tf-dim" x="62" y="238.37" font-size="14" text-anchor="end">1</text>
 <line x1="65" y1="186.67" x2="70" y2="186.67" class="ts-dim" stroke-width="1.2" fill="none"/>
-<text class="tf-dim" x="62" y="191.35" font-size="13" text-anchor="end">2</text>
+<text class="tf-dim" x="62" y="191.71" font-size="14" text-anchor="end">2</text>
 <line x1="65" y1="93.33" x2="70" y2="93.33" class="ts-dim" stroke-width="1.2" fill="none"/>
-<text class="tf-dim" x="62" y="98.01" font-size="13" text-anchor="end">4</text>
+<text class="tf-dim" x="62" y="98.37" font-size="14" text-anchor="end">4</text>
 <line x1="65" y1="46.67" x2="70" y2="46.67" class="ts-dim" stroke-width="1.2" fill="none"/>
-<text class="tf-dim" x="62" y="51.35" font-size="13" text-anchor="end">5</text>
+<text class="tf-dim" x="62" y="51.71" font-size="14" text-anchor="end">5</text>
 <path d="M70 280 L72.08 278.83 L74.17 277.67 L76.25 276.5 L78.33 275.33 L80.42 274.17 L82.5 273 L84.58 271.83 L86.67 270.66 L88.75 269.5 L90.83 268.33 L92.92 267.16 L95 265.99 L97.08 264.82 L99.17 263.66 L101.25 262.49 L103.33 261.32 L105.42 260.15 L107.5 258.98 L109.58 257.81 L111.67 256.64 L113.75 255.46 L115.83 254.29 L117.92 253.12 L120 251.95 L122.08 250.77 L124.17 249.6 L126.25 248.42 L128.33 247.25 L130.42 246.07 L132.5 244.9 L134.58 243.72 L136.67 242.54 L138.75 241.36 L140.83 240.18 L142.92 239 L145 237.82 L147.08 236.64 L149.17 235.45 L151.25 234.27 L153.33 233.08 L155.42 231.9 L157.5 230.71 L159.58 229.52 L161.67 228.33 L163.75 227.14 L165.83 225.95 L167.92 224.76 L170 223.56 L172.08 222.37 L174.17 221.17 L176.25 219.97 L178.33 218.77 L180.42 217.57 L182.5 216.37 L184.58 215.17 L186.67 213.96 L188.75 212.75 L190.83 211.54 L192.92 210.33 L195 209.12 L197.08 207.91 L199.17 206.69 L201.25 205.48 L203.33 204.26 L205.42 203.04 L207.5 201.81 L209.58 200.59 L211.67 199.36 L213.75 198.13 L215.83 196.9 L217.92 195.67 L220 194.44 L222.08 193.2 L224.17 191.96 L226.25 190.71 L228.33 189.47 L230.42 188.22 L232.5 186.97 L234.58 185.72 L236.67 184.46 L238.75 183.21 L240.83 181.94 L242.92 180.68 L245 179.41 L247.08 178.14 L249.17 176.87 L251.25 175.59 L253.33 174.31 L255.42 173.03 L257.5 171.74 L259.58 170.45 L261.67 169.16 L263.75 167.86 L265.83 166.56 L267.92 165.25 L270 163.94 L272.08 162.63 L274.17 161.31 L276.25 159.98 L278.33 158.65 L280.42 157.32 L282.5 155.98 L284.58 154.64 L286.67 153.29 L288.75 151.94 L290.83 150.58 L292.92 149.21 L295 147.84 L297.08 146.47 L299.17 145.08 L301.25 143.69 L303.33 142.3 L305.42 140.89 L307.5 139.48 L309.58 138.06 L311.67 136.64 L313.75 135.2 L315.83 133.76 L317.92 132.31 L320 130.85 L322.08 129.38 L324.17 127.9 L326.25 126.41 L328.33 124.91 L330.42 123.39 L332.5 121.87 L334.58 120.33 L336.67 118.79 L338.75 117.22 L340.83 115.65 L342.92 114.06 L345 112.45 L347.08 110.82 L349.17 109.18 L351.25 107.52 L353.33 105.84 L355.42 104.14 L357.5 102.42 L359.58 100.67 L361.67 98.89 L363.75 97.09 L365.83 95.26 L367.92 93.39 L370 91.49 L372.08 89.55 L374.17 87.56 L376.25 85.53 L378.33 83.44 L380.42 81.29 L382.5 79.06 L384.58 76.76 L386.67 74.36 L388.75 71.85 L390.83 69.2 L392.92 66.37 L395 63.31 L397.08 59.91 L399.17 56 L401.25 51.08 L403.33 40.06" class="ts-cyan" stroke-width="2.4" stroke-linejoin="round" fill="none"/>
 <circle cx="403.33" cy="40.06" r="3.4" class="tf-cyan"/>
-<text class="tf-cyan" x="393.33" y="42.74" font-size="13" text-anchor="end">2 + π</text>
-<line x1="316.36" y1="280" x2="316.36" y2="146.19" class="ts-cyan" stroke-width="1.8" fill="none"/>
-<path d="M316.36 139.39 L319.72 147.39 L313 147.39Z" class="tf-cyan"/>
-<line x1="312.36" y1="133.39" x2="78.8" y2="133.39" class="ts-cyan" stroke-width="1.8" fill="none"/>
-<path d="M72 133.39 L80 130.03 L80 136.75Z" class="tf-cyan"/>
-<line x1="70" y1="140.39" x2="316.36" y2="140.39" class="ts-magenta" stroke-width="1.6" stroke-dasharray="5 3" fill="none"/>
-<line x1="323.36" y1="140.39" x2="323.36" y2="271.2" class="ts-magenta" stroke-width="1.6" stroke-dasharray="5 3" fill="none"/>
-<path d="M323.36 278 L320 270 L326.72 270Z" class="tf-magenta"/>
+<text class="tf-cyan" x="393.33" y="43.1" font-size="14" text-anchor="end">2 + π</text>
+<line x1="316.36" y1="280" x2="316.36" y2="147.04" class="ts-cyan" stroke-width="2.8" fill="none"/>
+<path d="M316.36 139.39 L320.14 148.39 L312.58 148.39Z" class="tf-cyan"/>
+<line x1="312.36" y1="133.39" x2="79.65" y2="133.39" class="ts-cyan" stroke-width="2.8" fill="none"/>
+<path d="M72 133.39 L81 129.61 L81 137.17Z" class="tf-cyan"/>
+<line x1="74" y1="133.39" x2="302.41" y2="133.39" class="ts-magenta" stroke-width="1.3" stroke-dasharray="5 3" fill="none"/>
+<path d="M308.36 133.39 L301.36 136.33 L301.36 130.45Z" class="tf-magenta"/>
+<line x1="316.36" y1="141.39" x2="316.36" y2="272.05" class="ts-magenta" stroke-width="1.3" stroke-dasharray="5 3" fill="none"/>
+<path d="M316.36 278 L313.42 271 L319.3 271Z" class="tf-magenta"/>
 <circle cx="316.36" cy="133.39" r="5.2" class="ts-bg tf-ink" stroke-width="1.4"/>
 <text class="tf-ink" x="62" y="138.79" font-size="15" text-anchor="end" font-weight="600">π</text>
 <text class="tf-ink" x="316.36" y="314" font-size="14" text-anchor="middle" font-weight="600"><tspan font-style="italic">θ</tspan><tspan dy="-0.42em" font-size="72%">∗</tspan><tspan dy="0.42em"> ≈ 0.739</tspan></text>

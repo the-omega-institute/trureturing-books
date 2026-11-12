@@ -16,7 +16,7 @@
 
 为什么仅靠“Alice 球面上的箭头 $\vv{r} \in \mathbb{R}^3$”加上“Bob 球面上的箭头 $\vv{s} \in \mathbb{R}^3$”，永远拼不出两体量子态的真实版图？让我们先做一笔严格的实维数与正交子空间审计。
 
-对任意自然数维数 $d \in \mathbb{N}$，全体 $d \times d$ 复厄米矩阵在实数域 $\mathbb{R}$ 上构成一个 $d^2$ 维实向量空间，记作 `HermitianSpace d`。赋予它典范的实希尔伯特—施密特（Hilbert–Schmidt）内积
+对任意正整数维数 $d \ge 1$，全体 $d \times d$ 复厄米矩阵在实数域 $\mathbb{R}$ 上构成一个 $d^2$ 维实向量空间，记作 `HermitianSpace d`。赋予它典范的实希尔伯特—施密特（Hilbert–Schmidt）内积
 
 $$
 \langle A, B\rangle_{\mathrm{HS}} = \operatorname{Re}\Tr(A^* B) = \operatorname{Re}\Tr(AB),
@@ -274,7 +274,7 @@ $$
 这条推论是算子恒等式；Lean 文件的说明明确写着，它不陈述任何期望值上界。要由它走到“经典门槛”，还需一段手工推导：$S$ 是厄米矩阵的克罗内克积之和与差，本身厄米；$S^2 = 4I$ 迫使每个特征值 $\lambda$ 满足 $\lambda^2 = 4$，即 $\lambda = \pm 2$；于是 $2I - S$ 与 $2I + S$ 都半正定，对任意密度矩阵 $\rho$ 有 $-2 \le \operatorname{Re}\Tr(\rho S) \le 2$。**只要有一方的两次提问不分先后，量子关联就跨不过经典门槛。**
 
 ::: {.viz src="chsh-dial" preset="collinear" height="500"}
-**一侧的两次提问重合，S 就越不过 2。** Alice 的两支实线箭头重合在 $Z$ 上，她那块品红面积缩成一条线，量尺上品红的刻度落到 $2$，与经典上界的虚线重合；时间轴转动 Bob 的一对虚线箭头，琥珀色的横线按 $2\cos\varphi$ 起落，最高只碰到 $2$（[@cor-chsh-local-commuting-collapse]）。
+**一侧的两次提问重合，S 就越不过 2。** Alice 的两支实线箭头重合在 $Z$ 上，她那块品红面积缩成一条线，量尺上品红的刻度落到 $2$，与经典上界的虚线重合；时间轴转动 Bob 的一对虚线箭头，琥珀色的横线按 $2\cos\varphi$ 起落，最高只碰到 $2$；图停在 $\varphi = -40^\circ$，横线在 $2\cos 40^\circ \approx 1.53$，品红的刻度在它上方（[@cor-chsh-local-commuting-collapse]）。
 :::
 
 **两侧面积都只张开一部分。** 回到单比特：设 Alice 两轴的夹角为 $\alpha$、Bob 两轴的夹角为 $\beta$，则 $\norm{\vv{a}_0 \times \vv{a}_1} = \sin\alpha$，$\norm{\vv{b}_0 \times \vv{b}_1} = \sin\beta$。泡利方向算子 $\vv{u}\cdot\vv{\sigma}$ 的特征值是 $\pm\norm{\vv{u}}$，所以由上面的手算公式，$C$ 只有两个特征值 $\pm 4\sin\alpha\sin\beta$（手工推导）。换位子项只取一对相反的值，这正是下面这条命题的前提。
@@ -415,7 +415,7 @@ $$
 在 Mathlib 中，`IsGreatest s a` 定义为 $a \in s \land \forall x \in s,\, x \le a$。源码分两步完成验证：
 
 1. **可达到性（$2\sqrt{2} \in \operatorname{range}$）**：取 [@thm-local-correlation-sectors] 与 [@lemma-bell-mixed-marginal] 中的合法双比特密度态 $\rho = \mathrm{bellDensity} = \lvert\Phi^+\rangle\langle\Phi^+\rvert \in \mathcal{S}_2$。将 $\mathrm{chshOperator}$ 合并同类项化简为 $\sqrt{2}(Z \otimes_{\mathrm{K}} Z + X \otimes_{\mathrm{K}} X)$，因 $\lvert\Phi^+\rangle$ 同时满足 $(Z \otimes_{\mathrm{K}} Z)\lvert\Phi^+\rangle = \lvert\Phi^+\rangle$ 与 $(X \otimes_{\mathrm{K}} X)\lvert\Phi^+\rangle = \lvert\Phi^+\rangle$，直接计算矩阵迹即得 $\operatorname{Re}\Tr(\mathrm{bellDensity} \cdot \mathrm{chshOperator}) = \sqrt{2}(1 + 1) = 2\sqrt{2}$。
-2. **全体量子态上的上界（$\le 2\sqrt{2}$）**：对任意 $\rho \in \mathcal{S}_2$，源码直接利用半正定上界差矩阵分解 $2\sqrt{2}I_4 - \mathrm{chshOperator} = \sqrt{2}(I_4 - Z\otimes_{\mathrm{K}} Z) + \sqrt{2}(I_4 - X\otimes_{\mathrm{K}} X) \ge 0$（因为 $Z \otimes_{\mathrm{K}} Z$ 与 $X \otimes_{\mathrm{K}} X$ 均为厄米对合矩阵，故 $I_4 - Z\otimes_{\mathrm{K}} Z \ge 0$ 且 $I_4 - X\otimes_{\mathrm{K}} X \ge 0$；与此同时，由 [@prop-landau-area-square] 的 Landau 平方公式，由于 $[Z, X] = 2iY$ 且 $[B_0, B_1] = -2iY$，该算子的平方精确等于 $(\mathrm{chshOperator})^2 = 4(I_4 - Y \otimes_{\mathrm{K}} Y) \le 8 I_4$，本征谱为 $\{8, 8, 0, 0\}$——在 $\operatorname{span}\{\lvert\Phi^+\rangle, \lvert\Psi^-\rangle\}$ 上取本征值 $8$，而在 $\operatorname{span}\{\lvert\Phi^-\rangle, \lvert\Psi^+\rangle\}$ 上取本征值 $0$）。半正定态 $\rho$ 与半正定差算子乘积的实迹非负，故 $\operatorname{Re}\Tr(\rho \cdot \mathrm{chshOperator}) \le 2\sqrt{2}\operatorname{Re}\Tr(\rho) = 2\sqrt{2}$。完整证明由 Lean 内核检查。
+2. **全体量子态上的上界（$\le 2\sqrt{2}$）**：对任意 $\rho \in \mathcal{S}_2$，手算可利用半正定上界差矩阵分解 $2\sqrt{2}I_4 - \mathrm{chshOperator} = \sqrt{2}(I_4 - Z\otimes_{\mathrm{K}} Z) + \sqrt{2}(I_4 - X\otimes_{\mathrm{K}} X) \ge 0$（因为 $Z \otimes_{\mathrm{K}} Z$ 与 $X \otimes_{\mathrm{K}} X$ 均为厄米对合矩阵，故 $I_4 - Z\otimes_{\mathrm{K}} Z \ge 0$ 且 $I_4 - X\otimes_{\mathrm{K}} X \ge 0$；与此同时，由 [@prop-landau-area-square] 的 Landau 平方公式，由于 $[Z, X] = 2iY$ 且 $[B_0, B_1] = -2iY$，该算子的平方精确等于 $(\mathrm{chshOperator})^2 = 4(I_4 - Y \otimes_{\mathrm{K}} Y) \le 8 I_4$，本征谱为 $\{8, 8, 0, 0\}$——在 $\operatorname{span}\{\lvert\Phi^+\rangle, \lvert\Psi^-\rangle\}$ 上取本征值 $8$，而在 $\operatorname{span}\{\lvert\Phi^-\rangle, \lvert\Psi^+\rangle\}$ 上取本征值 $0$）。半正定态 $\rho$ 与半正定差算子乘积的实迹非负，故 $\operatorname{Re}\Tr(\rho \cdot \mathrm{chshOperator}) \le 2\sqrt{2}\operatorname{Re}\Tr(\rho) = 2\sqrt{2}$。完整证明由 Lean 内核检查。
 :::
 
 ::: {.viz src="chsh-dial" preset="tsirelson" height="500"}
@@ -482,7 +482,7 @@ Bob 的两个答案只有两种关系：
 :::
 
 ::: {.viz src="chsh-dial" preset="hidden" height="500"}
-**每个隐方向只给 ±2，平均出不了 2。** 同样两个十字架，对手换成 360 个等距隐方向、权重各 $1/360$ 的经典模型（[@ex-bell-chsh-45deg] 第三步的均匀隐方向玩具模型，取有限个方向），它是一个有限确定性纤维模型。环上每个刻度是一个隐方向：青色给 $+2$，品红给 $-2$。Bob 的十字架从 $0^\circ$ 转到 $90^\circ$，360 个刻度全是青色，琥珀色的横线钉在 $2$（[@thm-classical-chsh-bound-exact]）；点线是贝尔态上的 $\langle S\rangle$，在 $45^\circ$ 升到 $2.828$。
+**每个隐方向只给 ±2，平均出不了 2。** 同样两个十字架，对手换成 360 个等距隐方向、权重各 $1/360$ 的经典模型（[@ex-bell-chsh-45deg] 第三步的均匀隐方向玩具模型，取有限个方向），它是一个有限确定性纤维模型。环上每个刻度是一个隐方向：青色给 $+2$，品红给 $-2$。Bob 的十字架从 $0^\circ$ 转到 $180^\circ$：到 $90^\circ$ 为止 360 个刻度全是青色，琥珀色的横线钉在 $2$；再往后品红的刻度越来越多，横线跟着往下落，到 $180^\circ$ 是 $-2$，始终不出 $[-2, 2]$（[@thm-classical-chsh-bound-exact]）。图停在 $120^\circ$：$240$ 个青色、$120$ 个品红，横线在 $(240 \cdot 2 - 120 \cdot 2)/360 = 2/3 \approx 0.667$。点线是贝尔态上的 $\langle S\rangle$，在 $45^\circ$ 升到 $2.828$，在 $120^\circ$ 是 $0.732$。
 :::
 
 现在两端都钉住了：有限确定性局域模型的 CHSH 值出不了线段 $[-2, 2]$（[@thm-classical-chsh-bound-exact]），而固定 CHSH 算子在量子态上的期望值可以到达 $2\sqrt{2}$（[@cor-fixed-chsh-tsirelson]）。两者之比为 $\sqrt{2}$，这就是 $45^\circ$ 圆弧超出折线的倍数。需要留意各条定理的量词范围：经典一侧针对的是有限纤维集合上的确定性 $\pm 1$ 应答表；量子一侧的可达性针对的是一个固定的双比特算子，上界 $2\sqrt{2}$ 则对一切有限维幺正策略成立（[@thm-unitary-bell-bound] 取 $d = 2$）；一般形式见章末 [@rem-bell-chsh-literature]。
@@ -575,7 +575,7 @@ $$
 :::
 
 ::: {.film src="004-chsh-45-degrees"}
-**45°：余弦弧高出经典折线（2 分 20 秒）。** 夹角 $\theta$ 从 $0^\circ$ 扫到 $180^\circ$，青色的余弦弧与玩具模型的折线 $1 - 2\theta/\pi$ 在 $0^\circ$、$90^\circ$、$180^\circ$ 重合，在 $45^\circ$ 弧高出 $0.207$；Bob 的一对方向转过 $45^\circ$，四段余弦一段段叠到 $2\sqrt{2}$，折线只叠到 $2$；再把 Bob 的一对从 $0^\circ$ 转到 $90^\circ$，值按 $2\sqrt{2}\cos(\varphi - 45^\circ)$ 起落。十六张确定性应答表每张都只给 $\pm 2$，加权平均出不了 $[-2, 2]$（[@thm-classical-chsh-bound-exact]）；$S^2$ 多出的那一项来自两侧的换位子（[@prop-landau-area-square]），两侧都张成直角、Bob 转过 $45^\circ$ 时，贝尔态上的值顶到 $2\sqrt{2}$，任何态都超不过（[@cor-fixed-chsh-tsirelson]）。
+**45°：余弦弧高出经典折线（2 分 23 秒）。** 在 $Z$–$X$ 平面内，夹角 $\theta$ 从 $0^\circ$ 扫到 $180^\circ$，青色的余弦弧与玩具模型的折线 $1 - 2\theta/\pi$ 在 $0^\circ$、$90^\circ$、$180^\circ$ 重合，在 $45^\circ$ 弧高出 $0.207$；Bob 的一对方向转过 $45^\circ$，四段余弦一段段叠到 $2\sqrt{2}$，折线只叠到 $2$；再把 Bob 的一对从 $0^\circ$ 转到 $90^\circ$，值按 $2\sqrt{2}\cos(\varphi - 45^\circ)$ 起落。十六张确定性应答表每张都只给 $\pm 2$，加权平均出不了 $[-2, 2]$（[@thm-classical-chsh-bound-exact]）；$S^2$ 多出的那一项来自两侧的换位子（[@prop-landau-area-square]），两侧都张成直角、Bob 转过 $45^\circ$ 时，贝尔态上的值顶到 $2\sqrt{2}$，任何态都超不过（[@cor-fixed-chsh-tsirelson]）。
 :::
 
 至此，我们从贝尔纯态看清了纠缠的第一重几何面貌：单比特的局部信息可以被完全掏空（$\vv{r} = \vv{s} = \vv{0}$），而把整整 $100\%$ 的非单位阵纯度盈余（$\Tr(\rho^2) - \frac{1}{4} = \frac{1}{4}\norm{T}_{\mathrm{F}}^2 = \frac{3}{4}$，连同单位阵基线的 $\frac{1}{4}$ 共计纯度 $1$）藏进高维关联扇区 $T_{ij}$ 的“球外之球”里。这立刻启发了一个关乎所有量子计算机生死存亡的工程点子：**如果在局域噪声模型中，环境噪声像小偷一样挨个袭击局部的“线”（单比特泡利错误），我们能不能故意把宝贵的逻辑量子态从脆弱的局部线上撤下来，藏进多比特纠缠织就的高维关联“面”与拓扑编织死结里？** 让我们进入[第十四章](ch14-cloning-codes-and-braids.md)。

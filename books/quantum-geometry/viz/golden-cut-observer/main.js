@@ -3,7 +3,8 @@
             their projections are φ or φ² apart; fixing a small patch leaves only a short range of admissible shifts
    cassini  the powers φᵏ⁺¹ = Fₖ + Fₖ₊₁φ in the same lattice: the rectangle between the origin and (φᵏ⁺¹, ψᵏ⁺¹) has
             signed area Fₖ·Fₖ₊₂ − Fₖ₊₁² = (−1)ᵏ⁺¹, and no other lattice point lies between the hyperbolas x·x′ = ±1
-   returns  the rotation by the golden angle seen through h(x) = cos 2πx: visits to (u₁, u₂) with bounded gaps
+   returns  the rotation by the golden angle seen through h(x) = cos 2πx: visits to (u₁, u₂) over the first N steps; the
+            longest gap between two visits so far and its reciprocal are sample statistics, not the theorem's M
    window3  the rhombic triacontahedron as the zonohedron of the six fivefold axes; the margin d∂ of a point inside
    The rail is the shift u (cut), k (cassini), the number of steps N (returns) or the position of the point (window3).
    Read-only probe for the browser suite: window.CUT_DEBUG. */
@@ -32,13 +33,32 @@
   const NEAR = lattice(60, 2.3);
   const inWin = (c, u) => c >= LO + u - TOL && c <= HI + u + TOL;           // the closed window [φ − 2, φ − 1] + u
   const margin = (c, u) => Math.min(c - LO - u, HI + u - c);
+  /** The Zeckendorf code of n by the greedy rule: digit i (from the lowest) stands for the Fibonacci number F_{i+2} = 1, 2, 3, 5, … */
+  function zeck(n) {
+    const F = [1, 2]; while (F[F.length - 1] <= n) F.push(F[F.length - 1] + F[F.length - 2]);
+    const d = F.map(() => 0); let r = n;
+    for (let i = F.length - 1; i >= 0; i--) if (F[i] <= r) { r -= F[i]; d[i] = 1; }
+    while (d.length > 1 && !d[d.length - 1]) d.pop();
+    return d;
+  }
+  const fibW = (i) => { let a = 1, b = 2; for (let k = 0; k < i; k++) [a, b] = [b, a + b]; return a; };     // F_{i+2}
   /** betaGolden(n): the Zeckendorf digits of n read in base φ, as the golden integer [a, b] (so that b = n). */
   function beta(n) {
-    const F = [1, 2]; while (F[F.length - 1] <= n) F.push(F[F.length - 1] + F[F.length - 2]);
-    let a = 0, b = 0, r = n;
-    for (let i = F.length - 1; i >= 0; i--) if (F[i] <= r) { r -= F[i]; a += i ? F[i - 1] : 1; b += F[i]; }   // F[i] = F_{i+2} and φ^(i+2) = F_{i+1} + F_{i+2}·φ
+    let a = 0, b = 0;
+    zeck(n).forEach((x, i) => { if (x) { a += i ? fibW(i - 1) : 1; b += fibW(i); } });   // φ^(i+2) = F_{i+1} + F_{i+2}·φ
     return [a, b];
   }
+  /** The strip of Zeckendorf codes for n = 0 … ZN: adjacent pairs of 1s and codes whose weights do not add up to n. */
+  const ZN = 54, ZROWS = 8;
+  const ZSTRIP = (() => {
+    const codes = [], adjacent = [], wrong = [];
+    for (let n = 0; n <= ZN; n++) {
+      const d = zeck(n); codes.push(d);
+      for (let i = 1; i < d.length; i++) if (d[i] && d[i - 1]) adjacent.push([n, i]);
+      if (d.reduce((t, x, i) => t + x * fibW(i), 0) !== n) wrong.push(n);
+    }
+    return { codes, adjacent, wrong };
+  })();
   /** The shifts that leave the selection among the points with |x| ≤ PATCH as it is at the shift u: the interval (lo, hi). */
   function patchAt(u) {
     let lo = -Infinity, hi = Infinity;
@@ -101,7 +121,7 @@
     text(ctx, L('a + bφ 本身 →', 'a + bφ itself →'), g.pl + g.iw - 6, g.pt + g.ih - 9, P.dim, { align: 'right', size: 10.5, face: 'body' });
     text(ctx, L('↑ 共轭 a + bψ', '↑ the conjugate a + bψ'), g.X(0) + 6, g.pt + 8, P.dim, { size: 10.5, face: 'body' });
     if (S.patch) text(ctx, L(`固定的一小片 |x| ≤ ${PATCH}`, `the fixed patch |x| ≤ ${PATCH}`), g.X(0), g.pt + g.ih - 10, P.ink, { align: 'center', size: 11, face: 'body' });
-    else if (q.deep) text(ctx, L(`最深的点 · 离边 ${fix(margin(q.deep.c, u), 2)}`, `deepest point · ${fix(margin(q.deep.c, u), 2)} from the edge`), clamp(g.X(q.deep.x), g.pl + 70, g.pl + g.iw - 70), g.Y(lo) + 12, P.cyan, { align: 'center', size: 11, face: 'body' });
+    else if (q.deep) text(ctx, L(`最深的点 · 离边 ${fix(margin(q.deep.c, u), 2)}`, `deepest point · ${fix(margin(q.deep.c, u), 2)} from the edge`), clamp(g.X(q.deep.x), g.pl + 70, g.pl + g.iw - 70), g.Y(q.deep.c) - 15 * K - 8, P.cyan, { align: 'center', size: 11, face: 'body' });
   }
 
   /* ---------- cassini: the powers of φ in the same lattice ---------- */
@@ -109,6 +129,7 @@
   const fibN = (i) => Number(FIB[i]);
   const cassini = (k) => FIB[k] * FIB[k + 2] - FIB[k + 1] * FIB[k + 1];
   const kOf = (t) => 1 + Math.round(clamp(t, 0, KMAX - 1));
+  const slope = (k) => fibN(k) / fibN(k + 1) - 1 / PHI;                                    // the integer point (x, y) = (Fₖ₊₁, Fₖ): slope y/x → φ⁻¹
   const power = (k) => [fibN(k) + fibN(k + 1) * PHI, fibN(k) + fibN(k + 1) * PSI];        // φ^(k+1) = F_k + F_(k+1)·φ as the lattice point (itself, conjugate)
   const sub = (n) => String(n).replace(/\d/g, (d) => '₀₁₂₃₄₅₆₇₈₉'[d]), sup = (n) => String(n).replace(/\d/g, (d) => '⁰¹²³⁴⁵⁶⁷⁸⁹'[d]);
   function drawCassini(k) {
@@ -126,7 +147,7 @@
     }
     if (!words) return;
     const [x, y] = power(k), tall = Math.abs(g.Y(y) - g.Y(0)) > 26;
-    text(ctx, `x·x′ = ${cassini(k) > 0n ? '+1' : '−1'}`, g.X(x / 2), tall ? g.Y(y / 2) : g.Y(0) + (y > 0 ? 14 : -13), tall ? P.ink : (y > 0 ? P.cyan : P.magenta), { align: 'center', size: 12, weight: 600 });
+    text(ctx, `x·x′ = ${cassini(k) > 0n ? '+1' : '−1'}`, g.X(x / 2), tall ? g.Y(y / 2) : g.Y(y) + (y > 0 ? -12 : 13), tall ? P.ink : (y > 0 ? P.cyan : P.magenta), { align: 'center', size: 12, weight: 600 });
     text(ctx, L('a + bφ 本身 →', 'a + bφ itself →'), g.pl + g.iw - 6, g.pt + g.ih - 8, P.dim, { align: 'right', size: 10.5, face: 'body' });
     text(ctx, L('↑ 共轭 a + bψ', '↑ the conjugate a + bψ'), g.X(0) + 6, g.pt + 8, P.dim, { size: 10.5, face: 'body' });
     text(ctx, 'x·x′ = +1', g.X(1.3), g.Y(0.95), P.cyan, { size: 10.5, alpha: 0.9 }); text(ctx, 'x·x′ = −1', g.X(1.3), g.Y(-0.95), P.magenta, { size: 10.5, alpha: 0.9 });
@@ -140,9 +161,11 @@
     const N = 1 + Math.round(clamp(t, 0, NMAX - 1)), [u1, u2] = win(), hits = [];
     for (let n = 1; n <= N; n++) { const e = obs(n); if (e > u1 && e < u2) hits.push(n); }
     const waits = []; for (let i = 1; i < hits.length; i++) waits.push(hits[i] - hits[i - 1]);
-    const longest = Math.max(hits.length ? hits[0] : N + 1, N + 1 - (hits.length ? hits[hits.length - 1] : 0), ...waits);   // with the stretches before the first and after the last visit
+    // the longest completed gap between two consecutive visits in these N steps (null before the second visit): a description
+    // of this finite sample only; it is not the theorem's M + 1 and bounds neither later gaps nor the share at this N
+    const longest = waits.length ? Math.max(...waits) : null, open = N - (hits.length ? hits[hits.length - 1] : 0);
     const measure = (Math.acos(clamp(u1, -1, 1)) - Math.acos(clamp(u2, -1, 1))) / Math.PI;
-    return { N, u1, u2, hits, waits, longest, share: hits.length / N, bound: 1 / longest, measure, kinds: [...new Set(waits)].sort((a, b) => a - b) };
+    return { N, u1, u2, hits, waits, longest, open, share: hits.length / N, ratio: longest ? 1 / longest : null, measure, kinds: [...new Set(waits)].sort((a, b) => a - b) };
   }
   function drawReturns(q) {
     const cv = $('cv'), W = cv.clientWidth, H = cv.clientHeight, words = !TRV.thumbMode;
@@ -174,7 +197,7 @@
     if (q.waits.length) {
       const i = q.waits.indexOf(Math.max(...q.waits)), a = q.hits[i], b = q.hits[i + 1], y = g.pt + g.ih - 15;
       ctx.strokeStyle = P.magenta; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(g.X(a), y + 4); ctx.lineTo(g.X(a), y); ctx.lineTo(g.X(b), y); ctx.lineTo(g.X(b), y + 4); ctx.stroke();
-      text(ctx, L(`最长的间隔 ${b - a} 步`, `longest gap: ${b - a} steps`), clamp((g.X(a) + g.X(b)) / 2, g.pl + 56, g.pl + g.iw - 56), y - 10, P.magenta, { align: 'center', size: 11, face: 'body' });
+      text(ctx, L(`目前最长的间隔 ${b - a} 步`, `longest gap so far: ${b - a} steps`), clamp((g.X(a) + g.X(b)) / 2, g.pl + 56, g.pl + g.iw - 56), y - 10, P.magenta, { align: 'center', size: 11, face: 'body' });
     }
   }
 
@@ -261,19 +284,22 @@
       if (S.patch) g.rect(S.patch.lo, -q.half, S.patch.hi, q.half, P.ink, { alpha: 0.14 });
       for (const p of NEAR) { if (Math.abs(p.x) > q.half) continue; const a = Math.max(-0.5, p.c - HI), b = Math.min(0.5, p.c - LO); if (b > a) g.line([[a, p.x], [b, p.x]], b - a > 0.999 ? P.cyan : P.magenta, { width: 2, alpha: b - a > 0.999 ? 1 : 0.85 }); }
       g.vline(q.u, P.amber);
-      const h = kit.plot(B, { x: [0, 0.5], y: [0, 1.05], pad: [30, 10, 8, 20] });
-      h.axes({ xTicks: [0, 0.25, 0.5], yTicks: [0, 0.5, 1], xLabel: 'm' }); h.line([[0, 1], [0.5, 0]], P.cyan, { width: 2 });
-      if (q.deep) { const m = margin(q.deep.c, q.u); h.dot(m, 1 - 2 * m, P.cyan, 4.5, { glow: 8 }); }
-      title(L('每个点在哪些平移下被选中', 'The shifts at which each point is selected'), L('整条青色：怎么挪都在', 'full cyan bars never leave'), L('离边至少这么远的点所占份额', 'Share of points at least this far from an edge'), '1 − 2m');
+      // the Zeckendorf codes of n = 0 … 54, one column each, the rows weighted 1, 2, 3, 5, …, 34 from the bottom
+      const h = kit.plot(B, { x: [-0.7, ZN + 0.7], y: [-0.6, ZROWS - 0.4], pad: [30, 10, 8, 20] }), bad = new Set(ZSTRIP.adjacent.map(([n, i]) => `${n},${i}`));
+      h.axes({ xTicks: [0, 10, 20, 30, 40, ZN], yTicks: [[0, '1'], [3, '5'], [7, '34']], xLabel: 'n' });
+      ZSTRIP.codes.forEach((d, n) => d.forEach((x, i) => { if (x) { const hit = bad.has(`${n},${i}`) || bad.has(`${n},${i + 1}`); h.rect(n - 0.36, i - 0.36, n + 0.36, i + 0.36, hit ? P.magenta : P.cyan, { alpha: 0.9 }); } }));
+      title(L('每个点在哪些平移下被选中', 'The shifts at which each point is selected'), L('整条青色：怎么挪都在', 'full cyan bars never leave'),
+        L('齐肯多夫码里有相邻的 1 吗', 'Adjacent ones in Zeckendorf codes?'),
+        L(`n ≤ ${ZN} · 相邻的 1：${ZSTRIP.adjacent.length} 处 · 求和不等于 n：${ZSTRIP.wrong.length} 个`, `n ≤ ${ZN} · adjacent 1s: ${ZSTRIP.adjacent.length} · sums ≠ n: ${ZSTRIP.wrong.length}`));
     } else if (S.scene === 'cassini') {
       const g = kit.plot(A, { x: [0.4, KN + 0.6], y: [1e-6, 1], pad: [38, 10, 8, 20], logY: true });
       g.axes({ xTicks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], yTicks: [[1, '1'], [1e-2, '10⁻²'], [1e-4, '10⁻⁴']], xLabel: 'k' });
-      for (let k = 1; k <= KN; k++) { const e = fibN(k + 1) / fibN(k) - PHI; g.line([[k, 1e-6], [k, Math.abs(e)]], e > 0 ? P.cyan : P.magenta, { width: k === q.k ? 5 : 3, alpha: k === q.k ? 1 : 0.7 }); }
-      g.legend([[P.cyan, L('大于 φ', 'above φ')], [P.magenta, L('小于 φ', 'below φ')]], { right: true });
+      for (let k = 1; k <= KN; k++) { const e = slope(k); g.line([[k, 1e-6], [k, Math.abs(e)]], e > 0 ? P.cyan : P.magenta, { width: k === q.k ? 5 : 3, alpha: k === q.k ? 1 : 0.7 }); }
+      g.legend([[P.cyan, L('大于 φ⁻¹', 'above φ⁻¹')], [P.magenta, L('小于 φ⁻¹', 'below φ⁻¹')]], { right: true });
       const h = kit.plot(B, { x: [0.4, KN + 0.6], y: [-1.5, 1.5], pad: [38, 10, 8, 20] });
       h.axes({ xTicks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], yTicks: [[-1, '−1'], [0, '0'], [1, '+1']], xLabel: 'k' }); h.hline(0, P.faint);
       for (let k = 1; k <= KN; k++) { const c = Number(cassini(k)), col = c > 0 ? P.cyan : P.magenta; h.line([[k, 0], [k, c]], col, { width: 2 }); h.dot(k, c, col, k === q.k ? 5.5 : 3.5, k === q.k ? { glow: 8 } : null); }
-      title(L('相邻斐波那契数之比离黄金比多远', 'Distance of the ratio of neighbouring Fibonacci numbers from the golden ratio'), L('对数坐标', 'log scale'), L('卡西尼式的值', 'The value of Cassini’s expression'), L('用大整数逐项算出', 'term by term with big integers'));
+      title(L('斐波那契斜率离它的极限还有多远', 'How far the Fibonacci slope is from its limit'), L('y/x = Fₖ/Fₖ₊₁ → φ⁻¹ · 对数坐标', 'y/x = Fₖ/Fₖ₊₁ → φ⁻¹ · log scale'), L('卡西尼式的值', 'The value of Cassini’s expression'), L('用大整数逐项算出', 'term by term with big integers'));
     } else if (S.scene === 'returns') {
       const n = Math.max(q.waits.length, 12), top = Math.max(8, ...q.waits) * 1.15, g = kit.plot(A, { x: [0, n + 1], y: [0, top], pad: [30, 10, 8, 20] });
       g.axes({ yTicks: [0, Math.round(top / 2.3), Math.round(top / 1.15)], xTicks: [1, Math.round(n / 2), n], xLabel: L('第几次回来', 'return number') });
@@ -281,9 +307,9 @@
       const h = kit.plot(B, { x: [0, Math.max(55, q.N)], y: [0, clamp(q.measure * 2.4, 0.1, 1)], pad: [34, 10, 8, 20] }), run = []; let c = 0, hi = 0;
       for (let m = 1; m <= q.N; m++) { if (q.hits[hi] === m) { c++; hi++; } run.push([m, Math.min(c / m, h.y1)]); }
       h.axes({ yTicks: [0, Number((h.y1 / 2).toFixed(2)), Number(h.y1.toFixed(2))], xTicks: [1, 21, 55, 89, 144, 233].filter((v) => v <= Math.max(55, q.N)), xLabel: 'N' });
-      h.hline(q.measure, P.ink, { dash: [4, 3], alpha: 0.7 }); h.hline(q.bound, P.magenta, { dash: [4, 3] }); h.line(run, P.cyan);
-      h.legend([[P.cyan, L('已进入的比例', 'share of steps inside')], [P.ink, L('窗口占圆周的份额', 'the window’s share of the circle'), 'dash'], [P.magenta, '1/(M + 1)', 'dash']], { right: true });
-      title(L('相邻两次回来之间的步数', 'Steps between consecutive returns'), q.kinds.length ? L(`出现过：${q.kinds.join('、')}`, `seen: ${q.kinds.join(', ')}`) : '', L('落在窗口里的比例', 'Share of steps in the window'), `${fix(q.share, 3)} ≥ ${fix(q.bound, 3)}`);
+      h.hline(q.measure, P.ink, { dash: [4, 3], alpha: 0.7 }); h.line(run, P.cyan);
+      h.legend([[P.cyan, L('已进入的比例', 'share of steps inside')], [P.ink, L('窗口占圆周的份额', 'the window’s share of the circle'), 'dash']], { right: true });
+      title(L('相邻两次回来之间的步数', 'Steps between consecutive returns'), q.kinds.length ? L(`出现过：${q.kinds.join('、')}`, `seen: ${q.kinds.join(', ')}`) : L('还没有完整的间隔', 'no completed gap yet'), L('落在窗口里的比例', 'Share of steps in the window'), L(`前 ${q.N} 步：${fix(q.share, 3)}`, `first ${q.N} steps: ${fix(q.share, 3)}`));
     } else {
       const g = kit.plot(A, { x: [0, SMAX], y: [-0.25, 1.05], pad: [34, 10, 8, 20] }), pts = [];
       for (let i = 0; i <= 120; i++) { const s = SMAX * i / 120; pts.push([s, depth(v3.scale(TRIA.dir, s * TRIA.exit)).d / TRIA.rin]); }
@@ -307,7 +333,7 @@
     ? (S.patch ? [['am', '窗口 W + u', 'the window W + u'], ['cy', '被这一小片定住的点（带圈）', 'points fixed by the patch (ringed)'], ['mg', '仍未定的点', 'points still undecided']]
       : [['am', '窗口 W + u', 'the window W + u'], ['cy', '窗口里的点，投到下面的直线上', 'points in the window, projected to the line below'], ['mg', '离边不到 0.08 的点', 'points less than 0.08 from an edge']].concat(Math.abs(q.u) < 1e-9 ? [['ok', '绿圈：自然数的黄金展开 β(n)', 'green rings: the golden expansions β(n)']] : []))
     : S.scene === 'cassini' ? [['cy', 'x·x′ = +1：点在横轴上方', 'x·x′ = +1: the point lies above the axis'], ['mg', 'x·x′ = −1：点在横轴下方', 'x·x′ = −1: the point lies below the axis'], ['dm', '其余格点，都在两条双曲线之外', 'the other lattice points, all outside the two hyperbolas']]
-      : S.scene === 'returns' ? [['am', '观测窗与此刻的点', 'the window and the current point'], ['cy', '落在窗口里的步', 'steps inside the window'], ['mg', '最长的间隔', 'the longest gap']]
+      : S.scene === 'returns' ? [['am', '观测窗与此刻的点', 'the window and the current point'], ['cy', '落在窗口里的步', 'steps inside the window'], ['mg', '目前最长的间隔（只是样本）', 'the longest gap so far (sample only)']]
         : [['cy', '12 个五重顶点', '12 fivefold vertices'], ['am', '窗口里的点与半径 d∂ 的球', 'the point and the ball of radius d∂'], ['mg', '离它最近的面', 'the face nearest to it']]);
   function drawText(q) {
     const set = (i, lab, val) => { $(`roL${i}`).textContent = lab; $(`ro${i}`).innerHTML = val; };
@@ -316,35 +342,36 @@
     if (S.scene === 'cut') {
       const u = q.u, names = q.kinds.map((d) => (Math.abs(d - PHI) < 1e-6 ? 'φ' : Math.abs(d - PHI * PHI) < 1e-6 ? 'φ²' : Math.abs(d - 1) < 1e-6 ? '1' : fix(d, 3))).join(L('、', ', ')), only = q.kinds.every((d) => Math.abs(d - PHI) < 1e-6 || Math.abs(d - PHI * PHI) < 1e-6);
       big = L(`切投 · u = ${sgn(u, 2)}`, `Cut · u = ${sgn(u, 2)}`);
-      hud = S.patch ? L(`窗口平移 u；固定中间一小片后只能取 (${sgn(S.patch.lo, 3)}, ${sgn(S.patch.hi, 3)})；视野里另有 ${q.forced.length} 个点被定住，${q.free.length} 个未定`, `the window is shifted by u; with the middle patch fixed, u is confined to (${sgn(S.patch.lo, 3)}, ${sgn(S.patch.hi, 3)}); ${q.forced.length} further points in view are fixed and ${q.free.length} are undecided`)
+      hud = S.patch ? L(`u 只能取 (${sgn(S.patch.lo, 3)}, ${sgn(S.patch.hi, 3)})；另有 ${q.forced.length} 个点被定住，${q.free.length} 个未定`, `u is confined to (${sgn(S.patch.lo, 3)}, ${sgn(S.patch.hi, 3)}); ${q.forced.length} more points fixed, ${q.free.length} undecided`)
         : L(`窗口平移 u · 视野里选中 ${q.seen.length} 个点 · 相邻间隔：${names} · ${q.edge} 个离边不到 0.08`, `the window is shifted by u · ${q.seen.length} points selected in view · gaps between neighbours: ${names} · ${q.edge} less than 0.08 from an edge`);
       keyRO(L('相邻两点的间隔', 'gaps between neighbouring points'), `<span class="c-cy">${names}</span>`, only ? L('只有两种', 'two kinds only') : L('闭窗口两端各有一个格点', 'a lattice point on each end of the closed window'));
       set(1, L('窗口 W + u', 'the window W + u'), `[${fix(LO + u, 3)}, ${fix(HI + u, 3)}]`);
-      set(2, L('最小间隔', 'smallest gap'), `${fix(q.minGap, 3)} <span class="okmark">${q.minGap >= 1 - 1e-9 ? '≥ 1 ✓' : '✗'}</span>`);
+      set(2, L('最小间隔', 'smallest gap'), `${fix(q.minGap, 3)} ${q.minGap >= 1 - 1e-9 ? '≥ 1 ✓' : '✗'}`);
       if (S.patch) { set(3, L('容许的平移', 'admissible shifts'), `(${sgn(S.patch.lo, 3)}, ${sgn(S.patch.hi, 3)})`); set(4, L('小片以外：定住 / 未定', 'beyond the patch: fixed / undecided'), `${q.forced.length} / ${q.free.length}`); }
       else { set(3, L('视野里选中的点', 'points selected in view'), String(q.seen.length)); set(4, L('最深的点离边', 'deepest point, distance from the edge'), q.deep ? `${fix(margin(q.deep.c, u), 3)} <small>x = ${fix(q.deep.x, 2)}</small>` : '—'); }
       note = S.patch ? L('带圈的点在容许范围内怎么挪窗口都留在里面：中间这一小片把它们定住了，再远也一样。', 'The ringed points stay inside however the window moves within the admissible range: the small patch in the middle fixes them, however far away they are.')
         : L('一个点离窗口的边有多远，它就经得起多大的平移；窗口长为 1，所以没有哪个点能超过 0.5。', 'A point withstands exactly as much shift as its distance from the edge of the window; the window has length 1, so no point can exceed 0.5.');
       what = `u = ${sgn(u, 2)}`; key = S.patch ? L(`定住 ${q.forced.length}`, `${q.forced.length} FIXED`) : names;
     } else if (S.scene === 'cassini') {
-      const k = q.k, a = FIB[k], b = FIB[k + 1], c = FIB[k + 2], e = fibN(k + 1) / fibN(k) - PHI, sv = q.value > 0 ? '+1' : '−1';
+      const k = q.k, a = FIB[k], b = FIB[k + 1], c = FIB[k + 2], sv = q.value > 0 ? '+1' : '−1';
       big = L(`卡西尼 · k = ${k}`, `Cassini · k = ${k}`);
       hud = L(`φ${sup(k + 1)} = ${a} + ${b}φ 在格点图里是 (${fix(q.x, 3)}, ${fix(q.y, 4)})：矩形面积 = F${sub(k)}·F${sub(k + 2)} − F${sub(k + 1)}² = ${a}·${c} − ${b}² = ${sv}`, `φ${sup(k + 1)} = ${a} + ${b}φ sits at (${fix(q.x, 3)}, ${fix(q.y, 4)}) in the lattice: area of the rectangle = F${sub(k)}·F${sub(k + 2)} − F${sub(k + 1)}² = ${a}·${c} − ${b}² = ${sv}`);
       keyRO('Fₖ·Fₖ₊₂ − Fₖ₊₁²', `<span class="${q.value > 0 ? 'c-cy' : 'c-mg'}">${sv}</span>`, `${a}·${c} − ${b}²`);
       set(1, '(Fₖ, Fₖ₊₁, Fₖ₊₂)', `(${a}, ${b}, ${c})`); set(2, L('本身 × 共轭', 'itself × conjugate'), `${fix(q.x, 3)} × ${fix(q.y, 4)} = ${fix(q.x * q.y, 6)}`);
-      set(3, L('矩形的长', 'length of the rectangle'), fix(q.x, 3)); set(4, 'Fₖ₊₁/Fₖ − φ', sgn(e, 6));
+      set(3, L('矩形的长', 'length of the rectangle'), fix(q.x, 3)); set(4, L('斜率 Fₖ/Fₖ₊₁ − φ⁻¹', 'slope Fₖ/Fₖ₊₁ − φ⁻¹'), sgn(slope(k), 6));
       note = L('矩形一次在横轴上方，一次在下方，越来越扁长，面积不变。两条双曲线之间除了原点没有别的格点：非零黄金整数的范数至少是 1。', 'The rectangles lie above and below the axis in turn, ever longer and flatter, with the same area. Between the two hyperbolas there is no lattice point but the origin: the norm of a nonzero golden integer is at least 1.');
       what = `k = ${k}`; key = sv;
     } else if (S.scene === 'returns') {
-      const none = !q.hits.length;
+      const none = !q.hits.length, gap = q.longest != null;
       big = L(`回归 · N = ${q.N}`, `Returns · N = ${q.N}`);
-      hud = none ? L(`观测窗 (${fix(q.u1, 2)}, ${fix(q.u2, 2)})：还没有进入过`, `window (${fix(q.u1, 2)}, ${fix(q.u2, 2)}): not entered yet`)
-        : L(`观测窗 (${fix(q.u1, 2)}, ${fix(q.u2, 2)})：进入 ${q.hits.length} 次 · 任何连续 ${q.longest} 步里至少进入一次`, `window (${fix(q.u1, 2)}, ${fix(q.u2, 2)}): entered ${q.hits.length} times · at least once in any ${q.longest} consecutive steps`);
-      keyRO(L('到此为止最长的等待 M + 1', 'longest wait so far, M + 1'), `<span class="c-mg">${q.longest}</span>`, L('步', 'steps'));
-      set(1, L('进入窗口的次数', 'visits to the window'), String(q.hits.length)); set(2, L('所占比例', 'share of the steps'), fix(q.share, 4));
-      set(3, '1/(M + 1)', `${fix(q.bound, 4)} <span class="okmark">${q.hits.length >= Math.floor(q.N / q.longest) ? '✓' : '✗'}</span>`); set(4, L('窗口占圆周的份额', 'the window’s share of the circle'), fix(q.measure, 4));
-      note = L('窗口只要碰得到观测值的取值范围，等待就有上限；窗口越窄，上限越大。', 'As long as the window meets the range of the observable, the waits are bounded; the narrower the window, the larger the bound.');
-      what = `N = ${q.N}`; key = none ? '—' : `M + 1 = ${q.longest}`;
+      hud = none ? L(`观测窗 (${fix(q.u1, 2)}, ${fix(q.u2, 2)})：前 ${q.N} 步还没有进入过`, `window (${fix(q.u1, 2)}, ${fix(q.u2, 2)}): not entered in the first ${q.N} steps`)
+        : gap ? L(`观测窗 (${fix(q.u1, 2)}, ${fix(q.u2, 2)})：前 ${q.N} 步进入 ${q.hits.length} 次 · 两次进入之间目前最长隔 ${q.longest} 步（只是样本）`, `window (${fix(q.u1, 2)}, ${fix(q.u2, 2)}): entered ${q.hits.length} times in the first ${q.N} steps · longest gap between two visits so far: ${q.longest} steps (sample only)`)
+          : L(`观测窗 (${fix(q.u1, 2)}, ${fix(q.u2, 2)})：前 ${q.N} 步只进入 1 次 · 还没有完整的间隔，上次进入后已过 ${q.open} 步`, `window (${fix(q.u1, 2)}, ${fix(q.u2, 2)}): entered once in the first ${q.N} steps · no completed gap yet, ${q.open} ${q.open === 1 ? 'step' : 'steps'} since that visit`);
+      keyRO(L('目前最长的间隔（样本）', 'longest gap so far (sample)'), gap ? `<span class="c-mg">${q.longest}</span>` : '—', gap ? L('步，只描述前 N 步', 'steps, describes the first N steps only') : L('还没有完整的间隔', 'no completed gap yet'));
+      set(1, L('进入窗口的次数', 'visits to the window'), String(q.hits.length)); set(2, L('前 N 步中所占比例', 'share of the first N steps'), fix(q.share, 4));
+      set(3, L('1 ÷ 目前最长的间隔（描述）', '1 ÷ longest gap so far (descriptive)'), gap ? fix(q.ratio, 4) : '—'); set(4, L('窗口占圆周的份额', 'the window’s share of the circle'), fix(q.measure, 4));
+      note = L('这些都是前 N 步的样本读数。定理只断言存在某个 n₀ 与 M：n₀ 之后每连续 M + 1 步至少进入一次，并且对每个 ε > 0，N 足够大时比例不低于 1/(M + 1) − ε。页面没有算出 n₀ 或 M；目前最长的间隔不是 M + 1，不限制以后的间隔，也不给出此刻比例的下界。', 'These are sample readouts of the first N steps. The theorem only asserts that some n₀ and M exist: after n₀ every M + 1 consecutive steps contain a visit, and for each ε > 0 the share is at least 1/(M + 1) − ε once N is large. The page computes neither n₀ nor M; the longest gap so far is not M + 1, does not bound later gaps and gives no lower bound on the share at this N.');
+      what = `N = ${q.N}`; key = gap ? L(`最长间隔 ${q.longest}`, `GAP ${q.longest}`) : '—';
     } else {
       const five = TRIA.verts.filter((v) => v.deg === 5).length, three = TRIA.verts.filter((v) => v.deg === 3).length;
       big = L(`接受窗 · s = ${fix(q.s, 2)}`, `Window · s = ${fix(q.s, 2)}`);
@@ -397,13 +424,13 @@
   };
   const NOTES = {
     cut: ['黄金整数 a + bφ 画成平面上的格点：横坐标是它本身，纵坐标是共轭 a + bψ。琥珀色的窗口长为 1，选出青色的点，投到下面的直线上，相邻两点只相距 φ 或 φ²。此刻窗口是闭区间 [φ − 2, φ − 1]，两个端点上各有一个格点，所以原点左边多出一段长为 1 的间隔。绿圈是自然数的黄金展开 β(n)。', 'The golden integers a + bφ drawn as lattice points: across, the number itself; up, its conjugate a + bψ. The amber window has length 1; it selects the cyan points, and projected to the line below, neighbours are φ or φ² apart. Here the window is the closed interval [φ − 2, φ − 1] with a lattice point on each end, so one extra gap of length 1 appears left of the origin. The green rings are the golden expansions β(n) of the natural numbers.'],
-    phason: ['窗口从 u = −0.5 挪到 +0.5。贴着边的点（洋红）进进出出，下面那排砖里相邻的一长一短随之对调；离边远的点一直留在原地。', 'The window moves from u = −0.5 to +0.5. Points at its edge (magenta) come and go, and in the row of tiles below a long and a short neighbour swap each time; points far from the edge stay where they are.'],
-    empire: ['把中间一小片（|x| ≤ 4 的点）固定下来：窗口只能在一小段范围里挪动。在这段范围里始终留在窗口内的点都被这一小片定住，包括很远的；只有洋红色的点还悬而未决。', 'Fix the small patch in the middle (the points with |x| ≤ 4): the window can now move only within a short range. Every point that stays inside the window over that whole range is fixed by the patch, however far away; only the magenta points are still undecided.'],
+    phason: ['窗口从 u = −0.5 挪到 +0.5。贴着边的点（品红）进进出出，下面那排砖里相邻的一长一短随之对调；离边远的点一直留在原地。', 'The window moves from u = −0.5 to +0.5. Points at its edge (magenta) come and go, and in the row of tiles below a long and a short neighbour swap each time; points far from the edge stay where they are.'],
+    empire: ['把中间一小片（|x| ≤ 4 的点）固定下来：窗口只能在一小段范围里挪动。在这段范围里始终留在窗口内的点都被这一小片定住，包括很远的；只有品红色的点还悬而未决。', 'Fix the small patch in the middle (the points with |x| ≤ 4): the window can now move only within a short range. Every point that stays inside the window over that whole range is fixed by the patch, however far away; only the magenta points are still undecided.'],
     cassini: ['还是那张格点图。φ 的幂 φ², φ³, … 一个在横轴上方、一个在下方，越来越贴近横轴；它与原点围成的矩形越来越扁长，面积却永远恰好是 1。这个面积就是卡西尼式 Fₖ·Fₖ₊₂ − Fₖ₊₁²。', 'The same lattice again. The powers φ², φ³, … lie above and below the horizontal axis in turn, ever closer to it; the rectangle each spans with the origin grows longer and flatter, and yet its area is always exactly 1. That area is Cassini’s expression Fₖ·Fₖ₊₂ − Fₖ₊₁².'],
-    returns: ['圆上的点每一步转过黄金角；它的高度 cos 2πnφ 就是观测值。琥珀色的带子是观测窗 (0.2, 0.8)。轨道一次次回到带子里，相邻两次之间的步数有上限。', 'A point on the circle turns by the golden angle at each step; its height cos 2πnφ is what is observed. The amber band is the observation window (0.2, 0.8). The orbit comes back into the band again and again, and the number of steps between two visits is bounded.'],
-    narrow: ['把窗口收窄到 (0.45, 0.55)：每次要等得更久，但等待仍有上限，落在窗口里的步数所占比例也不低于 1/(M + 1)。', 'Narrow the window to (0.45, 0.55): each wait is longer, yet the waits are still bounded, and the share of steps inside the window is no less than 1/(M + 1).'],
+    returns: ['圆上的点每一步转过黄金角；它的高度 cos 2πnφ 就是观测值。琥珀色的带子是观测窗 (0.2, 0.8)。轨道一次次回到带子里；洋红的括号标出这些步里两次进入之间最长的间隔，它只描述画出的这些步。', 'A point on the circle turns by the golden angle at each step; its height cos 2πnφ is what is observed. The amber band is the observation window (0.2, 0.8). The orbit comes back into the band again and again; the magenta bracket marks the longest gap between two visits among the steps drawn, and describes those steps only.'],
+    narrow: ['把窗口收窄到 (0.45, 0.55)：进入得更少，画出的间隔更长。图上的最长间隔只是这 233 步的样本，不是定理里的 M；定理只保证存在某个 M，图上不读出它。', 'Narrow the window to (0.45, 0.55): visits are rarer and the gaps drawn are longer. The longest gap on the picture is a sample of these 233 steps, not the M of the theorem; the theorem only guarantees that some M exists, and the picture does not read it off.'],
     window: ['菱形三十面体：六条五重轴各出一条棱，拼成 30 个菱形面、60 条棱、32 个顶点。靠近中心的点离每个面都远，球的半径 d∂ 就是它经得起的扰动。拖动可以转动它。', 'The rhombic triacontahedron: each of the six fivefold axes supplies an edge, giving 30 rhombic faces, 60 edges and 32 vertices. A point near the centre is far from every face, and the radius d∂ of the ball is the disturbance it can withstand. Drag to turn it.'],
-    edge: ['把点推向边界：球越缩越小，d∂ 归零的那一刻它碰到最近的面（洋红），再往外就不在窗口里了。', 'Push the point towards the boundary: the ball shrinks, d∂ reaches zero when the point touches the nearest face (magenta), and beyond that it is no longer in the window.']
+    edge: ['把点推向边界：球越缩越小，d∂ 归零的那一刻它碰到最近的面（品红），再往外就不在窗口里了。', 'Push the point towards the boundary: the ball shrinks, d∂ reaches zero when the point touches the nearest face (magenta), and beyond that it is no longer in the window.']
   };
   let booting = true;
   function applyPreset(id) {
@@ -427,14 +454,17 @@
       const q = state(), out = { scene: S.scene, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current };
       const pt = (p) => ({ a: p.a, b: p.b, x: p.x, c: p.c });
       if (S.scene === 'cut') Object.assign(out, { u: q.u, window: [LO + q.u, HI + q.u], half: q.half, selected: q.sel.map(pt), kinds: q.kinds, minGap: q.minGap, seen: q.seen.length, edge: q.edge, deep: q.deep && Object.assign(pt(q.deep), { margin: margin(q.deep.c, q.u) }), patch: S.patch && { lo: S.patch.lo, hi: S.patch.hi, ref: S.patch.ref, radius: PATCH, emp: q.emp, forced: q.forced.map(pt), free: q.free.map(pt) }, beta: Array.from({ length: 40 }, (_, n) => beta(n)) });
-      else if (S.scene === 'cassini') Object.assign(out, { k: q.k, fib: [FIB[q.k], FIB[q.k + 1], FIB[q.k + 2]].map(String), value: q.value, point: [q.x, q.y], all: Array.from({ length: KN }, (_, i) => Number(cassini(i + 1))) });
-      else if (S.scene === 'returns') Object.assign(out, { N: q.N, u1: q.u1, u2: q.u2, hits: q.hits, waits: q.waits, longest: q.longest, share: q.share, bound: q.bound, measure: q.measure });
+      else if (S.scene === 'cassini') Object.assign(out, { k: q.k, fib: [FIB[q.k], FIB[q.k + 1], FIB[q.k + 2]].map(String), value: q.value, point: [q.x, q.y], all: Array.from({ length: KN }, (_, i) => Number(cassini(i + 1))), slopes: Array.from({ length: KN }, (_, i) => slope(i + 1)) });
+      else if (S.scene === 'returns') Object.assign(out, { N: q.N, u1: q.u1, u2: q.u2, hits: q.hits, waits: q.waits, longest: q.longest, open: q.open, share: q.share, ratio: q.ratio, measure: q.measure });
       else Object.assign(out, { s: q.s, p: q.p, d: q.d, inside: q.inside, share: q.share, rin: TRIA.rin, rout: TRIA.rout, counts: [TRIA.faces.length, TRIA.edges.length, TRIA.verts.length], nearest: q.face.n });
       return out;
     },
     seek: (t) => { clock.pause(); clock.set(t); },
     /** The polyhedron as the page built it: vertices with their degree, faces as four vertex indices with the outward normal. */
     solid: () => ({ verts: TRIA.verts.map((v) => ({ p: v.p, deg: v.deg })), faces: TRIA.faces.map((f) => ({ i: f.i, n: f.n })), edges: TRIA.edges.map((e) => [e.a, e.b]) }),
+    /** The Zeckendorf code of n as the page computes it (digit i stands for F_{i+2}), and the strip it draws for n ≤ 54. */
+    zeck: (n) => zeck(n),
+    zstrip: () => ({ n: ZN, codes: ZSTRIP.codes, adjacent: ZSTRIP.adjacent, wrong: ZSTRIP.wrong }),
     /** The orbit point and the observed value at step n. */
     orbit: (n) => [orbitX(n), obs(n)],
     /** The lattice points the page works with: every golden integer with |a + bφ| ≤ 60 and |a + bψ| ≤ 2.3. */

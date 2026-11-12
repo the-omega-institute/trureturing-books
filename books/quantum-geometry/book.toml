@@ -1,11 +1,11 @@
 # 《量子计算的几何直觉》书籍元数据
 [book]
-version = "0.1.0"
+version = "0.1.0-beta.1"
 authors = ["Auric"]
 license = "CC-BY-4.0"
 editions = ["zh", "en"]
 code = "ORTHO//QUANTUM"
-date = "2026-11-10"
+date = "2026-11-12"
 
 [book.title]
 zh = "量子计算的几何直觉"
@@ -21,11 +21,12 @@ en = "A bilingual monograph and self-contained textbook uniting physical intuiti
 
 [outputs]
 html = true
-pdf = ["screen", "print"]
+pdf = ["academic"]
 epub = true
 
 [pdf]
 paper = "a4"
+academic_paper = "a4"
 
 [epub]
 embed_fonts = false

@@ -15,7 +15,11 @@
 
   /* ---------- model ---------- */
   const S = { ch: 'amp', p: 0.3, ratio: 2, rho0: [0, 0, -1], sig0: [1, 0, 0] };
-  const chName = (c) => ({ dephase: L('相位阻尼', 'Phase damping'), amp: L('振幅阻尼', 'Amplitude damping'), depol: L('去极化', 'Depolarizing') })[c];
+  /** Past T₂ = 2 T₁ the north-pole map keeps more sideways than √a and is no longer a channel (nor amplitude damping). */
+  const notChannel = () => S.ch === 'amp' && S.ratio > 2 + 1e-9;
+  const chName = (c) => (c === 'amp' && notChannel() ? L('固定北极的仿射映射（不是信道）', 'A map fixing the north pole (not a channel)')
+    : c === 'dephase' && S.p > 1 - 1e-12 ? L('捏合（完全去相干）', 'Pinching (complete dephasing)')
+      : ({ dephase: L('相位阻尼', 'Phase damping'), amp: L('振幅阻尼', 'Amplitude damping'), depol: L('去极化', 'Depolarizing') })[c]);
   /** The affine map after a whole number n of steps: { lam, a, h } with r ↦ (lam x, lam y, a z + h). */
   function whole(n) {
     const f = Math.pow(1 - S.p, n);   // 0^0 = 1: no step, no change
@@ -81,7 +85,7 @@
     st.sphere(1, { lat: [0], lon: 2, shade: 0.04, alpha: TRV.thumbMode ? 0.75 : 0.4 });
     st.line([0, 0, -1.18], [0, 0, 1.18], { color: P.faint, width: 1, alpha: 0.9, back: 0.5 });
     st.line([-1.12, 0, 0], [1.12, 0, 0], { color: P.faint, width: 1, alpha: 0.6, back: 0.5 });
-    st.tag('k0', [0, 0, 1.08], '|0⟩', 'num', { dx: -22 }); st.tag('k1', [0, 0, -1.08], '|1⟩', 'num', { dx: -22 }); st.tag('kp', [1.24, 0, 0], '|+⟩', 'num');
+    st.tag('k0', [0, 0, 1.08], '|0⟩', 'num', now.escapes ? { dx: -26, dy: -46 } : { dx: -22 });   // above the bulge when the image pierces the skin st.tag('k1', [0, 0, -1.08], '|1⟩', 'num', { dx: -22 }); st.tag('kp', [1.24, 0, 0], '|+⟩', 'num');
     // the image of the ball: outline of the spheroid with half-axes (λ, λ, a) centred at (0, 0, h)
     const e1 = v3.unit(v3.cross(D, Math.abs(D[2]) < 0.95 ? [0, 0, 1] : [1, 0, 0])), e2 = v3.cross(D, e1), outline = [];
     for (let i = 0; i < 96; i++) {
@@ -105,7 +109,7 @@
     const acting = S.p > 1e-9 && clock.t > 1e-9;
     if (acting) {
       if (S.ch === 'dephase') { c.save(); c.shadowColor = P.violet; c.shadowBlur = 8; st.line([0, 0, -1], [0, 0, 1], { color: P.violet, width: 2 * thick, alpha: 1, dash: [7, 5], back: 0.7 }); c.restore(); st.tag('fx', [0, 0, -0.55], L('不动点：整根竖轴', 'fixed: the whole axis'), 'raw c-vi', { dx: 72, fade: false }); }
-      else if (S.ch === 'amp') { st.dot([0, 0, 1], 6.5, P.violet, { glow: 12, fade: false }); st.tag('fx', [0, 0, 1], L('不动点', 'fixed point'), 'raw c-vi', { dx: 54, dy: -12 }); }
+      else if (S.ch === 'amp') { st.dot([0, 0, 1], 6.5, P.violet, { glow: 12, fade: false }); st.tag('fx', [0, 0, 1], L('不动点', 'fixed point'), 'raw c-vi', now.escapes ? { dx: 40, dy: -58 } : { dx: 54, dy: -12 }); }
       else { st.dot([0, 0, 0], 6.5, P.violet, { glow: 12, fade: false }); st.tag('fx', [0, 0, 0], L('不动点', 'fixed point'), 'raw c-vi', { dx: -46, dy: 16 }); }
     }
     // where the image pierces the skin: the farthest point, turned to face the side of the screen
@@ -132,18 +136,20 @@
     if (acting && S.ch !== 'dephase') st.dot(S.ch === 'amp' ? [0, 0, 1] : [0, 0, 0], 10.5, P.violet, { ring: true, width: 2, fade: false });
     // labels: ρ and σ pushed away from each other on screen; the distance at the middle of the white line
     const pr = st.p(now.rho), ps = st.p(now.sig), dx = pr[0] - ps[0], dy = pr[1] - ps[1], dl = Math.hypot(dx, dy);
-    const ux = dl > 1 ? dx / dl : 0, uy = dl > 1 ? dy / dl : -1;
+    // when the two land on one point, their labels go to either side of it, clear of the vertical axis
+    const ux = dl > 1 ? dx / dl : 1, uy = dl > 1 ? dy / dl : 0;
     st.tag('rho', now.rho, 'ρ', 'num c-am big', { dx: 15 * ux + 4, dy: 15 * uy - 6 });
     st.tag('sig', now.sig, 'σ', 'num big', { dx: -15 * ux - 4, dy: -15 * uy - 6 });
-    if (dl > 46) st.tag('T', v3.scale(v3.add(now.rho, now.sig), 0.5), `T ${fix(now.T, 3)}`, 'num', { dx: 14 * -uy, dy: 14 * ux });
+    if (dl > 46 && !notChannel()) st.tag('T', v3.scale(v3.add(now.rho, now.sig), 0.5), `T ${fix(now.T, 3)}`, 'num', { dx: 14 * -uy, dy: 14 * ux });
     st.end();
     $('legEsc').hidden = !now.escapes;
     $('hudBig').textContent = `${chName(S.ch)} · N = ${fix(clock.t, 2)}`;
     const k = Math.floor(clock.t + 1e-12), between = clock.t - k > 1e-9;
     let sub;
-    if (S.ch === 'dephase') sub = L(`横向 ×${fix(m.lam, 2)}（= cos θ_env，θ_env = ${fix(Math.acos(kit.clamp(m.lam, -1, 1)) / DEG, 1)}°）· 高度不变`, `across ×${fix(m.lam, 2)} (= cos θ_env, θ_env = ${fix(Math.acos(kit.clamp(m.lam, -1, 1)) / DEG, 1)}°) · height kept`);
+    if (S.ch === 'dephase') sub = L(`横向 ×${fix(m.lam, 2)}（= cos θ_env，θ_env = ${fix(Math.acos(kit.clamp(m.lam, -1, 1)) / DEG, 1)}°）· 高度不变 · ρ 的相干质量 ${fix(now.mass0, 3)} → ${fix(now.mass, 3)}`, `across ×${fix(m.lam, 2)} (= cos θ_env, θ_env = ${fix(Math.acos(kit.clamp(m.lam, -1, 1)) / DEG, 1)}°) · height kept · coherence mass of ρ ${fix(now.mass0, 3)} → ${fix(now.mass, 3)}`);
     else if (S.ch === 'depol') sub = L(`整体 ×${fix(m.a, 2)}，球心不动`, `everything ×${fix(m.a, 2)}, the centre stays`);
-    else sub = L(`横向 ×${fix(m.lam, 2)} · 纵向 ×${fix(m.a, 2)} · 球心上移 ${fix(m.h, 2)}`, `across ×${fix(m.lam, 2)} · up ×${fix(m.a, 2)} · centre lifted ${fix(m.h, 2)}`);
+    else sub = L(`横向 ×${fix(m.lam, 2)} · 纵向 ×${fix(m.a, 2)} · 球心上移 ${fix(m.h, 2)}`, `across ×${fix(m.lam, 2)} · up ×${fix(m.a, 2)} · centre lifted ${fix(m.h, 2)}`)
+      + (notChannel() ? L(` · T₂ = ${fix(S.ratio, 1)} T₁ > 2 T₁`, ` · T₂ = ${fix(S.ratio, 1)} T₁ > 2 T₁`) : '');
     $('hudSub').innerHTML = sub + (between ? L(` · 第 ${k} 与第 ${k + 1} 步之间`, ` · between steps ${k} and ${k + 1}`) : '');
   }
 
@@ -175,7 +181,7 @@
   function drawText() {
     const now = read(clock.t), m = now.m;
     $('roDist').innerHTML = `${fix(now.T0, 4)} → ${fix(now.T, 4)}`;
-    $('roDistSub').textContent = L(' · 只减不增', ' · never grows');
+    $('roDistSub').textContent = notChannel() ? L(' · 不是信道，不增定理管不到', ' · not a channel: the theorem does not apply') : L(' · 只减不增', ' · never grows');
     $('roLen').textContent = `${fix(v3.len(S.rho0), 3)} → ${fix(now.len, 3)}`;
     $('roAxes').textContent = `${fix(m.lam, 3)} · ${fix(m.a, 3)}`;
     $('roMass').textContent = `${fix(now.mass0, 3)} → ${fix(now.mass, 3)}`;
@@ -220,7 +226,6 @@
     dephase: { ch: 'dephase', p: 0.3, ratio: 2, rho: [50, 20], sig: [125, 250], max: 8, still: 2.5 },
     amp: { ch: 'amp', p: 0.3, ratio: 2, rho: [180, 0], sig: [90, 0], max: 8, still: 3.5 },
     wide: { ch: 'amp', p: 0.5, ratio: 6, rho: [40, 0], sig: [90, 180], max: 3, still: 2 },
-    depol: { ch: 'depol', p: 0.3, ratio: 2, rho: [60, 30], sig: [120, 250], max: 8, still: 2 },
     distance: { ch: 'amp', p: 0.5, ratio: 2, rho: [0, 0], sig: [90, 0], max: 1, still: 1 },
     centre: { ch: 'depol', p: 1, ratio: 2, rho: [0, 0], sig: [90, 0], max: 1, still: 1 }
   };
@@ -230,7 +235,6 @@
     dephase: ['每一步横向乘 0.7、高度不动：青色的球收腰成竖直的雪茄，再细成紫色的竖轴；ρ 与 σ 沿水平方向走向轴线。', 'Each step multiplies the sideways part by 0.7 and keeps the height: the cyan ball pinches into an upright cigar and thins towards the violet axis, while ρ and σ move horizontally towards it.'],
     amp: ['振幅阻尼：青色的球一边缩小一边往北极上漂，横向缩得比纵向慢；紫色的北极 |0⟩ 不动，从南极出发的 ρ 一路爬向北极。', 'Amplitude damping: the cyan ball shrinks while it drifts towards the north pole, more slowly across than up; the violet north pole |0⟩ stays put, and ρ climbs all the way from the south pole towards it.'],
     wide: ['横向保留得比 √a 多（T₂ = 6 T₁）：青色的像在北极附近从侧面鼓出球皮，品红的部分已经不在球里。这样的映射不把态送到态。', 'More is kept sideways than √a allows (T₂ = 6 T₁): near the north pole the cyan image bulges out through the skin, and the magenta part is no longer in the ball. Such a map does not send states to states.'],
-    depol: ['去极化：青色的球保持圆形，同心缩向紫色的球心；ρ 与 σ 沿各自的半径走向球心。', 'Depolarizing: the cyan ball stays round and shrinks evenly towards the violet centre; ρ and σ move along their radii towards it.'],
     distance: ['振幅阻尼走一步（γ = ½）：北极的 ρ 不动，+x 上的 σ 被拉向北方；白线标出的距离 T 从虚线的 0.707 缩到 0.433。', 'One step of amplitude damping (γ = ½): ρ at the north pole stays, σ at +x is pulled north, and the distance T on the white line drops from the dashed 0.707 to 0.433.'],
     centre: ['强度 1 的去极化：整颗球缩成紫色的球心一点。北极的 ρ 与 +x 的 σ 落在同一处，距离为零。', 'Depolarizing at strength 1: the whole ball shrinks to the violet centre. ρ from the north pole and σ from +x land on the same spot, at distance zero.']
   };

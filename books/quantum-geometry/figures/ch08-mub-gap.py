@@ -11,7 +11,7 @@ import math
 
 from _ch08 import LN2, h
 
-SIZE = (500, 290)
+SIZE = (430, 290)
 ALT = {
     "zh": "横轴是 Z 基对角态 ρ 在竖轴上的高度 r，从 −1 到 1；纵轴是熵（奈特）。顶上一条虚线是 ln 2，即 X 基捏合后的 S(σ)。"
           "下面的拱形曲线是 S(ρ)，在 r = 0 处碰到 ln 2，在两端降到 0。曲线与虚线之间的品红区域就是 D(ρ‖σ) = ln 2 − S(ρ)。"
@@ -36,7 +36,7 @@ def draw(fig):
     t = fig.t
     for r in (-1.0, -0.4, 0.0, 0.3, 0.9, 1.0):
         assert abs(D_to_centre(r) - (LN2 - S(r))) < 1e-12        # conclusion 3–4 of the theorem, d = 2
-    ax = fig.axes(66, 34, 330, 196, (-1, 1), (0, 0.86))
+    ax = fig.axes(66, 34, 340, 196, (-1, 1), (0, 0.86))
     pts = [(-1 + 2 * i / 200, S(-1 + 2 * i / 200)) for i in range(201)]
     top = [(x, LN2) for x, _ in pts]
     ax.cv.polygon([ax.pt(x, y) for x, y in pts] + [ax.pt(x, y) for x, y in reversed(top)], "area", fill_opacity=0.2)

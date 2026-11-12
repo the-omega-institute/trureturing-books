@@ -50,7 +50,7 @@ The reader is Pandoc Markdown without ``citations``: ``[@id]`` is resolved by
 
 Rendering: ``tools/filters/tr-book.lua`` (book structure) and ``tools/filters/tr-env.lua``
 (environments) run inside Pandoc. The PDF is compiled by the ``typst`` Python module with
-``theme/typst/book.typ`` (``sys.inputs["tr-variant"]`` = ``screen`` | ``print``); the EPUB
+``theme/typst/book.typ`` (``sys.inputs["tr-variant"]`` = ``screen`` | ``print`` | ``academic``); the EPUB
 is written by Pandoc with ``theme/epub/book.css`` and post-processed for Apple Books
 (``META-INF/com.apple.ibooks.display-options.xml``, deterministic zip) and validated with
 epubcheck when Java is available.
@@ -106,6 +106,7 @@ class PandocError(RuntimeError):
 LOCAL_STRINGS: dict[str, dict[str, str]] = {
     "zh": {
         "pdf.colophon": "版权信息",
+        "pdf.abstract": "摘要",
         "pdf.date": "日期",
         "pdf.authors": "作者",
         "pdf.license": "许可",
@@ -114,6 +115,7 @@ LOCAL_STRINGS: dict[str, dict[str, str]] = {
         "pdf.edition": "版本说明",
         "pdf.variant_screen": "屏幕版（深色）",
         "pdf.variant_print": "印刷版（浅色）",
+        "pdf.variant_academic": "学术预印本",
         "pdf.typeset": "排版",
         "pdf.typeset_value": "Pandoc 与 Typst，由 trureturing 书籍模板构建",
         "pdf.source": "源文件",
@@ -129,6 +131,7 @@ LOCAL_STRINGS: dict[str, dict[str, str]] = {
     },
     "en": {
         "pdf.colophon": "Colophon",
+        "pdf.abstract": "Abstract",
         "pdf.date": "Date",
         "pdf.authors": "Authors",
         "pdf.license": "License",
@@ -137,6 +140,7 @@ LOCAL_STRINGS: dict[str, dict[str, str]] = {
         "pdf.edition": "Edition",
         "pdf.variant_screen": "Screen edition (dark)",
         "pdf.variant_print": "Print edition (light)",
+        "pdf.variant_academic": "Research preprint",
         "pdf.typeset": "Typeset with",
         "pdf.typeset_value": "Pandoc and Typst, built with the trureturing books template",
         "pdf.source": "Source",
@@ -511,6 +515,11 @@ def parse_heading(line: str) -> tuple[int, str, mdscan.Attrs | None] | None:
 def format_heading(level: int, text: str, attrs: mdscan.Attrs | None) -> str:
     line = "#" * level + " " + text
     if attrs and (attrs.id or attrs.classes or attrs.kv):
+        if "*" in text:
+            # An unmatched asterisk can make Pandoc consume trailing attributes
+            # as title text. Carry generated metadata before the untouched title.
+            marker = attrs.to_pandoc()[:-1] + " .tr-heading-meta}"
+            return "#" * level + " []" + marker + " " + text
         line += " " + attrs.to_pandoc()
     return line
 
@@ -1407,7 +1416,8 @@ def _stage_theme(out_dir: Path) -> None:
     gen.mkdir(parents=True, exist_ok=True)
     shutil.copy2(paths.GENERATED / "tokens.typ", gen / "tokens.typ")
     tokens = json.loads(paths.TOKENS.read_text(encoding="utf-8"))
-    for variant, palette in (("screen", tokens["screen"]), ("print", tokens["paper"])):
+    for variant in config.PDF_VARIANTS:
+        palette = tokens["screen"] if variant == "screen" else tokens["paper"]
         (dst / f"code-{variant}.tmTheme").write_text(code_theme(palette, variant), encoding="utf-8")
 
 
@@ -1514,6 +1524,7 @@ def book_meta(site: config.Site, book: config.Book, edition: config.Edition, mod
         "publisher": site.text(site.title, lang),
         "keywords": _keywords(book, edition),
         "paper": str(book.pdf.get("paper", "a4")),
+        "academic_paper": str(book.pdf.get("academic_paper", "a4")),
         "online_url": online,
         "repo_url": f"https://github.com/{site.repo}" if site.repo else "",
         "formal_count": formal,
@@ -1536,6 +1547,7 @@ def book_meta(site: config.Site, book: config.Book, edition: config.Edition, mod
             "badge_lean": s("badge.lean"),
             "lean_label": t(lang, "pdf.lean_label"),
             "colophon": t(lang, "pdf.colophon"),
+            "abstract": t(lang, "pdf.abstract"),
             "date": t(lang, "pdf.date"),
             "authors": t(lang, "pdf.authors"),
             "license": t(lang, "pdf.license"),
@@ -1544,6 +1556,7 @@ def book_meta(site: config.Site, book: config.Book, edition: config.Edition, mod
             "edition": t(lang, "pdf.edition"),
             "variant_screen": t(lang, "pdf.variant_screen"),
             "variant_print": t(lang, "pdf.variant_print"),
+            "variant_academic": t(lang, "pdf.variant_academic"),
             "typeset": t(lang, "pdf.typeset"),
             "typeset_value": t(lang, "pdf.typeset_value"),
             "source": t(lang, "pdf.source"),
@@ -1610,24 +1623,35 @@ _TYPST_FONT_WARNING = re.compile(r"unknown font family: (.+)")
 
 
 def compile_typst(main: Path, out_path: Path, *, root: Path, fmt: str = "pdf", ppi: float | None = None,
-                  sys_inputs: dict[str, str] | None = None, timestamp: int | None = None) -> Path:
-    """Compile with the typst Python module; font fallbacks are reported in one line."""
-    import typst  # type: ignore
-
+                  sys_inputs: dict[str, str] | None = None, timestamp: int | None = None,
+                  pdf_tags: bool = True) -> Path:
+    """Compile in a fresh process so each document releases its Typst memory on exit."""
     out_path.parent.mkdir(parents=True, exist_ok=True)
     kwargs = dict(output=str(out_path), root=str(root), font_paths=[str(d) for d in font_dirs()],
                   format=fmt, sys_inputs=sys_inputs or {})
+    if fmt == "pdf":
+        kwargs["pdf_tags"] = pdf_tags
     if ppi:
         kwargs["ppi"] = ppi
     if timestamp:
         kwargs["timestamp"] = timestamp
     try:
-        _, warnings = typst.compile_with_warnings(str(main), **kwargs)
-    except (typst.TypstError, RuntimeError, OSError) as exc:
+        result = subprocess.run(
+            [sys.executable, str(Path(__file__).with_name("typst_worker.py"))],
+            input=json.dumps({"main": str(main), "kwargs": kwargs}),
+            capture_output=True, encoding="utf-8",
+        )
+    except OSError as exc:
         raise PandocError(f"typst failed for {paths.rel(main)}:\n{exc}") from exc
+    if result.returncode:
+        detail = result.stderr.strip() or f"compiler worker exited with status {result.returncode}"
+        raise PandocError(f"typst failed for {paths.rel(main)}:\n{detail}")
+    try:
+        warnings = json.loads(result.stdout)
+    except ValueError as exc:
+        raise PandocError(f"typst failed for {paths.rel(main)}:\ninvalid compiler worker response") from exc
     missing: set[str] = set()
-    for w in warnings or []:
-        msg = getattr(w, "message", str(w))
+    for msg in warnings:
         m = _TYPST_FONT_WARNING.search(msg)
         if m:
             missing.add(m.group(1))
@@ -1640,7 +1664,7 @@ def compile_typst(main: Path, out_path: Path, *, root: Path, fmt: str = "pdf", p
 
 def build_pdf(site, book, edition, model, lock, variant: str, out_path: Path, *,
               stage_dir: Path | None = None) -> Path:
-    """Build ``out_path`` (PDF, variant ``screen`` = dark neon or ``print`` = white paper).
+    """Build ``out_path`` (PDF: ``screen`` (dark), ``print`` (light), or ``academic`` (scholarly layout)).
 
     ``stage_dir`` overrides build/stage/<slug>/<lang>/pandoc/ (tests).
     """
@@ -1648,7 +1672,8 @@ def build_pdf(site, book, edition, model, lock, variant: str, out_path: Path, *,
         raise PandocError(f"unknown PDF variant {variant!r}; expected one of {config.PDF_VARIANTS}")
     staged = typst_source(site, book, edition, model, lock, stage_dir=stage_dir)
     return compile_typst(staged.dir / "main.typ", Path(out_path), root=staged.dir,
-                         sys_inputs={"tr-variant": variant}, timestamp=source_date_epoch(book) or None)
+                         sys_inputs={"tr-variant": variant}, timestamp=source_date_epoch(book) or None,
+                         pdf_tags=bool(book.pdf.get("academic_tags", False)) if variant == "academic" else True)
 
 
 # --------------------------------------------------------------------------- EPUB

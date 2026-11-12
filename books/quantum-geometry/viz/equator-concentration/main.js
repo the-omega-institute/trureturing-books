@@ -13,6 +13,7 @@
   const $ = (id) => document.getElementById(id);
   const TH = TRV.thumbMode ? 2 : 1;          // thicker strokes on the wordless cover
   const NPTS = 1500, NMAX = 20;
+  const ZOOM_W = 0.05, ZW = 4;              // magnify once 1/√d < ZOOM_W (d ≥ 512); the window is |x₁√d| ≤ ZW
   const YC = [-1.16, 1.16];                  // the shared vertical x₁ scale
 
   /* ---------- special functions ---------- */
@@ -93,7 +94,7 @@
   const dName = (d) => (d >= 4 && Number.isInteger(Math.log2(d)) ? `2${String(Math.log2(d)).split('').map((c) => SUP[c]).join('')} = ${d.toLocaleString('en-US')}` : String(d));
 
   /* ---------- layout: circle on the left, the density on the right (one x₁ scale) ---------- */
-  let boxes = null;
+  let boxes = null, LOUPE = null;
   function layout(W, H) {
     const st = $('stage').getBoundingClientRect(), below = (el) => (el ? el.getBoundingClientRect().bottom - st.top : 0);
     const thumb = TRV.thumbMode;
@@ -129,8 +130,8 @@
     ctx.globalAlpha = 1;
     if (!TRV.thumbMode) {
       tagAt('axis', g, 0, YC[1] - 0.02, L('测量轴 x₁', 'measured axis x₁'), 'raw cy', 0, 4);
-      tagAt('eq', g, 1.15, 0, L('赤道', 'equator'), 'tick', 0, -8);
-      tagAt('band', g, -1.15, e, `ε = ${fix(e, 2)}`, 'raw cy', 30, -9);
+      tagAt('eq', g, 0.55, 0, L('赤道', 'equator'), 'raw ink', 0, -9);
+      tagAt('band', g, -0.55, e, `ε = ${fix(e, 2)}`, 'raw cy', 0, -15);
     }
   }
 
@@ -161,9 +162,50 @@
     // ±1/√d
     const w = F.width;
     for (const s of [-1, 1]) g.line([[0, s * w], [xmax * 0.06, s * w]], P.ink, { width: 2 * TH });
+    // a bump only a few pixels thick gets a magnifier: the same density against x₁√d, enlarged √d times
+    const zoom = w < ZOOM_W;
+    LOUPE = null;
+    if (zoom) drawLoupe(W, H, F, sm, g, xmax);
     if (!TRV.thumbMode) {
-      tagAt('wd', g, xmax * 0.06, w, '±1/√d', 'num', 30, w > 0.12 ? 0 : -10);
+      if (!zoom) tagAt('wd', g, xmax * 0.06, w, '±1/√d', 'num', 30, 0);
       tagAt('cmp', g, xmax, YC[1] - 0.12, L(`带外 ${share(F.lnOut)} ≤ 界 ${F.bound < 1e-3 ? share(Math.log(F.bound)) : fix(F.bound, 4)}`, `outside ${share(F.lnOut)} ≤ bound ${F.bound < 1e-3 ? share(Math.log(F.bound)) : fix(F.bound, 4)}`), 'raw mg', -110, 0);
+    }
+  }
+
+  /** The magnifier: the region |x₁| ≤ ZW/√d of the density panel, redrawn against z = x₁√d. */
+  function drawLoupe(W, H, F, sm, g, xmax) {
+    const d = F.d, e = F.eps, rd = Math.sqrt(d), ctx = g.ctx, b = boxes.p;
+    const ix0 = g.X(xmax * 0.3), ix1 = b.x + b.w - 6, iy0 = g.Y(0.94), iy1 = g.Y(0.2);
+    if (ix1 - ix0 < 80 || iy1 - iy0 < 60) return;   // too cramped (a phone): no magnifier
+    LOUPE = { mag: rd, window: ZW };
+    // the source strip in the main panel and the two leader lines to the window
+    const sy0 = g.Y(ZW / rd), sy1 = g.Y(-ZW / rd), sx0 = g.X(0), sx1 = g.X(xmax);
+    ctx.save();
+    ctx.strokeStyle = P.dim; ctx.lineWidth = TH; ctx.globalAlpha = 0.8; ctx.setLineDash([3, 3]);
+    ctx.strokeRect(sx0 + 0.5, sy0 - 1.5, sx1 - sx0 - 1, Math.max(3, sy1 - sy0 + 3));
+    ctx.beginPath(); ctx.moveTo(ix0, iy1); ctx.lineTo(sx0 + (ix0 - sx0) * 0.5, sy0 - 1.5); ctx.moveTo(ix1, iy1); ctx.lineTo(Math.min(ix1, sx1), sy0 - 1.5); ctx.stroke();
+    ctx.setLineDash([]); ctx.globalAlpha = 0.94; ctx.fillStyle = P.stage; ctx.fillRect(ix0, iy0, ix1 - ix0, iy1 - iy0);
+    ctx.globalAlpha = 1; ctx.strokeStyle = P.dim; ctx.strokeRect(ix0 + 0.5, iy0 + 0.5, ix1 - ix0 - 1, iy1 - iy0 - 1);
+    ctx.restore();
+    const dz = (z) => density(d, z / rd) / rd, zmax = Math.max(0.3, dz(0) * 1.15), zE = e * rd;
+    const h = kit.plot($('cv'), { x: [0, zmax], y: [-ZW, ZW], pad: [ix0 + 30, W - ix1 + 8, iy0 + 28, H - iy1 + 8], clear: false });
+    h.axes({ yTicks: TRV.thumbMode ? [] : [[-ZW, `−${ZW}`], [0, '0'], [ZW, String(ZW)]], xTicks: [] });
+    if (zE < ZW) { h.rect(0, -zE, zmax, zE, P.cyan, { alpha: 0.08 }); for (const s of [-1, 1]) h.line([[0, s * zE], [zmax, s * zE]], P.cyan, { width: TH, dash: [4, 4], alpha: 0.7 }); }
+    else h.rect(0, -ZW, zmax, ZW, P.cyan, { alpha: 0.08 });
+    const nb = 40, bw = 2 * ZW / nb, cnt = new Array(nb).fill(0);
+    for (const x of sm.x) { const k = Math.floor((x * rd + ZW) / bw); if (k >= 0 && k < nb) cnt[k]++; }
+    cnt.forEach((n, k) => { if (!n) return; const y0 = -ZW + k * bw, ya = h.Y(y0), yb = h.Y(y0 + bw); h.ctx.globalAlpha = 0.5; h.ctx.fillStyle = P.dim; h.ctx.fillRect(h.X(0), Math.min(ya, yb) - 0.5, h.X(Math.min(n / (NPTS * bw), zmax)) - h.X(0), Math.max(1, Math.abs(ya - yb) - 0.5)); h.ctx.globalAlpha = 1; });
+    const K = 240, pts = []; for (let i = 0; i <= K; i++) { const z = -ZW + 2 * ZW * i / K; pts.push([Math.min(dz(z), zmax), z]); }
+    const part = (lo, hi) => { const ps = pts.filter((p) => p[1] >= lo && p[1] <= hi); return ps.length < 2 ? null : [[0, ps[0][1]], ...ps, [0, ps[ps.length - 1][1]]]; };
+    const pin = part(-zE, zE); if (pin) h.poly(pin, P.cyan, { alpha: 0.45 });
+    for (const pp of [part(zE, ZW), part(-ZW, -zE)]) if (pp) h.poly(pp, P.magenta, { alpha: 0.5 });
+    h.line(pts, P.ink, { width: 1.6 * TH, alpha: 0.9 });
+    for (const s of [-1, 1]) h.line([[0, s], [zmax * 0.06, s]], P.ink, { width: 2 * TH });
+    if (!TRV.thumbMode) {
+      const mag = rd >= 100 ? Math.round(rd).toLocaleString('en-US') : String(+rd.toFixed(1));
+      stage.tag('zm', [(ix0 + ix1) / 2, iy0 + 11], L(`放大 ×${mag} · 纵轴 x₁√d`, `×${mag} · vertical axis x₁√d`), 'raw', { screen: true, dx: 0, dy: 0 });
+      tagAt('wd', h, zmax * 0.06, 1, '±1/√d', 'num', 30, 0);
+      if (zE >= ZW) stage.tag('ze', [(ix0 + ix1) / 2, iy1 + 12], L(`带边 ±ε√d = ±${fix(zE, 0)}，远在窗外`, `belt edges at ±ε√d = ±${fix(zE, 0)}, far outside`), 'raw cy', { screen: true });
     }
   }
 
@@ -243,17 +285,15 @@
   const L3 = Math.log2(3);
   const PRESETS = {
     three: { t: L3, eps: 0.1 },
-    four: { t: 4, eps: 0.1 },
     width: { t: 10, eps: 0.1 },
     bound: { t: 7, eps: 0.2 },
     twenty: { t: 20, eps: 0.1 }
   };
   const NOTES = {
-    three: ['普通的三维球面，d = 3：圆上的点上下铺开，右边的密度是一条竖直的直线 1/2，直方图围着它起伏——点的高度 x₁ 在 −1 到 1 之间均匀分布。ε = 0.1 的赤道带里恰好是 10% 的点（青色），其余 90% 是品红。', 'The ordinary sphere, d = 3: the dots spread up and down the circle, and on the right the density is a vertical straight line at 1/2 with the histogram around it: the height x₁ is spread evenly between −1 and 1. The belt with ε = 0.1 holds exactly 10% of the points (cyan); the other 90% are magenta.'],
-    four: ['四个量子比特，d = 16：点向赤道聚拢，密度变成一个鼓包，两道短横线标出 ±1/√d = ±0.25。ε = 0.1 的带里已有 30% 的点，品红的点只剩 70%。', 'Four qubits, d = 16: the dots gather towards the equator and the density becomes a bump; the two short ticks mark ±1/√d = ±0.25. The belt with ε = 0.1 already holds 30% of the points, and only 70% are left magenta.'],
-    width: ['维数从 2 一路升到 2¹⁰ = 1024：点越来越挤向赤道，鼓包越来越窄、越来越高，±1/√d 的短横线一起向赤道收拢。到 d = 1024 时宽度是 0.031，带外只剩 0.13%。', 'The dimension rises from 2 to 2¹⁰ = 1024: the dots crowd ever closer to the equator, the bump grows narrower and taller, and the ±1/√d ticks close in with it. At d = 1024 the width is 0.031 and only 0.13% lies outside.'],
+    three: ['普通的三维球面，d = 3：圆上的点上下铺开，右边的密度是一条竖直的直线 1/2，直方图围着它起伏——点的高度 x₁ 在 −1 到 1 之间均匀分布。ε = 0.1 的赤道带恰好占球面的 10%；1500 个点里落进带里的青色点约有一成，具体几个随抽样而变，其余是品红。', 'The ordinary sphere, d = 3: the dots spread up and down the circle, and on the right the density is a vertical straight line at 1/2 with the histogram around it: the height x₁ is spread evenly between −1 and 1. The belt with ε = 0.1 takes exactly 10% of the sphere; about a tenth of the 1500 dots fall in it (cyan), the exact count varying with the draw, and the rest are magenta.'],
+    width: ['维数从 2 一路升到 2¹⁰ = 1024：点越来越挤向赤道，鼓包越来越窄、越来越高，±1/√d 的短横线一起向赤道收拢。到 d = 1024 时宽度是 0.031，带外只剩 0.13%；鼓包薄得看不清，右上角的放大镜把赤道附近放大 32 倍，鼓包在那里仍是 ±1/√d 那么宽。', 'The dimension rises from 2 to 2¹⁰ = 1024: the dots crowd ever closer to the equator, the bump grows narrower and taller, and the ±1/√d ticks close in with it. At d = 1024 the width is 0.031 and only 0.13% lies outside; the bump is too thin to see, so the magnifier at the upper right enlarges the equator 32 times, and there it is still ±1/√d wide.'],
     bound: ['d = 2⁷ = 128，带宽 ε = 0.2：品红的带外份额是 0.023，马尔可夫上界 1/(dε²) = 0.195 在它之上，大了八倍多。', 'd = 2⁷ = 128 with ε = 0.2: the magenta outside share is 0.023, and the Markov bound 1/(dε²) = 0.195 lies above it, more than eight times larger.'],
-    twenty: ['二十个量子比特，d = 2²⁰ = 1,048,576，ε = 0.1：所有的点都落在赤道上，密度是赤道上的一根细针。带外份额的马尔可夫上界是 9.54 × 10⁻⁵，精确值约为 3 × 10⁻²²⁹¹。', 'Twenty qubits, d = 2²⁰ = 1,048,576, ε = 0.1: every dot lands on the equator, and the density is a thin needle there. The Markov bound on the outside share is 9.54 × 10⁻⁵; the exact share is about 3 × 10⁻²²⁹¹.']
+    twenty: ['二十个量子比特，d = 2²⁰ = 1,048,576，ε = 0.1：所有的点都落在赤道上，密度缩成赤道上的一根细针；右上角的放大镜把赤道附近放大 1024 倍，针原来是一个宽 ±1/√d 的鼓包，带边 ±ε 远在窗外。带外份额的马尔可夫上界是 9.54 × 10⁻⁵，精确值约为 3 × 10⁻²²⁹¹。', 'Twenty qubits, d = 2²⁰ = 1,048,576, ε = 0.1: every dot lands on the equator and the density shrinks to a thin needle there; the magnifier at the upper right enlarges the equator 1024 times, and the needle turns out to be a bump ±1/√d wide, with the belt edges ±ε far outside the window. The Markov bound on the outside share is 9.54 × 10⁻⁵; the exact share is about 3 × 10⁻²²⁹¹.']
   };
   let booting = true;
   function applyPreset(id) {
@@ -276,13 +316,15 @@
 
   /* ---------- probe, cover, start ---------- */
   window.EQUATOR_DEBUG = {
-    get state() { const F = facts(); return Object.assign({ t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, seed: S.seed }, F); },
+    get state() { const F = facts(); return Object.assign({ t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, seed: S.seed, loupe: LOUPE && Object.assign({}, LOUPE) }, F); },
     samples: () => samples().x.slice(),
     density: (x) => density(dOf(S.t), x),
+    loupeDensity: (z) => { const d = dOf(S.t); return density(d, z / Math.sqrt(d)) / Math.sqrt(d); },
     seek: (t) => { clock.pause(); clock.set(t); }
   };
-  window.TRV_THUMB = () => { applyPreset('four'); cards.mark('four'); paint.now(); };
-  cards.pick(cards.initial('four'));
+  // the cover shows four qubits, d = 16: the dots have begun to gather and the bump is plain to see
+  window.TRV_THUMB = () => { clock.pause(); stopAt = null; S.eps = 0.1; fEps.set(0.1); clock.set(3); cards.mark(null); paint.now(); };
+  cards.pick(cards.initial('width'));
   booting = false;
   paint();
 })();

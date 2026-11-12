@@ -19,7 +19,7 @@ $$
 在这行只有六个符号的恒等式面前，困惑物理学界百年的波粒二象性、罗伯逊—薛定谔不确定性原理、双缝干涉与惠勒延迟选择实验，乃至传统量子力学教材里互不统属的“五大公设”，都将水落石出地收束为同一条初等几何铁律——**余弦粒子线与正弦波动面的勾股守恒 $\cos^2\theta + \sin^2\theta = 1$**。
 
 ::: {.figure src="ch06-overview"}
-**图 6。** 本章地图：第 I 栏，琥珀色的 $\vv{B}$ 落在 $\vv{A}$ 上的青色影子是 $\cos\theta$，两者张出的品红平行四边形是 $\sin\theta$；第 II 栏，在等权纯双路、理想平衡合束并扫描参考相位的模型中，取 $\alpha = \arccos|c|$，四分之一圆 $D^2 + V^2 = 1$，琥珀色的点在 $\alpha = 60^\circ$ 处，由品红的 $D \approx 0.87$ 与青色的 $V = 0.5$ 拼成，圆弧两端分别是“只有路径”与“只有条纹”（[@thm-record-coherence-complementarity]）；第 III 栏，[@ex-wheeler-delayed-choice-tradeoff] 中 $\alpha = 60^\circ$ 的 $\rho$，青色的对角部分 $\Pi(\rho)$ 与品红的副对角部分 $\rho - \Pi(\rho)$ 是直角三角形的两条直角边，斜边是 $\rho$（[@cor-pinching-pythagorean]）。
+**图 6。** 本章地图：第 I 栏，琥珀色的 $\vv{B}$ 落在 $\vv{A}$ 上的青色影子是 $\cos\theta$，两者张出的品红平行四边形是 $\sin\theta$；第 II 栏，在等权纯双路、理想平衡合束并扫描参考相位的模型中，取 $\alpha = \arccos|c|$，四分之一圆 $D^2 + V^2 = 1$，琥珀色的点在 $\alpha = 60^\circ$ 处，由青色的横段 $V = 0.5$ 与品红的竖段 $D \approx 0.87$ 拼成，圆弧右端是“只有条纹”，上端是“只有路径”（[@thm-record-coherence-complementarity]）；第 III 栏，[@ex-wheeler-delayed-choice-tradeoff] 中 $\alpha = 60^\circ$ 的 $\rho$，青色的对角部分 $\Pi(\rho)$ 与品红的副对角部分 $\rho - \Pi(\rho)$ 是直角三角形的两条直角边，斜边是 $\rho$（[@cor-pinching-pythagorean]）。
 :::
 
 ## 6.1 内积 $\vv{A}\cdot\vv{B}$ 为何是“粒子”？外积 $\vv{A}\wedge\vv{B}$ 为何是“波”？ {#sec-inner-particle-outer-wave}
@@ -246,7 +246,19 @@ $$
 **正交标记，条纹消失。** $\alpha = 90^\circ$：两支箭头垂直，青色的影子缩成零，品红的高到顶，点停在圆的最高处（[@thm-record-coherence-complementarity] 的性质 2）。屏上的落点堆成一个没有条纹的鼓包。
 :::
 
-同时，从单比特约化密度矩阵 $\rho \in M_2(\mathbb{C})$ 的视角来看（回忆[第四章](ch04-decoherence.md)的 [@thm-pinching-pythagorean]），当环境记录彻底正交（$c = 0$）并执行标准基捏合投影 $\Pi(\rho)$（[`pinching`](lean:D5/S3/QuantumChannels/Pinching.pinching)）时，对角粒子布居 $\Pi(\rho)$ 与副对角波动相干残差 $\rho - \Pi(\rho)$ 在希尔伯特—施密特内积（[`hilbertSchmidtInner`](lean:D5/S3/QuantumChannels/Pinching.hilbertSchmidtInner)）下严格正交（[`pinching_hilbert_schmidt_orthogonal`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_orthogonal)）。我们将其作为本章几何积正交分解在算子空间上的直接推论重申如下：
+性质 3 是另一端：两支标记重合时 $V = 1$、$D = 0$，屏上是对比度满格的条纹。
+
+::: {.viz src="double-slit-marker" preset="wave" height="500"}
+**标记重合，条纹满格。** $\alpha = 0$：琥珀色的 $r_R$ 与 $r_L$ 重合，青色的影子是整条半径，品红的高为零，点落在圆的最右端（[@thm-record-coherence-complementarity] 的性质 3）。屏上的落点堆出满对比度的条纹，暗纹处几乎没有落点。
+:::
+
+回到 6.1 节的那一颗比特，波的这一端就是面积撑满、线缩成一点：
+
+::: {.viz src="qubit-geometry" preset="area" height="500"}
+**全是面积的一端。** $\vv{B}$ 与 $\vv{A}$ 垂直时，青色的线缩成一个点，品红的面积撑到最大：线 $\cos\theta = 0$，面积 $\sin\theta = 1$。用图下方的 ◀ 切到“全是线”的另一端，对照 [@thm-record-coherence-complementarity] 的两个极限。
+:::
+
+再看性质 2 那一端：从单比特约化密度矩阵 $\rho \in M_2(\mathbb{C})$ 的视角来看（回忆[第四章](ch04-decoherence.md)的 [@thm-pinching-pythagorean]），当环境记录彻底正交（$c = 0$）并执行标准基捏合投影 $\Pi(\rho)$（[`pinching`](lean:D5/S3/QuantumChannels/Pinching.pinching)）时，对角粒子布居 $\Pi(\rho)$ 与副对角波动相干残差 $\rho - \Pi(\rho)$ 在希尔伯特—施密特内积（[`hilbertSchmidtInner`](lean:D5/S3/QuantumChannels/Pinching.hilbertSchmidtInner)）下严格正交（[`pinching_hilbert_schmidt_orthogonal`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_orthogonal)）。我们将其作为本章几何积正交分解在算子空间上的直接推论重申如下：
 
 ::: {.corollary #cor-pinching-pythagorean title="单比特捏合投影的正交勾股分解与副对角波动相干质量" lean="D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass"}
 对任意单比特矩阵 $\rho \in M_2(\mathbb{C})$ 及标准基对角捏合算子 $\Pi(\rho)_{ij} = \delta_{ij}\rho_{ij}$（[`pinching`](lean:D5/S3/QuantumChannels/Pinching.pinching)），对角粒子部分 $\Pi(\rho)$ 与副对角相干残差 $\rho - \Pi(\rho)$ 在希尔伯特—施密特内积 $\langle X, Y\rangle_{\mathrm{HS}} = \Tr(X^* Y)$ 下正交（$\langle \Pi(\rho),\, \rho - \Pi(\rho)\rangle_{\mathrm{HS}} = 0$，[`pinching_hilbert_schmidt_orthogonal`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_orthogonal)），故总希尔伯特—施密特范数平方满足正交勾股分解
@@ -287,11 +299,11 @@ $$
 :::
 
 ::: {.viz src="double-slit-marker" preset="delayed" height="500"}
-**先落点，后读标记。** $\alpha = 90^\circ$，落点全部到齐之后才按路径读标记：同一批落点被复制成“左缝”“右缝”两行，品红的两行都是没有条纹的鼓包。
+**先落点，后读标记。** $\alpha = 90^\circ$，落点全部到齐之后才按路径读标记：同一批落点按读数分成“左缝”“右缝”两行，两行加起来正好是全部落点，品红的两行都是没有条纹的鼓包。
 :::
 
 ::: {.viz src="double-slit-marker" preset="erase" height="500"}
-**同一批落点，换一种读法。** 还是这些落点，改按擦除方向读标记：青色的一行是条纹，另一行是错开半格的反条纹，两行合起来仍是上面那个鼓包。后来的选择没有移动屏上任何一个落点，只决定怎样把它们分开。
+**同一批落点，换一种读法。** 还是这些落点，改按擦除方向读标记，分出的两行都是青色：“读作 +”的一行是条纹，“读作 −”的一行是错开半格的反条纹，两行合起来仍是上面那个鼓包。后来的选择没有移动屏上任何一个落点，只决定怎样把它们分开。
 :::
 
 ::: {.remark #rem-englert-greenberger-literature title="Wootters–Zurek、Greenberger–Yasin 与 Englert 波粒二象性不等式（文献结果，未在本书形式化）"}
@@ -310,10 +322,6 @@ $$
 
 ::: {.viz src="double-slit-marker" preset="mixed" height="500"}
 **混合的标记落在圆内。** 标记本身带噪声（纯态权重 $\lambda = 0.5$，纯度 $\Tr\rho^2 = (1 + \lambda^2)/2 = 0.625$）：可见度仍是 $V = 0.5$，能读出的迹距离可区分度只剩 $0.43$，点沿品红的虚弧落进圆内，$D^2 + V^2 \approx 0.44 < 1$。这是上面 Englert 不等式（文献结果，未在本书形式化）的一个实例。
-:::
-
-::: {.viz src="qubit-geometry" preset="area" height="500"}
-**全是面积的一端。** $\vv{B}$ 与 $\vv{A}$ 垂直时，线缩成一个点，面积撑到最大：两种咔哒各占一半，条纹最清楚。用图下方的 ◀ 切到“全是线”的另一端，对照 [@thm-record-coherence-complementarity] 的两个极限。
 :::
 
 ::: {.viz src="double-slit-marker" height="560"}

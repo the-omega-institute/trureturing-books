@@ -19,7 +19,7 @@ $$
 Before this six-symbol identity, wave–particle duality, the Robertson–Schrödinger uncertainty relation, double-slit interference, Wheeler's delayed-choice experiment, and the five disconnected postulates of textbook quantum mechanics all collapse into a single elementary geometric law: **Pythagorean conservation $\cos^2\theta + \sin^2\theta = 1$ between the cosine particle line and the sine wave area**.
 
 ::: {.figure src="ch06-overview"}
-**Figure 6.** The chapter at a glance. Panel I: the cyan shadow of the amber $\vv{B}$ on $\vv{A}$ is $\cos\theta$, and the magenta parallelogram they span is $\sin\theta$. Panel II: for equal-weight pure paths with ideal balanced recombination and a scanned reference phase, set $\alpha = \arccos|c|$; the quarter circle $D^2 + V^2 = 1$; the amber point at $\alpha = 60^\circ$ is made of the magenta $D \approx 0.87$ and the cyan $V = 0.5$, and the ends of the arc are “path only” and “fringes only” ([@thm-record-coherence-complementarity]). Panel III: the $\rho$ of [@ex-wheeler-delayed-choice-tradeoff] at $\alpha = 60^\circ$; its cyan diagonal part $\Pi(\rho)$ and magenta off-diagonal part $\rho - \Pi(\rho)$ are the two legs of a right triangle whose hypotenuse is $\rho$ ([@cor-pinching-pythagorean]).
+**Figure 6.** The chapter at a glance. Panel I: the cyan shadow of the amber $\vv{B}$ on $\vv{A}$ is $\cos\theta$, and the magenta parallelogram they span is $\sin\theta$. Panel II: for equal-weight pure paths with ideal balanced recombination and a scanned reference phase, set $\alpha = \arccos|c|$; the quarter circle $D^2 + V^2 = 1$; the amber point at $\alpha = 60^\circ$ is made of the cyan $V = 0.5$ across and the magenta $D \approx 0.87$ up; the right end of the arc is “fringes only”, the top end “path only” ([@thm-record-coherence-complementarity]). Panel III: the $\rho$ of [@ex-wheeler-delayed-choice-tradeoff] at $\alpha = 60^\circ$; its cyan diagonal part $\Pi(\rho)$ and magenta off-diagonal part $\rho - \Pi(\rho)$ are the two legs of a right triangle whose hypotenuse is $\rho$ ([@cor-pinching-pythagorean]).
 :::
 
 ## 6.1 Why Is the Inner Product $\vv{A}\cdot\vv{B}$ the "Particle" and the Exterior Product $\vv{A}\wedge\vv{B}$ the "Wave"? {#sec-inner-particle-outer-wave}
@@ -246,7 +246,19 @@ By the Cauchy–Schwarz inequality and $\|r_L\| = \|r_R\| = 1$, we have $0 \le V
 **Orthogonal markers, no fringes.** At $\alpha = 90^\circ$ the arrows are square: the cyan shadow shrinks to nothing, the magenta height reaches the top, and the point sits at the highest point of the circle (property 2 of [@thm-record-coherence-complementarity]). The hits on the screen pile up into a hump without fringes.
 :::
 
-Simultaneously, on the $2\times 2$ qubit density matrix $\rho \in M_2(\mathbb{C})$ (recalling [@thm-pinching-pythagorean] from [Chapter 4](ch04-decoherence.md)), standard-basis pinching $\Pi(\rho)$ ([`pinching`](lean:D5/S3/QuantumChannels/Pinching.pinching)) decomposes $\rho$ into a diagonal particle part $\Pi(\rho)$ and an off-diagonal wave residual $\rho - \Pi(\rho)$ that are strictly orthogonal under the Hilbert–Schmidt inner product ([`hilbertSchmidtInner`](lean:D5/S3/QuantumChannels/Pinching.hilbertSchmidtInner), [`pinching_hilbert_schmidt_orthogonal`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_orthogonal)):
+Property 3 is the other end: when the two markers coincide, $V = 1$ and $D = 0$, and the screen shows fringes of full contrast.
+
+::: {.viz src="double-slit-marker" preset="wave" height="500"}
+**Coincident markers, full fringes.** At $\alpha = 0$ the amber $r_R$ lies on $r_L$: the cyan shadow is the whole radius, the magenta height is zero, and the point sits at the right-hand end of the circle (property 3 of [@thm-record-coherence-complementarity]). The hits on the screen pile up into fringes of full contrast, with almost none landing in the dark fringes.
+:::
+
+Back on the single qubit of Section 6.1, this wave end is the one where the area is full and the line has shrunk to a point:
+
+::: {.viz src="qubit-geometry" preset="area" height="500"}
+**The all-area end.** With $\vv{B}$ perpendicular to $\vv{A}$ the cyan line shrinks to a point and the magenta area is as large as it gets: line $\cos\theta = 0$, area $\sin\theta = 1$. Use ◀ under the figure to reach the opposite, all-line end, and compare the two limits of [@thm-record-coherence-complementarity].
+:::
+
+Return now to the end of property 2: on the $2\times 2$ qubit density matrix $\rho \in M_2(\mathbb{C})$ (recalling [@thm-pinching-pythagorean] from [Chapter 4](ch04-decoherence.md)), standard-basis pinching $\Pi(\rho)$ ([`pinching`](lean:D5/S3/QuantumChannels/Pinching.pinching)) decomposes $\rho$ into a diagonal particle part $\Pi(\rho)$ and an off-diagonal wave residual $\rho - \Pi(\rho)$ that are strictly orthogonal under the Hilbert–Schmidt inner product ([`hilbertSchmidtInner`](lean:D5/S3/QuantumChannels/Pinching.hilbertSchmidtInner), [`pinching_hilbert_schmidt_orthogonal`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_orthogonal)):
 
 ::: {.corollary #cor-pinching-pythagorean title="Hilbert–Schmidt Orthogonal Decomposition and Discarded Off-Diagonal Coherence Mass Under Qubit Pinching" lean="D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass"}
 For every $2\times 2$ qubit matrix $\rho \in M_2(\mathbb{C})$ and the diagonal pinching projection $\Pi(\rho)_{ij} = \delta_{ij}\rho_{ij}$ ([`pinching`](lean:D5/S3/QuantumChannels/Pinching.pinching)), the diagonal part $\Pi(\rho)$ and the off-diagonal residual $\rho - \Pi(\rho)$ are orthogonal with respect to the Hilbert–Schmidt inner product $\langle X, Y\rangle_{\mathrm{HS}} = \Tr(X^* Y)$ ($\langle \Pi(\rho),\, \rho - \Pi(\rho)\rangle_{\mathrm{HS}} = 0$, [`pinching_hilbert_schmidt_orthogonal`](lean:D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_orthogonal)), yielding the Pythagorean identity
@@ -287,11 +299,11 @@ Nothing in Wheeler's delayed choice reaches backward in time: prior to the final
 :::
 
 ::: {.viz src="double-slit-marker" preset="delayed" height="500"}
-**Hits first, reading later.** At $\alpha = 90^\circ$ the marker is read for the path only after every hit has landed: the same hits are copied into a “left” and a “right” row, and both magenta rows are humps without fringes.
+**Hits first, reading later.** At $\alpha = 90^\circ$ the marker is read for the path only after every hit has landed: the same hits are split by the reading into a “left” and a “right” row that together hold every hit, and both magenta rows are humps without fringes.
 :::
 
 ::: {.viz src="double-slit-marker" preset="erase" height="500"}
-**The same hits, read another way.** The very same hits, but now the marker is read to erase: one cyan row shows fringes, the other anti-fringes shifted by half a period, and together they are still the hump above. The later choice moves no hit on the screen; it only decides how they are sorted.
+**The same hits, read another way.** The very same hits, but now the marker is read to erase, and both rows it sorts into are cyan: the “read as +” row shows fringes, the “read as −” row anti-fringes shifted by half a period, and together they are still the hump above. The later choice moves no hit on the screen; it only decides how they are sorted.
 :::
 
 ::: {.remark #rem-englert-greenberger-literature title="Wootters–Zurek, Greenberger–Yasin, and Englert Wave–Particle Duality Inequalities (Literature Result, Not Formalized in This Book)"}
@@ -310,10 +322,6 @@ Englert's trace-distance inequality for general mixed environmental states is ci
 
 ::: {.viz src="double-slit-marker" preset="mixed" height="500"}
 **A mixed marker falls inside the circle.** When the marker itself is noisy (pure-state weight $\lambda = 0.5$, purity $\Tr\rho^2 = (1 + \lambda^2)/2 = 0.625$), the visibility is still $V = 0.5$, but only $0.43$ of trace-distance distinguishability can be read: the point drops inside the circle along the dashed magenta arc, $D^2 + V^2 \approx 0.44 < 1$. This is one instance of Englert's inequality above (a literature result, not formalized in this book).
-:::
-
-::: {.viz src="qubit-geometry" preset="area" height="500"}
-**The all-area end.** With $\vv{B}$ perpendicular to $\vv{A}$ the line shrinks to a point and the area is as large as it gets: the two clicks are 50 / 50 and the fringes are sharpest. Use ◀ under the figure to reach the opposite, all-line end, and compare the two limits of [@thm-record-coherence-complementarity].
 :::
 
 ::: {.viz src="double-slit-marker" height="560"}

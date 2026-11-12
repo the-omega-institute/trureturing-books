@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch38-copy-record" data-lang="zh" viewBox="0 0 460 236" width="460" height="236" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="从左到右三个矩阵。左边是 4×4 的 B(ρ)，分成四个 2×2 块，每块只在左上角有一个数：p、c、c̄、1−p。中间是 U_copy 作用后的 R(ρ)：青色的 p 与 1−p 仍在对角块的角上，品红的 c 与 c̄ 搬到了右上块的右上格与左下块的左下格，不在块的左上角了。右边是对地址记录求偏迹后的 2×2 矩阵：对角上是青色的 p 与 1−p，副对角是 0。">
+<title>从左到右三个矩阵。左边是 4×4 的 B(ρ)，分成四个 2×2 块，每块只在左上角有一个数：p、c、c̄、1−p。中间是 U_copy 作用后的 R(ρ)：青色的 p 与 1−p 仍在对角块的角上，品红的 c 与 c̄ 搬到了右上块的右上格与左下块的左下格，不在块的左上角了。右边是对地址记录求偏迹后的 2×2 矩阵：对角上是青色的 p 与 1−p，副对角是 0。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<rect x="16" y="50" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="46" y="50" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="76" y="50" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="106" y="50" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="16" y="80" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="46" y="80" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="76" y="80" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="106" y="80" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="16" y="110" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="46" y="110" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="76" y="110" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="106" y="110" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="16" y="140" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="46" y="140" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="76" y="140" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="106" y="140" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<line x1="76" y1="50" x2="76" y2="170" class="ts-ink" stroke-width="1.6" fill="none"/>
+<line x1="16" y1="110" x2="136" y2="110" class="ts-ink" stroke-width="1.6" fill="none"/>
+<rect x="16" y="50" width="120" height="120" class="ts-ink" stroke-width="1.4" fill="none"/>
+<text class="tf-cyan" x="31" y="70.04" font-size="14" text-anchor="middle" font-weight="600">p</text>
+<text class="tf-magenta" x="91" y="70.04" font-size="14" text-anchor="middle" font-weight="600">c</text>
+<text class="tf-magenta" x="31" y="130.04" font-size="14" text-anchor="middle" font-weight="600">c</text>
+<line x1="27" y1="117" x2="35" y2="117" class="ts-magenta" stroke-width="1.4" fill="none"/>
+<text class="tf-cyan" x="91" y="129.68" font-size="13" text-anchor="middle" font-weight="600">1−p</text>
+<text class="tf-ink" x="76" y="194" font-size="14" text-anchor="middle"><tspan font-style="italic">B</tspan>(<tspan font-style="italic">ρ</tspan>)</text>
+<rect x="196" y="50" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="226" y="50" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="256" y="50" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="286" y="50" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="196" y="80" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="226" y="80" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="256" y="80" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="286" y="80" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="196" y="110" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="226" y="110" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="256" y="110" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="286" y="110" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="196" y="140" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="226" y="140" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="256" y="140" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<rect x="286" y="140" width="30" height="30" class="ts-faint tf-panel" stroke-width="1"/>
+<line x1="256" y1="50" x2="256" y2="170" class="ts-ink" stroke-width="1.6" fill="none"/>
+<line x1="196" y1="110" x2="316" y2="110" class="ts-ink" stroke-width="1.6" fill="none"/>
+<rect x="196" y="50" width="120" height="120" class="ts-ink" stroke-width="1.4" fill="none"/>
+<text class="tf-cyan" x="211" y="70.04" font-size="14" text-anchor="middle" font-weight="600">p</text>
+<text class="tf-magenta" x="301" y="70.04" font-size="14" text-anchor="middle" font-weight="600">c</text>
+<text class="tf-magenta" x="211" y="160.04" font-size="14" text-anchor="middle" font-weight="600">c</text>
+<line x1="207" y1="147" x2="215" y2="147" class="ts-magenta" stroke-width="1.4" fill="none"/>
+<text class="tf-cyan" x="301" y="159.68" font-size="13" text-anchor="middle" font-weight="600">1−p</text>
+<text class="tf-ink" x="256" y="194" font-size="14" text-anchor="middle"><tspan font-style="italic">R</tspan><tspan dy="0.28em" font-size="72%">addr</tspan><tspan dy="-0.28em">(</tspan><tspan font-style="italic">ρ</tspan>)</text>
+<line x1="144" y1="110" x2="181.2" y2="110" class="ts-dim" stroke-width="1.8" fill="none"/>
+<path d="M188 110 L180 113.36 L180 106.64Z" class="tf-dim"/>
+<text class="tf-dim" x="166" y="98" font-size="14" text-anchor="middle"><tspan font-style="italic">U</tspan><tspan dy="0.28em" font-size="72%">copy</tspan><tspan dy="-0.28em">​</tspan></text>
+<line x1="324" y1="110" x2="361.2" y2="110" class="ts-dim" stroke-width="1.8" fill="none"/>
+<path d="M368 110 L360 113.36 L360 106.64Z" class="tf-dim"/>
+<text class="tf-dim" x="346" y="98" font-size="14" text-anchor="middle">Tr<tspan dy="0.28em" font-size="72%">env</tspan><tspan dy="-0.28em">​</tspan></text>
+<rect x="376" y="78" width="32" height="32" class="ts-faint tf-panel" stroke-width="1"/>
+<text class="tf-cyan" x="392" y="99.04" font-size="14" text-anchor="middle" font-weight="600">p</text>
+<rect x="408" y="78" width="32" height="32" class="ts-faint tf-panel" stroke-width="1"/>
+<text class="tf-dim" x="424" y="99.04" font-size="14" text-anchor="middle">0</text>
+<rect x="376" y="110" width="32" height="32" class="ts-faint tf-panel" stroke-width="1"/>
+<text class="tf-dim" x="392" y="131.04" font-size="14" text-anchor="middle">0</text>
+<rect x="408" y="110" width="32" height="32" class="ts-faint tf-panel" stroke-width="1"/>
+<text class="tf-cyan" x="424" y="130.68" font-size="13" text-anchor="middle" font-weight="600">1−p</text>
+<rect x="376" y="78" width="64" height="64" class="ts-ink" stroke-width="1.4" fill="none"/>
+<text class="tf-ink" x="408" y="194" font-size="13" text-anchor="middle">局部读出</text>
+<text class="tf-dim" x="16" y="24" font-size="13">行与列按（系统位, 记录位）排</text>
+</svg>

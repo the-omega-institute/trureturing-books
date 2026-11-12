@@ -2,7 +2,7 @@
 //   node books/quantum-geometry/viz/tests/qubit-geometry.test.mjs      (or: node tools/node/viz-test.mjs quantum-geometry)
 // The page keeps gates as unit quaternions. The suite recomputes everything with 2 × 2 complex matrices acting on the
 // spinor, so the two implementations check each other, and reads the page through window.QUBIT_DEBUG.
-import { session, stageFirstChecks, settle } from '../../../../tools/node/viz-testkit.mjs';
+import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'qubit-geometry';
 const T = await session();
@@ -34,13 +34,13 @@ await stageFirstChecks(T, BOOK, ID);
 
 /* ---------- page-specific invariants ---------- */
 const page = await T.goto(BOOK, ID, '?lang=zh');
-await page.waitForTimeout(300);
+await settle(page);
 const state = async () => { await settle(page); return page.evaluate(() => window.QUBIT_DEBUG.state); };
 // playback advances on animation frames, and a busy runner delivers them late: wait until the page reports the move, not for a fixed time
-const until = (fn) => page.waitForFunction(fn, null, { timeout: 30000 }).catch(() => {});
+const frames = (n) => page.evaluate((k) => new Promise((done) => { const f = () => (k-- > 0 ? requestAnimationFrame(f) : done()); f(); }), n);
 const pick = async (id) => { await page.click(`[data-preset="${id}"]`); await settle(page); };   // a card glides B to its start before it applies; settle lands that glide instead of waiting for it
 const end = async () => { await page.evaluate(() => { const d = window.QUBIT_DEBUG; d.seek(d.state.n); }); return state(); };
-const setRange = async (id, v) => { await page.evaluate(([i, val]) => { const el = document.getElementById(i); el.value = String(val); el.dispatchEvent(new Event('input', { bubbles: true })); }, [id, v]); await page.waitForTimeout(40); };
+const setRange = async (id, v) => { await page.evaluate(([i, val]) => { const el = document.getElementById(i); el.value = String(val); el.dispatchEvent(new Event('input', { bubbles: true })); }, [id, v]); await settle(page); };
 
 let s = await state();
 check('starts on the SIXTY card with no gates', s.preset === 'half' && s.n === 0 && s.theta === 60 && s.phi === 40);
@@ -115,7 +115,7 @@ await pick('half');
 const seq = ['H', 'S', 'X', 'T', 'Y', 'Z'], TURN = { X: ['x', 180], Y: ['y', 180], Z: ['z', 180], H: ['h', 180], S: ['z', 90], T: ['z', 45] };
 let gateErr = 0;
 for (let k = 0; k < seq.length; k++) {
-  await page.click(`#gateChips [data-gate="${seq[k]}"]`); await page.waitForTimeout(40);
+  await page.click(`#gateChips [data-gate="${seq[k]}"]`); await settle(page);
   s = await end(); e = expected(60, 40, seq.slice(0, k + 1).map((g) => TURN[g]));
   gateErr = Math.max(gateErr, ...s.r.map((x, i) => Math.abs(x - e.r[i])), ...s.q.map((x, i) => Math.abs(x - e.q[i])));
 }
@@ -137,9 +137,9 @@ await page.locator('body').click({ position: { x: 5, y: 5 } });
 await page.keyboard.press('ArrowRight'); check('→ steps one gate forward', close((await state()).tau, 3));
 await page.keyboard.press('ArrowLeft'); await page.keyboard.press('ArrowLeft'); check('← steps back', close((await state()).tau, 1));
 await page.keyboard.press('Home'); check('Home returns to ψ₀', close((await state()).tau, 0));
-await page.keyboard.press('Space'); await until(() => { const d = window.QUBIT_DEBUG.state; return d.playing && d.tau > 0; }); s = await state();
-check('Space plays', s.playing && s.tau > 0);
-await page.keyboard.press('Space'); const paused = await state(); await page.waitForTimeout(200);
+await page.keyboard.press('Space');
+check('Space plays', await until(page, () => { const d = window.QUBIT_DEBUG.state; return d.playing && d.tau > 0; }));
+await page.keyboard.press('Space'); const paused = await state(); await frames(3);   // three more animation frames: a running clock would have moved
 check('Space pauses', !paused.playing && close((await state()).tau, paused.tau));
 await page.keyboard.press('End'); check('End goes to the end of the circuit', close((await state()).tau, 7));
 await setRange('now', 3.25); check('scrubbing the rail sets τ', close((await state()).tau, 3.25));
@@ -162,6 +162,22 @@ const cam1 = await page.evaluate(() => window.QUBIT_DEBUG.camera());
 check('dragging empty space orbits the camera and leaves the state alone', cam1.yaw !== cam0.yaw && cam1.pitch !== cam0.pitch && close((await state()).theta, s.theta));
 await page.click('#camChips [data-cam="top"]'); await settle(page);
 check('the Top view looks down the z axis', (await page.evaluate(() => window.QUBIT_DEBUG.camera())).pitch > 1.5);
+
+// the stills the chapters print: each card stops at the moment its caption describes, and the readout says so
+const stillOf = async (card) => {
+  const pg = await T.goto(BOOK, ID, `?shot=1&lang=zh&preset=${card}`, await T.newPage());
+  await settle(pg);
+  const out = await pg.evaluate(() => ({ s: window.QUBIT_DEBUG.state, big: document.getElementById('hudBig').textContent, sub: document.getElementById('hudSub').textContent }));
+  await pg.close();
+  return out;
+};
+const wIn = (txt) => { const m = /w\s*=\s*([+−-]?\d+\.\d+)/.exec(txt); return m ? Number(m[1].replace('−', '-')) : NaN; };
+let st = await stillOf('turn1'); e = expected(60, 40, [['x', 360]]);
+check('TURN-360 still: B has gone the full 360° and is back, the readout says w = −1.00', close(st.s.tau, 2) && vclose(st.s.r, expected(60, 40, []).r, 1e-12) && close(wIn(st.sub), Math.round(e.q[0] * 100) / 100) && e.q[0] < -0.999 && /360°/.test(st.sub), st.sub);
+st = await stillOf('turn2'); e = expected(60, 40, [['x', 720]]);
+check('TURN-720 still: B has gone the full 720° and is back, the readout says w = +1.00', close(st.s.tau, 4) && vclose(st.s.r, expected(60, 40, []).r, 1e-12) && close(wIn(st.sub), Math.round(e.q[0] * 100) / 100) && e.q[0] > 0.999 && /720°/.test(st.sub), st.sub);
+st = await stillOf('hadamard'); e = expected(0, 0, [['h', 180]]);
+check('HADAMARD still: the end of the turn, B on |+⟩, line 0 and area 1, θ(A,B) = 90°', close(st.s.tau, 1) && vclose(st.s.r, e.r, 1e-12) && close(st.s.line, e.r[2], 1e-12) && close(st.s.area, Math.hypot(e.r[0], e.r[1]), 1e-12) && st.big.includes(`${(Math.acos(e.r[2]) * 180 / Math.PI).toFixed(1)}°`), st.big);
 
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();

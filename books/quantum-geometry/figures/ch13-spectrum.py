@@ -9,7 +9,7 @@ by hand from the Landau identity) are drawn as hollow points.
 
 import math
 
-SIZE = (500, 340)
+SIZE = (440, 340)
 ALT = {
     "zh": "横轴是面积参数 N，从 0 到 4；纵轴是 CHSH 算子的特征值，从 −3 到 3。四条品红的曲线是 ±√(4 + N) 与 ±√(4 − N)："
           "N = 0 时四条汇成 ±2，N 增大时外侧两条向 ±2√2 张开、内侧两条向 0 收拢。暗色虚线标出 ±2。"
@@ -37,11 +37,11 @@ def branches(n):
 
 def draw(fig):
     t = fig.t
-    ax = fig.axes(70, 20, 330, 258, (0, 4), (-3.1, 3.1))
+    ax = fig.axes(50, 20, 330, 258, (0, 4), (-3.1, 3.1))
     ax.grid(ys=[-2, 2], color="dim", width=1.2, dash="5 4")
     ax.hline(0, "faint", 1.0)
-    ax.xaxis(at=-3.1, ticks=[0, 1, 2, 3, 4], labels=["0", "1", "2", "3", "4"])
-    ax.yaxis(at=0, ticks=[-2, 0, 2], labels=["−2", "0", "2"])
+    ax.xaxis(at=-3.1, ticks=[0, 1, 2, 3, 4], labels=["0", "1", "2", "3", "4"], size=13)
+    ax.yaxis(at=0, ticks=[-2, 0, 2], labels=["−2", "0", "2"], size=13)
     fig.text(ax.X(4) + 10, ax.Y(-3.1) + 5, "*N*", size=15, color="dim")
 
     for k in range(4):

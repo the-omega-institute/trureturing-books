@@ -220,6 +220,13 @@
       c.beginPath(); c.moveTo(X(0), Y(z)); c.lineTo(X(x), Y(z)); c.moveTo(X(x), Y(0)); c.lineTo(X(x), Y(z)); c.stroke(); c.setLineDash([]);
     }
     if (Math.abs(x) > 2e-3) arrow(c, cx, cy, X(x), cy, P.magenta, 3 * thick, 9 * thick);
+    // right after a pinch the sideways part is gone: a dashed magenta outline keeps what was wiped in view
+    const wiped = a.f === 0 && a.k > 0 && a.h.step && a.h.step.op === 'pinch' ? hist[a.k - 1].bloch[0] - x : 0;
+    if (Math.abs(wiped) > 2e-3) {
+      c.save(); c.globalAlpha = 0.8; c.setLineDash([5 * thick, 4 * thick]); c.strokeStyle = P.magenta; c.lineWidth = 2 * thick;
+      c.beginPath(); c.moveTo(X(x), cy); c.lineTo(X(x + wiped), cy); c.stroke(); c.setLineDash([]);
+      c.beginPath(); c.arc(X(x + wiped), cy, 4 * thick, 0, 2 * Math.PI); c.stroke(); c.restore();
+    }
     if (Math.abs(z) > 2e-3) { c.save(); c.shadowColor = P.cyan; c.shadowBlur = 10; arrow(c, cx, cy, cx, Y(z), P.cyan, 5 * thick, 11 * thick); c.restore(); }
     c.save(); c.shadowColor = P.amber; c.shadowBlur = 12;
     if (Math.hypot(x, z) > 2e-3) arrow(c, cx, cy, X(x), Y(z), P.amber, 2.4 * thick, 12 * thick);
@@ -229,6 +236,7 @@
       st.tag('k1', [cx + 16, Y(-1.08)], '|1⟩', 'num', { screen: true });
       st.tag('z', [cx - 14, Y(1.1)], 'Z', 'cy', { screen: true });
       if (Math.abs(x) > 0.22) st.tag('xv', [X(x / 2), cy + 14], `${L('横', 'side')} ${fix(Math.abs(x), 2)}`, 'num c-mg', { screen: true });
+      if (Math.abs(wiped) > 0.22) st.tag('xw', [X(x + wiped / 2), cy + 14], `${L('抹掉的横', 'wiped side')} ${fix(Math.abs(wiped), 2)}`, 'num c-mg', { screen: true });
     }
     // the second bit: the record E while it holds a copy, the bath qubit around a swap
     const showSwap = (a.next && a.next.step.op === 'swap') ? a.next.step : (a.f === 0 && a.h.step && a.h.step.op === 'swap' ? a.h.step : null);
@@ -269,7 +277,14 @@
     seg.blocks.forEach((d, i) => {
       const yA = V(acc), yB = V(Math.min(acc + d, a.S + 1e-12));
       if (acc > 1e-6 && a.S > acc + 1e-6) { c.beginPath(); c.moveTo(x1 - cw / 2, yA); c.lineTo(x1 + cw / 2, yA); c.stroke(); }
-      if (labels && a.S >= acc + d - 1e-6 && yA - yB > 17) st.tag(`d${i}`, [x1, (yA + yB) / 2], `D${'₁₂₃₄₅₆₇₈₉'[i] || ''} ${fix(d, 2)}`, 'num', { screen: true });
+      if (labels && a.S >= acc + d - 1e-6 && d > 1e-6) {
+        const name = `D${'₁₂₃₄₅₆₇₈₉'[i] || ''} ${fix(d, 2)}`, ym = (yA + yB) / 2;
+        if (yA - yB > 17) st.tag(`d${i}`, [x1, ym], name, 'num', { screen: true });
+        else {   // a block too thin to hold its name: the name goes outside, on the right, with a leader line
+          c.save(); c.strokeStyle = P.sigma; c.lineWidth = 1 * thick; c.beginPath(); c.moveTo(x1 + cw / 2, ym); c.lineTo(x1 + cw / 2 + 16, ym); c.stroke(); c.restore();
+          st.tag(`d${i}`, [x1 + cw / 2 + 50, ym], name, 'num', { screen: true });
+        }
+      }
       acc += d;
     });
     c.strokeStyle = P.sigma; c.lineWidth = 1.4 * thick; c.strokeRect(x1 - cw / 2, Math.min(top, y0), cw, Math.abs(y0 - top));
@@ -282,7 +297,7 @@
       const yf = V(a.floor);
       c.strokeStyle = P.ink; c.lineWidth = 2 * thick; c.beginPath(); c.moveTo(x2 - cw / 2 - 7, yf); c.lineTo(x2 + cw / 2 + 7, yf); c.stroke();
       if (labels) st.tag('fl', [x2, yf + 10], L('下界', 'floor'), 'num', { screen: true });
-      if (labels && hf - hq > 34) st.tag('ex', [x2, (hq + hf) / 2 - 2], L('多付', 'extra'), 'num', { screen: true });
+      if (labels && hf - hq > 34) st.tag('ex', [x2, (hq + hf) / 2 - 2], `${L('多付', 'extra')} ${fix(a.heat - a.floor, 3)}`, 'num', { screen: true });
     }
     // the baseline
     c.strokeStyle = P.lineHot; c.lineWidth = 1.2; c.beginPath(); c.moveTo(x1 - cw * 0.9, y0); c.lineTo(x2 + cw * 0.9, y0); c.stroke();
@@ -319,7 +334,7 @@
     const a = at(clock.t), cur = a.f > 0 ? a.k + 1 : a.k, h = hist[cur], step = cur ? h.step : null;
     const ap = a.f > 0 ? '≈ ' : '';
     $('roKey').innerHTML = `${ap}${fix(a.heat, 3)} = ${fix(a.floor, 3)} + ${fix(a.extra, 3)}`;
-    $('roKeySub').textContent = L('βQ = −ΔS + (I + D)，累计；βQ = Q/(k_BT) 无量纲，与以奈特计的熵直接相比', 'βQ = −ΔS + (I + D), running totals; βQ = Q/(k_BT) is dimensionless, set beside S in nats');
+    $('roKeySub').innerHTML = L('βQ = −ΔS + (I + D)，累计；βQ = Q/(k<sub>B</sub>T) 无量纲，与以奈特计的熵直接相比', 'βQ = −ΔS + (I + D), running totals; βQ = Q/(k<sub>B</sub>T) is dimensionless, set beside S in nats');
     $('roS').textContent = ap + fix(a.S, 3);
     $('roX').textContent = fix(Math.abs(a.bloch[0]), 3);
     $('roStep').innerHTML = !step ? '—'
@@ -410,7 +425,7 @@
     copy: { alpha: 90, p: 0.9, ops: ['rot', 'copy', 'uncopy'], still: 2 }
   };
   const NOTES = {
-    pinch: ['先转 90°：琥珀色的箭头从 |0⟩ 转到横躺，熵那一栏不动。再捏合：品红的横着的一份被抹掉，箭头缩成圆心，熵那一栏升到 ln 2 的虚线，付给环境的热仍是 0。', 'Turn by 90° first: the amber arrow swings from |0⟩ to lying flat, and the entropy column does not move. Then pinch: the magenta sideways part is wiped out, the arrow shrinks to the centre, the entropy column rises to the dashed ln 2 line, and the heat paid is still 0.'],
+    pinch: ['先转 90°：琥珀色的箭头从 |0⟩ 转到横躺，熵那一栏不动。再捏合：品红的横着的一份被抹掉，只剩一道虚线标出它原来的长度，箭头缩成圆心，熵那一栏升到 ln 2 的虚线，付给环境的热仍是 0。', 'Turn by 90° first: the amber arrow swings from |0⟩ to lying flat, and the entropy column does not move. Then pinch: the magenta sideways part is wiped out, leaving only a dashed outline of its old length, the arrow shrinks to the centre, the entropy column rises to the dashed ln 2 line, and the heat paid is still 0.'],
     steps: ['每步转 50°、再捏合，连做三步：箭头一级一级落到青色的线上、越来越短；熵那一栏一块一块叠起来，每一块标着这一步的 D，叠起来正好是总熵。', 'Turn by 50°, then pinch, three times over: the arrow drops step by step onto the cyan line and gets shorter; the entropy column stacks up block by block, each block marked with that step\'s D, and together they make the total.'],
     cycle: ['阶段 A：转 90° 再捏合，熵那一栏升到 ln 2，热为 0。阶段 B：理想复位把箭头拉回 |0⟩，熵那一栏回到 0，付给环境的热升到 ln 2，正好碰到下界的横线。', 'Stage A: turn by 90° and pinch; the entropy column rises to ln 2 and the heat is 0. Stage B: the ideal reset pulls the arrow back to |0⟩, the entropy column drops to 0, and the heat paid rises to ln 2, just touching the floor line.'],
     bath: ['同样先把箭头捏成圆心，再与一个 p = 0.9 的热浴比特交换：箭头只回到 0.8 高，熵减 0.368；热付了 0.879，比下界高出斜线的一截 0.511，那是右边小圆里热浴比特被推离平衡的 D。', 'The arrow is pinched to the centre as before, then swapped with a bath qubit at p = 0.9: it climbs back only to height 0.8, an entropy decrease of 0.368; the heat paid is 0.879, above the floor by the hatched piece of 0.511, the D by which the bath qubit in the small disc was pushed off equilibrium.'],

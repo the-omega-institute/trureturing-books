@@ -17,7 +17,7 @@ $$
 本章将沿着这一“素数即算术正交基”的几何直觉，严格建立**狄利克雷（Dirichlet）自然数级数**与**欧拉（Euler）无穷素数乘积**在绝对收敛半平面 $\operatorname{Re}(s) > 1$ 上的机器形式化恒等式，剖析有限素数筛的“多面体截断余项”，并在严谨的三层认识论契约下远眺数论皇冠上的开放猜想——**黎曼猜想（Riemann Hypothesis）**。
 
 ::: {.figure src="ch22-overview"}
-**图 22。** 本章地图：第 I 栏，横走一步乘 $2$、竖走一步乘 $3$，每个整数是素数轴上的一个格点，青色的箭头走到 $12 = 2^2 \times 3$；第 II 栏，$1$ 到 $30$ 中只用 $2, 3, 5$ 乘得出的格子是青色，其余是品红，第一个品红格是 $7$（[@ex-prime-log-orthogonality-and-sieve]）；第 III 栏，临界带 $0 < \operatorname{Re}(s) < 1$ 中央的虚线是 $\sigma = \frac{1}{2}$，前十个零点（数值结果）都落在线上，$s = 1$ 处的叉是极点；红色的问号与标签说的是开放问题：是否所有非平凡零点都在这条线上（[@conj-riemann-hypothesis]）。
+**图 22。** 本章地图：第 I 栏，横走一步乘 $2$、竖走一步乘 $3$，每个整数是素数轴上的一个格点，青色的箭头走到 $12 = 2^2 \times 3$；第 II 栏，$1$ 到 $30$ 中只用 $2, 3, 5$ 乘得出的格子是青色，其余是品红，第一个品红格是 $7$（[@ex-prime-log-orthogonality-and-sieve]）；第 III 栏，临界带 $0 < \operatorname{Re}(s) < 1$ 中央的虚线是 $\sigma = \frac{1}{2}$，前十个零点（数值结果）都落在线上，$s = 1$ 处的叉是极点；红色的问号与标签说的是开放问题：是否所有非平凡零点都在这条线上（[@conj-riemann-hypothesis]）；问号成对画在线的两侧，因为离线零点若有，必关于 $\sigma = \frac{1}{2}$ 成对出现（[@thm-xi-reading-entire-reflection]、[@prop-zeta-conjugation-covariance]）。
 :::
 
 ## 22.1 算术正交基与因式分解消除无穷 {#sec-ch22-1}
@@ -329,15 +329,17 @@ $$
 **到 31，漏网从 37 起。** 清单是到 $31$ 为止的 $11$ 个素数：$1$ 到 $36$ 全是青色，第一个品红格是 $37$。在 $s = 2$ 处缺口缩到 $0.0102$，放大镜里垫底的仍是 $37^{-2}$：要补上这一段，只能把 $37$ 加进清单。
 :::
 
+欧几里得的那一招在这里要读得准一些：把清单上的素数全部乘起来再加一，得到的数没有一个素因子在清单里（欧几里得的论证，文献结果），但它本身未必是素数，找到的新素数也未必是紧接着的那一个。
+
 ::: {.viz src="sphere-escape" preset="thirteen" height="500"}
-**加一之后不一定是素数。** 清单是 $2, 3, 5, 7, 11, 13$，$Q = 30031$：每只钟的指针都指着 $1$，没有一只指着 $0$。可 $Q = 59 \times 509$ 本身不是素数；欧几里得的论证（文献结果）只说 $Q$ 的素因子都不在清单里，新找到的 $59$ 也不是紧接着的 $17$。
+**加一之后不一定是素数。** 清单是 $2, 3, 5, 7, 11, 13$，$Q = 30031$。这里的钟是余数钟，不是上面那种匀速转动的相位钟：每只有 $p$ 个刻度，指针指着 $Q$ 除以 $p$ 的余数，全都指着 $1$，没有一只指着 $0$。可 $Q = 59 \times 509$ 本身不是素数；欧几里得的论证（文献结果）只说 $Q$ 的素因子都不在清单里，新找到的 $59$ 也不是紧接着的 $17$。
 :::
+
+> 合数是素数正交轴张成的对角网格；欧拉乘积不过是把纠缠在自然数长线上的无穷和，顺着一根根互不相干的素数主轴正交投影拆解开来。
 
 ::: {.viz src="euler-product-sieve" height="560"}
 欧拉乘积与筛的完整实验室：拖动时间轴加减素数，拖动琥珀色竖线改 $s$，点一个品红格把它的最大素因子放进清单。下方第一张小图里，墨色的 $(s - 1)\zeta(s)$ 走向绿色虚线 $1$（[@lem-riemann-zeta-residue-one]），青色的 $(s - 1)$ 乘以乘积走向 $0$；第二张小图是乘积与 $\zeta(s)$ 相差不到 $1\%$ 所需的素数个数。
 :::
-
-> 合数是素数正交轴张成的对角网格；欧拉乘积不过是把纠缠在自然数长线上的无穷和，顺着一根根互不相干的素数主轴正交投影拆解开来。
 
 ## 22.4 临界对称轴 $\sigma = 1/2$ 与黎曼猜想的认识论边界 {#sec-ch22-4}
 
@@ -352,7 +354,7 @@ $$
 ::: {.definition #def-xi-reading title="完备 ζ 读数与去极点的 ξ 读数" lean="D5/S3/Zeros/CompletedZeta.completedZetaReading D5/S3/Zeros/CompletedZeta.xiReading"}
 在模块 `CompletedZeta` 中：
 
-1. **完备 $\zeta$ 读数** [`completedZetaReading`](lean:D5/S3/Zeros/CompletedZeta.completedZetaReading) $s$ 定义为 Mathlib 的 `completedRiemannZeta s`，即 $\Lambda(s) = \pi^{-s/2}\,\Gamma(s/2)\,\zeta(s)$ 的全纯延拓（在 $s = 0$ 与 $s = 1$ 处按 Mathlib 的约定取值）；
+1. **完备 $\zeta$ 读数** [`completedZetaReading`](lean:D5/S3/Zeros/CompletedZeta.completedZetaReading) $s$ 定义为 Mathlib 的 `completedRiemannZeta s`，即 $\Lambda(s) = \pi^{-s/2}\,\Gamma(s/2)\,\zeta(s)$ 的亚纯延拓（在 $s = 0$ 与 $s = 1$ 处按 Mathlib 的约定取值）；
 2. **$\xi$ 读数** [`xiReading`](lean:D5/S3/Zeros/CompletedZeta.xiReading) 定义为
 
    $$

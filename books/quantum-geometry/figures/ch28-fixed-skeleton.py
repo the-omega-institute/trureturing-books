@@ -9,7 +9,7 @@ hypothesis), then the sum over k with `hP.complete` again.
 
 from _ch27 import box, hyp, lean_box, link
 
-SIZE = (560, 352)
+SIZE = (440, 352)
 ALT = {
     "zh": "证明骨架图，左右两列。左列“⇒”：从前提 U(ρ) = ρ 出发，P_kρP_l = P_k U(ρ) P_l（← hFixed），"
           "= P_kρP_k · P_l（left_project_unread），= 0（hP.orthogonal）。右列“⇐”：从前提 P_kρP_l = 0（k ≠ l）出发，"
@@ -23,7 +23,7 @@ ALT = {
 
 
 def draw(fig):
-    L, R = 140, 410
+    L, R = 110, 330
     fig.text(L, 18, "⇒", size=16, weight=600, anchor="middle", middle=True)
     fig.text(R, 18, "⇐", size=16, weight=600, anchor="middle", middle=True)
     hl = hyp(fig, L, 34, "*U*(*ρ*) = *ρ*")
@@ -36,6 +36,8 @@ def draw(fig):
     r3 = box(fig, R, 232, "*U*(*ρ*) = Σ_{k} *P*_{k}*ρ* = *ρ*", "hP.complete")
     for a, b in ((hl, l1), (l1, l2), (l2, l3), (hr, r1), (r1, r2), (r2, r3)):
         link(fig, a.bottom, b.top)
-    goal = lean_box(fig, 280, 310, "D5/S3/Observer/Conditioning.unreadState_fixed_iff")
+    goal = lean_box(fig, fig.width / 2, 310, "D5/S3/Observer/Conditioning.unreadState_fixed_iff")
+    assert all(b.x >= 4 and b.x + b.w <= fig.width - 4 for b in (hl, hr, l1, l2, l3, r1, r2, r3))
+    assert l1.x + l1.w + 12 < r1.x and hl.x + hl.w + 12 < hr.x
     for b in (l3, r3):
         link(fig, b.bottom, (min(max(b.cx, goal.x + 16), goal.x + goal.w - 16), goal.y), "ink")

@@ -13,7 +13,7 @@ In keeping with our three-tier epistemological contract and the discrete facet-s
 3. **Literature boundary for continuum holography**: Multi-scale entanglement renormalization ansatz (MERA) schematics and the continuum AdS/CFT Ryu–Takayanagi (RT) minimal-surface formula are confined to an explicit literature remark ([@rem-ryu-takayanagi-literature]), never conflated with our finite-dimensional width-three bridge theorem.
 
 ::: {.figure src="ch19-overview"}
-**Figure 19.** The chapter at a glance. Panel I: in a binary layered network, the 4 amber legs along the bottom are cut off by just the 2 bonds marked magenta (a schematic model). Panel II: on the width-three bridge graph $(a, b, c, d) = (2, 3, 2, 3)$, the two magenta min cuts above and below have capacity $ad = bc = 6$, and flow equals cut ([@thm-bridge-quantum-maxflow-mincut]). Panel III: in log capacity, the blue $ad$ facet and the orange $bc$ facet join into one bent line at the dashed vertical seam; the violet tag is the RT formula (literature result, not formalized in this book).
+**Figure 19.** The chapter at a glance. Panel I: in an ordinary binary tree (not the layered network of the later experiment cards), the 4 amber legs along the bottom are cut off by just the 2 bonds marked magenta (a schematic model). Panel II: on the width-three bridge graph $(a, b, c, d) = (2, 3, 2, 3)$, the two magenta min cuts above and below have capacity $ad = bc = 6$, and flow equals cut ([@thm-bridge-quantum-maxflow-mincut]). Panel III: in log capacity, the blue $ad$ facet and the orange $bc$ facet join into one bent line at the dashed vertical seam; the violet tag is the RT formula (literature result, not formalized in this book).
 :::
 
 ## Entanglement hierarchies and finite tensor networks {#sec-mera-hierarchy}
@@ -40,6 +40,7 @@ $$
 $$
 
 with row indices in $\operatorname{Fin} a \times \operatorname{Fin} d$ ($ad$ rows) and column indices in $\operatorname{Fin} b \times \operatorname{Fin} c$ ($bc$ columns);
+
 - Define the set of attainable ranks $\operatorname{attainable}(a, b, c, d) = \bigl\{\, r \in \mathbb{N} \;\big|\; \exists M, N,\; \operatorname{rank}(\operatorname{flow}(M, N)) = r \,\bigr\}$, and define the **quantum max-flow** `QMaxFlow` as its supremum:
 
 $$
@@ -64,20 +65,22 @@ Note the honesty boundary of [@lemma-bridge-flow-attained]: the lemma proves the
 
 ## Rank and cut capacity in a width-three bridge graph {#sec-bridge-flow-cut}
 
-Now count the candidate bottleneck cuts that can limit the rank of $\operatorname{flow}(M, N) = \sum_{r=0}^2 M_r \otimes N_r$:
+Now count the three cut-capacity bounds used by the source to limit the rank of $\operatorname{flow}(M, N) = \sum_{r=0}^2 M_r \otimes N_r$:
 
 1. **Left outer cut (row-space bound)**: $\operatorname{flow}(M, N)$ has $|\operatorname{Fin} a \times \operatorname{Fin} d| = ad$ rows, so its rank cannot exceed $ad$;
 2. **Right outer cut (column-space bound)**: $\operatorname{flow}(M, N)$ has $|\operatorname{Fin} b \times \operatorname{Fin} c| = bc$ columns, so its rank cannot exceed $bc$;
 3. **Internal width-three bridge cut**: For each $r \in \operatorname{Fin} 3$, $\operatorname{rank}(M_r) \le a$ and $\operatorname{rank}(N_r) \le c$, so $\operatorname{rank}(M_r \otimes N_r) \le ac$; summing over the three bridge channels $r = 0, 1, 2$ bounds the rank of the sum by $3ac$.
 
-Taking the minimum of these three cut capacities defines the **discrete quantum min-cut** `QMinCut`:
+Taking the minimum of these three cut-capacity bounds used by the source defines its **discrete quantum min-cut** `QMinCut`:
 
 $$
 \operatorname{QMinCut}(a, b, c, d) = \min\bigl(3ac,\, \min(ad, bc)\bigr) \in \mathbb{N}.
 $$
 
+For general dimensions, the graph has a fourth cut of capacity $3bd$; when $a \le b$ and $c \le d$, $3bd \ge 3ac$, so this term is redundant.
+
 ::: {.figure src="ch19-three-cuts"}
-**Only three candidate cuts sever the width-three bridge graph, and the min cut is the smallest of them.** For $(a, b, c, d) = (2, 3, 2, 3)$: the upper dashed line crosses legs $a$ and $d$, capacity $ad = 6$; the lower one crosses legs $b$ and $c$, capacity $bc = 6$; the slanting grey line crosses leg $a$, the three bridges and leg $c$, capacity $3ac = 12$. The two magenta outer cuts tie for smallest, so $\operatorname{QMinCut} = 6$.
+**The figure shows the three cut-capacity bounds used by the source; QMinCut is their minimum.** For $(a, b, c, d) = (2, 3, 2, 3)$: the upper dashed line crosses legs $a$ and $d$, capacity $ad = 6$; the lower one crosses legs $b$ and $c$, capacity $bc = 6$; the slanting grey line crosses leg $a$, the three bridges and leg $c$, capacity $3ac = 12$. The two magenta outer cuts tie for smallest, so $\operatorname{QMinCut} = 6$.
 :::
 
 Our next proposition shows that for all natural numbers $a, b, c, d \in \mathbb{N}$, with no cone assumptions needed, the quantum max-flow never exceeds the quantum min-cut.
@@ -144,7 +147,7 @@ In [@ex-bridge-two-three], the internal bridge cut $3ac = 12$ sits well above th
 A one-line algebraic check tells the story: when $a > 0$, $a^2 + b^2 \le 3ab$ forces $b^2 < a^2 + b^2 \le 3ab$, so $b < 3a$ (and similarly $c > 0$ with $c^2 + d^2 \le 3cd$ forces $d < 3c$). Multiplying $b < 3a$ by $c$ gives $bc < 3ac$, and multiplying $d < 3c$ by $a$ gives $ad < 3ac$. Thus, whenever $(a, b)$ and $(c, d)$ lie inside the quadratic cone $a^2 + b^2 \le 3ab$ and $c^2 + d^2 \le 3cd$ (with $a > 0$ and $c > 0$), the internal cut $3ac$ never undercuts $\min(ad, bc)$, so $\operatorname{QMinCut}(a, b, c, d)$ simplifies to $\min(ad, bc)$.
 
 ::: {.viz src="eth-horizon-crossover" preset="narrow" height="500"}
-**Bridges too narrow: they are the bottleneck.** The bridge graph $(a, b, c, d) = (1, 5, 1, 5)$: both outer cuts are $5$, but the three bridges carry only $3ac = 3$, and the smallest cut, marked by the dashed amber line, is the middle one. On the right the flow matrix is $5 \times 5$, and its cyan singular values vanish after the third: the rank is just $3$. Since $1^2 + 5^2 = 26 > 3 \cdot 1 \cdot 5$, these dimensions lie outside the cone ([@prop-bridge-flow-cut-bound]).
+**Bridges too narrow: they are the bottleneck.** The bridge graph $(a, b, c, d) = (1, 5, 1, 5)$: both outer cuts are $5$, but the three bridges carry only $3ac = 3$, and the smallest cut, marked by the dashed amber line, crosses leg $a$, the three bridges and leg $c$. On the right the flow matrix is $5 \times 5$, and its cyan singular values vanish after the third: the rank is just $3$. Since $1^2 + 5^2 = 26 > 3 \cdot 1 \cdot 5$, these dimensions lie outside the cone ([@prop-bridge-flow-cut-bound]).
 :::
 
 ::: {.corollary #cor-bridge-cone-mincut title="Minimum cut on the cone" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.cone_QMinCut"}
@@ -233,7 +236,7 @@ The second equality $\operatorname{QMinCut}(a, b, c, d) = \min(ad, bc)$ is [@cor
 
 1. **Explicit rational witnesses for equal-width and mixed-ratio regimes (`widthTwo_proved`)**: When $a = b$ or $c = d$ (`square_left`, `square_right`), or when one pair lies in the large-ratio regime while the other lies in the small-ratio regime ($2a \le b \land d \le 2c$ in `mixed_left`, and $b \le 2a \land 2c \le d$ in `mixed_right` via transpose duality `witness_swap`), explicit block partial-identity matrices construct a `RationalWitness` embedding an identity submatrix of order $\min(ad, bc)$ inside $\operatorname{flow}(M, N)$;
 2. **Base regime with both ratios below two (`base_witness`)**: When $a < b < 2a$ and $c < d < 2c$, the base module supplies a full-rank rational witness;
-3. **Simultaneous quadratic-cone descent when both ratios are at least two (`cone_descent` and `full_rank_of_descent`)**: When $2a \le b$ and $2c \le d$, the polynomial identity $(3a - b)^2 + a^2 - 3(3a - b)a = a^2 + b^2 - 3ab \le 0$ maps $(a, b, c, d)$ to the strictly smaller cone quadruple $(a', b', c', d') = (3a - b,\, a,\, 3c - d,\, c)$ with $b' + d' = a + c < b + d$. By the induction hypothesis, the smaller quadruple achieves full rank $\min((3a - b)c,\, a(3c - d))$; combining this with the castling deficit invariance identity (`castling_proved`: $u v - \operatorname{QMaxFlow}(u, x, v, y) = x(3y - v) - \operatorname{QMaxFlow}(x, 3x - u, y, 3y - v)$) and the cut balance $(3a - b)c + bc = a(3c - d) + ad$ forces the rank deficit of $(a, b, c, d)$ to vanish, establishing $\operatorname{QMaxFlow}(a, b, c, d) = \min(ad, bc)$.
+3. **Simultaneous quadratic-cone descent when both ratios are at least two (`cone_descent` and `full_rank_of_descent`)**: When $2a \le b$ and $2c \le d$, the polynomial identity $(3a - b)^2 + a^2 - 3(3a - b)a = a^2 + b^2 - 3ab \le 0$ maps $(a, b, c, d)$ to the strictly smaller cone quadruple $(a', b', c', d') = (3a - b,\, a,\, 3c - d,\, c)$ with $b' + d' = a + c < b + d$. By the induction hypothesis, the smaller quadruple achieves full rank $\min((3a - b)c,\, a(3c - d))$; combining this with the castling deficit invariance identity (`castling_proved`: $u y - \operatorname{QMaxFlow}(u, x, v, y) = x(3y - v) - \operatorname{QMaxFlow}(x, 3x - u, y, 3y - v)$) and the cut balance $(3a - b)c + bc = a(3c - d) + ad$ forces the rank deficit of $(a, b, c, d)$ to vanish, establishing $\operatorname{QMaxFlow}(a, b, c, d) = \min(ad, bc)$.
 
 The full proof is checked by the Lean kernel.
 :::
@@ -271,12 +274,14 @@ See S. Ryu & T. Takayanagi, *Phys. Rev. Lett.* **96**, 181602 (2006), DOI: `10.1
 **Double the interval, and the cut gains only about two legs.** The amber interval keeps its right end and grows from 1 site to 16; the magenta minimal cut climbs layer by layer from 1 bond to only 8, whereas severing every leg would take 16. For every interval of this 32-site network the cut stays within $2\log_2 L + 1$ (checked one by one on the page). Reading the number of severed legs as the “area” of an RT minimal surface is Swingle's MERA analogy (a literature result, not formalized in this book).
 :::
 
+With more than one interval there is more than one candidate cut: the two intervals can be cut off separately, or one large cut can enclose both together with the gap between them while the gap's own legs are cut on their own; the minimal cut is whichever way severs the fewest bonds.
+
 ::: {.viz src="layered-network-cut" preset="two" height="500"}
 **Two intervals: cut them apart, or cut them together.** Two sites separate the amber intervals A and B, and A grows leftward from a single site. While A is short, the magenta minimal cut is two separate cuts; from 7 sites on, one large cut around A, B and the gap, plus a small cut through the two legs of the gap, is cheaper: at 10 sites, cutting together takes 10 bonds and cutting apart 13. The minimal cut is always the cheapest of the candidates; for the analogous verified bound on the width-three bridge graph see [@prop-bridge-flow-cut-bound].
 :::
 
+Across the width-three bridge network, we have seen how a collection of quantum channels saturates the discrete minimum cut $\min(ad, bc)$ ([@thm-bridge-quantum-maxflow-mincut]) and stitches together affine log-capacity facets along the seam $ad = bc$. Yet what happens in a dynamical quantum circuit after boundary entanglement has already saturated its cut bound? How do parallel circuit depth, exact two-qubit gate synthesis lower bounds, and closed graph walks behave — and where is the exact boundary between Lean-verified circuit theorems and the great open conjectures of holographic complexity and computational complexity theory? Let us turn to [Chapter 20](ch20-complexity-and-spacetime.md).
+
 ::: {.viz src="layered-network-cut" height="560"}
 The full laboratory of the layered network and its cut: drag one or two intervals along the boundary and watch the magenta minimal cut thread through the network, counting the bonds it severs. The network is a schematic model and the counts are computed by the page; the RT formula and the MERA analogy are literature results, not formalized in this book, and green is reserved for [@prop-bridge-flow-cut-bound].
 :::
-
-Across the width-three bridge network, we have seen how a collection of quantum channels saturates the discrete minimum cut $\min(ad, bc)$ ([@thm-bridge-quantum-maxflow-mincut]) and stitches together affine log-capacity facets along the seam $ad = bc$. Yet what happens in a dynamical quantum circuit after boundary entanglement has already saturated its cut bound? How do parallel circuit depth, exact two-qubit gate synthesis lower bounds, and closed graph walks behave — and where is the exact boundary between Lean-verified circuit theorems and the great open conjectures of holographic complexity and computational complexity theory? Let us turn to [Chapter 20](ch20-complexity-and-spacetime.md).

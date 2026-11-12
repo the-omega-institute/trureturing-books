@@ -13,7 +13,7 @@
 3. **连续统全息对偶的文献边界**：将多尺度纠缠重整化拟设（MERA）与连续统 AdS/CFT 中的 Ryu–Takayanagi（RT）极小曲面公式严格置于文献注记（[@rem-ryu-takayanagi-literature]）内，绝不把特定宽度三桥图的有限维矩阵秩定理夸大为任意张量网络或连续时空全息对偶的普遍证明。
 
 ::: {.figure src="ch19-overview"}
-**图 19。** 本章地图：第 I 栏，二叉层级网络底边琥珀色的 4 条腿只需割断品红标出的 2 条键就能切下来（示意模型）；第 II 栏，宽度三桥图 $(a, b, c, d) = (2, 3, 2, 3)$ 上下两道品红的最小割 $ad = bc = 6$，流与割相等（[@thm-bridge-quantum-maxflow-mincut]）；第 III 栏，对数容量里蓝色的 $ad$ 分片与橙色的 $bc$ 分片沿竖直虚线的接缝拼成一条折线，紫色标签是 RT 公式（文献结果，未在本书形式化）。
+**图 19。** 本章地图：第 I 栏，一棵普通的二叉树（不是后面实验卡里的层级网络）底边琥珀色的 4 条腿，只需割断品红标出的 2 条键就能切下来（示意模型）；第 II 栏，宽度三桥图 $(a, b, c, d) = (2, 3, 2, 3)$ 上下两道品红的最小割 $ad = bc = 6$，流与割相等（[@thm-bridge-quantum-maxflow-mincut]）；第 III 栏，对数容量里蓝色的 $ad$ 分片与橙色的 $bc$ 分片沿竖直虚线的接缝拼成一条折线，紫色标签是 RT 公式（文献结果，未在本书形式化）。
 :::
 
 ## 纠缠层级与有限张量网络 {#sec-mera-hierarchy}
@@ -40,6 +40,7 @@ $$
 $$
 
 其行指标取自乘积类型 $\operatorname{Fin} a \times \operatorname{Fin} d$（共 $ad$ 行），列指标取自 $\operatorname{Fin} b \times \operatorname{Fin} c$（共 $bc$ 列）；
+
 - 定义可达秩集合 $\operatorname{attainable}(a, b, c, d) = \bigl\{\, r \in \mathbb{N} \;\big|\; \exists M, N,\; \operatorname{rank}(\operatorname{flow}(M, N)) = r \,\bigr\}$，并将**量子最大流** `QMaxFlow` 定义为可达秩的上确界：
 
 $$
@@ -64,20 +65,22 @@ $$
 
 ## 宽度三桥图的秩与割容量 {#sec-bridge-flow-cut}
 
-现在我们来数一数：要想把 $\operatorname{flow}(M, N) = \sum_{r=0}^2 M_r \otimes N_r$ 从左输入端 $(\operatorname{Fin} b \times \operatorname{Fin} c)$ 到右输出端 $(\operatorname{Fin} a \times \operatorname{Fin} d)$ 的信息通道彻底切断，一共有哪几道候选切口（cuts）？
+现在我们来数一数：源码用哪三项割容量上界，来约束 $\operatorname{flow}(M, N) = \sum_{r=0}^2 M_r \otimes N_r$ 从左输入端 $(\operatorname{Fin} b \times \operatorname{Fin} c)$ 到右输出端 $(\operatorname{Fin} a \times \operatorname{Fin} d)$ 的信息通道的秩？
 
 1. **左外边界割（行空间瓶颈）**：矩阵 $\operatorname{flow}(M, N)$ 只有 $|\operatorname{Fin} a \times \operatorname{Fin} d| = ad$ 行，因此其秩绝不可能超过 $ad$；
 2. **右外边界割（列空间瓶颈）**：矩阵 $\operatorname{flow}(M, N)$ 只有 $|\operatorname{Fin} b \times \operatorname{Fin} c| = bc$ 列，因此其秩绝不可能超过 $bc$；
 3. **中间三桥内部割（跨桥瓶颈）**：对每个桥指标 $r \in \operatorname{Fin} 3$，$M_r \in M_{a\times b}(\mathbb{C})$ 的秩至多为 $a$，$N_r \in M_{d\times c}(\mathbb{C})$ 的秩至多为 $c$，故单个克罗内克积 $M_r \otimes N_r$ 的秩至多为 $ac$；将 $r = 0, 1, 2$ 三路相加，由矩阵秩的次可加性知总秩至多为 $3ac$。
 
-把这三道切口的容量取最小值，就是 Lean 模块中定义的**离散量子最小割容量** `QMinCut`：
+把源码采用的这三项割容量上界取最小值，就是 Lean 模块中定义的**离散量子最小割容量** `QMinCut`：
 
 $$
 \operatorname{QMinCut}(a, b, c, d) = \min\bigl(3ac,\, \min(ad, bc)\bigr) \in \mathbb{N}.
 $$
 
+一般维数下，图中另有容量为 $3bd$ 的第四道割；当 $a \le b$ 且 $c \le d$ 时，$3bd \ge 3ac$，这一项冗余。
+
 ::: {.figure src="ch19-three-cuts"}
-**切断宽度三桥图只有三道候选割，最小割取三者中最小的。** 取 $(a, b, c, d) = (2, 3, 2, 3)$：上面的虚线横切腿 $a$、$d$，容量 $ad = 6$；下面的虚线横切腿 $b$、$c$，容量 $bc = 6$；斜着的灰色虚线切过腿 $a$、三条桥与腿 $c$，容量 $3ac = 12$。两道品红的外割并列最小，$\operatorname{QMinCut} = 6$。
+**图中画出源码采用的三项割容量上界，QMinCut 取三者中最小的。** 取 $(a, b, c, d) = (2, 3, 2, 3)$：上面的虚线横切腿 $a$、$d$，容量 $ad = 6$；下面的虚线横切腿 $b$、$c$，容量 $bc = 6$；斜着的灰色虚线切过腿 $a$、三条桥与腿 $c$，容量 $3ac = 12$。两道品红的外割并列最小，$\operatorname{QMinCut} = 6$。
 :::
 
 下面的命题证明了：无需任何额外参数限制，对一切自然数 $a, b, c, d \in \mathbb{N}$，宽度三桥图的量子最大流永远不超过这一最小割容量。
@@ -144,7 +147,7 @@ $$
 不妨做一步初等代数检验：当 $a > 0$ 时，不等式 $a^2 + b^2 \le 3ab$ 意味着 $b^2 < a^2 + b^2 \le 3ab$，消去正因子 $b$（若 $b > 0$）即得 $b < 3a$，同理 $c > 0$ 与 $c^2 + d^2 \le 3cd$ 意味着 $d < 3c$。换言之，两个外边界比值 $b/a$ 与 $d/c$ 都被严格关在宽度因子 $3$ 以内：一旦乘上桥宽 $3$，就有 $3ac > bc$ 且 $3ac > ad$！因此，只要参数 $(a, b)$ 与 $(c, d)$ 落在二次锥域 $a^2 + b^2 \le 3ab$ 与 $c^2 + d^2 \le 3cd$（且 $a > 0, c > 0$）之内，中间割 $3ac$ 就永远大于或等于外边界割 $\min(ad, bc)$，从而最小割公式自动脱去外层的 $3ac$！
 
 ::: {.viz src="eth-horizon-crossover" preset="narrow" height="500"}
-**桥太窄：三条桥成了瓶颈。** 桥图 $(a, b, c, d) = (1, 5, 1, 5)$：两道外割都是 $5$，三条桥却只能过 $3ac = 3$，琥珀色虚线标出的最小割是中间那道。右边的流矩阵是 $5 \times 5$ 的，青色的奇异值在第三个之后归零，秩只有 $3$。$1^2 + 5^2 = 26 > 3 \cdot 1 \cdot 5$，这组维数在锥域之外（[@prop-bridge-flow-cut-bound]）。
+**桥太窄：三条桥成了瓶颈。** 桥图 $(a, b, c, d) = (1, 5, 1, 5)$：两道外割都是 $5$，三条桥却只能过 $3ac = 3$，琥珀色虚线标出的最小割切过腿 $a$、三条桥与腿 $c$。右边的流矩阵是 $5 \times 5$ 的，青色的奇异值在第三个之后归零，秩只有 $3$。$1^2 + 5^2 = 26 > 3 \cdot 1 \cdot 5$，这组维数在锥域之外（[@prop-bridge-flow-cut-bound]）。
 :::
 
 ::: {.corollary #cor-bridge-cone-mincut title="锥域内最小割" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.cone_QMinCut"}
@@ -233,7 +236,7 @@ $$
 
 1. **等宽与混合宽度区间的显式有理证人（`widthTwo_proved`）**：当 $a = b$ 或 $c = d$（`square_left`、`square_right`），或一侧处于大比值区间而另一侧处于小比值区间（$2a \le b \land d \le 2c$ 的 `mixed_left`，及由转置对偶 `witness_swap` 诱导的 $b \le 2a \land 2c \le d$ 的 `mixed_right`）时，直接用分块部分单位矩阵构造有理矩阵证人（`RationalWitness`），在 $\operatorname{flow}(M, N)$ 中嵌出阶数为 $\min(ad, bc)$ 的单位子矩阵；
 2. **双小比值基底区间（`base_witness`）**：当 $a < b < 2a$ 且 $c < d < 2c$ 时，调用基底模块构造满秩有理证人；
-3. **双大比值区间的二次锥同步无穷递降（`cone_descent` 与 `full_rank_of_descent`）**：当 $2a \le b$ 且 $2c \le d$ 时，利用整系数恒等式 $(3a - b)^2 + a^2 - 3(3a - b)a = a^2 + b^2 - 3ab \le 0$，将四元组映射为严格更小的锥域四元组 $(a', b', c', d') = (3a - b,\, a,\, 3c - d,\, c)$（其外腿和 $b' + d' = a + c < b + d$）。由归纳假设知较小四元组达到满秩 $\min((3a-b)c,\, a(3c-d))$，再结合移位易位亏格守恒恒等式（`castling_proved`：$u v - \operatorname{QMaxFlow}(u, x, v, y) = x(3y - v) - \operatorname{QMaxFlow}(x, 3x - u, y, 3y - v)$）与割容量平衡关系 $(3a - b)c + bc = a(3c - d) + ad$，推出原四元组 $(a, b, c, d)$ 的亏格为零，即 $\operatorname{QMaxFlow}(a, b, c, d) = \min(ad, bc)$。
+3. **双大比值区间的二次锥同步无穷递降（`cone_descent` 与 `full_rank_of_descent`）**：当 $2a \le b$ 且 $2c \le d$ 时，利用整系数恒等式 $(3a - b)^2 + a^2 - 3(3a - b)a = a^2 + b^2 - 3ab \le 0$，将四元组映射为严格更小的锥域四元组 $(a', b', c', d') = (3a - b,\, a,\, 3c - d,\, c)$（其外腿和 $b' + d' = a + c < b + d$）。由归纳假设知较小四元组达到满秩 $\min((3a-b)c,\, a(3c-d))$，再结合移位易位亏格守恒恒等式（`castling_proved`：$u y - \operatorname{QMaxFlow}(u, x, v, y) = x(3y - v) - \operatorname{QMaxFlow}(x, 3x - u, y, 3y - v)$）与割容量平衡关系 $(3a - b)c + bc = a(3c - d) + ad$，推出原四元组 $(a, b, c, d)$ 的亏格为零，即 $\operatorname{QMaxFlow}(a, b, c, d) = \min(ad, bc)$。
 
 完整证明由 Lean 内核检查。
 :::
@@ -271,12 +274,14 @@ $$
 **区间翻倍，割只多约两条腿。** 琥珀色区间右端不动，从 1 格长到 16 格；品红的最小割一层层往上爬，只从 1 条长到 8 条，而直接剪断每条腿要 16 条。这张 32 格网络的每一段区间，割都不超过 $2\log_2 L + 1$（页面逐个算过）。把割断的腿数读作 RT 极小曲面的“面积”，是 Swingle 用 MERA 作的类比（文献结果，未在本书形式化）。
 :::
 
+区间不止一段时，候选割也不止一道：两段可以各割各的，也可以用一道大割把它们连同中间的空隙一起包住、再单独剪断空隙的腿；最小割取割断键数最少的那种割法。
+
 ::: {.viz src="layered-network-cut" preset="two" height="500"}
 **两段区间：分开割，还是一起割。** 琥珀色的 A、B 之间空 2 格，A 从 1 格往左长。A 短时，品红的最小割是两道各自的割；A 长到 7 格起，一道包住 A、B 与空隙的大割，加上剪断空隙两条腿的小割，反而更省：A 长 10 格时一起割 10 条，分开割 13 条。最小割总是在候选割中取最少的那道，宽度三桥图上的同类上界见 [@prop-bridge-flow-cut-bound]。
 :::
 
+在宽度三桥图上，我们亲眼看到了一组量子态如何通过三路张量收缩撑满最小割容量 $\min(ad, bc)$（[@thm-bridge-quantum-maxflow-mincut]），并在对数容量空间里沿着接缝 $ad = bc$ 拼出离散的多面体截面。然而，当一个量子系统的边界纠缠熵已经达到最小割上限（热化饱和）之后，系统内部的量子电路结构是否就停止演化了？在全息图景与计算复杂性理论中，“电路深度与门计数”究竟遵循怎样的严格下界，又在哪道悬崖边上遇上了当今科学尚未攻克的三大开放猜想？让我们进入第五部的收官之章——[门复杂度即体积](ch20-complexity-and-spacetime.md)。
+
 ::: {.viz src="layered-network-cut" height="560"}
 层级网络与割的完整实验室：在底边拖动一段或两段区间，看品红的最小割怎样穿过网络、割断几条键。网络是示意模型，割的条数由页面算出；RT 公式与 MERA 的类比是文献结果，未在本书形式化，绿色只给 [@prop-bridge-flow-cut-bound]。
 :::
-
-在宽度三桥图上，我们亲眼看到了一组量子态如何通过三路张量收缩撑满最小割容量 $\min(ad, bc)$（[@thm-bridge-quantum-maxflow-mincut]），并在对数容量空间里沿着接缝 $ad = bc$ 拼出离散的多面体截面。然而，当一个量子系统的边界纠缠熵已经达到最小割上限（热化饱和）之后，系统内部的量子电路结构是否就停止演化了？在全息图景与计算复杂性理论中，“电路深度与门计数”究竟遵循怎样的严格下界，又在哪道悬崖边上遇上了当今科学尚未攻克的三大开放猜想？让我们进入第五部的收官之章——[门复杂度即体积](ch20-complexity-and-spacetime.md)。

@@ -14,7 +14,7 @@ In this chapter we complete the single-qubit computational bridge by joining two
    and rotate any vector $v \in \mathbb{R}^3$ via the two-sided sandwich product $v \mapsto R v \widetilde{R}$?
 
 ::: {.figure src="ch26-overview"}
-**Figure 26.** The chapter at a glance. Panel I: the green Bloch ball; the amber pure-state arrow reaches the shell $\lvert r\rvert = 1$, and the dark point lies inside, where every positive semidefinite matrix lands ([@prop-hermitian-bloch-geometry], [@cor-psd-bloch-ball-bound]). Panel II: the sandwich turns by $90^\circ$ about the violet $z$ axis; the cyan shadow stays on the axis, and the magenta fan is split by a dashed line into two half-angles. Panel III: $e_1$ turned about $z$, $y$, $z$ by $(\alpha, \beta, \gamma) = (0.37, -0.81, 0.52)$; the amber path of three legs ends at $R e_1 \widetilde{R}$ (rotor compilation is a numerical illustration with no frozen theorem).
+**Figure 26.** The chapter at a glance. Panel I: the green Bloch ball; the amber pure-state arrow reaches the shell $\lvert r\rvert = 1$, and the dark point lies inside, where every trace-one positive semidefinite matrix lands ([@prop-hermitian-bloch-geometry], [@cor-psd-bloch-ball-bound]). Panel II: the sandwich turns by $90^\circ$ about the violet $z$ axis; the cyan shadow stays on the axis, and the magenta fan is split by a dashed line into two half-angles. Panel III: in the order used by the rotor product, $e_1$ turns about $z$ by $\gamma$, then about $y$ by $\beta$, and finally about $z$ by $\alpha$, with parameter tuple $(\alpha, \beta, \gamma) = (0.37, -0.81, 0.52)$; the amber path of three legs ends at $R e_1 \widetilde{R}$ (rotor compilation is a numerical illustration with no frozen theorem).
 :::
 
 ## Bloch Matrix Trace and Coordinate Recovery {#sec-bloch-matrix-trace-and-recovery}
@@ -372,12 +372,8 @@ Let us verify the compiled multivector coefficients and rotated basis vectors on
    satisfying $R_H e_1 \widetilde{R}_H = e_3$, $R_H e_2 \widetilde{R}_H = -e_2$, and $R_H e_3 \widetilde{R}_H = e_1$ to machine precision.
 :::
 
-::: {.viz src="zyz-compile" preset="t" height="500"}
-**The $T$ gate: the middle turn is zero.** For $(\alpha, \beta, \gamma) = (\pi/4, 0, 0)$ the first two angles vanish, and neither the amber arrow nor the white tripod moves; the last turn is $45^\circ$ about the violet $z$ axis, the arrow runs $45^\circ$ along the equator from $e_1$, $Re_3$ stays at the north pole, and the rotor at the top is $0.924 - 0.383\,e_1e_2$.
-:::
-
 ::: {.viz src="zyz-compile" preset="h" height="500"}
-**The Hadamard gate $(0, \pi/2, \pi)$.** The first turn is $180^\circ$ about $z$: the amber arrow sits at the north pole, on the axis, so only its cyan shadow is left while the tripod's $Re_1$ and $Re_2$ flip over; the second turn is $90^\circ$ about $y$ and brings the arrow down to $e_1$. The violet dashed line is the diagonal axis $(e_1 + e_3)/\sqrt{2}$, and the tripod comes to rest at $Re_1 = e_3$, $Re_2 = -e_2$, $Re_3 = e_1$.
+**The Hadamard gate $(0, \pi/2, \pi)$.** By contrast, the $T$ gate $(\pi/4, 0, 0)$ has only a last turn of $45^\circ$ about $z$, the same kind of picture as the sandwich card above; the Hadamard gate takes two turns. The first is $180^\circ$ about $z$: the amber arrow sits at the north pole, on the axis, so only its cyan shadow is left while the tripod's $Re_1$ and $Re_2$ flip over; the second turn is $90^\circ$ about $y$ and brings the arrow down to $e_1$. The violet dashed line is the diagonal axis $(e_1 + e_3)/\sqrt{2}$, and the tripod comes to rest at $Re_1 = e_3$, $Re_2 = -e_2$, $Re_3 = e_1$.
 :::
 
 ::: {.remark #rem-zyz-euler-compilation-literature title="The SU(2)→SO(3) Double Cover and Universal ZYZ Euler Decomposition (Literature Result, Not Formalized in This Book)"}
@@ -395,12 +391,16 @@ Let us verify the compiled multivector coefficients and rotated basis vectors on
 **Three turns equal one turn about one axis.** For the same angles $(0.37, -0.81, 0.52)$, the violet dashed line is the compiled rotor's own axis $n$ and the violet dashed arc a single turn of $67.9^\circ$ about it: leaving the white start ring, it lands exactly where the white road of the three turns ends. That a unit rotor is one turn about one axis belongs to the literature results above and is not formalized in this book; the axis and the angle are computed numerically by the page.
 :::
 
+The $67.9^\circ$ of the violet dashed arc comes from the scalar part of the rotor in the example: the scalar $0.829592$ is the cosine of the half-angle, and $2\arccos 0.829592 \approx 67.9^\circ$.
+
 ::: {.viz src="zyz-compile" height="560"}
 **The ZYZ compilation lab.** Drag the three Euler angles, move the arrow's start, or switch on the single axis $n$: in every turn the cyan shadow stays put while the magenta fan sweeps the whole angle, and in the strip scalar$^2$ and area$^2$ trade off with a sum that stays $1$. The green boxes cite only this chapter's four frozen theorems ([@thm-bloch-matrix-trace], [@lemma-bloch-coordinate-recovery], [@prop-hermitian-bloch-geometry], [@cor-psd-bloch-ball-bound]), which the page checks one by one on the pure state $\rho = \operatorname{blochMatrix}(1, v)$ of the arrow.
 :::
 
+Our executable Python 3 geometric algebra and rotor compilation engine is now complete.
+
 ::: {.film src="007-zyz-compile"}
-**Compiling a rotation into three turns: ZYZ and the sandwich action (2 min 3 s).** Turning about the violet $z$ axis, the cyan shadow $\tfrac{1}{2}e_3$ stays put and the magenta part sweeps the whole angle, while on the little dial the rotor moves only half as far; then the amber arrow turns about $z$, $y$ and $z$ by $\gamma$, $\beta$ and $\alpha$, the three rotors multiply into one rotor with four coefficients, $0.830 - 0.396\,e_1e_2 - 0.393\,e_1e_3 + 0.030\,e_2e_3$, and sandwiching the three basis vectors with it gives the columns of the ZYZ matrix; a single $67.9^\circ$ turn about its own axis lands on the same point (the single axis is the literature result of [@rem-zyz-euler-compilation-literature]; the rotor compilation is a numerical demonstration). The $T$ and Hadamard gates follow, and the film ends on the pure state $\rho = \operatorname{blochMatrix}(1, v)$ with this chapter's four frozen theorems ([@thm-bloch-matrix-trace], [@lemma-bloch-coordinate-recovery], [@prop-hermitian-bloch-geometry], [@cor-psd-bloch-ball-bound]).
+**Compiling a rotation into three turns: ZYZ and the sandwich action (2 min 5 s).** Turning about the violet $z$ axis, the cyan shadow $\tfrac{1}{2}e_3$ stays put and the magenta part sweeps the whole angle, while on the little dial the rotor moves only half as far; then the amber arrow turns about $z$, $y$ and $z$ by $\gamma$, $\beta$ and $\alpha$, the three rotors multiply into one rotor with four coefficients, $0.830 - 0.396\,e_1e_2 - 0.393\,e_1e_3 + 0.030\,e_2e_3$, and sandwiching the three basis vectors with it gives the columns of the ZYZ matrix; a single $67.9^\circ$ turn about its own axis lands on the same point (the single axis is the literature result of [@rem-zyz-euler-compilation-literature]; the rotor compilation is a numerical demonstration). The $T$ and Hadamard gates follow, and the film ends on the pure state $\rho = \operatorname{blochMatrix}(1, v)$ with this chapter's four frozen theorems ([@thm-bloch-matrix-trace], [@lemma-bloch-coordinate-recovery], [@prop-hermitian-bloch-geometry], [@cor-psd-bloch-ball-bound]).
 :::
 
-With our executable Python 3 geometric algebra and rotor compilation engine complete, we now step directly into the frozen Lean 4 source files of `trureturing@dev` to audit the proof scripts that certify this monograph. Let us open [Chapter 27](ch27-reading-frozen-proofs-i.md).
+From here we step directly into the frozen Lean 4 source files of `trureturing@dev` to audit the proof scripts that certify this monograph. Let us open [Chapter 27](ch27-reading-frozen-proofs-i.md).

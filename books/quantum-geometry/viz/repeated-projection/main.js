@@ -119,7 +119,11 @@
     st.end();
     const cur = a.f > 0 ? a.k + 1 : last.done;
     $('hudBig').textContent = cur ? L(`第 ${cur} 投`, `Press ${cur}`) : L('投影之前', 'Before any press');
-    const tail = last.done ? L(`这一投挪动 ${fix(last.moved, 3)}`, `this press moved it ${fix(last.moved, 3)}`)
+    // after two or more presses the readout lists what each press moved, so that a still shows the first press moving
+    // the arrow and the later ones leaving it where it is
+    const moves = []; for (let k = 1; k <= last.done; k++) moves.push(fix(v3.len(v3.sub(hist[k], hist[k - 1])), 3));
+    const tail = last.done > 1 ? L(`每一投挪动 ${moves.join(' → ')}`, `each press moved it ${moves.join(' → ')}`)
+      : last.done ? L(`这一投挪动 ${fix(last.moved, 3)}`, `this press moved it ${fix(last.moved, 3)}`)
       : L(`线² + 面² = ${fix(m.dot * m.dot + m.plane * m.plane, 3)} = 长度²`, `line² + plane² = ${fix(m.dot * m.dot + m.plane * m.plane, 3)} = length²`);
     $('hudSub').innerHTML = `<span class="c-cy">${L('线', 'line')} ${sgn(m.dot, 2)}</span> · <span class="c-mg">${L('面', 'plane')} ${fix(m.plane, 2)}</span> · ${tail}`;
   }
@@ -209,7 +213,7 @@
   };
   const NOTES = {
     once: ['投一次：琥珀色的箭头沿着平行于品红平面的方向，落到青色的线上，只剩它在线上的影子；品红的那一份没了。虚线是原来的箭头：投完之后箭头变短，箭尖离开了球面。', 'One press: the amber arrow drops onto the cyan line, moving parallel to the magenta plane, and only its shadow on the line is left; the magenta part is gone. The dashed arrow is where it started: after the press the arrow is shorter and its tip has left the sphere.'],
-    twice: ['连投三次：第一次，箭头落到青色的线上，品红的一份消失；第二次、第三次，箭头一动不动，左上角“这一投挪动”是 0。', 'Three presses in a row: at the first the arrow drops onto the cyan line and the magenta part is gone; at the second and the third it does not move, and “this press moved it” at the top left reads 0.'],
+    twice: ['连投三次：第一次，箭头落到青色的线上，品红的一份消失；第二次、第三次，箭头一动不动：左上角逐投列出的挪动量，第一个不为零，后两个是 0。', 'Three presses in a row: at the first the arrow drops onto the cyan line and the magenta part is gone; at the second and the third it does not move: of the three amounts moved listed at the top left, the first is not zero and the other two are 0.'],
     fixed: ['箭头本来就躺在青色的线上，没有品红的那一份。投两次，它一次也没有动。', 'The arrow already lies on the cyan line and has no magenta part. Two presses, and it never moves.'],
     perp: ['箭头整个躺在品红的对偶平面里，在青色的线上没有影子。投一次，它缩成球心的一个点。', 'The whole arrow lies in the magenta dual plane and casts no shadow on the cyan line. One press shrinks it to a point at the centre.'],
     sum: ['青色的影子加上品红的那一份，正好拼回琥珀色的箭头。两份互相垂直，左上角：线² + 面² 等于箭头长度的平方。', 'The cyan shadow and the magenta part add up to the amber arrow. They are perpendicular, and at the top left line² + plane² equals the arrow\'s length squared.']

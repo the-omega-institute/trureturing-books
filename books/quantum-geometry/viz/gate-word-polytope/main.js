@@ -102,7 +102,7 @@
   });
 
   /* ---------- state ---------- */
-  const S = { mode: 'free', draw: 'chord', theta: 110, phi: 200 };
+  const S = { mode: 'free', draw: 'chord', theta: 110, phi: 200, chart: false };   // chart: the ε_L staircase on the stage (the shrink card)
   const level = () => Math.min(LMAX, Math.floor(clock.t + 1e-9));
   const target = () => (S.mode === 'worst' ? WORST[level()].dir : v3.sph(S.theta * DEG, S.phi * DEG));
   function nearest(l, n) {
@@ -122,7 +122,7 @@
 
   /* ---------- stage ---------- */
   let grab = false;
-  const stage = kit.stage3($('stage'), {
+  const SO = {
     canvas: $('cv'), radius: TRV.thumbMode ? 0.4 : 0.36, cy: 0.54, yaw: -0.9, pitch: 0.42,
     onChange: () => paint(),
     onPick: (ev, st) => { grab = st.near(ev, target()) < 22; return grab; },
@@ -135,9 +135,19 @@
       leave(); paint();
     },
     onDrop: () => { grab = false; }
-  });
+  };
+  const stage = kit.stage3($('stage'), SO);
+  /** Where the staircase goes when it shares the stage: right of the sphere, or below it on a narrow stage. */
+  function chartBox() {
+    const W = $('cv').clientWidth, H = $('cv').clientHeight, narrow = W < 560;
+    const top = Math.max(56, $('hudBig').parentElement.getBoundingClientRect().bottom - $('stage').getBoundingClientRect().top + 30), bottom = H - Math.max(24, $('legend').offsetHeight + 22);
+    return narrow ? { narrow, x: 14, y: H * 0.6, w: W - 28, h: bottom - H * 0.6 } : { narrow, x: W * 0.58, y: top, w: W * 0.4 - 14, h: bottom - top };
+  }
   function drawStage() {
     const st = stage, l = level(), n = target(), near = nearest(l, n), W = WORST[l], sh = shape(l), thumb = TRV.thumbMode;
+    // with the staircase on the stage the sphere moves aside to make room for it
+    const cb = S.chart && !thumb ? chartBox() : null;
+    SO.cx = cb && !cb.narrow ? 0.3 : 0.5; SO.cy = cb && cb.narrow ? 0.36 : 0.54; SO.radius = cb ? (cb.narrow ? 0.26 : 0.32) : thumb ? 0.4 : 0.36;
     st.begin();
     st.sphere(1, { lat: [0], lon: 2, shade: 0.05, alpha: thumb ? 0.6 : 0.32 });
     // the two axes: T turns about e_z by 45°, H turns about (e_x + e_z)/√2 by 180°
@@ -184,7 +194,17 @@
       st.tag('tgt', n, S.mode === 'worst' ? `ε = ${fix(W.eps / DEG, 1)}°` : `${fix(near.angle / DEG, 1)}°`, 'num c-am', { dx: -right * 30, dy: 14 });
       st.tag('N', [0, 0, 1.08], 'e<sub>z</sub>', 'tick', { dx: -18, dy: -6 });
     }
+    if (cb) drawChart(cb, l);
     st.end();
+  }
+  /** The staircase on the stage: ε_L for every length computed by the page (magenta), the current length amber. */
+  function drawChart(b, l) {
+    const W = $('cv').clientWidth, H = $('cv').clientHeight;
+    const g = kit.plot($('cv'), { x: [-0.6, LMAX + 0.6], y: [0, 190], pad: [b.x + 40, W - b.x - b.w, b.y + 22, H - b.y - b.h + 20], clear: false });
+    g.axes({ yTicks: [0, 45, 90, 135, 180], yFmt: (v) => `${v}°`, xTicks: [0, 5, 10, 15, 20] });
+    WORST.forEach((w, k) => g.rect(k - 0.36, 0, k + 0.36, w.eps / DEG, k === l ? P.amber : P.magenta, { alpha: k === l ? 0.9 : 0.6 }));
+    stage.tag('chT', [b.x + 40 + (b.w - 40) / 2, b.y + 6], L('每个门长 L 的最大缺口 ε', 'largest hole ε for each length L'), 'raw', { screen: true });
+    stage.tag('chV', [g.X(l) - (l > LMAX - 3 ? 18 : 0), g.Y(WORST[l].eps / DEG) - 14], `<span class="c-am">${fix(WORST[l].eps / DEG, 2)}°</span>`, 'num', { screen: true });
   }
 
   /* ---------- strip: ε_L against L ---------- */
@@ -234,7 +254,7 @@
   });
 
   /* ---------- controls ---------- */
-  const leave = () => { cards.mark(null); stopAt = null; };
+  const leave = () => { cards.mark(null); stopAt = null; S.chart = false; };
   const fT = kit.field($('theta'), { fmt: (v) => `${fix(v, 0)}°`, onInput: (v) => { leave(); S.mode = 'free'; modeChips.set('free', true); S.theta = v; paint(); } });
   const fF = kit.field($('phi'), { fmt: (v) => `${fix(v, 0)}°`, onInput: (v) => { leave(); S.mode = 'free'; modeChips.set('free', true); S.phi = v; paint(); } });
   const modeChips = kit.chips($('modeChips'), 'mode', (v) => { leave(); S.mode = v; paint(); });
@@ -247,20 +267,20 @@
     three: { L: 3, mode: 'free', theta: 90, phi: 180, draw: 'chord', view: [0.3, 0.38] },
     six: { L: 6, mode: 'worst', theta: 110, phi: 200, draw: 'geo', aim: [0.3, -0.12] },
     nearest: { L: 10, mode: 'free', theta: 110, phi: 200, draw: 'chord', view: [1.0, -0.12] },
-    shrink: { L: 20, mode: 'worst', theta: 110, phi: 200, draw: 'chord', aim: [0.55, -0.2] }
+    shrink: { L: 20, mode: 'worst', theta: 110, phi: 200, draw: 'chord', aim: [0.55, -0.2], chart: true }
   };
   const NOTES = {
     one: ['门长 1：北极是 T 的不动点，只有 H 把它送到 e<sub>x</sub>。两个青色的点只连成一条线段；琥珀色的目标就落在 e<sub>x</sub> 上，门字 H 精确命中，没有品红的缺口。紫色是 H 与 T 的转轴。', 'Length 1: the north pole is fixed by T, and only H carries it to e<sub>x</sub>. The two cyan points span just a segment; the amber target sits on e<sub>x</sub>, the word H hits it exactly, and there is no magenta gap. Violet marks the axes of H and T.'],
     three: ['门长 3：五个青色的顶点第一次围成立体，但它们都在 x ≥ 0、z ≥ 0 的一侧，球心在外面。琥珀色的目标指向 −e<sub>x</sub>：最近的顶点在 90° 外，品红的径向间隙从球心一直到球皮，整整为 1。', 'Length 3: the five cyan vertices enclose a solid for the first time, but all of them lie where x ≥ 0 and z ≥ 0, so the centre is outside. The amber target points to −e<sub>x</sub>: the nearest vertex is 90° away, and the magenta radial gap runs all the way from the centre to the sphere, a full 1.'],
     six: ['门长 6：19 个点的凸包已经包住球心，把棱沿半径投到球皮上，就成了一张青色的大圆弧网格。网格里最大的一个洞仍是品红虚线圈住的空球冠，半径 ε = 47.27°，琥珀色的箭头指着它的中心。', 'Length 6: the hull of 19 points now holds the centre, and projecting its edges radially onto the sphere gives a mesh of cyan great-circle arcs. The largest hole in the mesh is still the empty cap circled in dashed magenta, of radius ε = 47.27°, with the amber arrow at its centre.'],
     nearest: ['门长 10、64 个点：琥珀色的目标在 θ = 110°、φ = 200°。离它最近的可达点由门字 HTHTTTTTH 到达，相隔 17.04°（品红的弧）；平直多面体在这个方向的高度是 0.956，离球皮还差 0.044（品红的半径段）。', 'Length 10, 64 points: the amber target is at θ = 110°, φ = 200°. The nearest reachable point is reached by the word HTHTTTTTH, 17.04° away (the magenta arc); in this direction the flat polytope reaches height 0.956, 0.044 short of the sphere (the magenta piece of radius).'],
-    shrink: ['门长从 0 走到 20：青色的点一层层变密，品红虚线圈出的最大空球冠一级级缩小，从 180° 缩到 9.10°；有几层一点也不缩。到 L = 20 有 971 个点，洞仍然在。', 'The length runs from 0 to 20: the cyan points grow denser layer by layer, and the largest empty cap circled in dashed magenta shrinks step by step from 180° to 9.10°; at some layers it does not shrink at all. At L = 20 there are 971 points, and the hole is still there.']
+    shrink: ['门长从 0 走到 20：球上青色的点一层层变密，品红虚线圈出的最大空球冠一级级缩小。旁边的台阶是每个门长的最大缺口 ε：从 180° 缩到 9.10°，有几层一点也不缩，琥珀色的是当前门长。到 L = 20 有 971 个点，洞仍然在。', 'The length runs from 0 to 20: the cyan points on the sphere grow denser layer by layer, and the largest empty cap circled in dashed magenta shrinks. The staircase beside it is the largest hole ε at each length: from 180° down to 9.10°, not shrinking at all at some layers, with the current length in amber. At L = 20 there are 971 points, and the hole is still there.']
   };
   let booting = true;
   function applyPreset(id) {
     const p = PRESETS[id];
     clock.pause(); stopAt = null;
-    S.mode = p.mode; S.theta = p.theta; S.phi = p.phi; S.draw = p.draw;
+    S.mode = p.mode; S.theta = p.theta; S.phi = p.phi; S.draw = p.draw; S.chart = !!p.chart;
     modeChips.set(S.mode, true); drawChips.set(S.draw, true); fT.set(p.theta); fF.set(p.phi);
     // worst-direction cards look at the worst direction of their length, a little from the side
     const aimAt = (d, o) => [Math.atan2(-d[0], -d[1]) + o[0], clamp(Math.asin(clamp(d[2], -1, 1)) + o[1], -1.4, 1.4)];
@@ -286,7 +306,7 @@
       return { L: l, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, mode: S.mode, draw: S.draw, theta: S.theta, phi: S.phi,
         target: n, count: UPTO[l], points: PTS.slice(0, UPTO[l]).map((q) => ({ p: q.p, word: q.word })),
         faces: HULLS[l] ? HULLS[l].map((f) => ({ v: f.v.slice(), n: f.n, d: f.d })) : null,
-        eps: WORST[l].eps / DEG, worst: WORST[l].dir, shape: shape(l), nearest: { p: PTS[near.i].p, word: PTS[near.i].word, angle: near.angle / DEG }, h: near.h, gap: 1 - near.h,
+        chart: S.chart, eps: WORST[l].eps / DEG, worst: WORST[l].dir, shape: shape(l), nearest: { p: PTS[near.i].p, word: PTS[near.i].word, angle: near.angle / DEG }, h: near.h, gap: 1 - near.h,
         epsAll: WORST.map((w) => w.eps / DEG), counts: UPTO.slice() };
     },
     seek: (t) => { clock.pause(); stopAt = null; clock.set(t); },

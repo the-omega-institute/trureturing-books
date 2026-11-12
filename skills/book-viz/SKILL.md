@@ -43,7 +43,8 @@ description: 为书做交互可视化时使用：先定这张图要让读者看�
 
 | 对象 | 舞台 | 参照页面 |
 | --- | --- | --- |
-| 方向、态、旋转 | 可拖动的球（`kit.stage3`） | trureturing-visualize：`zeno-watch`、`tomo-glance` |
+| 方向、态、旋转 | 可拖动的球（`kit.stage3`；球里有要紧的东西时用 `kit.solid` 的玻璃球壳） | trureturing-visualize：`zeno-watch`、`tomo-glance` |
+| 面或体本身（带、环面、多面体、可行域） | 受光的实体（`kit.solid`，见下文“具象”） | 本模板的 `phase-torus` |
 | 整数、格点、逼近 | 格点平面加放大镜（`kit.plot` 的 `equal`） | `prime-gaps`、`robin-lattice` |
 | 清单、表、矩阵 | 可点击的格子 | `perm-complement`、`hard-squares` |
 | 随时间展开的过程 | 时空图或轨迹，时间轴驱动 | `chrono-slit`、`cat-ledger` |
@@ -58,6 +59,44 @@ description: 为书做交互可视化时使用：先定这张图要让读者看�
 一个页面的几个场景尽量画在同一个对象上（同一张格点、同一颗球）：读者换场景时不必重新认图，后一个场景的结论会落在前一个场景已经认识的点上。
 
 二维舞台不必两轴等比。只依赖平行、共线与面积比的图（格点、窗口、带子、矩形）可以把要看的那一维拉开，让主角有足够的厚度；图里有圆、角度或正交时才必须加 `equal`。按真实比例画出来只剩一条细线的对象，换一个表示（例如把“细长平行四边形的面积”换成“双曲线下的矩形”），而不是放任它看不见。
+
+### 1½. 具象：对象本身是面或体时，画成受光的实体
+
+**实体舞台是多出来的一种可视化能力，不是全书统一的风格；每个页面仍然按内容选最合适的可视化。** 对象本身是面或体、画成实体确实更能让读者看懂时才用；曲线、格点、矩阵、记号串继续用上表里原来最合适的画法；同一页里也可以只有个别场景或个别卡用实体，别的卡保留二维画法。
+
+**何时用**：结论落在一个面或一个体上——一条带转了半圈（莫比乌斯带、双覆叠）、正方形的对边粘起来（环面）、一团可行域（椭圆体、多面体、凸包）、一个球及球里的东西（布洛赫球，用玻璃球壳）、一根沿曲线的管（世界线、涡管）。线框让读者自己在脑子里补面、补遮挡；受光的实体直接给出前后、正反与弯曲。
+
+**何时不硬套**：曲线、格点、矩阵、记号串、读数表、时间序列；一张平面图就讲清的恒等式（例如 $\cos^2\theta + \sin^2\theta = 1$）；原理图本来就是二维示意的东西（画成三维反而说得比依据多）。也不要为了“像实体”给对象加没有意义的颜色：例如莫比乌斯带没有不留接缝的全局两面，给“两叶”各上一种固定颜色就画出了定理禁止的那道接缝——明暗只按相机视角（受光面与背光面）来。
+
+**怎么做**：
+
+- 一个实体占满舞台；它的颜色是一种令牌色，或沿一个有意义的量在两三种令牌色之间渐变；明暗只来自一盏固定在相机坐标里的主光加环境光，不另加发光、阴影、景深。
+- 标记长在实体上：环、珠、箭头、小旗、管、连线都用 `kit.solid` 的图元画，被实体挡住时确实被挡住（标签变淡），被挡住的标记点不到。
+- 一两个有意义的参数让实体连续变形（粘合、转角、隔墙）；实验卡是这条变形路上的几站，每站一个看得出差别的画面。只为过渡画面而设、正文没有定义的参数照实标 `MODEL`，变形的终态必须是正文里那个可核算的对象。
+- 读数少而大：只读正文定义过的量。参照别处的漂亮读数而本书没有定义的，不搬。
+- 不变的东西照旧：页面契约、颜色语义、依据标注（`LEAN ✓` 只给锁文件里的定理），每个数都由页面算出、测试用独立算法核对。
+
+**运行时**：`kit.solid(stageEl, { canvas, onChange: paint, onPick, onDrag })`，任何页面都可以直接调用，不需要多加载脚本：第一次调用时 `kit.js` 才动态取造型核心 `theme/viz/solid-core.js`（ES 模块）与它导入的、`theme/viz/vendor/` 里钉版的 three.js（`vendor/README.md` 记版本、来源与许可证），不画实体的页面不多下载 three.js。造型核心不碰 DOM、事件、主题与动画循环，给定状态同步画一帧（视频引擎也用它）；`kit.solid` 只是页面的外壳：挂到舞台、交互、进视口才建上下文、静止时释放。相机、拖动、滚轮、捏合、投影 `p(v)`、标签与 `kit.stage3` 相同（x 向右、z 向上、正交轨道相机），所以从 `stage3` 换成实体时几何代码不用改。每帧照样在 painter 里画：
+
+```js
+const sc = kit.solid($('stage'), { canvas: $('cv'), onChange: () => paint(), onPick: (ev, st) => st.nearest(ev, pts, 12) >= 0 });
+sc.begin();
+sc.surface('band', (u, v) => [x, y, z], { u: [0, TAU], v: [0, 1], nu: 96, nv: 20, color: P.violet, grid: { every: [4, 2] } });
+sc.glass('ball', [0, 0, 0], 1);                 // 玻璃球壳：球里的箭头看得见
+sc.poly('ico', { vertices, faces }, { color: P.violet });
+sc.tube('path', pts, { color: P.violet, width: 4, glow: 1 });
+sc.line(pts, { color: P.cyan, dash: [4, 3] });  sc.arrow([0, 0, 0], J, { color: P.cyan });
+sc.ring(p, { normal: n });  sc.bead(p, { color: P.amber });  sc.fan(quad, { fill: P.magenta, alpha: 0.3 });
+sc.tag('J', J, 'J', 'raw c-cy');
+sc.end();
+const h = sc.hit(ev);                            // { id, u, v, point, normal, front }：(u, v) 落在曲面上的参数点
+```
+
+`surface` 的 `value(u, v)` 配 `colors`、`range` 给沿标量的渐变；`back` 给背面另一种颜色（默认同色更暗）。没有渲染循环：画面只在 `paint()` 时画。书内（`TRV.embed`）的实体在进入视口时才建 WebGL 上下文，静止约 1.6 秒后把这一帧留在页面的二维画布上并释放上下文，读者一碰、或时钟走一帧再取回——一章里嵌十几张卡也不会超过浏览器的上下文上限。`kit.ready()` 在 three.js 到位后兑现，测试工具的 `settle(page)` 会等它。
+
+**测试**：`stageFirstChecks(T, book, id, { solid: true })` 另加实体检查（舞台上确有受光实体：不透明像素占比、明暗有起伏、转动相机后明暗分布改变；被挡住的标记点不到、看得见的点得到；书内静止后释放上下文、一碰取回），也可单独调用 `solidChecks(T, book, id, page, opts)`。页面声称的几何性质照样用测试里另写的算法核对（例如沿中线搬运法向，一圈反向、两圈复原）。本机无头 Chromium 用 SwiftShader 软件渲染，`viz-shots`、`viz-thumbs` 截到的就是实体画面。
+
+成品示例：`books/example-monograph/viz/phase-torus/`（把相位正方形粘成环面：时间轴就是粘合，颜色是相位判据的三块，珠子可点），第一章按卡引用它的 `torus`。
 
 ### 2. 用共享的实验室版式
 
@@ -83,7 +122,7 @@ description: 为书做交互可视化时使用：先定这张图要让读者看�
   :::
   ```
 
-  引用块顶格写在两个段落之间；缩进在列表项里面的 `:::` 不被识别。要紧跟某一条列表项时，放在这一条之后、下一条之前，有序列表的编号会接着排。
+  引用块顶格写在两个段落之间；缩进在列表项里面的 `:::` 不被识别。媒体块不连排：实验卡、完整实验室、视频与静态图之间要有正文，三块以上只隔着空行挨在一起时 `./tbook check` 从第三块起给出警告；完整实验室与紧随的视频之间也隔一段正文。要紧跟某一条列表项时，放在这一条之后、下一条之前，有序列表的编号会接着排。
 
   HTML 中它是不带内部滚动的一张图（舞台、一句说明、◀ ▶、时间轴）；“全屏打开”进入同一状态的完整实验室。PDF/EPUB 中它是那张卡的带标签静态图（`fig-<卡>.<语言>.jpg`）。不带 `preset` 的嵌入是完整实验室，通常每个可视化在章末放一处。
 
@@ -127,11 +166,13 @@ await stageFirstChecks(T, '<book>', '<id>');     // 所有舞台优先页面都�
 // 然后是这个页面自己的检查
 ```
 
-- `stageFirstChecks` 检查：舞台占比、每张卡能点且有说明、标签不重叠、抽屉、如实标注（每条 Lean 链接都是锁文件里的定理并指向所钉提交的文件与行；登记表列出的定理与页面引用的一致；绿色框恰好是引用 Lean 定理的框；抽屉用两种语言写明“不是证明”）、英文无残留中文、书内第一屏、被引用的图不滚动、静态图、手机无横向滚动、封面非空白、减少动效。
+- `stageFirstChecks` 检查：舞台占比、每张卡能点且有说明、标签不重叠、抽屉、点卡之后空格键控制播放、如实标注（每条 Lean 链接都是锁文件里的定理并指向所钉提交的文件与行；登记表列出的定理与页面引用的一致；绿色框恰好是引用 Lean 定理的框；抽屉用两种语言写明“不是证明”）、英文无残留中文、书内第一屏、被引用的图不滚动、静态图、手机无横向滚动、封面非空白、减少动效。
 - 页面自己的检查：每个控件一条；页面声称的每条性质一条，**用测试里另写的独立算法核对**（另一种表示、暴力枚举、数值积分），不调用页面自己的函数。页面通过只读探针 `window.<NAME>_DEBUG` 暴露状态。
 - 读状态前调用 `settle(page)`：无头浏览器每秒只渲染几帧，不要靠等待碰运气。它先把进行中的过渡（`kit.tween`、相机的 `st.view`）走完，再重绘：点完一张卡 `settle` 一下就能读到终态，不要为过渡等一个固定的毫秒数。过渡只在动画帧上前进，机器一忙，结束它的那一帧可能比标称时长晚得多。
 - 播放不是过渡，`settle` 不替时钟往前走。检查“空格开始播放”“这张卡会自己播”时，等页面自己报告动了：`check('Space plays', await until(page, () => window.<NAME>_DEBUG.state.t > 0))`。`until` 由 `viz-testkit.mjs` 导出，条件一成立就返回 `true`，30 秒仍不成立返回 `false`，本身就是这条检查的结果。不要写“按空格、等 700 毫秒、再读 t”：播放靠动画帧推进，机器一忙，700 毫秒里可能一帧都没到，页面没错，检查却失败。
-- 交付前加上 `VIZ_SLOW_FRAMES=1000` 再跑一遍测试（`VIZ_SLOW_FRAMES=1000 node books/<book>/viz/tests/<id>.test.mjs`）：它把动画帧拉开到一秒一帧，比 CI 最忙时还慢，耗时与平时几乎相同。为过渡或播放等固定时间而碰巧通过的检查在这里必然失败；间隔取得比测试里最长的固定等待短，就可能照不出来。
+- 不写 `page.waitForTimeout(…)`：`viz-validate`（与 `./tbook check`）对测试里的每一处固定等待报警告，并给出行号与改法。
+- 交付前加上 `VIZ_SLOW_FRAMES=1000` 再跑一遍测试（`VIZ_SLOW_FRAMES=1000 node books/<book>/viz/tests/<id>.test.mjs`，或整本书 `node tools/node/viz-test.mjs <book> --slow`）：它把动画帧拉开到一秒一帧，比 CI 最忙时还慢，耗时与平时几乎相同。为过渡或播放等固定时间而碰巧通过的检查在这里必然失败；间隔取得比测试里最长的固定等待短，就可能照不出来。CI 每周（与手动触发时）用 `--slow` 把全部测试跑一遍（`ci.yml` 的 `viz-slow`，`docs/PUBLISHING.md` §4），PR 不等它。
+- 键盘：用指针点了实验卡、场景按钮或导览条之后，`kit` 把焦点交给舞台，空格直接播放或暂停；用 Tab 走到按钮上的读者，空格与回车仍按下那个按钮。测试里点完卡就按空格，读到的是时钟的翻转；要测按钮本身对空格的响应，先 `page.focus(…)` 或用 Tab 走到它。
 - 用随机抽样做独立核对时，容差要对得上抽样的精度。落在尖点上的极值（多面体的面、绝对值之和）靠均匀抽样收敛很慢：先抽样，再在最好的点附近逐步收窄搜索。
 - 每提交一次输入（`fill` 加回车、点一次步进键或一张卡）也先 `settle(page)`，再去动下一个控件：页面在下一帧按状态重写全部输入框，上一次提交排定的那一帧若落在“第二个框已填、回车未按”之间，刚填的值被覆盖，第二次提交不会发生。本地机器快，几乎不触发；CI 上表现为同一条断言偶发失败、重跑又通过。
 
@@ -154,9 +195,10 @@ node tools/node/viz-validate.mjs <book> && ./tbook check
 | --- | --- |
 | 重绘 | `const paint = kit.painter(draw, [要监听尺寸的元素])`；`paint()` 请求一帧，`kit.flush()` 走完进行中的过渡并立即重绘（测试用） |
 | 三维舞台（二维画布上） | `const st = kit.stage3(el, { canvas, onChange: paint, onPick, onDrag })`；每帧 `st.begin()` … `st.sphere()`、`st.arc(u, v)`、`st.arrow(a, b)`、`st.path(pts)`、`st.poly(pts)`、`st.dot(p)`、`st.circle(c, n, r)`、`st.tag(key, p, html, cls)` … `st.end()`；`st.pick(ev)` 取指针下的球面点，`st.view('iso' \| 'front' \| 'top')` |
+| 受光的实体（three.js，首次调用才加载） | `const sc = kit.solid(el, { canvas, onChange: paint, onPick, onDrag })`；每帧 `sc.begin()` … `sc.surface(key, f, s)`、`sc.glass(key, c, r)`、`sc.poly(key, { vertices, faces })`、`sc.tube(key, pts)`、`sc.line(pts)`、`sc.arrow(a, b)`、`sc.ring(p)`、`sc.bead(p)`、`sc.fan(pts)`、`sc.tag(…)` … `sc.end()`；`sc.hit(ev)`、`sc.nearest(ev, pts, px)`、`sc.occluded(p)`、`sc.view(…)`；`kit.ready()` |
 | 二维舞台与小图 | `const g = kit.plot(canvas, { x, y, pad, equal, logY })`；`g.axes()`、`g.line()`、`g.area()`、`g.rect()`、`g.poly()`、`g.dot()`、`g.vline()`、`g.hline()`、`g.text()`、`g.legend()`；`g.invX/invY` 把指针换回数据坐标 |
 | 同一页既有二维又有三维场景 | 共用一块画布和一个 `kit.stage3`：二维场景里先 `st.begin(); st.end();` 再 `kit.plot(canvas, …)`；`onPick` 在二维场景返回 `true` 接管拖动（否则拖动会悄悄转动相机），并随场景切换舞台的 `still` 类 |
-| 时间轴 | `kit.clock({ range, play, label, speeds, max, rate, step, format, onChange })` → `set`、`setMax`、`play`、`pause`、`stepBy`；键盘 Space / ← → / Home / End 已绑定。`format(t, max)` 在构造时就被调用一次：只用这两个参数与页面状态，不引用时钟变量本身 |
+| 时间轴 | `kit.clock({ range, play, label, speeds, max, rate, step, format, onChange })` → `set`、`setMax`、`play`、`pause`、`stepBy`；键盘 Space / ← → / Home / End 已绑定（用指针点过卡或 `kit.chips` 的按钮后焦点在舞台上，空格即播放）。`format(t, max)` 在构造时就被调用一次：只用这两个参数与页面状态，不引用时钟变量本身 |
 | 实验卡与导览条 | `kit.cards(el, { notes, noteEl, tour, idle, onPick })` → `pick`、`mark(null)`（读者动了控件）、`initial(默认卡)`、`step(±1)` |
 | 进入视野才播放 | `kit.autoplay(clock, stageEl)` |
 | 过渡 | `kit.tween(ms, step, done)`（尊重 `prefers-reduced-motion`） |
@@ -174,6 +216,7 @@ node tools/node/viz-validate.mjs <book> && ./tbook check
 | 卡片说明提到图里没有的东西 | 被引用时条带小图和读数栏不在场 | 说明只说舞台上看得见的 |
 | 一进页面就自动播放，或在视野外播完 | 读者错过了演示 | `kit.autoplay`；整页打开停在关键帧 |
 | 章末一台大实验室，正文没有图 | 读到那句话时图不在旁边 | 在那句话旁按卡引用 |
+| 两三张卡、完整实验室和视频摞在一起 | 读者分不清哪张对应哪句话（`check` 警告 `media blocks in a row`） | 每张卡挪到它对应的那句话之后，块与块之间有正文 |
 | 为“看起来丰富”加第三张小图、第四个场景 | 每多一样东西，主角就淡一分 | 删到每样东西都回答一个问题 |
 | 用 `sleep` 等渲染、等过渡或等播放的测试 | 无头环境帧率低，时过时不过 | 过渡用 `settle(page)`，播放用 `until(page, …)`；用 `VIZ_SLOW_FRAMES=1000` 复查 |
 
@@ -195,7 +238,10 @@ node tools/node/viz-validate.mjs <book> && ./tbook check
 | 标题里的 φ、u 变成了 Φ、U | 标题按大写排版；变量不写进标题 |
 | `Cannot access '…' before initialization`，页面一片空白 | `kit.clock` 的 `format` 在构造时被调用，里面引用了尚未赋值的时钟变量 |
 | 书里的图内部出现滚动条 | 被引用的图（带 `preset`）不应滚动；检查是否有固定高度的元素撑破了舞台 |
-| 测试本地通过，CI 上偶尔有几条失败 | 多半是为过渡或播放等了固定时间；用 `VIZ_SLOW_FRAMES=1000` 在本地复现，过渡改成 `settle(page)`，播放改成 `until(page, …)` 等状态本身 |
+| 测试本地通过，CI 上偶尔有几条失败 | 多半是为过渡或播放等了固定时间；用 `node tools/node/viz-test.mjs <book> --slow`（即 `VIZ_SLOW_FRAMES=1000`）在本地复现，过渡改成 `settle(page)`，播放改成 `until(page, …)` 等状态本身 |
+| `viz-validate` 警告 `waitForTimeout(…) at line N waits a fixed time` | 测试第 N 行等了固定时间：点卡或过渡之后改成 `await settle(page)`，等播放改成 `check(…, await until(page, () => …))`；改完用 `--slow` 跑一遍 |
+| 点过一张卡后按空格，卡又重放了一遍，没有暂停 | 页面没有用 `kit.cards` / `kit.chips` 处理点击（自己写了 `click` 监听）：改用它们，或在自己的指针点击处理里把焦点交给 `.stage`；`stageFirstChecks` 的 `keyboard: after a card is clicked, Space plays and pauses the clock` 会抓到 |
+| 页面的空格不控制时钟（`kit.clock({ keys: false })`），这条键盘检查失败 | 页面另有空格的用法时，传 `stageFirstChecks(T, book, id, { keys: false })` 跳过它，并在页面自己的测试里检查那个用法 |
 
 ## 完成标准
 

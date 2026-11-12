@@ -29,7 +29,7 @@ In the geometric interpretation of this book, these three insights share **one a
 > To name chaos is to drive a stake $P^2 = P$ into the sphere; "substance" is whatever survives being measured twice by the same rod without flinching.
 
 ::: {.viz src="repeated-projection" preset="twice" height="500"}
-**Project again, and nothing moves.** At the first press the amber arrow drops onto the cyan measurement line and the magenta part vanishes; at the second and third presses the arrow stays put, and "this press moved it" at the top left reads 0. A press here is a measurement along the line whose result is not read, so "a second press changes nothing" is exactly [@thm-pinching-idempotent].
+**Project again, and nothing moves.** At the first press the amber arrow drops onto the cyan measurement line and the magenta part vanishes; at the second and third presses the arrow stays put: of the moves listed press by press at the top left, the first is not zero and the other two are 0. A press here is a measurement along the line whose result is not read, so "a second press changes nothing" is exactly [@thm-pinching-idempotent].
 :::
 
 In an actual laboratory apparatus we rarely erect a single ray in isolation; instead we partition the space into a mutually exclusive, exhaustive family of orthogonal readout ports $\{P_k\}_{k \in \kappa}$ (such as the upper and lower beams of a Stern–Gerlach magnet or a multi-port polarizing splitter). In the Lean module `Observer/Conditioning`, this complete ruler is formalized as a **record measurement**.
@@ -239,7 +239,13 @@ $$
 \operatorname{residualMass}(V, s) = \frac{1}{2}\bigl(r_x^2 + r_y^2\bigr)!
 $$
 
-On the pure shell $\norm{\vv{r}}^2 = 1$, $r_z^2 + (r_x^2 + r_y^2) = 1$: the sharper the particle bias $|r_z| \to 1$ along the chosen line, the smaller the wave interference $r_x^2 + r_y^2$ left in the equatorial plane, and conversely. **Wave and particle never contradict one another; they are the two orthogonal legs cut from a single unit hypotenuse by an axis $V$ and its Hodge dual $\star V$.**
+On the pure shell $\norm{\vv{r}}^2 = 1$, $r_z^2 + (r_x^2 + r_y^2) = 1$: the sharper the particle bias $|r_z| \to 1$ along the chosen line, the smaller the wave interference $r_x^2 + r_y^2$ left in the equatorial plane, and conversely.
+
+::: {.viz src="repeated-projection" preset="perp" height="500"}
+**Lying in the dual plane, no shadow on the line.** The grey dashed arrow, before the press, lies entirely in the magenta equatorial dual plane and casts no shadow on the cyan measurement line Z; one press shrinks the amber arrow to a point at the centre, with line and plane both $0$.
+:::
+
+**Wave and particle never contradict one another; they are the two orthogonal legs cut from a single unit hypotenuse by an axis $V$ and its Hodge dual $\star V$.**
 
 ::: {.viz src="repeated-projection" preset="sum" height="500"}
 **One part on the line, one in the plane.** The cyan shadow lies on the measurement line Z and the magenta part lies in the equatorial dual plane; they are perpendicular and together rebuild the amber arrow, and at the top left line² + plane² equals the arrow's length squared. Halve both sides and you have the single-qubit ledger of [@thm-complementary-pythagoras].

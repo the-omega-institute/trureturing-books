@@ -30,7 +30,7 @@ $$
 In this chapter we unfold this self-referential closure across four mathematical levels: **the Lean-verified stabilization theorem for contracting updates on finite sets**, **single-step context-relative interpretation fixed points and contextual non-uniqueness**, **the unique positive algebraic fixed point $\varphi = \frac{1+\sqrt{5}}{2}$ of the golden reciprocal map $x = 1 + 1/x$**, and **the classical analytic and number-theoretic background of cosine self-reference $\cos\theta^* = \theta^*$** recorded in the literature remarks [@rem-banach-dottie-hairy-ball-literature] and [@rem-dottie-angle-incommensurable].
 
 ::: {.figure src="ch24-overview"}
-**Figure 24.** The chapter at a glance. Panel I: the cyan cosine curve and the grey diagonal $y = x$, with the cobweb from $0$ winding into $\theta^* \approx 0.739$ (convergence is a literature result, see [@rem-banach-dottie-hairy-ball-literature]). Panel II: the candidate set $\{0, 1, 2\}$ loses one element per step and stops changing at $\{0\}$ ([@thm-finite-contracting-updates-stabilize]). Panel III: the cyan curve $y = 1 + 1/x$ meets the diagonal on the positive half-line only at the green point $\varphi \approx 1.618$ ([@cor-golden-fixed-point-unique]).
+**Figure 24.** The chapter at a glance. Panel I: the cyan cosine curve and the grey diagonal $y = x$, with the cobweb from $0$ winding into $\theta^* \approx 0.739$ (convergence applies existing results; full derivation in [@ex-ch33-mutual-cosine-monotonic-lock]). Panel II: the candidate set $\{0, 1, 2\}$ loses one element per step and stops changing at $\{0\}$ ([@thm-finite-contracting-updates-stabilize]). Panel III: the cyan curve $y = 1 + 1/x$ meets the diagonal on the positive half-line only at the green point $\varphi \approx 1.618$ ([@cor-golden-fixed-point-unique]).
 :::
 
 ## 24.1 Discrete Contraction Must Stabilize: The Finite Contracting Update Theorem {#sec-ch24-1}
@@ -307,7 +307,7 @@ When the self-referential operator upgrades from a one-dimensional rational frac
 The following literature note records four classical theorems governing $\cos\theta = \theta$ and continuous self-maps of even-dimensional spheres.
 
 ::: {.remark #rem-banach-dottie-hairy-ball-literature title="Banach Contraction on [0,1], Transcendence of the Dottie Root, Taylor Remainder Bounds, and the Hairy Ball Fixed/Antipodal Alternative (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** Four classical theorems from analysis, transcendental number theory, and algebraic topology complement the frozen Lean declarations of this chapter:
+**Literature result, not formalized in this book.** Among the four items below, qualitative cosine dynamics follow by applying this chapter's endpoint [@thm-dottie-rational-inverse-endpoint] and existing real-analysis results; [@ex-ch33-mutual-cosine-monotonic-lock] supplies the full hypotheses, strictness exceptions, and derivation. Transcendence, numerical claims, and further topological extensions retain their respective literature boundaries:
 
 1. **Banach contraction principle on $[0, 1]$ and global Picard convergence**:
    [@thm-finite-contracting-updates-stabilize] uses finiteness and set pruning to guarantee finite stabilization; here completeness and metric contraction give uniqueness and asymptotic convergence. The hypotheses and conclusions differ. On the real line $\mathbb{R}$, cosine sends $\mathbb{R}$ into $[-1,1]$ and sends $[-1,1]$ to $[\cos1,1]\subset[0,1]$, a compact invariant interval. On $[0,1]$, the mean value theorem gives the strict Lipschitz bound
@@ -316,7 +316,7 @@ The following literature note records four classical theorems governing $\cos\th
    |\cos x - \cos y| \;\le\; (\sin 1)\,|x - y|, \qquad \sin 1 \approx 0.84147098 < 1.
    $$
 
-   By Banach's contraction theorem on the complete metric space $[0, 1]$, $\cos$ has a **unique real fixed point** $\theta^* \approx 0.73908513321516\dots$ (the Dottie root), and Picard iteration $\theta_{k+1} = \cos\theta_k$ converges geometrically to $\theta^*$ from every real initial seed $\theta_0 \in \mathbb{R}$. Here $\sin 1$ is the worst-case constant over the whole interval; the asymptotic contraction rate at the fixed point is $\lvert\cos'\theta^*\rvert = \sin\theta^* \approx 0.6736$ (checked numerically in [@ex-dottie-rate-newton-rational]). (Symmetrically, the mirror equation $\cos\theta = -\theta$ has unique real root $-\theta^* \approx -0.7390851332\dots$.)
+   By Banach's contraction theorem on the complete metric space $[0, 1]$, $\cos$ has a **unique real fixed point** $\theta^* \approx 0.73908513321516\dots$ (the Dottie root), and Picard iteration $\theta_{k+1} = \cos\theta_k$ converges to $\theta^*$ from every real initial seed $\theta_0 \in \mathbb{R}$. After the second step it lies in $[0,1]$, giving $|\theta_k-\theta^*|\le(\sin1)^{k-2}|\theta_2-\theta^*|$ for $k\ge2$. Here $\sin 1$ is the worst-case constant over the whole interval; the asymptotic contraction rate at the fixed point is $\lvert\cos'\theta^*\rvert = \sin\theta^* \approx 0.6736$ (checked numerically in [@ex-dottie-rate-newton-rational]). (Symmetrically, the mirror equation $\cos\theta = -\theta$ has unique real root $-\theta^* \approx -0.7390851332\dots$.)
 2. **Transcendence of $\theta^*$ and the nonzero algebraic residual $|\cos q - q| > 0$ (Lindemann–Weierstrass theorem)**:
    Suppose a nonzero algebraic number $q \in \overline{\mathbb{Q}} \setminus \{0\}$ satisfied $\cos q = q$. Writing $\cos q = \frac{e^{iq} + e^{-iq}}{2}$ and setting $u = e^{iq}$ yields the quadratic equation
 
@@ -340,7 +340,7 @@ The following literature note records four classical theorems governing $\cos\th
 :::
 
 ::: {.viz src="sphere-escape" preset="far" height="500"}
-**Another start, the same end.** Starting far out at $x_0 = 3$, the amber cobweb drops into $[-1, 1]$ on its first step and from there winds in towards the magenta fixed point $x^* = \theta^* \approx 0.739$. The end does not depend on the start, and neither does the fact that no step ever lands on it exactly (global convergence is the literature result of item 1 above).
+**Another start, the same end.** Starting far out at $x_0 = 3$, the amber cobweb drops into $[-1, 1]$ on its first step and from there winds in towards the magenta fixed point $x^* = \theta^* \approx 0.739$. The limit is independent of the start. Never hitting it at a finite step requires the separate nonfixed interval hypothesis, rather than convergence alone: $-\theta^*$ arrives in one step (full qualitative derivation in [@ex-ch33-mutual-cosine-monotonic-lock]).
 :::
 
 Pushing one step further from the number-theoretic context of [@rem-banach-dottie-hairy-ball-literature], the author's foundational notes ask: *"What are the relations among transcendental numbers? Is $\pi$ a projection of $\theta$? Is $\theta$ the ultimate transcendental number?"* In modern number theory, the algebraic independence of $\theta^*$ and $\pi$ is governed by **Schanuel's Conjecture**, which we record as an open conjecture (`OPEN`, carrying no `lean` attribute).
@@ -354,7 +354,7 @@ Assuming Schanuel's conjecture (for any $\mathbb{Q}$-linearly independent comple
 Let us compare the three self-referential trajectories of this chapter — discrete set contraction ([@thm-finite-contracting-updates-stabilize]), the algebraic golden continued fraction ([@cor-golden-fixed-point-unique]), and the Dottie cosine spiral ([@rem-banach-dottie-hairy-ball-literature]) — side by side in a concrete hand calculation.
 
 ::: {.example #ex-dottie-and-golden-iterations title="Hand Comparison of Three Self-Referential Loops: Finite Set Pruning, Golden Continued Fraction, and Dottie Cosine Spiral (With Literature Context, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** Items 1 and 2 below instantiate this chapter's kernel-verified [@thm-finite-contracting-updates-stabilize] and [@cor-golden-fixed-point-unique], whereas the convergence of the cosine iteration $\theta_{k+1} = \cos\theta_k$ to its unique real fixed point $\theta^*$ in Item 3 belongs to the classical analysis literature (see [@rem-banach-dottie-hairy-ball-literature] above) and is not formalized in this book.
+**Literature result, not formalized in this book.** Items 1 and 2 below instantiate this chapter's kernel-verified [@thm-finite-contracting-updates-stabilize] and [@cor-golden-fixed-point-unique], while Item 3's qualitative convergence applies the endpoint and existing real-analysis results (full derivation in [@ex-ch33-mutual-cosine-monotonic-lock]); the displayed decimals and residuals remain a separate numerical example.
 
 Starting from the unit seed $1$ (or a three-element initial set), compare how three self-referential operators lock onto their respective fixed points:
 
@@ -372,7 +372,7 @@ Starting from the unit seed $1$ (or a three-element initial set), compare how th
    $$
 
    Convergence follows directly from the known identity $1+1/\varphi=\varphi$: $|x_{k+1}-\varphi|=|x_k-\varphi|/(\varphi x_k)$. Here $x_k\ge1$, so each step multiplies the error by at most $1/\varphi<1$. For any positive initial value, $x_k>1$ from the first step onward, and the same estimate gives convergence. This is a manual derivation, not formalized in this book; [@cor-golden-fixed-point-unique] itself characterizes fixed points only. With $x_0=1$, every finite iterate is rational and differs from the irrational $\varphi$. The limit's algebraicity follows from the fixed-point equation, not merely from using rational addition and division at each finite step.
-3. **Two-dimensional rotational cosine loop ($\theta_{k+1} = \cos\theta_k$, **literature result, not formalized in this book**; see [@rem-banach-dottie-hairy-ball-literature])**: Starting from $\theta_0 = 1$ radian, repeated cosine evaluation yields
+3. **Two-dimensional rotational cosine loop ($\theta_{k+1} = \cos\theta_k$, qualitative convergence applies existing results; numerics are separate; see [@ex-ch33-mutual-cosine-monotonic-lock])**: Starting from $\theta_0 = 1$ radian, repeated cosine evaluation yields
 
    $$
    \begin{aligned}
@@ -411,15 +411,25 @@ Section 24.7 gives a typed reading of this aphorism: the function $\psi$ acts on
 The aphorism is stated; now let us do the arithmetic. The cosine table in [@ex-dottie-and-golden-iterations] lists only four rows, and the contraction constant $\sin 1 \approx 0.8415$ of [@rem-banach-dottie-hairy-ball-literature] is the worst case over the whole interval $[0, 1]$. Three questions are still open:
 
 1. Close to $\theta^*$, by how much does one press of the cosine key actually shrink the error?
+
+::: {.viz src="fixed-point-convergence" preset="rate" height="500"}
+**Near the fixed point, the error ratio tends to about −0.674.** Taking the cosine again and again from $\theta_0 = 1$ while the view zooms with the error: zoomed in, the cyan curve lies on the magenta tangent, every turn has the same shape, and the ratio of successive turns tends to the slope of the tangent, $-\sin\theta^* \approx -0.674$, gentler than the global constant $-\sin 1 \approx -0.84$ of the dashed grey line ($\theta_0 = 1$ lies in $[0, 1]$ and is not $\theta^*$, so the error ratio tends to $-\sqrt{1 - (\theta^*)^2}$, an application of existing results, clauses 22–23 of [@ex-ch33-mutual-cosine-monotonic-lock]; the decimals are numerical).
+:::
+
 2. If the ruler reads not only the projection $\cos\theta$ but also the orthogonal component $\sin\theta$, how much faster does the loop close?
+
+::: {.viz src="fixed-point-convergence" preset="newton" height="500"}
+**Follow the tangent: near the fixed point, digits double asymptotically.** Again from $\theta_0 = 1$, each step reads the height of the curve and then follows the magenta tangent to the grey line $y = x$. Once it is near the fixed point, the view zooms along and stops at step $2$, about $10^{-4}$ wide. The amber $x_2$ has just come down the magenta tangent of the previous step onto the grey line, $2.78\times10^{-5}$ from the white ring $\theta^*$; at this magnification the cyan curve is already too straight to tell from its tangent. The correct decimal digits run $0$, $1$, $4$, with the error asymptotically squared at each step; the plain iteration needs $24$ steps to match this step (numerical check in [@ex-dottie-rate-newton-rational]).
+:::
+
 3. How close to $\cos q = q$ can a ruler with finitely many rational tick marks get?
 
 ::: {.figure src="ch24-three-speeds"}
-**The three questions, answered numerically side by side.** Left, by step: the cyan points, repeated cosine, go down one equal notch per step along the dashed line of slope $\lg\lambda$ ($\lambda \approx 0.674$) and pass $10^{-10}$ only at step $55$; the magenta points, Newton's method, reach $10^{-21}$ in four steps. Right, by denominator: seven points are the residuals $\lvert\cos q - q\rvert$ of the convergents of $\theta^*$, all under the dashed bound $(1 + \sin 1)/b^2$, falling but never zero. All are numerical results; the rates and the bound are literature results in the note below, not formalized in this book.
+**The three questions, answered numerically side by side.** Left, by step: the cyan points, repeated cosine, go down one equal notch per step along the dashed line of slope $\lg\lambda$ ($\lambda \approx 0.674$) and pass $10^{-10}$ only at step $55$; the magenta points, Newton's method, reach $10^{-21}$ in four steps. Right, by denominator: seven points are the residuals $\lvert\cos q - q\rvert$ of the convergents of $\theta^*$, all under the dashed bound $(1 + \sin 1)/b^2$, falling but never zero. All are numerical results; the asymptotic factor of the cosine iteration is an application of existing results in [@ex-ch33-mutual-cosine-monotonic-lock], while the Newton rate and the residual bound are literature results in the note below, not formalized in this book.
 :::
 
 ::: {.remark #rem-dottie-convergent-residual-literature title="Asymptotic Contraction Rate, Newton's Quadratic Speed-Up, and Continued-Fraction Convergent Residual Bounds for θ* (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.**
+**Literature result, not formalized in this book.** The exact asymptotic factor and conditional error ratio are applications of existing results in [@ex-ch33-mutual-cosine-monotonic-lock]. The higher-order expansion, Newton method, continued-fraction bounds, and decimals below retain their separate literature or numerical status.
 
 **First question: position and rate lie on one unit circle.** Write the error as $\delta_k = \theta_k - \theta^*$, expand $\cos$ about $\theta^*$, and cancel the zeroth-order term with $\cos\theta^* = \theta^*$:
 
@@ -427,7 +437,7 @@ $$
 \delta_{k+1} \;=\; \cos(\theta^* + \delta_k) - \theta^* \;=\; -\sin\theta^*\,\delta_k \;-\; \frac{\theta^*}{2}\,\delta_k^2 \;+\; O(\delta_k^3).
 $$
 
-The minus sign of the linear coefficient says that the iterates straddle $\theta^*$ alternately from the right and from the left, which is the square spiral of the cobweb diagram. Its modulus
+Strict alternation requires $\theta_0\in[0,1]\setminus\{\theta^*\}$; under that hypothesis the order argument in Chapter 33 makes the iterates straddle $\theta^*$ alternately from the right and from the left, which is the square spiral of the cobweb diagram. Its modulus
 
 $$
 \lambda \;=\; \lvert\cos'\theta^*\rvert \;=\; \sin\theta^* \;=\; \sqrt{1 - (\theta^*)^2} \;\approx\; 0.6736120292
@@ -453,7 +463,7 @@ $$
 \delta_{k+1} \;=\; \frac{\theta^*}{2\,(1 + \lambda)}\,\delta_k^2 + O(\delta_k^3), \qquad \frac{\theta^*}{2\,(1 + \lambda)} \approx 0.2208054 .
 $$
 
-Picard iteration adds a fixed number of digits per step; Newton's iteration roughly doubles the number of correct digits per step.
+Picard iteration adds a fixed number of digits per step; once it is near the fixed point, Newton's iteration asymptotically doubles the number of correct digits.
 
 **Third question: the residual is the distance to the fixed point.** For $q \in [0, 1]$, apply the mean value theorem to $F$ and use $F(\theta^*) = 0$: there is some $\xi$ between $q$ and $\theta^*$ with
 
@@ -476,16 +486,10 @@ $$
 for infinitely many denominators $b$: the seam narrows like the square of the denominator, yet never closes.
 :::
 
-::: {.viz src="fixed-point-convergence" preset="rate" height="500"}
-**Each press multiplies the error by −0.674.** Taking the cosine again and again from $\theta_0 = 1$ while the view zooms with the error: zoomed in, the cyan curve lies on the magenta tangent, every turn has the same shape, and the ratio of successive turns tends to the slope of the tangent, $-\sin\theta^* \approx -0.674$, gentler than the global constant $-\sin 1 \approx -0.84$ of the dashed grey line (a literature result; see [@rem-dottie-convergent-residual-literature]).
-:::
+Back to the answer to the first question: where the fixed point sits and how fast the loop closes are the two coordinates of one point $(\theta^*, \lambda)$ on the unit circle.
 
 ::: {.viz src="fixed-point-convergence" preset="circle" height="500"}
 **Where it stops, and how fast it closes.** The same cobweb with the unit circle added. On the circle sits $P = (\theta^*, \sin\theta^*)$: its cyan abscissa $\theta^*$ is where the cobweb closes in, and its magenta height $\lambda = \sin\theta^* \approx 0.674$ is the ratio by which each step shrinks the error, the size of the slope of the magenta tangent; $(\theta^*)^2 + \lambda^2 = 1$. For the existence and uniqueness of $\theta^*$ see [@thm-dottie-rational-inverse-endpoint].
-:::
-
-::: {.viz src="fixed-point-convergence" preset="newton" height="500"}
-**Follow the tangent, double the digits.** Again from $\theta_0 = 1$, each step reads the height of the curve and then follows the magenta tangent to the grey line $y = x$. The view zooms along: within four steps its width falls from about $0.6$ to the order of $10^{-20}$, the error being roughly squared at each step; the plain iteration needs $115$ steps to match step $4$ (numerical check in [@ex-dottie-rate-newton-rational]).
 :::
 
 ::: {.example #ex-dottie-rate-newton-rational title="Numerical Check of the True Contraction Rate, Newton's Quadratic Closure, and the Residuals of the Best Rational Readings"}
@@ -534,17 +538,13 @@ Every entry of the last column is below $1 + \sin 1 \approx 1.84$, in agreement 
 :::
 
 ::: {.viz src="fixed-point-convergence" preset="rational" height="500"}
-**The seam narrows but never closes.** The convergents $2/3, 3/4, 14/19, 17/23, 694/939, \dots$ of $\theta^*$ land one by one on the grey line (amber marks the current one), and the magenta upright is the drop from there to the cosine curve, the residual $\lvert\cos q - q\rvert$. The upright always stays inside the wedge of the two dashed grey lines (slopes $0$ and $-\sin 1$); with the view magnified ten million times, it is still there.
+**The seam narrows but never closes.** The convergents $2/3, 3/4, 14/19, 17/23, 694/939, \dots$ of $\theta^*$ land one by one on the grey line (amber marks the current one), and the magenta upright is the drop from there to the cosine curve, the residual $\lvert\cos q - q\rvert$. Its endpoint on the cosine curve always stays inside the wedge of the two dashed grey lines (slopes $0$ and $-\sin 1$); with the view magnified ten million times, it is still there.
 :::
 
 The last table of [@ex-dottie-rate-newton-rational] shows that refining the tick marks does not automatically buy a better reading. What sets the width of the seam is not the size of the denominator but its arithmetic relation to $\theta^*$: a ruler with twenty-three divisions happens to line up almost exactly at its seventeenth mark, and a ruler with a thousand divisions does not.
 
 ::: {.viz src="fixed-point-convergence" preset="ruler" height="500"}
 **Twenty-three divisions beat a thousand.** The amber $17/23$ next to the dashed ruler reading $739/1000$: the tick nearest $\theta^*$ on a thousandths ruler leaves about twice the residual of $17/23$ ($1.42\times10^{-4}$ against $7.58\times10^{-5}$).
-:::
-
-::: {.viz src="fixed-point-convergence" height="560"}
-**How fixed points close in: the full lab.** Three scenes on one cobweb plane: iteration ($\cos x$ or $1 + 1/x$, with a draggable start and three cameras), Newton's method, and rational readings (with an adjustable ruler). Convergence, its rate and the residual bounds are literature results, not formalized in this book; the green boxes cite only [@cor-golden-fixed-point-unique] and [@thm-dottie-rational-inverse-endpoint].
 :::
 
 Rational readings never line up. What about a different kind of closure: instead of asking the projection to return to itself, ask a rotation to return to its starting point? The answer is again no, and this time no conjecture is needed.
@@ -605,6 +605,100 @@ The average of $f_1$ tends to $0$ quickly: the geometric sum gives the bound $\f
 :::
 
 Within a hundred steps, the orbit with step $\theta^*$ looks almost indistinguishable from a regular heptadecagon; equidistribution shows itself only on a longer time scale. An observer with finitely many steps sees a closed polygon; the whole circle appears only in the limit of infinitely many.
+
+::: {.viz src="fixed-point-convergence" height="560"}
+**How fixed points close in: the full lab.** Three scenes on one cobweb plane: iteration ($\cos x$ or $1 + 1/x$, with a draggable start and three cameras), Newton's method, and rational readings (with an adjustable ruler). Qualitative cosine convergence and conditional asymptotic factors follow from the reuse derivation in [@ex-ch33-mutual-cosine-monotonic-lock]; Newton's method, numerical values, and residual bounds retain their literature or numerical boundaries; the green boxes cite only [@cor-golden-fixed-point-unique] and [@thm-dottie-rational-inverse-endpoint].
+:::
+
+### Twin-Spiral Correspondence: From the One-Dimensional Golden Continued Fraction to Two-Dimensional Cosine Whirling Squares {#sec-ch24-dottie-fibonacci-spirals}
+
+Looking back at the two tables computed side by side in [@ex-dottie-and-golden-iterations] — the golden reciprocal continued-fraction iteration and the cosine fixed-point iteration — the author recorded an observation in the manuscript that goes straight to the geometric core: *"Approaching $\theta$ is very much like a Fibonacci spiral."*（“逼近 $\theta$ 的过程很像斐波那契螺旋。”） Far from a loose visual metaphor, this expresses a structural correspondence and continuous spiral interpolation model (`MODEL`) of the same negative-slope turning mechanism acting first on a flat one-dimensional ruler and then on a curved two-dimensional circular arc.
+
+Why does a recurrence that takes values purely on a one-dimensional real interval wind into an inward spiral as soon as it is plotted in the plane? Place the two recurrences side by side: on one hand, the golden inverse branch $x_{k+1} = \frac{1}{1 + x_k}$ starting from $x_0 = 1$ steps through the Fibonacci convergents $1/1,\; 1/2,\; 2/3,\; 3/5,\; 5/8,\; 8/13,\; \dots \to \varphi^{-1} \approx 0.6180339887$ (whose unique positive fixed point is locked in `trureturing` by [@lem-golden-inverse-branch-fixed-point] `golden_inverse_branch_positive_fixed_point_iff`, while the alternating sign $(-1)^{k+1}$ and the strict rational-approximation lower bound $\lvert\varphi - q\rvert > \frac{1}{\sqrt{5}\,b^2 + b}$ for every $q = a/b \in \mathbb{Q}$ are proved in the [Coda](coda.md) at [@thm-coda-golden-cut-observer-cassini] and [@thm-coda-golden-hurwitz]; that the all-ones continued fraction $[1; 1, 1, \dots]$ achieves asymptotic Hurwitz extremality among all irrationals is a classical number-theoretic theorem, Hurwitz 1891); on the other hand, the cosine iteration $\theta_{k+1} = \cos\theta_k$ starting from $\theta_0 = 0$ steps through $0 \to 1 \to 0.5403 \to 0.8576 \to 0.6543 \to 0.7935 \to \dots \to \theta^* \approx 0.7390851332$ (whose unique positive fixed point is locked by [@thm-dottie-rational-inverse-endpoint] `rational_inverse_endpoint`, with qualitative convergence and strict alternation hypotheses derived in [@ex-ch33-mutual-cosine-monotonic-lock]). In real analysis, neither orbit creeps monotonically from one side because both first derivatives at the fixed point are strictly negative (item 1 of [@rem-dottie-fibonacci-spiral-literature] below). In our Clifford orthogonal geometric model (`MODEL`, whose discrete operator prototype is the skew-adjoint unitary squaring law $R^2 = -I_n$ of [Chapter 5](ch05-complex-phase-and-rotors.md), [`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary)), the minus sign $-1 = \hat{\mathbf{I}}^2$ is not a discontinuous leap along a line, but **two consecutive same-handed $90^\circ$ right-angle turns** in a two-dimensional bivector plane: left-right oscillation on the real axis is the edge-on shadow of an inward spiral. Unfolded onto the cobweb plane $(x_k, x_{k+1})$, each Picard update splits into a vertical read $A_k(x_k, x_k) \to B_k(x_k, x_{k+1})$ and a horizontal return $B_k(x_k, x_{k+1}) \to A_{k+1}(x_{k+1}, x_{k+1})$ of strictly equal length (winding $2 \times 90^\circ = 180^\circ$ around the fixed point per step): starting below the fixed point ($x_0 < x^*$, such as $\theta_0 = 0 < \theta^*$) enters the clockwise cycle at **North ($+\mathbf{e}_2$) $\to$ East ($+\mathbf{e}_1$) $\to$ South ($-\mathbf{e}_2$) $\to$ West ($-\mathbf{e}_1$)**, whereas starting above it ($x_0 > x^*$, such as $x_0 = 1$) enters the same clockwise cycle shifted by two quarter-turns (**South $\to$ West $\to$ North $\to$ East**), with vanishing step $s_k = 0$ when $x_0 = x^*$. Each step bounds a nested square whose inscribed **piecewise quarter-circle guide** (whose tangents meet perpendicularly at every diagonal vertex $A_{k+1}$ even under zoom) parallels the Fibonacci whirling-square diagram: the diagonal vertices and square side lengths contract asymptotically at the geometric rate $\lambda = \lvert f'(x^*)\rvert$, while on the polar stage a separate smooth equiangular logarithmic spiral $R(\phi) = R_0 e^{-b\phi}$ (`MODEL`) continuously interpolates that discrete geometric contraction.
+
+::: {.viz src="dottie-fibonacci-spirals" preset="whirl" height="500"}
+**Every cobweb step frames a whirling square.** Iterating the cyan curve $y = \cos\theta$ from $\theta_0 = 0$, each vertical step to the curve and horizontal return to the grey diagonal $y = x$ have equal length $\lvert\cos\theta_k - \theta_k\rvert$, winding clockwise North $\to$ East $\to$ South $\to$ West to nest squares and piecewise $90^\circ$ cyan quarter-circle guides around the cyan fixed-point ring $(\theta^*, \theta^*)$ on the grey coordinate crosshair; at step index $k = 5$ (after five completed updates $Q_0 \dots Q_4$), amber marks only the active update $Q_5$ and its South $\to$ West arms and square (equal-arm and turn properties in [@rem-dottie-fibonacci-spiral-literature]; uniqueness of the positive fixed point in [@thm-dottie-rational-inverse-endpoint]).
+:::
+
+::: {.remark #rem-dottie-fibonacci-spiral-literature title="Twin-Spiral Contraction Factors, Pythagorean Conservation Duality, and Equiangular Spiral Inward-Radial Tangent Angles (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** The following properties of cobweb whirling squares, flat-versus-curved golden conservation laws, and equiangular logarithmic spiral tangent angles belong to classical calculus and plane differential geometry (with qualitative cosine convergence and strict alternation reusing the derivation in [@ex-ch33-mutual-cosine-monotonic-lock], while decimal values and plane-geometric formulas retain their literature or numerical boundaries):
+
+1. **Negative fixed-point derivatives, equal-arm cobweb polylines, and piecewise whirling-square arcs.** At the positive fixed points $x^* = \varphi^{-1} = \frac{\sqrt{5}-1}{2}$ of $g(x) = \frac{1}{1+x}$ and $\theta^*$ of $f(\theta) = \cos\theta$, the first derivatives are
+
+   $$
+   g'(\varphi^{-1}) \;=\; -\frac{1}{(1 + \varphi^{-1})^2} \;=\; -\varphi^{-2} \;\approx\; -0.3819660113 < 0, \qquad f'(\theta^*) \;=\; -\sin\theta^* \;\approx\; -0.6736120292 < 0.
+   $$
+
+   For any one-dimensional map $h$ with cobweb vertices $A_k = (x_k, x_k)$ and $B_k = (x_k, x_{k+1})$ ($x_{k+1} = h(x_k)$), the vertical displacement $(0, x_{k+1} - x_k)$ and horizontal displacement $(x_{k+1} - x_k, 0)$ have identical Euclidean length
+
+   $$
+   \lvert B_k - A_k\rvert \;=\; \lvert A_{k+1} - B_k\rvert \;=\; s_k \;=\; \lvert h(x_k) - x_k\rvert.
+   $$
+
+   Each Picard update traverses two perpendicular arms ($180^\circ$ around $(x^*, x^*)$): whenever the signed residual alternates strictly across $x^*$ (guaranteed for cosine iteration on $\theta_0 \in [0, 1] \setminus \{\theta^*\}$ by the order argument in [@ex-ch33-mutual-cosine-monotonic-lock]), starting below $x^*$ ($x_0 < x^*$) enters the clockwise cycle at $+\mathbf{e}_2$ (North) $\to +\mathbf{e}_1$ (East) $\to -\mathbf{e}_2$ (South) $\to -\mathbf{e}_1$ (West), whereas starting above $x^*$ ($x_0 > x^*$) enters the same clockwise cycle shifted by two quarter-turns (South $\to$ West $\to$ North $\to$ East), with $s_k = 0$ at $x_0 = x^*$. Each step bounds the square $[\min(x_k, x_{k+1}),\, \max(x_k, x_{k+1})]^2$ of side $s_k$ enclosing $(x^*, x^*)$; the quarter-circle arcs of radius $s_k$ centered at $(x_{k+1}, x_k)$ from $A_k$ to $A_{k+1}$ form **piecewise quarter-circle guides** (retaining perpendicular tangents at every diagonal junction $A_{k+1}$ even under exact linear scaling, and never converging in curve shape to a smooth logarithmic spiral); rather, in the asymptotic linear regime $\delta_{k+1} \approx h'(x^*)\,\delta_k$ the diagonal vertices and square side lengths contract geometrically at rate $\lambda = \lvert h'(x^*)\rvert$, which item 3 below continuously interpolates on the polar plane via a separate smooth equiangular logarithmic spiral $R(\phi) = R_0 e^{-b\phi}$.
+
+2. **One-dimensional linear additive conservation versus two-dimensional Pythagorean square conservation.**
+   - **One-dimensional flat golden section ($\varphi^{-1}$)**: For $x > 0$, $x = \frac{1}{1+x}$ is equivalent to $x + x^2 = 1$, locking the fixed point $x^* = \varphi^{-1} \approx 0.6180339887$ and the single-step contraction modulus $\lambda_\varphi = \lvert g'(\varphi^{-1})\rvert = \varphi^{-2} \approx 0.3819660113$ (factoring the sign reversal into two equal $90^\circ$ turns gives a per-quarter-turn radial scaling of $\sqrt{\lambda_\varphi} = \varphi^{-1} \approx 0.618034$). Fixed-point position and single-step contraction obey **one-dimensional linear additive conservation**:
+
+     $$
+     \varphi^{-1} + \varphi^{-2} \;=\; 0.6180339887\ldots + 0.3819660113\ldots \;=\; 1.
+     $$
+
+   - **Two-dimensional curved cosine fixed point ($\theta^*$)**: Bending the unit ruler into a circular arc, $\cos\theta = \theta$ locks the fixed point $\theta^* \approx 0.7390851332$ and the orthogonal contraction modulus $\lambda_\theta = \lvert f'(\theta^*)\rvert = \sin\theta^* \approx 0.6736120292$. Relative to $\varphi^{-1} \approx 0.6180339887$, $\lambda_\theta$ is shifted upward by only
+
+     $$
+     \lambda_\theta - \varphi^{-1} \;=\; \sin\theta^* - \varphi^{-1} \;\approx\; +0.055578 \quad\text{($+5.56$ percentage points, or $\approx 9.0\%$ relative to $\varphi^{-1}$)},
+     $$
+
+     while fixed-point position and contraction modulus now obey **two-dimensional Pythagorean square conservation** on the unit circle:
+
+     $$
+     (\theta^*)^2 + \lambda_\theta^2 \;=\; \cos^2\theta^* + \sin^2\theta^* \;=\; 0.5462468341\ldots + 0.4537531659\ldots \;=\; 1.
+     $$
+
+3. **Jakob Bernoulli's equiangular logarithmic spiral and inward-radial tangent angle.** Jakob Bernoulli (*Acta Eruditorum*, 1692) studied the polar logarithmic spiral $R(\phi) = R_0 e^{-b\phi}$ ($R_0 > 0,\; b \ge 0$), naming it *spira mirabilis* (*"Eadem mutata resurgo"*, "Though changed, I arise the same") for its exact self-similarity under rescaling. Writing $\kappa = e^{-b\pi/2} \in (0, 1]$ for the radial scaling per clockwise $90^\circ$ quarter-turn gives damping rate $b = -\frac{2}{\pi}\ln\kappa$ and $360^\circ$ full-turn scaling $\kappa^4 = e^{-2\pi b}$. Parametrizing clockwise from North $+\mathbf{e}_2$ as $\mathbf{r}(\phi) = R(\phi)(\sin\phi, \cos\phi)$, with outward radial unit vector $\hat{\mathbf{r}}(\phi) = (\sin\phi, \cos\phi)$ and clockwise circle-tangent unit vector $\hat{\boldsymbol{\phi}}(\phi) = (\cos\phi, -\sin\phi)$, differentiation yields $\mathbf{r}'(\phi) = R(\phi)\bigl(-b\,\hat{\mathbf{r}}(\phi) + \hat{\boldsymbol{\phi}}(\phi)\bigr)$ and $\lvert\mathbf{r}'(\phi)\rvert = R(\phi)\sqrt{1 + b^2}$. Because $\hat{\mathbf{r}}(\phi)\cdot\hat{\mathbf{t}}(\phi) = -b/\sqrt{1 + b^2} \le 0$ makes an obtuse angle $\pi - \alpha$ with the outward ray when $b > 0$, $(-\hat{\mathbf{r}}(\phi))\cdot\hat{\mathbf{t}}(\phi) = b/\sqrt{1 + b^2} \ge 0$ defines the constant **acute angle $\alpha \in (0, \frac{\pi}{2}]$ between the inward radial unit ray $-\hat{\mathbf{r}}(\phi)$ (pointing toward the fixed-point center) and the forward unit tangent $\hat{\mathbf{t}}(\phi)$**:
+
+   $$
+   \alpha \;=\; \arctan\!\left(\frac{1}{b}\right) \;=\; \frac{\pi}{2} - \arctan b \qquad (\alpha = 90^\circ \text{ when } b = 0),
+   $$
+
+   with constant inward deflection $90^\circ - \alpha = \arctan b$ relative to the $90^\circ$ circle tangent $\hat{\boldsymbol{\phi}}$; conversely, integrating $R'(\phi)/R(\phi) = -\cot\alpha$ shows that logarithmic spirals are the unique smooth polar curves $R(\phi) > 0$ of constant inward-radial tangent angle $\alpha \in (0, \frac{\pi}{2})$. The four smooth model trajectories compare as follows:
+
+   | Smooth spiral model | Per-$90^\circ$ scaling $\kappa$ | Damping $b = -\frac{2}{\pi}\ln\kappa$ | Inward-radial tangent angle $\alpha = \arctan(1/b)$ | Inward tilt $90^\circ - \alpha$ | Per-$360^\circ$ scaling $\kappa^4$ |
+   | :--- | :---: | :---: | :---: | :---: | :---: |
+   | **Ideal closed circle** | $1.0000$ | $0$ | $\mathbf{90.00^\circ}$ | $0.00^\circ$ | $1.0000$ |
+   | **$\theta^*$ cobweb two-step spiral** ($90^\circ$ per arm, $180^\circ$ per iterate) | $\sqrt{\sin\theta^*} \approx 0.8207$ | $0.1258$ | $\mathbf{82.83^\circ}$ | $7.17^\circ$ | $\sin^2\theta^* \approx 0.4538$ |
+   | **$\theta^*$ Clifford orthogonal spiral** ($\sin\theta^*$ per $90^\circ$) | $\sin\theta^* \approx \mathbf{0.6736}$ | $0.2515$ | $\mathbf{75.88^\circ}$ | $14.12^\circ$ | $\sin^4\theta^* \approx 0.2059$ |
+   | **Fibonacci golden spiral** ($\varphi^{-1}$ per $90^\circ$) | $\varphi^{-1} \approx \mathbf{0.6180}$ | $0.3063$ | $\mathbf{72.97^\circ}$ | $17.03^\circ$ | $\varphi^{-4} \approx 0.1459$ |
+:::
+
+Setting the two conservation laws of item 2 in [@rem-dottie-fibonacci-spiral-literature] side by side lays bare the geometric transition from $\varphi^{-1}$ to $\theta^*$. On a flat one-dimensional ruler, "whole is to longer part as longer is to shorter" cuts the unit bar into $\varphi^{-1} + \varphi^{-2} = 1$, scaling by $\varphi^{-1} \approx 0.6180$ per quarter-turn; the moment that unit ruler is bent into a unit circular arc whose arc length equals its own cosine projection $\cos\theta = \theta$, linear additive conservation lifts into Pythagorean square conservation $(\theta^*)^2 + \sin^2\theta^* = 1$, and the orthogonal contraction factor shifts from the flat $0.6180$ to the curved $\sin\theta^* \approx 0.6736$ — a difference of $\approx 0.0556$ ($5.56$ percentage points, or an $\approx 9.0\%$ relative curvature shift). Within our four-tier number-and-sphere hierarchy (`MODEL`, detailed in [Chapter 29](ch29-timeless-causality-and-gram-space.md) [@rem-ch29-four-tier-sphere-table]), $\varphi^{-1} \approx 0.6180$ is the **one-dimensional flat algebraic golden ratio** (Tier 2, quadratic algebraic extensions), whereas $\theta^* \approx 0.7391$ is the **two-dimensional orthogonal transcendental golden ratio** born from bending self-similarity onto the unit circle (Tier 4, self-referential cosine fixed point).
+
+::: {.viz src="dottie-fibonacci-spirals" preset="pythagoras" height="500"}
+**A flat ruler adds; a bent arc squares.** Left: the four smooth polar trajectories. Right: at top, the flat unit bar divided at the ink tick into cyan $\varphi^{-1} \approx 0.6180$ and magenta $\varphi^{-2} \approx 0.3820$ (1D additive conservation $\varphi^{-1} + \varphi^{-2} = 1$); below, the quarter unit circle with its cyan-ringed fixed point $P(\theta^*, \sin\theta^*)$ splitting hypotenuse $1$ into cyan base $\cos\theta^* = \theta^* \approx 0.7391$ and magenta height $\sin\theta^* \approx 0.6736$ (2D Pythagorean conservation $(\theta^*)^2 + \sin^2\theta^* = 1$, with amber marking only the live $k = 8$ iterates $x_8, \theta_8$; item 2 of [@rem-dottie-fibonacci-spiral-literature]).
+:::
+
+Item 3 of [@rem-dottie-fibonacci-spiral-literature] likewise gives a sharp plane-geometric measure of our recurring motif (`MODEL`) that every apparent sphere is locally an arc yet globally an inward-refining spiral. Only at inward-radial tangent angle $\alpha = 90.00^\circ$ does a trajectory close onto itself with zero scale refinement; on the $\theta^*$ cobweb two-step spiral ($\alpha \approx 82.83^\circ$), local arcs look nearly circular, yet one full $360^\circ$ revolution (two cosine updates, four $90^\circ$ arms) shrinks the radius to $\sin^2\theta^* \approx 0.4538$; and on the $\theta^*$ Clifford orthogonal spiral, the inward-radial tangent angle $\alpha \approx 75.88^\circ$ — just $2.91^\circ$ gentler than the Fibonacci golden spiral's $72.97^\circ$ — tilts inward by $14.12^\circ$ from the circle tangent at every $90^\circ$ turn, uniting phase rotation and scale refinement in a single motion.
+
+::: {.viz src="dottie-fibonacci-spirals" preset="tilt" height="500"}
+**Fourteen degrees inward turns a circle into a contracting spiral.** Directly at polar step $k = 1$ ($\phi_1 = \pi/2$, radius $r = \sin\theta^* \approx 0.6736$) on the cyan $\theta^*$ orthogonal spiral, the left panel draws both the amber inward radial vector (pointing toward the center) and the cyan forward tangent: the cyan acute sector between them is the inward-radial tangent angle $\alpha \approx 75.88^\circ$, opening a $14.12^\circ$ magenta inward-tilt wedge from the $90.00^\circ$ dashed grey circle tangent, flanked by the violet cobweb spiral ($82.83^\circ$) and the magenta Fibonacci spiral ($72.97^\circ$) (literature result, item 3 of [@rem-dottie-fibonacci-spiral-literature]).
+:::
+
+Because $\cos\theta$ hugs its tangent line of slope $-\sin\theta^*$ ever more closely as $\theta_k \to \theta^*$, the cobweb whirling squares exhibit **asymptotic self-similarity** in the spirit of Bernoulli's *Eadem mutata resurgo*: starting from $\theta_0 = 0$, the residual ratio $\lvert\delta_4/\delta_{12}\rvert \approx 24.36$ between step indices $k = 4$ and $k = 12$ is already close to the asymptotic factor $(\sin\theta^*)^{-8} \approx 23.59$, so magnifying around $(\theta^*, \theta^*)$ makes the square $Q_{12}$ at $k = 12$ visually nearly indistinguishable from $Q_4$ at $k = 4$.
+
+::: {.viz src="dottie-fibonacci-spirals" preset="zoom" height="500"}
+**Magnified about twenty-fourfold, square $Q_{12}$ at $k = 12$ visually reproduces the proportions of $Q_4$ at $k = 4$.** Locking onto the cyan fixed-point ring $(\theta^*, \theta^*)$ and rescaling with the current error (at step index $k = 12$, after twelve completed updates $Q_0 \dots Q_{11}$, active amber square $Q_{12}$ has side $s_{12} \approx 5.8\times 10^{-3}$ and residual $\lvert\delta_{12}\rvert \approx 3.5\times 10^{-3}$), the cyan cosine curve lies flat along the dashed magenta tangent while the amber update $Q_{12}$ and piecewise $90^\circ$ square guides visually repeat the proportions of $Q_4$ at $k = 4$ (literature result, [@rem-dottie-fibonacci-spiral-literature]).
+:::
+
+Placing the piecewise cobweb whirling squares on the left and the smooth polar spiral models on the right along one shared step index $k$ (where each Picard update winds $180^\circ$ across two perpendicular cobweb arms on the left, while on the right each index $k$ advances one $90^\circ$ quarter-turn of scaling $\sin\theta^*$ vs. $\varphi^{-1}$, alongside the per-arm $\sqrt{\sin\theta^*}$ cobweb spiral) makes visible how approaching $\theta^*$ parallels the inward contraction of the Fibonacci golden spiral (their horizontal-versus-vertical division of labor in the unified-field model returns in [Chapter 32](ch32-unified-field-and-meta-unification.md#sec-ch32-generative-laws)).
+
+::: {.viz src="dottie-fibonacci-spirals" preset="twin" height="500"}
+**Cobweb whirling squares on the left, smooth twin-spiral models indexed by step on the right.** At the shared step index $k = 8$: on the left, eight completed historical Picard updates $Q_0 \dots Q_7$ from $\theta_0 = 0$ ($180^\circ$ across two arms per step, four full cobweb turns) plus the active amber step-$8$ update $Q_8$ display nine updates ($4.5$ cobweb turns) of nested squares and piecewise $90^\circ$ quarter-circle guides; on the right, at polar step $k = 8$ ($\phi_8 = 4\pi$, two full polar turns at $90^\circ$ per step, amber ray and dots), the dashed grey circle, violet per-arm cobweb spiral ($0.8207$ per $90^\circ$), cyan $\theta^*$ orthogonal spiral ($0.6736$), and magenta Fibonacci golden spiral ($0.6180$) wind concentrically inward.
+:::
+
+::: {.viz src="dottie-fibonacci-spirals" height="580"}
+**Dottie and Fibonacci Twin Spirals: full interactive lab.** Three scenes share one step rail $k = 0 \dots 20$: Twin ($\cos\theta$, $1/(1+x)$, or both overlaid, with draggable start $x_0$), Squares (whole path or follow-and-zoom), and Angle (inward-radial tangent angles and additive vs. Pythagorean conservation). Qualitative cosine convergence follows [@ex-ch33-mutual-cosine-monotonic-lock], derivatives, inward-radial tangent angles, and conservation laws are literature results ([@rem-dottie-fibonacci-spiral-literature]), Clifford turns, continuous logarithmic-spiral interpolation, and dual-spiral roles are this book's `MODEL`, and green badges mark only the five frozen Lean theorems.
+:::
 
 ## 24.6 "Is $\pi$ a Projection of $\theta$?": Two Mutually Inverse Series, Kepler's Equation, and Half-Time Free Fall {#sec-ch24-6}
 
@@ -822,13 +916,13 @@ The ratio of successive terms of $A$ tends to $(\theta^*)^2 \approx 0.546$. The 
 So two statements hold together without contradiction: analytically, each of $\pi$ and $\theta^*$ is the value of a rational power series at the other ([@thm-dottie-rational-inverse-endpoint], [@ex-dottie-pi-series]); algebraically, under Schanuel's conjecture ([@conj-schanuel-dottie]), no polynomial relation holds between them. $A$ and $B$ are infinite series, not polynomials; the finite truncations listed in the table all leave a nonzero difference. Nonvanishing of general truncation tails, a pattern of coefficient signs, and computational resource bounds are outside the endpoint theorem.
 
 ::: {.figure src="ch24-two-series"}
-**$\pi$ and $\theta^*$ are the two coordinates of one point on one curve.** The cyan curve is $A(x) = 2x + 2\arcsin x$. Going up from $\theta^*$ on the horizontal axis and then left reads off $\pi = A(\theta^*)$: the cyan arrows. Going right from $\pi$ on the vertical axis and then down reads back $\theta^* = B(\pi)$: the dashed magenta arrows. The absolute convergence and sum of $B$ at $\pi$ are [@thm-dottie-rational-inverse-endpoint]; the arcsine expansion behind $\pi = A(\theta^*)$ is in [@rem-arcsin-series-derivation] (literature result, not formalized in this book).
+**$\pi$ and $\theta^*$ are the two coordinates of one point on one curve.** The cyan curve is $A(x) = 2x + 2\arcsin x$. Going up from $\theta^*$ on the horizontal axis and then left reads off $\pi = A(\theta^*)$: the cyan arrows. Going right from $\pi$ on the vertical axis and then down reads back $\theta^* = B(\pi)$ along the same path: the dashed magenta arrows laid over the cyan ones. The absolute convergence and sum of $B$ at $\pi$ are [@thm-dottie-rational-inverse-endpoint]; the arcsine expansion behind $\pi = A(\theta^*)$ is in [@rem-arcsin-series-derivation] (literature result, not formalized in this book).
 :::
 
 **Where the fixed point lives: the half-time of a cycloid.** How the auxiliary equation $\eta + \sin\eta = \pi/2$ appears in Kepler's equation and Newtonian radial free fall is worked out in [@ex-dottie-free-fall].
 
 ::: {.example #ex-dottie-free-fall title="Half-Time Free Fall: When Half the Fall Time Has Elapsed, the Distance Remaining Is (1 + sin θ*)/2"}
-**Literature result, not formalized in this book.** Substituting $E = \pi - \eta$ into $\eta + \sin\eta = \pi/2$ from [@ex-dottie-pi-series] yields Kepler's equation $E - \sin E = \frac{\pi}{2}$ at eccentricity $e = 1$ and mean anomaly $M = \pi/2$, solved by $E = \frac{\pi}{2} + \theta^* \approx 132.35^\circ$. A Kepler orbit of eccentricity $1$ degenerates into a radial segment, corresponding in Newtonian mechanics to a particle falling radially from rest at distance $r_0$ in the gravitational field of a central mass $M$. Energy conservation gives $\dot{r}^2 = 2GM\left(\frac{1}{r} - \frac{1}{r_0}\right)$, whose solution is the cycloid parametrization:
+**Literature result, not formalized in this book.** Substituting $E = \pi - \eta$ into $\eta + \sin\eta = \pi/2$ from [@ex-dottie-pi-series] yields Kepler's equation $E - \sin E = \frac{\pi}{2}$ at eccentricity $e = 1$ and mean anomaly $M = \pi/2$, solved by $E = \frac{\pi}{2} + \theta^* \approx 132.35^\circ$. Here we take the zero-angular-momentum limit of a bound ellipse ($e \to 1$), which degenerates into a radial segment; the motion along it is the Newtonian radial free fall from rest at distance $r_0$ in the gravitational field of a central mass $M$. Energy conservation gives $\dot{r}^2 = 2GM\left(\frac{1}{r} - \frac{1}{r_0}\right)$, whose solution is the cycloid parametrization:
 
 $$
 r(\eta) \;=\; \frac{r_0}{2}\,(1 + \cos\eta), \qquad t(\eta) \;=\; \frac{t_{\mathrm{ff}}}{\pi}\,(\eta + \sin\eta), \qquad \eta \in [0, \pi],

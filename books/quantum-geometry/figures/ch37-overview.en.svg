@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch37-overview" data-lang="en" data-wrap="1" viewBox="0 0 740 270" width="740" height="270" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="Three panels. Panel I: a 2 × 2 grid on top, two cyan diagonal squares and two magenta off-diagonal squares whose areas are the sizes of the matrix entries; an arrow marked &#x27;pinch&#x27; points down to a grid where the cyan diagonal stays and the magenta off-diagonal is left as dashed outlines. Panel II: on a circle of radius 1/2, ρ₀₁ starts at 1/2 on the right; two magenta arrows each turn a quarter along the lower half to −1/2 on the left; two cyan arrows turn it back along the inside to 1/2. Panel III: two identical lines carry the same row of places; on the upper one only the body place x₀ in the middle is amber and the rest are grey; the lower one, marked P_body → 0, has every place lit cyan.">
+<title>Three panels. Panel I: a 2 × 2 grid on top, two cyan diagonal squares and two magenta off-diagonal squares whose areas are the sizes of the matrix entries; an arrow marked &#x27;pinch&#x27; points down to a grid where the cyan diagonal stays and the magenta off-diagonal is left as dashed outlines. Panel II: on a circle of radius 1/2, ρ₀₁ starts at 1/2 on the right; two magenta arrows each turn a quarter along the lower half to −1/2 on the left; two cyan arrows turn it back along the inside to 1/2. Panel III: two identical lines carry the same row of places; on the upper one only the body place x₀ in the middle is amber and the rest are grey; the lower one, marked P_body → 0, has every place lit cyan.</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="236" height="270" viewBox="0 0 236 270">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">I  waking: pinch</text>
+<rect x="72" y="40" width="46" height="46" class="ts-edge" stroke-width="1" fill="none"/>
+<rect x="78.55" y="46.55" width="32.91" height="32.91" class="ts-cyan tf-cyan" stroke-width="1" fill-opacity="0.75"/>
+<rect x="118" y="40" width="46" height="46" class="ts-edge" stroke-width="1" fill="none"/>
+<rect x="128.5" y="50.5" width="25.01" height="25.01" class="ts-magenta tf-magenta" stroke-width="1" fill-opacity="0.75"/>
+<rect x="72" y="86" width="46" height="46" class="ts-edge" stroke-width="1" fill="none"/>
+<rect x="82.5" y="96.5" width="25.01" height="25.01" class="ts-magenta tf-magenta" stroke-width="1" fill-opacity="0.75"/>
+<rect x="118" y="86" width="46" height="46" class="ts-edge" stroke-width="1" fill="none"/>
+<rect x="131.5" y="99.5" width="19" height="19" class="ts-cyan tf-cyan" stroke-width="1" fill-opacity="0.75"/>
+<line x1="118" y1="138" x2="118" y2="162.35" class="ts-ink" stroke-width="2" fill="none"/>
+<path d="M118 170 L114.22 161 L121.78 161Z" class="tf-ink"/>
+<text class="tf-dim" x="128" y="160" font-size="14">pinch</text>
+<rect x="72" y="176" width="46" height="46" class="ts-edge" stroke-width="1" fill="none"/>
+<rect x="78.55" y="182.55" width="32.91" height="32.91" class="ts-cyan tf-cyan" stroke-width="1" fill-opacity="0.75"/>
+<rect x="118" y="176" width="46" height="46" class="ts-edge" stroke-width="1" fill="none"/>
+<rect x="128.5" y="186.5" width="25.01" height="25.01" class="ts-magenta" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<rect x="72" y="222" width="46" height="46" class="ts-edge" stroke-width="1" fill="none"/>
+<rect x="82.5" y="232.5" width="25.01" height="25.01" class="ts-magenta" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<rect x="118" y="222" width="46" height="46" class="ts-edge" stroke-width="1" fill="none"/>
+<rect x="131.5" y="235.5" width="19" height="19" class="ts-cyan tf-cyan" stroke-width="1" fill-opacity="0.75"/>
+</svg>
+<svg class="tr-fig-panel" x="252" y="0" width="236" height="270" viewBox="0 0 236 270">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">II  night: joint reversal</text>
+<line x1="26" y1="136" x2="210" y2="136" class="ts-faint" stroke-width="1.2" fill="none"/>
+<line x1="118" y1="48" x2="118" y2="224" class="ts-faint" stroke-width="1.2" fill="none"/>
+<circle cx="118" cy="136" r="76" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 4" fill="none"/>
+<path d="M191.41 155.67 L189.97 160.43 L188.21 165.08 L186.16 169.61 L183.82 174 L181.19 178.22 L178.29 182.27 L175.14 186.11 L171.74 189.74 L168.11 193.14 L164.27 196.29 L160.22 199.19 L156 201.82 L151.61 204.16 L147.08 206.21 L142.43 207.97 L137.67 209.41" class="ts-magenta" stroke-width="2.4" stroke-linejoin="round" fill="none"/>
+<path d="M137.67 209.41 L145.19 203.18 L147.38 210.42Z" class="tf-magenta"/>
+<path d="M98.33 209.41 L93.57 207.97 L88.92 206.21 L84.39 204.16 L80 201.82 L75.78 199.19 L71.73 196.29 L67.89 193.14 L64.26 189.74 L60.86 186.11 L57.71 182.27 L54.81 178.22 L52.18 174 L49.84 169.61 L47.79 165.08 L46.03 160.43 L44.59 155.67" class="ts-magenta" stroke-width="2.4" stroke-linejoin="round" fill="none"/>
+<path d="M44.59 155.67 L50.82 163.19 L43.58 165.38Z" class="tf-magenta"/>
+<path d="M60.04 151.53 L61.18 155.29 L62.57 158.96 L64.19 162.54 L66.04 166 L68.11 169.33 L70.4 172.53 L72.89 175.56 L75.57 178.43 L78.44 181.11 L81.47 183.6 L84.67 185.89 L88 187.96 L91.46 189.81 L95.04 191.43 L98.71 192.82 L102.47 193.96" class="ts-cyan" stroke-width="2.2" stroke-linejoin="round" fill="none"/>
+<path d="M102.47 193.96 L93.84 194.85 L95.79 188.42Z" class="tf-cyan"/>
+<path d="M133.53 193.96 L137.29 192.82 L140.96 191.43 L144.54 189.81 L148 187.96 L151.33 185.89 L154.53 183.6 L157.56 181.11 L160.43 178.43 L163.11 175.56 L165.6 172.53 L167.89 169.33 L169.96 166 L171.81 162.54 L173.43 158.96 L174.82 155.29 L175.96 151.53" class="ts-cyan" stroke-width="2.2" stroke-linejoin="round" fill="none"/>
+<path d="M175.96 151.53 L176.85 160.16 L170.42 158.21Z" class="tf-cyan"/>
+<circle cx="194" cy="136" r="5" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="42" cy="136" r="5" class="ts-bg tf-magenta" stroke-width="1.4"/>
+<text class="tf-cyan ts-bg" x="203" y="124" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">1/2</text>
+<text class="tf-magenta ts-bg" x="33" y="124" font-size="14" text-anchor="end" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">−1/2</text>
+<text class="tf-dim" x="118" y="242" font-size="13" text-anchor="middle">write × (−i)², reverse × (+i)²</text>
+</svg>
+<svg class="tr-fig-panel" x="504" y="0" width="236" height="270" viewBox="0 0 236 270">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">III  bodiless: many places</text>
+<line x1="14" y1="92" x2="222" y2="92" class="ts-ink" stroke-width="1.4" fill="none"/>
+<circle cx="35.05" cy="92" r="4" class="tf-faint"/>
+<circle cx="60.05" cy="92" r="4" class="tf-faint"/>
+<circle cx="100.5" cy="92" r="6" class="ts-bg tf-amber" stroke-width="1.4"/>
+<circle cx="165.95" cy="92" r="4" class="tf-faint"/>
+<circle cx="206.4" cy="92" r="4" class="tf-faint"/>
+<line x1="14" y1="206" x2="222" y2="206" class="ts-ink" stroke-width="1.4" fill="none"/>
+<circle cx="35.05" cy="206" r="6" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="60.05" cy="206" r="6" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="100.5" cy="206" r="6" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="165.95" cy="206" r="6" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="206.4" cy="206" r="6" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<path d="M96.5 50 L104.5 50 L100.5 86Z" class="ts-amber tf-amber" stroke-width="1" stroke-linejoin="round" fill-opacity="0.35"/>
+<text class="tf-amber ts-bg" x="100.5" y="112" font-size="14" text-anchor="middle" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">x₀</text>
+<text class="tf-dim" x="118" y="134" font-size="13" text-anchor="middle">the senses read one place</text>
+<text class="tf-cyan" x="118" y="180" font-size="14" text-anchor="middle">P<tspan dy="0.28em" font-size="72%">body</tspan><tspan dy="-0.28em"> → 0</tspan></text>
+</svg>
+</svg>

@@ -44,8 +44,8 @@ def draw(fig):
 
     x0, dx, y0, dy = 78, 31, 54, 34
     for k in range(8):
-        fig.text(x0 + k * dx, 26, str(k), size=13, color="dim", anchor="middle")
-    fig.text(x0 + 8 * dx + 18, 26, "|*S*(*n*)|", size=13, color="dim", anchor="middle")
+        fig.text(x0 + k * dx, 26, str(k), size=14, color="dim", anchor="middle")
+    fig.text(x0 + 8 * dx + 18, 26, "|*S*(*n*)|", size=14, color="dim", anchor="middle")
     for n, s in enumerate(S):
         y = y0 + n * dy
         fig.text(20, y, f"*S*({n})", size=14, color="dim", middle=True)
@@ -62,5 +62,5 @@ def draw(fig):
                  anchor="middle", middle=True)
     yN = y0 + N * dy
     bx = x0 + 8 * dx + 40
-    fig.brace(bx, yN - 10, bx, y0 + 5 * dy + 10, t("不再变", "no change"))
-    fig.chip(fig.width / 2, 288, f"LEAN ✓  N = {N} ≤ |S(0)| = {sizes[0]}", "lean", size=13, anchor="middle")
+    fig.brace(bx, yN - 10, bx, y0 + 5 * dy + 10, t("不再变", "no change"), size=14)
+    fig.chip(fig.width / 2, 288, f"LEAN ✓  N = {N} ≤ |S(0)| = {sizes[0]}", "lean", size=14, anchor="middle")

@@ -68,11 +68,11 @@ The unconditional restricted-model lower bounds corresponding to these two geome
 
 1. **Unstructured Black-Box Quantum Query Lower Bound (C. H. Bennett, E. Bernstein, G. Brassard & U. Vazirani, *SIAM J. Comput.* **26**, 1510–1523, 1997)**: In the black-box oracle model, identifying a marked item among $N = 2^n$ candidates with bounded error requires $L = \Omega(2^{n/2})$ quantum queries (matching Grover's $O(2^{n/2})$ upper bound up to constants, $\Theta(2^{n/2})$);
 2. **Classical Watershed Between 2-SAT and 3-SAT (S. A. Cook, 1971; L. A. Levin, 1973; B. Aspvall, M. F. Plass & R. E. Tarjan, 1979)**: 2-SAT is decidable in linear time $O(n+m)$ via strongly connected components of the implication graph (hence $\text{2-SAT} \in \mathrm{P}$), whereas 3-SAT is $\mathrm{NP}$-complete;
-3. **Bounded-Degree Sum-of-Squares (SoS) Lower Bound (D. Grigoriev, *Theor. Comput. Sci.* **259**, 613–622, 2001; G. Schoenebeck, *FOCS*, 593–602, 2008)**: For random 3-XOR / 3-SAT instances that are globally unsatisfiable due to parity frustration, every local Lasserre / Gram semidefinite relaxation $G_M \succeq 0$ of degree $M = o(n)$ remains feasible and positive semidefinite with high probability, ruling out subexponential-size SoS refutations at sublinear degree.
+3. **Bounded-Degree Sum-of-Squares (SoS) Lower Bound (D. Grigoriev, *Theor. Comput. Sci.* **259**, 613–622, 2001; G. Schoenebeck, *FOCS*, 593–602, 2008)**: For example, fix a sufficiently large constant clause density $m/n = \Delta$, sample triples of distinct variables and literal signs uniformly and independently (equivalently, random parity right-hand sides for 3-XOR), and use the standard Boolean polynomial encoding: parity equations for 3-XOR and clause-satisfaction constraints for 3-SAT. With high probability, the random instance is unsatisfiable while its degree-$M = o(n)$ local Lasserre / Gram semidefinite relaxation still has a feasible positive semidefinite moment matrix $G_M \succeq 0$ satisfying the local constraints, so it cannot refute unsatisfiability at that degree (corresponding to a subexponential-size semidefinite program; see [Theorem 12 of Schoenebeck's full version](https://schoeneb.people.si.umich.edu/papers/LasserreNew.pdf)).
 :::
 
-::: {.viz src="timeless-causal-crystal" preset="longer" height="500"}
-**16 times the space, 4 times the steps.** With $4096$ candidates the angle per step shrinks to a quarter ($2\theta = 1.79^\circ$) and the steps grow to about $50$; in the plot below, the cyan $(\pi/4)\sqrt{N}$ and the dashed magenta $N/2$ pull further and further apart. The thread lengthens like $\sqrt{N}$, and there is still no slope to follow; this is the same order as the query lower bound of item 1 above (a literature result).
+::: {.viz src="timeless-causal-crystal" preset="sos" height="500"}
+**Two literals close at order 2; three-way parity does not.** The cyan points: for each $n$ a random 2-SAT formula, in which resolving two 2-clauses on a variable leaves at most two literals, so the resolution closure stays at order $2$ and whether the empty clause appears decides satisfiability: a filled point derived the empty clause (unsatisfiable), a hollow ring did not (satisfiable) (numbers computed by the page). The dashed magenta line: for random 3-XOR / 3-SAT, the literature result of item 3 above says that sum-of-squares relaxations of order $o(n)$ stay consistent everywhere; the slope of this line is only schematic (`MODEL`). Amber is the observer's order $M$. These lower bounds constrain this family of relaxations only and do not imply $\mathrm{P}\neq\mathrm{NP}$ ([@conj-p-neq-np], `OPEN`).
 :::
 
 ### 3. The Author's Interpretation: Complexity Horizons, Subjective Time, and Choice
@@ -109,25 +109,243 @@ $$
 - **Verification along the thread**: Costs include reading the input and witness encodings and performing each local check. If check $i$ costs $c_i$, the checks contribute $\sum_{i=1}^k c_i$, which is $O(k)$ only when each cost is uniformly bounded. Counting segments alone proves no polynomial bit complexity. Formal proof terms can also be pictured as threads, but arbitrary proof terms have no uniform linear guarantee here on encoding length, type checking, or reduction cost, so this analogy does not place them within the same $NP$ verification argument;
 - **Search without a field**: Efficient witness checking does not automatically supply an efficient search method; it does not rule one out either. A “zero-cross-section thread” expresses the author's picture of unguided search, not a discrete complexity lower bound or a claim that every $NP$ problem is hard.
 
+::: {.viz src="timeless-causal-crystal" preset="wilderness" height="500"}
+**One field: straight along the thread, circling off it.** The plane carries a single autonomous field $\mathbf{F} = g(\tilde y)\bigl(1, h'(x)\bigr) + \bigl(1 - g(\tilde y)\bigr)\mathbf{F}_{\mathrm{swirl}}$, with $\tilde y = y - h(x)$, $g(\tilde y) = e^{-\tilde y^2/\varepsilon^2}$, and $\mathbf{F}_{\mathrm{swirl}}$ vanishing on the thread. The probe that starts at $S_0$ exactly on the cyan witness thread $y = h(x)$ runs along it to $S^*$; three magenta probes that start only a little off it, but outside the channel $|\tilde y| < \varepsilon$, are caught by the first vortex under the same integrator and never reach the target. A schematic model of “a thread without a field” (`MODEL`), not a complexity lower bound.
+:::
+
 ### 2. Why "$P$ Is a Field" (`弃线造场，局部切面处处对齐全局`)
 
 In our geometric interpretation (`MODEL`), geometric or algebraic structure used by some polynomial-time algorithms is pictured as a **guiding field**, such as a convex gradient flow $\mathbf{F}=-\nabla V$. This is neither the definition of $P$ nor a necessary condition for membership. Even a smooth or curl-free field requires an analysis showing that it can be computed efficiently, reaches the required precision, and terminates in polynomially many steps. The following classical algorithms offer concrete points of comparison:
 
 ::: {.remark #rem-ch30-karmarkar-kasteleyn-literature title="Literature Note on Interior-Point Linear Programming, Pfaffian Planar Matching, and the Hairy Ball Theorem"}
-**Literature result, not formalized in this book.** Three classical algorithmic and topological theorems cited in this section to illustrate field construction and topological curl belong to the external literature and are not formalized in this book:
+**Literature result, not formalized in this book.** The three classical results below illustrate field construction and topological curl. Algorithms, geometric extensions, and complexity retain their literature status; the actual suppliers and boundaries of the conditional Pfaffian sign identity are explained in [@rem-ch30-rotation-pfaffian-boundary]:
 
 1. **Karmarkar's Interior-Point Algorithm for Linear Programming (N. Karmarkar, *Combinatorica* **4**, 373–395, 1984)**: Whereas Dantzig's simplex method traverses 1D boundary edges and takes $2^n$ steps on worst-case Klee–Minty (1972) deformed cubes, Karmarkar's algorithm enters the interior of the polytope and follows a smooth logarithmic-barrier gradient field to reach the optimum in polynomial time;
-2. **Kasteleyn's Pfaffian Planar-Matching Theorem (P. W. Kasteleyn, *Physica* **27**, 1209–1225, 1961)**: Counting perfect matchings in general bipartite graphs (computing the permanent) is `#P`-complete (L. G. Valiant, 1979); on a planar graph, however, a Kasteleyn orientation assigns signs to edges so that non-planar crossing terms cancel in the skew-symmetric matrix $A_K^T = -A_K$, yielding the weighted dimer partition function $Z = |\operatorname{Pf}(A_K)| = \sqrt{\det A_K}$ in polynomial time via Cayley's identity $[\operatorname{Pf}(A_K)]^2 = \det A_K$;
+2. **Kasteleyn's Pfaffian Planar-Matching Theorem (P. W. Kasteleyn, *Physica* **27**, 1209–1225, 1961)**: Counting perfect matchings in general bipartite graphs (computing the permanent) is `#P`-complete (L. G. Valiant, 1979). For a finite planar graph with nonnegative edge weights $w_e$, the classical method uses a Kasteleyn orientation to form a skew-symmetric weighted adjacency matrix $A_K^T=-A_K$ in which all actual perfect-matching terms in the Pfaffian expansion have the same coefficient sign. Thus the weighted perfect-matching partition function is $Z=\sum_M\prod_{e\in M}w_e=|\operatorname{Pf}(A_K)|$, and Cayley's identity $[\operatorname{Pf}(A_K)]^2=\det A_K$ gives $Z=\sqrt{\det A_K}$. The sign mechanism aligns matching coefficients; nonedges have zero matrix entries. Exact evaluation in polynomial time for nonnegative rational weights encoded in binary is a literature result. If no perfect matching exists, $Z=0$; handling general planar graphs also includes connected components and the zero case caused by an odd-order component. A modern account is D. Cimasoni and N. Reshetikhin (2007), [*Dimers on surface graphs and spin structures. I*](https://arxiv.org/html/math-ph/0608070v2), Section 5.1, Theorem 5.1 and its matching expansion, specialized to the sphere;
 3. **Poincaré–Brouwer Hairy Ball Theorem (H. Poincaré, 1885; L. E. J. Brouwer, 1912)**: Because the 2-sphere has Euler characteristic $\chi(S^2) = 2 \neq 0$, every continuous tangent vector field on $S^2$ must vanish at least at one point (a topological vortex).
 :::
 
 ::: {.viz src="timeless-causal-crystal" preset="field" height="500"}
-**A field: a slope everywhere.** The cyan flow lines start from all over the sphere; each looks only at the slope underfoot, and each flows to the target. The amber line is the chosen one, and the field vanishes at the opposite point. In the plot below, whatever the cyan potential loses, the magenta dissipation pays, and their sum (dashed amber) stays fixed ([`S2_dissipation`](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation)). Reading it as a "field" is this book's interpretation (`MODEL`).
+**A field: a slope everywhere.** The cyan flow lines start from all over the sphere; each looks only at the slope underfoot, and each flows to the target. The amber line is the chosen one, and the field vanishes at the opposite point (the grey ring). Reading it as a "field" is this book's interpretation (`MODEL`).
 :::
 
-The three items of [@rem-ch30-karmarkar-kasteleyn-literature] are literature only. There is, however, a small discrete problem in which both the "field" and the "line" can be written down as exact mathematics and handed to the kernel: coloring the vertices of a graph.
+#### From Actual Vertex Rotations to Face-Odd Orientations: A Finite Combinatorial Prerequisite {#sec-ch30-rotation-parity}
 
-Start with the smallest odd cycle, the pentagon $C_5$: vertices $0, 1, 2, 3, 4$, edges $01, 12, 23, 34, 40$. Paint the vertices with the colors $c = (0, 1, 0, 1, 2)$; no two neighbors share a color. Read the color as a height, and this is a three-level field on the vertices. Now let every edge point towards its higher-colored end:
+The full planar-matching result above has geometric, combinatorial, algebraic, and algorithmic parts. We first isolate a finite combinatorial question: given the cyclic order of the original graph's edges at each vertex, can one choose a single edge orientation for which every face and every even simple cycle whose deletion leaves a perfect matching has an odd number of opposing darts? A dart is an actual edge with a direction. A bridge, for example, has two reverse darts; a facial traversal that goes out and back along it must count both occurrences. An edge set alone would lose this information.
+
+The results below derive the required sides from vertex rotations and an integer counting condition. Here “sphere rotation” means only the finite data satisfying the Euler condition specified below; obtaining these data from a geometric embedding is a separate step.
+
+::: {.definition #def-ch30-actual-rotation title="Actual Darts, Vertex Rotations, and Complete Face Orbits" lean="D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.Rotation D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.facePerm D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.Face D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face"}
+Let $V$ be an arbitrary finite type with decidable equality, and let $G$ be a simple undirected graph on $V$ with decidable adjacency. Write $D=G.\mathrm{Dart}$ for its actual dart type: a dart $d=(u,v)$ requires $G.\mathrm{Adj}(u,v)$. Write $E=G.\mathrm{edgeSet}$ for the type of actual unordered edges, $e(d)=\{u,v\}\in E$, and $\alpha(d)=(v,u)$.
+
+A vertex rotation $R$ is a permutation $\rho$ of $D$ such that, for all $d,t\in D$,
+
+$$
+\bigl(\exists n\in\mathbb Z,\ \rho^n(d)=t\bigr)
+\quad\Longleftrightarrow\quad d.\mathrm{fst}=t.\mathrm{fst}.
+$$
+
+The facial successor first reverses and then rotates: $\phi(d)=\rho(\alpha(d))$. The face type $F$ is the quotient of $D$ by the orbit relation of $\phi$: $d\sim t$ exactly when $\phi^n(d)=t$ for some $n\in\mathbb Z$. Write $f(d)$ for the class of $d$. Every orbit belongs to $F$, including singleton orbits. The rotation data themselves include no connectedness, geometric realization, or Euler equation.
+:::
+
+All three theorems below assume that $G$ is connected, $D$ is nonempty, and the following Euler equation holds **in the integers**:
+
+$$
+(|V|:\mathbb Z)-(|E|:\mathbb Z)+(|F|:\mathbb Z)=2.
+$$
+
+Each cardinality is cast to an integer before subtraction; no truncated natural-number subtraction is used. In particular, the edgeless one-vertex graph fails the nonempty-dart hypothesis and lies outside these three theorems.
+
+::: {.definition #def-ch30-face-boundary title="Binary Facial Boundary and Opposition Count" lean="D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.boundary D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.faceOpposition"}
+Write $\mathbb F_2=\mathbb Z/2\mathbb Z$. For a face function $x:F\to\mathbb F_2$, the linear boundary map $B:\mathbb F_2^F\to\mathbb F_2^E$ chooses one representative dart $d_e$ for each unordered edge and sets
+
+$$
+(Bx)(e)=x(f(d_e))+x(f(\alpha(d_e))).
+$$
+
+For any dart function $\varepsilon:D\to\mathbb F_2$, define the facial opposition count by
+
+$$
+\operatorname{opp}_F(\varepsilon,f)=\sum_{\substack{d\in D\\f(d)=f}}\varepsilon(d).
+$$
+
+If $\varepsilon(\alpha(d))=1+\varepsilon(d)$, it encodes an edge orientation: $\varepsilon(d)=0$ means that the orientation follows $d$, and $1$ means that it opposes $d$. The face count includes every actual dart in the complete orbit. Both darts of a bridge count separately even when they belong to the same face. Write $\mathcal C(G)\subseteq\mathbb F_2^E$ for the linear span of the unordered-edge indicators of all actual simple cycles.
+:::
+
+::: {.theorem #thm-ch30-face-cycle-exact title="Facial Boundaries Equal the Actual Cycle Space" lean="D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact"}
+For any finite $V$, connected simple graph $G$, and vertex rotation $R$ as above, assume $D\ne\varnothing$ and the integer equation $|V|-|E|+|F|=2$. Then all three statements hold:
+
+1. For every $x:F\to\mathbb F_2$ and $d\in D$, $(Bx)(e(d))=x(f(d))+x(f(\alpha(d)))$.
+2. For every $x:F\to\mathbb F_2$, $Bx=0$ if and only if some $c\in\mathbb F_2$ satisfies $x(f)=c$ for every $f\in F$.
+3. $\operatorname{im}B=\mathcal C(G)$.
+:::
+
+::: proof
+The two representatives of an unordered edge differ only by reversal, so their shore-value sum is independent of the choice. Zero boundary equates the facial values on reverse darts. Facial succession and the vertex rotation propagate this equality around a vertex, and connectedness propagates it to all faces. The kernel therefore consists of constants and has dimension $1$. Reindexing a dart sum by the facial successor shows that every facial boundary has even incidence at every vertex, placing it in the existing actual cycle space. Rank–nullity gives $\dim\operatorname{im}B=|F|-1$, whereas the connected graph's cycle space has dimension $|E|-|V|+1$. The integer Euler equation makes these dimensions equal. The full proof is checked by the Lean kernel.
+:::
+
+Next, take an actual closed walk $p$ in the original graph, based at $a$. A simple cycle satisfies the formal predicate $p.\mathrm{IsCycle}$: no vertex repeats except the starting vertex at closure, and the zero-length walk and degenerate out-and-back traversal of one edge are excluded. Write $C(p)$ for its vertex support, $E(p)$ for its actual unordered-edge set, $\mathcal D(p)$ for its ordered dart list, and $p^{\mathrm{rev}}$ for the reversed walk. Write $G[S]$ for the subgraph induced on a vertex set $S$. Its vertices carry the condition of belonging to $S$; $v.\mathrm{val}$ denotes the original vertex after forgetting this condition. An even simple cycle is called *nice* when deleting $C(p)$ from the original graph leaves an actual induced graph with a perfect matching.
+
+::: {.theorem #thm-ch30-cycle-face-sides title="Actual Simple-Cycle Sides, Regional Euler Identities, and Matching Restrictions" lean="D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.cycle_face_sides"}
+For the finite $V$, connected simple graph $G$, and rotation $R$ above, assume $D\ne\varnothing$ and the integer equation $|V|-|E|+|F|=2$. For every $a\in V$ and actual simple cycle $p:a\leadsto a$, there exist a face function $x:F\to\mathbb F_2$ and vertex sets $I,J\subseteq V$ satisfying all the following statements.
+
+1. The face sets $F_1=\{f\in F:x(f)=1\}$ and $F_0=\{f\in F:x(f)=0\}$ are nonempty complements, and $Bx=\mathbf1_{E(p)}$.
+2. There is a walk $q=p$ or $q=p^{\mathrm{rev}}$ such that, for every actual dart $d$,
+
+   $$
+   \begin{aligned}
+   &x(f(d))=1\ \land\ x(f(\alpha(d)))=0\\
+   &\quad\Longleftrightarrow\ d\in\mathcal D(q),\\
+   &x(f(d))=0\ \land\ x(f(\alpha(d)))=1\\
+   &\quad\Longleftrightarrow\ d\in\mathcal D(q^{\mathrm{rev}}).
+   \end{aligned}
+   $$
+
+3. For every $v\in V$, $v\notin C(p)$ if and only if $v\in I\cup J$, and $I\cap J=\varnothing$. Every actual dart with $d.\mathrm{fst}\notin C(p)$ satisfies
+
+   $$
+   \begin{aligned}
+   d.\mathrm{fst}\in I&\ \Longleftrightarrow\ x(f(d))=1,\\
+   d.\mathrm{fst}\in J&\ \Longleftrightarrow\ x(f(d))=0.
+   \end{aligned}
+   $$
+
+   For all $v\in I,w\in J$, $\neg G.\mathrm{Adj}(v,w)$.
+4. For each pair $(S,b)=(I,1)$ or $(J,0)$, there is a connected subgraph $H_S$ of the original graph with vertex set exactly $C(p)\cup S$. For every actual dart $d$,
+
+   $$
+   \begin{aligned}
+   &H_S.\mathrm{Adj}(d.\mathrm{fst},d.\mathrm{snd})\\
+   &\quad\Longleftrightarrow\ e(d)\in E(p)\\
+   &\qquad\lor\bigl(x(f(d))=b\ \land\\
+   &\qquad\qquad x(f(\alpha(d)))=b\bigr).
+   \end{aligned}
+   $$
+
+   Let $E_S$ be this subgraph's actual unordered-edge set, and $E_S^\circ=E_S\setminus E(p)$. Both identities hold in $\mathbb Z$:
+
+   $$
+   \begin{aligned}
+   |C(p)\cup S|-|E_S|+|F_b|&=1,\\
+   |S|-|E_S^\circ|+|F_b|&=1.
+   \end{aligned}
+   $$
+
+5. Let $U=V\setminus C(p)$, and let $\bar G=G[U]$ be the actual vertex-deleted complement. For any perfect-matching subgraph $M$ of this same graph $\bar G$, and every $S\in\{I,J\}$, put $S'=\{u\in U:u.\mathrm{val}\in S\}$. There is a perfect-matching subgraph $N$ of $\bar G[S']$ such that, for all its vertices $v,w$,
+
+   $$
+   \begin{aligned}
+   &N.\mathrm{Adj}(v,w)\\
+   &\quad\Longleftrightarrow\ M.\mathrm{Adj}(v.\mathrm{val},w.\mathrm{val}).
+   \end{aligned}
+   $$
+
+   In this case both $|I|$ and $|J|$ are even.
+:::
+
+::: proof
+By [@thm-ch30-face-cycle-exact], the cycle's edge indicator has a facial preimage $x$. Its nonzero boundary excludes constant labels, so both face values occur. All incident facial values at an off-cycle vertex agree, determining $I,J$; an original edge cannot join off-cycle vertices of different labels. The regional edge condition retains the cycle edges and edges with both shores on the chosen side. Even a chord whose endpoints both lie on the cycle must be excluded from the opposite region. Following an original graph path until it first reaches the cycle proves that each selected region is connected.
+
+Map functions supported on one facial side into the cycle space of its region. The connected cycle-rank bound gives an Euler inequality for each side. The vertex and edge union/intersection counts, together with the global integer Euler equation, force equality on both sides. A simple cycle has equally many edges and vertices; removing both counts gives the second regional identity. At each cycle vertex, its two actual cycle edges determine two label changes in the vertex rotation, giving the direct boundary equivalences for $q$ and $q^{\mathrm{rev}}$. Finally, the absence of cross edges keeps each edge of the given $M$ on one side. Restricting that same matching to both sides and applying perfect-matching parity makes both side cardinalities even. The full proof is checked by the Lean kernel.
+:::
+
+Both facial sides are nonempty, but an off-cycle vertex side may be empty. The theorem requires no strictly interior vertex on either side and assumes no interior parity. Each region is a connected subgraph selected by its actual edges; these conclusions do not construct a topological disk.
+
+::: {.theorem #thm-ch30-face-odd-nice-cycle-orientation title="One Orientation Is Odd on All Faces and All Nice Even Cycles" lean="D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.face_odd_nice_cycle_orientation"}
+Let $V$ be any finite type with decidable equality, $G$ a connected simple graph with decidable adjacency, and $R$ its vertex rotation. If $D\ne\varnothing$, $|V|$ is even, and $|V|-|E|+|F|=2$ in $\mathbb Z$, there exists **one** function $\varepsilon:D\to\mathbb F_2$ satisfying
+
+$$
+\begin{aligned}
+&\forall d\in D,\quad \varepsilon(\alpha(d))=1+\varepsilon(d),\\
+&\forall f\in F,\quad \operatorname{opp}_F(\varepsilon,f)=1.
+\end{aligned}
+$$
+
+Furthermore, for every $a\in V$, every actual even-length simple cycle $p$ based at $a$, and every perfect-matching subgraph $M$ of the actual complement $G[V\setminus C(p)]$,
+
+$$
+\sum_{d\in\mathcal D(p)}\varepsilon(d)=1\quad\text{in }\mathbb F_2.
+$$
+
+The sum counts the dart list. The existential quantifier $\exists\varepsilon$ precedes the universal quantifiers over all cycles and all complement matchings.
+:::
+
+::: proof
+Start with any edge orientation and record each face's parity defect. Since the facial boundary map has only constants in its kernel, the defects correctable by its transpose are exactly those whose total is zero. The global integer Euler equation and the even vertex count ensure this compatibility condition. Adding the same binary correction to both darts of each edge preserves reversal and makes the opposition count on every facial orbit equal to $1$.
+
+For any given nice even cycle, use one actual side supplied by [@thm-ch30-cycle-face-sides]. Summing the facial opposition counts on that side gives a contribution of $1$ from each selected noncycle edge; the direct boundary equivalence identifies the remaining terms with the dart sum along $q$. The regional Euler identity then gives
+
+$$
+\sum_{d\in\mathcal D(q)}\varepsilon(d)
+  =|F_1|+|E_I^\circ|=1+|I|\quad\text{in }\mathbb F_2.
+$$
+
+The actual restriction of the given complement matching makes $|I|$ even, so the right-hand side is $1$. If $q=p^{\mathrm{rev}}$, the reversal rule changes the sum by the cycle length in $\mathbb F_2$; even length makes this change zero. The single orientation chosen at the outset therefore works for every such cycle and matching. The full proof is checked by the Lean kernel.
+:::
+
+::: {.remark #rem-ch30-rotation-pfaffian-boundary title="The Boundary Between the Finite Rotation Prerequisite and Full Planar Matching"}
+**Applications of existing results and remaining literature boundaries.** The preceding three theorems retain their finite combinatorial hypotheses: an actual vertex rotation, nonempty darts, connectedness, and the integer Euler equation. We now connect actual interlacing, the original Pfaffian convention, and coefficient transport on the same graph. These explanations introduce no composite theorem box.
+
+**From two matchings to rooted even cycles.** Let $X$ be any finite linearly ordered type. The native carrier $\mathcal M(X)$ is [`FixedPointFreeInvolution`](lean:D5/S3/Zeros/Convolution/PerfectMatchingCount.FixedPointFreeInvolution), consisting of permutations satisfying $s(s(x))=x$ and $s(x)\ne x$. For an ordered pair $(s,t)$, actual components are the reflexive transitive closure of the two colors of edges $x\!\leftrightarrow\!s(x)$ and $x\!\leftrightarrow\!t(x)$. Root each component separately at its least vertex $m$, put $r=t\,s$ (apply $s$ first), and use the full integer-power $r$ orbit of $m$ as the first phase. Both matchings exchange the component's two disjoint $r$ orbits. The phase depends on the component minimum, not numerical label parity. The interlacing permutation $q$ follows $s$ in the first phase and $t$ in the other; its predecessor makes the opposite choice. For every such minimum $m$ and every $k\in\mathbb N$,
+
+$$
+\begin{aligned}
+q^{2k}(m)&=(ts)^k(m),\\
+q^{2k+1}(m)&=s((ts)^k(m)).
+\end{aligned}
+$$
+
+[`rooted_interlacing`](lean:D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles.rooted_interlacing) supplies these formulas, equality of the full $q$ cycles with the actual two-color components, the minimum property, and recovery of the original ordered matchings. Interlacing covers the whole component; each step flips phase, so each cycle has even length. The output carrier explicitly requires **both $\forall x,\ q(x)\ne x$ and even support cardinality for every member of $q.\mathrm{cycleFactorsFinset}$**. That finset omits singleton cycles, so the first condition cannot be dropped.
+
+Conversely, root each full cycle of an admissible $q$ at its least vertex $m$ and use its full $q^2$ orbit as the even phase. There set $s(x)=q(x)$ and $t(x)=q^{-1}(x)$; on the other phase swap the choices. Even cycle length makes both successor and predecessor flip phase, including the last-to-first edge. The recovered maps are therefore fixed-point-free involutions. [`rooted_reconstruction`](lean:D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles.rooted_reconstruction) gives these pointwise formulas and $\mathrm{forward}(\mathrm{recover}(q))=q$; the other composite returns the original ordered pair. The actual [`equivalence`](lean:D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles.equivalence) is the `Equiv` definition with these inverse maps, rather than a theorem declaration or an arbitrary cardinality bijection. No nonemptiness or even-cardinality premise is imposed on $X$: on the empty type the maps are the unique empty permutations; on odd cardinalities both carriers are empty. A shared matching edge becomes a genuine two-cycle, $s=t$ gives $q=s$, and a two-cycle recovers coincident mates. Disconnected components have separate roots. Eğecioğlu's incoming-edge color convention (1990, *Ars Combinatoria* **29**, 107–116) is not asserted to equal this outward first-color convention. This structural equivalence proves no weighted sign identity or determinant square. Source audit `29209` remains at 2 unresolved and 0 validated items.
+
+**Keep the original normalized Pfaffian.** Fix $n\in\mathbb N$ and any commutative ring $R$. Pairings in [`P`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.P) are fixed-point-free involutive functions on $\mathrm{Fin}(2n)$. Sort their lower endpoints and place each partner immediately after its lower endpoint to obtain $c(p)$. [`canonical_mate`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.canonical_mate) identifies the adjacent slots as partners. [`listingEquiv`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.listingEquiv) gives inverse maps between all normalized listings and these pairings: conjugate the consecutive-slot pairing by the listing, then recover that listing canonically. The original [`pfaffian`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.pfaffian) remains
+
+$$
+\operatorname{Pf}(A)=\sum_{\sigma\in L(n)}
+\operatorname{sgn}(\sigma)\prod_{i\in\mathrm{Fin}(n)}
+A_{\sigma(2i),\sigma(2i+1)},
+$$
+
+where each pair in $L(n)$ is increasing and its first endpoints increase, and the integer sign is cast into $R$. There is no division by a factorial or by $2$. The empty listing contributes the empty product $1$. The coefficient is the sign of the **listing permutation**, not of the partner involution. The latter corresponds to native $\mathcal M(\mathrm{Fin}(2n))$ by turning the bijective involutive function into a permutation and forgetting that structure in the inverse direction; both composites preserve the same partner function pointwise.
+
+For normalized $\sigma$, put $p=\mathrm{pairingOfListing}(\sigma)$. Inversions are positions $u<v$ with $\sigma(v)<\sigma(u)$. Count each crossing once by its lower endpoints $a<c<p(a)<p(c)$, and each nesting once by $a<c<p(c)<p(a)$. The actual [`inversionCrossNestEquiv`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.inversionCrossNestEquiv) sends an inversion to a crossing or to a nesting with a bit in $\mathrm{Fin}(2)$. For two distinct pair slots, a crossing contributes the second–first inversion; nesting contributes that inversion and also the second–second inversion. Thus [`inversion_card_eq_cross_add_two_nesting_card`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.inversion_card_eq_cross_add_two_nesting_card) gives
+
+$$
+|\mathrm{Inv}(\sigma)|=|\mathrm{Cross}(p)|+2|\mathrm{Nest}(p)|.
+$$
+
+The listing sign is consequently $(-1)^{|\mathrm{Cross}(p)|}$. [`pfaffian_eq_crossing_sum`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.pfaffian_eq_crossing_sum) rewrites the original sum term by term using this coefficient and $\prod_{a<p(a)}A_{a,p(a)}$, counting each paired edge once. This holds for every matrix over every commutative ring, without skew-symmetry, division, or cancellation. The correspondence includes both nesting contributions and the empty case. For an arbitrary listing, [`listing_value_canonical`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.listing_value_canonical) preserves its signed value when integer unit factors negate on reversal: permuting whole pairs has sign a square, hence $1$, while reversing a pair negates both the permutation sign and its factor.
+
+**Transport on the same actual graph.** Let $V$ now be finite, $G$ a simple graph on $V$, and $e:V\simeq\mathrm{Fin}(2n)$ an enumeration. Actual perfect matchings remain Mathlib $G.\mathrm{Subgraph}$ objects with exactly one neighbor at each vertex. On the complete graph, [`matchingEquiv`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.matchingEquiv) chooses that neighbor as the partner map; its inverse defines adjacency by $p(v)=w$. Transport through $e$ and retain precisely those pairings whose partner edges are actual $G$ edges. These correspond exactly to actual perfect matchings of $G$, without another matching datatype or Pfaffian core.
+
+Let dart bits $\varepsilon:G.\mathrm{Dart}\to\mathbb Z/2\mathbb Z$ satisfy [`Reverses`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.Reverses), meaning $\varepsilon(\bar d)=1+\varepsilon(d)$. The integer units $\delta(d)=(-1)^{\varepsilon(d)}$ then satisfy $\delta(\bar d)=-\delta(d)$. The coefficient $\tau_e(M)$ is the canonical listing sign times the product of $\delta$ on its actual directed matching edges. For an actual simple closed walk $p$, write $C=p.\mathrm{toSubgraph}$. If it alternates with $M$, meaning exactly one of the two distinct cycle edges at each vertex belongs to $M$, [`alternating_cycle_flip`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.alternating_cycle_flip) gives even length, an actual perfect matching $N=M\mathbin{\triangle}C$, and a perfect matching of the **induced graph obtained by deleting $C$'s vertices from this same $G$**. Every cycle vertex already has its partner inside the cycle, so uniqueness prevents matching edges crossing between inside and outside. Restricting the same $M$ supplies the complement matching. This flip result itself requires no finiteness, embedding, orientation, or weights.
+
+With the enumeration and reversal hypothesis above, [`alternating_cycle_transport`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.alternating_cycle_transport) proves for this actual flip that
+
+$$
+\tau_e(M)\tau_e(N)=-\prod_{d\in p.\mathrm{darts}}\delta(d).
+$$
+
+Rotate the cycle vertices once and fix every outside vertex. This permutation has even support cardinality and hence sign $-1$. It sends the matching edges on the cycle to their complementary cycle edges, while retaining the common outside pairing even when labels interleave. Listing normalization identifies the resulting signed value with $\tau_e(N)$. A backward-listed cycle edge contributes two cancelling negative signs; outside units square to $1$. What remains is exactly the actual dart product.
+
+[`NiceOdd`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.NiceOdd) requires $\sum_{d\in p.\mathrm{darts}}\varepsilon(d)=1$ for **every actual even simple closed walk** whose actual induced vertex-deleted complement has a perfect matching. The symmetric difference of two matchings has degree zero or two at every vertex. If they disagree, take an actual alternating simple cycle in that difference. The complement matching above supplies its nice-cycle premise, the dart product is $-1$, and flipping preserves the coefficient while strictly decreasing disagreement edges. Finite induction gives [`niceOdd_matching_tau_eq`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.niceOdd_matching_tau_eq): all actual matching coefficients agree, including shared edges, disconnected graphs, and $M=N$.
+
+**One unit for every weight and coefficient ring.** Give actual undirected edges weights $w:G.\mathrm{edgeSet}\to R$. Let $A_{e,\varepsilon,w}$ have entry $\delta(x,y)w_{\{x,y\}}$ cast into $R$ on actual edges, and zero on nonedges and on the diagonal. Reversal makes it skew-symmetric; the diagonal is explicitly zero even in characteristic $2$. Define $Z(w)$ by summing over actual perfect matchings and multiplying each actual undirected matching edge once. Unsupported pairings have a zero matrix factor. Supported pairings correspond inversely to actual matchings, and canonical pair slots biject with their edges. The original Pfaffian is therefore $\sum_M\tau_e(M)\prod_{a\in M}w_a$. Under `Reverses` and `NiceOdd`, [`weighted_pfaffian_identity`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.weighted_pfaffian_identity) factors out the common coefficient:
+
+$$
+\operatorname{Pf}(A_{e,\varepsilon,w})=(u_{e,\varepsilon}:R)\,Z(w),
+\qquad u_{e,\varepsilon}\in\mathbb Z^\times.
+$$
+
+[`orientationUnit`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.orientationUnit) selects an actual matching's integer unit coefficient when a matching exists and $1$ otherwise. It depends only on the graph, enumeration, and orientation, independently of $R,w$. The formula includes negative and zero weights, rings with zero divisors, and characteristic $2$, with no division. When the vertex set is empty ($n=0$), the unique empty matching gives $1$ on both sides. A nonempty edgeless graph has no perfect matching and belongs to the zero case: all pairing terms vanish and $Z=0$. If additionally $R=\mathbb R$ and all actual edge weights are nonnegative, then $Z\ge0$ and $|u|=1$, so taking absolute values gives $|\operatorname{Pf}(A)|=Z$. This is an application of the signed identity, not a separate absolute-value endpoint theorem.
+
+To combine the finite rotation orientation with this identity, all data must describe **the same actual graph**. Retain connectedness, nonempty darts, and the integer Euler equation; identify the original dart reversal condition with `Reverses`, and supply the actual induced vertex-deleted complement matching for each even simple cycle to the original nice-cycle condition to obtain this `NiceOdd`. Passing from an arbitrary geometric planar embedding to that rotation and its complete face orbits, graphs outside the rotation hypotheses, the full Cayley determinant-square identity `FullCayley`, the $\sqrt{\det A}$ formulation, exact rational algorithms and bit complexity, and `#P`-completeness of general bipartite counting remain separate obligations; the latter claims retain their literature status under [@rem-ch30-karmarkar-kasteleyn-literature]. Source audit `29266` retains 10 validated and 9 unresolved items. The conditional signed identity does not discharge these residual obligations.
+:::
+
+The algorithmic and geometric extensions in [@rem-ch30-karmarkar-kasteleyn-literature] retain their literature boundaries; the conditional matching identity above has exact formal suppliers. Another discrete problem admitting precise mathematics on both the "field" and the "line" sides is coloring a graph's vertices.
+
+Start with an odd cycle, the pentagon $C_5$: vertices $0, 1, 2, 3, 4$, edges $01, 12, 23, 34, 40$. Paint the vertices with the colors $c = (0, 1, 0, 1, 2)$; no two neighbors share a color. Read the color as a height, and this is a three-level field on the vertices. Now let every edge point towards its higher-colored end:
 
 $$
 0 \to 1, \qquad 2 \to 1, \qquad 2 \to 3, \qquad 3 \to 4, \qquad 0 \to 4 .
@@ -210,6 +428,7 @@ Two rows can be done by hand. $C_5$ with $k = 2$: suppose every edge has exactly
 ### 3. Hairy-Ball Curl ($\nabla \wedge \mathbf{F}$) as a Geometric Analogy for $P \neq NP$: Why One Line Cannot Hold Up a Field
 
 Why is it so difficult to construct such a polynomial-time guiding field for $\mathrm{NP}$-complete problems like 3-SAT? Expressed as a continuous differential-geometric analogy (`MODEL`, intended as geometric intuition rather than a formal proof of [@conj-p-neq-np]):
+
 - A conservative gradient field $\mathbf{F} = -\nabla V$ that slides without frustration to a global minimum satisfies the vanishing exterior-curl condition:
 
   $$
@@ -261,7 +480,7 @@ Comparing the mathematical mechanism in [@rem-ch30-eth-subexponential-literature
 - ***"A Sphere Is Always Only a Polyhedral Approximation"* — Local Three-Body Facets and Asymptotic Seams (`MODEL`)**: The author uses the picture of assembling local three-body facets ($\mathbf{e}_i\wedge\mathbf{e}_j\wedge\mathbf{e}_k$) into a whole to interpret the possibility of an upper-bound exponent changing with scale. If the bound claimed by the preprints in [@rem-ch30-eth-subexponential-literature] survives audit, its effective per-variable exponent tends to $0$. This conditional algorithmic claim follows neither from the polyhedral metaphor nor from the finite-dimensional Lean prototypes above.
 
 ::: {.viz src="eth-horizon-crossover" preset="bridge" height="500"}
-**The rank of the flow matrix equals the minimal cut.** The bridge graph with $(a, b, c, d) = (2, 3, 2, 3)$: both outer cuts are $6$ (amber dashes) and the three bridges could carry $12$. On the right is the $6 \times 6$ flow matrix of one random integer instance (cyan entries positive, magenta negative) with six nonzero singular values below it: rank $6$, exactly the minimal cut. This is a single instance; that it always holds for these bridge graphs inside the cone of dimensions is the theorem verified in Lean.
+**The rank of the flow matrix equals the minimal cut.** The bridge graph with $(a, b, c, d) = (2, 3, 2, 3)$: both outer cuts are $6$ (amber dashes) and the three bridges could carry $12$. On the right is the $6 \times 6$ flow matrix of one random integer instance (cyan entries positive, magenta negative) with six nonzero singular values below it: rank $6$, exactly the minimal cut. This is a single instance; [@thm-bridge-quantum-maxflow-mincut], verified in Lean, states that under its full dimensional hypotheses the greatest attainable rank of these bridge graphs equals the minimal cut, while a single draw can have lower rank. The theorem is only about flows and cuts on bridge graphs and has nothing to do with the subexponential 3-SAT preprints discussed above: it neither checks nor supports their algorithmic claim ([@rem-ch30-eth-subexponential-literature], unaudited).
 :::
 
 ### 2. Galactic Algorithms and the Cosmic Horizon: What Can Upper-Bound Comparisons Tell Us? (`MODEL` & Epistemological Boundaries)
@@ -289,15 +508,20 @@ The function $g(n)=n\log\log n/\sqrt{\log n}$ grows faster than $\log n$, so for
 The trans-cosmological scale and reduction comparison in [@ex-ch30-galactic-crossover-scale] highlights three closing reflections for our theme of "the finite observer inside the sphere vs. the one beyond the sphere" (`MODEL`):
 
 - **Galactic Algorithms and Physical Scale Boundaries for Finite Observers (`MODEL`)**: The normalized illustrative curve in [@ex-ch30-galactic-crossover-scale] shows how a crossover can occur only at astronomical scales, echoing the picture of a galactic algorithm. The **Finite Memory History Capacity Theorem** ([`finite_memory_history_capacity`](lean:D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity), bounding distinguishable histories) and **Open Integrable Circuit Minimum Depth Theorem** ([`OpenIntegrableCircuitMinDepth.result`](lean:D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result), giving minimum depth $\lfloor N/(\kappa+1)\rfloor+1$ under its locality assumptions) each constrain resources in a specified model. Juxtaposing them with the upper-bound curve supports the author's finite-observer interpretation, but does not combine them into a lower bound for all SAT algorithms or a proof that finite observers necessarily face intractability. Standard $P\neq NP$ remains `OPEN` ([@conj-p-neq-np]).
+
+::: {.viz src="eth-horizon-crossover" preset="constant" height="500"}
+**Halve the constant, and the crossover comes inside the horizon.** With $c = 1/2$ the cyan schematic curve meets the magenta $0.386$ at $n \approx 2^{57}$, inside the shaded part (sizes within the number of atoms in the observable universe). The big O does not give the constant $c$, and on which side of the horizon the crossover lies depends on it alone (a numerical comparison of the schematic curve, `MODEL`).
+:::
+
 - **Epistemic Contrast Between $P$ (Field) and $NP$ (Line) (`MODEL`)**: Guidance structures and witness checking play different task roles; both can occur in the same problem because $P\subseteq NP$. Upper-bound curves and encoding-scale comparisons do not separate the classes.
-- **The Gödelian Semantic Boundary Illustrated by Specification Auditing (`LEAN ✓` Prototype & `MODEL` Reflection)**: A striking epistemological lesson of [@rem-ch30-eth-subexponential-literature] is that while a proof-assistant kernel can rapidly verify every internal deductive step of a formal script, human researchers must still audit whether the top-level definitions faithfully match the intended Turing-machine complexity statement. In Chapter 21, our kernel-verified **Relative Semantic Diagonal and Definition Escape Theorems** prove that for any fixed-point-free twist (`∀ v, twist v ≠ v`), the relative semantic diagonal differs from every decoded profile in a listed catalog ([`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)), and when the listed decoder catalog is surjective onto the latent space, the diagonal target is not `TargetAdequate` with respect to that latent map ([`relative_semantic_diagonal_target_inadequate_of_surjective`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective)). Viewed as an epistemological prototype (`MODEL`), this theorem illuminates why **a formal kernel locks transitive deductive consistency inside a given formal sphere, whereas auditing the semantic adequacy of top-level boundary definitions requires standing outside that sphere!**
+- **The Gödelian Semantic Boundary Illustrated by Specification Auditing (`LEAN ✓` Prototype & `MODEL` Reflection)**: A striking epistemological lesson of [@rem-ch30-eth-subexponential-literature] is that while a proof-assistant kernel can rapidly verify every internal deductive step of a formal script, human researchers must still audit whether the top-level definitions faithfully match the intended Turing-machine complexity statement. In Chapter 21, our kernel-verified **Relative Semantic Diagonal and Definition Escape Theorems** prove that for any fixed-point-free twist (`∀ v, twist v ≠ v`), the relative semantic diagonal differs from every decoded profile in a listed catalog ([`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)), and when the catalog lists every decoder on the latent coordinate space, the diagonal target is not `TargetAdequate` with respect to that latent map ([`relative_semantic_diagonal_target_inadequate_of_surjective`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective)). Viewed as an epistemological prototype (`MODEL`), this theorem illuminates why **a formal kernel locks transitive deductive consistency inside a given formal sphere, whereas auditing the semantic adequacy of top-level boundary definitions requires standing outside that sphere!**
 
 ::: {.viz src="eth-horizon-crossover" preset="atoms" height="500"}
 **The crossover lies beyond the horizon.** Cyan is the schematic curve $r(n) = \log_2(\log_2 n)/\sqrt{\log_2 n}$ with $c = 1$, magenta the $0.386$ of PPSZ, and the shaded part the scales up to the $2^{266}$ atoms of the observable universe. The amber reading stands at $n = 2^{266}$: the curve is still at $0.494$ and comes down to $0.386$ only at $n \approx 2^{558}$ (a numerical comparison for a schematic curve, `MODEL`).
 :::
 
 ::: {.viz src="eth-horizon-crossover" height="640"}
-**Interactive laboratory `ORTHO//HORIZON`**: the three scenes of this section. Rates: where the schematic curve $r(n)$ meets the $0.386$ of PPSZ, and how the constant $c$ moves the crossover into or out of the shaded part; bridge graph: the rank of the flow matrix against the three cuts, equal to the minimal cut inside the cone (verified in Lean), with the three bridges as the bottleneck outside it; modes: the number of modes of a spectrum that reach the threshold $\theta$ is at most $T/\theta$ (verified in Lean). The curve with $c = 1$ is schematic, not a measurement of any algorithm.
+**Interactive laboratory `ORTHO//HORIZON`**: the three scenes of this section. Rates: where the schematic curve $r(n)$ meets the $0.386$ of PPSZ, and how the constant $c$ moves the crossover into or out of the shaded part; bridge graph: one sampled flow-matrix rank against four cuts, with the frozen quantity $\operatorname{QMinCut} = \min(3ac, ad, bc)$ and the fourth cut $3bd$ derived by hand through matrix factorization; for natural-number dimensions satisfying $0 < a \le b$, $0 < c \le d$, $a^2 + b^2 \le 3ab$ and $c^2 + d^2 \le 3cd$, the greatest attainable rank equals $\operatorname{QMinCut} = \min(ad, bc)$ (verified in Lean), though a single draw can fall lower; outside the cone, the four cuts must be compared; modes: the number of modes of a spectrum that reach the threshold $\tau$ is at most $RW/(\pi\tau)$ (verified in Lean). The curve with $c = 1$ is schematic, not a measurement of any algorithm.
 :::
 
 ---
@@ -406,7 +630,7 @@ Let $N \in \mathbb{N}$ and $b, \Omega \in \mathbb{R}$.
 Each of the two terms has one job. The sum is the velocity blown onto vortex $j$ by the others: the $k$-th vortex induces, at distance $r$, a velocity of magnitude $\frac{b}{2r}$, perpendicular to the line joining the two, with the sense given by $s_k$; compared with [@rem-ch30-point-vortex-literature], this is the choice $\Gamma_k = \pi b\,s_k$. The first term makes each vortex circle the origin on its own, with angular velocity $s_j\Omega$: for $\Omega > 0$, positive vortices go counterclockwise and negative ones clockwise. Put an even number of vortices of alternating sign on a circle of radius $\rho$ and the two terms pull against each other along the tangent. A manual derivation (it uses the tangential readout identity quoted in the proof below): the other vortices give the $j$-th one the tangential velocity $-s_j\,\frac{b}{4\rho}$, the precession gives it $s_j\,\Omega\rho$, and the two cancel exactly when $\rho^2 = \frac{b}{4\Omega}$. On too small a circle the neighbors win; on too large a circle the precession wins; a single radius brings the whole ring to rest.
 
 ::: {.figure src="ch30-vortex-radius"}
-**Only one radius brings the whole ring to rest.** Across is the radius $\rho$ of the circle carrying the alternating vortices. The violet line is the size $\Omega\rho$ of the tangential velocity the precession gives each vortex, the blue curve the size $\frac{b}{4\rho}$ of the tangential velocity blown in by the others; the two point in opposite directions and are equal only at $\rho = R_{b,\Omega} = \sqrt{b/(4\Omega)}$ (here $b = 2$, $\Omega = \tfrac12$, so $R = 1$). Left of the crossing the neighbors win, right of it the precession wins; the condition for rest is [@lem-ch30-vortex-polygon-equilibrium].
+**Only one radius brings the whole ring to rest.** Across is the radius $\rho$ of the circle carrying the alternating vortices. The violet line is the size $\Omega\rho$ of the tangential velocity the precession gives each vortex, the cyan curve the size $\frac{b}{4\rho}$ of the tangential velocity blown in by the others; the two point in opposite directions and are equal only at $\rho = R_{b,\Omega} = \sqrt{b/(4\Omega)}$ (here $b = 2$, $\Omega = \tfrac12$, so $R = 1$). Left of the crossing the neighbors win, right of it the precession wins; the condition for rest is [@lem-ch30-vortex-polygon-equilibrium].
 :::
 
 ::: {.lemma #lem-ch30-vortex-polygon-equilibrium title="When a Centered Regular Polygon Is Stationary, and the Fréchet Derivative at the Equilibrium" lean="D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.regular_equilibrium_iff_radius D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.scaled_equilibrium D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalDerivative.physical_derivative"}
@@ -629,4 +853,4 @@ Combining [@thm-coda-quadratic-advection-no-closure] with the literature context
 
 The chapter connects discrete logic and continuum fluids through the author's aphorisms about the global static field, finite observers, “fields,” and “lines.” Mathematically, static satisfying subspaces, complexity equalities with extra resources, restricted-model lower bounds, and the open standard $P\neq NP$ question have distinct boundaries. In the finite-graph coloring example, the Gallai–Hasse–Roy–Vitaver theorem gives an exact equivalence between $k$-colorability and the existence of an orientation whose directed paths have at most $k$ vertices ([@thm-ch30-gallai-roy]); it exchanges two existence witnesses without providing an algorithm or settling the general $P$ vs. $NP$ question. The galactic crossover table compares illustrative upper bounds ([@ex-ch30-galactic-crossover-scale]), not universal search lower bounds. The fluid discussion juxtaposes **Lamb's decomposition ([@rem-ch30-lamb-decomposition-literature]), the open unforced 3D global regularity conjecture ([@conj-coda-navier-stokes-regularity]), and the quadratic advection projection closure obstruction ([@thm-coda-quadratic-advection-no-closure])**. These results offer points of reference for the author's geometric interpretation, without establishing mathematical equivalence between the two open problems.
 
-Continuing across this orthogonal horizon, **[Chapter 31: The Essence of the Quantum Is Fairness](ch31-quantum-fairness.md)** and **[Chapter 32: Orthogonal Self-Referential Unified Field and Meta-Unification](ch32-unified-field-and-meta-unification.md)** unveil the fivefold abolition of geometric privilege, ergodic statistical holism, and cross-program meta-unification, before we enter the **[Coda: Outside All Spheres](coda.md)** to survey polyhedral angular-defect remainders (see Coda [@rem-coda-polyhedral-topology-literature]), the contracting fixed-point anchor, and the complete thirty-two-chapter dependency map.
+Continuing across this orthogonal horizon, **[Chapter 31: The Essence of the Quantum Is Fairness](ch31-quantum-fairness.md)** and **[Chapter 32: Orthogonal Self-Referential Unified Field and Meta-Unification](ch32-unified-field-and-meta-unification.md)** unveil the fivefold abolition of geometric privilege, ergodic statistical holism, and cross-program meta-unification, before we enter the **[Coda: Outside All Spheres](coda.md)** to survey polyhedral angular-defect remainders (see Coda [@rem-coda-polyhedral-topology-literature]), the contracting fixed-point anchor, and the complete dependency map.

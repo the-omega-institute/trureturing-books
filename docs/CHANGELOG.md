@@ -2,9 +2,78 @@
 
 本文件记录 trureturing-books-template 的版本变化，格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循[语义化版本](https://semver.org/lang/zh-CN/)。下游升级时请阅读跨越的所有版本，处理标为“需要手动操作”的条目。
 
+## [Unreleased]
+
+## [0.7.0] - 2026-11-12
+
+### 变更
+
+- `academic` 改为 arXiv 常见的单栏研究预印本外观：默认 A4、11 pt New Computer Modern 与宋体中文、题名和摘要同页、连续阿拉伯页码、章部随文；中文自然字距与左对齐，不再使用专著的对开页眉、版权页和空白补页。保持正文、数学、编号、图注与 Lean 引用不变。`PDF-TYPOGRAPHY.md` 区分 arXiv 官方 PDF 技术要求与项目视觉选择，导出技能同步验收步骤。已有显式 `academic_paper` 配置继续生效；如需采用新默认开本，可删除旧的 `iso-b5` 配置或改为 `a4`。来源：下游《量子计算的几何直觉》预印本排版。
+- 普通行内公式按正文流动，取消半行阈值的强制换行；仅在超出实际可用宽度时换行和适宽，并预留尾标点空间，避免几乎满行的公式连同分号越界；窄表与列表仍受边界保护。
+
+- 预印本默认省略可选 PDF 结构标签，减少长篇导出的结构开销，保留文字、图像清晰度、书签和链接；可用 `[pdf] academic_tags = true` 启用。规范补入官方默认 50 MB 投稿大小限制与例外路径。
+
+### 修复
+
+- PDF 静态图使用覆盖数学与组合标记的字体栈，编译时排除 macOS LastResort 占位字体并保留真正的系统字体，修复带帽的 n、带波浪号的 R 及 ket 标签等符号缺字；保留图源标签与字符，不改 HTML、EPUB 或幻灯片副本。
+- 工具生成的标题属性在含星号的标题中通过前置空 Span 传给过滤器，防止未闭合的指针星号让 `{#…}` 锚点串印入 PDF/EPUB；标题正文、强调、代码与数学的解析结果保持不变。
+### 新增
+
+- 可视化：受光的实体 `kit.solid(el, opts)`（`theme/viz/kit.js`）。任何页面都可以直接调用，页面契约不变：第一次调用时才用 `import()` 取造型核心 `theme/viz/solid-core.js`（不依赖 DOM、事件与动画循环，给定状态同步画一帧，供视频引擎复用；`createScene`、`createRenderer`、`p`、`occluded`）与它导入的、`theme/viz/vendor/` 里钉版的 three.js（three@0.183.2 的 `three.module.min.js` 与 `three.core.min.js`，原样复制，MIT，gzip 约 185 KB；`vendor/README.md` 记来源与校验和），不画实体的页面一个字节都不多下载。图元按本书的语汇：参数曲面或点阵（逐顶点光照、正背面可区分、网格线、令牌色或沿标量渐变）、平面着色多面体（顶点/面表）、玻璃球壳、沿曲线的管（平行移动标架）、线、箭头、环、珠、平面多边形、DOM 标签（被实体挡住时变淡）；一盏固定在相机坐标里的主光加环境光；相机、拖动、滚轮、捏合与投影同 `kit.stage3`。拾取 `sc.hit(ev)` 返回曲面上的参数点（在精确曲面上用牛顿法细化），`sc.nearest`、`sc.occluded` 跳过被挡住的标记。没有渲染循环；书内嵌入时进入视口才建 WebGL 上下文，静止约 1.6 秒后把画面留在页面的二维画布上并释放上下文，读者一碰再取回。`kit.ready()` 在 three.js 到位后兑现，测试工具的 `settle(page)` 会等它；`inkShare` 能读 WebGL 画布。
+- `stageFirstChecks(…, { solid: true })` 与单独导出的 `solidChecks`、`solidPixels`：舞台上确有受光实体（不透明像素占比、明暗起伏）、转动相机后明暗分布改变、被挡住的标记点不到、书内静止后释放上下文且一碰取回。已有页面不传这个选项，检查不变。
+- 示例专著新增可视化 `phase-torus`（把相位正方形粘成环面：颜色是相位判据的三块，两条斜线在环面上接成一条闭曲线，珠子可点），第一章按卡引用 `torus`，配浏览器测试。`skills/book-viz` 新增“具象”一节：实体舞台是多出来的一种能力，不是统一风格，何时用、何时不硬套、怎么做。`tools/tests/test_viz_solid.py` 在 Chromium 里核对拾取（球与环面对解析解）、遮挡随相机翻转、正背面、主光、上下文释放与取回、three.js 只在首次调用时下载。来源：下游 trureturing-books#158（具象可视化），#42。
+
+## [0.6.1] - 2026-11-12
+
+### 修复
+
+- 学术版 PDF 的长行内公式在式前换行，前一行保持自然字距；超过所在段落、列表或窄容器宽度时等比缩小，避免长类型签名超出版心。普通行内公式保持原有字号与正文流动，不改公式源码。补中英文真实行内公式的容器边界、横向占位、段落缩进与基线回归测试。来源：下游主干新增的诠释语境类型签名。
+- Typst 标题转换只裁去 ASCII 行尾空白，避免某些系统区域设置把中文字的 UTF-8 尾字节当成空白，导致章名、环境标题与书签乱码。
+- 每次 Typst 编译在独立 Python 进程中执行，完成后释放该文档的编译内存；PDF、EPUB 封面与站点封面的调用接口、错误报告和字体回退警告保持一致，避免全站连续导出多种 PDF 后保留编译内存。
+
+## [0.6.0] - 2026-11-12
+
+### 新增
+
+- 可选学术专著 PDF `academic`：独立的 B5 学术专著版式、衬线正文、分开的标题/版权/内容提要/目录、对开页眉、传统定理与证明、三线表及无框图注，保留 Lean 徽记、永久链接、公式适宽与验证账本；图件与代码高亮复用浅色配色。在 `[outputs] pdf` 中加 `"academic"` 后用 `./tbook build pdf --variant academic` 导出，站点与 Release 自动收录；已有书省略配置或 `pdf = true` 仍默认原两版。来源：下游《量子计算的几何直觉》学术专著导出。
+
+- 画图库补上下游用到却没有的形状，均为新增接口，已有的图逐字节不变：流程图的 `fig.box(…)`（自动定宽与换行、虚线框、强调色框与 `chip`/`chip_size`，返回锚点；默认字号按不宽于 358 的一栏设计）与 `fig.link(a, b, elbow=…)`；球上的 `sp.turn(轴, 起点, 角度, arrow=True)`、`sp.small_circle(…, start=, span=, arrow=True)`、`sp.sector(…)`、`sp.patch(…)`、`sp.polytope(…)`；`fig.axes(…, logx=True, logy=True)`（自动十的幂刻度与细刻度、`ax.decades()`）；`ax.step(…)`、`ax.bars(…)`；`figkit.hull(…)`、`figkit.hull3(…)`；`fig.bounce(a, 镜面点, b)`；文字标记 `***粗斜体***` 与 `\bar{z}`；脚本可选 `MARKUP = 2`，让下标、上标里的标记嵌套、斜体 `I` 用衬线字形（不写时按旧规则）；等宽文字按每字 0.6 em 估宽（组合附加符不计），`fig.measure()`、`fig.wrap_text()`。示例专著第四章新增三张图（证明骨架、黄金旋转、回归得分的对数图）。来源：下游《量子计算的几何直觉》150 张图中各章各写一遍的辅助代码（#35）。
+- `viz-validate` 与 `./tbook check` 对 `viz/tests/*.test.mjs` 里的每一处 `waitForTimeout(…)` 报警告（行号与改法：过渡用 `settle(page)`，播放用 `until(page, …)`）。
+- `node tools/node/viz-test.mjs --slow`：等价于 `VIZ_SLOW_FRAMES=1000`，以一秒一帧跑浏览器测试。`ci.yml` 新增 `viz-slow` 作业（8 片，同 `viz`），只在手动运行（输入 `slow_frames`，默认勾选）与每周三定时运行中出现，定时运行只跑它；PR 与推送的 CI 不变。何时跑见 `docs/PUBLISHING.md` §4。**需要手动操作（仅当分支保护列出所有检查时）**：新检查 “Visualization browser tests, slow frames (i/8)” 不在 PR 上运行，不要把它设为必需检查。
+
+### 变更
+
+- `./tbook check` 拦住不按标准做的图（均为警告）：章节用图片语法引用、放在 `assets/`、写死颜色（没有角色类、也没有 `prefers-color-scheme`）的 SVG，提示改用 `::: {.figure}` 与 `figures/<name>.py`（照片与位图不报）；两种语言的章节共用一个带 `<text>` 的 SVG，提示每种语言一版标签；三块以上 `.figure`、`.viz`、`.film`、`.slides` 只隔着空行连排，从第三块起报位置。
+- 图在手机上的最小标签：`./tbook fig build` 与 `./tbook check` 按 `min(1, 358 / 宽度)`（`WRAP = True` 的分栏图按最宽一栏）算出手机上的最小字号，低于 10 px 时给出警告（图名、当前值与做窄、分栏、加大字号三种改法）；`site.toml` 的 `[figures]` `phone_labels = "error"` 可升为错误；`./tbook fig list` 增加一列“手机上的最小标签”。起始脚本 `templates/figure/figure.py` 与示例专著的 `carry-rules` 已调到不低于 10 px。`skills/book-figure`、`skills/book-viz` 与 `docs/AUTHORING.md` 写明手机上的字号下限、图片语法只用于照片一类、媒体块不连排。来源：《量子计算的几何直觉》有 9 张手绘图、73 张手机上标签不到 10 px 的图与 8 处媒体连排，`check` 均未报出（#34）。
+
+### 修复
+
+- 可视化注册表单元测试采用独立的测试套件样本，避免下游保留旧版示例书时，示例中的固定等待让模板升级后的工具测试失败；实际书籍的浏览器测试与检查继续覆盖原始套件。
+- 可视化：用指针点过实验卡、场景按钮（`kit.chips`）或导览条之后，空格键直接播放或暂停时钟，不再把那张卡重新按一遍（回到起点重播）。`theme/viz/kit.js` 在指针点击（`detail > 0`）后把焦点交给舞台（`.stage` 加 `tabindex="-1"`，按键时不画焦点框）；用 Tab 走到按钮上的读者，空格与回车仍由按钮响应。`stageFirstChecks` 新增 `keyboard: after a card is clicked, Space plays and pauses the clock`（没有 `footer.rail #play`、或没有一张卡能启用它的页面跳过；页面另有空格用法时传 `{ keys: false }`；也单独导出为 `spaceAfterCard(T, page)`），示例 `golden-carry` 补浏览器回归测试，单元测试在起始模板的副本上核对通过、失败（点击后焦点仍留在卡上）与跳过三种情形。来源：下游《量子计算的几何直觉》核查（trureturing-books#147），#36。
+
+## [0.5.2] - 2026-11-12
+
+### 修复
+
+- CI 的 PR 构建可以复用默认分支成功 Pages 运行的缓存工件，无须等待 Release。通过 API 核对来源运行的 workflow、仓库、分支、事件和成功状态，按 run ID / artifact ID 下载；不读 PR 的 Actions 缓存或工件，缺权限或工件过期时退回构建。Pages 工件保留 7 天，调用 CI 的工作流增加 `actions: read`。来源：下游《量子计算的几何直觉》一次 PR 的八部视频串行重建耗时 30 分 40 秒，整轮 CI 约 36 分钟。
+- 开发分支只由 PR 触发完整 CI，消除同一提交的 push / PR 重复运行；无 PR 时可手动触发。main 的旧 CI 允许被新提交取消，Pages 保持串行。
+- 视频独立分 4 片严格构建，书籍 HTML、屏幕 PDF、印刷 PDF、EPUB 分格式并行，可视化浏览器测试从 4 片增为 8 片。空书库、隐藏示例书、空分片保持可用，分片复用正常构建缓存键。**需要手动操作（若分支保护要求旧检查名）**：将旧的书籍构建、四片可视化和 “Slides and films” 检查更新为 “Build books (html/pdf-screen/pdf-print/epub)”、八个 “Visualization browser tests (i/8)”、“Slides” 与四个 “Films (i/4)”；CI 下载工件名改为按格式区分（见 `docs/PUBLISHING.md` §3）。
+
+## [0.5.1] - 2026-11-12
+
+### 修复
+
+- 可视化完整实验室在手机宽度的书内嵌入中保留可操作的时间轴与全部播放控件，避免传输栏把滑块挤成零宽；共享浏览器质量门补查窄嵌入、正文横向溢出及时间轴的指针与键盘操作。来源：《量子计算的几何直觉》第 14–15 章的四个完整实验室。
+- 修正新增的时间轴质量门：终点比较容许原生滑块的数字序列化舍入；开场空线路禁用时间轴时，先检查版式，再通过实验卡启用并验证拖动、键盘与读数。补充正常及故障状态的浏览器回归测试。
+
+### 变更
+
+- `./tbook check` 新增一种“mdBook 与 Pandoc 读法不同”的警告：顶层段落的下一行直接开始列表（`- 甲` 或 `1. 一`）。HTML 版（mdBook）把它显示为列表，PDF/EPUB（Pandoc）却把各项并进上一段，成了“…… - 甲 ……”；在列表前空一行即可。列表项里紧跟的子列表、跨行公式里以 `-` 开头的行不报。来源：《量子计算的几何直觉》有 20 处这样的列表在 PDF 里并进了段落（#30）。
+
 ## [0.5.0] - 2026-11-12
 
 ### 新增
+
 
 - 当前 trureturing pin 以锁文件为唯一来源：正文复用 `lean:` 解析器的 `{source}` / `{statement_id}` 标签和 `[{commit}](trureturing:)`，幻灯片增加复用 `pinned` 的 `<PinnedCommit />`，可视化构建与本地预览提供生成的 `assets/trureturing.json`。视频新增 `publication_basis: "pinned"`；可选的 `subject_commit` 保留真实制作历史。旧格式继续受支持。
 - 幂等迁移只移除已明确标记为锁引用的 HTML 锚点的版本回退链接。正文审计表、动态地图与历史记录的选择性迁移见 `docs/UPGRADING.md`，不会自动抹去历史。来源：下游更新 pin 时，当前版本曾复制到正文、八部视频、幻灯片与声明地图，造成同步冲突和行号/摘要漂移。
@@ -23,6 +92,7 @@
 ## [0.4.0] - 2026-11-12
 
 ### 新增
+
 
 - 完整出版工具链容器：在固定版本与摘要的官方 Playwright 镜像上预装 Python、Node、mdBook、Pandoc、Typst、EPUB 校验器、中英文字体及视频与语音工具。上游 `Toolchain image` 工作流实际验证断网 PDF/EPUB/语音/浏览器及完整示例构建后发布 GHCR 镜像；组合动作自动核对依赖指纹并复用预装环境，采用容器的作业不再逐次运行 apt。容器为可选接入，默认 CI 与 Pages 继续使用现有的 Ubuntu 工具安装与缓存流程。使用与升级方式见 `docs/CONTAINERS.md`。来源：trureturing-books 的 CI 与 Pages 在 Ubuntu 软件源 DNS 解析失败时连续无法安装字体和浏览器依赖。
 
@@ -57,6 +127,7 @@
 
 ### 新增
 
+
 - `until(page, fn)`（`tools/node/viz-testkit.mjs`）：等页面自己报告某件事发生了，成立返回 `true`，超时返回 `false`，可以直接作为一条检查的结果。用于靠动画帧自己前进的东西，首先是播放：`settle(page)` 走完过渡，但不替时钟往前走。
 
 ### 修复
@@ -85,6 +156,7 @@
 ## [0.3.0] - 2026-11-11
 
 ### 新增
+
 
 - 可视化：每张实验卡都可以在章节里单独引用，`::: {.viz src="<id>" preset="<卡>" height="500"}`。HTML 中它是开在那张卡上、不带内部滚动的一张图（舞台、一句说明、◀ ▶、时间轴），“全屏打开”进入同一状态的完整实验室；PDF/EPUB 中它是那张卡的带标签静态图 `viz/<id>/fig-<卡>.<语言>.jpg`，取代通用封面。`./tbook check` 核对被引用的卡存在、各语言版本引用同一张卡、静态图齐全；`node tools/node/viz-thumbs.mjs` 在生成封面的同时为被引用的卡生成静态图，并删除不再被引用的。运行时新增 `TRV.preset`、`TRV.figure`、`TRV.shot`、`TRV.still`。
 - 可视化运行时 `theme/viz/kit.js`（`TRV.kit`，可选）：二维画布上的三维舞台（轨道相机、深度淡化、球面拾取、DOM 标签）、二维舞台与小图、时间轴、实验卡与导览条、进入视野才播放、过渡、互斥按钮组、滑块绑定、快捷键与数字格式。`theme/viz/theme.css` 新增舞台优先的实验室版式 `.app.lab`、实验卡 `.presets.cards`、条带小图 `.strip`、导览条 `.tour`、舞台图例 `.hud-bl` 与关键读数 `dl.ro .key`，以及书内引用图与静态图两种模式的样式。
@@ -142,6 +214,7 @@
 升级时迁移 `tools/migrations/v0.2.0.py` 自动处理书库自有的内容：给每个 `books/*/films/*/film.json` 补上缺少的 `outputs.narrated_720p` 与 `outputs.cover`（默认文件名），删除不再使用的 `release_tag`、`published_tag`；已列出的 1080p 与纯配乐输出保持不变。它还在升级摘要中提示：视频如何改用 720p 默认、书库保留示例书时用 `[books] hide = ["example-*"]` 隐藏它们、调用 `ci.yml` 的书库工作流须授予 `pages: read`。
 
 ### 新增
+
 
 - 示例书扩充为四章加一个附录：收缩面与相位判据（附图与小数值表）、有限证书与反驳（Detlefs、反例搜索、Farkas）、细化与目标风险、遗忘与熵、黄金词与回归得分、$\lambda_-$ 的几乎可加性、齐肯多夫表示与进位（附图）；33 条定理类结论都引用所钉提交上已冻结的 Lean 声明，另有 2 个开放问题与 1 个猜想；Detlefs 刻画补上漏掉的剩余类后得到的修正刻画写成注记（两个方向都有纸面证明，尚无 Lean 证明），不算开放问题。定理 2.1 改为只陈述 Lean 证明的内容（该取整公式并非对所有 $n \ge 1$ 成立），见证值移到证明中。
 - 新增第二本示例书 `books/example-primer/`《斐波那契与卢卡斯：一本可验证的入门小书》：两章、11 条定理与一个开放问题，没有媒体，演示一本书最少需要什么。两本示例书都以 `example-` 开头，书库用 `hide = ["example-*"]` 一并隐藏。
@@ -206,6 +279,7 @@
 ## [0.1.0] - 2026-11-08
 
 ### 新增
+
 
 - 多本书、多语言（默认中文、英文）的书库结构：`books/<slug>/<lang>/`，`./tbook check` 校验各语言版本逐条对齐。
 - 定理验证：形式结论必须引用 trureturing 中在所钉提交上已冻结（`Golden/Frozen/state`）的 Lean `theorem`；`trureturing.lock.json` 由 `./tbook pin` 生成并在 CI 中复核；`lean-verify` 工作流做公理闭包深度验证。

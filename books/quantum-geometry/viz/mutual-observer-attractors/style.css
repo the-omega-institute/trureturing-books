@@ -1,0 +1,7 @@
+/* ORTHO//MUTUAL: the shared lab layout (../assets/theme.css) carries the page. Only what belongs to this page:
+   the pointer on the stage and the legend swatches for the neutral path, the dashed losing cut and the cyan rings. */
+#cv { cursor: crosshair; touch-action: none; }
+.sw.ink { background: var(--sigma); }
+.sw.dash { background: repeating-linear-gradient(90deg, var(--dim) 0 4px, transparent 4px 7px); }
+.sw.ring { width: 10px; height: 10px; border-radius: 50%; background: transparent; border: 2px solid var(--sigma); }
+.sw.box { opacity: 0.55; }

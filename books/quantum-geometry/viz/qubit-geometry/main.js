@@ -102,8 +102,13 @@
     const g = now.k < n ? S.gates[now.k] : null;
     $('hudBig').textContent = `θ(A,B) = ${fix(now.angle, 1)}°`;
     $('hudSub').innerHTML = !n ? (TRV.still ? L(`线 cos θ = ${fix(now.line, 2)} · 面积 sin θ = ${fix(now.area, 2)}`, `line cos θ = ${fix(now.line, 2)} · area sin θ = ${fix(now.area, 2)}`) : L('还没有门：拖动 B，或选一张实验卡', 'No gates yet: drag B, or pick an experiment'))
-      : (g ? L(`第 ${now.k + 1} / ${n} 门 ${g.name}：绕 ${AXIS_NAME[g.ax]} 转 ${g.deg}°，已转 ${fix(g.deg * now.f, 0)}°`, `Gate ${now.k + 1} of ${n}, ${g.name}: a ${g.deg}° turn about ${AXIS_NAME[g.ax]}, ${fix(g.deg * now.f, 0)}° done`)
-        : L(`线路走完：${n} 个门`, `End of the circuit: ${n} gate${n > 1 ? 's' : ''}`)) + ` · ${L('旋子 w', 'rotor w')} = <b class="c-vi">${sgn(now.q[0], 2)}</b>`;
+      : (g ? (g.total
+        // a turn longer than 180° rides the rail in pieces: report the whole turn and how much of it is done
+        ? L(`${g.name}：绕 ${AXIS_NAME[g.ax]} 共转 ${fix(g.total, 0)}°，已转 ${fix(g.before + g.deg * now.f, 0)}°`, `${g.name}: a ${fix(g.total, 0)}° turn about ${AXIS_NAME[g.ax]}, ${fix(g.before + g.deg * now.f, 0)}° done`)
+        : L(`第 ${now.k + 1} / ${n} 门 ${g.name}：绕 ${AXIS_NAME[g.ax]} 转 ${g.deg}°，已转 ${fix(g.deg * now.f, 0)}°`, `Gate ${now.k + 1} of ${n}, ${g.name}: a ${g.deg}° turn about ${AXIS_NAME[g.ax]}, ${fix(g.deg * now.f, 0)}° done`))
+        : (S.gates[n - 1].total && Math.abs(S.gates[n - 1].total - n * S.gates[n - 1].deg) < 1e-9
+          ? L(`转完：绕 ${AXIS_NAME[S.gates[0].ax]} 共转 ${fix(S.gates[0].total, 0)}°`, `Turn complete: ${fix(S.gates[0].total, 0)}° about ${AXIS_NAME[S.gates[0].ax]}`)
+          : L(`线路走完：${n} 个门`, `End of the circuit: ${n} gate${n > 1 ? 's' : ''}`))) + ` · ${L('旋子 w', 'rotor w')} = <b class="c-vi">${sgn(now.q[0], 2)}</b>`;
   }
 
   /* ---------- strip: what a detector sees; the line and the rotor along the circuit ---------- */
@@ -146,8 +151,8 @@
     $('roLine').textContent = sgn(now.line, 3); $('roArea').textContent = fix(now.area, 3);
     $('roP0').innerHTML = `${fix(now.p0, 3)} <small>= cos²(θ/2)</small>`; $('roVis').innerHTML = `${fix(now.area, 3)} <small>= sin θ</small>`;
     $('roRotor').innerHTML = `${sgn(now.q[0], 3)} − (${fix(now.q[1], 3)}, ${fix(now.q[2], 3)}, ${fix(now.q[3], 3)})·iσ <small>· ${L('叶', 'sheet')} ${now.sheet > 0 ? '+1' : '−1'}</small>`;
-    const kind = now.area < 0.02 ? L('B 与 A 共线：只有线，没有面积。探测器每次都给同一种咔哒，条纹消失。', 'B is along A: all line, no area. The detector gives the same click every time and the fringes vanish.')
-      : Math.abs(now.line) < 0.02 ? L('B 与 A 垂直：只有面积，没有线。两种咔哒各占一半，条纹最清楚。', 'B is perpendicular to A: all area, no line. The two clicks are 50 / 50 and the fringes are sharpest.')
+    const kind = now.area < 0.02 ? L('B 与 A 共线或几乎共线：几乎全是线，面积不到 0.02。探测器几乎每次都给同一种咔哒，条纹对比不到 2%；恰好共线时没有面积，每次都是同一种咔哒，条纹消失。', 'B is along A or nearly so: almost all line, with area under 0.02. The detector gives the same click almost every time and the fringe contrast is under 2%; exactly along A there is no area, the click is the same every time and the fringes vanish.')
+      : Math.abs(now.line) < 0.02 ? L('B 与 A 垂直或几乎垂直：几乎全是面积，线在 ±0.02 以内。两种咔哒各占 49% 到 51%，条纹接近最清楚；恰好垂直时没有线，两种咔哒各占一半，条纹最清楚。', 'B is perpendicular to A or nearly so: almost all area, with the line within ±0.02. Each of the two clicks comes 49–51% of the time and the fringes are close to their sharpest; exactly perpendicular there is no line, the clicks are 50 / 50 and the fringes are sharpest.')
         : L(`线占 ${fix(100 * l2, 0)}%，面积占 ${fix(100 * a2, 0)}%：咔哒偏向一边，同时还留着 ${fix(100 * now.area, 0)}% 的条纹对比。`, `${fix(100 * l2, 0)}% line and ${fix(100 * a2, 0)}% area: the clicks lean one way while the fringes keep ${fix(100 * now.area, 0)}% of their contrast.`);
     $('roNote').textContent = kind;
     $('pillLine').querySelector('strong').textContent = sgn(now.line, 2);
@@ -209,7 +214,7 @@
   /** Append a turn of `deg` degrees about axis `ax`, in pieces of at most 180° so that the rail moves at an even pace. */
   function addTurn(ax, deg, name) {
     const pieces = Math.ceil(deg / 180 - 1e-9), each = deg / pieces;
-    for (let i = 0; i < pieces; i++) S.gates.push({ name: name || `${AXIS_NAME[ax]}${fix(deg, 0)}°`, label: name || `${AXIS_NAME[ax]} ${fix(each, 0)}°`, ax, n: AXES[ax], deg: each });
+    for (let i = 0; i < pieces; i++) S.gates.push({ name: name || `${AXIS_NAME[ax]}${fix(deg, 0)}°`, label: name || `${AXIS_NAME[ax]} ${fix(each, 0)}°`, ax, n: AXES[ax], deg: each, total: pieces > 1 ? deg : 0, before: i * each });
     return pieces;
   }
   function appendAndPlay(fn) {
@@ -238,10 +243,10 @@
     area: { theta: 90, phi: 0, axis: 'z', turns: [] },
     half: { theta: 60, phi: 40, axis: 'z', turns: [] },
     phase: { theta: 90, phi: 0, axis: 'z', turns: [['z', 360]], play: true, still: 0.3 },
-    hadamard: { theta: 0, phi: 0, axis: 'z', turns: [['h', 180, 'H']], play: true, still: 0.6 },
+    hadamard: { theta: 0, phi: 0, axis: 'z', turns: [['h', 180, 'H']], play: true, still: 1 },
     hzh: { theta: 60, phi: 40, axis: 'z', turns: [['h', 180, 'H'], ['z', 180, 'Z'], ['h', 180, 'H']], play: true, still: 1.55 },
-    turn1: { theta: 60, phi: 40, axis: 'z', turns: [['x', 360]], play: true, still: 1.4 },
-    turn2: { theta: 60, phi: 40, axis: 'z', turns: [['x', 720]], play: true, still: 3 }
+    turn1: { theta: 60, phi: 40, axis: 'z', turns: [['x', 360]], play: true, still: 2 },
+    turn2: { theta: 60, phi: 40, axis: 'z', turns: [['x', 720]], play: true, still: 4 }
   };
   const NOTES = {
     line: ['B 就躺在量尺 A 上：青色的线是 1，整根 B 都是影子；品红的面积是 0，舞台上没有面。这是“粒子”的一端。', 'B lies along the ruler A: the cyan line is 1, all of B is shadow, and the magenta area is 0, so the stage shows no face. This is the “particle” end.'],

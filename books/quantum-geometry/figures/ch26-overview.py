@@ -1,5 +1,5 @@
-"""第二十六章地图：纯态在球面、正半定在球内；夹心积让轴上的影子不动、平面里的那份转整角；三段 ZYZ 转动编译成一枚旋子。
-Chapter 26 at a glance: pure states on the shell and positive semidefinite matrices inside; the sandwich keeps
+"""第二十六章地图：纯态在球面、迹一正半定在球内；夹心积让轴上的影子不动、平面里的那份转整角；三段 ZYZ 转动编译成一枚旋子。
+Chapter 26 at a glance: pure states on the shell and trace-one positive semidefinite matrices inside; the sandwich keeps
 the shadow on the axis and turns the in-plane part by the whole angle; three ZYZ turns compile into one rotor.
 
 Panel I: the shell and the ball are the two cited theorems (green). Panel II: v at 60° from z turned by
@@ -16,12 +16,12 @@ from _ch26 import ANGLES, apply, check_example, rotor, title
 SIZE = (740, 290)
 WRAP = True
 ALT = {
-    "zh": "三栏。左栏：绿色的布洛赫球，琥珀色的箭头伸到球面，旁注“纯态 |r| = 1”；球里一个墨色的点，旁注“正半定 |r| ≤ 1”。"
+    "zh": "三栏。左栏：绿色的布洛赫球，琥珀色的箭头伸到球面，旁注“纯态 |r| = 1”；球里一个墨色的点，旁注“迹一正半定 |r| ≤ 1”。"
           "中栏：紫色的竖轴 z，灰色的箭头 v 与竖轴成 60°，它在轴上的青色影子不动；v 的横向那份在一个水平圆盘里扫过品红的 90° 扇形，"
           "虚线把扇形分成两个 45°，琥珀色的箭头是转完的 R v R̃。右栏：紫色的 z 轴与 y 轴，白色的起点 e₁ 在赤道上，"
           "琥珀色的路分三段：先绕 z 沿赤道走一小段，再绕 y 向上抬，最后再绕 z 走一小段，停在琥珀色箭头 R e₁ R̃ 的尖上。",
     "en": "Three panels. Panel I: a green Bloch ball; an amber arrow reaches the shell, marked “pure |r| = 1”, and a dark point "
-          "inside is marked “PSD |r| ≤ 1”. Panel II: the violet vertical axis z; the grey arrow v at 60° from it keeps its cyan "
+          "inside is marked “trace-one PSD |r| ≤ 1”. Panel II: the violet vertical axis z; the grey arrow v at 60° from it keeps its cyan "
           "shadow on the axis while its sideways part sweeps a magenta 90° sector in a horizontal disc, split by a dashed line "
           "into two 45° halves; the amber arrow is the turned R v R̃. Panel III: the violet z and y axes, the white starting "
           "point e₁ on the equator, and an amber path in three legs — a short way along the equator about z, a lift about y, "
@@ -42,7 +42,7 @@ def panel_ball(p):
     x, y = sp.xy(pure)
     p.text(x + 6, y - 10, p.t("纯态 |*r*| = 1", "pure |*r*| = 1"), size=13, color="now", weight=600, halo=True)
     x, y = sp.xy(mixed)
-    p.text(x - 2, y + 22, p.t("正半定 |*r*| ≤ 1", "PSD |*r*| ≤ 1"), size=13, color="ink", halo=True, anchor="middle")
+    p.text(x - 2, y + 22, p.t("迹一正半定 |*r*| ≤ 1", "trace-one PSD |*r*| ≤ 1"), size=13, color="ink", halo=True, anchor="middle")
     assert abs(sum(c * c for c in pure) - 1) < 1e-12 and sum(c * c for c in mixed) < 1
 
 

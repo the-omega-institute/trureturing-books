@@ -784,12 +784,18 @@ def plant_cache(commit: str, branch: str = "dev") -> None:
 def gha_if(expr: str, *, event: str, ref: str, default_branch: str | None = "main",
            context: dict[str, str] | None = None, cancelled: bool = False, **outputs: str) -> bool:
     """Evaluate a workflow step's ``if:`` written with the subset of GitHub's expression syntax used by the
-    cache steps: ``==``, ``!=``, ``!``, ``&&``, ``||``, parentheses, ``format``, ``startsWith``,
-    ``cancelled()``. ``context`` gives further names (``inputs.browsers``, ``steps.<id>.outputs.cache-hit``…)."""
+    cache steps and job conditions: ``==``, ``!=``, ``!``, ``&&``, ``||``, parentheses, ``format``, ``startsWith``,
+    ``contains`` (of a string), ``true`` / ``false`` / ``null``, ``cancelled()``. ``context`` gives further names
+    (``inputs.browsers``, ``steps.<id>.outputs.cache-hit``, ``github.workflow_ref``…; a name it does not give is
+    an error, so pass ``None`` for an input a run does not have)."""
     py = expr.strip().removeprefix("${{").removesuffix("}}")
     py = py.replace("cancelled()", repr(cancelled))
     py = re.sub(r"format\(('[^']*'),\s*([\w.]+)\)", r"\1.format(\2)", py)
     py = re.sub(r"startsWith\(([\w.]+),\s*('[^']*')\)", r"\1.startswith(\2)", py)
+    py = re.sub(r"contains\(([\w.]+),\s*('[^']*')\)", r"(\2 in \1)", py)
+    literals = {"true": "True", "false": "False", "null": "None"}
+    py = "".join(part if part.startswith("'") else re.sub(r"\b(true|false|null)\b", lambda m: literals[m.group(1)], part)
+                 for part in re.split(r"('[^']*')", py))
     py = re.sub(r"!(?!=)", " not ", py.replace("&&", " and ").replace("||", " or "))
     values = {"github.event.repository.default_branch": default_branch or "", "github.event_name": event,
               "github.ref": ref, **{f"steps.target.outputs.{k}": v for k, v in outputs.items()}, **(context or {})}
@@ -1277,7 +1283,7 @@ class BuildCacheWorkflowTests(unittest.TestCase):
     def building_jobs(self) -> dict[tuple[str, str], list[dict]]:
         return {(wf.name, job): steps for wf in sorted(self.WORKFLOWS.glob("*.yml"))
                 for job, steps in workflow_jobs(wf).items()
-                if any(re.search(r"^\./tbook build\b", s.get("run", ""), re.M) for s in steps)}
+                if any(re.search(r"^(?:\./tbook build\b|python tools/ci/films.py\b)", s.get("run", ""), re.M) for s in steps)}
 
     def test_builds_go_through_the_cache(self):
         """Every job that builds restores the store first (outside pull requests: the action decides), looks
@@ -1285,11 +1291,11 @@ class BuildCacheWorkflowTests(unittest.TestCase):
         keys; jobs that build films install the film toolchain and fail when a film cannot be rendered; only
         pages.yml saves the store, after its build ran."""
         jobs = self.building_jobs()
-        self.assertEqual(set(jobs), {("ci.yml", "build"), ("ci.yml", "media"), ("pages.yml", "build"),
+        self.assertEqual(set(jobs), {("ci.yml", "build"), ("ci.yml", "media"), ("ci.yml", "films"), ("pages.yml", "build"),
                                      ("release.yml", "build"), ("template-release.yml", "site")})
         for (wf, job), steps in jobs.items():
             where = f"{wf}, job {job}"
-            builds = [i for i, s in enumerate(steps) if re.search(r"^\./tbook build\b", s.get("run", ""), re.M)]
+            builds = [i for i, s in enumerate(steps) if re.search(r"^(?:\./tbook build\b|python tools/ci/films.py\b)", s.get("run", ""), re.M)]
             cache = [(i, s["with"].get("mode")) for i, s in enumerate(steps) if s.get("uses") == "./.github/actions/build-cache"]
             restores = [i for i, mode in cache if mode == "restore"]
             saves = [i for i, mode in cache if mode == "save"]
@@ -1308,7 +1314,7 @@ class BuildCacheWorkflowTests(unittest.TestCase):
                 self.assertEqual(env.get("TBOOK_CACHE_REMOTE"), "1", f"{where}: {run}")
                 self.assertEqual(env.get("GITHUB_TOKEN"), "${{ github.token }}", f"{where}: {run}")
                 self.assertNotIn("TBOOK_CACHE", env, where)
-                if re.search(r"^\./tbook build\b.*\b(all|films)\b", run, re.M):
+                if "python tools/ci/films.py" in run or re.search(r"^\./tbook build\b.*\b(all|films)\b", run, re.M):
                     films = True
                     film_if = steps[i].get("if", "")
                     self.assertEqual(env.get("TBOOK_FILMS"), "require", f"{where}: {run}")
@@ -1345,7 +1351,7 @@ class BuildCacheWorkflowTests(unittest.TestCase):
         jobs that install browsers (otherwise ci.yml's build job could never restore what pages.yml saved)."""
         checked = []
         for (wf, job), steps in self.building_jobs().items():
-            if not any(re.search(r"^\./tbook build(?: [\w ]*)?\b(?:all|pdf|epub)\b", s.get("run", ""), re.M)
+            if (wf, job) != ("ci.yml", "build") and not any(re.search(r"^\./tbook build(?: [\w ]*)?\b(?:all|pdf|epub)\b", s.get("run", ""), re.M)
                        for s in steps):
                 continue
             setup = next(s for s in steps if s.get("uses") == "./.github/actions/setup")
@@ -1370,12 +1376,14 @@ class BuildCacheWorkflowTests(unittest.TestCase):
     def test_films_render_once_per_change(self):
         """ci.yml leaves the films to pages.yml on the default branch and to the release workflows on tags,
         which build them (pages.yml also stores them); a film is not rendered by two runs of one push."""
-        media = workflow_jobs(self.WORKFLOWS / "ci.yml")["media"]
-        step = next(s for s in media if re.search(r"^\./tbook build films\b", s.get("run", ""), re.M))
-        self.assertFalse(gha_if(step["if"], event="push", ref="refs/heads/main"))
-        self.assertFalse(gha_if(step["if"], event="push", ref="refs/tags/v1.0.0"))
-        self.assertTrue(gha_if(step["if"], event="push", ref="refs/heads/feature"))
-        self.assertTrue(gha_if(step["if"], event="pull_request", ref="refs/pull/7/merge"))
+        text = (self.WORKFLOWS / "ci.yml").read_text(encoding="utf-8")
+        match = re.search(r"(?ms)^  films:\n.*?^    if: >-\n(.*?)^    runs-on:", text)
+        self.assertTrue(match)
+        condition = " ".join(match.group(1).split())
+        self.assertFalse(gha_if(condition, event="push", ref="refs/heads/main"))
+        self.assertFalse(gha_if(condition, event="push", ref="refs/tags/v1.0.0"))
+        self.assertTrue(gha_if(condition, event="workflow_dispatch", ref="refs/heads/feature"))
+        self.assertTrue(gha_if(condition, event="pull_request", ref="refs/pull/7/merge"))
 
     def test_pages_build_step_times_out_before_the_job(self):
         """A step that runs out of time fails and the save still runs; a job that does is cancelled and

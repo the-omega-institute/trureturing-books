@@ -28,8 +28,8 @@ def draw(fig):
     assert tau(0) == dt and tau(3) == 4 and tau(5) == 0
     assert all(tau(k / 10) <= dt for k in range(51))
 
-    ax.xaxis(ticks=[0, 1, 2, 3, 4, 5], label=t("空间位移 |Δ*x*|", "space step |Δ*x*|"), size=13)
-    ax.yaxis(ticks=[0, 1, 2, 3, 4, 5], size=13)
+    ax.xaxis(ticks=[0, 1, 2, 3, 4, 5], label=t("空间位移 |Δ*x*|", "space step |Δ*x*|"), size=14)
+    ax.yaxis(ticks=[0, 1, 2, 3, 4, 5], size=14)
     ax.text(0, 5.7, t("固有时 Δ*τ*", "proper time Δ*τ*"), dx=8, dy=4, size=14, color="dim")
     ax.hline(dt, "ink", 1.4, dash="5 4")
     ax.text(5.6, dt, "Δ*t* = 5", dx=-2, dy=-8, size=14, color="ink", anchor="end")

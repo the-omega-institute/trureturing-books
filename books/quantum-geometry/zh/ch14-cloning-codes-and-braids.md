@@ -123,7 +123,7 @@ Lean 模块 `D5/S3/Quantum/CloningMachine` 直接把这一候选机器约化态�
 [@thm-cloning-machine-spectrum] 严格证明的是 [@def-cloning-machine-reduced-state] 中给定 $2\times 2$ 矩阵的密度态性质、行列式、输入无关谱与机器熵闭式；它与三比特克隆等距偏迹之间的对应见下例（[@ex-buzek-hillery-three-marginals]）。
 
 ::: {.example #ex-buzek-hillery-three-marginals title="Bužek–Hillery 克隆机的三个边缘态：克隆体保真度 5/6，机器比特反向收缩到 1/3"}
-**文献结果，未在本书形式化**（V. Bužek 与 M. Hillery，Phys. Rev. A **54**, 1844, 1996；最优性见 N. Gisin 与 M. Massar，Phys. Rev. Lett. **79**, 2153, 1997；亦见 [@rem-buzek-hillery-isometry-literature]）。下面的三个边缘态由该克隆等距直接求偏迹得到，并已对随机输入态作数值核对。
+**文献结果，未在本书形式化**（V. Bužek 与 M. Hillery，Phys. Rev. A **54**, 1844, 1996；最优性见 N. Gisin 与 S. Massar，Phys. Rev. Lett. **79**, 2153, 1997；亦见 [@rem-buzek-hillery-isometry-literature]）。下面的三个边缘态由该克隆等距直接求偏迹得到，并已对随机输入态作数值核对。
 
 记输出态为 $\lvert\Omega\rangle = \sqrt{\frac{2}{3}}\,\lvert\psi\psi\rangle\lvert\psi^\perp\rangle_M - \sqrt{\frac{1}{3}}\,\lvert S\rangle\lvert\psi\rangle_M$，其中 $\lvert S\rangle = \frac{1}{\sqrt{2}}\bigl(\lvert\psi\psi^\perp\rangle + \lvert\psi^\perp\psi\rangle\bigr)$。
 
@@ -261,7 +261,7 @@ $$
 :::
 
 ::: {.figure src="ch14-trace-survives"}
-**解码之后，$\sigma$ 只剩对角线。** 左边是 $4\times 4$ 的噪声矩阵 $\sigma$：对角线上青色的四格取例 [@ex-repetition-code-syndrome] 第四步的 $\frac{1}{2}, \frac{1}{4}, \frac{1}{8}, \frac{1}{8}$，其余十二格是品红的跨房间相干项，全部划掉。四个对角数相加得 $\Tr\sigma = 1$，解码输出 $1 \cdot \rho = \rho$（[@prop-orthogonal-syndrome-recovery]）。相干项取非零值时，在三比特码上的数值核对给出同一个 $\rho$。
+**解码之后，$\sigma$ 只剩对角线。** 上面是 $4\times 4$ 的噪声矩阵 $\sigma$：对角线上青色的四格取例 [@ex-repetition-code-syndrome] 第四步的 $\frac{1}{2}, \frac{1}{4}, \frac{1}{8}, \frac{1}{8}$，其余十二格是品红的跨房间相干项，全部划掉。四个对角数相加得 $\Tr\sigma = 1$，解码输出 $1 \cdot \rho = \rho$（[@prop-orthogonal-syndrome-recovery]）。相干项取非零值时，在三比特码上的数值核对给出同一个 $\rho$。
 :::
 
 [@prop-orthogonal-syndrome-recovery] 的代数结构干净得令人赞叹，在应用时需把握两条精确边界：
@@ -286,10 +286,6 @@ $$
 **一次交换：谁从前面过，记在第三个方向上。** 平面里的两颗粒子随时间往上走出世界线，绕中点转半圈换了位置：左边那股从前面过（离你近），右边那股从后面过。绳子上的数字是颜色：前面那股带着 $0$ 走到右边，后面那股被它改色，$1$ 变成 $0 \star 1 = 2$，正是 $\mathrm{crossing}(x, y) = (x \star y,\, x)$。
 :::
 
-::: {.viz src="braiding" preset="inverse" height="500"}
-**反着再交换一次，原样回来。** 左边先交换一次，再反着交换一次（这回右边那股从前面过），两股回到原位，颜色 $(0, 1)$ 原样回到顶端：$\mathrm{crossingInv}(\mathrm{crossing}(x, y)) = (x, y)$。右边是不交换的直线，顶端也是 $(0, 1)$。
-:::
-
 在源码模块 `D5/S0/Certificates/Quandles/BraidColoringTransport.lean` 中，这一编织不变量通过架（`Rack Q`）的代数着色传输得到了纯组合形式化。设类型 $Q$ 带有 `Rack Q` 实例，其上配备二元运算 $\star : Q \to Q \to Q$（源码记作 `act`）及逆运算 $\star^{-1} : Q \to Q \to Q$（源码记作 `invAct`），使得对每个固定的第一宗量 $x \in Q$，左平移作用映射 $L_x : y \mapsto x \star y$ 是双射（其逆映射为 $L_x^{-1} : y \mapsto x \star^{-1} y$，满足 `Function.LeftInverse (invAct x) (act x)` 与 `Function.RightInverse (invAct x) (act x)`，即 $x \star^{-1} (x \star y) = y$ 且 $x \star (x \star^{-1} y) = y$），并满足左自分配公理（left self-distributivity）：
 
 $$
@@ -308,6 +304,10 @@ $$
 \mathrm{crossing}_1\bigl(x, (y, z)\bigr) = \bigl(x \star y,\, (x, z)\bigr), \qquad
 \mathrm{crossing}_2\bigl(x, (y, z)\bigr) = \bigl(x,\, (y \star z,\, y)\bigr).
 $$
+
+::: {.viz src="braiding" preset="inverse" height="500"}
+**反着再交换一次，原样回来。** 左边先交换一次，再反着交换一次（这回右边那股从前面过），两股回到原位，颜色 $(0, 1)$ 原样回到顶端：$\mathrm{crossingInv}(\mathrm{crossing}(x, y)) = (x, y)$。右边是不交换的直线，顶端也是 $(0, 1)$。
+:::
 
 下面的推论证明，这两个相邻交叉算子在任意架 $Q$ 上严格满足三股 Yang–Baxter 编织恒等式。
 
@@ -360,6 +360,49 @@ $$
 ::: {.viz src="braiding" preset="twice" height="500"}
 **同向交换两次，不等于不交换。** 左边同一个方向交换两次，两条世界线互相绕了整整一圈，每颗粒子都回到原位，颜色却从 $(0, 1)$ 变成 $(1, 2)$；右边是不交换的直线，顶端仍是 $(0, 1)$。粒子被限制在平面里时这一圈解不开；借第三个空间方向把它抬过去解开，是 [@rem-braid-knot-topology-literature] 第 2 条的文献结果。
 :::
+
+**费米子的 $-1$ 从哪里来？** 上面说，粒子不被困在平面里时，一次交换只剩两种可能：玻色子的 $+1$ 与费米子的 $-1$（[@rem-braid-knot-topology-literature] 与下文 [@rem-error-correction-anyons-literature] 里的文献结果）。可量子计算机里只有比特，而作用在不同比特上的算子彼此**对易**，交换次序什么也不改变。用一串比特模拟费米子，那个 $-1$ 只能另找来源。办法是给每个“湮灭一个粒子”的算子拖一条尾巴：它左边每一位都放一个 $Z$。
+
+::: {.theorem #thm-jordan-wigner-car title="Jordan–Wigner 构造：带 Z 串的比特算子满足费米子的正则反对易关系" lean="D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_anticomm_of_lt D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_mixed_anticomm_of_lt D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_CAR"}
+设有 $N$ 个比特，格点编号 $0, 1, \dots, N - 1$，每个比特的基为 $\lvert 0\rangle$（空）与 $\lvert 1\rangle$（占据），$Z = \lvert 0\rangle\langle 0\rvert - \lvert 1\rangle\langle 1\rvert$，$\sigma^- = \lvert 0\rangle\langle 1\rvert$。对每个格点 $j$，令
+
+$$
+c_j = \underbrace{Z \otimes \cdots \otimes Z}_{\text{格点 } 0, \dots, j-1} \otimes\, \sigma^- \otimes \underbrace{I \otimes \cdots \otimes I}_{\text{格点 } j+1, \dots, N-1}.
+$$
+
+则对一切格点 $i < j$，
+
+$$
+c_i c_j + c_j c_i = 0, \qquad c_i c_j^\dagger + c_j^\dagger c_i = 0,
+$$
+
+并且对每个格点 $i$，$c_i c_i^\dagger + c_i^\dagger c_i = I$。
+:::
+
+::: proof
+三条都在张量积的每一位上逐位相乘。（1）$i < j$ 时，$c_i c_j$ 与 $c_j c_i$ 只在第 $i$ 位不同：一个是 $\sigma^- Z$，一个是 $Z \sigma^-$；其余各位两边相同。而 $\sigma^- Z = -\sigma^-$、$Z\sigma^- = \sigma^-$（$Z$ 在 $\lvert 1\rangle$ 上取 $-1$，在 $\lvert 0\rangle$ 上取 $+1$），所以两项恰好反号相消。这就是 Lean 证明里“相隔的两个格点之间只贡献一次符号反转”。（2）把 $c_j$ 换成 $c_j^\dagger$，第 $i$ 位的因子还是 $\sigma^-$ 与 $Z$ 的两种次序，同样相消。（3）$i = j$ 时左边的 $Z$ 串平方成 $I$，剩下第 $i$ 位的 $\sigma^-\sigma^+ + \sigma^+\sigma^- = \lvert 0\rangle\langle 0\rvert + \lvert 1\rangle\langle 1\rvert = I$：占据与空两类基态各被一项恰好覆盖一次。完整证明由 Lean 内核检查。
+:::
+
+::: {.example #ex-jordan-wigner-two-sites title="两个格点：没有 Z 串就没有 −1"}
+取 $N = 2$：$c_0 = \sigma^- \otimes I$，$c_1 = Z \otimes \sigma^-$。以下都是手工推导，并已用 $N = 2, 3$ 的显式矩阵逐项核对。
+
+- **$-1$ 来自 $Z$ 串。** $c_0 c_1 + c_1 c_0 = (\sigma^- Z + Z\sigma^-) \otimes \sigma^- = (-\sigma^- + \sigma^-) \otimes \sigma^- = 0$。若把 $c_1$ 换成没有尾巴的 $I \otimes \sigma^-$，两个算子作用在不同比特上，彼此对易，反对易子变成 $2\,\sigma^- \otimes \sigma^- \ne 0$。
+- **交换创建次序翻一个号。** $c_1^\dagger = Z \otimes \sigma^+$，其中 $\sigma^+ = \lvert 1\rangle\langle 0\rvert$。从空态出发：$c_0^\dagger c_1^\dagger \lvert 00\rangle = c_0^\dagger \lvert 01\rangle = \lvert 11\rangle$；反过来 $c_1^\dagger c_0^\dagger \lvert 00\rangle = c_1^\dagger \lvert 10\rangle = (Z\lvert 1\rangle) \otimes \lvert 1\rangle = -\lvert 11\rangle$。同一个双粒子态，按两种次序造出来差一个负号。
+- **泡利不相容。** $(c_j^\dagger)^2$ 在第 $j$ 位是 $(\sigma^+)^2 = 0$：同一个格点不能放两个粒子。
+- **跳跃项的局域性。** 相邻跳跃 $c_j^\dagger c_{j+1}$ 里，格点 $0, \dots, j-1$ 上的 $Z$ 串两两平方成 $I$，第 $j$ 位剩下 $\sigma^+ Z = \sigma^+$，所以 $c_j^\dagger c_{j+1} = \sigma^+_j \sigma^-_{j+1}$，只碰两个相邻比特。隔一位跳跃则多出一个 $Z$：$c_0^\dagger c_2 = \sigma^+ \otimes Z \otimes \sigma^-$，中间那个格点被“问了一次占据数”。
+:::
+
+一维链上，最近邻跳跃保持局域，代价只是一个看不见的奇偶尾巴。
+
+::: {.remark #rem-jordan-wigner-literature title="Jordan–Wigner 与高维编码（文献结果，未在本书形式化）"}
+以下是**文献结果，未在本书形式化**：
+
+- 这一构造出自 P. Jordan 与 E. Wigner（*Z. Phys.* **47**, 631–651, 1928）；
+- 自旋与统计之间的一般联系是自旋—统计定理；
+- 在二维格点上，通常的一维排序会使一些跳跃项带上长 $Z$ 串而变为非局域；可采用 Bravyi–Kitaev（2002）或 Verstraete–Cirac（2005）等其他编码来改变这种代价。
+:::
+
+> 费米子的负号不住在粒子里，住在它左边那一串奇偶里。
 
 ## 把编织首尾相接：Markov 稳定化与着色计数 {#sec-markov-stabilization-coloring-count}
 
@@ -454,6 +497,10 @@ $$
 2. **不变量只会说“不同”。** 计数不同，两个编织一定不是 Markov 等价的；计数相同，什么也推不出。
 3. **幂等公理省不得。** `coloringCount` 对任意有限的架都有定义，定理却要求 `[Quandle Q]`。[@ex-fox-three-colorings-markov] 的最后一步给出一个三元素的架，它的计数在一次稳定化下从 $3$ 变成 $0$。
 
+::: {.viz src="braiding" preset="rack" height="500"}
+**不幂等的架：添一股就一个也回不来。** 颜色规则换成 $x \star y = y + 1$。左边一股、没有交叉，三个着色都回得来。右边添一股、交叉一次：新股抄来的 $0$ 过交叉变成 $0 \star 0 = 1$，接回来对不上（品红），九个着色一个也回不来。
+:::
+
 ::: {.example #ex-fox-three-colorings-markov title="三种颜色数出 3、3、9：$\sigma_1$、$\sigma_1^2$、$\sigma_1^3$ 的闭合着色与稳定化前后的同一个数（含文献说明，未在本书形式化）"}
 **文献结果，未在本书形式化。** 下表“闭合的图形”一列（哪个编织闭合成哪个结或链环）是几何识别，属于经典纽结理论。本例的全部计数由穷举得到（每一个都可以手算核对），属手工推导，不是 Lean 结论；Lean 验证的是 [@thm-quandle-coloring-markov-invariant] 所断言的相等关系。
 
@@ -495,10 +542,6 @@ $$
 
 ::: {.viz src="braiding" preset="trefoil" height="500"}
 **$\sigma_1$ 与 $\sigma_1^3$ 数出不同的数。** 左边 $\sigma_1$，右边 $\sigma_1^3$，颜色都从 $(0, 1)$ 出发：左边接回来对不上（品红），右边对得上（青色）。回得来的着色左边 $3$ 个，右边 $9$ 个；$3 \ne 9$，按 [@thm-quandle-coloring-markov-invariant] 两者不是 Markov 等价的。
-:::
-
-::: {.viz src="braiding" preset="rack" height="500"}
-**不幂等的架：添一股就一个也回不来。** 颜色规则换成 $x \star y = y + 1$。左边一股、没有交叉，三个着色都回得来。右边添一股、交叉一次：新股抄来的 $0$ 过交叉变成 $0 \star 0 = 1$，接回来对不上（品红），九个着色一个也回不来。
 :::
 
 ::: {.remark #rem-alexander-markov-literature title="Artin、Alexander 与 Markov：从代数 Markov 类到链环不变量（文献结果，未在本书形式化）"}

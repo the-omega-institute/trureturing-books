@@ -12,7 +12,7 @@ Across the twenty-eight chapters of Parts I–VII, we have traveled from pairwis
 
 ## Pythagoras, "All Is Number," and the Four-Tier Escape of Number {#sec-coda-pythagoras-all-is-number}
 
-If we compress all thirty-two chapters of this monograph back into the foundational seed of mathematical civilization, we find that the entire architecture was already latent twenty-five centuries ago in the twin mottoes of the Pythagorean school: **the Pythagorean Theorem ($a^2 + b^2 = c^2$)** and **"All Is Number" ($\pi\alpha\nu\tau\alpha\ \dot{\alpha}\rho\iota\theta\mu\acute{o}\varsigma$ / 万物皆数)**. Viewed through Clifford geometric algebra and a formal proof kernel, these two ancient principles unfold as a three-act geometric drama.
+If we compress all thirty-nine chapters of this monograph back into the foundational seed of mathematical civilization, we find that the entire architecture was already latent twenty-five centuries ago in the twin mottoes of the Pythagorean school: **the Pythagorean Theorem ($a^2 + b^2 = c^2$)** and **"All Is Number" ($\pi\alpha\nu\tau\alpha\ \dot{\alpha}\rho\iota\theta\mu\acute{o}\varsigma$ / 万物皆数)**. Viewed through Clifford geometric algebra and a formal proof kernel, these two ancient principles unfold as a three-act geometric drama.
 
 ### Act I: The True Face of the Pythagorean Theorem—1D Segments Cannot Add, 2D Areas Conserve {#sec-coda-pythagoras-act1}
 
@@ -175,13 +175,14 @@ When "number" is reduced to a static noun (`shù`), every number system is inevi
 | Sphere Tier | Number Domain & Landmark Constants | Generative Geometric / Algebraic Operator (Verb `shǔ`) | Internal Closure Law (Noun `shù`) | The Crack & Remainder Forcing Escape to the Next Sphere |
 | :--- | :--- | :--- | :--- | :--- |
 | **Tier 1 Sphere** | Integers $\mathbb{Z}$ & Rationals $\mathbb{Q}$<br/>(ratio marks $m/n$) | $0^\circ$ collinear Euclidean algorithm and linear addition/subtraction | Finite commensurable closure on a 1D rational ruler: $n \cdot (m/n) = m$ | $90^\circ$ orthogonal Pythagorean squaring $1^2 + 1^2 = 2$ triggers a $2$-adic parity clash (for the Pell remainder, see [@thm-ch29-silver-pell-remainder]; for the continued-fraction identification, [@rem-ch29-pell-convergents-literature]) |
-| **Tier 2 Sphere** | Algebraic Irrationals $\overline{\mathbb{Q}}$<br/>(diagonal $\sqrt{2}$, golden ratio $\varphi = \frac{1+\sqrt{5}}{2}$) | Finite-dimensional orthogonal Pythagorean area conservation $a^2 + b^2 = c^2$ and polynomial root extraction | Finite algebraic polyhedral closure: $x^2 - 2 = 0$, $x^2 - x - 1 = 0$ ([`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique)) | Infinite $2^k$-gon cyclotomic halving limit (for classical arc-transcendence literature notes, see [@rem-banach-dottie-hairy-ball-literature]) |
+| **Tier 2 Sphere** | Algebraic Numbers $\overline{\mathbb{Q}}$<br/>(diagonal $\sqrt{2}$, golden ratio $\varphi = \frac{1+\sqrt{5}}{2}$) | Finite-dimensional orthogonal Pythagorean area conservation $a^2 + b^2 = c^2$ and polynomial root extraction | Finite algebraic polyhedral closure: $x^2 - 2 = 0$, $x^2 - x - 1 = 0$ ([`golden_fixed_point_unique`](lean:D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique)) | Infinite $2^k$-gon cyclotomic halving limit (for classical arc-transcendence literature notes, see [@rem-banach-dottie-hairy-ball-literature]) |
 | **Tier 3 Sphere** | Elementary Period Constants<br/>(circle constant $\pi$, natural base $e$) | Infinite Pythagorean half-angle iteration $\sin(\theta/2) = \sqrt{(1-\cos\theta)/2}$ and exponential map $e^{i\theta} = \cos\theta + i\sin\theta$ | Static unit-circle and spherical period closure: $e^{i\pi} + 1 = 0$, $\cos(\pi/2) = 0$ | Arc input $\theta$ and chord projection $\cos\theta$ remain split across the operator (for nonzero algebraic residuals, see [@rem-banach-dottie-hairy-ball-literature]) |
 | **Tier 4 Sphere** | Self-Referential Cosine Fixed Point<br/>(Dottie constant $\theta^*$) | Self-referential feedback $\theta_{k+1} = \cos(\theta_k)$ equating the Pythagorean leg projection $\cos\theta$ with the arc angle $\theta$ itself | Operator-coordinate unification: $\cos(\theta^*) = \theta^*$ (the real-axis projection of $\psi = \psi(\psi)$) | Classical transcendence literature in [@rem-banach-dottie-hairy-ball-literature]; algebraic-independence frontier with $\pi, e$ in open conjecture [@conj-schanuel-dottie] (`OPEN`) |
 
 :::
 
 Seen through this four-tier table, Pythagoras and the overarching thesis of this book converge into a single arc:
+
 - In the **Tier 1 Sphere**, we measure back and forth along a single line and mistake rational ratios $m/n$ for the whole universe;
 - The Pythagorean theorem erects an orthogonal axis and uses area conservation $1^2 + 1^2 = (\sqrt{2})^2$ to propel us into the **Tier 2 Sphere** of algebraic polyhedra;
 - Applying the Pythagorean theorem infinitely many times to inscribed $2^k$-gons bends polygonal chords into circular arcs, crystallizing $\pi$ and closing the static **Tier 3 Sphere**;
@@ -245,6 +246,10 @@ In the Lean file, part 1 is a single wrapper: $p \bmod 4 = 1$ gives $p \bmod 4 \
 :::
 
 Geometrically, $p = a^2 + b^2$ says that the circle of radius $\sqrt{p}$ passes through the lattice point $(a, b)$; part 2 writes this as the product of a conjugate pair of vectors in the Gaussian plane, $p = (a + bi)(a - bi)$. Read $i$ as the bivector generator $\hat{\mathbf{I}}$ introduced above, and the prime $p$ spans an orthogonal face: hence the name "plane prime." A line prime, in turn, has an even stronger rigidity: not only is it not a sum of two squares itself, but as soon as it divides a sum of two squares it must divide both legs.
+
+::: {.viz src="pythagoras-number-escape" preset="five" height="500"}
+**Plane primes and line primes.** When the circle of radius $\sqrt{p}$ passes through a lattice point, $p = a^2 + b^2$ is a plane prime, and squaring $a + bi$ gives an integer right triangle; step through the odd primes with the rail under the figure, and for $p \equiv 3 \pmod 4$ the circle touches no lattice point at all.
+:::
 
 ::: {.lemma #lem-ch29-line-prime-descent title="A Prime Congruent to 3 Modulo 4 That Divides a Sum of Two Squares Divides Both Bases" lean="D5/S3/PrimeForms/ThreeModFourDescent.prime_dvd_dvd_of_dvd_sq_add_sq"}
 Let $q$ be a prime with $q \bmod 4 = 3$, and let $a, b$ be natural numbers. If $q \mid a^2 + b^2$, then $q \mid a$ and $q \mid b$.
@@ -333,16 +338,12 @@ which are exactly the two legs read off from the Gaussian product $(1 + i)(22 + 
    In this book's geometric reading, a $-1$ chiral twist can never arise in isolation on a single prime axis; it must cancel in pairs across places, an arithmetic echo of the principle of Chapter 10 that "pairwise comparison is always consistent and order-independent."
 :::
 
-::: {.viz src="pythagoras-number-escape" preset="five" height="500"}
-**Plane primes and line primes.** When the circle of radius $\sqrt{p}$ passes through a lattice point, $p = a^2 + b^2$ is a plane prime, and squaring $a + bi$ gives an integer right triangle; step through the odd primes with the rail under the figure, and for $p \equiv 3 \pmod 4$ the circle touches no lattice point at all.
-:::
-
 ### Pillar 2: Intersecting Two Quadratic Seams ($2 \times 2 = 4$)—From a Single Quadric to the Congruent-Number Elliptic Curve Torus {#sec-coda-congruent-elliptic-torus}
 
 Passing from a single quadratic conic to the classical congruent-number problem—where a rational right triangle simultaneously satisfies a Pythagorean hypotenuse constraint and a prescribed orthogonal area—leads to the following classical algebraic-geometric and Riemann-surface structure:
 
 ::: {.remark #rem-ch29-elliptic-torus-literature title="Congruent-Number Birational Reduction, Complex Elliptic-Curve Torus Topology, and Abelian Group Law (Literature result, not formalized in this book)"}
-**Literature result, not formalized in this book.** In classical number theory, algebraic geometry, and Riemann-surface theory (outside the `trureturing@dev` formalization locked by this book), passing from one quadric to the intersection of two quadrics is governed by the following results:
+**Literature result, not formalized in this book.** In classical number theory, algebraic geometry, and Riemann-surface theory (outside the `trureturing@dev` formalization locked by this book), passing from a single conic to the intersection of two quadric surfaces in projective three-space $\mathbb{P}^3$ is governed by the following results:
 
 - **From a genus-$0$ conic to the congruent-number elliptic curve**: A single Pell equation $m^2 - d\,n^2 = \pm 1$ is a single quadratic conic of genus $g = 0$; over $\mathbb{C}$, a smooth projective curve of genus $0$ is topologically a 2-sphere $S^2$ with Euler characteristic $\chi(S^2) = 2$ (for the Hairy Ball obstruction, see Chapter 21, [@rem-hairy-ball-adams-literature]), which cannot support a globally nowhere-vanishing group flow without singularities. In the classical **Congruent Number Question**—which positive integers $d$ occur as the area of a rational right triangle $(a, b, c) \in \mathbb{Q}_{>0}^3$?—one simultaneously imposes two quadratic constraints:
 
@@ -350,7 +351,7 @@ Passing from a single quadratic conic to the classical congruent-number problem�
   a^2 + b^2 = c^2 \quad (\text{Pythagorean hypotenuse}), \qquad \frac{1}{2}ab = d \quad (\text{orthogonal bivector area}),
   $$
 
-  equivalently intersecting the two quadratic conics $(a + b)^2 = c^2 + 4d$ and $(a - b)^2 = c^2 - 4d$ in projective space (degree $2 \times 2 = 4$). Under the classical birational substitution $x = (a+c)/b,\; y = 2(a+c)/b^2$ (or $X = dx = d(a+c)/b,\; Y = d^2 y = 2d^2(a+c)/b^2$ for the standard Weierstrass model $Y^2 = X^3 - d^2 X$), this pair of Pythagorean constraints is birationally equivalent to the **congruent-number elliptic curve**:
+  equivalently intersecting the two quadric surfaces defined by $(a + b)^2 = c^2 + 4d$ and $(a - b)^2 = c^2 - 4d$ in projective three-space $\mathbb{P}^3$ after homogenization (degree $2 \times 2 = 4$). Under the classical birational substitution $x = (a+c)/b,\; y = 2(a+c)/b^2$ (or $X = dx = d(a+c)/b,\; Y = d^2 y = 2d^2(a+c)/b^2$ for the standard Weierstrass model $Y^2 = X^3 - d^2 X$), this pair of Pythagorean constraints is birationally equivalent to the **congruent-number elliptic curve**:
 
   $$
   E_d :\quad d\,y^2 = x^3 - x = x(x - 1)(x + 1),
@@ -359,6 +360,10 @@ Passing from a single quadratic conic to the classical congruent-number problem�
   whose three roots $0,\; +1,\; -1$ on the right-hand side mark the origin together with the $\pm 1$ seam boundaries.
 - **Complex torus topology and abelian group law**: Over $\mathbb{C}$, the Riemann surface $E_d(\mathbb{C}) \cong \mathbb{C}/(\mathbb{Z}\omega_1 \oplus \mathbb{Z}\omega_2)$ branched over $\{0, +1, -1, \infty\}$ is no longer a genus-$0$ 2-sphere $S^2$ ($\chi = 2$), but a **genus-$1$ torus $T^2 = S^1 \times S^1$ with Euler characteristic $\chi(T^2) = 2 - 2g = 0$**;
 - Because $\chi(T^2) = 0$, the even-sphere Hairy Ball obstruction (cf. [@rem-hairy-ball-adams-literature]) disappears on the torus: the invariant holomorphic differential $\omega = dx/y$ is everywhere nonvanishing and pole-free on the smooth projective curve $E_d$, endowing $E_d(\mathbb{Q})$ with a smooth global abelian group law $P \oplus Q$ (cf. [@rem-diophantine-z-in-q-literature] in Chapter 23 on Poonen's elliptic-curve divisibility method).
+:::
+
+::: {.viz src="hairy-ball-normal-escape" preset="torus" height="500"}
+**On a torus the arrows vanish nowhere.** On the torus $\bigl((R + r\cos\theta)\cos\phi,\, (R + r\cos\theta)\sin\phi,\, r\sin\theta\bigr)$ ($R > r > 0$) the cyan unit tangent vectors $\hat{\mathbf{e}}_\phi = (-\sin\phi, \cos\phi, 0)$ all point along the big circle, with length $1$ everywhere; the amber point goes once round, its arrow never shrinking, and there is no magenta ring of a zero on the torus. $\chi(T^2) = 0$, against $\chi(S^2) = 2$ for the sphere (literature result, not formalized in this book; see [@rem-ch29-elliptic-torus-literature]). The picture shows a surface of the same topology, not the elliptic curve itself.
 :::
 
 ### Pillar 3: Finite-Field Elliptic-Curve Reduction, the Frobenius Cosine, and the $S^3 \cong \mathrm{SU}(2)$ Projection {#sec-coda-hasse-sato-tate}
@@ -401,7 +406,7 @@ which is governed by two foundational theorems:
 :::
 
 ::: {.viz src="pythagoras-number-escape" preset="count" height="500"}
-**Counting points mod $13$.** Put $y^2 = x^3 - x$ into a grid of only $13$ numbers and check every cell: $4$ cyan lattice points, $3$ amber points with $y = 0$ and the point at infinity make $8$, six fewer than $p + 1 = 14$, so $a_{13} = 6$; the amber cosine on the right is $6/(2\sqrt{13}) \approx 0.832$. Since $13 = 3^2 + 2^2$ and $6 = 2 \cdot 3$, the deficit is twice the odd leg of the Gaussian triangle, as in item 2 above (literature result, not formalized in this book).
+**Counting points mod $13$.** Put $y^2 = x^3 - x$ into a grid of only $13$ numbers and check every cell: $4$ cyan lattice points, $3$ neutral branch points with $y = 0$ and the point at infinity make $8$, six fewer than $p + 1 = 14$, so $a_{13} = 6$. The ring of spins at the upper right places $x = 0, 1, \dots, 12$ on a circle and colours each by the Legendre symbol $\left(\frac{x^3 - x}{13}\right)$: $2$ cyan $+1$ (the column holds a pair of points $\pm y$), $8$ magenta $-1$ (the column is empty) and $3$ neutral $0$, summing to $-6$, which is $-a_{13}$ in the formula above; the amber cosine on the right is $6/(2\sqrt{13}) \approx 0.832$. Since $13 = 3^2 + 2^2$ and $6 = 2 \cdot 3$, the deficit is twice the odd leg of the Gaussian triangle, as in item 2 above (literature result, not formalized in this book).
 :::
 
 ::: {.remark #rem-ch29-gauss-character-application title="From Square Fibers to a Gaussian Triangle (Literature result, not formalized in this book)"}
@@ -497,7 +502,7 @@ The quartic integrality congruence corresponds to Mathlib's `exists_jacobiSum_eq
 [^gauss-jacobi-background]: Keith Conrad, *Gauss and Jacobi Sums*, author's notes, Theorem 2.4 and Corollary 2.5, on the norm of Gauss sums of nontrivial characters and the Jacobi-sum norm when both characters and their product are nontrivial. This citation supports only the norm step here, not the complete trace derivation for this curve.
 
 ::: {.remark #rem-ch29-arithmetic-geometry-literature title="Sato–Tate Equidistribution on Non-CM Elliptic Curves and Formalization Boundary (Literature result, not formalized in this book)"}
-**Literature result, not formalized in this book.** Passing to a generic elliptic curve over $\mathbb{Q}$ without extra complex-multiplication symmetry (such as $y^2 = x^3 - x + 1$), the asymptotic distribution of the normalized cosines $\cos\theta_p \in [-1, +1]$ as $p \to \infty$ over all primes of good reduction is established by the **Sato–Tate Theorem** (proved for non-CM elliptic curves over $\mathbb{Q}$ by Barnet-Lamb, Geraghty, Harris, and Taylor, *Ann. of Math.* **173**, 2011): $\theta_p \in [0, \pi]$ is equidistributed with respect to the **four-dimensional hyperspherical slice law**:
+**Literature result, not formalized in this book.** Passing to a generic elliptic curve over $\mathbb{Q}$ without extra complex-multiplication symmetry (such as $y^2 = x^3 - x + 1$), the asymptotic distribution of the normalized cosines $\cos\theta_p \in [-1, +1]$ as $p \to \infty$ over all primes of good reduction is established by the **Sato–Tate Theorem** (proved for non-CM elliptic curves over $\mathbb{Q}$ by Barnet-Lamb, Geraghty, Harris, and Taylor, *Publ. Res. Inst. Math. Sci.* **47**(1), 29–98 (2011)): $\theta_p \in [0, \pi]$ is equidistributed with respect to the **four-dimensional hyperspherical slice law**:
 
 $$
 d\mu_{\mathrm{ST}}(\theta) = \frac{2}{\pi}\sin^2\theta\,d\theta \quad \Longleftrightarrow \quad \frac{2}{\pi}\sqrt{1 - u^2}\,du \quad (u = \cos\theta \in [-1, +1]).
@@ -509,7 +514,7 @@ Across the first two sections of this chapter, the Lindemann–Weierstrass theor
 :::
 
 ::: {.viz src="pythagoras-number-escape" preset="sato" height="500"}
-**Another curve: the semicircle.** Switch to $y^2 = x^3 - x + 1$ (the violet points): line primes no longer sit at zero, and the Frobenius cosines scatter between $-1$ and $1$; at $p = 53$, for instance, the cosine is $0.137$. The histogram further down the page, over the primes below $3000$, follows the dashed amber semicircle law $\frac{2}{\pi}\sqrt{1 - u^2}$. A histogram over finitely many primes is only a numerical demonstration; the Sato–Tate distribution is the literature result of the remark above.
+**Another curve: the semicircle.** Switch to $y^2 = x^3 - x + 1$ (the cyan points): line primes no longer sit at zero, and the Frobenius cosines scatter between $-1$ and $1$; at $p = 53$, for instance, the cosine is $0.137$. On the right, the violet histogram over the $428$ primes of good reduction below $3000$ follows the dashed amber semicircle law $\frac{2}{\pi}\sqrt{1 - u^2}$, and the amber vertical line marks the $0.137$ of $p = 53$. A histogram over finitely many primes is only a numerical demonstration; the Sato–Tate distribution is the literature result of the remark above.
 :::
 
 In the overarching geometric synthesis of this book, starting from the Pell seam cracked open by Hippasus's right triangle ([@thm-ch29-silver-pell-remainder]) and reading across the arithmetic-geometry literature remarks above ([@rem-ch29-pell-primes-hilbert-literature], [@rem-ch29-elliptic-torus-literature], [@rem-ch29-hasse-gauss-literature], and [@rem-ch29-arithmetic-geometry-literature]), the point-count oscillations along the prime axes align visually with the cosine shadow cast by the quantum spinor sphere $S^3 \cong \mathrm{SU}(2)$ onto its diameter $[-1, +1]$.
@@ -588,12 +593,9 @@ $$
 :::
 
 This single equation exhibits two inseparable faces:
+
 - **Complete order-independence (timelessness)**: the relation is completely permutation-symmetric in $(A, B, C)$, with no "earlier cause" or "later effect";
 - **Absolute causal necessity (zero-degree-of-freedom rigidity)**: once $c_{AB}$ and $c_{BC}$ are fixed, spherical geometry locks $c_{AC}$ with zero slack! Likewise, mathematical deduction ($\text{Axioms} \implies \text{Theorems}$) is timeless crystal facet alignment, where the gate count $L$ of Chapters 9 and 16 merely counts how many steps an observer takes to rotate their measurement ruler into alignment with the target facet.
-
-::: {.viz src="timeless-causal-crystal" preset="edge" height="500"}
-**At the edge: all three coplanar.** Turn $\mathbf{C}$ to its nearest position to $\mathbf{A}$: the three vectors fall into one plane, the violet volume collapses to zero, and the amber $c_{AC}$ is exactly $\cos(60^\circ - 45^\circ)$, the minus-sign branch of the locus above.
-:::
 
 ::: {.film src="008-gram-window"}
 **Two cosines lock the third: the Gram window (1:39).** With $\theta_1 = 60^\circ$ and $\theta_2 = 45^\circ$ fixed, $\mathbf{C}$ goes once round $\mathbf{B}$: $c_{AC}$ swings through $[\cos 105^\circ, \cos 15^\circ]$, the violet volume collapses to zero at the edges, and a cosine outside the window would make $\det G$ negative. Then $\theta_2$ runs from $0^\circ$ to $180^\circ$ and the windows fill the slice of the Gram ellipse. Where the top edge reaches $1$, $\mathbf{C}$ lands exactly on $\mathbf{A}$, which is the second part of [@thm-ch29-gram-rigidity-and-pell]; every other number in the film is computed on screen.
@@ -604,7 +606,7 @@ This single equation exhibits two inseparable faces:
 From the standpoint of path integrals and the bivector chirality model, why does nature display only the causally necessary trajectory?
 
 ::: {.remark #rem-ch29-feynman-stationary-phase-literature title="Feynman Path-Integral Stationary Phase and the Bivector Chirality Interpretation (Literature result, not formalized in this book)"}
-**Literature result, not formalized in this book.** In the standard Feynman path-integral formulation of quantum mechanics (R. P. Feynman, *Rev. Mod. Phys.* **20**, 367, 1948; not formalized in `trureturing@dev`), virtual trajectories far from the classical path oscillate rapidly via $\exp(iS[x]/\hbar)$ and cancel by destructive phase interference, leaving constructive interference around the stationary-action locus $\delta S = 0$. In our Clifford geometric interpretation (`MODEL`), where the unit imaginary $i$ is realized as a grade-2 bivector generator $\hat{\mathbf{I}}$, an order-independent sum over configurations pairs off-shell trajectories into opposite-chirality bivector partners ($+\hat{\mathbf{I}}$ and $-\hat{\mathbf{I}}$) whose oriented area elements cancel:
+**Literature result, not formalized in this book.** In the standard Feynman path-integral formulation of quantum mechanics (R. P. Feynman, *Rev. Mod. Phys.* **20**, 367, 1948; not formalized in `trureturing@dev`), in the semiclassical stationary-phase approximation, rapid oscillations of $\exp(iS[x]/\hbar)$ suppress contributions away from stationary paths, and neighborhoods of paths satisfying $\delta S = 0$ dominate. In our Clifford geometric interpretation (`MODEL`), where the unit imaginary $i$ is realized as a grade-2 bivector generator $\hat{\mathbf{I}}$, an order-independent sum over configurations pairs off-shell trajectories into opposite-chirality bivector partners ($+\hat{\mathbf{I}}$ and $-\hat{\mathbf{I}}$) whose oriented area elements cancel:
 
 $$
 +\mathbf{\Omega} - \mathbf{\Omega} = 0.
@@ -614,6 +616,7 @@ Only the self-consistent stationary configuration ($\delta S = 0$) lacks an oppo
 :::
 
 This picture simultaneously reconciles the age-old rivalry between **mechanical determinism** and **teleology**:
+
 - Reading the page numbers **left to right** along the Picard iteration $\theta_{k+1} = \cos(\theta_k)$ from an initial state $\theta_0$ looks like **determinism** ("the past pushes the present step by step");
 - Reading the convergence **right to left** from the unique attractor $\theta^* \approx 0.7390851332$ looks like **teleology** ("the future fixed point pulls every trajectory toward itself");
 - Viewed from outside the sphere, in the timeless self-referential equation
@@ -637,7 +640,7 @@ If the global time field is a timeless geometric crystal and local causality pos
    \det G = (1 - c_{AB}^2)(1 - c_{BC}^2) - \bigl(c_{AC} - c_{AB}c_{BC}\bigr)^2 = \sin^2\theta_1\sin^2\theta_2 - \bigl(c_{AC} - \cos\theta_1\cos\theta_2\bigr)^2 \ge 0.
    $$
 
-   Denoting by $\phi \in [0, 2\pi)$ the dihedral angle between the two bivector planes $(\mathbf{A}\wedge\mathbf{B})$ and $(\mathbf{B}\wedge\mathbf{C})$, the spherical law of cosines parameterizes the causally compatible interval as:
+   Assume $0 < \theta_1, \theta_2 < \pi$ so that both rotation planes are nondegenerate. Denoting by $\phi \in [0, 2\pi)$ the dihedral angle between the two bivector planes $(\mathbf{A}\wedge\mathbf{B})$ and $(\mathbf{B}\wedge\mathbf{C})$, the spherical law of cosines parameterizes the causally compatible interval as:
 
    $$
    c_{AC} = \underbrace{\cos\theta_1\cos\theta_2}_{\text{locked 1D historical backbone}} + \underbrace{\cos\phi}_{\text{observer's choice degree of freedom }\in [-1, +1]} \cdot \underbrace{\sin\theta_1\sin\theta_2}_{\text{uncollapsed orthogonal area radius}}.
@@ -646,6 +649,10 @@ If the global time field is a timeless geometric crystal and local causality pos
    In the correlation coordinates $(x, y, z) = (c_{AB}, c_{BC}, c_{AC})$, the inequality $1 - x^2 - y^2 - z^2 + 2xyz \ge 0$ carves out the convex **Gram elliptope**:
    - **Boundary shell ($\cos\phi = \pm 1 \iff \det G = 0$)**: the three vectors lie in a single great-circle plane ($\mathbf{A}\wedge\mathbf{B}\wedge\mathbf{C} = 0$), representing coplanar inertial sliding with zero free volume ($c_{AC} = \cos(\theta_1 \mp \theta_2)$ is completely locked);
    - **Interior compatible space ($|\cos\phi| < 1 \iff \det G > 0$)**: as long as the previous transitions retain uncollapsed orthogonal area ($\sin\theta_1 > 0$ and $\sin\theta_2 > 0$), the observer can fold a dihedral angle $\phi \in (0, \pi)$ into a new orthogonal dimension ($\mathbf{A}\wedge\mathbf{B}\wedge\mathbf{C} \neq 0$), opening a genuine causal branch!
+
+::: {.viz src="gram-causal-elliptope" preset="elliptope" height="500"}
+**Two steps remembered: a slice of the swollen tetrahedron.** The violet swollen tetrahedron is every $(x, y, z)$ with $1 - x^2 - y^2 - z^2 + 2xyz \ge 0$. In the picture $\mathbf{P}_0$ is the current point and $\mathbf{Q}$ the candidate next one; the history fixes $x = \mathbf{P}_0\cdot\mathbf{P}_{-1}$, so $\mathbf{Q}$ can only put $(y, z) = (\mathbf{Q}\cdot\mathbf{P}_{-1},\, \mathbf{Q}\cdot\mathbf{P}_0)$ in the slice at $x$, whose edge is the magenta ellipse ($\det G = 0$). The cyan segment running vertically through the amber $\mathbf{Q}$ is the window for $z$, $[xy - \sqrt{(1-x^2)(1-y^2)},\, xy + \sqrt{(1-x^2)(1-y^2)}]$. This description of the elliptope is a literature result, not formalized in this book.
+:::
 
 2. **Continuously Picking Points in the Time Field (`不断在时间场中选点`) as PSD Matrix Completion**:
    The global time field is a static photographic plate of potential state points obeying pairwise consistency and order-independence. Yet any physical observer is **finite** in compute, lifetime, and memory capacity (corresponding to the finite gate count $L$ of Chapter 20 and the finite record algebra of Chapter 28):
@@ -658,6 +665,16 @@ If the global time field is a timeless geometric crystal and local causality pos
    - Carrying $M$ finite historical memory anchors at $\mathbf{P}_k$, picking the next point $\mathbf{P}_{k+1}$ is mathematically a **Positive-Semidefinite (PSD) Matrix Completion ($G_{M+1} \succeq 0$)** inside the green compatible bubble carved out by those $M$ anchors;
    - Once $\mathbf{P}_{k+1}^*$ is chosen, the dihedral angle $\phi_k$ solidifies into a new 1D inner-product coordinate (the verb `liáng` crystallizing into the noun `liàng`), immediately framing the compatible bubble for step $k + 2$.
 
+::: {.viz src="gram-causal-elliptope" preset="narrow" height="500"}
+**One more step remembered, one ring narrower.** The rail adds history from $M = 1$ to $M = 5$: each older anchor adds a magenta ellipse to the slice, nested inside the last, and the cyan window through the amber $\mathbf{Q}$ narrows with it, from all of $[-1, 1]$ to about a quarter of that, with $\mathbf{Q}$ inside throughout. The events live in $\mathbb{R}^6$, so every depth keeps an inside; reading the compatible space as a finite observer's room for choice is this book's interpretation (`MODEL`).
+:::
+
+Conversely, if the new inner-product coordinates are forced outside the bubble, the Gram table stops being positive semidefinite and fits in no inner-product space:
+
+::: {.viz src="gram-causal-elliptope" preset="violate" height="500"}
+**Filled in outside the bubble: the fifth minor turns negative first.** Five steps are remembered, but $z$ is placed inside the third ring and outside the fourth, so the amber $\mathbf{Q}$ becomes a hollow ring. In the order $\mathbf{Q}, \mathbf{P}_0, \mathbf{P}_{-1}, \dots$ the first four leading principal minors are still nonnegative and $D_5$ turns negative first: the thickened fourth ring is the one that refuses it (Sylvester's criterion, a literature result not formalized in this book).
+:::
+
 3. **Omniscient Deadlock, Forgetting-as-Renewal, and the Golden Breath of $\theta^* \approx 0.739$**:
    The interplay between historical memory and orthogonal slack across three observer regimes is summarized below:
 
@@ -666,6 +683,12 @@ If the global time field is a timeless geometric crystal and local causality pos
 | **Infinite Omniscient Observer**<br/>（无限全知观察者） | Orthogonal slack exhausted: $\sin\theta \to 0$, $M \to \infty$ | $\det G = 0$, compatible radius collapses to $0$ | **Omniscient Deadlock**: welded into the timeless static crystal (cf. [@rem-ch29-wheeler-dewitt-page-wootters-literature]) with zero room for choice or motion |
 | **Zero-Memory Instantaneous Observer**<br/>（零记忆瞬时观察者） | Historical backbone lost: $\cos\theta \to 0$, $M = 0$ | Compatible radius $\sin\theta = 1$ unconstrained | **Maximum Sphere Noise**: devoid of causal continuity, every step degenerates into memoryless random drift |
 | **Finite Self-Referential Prototype**<br/>（有限自指观察者原型，`MODEL`） | Modeled by the 1D Dottie fixed point $\cos\theta^* = \theta^* \approx 0.7391$, $\sin\theta^* \approx 0.6736$ | $\det G > 0$, open corridor radius $(\sin\theta^*)^2 \approx 0.4538 > 0$ | **Golden Breath (`MODEL`)**: a geometric metaphor balancing a $\approx 73.9\%$ causal backbone with $\approx 67.4\%$ orthogonal slack for renewal |
+
+::: {.viz src="gram-causal-elliptope" preset="flat" height="500"}
+**No fourth direction: the bubble keeps only its edge.** Squeeze the same history back into three dimensions (only $E_\parallel$): four or more vectors span no volume, and the whole table has $\det G = 0$. At the third depth the magenta bubble keeps only its dashed edge; at the fourth and fifth only isolated points can be realized, the window for $z$ shrinks to one value, and the amber $\mathbf{Q}$ is pinned there. Reading this as the compatible radius collapsing to $0$ in the "Infinite Omniscient Observer" row of the table above is this book's interpretation (`MODEL`).
+:::
+
+At the other end of the table stands the zero-memory instantaneous observer, with the window wide open:
 
 ::: {.viz src="timeless-causal-crystal" preset="right" height="500"}
 **Two right angles: the window is wide open.** With $\theta_1 = \theta_2 = 90^\circ$ the cyan and magenta cosines are both $0$ and put no constraint on the third: the window is all of $[-1, 1]$, $\mathbf{C}$ can travel anywhere along the equator, and the amber $c_{AC}$ runs from $-1$ to $1$. Reading this as the "Zero-Memory Instantaneous Observer" row of the table above is this book's interpretation (`MODEL`).
@@ -709,5 +732,10 @@ Part 1 expands $(2a + b)^2 - 5b^2 = 4a^2 + 4ab + b^2 - 5b^2 = 4(a^2 + ab - b^2) 
 ## Chapter Summary: From the Arithmetic Seam to the Timeless Causal Crystal {#sec-ch29-summary}
 
 This chapter has unified Pythagorean area conservation, the Pell remainder and best-approximation lower bound of the silver slope $\sqrt{2} - 1$ ([@thm-ch29-silver-pell-remainder], [@thm-ch29-silver-best-approximation]), the golden-integer Pell norm identity, unit-vector Gram overlap equivalence ([@thm-ch29-gram-rigidity-and-pell]), and the plane-prime and two-squares criteria ([@thm-ch29-face-prime-two-squares], [@thm-ch29-two-squares-classification])—alongside the continued-fraction and arithmetic-geometry literature remarks ([@rem-ch29-pell-convergents-literature], [@rem-ch29-pell-primes-hilbert-literature], [@rem-ch29-elliptic-torus-literature], [@rem-ch29-hasse-gauss-literature], [@rem-ch29-arithmetic-geometry-literature]) and the timeless-constraint and stationary-phase literature remarks ([@rem-ch29-wheeler-dewitt-page-wootters-literature], [@rem-ch29-feynman-stationary-phase-literature])—with Spinoza's geometric necessity and the finite observer's Gram elliptope ($\det G \ge 0$): **because the global field is timeless, truth endures forever; because the observer is finite, every step is new.**
+
+::: {.viz src="gram-causal-elliptope" height="640"}
+**Interactive lab `ORTHO//ELLIPTOPE`**: the multi-step memory windows of a finite observer. The stage is the three-element Gram elliptope and its slice at the history's $x$; the magenta ellipses bound the next step's $(y, z)$ with $M = 2, \dots, 5$ steps remembered, the cyan segment is the window for $z$, and the ladder strip gives the leading principal minors. Switch to $\mathbb{R}^3$ to see that four or more vectors span no volume: at the third depth the bubble keeps only its edge, and from the fourth only isolated points. That is why the events are taken in $\mathbb{R}^6$. The description of the three-element elliptope and Sylvester's criterion are literature results, not formalized in this book; reading $G \succeq 0$ as the causally compatible space is this book's interpretation (`MODEL`).
+:::
+
 
 In [Chapter 30](ch30-fields-lines-eth-and-navier-stokes.md), we carry this tension between the global static field and the finite observer to the twin peaks of computational complexity and continuum fluid dynamics—examining **$\mathrm{P}$ vs. $\mathrm{NP}$**, the **Exponential Time Hypothesis (ETH) and 2026 tensor-network rank reduction**, and **three-dimensional Navier–Stokes vortex filaments**.

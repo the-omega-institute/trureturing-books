@@ -84,10 +84,12 @@ for (let l = 0; l < 8 && !rwBad; l++) for (let r = 0; r < 8; r++) {
 check('64 rewrites: swaps = inversions, each swap flips the sign, equal pairs cancel, the last string is the product blade', !rwBad, rwBad);
 
 /* ---------- cards ---------- */
-await pick('e1e2'); st = await state(); let x = await info();
-check('E1·E2: e₁ · e₂ = +e₁₂ with no swap and nothing to cancel', st.l === 1 && st.r === 2 && x.sign === 1 && x.mask === 3 && x.steps.length === 0 && cl3(1, 2).sign === 1);
-await pick('e2e1'); await page.keyboard.press('End'); x = await info();
-check('E2·E1: e₂ · e₁ = −e₁₂ after one swap', x.sign === -1 && x.mask === 3 && x.swaps === 1 && cl3(2, 1).sign === -1);
+await pick('e2e1'); await page.keyboard.press('End'); st = await state(); let x = await info();
+check('E2·E1: e₂ · e₁ = −e₁₂ after one swap', st.l === 2 && st.r === 1 && x.sign === -1 && x.mask === 3 && x.swaps === 1 && cl3(2, 1).sign === -1);
+tab = await D(() => window.BX_DEBUG.table());
+check('E2·E1: the note\'s other order, e₁ · e₂ = +e₁₂, needs no swap, and the two cells mirror each other across the diagonal',
+  cl3(1, 2).sign === 1 && cl3(1, 2).mask === 3 && inversions(1, 2) === 0 && eq(tab[1][2], { mask: 3, sign: 1 }) && eq(tab[2][1], { mask: 3, sign: -1 }));
+check('E2·E1: the note names both orders and both colours', /e₁ · e₂/.test(await text('#presetNote')) && /青色/.test(await text('#presetNote')) && /品红/.test(await text('#presetNote')));
 await pick('square'); st = await state(); x = await info();
 check('E12²: e₁₂ · e₁₂ = −1: one swap, two cancelled pairs', st.l === 3 && st.r === 3 && st.hl === 'diag' && x.sign === -1 && x.mask === 0 && x.swaps === 1 && x.cancels === 2 && eq(cl3(3, 3), { mask: 0, sign: -1 }));
 check('E12²: on the diagonal 1, e₁, e₂, e₃ square to +1 and e₁₂, e₁₃, e₂₃, I₃ to −1', [0, 1, 2, 4].every((m) => cl3(m, m).sign === 1) && [3, 5, 6, 7].every((m) => cl3(m, m).sign === -1)

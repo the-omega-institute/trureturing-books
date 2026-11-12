@@ -43,7 +43,7 @@ $$
 :::
 
 ::: proof
-在 Lean 4 源码 `D5/S3/Quantum/FiniteDimensional.lean:24` 中，证明通过三次 `constructor` 将五个合取项依次拆开，对每一条矩阵等式调用外延性策略 `ext i j`，并对有限指标 `i, j : Fin 2` 施行穷举分析 `fin_cases i <;> fin_cases j`，最后由 `simp [qubitX, qubitZ, pow_two, Matrix.mul_apply, Fin.sum_univ_two]` 直接展开 $2\times 2$ 矩阵乘法与共轭转置完成检验。用显式矩阵计算写出：
+在 Lean 4 源码 `D5/S3/Quantum/FiniteDimensional.lean:24` 中，证明通过四次 `constructor` 将五个合取项依次拆开，对每一条矩阵等式调用外延性策略 `ext i j`，并对有限指标 `i, j : Fin 2` 施行穷举分析 `fin_cases i <;> fin_cases j`，最后由 `simp [qubitX, qubitZ, pow_two, Matrix.mul_apply, Fin.sum_univ_two]` 直接展开 $2\times 2$ 矩阵乘法与共轭转置完成检验。用显式矩阵计算写出：
 
 $$
 \operatorname{qubitZ}\cdot\operatorname{qubitX} = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix} = -\begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} = -(\operatorname{qubitX}\cdot\operatorname{qubitZ}),
@@ -175,12 +175,8 @@ $$
    \operatorname{sign}(\mathrm{left}, \mathrm{right}) = (-1)^{\operatorname{inv}(\mathrm{left}, \mathrm{right})}.
    $$
 
-::: {.viz src="blade-multiplication" preset="e1e2" height="500"}
-**不用交换：e₁ · e₂ = +e₁₂。** 两块刀片各占一位，掩码 001₂ ⊕ 010₂ = 011₂；右栏的两枚因子已经按顺序排好，没有交叉的线，表里这一格是青色。
-:::
-
 ::: {.viz src="blade-multiplication" preset="e2e1" height="500"}
-**交换一次，变一次号：e₂ · e₁ = −e₁₂。** 掩码的异或不变，仍是 011₂；右边的 e₁ 要越过左边的 e₂，两条品红的线交叉一次，符号变成 −，表里这一格是品红。
+**交换一次，变一次号：e₂ · e₁ = −e₁₂。** 两种次序的掩码异或都是 001₂ ⊕ 010₂ = 011₂。e₁ · e₂ 的两枚因子已经按顺序排好，不用交换，表里那一格是青色；e₂ · e₁ 右边的 e₁ 要越过左边的 e₂，右栏两条品红的线交叉一次，符号变成 −，表里这一格是品红。
 :::
 
 请特别注意表中两处最容易混淆的对应关系，我们在代码与正文中将它们严格区分、保持百分之百自洽：
@@ -190,6 +186,11 @@ $$
   I_3^2 = (e_1 e_2 e_3)(e_1 e_2 e_3) = (-1)^3 e_1^2 e_2^2 e_3^2 = -1!
   $$
   在复矩阵表示 $e_1 \mapsto X, e_2 \mapsto Y, e_3 \mapsto Z, I_3 \mapsto i I_2$ 下，赤道双矢量 $e_1 e_2$ 恰等于 $I_3 e_3 \leftrightarrow iZ$（同理 $e_2 e_3 = I_3 e_1 \leftrightarrow iX$，$e_3 e_1 = -e_1 e_3 = I_3 e_2 \leftrightarrow iY$）。
+
+::: {.viz src="blade-multiplication" preset="pseudo" height="500"}
+**伪标量的平方：I₃ · I₃ = −1。** 三位全部抵掉（⊕ 那一行三个青色的叉）；右栏里品红的交叉共 0 + 1 + 2 = 3 次，是奇数，结果是 −1。紫色框住的 I₃ 那一行与那一列逐格相同：I₃ 与每块刀片对易。
+:::
+
 - **两比特辛泡利字（2-bit symplectic Pauli encoding `pauli(x, z, phase)`）**：在第四部稳定子码与本章 [@thm-qubit-weyl-star] 的外尔对语言里，人们常把由两个反对易对合生成元（记作 $X_{\mathrm{sym}}$ 与 $Z_{\mathrm{sym}}$）生成的二元泡利词编码为两比特辛向量 $(x, z) \in \{0, 1\}^2$。在下面的 `GeometricState.pauli(x, z, phase)` 方法中，我们将辛比特 $x \in \{0,1\}$ 绑定到第 $0$ 位（刀片 $e_1$，掩码 `1`），将辛比特 $z \in \{0,1\}$ 绑定到第 $1$ 位（刀片 $e_2$，掩码 `2`），即
   $$
   \mathrm{mask}(x, z) = x \;\texttt{|}\; (z \ll 1) \in \{0, 1, 2, 3\}.
@@ -198,10 +199,6 @@ $$
   $$
   \operatorname{pauli}(1, 0) \cdot \operatorname{pauli}(0, 1) = e_1 e_2 = -\operatorname{pauli}(0, 1) \cdot \operatorname{pauli}(1, 0)!
   $$
-
-::: {.viz src="blade-multiplication" preset="pseudo" height="500"}
-**伪标量的平方：I₃ · I₃ = −1。** 三位全部抵掉（⊕ 那一行三个青色的叉）；右栏里品红的交叉共 0 + 1 + 2 = 3 次，是奇数，结果是 −1。紫色框住的 I₃ 那一行与那一列逐格相同：I₃ 与每块刀片对易。
-:::
 
 此外，对任意 $k$-阶刀片（$k = \operatorname{popcount}(m)$），把因子顺序完全颠倒的**逆序共轭（reversion）** $\widetilde{E}_m$ 需要做 $\frac{k(k-1)}{2}$ 次相邻对换，符号为 $(-1)^{k(k-1)/2}$：对 $k \in \{0, 1\}$ 为 $+1$，对 $k \in \{2, 3\}$ 为 $-1$。
 
@@ -235,6 +232,10 @@ $$
 :::
 
 结论 4 的指数 $bc - ad$ 是两个下标对 $(a, b)$ 与 $(c, d)$ 的**辛配对**：交换两对下标它变号，与自己配对为零。由结论 3 可以读出对易判据（手工推导，未在本书形式化；Lean 模块本身不陈述这一推论）：$D(c, d)\,D(a, b)$ 可逆，所以 $D(a, b)$ 与 $D(c, d)$ 对易当且仅当 $\omega^{\,bc - ad} = 1$，即 $bc - ad \equiv 0 \pmod M$。
+
+::: {.figure src="ch25-weyl-clock"}
+**$M = 3$ 时交换一次不是变号，而是转过 $120^\circ$。** 左栏是三能级系统的三个基矢 $\lvert 0\rangle, \lvert 1\rangle, \lvert 2\rangle$：青色的箭头是移位 $X$，把每个基矢沿环推到下一个，紫色的 $1, \omega, \omega^2$ 是时钟 $Z$ 给它们的相位。右栏是相位的单位圆：由合成律，$ZX = \omega\,XZ$，紫色的弧从 $XZ$ 转过 $120^\circ$ 到 $ZX$；虚线是 $M = 2$ 时的同一段弧，转过 $180^\circ$ 落在 $-1$，即变号（[@thm-weyl-displacement-laws]）。
+:::
 
 多个 $M$ 能级系统并排时的乘法律已在[第十四章](ch14-cloning-codes-and-braids.md) [@lemma-pauli-word-phase] 中引用：那里的交叉相位指数 $\sum_n a.z_n \cdot b.x_n$，就是本定理结论 1 的指数 $bc$ 逐个系统求和。
 

@@ -131,8 +131,16 @@
     g.dot(V, D, P.amber, 6.5 * (TRV.thumbMode ? 1.5 : 1), { glow: 14 });
     if (!words) return;
     const lab = (x, y, str, col, al, dx, dy) => text(ctx, str, g.X(x) + (dx || 0), g.Y(y) + (dy || 0), col, { align: al || 'center', size: 12 });
-    lab(1, 0, 'r_L', P.ink, 'left', 4, -12);
-    lab(c, s, 'r_R', P.amber, c > 0.35 ? 'left' : 'left', 10, -10);
+    // r with a true subscript (L or R), not an underscore
+    const labR = (x, y, sub, col, dx, dy) => {
+      const X = g.X(x) + dx, Y = g.Y(y) + dy;
+      text(ctx, 'r', X, Y, col, { size: 13 });
+      const w = ctx.measureText('r').width;
+      text(ctx, sub, X + w + 0.5, Y + 4, col, { size: 9.5 });
+    };
+    labR(1, 0, 'L', P.ink, 4, -12);
+    if (s < 0.15) labR(c, s, 'R', P.amber, 4, -30);                 // near α = 0 the two labels would sit on each other: stack r_R above r_L
+    else labR(c, s, 'R', P.amber, 10, -10);
     lab(V / 2, 0, `V = ${fix(V, 2)}`, P.cyan, 'center', 0, 16);
     if (D > 0.04) lab(c, D / 2, `D = ${fix(D, 2)}`, P.magenta, c > 0.82 ? 'right' : 'left', c > 0.82 ? -10 : 10, 0);
     else lab(c, 0, `D = ${fix(D, 2)}`, P.magenta, 'right', -6, -14);
@@ -196,9 +204,9 @@
   }
 
   const LEG = {
-    none: [['cy box', '条纹对比度 V（影子与带宽）', 'fringe contrast V (shadow, band)'], ['mg', '路径可辨度 D（高）', 'path distinguishability D (height)'], ['am', '当前的标记 r_R', 'the current marker r_R']],
-    path: [['cy box', '条纹对比度 V', 'fringe contrast V'], ['mg', '按路径读出的两行与 D', 'rows read for the path, and D'], ['am', '当前的标记 r_R', 'the current marker r_R']],
-    erase: [['cy', '擦除后分拣的两行与 V', 'rows read to erase, and V'], ['mg', '路径可辨度 D', 'path distinguishability D'], ['am', '当前的标记 r_R', 'the current marker r_R']]
+    none: [['cy box', '条纹对比度 V（影子与带宽）', 'fringe contrast V (shadow, band)'], ['mg', '路径可辨度 D（高）', 'path distinguishability D (height)'], ['am', '<bdi>当前的标记 r<sub>R</sub></bdi>', '<bdi>the current marker r<sub>R</sub></bdi>']],
+    path: [['cy box', '条纹对比度 V', 'fringe contrast V'], ['mg', '按路径读出的两行与 D', 'rows read for the path, and D'], ['am', '<bdi>当前的标记 r<sub>R</sub></bdi>', '<bdi>the current marker r<sub>R</sub></bdi>']],
+    erase: [['cy', '擦除后分拣的两行与 V', 'rows read to erase, and V'], ['mg', '路径可辨度 D', 'path distinguishability D'], ['am', '<bdi>当前的标记 r<sub>R</sub></bdi>', '<bdi>the current marker r<sub>R</sub></bdi>']]
   };
   function drawText() {
     const V = contrast(), D = disting(), sum = V * V + D * D, n = shown(), pure = S.lambda >= 1;
@@ -270,8 +278,8 @@
     wave: ['α = 0°：两支箭头重合，影子是整条半径，高为零。落点一个个堆出满对比度的条纹：暗纹处几乎没有落点。', 'α = 0°: the two arrows coincide, the shadow is the whole radius and the height is zero. The hits pile up into fringes of full contrast: almost none land in the dark fringes.'],
     partial: ['α = 60°：青色的影子 V = 0.5，品红的高 D = 0.87，点仍在圆上。条纹还在，只是暗纹不再全黑，青色的带子变窄了一半。', 'α = 60°: the cyan shadow is V = 0.5, the magenta height D = 0.87, and the point is still on the circle. The fringes remain, but the dark ones are no longer black and the cyan band is half as thick.'],
     which: ['α = 90°：两支箭头垂直，影子缩成零，点停在圆顶。落点堆成一个平滑的鼓包，没有条纹。', 'α = 90°: the arrows are square, the shadow shrinks to nothing and the point sits at the top of the circle. The hits pile up into a smooth hump without fringes.'],
-    delayed: ['α = 90°。落点先到齐，然后才按路径读标记：同一批落点被复制成两行，“左缝”一行与“右缝”一行都是没有条纹的鼓包。', 'α = 90°. All hits arrive first, and only then is the marker read for the path: the same hits are copied into two rows, and both the “left” row and the “right” row are humps without fringes.'],
-    erase: ['同样 α = 90°、同一批落点，这回按擦除方向读标记：一行是条纹，另一行是错开半格的反条纹，两行合起来仍是上面那个鼓包。', 'Again α = 90° and the same hits, but this time the marker is read to erase: one row shows fringes, the other anti-fringes shifted by half a period, and together they are still the hump above.'],
+    delayed: ['α = 90°。落点先到齐，然后才按路径读标记：同一批落点按读数分成两行，“左缝”一行与“右缝”一行加起来正好是全部落点，都是没有条纹的品红鼓包。', 'α = 90°. All hits arrive first, and only then is the marker read for the path: the same hits are split into two rows that add up to all of them, and both the “left” row and the “right” row are magenta humps without fringes.'],
+    erase: ['同样 α = 90°、同一批落点，这回按擦除方向读标记，分出的两行都画成青色：“读作 +”一行是条纹，“读作 −”一行是错开半格的反条纹，两行合起来仍是上面那个鼓包。', 'Again α = 90° and the same hits, but this time the marker is read to erase, and both rows are drawn in cyan: the “read as +” row shows fringes, the “read as −” row anti-fringes shifted by half a period, and together they are still the hump above.'],
     mixed: ['标记本身带噪声（纯态权重 λ = 0.5，纯度 Tr ρ² = 0.625）：对比度仍是 V = 0.5，能读出的可辨度只剩 D = 0.43，点落进圆内，沿品红的虚弧走：D² + V² = 0.44 < 1。', 'A noisy marker (pure-state weight λ = 0.5, purity Tr ρ² = 0.625): the contrast is still V = 0.5, but only D = 0.43 of distinguishability can be read; the point falls inside the circle and moves along the dashed magenta arc: D² + V² = 0.44 < 1.']
   };
   let booting = true;

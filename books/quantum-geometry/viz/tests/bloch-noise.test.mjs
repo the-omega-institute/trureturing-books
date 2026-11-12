@@ -132,8 +132,8 @@ await setRange('ratio', 2); s = await seek(2);
 check('T2 = 2T1 is pure amplitude damping: Kraus operators agree and the ball is kept', !s.escapes && agrees(s) < 1e-12);
 await chip('depol');
 check('the lifetime slider is disabled away from amplitude damping', await page.evaluate(() => document.getElementById('ratio').disabled));
-await pick('depol'); s = await seek(2);
-check('SHRINK: depolarizing scales every state by 0.49 towards the centre', vclose(s.rho, s.rho0.map((x) => 0.49 * x), 1e-12) && vclose(s.sig, s.sig0.map((x) => 0.49 * x), 1e-12));
+await setRange('strength', 0.3); s = await seek(2);
+check('depolarizing at p = 0.3 scales every state by 0.7² = 0.49 towards the centre after two steps', vclose(s.rho, s.rho0.map((x) => 0.49 * x), 1e-12) && vclose(s.sig, s.sig0.map((x) => 0.49 * x), 1e-12));
 await pick('distance'); s = await seek(1);
 check('NEVER-FARTHER: north pole and +x, amplitude damping γ = ½: T 0.7071 → 0.4330', close(s.T0, Math.SQRT1_2, 1e-12) && close(s.T, 0.4330127, 1e-6) && agrees(s) < 1e-12);
 const table = {};
@@ -185,6 +185,29 @@ const cam0 = await page.evaluate(() => window.NOISE_DEBUG.camera()), box = await
 await page.mouse.move(box.x + 50, box.y + box.height - 80); await page.mouse.down(); await page.mouse.move(box.x + 150, box.y + box.height - 120, { steps: 4 }); await page.mouse.up();
 const cam1 = await page.evaluate(() => window.NOISE_DEBUG.camera());
 check('dragging empty space orbits the camera and leaves the states alone', cam1.yaw !== cam0.yaw && vclose((await state()).rho0, s.rho0));
+
+// the stills printed in chapter 4: what the title and the labels say at the frame the reader sees
+const stillOf = async (card) => {
+  const pg = await T.goto(BOOK, ID, `?shot=1&lang=zh&preset=${card}`, await T.newPage());
+  await settle(pg);
+  const out = await pg.evaluate(() => {
+    const vis = [...document.querySelectorAll('#stage .tag')].filter((t) => !t.hidden).map((t) => { const b = t.getBoundingClientRect(); return { text: t.textContent, l: b.left, r: b.right, t: b.top, b: b.bottom }; });
+    return { s: window.NOISE_DEBUG.state, big: document.getElementById('hudBig').textContent, sub: document.getElementById('hudSub').textContent, dist: document.getElementById('roDistSub').textContent, vis };
+  });
+  await pg.close();
+  return out;
+};
+const overlaps = (a, b) => a.l < b.r && b.l < a.r && a.t < b.b && b.t < a.b;
+let w = await stillOf('wide');
+const wm = lifetimeMap(w.s.p, 6, w.s.t), wfar = bruteFarthest(wm.lam, wm.a);
+check('T2 > 2T1 still: λ = a^(1/6) pierces the ball (λ² > a), so the title does not call the map amplitude damping and says it is not a channel', close(w.s.lam, Math.pow(w.s.a, 1 / 6), 1e-12) && wm.lam ** 2 > wm.a && !/振幅阻尼/.test(w.big) && /不是信道/.test(w.big) && w.sub.includes('T₂ = 6.0 T₁'), w.big);
+check('T2 > 2T1 still: the escape label reads the farthest image point, found by an independent search', w.vis.some((t) => t.text.includes(`‖r‖ = ${wfar.toFixed(3)}`)) && close(w.s.farthest, wfar, 1e-6));
+check('T2 > 2T1 still: no distance T is shown on the stage, and the readout says the theorem does not apply', !w.vis.some((t) => /^T /.test(t.text)) && /不是信道/.test(w.dist));
+const tagOf = (o, re) => o.vis.find((t) => re.test(t.text));
+check('T2 > 2T1 still: the labels “fixed point” and |0⟩ do not sit on each other or on the escape label', (() => { const a = tagOf(w, /不动点/), b = tagOf(w, /\|0⟩/), e = tagOf(w, /出界/); return a && b && e && !overlaps(a, b) && !overlaps(a, e) && !overlaps(b, e); })());
+const pinchStill = await stillOf('pinch');
+check('ONTO-AXIS still: the title says pinching, not phase damping, and the readout gives the coherence mass of ρ lost, 0.375 → 0', /捏合/.test(pinchStill.big) && !/相位阻尼/.test(pinchStill.big) && pinchStill.sub.includes(`${coherenceMass(density(pinchStill.s.rho0)).toFixed(3)} → 0.000`), pinchStill.sub);
+check('ONTO-AXIS still: ρ and σ land on one point and their labels do not overlap', vclose(pinchStill.s.rho, pinchStill.s.sig, 1e-12) && !overlaps(tagOf(pinchStill, /^ρ$/), tagOf(pinchStill, /^σ$/)));
 
 // language
 await page.click('[data-lang-set="en"]'); await settle(page);

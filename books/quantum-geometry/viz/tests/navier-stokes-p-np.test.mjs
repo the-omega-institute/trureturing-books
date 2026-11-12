@@ -2,7 +2,8 @@
 //   node books/quantum-geometry/viz/tests/navier-stokes-p-np.test.mjs   (or: node tools/node/viz-test.mjs quantum-geometry)
 // Reads the page through window.VORTEX_DEBUG and checks it against independent computations written here: the vector
 // identity by finite differences with another step, the cross-section of the tube by integrating its differential
-// equation with Runge–Kutta, and the closure criterion by brute force over all 27 settings of the three leaks.
+// equation with Runge–Kutta, the Burgers core radius by integrating dR²/dτ = −αR² + 4ν with Heun steps, the K41 scaling
+// by log-log slopes, and the closure criterion by brute force over all 27 settings of the three leaks.
 import { session, stageFirstChecks, settle, cjkLeftovers } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'navier-stokes-p-np';
@@ -45,7 +46,7 @@ for (let k = 0; k < 60 && idOK; k++) {
   if (!ok) { idOK = false; idBad = JSON.stringify({ q, x, y, d }); }
 }
 check('60 random points: advection = gradient half + ω × u, ω = 2s, the flow is divergence-free (finite differences of my own)', idOK, idBad);
-await pick('vortex'); await page.waitForTimeout(400); s = await state();
+await pick('vortex'); await settle(page); s = await state();
 check('LAMB plays s upward from 0', s.scene === 'lamb' && (s.playing || s.t > 0));
 s = await seek(0.8); check('at s = 0.8 the vorticity is 1.6 and the readout shows a nonzero Lamb half', near(s.lamb.w, 1.6) && Number((await page.textContent('#roKey')).replace('−', '-')) > 0);
 const to = await D(() => window.VORTEX_DEBUG.at(-0.6, 0.9));
@@ -62,6 +63,33 @@ for (const [mode, nu, t] of [['flat', 0, 3], ['flat', 0.02, 4], ['strain', 0, 1.
   if (!(near(d.A, A, 1e-6) && near(d.w * d.A, gamma, 1e-9))) { tubeOK = false; tubeBad = JSON.stringify({ mode, nu, t, page: d.A, mine: A }); break; }
 }
 check('the cross-section follows dA/dt = 4πν − (stretching) in all three modes (Runge–Kutta here), and ω·A = Γ', tubeOK, tubeBad);
+// the Burgers core: the exact smooth solution against an independent integration of dR²/dτ = −αR² + 4ν (Heun, R² as the unknown)
+const heunR = (nu, t, r0sq) => { let q = r0sq; const n = 20000, h = t / n, f = (x) => -alpha * x + 4 * nu; for (let i = 0; i < n; i++) { const p = q + h * f(q); q += h * (f(q) + f(p)) / 2; } return Math.sqrt(q); };
+let burOK = true, burBad = '';
+const r0 = Math.sqrt(a0 / Math.PI);
+for (const [nu, t] of [[0, 0.7], [0, 3], [0.004, 2], [0.02, 1], [0.02, 5.5], [0.06, 4], [0.12, 6]]) {
+  const d = await D(([v, tt]) => window.VORTEX_DEBUG.tube('strain', v, tt), [nu, t]), mine = heunR(nu, t, r0 * r0);
+  if (!(near(d.R, mine, 1e-7) && near(d.A, Math.PI * d.R * d.R, 1e-12) && near(d.w, gamma / (Math.PI * mine * mine), 1e-5 * d.w))) { burOK = false; burBad = JSON.stringify({ nu, t, page: d.R, mine }); break; }
+}
+check('BURGERS core: R(τ) = √(R∞² + (R₀² − R∞²)e^(−ατ)) agrees with an integration of dR²/dτ = −αR² + 4ν, and ω = Γ/(πR²)', burOK, burBad);
+const rinf = await D((nus) => nus.map((v) => window.VORTEX_DEBUG.rInf(v)), [0.0025, 0.01, 0.04, 0.16]);
+const slopeR = Math.log(rinf[3] / rinf[0]) / Math.log(0.16 / 0.0025);
+check('R∞ = √(4ν/α), so R∞ ∝ ν^½ ∝ Re^(−½): log-log slope ½ in ν, and the long-time limit of the integration is R∞', rinf.every((v, i) => near(v, Math.sqrt(4 * [0.0025, 0.01, 0.04, 0.16][i] / alpha), 1e-12)) && near(slopeR, 0.5, 1e-12) && near(heunR(0.04, 40, r0 * r0), rinf[2], 1e-9), String(slopeR));
+let invOK = true;
+for (const t of [0.5, 1.8, 4, 6]) {
+  const d = await D((tt) => window.VORTEX_DEBUG.tube('strain', 0, tt), t), e = await D((tt) => window.VORTEX_DEBUG.tube('strain', 1e-10, tt), t);
+  if (!(near(d.R, r0 * Math.exp(-alpha * t / 2), 1e-12) && near(d.w / (gamma / a0), Math.exp(alpha * t), 1e-9 * d.w) && near(e.R, d.R, 1e-6))) invOK = false;
+}
+check('inviscid limit ν → 0: R(τ) = R₀e^(−ατ/2) and ω(τ) = ω₀e^(ατ), and a tiny ν gives the same radius', invOK);
+// K41, a separate fact: η/L = Re^(−3/4), N ~ Re^(9/4), and the model spectrum has slope −5/3 well inside the inertial range
+const ks = [1, 2, 4, 1e3];
+const K = await D(([v, k]) => window.VORTEX_DEBUG.k41(v, k), [0.001, ks]), K2 = await D(([v, k]) => window.VORTEX_DEBUG.k41(v, k), [0.016, ks]);
+const slopeEta = Math.log(K2.eta / K.eta) / Math.log(K2.re / K.re), slopeN = Math.log(K2.ndof / K.ndof) / Math.log(K2.re / K.re), slopeE = Math.log(K.E[1] / K.E[0]) / Math.log(2);
+const beta = s.consts.beta;
+check('K41: Re = 1/ν, η/L has log-log slope −3/4 in Re, N has slope 9/4, E(k) ∝ k^(−5/3)e^(−βkη) (slope near −5/3 for kη ≪ 1, cut off for kη ≫ 1)',
+  near(K.re, 1000, 1e-9) && near(slopeEta, -0.75, 1e-12) && near(slopeN, 2.25, 1e-12) && near(slopeE, -5 / 3 - beta * K.eta / Math.log(2), 1e-9) && Math.abs(slopeE + 5 / 3) < 0.02
+  && near(K.E[3], Math.pow(1e3, -5 / 3) * Math.exp(-beta * 1e3 * K.eta), 1e-15) && K.E[3] < 0.01 * Math.pow(1e3, -5 / 3), JSON.stringify([slopeEta, slopeN, slopeE]));
+check('the Burgers exponent (−1/2 in Re) and the K41 exponent (−3/4 in Re) are different numbers', Math.abs(-slopeR - slopeEta) > 0.2);
 await pick('flat'); s = await seek(5);
 check('FLAT-2D: no stretching; the cross-section only widens and the vorticity only falls', s.mode === 'flat' && s.tube.A > a0 && s.tube.w < gamma / a0 && s.tube.len === 1);
 await pick('strain'); s = await seek(0); const w0 = s.tube.w; s = await seek(4);
@@ -80,6 +108,14 @@ check('the mode chips switch the kind of stretching and restart the rail', s.mod
 /* ---------- closure ---------- */
 await pick('closed'); s = await seek(1.7);
 check('CLOSED: no leak, the seen acceleration does not depend on the unseen y', s.scene === 'closure' && s.closed && near(s.seen[0], s.seen[1], 1e-12) && /存在精确闭合/.test(await page.textContent('#roKeySub')));
+{
+  // the labels at the right edge: written here from P(V) = −x − x² (no leak, y = 1), every x once, and lines that end at
+  // the same height (x = −1 and x = 0) share one label instead of two printed over each other
+  const lab = s.lineTags, xs = lab.flatMap((e) => e.xs).sort((a, b) => a - b), f = (x) => -x - x * x;
+  const shared = lab.find((e) => e.xs.includes(-1));
+  const apart = lab.every((e, i) => lab.every((q, j) => i === j || Math.abs(e.v - q.v) >= 0.12));
+  check('CLOSED: one label per line height; x = −1 and x = 0 coincide and share a label', JSON.stringify(xs) === JSON.stringify([-1, -0.5, 0, 0.5, 1]) && shared && shared.xs.includes(0) && apart && lab.every((e) => e.xs.every((x) => Math.abs(f(x) - e.v) < 0.12)), JSON.stringify(lab));
+}
 let iffOK = true, iffBad = '', incOK = true;
 for (const lin of [-1, 0, 1]) for (const self of [-1, 0, 1]) for (const mix of [-1, 0, 1]) {
   await setRange('lin', lin); await setRange('self', self); await setRange('mix', mix);
@@ -107,7 +143,10 @@ await page.keyboard.press('Space'); check('Space pauses', !(await state()).playi
 await page.click('#rew'); check('⏮ returns to the start', (await state()).t === 0);
 await page.click('[data-lang-set="en"]'); await settle(page, 150);
 for (const sc of ['lamb', 'tube', 'closure']) { await page.click(`#sceneChips [data-scene="${sc}"]`); await settle(page, 60); const left = await cjkLeftovers(page); check(`English: no Chinese left in the scene ${sc} after free play`, left.length === 0, left.slice(0, 4).join(' | ')); }
-check('the open problem is labelled as open and the toy models as models', await D(() => !!document.querySelector('.lean.open[data-scenes="tube"]') && !!document.querySelector('.lean.model[data-scenes="tube"]')));
+check('the open problem is labelled as open and the toy models as models', await D(() => !!document.querySelector('.lean.open[data-scenes="tube"]') && !!document.querySelector('.lean.model[data-scenes="tube"]') && !!document.querySelector('#drawer .lean.open')));
+check('no wording anywhere on the page claims the regularity problem is settled', await D(() => !/(正则性已|已经?解决|证明了.{0,6}(正则|光滑)|否定了|regularity (is|has been) (settled|solved|proved)|proves? (global )?regularity|disproves?)/i.test(document.body.textContent.replace(/既不证明也不否定|neither proves nor disproves/g, ''))));
+await page.click('#sceneChips [data-scene="tube"]'); await settle(page);
+check('the tube scene draws the K41 plot on its own, labelled as a different matter', /K41/.test(await page.textContent('#pBTitle')) && /Re/.test(await page.textContent('#pBMeta')));
 
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();

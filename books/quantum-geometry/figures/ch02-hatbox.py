@@ -9,7 +9,7 @@ area 2π · 0.4 (Archimedes), and that each maps to a p-interval of length ⅕.
 import math
 
 
-SIZE = (540, 336)
+SIZE = (440, 336)
 N = 5
 ALT = {
     "zh": "左边一颗球，已知态 a 在北极，四条青色的纬线把球切成五条等高的球带，外面套着一只灰色虚线的圆柱帽盒。"
@@ -51,21 +51,21 @@ def draw(fig):
     sp.outline(fill="cyan", fill_opacity=0.05)
     for z in zs[1:-1]:
         sp.small_circle((0, 0, 1), math.degrees(math.acos(z)), "line", 1.8)
-    sp.dot((0, 0, 1), "now", 5)
-    sp.label((0, 0, 1), "*a*", dx=10, dy=-8, size=16, color="now")
+    sp.dot((0, 0, 1), "line", 5)   # the known state: cyan, as in the chapter's other figures (amber is only for B)
+    sp.label((0, 0, 1), "*a*", dx=10, dy=-8, size=16, color="line")
 
     # the scale of p
-    sx = 420
+    sx = 336
     fig.line(sx, top, sx, bot, "ink", 1.6)
     for i, z in enumerate(zs):
         y = cy - R * z * k
         fig.line(sx - 6, y, sx + 6, y, "ink", 1.6)
-        fig.text(sx + 14, y, f"{(1 + z) / 2:g}", size=13, color="dim", middle=True)
+        fig.text(sx + 14, y, f"{(1 + z) / 2:g}", size=14, color="dim", middle=True)
         if 0 < i < N:
             fig.line(cx + R * math.sqrt(1 - z * z) + 4, y, sx - 10, y, "line", 1.1, dash="3 4")
     for z0, z1 in zip(zs, zs[1:]):
         y0, y1 = cy - R * z0 * k, cy - R * z1 * k
         fig.line(sx, y0 - 3, sx, y1 + 3, "line", 5, cap="round")
     fig.text(sx, top - 16, "*p*", size=16, color="line", anchor="middle", weight=600)
-    fig.text(sx + 46, cy, t("各 ⅕", "⅕ each"), size=14, color="line", middle=True)
-    fig.text(cx, 328, t("每条球带面积 2π × 0.4", "each zone: area 2π × 0.4"), size=13, color="dim", anchor="middle")
+    fig.text(sx + 48, cy, t("各 ⅕", "⅕ each"), size=15, color="line", middle=True)
+    fig.text(cx, 328, t("每条球带面积 2π × 0.4", "each zone: area 2π × 0.4"), size=14, color="dim", anchor="middle")

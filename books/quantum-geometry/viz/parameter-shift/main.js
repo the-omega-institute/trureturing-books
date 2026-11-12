@@ -82,6 +82,10 @@
   const stats = (xs) => { const n = xs.length; if (!n) return { mean: NaN, sd: NaN }; const m = xs.reduce((a, x) => a + x, 0) / n; return { mean: m, sd: n > 1 ? Math.sqrt(xs.reduce((a, x) => a + (x - m) ** 2, 0) / (n - 1)) : 0 }; };
   const trialsNow = () => (S.scene === 'shots' ? Math.round(clock.t) : 0);
 
+  /** The card on show decides what the stage stresses: `shift` hides the small-step chord (not yet met in the text),
+      `step` stresses the chord and the gap between its bar and the tangent; free play shows everything evenly. */
+  const focus = () => { try { return cards.current === 'shift' || cards.current === 'step' ? cards.current : null; } catch (e) { return null; } };
+
   /* ---------- layout: dial | curve | gauge on a wide stage; dial and gauge above the curve on a narrow one ---------- */
   let boxes = null, curveG = null, dialG = null;
   function layout(W, H) {
@@ -150,18 +154,25 @@
     g.vline(th, P.amber, { alpha: 0.35, dash: [3, 4] });
     const fp = f(th + Q), fm = f(th - Q), sl = slopeByCommutator(MODELS[S.model], th);
     g.vline(th + Q, P.cyan, { alpha: 0.35, dash: [2, 4] }); g.vline(th - Q, P.cyan, { alpha: 0.35, dash: [2, 4] });
-    // the small-step chord through θ ± h, drawn over the same run as the tangent
-    const run = 0.95, fd = fdOf(th, hr), f0 = f(th);
+    // the small-step chord: the line through the two sampled points (θ − h, f(θ − h)) and (θ + h, f(θ + h)), whose
+    // midpoint sits at θ with the mean of the two values; drawn at least over the run of the tangent and out to both points
+    const run = 0.95, fd = fdOf(th, hr), f0 = f(th), fHi = f(th + hr), fLo = f(th - hr), mid = (fHi + fLo) / 2, runC = Math.max(run, hr);
+    const fo = focus(), chord = fo !== 'shift', cyA = fo === 'step' ? 0.35 : 1;
     g.ctx.save(); g.ctx.beginPath(); g.ctx.rect(g.pl, g.pt, g.iw, g.ih); g.ctx.clip();
-    g.line([[th - run, f0 - fd * run], [th + run, f0 + fd * run]], P.magenta, { width: 1.8 * TH, alpha: 0.9 });
-    g.dot(th + hr, f(th + hr), P.magenta, 3.4 * TH); g.dot(th - hr, f(th - hr), P.magenta, 3.4 * TH);
+    if (chord) {
+      g.line([[th - runC, mid - fd * runC], [th + runC, mid + fd * runC]], P.magenta, { width: (fo === 'step' ? 2.8 : 1.8) * TH, alpha: 0.9 });
+      g.dot(th + hr, fHi, P.magenta, (fo === 'step' ? 4.4 : 3.4) * TH); g.dot(th - hr, fLo, P.magenta, (fo === 'step' ? 4.4 : 3.4) * TH);
+    }
     g.line([[th - run, f0 - sl * run], [th + run, f0 + sl * run]], P.ink, { width: 1.6 * TH, dash: [6, 4] });
     g.ctx.restore();
-    g.dot(th + Q, fp, P.cyan, 5.5 * TH, { glow: 10 }); g.dot(th - Q, fm, P.cyan, 5.5 * TH, { glow: 10 });
+    g.dot(th + Q, fp, P.cyan, 5.5 * TH, { glow: fo === 'step' ? 0 : 10, alpha: cyA }); g.dot(th - Q, fm, P.cyan, 5.5 * TH, { glow: fo === 'step' ? 0 : 10, alpha: cyA });
     g.dot(th, f0, P.amber, 6.5 * TH, { glow: 14 });
     if (!TRV.thumbMode) {
-      tagAt('cP', g, th + Q, fp, `f(θ+90°) ${fix(fp, 3)}`, 'raw cy', 0, fp > 0.75 ? 14 : -14);
-      tagAt('cM', g, th - Q, fm, `f(θ−90°) ${fix(fm, 3)}`, 'raw cy', 0, fm > 0.75 ? 14 : -14);
+      if (fo !== 'step') {
+        tagAt('cP', g, th + Q, fp, `f(θ+90°) ${fix(fp, 3)}`, 'raw cy', 0, fp > 0.75 ? 14 : -14);
+        tagAt('cM', g, th - Q, fm, `f(θ−90°) ${fix(fm, 3)}`, 'raw cy', 0, fm > 0.75 ? 14 : -14);
+      }
+      if (fo === 'step') tagAt('cH', g, th - hr, f(th - hr), L(`±${S.h}° 的弦`, `the ±${S.h}° chord`), 'raw mg', 66, -2);
       const yIn = (v) => clamp(v, YC[0] + 0.08, YC[1] - 0.08);
       tagAt('cT', g, th + run, yIn(f0 + sl * run), L('切线', 'tangent'), 'raw ink', 26, sl > 0 ? -6 : 6);
       if (Math.abs(C.c) > 1e-9) tagAt('cC', g, XR[0] + 0.25, C.c, 'c', 'tick', 6, -8);
@@ -173,16 +184,24 @@
   function drawGauge(W, H, cur) {
     const b = boxes.g, cv = $('cv'), shotsScene = S.scene === 'shots', y = shotsScene ? YS : YC;
     const g = kit.plot(cv, { x: [0, 3], y, pad: padOf(b, W, H, 30, 4, 6, 18), clear: false });
-    g.axes({ yTicks: shotsScene ? [[-3, '−3'], [-2, '−2'], [-1, '−1'], [0, '0'], [1, '1'], [2, '2'], [3, '3']] : [[-1, '−1'], [0, '0'], [1, '1']], xTicks: TRV.thumbMode ? [] : [[0.5, 'f′'], [1.5, '±90°'], [2.5, `±${S.h}°`]] });
+    const fo = shotsScene ? null : focus();
+    g.axes({ yTicks: shotsScene ? [[-3, '−3'], [-2, '−2'], [-1, '−1'], [0, '0'], [1, '1'], [2, '2'], [3, '3']] : [[-1, '−1'], [0, '0'], [1, '1']], xTicks: TRV.thumbMode ? [] : [[0.5, 'f′'], [1.5, '±90°']].concat(fo === 'shift' ? [] : [[2.5, `±${S.h}°`]]) });
     g.hline(0, P.faint, {});
     g.line([[0.05, cur.sl], [2.95, cur.sl]], P.ink, { width: 1.6 * TH, dash: [6, 4] });
     g.rect(0.3, 0, 0.7, cur.sl, P.ink, { alpha: 0.25 });
     const n = trialsNow(), out = { above: 0, below: 0 };
     if (!shotsScene) {
-      g.rect(1.25, 0, 1.75, cur.shift, P.cyan, { alpha: 0.7 });
-      g.rect(2.25, 0, 2.75, cur.fd, P.magenta, { alpha: 0.6 });
-      g.line([[1.18, cur.shift], [1.82, cur.shift]], P.cyan, { width: 2.6 * TH, glow: 8 });
-      g.line([[2.18, cur.fd], [2.82, cur.fd]], P.magenta, { width: 2.6 * TH });
+      const cyA = fo === 'step' ? 0.35 : 1;
+      g.rect(1.25, 0, 1.75, cur.shift, P.cyan, { alpha: 0.7 * cyA });
+      g.line([[1.18, cur.shift], [1.82, cur.shift]], P.cyan, { width: 2.6 * TH, glow: fo === 'step' ? 0 : 8, alpha: cyA });
+      if (fo !== 'shift') {
+        g.rect(2.25, 0, 2.75, cur.fd, P.magenta, { alpha: 0.6 });
+        g.line([[2.18, cur.fd], [2.82, cur.fd]], P.magenta, { width: 2.6 * TH });
+      }
+      if (fo === 'step' && Math.abs(cur.sl) > 1e-9) {   // the gap between the chord's bar and the tangent, with its size
+        g.line([[2.88, cur.fd], [2.94, cur.fd], [2.94, cur.sl], [2.88, cur.sl]], P.magenta, { width: 1.6 * TH });
+        if (!TRV.thumbMode) tagAt('gGap', g, 2.1, (cur.fd + cur.sl) / 2, L(`短 ${fix(100 * Math.abs(1 - cur.fd / cur.sl), 1)}%`, `${fix(100 * Math.abs(1 - cur.fd / cur.sl), 1)}% short`), 'raw mg', 0, cur.sl < 0 ? 14 : -14);
+      }
     } else {
       const sh = shots();
       const jit = (i) => ((i * 0.6180339887) % 1) - 0.5;
@@ -279,6 +298,7 @@
   };
   function drawText() {
     const th = S.theta, hr = S.h * DEG, fp = f(th + Q), fm = f(th - Q), sl = slopeByCommutator(MODELS[S.model], th), est = shiftOf(th), fd = fdOf(th, hr);
+    const flat = Math.abs(sl) < 1e-9;          // at an extremum the difference is 0 too: no ratio to speak of
     let big, sub, key, keyName, rows, note, aside, pill;
     if (S.scene === 'curve') {
       big = `θ = ${fix(th / DEG, 1)}°`;
@@ -287,9 +307,10 @@
       key = `${fix(est, 6)} <small>· ${fix(sl, 6)}</small>`;
       rows = row('', 'f(θ)', 'f(θ)', fix(f(th), 4)) + row('c', 'f(θ + 90°)', 'f(θ + 90°)', fix(fp, 4)) + row('c', 'f(θ − 90°)', 'f(θ − 90°)', fix(fm, 4))
         + row('m', `±${S.h}° 差分`, `±${S.h}° difference`, fix(fd, 4)) + row('m', '差分的误差', 'error of the difference', sgn(fd - sl, 4))
-        + row('', '差分 / 斜率 = sin h / h', 'difference / slope = sin h / h', fix(Math.sin(hr) / hr, 4));
+        + (flat ? row('', 'sin h / h（斜率为 0，没有比值）', 'sin h / h (slope 0: no ratio)', fix(Math.sin(hr) / hr, 4))
+          : row('', '差分 / 斜率 = sin h / h', 'difference / slope = sin h / h', fix(Math.sin(hr) / hr, 4)));
       aside = "f′ = 2 Re(i Tr ρ[H,P])";
-      note = Math.abs(sl) < 1e-9 ? L('此处斜率为 0：两个取值点一样高，弦也是平的。', 'The slope is 0 here: the two settings are level and so is the chord.')
+      note = flat ? L('此处斜率为 0：两个取值点一样高，弦也是平的，差分与斜率同为 0。', 'The slope is 0 here: the two settings are level and so is the chord; the difference and the slope are both 0.')
         : L(`两值之差的一半与切线斜率相差 ${Math.abs(est - sl).toExponential(1)}，只是舍入；±${S.h}° 的弦比切线${Math.abs(fd) < Math.abs(sl) ? '缓' : '陡'} ${fix(100 * Math.abs(1 - fd / sl), 2)}%。`, `Half the difference and the tangent slope differ by ${Math.abs(est - sl).toExponential(1)}, rounding only; the ±${S.h}° chord is ${fix(100 * Math.abs(1 - fd / sl), 2)}% ${Math.abs(fd) < Math.abs(sl) ? 'flatter' : 'steeper'} than the tangent.`);
       pill = [L('斜率', 'SLOPE'), fix(sl, 3)];
     } else {
@@ -310,7 +331,7 @@
     $('roNote').textContent = note; $('roAside').textContent = aside;
     $('pillScene').querySelector('strong').textContent = S.scene === 'curve' ? L('曲线', 'CURVE') : L('采样', 'SHOTS');
     $('pillKeyName').textContent = pill[0]; $('pillKey').querySelector('strong').textContent = pill[1];
-    $('legend').innerHTML = LEGEND[S.scene].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
+    $('legend').innerHTML = LEGEND[S.scene].filter(([cl]) => !(S.scene === 'curve' && cl === 'mg' && focus() === 'shift')).map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
     $('modelNote').textContent = S.model === 'z' ? L('r₀ = m = (0, 0, 1)：f = cos θ，第十二章的例子。', 'r₀ = m = (0, 0, 1): f = cos θ, the example of Chapter 12.')
       : L(`r₀ = (0.48, 0.60, 0.64)，m = (0.80, 0.36, 0.48)：c = ${fix(C.c, 4)}，a = ${fix(C.a, 4)}，b = ${fix(C.b, 4)}。`, `r₀ = (0.48, 0.60, 0.64), m = (0.80, 0.36, 0.48): c = ${fix(C.c, 4)}, a = ${fix(C.a, 4)}, b = ${fix(C.b, 4)}.`);
   }
@@ -361,8 +382,8 @@
   const NOTES = {
     shift: ['f = cos θ，θ = 60°。两个青色的点在 −30° 与 150°，高 0.866 与 −0.866；两值之差的一半是 −0.866，正是虚线切线的斜率。圆里两支青色箭头与琥珀色的箭头垂直，它们的高度就是这两个值。', 'f = cos θ at θ = 60°. The two cyan points sit at −30° and 150°, at heights 0.866 and −0.866; half their difference is −0.866, exactly the slope of the dashed tangent. In the dial the two cyan arrows are perpendicular to the amber one, and their heights are these two values.'],
     anywhere: ['倾斜的态与测量轴：曲线 f = c + a cos θ + b sin θ 抬高了 c、错开了相位。θ 扫过一整圈，量尺上青色的条始终停在切线的虚线上，下面的小图里两条线处处重合；常数 c 在相减时消掉。', 'Tilted state and axis: the curve f = c + a cos θ + b sin θ is raised by c and shifted in phase. As θ sweeps a full turn the cyan bar on the gauge stays on the dashed tangent line, and in the small plot the two lines coincide everywhere; the constant c cancels in the difference.'],
-    step: ['同一条 f = cos θ，用 ±30° 的小步长做差分：品红的弦比虚线切线缓，品红的条比切线短 4.5%（sin h / h = 0.955）。拖小 h，差距按 h² 缩小，但不会消失；青色的条始终精确。', 'The same f = cos θ with a ±30° small-step difference: the magenta chord is flatter than the dashed tangent and the magenta bar is 4.5% short (sin h / h = 0.955). Make h smaller and the gap shrinks like h², but it never vanishes; the cyan bar is always exact.'],
-    noise: ['θ = 60°，每个取值点只测 100 发，小步长 6°。每次试验在量尺上落一个青色点和一个品红点：青色的点挤在切线旁，宽约 0.035；品红的点散开约 0.58，宽 16 倍，有的落出量尺。散布来自散粒噪声，小步长把它放大了。', 'θ = 60°, only 100 shots per setting, a 6° small step. Each trial drops one cyan and one magenta dot on the gauge: the cyan dots crowd the tangent with a width of about 0.035; the magenta dots spread about 0.58, sixteen times wider, some of them off the gauge. The scatter is shot noise, and the small step magnifies it.']
+    step: ['同一条 f = cos θ，用 ±30° 的小步长做差分：差分恰好是斜率乘 sin h / h = 0.955。θ = 60° 时品红的弦比虚线切线缓，品红的条比切线短 4.5%。拖小 h，差距按 h² 缩小，但只要斜率不为零就不会消失；只在 θ = 0° 与 ±180°，斜率为零，弦与切线都是平的。青色的条始终精确。', 'The same f = cos θ with a ±30° small-step difference: the difference is exactly the slope times sin h / h = 0.955. At θ = 60° the magenta chord is flatter than the dashed tangent and the magenta bar is 4.5% short. Make h smaller and the gap shrinks like h², but it never vanishes while the slope is not zero; only at θ = 0° and ±180°, where the slope is zero, are chord and tangent both level. The cyan bar is always exact.'],
+    noise: ['θ = 60°，每个取值点只测 100 发，小步长 6°。每次试验在量尺上落一个青色点和一个品红点：青色的点挤在切线旁，宽约 0.035；品红的点散开约 0.58，宽 16 倍。散布来自散粒噪声，小步长把它放大了。', 'θ = 60°, only 100 shots per setting, a 6° small step. Each trial drops one cyan and one magenta dot on the gauge: the cyan dots crowd the tangent with a width of about 0.035; the magenta dots spread about 0.58, sixteen times wider. The scatter is shot noise, and the small step magnifies it.']
   };
   let booting = true;
   function applyPreset(id) {
@@ -397,7 +418,7 @@
     get state() {
       const th = S.theta, hr = S.h * DEG, sh = shots(), n = trialsNow();
       return {
-        scene: S.scene, model: S.model, theta: th, h: S.h, N: S.N, seed: S.seed, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current,
+        scene: S.scene, focus: focus(), model: S.model, theta: th, h: S.h, N: S.N, seed: S.seed, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current,
         r0: MODELS[S.model].r0.slice(), m: MODELS[S.model].m.slice(), coeffs: Object.assign({}, C),
         f: f(th), fPlus: f(th + Q), fMinus: f(th - Q), shift: shiftOf(th), slope: slopeByCommutator(MODELS[S.model], th), fd: fdOf(th, hr),
         trials: n, offGauge: last.out ? last.out.above + last.out.below : 0,
@@ -409,6 +430,8 @@
     /** Half the ±90° difference and the commutator slope on a grid of θ (for the "any angle" check). */
     sweep: (n) => Array.from({ length: n + 1 }, (_, i) => { const x = -PI + 2 * PI * i / n; return [x, shiftOf(x), slopeByCommutator(MODELS[S.model], x), fdOf(x, S.h * DEG)]; }),
     seek: (t) => { clock.pause(); clock.set(t); },
+    /** Moves the clock without pausing it, so a test can bring a playing card close to where it stops by itself. */
+    scrub: (t) => clock.set(t),
     /** Viewport coordinates of a point of the curve and of the dial's centre, for pointer tests. */
     curvePoint: (th) => { const b = $('cv').getBoundingClientRect(); return curveG ? [b.left + curveG.X(th), b.top + curveG.Y(f(th))] : null; },
     dialPoint: (dx, dy) => { const b = $('cv').getBoundingClientRect(); return dialG ? [b.left + dialG.X(dx), b.top + dialG.Y(C.c + dy)] : null; }

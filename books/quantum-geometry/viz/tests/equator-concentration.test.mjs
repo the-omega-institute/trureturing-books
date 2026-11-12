@@ -54,16 +54,30 @@ await stageFirstChecks(T, BOOK, ID);
 /* ---------- page-specific checks ---------- */
 const page = await T.goto(BOOK, ID, '?lang=zh');
 const state = async () => { await settle(page); return page.evaluate(() => window.EQUATOR_DEBUG.state); };
-const pick = async (id) => { await page.click(`[data-preset="${id}"]`); await settle(page); };
-const plays = () => until(page, () => { const s = window.EQUATOR_DEBUG.state; return s.playing && s.t > 0; });
+// A card's sweep can be over before the test starts looking: d = 3 runs 0.585 of a rail step, about a fifth of a second.
+// So "it played" is recorded inside the page, by a watcher armed before the click, and plays() reads that record.
+const pick = async (id) => {
+  await page.evaluate(() => {
+    const me = window.__playWatch = (window.__playWatch || 0) + 1; window.__played = false;
+    const tick = () => { if (window.__playWatch !== me) return; const s = window.EQUATOR_DEBUG.state; if (s.playing && s.t > 0) window.__played = true; else requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+  });
+  await page.click(`[data-preset="${id}"]`); await settle(page);
+};
+const plays = () => until(page, () => window.__played);
 const stops = () => until(page, () => !window.EQUATOR_DEBUG.state.playing);
 const seek = async (t) => { await page.evaluate((x) => window.EQUATOR_DEBUG.seek(x), t); await settle(page); };
 const setRange = async (id, v) => { await page.evaluate(([i, val]) => { const el = document.getElementById(i); el.value = String(val); el.dispatchEvent(new Event('input', { bubbles: true })); }, [id, v]); await settle(page); };
 const smp = () => page.evaluate(() => window.EQUATOR_DEBUG.samples());
 
-// FOUR QUBITS opens the page
+// the page opens on the 1/√d card at its telling frame, d = 2¹⁰
 let s = await state();
-check('opens on FOUR QUBITS: d = 16, ε = 0.1', s.preset === 'four' && s.d === 16 && close(s.eps, 0.1, 1e-12));
+check('opens on 1/√d at d = 1024, ε = 0.1, without playing', s.preset === 'width' && s.d === 1024 && close(s.eps, 0.1, 1e-12) && !s.playing);
+check('d = 1024: the magnifier is shown and enlarges √d = 32 times', s.loupe && close(s.loupe.mag, 32, 1e-12));
+
+// d = 16 (four qubits) on the rail
+await seek(3); s = await state();
+check('the rail at n = 4 gives d = 16 and leaves no magnifier (the bump is wide enough to see)', s.d === 16 && s.loupe === null);
 const t16 = tailSimpson(16, 0.1);
 check('d = 16: the outside share 0.7026 agrees with Simpson integration of the density', close(s.out, t16, 1e-9) && close(t16, 0.70256, 5e-5), `${s.out} ${t16}`);
 const mc = monteCarlo(16, 0.1, 6000);
@@ -74,6 +88,8 @@ const varSq = (d) => 3 / (d * (d + 2)) - 1 / (d * d);
 check('d = 16: the sample mean of x₁² is 1/d within 4 standard errors; the outside count matches the points', Math.abs(s.meanSq - 1 / 16) < 4 * Math.sqrt(varSq(16) / 1500) && s.outN === x.filter((v) => Math.abs(v) >= 0.1).length);
 check('d = 16: the drawn density at 0 is Γ(8)/(√π Γ(7.5))', close(await page.evaluate(() => window.EQUATOR_DEBUG.density(0)), dens(16, 0), 1e-10));
 check('the HUD prints d = 2⁴ = 16 and the key readout the outside share', (await page.textContent('#hudBig')).includes('16') && (await page.textContent('#ro .key')).includes('0.7026'));
+let worstZ = 0; for (let n = 1; n <= 20; n++) { await seek(n - 1); const st = await state(); if ((st.loupe !== null) !== (Math.pow(2, -n / 2) < 0.05)) worstZ = Infinity; }
+check('the magnifier appears exactly when 1/√d < 0.05 (d ≥ 2⁹), checked for n = 1 … 20', worstZ === 0);
 
 // d = 3: even heights
 await pick('three');
@@ -84,6 +100,12 @@ check('d = 3: the inside share is exactly ε = 0.1 and the density is the consta
 x = await smp();
 const Dunif = ks(x, (v) => (v + 1) / 2);
 check('d = 3: the points\' heights pass a Kolmogorov–Smirnov test for the uniform distribution on [−1, 1]', Dunif < KS1, String(Dunif));
+// the measure of the belt is exactly 10%; the fixed draw is a sample of it, counted here from the raw heights
+const cyan3 = x.filter((v) => Math.abs(v) < 0.1).length;
+check('d = 3: the fixed draw (seed 1) puts 142 of the 1500 points (9.47%) in the belt, not 150: a binomial sample of the exact 10%, and the page counts the rest as outside', s.seed === 1 && cyan3 === 142 && s.outN === 1500 - cyan3
+  && Math.abs(cyan3 / 1500 - 0.1) < 4 * Math.sqrt(0.1 * 0.9 / 1500), `${cyan3} in the belt`);
+const note3 = await page.textContent('#presetNote');
+check('d = 3: the card note gives 10% as the share of the sphere and says the count of dots varies with the draw', note3.includes('占球面的 10%') && note3.includes('随抽样而变') && !note3.includes('10% 的点'), note3);
 
 // the width card: up to d = 1024
 await pick('width');
@@ -116,6 +138,12 @@ const la = log10TailAsym(1048576, 0.1);
 check('20 QUBITS: log₁₀ of the exact share is −2290.52, as the Laplace asymptotic gives', close(s.log10Out, la, 1e-3) && close(la, -2290.52, 0.01), `${s.log10Out} ${la}`);
 check('20 QUBITS: every point is in the belt', s.outN === 0 && close(s.inside, 1, 1e-12));
 check('20 QUBITS: the key readout prints 3.0 × 10⁻²²⁹¹', (await page.textContent('#ro .key')).includes('3.0 × 10⁻²²⁹¹'));
+// the magnifier: the density of z = x₁√d, against Stirling-normalized (1 − z²/d)^{(d−3)/2}/√d and the normal limit
+const lz = await page.evaluate(() => [0, 1, 2, 3.5].map((z) => window.EQUATOR_DEBUG.loupeDensity(z)));
+const ind = [0, 1, 2, 3.5].map((z) => Math.exp(lnNorm(1048576) + (1048576 - 3) / 2 * Math.log1p(-z * z / 1048576)) / 1024);
+const gauss = [0, 1, 2, 3.5].map((z) => Math.exp(-z * z / 2) / Math.sqrt(2 * Math.PI));
+check('20 QUBITS: the magnifier enlarges 1024 times and its density of x₁√d matches the independent formula and the normal limit', s.loupe && close(s.loupe.mag, 1024, 1e-9) && lz.every((v, i) => close(v, ind[i], 1e-8) && close(v, gauss[i], 2e-5)), `${lz} ${ind}`);
+check('20 QUBITS: the magnifier names the belt edges ±ε√d = ±102 outside its window', (await page.textContent('#stage')).includes('±102'));
 
 // controls and keyboard
 const before = (await smp())[0];
@@ -137,6 +165,8 @@ check('the rail sets d = 2⁶ = 64', s.d === 64 && close(s.out, tailSimpson(64, 
 // English
 await page.click('[data-lang-set="en"]'); await pick('three'); await seek(Math.log2(3) - 1);
 check('English: the HUD names the ordinary sphere', (await page.textContent('#hudSub')).includes('the ordinary sphere'));
+const note3en = await page.textContent('#presetNote');
+check('English: the d = 3 note gives 10% of the sphere, not 10% of the points', note3en.includes('10% of the sphere') && note3en.includes('varying with the draw') && !note3en.includes('10% of the points'), note3en);
 
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();

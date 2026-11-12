@@ -12,7 +12,7 @@ import math
 
 from _ch24 import set_capsule
 
-SIZE = (560, 290)
+SIZE = (420, 290)
 ALT = {
     "zh": "三行，每行从同一个候选集 {0, 1, 2} 出发，向右每走一步作用一次更新，直到相邻两步相同为止，停下的那一格用青色框出。"
           "第一行“删去大于 0 的最大元”：{0, 1, 2}、{0, 1}、{0}，停在 {0}。第二行 U(A) = A：一开始就停在 {0, 1, 2}。"
@@ -48,7 +48,7 @@ def draw(fig):
     assert [sorted(map(sorted, r), key=len, reverse=True) for r in rows] == [[[0, 1, 2], [0, 1], [0]], [[0, 1, 2]], [[0, 1, 2], []]]
     assert all(len(r) - 1 <= len(S0) for r in rows)
 
-    x0, step = 24, 150
+    x0, step = 18, 134
     ys = [84, 172, 260]
     for k in range(3):
         fig.text(x0 + k * step + 49, 24, f"*S*_{{{k}}}", size=14, color="dim", anchor="middle")
@@ -57,7 +57,7 @@ def draw(fig):
         for k, s in enumerate(seq):
             last = k == len(seq) - 1
             x = x0 + k * step
-            w = set_capsule(fig, x, y, s, r=13, gap=4, outline="line" if last else "dim")
+            w = set_capsule(fig, x, y, s, r=13, gap=4, size=14, outline="line" if last else "dim")
             if not last:
                 fig.arrow(x + w + 4, y, x + step - 4, y, "dim", 1.4, head=7)
             else:

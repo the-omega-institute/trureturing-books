@@ -71,6 +71,25 @@ for (let n = 0; n < 40; n++) {
 check('β(n) for n < 40: the page’s golden integers have b = n, equal the sum of the powers of φ at the Zeckendorf digits, and a is the one integer that puts the conjugate in (φ − 2, φ − 1]', betaOK);
 check('every β(n) is selected by the window at u = 0, and consecutive ones are φ or φ² apart', betaIn && stepOK);
 check('−φ is selected at u = 0 but is no β(n): the inclusion is proper', zero.some((p) => p.a === 0 && p.b === -1) && !s.beta.some(([a, b]) => a === 0 && b === -1));
+// the Zeckendorf codes behind β(n): no two adjacent 1s, the Fibonacci weights add up to n, and an independent greedy agrees digit by digit
+const zFib = (i) => { let a = 1, b = 1; for (let k = 0; k < i + 1; k++) [a, b] = [b, a + b]; return a; };   // F_{i+2}: 1, 2, 3, 5, …
+const greedy = (n) => { const out = []; let r = n; while (r > 0) { let i = 0; while (zFib(i + 1) <= r) i++; out[i] = 1; r -= zFib(i); } for (let i = 0; i < out.length; i++) out[i] = out[i] || 0; return out.length ? out : [0]; };
+const pageCodes = await D(() => Array.from({ length: 1001 }, (_, n) => window.CUT_DEBUG.zeck(n)));
+let zNoAdj = true, zSum = true, zSame = true, zBad = '';
+pageCodes.forEach((d, n) => {
+  if (d.some((x, i) => i && x && d[i - 1])) { zNoAdj = false; zBad = `adjacent at n=${n}`; }
+  if (d.reduce((t, x, i) => t + x * zFib(i), 0) !== n) { zSum = false; zBad = `sum at n=${n}`; }
+  if (d.join('') !== greedy(n).join('')) { zSame = false; zBad = `n=${n}: ${d.join('')} vs ${greedy(n).join('')}`; }
+});
+check('Zeckendorf codes of n = 0 … 1000: no two adjacent 1s', zNoAdj, zBad);
+check('and the Fibonacci weights 1, 2, 3, 5, … of their 1s add up to n', zSum, zBad);
+check('and they agree digit by digit with a greedy written here (largest Fibonacci number not above what is left)', zSame, zBad);
+// uniqueness by brute force: among all words of length 12 with no adjacent 1s, exactly one has each value below F_14 = 377
+const byValue = new Map(); for (let w = 0; w < 4096; w++) { if (w & (w >> 1)) continue; let v = 0; for (let i = 0; i < 12; i++) if (w >> i & 1) v += zFib(i); byValue.set(v, (byValue.get(v) || []).concat([w])); }
+check('brute force over the 377 words of length 12 with no adjacent 1s: every n < 377 has exactly one, and it is the page’s code', [...Array(377).keys()].every((n) => { const ws = byValue.get(n) || []; if (ws.length !== 1) return false; const d = pageCodes[n]; let w = 0; d.forEach((x, i) => { if (x) w |= 1 << i; }); return w === ws[0]; }));
+const zs = await D(() => window.CUT_DEBUG.zstrip());
+check('the strip below the stage shows the codes for n = 0 … 54, in at most 8 rows, with no adjacent pair and no wrong sum flagged', zs.n === 54 && zs.codes.length === 55 && zs.codes.every((d, n) => d.join('') === pageCodes[n].join('') && d.length <= 8) && zs.codes[54].length === 8 && zs.adjacent.length === 0 && zs.wrong.length === 0);
+check('the strip asks its question in its title and reports the count', /相邻的 1 吗/.test(await page.textContent('#pBTitle')) && /相邻的 1：0 处/.test(await page.textContent('#pBMeta')));
 check('the green rings are announced at u = 0 only', /β\(n\)/.test(await page.textContent('#legend')) && !/β\(n\)/.test((await seek(0.8), await page.textContent('#legend'))));
 // a point withstands exactly the shifts smaller than its distance to the edge
 s = await seek(0.6); const u0 = s.u, here = chosen(u0).filter((p) => Math.abs(p.x) <= s.half), marg = (p, u) => Math.min(p.c - LO - u, HI + u - p.c);
@@ -130,25 +149,51 @@ const onCurve = pageLattice.filter((p) => Math.abs(Math.abs(p.x * p.c) - 1) < 1e
 check(`between the hyperbolas x·x′ = ±1 there is no lattice point but the origin, and the ${onCurve.length} points on them are ± powers of φ`, inside.length === 0 && onCurve.length >= 10 && onCurve.every((p) => { const t = Math.log(Math.abs(p.x)) / Math.log(PHI); return near(t, Math.round(t), 1e-7); }));
 let ratioOK = true; for (let k = 1; k <= 12; k++) { const e = Number(F[k + 1]) / Number(F[k]) - PHI; if (Math.sign(e) !== (k % 2 ? -1 : 1) || !near(Math.abs(e), Math.pow(PHI, -k) / Number(F[k]), 1e-12)) ratioOK = false; }
 check('Fₖ₊₁/Fₖ − φ alternates in sign and equals ±φ⁻ᵏ/Fₖ', ratioOK);
+// the slope convention y/x = Fₖ/Fₖ₊₁ → φ⁻¹ for the integer point (Fₖ₊₁, Fₖ): the error is ψᵏ⁺¹/Fₖ₊₁
+s = await state(); let slopeOK = true;
+for (let k = 1; k <= 12; k++) { const e = s.slopes[k - 1], want = Math.pow(PSI, k + 1) / Number(F[k + 1]), viaInt = (Number(F[k]) * PHI - Number(F[k + 1])) / (Number(F[k + 1]) * PHI); if (!near(e, want, 1e-13) || !near(e, viaInt, 1e-13) || Math.sign(e) !== (k % 2 ? 1 : -1)) slopeOK = false; }
+check('the slope strip: Fₖ/Fₖ₊₁ − φ⁻¹ equals ψᵏ⁺¹/Fₖ₊₁, alternates in sign starting above, and shrinks towards 0', slopeOK && Math.abs(s.slopes[11]) < 1e-5);
+check('the strip states the convention y/x = Fₖ/Fₖ₊₁ → φ⁻¹', /y\/x = Fₖ\/Fₖ₊₁ → φ⁻¹/.test(await page.textContent('#pAMeta')));
 
 /* ---------- returns ---------- */
 await pick('returns'); s = await seek(88);
 const orbit = [0]; for (let n = 1; n <= 233; n++) { let x = orbit[n - 1] + (PHI - 1); if (x >= 1) x -= 1; orbit.push(x); }
 const hitsOf = (N, u1, u2) => { const h = []; for (let n = 1; n <= N; n++) { const e = Math.cos(2 * Math.PI * orbit[n]); if (e > u1 && e < u2) h.push(n); } return h; };
-const longestOf = (N, h) => { let run = 0, best = 0; const set = new Set(h); for (let n = 1; n <= N; n++) { run = set.has(n) ? 0 : run + 1; best = Math.max(best, run); } return best + 1; };   // longest stretch without a visit, plus one
+const gapOf = (h) => { let best = null; for (let i = 1; i < h.length; i++) best = Math.max(best ?? 0, h[i] - h[i - 1]); return best; };   // longest completed gap between two visits, null before the second
+const txt = async (sel) => (await page.textContent(sel)).replace(/\s+/g, ' ').trim();
 let orbOK = true; for (const n of [1, 2, 34, 89, 144, 233]) { const [x, e] = await D((m) => window.CUT_DEBUG.orbit(m), n); if (!near(x, orbit[n], 1e-9) || !near(e, Math.cos(2 * Math.PI * orbit[n]), 1e-8)) orbOK = false; }
 check('the orbit is the rotation by φ of a turn (compared with repeated addition) and the observed value is the cosine', orbOK);
 let h = hitsOf(89, 0.2, 0.8);
 check('RETURNS: N = 89, window (0.2, 0.8); the visits are the steps whose value lies in the open window', s.scene === 'returns' && s.N === 89 && near(s.u1, 0.2) && near(s.u2, 0.8) && s.hits.join() === h.join() && h.length > 10);
-check('the longest wait counts the longest stretch without a visit: every block of that many consecutive steps contains a visit, and one block shorter by a step does not', s.longest === longestOf(89, h) && near(s.bound, 1 / s.longest) && s.waits.join() === h.slice(1).map((v, i) => v - h[i]).join());
-check('the share of steps inside is at least ⌊N/(M + 1)⌋/N, and the page ticks it', near(s.share, h.length / 89) && h.length >= Math.floor(89 / s.longest) && /✓/.test(await page.textContent('#ro3')));
+check('the longest gap is the longest completed gap between two consecutive visits, and its reciprocal is reported as a description', s.longest === gapOf(h) && s.longest === 7 && near(s.ratio, 1 / 7) && s.waits.join() === h.slice(1).map((v, i) => v - h[i]).join());
+check('the share of steps inside is the plain count over N', near(s.share, h.length / 89));
+check('the readouts call the longest gap a sample and the reciprocal descriptive, with no tick and no inequality', /样本/.test(await txt('#roKeyL')) && /描述/.test(await txt('#roL3')) && !/[✓✗≥≤]/.test(await txt('#readouts .ro')) && !/M \+ 1/.test(await txt('#roKeyL') + await txt('#roL3')) && /没有算出 n₀ 或 M/.test(await txt('#roNote')));
+check('the strip title states the share of the first N steps, not an inequality against the sample gap', !/≥/.test(await txt('#pBMeta')) && (await txt('#pBMeta')).includes((h.length / 89).toFixed(3)) && !/1\/\(M \+ 1\)/.test(await txt('.strip')));
 let arc = 0; for (let i = 0; i < 400000; i++) { const e = Math.cos(2 * Math.PI * (i + 0.5) / 400000); if (e > 0.2 && e < 0.8) arc++; }
 check('the window’s share of the circle is the measure of { cos 2πx ∈ (0.2, 0.8) }', near(s.measure, arc / 400000, 1e-4), `${s.measure} ${arc / 400000}`);
+// the sample gap is not a bound: controls at N = 3, 4 and 10 with the default window (0.2, 0.8)
+s = await seek(2); h = hitsOf(3, 0.2, 0.8);
+const h10 = hitsOf(10, 0.2, 0.8), nextAfter3 = hitsOf(233, 0.2, 0.8).find((n) => n > 3);
+check('N = 3: one visit (step 3), no completed gap; independently the next visit is step 10, a gap of 7 that no 3-step sample could bound', s.N === 3 && h.join() === '3' && s.hits.join() === '3' && s.longest === null && s.ratio === null && s.open === 0 && nextAfter3 === 10 && nextAfter3 - 3 === 7);
+check('N = 3 readouts: the key and the reciprocal are “—”, the stage says there is no completed gap, and nothing claims a visit in every block of steps', (await txt('#roKey')) === '—' && (await txt('#ro3')) === '—' && /还没有完整的间隔/.test(await txt('#hudSub')) && !/任何连续/.test(await txt('#hudSub')) && (await txt('#ro1')) === '1');
+s = await seek(3);
+check('N = 4: share 1/4, still no completed gap; independently 1/4 < 1/3, so a sample reciprocal 1/3 would be no lower bound, and the page shows none', s.N === 4 && near(s.share, 0.25) && s.longest === null && (await txt('#ro2')) === '0.2500' && (await txt('#ro3')) === '—' && 1 / 4 < 1 / 3 && !/[✓≥]/.test(await txt('#readouts .ro')) && /上次进入后已过 1 步/.test(await txt('#hudSub')));
+s = await seek(9);
+check('N = 10: the second visit completes the first gap, 7 steps', s.N === 10 && s.hits.join() === h10.join() && h10.join() === '3,10' && s.longest === 7 && (await txt('#roKey')).startsWith('7') && (await txt('#ro3')) === (1 / 7).toFixed(4));
 s = await seek(232); h = hitsOf(233, 0.2, 0.8);
-check('at N = 233 the share of visits is within 0.01 of that measure, and the longest wait has not grown since N = 89', s.N === 233 && s.hits.join() === h.join() && Math.abs(s.share - s.measure) < 0.01 && s.longest === longestOf(233, h) && s.longest === longestOf(89, hitsOf(89, 0.2, 0.8)), JSON.stringify([s.share, s.measure, s.longest]));
+check('at N = 233 the share of visits is within 0.01 of that measure, and the longest completed gap is still 7', s.N === 233 && s.hits.join() === h.join() && Math.abs(s.share - s.measure) < 0.01 && s.longest === gapOf(h) && s.longest === gapOf(hitsOf(89, 0.2, 0.8)), JSON.stringify([s.share, s.measure, s.longest]));
 const wide = s.longest;
 await pick('narrow'); s = await seek(232); h = hitsOf(233, 0.45, 0.55);
-check('NARROW: window (0.45, 0.55); fewer visits, longer waits, still at least one visit in every block of M + 1 steps', near(s.u1, 0.45) && near(s.u2, 0.55) && s.hits.join() === h.join() && h.length >= 3 && s.longest === longestOf(233, h) && s.longest > wide && h.length >= Math.floor(233 / s.longest));
+check('NARROW: window (0.45, 0.55); fewer visits and a longer longest gap, computed from the visits alone', near(s.u1, 0.45) && near(s.u2, 0.55) && s.hits.join() === h.join() && h.length >= 3 && s.longest === gapOf(h) && s.longest > wide && near(s.ratio, 1 / s.longest));
+check('NARROW: the still the card stops on (N = 233) prints the visits and the longest completed gap computed here, and the readouts carry no green tick', s.N === 233 && (await page.textContent('#hudSub')).includes(`进入 ${h.length} 次`) && (await page.textContent('#hudSub')).includes(`目前最长隔 ${gapOf(h)} 步`) && !/任何连续/.test(await page.textContent('#hudSub')) && (await D(() => document.querySelectorAll('#readouts .okmark').length)) === 0, await page.textContent('#hudSub'));
+s = await seek(10); h = hitsOf(11, 0.45, 0.55);
+check('NARROW with no visit yet (N = 11): no hits, no gap, and the page says so instead of inventing a bound', h.length === 0 && s.hits.length === 0 && s.longest === null && s.ratio === null && (await txt('#roKey')) === '—' && (await txt('#ro3')) === '—' && /还没有进入过/.test(await txt('#hudSub')) && (await txt('#ro1')) === '0');
+await page.click('[data-lang-set="en"]'); await settle(page, 60);
+check('English, narrow and no visit: the readouts say “no completed gap yet” and “not entered”, with no bound', /not entered in the first 11 steps/.test(await txt('#hudSub')) && /no completed gap yet/.test(await txt('#roKeySub')) && /sample/.test(await txt('#roKeyL')) && /descriptive/.test(await txt('#roL3')) && /neither n₀ nor M/.test(await txt('#roNote')));
+await pick('returns'); s = await seek(3);
+check('English, N = 4 with the default window: “no completed gap yet, 1 step since that visit”, share 0.2500, no inequality', /no completed gap yet/.test(await txt('#hudSub')) && (await txt('#ro2')) === '0.2500' && !/[✓≥]/.test(await txt('#readouts .ro')) && /1 step since that visit/.test(await txt('#hudSub')) && !/at least once in any/.test(await txt('#hudSub')));
+await page.click('[data-lang-set="zh"]'); await settle(page, 60);
+await pick('narrow'); s = await seek(232);
 await setRange('wc', -0.5); await setRange('ww', 0.3); s = await state(); h = hitsOf(s.N, -0.65, -0.35);
 check('the sliders move the window (here to (−0.65, −0.35)) and the visits follow', near(s.u1, -0.65) && near(s.u2, -0.35) && s.hits.join() === h.join() && s.preset === null && (await page.textContent('#oWC')).trim() === '−0.50');
 await setRange('wc', 0.9); await setRange('ww', 0.05); s = await state();
@@ -190,7 +235,7 @@ check('the share of the window at least d∂ deep is (1 − d∂/r)³ (Monte Car
 s = await seek(0); check('at the centre d∂ is the inradius', near(s.d, s.rin, 1e-12) && near(s.share, 0, 1e-12));
 s = await seek(1); check('at s = 1 the point is on the boundary: d∂ = 0', Math.abs(s.d) < 1e-9);
 s = await seek(1.1); check('beyond it the point is outside and the page says so', !s.inside && s.d < 0 && depthOf(s.p) < 0 && /窗外/.test(await page.textContent('#roKey')) && /不在窗口里/.test(await page.textContent('#hudSub')));
-await pick('edge'); await page.waitForTimeout(250); s = await state();
+await pick('edge'); s = await state();
 check('EDGE plays the point outwards from the centre', s.preset === 'edge' && (s.playing || s.s > 0)); s = await seek(0.93);
 check('at s = 0.93 the point is still inside, a short distance from the nearest face', s.inside && s.d > 0 && s.d < 0.12 * s.rin);
 

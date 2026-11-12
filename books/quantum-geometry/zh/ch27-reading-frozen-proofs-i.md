@@ -22,7 +22,7 @@
 在 `trureturing` 仓库的冻结验证体系中，一个数学命题要想成为本书可引用的绿色定理，必须跨越三道机器铁门槛：
 
 1. **定义（Define）**：所有参与陈述的对象——如赋范内积空间 `InnerProductSpace ℝ E`、复方阵 `Matrix n n ℂ`、正半定谓词 `Matrix.PosSemidef`、记录测量结构 `IsRecordMeasurement P`——都必须在依值类型论（dependent type theory）中具备无歧义的类型构造；
-2. **定理（State）**：定理头部声明（signature）精确列出每一项类型类约束与显式前提，生成唯一的 SHA-256 语句摘要 `statement_id` 并写入 `Golden/Frozen/state/<module>.lean.json`；
+2. **定理（State）**：定理头部声明（signature）精确列出每一项类型类约束与显式前提；源码模块生成模块级的 SHA-256 语句摘要 `statement_id` 并写入 `Golden/Frozen/state/<module>.lean.json`，同一模块的多个声明可以共享这份摘要；
 3. **证明（Prove）**：证明项经 Lean 4 内核完整归约检验，严禁包含任何未证占位符 `sorry` 或非标准临时公理（源码中常以 `#print axioms` 显式核查其仅依赖标准公理 `propext`、`Classical.choice`、`Quot.sound`）。
 
 让我们先审计第一部前两章的两座基石定理：实内积平行四边形定律与有限维玻恩概率骨架（图 27 左栏）。
@@ -52,7 +52,7 @@ theorem inner_product_norm_parallelogram_law {E : Type*} [NormedAddCommGroup E]
 
 > **作者原话**：“毕达哥拉斯 万物皆数 勾股定理”
 
-**从一维线段的不可直加性到 0 阶面积度规与 2 阶双向量正反抵消**：设正定欧氏内积空间中两个正交向量 $\vv{a} \perp \vv{b}$ 的标量模长为 $a = \norm{\vv{a}}, b = \norm{\vv{b}}, c = \norm{\vv{a} + \vv{b}}$。当 $\vv{a}$ 与 $\vv{b}$ 互相垂直时，一维长度标量绝不能线性相加（$a + b \neq c$），因为它们指向彼此独立的维度。而在正定欧氏克利福德几何代数中，将合成向量 $\vv{c} = \vv{a} + \vv{b}$ 与自身作几何乘积：
+**从一维线段的不可直加性到 0 阶面积度规与 2 阶双向量正反抵消**：设正定欧氏内积空间中两个正交向量 $\vv{a} \perp \vv{b}$ 的标量模长为 $a = \norm{\vv{a}}, b = \norm{\vv{b}}, c = \norm{\vv{a} + \vv{b}}$。当 $\vv{a}$ 与 $\vv{b}$ 互相垂直且二者均非零时，一维长度标量绝不能线性相加（$a + b \neq c$），因为它们指向彼此独立的维度；若其中一个向量为零，这个严格不等式退化为等式。无论是否退化，在正定欧氏克利福德几何代数中，都可将合成向量 $\vv{c} = \vv{a} + \vv{b}$ 与自身作几何乘积：
 
 $$
 \vv{c}^2 = (\vv{a} + \vv{b})(\vv{a} + \vv{b}) = \vv{a}^2 + \vv{b}^2 + (\vv{a}\vv{b} + \vv{b}\vv{a}) = a^2 + b^2 + 2(\vv{a}\cdot\vv{b}) + (\vv{a}\wedge\vv{b} + \vv{b}\wedge\vv{a}).
@@ -262,6 +262,10 @@ $$
 
 1. **当 `RaySupportConnected tests` 成立时**：取单元素测试集 $\mathrm{tests} = \{x\}$，其中 $x = (1, 1)$ 满足 $x_0 = 1 \neq 0$ 且 $x_1 = 1 \neq 0$。若幺正矩阵 $A \in U(2, \mathbb{C})$ 保持两根坐标射线 $\vv{e}_0 = (1, 0)$ 与 $\vv{e}_1 = (0, 1)$，则 `hoff` 先迫使 $A = \operatorname{diag}(c_0, c_1)$；接着 `hstep 0 1` 将 $A *_{v} (1, 1) = (c_0, c_1) = d(1, 1)$ 的两个分量通过右消去律 `mul_right_cancel₀` 锁在一起，给出 $c_0 = d = c_1$，故 $A = c_0 I_2$（$|c_0| = 1$）。
 2. **当 `RaySupportConnected tests` 被移除或断开时**：设 $\mathrm{tests} = \{\vv{e}_0, \vv{e}_1\}$，没有任何一个测试向量在坐标 $0$ 与 $1$ 处**同时非零**。此时 `Relation.ReflTransGen (fun i j => ∃ x ∈ tests, x i ≠ 0 ∧ x j ≠ 0) 0 1` 不成立！在物理上，相位门 $A = \operatorname{diag}(1, i) \in U(2, \mathbb{C})$ 保持 $\vv{e}_0$ 与 $\vv{e}_1$ 的射线不变，但它显然不是标量矩阵 $c I_2$。源码中的 `hconnect : RaySupportConnected tests` 恰恰在 `hchain (hconnect i j)` 这一行严丝合缝地堵住了“不连通子空间各自携带独立相对相位”的反例漏洞！
+:::
+
+::: {.figure src="ch27-ray-counterexample"}
+**支撑图一断开，两格的相位就各走各的。** 两栏里的两个圆是 $\iota = \operatorname{Fin} 2$ 的两个坐标，圆里紫色的箭头是对角元 $A_{00}$、$A_{11}$ 的相位。左栏只有一个测试态 $x = (1, 1)$，青色的弧连起两格，两支箭头指向同一方向：$A = c_0 I_2$（[@prop-audit-ray-phase-rigidity]）。右栏的测试态 $\vv{e}_0$、$\vv{e}_1$ 各只罩住一格，两格之间的虚线弧被划掉；$\operatorname{diag}(1, i)$ 保持两条坐标射线，两支箭头却相差 $90^\circ$，不是 $c I_2$。右栏是去掉连通前提后的反例，不是定理的结论。
 :::
 
 ::: {.remark #rem-lean-kernel-trust-boundary-literature title="依值类型论内核、德布鲁因准则与物理语义边界（文献结果，未在本书形式化）"}

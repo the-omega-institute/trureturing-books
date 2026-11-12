@@ -68,11 +68,11 @@ $$
 
 1. **无结构黑盒量子查询下界（C. H. Bennett, E. Bernstein, G. Brassard & U. Vazirani, *SIAM J. Comput.* **26**, 1510–1523, 1997）**：在黑盒神谕（Oracle）查询模型下，从 $N = 2^n$ 个候选中以有界误差定位未知目标至少需要 $L = \Omega(2^{n/2})$ 次量子查询（与 Grover 算法的 $O(2^{n/2})$ 上界共同锁定 $\Theta(2^{n/2})$）；
 2. **2-SAT 与 3-SAT 的经典复杂度分水岭（S. A. Cook, 1971；L. A. Levin, 1973；B. Aspvall, M. F. Plass & R. E. Tarjan, 1979）**：2-SAT 可通过强连通分量传递闭包在 $O(n+m)$ 线性时间内判定（故 $\text{2-SAT} \in \mathrm{P}$），而 3-SAT 为 $\mathrm{NP}$-完全问题；
-3. **有界阶平方和（SoS）半正定松弛下界（D. Grigoriev, *Theor. Comput. Sci.* **259**, 613–622, 2001；G. Schoenebeck, *FOCS*, 593–602, 2008）**：对于存在全局奇偶矛盾而不可满足的随机 3-XOR / 3-SAT 实例，任何阶数 $M = o(n)$ 的局部 Lasserre / Gram 半正定矩阵松弛 $G_M \succeq 0$ 均以高概率保持半正定与局部自洽，无法在亚线性松弛阶数（对应亚指数规模半正定规划）内证伪不可满足性。
+3. **有界阶平方和（SoS）半正定松弛下界（D. Grigoriev, *Theor. Comput. Sci.* **259**, 613–622, 2001；G. Schoenebeck, *FOCS*, 593–602, 2008）**：例如，在固定且充分大的常数子句密度 $m/n = \Delta$ 下，独立均匀抽取三个互异变量与随机文字符号（3-XOR 等价地抽取随机奇偶右端），采用标准布尔多项式编码（3-XOR 的奇偶等式、3-SAT 的子句满足约束），随机实例以高概率不可满足，而其阶数 $M = o(n)$ 的局部 Lasserre / Gram 半正定松弛仍有满足局部约束的可行矩矩阵 $G_M \succeq 0$，无法在该阶数（对应亚指数规模半正定规划）内证伪不可满足性（见 [Schoenebeck 完整版定理 12](https://schoeneb.people.si.umich.edu/papers/LasserreNew.pdf)）。
 :::
 
-::: {.viz src="timeless-causal-crystal" preset="longer" height="500"}
-**空间翻 $16$ 倍，步数翻 $4$ 倍。** 候选增到 $4096$ 个，每步的转角缩到四分之一（$2\theta = 1.79^\circ$），步数变成约 $50$；下方的图里青色的 $(\pi/4)\sqrt{N}$ 与品红虚线的 $N/2$ 越拉越开。线变长的速度是 $\sqrt{N}$，仍然没有坡度可循；这与上面第 1 条的查询下界同阶（文献结果）。
+::: {.viz src="timeless-causal-crystal" preset="sos" height="500"}
+**两元在阶 2 闭合，三元奇偶没有。** 青色的点：每个 $n$ 取一个随机 2-SAT 公式，两条两元子句消去一个变量，推出的仍至多两个文字，所以消解闭包停在阶 $2$，空子句是否出现就判定了可满足性：实心点推出了空子句（不可满足），空心圈没有（可满足）（页面的数值）。品红的虚线：对随机 3-XOR / 3-SAT，上面第 3 条的文献结果说阶 $o(n)$ 的平方和松弛仍处处相容，这条直线的斜率只是示意（`MODEL`）。琥珀色是观察者的阶 $M$。这些下界只约束这一族松弛，不推出 $\mathrm{P}\neq\mathrm{NP}$（[@conj-p-neq-np]，`OPEN`）。
 :::
 
 ### 3. 作者的诠释：复杂度视界、主观时间与自由选择
@@ -109,25 +109,243 @@ $$
 - **顺线验真（Verification along the line）**：必须计入读取输入与见证编码、以及每一节检查的实际成本；若第 $i$ 节成本为 $c_i$，逐节检查贡献 $\sum_{i=1}^k c_i$，只有每节成本一致有界时才是 $O(k)$。折线的段数本身不证明多项式位复杂度。形式证明项也可比喻为见证丝，但任意证明项的编码长度、类型检查与归约成本并无这里所需的统一线性保证，不能直接归入同一个 $NP$ 验证论证；
 - **离丝寻线（Searching without a field）**：见证可被高效检查，并不自动给出高效搜寻方法；反之，也不排除这种方法。“零横截面见证丝”表达作者关于无导引搜寻的图像，不是离散问题的复杂度下界，亦不适用于断言所有 $NP$ 问题都难解。
 
+::: {.viz src="timeless-causal-crystal" preset="wilderness" height="500"}
+**同一个场：丝上直达，丝外打转。** 平面上只有一个自治场 $\mathbf{F} = g(\tilde y)\bigl(1, h'(x)\bigr) + \bigl(1 - g(\tilde y)\bigr)\mathbf{F}_{\mathrm{swirl}}$，其中 $\tilde y = y - h(x)$，$g(\tilde y) = e^{-\tilde y^2/\varepsilon^2}$，$\mathbf{F}_{\mathrm{swirl}}$ 在丝上为零。从 $S_0$ 出发、恰在青色见证丝 $y = h(x)$ 上的探针沿丝直达 $S^*$；离丝只差一点、但在通道 $|\tilde y| < \varepsilon$ 之外出发的三根品红探针，在同一个积分器下被第一个涡旋卷住，到不了目标。这是“有线无场”的示意模型（`MODEL`），不是复杂度下界。
+:::
+
 ### 2. 为什么“$P$ 是场”（弃线造场，局部切面处处对齐全局）？
 
 在我们的几何诠释（`MODEL`）中，一些多项式时间算法所利用的几何或代数结构被比喻为**导向场**（如凸势能的负梯度流 $\mathbf{F}=-\nabla V$）。这不是 $P$ 的定义或必要条件；即使有光滑或无旋的场，也仍须证明它可高效计算、达到所需精度并在多项式步内终止。以下经典算法为这种图景提供具体参照：
 
 ::: {.remark #rem-ch30-karmarkar-kasteleyn-literature title="线性规划内点法、平面图 Pfaffian 匹配与毛球定理的文献说明"}
-**文献结果，未在本书形式化。** 本节用于对照“弃线造场”与“拓扑旋涡阻挫”的三项经典数学与算法结果均属外部文献，未在本书形式化：
+**文献结果，未在本书形式化。** 本节对照“弃线造场”与“拓扑旋涡阻挫”的三项经典结果；算法、几何推广及复杂度仍属外部文献，条件 Pfaffian 符号恒等式的实际供应与边界见 [@rem-ch30-rotation-pfaffian-boundary]：
 
 1. **卡马卡（N. Karmarkar, *Combinatorica* **4**, 373–395, 1984）线性规划内点法**：单纯形法沿着凸多面体表面的一维棱线折线爬行，在 Klee–Minty（1972）扭曲超立方体最坏实例上需走完指数级 $2^n$ 步；而内点法离开一维边界折线，进入多面体内部沿光滑对数势垒梯度场迭代，在多项式时间内抵达最优解；
-2. **卡斯特莱因（P. W. Kasteleyn, *Physica* **27**, 1209–1225, 1961）平面图 Pfaffian 完美匹配定理**：一般二分图完美匹配计数（永久式 Permanent）经 L. G. Valiant（1979）证明为 `#P`-完全；但在平面图上，Kasteleyn 定向为每条有向边赋予手性符号，构造反对称矩阵 $A_K^T = -A_K$ 使非平面交叉项正反相消，进而由凯莱恒等式 $[\operatorname{Pf}(A_K)]^2 = \det A_K$ 在多项式时间内精确算出加权完美匹配配分函数 $Z = |\operatorname{Pf}(A_K)| = \sqrt{\det A_K}$；
+2. **卡斯特莱因（P. W. Kasteleyn, *Physica* **27**, 1209–1225, 1961）平面图 Pfaffian 完美匹配定理**：一般二分图完美匹配计数（永久式 Permanent）经 L. G. Valiant（1979）证明为 `#P`-完全；对于有限平面图及非负边权 $w_e$，经典方法利用 Kasteleyn 定向构造反对称加权邻接矩阵 $A_K^T=-A_K$，使 Pfaffian 展开中各个实际完美匹配项的系数同号。因此，加权完美匹配配分函数为 $Z=\sum_M\prod_{e\in M}w_e=|\operatorname{Pf}(A_K)|$，再由凯莱恒等式 $[\operatorname{Pf}(A_K)]^2=\det A_K$ 得到 $Z=\sqrt{\det A_K}$。这里的符号机制是匹配项的系数对齐；非边对应零矩阵元。非负有理权以二进制编码时，精确求值属于多项式时间算法的文献结论。无完美匹配时 $Z=0$；一般平面图的处理还包括连通分量及奇数阶分量的零值情形。现代出处可参见 D. Cimasoni 与 N. Reshetikhin（2007），[*Dimers on surface graphs and spin structures. I*](https://arxiv.org/html/math-ph/0608070v2)，第 5.1 节、定理 5.1 的匹配展开及其球面特例；
 3. **庞加莱—布劳威尔偶维球面毛球定理（H. Poincaré, 1885；L. E. J. Brouwer, 1912）**：二维球面欧拉示性数 $\chi(S^2) = 2 \neq 0$，其上任何连续切向量场必至少存在一个零点（奇异发旋）。
 :::
 
 ::: {.viz src="timeless-causal-crystal" preset="field" height="500"}
-**场：处处有坡度。** 青色的流线从球上各处出发，每条都只看脚下的坡度，都流到目标；琥珀色是选中的那一条，球的对面那一点场为零。下方的图里，青色的势能降下多少，品红的耗散就付出多少，两者之和（琥珀色虚线）不变（[`S2_dissipation`](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation)）。把它读作“场”是本书的诠释（`MODEL`）。
+**场：处处有坡度。** 青色的流线从球上各处出发，每条都只看脚下的坡度，都流到目标；琥珀色是选中的那一条，球的对面那一点（灰色圈）场为零。把它读作“场”是本书的诠释（`MODEL`）。
 :::
 
-[@rem-ch30-karmarkar-kasteleyn-literature] 的三条都只是文献。在一个离散的小问题上，“场”与“线”两边都能写成精确的数学，并交给内核检查：给图的顶点着色。
+#### 从实际顶点旋转到面奇定向：一个有限组合前提 {#sec-ch30-rotation-parity}
 
-先看最小的奇圈，五边形 $C_5$：顶点 $0, 1, 2, 3, 4$，边 $01, 12, 23, 34, 40$。依次涂上颜色 $c = (0, 1, 0, 1, 2)$，相邻顶点颜色都不同。把颜色读作高度，这是顶点上一片分三层的场。现在让每条边指向颜色较大的一端：
+上面平面匹配的完整文献结论包含几何、组合、代数与算法四个环节。先取出其中一个可以逐项说清的有限组合问题：已给定原图在各顶点的循环次序，能否选择同一个边定向，使每个面和每条“删去后仍有完美匹配”的偶简单圈都具有奇数个反向 dart？这里的 dart 是一条带方向的实际边。例如一条桥有两个互逆 dart；面边界往返经过这条桥时，两次出现都要计数。只记录边的集合会丢掉这一信息。
+
+以下不预设平面中的内外区域，而从顶点旋转和一个整数计数条件推出所需的两侧结构。术语“球面旋转”在这里仅指下述满足欧拉条件的有限数据；从几何嵌入取得这些数据的对应关系另属一个环节。
+
+::: {.definition #def-ch30-actual-rotation title="实际 dart、顶点旋转与完整面轨道" lean="D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.Rotation D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.facePerm D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.Face D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face"}
+设 $V$ 为任意有限类型，具有可判定相等性，$G$ 为 $V$ 上邻接关系可判定的简单无向图。记 $D=G.\mathrm{Dart}$ 为实际 dart 类型：$d=(u,v)$ 必须满足 $G.\mathrm{Adj}(u,v)$；记 $E=G.\mathrm{edgeSet}$ 为实际无向边的类型，$e(d)=\{u,v\}\in E$，$\alpha(d)=(v,u)$。
+
+一个顶点旋转 $R$ 是 $D$ 上的置换 $\rho$，满足对所有 $d,t\in D$，
+
+$$
+\bigl(\exists n\in\mathbb Z,\ \rho^n(d)=t\bigr)
+\quad\Longleftrightarrow\quad d.\mathrm{fst}=t.\mathrm{fst}.
+$$
+
+面后继置换先反向、再旋转，即 $\phi(d)=\rho(\alpha(d))$。面类型 $F$ 是 $D$ 按 $\phi$ 的同轨道关系取商：$d\sim t$ 当且仅当存在 $n\in\mathbb Z$ 使 $\phi^n(d)=t$。记 $f(d)$ 为 $d$ 的商类；所有轨道都包含在 $F$ 中，包括单元素轨道。旋转数据本身不附带连通性、几何实现或欧拉等式。
+:::
+
+下列三个定理共同假设 $G$ 连通、$D$ 非空，并满足**整数**欧拉等式
+
+$$
+(|V|:\mathbb Z)-(|E|:\mathbb Z)+(|F|:\mathbb Z)=2.
+$$
+
+所有基数先转为整数再相减，不采用自然数的截断减法。特别地，单顶点无边图不满足这里的 dart 非空前提，不在这三个定理的范围内。
+
+::: {.definition #def-ch30-face-boundary title="二元面边界与反向计数" lean="D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.boundary D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.faceOpposition"}
+记 $\mathbb F_2=\mathbb Z/2\mathbb Z$。对面函数 $x:F\to\mathbb F_2$，线性边界映射 $B:\mathbb F_2^F\to\mathbb F_2^E$ 在每条无向边上选择一个代表 dart $d_e$，定义
+
+$$
+(Bx)(e)=x(f(d_e))+x(f(\alpha(d_e))).
+$$
+
+对任意 dart 函数 $\varepsilon:D\to\mathbb F_2$，定义面反向计数
+
+$$
+\operatorname{opp}_F(\varepsilon,f)=\sum_{\substack{d\in D\\f(d)=f}}\varepsilon(d).
+$$
+
+当 $\varepsilon(\alpha(d))=1+\varepsilon(d)$ 时，它编码一个边定向：$\varepsilon(d)=0$ 表示定向沿着 $d$，$1$ 表示与 $d$ 相反。面计数遍历该完整轨道的所有实际 dart；桥的两个 dart 即使属于同一个面，也分别计数。记 $\mathcal C(G)\subseteq\mathbb F_2^E$ 为所有实际简单圈的无向边指示函数所张成的线性空间。
+:::
+
+::: {.theorem #thm-ch30-face-cycle-exact title="面边界恰为实际圈空间" lean="D5/S3/Combinatorics/Graph/PlanarMatching/RotationBoundary.face_cycle_exact"}
+对上述任意有限 $V$、连通简单图 $G$ 与顶点旋转 $R$，若 $D\ne\varnothing$ 且整数等式 $|V|-|E|+|F|=2$ 成立，则以下三项同时成立：
+
+1. 对所有 $x:F\to\mathbb F_2$ 和 $d\in D$，$(Bx)(e(d))=x(f(d))+x(f(\alpha(d)))$。
+2. 对所有 $x:F\to\mathbb F_2$，$Bx=0$ 当且仅当存在 $c\in\mathbb F_2$ 使每个 $f\in F$ 都满足 $x(f)=c$。
+3. $\operatorname{im}B=\mathcal C(G)$。
+:::
+
+::: proof
+同一无向边的两个代表只差反向，所以两岸之和不依赖选择。零边界使互逆 dart 两侧的面值相等；面后继与顶点循环次序把相等性传到同一顶点，再由原图连通性传到所有面。于是核恰为常函数，维数为 $1$。沿面后继重排 dart 求和，说明每个面边界在每个顶点的关联次数为偶数，因此属于已有的实际圈空间。秩—零化度公式给出 $\dim\operatorname{im}B=|F|-1$；连通图圈空间的维数为 $|E|-|V|+1$，整数欧拉等式使两者相等。完整证明由 Lean 内核检查。
+:::
+
+接下来，取原图中以 $a$ 为起终点的实际闭游走 $p$。所谓简单圈，是 $p$ 满足形式谓词 $p.\mathrm{IsCycle}$：除闭合处重复起点外不重复顶点，并排除零长游走和沿同一边往返的退化情形。记 $C(p)$ 为其顶点支撑集，$E(p)$ 为其实际无向边集，$\mathcal D(p)$ 为按游走顺序排列的 dart 列表，$p^{\mathrm{rev}}$ 为逆向游走。写 $G[S]$ 表示 $G$ 在顶点集 $S$ 上的诱导子图；其顶点携带属于 $S$ 的条件，$v.\mathrm{val}$ 表示忘去这一条件后的原顶点。称一个偶简单圈为 *nice*，是指原图删去 $C(p)$ 后的实际诱导子图存在完美匹配。
+
+::: {.theorem #thm-ch30-cycle-face-sides title="实际简单圈的两侧、区域欧拉式与匹配限制" lean="D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.cycle_face_sides"}
+对上述有限 $V$、连通简单图 $G$ 与旋转 $R$，假设 $D\ne\varnothing$ 和整数等式 $|V|-|E|+|F|=2$。对任意 $a\in V$ 和实际简单圈 $p:a\leadsto a$，存在面函数 $x:F\to\mathbb F_2$ 及顶点集 $I,J\subseteq V$，使下列各项同时成立。
+
+1. $F_1=\{f\in F:x(f)=1\}$ 与 $F_0=\{f\in F:x(f)=0\}$ 均非空；它们互为补集，且 $Bx=\mathbf1_{E(p)}$。
+2. 存在 $q=p$ 或 $q=p^{\mathrm{rev}}$，使对每个实际 dart $d$，
+
+   $$
+   \begin{aligned}
+   &x(f(d))=1\ \land\ x(f(\alpha(d)))=0\\
+   &\quad\Longleftrightarrow\ d\in\mathcal D(q),\\
+   &x(f(d))=0\ \land\ x(f(\alpha(d)))=1\\
+   &\quad\Longleftrightarrow\ d\in\mathcal D(q^{\mathrm{rev}}).
+   \end{aligned}
+   $$
+
+3. 对每个 $v\in V$，$v\notin C(p)$ 当且仅当 $v\in I\cup J$，且 $I\cap J=\varnothing$。对每个 $d.\mathrm{fst}\notin C(p)$ 的实际 dart，
+
+   $$
+   \begin{aligned}
+   d.\mathrm{fst}\in I&\ \Longleftrightarrow\ x(f(d))=1,\\
+   d.\mathrm{fst}\in J&\ \Longleftrightarrow\ x(f(d))=0.
+   \end{aligned}
+   $$
+
+   任意 $v\in I,w\in J$ 均满足 $\neg G.\mathrm{Adj}(v,w)$。
+4. 对每一对 $(S,b)=(I,1)$ 或 $(J,0)$，存在原图的连通子图 $H_S$，其顶点集恰为 $C(p)\cup S$；对每个实际 dart $d$，
+
+   $$
+   \begin{aligned}
+   &H_S.\mathrm{Adj}(d.\mathrm{fst},d.\mathrm{snd})\\
+   &\quad\Longleftrightarrow\ e(d)\in E(p)\\
+   &\qquad\lor\bigl(x(f(d))=b\ \land\\
+   &\qquad\qquad x(f(\alpha(d)))=b\bigr).
+   \end{aligned}
+   $$
+
+   记 $E_S$ 为这个子图的实际无向边集，$E_S^\circ=E_S\setminus E(p)$。以下两式均在 $\mathbb Z$ 中成立：
+
+   $$
+   \begin{aligned}
+   |C(p)\cup S|-|E_S|+|F_b|&=1,\\
+   |S|-|E_S^\circ|+|F_b|&=1.
+   \end{aligned}
+   $$
+
+5. 令 $U=V\setminus C(p)$，$\bar G=G[U]$ 为实际顶点删除补图。对这个同一图 $\bar G$ 的任意完美匹配子图 $M$，以及每个 $S\in\{I,J\}$，令 $S'=\{u\in U:u.\mathrm{val}\in S\}$。存在 $\bar G[S']$ 的完美匹配子图 $N$，对其所有顶点 $v,w$ 满足
+
+   $$
+   \begin{aligned}
+   &N.\mathrm{Adj}(v,w)\\
+   &\quad\Longleftrightarrow\ M.\mathrm{Adj}(v.\mathrm{val},w.\mathrm{val}).
+   \end{aligned}
+   $$
+
+   此时 $|I|$ 与 $|J|$ 都为偶数。
+:::
+
+::: proof
+由 [@thm-ch30-face-cycle-exact]，简单圈的边指示函数具有一个面原像 $x$。非零边界排除常值标号，故两类面都出现。圈外顶点的全部相邻面值相同，因而确定 $I,J$；原图边不能跨接不同标号的圈外顶点。区域选边条件保留圈边与两岸都在该侧的边：即使一条弦的两个端点都在圈上，也不能把位于另一侧的弦加入本侧。沿原图路径首次抵达圈，得到每个选边区域的连通性。
+
+把仅支撑在一侧的面函数映入该区域的圈空间，利用连通图圈秩得到两侧的欧拉不等式。两区域顶点、边的并交计数与全局整数欧拉等式迫使两侧同时取等。简单圈的边数等于顶点数，消去圈边与圈点便得到第二种区域欧拉式。每个圈顶点的两条实际圈边在顶点旋转中确定两次标号切换，由此得到 $q$ 与 $q^{\mathrm{rev}}$ 的直接边界等价。最后，无跨边性质保证给定 $M$ 的每条匹配边留在同一侧；把同一个 $M$ 限制到两侧，完美匹配的偶阶性质便推出两侧顶点数为偶数。完整证明由 Lean 内核检查。
+:::
+
+两侧面集均非空，但圈外顶点侧可以为空；定理并不要求每侧都有严格内部顶点，也没有假设“内部点数为偶数”。区域是按实际边选择的连通子图，以上结论不把它称为已构造的拓扑圆盘。
+
+::: {.theorem #thm-ch30-face-odd-nice-cycle-orientation title="同一个定向在所有面与所有 nice 偶圈上为奇" lean="D5/S3/Combinatorics/Graph/PlanarMatching/RotationFaces.face_odd_nice_cycle_orientation"}
+设 $V$ 为任意有限类型，具有可判定相等性；$G$ 为邻接关系可判定的连通简单图，$R$ 为其顶点旋转。若 $D\ne\varnothing$、$|V|$ 为偶数，且在 $\mathbb Z$ 中 $|V|-|E|+|F|=2$，则存在**同一个**函数 $\varepsilon:D\to\mathbb F_2$，同时满足：
+
+$$
+\begin{aligned}
+&\forall d\in D,\quad \varepsilon(\alpha(d))=1+\varepsilon(d),\\
+&\forall f\in F,\quad \operatorname{opp}_F(\varepsilon,f)=1.
+\end{aligned}
+$$
+
+此外，对每个 $a\in V$、每个以 $a$ 为起终点的实际偶长简单圈 $p$，以及实际补图 $G[V\setminus C(p)]$ 的每个完美匹配子图 $M$，均有
+
+$$
+\sum_{d\in\mathcal D(p)}\varepsilon(d)=1\quad\text{于 }\mathbb F_2.
+$$
+
+这里的和按 dart 列表计数。存在量词 $\exists\varepsilon$ 位于所有圈与所有补图匹配的全称量词之前。
+:::
+
+::: proof
+先任取一个边定向，记录每个面的奇偶缺陷。面边界映射的核仅由常函数组成，所以其转置所能修正的缺陷恰好满足总和为零。全局整数欧拉式与 $|V|$ 为偶数保证这个相容条件。给每条边的两个 dart 加上同一个二元修正，既保持反向关系，又使全部面轨道的反向计数为 $1$。
+
+对任意给定的 nice 偶圈，使用 [@thm-ch30-cycle-face-sides] 的实际一侧。把该侧所有面的反向计数相加，每条非圈的所选边贡献 $1$；直接边界等价把剩余项识别为沿 $q$ 的 dart 和。区域欧拉式于是给出
+
+$$
+\sum_{d\in\mathcal D(q)}\varepsilon(d)
+  =|F_1|+|E_I^\circ|=1+|I|\quad\text{于 }\mathbb F_2.
+$$
+
+给定补图匹配的实际限制使 $|I|$ 为偶数，所以右侧为 $1$。若 $q=p^{\mathrm{rev}}$，反向关系使两次遍历的和相差圈长在 $\mathbb F_2$ 中的值；偶长条件使此差为零。因此最初选出的同一个定向适用于所有这些圈与匹配。完整证明由 Lean 内核检查。
+:::
+
+::: {.remark #rem-ch30-rotation-pfaffian-boundary title="有限旋转前提与完整平面匹配结论的边界"}
+**既有结果的应用与文献结果的边界。** 上面三个定理仍只处理已给定实际顶点旋转、dart 非空、连通及整数欧拉式的有限组合情形。下面把两种匹配的实际交错、原始 Pfaffian 的符号约定和同一张图上的系数传递逐一接起来；这些解释不另立复合定理盒。
+
+**从两种匹配到有根偶圈。** 设 $X$ 是任意有限线性有序类型，$\mathcal M(X)$ 是原生载体 [`FixedPointFreeInvolution`](lean:D5/S3/Zeros/Convolution/PerfectMatchingCount.FixedPointFreeInvolution)：其元素是满足 $s(s(x))=x$ 且 $s(x)\ne x$ 的置换。对有序输入 $(s,t)$，以两色边 $x\!\leftrightarrow\!s(x)$、$x\!\leftrightarrow\!t(x)$ 的自反传递闭包定义实际连通分量。每个分量各取自己的最小点 $m$，令 $r=t\,s$（先作用 $s$），以 $r$ 的完整整数幂轨道作为第一相位。两种匹配都交换该分量中两个互不相交的 $r$ 轨道；相位由分量最小点决定，与数值标签的奇偶无关。交错置换 $q$ 在第一相位沿 $s$，在另一相位沿 $t$；其前驱反过来选择。于是从每个这样的 $m$ 出发，对所有 $k\in\mathbb N$，
+
+$$
+\begin{aligned}
+q^{2k}(m)&=(ts)^k(m),\\
+q^{2k+1}(m)&=s((ts)^k(m)).
+\end{aligned}
+$$
+
+[`rooted_interlacing`](lean:D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles.rooted_interlacing) 同时给出这些公式、$q$ 的完整圈恰等于原两色分量、最小点性质，以及恢复两个原始匹配的等式。交错覆盖整个分量；每步翻转相位，所以每圈长度为偶数。其输出载体明确要求 **$\forall x,\ q(x)\ne x$，并且 $q.\mathrm{cycleFactorsFinset}$ 的每个成员的支撑基数为偶数**。后一有限集不列出单点圈，不能省去前一条件。
+
+反向从这样的 $q$ 出发，取每个完整 $q$ 圈的最小点 $m$，以 $q^2$ 的完整轨道定义偶相位；在偶相位令 $s(x)=q(x)$、$t(x)=q^{-1}(x)$，在另一相位交换这两个选择。偶圈长度保证后继和前驱都翻转相位，包括末点回到首点的边，所以恢复出的 $s,t$ 都是无不动点对合。[`rooted_reconstruction`](lean:D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles.rooted_reconstruction) 给出点态公式与 $\mathrm{forward}(\mathrm{recover}(q))=q$；另一个复合恢复原来的有序对。实际的 [`equivalence`](lean:D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles.equivalence) 是这两张互逆映射构成的 `Equiv` 定义，不是另一条定理或仅凭基数选出的双射。不要求 $X$ 非空或预先为偶数阶：空类型上是唯一空置换，奇数阶时两边载体皆空；共同匹配边给出真正的二循环，$s=t$ 时 $q=s$，二循环反向恢复的两种匹配相同；不连通分量各自扎根。Eğecioğlu（1990，*Ars Combinatoria* **29**, 107–116）的入边标色约定不在这里冒称为同一个相位约定。这一结构对应不证明加权符号恒等式或行列式平方；源审计 `29209` 仍为 2 项未决、0 项验证。
+
+**保留原始归一化 Pfaffian。** 取 $n\in\mathbb N$ 与任意交换环 $R$。[`P`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.P) 的配对是 $\mathrm{Fin}(2n)$ 上无不动点的对合函数。对每个配对，把较小端点递增排列，再紧接其伙伴，得到规范列举 $c(p)$；[`canonical_mate`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.canonical_mate) 确认相邻槽位确为伙伴。[`listingEquiv`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.listingEquiv) 把所有归一化列举与这些配对互逆地对应：列举共轭相邻槽位配对得到 $p$，再规范列举返回原列举。原定义 [`pfaffian`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.pfaffian) 始终是
+
+$$
+\operatorname{Pf}(A)=\sum_{\sigma\in L(n)}
+\operatorname{sgn}(\sigma)\prod_{i\in\mathrm{Fin}(n)}
+A_{\sigma(2i),\sigma(2i+1)},
+$$
+
+其中 $L(n)$ 要求每对内部递增、各对首端点递增，整数符号再映入 $R$；没有阶乘或 $2$ 的除法。空列举的空积为 $1$。符号是**列举置换**的符号，不是伙伴对合置换的符号。后者与原生 $\mathcal M(\mathrm{Fin}(2n))$ 的对应，是用对合函数的双射性构成置换，再忘掉置换结构；两个复合逐点保留同一个伙伴函数。
+
+对归一化 $\sigma$，令 $p=\mathrm{pairingOfListing}(\sigma)$。逆序对是位置 $u<v$ 且 $\sigma(v)<\sigma(u)$；交叉对以较小端点 $a<c<p(a)<p(c)$ 计一次，嵌套对以 $a<c<p(c)<p(a)$ 计一次。实际的 [`inversionCrossNestEquiv`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.inversionCrossNestEquiv) 把逆序对对应到一个交叉，或一个嵌套加 $\mathrm{Fin}(2)$ 中的方向位：两个不同配对槽中，交叉贡献“后一端—前一端”一个逆序，嵌套再贡献“后一端—后一端”一个逆序。[`inversion_card_eq_cross_add_two_nesting_card`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.inversion_card_eq_cross_add_two_nesting_card) 因而给出
+
+$$
+|\mathrm{Inv}(\sigma)|=|\mathrm{Cross}(p)|+2|\mathrm{Nest}(p)|.
+$$
+
+故列举符号等于 $(-1)^{|\mathrm{Cross}(p)|}$。[`pfaffian_eq_crossing_sum`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.pfaffian_eq_crossing_sum) 将原始和逐项改写为以此符号乘 $\prod_{a<p(a)}A_{a,p(a)}$ 的和，每条配对边恰算一次。该结论对任意矩阵、任意交换环成立，不要求反对称性、除法或消去律；嵌套的两次贡献连同空情形均在对应内。对非规范列举，[`listing_value_canonical`](lean:D5/S0/Certificates/Combinatorics/NormalizedPfaffian.listing_value_canonical) 在反向变号的整数单位因子下保证相同有符号值：整对换位的符号是平方 $1$，单对翻转的置换负号与边因子负号相消。
+
+**同一张实际图上的符号传递。** 现在令 $V$ 有限、$G$ 为其上的简单图，给定枚举 $e:V\simeq\mathrm{Fin}(2n)$。实际完美匹配始终是 Mathlib 的 $G.\mathrm{Subgraph}$，每点恰有一个邻点。[`matchingEquiv`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.matchingEquiv) 在完全图上选择唯一邻点得到伙伴函数，反向用 $p(v)=w$ 定义邻接；再经 $e$ 搬运，并仅保留伙伴边全为实际 $G$ 边的配对，便恰好得到 $G$ 的实际完美匹配，没有另造匹配或 Pfaffian 核心。
+
+令 dart 位 $\varepsilon:G.\mathrm{Dart}\to\mathbb Z/2\mathbb Z$ 满足 [`Reverses`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.Reverses)，即 $\varepsilon(\bar d)=1+\varepsilon(d)$；整数单位 $\delta(d)=(-1)^{\varepsilon(d)}$ 因而满足 $\delta(\bar d)=-\delta(d)$。匹配系数 $\tau_e(M)$ 是其规范列举的符号乘列出的实际有向匹配边的 $\delta$ 之积。对任意实际简单闭行走 $p$，记 $C=p.\mathrm{toSubgraph}$；若它对 $M$ 交替，即圈上每点的两条不同圈边恰有一条在 $M$ 中，[`alternating_cycle_flip`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.alternating_cycle_flip) 给出偶长度、仍为实际完美匹配的 $N=M\mathbin{\triangle}C$，以及**同一张 $G$ 删除 $C$ 顶点后的诱导图**上的完美匹配。原因是圈内每点已有圈内伙伴，唯一性禁止匹配边横跨圈内外；限制同一个 $M$ 就给出补图匹配。此翻转结论本身不需要有限性、嵌入、定向或权重。
+
+在上述枚举与反向条件下，[`alternating_cycle_transport`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.alternating_cycle_transport) 对这个实际翻转证明
+
+$$
+\tau_e(M)\tau_e(N)=-\prod_{d\in p.\mathrm{darts}}\delta(d).
+$$
+
+沿圈转动一次并固定圈外顶点的置换具有偶数个支撑点，所以符号为 $-1$。它把圈内匹配送到互补圈边，圈外共同匹配保持原样；即使标签交错也如此。列举归一化把这一新列举的值识别为 $\tau_e(N)$。圈上反向列出的边同时带来两个相消负号，圈外相同单位平方为 $1$，余下恰为实际 dart 乘积。
+
+[`NiceOdd`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.NiceOdd) 要求：对**每条实际偶简单闭行走**，若其实际顶点删除诱导补图有完美匹配，则 $\sum_{d\in p.\mathrm{darts}}\varepsilon(d)=1$。两匹配的对称差各点度为 $0$ 或 $2$；不同时可取其中一条实际交替简单圈，上段的补图匹配使它满足此假设，dart 乘积为 $-1$，翻转保持系数且严格减少分歧边。有限归纳给出 [`niceOdd_matching_tau_eq`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.niceOdd_matching_tau_eq)：任意实际匹配的系数相同，允许共同边、不连通图及 $M=N$。
+
+**一个单位，所有权重与系数环。** 给每条实际无向边权重 $w:G.\mathrm{edgeSet}\to R$，令 $A_{e,\varepsilon,w}$ 在实际边上为 $\delta(x,y)w_{\{x,y\}}$ 映入 $R$，非边及对角元为 $0$。反向条件使之反对称，特征 $2$ 时对角元仍明确为零。$Z(w)$ 是对实际完美匹配求和、对每条实际无向匹配边只乘一次的配分函数。不受实际图支持的配对有零矩阵因子；受支持的配对与实际匹配互逆，规范槽位与匹配边双射。因此原始 Pfaffian 等于 $\sum_M\tau_e(M)\prod_{a\in M}w_a$。[`weighted_pfaffian_identity`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.weighted_pfaffian_identity) 在 `Reverses` 与 `NiceOdd` 下将共同系数提出：
+
+$$
+\operatorname{Pf}(A_{e,\varepsilon,w})=(u_{e,\varepsilon}:R)\,Z(w),
+\qquad u_{e,\varepsilon}\in\mathbb Z^\times.
+$$
+
+[`orientationUnit`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.orientationUnit) 在有匹配时取任一实际匹配的整数单位系数，无匹配时取 $1$；它只依赖图、枚举与定向，独立于 $R,w$。故公式包括负权、零权、零因子环和特征 $2$，不使用除法。顶点集为空（$n=0$）时，唯一空匹配使两边为 $1$；顶点集非空的无边图没有完美匹配，属于所有配对项为零且 $Z=0$ 的无完美匹配情形。若进一步 $R=\mathbb R$ 且每个实际边权非负，则 $Z\ge0$、$|u|=1$，取绝对值得 $|\operatorname{Pf}(A)|=Z$；这是上述恒等式的应用，不另有一个绝对值端点定理。
+
+上面的有限旋转定向与此恒等式只有在**同一张实际图**上才能合用：保留原来的连通、dart 非空和整数欧拉假设，将原来的反向 dart 条件识别为 `Reverses`，并将每条偶简单圈的实际顶点删除补图匹配送入原 nice 圈条件，才能取得这里的 `NiceOdd`。从任意几何平面嵌入取得该旋转及完整面轨道的对应、超出旋转前提的图、完整凯莱行列式平方恒等式 `FullCayley`、$\sqrt{\det A}$ 表述、有理输入的精确算法和位复杂度及一般二分计数的 `#P`-完全性仍须分别处理，后者保留为 [@rem-ch30-karmarkar-kasteleyn-literature] 的文献结果。源审计 `29266` 保留 10 项验证、9 项未决；条件符号恒等式不消去这些残余义务。
+:::
+
+[@rem-ch30-karmarkar-kasteleyn-literature] 中的算法与几何推广仍有文献边界；上述条件匹配恒等式则已有精确供应声明。另一个“场”与“线”两边都能写成精确数学的离散问题，是给图的顶点着色。
+
+先看一个奇圈，五边形 $C_5$：顶点 $0, 1, 2, 3, 4$，边 $01, 12, 23, 34, 40$。依次涂上颜色 $c = (0, 1, 0, 1, 2)$，相邻顶点颜色都不同。把颜色读作高度，这是顶点上一片分三层的场。现在让每条边指向颜色较大的一端：
 
 $$
 0 \to 1, \qquad 2 \to 1, \qquad 2 \to 3, \qquad 3 \to 4, \qquad 0 \to 4 .
@@ -210,6 +428,7 @@ $C_5$ 中最长有向路含 $5$ 个顶点的 $12$ 个定向里，有 $2$ 个是�
 ### 3. 毛球旋度（$\nabla \wedge \mathbf{F}$）几何类比与 $P \neq NP$：为什么一根线撑不起一片场？
 
 既然造出全局导向场就能化盲搜为顺流，为什么在 3-SAT 等问题中难以构造这样一片多项式可计算的全局导向场？用连续微分几何作类比模型（`MODEL`，旨在提供几何直觉而非复杂度猜想 [@conj-p-neq-np] 的直接形式证明）：
+
 - 一片能够从任意初态无阻挫滑向全局终点的保守梯度场 $\mathbf{F} = -\nabla V$，在连续极限下满足外微分零旋度条件：
 
   $$
@@ -261,7 +480,7 @@ $C_5$ 中最长有向路含 $5$ 个顶点的 $12$ 个定向里，有 $2$ 个是�
 - **“球永远只是多面体近似”：三体局部切面与渐近缝隙（`MODEL`）**：作者以局部三体切面（$\mathbf{e}_i\wedge\mathbf{e}_j\wedge\mathbf{e}_k$）拼接整体的图像，诠释指数率上界随规模变化的可能性。若 [@rem-ch30-eth-subexponential-literature] 中预印本宣称的上界经审计成立，其有效单变量指数率将趋于 $0$；这一条件性算法主张不能由多面体比喻或上述有限维 Lean 原型推出。
 
 ::: {.viz src="eth-horizon-crossover" preset="bridge" height="500"}
-**流矩阵的秩等于最小割。** 桥图 $(a, b, c, d) = (2, 3, 2, 3)$：两道外割都是 $6$（琥珀色虚线），三条桥能过 $12$。右边是一个随机整数实例的 $6 \times 6$ 流矩阵（青色为正项，品红为负项），下面六根奇异值都不为零：秩 $6$，恰等于最小割。这只是一个实例；这类桥图在维数锥域内总是如此，是 Lean 验证的定理。
+**流矩阵的秩等于最小割。** 桥图 $(a, b, c, d) = (2, 3, 2, 3)$：两道外割都是 $6$（琥珀色虚线），三条桥能过 $12$。右边是一个随机整数实例的 $6 \times 6$ 流矩阵（青色为正项，品红为负项），下面六根奇异值都不为零：秩 $6$，恰等于最小割。这只是一个实例；Lean 验证的 [@thm-bridge-quantum-maxflow-mincut] 表明：在其完整维数假设下，这类桥图的最大可达秩等于最小割，单次抽样的秩则可能更低。这条定理只讲桥图上的流与割，与上文转述的亚指数 3-SAT 预印本无关：它既不检验、也不支持那里的算法主张（[@rem-ch30-eth-subexponential-literature]，未经审计）。
 :::
 
 ### 2. 银河算法（Galactic Algorithm）与宇宙视界：上界比较能说明什么？（`MODEL` 与认识论边界）
@@ -289,15 +508,20 @@ $C_5$ 中最长有向路含 $5$ 个顶点的 $12$ 个定向里，有 $2$ 个是�
 [@ex-ch30-galactic-crossover-scale] 中跨越宇宙尺度的数值与规约对比，为本书“球内有限观察者 vs. 球外之球”的认识论图景（`MODEL`）提供了三点深刻启示：
 
 - **银河算法与有限观察者的物理尺度边界（`MODEL`）**：[@ex-ch30-galactic-crossover-scale] 的归一化示意曲线展示了超天文尺度才交叉的可能性，与“银河算法”的尺度图像呼应。**有限记忆历史容量定理**（[`finite_memory_history_capacity`](lean:D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity)，约束可区分历史数）与**开放可积电路最小深度定理**（[`OpenIntegrableCircuitMinDepth.result`](lean:D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result)，在其局部性前提下给出最小深度 $\lfloor N/(\kappa+1)\rfloor+1$）各自刻画特定模型的资源限制。它们与上界曲线并置可用于作者的有限观察者诠释，但不能组合成所有 SAT 算法的下界或有限观察者必然难解的证明；标准 $P\neq NP$ 仍为 `OPEN`（[@conj-p-neq-np]）。
+
+::: {.viz src="eth-horizon-crossover" preset="constant" height="500"}
+**常数减半，交叉点回到视界之内。** 取 $c = 1/2$：青色示意曲线与品红的 $0.386$ 交在 $n \approx 2^{57}$，落进阴影（可观测宇宙原子数以内的规模）。大 O 记号不给出常数 $c$，交叉点落在视界的哪一边全看它（示意曲线的数值对比，`MODEL`）。
+:::
+
 - **$P$（场）与 $NP$（线）的认识论对照（`MODEL`）**：导向结构与见证检查表现出不同的任务角色；它们可以在同一个问题中并存，因为 $P\subseteq NP$。上界曲线和编码尺度比较不把两类问题分开。
-- **形式内核核验与顶层规约审计的哥德尔—语义边界（`LEAN ✓` 原型与 `MODEL` 映照）**：[@rem-ch30-eth-subexponential-literature] 中最具认识论意味的一幕是——形式证明助手内核可以迅速核验脚本内部每一步推演的传递合法性，而学界仍需仔细审计“顶层形式化命题的定义是否忠实刻画了目标图灵机复杂度命题”。在本书第 21 章中，经 Lean 4 内核验证的**相对语义对角线与定义逃逸定理**严格证明：在给定无不动点扭转映射（`∀ v, twist v ≠ v`）的条件下，相对语义对角线构造必然逃出任何已编目解码族（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)），且当解码目录对潜空间满射时，该对角线目标相对于给定潜映射不满足语义完备性 `TargetAdequate`（[`relative_semantic_diagonal_target_inadequate_of_surjective`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective)）。将这一形式定理作为认识论原型（`MODEL`）来观照顶层规约审计，恰好印证了全书的核心准则：**形式内核在球内严格锁死推演链条的传递正确性，而对顶层命题边界定义之语义恰当性的审视，永远需要站在形式球壳之外！**
+- **形式内核核验与顶层规约审计的哥德尔—语义边界（`LEAN ✓` 原型与 `MODEL` 映照）**：[@rem-ch30-eth-subexponential-literature] 中最具认识论意味的一幕是——形式证明助手内核可以迅速核验脚本内部每一步推演的传递合法性，而学界仍需仔细审计“顶层形式化命题的定义是否忠实刻画了目标图灵机复杂度命题”。在本书第 21 章中，经 Lean 4 内核验证的**相对语义对角线与定义逃逸定理**严格证明：在给定无不动点扭转映射（`∀ v, twist v ≠ v`）的条件下，相对语义对角线构造必然逃出任何已编目解码族（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)），且当解码目录覆盖潜坐标上的全部解码函数时，该对角线目标相对于给定潜映射不满足语义完备性 `TargetAdequate`（[`relative_semantic_diagonal_target_inadequate_of_surjective`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective)）。将这一形式定理作为认识论原型（`MODEL`）来观照顶层规约审计，恰好印证了全书的核心准则：**形式内核在球内严格锁死推演链条的传递正确性，而对顶层命题边界定义之语义恰当性的审视，永远需要站在形式球壳之外！**
 
 ::: {.viz src="eth-horizon-crossover" preset="atoms" height="500"}
 **交叉点在视界之外。** 青色是取 $c = 1$ 的示意曲线 $r(n) = \log_2(\log_2 n)/\sqrt{\log_2 n}$，品红是 PPSZ 的 $0.386$，阴影是可观测宇宙原子数 $2^{266}$ 以内的规模。琥珀色的读数停在 $n = 2^{266}$：曲线还在 $0.494$，要到 $n \approx 2^{558}$ 才降到 $0.386$（示意曲线的数值对比，`MODEL`）。
 :::
 
 ::: {.viz src="eth-horizon-crossover" height="640"}
-**交互实验室 `ORTHO//HORIZON`**：本节的三个场景。指数率：示意曲线 $r(n)$ 与 PPSZ 的 $0.386$ 在哪里相交，以及常数 $c$ 怎样把交叉点挪进或挪出阴影；桥图：流矩阵的秩与三道割，锥域内秩等于最小割（Lean 已验证），锥域外三条桥成为瓶颈；模态：谱里不小于阈值 $\theta$ 的模态数不超过 $T/\theta$（Lean 已验证）。取 $c = 1$ 的曲线只是示意，不是任何算法的实测。
+**交互实验室 `ORTHO//HORIZON`**：本节的三个场景。指数率：示意曲线 $r(n)$ 与 PPSZ 的 $0.386$ 在哪里相交，以及常数 $c$ 怎样把交叉点挪进或挪出阴影；桥图：单次抽样的流矩阵秩与四道割，冻结量 $\operatorname{QMinCut} = \min(3ac, ad, bc)$，第四道 $3bd$ 割由手工矩阵分解给出；自然数维数满足 $0 < a \le b$、$0 < c \le d$、$a^2 + b^2 \le 3ab$、$c^2 + d^2 \le 3cd$ 时，可达最大秩等于 $\operatorname{QMinCut} = \min(ad, bc)$（Lean 已验证），单次抽样仍可更低，锥域外须比较四道割；模态：谱里不小于阈值 $\tau$ 的模态数不超过 $RW/(\pi\tau)$（Lean 已验证）。取 $c = 1$ 的曲线只是示意，不是任何算法的实测。
 :::
 
 ---
@@ -405,7 +629,7 @@ $$
 两项各管一件事。求和项是其余涡旋吹过来的速度：第 $k$ 个涡旋在距离 $r$ 处诱导的速度大小为 $\frac{b}{2r}$，方向垂直于连线，转向由 $s_k$ 决定；对照 [@rem-ch30-point-vortex-literature]，这相当于取 $\Gamma_k = \pi b\,s_k$。第一项让每个涡旋自己绕原点转，角速度为 $s_j\Omega$：$\Omega > 0$ 时正涡旋逆时针，负涡旋顺时针。把偶数个涡旋正负相间摆在半径 $\rho$ 的圆上，两项在切向上对着干。手工推导（用到下面证明里的切向读数恒等式）：其余涡旋给第 $j$ 个涡旋的切向速度是 $-s_j\,\frac{b}{4\rho}$，进动给它的切向速度是 $s_j\,\Omega\rho$，两者相消当且仅当 $\rho^2 = \frac{b}{4\Omega}$。圆太小，邻居的推动占上风；圆太大，进动占上风；只有一个半径能让整圈停住。
 
 ::: {.figure src="ch30-vortex-radius"}
-**只有一个半径能让整圈停住。** 横轴是正负相间的涡旋所在圆的半径 $\rho$。紫色的直线是进动给每个涡旋的切向速度大小 $\Omega\rho$，蓝色的曲线是其余涡旋吹来的切向速度大小 $\frac{b}{4\rho}$，两者方向相反，只在 $\rho = R_{b,\Omega} = \sqrt{b/(4\Omega)}$ 处相等（图中取 $b = 2$、$\Omega = \tfrac12$，$R = 1$）。交点左边邻居占上风，右边进动占上风；静止条件见 [@lem-ch30-vortex-polygon-equilibrium]。
+**只有一个半径能让整圈停住。** 横轴是正负相间的涡旋所在圆的半径 $\rho$。紫色的直线是进动给每个涡旋的切向速度大小 $\Omega\rho$，青色的曲线是其余涡旋吹来的切向速度大小 $\frac{b}{4\rho}$，两者方向相反，只在 $\rho = R_{b,\Omega} = \sqrt{b/(4\Omega)}$ 处相等（图中取 $b = 2$、$\Omega = \tfrac12$，$R = 1$）。交点左边邻居占上风，右边进动占上风；静止条件见 [@lem-ch30-vortex-polygon-equilibrium]。
 :::
 
 ::: {.lemma #lem-ch30-vortex-polygon-equilibrium title="居中正多边形的静止条件与平衡点处的弗雷歇导数" lean="D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.regular_equilibrium_iff_radius D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.scaled_equilibrium D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalDerivative.physical_derivative"}
@@ -628,4 +852,4 @@ $$
 
 本章以作者关于全局静态场与有限观察者、“场”与“线”的格言连接离散逻辑和连续流体。数学层面，静态满足子空间、额外资源下的复杂度等式、受限模型下界与标准 $P\neq NP$ 开放问题各有边界。在有限图着色这一例子中，Gallai–Hasse–Roy–Vitaver 定理给出“$G$ 可 $k$ 着色”与“存在一种定向，使每条有向路至多含 $k$ 个顶点”之间的精确等价（[@thm-ch30-gallai-roy]）；它只是交换两种存在性见证，不提供算法，也不解决一般的 $P$ vs. $NP$ 问题。银河交叉表比较的是示意上界（[@ex-ch30-galactic-crossover-scale]），不是普遍搜索下界。流体部分则并置 **兰姆分解（[@rem-ch30-lamb-decomposition-literature]）、无外力三维全局正则性开放猜想（[@conj-coda-navier-stokes-regularity]）与二次平流投影无精确闭合定理（[@thm-coda-quadratic-advection-no-closure]）**。这些结果为作者的几何诠释提供参照，并不建立两道开放难题的数学等价。
 
-沿着这道正交视界继续向前，我们将在 **[第三十一章：量子的本质是公平](ch31-quantum-fairness.md)** 与 **[第三十二章：正交自指统一场与万流归宗](ch32-unified-field-and-meta-unification.md)** 中揭示五重几何特权的废除、遍历统计全息与跨纲领元统一，并最终步入 **[终章：在所有的球之外](coda.md)**，在多面体离散角亏余项（见终章 [@rem-coda-polyhedral-topology-literature]）、收缩不动点锚点与全书三十二章总导图中完成最后的升维回望。
+沿着这道正交视界继续向前，我们将在 **[第三十一章：量子的本质是公平](ch31-quantum-fairness.md)** 与 **[第三十二章：正交自指统一场与万流归宗](ch32-unified-field-and-meta-unification.md)** 中揭示五重几何特权的废除、遍历统计全息与跨纲领元统一，并最终步入 **[终章：在所有的球之外](coda.md)**，在多面体离散角亏余项（见终章 [@rem-coda-polyhedral-topology-literature]）、收缩不动点锚点与全书总导图中完成最后的升维回望。
