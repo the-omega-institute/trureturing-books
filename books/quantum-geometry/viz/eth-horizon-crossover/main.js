@@ -1,6 +1,6 @@
 /* ORTHO//HORIZON: the ETH section of chapter 30, in three scenes.
-   rates  the schematic exponent rate r(n) = c·log₂log₂n/√log₂n against the constant 0.386 of PPSZ, over log₂ n
-          from 2 to 800, with the scale of the observable universe (2^266) shaded
+   rates  the schematic exponent rate r(n) = c·log₂log₂n/√log₂n against the constant rate of PPSZ for k-SAT
+          (k = 3 … 6; 0.386 for k = 3), over log₂ n from 2 to 800, with the scale of the observable universe (2^266) shaded
    cut    the bridge graph of width three: flow = Σ_r M_r ⊗ N_r with M_r of size a×b and N_r of size d×c; its three
           cuts a·d, b·c and 3·a·c, the exact rank of a random integer instance and its singular values
    modes  a nonnegative spectrum of total T: at most T/θ of its terms reach the threshold θ
@@ -10,8 +10,17 @@
   'use strict';
   const { kit, L } = TRV, { fix, clamp } = kit, P = TRV.palette;
   const $ = (id) => document.getElementById(id);
-  const PPSZ = Math.log2(1.307), ATOMS = 266, LMAX = 800;   // 1.307ⁿ = 2^(0.386… n)
-  const S = { scene: 'rates', c: 1, dims: [2, 3, 2, 3], prof: 'plateau' };
+  const ATOMS = 266, LMAX = 800;
+  /** The PPSZ exponent rate for unique k-SAT: time 2^((1 − μ_k/(k−1))·n) with μ_k = Σ_{j≥1} 1/(j(j + 1/(k−1))).
+      μ_k/(k−1) = Σ x/(j(j + x)) with x = 1/(k−1): summed to J, the tail Σ_{j>J} by its integral from J + ½ (error O(J⁻³)). */
+  const ppszRates = {};
+  function ppsz(k) {
+    if (ppszRates[k] == null) { const x = 1 / (k - 1), J = 20000; let s = 0; for (let j = J; j >= 1; j--) s += x / (j * (j + x)); ppszRates[k] = 1 - (s + Math.log1p(x / (J + 0.5))); }
+    return ppszRates[k];
+  }
+  const ASYM = (k) => 1 - Math.PI * Math.PI / (6 * k);   // the leading term for large k: k·(1 − r_k) → μ_∞ = π²/6
+  const S = { scene: 'rates', c: 1, k: 3, dims: [2, 3, 2, 3], prof: 'plateau' };
+  const PPSZ = () => ppsz(S.k);
   const face = (f) => (f === 'body' ? TRV.fonts.body : f === 'display' ? TRV.fonts.display : TRV.fonts.data);
   function text(ctx, str, x, y, color, o) {
     o = o || {};
@@ -23,10 +32,10 @@
 
   /* ---------- rates ---------- */
   const rate = (c, l) => c * Math.log2(l) / Math.sqrt(l);                       // l = log₂ n
-  /** log₂ n at which the curve falls to PPSZ (on its falling branch, past l = e²), or null if it is below everywhere. */
-  function crossover(c) {
-    const top = Math.E * Math.E; if (rate(c, top) <= PPSZ) return null;
-    let lo = top, hi = 1e7; for (let i = 0; i < 80; i++) { const mid = (lo + hi) / 2; if (rate(c, mid) > PPSZ) lo = mid; else hi = mid; }
+  /** log₂ n at which the curve falls to the PPSZ rate p (on its falling branch, past l = e²), or null if it is below everywhere. */
+  function crossover(c, p = PPSZ()) {
+    const top = Math.E * Math.E; if (rate(c, top) <= p) return null;
+    let lo = top, hi = 1e7; for (let i = 0; i < 80; i++) { const mid = (lo + hi) / 2; if (rate(c, mid) > p) lo = mid; else hi = mid; }
     return (lo + hi) / 2;
   }
   const scaleL = () => clamp(clock.t, 2, LMAX);
@@ -35,16 +44,23 @@
     g.rect(0, g.y0, ATOMS, g.y1, P.lineHot, { alpha: 0.14 });
     g.axes({ yTicks: [0, 0.25, 0.5, 0.75, 1, 1.25].filter((v) => v <= g.y1), xTicks: [0, 100, 200, 300, 400, 500, 600, 700, 800], xLabel: 'log₂ n', yLabel: L('每个变量的指数 r', 'exponent per variable r') });
     g.vline(ATOMS, P.ink, { alpha: 0.55, dash: [3, 4] });
-    g.hline(1, P.dim, { dash: [2, 4] }); g.hline(PPSZ, P.magenta, { width: 2 });
+    g.hline(1, P.dim, { dash: [2, 4] }); g.hline(PPSZ(), P.magenta, { width: 2 });
     const pts = []; for (let i = 0; i <= 400; i++) { const ll = 2 + (LMAX - 2) * Math.pow(i / 400, 2); pts.push([ll, rate(S.c, ll)]); }
     g.line(pts, P.cyan, { width: 2.4, glow: 8 });
-    if (x != null && x <= LMAX) { g.vline(x, P.ink, { alpha: 0.8 }); g.dot(x, PPSZ, P.ink, 4.5); }
+    if (x != null && x <= LMAX) { g.vline(x, P.ink, { alpha: 0.8 }); g.dot(x, PPSZ(), P.ink, 4.5); }
     g.vline(l, P.amber, { alpha: 0.9 }); g.dot(l, rate(S.c, l), P.amber, 6.5, { glow: 12 });
     if (!TRV.thumbMode) {
-      g.text(ATOMS, g.y1, L('宇宙原子数 2²⁶⁶ 以内', 'within the atoms of the universe, 2²⁶⁶'), P.ink, { align: 'right', base: 'top', dx: -8, dy: 8, face: 'body', size: 11.5, alpha: 0.9 });
-      g.text(LMAX, PPSZ, 'PPSZ 0.386', P.magenta, { align: 'right', base: 'bottom', dx: -6, dy: -5, size: 11.5 });
+      const atomsLab = L('宇宙原子数 2²⁶⁶ 以内', 'within the atoms of the universe, 2²⁶⁶'); g.ctx.font = `11.5px ${TRV.fonts.body}`;
+      const atomsFits = g.ctx.measureText(atomsLab).width + 16 <= g.X(ATOMS) - g.X(0);   // on a narrow stage it starts at the axis instead
+      g.text(atomsFits ? ATOMS : 0, g.y1, atomsLab, P.ink, { align: atomsFits ? 'right' : 'left', base: 'top', dx: atomsFits ? -8 : 8, dy: 26, face: 'body', size: 11.5, alpha: 0.9 });   // below the axis label
+      g.text(LMAX, PPSZ(), `PPSZ ${S.k}-SAT ${fix(PPSZ(), 3)}`, P.magenta, { align: 'right', base: 'bottom', dx: -6, dy: -5, size: 11.5 });
       g.text(LMAX, 1, L('穷举 2ⁿ：r = 1', 'brute force 2ⁿ: r = 1'), P.dim, { align: 'right', base: 'bottom', dx: -6, dy: -4, face: 'body', size: 11 });
-      if (x != null && x <= LMAX) g.text(x, PPSZ, L(`交叉 n ≈ 2${sup(Math.round(x))}`, `crossover n ≈ 2${sup(Math.round(x))}`), P.ink, { align: x > 640 ? 'right' : 'left', base: 'top', dx: x > 640 ? -8 : 8, dy: 8, face: 'body', size: 11.5, halo: true });
+      // at the foot of the crossover line: the curve stays above r ≈ 0.13 on the drawn range for every c with a crossover
+      if (x != null && x <= LMAX) {
+        g.ctx.font = `11.5px ${TRV.fonts.body}`;
+        const crossLab = L(`交叉 n ≈ 2${sup(Math.round(x))}`, `crossover n ≈ 2${sup(Math.round(x))}`), left = g.X(x) + 8 + g.ctx.measureText(crossLab).width + 60 > g.X(LMAX);   // keep clear of the axis name at the right end
+        g.text(x, g.y0, crossLab, P.ink, { align: left ? 'right' : 'left', base: 'bottom', dx: left ? -8 : 8, dy: -8, face: 'body', size: 11.5, halo: true });
+      }
       g.text(l, rate(S.c, l), fix(rate(S.c, l), 3), P.amber, { align: l > 700 ? 'right' : 'left', base: 'bottom', dx: l > 700 ? -10 : 10, dy: -8, size: 12.5, weight: 600, halo: true });
     }
   }
@@ -166,10 +182,12 @@
       g.axes({ yTicks: [0, 266, 558, 800], xTicks: [0.5, 1, 1.5, 2], xLabel: 'c' }); g.rect(0.3, 0, 2, ATOMS, P.lineHot, { alpha: 0.14 });
       g.line(pts.map(([c, x]) => [c, Math.min(x, 800)]), P.cyan); g.vline(S.c, P.amber, { alpha: 0.8 }); const x = crossover(S.c); if (x != null && x <= 800) g.dot(S.c, x, P.amber, 4.5);
       $('pATitle').textContent = L('常数 c 决定交叉点', 'The constant c decides the crossover'); $('pAMeta').textContent = x == null ? L('没有交叉：处处更低', 'no crossover: lower everywhere') : `log₂ n ≈ ${fix(x, 0)}`;
-      const h = kit.plot(B, { x: [2, 40], y: [0, Math.max(1.3, 1.12 * rate(S.c, 7.39))], pad: [30, 12, 10, 20] }), q = [];
-      for (let i = 0; i <= 190; i++) { const l = 2 + i * 0.2; q.push([l, rate(S.c, l)]); }
-      h.axes({ yTicks: [0, 0.5, 1], xTicks: [2, 16, 30, 40], xLabel: 'log₂ n' }); h.hline(1, P.dim, { dash: [2, 4] }); h.hline(PPSZ, P.magenta); h.line(q, P.cyan); if (scaleL() <= 40) h.vline(scaleL(), P.amber, { alpha: 0.8 });
-      $('pBTitle').textContent = L('小规模处：先升后降', 'Small sizes: up, then down'); $('pBMeta').textContent = L(`最高 ${fix(rate(S.c, Math.E * Math.E), 3)}，在 log₂ n = e²`, `peak ${fix(rate(S.c, Math.E * Math.E), 3)} at log₂ n = e²`);
+      const h = kit.plot(B, { x: [2.5, 12.5], y: [0.3, 1.05], pad: [30, 12, 10, 20] }), asym = [];
+      for (let i = 0; i <= 100; i++) { const kk = 3 + i * 0.095; asym.push([kk, ASYM(kk)]); }
+      h.axes({ yTicks: [0.4, 0.6, 0.8, 1], xTicks: [3, 4, 5, 6, 8, 10, 12], xLabel: 'k' }); h.hline(1, P.dim, { dash: [2, 4] });
+      h.line(asym, P.dim, { dash: [4, 3] });
+      for (let kk = 3; kk <= 12; kk++) h.dot(kk, ppsz(kk), kk === S.k ? P.amber : P.magenta, kk === S.k ? 5 : 3, kk === S.k ? { glow: 8 } : undefined);
+      $('pBTitle').textContent = L('子句越宽，PPSZ 的指数率越高', 'Wider clauses, a higher PPSZ rate'); $('pBMeta').textContent = L(`虚线 1 − π²/(6k)`, `dashed: 1 − π²/(6k)`);
     } else if (S.scene === 'cut') {
       const I = fresh(), k = cuts(I.a, I.b, I.c, I.d), g = kit.plot(A, { x: [0, 4], y: [0, Math.max(k.rows, k.cols, k.bridges) * 1.2], pad: [30, 12, 10, 20] });
       g.axes({ yTicks: [0, k.min], xTicks: [[0.5, 'a·d'], [1.5, 'b·c'], [2.5, '3·a·c'], [3.5, L('秩', 'rank')]] });
@@ -203,7 +221,7 @@
     modes: { name: ['模态', 'MODES'], max: () => 1, rate: 0.12, step: 0.05, start: 0.5 }
   };
   const LEGEND = {
-    rates: [['cy', '示意曲线 r(n)', 'the schematic curve r(n)'], ['mg', 'PPSZ：0.386', 'PPSZ: 0.386'], ['am', '当前规模', 'the current scale'], ['dm box', '宇宙原子数以内', 'within the atoms of the universe']],
+    rates: [['cy', '示意曲线 r(n)', 'the schematic curve r(n)'], ['mg', 'PPSZ 基准', 'the PPSZ baseline'], ['am', '当前规模', 'the current scale'], ['dm box', '宇宙原子数以内', 'within the atoms of the universe']],
     cut: [['am', '最小的那道割', 'the smallest cut'], ['cy box', '流矩阵的正项与非零奇异值', 'positive entries of flow, nonzero singular values'], ['mg box', '负项', 'negative entries']],
     modes: [['cy box', '不小于 θ 的模态', 'modes that reach θ'], ['am', '阈值 θ', 'the threshold θ'], ['mg', '墙：T/θ', 'the wall: T/θ'], ['dm box', '低于 θ 的模态', 'modes below θ']]
   };
@@ -211,14 +229,14 @@
     const set = (i, lab, val) => { $(`roL${i}`).textContent = lab; $(`ro${i}`).innerHTML = val; };
     let big, hud, what, key, note;
     if (S.scene === 'rates') {
-      const l = scaleL(), r = rate(S.c, l), x = crossover(S.c), wins = r < PPSZ;
+      const l = scaleL(), r = rate(S.c, l), p = PPSZ(), pp = fix(p, 3), x = crossover(S.c), wins = r < p;
       big = L(`指数率 · n = 2${sup(Math.round(l))}`, `Exponent rate · n = 2${sup(Math.round(l))}`);
-      hud = L(`示意曲线 ${fix(r, 3)}，PPSZ 0.386：这个规模上${wins ? '示意曲线更低' : 'PPSZ 更低'}`, `schematic curve ${fix(r, 3)}, PPSZ 0.386: at this scale ${wins ? 'the schematic curve is lower' : 'PPSZ is lower'}`);
-      $('roKeyL').textContent = L('这个规模上示意曲线的指数率', 'rate of the schematic curve at this scale'); $('roKey').innerHTML = `<span class="${wins ? 'c-cy' : 'c-am'}">${fix(r, 3)}</span>`; $('roKeySub').textContent = L(`是 PPSZ 的 ${fix(r / PPSZ, 2)} 倍`, `${fix(r / PPSZ, 2)} times that of PPSZ`);
-      set(1, 'log₂ n', fix(l, 0)); set(2, L('PPSZ 的指数率', 'rate of PPSZ'), '0.386');
+      hud = L(`示意曲线 ${fix(r, 3)}，${S.k}-SAT 的 PPSZ ${pp}：这个规模上${wins ? '示意曲线更低' : 'PPSZ 更低'}`, `schematic curve ${fix(r, 3)}, PPSZ for ${S.k}-SAT ${pp}: at this scale ${wins ? 'the schematic curve is lower' : 'PPSZ is lower'}`);
+      $('roKeyL').textContent = L('这个规模上示意曲线的指数率', 'rate of the schematic curve at this scale'); $('roKey').innerHTML = `<span class="${wins ? 'c-cy' : 'c-am'}">${fix(r, 3)}</span>`; $('roKeySub').textContent = L(`是 PPSZ 的 ${fix(r / p, 2)} 倍`, `${fix(r / p, 2)} times that of PPSZ`);
+      set(1, 'log₂ n', fix(l, 0)); set(2, L(`${S.k}-SAT 的 PPSZ 指数率`, `PPSZ rate for ${S.k}-SAT`), fix(p, 4));
       set(3, L('交叉点 log₂ n', 'crossover log₂ n'), x == null ? L('无：处处更低', 'none: lower everywhere') : fix(x, 0)); set(4, L('交叉点与 2²⁶⁶ 相比', 'crossover against 2²⁶⁶'), x == null ? '—' : x > ATOMS ? L('在视界之外', 'beyond the horizon') : L('在视界之内', 'inside the horizon'));
       note = L('曲线趋于零，所以渐近地它一定更好；但“渐近”从哪里开始，由常数 c 决定。', 'The curve tends to zero, so asymptotically it must be better; but where “asymptotically” begins is decided by the constant c.');
-      what = `log₂ n = ${fix(l, 0)}`; key = `r = ${fix(r, 3)}`;
+      what = `k = ${S.k} · log₂ n = ${fix(l, 0)}`; key = `r = ${fix(r, 3)}`;
     } else if (S.scene === 'cut') {
       const I = fresh(), k = cuts(I.a, I.b, I.c, I.d), cone = inCone(I.a, I.b, I.c, I.d);
       big = L(`桥图 (${I.a}, ${I.b}, ${I.c}, ${I.d}) · 第 ${I.seed} 次抽样`, `Bridge (${I.a}, ${I.b}, ${I.c}, ${I.d}) · draw ${I.seed}`);
@@ -261,6 +279,7 @@
   const fC = kit.field($('cc'), { fmt: (v) => fix(v, 2), onInput: (v) => { S.c = v; leave(); paint(); } });
   const dimFields = ['da', 'db', 'dc', 'dd'].map((id, i) => kit.field($(id), { out: $('o' + id.toUpperCase()), onInput: (v) => { S.dims[i] = v; leave(); paint(); } }));
   const profChips = kit.chips($('profChips'), 'prof', (v) => { S.prof = v; leave(); paint(); });
+  const kChips = kit.chips($('kChips'), 'k', (v) => { S.k = Number(v); leave(); paint(); });
   $('rew').addEventListener('click', () => { clock.pause(); clock.set(0); });
   kit.keys({ 1: () => { leave(); setScene('rates'); }, 2: () => { leave(); setScene('cut'); }, 3: () => { leave(); setScene('modes'); } });
   // drag the threshold on the stage
@@ -272,7 +291,7 @@
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
-    human: { scene: 'rates', c: 1, at: 16 }, atoms: { scene: 'rates', c: 1, at: 266 }, cross: { scene: 'rates', c: 1, at: 558, play: true, from: 2 }, constant: { scene: 'rates', c: 0.5, at: 57 },
+    human: { scene: 'rates', c: 1, k: 3, at: 16 }, atoms: { scene: 'rates', c: 1, k: 3, at: 266 }, cross: { scene: 'rates', c: 1, k: 3, at: 558, play: true, from: 2 }, constant: { scene: 'rates', c: 0.5, k: 3, at: 57 },
     bridge: { scene: 'cut', dims: [2, 3, 2, 3], at: 0 }, narrow: { scene: 'cut', dims: [1, 5, 1, 5], at: 0 },
     plateau: { scene: 'modes', prof: 'plateau', at: 0.5 / 0.98 }, tail: { scene: 'modes', prof: 'power', at: 0.95, play: true }
   };
@@ -290,6 +309,7 @@
   function applyPreset(id) {
     const p = PRESETS[id];
     if (p.c != null) { S.c = p.c; fC.set(p.c); }
+    if (p.k != null) { S.k = p.k; kChips.set(p.k, true); }
     if (p.dims) { S.dims = p.dims.slice(); dimFields.forEach((f, i) => f.set(p.dims[i])); }
     if (p.prof) { S.prof = p.prof; profChips.set(p.prof, true); }
     setScene(p.scene, p.at);
@@ -298,7 +318,7 @@
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
   const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
-    idle: ['自由探索：换场景、调常数、改维数、拖阈值。随时可以再选一张卡。', 'Free play: switch scenes, change the constant or the dimensions, drag the threshold. Pick a card again at any time.'] });
+    idle: ['自由探索：换场景、调常数、换子句宽度 k、改维数、拖阈值。随时可以再选一张卡。', 'Free play: switch scenes, change the constant or the clause width k, change the dimensions, drag the threshold. Pick a card again at any time.'] });
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });
   TRV.startGlitch(document.querySelector('.brand'));
@@ -306,14 +326,14 @@
   window.HORIZON_DEBUG = {
     get state() {
       const I = fresh(), k = cuts(I.a, I.b, I.c, I.d), th = theta(), T = total();
-      return { scene: S.scene, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, c: S.c, l: scaleL(), rate: rate(S.c, scaleL()), crossover: crossover(S.c), ppsz: PPSZ, atoms: ATOMS,
+      return { scene: S.scene, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, c: S.c, l: scaleL(), rate: rate(S.c, scaleL()), crossover: crossover(S.c), k: S.k, ppsz: PPSZ(), atoms: ATOMS,
         dims: [I.a, I.b, I.c, I.d], seed: I.seed, rank: I.rank, cuts: k, cone: inCone(I.a, I.b, I.c, I.d), sv: I.sv.slice(), flow: I.F.map((r) => r.slice()), M: I.M, N: I.N,
         prof: S.prof, theta: th, total: T, count: countAbove(th), wall: T / th };
     },
-    seek: (t) => { clock.pause(); clock.set(t); }, rate: (c, l) => rate(c, l), crossoverOf: (c) => crossover(c), lambda: (prof, j) => SPEC[prof](j),
+    seek: (t) => { clock.pause(); clock.set(t); }, rate: (c, l) => rate(c, l), crossoverOf: (c) => crossover(c), ppszOf: (k) => ppsz(k), lambda: (prof, j) => SPEC[prof](j),
     at: (j, v) => { const b = $('cv').getBoundingClientRect(); return [b.left + view.X(j), b.top + view.Y(v)]; }
   };
-  window.TRV_THUMB = () => { S.c = 1; fC.set(1); setScene('rates', 266); paint.now(); };
+  window.TRV_THUMB = () => { S.c = 1; fC.set(1); S.k = 3; kChips.set(3, true); setScene('rates', 266); paint.now(); };
   cards.pick(cards.initial('atoms'));
   booting = false;
   paint();
