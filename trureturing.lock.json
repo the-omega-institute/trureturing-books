@@ -285,6 +285,14 @@
       "line": 182,
       "signature": "theorem golden_window_volume : volume goldenWindow = 1"
     },
+    "D5/S1/Depth/GoldenHurwitzBound.golden_hurwitz_bound": {
+      "module": "D5/S1/Depth/GoldenHurwitzBound",
+      "name": "D5.S1.Depth.golden_hurwitz_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:cf0763f662c3655d58498aab971b6b3dffda7be473d5796c52d3433acb494308",
+      "line": 46,
+      "signature": "theorem golden_hurwitz_bound (q : ℚ) : 1 / (Real.sqrt 5 * (q.den : ℝ) ^ 2 + q.den) < |Real.goldenRatio - q|"
+    },
     "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.goldenReciprocalMap": {
       "module": "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint",
       "name": "D5.S1.FixedPoints.Algebraic.GoldenFixedPoint.goldenReciprocalMap",
@@ -316,6 +324,22 @@
       "statement_id": "sha256:f1e543c619f84ecae4890325f0da62d79dee07bfe3ea530f4a918af15cbb3343",
       "line": 94,
       "signature": "theorem continuous_average_tendsto_haar (α : ℝ) (hα : Irrational α) (ρ : ℝ) (f : AddCircle (1 : ℝ) → ℂ) (hf : Continuous f) : Tendsto (fun N : ℕ => (∑ i ∈ Finset.range N, f ((ρ + (i : ℝ) * α : ℝ) : AddCircle (1 : ℝ))) / (N : ℂ)) atTop (𝓝 (∫ x, f x ∂AddCircle.haarAddCircle))"
+    },
+    "D5/S1/Phase/ThreeGap/Main.three_gap_card_le_three": {
+      "module": "D5/S1/Phase/ThreeGap/Main",
+      "name": "ThreeGap.three_gap_card_le_three",
+      "kind": "theorem",
+      "statement_id": "sha256:73452cca2519671f0aac9172804b037d4893debaea39150d42b302516ea39ac3",
+      "line": 223,
+      "signature": "theorem three_gap_card_le_three (a : ℝ) (N : ℕ) : (gaps a N).toFinset.card ≤ 3"
+    },
+    "D5/S1/Phase/ThreeGap/Main.three_gap_lengths_eq": {
+      "module": "D5/S1/Phase/ThreeGap/Main",
+      "name": "ThreeGap.three_gap_lengths_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:73452cca2519671f0aac9172804b037d4893debaea39150d42b302516ea39ac3",
+      "line": 237,
+      "signature": "theorem three_gap_lengths_eq (a : ℝ) {N : ℕ} (h3 : (gaps a N).toFinset.card = 3) : (gaps a N).toFinset = ({etaPos a N, etaNeg a N, etaPos a N + etaNeg a N} : Finset ℝ)"
     },
     "D5/S1/Recurrence/NormOneTraceAddition.trace_recurrence": {
       "module": "D5/S1/Recurrence/NormOneTraceAddition",
