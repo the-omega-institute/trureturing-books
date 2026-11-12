@@ -11,7 +11,7 @@ import math
 
 from _ch18 import mid_arrow
 
-SIZE = (540, 318)
+SIZE = (500, 318)
 ALT = {
     "zh": "一张七个顶点的有向图。青色的六条边是选定的生成树 T，灰色虚线是树外的弦，其中有一条从顶点回到自身的自环，还有一条与树边平行的重边。"
           "左边的根 r 到右上角的顶点 a 只有一条树路径，画成粗青线，经过三条边 e₁、e₂、e₃：e₁ 与 e₃ 的方向顺着走，标着 × u(e₁)、× u(e₃)；"
@@ -23,8 +23,8 @@ ALT = {
           "rootPhase(a) = u(e₁) · u(e₂)⁻¹ · u(e₃).",
 }
 
-POS = {"r": (62, 150), "b": (180, 82), "c": (300, 128), "a": (440, 70),
-       "d": (180, 220), "e": (310, 232), "f": (446, 196)}
+POS = {"r": (44, 150), "b": (162, 82), "c": (282, 128), "a": (422, 70),
+       "d": (162, 220), "e": (292, 232), "f": (428, 196)}
 TREE = [("r", "b"), ("c", "b"), ("c", "a"), ("r", "d"), ("d", "e"), ("f", "e")]       # (source, target)
 CHORDS = [("b", "d"), ("c", "e"), ("a", "f"), ("e", "d"), ("f", "f")]
 
@@ -98,6 +98,6 @@ def draw(fig):
 
     fig.text(SIZE[0] / 2, 306, "rootPhase(*a*) = *u*(*e*₁) · *u*(*e*₂)⁻¹ · *u*(*e*₃)", size=15, color="line", anchor="middle",
              weight=600)
-    fig.legend(16, 24, [("line", t("生成树 *T*", "spanning tree *T*"))])
-    fig.line(16, 39.8, 34, 39.8, "dim", 1.5, dash="4 3")
-    fig.text(42, 44, t("弦 *e* ∉ *T*", "chord *e* ∉ *T*"), size=13, color="dim")
+    fig.legend(16, 24, [("line", t("生成树 *T*", "spanning tree *T*"))], size=14)
+    fig.line(16, 39.5, 34, 39.5, "dim", 1.5, dash="4 3")
+    fig.text(42, 44, t("弦 *e* ∉ *T*", "chord *e* ∉ *T*"), size=14, color="dim")
