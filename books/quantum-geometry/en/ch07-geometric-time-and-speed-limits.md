@@ -297,6 +297,79 @@ Claim 1: the history after zero probes is $v$ itself, of squared norm $1$. Claim
 
 [@prop-monitored-return-conservation] says that no probability is lost: the probability of a first return within the first $N$ steps, plus the probability of no return so far, is exactly $1$. It does not depend on what $U$ is, nor on the dimension of the space. Applied to the rotating qubit of [@ex-zeno-strobe-freezing], it leads to a conclusion that stands exactly opposite to Zeno freezing.
 
+Before computing a mean return time, ask which directions the initial state can actually visit. In a finite-dimensional complex inner-product space $E$, let $U$ be unitary, take $v\in E$, and write
+
+$$
+C=\operatorname{span}_{\mathbb C}\{U^n v:n\in\mathbb N\},
+\qquad
+P_v=\text{the orthogonal projection onto }\mathbb C v.
+$$
+
+This orbit span is the cyclic space of the initial vector. Two finite-dimensional arguments explain why a direction that never triggers the detector must be treated differently inside and outside $C$.
+
+::: {.remark #rem-monitored-cyclic-observability title="No permanent dark state in the cyclic space: a finite-dimensional derivation"}
+**Literature result, not formalized in this book.** Put $T=(I-P_v)U$. The operator $U$ preserves $C$, and the range of $P_v$ lies in $C$, so both $T$ and $P_vU$ restrict to operators from $C$ to itself:
+
+$$
+A=T|_C,\qquad B=(P_vU)|_C.
+$$
+
+Collect the directions producing no click at any future step:
+
+$$
+K=\bigcap_{n\in\mathbb N}\ker(BA^n).
+$$
+
+For $x\in K$, the equation $Bx=0$ gives $Ax=Ux$. Shifting the click history by one step also gives $Ax\in K$, so $U$ preserves $K$. The restriction $U|_K$ is injective on a finite-dimensional space and hence surjective; therefore $U^{-1}$ preserves $K$ too. Write any $x\in K$ as $x=Uy$ with $y\in K$. Since $By=P_vUy=0$, we have $x\perp v$. Iterating backwards under $U$ now gives $x\perp U^nv$ for every $n\ge0$. Yet $x$ belongs to their span $C$, so
+
+$$
+K=\{0\}.
+$$
+
+No unit-vector assumption is needed: when $v=0$, the cyclic space is zero. Omitting the cyclic restriction would make the conclusion false. With $U=I$ and $v=e_1$, any nonzero vector orthogonal to $e_1$ never clicks. This argument establishes observability within the cyclic space; it does not yet compute an infinite return-probability sum.
+:::
+
+::: {.remark #rem-monitored-cyclic-power-contraction title="Why does the absence of a permanent dark state force strict contraction after finitely many steps?"}
+**Literature result, not formalized in this book.** Now assume $\norm v=1$, and let $d=\dim_{\mathbb C}C\ge1$. Orthogonal projection and the isometry of $U$ give, for $x\in C$,
+
+$$
+\norm{Ax}^2+\norm{Bx}^2=\norm{x}^2.
+$$
+
+Set $K_m=\bigcap_{j=0}^{m-1}\ker(BA^j)$, with $K_0=C$. If $K_m=K_{m+1}$ at any step, shifting the history shows that $A$ preserves $K_m$, so it is already the permanent dark space. The preceding argument makes that space zero. Thus its dimension must decrease strictly whenever $K_m\ne\{0\}$, and $K_d=\{0\}$ after at most $d$ steps.
+
+For each unit vector $x\in C$, finite conservation therefore gives
+
+$$
+\norm{A^d x}^2
+=1-\sum_{j=0}^{d-1}\norm{BA^j x}^2<1.
+$$
+
+The unit sphere is compact in finite dimension, so the continuous function $x\mapsto\norm{A^dx}$ attains its maximum, which is still strictly below one. Choosing $N=d$ and $q=\norm{A^d}_{\mathrm{op}}$ yields
+
+$$
+N\ge1,\qquad 0\le q<1,\qquad \norm{A^N}_{\mathrm{op}}\le q.
+$$
+
+Compactness turns a loss in every direction into one strict loss bound shared by all directions. The bound may depend on $U,v$; it is not a uniform constant across all systems. For monitored-return background, see Grünbaum, Velázquez, Werner and Werner, *Recurrence for discrete time unitary evolutions*, arXiv:1202.3903v3, Theorem 2. These two finite-dimensional derivations are not counted as Lean theorem entries in this book.
+:::
+
+::: {.problem #prob-monitored-spectral-mean title="Formalization gap: from actual monitored histories to occupied spectral points"}
+For every finite-dimensional complex inner-product space, unitary $U$, and unit vector $v$, retain $p_{n+1}=\lvert\langle v,UT^nv\rangle\rvert^2$ from [@def-monitored-return]. Define the occupied spectrum by
+
+$$
+S=\{\lambda\in\mathbb C:\exists w\in E,\ Uw=\lambda w\ \text{and}\ \langle w,v\rangle\ne0\}.
+$$
+
+The formalization target is: if $\sum_{n=0}^{\infty}p_{n+1}=1$, then $S$ is finite and
+
+$$
+\sum_{n=0}^{\infty}(n+1)p_{n+1}=\#S.
+$$
+
+This is a gap in the formalization of a known literature theorem, not an unsolved mathematical conjecture. The cyclic-space and contraction arguments still need a convergent operator-trace sum, the conversion from survival tails to the first-return mean, and the identity $\dim C=\#S$. That identity counts distinct occupied spectral values rather than algebraic eigenvalue multiplicity. Neither finite conservation nor one strictly contracting power alone states this full conclusion.
+:::
+
 ::: {.example #ex-first-return-qubit title="First-Return Statistics of a Rotating Qubit: The Mean Return Time Is Always 2, Whatever the Step"}
 Let a qubit turn through the Bloch angle $\delta$ about the $X$ axis at each step, $U = \cos\frac{\delta}{2}\,I - i\sin\frac{\delta}{2}\,X$, with initial state $v = \lvert 0\rangle$. Write $c = \cos\frac{\delta}{2}$ and $s = \sin\frac{\delta}{2}$, and assume $s \neq 0$.
 
