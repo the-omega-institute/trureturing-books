@@ -3,7 +3,8 @@
           (k = 3 … 6; 0.386 for k = 3), over log₂ n from 2 to 800, with the scale of the observable universe (2^266) shaded
    cut    the bridge graph of width three: flow = Σ_r M_r ⊗ N_r with M_r of size a×b and N_r of size d×c; its three
           cuts a·d, b·c and 3·a·c, the exact rank of a random integer instance and its singular values
-   modes  a nonnegative spectrum of total T: at most T/θ of its terms reach the threshold θ
+   modes  a nonnegative spectrum of total RW/π (the trace budget of chapter 12): at most RW/(πτ) of its terms reach the
+          threshold τ
    The rail is log₂ n (rates), the draw (cut) or the threshold (modes).
    Read-only probe for the browser suite: window.HORIZON_DEBUG. */
 (() => {
@@ -155,14 +156,18 @@
   let view = null;
   function drawModes() {
     const th = theta(), T = total(), wall = T / th, g = kit.plot($('cv'), { x: [0, NM], y: [0, 1.1], pad: [44, 24, box.top + 4, box.bottom + 24] }); view = g;
-    g.axes({ yTicks: [0, 0.25, 0.5, 0.75, 1], xTicks: [0, 10, 20, 30, 40], xLabel: L('模态序号 j', 'mode index j'), yLabel: 'λⱼ' });
+    g.axes({ yTicks: [0, 0.25, 0.5, 0.75, 1], xTicks: [0, 10, 20, 30, 40], yLabel: 'λⱼ' });
+    // the axis name sits between the ticks 30 and 40, under the axis, where neither the threshold nor the wall can cross it
+    if (!TRV.thumbMode) g.text(35, 0, L('模态序号 j', 'mode index j'), P.dim, { align: 'center', base: 'top', dy: 5, size: 10.5, face: 'body' });
     for (let j = 0; j < NM; j++) { const v = lam(j), on = v >= th; g.rect(j + 0.12, 0, j + 0.88, v, on ? P.cyan : P.dim, { alpha: on ? 0.95 : 0.5 }); }
     g.hline(th, P.amber, { width: 2, glow: 8 });
     if (wall <= NM) { g.vline(wall, P.magenta, { width: 2.4 }); }
     if (!TRV.thumbMode) {
-      g.text(NM, th, `θ = ${fix(th, 2)}`, P.amber, { align: 'right', base: 'bottom', dx: -6, dy: -5, size: 12, weight: 600 });
-      if (wall <= NM) g.text(wall, 1.1, `T/θ = ${fix(wall, 1)}`, P.magenta, { align: wall > 32 ? 'right' : 'left', base: 'top', dx: wall > 32 ? -7 : 7, dy: 6, size: 12 });
-      else g.text(NM, 1.1, L(`墙在 T/θ = ${fix(wall, 1)}，画面之外`, `the wall is at T/θ = ${fix(wall, 1)}, off the picture`), P.magenta, { align: 'right', base: 'top', dx: -6, dy: 6, size: 11.5, face: 'body' });
+      // the threshold's label ends short of the wall when the wall stands near the right edge
+      const thX = wall <= NM && wall > NM - 10 ? wall : NM;
+      g.text(thX, th, `τ = ${fix(th, 2)}`, P.amber, { align: 'right', base: 'bottom', dx: -8, dy: -5, size: 12, weight: 600 });
+      if (wall <= NM) g.text(wall, 1.1, `RW/(πτ) = ${fix(wall, 1)}`, P.magenta, { align: wall > 30 ? 'right' : 'left', base: 'top', dx: wall > 30 ? -7 : 7, dy: 6, size: 12 });
+      else g.text(NM, 1.1, L(`墙在 RW/(πτ) = ${fix(wall, 1)}，画面之外`, `the wall is at RW/(πτ) = ${fix(wall, 1)}, off the picture`), P.magenta, { align: 'right', base: 'top', dx: -6, dy: 6, size: 11.5, face: 'body' });
     }
   }
 
@@ -203,10 +208,10 @@
     } else {
       const T = total(), g = kit.plot(A, { x: [0.02, 1], y: [0.5, 2000], pad: [36, 12, 10, 20], logY: true, logX: true }), cn = [], bd = [];
       for (let i = 0; i <= 120; i++) { const th = 0.02 * Math.pow(50, i / 120); cn.push([th, Math.max(0.5, countAbove(th))]); bd.push([th, T / th]); }
-      g.axes({ yTicks: [[1, '1'], [10, '10'], [100, '100'], [1000, '1000']], xTicks: [[0.02, '0.02'], [0.1, '0.1'], [1, '1']], xLabel: 'θ' });
+      g.axes({ yTicks: [[1, '1'], [10, '10'], [100, '100'], [1000, '1000']], xTicks: [[0.02, '0.02'], [0.1, '0.1'], [1, '1']], xLabel: 'τ' });
       g.line(bd, P.magenta); g.line(cn, P.cyan); g.vline(theta(), P.amber, { alpha: 0.8 });
-      g.legend([[P.cyan, L('不小于 θ 的个数', 'number of terms ≥ θ')], [P.magenta, L('上界 T/θ', 'the bound T/θ')]]);
-      $('pATitle').textContent = L('个数永远在墙下', 'The count stays under the wall'); $('pAMeta').textContent = `T = ${fix(T, 3)}`;
+      g.legend([[P.cyan, L('不小于 τ 的个数', 'number of terms ≥ τ')], [P.magenta, L('上界 RW/(πτ)', 'the bound RW/(πτ)')]]);
+      $('pATitle').textContent = L('个数永远在墙下', 'The count stays under the wall'); $('pAMeta').textContent = `RW/π = ${fix(T, 3)}`;
       const h = kit.plot(B, { x: [0, NM], y: [0, 1.05], pad: [30, 12, 10, 20] });
       h.axes({ yTicks: [0, 0.5, 1], xTicks: [0, 20, 40], xLabel: 'j' });
       for (const [name, col] of [['plateau', P.cyan], ['geometric', P.violet], ['power', P.sigma]]) { const pts = []; for (let j = 0; j < NM; j++) pts.push([j, SPEC[name](j)]); h.line(pts, name === S.prof ? P.cyan : P.dim, { width: name === S.prof ? 2.2 : 1.1 }); }
@@ -223,7 +228,7 @@
   const LEGEND = {
     rates: [['cy', '示意曲线 r(n)', 'the schematic curve r(n)'], ['mg', 'PPSZ 基准', 'the PPSZ baseline'], ['am', '当前规模', 'the current scale'], ['dm box', '宇宙原子数以内', 'within the atoms of the universe']],
     cut: [['am', '最小的那道割', 'the smallest cut'], ['cy box', '流矩阵的正项与非零奇异值', 'positive entries of flow, nonzero singular values'], ['mg box', '负项', 'negative entries']],
-    modes: [['cy box', '不小于 θ 的模态', 'modes that reach θ'], ['am', '阈值 θ', 'the threshold θ'], ['mg', '墙：T/θ', 'the wall: T/θ'], ['dm box', '低于 θ 的模态', 'modes below θ']]
+    modes: [['cy box', '不小于 τ 的模态', 'modes that reach τ'], ['am', '阈值 τ', 'the threshold τ'], ['mg', '墙：RW/(πτ)', 'the wall: RW/(πτ)'], ['dm box', '低于 τ 的模态', 'modes below τ']]
   };
   function drawText() {
     const set = (i, lab, val) => { $(`roL${i}`).textContent = lab; $(`ro${i}`).innerHTML = val; };
@@ -241,19 +246,19 @@
       const I = fresh(), k = cuts(I.a, I.b, I.c, I.d), cone = inCone(I.a, I.b, I.c, I.d);
       big = L(`桥图 (${I.a}, ${I.b}, ${I.c}, ${I.d}) · 第 ${I.seed} 次抽样`, `Bridge (${I.a}, ${I.b}, ${I.c}, ${I.d}) · draw ${I.seed}`);
       hud = L(`这个实例的秩 ${I.rank}，最小割 ${k.min}：${I.rank === k.min ? '相等' : '秩更小'}`, `rank of this instance ${I.rank}, minimal cut ${k.min}: ${I.rank === k.min ? 'equal' : 'the rank is smaller'}`);
-      $('roKeyL').textContent = L('这个随机实例的秩', 'rank of this random instance'); $('roKey').innerHTML = `<span class="c-cy">${I.rank}</span> <span class="okmark">${I.rank <= k.min ? `≤ ${k.min} ✓` : '✗'}</span>`; $('roKeySub').textContent = L(`最小割 min(3ac, ad, bc) = ${k.min}`, `minimal cut min(3ac, ad, bc) = ${k.min}`);
+      $('roKeyL').textContent = L('这个随机实例的秩', 'rank of this random instance'); $('roKey').innerHTML = `<span class="c-cy">${I.rank}</span> ${I.rank <= k.min ? `≤ ${k.min}` : '&gt;'}`; $('roKeySub').textContent = L(`最小割 min(3ac, ad, bc) = ${k.min}`, `minimal cut min(3ac, ad, bc) = ${k.min}`);
       set(1, L('行数 a·d', 'rows a·d'), String(k.rows)); set(2, L('列数 b·c', 'columns b·c'), String(k.cols)); set(3, L('三条桥 3·a·c', 'three bridges 3·a·c'), String(k.bridges));
-      set(4, L('在定理的锥域内？', 'inside the cone of the theorem?'), cone ? `${L('是', 'yes')} <span class="okmark">✓</span>` : L('否', 'no'));
+      set(4, L('在定理的锥域内？', 'inside the cone of the theorem?'), cone ? L('是', 'yes') : L('否', 'no'));
       note = cone ? L('四个维数在锥域内：Lean 定理说最大秩恰好是 min(a·d, b·c)。', 'The four dimensions lie in the cone: the Lean theorem says the greatest rank is exactly min(a·d, b·c).') : L('四个维数不在锥域内：Lean 只保证秩不超过最小割，等号是这个实例的观察。', 'The four dimensions lie outside the cone: Lean only guarantees that the rank does not exceed the minimal cut; equality is an observation on this instance.');
       what = `(${[I.a, I.b, I.c, I.d].join(', ')})`; key = L(`秩 ${I.rank}`, `RANK ${I.rank}`);
     } else {
       const th = theta(), T = total(), n = countAbove(th);
-      big = L(`模态 · θ = ${fix(th, 2)}`, `Modes · θ = ${fix(th, 2)}`);
-      hud = L(`不小于 θ 的模态有 ${n} 个，上界 T/θ = ${fix(T / th, 1)}`, `${n} mode${n === 1 ? '' : 's'} reach θ; the bound is T/θ = ${fix(T / th, 1)}`);
-      $('roKeyL').textContent = L('不小于 θ 的模态个数', 'number of modes that reach θ'); $('roKey').innerHTML = `<span class="c-cy">${n}</span> <span class="okmark">${n <= T / th ? `≤ ${fix(T / th, 1)} ✓` : '✗'}</span>`; $('roKeySub').textContent = L('否则它们的和就超过 T', 'or their sum would exceed T');
-      set(1, L('阈值 θ', 'threshold θ'), fix(th, 3)); set(2, L('墙 T/θ', 'the wall T/θ'), fix(T / th, 2)); set(3, L('总和 T = Σλⱼ', 'total T = Σλⱼ'), fix(T, 4)); set(4, L('个数 × θ', 'count × θ'), `${fix(n * th, 3)} <span class="okmark">≤ T ✓</span>`);
+      big = L(`模态 · τ = ${fix(th, 2)}`, `Modes · τ = ${fix(th, 2)}`);
+      hud = L(`不小于 τ 的模态有 ${n} 个，上界 RW/(πτ) = ${fix(T / th, 1)}`, `${n} mode${n === 1 ? '' : 's'} reach τ; the bound is RW/(πτ) = ${fix(T / th, 1)}`);
+      $('roKeyL').textContent = L('不小于 τ 的模态个数', 'number of modes that reach τ'); $('roKey').innerHTML = `<span class="c-cy">${n}</span> ${n <= T / th ? `≤ ${fix(T / th, 1)}` : '&gt;'}`; $('roKeySub').textContent = L('否则它们的和就超过 RW/π', 'or their sum would exceed RW/π');
+      set(1, L('阈值 τ', 'threshold τ'), fix(th, 3)); set(2, L('墙 RW/(πτ)', 'the wall RW/(πτ)'), fix(T / th, 2)); set(3, L('总和 RW/π = Σλⱼ', 'total RW/π = Σλⱼ'), fix(T, 4)); set(4, L('个数 × τ', 'count × τ'), `${fix(n * th, 3)} ${n * th <= T ? '≤' : '&gt;'} RW/π`);
       note = L('这是马尔可夫不等式的计数形式：谱越集中，承重的模态越少。', 'This is the counting form of Markov’s inequality: the more concentrated the spectrum, the fewer modes carry the weight.');
-      what = `θ = ${fix(th, 2)}`; key = `${n} ≤ ${fix(T / th, 1)}`;
+      what = `τ = ${fix(th, 2)}`; key = `${n} ≤ ${fix(T / th, 1)}`;
     }
     $('hudBig').textContent = big; $('hudSub').textContent = hud; $('roNote').textContent = note; $('roAside').textContent = L(SC[S.scene].name[0], SC[S.scene].name[1]);
     $('pillScene').querySelector('strong').textContent = SC[S.scene].name[1]; $('pillWhat').querySelector('strong').textContent = what; $('pillKey').querySelector('strong').textContent = key;
@@ -265,7 +270,7 @@
   /* ---------- controls ---------- */
   const clock = kit.clock({
     range: $('now'), play: $('play'), label: $('tau'), speeds: $('speedChips'), max: LMAX, rate: 60, step: 50, t: 266,
-    format: (t) => (S.scene === 'rates' ? `log₂ n ${clamp(t, 2, LMAX).toFixed(0)} <small>/ ${LMAX}</small>` : S.scene === 'cut' ? `${L('抽样 ', 'DRAW ')}${Math.floor(t + 1e-9)} <small>/ 12</small>` : `θ ${clamp(1 - 0.98 * t, 0.02, 1).toFixed(2)} <small>/ 0.02</small>`),
+    format: (t) => (S.scene === 'rates' ? `log₂ n ${clamp(t, 2, LMAX).toFixed(0)} <small>/ ${LMAX}</small>` : S.scene === 'cut' ? `${L('抽样 ', 'DRAW ')}${Math.floor(t + 1e-9)} <small>/ 12</small>` : `τ ${clamp(1 - 0.98 * t, 0.02, 1).toFixed(2)} <small>/ 0.02</small>`),
     onChange: () => paint()
   });
   function fitClock(t) { const sc = SC[S.scene]; clock.pause(); clock.rate = sc.rate; clock.step = sc.step; clock.setMax(sc.max(), true); clock.set(t == null ? sc.start : t); }
@@ -300,9 +305,9 @@
     atoms: ['n = 2²⁶⁶，可观测宇宙的原子数：示意曲线是 0.494，仍高于 0.386。阴影以内的任何规模上，它都还没有赢。', 'n = 2²⁶⁶, the number of atoms in the observable universe: the schematic curve stands at 0.494, still above 0.386. At no scale inside the shaded part has it won yet.'],
     cross: ['让规模一路增大：曲线缓缓下降，直到 n ≈ 2⁵⁵⁸ 才与 0.386 相交，远在阴影之外。', 'Let the scale grow: the curve sinks slowly and meets 0.386 only at n ≈ 2⁵⁵⁸, far outside the shaded part.'],
     constant: ['把常数 c 减半：交叉点从 2⁵⁵⁸ 回到 2⁵⁷ 附近，落进阴影里。大 O 记号不告诉我们 c；交叉点在视界的哪一边，全看它。', 'Halve the constant c: the crossover moves from 2⁵⁵⁸ back to about 2⁵⁷, inside the shaded part. The big O does not tell us c, and on which side of the horizon the crossover lies depends on it alone.'],
-    bridge: ['a = c = 2、b = d = 3：两道外割都是 6，三条桥能过 12，不是瓶颈。随机实例的流矩阵有 6 行 6 列，秩是 6，等于最小割；Lean 证明在这个锥域内总是如此。', 'a = c = 2, b = d = 3: both outer cuts are 6 and the three bridges could carry 12, so they are no bottleneck. The flow matrix of the random instance has 6 rows and 6 columns and rank 6, the minimal cut; Lean proves that this always holds inside the cone.'],
+    bridge: ['a = c = 2、b = d = 3：两道外割都是 6，三条桥能过 12，不是瓶颈。随机实例的流矩阵有 6 行 6 列，秩是 6，等于最小割；Lean 证明在这个锥域内总是如此。这条定理只讲桥图上的流与割，与第 30 章转述的亚指数 3-SAT 预印本的算法主张无关，既不检验也不支持它。', 'a = c = 2, b = d = 3: both outer cuts are 6 and the three bridges could carry 12, so they are no bottleneck. The flow matrix of the random instance has 6 rows and 6 columns and rank 6, the minimal cut; Lean proves that this always holds inside the cone. The theorem is about flows and cuts on the bridge graph only: it has nothing to do with the algorithmic claim of the sub-exponential 3-SAT preprint that chapter 30 reports, and neither tests nor supports it.'],
     narrow: ['a = c = 1、b = d = 5：外割都是 5，三条桥却只能过 3。流矩阵是 5 × 5 的，秩只有 3：奇异值在第三个之后归零。这组维数在锥域之外。', 'a = c = 1, b = d = 5: the outer cuts are 5 but the three bridges carry only 3. The flow matrix is 5 × 5 and its rank is just 3: the singular values vanish after the third. These dimensions lie outside the cone.'],
-    plateau: ['平台形的谱：前八个模态接近 1，之后迅速掉到零。阈值取 0.5 时有 8 个模态过线，而墙在 T/θ = 16：承重的模态屈指可数。', 'A plateau: the first eight modes are close to 1 and then the spectrum drops to zero. At the threshold 0.5 eight modes clear the line while the wall stands at T/θ = 16: only a handful of modes carry the weight.'],
+    plateau: ['平台形的谱：前八个模态接近 1，之后迅速掉到零。阈值 τ 取 0.5 时有 8 个模态过线，而墙在 RW/(πτ) = 16：承重的模态屈指可数。', 'A plateau: the first eight modes are close to 1 and then the spectrum drops to zero. At the threshold τ = 0.5 eight modes clear the line while the wall stands at RW/(πτ) = 16: only a handful of modes carry the weight.'],
     tail: ['换成拖着长尾的幂律谱，再把阈值一路降低：过线的模态越来越多，但青色的柱子始终到不了品红的墙。', 'Switch to a power law with a long tail and lower the threshold all the way: more and more modes clear the line, but the cyan bars never reach the magenta wall.']
   };
   let booting = true;
