@@ -89,6 +89,9 @@ const text = async (sel) => (await page.textContent(sel)).trim();
 
 let s = await state();
 check('page carries its viz id', (await page.evaluate(() => document.body.dataset.vizId)) === ID);
+check('current-step pill is highlighted while the constant-angle pill is not',
+  await page.evaluate(() => document.getElementById('pillStep').classList.contains('hot')
+    && !document.getElementById('pillAngle').classList.contains('hot')));
 check('opens on the default TWIN card at its still (step 8, stopped)',
   s.preset === 'twin' && s.scene === 'duo' && s.map === 'cos' && s.cam === 'whole' && s.x0 === 0 && s.step === 8 && !s.playing,
   JSON.stringify({ preset: s.preset, scene: s.scene, step: s.step, playing: s.playing }));
@@ -298,7 +301,9 @@ await page.click('[data-lang-set="en"]'); await pick('twin'); await seek(8);
 const enTwinNote = await text('#presetNote');
 check('TWIN preset note accurately distinguishes 8 completed updates Q₀…Q₇ (4 turns) + active Q₈ (9 updates / 4.5 turns) in zh & en',
   zhTwinNote.includes('Q₀…Q₇') && zhTwinNote.includes('Q₈') && zhTwinNote.includes('4.5')
-  && enTwinNote.includes('Q₀…Q₇') && enTwinNote.includes('Q₈') && enTwinNote.includes('4.5'),
+  && zhTwinNote.includes('8 次历史递推') && zhTwinNote.includes('9 次递推')
+  && enTwinNote.includes('Q₀…Q₇') && enTwinNote.includes('Q₈') && enTwinNote.includes('4.5')
+  && enTwinNote.includes('8 completed updates') && enTwinNote.includes('9 displayed updates'),
   JSON.stringify({ zhTwinNote, enTwinNote }));
 check('English HUD renders Twin Spirals title cleanly', (await text('#hudBig')) === 'TWIN SPIRALS · STEP 8');
 await page.click('#sceneChips [data-scene="angle"]');
