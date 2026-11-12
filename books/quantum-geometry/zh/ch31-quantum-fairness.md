@@ -14,13 +14,19 @@
 4. **博弈公平（Horizon Fairness）**：相干一致旋转的固定步幅定律（[@thm-ch31-horizon-landauer-ergodic-fairness] 第 2 款）与有限观察者复杂性防火墙（[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md) [@conj-p-neq-np]；外部背景见 [@rem-ch30-query-sos-literature]）阻止算力垄断者提前剧透生命终局；
 5. **遍历公平（Ergodic Fairness）**：诞生遗忘重置相容自由度（`MODEL`），而紧致环面闭子群轨道均匀分布与有界间隙回归定理（[@thm-ch31-horizon-landauer-ergodic-fairness] 第 3–4 款；外部遍历论延伸见 [@rem-ch31-weyl-window-equidistribution-literature]）支撑“长程旅程共享统计全息星光”的本体诠释。
 
-![量子公平五重铁律与遍历统计全息图景](../assets/fig-31-quantum-fairness.svg)
+::: {.figure src="ch31-overview"}
+**图 31。** 本章地图：第 I 栏，墨色的 $\phi$ 与 $\psi$ 互相丈量，各自投到对方上的青色影子一样长，都是 $\cos\theta$，上方的第 3 点 $C$ 被划掉；第 II 栏，墨色对角线 $y = x$ 与青色抛物线 $y = x^2$ 只在 $0$（$\phi \perp \psi$）与 $1$（$\phi = \psi$）相交，这是克隆机强加给内积的锁；第 III 栏，圆上按黄金角排开的 $21$ 个点里有 $8$ 个落进占圆周 $2 - \varphi \approx 0.382$ 的青色窗口，长程份额趋于窗口所占的 $2 - \varphi$（示意；指示函数窗口的等分布见 [@rem-ch31-weyl-window-equidistribution-literature]）。
+:::
 
 ---
 
 ## 31.1 席位公平与得失公平：平视的尺子与零免费午餐账本 {#sec-ch31-seat-and-pythagoras}
 
 特权的第一大来源，是在万物之外私设一座高高在上的“绝对裁判席”——也就是我们在[第二章](ch02-born-rule.md)里亲手砍掉的“外部第 3 点 $C$”：谁离裁判席更近，谁就自封为标准刻度。
+
+::: {.figure src="ch31-ruler"}
+**两子互量，用不着第 3 点。** 墨色的单位箭头 $\phi$ 与 $\psi$ 夹角 $\theta$：$\phi$ 投到 $\psi$ 上的青色影子，与 $\psi$ 投到 $\phi$ 上的青色影子左右对称、一样长，都是 $\cos\theta$（图中 $\theta = 60^\circ$，影长 $1/2$）；上方连到两支箭头尖的点 $C$ 被划掉。这是实平面上的切片，复内积的玻恩权重是同一个模方 $|\langle\phi,\psi\rangle|^2 = |\langle\psi,\phi\rangle|^2$（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 1 款）。
+:::
 
 而在纯态几何中，每一个归一化状态都立在无特权基轴的对称空间上（`MODEL`）；量子几何直接用两条代数铁律废黜了任何“站在世界之外俯瞰众生的纯粹旁观之眼”（哲学与文学背景对照见下方 [@rem-ch31-haar-isotropy-landauer-literature]）：
 
@@ -118,6 +124,10 @@
 第 1 款由秩一外积迹归约 `rank_one_pure_state_modulus_square_reduction` 与加权后验系综分解 `unread_eq_weighted_ensemble` 合取而成（并由复点积共轭反演给出对易模方 $\|\phi^* \bullet_v \psi\|^2 = \|\psi^* \bullet_v \phi\|^2$）；第 2 款由完备内积空间闭子空间正交分解 `Submodule.norm_sq_eq_add_norm_sq_starProjection` 代入假设即得；第 3 款利用线性等距算子保持张量积内积 $\langle\phi, \psi\rangle\langle\mathrm{blank}, \mathrm{blank}\rangle = \langle\phi, \psi\rangle^2$，由复数域整环幂等解 `eq_zero_or_one_of_sq_eq_self` 与单位向量内积取一判据 `inner_eq_one_iff_of_norm_eq_one` 归约为 $\phi = \psi$ 或正交；第 4 款直接对 $4\times 4$ 贝尔密度矩阵执行偏迹分块求和并验证 $(\frac{1}{2}I_2)^2 = \frac{1}{4}I_2 \neq \frac{1}{2}I_2$。完整证明由 Lean 内核检查。
 :::
 
+::: {.figure src="ch31-cloning-lock"}
+**内积锁只开两把：$0$ 与 $1$。** 横轴是内积 $x = \langle\phi,\psi\rangle$；同一台克隆机迫使 $x = x^2$，墨色对角线 $y = x$ 与青色抛物线 $y = x^2$ 只在原点（$\phi \perp \psi$）与 $(1, 1)$（$\phi = \psi$）相交，两点之间抛物线始终在对角线下方，没有解（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 3 款）。图中只画了实轴；在复数中 $z = z^2$ 同样只有 $z = 0$ 与 $z = 1$。
+:::
+
 当第三个量子比特 $\mathbf{C}$ 走入视野时，多体纠缠配额在外部量子信息文献中的定量延伸整理于下框：
 
 ::: {.remark #rem-ch31-ckw-monogamy-literature title="三量子比特 CKW 纠缠单配性不等式与 Bell / GHZ / W 态预算核验（文献结果，未在本书形式化）"}
@@ -193,6 +203,10 @@
 
 ::: proof
 第 1 款由 $\mathrm{mutualInfo} + \mathrm{divergence} \ge 0$ 与实数加法单调性直接推出；第 2 款在 $p = 1$ 时由 `unit_success` 得 $U = W$，在 $p < 1$ 时验证 $W, B$ 的相互正交等距性并对步数 $n$ 用三角和角公式归纳，再由克罗内克积线性性提升至任意伴随张量因子 $R$；第 3 款利用时间平均算子列的等度连续性将收敛子空间 $S \subseteq C(G, \mathbb{C})$ 刻画为闭子空间，结合环面特征标的几何级数抵消与三角多项式稠密逼近证出全空间收敛；第 4 款由紧空间开原像严格正测度证出 $\operatorname{supp}(h_*\mu) = \operatorname{range}(h)$，并由紧致平移开覆盖有限子覆盖提取有界回归跨度 $M$ 及正下渐近访问密度下界。完整证明由 Lean 内核检查。
+:::
+
+::: {.figure src="ch31-rotation-steps"}
+**每一轮只转 $2\theta$，不能跳步。** 在成功方向 $W$（竖直）与失败方向 $B$（水平）张成的平面里，第 $n$ 轮的态是 $\sin((2n+1)\theta)\,W + \cos((2n+1)\theta)\,B$，从 $B$ 上方 $\theta$ 处出发，每轮多转一段紫色的 $2\theta$（[@thm-ch31-horizon-landauer-ergodic-fairness] 第 2 款）。图中取 $\theta = \pi/14$，即 $p = \sin^2\theta \approx 0.050$，琥珀色的第 $n = 3$ 轮恰好落在 $W$ 上；$p$ 越小，每步越短，要走的轮数越多。
 :::
 
 从连续观测函数延伸至带边界接受窗指示函数的外部遍历论文献背景整理于下框：
