@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch03-trine-records" data-lang="zh" data-wrap="1" viewBox="0 0 500 270" width="500" height="270" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="左右两半。左半：布洛赫球的一个大圆上三支青色的箭头 ψ₀、ψ₁、ψ₂，两两相隔 120°。右半：一张 3×3 的读数表，行是读出 E₀、E₁、E₂，列是记录 ψ₀、ψ₁、ψ₂，每格里一个方块，面积按读数大小：对角线上三格是 ⅔，其余六格是 ⅙；下面写着平均读对 ⅔ = d/N。">
+<title>左右两半。左半：布洛赫球的一个大圆上三支青色的箭头 ψ₀、ψ₁、ψ₂，两两相隔 120°。右半：一张 3×3 的读数表，行是读出 E₀、E₁、E₂，列是记录 ψ₀、ψ₁、ψ₂，每格里一个方块，面积按读数大小：对角线上三格是 ⅔，其余六格是 ⅙；下面写着平均读对 ⅔ = d/N。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="210" height="270" viewBox="0 0 210 270">
+<circle cx="105" cy="140" r="86" class="ts-dim" stroke-width="1.4" fill="none"/>
+<text class="tf-ink" x="105" y="22" font-size="14" text-anchor="middle" font-weight="600">同一个大圆上的三条记录</text>
+<line x1="105" y1="140" x2="105" y2="61.65" class="ts-cyan" stroke-width="2.4" fill="none"/>
+<path d="M105 54 L108.78 63 L101.22 63Z" class="tf-cyan"/>
+<text class="tf-cyan ts-bg" x="105" y="43" font-size="15" text-anchor="middle" stroke-width="4.2" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">ψ</tspan><tspan dy="0.28em" font-size="72%">0</tspan><tspan dy="-0.2em">​</tspan></text>
+<line x1="105" y1="140" x2="172.85" y2="179.18" class="ts-cyan" stroke-width="2.4" fill="none"/>
+<path d="M179.48 183 L169.79 181.77 L173.57 175.23Z" class="tf-cyan"/>
+<text class="tf-cyan ts-bg" x="193.33" y="196" font-size="15" text-anchor="middle" stroke-width="4.2" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">ψ</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.2em">​</tspan></text>
+<line x1="105" y1="140" x2="37.15" y2="179.18" class="ts-cyan" stroke-width="2.4" fill="none"/>
+<path d="M30.52 183 L36.43 175.23 L40.21 181.77Z" class="tf-cyan"/>
+<text class="tf-cyan ts-bg" x="16.67" y="196" font-size="15" text-anchor="middle" stroke-width="4.2" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">ψ</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.2em">​</tspan></text>
+<path d="M105 114 L106.81 114.06 L108.62 114.25 L110.41 114.57 L112.17 115.01 L113.89 115.57 L115.58 116.25 L117.21 117.04 L118.78 117.95 L120.28 118.97 L121.71 120.08 L123.06 121.3 L124.32 122.6 L125.49 123.99 L126.55 125.46 L127.52 127 L128.37 128.6 L129.11 130.26 L129.73 131.97 L130.23 133.71 L130.61 135.49 L130.86 137.28 L130.98 139.09 L130.98 140.91 L130.86 142.72 L130.61 144.51 L130.23 146.29 L129.73 148.03 L129.11 149.74 L128.37 151.4 L127.52 153" class="ts-dim" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+<text class="tf-dim" x="143.11" y="122.68" font-size="13" text-anchor="middle">120°</text>
+</svg>
+<svg class="tr-fig-panel" x="226" y="0" width="274" height="270" viewBox="0 0 274 270">
+<text class="tf-ink" x="137" y="22" font-size="14" text-anchor="middle" font-weight="600">读数 Tr(<tspan font-style="italic">E</tspan><tspan dy="0.28em" font-size="72%" font-style="italic">j</tspan><tspan dy="-0.2em"> </tspan><tspan font-style="italic">ρ</tspan><tspan dy="0.28em" font-size="72%" font-style="italic">k</tspan><tspan dy="-0.2em">)</tspan></text>
+<text class="tf-cyan" x="96" y="48" font-size="14" text-anchor="middle"><tspan font-style="italic">ψ</tspan><tspan dy="0.28em" font-size="72%">0</tspan><tspan dy="-0.2em">​</tspan></text>
+<text class="tf-ink" x="60" y="87" font-size="14" text-anchor="end"><tspan font-style="italic">E</tspan><tspan dy="0.28em" font-size="72%">0</tspan><tspan dy="-0.2em">​</tspan></text>
+<text class="tf-cyan" x="148" y="48" font-size="14" text-anchor="middle"><tspan font-style="italic">ψ</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.2em">​</tspan></text>
+<text class="tf-ink" x="60" y="139" font-size="14" text-anchor="end"><tspan font-style="italic">E</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.2em">​</tspan></text>
+<text class="tf-cyan" x="200" y="48" font-size="14" text-anchor="middle"><tspan font-style="italic">ψ</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.2em">​</tspan></text>
+<text class="tf-ink" x="60" y="191" font-size="14" text-anchor="end"><tspan font-style="italic">E</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.2em">​</tspan></text>
+<rect x="70" y="56" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="74" y="60" width="44" height="44" class="ts-cyan tf-cyan" stroke-width="1"/>
+<text class="tf-bg" x="96" y="87" font-size="14" text-anchor="middle" font-weight="600">⅔</text>
+<rect x="122" y="56" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="137" y="71" width="22" height="22" class="ts-dim tf-dim" stroke-width="1"/>
+<text class="tf-dim" x="170" y="102" font-size="13" text-anchor="end">⅙</text>
+<rect x="174" y="56" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="189" y="71" width="22" height="22" class="ts-dim tf-dim" stroke-width="1"/>
+<text class="tf-dim" x="222" y="102" font-size="13" text-anchor="end">⅙</text>
+<rect x="70" y="108" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="85" y="123" width="22" height="22" class="ts-dim tf-dim" stroke-width="1"/>
+<text class="tf-dim" x="118" y="154" font-size="13" text-anchor="end">⅙</text>
+<rect x="122" y="108" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="126" y="112" width="44" height="44" class="ts-cyan tf-cyan" stroke-width="1"/>
+<text class="tf-bg" x="148" y="139" font-size="14" text-anchor="middle" font-weight="600">⅔</text>
+<rect x="174" y="108" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="189" y="123" width="22" height="22" class="ts-dim tf-dim" stroke-width="1"/>
+<text class="tf-dim" x="222" y="154" font-size="13" text-anchor="end">⅙</text>
+<rect x="70" y="160" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="85" y="175" width="22" height="22" class="ts-dim tf-dim" stroke-width="1"/>
+<text class="tf-dim" x="118" y="206" font-size="13" text-anchor="end">⅙</text>
+<rect x="122" y="160" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="137" y="175" width="22" height="22" class="ts-dim tf-dim" stroke-width="1"/>
+<text class="tf-dim" x="170" y="206" font-size="13" text-anchor="end">⅙</text>
+<rect x="174" y="160" width="52" height="52" class="ts-faint" stroke-width="1" fill="none"/>
+<rect x="178" y="164" width="44" height="44" class="ts-cyan tf-cyan" stroke-width="1"/>
+<text class="tf-bg" x="200" y="191" font-size="14" text-anchor="middle" font-weight="600">⅔</text>
+<text class="tf-ink" x="137" y="250" font-size="14" text-anchor="middle">平均读对 ⅔ = <tspan font-style="italic">d</tspan>/<tspan font-style="italic">N</tspan></text>
+</svg>
+</svg>
