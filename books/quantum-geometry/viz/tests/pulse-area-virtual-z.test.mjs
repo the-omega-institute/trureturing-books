@@ -329,6 +329,154 @@ for (const [where, T2] of [['summary', sum], ['drawer', drw]]) for (const lng of
 check('drawer and served hub summary (zh, en): swaps and wrong signs as possibilities with the pole flip\'s |+⟩, λ = 90°, the z-turn relation for the virtual Z, and the free-H₀ condition for the poles, as the RK4 programs require',
   swapSame.every((e) => e.gap < 1e-6 && close(e.P0[0], 1, 1e-9) && close(e.P0[1], 1, 1e-9)) && close(keepRead.gap, 90, 1e-6) && keepRead.P0.every((p) => close(p, 0.5, 1e-9))
   && close(flip.P0[0], 0, 1e-9) && close(flip.P0[1], 1, 1e-9) && coinGap < 1e-6 && claimBad.length === 0, claimBad.slice(0, 4).join(' || '));
+
+// Which path is dashed. The page takes one comparison in a fixed order: two pulses > λ ≠ 0 > Δ ≠ 0 > Gaussian > none.
+// A reader who picks VIRTUAL-Z and adds a second pulse of the same area gets the swap of the two pulses actually sent
+// (−90°, 0°), not the literal virtual-Z circuit, and the two readouts differ. Recomputed here with 2 × 2 products
+// built from the Pauli matrices and applied to |+⟩; the drawer is opened by its button and read as shown, per language.
+const PX = [[[0, 0], [1, 0]], [[1, 0], [0, 0]]], PY = [[[0, 0], [0, -1]], [[0, 1], [0, 0]]], PZ = [[[1, 0], [0, 0]], [[0, 0], [-1, 0]]], ID2 = [[[1, 0], [0, 0]], [[0, 0], [1, 0]]];
+const madd = (A, B) => A.map((row, i) => row.map((z, j) => ca(z, B[i][j]))), msc = (A, k) => A.map((row) => row.map((z) => cm(z, k)));
+/** exp(−(i/2)θ n·σ) = cos(θ/2) 1 − i sin(θ/2)(n_x X + n_y Y + n_z Z), assembled from the Pauli matrices. */
+const pauliTurn = (n, th) => madd(msc(ID2, [Math.cos(th / 2), 0]), msc(madd(madd(msc(PX, [n[0], 0]), msc(PY, [n[1], 0])), msc(PZ, [n[2], 0])), [0, -Math.sin(th / 2)]));
+const pulseP = (phDeg, th) => pauliTurn([Math.cos(phDeg * DEG), Math.sin(phDeg * DEG), 0], th);
+const applyM = (A, v) => [ca(cm(A[0][0], v[0]), cm(A[0][1], v[1])), ca(cm(A[1][0], v[0]), cm(A[1][1], v[1]))];
+const inOrder = (mats, v) => mats.reduce((acc, A) => applyM(A, acc), v);   // the first matrix acts first
+const plusV = [[Math.SQRT1_2, 0], [Math.SQRT1_2, 0]];
+const cxMain = blochOf(inOrder([pulseP(-90, PI / 2), pulseP(0, PI / 2)], plusV));                       // hardware: −90° then 0°
+const cxSwap = blochOf(inOrder([pulseP(0, PI / 2), pulseP(-90, PI / 2)], plusV));                       // those two swapped
+const cxLit = blochOf(inOrder([pauliTurn([0, 0, 1], PI / 2), pulseP(0, PI / 2), pulseP(90, PI / 2)], plusV));   // literal Z(90°), X, Y
+const p0Pair = (txt) => { const m = txt.trim().match(/^([−\d.]+)(?:\s*·\s*(?:虚线|dashed)\s+([−\d.]+))?$/); return m ? [num(m[1]), m[2] != null ? num(m[2]) : null] : null; };
+const flat = (x) => x.replace(/\s+/g, ' ');
+/** Open the drawer with its button in language l, read the block a reader sees, close it with Escape. */
+async function drawerSeen(l) {
+  await lang(l); await page.click('#infoBtn'); await settle(page);
+  const shown = page.locator(`#drawer .sheet > .${l}`), other = page.locator(`#drawer .sheet > .${l === 'zh' ? 'en' : 'zh'}`);
+  const seen = { open: await page.evaluate(() => !document.getElementById('drawer').hidden), visible: await shown.isVisible(), otherHidden: !(await other.isVisible()), text: flat(await shown.innerText()) };
+  await page.keyboard.press('Escape'); await settle(page);
+  seen.closed = await page.evaluate(() => document.getElementById('drawer').hidden);
+  return seen;
+}
+await lang('zh'); await pick('vz'); await chip('#twoChips [data-two="1"]'); s = await seek(50);
+const cxRo = { zh: p0Pair(await page.textContent('#roP0')), legZh: await page.textContent('#legend'), meta: await page.textContent('#p0Meta') };
+await lang('en'); cxRo.en = p0Pair(await page.textContent('#roP0')); cxRo.legEn = await page.textContent('#legend'); await lang('zh');
+check('VIRTUAL-Z + a second pulse of the same area, at 50 ns: Pauli products on |+⟩ give −y for the hardware (−90°, 0°), +z for its swap and +x for the literal circuit Z(90°) X Y (= the hardware end turned by 90° about z); the page draws the swap (main −y, dashed +z, RK4 too), reads P(0) 0.5000 · dashed 1.0000 and names the swap in its legend (zh, en)',
+  vdist(cxMain, [0, -1, 0]) < 1e-12 && vdist(cxSwap, [0, 0, 1]) < 1e-12 && vdist(cxLit, [1, 0, 0]) < 1e-12 && vdist(rotZ(cxMain, PI / 2), cxLit) < 1e-12 && vdist(cxSwap, cxLit) > 1
+  && s.two && s.lam === 90 && s.sign === 1 && close(s.max, 50) && vdist(s.r0, [1, 0, 0]) < 1e-12 && s.phys.length === 2 && close(s.phys[0], -90) && close(s.phys[1], 0) && s.ghost === 'two'
+  && vdist(s.r, cxMain) < 1e-9 && vdist(s.ghostState.r, cxSwap) < 1e-9 && err(s) < 1e-8
+  && [cxRo.zh, cxRo.en].every((r) => r && Math.abs(r[0] - P0T(cxMain)) <= TOL_P && Math.abs(r[1] - P0T(cxSwap)) <= TOL_P && Math.abs(r[1] - r[0]) > 0.4) && cxRo.meta.includes('0.500') && cxRo.meta.includes('1.000')
+  && cxRo.legZh.includes('虚线：两个脉冲换序') && !cxRo.legZh.includes('先真转') && cxRo.legEn.includes('dashed: the two pulses swapped') && !cxRo.legEn.includes('a real Z(λ)'),
+  `${JSON.stringify({ r: s.r, g: s.ghostState && s.ghostState.r, ro: cxRo })}`);
+const dz = await drawerSeen('zh'), de = await drawerSeen('en'); await lang('zh');
+const literalBad = [];
+for (const [lng, d] of [['zh', dz], ['en', de]]) for (const c of clauses(d.text, lng)) {
+  const [dashed, lit, cond] = lng === 'zh' ? [/虚线/, /电路字面/, /一个脉冲|第二个脉冲/] : [/dashed/, /literal/, /one pulse|second pulse/];
+  if (dashed.test(c) && lit.test(c) && !cond.test(c)) literalBad.push(`${lng}: ${c.trim().slice(0, 90)}`);
+}
+check('the drawer, opened and read as shown (zh, en): the dashed path is the literal circuit only under a one-pulse condition, and this very program is stated as the swap: solid −y, P(0) = 1/2, dashed north pole, P(0) = 1, as the Pauli products and the readouts above give',
+  [dz, de].every((d) => d.open && d.visible && d.otherHidden && d.closed) && literalBad.length === 0
+  && dz.text.includes('实际发出 −90° 与 0°') && dz.text.includes('实线停在 −y，P(0) = 1/2') && dz.text.includes('换序的虚线到北极，P(0) = 1') && !dz.text.includes('白色虚线是电路字面上的那条路')
+  && de.text.includes('sends −90° and then 0°') && de.text.includes('the solid path ends at −y, P(0) = 1/2') && de.text.includes('the dashed swap at the north pole, P(0) = 1') && !de.text.includes('and the white dashed path is the circuit taken literally')
+  && close(P0T(cxMain), 0.5, 1e-12) && close(P0T(cxSwap), 1, 1e-12),
+  `${literalBad.slice(0, 3).join(' || ')} | ${JSON.stringify([dz, de].map((d) => [d.open, d.visible, d.otherHidden, d.closed]))}`);
+// the drawer's precedence, word for word as a reader sees it, in order
+const COND = {
+  two: ['① 开了第二个脉冲，虚线一律是两个脉冲换序', 'With the second pulse on, it is always the two pulses swapped'],
+  lam: ['② 否则（只有一个脉冲），λ ≠ 0 时，虚线是电路字面上的那条路', 'Otherwise, with one pulse and λ ≠ 0, it is the literal circuit'],
+  det: ['③ 否则，λ = 0 而有失谐时，虚线是同一个脉冲不失谐', 'Otherwise, with λ = 0 and a detuning, it is the same pulse without detuning'],
+  gauss: ['④ 否则，λ = 0、不失谐、高斯包络时，虚线是同面积的方波', 'Otherwise, with λ = 0, no detuning and a Gaussian envelope, it is the square pulse of the same area'],
+  none: ['⑤ 其余情形（一个方波、λ = 0、不失谐）没有虚线', 'Otherwise (one square pulse, λ = 0, no detuning) there is no dashed path']
+};
+const EQW = {
+  two: ['两条路的读数也未必相同', 'the two readouts need not agree'],
+  right: ['符号正确（φ − λ）时，不论包络与失谐，把实线的终点绕 z 轴转 λ 就得到虚线的终点', 'with the right sign φ − λ, at any envelope and detuning, turning the solid end by λ about z gives the dashed end'],
+  wrong: ['读数可能变，也可能恰好相同', 'the readouts can differ and can also coincide'],
+  half: ['例如 λ = 180° 时两个符号是同一个相位', 'at λ = 180°, for instance, the two signs give one phase'],
+  gauss: ['面积律保证两者终点相同', 'the area law makes the two ends the same']
+};
+const order = (txt, li) => { const at = ['two', 'lam', 'det', 'gauss', 'none'].map((k) => txt.indexOf(COND[k][li])); return at.every((x, i) => x >= 0 && (i === 0 || x > at[i - 1])); };
+check('the drawer states every comparison\'s condition in the page\'s order, two > λ ≠ 0 > Δ ≠ 0 > Gaussian > none, with when equality holds (zh, en, as shown)',
+  order(dz.text, 0) && order(de.text, 1) && Object.values(EQW).every(([zh, en]) => dz.text.includes(zh) && de.text.includes(en)), `${dz.text.slice(0, 120)} | ${de.text.slice(0, 120)}`);
+
+// Conflicting settings, set through the controls from |+⟩ (VIRTUAL-Z card): the experimental programs below are
+// written down from the case alone, run by RK4, and the page's dashed path must be exactly the one the order names
+// and none of the other comparisons whose condition also holds; its legend, readout and the drawer's words follow.
+const CB = { area: 0.7, T: 20, phi: 30, phi2: -60 };
+const CASES = [
+  { id: 'two + λ 45° (φ − λ) + 4 MHz + Gaussian', two: 1, lam: 45, sign: 1, det: 4, shape: 'gauss', want: 'two' },
+  { id: 'two + λ 45° (φ + λ) + 4 MHz + Gaussian', two: 1, lam: 45, sign: -1, det: 4, shape: 'gauss', want: 'two' },
+  { id: 'two + λ 90° (φ − λ), resonant square', two: 1, lam: 90, sign: 1, det: 0, shape: 'square', want: 'two' },
+  { id: 'one + λ 45° (φ − λ) + 4 MHz + Gaussian', two: 0, lam: 45, sign: 1, det: 4, shape: 'gauss', want: 'lam', rel: 'right' },
+  { id: 'one + λ 45° (φ + λ) + 4 MHz + Gaussian', two: 0, lam: 45, sign: -1, det: 4, shape: 'gauss', want: 'lam', rel: 'wrong' },
+  { id: 'one + λ 180° (φ + λ) + 4 MHz + Gaussian', two: 0, lam: 180, sign: -1, det: 4, shape: 'gauss', want: 'lam', rel: 'half' },
+  { id: 'one + λ 0 + 4 MHz + Gaussian', two: 0, lam: 0, sign: 1, det: 4, shape: 'gauss', want: 'det' },
+  { id: 'one + λ 0, resonant Gaussian', two: 0, lam: 0, sign: 1, det: 0, shape: 'gauss', want: 'gauss', rel: 'gauss' },
+  { id: 'one + λ 0, resonant square', two: 0, lam: 0, sign: 1, det: 0, shape: 'square', want: null }
+];
+const LEGW = { two: ['虚线：两个脉冲换序', 'dashed: the two pulses swapped'], lam: ['虚线：先真转 Z(λ)，再按 φ 发脉冲', 'dashed: a real Z(λ) first, then the pulse at φ'],
+  det: ['虚线：同一个脉冲，不失谐', 'dashed: the same pulse, no detuning'], gauss: ['虚线：同面积的方波', 'dashed: a square pulse of the same area'] };
+const peakOf = (shape) => CB.area * PI / simpson((t) => SHAPE[shape](t, CB.T), 0, CB.T);
+function caseProgs(c) {
+  const nominal = c.two ? [CB.phi, CB.phi2] : [CB.phi], sent = nominal.map((p) => p - c.sign * c.lam);
+  const mk = (phases, shape, det, pre = 0) => ({ pre: pre * DEG, pulses: phases.map((p, i) => ({ t0: i * CB.T, T: CB.T, shape, A: peakOf(shape), phi: p * DEG, det: det * MHZ })) });
+  return { sent, main: mk(sent, c.shape, c.det), two: mk(sent.slice().reverse(), c.shape, c.det), lam: mk(nominal, c.shape, c.det, c.lam), det: mk(sent, c.shape, 0), gauss: mk(sent, 'square', c.det) };
+}
+const active = (c) => ({ two: !!c.two, lam: c.lam !== 0, det: c.det !== 0, gauss: c.shape === 'gauss' });
+function runProg(pr, t) {
+  let psi = stateOf([1, 0, 0]);
+  if (pr.pre) psi = inOrder([pauliTurn([0, 0, 1], pr.pre)], psi);
+  for (const p of pr.pulses) { const tau = Math.max(0, Math.min(p.T, t - p.t0)); if (tau > 0) psi = rk4(psi, p, tau, 4000); }
+  return blochOf(psi);
+}
+const caseBad = [];
+for (const c of CASES) {
+  await lang('zh'); await pick('vz'); await chip(`#shapeChips [data-shape="${c.shape}"]`);
+  await setRange('area', CB.area); await setRange('dur', CB.T); await setRange('phase', CB.phi); await setRange('det', c.det); await setRange('lam', c.lam);
+  await chip(`#signChips [data-sign="${c.sign}"]`); await chip(`#twoChips [data-two="${c.two}"]`);
+  if (c.two) await setRange('phase2', CB.phi2);
+  const P = caseProgs(c), end = CB.T * (c.two ? 2 : 1), bad = (what) => caseBad.push(`${c.id}: ${what}`);
+  s = await state();
+  if (s.ghost !== c.want) bad(`page compares ${s.ghost}, the order says ${c.want}`);
+  const samePhase = (a, b) => Math.abs(((a - b) % 360 + 540) % 360 - 180) < 1e-9;
+  if (!close(s.max, end) || !close(s.peak, peakOf(c.shape), 1e-9) || s.phys.length !== P.sent.length || !s.phys.every((p, i) => samePhase(p, P.sent[i])))
+    bad(`program ${JSON.stringify({ max: s.max, peak: s.peak, phys: s.phys, sent: P.sent })}`);
+  // the page's two paths at three times against the written-down programs (RK4)
+  const others = Object.entries(active(c)).filter(([k, on]) => on && k !== c.want).map(([k]) => k), gapTo = Object.fromEntries(others.map((k) => [k, 0]));
+  for (const f of [0.4, 0.75, 1]) {
+    s = await seek(end * f);
+    if (vdist(s.r, runProg(P.main, s.t)) > 1e-6) bad(`main at ${s.t}`);
+    if (c.want) {
+      if (!s.ghostState || vdist(s.ghostState.r, runProg(P[c.want], s.t)) > 1e-6) bad(`dashed is not the ${c.want} program at ${s.t}`);
+      for (const k of others) gapTo[k] = Math.max(gapTo[k], s.ghostState ? vdist(s.ghostState.r, runProg(P[k], s.t)) : 0);
+    } else if (s.ghostState) bad('a dashed path where none is due');
+  }
+  for (const k of others) if (!(gapTo[k] > 1e-3)) bad(`dashed also matches the lower-ranked ${k} program (${gapTo[k]})`);
+  // the readout at the end, the legend, and the relation the drawer states for this comparison
+  const mEnd = runProg(P.main, end), gEnd = c.want ? runProg(P[c.want], end) : null;
+  for (const [li, l] of [[0, 'zh'], [1, 'en']]) {
+    await lang(l);
+    const ro = p0Pair(await page.textContent('#roP0')), leg = await page.textContent('#legend');
+    if (!ro || Math.abs(ro[0] - P0T(mEnd)) > TOL_P) bad(`${l} solid readout ${ro} vs ${P0T(mEnd)}`);
+    if (c.want) {
+      if (!ro || ro[1] == null || Math.abs(ro[1] - P0T(gEnd)) > TOL_P) bad(`${l} dashed readout ${ro} vs ${P0T(gEnd)}`);
+      if (!leg.includes(LEGW[c.want][li]) || Object.keys(LEGW).some((k) => k !== c.want && leg.includes(LEGW[k][li]))) bad(`${l} legend ${leg}`);
+    } else if ((ro && ro[1] != null) || /虚线|dashed/.test(leg)) bad(`${l} shows a comparison: ${leg}`);
+    const d = l === 'zh' ? dz.text : de.text;
+    if (!d.includes(COND[c.want || 'none'][li])) bad(`${l} drawer lacks the condition for ${c.want || 'none'}`);
+    if (c.want === 'two' && !d.includes(EQW.two[li])) bad(`${l} drawer lacks the no-equality clause for swaps`);
+    if (c.rel && !d.includes(EQW[c.rel][li])) bad(`${l} drawer lacks the ${c.rel} relation`);
+    if (c.rel === 'right' || c.rel === 'half' || c.rel === 'gauss') { if (!ro || ro[1] == null || Math.abs(ro[0] - ro[1]) > 1e-9) bad(`${l} readouts should agree: ${ro}`); }
+    if (c.rel === 'wrong' && (!ro || ro[1] == null || Math.abs(ro[0] - ro[1]) < 0.05)) bad(`${l} wrong-sign readouts should differ here: ${ro}`);
+  }
+  // the relations themselves, from the programs alone
+  if ((c.rel === 'right' || c.rel === 'half') && !(vdist(rotZ(mEnd, c.lam * DEG), gEnd) < 1e-6)) bad('literal end is not the hardware end turned by λ about z');
+  if (c.rel === 'half' && !(Math.abs(((P.sent[0] - (CB.phi - c.lam)) % 360 + 540) % 360 - 180) < 1e-9)) bad('φ + 180° and φ − 180° are not one phase');
+  if (c.rel === 'wrong' && !(Math.abs(P0T(mEnd) - P0T(gEnd)) > 0.05)) bad(`wrong sign kept the readout: ${P0T(mEnd)} ${P0T(gEnd)}`);
+  if (c.rel === 'gauss' && !(vdist(mEnd, gEnd) < 1e-6)) bad('the square of the same area does not end with the Gaussian');
+  if (c.want === 'two' && !(vdist(runProg(P.two, end), runProg(P.lam, end)) > 1e-3)) bad('the swap coincides with the literal circuit');
+}
+await lang('zh');
+check('conflicting settings (9 cases from |+⟩, both signs, λ = 180°): the dashed path is the RK4 run of the program the order two > λ ≠ 0 > Δ ≠ 0 > Gaussian > none names and of no other applicable comparison; legend, both P(0) readouts and the drawer\'s condition and equality words agree (zh, en)',
+  caseBad.length === 0, caseBad.slice(0, 4).join(' || '));
 // detuned: a square envelope keeps one tilted axis, a Gaussian one turns it
 await pick('quarter'); await setRange('det', 5); s = await state();
 const axSq = [s.peak, 0, 5 * MHZ].map((x, i, g) => x / Math.hypot(...g));
