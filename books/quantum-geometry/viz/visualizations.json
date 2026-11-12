@@ -2326,6 +2326,49 @@
           "gid": "D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result"
         }
       ]
+    },
+    {
+      "id": "spherical-degeneracy-radar",
+      "code": "ORTHO//DEGENERACY",
+      "title": "球面简并雷达 · 一次正交与两次正交如何反演观察者位置",
+      "title_en": "Spherical degeneracy radar · how turning once and turning twice locate the observer",
+      "summary": "单位球面上，一次正交与两次正交把同一个起点送到不同处，琥珀色的观察者轴给两个结果各投一道青色影子。两道影子重合的观察者落在一条青色虚线的盲圈上；方位角转一圈、或把八分球面旋子的初始赤道标架转一圈，盲圈绕竖轴扫过整颗球，每一条都经过的只有极轴 ±e₃。旋子在 Cl(3,0) 里逐项相乘：R₁ = (1 − e₁e₃)/√2 与 R₂ = ((1 − e₂e₃)/√2)((1 − e₁e₂)/√2) 都把 +e₁ 送到 +e₃，差旋子 exp(−π/4 e₁e₂) 落在赤道面里。",
+      "summary_en": "On the unit sphere, one orthogonal turn and two send the same starting point to different places, and the amber observer axis receives a cyan shadow of each result. Observers whose two shadows coincide lie on a dashed cyan blind circle; as the azimuth goes once round, or the initial equatorial frame of the octant rotors does, the blind circle sweeps the whole sphere about the vertical, and only the polar axis ±e₃ lies on every one of them. The rotors are multiplied out in Cl(3,0): R₁ = (1 − e₁e₃)/√2 and R₂ = ((1 − e₂e₃)/√2)((1 − e₁e₂)/√2) both take +e₁ to +e₃, and their difference exp(−π/4 e₁e₂) lies in the equatorial plane.",
+      "path": "spherical-degeneracy-radar/",
+      "thumbnail": "spherical-degeneracy-radar/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "正交简并",
+        "观察者定位",
+        "旋子",
+        "布洛赫球"
+      ],
+      "tags_en": [
+        "orthogonal degeneracy",
+        "locating the observer",
+        "rotors",
+        "Bloch sphere"
+      ],
+      "theory": [
+        {
+          "label": "本书第三十四章",
+          "label_en": "Chapter 34",
+          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html",
+          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Geometry/TwoAxisFiniteRotation.unit_perpendicular_pair"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula"
+        }
+      ]
     }
   ]
 }

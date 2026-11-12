@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//DEGENERACY · Spherical degeneracy radar">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//DEGENERACY 球面简并雷达</title>
+<meta name="description" content="单位球面上的两步正交寻址与八分球面旋子。琥珀色的观察者轴把一次正交与两次正交的结果各投一道青色的影子；两道影子重合的观察者落在青色虚线的盲圈上。方位角转一圈、标架转一圈，盲圈绕竖轴扫过整颗球，只有紫色的极轴 ±e₃ 留在每一条盲圈上。Two-step orthogonal addressing on the unit sphere and the octant rotors. The amber observer axis casts a cyan shadow of the once-turned and of the twice-turned result; observers whose two shadows coincide lie on the dashed cyan blind circle. As the azimuth or the frame goes once round, the blind circle sweeps the whole sphere about the vertical, and only the violet polar axis ±e₃ stays on every one of them.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="spherical-degeneracy-radar">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//DEGENERACY">ORTHO<b>//</b>DEGENERACY</h1>
+      <div class="tagline">
+        <span class="zh">球面简并雷达 · <em>转一次与转两次，终点不同，有的观察者却读出同一个数；把这些读不出差别的人收集起来，只剩极轴上的那一对</em></span>
+        <span class="en">Spherical degeneracy radar · <em>turned once or turned twice, the end points differ, yet some observers read the same number; gather everyone who cannot tell, and only the pair on the polar axis is left</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill hot" id="pillObs"><span class="zh">观察者离北极</span><span class="en">OBSERVER</span> <strong>—</strong></span>
+      <span class="pill" id="pillGap"><span class="zh">读数差</span><span class="en">GAP</span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="meridian" aria-pressed="false"><span class="code">MERIDIAN</span><span class="cn zh">横拐 90°：盲圈是对称子午线</span><span class="cn en">A 90° side turn: the blind circle is the symmetric meridian</span></button>
+        <button class="preset" data-preset="sweep" aria-pressed="false"><span class="code">SWEEP</span><span class="cn zh">方位角转一圈：盲圈只共有两极</span><span class="cn en">The azimuth goes round: the blind circles share only the poles</span></button>
+        <button class="preset" data-preset="tilted" aria-pressed="false"><span class="code">TILTED</span><span class="cn zh">偏离极轴：读数张开</span><span class="cn en">Off the polar axis: the readings split</span></button>
+        <button class="preset" data-preset="hops" aria-pressed="false"><span class="code">HOPS</span><span class="cn zh">一步与两步：同一终点，标架差 90°</span><span class="cn en">One hop or two: one end point, frames 90° apart</span></button>
+        <button class="preset" data-preset="equator" aria-pressed="false"><span class="code">EQUATOR</span><span class="cn zh">赤道测试态：站在 e₂ 读出 sin α 与 0</span><span class="cn en">An equator test state: from e₂ one reads sin α and 0</span></button>
+        <button class="preset" data-preset="frames" aria-pressed="false"><span class="code">FRAMES</span><span class="cn zh">转动标架：极点始终读不出差别</span><span class="cn en">Turning the frame: the pole never tells them apart</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec" id="ctlPanel">
+      <h2><span class="zh">观察者与转角</span><span class="en">Observer and angles</span><span class="aside"><span class="zh">也可拖动琥珀点</span><span class="en">or drag the amber dot</span></span></h2>
+      <div class="field" id="thetaField">
+        <label for="theta"><span class="zh">第一次转动 θ</span><span class="en">First turn θ</span><small class="zh">从 e₃ 倒向 e₁</small><small class="en">from e₃ towards e₁</small></label><output id="oTheta" for="theta">60°</output>
+        <input type="range" id="theta" min="10" max="170" step="1" value="60">
+      </div>
+      <div class="field" id="alphaField">
+        <label for="alpha"><span class="zh">测试态 α</span><span class="en">Test state α</span><small class="zh">赤道上从 e₁ 起算</small><small class="en">along the equator from e₁</small></label><output id="oAlpha" for="alpha">60°</output>
+        <input type="range" id="alpha" min="5" max="175" step="1" value="60">
+      </div>
+      <div class="field">
+        <label for="beta"><span class="zh">观察者离北极 β</span><span class="en">Observer from the North Pole β</span></label><output id="oBeta" for="beta">0°</output>
+        <input type="range" id="beta" min="0" max="180" step="1" value="0">
+      </div>
+      <div class="field">
+        <label for="azim"><span class="zh">观察者方位角</span><span class="en">Observer azimuth</span></label><output id="oAzim" for="azim">0°</output>
+        <input type="range" id="azim" min="0" max="360" step="1" value="0">
+      </div>
+      <div class="chips" role="group" aria-label="观察者站位" data-aria-en="Observer positions">
+        <button class="chip" id="toPole"><span class="zh">站到北极 +e₃</span><span class="en">To the pole +e₃</span></button>
+        <button class="chip" id="toE2"><span class="zh">站到赤道 e₂</span><span class="en">To the equator e₂</span></button>
+      </div>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="单位球面上一次正交与两次正交的两个结果、琥珀色的观察者轴与它投下的两道青色影子，以及读数相同的观察者所在的青色虚线盲圈" data-aria-en="The once-turned and twice-turned results on the unit sphere, the amber observer axis with the two cyan shadows it receives, and the dashed cyan blind circle of observers who read the same">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+        <button class="chip" data-scene="address" aria-pressed="true"><span class="zh">寻址</span><span class="en">Address</span></button>
+        <button class="chip" data-scene="rotor" aria-pressed="false"><span class="zh">旋子</span><span class="en">Rotors</span></button>
+        <button class="chip" data-scene="test" aria-pressed="false"><span class="zh">测试态</span><span class="en">Test</span></button>
+        <button class="chip" data-scene="frames" aria-pressed="false"><span class="zh">标架</span><span class="en">Frames</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="plotTitle"><span class="zh">沿时间轴：两次读数差多少</span><span class="en">Along the rail: how far apart the two readings are</span></h2><span id="plotMeta"></span></div>
+        <canvas id="plot" aria-label="沿时间轴的读数差" data-aria-en="The gap between the readings along the rail"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="dtKey"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div class="m"><dt id="dtA"></dt><dd id="roA">—</dd></div>
+        <div><dt id="dtB"></dt><dd id="roB">—</dd></div>
+        <div class="c"><dt id="dtC"></dt><dd id="roC">—</dd></div>
+        <div><dt id="dtD"></dt><dd id="roD">—</dd></div>
+        <div><dt id="dtE"></dt><dd id="roE">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">公共单位法线：三维空间里任意两根向量 a、b（不必非零、不必独立）都有一根单位向量 n 同时与两者正交。页面里 a、b 是两次不同转动下“两次 − 一次”的差向量；与两者都正交的观察者，两种转动都读不出差别。上面那一行的 n 由页面取 a × b 归一算出。已冻结：</span><span class="en">A common unit normal: any two vectors a, b of three-dimensional space (not necessarily nonzero or independent) have a unit vector n orthogonal to both. On the page a and b are the differences “twice − once” for two different turns; an observer orthogonal to both cannot tell either pair apart. The page computes the n in the row above as a × b normalized. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Geometry/TwoAxisFiniteRotation.unit_perpendicular_pair" href="#" target="_blank" rel="noopener"><code>unit_perpendicular_pair</code></a></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">读出划分拓扑的不可分核：读出映射在 X 上诱导的划分拓扑里，两个状态拓扑不可分，当且仅当读出相同。这里的读出是观察者的内积 s ↦ O·s：极点观察者把 s₁ 与 s₂ 读成同一个数，两者就落在同一根纤维上。已冻结：</span><span class="en">The kernel of the readout partition topology: in the partition topology a readout induces on X, two states are topologically inseparable exactly when their readouts agree. Here the readout is the observer’s inner product s ↦ O·s: an observer at the pole reads s₁ and s₂ as the same number, so they lie on one fibre. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel" href="#" target="_blank" rel="noopener"><code>partition_inseparable_iff_kernel</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">协变换位子：在任意环里，若 U·f = f′·U，则 U·f − f·U = (f′ − f)·U。页面在 Cl(3,0) 里取 U = 差旋子 D = R₂R̃₁、f = e₃：D e₃ = e₃ D，f′ = f，换位子为零；f = e₁ 时 f′ = e₂，换位子不为零（读数见“旋子”场景）。已冻结：</span><span class="en">The covariant commutator: in any ring, if U·f = f′·U then U·f − f·U = (f′ − f)·U. The page takes, in Cl(3,0), U = the difference rotor D = R₂R̃₁ and f = e₃: D e₃ = e₃ D, so f′ = f and the commutator vanishes; for f = e₁, f′ = e₂ and it does not (readouts in the Rotors scene). Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula" href="#" target="_blank" rel="noopener"><code>covariant_commutator_formula</code></a></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">八分球面闭合三角形 e₁ → e₂ → e₃ → e₁ 围出立体角 Ω = π/2，自旋 1/2 态绕它一周积累的 Berry—Pancharatnam 几何相位 γ<sub>B</sub> = −Ω/2 = −π/4；超导读出前绕 Z 轴的转动可由“虚拟 Z 门”改写控制帧而实现。两者都是第三十四章注记转述的文献结果，未在本书形式化，本页不计算它们。</span><span class="en">The closed octant triangle e₁ → e₂ → e₃ → e₁ encloses a solid angle Ω = π/2, and a spin-½ state taken once round it gathers the Berry–Pancharatnam geometric phase γ<sub>B</sub> = −Ω/2 = −π/4; a turn about Z before a superconducting readout can be done as a “virtual Z gate” that rewrites the control frame. Both are literature results reported in a remark of Chapter 34, not formalized in this book; the page does not compute them.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">“凡读数简并处，皆反演出观察者站位”是第三十四章的模型诠释：把读不出差别的观察者收集起来，读成观察者自己的位置。页面按章节算例实现它：方位角或初始赤道标架扫一圈，盲圈的公共部分只剩 ±e₃。这是诠释与画法，不是定理。</span><span class="en">“Wherever the readings are degenerate, the observer’s own position is inverted from them” is the model interpretation of Chapter 34: gather the observers who cannot tell the results apart, and read that set as the observer’s own place. The page follows the chapter’s worked example: as the azimuth or the initial equatorial frame goes once round, what the blind circles have in common is only ±e₃. This is an interpretation and a way of drawing, not a theorem.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面在实三维几何代数 Cl(3,0) 里按刀片逐项相乘：旋子 R = cos(ϑ/2) − sin(ϑ/2) a∧b，作用 s ↦ R s R̃；终点、标架、读数、差旋子与换位子都由这一乘法当场算出。旋子代数本身是第三十四章算例里的标准结果（文献结果，未在本书形式化）；这里的数是数值演示，不是证明。</span><span class="en">The page multiplies blade by blade in the real geometric algebra Cl(3,0): a rotor R = cos(ϑ/2) − sin(ϑ/2) a∧b acts by s ↦ R s R̃; the end points, frames, readings, the difference rotor and the commutators all come from this product on the spot. The rotor algebra itself is the standard material of the Chapter 34 worked example (a literature result, not formalized in this book); these numbers are a numerical illustration, not a proof.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="时间轴：方位角、旋子步数、测试态或标架转角" data-aria-en="Rail: the azimuth, the rotor step, the test state or the frame angle">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐 15° / 逐步</span><span class="en">15° at a time / step by step</span> · <kbd>P</kbd> <span class="zh">站到北极</span><span class="en">to the pole</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">舞台是单位球面 S² ⊂ ℝ³，标准正交基 e₁、e₂、e₃（e₃ 朝上）。琥珀色的点是单位观察者探针 O，它对一个状态 s 的读数是内积 O·s，画成从 s 落到观察者轴上的青色影子。本页是数值演示，不是证明；每个数都由页面在 Cl(3,0) 里当场算出（NUM）。</p>
+      <ol>
+        <li><b>两步寻址（第三十四章例 1 与例 2 第 1 部分）。</b>一次正交在子午面 e₃∧e₁ 里倾转 θ：v₁ = cos θ e₃ + sin θ e₁；两次正交再在赤道面 e₁∧e₂ 里拧过方位角 φ：v₂ = cos θ e₃ + sin θ (cos φ e₁ + sin φ e₂)。读数差 Δ(O) = O·v₂ − O·v₁ = sin θ [O₁(cos φ − 1) + O₂ sin φ]。</li>
+        <li><b>盲圈。</b>固定 φ，Δ(O) = 0 的观察者是与 v₂ − v₁ 正交的那条大圆（青色虚线）。φ = π/2 时它是 O₁ = O₂ 的对称子午大圆；φ 扫过 (0, 2π)，这条大圆绕竖轴转过半圈、扫遍整颗球，所有盲圈的公共部分只剩 O = ±e₃，在那里两路读数都是 ±cos θ。</li>
+        <li><b>偏离极轴。</b>观察者离北极 β、方位角 φ<sub>O</sub> 时 Δ = sin θ sin β [cos(φ − φ<sub>O</sub>) − cos φ<sub>O</sub>]，随 φ 扫描张开的峰峰值是 2 |sin θ| sin β。</li>
+        <li><b>八分球面旋子（例 2 第 2 部分）。</b>双明治作用 s ↦ R s R̃，R̃ 为逆序（e<sub>i</sub>e<sub>j</sub> 的逆序是 −e<sub>i</sub>e<sub>j</sub>）。一步：R₁ = exp(−π/4 e₁e₃) = (1 − e₁e₃)/√2，把 +e₁ 送到 +e₃。两步：先 e₁ → e₂，再左乘 e₂ → e₃，R₂ = ((1 − e₂e₃)/√2)((1 − e₁e₂)/√2) = (1 − e₁e₂ − e₂e₃ − e₁e₃)/2 = exp(−π/4 e₁e₂) R₁，也把 +e₁ 送到 +e₃。两者相差的差旋子 D = R₂R̃₁ = exp(−π/4 e₁e₂) 整个落在赤道面 e₁∧e₂ 里：它把随行的标架绕 e₃ 转 π/2（右下角的小盘）。</li>
+        <li><b>赤道测试态。</b>s(α) = cos α e₁ + sin α e₂ 经两枚旋子得 s₁(α) = cos α e₃ + sin α e₂ 与 s₂(α) = cos α e₃ − sin α e₁。整条赤道的两个像是 e₂∧e₃ 面与 e₁∧e₃ 面里的两条大圆，只在 ±e₃ 相交：两者只在 sin α = 0 时重合。读数相等的条件是 O·(s₂ − s₁) = −sin α (O₁ + O₂) = 0；站在 e₂ 上读出 sin α 与 0，站在 e₃ 上两路都读 cos α。</li>
+        <li><b>转动标架。</b>把初始赤道标架换成 e₁(γ) = cos γ e₁ + sin γ e₂、e₂(γ) = −sin γ e₁ + cos γ e₂，同样造两枚旋子：盲圈变成与 e₁(γ) + e₂(γ) 正交的大圆，随 γ 绕竖轴转动；对所有 γ 都读不出差别的只有 O = ±e₃。</li>
+        <li><b>冻结定理。</b>公共单位法线 <a class="leanref" data-lean-gid="D5/S3/Geometry/TwoAxisFiniteRotation.unit_perpendicular_pair" href="#" target="_blank" rel="noopener"><code>unit_perpendicular_pair</code></a>、读出划分拓扑的不可分核 <a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel" href="#" target="_blank" rel="noopener"><code>partition_inseparable_iff_kernel</code></a> 与协变换位子 <a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula" href="#" target="_blank" rel="noopener"><code>covariant_commutator_formula</code></a> 是第三十四章用 <code>lean=</code> 引用的定理（LEAN ✓）。它们是一般陈述，页面只演示它们在这几个例子里的样子；“盲区反演站位”本身是该章的模型诠释（MODEL），Berry—Pancharatnam 相位与虚拟 Z 门是该章转述的文献结果（ARGUED）。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-spherical-addressing-inversion" target="_top">第三十四章 · 球面寻址中的二次正交隐身</a> · <a href="../../zh/ch34-orthogonality-degeneracy-and-observer-position.html#ex-ch34-spherical-addressing-and-octant-rotors" target="_top">球面两步寻址与八分球面旋子和乐</a> · <a href="../../zh/ch34-orthogonality-degeneracy-and-observer-position.html#rem-ch34-virtual-z-berry-relativity-literature" target="_top">虚拟 Z 门与 Berry 相位文献注记</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">The stage is the unit sphere S² ⊂ ℝ³ with the orthonormal basis e₁, e₂, e₃ (e₃ up). The amber point is a unit observer probe O; its reading of a state s is the inner product O·s, drawn as the cyan shadow that s casts on the observer’s axis. The page is a numerical illustration, not a proof; every number is computed on the spot in Cl(3,0) (NUM).</p>
+      <ol>
+        <li><b>Two-step addressing (Chapter 34, Example 1 and part 1 of Example 2).</b> The first orthogonal turn tilts by θ in the meridian plane e₃∧e₁: v₁ = cos θ e₃ + sin θ e₁; the second twists by the azimuth φ in the equatorial plane e₁∧e₂: v₂ = cos θ e₃ + sin θ (cos φ e₁ + sin φ e₂). The gap in the readings is Δ(O) = O·v₂ − O·v₁ = sin θ [O₁(cos φ − 1) + O₂ sin φ].</li>
+        <li><b>The blind circle.</b> For a fixed φ, the observers with Δ(O) = 0 form the great circle orthogonal to v₂ − v₁ (dashed cyan). At φ = π/2 it is the symmetric meridian O₁ = O₂; as φ runs over (0, 2π) the circle turns half a turn about the vertical and sweeps the whole sphere, and all the blind circles have only O = ±e₃ in common, where both readings are ±cos θ.</li>
+        <li><b>Off the polar axis.</b> For an observer at angle β from the North Pole and azimuth φ<sub>O</sub>, Δ = sin θ sin β [cos(φ − φ<sub>O</sub>) − cos φ<sub>O</sub>], which opens, as φ sweeps, to a peak-to-peak spread of 2 |sin θ| sin β.</li>
+        <li><b>Octant rotors (part 2 of Example 2).</b> The sandwich action s ↦ R s R̃, with R̃ the reversion (the reverse of e<sub>i</sub>e<sub>j</sub> is −e<sub>i</sub>e<sub>j</sub>). One hop: R₁ = exp(−π/4 e₁e₃) = (1 − e₁e₃)/√2 takes +e₁ to +e₃. Two hops, first e₁ → e₂ and then, multiplied on the left, e₂ → e₃: R₂ = ((1 − e₂e₃)/√2)((1 − e₁e₂)/√2) = (1 − e₁e₂ − e₂e₃ − e₁e₃)/2 = exp(−π/4 e₁e₂) R₁, which also takes +e₁ to +e₃. The difference rotor D = R₂R̃₁ = exp(−π/4 e₁e₂) lies wholly in the equatorial plane e₁∧e₂: it turns the carried frame by π/2 about e₃ (the small dial at the lower right).</li>
+        <li><b>An equator test state.</b> s(α) = cos α e₁ + sin α e₂ becomes s₁(α) = cos α e₃ + sin α e₂ under the one-hop rotor and s₂(α) = cos α e₃ − sin α e₁ under the two-hop one. The images of the whole equator are two great circles, in the planes e₂∧e₃ and e₁∧e₃, meeting only at ±e₃: the two agree only where sin α = 0. The readings agree when O·(s₂ − s₁) = −sin α (O₁ + O₂) = 0; from e₂ one reads sin α and 0, from e₃ both read cos α.</li>
+        <li><b>Turning the frame.</b> Replace the initial equatorial frame by e₁(γ) = cos γ e₁ + sin γ e₂ and e₂(γ) = −sin γ e₁ + cos γ e₂ and build the two rotors the same way: the blind circle becomes the great circle orthogonal to e₁(γ) + e₂(γ) and turns about the vertical with γ; only O = ±e₃ cannot tell the results apart for every γ.</li>
+        <li><b>Frozen theorems.</b> The common unit normal <a class="leanref" data-lean-gid="D5/S3/Geometry/TwoAxisFiniteRotation.unit_perpendicular_pair" href="#" target="_blank" rel="noopener"><code>unit_perpendicular_pair</code></a>, the kernel of the readout partition topology <a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel" href="#" target="_blank" rel="noopener"><code>partition_inseparable_iff_kernel</code></a> and the covariant commutator <a class="leanref" data-lean-gid="D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula" href="#" target="_blank" rel="noopener"><code>covariant_commutator_formula</code></a> are theorems that Chapter 34 cites with <code>lean=</code> (LEAN ✓). They are general statements; the page only shows what they look like in these examples. “Inverting the observer’s position from the blind spots” is itself the chapter’s model interpretation (MODEL), and the Berry–Pancharatnam phase and the virtual Z gate are literature results the chapter reports (ARGUED).</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch34-orthogonality-degeneracy-and-observer-position.html#sec-ch34-spherical-addressing-inversion" target="_top">Chapter 34 · the second orthogonal turn hidden in spherical addressing</a> · <a href="../../en/ch34-orthogonality-degeneracy-and-observer-position.html#ex-ch34-spherical-addressing-and-octant-rotors" target="_top">two-step addressing and the octant rotor holonomy</a> · <a href="../../en/ch34-orthogonality-degeneracy-and-observer-position.html#rem-ch34-virtual-z-berry-relativity-literature" target="_top">the literature remark on the virtual Z gate and the Berry phase</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
