@@ -61,6 +61,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `zyz-compile` | 绕 z、绕 y、再绕 z 转三段，乘出来只是一枚旋子：绕一根轴的一次转动 | `sandwich` `chain` `t` `h` `fold` |
 | `fixed-point-convergence` | 蛛网每绕一圈，误差乘上不动点处的斜率；连斜率一起读，几步就合拢；有理读数却总差一道缝 | `golden` `rate` `circle` `newton` `rational` `ruler` |
 | `lean-declaration-map` | 书里引用的每一条冻结声明都落在它第一次出场的那一章；读完正文，锁文件里的条目一条不剩全部落定 | `all` `bedrock` `table27` `closure` `table28` `theorems` `inline` |
+| `unified-field-slice` | 时钟与速度是同一个圆上的线与面积；在两个平面里来回转一圈回不到原处；视界割断几条边，跨界的纠缠就封顶在那里 | `polytope` `fixedpoint` `gudermann` `photon` `abelian` `plaquette` `horizon` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -121,6 +122,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `fixed-point-convergence` 与 `sphere-escape` 的 `dottie`、`far` 分工：那两张讲“总有一点留在外面”，本页讲“怎样收束、收得多快”。舞台是蛛网图（曲线 y = f(x) 与直线 y = x），“跟着放大”时以不动点为原点重新标尺。绿色框只给第二十四章用 `lean=` 引用的 `golden_fixed_point_unique`（φ 是 1 + 1/x 唯一的正不动点）与 `rational_inverse_endpoint`（只取其中 θ* 的存在、唯一与 0 < θ* < 1）；压缩映射与全局收敛、渐近压缩率 −sin θ*、牛顿二次收敛、残差双边界与 (1 + sin 1)/b² 界按 §24.4–24.5 的文献注记标 `ARGUED`；轨道、残差、“单纯迭代要走几步”与连分数部分商都以 70 位定点整数实算（`NUM`）。这一页的青色是曲线 y = f(x)（只读投影）与单位圆上 P 的横坐标 θ*，品红是斜率那一半：不动点处的切线、牛顿沿切线走的那一段、λ = sin θ* 的高度与残差竖线；琥珀只给当前这一步或当前读数；走过的折线是中性墨色，灰色虚线是最陡斜率 −sin 1 与残差的楔形边界。路线图候选“开普勒方程”“半程落体”讲的是 θ* 住在哪里，正文那里没有关于收束快慢的句子，未做成卡；正文讲了而候选没有的“单位圆上的线与面”（`circle`）与“十进制千分尺”（`ruler`）补做成卡。
 
 `lean-declaration-map` 的舞台按阅读顺序排开 34 根柱子（序曲、三十章、终章、附录 A 与 B；附录 C 引用全部条目，不单列一柱，只在读数里给序号），每一格是 `trureturing.lock.json` 的一条声明，落在中文正文第一次引用它的那一章。数据由页面目录里的 `gen-data.py` 从锁文件与中文章节（`:::` 行上的 `lean="…"` 记为环境引用，`(lean:…)` 记为行内引用）生成并写进 `main.js` 的生成段，不手填；锁文件或章节变了要重新运行它并重新出图。绿色只给锁文件里种类为 `theorem` 的格子，灰色是定义，空心是只有行内链接的；青色是某一章引用的那些（从它的柱脚连线），琥珀只给选中的一格、连到另外引用它的章的线与阅读位置。依据框里的绿色只给第二十七、二十八章用 `lean=` 逐行解剖的八条定理；格数、种类与出现的章标 `NUM`，“落在首次出场的章”与柱内次序标 `MODEL`。测试按锁文件核对条目数、种类与源码行，并用另一种扫描重读章节核对每一处引用。路线图候选“一部”改为两张审计表卡 `table27`、`table28`（正文的两张表恰好分别覆盖第一至三部与第四至六部），“正文已解剖的那几条”按两章拆成 `bedrock` 与 `closure`，另按附录 C.2.1 加了 `inline`。
+
+`unified-field-slice` 只覆盖第三十二章上半篇（§32.1–32.2；下半篇的八纲领罗盘是 `meta-unification-compass`）。三个场景共用一条时间轴：“时钟”是单位圆加双曲线 t² − x² = 1，θ = gd(η)，青色的线是 cos θ = 1/γ（固有时率），品红的高是 sin θ = tanh η（速度），紫色是弧长 θ（`fixedpoint` 卡里弧长等于影子）；“回路”是球面上的旋子换位子 U = R₁R₂R₁⁻¹R₂⁻¹，琥珀色只给参考箭头的尖端，品红是没合上的缺口，紫色是转轴；“视界”是内接于球的正二十面体，青色是视界以内的边，品红是割断的边与每个顶点缺的 60°，琥珀是视界 λ。绿色框只给本章用 `lean=` 引用的三条：`eq_smul_minkowski_of_null`、`anchored_phase_classification`（只管单一平面的圆周相位，页面写明两个平面的换位子不在其内）、`QuantumMaxFlowMinCut.result`（桥图，页面写明二十面体不是它的实例）；Gudermann 恒等式、Dottie 不动点、720° 角亏、换位子曲率与秩 ≤ D^|∂A| 标 `ARGUED`，线/面积/视界/相互作用源的读法标 `MODEL`。路线图候选 `mincut`（桥图）与第三十章 `eth-horizon-crossover` · `bridge` 同一画面，改为二十面体上的 `horizon`；`generations`（内部空间三轴世代）在上半篇正文里没有可引用的句子，未做。
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
@@ -329,6 +332,14 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十章 | 定理 `thm-coda-quadratic-advection-no-closure` 的证明之后 | `navier-stokes-p-np` · `mixed` |
 | 第三十章 | `mixed` 之后 | `navier-stokes-p-np` · `closed` |
 | 第三十章 | 纳维—斯托克斯一节末 | `navier-stokes-p-np` 完整实验室 |
+| 第三十二章 | §32.1 三条创生律列表之后、定理 `thm-ch32-generative-self-reference-and-zeckendorf` 引言之前 | `unified-field-slice` · `polytope` |
+| 第三十二章 | 文献注记 `rem-ch32-generative-laws-dottie-literature` 之后 | `unified-field-slice` · `fixedpoint` |
+| 第三十二章 | §32.2 列表第 1 条（物质旋量与狭义相对论）之后、第 2 条之前 | `unified-field-slice` · `photon` |
+| 第三十二章 | §32.2 列表第 2 条（规范相互作用与环路残差）之后、第 3 条之前 | `unified-field-slice` · `plaquette` |
+| 第三十二章 | §32.2 列表第 3 条（全息热力学引力与视界）之后、第 4 条之前 | `unified-field-slice` · `horizon` |
+| 第三十二章 | 定理 `thm-ch32-null-cone-holonomy-and-holographic-cut` 的证明之后 | `unified-field-slice` · `abelian` |
+| 第三十二章 | 文献注记 `rem-ch32-dirac-yang-mills-jacobson-literature` 之后 | `unified-field-slice` · `gudermann` |
+| 第三十二章 | §32.2 末（文献注记 `rem-ch32-six-domain-isomorphism-table` 之后、§32.3 之前；上半篇末尾） | `unified-field-slice` 完整实验室 |
 | 终章 | 空间吸引子 · 一 末 | `spatial-attractor-deja-vu` · `butterfly` |
 | 终章 | 空间吸引子 · 二 “内禀几何参数”列表之后 | `spatial-attractor-deja-vu` · `fixed`、`cycle` |
 | 终章 | 空间吸引子 · 二 末（文献注记 `rem-coda-lorenz-srb-literature` 之后） | `spatial-attractor-deja-vu` · `forget`、`dimension` |
