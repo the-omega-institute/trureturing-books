@@ -113,6 +113,11 @@ s = await pick('bedrock');
 const e27 = citedBy(CH27, 'env'), e28 = citedBy(CH28, 'env');
 check('CH27-FOUR: cyan marks the four theorems Chapter 27 cites in its environments', e27.length === 4 && JSON.stringify(s.focus) === JSON.stringify(e27) && s.src === CH27 && s.mode === 'env', JSON.stringify(s.focus));
 check('CH27-FOUR: the chosen cell is the parallelogram law', s.sel === 'D5/S3/QuantumContext/ParallelogramNormLaw.inner_product_norm_parallelogram_law');
+// the lines as drawn: a cyan one from the chapter's foot to each of its cells (the chosen one included), and amber
+// lines from the chosen cell only to the other chapters that cite it (not its home, not Appendix C, not this chapter)
+const amberWant = (gid, src) => [...truth[gid].cites.keys()].filter((f) => f !== INDEX && f !== truth[gid].home && f !== src).sort();
+check('CH27-FOUR: four cyan lines, one to each dissected cell (the chosen one too); amber lines only to the other chapters citing it', JSON.stringify(s.arcs.cyan) === JSON.stringify(e27) && JSON.stringify(s.arcs.amber) === JSON.stringify(amberWant(s.sel, CH27)) && s.arcs.amber.length >= 1, JSON.stringify(s.arcs));
+check('CH27-FOUR note: as many cyan lines as drawn, and amber only for the other chapters', (await page.textContent('#presetNote')).includes(`${s.arcs.cyan.length} 根青色的线`) && /琥珀色的线只连到另外引用它的几章/.test(await page.textContent('#presetNote')));
 check('CH27-FOUR: all four are theorems of the lock and land in Chapters 1–3', e27.every((g) => lock.declarations[g].kind === 'theorem' && ['ch01-measurement.md', 'ch02-born-rule.md', 'ch03-projectors-and-duality.md'].includes(truth[g].home)));
 const pageGids = await page.$$eval('#evidence a[data-lean-gid]', (as) => as.map((a) => a.dataset.leanGid).sort());
 check('the green boxes cite exactly the eight theorems Chapters 27 and 28 dissect', JSON.stringify(pageGids) === JSON.stringify([...e27, ...e28].sort()));
@@ -123,6 +128,7 @@ check('the readouts give the chosen declaration as the lock and the index have i
   && r.href === `https://github.com/${lock.repo}/blob/${lock.commit}/D5/S3/QuantumContext/ParallelogramNormLaw.lean#L${lock.declarations[PAR].line}`, JSON.stringify(r));
 s = await pick('closure');
 check('CH28-FOUR: cyan marks the four theorems Chapter 28 cites in its environments', e28.length === 4 && JSON.stringify(s.focus) === JSON.stringify(e28) && s.src === CH28);
+check('CH28-FOUR: four cyan lines, and amber lines only to the other chapters citing the chosen criterion', JSON.stringify(s.arcs.cyan) === JSON.stringify(e28) && JSON.stringify(s.arcs.amber) === JSON.stringify(amberWant(s.sel, CH28)), JSON.stringify(s.arcs));
 const FIX = 'D5/S3/Observer/Conditioning.unreadState_fixed_iff';
 r = await ro();
 const whereFix = [...truth[FIX].cites.keys()].filter((f) => f !== INDEX).length;

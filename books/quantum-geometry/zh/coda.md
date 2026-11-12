@@ -90,11 +90,7 @@
 - **未被擦除的**，是观察者作为丈量算子 $\psi(\cdot)$ 本身的**内禀几何参数**（动词 `量 liáng` 的固有倾角）——他在面对相容空间做两子比较时特有的正交偏转角、审美共振比与拓扑手性偏好！
 
 ::: {.viz src="spatial-attractor-deja-vu" preset="fixed" height="500"}
-**换了参数：落进一个点。** 把 $\rho$ 换成 $14$：青色与品红两轮各自螺旋落进一个不动点，然后不再动，那对翅膀不见了。轨道最后落在哪里由方程的参数决定，而不由起点决定；把参数读作“内禀倾角”是诠释模型（`MODEL`）。
-:::
-
-::: {.viz src="spatial-attractor-deja-vu" preset="cycle" height="500"}
-**$\rho = 160$：一条闭合的环。** 两轮落到同一条闭合的环上，每一圈都踩在同一处。这是一维的吸引子：重复，但没有余地，对应下文第三节第 1 条的“$1$ 维死板闭环”（`MODEL`）。
+**换了参数：落进一个点。** 把 $\rho$ 换成 $14$：青色与品红两轮各自螺旋落进一个不动点，然后不再动，那对翅膀不见了。参数决定了终点是一个点、而不是那对翅膀；起点只决定落进两个点里的哪一个：这里青色落进 $C_-$，品红落进 $C_+$。把参数读作“内禀倾角”是诠释模型（`MODEL`）。
 :::
 
 在将这一哲学意象展开为分形叶层上的跨轮次回归之前，我们先将所引用的洛伦兹奇异吸引子、SRB 不变测度与庞加莱回归三项经典连续动力系统文献结果归入文献注记：
@@ -121,10 +117,6 @@
 
 ::: {.viz src="spatial-attractor-deja-vu" preset="forget" height="500"}
 **忘掉起点，落回同一对翅膀。** 洛伦兹系统在 $(\sigma, \rho, \beta) = (10, 28, 8/3)$ 下的两条轨道：青色是第 $k$ 轮，品红是第 $k+1$ 轮，起点相距很远（两个圆圈），参数相同。短暂游荡之后它们落到同一对翅膀上；琥珀色的小点是每次经过“遗迹”邻域（琥珀色的圆）的地方。把一条轨道读作“一轮”是诠释模型（`MODEL`）。
-:::
-
-::: {.viz src="spatial-attractor-deja-vu" preset="dimension" height="500"}
-**比一张面多一点。** 沿一条长轨道（青色）估计三个李雅普诺夫指数；图上方的读数给出 $\lambda_1 \approx 0.9$、$\lambda_2 \approx 0$、$\lambda_3 \approx -14.6$ 与卡普兰—约克维数的估计 $D_{\mathrm{KY}} \approx 2.06$（数值估计，不是定理）。
 :::
 
 **“忘掉起点”能说到多精确？** 上面那张“忘掉起点”的卡片里，青色与品红两条轨道的起点相距很远，最后却落到同一对翅膀上。“落到同一处”有两种说法。一种是逐点的：两条轨道最终挨在一起。这在混沌系统里恰恰不成立，起点的微小差别会被 $\lambda_1 > 0$ 指数放大。另一种是统计的：两条轨道在各处逗留的时间比例相同。[@rem-coda-lorenz-srb-literature] 第 2 项说的是后者。它背后的一般机制与洛伦兹方程无关，已冻结为下面这条定理。
@@ -206,7 +198,17 @@ $1/3$ 对 $g$ 给出正确的 $1/2$，对 $h$ 却给出 $0$：例外集合随可
 在本书的哲学与几何诠释（`MODEL`）中，借用 [@rem-coda-lorenz-srb-literature] 所载奇异吸引子文献图景作为动力学隐喻——即清空上一轮表层轨迹记事但保留算子内禀参数——“宿命重逢”与“自由选点”便在同一几何意象下并行不悖：
 
 1. **倘若生命轨迹只是 $1$ 维死板闭环（$D = 1$，`MODEL`）**：观察者就会困在机械重复的死循环里——每一轮在同一相对相位踩中同一个点，丧失横截自由余量（$\det G = 0$）；
+
+::: {.viz src="spatial-attractor-deja-vu" preset="cycle" height="500"}
+**$\rho = 160$：一条闭合的环。** $t = 30$ 之前的过渡画得很淡；亮的是最后十个时间单位，两轮在这里落到同一条闭合的环上（青色被品红盖住，只露出它此刻所在的点），每一圈都踩在同一处。这是一维的吸引子：重复，但没有余地，即上面第 1 条的“$1$ 维死板闭环”（`MODEL`）。
+:::
+
 2. **在借用 [@rem-coda-lorenz-srb-literature] 分形横截叶层图景的几何隐喻（`MODEL`）中**：重返熟悉坐标邻域的宏观倾向与微观轨迹各轮互不重合的新意得以并存——观察者一次次走回熟悉的吸引子坐标邻域，却在每一次重返时踏上崭新的叶层；
+
+::: {.viz src="spatial-attractor-deja-vu" preset="dimension" height="500"}
+**比一张面多一点。** 沿一条长轨道（青色）估计三个李雅普诺夫指数；图上方的读数给出 $\lambda_1 \approx 0.9$、$\lambda_2 \approx 0$、$\lambda_3 \approx -14.6$ 与卡普兰—约克维数的估计 $D_{\mathrm{KY}} \approx 2.06$（数值估计，不是定理）。
+:::
+
 3. **“似曾相识（Déjà vu）”的跨轮次内积共振模型（`MODEL`）**：
    将这一图景映射为作者的几何隐喻：当观察者在某座古迹台阶或转角突然停住脚步，心中涌起*“我一定在什么时候来过这里”*的悸动时，若吸引子盆地中的局部几何将同一观察者在不同轮次的注意力方向引向几乎平行的局部切方向（方向夹角 $\delta\theta \to 0$），则当下的注意力态 $\mathbf{\Psi}^{(k+1)}$ 与留在同一空间吸引子邻域内的前轮印记 $\mathbf{\Psi}^{(k)}$ 做**成对内积投影（两子丈量）**时，就会出现
 
@@ -217,7 +219,7 @@ $1/3$ 对 $g$ 给出正确的 $1/2$，对 $h$ 却给出 $0$：例外集合随可
    在这一诠释模型（`MODEL`）中，所谓“似曾相识”，正是同一观察者算子在不同轮次划过同一座空间吸引子邻域、局部注意力方向趋于共线（$\delta\theta \to 0$）时触发的**高幅值内积共振**。
 
 ::: {.viz src="spatial-attractor-deja-vu" preset="return" height="500"}
-**擦肩而过时方向几乎平行。** 停在 $t = 22$：两轮都已经过遗迹的邻域（琥珀色的圆）。它们经过时的弧段并不重合，方向却几乎平行：图上方给出最近一次重返（两轮各一次经过、两点相距小于 $\varepsilon$）的方向夹角，青色与品红的两支短箭头是那里的单位切向，内积 $\cos\delta\theta = \hat{\mathbf{v}}_1\cdot\hat{\mathbf{v}}_2$ 接近 $1$（页面数值）。把它读作“似曾相识”是诠释模型（`MODEL`）。
+**擦肩而过时方向几乎平行。** 停在 $t = 22$：两轮都已经过遗迹的邻域（琥珀色的圆）。它们经过时的弧段并不重合，方向却几乎平行：图上方给出最近一次重返（两轮各一次经过、两点相距小于 $\varepsilon$）的方向夹角 $\delta\theta$，只有几度；青色与品红的两支短箭头是那里的单位切向，内积 $\cos\delta\theta = \hat{\mathbf{v}}_1\cdot\hat{\mathbf{v}}_2$ 因而接近 $1$（页面数值）。把它读作“似曾相识”是诠释模型（`MODEL`）。
 :::
 
 ::: {.viz src="spatial-attractor-deja-vu" height="640"}
@@ -252,6 +254,11 @@ $1/3$ 对 $g$ 给出正确的 $1/2$，对 $h$ 却给出 $0$：例外集合随可
 
      筛选出的全窗口切投模型集 $\operatorname{modelSet}(\operatorname{goldenWindow}) = \{y \in \mathbb{R} \mid \exists x \in \mathrm{GoldenInt},\, \operatorname{embedding}(x) = y \wedge \operatorname{embedding}(\operatorname{conj} x) \in \operatorname{goldenWindow}\}$（同构于 `goldenCutAndProjectSet`），由 [`exists_golden_modelSet_delone`](lean:D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone) 证明构成 $\mathbb{R}$ 上**装球半径为 $1/2$、覆盖半径为 $3$ 的 Delone 集**；其离散分离性源自**共轭范数互反分离定理** [`norm_separation`](lean:D5/S3/Fourier/GoldenModelSetDelone.norm_separation)：对任意相异黄金整数 $u \neq v \in \mathrm{GoldenInt}$ 与实数上界 $B$，只要内部共轭差满足 $|\operatorname{embedding}(\operatorname{conj} u) - \operatorname{embedding}(\operatorname{conj} v)| \le B$，物理投影差必满足 $1 \le |\operatorname{embedding}(u) - \operatorname{embedding}(v)| \cdot B$。
    - **自然数黄金展开模型集 `goldenModelSet` 与 Beatty 观察者路由**：自然数黄金展开序列 $\operatorname{betaGolden} : \mathbb{N} \to \mathrm{GoldenInt}$ 的值域 $\operatorname{goldenModelSet} = \operatorname{range}(\operatorname{betaGolden})$，其物理嵌入像被证明为全窗口切投集的子集 $\operatorname{embedding} '' \operatorname{goldenModelSet} \subseteq \operatorname{goldenCutAndProjectSet}$（[`golden_model_set_subset_cut_and_project`](lean:D5/S1/Deficit/ModelSet/GoldenCutAndProject.golden_model_set_subset_cut_and_project)，注：逆包含不成立，因 $-\varphi$ 落在窗口右端点但 $b = -1 < 0$）；`goldenModelSet` 自身不相交地自相似分解为 $\operatorname{phiBranch} \cup \operatorname{phiSquaredBranch}$（[`golden_model_set_self_similar`](lean:D5/S1/Deficit/ModelSet/GoldenModelSetSelfSimilar.golden_model_set_self_similar)），其前 $n$ 项前缀集 `goldenPrefix n` 的渐近计数密度严格收敛于 $1/\sqrt{5}$（[`golden_model_set_density`](lean:D5/S1/Deficit/ModelSet/GoldenModelSetDensity.golden_model_set_density)），且实轴观察者路由序列 $\beta(v) = \sqrt{5}\,v + \operatorname{remainder}(v)$ 满足内部余项 $\operatorname{remainder}(v) \in (\varphi - 2, \varphi - 1]$、相邻步长 $\beta(v+1) - \beta(v) \in \{\varphi, \varphi^2\}$ 的 Beatty 路由定律（[`golden_observer_route_w_c1`](lean:D5/S1/Deficit/Beatty/GoldenObserverRoute.golden_observer_route_w_c1)）。
+
+::: {.viz src="golden-cut-observer" preset="cut" height="500"}
+**一条窗口切出一串点。** 黄金整数 $a + b\varphi$ 画成格点：横坐标是它本身，纵坐标是共轭 $a + b\psi$。琥珀色的窗口 $[\varphi - 2, \varphi - 1]$ 选出青色的点，投到下面的直线上，相邻两点只相距 $\varphi$ 或 $\varphi^2$；闭窗口的两个端点上各有一个格点（品红），所以原点左边多出一段长为 $1$ 的间隔。绿圈是自然数的黄金展开 $\beta(n)$，Lean 已验证它们都在这个窗口里。
+:::
+
 2. **高维准晶切投模型与内部窗口相位平移的哲学参数化（`MODEL`）**：
    将上述一维内核定理推广到三维物理空间时（其六维母格正二十面体准晶文献背景详列于下文文献注记 [@rem-coda-quasicrystal-empire-literature]），在本书的跨学科几何诠释模型（`MODEL`）中，我们将全局无时间背景比拟为高维母格 $\mathbb{Z}^D \subset E_\parallel \oplus E_\perp$，并将一位具体观察者的内禀视角参数化为黄金无理倾角 $\varphi$ 与**内部正交窗口平移相位 $u \in E_\perp$**，通过平移接受窗 $W + u \subset E_\perp$ 在物理空间 $E_\parallel$ 中切出模型集 $\Lambda_u = \{\pi_\parallel(z) \mid z \in \mathbb{Z}^D,\; \pi_\perp(z) \in W + u\}$。
 
@@ -264,10 +271,6 @@ $1/3$ 对 $g$ 给出正确的 $1/2$，对 $h$ 却给出 $0$：例外集合随可
 
 ::: {.figure src="coda-no-eleven"}
 **齐肯多夫自动机只收没有相邻 `11` 的字。** 十六个四位二进制字里，青色的八个没有两个相邻的 $1$，被接受；品红的八个各含一对相邻的 $11$（框出的是第一对），被拒绝。接受条件就是 [@thm-coda-golden-cut-observer-cassini] 第 3 条里的 $\operatorname{NoAdjacentOnes}(w)$。
-:::
-
-::: {.viz src="golden-cut-observer" preset="cut" height="500"}
-**一条窗口切出一串点。** 黄金整数 $a + b\varphi$ 画成格点：横坐标是它本身，纵坐标是共轭 $a + b\psi$。琥珀色的窗口 $[\varphi - 2, \varphi - 1]$ 选出青色的点，投到下面的直线上，相邻两点只相距 $\varphi$ 或 $\varphi^2$；闭窗口的两个端点上各有一个格点（品红），所以原点左边多出一段长为 $1$ 的间隔。绿圈是自然数的黄金展开 $\beta(n)$，Lean 已验证它们都在这个窗口里。
 :::
 
 ### 二、 哲学诠释模型（`MODEL`）：什么是“同一个灵魂”？什么是“单次生命与遗忘”？ {#sec-coda-trureturing-soul-vs-lifetime}
@@ -336,6 +339,11 @@ $1/3$ 对 $g$ 给出正确的 $1/2$，对 $h$ 却给出 $0$：例外集合随可
    $$
 
    请看卡西尼恒等式右端的 **$(-1)^{k+1} = \pm 1$**（配合 [@rem-coda-quasicrystal-empire-literature] 第 3 条记述的有理斜率收敛背景）：这与第 29 章经 Lean 验证的希帕索斯佩尔余项 $P_{k+2}P_k - P_{k+1}^2 = (-1)^{k+1}$（[@thm-ch29-silver-pell-remainder]）与奇素数模四分裂（[@thm-ch29-face-prime-two-squares]），以及该章文献注记中的同余数三次曲线支点（[@rem-ch29-elliptic-torus-literature]），同样展现了离散整数网格逼近无理方向时不可消除的 **$\pm 1$ 最小单位范数接缝**！
+
+::: {.viz src="golden-cut-observer" preset="cassini" height="500"}
+**面积永远是 $\pm 1$。** 还是那张格点图。$\varphi$ 的幂 $\varphi^2, \varphi^3, \dots$ 一个在横轴上方（青色）、一个在下方（品红），落在双曲线 $x \cdot x' = \pm 1$ 上；每个幂与原点围成的矩形越来越扁长，面积却恰好是 $1$。填色的是 $\varphi^5 = 3 + 5\varphi$：$F_4 F_6 - F_5^2 = 3 \cdot 8 - 5^2 = -1$。两条双曲线之间除了原点没有别的格点。
+:::
+
 2. **环面观测窗有界间隙回归定理（[`TorusObservationWindowReturns.result`](lean:D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result)，`LEAN ✓`）**：
    `trureturing` 在一般紧致环面动力系统中严格证明：设 $I$ 为有限指标集，$g : I \to \mathrm{Circle}$ 为环面元素，$G = \overline{\langle g\rangle}$ 为其生成的紧致闭子群，$\mu$ 为 $G$ 上的哈尔概率测度，$a = \langle g, \dots\rangle \in G$。对 $G$ 上任意连续实值观测函数 $h \in C(G, \mathbb{R})$ 及满足渐近误差归零 $\lim_{n\to\infty}(e(n) - h(a^n)) = 0$ 的任意实测序列 $e : \mathbb{N} \to \mathbb{R}$：
    - 推前测度 $\operatorname{Measure.map} h\,\mu$ 的拓扑支集严格等于连续像集 $\operatorname{range}(h)$；
@@ -347,10 +355,6 @@ $1/3$ 对 $g$ 给出正确的 $1/2$，对 $h$ 却给出 $0$：例外集合随可
 
 3. **跨轮次回归与“似曾相识”的几何诠释（`MODEL`）**：
    将上述两条严格定理放回我们的哲学模型（`MODEL`）：$(-1)^{k+1}$ 的正负交替意味着不同阶数的有理逼近从正反两侧交替贴近无理方向（而不重合于同一有理切片），而只要某个目标区域对应着连续观测像集中的非空开窗口 $(u_1, u_2)$（或内部窗口中具有正安全裕度 $d_{\partial} > 0$ 的邻域），轨道便以有界步数间隙 $M$ 与严格正的最终访问比例反复重返该窗口——这为“同一个灵魂一轮又一轮走过自己熟悉的地方，并在擦肩而过时触发 $\cos\delta\theta \to 1$ 的似曾相识共振”提供了严谨的数学灵感源泉。
-
-::: {.viz src="golden-cut-observer" preset="cassini" height="500"}
-**面积永远是 $\pm 1$。** 还是那张格点图。$\varphi$ 的幂 $\varphi^2, \varphi^3, \dots$ 一个在横轴上方（青色）、一个在下方（品红），落在双曲线 $x \cdot x' = \pm 1$ 上；每个幂与原点围成的矩形越来越扁长，面积却恰好是 $1$。填色的是 $\varphi^5 = 3 + 5\varphi$：$F_4 F_6 - F_5^2 = 3 \cdot 8 - 5^2 = -1$。两条双曲线之间除了原点没有别的格点。
-:::
 
 ::: {.viz src="golden-cut-observer" preset="returns" height="500"}
 **以有界的间隔回到窗口。** 圆上的点每一步转过黄金角，它的高度 $\cos 2\pi n\varphi$ 画在右边。琥珀色的带子是观测窗 $(0.2, 0.8)$，青色是落在带子里的步：前 $89$ 步里进入 $21$ 次，相邻两次最多相隔 $7$ 步（品红）。这是有限步的数值演示；对一切 $n$ 都存在这样的上界，是 Lean 验证的定理。
@@ -376,7 +380,7 @@ $1/3$ 对 $g$ 给出正确的 $1/2$，对 $h$ 却给出 $0$：例外集合随可
 :::
 
 ::: {.viz src="golden-cut-observer" preset="narrow" height="500"}
-**窗口变窄：等得久，仍有界。** 把琥珀色的观测窗收窄到 $(0.45, 0.55)$：前 $233$ 步里青色的步只有 $8$ 个，品红标出的最长间隔拉长到 $48$ 步，但间隔仍有上界；页面下方的图里，青色的已进入比例不低于品红虚线的 $1/(M + 1)$。有限步是数值演示；对一切 $n$ 成立的有界回归是上面定理的第 4 条。
+**窗口变窄：等得久，仍有界。** 把琥珀色的观测窗收窄到 $(0.45, 0.55)$：前 $233$ 步里青色的步只有 $8$ 个，品红标出的最长间隔拉长到 $48$ 步，但间隔仍有上界。有限步是数值演示；对一切 $n$ 成立的有界回归是上面定理的第 4 条。
 :::
 
 **时间上的间隔，空间上的间隔。** 上面“以有界的间隔回到窗口”与“窗口变窄”两张卡片看的是时间：轨道隔多少步回一次窗口。把同一条黄金角轨道的前 $N$ 个点一起摆在圆周上，问的就是空间：相邻两点之间隔着多长的弧？答案出奇地整齐，而且不只对黄金角成立。
