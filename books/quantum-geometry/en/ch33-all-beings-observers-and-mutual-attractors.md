@@ -202,12 +202,12 @@ Look at the two contrasting cobweb trajectories of solitary and mutual reference
 :::
 
 ::: {.viz src="mutual-observer-attractors" preset="round" height="500"}
-**Two beats a round, from one side only.** The same orbit sampled every two beats (the hollow rings): $0.1 \to 0.544 \to 0.656 \to 0.702 \to \dots$ closes in monotonically on one side of $\theta^*$, the error multiplied by about $0.454 = 0.674^2$ a round; a round costs two cosine evaluations ([@ex-ch33-mutual-cosine-monotonic-lock], clauses 14, 21 and 24, and the numerical ledger).
+**Two beats a round, from one side only.** The same orbit sampled every two beats (the hollow rings): $0.1 \to 0.544 \to 0.656 \to 0.702 \to \dots$ closes in monotonically on one side of $\theta^*$, the error multiplied by about $0.454 = 0.674^2$ a round; a round costs two cosine evaluations ([@ex-ch33-mutual-cosine-monotonic-lock], clauses 14, 21, 23 and 24, and the numerical ledger).
 :::
 
 Stepping back from the trajectory ledger of [@ex-ch33-mutual-cosine-monotonic-lock], within our relational observer `MODEL`, stepping out of isolation into eye-level mutual reflection is never a sentimental concession—it is the endogenous geometry that frees bounded beings from solitary oscillation.
 
-The same holds when the two start apart. The curve $x = \cos y$ along which A reads B and the curve $y = \cos x$ along which B reads A meet only at $(\theta^*, \theta^*)$ on the diagonal; for starts in $[0, \pi/2)$, sampled round by round, each reading closes in on that point monotonically from its own side (see [@ex-ch33-mutual-cosine-monotonic-lock], clauses 12–14).
+The same holds when the two start apart. The curve $x = \cos y$ along which A reads B and the curve $y = \cos x$ along which B reads A meet only at $(\theta^*, \theta^*)$ on the diagonal ([@ex-ch33-mutual-cosine-monotonic-lock], clause 9); sampled round by round, each reading is an orbit of $g$ and closes in on that point from any real start (clause 8), and from a start in $(0, \theta^*)$ it increases strictly from below (clauses 12–14).
 
 ::: {.viz src="mutual-observer-attractors" preset="apart" height="500"}
 **Different starts, a single meeting point.** A starts at 1.5, B at 0: the cyan curves $x = \cos y$ and $y = \cos x$ meet only at $(\theta^*, \theta^*)$ on the diagonal, and the hollow rings close in on it, A's reading from above and B's from below.
@@ -293,5 +293,5 @@ Because episodic forgetting cleared only surface particle ticks while leaving ea
 Yet if the universe excised the external reference point $C$ and all beings measure one another as mobile attractors on an isotropic sphere, an urgent geometric question immediately arises: **on a featureless unit sphere with no privileged origin, how does an observer ever determine *where* it stands? Why does a single inner-product reading leave an entire equatorial circle of degeneracy, and why is it specifically the degeneracy and breaking of *orthogonality ($90^\circ$)* that pins down an observer's unique address?** That is the door we open in the next chapter (Chapter 34).
 
 ::: {.viz src="mutual-observer-attractors" height="620"}
-**Mutual attractors: the full lab.** Two scenes: mirrors (move the two starts, watch beat by beat or round by round) and min cut (set the two lengths, bring the gap closer). Convergence, its rate and the minimal-surface transition are literature results, not formalized in this book; the green box cites only [@prop-ch33-bridge-reconnection-mincut], which concerns a discrete bridge graph and does not cover the continuous picture on the stage.
+**Mutual attractors: the full lab.** Two scenes: mirrors (move the two starts, watch beat by beat or round by round) and min cut (set the two lengths, bring the gap closer). The convergence of the mutual reading and its local factor per round are an application of existing results in [@ex-ch33-mutual-cosine-monotonic-lock] (the decimals are numerical), and the minimal-surface transition is a literature result, not formalized in this book; the green box cites only [@prop-ch33-bridge-reconnection-mincut], which concerns a discrete bridge graph and does not cover the continuous picture on the stage.
 :::

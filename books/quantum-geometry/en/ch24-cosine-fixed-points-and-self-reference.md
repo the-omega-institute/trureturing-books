@@ -413,7 +413,7 @@ The aphorism is stated; now let us do the arithmetic. The cosine table in [@ex-d
 1. Close to $\theta^*$, by how much does one press of the cosine key actually shrink the error?
 
 ::: {.viz src="fixed-point-convergence" preset="rate" height="500"}
-**Each press multiplies the error by −0.674.** Taking the cosine again and again from $\theta_0 = 1$ while the view zooms with the error: zoomed in, the cyan curve lies on the magenta tangent, every turn has the same shape, and the ratio of successive turns tends to the slope of the tangent, $-\sin\theta^* \approx -0.674$, gentler than the global constant $-\sin 1 \approx -0.84$ of the dashed grey line (a literature result; see [@rem-dottie-convergent-residual-literature]).
+**Each press multiplies the error by −0.674.** Taking the cosine again and again from $\theta_0 = 1$ while the view zooms with the error: zoomed in, the cyan curve lies on the magenta tangent, every turn has the same shape, and the ratio of successive turns tends to the slope of the tangent, $-\sin\theta^* \approx -0.674$, gentler than the global constant $-\sin 1 \approx -0.84$ of the dashed grey line ($\theta_0 = 1$ lies in $[0, 1]$ and is not $\theta^*$, so the error ratio tends to $-\sqrt{1 - (\theta^*)^2}$, an application of existing results, clauses 22–23 of [@ex-ch33-mutual-cosine-monotonic-lock]; the decimals are numerical).
 :::
 
 2. If the ruler reads not only the projection $\cos\theta$ but also the orthogonal component $\sin\theta$, how much faster does the loop close?
@@ -425,7 +425,7 @@ The aphorism is stated; now let us do the arithmetic. The cosine table in [@ex-d
 3. How close to $\cos q = q$ can a ruler with finitely many rational tick marks get?
 
 ::: {.figure src="ch24-three-speeds"}
-**The three questions, answered numerically side by side.** Left, by step: the cyan points, repeated cosine, go down one equal notch per step along the dashed line of slope $\lg\lambda$ ($\lambda \approx 0.674$) and pass $10^{-10}$ only at step $55$; the magenta points, Newton's method, reach $10^{-21}$ in four steps. Right, by denominator: seven points are the residuals $\lvert\cos q - q\rvert$ of the convergents of $\theta^*$, all under the dashed bound $(1 + \sin 1)/b^2$, falling but never zero. All are numerical results; the rates and the bound are literature results in the note below, not formalized in this book.
+**The three questions, answered numerically side by side.** Left, by step: the cyan points, repeated cosine, go down one equal notch per step along the dashed line of slope $\lg\lambda$ ($\lambda \approx 0.674$) and pass $10^{-10}$ only at step $55$; the magenta points, Newton's method, reach $10^{-21}$ in four steps. Right, by denominator: seven points are the residuals $\lvert\cos q - q\rvert$ of the convergents of $\theta^*$, all under the dashed bound $(1 + \sin 1)/b^2$, falling but never zero. All are numerical results; the asymptotic factor of the cosine iteration is an application of existing results in [@ex-ch33-mutual-cosine-monotonic-lock], while the Newton rate and the residual bound are literature results in the note below, not formalized in this book.
 :::
 
 ::: {.remark #rem-dottie-convergent-residual-literature title="Asymptotic Contraction Rate, Newton's Quadratic Speed-Up, and Continued-Fraction Convergent Residual Bounds for θ* (Literature Result, Not Formalized in This Book)"}

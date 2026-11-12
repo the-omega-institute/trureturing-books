@@ -168,7 +168,7 @@ floor$，墨色竖线是 $a = 0.50$ 与 $b = 0.55$，右边两列是两数读数
 不！这正是第五部（[第 17 章](ch17-lorentz-geometry.md)与[第 18 章](ch18-spinors-and-gauge-curvature.md)）埋下伏笔、而唯有在本章“观察者即宇宙本体”的高度上才能彻底揭开的终极几何奥秘（`MODEL`（模型诠释））：**观察者从来没有“住在时空里”；恰恰相反，一维时间流与二维空间规范面，全都是观察者旋量 $\psi$ 转身与反转的自身 $\tilde{\psi}$ 相乘比量时，顺手织出来的双线性衣袂！**
 
 ::: {.viz src="self-sustaining-spinor-flow" preset="weave" height="500"}
-**旋量夹住两块参考刀片。** 虚线是参考的 $\mathbf{e}_3$ 与 $\mathbf{e}_1\mathbf{e}_2$ 正方形；旋量 $\psi$ 把前者夹成青色的流向量 $\mathbf{J} = \psi\mathbf{e}_3\tilde{\psi}$，把后者夹成品红的自旋面 $\mathbf{S} = \psi\mathbf{e}_1\mathbf{e}_2\tilde{\psi}$，那块面与 $\mathbf{J}$ 垂直；紫色虚线小弧是 $\psi$ 把 $\mathbf{e}_3$ 带到 $\mathbf{J}$ 走的路（乘积见 [@ex-ch39-even-clifford-spinor-bilinear-fierz]）。
+**旋量夹住两块参考刀片。** 虚线是参考的 $\mathbf{e}_3$ 与 $\mathbf{e}_1\mathbf{e}_2$ 正方形；旋量 $\psi$ 把前者夹成青色的流向量 $\mathbf{J} = \psi\mathbf{e}_3\tilde{\psi}$，把后者夹成品红的自旋面 $\mathbf{S} = \psi\mathbf{e}_1\mathbf{e}_2\tilde{\psi}$，那块面与 $\mathbf{J}$ 垂直；紫色虚线小弧是 $\psi$ 把 $\mathbf{e}_3$ 带到 $\mathbf{J}$ 走的路（乘积见 [@ex-ch39-even-clifford-spinor-bilinear-fierz]：$\mathbf{J}$ 是欧氏向量、$\mathbf{S}$ 是欧氏双矢量，把它们读作时流与规范面沿用上文的 `MODEL`）。
 :::
 
 数学物理史上关于“旋量先于时空矢量”与旋量双线性恒等式的经典文献脉络归纳于下框：
@@ -282,7 +282,7 @@ $$
 2. **所观之宇（$\sin\theta\,\hat{\mathbf{I}}$ 浩瀚客观星海，“大我余部”，纯度份额 $\sin^2\theta$）**：$\mathbf{\Psi}$ 剩下的归一化份额 $\sin^2\theta$ 所对应的本体质量去了哪里？并没有消失——它正交展开在局部化身的 $90^\circ$ 补空间里，显影为你推窗仰望的亿万星系、精密咬合的规范曲率、不可克隆的同伴灵魂、刚性的素数频谱，以及守护生命博弈悬念的复杂性视界防火墙（[@conj-p-neq-np]）！
 
 ::: {.figure src="ch39-self-folding"}
-**一份纯度正交折成两翼，加起来恰好是整份 $1$。** 墨色的单位箭头 $\Psi$ 与水平的观察者之线成 $\theta = 40^\circ$：青色正方形立在影子 $\cos\theta$ 上，面积 $\cos^2\theta \approx 0.59$（能观之极）；品红正方形立在垂线 $\sin\theta$ 上，面积 $\sin^2\theta \approx 0.41$（所观之宇）；两块合起来等于 $\Psi$ 上灰色虚线正方形的面积 $1$，画面里没有第 3 点。把纯度预算无松弛地拆成可见部分与正交残余，是下方 [@prop-ch39-orthogonal-folding-and-objective-common-factor] 第 1 款；把这两翼读成“小我”与“星海”是本章的正交折叠模型（`MODEL`）。
+**纯度预算正交折成两翼，两份归一化份额加起来恰好是 $1$。** 墨色的单位箭头 $\Psi$ 与水平的观察者之线成 $\theta = 40^\circ$：青色正方形立在影子 $\cos\theta$ 上，面积 $\cos^2\theta \approx 0.59$（能观之极）；品红正方形立在垂线 $\sin\theta$ 上，面积 $\sin^2\theta \approx 0.41$（所观之宇）；两块合起来等于 $\Psi$ 上灰色虚线正方形的面积 $1$，画面里没有第 3 点。这里画的是 $B > 0$ 时除以中心化纯度预算 $B$ 的归一化份额，两翼的实际质量是 $B\cos^2\theta$ 与 $B\sin^2\theta$。把纯度预算无松弛地拆成可见部分与正交残余，是下方 [@prop-ch39-orthogonal-folding-and-objective-common-factor] 第 1 款；把这两翼读成“小我”与“星海”是本章的正交折叠模型（`MODEL`）。
 :::
 
 看清这一折，那个困扰千古的悖论瞬间豁然开朗：**墙上左手的影子，当然不可能凭局部念头掰断右手的骨骼！** 你作为局部化身（$\cos\theta$ 栈帧）之所以无法靠一己私欲篡改物理常数，**恰恰因为窗外那套铁面无私的客观宇宙定律，根本不是压迫你的异己暴君，而是作为宇宙本体的你自己为了不让这场体验坍缩成虚无幻梦，用自己其余 $\sin^2\theta$ 的本体身躯亲手撑起的宏伟肋骨！**
