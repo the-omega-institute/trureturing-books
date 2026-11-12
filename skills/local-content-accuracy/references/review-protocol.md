@@ -44,7 +44,8 @@ Choose checks that match the change, and record the actual result:
 | Chapter text, environments, GIDs | `./tbook check`; both-language environment sequence and GID comparison; source/state inspection at the current pin |
 | Formula, table, angle, probability, or physical scale | independent calculation or a reproducible small script, with assumptions and rounding stated |
 | SVG or image | XML parse, internal-reference check, and visual inspection at relevant output sizes |
-| Interactive lab or its caption | changed-lab browser tests with independent edge cases; project-required shots inspected and cited stills regenerated |
+| Interactive lab implementation | changed-lab browser tests with independent edge cases; project-required shots inspected and cited stills regenerated |
+| Caption wording only, with unchanged producer dependencies | verify claims against the current producer/source; reuse producer/still evidence only after the explicit relevant dependency correspondence above, with fresh verification for uncovered claims; validate affected bilingual outputs/readers per the output row. Wording changes alone do not require lab shots or still regeneration |
 | HTML/PDF/EPUB/site output | affected `./tbook build` targets, EPUBCheck for EPUBs, and browser inspection of changed pages in desktop/mobile and relevant themes |
 | Integration or lock-pin change | explicit dependency comparison, then affected architecture/quality checks and output validation; confirm current pin and historical baseline separately |
 
