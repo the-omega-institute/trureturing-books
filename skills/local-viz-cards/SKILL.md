@@ -341,7 +341,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十四章 | “二十三等分的尺子……一千等分的尺子没有”一段之后、“有理读数永远对不准”之前 | `fixed-point-convergence` · `ruler`，随后完整实验室 |
 | 第二十五章 | §三比特刀片掩码一节的掩码表之后、“在这套 3 比特编码下”之前 | `blade-multiplication` · `square` |
 | 第二十五章 | 两条位运算定律的列表之后、“请特别注意”之前 | `blade-multiplication` · `e1e2`、`e2e1` |
-| 第二十五章 | 伪标量与两比特辛泡利字两条说明之后、逆序共轭一段之前 | `blade-multiplication` · `pseudo` |
+| 第二十五章 | “请特别注意”下第一条（伪标量 $I_3$）之后、第二条（两比特辛泡利字）之前 | `blade-multiplication` · `pseudo` |
 | 第二十五章 | 例 `ex-pauli-words-xor-sign-table` 之后、§零依赖 Python 3 引擎之前 | `blade-multiplication` · `pauli` |
 | 第二十五章 | 例 `ex-xor-pauli-table` 之后、文献注记 `rem-clifford-stabilizer-literature` 之前 | `blade-multiplication` · `vector` |
 | 第二十五章 | 文献注记 `rem-clifford-stabilizer-literature` 之后、转入第二十六章之前 | `blade-multiplication` 完整实验室 |
