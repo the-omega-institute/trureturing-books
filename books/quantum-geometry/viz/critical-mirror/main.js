@@ -249,8 +249,8 @@
       'ρ = 0.6 + 2i (amber). The mirror s ↦ 1 − s̄ and conjugation each give it a partner, and the four points ρ, ρ̄, 1 − ρ, 1 − ρ̄ group around ½ (magenta); on the right their images w, w̄, 1/w, 1/w̄ lie two inside the unit circle and two outside. Playing pushes ρ onto the mirror: as δ reaches 0 the four points merge into two (cyan) and the images land on the circle.'],
     cayley: ['ρ = ½ + 14.134725i，第一个零点的高度。它在镜面上，像 w 落在单位圆上，辐角 4.05°；灰色是前五个零点（数值结果）在两个平面里的位置，在右边都落在圆上、靠近 1。',
       'ρ = ½ + 14.134725i, the height of the first zero. It is on the mirror, and its image w lies on the unit circle at an angle of 4.05°; in grey, the first five zeros (numerical) in both planes, all on the circle near 1 on the right.'],
-    thin: ['ρ = 0.6 + 14i：离镜面 0.1，却在高度 14。右边的像只偏出圆周万分之五：|w| = 0.999491，它的反演 1.000510。右上的放大镜把角度与 ln|w| 拉开，看得见四个像夹着圆周（青线）成一个矩形。',
-      'ρ = 0.6 + 14i: 0.1 off the mirror, but at height 14. On the right the images leave the circle by only five parts in ten thousand: |w| = 0.999491, its inverse 1.000510. The magnifier at the top right stretches angle and ln|w| apart, and the four images straddle the circle (the cyan line) as the corners of a rectangle.'],
+    thin: ['ρ = 0.6 + 14i：离镜面 0.1，却在高度 14。右边的像只偏出圆周万分之五：|w| = 0.999491，它的反演 1.000510。左下的放大镜把角度与 ln|w| 拉开，看得见四个像夹着圆周（青线）成一个矩形。',
+      'ρ = 0.6 + 14i: 0.1 off the mirror, but at height 14. On the right the images leave the circle by only five parts in ten thousand: |w| = 0.999491, its inverse 1.000510. The magnifier at the lower left stretches angle and ln|w| apart, and the four images straddle the circle (the cyan line) as the corners of a rectangle.'],
     quartic: ['伪造的四点组：δ = ¼，γ = 14，零点 ½ ± ¼ ± 14i 都不在线上。右边上图是同样有这四个零点、同样对称的四次式 F 沿临界线的值：实数、处处为正，最低 49；下图是 ξ(½ + it)，在 14 与 15 之间变号。两条曲线各用各的标尺。',
       'A mock quartet: δ = ¼, γ = 14, zeros ½ ± ¼ ± 14i, none on the line. Top right: the quartic F with these four zeros and the same symmetries, along the critical line: real, positive everywhere, lowest 49. Bottom right: ξ(½ + it), which changes sign between 14 and 15. Each curve has its own scale.']
   };

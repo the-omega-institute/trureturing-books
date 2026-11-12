@@ -166,7 +166,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 `sphere-escape` 的六个场景（对角线、纤维、割圆、指针、余弦、素数）共用一条时间轴。“纤维”场景是第二十一章例 `ex-cantor-godel-diagonal-table` 的四地址目录（解码器常零、恒等、取反、常一，恰好满射）：读者点地址改它的潜坐标，时间轴先逐个算出 g，再把同一纤维里 g 不同的点对连成品红线（分离亏损），最后把 g 立成紫色的第二根轴、块数变多；16 种潜坐标都劈开某根纤维，绿色框只给 `complete_diagonal_topological_settlement`。“指针”场景画 N + 1 格的记录指针（青色条）与平移 ℓ 格的副本（品红轮廓），右边是正 (⌊N/ℓ⌋ + 2) 边形的边心距（青色虚线）与弓高（品红），琥珀色的点是 |γ(ℓ)|；正弦形在 ℓ = 1 时恰好取到边心距（页面实算），绿色框给 `coefficient_gamma_le_cosine` 与 `finite_record_cosine_obstruction`。页面读数里“相符”的勾是中性色（`.chk`），不是绿色。
 
-`critical-mirror` 的舞台是两个并排的平面：左边是临界带 0 < Re s < 1（纵向压缩），琥珀色的 ρ = ½ ± δ + iγ 与三个品红的伴 ρ̄、1 − ρ、1 − ρ̄，δ = 0 时两两重合成青色的两点；右边是凯莱坐标 w = (s − 1)/s，单位圆是青色，右上的放大镜以辐角为横轴、ln|w| 为纵轴，把高处只偏出圆周万分之几的四个像拉开。“四次式”场景把右边换成同样对称的四次式 F(½ + it)（青色，最低处琥珀色）与 ξ(½ + it)（品红，各用各的标尺；ξ 由欧拉—麦克劳林求 ζ、斯特林求 Γ）。前五个零点是灰色的数值点（与静态图 `ch22-critical-line`、`ch22-overview` 里的零点同为灰色）。时间轴是 ρ 到镜面的距离 δ。绿色框只给第二十二章用 `lean=` 引用的 `xi_reading_reflection`、`xi_reading_one_sub_conj`、`cayley_ratio_norm_one_iff_critical_line` 与 `full_symmetry_not_fixed_line_localization`；零点高度、|w|、F、ξ 标 `NUM`；黎曼猜想只在抽屉里标 `OPEN`，页面不画“全部零点”。
+`critical-mirror` 的舞台是两个并排的平面：左边是临界带 0 < Re s < 1（纵向压缩），琥珀色的 ρ = ½ ± δ + iγ 与三个品红的伴 ρ̄、1 − ρ、1 − ρ̄，δ = 0 时两两重合成青色的两点；右边是凯莱坐标 w = (s − 1)/s，单位圆是青色，左下的放大镜以辐角为横轴、ln|w| 为纵轴，把高处只偏出圆周万分之几的四个像拉开。“四次式”场景把右边换成同样对称的四次式 F(½ + it)（青色，最低处琥珀色）与 ξ(½ + it)（品红，各用各的标尺；ξ 由欧拉—麦克劳林求 ζ、斯特林求 Γ）。前五个零点是灰色的数值点（与静态图 `ch22-critical-line`、`ch22-overview` 里的零点同为灰色）。时间轴是 ρ 到镜面的距离 δ。绿色框只给第二十二章用 `lean=` 引用的 `xi_reading_reflection`、`xi_reading_one_sub_conj`、`cayley_ratio_norm_one_iff_critical_line` 与 `full_symmetry_not_fixed_line_localization`；零点高度、|w|、F、ξ 标 `NUM`；黎曼猜想只在抽屉里标 `OPEN`，页面不画“全部零点”。
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
