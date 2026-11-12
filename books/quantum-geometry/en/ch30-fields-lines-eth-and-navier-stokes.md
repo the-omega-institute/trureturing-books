@@ -72,7 +72,7 @@ The unconditional restricted-model lower bounds corresponding to these two geome
 :::
 
 ::: {.viz src="timeless-causal-crystal" preset="sos" height="500"}
-**Two literals close at order 2; three-way parity does not.** The cyan points: for each $n$ a random 2-SAT formula, in which resolving two 2-clauses on a variable leaves at most two literals, so the resolution closure stays at order $2$ and whether the empty clause appears decides satisfiability (numbers computed by the page). The dashed magenta line: for random 3-XOR / 3-SAT, the literature result of item 3 above says that sum-of-squares relaxations of order $o(n)$ stay consistent everywhere; the slope of this line is only schematic (`MODEL`). Amber is the observer's order $M$. These lower bounds constrain this family of relaxations only and do not imply $\mathrm{P}\neq\mathrm{NP}$ ([@conj-p-neq-np], `OPEN`).
+**Two literals close at order 2; three-way parity does not.** The cyan points: for each $n$ a random 2-SAT formula, in which resolving two 2-clauses on a variable leaves at most two literals, so the resolution closure stays at order $2$ and whether the empty clause appears decides satisfiability: a filled point derived the empty clause (unsatisfiable), a hollow ring did not (satisfiable) (numbers computed by the page). The dashed magenta line: for random 3-XOR / 3-SAT, the literature result of item 3 above says that sum-of-squares relaxations of order $o(n)$ stay consistent everywhere; the slope of this line is only schematic (`MODEL`). Amber is the observer's order $M$. These lower bounds constrain this family of relaxations only and do not imply $\mathrm{P}\neq\mathrm{NP}$ ([@conj-p-neq-np], `OPEN`).
 :::
 
 ### 3. The Author's Interpretation: Complexity Horizons, Subjective Time, and Choice
@@ -126,7 +126,7 @@ In our geometric interpretation (`MODEL`), geometric or algebraic structure used
 :::
 
 ::: {.viz src="timeless-causal-crystal" preset="field" height="500"}
-**A field: a slope everywhere.** The cyan flow lines start from all over the sphere; each looks only at the slope underfoot, and each flows to the target. The amber line is the chosen one, and the field vanishes at the opposite point. In the plot below, whatever the cyan potential loses, the magenta dissipation pays, and their sum (dashed amber) stays fixed ([`S2_dissipation`](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation)). Reading it as a "field" is this book's interpretation (`MODEL`).
+**A field: a slope everywhere.** The cyan flow lines start from all over the sphere; each looks only at the slope underfoot, and each flows to the target. The amber line is the chosen one, and the field vanishes at the opposite point (the grey ring). Reading it as a "field" is this book's interpretation (`MODEL`).
 :::
 
 #### From Actual Vertex Rotations to Face-Odd Orientations: A Finite Combinatorial Prerequisite {#sec-ch30-rotation-parity}
