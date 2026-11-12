@@ -25,6 +25,8 @@ Maintain one row per SUMMARY unit. A row can say `pending`, `read-only review`, 
 
 On recovery or integration, record the prior evidence candidate, current input HEAD and changed scope. Compare the dependencies relevant to each reused conclusion: text/environment bytes, referenced source and pin, media/captions, and output tools/assets. State which evidence survives and why, which changed claims need fresh review, and which outputs need rebuilding. Do not treat changed tooling as a new content audit of every chapter, or unchanged text as approval of new media. For an uncommitted handoff, identify the input HEAD and changed file digests; a later committed hash needs the lifecycle owner’s correspondence check.
 
+For an upstream table, list or display reflow, record how each affected claim’s old row/field corresponds to its current stable location and labelled fields in both languages, including assumptions, qualifiers, conclusions and source/GID/attribution bindings. Carry the already-confirmed minimal corrections into those fields where their justification still holds, retaining author wording and the upstream presentation. Established semantic correspondence can justify reuse of the relevant evidence despite changed bytes; line growth or a new layout alone adds no claims or audit credit. A changed or missing hypothesis, qualifier, conclusion or source binding beyond those corrections needs fresh review of that claim. Correspondence alone does not establish content accuracy or approve the surrounding material.
+
 ## Three review seats
 
 - **Architecture:** lock pin and branch, GID resolution and theorem kinds, bilingual environment/media parity, epistemic color and block classification, managed-file boundaries, and scoped links.
