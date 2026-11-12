@@ -275,6 +275,8 @@ which is the exponent $bc$ of the composition law ($b = z_{\mathrm{left}}$, $c =
 
 ## Zero-Dependency Python 3 Geometric Algebra Engine and Self-Test {#sec-geometric-state-python-engine}
 
+The eight blades first combine with real coefficients: the table gives a faithful complex Pauli matrix representation of the real algebra $\mathcal{Cl}_{3,0}(\mathbb{R})$, with its literature context in [@rem-clifford-stabilizer-literature]. The code stores coefficients as `complex`, allowing an independent complex coefficient for every blade. The `1j` in `pauli(x, z, phase)` is an external coefficient phase, kept separate from the real algebra's volume blade $I_3$; the table no longer gives a faithful representation of this enlarged complex-coefficient container. `reverse()` reverses blade factors and extends linearly in the coefficients, without conjugating them. For real coefficients, the scalar part read by `norm_squared()` is the nonnegative sum of the squared blade coefficients. The next chapter uses real coefficients on even blades and imposes the unit condition on its rotors, so reversion supplies the inverse and the sandwich acts as a three-dimensional rotation.
+
 Here is the complete, runnable, zero-dependency Python 3 implementation of `GeometricState` (from the companion verification script `part7_engine.py`):
 
 ```python

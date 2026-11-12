@@ -19,7 +19,7 @@ In this chapter we complete the single-qubit computational bridge by joining two
 
 ## Bloch Matrix Trace and Coordinate Recovery {#sec-bloch-matrix-trace-and-recovery}
 
-In the Lean 4 module `D5/S3/Quantum/Information/ActualPureQubitGeometry.lean` (within namespace `D5.S3.Quantum.Information.ActualPureQubitCostInfimum`), the bidirectional correspondence between $2\times 2$ complex matrices $M \in M_2(\mathbb{C})$ and three-dimensional Euclidean vectors in $\operatorname{EuclideanSpace}\,\mathbb{R}\,(\operatorname{Fin} 3)$ is defined by two maps:
+In the Lean 4 module `D5/S3/Quantum/Information/ActualPureQubitGeometry.lean` (within namespace `D5.S3.Quantum.Information.ActualPureQubitCostInfimum`), the exact bidirectional correspondence between $2\times 2$ Hermitian matrices $M \in M_2(\mathbb{C})$ and pairs consisting of a real trace scalar $\operatorname{Re}(\Tr M)$ and a real Bloch three-vector $\operatorname{bloch}(M) \in \operatorname{EuclideanSpace}\,\mathbb{R}\,(\operatorname{Fin} 3)$ is defined by two maps:
 
 1. **The Bloch coordinate extraction map `bloch`**: For any $M \in M_2(\mathbb{C})$,
    $$
@@ -165,6 +165,8 @@ $$
 :::
 
 ## Python 3 ZYZ Rotor Compiler Implementation and Numerical Verification {#sec-zyz-rotor-compiler-python}
+
+We keep the real coefficients of the preceding chapter's engine: compilation produces real even rotors, whose unit condition makes `reverse()` their inverse; `norm_squared()` checks normalization within this same domain.
 
 Below is the complete runnable Python 3 `RotorCompiler` and `self_test()` implementation (building directly on `GeometricState` from [Chapter 25](ch25-rewriting-and-xor.md)):
 
@@ -351,7 +353,7 @@ Let us verify the compiled multivector coefficients and rotated basis vectors on
    $$
    R(0.37, -0.81, 0.52) \approx 0.829592 - 0.395635\,e_1 e_2 - 0.392911\,e_1 e_3 + 0.029524\,e_2 e_3,
    $$
-   where calling `rotor.norm_squared()` (`(R * R.reverse()).scalar_part().real`) on the unrounded floating-point `rotor` object evaluates to `1.000000000000` to machine precision (while summing the squares of the 6-decimal rounded display coefficients gives $0.829592^2 + (-0.395635)^2 + (-0.392911)^2 + 0.029524^2 \approx 1.000001 \approx 1$). Evaluating `apply(R, e_k)` on $e_1, e_2, e_3$ reproduces the three columns of `zyz_matrix(0.37, -0.81, 0.52)` to machine precision:
+   where calling `rotor.norm_squared()` (`(R * R.reverse()).scalar_part().real`) on the unrounded floating-point `rotor` object returns a value that rounds to `1.000000000000` at twelve decimal places (while summing the squares of the 6-decimal rounded display coefficients gives $0.829592^2 + (-0.395635)^2 + (-0.392911)^2 + 0.029524^2 \approx 1.000001 \approx 1$). Evaluating `apply(R, e_k)` on $e_1, e_2, e_3$ reproduces the three columns of `zyz_matrix(0.37, -0.81, 0.52)` to machine precision:
    $$
    M_{\mathrm{ZYZ}}(0.37, -0.81, 0.52) \approx \begin{pmatrix}
    0.378188 & -0.633230 & -0.675273 \\
@@ -367,7 +369,7 @@ Let us verify the compiled multivector coefficients and rotated basis vectors on
    $$
    R_H = -\frac{1}{\sqrt{2}}\,e_1 e_2 - \frac{1}{\sqrt{2}}\,e_2 e_3 \approx -0.707107\,e_1 e_2 - 0.707107\,e_2 e_3,
    $$
-   satisfying $R_H e_1 \widetilde{R}_H = e_3$, $R_H e_2 \widetilde{R}_H = -e_2$, and $R_H e_3 \widetilde{R}_H = e_1$.
+   satisfying $R_H e_1 \widetilde{R}_H = e_3$, $R_H e_2 \widetilde{R}_H = -e_2$, and $R_H e_3 \widetilde{R}_H = e_1$ to machine precision.
 :::
 
 ::: {.viz src="zyz-compile" preset="t" height="500"}
