@@ -3,8 +3,9 @@
 // Reads the page through window.VORTEX_DEBUG and checks it against independent computations written here: the vector
 // identity by finite differences with another step, the cross-section of the tube by integrating its differential
 // equation with Runge–Kutta, the Burgers core radius by integrating dR²/dτ = −αR² + 4ν with Heun steps, the K41 scaling
-// by log-log slopes, and the closure criterion by brute force over all 27 settings of the three leaks.
-import { session, stageFirstChecks, settle, cjkLeftovers } from '../../../../tools/node/viz-testkit.mjs';
+// by log-log slopes, and the closure criterion by brute force over all 27 settings of the three leaks. The tube scene
+// is a lit solid (kit.solid); its drawn radius, ends, loop and colour are checked against the same integration.
+import { session, stageFirstChecks, solidChecks, settle, cjkLeftovers } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'navier-stokes-p-np';
 const T = await session();
@@ -27,6 +28,9 @@ const setRange = async (id, v) => { await D(([i, val]) => { const el = document.
 let s = await state();
 check('opens on STRETCH: the tube under steady strain, without viscosity, at the telling frame', s.preset === 'strain' && s.scene === 'tube' && s.mode === 'strain' && s.nu === 0 && near(s.t, 1.8) && !s.playing, JSON.stringify([s.preset, s.scene, s.t]));
 const { alpha, kappa, gamma, a0 } = s.consts;
+
+/* ---------- the tube is a lit solid (the scenes of the other cards are 2D plots) ---------- */
+await solidChecks(T, BOOK, ID, page);
 
 /* ---------- the two halves of advection ---------- */
 await pick('vortex'); s = await seek(0);
@@ -63,6 +67,24 @@ for (const [mode, nu, t] of [['flat', 0, 3], ['flat', 0.02, 4], ['strain', 0, 1.
   if (!(near(d.A, A, 1e-6) && near(d.w * d.A, gamma, 1e-9))) { tubeOK = false; tubeBad = JSON.stringify({ mode, nu, t, page: d.A, mine: A }); break; }
 }
 check('the cross-section follows dA/dt = 4πν − (stretching) in all three modes (Runge–Kutta here), and ω·A = Γ', tubeOK, tubeBad);
+// the solid as drawn at the stop of each tube card: radius ∝ √A (so the drawn cross-section is A to scale against the
+// start, the faint tube of radius R₀), the ends capped exactly when the whole stretched segment is on the stage, the loop
+// lying on the wall, and the colour of the wall the share of ln(Γ/A) between ln ½ and ln 12
+let solidOK = true, solidBad = '';
+for (const [card, mode, nu, t] of [['flat', 'flat', 0.02, 4], ['strain', 'strain', 0, 1.8], ['burgers', 'strain', 0.02, 5.5], ['runaway', 'self', 0.012, 2.4]]) {
+  await pick(card); await seek(t); const g = await D(() => window.VORTEX_DEBUG.drawn);
+  const A = integrate(mode, nu, t), wide = Math.sqrt(A / a0), shade = Math.min(1, Math.max(0, (Math.log(gamma / A) - Math.log(0.5)) / (Math.log(12) - Math.log(0.5))));
+  const ok = g && near(g.r / g.R0, wide, 1e-5) && near(g.R0, 0.8 * g.k, 1e-12) && near(g.h0, 0.95 * g.k, 1e-12) && g.k > 0 && g.k <= 1
+    && g.capped === near(g.hl, g.h0 * g.len, 1e-9) && (!g.capped || near(g.hl / g.h0, g.len, 1e-9)) && g.ring > g.r && g.ring - g.r < 0.05 && near(g.shade, shade, 1e-5)
+    && (mode === 'flat' ? g.r > g.R0 && g.len === 1 : g.r < g.R0);
+  if (!ok) { solidOK = false; solidBad = JSON.stringify({ card, g, wide, shade }); break; }
+}
+check('the solid tube at each card: radius/R₀ = √(A/A₀) from my integration, caps only on a whole segment, the loop on the wall, the wall colour from ln(Γ/A)', solidOK, solidBad);
+{
+  await pick('strain'); await seek(1.8);
+  const m = await D(() => window.TRV.solids[0].marks().filter((q) => /^swirl/.test(q.key)));
+  check('the three particles on the loop are marks of the solid; one at least is in view and one is hidden behind the tube', m.length === 3 && m.some((q) => !q.hidden) && m.some((q) => q.hidden), JSON.stringify(m.map((q) => q.hidden)));
+}
 // the Burgers core: the exact smooth solution against an independent integration of dR²/dτ = −αR² + 4ν (Heun, R² as the unknown)
 const heunR = (nu, t, r0sq) => { let q = r0sq; const n = 20000, h = t / n, f = (x) => -alpha * x + 4 * nu; for (let i = 0; i < n; i++) { const p = q + h * f(q); q += h * (f(q) + f(p)) / 2; } return Math.sqrt(q); };
 let burOK = true, burBad = '';
