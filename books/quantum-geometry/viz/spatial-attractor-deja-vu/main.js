@@ -14,7 +14,7 @@
   const { kit, L } = TRV, { fix, clamp } = kit, P = TRV.palette;
   const $ = (id) => document.getElementById(id);
   const SIG = 10, BETA = 8 / 3, H = 0.01, EPS = 2, TR = 40, TS = 2, TD = 100, NP = 500, DIV = -(SIG + 1 + BETA);
-  const S = { scene: 'rounds', rho: 28, seed: 0, settle: 0 };   // settle: the time before which the rounds are drawn faint (a card's choice)
+  const S = { scene: 'rounds', rho: 28, seed: 0, settle: 0, card: null };   // card: the card last picked (null after free play)   // settle: the time before which the rounds are drawn faint (a card's choice)
   const F = (p, rho) => [SIG * (p[1] - p[0]), p[0] * (rho - p[2]) - p[1], p[0] * p[1] - BETA * p[2]];
   function rk4(p, h, rho) {
     const k1 = F(p, rho), k2 = F([p[0] + h * k1[0] / 2, p[1] + h * k1[1] / 2, p[2] + h * k1[2] / 2], rho), k3 = F([p[0] + h * k2[0] / 2, p[1] + h * k2[1] / 2, p[2] + h * k2[2] / 2], rho), k4 = F([p[0] + h * k3[0], p[1] + h * k3[1], p[2] + h * k3[2]], rho);
@@ -61,8 +61,10 @@
     const starts = seed === 0 ? [[-0.55 * W.half, -0.75 * W.half, W.c[2] - 0.8 * W.half], [0.7 * W.half, 0.8 * W.half, W.c[2] + 0.75 * W.half]] : [at(), at()];
     const out = starts.map((s0) => {
       const pts = [s0]; let p = s0; for (let i = 0; i < TR / H; i++) { p = rk4(p, H, W.rho); pts.push(p); }
+      // up[i]: of the steps 1 … i, how many lie above the height ρ − 1 of C₊ and C₋ (a time average of one indicator)
+      const up = new Int32Array(pts.length); for (let i = 1; i < pts.length; i++) up[i] = up[i - 1] + (pts[i][2] > W.rho - 1 ? 1 : 0);
       const visits = []; for (let i = 1; i < pts.length - 1; i++) { const d = dist(pts[i], W.ruin); if (d < EPS && d <= dist(pts[i - 1], W.ruin) && d < dist(pts[i + 1], W.ruin)) visits.push({ i, t: i * H, d, dir: unit(F(pts[i], W.rho)) }); }
-      return { start: s0, pts, visits };
+      return { start: s0, pts, visits, up };
     });
     return (W.rounds[seed] = out);
   }
@@ -149,12 +151,41 @@
       const cos = ret ? clamp(ret.a.dir[0] * ret.b.dir[0] + ret.a.dir[1] * ret.b.dir[1] + ret.a.dir[2] * ret.b.dir[2], -1, 1) : null;
       // when C₊ and C₋ are stable (ρ = 14), the one each round has fallen into by the end of the rail, t = 40
       const eq = equilibria(S.rho), ends = eq.unstable ? null : R.map((r) => { const e = r.pts[r.pts.length - 1]; return dist(e, eq.pts[0].p) < dist(e, eq.pts[1].p) ? eq.pts[0].name : eq.pts[1].name; });
-      return { W, R, i, counts: last.map((v) => v.length), latest: [a || null, b || null], ret, cos, angle: cos == null ? null : Math.acos(cos) * 180 / Math.PI, gap: dist(R[0].pts[i], R[1].pts[i]), now: [R[0].pts[i], R[1].pts[i]], eq, ends };
+      return { W, R, i, counts: last.map((v) => v.length), latest: [a || null, b || null], ret, cos, angle: cos == null ? null : Math.acos(cos) * 180 / Math.PI, gap: dist(R[0].pts[i], R[1].pts[i]), now: [R[0].pts[i], R[1].pts[i]], eq, ends, above: i > 0 ? R.map((r) => r.up[i] / i) : null };
     }
     if (S.scene === 'shrink') { const C = cloud(W), t = clamp(clock.t, 0, TS); return { W, C, t, frame: Math.round(t / 0.02), exact: Math.exp(DIV * t), det: C.det[Math.round(t / H)] }; }
     const Ly = lyap(W), T = clamp(clock.t, 0, TD), k = Math.max(1, Math.min(Ly.samples.length - 1, Math.round(T / 0.5))), l = Ly.samples[k].slice(1);
     return { W, Ly, T, k, l, sum: l[0] + l[1] + l[2], dky: kaplanYorke(l) };
   };
+  /** The magnifier: a square in the lower right corner that shows the neighbourhood of the ruin (the amber circle of
+      radius ε) enlarged, the two arcs of the latest return through it and their unit tangents as long arrows. The
+      enlargement is the screen projection around the ruin scaled by `mag`, so the arrows point as on the stage. */
+  function inset(ctx, q, rp, rr) {
+    const W = q.W, s = Math.round(Math.min(st.W, st.H) * 0.36), x = st.W - s - 14, y = st.H - s - 44;
+    if (s < 90 || x < st.W * 0.45) return null;
+    const mag = 4, cx = x + s / 2, cy = y + s / 2;
+    const to = (p) => { const a = st.p(toStage(W, p)); return [cx + (a[0] - rp[0]) * mag, cy + (a[1] - rp[1]) * mag]; };
+    ctx.save();
+    ctx.strokeStyle = P.amber; ctx.globalAlpha = 0.45; ctx.lineWidth = 1; ctx.setLineDash([3, 4]);
+    ctx.beginPath(); ctx.moveTo(rp[0], rp[1]); ctx.lineTo(x, y + s); ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha = 1;
+    ctx.fillStyle = P.stage; ctx.globalAlpha = 0.86; ctx.fillRect(x, y, s, s); ctx.globalAlpha = 1;
+    ctx.strokeStyle = P.amber; ctx.lineWidth = 1.2; ctx.strokeRect(x + 0.5, y + 0.5, s - 1, s - 1);
+    ctx.beginPath(); ctx.rect(x + 1, y + 1, s - 2, s - 2); ctx.clip();
+    ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(cx, cy, rr * mag, 0, kit.TAU); ctx.stroke();
+    [[q.ret.a, 0], [q.ret.b, 1]].forEach(([v, k]) => {
+      const pts = q.R[k].pts, col = k ? P.magenta : P.cyan;
+      ctx.strokeStyle = col; ctx.lineWidth = 1.6; ctx.beginPath();
+      for (let j = Math.max(0, v.i - 40), m = 0; j <= Math.min(pts.length - 1, v.i + 40); j++, m++) { const a = to(pts[j]); if (m) ctx.lineTo(a[0], a[1]); else ctx.moveTo(a[0], a[1]); }
+      ctx.stroke();
+      const a = to(pts[v.i]), b = to([pts[v.i][0] + v.dir[0], pts[v.i][1] + v.dir[1], pts[v.i][2] + v.dir[2]]), d = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1;
+      const L0 = 0.34 * s, e = [a[0] + (b[0] - a[0]) / d * L0, a[1] + (b[1] - a[1]) / d * L0], u = [(e[0] - a[0]) / L0, (e[1] - a[1]) / L0];
+      ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(e[0], e[1]); ctx.stroke();
+      ctx.fillStyle = col; ctx.beginPath(); ctx.moveTo(e[0] + u[0] * 4, e[1] + u[1] * 4); ctx.lineTo(e[0] - u[0] * 12 - u[1] * 7, e[1] - u[1] * 12 + u[0] * 7); ctx.lineTo(e[0] - u[0] * 12 + u[1] * 7, e[1] - u[1] * 12 - u[0] * 7); ctx.closePath(); ctx.fill();
+      ctx.beginPath(); ctx.arc(a[0], a[1], 4.5, 0, kit.TAU); ctx.fill();
+    });
+    ctx.restore();
+    return { x, y, s, mag };
+  }
   function drawStage(q) {
     const ctx = st.begin(), W = q.W, words = !TRV.thumbMode;
     if (S.scene === 'rounds') {
@@ -164,7 +195,9 @@
       q.eq.pts.forEach((e) => st.dot(toStage(W, e.p), 4.5, P.ink, { ring: true, fade: false }));
       if (q.ret) [[q.ret.a, 0], [q.ret.b, 1]].forEach(([v, k]) => { const x = q.R[k].pts[v.i], L0 = 2.5 * EPS; st.arrow(toStage(W, x), toStage(W, [x[0] + L0 * v.dir[0], x[1] + L0 * v.dir[1], x[2] + L0 * v.dir[2]]), { color: k ? P.magenta : P.cyan, width: 2, headSize: 8, fade: false }); });
       q.R.forEach((r, k) => { r.visits.filter((v) => v.i <= q.i).forEach((v) => st.dot(toStage(W, r.pts[v.i]), 2.6, P.amber, { fade: false })); st.dot(toStage(W, r.start), 4, k ? P.magenta : P.cyan, { ring: true, fade: false }); st.dot(toStage(W, q.now[k]), 5, k ? P.magenta : P.cyan, { glow: 12, fade: false }); });
-      if (words) { st.tag('ruin', toStage(W, W.ruin), L('遗迹的邻域', 'around the ruin'), 'hot raw', { dy: -Math.max(rr, 5) - 12 }); st.tag('s0', toStage(W, q.R[0].start), L('第 k 轮起点', 'start of round k'), 'cy raw', { dy: 14 }); st.tag('s1', toStage(W, q.R[1].start), L('第 k+1 轮起点', 'start of round k+1'), 'mg raw', { dy: -14 }); q.eq.pts.forEach((e, k) => eqTag(k, e, toStage(W, e.p), q.ends)); }
+      const box = words && q.ret && !['forget', 'fixed', 'cycle'].includes(S.card) ? inset(ctx, q, rp, rr) : null;   // the magnifier serves RETURN and free play
+      if (words) { if (box) st.tag('ruin', [box.x + box.s / 2, box.y - 11], L(`遗迹的邻域 · 放大 ${box.mag}×`, `around the ruin · ${box.mag}× enlarged`), 'hot raw', { screen: true });
+        else st.tag('ruin', toStage(W, W.ruin), L('遗迹的邻域', 'around the ruin'), 'hot raw', { dx: Math.max(rr, 5) + 46, dy: -Math.max(rr, 5) - 18, fade: false }); st.tag('s0', toStage(W, q.R[0].start), L('第 k 轮起点', 'start of round k'), 'cy raw', { dy: 14 }); st.tag('s1', toStage(W, q.R[1].start), L('第 k+1 轮起点', 'start of round k+1'), 'mg raw', { dy: -14 }); q.eq.pts.forEach((e, k) => eqTag(k, e, toStage(W, e.p), q.ends)); }
     } else if (S.scene === 'shrink') {
       const c = q.C, s = c.side, corner = (a, b, d) => toStage(W, [W.c[0] + a * s, W.c[1] + b * s, W.c[2] + d * s]);
       for (const [a, b] of [[-1, -1], [-1, 1], [1, -1], [1, 1]]) { st.line(corner(a, b, -1), corner(a, b, 1), { color: P.dim, width: 1, dash: [3, 4], alpha: 0.7 }); st.line(corner(a, -1, b), corner(a, 1, b), { color: P.dim, width: 1, dash: [3, 4], alpha: 0.7 }); st.line(corner(-1, a, b), corner(1, a, b), { color: P.dim, width: 1, dash: [3, 4], alpha: 0.7 }); }
@@ -247,12 +280,13 @@
   function drawText(q) {
     const set = (i, lab, val) => { $(`roL${i}`).innerHTML = lab; $(`ro${i}`).innerHTML = val; };
     $('ro5w').hidden = S.scene !== 'rounds';
-    let big, hud, what, key, note;
+    let big, hud, hud2 = '', what, key, note;
     if (S.scene === 'rounds') {
       const t = q.i * H;
       big = L(`两轮 · ρ = ${S.rho} · t = ${fix(t, 1)}`, `Two rounds · ρ = ${S.rho} · t = ${fix(t, 1)}`);
       hud = q.cos == null ? L(`经过遗迹的次数：第 k 轮 ${q.counts[0]} 次，第 k+1 轮 ${q.counts[1]} 次`, `passages by the ruin: round k ${q.counts[0]}, round k+1 ${q.counts[1]}`)
-        : L(`经过遗迹：${q.counts[0]} 次与 ${q.counts[1]} 次 · 最近一次重返的方向夹角 ${fix(q.angle, 1)}°`, `passages by the ruin: ${q.counts[0]} and ${q.counts[1]} · at the latest return the directions differ by ${fix(q.angle, 1)}°`);
+        : L(`经过遗迹：${q.counts[0]} 次与 ${q.counts[1]} 次 · 最近一次重返的方向夹角 ${fix(q.angle, 1)}°，cos δθ = ${fix(q.cos, 4)}`, `passages by the ruin: ${q.counts[0]} and ${q.counts[1]} · at the latest return the directions differ by ${fix(q.angle, 1)}°, cos δθ = ${fix(q.cos, 4)}`);
+      hud2 = S.rho === 28 && q.above && S.card !== 'return' ? L(`高过 C₊、C₋ 的时间比例：第 k 轮 ${fix(q.above[0], 2)}，第 k+1 轮 ${fix(q.above[1], 2)} · 两轮此刻相距 ${fix(q.gap, 1)}`, `share of time above C₊ and C₋: round k ${fix(q.above[0], 2)}, round k+1 ${fix(q.above[1], 2)} · the rounds are now ${fix(q.gap, 1)} apart`) : '';
       $('roKeyL').textContent = L('重返处两条切向的内积 cos δθ = v̂₁·v̂₂', 'inner product of the two tangents at the return, cos δθ = v̂₁·v̂₂'); $('roKey').innerHTML = q.cos == null ? '—' : `<span class="c-am">${fix(q.cos, 4)}</span>`; $('roKeySub').innerHTML = q.cos == null ? L('还没有一次重返', 'no return yet') : `δθ = ${fix(q.angle, 2)}° · t<sub>a</sub> = ${fix(q.ret.a.t, 2)}, t<sub>b</sub> = ${fix(q.ret.b.t, 2)}`;
       set(1, L('第 k 轮经过次数', 'passages of round k'), String(q.counts[0])); set(2, L('第 k+1 轮经过次数', 'passages of round k+1'), String(q.counts[1]));
       set(3, L('两轮此刻相距', 'distance between the rounds now'), fix(q.gap, 2));
@@ -277,7 +311,7 @@
       note = L('三个指数之和总是 −41/3；它们怎样分配，决定了吸引子是点、是环，还是比面略厚的一层。', 'The three exponents always add up to −41/3; how they are shared decides whether the attractor is a point, a loop, or a layer slightly thicker than a surface.');
       what = `T = ${fix(q.T, 0)}`; key = `D ≈ ${fix(q.dky, 2)}`;
     }
-    $('hudBig').textContent = big; $('hudSub').textContent = hud; $('roNote').textContent = note; $('roAside').textContent = L(SC[S.scene].name[0], SC[S.scene].name[1]); $('seedTag').textContent = `#${S.seed}`;
+    $('hudBig').textContent = big; $('hudSub').textContent = hud; $('hudSub2').textContent = hud2; $('hudSub2').hidden = !hud2; $('roNote').textContent = note; $('roAside').textContent = L(SC[S.scene].name[0], SC[S.scene].name[1]); $('seedTag').textContent = `#${S.seed}`;
     $('pillScene').querySelector('strong').textContent = SC[S.scene].name[1]; $('pillWhat').querySelector('strong').textContent = what; $('pillKey').querySelector('strong').textContent = key;
     const leg = LEGEND[S.scene].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
     if ($('legend')._h !== leg) { $('legend').innerHTML = leg; $('legend')._h = leg; }
@@ -296,7 +330,7 @@
     document.querySelectorAll('[data-scenes]').forEach((el) => { el.hidden = !el.dataset.scenes.split(' ').includes(sc); });
     fitClock(t);
   }
-  const leave = () => { S.settle = 0; cards.mark(null); };
+  const leave = () => { S.settle = 0; S.card = null; cards.mark(null); };
   const sceneChips = kit.chips($('sceneChips'), 'scene', (v) => { leave(); setScene(v); });
   const rhoChips = kit.chips($('rhoChips'), 'rho', (v) => { S.rho = Number(v); leave(); paint(); });
   $('forgetBtn').addEventListener('click', () => { S.seed += 1; leave(); clock.set(0); clock.play(); });
@@ -305,12 +339,11 @@
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
-    butterfly: { scene: 'rounds', rho: 28, seed: 0, at: TR, play: true }, forget: { scene: 'rounds', rho: 28, seed: 3, at: TR, play: true }, return: { scene: 'rounds', rho: 28, seed: 0, at: 22 },
+    forget: { scene: 'rounds', rho: 28, seed: 3, at: TR, play: true }, return: { scene: 'rounds', rho: 28, seed: 0, at: 22 },
     shrink: { scene: 'shrink', rho: 28, at: 1, play: true }, dimension: { scene: 'dimension', rho: 28, at: TD },
     fixed: { scene: 'rounds', rho: 14, seed: 0, at: TR, play: true }, cycle: { scene: 'rounds', rho: 160, seed: 0, at: TR, play: true, settle: 30 }
   };
   const NOTES = {
-    butterfly: ['两条轨道从相距很远的两点出发，参数相同。短暂游荡之后，它们落到同一对翅膀上；琥珀色的小点是每次经过遗迹邻域的地方。', 'Two orbits start from two distant points with the same parameters. After a short wander they land on the same pair of wings; the small amber dots mark each passage through the neighbourhood of the ruin.'],
     forget: ['换一对完全不同的起点：前面走过的路全忘了。参数没变，轨道还是落回同一对翅膀，照样一次次经过同一处。', 'Take two entirely different starts: everything walked before is forgotten. The parameters are the same, and the orbits fall back onto the same wings and pass the same place again and again.'],
     return: ['停在 t = 22：两轮都已经过遗迹。它们经过时的弧段并不重合，方向却几乎平行，内积 cos δθ 接近 1。', 'Stopped at t = 22: both rounds have passed the ruin. The arcs along which they passed do not coincide, yet their directions are nearly parallel and the inner product cos δθ is close to 1.'],
     shrink: ['500 个点从一个立方体里出发。不到一个时间单位，它们就被压到一张薄片上：体积按 e^(−41t/3) 缩小。', '500 points start inside a cube. In less than one unit of time they are pressed onto a thin sheet: the volume shrinks like e^(−41t/3).'],
@@ -321,7 +354,7 @@
   let booting = true;
   function applyPreset(id) {
     const p = PRESETS[id];
-    S.rho = p.rho; rhoChips.set(String(p.rho), true); if (p.seed != null) S.seed = p.seed; S.settle = p.settle || 0;
+    S.card = id; S.rho = p.rho; rhoChips.set(String(p.rho), true); if (p.seed != null) S.seed = p.seed; S.settle = p.settle || 0;
     setScene(p.scene, p.at);
     if (!p.play || TRV.still || (booting && !TRV.embed)) return;
     clock.set(0);
@@ -349,7 +382,7 @@
     cloudPoint: (k, f) => cloud(world(S.rho)).frames[f][k]
   };
   window.TRV_THUMB = () => { S.rho = 28; S.seed = 0; S.settle = 0; rhoChips.set('28', true); st.cam.zoom = 1.25; setScene('rounds', TR); paint.now(); };
-  cards.pick(cards.initial('butterfly'));
+  cards.pick(cards.initial('forget'));
   booting = false;
   paint();
 })();
