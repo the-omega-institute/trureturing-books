@@ -5,14 +5,19 @@
 // rules as tables (Fox's rule "equal stays, different gives the third" instead of 2x − y; y + 1 by a lookup), the
 // chapter's crossing / crossingInv on pairs and crossing₁ / crossing₂ on nested triples (x, (y, z)), closed colourings
 // counted by nested loops, and the geometry read off the page's sampled world lines: the winding angle of the pair,
-// which strand is nearer the viewer at a crossing, and where each strand ends.
+// which strand is nearer the viewer at a crossing, and where each strand ends; for the tubes of an open braid, that
+// no two of them meet (closest approach of the sampled axes against the tube diameter) and that where two cross on
+// screen the one in front is the one the page says (projection by a camera rebuilt here from yaw and pitch).
 // The page is read through window.BRAID_DEBUG.
 import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'braiding';
 const T = await session();
 const { check } = T;
-await stageFirstChecks(T, BOOK, ID);
+// The solid of this page is a handful of tubes, not a body that fills the stage: two tubes as thick as they can be
+// without meeting cover about 4% of it, so the opaque share asked of them is 3% (shading, turning, picking and the
+// rest after a rest are checked as for every solid).
+await stageFirstChecks(T, BOOK, ID, { solid: { minShare: 0.03 } });
 
 /* ---------- independent model ---------- */
 const FOX = [[0, 2, 1], [2, 1, 0], [1, 0, 2]];                 // x ⋆ y: equal colours stay, different give the third
@@ -46,6 +51,40 @@ function winding(pts, a, b) {
   return tot;
 }
 const close = (a, b, eps = 1e-6) => Math.abs(a - b) <= eps;
+/** Closest approach in space between any two different strands of a sampled braid (segment to segment). */
+function closest(pts) {
+  const seg = (p, q, r, s) => {      // distance between segments pq and rs, by a fine scan of both parameters
+    let best = Infinity;
+    for (let i = 0; i <= 8; i++) for (let j = 0; j <= 8; j++) {
+      const a = i / 8, b = j / 8, x = [0, 1, 2].map((k) => p[k] + (q[k] - p[k]) * a - (r[k] + (s[k] - r[k]) * b));
+      best = Math.min(best, Math.hypot(...x));
+    }
+    return best;
+  };
+  let best = Infinity;
+  for (let a = 0; a < pts.length; a++) for (let b = a + 1; b < pts.length; b++)
+    for (let i = 1; i < pts[a].length; i++) for (let j = 1; j < pts[b].length; j++) {
+      const P0 = pts[a][i - 1], Q0 = pts[b][j - 1];
+      if (Math.abs(P0[2] - Q0[2]) > 0.6) continue;          // far apart in height: cannot be the closest pair
+      best = Math.min(best, seg(P0, pts[a][i], Q0, pts[b][j]));
+    }
+  return best;
+}
+/** Where strands a and b cross on screen, seen by the camera (yaw, pitch): the depth of each there (larger = nearer). */
+function screenCrossing(pts, a, b, cam) {
+  const cy = Math.cos(cam.yaw), sy = Math.sin(cam.yaw), cp = Math.cos(cam.pitch), sp = Math.sin(cam.pitch);
+  const R = [cy, -sy, 0], U = [sy * sp, cy * sp, cp], Dv = [-sy * cp, -cy * cp, sp], dot = (u, v) => u[0] * v[0] + u[1] * v[1] + u[2] * v[2];
+  const pr = (p) => [dot(p, R), dot(p, U), dot(p, Dv)];
+  const A = pts[a].map(pr), B = pts[b].map(pr);
+  for (let i = 1; i < A.length; i++) for (let j = 1; j < B.length; j++) {
+    const p = A[i - 1], r = [A[i][0] - p[0], A[i][1] - p[1]], q = B[j - 1], s = [B[j][0] - q[0], B[j][1] - q[1]];
+    const den = r[0] * s[1] - r[1] * s[0];
+    if (Math.abs(den) < 1e-12) continue;
+    const u = ((q[0] - p[0]) * s[1] - (q[1] - p[1]) * s[0]) / den, v = ((q[0] - p[0]) * r[1] - (q[1] - p[1]) * r[0]) / den;
+    if (u >= 0 && u <= 1 && v >= 0 && v <= 1) return { a: p[2] + (A[i][2] - p[2]) * u, b: q[2] + (B[j][2] - q[2]) * v };
+  }
+  return null;
+}
 
 /* ---------- model sanity ---------- */
 let ok = true;
@@ -83,6 +122,10 @@ check('σ₁: the pair turns half a turn anticlockwise seen from above (+π)', c
 const mid = Math.floor(ln.pts[0].length / 2);
 check('σ₁: halfway, the strand that started on the left is nearer the viewer (y < 0) and the other behind', ln.pts[0][mid][1] < -0.3 && ln.pts[1][mid][1] > 0.3);
 check('σ₁: the left strand ends on the right slot and vice versa', close(ln.pts[0].at(-1)[0], ln.slots[1]) && close(ln.pts[1].at(-1)[0], ln.slots[0]));
+check('σ₁: the world lines are tubes (lit solid) while the braid is open', s.mode === 'webgl' && !s.closed && s.tube.r > 0);
+check('σ₁: the tubes read as tubes (diameter ≥ 12 px on the desktop stage) and do not meet (closest axes > diameter)', 2 * s.tube.px >= 12 && closest(ln.pts) > 2 * s.tube.r, JSON.stringify([s.tube, closest(ln.pts)]));
+let sx = screenCrossing(ln.pts, 0, 1, s.camera);
+check('σ₁: where the two tubes cross on screen, the strand that started on the left is the nearer one', !!sx && sx.a > sx.b + 2 * s.tube.r, JSON.stringify(sx));
 
 // clicking a bottom end recolours it
 let q = await Dv(() => window.BRAID_DEBUG.bottom(0));
@@ -98,12 +141,14 @@ const q1 = Math.floor(ln.pts[0].length * 3 / 4);
 // after σ₁ the strands have swapped slots: strand 0 now comes from the right
 check('σ₁⁻¹: the strand coming from the right passes in front this time', ln.pts[0][q1][1] < -0.3 && ln.pts[1][q1][1] > 0.3);
 check('σ₁σ₁⁻¹: every strand ends where it started', close(ln.pts[0].at(-1)[0], ln.slots[0]) && close(ln.pts[1].at(-1)[0], ln.slots[1]));
+check('σ₁σ₁⁻¹: the tubes do not meet', closest(ln.pts) > 2 * s.tube.r);
 
 // TWICE
 await pick('twice'); check('σ₁² plays', await played()); s = await state();
 check('σ₁²: (0, 1) arrives as (1, 2), not as the straight braid\'s (0, 1)', s.A.top.join() === '1,2' && s.B.top.join() === '0,1' && agreesA(s, D3));
 ln = await linesOf(0);
 check('σ₁²: the pair winds a full turn (2π) and each strand is back on its slot', close(winding(ln.pts, 0, 1), 2 * Math.PI, 1e-3) && close(ln.pts[0].at(-1)[0], ln.slots[0]));
+check('σ₁²: the two tubes wind round each other without meeting', closest(ln.pts) > 2 * s.tube.r, `${closest(ln.pts)}`);
 let anyBack = false;
 for (let a = 0; a < 3; a++) for (let b = 0; b < 3; b++) if (a !== b && run(D3, [a, b], [1, 1]).join() === [a, b].join()) anyBack = true;
 check('model: no two-colour start comes back after σ₁² (only the one-colour ones do)', !anyBack && count(D3, 2, [1, 1]) === 3);
@@ -121,11 +166,15 @@ for (let k = 0; k < 9; k++) {
 check('YB: after nine recolourings the two tops still agree, as the model says', all);
 ln = await linesOf(0); const lnB = await linesOf(1);
 check('YB: the two braids\' world lines differ (strand 1 halfway is elsewhere)', Math.abs(ln.pts[1][Math.floor(ln.pts[1].length / 2)][0] - ln.slots[0] - (lnB.pts[1][Math.floor(lnB.pts[1].length / 2)][0] - lnB.slots[0])) > 0.1);
+check('YB: no two of the three tubes meet, on either side', closest(ln.pts) > 2 * s.tube.r && closest(lnB.pts) > 2 * s.tube.r, JSON.stringify([closest(ln.pts), closest(lnB.pts), s.tube.r]));
+const gapAB = Math.min(...lnB.pts.flat().map((p) => p[0])) - Math.max(...ln.pts.flat().map((p) => p[0]));
+check('YB: the two braids stand apart (the nearest tubes of left and right are more than a slot apart)', gapAB > 0.8 + 2 * s.tube.r, gapAB.toFixed(3));
 
 // CLOSE
 await pick('close'); check('CLOSE plays', await played()); s = await state();
 check('CLOSE: closed, (0, 1) → (2, 0) clashes, 3 of 9 come back', s.closed && s.A.top.join() === '2,0' && s.A.count === 3 && count(D3, 2, [1]) === 3);
 check('CLOSE: the key readout prints 3 / 9', (await page.textContent('#roKey')).trim() === '3 / 9');
+check('CLOSE: a closed braid is the plane diagram: front view, legend names the diagram lines, not tubes', close(s.camera.yaw, 0) && close(s.camera.pitch, 0) && await page.$eval('#stage', (e) => e.classList.contains('closed') && getComputedStyle(e.querySelector('.lg-open')).display === 'none'));
 
 // STABILIZE
 await pick('stabilize'); check('+1 STRAND plays', await played()); s = await state();
