@@ -22,6 +22,7 @@ const DATA = {"kinds":["theorem","def","inductive"],"index":43,"units":[{"file":
   const IDX = DATA.index;                                               // the unit of Appendix C
   const COLS = DATA.units.map((u, i) => i).filter((i) => i !== IDX);    // units with a column, in reading order
   const NC = COLS.length, colOf = {};
+  $('src').max = String(NC - 1);
   COLS.forEach((u, c) => { colOf[u] = c; });
   const response = await fetch('../assets/trureturing.json', { cache: 'no-store' });
   if (!response.ok) throw new Error(`Cannot load publication lock: ${response.status}`);

@@ -14,7 +14,7 @@
    并通过双侧夹心积 $v \mapsto R v \widetilde{R}$ 一步算出三维方向向量 $v \in \mathbb{R}^3$ 的精确转向？
 
 ::: {.figure src="ch26-overview"}
-**图 26。** 本章地图：左栏，绿色的布洛赫球，琥珀色的纯态箭头伸到球面 $\lvert r\rvert = 1$，墨色的点在球内，迹为 $1$ 的正半定矩阵都落在这里（[@prop-hermitian-bloch-geometry]、[@cor-psd-bloch-ball-bound]）；中栏，夹心积绕紫色的 $z$ 轴转 $90^\circ$，青色的影子留在轴上，品红的扇形被虚线分成两个半角；右栏，$e_1$ 依次绕 $z$、$y$、$z$ 转过 $(\alpha, \beta, \gamma) = (0.37, -0.81, 0.52)$，琥珀色的三段路停在 $R e_1 \widetilde{R}$（旋子编译是数值演示，没有冻结定理）。
+**图 26。** 本章地图：左栏，绿色的布洛赫球，琥珀色的纯态箭头伸到球面 $\lvert r\rvert = 1$，墨色的点在球内，迹为 $1$ 的正半定矩阵都落在这里（[@prop-hermitian-bloch-geometry]、[@cor-psd-bloch-ball-bound]）；中栏，夹心积绕紫色的 $z$ 轴转 $90^\circ$，青色的影子留在轴上，品红的扇形被虚线分成两个半角；右栏，$e_1$ 按旋子乘积的作用顺序先绕 $z$ 转 $\gamma$、再绕 $y$ 转 $\beta$、最后绕 $z$ 转 $\alpha$，参数组写作 $(\alpha, \beta, \gamma) = (0.37, -0.81, 0.52)$，琥珀色的三段路停在 $R e_1 \widetilde{R}$（旋子编译是数值演示，没有冻结定理）。
 :::
 
 ## 布洛赫矩阵的迹与坐标还原 {#sec-bloch-matrix-trace-and-recovery}

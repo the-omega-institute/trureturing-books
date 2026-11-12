@@ -22,7 +22,7 @@
     ], "cues": [{"line": 1, "at": 3.6, "kind": "chime"}]},
     {"id": "fold", "name": "ONE AXIS", "lead": 0.5, "tail": 0.5, "music": [1.0, 0.8, 0.7, 0.5, 0.4], "lines": [
       ["The literature says more: every unit rotor is a single turn about a single axis.", "文献结果说得更多：每一枚单位旋转器都是绕一根轴的一次转动。"],
-      ["Here the axis comes from the bivector part, and the angle is twice the arc cosine of the scalar: sixty-seven point nine degrees.", "这里转轴取自双矢量部分，转角是标量的反余弦的两倍：2 arccos 0.830 = 67.9°。"],
+      ["Here the axis comes from the bivector part, and the angle is twice the arc cosine of the scalar: sixty-seven point nine degrees.", "这里转轴取自双矢量部分，转角是标量的反余弦的两倍：标量约为 0.829591626，2 arccos(0.829591626) ≈ 67.9°。"],
       ["One turn lands exactly where the three turns did.", "这一次转动，正好落在三段转动走到的那一点。"]
     ], "cues": [{"line": 2, "at": 2.0, "kind": "impact"}]},
     {"id": "gates", "name": "T AND H", "lead": 0.5, "tail": 0.5, "music": [0.9, 0.9, 0.9, 0.7, 0.6], "lines": [

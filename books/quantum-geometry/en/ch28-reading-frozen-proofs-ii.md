@@ -53,7 +53,7 @@ theorem rank_one_pure_state_modulus_square_reduction
     (Complex.normSq_eq_conj_mul_self (z := star phi ⬝ᵥ psi)).symm
 ```
 
-Tracing the nine rewrites inside `rw [...]` step by step:
+Tracing the ten rewrites inside `rw [...]` step by step:
 
 1. `recordWeight` and `bornProbability` unfold the left-hand side to $\Tr(\rho \cdot P_k)$;
 2. `hPureState` and `hProjection` substitute $\operatorname{vecMulVec}(\psi, \operatorname{star}\psi)$ and $\operatorname{vecMulVec}(\phi, \operatorname{star}\phi)$;

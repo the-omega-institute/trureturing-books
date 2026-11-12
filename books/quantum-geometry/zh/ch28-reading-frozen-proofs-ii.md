@@ -53,7 +53,7 @@ theorem rank_one_pure_state_modulus_square_reduction
     (Complex.normSq_eq_conj_mul_self (z := star phi ⬝ᵥ psi)).symm
 ```
 
-让我们逐项追踪 `rw` 链条中的 9 个重写动作：
+让我们逐项追踪 `rw` 链条中的 10 个重写动作：
 
 1. `recordWeight` 与 `bornProbability` 展开目标左端为 $\Tr(\rho \cdot P_k)$；
 2. `hPureState` 与 `hProjection` 将 $\rho$ 与 $P_k$ 替换为两个秩一外积 $\operatorname{vecMulVec}(\psi, \operatorname{star}\psi)$ 与 $\operatorname{vecMulVec}(\phi, \operatorname{star}\phi)$；

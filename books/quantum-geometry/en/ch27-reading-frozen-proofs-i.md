@@ -22,7 +22,7 @@ In this chapter and [Chapter 28](ch28-reading-frozen-proofs-ii.md), we open the 
 In the `trureturing` verification pipeline, every green theorem in this book passes three machine-enforced stages:
 
 1. **Define**: Every mathematical object — such as a real inner-product space `InnerProductSpace ℝ E`, a square complex matrix `Matrix n n ℂ`, the positive-semidefinite predicate `Matrix.PosSemidef`, or a projective record measurement `IsRecordMeasurement P` — is defined unambiguously in dependent type theory;
-2. **State**: The theorem header specifies all typeclass instances and explicit hypotheses, producing a canonical SHA-256 `statement_id` recorded in `Golden/Frozen/state/<module>.lean.json` and locked in `trureturing.lock.json`;
+2. **State**: The theorem header specifies all typeclass instances and explicit hypotheses; the source module produces a module-level SHA-256 `statement_id`, recorded in `Golden/Frozen/state/<module>.lean.json`, which may be shared by several declarations in that module;
 3. **Prove**: The proof term is checked by the Lean 4 kernel with zero `sorry` placeholders and only standard foundational axioms (`propext`, `Classical.choice`, `Quot.sound`, verified in source files via `#print axioms`).
 
 We begin by auditing two cornerstone declarations from Part I: the parallelogram norm identity and the finite-dimensional Born probability skeleton (Panel I of Figure 27).
@@ -52,7 +52,7 @@ Why must `parallelogram_law_with_norm` and `norm_add_sq_real` square 1D vectors 
 
 > **Author's original words**: "Pythagoras — all things are number — the Pythagorean theorem (毕达哥拉斯 万物皆数 勾股定理)."
 
-**From non-additive 1D lengths to grade-0 area scalars and canceling grade-2 bivector orientations**: In a positive-definite Euclidean inner-product space, let two orthogonal vectors $\vv{a} \perp \vv{b}$ have scalar norms $a = \norm{\vv{a}}, b = \norm{\vv{b}}, c = \norm{\vv{a} + \vv{b}}$. Their 1D lengths cannot add linearly ($a + b \neq c$) because they point along perpendicular axes. In positive-definite Euclidean Clifford geometric algebra, squaring the resultant $\vv{c} = \vv{a} + \vv{b}$ yields
+**From non-additive 1D lengths to grade-0 area scalars and canceling grade-2 bivector orientations**: In a positive-definite Euclidean inner-product space, let two orthogonal vectors $\vv{a} \perp \vv{b}$ have scalar norms $a = \norm{\vv{a}}, b = \norm{\vv{b}}, c = \norm{\vv{a} + \vv{b}}$. When both vectors are non-zero, their 1D lengths cannot add linearly ($a + b \neq c$) because they point along perpendicular axes; if one vector is zero, that strict inequality degenerates to equality. In positive-definite Euclidean Clifford geometric algebra, squaring the resultant $\vv{c} = \vv{a} + \vv{b}$ yields
 
 $$
 \vv{c}^2 = (\vv{a} + \vv{b})(\vv{a} + \vv{b}) = \vv{a}^2 + \vv{b}^2 + (\vv{a}\vv{b} + \vv{b}\vv{a}) = a^2 + b^2 + 2(\vv{a}\cdot\vv{b}) + (\vv{a}\wedge\vv{b} + \vv{b}\wedge\vv{a}).
