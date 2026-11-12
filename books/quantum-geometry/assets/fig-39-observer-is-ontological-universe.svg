@@ -55,7 +55,7 @@
     <!-- Left Panel Card 1: Diagonal Fixed Point & Four Fates -->
     <rect x="30" y="234" width="330" height="70" rx="6" fill="#050c16" stroke="#46ffb2" stroke-width="1.2"/>
     <text x="40" y="250" fill="#46ffb2" font-size="8.5" font-weight="600">LEAN · 对角自指落点与四重自应用命运</text>
-    <text x="40" y="266" fill="#d4efff" font-size="8">g a₀ = diagonal f g ⟹ f(g(a₀,a₀)) = g(a₀,a₀)</text>
+    <text font-family="New Computer Modern Math,JetBrains Mono,monospace" x="40" y="266" fill="#d4efff" font-size="8">g a₀ = diagonal f g ⟹ f(g(a₀,a₀)) = g(a₀,a₀)</text>
     <text x="40" y="281" fill="#cfe3ff" font-size="7.8">∃! fate ∈ {empty, dead, collapse, live}</text>
     <text x="40" y="296" fill="#46ffb2" font-size="7.9">HasFate m .live ⇔ IsPhiFamily m  (Δ = 1² + 4 = 5)</text>
 

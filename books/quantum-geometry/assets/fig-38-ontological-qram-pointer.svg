@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" width="960" height="440">
   <title>第38章 · 宇宙本体 QRAM、观察者记忆指针与递归自映射页表 / Chapter 38 · Ontological QRAM, Observer Memory Pointer, and Recursive Self-Mapped Page Table</title>
-  <desc>Two-panel architectural diagram. Left panel: static 8x8 Ontological QRAM crystal grid with binary routing tree, high-RefCount shared borrow cell (ptr_A == ptr_B), active *ptr dereference cell, and cyan-violet Slot [0,0] recursive self-map (p = *p). Right panel: five-part Observer Pointer Register anatomy (Base u in E_perp^3, MMU Bounds P_body, TLB Table T, shared &amp;State borrow, *ptr++ laser) contrasting dangling ptr = NULL (cos 90 deg = 0 GC wipe) against multi-level p = *p discrete indirection (cos theta_k = sech eta_k &gt; 0).</desc>
+  <desc>Two-panel architectural MODEL. Left: static 8x8 QRAM grid, routing tree, chosen shared borrow cell, active dereference and root self-address. Right: pointer anatomy with N ≤ d for Hilbert dimension d (b bits: d=2^b), chosen shared references and indexed views [1,2] data, [0,1] leaf table, [0,0] root. Repeated zero-slot dereferencing stays at the root. Self-address storage differs from an execution rule; diagonal capture requires equality of the whole row. Finite-step sech positivity differs from MODEL rules for root residency, memory retention and full-domain access.</desc>
 
   <!-- Outer Cyberpunk Frame -->
   <rect x="6" y="6" width="948" height="428" rx="14" fill="#03060c" stroke="#143049" stroke-width="2"/>
@@ -89,8 +89,8 @@
     <!-- Callout 1: Slot [0,0] Recursive Self-Map -->
     <rect x="252" y="152" width="196" height="68" rx="6" fill="#050c16" stroke="#9d8cff" stroke-width="1.3"/>
     <text x="260" y="168" fill="#9d8cff" font-size="8.8" font-weight="600">MODEL: Slot [0,0] 递归自映射 p = *p</text>
-    <text x="260" y="183" fill="#d4efff" font-size="8.4">P[0] = addr(P)  (ψ = ψ(ψ))</text>
-    <text x="260" y="198" fill="#46ffb2" font-size="8.1">LEAN: f(g(a₀,a₀)) = g(a₀,a₀)</text>
+    <text x="260" y="183" fill="#d4efff" font-size="8.4">P[0] = addr(P) · MODEL: ψ = ψ(ψ)</text>
+    <text x="260" y="198" fill="#46ffb2" font-size="8.1">LEAN: g(a₀)=diagonal f g ⇒ fixed</text>
     <text x="260" y="212" fill="#46ffb2" font-size="8">LEAN: φ = (1+√5)/2 unique</text>
     <line x1="61" y1="174" x2="252" y2="174" stroke="#9d8cff" stroke-width="1.1" stroke-dasharray="4,3"/>
 
@@ -102,8 +102,8 @@
 
     <!-- Callout 3: Shared Borrow & RefCount Aliasing -->
     <rect x="252" y="294" width="196" height="64" rx="6" fill="#050c16" stroke="#ff2fd0" stroke-width="1.2"/>
-    <text x="260" y="310" fill="#ff2fd0" font-size="8.8" font-weight="600">共享借用 &amp;State / 高 RefCount</text>
-    <text x="260" y="325" fill="#d4efff" font-size="8.2">古迹常驻热点 · 重逢 ptr_A==ptr_B</text>
+    <text x="260" y="310" fill="#ff2fd0" font-size="8.8" font-weight="600">MODEL: 共享借用 &amp;State / Shared</text>
+    <text x="260" y="325" fill="#d4efff" font-size="8.2">MODEL 古迹常驻 · ptr_A==ptr_B</text>
     <text x="260" y="340" fill="#46ffb2" font-size="8">LEAN: ⟨φ,ψ⟩ = ⟨φ,ψ⟩² (禁克隆内积判据)</text>
     <text x="260" y="352" fill="#46ffb2" font-size="7.8">LEAN: Bell 纯态单边偏迹 ρ_A = I/2</text>
     <line x1="113" y1="299" x2="252" y2="318" stroke="#ff2fd0" stroke-width="1.1" stroke-dasharray="3,3"/>
@@ -116,7 +116,7 @@
 
     <!-- Top Sub-Panel: 5-Part Hardware Register Stack -->
     <rect x="492" y="105" width="436" height="136" rx="8" fill="#050c16" stroke="#1f5d7c" stroke-width="1.2"/>
-    <text x="504" y="122" fill="#19f0ff" font-size="9.3" font-weight="600">观察者寄存器 ptr (LEAN 位宽上限 / Register Width: N ≤ d)</text>
+    <text x="504" y="122" fill="#19f0ff" font-size="9.3" font-weight="600">观察者 ptr (LEAN 维数 / Dimension: N ≤ d; d=2ᵇ)</text>
     <text x="916" y="122" text-anchor="end" fill="#ff5064" font-size="8.3">OPEN: 局部 P ≠ NP</text>
 
     <!-- Register Row 1 & 2 -->
@@ -140,7 +140,7 @@
     <!-- Register Row 5 (Full width) -->
     <rect x="504" y="198" width="412" height="34" rx="4" fill="#07101b" stroke="#ff2fd0" stroke-width="1.1"/>
     <text x="512" y="212" fill="#ff2fd0" font-size="8.4" font-weight="600">5. 禁深拷贝与共享引用 Borrow (&amp;State / RefCount) · 指针别名共振</text>
-    <text x="512" y="225" fill="#d4efff" font-size="7.9">No memcpy of superpositions → shared window W_AB &amp; reunion ptr_A == ptr_B</text>
+    <text x="512" y="225" fill="#d4efff" font-size="7.9">No universal exact cloning; MODEL: shared W_AB &amp; reunion ptr_A == ptr_B</text>
 
     <!-- Active *ptr++ Laser Beam from Pointer Register across panels to Cell (3,5) -->
     <line x1="492" y1="215" x2="191" y2="248" stroke="#19f0ff" stroke-width="2" stroke-opacity="0.88"/>
@@ -153,7 +153,7 @@
     <rect x="492" y="250" width="212" height="126" rx="8" fill="#050c16" stroke="#ff8a3c" stroke-width="1.4"/>
     <text x="598" y="268" text-anchor="middle" fill="#ff8a3c" font-size="9.2" font-weight="600">A · 未自映射越界 / NULL RESET</text>
     <text x="502" y="286" fill="#d4efff" font-size="8.2">栈溢出 det G → 0 滑入 θ = 90°</text>
-    <text x="502" y="302" fill="#ff8a3c" font-size="8.6" font-weight="600">cos 90° = 0 ⟹ ptr = NULL</text>
+    <text font-family="New Computer Modern Math,JetBrains Mono,monospace" x="502" y="302" fill="#ff8a3c" font-size="8.6" font-weight="600">cos 90° = 0 ⟹ ptr = NULL</text>
     <text x="502" y="318" fill="#9d8cff" font-size="8.1">MODEL: GC Wipe 清空私有快表 T</text>
     <text x="502" y="334" fill="#cfe3ff" font-size="8">0x0000 冷启动重分配 (受精闪光)</text>
     <text x="502" y="350" fill="#6f8ea5" font-size="7.7">Dangling null pointer triggers</text>
@@ -162,12 +162,12 @@
     <!-- Fate B: Self-Mapped Recursive Page Table p = *p -->
     <rect x="716" y="250" width="212" height="126" rx="8" fill="#050c16" stroke="#19f0ff" stroke-width="1.5"/>
     <text x="822" y="268" text-anchor="middle" fill="#19f0ff" font-size="9.2" font-weight="600">B · 递归自映射 / p = *p LADDER</text>
-    <text x="726" y="286" fill="#d4efff" font-size="8.2">多级离散间接寻址 *p → **p → ***p</text>
+    <text x="726" y="286" fill="#d4efff" font-size="8.2">[1,2] 数据 · [0,1] 叶表 · [0,0] 根</text>
     <text x="726" y="302" fill="#9d8cff" font-size="8.5" font-weight="600">η_k = η₀+kΔη · cos θ_k = sech η_k &gt; 0</text>
     <text x="726" y="318" fill="#19f0ff" font-size="8.2">MODEL: ptr != NULL · Slot [0,0] 根表常驻</text>
-    <text x="726" y="334" fill="#cfe3ff" font-size="8">算法入表 (ψ = ψ(ψ)) 渐近遍历全域</text>
-    <text x="726" y="350" fill="#6f8ea5" font-size="7.7">Root TLB entry preserved; spans</text>
-    <text x="726" y="363" fill="#6f8ea5" font-size="7.7">full QRAM with zero GC wipe</text>
+    <text x="726" y="334" fill="#cfe3ff" font-size="8">MODEL: 执行规则入表 · 全域寻址</text>
+    <text x="726" y="350" fill="#6f8ea5" font-size="7.7">MODEL: root kept; indices span</text>
+    <text x="726" y="363" fill="#6f8ea5" font-size="7.7">QRAM; zero-slot loops stay root</text>
   </g>
 
   <!-- Bottom Formal Verification Banner -->
