@@ -95,6 +95,8 @@ check('ADDRESS: v₁, v₂ and Δ(O) = sin θ [O₁(cos φ − 1) + O₂ sin φ]
 s = await pick('sweep');
 check('SWEEP: the observer stands at +e₃, and the card plays', vclose(s.O, E3, 1e-12) && s.trail && await until(page, () => window.DEGEN_DEBUG.state.t > 0));
 check('SWEEP runs once round and stops', await until(page, () => { const d = window.DEGEN_DEBUG.state; return !d.playing && d.t >= 2 * Math.PI - 1e-9; }, null, 120000));
+const legendFaint = () => page.evaluate(() => /淡线|faint/.test(document.getElementById('legend').textContent));
+check('SWEEP: the legend names the faint circles the caption calls the ones already passed', await legendFaint());
 worst = 0;
 for (let k = 1; k < 24; k++) { s = await seek(k * TAU / 24); worst = Math.max(worst, Math.abs(s.gap), Math.abs(s.ra - 0.5), Math.abs(dot(s.blind, E3)), Math.abs(dot(s.blind, sub(s.b, s.a)) - norm(sub(s.b, s.a)))); }
 check('SWEEP: at every φ the pole reads cos θ = ½ twice, and each blind circle contains ±e₃ and is orthogonal to v₂ − v₁', worst < 1e-12, `max error ${worst}`);
@@ -112,6 +114,7 @@ check('brute force over 16 380 grid observers: only ±e₃ read twelve azimuths 
 // TILTED: the spread is 2 sin θ sin β
 s = await pick('tilted');
 await until(page, () => !window.DEGEN_DEBUG.state.playing, null, 120000);
+check('TILTED draws no trail, and its legend does not mention faint circles', !(await state()).trail && !(await legendFaint()));
 const Ot = sph(PI / 4, PI / 2);
 check('TILTED: the observer is 45° from the pole in the e₂∧e₃ plane', vclose(s.O, Ot, 1e-12));
 let lo = Infinity, hi = -Infinity;

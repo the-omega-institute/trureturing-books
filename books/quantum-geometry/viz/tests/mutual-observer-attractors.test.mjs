@@ -66,6 +66,9 @@ s = await seek(10);
 const rounds = [0.1, 0.544499, 0.655927, 0.702079, 0.722420, 0.731547];
 check('ONE-ROUND: every second beat matches the mutual column of the chapter\'s table, y_k = x_{2k}', s.view === 'round' && rounds.every((v, k) => Math.abs(s.xs[2 * k] - v) < 5e-7 && (k === 0 || Math.abs(g(s.xs[2 * k - 2]) - s.xs[2 * k]) < 1e-14)));
 check('ONE-ROUND: the round samples stay below θ* and rise monotonically', [0, 2, 4, 6, 8].every((t) => s.xs[t] < s.xs[t + 2] && s.xs[t + 2] < THETA));
+{ // the card note: the rings are the even beats of the same-start orbit, so 2k cosine evaluations land in the same place either way
+  let x = 0.1, ok = true; for (let n = 0; n <= 10; n++) { if (Math.abs(s.xs[n] - x) > 1e-14) ok = false; x = Math.cos(x); }
+  check('ONE-ROUND: no speed-up — beat n of the orbit is n plain cosine evaluations of 0.1, and the ring after k rounds is beat 2k', ok); }
 
 // any start in [0, 1.5]²: rounds monotone towards θ* and the limit is the consensus point
 let okAll = true;

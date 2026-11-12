@@ -216,7 +216,7 @@ $$
    请细读下方 [@thm-ch35-lawvere-diagonal-and-homoiconic-closure] 第 1 款的四个合取项：当修饰映射 $f$ **没有不动点**时，自作用对角线 $\operatorname{diagonal}(f, h)(a) = f(h(a, a))$ 必然逃逸一切列表 $h$（第 3 项）；反之，第 4 项用显式二元见证证明“无不动点”假设绝不可省——**一旦表内捕获了自身的对角线行，落点地址上的自作用值就必然锁定在不动点上**！当表 $T$ 不再外求更高一层的元解释器，而是用自己第 $0$ 行的查表算子直接索引并重写表 $T$ 自身，且给定更新映射确实满足正交投影收缩条件（[第 32 章](ch32-unified-field-and-meta-unification.md) [@thm-ch32-generative-self-reference-and-zeckendorf] 与[第 24 章](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature]）而收敛稳定时，解释器追问在本模型中收束为**同像自指闭环**：
 
 ::: {.viz src="self-referential-table" preset="diagonal" height="500"}
-**对角格自己读自己。** 第 $4$ 行与第 $4$ 列是同一串数，八个乘积都是平方，全是青色；加起来是这一行的长度平方，正好回到对角格 $T_{44}$ 本身。
+**对角格自己读自己。** 第 $4$ 行与第 $4$ 列是同一串数，八个乘积都是平方，全是青色；加起来是这一行的长度平方，正好回到对角格 $T_{44}$ 本身。这只是 $T^2 = T$ 落在对角格上的一项 $T_{kk} = \sum_j T_{kj}^2$，不是在演示下面的 [@thm-ch35-lawvere-diagonal-and-homoiconic-closure]：那条定理讲修饰映射没有不动点时对角线逃出一切列表，这张表上画不出来。
 :::
 
 $$
