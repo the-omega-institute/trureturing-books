@@ -424,7 +424,7 @@ SCENES.diag = S => {
   }
   if (rowA >= 0) box(gx - 4, gy + rowA * c - 4, n * c + 8, c + 8, C.now, a * (sw > 0.5 ? Q(S, 2, 'some row', 0.5) : 1), 3);
   /* the diagonal, read in line 0 */
-  const qd = Q(S, 0, 'Read the diagonal', 1.2);
+  const qd = Q(S, 0, 'read the diagonal', 1.2);
   for (let k = 0; k < n; k++) {
     const p = clamp(qd * 4 - k);
     if (p > 0) box(gx + k * c + 8, gy + k * c + 8, c - 16, c - 16, C.now, a * p, 2.5);

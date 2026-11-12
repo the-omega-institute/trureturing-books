@@ -6,7 +6,7 @@
   "summary_zh": "指针要查页表才能读到内存，可页表本身也住在内存里；请更大的表来读它，就没有尽头。把页目录自己的地址写进零号槽，倒退就停了：在本章的四槽页目录上，索引 [1, 2] 读到数据帧，[0, 1] 把叶页表当作数据交回，[0, 0] 回到原处，p = *p。第三十八章把它与两条对角线定理并读：没有不动点的映射逃出每一张表，捕获对角线的那一行落在不动点上。接着，旋量转过 360°，向量 J 回来了，旋量自己却变了号；圆周的平方双覆叠把一整圈从 1 提升到 −1，要 720° 才回来，而且没有连续的全局截面，正如第三十九章的 Lean 定理所述。",
   "subject": "https://github.com/the-omega-institute/trureturing",
   "released": "2026-11-12",
-  "duration": "0:30",
+  "duration": "2:06",
   "resolution": "1280x720@30",
   "style": "trureturing cyberpunk · a self-mapped page directory, the diagonal of a table, a spinor's half turn and the double cover of the circle",
   "narration": {
