@@ -181,7 +181,10 @@
     g.line([[0.05, val], [4.95, val]], P.amber, { width: 2.6 * TH, glow: 12 });
     if (hidden) g.line([[0.05, q.S], [4.95, q.S]], P.ink, { width: 1.3 * TH, dash: [2, 3], alpha: 0.8 });
     if (!TRV.thumbMode) {
-      tagAt('gS', g, 4.5, val, fix(val, 3), 'raw hot', 0, val >= 0 ? -11 : 11);
+      // the value sits on the side of the bar away from a magenta mark just beyond it (e.g. 2.5 under √7)
+      const crowd = !hidden && Math.abs(val) > 1e-9 && ar.hi - Math.abs(val) > 0.02 && ar.hi - Math.abs(val) < 0.4;
+      const up = (val >= 0) !== crowd;
+      tagAt('gS', g, 4.5, val, fix(val, 3), 'raw hot', 0, up ? -11 : 11);
       if (hidden) tagAt('gQ', g, 2, q.S, L(`贝尔态 ${fix(q.S, 3)}`, `Bell state ${fix(q.S, 3)}`), 'raw ink', 0, q.S > cl.S + 0.3 ? -10 : 12);
       const hiTxt = Math.abs(ar.hi - TOP) < 1e-3 ? '' : `√(4+N) ${fix(ar.hi, 3)}`;
       if (!hidden && hiTxt && Math.abs(ar.hi - val) > 0.18 && Math.abs(ar.hi - 2) > 0.12) tagAt('gHi', g, 2, ar.hi, hiTxt, 'raw mg', 0, ar.hi > val ? -10 : 10);
@@ -346,7 +349,7 @@
     cross: { scene: 'dial', a0: 0, a1: 90, beta: 90, still: 0 },
     sweep: { scene: 'dial', a0: 0, a1: 90, beta: 90, from: 0, to: 90, still: 20 },
     tsirelson: { scene: 'dial', a0: 0, a1: 90, beta: 90, still: 45 },
-    hidden: { scene: 'hidden', a0: 0, a1: 90, beta: 90, from: 0, to: 90, still: 45 },
+    hidden: { scene: 'hidden', a0: 0, a1: 90, beta: 90, from: 0, to: 180, still: 120 },
     arc: { scene: 'arc', a0: 0, a1: 90, beta: 90, still: 45 }
   };
   const NOTES = {
@@ -355,7 +358,7 @@
     cross: ['两侧都张成直角，两块品红面积都是整个正方形，N = 4，品红的刻度升到量尺顶上的 2√2。可 Bob 的十字架与 Alice 的对齐（B₀ 在 A₀ 上，B₁ 与 A₁ 相反），四段青色只是 1 + 0 + 0 + 1 = 2：天花板到了顶，CHSH 值还在经典上界上。', 'Both sides open a right angle, both magenta areas are full squares, N = 4, and the magenta mark rises to 2√2 at the top of the gauge. But Bob\'s cross is aligned with Alice\'s (B₀ on A₀, B₁ opposite A₁), so the four cyan steps are just 1 + 0 + 0 + 1 = 2: the ceiling is at the top, the CHSH value still on the classical bound.'],
     sweep: ['两侧都是直角，时间轴把 Bob 的十字架从 0° 转到 90°：琥珀色的横线按 2√2 cos(φ − 45°) 起落，在 0° 与 90° 是 2，只在 45° 碰到品红的刻度 2√2。停在 20° 时，它是 2.563。', 'Both sides at right angles; the rail turns Bob\'s cross from 0° to 90°. The amber bar rises and falls as 2√2 cos(φ − 45°): 2 at 0° and at 90°, touching the magenta mark 2√2 only at 45°. Stopped at 20° it reads 2.563.'],
     tsirelson: ['Bob 的十字架转过 45°：B₀ 在 A₀ 与 A₁ 正中，B₁ 在 −45°。三对方向夹 45°，第四对 A₁、B₁ 夹 135°。四段青色各长 0.707，最后一段的余弦是负的、前面又是减号，也往上叠，合计 2√2 ≈ 2.828，正好顶到品红的刻度与量尺顶上的线。', 'Bob\'s cross turned by 45°: B₀ halfway between A₀ and A₁, B₁ at −45°. Three pairs meet at 45°, the fourth pair A₁, B₁ at 135°. Each cyan step is 0.707; the last cosine is negative and carries a minus sign, so it stacks upward too, for 2√2 ≈ 2.828 in all, right at the magenta mark and the line at the top of the gauge.'],
-    hidden: ['同样的两个十字架，换成经典的隐方向模型：环上 360 个刻度，每个隐方向的 CHSH 值只能是 +2（青色）或 −2（品红）。Bob 的十字架从 0° 转到 90°，360 个刻度全是青色，琥珀色的横线钉在 2；点线是贝尔态上的 ⟨S⟩，在 45° 升到 2.828。', 'The same two crosses against the classical hidden-direction model: 360 ticks on the ring, and each hidden direction gives a CHSH value of only +2 (cyan) or −2 (magenta). As Bob\'s cross turns from 0° to 90° all 360 ticks stay cyan and the amber bar stays pinned at 2; the dotted line is ⟨S⟩ on the Bell state, rising to 2.828 at 45°.'],
+    hidden: ['同样的两个十字架，换成经典的隐方向模型：环上 360 个刻度，每个隐方向的 CHSH 值只能是 +2（青色）或 −2（品红）。Bob 的十字架从 0° 转到 180°：到 90° 为止 360 个刻度全是青色，琥珀色的横线钉在 2；再往后品红的刻度越来越多，横线跟着往下落，到 180° 是 −2。停在 120° 时 240 个青色、120 个品红，横线在 (240 · 2 − 120 · 2)/360 ≈ 0.667。点线是贝尔态上的 ⟨S⟩，在 45° 升到 2.828，在 120° 是 0.732。', 'The same two crosses against the classical hidden-direction model: 360 ticks on the ring, and each hidden direction gives a CHSH value of only +2 (cyan) or −2 (magenta). As Bob\'s cross turns from 0° to 180°, up to 90° all 360 ticks stay cyan and the amber bar stays pinned at 2; after that more and more ticks turn magenta and the bar sinks with them, to −2 at 180°. Stopped at 120° there are 240 cyan and 120 magenta ticks, and the bar sits at (240 · 2 − 120 · 2)/360 ≈ 0.667. The dotted line is ⟨S⟩ on the Bell state: 2.828 at 45°, 0.732 at 120°.'],
     arc: ['横轴是两方向的夹角。三对方向落在 45°，青色的弧比暗色的折线高 0.207；第四对落在 135°，弧比折线低 0.207，这一项带减号，也算 +0.207。四段品红合计 0.828 = 2√2 − 2：弧上的四个点叠成 2.828，折线上的叠成 2。在 0°、90°、180° 弧与折线重合。', 'The horizontal axis is the angle between two directions. Three pairs land at 45°, where the cyan arc stands 0.207 above the dark polyline; the fourth lands at 135°, where the arc is 0.207 below it, and with its minus sign that also counts +0.207. The four magenta segments add up to 0.828 = 2√2 − 2: the points on the arc stack to 2.828, those on the line to 2. Arc and line meet at 0°, 90° and 180°.']
   };
   let booting = true, tw = null;
@@ -405,6 +408,8 @@
     /** The polyline of the arc scene: the toy correlation at 0°, 0.5°, …, 180°. */
     toyLine: () => TOY_LINE.map((p) => p.slice()),
     seek: (phi) => setPhi(phi),
+    /** Viewport y of the value v on the gauge (null before the first draw). */
+    gaugeY: (v) => { if (!gaugeG) return null; return $('cv').getBoundingClientRect().top + gaugeG.Y(v); },
     /** Viewport coordinates of the point at angle `a` and radius `r` on the dial (null outside the dial scenes). */
     dialPoint: (a, r) => { const b = $('cv').getBoundingClientRect(); if (!dialG || S.scene === 'arc') return null; const p = pt(a, r); return [b.left + dialG.X(p[0]), b.top + dialG.Y(p[1])]; }
   };

@@ -6,6 +6,7 @@
 // products of n·σ = cos θ Z + sin θ X, its expectation on |Φ⁺⟩, its eigenvalues by Jacobi rotations, S² − 4I; the
 // toy model with unit vectors and signs of dot products; and the maximum over Bob's turn by a grid search refined
 // by golden-section steps. It reads the page through window.CHSH_DEBUG.
+import fs from 'node:fs';
 import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'chsh-dial';
@@ -129,7 +130,7 @@ check('TURN BOB: at 20° the value is 2.563', close(s.S, 2 * R2 * Math.cos(25 * 
 // HIDDEN ±2: the finite fiber model
 await pick('hidden');
 check('HIDDEN plays by itself', await plays());
-check('HIDDEN stops at φ = 90°', await stopsAt(90));
+check('HIDDEN stops at φ = 180° by itself', await stopsAt(180));
 s = await state();
 check('HIDDEN: the scene is the hidden-direction model', s.scene === 'hidden');
 let allPlus = true, worstToy = 0;
@@ -198,7 +199,31 @@ await page.click('#sceneChips [data-scene="hidden"]'); check('the scene chips sw
 
 // English
 await page.click('[data-lang-set="en"]'); await pick('hidden'); await until(page, () => !window.CHSH_DEBUG.state.playing, undefined, 180000);
-check('English: the HUD reads “hidden-direction model · 360/360 give +2”', (await page.textContent('#hudSub')).includes('hidden-direction model · 360/360 give +2'));
+s = await state();
+check('English: the HUD reads “hidden-direction model · k/360 give +2” with the count of the stop', (await page.textContent('#hudSub')).includes(`hidden-direction model · ${toy(s.dirs).per.filter((c) => c > 0).length}/360 give +2`));
+
+/* ---------- the cited stills: the frame each figure shows against its caption and its card note ---------- */
+const chapter = (lang) => fs.readFileSync(new URL(`../../${lang}/ch13-entanglement-and-chsh.md`, import.meta.url), 'utf8');
+const caption = (lang, card) => { const m = new RegExp(`::: \\{\\.viz src="chsh-dial" preset="${card}"[^}]*\\}\\n([\\s\\S]*?)\\n:::`).exec(chapter(lang)); return m ? m[1] : ''; };
+const shot = await T.newPage();
+for (const lang of ['zh', 'en']) {
+  await T.goto(BOOK, ID, `?shot=1&lang=${lang}&preset=hidden`, shot); await settle(shot);
+  const h = await shot.evaluate(() => window.CHSH_DEBUG.state), t = toy(h.dirs);
+  const plus = t.per.filter((c) => c === 2).length, minus = t.per.filter((c) => c === -2).length;
+  const bell = expect(opOf(h.dirs)), cap = caption(lang, 'hidden'), note = await shot.textContent('#presetNote');
+  check(`HIDDEN still (${lang}): both colours on the ring (vector signs: ${plus} give +2, ${minus} give −2) and the page agrees`, plus > 0 && minus > 0 && plus + minus === 360 && h.classical.plus === plus && close(h.classical.S, t.S, 1e-12), `${plus}/${minus}`);
+  const nums = [`${plus}`, `${minus}`, `${Math.round(h.phi)}^\\circ`, t.S.toFixed(3), bell.toFixed(3), `(${plus} \\cdot 2 - ${minus} \\cdot 2)/360`];
+  check(`HIDDEN still (${lang}): the caption names the stop φ, the two counts, the mean ${t.S.toFixed(3)} and the Bell value ${bell.toFixed(3)}`, nums.every((x) => cap.includes(x)), nums.filter((x) => !cap.includes(x)).join(' '));
+  check(`HIDDEN still (${lang}): the card note names the same numbers`, [`${plus}`, `${minus}`, `${Math.round(h.phi)}°`, t.S.toFixed(3), bell.toFixed(3)].every((x) => note.includes(x)));
+  await T.goto(BOOK, ID, `?shot=1&lang=${lang}&preset=sixty`, shot); await settle(shot);
+  const x = await shot.evaluate(() => {
+    const st = window.CHSH_DEBUG.state, tag = [...document.querySelectorAll('.tags .tag.hot')].find((e) => !e.hidden && e.textContent.trim() === st.S.toFixed(3));
+    const r = tag && tag.getBoundingClientRect();
+    return { S: st.S, hi: st.hi, box: r && [r.top, r.bottom], yHi: window.CHSH_DEBUG.gaugeY(st.hi), yVal: window.CHSH_DEBUG.gaugeY(st.S) };
+  });
+  const free = x.box && !(x.box[0] <= x.yHi + 2 && x.box[1] >= x.yHi - 2);
+  check(`60° · 60° still (${lang}): the value label ${x.S.toFixed(3)} keeps off the magenta √(4+N) line at ${x.hi.toFixed(3)}`, close(x.hi, Math.sqrt(7), 1e-12) && close(x.S, 2.5, 1e-12) && free, JSON.stringify(x));
+}
 
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();
