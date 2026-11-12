@@ -30,7 +30,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `pythagoras-number-escape` | 线上的误差可以趋于零，面积上的缺口至少一格 | `hippasus` `locked` `five` `seven` `count` `sato` |
 | `timeless-causal-crystal` | 两条余弦锁住第三条的窗口，观察者只能在窗口里选点 | `window` `impossible` `right` `crystal` `field` `thread` `sos` `wilderness` |
 | `navier-stokes-p-np` | 对流项拆成梯度与兰姆两半；涡管被拉细（伯格斯涡核按精确解趋向 R∞ ∝ Re^(−½)，条带小图另画 K41 统计标度，两者不互推）；只看一部分的观察者得不到闭合 | `vortex` `flat` `strain` `burgers` `runaway` `mixed` |
-| `eth-horizon-crossover` | 渐近更好的曲线要到视界之外才追上；单次抽样流矩阵的秩与四道割比较；过线的模态数有墙 | `human` `atoms` `cross` `constant` `bridge` `narrow` `plateau` `tail` |
+| `eth-horizon-crossover` | 渐近更好的曲线要到视界之外才追上；单次抽样流矩阵的秩与四道割比较；过线的模态数有墙 | `human` `atoms` `cross` `constant` `bridge` `narrow` `geometric` |
 | `spatial-attractor-deja-vu` | 忘掉起点，轨道还是落回同一对翅膀，一次次经过同一处 | `forget` `return` `shrink` `dimension` `fixed` `cycle` |
 | `golden-cut-observer` | 窗口挪一挪，贴边的点翻转，深处的点留在原地 | `cut` `phason` `empire` `cassini` `returns` `narrow` `window` `gaps` `pi` |
 | `repeated-projection` | 投一次，箭头只剩线上的影子；再投多少次，影子都不再动 | `twice` `fixed` `perp` `sum` `chain` |
@@ -38,7 +38,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `double-slit-marker` | 路径记得越清，条纹越淡；两者落在同一个圆上，怎么读标记可以等落点到了再定 | `wave` `partial` `which` `delayed` `erase` `mixed` |
 | `erasure-ledger` | 转动不记账；抹掉横着的那一份，系统的熵就多出这一份；把比特复位，这笔熵要化成热付给环境，只能多付，不能少付 | `pinch` `steps` `cycle` `bath` `copy` `dpi` |
 | `speed-limit-zeno` | 翻过 90° 的墙快不过能量涨落；看得越勤越走不掉，可平均还是两步回来一次 | `equal` `three` `unequal` `strobe4` `strobe16` `mean` |
-| `two-angle-addressing` | 先倾一次、再拧一次，就到得了球面上任何一点；两根轴斜着，只是要多转几次 | `tilt` `address` `pole` `skew` `collinear` `narrow` `three` `six` |
+| `two-angle-addressing` | 先倾一次、再拧一次，就到得了球面上任何一点；两根轴斜着，只是要多转几次 | `tilt` `address` `pole` `skew` `narrow` `trotter` `three` `six` |
 | `berry-loop` | 走一圈回来，箭头转过圈住的面积，内积连乘的相位只记下一半；整颗球上总有梳不平的一点 | `order` `octant` `equator` `reverse` `comb` |
 | `pulse-area-virtual-z` | 包络下有多少面积，态就转多大的角；绕竖轴的那一转不发脉冲，只改后面脉冲的相位 | `carrier` `quarter` `gauss` `detune` `order` `vz` `sign` |
 | `parameter-shift` | 左右各转 90° 取两个值，两值之差的一半正好是这一点的斜率；小步长差分总差一点，还把散粒噪声放大 | `shift` `anywhere` `step` `noise` |
@@ -79,7 +79,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 ### 各页面的依据分层、用语与分工
 
-`navier-stokes-p-np`、`eth-horizon-crossover`、`spatial-attractor-deja-vu`、`golden-cut-observer` 四个页面的依据分层要写在页面与图注里：第三十章转述的 2026 年预印本只作为该章的转述出现，页面上的曲线与涡管是示意模型（`MODEL`）；菱形三十面体与“帝国”是文献结果（`ARGUED`）；灵魂、遗迹、似曾相识是诠释模型（`MODEL`）；只有带 Lean 链接的绿色框是已验证定理。`spatial-attractor-deja-vu` 不引用任何 Lean 定理：重返（两轮各一次经过、两点相距 ‖x₁(t<sub>a</sub>) − x₂(t<sub>b</sub>)‖ < ε）处单位切向的内积 cos δθ = v̂₁·v̂₂ 标 `NUM` 与 `MODEL`，舞台上画成青色与品红的两支箭头；Tucker 的奇异吸引子定理与卡普兰—约克公式标 `ARGUED`；两个非零平衡点 C₊、C₋ 的 x、y 同号（ρ = 28 时是不稳定的鞍焦点），画成中性色空心圈；ρ = 14 时两点都稳定，同样的参数下每一轮落进哪一个由起点所在的吸引域决定（`fixed` 卡的两轮落进相反的两点），标签写“稳定点 C₊/C₋”、按落进它的那一轮着青色或品红，点在窄屏画布边外时标签收进画布并带箭头指向它；页面自己的数值核对不用绿色 ✓。`forget` 的说明条第二行是两轮到此刻为止高过 C₊、C₋（z > ρ − 1）的时间比例与两轮此刻的距离（`NUM`）：讲“忘掉的是起点，留下的是比例”；`return` 在右下角开一个放大 4 倍的小窗，画遗迹邻域、两段弧与两支长的单位切向，说明条给出 δθ 与 cos δθ。`golden-cut-observer` 的场景“缝”画旋转的前 N 个点在长为 1 的圆周上切出的弧，按长度分类上色（最短青、中间紫、最长品红，琥珀只给最新的点），绿色框只给终章用 `lean=` 引用的三距离定理与黄金赫尔维茨界，“每段弧长于 1/(√5 N)”是正文的手工推导（`ARGUED`），各个 N 的读数标 `NUM`；Delone 集定理在终章只以行内链接出现，页面上写成不带颜色的说明。
+`navier-stokes-p-np`、`eth-horizon-crossover`、`spatial-attractor-deja-vu`、`golden-cut-observer` 四个页面的依据分层要写在页面与图注里：第三十章转述的 2026 年预印本只作为该章的转述出现，页面上的曲线与涡管是示意模型（`MODEL`）；菱形三十面体与“帝国”是文献结果（`ARGUED`）；灵魂、遗迹、似曾相识是诠释模型（`MODEL`）；只有带 Lean 链接的绿色框是已验证定理。`eth-horizon-crossover` 的桥图场景里品红是最小的那道割，青色是流矩阵的正项与非零奇异值，灰色的格子是流矩阵的负项，白色竖线标出秩的位置；模态场景里琥珀色是阈值 τ 与过线柱子上 τ 高度的刻线，品红是墙 RW/(πτ)；`geometric` 卡用第十二章例题第 5 步的几何谱 λⱼ = 2^−(j+1)。`spatial-attractor-deja-vu` 不引用任何 Lean 定理：重返（两轮各一次经过、两点相距 ‖x₁(t<sub>a</sub>) − x₂(t<sub>b</sub>)‖ < ε）处单位切向的内积 cos δθ = v̂₁·v̂₂ 标 `NUM` 与 `MODEL`，舞台上画成青色与品红的两支箭头；Tucker 的奇异吸引子定理与卡普兰—约克公式标 `ARGUED`；两个非零平衡点 C₊、C₋ 的 x、y 同号（ρ = 28 时是不稳定的鞍焦点），画成中性色空心圈；ρ = 14 时两点都稳定，同样的参数下每一轮落进哪一个由起点所在的吸引域决定（`fixed` 卡的两轮落进相反的两点），标签写“稳定点 C₊/C₋”、按落进它的那一轮着青色或品红，点在窄屏画布边外时标签收进画布并带箭头指向它；页面自己的数值核对不用绿色 ✓。`forget` 的说明条第二行是两轮到此刻为止高过 C₊、C₋（z > ρ − 1）的时间比例与两轮此刻的距离（`NUM`）：讲“忘掉的是起点，留下的是比例”；`return` 在右下角开一个放大 4 倍的小窗，画遗迹邻域、两段弧与两支长的单位切向，说明条给出 δθ 与 cos δθ。`golden-cut-observer` 的场景“缝”画旋转的前 N 个点在长为 1 的圆周上切出的弧，按长度分类上色（最短青、中间紫、最长品红，琥珀只给最新的点），绿色框只给终章用 `lean=` 引用的三距离定理与黄金赫尔维茨界，“每段弧长于 1/(√5 N)”是正文的手工推导（`ARGUED`），各个 N 的读数标 `NUM`；Delone 集定理在终章只以行内链接出现，页面上写成不带颜色的说明。
 
 `repeated-projection` 的箭头是布洛赫矢量，页面分两种操作。“投一次”是沿测量线的未读测量 $P_+\rho P_+ + P_-\rho P_-$，箭头落到线上的影子、缩进球内；“一投等于投到线上的影子”是页面的数值核对（`NUM`）。`chain` 卡与“中间片数 N”滑块是第三章偏振片例题的选择性条件更新：读出结果、只留通过的一支（$0^\circ$ 与 $90^\circ$ 偏振片在布洛赫球上是同一条线的两端，中间片把这段经线等分），态每跳一次留在球皮上，代价记在相乘的权重里，青色竖条是累计权重；$N \to \infty$ 的极限是文献结果，页面不画。绿色框只给本章引用的五条定理：捏合幂等、不动点判据、互补勾股、条件态合法、有序外积链之迹。整页（不带 `preset`）打开在刚投一次的那一帧。
 
@@ -91,15 +91,15 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 `speed-limit-zeno` 的速度线与墙上的 MT、ML 刻度按 Mandelstam–Tamm、Margolus–Levitin 公式画出，芝诺冻结的极限是 Misra–Sudarshan 定理，三者都是文献结果（`ARGUED`）；“平均返回时间恒为 2”是第七章例子的手算与页面的数值核对（`NUM`）；绿色框只给第七章引用的两条定理：`record_time_lower_bound` 与 `monitored_return_conservation`。
 
-`two-angle-addressing` 的琥珀色点是从北极出发的布洛赫方向，紫色是两根转轴 $a = \vv{e}_3$ 与 $b$（夹角 $\alpha$，$90^\circ$ 时 $b = \vv{e}_2$），白色小旗是转动带走的切向 $\vv{e}_1$，青色虚线圈是“绕 $b$ 转了 $j$ 次后离 $N$ 至多 $2j\alpha$”的界，品红的点是没有球冠盖住的地方。绿色框只给第九章引用的三条定理（有限旋转字、有理六轴覆盖、六色下界）；两角公式与欧拉分解标 `ARGUED`；斜轴的旋转字由页面按贪心规则当场构造、球面最小值由网格取样，都标 `NUM`，页面不声称是最短字。
+`two-angle-addressing` 的琥珀色点是从北极出发的布洛赫方向，紫色是两根转轴 $a = \vv{e}_3$ 与 $b$（夹角 $\alpha$，$90^\circ$ 时 $b = \vv{e}_2$），白色小旗是转动带走的切向 $\vv{e}_1$，青色虚线圈是“绕 $b$ 转了 $j$ 次后离 $N$ 至多 $2j\alpha$”的界，品红的点是没有球冠盖住的地方。`trotter` 卡里琥珀色的锯齿是交替的小转动，白色的弧是目标转动带着 N 走的路，紫色的点是乘积 Pₙ 的转轴（空心的是其余几个 n）。绿色框只给第九章引用的四条定理（有限旋转字、Lie–Trotter 乘积公式、有理六轴覆盖、六色下界）；Lie–Trotter 乘积的转角、转轴与误差标 `NUM`；两角公式与欧拉分解标 `ARGUED`；斜轴的旋转字由页面按贪心规则当场构造、球面最小值由网格取样，都标 `NUM`，页面不声称是最短字。
 
 `berry-loop` 的绿色框只给第十章用 `lean=` 引用的同纬度内积恒等式（`Latitude.latitude_dot`，赤道相邻两点的 $(1+i)/2$）；$\arg\Delta = \Omega/2$、贝里相位约定 $\gamma_B = -\Omega/2$、切向量平行移动转过所围面积（高斯—博内）与毛球定理按该章文献注记标 `ARGUED`；面积、转角与相位三个数各走一条路实算（`NUM`）。这一页的青色是回路（相邻两点的内积）与内积连乘的相位指针，品红是圈住的面积与箭头的转角，紫色是转轴与竖直轴上的零点。
 
-`pulse-area-virtual-z` 的品红是“面积”的两面：左边包络下扫过的面积与右边球上同样大小的扇形；紫色是此刻的转轴（实验室系里是载频的 z 轴），青色是态在 z 轴上的影子 P(0)，白色虚线是对照的那条路（换序、电路字面、不失谐或同面积方波），失谐时两个终点之间的白色短弧标出差的角度；失谐时此刻的转轴画成淡色（包络两端它是竖直的），轴端走过的紫色虚线才是主角，标签写它离赤道最近处的倾角。绿色框只给第十一章正文用 `lean=` 引用的本征态定态性（`energy_eigenstate_stationary`，抽屉里另有 `exp_mulVec_of_eigenvector` 与 `observer_pullback_trace_identity`）；面积律、旋转系消去载频、轴向共轭恒等式与虚拟 Z 调度按该章文献注记标 `ARGUED`；截断高斯与实验室系画法标 `MODEL`；失谐时的分段时序乘积标 `NUM`。`order` 卡只演示两个转动不对易，不代表该章三脉冲积分核误差界。
+`pulse-area-virtual-z` 的品红是“面积”的两面：左边包络下扫过的面积与右边球上同样大小的扇形；紫色是此刻的转轴（实验室系里是载频的 z 轴），青色是态在 z 轴上的影子 P(0)，白色虚线是对照的那条路（换序、电路字面、不失谐或同面积方波），失谐时两个终点之间的白色短弧标出差的角度；失谐时此刻的转轴画成淡色（包络两端它是竖直的），轴端走过的紫色虚线才是主角，标签写它离赤道最近处的倾角（窄舞台上缩成“轴端最低 12°”）。舞台上的白色虚线由页面按投影长度切段，轴端来回走的是同一段弧，紫色虚线按倾角切段（5° 实、3° 空），两趟的虚线才落在同一处。绿色框只给第十一章正文用 `lean=` 引用的本征态定态性（`energy_eigenstate_stationary`，抽屉里另有 `exp_mulVec_of_eigenvector` 与 `observer_pullback_trace_identity`）；面积律、旋转系消去载频、轴向共轭恒等式与虚拟 Z 调度按该章文献注记标 `ARGUED`；截断高斯与实验室系画法标 `MODEL`；失谐时的分段时序乘积标 `NUM`。`order` 卡只演示两个转动不对易，不代表该章三脉冲积分核误差界。
 
 `parameter-shift` 的绿色框只给第十二章引用的 `projection_probability_flow`：虚线切线的斜率按它的对易子公式在 2 × 2 密度矩阵上算出；两点公式本身（参数位移律）是文献结果（`ARGUED`）；采样场景的每一发来自固定种子的伪随机数，散布与理论宽度是页面的数值（`NUM`）。这一页的青色是期望值曲线与 ±90° 两点（影子），品红是小步长差分。
 
-`equator-concentration` 不引用任何 Lean 定理（第十二章引用的冻结定理与球面测度集中无关，正文强调它们相互独立）：E[x₁²] = 1/d、马尔可夫上界、x₁ 的密度 ∝ (1 − x²)^{(d−3)/2} 与贫瘠高原都是文献结果（`ARGUED`）；带内外的精确份额由不完全贝塔函数算出、舞台上的点是精确分布的分位数（`NUM`）。页面不画梯度。青色是赤道带里的点与带内密度，品红是带外的点与带外密度。d ≥ 2⁹ 时鼓包薄得看不清，密度那一栏的右上角出现放大镜：纵轴换成 x₁√d、放大 √d 倍，带边 ±ε√d 落在窗外时用一行字写明。
+`equator-concentration` 不引用任何 Lean 定理（第十二章引用的冻结定理与球面测度集中无关，正文强调它们相互独立）：E[x₁²] = 1/d、马尔可夫上界、x₁ 的密度 ∝ (1 − x²)^{(d−3)/2} 与贫瘠高原都是文献结果（`ARGUED`）；带内外的精确份额由不完全贝塔函数算出、舞台上的点是精确分布的分位数（`NUM`）。页面不画梯度。青色是赤道带里的点与带内密度，品红是带外的点与带外密度。`bound` 卡切到“份额与上界”场景：横轴 n = log₂ d、纵轴取对数，品红实线是带外的精确份额，品红虚线是马尔可夫上界，琥珀色的竖线是当前的 n。d ≥ 2⁹ 时鼓包薄得看不清，密度那一栏的右上角出现放大镜：纵轴换成 x₁√d、放大 √d 倍，带边 ±ε√d 落在窗外时用一行字写明。
 
 `pairwise-shutter` 的青色是已知态 $A$、它那条直径上从 $-1$ 端到 $B$ 的垂足的一段（长度占直径的 $p$）、权重的虚线与“过”的方块；琥珀色是目标态 $B$ 与当前的比例；细曲线（墨色）是数出来的比例 $k/N$；紫色只在 `turn` 卡里出现，是两支共用的转轴；`turn` 卡的灰色虚线箭头是出发时的那一对（它的静态图停在转过 $306^\circ$ 处，与出发时分得开）。绿色框只给第二章用 `lean=` 引用的两条定理：`born_probability_skeleton`（过与不过两份权重非负、相加为 1）与 `rank_one_born_pairing_weight`（$\lvert\langle\phi\mid\psi\rangle\rvert^2 = \Tr(\rho P_k)$）；半角公式 $(1 + \cos\theta)/2$ 与随机方向上权重均匀是第二章例题的手算，页面三路数值核对标 `NUM`；快门计数是固定种子的抽样模型，比例趋向权重是大数定律（本书未形式化），浅色带 $p \pm 2\sqrt{p(1-p)/N}$ 只是参考尺度，一并标 `MODEL`。这一页不画布洛赫球上“影子长 $\cos\theta$”的读数，只画计数。
 
@@ -224,8 +224,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第九章 | 两角寻址的两步列表之后、“为什么不需要正交三次”之前 | `two-angle-addressing` · `address` |
 | 第九章 | 两角寻址一节末（南北两极的方位角冗余） | `two-angle-addressing` · `pole` |
 | 第九章 | 定理 `thm-two-axis-finite-word` 的证明之后 | `two-angle-addressing` · `skew` |
-| 第九章 | 该定理契约列表第 1 条（共线退化）之后 | `two-angle-addressing` · `collinear` |
-| 第九章 | 该定理契约列表第 2 条之后、有理六轴一节之前 | `two-angle-addressing` · `narrow` |
+| 第九章 | 该定理契约列表第 2 条之后、Lie–Trotter 一段之前（图注带上共线退化的半句） | `two-angle-addressing` · `narrow` |
+| 第九章 | 例 `ex-trotter-two-quarter-turns` 之后、格言之前 | `two-angle-addressing` · `trotter` |
 | 第九章 | 命题 `prop-rational-six-axis-cover` 之前 | `two-angle-addressing` · `three` |
 | 第九章 | 例 `ex-two-angle-six-axis` 之后 | `two-angle-addressing` · `six` |
 | 第九章 | 文献注记 `rem-axes-literature` 之后、转入第十章之前 | `two-angle-addressing` 完整实验室 |
@@ -241,14 +241,15 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第十一章 | §11.4 开头一段之后、文献注记 `rem-virtual-z-scheduling-literature` 之前 | `pulse-area-virtual-z` · `vz` |
 | 第十一章 | 文献注记 `rem-virtual-z-scheduling-literature` 之后（第 3 条符号核对） | `pulse-area-virtual-z` · `sign` |
 | 第十一章 | 例 `ex-five-ghz-pi-over-two` 之后、文献注记 `rem-pulses-literature` 之前 | `pulse-area-virtual-z` · `gauss` |
-| 第十一章 | 文献注记 `rem-pulses-literature` 之后（章末） | `pulse-area-virtual-z` · `detune`，随后完整实验室 |
+| 第十一章 | 文献注记 `rem-pulses-literature` 之后 | `pulse-area-virtual-z` · `detune` |
+| 第十一章 | 章末最后一段之后 | `pulse-area-virtual-z` 完整实验室 |
 | 第十二章 | 开篇三座高峰第 2 条（参数位移律）之后、第 3 条之前 | `parameter-shift` · `noise` |
 | 第十二章 | §泡利转角与精确参数位移 · 文献注记 `rem-parameter-shift-rule-literature` 之前 | `parameter-shift` · `shift` |
 | 第十二章 | 文献注记 `rem-parameter-shift-rule-literature` 之后、讲有限步长截断偏差的那句话之后 | `parameter-shift` · `step` |
 | 第十二章 | `step` 卡之后、讲两点公式没有这一截偏差的那句话之后（该节末） | `parameter-shift` · `anywhere`，隔一句后是完整实验室 |
-| 第十二章 | §赤道集中与贫瘠高原的条件 · 文献注记 `rem-sphere-equator-markov-literature` 之前 | `equator-concentration` · `three`、`width` |
-| 第十二章 | 文献注记 `rem-sphere-equator-markov-literature` 之后 | `equator-concentration` · `bound`、`twenty` |
-| 第十二章 | 推论 `cor-finite-trace-mode-budget` 的证明之后 | `eth-horizon-crossover` · `plateau`、`tail` |
+| 第十二章 | §赤道集中与贫瘠高原的条件 · 文献注记 `rem-sphere-equator-markov-literature` 之前 | `equator-concentration` · `three`，隔一句后是 `width` |
+| 第十二章 | 文献注记 `rem-sphere-equator-markov-literature` 之后 | `equator-concentration` · `bound`，隔一句后是 `twenty` |
+| 第十二章 | 推论 `cor-finite-trace-mode-budget` 的证明之后 | `eth-horizon-crossover` · `geometric` |
 | 第十二章 | 例 `ex-cluster-shift-and-gradient` 之后、文献注记 `rem-mbqc-gradients-literature` 之前 | `equator-concentration` 完整实验室 |
 | 第十三章 | 推论 `cor-chsh-local-commuting-collapse` 后的解读段末（“只要有一方的两次提问不分先后”） | `chsh-dial` · `collinear` |
 | 第十三章 | 例 `ex-chsh-spectrum-angle-table` 之后、“面积张满时的天花板”之前 | `chsh-dial` · `sixty` |
