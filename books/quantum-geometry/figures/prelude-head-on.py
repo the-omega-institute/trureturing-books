@@ -37,4 +37,4 @@ def draw(fig):
         fig.text(cx, 24, f"*α* = {a}°", size=14, color="ink", anchor="middle")
         fig.text(cx, 172, f"{length:.2f}".rstrip("0").rstrip(".") if a else "0", size=14, color="line",
                  weight=600, anchor="middle")
-    fig.text(4, 194, fig.t("看到的长度 sin *α*", "visible length sin *α*"), size=13, color="dim")
+    fig.text(4, 194, fig.t("看到的长度 sin *α*", "visible length sin *α*"), size=14, color="dim")
