@@ -19,15 +19,15 @@
 <path d="M75 75.4 L79 78 L83.11 80.49 L87.31 82.87 L91.6 85.14 L95.98 87.3 L100.45 89.35 L104.99 91.28 L109.61 93.11 L114.29 94.83 L119.04 96.43 L123.86 97.92 L128.73 99.31 L133.65 100.58 L138.62 101.74 L143.63 102.8 L148.69 103.74 L153.77 104.57 L158.89 105.29 L164.04 105.89 L169.2 106.39 L174.39 106.78 L179.58 107.06 L184.79 107.22 L190 107.28 L195.21 107.22 L200.42 107.06 L205.61 106.78 L210.8 106.39 L215.96 105.89 L221.11 105.29 L226.23 104.57 L231.31 103.74 L236.37 102.8 L241.38 101.74 L246.35 100.58 L251.27 99.31 L256.14 97.92 L260.96 96.43 L265.71 94.83 L270.39 93.11 L275.01 91.28 L279.55 89.35 L284.02 87.3 L288.4 85.14 L292.69 82.87 L296.89 80.49 L301 78 L305 75.4" class="ts-violet" stroke-width="3.2" stroke-linejoin="round" fill="none"/>
 <circle cx="75" cy="75.4" r="3.4" class="tf-violet"/>
 <circle cx="305" cy="75.4" r="3.4" class="tf-violet"/>
-<text class="tf-dim" x="65" y="281" font-size="13" text-anchor="end">左边界</text>
-<text class="tf-dim" x="315" y="281" font-size="13">右边界</text>
-<text class="tf-dim" x="190" y="45" font-size="13" text-anchor="middle">奇点</text>
-<text class="tf-violet" x="315" y="176" font-size="13"><tspan font-style="italic">t</tspan> = 0</text>
-<text class="tf-violet" x="315" y="143.8" font-size="13"><tspan font-style="italic">t</tspan> = 1</text>
-<text class="tf-violet" x="315" y="111.6" font-size="13"><tspan font-style="italic">t</tspan> = 2</text>
-<text class="tf-violet" x="315" y="79.4" font-size="13"><tspan font-style="italic">t</tspan> = 3</text>
+<text class="tf-dim" x="65" y="281" font-size="14" text-anchor="end">左边界</text>
+<text class="tf-dim" x="315" y="281" font-size="14">右边界</text>
+<text class="tf-dim" x="190" y="45" font-size="14" text-anchor="middle">奇点</text>
+<text class="tf-violet" x="315" y="176" font-size="14"><tspan font-style="italic">t</tspan> = 0</text>
+<text class="tf-violet" x="315" y="143.8" font-size="14"><tspan font-style="italic">t</tspan> = 1</text>
+<text class="tf-violet" x="315" y="111.6" font-size="14"><tspan font-style="italic">t</tspan> = 2</text>
+<text class="tf-violet" x="315" y="79.4" font-size="14"><tspan font-style="italic">t</tspan> = 3</text>
 <text class="tf-violet ts-bg" x="190" y="95.28" font-size="15" text-anchor="middle" font-weight="600" stroke-width="4.2" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">Σ</tspan><tspan dy="0.28em" font-size="72%">t</tspan><tspan dy="-0.28em">​</tspan></text>
-<text class="tf-dim" x="190" y="313" font-size="13" text-anchor="middle">黑洞内部（示意）</text>
-<rect x="375.2" y="44" width="114.8" height="21" class="ts-warn tf-warn" stroke-width="1.2" fill-opacity="0.12"/>
-<text class="tf-warn tr-fig-mono" x="382.2" y="60" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">C ∝ V(Σ<tspan dy="0.28em" font-size="72%">t</tspan><tspan dy="-0.28em">)？开放</tspan></text>
+<text class="tf-dim" x="190" y="313" font-size="14" text-anchor="middle">黑洞内部（示意）</text>
+<rect x="358.4" y="42" width="131.6" height="23" class="ts-warn tf-warn" stroke-width="1.2" fill-opacity="0.12"/>
+<text class="tf-warn tr-fig-mono" x="365.4" y="60" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">C ∝ V(Σ<tspan dy="0.28em" font-size="72%">t</tspan><tspan dy="-0.28em">)？开放</tspan></text>
 </svg>
