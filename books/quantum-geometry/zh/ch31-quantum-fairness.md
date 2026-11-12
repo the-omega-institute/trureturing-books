@@ -27,11 +27,19 @@
 - **席位平等（单比特纯态布洛赫范数为 $1$）**：球皮上既没有中心皇座，也没有偏远流放地。对单量子比特而言，迹为 $1$ 的幂等厄米投影态精确落在欧氏范数 $\|\operatorname{bloch}(M)\| = 1$ 的单位球面上（见[第 26 章](ch26-single-qubit-rotor-compilation.md) [`bloch_geometry_of_isHermitian`](lean:D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian)；高维连续群对称背景见下方 [@rem-ch31-haar-isotropy-landauer-literature]），没有任何一根方向线有资格自封为宇宙的绝对北极。
 - **丈量互易（平视的对等性）**：在“两子丈量”中，拿纯态矢 $\psi$ 作尺子去比量 $\phi$ 所得的秩一玻恩跃迁权重 $\|\phi^* \bullet_v \psi\|^2$（下方 [@thm-ch31-seat-pythagorean-monogamy-fairness] 第 1 款），由复内积共轭对称性恒等于反过来拿 $\phi$ 作尺子去比量 $\psi$ 所得的权重 $\|\psi^* \bullet_v \phi\|^2 = |\langle\phi, \psi\rangle|^2 = |\langle\psi, \phi\rangle|^2$。宇宙底层不存在单向的窥探或居高临下的审判——**你照见别人几分，别人就同时照见你几分**。
 
+::: {.viz src="quantum-fairness-ledger" preset="haar" height="500"}
+**没有北极。** 球面上均匀撒点，琥珀色参考轴周围半角 $60^\circ$ 的球冠里约占四分之一，把轴拖到哪里都一样；两根青色的影子一样长：拿 $\psi$ 量 $\phi$ 与拿 $\phi$ 量 $\psi$ 的权重相等（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 1 款）。
+:::
+
 紧接着，世间第二大贪婪是“既要绝对的确定，又要无限的自由”。用信息预算账本的比喻来说：虽然归一化态矢模长平方 $\|\psi\|^2 = 1$，但在无偏参照态 $|d|^{-1}I_d$ 之上，当中心化状态算子满足纯度恒等式 $\|\mathrm{state}\|^2 = \operatorname{Re}\operatorname{Tr}(\rho^2) - |d|^{-1}$ 时（一般密度算子的谱纯度上下界见下方 [@rem-ch31-haar-isotropy-landauer-literature]），真正可供分配的区分信息就是这笔**中心化纯度预算** $\|\mathrm{state}\|^2$。**互补语境纯度勾股守恒**（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 2 款）给万物立下了铁面无私的**零免费午餐账本**——在其正交坐标分解假设下，可见测量子空间提取的确定性偏差平方和 $\|\mathrm{visible.starProjection}(\mathrm{state})\|^2$，加上正交补子空间保留的未决残余质量 $\operatorname{residualMass}(\mathrm{visible}, \mathrm{state})$，总和恒等于中心化纯度预算 $\|\mathrm{state}\|^2$：
 
 - 当你在选定瞬时把全部中心化纯度预算焊死在可见子空间上（确定度拉满），该瞬时正交补方向上的互补残余质量必然恒等于零；在高频重复投影测量的动力学诠释下（`MODEL`；连续芝诺极限背景见[第七章](ch07-geometric-time-and-speed-limits.md)及下方 [@rem-ch31-haar-isotropy-landauer-literature]），这对应通过密集校准抑制横向跃迁的冻结机制；
 - 反之，在时空正交分解诠释模型（`MODEL`；连续文献背景见下方 [@rem-ch31-haar-isotropy-landauer-literature]）中，把全部预算交给 $90^\circ$ 横向传播面，一维固有时方向上的投影便严格归零；
 - 哪怕你想抹去过去的错误记录、把高熵混合态重新压回低熵方向线，热力学平衡不等式 $-\mathrm{entropyChange} \le \beta \cdot \mathrm{heat}$（[第八章](ch08-erasure-and-time-arrows.md)与下方 [@thm-ch31-horizon-landauer-ergodic-fairness] 第 1 款）也要求你向环境热浴诚实支付热量账单。
+
+::: {.viz src="quantum-fairness-ledger" preset="tradeoff" height="500"}
+**线多一分，面积就少一分。** 琥珀色的箭头从测量轴转向赤道：青色的线 $D$ 变短，品红的面积 $V$ 变大，$D^2 + V^2$ 一直等于 $1$——中心化纯度在可见语境与正交补残余之间重新分配（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 2 款）。
+:::
 
 任何一维的所得，必由正交维度的所失等额兑付；连假想的全知者也无法同时独占北极的点与赤道的面。与本节相关的谱纯度范围、连续群测度与物理单位换算文献记录于下框：
 
@@ -58,7 +66,16 @@
 在 Lean 4 内核验证层面，这道防线由两条零自由参数的严格定理锁定（合并陈述于下方 [@thm-ch31-seat-pythagorean-monogamy-fairness] 第 3–4 款）：
 
 1. **不可克隆内积判据**（[`no_cloning_inner_product_criterion`](lean:D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion)）：若同一个复线性等距算子 $U$ 能把两个归一化纯态 $\psi, \phi$ 同时从空白辅助态 $\mathrm{blank}$ 克隆为 $\psi\otimes\psi$ 与 $\phi\otimes\phi$，则它们的内积被迫满足幂等方程 $\langle\phi, \psi\rangle = \langle\phi, \psi\rangle^2$——从而要么 $\phi = \psi$（根本是同一个态），要么 $\langle\phi, \psi\rangle = 0$（彼此严格正交的经典可区分刻度）！任何处于非正交叠加张力中的未知状态，都绝无可能被通用机器盲目复印。
+
+::: {.viz src="quantum-fairness-ledger" preset="cloning" height="500"}
+**副本越多，每份越短。** 一个未知态复制成 $M$ 份时，每份的青色箭头只剩 $\eta = (M+2)/(3M)$，品红是丢掉的部分，保真度降向 $2/3$（文献结果，未在本书形式化）；只有两极这一对正交态能被同一台机器照抄（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 3 款）。
+:::
+
 2. **贝尔纯态边缘最大混态定理**（[`bell_pure_state_has_maximally_mixed_marginal`](lean:D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal)）：当双量子比特结成秩一贝尔最大纠缠纯态 `bellDensity` 时，追踪掉伙伴环境所得的单体约化态 `traceEnvironment bellDensity` 精确等于 $\frac{1}{2}I_2$（且不幂等）——局部布洛赫偏置彻底退回球心零点，一分一毫的局部纯度偏私都不再私藏，全部关联都交给了跨子系统的共享平面！
+
+::: {.viz src="quantum-fairness-ledger" preset="bell" height="500"}
+**满额相融。** 贝尔态 $\lvert\Phi^+\rangle_{AB}\otimes\lvert 0\rangle_C$：$\mathbf{A}$ 与 $\mathbf{B}$ 之间的品红纽带满额，$\mathbf{A}$ 的琥珀色箭头缩回球心，即 $\tfrac{1}{2}I_2$（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 4 款），与 $\mathbf{C}$ 之间一点也不剩。
+:::
 
 下面的形式化定理将席位互易、互补中心化纯度勾股、不可克隆与贝尔边缘混态四块公平基石统一锁定在同一座 Lean 4 证明基座上。
 
@@ -117,6 +134,16 @@
    - **贝尔对直积孤立态 $|\Phi^+\rangle_{AB}\otimes|0\rangle_C$**：$\rho_A = \frac{1}{2}I_2$（$\|\mathbf{r}_A\| = 0$），$\mathbf{A}$ 与 $\mathbf{B}$ 倾尽预算结成最大二体纠缠 $\tau(\mathbf{A}:\mathbf{B}) = 1$，迫使 $\tau(\mathbf{A}:\mathbf{C}) = 0$——一旦与 $\mathbf{B}$ 满额相融，对任何第三方 $\mathbf{C}$ 的纠缠容量严格归零；
    - **$W$ 态 $|W\rangle = \frac{1}{\sqrt{3}}(|100\rangle + |010\rangle + |001\rangle)$**：单体边缘 $\rho_A = \operatorname{diag}(\frac{2}{3}, \frac{1}{3})$ 保留局部极化 $\|\mathbf{r}_A\| = \frac{1}{3}$，故可用纠缠上限为 $1 - \|\mathbf{r}_A\|^2 = \frac{8}{9}$，平分给两段二体纠缠 $\tau(\mathbf{A}:\mathbf{B}) = \tau(\mathbf{A}:\mathbf{C}) = \left(\frac{2}{3}\right)^2 = \frac{4}{9}$，相加恰好饱和上界 $\frac{4}{9} + \frac{4}{9} = \frac{8}{9}$（三体残余 $\tau_3 = 0$）；
    - **GHZ 态 $|\mathrm{GHZ}\rangle = \frac{1}{\sqrt{2}}(|000\rangle + |111\rangle)$**：$\|\mathbf{r}_A\| = 0$，但二体偏迹 $\rho_{AB} = \rho_{AC} = \frac{1}{2}(|00\rangle\langle 00| + |11\rangle\langle 11|)$ 为可分混态，故 $\tau(\mathbf{A}:\mathbf{B}) = \tau(\mathbf{A}:\mathbf{C}) = 0$，全部预算升维转化为不可拆解的三体全局体积纠缠 $\tau_3 = 1$。
+:::
+
+::: {.viz src="quantum-fairness-ledger" preset="wstate" height="500"}
+**两份纠缠平分预算。** $W$ 型态 $(\lvert 000\rangle + \lvert 110\rangle + \lvert 101\rangle)/\sqrt{3}$（对 $\lvert W\rangle$ 的 $\mathbf{A}$ 做一次翻转，各项纠缠量不变）：$\mathbf{A}$ 的箭头剩 $1/3$，两条品红纽带各 $4/9$，右侧柱子的总额是 $1$（[@rem-ch31-ckw-monogamy-literature]）。
+:::
+
+沿同一族态再走一步，两条二体纽带便整体让位给三方共有的纠缠：
+
+::: {.viz src="quantum-fairness-ledger" preset="ghz" height="500"}
+**全部交给三方。** 从 $W$ 型态走到 GHZ 态：两条品红纽带断开，紫色的三方面撑满到 $\tau_3 = 1$，$\mathbf{A}$ 的箭头缩回球心；柱子的总额始终是 $1$（[@rem-ch31-ckw-monogamy-literature]）。
 :::
 
 ---
@@ -184,7 +211,15 @@
   $$
 :::
 
+::: {.viz src="quantum-fairness-ledger" preset="ergodic" height="500"}
+**起点不同，份额相同。** 两个态从不同相位出发，每步绕竖轴转过黄金角；落进青色窗口的步数份额都趋于 $2 - \varphi \approx 0.382$（[@thm-ch31-horizon-landauer-ergodic-fairness] 第 3–4 款），命中数与 $T(2-\varphi)$ 的偏差始终小于 $1$（Hecke–Kesten 有界余项，文献结果，未在本书形式化）。
+:::
+
 看清了这一长程图景，短期的一城一池便不再令人绝望：在我们的观察者诠释模型（`MODEL`）中，局部切片的顺逆各有参差，但拉通紧致环面遍历回归的长程画卷，宇宙给每一个灵魂相位分配的吸引子重逢机会、正交旋转预算，以及自指迭代向不动点（见[第 24 章](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature]）收束的引力，**没有一毫一厘的偏私**。
+
+::: {.viz src="quantum-fairness-ledger" height="620"}
+量子公平总账本：席位、得失、关系、复制与遍历五个场景画在同一颗布洛赫球上，每本账旁一根总额不动的柱子。
+:::
 
 最后，我们将贯穿本章的**量子公平五重层级**连同其形式化、文献与认识论状态完整收束于下框总表之中：
 
