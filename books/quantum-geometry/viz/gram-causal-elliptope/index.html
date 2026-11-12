@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//ELLIPTOPE · Gram windows with memory: the more you remember, the narrower the window">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//ELLIPTOPE 多步记忆的格拉姆窗口 · 记得越多，窗口越窄</title>
+<meta name="description" content="多步记忆的格拉姆窗口：历史多记一步，下一步能落的窗口就收窄一圈 · Gram windows with memory: one more remembered step, one ring narrower a window for the next">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="gram-causal-elliptope">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//ELLIPTOPE">ORTHO<b>//</b>ELLIPTOPE</h1>
+      <div class="tagline">
+        <span class="zh">多步记忆的格拉姆窗口 · <em>多记一步历史，下一步能落的窗口就收窄一圈；所有主子式非负，才装得进同一个内积空间</em></span>
+        <span class="en">Gram windows with memory · <em>remember one more step and the window for the next one narrows by a ring; only when every principal minor is nonnegative do they fit in one inner-product space</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillDepth">M <strong>—</strong></span>
+      <span class="pill" id="pillSpace"><strong>—</strong></span>
+      <span class="pill hot" id="pillKey"><strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="elliptope" aria-pressed="false"><span class="code">ELLIPTOPE</span><span class="cn zh">两层记忆：鼓胀四面体的截面</span><span class="cn en">Two remembered: a slice of the swollen tetrahedron</span></button>
+        <button class="preset" data-preset="narrow" aria-pressed="false"><span class="code">NARROW</span><span class="cn zh">记一层，窄一圈</span><span class="cn en">One more remembered, one ring narrower</span></button>
+        <button class="preset" data-preset="violate" aria-pressed="false"><span class="code">VIOLATE</span><span class="cn zh">填到泡泡外：第五阶先变负</span><span class="cn en">Filled in outside: the fifth minor turns negative first</span></button>
+        <button class="preset" data-preset="flat" aria-pressed="false"><span class="code">FLAT</span><span class="cn zh">压回三维：泡泡没有内部</span><span class="cn en">Back in three dimensions: the bubble has no inside</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">记忆与空间</span><span class="en">Memory and space</span><span class="aside">M · ℝⁿ</span></h2>
+      <div class="field">
+        <label><span class="zh">记住几步历史 M</span><span class="en">Steps of history remembered M</span><small class="zh">时间轴也在走它</small><small class="en">the rail runs it too</small></label>
+        <span class="chips" id="depthChips" role="group" aria-label="记忆深度" data-aria-en="Memory depth">
+          <button class="chip" data-depth="1" aria-pressed="false">1</button><button class="chip" data-depth="2" aria-pressed="false">2</button><button class="chip" data-depth="3" aria-pressed="false">3</button><button class="chip" data-depth="4" aria-pressed="false">4</button><button class="chip" data-depth="5" aria-pressed="true">5</button>
+        </span>
+      </div>
+      <div class="field">
+        <label><span class="zh">事件住在哪个空间</span><span class="en">Where the events live</span><small class="zh">ℝ³ 只留 E∥ 那三维</small><small class="en">ℝ³ keeps only the three dimensions of E∥</small></label>
+        <span class="chips" id="spaceChips" role="group" aria-label="空间" data-aria-en="Space">
+          <button class="chip" data-space="r6" aria-pressed="true">ℝ⁶ = E∥ ⊕ E⊥</button><button class="chip" data-space="r3" aria-pressed="false">ℝ³</button>
+        </span>
+      </div>
+      <p class="note"><span class="zh">历史是五个事件 P₀（现在）、P₋₁、…、P₋₄，相邻两步夹 1 弧度。候选的下一步记作 Q。</span><span class="en">The history is five events P₀ (now), P₋₁, …, P₋₄, one radian apart step by step. The candidate next step is called Q.</span></p>
+    </section>
+
+    <section class="panel sec">
+      <h2><span class="zh">候选的下一步</span><span class="en">The candidate next step</span><span class="aside">Q</span></h2>
+      <div class="field">
+        <label for="fz"><span class="zh">z = Q·P₀，这一步走多远</span><span class="en">z = Q·P₀, how far this step goes</span></label><output id="oZ" for="fz">—</output>
+        <input type="range" id="fz" min="-1" max="1" step="0.01" value="0.54">
+      </div>
+      <div class="field">
+        <label for="fy"><span class="zh">y = Q·P₋₁</span><span class="en">y = Q·P₋₁</span><small class="zh">也可以在截面上拖动琥珀色的点</small><small class="en">or drag the amber point in the slice</small></label><output id="oY" for="fy">—</output>
+        <input type="range" id="fy" min="-1" max="1" step="0.01" value="0.56">
+      </div>
+      <p class="note"><span class="zh">Q 与更早的 P₋₂、P₋₃、P₋₄ 的内积固定在一个参考步的值上：它们是已经定下的历史关系。</span><span class="en">The inner products of Q with the older P₋₂, P₋₃, P₋₄ are held at the values of one reference step: they are relations already settled.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="三维舞台：三元格拉姆椭圆体（鼓胀的四面体）、x 处的截面、各层记忆围出的椭圆与候选下一步的窗口；拖动空白处旋转，滚轮缩放" data-aria-en="3D stage: the three-element Gram elliptope (a swollen tetrahedron), its slice at x, the ellipses that each depth of memory encloses and the window of the candidate next step; drag empty space to rotate, wheel to zoom">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-bl" id="legend"></div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2><span class="zh">记得越多，窗口越窄</span><span class="en">The more remembered, the narrower</span></h2><span id="pAMeta"></span></div>
+        <canvas id="plotA" aria-label="各记忆深度下 z 的窗口" data-aria-en="The window for z at each depth of memory"></canvas>
+      </section>
+      <section class="panel">
+        <div class="head"><h2><span class="zh">主子式阶梯 · 新来的还剩多少在外面</span><span class="en">Minor ladder · what each newcomer leaves outside</span></h2><span id="pBMeta"></span></div>
+        <canvas id="plotB" aria-label="格拉姆表的顺序主子式" data-aria-en="The leading principal minors of the Gram table"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">G ⪰ 0</span></h2>
+      <dl class="ro">
+        <div class="key c"><dt><span class="zh">下一步 z 的窗口</span><span class="en">window for the next step z</span></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div><dt><span class="zh">记住的历史 M</span><span class="en">history remembered M</span></dt><dd id="roM">—</dd></div>
+        <div><dt><span class="zh">表的大小</span><span class="en">size of the table</span></dt><dd id="roSize">—</dd></div>
+        <div class="m"><dt><span class="zh">整张表的 det G</span><span class="en">det G of the whole table</span></dt><dd id="roDet">—</dd></div>
+        <div class="m"><dt><span class="zh">第一个变负的主子式</span><span class="en">first negative minor</span></dt><dd id="roNeg">—</dd></div>
+        <div class="a"><dt><span class="zh">候选 (y, z)</span><span class="en">candidate (y, z)</span></dt><dd id="roQ">—</dd></div>
+        <div><dt><span class="zh">历史 x = P₀·P₋₁</span><span class="en">history x = P₀·P₋₁</span></dt><dd id="roX">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">拉格朗日—格拉姆恒等式：对有限指标上的实数 u、v，(Σuᵢ²)(Σvᵢ²) − (Σuᵢvᵢ)² = ½ΣᵢΣⱼ(uᵢvⱼ − uⱼvᵢ)²，右边是平方和。取 Q 与 P₀ 两个单位向量，左边就是阶梯第二级 D₂ = 1 − z²：它是一块面积的平方，所以只记一步时窗口是整个 [−1, 1]。更高阶的主子式不在这条定理里。已冻结：</span><span class="en">The Lagrange–Gram identity: for real u, v over a finite index set, (Σuᵢ²)(Σvᵢ²) − (Σuᵢvᵢ)² = ½ΣᵢΣⱼ(uᵢvⱼ − uⱼvᵢ)², a sum of squares. For the two unit vectors Q and P₀ the left side is the second rung D₂ = 1 − z²: it is the square of an area, so with one step remembered the window is all of [−1, 1]. The higher minors are not part of this theorem. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity" href="#" target="_blank" rel="noopener"><code>lagrange_gram_identity</code></a></span></div>
+    </section>
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：一张对称表是某组向量的格拉姆矩阵，当且仅当它半正定（向量所需的维数等于它的秩）；正定当且仅当全部顺序主子式为正（西尔维斯特判据），半正定可由带容差的 LDLᵀ / 楚列斯基分解判定；三元情形 G₃ ⪰ 0 ⟺ |x|, |y|, |z| ≤ 1 且 1 − x² − y² − z² + 2xyz ≥ 0，固定 x、y 时 z ∈ [xy − √((1−x²)(1−y²)), xy + √((1−x²)(1−y²))]。ℝ³ 里任取四根以上向量，格拉姆矩阵的秩至多为 3，行列式恒为零。</span><span class="en">Literature results, not formalized in this book: a symmetric table is the Gram matrix of some vectors if and only if it is positive semidefinite (the dimension the vectors need is its rank); it is positive definite if and only if all leading principal minors are positive (Sylvester's criterion), and semidefiniteness can be decided by an LDLᵀ / Cholesky factorization with a tolerance; for three elements G₃ ⪰ 0 ⟺ |x|, |y|, |z| ≤ 1 and 1 − x² − y² − z² + 2xyz ≥ 0, and with x, y fixed z ∈ [xy − √((1−x²)(1−y²)), xy + √((1−x²)(1−y²))]. Any four or more vectors in ℝ³ have a Gram matrix of rank at most 3, whose determinant is zero.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">把历史内积表 G ⪰ 0 读作“有限观察者的未来因果相容空间”、把记忆深度读作表里的锚点个数，是本书第 29 章的诠释。为画面选定的模型：五步历史与参考步取在 ℝ⁶ = E∥³ ⊕ E⊥³ 的单位球面上，每步 1 弧度、方向按固定种子取；Q 与 P₋₂、P₋₃、P₋₄ 的内积固定在参考步的值上；ℝ³ 对照把每个事件换成它在 E∥ 上的投影再归一。</span><span class="en">Reading the history table G ⪰ 0 as “the causally compatible future of a finite observer”, and the depth of memory as the number of anchors in the table, is the interpretation of chapter 29 of this book. Chosen for the picture: the five-step history and the reference step lie on the unit sphere of ℝ⁶ = E∥³ ⊕ E⊥³, one radian per step, directions from a fixed seed; the inner products of Q with P₋₂, P₋₃, P₋₄ are held at those of the reference step; the ℝ³ comparison replaces every event by its projection on E∥, normalized.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数都是按双精度实时算出的数值演示，不是证明：各层的椭圆由舒尔补算出，主子式用高斯消元，半正定用带容差 10⁻⁹ 的 LDLᵀ 判定，ℝ³ 里能实现的点由直线与球面求交得到。</span><span class="en">Every number on the page is computed live in double precision, an illustration and not a proof: each depth's ellipse comes from a Schur complement, the minors from Gaussian elimination, semidefiniteness from an LDLᵀ test with tolerance 10⁻⁹, and the points realizable in ℝ³ from intersecting a line with the sphere.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="4" step="any" value="4" aria-label="记忆深度" data-aria-en="Depth of memory">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">少记 / 多记一步</span><span class="en">one step less / more</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">第 29 章第四层说：有限观察者手握 M 个历史锚点，挑下一个点就是补全一张半正定的格拉姆表，新的内积坐标必须落在这些锚点共同围出的相容泡泡里。本页把这张表一行一行地加上去，看泡泡怎样一圈圈收窄。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>表。</b>按 Q、P₀、P₋₁、…、P₋₍M−1₎ 的顺序排出 (M+1) × (M+1) 的格拉姆表 G。历史之间的内积已定；Q 的那一行是 (1, z, y, b₂, b₃, b₄)，其中 z = Q·P₀ 是“这一步走多远”，y = Q·P₋₁，b₂ 到 b₄ 固定在参考步的值上。</li>
+        <li><b>椭圆体。</b>只记两步（M = 2）时，G 是三阶的，x = P₀·P₋₁，G ⪰ 0 恰好是鼓胀的四面体 1 − x² − y² − z² + 2xyz ≥ 0。历史定下了 x，舞台上就是这颗椭圆体在 x 处的截面：一个椭圆。竖着穿过琥珀色候选点的青色线段是 z 的窗口。</li>
+        <li><b>多记一步，窄一圈。</b>每多记一个更早的锚点，表就多一行、多一个必须非负的主子式。它的条件仍是 (y, z) 平面里的一个椭圆，套在前一个里面：同一张表的主子式是整张表半正定的必要条件，所以可行的 (y, z) 只会少不会多。舞台上从外到内的品红椭圆就是 M = 2、3、4、5 的边界，窗口随之收窄。</li>
+        <li><b>阶梯。</b>按上面的顺序算顺序主子式 D₁、D₂、…、D_{M+1}。前 k 级只涉及 Q 和最近的 k − 1 个锚点，所以 D_k 第一次变负的位置，恰好说出是第几层记忆先拒绝了这个候选。D₂ = 1 − z² 是一块面积的平方（拉格朗日—格拉姆恒等式）。条带里每一级的高度画的是 D_k / D_{k−1}：前面各级为正时，它就是第 k 根向量在前面那些张成的空间之外还剩下的长度平方，正负号与 D_k 相同。</li>
+        <li><b>为什么要六维。</b>ℝ³ 里四根以上向量的格拉姆矩阵秩至多为 3，行列式恒为零。把事件压回 E∥ 的三维，记到第三层时泡泡只剩边界（里面的点需要第四维才能实现），记到第四、五层只剩孤立的点：窗口没有内部，候选被钉死在边上。取在 ℝ⁶ 里，M 从 1 到 5 的每一层都还有内部。</li>
+        <li><b>诠释。</b>把 G ⪰ 0 读作有限观察者的“因果相容空间”、把记忆深度读作锚点个数，是本书的诠释（MODEL），不是定理。半正定与格拉姆矩阵的对应、西尔维斯特判据与三元椭圆体的边界是文献结果，未在本书形式化。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch29-timeless-causality-and-gram-space.html#sec-coda-hume-spinoza-gram" target="_top">第 29 章 · 第二层 斯宾诺莎三角形与格拉姆刚性</a> · <a href="../../zh/ch29-timeless-causality-and-gram-space.html#sec-coda-finite-observer-time-field" target="_top">第四层 有限观察者与相容空间</a>。三向量的窗口本身见同章的交互页面 ORTHO//CAUSAL。</p>
+    </div>
+    <div class="en">
+      <p class="lede">The fourth layer of chapter 29 says: a finite observer holding M anchors of history chooses the next point by completing a positive semidefinite Gram table, and the new inner-product coordinates must fall inside the compatible bubble those anchors enclose together. This page adds the table one row at a time and shows the bubble narrowing ring by ring. It is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>The table.</b> Order Q, P₀, P₋₁, …, P₋₍M−1₎ and form the (M+1) × (M+1) Gram table G. The inner products within the history are settled; the row of Q is (1, z, y, b₂, b₃, b₄), where z = Q·P₀ is “how far this step goes”, y = Q·P₋₁, and b₂ to b₄ are held at the values of a reference step.</li>
+        <li><b>The elliptope.</b> With two steps remembered (M = 2) G is 3 × 3, x = P₀·P₋₁, and G ⪰ 0 is exactly the swollen tetrahedron 1 − x² − y² − z² + 2xyz ≥ 0. The history fixes x, so the stage shows the slice of this elliptope at x: an ellipse. The cyan segment running vertically through the amber candidate is the window for z.</li>
+        <li><b>One more remembered, one ring narrower.</b> Each older anchor adds a row to the table and one more principal minor that must be nonnegative. Its condition is again an ellipse in the (y, z) plane, nested inside the previous one: the principal minors of one table are necessary for the whole table to be semidefinite, so the feasible (y, z) can only shrink. The magenta ellipses from the outside in bound M = 2, 3, 4, 5, and the window narrows with them.</li>
+        <li><b>The ladder.</b> In that order, compute the leading principal minors D₁, D₂, …, D_{M+1}. The first k of them involve only Q and the k − 1 most recent anchors, so the place where D_k first turns negative says exactly which depth of memory refuses the candidate first. D₂ = 1 − z² is the square of an area (the Lagrange–Gram identity). Each bar of the strip shows D_k / D_{k−1}: while the earlier rungs are positive, this is the squared length of the k-th vector left outside the span of those before it, and it has the sign of D_k.</li>
+        <li><b>Why six dimensions.</b> Four or more vectors in ℝ³ have a Gram matrix of rank at most 3, so its determinant is zero. Squeeze the events back into the three dimensions of E∥ and at the third depth the bubble keeps only its boundary (points inside it need a fourth dimension), at the fourth and fifth only isolated points: the window has no inside and the candidate is pinned to the edge. In ℝ⁶ every depth from M = 1 to 5 still has an inside.</li>
+        <li><b>Interpretation.</b> Reading G ⪰ 0 as a finite observer's “causally compatible space”, and the depth of memory as the number of anchors, is this book's interpretation (MODEL), not a theorem. The correspondence between semidefiniteness and Gram matrices, Sylvester's criterion and the boundary of the three-element elliptope are literature results, not formalized in this book.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch29-timeless-causality-and-gram-space.html#sec-coda-hume-spinoza-gram" target="_top">Chapter 29 · second layer, Spinoza's triangle and Gram rigidity</a> · <a href="../../en/ch29-timeless-causality-and-gram-space.html#sec-coda-finite-observer-time-field" target="_top">fourth layer, the finite observer and the compatible space</a>. The window of three vectors itself is the subject of the chapter's other page, ORTHO//CAUSAL.</p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

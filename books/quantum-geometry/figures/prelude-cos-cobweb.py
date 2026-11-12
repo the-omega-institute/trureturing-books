@@ -25,8 +25,8 @@ ALT = {
 def draw(fig):
     t = fig.t
     ax = fig.axes(54, 22, 340, 260, (0.0, 1.05), (0.0, 1.05))
-    ax.xaxis(ticks=[0, 0.5, 1], labels=["0", "0.5", "1"], label="*θ*")
-    ax.yaxis(ticks=[0, 0.5, 1], labels=["0", "0.5", "1"], label="*y*")
+    ax.xaxis(ticks=[0, 0.5, 1], labels=["0", "0.5", "1"], label="*θ*", size=13)
+    ax.yaxis(ticks=[0, 0.5, 1], labels=["0", "0.5", "1"], label="*y*", size=13)
     ax.plot(lambda x: x, color="dim", width=1.4)
     ax.plot(math.cos, color="line", width=2.6)
     th = [1.0]
@@ -56,4 +56,4 @@ def draw(fig):
     dx, dy = ax.pt(0.9, 0.9)
     fig.text(dx + 4, dy - 8, "*y* = *θ*", size=13, color="dim", anchor="end", halo=True)
     qx, qy = ax.pt(0.62, 0.14)
-    fig.chip(qx, qy, t("文献结果", "literature"), "argued")
+    fig.chip(qx, qy, t("文献结果", "literature"), "argued", size=13)

@@ -13,7 +13,7 @@ import math
 
 from _ch24 import THETA
 
-SIZE = (560, 300)
+SIZE = (520, 306)
 ALT = {
     "zh": "横轴是截断多项式的次数 0、2、4、6、8、10，纵轴是它的不动点 q 与 θ* 的差，按绝对值取对数刻度。"
           "六根竖线交替朝上（青色，q 比 θ* 大）和朝下（品红，q 比 θ* 小），长度一次比一次短：差依次约为 0.26、0.0070、0.00013、"
@@ -58,15 +58,15 @@ def L(e):
 
 def draw(fig):
     t = fig.t
-    ax = fig.axes(96, 30, 420, 210, (-0.5, 5.6), (-LOG0, LOG0))
+    ax = fig.axes(84, 40, 410, 210, (-0.5, 5.6), (-LOG0, LOG0))
     ax.hline(0, "dim", 1.3)
     for v, lab in ((4, "10⁻⁸"), (8, "10⁻⁴"), (12, "1")):
         for sg in (1, -1):
             fig.line(ax.X(-0.5) - 5, ax.Y(sg * v), ax.X(-0.5), ax.Y(sg * v), "dim", 1.2)
-            fig.text(ax.X(-0.5) - 8, ax.Y(sg * v), ("" if sg > 0 else "−") + lab, size=13, color="dim", anchor="end",
+            fig.text(ax.X(-0.5) - 8, ax.Y(sg * v), ("" if sg > 0 else "−") + lab, size=15, color="dim", anchor="end",
                      middle=True)
     fig.line(ax.X(-0.5), ax.Y(LOG0), ax.X(-0.5), ax.Y(-LOG0), "dim", 1.3)
-    fig.text(ax.X(5.6), ax.Y(0) - 8, "*θ*^{∗}", size=14, color="ink", anchor="end")
+    fig.text(ax.X(5.6), ax.Y(0) - 8, "*θ*^{∗}", size=15, color="ink", anchor="end")
     labels = ["1", "√3 − 1", "0.73922", "0.739084", "0.73908514", "0.739085133"]
     for k, (e, lab) in enumerate(zip(ERR, labels)):
         role = "line" if e > 0 else "area"
@@ -74,7 +74,10 @@ def draw(fig):
         x1, y1 = ax.pt(k, L(e))
         fig.line(x0, y0, x1, y1, role, 4.2, cap="round")
         fig.dot(x1, y1, 4.4, role, ring="bg")
-        fig.text(x1, y1 + (-12 if e > 0 else 22), lab, size=13, color=role, anchor="middle", halo=True)
-        fig.text(ax.X(k), 268, str(2 * k), size=13, color="dim", anchor="middle")
-    fig.text(ax.X(-0.5) - 8, 268, t("次数", "degree"), size=13, color="dim", anchor="end")
-    fig.text(14, 17, t("*q* − *θ*^{∗}（对数刻度）", "*q* − *θ*^{∗} (log scale)"), size=13, color="dim")
+        if k == 0:                                               # beside the tallest stem, clear of the axis title
+            fig.text(x1 + 10, y1, lab, size=15, color=role, middle=True, halo=True)
+        else:
+            fig.text(x1, y1 + (-12 if e > 0 else 23), lab, size=15, color=role, anchor="middle", halo=True)
+        fig.text(ax.X(k), 280, str(2 * k), size=15, color="dim", anchor="middle")
+    fig.text(ax.X(-0.5) - 8, 280, t("次数", "degree"), size=15, color="dim", anchor="end")
+    fig.text(12, 20, t("*q* − *θ*^{∗}（对数刻度）", "*q* − *θ*^{∗} (log scale)"), size=15, color="dim")

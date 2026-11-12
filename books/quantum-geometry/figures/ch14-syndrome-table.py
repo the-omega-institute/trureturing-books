@@ -9,7 +9,7 @@ asserted equal for the two strings of a row and distinct across rows, and match 
 
 from _ch14 import ERRORS, NAMES, flip, syndrome
 
-SIZE = (540, 300)
+SIZE = (410, 300)
 ALT = {
     "zh": "一张四行的表，行依次是错误 I、X₁、X₂、X₃。每行有两串三个比特：左边是 E|000⟩，右边是 E|111⟩，被翻的那一位描成品红；"
           "每串旁边各有两盏灯 g₁、g₂。I 那一行两串都是青色，四盏灯全暗；X₁ 那行两串旁都只亮 g₁；X₂ 那行两盏都亮；X₃ 那行只亮 g₂。"
@@ -45,7 +45,7 @@ def bits_and_lamps(fig, x, y, bits, err, code):
 
 def draw(fig):
     t = fig.t
-    left, right = 92, 330
+    left, right = 66, 250
     top, row = 70, 54
     for x, head in ((left, "*E*|000⟩"), (right, "*E*|111⟩")):
         fig.text(x + 43, top - 26, head, size=14, color="dim", anchor="middle")
@@ -60,7 +60,7 @@ def draw(fig):
         s1 = bits_and_lamps(fig, right, y, flip((1, 1, 1), err), err, code)
         assert s0 == s1 == TABLE[name]
         seen.add(s0)
-        fig.text((left + right + 90) / 2 + 30, y + 13, "=", size=16, color="dim", anchor="middle", middle=True)
+        fig.text((left + 3 * 30 + 50 + right) / 2, y + 13, "=", size=16, color="dim", anchor="middle", middle=True)
     assert len(seen) == 4
-    fig.text(270, top + 4 * row + 12, t("同一行：左右亮的灯一样", "within a row: the same lamps on both sides"),
+    fig.text(SIZE[0] / 2, top + 4 * row + 12, t("同一行：左右亮的灯一样", "within a row: the same lamps on both sides"),
              size=13, color="dim", anchor="middle")

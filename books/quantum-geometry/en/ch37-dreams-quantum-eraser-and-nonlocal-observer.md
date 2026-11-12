@@ -11,6 +11,10 @@ For millennia, mechanistic materialism dismissed dreams as random nocturnal stat
 3. **Bodiless dreams falsify the "vessel illusion"**: When the bodily prior drops to zero in deep dreams, awareness continues rendering vividly without limbs or sense organs, revealing daytime brick-and-bone solidity and nighttime bodiless flight as co-originating inner-product appearances;
 4. **Nonlocal multi-position emergence beyond the five-sense pinhole**: The five senses act as a spatial throttle pinning readout to one coordinate; once that pinhole relaxes, the observer emerges simultaneously across an entire Delone model set of golden cut-and-project nodes.
 
+::: {.figure src="ch37-overview"}
+**Figure 37.** The chapter at a glance. Panel I: the grid of the $2 \times 2$ pure state at $\theta = \pi/6$ (each square has area $\lvert\rho_{ij}\rvert$); after pinching the cyan diagonal stays as it was and the magenta off-diagonal is left as dashed outlines. Panel II: on the circle of radius $1/2$, two phase records each multiply $\rho_{01}$ by $-i$ and turn it along the magenta arrows from $1/2$ to $-1/2$; reversing both together, the cyan arrows turn it back the same way to $1/2$ (see [@thm-ch37-joint-coherent-record-erasure]). Panel III: one row of cut-and-project places; on the upper line the five-sense pinhole reads only the amber body place $\mathbf{x}_0$, on the lower line, with the bodily prior unloaded, every place is lit cyan. Reading the three scenes this way is the chapter's interpretive model (`MODEL`).
+:::
+
 ---
 
 ## 37.1 Observation as Decoherence via Known Data: Why Waking Reality Feels Rigid and Narrow
@@ -41,10 +45,18 @@ $$
 S\bigl(\rho(1)\bigr) - S\bigl(\rho(0)\bigr) \;=\; -\cos^2\theta\ln(\cos^2\theta) - \sin^2\theta\ln(\sin^2\theta) \;=\; D\bigl(\tilde{\rho}_0 \,\|\, \operatorname{pinching}(\tilde{\rho}_0)\bigr) \;\ge\; 0
 $$
 
-(evaluating to $\ln 2$ at equal superposition $\theta = \frac{\pi}{4}$). Why the daytime world feels at once **solid and reliable** yet **narrow and exhausting** is now algebraically transparent:
+::: {.figure src="ch37-entropy-tax"}
+**The coherence one pinching step cuts and the entropy tax it charges peak together at $\theta = \pi/4$.** The magenta curve is the discarded coherence mass $\frac{1}{2}\sin^2(2\theta)$, the ink curve the entropy increase $-\cos^2\theta\ln(\cos^2\theta) - \sin^2\theta\ln(\sin^2\theta)$; both vanish at $\theta = 0$ and $\theta = \pi/2$ and reach $1/2$ and $\ln 2$ respectively at $\theta = \pi/4$ (the one-qubit case of [@thm-ch37-known-data-pinching-and-entropy-tax], items 2 and 3).
+:::
+
+At the equal superposition $\theta = \frac{\pi}{4}$ the one-step tax evaluates to $\ln 2$. Why the daytime world feels at once **solid and reliable** yet **narrow and exhausting** is now algebraically transparent:
 
 - **Solid**, because record pinching obeys strict functional idempotence $\Pi_{\mathrm{wake}} \circ \Pi_{\mathrm{wake}} = \Pi_{\mathrm{wake}}$: so long as you interrogate the world millisecond after millisecond with the same known-data basis, every off-diagonal anomaly is crushed to zero ($P_k \rho P_l = 0$), tables stay tables, and walls never let a hand pass through;
 - **Narrow and exhausting**, because across every step of unitary evolution $U$ followed by basis pinching that deletes coherence between sectors, the deleted off-diagonal coherence is converted penny for penny into a nonnegative **quantum relative-entropy tax**! In this `MODEL`, sustaining a crisp one-dimensional daytime rail feels like paying an ongoing entropy bill; turning that information-entropy tax into physical heat dissipation also requires the bath, initial-state, and entropy-balance conditions of [Chapter 31](ch31-quantum-fairness.md) [@thm-ch31-horizon-landauer-ergodic-fairness].
+
+::: {.viz src="dream-decoherence-unpinning" preset="waking" height="500"}
+**Awake: the known data pin every place.** As the anchor strength λ goes from 0 to 1, the magenta cross-block squares shrink by 1 − λ to nothing while the cyan diagonal, the weight of each place, does not move; on the screen the fringes fade into the smooth envelope of the dashed cyan curve, and the entropy rises from 0 to the relative entropy of the deleted coherence ([@thm-ch37-known-data-pinching-and-entropy-tax], items 1 and 3). The four places and the screen are a model chosen for the picture.
+:::
 
 The formal theorem below locks record-pinching idempotence, the vanishing-off-diagonal fixed-point criterion, exact qubit discarded coherence mass, and the multi-step coherence-deletion entropy identity onto a single Lean-4-verified foundation:
 
@@ -77,6 +89,10 @@ Across the frozen observer-conditioning, pinching-projection, and quantum-dynami
 
 ::: proof
 In Conjunct 1, left-multiplying $\operatorname{unreadState}(P, \rho)$ by $P_k$ kills $l \neq k$ via orthogonality to give $P_k \operatorname{unreadState}(P, \rho) = P_k \rho P_k$, right-multiplying by $P_k$ and applying $P_k^2 = P_k$ yields pointwise idempotence, and `funext` lifts this to function composition; for `unreadState_fixed_iff`, if $\operatorname{unreadState}(P, \rho) = \rho$ then $P_k \rho P_l = P_k \rho (P_k P_l) = 0$ for $k \neq l$, while conversely completeness gives $P_k \rho = P_k \rho (\sum_l P_l) = P_k \rho P_k$, whose sum over $k$ restores $(\sum_k P_k)\rho = \rho$. Conjunct 2 expands the $\operatorname{Fin} 2$ trace product of $\rho - \operatorname{pinching}(\rho)$ and simplifies $\bar{z}z = \operatorname{normSq}(z)$. Conjunct 3 uses the continuous functional calculus to prove unitary invariance $S(\tilde{\rho}_k) = S(\rho(k))$ and the diagonal log-trace identity $\operatorname{Tr}(\tilde{\rho}_k \log \mathcal{P}(\tilde{\rho}_k)) = \operatorname{Tr}(\mathcal{P}(\tilde{\rho}_k) \log \mathcal{P}(\tilde{\rho}_k))$ to equate single-step entropy gain with $D(\tilde{\rho}_k \,\|\, \mathcal{P}(\tilde{\rho}_k))$; doubly stochastic majorization by squared eigenvector moduli together with convexity of $x \mapsto x\ln x$ establishes nonnegativity, and telescoping over $\operatorname{Finset.range} N$ yields the finite-horizon sum. The full proof is checked by the Lean kernel.
+:::
+
+::: {.viz src="dream-decoherence-unpinning" preset="blocks" height="500"}
+**With only two anchor blocks, the coherence inside a block stays.** With the family “body x₀ | the other three”, λ = 1 cuts only the magenta squares between the body and the rest; the cyan squares among the three stay in their block and the screen keeps the cyan fringes they add. This is the fixed point of item 1 of [@thm-ch37-known-data-pinching-and-entropy-tax]: zero across the blocks, and pinching again changes nothing.
 :::
 
 ---
@@ -117,6 +133,10 @@ Consider three unit vectors in a real inner-product space: let $\mathbf{u}_1$ de
    - **Dream Partial Forgetting ($M - \Delta M = 2$, $\mathbf{u}_2$ Suspended)**: Once sleep temporarily unloads $\mathbf{u}_2$, compatibility reduces to $G_2(\frac{4}{5}) \succeq 0$; the determinant more than triples from $0.104$ to $\det G_2(\frac{4}{5}) = 1 - \frac{16}{25} = \frac{9}{25} = 0.360 > 0$, the valid slice now retains only $\mathbf{u}_1$ and $\mathbf v$. With $\mathbf{u}_2$ removed, $x_2$ is no longer constrained; the old incompatible triple at $x_2=0$ has not become a realizable Gram matrix!
 :::
 
+::: {.figure src="ch37-constraint-release"}
+**Suspending the spacetime anchor $\mathbf{u}_2$ lifts the compatibility determinant from $0.104$ to $0.36$, and $x_2$ drops out of it.** With $c_{12} = x_1 = \frac{4}{5}$, the ink parabola is $\det G_3$ with all three anchors in place: it is non-negative only in the narrow waking window $x_2 \in [0.28, 1]$ (the dot is $0.104$ at $x_2 = 0.8$), and at $x_2 = 0$ it is $-0.28$, crossed out. The dashed cyan line is $\det G_2 = 0.36$ of the slice that keeps only $\mathbf{u}_1$ and $\mathbf{v}$ once $\mathbf{u}_2$ is suspended, and the cyan arrow is that jump. Suspending $\mathbf{u}_2$ only frees $x_2$ from the constraint; the triple at $x_2 = 0$ is still not a realizable Gram matrix, so the cross stays. Elementary linear algebra, a literature result not formalized in this book; see [@ex-ch37-gram-constraint-release].
+:::
+
 [@ex-ch37-gram-constraint-release] dissolves the apparent absurdity of dream montage: dreams are not broken films, but **oblique phase-addressed cross-sections** that emerge once chronological index $\mathbf{u}_2$ steps aside—allowing a childhood alley, a distant face, and an unwalked $\sin\theta$ fork to meet in one frame because all three share internal phase resonance $x_1$!
 
 External quantum-optics literature concerning record erasure and its relativistic no-signaling boundary is recorded separately in [@rem-ch37-quantum-eraser-literature]:
@@ -135,6 +155,10 @@ Inspect the explicit two-copy phase ledger first: start from the equal-superposi
 $$
 \frac{1}{2} \;\xrightarrow{\;\text{forward }\times (-i)^2\;}\; -\frac{1}{2} \;\xrightarrow{\;\text{reverse }\{0\}\;\times (+i)\;}\; -\frac{i}{2} \neq \frac{1}{2}, \qquad -\frac{1}{2} \;\xrightarrow{\;\text{reverse }\{0,1\}\;\times (+i)^2\;}\; +\frac{1}{2}.
 $$
+
+::: {.viz src="dream-decoherence-unpinning" preset="half_erase" height="500"}
+**Two records, only one reversed.** Two phase records (c = −i) are written one after the other and the magenta ρ₀₁ turns from 1/2 to −1/2; reverse copy 0 alone and it stops at −i/2, the needle in its square points down, and the fringes sit a quarter period off the dashed grey curve ([@thm-ch37-joint-coherent-record-erasure], item 2).
+:::
 
 Two kernel theorems establish both general full-family unimodular reversal and this exact two-copy certificate:
 
@@ -169,7 +193,15 @@ Across the frozen joint-coherent-reversal observer-memory module of `trureturing
 For Conjunct 1, unfolding `multi_record_channel_apply` twice expresses entry $(i, j)$ as the product of the reversed-family overlap product, the forward overlap product, and $\rho_{ij}$; `reverse_record_overlap` rewrites each reversed copy's overlap as $\operatorname{star}(\operatorname{recordOverlap}(\mathrm{records}(k), i, j))$, and `Finset.prod_mul_distrib` merges the two finite products into $\prod_{k \in \operatorname{Finset.univ}} \operatorname{star}(\operatorname{recordOverlap}(\mathrm{records}(k), i, j)) \cdot \operatorname{recordOverlap}(\mathrm{records}(k), i, j) = \prod_k 1 = 1$ by `hunit k`. For Conjunct 2, direct evaluation gives $\operatorname{recordOverlap}(\mathrm{phaseRecord}, 0, 1) = 1 \cdot \overline{i} + 0 = -i$: forward coupling across both copies multiplies $1/2$ by $(-i)^2 = -1$ to give $-1/2$; reversing `{0}` alone multiplies by a single $+i$ to leave $-i/2 \neq 1/2$; jointly reversing `Finset.univ` (`{0, 1}`) multiplies by $(+i)^2 = -1$ and restores $(-1)(-1/2) = +1/2$. The full proof is checked by the Lean kernel.
 :::
 
+::: {.viz src="dream-decoherence-unpinning" preset="zero_overlap_fail" height="500"}
+**The unit-modulus premise cannot be dropped.** If the records tell the two paths apart completely (overlap c = 0, so the premise |c|² = 1 fails), writing the first copy shrinks the magenta ρ₀₁ to nothing and leaves only the envelope of the dashed cyan curve on the screen; reverse both copies and ρ₀₁ is still 0, the fringes do not return. These are numbers of the page from the same channel formula, outside the scope of [@thm-ch37-joint-coherent-record-erasure].
+:::
+
 Conjunct 2 of [@thm-ch37-joint-coherent-record-erasure] captures the lived difference between shallow half-sleep and deep nocturnal release (`MODEL` (interpretive model)): when two daytime commitments invert an initial $+1/2$ coherence into $-1/2$, loosening only copy `{0}` leaves the unreversed second guard twisting the phase onto $-i/2$; only when both copies are jointly conjugated across `Finset.univ` does the buried $+1/2$ amplitude resurface intact!
+
+::: {.viz src="dream-decoherence-unpinning" preset="quantum_eraser" height="500"}
+**Joint reversal of every copy.** Both phase records are written, then both are reversed: ρ₀₁ turns half way round the circle of radius 1/2 and back to 1/2, and the fringes land on the dashed grey curve again ([@thm-ch37-joint-coherent-record-erasure], item 1, every record with |c|² = 1).
+:::
 
 ---
 
@@ -193,6 +225,10 @@ Related external literature in computational neuroscience and sleep physiology, 
 Stepping back from neurophysiology into our zero-background self-referential geometry (**`MODEL` (interpretive model)**, alongside the empirical context of [@rem-ch37-predictive-processing-rem-literature]), let us ask the decisive genealogical question: why does a single ordinary bodiless dream shatter naive "vessel materialism" at its root?
 
 If awareness were genuinely secreted by sense organs as a fragile byproduct that cannot exist without a corporeal container, then the instant deep sleep drives the **loading weight of the bodily prior projector $\mathbf{P}_{\mathrm{body}}$ in lookup table $T$ toward zero** (below, $\mathbf{P}_{\mathrm{body}} \to 0$ abbreviates unloading this `MODEL` configuration; the projector itself remains idempotent), observation itself would have to black out alongside its container!
+
+::: {.viz src="dream-decoherence-unpinning" preset="unpin_body" height="500"}
+**Unpinning: the coherence returns, the weights stay.** The anchor strength λ drops from 1 to 0.1: the magenta cross-block squares grow back, |ρᵢⱼ| returns to 0.9 times its original value, and the fringes come back on the screen; the cyan diagonal, the weight of each place, never moved. Reading λ as the strength of the “bodily prior” is this book's interpretive model (`MODEL`).
+:::
 
 Yet the exact opposite occurs: **the body is forgotten completely, and observation loses not a single lumen of clarity!** Light, perspective, geometry, and affection continue unfolding without eyeballs or limbs. This repeatable nightly experiment exposes two foundational consequences (`MODEL`):
 
@@ -252,12 +288,20 @@ Contemplate what [@thm-ch37-golden-cut-delone-multilocation] reveals for our obs
 - For $u_0 = \langle 0, 0\rangle$: the conjugate coordinate is $0 \in [\varphi - 2, \varphi - 1]$, lighting up physical position $y_0 = 0$ (spacing $y_0 - y_{-1} = \varphi \approx 1.6180 \ge 1$);
 - For $u_1 = \langle 1, 1\rangle$ and $u_2 = \langle 1, 2\rangle$: the conjugate coordinates are $2 - \varphi \approx +0.3820 \in [\varphi - 2, \varphi - 1]$ and $3 - 2\varphi \approx -0.2361 \in [\varphi - 2, \varphi - 1]$, lighting up $y_1 = 1 + \varphi = \varphi^2 \approx 2.6180$ and $y_2 = 1 + 2\varphi \approx 4.2361$ (whereas the intermediate candidate $\langle 0, 1\rangle \mapsto \varphi \approx 1.6180$ has conjugate $1 - \varphi \approx -0.6180 < \varphi - 2$ outside the window and is filtered out, leaving adjacent gaps $y_1 - y_0 = \varphi^2 \approx 2.6180 \le 6$ and $y_2 - y_1 = \varphi \approx 1.6180 \ge 1$ strictly within the packing radius $1/2$ and covering radius $3$ bounds).
 
+::: {.figure src="ch37-golden-cut"}
+**One window of width $1$ lights a whole row of separated places on the real line at once.** Above are the golden lattice points $\langle a, b\rangle$, with the physical coordinate $a + b\varphi$ across and the conjugate coordinate $a + b(1 - \varphi)$ up; the cyan horizontal strip is $\mathrm{goldenWindow} = [\varphi - 2, \varphi - 1]$. The five cyan lattice points in the strip drop along dashed lines onto the real line $E_\parallel$ below and light $y_{-2}, y_{-1}, y_0, y_1, y_2$, neighbours at least $1$ apart; $\langle 0, 1\rangle$ lies below the strip, and its place $\varphi$ on the real line is crossed out. These are the five points counted by hand above; the whole real line is the content of [@thm-ch37-golden-cut-delone-multilocation], item 2.
+:::
+
 Thus the physical slice $\operatorname{modelSet}(\mathrm{goldenWindow})$ cut out by a single internal window **is never an isolated point—it is a Delone cut-and-project constellation spanning the entire real line $\mathbb{R}$ with minimum spacing $1$ (packing radius $1/2$) and maximum covering radius $3$!** (For additional external literature context, see [@rem-ch37-dream-eraser-synthesis-table] below.) Daytime five-sense gating restricts readout to the single node nearest $\mathbf{x}_0$; when deep sleep unloads $\mathbf{P}_{\mathrm{body}}$ and local chronological guards, multiple compatible cut-points $\{\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_K\}$ across the same internal window illuminate awareness simultaneously.
 
-We consolidate waking five-sense lock, shallow nocturnal erasure, and bodiless deep-dream awareness under our **`MODEL` (interpretive model)** in the boxed three-regime ledger and diagram below:
+::: {.viz src="dream-decoherence-unpinning" preset="wake_snap" height="500"}
+**Waking: the readout keeps only the body cell.** The dream state (λ = 0.1) has weight on all four places, bound together by coherence; the readout projection P₀ = |x₀⟩⟨x₀| (amber frame) keeps only the body cell x₀, the weight of the other three places fades out with all the coherence, and the forgotten weight is 1 − Tr(P₀ρ) = 0.60. This is a model (`MODEL`), not the cut-and-project star net itself.
+:::
 
-::: {.remark #rem-ch37-dream-eraser-synthesis-table title="Three-Regime Synthesis Table and Diagram of Waking Lock, Dream Erasure, and Nonlocal Emergence (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** The table and figure below synthesize Gram-elliptope ([Chapter 29](ch29-timeless-causality-and-gram-space.md#sec-coda-finite-observer-time-field) [@thm-ch29-gram-rigidity-and-pell]), cut-and-project quasicrystal aperiodicity (M. Baake & U. Grimm, *Aperiodic Order, Vol. 1*, Cambridge Univ. Press, 2013), quantum-eraser, and predictive-processing literature alongside our `MODEL` and formal decoherence-reversal and golden Delone theorems (`LEAN ✓`):
+We consolidate waking five-sense lock, shallow nocturnal erasure, and bodiless deep-dream awareness under our **`MODEL` (interpretive model)** in the boxed three-regime ledger below:
+
+::: {.remark #rem-ch37-dream-eraser-synthesis-table title="Three-Regime Synthesis Table of Waking Lock, Dream Erasure, and Nonlocal Emergence (Literature Result, Not Formalized in This Book)"}
+**Literature result, not formalized in this book.** The table below synthesizes Gram-elliptope ([Chapter 29](ch29-timeless-causality-and-gram-space.md#sec-coda-finite-observer-time-field) [@thm-ch29-gram-rigidity-and-pell]), cut-and-project quasicrystal aperiodicity (M. Baake & U. Grimm, *Aperiodic Order, Vol. 1*, Cambridge Univ. Press, 2013), quantum-eraser, and predictive-processing literature alongside our `MODEL` and formal decoherence-reversal and golden Delone theorems (`LEAN ✓`):
 
 | Regime of Awareness (`MODEL`) | Known-Data Anchors & Bodily Prior | Gram Volume & Off-Diagonal Coherence Fate | Spatial Addressing & Observer Localization | Phenomenological Vista & Ontological Verdict |
 | :--- | :--- | :--- | :--- | :--- |
@@ -265,11 +309,13 @@ We consolidate waking five-sense lock, shallow nocturnal erasure, and bodiless d
 | **2. Shallow Dream Erasure (Partial Memory Forgetting)** | Suspends $\Delta M$ spatiotemporal and chronological constraints and applies coherent conjugation to local record copies | The retained principal minor in this example does not decrease ($\det G_2 \ge \det G_3$; strictly under the stated coupling conditions, e.g., to $0.360$); suppressed off-diagonal coherence restores under joint reversal | Oblique cross-layer addressing across eras and places sharing internal phase | Redeems counterfactual branches missed by daytime choice, while any unreversed copy leaves residual phase twist |
 | **3. Bodiless Deep Dream & Pure Awareness (Bodily Prior Zeroed)** | Bodily prior zeroed ($\mathbf{P}_{\mathrm{body}} \to 0$) and five-sense local throttle removed, retaining self-referential core $\psi = \psi(\psi)$ | Frees the observer from single-step avatar pinching overhead, aligning the internal acceptance window directly with the global lattice | Nonlocal simultaneous emergence across multiple positions $\{\mathbf{x}_1, \dots, \mathbf{x}_K\}$ along the golden cut-and-project Delone quasicrystal carrier (packing radius $1/2$, covering radius $3$) | Falsifies vessel materialism: waking and dreaming appearances alike are projection-mask inner-product renderings, while self-referential measurement alone shines undiminished |
 
-The strict positive sign in Panel II belongs to the coupled numerical example $0.104 \to 0.360$; the general difference is nonnegative. Panel I depicts unread pinching, with a single-line experience requiring outcome conditioning; Panel III uses $P_{\mathrm{body}} \to 0$ as shorthand for zero loading weight.
-
-![Dream quantum erasure, bodily prior unloading, and nonlocal multi-position observer emergence](../assets/fig-37-dream-eraser-nonlocal.svg)
+Panel I of Figure 37 depicts unread pinching, with a single-line experience requiring outcome conditioning; Panel III uses $P_{\mathrm{body}} \to 0$ as shorthand for zero loading weight. The strict positive sign in the Gram-window figure after [@ex-ch37-gram-constraint-release] belongs to the coupled numerical example $0.104 \to 0.360$; the general difference is nonnegative.
 :::
 
-Stepping across the three panels of [@rem-ch37-dream-eraser-synthesis-table] dissolves the ancient opposition between noon and midnight: waking perception is not the sole reality, only a high-magnification narrow-aperture visor worn to place crisp moves among slow-clock material attractors; dreaming is not neural noise, but a nightly quantum erasure that lifts the visor and unbuckles the bodily armor—letting finite awareness revisit unwalked orthogonal paths and verify firsthand that even without a body, across every Delone cut-and-project node, the seeing, feeling, self-referential observer shines undiminished.
+Stepping down the three rows of [@rem-ch37-dream-eraser-synthesis-table], the three scenes of Figure 37, panels I, II and III, dissolves the ancient opposition between noon and midnight: waking perception is not the sole reality, only a high-magnification narrow-aperture visor worn to place crisp moves among slow-clock material attractors; dreaming is not neural noise, but a nightly quantum erasure that lifts the visor and unbuckles the bodily armor—letting finite awareness revisit unwalked orthogonal paths and verify firsthand that even without a body, across every Delone cut-and-project node, the seeing, feeling, self-referential observer shines undiminished.
+
+::: {.viz src="dream-decoherence-unpinning" height="620"}
+**The dream-erasure lab.** Three scenes on one density-matrix grid and one screen: Anchors (the decoherence interpolation ρ(λ)), Records (writing and jointly reversing multi-copy phase records) and Waking (the readout projection and the forgotten weight). Green is reserved for the theorems this chapter cites with `lean=`; the screen, the places and the readings “dream” and “waking” are a model chosen for the picture.
+:::
 
 And once we recognize that five-sense waking lock, dream montage, and bodiless multi-location are simply different **address masks** querying one unchanging global lattice, an unmistakable computer-architecture revelation steps into view: **if not a single brick of the timeless carrier needs to be physically hauled around when awareness shifts from $\mathbf{x}_0$ to $\{\mathbf{x}_1, \dots, \mathbf{x}_K\}$, what hardware primitive *is* the observer inside the cosmic quantum computer?** In the next chapter, we unveil that crystalline answer: **an addressing pointer `ptr` scanning a static ontological Quantum Random-Access Memory (QRAM)**.

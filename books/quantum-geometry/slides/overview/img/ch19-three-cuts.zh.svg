@@ -26,6 +26,6 @@
 <text class="tf-magenta" x="312" y="118.5" font-size="15" font-weight="600"><tspan font-style="italic">ad</tspan> = 6</text>
 <text class="tf-magenta" x="312" y="221.5" font-size="15" font-weight="600"><tspan font-style="italic">bc</tspan> = 6</text>
 <text class="tf-dim" x="116" y="99.5" font-size="15" text-anchor="end">3<tspan font-style="italic">ac</tspan> = 12</text>
-<text class="tf-dim ts-bg" x="190" y="205" font-size="13" text-anchor="middle" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">r</tspan> = 0, 1, 2</text>
+<text class="tf-dim ts-bg" x="190" y="205" font-size="14" text-anchor="middle" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">r</tspan> = 0, 1, 2</text>
 <text class="tf-magenta" x="484" y="300" font-size="14" text-anchor="end">最小割 = min(12, 6, 6) = 6</text>
 </svg>

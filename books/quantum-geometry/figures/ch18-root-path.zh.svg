@@ -1,43 +1,43 @@
-<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch18-root-path" data-lang="zh" viewBox="0 0 540 318" width="540" height="318" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="一张七个顶点的有向图。青色的六条边是选定的生成树 T，灰色虚线是树外的弦，其中有一条从顶点回到自身的自环，还有一条与树边平行的重边。左边的根 r 到右上角的顶点 a 只有一条树路径，画成粗青线，经过三条边 e₁、e₂、e₃：e₁ 与 e₃ 的方向顺着走，标着 × u(e₁)、× u(e₃)；e₂ 的方向逆着走，标着 × u(e₂)⁻¹。底部写着 rootPhase(a) = u(e₁) · u(e₂)⁻¹ · u(e₃)。">
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch18-root-path" data-lang="zh" viewBox="0 0 500 318" width="500" height="318" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="一张七个顶点的有向图。青色的六条边是选定的生成树 T，灰色虚线是树外的弦，其中有一条从顶点回到自身的自环，还有一条与树边平行的重边。左边的根 r 到右上角的顶点 a 只有一条树路径，画成粗青线，经过三条边 e₁、e₂、e₃：e₁ 与 e₃ 的方向顺着走，标着 × u(e₁)、× u(e₃)；e₂ 的方向逆着走，标着 × u(e₂)⁻¹。底部写着 rootPhase(a) = u(e₁) · u(e₂)⁻¹ · u(e₃)。">
 <title>一张七个顶点的有向图。青色的六条边是选定的生成树 T，灰色虚线是树外的弦，其中有一条从顶点回到自身的自环，还有一条与树边平行的重边。左边的根 r 到右上角的顶点 a 只有一条树路径，画成粗青线，经过三条边 e₁、e₂、e₃：e₁ 与 e₃ 的方向顺着走，标着 × u(e₁)、× u(e₃)；e₂ 的方向逆着走，标着 × u(e₂)⁻¹。底部写着 rootPhase(a) = u(e₁) · u(e₂)⁻¹ · u(e₃)。</title>
 <style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
-<line x1="180" y1="82" x2="180" y2="220" class="ts-dim" stroke-width="1.5" stroke-dasharray="4 3" fill="none"/>
-<path d="M180 156.52 L176.64 148.52 L183.36 148.52Z" class="tf-dim"/>
-<line x1="300" y1="128" x2="310" y2="232" class="ts-dim" stroke-width="1.5" stroke-dasharray="4 3" fill="none"/>
-<path d="M305.4 184.16 L301.29 176.52 L307.98 175.88Z" class="tf-dim"/>
-<line x1="440" y1="70" x2="446" y2="196" class="ts-dim" stroke-width="1.5" stroke-dasharray="4 3" fill="none"/>
-<path d="M443.24 138.04 L439.5 130.21 L446.22 129.89Z" class="tf-dim"/>
-<path d="M310 232 L305.67 234.44 L301.33 236.68 L297 238.72 L292.67 240.57 L288.33 242.22 L284 243.68 L279.67 244.94 L275.33 246.01 L271 246.88 L266.67 247.56 L262.33 248.04 L258 248.32 L253.67 248.41 L249.33 248.3 L245 248 L240.67 247.5 L236.33 246.81 L232 245.92 L227.67 244.84 L223.33 243.56 L219 242.08 L214.67 240.41 L210.33 238.54 L206 236.48 L201.67 234.22 L197.33 231.77 L193 229.12 L188.67 226.28 L184.33 223.24 L180 220" class="ts-dim" stroke-width="1.5" stroke-dasharray="4 3" stroke-linejoin="round" fill="none"/>
-<path d="M240.67 247.5 L249.05 245.26 L248.13 251.92Z" class="tf-dim"/>
-<path d="M450.84 214.79 L450.21 212.43 L450 210 L450.21 207.57 L450.84 205.21 L451.88 203 L453.28 201 L455 199.28 L457 197.88 L459.21 196.84 L461.57 196.21 L464 196 L466.43 196.21 L468.79 196.84 L471 197.88 L473 199.28 L474.72 201 L476.12 203 L477.16 205.21 L477.79 207.57 L478 210 L477.79 212.43 L477.16 214.79 L476.12 217 L474.72 219 L473 220.72 L471 222.12 L468.79 223.16 L466.43 223.79 L464 224 L461.57 223.79 L459.21 223.16 L457 222.12" class="ts-dim" stroke-width="1.5" stroke-dasharray="4 3" stroke-linejoin="round" fill="none"/>
-<path d="M457 222.12 L464.59 222.42 L462.1 227.75Z" class="tf-dim"/>
-<line x1="62" y1="150" x2="180" y2="82" class="ts-cyan" stroke-width="4.6" stroke-linecap="round" fill="none"/>
-<path d="M125.72 113.28 L118.5 122.78 L113.88 114.77Z" class="tf-cyan"/>
-<line x1="300" y1="128" x2="180" y2="82" class="ts-cyan" stroke-width="4.6" stroke-linecap="round" fill="none"/>
-<path d="M235.2 103.16 L247.12 102.78 L243.82 111.41Z" class="tf-cyan"/>
-<line x1="300" y1="128" x2="440" y2="70" class="ts-cyan" stroke-width="4.6" stroke-linecap="round" fill="none"/>
-<path d="M375.6 96.68 L367.21 105.16 L363.67 96.62Z" class="tf-cyan"/>
-<line x1="62" y1="150" x2="180" y2="220" class="ts-cyan" stroke-width="2" stroke-linecap="round" fill="none"/>
-<path d="M125.72 187.8 L116.05 186.46 L119.91 179.96Z" class="tf-cyan"/>
-<line x1="180" y1="220" x2="310" y2="232" class="ts-cyan" stroke-width="2" stroke-linecap="round" fill="none"/>
-<path d="M250.2 226.48 L240.89 229.42 L241.59 221.89Z" class="tf-cyan"/>
-<line x1="446" y1="196" x2="310" y2="232" class="ts-cyan" stroke-width="2" stroke-linecap="round" fill="none"/>
-<path d="M372.56 215.44 L380.29 209.48 L382.23 216.79Z" class="tf-cyan"/>
-<circle cx="62" cy="150" r="6.5" class="ts-bg tf-ink" stroke-width="1.4"/>
-<circle cx="180" cy="82" r="4.6" class="ts-bg tf-ink" stroke-width="1.4"/>
-<circle cx="300" cy="128" r="4.6" class="ts-bg tf-ink" stroke-width="1.4"/>
-<circle cx="440" cy="70" r="6.5" class="ts-bg tf-ink" stroke-width="1.4"/>
-<circle cx="180" cy="220" r="4.6" class="ts-bg tf-ink" stroke-width="1.4"/>
-<circle cx="310" cy="232" r="4.6" class="ts-bg tf-ink" stroke-width="1.4"/>
-<circle cx="446" cy="196" r="4.6" class="ts-bg tf-ink" stroke-width="1.4"/>
-<text class="tf-ink" x="50" y="155" font-size="17" text-anchor="end" font-weight="600"><tspan font-style="italic">r</tspan></text>
-<text class="tf-ink" x="452" y="76" font-size="17" font-weight="600"><tspan font-style="italic">a</tspan></text>
-<text class="tf-cyan ts-bg" x="107" y="108" font-size="14" text-anchor="end" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">× <tspan font-style="italic">u</tspan>(<tspan font-style="italic">e</tspan>₁)</text>
-<text class="tf-cyan ts-bg" x="240" y="91" font-size="14" text-anchor="middle" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">× <tspan font-style="italic">u</tspan>(<tspan font-style="italic">e</tspan>₂)⁻¹</text>
-<text class="tf-cyan ts-bg" x="376" y="121" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">× <tspan font-style="italic">u</tspan>(<tspan font-style="italic">e</tspan>₃)</text>
-<text class="tf-cyan" x="270" y="306" font-size="15" text-anchor="middle" font-weight="600">rootPhase(<tspan font-style="italic">a</tspan>) = <tspan font-style="italic">u</tspan>(<tspan font-style="italic">e</tspan>₁) · <tspan font-style="italic">u</tspan>(<tspan font-style="italic">e</tspan>₂)⁻¹ · <tspan font-style="italic">u</tspan>(<tspan font-style="italic">e</tspan>₃)</text>
-<line x1="16" y1="19.84" x2="34" y2="19.84" class="ts-cyan" stroke-width="2.6" fill="none"/>
-<text class="tf-dim" x="42" y="24" font-size="13">生成树 <tspan font-style="italic">T</tspan></text>
-<line x1="16" y1="39.8" x2="34" y2="39.8" class="ts-dim" stroke-width="1.5" stroke-dasharray="4 3" fill="none"/>
-<text class="tf-dim" x="42" y="44" font-size="13">弦 <tspan font-style="italic">e</tspan> ∉ <tspan font-style="italic">T</tspan></text>
+<line x1="162" y1="82" x2="162" y2="220" class="ts-dim" stroke-width="1.5" stroke-dasharray="4 3" fill="none"/>
+<path d="M162 156.52 L158.64 148.52 L165.36 148.52Z" class="tf-dim"/>
+<line x1="282" y1="128" x2="292" y2="232" class="ts-dim" stroke-width="1.5" stroke-dasharray="4 3" fill="none"/>
+<path d="M287.4 184.16 L283.29 176.52 L289.98 175.88Z" class="tf-dim"/>
+<line x1="422" y1="70" x2="428" y2="196" class="ts-dim" stroke-width="1.5" stroke-dasharray="4 3" fill="none"/>
+<path d="M425.24 138.04 L421.5 130.21 L428.22 129.89Z" class="tf-dim"/>
+<path d="M292 232 L287.67 234.44 L283.33 236.68 L279 238.72 L274.67 240.57 L270.33 242.22 L266 243.68 L261.67 244.94 L257.33 246.01 L253 246.88 L248.67 247.56 L244.33 248.04 L240 248.32 L235.67 248.41 L231.33 248.3 L227 248 L222.67 247.5 L218.33 246.81 L214 245.92 L209.67 244.84 L205.33 243.56 L201 242.08 L196.67 240.41 L192.33 238.54 L188 236.48 L183.67 234.22 L179.33 231.77 L175 229.12 L170.67 226.28 L166.33 223.24 L162 220" class="ts-dim" stroke-width="1.5" stroke-dasharray="4 3" stroke-linejoin="round" fill="none"/>
+<path d="M222.67 247.5 L231.05 245.26 L230.13 251.92Z" class="tf-dim"/>
+<path d="M432.84 214.79 L432.21 212.43 L432 210 L432.21 207.57 L432.84 205.21 L433.88 203 L435.28 201 L437 199.28 L439 197.88 L441.21 196.84 L443.57 196.21 L446 196 L448.43 196.21 L450.79 196.84 L453 197.88 L455 199.28 L456.72 201 L458.12 203 L459.16 205.21 L459.79 207.57 L460 210 L459.79 212.43 L459.16 214.79 L458.12 217 L456.72 219 L455 220.72 L453 222.12 L450.79 223.16 L448.43 223.79 L446 224 L443.57 223.79 L441.21 223.16 L439 222.12" class="ts-dim" stroke-width="1.5" stroke-dasharray="4 3" stroke-linejoin="round" fill="none"/>
+<path d="M439 222.12 L446.59 222.42 L444.1 227.75Z" class="tf-dim"/>
+<line x1="44" y1="150" x2="162" y2="82" class="ts-cyan" stroke-width="4.6" stroke-linecap="round" fill="none"/>
+<path d="M107.72 113.28 L100.5 122.78 L95.88 114.77Z" class="tf-cyan"/>
+<line x1="282" y1="128" x2="162" y2="82" class="ts-cyan" stroke-width="4.6" stroke-linecap="round" fill="none"/>
+<path d="M217.2 103.16 L229.12 102.78 L225.82 111.41Z" class="tf-cyan"/>
+<line x1="282" y1="128" x2="422" y2="70" class="ts-cyan" stroke-width="4.6" stroke-linecap="round" fill="none"/>
+<path d="M357.6 96.68 L349.21 105.16 L345.67 96.62Z" class="tf-cyan"/>
+<line x1="44" y1="150" x2="162" y2="220" class="ts-cyan" stroke-width="2" stroke-linecap="round" fill="none"/>
+<path d="M107.72 187.8 L98.05 186.46 L101.91 179.96Z" class="tf-cyan"/>
+<line x1="162" y1="220" x2="292" y2="232" class="ts-cyan" stroke-width="2" stroke-linecap="round" fill="none"/>
+<path d="M232.2 226.48 L222.89 229.42 L223.59 221.89Z" class="tf-cyan"/>
+<line x1="428" y1="196" x2="292" y2="232" class="ts-cyan" stroke-width="2" stroke-linecap="round" fill="none"/>
+<path d="M354.56 215.44 L362.29 209.48 L364.23 216.79Z" class="tf-cyan"/>
+<circle cx="44" cy="150" r="6.5" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="162" cy="82" r="4.6" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="282" cy="128" r="4.6" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="422" cy="70" r="6.5" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="162" cy="220" r="4.6" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="292" cy="232" r="4.6" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="428" cy="196" r="4.6" class="ts-bg tf-ink" stroke-width="1.4"/>
+<text class="tf-ink" x="32" y="155" font-size="17" text-anchor="end" font-weight="600"><tspan font-style="italic">r</tspan></text>
+<text class="tf-ink" x="434" y="76" font-size="17" font-weight="600"><tspan font-style="italic">a</tspan></text>
+<text class="tf-cyan ts-bg" x="89" y="108" font-size="14" text-anchor="end" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">× <tspan font-style="italic">u</tspan>(<tspan font-style="italic">e</tspan>₁)</text>
+<text class="tf-cyan ts-bg" x="222" y="91" font-size="14" text-anchor="middle" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">× <tspan font-style="italic">u</tspan>(<tspan font-style="italic">e</tspan>₂)⁻¹</text>
+<text class="tf-cyan ts-bg" x="358" y="121" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">× <tspan font-style="italic">u</tspan>(<tspan font-style="italic">e</tspan>₃)</text>
+<text class="tf-cyan" x="250" y="306" font-size="15" text-anchor="middle" font-weight="600">rootPhase(<tspan font-style="italic">a</tspan>) = <tspan font-style="italic">u</tspan>(<tspan font-style="italic">e</tspan>₁) · <tspan font-style="italic">u</tspan>(<tspan font-style="italic">e</tspan>₂)⁻¹ · <tspan font-style="italic">u</tspan>(<tspan font-style="italic">e</tspan>₃)</text>
+<line x1="16" y1="19.52" x2="34" y2="19.52" class="ts-cyan" stroke-width="2.6" fill="none"/>
+<text class="tf-dim" x="42" y="24" font-size="14">生成树 <tspan font-style="italic">T</tspan></text>
+<line x1="16" y1="39.5" x2="34" y2="39.5" class="ts-dim" stroke-width="1.5" stroke-dasharray="4 3" fill="none"/>
+<text class="tf-dim" x="42" y="44" font-size="14">弦 <tspan font-style="italic">e</tspan> ∉ <tspan font-style="italic">T</tspan></text>
 </svg>

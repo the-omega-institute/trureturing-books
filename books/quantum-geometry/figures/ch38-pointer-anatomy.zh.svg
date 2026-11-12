@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch38-pointer-anatomy" data-lang="zh" viewBox="0 0 460 372" width="460" height="372" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="左边一枚竖放的指针寄存器，分成五段：1 Base，2 MMU 边界，3 叠加指针 Σ α_k |addr_k⟩，4 TLB，5 &amp;State。每段右边一幅小图和一句话。第 1 段：一片格点和一支写着 u 的箭头，从格点角上移到一个偏移的原点，旁注“第一人称原点”。第 2 段：一排小格，中间三格被框住，一支伸出框外的箭头被划掉，旁注“清醒五感沙箱”。第 3 段：一个点同时发出三支青色箭头指向三格，旁注“梦中多路寻址”。第 4 段：一排点之间有灰色虚线的小跳，上方一条青色弧线从头直达末尾，旁注“学会的捷径”。第 5 段：两支青色箭头指向同一页，旁边一张虚线复印页被划掉，旁注“共指一页，不许复印”。">
+<title>左边一枚竖放的指针寄存器，分成五段：1 Base，2 MMU 边界，3 叠加指针 Σ α_k |addr_k⟩，4 TLB，5 &amp;State。每段右边一幅小图和一句话。第 1 段：一片格点和一支写着 u 的箭头，从格点角上移到一个偏移的原点，旁注“第一人称原点”。第 2 段：一排小格，中间三格被框住，一支伸出框外的箭头被划掉，旁注“清醒五感沙箱”。第 3 段：一个点同时发出三支青色箭头指向三格，旁注“梦中多路寻址”。第 4 段：一排点之间有灰色虚线的小跳，上方一条青色弧线从头直达末尾，旁注“学会的捷径”。第 5 段：两支青色箭头指向同一页，旁边一张虚线复印页被划掉，旁注“共指一页，不许复印”。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<rect x="16" y="20" width="150" height="66" class="ts-edge tf-panel" stroke-width="1.2"/>
+<text class="tf-dim" x="28" y="58.04" font-size="14" font-weight="600">1</text>
+<text class="tf-ink tr-fig-mono" x="48" y="58.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">Base</text>
+<circle cx="194" cy="37" r="1.9" class="tf-faint"/>
+<circle cx="194" cy="53" r="1.9" class="tf-faint"/>
+<circle cx="194" cy="69" r="1.9" class="tf-faint"/>
+<circle cx="210" cy="37" r="1.9" class="tf-faint"/>
+<circle cx="210" cy="53" r="1.9" class="tf-faint"/>
+<circle cx="210" cy="69" r="1.9" class="tf-faint"/>
+<circle cx="226" cy="37" r="1.9" class="tf-faint"/>
+<circle cx="226" cy="53" r="1.9" class="tf-faint"/>
+<circle cx="226" cy="69" r="1.9" class="tf-faint"/>
+<circle cx="242" cy="37" r="1.9" class="tf-faint"/>
+<circle cx="242" cy="53" r="1.9" class="tf-faint"/>
+<circle cx="242" cy="69" r="1.9" class="tf-faint"/>
+<circle cx="258" cy="37" r="1.9" class="tf-faint"/>
+<circle cx="258" cy="53" r="1.9" class="tf-faint"/>
+<circle cx="258" cy="69" r="1.9" class="tf-faint"/>
+<line x1="194" y1="69" x2="246.44" y2="49.11" class="ts-ink" stroke-width="1.8" fill="none"/>
+<path d="M252 47 L246.5 52.23 L244.41 46.73Z" class="tf-ink"/>
+<circle cx="256" cy="45" r="3.6" class="ts-bg tf-ink" stroke-width="1.4"/>
+<text class="tf-ink" x="222" y="75" font-size="14" font-style="italic"><tspan font-style="italic">u</tspan></text>
+<text class="tf-dim" x="322" y="57.68" font-size="13">第一人称原点</text>
+<rect x="16" y="86" width="150" height="66" class="ts-edge tf-panel" stroke-width="1.2"/>
+<text class="tf-dim" x="28" y="124.04" font-size="14" font-weight="600">2</text>
+<text class="tf-ink tr-fig-mono" x="48" y="124.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">MMU Bounds</text>
+<rect x="186" y="110" width="16" height="18" rx="2" class="ts-edge tf-panel" stroke-width="1"/>
+<rect x="204" y="110" width="16" height="18" rx="2" class="ts-edge tf-panel" stroke-width="1"/>
+<rect x="222" y="110" width="16" height="18" rx="2" class="ts-edge tf-panel" stroke-width="1"/>
+<rect x="240" y="110" width="16" height="18" rx="2" class="ts-edge tf-panel" stroke-width="1"/>
+<rect x="258" y="110" width="16" height="18" rx="2" class="ts-edge tf-panel" stroke-width="1"/>
+<rect x="276" y="110" width="16" height="18" rx="2" class="ts-edge tf-panel" stroke-width="1"/>
+<rect x="201" y="106" width="58" height="26" rx="3" class="ts-ink" stroke-width="1.8" fill="none"/>
+<line x1="248" y1="119" x2="290.05" y2="119" class="ts-dim" stroke-width="1.6" fill="none"/>
+<path d="M296 119 L289 121.94 L289 116.06Z" class="tf-dim"/>
+<line x1="273" y1="112" x2="287" y2="126" class="ts-dim" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+<line x1="273" y1="126" x2="287" y2="112" class="ts-dim" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+<text class="tf-dim" x="322" y="123.68" font-size="13">清醒五感沙箱</text>
+<line x1="180" y1="86" x2="452" y2="86" class="ts-faint" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+<rect x="16" y="152" width="150" height="66" class="ts-edge tf-panel" stroke-width="1.2"/>
+<text class="tf-dim" x="28" y="190.04" font-size="14" font-weight="600">3</text>
+<text class="tf-ink" x="48" y="190.04" font-size="14" font-weight="600">Σ α<tspan dy="0.28em" font-size="72%">k</tspan><tspan dy="-0.28em">|addr</tspan><tspan dy="0.28em" font-size="72%">k</tspan><tspan dy="-0.28em">⟩</tspan></text>
+<circle cx="194" cy="185" r="4" class="ts-bg tf-ink" stroke-width="1.4"/>
+<rect x="276" y="155" width="20" height="16" rx="2" class="ts-edge tf-panel" stroke-width="1"/>
+<line x1="199" y1="181.7" x2="267.23" y2="164.46" class="ts-cyan" stroke-width="1.8" fill="none"/>
+<path d="M273 163 L266.93 167.57 L265.49 161.86Z" class="tf-cyan"/>
+<rect x="276" y="177" width="20" height="16" rx="2" class="ts-edge tf-panel" stroke-width="1"/>
+<line x1="199" y1="185" x2="267.05" y2="185" class="ts-cyan" stroke-width="1.8" fill="none"/>
+<path d="M273 185 L266 187.94 L266 182.06Z" class="tf-cyan"/>
+<rect x="276" y="199" width="20" height="16" rx="2" class="ts-edge tf-panel" stroke-width="1"/>
+<line x1="199" y1="188.3" x2="267.23" y2="205.54" class="ts-cyan" stroke-width="1.8" fill="none"/>
+<path d="M273 207 L265.49 208.14 L266.93 202.43Z" class="tf-cyan"/>
+<text class="tf-dim" x="322" y="189.68" font-size="13">梦中多路寻址</text>
+<line x1="180" y1="152" x2="452" y2="152" class="ts-faint" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+<rect x="16" y="218" width="150" height="66" class="ts-edge tf-panel" stroke-width="1.2"/>
+<text class="tf-dim" x="28" y="256.04" font-size="14" font-weight="600">4</text>
+<text class="tf-ink tr-fig-mono" x="48" y="256.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">TLB</text>
+<path d="M194 263.0 Q207.0 249.0 220 263.0" class="ts-dim" stroke-width="1.3" stroke-dasharray="3 3" fill="none"/>
+<path d="M220 263.0 Q233.0 249.0 246 263.0" class="ts-dim" stroke-width="1.3" stroke-dasharray="3 3" fill="none"/>
+<path d="M246 263.0 Q259.0 249.0 272 263.0" class="ts-dim" stroke-width="1.3" stroke-dasharray="3 3" fill="none"/>
+<path d="M272 263.0 Q285.0 249.0 298 263.0" class="ts-dim" stroke-width="1.3" stroke-dasharray="3 3" fill="none"/>
+<circle cx="194" cy="263" r="3" class="tf-dim"/>
+<circle cx="220" cy="263" r="3" class="tf-dim"/>
+<circle cx="246" cy="263" r="3" class="tf-dim"/>
+<circle cx="272" cy="263" r="3" class="tf-dim"/>
+<circle cx="298" cy="263" r="3" class="tf-dim"/>
+<path d="M194 263.0 C214 217.0 278 217.0 298 259.0" class="ts-cyan" stroke-width="2.2" fill="none"/>
+<path d="M298 260 L291.28 254.51 L297.21 251.36Z" class="tf-cyan"/>
+<text class="tf-dim" x="322" y="255.68" font-size="13">学会的捷径</text>
+<line x1="180" y1="218" x2="452" y2="218" class="ts-faint" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+<rect x="16" y="284" width="150" height="66" class="ts-edge tf-panel" stroke-width="1.2"/>
+<text class="tf-dim" x="28" y="322.04" font-size="14" font-weight="600">5</text>
+<text class="tf-ink tr-fig-mono" x="48" y="322.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">&amp;State</text>
+<rect x="212" y="293" width="40" height="26" rx="3" class="ts-ink tf-panel" stroke-width="1.5"/>
+<line x1="196" y1="339" x2="216.36" y2="324.46" class="ts-cyan" stroke-width="1.8" fill="none"/>
+<path d="M221.2 321 L217.21 327.46 L213.8 322.68Z" class="tf-cyan"/>
+<line x1="268" y1="339" x2="247.64" y2="324.46" class="ts-cyan" stroke-width="1.8" fill="none"/>
+<path d="M242.8 321 L250.2 322.68 L246.79 327.46Z" class="tf-cyan"/>
+<rect x="282" y="295" width="26" height="22" rx="3" class="ts-dim" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<line x1="287" y1="298" x2="303" y2="314" class="ts-dim" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<line x1="287" y1="314" x2="303" y2="298" class="ts-dim" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+<text class="tf-dim" x="322" y="321.68" font-size="13">共指一页，不许复印</text>
+<line x1="180" y1="284" x2="452" y2="284" class="ts-faint" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+<rect x="16" y="20" width="150" height="330" rx="3" class="ts-ink" stroke-width="1.8" fill="none"/>
+<text class="tf-ink tr-fig-mono" x="91" y="368" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle" font-weight="600">ptr</text>
+</svg>

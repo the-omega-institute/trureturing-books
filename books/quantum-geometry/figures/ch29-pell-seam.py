@@ -13,7 +13,7 @@ import math
 
 from _ch29 import S
 
-SIZE = (560, 300)
+SIZE = (480, 300)
 ALT = {
     "zh": "横轴是步数 k = 0 到 5，纵轴是误差 P_{k+1}·s − P_k，按绝对值取对数刻度。六根竖线交替朝上（青色）和朝下（品红），绝对值依次是 0.414、0.172、0.071、0.029、0.012、0.005，"
           "端点都落在两条虚线包络 ±s^{k+1} 上，每一步缩短相同的一格，变号却不归零。竖线顶端标着渐近分数 1/1、3/2、7/5、17/12、41/29、99/70。"
@@ -47,18 +47,18 @@ def L(e):
 
 def draw(fig):
     t = fig.t
-    ax = fig.axes(96, 38, 420, 190, (-0.5, 5.6), (-3, 3))
+    ax = fig.axes(96, 38, 336, 190, (-0.5, 5.6), (-3, 3))
     ax.hline(0, "dim", 1.3)
     for v, lab in ((1, "0.01"), (2, "0.1"), (3, "1")):
         for sg in (1, -1):
             ax.cv.line(ax.X(-0.5) - 5, ax.Y(sg * v), ax.X(-0.5), ax.Y(sg * v), "dim", 1.2)
-            ax.text(-0.5, sg * v, ("" if sg > 0 else "−") + lab, dx=-8, size=13, color="dim", anchor="end", middle=True)
+            ax.text(-0.5, sg * v, ("" if sg > 0 else "−") + lab, dx=-8, size=14, color="dim", anchor="end", middle=True)
     ax.cv.line(ax.X(-0.5), ax.Y(3), ax.X(-0.5), ax.Y(-3), "dim", 1.3)
     env = lambda k: math.log10(S ** (k + 1)) + 3
     ax.plot(env, -0.2, 5.3, color="faint", width=1.4, dash="4 4")
     ax.plot(lambda k: -env(k), -0.2, 5.3, color="faint", width=1.4, dash="4 4")
-    ax.text(5.3, env(5.3), "*s*^{*k*+1}", dx=6, dy=0, size=13, color="dim", middle=True)
-    ax.text(5.3, -env(5.3), "−*s*^{*k*+1}", dx=6, dy=0, size=13, color="dim", middle=True)
+    ax.text(5.3, env(5.3), "*s*^{*k*+1}", dx=6, dy=0, size=14, color="dim", middle=True)
+    ax.text(5.3, -env(5.3), "−*s*^{*k*+1}", dx=6, dy=0, size=14, color="dim", middle=True)
     for k, e in enumerate(ERR):
         role = "line" if e > 0 else "area"
         x0, y0 = ax.pt(k, 0)
@@ -72,8 +72,8 @@ def draw(fig):
     yr = yk + 30
     fig.text(ax.X(-0.5) - 8, yr, "*Q*² − 2*P*²", size=14, color="ink", anchor="end", middle=True)
     for k in range(6):
-        fig.text(ax.X(k), yk, str(k), size=13, color="dim", anchor="middle", middle=True)
+        fig.text(ax.X(k), yk, str(k), size=14, color="dim", anchor="middle", middle=True)
         v = Q[k + 1] ** 2 - 2 * P[k + 1] ** 2
         fig.text(ax.X(k), yr, "+1" if v > 0 else "−1", size=15, color="ink", anchor="middle", middle=True, weight=600)
     fig.line(ax.X(-0.5), yk + 14, ax.X(5.6), yk + 14, "faint", 1.2)
-    fig.text(14, 17, t("误差（对数刻度）", "error (log scale)"), size=13, color="dim")
+    fig.text(14, 17, t("误差（对数刻度）", "error (log scale)"), size=14, color="dim")

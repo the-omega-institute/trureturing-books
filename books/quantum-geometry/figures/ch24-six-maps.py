@@ -12,13 +12,13 @@ import math
 
 from _ch24 import PHI
 
-SIZE = (560, 384)
+SIZE = (368, 580)
 ALT = {
-    "zh": "六个同样大小的小图，排成两行，每个画一条映射曲线（墨色）与灰色虚线对角线 y = x，交点就是不动点。"
+    "zh": "六个同样大小的小图，排成三行两列，每个画一条映射曲线（墨色）与灰色虚线对角线 y = x，交点就是不动点。"
           "x ↦ x：曲线与对角线重合，每一点都是不动点（empty）。x ↦ x + 1：与对角线平行，没有交点（dead）。"
           "x ↦ x/(x + 1)：只在 0 处碰到对角线（collapse）。x ↦ 1/x：交于 1 与 −1（collapse）。这些交点是青色的有理数。"
           "x ↦ 1 + 1/x：交于 φ 与 −1/φ（live）；x ↦ 1/(1 + x)：交于 1/φ 与 −φ（live）；这四个交点是品红的无理数。",
-    "en": "Six small plots of the same size in two rows, each with a map's curve (ink) and the grey dashed diagonal y = x; "
+    "en": "Six small plots of the same size in three rows of two, each with a map's curve (ink) and the grey dashed diagonal y = x; "
           "the crossings are the fixed points. x ↦ x: the curve lies on the diagonal, every point is fixed (empty). "
           "x ↦ x + 1: parallel to the diagonal, no crossing (dead). x ↦ x/(x + 1): touches the diagonal only at 0 "
           "(collapse). x ↦ 1/x: crosses at 1 and −1 (collapse). These crossings are cyan rationals. x ↦ 1 + 1/x: crosses at "
@@ -73,8 +73,8 @@ assert all(abs(u - v) < 1e-12 for u, v in zip(roots((0, 1, 1, 1)), [-PHI, 1 / PH
 
 
 def draw(fig):
-    panels = fig.row([176, 176, 176], 188, gap=16) + fig.row([176, 176, 176], 188, gap=16, y=196)
-    # (a fixed 3 × 2 grid: the six plots are read side by side, so they stay together on a phone)
+    panels = [p for y in (0, 196, 392) for p in fig.row([176, 176], 188, gap=16, y=y)]
+    # (a fixed 2 × 3 grid, narrow enough for a phone: the six plots are read side by side, so they stay together)
     R = 2.4
     for p, (m, label, fname) in zip(panels, MAPS):
         a, b, c, d = m

@@ -12,7 +12,7 @@ def grover_theta(N):
     return math.asin(1 / math.sqrt(N))
 
 
-def plane(cv, cx, cy, R, *, w_label=("*W* 成功", "*W* success"), b_label=("*B* 失败", "*B* failure"), below=False):
+def plane(cv, cx, cy, R, *, w_label=("*W* 成功", "*W* success"), b_label=("*B* 失败", "*B* failure"), below=False, size=13):
     """The two axes of the Grover plane and the quarter circle the unit states end on.
 
     Returns the map angle (degrees, from B towards W) -> canvas point at radius R."""
@@ -24,6 +24,6 @@ def plane(cv, cx, cy, R, *, w_label=("*W* 成功", "*W* success"), b_label=("*B*
     cv.arc(cx, cy, R, lo, 100, "faint", 1.2, dash="3 4")
     cv.line(cx, cy, cx + R * 1.12, cy, "dim", 1.3)
     cv.line(cx, cy, cx, cy - R * 1.12, "dim", 1.3)
-    cv.text(cx + R * 1.12 + 4, cy + 5, cv.t(*b_label), size=13, color="dim")
-    cv.text(cx + 8, cy - R * 1.12 + 4, cv.t(*w_label), size=13, color="dim")
+    cv.text(cx + R * 1.12 + 4, cy + 5, cv.t(*b_label), size=size, color="dim")
+    cv.text(cx + 8, cy - R * 1.12 + 4, cv.t(*w_label), size=size, color="dim")
     return P

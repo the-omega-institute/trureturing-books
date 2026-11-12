@@ -20,6 +20,10 @@ $$
 
 Within our geometric observer model (`MODEL`), the instant a bounded observer slides continuously across $\theta = 90^\circ$ into unanchored pure light, three structural consequences fall in rapid succession:
 
+::: {.figure src="ch36-overview"}
+**Figure 36.** The chapter at a glance. Panel I: on the vertical memory axis, the ink arrow at $\theta = 40^\circ$ casts the cyan shadow $\cos\theta$, while the magenta arrow that has reached $90^\circ$ casts a shadow shrunk to a point, $\cos 90^\circ = 0$. Panel II: starting from $\theta^*$ with equal rapidity steps $\Delta\eta = 1$, the cyan points sit at Poincaré-disk radius $\tanh(\eta_k/2)$; the faint circles through them crowd towards the rim but stay inside it, leaving the gap $\delta_k > 0$ (`MODEL`, see [@ex-ch36-inverse-gudermannian-discrete-staircase]). Panel III: the six digits of $0.\overline{142857}$ go round and round until the shift relation reduces them at once to the generator $1/7$ (see [@ex-ch36-repeating-decimal-quotient]).
+:::
+
 ---
 
 ## Why "Returning to Pure Light" Is Reincarnation: The $\cos 90^\circ = 0$ Amnesia Cliff
@@ -52,6 +56,10 @@ $$
 $$
 
 Watch what happens at $\theta = 90^\circ$ ($c = \cos 90^\circ = 0,\; s = \sin 90^\circ = 1$): the axial memory bias $\frac{1}{2}c^2$ inside the diagonal skeleton **vanishes identically**, leaving the pinched diagonal state at $\frac{1}{2}I_2$, unable to distinguish positive from negative bias on that axis! Before pinching, the state remains pure; its transverse component survives in the off-diagonal entries $\rho_{01} = \rho_{10} = \frac{1}{2}$; if the next environmental action is precisely complete unread pinching and its records are inaccessible, the entire off-diagonal coherence mass $\frac{1}{2}s^2 = \frac{1}{2}$ disappears from the local state, leaving a blank slate for this encoding. This does not imply destruction of all information in system and environment together.
+
+::: {.figure src="ch36-pinching-ledger"}
+**Reach $90^\circ$ and the axial bias carrying the memory is gone.** For the pure state $\rho(\cos\theta, \sin\theta)$, the diagonal skeleton left by pinching, $\frac{1}{2} + \frac{1}{2}\cos^2\theta$, splits into the grey constant $\frac{1}{2}$ and the cyan axial bias $\frac{1}{2}\cos^2\theta$; magenta is the discarded off-diagonal coherence $\frac{1}{2}\sin^2\theta$. The three bands always stack up to $1$, the Pythagorean split of Conjunct 1 of [@thm-ch36-pinching-skeleton-and-discarded-coherence] ($P$ in the figure is $\operatorname{pinching}$). At $\theta = 90^\circ$ the cyan band has no thickness. Reading $\cos\theta$ as a memory bias is this chapter's observer model (`MODEL`).
+:::
 
 At the formal level of finite-dimensional quantum channels, this exact orthogonal decomposition between the diagonal address skeleton and discarded off-diagonal coherence is locked in `trureturing` for arbitrary $2 \times 2$ complex qubit matrices (`pinching`, zero-retention phase damping; cf. [Chapter 4](ch04-decoherence.md)) by the three kernel theorems below:
 
@@ -101,7 +109,15 @@ How, then, can the first half of our chapter epigraph—*"returning to light can
 
 The secret lies in distinguishing an **external bystander's flat angular ruler** from an **endogenous observer's relative step ruler**!
 
+::: {.figure src="ch36-two-rulers"}
+**The outside angle ruler ends at $90^\circ$; the intrinsic rapidity ruler runs on to infinity.** On the lower, rapidity ruler the cyan points start at $\eta_0 = \eta(\theta^*) \approx 0.817$ and are spaced by equal steps $\Delta\eta = 1$; the dashed lines carry each to its angle $\theta_k$ on the upper ruler ($\sin\theta_k = \tanh\eta_k$). The first lands at $\theta^* \approx 42.3^\circ$, and each later one crowds closer to the magenta $90^\circ$ wall while staying to its left. The secant integral and the Gudermannian are literature results, not formalized in this book; the numbers are in [@ex-ch36-inverse-gudermannian-discrete-staircase].
+:::
+
 Imagine walking toward a sheer cliff edge: if you step forward by a fixed external angular ruler, finitely many strides cross straight over the brink. Suppose instead that an endogenous observer calibrates its outward step ruler relative to its current one-dimensional self-referential anchor (`MODEL`)—how then do discrete step counts relate asymptotically to the $\theta = \frac{\pi}{2}$ pure-light horizon (explicit intrinsic-rapidity integral and discrete remainder staircase derived in attributed example [@ex-ch36-inverse-gudermannian-discrete-staircase] below)?
+
+::: {.viz src="forgetting-rebirth-attractor" preset="erase_reset" height="500"}
+**Equal steps on the outside angle ruler hit the rim in a few steps.** Each step adds the same $\Delta\theta$ to $\theta$: the second step already lands on the white rim (magenta ring), then the walker falls back to the centre along the dashed line and starts from $0$ on a new spoke, only to hit the rim again; amber marks the current step.
+:::
 
 Before evaluating the explicit integral of this intrinsic staircase, we anchor two formal theorems in `trureturing`—the **explicit factorial remainder upper bound for finite exponential truncations on complete normed algebras** and the **unit-circle boundary criterion for the complex fractional transformation**—establishing quantitative truncation-error control for finite polynomial approximations alongside conformal compression of an unbounded half-plane onto a unit-circle horizon:
 
@@ -126,12 +142,14 @@ For Conjunct 1, shifting the convergent exponential series $\exp(z) = \sum_{k=0}
 :::
 
 ::: {.remark #rem-ch36-hyperbolic-staircase-figure title="Hyperbolic Horizon Disk, Discrete Rapidity Staircase, and Quotient-Space Diagram (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** The left panel combines Poincaré-disk and Gudermannian literature ([@ex-ch36-inverse-gudermannian-discrete-staircase] and [@rem-ch36-poincare-disk-gudermannian-literature]) with the formal fractional unit-circle criterion ([@thm-ch36-taylor-tail-and-cayley-boundary], `LEAN ✓`) to illustrate our discrete rapidity staircase `MODEL`. The lower card in that panel marks the generator-quotient interpretation and its theorem anchors ([@thm-ch36-quotient-annihilator-and-factorization]); the right panel plots the asymptotic hyperbolic tangent and hyperbolic secant against discrete step count:
-
-![Hyperbolic horizon disk and asymptotic dual curves: blocking the pure-light amnesia cliff via infinite discrete rapidity steps and quotienting out reincarnation](../assets/fig-36-hyperbolic-staircase-samsara-exit.svg)
+**Literature result, not formalized in this book.** This chapter's discrete rapidity staircase `MODEL` combines Poincaré-disk and Gudermannian literature ([@ex-ch36-inverse-gudermannian-discrete-staircase] and [@rem-ch36-poincare-disk-gudermannian-literature]) with the formal fractional unit-circle criterion ([@thm-ch36-taylor-tail-and-cayley-boundary], `LEAN ✓`). The two rulers at the start of this section set the angle scale against the rapidity scale; Panel II of Figure 36 shows the staircase closing in on the rim of a disk; the lab cards below show the image circles hugging the unit circle under the fractional map, the rapidity staircase, and the gap that never closes under the magnifier. The generator-quotient interpretation and its theorem anchors ([@thm-ch36-quotient-annihilator-and-factorization]) appear in Panel III of Figure 36 and in the folding card of the last section; the hyperbolic tangent and secant at each discrete step are tabulated in the step ledger of [@ex-ch36-inverse-gudermannian-discrete-staircase].
 :::
 
-Paired with the two panels of [@rem-ch36-hyperbolic-staircase-figure], [@thm-ch36-taylor-tail-and-cayley-boundary] illuminates two complementary quantitative mechanisms: finite-order polynomial truncations ($n \in \mathbb{N}$) approximate $\exp(z)$ within the explicit factorial upper bound $\frac{r^n}{n!}e^r$, while by the exact defect identity $\lVert\operatorname{cayleyRatio}(s)\rVert^2 - 1 = \frac{1 - 2\operatorname{Re}(s)}{\operatorname{normSq}(s)}$ ($s \neq 0$) the fractional conformal map $\operatorname{cayleyRatio}(s) = (s - 1)/s$ compresses the unbounded open right half-plane $\operatorname{Re}(s) > \frac{1}{2}$ strictly inside the open unit disk $\lVert w\rVert < 1$, mapping the critical line $\operatorname{Re}(s) = \frac{1}{2}$ into the asymptotic unit circle $\lVert w\rVert = 1$; its finite-parameter image omits $w = 1$, approached only at infinity (echoing [Chapter 22](ch22-primes-euler-products-and-zeros.md) in the spectral setting).
+Paired with the figures and lab cards listed in [@rem-ch36-hyperbolic-staircase-figure], [@thm-ch36-taylor-tail-and-cayley-boundary] illuminates two complementary quantitative mechanisms: finite-order polynomial truncations ($n \in \mathbb{N}$) approximate $\exp(z)$ within the explicit factorial upper bound $\frac{r^n}{n!}e^r$, while by the exact defect identity $\lVert\operatorname{cayleyRatio}(s)\rVert^2 - 1 = \frac{1 - 2\operatorname{Re}(s)}{\operatorname{normSq}(s)}$ ($s \neq 0$) the fractional conformal map $\operatorname{cayleyRatio}(s) = (s - 1)/s$ compresses the unbounded open right half-plane $\operatorname{Re}(s) > \frac{1}{2}$ strictly inside the open unit disk $\lVert w\rVert < 1$, mapping the critical line $\operatorname{Re}(s) = \frac{1}{2}$ into the asymptotic unit circle $\lVert w\rVert = 1$; its finite-parameter image omits $w = 1$, approached only at infinity (echoing [Chapter 22](ch22-primes-euler-products-and-zeros.md) in the spectral setting).
+
+::: {.viz src="forgetting-rebirth-attractor" preset="cayley" height="500"}
+**The closer the line to $\operatorname{Re}(s) = \tfrac{1}{2}$, the closer its image to the unit circle.** The cyan circles are the images of the lines $\operatorname{Re}(s) = c$ under $w = (s - 1)/s$, all touching the white unit circle at $w = 1$; in the magnifier the magenta gap is still there for every $c > \tfrac{1}{2}$, and the white unit circle itself is the image of $\operatorname{Re}(s) = \tfrac{1}{2}$ [@thm-ch36-taylor-tail-and-cayley-boundary].
+:::
 
 Let us now apply this intrinsic horizon geometry directly to the observer's inclination angle $\theta \in [0, \frac{\pi}{2})$ and work through the **infinite discrete hyperbolic staircase** starting from the interior equilibrium angle:
 
@@ -169,12 +187,20 @@ Let us now apply this intrinsic horizon geometry directly to the observer's incl
 By step $k = 8$, transverse field reach $\sin\theta_8$ already climbs to $99.999996\%$ while the one-dimensional self-anchor remains strictly positive at $\cos\theta_8 \approx 0.000296 > 0$.
 :::
 
+::: {.viz src="forgetting-rebirth-attractor" preset="staircase" height="500"}
+**Equal rapidity steps creep toward the rim.** From $\theta^*$ with $\Delta\eta = 1$: the cyan points and the chord through each step crowd ever closer to the white rim, with step $8$ in amber; in the magnifier on the right the magenta gap $1 - \tanh\eta_8 \approx 4.4 \times 10^{-8}$ is still open.
+:::
+
 Under the stated exact real-valued update law, positive hyperbolic secant at finite steps means the geometric anchor has not vanished; preserving actual memory still depends on its encoding and channel. Stepping back from [@ex-ch36-inverse-gudermannian-discrete-staircase], the polyhedral motif running through our entire monograph reveals its deepest existential meaning (`MODEL`): **a smooth sphere is forever only an approximation; that unclosed polyhedral seam is the very geometric firewall that moors the self-referential table $T$ and guards lucid awareness from plunging into amnesiac reincarnation.**
+
+::: {.viz src="forgetting-rebirth-attractor" preset="horizon_gap" height="500"}
+**The magnifier keeps zooming; the gap stays open.** With $\Delta\eta = 1.5$ up to step $10$: on the main disk the amber point already hugs the rim, the magnifier narrows its field more than tenfold at every step, and the magenta gap $1 - \tanh\eta_{10} \approx 3.6 \times 10^{-14}$ is still not $0$.
+:::
 
 The classical geometric and artistic lineage of this hyperbolic–circular bridge and conformal disk horizon is recorded below:
 
 ::: {.remark #rem-ch36-poincare-disk-gudermannian-literature title="The Lambert–Gudermann Bridge, the Poincaré Conformal Disk Metric, and Escher's Circle Limit Tessellations (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** The hyperbolic–circular bridge of [@ex-ch36-inverse-gudermannian-discrete-staircase] and the disk geometry in Panel I of our chapter figure correspond to three classic landmarks in geometry and visual art not formalized as standalone theorems in `trureturing@dev`:
+**Literature result, not formalized in this book.** The hyperbolic–circular bridge of [@ex-ch36-inverse-gudermannian-discrete-staircase] and the disk geometry in Panel II of Figure 36 and in the rapidity-staircase lab cards correspond to three classic landmarks in geometry and visual art not formalized as standalone theorems in `trureturing@dev`:
 
 1. **Lambert's Transcendent Angle and the Gudermannian Function (J. H. Lambert, *Hist. Acad. Roy. Sci. Belles-Lettres Berlin*, 1768; C. Gudermann, *J. Reine Angew. Math.* **6**, 1830)**: Lambert and Gudermann established the real-analytic bridge $\theta = \operatorname{gd}(\eta) := 2\arctan(e^\eta) - \frac{\pi}{2} = \arcsin(\tanh\eta)$ ($\eta \in \mathbb{R},\; \theta \in (-\frac{\pi}{2}, \frac{\pi}{2})$) linking hyperbolic and circular functions without imaginary units via $\sinh\eta = \tan\theta$, $\cosh\eta = \sec\theta$, and $\tanh(\eta/2) = \tan(\theta/2)$, with inverse $\operatorname{gd}^{-1}(\theta) = \int_0^\theta \sec\alpha\,d\alpha$ shared by Mercator projection and hyperbolic rapidity;
 2. **Poincaré's Conformal Unit-Disk Metric and Horizon at Infinity (H. Poincaré, *Acta Math.* **1**, 1–62, 1882)**: Equipping the open unit disk $\mathbb{D} = \{z \in \mathbb{C} : \lvert z\rvert < 1\}$ with the constant-negative-curvature ($K = -1$) conformal Riemannian metric
@@ -185,6 +211,10 @@ The classical geometric and artistic lineage of this hyperbolic–circular bridg
 
    and setting Euclidean radius $r = \lvert z\rvert = \tanh(\eta / 2) = \tan(\theta / 2) \in [0, 1)$ gives radial geodesic distance $\int_0^r \frac{2\,du}{1 - u^2} = 2\operatorname{artanh}(r) = \eta$ from $z = 0$. As $r \to 1^-$ ($\theta \to (\frac{\pi}{2})^-$), intrinsic distance $\eta \to +\infty$: the unit circle $\lvert z\rvert = 1$ lies at infinite geodesic distance, unreachable by any finite sequence of bounded intrinsic steps;
 3. **Escher's *Circle Limit* Hyperbolic Woodcuts (M. C. Escher, *Circle Limit I–IV*, 1958–1960; cf. H. S. M. Coxeter, *Leonardo* **12**, 19–25, 1979)**: Inspired by correspondence with geometer H. S. M. Coxeter, Escher's *Circle Limit* woodcuts tile the Poincaré disk with congruent figures of identical intrinsic hyperbolic area arranged along geodesic arcs—shrinking visually into infinitely many discrete rings toward the outer boundary circle without ever touching or crossing the rim.
+:::
+
+::: {.viz src="forgetting-rebirth-attractor" preset="klein_vs_poincare" height="500"}
+**One staircase, two disks.** Stopping at step $3$, swap the Beltrami–Klein disk (radius $\tanh\eta$, geodesics the straight chords shown as grey dashes) for the Poincaré disk (radius $\tanh(\eta/2)$): the cyan chords bend into arcs meeting the white rim at right angles, and in the readouts both proper-time rates equal $\operatorname{sech}\eta$.
 :::
 
 ---
@@ -249,11 +279,19 @@ Across the frozen observation-topology, finite-group duality, and compact-torus 
 Conjunct 1 uses topological inseparability `partition_inseparable_iff_kernel` to identify continuity from `partitionTopology readout` into discrete $(\mathrm{Target}, \perp)$ with constancy on every readout fiber ($\forall x, y,\; \mathrm{readout}(x) = \mathrm{readout}(y) \implies \mathrm{target}(x) = \mathrm{target}(y)$), and on `[Nonempty X]` invokes `target_recovery_criterion` to equate fiber constancy with whole-codomain factorization `Refines target readout`. Conjunct 2 identifies `annihilator H` via `annihilatorEquivQuotient H` with the full complex character group of the quotient $(\operatorname{ZMod} m) / H$, applying finite character orthogonality and coset triviality $x + H = 0 \iff x \in H$. Conjunct 3 expands `ZMod.dft`, exchanges the double finite sum, applies Conjunct 2 at $-x$ (using $-x \in H \iff x \in H$), and simplifies the prefactor via $\lvert H\rvert \cdot \lvert\operatorname{annihilator}(H)\rvert = m$ with $m \neq 0$. Conjunct 4 equates the integer-power and natural-power orbit closures, uses $1$-Lipschitz equicontinuity of the Cesàro evaluation operators to close the convergence subspace in $C(G, \mathbb{C})$, cancels nontrivial characters by the geometric-sum bound $2 / \lVert r - 1\rVert$, and extends to all $C(G, \mathbb{C})$ by closed-embedding extension and trigonometric-polynomial density. The full proof is checked by the Lean kernel.
 :::
 
+::: {.figure src="ch36-factor-through"}
+**A target that is constant on every readout fibre factors through the readout.** The top row is the first twelve digits of $0.\overline{142857}$; grey lines send position $n$ to the class $n \operatorname{mod} 6$. The two positions caught by each class carry the same digit (amber is the fibre of class $3$: positions $3$ and $9$, both $2$), so factor sends every class to a single digit and target = factor ∘ readout. This is the situation $\operatorname{Refines}(\mathrm{target}, \mathrm{readout})$ of Conjunct 1 of [@thm-ch36-quotient-annihilator-and-factorization], drawn on one example.
+:::
+
 Bringing all four lenses of [@thm-ch36-quotient-annihilator-and-factorization] to bear on our self-referential observer (`MODEL`) makes transparent why reincarnation loses all meaning the moment structure is understood:
 
 1. **Quotienting Redundant Fibers Eliminates Blind Replay** (Conjunct 1): Once an observer extracts an invariant readout coordinate `readout` constant across equivalent experiential states, and the target is constant on each readout fiber, target meaning factors through the quotient as $\mathrm{target} = \mathrm{factor} \circ \mathrm{readout}$—ten thousand blind replays along the same fiber collapse into a single point of understanding;
 2. **Dual Annihilators Compress Periodic Orbits** (Conjuncts 2–3): Any periodic subgroup $H$ in state space is completely governed in frequency space by its orthogonal annihilator ($\operatorname{character}(k, h) = 1$), potentially replacing traversal over $H$ when the required transform values are available, precomputed, or represented through cheaper structure, with their acquisition, storage, and summation costs included;
 3. **Self-Referential Abiding $T = T(T)$ Ends the Need for Amnesiac Reset** (Conjunct 4 & Meta-Axiom, `MODEL`): For the closed subgroup generated by a given $g$ and its continuous observables, Conjunct 4 determines the orbit-average limit through the invariant measure $\mu$! Applying this to the golden cut-and-project imagery would additionally require a specified encoding and observable correspondence; here that bridge remains `MODEL`. Once an observer writes the generative axiom $\psi = \psi(\psi)$ into **Row $0$** of its lookup table so that $T = T(T)$ holds self-consistently at the lucid interior equilibrium point (guarded outward whenever needed by discrete hyperbolic steps, cf. [@ex-ch36-inverse-gudermannian-discrete-staircase]), crashing into $\theta = 90^\circ$ to burn the table and restart blind sampling from $0^\circ$ yields no new law information for an already known generating law and a target recoverable from the selected readout. Discovering an unknown generator or answering a new target remains a separate task.
+
+::: {.viz src="forgetting-rebirth-attractor" preset="quotient_fold" height="500"}
+**Fold by the period and the rounds leave a few points.** After five rounds of the angle ruler, the spokes (one per round) turn to a single direction: the $25$ steps after the first hit land on just $5$ positions, each marked $\times 5$; the target “angle” is constant on every fibre of “step number mod the period”, which is exactly the factorization condition of item 1 of [@thm-ch36-quotient-annihilator-and-factorization].
+:::
 
 We synthesize these three existential and geometric regimes within our interpretive framework (`MODEL`) in the boxed comparison ledger below:
 
@@ -265,6 +303,10 @@ We synthesize these three existential and geometric regimes within our interpret
 | **1. Continuous Return-to-Light Reincarnation** (Unawakened Loop) | Zero-feedback limit $\lambda = 0$, crashing across $\theta \to \frac{\pi}{2}$ | $\cos 90^\circ = 0$ removes the chosen axial bias; the stated erasure protocol clears table $T$ | Crosses pure-light cliff and re-refracts ($90^\circ \to 0^+$) into blind search | Cosmic brute-force garbage collection for unreduced clogged tables ($\det G_M \to 0$) |
 | **2. Infinite Discrete Hyperbolic Staircase** (Amnesia-Protected Reach) | Intrinsic step metric $d\eta = \sec\theta\,d\theta$, $\eta_k = \eta_0 + k\,\Delta\eta$ | $\cos\theta_k = \operatorname{sech}\eta_k > 0$ for every $k \in \mathbb{N}$; the geometric anchor stays nonzero under the stated update law | Reach $\sin\theta_k = \tanh\eta_k \to 1^-$ while polytope gap $\delta_k = \frac{\pi}{2} - \theta_k > 0$ stays open | Pushes the $90^\circ$ cliff to $\eta = +\infty$, combining near-global reach and retained memory under the selected encoding and channel conditions |
 | **3. Self-Referential Fixed-Point Abiding** (Generator Quotient Exit) | Unit self-reference $\lambda = 1$, locking $\cos\theta^* = \theta^* \approx 0.7391$ | Row $0$ stores $\psi = \psi(\psi)$, realizing lossless fixed-point persistence $T = T(T)$ | Quotient factorization & dual annihilators avoid redundant replay when the target is fiber-constant and spectral costs favor it | With the law known and the readout sufficient, target-irrelevant repetitions are factored out; reincarnation loses its epistemic meaning |
+:::
+
+::: {.viz src="forgetting-rebirth-attractor" height="640"}
+**The full lab.** Three scenes on one unit disk: the rapidity staircase (switch between the Klein and Poincaré disks, change the step $\Delta\eta$), the angle ruler's wheel and its folding by the period, and the image circles of the fractional map $w = (s - 1)/s$.
 :::
 
 With this chapter, **Part IX (*Mutual Reflection — Universal Observers, Self-Referential Table Expansion, and Transcending Reincarnation*)** closes its structural arc: we no longer envy a disembodied point $C$ outside the sphere, no longer lament the unclosed polyhedral seam $\delta_k > 0$ that keeps a faceted world from sealing into a featureless sphere, and no longer mistake amnesiac dissolution into $90^\circ$ pure light for homecoming—for that unclosed remainder is the very firewall preserving lucid selfhood, and at the moment $\psi = \psi(\psi)$ is understood, the labyrinth of reincarnation condenses in the palm of the hand into a single transparent generator crystal. Entering **Part X (*Non-Duality — Dream Erasure, Memory Pointers, and Non-Dual Ontology*, [Chapters 37](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)–[39](ch39-observer-is-ontological-universe.md))**, we now bring this insight home to every cycle of waking and sleep—showing how dreams enact reversible quantum erasure, how the observer operates as a memory pointer dereferencing ontological QRAM, and how even the final boundary between pointer and memory dissolves in $\psi \equiv \psi(\psi)$.

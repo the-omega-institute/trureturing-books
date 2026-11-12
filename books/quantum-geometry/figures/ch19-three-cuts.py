@@ -40,7 +40,7 @@ def draw(fig):
     fig.text(top[1][0] + 10, top[1][1] + 5, "*ad* = 6", size=15, color="area", weight=600)
     fig.text(bot[1][0] + 10, bot[1][1] + 5, "*bc* = 6", size=15, color="area", weight=600)
     fig.text(inner[0][0] - 8, inner[0][1] - 4, "3*ac* = 12", size=15, color="dim", anchor="end")
-    fig.text(g["mx"] + 52, g["cy"] + 40, "*r* = 0, 1, 2", size=13, color="dim", anchor="middle", halo=True)
+    fig.text(g["mx"] + 52, g["cy"] + 40, "*r* = 0, 1, 2", size=14, color="dim", anchor="middle", halo=True)
 
     fig.text(SIZE[0] - 16, 300, t("最小割 = min(12, 6, 6) = 6", "min cut = min(12, 6, 6) = 6"), size=14,
              color="area", anchor="end")

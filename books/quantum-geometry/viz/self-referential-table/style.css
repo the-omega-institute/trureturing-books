@@ -1,0 +1,5 @@
+/* ORTHO//TABLE: the shared lab layout (../assets/theme.css) carries the page. Only the clickable table and the
+   declaration map in the drawer belong to this page; colours come from the tokens, never from hex values. */
+#cv { cursor: pointer; touch-action: manipulation; }
+.sheet .evh { margin: 16px 0 6px; font-family: var(--font-display); font-size: 12px; letter-spacing: 0.14em; color: var(--cyan); text-transform: uppercase; }
+.declmap { display: grid; gap: 6px; }

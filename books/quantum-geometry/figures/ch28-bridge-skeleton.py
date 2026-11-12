@@ -8,9 +8,9 @@ rank_one_pure_state_modulus_square_reduction (green: cited with lean= in this ch
 `mul_inv_cancel₀`; `compressed_eq_zero_of_recordWeight_eq_zero`).
 """
 
-from _ch27 import box, hyp, lean_box, link
+from _ch27 import WIDTH, box, hyp, lean_box, link
 
-SIZE = (560, 312)
+SIZE = (WIDTH, 364)
 ALT = {
     "zh": "证明骨架图。底部绿色的 LEAN ✓ rank_one_born_pairing_weight 由三路汇入：第①路是绿色的上一条定理“秩一归约”；"
           "第②路“= Tr(ρP_k)”用 rfl；第③路“U(ρ) = Σ w_j ρ_j”用 unread_eq_weighted_ensemble，它上方分两种情形："
@@ -26,18 +26,22 @@ ALT = {
 
 def draw(fig):
     t = fig.t
-    c2 = box(fig, 360, 8, "*w*_{j} = 0 ⇒ *P*_{j}*ρP*_{j} = 0", "compressed_eq_zero_of_recordWeight_eq_zero")
-    h = hyp(fig, 70, c2.cy - 14, "*ρ* ⪰ 0")
-    c1 = box(fig, 190, 84, "*w*_{j} ≠ 0 ⇒ *w*_{j}*ρ*_{j} = *P*_{j}*ρP*_{j}", "smul_smul · mul_inv_cancel₀")
-    s3 = box(fig, 420, 162, "③ *U*(*ρ*) = Σ *w*_{j}*ρ*_{j}", "unread_eq_weighted_ensemble")
-    s2 = box(fig, 244, 162, "② = Tr(*ρP*_{k})", "rfl")
-    s1 = lean_box(fig, 98, 170, "D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction",
+    cx = WIDTH / 2
+    # ③ splits each term into two cases, w_j = 0 (top, full width) and w_j ≠ 0 (below it)
+    c2 = box(fig, WIDTH - 4, 8, "*w*_{j} = 0 ⇒ *P*_{j}*ρP*_{j} = 0", "compressed_eq_zero_of_recordWeight_eq_zero", anchor="end")
+    h = hyp(fig, c2.x - 24, c2.cy - 14, "*ρ* ⪰ 0", anchor="end")
+    c1 = box(fig, cx, 84, "*w*_{j} ≠ 0 ⇒ *w*_{j}*ρ*_{j} = *P*_{j}*ρP*_{j}", "smul_smul · mul_inv_cancel₀")
+    s3 = box(fig, cx, 162, "③ *U*(*ρ*) = Σ *w*_{j}*ρ*_{j}", "unread_eq_weighted_ensemble")
+    s1 = lean_box(fig, 110, 250, "D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction",
                   label=t("① 秩一归约", "① rank one"))
-    goal = lean_box(fig, 280, 268, "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight")
+    s2 = box(fig, WIDTH - 110, 242, "② = Tr(*ρP*_{k})", "rfl")
+    goal = lean_box(fig, cx, 322, "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight")
+    assert h.x >= 4 and s1.x + s1.w < cx - 8 and cx + 8 < s2.x and s2.x + s2.w <= WIDTH - 4
     link(fig, h.right, c2.left)
-    x_in = s3.x + 34
-    link(fig, (x_in + 60, c2.y + c2.h), (x_in + 60, s3.y))
-    fig.curve_arrow([c1.right, (x_in, c1.cy), (x_in, s3.y)], "dim", 1.4, head=7)
-    fig.text(x_in + 68, 148, "by_cases", size=13, color="dim", mono=True)
-    for b in (s1, s2, s3):
+    link(fig, c1.bottom, s3.top)
+    bus = c2.x + c2.w - 30
+    fig.curve_arrow([(bus, c2.y + c2.h), (bus, s3.cy), s3.right], "dim", 1.4, head=7)
+    fig.text(bus - 8, s3.y - 10, "by_cases", size=13, color="dim", mono=True, anchor="end")
+    link(fig, s3.bottom, (cx, goal.y), "ink")
+    for b in (s1, s2):
         link(fig, b.bottom, (min(max(b.cx, goal.x + 16), goal.x + goal.w - 16), goal.y), "ink")

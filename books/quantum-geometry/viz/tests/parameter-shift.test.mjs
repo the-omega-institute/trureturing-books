@@ -108,6 +108,9 @@ ch = await chord(s.theta, 90 * DEG);
 check('h = 90°: the chord reaches the two cyan settings θ ± 90° and passes through both', s.h === 90 && ch.off < 0.75 && ch.spans, `${ch.msg}; ${ch.off.toFixed(2)} px off`);
 await pick('shift');
 check('SHIFT plays by itself when clicked', await plays());
+// the card runs from 0° to 60°; bring the playing clock to 58° instead of waiting out the whole sweep, then let the page stop itself
+const near = await page.evaluate(() => { const d = window.SHIFT_DEBUG, t = d.state; if (t.playing) d.scrub(Math.max(t.t, Math.PI + Math.PI / 3 - 2 * Math.PI / 180)); return d.state; });
+check('SHIFT is still short of 60° and playing after the jump to 58° (or has already stopped by itself)', near.playing ? near.theta < Math.PI / 3 - 1e-6 : Math.abs(near.theta - Math.PI / 3) < 1e-9, String(near.theta));
 check('SHIFT stops at θ = 60° by itself', await until(page, () => { const s = window.SHIFT_DEBUG.state; return !s.playing && Math.abs(s.theta - Math.PI / 3) < 1e-9; }));
 
 // ANY ANGLE: the tilted case, a full sweep

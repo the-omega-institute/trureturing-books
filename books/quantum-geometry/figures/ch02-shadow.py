@@ -9,7 +9,7 @@ import math
 
 from _ch02 import along, shadow
 
-SIZE = (500, 296)
+SIZE = (420, 296)
 ALT = {
     "zh": "青色的直线是已知态 a 所在的线，琥珀色的单位箭头 b 与它夹角 θ = 50°。从 b 的箭尖向 a 作垂线，垂足标作 C。"
           "从原点到 C 的青色粗线是影子 c = (a·b)a，长 cos θ；从 C 到 b 箭尖的品红虚线是垂直的剩余 b − c，长 sin θ，"
@@ -25,7 +25,7 @@ THETA = 50
 
 def draw(fig):
     t = fig.t
-    ox, oy, L = 56, 258, 250
+    ox, oy, L = 34, 258, 232
     tip, foot, c = shadow(fig, ox, oy, 0, THETA, L, ruler=1.3, back=0.08)
     s = math.sin(math.radians(THETA))
     b = (math.cos(math.radians(THETA)), s)
@@ -41,9 +41,9 @@ def draw(fig):
     fig.text(end[0] - 4, end[1] - 10, "*a*", size=17, color="line", anchor="end")
     fig.text(tip[0] + 8, tip[1] + 2, "*b*", size=17, color="now")
     fig.text(foot[0] + 2, foot[1] + 26, "*C*", size=17, color="line", anchor="middle", weight=600)
-    fig.text(foot[0] / 2 + ox / 2, oy + 26, "*c* = cos *θ* · *a*", size=15, color="line", anchor="middle")
+    fig.text(foot[0] / 2 + ox / 2, oy + 26, "*c* = cos *θ* · *a*", size=16, color="line", anchor="middle")
     mid = ((tip[0] + foot[0]) / 2, (tip[1] + foot[1]) / 2)
-    fig.text(mid[0] + 12, mid[1] - 8, "*b* − *c*", size=15, color="area")
-    fig.text(mid[0] + 12, mid[1] + 14, "sin *θ*", size=14, color="area")
-    fig.text(SIZE[0] - 14, 36, t("C 是垂足，不是第三个参照点", "C is a foot, not a third reference"), size=13,
+    fig.text(mid[0] + 12, mid[1] - 8, "*b* − *c*", size=16, color="area")
+    fig.text(mid[0] + 12, mid[1] + 14, "sin *θ*", size=15, color="area")
+    fig.text(SIZE[0] - 10, 30, t("C 是垂足，不是第三个参照点", "C is a foot, not a third reference"), size=14,
              color="dim", anchor="end")

@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//TABLE · The self-reading table">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//TABLE 同像自指表</title>
+<meta name="description" content="同像自指表：一张 N × N 的对称幂等方阵 T，横读是去丈量的行，竖读是被丈量的列；第 i 行读第 j 列正好读回 Tᵢⱼ，对角格自己读自己；点一格注入扰动，迭代 3T² − 2T³ 把它拉回一张幂等的表。The self-reading table: an N × N symmetric idempotent matrix T, read across as rows that measure and down as columns that are measured; row i reading column j gives back Tᵢⱼ, a diagonal cell reads itself; kick a cell and the iteration 3T² − 2T³ pulls it back to an idempotent table.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="self-referential-table">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//TABLE">ORTHO<b>//</b>TABLE</h1>
+      <div class="tagline">
+        <span class="zh">同像自指表 · <em>同一张表，横着读是尺子，竖着读是被量的东西；拿它读它自己，读回来的还是它；碰歪一格，它自己回到一张幂等的表</em></span>
+        <span class="en">The self-reading table · <em>one table, read across it is the ruler, read down it is what gets measured; let it read itself and you get it back; knock one cell and it settles into an idempotent table again</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillSize">N × r <strong>—</strong></span>
+      <span class="pill hot" id="pillErr"><span class="zh">幂等误差</span><span class="en">IDEMPOTENCY ERROR</span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="reset" aria-pressed="false"><span class="code">RANK 1</span><span class="cn zh">清空到一行：每格都是 1/N</span><span class="cn en">Cleared to one row: every cell is 1/N</span></button>
+        <button class="preset" data-preset="expand_table" aria-pressed="false"><span class="code">EXPAND</span><span class="cn zh">扩表：一行一行写进去，迹跟着秩走</span><span class="cn en">Expanding: rows go in one by one, the trace follows the rank</span></button>
+        <button class="preset" data-preset="full" aria-pressed="false"><span class="code">FULL · r = N</span><span class="cn zh">写满：N 个地址全占，表成了单位阵</span><span class="cn en">Full: all N addresses taken, the table is the identity</span></button>
+        <button class="preset" data-preset="dual_read" aria-pressed="false"><span class="code">ROW · COL</span><span class="cn zh">第 i 行读第 j 列，读回 Tᵢⱼ</span><span class="cn en">Row i reads column j and gets Tᵢⱼ back</span></button>
+        <button class="preset" data-preset="diagonal" aria-pressed="false"><span class="code">DIAGONAL</span><span class="cn zh">对角格自己读自己</span><span class="cn en">A diagonal cell reads itself</span></button>
+        <button class="preset" data-preset="heal" aria-pressed="false"><span class="code">3T² − 2T³</span><span class="cn zh">碰歪一格，几步回到幂等</span><span class="cn en">Knock a cell, a few steps back to idempotent</span></button>
+        <button class="preset" data-preset="orthogonal_zero" aria-pressed="false"><span class="code">90°</span><span class="cn zh">转到正交补：读出归零</span><span class="cn en">Turn into the complement: the reading goes to zero</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+    <section class="panel sec">
+      <h2><span class="zh">这张表</span><span class="en">The table</span><span class="aside" id="tableAside">T = Σ vₐvₐᵀ</span></h2>
+      <div class="chips" id="sizeChips" role="group" aria-label="表的大小 N" data-aria-en="Table size N">
+        <button class="chip" data-size="4" aria-pressed="false">N = 4</button><button class="chip" data-size="8" aria-pressed="true">N = 8</button><button class="chip" data-size="12" aria-pressed="false">N = 12</button>
+      </div>
+      <div class="field">
+        <label for="rank"><span class="zh">写进去的行数（秩 r）</span><span class="en">Rows written in (rank r)</span><small class="zh">r 条两两正交的余弦向量</small><small class="en">r mutually orthogonal cosine vectors</small></label><output id="oRank" for="rank">3</output>
+        <input type="range" id="rank" min="1" max="8" step="1" value="3">
+      </div>
+      <div class="field">
+        <label for="kick"><span class="zh">点一格加多少（ε）</span><span class="en">How hard a click knocks (ε)</span><small class="zh">在“自愈”场景里点格子：Tᵢⱼ 与 Tⱼᵢ 各加 ε</small><small class="en">click a cell in the healing scene: ε is added to Tᵢⱼ and Tⱼᵢ</small></label><output id="oKick" for="kick">0.30</output>
+        <input type="range" id="kick" min="-0.45" max="0.45" step="0.01" value="0.3">
+      </div>
+      <div class="chips"><button class="chip" id="clearBtn"><span class="zh">撤掉扰动</span><span class="en">Remove the knocks</span></button></div>
+      <p class="note"><span class="zh">直接点表里的一格：读表时选中那一格，自愈时往那一格加 ε。</span><span class="en">Click a cell of the table: in reading it selects that cell, in healing it adds ε there.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage still" id="stage" data-thumb aria-label="舞台：一张对称幂等的方阵，格子的颜色是数值的正负与大小；旁边是选中那一行读那一列的逐项乘积、表的谱或读出的向量" data-aria-en="Stage: a symmetric idempotent square table, each cell coloured by the sign and size of its value; beside it the term-by-term products of the chosen row reading the chosen column, the spectrum of the table, or the vectors read out">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+        <button class="chip" data-scene="rank" aria-pressed="false"><span class="zh">扩表</span><span class="en">Rank</span></button>
+        <button class="chip" data-scene="read" aria-pressed="true"><span class="zh">读表</span><span class="en">Read</span></button>
+        <button class="chip" data-scene="heal" aria-pressed="false"><span class="zh">自愈</span><span class="en">Heal</span></button>
+        <button class="chip" data-scene="perp" aria-pressed="false"><span class="zh">正交补</span><span class="en">90°</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2><span class="zh">这张表还幂等吗</span><span class="en">Is the table still idempotent</span></h2><span id="plotMeta"></span></div>
+        <canvas id="plot" aria-label="幂等误差 ‖T² − T‖ 沿时间轴的变化（对数纵轴）" data-aria-en="The idempotency error ‖T² − T‖ along the rail (log scale)"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside">T² = T</span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="roKeyLabel"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div class="wide"><dt id="ro1Label"></dt><dd id="ro1">—</dd></div>
+        <div><dt id="ro2Label"></dt><dd id="ro2">—</dd></div>
+        <div><dt id="ro3Label"></dt><dd id="ro3">—</dd></div>
+        <div class="wide"><dt id="ro4Label"></dt><dd id="ro4">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean" data-scenes="rank"><span class="ok">LEAN ✓</span><span><span class="zh">有限记忆的容量：d 维里能被同一次测量零误差区分开的历史至多 d 个（N ≤ d）。这张表的 r 行两两正交，配上 I − T 就是一次能把它们完全分开的测量，所以 r 写不过 N。已冻结：</span><span class="en">The capacity of a finite memory: at most d histories in d dimensions can be told apart without error by one measurement (N ≤ d). The r rows of this table are mutually orthogonal, and together with I − T they form one measurement that tells them apart perfectly, so r cannot pass N. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity" href="#" target="_blank" rel="noopener"><code>finite_memory_history_capacity</code></a></span></div>
+      <div class="lean argued" data-scenes="heal" hidden><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：对称矩阵的牛顿—舒尔茨符号迭代 X ↦ 3X² − 2X³ 把每个本征值按 x ↦ 3x² − 2x³ 推向 0 或 1，在 0 与 1 附近二次收敛。若扰动的谱范数 ‖Δ‖₂ &lt; (√3 − 1)/2 ≈ 0.366，极限是 T₀ 在 ½ 以上本征值的谱投影，秩与 T 相同；‖Δ‖₂ &lt; ½ 时极限仍是某个投影，秩可能变。</span><span class="en">Literature result, not formalized in this book: the Newton–Schulz sign iteration X ↦ 3X² − 2X³ on a symmetric matrix pushes each eigenvalue towards 0 or 1 by x ↦ 3x² − 2x³, quadratically near 0 and 1. If the knock has spectral norm ‖Δ‖₂ &lt; (√3 − 1)/2 ≈ 0.366, the limit is the spectral projection of T₀ onto its eigenvalues above ½, with the rank of T; for ‖Δ‖₂ &lt; ½ the limit is still some projection, but its rank may change.</span></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">表、乘积、迹、本征值与每一步迭代都由页面用双精度实算（本征值用雅可比旋转）；“T² = T”“读回 Tᵢⱼ”是这几张有限表上的数值核对，不是证明。</span><span class="en">The table, the products, the trace, the eigenvalues and every step of the iteration are computed by the page in double precision (eigenvalues by Jacobi rotations); “T² = T” and “gets Tᵢⱼ back” are numerical checks on these finite tables, not a proof.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">把第三十五章的“扩表”“查表算法也在表里”“T = T(T)”画成一张实对称投影方阵，是本书的诠释模型：横读的行当尺子、竖读的列当状态、T² = T 当“拿它读它自己”。正交基选的是离散余弦向量，只为画面清楚。</span><span class="en">Drawing the “expanding table”, “the lookup algorithm is in the table” and “T = T(T)” of Chapter 35 as a real symmetric projection matrix is this book’s interpretive model: rows read across are rulers, columns read down are states, and T² = T is “the table reading itself”. The orthonormal basis is the discrete cosine one, chosen only for a clear picture.</span></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：实对称矩阵 T 满足 T² = T 当且仅当它是到像空间的正交投影，迹等于秩，(Im T)⊥ 里的向量读出为 0。</span><span class="en">Literature result, not formalized in this book: a real symmetric matrix T has T² = T exactly when it is the orthogonal projection onto its image; its trace equals its rank, and vectors in (Im T)⊥ read out as 0.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="时间轴：读到第几项、写进几行、迭代几步或转过的角度" data-aria-en="Rail: terms read, rows written, steps iterated or the angle turned">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>1</kbd>–<kbd>4</kbd> <span class="zh">场景</span><span class="en">scene</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">舞台上是一张 N × N 的表 T = Σₐ vₐvₐᵀ（a = 1 … r），vₐ 是两两正交的单位向量。它是实对称的（Tᵀ = T），而且幂等（T² = T）：第 i 行当作尺子去读第 j 列，Σₖ TᵢₖTₖⱼ 正好读回 Tᵢⱼ。页面把这件事画成第三十五章“查表的算法也在表里”“T = T(T)”的一个诠释模型。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>依据的章节。</b><a href="../../zh/ch35-light-pulse-and-self-referential-table.html" target="_top">第三十五章 · 乘光而来与自指扩表</a>，特别是定理 <a href="../../zh/ch35-light-pulse-and-self-referential-table.html#thm-ch35-null-pulse-and-record-blocking" target="_top">thm-ch35-null-pulse-and-record-blocking</a> 第 3 款（N ≤ d）与 <a href="../../zh/ch35-light-pulse-and-self-referential-table.html#thm-ch35-lawvere-diagonal-and-homoiconic-closure" target="_top">thm-ch35-lawvere-diagonal-and-homoiconic-closure</a>。</li>
+        <li><b>四个场景。</b>扩表：时间轴是秩 r，迹 Σ Tₖₖ 始终等于 r，右边 N 个地址槽里 r 个被占。读表：时间轴逐项累加 TᵢₖTₖⱼ；选中对角格时每一项都是平方。自愈：点一格，Tᵢⱼ 与 Tⱼᵢ 各加 ε（保持对称），然后迭代 Tₘ₊₁ = 3Tₘ² − 2Tₘ³，右边是 Tₘ 的 N 个本征值。正交补：ψ(θ) = cos θ·v₁ + sin θ·w，w 与所有 vₐ 正交，读出 Tψ 的长度是 cos θ，转到 90° 归零。</li>
+        <li><b>已验证的定理。</b>只有一条落在舞台上：有限记忆的可区分历史至多 d 个（LEAN ✓，扩表场景）。本章引用的其余冻结定理列在下方声明地图里，页面不画它们。</li>
+        <li><b>不在 Lean 里的。</b>“对称且幂等 ⟺ 正交投影”“迹 = 秩”是线性代数的文献结果（ARGUED）；牛顿—舒尔茨迭代的收敛阈值与二次收敛是文献结果（ARGUED）：‖Δ‖₂ &lt; (√3 − 1)/2 时回到同秩的投影（离原表很近，一般不是原表），‖Δ‖₂ &lt; ½ 时回到某个投影；把这张表读成“生命扩表”“同像自指表 T = T(T)”是本书的诠释（MODEL）。页面上的每个数都是实算（NUM）。</li>
+      </ol>
+    </div>
+    <div class="en">
+      <p class="lede">The stage shows an N × N table T = Σₐ vₐvₐᵀ (a = 1 … r), with vₐ mutually orthogonal unit vectors. It is real symmetric (Tᵀ = T) and idempotent (T² = T): row i used as a ruler on column j gives Σₖ TᵢₖTₖⱼ, which is exactly Tᵢⱼ again. The page draws this as one interpretive model of Chapter 35’s “the lookup algorithm is in the table” and “T = T(T)”. The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>The chapter behind it.</b> <a href="../../en/ch35-light-pulse-and-self-referential-table.html" target="_top">Chapter 35 · Arriving on a pulse of light and self-referential table expansion</a>, in particular item 3 of the theorem <a href="../../en/ch35-light-pulse-and-self-referential-table.html#thm-ch35-null-pulse-and-record-blocking" target="_top">thm-ch35-null-pulse-and-record-blocking</a> (N ≤ d) and <a href="../../en/ch35-light-pulse-and-self-referential-table.html#thm-ch35-lawvere-diagonal-and-homoiconic-closure" target="_top">thm-ch35-lawvere-diagonal-and-homoiconic-closure</a>.</li>
+        <li><b>Four scenes.</b> Rank: the rail is the rank r; the trace Σ Tₖₖ always equals r, and r of the N address slots on the right are taken. Read: the rail adds up TᵢₖTₖⱼ term by term; for a diagonal cell every term is a square. Heal: a click adds ε to Tᵢⱼ and Tⱼᵢ (keeping the table symmetric), then Tₘ₊₁ = 3Tₘ² − 2Tₘ³ is iterated; the right shows the N eigenvalues of Tₘ. 90°: ψ(θ) = cos θ·v₁ + sin θ·w with w orthogonal to every vₐ; the reading Tψ has length cos θ and vanishes at 90°.</li>
+        <li><b>Verified theorems.</b> Only one is on the stage: a finite memory holds at most d distinguishable histories (LEAN ✓, rank scene). The other frozen theorems the chapter cites are in the declaration map below; the page does not draw them.</li>
+        <li><b>Not in Lean.</b> “Symmetric and idempotent ⟺ orthogonal projection” and “trace = rank” are linear-algebra results from the literature (ARGUED); the convergence thresholds and quadratic convergence of the Newton–Schulz iteration are literature results (ARGUED): for ‖Δ‖₂ &lt; (√3 − 1)/2 it returns to a projection of the same rank (very close to the original table, but in general not the original table), for ‖Δ‖₂ &lt; ½ to some projection; reading this table as “life expanding its table” or as the self-referential table T = T(T) is this book’s interpretation (MODEL). Every number on the page is computed (NUM).</li>
+      </ol>
+    </div>
+    <h3 class="evh"><span class="zh">声明地图 · 第三十五章引用的冻结定理</span><span class="en">Declaration map · the frozen theorems Chapter 35 cites</span></h3>
+    <p class="note"><span class="zh">逐条与正文的定理环境一致；“舞台上”标出页面用到的那一条，其余是本章另引、舞台不画的。链接由构建固定到所钉提交。</span><span class="en">Each entry matches the theorem environment of the chapter; “on the stage” marks the one the page uses, the others are cited by the chapter but not drawn. The links are pinned to the pinned commit by the build.</span></p>
+    <div class="declmap">
+      <div class="lean" data-decl="chapter"><span class="ok">LEAN ✓</span><span><span class="zh">零光锥刚性：在全部零光锥向量上消失的实二次型 S 满足 S = S(1, 0) • minkowski_d。</span><span class="en">Null-cone rigidity: a real quadratic form S that vanishes on every null vector satisfies S = S(1, 0) • minkowski_d. </span><a class="leanref" data-lean-gid="D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null" href="#" target="_blank" rel="noopener"><code>eq_smul_minkowski_of_null</code></a></span></div>
+      <div class="lean" data-decl="chapter"><span class="ok">LEAN ✓</span><span><span class="zh">其余副本满足幺模条件、幸存副本 k 的重叠因子不为 1 且 ρᵢⱼ ≠ 0 时，逆转其余全部副本也恢复不了第 (i, j) 元。</span><span class="en">If the other copies satisfy the unimodular condition, the surviving copy k has overlap factor ≠ 1 and ρᵢⱼ ≠ 0, then reversing every other copy does not restore the (i, j) entry. </span><a class="leanref" data-lean-gid="D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal" href="#" target="_blank" rel="noopener"><code>surviving_copy_blocks_reversal</code></a></span></div>
+      <div class="lean" data-decl="stage"><span class="ok">LEAN ✓</span><span><span class="zh">［舞台上 · 扩表］N 个 d × d 密度矩阵若能被一组 POVM 零误差区分（Tr(Eⱼρᵢ) = δᵢⱼ），则 N ≤ d。</span><span class="en">[on the stage · rank] If N density matrices of size d × d are told apart without error by one POVM (Tr(Eⱼρᵢ) = δᵢⱼ), then N ≤ d. </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity" href="#" target="_blank" rel="noopener"><code>finite_memory_history_capacity</code></a></span></div>
+      <div class="lean" data-decl="chapter"><span class="ok">LEAN ✓</span><span><span class="zh">X 非空时，target = recover ∘ process 有解 ⟺ 同一过程纤维上目标恒定 ⟺ 碰撞缺陷集为空。</span><span class="en">For nonempty X, target = recover ∘ process has a solution ⟺ the target is constant on each process fibre ⟺ the collision-defect set is empty. </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/Restoration/TargetRecoveryCriterion.target_recovery_criterion" href="#" target="_blank" rel="noopener"><code>target_recovery_criterion</code></a></span></div>
+      <div class="lean" data-decl="chapter"><span class="ok">LEAN ✓</span><span><span class="zh">两个模块定义的典范拷贝地址记录（i = a 时为 1，否则为 0）作为 Fin 2 → Fin 2 → ℂ 相等。</span><span class="en">The two modules’ canonical copied address records (1 when i = a, else 0) are equal as maps Fin 2 → Fin 2 → ℂ. </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.canonical_copied_address_record_eq_prior" href="#" target="_blank" rel="noopener"><code>canonical_copied_address_record_eq_prior</code></a></span></div>
+      <div class="lean" data-decl="chapter"><span class="ok">LEAN ✓</span><span><span class="zh">自作用对角线：diagonal(f, g)(a) = f(g(a, a))；f 无不动点时对角线逃出每一张表；有不动点时存在被表捕获的例子。</span><span class="en">Self-application: diagonal(f, g)(a) = f(g(a, a)); if f has no fixed point the diagonal escapes every table; with a fixed point there is an example where the table captures it. </span><a class="leanref" data-lean-gid="D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package" href="#" target="_blank" rel="noopener"><code>self_application_fragment_package</code></a></span></div>
+      <div class="lean" data-decl="chapter"><span class="ok">LEAN ✓</span><span><span class="zh">twist 无不动点时，相对语义对角线与每一个在册解码读出 decoderCatalog(address) ∘ latent 都不相等。</span><span class="en">If twist has no fixed point, the relative semantic diagonal differs from every listed decoding decoderCatalog(address) ∘ latent. </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode" href="#" target="_blank" rel="noopener"><code>relative_semantic_diagonal_ne_listed_decode</code></a></span></div>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

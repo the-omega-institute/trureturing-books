@@ -55,10 +55,10 @@ section: "Reader's guide"
 <div class="body">
   <p class="kicker">Ten parts, thirty-nine chapters</p>
   <h2 class="t">Ten parts form a staircase, <em>each one dimension higher</em></h2>
-  <img src="./img/prelude-eight-parts.en.svg" alt="Ten bars, one per part, each spanning its chapters and one step above the last." style="display: block; height: 600px; max-width: 100%; margin: 20px auto 0;">
+  <img src="./img/prelude-parts.en.svg" alt="Ten bars, one per part, each spanning its chapters and one step above the last." style="display: block; height: 600px; max-width: 100%; margin: 20px auto 0;">
   <p class="lead mt-s">Four chapters apiece across Parts I–IX and three in Part X: point → line, line → plane, plane → sphere, entangled spheres, spacetime sphere, beyond the sphere, construction, synthesis, mutual illumination, non-duality.</p>
 </div>
-<Source>Prelude, “Reader's Guide and Formal Verification Contract” (prelude-eight-parts)</Source>
+<Source>Prelude, “Reader's Guide and Formal Verification Contract” (prelude-parts)</Source>
 
 ---
 # 05 Part I
@@ -665,14 +665,14 @@ section: "Three tiers"
   <p class="kicker">Three tiers of warrant</p>
   <h2 class="t">Three tiers of warrant, <em>three colours</em>, never mixed</h2>
   <div class="split mt">
-    <img src="./img/prelude-three-tiers.en.svg" alt="Three bars: green 215, violet 167, red 6; under the green bar, 320 theorem declarations in the lock file." style="display: block; width: 900px; max-width: 100%;">
+    <img src="./img/prelude-three-tiers.en.svg" alt="Three bars: green 215, violet 164, red 6; under the green bar, 330 theorem declarations in the lock file." style="display: block; width: 900px; max-width: 100%;">
     <div>
       <div class="g3">
         <Stat value="215" label="theorems, lemmas, propositions and corollaries with lean=" tone="ok" />
-        <Stat value="167" label="remarks and examples marked “literature result, not formalized”" tone="violet" />
+        <Stat value="164" label="remarks and examples marked “literature result, not formalized”" tone="violet" />
         <Stat value="6" label="open conjectures, marked OPEN, with no Lean reference" tone="warn" />
       </div>
-      <p class="lead mt">The lock file <span class="mono">trureturing.lock.json</span> pins <PinnedCommit />: 457 declarations, 320 of them Lean theorems.</p>
+      <p class="lead mt">The lock file <span class="mono">trureturing.lock.json</span> pins <PinnedCommit />: 477 declarations, 330 of them Lean theorems.</p>
     </div>
   </div>
 </div>

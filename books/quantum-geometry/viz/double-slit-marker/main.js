@@ -132,7 +132,8 @@
     if (!words) return;
     const lab = (x, y, str, col, al, dx, dy) => text(ctx, str, g.X(x) + (dx || 0), g.Y(y) + (dy || 0), col, { align: al || 'center', size: 12 });
     lab(1, 0, 'r_L', P.ink, 'left', 4, -12);
-    lab(c, s, 'r_R', P.amber, c > 0.35 ? 'left' : 'left', 10, -10);
+    if (s < 0.15) lab(c, s, 'r_R', P.amber, 'left', 4, -30);                 // near α = 0 the two labels would sit on each other: stack r_R above r_L
+    else lab(c, s, 'r_R', P.amber, 'left', 10, -10);
     lab(V / 2, 0, `V = ${fix(V, 2)}`, P.cyan, 'center', 0, 16);
     if (D > 0.04) lab(c, D / 2, `D = ${fix(D, 2)}`, P.magenta, c > 0.82 ? 'right' : 'left', c > 0.82 ? -10 : 10, 0);
     else lab(c, 0, `D = ${fix(D, 2)}`, P.magenta, 'right', -6, -14);

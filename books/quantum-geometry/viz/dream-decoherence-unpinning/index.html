@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//DREAM · Dream erasure · the anchors cut the coherence between places, the weights stay; loosen them or reverse every record and the fringes return">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//DREAM 梦境擦除 · 锚点剪掉位置之间的相干，各处的权重不动；放松锚点或逆转每一份记录，条纹回来</title>
+<meta name="description" content="第 37 章的三个场景，画在同一张密度矩阵 |ρᵢⱼ| 的方格与一面屏上。锚点：全局纯态 Ψ 对先验投影族 {Pₖ} 的退相干插值 ρ(λ) = (1 − λ)|Ψ⟩⟨Ψ| + λ Σₖ PₖΨΨ*Pₖ；λ = 1 时跨块相干全部为零，再捏一次什么也不变（Lean 已验证的捏合幂等与不动点判据），对角的权重始终不动，熵从 0 涨到删去相干的相对熵；λ 降到 0.1，相干回来九成。记录：两份相位记录先后写入等幅叠加，非对角元 ρ₀₁ 由 1/2 变为 −1/2，只逆转一份得 −i/2，两份都逆转复原为 1/2（Lean 已验证，前提是每份记录的重叠模长为 1）；重叠为零时逆转救不回来。醒来：读出投影只留躯体那一格，遗忘的权重 1 − Tr(P₀ρ) 与锚点强度无关。Three scenes of chapter 37, drawn on one grid of the density matrix |ρᵢⱼ| and one screen. Anchors: the decoherence interpolation ρ(λ) = (1 − λ)|Ψ⟩⟨Ψ| + λ Σₖ PₖΨΨ*Pₖ of a global pure state over a family of prior projections; at λ = 1 every cross-block coherence is zero and pinching again changes nothing (pinching idempotence and its fixed-point criterion, verified in Lean), the diagonal weights never move, and the entropy rises from 0 to the relative entropy of the deleted coherence; lower λ to 0.1 and nine tenths of the coherence return. Records: two phase records written on an equal superposition take ρ₀₁ from 1/2 to −1/2, reversing one gives −i/2, reversing both restores 1/2 (verified in Lean, assuming each record overlap has modulus 1); with zero overlap reversal cannot restore it. Waking: the readout projection keeps only the body cell; the forgotten weight 1 − Tr(P₀ρ) does not depend on the anchor strength.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="dream-decoherence-unpinning">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//DREAM">ORTHO<b>//</b>DREAM</h1>
+      <div class="tagline">
+        <span class="zh">梦境擦除 · <em>锚点剪掉位置之间的相干，各处的权重一格不动；放松锚点，或把每一份记录都逆转，条纹就回来——记录把两条路完全分开时回不来</em></span>
+        <span class="en">Dream erasure · <em>the anchors cut the coherence between places while the weight of each place stays put; loosen the anchors, or reverse every record, and the fringes come back, unless the records told the paths apart completely</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillScene"><span class="zh">场景</span><span class="en">SCENE</span> <strong>—</strong></span>
+      <span class="pill" id="pillNow"><span class="zh">现在</span><span class="en">NOW</span> <strong>—</strong></span>
+      <span class="pill hot" id="pillKey"><span class="zh">关键</span><span class="en">KEY</span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="waking" aria-pressed="false"><span class="code">WAKING</span><span class="cn zh">清醒：逐个位置钉住，相干剪光</span><span class="cn en">Awake: every place pinned, the coherence cut away</span></button>
+        <button class="preset" data-preset="blocks" aria-pressed="false"><span class="code">TWO-BLOCKS</span><span class="cn zh">只分两块：块里的相干留下</span><span class="cn en">Two blocks only: the coherence inside a block stays</span></button>
+        <button class="preset" data-preset="half_erase" aria-pressed="false"><span class="code">HALF-ERASE</span><span class="cn zh">两份记录只逆转一份：停在 −i/2</span><span class="cn en">Two records, one reversed: stuck at −i/2</span></button>
+        <button class="preset" data-preset="zero_overlap_fail" aria-pressed="false"><span class="code">ZERO-OVERLAP</span><span class="cn zh">记录重叠为零：逆转救不回来</span><span class="cn en">Zero record overlap: reversal cannot help</span></button>
+        <button class="preset" data-preset="quantum_eraser" aria-pressed="false"><span class="code">JOINT-REVERSAL</span><span class="cn zh">两份都逆转：回到 1/2</span><span class="cn en">Both reversed: back to 1/2</span></button>
+        <button class="preset" data-preset="unpin_body" aria-pressed="false"><span class="code">UNPIN</span><span class="cn zh">卸下锚点：λ 降到 0.1，相干回来</span><span class="cn en">Unpinning: λ down to 0.1, the coherence returns</span></button>
+        <button class="preset" data-preset="wake_snap" aria-pressed="false"><span class="code">WAKE-SNAP</span><span class="cn zh">醒来：只读躯体那一格</span><span class="cn en">Waking: only the body cell is read</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec" data-scenes="anchor wake">
+      <h2><span class="zh">全局态与锚点</span><span class="en">The global state and the anchors</span><span class="aside">Ψ · λ</span></h2>
+      <div class="field">
+        <label for="lam"><span class="zh">锚点强度 λ</span><span class="en">Anchor strength λ</span><small class="zh">0 是全局纯态，1 是完全捏合；时间轴沿当前这张卡的方向推动它</small><small class="en">0 is the global pure state, 1 full pinching; the rail moves it in the direction of the current card</small></label><output id="oLam" for="lam">0.00</output>
+        <input type="range" id="lam" min="0" max="1" step="0.01" value="0">
+      </div>
+      <div class="field">
+        <label for="w"><span class="zh">躯体位置 x₀ 的权重</span><span class="en">Weight of the body place x₀</span><small class="zh">|⟨x₀|Ψ⟩|²；其余三处平分剩下的</small><small class="en">|⟨x₀|Ψ⟩|²; the other three places share the rest equally</small></label><output id="oW" for="w">0.40</output>
+        <input type="range" id="w" min="0.05" max="0.85" step="0.05" value="0.4">
+      </div>
+      <div data-scenes="anchor">
+        <div class="chips" id="famChips" role="group" aria-label="锚点的投影族" data-aria-en="The family of anchor projections">
+          <button class="chip" data-fam="fine" aria-pressed="true"><span class="zh">逐个位置</span><span class="en">Every place</span></button>
+          <button class="chip" data-fam="body" aria-pressed="false"><span class="zh">躯体 | 其余</span><span class="en">Body | the rest</span></button>
+        </div>
+        <p class="note"><span class="zh">锚点是一组两两正交、加起来等于 1 的投影；虚线框是它们的块。跨块的相干乘上 1 − λ，块里的不动。</span><span class="en">The anchors are projections, pairwise orthogonal and summing to 1; the dashed frames are their blocks. Cross-block coherence is multiplied by 1 − λ; inside a block nothing changes.</span></p>
+      </div>
+      <p class="note" data-scenes="wake" hidden><span class="zh">醒来的读出投影是 P₀ = |x₀⟩⟨x₀|：只读躯体那一格。时间轴把读出从 0 推到 1。</span><span class="en">The waking readout is the projection P₀ = |x₀⟩⟨x₀|: it reads the body cell only. The rail takes the readout from 0 to 1.</span></p>
+    </section>
+
+    <section class="panel sec" data-scenes="record" hidden>
+      <h2><span class="zh">两份环境记录</span><span class="en">Two environment records</span><span class="aside">c</span></h2>
+      <div class="field">
+        <label for="r"><span class="zh">记录重叠的模长 |c|</span><span class="en">Modulus of the record overlap |c|</span><small class="zh">1：记录只带相位，不区分两条路；0：两条路被完全分开</small><small class="en">1: the record carries a phase only and tells the paths apart not at all; 0: it tells them apart completely</small></label><output id="oR" for="r">1.00</output>
+        <input type="range" id="r" min="0" max="1" step="0.05" value="1">
+      </div>
+      <div class="field">
+        <label for="phi"><span class="zh">记录写进的相位 φ</span><span class="en">Phase φ the record writes</span><small class="zh">每份记录的重叠 c = |c|·e<sup>−iφ</sup>；90° 时 c = −i</small><small class="en">each record has overlap c = |c|·e<sup>−iφ</sup>; at 90°, c = −i</small></label><output id="oPhi" for="phi">90°</output>
+        <input type="range" id="phi" min="0" max="180" step="5" value="90">
+      </div>
+      <p class="note"><span class="zh">时间轴四步：写入副本 0、写入副本 1、逆转副本 0、逆转副本 1。写入乘 c，逆转乘 c̄。</span><span class="en">Four steps on the rail: write copy 0, write copy 1, reverse copy 0, reverse copy 1. Writing multiplies by c, reversing by c̄.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage still" id="stage" data-thumb aria-label="舞台：密度矩阵各格的大小与相位，以及它在屏上留下的条纹" data-aria-en="Stage: the size and phase of every entry of the density matrix, and the fringes it leaves on a screen">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
+        <button class="chip" data-scene="anchor" aria-pressed="true"><span class="zh">锚点</span><span class="en">Anchors</span></button>
+        <button class="chip" data-scene="record" aria-pressed="false"><span class="zh">记录</span><span class="en">Records</span></button>
+        <button class="chip" data-scene="wake" aria-pressed="false"><span class="zh">醒来</span><span class="en">Waking</span></button>
+      </div>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="pATitle"></h2><span id="pAMeta"></span></div>
+        <canvas id="plotA" aria-label="本场景沿时间轴变化与不变的量" data-aria-en="What changes and what does not along the rail in this scene"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt id="roKeyL"></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div><dt id="roL1"></dt><dd id="ro1">—</dd></div>
+        <div><dt id="roL2"></dt><dd id="ro2">—</dd></div>
+        <div class="wide"><dt id="roL3"></dt><dd id="ro3">—</dd></div>
+        <div><dt id="roL4"></dt><dd id="ro4">—</dd></div>
+        <div><dt id="roL5"></dt><dd id="ro5">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">对一组记录测量投影 {Pₖ}（自伴、幂等、两两正交、加起来是 1），未读捏合 𝒫(ρ) = Σₖ PₖρPₖ 做两次等于做一次；𝒫(ρ) = ρ 当且仅当对一切 k ≠ l 都有 PₖρPₗ = 0。舞台上 λ = 1 时跨块方格全空，正是这样的不动点。已冻结：</span><span class="en">For a family of record-measurement projections {Pₖ} (self-adjoint, idempotent, pairwise orthogonal, summing to 1), the unread pinching 𝒫(ρ) = Σₖ PₖρPₖ applied twice equals applying it once, and 𝒫(ρ) = ρ exactly when PₖρPₗ = 0 for all k ≠ l. At λ = 1 the cross-block cells on the stage are empty: such a fixed point. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent" href="#" target="_blank" rel="noopener"><code>finite_record_pinching_idempotent</code></a> · <a class="leanref" data-lean-gid="D5/S3/Observer/Conditioning.unreadState_fixed_iff" href="#" target="_blank" rel="noopener"><code>unreadState_fixed_iff</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">幺正演化后按基捏合：每一步的冯·诺依曼熵增等于删去相干的相对熵 D(ρ̃ ‖ 𝒫(ρ̃)) ≥ 0，N 步累计熵增等于各步之和。“逐个位置”的锚点就是按基捏合：从纯态 Ψ（熵 0）出发，λ = 1 时的熵正是 D(Ψ ‖ 𝒫(Ψ))。已冻结：</span><span class="en">Unitary evolution followed by basis pinching: the von Neumann entropy gained at each step equals the relative entropy D(ρ̃ ‖ 𝒫(ρ̃)) ≥ 0 of the deleted coherence, and over N steps the gains add up. Anchoring “every place” is basis pinching: starting from the pure state Ψ (entropy 0), the entropy at λ = 1 is exactly D(Ψ ‖ 𝒫(Ψ)). Frozen: </span><a class="leanref" data-lean-gid="D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity" href="#" target="_blank" rel="noopener"><code>entropy_production_coherence_deletion_identity</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">对任意 2 × 2 矩阵 ρ，捏合去掉的部分 ρ − 𝒫(ρ) 的希尔伯特—施密特质量等于 |ρ₀₁|² + |ρ₁₀|²。“记录”场景的读数“相干质量”就是这个数。已冻结：</span><span class="en">For every 2 × 2 matrix ρ, the Hilbert–Schmidt mass of the part ρ − 𝒫(ρ) that pinching removes equals |ρ₀₁|² + |ρ₁₀|². The “coherence mass” readout of the Records scene is this number. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass" href="#" target="_blank" rel="noopener"><code>pinching_discarded_coherence_mass</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">前提：每一份记录在 (i, j) 处的重叠 c 都满足 c̄·c = 1。则把正向多副本记录信道的输出再送进全部副本的逆转信道，第 (i, j) 元精确复原。另有显式证书：等幅叠加、两份相位记录（c = −i）时，ρ₀₁ 依次为 1/2、−1/2；只逆转副本 0 得 −i/2，两份都逆转得 1/2。已冻结：</span><span class="en">Premise: every record overlap c at (i, j) satisfies c̄·c = 1. Then sending the output of the forward multi-copy record channel through the reversal of all copies restores entry (i, j) exactly. An explicit certificate adds: for the equal superposition and two phase records (c = −i), ρ₀₁ goes 1/2, −1/2; reversing copy 0 only gives −i/2, reversing both gives 1/2. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ObserverMemory/JointCoherentReversal.joint_coherent_reversal" href="#" target="_blank" rel="noopener"><code>joint_coherent_reversal</code></a> · <a class="leanref" data-lean-gid="D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate" href="#" target="_blank" rel="noopener"><code>two_copy_joint_reversal_certificate</code></a></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数值演示，不是证明：本征值（雅可比旋转）、熵、屏上的曲线与 |c| &lt; 1 的情形都按同一组公式实时算出。|c| &lt; 1 时两份都逆转后 ρ₀₁ 只剩原来的 |c|⁴ 倍，|c| = 0 时为零：幺模前提不成立，上面的复原定理不适用。</span><span class="en">A numerical illustration on the page, not a proof: eigenvalues (Jacobi rotations), entropies, the curves on the screen and the cases |c| &lt; 1 are computed live from the same formulas. For |c| &lt; 1, reversing both copies leaves ρ₀₁ at |c|⁴ times its start, and at |c| = 0 at zero: the unit-modulus premise fails and the restoration theorem above does not apply.</span></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：Scully–Drühl 量子擦除（1982）与其光学实验（Herzog 等 1995；Kim 等 2000，无条件的屏上分布不随后来的选择改变）；环境诱导退相干；预测加工与快速眼动睡眠的感觉门控（Friston 2010；Hobson 等 2000）。页面只借这些背景，不计算它们。</span><span class="en">Literature results, not formalized in this book: the Scully–Drühl quantum eraser (1982) and its optical experiments (Herzog et al. 1995; Kim et al. 2000, where the unconditioned screen distribution does not change with the later choice); environment-induced decoherence; predictive processing and the sensory gating of REM sleep (Friston 2010; Hobson et al. 2000). The page borrows them as background and computes none of them.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">为画面选定的模型与本书的诠释：四个位置 x₀…x₃（x₀ 是躯体）上的实振幅全局态；把插值参数读成“锚点强度”、把 λ 降低读成“梦境卸下躯体先验”、把读出 P₀ 读成“醒来”、把相干的多处读成“多位置涌现”；屏上取远场 env(u)·Σᵢⱼ Re(ρᵢⱼ e^{ik(dᵢ − dⱼ)u})。这些读法不是上面任何定理推出来的，也不是神经科学结论。</span><span class="en">A model chosen for the picture and this book's interpretation: a real-amplitude global state on four places x₀…x₃ (x₀ is the body); reading the interpolation parameter as “anchor strength”, lowering λ as “a dream unloading the bodily prior”, the readout P₀ as “waking”, and coherence across places as “emerging in many places”; the screen shows the far field env(u)·Σᵢⱼ Re(ρᵢⱼ e^{ik(dᵢ − dⱼ)u}). None of these readings follows from the theorems above, and none is a finding of neuroscience.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="时间轴：锚点强度、记录的步数或醒来的读出" data-aria-en="Rail: the anchor strength, the record step or the waking readout">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <span class="zh">场景</span><span class="en">scene</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">左边是一张密度矩阵：第 i 行第 j 列那一格的方块面积是 |ρᵢⱼ|，方块里的短线指向它的相位，虚线框是它出发时的大小。对角是每个位置的权重（青色），非对角是位置之间的相干。右边是这张矩阵在一面屏上留下的亮度：青色虚线只由对角给出，青色填色是锚点块里的相干添上的条纹，品红填色是其余相干添上的条纹。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>锚点。</b>全局纯态 Ψ 落在四个位置上，x₀ 是躯体。锚点是一组投影 {Pₖ}，ρ(λ) = (1 − λ)|Ψ⟩⟨Ψ| + λ Σₖ PₖΨΨ*Pₖ：跨块的格乘上 1 − λ，块里的格与对角不动。它对一切 λ 都是迹为 1、厄米、半正定的矩阵（两个密度矩阵的凸组合）。λ = 1 时跨块全为零，再捏一次什么也不变：这是第 37 章 Lean 已验证的捏合幂等与不动点判据。“逐个位置”时 λ = 1 的熵等于删去相干的相对熵（Lean 已验证的熵产恒等式，从熵为 0 的纯态出发）；“躯体 | 其余”的块捏合与 0 &lt; λ &lt; 1 的熵是页面数值。</li>
+        <li><b>卸下锚点。</b>λ 从 1 降到 0.1，跨块相干的模长回到原来的 0.9 倍，条纹回来；对角——每个位置的权重——始终不动。“梦境卸下躯体先验”是本书的诠释（MODEL）。</li>
+        <li><b>记录。</b>两条路 x₀、x₁ 的等幅叠加，ρ₀₁ = 1/2。每份环境记录给地址 0 写 (1, 0)，给地址 1 写 (|c|e^{iφ}, √(1 − |c|²))，重叠 c = |c|e^{−iφ}；写入一份让 ρ₀₁ 乘 c，逆转一份乘 c̄。|c| = 1、φ = 90° 时正是 Lean 证书里的相位记录：1/2 → −i/2 → −1/2 → −i/2 → 1/2，只逆转一份停在 −i/2。复原定理的前提是每份记录 c̄·c = 1；|c| &lt; 1 时两份都逆转只剩 |c|⁴ 倍，|c| = 0 时为零——这是页面按同一公式的数值，不是那条定理的推论。屏上条纹的对比度是 2|ρ₀₁|，位置随 ρ₀₁ 的相位移动。</li>
+        <li><b>醒来。</b>梦中的态取“逐个位置”的 ρ(λ)。读出投影 P₀ = |x₀⟩⟨x₀| 只留躯体那一格，遗忘的权重 1 − Tr(P₀ρ) = 1 − |⟨x₀|Ψ⟩|²：P₀ 与锚点的块对易，捏合不改对角，所以它与 λ 无关。把这个数读成“醒来忘掉的梦”是本书的诠释（MODEL）。</li>
+        <li><b>不是什么。</b>页面不模拟大脑，也不演示第 37 章的黄金切投与德洛内定理；量子擦除实验与睡眠生理是文献背景（ARGUED）。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch37-dreams-quantum-eraser-and-nonlocal-observer.html#thm-ch37-known-data-pinching-and-entropy-tax" target="_top">第 37 章 · 已知数据记录捏合定理</a> · <a href="../../zh/ch37-dreams-quantum-eraser-and-nonlocal-observer.html#thm-ch37-joint-coherent-record-erasure" target="_top">联合相干逆转定理</a> · <a href="../../zh/ch37-dreams-quantum-eraser-and-nonlocal-observer.html#rem-ch37-quantum-eraser-literature" target="_top">量子擦除的文献注记</a> · trureturing（所钉提交）：<a data-trureturing-path="D5/S3/ObserverMemory/JointCoherentReversal.lean" href="#" target="_blank" rel="noopener">JointCoherentReversal.lean</a> · <a data-trureturing-path="D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.lean" href="#" target="_blank" rel="noopener">FiniteRecordPinchingIdempotence.lean</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">On the left is a density matrix: the square in row i, column j has area |ρᵢⱼ|, the short needle inside points to its phase, and the dashed frame is its size at the start. The diagonal is the weight of each place (cyan); the off-diagonal entries are the coherence between places. On the right is the brightness this matrix leaves on a screen: the dashed cyan curve comes from the diagonal alone, the cyan fill marks the fringes added by the coherence inside an anchor block, the magenta fill those added by the rest of the coherence. The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>Anchors.</b> The global pure state Ψ lies on four places, x₀ being the body. The anchors are a family of projections {Pₖ}, and ρ(λ) = (1 − λ)|Ψ⟩⟨Ψ| + λ Σₖ PₖΨΨ*Pₖ: cross-block entries are multiplied by 1 − λ, entries inside a block and the diagonal do not move. For every λ it is a matrix of trace 1, Hermitian and positive semidefinite (a convex combination of two density matrices). At λ = 1 every cross-block entry is zero and pinching again changes nothing: pinching idempotence and its fixed-point criterion, verified in Lean in chapter 37. For “every place”, the entropy at λ = 1 equals the relative entropy of the deleted coherence (the entropy-production identity verified in Lean, starting from a pure state of entropy 0); the block pinching “body | the rest” and the entropies for 0 &lt; λ &lt; 1 are numbers of the page.</li>
+        <li><b>Unpinning.</b> As λ drops from 1 to 0.1, the cross-block coherence comes back to 0.9 times its original modulus and the fringes return; the diagonal, the weight of each place, never moves. “A dream unloads the bodily prior” is this book's interpretation (MODEL).</li>
+        <li><b>Records.</b> An equal superposition of two paths x₀, x₁, with ρ₀₁ = 1/2. Each environment record writes (1, 0) for address 0 and (|c|e^{iφ}, √(1 − |c|²)) for address 1, so its overlap is c = |c|e^{−iφ}; writing a copy multiplies ρ₀₁ by c, reversing one multiplies it by c̄. With |c| = 1 and φ = 90° this is the phase record of the Lean certificate: 1/2 → −i/2 → −1/2 → −i/2 → 1/2, and reversing one copy only stops at −i/2. The restoration theorem assumes c̄·c = 1 for every copy; for |c| &lt; 1 reversing both copies leaves |c|⁴ times the start, and at |c| = 0 nothing: numbers of the page from the same formula, not consequences of that theorem. The fringe contrast on the screen is 2|ρ₀₁|, and the fringes shift with the phase of ρ₀₁.</li>
+        <li><b>Waking.</b> The dream state is ρ(λ) anchored at “every place”. The readout projection P₀ = |x₀⟩⟨x₀| keeps only the body cell, and the forgotten weight is 1 − Tr(P₀ρ) = 1 − |⟨x₀|Ψ⟩|²: P₀ commutes with the anchor blocks and pinching leaves the diagonal alone, so it does not depend on λ. Reading this number as “the dream forgotten on waking” is this book's interpretation (MODEL).</li>
+        <li><b>What it is not.</b> The page does not simulate a brain, nor does it show the golden cut-and-project and Delone theorems of chapter 37; the quantum-eraser experiments and sleep physiology are literature background (ARGUED).</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch37-dreams-quantum-eraser-and-nonlocal-observer.html#thm-ch37-known-data-pinching-and-entropy-tax" target="_top">Chapter 37 · The known-data pinching theorem</a> · <a href="../../en/ch37-dreams-quantum-eraser-and-nonlocal-observer.html#thm-ch37-joint-coherent-record-erasure" target="_top">The joint coherent reversal theorem</a> · <a href="../../en/ch37-dreams-quantum-eraser-and-nonlocal-observer.html#rem-ch37-quantum-eraser-literature" target="_top">The literature note on the quantum eraser</a> · trureturing (pinned commit): <a data-trureturing-path="D5/S3/ObserverMemory/JointCoherentReversal.lean" href="#" target="_blank" rel="noopener">JointCoherentReversal.lean</a> · <a data-trureturing-path="D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.lean" href="#" target="_blank" rel="noopener">FiniteRecordPinchingIdempotence.lean</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//CLOSURE · Self-sustaining spinor flow">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//CLOSURE 自持旋量流</title>
+<meta name="description" content="三维偶子代数里的旋量 ψ = √ρ R 夹住 e₃ 织出青色的流向量 J，夹住 e₁e₂ 织出品红的自旋面 S，三个平方 J²、−S²、ρ² 始终相等。让 ψ 绕一根紫色的轴转：J 转一圈就回到原处，ψ 却翻成 −ψ，紫色小旗沿单侧光带翻到另一面；走满 720° 才回到 +ψ。An even spinor ψ = √ρ R of three-dimensional space weaves the cyan current vector J from e₃ and the magenta spin plane S from e₁e₂, and the three squares J², −S² and ρ² stay equal. Turn ψ about a violet axis: J is back after one turn, but ψ has become −ψ and the violet flag has slid to the other side of the one-sided band; only 720° brings back +ψ.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="self-sustaining-spinor-flow">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//CLOSURE">ORTHO<b>//</b>CLOSURE</h1>
+      <div class="tagline">
+        <span class="zh">自持旋量流 · <em>旋量夹住两块参考刀片，织出一根流向量与一块自旋面，三个平方始终相等；矢量转一圈就回来，旋量要转两圈</em></span>
+        <span class="en">Self-sustaining spinor flow · <em>a spinor sandwiching two reference blades weaves a current vector and a spin plane whose squares always agree; the vector is back after one turn, the spinor only after two</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill hot" id="pillTurn"><span class="zh">转角</span><span class="en">TURN</span> <strong>—</strong></span>
+      <span class="pill" id="pillSign"><span class="zh">ψ 比 ψ₀</span><span class="en">ψ / ψ₀</span> <strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="weave" aria-pressed="false"><span class="code">WEAVE</span><span class="cn zh">ψ 夹住 e₃ 与 e₁e₂：织出 J 与 S</span><span class="cn en">ψ sandwiches e₃ and e₁e₂: out come J and S</span></button>
+        <button class="preset" data-preset="fierz" aria-pressed="false"><span class="code">FIERZ</span><span class="cn zh">随便一个 ψ：J² = −S² = ρ²</span><span class="cn en">Any ψ at all: J² = −S² = ρ²</span></button>
+        <button class="preset" data-preset="turn360" aria-pressed="false"><span class="code">TURN 360°</span><span class="cn zh">J 回到原处，ψ 变成 −ψ</span><span class="cn en">J is back, ψ has become −ψ</span></button>
+        <button class="preset" data-preset="seam" aria-pressed="false"><span class="code">SEAM</span><span class="cn zh">一路插小旗：回到起点对不上</span><span class="cn en">Flags all the way round: they do not match at the start</span></button>
+        <button class="preset" data-preset="turn720" aria-pressed="false"><span class="code">TURN 720°</span><span class="cn zh">走满两圈，光带的边才闭合</span><span class="cn en">Two full turns before the edge of the band closes</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+
+    <section class="panel sec" id="ctlPanel">
+      <h2><span class="zh">旋量与转动</span><span class="en">Spinor and turn</span><span class="aside"><span class="zh">也可拖动 J 的箭头尖</span><span class="en">or drag the tip of J</span></span></h2>
+      <div class="field">
+        <label for="rho"><span class="zh">密度 ρ = ψψ̃</span><span class="en">Density ρ = ψψ̃</span></label><output id="oRho" for="rho">1.00</output>
+        <input type="range" id="rho" min="0.2" max="1.6" step="0.05" value="1">
+      </div>
+      <div class="chips" id="planeChips" role="group" aria-label="转动所在的平面" data-aria-en="Plane of the turn">
+        <button class="chip" data-plane="e23" aria-pressed="true"><span class="zh">在 e₂e₃ 面里转</span><span class="en">turn in e₂e₃</span></button>
+        <button class="chip" data-plane="e31" aria-pressed="false"><span class="zh">在 e₃e₁ 面里转</span><span class="en">turn in e₃e₁</span></button>
+        <button class="chip" data-plane="e12" aria-pressed="false"><span class="zh">在 e₁e₂ 面里转</span><span class="en">turn in e₁e₂</span></button>
+      </div>
+      <div class="chips" role="group" aria-label="出发时的旋量 ψ₀" data-aria-en="The starting spinor ψ₀">
+        <button class="chip" id="psiOne"><span class="zh">ψ₀ = √ρ（J 从 e₃ 出发）</span><span class="en">ψ₀ = √ρ (J starts at e₃)</span></button>
+        <button class="chip" id="psiRandom"><span class="zh">随机 ψ₀</span><span class="en">Random ψ₀</span></button>
+        <button class="chip" id="fanChip" aria-pressed="false"><span class="zh">一路插小旗</span><span class="en">Flags all the way</span></button>
+        <button class="chip" id="bandChip" aria-pressed="true"><span class="zh">单侧光带</span><span class="en">One-sided band</span></button>
+      </div>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage" id="stage" data-thumb aria-label="单位球里青色的流向量 J 与品红的自旋面 S；球外是绕紫色转轴一圈的单侧光带，紫色小旗插在光带上，记着旋量转过的半角" data-aria-en="Inside the unit sphere, the cyan current vector J and the magenta spin plane S; outside it, a one-sided band once round the violet axis, with a violet flag on the band that records the half angle the spinor has turned through">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-bl" id="legend"></div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2><span class="zh">沿时间轴：矢量一圈回来，旋量两圈回来</span><span class="en">Along the rail: the vector returns after one turn, the spinor after two</span></h2><span id="plotMeta"></span></div>
+        <canvas id="plot" aria-label="J 与出发方向的夹角余弦（青）和 ψ 与 ψ₀ 的标量比（紫）随转角的变化" data-aria-en="The cosine of the angle between J and its starting direction (cyan) and the scalar ratio of ψ to ψ₀ (violet) against the turn"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside" id="roAside"></span></h2>
+      <dl class="ro">
+        <div class="key"><dt><span class="zh">J² · −S² · ρ²</span><span class="en">J² · −S² · ρ²</span></dt><dd><b id="roKey">—</b><span id="roKeySub"></span></dd></div>
+        <div><dt><span class="zh">旋量 ψ</span><span class="en">spinor ψ</span></dt><dd id="roPsi">—</dd></div>
+        <div class="c"><dt><span class="zh">流向量 J = ψe₃ψ̃</span><span class="en">current J = ψe₃ψ̃</span></dt><dd id="roJ">—</dd></div>
+        <div class="m"><dt><span class="zh">自旋面 S = ψe₁e₂ψ̃</span><span class="en">spin plane S = ψe₁e₂ψ̃</span></dt><dd id="roS">—</dd></div>
+        <div class="c"><dt><span class="zh">J 离出发方向</span><span class="en">J from its start</span></dt><dd id="roJback">—</dd></div>
+        <div><dt><span class="zh">ψ 比 ψ₀（标量部 ⟨ψψ̃₀⟩/ρ）</span><span class="en">ψ against ψ₀ (scalar part ⟨ψψ̃₀⟩/ρ)</span></dt><dd id="roSign">—</dd></div>
+      </dl>
+      <p class="note" id="roNote"></p>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">旋量双线性的菲尔兹恒等式：三维偶子代数里 ψ = √ρ R（RR̃ = 1）给出 J² = −S² = ρ²；时空代数里狄拉克旋量的对应关系是 J<sub>μ</sub>J<sup>μ</sup> = σ² + ω²（本页不画四分量的情形）。文献结果，未在本书形式化。上面一行是页面在这个 ψ 上当场乘出的三个平方。</span><span class="en">The Fierz identity for spinor bilinears: in the even subalgebra of three-dimensional space, ψ = √ρ R (RR̃ = 1) gives J² = −S² = ρ²; for a Dirac spinor in the spacetime algebra the counterpart is J<sub>μ</sub>J<sup>μ</sup> = σ² + ω² (the page does not draw the four-component case). A literature result, not formalized in this book. The row above is the three squares the page multiplies out for this ψ on the spot.</span></span></div>
+    </section>
+
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">圆周平方双覆叠没有连续的全局截面：不存在连续映射 s : Circle → Circle 使对每个 z 都有 s(z)² = z。光带上的小旗就是这样一个“平方根”的选择：沿底圈走一圈，连续插下去的小旗回到起点时与第一面相反。已冻结：</span><span class="en">The squaring double cover of the circle has no continuous global section: there is no continuous map s : Circle → Circle with s(z)² = z for every z. The flags on the band are such a choice of square root: carried continuously once round the base circle, the flag comes back to the start opposite to the first one. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section" href="#" target="_blank" rel="noopener"><code>no_continuous_global_section</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">历史依赖的唯一提升：底圈上的每条连续路径，从给定的上层起点出发，恰有一条连续提升；绕底圈整整一圈的回路 fullTurn(t) = exp(2πit) 从 1 提升，终点是 −1。页面里底圈是 J 转过的角 t，上层是小旗转过的半角 t/2：t = 360° 时小旗与出发时相反。已冻结：</span><span class="en">The unique history-dependent lift: every continuous path on the base circle, from a given starting point upstairs, has exactly one continuous lift; the loop fullTurn(t) = exp(2πit) once round the base circle, lifted from 1, ends at −1. On the page the base is the angle t that J has turned through and upstairs is the half angle t/2 of the flag: at t = 360° the flag is the reverse of the starting one. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift" href="#" target="_blank" rel="noopener"><code>circle_double_cover_history_lift</code></a></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">Spin(3) ≅ SU(2) → SO(3) 是二对一的覆叠：R 与 −R 给出同一个转动，所以 J、S 只认得出转动，认不出 ψ 的正负号。文献结果，未在本书形式化。上面两条 Lean 定理讲的是圆周上的平方映射，页面把它画在这个转动平面的单参数族上。</span><span class="en">Spin(3) ≅ SU(2) → SO(3) is a two-to-one covering: R and −R give the same rotation, so J and S see the rotation but not the sign of ψ. A literature result, not formalized in this book. The two Lean theorems above are about the squaring map of the circle; the page draws it on the one-parameter family of turns in the chosen plane.</span></span></div>
+      <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">“无底物的自指旋量流”“时空是观察者自乘的副产物”“观察者即宇宙本体”是第三十九章的模型诠释。页面只画三维偶子代数里的乘积与圆周双覆叠：J 是欧氏向量、S 是欧氏双矢量，把它们叫作流向量与自旋面、读成时间流与规范面也属这一模型，页面不构造洛伦兹时间流或规范场。这些读法不是定理，也不是物理结论。</span><span class="en">“A substrate-free, self-referential spinor flow”, “spacetime as a by-product of the observer multiplying itself” and “the observer is the ontological universe” are the model interpretation of Chapter 39. The page draws only products in the even subalgebra of three-dimensional space and the double cover of the circle: J is a Euclidean vector and S a Euclidean bivector, and calling them the current vector and the spin plane, read as time flow and gauge plane, belongs to the same model; the page constructs no Lorentzian time flow or gauge field. Those readings are neither theorems nor physical results.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面在实三维几何代数 Cl(3,0) 里按刀片逐项相乘：ψ、J、S、三个平方、小旗的半角都由这一乘法当场算出（双精度）。这是数值演示，不是证明。</span><span class="en">The page multiplies blade by blade in the real geometric algebra Cl(3,0): ψ, J, S, the three squares and the half angle of the flag all come from this product on the spot (double precision). This is a numerical illustration, not a proof.</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="12.566370614359172" step="any" value="0" aria-label="时间轴：ψ 转过的角" data-aria-en="Rail: the angle ψ has turned through">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">每次 15°</span><span class="en">15° at a time</span> · <kbd>R</kbd> <span class="zh">随机 ψ₀</span><span class="en">random ψ₀</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">舞台是实三维几何代数 Cl(3,0)：单位球里画旋量 ψ 织出的两样东西，球外一圈单侧光带画 ψ 自己的正负号。本页是数值演示，不是证明；每个数都由页面在 Cl(3,0) 里当场算出（NUM）。</p>
+      <ol>
+        <li><b>旋量与密度。</b>偶多向量 ψ = a + b e₂e₃ + c e₃e₁ + d e₁e₂，反序 ψ̃ 把双向量变号。ρ = ψψ̃ = a² + b² + c² + d² ≥ 0，R = ψ/√ρ 满足 RR̃ = 1（第三十九章例 <a href="../../zh/ch39-observer-is-ontological-universe.html#ex-ch39-even-clifford-spinor-bilinear-fierz" target="_top">ex-ch39-even-clifford-spinor-bilinear-fierz</a> 第 1 步）。</li>
+        <li><b>两个双线性量。</b>流向量 J = ψe₃ψ̃ = ρ R e₃ R̃，长度 ρ（青色的箭头）；自旋双向量 S = ψe₁e₂ψ̃ = ρ (Re₁R̃)(Re₂R̃)，画成边长 √ρ、由 Re₁R̃ 与 Re₂R̃ 张成的品红正方形，面积 ρ，小弧标出它的转向。由结合律 J² = ψe₃(ψ̃ψ)e₃ψ̃ = ρ²，S² = ρ ψ(e₁e₂)²ψ̃ = −ρ²：这就是 J² = −S² = ρ²（例第 2、3 步）。在三维里 e₁e₂ = I e₃（I = e₁e₂e₃ 与一切元素对易），所以 S = I J：自旋面恰是与 J 正交的那块面。</li>
+        <li><b>转动。</b>取一个单位双向量 B（e₂e₃、e₃e₁ 或 e₁e₂），令 ψ(t) = R(t) ψ₀，R(t) = cos(t/2) − sin(t/2) B。J(t) = R(t) J₀ R̃(t) 绕紫色的轴 n（B 的对偶）转过角 t；t = 360° 时 J、S 都回到出发时的样子，ψ(360°) = −ψ₀，t = 720° 时 ψ = +ψ₀（例第 4 步）。</li>
+        <li><b>单侧光带与小旗。</b>球外的光带以 n 为轴绕一圈；在 J 所在的方位插一面紫色小旗，方向 cos(t/2) n + sin(t/2) r（r 是这一方位上指向外面的单位向量），即 ψψ̃₀/ρ = cos(t/2) − sin(t/2) B 的两个分量。光带的横向在一圈里只转半圈，是一条单侧的莫比乌斯带：小旗走完一圈到了另一面（与出发时相反），走完两圈才回到原面。旗尖走过的路是光带的边，边要绕两圈才闭合。</li>
+        <li><b>冻结定理。</b>圆周平方双覆叠没有连续的全局截面 <a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section" href="#" target="_blank" rel="noopener"><code>no_continuous_global_section</code></a> 与历史依赖的唯一提升 <a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift" href="#" target="_blank" rel="noopener"><code>circle_double_cover_history_lift</code></a> 是第三十九章定理 <a href="../../zh/ch39-observer-is-ontological-universe.html#thm-ch39-double-cover-no-section-and-720-lift" target="_top">thm-ch39-double-cover-no-section-and-720-lift</a> 用 <code>lean=</code> 引用的两条（LEAN ✓）。它们讲的是圆周 z ↦ z²；页面里底圈的点是 e<sup>it</sup>（J 转过的角），上层是 e<sup>it/2</sup>（小旗的半角）。</li>
+        <li><b>文献与诠释。</b>菲尔兹恒等式（含狄拉克旋量的 J<sub>μ</sub>J<sup>μ</sup> = σ² + ω²）与 Spin(3) ≅ SU(2) → SO(3) 双覆叠是第三十九章文献注记 <a href="../../zh/ch39-observer-is-ontological-universe.html#rem-ch39-cartan-penrose-hestenes-fierz-literature" target="_top">rem-ch39-cartan-penrose-hestenes-fierz-literature</a> 转述的文献结果（ARGUED），本书未形式化；“无底物自指旋量流”“观察者即宇宙本体”是该章的模型诠释（MODEL），页面不声称它们是定理或物理结论。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch39-observer-is-ontological-universe.html#rem-ch39-cartan-penrose-hestenes-fierz-literature" target="_top">第三十九章 · 旋量双线性与菲尔兹恒等式文献注记</a> · <a href="../../zh/ch39-observer-is-ontological-universe.html#ex-ch39-even-clifford-spinor-bilinear-fierz" target="_top">三维偶子代数上的手算核验</a> · <a href="../../zh/ch39-observer-is-ontological-universe.html#thm-ch39-double-cover-no-section-and-720-lift" target="_top">双覆叠无截面与 360° 换叶</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">The stage is the real geometric algebra Cl(3,0): inside the unit sphere, the two things a spinor ψ weaves; outside it, a one-sided band round the sphere that shows the sign of ψ itself. The page is a numerical illustration, not a proof; every number is computed on the spot in Cl(3,0) (NUM).</p>
+      <ol>
+        <li><b>Spinor and density.</b> An even multivector ψ = a + b e₂e₃ + c e₃e₁ + d e₁e₂; the reversion ψ̃ flips the sign of the bivectors. ρ = ψψ̃ = a² + b² + c² + d² ≥ 0, and R = ψ/√ρ has RR̃ = 1 (Chapter 39, step 1 of Example <a href="../../en/ch39-observer-is-ontological-universe.html#ex-ch39-even-clifford-spinor-bilinear-fierz" target="_top">ex-ch39-even-clifford-spinor-bilinear-fierz</a>).</li>
+        <li><b>Two bilinears.</b> The current vector J = ψe₃ψ̃ = ρ R e₃ R̃ has length ρ (the cyan arrow); the spin bivector S = ψe₁e₂ψ̃ = ρ (Re₁R̃)(Re₂R̃) is drawn as the magenta square of side √ρ spanned by Re₁R̃ and Re₂R̃, area ρ, with a small arc for its sense. By associativity J² = ψe₃(ψ̃ψ)e₃ψ̃ = ρ² and S² = ρ ψ(e₁e₂)²ψ̃ = −ρ²: this is J² = −S² = ρ² (steps 2 and 3). In three dimensions e₁e₂ = I e₃, with I = e₁e₂e₃ commuting with everything, so S = I J: the spin plane is exactly the plane orthogonal to J.</li>
+        <li><b>The turn.</b> Take a unit bivector B (e₂e₃, e₃e₁ or e₁e₂) and set ψ(t) = R(t) ψ₀ with R(t) = cos(t/2) − sin(t/2) B. J(t) = R(t) J₀ R̃(t) turns through t about the violet axis n (the dual of B); at t = 360° J and S look as they did at the start while ψ(360°) = −ψ₀, and at t = 720° ψ = +ψ₀ (step 4).</li>
+        <li><b>The one-sided band and the flag.</b> The band outside goes once round the axis n. At the bearing of J stands a violet flag pointing along cos(t/2) n + sin(t/2) r, with r the outward unit vector at that bearing: the two components of ψψ̃₀/ρ = cos(t/2) − sin(t/2) B. Across one round the band’s width turns only half a turn, so it is a one-sided Möbius band: after one round the flag is on the other side (the reverse of where it started), after two it is back. The path of the flag’s tip is the band’s edge, which closes only after going round twice.</li>
+        <li><b>Frozen theorems.</b> The squaring double cover of the circle has no continuous global section, <a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section" href="#" target="_blank" rel="noopener"><code>no_continuous_global_section</code></a>, and every path has a unique history-dependent lift, <a class="leanref" data-lean-gid="D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift" href="#" target="_blank" rel="noopener"><code>circle_double_cover_history_lift</code></a>: the two theorems Chapter 39 cites with <code>lean=</code> in <a href="../../en/ch39-observer-is-ontological-universe.html#thm-ch39-double-cover-no-section-and-720-lift" target="_top">thm-ch39-double-cover-no-section-and-720-lift</a> (LEAN ✓). They are about the circle map z ↦ z²; on the page the point downstairs is e<sup>it</sup> (the angle J has turned through) and upstairs it is e<sup>it/2</sup> (the half angle of the flag).</li>
+        <li><b>Literature and interpretation.</b> The Fierz identity (with J<sub>μ</sub>J<sup>μ</sup> = σ² + ω² for a Dirac spinor) and the double cover Spin(3) ≅ SU(2) → SO(3) are literature results reported in the remark <a href="../../en/ch39-observer-is-ontological-universe.html#rem-ch39-cartan-penrose-hestenes-fierz-literature" target="_top">rem-ch39-cartan-penrose-hestenes-fierz-literature</a> (ARGUED), not formalized in this book; “a substrate-free self-referential spinor flow” and “the observer is the ontological universe” are the chapter’s model interpretation (MODEL), and the page does not claim them as theorems or physical results.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch39-observer-is-ontological-universe.html#rem-ch39-cartan-penrose-hestenes-fierz-literature" target="_top">Chapter 39 · the remark on spinor bilinears and the Fierz identity</a> · <a href="../../en/ch39-observer-is-ontological-universe.html#ex-ch39-even-clifford-spinor-bilinear-fierz" target="_top">the hand computation in the even subalgebra</a> · <a href="../../en/ch39-observer-is-ontological-universe.html#thm-ch39-double-cover-no-section-and-720-lift" target="_top">no section and the 360° change of sheet</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

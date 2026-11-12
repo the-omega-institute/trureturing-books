@@ -11,7 +11,7 @@ import math
 
 from _ch07 import ZENO_TABLE, zeno_final
 
-SIZE = (500, 290)
+SIZE = (440, 290)
 ALT = {
     "zh": "横轴是测量次数 N，按对数刻度从 1 到 64；纵轴是全程留在 |0⟩ 的概率。青色的曲线是 P_N = [cos²(π/2N)]^N，"
           "四个青色的点是 N = 1、4、16、64，依次为 0、0.531、0.857、0.962。灰色虚线是近似式 1 − π²/4N，"
@@ -25,7 +25,7 @@ ALT = {
 
 def draw(fig):
     t = fig.t
-    ax = fig.axes(58, 30, 410, 200, (0, math.log2(64)), (0, 1))
+    ax = fig.axes(58, 30, 360, 200, (0, math.log2(64)), (0, 1))
     ax.grid(ys=[0.25, 0.5, 0.75])
     ax.hline(1, "faint", 1.2, dash="4 3")
     ax.xaxis(ticks=[0, 2, 4, 6], labels=["1", "4", "16", "64"], size=13, label=t("测量次数 *N*", "measurements *N*"))

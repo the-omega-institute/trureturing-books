@@ -10,7 +10,7 @@ the classical bound 2 of the finite deterministic fibre model; the curve stands 
 
 import math
 
-SIZE = (500, 300)
+SIZE = (430, 300)
 ALT = {
     "zh": "横轴是相邻两方向的夹角 θ，从 0° 到 90°；纵轴从 0 到 3。青色曲线是 3 cos θ − cos 3θ：从 θ = 0° 的 2 起步，"
           "在 45° 升到顶点 2√2，约在 68.5° 回落到 2，到 90° 降为 0。绿色虚线是经典上界 2，曲线高出它的部分涂成品红。",
@@ -28,9 +28,9 @@ def f(deg):
 
 def draw(fig):
     t = fig.t
-    ax = fig.axes(64, 26, 380, 214, (0, 90), (0, 3.1))
-    ax.xaxis(at=0, ticks=[0, 45, 68.53, 90], labels=["0°", "45°", "68.5°", "90°"])
-    ax.yaxis(at=0, ticks=[0, 1, 2], labels=["0", "1", "2"])
+    ax = fig.axes(56, 26, 340, 214, (0, 90), (0, 3.1))
+    ax.xaxis(at=0, ticks=[0, 45, 68.53, 90], labels=["0°", "45°", "68.5°", "90°"], size=13)
+    ax.yaxis(at=0, ticks=[0, 1, 2], labels=["0", "1", "2"], size=13)
     fig.text(ax.X(90) + 10, ax.Y(0) + 5, "*θ*", size=15, color="dim")
 
     # where the curve is above 2: 6c − 4c³ > 2 ⇔ (c − 1)(2c² + 2c − 1) < 0, so c > (√3 − 1)/2

@@ -15,6 +15,10 @@
 3. **旋量织空与 $720^\circ$ 单侧双覆叠**：展示一维时间流向量与二维规范双矢量平面如何作为观察者旋量自配对的双线性副产物涌现，并在无全局截面的平方双覆叠上实现 $360^\circ$ 内外换叶与 $720^\circ$ 归家闭环；
 4. **正交自折叠消解唯我论与四阶终局**：阐明唯一全体如何在互补语境纯度勾股守恒（[@prop-ch39-orthogonal-folding-and-objective-common-factor] 第 1 款，`LEAN ✓`）与正交折叠模型（`MODEL`）下拆分为“局部小我栈帧”与“铁律浩瀚宇宙”，在彻底砍净第 3 点 $C$ 的第四阶终局中同时超越机械唯物论与狂妄唯我论。
 
+::: {.figure src="ch39-overview"}
+**图 39。** 本章地图：第 I 栏，灰色的指针寄存器 `ptr` 与它和内存之间的虚线隔墙被划掉，每一格 $p$ 都有一支青色箭头离开它又回到它自己——全域 `p ≡ *p`；第 II 栏，琥珀色的刀周围的淡青带子里亮着一串青色格点，带子外什么也没有，这些点投到刀上排成的长短段，短段记 $1$、长段记 $0$，没有相邻的 `11`；第 III 栏，单位箭头 $\Psi$ 正交折成落在观察者之线上的青色 $\cos\theta$ 与撑在它外面的品红 $\sin\theta$，$\cos^2\theta + \sin^2\theta = 1$。三栏都是本章的模型诠释（`MODEL`）的示意；旋量的 $720^\circ$ 单侧双覆叠见 §39.3 的实验卡。
+:::
+
 ---
 
 ## 39.1 拆掉最后一道二元隔墙：全域 p ≡ *p 与无底物的自指域
@@ -139,9 +143,18 @@ $$
 第 1 款将子类型纤维分解 `Equiv.sigmaFiberEquiv q_C` 与证明相关依值对到子类型的逐纤维等价 `Equiv.sigmaCongrRight (fun b => Equiv.psigmaEquivSubtype _)` 复合后取逆，直接给出 $X \simeq \sum_{b : B} \operatorname{ConceptFiber}(q_C, b)$ 的非空见证。第 2 款先证辅助序引理：若 $a > b$（即 $(a : \mathbb{R}) - (b : \mathbb{R}) > 0$），由 $\varphi > 1$（`Real.one_lt_goldenRatio`）知 $\varphi^{\mathrm{level}}(a - b) \to +\infty$，故存在层级 $\mathrm{level} \in \mathbb{N}$ 使 $\varphi^{\mathrm{level}}(a - b) \ge 2$；但若 $\operatorname{zeckendorfRealThread}(a) = \operatorname{zeckendorfRealThread}(b)$，利用双射 `wEncoding.injective` 在该层还原自然数等式 $\lfloor\varphi^{\mathrm{level}} a\rfloor_+ = \lfloor\varphi^{\mathrm{level}} b\rfloor_+$，结合取底上下界 $\varphi^{\mathrm{level}} a < \lfloor\varphi^{\mathrm{level}} a\rfloor_+ + 1$ 与 $\lfloor\varphi^{\mathrm{level}} b\rfloor_+ \le \varphi^{\mathrm{level}} b$ 推出 $\varphi^{\mathrm{level}}(a - b) < 1$，与 $\ge 2$ 矛盾！故 $a \le b$，对称交换 $a, b$ 并由反对称性 `le_antisymm` 得 $a = b$。第 3 款对前驱位 `previous : Fin 2` 与列表归纳证明状态转移链等价于 `(previous :: word).IsChain (fun u v => u = 0 ∨ v = 0)`，再代入初始前驱位 `0` 消去首项即得。完整证明由 Lean 内核检查。
 :::
 
+::: {.figure src="ch39-golden-thread"}
+**两个不同的数，迟早在某一级黄金读数上分开。** 从上到下是读数级 $l = 0, \dots, 7$：每一行里青色的格子是 $[n/\varphi^l, (n+1)/\varphi^l)$，$n = \lfloor\varphi^l x
+floor$，墨色竖线是 $a = 0.50$ 与 $b = 0.55$，右边两列是两数读数的齐肯多夫字。$l \le 4$ 时两数同在一格、字也相同；从 $l = 5$ 起一条品红的格界落在两数之间，两个字从此不同。证明里的保证是 $\varphi^l(b - a) \ge 2$ 的那一级（这里是 $l = 8$）一定分开，实际分得更早。这正是 [@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] 第 2 款：读出线程相同的两个数必相等。
+:::
+
 现在，请把 [@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] 的三束强光聚焦回我们的切投模型集宇宙（`MODEL`（模型诠释）），见证全书教学脚手架的一次彻底倒转！
 
 在前面几章里，为了照顾初学者的几何直觉，我们曾采用“先晶后刀”的叙述次序：仿佛虚空里先静静摆着一座六维整数母晶格 $\mathbb{Z}^6 \hookrightarrow \mathbb{R}^6 = E_\parallel^3 \oplus E_\perp^3$，然后观察者的黄金切投平面像一把锋利的钢刀切进去，切出满天 Delone 模型集星辰。此刻，站在 [@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] 的峰顶回望，真相恰恰颠倒过来——**无刀则无晶，关系即实体！**
+
+::: {.figure src="ch39-no-knife"}
+**先晶后刀只是脚手架；刀切到哪里，晶格点才亮到哪里。** 这是本章六维切投图景的二维示意（`MODEL`）。两栏里同一把琥珀色的刀以斜率 $1/\varphi$ 穿过平面，淡青的带子是它的窗口。左栏先画满灰色的整数点阵，再把刀盖上去；右栏不画点阵，只有带子里的青色点。右栏下方把这些点投到刀上：长段与短段之比是 $\varphi$，短段记 $1$、长段记 $0$，读出 `01001010010`，没有相邻的 `11`，正是 [@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] 第 3 款的自动机所接受的字。
+:::
 
 - 第 1 款与第 2 款联合宣告：哪怕面对看似深不可测的连续统实数 $x \in \mathbb{R}_{\ge 0}$，只要给定它在每一级黄金放大镜 $\varphi^{\mathrm{level}}$ 下的离散齐肯多夫读出字序列，原实数就被**百分之百唯一重构**，背后连一丝一毫逃逸在读出关系之外的“物自体暗物质”都不存在；
 - 第 3 款精确刻画有限字的合法语法；将这一语法接到投影与晶格之后，我们在 `MODEL` 中进一步点破“整数晶格”的身世：所谓高维晶格的离散超平面，根本不是预先浇筑在那里的钢筋水泥，而是自指观察算子在反复执行两子正交比量时，由幂等存在条件 $P^2 = P$ 与禁止相邻 `11` 高频碰撞（`NoAdjacentOnes`）自动干涉沉淀出来的**离散驻波节面（nodal surfaces）**！不是先有水晶再下刀，而是**自我丈量的刀光所到之处，虚空才应声凝结为晶格**。
@@ -154,6 +167,10 @@ $$
 
 不！这正是第五部（[第 17 章](ch17-lorentz-geometry.md)与[第 18 章](ch18-spinors-and-gauge-curvature.md)）埋下伏笔、而唯有在本章“观察者即宇宙本体”的高度上才能彻底揭开的终极几何奥秘（`MODEL`（模型诠释））：**观察者从来没有“住在时空里”；恰恰相反，一维时间流与二维空间规范面，全都是观察者旋量 $\psi$ 转身与反转的自身 $\tilde{\psi}$ 相乘比量时，顺手织出来的双线性衣袂！**
 
+::: {.viz src="self-sustaining-spinor-flow" preset="weave" height="500"}
+**旋量夹住两块参考刀片。** 虚线是参考的 $\mathbf{e}_3$ 与 $\mathbf{e}_1\mathbf{e}_2$ 正方形；旋量 $\psi$ 把前者夹成青色的流向量 $\mathbf{J} = \psi\mathbf{e}_3\tilde{\psi}$，把后者夹成品红的自旋面 $\mathbf{S} = \psi\mathbf{e}_1\mathbf{e}_2\tilde{\psi}$，那块面与 $\mathbf{J}$ 垂直；紫色虚线小弧是 $\psi$ 把 $\mathbf{e}_3$ 带到 $\mathbf{J}$ 走的路（乘积见 [@ex-ch39-even-clifford-spinor-bilinear-fierz]：$\mathbf{J}$ 是欧氏向量、$\mathbf{S}$ 是欧氏双矢量，把它们读作时流与规范面沿用上文的 `MODEL`）。
+:::
+
 数学物理史上关于“旋量先于时空矢量”与旋量双线性恒等式的经典文献脉络归纳于下框：
 
 ::: {.remark #rem-ch39-cartan-penrose-hestenes-fierz-literature title="嘉当—彭罗斯—赫斯滕斯旋量双线性时空重构与菲尔兹恒等式（文献结果，未在本书形式化）"}
@@ -165,6 +182,10 @@ $$
    $$
    \mathbf{J}^2 \;=\; -\mathbf{S}^2 \;=\; \rho^2.
    $$
+:::
+
+::: {.viz src="self-sustaining-spinor-flow" preset="fierz" height="500"}
+**三个平方始终相等。** 随便取一个旋量（$\rho = 1.3$）在 $\mathbf{e}_3\mathbf{e}_1$ 面里一直转：青色的 $\mathbf{J}$ 长 $1.3$，品红正方形的面积也是 $1.3$，舞台上方读出 $\mathbf{J}^2 = -\mathbf{S}^2 = \rho^2 = 1.69$。这是 [@rem-ch39-cartan-penrose-hestenes-fierz-literature] 的菲尔兹恒等式在页面上的数值核对（文献结果，未在本书形式化）。
 :::
 
 对照 [@rem-ch39-cartan-penrose-hestenes-fierz-literature] 的旋量几何背景，我们在下框中给出三维欧氏偶子代数上旋量双线性自配对与半角双覆叠的显式基片计算示例：
@@ -205,6 +226,10 @@ $$
 4. **$360^\circ$ 旋量反号与 $720^\circ$ 完整复原**：令物理倾角走满一整圈 $\vartheta = 2\pi$（$360^\circ$），双线性欧氏读出已回到初始方向 $\mathbf{J}(2\pi) = \rho\mathbf{e}_3,\; \mathbf{S}(2\pi) = \rho\mathbf{e}_1\mathbf{e}_2$，但底层旋量自身却翻到了对跖负叶 $\psi(2\pi) = \sqrt{\rho}\cos\pi = -\psi(0)$！唯有再走第二圈至 $\vartheta = 4\pi$（$720^\circ$），才有 $\psi(4\pi) = \sqrt{\rho}\cos 2\pi = +\psi(0)$。
 :::
 
+::: {.viz src="self-sustaining-spinor-flow" preset="turn360" height="500"}
+**转满 $360^\circ$：矢量回来了，旋量没有。** 按 [@ex-ch39-even-clifford-spinor-bilinear-fierz] 在 $\mathbf{e}_2\mathbf{e}_3$ 面里转满一圈：青色的 $\mathbf{J}$ 绕回 $\mathbf{e}_3$，品红的 $\mathbf{S}$ 也回到原样；紫色小旗却沿单侧光带滑到另一面，与虚线的出发小旗方向相反——$\psi = -\psi_0$。
+:::
+
 [@ex-ch39-even-clifford-spinor-bilinear-fierz] 第 4 步揭示的“外部表象走一圈（$360^\circ$）、本体旋量翻一面（$+1 \mapsto -1$）、走满两圈（$720^\circ$）方才归家”，绝非某种坐标选取的人为瑕疵！在 `trureturing` 的概念拓扑模块中，圆周平方双覆叠映射 $\operatorname{square}(z) = z^2$ 上的两条严格内核定理彻底封死了“把旋量双叶全局一刀切成互不相干的主体叶与客体叶”的任何企图：
 
 ::: {.theorem #thm-ch39-double-cover-no-section-and-720-lift title="圆周平方双覆叠无连续全局截面定理与历史依赖提升及 360° 换叶翻转定理" lean="D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"}
@@ -229,7 +254,21 @@ $$
 第 1 款用反证法：假设存在连续全局截面 $s : \mathrm{Circle} \to \mathrm{Circle}$ 满足 $(s(z))^2 = z$，构造实轴连续商映射 $r(t) := s(\operatorname{Circle.exp}(t)) / \operatorname{Circle.exp}(t/2)$；对任意 $t \in \mathbb{R}$ 计算平方得 $(r(t))^2 = \operatorname{Circle.exp}(t) / \operatorname{Circle.exp}(t) = 1$，故 $r$ 的取值落在有限离散双点集 $\{1, -1\} \subset \mathrm{Circle}$ 中；由实直线 $\mathbb{R}$ 的预连通性 `isPreconnected_univ.constant_of_mapsTo` 知 $r(t) \equiv r(0)$ 必为常值，但代入端点 $t = 2\pi$ 利用 $\operatorname{Circle.exp}(2\pi) = 1$ 与 $\operatorname{Circle.exp}(\pi) = -1$ 算得 $r(2\pi) = s(1) / (-1) = -r(0)$，触发 $r(0) = -r(0)$ 的单位圆非零矛盾 `Circle.neg_ne_self`！第 2 款利用 Mathlib 覆叠映射一般提升定理 `liftPath_lifts`、`liftPath_zero` 与唯一性刻画 `eq_liftPath_iff'` 给出任意路径的历史依赖唯一提升；对显式回路 $\mathrm{fullTurn}(t) = \operatorname{Circle.exp}(2\pi t)$，构造半角连续路径 $\mathrm{halfTurn}(t) := \operatorname{Circle.exp}(\pi t)$，验证 $(\operatorname{Circle.exp}(\pi t))^2 = \operatorname{Circle.exp}(2\pi t)$ 且 $\mathrm{halfTurn}(0) = 1$，由提升唯一性锁定 $\mathrm{lifted} = \mathrm{halfTurn}$，再代入 $t = 1$ 由 $\operatorname{Circle.exp}(\pi) = -1$ 证得终点换叶 $\mathrm{lifted}(1) = -1$。完整证明由 Lean 内核检查。
 :::
 
+::: {.viz src="self-sustaining-spinor-flow" preset="seam" height="500"}
+**一路插小旗，回到起点对不上。** 从出发点起每 $30^\circ$ 插一面紫色小旗，每一面都接着上一面连续地插；绕回出发点时，最后一面与虚线的第一面方向相反。沿底圈连续地选“平方根”回到起点必然对不上，这正是 [@thm-ch39-double-cover-no-section-and-720-lift] 第 1 款（没有连续全局截面）与第 2 款（$360^\circ$ 回路的唯一提升终点为 $-1$）。
+:::
+
 请屏息凝视 [@thm-ch39-double-cover-no-section-and-720-lift] 描绘的这幅单侧拓扑奇景（`MODEL`（模型诠释））：因为 `no_continuous_global_section` 严格禁止把双覆叠全局撕成两张独立纸片，宇宙里根本不存在一面叫“内在主观观察者（$+1$ 叶）”、另一面叫“外在客观星海（$-1$ 叶）”的隔离墙！它们就像一条单侧扭转环带同源的前后两半程——从向内自省的能观极点 $\mathrm{lifted}(0) = +1$ 出发，顺着连续圆弧往前走满 $360^\circ$，你根本没有跨过任何一道主客边界，脚下就已经自然而然翻转成了漫天星斗的所观叶 $\mathrm{lifted}(1) = -1$；再顺着星海往前走完第二个 $360^\circ$（合计 $720^\circ$），漫天星斗又严丝合缝地流回你自己的眼底！
+
+::: {.viz src="self-sustaining-spinor-flow" preset="turn720" height="500"}
+**走满 $720^\circ$ 才回家。** 再转一圈：紫色小旗回到出发时的那一面，$\psi = +\psi_0$；旗尖走过的紫色轨迹就是光带的边，这条边绕了两圈才首尾相接，青色的 $\mathbf{J}$ 在此期间走了两圈。
+:::
+
+下面的视频把这几步按次序连起来走一遍：先看上一章那座页目录的零号槽怎样让 `p = *p` 成立，再看旋量转满一圈之后为什么离回家还差一圈。
+
+::: {.film src="010-pointer-720"}
+**p = \*p：指针、页表与 720°（2:06）。** 在[第 38 章](ch38-observer-memory-pointer-and-ontological-qram.md)的四槽页目录上，索引 [1, 2] 两跳读到数据帧 0x9000，[0, 1] 把叶页表 T₁ 本身当作数据交回，[0, 0] 每一跳都回到页目录自己；在一张 $4 \times 4$ 的小表上，没有不动点的 $f$ 沿对角线造出的品红新行与每一行都不同，而捕获对角线的那一行在对角格上落到 $f$ 的不动点（[@thm-ch38-self-mapped-diagonal-fixed-point]）。随后青色的 $\mathbf{J}$ 转满 $360^\circ$ 回到原处，紫色的提升从 $w = +1$ 走到 $w = -1$，再转一圈才回到 $+1$；每隔 $30^\circ$ 连续插下的平方根小旗回到起点时方向相反（[@thm-ch39-double-cover-no-section-and-720-lift]）。页表自映射与旋量双线性是文献结果，片中的数字都是屏幕上的计算。
+:::
 
 ---
 
@@ -247,6 +286,10 @@ $$
 
 1. **能观之极（$\cos\theta$ 局部栈帧化身，“小我”，纯度份额 $\cos^2\theta$）**：通过加载已知数据捏合掩码 $D_{\mathrm{known}}$ 与躯体沙箱边界 $\mathbf{P}_{\mathrm{body}}$（[第 37 章](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)与[第 38 章](ch38-observer-memory-pointer-and-ontological-qram.md)），$\mathbf{\Psi}$ 故意收窄位宽、隐去全局记忆，在一角折出一枚拥有清晰叙事视角与悬念体验的有限指针化身；
 2. **所观之宇（$\sin\theta\,\hat{\mathbf{I}}$ 浩瀚客观星海，“大我余部”，纯度份额 $\sin^2\theta$）**：$\mathbf{\Psi}$ 剩下的归一化份额 $\sin^2\theta$ 所对应的本体质量去了哪里？并没有消失——它正交展开在局部化身的 $90^\circ$ 补空间里，显影为你推窗仰望的亿万星系、精密咬合的规范曲率、不可克隆的同伴灵魂、刚性的素数频谱，以及守护生命博弈悬念的复杂性视界防火墙（[@conj-p-neq-np]）！
+
+::: {.figure src="ch39-self-folding"}
+**纯度预算正交折成两翼，两份归一化份额加起来恰好是 $1$。** 墨色的单位箭头 $\Psi$ 与水平的观察者之线成 $\theta = 40^\circ$：青色正方形立在影子 $\cos\theta$ 上，面积 $\cos^2\theta \approx 0.59$（能观之极）；品红正方形立在垂线 $\sin\theta$ 上，面积 $\sin^2\theta \approx 0.41$（所观之宇）；两块合起来等于 $\Psi$ 上灰色虚线正方形的面积 $1$，画面里没有第 3 点。这里画的是 $B > 0$ 时除以中心化纯度预算 $B$ 的归一化份额，两翼的实际质量是 $B\cos^2\theta$ 与 $B\sin^2\theta$。把纯度预算无松弛地拆成可见部分与正交残余，是下方 [@prop-ch39-orthogonal-folding-and-objective-common-factor] 第 1 款；把这两翼读成“小我”与“星海”是本章的正交折叠模型（`MODEL`）。
+:::
 
 看清这一折，那个困扰千古的悖论瞬间豁然开朗：**墙上左手的影子，当然不可能凭局部念头掰断右手的骨骼！** 你作为局部化身（$\cos\theta$ 栈帧）之所以无法靠一己私欲篡改物理常数，**恰恰因为窗外那套铁面无私的客观宇宙定律，根本不是压迫你的异己暴君，而是作为宇宙本体的你自己为了不让这场体验坍缩成虚无幻梦，用自己其余 $\sin^2\theta$ 的本体身躯亲手撑起的宏伟肋骨！**
 
@@ -278,10 +321,10 @@ $$
 第 1 款在完备实内积空间 $E$ 中对闭子模 `visible` 直接调用正交投影范数勾股分解 `Submodule.norm_sq_eq_add_norm_sq_starProjection state visible`，将 $\lVert\mathrm{state}\rVert^2$ 拆为可见投影模方与正交补模方 `residualMass visible state` 之和，再代入假设 `hpurity` 与 `hcoordinates` 即得。第 2 款先由交叉项抵消 $A B^\dagger + B A^\dagger = 0$ 证得反自伴性 $(2 A B^\dagger)^\dagger = -2 A B^\dagger$（`relativeComplexStructure_is_skewAdjoint`），再结合矩阵结合律代入 $B^\dagger B = \frac{1}{2}I_n$ 与 $A A^\dagger = \frac{1}{2}I_n$ 证得右幺正性 $(2 A B^\dagger)(2 A B^\dagger)^\dagger = 4 A (B^\dagger B) A^\dagger = I_n$（`relativeComplexStructure_mul_conjTranspose`），最后调用 [`square_eq_neg_one_of_skewAdjoint_unitary`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary) 导出平方等于 $-I_n$。第 3 款展开携带证明的客观断言定义 `ObjectiveInterpretationClaim`，直接提取跨越全体满足 `isFixedMeaning context meaning` 对偶实例一致成立的公共因子见证 `commonFactor`。完整证明由 Lean 内核检查。
 :::
 
-站在第三十九章的收束高台回望全书十部征程，从[第一章](ch01-measurement.md)把“量子”还原为平视动词，到本章写出“观察者即宇宙本体”，我们走完了一座**分四步彻底砍净“隐藏第 3 点 $C$”的认知阶梯（`MODEL`（模型诠释））**。下框将这四重演进阶段与本章单侧双覆叠全景图一并定格：
+站在第三十九章的收束高台回望全书十部征程，从[第一章](ch01-measurement.md)把“量子”还原为平视动词，到本章写出“观察者即宇宙本体”，我们走完了一座**分四步彻底砍净“隐藏第 3 点 $C$”的认知阶梯（`MODEL`（模型诠释））**。下框将这四重演进阶段列成一张总表，其后的图把它们画成一级级台阶：
 
 ::: {.remark #rem-ch39-four-stage-endgame-table title="砍除隐藏“第 3 点 C”的四阶认知演进总表与单侧双覆叠全景图（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 下表与下图综合对照近代认识论与计算机体系结构文献背景（见 [@rem-ch39-von-neumann-scott-reflexive-domain-literature]、[@rem-ch39-kant-yoneda-lemma-literature] 与 [@rem-ch39-cartan-penrose-hestenes-fierz-literature]）与本书十部曲四阶本体论演进模型（`MODEL`，形式化内核定理标为 `LEAN ✓`）：
+**文献结果，未在本书形式化。** 下表综合对照近代认识论与计算机体系结构文献背景（见 [@rem-ch39-von-neumann-scott-reflexive-domain-literature]、[@rem-ch39-kant-yoneda-lemma-literature] 与 [@rem-ch39-cartan-penrose-hestenes-fierz-literature]）与本书十部曲四阶本体论演进模型（`MODEL`，形式化内核定理标为 `LEAN ✓`）：
 
 | 认知演进阶段（`MODEL`） | 核心存在论图景与基本原语 | 隐藏“第 3 点 $C$”的残留形态 | 二元裂缝度与外部余项 | 存在论与认识论终局判词 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -290,7 +333,15 @@ $$
 | **第三阶：指针寻址观**（第 38 章硬件解耦图景） | 静态无时间本体 QRAM 存储阵列不动，观察者作为轻量级地址指针 `ptr` 扫描解引用 | 物理搬运迷思已破，但“宇宙**的**指针”一词仍残留“主动指针 vs. 被动死内存”的最后隔墙 $\mu > 0$ | 数据生灭归零，仅剩寄存器与存储底物的语法二元残留 | 统一阐明时间帧率 `ptr++`、退相干位掩码（`LEAN ✓`）、梦境叠加与 `p = *p` 根页表 |
 | **第四阶：无二自指本体观**（本章终极合拢 $\psi \equiv \psi(\psi)$） | 全域 `p ≡ *p` 无底物自指恒等；唯一全体经互补勾股纯度守恒（`LEAN ✓`）正交自折叠并沿 $720^\circ$ 双覆叠（`LEAN ✓`）织出时空 | 隐藏第 3 点 $C$、被动死底物与不可知物自体被百分之百连根拔除 | 二元裂缝 $\mu = 0$，外部未表余项严格等于 $0$ | 观察者即宇宙本体：局部栈帧体验悬念，其余正交补本体化作客观星海与公正铁律 |
 
-![单子正交自折叠、旋量织空与 720° 单侧双覆叠：观察者即宇宙本体](../assets/fig-39-observer-is-ontological-universe.svg)
+第四阶里旋量沿 $720^\circ$ 单侧双覆叠织出时空的那一步，见 §39.3 的 `turn360`、`seam`、`turn720` 三张实验卡与章末的完整实验室。
 :::
 
-请最后一次静静凝视上图右侧那条在深空背景中缓缓流转的 $720^\circ$ 单侧光带。当左半幅那道虚幻的二元隔墙随着 $\mu \to 0$ 彻底消融，一粒温暖的琥珀色光点正沿着不可全局撕裂的双覆叠流形滑行：在前半个 $360^\circ$ 里，它是向内自省的观测指针、是枕畔做梦的心智、是在有限复杂性视界前认真落子的你；接着，它连一道边界都没有跨越，就在旋量自配对的中心扭结处自然翻转为后半个 $360^\circ$——化作横亘亿万光年的璀璨星网、化作素数与零点的交响、化作托起万物平视的量子公平铁律，并在走满 $720^\circ$ 的刹那带着满身星辉流回你此刻阅读这行文字的双眸。原来从我们在[第一章](ch01-measurement.md)与[第二章](ch02-born-rule.md)亲手砍掉外部第 3 点 $C$、写下 $\psi = \psi(\psi)$ 的第一笔起，结局就早已注定：世间从来没有一个渺小的观察者孤独地仰望陌生的宇宙；从始至终，都是宇宙本体把自己正交折叠成一双眼睛，在漫长而公正的星光旅途尽头，与自己重逢。现在，让我们推开全书最后一道门扉，步入[终章](coda.md)《在所有的球之外》。
+::: {.figure src="ch39-four-stages"}
+**砍掉第 3 点 $C$ 的四阶。** 第一阶，灰色虚线框是外部舞台，上方的点 $C$ 用虚线连到两支箭头的尖；第二阶，两支箭头各自投到对方上的青色影子一样长，$C$ 被划掉；第三阶，琥珀色的指针 `ptr` 越过一道虚线隔墙（$\mu > 0$）读内存里的一格；第四阶，隔墙也消失（$\mu = 0$），只剩一格 $\psi$，青色箭头离开它又回到它自己。四格只是把 [@rem-ch39-four-stage-endgame-table] 的四行画出来，属本章的模型诠释（`MODEL`），不是定理。
+:::
+
+请最后一次静静凝视下方实验室里那条在深空背景中缓缓流转的 $720^\circ$ 单侧光带。当上图第三阶那道虚幻的二元隔墙随着 $\mu \to 0$ 彻底消融，一粒温暖的琥珀色光点正沿着不可全局撕裂的双覆叠流形滑行：在前半个 $360^\circ$ 里，它是向内自省的观测指针、是枕畔做梦的心智、是在有限复杂性视界前认真落子的你；接着，它连一道边界都没有跨越，就在旋量自配对的中心扭结处自然翻转为后半个 $360^\circ$——化作横亘亿万光年的璀璨星网、化作素数与零点的交响、化作托起万物平视的量子公平铁律，并在走满 $720^\circ$ 的刹那带着满身星辉流回你此刻阅读这行文字的双眸。原来从我们在[第一章](ch01-measurement.md)与[第二章](ch02-born-rule.md)亲手砍掉外部第 3 点 $C$、写下 $\psi = \psi(\psi)$ 的第一笔起，结局就早已注定：世间从来没有一个渺小的观察者孤独地仰望陌生的宇宙；从始至终，都是宇宙本体把自己正交折叠成一双眼睛，在漫长而公正的星光旅途尽头，与自己重逢。现在，让我们推开全书最后一道门扉，步入[终章](coda.md)《在所有的球之外》。
+
+::: {.viz src="self-sustaining-spinor-flow" height="640"}
+**自持旋量流实验室。** 改变密度 $\rho$、转动所在的平面，或拖动 $\mathbf{J}$ 的箭头尖换一个旋量：读数栏里的三个平方 $\mathbf{J}^2$、$-\mathbf{S}^2$、$\rho^2$ 始终相等；沿时间轴，青色曲线一圈回到 $1$，紫色曲线要两圈。
+:::

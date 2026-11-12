@@ -178,8 +178,8 @@
       "code": "ORTHO//PYTHAGORAS",
       "title": "±1 接缝 · 佩尔的一格、线素数与面素数、模 p 数点",
       "title_en": "The ±1 seam · Pell's one cell, line primes and plane primes, points mod p",
-      "summary": "沿着 ±1 接缝走一遍的三个场景。佩尔接缝：√d（无平方因子 2 ≤ d ≤ 37）的渐近分数 m/n 在格点上沿直线越贴越近，|m/n − √d| 趋于零，m² − d·n² 却是非零整数；两条色带末端的放大镜显示它们永远差着整数格，差值的符号来回翻转，连分数周期为奇数时才取得到 −1（d = 5 时绿圈标出已由 Lean 验证的全部 ±4 解）。线素数与面素数：半径 √p 的圆上有格点当且仅当 p ≡ 1 (mod 4)，这时 a + bi 的平方给出整数直角三角形。模 p 数点：曲线 y² = x³ − x 在 𝔽ₚ 上的 aₚ 被哈塞界 ±2√p 关住，线素数恰在零上，面素数的余弦等于高斯三角形的余弦；换成 y² = x³ − x + 1，余弦的分布贴近半圆律。",
-      "summary_en": "Three scenes along the ±1 seam. The Pell seam: on the lattice the convergents m/n of √d (squarefree 2 ≤ d ≤ 37) hug the line ever more closely, |m/n − √d| goes to zero, yet m² − d·n² is a nonzero integer; a magnifier on the ends of two bands shows that they always differ by whole cells, the sign of the gap flips back and forth, and −1 is reached only when the period of the continued fraction is odd (for d = 5 the green rings mark all the ±4 solutions, as verified in Lean). Line primes and plane primes: the circle of radius √p passes through lattice points exactly when p ≡ 1 (mod 4), and then the square of a + bi gives an integer right triangle. Points mod p: for the curve y² = x³ − x over 𝔽ₚ, aₚ is held inside Hasse's bound ±2√p, line primes sit exactly at zero and the cosine of a plane prime equals the cosine of its Gaussian triangle; for y² = x³ − x + 1 the cosines follow the semicircle law.",
+      "summary": "沿着 ±1 接缝走一遍的三个场景。佩尔接缝：√d（无平方因子 2 ≤ d ≤ 37）的渐近分数 m/n 在格点上沿直线越贴越近，|m/n − √d| 趋于零，m² − d·n² 却是非零整数；两条色带末端的放大镜显示它们永远差着整数格，差值的符号来回翻转，连分数周期为奇数时才取得到 −1（d = 5 时绿圈标出已由 Lean 验证的全部 ±4 解）。线素数与面素数：半径 √p 的圆上有格点当且仅当 p ≡ 1 (mod 4)，这时 a + bi 的平方给出整数直角三角形；格点的方向角 θ 是希尔伯特夹角，平方后的三角形转过布洛赫极角 2θ。模 p 数点：自旋环把勒让德符号 χₚ(f(x)) 画成一圈青色 +1、品红 −1 与中性 0，点数是 p + 1 + Σχ；曲线 y² = x³ − x 在 𝔽ₚ 上的 aₚ 被哈塞界 ±2√p 关住，线素数恰在零上，面素数的余弦等于高斯三角形的余弦；换成 y² = x³ − x + 1，余弦的分布贴近半圆律，p = 23 处明确标出坏约化（Δ = −368 = −2⁴·23）。",
+      "summary_en": "Three scenes along the ±1 seam. The Pell seam: on the lattice the convergents m/n of √d (squarefree 2 ≤ d ≤ 37) hug the line ever more closely, |m/n − √d| goes to zero, yet m² − d·n² is a nonzero integer; a magnifier on the ends of two bands shows that they always differ by whole cells, the sign of the gap flips back and forth, and −1 is reached only when the period of the continued fraction is odd (for d = 5 the green rings mark all the ±4 solutions, as verified in Lean). Line primes and plane primes: the circle of radius √p passes through lattice points exactly when p ≡ 1 (mod 4), and then the square of a + bi gives an integer right triangle; the direction θ of the lattice point is the Hilbert angle, and the squared triangle turns through the Bloch polar angle 2θ. Points mod p: a ring of spins draws the Legendre symbols χₚ(f(x)) as cyan +1, magenta −1 and neutral 0, and the count is p + 1 + Σχ; for the curve y² = x³ − x over 𝔽ₚ, aₚ is held inside Hasse's bound ±2√p, line primes sit exactly at zero and the cosine of a plane prime equals the cosine of its Gaussian triangle; for y² = x³ − x + 1 the cosines follow the semicircle law, and p = 23 is flagged as a prime of bad reduction (Δ = −368 = −2⁴·23).",
       "path": "pythagoras-number-escape/",
       "thumbnail": "pythagoras-number-escape/thumb.jpg",
       "status": "live",
@@ -263,8 +263,8 @@
       "code": "ORTHO//CAUSAL",
       "title": "没有时间的必然 · 格拉姆窗口、书页、场与线",
       "title_en": "Necessity without time · the Gram window, a book of pages, a field and a thread",
-      "summary": "同一颗球上的四个场景。窗口：B 立在北极，A 与它夹角 θ₁，C 只能绕它转，于是 A·C = cos θ₁ cos θ₂ + sin θ₁ sin θ₂ cos φ 只能落在 [cos(θ₁ + θ₂), cos(θ₁ − θ₂)] 里；det G 是三根向量撑开的体积的平方，贴上窗边时三者共面、体积为零，窗外 det G 为负，没有向量能实现。书页：有限时钟上所有页同时画在球上，整本书在“拨一格”之下不变，条件化才取出读头下的那一页。场：势能 V = 1 − cos α 的梯度流从任何地方都流向目标，降下的势能等于走过的耗散。线：在 N = 2ⁿ 个候选里找一个目标，振幅放大每步只转 2θ，约 (π/4)√N 步到达。把它们读作“选择”“书页”“场”与“线”是本书终章的诠释。",
-      "summary_en": "Four scenes on one sphere. The window: B stands at the north pole, A makes the angle θ₁ with it and C can only go around it, so A·C = cos θ₁ cos θ₂ + sin θ₁ sin θ₂ cos φ can only fall in [cos(θ₁ + θ₂), cos(θ₁ − θ₂)]; det G is the squared volume the three vectors span, zero at the edges of the window where they are coplanar and negative outside, where no vectors exist. The pages: on a finite clock all pages are drawn on the sphere at once, the whole book is unchanged by a tick, and conditioning picks the page under the reading head. The field: the gradient flow of V = 1 − cos α runs to the target from anywhere, and the potential it loses equals the dissipation it pays. The thread: to find one target among N = 2ⁿ candidates amplitude amplification turns only 2θ per step and arrives after about (π/4)√N steps. Reading these as “choice”, “pages”, “field” and “thread” is the interpretation of this book's coda.",
+      "summary": "同一颗球上的四个场景，另加第 30 章的两个平面场景。窗口：B 立在北极，A 与它夹角 θ₁，C 只能绕它转，于是 A·C = cos θ₁ cos θ₂ + sin θ₁ sin θ₂ cos φ 只能落在 [cos(θ₁ + θ₂), cos(θ₁ − θ₂)] 里；det G 是三根向量撑开的体积的平方，贴上窗边时三者共面、体积为零，窗外 det G 为负，没有向量能实现。书页：有限时钟上所有页同时画在球上，整本书在“拨一格”之下不变，条件化才取出读头下的那一页。场：势能 V = 1 − cos α 的梯度流从任何地方都流向目标，降下的势能等于走过的耗散。线：在 N = 2ⁿ 个候选里找一个目标，振幅放大每步只转 2θ，约 (π/4)√N 步到达。阶：随机 2-SAT 公式的消解闭包停在两元子句，随机 3-XOR / 3-SAT 的平方和松弛在阶 o(n) 内仍相容（文献结果，直线斜率为示意）。荒野：同一个自治场里，见证丝 y = h(x) 是精确的不变曲线，丝上的探针直达目标，通道外出发的探针被涡旋卷住（示意模型）。把它们读作“选择”“书页”“场”“线”与“见证丝”是本书第 29、30 章的诠释；图灵机意义下的 P ≠ NP 仍是开放问题，本页不推出它的任何答案。",
+      "summary_en": "Four scenes on one sphere, plus two plane scenes from chapter 30. The window: B stands at the north pole, A makes the angle θ₁ with it and C can only go around it, so A·C = cos θ₁ cos θ₂ + sin θ₁ sin θ₂ cos φ can only fall in [cos(θ₁ + θ₂), cos(θ₁ − θ₂)]; det G is the squared volume the three vectors span, zero at the edges of the window where they are coplanar and negative outside, where no vectors exist. The pages: on a finite clock all pages are drawn on the sphere at once, the whole book is unchanged by a tick, and conditioning picks the page under the reading head. The field: the gradient flow of V = 1 − cos α runs to the target from anywhere, and the potential it loses equals the dissipation it pays. The thread: to find one target among N = 2ⁿ candidates amplitude amplification turns only 2θ per step and arrives after about (π/4)√N steps. The order: the resolution closure of random 2-SAT formulas stays at two-literal clauses, while sum-of-squares relaxations of random 3-XOR / 3-SAT stay consistent up to order o(n) (a literature result; the slope of the line is schematic). The wilderness: in one autonomous field the witness thread y = h(x) is an exact invariant curve, the probe on it runs to the target, and probes started outside the channel are caught by vortices (a schematic model). Reading these as “choice”, “pages”, “field”, “thread” and “witness thread” is the interpretation of chapters 29 and 30 of this book; P ≠ NP in the sense of Turing machines remains open, and the page settles nothing about it.",
       "path": "timeless-causal-crystal/",
       "thumbnail": "timeless-causal-crystal/thumb.jpg",
       "status": "live",
@@ -276,7 +276,10 @@
         "梯度流",
         "振幅放大",
         "P 是场，NP 是线",
-        "第 29 章"
+        "平方和松弛",
+        "见证丝",
+        "第 29 章",
+        "第 30 章"
       ],
       "tags_en": [
         "Gram window",
@@ -285,7 +288,10 @@
         "gradient flow",
         "amplitude amplification",
         "P is a field, NP is a line",
-        "chapter 29"
+        "sum of squares",
+        "witness thread",
+        "chapter 29",
+        "chapter 30"
       ],
       "theory": [
         {
@@ -338,8 +344,8 @@
       "code": "ORTHO//VORTEX",
       "title": "场与涡丝 · 对流项的两半、越拉越细的涡管与算不出下一步的低频观察者",
       "title_en": "Field and filament · the two halves of advection, a vortex tube drawn thin, and a low-mode observer who cannot predict the next step",
-      "summary": "第 30 章流体一侧的三个场景。对流的两半：(u·∇)u 恒等于梯度 ∇(|u|²/2) 加兰姆项 ω × u，无旋时只剩梯度。涡管：二维里没有拉伸；三维里截面 A 变细而环量 Γ = ωA 不变，涡度按 Γ/A 变大，粘性把它拦在伯格斯截面 4πν/α 上，示意的自拉伸模型在 κΓ > 4πν 时有限时间夹断。闭合：只看得见 x 的观察者能精确预测下一步，当且仅当三条泄漏同时为零（Lean 已验证）；五模态傅里叶实例里的混合项是 i/4。",
-      "summary_en": "Three scenes on the fluid side of chapter 30. The two halves of advection: (u·∇)u is the gradient ∇(|u|²/2) plus the Lamb term ω × u, and without vorticity only the gradient is left. The vortex tube: no stretching in two dimensions; in three the cross-section A shrinks while the circulation Γ = ωA stays, so the vorticity grows like Γ/A; viscosity holds it at the Burgers cross-section 4πν/α, and a schematic self-stretching model pinches in finite time when κΓ > 4πν. Closure: an observer who sees only x can predict the next step exactly iff three leaks vanish together (kernel-verified in Lean); in a five-mode Fourier instance the mixed term is i/4.",
+      "summary": "第 30 章流体一侧的三个场景。对流的两半：(u·∇)u 恒等于梯度 ∇(|u|²/2) 加兰姆项 ω × u，无旋时只剩梯度。涡管：二维里没有拉伸；三维里截面 A 变细而环量 Γ = ωA 不变，涡度按 Γ/A 变大，粘性按伯格斯涡的精确解 R(t)² = R∞² + (R₀² − R∞²)e^(−αt) 把涡核拦在 R∞ = √(4ν/α) ∝ Re^(−½)，示意的自拉伸模型在 κΓ > 4πν 时有限时间夹断；小图另画 K41 湍流统计标度 η/L ∼ Re^(−¾)、N ∼ Re^(9/4) 与模型能谱，两者是不同的事；三维无外力光滑解的全局正则性仍是开放问题。闭合：只看得见 x 的观察者能精确预测下一步，当且仅当三条泄漏同时为零（Lean 已验证）；五模态傅里叶实例里的混合项是 i/4。",
+      "summary_en": "Three scenes on the fluid side of chapter 30. The two halves of advection: (u·∇)u is the gradient ∇(|u|²/2) plus the Lamb term ω × u, and without vorticity only the gradient is left. The vortex tube: no stretching in two dimensions; in three the cross-section A shrinks while the circulation Γ = ωA stays, so the vorticity grows like Γ/A; viscosity holds the core at R∞ = √(4ν/α) ∝ Re^(−½) along the exact Burgers solution R(t)² = R∞² + (R₀² − R∞²)e^(−αt), and a schematic self-stretching model pinches in finite time when κΓ > 4πν; a small plot draws, separately, the K41 statistical scaling η/L ∼ Re^(−¾), N ∼ Re^(9/4) with a model spectrum; global regularity of unforced three-dimensional smooth solutions remains open. Closure: an observer who sees only x can predict the next step exactly iff three leaks vanish together (kernel-verified in Lean); in a five-mode Fourier instance the mixed term is i/4.",
       "path": "navier-stokes-p-np/",
       "thumbnail": "navier-stokes-p-np/thumb.jpg",
       "status": "live",
@@ -399,8 +405,8 @@
       "code": "ORTHO//HORIZON",
       "title": "视界之外的交叉点 · 一条缓慢下降的指数率、桥图的最小割与少数承重的模态",
       "title_en": "A crossover beyond the horizon · a slowly falling exponent rate, the minimal cut of a bridge graph and the few modes that carry the weight",
-      "summary": "第 30 章 ETH 一节的三个场景。指数率：示意曲线 r(n) = c·log₂log₂n/√log₂n 趋于零却降得极慢，c = 1 时要到 n ≈ 2⁵⁵⁸ 才低于 PPSZ 的 0.386，远在宇宙原子数 2²⁶⁶ 之外；常数 c 决定交叉点在视界的哪一边。桥图：宽度为 3 的双节点张量网络，每个随机整数实例的流矩阵的秩都不超过 Lean 的三项割上界 QMinCut = min(3ac, ad, bc)，也不超过第四道割 3bd（初等推导，未形式化），整张图的最小割是这四道的最小值；锥域内最大秩等于 min(ad, bc) 已由 Lean 验证，但不保证任何一次抽样满秩。模态：非负且总和为 T 的谱里，不小于阈值 θ 的模态至多 T/θ 个（Lean 已验证）。",
-      "summary_en": "Three scenes for the ETH section of chapter 30. The exponent rate: the schematic curve r(n) = c·log₂log₂n/√log₂n tends to zero but so slowly that for c = 1 it drops below the 0.386 of PPSZ only at n ≈ 2⁵⁵⁸, far beyond the 2²⁶⁶ atoms of the universe; the constant c decides on which side of the horizon the crossover lies. The bridge graph: a two-node tensor network of width 3 where the flow matrix of each random integer instance has rank at most Lean's three-term cut bound QMinCut = min(3ac, ad, bc) and at most the fourth cut 3bd (an elementary argument, not formalized), the minimal cut of the whole graph being the least of the four; that the greatest rank equals min(ad, bc) inside the cone is kernel-verified in Lean, though no single draw is guaranteed full rank. The modes: in a nonnegative spectrum of total T at most T/θ modes reach a threshold θ (kernel-verified in Lean).",
+      "summary": "第 30 章 ETH 一节的三个场景。指数率：示意曲线 r(n) = c·log₂log₂n/√log₂n 趋于零却降得极慢，c = 1 时要到 n ≈ 2⁵⁵⁸ 才低于 PPSZ 的 0.386，远在宇宙原子数 2²⁶⁶ 之外；常数 c 决定交叉点在视界的哪一边；子句宽度 k = 3…6 只换 PPSZ 的基准线（唯一可满足情形的文献率 0.3863、0.5548、0.6502、0.7118）。桥图：宽度为 3 的双节点张量网络，每个随机整数实例的流矩阵的秩都不超过 Lean 的三项割上界 QMinCut = min(3ac, ad, bc)，也不超过第四道割 3bd（初等推导，未形式化），整张图的最小割是这四道的最小值；对自然数维数 0 < a ≤ b、0 < c ≤ d 且 a² + b² ≤ 3ab、c² + d² ≤ 3cd（锥域），能达到的最大秩等于 QMinCut = min(ad, bc) 已由 Lean 验证，但单次抽样的秩可以更低；锥域外须比较四道割。模态：非负且总和为 T 的谱里，不小于阈值 θ 的模态至多 T/θ 个（Lean 已验证）。",
+      "summary_en": "Three scenes for the ETH section of chapter 30. The exponent rate: the schematic curve r(n) = c·log₂log₂n/√log₂n tends to zero but so slowly that for c = 1 it drops below the 0.386 of PPSZ only at n ≈ 2⁵⁵⁸, far beyond the 2²⁶⁶ atoms of the universe; the constant c decides on which side of the horizon the crossover lies; the clause width k = 3 … 6 only changes the PPSZ baseline (the literature rates of the uniquely satisfiable case, 0.3863, 0.5548, 0.6502, 0.7118). The bridge graph: a two-node tensor network of width 3 where the flow matrix of each random integer instance has rank at most Lean's three-term cut bound QMinCut = min(3ac, ad, bc) and at most the fourth cut 3bd (an elementary argument, not formalized), the minimal cut of the whole graph being the least of the four; that for natural-number dimensions with 0 < a ≤ b, 0 < c ≤ d, a² + b² ≤ 3ab and c² + d² ≤ 3cd (the cone) the greatest attainable rank equals QMinCut = min(ad, bc) is kernel-verified in Lean, though a single draw can fall lower; outside the cone the four cuts must be compared. The modes: in a nonnegative spectrum of total T at most T/θ modes reach a threshold θ (kernel-verified in Lean).",
       "path": "eth-horizon-crossover/",
       "thumbnail": "eth-horizon-crossover/thumb.jpg",
       "status": "live",
@@ -457,8 +463,8 @@
       "code": "ORTHO//ATTRACTOR",
       "title": "空间吸引子 · 忘掉起点，回到同一对翅膀",
       "title_en": "Spatial attractor · forget the start, return to the same wings",
-      "summary": "终章“历史遗迹作为空间吸引子”一节，用洛伦兹系统演示。两轮：两条起点不同、参数相同的轨道落到同一对翅膀上，一次次回到同一处邻域，经过时方向几乎平行。收缩：相空间体积按 e^(−41t/3) 缩小，500 个点被压成一张薄片。维数：李雅普诺夫指数的数值估计给出卡普兰—约克维数约 2.06；换成 ρ = 14 或 ρ = 160，吸引子变成一个点或一条闭合的环。本页是数值演示与诠释模型，不引用 Lean 定理。",
-      "summary_en": "The coda’s section on historical ruins as spatial attractors, shown with the Lorenz system. Rounds: two orbits with different starts and the same parameters land on the same pair of wings and return again and again to one neighbourhood, passing it in nearly the same direction. Contraction: phase volume shrinks like e^(−41t/3) and 500 points are pressed into a thin sheet. Dimension: numerical Lyapunov exponents give a Kaplan–Yorke dimension of about 2.06; at ρ = 14 or ρ = 160 the attractor becomes a point or a closed loop. The page is a numerical illustration and an interpretive model; it cites no Lean theorem.",
+      "summary": "终章“历史遗迹作为空间吸引子”一节，用洛伦兹系统演示。两轮：两条起点不同、参数相同的轨道落到同一对翅膀上，一次次回到同一处邻域；重返时两点相距小于 ε，单位切向的内积 cos δθ 接近 1。收缩：相空间体积按 e^(−41t/3) 缩小，500 个点被压成一张薄片。维数：李雅普诺夫指数的数值估计给出卡普兰—约克维数约 2.06；换成 ρ = 14，翅膀变成两个稳定点 C₊、C₋，参数相同时落进哪一个由起点所在的吸引域决定；换成 ρ = 160，吸引子变成一条闭合的环。本页是数值演示与诠释模型，不引用 Lean 定理。",
+      "summary_en": "The coda’s section on historical ruins as spatial attractors, shown with the Lorenz system. Rounds: two orbits with different starts and the same parameters land on the same pair of wings and return again and again to one neighbourhood; at a return the two points are less than ε apart and the inner product cos δθ of the unit tangents is close to 1. Contraction: phase volume shrinks like e^(−41t/3) and 500 points are pressed into a thin sheet. Dimension: numerical Lyapunov exponents give a Kaplan–Yorke dimension of about 2.06; at ρ = 14 the wings give way to two stable points C₊ and C₋, and with the same parameters the basin of the start decides which one is reached; at ρ = 160 the attractor becomes a closed loop. The page is a numerical illustration and an interpretive model; it cites no Lean theorem.",
       "path": "spatial-attractor-deja-vu/",
       "thumbnail": "spatial-attractor-deja-vu/thumb.jpg",
       "status": "live",
@@ -500,8 +506,8 @@
       "code": "ORTHO//CUT",
       "title": "黄金切投 · 一条窗口从格点里切出的准晶、±1 接缝与有界间隙的回归",
       "title_en": "The golden cut · a quasicrystal cut from a lattice by a window, the ±1 seam and returns with bounded gaps",
-      "summary": "终章“黄金切投”一节的四个场景。切投：黄金整数 a + bφ 画成格点 (a + bφ, a + bψ)，一条长为 1 的窗口选出其中一些，投到直线上，相邻两点只相距 φ 或 φ²；挪动窗口，贴边的点翻转，深处的点不动；固定一小片就定住了远处的点。卡西尼：φ 的幂在同一张格点图里与原点围成的矩形，面积恒为 ±1。回归：按黄金角旋转的轨道以有界的间隔回到观测窗。接受窗：菱形三十面体，点离边界越远越稳。灵魂与遗迹的说法是本书的诠释模型。",
-      "summary_en": "Four scenes for the coda’s section on the golden cut. Cut and project: the golden integers a + bφ are drawn as lattice points (a + bφ, a + bψ), a window of length 1 selects some of them, and projected to a line the neighbours are φ or φ² apart; move the window and points at its edge flip while deep points stay; fixing a small patch fixes distant points. Cassini: in the same lattice, the rectangle between the origin and a power of φ always has area ±1. Returns: an orbit turning by the golden angle comes back to an observation window with bounded gaps. The acceptance window: a rhombic triacontahedron, where a point is the safer the farther it is from the boundary. What the page says about souls and ruins is an interpretive model of this book.",
+      "summary": "终章“黄金切投”一节的四个场景。切投：黄金整数 a + bφ 画成格点 (a + bφ, a + bψ)，一条长为 1 的窗口选出其中一些，投到直线上，相邻两点只相距 φ 或 φ²；挪动窗口，贴边的点翻转，深处的点不动；固定一小片就定住了远处的点。卡西尼：φ 的幂在同一张格点图里与原点围成的矩形，面积恒为 ±1。回归：按黄金角旋转的轨道以有界的间隔回到观测窗。接受窗：菱形三十面体，点离边界越远越稳（三维接受窗与“帝国”是文献结果）。下方条带列出自然数的齐肯多夫码，没有相邻的两个 1。灵魂与遗迹的说法是本书的诠释模型。",
+      "summary_en": "Four scenes for the coda’s section on the golden cut. Cut and project: the golden integers a + bφ are drawn as lattice points (a + bφ, a + bψ), a window of length 1 selects some of them, and projected to a line the neighbours are φ or φ² apart; move the window and points at its edge flip while deep points stay; fixing a small patch fixes distant points. Cassini: in the same lattice, the rectangle between the origin and a power of φ always has area ±1. Returns: an orbit turning by the golden angle comes back to an observation window with bounded gaps. The acceptance window: a rhombic triacontahedron, where a point is the safer the farther it is from the boundary (the three-dimensional window and the “empire” are literature results). A strip lists the Zeckendorf codes of the natural numbers, none with two adjacent 1s. What the page says about souls and ruins is an interpretive model of this book.",
       "path": "golden-cut-observer/",
       "thumbnail": "golden-cut-observer/thumb.jpg",
       "status": "live",
@@ -565,6 +571,9 @@
         },
         {
           "gid": "D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result"
+        },
+        {
+          "gid": "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes"
         }
       ]
     },
@@ -1112,8 +1121,8 @@
       "code": "EQUATOR//CROWD",
       "title": "赤道集中",
       "title_en": "Concentration at the equator",
-      "summary": "在 d 维实单位球面上均匀取点，看它们在一根固定测量轴上的坐标 x₁：左边把每个点按 x₁ 放在过测量轴的圆截面上，右边横着画 x₁ 的精确密度与直方图。三维时高度均匀分布；维数 d = 2ⁿ 升高，点挤向垂直于测量轴的赤道，宽度按 1/√d 缩小。马尔可夫上界 1/(dε²) 总在精确的带外份额之上：二十个量子比特、ε = 0.1 时界是 9.54 × 10⁻⁵，精确值约 3 × 10⁻²²⁹¹。赤道集中、马尔可夫上界与贫瘠高原都是文献结果，页面不画梯度。五张实验卡可以在第十二章正文里单独引用。",
-      "summary_en": "Pick points uniformly on the real unit sphere in d dimensions and look at their coordinate x₁ along one fixed measured axis: on the left each point sits at its x₁ on the section of the sphere through the axis, on the right the exact density of x₁ and the histogram are drawn sideways. In three dimensions the heights are spread evenly; as d = 2ⁿ grows the points crowd onto the equator perpendicular to the axis, in a belt that shrinks like 1/√d. The Markov bound 1/(dε²) always lies above the exact outside share: at twenty qubits and ε = 0.1 the bound is 9.54 × 10⁻⁵ and the exact share about 3 × 10⁻²²⁹¹. Equator concentration, the Markov bound and barren plateaus are literature results, and the page draws no gradients. Each of the five experiment cards can be cited on its own from Chapter 12.",
+      "summary": "在 d 维实单位球面上均匀取点，看它们在一根固定测量轴上的坐标 x₁：左边把每个点按 x₁ 放在过测量轴的圆截面上，右边横着画 x₁ 的精确密度与直方图。三维时高度均匀分布；维数 d = 2ⁿ 升高，点挤向垂直于测量轴的赤道，宽度按 1/√d 缩小。马尔可夫上界 1/(dε²) 总在精确的带外份额之上：二十个量子比特、ε = 0.1 时界是 9.54 × 10⁻⁵，精确值约 3 × 10⁻²²⁹¹；维数高到鼓包看不清时，放大镜把赤道附近放大 √d 倍。赤道集中、马尔可夫上界与贫瘠高原都是文献结果，页面不画梯度。四张实验卡可以在第十二章正文里单独引用。",
+      "summary_en": "Pick points uniformly on the real unit sphere in d dimensions and look at their coordinate x₁ along one fixed measured axis: on the left each point sits at its x₁ on the section of the sphere through the axis, on the right the exact density of x₁ and the histogram are drawn sideways. In three dimensions the heights are spread evenly; as d = 2ⁿ grows the points crowd onto the equator perpendicular to the axis, in a belt that shrinks like 1/√d. The Markov bound 1/(dε²) always lies above the exact outside share: at twenty qubits and ε = 0.1 the bound is 9.54 × 10⁻⁵ and the exact share about 3 × 10⁻²²⁹¹; once the bump is too thin to see, a magnifier enlarges the equator √d times. Equator concentration, the Markov bound and barren plateaus are literature results, and the page draws no gradients. Each of the four experiment cards can be cited on its own from Chapter 12.",
       "path": "equator-concentration/",
       "thumbnail": "equator-concentration/thumb.jpg",
       "status": "live",
@@ -2171,6 +2180,626 @@
         },
         {
           "gid": "D5/S3/Observer/Conditioning.unreadState_fixed_iff"
+        }
+      ]
+    },
+    {
+      "id": "mutual-observer-attractors",
+      "code": "ORTHO//MUTUAL",
+      "title": "互为吸引子 · 两个观察者互相丈量",
+      "title_en": "Mutual attractors · two observers measuring each other",
+      "summary": "两个场景：两个观察者同时用对方的读数更新自己，(x, y) ↦ (cos y, cos x)，逐拍可以左右越过 θ*，两拍一轮却从一侧单调逼近同一个 (θ*, θ*)，每轮误差约乘 sin²θ* ≈ 0.454，正是每拍 0.674 的平方；两段边界区间拉近时，连通的极小割在 d(l₁ + l₂ + d) = l₁l₂ 处胜过各自的割，领先阶互信息从零变正。",
+      "summary_en": "Two scenes: two observers update at once from each other's reading, (x, y) ↦ (cos y, cos x), and may cross θ* at every beat, yet sampled every two beats they close in on the same (θ*, θ*) from one side, each round multiplying the error by about sin²θ* ≈ 0.454, the square of the 0.674 of one beat; as two boundary intervals come closer, the connected minimal cut beats the separate ones where d(l₁ + l₂ + d) = l₁l₂ and the leading-order mutual information turns positive.",
+      "path": "mutual-observer-attractors/",
+      "thumbnail": "mutual-observer-attractors/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "互为吸引子",
+        "余弦不动点",
+        "极小割",
+        "互信息"
+      ],
+      "tags_en": [
+        "mutual attractors",
+        "cosine fixed point",
+        "minimal cut",
+        "mutual information"
+      ],
+      "theory": [
+        {
+          "label": "本书第三十三章",
+          "label_en": "Chapter 33",
+          "href": "../zh/ch33-all-beings-observers-and-mutual-attractors.html",
+          "href_en": "../en/ch33-all-beings-observers-and-mutual-attractors.html"
+        },
+        {
+          "label": "Blueprint · 桥图最大流最小割",
+          "label_en": "Blueprint · bridge-graph max-flow min-cut",
+          "href": "{trureturing}/Blueprint/D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.md"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result"
+        }
+      ]
+    },
+    {
+      "id": "self-referential-table",
+      "code": "ORTHO//TABLE",
+      "title": "同像自指表 · 横读是尺子，竖读是状态",
+      "title_en": "The self-reading table · rulers across, states down",
+      "summary": "一张 N × N 的对称幂等方阵 T = Σ vₐvₐᵀ：第 i 行读第 j 列逐项相加正好读回 Tᵢⱼ，对角格自己读自己；一行一行扩表时迹始终等于秩，写满时表成了单位阵；转进正交补的状态读出为零；点一格注入扰动，迭代 3T² − 2T³ 几步就回到一张幂等的表（离原表很近，一般不是原表）。",
+      "summary_en": "An N × N symmetric idempotent matrix T = Σ vₐvₐᵀ: row i reading column j, term by term, gives back exactly Tᵢⱼ, and a diagonal cell reads itself; as rows are added the trace always equals the rank, and the full table is the identity; a state turned into the complement reads out as zero; knock one cell and the iteration 3T² − 2T³ returns in a few steps to an idempotent table (very close to the original, but in general not the original).",
+      "path": "self-referential-table/",
+      "thumbnail": "self-referential-table/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "投影",
+        "幂等",
+        "自指表",
+        "牛顿—舒尔茨迭代"
+      ],
+      "tags_en": [
+        "projection",
+        "idempotent",
+        "self-referential table",
+        "Newton–Schulz iteration"
+      ],
+      "theory": [
+        {
+          "label": "第三十五章 · 乘光而来与自指扩表",
+          "label_en": "Chapter 35 · Arriving on a pulse of light and self-referential table expansion",
+          "href": "../zh/ch35-light-pulse-and-self-referential-table.html",
+          "href_en": "../en/ch35-light-pulse-and-self-referential-table.html"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal"
+        },
+        {
+          "gid": "D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Restoration/TargetRecoveryCriterion.target_recovery_criterion"
+        },
+        {
+          "gid": "D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.canonical_copied_address_record_eq_prior"
+        },
+        {
+          "gid": "D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode"
+        }
+      ]
+    },
+    {
+      "id": "quantum-fairness-ledger",
+      "code": "ORTHO//FAIRNESS",
+      "title": "量子公平总账本 · 席位、得失、关系、复制与遍历都没有特权",
+      "title_en": "The quantum fairness ledger · no privilege of seat, gain, bond, copy or history",
+      "summary": "同一颗布洛赫球上的五本账，每本旁边一根总额不动的柱子：任何一根轴都分到同样的球冠，拿 ψ 量 φ 与拿 φ 量 ψ 的玻恩权重相等；线² 加面积² 等于纯度预算；沿 a|000⟩ + b|110⟩ + c|101⟩ + g|111⟩ 走过贝尔、W 与 GHZ 态，A 留下的长度² 与三份纠缠加起来恰为 1；未知态复制得越多，每份越短，保真度降向 2/3；黄金步长绕球旋转，两个起点都分到 2 − φ 的份额，偏差始终小于 1。",
+      "summary_en": "Five ledgers on one Bloch sphere, each beside a bar whose total does not move: every axis gets the same cap and the Born weight of ψ on φ equals that of φ on ψ; line² plus area² equals the purity budget; walking a|000⟩ + b|110⟩ + c|101⟩ + g|111⟩ through Bell, W and GHZ states, what A keeps and three tangles add up to exactly 1; the more copies of an unknown state, the shorter each, with fidelity falling to 2/3; a golden rotation gives two different starts the same share 2 − φ with a discrepancy always below 1.",
+      "path": "quantum-fairness-ledger/",
+      "thumbnail": "quantum-fairness-ledger/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "公平",
+        "玻恩互易",
+        "互补勾股",
+        "CKW 单配性",
+        "不可克隆",
+        "黄金旋转"
+      ],
+      "tags_en": [
+        "fairness",
+        "Born reciprocity",
+        "complementary Pythagoras",
+        "CKW monogamy",
+        "no-cloning",
+        "golden rotation"
+      ],
+      "theory": [
+        {
+          "label": "本书第 31 章",
+          "label_en": "Chapter 31",
+          "href": "../zh/ch31-quantum-fairness.html",
+          "href_en": "../en/ch31-quantum-fairness.html"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight"
+        },
+        {
+          "gid": "D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras"
+        },
+        {
+          "gid": "D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal"
+        },
+        {
+          "gid": "D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion"
+        },
+        {
+          "gid": "D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result"
+        },
+        {
+          "gid": "D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result"
+        }
+      ]
+    },
+    {
+      "id": "spherical-degeneracy-radar",
+      "code": "ORTHO//DEGENERACY",
+      "title": "球面简并雷达 · 一次正交与两次正交如何反演观察者位置",
+      "title_en": "Spherical degeneracy radar · how turning once and turning twice locate the observer",
+      "summary": "单位球面上，一次正交与两次正交把同一个起点送到不同处，琥珀色的观察者轴给两个结果各投一道青色影子。两道影子重合的观察者落在一条青色虚线的盲圈上；方位角转一圈、或把八分球面旋子的初始赤道标架转一圈，盲圈绕竖轴扫过整颗球，每一条都经过的只有极轴 ±e₃。旋子在 Cl(3,0) 里逐项相乘：R₁ = (1 − e₁e₃)/√2 与 R₂ = ((1 − e₂e₃)/√2)((1 − e₁e₂)/√2) 都把 +e₁ 送到 +e₃，差旋子 exp(−π/4 e₁e₂) 落在赤道面里。",
+      "summary_en": "On the unit sphere, one orthogonal turn and two send the same starting point to different places, and the amber observer axis receives a cyan shadow of each result. Observers whose two shadows coincide lie on a dashed cyan blind circle; as the azimuth goes once round, or the initial equatorial frame of the octant rotors does, the blind circle sweeps the whole sphere about the vertical, and only the polar axis ±e₃ lies on every one of them. The rotors are multiplied out in Cl(3,0): R₁ = (1 − e₁e₃)/√2 and R₂ = ((1 − e₂e₃)/√2)((1 − e₁e₂)/√2) both take +e₁ to +e₃, and their difference exp(−π/4 e₁e₂) lies in the equatorial plane.",
+      "path": "spherical-degeneracy-radar/",
+      "thumbnail": "spherical-degeneracy-radar/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "正交简并",
+        "观察者定位",
+        "旋子",
+        "布洛赫球"
+      ],
+      "tags_en": [
+        "orthogonal degeneracy",
+        "locating the observer",
+        "rotors",
+        "Bloch sphere"
+      ],
+      "theory": [
+        {
+          "label": "本书第三十四章",
+          "label_en": "Chapter 34",
+          "href": "../zh/ch34-orthogonality-degeneracy-and-observer-position.html",
+          "href_en": "../en/ch34-orthogonality-degeneracy-and-observer-position.html"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Geometry/TwoAxisFiniteRotation.unit_perpendicular_pair"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula"
+        }
+      ]
+    },
+    {
+      "id": "unified-field-slice",
+      "code": "ORTHO//UNIFIED",
+      "title": "正交自指统一场切片",
+      "title_en": "A slice of the orthogonal self-referential unified field",
+      "summary": "第三十二章上半篇的三个画面：同一个角 θ = gd(η) 把固有时率 cos θ = 1/γ 与速度 sin θ = tanh η 扣在一个圆上；两个平面上的旋子来回转一圈留下 U = R₁R₂R₁⁻¹R₂⁻¹ ≠ 1 的二向量余项，同一平面里则回到原处；球面二十面体每个顶点缺 60°、共缺 720°，观察者的视界推到 90° 割断 10 条边，跨视界的施密特秩不超过 D¹⁰。",
+      "summary_en": "Three pictures from the first half of Chapter 32: one angle θ = gd(η) puts the proper-time rate cos θ = 1/γ and the speed sin θ = tanh η on one circle; rotors turning back and forth in two planes leave a bivector remainder U = R₁R₂R₁⁻¹R₂⁻¹ ≠ 1, while in one plane they come home; an icosahedron on the sphere misses 60° at each vertex and 720° in all, and the observer's horizon pushed to 90° cuts 10 edges, so the Schmidt rank across it is at most D¹⁰.",
+      "path": "unified-field-slice/",
+      "thumbnail": "unified-field-slice/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "快度",
+        "Gudermann 函数",
+        "固有时",
+        "旋子",
+        "换位子",
+        "角亏",
+        "视界",
+        "最小割",
+        "统一场"
+      ],
+      "tags_en": [
+        "rapidity",
+        "Gudermannian",
+        "proper time",
+        "rotors",
+        "commutator",
+        "angle deficit",
+        "horizon",
+        "minimal cut",
+        "unified field"
+      ],
+      "theory": [
+        {
+          "label": "本书第三十二章 · §32.1–32.2",
+          "label_en": "Chapter 32 · §32.1–32.2",
+          "href": "../zh/ch32-unified-field-and-meta-unification.html",
+          "href_en": "../en/ch32-unified-field-and-meta-unification.html"
+        },
+        {
+          "label": "Lean · 零光锥刚性",
+          "label_en": "Lean · null-cone rigidity",
+          "href": "{trureturing}/D5/S0/Certificates/MinkowskiNullConeRigidity.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null"
+        },
+        {
+          "gid": "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification"
+        },
+        {
+          "gid": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result"
+        }
+      ]
+    },
+    {
+      "id": "forgetting-rebirth-attractor",
+      "code": "ORTHO//SAMSARA",
+      "title": "轮回与视界阶梯",
+      "title_en": "Samsara and the horizon staircase",
+      "summary": "单位开圆盘上的双曲视界阶梯：从 θ* 出发、内禀快度等步 η_k = η₀ + kΔη，Beltrami–Klein 半径 tanh η_k（直弦）与庞加莱半径 tanh(η_k/2)（正交圆弧）一格格逼近边界，放大镜一直把那道缝放大，它对每个有限步都不为零；按外部角度尺等步走，几步就撞上边界、回到圆心重来，绕成一只轮子，按周期折叠只剩几个点；分式变换 (s − 1)/s 把直线 Re s = c 送成圆内的圆，Re s = 1/2 送成单位圆。",
+      "summary_en": "The hyperbolic horizon staircase on the open unit disk: from θ*, equal rapidity steps η_k = η₀ + kΔη creep toward the rim at Beltrami–Klein radius tanh η_k (chords) or Poincaré radius tanh(η_k/2) (orthogonal arcs), and a magnifier keeps blowing up the gap, which is nonzero at every finite step; equal steps on the outside angle ruler hit the rim in a few steps and fall back to the centre, turning a wheel that folds by its period into a few points; the fractional map (s − 1)/s sends the lines Re s = c to circles inside the disk and Re s = 1/2 to the unit circle.",
+      "path": "forgetting-rebirth-attractor/",
+      "thumbnail": "forgetting-rebirth-attractor/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "双曲圆盘",
+        "快度",
+        "庞加莱圆盘",
+        "Beltrami–Klein",
+        "捏合",
+        "商空间",
+        "轮回"
+      ],
+      "tags_en": [
+        "hyperbolic disk",
+        "rapidity",
+        "Poincaré disk",
+        "Beltrami–Klein",
+        "pinching",
+        "quotient",
+        "rebirth"
+      ],
+      "theory": [
+        {
+          "label": "本书第三十六章",
+          "label_en": "Chapter 36",
+          "href": "../zh/ch36-hyperbolic-steps-and-quotienting-reincarnation.html",
+          "href_en": "../en/ch36-hyperbolic-steps-and-quotienting-reincarnation.html"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/TargetContinuityFactorization.target_factors_iff_continuous_partition"
+        },
+        {
+          "gid": "D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line"
+        }
+      ]
+    },
+    {
+      "id": "pointer-ontology-deref",
+      "code": "ORTHO//ONTOLOGY",
+      "title": "寻址三条路 · 扫描、路由树与自映射页表",
+      "title_en": "Three ways to address · scan, routing tree and self-mapped page table",
+      "summary": "同一条时间轴上并排走三种寻址：逐格扫描读到第 k 格要 k 步，N = 64 格最坏 64 步；桶链式路由树深 log₂N = 6 层、共 N − 1 = 63 个开关，一个地址只拨动根到叶路上的 6 个，叠加的地址几条路同时亮、分叉后不再共用；第三十八章的二级页表里零号槽写着页目录自己的地址 0x1000，解引用一次就回到自己（p = *p）。",
+      "summary_en": "Three ways of addressing side by side on one rail: scanning reaches cell k in k steps, up to 64 for N = 64; the bucket-brigade routing tree is log₂N = 6 levels deep with N − 1 = 63 switches, and one address sets only the 6 on its root-to-leaf path, while a superposed address lights several paths at once that never share again after they fork; in Chapter 38's two-level page table slot 0 holds the directory's own address 0x1000, so one dereference lands back on itself (p = *p).",
+      "path": "pointer-ontology-deref/",
+      "thumbnail": "pointer-ontology-deref/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "寻址",
+        "桶链式 QRAM",
+        "递归页表",
+        "不动点"
+      ],
+      "tags_en": [
+        "addressing",
+        "bucket-brigade QRAM",
+        "recursive page table",
+        "fixed point"
+      ],
+      "theory": [
+        {
+          "label": "本书第三十八章",
+          "label_en": "Chapter 38",
+          "href": "../zh/ch38-observer-memory-pointer-and-ontological-qram.html",
+          "href_en": "../en/ch38-observer-memory-pointer-and-ontological-qram.html"
+        },
+        {
+          "label": "Lean 源码 · 对角线落点",
+          "label_en": "Lean source · diagonal landing",
+          "href": "{trureturing}/D5/S0/Diagonal/EscapeCount.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S0/Diagonal/EscapeCount.diagonal_landing_fixed"
+        }
+      ]
+    },
+    {
+      "id": "self-sustaining-spinor-flow",
+      "code": "ORTHO//CLOSURE",
+      "title": "自持旋量流",
+      "title_en": "Self-sustaining spinor flow",
+      "summary": "三维偶子代数里的旋量 ψ = √ρ R 夹住 e₃ 织出青色的流向量 J，夹住 e₁e₂ 织出品红的自旋面 S，页面当场乘出 J²、−S²、ρ² 三个相等的平方（菲尔兹恒等式，文献结果）。让 ψ 绕紫色的轴转：J 转一圈就回到原处，ψ 却成了 −ψ，紫色小旗沿单侧光带翻到另一面；走满 720° 才回到 +ψ。绿色框只给第三十九章引用的圆周双覆叠两条定理。",
+      "summary_en": "An even spinor ψ = √ρ R of three-dimensional space sandwiches e₃ into the cyan current vector J and e₁e₂ into the magenta spin plane S, and the page multiplies out the three equal squares J², −S² and ρ² on the spot (the Fierz identity, a literature result). Turn ψ about the violet axis: J is back after one turn while ψ has become −ψ and the violet flag has slid to the other side of the one-sided band; only 720° brings back +ψ. Green goes only to the two circle double-cover theorems that Chapter 39 cites.",
+      "path": "self-sustaining-spinor-flow/",
+      "thumbnail": "self-sustaining-spinor-flow/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "旋量",
+        "菲尔兹恒等式",
+        "双覆叠",
+        "720°",
+        "第三十九章"
+      ],
+      "tags_en": [
+        "spinors",
+        "Fierz identity",
+        "double cover",
+        "720°",
+        "Chapter 39"
+      ],
+      "theory": [
+        {
+          "label": "本书第三十九章",
+          "label_en": "Chapter 39",
+          "href": "../zh/ch39-observer-is-ontological-universe.html",
+          "href_en": "../en/ch39-observer-is-ontological-universe.html"
+        },
+        {
+          "label": "圆周双覆叠无连续截面（Lean）",
+          "label_en": "No continuous section of the circle double cover (Lean)",
+          "href": "{trureturing}/D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.lean"
+        },
+        {
+          "label": "圆周双覆叠的历史依赖提升（Lean）",
+          "label_en": "History-dependent lift of the circle double cover (Lean)",
+          "href": "{trureturing}/D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"
+        }
+      ]
+    },
+    {
+      "id": "gram-causal-elliptope",
+      "code": "ORTHO//ELLIPTOPE",
+      "title": "多步记忆的格拉姆窗口 · 记得越多，窗口越窄",
+      "title_en": "Gram windows with memory · the more you remember, the narrower the window",
+      "summary": "有限观察者记住 M 步历史，挑下一步就是补全一张 (M+1) × (M+1) 的格拉姆表，它必须半正定。舞台是三元格拉姆椭圆体（鼓胀的四面体 1 − x² − y² − z² + 2xyz ≥ 0）与它在历史 x = P₀·P₋₁ 处的截面：每多记一个更早的锚点，候选 Q 的 (y, z) 就多一圈品红的椭圆约束，套在上一圈里面，穿过 Q 的 z 的窗口一圈圈收窄。把 z 填到某一圈之外，按 Q, P₀, P₋₁, … 的顺序，第一个变负的顺序主子式正好指出是哪一层记忆拒绝了它。事件取在 ℝ⁶ = E∥ ⊕ E⊥ 中，M = 1 … 5 每一层都还有内部；压回三维时四根以上的向量撑不出体积，泡泡只剩边界和孤立的点。半正定判据与椭圆体的刻画是文献结果，把 G ⪰ 0 读作因果相容空间是本书第 29 章的诠释。",
+      "summary_en": "A finite observer remembering M steps of history chooses the next step by completing an (M+1) × (M+1) Gram table, which must be positive semidefinite. The stage is the three-element Gram elliptope (the swollen tetrahedron 1 − x² − y² − z² + 2xyz ≥ 0) and its slice at the history's x = P₀·P₋₁: each older anchor remembered adds a magenta ellipse constraining the candidate Q's (y, z), nested inside the last, and the window for z through Q narrows ring by ring. Fill z in outside one of the rings and, in the order Q, P₀, P₋₁, …, the first leading principal minor to turn negative says exactly which depth of memory refuses it. The events live in ℝ⁶ = E∥ ⊕ E⊥, so every depth M = 1 … 5 keeps an inside; squeezed back into three dimensions, four or more vectors span no volume and the bubble keeps only its edge and isolated points. The semidefiniteness criteria and the description of the elliptope are literature results; reading G ⪰ 0 as the causally compatible space is the interpretation of chapter 29 of this book.",
+      "path": "gram-causal-elliptope/",
+      "thumbnail": "gram-causal-elliptope/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "格拉姆矩阵",
+        "半正定",
+        "椭圆体",
+        "主子式",
+        "有限观察者",
+        "第 29 章"
+      ],
+      "tags_en": [
+        "Gram matrix",
+        "positive semidefinite",
+        "elliptope",
+        "principal minors",
+        "finite observer",
+        "chapter 29"
+      ],
+      "theory": [
+        {
+          "label": "第 29 章 · 第二层 斯宾诺莎三角形与格拉姆刚性",
+          "label_en": "Chapter 29 · Level 2, Spinoza's triangle and Gram rigidity",
+          "href": "../zh/ch29-timeless-causality-and-gram-space.html#sec-coda-hume-spinoza-gram",
+          "href_en": "../en/ch29-timeless-causality-and-gram-space.html#sec-coda-hume-spinoza-gram"
+        },
+        {
+          "label": "第 29 章 · 第四层 有限观察者与因果相容空间",
+          "label_en": "Chapter 29 · Level 4, the finite observer and the compatible space",
+          "href": "../zh/ch29-timeless-causality-and-gram-space.html#sec-coda-finite-observer-time-field",
+          "href_en": "../en/ch29-timeless-causality-and-gram-space.html#sec-coda-finite-observer-time-field"
+        },
+        {
+          "label": "Lean 源码 · LagrangeGramIdentity.lean",
+          "label_en": "Lean source · LagrangeGramIdentity.lean",
+          "href": "{trureturing}/D5/S3/QuantumBounds/LagrangeGramIdentity.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        }
+      ]
+    },
+    {
+      "id": "dream-decoherence-unpinning",
+      "code": "ORTHO//DREAM",
+      "title": "梦境擦除 · 退相干、卸锚与联合逆转",
+      "title_en": "Dream erasure · decoherence, unpinning and joint reversal",
+      "summary": "同一张密度矩阵 |ρᵢⱼ| 的方格与它在屏上留下的条纹。锚点：全局纯态 Ψ 对先验投影族的退相干插值 ρ(λ) = (1 − λ)|Ψ⟩⟨Ψ| + λ Σₖ PₖΨΨ*Pₖ，跨块相干按 1 − λ 直线减少，对角的权重一格不动；λ = 1 时是捏合的不动点，熵从 0 涨到删去相干的相对熵；λ 降到 0.1，九成相干回来。记录：两份相位记录（c = −i）把 ρ₀₁ 从 1/2 转到 −1/2，只逆转一份停在 −i/2，两份都逆转复原为 1/2；记录重叠为零时逆转救不回来。醒来：读出投影只留躯体那一格，遗忘的权重与锚点强度无关。",
+      "summary_en": "One grid of the density matrix |ρᵢⱼ| and the fringes it leaves on a screen. Anchors: the decoherence interpolation ρ(λ) = (1 − λ)|Ψ⟩⟨Ψ| + λ Σₖ PₖΨΨ*Pₖ of a global pure state over a family of prior projections; the cross-block coherence falls in a straight line with 1 − λ while the diagonal weights stay put; at λ = 1 it is a fixed point of the pinching and the entropy has risen from 0 to the relative entropy of the deleted coherence; lower λ to 0.1 and nine tenths of the coherence return. Records: two phase records (c = −i) turn ρ₀₁ from 1/2 to −1/2, reversing one stops at −i/2, reversing both restores 1/2; with zero record overlap reversal cannot restore it. Waking: the readout keeps only the body cell, and the forgotten weight does not depend on the anchor strength.",
+      "path": "dream-decoherence-unpinning/",
+      "thumbnail": "dream-decoherence-unpinning/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "退相干",
+        "捏合",
+        "量子擦除",
+        "记录逆转",
+        "密度矩阵"
+      ],
+      "tags_en": [
+        "decoherence",
+        "pinching",
+        "quantum eraser",
+        "record reversal",
+        "density matrix"
+      ],
+      "theory": [
+        {
+          "label": "本书第三十七章",
+          "label_en": "Chapter 37",
+          "href": "../zh/ch37-dreams-quantum-eraser-and-nonlocal-observer.html",
+          "href_en": "../en/ch37-dreams-quantum-eraser-and-nonlocal-observer.html"
+        },
+        {
+          "label": "联合相干逆转（Blueprint）",
+          "label_en": "Joint coherent reversal (Blueprint)",
+          "href": "{trureturing}/Blueprint/D5/S3/ObserverMemory/JointCoherentReversal.md"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning.unreadState_fixed_iff"
+        },
+        {
+          "gid": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/JointCoherentReversal.joint_coherent_reversal"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate"
+        }
+      ]
+    },
+    {
+      "id": "meta-unification-compass",
+      "code": "ORTHO//COMPASS",
+      "title": "元统一罗盘与黄金四元数桥",
+      "title_en": "The meta-unification compass and the golden quaternion bridge",
+      "summary": "第三十二章下半篇的两个画面：§32.3 的三根诊断轴（阶数 θ、分辨率 η、观察者 λ）张成立方体，§32.4 的八家统一纲领按总表原话落在各轴的三段之一（本书的比较诊断坐标），时间轴逐个读四大阵营；二元二十面体群 2I 的 120 个单位四元数在 ℤ[φ] 里精确算出，加上 φ⁻¹·2I 恰得 Q(q) = 2(a + b) = 2 的 240 个根，两两的 B 为整数、各有 56 个邻居、格拉姆行列式为 1，纯虚的 60 个从 E∥ 转到 E⊥ 时里外两层对调。",
+      "summary_en": "Two pictures from the second half of Chapter 32: the three diagnostic axes of §32.3 (grade θ, resolution η, observer λ) span a cube in which the eight unification programmes of §32.4 sit in one of three bands of each axis, by the words of the table (the book's comparative diagnostic coordinates), and the rail reads the four camps one by one; the 120 unit quaternions of the binary icosahedral group 2I are computed exactly in ℤ[φ], and with φ⁻¹·2I they give exactly the 240 vectors with Q(q) = 2(a + b) = 2, every B between them an integer, 56 neighbours each and Gram determinant 1, while the 60 pure ones swap shells when the projection turns from E∥ to E⊥.",
+      "path": "meta-unification-compass/",
+      "thumbnail": "meta-unification-compass/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "统一纲领",
+        "诊断坐标",
+        "二元二十面体群",
+        "艾柯西安环",
+        "E₈",
+        "四元数",
+        "黄金比",
+        "准晶切投"
+      ],
+      "tags_en": [
+        "unification programmes",
+        "diagnostic coordinates",
+        "binary icosahedral group",
+        "icosian ring",
+        "E₈",
+        "quaternions",
+        "golden ratio",
+        "quasicrystal cut and project"
+      ],
+      "theory": [
+        {
+          "label": "本书第三十二章 · §32.3–32.4",
+          "label_en": "Chapter 32 · §32.3–32.4",
+          "href": "../zh/ch32-unified-field-and-meta-unification.html",
+          "href_en": "../en/ch32-unified-field-and-meta-unification.html"
+        },
+        {
+          "label": "Lean · 黄金不动点",
+          "label_en": "Lean · the golden fixed point",
+          "href": "{trureturing}/D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique"
+        }
+      ]
+    },
+    {
+      "id": "hairy-ball-normal-escape",
+      "code": "ORTHO//HAIRY",
+      "title": "毛球、环面与法向逃逸",
+      "title_en": "Hairy balls, tori and the normal escape",
+      "summary": "可转动的球面与环面上铺满连续的切向箭头，品红的环圈出箭头为零的点。球面上的纬向场 (−y, x, 0) 在南北两极各有一个指标 +1 的零点；用立体投影拉回的一族场把南极的零点沿经线推到北极，两个合成偶极切场 w = (((1 − z)² − x² + y²)/2, −xy, x(1 − z)) 唯一的、指标 +2 的零点，指标之和始终是 2。环面 ((R + r cos θ) cos φ, (R + r cos θ) sin φ, r sin θ) 上的单位切场 ê_φ 处处长 1，没有零点。正二十面体逐级切成测地穹顶，ν = 1 到 6 的顶点角亏之和都是 4π。让箭头沿外法向抬起，w̃_λ = (1 − λ)w + λ(1 + z)/2·x 在 0 < λ < 1 时处处不为零，‖w̃₁(N)‖ = 1；λ = 1 时南极又成了零点。庞加莱—霍普夫与笛卡尔定理是文献结果，抬升的读法是诠释模型；四张实验卡可在第二十一、二十九章正文里单独引用。",
+      "summary_en": "Continuous tangent arrows cover a sphere and a torus that can be turned by hand; magenta rings circle the points where they vanish. The zonal field (−y, x, 0) has a zero of index +1 at each pole; a family pulled back by stereographic projection pushes the southern zero up a meridian into the North Pole, where the two become the single zero, of index +2, of the dipole field w = (((1 − z)² − x² + y²)/2, −xy, x(1 − z)); the indices always add up to 2. On the torus ((R + r cos θ) cos φ, (R + r cos θ) sin φ, r sin θ) the unit field ê_φ has length 1 everywhere and no zero. The icosahedron cut into geodesic domes keeps a total vertex defect of 4π for ν = 1 to 6. Lifted along the outward normal, w̃_λ = (1 − λ)w + λ(1 + z)/2·x vanishes nowhere for 0 < λ < 1 and ‖w̃₁(N)‖ = 1, while at λ = 1 the South Pole becomes a zero. Poincaré–Hopf and Descartes are literature results and the reading of the lift is an interpretation; each of the four experiment cards can be cited on its own from Chapters 21 and 29.",
+      "path": "hairy-ball-normal-escape/",
+      "thumbnail": "hairy-ball-normal-escape/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "毛球定理",
+        "庞加莱—霍普夫",
+        "欧拉示性数",
+        "环面",
+        "笛卡尔角亏",
+        "法向逃逸"
+      ],
+      "tags_en": [
+        "Hairy ball theorem",
+        "Poincaré–Hopf",
+        "Euler characteristic",
+        "Torus",
+        "Descartes defect",
+        "Normal escape"
+      ],
+      "theory": [
+        {
+          "label": "第二十一章 · 毛球定理、角亏与 Adams 球面",
+          "label_en": "Chapter 21 · Hairy ball, angle defect and Adams spheres",
+          "href": "../zh/ch21-diagonalization-and-escape.html#sec-ch21-4",
+          "href_en": "../en/ch21-diagonalization-and-escape.html#sec-ch21-4"
+        },
+        {
+          "label": "第二十九章 · 同余数椭圆曲线环面",
+          "label_en": "Chapter 29 · The congruent-number elliptic torus",
+          "href": "../zh/ch29-timeless-causality-and-gram-space.html#rem-ch29-elliptic-torus-literature",
+          "href_en": "../en/ch29-timeless-causality-and-gram-space.html#rem-ch29-elliptic-torus-literature"
+        },
+        {
+          "label": "终章 · 多面体近似与不可抹平的几何余项",
+          "label_en": "End chapter · Polyhedral approximation and its remainder",
+          "href": "../zh/coda.html#sec-coda-polyhedral-remainder",
+          "href_en": "../en/coda.html#sec-coda-polyhedral-remainder"
+        },
+        {
+          "label": "trureturing · DiagonalTopologicalEscape.lean",
+          "label_en": "trureturing · DiagonalTopologicalEscape.lean",
+          "href": "{trureturing}/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean",
+          "href_en": "{trureturing}/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous"
         }
       ]
     }

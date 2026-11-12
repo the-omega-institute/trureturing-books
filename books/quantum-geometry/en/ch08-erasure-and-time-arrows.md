@@ -65,7 +65,7 @@ $$
 $$
 
 ::: {.viz src="erasure-ledger" preset="pinch" height="500"}
-**Turn, then pinch: ln 2 more entropy.** During the 90° turn the amber arrow swings from |0⟩ to lying flat and the “system S” column on the right does not move; at the pinch the magenta sideways part is wiped out, the arrow shrinks to the centre, the entropy column rises to the dashed ln 2 line, and the heat paid is still 0 ([@thm-dual-account-full]).
+**Turn, then pinch: ln 2 more entropy.** During the 90° turn the amber arrow swings from |0⟩ to lying flat and the “system S” column on the right does not move; at the pinch the magenta sideways part is wiped out, leaving only a dashed outline of its old length, the arrow shrinks to the centre, the entropy column rises to the dashed ln 2 line, and the heat paid is still 0 ([@thm-dual-account-full]).
 :::
 
 **Not only pinching: no process makes two states more distinguishable.** [@thm-dual-account-full] keeps the ledger for one particular operation, basis pinching. Widen the question. Send two states $\rho$ and $\sigma$ through the same physical process (noise, a measurement whose result is thrown away, a coupling to an environment that is then discarded). What happens to the relative entropy between them? The answer is the same for **every** finite-dimensional quantum channel: it can only go down.

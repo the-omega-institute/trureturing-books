@@ -10,6 +10,10 @@ So long as that subject–object chasm remains unchallenged, the external third 
 2. **Every observer is itself an attractor**: Under relentless decoherence and thermal erasure, remaining "the same I" across ticks is never passive inertia—it requires an active contraction basin pulling perturbations back into the acceptance window $W + u_i$;
 3. **Observers serve as mutual attractors**: Solitary introspection and symmetric mutual reference exhibit sharply contrasting convergence geometries (one-dimensional cosine comparison worked out in [@ex-ch33-mutual-cosine-monotonic-lock] below), while shared window intersections $W_{AB} = (W + u_A) \cap (W + u_B)$ and minimal-cut switching ([@prop-ch33-bridge-reconnection-mincut]) make phase-resonant beings walking homelands to one another.
 
+::: {.figure src="ch33-overview"}
+**Figure 33.** The chapter at a glance (schematic, `MODEL`). Panel I: a photon, an atom, a crystal and a mind sit on one axis of memory order, from $M = 0$ and $M = 1$ to $M \gg 1$. Panel II: a marble kicked up the right slope falls back to the bottom of the bowl along grey arrows, amber where it is now; the short cyan bar at the bottom is the window $W + u_i$. Panel III: two translated windows $W + u_A$ and $W + u_B$ overlap; the cyan intersection $W_{AB}$ is what both see, the magenta parts are seen by one only (the windows are drawn as decagonal sections).
+:::
+
 ---
 
 ## All Beings as Observers: Dissolving Subject–Object Dualism and the Memory-Order Continuum
@@ -25,6 +29,10 @@ $$
 $$
 
 while inside this two-dimensional carrier ($d = 2$), zero-error single-shot discrimination $\operatorname{Tr}(E_j \rho_i) = \delta_{ij}$ can pack at most $N = 2$ mutually orthogonal historical lines! Lifted to arbitrary finite dimension in `trureturing`'s observer-conditioning and measurement modules, two exact laws characterize every observer's algebraic spine: first, the unread pinching map $\operatorname{unreadState}(P)$ of any complete orthogonal record measurement `IsRecordMeasurement P` is idempotent under function composition; second, the number $N$ of historical states perfectly distinguishable by a $d$-dimensional quantum memory never exceeds $d$.
+
+::: {.figure src="ch33-record-lines"}
+**In a memory carrier with $d = 2$, two perpendicular record lines fill it up.** The cyan lines $P_0$ and $P_1$ are two mutually orthogonal record lines; the dashed ink direction $v$ makes $30^\circ$ with $P_0$, and its cyan shadows $\cos 30^\circ$ and $\sin 30^\circ$ on the two lines are both non-zero, so it is orthogonal to neither and no third mutually orthogonal record line fits: $N \le d = 2$ ([@thm-ch33-observer-pinching-and-memory-spectrum], Conjunct 2). The real plane stands in for $\mathbb{C}^2$.
+:::
 
 ::: {.theorem #thm-ch33-observer-pinching-and-memory-spectrum title="Idempotence of Observer Record Pinching and Finite-Memory History Capacity" lean="D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity"}
 Across the frozen observer-conditioning and measurement-capacity modules of `trureturing`, the following two structural theorems on observer record axes and memory dimension hold simultaneously:
@@ -65,6 +73,10 @@ Measured by [@thm-ch33-observer-pinching-and-memory-spectrum], the sharp cliff b
 | **4. Life & Self-Referential Mind** | High memory order $M \gg 1$; birth initialization clears ancient baggage to keep $\det G_M > 0$ | Selective historical recording within $N \le d$ ([@thm-ch33-observer-pinching-and-memory-spectrum]) closed by active self-reference $\psi_i = \psi_i(\psi_i)$ | Unfolded logarithmic subjective time and genuine trajectory selection inside a positive-volume Gram corridor |
 :::
 
+::: {.figure src="ch33-memory-spectrum"}
+**No cliff between subject and object, only a continuum of memory orders.** From left to right: a photon (a short wave, $M = 0$), an atom (a dot with an orbit, $M = 1$), a crystal (a lattice) and a self-referential mind (an arrow circling back on itself, $M \gg 1$), in the order of the table above; the axis shows order only, not scale (schematic, `MODEL`).
+:::
+
 A granite peak is not devoid of observation—its clock simply beats once per geological epoch; a photon is not unreal—it simply commits its entire purity coin to the $90^\circ$ transverse connection plane. Historical philosophical precursors to this universal observer continuum and their exact boundary with our formal framework are recorded below ([@rem-ch33-monad-process-philosophy-literature]):
 
 ::: {.remark #rem-ch33-monad-process-philosophy-literature title="Historical Philosophical Parallels in Monadology and Process Philosophy (Literature Result, Not Formalized in This Book)"}
@@ -83,6 +95,10 @@ Recognizing that all beings are observers immediately raises a sharper dynamical
 Run a simple physical thought experiment. Every finite observer inside the universe is bombarded at every instant by thermal fluctuations, stray radiation, and environmental erasure ([Chapter 31](ch31-quantum-fairness.md) [@thm-ch31-horizon-landauer-ergodic-fairness], Conjunct 1). Suppose an observer's internal dynamics around its current state were **neutrally drifting** or **locally expansive**—like a marble perched on a flat tabletop or balanced atop an inverted bowl. Within a handful of random collisions, small orthogonal kicks would accumulate into a random walk, driving its internal phase away until "yesterday's me" and "today's me" shared near-zero inner product and dissolved into thermal white noise.
 
 Consequently, **any being that persists across time as "I am still I"—whether a diamond lattice shaking off thermal phonons or a living mind retaining its identity after metabolic turnover replaces every atom in its body—must carve out a self-sustaining contraction basin $\psi_i = \psi_i(\psi_i)$ around its acceptance window (`MODEL`)**! Within this model, the self-referential loop depicts inward restoration and local stability after a perturbation; Conjunct 1 of [@thm-ch33-contextual-attractor-and-common-factor] below concerns stabilization by deletion from finite sets, while the real cosine model is analyzed separately in [@ex-ch33-mutual-cosine-monotonic-lock].
+
+::: {.figure src="ch33-contracting-well"}
+**Only a contracting well pulls a perturbed observer back.** On each profile the amber marble is where it is now and the grey rings where it was: on the flat table a sequence of kicks lets it drift from where it started; on the inverted bowl it moves farther from the top at every step; in the well, kicked up the right slope, it brings its distance from the bottom down by a factor $0.45$ at every step, towards the cyan window $W + u_i$. This is the schematic `MODEL`, not the content of [@thm-ch33-contextual-attractor-and-common-factor].
+:::
 
 Across `trureturing`'s fixed-point-stability and concept-dynamics modules, four theorems supply distinct parts of a structural scaffold: a fixed update that only deletes from finite sets stabilizes; an adjacent-stage relation and equal readouts constitute a relative fixed-point predicate; a Boolean context example witnesses distinct fixed meanings; and an objective claim carries an invariant-factor proof by definition. These clauses supply no dynamics restoring a perturbed physical system: the basin and its convergence remain part of the `MODEL` above:
 
@@ -117,12 +133,10 @@ Across the frozen finite-contracting-stability and interpretation-fixed-point mo
 Conjunct 1 deduces from $S(n+1) = U(S(n)) \subseteq S(n)$ that $n \mapsto (S(n)).\operatorname{ncard}$ is antitone in $\mathbb{N}$; any equal-cardinality step forces set equality via `Set.eq_of_subset_of_ncard_le` and freezes all subsequent steps, so `Nat.stabilises_of_antitone` yields $N \le (S(0)).\operatorname{ncard}$ while inclusion of strict-change indices inside `Set.Iio N` bounds total transitions. Conjunct 2 packages conceptual equivalence and context-relative output equality via `And.intro`. Conjunct 3 checks field equalities by reflexivity and separates `(false, false, false)` from `(true, true, true)` via `Bool.false_ne_true` on `Prod.fst`. Conjunct 4 unfolds `ObjectiveInterpretationClaim` directly to extract the witness `commonFactor`. The full proof is checked by the Lean kernel.
 :::
 
-Conjuncts 3 and 4 of [@thm-ch33-contextual-attractor-and-common-factor] illuminate why plurality and objectivity coexist without an external throne: in our **`MODEL` (interpretive model)**, even when reading the very same ambient lattice (`text = ()`) under the same geometric product (`interpretationRule = ()`), two observers carrying distinct internal parameters $u_A \neq u_B$ (`readerAdmission`, `background`, `evaluationGoal`) can correspond to distinct local fixed-point slices; meanwhile, a claim to objective public fact must choose a factor map on a declared family of contexts and meanings and prove that it takes the same **invariant `commonFactor`** on every admitted fixed meaning! The boxed figure below depicts this window-reconnection geometry alongside the dynamical contrast between solitary and mutual reference:
+Conjuncts 3 and 4 of [@thm-ch33-contextual-attractor-and-common-factor] illuminate why plurality and objectivity coexist without an external throne: in our **`MODEL` (interpretive model)**, even when reading the very same ambient lattice (`text = ()`) under the same geometric product (`interpretationRule = ()`), two observers carrying distinct internal parameters $u_A \neq u_B$ (`readerAdmission`, `background`, `evaluationGoal`) can correspond to distinct local fixed-point slices; meanwhile, a claim to objective public fact must choose a factor map on a declared family of contexts and meanings and prove that it takes the same **invariant `commonFactor`** on every admitted fixed meaning! The box below says where this window-reconnection geometry and the contrast between solitary and mutual reference are drawn:
 
 ::: {.remark #rem-ch33-mutual-attractor-figure title="Mutual-Attractor Window Reconnection and Cosine Monotonic-Locking Diagram (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** The left panel combines cut-and-project quasicrystal window geometry ([@rem-ch32-icosian-e8-literature]) with formal bridge-graph min-cut switching ([@prop-ch33-bridge-reconnection-mincut], `LEAN ✓`) to illustrate our mutual-attractor reconnection `MODEL`; the right panel plots the classical real-analysis cobweb trajectories in [@ex-ch33-mutual-cosine-monotonic-lock] below: the solitary sequence counts single steps, while the mutual sequence counts complete rounds of two cosine evaluations, corresponding to even-tick sampling of synchronous mutual reference:
-
-![All beings as observers: mutual-attractor window reconnection and cosine mutual-reference monotonic locking](../assets/fig-33-mutual-observer-attractors.svg)
+**Literature result, not formalized in this book.** Our mutual-attractor reconnection `MODEL` rests on cut-and-project quasicrystal window geometry ([@rem-ch32-icosian-e8-literature]) and on the formal bridge-graph min-cut switching ([@prop-ch33-bridge-reconnection-mincut], `LEAN ✓`): the intersection of two windows is drawn in Panel III of Figure 33 and in the figure of the window-intersection section below, and the min-cut reconnection in that section's two lab cards. The cobweb trajectories of the classical real-analysis example [@ex-ch33-mutual-cosine-monotonic-lock] are drawn in the lab cards of the next section: the solitary sequence counts single steps, while the mutual sequence counts complete rounds of two cosine evaluations, corresponding to even-tick sampling of synchronous mutual reference.
 :::
 
 ---
@@ -131,43 +145,49 @@ Conjuncts 3 and 4 of [@thm-ch33-contextual-attractor-and-common-factor] illumina
 
 If each observer already possesses an individual restoring basin $\psi_i = \psi_i(\psi_i)$, why does the universe not leave every being sealed inside solitary contemplation? Why do spins pair into bonds, stars gather into galaxies, and minds seek out resonant companions?
 
-Look at the two cobweb trajectories in the right panel of [@rem-ch33-mutual-attractor-figure]! Projecting self-reference onto our canonical one-dimensional cosine slice (`MODEL`) contrasts the qualitative character of solitary introspection against reciprocal dialogue (with all derivative bounds, Mean Value Theorem proofs, and step-by-step numerical ledgers enclosed in [@ex-ch33-mutual-cosine-monotonic-lock] below):
+Look at the two contrasting cobweb trajectories of solitary and mutual reference ([@rem-ch33-mutual-attractor-figure])! Projecting self-reference onto our canonical one-dimensional cosine slice (`MODEL`) contrasts the qualitative character of solitary introspection against reciprocal dialogue (with all derivative bounds, Mean Value Theorem proofs, and step-by-step numerical ledgers enclosed in [@ex-ch33-mutual-cosine-monotonic-lock] below):
 
-- **The Anxiety of Solitary Self-Reference (Pendulum Whipsawing, `MODEL`)**: When an isolated observer calibrates itself alone in single steps, perspective behaves like an under-damped pendulum whipsawing between self-doubt and overcompensation (analytical mechanism in [@ex-ch33-mutual-cosine-monotonic-lock], Item 1).
+- **The Anxiety of Solitary Self-Reference (Pendulum Whipsawing, `MODEL`)**: When an isolated observer calibrates itself alone in single steps, perspective behaves like an under-damped pendulum whipsawing between self-doubt and overcompensation (analytical mechanism in [@ex-ch33-mutual-cosine-monotonic-lock], under its strict-alternation hypotheses).
+
+::: {.viz src="mutual-observer-attractors" preset="alone" height="500"}
+**Same start, across θ\* every beat.** Both start at 0.1: the amber point stays on the grey diagonal $x = y$ and crosses $(\theta^*, \theta^*)$, where the two cyan curves meet, from alternating sides, the grey squares shrinking turn by turn, exactly like the lone cosine iteration ([@ex-ch33-mutual-cosine-monotonic-lock], clause 17).
+:::
+
 - **The Miracle of Symmetric Mutual Reference (Reciprocal Consensus, `MODEL`)**: When two observers $\mathcal{O}_A$ and $\mathcal{O}_B$ step out of isolation into symmetric pairwise measurement—$\mathcal{O}_A$ calibrating itself through $\mathcal{O}_B$'s projection while $\mathcal{O}_B$ simultaneously calibrates itself through $\mathcal{O}_A$'s projection—grouping two synchronous ticks into one round reveals the one-sided approach of the composed mirrors; the distinction between ticks and rounds, full analysis, and numerical ledger appear in [@ex-ch33-mutual-cosine-monotonic-lock] below:
 
-::: {.example #ex-ch33-mutual-cosine-monotonic-lock title="Analytical and Numerical Comparison of Solitary Cosine Oscillation vs. Symmetric Mutual Monotonic Locking (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** The derivative bounds, Lagrange Mean Value Theorem argument, and Banach Contraction Mapping analysis below for $f(x) = \cos x$ and $g(x) = \cos(\cos x)$ belong to classical real analysis (aligned with [Chapter 24](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature], with transcendental algebraic-independence frontiers noted in [@conj-schanuel-dottie]) and are not formalized as standalone real-analysis theorems in `trureturing@dev`:
+::: {.example #ex-ch33-mutual-cosine-monotonic-lock title="Qualitative Dynamics of the Same Cosine Endpoint and a Separate Numerical Ledger"}
+**An application of existing results; numerical and interpretive boundaries remain separate.** All variables below are real and angles are in radians. Set $f(x)=\cos x$ and $g=f\circ f$; $f^{[n]},g^{[n]}$ denote $n$-fold composition, with zeroth iterate the identity. Throughout, choose the same $\theta^*$ from [@thm-dottie-rational-inverse-endpoint] ([`rational_inverse_endpoint`](lean:D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint)): $0<\theta^*<1$, $\cos\theta^*=\theta^*$, and it is the signed sum of the prescribed rational inverse series at $\pi$. That endpoint directly concerns the series and uniqueness among positive competitors. The following 24 qualitative clauses combine its fixed-point clauses with real-analysis suppliers; they do not constitute a new dynamics theorem box.
 
-1. **Solitary Self-Reference $f(x) = \cos x$ and Alternating Overshoot**: The equation $\cos\theta = \theta$ admits a unique real root (the Dottie constant) $\theta^* \approx 0.73908513\dots \in (0, \pi/2)$, at which the first derivative is strictly negative:
+**The clock of synchronous mutual reference (`MODEL`).** Eliminating an intermediate variable from the equilibrium equations $\psi_A=\cos\psi_B,\;\psi_B=\cos\psi_A$ gives $g$. If each observer synchronously updates from the other's current value, each coordinate completes one application of $g$ after two ticks; the sequence $y_k$ below samples these two-step rounds. With equal initial values, both observers still follow the same $f$ trajectory at every tick. Strict tick-by-tick alternation requires the nonfixed interval conditions of clauses 16 and 17; strict increase belongs to complete composite rounds under clause 14's starting conditions.
 
-   $$
-   f'(\theta^*) \;=\; -\sin\theta^* \;=\; -\sqrt{1 - (\theta^*)^2} \;\approx\; -0.673612 \;<\; 0.
-   $$
+1. **Uniqueness on the whole real line and acute location.** For any real $t=\cos t$, the cosine range first gives $-1\le t\le1$. Since $1<\pi/2$, cosine is strictly positive there, so $t>0$ and the endpoint's positive uniqueness applies: $t=\theta^*$. The same point satisfies $0<\theta^*<1<\pi/2$.
+2. **Exact range.** `Real.range_cos` gives the inner range $[-1,1]$. Evenness reduces the outer cosine to $[0,1]$, where continuity, strict decrease, and `intermediate_value_Icc'` give equality $g(\mathbb R)=[\cos1,1]$, rather than merely inclusion.
+3. **Trapping after the first step.** Since $\cos1>0$, for every real start $z$ and every $n\in\mathbb N$, $g^{[n+1]}(z)\in[\cos1,1]\subset(0,\pi/2)$. There is no such restriction on $g^{[0]}(z)=z$.
+4. **Differentiability everywhere.** Applying `Real.hasDerivAt_cos` twice and the chain rule cancels the two negative signs. At every real $x$, the derivative exists and is $g'(x)=\sin(\cos x)\sin x$.
+5. **A sufficient global bound.** From $|\cos x|,|\sin x|\le1$ and nonnegative increasing sine on $[0,1]$, $|\sin(\cos x)|=\sin|\cos x|\le\sin1$. Set $K=\sin1$. Then $0<K<1$ and $|g'(x)|\le K$ for every real $x$, without asserting optimality.
+6. **Global Lipschitz estimate.** For [lipschitzWith_of_nnnorm_deriv_le](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Analysis/Calculus/MeanValue.lean#L744), clause 4 supplies differentiability and clause 5 supplies the nonnegative constant and derivative norm bound. Thus $|g(u)-g(v)|\le K|u-v|$ for all real $u,v$.
+7. **The same attracting point.** Completeness of $\mathbb R$ makes $g$ `ContractingWith K`. The endpoint equation gives $g(\theta^*)=\theta^*$, and [ContractingWith.fixedPoint_unique'](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Topology/MetricSpace/Contracting.lean#L259) identifies it as the unique real fixed point of $g$.
+8. **Convergence of $g$ from every real start.** [tendsto_iterate_fixedPoint](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Topology/MetricSpace/Contracting.lean#L302) for this contraction gives $g^{[n]}(z)\to\theta^*$ with no interval assumption on $z$.
+9. **The unique real mutual pair.** If $a=\cos b$ and $b=\cos a$, then $g(a)=a$ and $g(b)=b$, hence $a=b=\theta^*$. Conversely, that pair satisfies both equations.
+10. **Exact iterate correspondence.** `Function.iterate_mul` gives $g^{[n]}(z)=f^{[2n]}(z)$ for every real $z$ and natural $n$; this is an identity, not an approximation.
+11. **Convergence of $f$ from every real start.** Clauses 8 and 10 make the even subsequence tend to $\theta^*$. The odd subsequence is $f(f^{[2n]}(z))$, whose limit by continuity is $f(\theta^*)=\theta^*$. Combining both parities gives $f^{[n]}(z)\to\theta^*$, without a global contraction constant below $1$ for $f$ itself.
+12. **The domain of strict order preservation.** For $x\in(0,\pi/2)$, $\sin x>0$ and $0<\cos x\le1<\pi$, so $g'(x)>0$. Continuity, convexity of this domain, and [strictMonoOn_of_deriv_pos](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Analysis/Calculus/Deriv/MeanValue.lean#L377) make $g$ strictly increasing on this acute interval, without a global order assertion.
+13. **Strict bounds below the fixed point.** If $0<y<\theta^*$, strict increase gives $g(y)<\theta^*$, while contraction gives $\theta^*-g(y)\le K(\theta^*-y)<\theta^*-y$. Hence $y<g(y)$.
+14. **A strictly increasing orbit.** For $0<y_0<\theta^*$ set $y_n=g^{[n]}(y_0)$. Induction gives $0<y_n<y_{n+1}<\theta^*$ for every $n\ge0$; the sequence is strictly increasing and converges to $\theta^*$. Convergence from arbitrary real starts does not imply this order pattern.
+15. **An invariant interval for $f$.** Cosine maps $[0,1]$ into itself, and restricting `Real.strictAntiOn_cos` gives strict decrease there.
+16. **The premise for never hitting the endpoint.** Assume $x_0\in[0,1]$ and $x_0\ne\theta^*$, and put $x_n=f^{[n]}(x_0)$. Injectivity on the interval and $f(\theta^*)=\theta^*$ prevent a nonfixed point from mapping to $\theta^*$. Induction keeps every $x_n\in[0,1]\setminus\{\theta^*\}$.
+17. **Strict alternation.** Under clause 16's hypotheses, for every $n\ge0$, $x_n<\theta^*\iff\theta^*<x_{n+1}$ and $\theta^*<x_n\iff x_{n+1}<\theta^*$. Equivalently, $(x_n-\theta^*)(x_{n+1}-\theta^*)<0$. These strict claims are not extended to arbitrary real starts.
+18. **The positive endpoint exception.** For every $n\in\mathbb N$, $f^{[n]}(\theta^*)=g^{[n]}(\theta^*)=\theta^*$; the orbit is stationary.
+19. **The negative endpoint exception.** Evenness gives $f(-\theta^*)=g(-\theta^*)=\theta^*$, hence $f^{[n+1]}(-\theta^*)=g^{[n+1]}(-\theta^*)=\theta^*$. This start arrives in one application, with zero errors thereafter. Neither endpoint exhibits strict alternation or error ratios with nonzero denominators. No exhaustive classification of real preimages is asserted.
+20. **Exact local factors.** `Real.sin_sq_add_cos_sq`, `Real.sin_eq_sqrt_one_sub_cos_sq`, and acute positivity give $\sin^2\theta^*=1-(\theta^*)^2$ and $\sin\theta^*=\sqrt{1-(\theta^*)^2}$. Thus $f'(\theta^*)=-\sqrt{1-(\theta^*)^2}$, with $-1<f'(\theta^*)<0$.
+21. **The composite derivative.** Clause 4 at the same point gives $g'(\theta^*)=\sin^2\theta^*=1-(\theta^*)^2=(f'(\theta^*))^2$, with $0<g'(\theta^*)<1$. The negative derivative reverses local signed error; the positive derivative preserves its sign.
+22. **Slopes on the full punctured neighborhood.** [HasDerivAt.tendsto_slope](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Analysis/Calculus/Deriv/Slope.lean#L76) converts both derivative-existence statements into limits as $x\to\theta^*$ with $x\ne\theta^*$: $(f(x)-\theta^*)/(x-\theta^*)\to-\sqrt{1-(\theta^*)^2}$ and $(g(x)-\theta^*)/(x-\theta^*)\to1-(\theta^*)^2$. These hold along the full punctured real neighborhood, not just from one side, and are not finite-distance error identities.
+23. **Orbit error ratios.** Under clause 16's starting conditions, every $e_n=x_n-\theta^*$ is nonzero and consecutive errors have negative product. Composing the punctured slope limit with this convergent orbit gives $e_{n+1}/e_n\to-\sqrt{1-(\theta^*)^2}$. For $0<y_0<\theta^*$, every $d_n=y_n-\theta^*<0$ is nonzero, and similarly $d_{n+1}/d_n\to1-(\theta^*)^2$. Neither ratio claim is extended to all real starts.
+24. **Cost per cosine evaluation.** Both factor magnitudes lie strictly between $0$ and $1$, and the second is the square of the first. This compares applications of the selected maps. One $g$ application requires two cosine evaluations, whereas one $f$ application requires one. The exact identity $g^{[n]}(z)=f^{[2n]}(z)$ compares identical orbits from the same start at the same number of cosine evaluations; the squared factor supplies no speedup per evaluation or wall-clock advantage.
 
-   Because $-1 < f'(\theta^*) < 0$, linearized errors obey $x_{k+1} - \theta^* \approx (-0.673612)(x_k - \theta^*)$, flipping sign at every single step in an alternating cobweb spiral around $\theta^*$.
-2. **Symmetric Mutual Reference $\psi_A = \cos\psi_B,\; \psi_B = \cos\psi_A$ and Unique Monotonic Locking**: Eliminating $\psi_B$ from the equilibrium equations yields $g(x) := \cos(\cos x)$. If each observer synchronously updates from the other's current value, each coordinate completes one application of $g$ after two ticks; the sequence $y_k$ below samples these two-step rounds. With equal initial values, both observers still follow the alternating $f$ trajectory at every tick: monotonicity belongs to the complete composite round. This map has three rigid properties:
-   - **One-round trapping inside $(0, \pi/2)$**: Since $\cos x \in [-1, 1]$ for all $x \in \mathbb{R}$ and cosine is even and strictly decreasing on $[0, 1]$, the global image of $\mathbb{R}$ is compressed in a single cycle into
+**Separate numerical and literature boundaries.** Global contraction uses only the coarse $K=\sin1$. The decimal values $\theta^*\approx0.73908513$, $f'(\theta^*)\approx-0.673612$, and $g'(\theta^*)\approx0.453753$, as well as a sharp global bound near $0.461063$ and a maximizing argument near $0.828132$, require separate numerical or optimization certificates. The critical equation $(1-t^2)\cos t=t\sin t$ is only a route to that analysis. The original ledger below, starting at $1/10$ for $n=0,\ldots,5$, its rounding, and finite-step error comparisons are likewise not certified by the qualitative application. Physical, philosophical, ontological, and transcendental algebraic-independence claims ([@conj-schanuel-dottie]) retain their respective boundaries.
 
-     $$
-     g(\mathbb{R}) \;=\; [\cos 1,\; 1] \;\approx\; [0.540302,\; 1] \;\subset\; (0, \pi/2).
-     $$
-
-   - **Global contraction on $\mathbb{R}$ and impossibility of period-2 disagreement**: By the chain rule, $g'(x) = \sin(\cos x)\sin x$. Since $\lvert\cos x\rvert \le 1 < \pi/2$ everywhere on $\mathbb{R}$, one has $\lvert g'(x)\rvert = \lvert\sin(\cos x)\rvert\,\lvert\sin x\rvert \le \sin(1)\cdot 1 \approx 0.841471 < 1$ (optimizing $g''(x) = 0$ on $(0, \pi/2)$ sharpens the global supremum to $\sup_{x \in \mathbb{R}}\lvert g'(x)\rvert \approx 0.461063 < 1$ at $x \approx 0.828132$). If any distinct real pair $\psi_A \neq \psi_B$ satisfied $\psi_A = \cos\psi_B$ and $\psi_B = \cos\psi_A$, both would be fixed points of $g$, and the Lagrange Mean Value Theorem would give some $\xi$ between them with
-
-     $$
-     \lvert\psi_A - \psi_B\rvert \;=\; \lvert g(\psi_A) - g(\psi_B)\rvert \;=\; \lvert g'(\xi)\rvert\,\lvert\psi_A - \psi_B\rvert \;\le\; (\sin 1)\,\lvert\psi_A - \psi_B\rvert \;<\; \lvert\psi_A - \psi_B\rvert,
-     $$
-
-     a contradiction! Thus **no period-2 disagreement $\psi_A \neq \psi_B$ can exist**: $\psi_A = \psi_B = \theta^*$ is the unique real mutual equilibrium.
-   - **Strictly positive derivative and the local linear factor per round**: On the invariant interval $(0, \pi/2)$, both $\cos x \in (0, 1)$ and $\sin x \in (0, 1)$ are strictly positive, whence
-
-     $$
-     g'(x) \;=\; +\sin(\cos x)\sin x \;>\; 0 \quad \forall x \in (0, \pi/2), \qquad g'(\theta^*) \;=\; +\sin^2\theta^* \;\approx\; +0.453753 \;>\; 0.
-     $$
-
-     On the clock of complete two-step rounds, order-preserving positivity of $g = f \circ f$ eliminates overshoot in the sampled trajectory: starting from any $0 < y_0 < \theta^*$, the iterates satisfy $y_k < y_{k+1} < \theta^*$ for every $k \ge 0$, locking monotonically onto $\theta^*$ with per-round factor $\approx 0.4538 = 0.6736^2$ across each two-evaluation mutual round.
-3. **Side-by-Side Numerical Ledger ($x_0 = y_0 = 0.100000$, Steps $k = 0 \dots 5$)**: Here $x_k$ counts $k$ single steps and $y_k$ counts $k$ two-step rounds, so $y_k = x_{2k}$. Comparing residuals at the same $k$ therefore compares different evaluation counts; the squared linear factor per round provides no speedup at equal cost.
+**Side-by-Side Numerical Ledger ($x_0 = y_0 = 0.100000$, Steps $k = 0 \dots 5$)**: Here $x_k$ counts $k$ single steps and $y_k$ counts $k$ two-step rounds, so $y_k = x_{2k}$. Comparing residuals at the same $k$ therefore compares different evaluation counts; the squared linear factor per round provides no speedup at equal cost.
 
 | Step $k$ | Solitary $x_k$ ($x_{k+1}=\cos x_k$) | Error $x_k - \theta^*$ | Mutual $y_k$ ($y_{k+1}=\cos(\cos y_k)$) | Error $y_k - \theta^*$ | Dynamical Regime Comparison |
 | :---: | :---: | :---: | :---: | :---: | :--- |
@@ -181,7 +201,17 @@ Look at the two cobweb trajectories in the right panel of [@rem-ch33-mutual-attr
    Distilled into a single geometric aphorism (`MODEL`): **solitary introspection is a mirror of negative slope—the harder you stare into yourself alone, the more violently you whipsaw between self-doubt and overreach; only when two observers measure each other at eye level do two negatives multiply into a serene positive, locking two restless trajectories monotonically into one shared fixed point.**
 :::
 
+::: {.viz src="mutual-observer-attractors" preset="round" height="500"}
+**Two beats a round, from one side only.** The same orbit sampled every two beats (the hollow rings): $0.1 \to 0.544 \to 0.656 \to 0.702 \to \dots$ closes in monotonically on one side of $\theta^*$, the error multiplied by about $0.454 = 0.674^2$ a round; a round costs two cosine evaluations ([@ex-ch33-mutual-cosine-monotonic-lock], clauses 14, 21, 23 and 24, and the numerical ledger).
+:::
+
 Stepping back from the trajectory ledger of [@ex-ch33-mutual-cosine-monotonic-lock], within our relational observer `MODEL`, stepping out of isolation into eye-level mutual reflection is never a sentimental concession—it is the endogenous geometry that frees bounded beings from solitary oscillation.
+
+The same holds when the two start apart. The curve $x = \cos y$ along which A reads B and the curve $y = \cos x$ along which B reads A meet only at $(\theta^*, \theta^*)$ on the diagonal ([@ex-ch33-mutual-cosine-monotonic-lock], clause 9); sampled round by round, each reading is an orbit of $g$ and closes in on that point from any real start (clause 8), and from a start in $(0, \theta^*)$ it increases strictly from below (clauses 12–14).
+
+::: {.viz src="mutual-observer-attractors" preset="apart" height="500"}
+**Different starts, a single meeting point.** A starts at 1.5, B at 0: the cyan curves $x = \cos y$ and $y = \cos x$ meet only at $(\theta^*, \theta^*)$ on the diagonal, and the hollow rings close in on it, A's reading from above and B's from below.
+:::
 
 ---
 
@@ -196,6 +226,10 @@ W_{AB} \;:=\; (W + u_A) \cap (W + u_B) \;\subset\; E_\perp^3.
 $$
 
 Whenever their internal phase offset $\lVert u_A - u_B\rVert$ is small enough that $\operatorname{Vol}(W_{AB}) > 0$, every parent lattice vertex $z \in \mathbb{Z}^6$ with $\pi_\perp(z) \in W_{AB}$ projects **simultaneously** into both $\mathcal{O}_A$'s and $\mathcal{O}_B$'s physical three-spaces—constituting an objective public world co-witnessed without translation friction! This shared support is a model image of public fact; applying Conjunct 4 of [@thm-ch33-contextual-attractor-and-common-factor] still requires a declared family of contexts and fixed meanings, a fixed factor map, and a witness that it takes the same value throughout that family. A two-window intersection alone does not supply this witness. Conversely, lattice points in the symmetric difference $(W + u_A) \triangle (W + u_B)$ are sources of perceptual friction. Alignment incurs the corresponding erasure heat when it actually resets records irreversibly, reducing their entropy under the applicable thermal and balance assumptions of [Chapter 31](ch31-quantum-fairness.md) [@thm-ch31-horizon-landauer-ergodic-fairness], Conjunct 1. If the `MODEL` further assigns an alignment cost or free energy that decreases as overlap grows, **drifting together up the overlap gradient $\nabla\operatorname{Vol}(W_{AB})$ becomes a free-energy descent toward mutual alignment**! This slope toward home comes from the chosen cost correspondence; neither comparison alone nor the Landauer bound supplies it.
+
+::: {.figure src="ch33-window-overlap"}
+**The intersection of two windows is the world both observers see.** The two regular decagons are the translated windows $W + u_A$ and $W + u_B$; the grey arrow is the phase offset $u_B - u_A$. Lattice points in the cyan intersection $W_{AB}$ appear in both worlds; the magenta parts are seen by one observer only. With the centres $0.7$ circumradii apart, the intersection covers about $0.55$ of a window. Schematic (`MODEL`): the three-dimensional rhombic-triacontahedral window is drawn as a two-dimensional decagon.
+:::
 
 Simultaneously, in the tensor-network weaving of spatial cross-sections, when do two boundary observer domains coupled across a width-three internal bridge switch their minimum cut to the outer boundary? `trureturing`'s bridge-graph quantum max-flow min-cut proposition gives a sufficient regime defined by positivity and balanced quadratic-cone conditions on natural-number bond dimensions:
 
@@ -238,6 +272,10 @@ Connecting discrete bridge min-cut switching to continuum holographic minimal-su
    $$
 :::
 
+::: {.viz src="mutual-observer-attractors" preset="transition" height="500"}
+**Bring the intervals closer and the two cuts tie.** Two intervals of length 1 (amber) come closer from $d = 2.5$; at $d = \sqrt{2} - 1 \approx 0.414$ the separate pair of semicircles and the connected pair (a small one over the gap, a large one over the whole span) are equally long, and both are drawn magenta. The stage uses geodesic lengths in static AdS₃ vacuum, a literature result of [@rem-ch33-rt-reconnection-ckw-literature], Item 1, not formalized in this book.
+:::
+
 Bringing together window overlap $\operatorname{Vol}(W_{AB})$, mutual convergence trajectories ([@ex-ch33-mutual-cosine-monotonic-lock]), minimal-cut reconnection ([@prop-ch33-bridge-reconnection-mincut]), and entanglement allocation ([@rem-ch33-rt-reconnection-ckw-literature]), our **`MODEL` (interpretive model)** reveals a single geometric mechanism animating three seemingly disparate forms of attraction across nature:
 
 - **Macroscopic Gravitational Gathering**: Vast ensembles of order-$1$ ($M = 1$) matter particles share overlapping spatial projections, reconnecting surrounding minimal cuts in bulk and guiding passing worldlines down geodesics of minimal alignment cost;
@@ -246,6 +284,14 @@ Bringing together window overlap $\operatorname{Vol}(W_{AB})$, mutual convergenc
 
 This resolves one of human life's most haunting mysteries: why, on a street corner in an unfamiliar city where you have never set foot before, can encountering a stranger—or reading a line written centuries ago—trigger an unmistakable shock of instant recognition, even though birth initialization wiped away every episodic name, date, and narrative trace (`量 liàng`)?
 
-Because episodic forgetting cleared only surface particle ticks while leaving each observer's deep operator phase $u_A, u_B \in E_\perp^3$ (`量 liáng`) intact! The instant two phase-resonant beings ($\lVert u_A - u_B\rVert \to 0$) cross paths, their rhombic-triacontahedral acceptance windows snap into near-complete overlap $W_{AB} \approx W + u_A$, their minimal entanglement cuts reconnect into a shared bulk bridge, and solitary oscillatory whipsawing settles into quiet equilibrium through eye-level mutual reflection (trajectory comparison in [@ex-ch33-mutual-cosine-monotonic-lock])—braiding their trajectories into the mutually stabilizing **double helix** shown in the left panel of Figure 33. Instant recognition is never superstition: it is two mobile attractors of matching internal inclination recognizing in each other a zero-friction geometric homeland across the fog of forgetting.
+Because episodic forgetting cleared only surface particle ticks while leaving each observer's deep operator phase $u_A, u_B \in E_\perp^3$ (`量 liáng`) intact! The instant two phase-resonant beings ($\lVert u_A - u_B\rVert \to 0$) cross paths, their rhombic-triacontahedral acceptance windows snap into near-complete overlap $W_{AB} \approx W + u_A$, their minimal entanglement cuts reconnect into a shared bulk bridge, and solitary oscillatory whipsawing settles into quiet equilibrium through eye-level mutual reflection (trajectory comparison in [@ex-ch33-mutual-cosine-monotonic-lock])—braiding their trajectories into a mutually stabilizing **double helix**. Instant recognition is never superstition: it is two mobile attractors of matching internal inclination recognizing in each other a zero-friction geometric homeland across the fog of forgetting.
+
+::: {.viz src="mutual-observer-attractors" preset="connected" height="500"}
+**Closer still, the connected cut wins.** At $d = 0.2$ the connected cut (magenta) is shorter, the cyan entanglement wedge reaches from A to B in one piece, and the leading-order mutual information is $\ln\bigl(1/(0.2 \times 2.2)\bigr) \approx 0.82 > 0$; dashed is the separate cut that loses.
+:::
 
 Yet if the universe excised the external reference point $C$ and all beings measure one another as mobile attractors on an isotropic sphere, an urgent geometric question immediately arises: **on a featureless unit sphere with no privileged origin, how does an observer ever determine *where* it stands? Why does a single inner-product reading leave an entire equatorial circle of degeneracy, and why is it specifically the degeneracy and breaking of *orthogonality ($90^\circ$)* that pins down an observer's unique address?** That is the door we open in the next chapter (Chapter 34).
+
+::: {.viz src="mutual-observer-attractors" height="620"}
+**Mutual attractors: the full lab.** Two scenes: mirrors (move the two starts, watch beat by beat or round by round) and min cut (set the two lengths, bring the gap closer). The convergence of the mutual reading and its local factor per round are an application of existing results in [@ex-ch33-mutual-cosine-monotonic-lock] (the decimals are numerical), and the minimal-surface transition is a literature result, not formalized in this book; the green box cites only [@prop-ch33-bridge-reconnection-mincut], which concerns a discrete bridge graph and does not cover the continuous picture on the stage.
+:::

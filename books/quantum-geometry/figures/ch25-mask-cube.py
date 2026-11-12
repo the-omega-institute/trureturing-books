@@ -70,10 +70,10 @@ def draw(fig):
                  color="now" if on else "ink", anchor=anc, weight=600 if on else None, halo=True)
 
     # direction keys
-    fig.text(O[0] + E[0][0] / 2, O[1] + 26, t("→ *e*_{1}（第 0 位）", "→ *e*_{1} (bit 0)"), size=13, color="dim",
+    fig.text(O[0] + E[0][0] / 2, O[1] + 26, t("→ *e*_{1}（第 0 位）", "→ *e*_{1} (bit 0)"), size=14, color="dim",
              anchor="middle")
-    fig.text(O[0] - 18, O[1] + E[2][1] / 2, t("↑ *e*_{3}", "↑ *e*_{3}"), size=13, color="dim", anchor="end")
+    fig.text(O[0] - 18, O[1] + E[2][1] / 2, t("↑ *e*_{3}", "↑ *e*_{3}"), size=14, color="dim", anchor="end")
     x2, y2 = corner(0b010)
-    fig.text(O[0] + E[1][0] / 2 - 14, O[1] + E[1][1] / 2 - 4, "*e*_{2}", size=13, color="dim", anchor="end")
+    fig.text(O[0] + E[1][0] / 2 - 14, O[1] + E[1][1] / 2 - 4, "*e*_{2}", size=14, color="dim", anchor="end")
     fig.text(470, 330, t("乘 *e*_{23}：在 *e*_{2}、*e*_{3} 上各走一步", "× *e*_{23}: one step along *e*_{2}, one along *e*_{3}"),
-             size=13, color="now", anchor="end")
+             size=14, color="now", anchor="end")

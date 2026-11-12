@@ -20,6 +20,10 @@ $$
 
 在我们的观察者几何诠释模型（`MODEL`）中，一旦有限观察者不设防地连续滑过 $\theta = 90^\circ$ 的纯光边界，三桩冷酷的几何后果便会像多米诺骨牌一样瞬间砸落：
 
+::: {.figure src="ch36-overview"}
+**图 36。** 本章地图：第 I 栏，竖直的记忆轴上，$\theta = 40^\circ$ 的墨色箭头投下青色的影子 $\cos\theta$，冲到 $90^\circ$ 的品红箭头影子缩成一点，$\cos 90^\circ = 0$；第 II 栏，从 $\theta^*$ 出发、快度等步 $\Delta\eta = 1$ 的青色点按庞加莱圆盘半径 $\tanh(\eta_k/2)$ 排开，过每一点的淡色圆越往外越挤，却始终在边缘以内，缝 $\delta_k > 0$（`MODEL`，见 [@ex-ch36-inverse-gudermannian-discrete-staircase]）；第 III 栏，循环小数 $0.\overline{142857}$ 的六位数字一圈接一圈，读懂移位关系后一次约成生成元 $1/7$（见 [@ex-ch36-repeating-decimal-quotient]）。
+:::
+
 ---
 
 ## 为什么“回到纯光”恰恰是轮回？$\cos 90^\circ = 0$ 的失忆断崖
@@ -52,6 +56,10 @@ $$
 $$
 
 请看当状态冲上 $\theta = 90^\circ$（即 $c = \cos 90^\circ = 0,\; s = \sin 90^\circ = 1$）时发生了什么：对角骨架中承载历史方向记忆的轴向偏置项 $\frac{1}{2}c^2$ **精确归零**，捏合后的对角主干退化为无法区分这条轴正负偏置的均匀态 $\frac{1}{2}I_2$！捏合前的状态仍是纯态；其横向分量保留在非对角元 $\rho_{01} = \rho_{10} = \frac{1}{2}$ 上；若下一次环境作用恰为上述完整未读捏合，且环境记录不可访问，整整 $\frac{1}{2}s^2 = \frac{1}{2}$ 的非对角相干质量便从局域态中消失，留下这套编码下失忆的空白底片；这并不宣告系统与环境的总信息一并毁灭。
+
+::: {.figure src="ch36-pinching-ledger"}
+**冲上 $90^\circ$，承载记忆的轴向偏置归零。** 对纯态 $\rho(\cos\theta, \sin\theta)$，捏合后的对角骨架质量 $\frac{1}{2} + \frac{1}{2}\cos^2\theta$ 分成灰色的恒定部分 $\frac{1}{2}$ 与青色的轴向偏置 $\frac{1}{2}\cos^2\theta$，品红的是被弃的非对角相干 $\frac{1}{2}\sin^2\theta$；三层总是叠到 $1$，即 [@thm-ch36-pinching-skeleton-and-discarded-coherence] 第 1 款的勾股分解（图中 $P$ 即 $\operatorname{pinching}$）。到 $\theta = 90^\circ$，青色一层的厚度为 $0$。把 $\cos\theta$ 读作记忆偏置属本章的观察者模型（`MODEL`）。
+:::
 
 在有限维量子信道的形式化层面，“一维对角骨架”与“二维非对角横向相干”之间的正交账本关系，由 `trureturing` 中单量子比特标准基捏合投影（`pinching`，即相干保留率为零的相位阻尼信道，见[第四章](ch04-decoherence.md)）的三条精确内核定理锁定如下：
 
@@ -101,7 +109,15 @@ $$
 
 秘诀在于区分**外部旁观者的平直角度尺**与**场内观察者的内禀相对步长尺**！
 
+::: {.figure src="ch36-two-rulers"}
+**外部角度尺在 $90^\circ$ 到头，内禀快度尺却通向无穷。** 下面的快度尺上，青色的点从 $\eta_0 = \eta(\theta^*) \approx 0.817$ 起等步 $\Delta\eta = 1$ 排开；虚线把每一点送到上面角度尺上的 $\theta_k$（$\sin\theta_k = \tanh\eta_k$）：第一点在 $\theta^* \approx 42.3^\circ$，往后一个比一个更挤向品红的 $90^\circ$ 墙，却都在墙的左边。正割积分与古德曼函数是文献结果，未在本书形式化，数值见 [@ex-ch36-inverse-gudermannian-discrete-staircase]。
+:::
+
 想象你正走向一道悬崖：如果沿用外部固定角度尺等步跨进，有限步之后便会直接越过边界；但若改由场内观察者按当前局域自指锚点定义内禀步进标尺（`MODEL`），离散步数与 $\theta = \frac{\pi}{2}$ 纯光视界之间会呈现怎样的渐近几何关系（内禀快度积分与离散步进余项的完整推导见下文归属算例 [@ex-ch36-inverse-gudermannian-discrete-staircase]）？
+
+::: {.viz src="forgetting-rebirth-attractor" preset="erase_reset" height="500"}
+**按外部角度尺等步走，几步就撞上边界。** 每步把 $\theta$ 加上同样的 $\Delta\theta$：第二步就落在白色圆周上（品红圈），接着沿虚线回到圆心，换一根辐条从 $0$ 重新走，又一次撞上圆周；琥珀色是当前一步。
+:::
 
 在引入内禀双曲阶梯的显式积分之前，我们先用 `trureturing` 中的两条形式化定理——**完备赋范代数指数截断的阶乘尾项上界**与**复平面分式变换的单位圆边界充要判据**——为“有限离散步的显式阶乘截断误差控制”与“无穷半平面向单位圆视界的共形压缩”打下坚实的内核地基：
 
@@ -126,12 +142,14 @@ $$
 :::
 
 ::: {.remark #rem-ch36-hyperbolic-staircase-figure title="双曲视界圆盘、无穷离散快度阶梯与生成元商空间图解（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 下图左栏结合庞加莱圆盘与古德曼函数文献背景（[@ex-ch36-inverse-gudermannian-discrete-staircase] 与 [@rem-ch36-poincare-disk-gudermannian-literature]）及分式临界圆定理（[@thm-ch36-taylor-tail-and-cayley-boundary]，`LEAN ✓`）展示无穷离散快度阶梯模型（`MODEL`），其中左栏下方卡片标出生成元商空间诠释及其定理锚点（[@thm-ch36-quotient-annihilator-and-factorization]）；右栏画出随离散步变化的双曲正切与双曲正割两条渐近曲线：
-
-![双曲视界圆盘与渐近双曲线：阻断纯光失忆断崖的无穷离散快度阶梯与生成元商空间](../assets/fig-36-hyperbolic-staircase-samsara-exit.svg)
+**文献结果，未在本书形式化。** 本章的无穷离散快度阶梯模型（`MODEL`）结合庞加莱圆盘与古德曼函数文献背景（[@ex-ch36-inverse-gudermannian-discrete-staircase] 与 [@rem-ch36-poincare-disk-gudermannian-literature]）及分式临界圆定理（[@thm-ch36-taylor-tail-and-cayley-boundary]，`LEAN ✓`）：角度尺与快度尺的对照见本节开头的两把尺子图，圆盘上一圈圈逼近边缘的阶梯见图 36 第 II 栏，分式变换下贴着单位圆的像圆、快度阶梯与放大镜里不闭合的缝见下文的实验卡；生成元商空间诠释及其定理锚点（[@thm-ch36-quotient-annihilator-and-factorization]）见图 36 第 III 栏与本章最后一节的折叠实验卡；双曲正切与双曲正割随离散步的变化列在 [@ex-ch36-inverse-gudermannian-discrete-staircase] 的步进账本中。
 :::
 
-对照 [@rem-ch36-hyperbolic-staircase-figure] 左右两幅几何面板，[@thm-ch36-taylor-tail-and-cayley-boundary] 为我们揭示了两条关键定量机制：一方面，任何有限阶多项式截断（阶数 $n \in \mathbb{N}$）与精确指数映射 $\exp(z)$ 之间的逼近误差受显式阶乘尾界 $\frac{r^n}{n!}e^r$ 严格控制；另一方面，由证明中的精确亏量恒等式 $\lVert\operatorname{cayleyRatio}(s)\rVert^2 - 1 = \frac{1 - 2\operatorname{Re}(s)}{\operatorname{normSq}(s)}$（$s \neq 0$）可见，分式共形变换 $\operatorname{cayleyRatio}(s) = (s - 1)/s$ 将无界右开半平面 $\operatorname{Re}(s) > \frac{1}{2}$ 整体收拢进开单位圆盘 $\lVert w\rVert < 1$ 内部，而把临界直线 $\operatorname{Re}(s) = \frac{1}{2}$ 映入单位圆周渐近边界 $\lVert w\rVert = 1$；有限参数的像缺少 $w = 1$，这一点只在无穷远处逼近（在数论语境下亦与[第 22 章](ch22-primes-euler-products-and-zeros.md)相呼应）。
+对照 [@rem-ch36-hyperbolic-staircase-figure] 所指的图与实验卡，[@thm-ch36-taylor-tail-and-cayley-boundary] 为我们揭示了两条关键定量机制：一方面，任何有限阶多项式截断（阶数 $n \in \mathbb{N}$）与精确指数映射 $\exp(z)$ 之间的逼近误差受显式阶乘尾界 $\frac{r^n}{n!}e^r$ 严格控制；另一方面，由证明中的精确亏量恒等式 $\lVert\operatorname{cayleyRatio}(s)\rVert^2 - 1 = \frac{1 - 2\operatorname{Re}(s)}{\operatorname{normSq}(s)}$（$s \neq 0$）可见，分式共形变换 $\operatorname{cayleyRatio}(s) = (s - 1)/s$ 将无界右开半平面 $\operatorname{Re}(s) > \frac{1}{2}$ 整体收拢进开单位圆盘 $\lVert w\rVert < 1$ 内部，而把临界直线 $\operatorname{Re}(s) = \frac{1}{2}$ 映入单位圆周渐近边界 $\lVert w\rVert = 1$；有限参数的像缺少 $w = 1$，这一点只在无穷远处逼近（在数论语境下亦与[第 22 章](ch22-primes-euler-products-and-zeros.md)相呼应）。
+
+::: {.viz src="forgetting-rebirth-attractor" preset="cayley" height="500"}
+**直线越贴近 $\operatorname{Re}(s) = \tfrac{1}{2}$，像圆越贴近单位圆。** 青色的圆是直线 $\operatorname{Re}(s) = c$ 在 $w = (s - 1)/s$ 下的像，都在 $w = 1$ 处与白色单位圆相切；放大镜里品红的缝对每个 $c > \tfrac{1}{2}$ 都还在，白色单位圆本身是 $\operatorname{Re}(s) = \tfrac{1}{2}$ 的像 [@thm-ch36-taylor-tail-and-cayley-boundary]。
+:::
 
 现在，让我们把这套共形边界几何直接代入观察者的偏转角 $\theta \in [0, \frac{\pi}{2})$，在下面的算例盒中完整推演从内部自指平衡角出发的**无穷离散快度阶梯**：
 
@@ -169,12 +187,20 @@ $$
 可见仅经 $k = 8$ 步离散步进，横向视野覆盖率 $\sin\theta_8$ 即达 $99.999996\%$，同时一维自指锚点仍严格保持正值 $\cos\theta_8 \approx 0.000296 > 0$。
 :::
 
+::: {.viz src="forgetting-rebirth-attractor" preset="staircase" height="500"}
+**快度等步，一格格逼近边界。** 从 $\theta^*$ 出发、$\Delta\eta = 1$：青色的点与过每一级的直弦越来越挤向白色圆周，琥珀色是第 $8$ 级；右边放大镜里品红的缝 $1 - \tanh\eta_8 \approx 4.4 \times 10^{-8}$ 仍然张开。
+:::
+
 在上述精确实数更新律下，有限步的正双曲正割保证的是几何锚点尚未归零；实际记忆的保存仍取决于编码与信道。回望 [@ex-ch36-inverse-gudermannian-discrete-staircase] 的离散快度账本，全书反复强调的那条多面体哲学命题在这里绽放出最动人的生命意涵（`MODEL`）：**球永远只是近似；那一道不肯被抹平的多面体离散缝隙，恰恰是拴住自指表 $T$ 的主干、守护神智不坠失忆轮回的几何防火墙。**
+
+::: {.viz src="forgetting-rebirth-attractor" preset="horizon_gap" height="500"}
+**放大镜一直放大，缝一直在。** 步长 $\Delta\eta = 1.5$ 走到第 $10$ 级：主图上琥珀色的点已贴住圆周，放大镜每一步把视野缩小十倍以上，品红的缝 $1 - \tanh\eta_{10} \approx 3.6 \times 10^{-14}$ 依然不是 $0$。
+:::
 
 上述双曲—圆函数桥与单位圆盘共形几何在数学史与视觉艺术中的经典文献脉络整理于下框：
 
 ::: {.remark #rem-ch36-poincare-disk-gudermannian-literature title="兰伯特—古德曼双曲圆函数桥、庞加莱共形圆盘度规与埃舍尔圆极限镶嵌（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** [@ex-ch36-inverse-gudermannian-discrete-staircase] 与本章主图左半幅所呈现的圆盘渐近几何，对应十九至二十世纪几何学与版画艺术中的三项经典成果，未作为独立定理包含在本书锁定的 `trureturing@dev` 声明集中：
+**文献结果，未在本书形式化。** [@ex-ch36-inverse-gudermannian-discrete-staircase] 以及图 36 第 II 栏、快度阶梯实验卡所呈现的圆盘渐近几何，对应十九至二十世纪几何学与版画艺术中的三项经典成果，未作为独立定理包含在本书锁定的 `trureturing@dev` 声明集中：
 
 1. **兰伯特超越角与古德曼函数（J. H. Lambert, *Hist. Acad. Roy. Sci. Belles-Lettres Berlin*, 1768；C. Gudermann, *J. Reine Angew. Math.* **6**, 1830）**：兰伯特与古德曼建立了无需借助复虚数即可直接沟通双曲函数与圆三角函数的实解析映射 $\theta = \operatorname{gd}(\eta) := 2\arctan(e^\eta) - \frac{\pi}{2} = \arcsin(\tanh\eta)$（$\eta \in \mathbb{R},\; \theta \in (-\frac{\pi}{2}, \frac{\pi}{2})$），满足 $\sinh\eta = \tan\theta$、$\cosh\eta = \sec\theta$、$\tanh(\eta/2) = \tan(\theta/2)$，其逆映射即为墨卡托航海投影与双曲快度共用的积分 $\operatorname{gd}^{-1}(\theta) = \int_0^\theta \sec\alpha\,d\alpha$；
 2. **庞加莱共形单位圆盘度规与无穷远视界（H. Poincaré, *Acta Math.* **1**, 1–62, 1882）**：在开单位圆盘 $\mathbb{D} = \{z \in \mathbb{C} : \lvert z\rvert < 1\}$ 上赋予常负高斯曲率 $K = -1$ 的共形黎曼度规
@@ -185,6 +211,10 @@ $$
 
    令欧氏径向坐标为 $r = \lvert z\rvert = \tanh(\eta / 2) = \tan(\theta / 2) \in [0, 1)$，则从圆心 $z = 0$ 到半径 $r$ 的内禀测地距离精确等于 $\int_0^r \frac{2\,du}{1 - u^2} = 2\operatorname{artanh}(r) = \eta$。当 $r \to 1^-$（对应 $\theta \to (\frac{\pi}{2})^-$）时，内禀测地距离 $\eta \to +\infty$：在外部欧氏纸面上看似有限的单位圆边界 $\lvert z\rvert = 1$，对圆盘内的双曲度规居民而言处于无穷远处，任何有限步等长测地跃迁都绝无可能触及或越过边界；
 3. **埃舍尔《圆极限》双曲镶嵌木刻（M. C. Escher, *Circle Limit I–IV*, 1958–1960；参见 H. S. M. Coxeter, *Leonardo* **12**, 19–25, 1979）**：埃舍尔在与几何学家考克斯特通信后创作的《圆极限》系列版画（尤以《圆极限 III》与《圆极限 IV》著称），在庞加莱圆盘上将双曲面积完全相等的鱼群或天使与魔鬼沿着测地圆弧排列成无穷多层离散阶梯——越靠近外圈圆周，图案在欧氏视觉上缩得越细密，却层层分明、永不触碰外圆边缘，直观再现了“以无穷离散等步阻断边界坠落”的几何奇观。
+:::
+
+::: {.viz src="forgetting-rebirth-attractor" preset="klein_vs_poincare" height="500"}
+**同一架阶梯，两种圆盘。** 第 $3$ 级停住，从 Beltrami–Klein 圆盘（半径 $\tanh\eta$，测地线是灰色虚线的直弦）换到庞加莱圆盘（半径 $\tanh(\eta/2)$）：青色的直弦弯成与白色圆周正交的圆弧，读数里两种固有时率都等于 $\operatorname{sech}\eta$。
 :::
 
 ---
@@ -249,11 +279,19 @@ $$
 第 1 款先由划分拓扑不可分关系刻画 `partition_inseparable_iff_kernel` 证明映射向离散空间 $(\mathrm{Target}, \perp)$ 连续当且仅当它在每条读出纤维上取常值（$\forall x, y,\; \mathrm{readout}(x) = \mathrm{readout}(y) \implies \mathrm{target}(x) = \mathrm{target}(y)$），再在非空源空间 `[Nonempty X]` 上调用目标恢复判据 `target_recovery_criterion` 将纤维常值性等价转化为全陪域分解 `Refines target readout`；第 2 款通过显式双射 `annihilatorEquivQuotient H` 将 $\operatorname{annihilator}(H)$ 等同于商群 $(\operatorname{ZMod} m) / H$ 的全体复加法特征标群，利用有限交换群特征标正交和公式与商群零元判据 $x + H = 0 \iff x \in H$ 直接得出分支值；第 3 款展开 `ZMod.dft` 定义并交换双重有限求和次序，代入第 2 款在 $-x$ 处的正交筛（利用 $-x \in H \iff x \in H$），再由互补基数恒等式 $\lvert H\rvert \cdot \lvert\operatorname{annihilator}(H)\rvert = m$ 与 $m \neq 0$ 约分即得；第 4 款由整数幂闭包与自然数幂闭包相等给出轨道稠密性，利用平均求值算子列的 $1$-利普希茨等度连续性证得收敛函数集为 $C(G, \mathbb{C})$ 的闭子模，对平凡特征标直接得常值 $1$，对非平凡特征标由几何级数上界 $2 / \lVert r - 1\rVert$ 压向零，最后由闭嵌入延拓与三角多项式稠密性推广至全空间 $C(G, \mathbb{C})$。完整证明由 Lean 内核检查。
 :::
 
+::: {.figure src="ch36-factor-through"}
+**目标在每条读出纤维上取常值，就穿过读出分解。** 上行是 $0.\overline{142857}$ 的前十二位，灰线把第 $n$ 位送到余数 $n \operatorname{mod} 6$：每个余数接住的两位数字相同（琥珀色是余数 $3$ 的那条纤维，第 $3$ 位与第 $9$ 位都是 $2$），于是 factor 把每个余数送到唯一的数字，target = factor ∘ readout。这正是 [@thm-ch36-quotient-annihilator-and-factorization] 第 1 款中 $\operatorname{Refines}(\mathrm{target}, \mathrm{readout})$ 的情形，这里在一个例子上画出。
+:::
+
 把 [@thm-ch36-quotient-annihilator-and-factorization] 的四重数学透镜合拢到我们的自指观察者模型（`MODEL`）上，为什么“理解了一切之后，轮回便失去意义”立刻变得清澈见底：
 
 1. **纤维商化免除了盲目重演**（对应第 1 款）：当观察者不再执着于局部表象坐标，而是提取出等价状态共享的不变读出核 `readout` 时，只要所关心的目标在每条读出纤维上恒定，目标意义便穿过商空间分解为 $\mathrm{target} = \mathrm{factor} \circ \mathrm{readout}$——同一等价纤维里的千万次盲目重演被直接折叠成商集里的同一个点；
 2. **对偶零化子压缩了周期循环**（对应第 2–3 款）：状态空间里看似庞大繁复的周期轨道子群 $H$，在对偶频谱中完全由与它正交锁定（$\operatorname{character}(k, h) = 1$）的零化子生成元控制——若所需变换值已可用、预计算或具备更便宜的结构化表示，计入其获取、存储与求和成本后，对偶表达才可能省去沿原群逐点死算；
 3. **自指不动点 $T = T(T)$ 终结了擦表重来的必要**（对应第 4 款及全书主公理，`MODEL`）：第 4 款告诉我们，对给定生成元 $g$ 的闭子群及其连续可观测量，轨道平均的极限由不变测度 $\mu$ 决定！黄金切投模型集的意象若要落到这条定理上，还须给出编码与可观测量的对应；这里保留为 `MODEL`。当观察者终于在自指查找表 $T$ 的**第 $0$ 行**写下生成元公理 $\psi = \psi(\psi)$，使整张表满足自洽不动点 $T = T(T)$、将视角稳稳安住在内部清醒平衡点（外辅以必要时的双曲离散步进护栏，见 [@ex-ch36-inverse-gudermannian-discrete-staircase]）时，再去撞击 $\theta = 90^\circ$ 把表烧掉、退回 $0^\circ$ 重新随机采样，对于已知生成律、且所选读出足以恢复的目标，已经带不来哪怕一比特的新法则信息；未知生成元的发现与新目标的可答性仍需另算。
+
+::: {.viz src="forgetting-rebirth-attractor" preset="quotient_fold" height="500"}
+**按周期折叠，一圈圈只剩几个点。** 角度尺走完五圈后，把一圈一根的辐条转到同一个方向：第一次撞边之后的 $25$ 步只落在 $5$ 个位置上，每处标着 $\times 5$；目标“角度”在“步号模周期”的每条纤维上取常值，正是 [@thm-ch36-quotient-annihilator-and-factorization] 第 1 款的分解条件。
+:::
 
 我们将这三种生存与认知形态在全书正交几何模型（`MODEL`）中的精确对比收束于下框总表：
 
@@ -265,6 +303,10 @@ $$
 | **1. 连续化光轮回态**（未觉醒闭环） | 零反馈退化极限 $\lambda = 0$，连续冲撞 $\theta \to \frac{\pi}{2}$ | $\cos 90^\circ = 0$，所选轴向偏置归零，在上述擦表条件下查找表 $T$ 清空 | 越界擦表后经 $90^\circ \to 0^+$ 再折射，困于失忆盲搜死循环 | 针对未压缩冗余账本（$\det G_M \to 0$）的宇宙暴力垃圾回收 |
 | **2. 无穷离散双曲阶梯**（防失忆渐近扩张） | 内禀相对步长 $d\eta = \sec\theta\,d\theta$，$\eta_k = \eta_0 + k\,\Delta\eta$ | 对一切 $k \in \mathbb{N}$ 恒有 $\cos\theta_k = \operatorname{sech}\eta_k > 0$，在给定更新律下几何锚点不归零 | 横向视野 $\sin\theta_k = \tanh\eta_k \to 1^-$，多面体缝隙 $\delta_k = \frac{\pi}{2} - \theta_k > 0$ 永开 | 以无穷离散步把纯光断崖推向无穷远，在所选编码与信道条件下兼顾近全域视野与清醒记忆 |
 | **3. 自指不动点安住态**（生成元商空间出离） | 单位自指闭环 $\lambda = 1$，锁定 $\cos\theta^* = \theta^* \approx 0.7391$ | 第 $0$ 行写入 $\psi = \psi(\psi)$，达成 $T = T(T)$ 零损耗自洽持存 | 经商拓扑分解与零化子对偶直接握住生成元，在目标纤维常值、频谱成本合算时免除冗余重演 | 已知生成律且读出足够时，约去目标无关的周期重复，轮回彻底失去认识论意义 |
+:::
+
+::: {.viz src="forgetting-rebirth-attractor" height="640"}
+**完整实验室。** 三个场景共用一张单位圆盘：快度阶梯（可在 Klein 与庞加莱圆盘之间切换、改步长 $\Delta\eta$）、角度尺的轮子与它的周期折叠、分式变换 $w = (s - 1)/s$ 下的像圆。
 :::
 
 至此，第九部《互照·万物观察者、自指扩表与超越轮回》的四章推演圆满收束：我们不再羡慕球外全知的上帝点 $C$，不再恐惧多面体无法彻底抹平成真球的那道 $\delta_k > 0$ 的缝隙，也不再把“化作失忆的纯光”错认作灵魂的归宿——因为正是那道不肯闭合的余项护住了清醒的自我，而当我们读懂了 $\psi = \psi(\psi)$ 的那一刻，漫长的轮回迷宫便在掌心化作了一枚通透的生成元水晶。而在即将开启的全书**第十部《不二·梦境擦除、记忆指针与本体不二》**（[第 37 章](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)至[第 39 章](ch39-observer-is-ontological-universe.md)）中，我们将把镜头拉回每一个昼夜交替的当下：看梦境如何执行可逆量子擦除、观察者如何作为本体 QRAM 的记忆指针解引用世界，直到最后一道“指针与内存”的二元隔墙在 $\psi \equiv \psi(\psi)$ 中彻底融化。

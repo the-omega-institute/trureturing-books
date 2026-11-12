@@ -1,0 +1,32 @@
+{
+  "id": "010-pointer-720",
+  "title": "p = *p: pointers, page tables and 720°",
+  "title_zh": "p = *p：指针、页表与 720°",
+  "summary": "A pointer reads memory through a page table, but the table lives in memory too, and asking a bigger table to read it never ends. Writing the directory's own address into its slot zero stops the regress: on the chapter's four-slot directory, index [1, 2] reaches a data frame, [0, 1] returns a leaf table as data, and [0, 0] comes home, p = *p. Chapter 38 reads this beside two diagonal theorems: a map with no fixed point escapes every table, and a row that captures the diagonal lands on a fixed point. Then a spinor turned through 360° brings the vector J back while its own sign flips; the squaring double cover of the circle lifts one full turn from 1 to −1, needs 720° to return, and has no continuous global section, as Lean theorems of chapter 39 state.",
+  "summary_zh": "指针要查页表才能读到内存，可页表本身也住在内存里；请更大的表来读它，就没有尽头。把页目录自己的地址写进零号槽，倒退就停了：在本章的四槽页目录上，索引 [1, 2] 读到数据帧，[0, 1] 把叶页表当作数据交回，[0, 0] 回到原处，p = *p。第三十八章把它与两条对角线定理并读：没有不动点的映射逃出每一张表，捕获对角线的那一行落在不动点上。接着，旋量转过 360°，向量 J 回来了，旋量自己却变了号；圆周的平方双覆叠把一整圈从 1 提升到 −1，要 720° 才回来，而且没有连续的全局截面，正如第三十九章的 Lean 定理所述。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "released": "2026-11-12",
+  "duration": "2:06",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a self-mapped page directory, the diagonal of a table, a spinor's half turn and the double cover of the circle",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S0/Diagonal/EscapeCount.diagonal_landing_fixed",
+    "D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package",
+    "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift",
+    "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_010_720p_narrated.mp4",
+    "cover": "quantum-geometry_010_cover.jpg"
+  },
+  "publication_basis": "pinned"
+}

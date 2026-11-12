@@ -261,7 +261,7 @@ $$
 :::
 
 ::: {.figure src="ch14-trace-survives"}
-**解码之后，$\sigma$ 只剩对角线。** 左边是 $4\times 4$ 的噪声矩阵 $\sigma$：对角线上青色的四格取例 [@ex-repetition-code-syndrome] 第四步的 $\frac{1}{2}, \frac{1}{4}, \frac{1}{8}, \frac{1}{8}$，其余十二格是品红的跨房间相干项，全部划掉。四个对角数相加得 $\Tr\sigma = 1$，解码输出 $1 \cdot \rho = \rho$（[@prop-orthogonal-syndrome-recovery]）。相干项取非零值时，在三比特码上的数值核对给出同一个 $\rho$。
+**解码之后，$\sigma$ 只剩对角线。** 上面是 $4\times 4$ 的噪声矩阵 $\sigma$：对角线上青色的四格取例 [@ex-repetition-code-syndrome] 第四步的 $\frac{1}{2}, \frac{1}{4}, \frac{1}{8}, \frac{1}{8}$，其余十二格是品红的跨房间相干项，全部划掉。四个对角数相加得 $\Tr\sigma = 1$，解码输出 $1 \cdot \rho = \rho$（[@prop-orthogonal-syndrome-recovery]）。相干项取非零值时，在三比特码上的数值核对给出同一个 $\rho$。
 :::
 
 [@prop-orthogonal-syndrome-recovery] 的代数结构干净得令人赞叹，在应用时需把握两条精确边界：

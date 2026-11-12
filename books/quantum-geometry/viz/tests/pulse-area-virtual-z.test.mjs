@@ -142,8 +142,8 @@ check('SAME-AREA: the Gaussian envelope has area π/2 (Simpson on the envelope)'
 check('SAME-AREA: it ends at the same point as the square pulse of the same area', vdist(s.r, [0, -1, 0]) < 1e-9 && vdist(s.ghostState.r, [0, -1, 0]) < 1e-9 && s.ghost === 'gauss' && err(s) < 1e-8);
 s = await seek(6);
 check('SAME-AREA: at 6 ns the Gaussian is behind the evenly moving square pulse', s.area < s.ghostState.area - 0.2 && err(s) < 1e-8 && close(s.ghostState.area, PI / 2 * 6 / 25, 1e-12));
-await pick('half'); s = await seek(25);
-check('HALF-TURN: area π takes the north pole to the south pole, P(0) = 0', vdist(s.r, [0, 0, -1]) < 1e-12 && close(s.P0, 0, 1e-12) && err(s) < 1e-9);
+await pick('quarter'); await setRange('area', 1); s = await seek(25);
+check('area slider at π: the square pulse takes the north pole to the south pole, P(0) = 0', vdist(s.r, [0, 0, -1]) < 1e-12 && close(s.P0, 0, 1e-12) && err(s) < 1e-9);
 await pick('detune'); s = await seek(25);
 const miss = Math.acos(run(s, 'main', 25).reduce((a, x, i) => a + x * run(s, 'det', 25)[i], 0)) / DEG;
 check('DETUNED: the time-ordered slices agree with Runge–Kutta to 1e-6', err(s) < 1e-6, `error ${err(s)}`);

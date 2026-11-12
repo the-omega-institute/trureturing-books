@@ -1,56 +1,56 @@
-<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch27-ray-skeleton" data-lang="en" viewBox="0 0 560 408" width="560" height="408" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="A proof skeleton, top to bottom. The dashed frame is the private lemma coordinate_shape_of_connected_ray_tests, with three steps inside: from the hypothesis &#x27;coordinate rays kept&#x27;, the off-diagonal entries vanish, A_{ij} = 0 (hoff); from &#x27;test rays kept&#x27;, two coordinates sharing a support have A_{ii} = A_{jj} (hstep, by sum_eq_single and mul_right_cancel₀); from &#x27;supports connected&#x27;, induction on ReflTransGen makes every diagonal entry equal. Below the frame the proof splits (isEmpty_or_nonempty): for empty ι take c = 1; for non-empty ι take c = A_{bb}, and the hypothesis &#x27;A unitary&#x27; gives |c| = 1. Both branches meet in the green LEAN ✓ unitary_phase_of_connected_ray_tests at the bottom.">
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch27-ray-skeleton" data-lang="en" viewBox="0 0 460 448" width="460" height="448" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="A proof skeleton, top to bottom. The dashed frame is the private lemma coordinate_shape_of_connected_ray_tests, with three steps inside: from the hypothesis &#x27;coordinate rays kept&#x27;, the off-diagonal entries vanish, A_{ij} = 0 (hoff); from &#x27;test rays kept&#x27;, two coordinates sharing a support have A_{ii} = A_{jj} (hstep, by sum_eq_single and mul_right_cancel₀); from &#x27;supports connected&#x27;, induction on ReflTransGen makes every diagonal entry equal. Below the frame the proof splits (isEmpty_or_nonempty): for empty ι take c = 1; for non-empty ι take c = A_{bb}, and the hypothesis &#x27;A unitary&#x27; gives |c| = 1. Both branches meet in the green LEAN ✓ unitary_phase_of_connected_ray_tests at the bottom.">
 <title>A proof skeleton, top to bottom. The dashed frame is the private lemma coordinate_shape_of_connected_ray_tests, with three steps inside: from the hypothesis &#x27;coordinate rays kept&#x27;, the off-diagonal entries vanish, A_{ij} = 0 (hoff); from &#x27;test rays kept&#x27;, two coordinates sharing a support have A_{ii} = A_{jj} (hstep, by sum_eq_single and mul_right_cancel₀); from &#x27;supports connected&#x27;, induction on ReflTransGen makes every diagonal entry equal. Below the frame the proof splits (isEmpty_or_nonempty): for empty ι take c = 1; for non-empty ι take c = A_{bb}, and the hypothesis &#x27;A unitary&#x27; gives |c| = 1. Both branches meet in the green LEAN ✓ unitary_phase_of_connected_ray_tests at the bottom.</title>
 <style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
-<rect x="186" y="8" width="332" height="250" rx="8" class="ts-dim" stroke-width="1.2" stroke-dasharray="5 4" fill="none"/>
-<text class="tf-dim tr-fig-mono" x="352" y="28" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">coordinate_shape_of_connected_ray_tests</text>
-<rect x="275.14" y="42" width="153.72" height="50" rx="6" class="ts-edge tf-panel" stroke-width="1.3"/>
-<text class="tf-ink" x="352" y="63" font-size="14" text-anchor="middle">off-diagonal <tspan font-style="italic">A</tspan><tspan dy="0.28em" font-size="72%">ij</tspan><tspan dy="-0.28em"> = 0</tspan></text>
-<text class="tf-dim tr-fig-mono" x="352" y="82" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">hoff</text>
-<rect x="209.3" y="118" width="285.4" height="50" rx="6" class="ts-edge tf-panel" stroke-width="1.3"/>
-<text class="tf-ink" x="352" y="139" font-size="14" text-anchor="middle"><tspan font-style="italic">x</tspan><tspan dy="0.28em" font-size="72%">i</tspan><tspan dy="-0.28em">, </tspan><tspan font-style="italic">x</tspan><tspan dy="0.28em" font-size="72%">j</tspan><tspan dy="-0.28em"> ≠ 0 ⇒ </tspan><tspan font-style="italic">A</tspan><tspan dy="0.28em" font-size="72%">ii</tspan><tspan dy="-0.28em"> = </tspan><tspan font-style="italic">A</tspan><tspan dy="0.28em" font-size="72%">jj</tspan><tspan dy="-0.28em">​</tspan></text>
-<text class="tf-dim tr-fig-mono" x="352" y="158" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">sum_eq_single · mul_right_cancel₀</text>
-<rect x="252.2" y="194" width="199.6" height="50" rx="6" class="ts-edge tf-panel" stroke-width="1.3"/>
-<text class="tf-ink" x="352" y="215" font-size="14" text-anchor="middle">all <tspan font-style="italic">A</tspan><tspan dy="0.28em" font-size="72%">ii</tspan><tspan dy="-0.28em"> equal</tspan></text>
-<text class="tf-dim tr-fig-mono" x="352" y="234" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">ReflTransGen induction</text>
-<rect x="31.64" y="53" width="116.72" height="28" rx="14" class="ts-dim" stroke-width="1.2" stroke-dasharray="4 3" fill="none"/>
-<text class="tf-dim" x="90" y="71.68" font-size="13" text-anchor="middle">coordinate rays</text>
-<rect x="52.7" y="129" width="74.6" height="28" rx="14" class="ts-dim" stroke-width="1.2" stroke-dasharray="4 3" fill="none"/>
-<text class="tf-dim" x="90" y="147.68" font-size="13" text-anchor="middle">test rays</text>
-<rect x="21.11" y="205" width="137.78" height="28" rx="14" class="ts-dim" stroke-width="1.2" stroke-dasharray="4 3" fill="none"/>
-<text class="tf-dim" x="90" y="223.68" font-size="13" text-anchor="middle">supports connected</text>
-<line x1="352" y1="92" x2="352" y2="112.05" class="ts-dim" stroke-width="1.4" fill="none"/>
-<path d="M352 118 L349.06 111 L354.94 111Z" class="tf-dim"/>
-<line x1="352" y1="168" x2="352" y2="188.05" class="ts-dim" stroke-width="1.4" fill="none"/>
-<path d="M352 194 L349.06 187 L354.94 187Z" class="tf-dim"/>
-<line x1="148.36" y1="67" x2="269.19" y2="67" class="ts-dim" stroke-width="1.4" fill="none"/>
-<path d="M275.14 67 L268.14 69.94 L268.14 64.06Z" class="tf-dim"/>
-<line x1="127.3" y1="143" x2="203.35" y2="143" class="ts-dim" stroke-width="1.4" fill="none"/>
-<path d="M209.3 143 L202.3 145.94 L202.3 140.06Z" class="tf-dim"/>
-<line x1="158.89" y1="219" x2="246.25" y2="219" class="ts-dim" stroke-width="1.4" fill="none"/>
-<path d="M252.2 219 L245.2 221.94 L245.2 216.06Z" class="tf-dim"/>
-<rect x="69.7" y="292" width="160.6" height="50" rx="6" class="ts-edge tf-panel" stroke-width="1.3"/>
-<text class="tf-ink" x="150" y="313" font-size="14" text-anchor="middle">ι empty: <tspan font-style="italic">c</tspan> = 1</text>
-<text class="tf-dim tr-fig-mono" x="150" y="332" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">Subsingleton.elim</text>
-<rect x="243.5" y="292" width="217" height="50" rx="6" class="ts-edge tf-panel" stroke-width="1.3"/>
-<text class="tf-ink" x="352" y="313" font-size="14" text-anchor="middle">ι non-empty: <tspan font-style="italic">c</tspan> = <tspan font-style="italic">A</tspan><tspan dy="0.28em" font-size="72%">bb</tspan><tspan dy="-0.28em">, |</tspan><tspan font-style="italic">c</tspan>| = 1</text>
-<text class="tf-dim tr-fig-mono" x="352" y="332" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">nlinarith</text>
-<rect x="472.18" y="303" width="75.64" height="28" rx="14" class="ts-dim" stroke-width="1.2" stroke-dasharray="4 3" fill="none"/>
-<text class="tf-dim" x="510" y="321.68" font-size="13" text-anchor="middle"><tspan font-style="italic">A</tspan> unitary</text>
-<path d="M352 258 L352 270" class="ts-dim" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
-<path d="M150 270 L352 270" class="ts-dim" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
-<line x1="150" y1="270" x2="150" y2="286.05" class="ts-dim" stroke-width="1.4" fill="none"/>
-<path d="M150 292 L147.06 285 L152.94 285Z" class="tf-dim"/>
-<line x1="352" y1="270" x2="352" y2="286.05" class="ts-dim" stroke-width="1.4" fill="none"/>
-<path d="M352 292 L349.06 285 L354.94 285Z" class="tf-dim"/>
-<text class="tf-dim tr-fig-mono" x="360" y="279" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace">isEmpty_or_nonempty ι</text>
-<line x1="472.18" y1="317" x2="466.45" y2="317" class="ts-dim" stroke-width="1.4" fill="none"/>
-<path d="M460.5 317 L467.5 314.06 L467.5 319.94Z" class="tf-dim"/>
-<rect x="93" y="368" width="374" height="34" rx="6" class="ts-ok tf-ok" stroke-width="1.6" fill-opacity="0.1"/>
-<rect x="107" y="374" width="57.2" height="21" class="ts-ok tf-ok" stroke-width="1.2" fill-opacity="0.12"/>
-<text class="tf-ok tr-fig-mono" x="114" y="390" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">LEAN ✓</text>
-<text class="tf-ok tr-fig-mono" x="172.2" y="390" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace">unitary_phase_of_connected_ray_tests</text>
-<line x1="150" y1="342" x2="150" y2="362.05" class="ts-ink" stroke-width="1.4" fill="none"/>
-<path d="M150 368 L147.06 361 L152.94 361Z" class="tf-ink"/>
-<line x1="352" y1="342" x2="352" y2="362.05" class="ts-ink" stroke-width="1.4" fill="none"/>
-<path d="M352 368 L349.06 361 L354.94 361Z" class="tf-ink"/>
+<text class="tf-dim tr-fig-mono" x="148" y="18" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace">coordinate_shape_of_connected_ray_tests</text>
+<rect x="148" y="26" width="308" height="240" rx="8" class="ts-dim" stroke-width="1.2" stroke-dasharray="5 4" fill="none"/>
+<rect x="225.14" y="52" width="153.72" height="50" rx="6" class="ts-edge tf-panel" stroke-width="1.3"/>
+<text class="tf-ink" x="302" y="73" font-size="14" text-anchor="middle">off-diagonal <tspan font-style="italic">A</tspan><tspan dy="0.28em" font-size="72%">ij</tspan><tspan dy="-0.28em"> = 0</tspan></text>
+<text class="tf-dim tr-fig-mono" x="302" y="92" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">hoff</text>
+<rect x="159.3" y="128" width="285.4" height="50" rx="6" class="ts-edge tf-panel" stroke-width="1.3"/>
+<text class="tf-ink" x="302" y="149" font-size="14" text-anchor="middle"><tspan font-style="italic">x</tspan><tspan dy="0.28em" font-size="72%">i</tspan><tspan dy="-0.28em">, </tspan><tspan font-style="italic">x</tspan><tspan dy="0.28em" font-size="72%">j</tspan><tspan dy="-0.28em"> ≠ 0 ⇒ </tspan><tspan font-style="italic">A</tspan><tspan dy="0.28em" font-size="72%">ii</tspan><tspan dy="-0.28em"> = </tspan><tspan font-style="italic">A</tspan><tspan dy="0.28em" font-size="72%">jj</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim tr-fig-mono" x="302" y="168" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">sum_eq_single · mul_right_cancel₀</text>
+<rect x="202.2" y="204" width="199.6" height="50" rx="6" class="ts-edge tf-panel" stroke-width="1.3"/>
+<text class="tf-ink" x="302" y="225" font-size="14" text-anchor="middle">all <tspan font-style="italic">A</tspan><tspan dy="0.28em" font-size="72%">ii</tspan><tspan dy="-0.28em"> equal</tspan></text>
+<text class="tf-dim tr-fig-mono" x="302" y="244" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">ReflTransGen induction</text>
+<rect x="23.28" y="63" width="116.72" height="28" rx="14" class="ts-dim" stroke-width="1.2" stroke-dasharray="4 3" fill="none"/>
+<text class="tf-dim" x="81.64" y="81.68" font-size="13" text-anchor="middle">coordinate rays</text>
+<rect x="65.4" y="139" width="74.6" height="28" rx="14" class="ts-dim" stroke-width="1.2" stroke-dasharray="4 3" fill="none"/>
+<text class="tf-dim" x="102.7" y="157.68" font-size="13" text-anchor="middle">test rays</text>
+<rect x="4.22" y="215" width="137.78" height="28" rx="14" class="ts-dim" stroke-width="1.2" stroke-dasharray="4 3" fill="none"/>
+<text class="tf-dim" x="73.11" y="233.68" font-size="13" text-anchor="middle">supports connected</text>
+<line x1="302" y1="102" x2="302" y2="122.05" class="ts-dim" stroke-width="1.4" fill="none"/>
+<path d="M302 128 L299.06 121 L304.94 121Z" class="tf-dim"/>
+<line x1="302" y1="178" x2="302" y2="198.05" class="ts-dim" stroke-width="1.4" fill="none"/>
+<path d="M302 204 L299.06 197 L304.94 197Z" class="tf-dim"/>
+<line x1="140" y1="77" x2="219.19" y2="77" class="ts-dim" stroke-width="1.4" fill="none"/>
+<path d="M225.14 77 L218.14 79.94 L218.14 74.06Z" class="tf-dim"/>
+<line x1="140" y1="153" x2="153.35" y2="153" class="ts-dim" stroke-width="1.4" fill="none"/>
+<path d="M159.3 153 L152.3 155.94 L152.3 150.06Z" class="tf-dim"/>
+<line x1="142" y1="229" x2="196.25" y2="229" class="ts-dim" stroke-width="1.4" fill="none"/>
+<path d="M202.2 229 L195.2 231.94 L195.2 226.06Z" class="tf-dim"/>
+<rect x="19.7" y="334" width="160.6" height="50" rx="6" class="ts-edge tf-panel" stroke-width="1.3"/>
+<text class="tf-ink" x="100" y="355" font-size="14" text-anchor="middle">ι empty: <tspan font-style="italic">c</tspan> = 1</text>
+<text class="tf-dim tr-fig-mono" x="100" y="374" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">Subsingleton.elim</text>
+<rect x="221.5" y="334" width="217" height="50" rx="6" class="ts-edge tf-panel" stroke-width="1.3"/>
+<text class="tf-ink" x="330" y="355" font-size="14" text-anchor="middle">ι non-empty: <tspan font-style="italic">c</tspan> = <tspan font-style="italic">A</tspan><tspan dy="0.28em" font-size="72%">bb</tspan><tspan dy="-0.28em">, |</tspan><tspan font-style="italic">c</tspan>| = 1</text>
+<text class="tf-dim tr-fig-mono" x="330" y="374" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">nlinarith</text>
+<rect x="360.68" y="272" width="75.64" height="28" rx="14" class="ts-dim" stroke-width="1.2" stroke-dasharray="4 3" fill="none"/>
+<text class="tf-dim" x="398.5" y="290.68" font-size="13" text-anchor="middle"><tspan font-style="italic">A</tspan> unitary</text>
+<path d="M302 266 L302 280" class="ts-dim" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+<path d="M100 280 L302 280" class="ts-dim" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+<line x1="100" y1="280" x2="100" y2="328.05" class="ts-dim" stroke-width="1.4" fill="none"/>
+<path d="M100 334 L97.06 327 L102.94 327Z" class="tf-dim"/>
+<line x1="302" y1="280" x2="302" y2="328.05" class="ts-dim" stroke-width="1.4" fill="none"/>
+<path d="M302 334 L299.06 327 L304.94 327Z" class="tf-dim"/>
+<text class="tf-dim tr-fig-mono" x="294" y="296" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="end">isEmpty_or_nonempty ι</text>
+<line x1="398.5" y1="300" x2="398.5" y2="328.05" class="ts-dim" stroke-width="1.4" fill="none"/>
+<path d="M398.5 334 L395.56 327 L401.44 327Z" class="tf-dim"/>
+<rect x="41.2" y="408" width="377.6" height="34" rx="6" class="ts-ok tf-ok" stroke-width="1.6" fill-opacity="0.1"/>
+<rect x="55.2" y="413" width="60.8" height="22" class="ts-ok tf-ok" stroke-width="1.2" fill-opacity="0.12"/>
+<text class="tf-ok tr-fig-mono" x="62.2" y="430" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">LEAN ✓</text>
+<text class="tf-ok tr-fig-mono" x="124" y="430" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace">unitary_phase_of_connected_ray_tests</text>
+<line x1="100" y1="384" x2="100" y2="402.05" class="ts-ink" stroke-width="1.4" fill="none"/>
+<path d="M100 408 L97.06 401 L102.94 401Z" class="tf-ink"/>
+<line x1="330" y1="384" x2="330" y2="402.05" class="ts-ink" stroke-width="1.4" fill="none"/>
+<path d="M330 408 L327.06 401 L332.94 401Z" class="tf-ink"/>
 </svg>

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch33-memory-spectrum" data-lang="zh" viewBox="0 0 460 176" width="460" height="176" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="一条向右的灰色轴，下方写着“记忆阶数 M 递增”。轴上自左向右四个刻度：光子（一段波），M = 0；原子（带轨道的点），M = 1；晶体（三乘三的点阵）；心智（一支绕回自身的箭头），M ≫ 1。轴只表示次序，不按比例。">
+<title>一条向右的灰色轴，下方写着“记忆阶数 M 递增”。轴上自左向右四个刻度：光子（一段波），M = 0；原子（带轨道的点），M = 1；晶体（三乘三的点阵）；心智（一支绕回自身的箭头），M ≫ 1。轴只表示次序，不按比例。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<line x1="24" y1="86" x2="432.35" y2="86" class="ts-dim" stroke-width="1.6" fill="none"/>
+<path d="M440 86 L431 89.78 L431 82.22Z" class="tf-dim"/>
+<line x1="52.42" y1="82" x2="52.42" y2="90" class="ts-dim" stroke-width="1.4" fill="none"/>
+<path d="M32.42 52 L33.05 50.24 L33.67 48.56 L34.3 47 L34.92 45.64 L35.55 44.52 L36.17 43.69 L36.8 43.17 L37.42 43 L38.05 43.17 L38.67 43.69 L39.3 44.52 L39.92 45.64 L40.55 47 L41.17 48.56 L41.8 50.24 L42.42 52 L43.05 53.76 L43.67 55.44 L44.3 57 L44.92 58.36 L45.55 59.48 L46.17 60.31 L46.8 60.83 L47.42 61 L48.05 60.83 L48.67 60.31 L49.3 59.48 L49.92 58.36 L50.55 57 L51.17 55.44 L51.8 53.76 L52.42 52 L53.05 50.24 L53.67 48.56 L54.3 47 L54.92 45.64 L55.55 44.52 L56.17 43.69 L56.8 43.17 L57.42 43 L58.05 43.17 L58.67 43.69 L59.3 44.52 L59.92 45.64 L60.55 47 L61.17 48.56 L61.8 50.24 L62.42 52 L63.05 53.76 L63.67 55.44 L64.3 57 L64.92 58.36 L65.55 59.48 L66.17 60.31 L66.8 60.83 L67.42 61 L68.05 60.83 L68.67 60.31 L69.3 59.48 L69.92 58.36 L70.55 57 L71.17 55.44 L71.8 53.76 L72.42 52" class="ts-ink" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+<path d="M75.42 52 L68.42 54.94 L68.42 49.06Z" class="tf-ink"/>
+<text class="tf-ink" x="52.42" y="106" font-size="13" text-anchor="middle">光子</text>
+<text class="tf-dim" x="52.42" y="124" font-size="13" text-anchor="middle"><tspan font-style="italic">M</tspan> = 0</text>
+<line x1="157.98" y1="82" x2="157.98" y2="90" class="ts-dim" stroke-width="1.4" fill="none"/>
+<ellipse cx="157.98" cy="52" rx="20" ry="8.4" transform="rotate(-20 157.98 52)" class="ts-dim" stroke-width="1.3" fill="none"/>
+<circle cx="157.98" cy="52" r="4.2" class="tf-ink"/>
+<circle cx="161.71" cy="42.24" r="2.6" class="tf-ink"/>
+<text class="tf-ink" x="157.98" y="106" font-size="13" text-anchor="middle">原子</text>
+<text class="tf-dim" x="157.98" y="124" font-size="13" text-anchor="middle"><tspan font-style="italic">M</tspan> = 1</text>
+<line x1="275.72" y1="82" x2="275.72" y2="90" class="ts-dim" stroke-width="1.4" fill="none"/>
+<line x1="263.32" y1="39.6" x2="288.12" y2="39.6" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="263.32" y1="39.6" x2="263.32" y2="64.4" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="263.32" y1="52" x2="288.12" y2="52" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="275.72" y1="39.6" x2="275.72" y2="64.4" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="263.32" y1="64.4" x2="288.12" y2="64.4" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="288.12" y1="39.6" x2="288.12" y2="64.4" class="ts-faint" stroke-width="1.1" fill="none"/>
+<circle cx="263.32" cy="39.6" r="2.6" class="tf-ink"/>
+<circle cx="263.32" cy="52" r="2.6" class="tf-ink"/>
+<circle cx="263.32" cy="64.4" r="2.6" class="tf-ink"/>
+<circle cx="275.72" cy="39.6" r="2.6" class="tf-ink"/>
+<circle cx="275.72" cy="52" r="2.6" class="tf-ink"/>
+<circle cx="275.72" cy="64.4" r="2.6" class="tf-ink"/>
+<circle cx="288.12" cy="39.6" r="2.6" class="tf-ink"/>
+<circle cx="288.12" cy="52" r="2.6" class="tf-ink"/>
+<circle cx="288.12" cy="64.4" r="2.6" class="tf-ink"/>
+<text class="tf-ink" x="275.72" y="106" font-size="13" text-anchor="middle">晶体</text>
+<line x1="397.52" y1="82" x2="397.52" y2="90" class="ts-dim" stroke-width="1.4" fill="none"/>
+<path d="M393.28 40.35 L392.48 40.67 L391.7 41.05 L390.95 41.48 L390.23 41.97 L389.55 42.5 L388.91 43.08 L388.31 43.7 L387.75 44.37 L387.24 45.07 L386.78 45.8 L386.37 46.56 L386.02 47.35 L385.73 48.17 L385.49 49 L385.31 49.85 L385.19 50.7 L385.13 51.57 L385.13 52.43 L385.19 53.3 L385.31 54.15 L385.49 55 L385.73 55.83 L386.02 56.65 L386.37 57.44 L386.78 58.2 L387.24 58.93 L387.75 59.63 L388.31 60.3 L388.91 60.92 L389.55 61.5 L390.23 62.03 L390.95 62.52 L391.7 62.95 L392.48 63.33 L393.28 63.65 L394.1 63.92 L394.94 64.13 L395.79 64.28 L396.66 64.37 L397.52 64.4 L398.38 64.37 L399.25 64.28 L400.1 64.13 L400.94 63.92 L401.76 63.65 L402.56 63.33 L403.34 62.95 L404.09 62.52 L404.81 62.03 L405.49 61.5 L406.13 60.92 L406.73 60.3 L407.29 59.63 L407.8 58.93 L408.26 58.2 L408.67 57.44 L409.02 56.65 L409.31 55.83 L409.55 55 L409.73 54.15 L409.85 53.3 L409.91 52.43 L409.91 51.57 L409.85 50.7 L409.73 49.85 L409.55 49 L409.31 48.17 L409.02 47.35 L408.67 46.56 L408.26 45.8 L407.8 45.07 L407.29 44.37 L406.73 43.7 L406.13 43.08 L405.49 42.5" class="ts-ink" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+<path d="M405.49 42.5 L412.74 44.75 L408.96 49.25Z" class="tf-ink"/>
+<circle cx="397.52" cy="52" r="3" class="tf-ink"/>
+<text class="tf-ink" x="397.52" y="106" font-size="13" text-anchor="middle">心智</text>
+<text class="tf-dim" x="397.52" y="124" font-size="13" text-anchor="middle"><tspan font-style="italic">M</tspan> ≫ 1</text>
+<text class="tf-dim" x="232" y="148" font-size="13" text-anchor="middle">记忆阶数 <tspan font-style="italic">M</tspan> 递增 →</text>
+</svg>

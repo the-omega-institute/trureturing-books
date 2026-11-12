@@ -1,7 +1,7 @@
 /* ORTHO//PYTHAGORAS: the ±1 seam, in three scenes.
    pell   convergents m/n of √d on the lattice: |m/n − √d| → 0 while m² − d·n² is a nonzero integer
    split  the circle a² + b² = p among the Gaussian integers: plane primes (p ≡ 1 mod 4) and line primes (p ≡ 3 mod 4)
-   curve  points of y² = x³ − x (or y² = x³ − x + 1) over F_p: a_p, Hasse's bound and the Frobenius cosine
+   curve  points of y² = x³ − x (or y² = x³ − x + 1) over F_p: the ring of Legendre symbols χ_p(f(x)), a_p, Hasse's bound and the Frobenius cosine
    The rail is the convergent index (pell) or walks through the odd primes 3 … 97 (split, curve).
    Read-only probe for the browser suite: window.PYTHAGORAS_DEBUG. */
 (() => {
@@ -52,7 +52,13 @@
     return (countCache[key] = { n, a: p + 1 - n, cos: (p + 1 - n) / (2 * Math.sqrt(p)) });
   }
   function points(curve, p) { const pts = []; for (let x = 0; x < p; x++) { const v = F[curve](x, p); for (let y = 0; y < p; y++) if ((y * y) % p === v) pts.push([x, y]); } return pts; }
-  const BAD = { cm: [2], gen: [2, 23] };   // primes of bad reduction (discriminants −64·(−1)… = 64 and −16·23)
+  const BAD = { cm: [2], gen: [2, 23] };   // primes of bad reduction: Δ = −16(4a³ + 27b²) is 64 = 2⁶ and −368 = −2⁴·23
+  const DISC = { cm: '64 = 2⁶', gen: '−368 = −2⁴·23' };
+  const isBad = (curve, p) => BAD[curve].includes(p);
+  /** The ring of spins: χ_p(f(x)) for x = 0 … p − 1, with χ the Legendre symbol (0 at a root of f). */
+  function spins(curve, p) { const sq = squaresMod(p), out = []; for (let x = 0; x < p; x++) { const v = F[curve](x, p); out.push(v === 0 ? 0 : sq[v] ? 1 : -1); } return out; }
+  /** The singular point of a curve with bad reduction at p: the double root of f with y = 0. */
+  function singular(curve, p) { for (let x = 0; x < p; x++) { const d = ((3 * x * x - 1) % p + p) % p; if (F[curve](x, p) === 0 && d === 0) return [x, 0]; } return null; }
 
   /* ---------- scenes ---------- */
   const SC = {
@@ -122,6 +128,10 @@
       g.dot(A, B, P.amber, 9, { ring: true, width: 2, glow: 8 });
       g.text(A / 2, 0, String(A), P.cyan, { align: 'center', base: 'top', dy: 6, size: 12 }); g.text(A, B / 2, String(B), P.cyan, { align: 'left', dx: 7, size: 12 });
       g.text(A / 2, B / 2, `√${p}`, P.ink, { align: 'right', base: 'bottom', dx: -5, dy: -3, size: 12 });
+      // the Hilbert angle θ of the lattice point; the triangle on the right has turned by 2θ
+      const th = Math.atan2(B, A), rho = Math.max(14, Math.min(46, 0.42 * A * g.scale)), ox = g.X(0), oy = g.Y(0);
+      c.strokeStyle = P.ink; c.lineWidth = 1.3; c.beginPath(); c.arc(ox, oy, rho, -th, 0); c.stroke();
+      c.fillStyle = P.ink; c.font = `600 13px ${TRV.fonts.data}`; c.textAlign = 'left'; c.textBaseline = 'middle'; c.fillText('θ', ox + (rho + 6) * Math.cos(th / 2), oy - (rho + 6) * Math.sin(th / 2));
     }
     if (wide) {
       const x0 = W - right + 30, bw = right - 60, cyy = H / 2 + 6;
@@ -130,6 +140,10 @@
         const [a, b] = ab[0] > ab[1] ? ab : [ab[1], ab[0]], u = a * a - b * b, v = 2 * a * b, sc = Math.min(bw / Math.max(u, 1), (H - 250) / v), tx = x0 + (bw - u * sc) / 2, ty = cyy + v * sc / 2;
         c.fillStyle = TRV.alpha(P.cyan, 0.14); c.strokeStyle = P.cyan; c.lineWidth = 1.6; c.beginPath(); c.moveTo(tx, ty); c.lineTo(tx + u * sc, ty); c.lineTo(tx + u * sc, ty - v * sc); c.closePath(); c.fill(); c.stroke();
         c.strokeRect(tx + u * sc - 9, ty - 9, 9, 9);
+        const t2 = Math.atan2(v, u), r2 = Math.max(14, Math.min(40, 0.32 * u * sc));
+        c.strokeStyle = P.ink; c.lineWidth = 1.3; c.beginPath(); c.arc(tx, ty, r2, -t2, 0); c.stroke();
+        c.fillStyle = P.ink; c.font = `600 13px ${TRV.fonts.data}`; c.textAlign = 'left'; c.textBaseline = 'middle'; c.fillText('2θ', tx + (r2 + 6) * Math.cos(t2 / 2), ty - (r2 + 6) * Math.sin(t2 / 2));
+        c.textAlign = 'center';
         c.font = `13px ${TRV.fonts.data}`; c.fillStyle = P.cyan; c.textBaseline = 'top'; c.fillText(String(u), tx + u * sc / 2, ty + 7);
         c.textAlign = 'left'; c.textBaseline = 'middle'; c.fillText(String(v), tx + u * sc + 8, ty - v * sc / 2);
         c.textAlign = 'right'; c.fillStyle = P.amber; c.fillText(String(p), tx + u * sc / 2 - 8, ty - v * sc / 2 - 6);
@@ -152,12 +166,35 @@
     const side = Math.min(wide ? W * 0.52 : W - 60, H - 150), cell = side / p, gx = wide ? Math.max(44, W * 0.3 - side / 2) : (W - side) / 2, gy = 80 + (H - 140 - side) / 2;
     c.strokeStyle = P.lineHot; c.lineWidth = 1; c.strokeRect(gx - 0.5, gy - 0.5, side + 1, side + 1);
     if (cell >= 5) { c.fillStyle = TRV.alpha(P.faint, 0.8); for (let x = 0; x < p; x++) for (let y = 0; y < p; y++) c.fillRect(gx + (x + 0.5) * cell - 0.6, gy + side - (y + 0.5) * cell - 0.6, 1.2, 1.2); }
-    c.strokeStyle = TRV.alpha(P.amber, 0.5); c.setLineDash([4, 4]); c.beginPath(); c.moveTo(gx, gy + side - (p / 2) * cell); c.lineTo(gx + side, gy + side - (p / 2) * cell); c.stroke(); c.setLineDash([]);
-    const col = S.curve === 'gen' ? P.violet : (p % 4 === 1 ? P.cyan : P.magenta), sz = Math.max(2.5, cell * 0.72);
-    for (const [x, y] of points(S.curve, p)) { c.fillStyle = y === 0 ? P.amber : col; c.fillRect(gx + (x + 0.5) * cell - sz / 2, gy + side - (y + 0.5) * cell - sz / 2, sz, sz); }
-    c.fillStyle = P.dim; c.font = `10.5px ${TRV.fonts.data}`; c.textAlign = 'center'; c.textBaseline = 'top'; c.fillText('x', gx + side / 2, gy + side + 5); c.textAlign = 'right'; c.textBaseline = 'middle'; c.fillText('y', gx - 6, gy + side / 2);
-    if (wide) {   // the Frobenius cosine on a half-disc
-      const r = Math.min(W * 0.17, H * 0.3), cx = W * 0.79, cy = H / 2 + r * 0.45, th = Math.acos(kit.clamp(E.cos, -1, 1));
+    c.strokeStyle = TRV.alpha(P.dim, 0.6); c.setLineDash([4, 4]); c.beginPath(); c.moveTo(gx, gy + side - (p / 2) * cell); c.lineTo(gx + side, gy + side - (p / 2) * cell); c.stroke(); c.setLineDash([]);
+    // a point (x, y ≠ 0) comes in a pair ±y and sits in a column with χ = +1 (cyan); y = 0 is a branch point with χ = 0 (neutral)
+    const sz = Math.max(2.5, cell * 0.72), chi = spins(S.curve, p), bad = isBad(S.curve, p), sing = bad ? singular(S.curve, p) : null, sum = chi.reduce((a, b) => a + b, 0);
+    for (const [x, y] of points(S.curve, p)) { c.fillStyle = y === 0 ? P.sigma : P.cyan; c.fillRect(gx + (x + 0.5) * cell - sz / 2, gy + side - (y + 0.5) * cell - sz / 2, sz, sz); }
+    if (sing) { c.strokeStyle = P.sigma; c.lineWidth = 1.6; c.beginPath(); c.arc(gx + (sing[0] + 0.5) * cell, gy + side - 0.5 * cell, sz * 1.25 + 3, 0, kit.TAU); c.stroke(); }
+    c.fillStyle = P.dim; c.font = `10.5px ${TRV.fonts.data}`; c.textBaseline = wide ? 'top' : 'middle'; c.textAlign = wide ? 'center' : 'left';
+    if (wide) c.fillText('x', gx + side / 2, gy + side + 5); else c.fillText('x', gx + side + 6, gy + side + 10);
+    c.textAlign = 'right'; c.textBaseline = 'middle'; c.fillText('y', gx - 6, gy + side / 2);
+    const spinCol = (v) => (v > 0 ? P.cyan : v < 0 ? P.magenta : P.sigma);
+    if (!wide) {   // narrow: the spins as one dot under each column
+      const rr = Math.max(1.6, Math.min(4, cell * 0.36));
+      for (let x = 0; x < p; x++) { c.fillStyle = spinCol(chi[x]); c.beginPath(); c.arc(gx + (x + 0.5) * cell, gy + side + 10, rr, 0, kit.TAU); c.fill(); }
+    }
+    if (wide) {   // the ring of spins χ_p(f(x)), x = 0 at the top, x and −x mirror images
+      const R1 = Math.min(W * 0.11, (H - 160) * 0.2), cx = W * 0.79, cy1 = (TRV.thumbMode ? 84 : 118) + R1, dr = Math.max(1.8, Math.min(5.5, Math.PI * R1 / p * 0.72)) * (TRV.thumbMode ? 1.5 : 1);
+      c.strokeStyle = TRV.alpha(P.lineHot, 0.9); c.lineWidth = 1; c.beginPath(); c.arc(cx, cy1, R1, 0, kit.TAU); c.stroke();
+      for (let x = 0; x < p; x++) { const a = -Math.PI / 2 + kit.TAU * x / p; c.fillStyle = spinCol(chi[x]); c.beginPath(); c.arc(cx + R1 * Math.cos(a), cy1 + R1 * Math.sin(a), dr, 0, kit.TAU); c.fill(); }
+      c.fillStyle = sum > 0 ? P.cyan : sum < 0 ? P.magenta : P.ink; c.font = `600 ${Math.round(Math.min(17, R1 * 0.3))}px ${TRV.fonts.data}`; c.textAlign = 'center'; c.textBaseline = 'middle';
+      c.fillText(`Σχ = ${signed(sum).replace(/[+−]0$/, '0')}`, cx, cy1 - 8);
+      c.fillStyle = P.dim; c.font = `${Math.round(Math.min(11.5, R1 * 0.2))}px ${TRV.fonts.data}`; c.fillText(`${p + 1} ${sum < 0 ? '−' : '+'} ${Math.abs(sum)} = ${E.n}`, cx, cy1 + 10);
+      c.fillText('x = 0', cx, cy1 - R1 - dr - 9);
+    }
+    if (wide && bad) {   // bad reduction: no Frobenius cosine here
+      const cx = W * 0.79, cy = H - 70 - Math.min(W * 0.15, (H - 160) * 0.28) / 2;
+      c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = P.ink; c.font = `600 15px ${TRV.fonts.data}`; c.fillText(L('坏约化', 'BAD REDUCTION'), cx, cy - 22);
+      c.fillStyle = P.dim; c.font = `12px ${TRV.fonts.data}`; c.fillText(`Δ = ${DISC[S.curve]}`, cx, cy + 2);
+      if (!TRV.thumbMode) { c.font = `11.5px ${TRV.fonts.body}`; c.fillText(L(`${p} 整除判别式：没有哈塞界，也没有余弦`, `${p} divides the discriminant: no Hasse bound, no cosine`), cx, cy + 24); }
+    } else if (wide) {   // the Frobenius cosine on a half-disc
+      const r = Math.min(W * 0.15, (H - 160) * 0.28), cx = W * 0.79, cy = H - 70, th = Math.acos(kit.clamp(E.cos, -1, 1));
       c.strokeStyle = P.lineHot; c.lineWidth = 1.2; c.beginPath(); c.arc(cx, cy, r, Math.PI, 0); c.stroke(); c.beginPath(); c.moveTo(cx - r - 10, cy); c.lineTo(cx + r + 10, cy); c.stroke();
       c.fillStyle = P.dim; c.font = `10.5px ${TRV.fonts.data}`; c.textAlign = 'center'; c.textBaseline = 'top'; for (const v of [-1, 0, 1]) { c.fillText(String(v).replace('-', '−'), cx + v * r, cy + 6); c.fillRect(cx + v * r - 0.5, cy - 3, 1, 6); }
       if (S.curve === 'cm' && ab) for (const s of [1, -1]) { const u = s * ab[0] / Math.sqrt(p), v = ab[1] / Math.sqrt(p); c.strokeStyle = TRV.alpha(P.cyan, 0.75); c.setLineDash([4, 3]); c.lineWidth = 1.2; c.beginPath(); c.moveTo(cx, cy); c.lineTo(cx + u * r, cy - v * r); c.stroke(); c.setLineDash([]); }
@@ -165,11 +202,12 @@
       c.strokeStyle = TRV.alpha(P.amber, 0.7); c.setLineDash([2, 3]); c.beginPath(); c.moveTo(px, py); c.lineTo(px, cy); c.stroke(); c.setLineDash([]);
       c.save(); c.shadowColor = P.amber; c.shadowBlur = 10; c.strokeStyle = P.amber; c.lineWidth = 2.2; c.beginPath(); c.moveTo(cx, cy); c.lineTo(px, py); c.stroke(); c.fillStyle = P.amber; c.beginPath(); c.arc(px, py, 4.5, 0, kit.TAU); c.fill(); c.restore();
       c.strokeStyle = P.amber; c.lineWidth = 4; c.beginPath(); c.moveTo(cx, cy); c.lineTo(px, cy); c.stroke();
-      c.fillStyle = P.ink; c.font = `600 15px ${TRV.fonts.data}`; c.textAlign = 'center'; c.textBaseline = 'bottom'; c.fillText(`cos θ = ${fix(E.cos, 3)}`, cx, cy - r - 30);
+      c.fillStyle = P.ink; c.font = `600 15px ${TRV.fonts.data}`; c.textAlign = 'center'; c.textBaseline = 'bottom'; c.fillText(`cos θₚ = ${fix(E.cos, 3)}`, cx, cy - r - 30);
       c.fillStyle = P.dim; c.font = `11.5px ${TRV.fonts.data}`; c.fillText(`a / (2√p) = ${signed(E.a).replace('+0', '0').replace('−0', '0')} / ${fix(2 * Math.sqrt(p), 2)}`, cx, cy - r - 12);
     }
-    $('hudBig').textContent = L(`在 𝔽${p} 上有 ${E.n} 个点`, `${E.n} POINTS OVER F_${p}`);
-    $('hudSub').textContent = L(`${E.n - 1} 个格点加上无穷远点；比 p + 1 = ${p + 1} ${E.a > 0 ? '少' : E.a < 0 ? '多' : '不多不少'}${E.a ? ' ' + Math.abs(E.a) : ''}`, `${E.n - 1} grid points and the point at infinity; ${E.a ? Math.abs(E.a) + (E.a > 0 ? ' fewer than' : ' more than') : 'exactly'} p + 1 = ${p + 1}`);
+    $('hudBig').textContent = bad ? L(`p = ${p}：坏约化`, `p = ${p}: BAD REDUCTION`) : L(`在 𝔽${p} 上有 ${E.n} 个点`, `${E.n} POINTS OVER F_${p}`);
+    $('hudSub').textContent = bad ? L(`判别式 ${DISC[S.curve]} 被 ${p} 整除：曲线在 (${sing[0]}, 0) 自交，这个素数不计入哈塞界与直方图`, `The discriminant ${DISC[S.curve]} is divisible by ${p}: the curve crosses itself at (${sing[0]}, 0), and this prime is left out of Hasse's bound and the histogram`)
+      : L(`${E.n - 1} 个格点加上无穷远点；比 p + 1 = ${p + 1} ${E.a > 0 ? '少' : E.a < 0 ? '多' : '不多不少'}${E.a ? ' ' + Math.abs(E.a) : ''}`, `${E.n - 1} grid points and the point at infinity; ${E.a ? Math.abs(E.a) + (E.a > 0 ? ' fewer than' : ' more than') : 'exactly'} p + 1 = ${p + 1}`);
   }
 
   /* ---------- plots ---------- */
@@ -205,23 +243,27 @@
       g.axes({ yTicks: [-20, 0, 20], xTicks: [0, 50, 100, 150, 200] });
       const up = [], dn = []; for (let x = 0; x <= 200; x += 2) { up.push([x, 2 * Math.sqrt(x)]); dn.push([x, -2 * Math.sqrt(x)]); }
       g.line(up, P.amber, { dash: [4, 3], width: 1.2 }); g.line(dn, P.amber, { dash: [4, 3], width: 1.2 });
-      for (const q of xs) { const a = count(S.curve, q).a; g.rect(q - 0.7, 0, q + 0.7, a, S.curve === 'gen' ? P.violet : (q % 4 === 1 ? P.cyan : P.magenta), { alpha: q === p ? 1 : 0.6 }); if (!a) g.dot(q, 0, P.magenta, 1.8); }
+      for (const q of xs) { const a = count(S.curve, q).a; g.rect(q - 0.7, 0, q + 0.7, a, a > 0 ? P.cyan : P.magenta, { alpha: q === p ? 1 : 0.6 }); if (!a) g.dot(q, 0, P.sigma, 1.8); }
       g.vline(p, P.amber, { alpha: 0.7 });
-      $('pATitle').textContent = L('aₚ 被 ±2√p 关住', 'aₚ is held inside ±2√p'); $('pAMeta').textContent = `a = ${signed(count(S.curve, p).a).replace(/[+−]0/, '0')}`;
+      $('pATitle').textContent = L('aₚ 被 ±2√p 关住', 'aₚ is held inside ±2√p'); $('pAMeta').textContent = isBad(S.curve, p) ? L('坏约化', 'bad reduction') : `a = ${signed(count(S.curve, p).a).replace(/[+−]0/, '0')}`;
       const key = S.curve; if (!histCache[key]) { const bins = new Array(24).fill(0); let n = 0; for (const q of ALL) { if (BAD[key].includes(q)) continue; const u = count(key, q).cos; bins[Math.min(23, Math.floor((u + 1) / 2 * 24))]++; n++; } histCache[key] = { bins, n }; }
       const Hh = histCache[key], dens = Hh.bins.map((b) => b / Hh.n * 12), g2 = kit.plot(B, { x: [-1, 1], y: [0, 1.25], pad: [30, 10, 10, 22] });
       g2.axes({ yTicks: [0, 0.5, 1], xTicks: [[-1, '−1'], [0, '0'], [1, '1']] });
       dens.forEach((v, i) => g2.rect(-1 + i / 12 + 0.006, 0, -1 + (i + 1) / 12 - 0.006, Math.min(v, 1.25), key === 'gen' ? P.violet : P.cyan, { alpha: 0.6 }));
       if (key === 'gen') { const sc2 = []; for (let i = 0; i <= 80; i++) { const u = -1 + i / 40; sc2.push([u, (2 / Math.PI) * Math.sqrt(Math.max(0, 1 - u * u))]); } g2.line(sc2, P.amber, { dash: [5, 3] }); g2.legend([[P.amber, L('半圆律', 'semicircle law'), 'dash']], { right: false }); }
       else g2.text(0, 1.25, L('一半的素数恰在 0', 'half of the primes sit exactly at 0'), P.magenta, { align: 'center', base: 'top', dy: 3, face: 'body' });
-      g2.vline(count(key, p).cos, P.amber);
+      if (!isBad(key, p)) g2.vline(count(key, p).cos, P.amber);
       $('pBTitle').textContent = L('cos θₚ 的分布', 'Distribution of cos θₚ'); $('pBMeta').textContent = L(`${Hh.n} 个素数，p < 3000`, `${Hh.n} primes, p < 3000`);
     }
   }
 
   /* ---------- readouts ---------- */
+  let lastBad = null;
+  /** The lattice point (A, B), A ≥ B, of a plane prime: its direction θ (Hilbert angle) and the doubled Bloch polar angle 2θ, in degrees. */
+  function angles(p) { const ab = twoSquares(p); if (!ab) return null; const A = Math.max(...ab), B = Math.min(...ab), t = Math.atan2(B, A) * 180 / Math.PI; return { A, B, theta: t, bloch: 2 * t }; }
   function drawText() {
     const k = step(), set = (i, lab, val) => { $(`roL${i}`).textContent = lab; $(`ro${i}`).innerHTML = val; };
+    $('roRow5').hidden = S.scene === 'pell';
     let what = '', key = '';
     if (S.scene === 'pell') {
       const C = pell(S.d), q = C.list[k], neg = negativePell(S.d);
@@ -238,26 +280,42 @@
       $('roKey').innerHTML = ab ? `<span class="c-cy">${p} = ${Math.max(...ab)}² + ${Math.min(...ab)}²</span>` : `<span class="c-mg">${p} ≠ a² + b²</span>`; $('roKeySub').textContent = ab ? L('面素数：分裂成 (a + bi)(a − bi)', 'a plane prime: it splits as (a + bi)(a − bi)') : L('线素数：在高斯整数里仍是素数', 'a line prime: still prime among the Gaussian integers');
       set(1, 'p mod 4', String(p % 4)); set(2, 'x² ≡ −1 (mod p)', roots.length ? `x = ${roots.join(', ')}` : L('无解', 'no solution'));
       set(3, L('整数直角三角形', 'integer right triangle'), ab ? `(${Math.abs(ab[0] * ab[0] - ab[1] * ab[1])}, ${2 * ab[0] * ab[1]}, ${p})` : '—'); set(4, 'm² − p·n² = −1', neg ? `(${neg[0]}, ${neg[1]})` : L('无解', 'no solution'));
-      $('roNote').textContent = ab ? L('三件事同时成立：圆上有格点、−1 是模 p 的平方、负佩尔方程有解。', 'Three things hold together: the circle meets the lattice, −1 is a square mod p, and the negative Pell equation has a solution.') : L('三件事同时落空：圆上没有格点、−1 不是模 p 的平方、负佩尔方程无解。', 'Three things fail together: the circle misses the lattice, −1 is not a square mod p, and the negative Pell equation has no solution.');
+      const ang = angles(p);
+      set(5, L('夹角 θ，布洛赫极角 2θ', 'angle θ, Bloch polar angle 2θ'), ang ? `θ = ${fix(ang.theta, 2)}° · 2θ = ${fix(ang.bloch, 2)}°` : '—');
+      $('roNote').textContent = ab ? L(`三件事同时成立：圆上有格点、−1 是模 p 的平方、负佩尔方程有解。格点 (${ang.A}, ${ang.B}) 的方向角 θ 是希尔伯特空间里的夹角：cos²θ + sin²θ = ${ang.A}²/${p} + ${ang.B}²/${p} = 1。把 ${ang.A} + ${ang.B === 1 ? '' : ang.B}i 平方，角翻倍成 2θ：右边的三角形除以 ${p}，就是态 (${ang.A}|0⟩ + ${ang.B}|1⟩)/√${p} 的布洛赫矢量，极角 θ_Bloch = 2θ。两个角差一倍，不要混用。`,
+        `Three things hold together: the circle meets the lattice, −1 is a square mod p, and the negative Pell equation has a solution. The direction θ of the lattice point (${ang.A}, ${ang.B}) is an angle in Hilbert space: cos²θ + sin²θ = ${ang.A}²/${p} + ${ang.B}²/${p} = 1. Squaring ${ang.A} + ${ang.B === 1 ? '' : ang.B}i doubles it to 2θ: the triangle on the right, divided by ${p}, is the Bloch vector of the state (${ang.A}|0⟩ + ${ang.B}|1⟩)/√${p}, whose polar angle is θ_Bloch = 2θ. The two angles differ by a factor of two; do not mix them up.`)
+        : L('三件事同时落空：圆上没有格点、−1 不是模 p 的平方、负佩尔方程无解。', 'Three things fail together: the circle misses the lattice, −1 is not a square mod p, and the negative Pell equation has no solution.');
       what = `p = ${p}`; key = ab ? L('面素数', 'PLANE') : L('线素数', 'LINE');
     } else {
-      const p = prime(), E = count(S.curve, p), ab = twoSquares(p), bound = 2 * Math.sqrt(p);
-      $('roKeyL').textContent = L('点数与 p + 1 之差 aₚ', 'aₚ: how far the count is from p + 1');
-      $('roKey').innerHTML = `${signed(E.a).replace(/[+−]0/, '0')} <span class="okmark">|aₚ| ≤ ${fix(bound, 2)} ✓</span>`; $('roKeySub').textContent = `aₚ = p + 1 − #E = ${p + 1} − ${E.n}`;
-      set(1, L('点数 #E(𝔽ₚ)', 'points #E(𝔽ₚ)'), String(E.n)); set(2, 'cos θₚ = aₚ/(2√p)', fix(E.cos, 4));
-      set(3, L('哈塞界 2√p', 'Hasse bound 2√p'), fix(bound, 3));
+      const p = prime(), E = count(S.curve, p), ab = twoSquares(p), bound = 2 * Math.sqrt(p), bad = isBad(S.curve, p), chi = spins(S.curve, p);
+      const cnt = (v) => chi.filter((c) => c === v).length, sum = chi.reduce((a, b) => a + b, 0);
+      if (bad) {
+        $('roKeyL').textContent = L('这个素数整除判别式', 'this prime divides the discriminant');
+        $('roKey').innerHTML = `${L('坏约化', 'bad reduction')} <small>Δ = ${DISC[S.curve]}</small>`; $('roKeySub').textContent = L(`曲线在 (${singular(S.curve, p)[0]}, 0) 自交`, `the curve crosses itself at (${singular(S.curve, p)[0]}, 0)`);
+      } else {
+        $('roKeyL').textContent = L('点数与 p + 1 之差 aₚ', 'aₚ: how far the count is from p + 1');
+        $('roKey').innerHTML = `${signed(E.a).replace(/[+−]0/, '0')} <span class="okmark">|aₚ| ≤ ${fix(bound, 2)} ✓</span>`; $('roKeySub').textContent = `aₚ = p + 1 − #E = ${p + 1} − ${E.n}`;
+      }
+      set(1, L('点数 #E = p + 1 + Σχ', 'points #E = p + 1 + Σχ'), String(E.n)); set(2, 'cos θₚ = aₚ/(2√p)', bad ? '—' : fix(E.cos, 4));
+      set(3, L('哈塞界 2√p', 'Hasse bound 2√p'), bad ? '—' : fix(bound, 3));
+      set(5, L('自旋环 χₚ(f(x))', 'ring of spins χₚ(f(x))'), `<span class="c-cy">${cnt(1)}×(+1)</span> <span class="c-mg">${cnt(-1)}×(−1)</span> ${cnt(0)}×0 = ${signed(sum).replace(/[+−]0$/, '0')}`);
       set(4, S.curve === 'cm' ? (ab ? `2|a|, p = ${ab[0]}² + ${ab[1]}²` : L('线素数', 'line prime')) : L('曲线', 'curve'), S.curve === 'cm' ? (ab ? `${2 * ab[0]} <span class="okmark">= |aₚ| ✓</span>` : `aₚ = 0 <span class="okmark">✓</span>`) : 'y² = x³ − x + 1');
-      $('roNote').textContent = S.curve === 'gen' ? L('这条曲线没有复乘：aₚ 不再有简单公式，余弦值散开，分布贴近半圆律。', 'This curve has no complex multiplication: aₚ has no simple formula any more, the cosines spread out and their distribution follows the semicircle law.')
+      $('roNote').textContent = bad ? L(`p = ${p} 是这条曲线的坏约化素数：判别式 ${DISC[S.curve]} 被 ${p} 整除，f 有二重根，曲线在 (${singular(S.curve, p)[0]}, 0) 自交（圆圈）。环上的自旋照样能数，但哈塞界、余弦与直方图只用良约化素数，这里跳过。`, `p = ${p} is a prime of bad reduction for this curve: the discriminant ${DISC[S.curve]} is divisible by ${p}, f has a double root and the curve crosses itself at (${singular(S.curve, p)[0]}, 0) (the circle). The spins on the ring can still be counted, but Hasse's bound, the cosine and the histogram use good primes only, so this prime is skipped.`)
+        : S.curve === 'gen' ? L('这条曲线没有复乘：aₚ 不再有简单公式，余弦值散开，分布贴近半圆律。', 'This curve has no complex multiplication: aₚ has no simple formula any more, the cosines spread out and their distribution follows the semicircle law.')
         : ab ? L(`面素数：|aₚ| = 2·${ab[0]}，余弦的绝对值 ${fix(Math.abs(E.cos), 3)} 就是高斯三角形的 ${ab[0]}/√${p}（青色虚线）。`, `A plane prime: |aₚ| = 2·${ab[0]}, and the absolute cosine ${fix(Math.abs(E.cos), 3)} is ${ab[0]}/√${p} of the Gaussian triangle (the dashed cyan line).`)
           : L('线素数：x 与 −x 的贡献正好抵消，aₚ = 0，角度落在 90°。', 'A line prime: the contributions of x and −x cancel exactly, aₚ = 0 and the angle sits at 90°.');
-      what = `p = ${p}`; key = `a = ${signed(E.a).replace(/[+−]0/, '0')}`;
+      what = `p = ${p}`; key = bad ? L('坏约化', 'BAD') : `a = ${signed(E.a).replace(/[+−]0/, '0')}`;
+      const badKey = bad ? S.curve + p : null;
+      if (badKey && badKey !== lastBad && !TRV.still) TRV.toast($('toast'), L(`p = ${p}：坏约化。Δ(E) = ${DISC[S.curve]}，曲线在 (${singular(S.curve, p)[0]}, 0) 自交，不计入哈塞界与佐藤—泰特直方图。`, `p = ${p}: bad reduction. Δ(E) = ${DISC[S.curve]}; the curve crosses itself at (${singular(S.curve, p)[0]}, 0) and is left out of Hasse's bound and the Sato–Tate histogram.`), 6000);
+      lastBad = badKey;
     }
+    if (S.scene !== 'curve') lastBad = null;
     $('roAside').textContent = L(SC[S.scene].name[0], SC[S.scene].name[1]);
     $('pillScene').querySelector('strong').textContent = SC[S.scene].name[1]; $('pillWhat').querySelector('strong').textContent = what; $('pillKey').querySelector('strong').textContent = key;
     const LEG = {
       pell: [['dm', '直线 m = √d·n', 'the line m = √d·n'], ['cy', '在线上方：差为正', 'above the line: positive gap'], ['mg', '在线下方：差为负', 'below the line: negative gap'], ['am', '当前的渐近分数', 'the current convergent']].concat(S.d === 5 ? [['ok', '(Fₙ, Lₙ)：±4 的全部解', '(Fₙ, Lₙ): every solution of ±4']] : []),
       split: [['cy', '面素数：圆上有格点', 'plane prime: lattice points on the circle'], ['mg', '线素数：圆上没有格点', 'line prime: none on the circle']],
-      curve: [['cy', 'p ≡ 1 (mod 4)', 'p ≡ 1 (mod 4)'], ['mg', 'p ≡ 3 (mod 4)', 'p ≡ 3 (mod 4)'], ['am', 'y = 0 的点；余弦', 'points with y = 0; the cosine']]
+      curve: [['cy', 'χ = +1：一对点 ±y', 'χ = +1: a pair of points ±y'], ['mg', 'χ = −1：这一列没有点', 'χ = −1: no point in the column'], ['sg', 'χ = 0：分支点 y = 0', 'χ = 0: a branch point y = 0'], ['am', '余弦 cos θₚ', 'the cosine cos θₚ']]
     };
     const html = LEG[S.scene].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
     if ($('legend')._h !== html) { $('legend').innerHTML = html; $('legend')._h = html; }
@@ -291,7 +349,7 @@
     golden: ['d = 5 是黄金比的根号。绿圈是 (Fₙ, Lₙ)：斐波那契数与卢卡斯数，它们恰好是 x² − 5y² = ±4 的全部解，这一点已由 Lean 内核验证。', 'd = 5 is the square root behind the golden ratio. The green rings are (Fₙ, Lₙ), Fibonacci and Lucas numbers: exactly the solutions of x² − 5y² = ±4, a fact checked by the Lean kernel.'],
     five: ['半径 √5 的圆穿过格点 (2, 1)：5 = 2² + 1²。把 2 + i 平方得到 3 + 4i，于是长出最熟悉的直角三角形 (3, 4, 5)。', 'The circle of radius √5 passes through the lattice point (2, 1): 5 = 2² + 1². Squaring 2 + i gives 3 + 4i, and out comes the most familiar right triangle, (3, 4, 5).'],
     seven: ['半径 √7 的圆从格点之间穿过，一个也碰不到。7 写不成两个平方之和，−1 也不是模 7 的平方。', 'The circle of radius √7 threads between the lattice points and touches none. 7 is not a sum of two squares, and −1 is not a square mod 7.'],
-    count: ['把 y² = x³ − x 放到只有 13 个数的世界里逐格检查：7 个格点加无穷远点共 8 个，比 p + 1 = 14 少 6。13 = 3² + 2²，而 6 = 2·3：这个差正是高斯三角形奇数边的两倍。', 'Put y² = x³ − x into a world of only 13 numbers and check every cell: 7 grid points and the point at infinity make 8, six fewer than p + 1 = 14. 13 = 3² + 2², and 6 = 2·3: the difference is twice the odd leg of the Gaussian triangle.'],
+    count: ['把 y² = x³ − x 放到只有 13 个数的世界里逐格检查：7 个格点加无穷远点共 8 个，比 p + 1 = 14 少 6。13 = 3² + 2²，而 6 = 2·3：这个差正是高斯三角形奇数边的两倍。右上环上的颜色是 χ₁₃(x³ − x)：2 个 +1、8 个 −1、3 个 0，和为 −6。', 'Put y² = x³ − x into a world of only 13 numbers and check every cell: 7 grid points and the point at infinity make 8, six fewer than p + 1 = 14. 13 = 3² + 2², and 6 = 2·3: the difference is twice the odd leg of the Gaussian triangle. The ring at the upper right is coloured by χ₁₃(x³ − x): two +1, eight −1 and three 0, summing to −6.'],
     sato: ['换成 y² = x³ − x + 1：线素数不再落在零上，余弦值散布在 −1 到 1 之间。对 3000 以内的素数作直方图，轮廓贴近半圆。', 'Switch to y² = x³ − x + 1: line primes no longer sit at zero and the cosines scatter between −1 and 1. A histogram over the primes below 3000 follows the semicircle.']
   };
   let booting = true;
@@ -320,7 +378,8 @@
     get state() {
       const k = step(), C = pell(S.d), q = C.list[Math.min(k, KP)], p = prime(), E = count(S.curve, p), neg = negativePell(S.scene === 'pell' ? S.d : p);
       return { scene: S.scene, step: k, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, d: S.d, m: String(q.m), n: String(q.n), delta: String(q.delta), period: C.period,
-        deltas: C.list.map((x) => String(x.delta)), quot: C.quot.slice(0, 12), negPell: neg ? neg.map(String) : null, p, two: twoSquares(p), roots: rootsOfMinusOne(p), curve: S.curve, count: E.n, a: E.a, cos: E.cos, npoints: points(S.curve, p).length };
+        deltas: C.list.map((x) => String(x.delta)), quot: C.quot.slice(0, 12), negPell: neg ? neg.map(String) : null, p, two: twoSquares(p), roots: rootsOfMinusOne(p), curve: S.curve, count: E.n, a: E.a, cos: E.cos, npoints: points(S.curve, p).length,
+        chi: spins(S.curve, p), bad: isBad(S.curve, p), singular: isBad(S.curve, p) ? singular(S.curve, p) : null, angles: angles(p) };
     },
     seek: (t) => { clock.pause(); clock.set(t); }, hist: () => histCache[S.curve] || null
   };

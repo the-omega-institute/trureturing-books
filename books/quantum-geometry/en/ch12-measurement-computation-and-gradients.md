@@ -176,7 +176,7 @@ When we scale from a single qubit to $n$ qubits with dimension $d = 2^n$, why do
 :::
 
 ::: {.viz src="equator-concentration" preset="width" height="500"}
-**The higher the dimension, the more the points crowd onto the equator.** The rail raises the dimension from $d = 2$ to $d = 2^{10}$: the dots crowd onto the equator perpendicular to the measured axis, the bump on the right grows narrower and taller, and the two short ticks at $\pm 1/\sqrt{d}$ close in with it; at $d = 1024$ only 0.13% lies outside. The width $1/\sqrt{d}$ comes from $\mathbb{E}[x_1^2] = 1/d$ ([@rem-sphere-equator-markov-literature]).
+**The higher the dimension, the more the points crowd onto the equator.** The rail raises the dimension from $d = 2$ to $d = 2^{10}$: the dots crowd onto the equator perpendicular to the measured axis, the bump on the right grows narrower and taller, and the two short ticks at $\pm 1/\sqrt{d}$ close in with it; at $d = 1024$ only 0.13% lies outside, and the bump is too thin to see, so the magnifier at the upper right enlarges the equator 32 times: there it is still $\pm 1/\sqrt{d}$ wide. The width $1/\sqrt{d}$ comes from $\mathbb{E}[x_1^2] = 1/d$ ([@rem-sphere-equator-markov-literature]).
 :::
 
 ::: {.remark #rem-sphere-equator-markov-literature title="Second-Moment and Markov Equatorial Concentration Bound on the Real Unit Sphere (Literature Result, Not Formalized in This Book)"}
@@ -194,7 +194,7 @@ At $n = 20$ qubits ($d = 1{,}048{,}576$) and $\varepsilon = 0.1$, at least $99.9
 :::
 
 ::: {.viz src="equator-concentration" preset="twenty" height="500"}
-**Twenty qubits: every point lies in the narrow equator belt.** At $d = 2^{20}$ and $\varepsilon = 0.1$ every dot lands on the equator, and the density is a thin needle there. The Markov bound gives $9.54 \times 10^{-5}$; the exact share, computed by the page from the incomplete beta function, is about $3 \times 10^{-2291}$. This is concentration of measure on the restricted real-amplitude model, not a law for circuit gradients ([@rem-mbqc-gradients-literature]).
+**Twenty qubits: every point lies in the narrow equator belt.** At $d = 2^{20}$ and $\varepsilon = 0.1$ every dot lands on the equator and the density shrinks to a thin needle there; the magnifier at the upper right enlarges the equator 1024 times, and the needle turns out to be a bump $\pm 1/\sqrt{d}$ wide, with the belt edges $\pm\varepsilon$ far outside the window. The Markov bound gives $9.54 \times 10^{-5}$; the exact share, computed by the page from the incomplete beta function, is about $3 \times 10^{-2291}$. This is concentration of measure on the restricted real-amplitude model, not a law for circuit gradients ([@rem-mbqc-gradients-literature]).
 :::
 
 Separately from uniform sphere measure and random-circuit gradient laws, when a nonnegative summable sequence $\lambda_j \ge 0$ obeys a finite trace identity $\sum_{j=0}^\infty \lambda_j = \frac{R W}{\pi}$, the frozen theorem in `FiniteRankConcentrationModeBound` provides a **sufficient counting upper bound** on the number of modes above any threshold $\tau > 0$. (Keep its scope exact: summability is a sufficient condition for the upper bound $RW/(\pi\tau)$, not a necessary condition even for finite superlevel sets — for instance, the non-summable harmonic sequence $\lambda_j = 1/(j+1)$ also has finitely many terms above each $\tau > 0$ — and a finite trace budget neither prevents zero gradients nor provides an escape from barren plateaus, as finite-dimensional density matrices already have unit trace.)
