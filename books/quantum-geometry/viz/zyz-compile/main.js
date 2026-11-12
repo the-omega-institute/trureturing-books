@@ -78,6 +78,32 @@
   const fmtR = (R, d = 3) => { const c = coeffs(R); return `${fix(c.s, d)} ${fmtCoef(c.b12, d)} e₁₂ ${fmtCoef(c.b13, d)} e₁₃ ${fmtCoef(c.b23, d)} e₂₃`; };
   const fmtV = (v, d = 3) => `(${v.map((x) => fix(x, d)).join(', ')})`;
   const sub = ['₁', '₂', '₃'];
+  /** A screen spot `dist` pixels from the centre in the direction that lies farthest (in angle) from every line drawn
+      out of the centre: both ends of the x, y, z axes and the tripod legs. For a leg seen end-on, whose own tip is at
+      the centre. */
+  function clearSpot(st, R, dist) {
+    const rays = [];
+    for (const u of [...BASIS, ...BASIS.map((e) => apply(R, e))]) for (const sgn of [1, -1]) {
+      const q = st.p(v3.scale(u, sgn)), dx = q[0] - st.cx, dy = q[1] - st.cy;
+      if (Math.hypot(dx, dy) > 0.15 * st.unit && (sgn > 0 || BASIS.includes(u))) rays.push(Math.atan2(dy, dx));
+    }
+    let best = Math.PI / 4, gap = -1;
+    for (let i = 0; i < 72; i++) {
+      const a = i * Math.PI / 36;
+      const g = Math.min(...rays.map((r) => Math.abs(Math.atan2(Math.sin(a - r), Math.cos(a - r)))));
+      if (g > gap + 1e-9) { gap = g; best = a; }
+    }
+    return [st.cx + dist * Math.cos(best), st.cy + dist * Math.sin(best), 1];
+  }
+  /** A label position in screen pixels for world point w: on the ray from the sphere's centre through w's projection,
+      pushed out to at least `rim` pixels from the centre plus `pad` (and half the label's width `half` sideways), so
+      that the label clears the sphere's outline and the lines that meet at the centre. Returns [x, y, depth]. */
+  function outward(st, w, rim, pad, half) {
+    const q = st.p(w), dx = q[0] - st.cx, dy = q[1] - st.cy, d = Math.hypot(dx, dy);
+    const ux = d > 1e-6 ? dx / d : 0.7071, uy = d > 1e-6 ? dy / d : 0.7071;
+    const r = Math.max(d, rim) + pad + (half || 0) * Math.abs(ux);
+    return [st.cx + ux * r, st.cy + uy * r, q[2]];
+  }
 
   function drawStage() {
     const st = stage, ctx = st.begin(), t = clock.t, R = partial(t), v = apply(R, S.v0), thick = TRV.thumbMode ? 1.5 : 1;
@@ -89,7 +115,10 @@
     for (const ax of ['y', 'z']) {
       const hot = live && live.ax === ax, u = AXIS[ax];
       st.line(v3.scale(u, -1.25), v3.scale(u, 1.25), { color: P.violet, width: (hot ? 2.8 : 1.4) * thick, alpha: hot ? 1 : 0.6, back: 0.5 });
-      st.tag('a' + ax, v3.scale(u, 1.4), ax, 'num c-vi', {});
+      // an axis that points steeply towards or away from the viewer ends inside the disc: label it past the outline
+      const tip = v3.scale(u, 1.4), tq = st.p(tip), inside = Math.hypot(tq[0] - st.cx, tq[1] - st.cy) < st.unit + 8;
+      if (inside) st.tag('a' + ax, outward(st, tip, st.unit, 14), ax, 'num c-vi', { screen: true });
+      else st.tag('a' + ax, tip, ax, 'num c-vi', {});
     }
     // this turn: the shadow on its axis (cyan) and the area the in-plane part sweeps (magenta)
     let halfTag = false;
@@ -108,7 +137,7 @@
           st.line(c, mid, { color: P.magenta, width: 1 * thick, alpha: 0.7, dash: [3, 3], back: 0.4 });
           if (Math.abs(th) > 25 * DEG && !TRV.thumbMode) {
             const h = fix(Math.abs(th) / 2 / DEG, 1);
-            st.tag('half', v3.add(c, v3.scale(v3.sub(mid, c), 1.2)), `${h}° + ${h}°`, 'num mg', { dx: 0, dy: -12 });
+            st.tag('half', outward(st, mid, st.unit, 40, 46), `${h}° + ${h}°`, 'num mg', { screen: true });
             halfTag = true;
           }
         }
@@ -139,7 +168,10 @@
       const p = apply(R, e);
       st.arrow([0, 0, 0], p, { color: P.ink, width: 1.3 * thick, headSize: 7, alpha: 0.75 });
       if (v3.len(v3.sub(p, v)) < 0.2) { same = i; return; }
-      st.tag('e' + i, v3.scale(p, 1.13), `Re${sub[i]}`, 'num', {});
+      // a leg seen nearly end-on ends at the centre, where the axes cross: set its label off to the side
+      const pq = st.p(p);
+      if (Math.hypot(pq[0] - st.cx, pq[1] - st.cy) < 0.3 * st.unit) st.tag('e' + i, clearSpot(st, R, 0.32 * st.unit), `Re${sub[i]}`, 'num', { screen: true });
+      else st.tag('e' + i, v3.scale(p, 1.13), `Re${sub[i]}`, 'num', {});
     });
     // the arrow
     st.arrow([0, 0, 0], v, { color: P.amber, width: 2.6 * thick, glow: 10, headSize: 11, fade: false });
@@ -228,7 +260,7 @@
   const NOTES = {
     sandwich: ['只转第一段：绕紫色的 z 轴转 90°。青色的影子 ½e₃ 留在轴上不动；品红的那一份在 z = ½ 的平面里扫出 90° 的扇形，虚线把它分成左右两半：45° + 45°。后两段角为零。', 'Only the first turn: 90° about the violet z axis. The cyan shadow ½e₃ stays on the axis; the magenta part sweeps a 90° fan in the plane z = ½, and the dashed line splits it into two halves, 45° + 45°. The other two angles are zero.'],
     chain: ['(α, β, γ) = (0.37, −0.81, 0.52)：先绕 z 转 γ，再绕 y 转 β，最后绕 z 转 α。白色三脚架停在 Re₁、Re₂、Re₃，琥珀色的 v = Re₁ = (0.378, 0.680, 0.629)；顶部是乘完的旋子 0.830 − 0.396 e₁₂ − 0.393 e₁₃ + 0.030 e₂₃。', '(α, β, γ) = (0.37, −0.81, 0.52): first γ about z, then β about y, last α about z. The white tripod stops at Re₁, Re₂, Re₃ and the amber v = Re₁ = (0.378, 0.680, 0.629); at the top is the compiled rotor 0.830 − 0.396 e₁₂ − 0.393 e₁₃ + 0.030 e₂₃.'],
-    t: ['T 门 (π/4, 0, 0)：前两段角为零，箭头和三脚架一动不动；最后一段绕 z 转 45°，琥珀色的 v 沿赤道从 e₁ 走过 45°，Re₃ 留在北极。顶部的旋子是 0.924 − 0.383 e₁₂。', 'The T gate (π/4, 0, 0): the first two angles are zero and neither the arrow nor the tripod moves; the last turn is 45° about z, the amber v runs 45° along the equator from e₁, and Re₃ stays at the north pole. The rotor at the top is 0.924 − 0.383 e₁₂.'],
+    t: ['T 门 (π/4, 0, 0)：先作用的 γ、β 两段角为零，箭头和三脚架一动不动；最后一段绕 z 转 45°，琥珀色的 v 沿赤道从 e₁ 走过 45°，Re₃ 留在北极。顶部的旋子是 0.924 − 0.383 e₁₂。', 'The T gate (π/4, 0, 0): the two turns that act first, γ and β, have zero angle, and neither the arrow nor the tripod moves; the last turn is 45° about z, the amber v runs 45° along the equator from e₁, and Re₃ stays at the north pole. The rotor at the top is 0.924 − 0.383 e₁₂.'],
     h: ['H 门 (0, π/2, π)：第一段绕 z 转 180°，v 在北极、就在轴上，只剩青色的影子，三脚架的 Re₁、Re₂ 翻到反面；第二段绕 y 转 90°，v 落到 e₁。紫色虚线是对角轴 (e₁ + e₃)/√2：三脚架停在 Re₁ = e₃、Re₂ = −e₂、Re₃ = e₁。', 'The H gate (0, π/2, π): the first turn is 180° about z; v sits at the north pole, on the axis, so only the cyan shadow is left while the tripod\'s Re₁ and Re₂ flip over; the second turn is 90° about y and v comes down to e₁. The violet dashed line is the diagonal axis (e₁ + e₃)/√2; the tripod stops at Re₁ = e₃, Re₂ = −e₂, Re₃ = e₁.'],
     fold: ['同一组角 (0.37, −0.81, 0.52)：紫色虚线是乘完的旋子自己的转轴 n，紫色虚弧是绕 n 一次转 67.9°；它从白色的起点圈出发，落在白色的路（三段）走到的同一点。', 'The same angles (0.37, −0.81, 0.52): the violet dashed line is the compiled rotor\'s own axis n, and the violet dashed arc is one turn of 67.9° about n; it leaves the white start ring and lands where the white road of the three turns ends.']
   };
@@ -264,6 +296,8 @@
     at: (t) => apply(partial(t), S.v0),
     seek: (t) => { clock.pause(); clock.set(t); },
     camera: () => Object.assign({}, stage.cam),
+    /** The unit sphere's outline on screen: viewport centre and radius (for label-placement tests). */
+    disc: () => { const b = $('cv').getBoundingClientRect(); return { x: b.left + stage.cx, y: b.top + stage.cy, r: stage.unit }; },
     /** Viewport coordinates of a world point (for pointer tests). */
     screen: (v) => { const q = stage.p(v), b = $('cv').getBoundingClientRect(); return [b.left + q[0], b.top + q[1]]; }
   };
