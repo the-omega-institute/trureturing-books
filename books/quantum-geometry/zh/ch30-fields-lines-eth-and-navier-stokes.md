@@ -334,7 +334,7 @@ $$
 \qquad u_{e,\varepsilon}\in\mathbb Z^\times.
 $$
 
-[`orientationUnit`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.orientationUnit) 在有匹配时取任一实际匹配的整数单位系数，无匹配时取 $1$；它只依赖图、枚举与定向，独立于 $R,w$。故公式包括负权、零权、零因子环和特征 $2$，不使用除法。空图唯一空匹配使两边为 $1$；无完美匹配时所有配对项为零且 $Z=0$。若进一步 $R=\mathbb R$ 且每个实际边权非负，则 $Z\ge0$、$|u|=1$，取绝对值得 $|\operatorname{Pf}(A)|=Z$；这是上述恒等式的应用，不另有一个绝对值端点定理。
+[`orientationUnit`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.orientationUnit) 在有匹配时取任一实际匹配的整数单位系数，无匹配时取 $1$；它只依赖图、枚举与定向，独立于 $R,w$。故公式包括负权、零权、零因子环和特征 $2$，不使用除法。顶点集为空（$n=0$）时，唯一空匹配使两边为 $1$；顶点集非空的无边图没有完美匹配，属于所有配对项为零且 $Z=0$ 的无完美匹配情形。若进一步 $R=\mathbb R$ 且每个实际边权非负，则 $Z\ge0$、$|u|=1$，取绝对值得 $|\operatorname{Pf}(A)|=Z$；这是上述恒等式的应用，不另有一个绝对值端点定理。
 
 上面的有限旋转定向与此恒等式只有在**同一张实际图**上才能合用：保留原来的连通、dart 非空和整数欧拉假设，将原来的反向 dart 条件识别为 `Reverses`，并将每条偶简单圈的实际顶点删除补图匹配送入原 nice 圈条件，才能取得这里的 `NiceOdd`。从任意几何平面嵌入取得该旋转及完整面轨道的对应、超出旋转前提的图、完整凯莱行列式平方恒等式 `FullCayley`、$\sqrt{\det A}$ 表述、有理输入的精确算法和位复杂度及一般二分计数的 `#P`-完全性仍须分别处理，后者保留为 [@rem-ch30-karmarkar-kasteleyn-literature] 的文献结果。源审计 `29266` 保留 10 项验证、9 项未决；条件符号恒等式不消去这些残余义务。
 :::

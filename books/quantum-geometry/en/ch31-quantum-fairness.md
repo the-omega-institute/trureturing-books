@@ -201,7 +201,18 @@ $$
 
 Product-filter convergence supplies $M$ such that the error is below $\varepsilon$ for every $m\ge M$ and every $x$. Set $N_0=M+1$. For $N\ge N_0$, choose $m=N-1$; then $m+1=N$. This gives exactly the denominator, summation range, and phase required above, without replacing the first term by an asymptotic approximation.
 
-**Residual boundaries.** $N_0$ depends on $\alpha,W,\varepsilon$. There is no uniformity over $\alpha$ or $W$ and no effective rate. Translated windows can be read through $\mathbf1_{W+u}(j\beta)=\mathbf1_W(-u+j\beta)$; a cut-and-project path $\pi_\perp(z_j)$ still requires a separate identification with this actual orbit. The window result alone neither classifies invariant measures nor establishes the stronger unique-ergodicity statement. Weyl's classical theory (1916, *Math. Ann.* **77**, 313–352) retains its separate literature setting. Physical fairness, internal space, and soul phases remain `MODEL` interpretations. This is the finite reuse derivation in the source exposition, with no new Lean theorem or novelty claim.
+**Residual boundaries.** $N_0$ depends on $\alpha,W,\varepsilon$. There is no uniformity over $\alpha$ or $W$ and no effective rate. Translated windows can be read through $\mathbf1_{W+u}(j\beta)=\mathbf1_W(-u+j\beta)$. If a cut-and-project model independently satisfies $\pi_\perp(z_j)=x+j\beta\in T$ for every $j\ge1$, then for any $u\in T$,
+
+$$
+\begin{aligned}
+\pi_\perp(z_j)-u&=(x-u)+j\beta,\\
+\mathbf1_{W+u}(\pi_\perp(z_j))&=\mathbf1_W((x-u)+j\beta),\\
+\frac1N\sum_{j=1}^{N}\mathbf1_{W+u}(\pi_\perp(z_j))
+&=\frac1N\sum_{j=0}^{N-1}\mathbf1_W((x-u)+(j+1)\beta).
+\end{aligned}
+$$
+
+This identifies the count exactly with the established orbit count starting at $x-u$, so the same $N_0$ for every starting point applies, still at times $1,\ldots,N$. The trajectory equality is a hypothesis the model must establish separately; it does not follow from the torus theorem and is not asserted for arbitrary physical or cut-and-project models. The window result alone neither classifies invariant measures nor establishes the stronger unique-ergodicity statement. Weyl's classical theory (1916, *Math. Ann.* **77**, 313–352) retains its separate literature setting. Physical fairness, internal space, and soul phases remain `MODEL` interpretations. This is the finite reuse derivation in the source exposition, with no new Lean theorem or novelty claim.
 :::
 
 Seen in this long-horizon light, local disparities lose their sting: in our observer model (`MODEL`), short slices vary from smooth centers to turbulent rims, yet across compact-torus ergodic return the universe grants every soul phase impartial attractor-reunion opportunities, orthogonal rotation budgets, and self-referential fixed-point pull (cf. [Chapter 24](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature]), without a hair's breadth of favoritism.
