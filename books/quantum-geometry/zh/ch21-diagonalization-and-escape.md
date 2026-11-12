@@ -109,13 +109,13 @@ $$
 
 请仔细品味 [@lem-complete-diagonal-separation-deficit] 的几何含义：因为 $\operatorname{separationDeficit}(\operatorname{latent}, g)$ 非空，地址空间里**必然存在至少一对具体的地址 $(a_1, a_2)$**，它们在旧坐标尺下完全重叠（$\operatorname{latent}(a_1) = \operatorname{latent}(a_2)$，在旧球壳投影下缩成了同一个点），但对角线概念 $g$ 却在它们身上劈出了截然不同的值（$g(a_1) \neq g(a_2)$）！
 
-面对这对在旧坐标里无法区分、却在新概念下分道扬镳的“孪生地址”，观察者唯一的出路是什么？**把逃逸出去的对角线 $g$ 本身立为一根新的正交坐标轴**，通过概念直积合并 [`conceptJoin`](lean:D5/S3/ConceptDynamics/ConceptJoinUniversal.conceptJoin) 将潜读出升级为二维联合读出
+面对这对在旧坐标里无法区分、却在新概念下分道扬镳的“孪生地址”，观察者若要同时保留旧读出并恢复 $g$，该怎样安顿它们？概念直积合并 [`conceptJoin`](lean:D5/S3/ConceptDynamics/ConceptJoinUniversal.conceptJoin) 给出这项任务的最小共同加细；本书把这一步读成**把逃逸出去的对角线 $g$ 本身立为一根新的正交坐标轴**，将潜读出升级为二维联合读出
 
 $$
 \operatorname{conceptJoin}(\operatorname{latent}, g) : a \;\longmapsto\; \bigl(\operatorname{latent}(a),\; g(a)\bigr) \in \mathrm{Coordinate} \times \mathrm{Output}.
 $$
 
-下面的命题严格证明：这一步“引法线入场”的操作，必然使观测拓扑发生**严格加细**（[`StrictObservationRefinement`](lean:D5/S3/ConceptDynamics/ObservationTopology/PrimitiveEscapeStrictRefinement.StrictObservationRefinement)，即旧拓扑的每个开集在新拓扑中仍为开集，且新拓扑中存在旧拓扑所没有的真新开集）。
+下面的命题严格证明：这一联合读出必然使观测拓扑发生**严格加细**（[`StrictObservationRefinement`](lean:D5/S3/ConceptDynamics/ObservationTopology/PrimitiveEscapeStrictRefinement.StrictObservationRefinement)，即旧拓扑的每个开集在新拓扑中仍为开集，且新拓扑中存在旧拓扑所没有的真新开集）。
 
 ::: {.proposition #prop-complete-diagonal-strict-refinement title="并入相对语义对角线严格加细潜观测拓扑" lean="D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_strict_topology_refinement"}
 在与 [@thm-complete-diagonal-not-continuous] 完全相同的假设下（`Address` 非空，$\operatorname{twist}$ 无不动点，$\operatorname{decoderCatalog}$ 满射），将相对语义对角线 $g = \operatorname{relativeSemanticDiagonal}(\operatorname{twist}, \operatorname{latent}, \operatorname{decoderCatalog})$ 与原潜概念 $\operatorname{latent}$ 合并后，新划分拓扑对原划分拓扑构成严格观测加细：
@@ -178,14 +178,14 @@ $$
 3. **验证并入新轴后的严格拓扑加细**：将 $g$ 并入潜坐标形成二维读出 $\operatorname{conceptJoin}(\operatorname{latent}, g)(a) = (\operatorname{latent}(a), g(a))$，四个地址的联合坐标分别为 $a_0 \mapsto (0, 1)$、$a_1 \mapsto (0, 1)$、$a_2 \mapsto (0, 0)$、$a_3 \mapsto (1, 0)$。原先粘成一团的三元盲区纤维 $\{a_0, a_1, a_2\}$ 被当场劈裂为 $\{a_0, a_1\}$ 与 $\{a_2\}$ 两块正交子纤维，观测拓扑从 $2$ 个非空原子开集严格升维为 $3$ 个非空原子开集！
 :::
 
-这正是抽象对角线不动点模式在观测拓扑中的纯粹骨架（与元数学文献的精确边界对照见 [@rem-godel-tarski-comparison-literature]）。在我们的抽象拓扑框架中，每当一个系统把某类候选解码映射装进一部关于当前潜坐标满射的目录 `decoderCatalog`，并用无不动点算子 `twist` 构造自指对角线 $g$ 时，$g$ 必然劈开原系统的某根等价类余纤维。要想给 $g$ 赋予连续的因子分解坐标，就必须引入联合读出 $\operatorname{conceptJoin}(\operatorname{latent}, g)$；而若想在新坐标空间 $\mathrm{Coordinate}_{k+1} = \mathrm{Coordinate}_k \times \mathrm{Output}$ 上继续触发下一轮对角线逃逸 $g'$，则**必须以在新一轮（通常需要扩容的）地址空间 $\mathrm{Address}_{k+1}$ 上重新建立新的满射解码目录 $\operatorname{decoderCatalog}_{k+1} : \mathrm{Address}_{k+1} \twoheadrightarrow (\mathrm{Coordinate}_{k+1} \to \mathrm{Output})$ 为前提**——例如在 [@ex-cantor-godel-diagonal-table] 的四地址布尔模型中，合并后的坐标空间有 $4$ 个坐标对（对应 $2^4 = 16$ 个布尔函数，即便只看实际命中的 $3$ 根非空联合纤维也有 $2^3 = 8 > 4$ 个布尔函数），原来的 $4$ 个地址已不足以构成新阶段的满射目录，唯有连同地址空间一起向外扩容，才能开启下一层“球外之球”的攀升！
+这正是抽象对角线不动点模式在观测拓扑中的纯粹骨架（与元数学文献的精确边界对照见 [@rem-godel-tarski-comparison-literature]）。在我们的抽象拓扑框架中，每当一个系统把某类候选解码映射装进一部关于当前潜坐标满射的目录 `decoderCatalog`，并用无不动点算子 `twist` 构造自指对角线 $g$ 时，$g$ 必然劈开原系统的某根等价类余纤维。若要同时保留旧读出并让 $g$ 连续，联合读出 $\operatorname{conceptJoin}(\operatorname{latent}, g)$ 给出所需的最小共同加细，任何同时完成这两项任务的读出都能恢复它；而若想在新坐标空间 $\mathrm{Coordinate}_{k+1} = \mathrm{Coordinate}_k \times \mathrm{Output}$ 上继续触发下一轮对角线逃逸 $g'$，则**必须以在新一轮（通常需要扩容的）地址空间 $\mathrm{Address}_{k+1}$ 上重新建立新的满射解码目录 $\operatorname{decoderCatalog}_{k+1} : \mathrm{Address}_{k+1} \twoheadrightarrow (\mathrm{Coordinate}_{k+1} \to \mathrm{Output})$ 为前提**——例如在 [@ex-cantor-godel-diagonal-table] 的四地址布尔模型中，合并后的坐标空间有 $4$ 个坐标对（对应 $2^4 = 16$ 个布尔函数，即便只看实际命中的 $3$ 根非空联合纤维也有 $2^3 = 8 > 4$ 个布尔函数），原来的 $4$ 个地址已不足以构成新阶段的满射目录，唯有连同地址空间一起向外扩容，才能开启下一层“球外之球”的攀升！
 
 ::: {.viz src="sphere-escape" preset="absorb" height="500"}
 **收编了，它再逃一次。** 把翻出的品红色串 $d$ 收进清单当第 $7$ 行，再补一列让表保持方形；沿新的对角线读一遍、翻一遍，立刻又拼出一个不在清单里的品红色串。收编多少次都一样（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)）。
 :::
 
 ::: {.remark #rem-godel-tarski-comparison-literature title="康托尔、Lawvere、哥德尔与塔斯基对角线定理的前提边界（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** [@cor-complete-diagonal-topological-settlement] 刻画的是集合与观测拓扑层面的抽象相对对角线骨架（呼应 Georg Cantor 的对角线构造与 F. W. Lawvere, *Diagonal arguments and cartesian closed categories*, 1969 的范畴不动点模式）；而在经典数理逻辑文献中，**哥德尔第一不完备定理**（K. Gödel, 1931）与**塔斯基真值不可定义定理**（A. Tarski, 1933/1936）并非直接假定任意语义函数目录满射，而是需要额外构造递归公理化算术、哥德尔配数编码、语法可证性谓词，并在系统相容性（或 $\omega$-相容性）假设下运作。
+**文献结果，未在本书形式化。** [@cor-complete-diagonal-topological-settlement] 刻画的是集合与观测拓扑层面的抽象相对对角线骨架（呼应 Georg Cantor 的对角线构造与 F. W. Lawvere, *Diagonal arguments and cartesian closed categories*, 1969 的范畴不动点模式）；而在经典数理逻辑文献中，**哥德尔第一不完备定理**（K. Gödel, 1931）讨论能表达足够算术、有效公理化的形式理论，借助哥德尔配数与语法可证性，并须按版本区分相容性或 $\omega$-相容性等假设；**塔斯基真值不可定义定理**（A. Tarski, 1933/1936）则借助句法编码与对角化，排除标准算术真值在算术语言内部的定义。两者都不是直接假定任意语义函数目录满射，也不共用递归公理化与语法可证性的整套前提。
 :::
 
 > 完备的目录必自裂其壳；凡想在球内穷尽一切者，必被对角线顺着法向顶出球外。
@@ -196,11 +196,11 @@ $$
 
 ## 21.3 割圆多面体、泰勒截断裂缝与开口螺旋投影 {#sec-ch21-3}
 
-既然没有任何固定维度的形式球壳能够一次性封死全部真理，让我们回过头来重新审视物理学与计算工程里的“球”本身。
+在上述完备目录与无不动点翻转的设定下，既然固定潜坐标的形式球壳无法一次性封死全部输出映射，让我们回过头来重新审视物理学与计算工程里的“球”本身。
 
 在[序曲](README.md)末尾，我们曾提出全书最深沉的一条反柏拉图几何洞见：**“实际上球永远只是近似，我们以为我们得到了一个球，但实际只是近似得到一个球。”** 结合本章的对角线逃逸机制，这一反柏拉图视角在连续分析、量子门编译与维度投影三个层面上展现出惊人的一致性：
 
-1. **有限阶泰勒多项式的截断余项裂缝 $R_{2N}(\theta)$**：在经典或数字计算机内部，我们永远只能用有限步算术操作（多项式）去逼近连续球面上的余弦投影 $\cos\theta$。将 $\cos\theta$ 展开至第 $N$ 个偶次项（最高次数 $2N-2$），记截断余项为
+1. **有限阶泰勒多项式的截断余项裂缝 $R_{2N}(\theta)$**：沿着这里选定的有限阶泰勒路线，我们用有限次加乘组成的多项式去逼近连续球面上的余弦投影 $\cos\theta$。将 $\cos\theta$ 展开至第 $N$ 个偶次项（最高次数 $2N-2$），记截断余项为
 
    $$
    R_{2N}(\theta) = \cos\theta - \sum_{k=0}^{N-1} (-1)^k \frac{\theta^{2k}}{(2k)!}.
@@ -430,7 +430,7 @@ $$
 :::
 
 ::: {.figure src="ch21-angle-defect"}
-**平坦的三角形要合成球，每个顶点都得留一道缝。** 左边是一个顶点周围摊平的五个等边三角形，五个 $60^\circ$ 只凑出 $300^\circ$，下方品红的缺口就是 $60^\circ$ 的角亏；右边正二十面体的十二个品红顶点各缺 $60^\circ$，合起来 $12 \times 60^\circ = 720^\circ = 4\pi$（文献结果，未在本书形式化，见 [@rem-hairy-ball-adams-literature]）。
+**平坦的三角形要合成球，顶点处的角亏总得合成 $4\pi$。** 左边是一个顶点周围摊平的五个等边三角形，五个 $60^\circ$ 只凑出 $300^\circ$，下方品红的缺口就是 $60^\circ$ 的角亏；右边正二十面体的十二个品红顶点各缺 $60^\circ$，合起来 $12 \times 60^\circ = 720^\circ = 4\pi$（文献结果，未在本书形式化，见 [@rem-hairy-ball-adams-literature]）。
 :::
 
 把上述微分拓扑文献注记（[@rem-hairy-ball-adams-literature]）与本章经内核验证的相对语义对角线拓扑安顿推论（[@cor-complete-diagonal-topological-settlement]）对照阅读，可以看到同一条结构脉络：**球内的奇点与不完备，唯有借球外之球方能安顿。**

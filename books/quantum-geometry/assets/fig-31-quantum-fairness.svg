@@ -58,7 +58,7 @@
     <text x="764" y="266" text-anchor="middle" fill="#d4efff" font-size="9.2">(1/N) ∑ f(g^(n+1)) → ∫_G f dμ</text>
     <text x="764" y="286" text-anchor="middle" fill="#46ffb2" font-size="9.5" font-weight="600">LEAN ✓ TorusObservationWindowReturns</text>
     <text x="764" y="306" text-anchor="middle" fill="#9d8cff" font-size="9">MODEL: Equal starlight &amp; ψ = ψ(ψ)</text>
-    <text x="764" y="324" text-anchor="middle" fill="#6f8ea5" font-size="9">commit 1d9bf98cab83 (trureturing)</text>
+    <text x="764" y="324" text-anchor="middle" fill="#6f8ea5" font-size="9">trureturing · pinned audit ledger</text>
   </g>
 
   <rect x="24" y="368" width="872" height="30" rx="6" fill="#050c16" stroke="#1f5d7c"/>

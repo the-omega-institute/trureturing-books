@@ -361,6 +361,45 @@ $$
 **同向交换两次，不等于不交换。** 左边同一个方向交换两次，两条世界线互相绕了整整一圈，每颗粒子都回到原位，颜色却从 $(0, 1)$ 变成 $(1, 2)$；右边是不交换的直线，顶端仍是 $(0, 1)$。粒子被限制在平面里时这一圈解不开；借第三个空间方向把它抬过去解开，是 [@rem-braid-knot-topology-literature] 第 2 条的文献结果。
 :::
 
+**费米子的 $-1$ 从哪里来？** 上面说，粒子不被困在平面里时，一次交换只剩两种可能：玻色子的 $+1$ 与费米子的 $-1$（[@rem-braid-knot-topology-literature] 与下文 [@rem-error-correction-anyons-literature] 里的文献结果）。可量子计算机里只有比特，而作用在不同比特上的算子彼此**对易**，交换次序什么也不改变。用一串比特模拟费米子，那个 $-1$ 只能另找来源。办法是给每个“湮灭一个粒子”的算子拖一条尾巴：它左边每一位都放一个 $Z$。
+
+::: {.theorem #thm-jordan-wigner-car title="Jordan–Wigner 构造：带 Z 串的比特算子满足费米子的正则反对易关系" lean="D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_anticomm_of_lt D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_mixed_anticomm_of_lt D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_CAR"}
+设有 $N$ 个比特，格点编号 $0, 1, \dots, N - 1$，每个比特的基为 $\lvert 0\rangle$（空）与 $\lvert 1\rangle$（占据），$Z = \lvert 0\rangle\langle 0\rvert - \lvert 1\rangle\langle 1\rvert$，$\sigma^- = \lvert 0\rangle\langle 1\rvert$。对每个格点 $j$，令
+
+$$
+c_j = \underbrace{Z \otimes \cdots \otimes Z}_{\text{格点 } 0, \dots, j-1} \otimes\, \sigma^- \otimes \underbrace{I \otimes \cdots \otimes I}_{\text{格点 } j+1, \dots, N-1}.
+$$
+
+则对一切格点 $i < j$，
+
+$$
+c_i c_j + c_j c_i = 0, \qquad c_i c_j^\dagger + c_j^\dagger c_i = 0,
+$$
+
+并且对每个格点 $i$，$c_i c_i^\dagger + c_i^\dagger c_i = I$。
+:::
+
+::: proof
+三条都在张量积的每一位上逐位相乘。（1）$i < j$ 时，$c_i c_j$ 与 $c_j c_i$ 只在第 $i$ 位不同：一个是 $\sigma^- Z$，一个是 $Z \sigma^-$；其余各位两边相同。而 $\sigma^- Z = -\sigma^-$、$Z\sigma^- = \sigma^-$（$Z$ 在 $\lvert 1\rangle$ 上取 $-1$，在 $\lvert 0\rangle$ 上取 $+1$），所以两项恰好反号相消。这就是 Lean 证明里“相隔的两个格点之间只贡献一次符号反转”。（2）把 $c_j$ 换成 $c_j^\dagger$，第 $i$ 位的因子还是 $\sigma^-$ 与 $Z$ 的两种次序，同样相消。（3）$i = j$ 时左边的 $Z$ 串平方成 $I$，剩下第 $i$ 位的 $\sigma^-\sigma^+ + \sigma^+\sigma^- = \lvert 0\rangle\langle 0\rvert + \lvert 1\rangle\langle 1\rvert = I$：占据与空两类基态各被一项恰好覆盖一次。完整证明由 Lean 内核检查。
+:::
+
+::: {.example #ex-jordan-wigner-two-sites title="两个格点：没有 Z 串就没有 −1"}
+取 $N = 2$：$c_0 = \sigma^- \otimes I$，$c_1 = Z \otimes \sigma^-$。以下都是手工推导，并已用 $N = 2, 3$ 的显式矩阵逐项核对。
+
+- **$-1$ 来自 $Z$ 串。** $c_0 c_1 + c_1 c_0 = (\sigma^- Z + Z\sigma^-) \otimes \sigma^- = (-\sigma^- + \sigma^-) \otimes \sigma^- = 0$。若把 $c_1$ 换成没有尾巴的 $I \otimes \sigma^-$，两个算子作用在不同比特上，彼此对易，反对易子变成 $2\,\sigma^- \otimes \sigma^- \ne 0$。
+- **交换创建次序翻一个号。** $c_1^\dagger = Z \otimes \sigma^+$，其中 $\sigma^+ = \lvert 1\rangle\langle 0\rvert$。从空态出发：$c_0^\dagger c_1^\dagger \lvert 00\rangle = c_0^\dagger \lvert 01\rangle = \lvert 11\rangle$；反过来 $c_1^\dagger c_0^\dagger \lvert 00\rangle = c_1^\dagger \lvert 10\rangle = (Z\lvert 1\rangle) \otimes \lvert 1\rangle = -\lvert 11\rangle$。同一个双粒子态，按两种次序造出来差一个负号。
+- **泡利不相容。** $(c_j^\dagger)^2$ 在第 $j$ 位是 $(\sigma^+)^2 = 0$：同一个格点不能放两个粒子。
+- **跳跃项的局域性。** 相邻跳跃 $c_j^\dagger c_{j+1}$ 里，格点 $0, \dots, j-1$ 上的 $Z$ 串两两平方成 $I$，第 $j$ 位剩下 $\sigma^+ Z = \sigma^+$，所以 $c_j^\dagger c_{j+1} = \sigma^+_j \sigma^-_{j+1}$，只碰两个相邻比特。隔一位跳跃则多出一个 $Z$：$c_0^\dagger c_2 = \sigma^+ \otimes Z \otimes \sigma^-$，中间那个格点被“问了一次占据数”。
+:::
+
+一维链上，最近邻跳跃保持局域，代价只是一个看不见的奇偶尾巴。以下是**文献结果，未在本书形式化**：
+
+- 这一构造出自 P. Jordan 与 E. Wigner（*Z. Phys.* **47**, 631–651, 1928）；
+- 自旋与统计之间的一般联系是自旋—统计定理；
+- 在二维格点上 $Z$ 串必然拉长、跳跃项变成非局域，因而需要 Bravyi–Kitaev（2002）或 Verstraete–Cirac（2005）等其他编码。
+
+> 费米子的负号不住在粒子里，住在它左边那一串奇偶里。
+
 ## 把编织首尾相接：Markov 稳定化与着色计数 {#sec-markov-stabilization-coloring-count}
 
 [@rem-braid-knot-topology-literature] 的第 2 条说，三维空间里的三叶结解不开，而着色正是分辨它的经典工具。这件工具怎么用？[@cor-braid-yang-baxter] 管的是一段编织：上面一排线头，下面一排线头，颜色从一排传到另一排。可是结没有线头。把编织弯过来，让第 $k$ 个下端接回第 $k$ 个上端，绳子才成了闭合的圈，这叫编织的**闭合**。接上之后，“上端的颜色”与“下端的颜色”是同一段绳子的颜色，于是闭合编织的着色只剩一个条件：颜色沿编织传一遍，必须原样回来。**闭合编织的着色，就是着色传输的不动点。**

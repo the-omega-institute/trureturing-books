@@ -2749,6 +2749,30 @@
       "line": 67,
       "signature": "theorem orthogonal_syndrome_recovery (S : s → Matrix n d ℂ) (hS : OrthogonalSyndromes S) (sigma : Matrix s s ℂ) (rho : Matrix d d ℂ) : syndromeDecoding S (syndromeEncoding S sigma rho) = Matrix.trace sigma • rho"
     },
+    "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_CAR": {
+      "module": "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner",
+      "name": "D5.S3.Quantum.SpinChains.SupersymmetricFermion.JordanWigner.fullC_CAR",
+      "kind": "theorem",
+      "statement_id": "sha256:8a81638a530816f83b4da59a0f897af918ed0c6f692bcf286a433be6a5dfa377",
+      "line": 119,
+      "signature": "theorem fullC_CAR {N : ℕ} (i : Fin N) : fullC i * (fullC i)ᴴ + (fullC i)ᴴ * fullC i = (1 : FullOperator N)"
+    },
+    "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_anticomm_of_lt": {
+      "module": "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner",
+      "name": "D5.S3.Quantum.SpinChains.SupersymmetricFermion.JordanWigner.fullC_anticomm_of_lt",
+      "kind": "theorem",
+      "statement_id": "sha256:8a81638a530816f83b4da59a0f897af918ed0c6f692bcf286a433be6a5dfa377",
+      "line": 62,
+      "signature": "theorem fullC_anticomm_of_lt {N : ℕ} (i j : Fin N) (hij : i < j) : fullC i * fullC j + fullC j * fullC i = 0"
+    },
+    "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_mixed_anticomm_of_lt": {
+      "module": "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner",
+      "name": "D5.S3.Quantum.SpinChains.SupersymmetricFermion.JordanWigner.fullC_mixed_anticomm_of_lt",
+      "kind": "theorem",
+      "statement_id": "sha256:8a81638a530816f83b4da59a0f897af918ed0c6f692bcf286a433be6a5dfa377",
+      "line": 215,
+      "signature": "theorem fullC_mixed_anticomm_of_lt {N : ℕ} (i j : Fin N) (hij : i < j) : fullC i * (fullC j)ᴴ + (fullC j)ᴴ * fullC i = 0"
+    },
     "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_attained": {
       "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound",
       "name": "D5.S3.Quantum.TensorNetworks.BridgeGraph.QuantumMaxFlowBound.QMaxFlow_attained",

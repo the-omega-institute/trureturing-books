@@ -2,7 +2,7 @@
 # 01 Cover
 theme: ../../../../theme/slides
 title: "Geometric Intuition of Quantum Computing · Overview"
-info: "An overview of Geometric Intuition of Quantum Computing: the four blind spots and the dimensional ladder; for each of the eight parts its core picture, main Lean-verified theorems, literature results and open problems; the counts of the three tiers of warrant; and the book's dependency map."
+info: "An overview of Geometric Intuition of Quantum Computing: the four blind spots and the ten-part, thirty-nine-chapter dimensional ladder; for Parts I–VIII their core pictures, main Lean-verified theorems, literature results and open problems; the counts of the three tiers of warrant across all ten parts; and the full thirty-nine-chapter dependency map."
 htmlAttrs:
   lang: "en"
 deck:
@@ -10,13 +10,13 @@ deck:
   book: "Geometric Intuition of Quantum Computing"
   title: "Overview"
   version: "0.1.0"
-  blurb: "From pairwise measurement to spheres beyond spheres: the core pictures, main theorems and three tiers of warrant of all eight parts and thirty-two chapters, in thirty-nine slides."
+  blurb: "From pairwise measurement to spheres beyond spheres: the core pictures, main theorems and three tiers of warrant across ten parts and thirty-nine chapters, in thirty-nine slides."
 layout: cover
 ---
 
 <p class="kicker">Geometric Intuition of Quantum Computing · Overview</p>
 <h1 class="display">From pairwise measurement<br>to <em>ψ = ψ(ψ)</em></h1>
-<p class="lead">Eight parts, thirty-two chapters, climbing the ladder point → line → plane → sphere → the sphere beyond, rebuild quantum computing as geometry you can work by hand. The book explains why; the Lean kernel guarantees that.</p>
+<p class="lead">Ten parts, thirty-nine chapters, climbing the ladder point → line → plane → sphere → the sphere beyond, rebuild quantum computing as geometry you can work by hand. The book explains why; the Lean kernel guarantees that.</p>
 
 ---
 # 02 The book in one sentence
@@ -48,15 +48,15 @@ section: "Four blind spots"
 <Source>Prelude, Figure 0 (prelude-overview)</Source>
 
 ---
-# 04 The eight parts form a staircase
+# 04 The ten parts form a staircase
 section: "Reader's guide"
 ---
 
 <div class="body">
-  <p class="kicker">Eight parts, thirty-two chapters</p>
-  <h2 class="t">Eight parts form a staircase, <em>each one dimension higher</em></h2>
-  <img src="./img/prelude-eight-parts.en.svg" alt="Eight bars, one per part, each spanning its chapters and one step above the last." style="display: block; height: 600px; max-width: 100%; margin: 20px auto 0;">
-  <p class="lead mt-s">Four chapters apiece across all eight parts: point → line, line → plane, plane → sphere, entangled spheres, spacetime sphere, beyond the sphere, construction, synthesis.</p>
+  <p class="kicker">Ten parts, thirty-nine chapters</p>
+  <h2 class="t">Ten parts form a staircase, <em>each one dimension higher</em></h2>
+  <img src="./img/prelude-eight-parts.en.svg" alt="Ten bars, one per part, each spanning its chapters and one step above the last." style="display: block; height: 600px; max-width: 100%; margin: 20px auto 0;">
+  <p class="lead mt-s">Four chapters apiece across Parts I–IX and three in Part X: point → line, line → plane, plane → sphere, entangled spheres, spacetime sphere, beyond the sphere, construction, synthesis, mutual illumination, non-duality.</p>
 </div>
 <Source>Prelude, “Reader's Guide and Formal Verification Contract” (prelude-eight-parts)</Source>
 
@@ -665,14 +665,14 @@ section: "Three tiers"
   <p class="kicker">Three tiers of warrant</p>
   <h2 class="t">Three tiers of warrant, <em>three colours</em>, never mixed</h2>
   <div class="split mt">
-    <img src="./img/prelude-three-tiers.en.svg" alt="Three bars: green 184, violet 127, red 6; under the green bar, 308 theorem declarations in the lock file." style="display: block; width: 900px; max-width: 100%;">
+    <img src="./img/prelude-three-tiers.en.svg" alt="Three bars: green 210, violet 164, red 6; under the green bar, 313 theorem declarations in the lock file." style="display: block; width: 900px; max-width: 100%;">
     <div>
       <div class="g3">
-        <Stat value="188" label="theorems, lemmas, propositions and corollaries with lean=" tone="ok" />
-        <Stat value="127" label="remarks and examples marked “literature result, not formalized”" tone="violet" />
+        <Stat value="211" label="theorems, lemmas, propositions and corollaries with lean=" tone="ok" />
+        <Stat value="164" label="remarks and examples marked “literature result, not formalized”" tone="violet" />
         <Stat value="6" label="open conjectures, marked OPEN, with no Lean reference" tone="warn" />
       </div>
-      <p class="lead mt">The lock file <span class="mono">trureturing.lock.json</span> pins <span class="mono">dev@1d9bf98cab83</span>: 444 declarations, 313 of them Lean theorems.</p>
+      <p class="lead mt">The lock file <span class="mono">trureturing.lock.json</span> pins <PinnedCommit />: 447 declarations, 316 of them Lean theorems.</p>
     </div>
   </div>
 </div>
@@ -691,15 +691,15 @@ section: "Dependency map"
       <h2 class="t">Which chapter <em>builds on</em> which</h2>
       <p class="lead">The curved arrow into each chapter comes from the earlier chapter it refers back to most; the more mentions, the thicker the arrow.</p>
       <ul class="plain mt">
-        <li><b>Physical intuition:</b> Prelude → Ch. 1–12 → Ch. 17–19</li>
-        <li><b>Algorithms and compilation:</b> Ch. 2 → Ch. 13–16 → Ch. 25–27</li>
-        <li><b>Logic and number theory:</b> Ch. 10 → Ch. 21–24 → Ch. 29–32</li>
+        <li><b>Physical intuition:</b> Prelude → Ch. 1–12 → Ch. 17–19 → Ch. 33–34</li>
+        <li><b>Algorithms and compilation:</b> Ch. 2 → Ch. 13–16 → Ch. 25–27 → Ch. 38</li>
+        <li><b>Logic and number theory:</b> Ch. 10 → Ch. 21–24 → Ch. 29–39</li>
         <li><b>Kernel audit:</b> Prelude → Ch. 25–28 → Appendix C</li>
       </ul>
     </div>
   </div>
 </div>
-<Source>Coda, “Eight-Part, Thirty-Two-Chapter Reading and Dependency Map” (coda-dependency-tree)</Source>
+<Source>Coda, “Ten-Part, Thirty-Nine-Chapter Reading and Dependency Map” (coda-dependency-tree)</Source>
 
 ---
 # 39 Closing
@@ -708,5 +708,5 @@ layout: cover
 
 <p class="kicker">Read · Verify · Watch</p>
 <h1 class="display">The book explains,<br><em>Lean</em> decides</h1>
-<p class="lead">Read online or as PDF and EPUB; 152 static figures, 36 interactive labs, one film for each of the eight parts; check every theorem at the pinned trureturing commit.</p>
+<p class="lead">Read online or as PDF and EPUB; 150 static figures, 36 interactive labs, ten parts and thirty-nine chapters with eight explainer films; check every theorem at the pinned trureturing commit.</p>
 <p class="lead mt mono hl-cyan">Prelude → Ch. 1 · Appendix C: locked index</p>
