@@ -141,7 +141,7 @@ $$
 （职责边界：[@prop-measurement-gradient-flow] 经 Lean 内核验证的是无穷小对易子导数公式与纯实性；上述两采样点有限位移恒等式额外依赖“参数 $\theta$ 仅在单扇对合泡利门 $e^{-i\theta P_{\mathrm{gen}}/2}$ 中出现一次”的二能级频率结构，作为手算与文献结果列入 [@ex-cluster-shift-and-gradient] 与 [@rem-mbqc-gradients-literature]。）
 :::
 
-两个取值点一旦不隔 $90^\circ$ 而只隔小步长 $\pm h$，差分就不再精确：对 $f = \cos\theta$，$\theta \pm h$ 两点连成的弦，斜率是切线斜率的 $\sin h / h$ 倍，$h = 30^\circ$ 时短约 $4.5\%$；$h$ 取小，这一截偏差按 $h^2$ 缩小，同样的散粒噪声却被 $2h$ 除得更大（本章开头的对照）。
+两个取值点一旦不隔 $90^\circ$ 而只隔小步长 $\pm h$，差分在斜率非零处就不再精确：对 $f = \cos\theta$，$\theta \pm h$ 两点连成的弦，斜率是切线斜率的 $\sin h / h$ 倍，$h = 30^\circ$ 时幅度短约 $4.5\%$，驻点处则两者同为零；$h$ 取小，这一截偏差按 $h^2$ 缩小，同样的散粒噪声却被 $2h$ 除得更大（本章开头的对照）。
 
 ::: {.viz src="parameter-shift" preset="step" height="500"}
 **小步长的差分总差一截。** 同一条 $f = \cos\theta$，琥珀色的点在 $\theta = 60^\circ$；$\pm 30^\circ$ 两点连成的品红的弦比虚线切线缓，量尺上品红的条比切线短 $4.5\%$（$\sin h / h = 0.955$），青色的条（左右各 $90^\circ$ 两值之差的一半）停在切线上。
