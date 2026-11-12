@@ -148,7 +148,7 @@ Thus, whereas exact cloning is obstructed by the $z = z^2$ criterion of [@thm-no
 :::
 
 ::: {.figure src="ch14-approx-clone"}
-**The price of approximate cloning: each clone shrinks to 2/3, and the machine carries away 1/3 the other way.** The amber point on the shell is the input $\vv{r}$; the cyan arrow is the Bloch vector $\frac{2}{3}\vv{r}$ of each clone, ending on the cyan dashed circle; the magenta arrow is the machine qubit's $-\frac{1}{3}\vv{r}$. All three vectors are computed by partial traces of the cloning isometry. Literature result, not formalized in this book; for the machine's spectrum see [@thm-cloning-machine-spectrum].
+**The price of approximate cloning: each clone shrinks to 2/3, and the machine carries away 1/3 the other way.** The amber point on the shell is the input $\vv{r}$; the cyan arrow is the Bloch vector $\frac{2}{3}\vv{r}$ of each clone, ending on the cyan dashed circle; the magenta arrow is the machine qubit's $-\frac{1}{3}\vv{r}$, ending on the magenta dashed circle of radius $\frac{1}{3}$. All three vectors are computed by partial traces of the cloning isometry. Literature result, not formalized in this book; for the machine's spectrum see [@thm-cloning-machine-spectrum].
 :::
 
 ## Pauli Words and Stabilizer Syndromes {#sec-pauli-syndrome-parity}
@@ -392,6 +392,10 @@ Take $N = 2$: $c_0 = \sigma^- \otimes I$ and $c_1 = Z \otimes \sigma^-$. Everyth
 - **Locality of hopping.** In the nearest-neighbour hop $c_j^\dagger c_{j+1}$, the $Z$ strings on sites $0, \dots, j-1$ square to $I$ and site $j$ keeps $\sigma^+ Z = \sigma^+$, so $c_j^\dagger c_{j+1} = \sigma^+_j \sigma^-_{j+1}$ touches only two neighbouring qubits. A hop over one site keeps an extra $Z$: $c_0^\dagger c_2 = \sigma^+ \otimes Z \otimes \sigma^-$, which "asks" the site in between for its occupation.
 :::
 
+::: {.figure src="ch14-jordan-wigner-string"}
+**$c_1c_3$ and $c_3c_1$ differ only at site $1$, by a sign.** Take $N = 4$. The top two rows are the factors of $c_1$ and $c_3$ site by site, with $c_3$ trailing its $Z$ string over sites $0, 1, 2$; the bottom two rows multiply them in both orders. At site $0$, $ZZ = I$, and sites $2$ and $3$ agree; only the magenta column $1$ has $\sigma^- Z = -\sigma^-$ on one side and $Z\sigma^- = \sigma^-$ on the other, so $c_1c_3 = -c_3c_1$ ([@thm-jordan-wigner-car]).
+:::
+
 On a one-dimensional chain, nearest-neighbour hopping stays local; the price is an invisible parity tail. The following are **literature results, not formalized in this book**:
 
 - the construction is due to P. Jordan and E. Wigner (*Z. Phys.* **47**, 631–651, 1928);
@@ -619,6 +623,8 @@ Note the scope of this code: it corrects only single $X$ bit-flip errors; a sing
 ::: {.viz src="syndrome-decoding" preset="two" height="500"}
 **Flip two, and the lights point the wrong way.** In the logical state $\lvert 000\rangle$ the first and second qubits flip together (two magenta X's): only $g_2$ lights up, exactly as if the third qubit alone had flipped. The decoder follows the light and flips the third qubit back (amber); together that is $X_1X_2X_3$, a logical flip, and the cyan bar lands on $\lvert 111\rangle$ while the dashed outline stands on $\lvert 000\rangle$. This code corrects at most one $X$ flip.
 :::
+
+A phase flip fails in a different way: $Z_1$ commutes with both $g_1 = Z_1Z_2$ and $g_2 = Z_2Z_3$, so neither check lights up, yet $\lvert +_L\rangle$ has been turned into $\lvert -_L\rangle$.
 
 ::: {.viz src="syndrome-decoding" preset="phase" height="500"}
 **Flip a phase: no light, yet the state has changed.** In the logical state $\lvert +_L\rangle$ the first qubit has its phase flipped (the magenta Z): $Z_1$ commutes with both $g_1$ and $g_2$, neither light goes on, the bars never leave the code space and the decoder does nothing; yet the cyan bar on $\lvert 111\rangle$ has flipped below the axis, exactly opposite the dashed outline, and the state has become the orthogonal $\lvert -_L\rangle$.

@@ -264,7 +264,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第十四章 | 定理 `thm-quandle-coloring-markov-invariant` 后三条边界的第 3 条（“幂等公理省不得”）之后、例 `ex-fox-three-colorings-markov` 之前 | `braiding` · `rack` |
 | 第十四章 | 例 `ex-fox-three-colorings-markov` 之后、文献注记 `rem-alexander-markov-literature` 之前 | `braiding` · `trefoil` |
 | 第十四章 | Markov 一节末（“这一半，Lean 已经验证”）之后 | `braiding` 完整实验室 |
-| 第十四章 | 例 `ex-repetition-code-syndrome` 之后、文献注记 `rem-error-correction-anyons-literature` 之前 | `syndrome-decoding` · `two`、`phase` |
+| 第十四章 | 例 `ex-repetition-code-syndrome` 之后、文献注记 `rem-error-correction-anyons-literature` 之前 | `syndrome-decoding` · `two`，一句相位翻转的过渡之后是 `phase` |
 | 第十四章 | 文献注记 `rem-error-correction-anyons-literature` 之后、转入第十五章之前 | `syndrome-decoding` 完整实验室 |
 | 第十五章 | Grover 一节定理 `thm-grover-uniform-rotation` 的证明之后、三条边界之前 | `grover-reflections` · `mirrors` |
 | 第十五章 | Grover 一节三条边界列表之后 | `grover-reflections` · `sqrt` |
