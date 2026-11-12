@@ -148,7 +148,7 @@ Lean 模块 `D5/S3/Quantum/CloningMachine` 直接把这一候选机器约化态�
 :::
 
 ::: {.figure src="ch14-approx-clone"}
-**近似克隆的代价：克隆体缩到 2/3，机器反向带走 1/3。** 琥珀色的点是球皮上的输入 $\vv{r}$；青色的箭头是每个克隆体的布洛赫矢量 $\frac{2}{3}\vv{r}$，落在青色虚线圆上；品红的箭头是机器比特的 $-\frac{1}{3}\vv{r}$。三个矢量由克隆等距求偏迹算出。文献结果，未在本书形式化；机器比特的谱见 [@thm-cloning-machine-spectrum]。
+**近似克隆的代价：克隆体缩到 2/3，机器反向带走 1/3。** 琥珀色的点是球皮上的输入 $\vv{r}$；青色的箭头是每个克隆体的布洛赫矢量 $\frac{2}{3}\vv{r}$，落在青色虚线圆上；品红的箭头是机器比特的 $-\frac{1}{3}\vv{r}$，落在半径 $\frac{1}{3}$ 的品红虚线圆上。三个矢量由克隆等距求偏迹算出。文献结果，未在本书形式化；机器比特的谱见 [@thm-cloning-machine-spectrum]。
 :::
 
 ## Pauli 字与稳定子综合征 {#sec-pauli-syndrome-parity}
@@ -390,6 +390,10 @@ $$
 - **交换创建次序翻一个号。** $c_1^\dagger = Z \otimes \sigma^+$，其中 $\sigma^+ = \lvert 1\rangle\langle 0\rvert$。从空态出发：$c_0^\dagger c_1^\dagger \lvert 00\rangle = c_0^\dagger \lvert 01\rangle = \lvert 11\rangle$；反过来 $c_1^\dagger c_0^\dagger \lvert 00\rangle = c_1^\dagger \lvert 10\rangle = (Z\lvert 1\rangle) \otimes \lvert 1\rangle = -\lvert 11\rangle$。同一个双粒子态，按两种次序造出来差一个负号。
 - **泡利不相容。** $(c_j^\dagger)^2$ 在第 $j$ 位是 $(\sigma^+)^2 = 0$：同一个格点不能放两个粒子。
 - **跳跃项的局域性。** 相邻跳跃 $c_j^\dagger c_{j+1}$ 里，格点 $0, \dots, j-1$ 上的 $Z$ 串两两平方成 $I$，第 $j$ 位剩下 $\sigma^+ Z = \sigma^+$，所以 $c_j^\dagger c_{j+1} = \sigma^+_j \sigma^-_{j+1}$，只碰两个相邻比特。隔一位跳跃则多出一个 $Z$：$c_0^\dagger c_2 = \sigma^+ \otimes Z \otimes \sigma^-$，中间那个格点被“问了一次占据数”。
+:::
+
+::: {.figure src="ch14-jordan-wigner-string"}
+**$c_1c_3$ 与 $c_3c_1$ 只在第 $1$ 格差一个负号。** 取 $N = 4$。上两行是 $c_1$ 与 $c_3$ 逐格的因子，$c_3$ 在格点 $0, 1, 2$ 上拖着 $Z$ 串；下两行是两种次序逐格相乘。格点 $0$ 上 $ZZ = I$，格点 $2$、$3$ 两行相同；只有品红的第 $1$ 列一边是 $\sigma^- Z = -\sigma^-$，一边是 $Z\sigma^- = \sigma^-$，于是 $c_1c_3 = -c_3c_1$（[@thm-jordan-wigner-car]）。
 :::
 
 一维链上，最近邻跳跃保持局域，代价只是一个看不见的奇偶尾巴。
@@ -638,6 +642,8 @@ $$
 ::: {.viz src="syndrome-decoding" preset="two" height="500"}
 **翻两个，灯指错。** 逻辑态 $\lvert 000\rangle$ 的第一、二个比特一起翻（两个品红的 X）：只有 $g_2$ 亮，与只翻第三个一模一样。解码器照灯翻回第三个比特（琥珀色），合起来是 $X_1X_2X_3$，一个逻辑翻转：青色柱子落在 $\lvert 111\rangle$ 上，虚线却在 $\lvert 000\rangle$。这套码只纠至多一个 $X$ 翻转。
 :::
+
+换成相位翻转，失败的方式就不同了：$Z_1$ 与 $g_1 = Z_1Z_2$、$g_2 = Z_2Z_3$ 都对易，两道校验一盏灯也不亮，$\lvert +_L\rangle$ 却被翻成了 $\lvert -_L\rangle$。
 
 ::: {.viz src="syndrome-decoding" preset="phase" height="500"}
 **翻相位，灯不亮，态却变了。** 逻辑态 $\lvert +_L\rangle$ 的第一个比特翻了相位（品红的 Z）：$Z_1$ 与 $g_1$、$g_2$ 都对易，两盏灯都不亮，柱子没有离开码空间，解码器也不动；可 $\lvert 111\rangle$ 那根青色柱子翻到了轴下，与虚线正好相反，态成了正交的 $\lvert -_L\rangle$。

@@ -95,10 +95,6 @@ $$
 Induction on $n \in \mathbb{N}$ using the angle-addition formulas for $\sin((2n+1)\theta + 2\theta)$ and $\cos((2n+1)\theta + 2\theta)$ proves the $n$-step rotation formula, and bilinearity of $\otimes_{\mathrm{K}}$ yields the tensored identity with $R$ (claim 2). The full proof is checked by the Lean kernel.
 :::
 
-::: {.viz src="grover-reflections" preset="mirrors" height="500"}
-**Two mirrors make one turn.** For $N = 8$, $\theta \approx 20.70^\circ$: the amber arrow is first mirrored in the failure axis $B$ (mirror 1), its tip dropping along the vertical dashed line below the axis; then in the dashed line of $\lvert s\rangle$ (mirror 2), and it comes back $2\theta \approx 41.41^\circ$ higher than where it started; the violet arc is that turn. The cyan shadow on the target axis $W$ is the success amplitude, growing from $0.354$ to $0.884$ ([@thm-grover-uniform-rotation] with $n = 1$).
-:::
-
 Three boundaries in [@thm-grover-uniform-rotation] must be kept explicit (Figure 15, Panel I):
 
 1. **Retaining the $p = 1$ branch**: Because $B$ divides by $\sqrt{1 - p}$, the case $p = 1$ is handled by the explicit branch $U = W$, while for $0 < p < 1$ the $n = 0$ case recovers $U = \sin\theta\,W + \cos\theta\,B$.
@@ -152,6 +148,10 @@ $$
 Write $X = \mathrm{shiftMatrix}(M)$ and $Z = \mathrm{clockMatrix}(M)$. Unitarity of $X$ and $Z$ implies $D(a, b) \cdot \mathrm{star}(D(a, b)) = I_M$. Commuting $X^{c.\mathrm{val}} Z^{d.\mathrm{val}}$ past $Z^{b.\mathrm{val}}$ and $X^{a.\mathrm{val}}$ via $Z^b X^c = \omega_M^{(b \cdot c).\mathrm{val}} X^c Z^b$ and $X^a Z^d = \omega_M^{(-a \cdot d).\mathrm{val}} Z^d X^a$ accumulates the net phase $\omega_M^{(b \cdot c - a \cdot d).\mathrm{val}}$, while the remaining $D(a, b) \cdot \mathrm{star}(D(a, b))$ cancels to $I_M$. The full proof is checked by the Lean kernel.
 :::
 
+
+::: {.figure src="ch15-weyl-area"}
+**Conjugation leaves only a phase, set by the area the two displacements span.** Take $M = 8$. On the left is the lattice $\mathrm{ZMod}\,8 \times \mathrm{ZMod}\,8$, horizontally the number of shifts $a$, vertically the number of clock steps $b$; the two cyan arrows $(a, b) = (2, 1)$ and $(c, d) = (1, 3)$ span a magenta parallelogram of oriented area $ad - bc = 5$. On the right is a phase clock with $8$ positions; the amber hand rests on $\omega_8^{3}$, since $bc - ad = -5 \equiv 3 \pmod 8$ ([@lemma-phase-kickback-weyl]). Reading the exponent as minus the oriented area is only a geometric reading of the determinant $bc - ad$; the position of the hand is checked directly with $8 \times 8$ matrices.
+:::
 Three details of [@lemma-phase-kickback-weyl] should be noted:
 
 1. **Subtraction in $\mathrm{ZMod}\,M$ precedes `.val`**: The exponent $(b \cdot c - a \cdot d).\mathrm{val}$ is computed by subtracting $a \cdot d$ from $b \cdot c$ inside $\mathrm{ZMod}\,M$ first and then taking its natural-number representative `.val` in $\{0, \dots, M-1\}$.
@@ -194,6 +194,10 @@ If $x \in H$, then $\mathrm{character}(k.1)(x) = 1$ for every $k \in \mathrm{ann
 
 Note the normalization boundary in [@prop-finite-character-cancellation]: for $x \in H$, the sum equals the **unnormalized** cardinality $|\mathrm{annihilator}(H)|$; one must divide by the state and QFT normalization factors ($\sqrt{|H|}$ and $\sqrt{m}$) before interpreting the result as a quantum amplitude or probability.
 
+::: {.viz src="phase-gears" preset="four" height="500"}
+**Period 4 leaves four peaks.** $Q = 16$, comb $\{0, 4, 8, 12\}$: following $k = 4$, all four cyan arrows point right and the chain has length $4$, an unnormalized sum and not a probability $1$; after the sweep only the four bars at $0$, $4$, $8$ and $12$ remain, each $\frac{1}{4}$, right on the magenta marks $sQ/r$, and the other twelve are $0$.
+:::
+
 ## Finite Period Sampling and Order Reconstruction in Shor’s Algorithm {#sec-shor-order-reconstruction}
 
 Applying [@prop-finite-character-cancellation] to an arbitrary function $f : \mathrm{ZMod}\,m \to \mathbb{C}$ yields the **finite Poisson summation formula**.
@@ -225,6 +229,12 @@ $$
 Since negation $k \mapsto -k$ is a bijection on the subgroup $\mathrm{annihilator}(H)$, [@prop-finite-character-cancellation] reduces the inner sum to $|\mathrm{annihilator}(H)|$ for $x \in H$ and $0$ for $x \notin H$. Multiplying by $\frac{|H|}{m}$ and using the cardinality identity $|H| \cdot |\mathrm{annihilator}(H)| = m$ cancels the prefactor to $1$, leaving $\sum_{h : H} f(h.1)$. The full proof is checked by the Lean kernel.
 :::
 
+
+In the example with $m = 32$ and period $r = 8$, the comb of positions $H = \{0, 8, 16, 24\}$ has only $4$ cells, while the annihilator $H^\perp = \{0, 4, 8, \dots, 28\}$ has $8$ frequencies, spaced $m/r = 4$ apart.
+
+::: {.viz src="phase-gears" preset="dual" height="500"}
+**The peaks are $Q/r$ apart, not $r$.** $Q = 32$ and period $r = 8$: the cyan comb $H = \{0, 8, 16, 24\}$ on the register has only $4$ cells, $8$ apart; after the sweep the spectrum keeps $8$ equal bars, each $\frac{1}{8}$, at $0, 4, 8, \dots, 28$, exactly the $8$ frequencies of $H^\perp$, spaced $Q/r = 4$ apart. At $k = 4$ the four cyan arrows all point right and the chain has length $4$; $\lvert H\rvert \cdot \lvert H^\perp\rvert = 4 \cdot 8 = 32$ ([@cor-finite-poisson-period]). In the example, $Q = 16$ and $r = 4$ happen to give $r = Q/r = 4$, so the two combs coincide.
+:::
 ::: {.remark #rem-shor-divisibility-boundary-literature title="Scope Boundaries Between Finite Poisson Summation and Non-Divisible Shor Order Recovery (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** Two critical boundaries govern how [@cor-finite-poisson-period] connects to Shor's algorithm — in particular, the Dirichlet/Fejér kernel concentration for $r \nmid Q$ and continued-fraction denominator recovery in Item 2 belong to the quantum-algorithms literature (see [@rem-grover-qft-shor-literature] below) and are not formalized in this book:
 
@@ -297,10 +307,6 @@ For $N = 8$ two steps still fall short, and the success probability stops at $\f
 :::
 
 In Step 3 the periodic state, after the QFT, leaves peaks only at the four frequencies $k \in \{0, 4, 8, 12\}$.
-
-::: {.viz src="phase-gears" preset="four" height="500"}
-**Period 4 leaves four peaks.** $Q = 16$, comb $\{0, 4, 8, 12\}$: following $k = 4$, all four cyan arrows point right and the chain has length $4$; after the sweep only the four bars at $0$, $4$, $8$ and $12$ remain, each $\frac{1}{4}$, right on the magenta marks $sQ/r$, and the other twelve are $0$.
-:::
 
 The order is then read off a peak: $k = 4$ and $12$ give the order $4$ directly, $k = 8$ gives only its proper divisor $2$, and $k = 0$ carries no information.
 

@@ -1,3 +1,5 @@
 /* ORTHO//ESCAPE: everything comes from the shared lab layout (../assets/theme.css); the stage is a flat canvas. */
 #cv { cursor: default; }
 .sheet .evh { margin: 16px 0 6px; font-family: var(--font-display); font-size: 12px; letter-spacing: 0.14em; color: var(--cyan); text-transform: uppercase; }
+.chk { color: var(--dim); font-weight: 600; }
+.chk { color: var(--dim); font-weight: 600; }

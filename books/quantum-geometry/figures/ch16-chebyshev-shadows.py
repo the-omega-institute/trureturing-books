@@ -11,11 +11,13 @@ import math
 SIZE = (500, 280)
 ALT = {
     "zh": "上半个单位圆，圆心在横轴上。四支箭头从圆心出发，依次与横轴正向成 0°、60°、120°、180°，相邻两支之间是紫色的角 θ = 60°，"
-          "最后一支 m = 3 是琥珀色的。每支箭头的尖端向横轴作虚线垂线，落脚处的青色点就是它的影子，标为 T₀ = 1、T₁ = ½、T₂ = −½、T₃ = −1。",
+          "最后一支 m = 3 是琥珀色的。每支箭头的尖端向横轴作虚线垂线，落脚处的青色点就是它的影子，标为 T₀ = 1、T₁ = ½、T₂ = −½、T₃ = −1。"
+          "两条紫色虚线把第 0 支与第 2 支箭头补成菱形，对角线的顶点正是第 1 支箭头的尖端；左上角写着 T₀ + T₂ = 2x T₁，即 1 − ½ = 2 · ½ · ½。",
     "en": "The upper half of a unit circle centred on the horizontal axis. Four arrows leave the centre at 0°, 60°, 120° and "
           "180° from the positive axis; neighbouring arrows are separated by the violet angle θ = 60°, and the last one, "
           "m = 3, is amber. A dashed perpendicular drops from each tip to the axis, and the cyan dot at its foot is the arrow's "
-          "shadow, labelled T₀ = 1, T₁ = ½, T₂ = −½, T₃ = −1.",
+          "shadow, labelled T₀ = 1, T₁ = ½, T₂ = −½, T₃ = −1. Two violet dashed lines complete arrows 0 and 2 into a rhombus whose "
+          "diagonal ends at the tip of arrow 1; the top left reads T₀ + T₂ = 2x T₁, that is 1 − ½ = 2 · ½ · ½.",
 }
 
 THETA = 60
@@ -40,6 +42,16 @@ def draw(fig):
     for m in range(1, 4):
         fig.angle(cx, cy, 40, (m - 1) * THETA, m * THETA, "*θ*", color="axis", width=2.0)
 
+    # the recurrence as a rhombus: arrow 0 + arrow 2 = 2 cos θ · arrow 1, so the shadows give T₀ + T₂ = 2x T₁
+    P = [(math.cos(math.radians(m * THETA)), math.sin(math.radians(m * THETA))) for m in range(4)]
+    diag = (P[0][0] + P[2][0], P[0][1] + P[2][1])
+    k = 2 * math.cos(math.radians(THETA))
+    assert abs(diag[0] - k * P[1][0]) < 1e-12 and abs(diag[1] - k * P[1][1]) < 1e-12
+    assert abs((tm[0] + tm[2]) / 2 - 2 * 0.5 * tm[1] / 2) < 1e-12
+    S = lambda v: (cx + R * v[0], cy - R * v[1])
+    fig.line(*S(P[0]), *S(diag), "axis", 1.8, dash="6 4")
+    fig.line(*S(P[2]), *S(diag), "axis", 1.8, dash="6 4")
+
     for m in range(4):
         a = math.radians(m * THETA)
         tx, ty = cx + R * math.cos(a), cy - R * math.sin(a)
@@ -52,6 +64,8 @@ def draw(fig):
             fig.text(lx, ly, f"*m* = {m}", size=14, color="dim", anchor="middle", middle=True)
         fig.dot(tx, cy, 5.4, "line", ring="bg")
         fig.text(tx, cy + 24, f"*T*_{{{m}}} = {VALUES[m]}", size=14, color="line", anchor="middle")
-    fig.text(cx + R, cy - 14, "*m* = 0", size=14, color="dim", anchor="end")
+    fig.text(cx + R + 4, cy - 16, "*m* = 0", size=14, color="dim")
     fig.text(cx - R, cy - 14, "*m* = 3", size=14, color="now")
     fig.text(cx, cy + 58, t("*x* = cos *θ* = ½", "*x* = cos *θ* = ½"), size=14, color="dim", anchor="middle")
+    fig.text(14, 24, "*T*_{0} + *T*_{2} = 2*x* *T*_{1}", size=14, color="axis")
+    fig.text(14, 44, "1 − ½ = 2 · ½ · ½", size=14, color="axis")

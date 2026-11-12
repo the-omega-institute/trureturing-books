@@ -353,7 +353,7 @@
     if (S.scene === 'window') {
       const g = gram(t), bad = S.wish != null && (S.wish < g.lo - 1e-9 || S.wish > g.hi + 1e-9);
       $('roKeyL').textContent = L('三根向量撑开的体积的平方 det G', 'det G, the squared volume the three span');
-      $('roKey').innerHTML = `${sgn(g.det, 4)} <span class="okmark">≥ 0 ✓</span>`; $('roKeySub').textContent = '(sin θ₁ · sin θ₂ · sin φ)²';
+      $('roKey').innerHTML = `${sgn(g.det, 4)} ≥ 0 ✓`; $('roKeySub').textContent = '(sin θ₁ · sin θ₂ · sin φ)²';
       set(1, 'A·B = cos θ₁', sgn(g.c1, 4)); set(2, 'B·C = cos θ₂', sgn(g.c2, 4)); set(3, 'A·C', `<span class="c-am">${sgn(g.cAC, 4)}</span>`); set(4, L('窗口', 'the window'), `[${sgn(g.lo, 3)}, ${sgn(g.hi, 3)}]`);
       $('roNote').innerHTML = bad ? L(`<b class="c-wn">指定的 A·C = ${sgn(S.wish, 2)} 在窗口之外</b>：那里 det G = ${sgn(detFor(S.wish), 3)} 为负，没有三根单位向量能同时给出这三个余弦。C 停在最近的窗边。`, `<b class="c-wn">The requested A·C = ${sgn(S.wish, 2)} is outside the window</b>: there det G = ${sgn(detFor(S.wish), 3)} is negative, and no three unit vectors give these three cosines together. C stays at the nearest edge.`)
         : g.vol < 1e-3 ? L('贴上窗边：三根向量落在同一个平面里，A·C 等于 cos(θ₁ ∓ θ₂)。', 'At the edge of the window: the three vectors lie in one plane and A·C equals cos(θ₁ ∓ θ₂).')
@@ -362,7 +362,7 @@
     } else if (S.scene === 'pages') {
       const bk = book(), j = Math.floor(t + 1e-9) % bk.N;
       $('roKeyL').textContent = L('把时钟拨一格、系统转一格之后，整本书的变化', 'change of the whole book after one tick of clock and system');
-      $('roKey').innerHTML = `${sci(bk.residual)} <span class="okmark">= 0 ✓</span>`; $('roKeySub').textContent = '‖(T ⊗ U − 1)Ψ‖';
+      $('roKey').innerHTML = `${sci(bk.residual)} = 0 ✓`; $('roKeySub').textContent = '‖(T ⊗ U − 1)Ψ‖';
       set(1, L('读头所在的页', 'page under the head'), `${j} / ${bk.N}`); set(2, L('这一页的权重', 'weight of this page'), `1/${bk.N} = ${fix(1 / bk.N, 4)}`);
       set(3, L('这一页的态 (x, y, z)', 'state on this page (x, y, z)'), bk.r[j].map((x) => fix(x, 2)).join(', ')); set(4, L('与下一页的重叠', 'overlap with the next page'), fix(bk.overlap(j, (j + 1) % bk.N), 4));
       $('roNote').textContent = L('整本书在“拨一格”之下不变，它没有哪一页是“现在”。对时钟读数条件化，才得到读头下面那一页。', 'The whole book is unchanged by a tick, and no page of it is “now”. Only conditioning on the clock reading gives the page under the head.');
@@ -370,7 +370,7 @@
     } else if (S.scene === 'field') {
       const F = flow(t);
       $('roKeyL').textContent = L('降下的势能 与 走过的耗散', 'potential lost and dissipation paid');
-      $('roKey').innerHTML = `${fix(F.V0 - F.V, 5)} = ${fix(F.diss, 5)} <span class="okmark">✓</span>`; $('roKeySub').textContent = 'V(0) − V(t) = ∫₀ᵗ |ẋ|² ds';
+      $('roKey').innerHTML = `${fix(F.V0 - F.V, 5)} = ${fix(F.diss, 5)} ✓`; $('roKeySub').textContent = 'V(0) − V(t) = ∫₀ᵗ |ẋ|² ds';
       set(1, L('到目标的角度 α', 'angle α to the target'), `${fix(F.a / DEG, 2)}°`); set(2, L('势能 V = 1 − cos α', 'potential V = 1 − cos α'), fix(F.V, 5));
       set(3, L('速度 |ẋ| = sin α', 'speed |ẋ| = sin α'), fix(F.speed, 4)); set(4, L('流过的时间 t', 'flow time t'), fix(t, 2));
       $('roNote').textContent = L('场在每一点都给出方向，所以不需要知道路线。它只在两处为零：目标，和目标正对面的那个不稳定点。', 'The field gives a direction at every point, so no route needs to be known. It vanishes at two places only: the target, and the unstable point exactly opposite it.');

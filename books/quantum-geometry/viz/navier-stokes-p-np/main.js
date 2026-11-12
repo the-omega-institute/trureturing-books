@@ -237,7 +237,7 @@
       hud = s < 1e-9 ? L('无旋：品红的兰姆项为零，整个对流项是一个梯度', 'no vorticity: the magenta Lamb term is zero and the whole advection term is a gradient') : L(`涡度 ω = ${fix(d.w, 2)}：白 = 青 + 品红`, `vorticity ω = ${fix(d.w, 2)}: white = cyan + magenta`);
       $('roKeyL').textContent = L('兰姆那一半的大小 |ω × u|', 'size of the Lamb half |ω × u|'); $('roKey').innerHTML = `<span class="c-mg">${fix(norm(d.lamb), 3)}</span>`; $('roKeySub').textContent = L(`对流项 ${fix(norm(d.adv), 3)} 之中`, `out of an advection term of ${fix(norm(d.adv), 3)}`);
       set(1, L('梯度那一半 |∇(|u|²/2)|', 'the gradient half |∇(|u|²/2)|'), fix(norm(d.grad), 3)); set(2, L('涡度 ω = ∇∧u', 'vorticity ω = ∇∧u'), fix(d.w, 2));
-      set(3, L('探针处的速度 |u|', 'speed at the probe |u|'), fix(norm(d.u), 3)); set(4, L('恒等式的差分残差', 'finite-difference residual of the identity'), `${d.residual.toExponential(1).replace('-', '−')} <span class="okmark">${d.residual < 1e-6 ? '✓' : '✗'}</span>`);
+      set(3, L('探针处的速度 |u|', 'speed at the probe |u|'), fix(norm(d.u), 3)); set(4, L('恒等式的差分残差', 'finite-difference residual of the identity'), `${d.residual.toExponential(1).replace('-', '−')} ${d.residual < 1e-6 ? L('相符', 'agrees') : L('不符', 'disagrees')}`);
       $('roNote').textContent = L('青色那一半取旋度后为零，所以改变涡度的只可能是品红那一半。', 'The cyan half has zero curl, so only the magenta half can ever change the vorticity.');
       what = `s = ${fix(s, 2)}`; key = `ω = ${fix(d.w, 2)}`;
     } else if (S.scene === 'tube') {
@@ -248,7 +248,7 @@
           : isFinite(ts) ? L(`自拉伸：κΓ = ${fix(KAPPA * GAMMA, 2)} 大于 4πν = ${fix(visc, 3)}，截面在 t* = ${fix(ts, 2)} 归零`, `self-stretching: κΓ = ${fix(KAPPA * GAMMA, 2)} exceeds 4πν = ${fix(visc, 3)}; the cross-section vanishes at t* = ${fix(ts, 2)}`) : L(`自拉伸：4πν = ${fix(visc, 3)} 不小于 κΓ，粘性赢了`, `self-stretching: 4πν = ${fix(visc, 3)} is at least κΓ, and viscosity wins`);
       $('roKeyL').textContent = L('涡核中心的涡度 ω = Γ/A', 'vorticity at the core centre ω = Γ/A'); $('roKey').innerHTML = `<span class="c-mg">${fix(d.w, d.w < 100 ? 2 : 0)}</span>`; $('roKeySub').textContent = L(`是开始时的 ${fix(d.w * A0 / GAMMA, d.w < 100 ? 2 : 0)} 倍`, `${fix(d.w * A0 / GAMMA, d.w < 100 ? 2 : 0)} times its starting value`);
       set(1, L('截面 A = πR²', 'cross-section A = πR²'), fix(d.A, 4)); set(2, L('涡核半径 R', 'core radius R'), fix(d.R, 4));
-      set(3, L('环量 Γ = ωA', 'circulation Γ = ωA'), `${fix(d.w * d.A, 3)} <span class="okmark">✓</span>`);
+      set(3, L('环量 Γ = ωA', 'circulation Γ = ωA'), `${fix(d.w * d.A, 3)} ✓`);
       set(4, S.mode === 'self' ? L('夹断时刻 t*', 'pinch time t*') : S.mode === 'strain' ? L('伯格斯涡核 R∞ = √(4ν/α)', 'Burgers core R∞ = √(4ν/α)') : L('拉伸项 (ω·∇)u', 'stretching term (ω·∇)u'), S.mode === 'self' ? (isFinite(ts) ? fix(ts, 3) : L('不夹断', 'no pinch')) : S.mode === 'strain' ? fix(rInf(S.nu), 4) : '0');
       $('roNote').textContent = S.mode === 'strain' ? L('恒定拉伸下涡核半径按精确解 R² = R∞² + (R₀² − R∞²)e^(−αt) 光滑地趋向 R∞，R∞ ∝ ν^½ ∝ Re^(−½)；ν = 0 时 R = R₀e^(−αt/2)，ω = ω₀e^(αt)。', 'Under steady strain the core radius follows the exact solution R² = R∞² + (R₀² − R∞²)e^(−αt) smoothly down to R∞, with R∞ ∝ ν^½ ∝ Re^(−½); at ν = 0, R = R₀e^(−αt/2) and ω = ω₀e^(αt).')
         : L('环量不变是无粘流体的开尔文定理；这里把它用在一根高斯涡核上（A = πR²，ω 是核心的峰值），粘性只通过涡核的扩散进来。', 'A fixed circulation is Kelvin’s theorem for inviscid flow; here it is applied to one Gaussian core (A = πR², ω its peak), and viscosity enters only through the spreading of the core.');
@@ -260,7 +260,7 @@
       $('roKeyL').textContent = L('看见的加速度之差 P(V(a + b)) − P(V(a))', 'difference of the seen accelerations P(V(a + b)) − P(V(a))'); $('roKey').innerHTML = `<span class="c-am">${sgn(gap, 3)}</span>`;
       $('roKeySub').textContent = ok ? L('存在精确闭合', 'an exact closure exists') : L('不存在精确闭合', 'no exact closure exists');
       set(1, L('隐态线性项 P(L b)', 'hidden linear term P(L b)'), sgn(q.lin, 3)); set(2, L('混合项 P(B(a,b) + B(b,a))', 'mixed term P(B(a,b) + B(b,a))'), sgn(q.mix, 3));
-      set(3, L('隐态自平流 P(B(b,b))', 'hidden self-advection P(B(b,b))'), sgn(q.self, 3)); set(4, L('第一项减后两项', 'first minus the other two'), `${sgn(q.lin - q.mix - q.self, 3)} <span class="okmark">${Math.abs(q.lin - q.mix - q.self - gap) < 1e-12 ? '= ✓' : '✗'}</span>`);
+      set(3, L('隐态自平流 P(B(b,b))', 'hidden self-advection P(B(b,b))'), sgn(q.self, 3)); set(4, L('第一项减后两项', 'first minus the other two'), `${sgn(q.lin - q.mix - q.self, 3)} ${Math.abs(q.lin - q.mix - q.self - gap) < 1e-12 ? '= ✓' : '✗'}`);
       $('roNote').textContent = L('在 Lean 验证过的五模态傅里叶实例里，不为零的是混合项：它等于 i/4。', 'In the five-mode Fourier instance verified in Lean it is the mixed term that does not vanish: it equals i/4.');
       what = `y = ${sgn(y, 2)}`; key = ok ? L('闭合', 'CLOSED') : L('不闭合', 'NOT CLOSED');
     }
@@ -295,20 +295,18 @@
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
-    potential: { scene: 'lamb', at: 0 }, vortex: { scene: 'lamb', at: 0.8, play: true },
+    vortex: { scene: 'lamb', at: 0.8, play: true },
     flat: { scene: 'tube', mode: 'flat', nu: 0.02, at: 4, play: true }, strain: { scene: 'tube', mode: 'strain', nu: 0, at: 1.8, play: true },
     burgers: { scene: 'tube', mode: 'strain', nu: 0.02, at: 5.5, play: true }, runaway: { scene: 'tube', mode: 'self', nu: 0.012, at: 2.4, play: true },
-    closed: { scene: 'closure', leaks: [0, 0, 0], at: 1.7, play: true }, mixed: { scene: 'closure', leaks: [0, 0, 1], at: 1.7, play: true }
+    mixed: { scene: 'closure', leaks: [0, 0, 1], at: 1.7, play: true }
   };
   const NOTES = {
-    potential: ['s = 0，驻点流，没有涡度。探针处白色的对流项与青色的梯度箭头完全重合，品红的兰姆项为零：这一项整个并入压强。', 's = 0, the stagnation flow, no vorticity. At the probe the white advection arrow coincides with the cyan gradient arrow and the magenta Lamb term is zero: the whole term joins the pressure.'],
     vortex: ['让 s 从 0 走到 1：涡度 ω = 2s 出现，对流项多出一支品红箭头 ω × u，白 = 青 + 品红。s 过了 ½，流线从双曲线合拢成椭圆。', 'Let s go from 0 to 1: the vorticity ω = 2s appears and the advection term gains a magenta arrow ω × u, white = cyan + magenta. Past s = ½ the streamlines close from hyperbolas into ellipses.'],
     flat: ['二维：涡度垂直于流动的平面，没有东西去拉它。涡管不变细，粘性只让它慢慢变粗，涡度只降不升。', 'Two dimensions: the vorticity is normal to the plane of the flow and nothing pulls on it. The tube does not thin; viscosity only widens it slowly and the vorticity can only fall.'],
     strain: ['三维：沿轴向以恒定拉伸率拉这根涡管，没有粘性。它越来越长、越来越细，环量 Γ = ωA 不变，所以涡度按 Γ/A 一路变大。', 'Three dimensions: pull the tube along its axis at a steady rate, without viscosity. It grows longer and thinner; the circulation Γ = ωA stays, so the vorticity grows like Γ/A all the way.'],
     burgers: ['加上粘性：变细的涡核同时向外扩散，截面停在 4πν/α 上不再变小。这就是伯格斯涡：拉伸与粘性恰好相抵。', 'Add viscosity: the thinning core also spreads, and the cross-section stops shrinking at 4πν/α. This is the Burgers vortex: stretching and viscosity exactly in balance.'],
     runaway: ['示意模型：让拉伸率正比于涡度本身。截面按 4πν − κΓ 的速率线性变化；κΓ 大于 4πν 时它在有限时间归零，涡度冲向无穷。真实的三维流体会不会这样，仍是开放问题。', 'A schematic model: let the strain be proportional to the vorticity itself. The cross-section changes linearly at the rate 4πν − κΓ; when κΓ exceeds 4πν it reaches zero in finite time and the vorticity runs to infinity. Whether a real three-dimensional fluid does this is open.'],
-    closed: ['三条泄漏都关掉：看不见的 y 怎么变，琥珀色的点都沿着水平线走，加速度不变。只看 x 的观察者可以自己预测下一步。', 'All three leaks are off: however the unseen y moves, the amber point runs along a level line and the acceleration does not change. The observer of x can predict the next step alone.'],
-    mixed: ['打开混合泄漏：曲线张成一把扇子。同一个 x，y 不同，加速度就不同（琥珀色的竖线是差值）。Lean 证明此时不存在精确闭合；五模态傅里叶实例里的混合项是 i/4。', 'Turn on the mixed leak: the curves fan out. For the same x a different y gives a different acceleration (the amber bar is the gap). Lean proves that no exact closure exists then; in the five-mode Fourier instance the mixed term is i/4.']
+    mixed: ['打开混合泄漏：曲线张成一把扇子。同一个 x，y 不同，加速度就不同（琥珀色的竖线是差值）。Lean 证明此时不存在精确闭合；五模态傅里叶实例里的混合项是 i/4。把三条泄漏都关掉，每条曲线都变成水平线：只看 x 的观察者可以自己预测下一步。', 'Turn on the mixed leak: the curves fan out. For the same x a different y gives a different acceleration (the amber bar is the gap). Lean proves that no exact closure exists then; in the five-mode Fourier instance the mixed term is i/4. Turn all three leaks off and every curve becomes a level line: the observer of x can predict the next step alone.']
   };
   let booting = true;
   function applyPreset(id) {

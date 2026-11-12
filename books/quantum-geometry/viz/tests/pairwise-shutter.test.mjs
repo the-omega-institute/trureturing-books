@@ -64,9 +64,9 @@ const played = async () => {
 };
 const setRange = async (id, v) => { await D(([i, val]) => { const el = document.getElementById(i); el.value = String(val); el.dispatchEvent(new Event('input', { bubbles: true })); }, [id, v]); await settle(page); };
 
-// opening view: the 60° card, its whole run done
+// opening view: the 60° worked example (not a card), its whole run done
 let s = await state();
-check('opens on the 60° card with the whole run done', s.preset === 'sixty' && s.N === 4000 && !s.playing && s.mode === 'fixed');
+check('opens on the 60° worked example with the whole run done, no card picked', s.preset === null && s.N === 4000 && !s.playing && s.mode === 'fixed');
 check('60°: A is 60° and B 120° from the north pole, in one meridian', close(ang(s.A, [0, 0, 1]), 60 * DEG, 1e-12) && close(ang(s.B, [0, 0, 1]), 120 * DEG, 1e-12) && close(s.A[1], 0, 1e-12) && close(s.B[1], 0, 1e-12));
 check('60°: one angle between them, θ = 60°', close(s.theta, 60 * DEG, 1e-12) && close(ang(s.a, s.b), 60 * DEG, 1e-12));
 check('60°: weight 3/4 by the eigen-spinor overlap and by Pauli traces', close(s.p, 0.75, 1e-12) && close(overlap(s.a, s.b), 0.75, 1e-12) && close(traceWeight(s.a, s.b)[0], 0.75, 1e-12) && close(traceWeight(s.a, s.b)[1], 0, 1e-12));
@@ -139,7 +139,7 @@ const axis = [Math.sin(55 * DEG) * Math.cos(110 * DEG), Math.sin(55 * DEG) * Mat
 const q700 = await D(() => window.SHUTTER_DEBUG.pairAt(700));
 check('TURN: both tips keep their component along the violet axis (a rotation about it)', close(dot(q700.a, axis), dot(s.A, axis), 1e-12) && close(dot(q700.b, axis), dot(s.B, axis), 1e-12));
 check('TURN: every one of the 4000 per-shot weights is 3/4', r.w.every((w) => close(w, 0.75, 1e-12)));
-check('TURN: the counts are exactly those of the 60° card without turning', s.k === sixtyK && s.k === recount(r.u, 0.75, 4000));
+check('TURN: the counts are exactly those of the 60° pair without turning', s.k === sixtyK && s.k === recount(r.u, 0.75, 4000));
 
 // the TURN still printed in chapter 2: the pair stops 306° of the way round, visibly away from its start
 {
@@ -188,7 +188,7 @@ await page.locator('body').click({ position: { x: 5, y: 5 } });
 await page.keyboard.press('r'); check('R draws another run', (await state()).seed === s2.seed + 1);
 
 // dragging B and A, orbiting empty space
-await pick('sixty'); await played();
+await pick('right'); await played();
 await page.keyboard.press('End');
 s = await state(); const uKeep = (await runOf()).u;
 let tips = await D(() => window.SHUTTER_DEBUG.tips());

@@ -12,11 +12,11 @@ import math
 SIZE = (480, 310)
 ALT = {
     "zh": "布洛赫球的一个截面。琥珀色的点是球皮上的输入 r，一条琥珀色虚线把它连到球心；青色的粗箭头沿同一方向只到 2/3，标着“克隆体 ×2”；"
-          "品红的箭头朝反方向，长 1/3，标着“机器”。一圈青色虚线是半径 2/3 的圆。",
+          "品红的箭头朝反方向，长 1/3，标着“机器”。一圈青色虚线是半径 2/3 的圆，一圈品红虚线是半径 1/3 的圆。",
     "en": "A cross-section of the Bloch ball. The amber point on the shell is the input r, joined to the centre by an amber "
           "dashed line; a thick cyan "
           "arrow along the same direction stops at 2/3 and is labelled clone ×2; a magenta arrow points the opposite way with "
-          "length 1/3 and is labelled machine. A cyan dashed circle has radius 2/3.",
+          "length 1/3 and is labelled machine. A cyan dashed circle has radius 2/3 and a magenta dashed circle radius 1/3.",
 }
 
 
@@ -59,6 +59,7 @@ def draw(fig):
     cx, cy, R = 210, 160, 126
     fig.circle(cx, cy, R, color="dim", fill="cyan", fill_opacity=0.04, width=1.5)
     fig.circle(cx, cy, R * 2 / 3, color="line", width=1.2, dash="4 4")
+    fig.circle(cx, cy, R / 3, color="area", width=1.2, dash="4 4")
     fig.line(cx - R - 10, cy, cx + R + 10, cy, "faint", 1.0)
     fig.line(cx, cy - R - 10, cx, cy + R + 10, "faint", 1.0)
 
@@ -75,4 +76,5 @@ def draw(fig):
     fig.text(tip[0] + 10, tip[1] + 2, t("输入 *r*", "input *r*"), size=14, color="now")
     # above and to the left of the arrow head, between the dashed 2/3 circle and the shell, clear of the amber line
     fig.text(two3[0] - 12, two3[1] - 21, t("克隆体 ×2：2/3", "clone ×2: 2/3"), size=14, color="line", anchor="end", halo=True)
-    fig.text(m[0] - 10, m[1] + 18, t("机器：−1/3", "machine: −1/3"), size=14, color="area", anchor="end", halo=True)
+    # below the arrow head, between the dashed 1/3 and 2/3 circles
+    fig.text(cx - 4, cy + 55, t("机器：−1/3", "machine: −1/3"), size=14, color="area", anchor="middle", halo=True)

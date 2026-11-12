@@ -91,6 +91,7 @@
     return { W, H, narrow, thumb, pad: [thumb ? 24 : (narrow ? 12 : 22), thumb ? 24 : (narrow ? 12 : 22), top, bottom] };
   }
 
+  const onSkew = () => { try { return cards.current === 'skew'; } catch (e) { return false; } };
   function drawEis() {
     const b = frameBox(), t = tOf(), m = S.m, [wx, wy] = eisWin(m), k = b.thumb ? 2 : 1;
     const g = kit.plot(cv, { x: [-wx, wx], y: [-wy, wy], pad: b.pad, equal: true });
@@ -125,6 +126,22 @@
       else g.line(curve(n), P.dim, { width: 1.1, alpha: 0.55 });
     }
     if (curN > 0) g.line(curve(curN), P.cyan, { width: 2 * k, glow: b.thumb ? 0 : 6 });
+    // the SKEW card: the same points where the complex plane puts them (dashed circle, faint dots), each joined to its integer-coordinate place
+    if (onSkew() && m < 0.5) {
+      for (const e of EIS) {
+        if (e.n > 13) continue;
+        const a = pos(e.x, e.y, t, m), c = pos(e.x, e.y, t, 1);
+        if (!inView(c) && !inView(a)) continue;
+        g.line([a, c], e.n === curN ? P.cyan : P.dim, { width: 1, alpha: e.n === curN ? 0.55 : 0.22 });
+        if (inView(c)) g.dot(c[0], c[1], e.n === curN ? P.cyan : P.ink, (e.n === curN ? 3 : 1.8) * k, { alpha: 0.6 });
+      }
+      const circ = []; for (let i = 0; i <= 180; i++) { const th = 2 * Math.PI * i / 180, y = 2 * Math.sqrt(curN) * Math.sin(th) / R3, x = Math.sqrt(curN) * Math.cos(th) - y / 2; circ.push(pos(x, y, t, 1)); }
+      g.line(circ, P.cyan, { width: 1.4 * k, alpha: 0.85, dash: [5, 4] });
+      const gc = pos(S.cur[0], S.cur[1], t, 1), gp = pos(S.cur[0], S.cur[1], t, 0);
+      g.line([gp, gc], P.amber, { width: 1.4 * k, alpha: 0.8, dash: [3, 3] });
+      g.dot(gc[0], gc[1], P.amber, 5 * k, { ring: true, width: 2 });
+      if (!b.thumb) stage.tag('ghost', [g.X(gc[0]), g.Y(gc[1]) + 20], `(x, y) = (${num(S.cur[0])}, ${num(S.cur[1])})`, 'num hot', { screen: true });
+    }
     // trails: how far each row slid since t0 (the RANGE card)
     if (S.trails && t > S.t0 + 1e-6) {
       for (const e of EIS) {
@@ -448,7 +465,7 @@
     hex: { scene: 'eis', m: 1, t: -1, cur: [-1, 3], cell: true, play: false },
     skew: { scene: 'eis', m: 0, t: 2, cur: [-1, 3], cell: false, play: false },
     shear: { scene: 'eis', m: 1, t: -1, t1: 2, cur: [-1, 3], cell: true, play: true },
-    range: { scene: 'eis', m: 0, t: -1, t1: 2, cur: [-1, 3], cell: false, trails: true, play: true },
+    range: { scene: 'eis', m: 0, t: -1, t1: 2, still: 1, cur: [-1, 3], cell: false, trails: true, play: true },
     norm: { scene: 'gold', alpha: 0, g0: [2, 1], smax: 2, play: false },
     pell: { scene: 'gold', alpha: 1, g0: [2, 1], smax: 2, play: false },
     units: { scene: 'gold', alpha: 1, g0: [1, 0], smax: 4, play: true }
@@ -456,8 +473,8 @@
   const NOTES = {
     hex: ['艾森斯坦整数画在复平面上，排成六角格。范数 x² + xy + y² 是到原点距离的平方：实线圆 1、3、4、7、9、12、13 都穿过格点，虚线圆 2、5、6 一个格点也碰不到。琥珀色的点 (−1, 3) 与另外 11 个青色格点同在范数 7 的圆上。',
       'The Eisenstein integers drawn in the complex plane form a hexagonal lattice. The norm x² + xy + y² is the squared distance to the origin: the solid circles 1, 3, 4, 7, 9, 12, 13 pass through lattice points, the dashed circles 2, 5, 6 meet none. The amber point (−1, 3) shares the norm-7 circle with 11 other cyan points.'],
-    skew: ['同一批格点改用整数坐标 (P, Q) 去读，t = 2：二次型成了 P² − 5PQ + 7Q²，范数 7 的圆被拉成一只又细又斜的青色椭圆，琥珀色的点在 (8, 3)。切到“复平面”，椭圆变回圆，(8, 3) 回到 (−1, 3)。',
-      'The same points read in the integer coordinates (P, Q) at t = 2: the form becomes P² − 5PQ + 7Q², the norm-7 circle is stretched into a long, slanted cyan ellipse, and the amber point sits at (8, 3). Switch to the complex plane and the ellipse turns back into the circle, (8, 3) back into (−1, 3).'],
+    skew: ['同一批格点改用整数坐标 (P, Q) 去读，t = 2：二次型成了 P² − 5PQ + 7Q²，范数 7 的圆被拉成一只又细又斜的青色椭圆，琥珀色的点在 (8, 3)。淡色的点与青色虚线圆是同一批格点在复平面里的位置，细线把每个格点的两处位置连起来：(8, 3) 连到 (−1, 3)。',
+      'The same points read in the integer coordinates (P, Q) at t = 2: the form becomes P² − 5PQ + 7Q², the norm-7 circle is stretched into a long, slanted cyan ellipse, and the amber point sits at (8, 3). The faint dots and the dashed cyan circle are the same points where the complex plane puts them; thin lines join each point\'s two places, (8, 3) to (−1, 3).'],
     shear: ['复平面里，t 从 −1 走到 2：格点与圆一动不动，只有琥珀色的基矢 u₂ 沿着它那一行（琥珀色虚线）滑过去，品红的格子被剪斜，面积始终是 √3/2；每到整数 t，u₂ 正好落在一个格点上。',
       'In the complex plane t runs from −1 to 2: the points and the circles do not move; only the amber basis vector u₂ slides along its row (the amber dashed line), shearing the magenta cell while its area stays √3/2; at every integer t, u₂ lands exactly on a lattice point.'],
     range: ['整数坐标里，t 从 −1 走到 2：每一行格点沿着自己那一行滑动（细线是走过的路），青色椭圆越拉越斜；每到整数 t，所有格点又正好填满整数网格，右下角取到的值始终是 0、1、3、4、7、9、12、13。',
@@ -479,7 +496,7 @@
       const m0 = same ? S.m : p.m, c0 = same ? clock.t : p.t + 1;
       setScene('eis'); viewChips.set(String(p.m), true);
       const end = p.play ? p.t1 + 1 : p.t + 1;
-      if (TRV.still || (booting && !TRV.embed)) { S.m = p.m; clock.set(end); return; }
+      if (TRV.still || (booting && !TRV.embed)) { S.m = p.m; clock.set(p.still != null ? p.still + 1 : end); return; }
       tw = kit.tween(same ? 650 : 0, (e) => { S.m = lerp(m0, p.m, e); clock.set(lerp(c0, p.t + 1, e)); }, () => {
         tw = null;
         if (!p.play) return;

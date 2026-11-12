@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch30-face-odd-orientation" data-lang="en" viewBox="0 0 358 350" width="358" height="350" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="A 4 × 4 grid graph with one arrow on every edge. Each of the nine squares carries an odd number: walking once around that face, the count of darts against the arrows; the count for the outer face, written below, is odd too. Amber traces an even cycle of ten edges; the six squares inside it are pale cyan, the two vertices inside are the cyan I and the four vertices of the bottom row, outside, are the magenta J. Walking once around the amber cycle, the darts against the arrows are again odd in number.">
+<title>A 4 × 4 grid graph with one arrow on every edge. Each of the nine squares carries an odd number: walking once around that face, the count of darts against the arrows; the count for the outer face, written below, is odd too. Amber traces an even cycle of ten edges; the six squares inside it are pale cyan, the two vertices inside are the cyan I and the four vertices of the bottom row, outside, are the magenta J. Walking once around the amber cycle, the darts against the arrows are again odd in number.</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<rect x="64" y="46" width="76" height="76" class="tf-cyan" fill-opacity="0.14"/>
+<rect x="140" y="46" width="76" height="76" class="tf-cyan" fill-opacity="0.14"/>
+<rect x="216" y="46" width="76" height="76" class="tf-cyan" fill-opacity="0.14"/>
+<rect x="64" y="122" width="76" height="76" class="tf-cyan" fill-opacity="0.14"/>
+<rect x="140" y="122" width="76" height="76" class="tf-cyan" fill-opacity="0.14"/>
+<rect x="216" y="122" width="76" height="76" class="tf-cyan" fill-opacity="0.14"/>
+<path d="M64 46 L140 46 L216 46 L292 46 L292 122 L292 198 L216 198 L140 198 L64 198 L64 122Z" class="ts-amber" stroke-width="4.2" stroke-linejoin="round" fill="none"/>
+<line x1="140" y1="46" x2="64" y2="46" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M96 46 L106 41.8 L106 50.2Z" class="tf-ink"/>
+<line x1="216" y1="46" x2="140" y2="46" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M172 46 L182 41.8 L182 50.2Z" class="tf-ink"/>
+<line x1="292" y1="46" x2="216" y2="46" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M248 46 L258 41.8 L258 50.2Z" class="tf-ink"/>
+<line x1="64" y1="122" x2="140" y2="122" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M108 122 L98 126.2 L98 117.8Z" class="tf-ink"/>
+<line x1="140" y1="122" x2="216" y2="122" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M184 122 L174 126.2 L174 117.8Z" class="tf-ink"/>
+<line x1="216" y1="122" x2="292" y2="122" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M260 122 L250 126.2 L250 117.8Z" class="tf-ink"/>
+<line x1="140" y1="198" x2="64" y2="198" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M96 198 L106 193.8 L106 202.2Z" class="tf-ink"/>
+<line x1="216" y1="198" x2="140" y2="198" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M172 198 L182 193.8 L182 202.2Z" class="tf-ink"/>
+<line x1="292" y1="198" x2="216" y2="198" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M248 198 L258 193.8 L258 202.2Z" class="tf-ink"/>
+<line x1="64" y1="274" x2="140" y2="274" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M108 274 L98 278.2 L98 269.8Z" class="tf-ink"/>
+<line x1="140" y1="274" x2="216" y2="274" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M184 274 L174 278.2 L174 269.8Z" class="tf-ink"/>
+<line x1="216" y1="274" x2="292" y2="274" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M260 274 L250 278.2 L250 269.8Z" class="tf-ink"/>
+<line x1="64" y1="46" x2="64" y2="122" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M64 90 L59.8 80 L68.2 80Z" class="tf-ink"/>
+<line x1="140" y1="46" x2="140" y2="122" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M140 90 L135.8 80 L144.2 80Z" class="tf-ink"/>
+<line x1="216" y1="46" x2="216" y2="122" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M216 90 L211.8 80 L220.2 80Z" class="tf-ink"/>
+<line x1="292" y1="46" x2="292" y2="122" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M292 90 L287.8 80 L296.2 80Z" class="tf-ink"/>
+<line x1="64" y1="122" x2="64" y2="198" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M64 166 L59.8 156 L68.2 156Z" class="tf-ink"/>
+<line x1="140" y1="122" x2="140" y2="198" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M140 166 L135.8 156 L144.2 156Z" class="tf-ink"/>
+<line x1="216" y1="122" x2="216" y2="198" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M216 166 L211.8 156 L220.2 156Z" class="tf-ink"/>
+<line x1="292" y1="122" x2="292" y2="198" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M292 166 L287.8 156 L296.2 156Z" class="tf-ink"/>
+<line x1="64" y1="198" x2="64" y2="274" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M64 242 L59.8 232 L68.2 232Z" class="tf-ink"/>
+<line x1="140" y1="198" x2="140" y2="274" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M140 242 L135.8 232 L144.2 232Z" class="tf-ink"/>
+<line x1="216" y1="198" x2="216" y2="274" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M216 242 L211.8 232 L220.2 232Z" class="tf-ink"/>
+<line x1="292" y1="198" x2="292" y2="274" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M292 242 L287.8 232 L296.2 232Z" class="tf-ink"/>
+<text class="tf-dim" x="102" y="89.76" font-size="16" text-anchor="middle" font-weight="600">3</text>
+<text class="tf-dim" x="178" y="89.76" font-size="16" text-anchor="middle" font-weight="600">3</text>
+<text class="tf-dim" x="254" y="89.76" font-size="16" text-anchor="middle" font-weight="600">3</text>
+<text class="tf-dim" x="102" y="165.76" font-size="16" text-anchor="middle" font-weight="600">1</text>
+<text class="tf-dim" x="178" y="165.76" font-size="16" text-anchor="middle" font-weight="600">1</text>
+<text class="tf-dim" x="254" y="165.76" font-size="16" text-anchor="middle" font-weight="600">1</text>
+<text class="tf-dim" x="102" y="241.76" font-size="16" text-anchor="middle" font-weight="600">3</text>
+<text class="tf-dim" x="178" y="241.76" font-size="16" text-anchor="middle" font-weight="600">3</text>
+<text class="tf-dim" x="254" y="241.76" font-size="16" text-anchor="middle" font-weight="600">3</text>
+<circle cx="64" cy="46" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="140" cy="46" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="216" cy="46" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="292" cy="46" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="64" cy="122" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="140" cy="122" r="6" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="216" cy="122" r="6" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="292" cy="122" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="64" cy="198" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="140" cy="198" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="216" cy="198" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="292" cy="198" r="4.2" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="64" cy="274" r="6" class="ts-bg tf-magenta" stroke-width="1.4"/>
+<circle cx="140" cy="274" r="6" class="ts-bg tf-magenta" stroke-width="1.4"/>
+<circle cx="216" cy="274" r="6" class="ts-bg tf-magenta" stroke-width="1.4"/>
+<circle cx="292" cy="274" r="6" class="ts-bg tf-magenta" stroke-width="1.4"/>
+<text class="tf-dim" x="44" y="308" font-size="14">outer face: 3</text>
+<text class="tf-amber" x="44" y="332" font-size="14">amber cycle: 5</text>
+<text class="tf-dim" x="312" y="308" font-size="14" text-anchor="end">cyan <tspan font-style="italic">I</tspan> · magenta <tspan font-style="italic">J</tspan></text>
+<text class="tf-dim" x="312" y="332" font-size="14" text-anchor="end">numbers: darts against</text>
+</svg>

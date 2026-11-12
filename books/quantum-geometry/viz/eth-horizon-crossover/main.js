@@ -136,20 +136,20 @@
       { id: 'bd', value: k.bridgesBD, pts: ac.map(flip), label: `3·b·d = ${k.bridgesBD}`, at: flip([over[0] + 12, over[1] - 4]), align: 'left' }
     ].map((q) => ({ ...q, hot: q.value === k.full }));
     for (const q of SEP.filter((z) => !z.hot).concat(SEP.filter((z) => z.hot))) {
-      ctx.strokeStyle = q.hot ? P.amber : P.dim; ctx.lineWidth = q.hot ? 2.2 : 1.2; ctx.setLineDash([5, 4]); if (q.hot) { ctx.shadowColor = P.amber; ctx.shadowBlur = 8; }
+      ctx.strokeStyle = q.hot ? P.magenta : P.dim; ctx.lineWidth = q.hot ? 2.4 : 1.2; ctx.setLineDash([5, 4]); if (q.hot) { ctx.shadowColor = P.magenta; ctx.shadowBlur = 8; }
       ctx.beginPath(); q.pts.forEach((p, i) => (i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]))); ctx.stroke(); ctx.setLineDash([]); ctx.shadowBlur = 0;
-      text(ctx, q.label, q.at[0], q.at[1], q.hot ? P.amber : P.dim, { align: q.align, size: 12, weight: q.hot ? 600 : 0, halo: true });
+      text(ctx, q.label, q.at[0], q.at[1], q.hot ? P.magenta : P.dim, { align: q.align, size: 12, weight: q.hot ? 600 : 0, halo: true });
     }
     cutGeo = { r, M: [mx, cy], N: [nx, cy], legs: LEGS, bridges: BRIDGES, cuts: SEP.map((q) => ({ id: q.id, value: q.value, hot: q.hot, label: q.label, pts: q.pts.map((p) => p.slice()) })) };
     // the flow matrix and its singular values
     const gx = wide ? x0 + dw + 14 : x0, gy = wide ? y0 + 16 : y0 + dh + 14, gw = wide ? w - dw - 14 : w, gh = (wide ? h : h - dh) - 16 - 54;
     const rows = I.F.length, cols = I.F[0].length, cell = Math.max(3, Math.min(gw / cols, gh / rows, 46)), ox = gx + (gw - cell * cols) / 2, oy = gy + Math.max(0, (gh - cell * rows) / 2);
     let top = 1; for (const row of I.F) for (const v of row) top = Math.max(top, Math.abs(v));
-    for (let i = 0; i < rows; i++) for (let j = 0; j < cols; j++) { const v = I.F[i][j]; ctx.fillStyle = v ? TRV.alpha(v > 0 ? P.cyan : P.magenta, 0.2 + 0.8 * Math.abs(v) / top) : TRV.alpha(P.lineHot, 0.25); ctx.fillRect(ox + j * cell, oy + i * cell, cell - Math.max(1, cell * 0.08), cell - Math.max(1, cell * 0.08)); }
+    for (let i = 0; i < rows; i++) for (let j = 0; j < cols; j++) { const v = I.F[i][j]; ctx.fillStyle = v ? TRV.alpha(v > 0 ? P.cyan : P.ink, (v > 0 ? 0.2 : 0.15) + (v > 0 ? 0.8 : 0.6) * Math.abs(v) / top) : TRV.alpha(P.lineHot, 0.25); ctx.fillRect(ox + j * cell, oy + i * cell, cell - Math.max(1, cell * 0.08), cell - Math.max(1, cell * 0.08)); }
     if (words) text(ctx, L(`flow：${rows} 行 × ${cols} 列`, `flow: ${rows} rows × ${cols} columns`), ox, oy - 9, P.dim, { size: 11, face: 'body' });
     const n = I.sv.length, by = oy + cell * rows + 46, bw = Math.min(26, (cell * cols) / n), smax = I.sv[0] || 1;
     for (let i = 0; i < n; i++) { const hh = 34 * I.sv[i] / smax, on = i < I.rank; ctx.fillStyle = on ? P.cyan : P.faint; ctx.fillRect(ox + i * bw, by - Math.max(hh, 1.5), Math.max(2, bw - 3), Math.max(hh, 1.5)); }
-    ctx.strokeStyle = P.amber; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(ox + I.rank * bw - 1.5, by - 40); ctx.lineTo(ox + I.rank * bw - 1.5, by + 3); ctx.stroke();
+    ctx.strokeStyle = P.ink; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(ox + I.rank * bw - 1.5, by - 40); ctx.lineTo(ox + I.rank * bw - 1.5, by + 3); ctx.stroke();
     if (words) text(ctx, L(`奇异值：前 ${I.rank} 个非零`, `singular values: the first ${I.rank} are nonzero`), ox + n * bw + 8, by - 14, P.dim, { size: 11, face: 'body' });
   }
 
@@ -157,7 +157,7 @@
   const NM = 40;
   const SPEC = {
     plateau: (j) => 1 / (1 + Math.exp((j - 7.5) / 0.55)),
-    geometric: (j) => Math.pow(0.82, j),
+    geometric: (j) => Math.pow(2, -(j + 1)),   // chapter 12, example step 5: λⱼ = 2^−(j+1), total RW/π = 1
     power: (j) => 1 / ((1 + j * 0.5) * (1 + j * 0.5))
   };
   const lam = (j) => SPEC[S.prof](j);
@@ -167,22 +167,27 @@
   const theta = () => clamp(1 - 0.98 * clock.t, 0.02, 1);
   /** The threshold as printed: three decimals below 0.1, so that the printed τ and the printed wall RW/(πτ) agree. */
   const fixTau = (x) => fix(x, x < 0.1 - 1e-12 ? 3 : 2);
-  const countAbove = (th) => { let n = 0; while (n < 200000 && lam(n) >= th) n++; return n; };   // the three spectra decrease
+  const countAbove = (th) => { let n = 0; while (n < 200000 && lam(n) >= th - 1e-12) n++; return n; };   // the three spectra decrease
+  /** τ as the chapter writes it: 1/8 rather than 0.125 when it is the reciprocal of a whole number. */
+  const fmtTau = (th) => { const r = Math.round(1 / th); return r > 1 && r <= 64 && Math.abs(1 / th - r) < 1e-9 ? `1/${r}` : fixTau(th); };
   let view = null;
   function drawModes() {
-    const th = theta(), T = total(), wall = T / th, g = kit.plot($('cv'), { x: [0, NM], y: [0, 1.1], pad: [44, 24, box.top + 4, box.bottom + 24] }); view = g;
-    g.axes({ yTicks: [0, 0.25, 0.5, 0.75, 1], xTicks: [0, 10, 20, 30, 40], yLabel: 'λⱼ' });
+    const short = S.prof === 'geometric', nm = short ? 12 : NM, yTop = short ? 0.6 : 1.1;   // the halving spectrum: twelve modes fill the stage
+    const th = theta(), T = total(), wall = T / th, g = kit.plot($('cv'), { x: [0, nm], y: [0, yTop], pad: [44, 24, box.top + 4, box.bottom + 24] }); view = g;
+    g.axes({ yTicks: short ? [0, 0.125, 0.25, 0.5] : [0, 0.25, 0.5, 0.75, 1], xTicks: short ? [0, 2, 4, 6, 8, 10, 12] : [0, 10, 20, 30, 40], yLabel: 'λⱼ', yFmt: short ? (v) => (v ? `1/${Math.round(1 / v)}` : '0') : undefined });
     // the axis name sits between the ticks 30 and 40, under the axis, where neither the threshold nor the wall can cross it
-    if (!TRV.thumbMode) g.text(35, 0, L('模态序号 j', 'mode index j'), P.dim, { align: 'center', base: 'top', dy: 5, size: 10.5, face: 'body' });
-    for (let j = 0; j < NM; j++) { const v = lam(j), on = v >= th; g.rect(j + 0.12, 0, j + 0.88, v, on ? P.cyan : P.dim, { alpha: on ? 0.95 : 0.5 }); }
+    if (!TRV.thumbMode && !(short && g.W < 520)) g.text(short ? 11 : 35, 0, L('模态序号 j', 'mode index j'), P.dim, { align: 'center', base: 'top', dy: 5, size: 10.5, face: 'body' });
+    for (let j = 0; j < nm; j++) { const v = lam(j), on = v >= th - 1e-12; g.rect(j + 0.12, 0, j + 0.88, v, on ? P.cyan : P.dim, { alpha: on ? 0.95 : 0.5 }); }
     g.hline(th, P.amber, { width: 2, glow: 8 });
-    if (wall <= NM) { g.vline(wall, P.magenta, { width: 2.4 }); }
+    // each bar that clears the line pays at least τ out of the budget: an amber notch at the height τ on it
+    for (let j = 0; j < nm && lam(j) >= th - 1e-12; j++) g.line([[j + 0.06, th], [j + 0.94, th]], P.amber, { width: 4 });
+    if (wall <= nm) { g.vline(wall, P.magenta, { width: 2.4 }); }
     if (!TRV.thumbMode) {
       // the threshold's label ends short of the wall when the wall stands near the right edge
-      const thX = wall <= NM && wall > NM - 10 ? wall : NM;
-      g.text(thX, th, `τ = ${fixTau(th)}`, P.amber, { align: 'right', base: 'bottom', dx: -8, dy: -5, size: 12, weight: 600 });
-      if (wall <= NM) g.text(wall, 1.1, `RW/(πτ) = ${fix(wall, 1)}`, P.magenta, { align: wall > 30 ? 'right' : 'left', base: 'top', dx: wall > 30 ? -7 : 7, dy: 6, size: 12 });
-      else g.text(NM, 1.1, L(`墙在 RW/(πτ) = ${fix(wall, 1)}，画面之外`, `the wall is at RW/(πτ) = ${fix(wall, 1)}, off the picture`), P.magenta, { align: 'right', base: 'top', dx: -6, dy: 6, size: 11.5, face: 'body' });
+      const thX = wall <= nm && wall > nm * 0.75 ? wall : nm;
+      g.text(thX, th, `τ = ${fmtTau(th)}`, P.amber, { align: 'right', base: 'bottom', dx: -8, dy: -5, size: 12, weight: 600 });
+      if (wall <= nm) g.text(wall, yTop, `RW/(πτ) = ${fix(wall, 1)}`, P.magenta, { align: wall > nm * 0.75 ? 'right' : 'left', base: 'top', dx: wall > nm * 0.75 ? -7 : 7, dy: 6, size: 12 });
+      else g.text(nm, yTop, L(`墙在 RW/(πτ) = ${fix(wall, 1)}，画面之外`, `the wall is at RW/(πτ) = ${fix(wall, 1)}, off the picture`), P.magenta, { align: 'right', base: 'top', dx: -6, dy: 6, size: 11.5, face: 'body' });
     }
   }
 
@@ -213,8 +218,8 @@
       const I = fresh(), k = cuts(I.a, I.b, I.c, I.d), most = Math.max(k.rows, k.cols, k.bridges, k.bridgesBD), floor = 0.8, bar = (v) => Math.max(v, floor);
       const g = kit.plot(A, { x: [0, 5], y: [floor, most * 1.6], pad: [30, 12, 10, 20], logY: true });
       g.axes({ yTicks: [...new Set([1, k.full, most])].map((v) => [v, String(v)]), xTicks: [[0.5, 'a·d'], [1.5, 'b·c'], [2.5, '3·a·c'], [3.5, '3·b·d'], [4.5, L('秩', 'rank')]] });
-      [[k.rows, 0], [k.cols, 1], [k.bridges, 2], [k.bridgesBD, 3]].forEach(([v, i]) => g.rect(i + 0.2, floor, i + 0.8, bar(v), v === k.full ? P.amber : P.dim, { alpha: v === k.full ? 0.9 : 0.5 }));
-      g.rect(4.2, floor, 4.8, bar(I.rank), P.cyan, { alpha: 0.95 }); g.hline(k.full, P.amber, { dash: [4, 3], alpha: 0.8 });
+      [[k.rows, 0], [k.cols, 1], [k.bridges, 2], [k.bridgesBD, 3]].forEach(([v, i]) => g.rect(i + 0.2, floor, i + 0.8, bar(v), v === k.full ? P.magenta : P.dim, { alpha: v === k.full ? 0.9 : 0.5 }));
+      g.rect(4.2, floor, 4.8, bar(I.rank), P.cyan, { alpha: 0.95 }); g.hline(k.full, P.magenta, { dash: [4, 3], alpha: 0.8 });
       $('pATitle').textContent = L('四道割与这个实例的秩', 'Four cuts and the rank of this instance'); $('pAMeta').textContent = `min = ${k.full} · QMinCut = ${k.min}`;
       const h = kit.plot(B, { x: [0.9, 6.1], y: [0.9, 6.1], pad: [30, 12, 10, 20], equal: true }), phi2 = (3 + Math.sqrt(5)) / 2;
       h.axes({ xTicks: [1, 2, 3, 4, 5, 6], yTicks: [1, 2, 3, 4, 5, 6], xLabel: 'a', yLabel: 'b' });
@@ -244,7 +249,7 @@
   };
   const LEGEND = {
     rates: [['cy', '示意曲线 r(n)', 'the schematic curve r(n)'], ['mg', 'PPSZ 基准', 'the PPSZ baseline'], ['am', '当前规模', 'the current scale'], ['dm box', '宇宙原子数以内', 'within the atoms of the universe']],
-    cut: [['am', '最小的那道割', 'the smallest cut'], ['cy box', '流矩阵的正项与非零奇异值', 'positive entries of flow, nonzero singular values'], ['mg box', '负项', 'negative entries']],
+    cut: [['mg', '最小的那道割', 'the smallest cut'], ['cy box', '流矩阵的正项与非零奇异值', 'positive entries of flow, nonzero singular values'], ['ik box', '灰色：负项 · 白线：秩的位置', 'grey: negative entries · white line: where the rank ends']],
     modes: [['cy box', '不小于 τ 的模态', 'modes that reach τ'], ['am', '阈值 τ', 'the threshold τ'], ['mg', '墙：RW/(πτ)', 'the wall: RW/(πτ)'], ['dm box', '低于 τ 的模态', 'modes below τ']]
   };
   function drawText() {
@@ -273,12 +278,12 @@
       what = `(${[I.a, I.b, I.c, I.d].join(', ')})`; key = L(`秩 ${I.rank}`, `RANK ${I.rank}`);
     } else {
       const th = theta(), T = total(), n = countAbove(th);
-      big = L(`模态 · τ = ${fixTau(th)}`, `Modes · τ = ${fixTau(th)}`);
+      big = L(`模态 · τ = ${fmtTau(th)}`, `Modes · τ = ${fmtTau(th)}`);
       hud = L(`不小于 τ 的模态有 ${n} 个，上界 RW/(πτ) = ${fix(T / th, 1)}`, `${n} mode${n === 1 ? '' : 's'} reach τ; the bound is RW/(πτ) = ${fix(T / th, 1)}`);
       $('roKeyL').textContent = L('不小于 τ 的模态个数', 'number of modes that reach τ'); $('roKey').innerHTML = `<span class="c-cy">${n}</span> ${n <= T / th ? `≤ ${fix(T / th, 1)}` : '&gt;'}`; $('roKeySub').textContent = L('否则它们的和就超过 RW/π', 'or their sum would exceed RW/π');
       set(1, L('阈值 τ', 'threshold τ'), fix(th, 3)); set(2, L('墙 RW/(πτ)', 'the wall RW/(πτ)'), fix(T / th, 2)); set(3, L('总和 RW/π = Σλⱼ', 'total RW/π = Σλⱼ'), fix(T, 4)); set(4, L('个数 × τ', 'count × τ'), `${fix(n * th, 3)} ${n * th <= T ? '≤' : '&gt;'} RW/π`);
       note = L('这是马尔可夫不等式的计数形式：谱越集中，承重的模态越少。', 'This is the counting form of Markov’s inequality: the more concentrated the spectrum, the fewer modes carry the weight.');
-      what = `τ = ${fixTau(th)}`; key = `${n} ≤ ${fix(T / th, 1)}`;
+      what = `τ = ${fmtTau(th)}`; key = `${n} ≤ ${fix(T / th, 1)}`;
     }
     $('hudBig').textContent = big; $('hudSub').textContent = hud; $('roNote').textContent = note; $('roAside').textContent = L(SC[S.scene].name[0], SC[S.scene].name[1]);
     $('pillScene').querySelector('strong').textContent = SC[S.scene].name[1]; $('pillWhat').querySelector('strong').textContent = what; $('pillKey').querySelector('strong').textContent = key;
@@ -318,7 +323,7 @@
   const PRESETS = {
     human: { scene: 'rates', c: 1, k: 3, at: 16 }, atoms: { scene: 'rates', c: 1, k: 3, at: 266 }, cross: { scene: 'rates', c: 1, k: 3, at: 558, play: true, from: 2 }, constant: { scene: 'rates', c: 0.5, k: 3, at: 57 },
     bridge: { scene: 'cut', dims: [2, 3, 2, 3], at: 0 }, narrow: { scene: 'cut', dims: [1, 5, 1, 5], at: 0 },
-    plateau: { scene: 'modes', prof: 'plateau', at: 0.5 / 0.98 }, tail: { scene: 'modes', prof: 'power', at: 0.95, play: true }
+    geometric: { scene: 'modes', prof: 'geometric', at: (1 - 1 / 8) / 0.98 }
   };
   const NOTES = {
     human: ['n = 2¹⁶，六万多个变量：c = 1 的示意曲线在这里才降回 1，也就是每个变量付出的指数与穷举相同。PPSZ 是 0.386。', 'n = 2¹⁶, some sixty-five thousand variables: for c = 1 the schematic curve is only back at 1 here, the same exponent per variable as brute force. PPSZ pays 0.386.'],
@@ -327,8 +332,7 @@
     constant: ['把常数 c 减半：交叉点从 2⁵⁵⁸ 回到 2⁵⁷ 附近，落进阴影里。大 O 记号不告诉我们 c；交叉点在视界的哪一边，全看它。', 'Halve the constant c: the crossover moves from 2⁵⁵⁸ back to about 2⁵⁷, inside the shaded part. The big O does not tell us c, and on which side of the horizon the crossover lies depends on it alone.'],
     bridge: ['a = c = 2、b = d = 3：两道外割都是 6，三条桥能过 12，不是瓶颈。第 0 次抽样的流矩阵有 6 行 6 列，秩是 6，达到了最小割；Lean 证明在这个锥域内能达到的最大秩恰好是最小割，个别抽样仍可能更低。这条定理只讲桥图上的流与割，与第 30 章转述的亚指数 3-SAT 预印本的算法主张无关，既不检验也不支持它。', 'a = c = 2, b = d = 3: both outer cuts are 6 and the three bridges could carry 12, so they are no bottleneck. The flow matrix of draw 0 has 6 rows and 6 columns and rank 6, reaching the minimal cut; Lean proves that inside the cone the greatest attainable rank is exactly the minimal cut, though a single draw can still fall lower. The theorem is about flows and cuts on the bridge graph only: it has nothing to do with the algorithmic claim of the sub-exponential 3-SAT preprint that chapter 30 reports, and neither tests nor supports it.'],
     narrow: ['a = c = 1、b = d = 5：外割都是 5，三条桥却只能过 3。流矩阵是 5 × 5 的，秩至多是 3；第 0 次抽样恰好是 3：奇异值在第三个之后归零。这组维数在锥域之外。', 'a = c = 1, b = d = 5: the outer cuts are 5 but the three bridges carry only 3. The flow matrix is 5 × 5 and its rank is at most 3; draw 0 has exactly 3: the singular values vanish after the third. These dimensions lie outside the cone.'],
-    plateau: ['平台形的谱：前八个模态接近 1，之后迅速掉到零。阈值 τ 取 0.5 时有 8 个模态过线，而墙在 RW/(πτ) = 16：承重的模态屈指可数。', 'A plateau: the first eight modes are close to 1 and then the spectrum drops to zero. At the threshold τ = 0.5 eight modes clear the line while the wall stands at RW/(πτ) = 16: only a handful of modes carry the weight.'],
-    tail: ['换成拖着长尾的幂律谱，再把阈值一路降低：过线的模态越来越多，但青色的柱子始终到不了品红的墙。', 'Switch to a power law with a long tail and lower the threshold all the way: more and more modes clear the line, but the cyan bars never reach the magenta wall.']
+    geometric: ['第十二章例题第 5 步的几何谱 λⱼ = 2^−(j+1)，总和 RW/π = 1。琥珀色的阈值 τ = 1/8：过线的青色柱子是 j = 0、1、2 三根，每根在高度 τ 处有一道琥珀色刻线，表示它至少付出 τ；三道刻线加起来不超过总预算 1，所以过线的柱子不会超过品红的墙 RW/(πτ) = 8。', 'The geometric spectrum λⱼ = 2^−(j+1) of chapter 12, example step 5, with total RW/π = 1. At the amber threshold τ = 1/8 three cyan bars clear the line, j = 0, 1, 2, each with an amber notch at the height τ to show that it pays at least τ; the notches add up to no more than the whole budget 1, so the bars that clear the line cannot pass the magenta wall RW/(πτ) = 8.']
   };
   let booting = true;
   function applyPreset(id) {

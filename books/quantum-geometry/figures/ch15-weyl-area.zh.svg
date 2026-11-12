@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch15-weyl-area" data-lang="zh" data-wrap="1" viewBox="0 0 520 290" width="520" height="290" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="左栏是 8 × 8 的格点平面，横轴是平移次数 a，纵轴是时钟次数 b。两支青色箭头从原点出发，(a, b) = (2, 1) 与 (c, d) = (1, 3)，张出一块品红的平行四边形，有向面积 ad − bc = 5。右栏是一只 8 格的相位钟，琥珀色的指针停在 ω₈³ 那一格，因为 bc − ad = −5 ≡ 3 (mod 8)。">
+<title>左栏是 8 × 8 的格点平面，横轴是平移次数 a，纵轴是时钟次数 b。两支青色箭头从原点出发，(a, b) = (2, 1) 与 (c, d) = (1, 3)，张出一块品红的平行四边形，有向面积 ad − bc = 5。右栏是一只 8 格的相位钟，琥珀色的指针停在 ω₈³ 那一格，因为 bc − ad = −5 ≡ 3 (mod 8)。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="5" y="0" width="270" height="290" viewBox="0 0 270 290">
+<circle cx="44" cy="250" r="1.8" class="tf-faint"/>
+<circle cx="44" cy="223" r="1.8" class="tf-faint"/>
+<circle cx="44" cy="196" r="1.8" class="tf-faint"/>
+<circle cx="44" cy="169" r="1.8" class="tf-faint"/>
+<circle cx="44" cy="142" r="1.8" class="tf-faint"/>
+<circle cx="44" cy="115" r="1.8" class="tf-faint"/>
+<circle cx="44" cy="88" r="1.8" class="tf-faint"/>
+<circle cx="44" cy="61" r="1.8" class="tf-faint"/>
+<circle cx="71" cy="250" r="1.8" class="tf-faint"/>
+<circle cx="71" cy="223" r="1.8" class="tf-faint"/>
+<circle cx="71" cy="196" r="1.8" class="tf-faint"/>
+<circle cx="71" cy="169" r="1.8" class="tf-faint"/>
+<circle cx="71" cy="142" r="1.8" class="tf-faint"/>
+<circle cx="71" cy="115" r="1.8" class="tf-faint"/>
+<circle cx="71" cy="88" r="1.8" class="tf-faint"/>
+<circle cx="71" cy="61" r="1.8" class="tf-faint"/>
+<circle cx="98" cy="250" r="1.8" class="tf-faint"/>
+<circle cx="98" cy="223" r="1.8" class="tf-faint"/>
+<circle cx="98" cy="196" r="1.8" class="tf-faint"/>
+<circle cx="98" cy="169" r="1.8" class="tf-faint"/>
+<circle cx="98" cy="142" r="1.8" class="tf-faint"/>
+<circle cx="98" cy="115" r="1.8" class="tf-faint"/>
+<circle cx="98" cy="88" r="1.8" class="tf-faint"/>
+<circle cx="98" cy="61" r="1.8" class="tf-faint"/>
+<circle cx="125" cy="250" r="1.8" class="tf-faint"/>
+<circle cx="125" cy="223" r="1.8" class="tf-faint"/>
+<circle cx="125" cy="196" r="1.8" class="tf-faint"/>
+<circle cx="125" cy="169" r="1.8" class="tf-faint"/>
+<circle cx="125" cy="142" r="1.8" class="tf-faint"/>
+<circle cx="125" cy="115" r="1.8" class="tf-faint"/>
+<circle cx="125" cy="88" r="1.8" class="tf-faint"/>
+<circle cx="125" cy="61" r="1.8" class="tf-faint"/>
+<circle cx="152" cy="250" r="1.8" class="tf-faint"/>
+<circle cx="152" cy="223" r="1.8" class="tf-faint"/>
+<circle cx="152" cy="196" r="1.8" class="tf-faint"/>
+<circle cx="152" cy="169" r="1.8" class="tf-faint"/>
+<circle cx="152" cy="142" r="1.8" class="tf-faint"/>
+<circle cx="152" cy="115" r="1.8" class="tf-faint"/>
+<circle cx="152" cy="88" r="1.8" class="tf-faint"/>
+<circle cx="152" cy="61" r="1.8" class="tf-faint"/>
+<circle cx="179" cy="250" r="1.8" class="tf-faint"/>
+<circle cx="179" cy="223" r="1.8" class="tf-faint"/>
+<circle cx="179" cy="196" r="1.8" class="tf-faint"/>
+<circle cx="179" cy="169" r="1.8" class="tf-faint"/>
+<circle cx="179" cy="142" r="1.8" class="tf-faint"/>
+<circle cx="179" cy="115" r="1.8" class="tf-faint"/>
+<circle cx="179" cy="88" r="1.8" class="tf-faint"/>
+<circle cx="179" cy="61" r="1.8" class="tf-faint"/>
+<circle cx="206" cy="250" r="1.8" class="tf-faint"/>
+<circle cx="206" cy="223" r="1.8" class="tf-faint"/>
+<circle cx="206" cy="196" r="1.8" class="tf-faint"/>
+<circle cx="206" cy="169" r="1.8" class="tf-faint"/>
+<circle cx="206" cy="142" r="1.8" class="tf-faint"/>
+<circle cx="206" cy="115" r="1.8" class="tf-faint"/>
+<circle cx="206" cy="88" r="1.8" class="tf-faint"/>
+<circle cx="206" cy="61" r="1.8" class="tf-faint"/>
+<circle cx="233" cy="250" r="1.8" class="tf-faint"/>
+<circle cx="233" cy="223" r="1.8" class="tf-faint"/>
+<circle cx="233" cy="196" r="1.8" class="tf-faint"/>
+<circle cx="233" cy="169" r="1.8" class="tf-faint"/>
+<circle cx="233" cy="142" r="1.8" class="tf-faint"/>
+<circle cx="233" cy="115" r="1.8" class="tf-faint"/>
+<circle cx="233" cy="88" r="1.8" class="tf-faint"/>
+<circle cx="233" cy="61" r="1.8" class="tf-faint"/>
+<line x1="44" y1="250" x2="249.2" y2="250" class="ts-dim" stroke-width="1.2" fill="none"/>
+<line x1="44" y1="250" x2="44" y2="44.8" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="44" y="268" font-size="13" text-anchor="middle">0</text>
+<text class="tf-dim" x="98" y="268" font-size="13" text-anchor="middle">2</text>
+<text class="tf-dim" x="152" y="268" font-size="13" text-anchor="middle">4</text>
+<text class="tf-dim" x="206" y="268" font-size="13" text-anchor="middle">6</text>
+<text class="tf-dim" x="34" y="201" font-size="13" text-anchor="end">2</text>
+<text class="tf-dim" x="34" y="147" font-size="13" text-anchor="end">4</text>
+<text class="tf-dim" x="34" y="93" font-size="13" text-anchor="end">6</text>
+<text class="tf-dim" x="249.2" y="268" font-size="14" text-anchor="middle"><tspan font-style="italic">a</tspan></text>
+<text class="tf-dim" x="34" y="50.8" font-size="14" text-anchor="end"><tspan font-style="italic">b</tspan></text>
+<path d="M44 250 L98 223 L125 142 L71 169Z" class="tf-magenta" fill-opacity="0.24"/>
+<line x1="44" y1="250" x2="91.16" y2="226.42" class="ts-cyan" stroke-width="2.6" fill="none"/>
+<path d="M98 223 L91.64 230.41 L88.26 223.64Z" class="tf-cyan"/>
+<line x1="44" y1="250" x2="68.58" y2="176.26" class="ts-cyan" stroke-width="2.6" fill="none"/>
+<path d="M71 169 L71.74 178.73 L64.57 176.34Z" class="tf-cyan"/>
+<text class="tf-cyan" x="106" y="239" font-size="14">(<tspan font-style="italic">a</tspan>, <tspan font-style="italic">b</tspan>) = (2, 1)</text>
+<text class="tf-cyan ts-bg" x="50" y="133.5" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">(<tspan font-style="italic">c</tspan>, <tspan font-style="italic">d</tspan>) = (1, 3)</text>
+<text class="tf-magenta ts-bg" x="88.5" y="201" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">ad</tspan> − <tspan font-style="italic">bc</tspan> = 5</text>
+</svg>
+<svg class="tr-fig-panel" x="295" y="0" width="220" height="290" viewBox="0 0 220 290">
+<circle cx="110" cy="140" r="78" class="ts-dim" stroke-width="1.4" fill="none"/>
+<circle cx="188" cy="140" r="3.2" class="tf-dim"/>
+<text class="tf-dim" x="206" y="145" font-size="13" text-anchor="middle">0</text>
+<circle cx="165.15" cy="84.85" r="3.2" class="tf-dim"/>
+<text class="tf-dim" x="177.88" y="77.12" font-size="13" text-anchor="middle">1</text>
+<circle cx="110" cy="62" r="3.2" class="tf-dim"/>
+<text class="tf-dim" x="110" y="49" font-size="13" text-anchor="middle">2</text>
+<circle cx="54.85" cy="84.85" r="3.2" class="tf-dim"/>
+<text class="tf-dim" x="42.12" y="77.12" font-size="13" text-anchor="middle">3</text>
+<circle cx="32" cy="140" r="3.2" class="tf-dim"/>
+<text class="tf-dim" x="14" y="145" font-size="13" text-anchor="middle">4</text>
+<circle cx="54.85" cy="195.15" r="3.2" class="tf-dim"/>
+<text class="tf-dim" x="42.12" y="212.88" font-size="13" text-anchor="middle">5</text>
+<circle cx="110" cy="218" r="3.2" class="tf-dim"/>
+<text class="tf-dim" x="110" y="241" font-size="13" text-anchor="middle">6</text>
+<circle cx="165.15" cy="195.15" r="3.2" class="tf-dim"/>
+<text class="tf-dim" x="177.88" y="212.88" font-size="13" text-anchor="middle">7</text>
+<line x1="110" y1="140" x2="67.98" y2="97.98" class="ts-amber" stroke-width="3" fill="none"/>
+<path d="M62.57 92.57 L71.6 96.26 L66.26 101.6Z" class="tf-amber"/>
+<circle cx="110" cy="140" r="3" class="tf-ink"/>
+<text class="tf-amber" x="100.28" y="104.28" font-size="15">ω₈<tspan dy="-0.42em" font-size="72%">3</tspan><tspan dy="0.42em">​</tspan></text>
+<text class="tf-ink" x="110" y="262" font-size="14" text-anchor="middle"><tspan font-style="italic">bc</tspan> − <tspan font-style="italic">ad</tspan> = −5 ≡ 3</text>
+<text class="tf-dim" x="110" y="20" font-size="13" text-anchor="middle">相位钟 ω₈<tspan dy="-0.42em" font-size="72%">n</tspan><tspan dy="0.42em">​</tspan></text>
+</svg>
+</svg>

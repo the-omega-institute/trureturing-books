@@ -205,7 +205,7 @@
   /* ---------- readouts ---------- */
   function drawText() {
     const K = Kof(), s = S.s, z = zeta(s), pr = prod(K, s), gap = z - pr, next = PR[K], fl = Math.pow(next, -s), nk = need(s);
-    $('roGap').innerHTML = `${sci(gap)} <span class="okmark">&gt; ${next}⁻ˢ ✓</span>`;
+    $('roGap').innerHTML = `${sci(gap)} <span class="chk">&gt; ${next}⁻ˢ ✓</span>`;
     $('roGapSub').textContent = `${next}⁻ˢ = ${sci(fl)} · ${L(`第一个漏网的整数是 ${next}`, `the first integer to slip through is ${next}`)}`;
     $('roList').textContent = `${listText(K)}${K ? L(`（${K} 个）`, ` (${K})`) : ''}`;
     $('roProd').textContent = pr.toFixed(6); $('roZeta').textContent = z.toFixed(6);
@@ -269,9 +269,8 @@
   const CARDS = {
     two: { K: 1, s: 2 },
     near: { K: 11, s: 1.1 },
-    all: { K: 25, s: 2 },
-    five: { K: 3, s: 2 },
-    remainder: { K: 3, s: 1.3, sweep: 4 },
+    all: { K: 25, s: 1.2 },
+    five: { K: 3, s: 2, sweep: [4, 1.3] },
     thirtyone: { K: 11, s: 2 }
   };
   const NOTES = {
@@ -279,12 +278,10 @@
       'Only 2 is on the list. The cyan curve is the geometric series along this one axis, 1 + 2⁻ˢ + 4⁻ˢ + … = (1 − 2⁻ˢ)⁻¹, which is 4/3 at s = 2; below, only the powers of 2 (1, 2, 4, 8, 16, 32, 64) are cyan, everything else is magenta, and the first magenta cell is 3.'],
     near: ['清单是到 31 为止的 11 个素数，琥珀色的竖线在 s = 1.1：青色曲线只到 4.93，墨色的 ζ 是 10.58，品红的缺口比乘积还大。越往左缺口越宽：s = 1 处青色曲线停在 6.54，ζ 冲出了画面。',
       'The list holds the 11 primes up to 31 and the amber line stands at s = 1.1: the cyan curve reaches only 4.93, the ink ζ is 10.58, and the magenta gap is larger than the product. Further left the gap only widens: at s = 1 the cyan curve stops at 6.54 while ζ leaves the picture.'],
-    all: ['素数一个个加进清单，直到 97：1 到 96 的格子全部变青，青色曲线在 s = 2 处贴近 ζ，只差 0.0030；放大镜里缺口还在，垫底的一段是 101⁻ˢ。',
-      'Primes join the list one by one up to 97: every cell from 1 to 96 turns cyan and at s = 2 the cyan curve comes within 0.0030 of ζ; in the magnifier the gap is still there, with 101⁻ˢ as its lowest slice.'],
-    five: ['清单是 2、3、5：青色的格子 1、2、3、4、5、6、8、9、10、12 … 是乘积展开出来的项，7 是第一个品红格。s = 2 处青色曲线是 25/16 = 1.5625，ζ(2) = 1.6449；放大镜把缺口 0.0824 自下而上拆成 7⁻ˢ、11⁻ˢ、13⁻ˢ 和更薄的一段段。',
-      'The list is 2, 3, 5: the cyan cells 1, 2, 3, 4, 5, 6, 8, 9, 10, 12 … are the terms the product expands into, and 7 is the first magenta cell. At s = 2 the cyan curve is 25/16 = 1.5625 against ζ(2) = 1.6449; the magnifier splits the gap of 0.0824, from the bottom up, into 7⁻ˢ, 11⁻ˢ, 13⁻ˢ and ever thinner slices.'],
-    remainder: ['还是 2、3、5。琥珀色的竖线从 s = 4 扫到 s = 1.3：品红的缺口越来越宽，放大镜里垫底的那一段始终是 7⁻ˢ，缺口从不比墨色与青色之间的品红虚线更窄。',
-      'Still 2, 3, 5. The amber line sweeps from s = 4 down to s = 1.3: the magenta gap keeps widening, its lowest slice in the magnifier is always 7⁻ˢ, and the gap never gets narrower than the dashed magenta curve between the ink and the cyan.'],
+    all: ['素数一个个加进清单，直到 97：1 到 96 的格子全部变青。琥珀色的竖线在 s = 1.2：青色的乘积只有 4.37，墨色的 ζ(1.2) = 5.59，品红的缺口 1.23 仍占 ζ 的五分之一以上；放大镜里垫底的一段是 101⁻ˢ。',
+      'Primes join the list one by one up to 97 and every cell from 1 to 96 turns cyan. The amber line stands at s = 1.2: the cyan product is only 4.37 against ζ(1.2) = 5.59, and the magenta gap of 1.23 is still more than a fifth of ζ; its lowest slice in the magnifier is 101⁻ˢ.'],
+    five: ['清单是 2、3、5：青色的格子 1、2、3、4、5、6、8、9、10、12 … 是乘积展开出来的项，7 是第一个品红格。s = 2 处青色曲线是 25/16 = 1.5625，ζ(2) = 1.6449；放大镜把缺口 0.0824 自下而上拆成 7⁻ˢ、11⁻ˢ、13⁻ˢ 和更薄的一段段。点这张卡，琥珀色的竖线从 s = 4 扫到 1.3：缺口越来越宽，垫底的始终是 7⁻ˢ，缺口从不比品红虚线更窄。',
+      'The list is 2, 3, 5: the cyan cells 1, 2, 3, 4, 5, 6, 8, 9, 10, 12 … are the terms the product expands into, and 7 is the first magenta cell. At s = 2 the cyan curve is 25/16 = 1.5625 against ζ(2) = 1.6449; the magnifier splits the gap of 0.0824, from the bottom up, into 7⁻ˢ, 11⁻ˢ, 13⁻ˢ and ever thinner slices. Click the card and the amber line sweeps from s = 4 down to 1.3: the gap widens, its lowest slice is always 7⁻ˢ, and it never gets narrower than the dashed magenta curve.'],
     thirtyone: ['清单到 31，共 11 个素数：1 到 36 全是青色，第一个品红格是 37，此后只零星几个。s = 2 处缺口缩到 0.0102，放大镜里垫底的仍是 37⁻ˢ。',
       'The list runs up to 31, eleven primes: 1 to 36 are all cyan, the first magenta cell is 37, and only a few more follow. At s = 2 the gap has shrunk to 0.0102, and its lowest slice in the magnifier is still 37⁻ˢ.']
   };
@@ -294,7 +291,7 @@
     stopAt = null; clock.pause();
     if (sTween) sTween.cancel();
     if (TRV.still || (booting && !TRV.embed)) { setS(c.s, true); clock.set(c.K); return; }
-    if (c.sweep && !booting) { clock.set(c.K, true); setS(c.sweep, true); tweenS(c.sweep, c.s, 2600); paint(); return; }
+    if (c.sweep && !booting) { clock.set(c.K, true); setS(c.sweep[0], true); tweenS(c.sweep[0], c.sweep[1], 2600); paint(); return; }
     if (booting) setS(c.s, true); else tweenS(S.s, c.s, 500);
     clock.set(0); stopAt = c.K;
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
