@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "a767dce5d7b4a01bd003f8722405c672f4eaaafa",
-  "pinned_at": "2026-11-12T05:43:05Z",
+  "commit": "af4e8db2907be5b6ce1601b9dc54aa3e606c760d",
+  "pinned_at": "2026-11-12T17:18:03Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -180,6 +180,14 @@
       "statement_id": "sha256:f4f9c8f7bbe3d674e020788a338506fda2a7e7512386a5142bec282841247c0e",
       "line": 48,
       "signature": "theorem self_application_fragment_package (f : Y → Y) (g : A → A → Y) : (∀ a : A, diagonal f g a = f (g a a)) ∧ (IsEscaped f g ↔ diagonal f g ∉ Set.range g) ∧ ((∀ y, f y ≠ y) → ∀ h : A → A → Y, IsEscaped f h) ∧ (∃ (f₀ : Bool → Bool) (g₀ : Unit → Unit → Bool), ¬ IsEscaped f₀ g₀)"
+    },
+    "D5/S0/Diagonal/RecursivePageTable.recursive_page_table_walk": {
+      "module": "D5/S0/Diagonal/RecursivePageTable",
+      "name": "D5.S0.Diagonal.RecursivePageTable.recursive_page_table_walk",
+      "kind": "theorem",
+      "statement_id": "sha256:86b084eb43c574d73ad7b21f9f8d7e96995e705b0e8d03403844ce2ce4263134",
+      "line": 28,
+      "signature": "theorem recursive_page_table_walk (lookup : Address -> Fin N -> Address) (root leaf data : Address) (selfSlot i j : Fin N) (hself : lookup root selfSlot = root) (hroot : lookup root i = leaf) (hleaf : lookup leaf j = data) : pageWalk lookup root [i, j] = data /\\ pageWalk lookup root [selfSlot, i] = leaf /\\ forall depth : Nat, pageWalk lookup root (List.replicate depth selfSlot) = root"
     },
     "D5/S0/Diagonal/SelfApplicationFates.BinaryFractionalMap": {
       "module": "D5/S0/Diagonal/SelfApplicationFates",

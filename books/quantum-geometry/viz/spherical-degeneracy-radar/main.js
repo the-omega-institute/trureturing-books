@@ -129,9 +129,20 @@
     if (!(cx && cx.noGap) && Math.abs(rb - ra) > 2e-3) st.line(fa, fb, { color: P.magenta, width: 4, alpha: 0.95, fade: false });
     st.dot(fa, 3.6, P.cyan, { fade: false }); st.dot(fb, 3.6, P.cyan, { fade: false });
     st.dot(O, 6.5, P.amber, { glow: 14, fade: false });
-    const off = Math.abs(O[2]) > 0.95 ? { dx: -66, dy: O[2] > 0 ? -14 : 14 } : outward(st, O, 30);
-    if (!cx || !cx.noTag) st.tag('obs', O, L('观察者 O', 'observer O'), 'raw c-am', cx && cx.obsOff ? cx.obsOff : off);
+    if (!cx || !cx.noTag) st.tag('obs', O, obsText(), 'raw c-am', cx && cx.obsOff ? cx.obsOff : obsOff(st, O));
   }
+  const obsText = () => L('观察者 O', 'observer O');
+  const obsOff = (st, O) => (Math.abs(O[2]) > 0.95 ? { dx: -66, dy: O[2] > 0 ? -14 : 14 } : outward(st, O, 30));
+  /** The screen box of a .tag.raw label (12 px body font, letter-spacing 0.04em) centred at its anchor plus offset. */
+  let measureCtx = null;
+  function labelBox(st, p, off, text) {
+    if (!measureCtx) measureCtx = document.createElement('canvas').getContext('2d');
+    measureCtx.font = `12px ${TRV.fonts.body}`;
+    const w = measureCtx.measureText(text).width + 0.48 * [...text].length, q = st.p(p);
+    return { x: q[0] + off.dx, y: q[1] + off.dy, w, h: 16 };
+  }
+  /** Two label boxes overlap, with a 6 px margin around each. */
+  const boxesMeet = (a, b) => Math.abs(a.x - b.x) < (a.w + b.w) / 2 + 6 && Math.abs(a.y - b.y) < (a.h + b.h) / 2 + 6;
   function drawPair(st, X, la, lb, offA, offB) {
     st.dot(X.a, 5.5, P.ink, { glow: 8 });
     st.dot(X.b, 6, P.ink, { ring: true, width: 2.2 });
@@ -246,7 +257,9 @@
       st.line(X.b0, sb, { color: P.dim, width: 1, dash: [2, 4], alpha: 0.7, back: 0.5 });
       st.dot(sa, 3, P.ink, { fade: false }); st.dot(sb, 3, P.ink, { fade: false });
       st.dot(Op, 5.5, P.ink, { ring: true, width: 2 });
-      st.tag('opull', Op, 'R⁻¹O', 'raw ink', outward(st, Op, 30));
+      // its label only where it cannot sit on the observer's own label (near ψ = 0 and 360° the two anchors meet)
+      const offP = outward(st, Op, 30);
+      if (!boxesMeet(labelBox(st, Op, offP, 'R⁻¹O'), labelBox(st, S.O, obsOff(st, S.O), obsText()))) st.tag('opull', Op, 'R⁻¹O', 'raw ink', offP);
     }
     drawPair(st, X, L('一次 Rv₁', 'once Rv₁'), L('两次 Rv₂', 'twice Rv₂'), null, null);
     drawObserver(st, X, { noGap: true });
