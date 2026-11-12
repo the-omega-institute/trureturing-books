@@ -2173,6 +2173,48 @@
           "gid": "D5/S3/Observer/Conditioning.unreadState_fixed_iff"
         }
       ]
+    },
+    {
+      "id": "mutual-observer-attractors",
+      "code": "ORTHO//MUTUAL",
+      "title": "互为吸引子 · 两个观察者互相丈量",
+      "title_en": "Mutual attractors · two observers measuring each other",
+      "summary": "两个场景：两个观察者同时用对方的读数更新自己，(x, y) ↦ (cos y, cos x)，逐拍可以左右越过 θ*，两拍一轮却从一侧单调逼近同一个 (θ*, θ*)，每轮误差约乘 sin²θ* ≈ 0.454，正是每拍 0.674 的平方；两段边界区间拉近时，连通的极小割在 d(l₁ + l₂ + d) = l₁l₂ 处胜过各自的割，领先阶互信息从零变正。",
+      "summary_en": "Two scenes: two observers update at once from each other's reading, (x, y) ↦ (cos y, cos x), and may cross θ* at every beat, yet sampled every two beats they close in on the same (θ*, θ*) from one side, each round multiplying the error by about sin²θ* ≈ 0.454, the square of the 0.674 of one beat; as two boundary intervals come closer, the connected minimal cut beats the separate ones where d(l₁ + l₂ + d) = l₁l₂ and the leading-order mutual information turns positive.",
+      "path": "mutual-observer-attractors/",
+      "thumbnail": "mutual-observer-attractors/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "互为吸引子",
+        "余弦不动点",
+        "极小割",
+        "互信息"
+      ],
+      "tags_en": [
+        "mutual attractors",
+        "cosine fixed point",
+        "minimal cut",
+        "mutual information"
+      ],
+      "theory": [
+        {
+          "label": "本书第三十三章",
+          "label_en": "Chapter 33",
+          "href": "../zh/ch33-all-beings-observers-and-mutual-attractors.html",
+          "href_en": "../en/ch33-all-beings-observers-and-mutual-attractors.html"
+        },
+        {
+          "label": "Blueprint · 桥图最大流最小割",
+          "label_en": "Blueprint · bridge-graph max-flow min-cut",
+          "href": "{trureturing}/Blueprint/D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.md"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result"
+        }
+      ]
     }
   ]
 }
