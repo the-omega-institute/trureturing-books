@@ -40,6 +40,7 @@ $$
 $$
 
 with row indices in $\operatorname{Fin} a \times \operatorname{Fin} d$ ($ad$ rows) and column indices in $\operatorname{Fin} b \times \operatorname{Fin} c$ ($bc$ columns);
+
 - Define the set of attainable ranks $\operatorname{attainable}(a, b, c, d) = \bigl\{\, r \in \mathbb{N} \;\big|\; \exists M, N,\; \operatorname{rank}(\operatorname{flow}(M, N)) = r \,\bigr\}$, and define the **quantum max-flow** `QMaxFlow` as its supremum:
 
 $$
