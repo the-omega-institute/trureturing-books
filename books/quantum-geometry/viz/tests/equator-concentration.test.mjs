@@ -54,8 +54,17 @@ await stageFirstChecks(T, BOOK, ID);
 /* ---------- page-specific checks ---------- */
 const page = await T.goto(BOOK, ID, '?lang=zh');
 const state = async () => { await settle(page); return page.evaluate(() => window.EQUATOR_DEBUG.state); };
-const pick = async (id) => { await page.click(`[data-preset="${id}"]`); await settle(page); };
-const plays = () => until(page, () => { const s = window.EQUATOR_DEBUG.state; return s.playing && s.t > 0; });
+// A card's sweep can be over before the test starts looking: d = 3 runs 0.585 of a rail step, about a fifth of a second.
+// So "it played" is recorded inside the page, by a watcher armed before the click, and plays() reads that record.
+const pick = async (id) => {
+  await page.evaluate(() => {
+    const me = window.__playWatch = (window.__playWatch || 0) + 1; window.__played = false;
+    const tick = () => { if (window.__playWatch !== me) return; const s = window.EQUATOR_DEBUG.state; if (s.playing && s.t > 0) window.__played = true; else requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+  });
+  await page.click(`[data-preset="${id}"]`); await settle(page);
+};
+const plays = () => until(page, () => window.__played);
 const stops = () => until(page, () => !window.EQUATOR_DEBUG.state.playing);
 const seek = async (t) => { await page.evaluate((x) => window.EQUATOR_DEBUG.seek(x), t); await settle(page); };
 const setRange = async (id, v) => { await page.evaluate(([i, val]) => { const el = document.getElementById(i); el.value = String(val); el.dispatchEvent(new Event('input', { bubbles: true })); }, [id, v]); await settle(page); };
@@ -91,6 +100,12 @@ check('d = 3: the inside share is exactly ε = 0.1 and the density is the consta
 x = await smp();
 const Dunif = ks(x, (v) => (v + 1) / 2);
 check('d = 3: the points\' heights pass a Kolmogorov–Smirnov test for the uniform distribution on [−1, 1]', Dunif < KS1, String(Dunif));
+// the measure of the belt is exactly 10%; the fixed draw is a sample of it, counted here from the raw heights
+const cyan3 = x.filter((v) => Math.abs(v) < 0.1).length;
+check('d = 3: the fixed draw (seed 1) puts 142 of the 1500 points (9.47%) in the belt, not 150: a binomial sample of the exact 10%, and the page counts the rest as outside', s.seed === 1 && cyan3 === 142 && s.outN === 1500 - cyan3
+  && Math.abs(cyan3 / 1500 - 0.1) < 4 * Math.sqrt(0.1 * 0.9 / 1500), `${cyan3} in the belt`);
+const note3 = await page.textContent('#presetNote');
+check('d = 3: the card note gives 10% as the share of the sphere and says the count of dots varies with the draw', note3.includes('占球面的 10%') && note3.includes('随抽样而变') && !note3.includes('10% 的点'), note3);
 
 // the width card: up to d = 1024
 await pick('width');
@@ -161,6 +176,8 @@ check('the rail sets d = 2⁶ = 64', s.d === 64 && close(s.out, tailSimpson(64, 
 // English
 await page.click('[data-lang-set="en"]'); await pick('three'); await seek(Math.log2(3) - 1);
 check('English: the HUD names the ordinary sphere', (await page.textContent('#hudSub')).includes('the ordinary sphere'));
+const note3en = await page.textContent('#presetNote');
+check('English: the d = 3 note gives 10% of the sphere, not 10% of the points', note3en.includes('10% of the sphere') && note3en.includes('varying with the draw') && !note3en.includes('10% of the points'), note3en);
 
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();

@@ -167,6 +167,11 @@ check('COMB: the page’s indices are the winding counts (+1, +1) and add up to 
 let zeros = 0;
 for (let i = 0; i <= 180; i++) for (let j = 0; j < 360; j += 3) { const th = i * PI / 180, ph = j * PI / 180, p = [Math.sin(th) * Math.cos(ph), Math.sin(th) * Math.sin(ph), Math.cos(th)]; if (norm(field(p)) < 1e-9) zeros++; }
 check('COMB: on a 1° grid the field vanishes only at the two poles', zeros === 2 * 120);
+// Poincaré–Hopf adds indices of isolated zeros: every sentence that states the sum must say so, in its own language
+const hopf = await page.evaluate(() => [...document.querySelectorAll('#evidence .lean.argued, #drawer li')].map((el) => el.textContent).filter((t) => /霍普夫|Poincaré–Hopf/.test(t)));
+const zhHopf = hopf.filter((t) => /霍普夫/.test(t)), enHopf = hopf.filter((t) => /Poincaré–Hopf/.test(t));
+check('COMB: the index sum χ(S²) = 2 is stated for isolated zeros only, in both languages (the field shown has two isolated zeros, +1 each)', zhHopf.length >= 2 && enHopf.length >= 2
+  && zhHopf.every((t) => t.includes('孤立')) && enHopf.every((t) => t.includes('isolated')) && zeros === 2 * 120 && wn === 1 && ws === 1, hopf.join(' | '));
 
 // controls: scene chips
 await page.click('#sceneChips [data-scene="loop"]'); s = await state();

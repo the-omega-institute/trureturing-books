@@ -43,7 +43,7 @@ $$
 :::
 
 ::: proof
-在 Lean 4 源码 `D5/S3/Quantum/FiniteDimensional.lean:24` 中，证明通过三次 `constructor` 将五个合取项依次拆开，对每一条矩阵等式调用外延性策略 `ext i j`，并对有限指标 `i, j : Fin 2` 施行穷举分析 `fin_cases i <;> fin_cases j`，最后由 `simp [qubitX, qubitZ, pow_two, Matrix.mul_apply, Fin.sum_univ_two]` 直接展开 $2\times 2$ 矩阵乘法与共轭转置完成检验。用显式矩阵计算写出：
+在 Lean 4 源码 `D5/S3/Quantum/FiniteDimensional.lean:24` 中，证明通过四次 `constructor` 将五个合取项依次拆开，对每一条矩阵等式调用外延性策略 `ext i j`，并对有限指标 `i, j : Fin 2` 施行穷举分析 `fin_cases i <;> fin_cases j`，最后由 `simp [qubitX, qubitZ, pow_two, Matrix.mul_apply, Fin.sum_univ_two]` 直接展开 $2\times 2$ 矩阵乘法与共轭转置完成检验。用显式矩阵计算写出：
 
 $$
 \operatorname{qubitZ}\cdot\operatorname{qubitX} = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix} = -\begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} = -(\operatorname{qubitX}\cdot\operatorname{qubitZ}),

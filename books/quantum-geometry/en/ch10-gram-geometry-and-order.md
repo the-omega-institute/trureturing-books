@@ -137,7 +137,7 @@ The last column of the table computes the spherical excess $\Omega$ independentl
 | $120^\circ$ | $0.0625$ | $0.1875$ | $0.03906$ | $0.03906$ | $71.57^\circ$ | $71.57^\circ$ |
 | $150^\circ$ | $0.0045$ | $0.0625$ | $0.00393$ | $0.00393$ | $85.89^\circ$ | $85.89^\circ$ |
 
-The row $\theta = 90^\circ$ is the octant loop: $\Delta = \frac{1+i}{4}$, which is Claim 2. As the triangle grows, its three sides become less and less compatible and $\lvert\Delta\rvert$ keeps shrinking, while the argument keeps growing and is always half the area. The fifth column equals the fourth row by row, which is the manual derivation above; the last two columns agree row by row, which is a numerical check of the Van Oosterom–Strackee formula on these five triangles, not a proof.
+The row $\theta = 90^\circ$ is the octant loop: $\Delta = \frac{1+i}{4}$, which is Claim 2. As the triangle grows, its two sides from the north pole become less and less compatible and $\lvert\Delta\rvert$ keeps shrinking, while the argument keeps growing and is always half the area. The fifth column equals the fourth row by row, which is the manual derivation above; the last two columns agree row by row, which is a numerical check of the Van Oosterom–Strackee formula on these five triangles, not a proof.
 :::
 
 ::: {.film src="003-two-angles-berry"}

@@ -75,7 +75,7 @@ $$
 :::
 
 ::: {.viz src="complexity-growth" preset="floor" height="500"}
-**挪动折返点，层数停在白线上。** N = 11、κ = 2：品红三角从 {2, 3} 一步步挪到 {4, 8}，青色的砖从 9 层一层层降到 4 层，落在白线 ⌊11/3⌋ + 1 = 4 上，再也降不下去（[@thm-open-circuit-min-depth]）。
+**挪动折返点，层数停在白线上。** N = 11、κ = 2：品红三角从 {2, 3} 一步步挪到 {4, 8}，青色的砖从 9 层一层层降到 4 层，落在白线 ⌊11/3⌋ + 1 = 4 上，再也降不下去；灰色虚线框与淡品红三角是起点 {2, 3} 的 9 层（[@thm-open-circuit-min-depth]）。
 :::
 
 请严格注意 [@thm-open-circuit-min-depth] 的数学含义：$\operatorname{minDepth}(N, \kappa)$ 是在**固定开放边界可积电路族** `circuit N S` 中遍历 $|S| = \kappa$ 配置所得的最优并行层数；它既不是合成任意目标酉矩阵所需的全局最小门数，也不是连续演化的物理时间 $t$。让我们用两组具体数值（$N = 8, \kappa = 2$ 与 $N = 11, \kappa = 2$）把每一道门落在哪一层亲手排出来。
@@ -156,14 +156,14 @@ $$
 
 特别地，必须严格区分**有限离散门集下的 $\varepsilon$-近似态复杂度**与**连续门族（或 Nielsen 几何）下的精确复杂度**：
 
-1. **有限普适门集（如 Clifford + $T$）与正误差容限 $\varepsilon > 0$**：若基本门集 $\mathcal{G}$ 是有限集合，则所有有限长电路在零误差（$\varepsilon = 0$）下能精确到达的量子态仅有可数无穷多个，而连续时间演化 $\lvert\psi(t)\rangle = e^{-iHt/\hbar}\lvert\psi(0)\rangle$ 扫过不可数无穷多个态。因此，在有限门集下定义连续时间态复杂度 $\mathcal{C}_\varepsilon(\lvert\psi(t)\rangle)$ **必须固定严格为正的近似容限 $\varepsilon > 0$**（要求电路输出态与目标态的距离不超过 $\varepsilon$，参见 S. Aaronson, `arXiv:1607.05256`, Definitions 3.2.1 & 3.3.1）；在固定 $\varepsilon > 0$ 下，多比特态与酉算子的近似合成复杂度受限于指数级天花板 $\mathcal{C}_\varepsilon(\lvert\psi(t)\rangle) \le \exp(O(N))$（例如结合连续双比特分解与 Solovay–Kitaev 编译给出的 $O(2^N \operatorname{poly}(\log(1/\varepsilon)))$ 态合成上界或 $O(4^N \operatorname{poly}(\log(1/\varepsilon)))$ 酉合成上界）。
+1. **有限普适门集（如 Clifford + $T$）与正误差容限 $\varepsilon > 0$**：若基本门集 $\mathcal{G}$ 是有限集合，则所有有限长电路在零误差（$\varepsilon = 0$）下能精确到达的量子态至多有可数多个，而非平稳的连续时间态轨道 $\lvert\psi(t)\rangle = e^{-iHt/\hbar}\lvert\psi(0)\rangle$ 通常包含不可数多个态。因此，为保证一般目标态在有限普适门集下具有有限复杂度，以下**固定近似容限 $\varepsilon > 0$**（要求电路输出态与目标态的距离不超过 $\varepsilon$，参见 S. Aaronson, `arXiv:1607.05256`, Definitions 3.2.1 & 3.3.1）；在固定 $\varepsilon > 0$ 下，多比特态与酉算子的近似合成复杂度受限于指数级天花板 $\mathcal{C}_\varepsilon(\lvert\psi(t)\rangle) \le \exp(O(N))$（例如结合连续双比特分解与 Solovay–Kitaev 编译：先把目标分解为 $L$ 个连续双比特门，态合成 $L = O(2^N)$、酉合成 $L = O(4^N)$；再把每个门逐一编译到误差 $\varepsilon/L$ 以内，使 $L$ 个门累加的误差不超过 $\varepsilon$，每个门需 $\operatorname{poly}(\log(L/\varepsilon))$ 个门，合计 $O(L \operatorname{poly}(\log(L/\varepsilon)))$，即 $O(2^N \operatorname{poly}(N + \log(1/\varepsilon)))$ 的态合成上界或 $O(4^N \operatorname{poly}(N + \log(1/\varepsilon)))$ 的酉合成上界；参见 C. M. Dawson & M. A. Nielsen, `arXiv:quant-ph/0505030`）。
 2. **连续双比特门族或连续 Nielsen 几何（$\varepsilon = 0$）**：若允许任意连续参数的单比特与双比特门 $\mathcal{G} = \mathrm{SU}(4)$ 按单位成本计价（或采用酉群流形上的连续 Nielsen 测地线距离），则任意 $N$ 比特纯态或酉算子的精确合成（$\varepsilon = 0$）对一切时刻 $t$ 均良定义，且同样受限于指数级构造上界 $\exp(O(N))$（态合成 $O(2^N)$、一般酉算子合成 $O(4^N)$）。
 
 在混沌多体量子系统与全息黑洞模型的物理叙述中，当系统演化越过热化时间 $t_{\mathrm{th}}$ 后，子系统纠缠熵 $S(t)$ 已达热平衡饱和值 $S_{\mathrm{th}} \sim O(N)$，而在中间时间窗 $t_{\mathrm{th}} \ll t \ll e^{O(N)}$ 内，$\varepsilon$-近似态复杂度（或连续 Nielsen 复杂度）被预期继续随时间 $t$ 近似线性增长。但在任何具有有限维希尔伯特空间与有界能谱的封闭量子系统中，态复杂度无法跨越 $\exp(O(N))$ 天花板，且在依赖于具体能谱与演化模型的更长时间尺度（典型情形下如双指数级量子庞加莱回归时间）上必然发生饱和与回归，绝不可能对一切 $t \to \infty$ 永远保持单调线性增长。参见 L. Susskind, *Fortschr. Phys.* **64**, 24–43 (2016), DOI: `10.1002/prop.201500092`；以及 S. Aaronson (2016), `arXiv:1607.05256`。
 :::
 
 ::: {.viz src="complexity-growth" preset="saturate" height="500"}
-**熵先封顶，门数接着长。** 8 个量子比特的随机砖墙电路走到第 14 层：青色的半链熵沿灰色台阶爬升，第 13 层前后停在 3.18–3.36 比特之间，压在 4 比特的白线下面；同一段里白线（已用门数）一路涨到 49。随机电路是示意模型，熵与门数逐层实算（[@rem-complexity-growth-literature]）。
+**熵先封顶，门数接着长。** 8 个量子比特的随机砖墙电路走到第 14 层：青色的半链熵沿灰色台阶爬升，第 13 层升到 3.14 比特，第 14 层仍是 3.14，压在 4 比特的白线下面；同一段里白线（已用门数）一路涨到 49。淡色的后段（第 40–90 层）在 3.18–3.36 比特之间起伏。随机电路是示意模型，熵与门数逐层实算（[@rem-complexity-growth-literature]）。
 :::
 
 ::: {.viz src="complexity-growth" preset="ceiling" height="500"}
@@ -244,7 +244,7 @@ $$
 
 2. **对角酉算子强制末尾导线奇偶复原（`diagonal_forces_identity`）**：每根导线 $q \in \operatorname{Fin}(2n)$ 在电路起点携带汉明权重为 $1$（奇权重）的单位奇偶向量 $e_q \in \mathbb{F}_2^{2n}$。每个 $\operatorname{CNOT}(t, c)$ 将目标导线 $t$ 的奇偶标签更新为 $l_t \oplus l_c$，而每个单比特门 $R_z(q, \varphi)$ 仅沿当前导线标签 $l_q$ 注入相位因子 $\exp(\mp i\varphi/2)$。由于整个电路矩阵等于对角矩阵 $\operatorname{diag}(e^{i\theta_{\mathrm{hard}}(x)})$ 的非零标量倍 $c$，源码证明电路走完最后一步时，所有导线的奇偶标签矩阵 `wireLabels circuit` 必须精确复原为单位矩阵 $I_{2n}$——即每一根导线在终点都必须退回单比特奇权重态，偶权重导线数 `evenWires` 必须归零！
 
-3. **Walsh–Hadamard 特征标判据与 $2^{2n-1} - 1$ 个偶奇偶输出（`hard_character` 与 `even_output_count`）**：对每个非零偶汉明权重向量 $v \in \mathbb{F}_2^{2n} \setminus \{0\}$（满足 $\bigoplus_{j=0}^{2n-1} v_j = \mathrm{false}$），定义乘性特征标 $\chi_v(f) = \prod_{x \in \operatorname{Qubits}(2n)} f(x)^{(-1)^{v \cdot x}}$。任何全局标量 $c \neq 0$（`character_global`）以及方向 $w \neq v$ 的单比特 $R_z$ 门（`character_factor`）对 $\chi_v$ 的贡献恒为 $1$；而在目标对角元 $e^{i\theta_{\mathrm{hard}}(x)}$ 上，由于 $0^{2n}$ 与 $1^{2n}$ 对偶权重向量 $v$ 的内积均为 $\mathrm{false}$，特征标取值为 $\chi_v(\exp(i\theta_{\mathrm{hard}})) = i \cdot i = -1 \neq 1$（`hard_character`）。因此，全部 $2^{2n-1} - 1$ 个非零偶奇偶向量都必须在某步 $R_z$ 旋转时出现在导线上（`rotation_labels`）；又因初始导线均为奇权重，每一个非零偶向量都必须出现在记录电路各 $\mathrm{CNOT}$ 步偶权重输出的列表 `evenOutputs` 之中（`even_mem_outputs`），从而其列表长度满足 $|\operatorname{evenOutputs}| \ge 2^{2n-1} - 1$（`even_output_count`）。
+3. **Walsh–Hadamard 特征标判据与 $2^{2n-1} - 1$ 个偶奇偶输出（`hard_character` 与 `even_output_count`）**：对每个非零偶汉明权重向量 $v \in \mathbb{F}_2^{2n} \setminus \{0\}$（满足 $\bigoplus_{j=0}^{2n-1} v_j = \mathrm{false}$），定义乘性特征标 $\chi_v(f) = \prod_{x \in \operatorname{Qubits}(2n)} f(x)^{(-1)^{v \cdot x}}$。任何全局标量 $c \neq 0$（`character_global`）以及方向 $w \neq v$ 的单比特 $R_z$ 门（`character_factor`）对 $\chi_v$ 的贡献恒为 $1$；而在目标对角元 $e^{i\theta_{\mathrm{hard}}(x)}$ 上，由于 $0^{2n}$ 与 $1^{2n}$ 对偶权重向量 $v$ 的内积均为 $\mathrm{false}$，特征标取值为 $\chi_v(\exp(i\theta_{\mathrm{hard}})) = i \cdot i = -1 \neq 1$（`hard_character`）。因此，全部 $2^{2n-1} - 1$ 个非零偶奇偶向量都必须在某步 $R_z$ 旋转时出现在导线上（`rotation_labels`）；又因初始导线均为奇权重，每一个非零偶向量都必须出现在记录电路各 $\mathrm{CNOT}$ 步偶权重输出的列表 `evenOutputs` 之中（`rotation_outputs`），从而其列表长度满足 $|\operatorname{evenOutputs}| \ge 2^{2n-1} - 1$（`even_output_count`）。
 
 4. **偶奇偶诞生与奇复原的收支平衡（`ReflectionDiagonalParityCounting.count_bound`）**：按电路各步 $\mathrm{CNOT}$ 门对偶权重导线数 `evenWires` 的改变（按步计重数）定义两类不相交事件：当某步 $\mathrm{CNOT}$ 的目标导线 $l_t$ 与控制导线 $l_c$ 均为奇权重、相加生成偶权重输出 $l_t \oplus l_c$ 时，记入**偶诞生列表** `births`（使 `evenWires` 加 $1$）；当某步 $\mathrm{CNOT}$ 的目标导线 $l_t$ 为偶权重而控制导线 $l_c$ 为奇权重、相加使目标导线恢复奇权重标签时，计为一次**奇复原步** `returns`（产出奇权重输出并使 `evenWires` 减 $1$）。由于任意时刻所有偶输出都落在 `births` 的 $\mathbb{F}_2$-线性张成集合 `listSpan births` 内（`span_outputs`），要覆盖全部 $2^{2n-1}$ 个偶奇偶向量，列表长度必须满足 $|\operatorname{births}| \ge 2n - 1$（`birth_count`）。同时，由于 `evenWires` 从初态 $0$ 出发并在电路终点必须归零（第 2 步），逐步收支平衡不等式（`return_balance`：$|\operatorname{births}| \le \operatorname{evenWires}(\mathit{ls}) + \operatorname{returns}$）强制要求每一次偶诞生步都必须由至少一次奇复原步来抵消，故 $\operatorname{returns} \ge |\operatorname{births}| \ge 2n - 1$。因为 `evenOutputs` 中统计的 $\mathrm{CNOT}$ 步总是输出偶权重标签，而 `returns` 中统计的 $\mathrm{CNOT}$ 步总是输出奇权重标签，两类 $\mathrm{CNOT}$ 步在同一电路列表中严格不交（`disjoint_counts`），相加即得精确下界
 
@@ -264,7 +264,7 @@ $$
 在全息引力文献中，与多比特纠缠与双边态紧密相关的另一条著名假说是马达西那（Juan Maldacena）与萨斯坎德（Leonard Susskind）提出的 $\mathrm{ER}=\mathrm{EPR}$ 猜想。我们将其严格置于开放猜想环境中。
 
 ::: {.figure src="ch20-er-epr"}
-**ER=EPR 只在大量纠缠的半经典体系里提出“纠缠就是桥”。** 上一行：左右两套系统 $L$、$R$ 之间许多青色虚线的纠缠对，与右边爱因斯坦—罗森桥的侧视图之间是红色的“≟”，这一对应是开放问题（[@conj-er-equals-epr]）。下一行：一对贝尔态指向的小桥被划掉——一对微观纠缠比特之间没有光滑的虫洞。全图是示意。
+**ER=EPR 中光滑经典桥的几何读法需要适当的半经典体系。** 上一行：左右两套系统 $L$、$R$ 之间许多青色虚线的纠缠对，与右边爱因斯坦—罗森桥的侧视图之间是红色的“≟”，这一对应是开放问题（[@conj-er-equals-epr]）。下一行：一对贝尔态指向的小桥被划掉——一对微观纠缠比特之间没有光滑的虫洞。全图是示意。
 :::
 
 ::: {.conjecture #conj-er-equals-epr title="ER=EPR"}
@@ -330,7 +330,7 @@ $$
 :::
 
 ::: {.figure src="ch20-lookup-budget"}
-**预存的查找表很快超出任何多项式预算。** 纵轴按对数刻度：品红的直线是查找表的行数 $2^n$，青色的曲线是取作示例的多项式预算 $n^3$；两者在 $n = 10$ 的竖直虚线处交叉，此后品红线越走越远。紫色标签：文献结果，未在本书形式化（[@rem-computational-model-literature]）；红色标签：$\mathrm{P}\neq\mathrm{NP}$ 仍是开放问题，这张图不回答它。
+**预存的查找表很快超出任何多项式预算。** 纵轴按对数刻度：品红的直线是查找表的行数 $2^n$，青色的曲线是取作示例的多项式预算 $n^3$；两者在 $n \approx 9.94$ 处交叉；竖直虚线标出 $n = 10$，此后的整数 $n$ 均有 $2^n > n^3$，品红线越走越远。紫色标签：文献结果，未在本书形式化（[@rem-computational-model-literature]）；红色标签：$\mathrm{P}\neq\mathrm{NP}$ 仍是开放问题，这张图不回答它。
 :::
 
 ::: {.conjecture #conj-p-neq-np title="P≠NP"}
@@ -347,7 +347,7 @@ $$
 
 走到第五部收官处，本章经 Lean 4 内核形式化验证的四条结果——开放边界可积电路最小并行深度闭式解 $L = \lfloor N/(\kappa+1)\rfloor + 1$（[@thm-open-circuit-min-depth]）、两条文献深度公式的反例证伪（[@lemma-open-circuit-depth-refutation]）、反射对称对角酉算子的指数级 $\mathrm{CNOT}$ 门计数下界 $2^{2n-1} + 2n - 2$（[@prop-reflection-cnot-lower-bound]）以及偶圈图闭合遍历步长偶性（[@cor-even-cycle-length]）——与三大开放猜想（[@conj-complexity-equals-volume]、[@conj-er-equals-epr]、[@conj-p-neq-np]）共同立起了一座清晰的几何坐标：在固定门集与局域相互作用约束下，局域观察者要想跨越空间纠缠割或对齐高维反射对称相位，必须实打实地付出最少层数 $L$ 或指数级双比特门数的旋转代价。
 
-这自然引出了一个更深层的本体论与复杂性追问：如果[第十章](ch10-gram-geometry-and-order.md)揭示的格拉姆矩阵重构具有“两两比较、永远一致、顺序无关”的无时间几何刚性，那么为什么局域观察者依然必须承受顺序门计数 $L$ 的硬下界与 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$ 的正交视界？在跨越第六部“球外之球”（对角线逃逸、素数谱与 $\psi = \psi(\psi)$）与第七部“机械法典”（无矩阵克利福德引擎、ZYZ 旋转器编译与 Lean 4 源码审计）之后，我们将在**第八部**给出完整的展开：
+这自然引出了一个更深层的本体论与复杂性追问：如果[第十章](ch10-gram-geometry-and-order.md)揭示的格拉姆矩阵重构具有“两两比较、永远一致、顺序无关”的无时间几何刚性，那么为什么局域观察者依然必须承受并行深度 $L$ 的硬下界与 $\mathrm{P} \stackrel{?}{=} \mathrm{NP}$ 的正交视界？在跨越第六部“球外之球”（对角线逃逸、素数谱与 $\psi = \psi(\psi)$）与第七部“机械法典”（无矩阵克利福德引擎、ZYZ 旋转器编译与 Lean 4 源码审计）之后，我们将在**第八部**给出完整的展开：
 
 - **[第二十九章](ch29-timeless-causality-and-gram-space.md)** 将把第十章的格拉姆椭圆体（$\det G \ge 0$）与无时间约束及条件时间切片文献背景（见第二十九章 `remark` 文献注记）合拢，阐明为什么顺序门深度 $L$ 度量的是有限观察者沿半正定矩阵补全（$G_{M+1} \succeq 0$）在静态时间场中一步步选点对齐晶面所需的最小旋转步数；
 - **[第三十章](ch30-fields-lines-eth-and-navier-stokes.md)** 将进一步在“全局静态场模型 vs. 场内有限观察者 $\mathrm{P}\neq\mathrm{NP}$（[@conj-p-neq-np]）”以及“$\mathrm{P}$ 是无旋引导场、$\mathrm{NP}$ 是零横截面一维见证丝”的几何框架下，结合专门文献注记审视细粒度复杂性中的张量网络秩约分讨论、宇宙尺度对照与三维流体平流闭合障碍；

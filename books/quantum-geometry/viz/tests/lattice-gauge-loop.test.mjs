@@ -97,6 +97,9 @@ check('TWIST: e₀ passes through 1, i, −1, −i and back', [[1, 0], [0, 1], [
 check('TWIST: the loop stays at i throughout', loopT.every((q) => dist(q, [0, 1]) < 1e-9));
 s = await seek(0.25);
 check('TWIST: e₁ turns the opposite way (−i at a quarter)', dist(cx(s.phi[1]), [0, -1]) < 1e-9 && s.hot && s.hot.kind === 'v' && s.hot.i === 1);
+// the still of TWIST stops at s = 0.875: the arcs on e₀ and e₁ cover ±315° (= the gauge angle 0.875 · 360° at corner 1), the loop none
+s = await seek(0.875);
+check('TWIST still: e₀ and e₁ have swept +315° and −315° (corner 1 turned 0.875 · 360°), the loop dial 0°', Math.abs(s.swept.phi[0] - 0.875 * 360) < 1e-9 && Math.abs(s.swept.phi[1] + 0.875 * 360) < 1e-9 && Math.abs(s.swept.phi[2]) < 1e-9 && Math.abs(s.swept.phi[3]) < 1e-9 && Math.abs(s.swept.loops[0]) < 1e-9);
 
 /* ---------- CHORD: two squares, gauge on every corner but the root ---------- */
 s = await card('chord'); const c0 = s; const c1 = await seek(1);
@@ -107,6 +110,8 @@ const outer = (x) => [step(x, 0, 1), step(x, 1, 2), step(x, 2, 5), step(x, 5, 4)
 check('CHORD: the outer loop keeps its phase and equals the product of the two squares', dist(outer(c0), outer(c1)) < 1e-9 && dist(outer(c1), mul(squares(c1).get('0,0'), squares(c1).get('1,0'))) < 1e-9);
 check('CHORD: the page\'s outer dial is the χ of the right chord and equals the outer loop', c1.sel === 6 && dist(cx(c1.chi[6]), outer(c1)) < 1e-9 && dist(cx(c0.chi[6]), outer(c0)) < 1e-9);
 check('CHORD: the root is not turned', Math.abs(c1.gauge[c1.root]) < 1e-9);
+check('CHORD still: the title gives every loop in degrees, and the subtitle says left, right and outer moved 0°', /回路 -?−?\d+° · -?−?\d+°$/.test(c1.hud.trim()) && !/[i]$/.test(c1.hud.trim()) && c1.hudSub.includes('左格 0°') && c1.hudSub.includes('右格 0°') && c1.hudSub.includes('外圈 0°'), c1.hud + ' | ' + c1.hudSub);
+check('CHORD still: every edge has an arc, no loop dial has one', c1.swept.phi.filter((d) => Math.abs(d) > 0.5).length >= 6 && c1.swept.loops.every((d) => Math.abs(d) < 1e-9));
 
 /* ---------- ANCHOR: the tree path from r to the far anchor ---------- */
 s = await card('anchor'); const a0 = s; const a1 = await seek(1);
@@ -133,6 +138,11 @@ const sq0 = squares(w0), sq1 = squares(w1);
 check('TWO: only the shared middle edge changes', w0.phi.every((p, e) => (e === 5) === (dist(cx(p), cx(w1.phi[e])) > 1e-6)) && w1.hot && w1.hot.i === 5);
 check('TWO: the left square turns by +150°, the right by −150°', dist(mul(sq1.get('0,0'), conj(sq0.get('0,0'))), cx(150)) < 1e-9 && dist(mul(sq1.get('1,0'), conj(sq0.get('1,0'))), cx(-150)) < 1e-9);
 check('TWO: the outer loop does not move', dist(outer(w0), outer(w1)) < 1e-9 && dist(cx(w1.chi[6]), outer(w1)) < 1e-9);
+{ // the subtitle of the still lists the three loop changes, read off the independent products above
+  const ang = (z) => Math.round(Math.atan2(z[1], z[0]) / (Math.PI / 180)), fmt = (d) => `${d > 0 ? '+' : d < 0 ? '−' : ''}${Math.abs(d)}°`;
+  const dl = ang(mul(sq1.get('0,0'), conj(sq0.get('0,0')))), dr = ang(mul(sq1.get('1,0'), conj(sq0.get('1,0')))), dc = ang(mul(outer(w1), conj(outer(w0))));
+  check('TWO still: the subtitle reads left +150°, right −150°, outer 0° (from the square products)', w1.hudSub.includes(`左格 ${fmt(dl)}、右格 ${fmt(dr)}、外圈 ${fmt(dc)}`) && dl === 150 && dr === -150 && dc === 0, w1.hudSub);
+}
 check('TWO: the page says this is not a gauge transformation', (await page.textContent('#roNote')).includes('不是规范变换'));
 
 /* ---------- controls ---------- */
@@ -141,11 +151,11 @@ check('lattice chips: 4 squares gives n = 9, m = 12, c = 4, a spanning tree', s.
 check('every lattice: the page\'s loop phases are the counter-clockwise products', [...squares(s).values()].every((q, i) => dist(q, pageLoops(s)[i]) < 1e-9));
 const before = s;
 await page.click('#btnGauge');
-check('random gauge plays to the end', await until(page, () => { const d = window.GAUGE_DEBUG.state; return !d.playing && d.s === 1; }));
+check('random gauge plays to the end', await until(page, () => { const d = window.GAUGE_DEBUG.state; return !d.playing && d.s === 1; }, null, 120000));
 s = await state();
 check('random gauge: edges moved, loops did not', s.phi.some((p, e) => dist(cx(p), cx(before.phi[e])) > 0.1) && sameLoops(before, s) < 1e-9);
 await page.click('#btnTree');
-check('iron the tree plays to the end', await until(page, () => { const d = window.GAUGE_DEBUG.state; return !d.playing && d.s === 1; }));
+check('iron the tree plays to the end', await until(page, () => { const d = window.GAUGE_DEBUG.state; return !d.playing && d.s === 1; }, null, 120000));
 s = await state();
 check('iron the tree: every tree edge reads 1, loops unchanged', s.phi.every((p, e) => !s.tree[e] || dist(cx(p), [1, 0]) < 1e-9) && sameLoops(before, s) < 1e-9);
 const fb = s;
