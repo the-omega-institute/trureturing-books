@@ -198,7 +198,7 @@
       $('roKeyL').textContent = L('最小割断的键', 'bonds in the minimal cut'); $('roKey').innerHTML = `<span class="c-mg">${C.k}</span>`; $('roKeySub').textContent = L(`A 有 ${l} 条腿`, `A has ${l} leg${l === 1 ? '' : 's'}`);
       set(1, L('区间 A', 'interval A'), l === 1 ? L(`第 ${C.a[0]} 格`, `site ${C.a[0]}`) : L(`第 ${C.a[0]}–${C.a[1] - 1} 格`, `sites ${C.a[0]}–${C.a[1] - 1}`));
       set(2, L('跨割的秩至多', 'rank across the cut at most'), `χ<sup>${C.k}</sup>`);
-      set(3, '2·log₂L + 1', `${fix(ref(l), 2)} <span class="okmark">${C.k <= ref(l) + 1e-9 ? '≥ k ✓' : '✗'}</span>`);
+      set(3, '2·log₂L + 1', `${fix(ref(l), 2)} <span class="chk">${C.k <= ref(l) + 1e-9 ? '≥ k ✓' : '✗'}</span>`);
       set(4, L('割内侧的张量', 'tensors inside the cut'), String(tens));
       note = L('割不会多于 L：直接剪断 A 的每条腿就是一道割。', 'The cut never needs more than L: severing every leg of A is itself a cut.');
       what = `L = ${l}`; key = `k = ${C.k}`;
@@ -209,7 +209,7 @@
       $('roKeyL').textContent = L('一起割 A∪B', 'cut A∪B together'); $('roKey').innerHTML = `<span class="c-mg">${C.k}</span>`; $('roKeySub').textContent = L(`分开割 ${C.kA} + ${C.kB} = ${C.sum}`, `apart ${C.kA} + ${C.kB} = ${C.sum}`);
       set(1, L('A 的割 · B 的割', 'cut of A · cut of B'), `${C.kA} · ${C.kB}`);
       set(2, L('分开割之和', 'sum apart'), String(C.sum));
-      set(3, L('一起割省下', 'saved together'), `${C.sum - C.k} <span class="okmark">${C.k <= C.sum ? '≥ 0 ✓' : '✗'}</span>`);
+      set(3, L('一起割省下', 'saved together'), `${C.sum - C.k} <span class="chk">${C.k <= C.sum ? '≥ 0 ✓' : '✗'}</span>`);
       set(4, L('A、B 之间空几格', 'sites between A and B'), String(gap));
       note = L('一起割从不比分开割多：A 的割与 B 的割合起来，本身就是 A∪B 的一道割。', 'Together never takes more than apart: the cut of A and the cut of B, taken together, are themselves a cut of A∪B.');
       what = `L = ${l}`; key = `k = ${C.k}`;
