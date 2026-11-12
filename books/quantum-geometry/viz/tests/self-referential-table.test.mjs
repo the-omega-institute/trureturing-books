@@ -73,7 +73,7 @@ const seekEnd = () => page.evaluate(() => window.TABLE_DEBUG.seek(1e9));
 
 let s = await state();
 check('page carries its id', (await page.evaluate(() => document.body.dataset.vizId)) === ID);
-check('opens on ROW · COL: N = 8, r = 3, cell (1, 4), read to the end', s.preset === 'dual_read' && s.scene === 'read' && s.N === 8 && s.r === 3 && s.i === 0 && s.j === 3 && s.k === 8 && !s.playing);
+check('opens on ROW · COL: N = 4, r = 2, cell (1, 4), read to the end', s.preset === 'dual_read' && s.scene === 'read' && s.N === 4 && s.r === 2 && s.i === 0 && s.j === 3 && s.k === 4 && !s.playing);
 
 // T is symmetric, idempotent, of rank r with trace r, for every N and r the page offers
 let worstSym = 0, worstIdem = 0, worstTrace = 0, rankOk = true, nullOk = true, basisOk = true;
@@ -115,20 +115,22 @@ await pick('dual_read'); await seekEnd();
 s = await state();
 let M = await dbg(() => window.TABLE_DEBUG.T()), prods = await dbg(() => window.TABLE_DEBUG.products());
 const M2 = matmul(M, M);
-check('ROW · COL: the eight products are TᵢₖTₖⱼ', prods.every((p, k) => Math.abs(p - M[0][k] * M[k][3]) < 1e-15));
+check('ROW · COL: the four products are TᵢₖTₖⱼ', s.N === 4 && prods.length === 4 && prods.every((p, k) => Math.abs(p - M[0][k] * M[k][3]) < 1e-15));
 check('ROW · COL: they add up to (T²)₁₄ = T₁₄', Math.abs(s.partial - M2[0][3]) < 1e-15 && Math.abs(M2[0][3] - M[0][3]) < 1e-15, `${s.partial} vs ${M[0][3]}`);
 check('ROW · COL: some products are negative (magenta) and T₁₄ < 0', prods.some((p) => p < 0) && prods.some((p) => p > 0) && M[0][3] < 0);
 await page.evaluate(() => window.TABLE_DEBUG.seek(3));
 s = await state();
-check('the rail adds terms one at a time (3 of 8)', s.k === 3 && Math.abs(s.partial - (prods[0] + prods[1] + prods[2])) < 1e-15);
-await pick('diagonal');
-s = await state(); prods = await dbg(() => window.TABLE_DEBUG.products());
-check('DIAGONAL: cell (4, 4), every product is a square ≥ 0', s.i === 3 && s.j === 3 && prods.every((p, k) => p >= 0 && Math.abs(p - M[3][k] ** 2) < 1e-15));
-check('DIAGONAL: the squares add up to T₄₄ (|row 4|² = T₄₄)', Math.abs(prods.reduce((a, b) => a + b, 0) - M[3][3]) < 1e-14 && Math.abs(vnorm(M[3]) ** 2 - M[3][3]) < 1e-14);
+check('the rail adds terms one at a time (3 of 4)', s.k === 3 && Math.abs(s.partial - (prods[0] + prods[1] + prods[2])) < 1e-15);
+// ROW · COL, a diagonal cell: the card note says a click there makes every product a square that adds up to Tₖₖ
+let pt = await dbg(() => window.TABLE_DEBUG.point.cell(2, 2));
+await page.mouse.click(pt.x, pt.y); await seekEnd(); s = await state(); prods = await dbg(() => window.TABLE_DEBUG.products());
+check('ROW · COL, diagonal cell (3, 3): every product is a square ≥ 0', s.i === 2 && s.j === 2 && prods.every((p, k) => p >= 0 && Math.abs(p - M[2][k] ** 2) < 1e-15));
+check('ROW · COL, diagonal cell (3, 3): the squares add up to T₃₃ (|row 3|² = T₃₃)', Math.abs(prods.reduce((a, b) => a + b, 0) - M[2][2]) < 1e-14 && Math.abs(vnorm(M[2]) ** 2 - M[2][2]) < 1e-14);
+check('the DIAGONAL card is gone (merged into ROW · COL)', (await page.locator('[data-preset="diagonal"]').count()) === 0);
 // a click on a cell selects it in the read scene
-let pt = await dbg(() => window.TABLE_DEBUG.point.cell(5, 1));
+pt = await dbg(() => window.TABLE_DEBUG.point.cell(3, 1));
 await page.mouse.click(pt.x, pt.y); s = await state();
-check('clicking a cell in READ selects it', s.i === 5 && s.j === 1 && s.scene === 'read' && s.preset === null);
+check('clicking a cell in READ selects it', s.i === 3 && s.j === 1 && s.scene === 'read' && s.preset === null);
 
 // RANK cards
 await pick('reset'); s = await state(); M = await dbg(() => window.TABLE_DEBUG.T());

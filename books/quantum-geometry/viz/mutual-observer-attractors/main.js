@@ -152,17 +152,51 @@
     const thumb = TRV.thumbMode;
     const top = thumb ? 20 : Math.max(46, below($('hudBig').parentElement), below($('sceneChips'))) + 8;
     const bottom = thumb ? 20 : Math.max(18, $('legend').offsetHeight + 20);
+    // the mirror scene keeps a narrow band under the plane: the signed error beat by beat, counted in cosine evaluations
+    const band = S.scene === 'mirror' && !thumb ? clamp(Math.round(st.height * 0.2), 64, 112) : 0;
     stage.begin();
     let g;
-    if (S.scene === 'mirror') g = kit.plot($('cv'), { x: [-0.08, 1.62], y: [-0.08, 1.62], equal: true, pad: [16, 16, top, bottom], clear: false });
+    if (S.scene === 'mirror') g = kit.plot($('cv'), { x: [-0.08, 1.62], y: [-0.08, 1.62], equal: true, pad: [16, 16, top, bottom + (band ? band + 22 : 0)], clear: false });
     else {
       const R = (S.l1 + S.l2 + DMAX) / 2;
       g = kit.plot($('cv'), { x: [-(DMAX / 2 + S.l1) - 0.12, DMAX / 2 + S.l2 + 0.12], y: [-0.35, R + 0.12], equal: true, pad: [16, 16, top, bottom], clear: false });
     }
     G = g;
     g.ctx.save(); g.ctx.beginPath(); g.ctx.rect(g.pl, g.pt, g.iw, g.ih); g.ctx.clip();
-    if (S.scene === 'mirror') drawMirror(g); else { drawCut(g); g.ctx.restore(); }
+    if (S.scene === 'mirror') { drawMirror(g); lastBand = band ? drawBand(bottom, band) : null; } else { drawCut(g); g.ctx.restore(); lastBand = null; }
     stage.end();
+  }
+
+  /* ---------- the band under the plane: one bar per cosine evaluation ----------
+     Bar n is A's signed error x_n − θ* on a symmetric log scale (so the late beats stay visible): up when the
+     reading is above θ*, down when below. The even beats carry the hollow ring of the plane; this beat is amber. */
+  const E0 = 1e-3, EMAX = 0.8;
+  const symlog = (e) => Math.sign(e) * Math.log10(1 + Math.abs(e) / E0) / Math.log10(1 + EMAX / E0);
+  let lastBand = null;
+  function drawBand(bottom, band) {
+    const cv = $('cv'), H = cv.clientHeight, O = orb(), k = Math.min(beat(), NB), round = S.view === 'round';
+    const b = kit.plot(cv, { x: [-0.7, NB + 0.7], y: [-1.3, 1.08], pad: [64, 18, H - bottom - band, bottom], clear: false });
+    const fs = 10.5, ink = P.ink, dim = P.dim;
+    b.line([[-0.5, 0], [NB + 0.5, 0]], dim, { width: 1, alpha: 0.8 });
+    b.text(-0.7, 0.55, L('高于 θ*', 'above θ*'), dim, { align: 'right', dx: -6, size: fs, face: 'body' });
+    b.text(-0.7, -0.55, L('低于 θ*', 'below θ*'), dim, { align: 'right', dx: -6, size: fs, face: 'body' });
+    b.text(-0.7, 1.08, L('误差 x − θ* · 横轴：余弦求值次数 n', 'error x − θ* · across: cosine evaluations n'), ink, { base: 'bottom', dy: -5, size: fs, face: 'body' });
+    const bars = [];
+    for (let n = 0; n <= NB; n++) {
+      const e = O.xs[n] - THETA, h = symlog(e), even = n % 2 === 0;
+      bars.push({ n, e, h, sign: Math.sign(e), shown: n <= k });
+      if (n % 2 === 0 || n === NB) b.text(n, -1.3, String(n), dim, { align: 'center', base: 'bottom', size: 9.5 });
+      if (n > k) continue;
+      const now = n === k, a = round ? (even ? 1 : 0.28) : 0.85;
+      b.line([[n, 0], [n, h]], now ? P.amber : dim, { width: (now ? 3.2 : round && even ? 2.6 : 2) * TH, alpha: now ? 1 : a });
+      if (even) b.dot(n, h, P.sigma, 4.2, { ring: true, width: 1.6, alpha: round ? 1 : 0.55 });
+      if (now) b.dot(n, h, P.amber, 3.2);
+    }
+    const factor = round ? L(`每轮 ×${fix(LAM2, 3)}，一轮两次求值`, `×${fix(LAM2, 3)} a round, two evaluations each`) : L(`每拍 ×(−${fix(LAM, 3)})`, `×(−${fix(LAM, 3)}) a beat`);
+    const eNow = O.xs[k] - THETA;
+    b.text(NB + 0.7, 1.0, factor, ink, { align: 'right', base: 'top', size: fs, face: 'body' });
+    b.text(NB + 0.7, 0.62, `n = ${k} · x − θ* = ${sgn(eNow, 4)}`, P.amber, { align: 'right', base: 'top', size: fs });
+    return { bars, k, factor, now: eNow, view: S.view };
   }
 
   /* ---------- the strip: one question per plot ---------- */
@@ -313,8 +347,8 @@
     connected: { scene: 'cut', l1: 1, l2: 1, at: tOf(0.2) }
   };
   const NOTES = {
-    alone: ['两人从同一个读数 0.1 出发：琥珀色的点始终在灰色对角线上，每一拍都越过 (θ*, θ*)，0.1 → 0.995 → 0.544 → 0.855……与孤立的余弦迭代一模一样，误差每拍乘约 −0.674。', 'Both start from the same reading 0.1: the amber point stays on the grey diagonal and crosses (θ*, θ*) at every beat, 0.1 → 0.995 → 0.544 → 0.855 …, exactly like the lone cosine iteration, the error multiplied by about −0.674 a beat.'],
-    round: ['同一条轨道，每两拍取一次（空心的环）：0.1 → 0.544 → 0.656 → 0.702……全在 (θ*, θ*) 的同一侧单调逼近，每轮误差约乘 +0.454 = 0.674²。一轮含两次余弦求值：环只是“同一起点”那张卡里同一条轨道的偶数拍，同样多次余弦求值走到同一处——更稳，不是更快。', 'The same orbit sampled every two beats (the hollow rings): 0.1 → 0.544 → 0.656 → 0.702 …, all on one side of (θ*, θ*), closing in monotonically, the error multiplied by about +0.454 = 0.674² a round. A round costs two cosine evaluations: the rings are just the even beats of the orbit in the “Same start” card, and the same number of cosine evaluations lands in the same place — steadier, not faster.'],
+    alone: ['两人从同一个读数 0.1 出发：琥珀色的点始终在灰色对角线上，每一拍都越过 (θ*, θ*)，0.1 → 0.995 → 0.544 → 0.855……与孤立的余弦迭代一模一样，误差每拍乘约 −0.674。下方条带的横轴是余弦求值次数：每根灰色细柱是那一拍的误差 x − θ*，一上一下地交替。', 'Both start from the same reading 0.1: the amber point stays on the grey diagonal and crosses (θ*, θ*) at every beat, 0.1 → 0.995 → 0.544 → 0.855 …, exactly like the lone cosine iteration, the error multiplied by about −0.674 a beat. Along the band below, the count is cosine evaluations: each grey bar is that beat\'s error x − θ*, and they alternate up and down.'],
+    round: ['同一条轨道，每两拍取一次（空心的环）：0.1 → 0.544 → 0.656 → 0.702……全在 (θ*, θ*) 的同一侧单调逼近，每轮误差约乘 +0.454 = 0.674²。一轮含两次余弦求值：环只是“同一起点”那张卡里同一条轨道的偶数拍，同样多次余弦求值走到同一处——更稳，不是更快。下方条带里，带环的细柱落在偶数格上，全在零线下方。', 'The same orbit sampled every two beats (the hollow rings): 0.1 → 0.544 → 0.656 → 0.702 …, all on one side of (θ*, θ*), closing in monotonically, the error multiplied by about +0.454 = 0.674² a round. A round costs two cosine evaluations: the rings are just the even beats of the orbit in the “Same start” card, and the same number of cosine evaluations lands in the same place — steadier, not faster. In the band below, the ringed bars sit on the even counts, all below the zero line.'],
     apart: ['A 从 1.5、B 从 0 出发：两条青色曲线 x = cos y 与 y = cos x 只在对角线上的 (θ*, θ*) 相交。空心的环收进这一点：A 的读数逐轮从上方单调下降，B 的读数逐轮从下方单调上升，没有别的平衡。', 'A starts at 1.5, B at 0: the cyan curves x = cos y and y = cos x meet only at (θ*, θ*) on the diagonal. The hollow rings close in on that point, A\'s reading falling monotonically from above round by round and B\'s rising from below; there is no other balance.'],
     transition: ['两段长 1 的区间从 d = 2.5 拉近：品红的是分开的两条半圆。到 d = √2 − 1 ≈ 0.414，连通的两条（间隙上的小半圆与整段上的大半圆）恰好一样长，两组都是品红。', 'Two intervals of length 1 come closer from d = 2.5: magenta is the separate pair of semicircles. At d = √2 − 1 ≈ 0.414 the connected pair (the small semicircle over the gap and the large one over the whole span) is exactly as long, and both pairs are magenta.'],
     connected: ['d = 0.2，比 0.414 更近：连通的割更短（品红），青色的纠缠楔从 A 连到 B 成为一片，领先阶互信息 ln(1/(0.2 × 2.2)) ≈ 0.82 > 0。', 'd = 0.2, closer than 0.414: the connected cut is shorter (magenta) and the cyan entanglement wedge reaches from A to B in one piece; the leading-order mutual information is ln(1/(0.2 × 2.2)) ≈ 0.82 > 0.']
@@ -343,7 +377,7 @@
       const base = { scene: S.scene, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, theta: THETA };
       if (S.scene === 'mirror') {
         const M = mirrorNumbers();
-        return Object.assign(base, { x0: S.x0, y0: S.y0, view: S.view, beat: M.k, xs: M.O.xs.slice(0, NB + 1), ys: M.O.ys.slice(0, NB + 1), x: M.O.xs[M.k], y: M.O.ys[M.k], roundRatio: M.round, beatRatio: M.beatR, readout: $('roKey').textContent });
+        return Object.assign(base, { x0: S.x0, y0: S.y0, view: S.view, beat: M.k, xs: M.O.xs.slice(0, NB + 1), ys: M.O.ys.slice(0, NB + 1), x: M.O.xs[M.k], y: M.O.ys[M.k], roundRatio: M.round, beatRatio: M.beatR, readout: $('roKey').textContent, band: lastBand });
       }
       const d = dNow(), C = cuts(S.l1, S.l2, d);
       return Object.assign(base, { l1: S.l1, l2: S.l2, d, dcrit: dCrit(S.l1, S.l2), sep: C.sep, conn: C.conn, I: C.I, winner: C.winner, eps: EPS, readout: $('roKey').textContent });

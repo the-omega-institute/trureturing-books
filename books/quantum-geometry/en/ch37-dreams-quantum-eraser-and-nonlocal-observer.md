@@ -157,7 +157,7 @@ $$
 $$
 
 ::: {.viz src="dream-decoherence-unpinning" preset="half_erase" height="500"}
-**Two records, only one reversed.** Two phase records (c = −i) are written one after the other and the magenta ρ₀₁ turns from 1/2 to −1/2; reverse copy 0 alone and it stops at −i/2, the needle in its square points down, and the fringes sit a quarter period off the dashed grey curve; the dashed white arc in the square records the path of the phase, out half a turn and a quarter of the way back ([@thm-ch37-joint-coherent-record-erasure], item 2).
+**Two records, only one reversed.** Two phase records (c = −i) are written one after the other and the magenta ρ₀₁ turns from 1/2 to −1/2; reverse copy 0 alone and the magenta arrow on the phase disc stops at −i/2, and the fringes sit a quarter period off the dashed grey curve; the dashed white line on the disc records the arrow's path, out half a turn and a quarter of the way back ([@thm-ch37-joint-coherent-record-erasure], item 2).
 :::
 
 Two kernel theorems establish both general full-family unimodular reversal and this exact two-copy certificate:
@@ -194,13 +194,13 @@ For Conjunct 1, unfolding `multi_record_channel_apply` twice expresses entry $(i
 :::
 
 ::: {.viz src="dream-decoherence-unpinning" preset="zero_overlap_fail" height="500"}
-**The unit-modulus premise cannot be dropped.** If the records tell the two paths apart completely (overlap c = 0, so the premise |c|² = 1 fails), writing the first copy shrinks the magenta ρ₀₁ to nothing and leaves only the envelope of the dashed cyan curve on the screen; reverse both copies and ρ₀₁ is still 0, the fringes do not return. These are numbers of the page from the same channel formula, outside the scope of [@thm-ch37-joint-coherent-record-erasure].
+**The unit-modulus premise cannot be dropped.** If the records tell the two paths apart completely (overlap c = 0, so the premise |c|² = 1 fails), writing the first copy shrinks the magenta ρ₀₁ to nothing, the arrow on the phase disc to a dot at the centre, and leaves only the envelope of the dashed cyan curve on the screen; reverse both copies and ρ₀₁ is still 0, the fringes do not return. These are numbers of the page from the same channel formula, outside the scope of [@thm-ch37-joint-coherent-record-erasure].
 :::
 
 Conjunct 2 of [@thm-ch37-joint-coherent-record-erasure] captures the lived difference between shallow half-sleep and deep nocturnal release (`MODEL` (interpretive model)): when two daytime commitments invert an initial $+1/2$ coherence into $-1/2$, loosening only copy `{0}` leaves the unreversed second guard twisting the phase onto $-i/2$; only when both copies are jointly conjugated across `Finset.univ` does the buried $+1/2$ amplitude resurface intact!
 
 ::: {.viz src="dream-decoherence-unpinning" preset="quantum_eraser" height="500"}
-**Joint reversal of every copy.** Both phase records are written, then both are reversed: ρ₀₁ turns half way round the circle of radius 1/2 and back to 1/2, and the fringes land on the dashed grey curve again; the dashed white arc in the square is the path of the phase, out half a turn on the outer strand and back on the inner one, with a dot where each step landed ([@thm-ch37-joint-coherent-record-erasure], item 1, every record with |c|² = 1).
+**Joint reversal of every copy.** Both phase records are written, then both are reversed: the magenta arrow on the phase disc turns half way round the dashed grey circle of radius 1/2 and back to 1/2, and the fringes land on the dashed grey curve again; the dashed white line on the disc is the arrow's path, out half a turn on the outer strand and back on the inner one, with a magenta dot where each step landed, at 1/2, −i/2 and −1/2 ([@thm-ch37-joint-coherent-record-erasure], item 1, every record with |c|² = 1).
 :::
 
 ---
@@ -227,7 +227,7 @@ Stepping back from neurophysiology into our zero-background self-referential geo
 If awareness were genuinely secreted by sense organs as a fragile byproduct that cannot exist without a corporeal container, then the instant deep sleep drives the **loading weight of the bodily prior projector $\mathbf{P}_{\mathrm{body}}$ in lookup table $T$ toward zero** (below, $\mathbf{P}_{\mathrm{body}} \to 0$ abbreviates unloading this `MODEL` configuration; the projector itself remains idempotent), observation itself would have to black out alongside its container!
 
 ::: {.viz src="dream-decoherence-unpinning" preset="unpin_body" height="500"}
-**Unpinning: the coherence returns, the weights stay.** The anchor strength λ drops from 1 to 0.1: the magenta cross-block squares grow back, |ρᵢⱼ| returns to 0.9 times its original value, and the fringes come back on the screen; the cyan diagonal, the weight of each place, never moved. Reading λ as the strength of the “bodily prior” is this book's interpretive model (`MODEL`).
+**Unloading the body's anchor: the coherence returns, the weights stay.** The anchors make two blocks, the body x₀ and the other three places, and the anchor strength λ drops from 1 to 0.1: only the magenta squares linking the body to the other three grow back, to 0.9 times their original |ρᵢⱼ|, and the magenta fringes come back on the screen; the cyan squares among the other three were there all along; the cyan diagonal, the weight of each place, never moved. Reading λ as the strength of the “bodily prior” is this book's interpretive model (`MODEL`).
 :::
 
 Yet the exact opposite occurs: **the body is forgotten completely, and observation loses not a single lumen of clarity!** Light, perspective, geometry, and affection continue unfolding without eyeballs or limbs. This repeatable nightly experiment exposes two foundational consequences (`MODEL`):
@@ -300,8 +300,8 @@ Thus the physical slice $\operatorname{modelSet}(\mathrm{goldenWindow})$ cut out
 
 We consolidate waking five-sense lock, shallow nocturnal erasure, and bodiless deep-dream awareness under our **`MODEL` (interpretive model)** in the boxed three-regime ledger below:
 
-::: {.remark #rem-ch37-dream-eraser-synthesis-table title="Three-Regime Synthesis Table of Waking Lock, Dream Erasure, and Nonlocal Emergence (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** The table below synthesizes Gram-elliptope ([Chapter 29](ch29-timeless-causality-and-gram-space.md#sec-coda-finite-observer-time-field) [@thm-ch29-gram-rigidity-and-pell]), cut-and-project quasicrystal aperiodicity (M. Baake & U. Grimm, *Aperiodic Order, Vol. 1*, Cambridge Univ. Press, 2013), quantum-eraser, and predictive-processing literature alongside our `MODEL` and formal decoherence-reversal and golden Delone theorems (`LEAN ✓`):
+::: {.remark #rem-ch37-dream-eraser-synthesis-table title="Three-Regime Synthesis Table of Waking Lock, Dream Erasure, and Nonlocal Emergence (Literature Results Set Against This Book's Model)"}
+**Synthesis table: literature results are not formalized in this book, interpretations are `MODEL`, formal theorems are marked `LEAN ✓`.** The table below synthesizes Gram-elliptope ([Chapter 29](ch29-timeless-causality-and-gram-space.md#sec-coda-finite-observer-time-field) [@thm-ch29-gram-rigidity-and-pell]), cut-and-project quasicrystal aperiodicity (M. Baake & U. Grimm, *Aperiodic Order, Vol. 1*, Cambridge Univ. Press, 2013), quantum-eraser, and predictive-processing literature alongside our `MODEL` and formal decoherence-reversal and golden Delone theorems (`LEAN ✓`):
 
 | Regime of Awareness (`MODEL`) | Known-Data Anchors & Bodily Prior | Gram Volume & Off-Diagonal Coherence Fate | Spatial Addressing & Observer Localization | Phenomenological Vista & Ontological Verdict |
 | :--- | :--- | :--- | :--- | :--- |

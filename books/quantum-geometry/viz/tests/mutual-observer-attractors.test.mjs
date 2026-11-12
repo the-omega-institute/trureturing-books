@@ -61,8 +61,20 @@ check('SAME-START: the pair stays on the diagonal', s.xs.every((x, t) => x === s
 check('SAME-START: the error changes sign at every beat', s.xs.slice(0, 12).every((x, t) => (x - THETA) * (s.xs[t + 1] - THETA) < 0));
 const table = [0.1, 0.995004, 0.544499, 0.855387, 0.655927, 0.792483];
 check('SAME-START: beats 0–5 match the isolated column of the chapter\'s table (6 decimals)', table.every((v, t) => Math.abs(s.xs[t] - v) < 5e-7), s.xs.slice(0, 6).join(', '));
+// the band under the plane: one bar per cosine evaluation, its height the signed error on a symmetric log scale
+{ const B = s.band; let ok = !!B && B.view === 'beat' && B.k === 12 && B.bars.length === 13;
+  for (const b of (B ? B.bars : [])) { const e = chainX(0.1, 0.1, b.n) - THETA, h = Math.sign(e) * Math.log(1 + Math.abs(e) / 1e-3) / Math.log(801);
+    ok = ok && Math.abs(b.e - e) < 1e-14 && Math.abs(b.h - h) < 1e-12 && b.sign === Math.sign(e) && Math.abs(b.h) <= 1; }
+  check('SAME-START band: bar n is A\'s error x_n − θ* after n cosine evaluations, on the symmetric log scale, inside the band', ok);
+  check('SAME-START band: the bars alternate above and below θ* at every count', B && B.bars.slice(0, 12).every((b, i) => b.sign === -B.bars[i + 1].sign));
+  check('SAME-START band: it names the factor of one beat, −sin θ* (finite differences, 3 decimals)', B && B.factor.includes(`−${(-slopeF).toFixed(3)}`), B && B.factor);
+  check('SAME-START band: the amber readout is the error at this count', B && Math.abs(B.now - (chainX(0.1, 0.1, 12) - THETA)) < 1e-14); }
 s = await card('round');
 s = await seek(10);
+{ const B = s.band;
+  check('ONE-ROUND band: the ringed (even) bars all lie below θ* and shrink, the odd ones above', B && B.view === 'round' && B.bars.filter((b) => b.n % 2 === 0).every((b, i, a) => b.sign < 0 && (i === 0 || Math.abs(b.h) < Math.abs(a[i - 1].h))) && B.bars.filter((b) => b.n % 2).every((b) => b.sign > 0));
+  check('ONE-ROUND band: it names the factor of one round, sin²θ* (finite differences, 3 decimals), and two evaluations a round', B && B.factor.includes(slopeG.toFixed(3)) && /两次求值/.test(B.factor), B && B.factor);
+  check('ONE-ROUND band: bars are drawn up to this count only (10 of 12)', B && B.k === 10 && B.bars.filter((b) => b.shown).length === 11); }
 const rounds = [0.1, 0.544499, 0.655927, 0.702079, 0.722420, 0.731547];
 check('ONE-ROUND: every second beat matches the mutual column of the chapter\'s table, y_k = x_{2k}', s.view === 'round' && rounds.every((v, k) => Math.abs(s.xs[2 * k] - v) < 5e-7 && (k === 0 || Math.abs(g(s.xs[2 * k - 2]) - s.xs[2 * k]) < 1e-14)));
 check('ONE-ROUND: the round samples stay below θ* and rise monotonically', [0, 2, 4, 6, 8].every((t) => s.xs[t] < s.xs[t + 2] && s.xs[t + 2] < THETA));

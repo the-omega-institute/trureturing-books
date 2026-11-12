@@ -117,9 +117,11 @@ check('TWO-BLOCKS: a fixed point of the two-block pinching', maxDiff(pinch(realP
 scr = await D((u) => window.DREAM_DEBUG.screen(u), us);
 check('TWO-BLOCKS: every fringe left on the screen comes from in-block coherence (drawn cyan), none from cut coherence', scr.every((v) => close(v.all, v.kept, 1e-12)) && scr.some((v) => Math.abs(v.all - v.diag) > 0.05));
 await pick('unpin_body'); s = await seek(0);
-check('UNPIN: starts at λ = 1', close(s.lam, 1));
+check('UNPIN: the body | rest family, starting at λ = 1 with the body links cut and the links among the rest full', s.fam === 'body' && close(s.lam, 1) && maxDiff(realPart(s.rho), rhoOf(0.4, 1, 'body')) < 1e-12 && s.rho[0][2][0] === 0 && close(s.rho[2][3][0], 0.2, 1e-12));
 s = await seek(1);
-check('UNPIN: ends at λ = 0.1 with the off-diagonal entries 0.9 aᵢaⱼ and the diagonal unchanged', close(s.lam, 0.1, 1e-12) && s.rho.every((r, i) => r.every((v, j) => close(v[0], psi(0.4)[i] * psi(0.4)[j] * (i === j ? 1 : 0.9), 1e-12))));
+/** Expected after unpinning to λ = 0.1 with blocks {x₀}, {x₁, x₂, x₃}: links touching x₀ (once) are 0.9 aᵢaⱼ, the rest aᵢaⱼ. */
+const unpinExp = (i, j) => psi(0.4)[i] * psi(0.4)[j] * ((i === 0) !== (j === 0) ? 0.9 : 1);
+check('UNPIN: ends at λ = 0.1; only the body links come back (0.9 aᵢaⱼ), the links among the rest and the diagonal never moved', close(s.lam, 0.1, 1e-12) && s.rho.every((r, i) => r.every((v, j) => close(v[0], unpinExp(i, j), 1e-12))));
 
 /* ---------- the record scene: Lean's channel, rebuilt from record vectors ---------- */
 const C = (re, im = 0) => [re, im], cm = (a, b) => [a[0] * b[0] - a[1] * b[1], a[0] * b[1] + a[1] * b[0]], cj = (a) => [a[0], -a[1]];
@@ -139,6 +141,7 @@ function expected(r, phi, step) {
 await page.click('[data-scene="record"]'); await settle(page);
 s = await state();
 check('the scene chip switches to the record scene (2 × 2, rail of four steps)', s.scene === 'record' && s.n === 2 && s.max === 4);
+check('the record scene draws the phase disc beside the grid', s.disc && s.disc.rad > 20 && s.disc.cx > s.grid.x0 + s.grid.size, JSON.stringify([s.disc, s.grid]));
 let errR = 0;
 for (const [r, phi] of [[1, 90], [1, 35], [0.6, 90], [0.3, 150], [0, 90]]) {
   await setRange('r', r); await setRange('phi', phi);
@@ -156,6 +159,7 @@ s = await state();
 const phasePath = (r, phi, k) => { let prev = 0, sweep = 0; for (let q = 1; q <= k; q++) { const z = expected(r, phi, q)[0][1]; let a = Math.atan2(z[1], z[0]); while (a - prev > Math.PI) a -= 2 * Math.PI; while (a - prev < -Math.PI) a += 2 * Math.PI; sweep += Math.abs(a - prev); prev = a; } return { sweep, end: prev }; };
 const ph3 = phasePath(1, 90, 3);
 check('HALF-ERASE: the trail in the ρ₀₁ square has turned 3π/2 and ends at −π/2', close(s.trail.sweep, ph3.sweep, 1e-6) && close(s.trail.end, ph3.end, 1e-9) && close(ph3.sweep, 1.5 * Math.PI, 1e-12), JSON.stringify(s.trail));
+check('HALF-ERASE: the arrow on the phase disc ends at −i/2, a quarter turn below the centre', close(s.arrow[0], 0, 1e-9) && close(s.arrow[1], -s.disc.rad, 1e-9), JSON.stringify(s.arrow));
 check('HALF-ERASE: ρ₀₁ = −i/2 (certificate)', close(s.z[0], 0, 1e-12) && close(s.z[1], -0.5, 1e-12));
 s = await seek(2);
 check('two copies written: ρ₀₁ = −1/2 (certificate)', close(s.z[0], -0.5, 1e-12) && close(s.z[1], 0, 1e-12));
@@ -164,6 +168,7 @@ check('JOINT-REVERSAL at step 0: no trail yet', s.trail.points === 0 && s.trail.
 s = await seek(4);
 const ph4 = phasePath(1, 90, 4);
 check('JOINT-REVERSAL: the still is told apart from the start by its trail: out half a turn and back (sweep 2π, ends at 0)', close(s.trail.sweep, ph4.sweep, 1e-6) && close(ph4.sweep, 2 * Math.PI, 1e-12) && Math.abs(s.trail.end) < 1e-9 && s.trail.points > 2, JSON.stringify(s.trail));
+check('JOINT-REVERSAL: the arrow on the phase disc is back at 1/2, on the dashed circle to the right', close(s.arrow[0], s.disc.rad, 1e-9) && close(s.arrow[1], 0, 1e-9));
 check('JOINT-REVERSAL: both reversed, ρ₀₁ = 1/2, the whole matrix restored', maxDiff(s.rho.map((r) => r.map((v) => v[0])), [[0.5, 0.5], [0.5, 0.5]]) < 1e-12 && Math.abs(s.z[1]) < 1e-12);
 scr = await D((u) => window.DREAM_DEBUG.screen(u), us);
 const KB = 2 * Math.PI / 0.5, SB = 0.55;
@@ -173,6 +178,7 @@ await pick('zero_overlap_fail'); s = await seek(1);
 check('ZERO-OVERLAP: one record with c = 0 kills ρ₀₁', s.r === 0 && Math.hypot(...s.z) === 0);
 check('ZERO-OVERLAP: c = 0 has no phase, so no trail is drawn', s.trail.points === 0);
 s = await seek(4);
+check('ZERO-OVERLAP: the arrow on the phase disc has shrunk to the centre', Math.hypot(...s.arrow) < 1e-12);
 check('ZERO-OVERLAP: reversing both copies does not restore it (ρ₀₁ = 0, fringes gone)', Math.hypot(...s.z) === 0 && (await D((u) => window.DREAM_DEBUG.screen(u), us)).every((v) => close(v.all, v.diag, 1e-15)));
 await setRange('r', 0.6); s = await seek(4);
 check('|c| = 0.6: reversing both leaves |c|⁴ = 0.1296 of ρ₀₁', close(Math.hypot(...s.z), 0.5 * 0.6 ** 4, 1e-12) && s.preset === null);
@@ -207,6 +213,25 @@ check('Space plays', await until(page, () => { const d = window.DREAM_DEBUG.stat
 await page.keyboard.press(' ');
 await page.click('[data-lang-set="en"]'); await settle(page);
 check('the key readout is rewritten in English', /cross-block/.test(await page.textContent('#roKeyL')));
+
+/* ---------- layout: the stage title clears the scene buttons on a phone; the English legend of a still is one line ---------- */
+/** The box of the text itself (a range over the element's contents), not of the element, which a flex column stretches. */
+const box = (pg, sel) => pg.evaluate((q) => { const rg = document.createRange(); rg.selectNodeContents(document.querySelector(q)); const r = rg.getBoundingClientRect(); return { l: r.left, r: r.right, t: r.top, b: r.bottom, h: r.height }; }, sel);
+const apart = (a, b) => a.r <= b.l || b.r <= a.l || a.b <= b.t || b.b <= a.t;
+for (const card of ['half_erase', 'waking', 'wake_snap']) {
+  const ph = await T.open(BOOK, ID, `?lang=en&preset=${card}`, { viewport: { width: 390, height: 844 } });
+  await settle(ph, 60);
+  const a = await box(ph, '#hudBig'), b = await box(ph, '#sceneChips');
+  check(`phone, English, ${card}: the stage title does not run under the scene buttons`, apart(a, b), JSON.stringify([a, b]));
+  await ph.context().close();
+}
+for (const card of ['blocks', 'waking', 'half_erase', 'wake_snap']) {
+  const fg = await T.open(BOOK, ID, `?lang=en&embed=1&shot=1&preset=${card}`, { viewport: { width: 740, height: 500 } });
+  await settle(fg, 60);
+  const lh = await fg.evaluate(() => { const el = document.getElementById('legend'), items = [...el.children].map((c) => c.getBoundingClientRect().top); return Math.max(...items) - Math.min(...items); });
+  check(`the English still of ${card} keeps its legend on one line`, lh < 4, `${lh}`);
+  await fg.context().close();
+}
 
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();
