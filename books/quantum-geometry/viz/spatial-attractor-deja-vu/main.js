@@ -13,7 +13,7 @@
   const { kit, L } = TRV, { fix, clamp } = kit, P = TRV.palette;
   const $ = (id) => document.getElementById(id);
   const SIG = 10, BETA = 8 / 3, H = 0.01, EPS = 2, TR = 40, TS = 2, TD = 100, NP = 500, DIV = -(SIG + 1 + BETA);
-  const S = { scene: 'rounds', rho: 28, seed: 0 };
+  const S = { scene: 'rounds', rho: 28, seed: 0, settle: 0 };   // settle: the time before which the rounds are drawn faint (a card's choice)
   const F = (p, rho) => [SIG * (p[1] - p[0]), p[0] * (rho - p[2]) - p[1], p[0] * p[1] - BETA * p[2]];
   function rk4(p, h, rho) {
     const k1 = F(p, rho), k2 = F([p[0] + h * k1[0] / 2, p[1] + h * k1[1] / 2, p[2] + h * k1[2] / 2], rho), k3 = F([p[0] + h * k2[0] / 2, p[1] + h * k2[1] / 2, p[2] + h * k2[2] / 2], rho), k4 = F([p[0] + h * k3[0], p[1] + h * k3[1], p[2] + h * k3[2]], rho);
@@ -113,7 +113,12 @@
 
   /* ---------- the stage ---------- */
   const st = kit.stage3($('stage'), { canvas: $('cv'), yaw: -0.42, pitch: 0.14, zoom: 1, radius: 0.44, wheel: false, onChange: () => paint() });
-  const trail = (W, pts, upTo, color, width) => { const n = Math.min(pts.length, upTo + 1), out = []; for (let i = 0; i < n; i++) out.push(toStage(W, pts[i])); if (out.length > 1) st.path(out, { color, width, back: 0.45 }); };
+  /** An orbit up to step upTo; the steps before `from` (the transient a card wants out of the way) are drawn faint. */
+  const trail = (W, pts, upTo, color, width, from = 0) => {
+    const n = Math.min(pts.length, upTo + 1), cut = Math.min(n, Math.max(0, from)), out = []; for (let i = 0; i < n; i++) out.push(toStage(W, pts[i]));
+    if (cut > 1) st.path(out.slice(0, cut + (cut < n ? 1 : 0)), { color, width: width * 0.8, back: 0.45, alpha: 0.16 });
+    if (n - cut > 1) st.path(out.slice(cut), { color, width, back: 0.45 });
+  };
   const state = () => {      // what the current frame shows, for the picture, the words and the probe
     const W = world(S.rho);
     if (S.scene === 'rounds') {
@@ -135,7 +140,7 @@
   function drawStage(q) {
     const ctx = st.begin(), W = q.W, words = !TRV.thumbMode;
     if (S.scene === 'rounds') {
-      trail(W, q.R[0].pts, q.i, P.cyan, 1.1); trail(W, q.R[1].pts, q.i, P.magenta, 1.1);
+      const from = Math.round(S.settle / H); trail(W, q.R[0].pts, q.i, P.cyan, 1.1, from); trail(W, q.R[1].pts, q.i, P.magenta, 1.1, from);
       const rp = st.p(toStage(W, W.ruin)), rr = EPS / W.half * st.unit;
       ctx.strokeStyle = P.amber; ctx.lineWidth = 2; ctx.shadowColor = P.amber; ctx.shadowBlur = 10; ctx.beginPath(); ctx.arc(rp[0], rp[1], Math.max(rr, 5), 0, kit.TAU); ctx.stroke(); ctx.shadowBlur = 0;
       q.eq.pts.forEach((e) => st.dot(toStage(W, e.p), 4.5, P.ink, { ring: true, fade: false }));
@@ -271,7 +276,7 @@
     document.querySelectorAll('[data-scenes]').forEach((el) => { el.hidden = !el.dataset.scenes.split(' ').includes(sc); });
     fitClock(t);
   }
-  const leave = () => cards.mark(null);
+  const leave = () => { S.settle = 0; cards.mark(null); };
   const sceneChips = kit.chips($('sceneChips'), 'scene', (v) => { leave(); setScene(v); });
   const rhoChips = kit.chips($('rhoChips'), 'rho', (v) => { S.rho = Number(v); leave(); paint(); });
   $('forgetBtn').addEventListener('click', () => { S.seed += 1; leave(); clock.set(0); clock.play(); });
@@ -282,7 +287,7 @@
   const PRESETS = {
     butterfly: { scene: 'rounds', rho: 28, seed: 0, at: TR, play: true }, forget: { scene: 'rounds', rho: 28, seed: 3, at: TR, play: true }, return: { scene: 'rounds', rho: 28, seed: 0, at: 22 },
     shrink: { scene: 'shrink', rho: 28, at: 1, play: true }, dimension: { scene: 'dimension', rho: 28, at: TD },
-    fixed: { scene: 'rounds', rho: 14, seed: 0, at: TR, play: true }, cycle: { scene: 'rounds', rho: 160, seed: 0, at: TR, play: true }
+    fixed: { scene: 'rounds', rho: 14, seed: 0, at: TR, play: true }, cycle: { scene: 'rounds', rho: 160, seed: 0, at: TR, play: true, settle: 30 }
   };
   const NOTES = {
     butterfly: ['两条轨道从相距很远的两点出发，参数相同。短暂游荡之后，它们落到同一对翅膀上；琥珀色的小点是每次经过遗迹邻域的地方。', 'Two orbits start from two distant points with the same parameters. After a short wander they land on the same pair of wings; the small amber dots mark each passage through the neighbourhood of the ruin.'],
@@ -291,12 +296,12 @@
     shrink: ['500 个点从一个立方体里出发。不到一个时间单位，它们就被压到一张薄片上：体积按 e^(−41t/3) 缩小。', '500 points start inside a cube. In less than one unit of time they are pressed onto a thin sheet: the volume shrinks like e^(−41t/3).'],
     dimension: ['沿一条长轨道估计三个李雅普诺夫指数：一个为正，一个为零，一个约 −14.57。由它们算出的维数约 2.06：比一张面多一点，远不到一块体。', 'Estimate the three Lyapunov exponents along one long orbit: one positive, one zero, one about −14.57. The dimension they give is about 2.06: a little more than a surface, far from a solid.'],
     fixed: ['把参数换成 ρ = 14：两轮各自螺旋落进一个不动点，然后不再动。换了内禀参数，就不是那对翅膀了。', 'Change the parameter to ρ = 14: each round spirals into a fixed point and then stays. With other intrinsic parameters the wings are gone.'],
-    cycle: ['ρ = 160：两轮落到同一条闭合的环上，每一圈都踩在同一处。这是一维的吸引子：重复，但没有余地。', 'ρ = 160: both rounds land on the same closed loop and tread the same place on every lap. This is a one-dimensional attractor: it repeats, with no room to spare.']
+    cycle: ['ρ = 160：两轮落到同一条闭合的环上，每一圈都踩在同一处。t = 30 之前的过渡画得很淡，亮的是最后十个时间单位。这是一维的吸引子：重复，但没有余地。', 'ρ = 160: both rounds land on the same closed loop and tread the same place on every lap. The transient before t = 30 is drawn faint; the bright part is the last ten units of time. This is a one-dimensional attractor: it repeats, with no room to spare.']
   };
   let booting = true;
   function applyPreset(id) {
     const p = PRESETS[id];
-    S.rho = p.rho; rhoChips.set(String(p.rho), true); if (p.seed != null) S.seed = p.seed;
+    S.rho = p.rho; rhoChips.set(String(p.rho), true); if (p.seed != null) S.seed = p.seed; S.settle = p.settle || 0;
     setScene(p.scene, p.at);
     if (!p.play || TRV.still || (booting && !TRV.embed)) return;
     clock.set(0);
@@ -310,7 +315,7 @@
 
   window.ATTRACTOR_DEBUG = {
     get state() {
-      const q = state(), out = { scene: S.scene, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, rho: S.rho, seed: S.seed, ruin: q.W.ruin.slice(), half: q.W.half, eps: EPS, div: DIV };
+      const q = state(), out = { scene: S.scene, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, rho: S.rho, seed: S.seed, settle: S.settle, ruin: q.W.ruin.slice(), half: q.W.half, eps: EPS, div: DIV };
       if (S.scene === 'rounds') Object.assign(out, { counts: q.counts, cos: q.cos, angle: q.angle, gap: q.gap, now: q.now, starts: q.R.map((r) => r.start), visits: q.R.map((r) => r.visits.map((v) => ({ t: v.t, d: v.d, dir: v.dir }))),
         ret: q.ret && { ta: q.ret.a.t, tb: q.ret.b.t, sep: q.ret.sep, dirs: [q.ret.a.dir, q.ret.b.dir] }, equilibria: q.eq.pts.map((e) => ({ name: e.name, p: e.p.slice() })), eig: q.eq.eig, unstable: q.eq.unstable, focus: q.eq.focus,
         labels: [...document.querySelectorAll('#stage .tag')].filter((t) => !t.hidden && /^C[₊₋]$/.test(t.textContent.trim())).map((t) => t.textContent.trim()) });
@@ -323,7 +328,7 @@
     point: (k, i) => rounds(world(S.rho), S.seed)[k].pts[i],
     cloudPoint: (k, f) => cloud(world(S.rho)).frames[f][k]
   };
-  window.TRV_THUMB = () => { S.rho = 28; S.seed = 0; rhoChips.set('28', true); st.cam.zoom = 1.25; setScene('rounds', TR); paint.now(); };
+  window.TRV_THUMB = () => { S.rho = 28; S.seed = 0; S.settle = 0; rhoChips.set('28', true); st.cam.zoom = 1.25; setScene('rounds', TR); paint.now(); };
   cards.pick(cards.initial('butterfly'));
   booting = false;
   paint();
