@@ -7,7 +7,8 @@ back with the chapter's definition of bloch and checks that it returns r and the
 (blochMatrix_trace, bloch_blochMatrix).
 """
 
-SIZE = (520, 270)
+SIZE = (520, 210)
+WRAP = True
 ALT = {
     "zh": "左边是一个 2 × 2 矩阵：左上 0.82，右上 0.24 − 0.30i，左下 0.24 + 0.30i，右下 0.18。对角两格是青色，两个角是墨色。"
           "右边四行读数：迹 = 0.82 + 0.18 = 1；z = 0.82 − 0.18 = 0.64，这两行是青色，取自对角两格；"
@@ -45,19 +46,20 @@ def draw(fig):
     assert abs((M[0][0] + M[1][1]) - 1) < 1e-12
     assert fmt(M[0][1]) == "0.24 − 0.30*i*" and fmt(M[0][0]) == "0.82"
 
-    cw, ch, gx, gy = 112, 64, 28, 86
+    mat, read = fig.row([260, 240], 210)
+    cw, ch, gx, gy = 112, 64, 18, 24
     cell = {}
     for i in range(2):
         for j in range(2):
             role = "line" if i == j else "ink"
             x, y = gx + cw * j, gy + ch * i
             dim = (i, j) == (1, 0)
-            fig.rect(x + 3, y + 3, cw - 6, ch - 6, color=role, fill=role, fill_opacity=0.04 if dim else (0.16 if role == "line" else 0.06),
+            mat.rect(x + 3, y + 3, cw - 6, ch - 6, color=role, fill=role, fill_opacity=0.04 if dim else (0.16 if role == "line" else 0.06),
                      width=1.2 if dim else 1.8, rx=5, dash="4 3" if dim else None)
-            fig.text(x + cw / 2, y + ch / 2, fmt(M[i][j]), size=15, color=role if not dim else "dim", anchor="middle",
+            mat.text(x + cw / 2, y + ch / 2, fmt(M[i][j]), size=15, color=role if not dim else "dim", anchor="middle",
                      middle=True, weight=None if dim else 600)
             cell[(i, j)] = (x + cw / 2, y + 3) if (i, j) == (0, 0) else (x + cw - 3, y + ch / 2)
-    fig.text(gx + cw, gy + 2 * ch + 24, "blochMatrix(1, *r*)", size=14, color="dim", anchor="middle")
+    mat.text(gx + cw, gy + 2 * ch + 24, "blochMatrix(1, *r*)", size=14, color="dim", anchor="middle")
 
     rows = (
         (t("迹", "trace"), "0.82 + 0.18 = 1", "line", [(0, 0), (1, 1)]),
@@ -65,9 +67,9 @@ def draw(fig):
         ("*x*", "2 × 0.24 = 0.48", "ink", [(0, 1)]),
         ("*y*", "−2 × (−0.30) = 0.60", "ink", [(0, 1)]),
     )
-    rx, ry0, dy = 300, 98, 34
+    rx, ry0, dy = 12, 34, 34
     for k, (name, val, role, src) in enumerate(rows):
         y = ry0 + dy * k
-        fig.text(rx, y, name, size=15, color=role, weight=600)
-        fig.text(rx + 52, y, val, size=14, color="ink")
-    fig.text(rx, ry0 + dy * 4 + 8, "*r* = (0.48, 0.60, 0.64)", size=14, color="ink", weight=600)
+        read.text(rx, y, name, size=15, color=role, weight=600)
+        read.text(rx + 52, y, val, size=14, color="ink")
+    read.text(rx, ry0 + dy * 4 + 8, "*r* = (0.48, 0.60, 0.64)", size=14, color="ink", weight=600)
