@@ -8,7 +8,7 @@ into the system's entropy drop −ΔS_sys (grey) and the reservoir's relative en
 
 from _ch08 import LN2, SWAP_TABLE, swap_row
 
-SIZE = (520, 300)
+SIZE = (450, 300)
 ALT = {
     "zh": "五根柱子，横轴是热浴比特的基态布居数 p = 0.6、0.75、0.9、0.99、0.999。每根柱子的总高度是热量 βQ，"
           "下面灰色的一截是系统熵减，上面虚线框的一截是热浴相对熵 D。一条虚线标出 ln 2：灰色的一截越来越接近它却不超过它，"
@@ -22,7 +22,7 @@ ALT = {
 
 def draw(fig):
     t = fig.t
-    ax = fig.axes(56, 30, 430, 212, (0, 5), (0, 3.6))
+    ax = fig.axes(56, 30, 370, 212, (0, 5), (0, 3.6))
     ax.yaxis(ticks=[0, 1, 2, 3], labels=["0", "1", "2", "3"], size=13)
     ax.xaxis(ticks=[i + 0.5 for i in range(5)], labels=[str(p) for p in SWAP_TABLE], size=13,
              label=t("热浴比特的基态布居数 *p*", "reservoir ground population *p*"))

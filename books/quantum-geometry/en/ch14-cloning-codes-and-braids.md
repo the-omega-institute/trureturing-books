@@ -261,7 +261,7 @@ By `OrthogonalSyndromes S`, $S_i^* S_j = \delta_{ij} I_d$ and $S_k^* S_i = (S_i^
 :::
 
 ::: {.figure src="ch14-trace-survives"}
-**After decoding, only the diagonal of $\sigma$ survives.** On the left is the $4\times 4$ noise matrix $\sigma$: the four cyan diagonal cells take the values $\frac{1}{2}, \frac{1}{4}, \frac{1}{8}, \frac{1}{8}$ from step four of [@ex-repetition-code-syndrome], and the other twelve, the magenta cross-room coherences, are all struck out. The diagonal adds up to $\Tr\sigma = 1$, and decoding outputs $1 \cdot \rho = \rho$ ([@prop-orthogonal-syndrome-recovery]). With non-zero coherences, a numerical check on the three-qubit code returns the same $\rho$.
+**After decoding, only the diagonal of $\sigma$ survives.** At the top is the $4\times 4$ noise matrix $\sigma$: the four cyan diagonal cells take the values $\frac{1}{2}, \frac{1}{4}, \frac{1}{8}, \frac{1}{8}$ from step four of [@ex-repetition-code-syndrome], and the other twelve, the magenta cross-room coherences, are all struck out. The diagonal adds up to $\Tr\sigma = 1$, and decoding outputs $1 \cdot \rho = \rho$ ([@prop-orthogonal-syndrome-recovery]). With non-zero coherences, a numerical check on the three-qubit code returns the same $\rho$.
 :::
 
 Two important domain boundaries apply to [@prop-orthogonal-syndrome-recovery]:

@@ -8,7 +8,7 @@ V(0) − V(T), the identity of thm-riemannian-gradient-dissipation, and that the
 
 from _ch12 import integral, potential, speed2
 
-SIZE = (500, 300)
+SIZE = (440, 300)
 T = 2.5
 DROP = potential(0) - potential(T)
 AREA = integral(speed2, 0, T)
@@ -25,18 +25,18 @@ ALT = {
 
 
 def draw(fig):
-    ax = fig.axes(56, 28, 340, 230, (0, T), (-1.05, 1.05))
+    ax = fig.axes(56, 28, 310, 230, (0, T), (-1.05, 1.05))
     ax.hline(0, "faint", 1.2)
     ax.yaxis(ticks=[-1, 0, 0.5, 1], labels=["−1", "0", "0.5", "1"], size=13)
     ax.xaxis(at=-1.05, ticks=[0, 1, 2], labels=["0", "1", "2"], size=13)
-    fig.text(226, 292, fig.t("时间 *t*", "time *t*"), size=14, color="dim", anchor="middle")
+    fig.text(ax.x + ax.w / 2, 292, fig.t("时间 *t*", "time *t*"), size=14, color="dim", anchor="middle")
     ts = [T * k / 200 for k in range(201)]
     sq = [(t, speed2(t)) for t in ts]
     ax.area(sq, "area", base=0, fill_opacity=0.24)
     ax.path(sq, "area", 2.0)
     ax.path([(t, potential(t)) for t in ts], "ink", 2.6)
     ax.points([(0, potential(0))], color="now", r=5.0, ring="bg")
-    ax.text(0.95, 0.35, f"{AREA:.2f}", size=16, weight=600, color="area", anchor="middle", halo=True)
+    ax.text(0.95, 0.2, f"{AREA:.2f}", size=16, weight=600, color="area", anchor="middle", halo=True)
     ax.text(1.35, 0.86, "|*ṙ*|^{2}", size=14, color="area", halo=True)
     ax.text(1.5, potential(1.5), "*V*", dx=8, dy=-10, size=15, color="ink", halo=True)
 

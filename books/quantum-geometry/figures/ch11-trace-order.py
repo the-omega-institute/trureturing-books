@@ -12,7 +12,7 @@ import math
 
 from _ch11 import TRACE_ABC, bound, ordered_trace
 
-SIZE = (480, 300)
+SIZE = (440, 300)
 ALT = {
     "zh": "双对数坐标，横轴是步长 t，从 0.01 到 1。三条线：品红的线是三段脉冲核乘积的迹的虚部，斜率为 1，按 t 增长；"
           "青色的线是迹的实部与 Tr(ABC) 的偏差，斜率为 2，按 t² 增长，在小 t 处比品红的线低得多；"
@@ -49,11 +49,11 @@ for _k in range(81):
 
 
 def draw(fig):
-    ax = fig.axes(70, 28, 380, 220, (LO, HI), (YLO, YHI))
+    ax = fig.axes(70, 28, 340, 220, (LO, HI), (YLO, YHI))
     ax.grid(xs=[-2, -1, 0], ys=[-5, -4, -3, -2, -1, 0])
     ax.xaxis(ticks=[-2, -1, 0], labels=["0.01", "0.1", "1"], size=13)
     ax.yaxis(ticks=[-4, -2, 0], labels=["10^{−4}", "10^{−2}", "1"], size=13)
-    fig.text(260, 290, fig.t("步长 *t*", "step *t*"), size=14, color="dim", anchor="middle")
+    fig.text(ax.x + ax.w / 2, 290, fig.t("步长 *t*", "step *t*"), size=14, color="dim", anchor="middle")
 
     def curve(f):
         return [(LO + (HI - LO) * k / 120, math.log10(f(10 ** (LO + (HI - LO) * k / 120)))) for k in range(121)]
@@ -61,8 +61,8 @@ def draw(fig):
     ax.path(curve(im_part), "area", 2.6)
     ax.path(curve(re_dev), "line", 2.6)
 
-    ax.text(-1.55, math.log10(im_part(10 ** -1.55)), fig.t("虚部 ∝ *t*", "imaginary part ∝ *t*"), dy=-12, size=14,
-            color="area", anchor="middle", halo=True)
+    ax.text(-0.85, math.log10(im_part(10 ** -0.85)), fig.t("虚部 ∝ *t*", "imaginary part ∝ *t*"), dy=-10, size=14,
+            color="area", anchor="end", halo=True)
     ax.text(-0.95, math.log10(re_dev(10 ** -0.95)), fig.t("实部偏差 ∝ *t*^{2}", "real deviation ∝ *t*^{2}"), dx=12,
             dy=18, size=14, color="line", halo=True)
     ax.text(-1.3, math.log10(bound(10 ** -1.3)), fig.t("界 (5/4)*L*^{5}*t*^{2}", "bound (5/4)*L*^{5}*t*^{2}"), dx=-10,

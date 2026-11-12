@@ -9,12 +9,12 @@ whatever the off-diagonal terms are.
 
 from _ch14 import NAMES, orthogonal, recover
 
-SIZE = (540, 270)
+SIZE = (358, 392)
 ALT = {
-    "zh": "左边是 4 × 4 的噪声矩阵 σ，行列标着 I、X₁、X₂、X₃。对角线上四格青色，写着 ½、¼、⅛、⅛；其余十二格是品红的跨房间相干项，"
-          "每格都被划掉。一支箭头指向右边：四个对角数相加得 Tr σ = 1，乘上逻辑态 ρ，解码后正好回到 ρ。",
-    "en": "On the left the 4 × 4 noise matrix σ, rows and columns labelled I, X₁, X₂, X₃. The four diagonal cells are cyan and "
-          "read ½, ¼, ⅛, ⅛; the other twelve are magenta cross-room coherences, each struck out. An arrow points right: the "
+    "zh": "上面是 4 × 4 的噪声矩阵 σ，行列标着 I、X₁、X₂、X₃。对角线上四格青色，写着 ½、¼、⅛、⅛；其余十二格是品红的跨房间相干项，"
+          "每格都被划掉。一支箭头向下指：四个对角数相加得 Tr σ = 1，乘上逻辑态 ρ，解码后正好回到 ρ。",
+    "en": "At the top, the 4 × 4 noise matrix σ, rows and columns labelled I, X₁, X₂, X₃. The four diagonal cells are cyan and "
+          "read ½, ¼, ⅛, ⅛; the other twelve are magenta cross-room coherences, each struck out. An arrow points down: the "
           "four diagonal numbers add to Tr σ = 1, which multiplies the logical state ρ, so decoding returns exactly ρ.",
 }
 
@@ -33,7 +33,7 @@ def draw(fig):
     assert abs(tr - 1) < 1e-12
     assert all(abs(out[r][c] - tr * rho[r][c]) < 1e-12 for r in range(2) for c in range(2))
 
-    x0, y0, c = 74, 56, 42
+    x0, y0, c = 95, 56, 42
     fig.text(x0 + 2 * c, 26, t("噪声矩阵 *σ*", "noise matrix *σ*"), size=14, weight=600, anchor="middle")
     for i in range(4):
         fig.text(x0 + i * c + c / 2, y0 - 8, NAMES[i], size=13, color="dim", anchor="middle")
@@ -49,10 +49,9 @@ def draw(fig):
     fig.text(x0 + 2 * c, y0 + 4 * c + 26, t("跨房间的相干项：解码时切掉", "cross-room terms: cut by decoding"),
              size=13, color="area", anchor="middle")
 
-    ax0 = x0 + 4 * c + 22
-    fig.arrow(ax0, y0 + 2 * c, ax0 + 66, y0 + 2 * c, "dim", 1.8)
-    fig.text(ax0 + 33, y0 + 2 * c - 12, t("解码", "decode"), size=13, color="dim", anchor="middle")
-    tx = ax0 + 84
-    fig.text(tx, y0 + 2 * c - 22, "Tr *σ* = ½ + ¼ + ⅛ + ⅛ = 1", size=14, color="line", middle=True)
-    fig.text(tx, y0 + 2 * c + 14, t("输出 = 1 · *ρ* = *ρ*", "output = 1 · *ρ* = *ρ*"), size=15, color="ink",
-             weight=600, middle=True)
+    mx, ay = x0 + 2 * c, y0 + 4 * c + 42
+    fig.arrow(mx, ay, mx, ay + 44, "dim", 1.8)
+    fig.text(mx + 12, ay + 22, t("解码", "decode"), size=13, color="dim", middle=True)
+    fig.text(mx, ay + 72, "Tr *σ* = ½ + ¼ + ⅛ + ⅛ = 1", size=14, color="line", anchor="middle", middle=True)
+    fig.text(mx, ay + 102, t("输出 = 1 · *ρ* = *ρ*", "output = 1 · *ρ* = *ρ*"), size=15, color="ink",
+             weight=600, anchor="middle", middle=True)
