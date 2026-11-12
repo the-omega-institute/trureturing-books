@@ -189,6 +189,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第四章 | §4.2 末（“可分辨性只会丢”） | `bloch-noise` · `distance` |
 | 第四章 | §4.3 开头一段之后 | `bloch-noise` · `centre` |
 | 第四章 | 例 `ex-maximally-mixed-center` 之后、第一部小结之前 | `bloch-noise` 完整实验室 |
+| 第五章 | §5.2 三明治积两条推导（$v_\perp$ 不动、$v_\parallel$ 合成整角）之后、“这里需要严守”之前 | `zyz-compile` · `sandwich` |
 | 第五章 | §5.2 定理 `thm-circle-double-cover-history-lift` 译回旋子的列表（“两整圈”）之后、例 `ex-rotor-two-turns` 之前 | `qubit-geometry` · `turn2` |
 | 第五章 | §5.2 末（旋子） | `qubit-geometry` · `turn1` |
 | 第五章 | §5.3 全局相位与相对相位的对照之后 | `qubit-geometry` · `phase` |
