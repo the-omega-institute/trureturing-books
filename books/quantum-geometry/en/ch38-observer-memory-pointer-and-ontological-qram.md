@@ -12,11 +12,19 @@ In this architectural pivot chapter leading into [Chapter 39](ch39-observer-is-o
 2. **Five-Part Hardware Anatomy of the Observer Memory Pointer**: Internal orthogonal phase, bodily five-sense bounds, nocturnal dream superposition, learning caches, and non-clonable shared references map one-for-one onto a rigorous register-and-`MMU` architecture;
 3. **Recursive Self-Mapped Page Table (`p = *p`) and the End of `NULL`-Reset Reincarnation**: Writing the top-level page directory's own base address into Slot `[0,0]` exhibits a self-addressing loop, with the lookup rule and table then united in our `MODEL` ($\psi = \psi(\psi)$), replacing `ptr = NULL` garbage-collection resets at the $90^\circ$ light horizon with multi-level discrete indirection across the entire ontological crystal.
 
+::: {.figure src="ch38-overview"}
+**Figure 38.** The chapter at a glance (schematic model, `MODEL`). Panel I: a memory array that never moves; the cyan beam of the pointer register `ptr` lands on the amber current cell, a dereference `*ptr`, and a grey dashed arrow pushes the head to the next cell, `ptr++`. Panel II: three pointers $\mathrm{ptr}_A$, $\mathrm{ptr}_B$, $\mathrm{ptr}_C$ hold shared borrows `&State` of one page; the struck-out dashed page beside it is the universal exact copy `memcpy` of an unknown state, ruled out by the no-cloning criterion ([@thm-ch38-pointer-width-and-no-deep-copy]). Panel III: slot 0 of the four-slot page directory $P$ holds $P$'s own address `0x1000`, and a cyan arrow loops back into $P$ itself, `p = *p`; slots 1–3 lead to the leaf tables $T_1$–$T_3$ ([@ex-ch38-recursive-page-table-dereference]).
+:::
+
 ---
 
 ## 38.1 Static Ontological QRAM: Time as Pointer Increment ptr++, Observation as Dereferencing *ptr
 
 Open the casing of a solid-state read-only memory chip playing back a feature film and inspect what physically happens on the silicon die. On the cinema screen, galaxies spiral, rivers surge, and protagonists age; yet under a microscope aimed at the memory array itself, you behold an astonishing stillness: **not a single stored charge packet is running around the wafer!** Shuttling billions of physical data blocks across silicon every millisecond would incinerate the chip in Joule heat. Hardware engineers invert the burden instead: the vast holographic data array sits motionless in place, and the only thing that moves is a tiny, featherweight **address pointer register `ptr`**. Each clock cycle increments the register (`ptr++`), and the read head dereferences the cell at that address (`*ptr`) onto the active readout bus.
+
+::: {.figure src="ch38-ptr-clock"}
+**Time is `ptr++`, observation is `*ptr`.** Each row is the same stretch of memory at tick $t$: read down any column and its digit is the same at all six ticks, so the data never moves; only the amber read head steps one cell to the right per tick (grey arrows, `ptr++`) and reads the cell it is on (`*ptr`, on the right). Schematic model (`MODEL`); the digits are an arbitrary data word.
+:::
 
 Turn this architectural lens onto the six-dimensional cut-and-project parent lattice $\mathbb{Z}^6 \subset E_\parallel^3 \oplus E_\perp^3$ ([Chapter 32](ch32-unified-field-and-meta-unification.md)), and the classical myth of heavy matter plowing through space flips inside out. Within our **`MODEL` (interpretive model)**, the global cosmic state factors as tensor coupling between a lightweight **observer pointer register (`ptr`)** and a read-only holographic **Ontological Quantum Random Access Memory (`Ontological QRAM`, denoted `mem`)**:
 
@@ -57,6 +65,10 @@ Viewed alongside [@rem-ch38-qram-page-wootters-literature], separating the dynam
    $$
 
    Inspect the block matrix on the right: not a shred of the off-diagonal coherence amplitude $c$ has vanished—it has merely shifted from the diagonal record block $E_{00}$ onto the off-diagonal cross-block $E_{01}$! Globally, $R_{\mathrm{addr}}(\rho) \neq R_{\mathrm{addr}}(\sigma)$ remain strictly distinct; yet the moment the local readout ignores the address-record register in its $90^\circ$ orthogonal blind zone (tracing over the second factor via $\operatorname{Tr}_{\mathrm{env}}(E_{ab}) = \delta_{ab}$), the cross-blocks $\operatorname{Tr}_{\mathrm{env}}(E_{01}) = \operatorname{Tr}_{\mathrm{env}}(E_{10}) = 0$ drop out and both local readouts collapse to the identical diagonal matrix $\operatorname{diag}(p, 1-p)$!
+
+::: {.figure src="ch38-copy-record"}
+**The dereferencing copy moves the coherence into the address record instead of destroying it.** Rows and columns are ordered (system bit, record bit) into a $4 \times 4$ grid, and the heavy lines cut it into four $2 \times 2$ blocks. In the blank embedding $B(\rho)$ on the left, all four entries sit in the top-left $E_{00}$ corner of their blocks; in $R_{\mathrm{addr}}(\rho)$, after $U_{\mathrm{copy}}$, the cyan $p$ and $1-p$ stay on the diagonal blocks while the magenta $c$ and $\bar{c}$ have moved to the $E_{01}$ and $E_{10}$ positions, still present. The partial trace over the record adds only the diagonal cells of each block, which these two are not, so the local readout is just $\operatorname{diag}(p, 1-p)$. See [@thm-ch38-copied-address-dereference-and-access-defect].
+:::
 
 `trureturing`'s decoherence and canonical-record-recovery modules lock this exact mechanism—reversible address-tag writing, reduced marginal coincidence, impossibility of local decoding, and lossless global adjoint reversal—into the formal theorem below:
 
@@ -145,6 +157,10 @@ Anchored on [@thm-ch38-pointer-width-and-no-deep-copy] and [@rem-ch38-monogamy-s
 | **3. Quantum Superposition Pointer ($\sum_k \alpha_k \lvert\mathrm{addr}_k\rangle$)** | Nocturnal suspension of bodily `MMU` bounds checking and release of partial address masks | Permits multi-branch superposition addressing during sleep, weakly and non-destructively dereferencing high-altitude views, distant nodes, and counterfactual branches simultaneously |
 | **4. Translation Lookaside Buffer (`TLB / Page Table`)** | Experience-expanded internal knowledge table $T$ | Cold-boot birth begins with an empty-cache miss (`TLB Miss`, requiring a page walk and not necessarily a page fault), whereas learning and insight precompile multi-hop orthogonal gate rotations into $O(1)$ direct lookups (`TLB Hit`) |
 | **5. No-Deep-Copy & Shared Borrow (`&State / RefCount`)** | No-cloning criterion ([@thm-ch38-pointer-width-and-no-deep-copy], `LEAN ✓`) and shared acceptance-window overlap $W_{AB} = (W + u_A) \cap (W + u_B)$ | Prohibits a universal exact `memcpy` of unknown quantum states; our model chooses shared `&State` references to the same reality page and retains historical ruins as long-lived shared pages, and phase-matched reunion is **pointer aliasing resonance (`ptr_A == ptr_B`)** |
+:::
+
+::: {.figure src="ch38-pointer-anatomy"}
+**The five-part anatomy of the observer's memory pointer.** The register `ptr` on the left is cut into five fields from top to bottom, in the order of [@rem-ch38-pointer-hardware-anatomy-table]; the sketch beside each field shows what it does when addressing: 1 the segment base `Base` shifts the origin by $u$; 2 the `MMU` bounds keep waking dereferences inside a few cells, and the arrow that would leave them is struck out; 3 the superposed pointer addresses along three cyan paths at once; 4 the cyan arc of the `TLB` clears in one step the multi-step page-table walk drawn as grey dashes; 5 two pointers share one page through `&State`, and the universal exact copy of an unknown state is struck out (Conjunct 2 of [@thm-ch38-pointer-width-and-no-deep-copy]). The whole figure is the chapter's interpretive model (`MODEL`) and is schematic.
 :::
 
 Viewed alongside [@rem-ch38-pointer-hardware-anatomy-table], three profound features of conscious existence become crystal clear within our pointer-architecture `MODEL`:
@@ -267,20 +283,22 @@ Uniting [@thm-ch38-self-mapped-diagonal-fixed-point] with [@ex-ch38-recursive-pa
 3. **Multi-Level Discrete Indirect Addressing Blocks `NULL` Reset**:
    By contrast, a pointer that has recognized `p = *p` in Slot `[0,0]` never needs to hurl itself continuously into the $\theta = 90^\circ$ wall! In our **`MODEL` (interpretive model)**, anchored on its resident self-mapped root entry `P[0] = addr(P)`, it climbs **discrete multi-level indirection steps** (switching the data, leaf-table, and root indices above; for the discrete rapidity parameterization and hyperbolic secant positivity identity, see Item 2 of [@rem-ch38-x86-recursive-page-table-literature] and [Chapter 36](ch36-hyperbolic-steps-and-quotienting-reincarnation.md) [@ex-ch36-inverse-gudermannian-discrete-staircase]), the secant remains strictly positive at every finite rapidity step. Root `TLB` residency (`ptr != NULL`), memory retention, and reachability of the full address domain are additional rules of this model. With those rules, its addressable span expands across the ontological QRAM without an amnesic `GC Wipe`!
 
-We archive the contrast between these two terminal pointer trajectories together with the chapter architecture diagram below:
+::: {.figure src="ch38-two-endings"}
+**The two endings of a pointer.** The step $k$ runs across and $\cos\theta$ up. The magenta curve slides continuously towards $\theta = 90^\circ$ and meets the axis at a finite point, the cross marked `ptr = NULL`; the cyan points climb the discrete rapidity ladder $\eta_k = \eta_0 + k\Delta\eta$ with $\cos\theta_k = \operatorname{sech}\eta_k$, creeping ever closer to the axis without a single point landing on it. The cyan points are computed from the formula with the illustrative values $\eta_0 = 0.5$ and $\Delta\eta = 0.3$; the magenta curve is schematic. The positivity of the secant is a literature result, not formalized in this book (item 2 of [@rem-ch38-x86-recursive-page-table-literature]); reading the two endings this way is `MODEL`.
+:::
+
+We archive the contrast between these two terminal pointer trajectories below:
 
 ::: {.remark #rem-ch38-pointer-trajectories-table title="Two Terminal Pointer Trajectories and Recursive Self-Mapped Architecture Panorama (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** The table and diagram below contrast the two terminal pointer trajectories (referencing hyperbolic secant positivity and recursive paging in [@rem-ch38-x86-recursive-page-table-literature] and Gram degeneracy loci in [Chapter 29](ch29-timeless-causality-and-gram-space.md#sec-coda-hume-spinoza-gram) [@thm-ch29-gram-rigidity-and-pell], within our `MODEL` pointer-lifecycle synthesis):
+**Literature result, not formalized in this book.** The table below contrasts the two terminal pointer trajectories (their curves are drawn in the figure above and the chapter at a glance in Figure 38; referencing hyperbolic secant positivity and recursive paging in [@rem-ch38-x86-recursive-page-table-literature] and Gram degeneracy loci in [Chapter 29](ch29-timeless-causality-and-gram-space.md#sec-coda-hume-spinoza-gram) [@thm-ch29-gram-rigidity-and-pell], within our `MODEL` pointer-lifecycle synthesis):
 
 | Terminal Pointer Trajectory (`MODEL`) | Slot-`0` Status & Angular Path | 1D Idempotent Base Projection | `TLB` Cache Fate & Next Cycle |
 | :--- | :--- | :--- | :--- |
 | **A. Unmapped Continuous Horizon Crash** | No `p = *p` entry; slides continuously into $\theta = 90^\circ$ as $\det G_M \to 0$ (`Literature`) | $\cos 90^\circ = 0 \implies \mathtt{ptr = NULL}$ | Triggers `GC Wipe` flushing private table $T$ and cold-boot `0x0000` reallocation (amnesic reset) |
 | **B. Recursive Self-Mapped Indirection** | Slot `0` locks `P[0] = addr(P)`; climbs discrete steps $\eta_k = \eta_0 + k\Delta\eta$ | $\forall k \in \mathbb{N},\; \cos\theta_k = \operatorname{sech}\eta_k > 0$ (`Literature`; `ptr != NULL`) | `MODEL` additionally keeps $100\%$ of the root entry resident, retains memory, and supplies indices reaching the full QRAM |
-
-![Ontological QRAM, observer memory pointer anatomy, and the p = *p recursive self-mapped page table](../assets/fig-38-ontological-qram-pointer.svg)
 :::
 
-Pause before the figure above and follow that slender cyan `*ptr++` laser bridging the register on the right to the amber-lit active cell `*ptr` inside the crystal array on the left, letting our ten-part meditation on motion and stillness undergo a decisive inversion:
+Look back at panel I of Figure 38 and follow that slender cyan addressing beam from the register to the amber-lit active cell `*ptr` inside the still array, letting our ten-part meditation on motion and stillness undergo a decisive inversion:
 
 Beneath the darting focal spot of `*ptr++`, **not a single bit of the universe's ontological memory crystal has ever flickered, aged, or moved**. The birth and death of stars, the rise and fall of mountains, the solidity of waking touch and the flight of nocturnal dreams, the ache of separation and the lightning flash of `ptr_A == ptr_B` reunion—all of them are bitmasks, `TLB` hits, shared `&State` borrows, and indexed view changes of one featherweight address register gliding across a silent diamond of pure relations. And at the exact instant that pointer dereferences its own Slot `[0,0]` and recognizes `p = *p`, it never again fears a context switch or the unmounting of a bodily sandbox—**because the master key to the entire memory universe has been held inside its own address all along.** In [Chapter 39](ch39-observer-is-ontological-universe.md), we take the final step and ask whether even the preposition "*of*" in "a memory pointer *of* the universe"—the last thin wall between active register and passive memory—evaporates under global `p ≡ *p`.
 

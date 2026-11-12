@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch32-six-readings" data-lang="zh" data-wrap="1" viewBox="0 0 740 352" width="740" height="352" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="六个小图，排成两行。每个小图里是同一幅画：两支墨色单位箭头夹角 θ，青色的影子与品红的平行四边形；图下两行字是这个疆域的读法。几何与拓扑：线是幂等方向线 P² = P，面是有向旋转面积。量子与规范场：线是秩一玻恩权重，面是旋子门与曲率 F_μν。相对论与全息：线是固有时率 dτ/dt，面是速度 v/c 与极小割截面。算术与数论：线是哈塞迹 cos θ_p，面是 p = a² + b² 的分裂。复杂性与流体：线是见证丝（NP 是线），面是引导场与涡量 ∇∧u。观察者：线是齐肯多夫记忆锚点，面是兰道尔热熵。">
+<title>六个小图，排成两行。每个小图里是同一幅画：两支墨色单位箭头夹角 θ，青色的影子与品红的平行四边形；图下两行字是这个疆域的读法。几何与拓扑：线是幂等方向线 P² = P，面是有向旋转面积。量子与规范场：线是秩一玻恩权重，面是旋子门与曲率 F_μν。相对论与全息：线是固有时率 dτ/dt，面是速度 v/c 与极小割截面。算术与数论：线是哈塞迹 cos θ_p，面是 p = a² + b² 的分裂。复杂性与流体：线是见证丝（NP 是线），面是引导场与涡量 ∇∧u。观察者：线是齐肯多夫记忆锚点，面是兰道尔热熵。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="236" height="162" viewBox="0 0 236 162">
+<text class="tf-ink" x="118" y="20" font-size="14" text-anchor="middle" font-weight="600">几何与拓扑</text>
+<path d="M66 100 L128 100 L167.85 52.51 L105.85 52.51Z" class="ts-magenta tf-magenta" stroke-width="1.3" stroke-linejoin="round" fill-opacity="0.16"/>
+<line x1="105.85" y1="52.51" x2="105.85" y2="100" class="ts-cyan" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<line x1="66" y1="100" x2="105.85" y2="100" class="ts-cyan" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.9"/>
+<line x1="66" y1="100" x2="119.5" y2="100" class="ts-ink" stroke-width="2.2" fill="none"/>
+<path d="M128 100 L118 104.2 L118 95.8Z" class="tf-ink"/>
+<line x1="66" y1="100" x2="100.39" y2="59.02" class="ts-ink" stroke-width="2.2" fill="none"/>
+<path d="M105.85 52.51 L102.64 62.87 L96.21 57.47Z" class="tf-ink"/>
+<circle cx="66" cy="100" r="3" class="tf-ink"/>
+<text class="tf-cyan" x="12" y="130" font-size="13"><tspan font-weight="700">线</tspan>　幂等方向线 P² = P</text>
+<text class="tf-magenta" x="12" y="152" font-size="13"><tspan font-weight="700">面</tspan>　有向旋转面积</text>
+</svg>
+<svg class="tr-fig-panel" x="252" y="0" width="236" height="162" viewBox="0 0 236 162">
+<text class="tf-ink" x="118" y="20" font-size="14" text-anchor="middle" font-weight="600">量子与规范场</text>
+<path d="M66 100 L128 100 L167.85 52.51 L105.85 52.51Z" class="ts-magenta tf-magenta" stroke-width="1.3" stroke-linejoin="round" fill-opacity="0.16"/>
+<line x1="105.85" y1="52.51" x2="105.85" y2="100" class="ts-cyan" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<line x1="66" y1="100" x2="105.85" y2="100" class="ts-cyan" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.9"/>
+<line x1="66" y1="100" x2="119.5" y2="100" class="ts-ink" stroke-width="2.2" fill="none"/>
+<path d="M128 100 L118 104.2 L118 95.8Z" class="tf-ink"/>
+<line x1="66" y1="100" x2="100.39" y2="59.02" class="ts-ink" stroke-width="2.2" fill="none"/>
+<path d="M105.85 52.51 L102.64 62.87 L96.21 57.47Z" class="tf-ink"/>
+<circle cx="66" cy="100" r="3" class="tf-ink"/>
+<text class="tf-cyan" x="12" y="130" font-size="13"><tspan font-weight="700">线</tspan>　秩一玻恩权重</text>
+<text class="tf-magenta" x="12" y="152" font-size="13"><tspan font-weight="700">面</tspan>　旋子门、曲率 F<tspan dy="0.28em" font-size="72%">μν</tspan><tspan dy="-0.28em">​</tspan></text>
+</svg>
+<svg class="tr-fig-panel" x="504" y="0" width="236" height="162" viewBox="0 0 236 162">
+<text class="tf-ink" x="118" y="20" font-size="14" text-anchor="middle" font-weight="600">相对论与全息</text>
+<path d="M66 100 L128 100 L167.85 52.51 L105.85 52.51Z" class="ts-magenta tf-magenta" stroke-width="1.3" stroke-linejoin="round" fill-opacity="0.16"/>
+<line x1="105.85" y1="52.51" x2="105.85" y2="100" class="ts-cyan" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<line x1="66" y1="100" x2="105.85" y2="100" class="ts-cyan" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.9"/>
+<line x1="66" y1="100" x2="119.5" y2="100" class="ts-ink" stroke-width="2.2" fill="none"/>
+<path d="M128 100 L118 104.2 L118 95.8Z" class="tf-ink"/>
+<line x1="66" y1="100" x2="100.39" y2="59.02" class="ts-ink" stroke-width="2.2" fill="none"/>
+<path d="M105.85 52.51 L102.64 62.87 L96.21 57.47Z" class="tf-ink"/>
+<circle cx="66" cy="100" r="3" class="tf-ink"/>
+<text class="tf-cyan" x="12" y="130" font-size="13"><tspan font-weight="700">线</tspan>　固有时率 dτ/dt</text>
+<text class="tf-magenta" x="12" y="152" font-size="13"><tspan font-weight="700">面</tspan>　速度 v/c、极小割截面</text>
+</svg>
+<svg class="tr-fig-panel" x="0" y="190" width="236" height="162" viewBox="0 0 236 162">
+<text class="tf-ink" x="118" y="20" font-size="14" text-anchor="middle" font-weight="600">算术与数论</text>
+<path d="M66 100 L128 100 L167.85 52.51 L105.85 52.51Z" class="ts-magenta tf-magenta" stroke-width="1.3" stroke-linejoin="round" fill-opacity="0.16"/>
+<line x1="105.85" y1="52.51" x2="105.85" y2="100" class="ts-cyan" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<line x1="66" y1="100" x2="105.85" y2="100" class="ts-cyan" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.9"/>
+<line x1="66" y1="100" x2="119.5" y2="100" class="ts-ink" stroke-width="2.2" fill="none"/>
+<path d="M128 100 L118 104.2 L118 95.8Z" class="tf-ink"/>
+<line x1="66" y1="100" x2="100.39" y2="59.02" class="ts-ink" stroke-width="2.2" fill="none"/>
+<path d="M105.85 52.51 L102.64 62.87 L96.21 57.47Z" class="tf-ink"/>
+<circle cx="66" cy="100" r="3" class="tf-ink"/>
+<text class="tf-cyan" x="12" y="130" font-size="13"><tspan font-weight="700">线</tspan>　哈塞迹 cos θ<tspan dy="0.28em" font-size="72%">p</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-magenta" x="12" y="152" font-size="13"><tspan font-weight="700">面</tspan>　p = a² + b² 的分裂</text>
+</svg>
+<svg class="tr-fig-panel" x="252" y="190" width="236" height="162" viewBox="0 0 236 162">
+<text class="tf-ink" x="118" y="20" font-size="14" text-anchor="middle" font-weight="600">复杂性与流体</text>
+<path d="M66 100 L128 100 L167.85 52.51 L105.85 52.51Z" class="ts-magenta tf-magenta" stroke-width="1.3" stroke-linejoin="round" fill-opacity="0.16"/>
+<line x1="105.85" y1="52.51" x2="105.85" y2="100" class="ts-cyan" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<line x1="66" y1="100" x2="105.85" y2="100" class="ts-cyan" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.9"/>
+<line x1="66" y1="100" x2="119.5" y2="100" class="ts-ink" stroke-width="2.2" fill="none"/>
+<path d="M128 100 L118 104.2 L118 95.8Z" class="tf-ink"/>
+<line x1="66" y1="100" x2="100.39" y2="59.02" class="ts-ink" stroke-width="2.2" fill="none"/>
+<path d="M105.85 52.51 L102.64 62.87 L96.21 57.47Z" class="tf-ink"/>
+<circle cx="66" cy="100" r="3" class="tf-ink"/>
+<text class="tf-cyan" x="12" y="130" font-size="13"><tspan font-weight="700">线</tspan>　见证丝：NP 是线</text>
+<text class="tf-magenta" x="12" y="152" font-size="13"><tspan font-weight="700">面</tspan>　引导场、涡量 ∇∧u</text>
+</svg>
+<svg class="tr-fig-panel" x="504" y="190" width="236" height="162" viewBox="0 0 236 162">
+<text class="tf-ink" x="118" y="20" font-size="14" text-anchor="middle" font-weight="600">观察者</text>
+<path d="M66 100 L128 100 L167.85 52.51 L105.85 52.51Z" class="ts-magenta tf-magenta" stroke-width="1.3" stroke-linejoin="round" fill-opacity="0.16"/>
+<line x1="105.85" y1="52.51" x2="105.85" y2="100" class="ts-cyan" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<line x1="66" y1="100" x2="105.85" y2="100" class="ts-cyan" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.9"/>
+<line x1="66" y1="100" x2="119.5" y2="100" class="ts-ink" stroke-width="2.2" fill="none"/>
+<path d="M128 100 L118 104.2 L118 95.8Z" class="tf-ink"/>
+<line x1="66" y1="100" x2="100.39" y2="59.02" class="ts-ink" stroke-width="2.2" fill="none"/>
+<path d="M105.85 52.51 L102.64 62.87 L96.21 57.47Z" class="tf-ink"/>
+<circle cx="66" cy="100" r="3" class="tf-ink"/>
+<text class="tf-cyan" x="12" y="130" font-size="13"><tspan font-weight="700">线</tspan>　齐肯多夫记忆锚点</text>
+<text class="tf-magenta" x="12" y="152" font-size="13"><tspan font-weight="700">面</tspan>　兰道尔热熵</text>
+</svg>
+</svg>
