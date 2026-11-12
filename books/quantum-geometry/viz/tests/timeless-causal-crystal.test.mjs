@@ -50,6 +50,12 @@ check('moving a slider leaves the experiment card', s.preset === null);
 await pick('window'); s = await seek(0);
 check('WINDOW at φ = 0: coplanar vectors, det G = 0 and A·C = cos 15°', close(s.det, 0, 1e-12) && close(s.cAC, Math.cos(15 * DEG), 1e-12) && (await page.textContent('#hudSub')).includes('共面'));
 check('the WINDOW card states the real section and the Bargmann phase', (await page.textContent('#presetNote')).includes('Bargmann') && (await page.textContent('#presetNote')).includes('2|c_AB||c_BC||c_AC| cos Φ'));
+// the half-width of the window is the product of the two wedge areas sin θ₁ sin θ₂; each 2 × 2 minor 1 − c² is the square of one of them
+const minorAB = 1 - Math.cos(60 * DEG) ** 2, minorBC = 1 - Math.cos(45 * DEG) ** 2, halfW = (s.hi - s.lo) / 2;
+const gramBox = await page.evaluate(() => [...document.querySelectorAll('.lean')].filter((b) => b.querySelector('[data-lean-gid$="lagrange_gram_identity"]') && /主子式/.test(b.textContent)).map((b) => b.textContent).join(' '));
+check('θ₁ = 60°, θ₂ = 45°: the half-width of the window is sin θ₁ sin θ₂ = √(minor_AB · minor_BC), the product of the two wedge areas, and the evidence calls each 2 × 2 minor a squared area (zh and en)',
+  close(halfW, Math.sin(60 * DEG) * Math.sin(45 * DEG), 1e-12) && close(halfW, Math.sqrt(minorAB * minorBC), 1e-12) && close(minorAB, Math.sin(60 * DEG) ** 2, 1e-12)
+  && /主子式都是面积平方/.test(gramBox) && /两块楔积面积的乘积/.test(gramBox) && /principal minor of the Gram matrix is a squared area/.test(gramBox) && /product of the wedge areas/.test(gramBox) && !/主子式都是面积，/.test(gramBox) && !/is an area, hence/.test(gramBox), gramBox.slice(0, 160));
 await pick('right'); s = await seek(123);
 check('RIGHT-ANGLES: the window is all of [−1, 1]', close(s.lo, -1, 1e-12) && close(s.hi, 1, 1e-12) && close(s.cAC, Math.cos(123 * DEG), 1e-12));
 await pick('impossible'); s = await state();
