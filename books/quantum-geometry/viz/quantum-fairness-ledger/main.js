@@ -1,15 +1,20 @@
 /* ORTHO//FAIRNESS: five ledgers of chapter 31 on one Bloch sphere. Each scene draws the sphere and, beside it, a bar
-   whose total does not move.
-     seat     points thrown uniformly on the sphere; a cap of half-angle α around any axis holds (1 − cos α)/2 of them;
-              two pure states measure each other with the same Born weight |⟨φ|ψ⟩|² = |⟨ψ|φ⟩|² = (1 + r_ψ·r_φ)/2
+   whose total does not move (in the seat: two Born bars that stay equal, and a cap count beside the fixed Haar mark).
+     seat     points from a fixed seed, uniform on the sphere. Under the Haar measure a cap of half-angle α around any axis
+              has measure exactly (1 − cos α)/2; the finite count of the sample only scatters around it (60°, 600 points:
+              145 in the cap about +z, 147 about −z, against 150). The centroid tends to the centre as N grows, but not at
+              every step (N = 10: 0.214, N = 15: 0.309). Two pure states measure each other with the same Born weight
+              |⟨φ|ψ⟩|² = |⟨ψ|φ⟩|² = (1 + r_ψ·r_φ)/2, exactly
      gain     an arrow r of length r ≤ 1: its shadow on the measurement axis D = |z| and its sideways part
-              V = √(x² + y²) satisfy D² + V² = r² (centred purity = visible certainty + residual mass, doubled)
+              V = √(x² + y²) satisfy D² + V² = r² (the qubit case of centred purity = visible certainty + residual mass,
+              worked out by hand and doubled); r = 0 is the centre, with no direction
      bonds    the three-qubit pure states a|000⟩ + b|110⟩ + c|101⟩ + g|111⟩: A's Bloch arrow is (0, 0, 2a² − 1) and
               ‖r_A‖² + τ_AB + τ_AC + τ₃ = 1 with τ_AB = 4a²b², τ_AC = 4a²c², τ₃ = 4a²g²
      copies   the optimal symmetric 1 → M copier of an unknown qubit shrinks the arrow by η = (M + 2)/(3M):
               fidelity F = (1 + η)/2 = (2M + 1)/(3M)
      ergodic  two states precessing about z by the golden angle 2πα, α = φ − 1, from different phases; a window of
-              azimuths of length 2 − φ = 1 − α; hits − T(2 − φ) stays in (−1, 1) (Hecke–Kesten)
+              azimuths of length 2 − φ = 1 − α, counted half-open (left end in); hits − T(2 − φ) stays in (−1, 1)
+              (Hecke–Kesten); the comparison is a fixed-seed independent random walk, plotted untruncated
    The rail is the number of points (seat), the tilt in degrees (gain), the path parameter (bonds), M − 1 (copies) or
    the step count T (ergodic). Read-only probe for the browser suite: window.FAIRNESS_DEBUG. */
 (() => {
@@ -90,6 +95,8 @@
     return { xs, hit, disc, R, hits: k, gap };
   }
   const RANDOM = (() => { const r = mulberry(7), d = []; let k = 0; for (let t = 1; t <= TMAX; t++) { if (r() < WIN) k++; d.push(k - t * WIN); } return d; })();
+  /** The literal range of the random comparison: it is plotted in full, not clipped. */
+  const RANDOM_RANGE = [Math.min(...RANDOM), Math.max(...RANDOM)];
   const ergodicRead = () => { const T = Math.floor(clock.t + 1e-9), o1 = orbit(S.u1, T), o2 = orbit(S.u2, T), full = orbit(S.u1, 2000); return { T, o1, o2, gapMax: full.gap, M: full.gap - 1 }; };
 
   /* ---------- scenes ---------- */
@@ -171,7 +178,7 @@
       st.tag('bt', [col.xs[0] + col.bw / 2 + col.bw + col.gapx / 2, col.top - 18], fix(R.wPsiPhi, 3), 'num c-cy', { screen: true });
     }
     $('hudBig').textContent = L(`球冠 ${fix(100 * R.share, 1)}%`, `CAP ${fix(100 * R.share, 1)}%`);
-    $('hudSub').textContent = L(`${R.n} 个均匀点，半角 ${S.cap}° 的球冠应占 ${fix(100 * R.theory, 1)}%，轴朝哪里都一样`, `${R.n} uniform points; a cap of half-angle ${S.cap}° should hold ${fix(100 * R.theory, 1)}%, wherever its axis points`);
+    $('hudSub').textContent = L(`${R.n} 个固定种子点；哈尔测度下半角 ${S.cap}° 的球冠对任何轴都恰占 ${fix(100 * R.theory, 1)}%，有限个点的计数围着它起伏`, `${R.n} fixed-seed points; under the Haar measure a cap of half-angle ${S.cap}° holds exactly ${fix(100 * R.theory, 1)}% around any axis, and a finite count scatters around it`);
   }
 
   function drawGain(st, c) {
@@ -197,7 +204,9 @@
       st.tag('g1', [col.xs[0] + col.bw / 2, col.top - 18], `= ${fix(R.D * R.D + R.V * R.V, 3)}`, 'num', { screen: true });
     }
     $('hudBig').textContent = `D² + V² = ${fix(R.D * R.D + R.V * R.V, 3)}`;
-    $('hudSub').textContent = L(`箭头偏离测量轴 ${fix(R.th, 0)}°：线 D = ${fix(R.D, 3)}，面积 V = ${fix(R.V, 3)}，预算 r² = ${fix(R.r * R.r, 3)}`, `The arrow is ${fix(R.th, 0)}° off the measurement axis: line D = ${fix(R.D, 3)}, area V = ${fix(R.V, 3)}, budget r² = ${fix(R.r * R.r, 3)}`);
+    $('hudSub').textContent = R.r <= 0
+      ? L(`r = 0：箭头缩成球心的一点，没有方向；线 D = ${fix(R.D, 3)}，面积 V = ${fix(R.V, 3)}，预算 r² = 0`, `r = 0: the arrow is a point at the centre with no direction; line D = ${fix(R.D, 3)}, area V = ${fix(R.V, 3)}, budget r² = 0`)
+      : L(`箭头偏离测量轴 ${fix(R.th, 0)}°：线 D = ${fix(R.D, 3)}，面积 V = ${fix(R.V, 3)}，预算 r² = ${fix(R.r * R.r, 3)}`, `The arrow is ${fix(R.th, 0)}° off the measurement axis: line D = ${fix(R.D, 3)}, area V = ${fix(R.V, 3)}, budget r² = ${fix(R.r * R.r, 3)}`);
   }
 
   function drawBonds(st, c) {
@@ -298,14 +307,14 @@
       const pts = []; for (let b = 0; b <= 180; b += 3) pts.push([b, capShare(v3.sph(b * DEG, az), Math.max(R.n, 1), S.cap)]);
       g.hline(R.theory, P.ink, { dash: [4, 3], alpha: 0.8 }); g.line(pts, P.cyan);
       const pol = Math.acos(kit.clamp(S.axis[2], -1, 1)) / DEG; g.vline(pol, P.amber); g.dot(pol, R.share, P.amber, 4.5);
-      g.legend([[P.cyan, L('数出来的份额', 'counted share')], [P.ink, '(1 − cos α)/2', 'dash']], { right: true });
-      $('pATitle').textContent = L('把轴转到哪里，球冠都分到一样多', 'Wherever the axis turns, the cap gets the same'); $('pAMeta').textContent = `N = ${R.n}`;
+      g.legend([[P.cyan, L('数出来的份额', 'counted share')], [P.ink, L('哈尔测度 (1 − cos α)/2', 'Haar measure (1 − cos α)/2'), 'dash']], { right: true });
+      $('pATitle').textContent = L('轴转到哪里，计数都围着同一条虚线起伏', 'Wherever the axis turns, the count scatters about one line'); $('pAMeta').textContent = `N = ${R.n}`;
       const g2 = kit.plot(B, { x: [0, NMAX], y: [0, 0.6], pad: [34, 10, 10, 22] });
       g2.axes({ yTicks: [0, 0.2, 0.4, 0.6], xTicks: [0, 200, 400, 600] });
       const cen = [], ref = []; for (let n = 5; n <= NMAX; n += 5) { cen.push([n, centroid(n)]); ref.push([n, 1 / Math.sqrt(n)]); }
       g2.line(ref, P.ink, { dash: [4, 3], alpha: 0.7 }); g2.line(cen, P.cyan); g2.vline(R.n, P.amber); g2.dot(R.n, R.cen, P.amber, 4);
       g2.legend([[P.cyan, L('质心离球心多远', 'centroid from the centre')], [P.ink, '1/√N', 'dash']]);
-      $('pBTitle').textContent = L('点越多，质心越靠近球心', 'More points, the centroid closer to the centre'); $('pBMeta').textContent = fix(R.cen, 3);
+      $('pBTitle').textContent = L('质心大势趋向球心，但不是每步都更近', 'The centroid drifts to the centre, not at every step'); $('pBMeta').textContent = fix(R.cen, 3);
     } else if (S.scene === 'gain') {
       const R = gainRead(), g = kit.plot(A, { x: [0, 180], y: [0, 1.55], pad: [34, 10, 10, 22] });
       g.axes({ yTicks: [0, 0.5, 1], xTicks: [[0, '0°'], [90, '90°'], [180, '180°']] });
@@ -361,14 +370,19 @@
       g.line(full1.R.map((r, i) => [i + 1, r]).slice(0, Math.max(T, 1)), P.cyan, { width: 1.6 });
       g.vline(T, P.amber);
       $('pATitle').textContent = L('两位的份额趋于同一个数', 'Both shares tend to the same number'); $('pAMeta').textContent = L(`下界 1/(M + 1)，M = ${E.M}`, `floor 1/(M + 1), M = ${E.M}`);
-      const g2 = kit.plot(B, { x: [0, TMAX], y: [-6, 12], pad: [30, 10, 8, 22] });
-      g2.axes({ yTicks: [[-5, '−5'], [0, '0'], [5, '5']], xTicks: [0, 100, 200, 300] });
-      g2.rect(0, -1, TMAX, 1, P.cyan, { alpha: 0.1 });
-      g2.line(RANDOM.map((d, i) => [i + 1, Math.max(-6, Math.min(6, d))]), P.magenta, { width: 1.1, alpha: 0.8 });
+      // the seeded random walk is drawn as it is (its literal range is in the meta), the golden band (−1, 1) stays shaded
+      // the three-row legend sits in a reserved 50 px top margin (rows at 15, 29, 43 px), above the data area, so it
+      // never covers the golden traces near 0; y runs just past the literal range −17.71 … +6.08
+      const g2 = kit.plot(B, { x: [0, TMAX], y: [-19, 7], pad: [30, 10, 50, 22] });
+      g2.axes({ yTicks: [[-15, '−15'], [0, '0']], xTicks: [0, 100, 200, 300] });
+      g2.rect(0, -1, TMAX, 1, P.cyan, { alpha: 0.14 });
+      g2.line(RANDOM.map((d, i) => [i + 1, d]), P.magenta, { width: 1.1, alpha: 0.8 });
       g2.line(full2.disc.map((d, i) => [i + 1, d]), P.ink, { width: 1, alpha: 0.8 }); g2.line(full1.disc.map((d, i) => [i + 1, d]), P.cyan, { width: 1.4 });
       g2.vline(T, P.amber);
-      g2.legend([[P.cyan, L('黄金步 ①', 'golden steps ①')], [P.ink, L('黄金步 ②', 'golden steps ②')], [P.magenta, L('独立随机点', 'independent random')]], { right: true });
-      $('pBTitle').textContent = L('命中数减去应得数：黄金步一直有界', 'Hits minus the fair count: golden steps stay bounded'); $('pBMeta').textContent = T ? `${kit.sgn(E.o1.disc[T - 1], 3)}` : '';
+      g2.legend([[P.cyan, L('黄金步 ①', 'golden steps ①')], [P.ink, L('黄金步 ②', 'golden steps ②')], [P.magenta, L('独立随机（固定种子）', 'independent random (fixed seed)')]], { right: true, dy: -44 });
+      const rr = `${kit.sgn(RANDOM_RANGE[0], 1)} … ${kit.sgn(RANDOM_RANGE[1], 1)}`;
+      $('pBTitle').textContent = L('命中数减去应得数：黄金步一直有界', 'Hits minus the fair count: golden steps stay bounded');
+      $('pBMeta').textContent = (T ? `① ${kit.sgn(E.o1.disc[T - 1], 3)} · ` : '') + L(`随机 ${rr}`, `random ${rr}`);
     }
   }
 
@@ -382,7 +396,7 @@
       $('roKey').innerHTML = `<span class="c-cy">${fix(R.wPsiPhi, 4)}</span> = <span class="c-cy">${fix(R.wPhiPsi, 4)}</span> <span class="okmark">✓</span>`; $('roKeySub').textContent = '|⟨φ|ψ⟩|² = |⟨ψ|φ⟩|²';
       set(1, L('球冠里的点', 'points in the cap'), `${fix(100 * R.share, 1)}%`, 'c'); set(2, L('应占 (1 − cos α)/2', 'expected (1 − cos α)/2'), `${fix(100 * R.theory, 1)}%`);
       set(3, L('质心离球心', 'centroid from centre'), fix(R.cen, 3)); set(4, L('(1 + r_ψ·r_φ)/2', '(1 + r_ψ·r_φ)/2'), fix(R.wBloch, 4));
-      $('roNote').textContent = L('换一根轴、换一对态：两根柱子永远一样高，球冠永远分到同样的份额。', 'Another axis, another pair of states: the two bars are always equally tall and the cap always gets the same share.');
+      $('roNote').textContent = L(`换一对态：两根柱子永远一样高，|⟨φ|ψ⟩|² = |⟨ψ|φ⟩|² 是恒等式。换一根轴：哈尔测度下球冠恰占 (1 − cos α)/2，与轴无关；这 ${R.n} 个固定种子点数出来的份额只围着它起伏，换轴会多几个或少几个点。`, `Another pair of states: the two bars are always equally tall, since |⟨φ|ψ⟩|² = |⟨ψ|φ⟩|² is an identity. Another axis: under the Haar measure the cap holds exactly (1 − cos α)/2 whatever the axis; the count of these ${R.n} fixed-seed points only scatters around it, a few points more or fewer as the axis moves.`);
       what = `N = ${R.n}`; key = `${fix(R.wPsiPhi, 3)} = ${fix(R.wPhiPsi, 3)}`;
     } else if (S.scene === 'gain') {
       const R = gainRead();
@@ -390,8 +404,13 @@
       $('roKey').innerHTML = `<span class="c-cy">${fix(R.D * R.D, 3)}</span> + <span class="c-mg">${fix(R.V * R.V, 3)}</span> = ${fix(R.D * R.D + R.V * R.V, 3)} <span class="okmark">✓</span>`; $('roKeySub').textContent = L('无论箭头倾斜多少', 'however the arrow tilts');
       set(1, L('线 D（可区分度）', 'line D (distinguishability)'), fix(R.D, 4), 'c'); set(2, L('面积 V（相干）', 'area V (coherence)'), fix(R.V, 4), 'm');
       set(3, L('中心化纯度 Tr ρ² − ½', 'centred purity Tr ρ² − ½'), fix(R.budget, 4)); set(4, L('确定度 + 残余', 'certainty + residual'), `${fix(R.visible, 4)} + ${fix(R.residual, 4)}`);
-      $('roNote').textContent = R.V < 0.02 ? L('箭头贴着测量轴：全是线，面积为零。', 'The arrow lies on the measurement axis: all line, no area.') : R.D < 0.02 ? L('箭头横在赤道上：全是面积，线为零。', 'The arrow lies on the equator: all area, no line.')
-        : L(`线占 ${fix(100 * R.D * R.D / Math.max(R.r * R.r, 1e-9), 0)}%，面积占 ${fix(100 * R.V * R.V / Math.max(R.r * R.r, 1e-9), 0)}%：多一分线，就少一分面积。`, `${fix(100 * R.D * R.D / Math.max(R.r * R.r, 1e-9), 0)}% line and ${fix(100 * R.V * R.V / Math.max(R.r * R.r, 1e-9), 0)}% area: a bit more line means a bit less area.`);
+      // r = 0 has no direction; otherwise the tilt decides: exact words only at 0°, 90° and 180°, shares of r² elsewhere
+      const pct = (q) => (q < 0.01 ? '< 1' : q > 0.99 ? '> 99' : fix(100 * q, 0)), qD = R.D * R.D / (R.r * R.r), qV = R.V * R.V / (R.r * R.r);
+      $('roNote').textContent = R.r <= 0 ? L('r = 0：箭头缩成球心的一点，没有方向，预算 r² = 0；线与面积都是零，谈不上谁多谁少。', 'r = 0: the arrow shrinks to a point at the centre with no direction; the budget r² is 0, and line and area are both zero.')
+        : R.th === 0 ? L('箭头沿测量轴指向 |0⟩：全是线，面积为零。', 'The arrow lies along the measurement axis, pointing to |0⟩: all line, no area.')
+          : R.th === 180 ? L('箭头沿测量轴指向 |1⟩：全是线，面积为零。', 'The arrow lies along the measurement axis, pointing to |1⟩: all line, no area.')
+            : R.th === 90 ? L('箭头横在赤道上：全是面积，线为零。', 'The arrow lies on the equator: all area, no line.')
+              : L(`线占 ${pct(qD)}%，面积占 ${pct(qV)}%：多一分线，就少一分面积。`, `${pct(qD)}% line and ${pct(qV)}% area: a bit more line means a bit less area.`);
       what = `${fix(R.th, 0)}°`; key = `D² + V² = ${fix(R.D * R.D + R.V * R.V, 3)}`;
     } else if (S.scene === 'bonds') {
       const R = bondsRead();
@@ -473,7 +492,7 @@
     ergodic: { scene: 'ergodic', at: 0, play: true, still: 233 }
   };
   const NOTES = {
-    haar: ['球面上均匀地撒点：琥珀色轴周围半角 60° 的球冠里总是约四分之一的点，把轴拖到哪里都一样。两根青色的影子一样长：拿 ψ 量 φ 与拿 φ 量 ψ，照见的一样多。', 'Points thrown uniformly on the sphere: the 60° cap around the amber axis always holds about a quarter of them, wherever you drag the axis. The two cyan shadows are equally long: measuring φ with ψ and ψ with φ see exactly as much.'],
+    haar: ['球面上均匀地撒点：按哈尔测度，琥珀色轴周围半角 60° 的球冠恰占四分之一，把轴拖到哪里都一样；图里这些固定种子的点数出来只是接近四分之一，换一根轴会多几个或少几个。两根青色的影子一样长：拿 ψ 量 φ 与拿 φ 量 ψ，照见的一样多。', 'Points thrown uniformly on the sphere: under the Haar measure the 60° cap around the amber axis holds exactly a quarter, wherever you drag the axis; the fixed-seed points in the picture only count close to a quarter, a few more or fewer for another axis. The two cyan shadows are equally long: measuring φ with ψ and ψ with φ see exactly as much.'],
     tradeoff: ['箭头从测量轴转向赤道：青色的线 D 变短，品红的面积 V 变大，D² + V² 始终是 1。线多一分，面积就少一分。', 'The arrow turns from the measurement axis to the equator: the cyan line D shrinks, the magenta area V grows, and D² + V² stays 1. More line means less area.'],
     cloning: ['把同一个未知态复制成 M 份：每份的箭头（青色）越来越短，品红是丢掉的部分；保真度从 1 降向 2/3。只有两极这一对正交态能被照抄。', 'Copy one unknown state into M copies: each copy\'s arrow (cyan) gets shorter, the magenta part is what is lost, and the fidelity falls from 1 towards 2/3. Only the orthogonal pair at the poles can be copied exactly.'],
     bell: ['贝尔态 (|00⟩ + |11⟩)/√2 ⊗ |0⟩：A 与 B 之间的品红纽带满额，A 的箭头缩回球心（½I），与 C 之间一点也没有。', 'The Bell state (|00⟩ + |11⟩)/√2 ⊗ |0⟩: the magenta bond between A and B is full, A\'s arrow shrinks to the centre (½I), and nothing is left for C.'],
