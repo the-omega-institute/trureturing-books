@@ -672,7 +672,7 @@ section: "三层依据"
         <Stat value="164" label="写明“文献结果，未在本书形式化”的注记与例" tone="violet" />
         <Stat value="6" label="开放猜想，标为 OPEN，不带 Lean 引用" tone="warn" />
       </div>
-      <p class="lead mt">锁文件 <span class="mono">trureturing.lock.json</span> 钉住 <span class="mono">dev@1d9bf98cab83</span>，共 444 项声明，其中 313 项是 Lean theorem。</p>
+      <p class="lead mt">锁文件 <span class="mono">trureturing.lock.json</span> 钉住 <PinnedCommit />，共 444 项声明，其中 313 项是 Lean theorem。</p>
     </div>
   </div>
 </div>
