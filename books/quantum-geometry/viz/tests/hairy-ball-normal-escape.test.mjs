@@ -6,8 +6,10 @@
 // checks each claim another way: the pull-back by finite differences of inverse stereographic projection, the indices
 // by its own winding count of its own formulas, the domes by recursive midpoint subdivision of an icosahedron found
 // from edge lengths with angles from the law of cosines, and the lifted minimum from the closed form of its
-// derivative. It reads the page through window.HAIRY_DEBUG.
-import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
+// derivative. It reads the page through window.HAIRY_DEBUG. The ball, the torus and the dome are lit solids
+// (kit.solid): the suite runs the solid gates on every card, and reads through the stage's own ray picking that the
+// dome hides the vertex beads on its far side and shows those in front, against the test's own camera direction.
+import { session, stageFirstChecks, solidChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'hairy-ball-normal-escape';
 const T = await session();
@@ -80,6 +82,22 @@ function liftMinExact(l) {
   return Math.min(...zs.map(f));
 }
 
+/** The camera direction towards the viewer, from yaw and pitch (the test's own formula of the orbit camera). */
+const towards = (c) => [-Math.sin(c.yaw) * Math.cos(c.pitch), -Math.cos(c.yaw) * Math.cos(c.pitch), Math.sin(c.pitch)];
+/** The camera move of the solid gate on the ball and the torus. The key light turns with the camera and both bodies
+    are round about z, so the gate's default move (a sideways drag: a turn about z) leaves their light and shade as
+    they were. Drag upwards instead, tipping the camera about 0.7 rad towards the horizon, which changes the torus'
+    outline and shading. A ball looks the same from every side, so there the move also zooms in to the closest view:
+    the frame then crops the ball's dark limb. */
+const tip = (zoomIn) => async (p) => {
+  const b = await p.evaluate(() => { const r = window.TRV.solids[0].el.getBoundingClientRect(); return [r.left, r.top, r.width, r.height]; });
+  const x = b[0] + b[2] * 0.06, y = b[1] + b[3] * 0.72;
+  await p.mouse.move(x, y); await p.mouse.down();
+  for (let k = 1; k <= 6; k++) await p.mouse.move(x, y - 15 * k);
+  await p.mouse.up();
+  if (zoomIn) { await p.mouse.move(b[0] + b[2] / 2, b[1] + b[3] / 2); await p.mouse.wheel(0, -900); }
+};
+
 /* ---------- the gates every stage-first page must pass ---------- */
 await stageFirstChecks(T, BOOK, ID);
 
@@ -92,6 +110,8 @@ const fieldAt = (pts) => page.evaluate((p) => window.HAIRY_DEBUG.field(p), pts);
 let s = await state();
 check('page carries its id', (await page.evaluate(() => document.body.dataset.vizId)) === ID);
 check('opens on the MERGE card, merged, not playing', s.preset === 'merge' && s.scene === 'sphere' && close(s.t, 1) && !s.playing);
+// the opening MERGE frame as a solid: an opaque lit ball (with the rest gate inside a book)
+await solidChecks(T, BOOK, ID, page, { turn: tip(true) });
 
 // the sphere: zonal at t = 0, dipole at t = 1, the pull-back in between
 const pts = Array.from({ length: 200 }, randomPoint).filter((x) => x[2] < 0.995);
@@ -151,6 +171,9 @@ for (let i = 0; i < 24; i++) for (let j = 0; j < 24; j++) {
 check('torus points follow the embedding; ê_φ is the unit ∂φ, tangent (⟂ normal) at 576 sites', torBad === 0, `${torBad} sites off`);
 check('…its shortest arrow has length 1: no zero (own grid and page readout)', close(minLen, 1, 1e-12) && close(s.minLength, 1, 1e-12) && (await page.textContent('#roKey')).trim() === '1.000');
 check('…the drawn mesh has V − E + F = 0', s.euler.V - s.euler.E + s.euler.F === 0);
+// the TORUS card as a solid, held at its telling frame
+await seek(0.3);
+await solidChecks(T, BOOK, ID, page, { rest: false, turn: tip(false) });
 await page.evaluate(() => { const el = document.getElementById('tube'); el.value = '0.45'; el.dispatchEvent(new Event('input', { bubbles: true })); });
 s = await state();
 const [xt] = await page.evaluate(() => window.HAIRY_DEBUG.torus(0, 0));
@@ -177,6 +200,18 @@ const sorted = (a) => a.slice().sort((x, y) => x - y);
 check('ν = 2: the page’s 42 defects are the same multiset as the midpoint subdivision', s.V === 42 && sorted(s.defects).every((d, i) => close(d, sorted(d2)[i], 1e-9)));
 s = await seek(0);
 check('ν = 1: twelve defects of 60°', s.V === 12 && s.defects.every((d) => close(d, PI / 3, 1e-12)));
+// the dome as a solid: at ν = 1 the icosahedron's flat faces change their light as it turns (the default move)
+await solidChecks(T, BOOK, ID, page, { rest: false });
+// at the card's frame (ν = 4) every vertex carries a bead; the opaque dome hides those on its far side
+await pick('defect'); s = await seek(3);
+const beads = await page.evaluate(() => window.TRV.solids[0].marks().filter((m) => /^v\d+$/.test(m.key)).map((m) => ({ i: Number(m.key.slice(1)), p: m.p, hidden: m.hidden })));
+const Dv = towards(s), facing = (m) => dot(unit(m.p), Dv);
+check('DEFECT solid: one magenta bead per vertex (ν = 4: 162), just outside its vertex', s.nu === 4 && beads.length === s.V && new Set(beads.map((m) => m.i)).size === s.V
+  && beads.every((m) => norm(sub(m.p, scale(s.vertices[m.i], 1.015))) < 1e-12));
+check('…the dome hides some of them and shows the others', beads.some((m) => !m.hidden) && beads.some((m) => m.hidden), `${beads.filter((m) => m.hidden).length} hidden of ${beads.length}`);
+const front = beads.filter((m) => facing(m) > 0.35), back = beads.filter((m) => facing(m) < -0.35);
+check('…every bead facing the viewer shows and every bead facing away is hidden (x·d ≷ ±0.35, the test’s own camera direction)', front.length > 20 && back.length > 20 && front.every((m) => !m.hidden) && back.every((m) => m.hidden),
+  `${front.filter((m) => m.hidden).length} of ${front.length} in front hidden, ${back.filter((m) => !m.hidden).length} of ${back.length} behind shown`);
 
 // the lifted field
 await pick('escape');
@@ -186,6 +221,8 @@ await page.evaluate(() => window.HAIRY_DEBUG.advance(0.45));
 check('…and stops by itself at λ = ½', await until(page, () => !window.HAIRY_DEBUG.state.playing, null, 120000));
 s = await state();
 check('…at λ = ½, the shortest arrow is the closed-form minimum (> 0) at z = 0.6', close(s.t, 0.5) && close(s.minLength, liftMinExact(0.5), 1e-9) && close(s.minHeight, 0.6, 1e-5) && s.minLength > 0.44);
+// the ESCAPE card as a solid, stopped at λ = ½
+await solidChecks(T, BOOK, ID, page, { rest: false, turn: tip(true) });
 let liftBad = 0;
 for (const l of [0, 0.1, 0.3, 0.5, 0.7, 0.9, 1]) {
   s = await seek(l);

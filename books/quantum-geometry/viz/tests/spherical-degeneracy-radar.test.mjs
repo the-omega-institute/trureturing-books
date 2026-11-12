@@ -5,8 +5,9 @@
 // claim another way: rotors as 2 × 2 complex SU(2) matrices (e₁, e₂, e₃ ↦ σx, σy, σz; R̃ ↦ R†), vectors read back as
 // ½ Tr(M σₖ); the closed forms of Chapter 34 for v₁, v₂, s₁, s₂ and Δ(O); 3 × 3 rotation matrices for the turned frame;
 // and a brute-force search over a grid of observers for the ones that read every pair equally. It reads the page
-// through window.DEGEN_DEBUG.
-import { session, stageFirstChecks, settle, until, labelOverlaps } from '../../../../tools/node/viz-testkit.mjs';
+// through window.DEGEN_DEBUG. The stage is a lit solid (kit.solid) in a glass sphere: solidChecks runs on the opening
+// card, and the flat overlay that carries the rotor scene's dial is checked as an overlay.
+import { session, stageFirstChecks, solidChecks, settle, until, labelOverlaps } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'spherical-degeneracy-radar';
 const T = await session();
@@ -58,6 +59,30 @@ const state = async () => { await settle(page); return page.evaluate(() => windo
 const seek = async (t) => { await page.evaluate((v) => window.DEGEN_DEBUG.seek(v), t); return state(); };
 const pick = async (id) => { await page.click(`[data-preset="${id}"]`); return state(); };
 const pairAt = (t) => page.evaluate((v) => window.DEGEN_DEBUG.pairAt(v), t);
+
+/* ---------- the lit solid and the flat overlay ---------- */
+// MERIDIAN: the opaque body is the swept quarter of the latitude disc with the tubes and beads around it, inside a
+// transparent glass shell that the coverage does not count (measured 1.8% opaque on the default 1440 × 900 page), so the
+// floor is 1.5%, not the default 12%; nothing is drawn larger to pass it.
+const camOpen = await page.evaluate(() => Object.assign({}, window.TRV.solids[0].cam));
+await solidChecks(T, BOOK, ID, page, { rest: false, minShare: 0.015 });
+await page.evaluate((c) => { Object.assign(window.TRV.solids[0].cam, c); window.TRV.kit.flush(); }, camOpen);
+{
+  const cam = await page.evaluate(() => window.DEGEN_DEBUG.camera());
+  check('solid: the camera is back where the card put it after the solid checks', close(cam.yaw, camOpen.yaw, 1e-12) && close(cam.pitch, camOpen.pitch, 1e-12) && close(cam.zoom, camOpen.zoom, 1e-12));
+  const f = await page.evaluate(() => { const el = document.getElementById('flat'); return { aria: el.getAttribute('aria-hidden'), events: getComputedStyle(el).pointerEvents, ...window.DEGEN_DEBUG.overlay() }; });
+  check('overlay: #flat sits just after #cv, aria-hidden, and never takes the pointer', f.after === 'cv' && f.aria === 'true' && f.events === 'none', JSON.stringify(f));
+  check('overlay: outside the rotor scene #flat is hidden and blank', f.hidden && f.ink === 0, JSON.stringify(f));
+  const ms = await page.evaluate(() => window.TRV.solids[0].marks().map((m) => ({ key: m.key, p: m.p })));
+  const mk = (k) => ms.find((m) => m.key === k);
+  const s0 = await state();
+  check('solid: the observer, once and twice are marks of the solid at the page\'s own points', !!mk('observer') && vclose(mk('observer').p, s0.O, 1e-12) && vclose(mk('once').p, s0.a, 1e-12) && vclose(mk('twice').p, s0.b, 1e-12), JSON.stringify(ms.map((m) => m.key)));
+  // Hit refinement evaluates a surface between its sampled vertices. This interior point of the 90° sector has
+  // radius sin(60°)/2 and height cos(60°), so its exact position is independent of the mesh resolution.
+  const sectorPoint = [Math.sqrt(6) / 8, Math.sqrt(6) / 8, 0.5];
+  const hit = await page.evaluate((w) => { const sc = window.TRV.solids[0], q = sc.p(w); return sc.hitAt(q[0], q[1]); }, sectorPoint);
+  check('MERIDIAN: picking inside the latitude sector returns its exact surface point', hit?.id === 'sweep' && vclose(hit.point, sectorPoint, 1e-7), JSON.stringify(hit));
+}
 
 // the rotor formulas of Example ex-ch34-spherical-addressing-and-octant-rotors
 const R = await page.evaluate(() => window.DEGEN_DEBUG.rotors());
@@ -132,6 +157,12 @@ check('HOPS: the flags (images of e₂) are e₂ and −e₁, as R₁e₂R̃₁ 
 check('HOPS: at the end the difference rotor is exp(−π/4 e₁e₂)', mclose(fromBlades(s.D), EXP12, 1e-12));
 s = await seek(1);
 check('HOPS, hop 1: two hops are at e₂ (exp(−π/4 e₁e₂) e₁), one hop halfway up e₁∧e₃', vclose(s.b, E2, 1e-12) && vclose(s.a, [R2, 0, R2], 1e-12));
+{
+  // (the stage's client box: #flat fills it inside the stage's border)
+  const f = await page.evaluate(() => window.DEGEN_DEBUG.overlay()), b = await page.evaluate(() => { const el = document.getElementById('stage'); return { w: el.clientWidth, h: el.clientHeight }; });
+  const inside = f.dial && f.dial[0] - f.dial[2] > 0 && f.dial[0] + f.dial[2] < f.w && f.dial[1] - f.dial[2] > 0 && f.dial[1] + f.dial[2] < f.h;
+  check('overlay: in the rotor scene #flat is shown over the whole stage and carries the dial of D, inside the stage', !f.hidden && f.w === b.w && f.h === b.h && f.ink > 200 && inside, JSON.stringify({ ...f, stage: b }));
+}
 s = await seek(1.5);
 const Uh = mm(rot(Math.cos(PI / 8), Math.sin(PI / 8), 1, 2), U12), Uo = rot(Math.cos(3 * PI / 16), Math.sin(3 * PI / 16), 0, 2);
 check('HOPS, hop 1.5: both points agree with SU(2) partial rotors', vclose(s.b, actM(Uh, E1), 1e-12) && vclose(s.a, actM(Uo, E1), 1e-12));
@@ -139,6 +170,7 @@ check('HOPS, hop 1.5: both points agree with SU(2) partial rotors', vclose(s.b, 
 // EQUATOR
 s = await pick('equator');
 check('EQUATOR: α = 60°, observer at e₂, not playing', s.scene === 'test' && close(s.t, PI / 3) && vclose(s.O, E2, 1e-12) && !s.playing);
+{ const f = await page.evaluate(() => window.DEGEN_DEBUG.overlay()); check('overlay: leaving the rotor scene hides #flat and clears the dial', f.hidden && f.ink === 0 && f.dial === null, JSON.stringify(f)); }
 check('EQUATOR: s₁ = (0, √3/2, ½), s₂ = (−√3/2, 0, ½); e₂ reads √3/2 and 0', vclose(s.a, [0, Math.sqrt(3) / 2, 0.5], 1e-12) && vclose(s.b, [-Math.sqrt(3) / 2, 0, 0.5], 1e-12) && close(s.ra, Math.sqrt(3) / 2, 1e-12) && close(s.rb, 0, 1e-12));
 worst = 0; let onlyPoles = true;
 for (let k = 0; k <= 48; k++) {
@@ -254,6 +286,18 @@ const to = await page.evaluate((v) => window.DEGEN_DEBUG.screen(v), target);
 await page.mouse.move(from[0], from[1]); await page.mouse.down(); await page.mouse.move(to[0], to[1], { steps: 8 }); await page.mouse.up(); s = await state();
 const cam = await page.evaluate(() => window.DEGEN_DEBUG.camera());
 check('dragging the amber observer moves it (and not the camera)', norm(sub(s.O, target)) < 0.03 && close(cam.yaw, -2.0, 1e-9), JSON.stringify([s.O, target]));
+{
+  // an observer on the far side of the sphere is not grabbed (the front test uses the viewing direction): the drag
+  // turns the view instead and the observer stays where the fields put it
+  const D = await page.evaluate(() => window.TRV.solids[0].facing());
+  const beta = Math.round(Math.acos(-D[2]) / DEG), az = Math.round(((Math.atan2(-D[1], -D[0]) / DEG) + 360) % 360);
+  await page.$eval('#beta', (el, v) => { el.value = String(v); el.dispatchEvent(new Event('input', { bubbles: true })); }, beta); await settle(page);
+  await page.$eval('#azim', (el, v) => { el.value = String(v); el.dispatchEvent(new Event('input', { bubbles: true })); }, az); s = await state();
+  const O0 = s.O, at = await page.evaluate((v) => window.DEGEN_DEBUG.screen(v), O0), yaw0 = (await page.evaluate(() => window.DEGEN_DEBUG.camera())).yaw;
+  await page.mouse.move(at[0], at[1]); await page.mouse.down(); await page.mouse.move(at[0] + 60, at[1] + 10, { steps: 6 }); await page.mouse.up(); s = await state();
+  const yaw1 = (await page.evaluate(() => window.DEGEN_DEBUG.camera())).yaw;
+  check('an observer on the far side of the sphere is not grabbed: the drag turns the view and the observer stays', at[2] < -0.05 && vclose(s.O, O0, 1e-12) && !close(yaw1, yaw0, 1e-6), JSON.stringify({ facing: at[2], O0, O: s.O, yaw0, yaw1 }));
+}
 check('no page errors', T.errors.length === 0, T.errors.slice(0, 3).join(' | '));
 
 await T.finish();

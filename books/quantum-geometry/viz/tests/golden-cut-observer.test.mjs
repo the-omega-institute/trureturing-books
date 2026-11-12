@@ -4,7 +4,7 @@
 // lattice enumerated over integer pairs with exact integer norms, the natural-number expansions by two other routes,
 // the admissible shifts of a fixed patch by brute force over a grid, Fibonacci numbers with their own BigInt recurrence,
 // the golden rotation by repeated addition, and the triacontahedron as a zonotope through its support function.
-import { session, stageFirstChecks, settle, cjkLeftovers } from '../../../../tools/node/viz-testkit.mjs';
+import { session, stageFirstChecks, solidChecks, settle, cjkLeftovers } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'golden-cut-observer';
 const T = await session();
@@ -17,7 +17,8 @@ const LATTICE = [];
 for (let a = -90; a <= 90; a++) for (let b = -60; b <= 60; b++) { const x = a + b * PHI, c = a + b * PSI; if (Math.abs(x) <= 55 && Math.abs(c) <= 2) LATTICE.push({ a, b, x, c, norm: a * a + a * b - b * b }); }
 const chosen = (u) => LATTICE.filter((p) => p.c >= LO + u - 1e-12 && p.c <= HI + u + 1e-12).sort((p, q) => p.x - q.x);
 
-await stageFirstChecks(T, BOOK, ID);
+// the cover is the cut scene, a flat plot drawn on #flat over the solid's canvases
+await stageFirstChecks(T, BOOK, ID, { cover: '#flat' });
 
 const page = await T.goto(BOOK, ID, '?lang=zh');
 await settle(page, 300);
@@ -203,6 +204,8 @@ check('dragging on the stage moves the band', s.scene === 'returns' && s.u1 < 0.
 
 /* ---------- the acceptance window ---------- */
 await pick('window'); s = await state();
+// the triacontahedron is a lit solid cut open towards the card's camera (the scenes of the other cards are 2D plots)
+await solidChecks(T, BOOK, ID, page, { rest: false });
 const solid = await D(() => window.CUT_DEBUG.solid());
 const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]], dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2], len = (a) => Math.hypot(a[0], a[1], a[2]), cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
 const V = solid.verts.map((v) => v.p), nV = V.length, nE = solid.edges.length, nF = solid.faces.length;
@@ -276,9 +279,11 @@ check('the rotation chips switch back to the golden angle (and leave the card)',
 await pick('window'); s = await seek(0.93);
 
 /* ---------- camera, keyboard, evidence, language ---------- */
-const shot0 = await D(() => document.getElementById('cv').toDataURL().length);
+// the solid is drawn on the WebGL canvas kit.solid adds to the stage: a fingerprint of its pixels and the camera
+const glShot = () => D(() => { const cv = document.querySelector('#stage canvas.solid-gl'); if (!cv) return null; const u = cv.toDataURL(); let h = 0; for (let i = 0; i < u.length; i += 3) h = (h * 31 + u.charCodeAt(i)) | 0; return { px: `${u.length}:${h}`, yaw: window.TRV.solids[0].cam.yaw }; });
+const shot0 = await glShot();
 await page.mouse.move(stage[0], stage[1]); await page.mouse.down(); await page.mouse.move(stage[0] + 140, stage[1] + 30, { steps: 5 }); await page.mouse.up(); await settle(page);
-check('dragging the stage turns the triacontahedron (the picture changes, the point stays)', (await D(() => document.getElementById('cv').toDataURL().length)) !== shot0 && near((await state()).s, 0.93));
+{ const shot1 = await glShot(); check('dragging the stage turns the triacontahedron (the picture changes, the point stays)', !!shot0 && !!shot1 && shot1.px !== shot0.px && shot1.yaw !== shot0.yaw && near((await state()).s, 0.93), JSON.stringify([shot0, shot1])); }
 await page.click('body', { position: { x: 5, y: 5 } });
 for (const [k, sc] of [['2', 'cassini'], ['3', 'returns'], ['4', 'window3'], ['5', 'gaps'], ['1', 'cut']]) { await page.keyboard.press(k); check(`key ${k} switches to the scene ${sc}`, (await state()).scene === sc); }
 await page.keyboard.press('Home'); await page.keyboard.press('ArrowRight'); check('Home and → step the rail (u from −0.5 to −0.45)', near((await state()).u, -0.45));

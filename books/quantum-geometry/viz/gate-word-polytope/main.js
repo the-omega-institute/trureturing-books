@@ -136,58 +136,59 @@
     },
     onDrop: () => { grab = false; }
   };
-  const stage = kit.stage3($('stage'), SO);
+  const stage = kit.solid($('stage'), SO);
+  /** Points of the great-circle arc from the unit vector u to the unit vector w, lifted just off the sphere. */
+  const arcPts = (u, w, n, lift = 1.004) => { const out = []; for (let k = 0; k <= n; k++) out.push(v3.scale(v3.slerp(u, w, k / n), lift)); return out; };
   /** Where the staircase goes when it shares the stage: right of the sphere, or below it on a narrow stage. */
   function chartBox() {
-    const W = $('cv').clientWidth, H = $('cv').clientHeight, narrow = W < 560;
+    const W = $('stage').clientWidth, H = $('stage').clientHeight, narrow = W < 560;
     const top = Math.max(56, $('hudBig').parentElement.getBoundingClientRect().bottom - $('stage').getBoundingClientRect().top + 30), bottom = H - Math.max(24, $('legend').offsetHeight + 22);
     return narrow ? { narrow, x: 14, y: H * 0.6, w: W - 28, h: bottom - H * 0.6 } : { narrow, x: W * 0.58, y: top, w: W * 0.4 - 14, h: bottom - top };
   }
   function drawStage() {
     const st = stage, l = level(), n = target(), near = nearest(l, n), W = WORST[l], sh = shape(l), thumb = TRV.thumbMode;
-    // with the staircase on the stage the sphere moves aside to make room for it
+    // with the staircase on the stage the sphere moves aside to make room for it; the staircase goes on #flat
     const cb = S.chart && !thumb ? chartBox() : null;
     SO.cx = cb && !cb.narrow ? 0.3 : 0.5; SO.cy = cb && cb.narrow ? 0.36 : 0.54; SO.radius = cb ? (cb.narrow ? 0.26 : 0.32) : thumb ? 0.4 : 0.36;
+    $('flat').hidden = !cb;
     st.begin();
-    st.sphere(1, { lat: [0], lon: 2, shade: 0.05, alpha: thumb ? 0.6 : 0.32 });
+    // the Bloch sphere: a glass shell and its equator
+    st.glass('bloch', [0, 0, 0], 1, { color: P.cyan, alpha: thumb ? 0.14 : 0.08, rim: 0.55 });
+    const eq = []; for (let k = 0; k < 96; k++) eq.push([Math.cos(kit.TAU * k / 96), Math.sin(kit.TAU * k / 96), 0]);
+    st.line(eq, { color: P.cyan, width: 1.1 * TH, alpha: thumb ? 0.6 : 0.4, close: true });
     // the two axes: T turns about e_z by 45°, H turns about (e_x + e_z)/√2 by 180°
     const AX = [['T', [0, 0, 1]], ['H', [R2, 0, R2]]];
     for (const [g, a] of AX) {
-      st.line(v3.scale(a, -1.22), v3.scale(a, 1.22), { color: P.violet, width: 1.2 * TH, alpha: 0.55, back: 0.5 });
-      if (!thumb) st.tag('ax' + g, v3.scale(a, 1.16), L(`${g} 的转轴`, `axis of ${g}`), 'raw c-vi', { dx: 36 });
+      st.line([v3.scale(a, -1.22), v3.scale(a, 1.22)], { color: P.violet, width: 1.2 * TH, alpha: 0.55 });
+      if (!thumb) st.tag('ax' + g, v3.scale(a, 1.16), L(`${g} 的转轴`, `axis of ${g}`), 'raw c-vi', { dx: g === "H" ? 50 : 36, dy: g === "H" ? -16 : 0, occlude: false });
     }
-    // the polytope
-    const pt = (i) => PTS[i].p, D = st.facing(), geo = S.draw === 'geo' && sh === 'inside';
+    // the polytope: an opaque, flat-shaded solid; in the projected drawing its edges are carried radially onto the sphere
+    const pt = (i) => PTS[i].p, geo = S.draw === 'geo' && sh === 'inside';
     if (HULLS[l]) {
-      const faces = HULLS[l].slice().sort((a, b) => v3.dot(v3.add(v3.add(pt(a.v[0]), pt(a.v[1])), pt(a.v[2])), D) - v3.dot(v3.add(v3.add(pt(b.v[0]), pt(b.v[1])), pt(b.v[2])), D));
-      for (const f of faces) {
-        const front = v3.dot(f.n, D) > 0;
-        st.poly(f.v.map(pt), { fill: P.cyan, alpha: geo ? 0.03 : front ? (thumb ? 0.14 : 0.09) : 0.04 });
-      }
-      for (const [a, b] of EDGES[l]) {
-        if (geo) st.arc(pt(a), pt(b), { color: P.cyan, width: 1.4 * TH, alpha: 0.85, back: 0.25, n: 16 });
-        else st.line(pt(a), pt(b), { color: P.cyan, width: 1.1 * TH, alpha: 0.75, back: 0.22 });
-      }
-    } else if (sh === 'segment') st.line(pt(0), pt(1), { color: P.cyan, width: 2 * TH, alpha: 0.9 });
-    else if (sh === 'triangle') { st.poly([pt(0), pt(1), pt(2)], { fill: P.cyan, alpha: 0.12 }); st.path([pt(0), pt(1), pt(2)], { color: P.cyan, width: 1.4 * TH, close: true, alpha: 0.9 }); }
+      st.poly('hull', { vertices: PTS.slice(0, UPTO[l]).map((q) => q.p), faces: HULLS[l].map((f) => f.v) }, { color: P.cyan, edges: geo ? false : P.ink, id: 'hull' });
+      if (geo) for (const [a, b] of EDGES[l]) st.line(arcPts(pt(a), pt(b), 16), { color: P.cyan, width: 1.4 * TH, alpha: 0.85 });
+    } else if (sh === 'segment') st.tube('seg', [pt(0), pt(1)], { color: P.cyan, width: 2 * TH });
+    else if (sh === 'triangle') st.poly('tri', { vertices: [pt(0), pt(1), pt(2)], faces: [[0, 1, 2]] }, { color: P.cyan, edges: P.ink, id: 'tri' });
     // the reachable points
-    for (let i = 0; i < UPTO[l]; i++) st.dot(pt(i), (UPTO[l] > 200 ? 2.2 : 3.2) * TH, P.cyan, { alpha: 0.95 });
+    for (let i = 0; i < UPTO[l]; i++) st.bead(v3.scale(pt(i), 1.008), { r: (UPTO[l] > 200 ? 2.2 : 3.2) * TH, color: P.cyan, glow: 0.7 });
     if (!thumb && UPTO[l] <= 8) for (let i = 0; i < UPTO[l]; i++) if (i !== near.i) st.tag('w' + i, pt(i), wordText(PTS[i].word), 'num cy', { dx: 0, dy: -14 });
-    // the worst direction: the empty cap of angular radius ε
-    if (S.mode === 'worst' && W.eps < Math.PI - 1e-9) st.circle(v3.scale(n, Math.cos(W.eps)), n, Math.sin(W.eps), { color: P.magenta, width: 1.6 * TH, alpha: 0.9, dash: [6, 4], back: 0.3, n: 120 });
+    // the worst direction: the empty cap of angular radius ε, its rim dashed on the sphere
+    if (S.mode === 'worst' && W.eps < Math.PI - 1e-9) {
+      const c = v3.scale(n, Math.cos(W.eps)), u = v3.unit(v3.cross(n, Math.abs(n[2]) < 0.9 ? [0, 0, 1] : [1, 0, 0])), w = v3.cross(n, u), rim = [];
+      for (let k = 0; k < 120; k++) { const a = kit.TAU * k / 120; rim.push(v3.scale(v3.add(c, v3.scale(v3.add(v3.scale(u, Math.cos(a)), v3.scale(w, Math.sin(a))), Math.sin(W.eps))), 1.004)); }
+      st.line(rim, { color: P.magenta, width: 1.6 * TH, alpha: 0.9, dash: [6, 4], close: true });
+    }
     // the gap: the arc to the nearest point, and the radial piece between the support plane and the sphere
     const s = pt(near.i);
-    if (near.angle > 1e-9) {
-      st.arc(n, s, { color: P.magenta, width: 2.4 * TH, alpha: 0.95, back: 0.4, n: 48 });
-    }
-    st.dot(s, 6.5 * TH, P.magenta, { ring: true, width: 2 });
-    st.arrow([0, 0, 0], n, { color: P.amber, width: 2.2 * TH, glow: 8, headSize: 9 });
+    if (near.angle > 1e-9) st.tube('gapArc', arcPts(n, s, 48), { color: P.magenta, width: 2.4 * TH });
+    st.ring(v3.scale(s, 1.008), { r: 6.5 * TH, normal: s, color: P.magenta, key: 'nearest' });
+    st.arrow([0, 0, 0], n, { color: P.amber, width: 2.2 * TH, headSize: 9 });
     // the radial gap on top of the arrow: from the support plane (height h) out to the sphere
     if (near.angle > 1e-9) {
-      st.line(v3.scale(n, near.h), n, { color: P.magenta, width: 4 * TH, alpha: 0.95, back: 0.45 });
-      st.dot(v3.scale(n, near.h), 3.2 * TH, P.magenta, {});
+      st.tube('gapRad', [v3.scale(n, near.h), n], { color: P.magenta, width: 4 * TH });
+      st.bead(v3.scale(n, near.h), { r: 3.2 * TH, color: P.magenta, key: 'support' });
     }
-    st.dot(n, 5 * TH, P.amber, { glow: 12 });
+    st.bead(n, { r: 5 * TH, color: P.amber, glow: 1, key: 'target' });
     if (!thumb) {
       const sq = st.p(s), nq = st.p(n), right = sq[0] >= nq[0] ? 1 : -1;
       st.tag('near', s, wordText(PTS[near.i].word), 'num mg', { dx: right * 34, dy: -12 });
@@ -197,10 +198,11 @@
     if (cb) drawChart(cb, l);
     st.end();
   }
-  /** The staircase on the stage: ε_L for every length computed by the page (magenta), the current length amber. */
+  /** The staircase on the stage, drawn on the flat canvas #flat over the solid (shown only while the card SHRINK holds
+      it): ε_L for every length computed by the page (magenta), the current length amber. */
   function drawChart(b, l) {
-    const W = $('cv').clientWidth, H = $('cv').clientHeight;
-    const g = kit.plot($('cv'), { x: [-0.6, LMAX + 0.6], y: [0, 190], pad: [b.x + 40, W - b.x - b.w, b.y + 22, H - b.y - b.h + 20], clear: false });
+    const W = $('flat').clientWidth, H = $('flat').clientHeight;
+    const g = kit.plot($('flat'), { x: [-0.6, LMAX + 0.6], y: [0, 190], pad: [b.x + 40, W - b.x - b.w, b.y + 22, H - b.y - b.h + 20] });
     g.axes({ yTicks: [0, 45, 90, 135, 180], yFmt: (v) => `${v}°`, xTicks: [0, 5, 10, 15, 20] });
     WORST.forEach((w, k) => g.rect(k - 0.36, 0, k + 0.36, w.eps / DEG, k === l ? P.amber : P.magenta, { alpha: k === l ? 0.9 : 0.6 }));
     stage.tag('chT', [b.x + 40 + (b.w - 40) / 2, b.y + 6], L('每个门长 L 的最大缺口 ε', 'largest hole ε for each length L'), 'raw', { screen: true });
@@ -307,11 +309,13 @@
         target: n, count: UPTO[l], points: PTS.slice(0, UPTO[l]).map((q) => ({ p: q.p, word: q.word })),
         faces: HULLS[l] ? HULLS[l].map((f) => ({ v: f.v.slice(), n: f.n, d: f.d })) : null,
         chart: S.chart, eps: WORST[l].eps / DEG, worst: WORST[l].dir, shape: shape(l), nearest: { p: PTS[near.i].p, word: PTS[near.i].word, angle: near.angle / DEG }, h: near.h, gap: 1 - near.h,
-        epsAll: WORST.map((w) => w.eps / DEG), counts: UPTO.slice() };
+        epsAll: WORST.map((w) => w.eps / DEG), counts: UPTO.slice(), flat: !$('flat').hidden };
     },
     seek: (t) => { clock.pause(); stopAt = null; clock.set(t); },
     camera: () => Object.assign({}, stage.cam),
-    screen: (v) => { const q = stage.p(v), b = $('cv').getBoundingClientRect(); return [b.left + q[0], b.top + q[1]]; }
+    /** Set the camera ([yaw, pitch, zoom]; the suite puts it back after turning it). */
+    setCamera: (c) => { stage.cam.yaw = c.yaw; stage.cam.pitch = c.pitch; stage.cam.zoom = c.zoom; paint(); },
+    screen: (v) => { const q = stage.p(v), b = $('stage').getBoundingClientRect(); return [b.left + q[0], b.top + q[1]]; }
   };
   window.TRV_THUMB = () => { applyPreset('nearest'); cards.mark('nearest'); S.mode = 'worst'; clock.pause(); clock.set(9); const d = WORST[9].dir; stage.cam.yaw = Math.atan2(-d[0], -d[1]) + 0.35; stage.cam.pitch = clamp(Math.asin(d[2]) - 0.1, -1.4, 1.4); paint.now(); };
   cards.pick(cards.initial('nearest'));
