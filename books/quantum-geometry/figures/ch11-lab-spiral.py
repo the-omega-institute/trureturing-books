@@ -13,6 +13,7 @@ from tbook import figkit
 from _ch11 import lab_from_rot, rot_path
 
 SIZE = (520, 280)
+WRAP = True
 ALT = {
     "zh": "两颗同样大小的布洛赫球。左边是实验室系：琥珀色的路径从北极出发，一圈圈绕着紫色的竖直 z 轴盘旋下降，最后落到赤道上，"
           "是一条螺旋。右边是旋转系：同一个脉冲里，琥珀色的态只沿一条经线从北极走到赤道，扫过一块四分之一圆的品红扇形，"
@@ -31,14 +32,15 @@ TURNS = 6                           # drawn
 
 def draw(fig):
     R = 96
-    for i, (zh, en) in enumerate((("实验室系", "lab frame"), ("旋转系", "rotating frame"))):
-        cx = 130 + 260 * i
-        fig.text(cx, 24, fig.t(zh, en), size=14, weight=600, anchor="middle")
+    lab, rot = fig.row([252, 252], 280, gap=16)
+    cx = 126
+    for p, (zh, en) in zip((lab, rot), (("实验室系", "lab frame"), ("旋转系", "rotating frame"))):
+        p.text(cx, 24, fig.t(zh, en), size=14, weight=600, anchor="middle")
     north = (0.0, 0.0, 1.0)
     end_rot = rot_path(math.pi / 2)
 
     # ---- lab frame
-    sp = fig.sphere(130, 150, R, el=24)
+    sp = lab.sphere(cx, 150, R, el=24)
     sp.outline()
     sp.great_circle((0, 0, 1), "faint", 1.2)
     sp.segment((0, 0, -1.0), (0, 0, 1.22), "axis", 2.2)
@@ -50,27 +52,27 @@ def draw(fig):
         pts.append(lab_from_rot(rot_path(math.pi / 2 * s), 2 * math.pi * TURNS * s))
     sp.curve(pts, "now", 1.8, back_opacity=0.5)
     (xa, ya), (xb, yb) = sp.xy(pts[-12]), sp.xy(pts[-1])
-    fig.arrow_head(xb, yb, math.degrees(math.atan2(-(yb - ya), xb - xa)), "now", head=8)
+    lab.arrow_head(xb, yb, math.degrees(math.atan2(-(yb - ya), xb - xa)), "now", head=8)
     sp.dot(north, "dim", 4.0, ring="bg")
     sp.dot(pts[-1], "now", 4.6, ring="bg")
-    fig.text(130, 272, fig.t("绕 *z* 转了很多圈", "many turns about *z*"), size=13, color="dim", anchor="middle")
+    lab.text(cx, 272, fig.t("绕 *z* 转了很多圈", "many turns about *z*"), size=13, color="dim", anchor="middle")
 
     # ---- rotating frame
-    sp = fig.sphere(390, 150, R, el=24)
+    sp = rot.sphere(cx, 150, R, el=24)
     sp.outline()
     sp.great_circle((0, 0, 1), "faint", 1.2)
     sp.segment((0, 0, -1.0), (0, 0, 1.0), "faint", 1.2, dash="3 3")
     sector = [(0.0, 0.0, 0.0)] + [rot_path(math.pi / 2 * k / 40) for k in range(41)]
-    fig.polygon([sp.xy(v) for v in sector], "area", fill_opacity=0.2, color="area", width=1.2)
+    rot.polygon([sp.xy(v) for v in sector], "area", fill_opacity=0.2, color="area", width=1.2)
     sp.segment((-1.25, 0, 0), (1.25, 0, 0), "axis", 2.2)
     sp.label((1, 0, 0), "*X*", scale=1.38, size=14, color="axis", anchor="middle", middle=True)
     arc = [rot_path(math.pi / 2 * k / 60) for k in range(61)]
     sp.curve(arc, "now", 2.4)
     (xa, ya), (xb, yb) = sp.xy(arc[-3]), sp.xy(arc[-1])
-    fig.arrow_head(xb, yb, math.degrees(math.atan2(-(yb - ya), xb - xa)), "now", head=9)
+    rot.arrow_head(xb, yb, math.degrees(math.atan2(-(yb - ya), xb - xa)), "now", head=9)
     sp.arrow(end_rot, "now", 2.2, head=8)
     sp.dot(north, "dim", 4.0, ring="bg")
     sp.label(end_rot, "−*y*", dx=4, dy=18, size=13, color="dim", middle=True)
     mid = rot_path(math.pi / 4)
     sp.label(mid, "π/2", scale=0.5, dx=-4, size=14, color="area", anchor="middle", middle=True, halo=True)
-    fig.text(390, 272, fig.t("一段经线", "one meridian arc"), size=13, color="dim", anchor="middle")
+    rot.text(cx, 272, fig.t("一段经线", "one meridian arc"), size=13, color="dim", anchor="middle")
