@@ -54,6 +54,10 @@ check('MINUS-ONE: 18² − 13·5² = −1', s.d === 13 && s.m === '18' && s.n ==
 s = await seek(9); check('one more period: 649² − 13·180² = +1', s.m === '649' && s.n === '180' && s.delta === '1');
 await pick('locked'); s = await state();
 check('LOCKED: d = 7 has an even period, gaps −3, +2, −3, +1, and no solution of −1', s.d === 7 && s.period === 4 && s.deltas.slice(0, 4).join() === '-3,2,-3,1' && s.negPell === null && !s.deltas.includes('-1'));
+// an even period restricts the gap only among ±1: of the two values ±1 only +1 occurs, while the gap itself also takes −3 and +2
+const lockedNote = await page.textContent('#roNote'), pellDrawer = await page.evaluate(() => ['zh', 'en'].map((l) => document.querySelector(`#drawer .sheet > div.${l}`).textContent));
+check('LOCKED: the readout and both drawers state the even-period case as “of ±1 only +1”, not as an unrestricted “only +1”', s.deltas.slice(0, 4).some((v) => v !== '1' && v !== '-1')
+  && /±1 两个值里只出现 \+1/.test(lockedNote) && /±1 两个值里只出现 \+1/.test(pellDrawer[0]) && /of the two values ±1 only \+1 occurs/.test(pellDrawer[1]) && !/只能取到 \+1/.test(pellDrawer[0]) && !/only \+1 does/.test(pellDrawer[1]) && !/只在 \+1 这一支上/.test(lockedNote), lockedNote);
 await pick('golden'); s = await state();
 check('GOLDEN: d = 5 and the legend points at the Lean-classified ±4 points', s.d === 5 && (await page.textContent('#legend')).includes('±4'));
 await setRange('dsel', 0); check('other values of d do not show the ±4 legend entry', !(await page.textContent('#legend')).includes('±4'));

@@ -22,7 +22,7 @@
     ], "cues": [{"line": 1, "at": 3.6, "kind": "chime"}]},
     {"id": "fold", "name": "ONE AXIS", "lead": 0.5, "tail": 0.5, "music": [1.0, 0.8, 0.7, 0.5, 0.4], "lines": [
       ["The literature says more: every unit rotor is a single turn about a single axis.", "文献结果说得更多：每一枚单位旋转器都是绕一根轴的一次转动。"],
-      ["Here the axis comes from the bivector part, and the angle is twice the arc cosine of the scalar: sixty-seven point nine degrees.", "这里转轴取自双矢量部分，转角是标量的反余弦的两倍：2 arccos 0.830 = 67.9°。"],
+      ["Here the axis comes from the bivector part, and the angle is twice the arc cosine of the scalar: sixty-seven point nine degrees.", "这里转轴取自双矢量部分，转角是标量的反余弦的两倍：标量约为 0.829591626，2 arccos(0.829591626) ≈ 67.9°。"],
       ["One turn lands exactly where the three turns did.", "这一次转动，正好落在三段转动走到的那一点。"]
     ], "cues": [{"line": 2, "at": 2.0, "kind": "impact"}]},
     {"id": "gates", "name": "T AND H", "lead": 0.5, "tail": 0.5, "music": [0.9, 0.9, 0.9, 0.7, 0.6], "lines": [
@@ -34,7 +34,7 @@
       ["Every arrow on these paths names a pure state: rho is the Bloch matrix of one and v.", "这些路径上的每一根箭头都对应一个纯态：ρ = blochMatrix(1, v)。"],
       ["Lean checks that its trace is one, and that reading off its Bloch vector gives v back.", "Lean 检验了：它的迹为 1，读出的布洛赫向量正是 v。"],
       ["A Hermitian matrix of trace one that squares to itself has a Bloch vector of length exactly one.", "迹为 1、自乘不变的厄米矩阵，布洛赫向量的长度恰为 1。"],
-      ["And a positive semidefinite one stays inside the ball.", "正半定矩阵则留在球内：‖bloch M‖ ≤ Re Tr M。"]
+      ["And a trace-one positive semidefinite matrix stays inside the unit ball.", "迹为 1 的正半定矩阵则留在单位球内：‖bloch M‖ ≤ Re Tr M = 1。"]
     ], "cues": [{"line": 2, "at": 3.8, "kind": "stamp"}]},
     {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
       ["Geometric Intuition of Quantum Computing, chapter twenty-six.", "《量子计算的几何直觉》· 第二十六章"]

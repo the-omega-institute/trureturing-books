@@ -103,8 +103,9 @@
   const lerpAt = (arr, t) => { const i = clamp(Math.floor(t), 0, TMAX), j = Math.min(TMAX, i + 1), f = clamp(t - i, 0, 1); return arr[i] + (arr[j] - arr[i]) * f; };
   const model = (g) => Math.min(g, CEIL);
   const cutBound = (t) => Math.min(HALF, 2 * RUN.cross[clamp(Math.floor(t), 0, TMAX)]);
-  /** First layer at which the entropy is within 0.25 bit of its late-time mean, and that mean. */
-  const LATE = (() => { const tail = RUN.S.slice(40); const m = tail.reduce((s, v) => s + v, 0) / tail.length; let t0 = 0; while (t0 < TMAX && RUN.S[t0] < m - 0.25) t0++; return { mean: m, t0, min: Math.min(...tail), max: Math.max(...tail) }; })();
+  /** The late window (layers `from` … TMAX): its mean, lowest and highest entropy; and the first layer t0 at which the
+      entropy comes within 0.25 bit of that mean (the onset, which lies far before the window). */
+  const LATE = (() => { const from = 40, tail = RUN.S.slice(from); const m = tail.reduce((s, v) => s + v, 0) / tail.length; let t0 = 0; while (t0 < TMAX && RUN.S[t0] < m - 0.25) t0++; return { from, mean: m, t0, min: Math.min(...tail), max: Math.max(...tail) }; })();
   const T_CEIL = RUN.gates.findIndex((g) => g >= CEIL);
 
   /* ======================= depth: the open chain of Chapter 20 ======================= */
@@ -319,7 +320,7 @@
       rows = row('', '层数（深度）', 'layers (depth)', String(i)) + row('', '跨过割线的门', 'gates across the cut', String(RUN.cross[i]))
         + row('c', '熵的上限 min(2 × 跨割门数, 4)', 'entropy ceiling min(2 × across, 4)', `${cutBound(i)} bit`) + row('m', '预期复杂度 min(门数, 2^N)', 'expected complexity min(gates, 2^N)', String(model(gc)));
       note = i < LATE.t0 ? L('熵还在爬：每道跨割门至多给它 2 比特。', 'The entropy is still climbing: each gate across the cut gives it at most 2 bits.')
-        : gc < CEIL ? L(`熵已停在 ${fix(LATE.min, 2)}–${fix(LATE.max, 2)} 比特之间，门数还在长。`, `The entropy has settled between ${fix(LATE.min, 2)} and ${fix(LATE.max, 2)} bits; the gate count is still growing.`)
+        : gc < CEIL ? L(`熵已到 ${fix(s, 2)} 比特（第 ${LATE.from}–${TMAX} 层在 ${fix(LATE.min, 2)}–${fix(LATE.max, 2)} 比特之间起伏），门数还在长。`, `The entropy is at ${fix(s, 2)} bits (layers ${LATE.from}–${TMAX} wander between ${fix(LATE.min, 2)} and ${fix(LATE.max, 2)} bits); the gate count is still growing.`)
           : L('门数已过 2^N：模型里的复杂度停在天花板上，白线还在往上走。', 'The gate count is past 2^N: the model complexity stays on its ceiling while the white line keeps rising.');
       aside = 'S = −Σ λ log₂ λ';
       pill = ['S', fix(s, 2)];
@@ -397,9 +398,9 @@
     eight: { scene: 'depth', N: 8, cuts: [3, 6], from: 0, to: 3, still: 3 },
     eleven: { scene: 'depth', N: 11, cuts: [4, 8], from: 0, to: 4, still: 4 }
   };
-  const fmtS = (x) => fix(x, 2);
+  const fmtS = (x) => fix(x, 2), SAT = PRESETS.saturate.still;
   const NOTES = {
-    saturate: [`从第 0 层走到第 14 层：青色的熵沿灰色台阶爬上去，到第 ${LATE.t0} 层前后停在 ${fmtS(LATE.min)}–${fmtS(LATE.max)} 比特之间，压在 4 比特的白线下面；同一段时间里白线（门数）从 0 一直涨到 ${RUN.gates[14]}，没有停的意思。`, `From layer 0 to layer 14: the cyan entropy climbs along the grey staircase and around layer ${LATE.t0} settles between ${fmtS(LATE.min)} and ${fmtS(LATE.max)} bits, under the white 4-bit line; over the same stretch the white line (gate count) rises from 0 to ${RUN.gates[14]} with no sign of stopping.`],
+    saturate: [`从第 0 层走到第 ${SAT} 层：青色的熵沿灰色台阶爬上去，第 ${LATE.t0} 层升到 ${fmtS(RUN.S[LATE.t0])} 比特，第 ${SAT} 层仍是 ${fmtS(RUN.S[SAT])}，压在 4 比特的白线下面；同一段时间里白线（门数）从 0 一直涨到 ${RUN.gates[SAT]}，没有停的意思。淡色的后段（第 ${LATE.from}–${TMAX} 层）在 ${fmtS(LATE.min)}–${fmtS(LATE.max)} 比特之间起伏。`, `From layer 0 to layer ${SAT}: the cyan entropy climbs along the grey staircase, reaches ${fmtS(RUN.S[LATE.t0])} bits at layer ${LATE.t0} and is still ${fmtS(RUN.S[SAT])} at layer ${SAT}, under the white 4-bit line; over the same stretch the white line (gate count) rises from 0 to ${RUN.gates[SAT]} with no sign of stopping. The faint later stretch (layers ${LATE.from}–${TMAX}) wanders between ${fmtS(LATE.min)} and ${fmtS(LATE.max)} bits.`],
     ceiling: [`接着一直走到第 ${TMAX} 层：青色的熵一直趴在原处；白线（门数）一路涨到 ${RUN.gates[TMAX]}；品红的预期复杂度跟着白线走，到第 ${T_CEIL} 层碰到虚线 2^N = ${CEIL}，就横着走了——门可以一直加，复杂度过不了这道天花板。`, `Run on to layer ${TMAX}: the cyan entropy stays where it was; the white line (gate count) climbs to ${RUN.gates[TMAX]}; the magenta expected complexity follows it until layer ${T_CEIL}, meets the dashed 2^N = ${CEIL} and runs flat from there — gates can always be added, the complexity cannot pass this ceiling.`],
     cv: ['红色标出的是品红线上升的那一段：熵早已停住，它还在涨。复杂度等于体积猜想把这一段读成黑洞内部切片的体积——这是开放猜想，舞台上没有画任何体积。', 'The red mark covers the rising stretch of the magenta line: the entropy stopped long ago, and this line is still climbing. The complexity = volume conjecture reads this stretch as the volume of a slice through the black-hole interior — an open conjecture; no volume is drawn on the stage.'],
     floor: ['N = 11、两个折返点。品红三角从 {2, 3} 一步步挪到 {4, 8}：最高的砖从 9 层降到 8、7、6、5，最后 4 层，正好落在白线上；再怎么挪也到不了白线下面。', 'N = 11 with two turning points. The magenta triangles move step by step from {2, 3} to {4, 8}: the tallest stack drops from 9 layers to 8, 7, 6, 5 and finally 4, right on the white line; no placement gets below it.'],

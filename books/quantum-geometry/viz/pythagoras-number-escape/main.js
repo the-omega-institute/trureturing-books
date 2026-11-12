@@ -272,7 +272,7 @@
       set(1, L('渐近分数 m/n', 'convergent m/n'), `${q.m}/${q.n}`); set(2, L('线上误差 |m/n − √d|', 'error on the line |m/n − √d|'), sci(Math.abs(Number(q.m) / Number(q.n) - C.root)));
       set(3, L('连分数', 'continued fraction'), `[${C.quot[0]}; ${C.quot.slice(1, C.period + 1).join(', ')}, …] <small>${L('周期', 'period')} ${C.period}</small>`);
       set(4, 'm² − d·n² = −1', neg ? `${neg[0]}² − ${S.d}·${neg[1]}² <span class="okmark">✓</span>` : L('无解', 'no solution'));
-      $('roNote').textContent = neg ? L(`周期 ${C.period} 是奇数：差值能取到 −1，再走一个周期翻回 +1。`, `The period ${C.period} is odd: the gap reaches −1, and one more period flips it back to +1.`) : L(`周期 ${C.period} 是偶数：差值只在 +1 这一支上，永远到不了 −1。`, `The period ${C.period} is even: the gap only ever returns to +1 and never reaches −1.`);
+      $('roNote').textContent = neg ? L(`周期 ${C.period} 是奇数：差值能取到 −1，再走一个周期翻回 +1。`, `The period ${C.period} is odd: the gap reaches −1, and one more period flips it back to +1.`) : L(`周期 ${C.period} 是偶数：±1 两个值里只出现 +1，差值永远到不了 −1。`, `The period ${C.period} is even: of the two values ±1 only +1 occurs; the gap never reaches −1.`);
       what = `√${S.d} ≈ ${q.m}/${q.n}`; key = `Δ = ${signed(q.delta)}`;
     } else if (S.scene === 'split') {
       const p = prime(), ab = twoSquares(p), roots = rootsOfMinusOne(p), neg = negativePell(p);

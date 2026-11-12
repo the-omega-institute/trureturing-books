@@ -1,7 +1,7 @@
-"""三种收束并排：单纯迭代每步多一点点位数，牛顿每步把位数翻倍，有理读数的残差只按分母的平方收窄。
+"""三种收束并排：单纯迭代每步多一点点位数，牛顿在不动点邻域内渐近地把位数翻倍，有理读数的残差只按分母的平方收窄。
 Three ways of closing in, side by side: plain iteration gains a fixed few digits per step, Newton
-doubles the digits per step, and a rational reading's residual narrows only like the square of its
-denominator.
+asymptotically doubles the digits near the fixed point, and a rational reading's residual narrows
+only like the square of its denominator.
 
 Left: log₁₀|θ_k − θ*| for θ_{k+1} = cos θ_k (cyan, k = 0…60) and for Newton's
 θ_{k+1} = θ_k − (θ_k − cos θ_k)/(1 + sin θ_k) (magenta, k = 0…4), both from θ₀ = 1, computed at 60
@@ -20,12 +20,12 @@ SIZE = (600, 300)
 WRAP = True
 ALT = {
     "zh": "两栏，纵轴都是误差的常用对数。左栏横轴是步数 k：青色的点是反复取余弦，排成一条斜直线，每一步只往下走同样的一小格，"
-          "沿着斜率 lg 0.674 的虚线，到第 55 步才过 10⁻¹⁰；品红的点是牛顿迭代，第 1、2、3、4 步分别落到 10⁻²、10⁻⁵、10⁻¹⁰、10⁻²¹，"
+          "沿着斜率 lg 0.674 的虚线，到第 55 步才过 10⁻¹⁰；品红的点是从 θ₀ = 1 出发的牛顿迭代，进入不动点邻域后第 1、2、3、4 步分别落到 10⁻²、10⁻⁵、10⁻¹⁰、10⁻²¹，"
           "一步比一步陡。右栏横轴是分母 b 的常用对数：七个点是 θ* 的渐近分数 2/3、3/4、14/19、17/23、694/939、711/962、7093/9597 的残差 |cos q − q|，"
           "全部在虚线 (1 + sin 1)/b² 之下，随着分母变大一路下降，却始终大于零。",
     "en": "Two panels, both with the base-10 logarithm of the error going up. Left, against the step k: the cyan points, "
           "repeated cosine, lie on a straight slanted line, going down the same small notch each step along the dashed line of "
-          "slope lg 0.674, and pass 10⁻¹⁰ only at step 55; the magenta points, Newton's method, reach 10⁻², 10⁻⁵, 10⁻¹⁰ "
+          "slope lg 0.674, and pass 10⁻¹⁰ only at step 55; the magenta points, Newton's method from θ₀ = 1, reach 10⁻², 10⁻⁵, 10⁻¹⁰ "
           "and 10⁻²¹ at steps 1, 2, 3, 4, steeper each time. Right, against the base-10 logarithm of the denominator b: seven "
           "points are the residuals |cos q − q| of the convergents 2/3, 3/4, 14/19, 17/23, 694/939, 711/962, 7093/9597 of θ*, "
           "all under the dashed bound (1 + sin 1)/b², falling as the denominator grows but never reaching zero.",
