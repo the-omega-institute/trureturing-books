@@ -58,6 +58,9 @@ check('SHIFT: the commutator slope equals the numerical derivative of the state-
 check('SHIFT: the HUD and the key readout print −0.8660', (await page.textContent('#hudSub')).includes('−0.8660') && (await page.textContent('#ro .key')).includes('−0.866025'));
 await pick('shift');
 check('SHIFT plays by itself when clicked', await plays());
+// the card runs from 0° to 60°; bring the playing clock to 58° instead of waiting out the whole sweep, then let the page stop itself
+const near = await page.evaluate(() => { const d = window.SHIFT_DEBUG, t = d.state; if (t.playing) d.scrub(Math.max(t.t, Math.PI + Math.PI / 3 - 2 * Math.PI / 180)); return d.state; });
+check('SHIFT is still short of 60° and playing after the jump to 58° (or has already stopped by itself)', near.playing ? near.theta < Math.PI / 3 - 1e-6 : Math.abs(near.theta - Math.PI / 3) < 1e-9, String(near.theta));
 check('SHIFT stops at θ = 60° by itself', await until(page, () => { const s = window.SHIFT_DEBUG.state; return !s.playing && Math.abs(s.theta - Math.PI / 3) < 1e-9; }));
 
 // ANY ANGLE: the tilted case, a full sweep

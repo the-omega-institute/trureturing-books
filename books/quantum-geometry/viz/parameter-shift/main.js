@@ -409,6 +409,8 @@
     /** Half the ±90° difference and the commutator slope on a grid of θ (for the "any angle" check). */
     sweep: (n) => Array.from({ length: n + 1 }, (_, i) => { const x = -PI + 2 * PI * i / n; return [x, shiftOf(x), slopeByCommutator(MODELS[S.model], x), fdOf(x, S.h * DEG)]; }),
     seek: (t) => { clock.pause(); clock.set(t); },
+    /** Moves the clock without pausing it, so a test can bring a playing card close to where it stops by itself. */
+    scrub: (t) => clock.set(t),
     /** Viewport coordinates of a point of the curve and of the dial's centre, for pointer tests. */
     curvePoint: (th) => { const b = $('cv').getBoundingClientRect(); return curveG ? [b.left + curveG.X(th), b.top + curveG.Y(f(th))] : null; },
     dialPoint: (dx, dy) => { const b = $('cv').getBoundingClientRect(); return dialG ? [b.left + dialG.X(dx), b.top + dialG.Y(C.c + dy)] : null; }
