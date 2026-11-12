@@ -53,7 +53,7 @@ theorem rank_one_pure_state_modulus_square_reduction
     (Complex.normSq_eq_conj_mul_self (z := star phi ⬝ᵥ psi)).symm
 ```
 
-让我们逐项追踪 `rw` 链条中的 9 个重写动作：
+让我们逐项追踪 `rw` 链条中的 10 个重写动作：
 
 1. `recordWeight` 与 `bornProbability` 展开目标左端为 $\Tr(\rho \cdot P_k)$；
 2. `hPureState` 与 `hProjection` 将 $\rho$ 与 $P_k$ 替换为两个秩一外积 $\operatorname{vecMulVec}(\psi, \operatorname{star}\psi)$ 与 $\operatorname{vecMulVec}(\phi, \operatorname{star}\phi)$；
@@ -186,7 +186,7 @@ $$
 与上一章的第一至三部审计表相呼应，下表汇总了本书第四部（纠缠、贝尔边界与傅里叶对偶）、第五部（玻戈留波夫双曲变换、闵可夫斯基光锥刚性、规范完整群、张量网络流割与电路深度反例）以及第六部（对角拓扑逃逸、黎曼 $\zeta$ 欧拉乘积、艾森斯坦范数型与收缩不动点）在 `trureturing@dev`（提交 [{commit}](trureturing:)）中的精确源码坐标、语句摘要哈希前缀（`statement_id`）及形式化边界。
 
 ::: {.figure src="ch28-declaration-parts"}
-**全书八部各引用了多少条冻结声明。** 柱高是该部各章用 `lean=` 引用的不同声明数（一条声明在两部都被引用时两部各算一次），柱上标着总数；下段绿色是锁文件里种类为定理的声明，上段灰色是定义与归纳类型。上方两道括号标出两章审计表各自覆盖的部：第二十七章是第一至第三部，本章是第四至第六部。图由脚本从 `trureturing.lock.json` 与中文章节算出。
+**全书十部及终章与附录各引用了多少条冻结声明。** 柱高是该部各章用 `lean=` 引用的不同声明数（一条声明在两部都被引用时两部各算一次），柱上标着总数；下段绿色是锁文件里种类为定理的声明，上段灰色是定义与归纳类型。上方两道括号标出两章审计表各自覆盖的部：第二十七章是第一至第三部，本章是第四至第六部。图由脚本从 `trureturing.lock.json` 与中文章节算出。
 :::
 
 | 所属章节 | 冻结声明 GID | 源码路径与行号 | `statement_id` 前缀 | 精确形式化范围与契约边界 |

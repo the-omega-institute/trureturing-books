@@ -236,14 +236,23 @@
       + row('c', '梳齿数 n', 'Comb cells n', String(n))
       + row('', 'k/Q 约分', 'k/Q reduced', S.k === 0 ? '0' : `${S.k / g}/${S.Q / g}`)
       + row('', '连分数读出（分母 ≤ √Q）', 'Continued fraction (denominator ≤ √Q)', S.k === 0 ? '—' : `${ro.s}/${ro.d}`)
-      + row('m', '离 sQ/r 最近的频点上的概率合计', 'Probability on the integers nearest sQ/r', fix(nearSum, 4))
-      + row('', '非零的频点数', 'Frequencies with nonzero probability', String(fin.filter((p) => p > 1e-12).length));
+      + row('m', '扫完后离 sQ/r 最近的频点上的概率合计', 'Probability on the integers nearest sQ/r after the full sweep', fix(nearSum, 4))
+      + row('', '扫完后非零的频点数', 'Frequencies with nonzero probability after the full sweep', String(fin.filter((p) => p > 1e-12).length));
     const res = S.Q % S.r === 0 && S.x0 === 0;
+    // r ∤ Q: say how many marks sQ/r are integers, and set the measured total on the nearest cells against the share
+    // a flat spectrum would give them (a one-cell comb is flat, so there the two agree); like the readouts it uses,
+    // the note speaks of the spectrum after the full sweep, whatever the rail shows now
+    const ints = Array.from({ length: S.r }, (_, s) => s).filter((s) => (s * S.Q) % S.r === 0).length, flat = near.size / S.Q;
+    const leak = () => (n === 1
+      ? L(`r = ${S.r} 不整除 Q = ${S.Q}，梳子只剩一格 x = ${c[0]}：扫完后只有一支箭头，谱是平的，每根柱子都是 1/${S.Q}；离 sQ/r 最近的 ${near.size} 个频点合计 ${near.size}/${S.Q} = ${fix(flat, 4)}，正是平的谱给它们的份额。`,
+        `r = ${S.r} does not divide Q = ${S.Q} and the comb is down to the single cell x = ${c[0]}: after the full sweep there is one arrow, a flat spectrum with every bar 1/${S.Q}; the ${near.size} frequencies nearest sQ/r carry ${near.size}/${S.Q} = ${fix(flat, 4)} together, just their share of a flat spectrum.`)
+      : L(`r = ${S.r} 不整除 Q = ${S.Q}：${S.r} 个品红的 sQ/r 中${ints === 1 ? '只有 s = 0 落在整数上' : ` ${ints} 个落在整数上（含 s = 0）`}，${S.r - ints} 个落在整数之间。扫完后的谱是梳子实际 ${n} 格箭头的有限和：离 sQ/r 最近的 ${near.size} 个频点合计 ${fix(nearSum, 4)}；谱若是平的，它们只有 ${fix(flat, 4)}。`,
+        `r = ${S.r} does not divide Q = ${S.Q}: of the ${S.r} magenta marks sQ/r, ${ints === 1 ? 'only s = 0 falls on an integer' : `${ints} fall on integers (s = 0 among them)`} and ${S.r - ints} fall between integers. After the full sweep the spectrum is the finite sum over the comb's actual ${n} cells: the ${near.size} frequencies nearest sQ/r carry ${fix(nearSum, 4)} together, against ${fix(flat, 4)} for a flat spectrum.`));
     $('roNote').textContent = res
       ? (S.k % (S.Q / S.r) === 0 ? L(`k 是 Q/r = ${S.Q / S.r} 的倍数：箭头全部同向，链长 ${n}。`, `k is a multiple of Q/r = ${S.Q / S.r}: all arrows point the same way and the chain has length ${n}.`)
         : L(`k 不是 Q/r = ${S.Q / S.r} 的倍数：扫完后链首尾相接，合成为 0。`, `k is not a multiple of Q/r = ${S.Q / S.r}: after the sweep the chain closes and sums to 0.`))
-      : S.Q % S.r === 0 ? L('起点不为 0：每格多一个公共相位，谱的高度不变。', 'A nonzero offset multiplies every arrow by one common phase; the bar heights stay the same.')
-        : L(`r = ${S.r} 不整除 Q = ${S.Q}：品红的 sQ/r 落在整数之间，峰摊开。`, `r = ${S.r} does not divide Q = ${S.Q}: the magenta marks sQ/r fall between integers and the peaks spread.`);
+      : S.Q % S.r === 0 ? L('完整陪集的平移只改变每个频率的公共相位，谱高不变；梳子在边界被截短时，谱高会改变。', 'Translating a complete coset changes only a common phase at each frequency; truncating the comb at the register boundary also changes the heights.')
+        : leak();
     $('pillQ').querySelector('strong').textContent = `${S.Q} · ${S.r}`;
     $('pillK').querySelector('strong').textContent = `${S.k} · ${fix(prob(S.k, t), 3)}`;
     $('legend').innerHTML = [['vi', '齿轮：k 的一个二进制位', 'gear: one binary digit of k'], ['cy', '梳子、相位箭头与谱', 'comb, phase arrows and spectrum'], ['mg', 'sQ/r', 'sQ/r'], ['am', '扫到的格 · 选中的 k', 'swept cell · chosen k']]
@@ -300,7 +309,7 @@
     cancel: ['Q = 16，梳子 {0, 4, 8, 12}，看 k = 1：只有最慢的那只齿轮亮着，每过一格梳齿转 90°。四支青色箭头 1、i、−1、−i 首尾相接围成正方形，回到原点；第 1 根柱子扫描中先长出来，最后缩回 0。', 'Q = 16, comb {0, 4, 8, 12}, following k = 1: only the slowest gear is lit, turning 90° from one tooth of the comb to the next. The four cyan arrows 1, i, −1, −i close into a square and return to the start; bar 1 grows during the sweep and shrinks back to 0 at the end.'],
     four: ['同一把梳子，看 k = 4：四支箭头全部朝右，链长 4。扫完之后谱上只剩 0、4、8、12 四根等高的柱子，每根 1/4，正好落在品红的 sQ/r 上；其余十二根都是 0。', 'The same comb, following k = 4: all four arrows point right and the chain has length 4. After the sweep only the four bars at 0, 4, 8 and 12 remain, each 1/4, right on the magenta marks sQ/r; the other twelve are 0.'],
     read: ['从峰读出阶：k = 4 与 12 给出 4/16 = 1/4、12/16 = 3/4，分母是阶 4；琥珀色框住的 k = 8 只给出 1/2，分母 2 是阶的真因子，要再检验；k = 0 不含信息。', 'Reading the order from the peaks: k = 4 and 12 give 4/16 = 1/4 and 12/16 = 3/4, whose denominator is the order 4; the amber-framed k = 8 only gives 1/2, and 2 is a proper divisor of the order that must be checked again; k = 0 carries nothing.'],
-    leak: ['Q = 64，周期 6 不整除 Q。品红的 sQ/r 落在 10.67、21.33 … 之间，峰摊到相邻格：k = 11 高 0.115、k = 10 只有 0.026，离 sQ/r 最近的六格合计 0.80。k = 11 的连分数读出 1/6，得到阶 6。', 'Q = 64 and the period 6 does not divide Q. The magenta marks sQ/r fall at 10.67, 21.33, … between integers and the peaks spread: k = 11 has 0.115, k = 10 only 0.026, and the six cells nearest sQ/r carry 0.80 together. The continued fraction of k = 11 reads 1/6, giving the order 6.']
+    leak: ['Q = 64，周期 6 不整除 Q。品红的 sQ/r 除 0 与 32 外都落在整数之间（10.67、21.33 …）；扫完后峰摊到相邻格：k = 11 高 0.115、k = 10 只有 0.026，离 sQ/r 最近的六格合计 0.80。k = 11 的连分数读出 1/6，得到阶 6。', 'Q = 64 and the period 6 does not divide Q. Apart from 0 and 32, the magenta marks sQ/r fall between integers (10.67, 21.33, …); after the full sweep the peaks spread: k = 11 has 0.115, k = 10 only 0.026, and the six cells nearest sQ/r carry 0.80 together. The continued fraction of k = 11 reads 1/6, giving the order 6.']
   };
   let booting = true;
   function applyPreset(id) {

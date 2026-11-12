@@ -430,7 +430,7 @@ Reading items 3 and 4 together illuminates the topological backdrop of [Chapter 
 :::
 
 ::: {.figure src="ch21-angle-defect"}
-**For flat triangles to close into a sphere, the vertex defects must add up to $4\pi$.** On the left, five equilateral triangles laid flat around one vertex: five corners of $60^\circ$ make only $300^\circ$, and the magenta gap below is the $60^\circ$ angular defect. On the right, each of the icosahedron's twelve magenta vertices is short by $60^\circ$, for a total of $12 \times 60^\circ = 720^\circ = 4\pi$ (literature result, not formalized in this book; see [@rem-hairy-ball-adams-literature]).
+**Every vertex of the regular icosahedron leaves a gap.** On the left, five equilateral triangles laid flat around one vertex: five corners of $60^\circ$ make only $300^\circ$, and the magenta gap below is the $60^\circ$ angular defect. On the right, each of the icosahedron's twelve magenta vertices is short by $60^\circ$, for a total of $12 \times 60^\circ = 720^\circ = 4\pi$ (literature result, not formalized in this book; see [@rem-hairy-ball-adams-literature]).
 :::
 
 Reading these classical topological results ([@rem-hairy-ball-adams-literature]) alongside our kernel-verified relative semantic diagonal settlement ([@cor-complete-diagonal-topological-settlement]) highlights a shared structural motif: **singularities and incompleteness inside a sphere can be resolved only from a sphere beyond the sphere.**

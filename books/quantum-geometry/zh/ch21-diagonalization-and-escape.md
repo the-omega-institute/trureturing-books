@@ -430,7 +430,7 @@ $$
 :::
 
 ::: {.figure src="ch21-angle-defect"}
-**平坦的三角形要合成球，顶点处的角亏总得合成 $4\pi$。** 左边是一个顶点周围摊平的五个等边三角形，五个 $60^\circ$ 只凑出 $300^\circ$，下方品红的缺口就是 $60^\circ$ 的角亏；右边正二十面体的十二个品红顶点各缺 $60^\circ$，合起来 $12 \times 60^\circ = 720^\circ = 4\pi$（文献结果，未在本书形式化，见 [@rem-hairy-ball-adams-literature]）。
+**正二十面体的每个顶点都留着一道缝。** 左边是一个顶点周围摊平的五个等边三角形，五个 $60^\circ$ 只凑出 $300^\circ$，下方品红的缺口就是 $60^\circ$ 的角亏；右边正二十面体的十二个品红顶点各缺 $60^\circ$，合起来 $12 \times 60^\circ = 720^\circ = 4\pi$（文献结果，未在本书形式化，见 [@rem-hairy-ball-adams-literature]）。
 :::
 
 把上述微分拓扑文献注记（[@rem-hairy-ball-adams-literature]）与本章经内核验证的相对语义对角线拓扑安顿推论（[@cor-complete-diagonal-topological-settlement]）对照阅读，可以看到同一条结构脉络：**球内的奇点与不完备，唯有借球外之球方能安顿。**

@@ -10,7 +10,7 @@ deck:
   book: "量子计算的几何直觉"
   title: "全书概览"
   version: "0.1.0"
-  blurb: "从两子丈量到球外之球：十部三十九章的核心图景、主要定理与三层依据，三十九页看完全书。"
+  blurb: "从两子丈量到球外之球：第一至第八部的核心图景与主要定理，配全书十部三十九章阶梯、三层依据与依赖导图，共三十九页。"
 layout: cover
 ---
 
@@ -30,7 +30,7 @@ section: "全书一句话"
     <p>“我们认为是点，其实是线，认为是线，其实是面，认为是面，其实是球，以为看到球了，却被更大的球包裹。”</p>
     <p>“这就是我们最早研究的 <Tex t="\psi = \psi(\psi)" />。”</p>
   </div>
-  <p class="lead mt">以已知态 <Tex t="\vec a" /> 直接比量目标态 <Tex t="\vec b" />，读数就是相融度 <Tex t="\vec a \cdot \vec b = \cos\theta" />，不需要外部的第 3 点 <Tex t="C" />。当丈量的尺子 <Tex t="\cos" /> 与被丈量的刻度 <Tex t="\theta" /> 合二为一，得到 <Tex t="\cos\theta^* = \theta^*" />。</p>
+  <p class="lead mt">在序曲的实单位向量投影图景中，以已知态 <Tex t="\vec a" /> 直接比量目标态 <Tex t="\vec b" />，读数就是相融度 <Tex t="\vec a \cdot \vec b = \cos\theta" />，不需要外部的第 3 点 <Tex t="C" />。当丈量的尺子 <Tex t="\cos" /> 与被丈量的刻度 <Tex t="\theta" /> 合二为一，得到 <Tex t="\cos\theta^* = \theta^*" />。</p>
 </div>
 <Source>序曲 题记（作者 Auric 原话）与“全书导读与形式化验证契约”</Source>
 
@@ -43,7 +43,7 @@ section: "四重盲区"
   <p class="kicker">Four blind spots · one ladder</p>
   <h2 class="t">以线为点、以面为线、以球为面，<em>球外还有球</em></h2>
   <img src="./img/prelude-overview.zh.svg" alt="序曲的三栏地图：共线的视线只看见一个点；两根箭头张开有向面积；旧球是新球的赤道。" style="display: block; width: 1240px; max-width: 100%; margin: 20px auto 0;">
-  <p class="lead mt-s">第 I 栏：视线与射线共线，只剩一个点；第 II 栏：两根箭头张开品红的有向面积 <Tex t="A \wedge B = \sin\theta\,\hat I" />；第 III 栏：旧球是新球青色的赤道，紫色的法向 <Tex t="\pm\vec e_{n+1}" /> 逃出旧球。</p>
+  <p class="lead mt-s">第 I 栏：视线 O 与朝向光源的 A 同向，入射光沿 −A 迎来，只剩一个点；第 II 栏：两根箭头张开品红的有向面积 <Tex t="A \wedge B = \sin\theta\,\hat I" />；第 III 栏：旧球是新球青色的赤道，紫色的法向 <Tex t="\pm\vec e_{n+1}" /> 逃出旧球。</p>
 </div>
 <Source>序曲 图 0（prelude-overview）</Source>
 
@@ -570,7 +570,7 @@ section: "第七部 · 依据"
     <div class="card violet">
       <h4>文献结果 · 第二十六章</h4>
       <h3>SU(2) → SO(3) 双覆盖与 ZYZ 欧拉分解</h3>
-      <p>本书验证了布洛赫重构与迹恒等式；任意单比特幺正都能写成 ZYZ 欧拉角的普遍分解定理，照文献引用。</p>
+      <p>本书验证了布洛赫重构与迹恒等式；任意单比特幺正略去整体相位后都能写成 ZYZ 欧拉角的普遍分解定理，照文献引用。</p>
     </div>
     <div class="card violet">
       <h4>文献结果 · 第二十七章</h4>
@@ -665,11 +665,11 @@ section: "三层依据"
   <p class="kicker">Three tiers of warrant</p>
   <h2 class="t">三层依据，<em>三种颜色</em>，从不越级</h2>
   <div class="split mt">
-    <img src="./img/prelude-three-tiers.zh.svg" alt="三条横条：绿色 215，紫色 166，红色 6；绿色下注锁文件里 320 条 theorem 声明。" style="display: block; width: 900px; max-width: 100%;">
+    <img src="./img/prelude-three-tiers.zh.svg" alt="三条横条：绿色 215，紫色 167，红色 6；绿色下注锁文件里 320 条 theorem 声明。" style="display: block; width: 900px; max-width: 100%;">
     <div>
       <div class="g3">
         <Stat value="215" label="带 lean= 的定理、引理、命题与推论" tone="ok" />
-        <Stat value="166" label="写明“文献结果，未在本书形式化”的注记与例" tone="violet" />
+        <Stat value="167" label="写明“文献结果，未在本书形式化”的注记与例" tone="violet" />
         <Stat value="6" label="开放猜想，标为 OPEN，不带 Lean 引用" tone="warn" />
       </div>
       <p class="lead mt">锁文件 <span class="mono">trureturing.lock.json</span> 钉住 <PinnedCommit />，共 457 项声明，其中 320 项是 Lean theorem。</p>

@@ -53,7 +53,7 @@ theorem rank_one_pure_state_modulus_square_reduction
     (Complex.normSq_eq_conj_mul_self (z := star phi ⬝ᵥ psi)).symm
 ```
 
-Tracing the nine rewrites inside `rw [...]` step by step:
+Tracing the ten rewrites inside `rw [...]` step by step:
 
 1. `recordWeight` and `bornProbability` unfold the left-hand side to $\Tr(\rho \cdot P_k)$;
 2. `hPureState` and `hProjection` substitute $\operatorname{vecMulVec}(\psi, \operatorname{star}\psi)$ and $\operatorname{vecMulVec}(\phi, \operatorname{star}\phi)$;
@@ -181,7 +181,7 @@ The full proof is checked by the Lean kernel.
 Completing the audit table begun in [Chapter 27](ch27-reading-frozen-proofs-i.md), the table below records the exact source files, line numbers, `statement_id` prefixes, and formal contracts for the declarations audited in this chapter together with representative frozen declarations across Parts IV, V, and VI at commit [{commit}](trureturing:).
 
 ::: {.figure src="ch28-declaration-parts"}
-**How many frozen declarations each of the eight parts cites.** A bar is the number of distinct declarations the chapters of that part cite with `lean=` (a declaration cited in two parts counts once in each), with the total on top; green below is the declarations of kind theorem in the lock, grey above the definitions and inductive types. The two braces mark the parts each audit table covers: Parts I–III for Chapter 27, Parts IV–VI for this chapter. The script computes the figure from `trureturing.lock.json` and the Chinese chapters.
+**How many frozen declarations each of the ten parts and the coda-and-appendices group cites.** A bar is the number of distinct declarations the chapters of that part cite with `lean=` (a declaration cited in two parts counts once in each), with the total on top; green below is the declarations of kind theorem in the lock, grey above the definitions and inductive types. The two braces mark the parts each audit table covers: Parts I–III for Chapter 27, Parts IV–VI for this chapter. The script computes the figure from `trureturing.lock.json` and the Chinese chapters.
 :::
 
 | Chapter | Frozen GID | Source File & Line | `statement_id` Prefix | Exact Formal Scope & Contract |

@@ -352,7 +352,7 @@ The previous paragraph cited the reflection symmetry $\xi(s) = \xi(1 - s)$ as an
 ::: {.definition #def-xi-reading title="The Completed Zeta Reading and the Pole-Removed Xi Reading" lean="D5/S3/Zeros/CompletedZeta.completedZetaReading D5/S3/Zeros/CompletedZeta.xiReading"}
 In the module `CompletedZeta`:
 
-1. The **completed zeta reading** [`completedZetaReading`](lean:D5/S3/Zeros/CompletedZeta.completedZetaReading) $s$ is defined as Mathlib's `completedRiemannZeta s`, the holomorphic continuation of $\Lambda(s) = \pi^{-s/2}\,\Gamma(s/2)\,\zeta(s)$ (with Mathlib's conventional values at $s = 0$ and $s = 1$);
+1. The **completed zeta reading** [`completedZetaReading`](lean:D5/S3/Zeros/CompletedZeta.completedZetaReading) $s$ is defined as Mathlib's `completedRiemannZeta s`, the meromorphic continuation of $\Lambda(s) = \pi^{-s/2}\,\Gamma(s/2)\,\zeta(s)$ (with Mathlib's conventional values at $s = 0$ and $s = 1$);
 2. The **xi reading** [`xiReading`](lean:D5/S3/Zeros/CompletedZeta.xiReading) is defined as
 
    $$

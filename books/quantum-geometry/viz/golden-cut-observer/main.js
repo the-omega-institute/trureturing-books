@@ -3,7 +3,8 @@
             their projections are φ or φ² apart; fixing a small patch leaves only a short range of admissible shifts
    cassini  the powers φᵏ⁺¹ = Fₖ + Fₖ₊₁φ in the same lattice: the rectangle between the origin and (φᵏ⁺¹, ψᵏ⁺¹) has
             signed area Fₖ·Fₖ₊₂ − Fₖ₊₁² = (−1)ᵏ⁺¹, and no other lattice point lies between the hyperbolas x·x′ = ±1
-   returns  the rotation by the golden angle seen through h(x) = cos 2πx: visits to (u₁, u₂) with bounded gaps
+   returns  the rotation by the golden angle seen through h(x) = cos 2πx: visits to (u₁, u₂) over the first N steps; the
+            longest gap between two visits so far and its reciprocal are sample statistics, not the theorem's M
    window3  the rhombic triacontahedron as the zonohedron of the six fivefold axes; the margin d∂ of a point inside
    The rail is the shift u (cut), k (cassini), the number of steps N (returns) or the position of the point (window3).
    Read-only probe for the browser suite: window.CUT_DEBUG. */
@@ -140,9 +141,11 @@
     const N = 1 + Math.round(clamp(t, 0, NMAX - 1)), [u1, u2] = win(), hits = [];
     for (let n = 1; n <= N; n++) { const e = obs(n); if (e > u1 && e < u2) hits.push(n); }
     const waits = []; for (let i = 1; i < hits.length; i++) waits.push(hits[i] - hits[i - 1]);
-    const longest = Math.max(hits.length ? hits[0] : N + 1, N + 1 - (hits.length ? hits[hits.length - 1] : 0), ...waits);   // with the stretches before the first and after the last visit
+    // the longest completed gap between two consecutive visits in these N steps (null before the second visit): a description
+    // of this finite sample only; it is not the theorem's M + 1 and bounds neither later gaps nor the share at this N
+    const longest = waits.length ? Math.max(...waits) : null, open = N - (hits.length ? hits[hits.length - 1] : 0);
     const measure = (Math.acos(clamp(u1, -1, 1)) - Math.acos(clamp(u2, -1, 1))) / Math.PI;
-    return { N, u1, u2, hits, waits, longest, share: hits.length / N, bound: 1 / longest, measure, kinds: [...new Set(waits)].sort((a, b) => a - b) };
+    return { N, u1, u2, hits, waits, longest, open, share: hits.length / N, ratio: longest ? 1 / longest : null, measure, kinds: [...new Set(waits)].sort((a, b) => a - b) };
   }
   function drawReturns(q) {
     const cv = $('cv'), W = cv.clientWidth, H = cv.clientHeight, words = !TRV.thumbMode;
@@ -174,7 +177,7 @@
     if (q.waits.length) {
       const i = q.waits.indexOf(Math.max(...q.waits)), a = q.hits[i], b = q.hits[i + 1], y = g.pt + g.ih - 15;
       ctx.strokeStyle = P.magenta; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(g.X(a), y + 4); ctx.lineTo(g.X(a), y); ctx.lineTo(g.X(b), y); ctx.lineTo(g.X(b), y + 4); ctx.stroke();
-      text(ctx, L(`最长的间隔 ${b - a} 步`, `longest gap: ${b - a} steps`), clamp((g.X(a) + g.X(b)) / 2, g.pl + 56, g.pl + g.iw - 56), y - 10, P.magenta, { align: 'center', size: 11, face: 'body' });
+      text(ctx, L(`目前最长的间隔 ${b - a} 步`, `longest gap so far: ${b - a} steps`), clamp((g.X(a) + g.X(b)) / 2, g.pl + 56, g.pl + g.iw - 56), y - 10, P.magenta, { align: 'center', size: 11, face: 'body' });
     }
   }
 
@@ -281,9 +284,9 @@
       const h = kit.plot(B, { x: [0, Math.max(55, q.N)], y: [0, clamp(q.measure * 2.4, 0.1, 1)], pad: [34, 10, 8, 20] }), run = []; let c = 0, hi = 0;
       for (let m = 1; m <= q.N; m++) { if (q.hits[hi] === m) { c++; hi++; } run.push([m, Math.min(c / m, h.y1)]); }
       h.axes({ yTicks: [0, Number((h.y1 / 2).toFixed(2)), Number(h.y1.toFixed(2))], xTicks: [1, 21, 55, 89, 144, 233].filter((v) => v <= Math.max(55, q.N)), xLabel: 'N' });
-      h.hline(q.measure, P.ink, { dash: [4, 3], alpha: 0.7 }); h.hline(q.bound, P.magenta, { dash: [4, 3] }); h.line(run, P.cyan);
-      h.legend([[P.cyan, L('已进入的比例', 'share of steps inside')], [P.ink, L('窗口占圆周的份额', 'the window’s share of the circle'), 'dash'], [P.magenta, '1/(M + 1)', 'dash']], { right: true });
-      title(L('相邻两次回来之间的步数', 'Steps between consecutive returns'), q.kinds.length ? L(`出现过：${q.kinds.join('、')}`, `seen: ${q.kinds.join(', ')}`) : '', L('落在窗口里的比例', 'Share of steps in the window'), `${fix(q.share, 3)} ≥ ${fix(q.bound, 3)}`);
+      h.hline(q.measure, P.ink, { dash: [4, 3], alpha: 0.7 }); h.line(run, P.cyan);
+      h.legend([[P.cyan, L('已进入的比例', 'share of steps inside')], [P.ink, L('窗口占圆周的份额', 'the window’s share of the circle'), 'dash']], { right: true });
+      title(L('相邻两次回来之间的步数', 'Steps between consecutive returns'), q.kinds.length ? L(`出现过：${q.kinds.join('、')}`, `seen: ${q.kinds.join(', ')}`) : L('还没有完整的间隔', 'no completed gap yet'), L('落在窗口里的比例', 'Share of steps in the window'), L(`前 ${q.N} 步：${fix(q.share, 3)}`, `first ${q.N} steps: ${fix(q.share, 3)}`));
     } else {
       const g = kit.plot(A, { x: [0, SMAX], y: [-0.25, 1.05], pad: [34, 10, 8, 20] }), pts = [];
       for (let i = 0; i <= 120; i++) { const s = SMAX * i / 120; pts.push([s, depth(v3.scale(TRIA.dir, s * TRIA.exit)).d / TRIA.rin]); }
@@ -307,7 +310,7 @@
     ? (S.patch ? [['am', '窗口 W + u', 'the window W + u'], ['cy', '被这一小片定住的点（带圈）', 'points fixed by the patch (ringed)'], ['mg', '仍未定的点', 'points still undecided']]
       : [['am', '窗口 W + u', 'the window W + u'], ['cy', '窗口里的点，投到下面的直线上', 'points in the window, projected to the line below'], ['mg', '离边不到 0.08 的点', 'points less than 0.08 from an edge']].concat(Math.abs(q.u) < 1e-9 ? [['ok', '绿圈：自然数的黄金展开 β(n)', 'green rings: the golden expansions β(n)']] : []))
     : S.scene === 'cassini' ? [['cy', 'x·x′ = +1：点在横轴上方', 'x·x′ = +1: the point lies above the axis'], ['mg', 'x·x′ = −1：点在横轴下方', 'x·x′ = −1: the point lies below the axis'], ['dm', '其余格点，都在两条双曲线之外', 'the other lattice points, all outside the two hyperbolas']]
-      : S.scene === 'returns' ? [['am', '观测窗与此刻的点', 'the window and the current point'], ['cy', '落在窗口里的步', 'steps inside the window'], ['mg', '最长的间隔', 'the longest gap']]
+      : S.scene === 'returns' ? [['am', '观测窗与此刻的点', 'the window and the current point'], ['cy', '落在窗口里的步', 'steps inside the window'], ['mg', '目前最长的间隔（只是样本）', 'the longest gap so far (sample only)']]
         : [['cy', '12 个五重顶点', '12 fivefold vertices'], ['am', '窗口里的点与半径 d∂ 的球', 'the point and the ball of radius d∂'], ['mg', '离它最近的面', 'the face nearest to it']]);
   function drawText(q) {
     const set = (i, lab, val) => { $(`roL${i}`).textContent = lab; $(`ro${i}`).innerHTML = val; };
@@ -336,15 +339,16 @@
       note = L('矩形一次在横轴上方，一次在下方，越来越扁长，面积不变。两条双曲线之间除了原点没有别的格点：非零黄金整数的范数至少是 1。', 'The rectangles lie above and below the axis in turn, ever longer and flatter, with the same area. Between the two hyperbolas there is no lattice point but the origin: the norm of a nonzero golden integer is at least 1.');
       what = `k = ${k}`; key = sv;
     } else if (S.scene === 'returns') {
-      const none = !q.hits.length;
+      const none = !q.hits.length, gap = q.longest != null;
       big = L(`回归 · N = ${q.N}`, `Returns · N = ${q.N}`);
-      hud = none ? L(`观测窗 (${fix(q.u1, 2)}, ${fix(q.u2, 2)})：还没有进入过`, `window (${fix(q.u1, 2)}, ${fix(q.u2, 2)}): not entered yet`)
-        : L(`观测窗 (${fix(q.u1, 2)}, ${fix(q.u2, 2)})：进入 ${q.hits.length} 次 · 任何连续 ${q.longest} 步里至少进入一次`, `window (${fix(q.u1, 2)}, ${fix(q.u2, 2)}): entered ${q.hits.length} times · at least once in any ${q.longest} consecutive steps`);
-      keyRO(L('到此为止最长的等待 M + 1', 'longest wait so far, M + 1'), `<span class="c-mg">${q.longest}</span>`, L('步', 'steps'));
-      set(1, L('进入窗口的次数', 'visits to the window'), String(q.hits.length)); set(2, L('所占比例', 'share of the steps'), fix(q.share, 4));
-      set(3, '1/(M + 1)', `${fix(q.bound, 4)} <span class="okmark">${q.hits.length >= Math.floor(q.N / q.longest) ? '✓' : '✗'}</span>`); set(4, L('窗口占圆周的份额', 'the window’s share of the circle'), fix(q.measure, 4));
-      note = L('窗口只要碰得到观测值的取值范围，等待就有上限；窗口越窄，上限越大。', 'As long as the window meets the range of the observable, the waits are bounded; the narrower the window, the larger the bound.');
-      what = `N = ${q.N}`; key = none ? '—' : `M + 1 = ${q.longest}`;
+      hud = none ? L(`观测窗 (${fix(q.u1, 2)}, ${fix(q.u2, 2)})：前 ${q.N} 步还没有进入过`, `window (${fix(q.u1, 2)}, ${fix(q.u2, 2)}): not entered in the first ${q.N} steps`)
+        : gap ? L(`观测窗 (${fix(q.u1, 2)}, ${fix(q.u2, 2)})：前 ${q.N} 步进入 ${q.hits.length} 次 · 两次进入之间目前最长隔 ${q.longest} 步（只是样本）`, `window (${fix(q.u1, 2)}, ${fix(q.u2, 2)}): entered ${q.hits.length} times in the first ${q.N} steps · longest gap between two visits so far: ${q.longest} steps (sample only)`)
+          : L(`观测窗 (${fix(q.u1, 2)}, ${fix(q.u2, 2)})：前 ${q.N} 步只进入 1 次 · 还没有完整的间隔，上次进入后已过 ${q.open} 步`, `window (${fix(q.u1, 2)}, ${fix(q.u2, 2)}): entered once in the first ${q.N} steps · no completed gap yet, ${q.open} ${q.open === 1 ? 'step' : 'steps'} since that visit`);
+      keyRO(L('目前最长的间隔（样本）', 'longest gap so far (sample)'), gap ? `<span class="c-mg">${q.longest}</span>` : '—', gap ? L('步，只描述前 N 步', 'steps, describes the first N steps only') : L('还没有完整的间隔', 'no completed gap yet'));
+      set(1, L('进入窗口的次数', 'visits to the window'), String(q.hits.length)); set(2, L('前 N 步中所占比例', 'share of the first N steps'), fix(q.share, 4));
+      set(3, L('1 ÷ 目前最长的间隔（描述）', '1 ÷ longest gap so far (descriptive)'), gap ? fix(q.ratio, 4) : '—'); set(4, L('窗口占圆周的份额', 'the window’s share of the circle'), fix(q.measure, 4));
+      note = L('这些都是前 N 步的样本读数。定理只断言存在某个 n₀ 与 M：n₀ 之后每连续 M + 1 步至少进入一次，并且对每个 ε > 0，N 足够大时比例不低于 1/(M + 1) − ε。页面没有算出 n₀ 或 M；目前最长的间隔不是 M + 1，不限制以后的间隔，也不给出此刻比例的下界。', 'These are sample readouts of the first N steps. The theorem only asserts that some n₀ and M exist: after n₀ every M + 1 consecutive steps contain a visit, and for each ε > 0 the share is at least 1/(M + 1) − ε once N is large. The page computes neither n₀ nor M; the longest gap so far is not M + 1, does not bound later gaps and gives no lower bound on the share at this N.');
+      what = `N = ${q.N}`; key = gap ? L(`最长间隔 ${q.longest}`, `GAP ${q.longest}`) : '—';
     } else {
       const five = TRIA.verts.filter((v) => v.deg === 5).length, three = TRIA.verts.filter((v) => v.deg === 3).length;
       big = L(`接受窗 · s = ${fix(q.s, 2)}`, `Window · s = ${fix(q.s, 2)}`);
@@ -400,8 +404,8 @@
     phason: ['窗口从 u = −0.5 挪到 +0.5。贴着边的点（洋红）进进出出，下面那排砖里相邻的一长一短随之对调；离边远的点一直留在原地。', 'The window moves from u = −0.5 to +0.5. Points at its edge (magenta) come and go, and in the row of tiles below a long and a short neighbour swap each time; points far from the edge stay where they are.'],
     empire: ['把中间一小片（|x| ≤ 4 的点）固定下来：窗口只能在一小段范围里挪动。在这段范围里始终留在窗口内的点都被这一小片定住，包括很远的；只有洋红色的点还悬而未决。', 'Fix the small patch in the middle (the points with |x| ≤ 4): the window can now move only within a short range. Every point that stays inside the window over that whole range is fixed by the patch, however far away; only the magenta points are still undecided.'],
     cassini: ['还是那张格点图。φ 的幂 φ², φ³, … 一个在横轴上方、一个在下方，越来越贴近横轴；它与原点围成的矩形越来越扁长，面积却永远恰好是 1。这个面积就是卡西尼式 Fₖ·Fₖ₊₂ − Fₖ₊₁²。', 'The same lattice again. The powers φ², φ³, … lie above and below the horizontal axis in turn, ever closer to it; the rectangle each spans with the origin grows longer and flatter, and yet its area is always exactly 1. That area is Cassini’s expression Fₖ·Fₖ₊₂ − Fₖ₊₁².'],
-    returns: ['圆上的点每一步转过黄金角；它的高度 cos 2πnφ 就是观测值。琥珀色的带子是观测窗 (0.2, 0.8)。轨道一次次回到带子里，相邻两次之间的步数有上限。', 'A point on the circle turns by the golden angle at each step; its height cos 2πnφ is what is observed. The amber band is the observation window (0.2, 0.8). The orbit comes back into the band again and again, and the number of steps between two visits is bounded.'],
-    narrow: ['把窗口收窄到 (0.45, 0.55)：每次要等得更久，但等待仍有上限，落在窗口里的步数所占比例也不低于 1/(M + 1)。', 'Narrow the window to (0.45, 0.55): each wait is longer, yet the waits are still bounded, and the share of steps inside the window is no less than 1/(M + 1).'],
+    returns: ['圆上的点每一步转过黄金角；它的高度 cos 2πnφ 就是观测值。琥珀色的带子是观测窗 (0.2, 0.8)。轨道一次次回到带子里；洋红的括号标出这些步里两次进入之间最长的间隔，它只描述画出的这些步。', 'A point on the circle turns by the golden angle at each step; its height cos 2πnφ is what is observed. The amber band is the observation window (0.2, 0.8). The orbit comes back into the band again and again; the magenta bracket marks the longest gap between two visits among the steps drawn, and describes those steps only.'],
+    narrow: ['把窗口收窄到 (0.45, 0.55)：进入得更少，画出的间隔更长。图上的最长间隔只是这 233 步的样本，不是定理里的 M；定理只保证存在某个 M，图上不读出它。', 'Narrow the window to (0.45, 0.55): visits are rarer and the gaps drawn are longer. The longest gap on the picture is a sample of these 233 steps, not the M of the theorem; the theorem only guarantees that some M exists, and the picture does not read it off.'],
     window: ['菱形三十面体：六条五重轴各出一条棱，拼成 30 个菱形面、60 条棱、32 个顶点。靠近中心的点离每个面都远，球的半径 d∂ 就是它经得起的扰动。拖动可以转动它。', 'The rhombic triacontahedron: each of the six fivefold axes supplies an edge, giving 30 rhombic faces, 60 edges and 32 vertices. A point near the centre is far from every face, and the radius d∂ of the ball is the disturbance it can withstand. Drag to turn it.'],
     edge: ['把点推向边界：球越缩越小，d∂ 归零的那一刻它碰到最近的面（洋红），再往外就不在窗口里了。', 'Push the point towards the boundary: the ball shrinks, d∂ reaches zero when the point touches the nearest face (magenta), and beyond that it is no longer in the window.']
   };
@@ -428,7 +432,7 @@
       const pt = (p) => ({ a: p.a, b: p.b, x: p.x, c: p.c });
       if (S.scene === 'cut') Object.assign(out, { u: q.u, window: [LO + q.u, HI + q.u], half: q.half, selected: q.sel.map(pt), kinds: q.kinds, minGap: q.minGap, seen: q.seen.length, edge: q.edge, deep: q.deep && Object.assign(pt(q.deep), { margin: margin(q.deep.c, q.u) }), patch: S.patch && { lo: S.patch.lo, hi: S.patch.hi, ref: S.patch.ref, radius: PATCH, emp: q.emp, forced: q.forced.map(pt), free: q.free.map(pt) }, beta: Array.from({ length: 40 }, (_, n) => beta(n)) });
       else if (S.scene === 'cassini') Object.assign(out, { k: q.k, fib: [FIB[q.k], FIB[q.k + 1], FIB[q.k + 2]].map(String), value: q.value, point: [q.x, q.y], all: Array.from({ length: KN }, (_, i) => Number(cassini(i + 1))) });
-      else if (S.scene === 'returns') Object.assign(out, { N: q.N, u1: q.u1, u2: q.u2, hits: q.hits, waits: q.waits, longest: q.longest, share: q.share, bound: q.bound, measure: q.measure });
+      else if (S.scene === 'returns') Object.assign(out, { N: q.N, u1: q.u1, u2: q.u2, hits: q.hits, waits: q.waits, longest: q.longest, open: q.open, share: q.share, ratio: q.ratio, measure: q.measure });
       else Object.assign(out, { s: q.s, p: q.p, d: q.d, inside: q.inside, share: q.share, rin: TRIA.rin, rout: TRIA.rout, counts: [TRIA.faces.length, TRIA.edges.length, TRIA.verts.length], nearest: q.face.n });
       return out;
     },

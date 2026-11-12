@@ -65,20 +65,22 @@ $$
 
 ## 宽度三桥图的秩与割容量 {#sec-bridge-flow-cut}
 
-现在我们来数一数：要想把 $\operatorname{flow}(M, N) = \sum_{r=0}^2 M_r \otimes N_r$ 从左输入端 $(\operatorname{Fin} b \times \operatorname{Fin} c)$ 到右输出端 $(\operatorname{Fin} a \times \operatorname{Fin} d)$ 的信息通道彻底切断，一共有哪几道候选切口（cuts）？
+现在我们来数一数：源码用哪三项割容量上界，来约束 $\operatorname{flow}(M, N) = \sum_{r=0}^2 M_r \otimes N_r$ 从左输入端 $(\operatorname{Fin} b \times \operatorname{Fin} c)$ 到右输出端 $(\operatorname{Fin} a \times \operatorname{Fin} d)$ 的信息通道的秩？
 
 1. **左外边界割（行空间瓶颈）**：矩阵 $\operatorname{flow}(M, N)$ 只有 $|\operatorname{Fin} a \times \operatorname{Fin} d| = ad$ 行，因此其秩绝不可能超过 $ad$；
 2. **右外边界割（列空间瓶颈）**：矩阵 $\operatorname{flow}(M, N)$ 只有 $|\operatorname{Fin} b \times \operatorname{Fin} c| = bc$ 列，因此其秩绝不可能超过 $bc$；
 3. **中间三桥内部割（跨桥瓶颈）**：对每个桥指标 $r \in \operatorname{Fin} 3$，$M_r \in M_{a\times b}(\mathbb{C})$ 的秩至多为 $a$，$N_r \in M_{d\times c}(\mathbb{C})$ 的秩至多为 $c$，故单个克罗内克积 $M_r \otimes N_r$ 的秩至多为 $ac$；将 $r = 0, 1, 2$ 三路相加，由矩阵秩的次可加性知总秩至多为 $3ac$。
 
-把这三道切口的容量取最小值，就是 Lean 模块中定义的**离散量子最小割容量** `QMinCut`：
+把源码采用的这三项割容量上界取最小值，就是 Lean 模块中定义的**离散量子最小割容量** `QMinCut`：
 
 $$
 \operatorname{QMinCut}(a, b, c, d) = \min\bigl(3ac,\, \min(ad, bc)\bigr) \in \mathbb{N}.
 $$
 
+一般维数下，图中另有容量为 $3bd$ 的第四道割；当 $a \le b$ 且 $c \le d$ 时，$3bd \ge 3ac$，这一项冗余。
+
 ::: {.figure src="ch19-three-cuts"}
-**切断宽度三桥图只有三道候选割，最小割取三者中最小的。** 取 $(a, b, c, d) = (2, 3, 2, 3)$：上面的虚线横切腿 $a$、$d$，容量 $ad = 6$；下面的虚线横切腿 $b$、$c$，容量 $bc = 6$；斜着的灰色虚线切过腿 $a$、三条桥与腿 $c$，容量 $3ac = 12$。两道品红的外割并列最小，$\operatorname{QMinCut} = 6$。
+**图中画出源码采用的三项割容量上界，QMinCut 取三者中最小的。** 取 $(a, b, c, d) = (2, 3, 2, 3)$：上面的虚线横切腿 $a$、$d$，容量 $ad = 6$；下面的虚线横切腿 $b$、$c$，容量 $bc = 6$；斜着的灰色虚线切过腿 $a$、三条桥与腿 $c$，容量 $3ac = 12$。两道品红的外割并列最小，$\operatorname{QMinCut} = 6$。
 :::
 
 下面的命题证明了：无需任何额外参数限制，对一切自然数 $a, b, c, d \in \mathbb{N}$，宽度三桥图的量子最大流永远不超过这一最小割容量。
@@ -145,7 +147,7 @@ $$
 不妨做一步初等代数检验：当 $a > 0$ 时，不等式 $a^2 + b^2 \le 3ab$ 意味着 $b^2 < a^2 + b^2 \le 3ab$，消去正因子 $b$（若 $b > 0$）即得 $b < 3a$，同理 $c > 0$ 与 $c^2 + d^2 \le 3cd$ 意味着 $d < 3c$。换言之，两个外边界比值 $b/a$ 与 $d/c$ 都被严格关在宽度因子 $3$ 以内：一旦乘上桥宽 $3$，就有 $3ac > bc$ 且 $3ac > ad$！因此，只要参数 $(a, b)$ 与 $(c, d)$ 落在二次锥域 $a^2 + b^2 \le 3ab$ 与 $c^2 + d^2 \le 3cd$（且 $a > 0, c > 0$）之内，中间割 $3ac$ 就永远大于或等于外边界割 $\min(ad, bc)$，从而最小割公式自动脱去外层的 $3ac$！
 
 ::: {.viz src="eth-horizon-crossover" preset="narrow" height="500"}
-**桥太窄：三条桥成了瓶颈。** 桥图 $(a, b, c, d) = (1, 5, 1, 5)$：两道外割都是 $5$，三条桥却只能过 $3ac = 3$，琥珀色虚线标出的最小割是中间那道。右边的流矩阵是 $5 \times 5$ 的，青色的奇异值在第三个之后归零，秩只有 $3$。$1^2 + 5^2 = 26 > 3 \cdot 1 \cdot 5$，这组维数在锥域之外（[@prop-bridge-flow-cut-bound]）。
+**桥太窄：三条桥成了瓶颈。** 桥图 $(a, b, c, d) = (1, 5, 1, 5)$：两道外割都是 $5$，三条桥却只能过 $3ac = 3$，琥珀色虚线标出的最小割切过腿 $a$、三条桥与腿 $c$。右边的流矩阵是 $5 \times 5$ 的，青色的奇异值在第三个之后归零，秩只有 $3$。$1^2 + 5^2 = 26 > 3 \cdot 1 \cdot 5$，这组维数在锥域之外（[@prop-bridge-flow-cut-bound]）。
 :::
 
 ::: {.corollary #cor-bridge-cone-mincut title="锥域内最小割" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.cone_QMinCut"}
@@ -234,7 +236,7 @@ $$
 
 1. **等宽与混合宽度区间的显式有理证人（`widthTwo_proved`）**：当 $a = b$ 或 $c = d$（`square_left`、`square_right`），或一侧处于大比值区间而另一侧处于小比值区间（$2a \le b \land d \le 2c$ 的 `mixed_left`，及由转置对偶 `witness_swap` 诱导的 $b \le 2a \land 2c \le d$ 的 `mixed_right`）时，直接用分块部分单位矩阵构造有理矩阵证人（`RationalWitness`），在 $\operatorname{flow}(M, N)$ 中嵌出阶数为 $\min(ad, bc)$ 的单位子矩阵；
 2. **双小比值基底区间（`base_witness`）**：当 $a < b < 2a$ 且 $c < d < 2c$ 时，调用基底模块构造满秩有理证人；
-3. **双大比值区间的二次锥同步无穷递降（`cone_descent` 与 `full_rank_of_descent`）**：当 $2a \le b$ 且 $2c \le d$ 时，利用整系数恒等式 $(3a - b)^2 + a^2 - 3(3a - b)a = a^2 + b^2 - 3ab \le 0$，将四元组映射为严格更小的锥域四元组 $(a', b', c', d') = (3a - b,\, a,\, 3c - d,\, c)$（其外腿和 $b' + d' = a + c < b + d$）。由归纳假设知较小四元组达到满秩 $\min((3a-b)c,\, a(3c-d))$，再结合移位易位亏格守恒恒等式（`castling_proved`：$u v - \operatorname{QMaxFlow}(u, x, v, y) = x(3y - v) - \operatorname{QMaxFlow}(x, 3x - u, y, 3y - v)$）与割容量平衡关系 $(3a - b)c + bc = a(3c - d) + ad$，推出原四元组 $(a, b, c, d)$ 的亏格为零，即 $\operatorname{QMaxFlow}(a, b, c, d) = \min(ad, bc)$。
+3. **双大比值区间的二次锥同步无穷递降（`cone_descent` 与 `full_rank_of_descent`）**：当 $2a \le b$ 且 $2c \le d$ 时，利用整系数恒等式 $(3a - b)^2 + a^2 - 3(3a - b)a = a^2 + b^2 - 3ab \le 0$，将四元组映射为严格更小的锥域四元组 $(a', b', c', d') = (3a - b,\, a,\, 3c - d,\, c)$（其外腿和 $b' + d' = a + c < b + d$）。由归纳假设知较小四元组达到满秩 $\min((3a-b)c,\, a(3c-d))$，再结合移位易位亏格守恒恒等式（`castling_proved`：$u y - \operatorname{QMaxFlow}(u, x, v, y) = x(3y - v) - \operatorname{QMaxFlow}(x, 3x - u, y, 3y - v)$）与割容量平衡关系 $(3a - b)c + bc = a(3c - d) + ad$，推出原四元组 $(a, b, c, d)$ 的亏格为零，即 $\operatorname{QMaxFlow}(a, b, c, d) = \min(ad, bc)$。
 
 完整证明由 Lean 内核检查。
 :::

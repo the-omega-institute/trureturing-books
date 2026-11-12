@@ -1,6 +1,6 @@
-"""ER=EPR 只在大量纠缠、可用半经典引力描述的体系里提出“纠缠就是桥”；一对贝尔态之间并没有光滑的虫洞。这一对应本身是开放问题。
-ER=EPR proposes "entanglement is a bridge" only for heavily entangled systems with a semiclassical
-gravity description; a single Bell pair has no smooth wormhole between its halves. The correspondence
+"""ER=EPR 中光滑经典桥的几何读法需要适当的半经典体系；一对贝尔态之间并没有光滑的虫洞。这一对应本身是开放问题。
+A smooth classical bridge interpretation of ER=EPR requires a suitable semiclassical
+system; a single Bell pair has no smooth wormhole between its halves. The correspondence
 itself is open.
 
 Schematic: the top row pairs many boundary qubits L_i with R_i (cyan dashed lines) and sets them
