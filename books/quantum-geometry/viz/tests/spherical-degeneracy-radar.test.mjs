@@ -6,7 +6,7 @@
 // ½ Tr(M σₖ); the closed forms of Chapter 34 for v₁, v₂, s₁, s₂ and Δ(O); 3 × 3 rotation matrices for the turned frame;
 // and a brute-force search over a grid of observers for the ones that read every pair equally. It reads the page
 // through window.DEGEN_DEBUG.
-import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
+import { session, stageFirstChecks, settle, until, labelOverlaps } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'spherical-degeneracy-radar';
 const T = await session();
@@ -193,6 +193,21 @@ for (let j = 0; j < 12; j++) {
 check('PULLBACK: at 12 angles the turned states match SU(2), and Tr(UρU†E) = Tr(ρ U†EU) equal the two readings (1 + O·Rv)/2, (1 + R⁻¹O·v)/2', worst < 1e-12, `max error ${worst}`);
 s = await seek(2 * PI / 3);
 check('PULLBACK at ψ = 120°: both ways read 0.61 and −0.62 (card note)', close(s.ra, s.pa, 1e-12) && close(s.rb, s.pb, 1e-12) && s.ra.toFixed(2) === '0.61' && s.rb.toFixed(2) === '-0.62', `${s.ra} ${s.rb}`);
+// the R⁻¹O label never sits on the observer's label: near ψ = 0 and 360° the two anchors meet and it must step aside
+{ const visible = () => page.evaluate(() => [...document.querySelectorAll('.stage .tag')].some((el) => !el.hidden && el.offsetParent !== null && el.textContent.trim() === 'R⁻¹O'));
+  for (const lang of ['zh', 'en']) {
+    await page.click(`[data-lang-set="${lang}"]`); await settle(page);
+    const bad = [];
+    for (const deg of [1, 3, 8, 120, 355, 359, 360]) {
+      await seek(deg * DEG);
+      const all = await labelOverlaps(page), any = (await labelOverlaps(page, '.stage .tag', 0)).filter((pr) => pr.includes('R⁻¹O'));
+      if (all.length || any.length) bad.push(`${deg}°: ${JSON.stringify(all.concat(any))}`);
+    }
+    check(`PULLBACK (${lang}): no two stage labels overlap at ψ = 1°, 3°, 8°, 120°, 355°, 359° and 360° (the card's stop), none touches R⁻¹O`, bad.length === 0, bad.join(' | '));
+    await seek(2 * PI / 3);
+    check(`PULLBACK (${lang}): at ψ = 120° the R⁻¹O label is shown`, await visible());
+  }
+  await page.click('[data-lang-set="zh"]'); await settle(page); }
 await page.click('#axisChips [data-axis="O"]'); s = await state();
 worst = 0;
 for (let j = 0; j < 12; j++) { const psi = j * TAU / 12 + 0.05; s = await seek(psi); worst = Math.max(worst, norm(sub(s.Op, OP)), Math.abs(s.ra - dot(OP, V1)), Math.abs(s.rb - dot(OP, V2)), norm(sub(s.k, OP))); }
