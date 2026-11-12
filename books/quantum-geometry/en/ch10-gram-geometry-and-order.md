@@ -345,10 +345,6 @@ Notice that [@lemma-unit-gram-equality] requires overlap equal to $1$, not modul
 **Walked the other way, the handedness flips.** The same triangle taken as $N \to +Y \to +X \to N$: the magenta area is just as large, but the amber arrow turns $\frac{\pi}{2}$ the other way and the cyan needle at the lower right stops at $-\frac{\pi}{4}$. The three neighbouring squared moduli are still all $\frac{1}{2}$: squared moduli alone cannot tell the two walks apart.
 :::
 
-::: {.viz src="berry-loop" height="560"}
-The full lab: drag the cyan corners, add a corner on an edge or reverse the loop, and compare the magenta area, the turn of the amber arrow and the phase on the cyan needle at the lower right; the “Order” and “Comb” scenes are one click away.
-:::
-
 ### A Timeless Interpretation: How Gram Geometry Constrains Causally Compatible Choices {#sec-timeless-gram-causality}
 
 > **Author's Original Words**: *"The essence of order-independence is that sequential before-and-after time simply does not exist at all... and that is why causality is so necessary." This single sentence slices straight through the 2,500-year-old "riddle of time" and "Hume's knot of causality."*
@@ -427,6 +423,10 @@ Let us develop this insight across four interconnected pillars:
 3. **Parallelizability of the rotor group $S^3 \cong \mathrm{SU}(2) \subset \mathrm{Cl}^+_{3,0}$**: Unit rotors form the norm-one sphere $S^3 \cong \mathrm{SU}(2)$ in the even Clifford algebra $\mathrm{Cl}^+_{3,0}$, which has $\chi(S^3) = 0$ and is globally parallelized by the explicit frame $(pI_x, pI_y, pI_z)$ (rather than inferring parallelizability from $\chi(S^3) = 0$ alone). The map $\mathrm{SU}(2) \to \mathrm{SO}(3)$ is a double cover, not an isomorphism, and parallelizability of the total space $S^3$ does not yield a global section over $S^2$.
 4. **Berry phase as bundle holonomy** (M. V. Berry, *Proc. R. Soc. A* **392**, 45–57, 1984, DOI `10.1098/rspa.1984.0023`; B. Simon, *Phys. Rev. Lett.* **51**, 2167, 1983, DOI `10.1103/PhysRevLett.51.2167`): For the adiabatically transported spin-up eigenline with dynamical phase removed and orientation fixed, the geometric phase is $\gamma_B = -\Omega/2$. This holonomy persists when all complex information is retained, and pairwise Gram consistency never erases physical noncommutativity.
 5. **Hume's problem of causation, Spinoza's geometric necessity, and timeless quantum correlations** (D. Hume, *A Treatise of Human Nature*, 1739 / *An Enquiry Concerning Human Understanding*, 1748; B. Spinoza, *Ethica, Ordine Geometrico Demonstrata*, 1677, Part I, Prop. 17 Scholium; and, as developed further in [Chapter 29](ch29-timeless-causality-and-gram-space.md), B. S. DeWitt, *Phys. Rev.* **160**, 1113, 1967, and D. N. Page, W. K. Wootters, *Phys. Rev. D* **27**, 2885, 1983): The algebraic core of Section 4's discussion of order-independence and causal rigidity is the positive-semidefinite Gram determinant constraint $\det G(\mathbf{A},\mathbf{B},\mathbf{C}) \ge 0$ together with [@thm-gram-unitary-reconstruction]; connecting this structure to Hume's critique of temporal causation, Spinoza's geometric determinism, and timeless quantum states belongs to the philosophical and physical interpretation layer and is not formalized in the Lean codebase.
+:::
+
+::: {.viz src="berry-loop" height="560"}
+The full lab: drag the cyan corners, add a corner on an edge or reverse the loop, and compare the magenta area, the turn of the amber arrow and the phase on the cyan needle at the lower right; the “Order” and “Comb” scenes are one click away.
 :::
 
 Now that we understand how rotations, phases, and Gram matrices fit together on the sphere, how does an actual superconducting quantum processor execute these spherical rotations in hardware? Why do $X$ and $Y$ gates require tens of nanoseconds of microwave pulse area, whereas a $Z$ gate can be executed in **zero analog duration**? Let us step into [Chapter 11](ch11-pulses-and-virtual-z.md).

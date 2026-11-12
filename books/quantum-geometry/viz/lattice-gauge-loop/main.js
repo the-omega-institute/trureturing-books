@@ -22,6 +22,11 @@
     return `${x < 0 ? '−' : ''}${fix(Math.abs(x), 1)}°`;
   }
   const SUB = ['₀', '₁', '₂', '₃'];
+  /** Several phases in one line: as 1, i, −1, −i when every one of them is a quarter turn, otherwise all in degrees. */
+  function phList(ds) {
+    const quarter = ds.every((d) => { const x = wrap(d); return Math.abs(x / 90 - Math.round(x / 90)) < 0.05 / 90; });
+    return ds.map((d) => (quarter ? ph(d) : `${wrap(d) < 0 ? '−' : ''}${fix(Math.abs(wrap(d)), Math.abs(wrap(d) - Math.round(wrap(d))) < 0.05 ? 0 : 1)}°`)).join(' · ');
+  }
 
   /* ---------- lattices ---------- */
   /** '1': the worked example (4 corners, edges round the square); '2', '4': nx × ny squares, edges pointing right and up. */
@@ -124,6 +129,14 @@
     ctx.beginPath(); ctx.arc(x, y, r, 0, 2 * Math.PI);
     ctx.fillStyle = TRV.alpha(P.stage, 0.92); ctx.fill();
     ctx.strokeStyle = o.ring || P.faint; ctx.lineWidth = (o.ringW || 1.2) * k; ctx.stroke();
+    // the angle this hand has swept since s = 0: a faint band, a full ring once it has gone all the way round
+    if (o.sweep && Math.abs(o.sweep[1] - o.sweep[0]) > 0.5) {
+      const [d0, d1] = o.sweep, full = Math.abs(d1 - d0) >= 360 - 1e-6;
+      ctx.strokeStyle = TRV.alpha(o.sweepColor || P.ink, 0.26); ctx.lineWidth = r * 0.42; ctx.lineCap = 'butt';
+      ctx.beginPath();
+      if (full) ctx.arc(x, y, r * 0.62, 0, 2 * Math.PI); else ctx.arc(x, y, r * 0.62, -d0 * DEG, -d1 * DEG, d1 > d0);
+      ctx.stroke();
+    }
     ctx.strokeStyle = TRV.alpha(P.dim, 0.7); ctx.lineWidth = 1 * k;   // the direction of 1
     ctx.beginPath(); ctx.moveTo(x + r * 0.78, y); ctx.lineTo(x + r, y); ctx.stroke();
     const a = deg * DEG, hx = x + Math.cos(a) * r * 0.86, hy = y - Math.sin(a) * r * 0.86;
@@ -155,7 +168,7 @@
   function drawStage() {
     const G = S.G; layout();
     const st = stage, ctx = st.begin(), s = clock.t, now = snapshot(s), k = box.k, thumb = TRV.thumbMode;
-    const anc = anchors(), cyc = S.sel != null && !G.tree[S.sel] ? chordCycle(S.sel) : null;
+    const anc = anchors(), cyc = S.sel != null && !G.tree[S.sel] ? chordCycle(S.sel) : null, base = snapshot(0);
 
     // the fundamental loop of the selected chord: a dashed magenta outline just inside it, and its dial outside
     if (cyc) {
@@ -186,20 +199,21 @@
     G.squares.forEach((q, i) => {
       const [x, y] = qxy(q);
       loopArrow(ctx, x, y, box.rq + 7 * k, TRV.alpha(P.magenta, 0.7), k);
-      dial(ctx, x, y, box.rq, now.loops[i], P.magenta, { ring: P.magenta, ringW: 1.6, w: 3, glow: thumb ? 0 : 10 });
+      dial(ctx, x, y, box.rq, now.loops[i], P.magenta, { ring: P.magenta, ringW: 1.6, w: 3, glow: thumb ? 0 : 10, sweep: [base.loops[i], now.loops[i]], sweepColor: P.magenta });
       if (!thumb) st.tag(`q${i}`, [x, y + box.rq + 15], `<span class="c-mg">${ph(now.loops[i])}</span>`, 'num', { screen: true });
     });
     // edge dials
     G.E.forEach((ab, e) => {
       const [x, y] = exy(e), hot = S.hot && S.hot.kind === 'e' && S.hot.i === e;
-      dial(ctx, x, y, box.rd, now.phi[e], hot ? P.amber : P.ink, { ring: hot ? P.amber : (G.tree[e] ? TRV.alpha(P.cyan, 0.8) : P.faint), glow: hot ? 10 : 0 });
+      dial(ctx, x, y, box.rd, now.phi[e], hot ? P.amber : P.ink, { ring: hot ? P.amber : (G.tree[e] ? TRV.alpha(P.cyan, 0.8) : P.faint), glow: hot ? 10 : 0, sweep: [base.phi[e], now.phi[e]] });
       if (thumb || (box.narrow && G.id === '4')) return;   // on a phone the four-square hands speak for themselves
       const horiz = Math.abs(vxy(ab[0])[1] - vxy(ab[1])[1]) < 1, bottomRow = horiz && G.V[ab[0]][1] === 0 && G.V[ab[1]][1] === 0;
       const label = (G.ename[e] ? `${G.ename[e]} ` : '') + ph(now.phi[e]);
       // outer rows: above or below the dial; inner rows: up and to the right, clear of the square labels;
       // vertical edges: to the right (inside the single square for its right-hand edge, where there is room)
       const topRow = horiz && G.V[ab[0]][1] === G.ny, lw = box.rd + 8 + label.length * 3.3;
-      const rightCol = !horiz && G.V[ab[0]][0] === G.nx && G.id === '1';
+      // the right column goes inside when it is the single square, or when the outer dial sits just to its right
+      const rightCol = !horiz && G.V[ab[0]][0] === G.nx && (G.id === '1' || (cyc && G.id === '2'));
       const off = horiz ? (bottomRow ? [0, box.rd + 13] : topRow ? [0, -(box.rd + 12)] : [lw, -(box.rd + 2)]) : [rightCol ? -lw : lw, 0];
       st.tag(`e${e}`, [x + off[0], y + off[1]], label, hot ? 'num hot' : 'num', { screen: true });
     });
@@ -224,22 +238,26 @@
     // outside dials: the loop of the selected chord, and the tree-path phase to the far anchor
     if (!thumb && cyc && G.id === '2') {
       const ys = cyc.map((v) => vxy(v)[1]), y = (Math.min(...ys) + Math.max(...ys)) / 2, x = box.outX;
-      dial(ctx, x, y, box.rq * 0.8, now.chi[S.sel], P.magenta, { ring: P.magenta, ringW: 1.6, w: 3, glow: 10 });
+      dial(ctx, x, y, box.rq * 0.8, now.chi[S.sel], P.magenta, { ring: P.magenta, ringW: 1.6, w: 3, glow: 10, sweep: [base.chi[S.sel], now.chi[S.sel]], sweepColor: P.magenta });
       st.tag('cyc', [x, y + box.rq * 0.8 + 15], `<span class="c-mg">${L('外圈', 'outer')} ${ph(now.chi[S.sel])}</span>`, 'num', { screen: true });
     }
     if (!thumb && anc.length > 1) {
       const [, y] = vxy(G.far), x = box.outX, yy = y + box.sp * 0.32;
-      dial(ctx, x, yy, box.rq * 0.8, now.rp[G.far], P.cyan, { ring: P.cyan, ringW: 1.6, w: 3, glow: 10 });
+      dial(ctx, x, yy, box.rq * 0.8, now.rp[G.far], P.cyan, { ring: P.cyan, ringW: 1.6, w: 3, glow: 10, sweep: [base.rp[G.far], now.rp[G.far]], sweepColor: P.cyan });
       st.tag('anc', [x, yy + box.rq * 0.8 + 15], `<span class="c-cy">r → a ${ph(now.rp[G.far])}</span>`, 'num', { screen: true });
     }
     st.end();
 
     // the title line and its explanation
-    const base = snapshot(0), turn = Math.max(0, ...now.phi.map((p, e) => Math.abs(p - base.phi[e])));
+    const turn = Math.max(0, ...now.phi.map((p, e) => Math.abs(p - base.phi[e])));
     const moved = Math.max(0, ...now.loops.map((x, i) => Math.abs(wrap(x - base.loops[i]))));
     const kind = G.id === '1' ? L('单格', 'One square') : G.id === '2' ? L('两格', 'Two squares') : L('四格', 'Four squares');
-    $('hudBig').textContent = `${kind} · ${L('回路', 'loop')} ${now.loops.map(ph).join(' · ')}`;
-    $('hudSub').textContent = L(`s = ${fix(s, 2)} · 边最多转了 ${fix(turn, 0)}° · 回路相位变了 ${fix(moved, 0)}°`, `s = ${fix(s, 2)} · edges turned up to ${fix(turn, 0)}° · loop phases moved ${fix(moved, 0)}°`);
+    $('hudBig').textContent = `${kind} · ${L('回路', 'loop')} ${phList(now.loops)}`;
+    if (G.id === '2' && S.sel != null && !G.tree[S.sel]) {
+      const d = (a, b) => { const x = wrap(a - b); return `${x > 0 ? '+' : x < 0 ? '−' : ''}${fix(Math.abs(x), 0)}°`; };
+      const dl = d(now.loops[0], base.loops[0]), dr = d(now.loops[1], base.loops[1]), dc = d(now.chi[S.sel], base.chi[S.sel]);
+      $('hudSub').textContent = L(`s = ${fix(s, 2)} · 边最多转了 ${fix(turn, 0)}° · 回路变了：左格 ${dl}、右格 ${dr}、外圈 ${dc}`, `s = ${fix(s, 2)} · edges turned up to ${fix(turn, 0)}° · loops moved: left ${dl}, right ${dr}, outer ${dc}`);
+    } else $('hudSub').textContent = L(`s = ${fix(s, 2)} · 边最多转了 ${fix(turn, 0)}° · 回路相位变了 ${fix(moved, 0)}°`, `s = ${fix(s, 2)} · edges turned up to ${fix(turn, 0)}° · loop phases moved ${fix(moved, 0)}°`);
   }
 
   /* ---------- strip: every edge and every loop along the rail ---------- */
@@ -342,7 +360,7 @@
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
-    twist: { lat: '1', anc: 'root', th: [0, 360, 0, 0], hot: { kind: 'v', i: 1 }, still: 0.375 },
+    twist: { lat: '1', anc: 'root', th: [0, 360, 0, 0], hot: { kind: 'v', i: 1 }, still: 0.875 },
     chord: { lat: '2', anc: 'root', th: [0, 135, -105, 60, -150, 90], still: 1 },
     anchor: { lat: '4', anc: 'far', th: [0, 120, -75, 150, -135, 45, 90, -60, 0], still: 1 },
     tree: { lat: '4', anc: 'root', th: 'tree', still: 1 },
@@ -350,18 +368,18 @@
     plaquette: { lat: '1', anc: 'root', th: [0, 90, 180, 270], still: 1 }
   };
   const NOTES = {
-    twist: ['单个方格，只拧顶点 1 一整圈（琥珀色）：e₀ 与 e₁ 的指针一个顺转、一个逆转，各自转遍所有值；品红的回路相位一直停在 i。',
-      'One square, and only corner 1 turns a full circle (amber): the hands on e₀ and e₁ turn opposite ways and each passes through every value; the magenta loop phase stays at i.'],
-    chord: ['两格。青色的生成树是上下两行与最左一列，右边那条弦的基本回路是品红虚线围出的整个长方形。除根以外的顶点一起拧：每条边的指针都在转，两格与外圈的品红指针都不动。',
-      'Two squares. The cyan tree is the top and bottom rows and the leftmost column; the fundamental loop of the right-hand chord is the whole rectangle inside the dashed magenta line. Every corner but the root turns: every hand on an edge moves, while the magenta hands of both squares and of the outer loop stay put.'],
-    anchor: ['四格，根 r 与右上角 a 都是锁住的方块。其余顶点随意拧：青色带子标出的树路径 r → a 上，每条边都在转，路径相位（右侧青色指针）不动。',
-      'Four squares, with the root r and the top-right corner a both locked squares. The other corners turn freely: every edge along the tree path r → a (the cyan band) moves, yet the path phase (the cyan hand on the right) stays put.'],
+    twist: ['单个方格，只拧顶点 1 一整圈（琥珀色）：e₀ 与 e₁ 的指针一个顺转、一个逆转，各自转遍所有值（淡白的弧是它们已扫过的角度）；品红的回路相位一直停在 i，表盘上没有弧。',
+      'One square, and only corner 1 turns a full circle (amber): the hands on e₀ and e₁ turn opposite ways and each passes through every value (the faint arcs are the angles they have swept); the magenta loop phase stays at i, with no arc on its dial.'],
+    chord: ['两格。青色的生成树是上下两行与最左一列，右边那条弦的基本回路是品红虚线围出的整个长方形。除根以外的顶点一起拧：每条边的指针都在转，淡白的弧是它们扫过的角度；两格与外圈的品红指针都不动，表盘上没有弧。',
+      'Two squares. The cyan tree is the top and bottom rows and the leftmost column; the fundamental loop of the right-hand chord is the whole rectangle inside the dashed magenta line. Every corner but the root turns: every hand on an edge moves, and the faint arcs are the angles they sweep; the magenta hands of both squares and of the outer loop stay put, with no arc on their dials.'],
+    anchor: ['四格，根 r 与右上角 a 都是锁住的方块。其余顶点随意拧：青色带子标出的树路径 r → a 上，每条边都在转（淡白的弧是扫过的角度），路径相位（右侧青色指针）不动，表盘上没有弧。',
+      'Four squares, with the root r and the top-right corner a both locked squares. The other corners turn freely: every edge along the tree path r → a (the cyan band) moves (the faint arcs are the angles swept), yet the path phase (the cyan hand on the right) stays put, with no arc on its dial.'],
     tree: ['四格。时间轴把每个顶点拧到它的树输运相位的倒数：青色的 8 条树边全部转到 1，4 条弦上剩下各自基本回路的相位。中间一列的弦等于它左边那一格，右边一列的弦等于同一行两格相乘。',
       'Four squares. The rail turns every corner by the inverse of its tree transport phase: all 8 cyan tree edges turn to 1, and the 4 chords keep the phases of their fundamental loops. A chord in the middle column equals the square to its left; a chord in the right column equals the product of the two squares in its row.'],
-    two: ['两格，只转中间那条公共边（琥珀色）：左格的品红指针朝一边转，右格朝另一边转，外圈的指针不动。公共边在两格里走的方向相反，相乘时抵消。',
-      'Two squares, and only the shared middle edge turns (amber): the magenta hand of the left square turns one way, the right square the other, and the outer loop does not move. The shared edge is walked in opposite directions in the two squares, so it cancels in the product.'],
-    plaquette: ['正文例题：边相位 (1, 1, 1, i)，规范 g = (1, i, −1, −i)。走完时间轴，四条边变成 (i, i, i, −1)，品红的回路相位始终是 i。',
-      'The worked example: edge phases (1, 1, 1, i) and the gauge g = (1, i, −1, −i). At the end of the rail the four edges read (i, i, i, −1), and the magenta loop phase is i throughout.']
+    two: ['两格，只转中间那条公共边（琥珀色）：左格的品红指针转了 +150°，右格转了 −150°（淡品红的弧），外圈的指针不动、没有弧。公共边在两格里走的方向相反，相乘时抵消。',
+      'Two squares, and only the shared middle edge turns (amber): the magenta hand of the left square turns by +150°, the right square by −150° (the faint magenta arcs), and the outer loop does not move and has no arc. The shared edge is walked in opposite directions in the two squares, so it cancels in the product.'],
+    plaquette: ['正文例题：边相位 (1, 1, 1, i)，规范 g = (1, i, −1, −i)。走完时间轴，四条边变成 (i, i, i, −1)，淡白的弧是各边指针扫过的角度；品红的回路相位始终是 i，表盘上没有弧。',
+      'The worked example: edge phases (1, 1, 1, i) and the gauge g = (1, i, −1, −i). At the end of the rail the four edges read (i, i, i, −1), and the faint arcs are the angles their hands swept; the magenta loop phase is i throughout, with no arc on its dial.']
   };
   let booting = true;
   function applyPreset(id) {
@@ -384,7 +402,7 @@
   /* ---------- probe for the browser suite, cover, start ---------- */
   window.GAUGE_DEBUG = {
     get state() {
-      const G = S.G, now = snapshot(clock.t);
+      const G = S.G, now = snapshot(clock.t), base = snapshot(0);
       return {
         lattice: G.id, s: clock.t, playing: clock.playing, preset: cards.current, anc: S.anc,
         V: G.V.map((p) => p.slice()), E: G.E.map((e) => e.slice()), tree: G.tree.slice(), root: G.root, far: G.far,
@@ -392,7 +410,9 @@
         phi: now.phi.map(wrap), gauge: S.th.map((x) => wrap(clock.t * x)), loops: now.loops.map(wrap),
         chi: now.chi.map((x) => (x == null ? null : wrap(x))), rootPhase: now.rp.map(wrap),
         counts: { n: now.n, m: now.m, k: now.k, T: now.T, c: now.c, a: now.a, inv: now.c + now.a },
-        loopText: $('roLoop').textContent, invText: $('roInv').textContent
+        loopText: $('roLoop').textContent, invText: $('roInv').textContent, hud: $('hudBig').textContent, hudSub: $('hudSub').textContent,
+        // the angle each hand has swept since s = 0 (what the faint arcs show)
+        swept: { phi: now.phi.map((p, e) => p - base.phi[e]), loops: now.loops.map((x, i) => x - base.loops[i]) }
       };
     },
     seek: (t) => { clock.pause(); clock.set(t); },
