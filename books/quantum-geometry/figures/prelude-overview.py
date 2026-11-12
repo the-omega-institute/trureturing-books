@@ -2,8 +2,8 @@
 The prelude at a glance: a ray met head-on becomes a point, two arrows in a plane span an oriented
 area, and the old sphere is the equator of the new one.
 
-Panel I: the line of sight O and the ray A are the same unit direction (O · A = 1), so the ray is seen
-as one point. Panel II: unit vectors A and B at the directed angle θ = 50° in the orientation Î; the
+Panel I: sight O and the source-facing geometric direction A agree (O · A = 1); incoming light
+travels along −A and is seen as one point. Panel II: unit vectors A and B at the directed angle θ = 50° in the orientation Î; the
 parallelogram they span has area sin θ (asserted). Panel III: S^{n−1} drawn as the equator of S^n, with
 the new normal direction ±e_{n+1} as the poles (the picture for n = 2).
 """
@@ -13,12 +13,12 @@ import math
 SIZE = (740, 270)
 WRAP = True
 ALT = {
-    "zh": "三栏。第一栏：左边一只眼睛，一根青色的射线 A 从右边迎面射进眼里，琥珀色的视线 O 与它在同一条直线上，标着 O·A = 1；"
+    "zh": "三栏。第一栏：左边一只眼睛，青色的入射光沿 −A 从右边迎面射进眼里；A 是从眼睛指向光源的单位几何方向，与琥珀色的视线 O 同向，标着 O·A = 1；"
           "下方一个小圆是眼睛看到的样子：正中只有一个亮点。第二栏：两支单位箭头 A（灰）与 B（琥珀）从同一点出发，夹角 θ，"
           "按带箭头的小圈 Î 所示的方向从 A 转到 B；它们张成的平行四边形涂成品红，标着 A∧B = sin θ Î。"
           "第三栏：一个球，赤道画成青色，标着 S^{n−1}；球的轮廓标着 S^{n}；一根紫色的竖轴穿过两极，两极标着 ±e_{n+1}。",
-    "en": "Three panels. Panel I: an eye on the left, a cyan ray A coming straight into it from the right, and the amber line "
-          "of sight O on the same straight line, labelled O·A = 1; a small circle below shows what the eye sees: a single "
+    "en": "Three panels. Panel I: an eye on the left, cyan incident light arriving from the right along −A; A is the unit geometric "
+          "direction from the eye toward the source, aligned with the amber line of sight O, labelled O·A = 1; a small circle below shows what the eye sees: a single "
           "bright point in the middle. Panel II: two unit arrows A (grey) and B (amber) from one point at the angle θ, turning "
           "from A to B in the sense of the small looped arrow Î; the parallelogram they span is magenta, labelled "
           "A∧B = sin θ Î. Panel III: a sphere whose equator is cyan and labelled S^{n−1}, its outline labelled S^{n}, and a "
@@ -48,10 +48,10 @@ def draw(fig):
     eye(one, 40, y)
     one.line(222, y, 66, y, "line", 3.2)
     one.arrow_head(160, y, 180, "line", head=12)
-    one.text(206, y - 14, "*A*", size=15, color="line", anchor="middle")
+    one.text(206, y - 14, "−*A*", size=15, color="line", anchor="middle")
     one.arrow(64, y, 124, y, "now", 2.0, head=8)
     one.text(96, y + 22, "*O*", size=15, color="now", anchor="middle")
-    o, a = (1.0, 0.0), (1.0, 0.0)                            # sight and ray: the same unit direction
+    o, a = (1.0, 0.0), (1.0, 0.0)                            # Unit sight O and source-facing A agree; the inward cyan propagation arrow is −A.
     assert o[0] * a[0] + o[1] * a[1] == 1.0
     one.text(118, 146, "*O*·*A* = 1", size=14, color="ink", anchor="middle")
     one.circle(118, 206, 34, color="dim", fill="panel", width=1.4)

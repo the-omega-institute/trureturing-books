@@ -127,7 +127,7 @@ In our geometric interpretation (`MODEL`), geometric or algebraic structure used
 
 The three items of [@rem-ch30-karmarkar-kasteleyn-literature] are literature only. There is, however, a small discrete problem in which both the "field" and the "line" can be written down as exact mathematics and handed to the kernel: coloring the vertices of a graph.
 
-Start with the smallest odd cycle, the pentagon $C_5$: vertices $0, 1, 2, 3, 4$, edges $01, 12, 23, 34, 40$. Paint the vertices with the colors $c = (0, 1, 0, 1, 2)$; no two neighbors share a color. Read the color as a height, and this is a three-level field on the vertices. Now let every edge point towards its higher-colored end:
+Start with an odd cycle, the pentagon $C_5$: vertices $0, 1, 2, 3, 4$, edges $01, 12, 23, 34, 40$. Paint the vertices with the colors $c = (0, 1, 0, 1, 2)$; no two neighbors share a color. Read the color as a height, and this is a three-level field on the vertices. Now let every edge point towards its higher-colored end:
 
 $$
 0 \to 1, \qquad 2 \to 1, \qquad 2 \to 3, \qquad 3 \to 4, \qquad 0 \to 4 .

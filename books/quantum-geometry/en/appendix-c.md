@@ -14,7 +14,7 @@ This appendix serves as the **Master Audit Ledger** of the epistemic boundaries 
 
 ## C.1 Verified and Frozen Lean 4 Theorems (241 Unique `theorem` GIDs) {#sec-appendix-c-theorems}
 
-The table below lists in alphabetical module order all **241 unique frozen theorems** bound to formal environments and media components across the monograph (spanning 317 theorem-level formal anchor slots including cross-chapter reuse). Click any declaration name to jump directly to its Lean 4 source file and line:
+The table below lists in alphabetical module order all **241 unique frozen theorems** bound to formal environments and media components across the monograph (spanning 322 theorem-level formal anchor slots including cross-chapter reuse). Click any declaration name to jump directly to its Lean 4 source file and line:
 
 ::: {.figure src="appc-theorems-by-chapter"}
 **How many frozen theorems each chapter's theorem environments cite with `lean=`.** The horizontal axis runs from Chapter 1 to Chapter 39 and the Coda (C), grouped into light part bands (I–X); each green bar counts the verified theorems cited in that chapter, counting once per chapter when a theorem is reused across chapters. Chapter 22 is tallest with $35$, followed by Chapter 30 with $20$, Chapter 4 with $17$, Chapter 24 with $16$, Chapter 29 with $13$, and the coda with $13$; every other chapter cites $4$ to $10$. The bars sum to $322$, computed directly from `trureturing.lock.json` and the Chinese chapters and checked chapter-by-chapter against the last column of the table below; all $241$ frozen theorems in the table appear in at least one bar (with `T042` cited both by a Chapter 35 theorem environment and by `viz/sphere-escape`).

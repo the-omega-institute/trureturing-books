@@ -17,6 +17,8 @@
     const k1 = F(p, rho), k2 = F([p[0] + h * k1[0] / 2, p[1] + h * k1[1] / 2, p[2] + h * k1[2] / 2], rho), k3 = F([p[0] + h * k2[0] / 2, p[1] + h * k2[1] / 2, p[2] + h * k2[2] / 2], rho), k4 = F([p[0] + h * k3[0], p[1] + h * k3[1], p[2] + h * k3[2]], rho);
     return [p[0] + h * (k1[0] + 2 * k2[0] + 2 * k3[0] + k4[0]) / 6, p[1] + h * (k1[1] + 2 * k2[1] + 2 * k3[1] + k4[1]) / 6, p[2] + h * (k1[2] + 2 * k2[2] + 2 * k3[2] + k4[2]) / 6];
   }
+  /** At ρ = 14 the two stable equilibria C± = (±√(β(ρ − 1)), ±√(β(ρ − 1)), ρ − 1); which one an orbit reaches depends on its start. */
+  const sinks = (rho) => { const r = Math.sqrt(BETA * (rho - 1)); return [[r, r, rho - 1], [-r, -r, rho - 1]]; };
   const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
   const unit = (v) => { const n = Math.hypot(v[0], v[1], v[2]) || 1; return [v[0] / n, v[1] / n, v[2] / n]; };
 
@@ -91,14 +93,28 @@
   }
 
   /* ---------- the stage ---------- */
+  const SINK_R = 4, SINK_PAD = 8;   // px: the ring of a stable point, and the margin its label keeps from the canvas edge
   const st = kit.stage3($('stage'), { canvas: $('cv'), yaw: -0.42, pitch: 0.14, zoom: 1, radius: 0.44, wheel: false, onChange: () => paint() });
   const trail = (W, pts, upTo, color, width) => { const n = Math.min(pts.length, upTo + 1), out = []; for (let i = 0; i < n; i++) out.push(toStage(W, pts[i])); if (out.length > 1) st.path(out, { color, width, back: 0.45 }); };
+  /** Where a stable point falls on the canvas: [x, y] in CSS pixels and the side (−1 left, 1 right, 0 neither) on which its ring is not wholly inside. */
+  const sinkView = (v) => { const p = st.p(v); return { x: p[0], y: p[1], off: p[0] < SINK_R ? -1 : p[0] > st.W - SINK_R ? 1 : 0 }; };
+  /** The label of a stable point, kept whole inside the canvas: placed under the ring, then moved in by its measured size.
+      On a narrow stage the fixed camera leaves the point itself just past the edge; the label then carries an arrow towards it. */
+  function sinkTag(k, v, cls) {
+    const key = `sink${k}`, name = k ? L('稳定点 C−', 'stable point C−') : L('稳定点 C+', 'stable point C+'), at = sinkView(v);
+    const text = at.off < 0 ? `← ${name}` : at.off > 0 ? `${name} →` : name;
+    st.tag(key, v, text, cls, { dy: 26, fade: false });
+    const el = [...$('stage').querySelectorAll('.tags .tag')].find((t) => !t.hidden && t.textContent === text); if (!el) return;
+    const w = el.offsetWidth / 2 + SINK_PAD, h = el.offsetHeight / 2 + SINK_PAD, x = clamp(at.x, w, Math.max(w, st.W - w)), y = clamp(at.y + 26, h, Math.max(h, st.H - h));
+    if (x !== at.x || y !== at.y + 26) st.tag(key, v, text, cls, { dx: x - at.x, dy: y - at.y, fade: false });
+  }
   const state = () => {      // what the current frame shows, for the picture, the words and the probe
     const W = world(S.rho);
     if (S.scene === 'rounds') {
       const R = rounds(W, S.seed), i = Math.round(clamp(clock.t, 0, TR) / H), last = R.map((r) => r.visits.filter((v) => v.i <= i)), a = last[0][last[0].length - 1], b = last[1][last[1].length - 1];
       const cos = a && b ? clamp(a.dir[0] * b.dir[0] + a.dir[1] * b.dir[1] + a.dir[2] * b.dir[2], -1, 1) : null;
-      return { W, R, i, counts: last.map((v) => v.length), latest: [a || null, b || null], cos, angle: cos == null ? null : Math.acos(cos) * 180 / Math.PI, gap: dist(R[0].pts[i], R[1].pts[i]), now: [R[0].pts[i], R[1].pts[i]] };
+      const ends = S.rho === 14 ? R.map((r) => { const e = r.pts[r.pts.length - 1], [cp, cm] = sinks(14); return dist(e, cp) < dist(e, cm) ? '+' : '−'; }) : null;
+      return { W, R, i, counts: last.map((v) => v.length), latest: [a || null, b || null], cos, angle: cos == null ? null : Math.acos(cos) * 180 / Math.PI, gap: dist(R[0].pts[i], R[1].pts[i]), now: [R[0].pts[i], R[1].pts[i]], ends };
     }
     if (S.scene === 'shrink') { const C = cloud(W), t = clamp(clock.t, 0, TS); return { W, C, t, frame: Math.round(t / 0.02), exact: Math.exp(DIV * t), det: C.det[Math.round(t / H)] }; }
     const Ly = lyap(W), T = clamp(clock.t, 0, TD), k = Math.max(1, Math.min(Ly.samples.length - 1, Math.round(T / 0.5))), l = Ly.samples[k].slice(1);
@@ -111,6 +127,7 @@
       const rp = st.p(toStage(W, W.ruin)), rr = EPS / W.half * st.unit;
       ctx.strokeStyle = P.amber; ctx.lineWidth = 2; ctx.shadowColor = P.amber; ctx.shadowBlur = 10; ctx.beginPath(); ctx.arc(rp[0], rp[1], Math.max(rr, 5), 0, kit.TAU); ctx.stroke(); ctx.shadowBlur = 0;
       q.R.forEach((r, k) => { r.visits.filter((v) => v.i <= q.i).forEach((v) => st.dot(toStage(W, r.pts[v.i]), 2.6, P.amber, { fade: false })); st.dot(toStage(W, r.start), 4, k ? P.magenta : P.cyan, { ring: true, fade: false }); st.dot(toStage(W, q.now[k]), 5, k ? P.magenta : P.cyan, { glow: 12, fade: false }); });
+      if (q.ends) sinks(14).forEach((c, k) => { st.dot(toStage(W, c), 3.4, P.ink, { ring: true, fade: false }); if (words) sinkTag(k, toStage(W, c), `${q.ends[0] === (k ? '−' : '+') ? 'cy' : 'mg'} raw`); });
       if (words) { st.tag('ruin', toStage(W, W.ruin), L('遗迹的邻域', 'around the ruin'), 'hot raw', { dy: -Math.max(rr, 5) - 12 }); st.tag('s0', toStage(W, q.R[0].start), L('第 k 轮起点', 'start of round k'), 'cy raw', { dy: 14 }); st.tag('s1', toStage(W, q.R[1].start), L('第 k+1 轮起点', 'start of round k+1'), 'mg raw', { dy: -14 }); }
     } else if (S.scene === 'shrink') {
       const c = q.C, s = c.side, corner = (a, b, d) => toStage(W, [W.c[0] + a * s, W.c[1] + b * s, W.c[2] + d * s]);
@@ -190,7 +207,7 @@
     shrink: [['cy', '500 个点', '500 points'], ['dm', '出发时的立方体', 'the cube they start in']],
     dimension: [['cy', '一条长轨道', 'one long orbit'], ['am', '此刻', 'now']]
   };
-  const kind = (rho) => (rho === 28 ? L('奇异吸引子', 'a strange attractor') : rho === 14 ? L('不动点', 'a fixed point') : L('闭合的环', 'a closed loop'));
+  const kind = (rho) => (rho === 28 ? L('奇异吸引子', 'a strange attractor') : rho === 14 ? L('两个稳定不动点之一', 'one of two stable fixed points') : L('闭合的环', 'a closed loop'));
   function drawText(q) {
     const set = (i, lab, val) => { $(`roL${i}`).textContent = lab; $(`ro${i}`).innerHTML = val; };
     let big, hud, what, key, note;
@@ -201,8 +218,10 @@
         : L(`经过遗迹：${q.counts[0]} 次与 ${q.counts[1]} 次 · 最近两次的方向夹角 ${fix(q.angle, 1)}°`, `passages by the ruin: ${q.counts[0]} and ${q.counts[1]} · the latest two differ in direction by ${fix(q.angle, 1)}°`);
       $('roKeyL').textContent = L('两轮最近一次经过时的方向内积 cos δθ', 'inner product of the directions of the latest passages, cos δθ'); $('roKey').innerHTML = q.cos == null ? '—' : `<span class="c-am">${fix(q.cos, 4)}</span>`; $('roKeySub').textContent = q.cos == null ? L('还没有都经过', 'not both have passed yet') : `δθ = ${fix(q.angle, 2)}°`;
       set(1, L('第 k 轮经过次数', 'passages of round k'), String(q.counts[0])); set(2, L('第 k+1 轮经过次数', 'passages of round k+1'), String(q.counts[1]));
-      set(3, L('两轮此刻相距', 'distance between the rounds now'), fix(q.gap, 2)); set(4, L('两个起点相距', 'distance between the starts'), fix(dist(q.R[0].start, q.R[1].start), 1));
-      note = S.rho === 28 ? L('两条轨道从不重合，也不同步；它们共享的只是这对翅膀，和每次路过遗迹时的方向。', 'The two orbits never coincide and do not keep step; what they share is the pair of wings, and the direction in which they pass the ruin.') : S.rho === 14 ? L('ρ = 14：两轮各自螺旋落进一个不动点，然后不再动。没有回访，也没有选择。', 'ρ = 14: each round spirals into a fixed point and then stays. No return, and no choice.') : L('ρ = 160：两轮落到同一条闭合的环上，一圈圈重复同样的路。', 'ρ = 160: both rounds land on the same closed loop and repeat the same path, lap after lap.');
+      set(3, L('两轮此刻相距', 'distance between the rounds now'), fix(q.gap, 2));
+      if (q.ends) set(4, L('t = 40 时落到的稳定点', 'stable point reached by t = 40'), `<span class="c-cy">C${q.ends[0]}</span> · <span class="c-mg">C${q.ends[1]}</span>`); else set(4, L('两个起点相距', 'distance between the starts'), fix(dist(q.R[0].start, q.R[1].start), 1));
+      note = S.rho === 28 ? L('两条轨道从不重合，也不同步；它们共享的只是这对翅膀，和每次路过遗迹时的方向。', 'The two orbits never coincide and do not keep step; what they share is the pair of wings, and the direction in which they pass the ruin.') : S.rho === 14 ? (q.ends[0] !== q.ends[1] ? L(`ρ = 14：参数相同，却有两个稳定点 C±；第 k 轮落进 C${q.ends[0]}，第 k+1 轮落进 C${q.ends[1]}，然后不再动。参数只给出可去的吸引子，去哪一个由起点所在的吸引域决定。`, `ρ = 14: the same parameters, yet two stable points C±; round k falls into C${q.ends[0]}, round k+1 into C${q.ends[1]}, and both then stay. The parameters only offer the attractors; which one is reached depends on the basin of the start.`)
+        : L(`ρ = 14：两个稳定点 C±；这两轮都落进 C${q.ends[0]}，然后不再动。去哪一个由起点所在的吸引域决定。`, `ρ = 14: two stable points C±; both rounds fall into C${q.ends[0]} and then stay. Which one is reached depends on the basin of the start.`)) : L('ρ = 160：两轮落到同一条闭合的环上，一圈圈重复同样的路。', 'ρ = 160: both rounds land on the same closed loop and repeat the same path, lap after lap.');
       what = `t = ${fix(t, 1)}`; key = q.cos == null ? '—' : `cos δθ = ${fix(q.cos, 3)}`;
     } else if (S.scene === 'shrink') {
       big = L(`体积收缩 · t = ${fix(q.t, 2)}`, `Contraction of volume · t = ${fix(q.t, 2)}`);
@@ -259,7 +278,7 @@
     shrink: ['500 个点从一个立方体里出发。不到一个时间单位，它们就被压到一张薄片上：体积按 e^(−41t/3) 缩小。', '500 points start inside a cube. In less than one unit of time they are pressed onto a thin sheet: the volume shrinks like e^(−41t/3).'],
     sheet: ['t = 2：体积只剩出发时的约 10⁻¹²。点还散布在整对翅膀上，只是没有厚度了。', 't = 2: about 10⁻¹² of the starting volume is left. The points still spread over the whole pair of wings; they have just lost their thickness.'],
     dimension: ['沿一条长轨道估计三个李雅普诺夫指数：一个为正，一个为零，一个约 −14.57。由它们算出的维数约 2.06：比一张面多一点，远不到一块体。', 'Estimate the three Lyapunov exponents along one long orbit: one positive, one zero, one about −14.57. The dimension they give is about 2.06: a little more than a surface, far from a solid.'],
-    fixed: ['把参数换成 ρ = 14：两轮各自螺旋落进一个不动点，然后不再动。换了内禀参数，就不是那对翅膀了。', 'Change the parameter to ρ = 14: each round spirals into a fixed point and then stays. With other intrinsic parameters the wings are gone.'],
+    fixed: ['把参数换成 ρ = 14：翅膀没有了，只剩两个稳定点 C+ 与 C−。两轮参数相同，却螺旋落进相反的两个点，然后不再动：参数给出可去的吸引子，起点所在的吸引域决定去哪一个。', 'Change the parameter to ρ = 14: the wings are gone, and only two stable points C+ and C− remain. The two rounds share the parameters yet spiral into opposite points and then stay: the parameters offer the attractors, and the basin of the start decides which one is reached.'],
     cycle: ['ρ = 160：两轮落到同一条闭合的环上，每一圈都踩在同一处。这是一维的吸引子：重复，但没有余地。', 'ρ = 160: both rounds land on the same closed loop and tread the same place on every lap. This is a one-dimensional attractor: it repeats, with no room to spare.']
   };
   let booting = true;
@@ -280,7 +299,7 @@
   window.ATTRACTOR_DEBUG = {
     get state() {
       const q = state(), out = { scene: S.scene, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, rho: S.rho, seed: S.seed, ruin: q.W.ruin.slice(), half: q.W.half, eps: EPS, div: DIV };
-      if (S.scene === 'rounds') Object.assign(out, { counts: q.counts, cos: q.cos, angle: q.angle, gap: q.gap, now: q.now, starts: q.R.map((r) => r.start), visits: q.R.map((r) => r.visits.map((v) => ({ t: v.t, d: v.d, dir: v.dir }))) });
+      if (S.scene === 'rounds') Object.assign(out, { ends: q.ends, sinks: S.rho === 14 ? sinks(14) : null, sinkViews: S.rho === 14 ? sinks(14).map((c) => sinkView(toStage(q.W, c))) : null, canvas: [st.W, st.H], counts: q.counts, cos: q.cos, angle: q.angle, gap: q.gap, now: q.now, starts: q.R.map((r) => r.start), visits: q.R.map((r) => r.visits.map((v) => ({ t: v.t, d: v.d, dir: v.dir }))) });
       else if (S.scene === 'shrink') Object.assign(out, { exact: q.exact, det: q.det, frame: q.frame, thickness: q.C.thick[Math.round(q.frame / 2)] / q.C.thick[0] });
       else Object.assign(out, { lyap: q.l, sum: q.sum, dky: q.dky });
       return out;
