@@ -2,22 +2,22 @@
 
 This appendix serves as the **Master Audit Ledger** of the epistemic boundaries governing this monograph. Under the Epistemic Contract established in the Prelude, every mathematical claim in the book belongs to one of three strictly segregated tiers, verified entry-by-entry against `trureturing.lock.json` (pinned to `trureturing@dev` commit [{commit}](trureturing:)):
 
-1. **C.1 Frozen Theorem Index (251 Unique `theorem` Declarations)**: Every environment of kind `theorem`, `lemma`, `proposition`, or `corollary`—as well as every `lean:` anchor in interactive visualizations, short films, and lecture slides—must resolve its `lean="<GID>"` attribute to a `sorry`-free, kernel-verified `theorem` declaration in `Golden/Frozen/state/<module>.lean.json`;
-2. **C.2 Formal Definition & Carrier Index (95 Unique `definition` / `structure` / `inductive` Declarations)**: Foundational algebraic carriers, spinor types, and quantum-state definitions bound to `definition` environments or media anchors, paired with **C.2.1 Inline Auxiliary Theorems & Definitions (133 Unique Declarations)**—accounting together with C.1 and C.2 for all **479 unique locked declarations** in `trureturing.lock.json` (`251 + 95 + 133 = 479`);
+1. **C.1 Frozen Theorem Index (252 Unique `theorem` Declarations)**: Every environment of kind `theorem`, `lemma`, `proposition`, or `corollary`—as well as every `lean:` anchor in interactive visualizations, short films, and lecture slides—must resolve its `lean="<GID>"` attribute to a `sorry`-free, kernel-verified `theorem` declaration in `Golden/Frozen/state/<module>.lean.json`;
+2. **C.2 Formal Definition & Carrier Index (95 Unique `definition` / `structure` / `inductive` Declarations)**: Foundational algebraic carriers, spinor types, and quantum-state definitions bound to `definition` environments or media anchors, paired with **C.2.1 Inline Auxiliary Theorems & Definitions (133 Unique Declarations)**—accounting together with C.1 and C.2 for all **480 unique locked declarations** in `trureturing.lock.json` (`252 + 95 + 133 = 480`);
 3. **C.3 Open Problems & Literature Boundary Register (8 Entries: 6 `conjecture` / `OPEN` Environments + 2 Literature Boundary `remark`s)**: Unresolved conjectures and unformalized external mathematical-physics results are strictly quarantined inside `lean`-free `conjecture` boxes (red `OPEN` badge) or explicitly attributed `remark` environments, never impersonating kernel-verified theorems.
 
 ::: {.viz src="lean-declaration-map" preset="all" height="500"}
-**479 cells, one for each entry in the lock.** Scrub the timeline from the Prelude to Appendix B and watch each declaration land in the column of the chapter that first cites it: green cells are `theorem` entries in the lock, grey cells are definitions, and hollow cells appear in inline links only. At the end of the rail, the cell count matches `trureturing.lock.json` exactly. Each declaration counts once, in the chapter that cites it first, and later citations add nothing; definitions and inline links take cells too. That is why these columns differ from the bar chart in C.1 below, which counts only the theorems in theorem environments and counts a theorem again in every chapter that cites it.
+**480 cells, one for each entry in the lock.** Scrub the timeline from the Prelude to Appendix B and watch each declaration land in the column of the chapter that first cites it: green cells are `theorem` entries in the lock, grey cells are definitions, and hollow cells appear in inline links only. At the end of the rail, the cell count matches `trureturing.lock.json` exactly. Each declaration counts once, in the chapter that cites it first, and later citations add nothing; definitions and inline links take cells too. That is why these columns differ from the bar chart in C.1 below, which counts only the theorems in theorem environments and counts a theorem again in every chapter that cites it.
 :::
 
 ---
 
-## C.1 Verified and Frozen Lean 4 Theorems (251 Unique `theorem` GIDs) {#sec-appendix-c-theorems}
+## C.1 Verified and Frozen Lean 4 Theorems (252 Unique `theorem` GIDs) {#sec-appendix-c-theorems}
 
-The table below lists in alphabetical module order all **251 unique frozen theorems** bound to formal environments and media components across the monograph (spanning 329 theorem-level formal anchor slots including cross-chapter reuse). Click any declaration name to jump directly to its Lean 4 source file and line:
+The table below lists in alphabetical module order all **252 unique frozen theorems** bound to formal environments and media components across the monograph (spanning 330 theorem-level formal anchor slots including cross-chapter reuse). Click any declaration name to jump directly to its Lean 4 source file and line:
 
 ::: {.figure src="appc-theorems-by-chapter"}
-**How many frozen theorems each chapter's theorem environments cite with `lean=`.** The horizontal axis runs from Chapter 1 to Chapter 39 and the Coda (C), grouped into light part bands (I–X); each green bar counts the verified theorems cited in that chapter, counting a theorem again in every chapter that cites it; definitions and declarations that appear only in inline links are not counted. The declaration map above counts differently: each declaration lands only in the chapter that cites it first, and definitions and inline links take cells there too, so the two charts' columns do not match. Chapter 22 is tallest with $35$, followed by Chapter 30 with $23$, Chapter 4 with $17$, Chapter 24 with $16$, Chapters 14 and 29 and the coda with $13$ each; every other chapter cites $4$ to $10$. The bars sum to $329$, computed directly from `trureturing.lock.json` and the Chinese chapters and checked chapter-by-chapter against the last column of the table below; $248$ frozen theorems in the table appear in at least one bar; the other three, `T035`, `T066`, `T112`, are cited by media and only inline in the chapters, so contribute no bar height (`T046` is cited both by a Chapter 35 theorem environment and by `viz/sphere-escape`).
+**How many frozen theorems each chapter's theorem environments cite with `lean=`.** The horizontal axis runs from Chapter 1 to Chapter 39 and the Coda (C), grouped into light part bands (I–X); each green bar counts the verified theorems cited in that chapter, counting a theorem again in every chapter that cites it; definitions and declarations that appear only in inline links are not counted. The declaration map above counts differently: each declaration lands only in the chapter that cites it first, and definitions and inline links take cells there too, so the two charts' columns do not match. Chapter 22 is tallest with $35$, followed by Chapter 30 with $23$, Chapter 4 with $17$, Chapter 24 with $16$, Chapters 14 and 29 and the coda with $13$ each; every other chapter cites $4$ to $10$. The bars sum to $330$, computed directly from `trureturing.lock.json` and the Chinese chapters and checked chapter-by-chapter against the last column of the table below; $249$ frozen theorems in the table appear in at least one bar; the other three, `T035`, `T066`, `T112`, are cited by media and only inline in the chapters, so contribute no bar height (`T046` is cited both by a Chapter 35 theorem environment and by `viz/sphere-escape`).
 :::
 
 | ID | Lean Declaration (Click for Source) | Module Path & Line | Kind | Chapters & Environment IDs |
@@ -273,12 +273,13 @@ The table below lists in alphabetical module order all **251 unique frozen theor
 | `T249` | [`D5.S3.Zeros.ZetaIdentities.riemann_zeta_euler_product`](lean:D5/S3/Zeros/ZetaIdentities.riemann_zeta_euler_product) | [{source}](lean:D5/S3/Zeros/ZetaIdentities.riemann_zeta_euler_product) | `theorem` | Ch 22 `#thm-riemann-zeta-euler-product`; media `viz/visualizations.json`, `viz/sphere-escape/index.html`, `viz/euler-product-sieve/index.html`, `slides/overview/slides.md`, `slides/overview/slides.en.md` |
 | `T250` | [`D5.S3.Zeros.ZetaIdentities.riemann_zeta_residue_one`](lean:D5/S3/Zeros/ZetaIdentities.riemann_zeta_residue_one) | [{source}](lean:D5/S3/Zeros/ZetaIdentities.riemann_zeta_residue_one) | `theorem` | Ch 22 `#lem-riemann-zeta-residue-one`; media `viz/visualizations.json`, `viz/euler-product-sieve/index.html` |
 | `T251` | [`D5.S3.Zeros.ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product`](lean:D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product) | [{source}](lean:D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product) | `theorem` | Ch 22 `#cor-dirichlet-sum-eq-euler-product`, Ch 28, Coda, Appendix A; media `viz/visualizations.json`, `viz/euler-product-sieve/index.html` |
+| `T252` | [`D5.S0.Diagonal.RecursivePageTable.recursive_page_table_walk`](lean:D5/S0/Diagonal/RecursivePageTable.recursive_page_table_walk) | [{source}](lean:D5/S0/Diagonal/RecursivePageTable.recursive_page_table_walk) | `theorem` | Ch 38 `#thm-ch38-recursive-page-table-walk` |
 
 ---
 
 ## C.2 Formal Definitions, Structures, and Inductive Types (95 Unique Declarations) {#sec-appendix-c-definitions}
 
-The table below lists all **95 unique foundational definitions, algebraic structures, and inductive types** bound to `definition` environments and media components (together with the 251 theorems of Section C.1, these form the **346 core environment and media declarations** of the monograph):
+The table below lists all **95 unique foundational definitions, algebraic structures, and inductive types** bound to `definition` environments and media components (together with the 252 theorems of Section C.1, these form the **347 core environment and media declarations** of the monograph):
 
 | ID | Lean Declaration (Click for Source) | Module Path & Line | Kind | Chapters & Environment IDs |
 | :--- | :--- | :--- | :--- | :--- |
@@ -382,7 +383,7 @@ The table below lists all **95 unique foundational definitions, algebraic struct
 
 ## C.2.1 Inline-Referenced Auxiliary Theorems and Definitions (133 Unique Declarations) {#sec-appendix-c-inline}
 
-In addition to the 346 declarations bound to formal environments or media anchors in Sections C.1 and C.2, the main text, proof explanations, and appendix tables reference **133 auxiliary theorems and definitions** via inline `[name](lean:GID)` links. Including these 133 inline declarations, this appendix accounts for all **479 unique locked declarations** in `trureturing.lock.json` (`251 + 95 + 133 = 479`):
+In addition to the 347 declarations bound to formal environments or media anchors in Sections C.1 and C.2, the main text, proof explanations, and appendix tables reference **133 auxiliary theorems and definitions** via inline `[name](lean:GID)` links. Including these 133 inline declarations, this appendix accounts for all **480 unique locked declarations** in `trureturing.lock.json` (`252 + 95 + 133 = 480`):
 
 | ID | Lean Declaration (Click for Source) | Module Path & Line | Kind | Inline Reference Chapters |
 | :--- | :--- | :--- | :--- | :--- |
@@ -554,16 +555,16 @@ Every build and release of this book mechanically enforces the following five ve
 | :--- | :--- | :--- | :---: |
 | **Upstream Repository & Branch** | `the-omega-institute/trureturing` branch `dev` | `site.toml` `[trureturing]` config & `git merge-base --is-ancestor` check | `PASS` |
 | **Pinned Commit SHA** | [{commit}](trureturing:) | Locked in `trureturing.lock.json` `commit` field | `PASS` |
-| **Frozen Theorem Count** | `251` environment/media theorems (`332` total `kind == "theorem"` with inline refs) | Verified against `Golden/Frozen/state/<module>.lean.json` state slices & `statement_id` digests | `PASS` |
+| **Frozen Theorem Count** | `252` environment/media theorems (`333` total `kind == "theorem"` with inline refs) | Verified against `Golden/Frozen/state/<module>.lean.json` state slices & `statement_id` digests | `PASS` |
 | **Auxiliary Definition / Structure Count** | `95` environment definitions (`147` total `kind` in `def`, `inductive` with inline refs) | Segregated into Section C.2 and never counted as `theorem / lemma / proposition / corollary` boxes | `PASS` |
 | **Bilingual Structural Alignment** | 100% parity between `zh` and `en` chapter order, env IDs, and Lean citations | Checked item-by-item by `./tbook check` (`0 error(s)`) | `PASS` |
 
 ::: {.viz src="lean-declaration-map" preset="theorems" height="500"}
-**Theorems only.** The map keeps the 332 entries of kind theorem in the lock, all green: 248 filled cells cited by a theorem environment with `lean=`, and 84 hollow ones that appear in inline links only.
+**Theorems only.** The map keeps the 333 entries of kind theorem in the lock, all green: 249 filled cells cited by a theorem environment with `lean=`, and 84 hollow ones that appear in inline links only.
 :::
 
 ::: {.remark #rem-appendix-c-epistemic-boundary title="Verification Boundary Note for the Complete Declaration Index"}
-All 251 formal environment/media theorems in Section C.1, all 95 environment definitions/structures in Section C.2, and all 133 inline cross-referenced declarations in Section C.2.1 (479 locked declarations in total: 332 theorems + 147 definitions/structures) are verified by the Lean 4 kernel at `trureturing@dev` commit [{commit}](trureturing:) and locked in `trureturing.lock.json`. By contrast, the open conjectures (`OPEN`) and classical literature results (Literature result, not formalized in this book) registered in Section C.3 are strictly excluded from the formal theorem count, ensuring that every `LEAN ✓` badge in this book is backed by an unambiguous kernel proof.
+All 252 formal environment/media theorems in Section C.1, all 95 environment definitions/structures in Section C.2, and all 133 inline cross-referenced declarations in Section C.2.1 (480 locked declarations in total: 333 theorems + 147 definitions/structures) are verified by the Lean 4 kernel at `trureturing@dev` commit [{commit}](trureturing:) and locked in `trureturing.lock.json`. By contrast, the open conjectures (`OPEN`) and classical literature results (Literature result, not formalized in this book) registered in Section C.3 are strictly excluded from the formal theorem count, ensuring that every `LEAN ✓` badge in this book is backed by an unambiguous kernel proof.
 :::
 
 ::: {.viz src="lean-declaration-map" height="560"}
