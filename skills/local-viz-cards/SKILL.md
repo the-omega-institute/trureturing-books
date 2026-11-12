@@ -61,6 +61,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `zyz-compile` | 绕 z、绕 y、再绕 z 转三段，乘出来只是一枚旋子：绕一根轴的一次转动 | `sandwich` `chain` `t` `h` `fold` |
 | `fixed-point-convergence` | 蛛网每绕一圈，误差乘上不动点处的斜率；连斜率一起读，几步就合拢；有理读数却总差一道缝 | `golden` `rate` `circle` `newton` `rational` `ruler` |
 | `lean-declaration-map` | 书里引用的每一条冻结声明都落在它第一次出场的那一章；读完正文，锁文件里的条目一条不剩全部落定 | `all` `bedrock` `table27` `closure` `table28` `theorems` `inline` |
+| `quantum-fairness-ledger` | 没有特权的座位：照见是相互的，得一分就失一分，满额的纠缠与副本分不出第二份，从哪里出发都分到同样的份额 | `haar` `tradeoff` `cloning` `bell` `wstate` `ghz` `ergodic` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -121,6 +122,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `fixed-point-convergence` 与 `sphere-escape` 的 `dottie`、`far` 分工：那两张讲“总有一点留在外面”，本页讲“怎样收束、收得多快”。舞台是蛛网图（曲线 y = f(x) 与直线 y = x），“跟着放大”时以不动点为原点重新标尺。绿色框只给第二十四章用 `lean=` 引用的 `golden_fixed_point_unique`（φ 是 1 + 1/x 唯一的正不动点）与 `rational_inverse_endpoint`（只取其中 θ* 的存在、唯一与 0 < θ* < 1）；压缩映射与全局收敛、渐近压缩率 −sin θ*、牛顿二次收敛、残差双边界与 (1 + sin 1)/b² 界按 §24.4–24.5 的文献注记标 `ARGUED`；轨道、残差、“单纯迭代要走几步”与连分数部分商都以 70 位定点整数实算（`NUM`）。这一页的青色是曲线 y = f(x)（只读投影）与单位圆上 P 的横坐标 θ*，品红是斜率那一半：不动点处的切线、牛顿沿切线走的那一段、λ = sin θ* 的高度与残差竖线；琥珀只给当前这一步或当前读数；走过的折线是中性墨色，灰色虚线是最陡斜率 −sin 1 与残差的楔形边界。路线图候选“开普勒方程”“半程落体”讲的是 θ* 住在哪里，正文那里没有关于收束快慢的句子，未做成卡；正文讲了而候选没有的“单位圆上的线与面”（`circle`）与“十进制千分尺”（`ruler`）补做成卡。
 
 `lean-declaration-map` 的舞台按阅读顺序排开 34 根柱子（序曲、三十章、终章、附录 A 与 B；附录 C 引用全部条目，不单列一柱，只在读数里给序号），每一格是 `trureturing.lock.json` 的一条声明，落在中文正文第一次引用它的那一章。数据由页面目录里的 `gen-data.py` 从锁文件与中文章节（`:::` 行上的 `lean="…"` 记为环境引用，`(lean:…)` 记为行内引用）生成并写进 `main.js` 的生成段，不手填；锁文件或章节变了要重新运行它并重新出图。绿色只给锁文件里种类为 `theorem` 的格子，灰色是定义，空心是只有行内链接的；青色是某一章引用的那些（从它的柱脚连线），琥珀只给选中的一格、连到另外引用它的章的线与阅读位置。依据框里的绿色只给第二十七、二十八章用 `lean=` 逐行解剖的八条定理；格数、种类与出现的章标 `NUM`，“落在首次出场的章”与柱内次序标 `MODEL`。测试按锁文件核对条目数、种类与源码行，并用另一种扫描重读章节核对每一处引用。路线图候选“一部”改为两张审计表卡 `table27`、`table28`（正文的两张表恰好分别覆盖第一至三部与第四至六部），“正文已解剖的那几条”按两章拆成 `bedrock` 与 `closure`，另按附录 C.2.1 加了 `inline`。
+
+`quantum-fairness-ledger` 把第 31 章的五重公平中的五本账（席位、得失、关系、复制、遍历）画在同一颗布洛赫球上，每本账旁一根总额为 1 的柱子；正文的“博弈公平”（一致放大旋转步幅）没有单独的场景：平面里每步转过同一角度的图景已在 `grover-reflections` 里画出，再加一个场景会冲淡主角。青色是留在里面的（影子、A 自己留下的 ‖r_A‖²、副本的箭头、窗口与命中），品红是让出去的（横向的面积、二体纠缠、复制丢掉的部分），紫色是三体纠缠 τ₃ 与遍历场景的转轴，琥珀是读者拖动的参考轴、当前的态与当前一步。绿色框只给第 31 章用 `lean=` 引用的六条：`rank_one_born_pairing_weight`、`complementary_context_probability_pythagoras`、`no_cloning_inner_product_criterion`、`bell_pure_state_has_maximally_mixed_marginal`、`TorusOrbitEquidistribution.result` 与 `TorusObservationWindowReturns.result`（窗口取 h(x) = cos 2π(x − c) 落在开区间里的那段弧）。哈尔测度、CKW 单配性、对称 1 → M 克隆保真度 (2M + 1)/(3M)（第 31 章正文未写，页面补充的文献背景）、外尔等分布与 Hecke–Kesten 有界余项标 `ARGUED`；“公平”的诠释与把黄金旋转画成两个绕竖轴进动的态标 `MODEL`。关系场景走的态族 a|000⟩ + b|110⟩ + c|101⟩ + g|111⟩ 里的 W 型态是 |W⟩ 对 A 翻转一次，纠缠量与正文注记里的 |W⟩ 相同。
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
@@ -329,6 +332,13 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十章 | 定理 `thm-coda-quadratic-advection-no-closure` 的证明之后 | `navier-stokes-p-np` · `mixed` |
 | 第三十章 | `mixed` 之后 | `navier-stokes-p-np` · `closed` |
 | 第三十章 | 纳维—斯托克斯一节末 | `navier-stokes-p-np` 完整实验室 |
+| 第三十一章 | §31.1 “丈量互易”列表之后 | `quantum-fairness-ledger` · `haar` |
+| 第三十一章 | §31.1 零免费午餐账本三项列表之后 | `quantum-fairness-ledger` · `tradeoff` |
+| 第三十一章 | §31.2 列表第 1 项（不可克隆内积判据）之后 | `quantum-fairness-ledger` · `cloning` |
+| 第三十一章 | §31.2 列表第 2 项（贝尔边缘）之后、定理 `thm-ch31-seat-pythagorean-monogamy-fairness` 的引言之前 | `quantum-fairness-ledger` · `bell` |
+| 第三十一章 | 文献注记 `rem-ch31-ckw-monogamy-literature` 之后 | `quantum-fairness-ledger` · `wstate`，一句过渡，再 `ghz` |
+| 第三十一章 | 文献注记 `rem-ch31-weyl-window-equidistribution-literature` 之后 | `quantum-fairness-ledger` · `ergodic` |
+| 第三十一章 | “看清了这一长程图景”一段之后、五重公平总表之前 | `quantum-fairness-ledger` 完整实验室 |
 | 终章 | 空间吸引子 · 一 末 | `spatial-attractor-deja-vu` · `butterfly` |
 | 终章 | 空间吸引子 · 二 “内禀几何参数”列表之后 | `spatial-attractor-deja-vu` · `fixed`、`cycle` |
 | 终章 | 空间吸引子 · 二 末（文献注记 `rem-coda-lorenz-srb-literature` 之后） | `spatial-attractor-deja-vu` · `forget`、`dimension` |
