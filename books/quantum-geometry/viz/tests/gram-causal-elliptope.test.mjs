@@ -4,13 +4,15 @@
 // After the stage-first battery it reads the page through window.ELLIPTOPE_DEBUG and checks it against computations
 // written here: eigenvalues by Jacobi rotations (instead of the page's LDLᵀ), determinants by cofactor expansion
 // (instead of its Gaussian elimination), windows by bisection on the smallest eigenvalue (instead of its Schur
-// complements), the closed form of the three-element elliptope, and random vectors in ℝ³ and ℝ⁶.
+// complements), the closed form of the three-element elliptope, and random vectors in ℝ³ and ℝ⁶. The lit solid is
+// checked point by point against det G₃ of the 3 × 3 table by cofactors: its surface is where det G₃ = 0, its grid
+// lines are lines of fixed x and fixed y, and it is cut open at the history's x with the slice facing the viewer.
 import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'gram-causal-elliptope';
 const T = await session();
 const { check } = T;
-await stageFirstChecks(T, BOOK, ID);
+await stageFirstChecks(T, BOOK, ID, { solid: true });
 
 /* ---------- independent linear algebra ---------- */
 const dot = (a, b) => a.reduce((s, x, i) => s + x * b[i], 0);
@@ -171,12 +173,78 @@ s = await pick('violate');
 s = await pick('elliptope');
 check('ELLIPTOPE: M = 2, in ℝ⁶, the candidate inside', s.M === 2 && s.space === 'r6' && s.psd && !s.playing);
 
+/* the lit solid: the elliptope itself, cut open at the history's x */
+{
+  const g3 = ([x, y, z]) => cofDet([[1, z, y], [z, 1, x], [y, x, 1]]);   // the table of Q, P₀, P₋₁
+  const m = await page.evaluate(() => window.ELLIPTOPE_DEBUG.solid());
+  const pts = [...m.upper.flat(), ...m.lower.flat()];
+  let onSurf = 0, beyond = -Infinity, order = Infinity;
+  for (const p of pts) { onSurf = Math.max(onSurf, Math.abs(g3(p))); beyond = Math.max(beyond, p[0] - m.cut); }
+  m.upper.forEach((r, j) => r.forEach((p, i) => { order = Math.min(order, p[2] - m.lower[j][i][2]); }));
+  check('solid: every vertex of both sheets has det G₃ = 0 (cofactors)', onSurf < 1e-12, `max |det G₃| ${onSurf}`);
+  check('solid: cut at the history\'s x, nothing drawn beyond it', Math.abs(m.cut - V6.x) < 1e-12 && beyond < 1e-12, `cut ${m.cut}, x ${V6.x}`);
+  check('solid: the upper sheet lies on or above the lower one', order > -1e-12, `min gap ${order}`);
+  let xLines = 0, yLines = 0;
+  for (const sh of [m.upper, m.lower]) {
+    for (let i = 0; i < sh[0].length; i++) xLines = Math.max(xLines, ...sh.map((r) => Math.abs(r[i][0] - sh[0][i][0])));
+    for (const r of sh) yLines = Math.max(yLines, ...r.map((p) => Math.abs(p[1] - r[0][1])));
+  }
+  check('solid: the grid lines of the surface are lines of fixed x and of fixed y', xLines < 1e-12 && yLines < 1e-12);
+  const ext = [0, 1, 2].map((k) => [Math.min(...pts.map((p) => p[k])), Math.max(...pts.map((p) => p[k]))]);
+  check('solid: y and z run over [−1, 1], x from −1 up to the cut', Math.abs(ext[0][0] + 1) < 1e-12 && Math.abs(ext[0][1] - m.cut) < 1e-12 && [1, 2].every((k) => Math.abs(ext[k][0] + 1) < 1e-9 && Math.abs(ext[k][1] - 1) < 1e-9), JSON.stringify(ext));
+  const near = (v) => pts.some((p) => Math.hypot(p[0] - v[0], p[1] - v[1], p[2] - v[2]) < 1e-12);
+  check('solid: the two corners of the tetrahedron on the kept side, (−1, 1, −1) and (−1, −1, 1), are on it', near([-1, 1, -1]) && near([-1, -1, 1]));
+  // a point just inside each sheet is inside (det > 0), just outside is outside: the solid is the region det G₃ ≥ 0
+  let inOut = true;
+  for (const [y, sg] of [[-0.5, 1], [0.2, 1], [0.7, -1], [0, -1]]) for (const x of [-0.6, 0, 0.3]) {
+    const z = x * y + sg * Math.sqrt((1 - x * x) * (1 - y * y));
+    if (!(g3([x, y, z - sg * 0.01]) > 0 && g3([x, y, z + sg * 0.01]) < 0)) inOut = false;
+  }
+  check('solid: just inside the surface det G₃ > 0, just outside det G₃ < 0', inOut);
+  // the cut face: the slice x = cut; its rim is det G₃ = 0, its inside det G₃ > 0, and its rim at the candidate's y is the M = 2 window
+  const cap = m.cap, rim = cap[cap.length - 1];
+  check('solid: the cut face lies in the plane x = cut, its rim on the surface, its inside inside', cap.flat().every((p) => Math.abs(p[0] - m.cut) < 1e-12) && rim.every((p) => Math.abs(g3(p)) < 1e-12) && cap.slice(1, -1).flat().every((p) => g3(p) > 0));
+  s = await state();
+  const zs = []; for (let i = 0; i + 1 < rim.length; i++) { const a = rim[i], b = rim[i + 1]; if ((a[1] - s.y) * (b[1] - s.y) <= 0 && a[1] !== b[1]) zs.push(a[2] + (b[2] - a[2]) * (s.y - a[1]) / (b[1] - a[1])); }
+  check('solid: the rim of the cut face meets the line y = y_Q at the two ends of the window for z (to the rim\'s polygon)', zs.length >= 2 && Math.abs(Math.min(...zs) - s.windows[1].lo) < 5e-3 && Math.abs(Math.max(...zs) - s.windows[1].hi) < 5e-3, `${zs} vs [${s.windows[1].lo}, ${s.windows[1].hi}]`);
+  // the slice faces the viewer: the candidate is a visible bead; turned round, the body hides it and it cannot be picked
+  let mk = await page.evaluate(() => window.ELLIPTOPE_DEBUG.marks());
+  const qm = mk.find((x) => x.key === 'q');
+  check('solid: in the card\'s view the candidate is a bead on the cut face, not hidden', qm && qm.kind === 'bead' && !qm.hidden);
+  check('solid: the label Q is not dimmed', await page.evaluate(() => [...document.querySelectorAll('#stage .tag')].some((t) => t.textContent === 'Q' && !t.hidden && Number(t.style.opacity || 1) > 0.9)));
+  await page.evaluate(() => window.ELLIPTOPE_DEBUG.view(1.9, 0.2));
+  await settle(page);
+  mk = await page.evaluate(() => window.ELLIPTOPE_DEBUG.marks());
+  const qb = mk.find((x) => x.key === 'q');
+  check('solid: seen from the other side the body hides the candidate', qb && qb.hidden);
+  const before = await state();
+  await page.mouse.move(qb.x, qb.y); await page.mouse.down(); await page.mouse.move(qb.x + 30, qb.y + 20, { steps: 3 }); await page.mouse.up();
+  const after = await state();
+  check('solid: a hidden candidate cannot be dragged (the drag turns the stage instead)', after.y === before.y && after.z === before.z);
+  s = await pick('elliptope');
+  await page.evaluate(() => window.ELLIPTOPE_DEBUG.view(-1.08, 0.28));
+}
+
+/* VIOLATE on the solid: the refused candidate is still inside the three-element body, on its cut face */
+s = await pick('violate');
+{
+  const g3 = cofDet([[1, s.z, s.y], [s.z, 1, s.x], [s.y, s.x, 1]]);
+  const mk = await page.evaluate(() => window.ELLIPTOPE_DEBUG.marks());
+  const q = mk.find((x) => x.key === 'q');
+  check('VIOLATE: Q is a hollow ring, and visible', q && q.kind === 'ring' && !q.hidden);
+  check('VIOLATE: Q is inside the three-element body (det G₃ > 0): only the deeper rings refuse it', g3 > 1e-3, `det G₃ ${g3}`);
+  const note = await page.textContent('#presetNote');
+  check('VIOLATE note says Q still lies on the cut face', note.includes('切面'), note);
+}
+s = await pick('elliptope');
+
 /* the FLAT card */
 s = await pick('flat');
 check('FLAT plays in ℝ³', await until(page, () => { const d = window.ELLIPTOPE_DEBUG.state; return d.playing && d.space === 'r3'; }));
 await page.evaluate(() => window.ELLIPTOPE_DEBUG.advance(3.8));
 await until(page, () => { const d = window.ELLIPTOPE_DEBUG.state; return !d.playing && d.M === 5; });
 s = await state();
+check('FLAT: the solid is cut at the ℝ³ history\'s x', Math.abs((await page.evaluate(() => window.ELLIPTOPE_DEBUG.solid().cut)) - V3.x) < 1e-12);
 check('FLAT: ℝ³ at M = 5, det G = 0, the window a single value', s.space === 'r3' && s.M === 5 && Math.abs(cofDet(table(V3, 5, s.y, s.z))) < 1e-12 && s.windows[4].pts.length === 1 && !s.windows[4].open);
 s = await pick('elliptope');
 

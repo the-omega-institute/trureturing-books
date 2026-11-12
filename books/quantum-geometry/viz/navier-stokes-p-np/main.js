@@ -44,7 +44,7 @@
   const norm = (v) => Math.hypot(v[0], v[1]);
   let view = null;
   function drawLamb(s) {
-    const g = kit.plot($('cv'), { x: [-1.6, 1.6], y: [-1.6, 1.6], pad: [18, 18, box.top, box.bottom], equal: true }), ctx = g.ctx; view = g;
+    const g = kit.plot($('flat'), { x: [-1.6, 1.6], y: [-1.6, 1.6], pad: [18, 18, box.top, box.bottom], equal: true }), ctx = g.ctx; view = g;
     // streamlines: level curves of ψ by marching squares
     const n = 56, x0 = g.x0, y0 = g.y0, dx = (g.x1 - g.x0) / n, dy = (g.y1 - g.y0) / n, F = [];
     let lo = 1e9, hi = -1e9;
@@ -100,29 +100,49 @@
   /** ∫₀ᵗ ω/2 dt: how far a particle of the core has gone around. */
   function swirl(t) { let a = 0; const n = 160; for (let i = 0; i < n; i++) a += tube(S.mode, S.nu, t * (i + 0.5) / n).w * (t / n) / 2; return a; }
   // The tube lies along the world x-axis, which the camera shows nearly level, so stretching uses the width of the stage.
-  const TUBE_CAM = { yaw: -0.42, pitch: 0.3, zoom: 1 }, RD0 = 0.8, HL0 = 0.95;
-  const ax = (z, r, a) => [z, r * Math.cos(a), r * Math.sin(a)], X = [1, 0, 0];
+  // It is drawn as a lit solid: a cylinder whose radius is RD0·√(A/A₀) (so the drawn cross-section is A to scale), capped
+  // at both ends while the whole material segment is in view, its colour running from dim to magenta with ln ω = ln(Γ/A)
+  // (the only quantity the colour carries; light and shade come from the camera). The circulation loop is a bright ring
+  // on the wall, the tube as it started a faint veil with dashed end circles.
+  const TUBE_CAM = { yaw: -0.42, pitch: 0.3, zoom: 1 }, RD0 = 0.8, HL0 = 0.95, SHADE = [Math.log(0.5), Math.log(12)];
+  const ax = (z, r, a) => [z, r * Math.cos(a), r * Math.sin(a)];
+  const circle = (z, r, n) => { const q = []; for (let i = 0; i < n; i++) q.push(ax(z, r, kit.TAU * i / n)); return q; };
+  const shade = (w) => clamp((Math.log(w) - SHADE[0]) / (SHADE[1] - SHADE[0]), 0, 1);
+  let drawn = null;   // the geometry of the last tube frame, for the suite
   function drawTube(t) {
     st.begin();
     const d = tube(S.mode, S.nu, t), sx = Math.max(0.3, Math.abs(Math.cos(st.cam.yaw)));
     const hlMax = Math.min(2.4, 0.84 * (st.W / 2) / st.unit / sx - 0.4), r1 = RD0 * Math.sqrt(d.A / A0), k = Math.min(1, 1.02 / r1, hlMax / HL0);
-    const R0 = RD0 * k, h0 = HL0 * k, r = r1 * k, hl = Math.min(hlMax, h0 * d.len), open = h0 * d.len > hlMax, wall = TRV.thumbMode ? 1.4 : 1.7;
-    // the tube as it started (dashed), to compare with
-    for (const z of [-h0, h0]) st.circle([z, 0, 0], X, R0, { color: P.dim, width: 1.2, alpha: 0.6, dash: [4, 4], n: 64 });
-    for (let j = 0; j < 4; j++) { const a = kit.TAU * (j + 0.5) / 4; st.line(ax(-h0, R0, a), ax(h0, R0, a), { color: P.dim, width: 1.2, alpha: 0.5, dash: [4, 4] }); }
-    // the wall: material rings that ride apart with the stretch, and lines along the tube
-    for (let i = -8; i <= 8; i++) { const z = i * 0.24 * k * d.len; if (Math.abs(z) <= hl + 1e-9 && i) st.circle([z, 0, 0], X, r, { color: P.dim, width: wall * 0.8, alpha: 0.85, n: 64 }); }
-    for (let j = 0; j < 12; j++) { const a = kit.TAU * j / 12; st.line(ax(-hl, r, a), ax(hl, r, a), { color: P.dim, width: wall, alpha: open ? 0.8 : 0.95 }); }
-    st.circle([0, 0, 0], X, r, { color: P.cyan, width: 3, alpha: 1, n: 72 });
+    const R0 = RD0 * k, h0 = HL0 * k, r = r1 * k, hl = Math.min(hlMax, h0 * d.len), open = h0 * d.len > hlMax, lw = Math.log(d.w);
+    const look = { colors: [P.dim, P.magenta], range: SHADE, value: () => lw };
+    // the wall, and the two ends (the cross-section A itself) while the whole segment is on the stage
+    st.surface('wall', (z, a) => ax(z, r, a), Object.assign({ u: [-hl, hl], v: [0, kit.TAU], nu: 4, nv: 64 }, look));
+    if (!open) for (const e of [-1, 1]) st.surface(`cap${e}`, (q, a) => ax(e * hl, q, a), Object.assign({ u: [0, r], v: [0, kit.TAU], nu: 3, nv: 64 }, look));
+    // material rings that ride apart with the stretch, drawn on the wall
+    const lineR = (w) => w * st.lw * 0.5 / st.unit;
+    for (let i = -8; i <= 8; i++) { const z = i * 0.24 * k * d.len; if (Math.abs(z) < hl - 1e-6 && i) st.line(circle(z, r + lineR(1.2), 64), { color: P.stage, width: 1.2, alpha: 0.55, close: true }); }
+    // the tube as it started: a faint veil and dashed end circles
+    const nG = 48;
+    for (let j = 0; j < nG; j++) { const a0 = kit.TAU * j / nG, a1 = kit.TAU * (j + 1) / nG; st.fan([ax(-h0, R0, a0), ax(h0, R0, a0), ax(h0, R0, a1), ax(-h0, R0, a1)], { fill: P.dim, alpha: TRV.thumbMode ? 0.07 : 0.06 }); }
+    for (const z of [-h0, h0]) st.line(circle(z + Math.sign(z) * lineR(1.4), R0, 72), { color: P.dim, width: 1.4, alpha: 0.85, dash: [4, 4], close: true });
+    // the circulation loop: a bright ring on the wall, with three particles going round it
+    const ringW = TRV.thumbMode ? 4.5 : 4, rr = r + lineR(ringW), loop = circle(0, rr, 96);
+    st.tube('loop', loop.concat([loop[0], loop[1]]), { color: P.cyan, width: ringW, glow: 0.8 });
     const ang = swirl(t);
-    for (let j = 0; j < 3; j++) st.dot(ax(0, r, ang + kit.TAU * j / 3), 4.5, P.cyan, { glow: 8 });
+    for (let j = 0; j < 3; j++) st.bead(ax(0, rr, ang + kit.TAU * j / 3), { color: P.cyan, r: 4.5, glow: 0.8, key: `swirl${j}` });
+    // the vorticity along the axis: it runs through the tube and shows at both ends
     const tip = [hl + 0.22, 0, 0];
-    st.arrow([-hl - 0.16, 0, 0], tip, { color: P.magenta, width: clamp(1.8 * Math.cbrt(d.w), 1.8, 7), glow: 8, headSize: 13 });
-    st.tag('w', tip, `ω = ${fix(d.w, d.w < 100 ? 2 : 0)}`, 'mg raw', { dx: -24, dy: -30 });
-    st.tag('g', ax(0, r, Math.PI / 2), `Γ = ωA = ${fix(d.w * d.A, 2)}`, 'cy raw', { dx: 0, dy: -18 });
-    st.tag('a', ax(0, r, -Math.PI / 2), `A = ${fix(d.A, 3)}`, 'raw ink', { dx: 0, dy: 18 });
-    st.tag('a0', ax(-h0, Math.max(R0, r), -2.4), 'A₀ = 1', 'raw', r > R0 ? { dx: -38, dy: 8 } : { dx: 4, dy: 22 });
+    st.arrow([-hl - 0.16, 0, 0], tip, { color: P.magenta, width: clamp(1.8 * Math.cbrt(d.w), 1.8, 7), headSize: 13 });
+    // labels on the side of the tube that faces the viewer
+    const cy = Math.cos(st.cam.yaw), sp = Math.sin(st.cam.pitch), cp = Math.cos(st.cam.pitch), D = st.facing();
+    const side = (s) => Math.atan2(s * cp + 0.8 * D[2], s * cy * sp + 0.8 * D[1]);   // up (s = 1) or down (s = −1), turned towards the viewer
+    const at = (a) => ax(0, rr + lineR(2), a);
+    st.tag('w', tip, `ω = ${fix(d.w, d.w < 100 ? 2 : 0)}`, 'mg raw', { dx: 18, dy: -(r * st.unit + 16) });   // above the near end, off the wall of the same colour
+    st.tag('g', at(side(1)), `Γ = ωA = ${fix(d.w * d.A, 2)}`, 'cy raw', { dx: 0, dy: -18 });
+    st.tag('a', at(side(-1)), `A = ${fix(d.A, 3)}`, 'raw ink', { dx: 0, dy: 18 });
+    st.tag('a0', ax(h0 + lineR(1.4), R0, side(-1)), 'A₀ = 1', 'raw', { dx: 30, dy: 14 });
     st.end();
+    drawn = { r, R0, hl, h0, k, len: d.len, capped: !open, ring: rr, shade: shade(d.w), lineR: lineR(1) };
   }
 
   /* ---------- closure: the observer sees x, not y ---------- */
@@ -131,7 +151,7 @@
   const isClosed = () => S.lin === 0 && S.mix === 0 && S.self === 0;
   let lineTags = [];   // the right-edge labels of the closure scene, as drawn: [{ v, xs }]
   function drawClosure(y) {
-    const g = kit.plot($('cv'), { x: [-1.08, 1.08], y: [-3.4, 1.4], pad: [46, 22, box.top + 6, box.bottom + 22] }), ctx = g.ctx; view = g;
+    const g = kit.plot($('flat'), { x: [-1.08, 1.08], y: [-3.4, 1.4], pad: [46, 22, box.top + 6, box.bottom + 22] }), ctx = g.ctx; view = g;
     g.axes({ yTicks: [-3, -2, -1, 0, 1], xTicks: [-1, -0.5, 0, 0.5, 1], xLabel: L('看不见的 y', 'the unseen y'), yLabel: L('看见的加速度 P(V)', 'the seen acceleration P(V)') });
     g.vline(0, P.faint);
     for (const x of [-1, -0.5, 0, 0.5, 1]) {
@@ -153,16 +173,17 @@
 
   /* ---------- the stage ---------- */
   const box = { top: 70, bottom: 44 };
-  const st = kit.stage3($('stage'), { canvas: $('cv'), yaw: TUBE_CAM.yaw, pitch: TUBE_CAM.pitch, zoom: TUBE_CAM.zoom, radius: 0.3, wheel: false, onChange: () => paint(),
+  const st = kit.solid($('stage'), { canvas: $('cv'), yaw: TUBE_CAM.yaw, pitch: TUBE_CAM.pitch, zoom: TUBE_CAM.zoom, radius: 0.3, wheel: false, onChange: () => paint(),
     onPick: (ev) => { if (S.scene === 'tube') return false; leave(); drag(ev); return true; }, onDrag: (ev) => drag(ev) });
   function drag(ev) {
     if (!view) return;
-    const b = $('cv').getBoundingClientRect(), x = view.invX(ev.clientX - b.left), y = view.invY(ev.clientY - b.top);
+    const b = $('flat').getBoundingClientRect(), x = view.invX(ev.clientX - b.left), y = view.invY(ev.clientY - b.top);
     if (S.scene === 'lamb') { S.probe = [clamp(x, -1.5, 1.5), clamp(y, -1.5, 1.5)]; paint(); } else { clock.pause(); clock.set(clamp(x, -1, 1) + 1); }
   }
   function drawStage() {
     const sr = $('stage').getBoundingClientRect(), below = (el) => el.getBoundingClientRect().bottom - sr.top;
     box.top = TRV.thumbMode ? 26 : Math.max(46, below($('hudBig').parentElement), below($('sceneChips'))) + 10; box.bottom = TRV.thumbMode ? 26 : Math.max(18, $('legend').offsetHeight + 20);
+    $('flat').hidden = S.scene === 'tube';
     if (S.scene === 'tube') drawTube(clock.t);
     else { st.begin(); st.end(); if (S.scene === 'lamb') drawLamb(clock.t); else drawClosure(clock.t - 1); }
   }
@@ -225,7 +246,7 @@
   };
   const LEGEND = {
     lamb: [['dm', '对流项 (u·∇)u', 'the advection term (u·∇)u'], ['cy', '梯度那一半 ∇(|u|²/2)', 'the gradient half ∇(|u|²/2)'], ['mg', '兰姆那一半 ω × u', 'the Lamb half ω × u'], ['am', '探针（可拖动）', 'the probe (drag it)']],
-    tube: [['cy', '环量回路 Γ（不变）', 'the circulation loop Γ (fixed)'], ['mg', '涡度 ω（沿轴）', 'the vorticity ω (along the axis)'], ['dm', '涡管的壁', 'the wall of the tube']],
+    tube: [['cy', '环量回路 Γ（不变）', 'the circulation loop Γ (fixed)'], ['mg', '涡度 ω：轴上的箭头；管面由灰到品红，ω = Γ/A 越大越品红', 'the vorticity ω: the arrow on the axis; the wall runs from grey to magenta as ω = Γ/A grows'], ['dm', '出发时的涡管（淡影与虚线圈）', 'the tube as it started (faint shadow, dashed circles)']],
     closure: [['cy', 'y = 0 时的加速度', 'the acceleration at y = 0'], ['am', '同一个 x、当前 y 时的加速度与两者之差', 'the acceleration for the same x at the current y, and the gap'], ['dm', '其余几个 x', 'the other values of x']]
   };
   function drawText() {
@@ -333,10 +354,12 @@
         consts: { alpha: ALPHA, kappa: KAPPA, gamma: GAMMA, a0: A0, beta: BETA } };
     },
     seek: (t) => { clock.pause(); clock.set(t); },
+    /** The tube as last drawn: radius, start radius, half-lengths, scale, stretch, end caps, loop radius and colour. */
+    get drawn() { return drawn && Object.assign({}, drawn); },
     seen: (x, y) => seen(x, y), tube: (mode, nu, t) => tube(mode, nu, t), rInf: (nu) => rInf(nu),
     k41: (nu, ks) => { const K = k41(nu); return { re: K.re, eta: K.eta, ndof: K.ndof, E: (ks || []).map(K.E) }; }, split: (s, x, y) => split(s, x, y),
     /** Viewport coordinates of a data point of the current 2D scene (for pointer tests). */
-    at: (x, y) => { const b = $('cv').getBoundingClientRect(); return [b.left + view.X(x), b.top + view.Y(y)]; }
+    at: (x, y) => { const b = $('flat').getBoundingClientRect(); return [b.left + view.X(x), b.top + view.Y(y)]; }
   };
   window.TRV_THUMB = () => { S.mode = 'strain'; S.nu = 0; modeChips.set('strain', true); fNu.set(0); Object.assign(st.cam, TUBE_CAM); setScene('tube', 1.5); paint.now(); };
   cards.pick(cards.initial('strain'));
