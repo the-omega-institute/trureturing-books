@@ -1,8 +1,8 @@
 # 纳维—斯托克斯公开研究核查、书稿推理与后续目标
 
-核查日期：2026-11-13。实施基线：`69ea91759351ffc7dab04f9348193edcc8352b50`（已快进至当时的 `origin/main`）。本书当前所钉的 trureturing 提交：`37ac4a0d6a8b6cea9792ac70953eeebe40c05792`，481 项声明。初次研究基线为 `9676fbc342fb305209346ebe1873ddd8b349ca44`、旧钉版为 `1d9bf98cab8306e67ec38a739359f2cdae63877a`；旧行号和旧基线检查不作为本次实施的验证证据。
+核查日期：2026-11-13。初次实施基线为 `69ea91759351ffc7dab04f9348193edcc8352b50`（当时的 `origin/main`），当时所钉的 trureturing 提交为 `37ac4a0d6a8b6cea9792ac70953eeebe40c05792`，481 项声明。最终整合候选为 `255749ca47cd3f279ab800b95a73cb52805ab69e`，已无冲突重放到 `origin/main` 的 `75fbcca8236df83a42413f333cccecb9bbf89f8a`；当前钉版为 `9b6270e9795ed74542ab38e06a271f706174239c`，486 项声明。初次研究基线为 `9676fbc342fb305209346ebe1873ddd8b349ca44`、旧钉版为 `1d9bf98cab8306e67ec38a739359f2cdae63877a`；各阶段检查只证明其对应输入，最终整合验收另列于下文。
 
-本轮围绕第 30 章，连同第 29 章、终章、附录 A / C 的相关表述进行定向审读；不构成全书全部文献的重新核验。本文件记录研究判断与实施验收；本次只修订范围内中英书稿及本记录，不改锁文件或正式条目的验证等级。
+本轮围绕第 30 章，连同第 29 章、终章、附录 A / C 的相关表述进行定向审读；不构成全书全部文献的重新核验。本文件记录研究判断与实施验收；实施范围限于相关中英书稿、本记录及已授权的桥图尺寸回归修复。锁文件沿用上游，正式条目的 ID / GID 与验证等级保留。
 
 ## 已核实的公开材料
 
@@ -68,7 +68,7 @@ $$
 
 ### 投影不闭合与二次平均应力
 
-本书所引的[二次闭合判据](https://github.com/the-omega-institute/trureturing/blob/37ac4a0d6a8b6cea9792ac70953eeebe40c05792/D5/S3/Observer/Reversal/QuadraticObservationClosure.lean)研究
+初次实施基线所引并核对的[二次闭合判据](https://github.com/the-omega-institute/trureturing/blob/37ac4a0d6a8b6cea9792ac70953eeebe40c05792/D5/S3/Observer/Reversal/QuadraticObservationClosure.lean)研究
 
 $$
 V(x)=Lx-B(x,x),\qquad a=\Pi x,\qquad b=x-\Pi x.
@@ -211,9 +211,9 @@ lake exe comparator ComparatorChallenges/Euler.json
 
 诊断保存在临时目录 `/tmp/cool-birch-ns-impl/`：`external-source-integrity.json`、`external-build.txt`、`comparator-navier-stokes.txt`、`comparator-euler.txt`。这些是复验记录，不是出版物的证明依赖。
 
-### 书库检查与出版输出
+### 重整合前的书库检查与出版输出（历史实施证据）
 
-最终书稿修改后，使用本机已有的原生 Pandoc；打包依赖附带的另一架构可执行文件无法在本机运行，未改托管工具。实际命令：
+以下检查针对 `69ea9175` 基线上的书稿修订，不能代替 `255749ca` 与新钉版的最终整合验收。该阶段书稿修改后，使用本机已有的原生 Pandoc；打包依赖附带的另一架构可执行文件无法在本机运行，未改托管工具。实际命令：
 
 ```sh
 TRURETURING_DIR=/tmp/cool-birch-ns-impl-trureturing ./tbook check
@@ -249,9 +249,42 @@ TBOOK_CACHE=0 PANDOC=/Users/auricstudio/.local/bin/pandoc TRURETURING_DIR=/tmp/c
 
 本轮诊断目录为 `/tmp/cool-birch-s5-worker2/`：`before/browser-final-results.json` 保留新增故障复现，`after/browser-final-results.json` 与 `after-summary.json` 记录真实章节复验，`geometry-regression.json` 与 `positive-pixels.json` 记录独立尺寸/正常帧对照，`test-normal.txt`、`test-slow.txt`、`verification-summary.json` 记录质量门结果；`shots/`、`after/` 和汇总截图保存可视证据。**该负半径阻断项已关闭**；独立审查与主代理整合后的最终出版验收、发布仍按下节分工续办。
 
+### 主干重整合后的最终验收（2026-11-13）
+
+本节针对 `255749ca47cd3f279ab800b95a73cb52805ab69e`（由 `0307ba85` 无冲突重放到 `75fbcca8236df83a42413f333cccecb9bbf89f8a`），加本记录的证据校正；上文旧基线的输出仍按历史事实保留。本轮带入既有研究和诊断材料，是实施整合验收，不作为隔离或独立审查席的证据。
+
+| 整合项目 | 实际结果 |
+| :--- | :--- |
+| 范围与上游保留 | 对既有 13 文件补丁分别作 `69ea9175..HEAD`、`origin/main...HEAD` 和旧基线至上游的有界比较。十份中英书稿的 **52 个原有正式块正文**、正式及 OPEN 环境头、媒体引用头、blockquote 引语、附录 A 每语言 **67 个作者原话单元格**均保留；除本补丁有意修订的 O8 外，相关 **50 条上游新增非空行**全部原样保留，包含实心椭圆体剖面与涡管图注。NS/ETH 来源块及三个教学块中英共十块与重放前逐字相同；桥图源码及回归测试与 `0307ba85` 完全相同 |
+| 当前钉版与精确源码 | 锁文件与 `origin/main` 逐字节一致：`9b6270e9795ed74542ab38e06a271f706174239c`，**486 项声明**。另在 `/tmp/cool-birch-ns-integration-trureturing` 以 `git fetch --filter=blob:none --depth=1 origin 9b6270e9795ed74542ab38e06a271f706174239c` 取得精确提交并作干净的分离式稀疏检出，含全部 **226 个被引冻结模块**。通过工具支持的 `TRURETURING_DIR` 读取；其分支检查记录 GitHub compare `5f749ade6529`（当时 dev 头）至钉版为 `behind`，确认钉版属于 dev。未改锁文件 |
+| 声明及附录 C | 旧 481 项声明的 statement digest 全部相同；五项新增声明来自上游的循环监测收缩及双锚点 Gram 模块。两语言附录 C 各覆盖全部 **486 个唯一 GID**，无缺项或多余实际声明，沿用上游 **257 + 96 + 133 = 486** 的分组。O8 的 A/B、OPEN、外部 C/D 及正文引用同时保留。声明地图现有测试 **128/128 通过**，退出 0；未重新生成地图或媒体源文件 |
+| 结构与冻结检查 | `./tbook check` 退出 **0：1 本书、0 错误、9 项既有警告**；仍是未引用的 `prelude-parts` 与八个视频的历史 subject commit。`git diff --check` 退出 0 |
+| 当前出版输出 | 禁用构建缓存，以原生 Pandoc、`TBOOK_EPUBCHECK=1` 完成中英 HTML、六份 screen/print/academic PDF、两份 EPUB 与站点，完整命令退出 **0**。站点阶段实际重建并检查中英两份 **48 页**演示文稿及其 PDF。清单钉版正确，12 项下载/封面/演示文稿文件的大小与 SHA-256 均与实际站点文件一致 |
+| PDF 当前产物 | 六份均扫描并渲染相关标度、投影、ODE 及附录 C 计数/O8 页面实看，另查看英文跨页公式续页。无原始 TeX/颜色源码泄漏；字体全部嵌入，无 Type 3/LastResort，无活动对象或附件；每份 **276 个书签**。中英 academic 分别 **41,098,449 / 42,574,231 字节**，均低于 50,000,000 |
+| EPUB 当前产物 | 两份均实际启用 EPUBCheck，构建未跳过检查，**0 错误、0 警告**；各 **60 份 XHTML** 可解析、**47 份含 MathML**，三个教学 ID 与当前钉版均存在。通过 LaunchServices 打开两份最终 EPUB 的命令各退出 0；Apple Books 阅读界面实看仍受下文限制 |
+| 当前实际浏览器验收 | 由 `./tbook serve --port 8890` 的真实 `/trureturing-books/` 路径查看第 29/30 章、终章、附录 A/C，中英 × navy/light × 1280/390 px，共 **40 组**：**0 页面异常、0 缺失本地响应、0 KaTeX 错误、0 断裂引用、0 页面横向越界、0 所查公式容器溢出**。八组桥图均恢复正尺寸，往返调整宽度后几何与数学状态完全一致。正文截图已实际查看；相关上游媒体另在探针、字体和正尺寸就绪并绘制后补截 **24 组**，无页面异常，画面已查看。首轮补充终章截图的定位器稳定等待超时属于诊断脚本中止，未计为通过；调整诊断定位后才得到上述完整终态 |
+| 有效证据复用及边界 | 外部固定源码 `f9e8bc5b38b6e212696e8a30e3e91517af887bbd` 的完整构建及 NS/Euler 两组 Nanoda/Lean Comparator 退出 0 证据保持，**未重跑**；仍不接入本书冻结体系。桥图专页正常/慢帧各 160/160、正常帧像素一致的既有证据也保留。本轮只更新本记录；书稿、锁文件、媒体、托管工具与本轮开始的内容摘要均相同 |
+
+本轮实际主命令如下；临时源码目录只供读取精确钉版，不执行 `pin`：
+
+```sh
+TRURETURING_DIR=/tmp/cool-birch-ns-integration-trureturing ./tbook check
+TBOOK_CACHE=0 TBOOK_EPUBCHECK=1 PANDOC=/Users/auricstudio/.local/bin/pandoc TRURETURING_DIR=/tmp/cool-birch-ns-integration-trureturing ./tbook build html pdf epub site --book quantum-geometry
+./tbook serve --port 8890
+node books/quantum-geometry/viz/tests/lean-declaration-map.test.mjs
+node /tmp/cool-birch-ns-integration/browser-integration.mjs
+node /tmp/cool-birch-ns-integration/settled-media.mjs
+.venv/bin/python /tmp/cool-birch-ns-integration/inspect-pdfs.py zh
+.venv/bin/python /tmp/cool-birch-ns-integration/inspect-pdfs.py en
+.venv/bin/python /tmp/cool-birch-ns-integration/pdf-extra.py
+.venv/bin/python /tmp/cool-birch-ns-integration/validate-epub-site.py
+```
+
+诊断位于 `/tmp/cool-birch-ns-integration/`：`pin-evidence.json`、`preservation-integration.json`、`implementation-claims-preserved.json`、`appendix-integration.json`、`browser-final-results.json`、`browser-summary.json`、`settled-media-results.json`、`pdf-inspection-{zh,en}.json`、`pdf-extra.json`、`pdf-appendix.json`、`epub-site-validation.json` 和相关截图。G0–G5 的内容及外部复验状态沿用上表；S4 的相关消费者与版本记录完成，S5 的本地检查和实际浏览完成，Apple Books 界面与完整视频发布仍按下节交接，S6 的独立审查、Git 生命周期及部署由主代理执行。
+
 ### 尚未完成的工作、责任人与真实阻碍
 
-1. **Apple Books 图形界面实看：主代理或具备界面权限的操作者。** 本机存在 Books.app，但实际尝试 `osascript -e 'tell application "System Events" to get UI elements enabled'` 退出 1，系统返回 Apple Events 未授权 `-1743`，无法自动操作/检查阅读界面。本次 EPUB 结构与 epubcheck 已通过，不能据此虚称 Apple Books 显示已经验收；仍须打开两份最终 EPUB 抽查新公式及阅读主题。
+1. **Apple Books 图形界面实看：主代理或具备界面权限的操作者。** 本机存在 Books.app；对两份最终 EPUB 各执行 `open -a Books <最终 EPUB>` 均退出 0，直接查询 Books 名称也退出 0。界面检查仍受阻：`osascript -e 'tell application "System Events" to get UI elements enabled'` 退出 1，返回 Apple Events 未授权 `-1743`；`screencapture -x <临时图片>` 退出 1，返回 `could not create image from display`。另以 `sdef /System/Applications/Books.app` 查询原生脚本接口，返回无法取得定义（`-192`）。启动与名称查询不证明阅读视图已经实看；本轮未改系统隐私权限。当前 EPUB 结构与 EPUBCheck 已通过，仍须由有界面权限的操作者抽查两份最终 EPUB 的新公式及阅读主题。详见临时诊断 `apple-books-alternative.json`。
 2. **独立三席审查、确认阻断项修复、PR/CI/合入 main/Pages：主代理。** 本实施工人没有委派、提交、推送或创建/合并 PR，不将本地验收写成发布完成。
 3. **本地视频输出的环境限制：发布负责人按既有流水线处理。** 本地站点构建发现视频 Python 依赖与语音资源不全，十个既有视频采用工具自带的海报与“未构建”回退；演示文稿中英各 48 页构建并检查成功。视频源码与既有引用均未改，不在本次安装完整视频流水线。正式发布应按既有 CI/缓存恢复完整媒体。
 
