@@ -2,8 +2,10 @@
 //   node books/quantum-geometry/viz/tests/two-angle-addressing.test.mjs      (or: node tools/node/viz-test.mjs quantum-geometry)
 // The page turns vectors with Rodrigues' formula. The suite recomputes every word with unit quaternions (a different
 // representation: q v q*), checks the caps with exact integer axes, and surveys the sphere on its own latitude–longitude
-// grid. It reads the page through window.ANGLES_DEBUG and never calls the page's own model.
-import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
+// grid. It reads the page through window.ANGLES_DEBUG and never calls the page's own model. The cover cards draw an
+// opaque lit ball with the caps as patches on it: the suite runs the solid gates on them and reads, through the stage's
+// own ray picking, which surface shows at sample points of the sphere, against the test's own cap membership.
+import { session, stageFirstChecks, solidChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'two-angle-addressing';
 const T = await session();
@@ -163,6 +165,53 @@ await page.click('#setChips [data-set="six"]'); s = await state();
 check('the cap chips switch to the six rational axes and leave the card', s.set === 'six' && s.preset === null && JSON.stringify(s.held) === JSON.stringify(held(s.p, RAW6)));
 await page.click('#sceneChips [data-scene="words"]'); s = await state();
 check('the scene chips switch back to addressing', s.scene === 'words' && await page.evaluate(() => document.getElementById('capPanel').hidden && !document.getElementById('polarPanel').hidden));
+
+// the cover cards as solids: an opaque, lit ball with the caps as patches on it
+await pick('six'); await seek(1e9);
+await solidChecks(T, BOOK, ID, page);
+await pick('three'); await seek(1e9);
+await solidChecks(T, BOOK, ID, page, { rest: false });
+/** The camera's direction towards the viewer, from yaw and pitch (the test's own formula of the orbit camera). */
+const towards = (c) => [-Math.sin(c.yaw) * Math.cos(c.pitch), -Math.cos(c.yaw) * Math.cos(c.pitch), Math.sin(c.pitch)];
+/** Points of the sphere facing the viewer, away from the rim: a spiral on the sphere kept where depth > 0.25. */
+const frontPoints = (D) => { const out = []; for (let i = 0, n = 1400; i < n; i++) { const z = 1 - 2 * (i + 0.5) / n, r = Math.sqrt(1 - z * z), a = i * Math.PI * (3 - Math.sqrt(5)), y = [r * Math.cos(a), r * Math.sin(a), z]; if (dot(y, D) > 0.25) out.push(y); } return out; };
+/** What should show at y: a cap of a colour holding x on top, else any cap holding y, else the bare ball. Null near a rim. */
+function expected(y, raw, heldX) {
+  if (raw.some((a) => Math.abs(2 * dot(y, a) ** 2 / dot(a, a) - 1) < 0.05)) return null;
+  const hold = held(y, raw), top = hold.filter((i) => heldX.includes(i)), use = top.length ? top : hold;
+  return use.length ? use.map((i) => `cap${i}${dot(y, raw[i]) > 0 ? '+' : '-'}`) : ['ball'];
+}
+for (const [card, raw, n] of [['six', RAW6, 12], ['three', RAW3, 6]]) {
+  await pick(card); s = await seek(1e9);
+  const caps = await page.evaluate(() => window.ANGLES_DEBUG.caps());
+  const centres = raw.flatMap((a) => [1, -1].map((sg) => a.map((c) => sg * c / Math.sqrt(dot(a, a)))));
+  check(`${card} solid: ${n} cap patches of angular radius 45°, centred on ±âᵢ`, caps.length === n && caps.every((c) => close(c.w, Math.PI / 4, 1e-12)) && centres.every((u) => caps.some((c) => vclose(c.c, u, 1e-12))), JSON.stringify(caps.map((c) => c.id)));
+  check(`${card} solid: the caps drawn cyan are exactly those of the colours holding x`, caps.every((c) => c.held === held(s.p, raw).includes(c.i)));
+  const D = towards(await page.evaluate(() => window.ANGLES_DEBUG.camera()));
+  const pts = frontPoints(D), ids = await page.evaluate((ps) => ps.map((v) => window.ANGLES_DEBUG.hit(v)), pts);
+  let bad = [], judged = 0, bare = 0;
+  pts.forEach((y, k) => { const e = expected(y, raw, s.held); if (!e) return; judged++; if (ids[k] === 'ball') bare++; if (!e.includes(ids[k])) bad.push(`${y.map((c) => c.toFixed(2))}: ${ids[k]} not ${e.join('/')}`); });
+  check(`${card} solid: at ${judged} points of the front of the sphere the surface on top is the cap the test's own membership says (cyan over grey over the bare ball)`, judged > 300 && bad.length === 0, bad.slice(0, 3).join(' | '));
+  if (card === 'six') check('six solid: the bare (magenta) ball shows nowhere: the caps cover the front of the sphere', bare === 0, `${bare}`);
+  else {
+    // the patches are meshes whose rims are chords of the true circles, so allow the rim band the layering check skips
+    const gapOK = pts.every((y, k) => ids[k] !== 'ball' || y.every((c) => c * c < 0.5 + 0.025));
+    const octants = new Set(pts.filter((y, k) => ids[k] === 'ball').map((y) => y.map((c) => (c > 0 ? '+' : '-')).join('')));
+    check('three solid: the bare (magenta) ball shows, and only where every (x·eⱼ)² < ½ (up to the drawn rims): around the octant diagonals', bare > 0 && gapOK && octants.has('+++'), `${bare} points in ${[...octants].join(' ')}; largest (x·eⱼ)² there ${Math.max(0, ...pts.filter((y, k) => ids[k] === 'ball').map((y) => Math.max(...y.map((c) => c * c)))).toFixed(4)}`);
+  }
+}
+// a target the ball hides cannot be grabbed; one in front can
+await pick('six'); await seek(1e9);
+const xs = await state(), toward = Math.atan2(-xs.p[0], -xs.p[1]);
+await page.evaluate((v) => window.ANGLES_DEBUG.view(v), [toward + Math.PI, -0.4]); await settle(page);
+let at = await page.evaluate(() => window.ANGLES_DEBUG.screen(window.ANGLES_DEBUG.state.target.map((c) => c * window.ANGLES_DEBUG.layers.mark)));
+const camBack = await page.evaluate(() => window.ANGLES_DEBUG.camera());
+await page.mouse.move(at[0], at[1]); await page.mouse.down(); await page.mouse.move(at[0] - 50, at[1] + 30, { steps: 4 }); await page.mouse.up(); s = await state();
+check('cover: a target behind the ball cannot be grabbed (the drag turns the camera instead)', vclose(s.target, xs.target, 1e-12) && (await page.evaluate(() => window.ANGLES_DEBUG.camera())).yaw !== camBack.yaw);
+await page.evaluate((v) => window.ANGLES_DEBUG.view(v), [toward, 0.3]); await settle(page);
+at = await page.evaluate(() => window.ANGLES_DEBUG.screen(window.ANGLES_DEBUG.state.target.map((c) => c * window.ANGLES_DEBUG.layers.mark)));
+await page.mouse.move(at[0], at[1]); await page.mouse.down(); await page.mouse.move(at[0] - 40, at[1] + 30, { steps: 4 }); await page.mouse.up(); s = await state();
+check('cover: a target in front of the ball can be grabbed and dragged; x follows it and its colours are recomputed', !vclose(s.target, xs.target, 1e-3) && vclose(s.p, s.target, 1e-9) && JSON.stringify(s.held) === JSON.stringify(held(s.p, RAW6)));
 
 // dragging the target ring
 await pick('address');

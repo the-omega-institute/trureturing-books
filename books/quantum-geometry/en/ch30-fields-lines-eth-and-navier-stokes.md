@@ -583,7 +583,7 @@ Comparing [@rem-ch30-vorticity-transport-literature] with the dimensional waters
   Juxtaposing the 2D planar regime recorded in [@rem-ch30-vorticity-transport-literature] with binary 2-SAT (`MODEL`), in our pinned `trureturing@dev` library the frozen theorem [`all_grade_regularity_of_mild_path`](lean:D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path) establishes a **conditional higher-grade regularity propagation theorem** on the 2D periodic Fourier lattice: given an already-existing continuous weighted-$H^2$, zero-mean, real divergence-free mild solution path on $[0, \tau]$ whose initial data is summable at all spatial Sobolev grades $m \in \mathbb{N}$, the path satisfies the strong differential equation at every grade $m$ (for unconditional 2D global smoothness in the classical PDE literature, see [@rem-ch30-navier-stokes-forced-literature]).
 
 ::: {.viz src="navier-stokes-p-np" preset="flat" height="500"}
-**Two dimensions: no stretching.** The vorticity is normal to the plane of the flow and nothing pulls on it. The tube does not thin; viscosity only widens it slowly (the cross-section $A$ grows from the dashed $1$ to about $2$), the circulation $\Gamma = \omega A$ of the cyan loop stays fixed, and the magenta vorticity can only fall (a schematic model, `MODEL`).
+**Two dimensions: no stretching.** The vorticity is normal to the plane of the flow and nothing pulls on it. The tube does not thin; viscosity only widens it slowly (the cross-section $A$ grows from the $1$ of the dashed circle on its end to about $2$), the circulation $\Gamma = \omega A$ of the cyan loop stays fixed, and the magenta vorticity can only fall (a schematic model, `MODEL`).
 :::
 
 - **Conditional 3D Slender-Tube Scenario ([@rem-ch30-vorticity-transport-literature]) $\leftrightarrow$ Analogy to Three-Body 3-SAT (`MODEL`)**:
@@ -763,7 +763,7 @@ For every smooth, divergence-free ($\nabla\cdot\mathbf{u}_0 = 0$) initial veloci
 :::
 
 ::: {.viz src="navier-stokes-p-np" preset="runaway" height="500"}
-**Thinner and thinner (a schematic model).** The circulation $\Gamma = \omega A$ of the cyan loop stays fixed; the dashed outline is the tube as it started. Here the strain is taken proportional to the vorticity itself ($\alpha = \kappa\omega$, a schematic closure and not a solution of the Navier–Stokes equations): $\kappa\Gamma = 0.50$ exceeds $4\pi\nu = 0.151$, so by $t = 2.4$ the cross-section is down to $0.162$ and the magenta vorticity up to $6.18$, and the cross-section reaches zero at $t^* = 2.86$. Whether a real three-dimensional fluid does this is the open problem stated just above (`MODEL`).
+**Thinner and thinner (a schematic model).** The circulation $\Gamma = \omega A$ of the cyan loop stays fixed; the faint shadow with its dashed circles is the tube as it started. Here the strain is taken proportional to the vorticity itself ($\alpha = \kappa\omega$, a schematic closure and not a solution of the Navier–Stokes equations): $\kappa\Gamma = 0.50$ exceeds $4\pi\nu = 0.151$, so by $t = 2.4$ the cross-section is down to $0.162$ and the magenta vorticity up to $6.18$, and the cross-section reaches zero at $t^* = 2.86$. Whether a real three-dimensional fluid does this is the open problem stated just above (`MODEL`).
 :::
 
 ### 3. Self-Reference of the Field and the Quadratic Advection Closure Obstruction (`LEAN ✓`)
