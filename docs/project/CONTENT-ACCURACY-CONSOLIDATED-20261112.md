@@ -52,3 +52,30 @@
 实施交付后，正式主线经 #140 前进到 `81a3d1b4fc5178bac0b7183d74c981fea1b6024a`。此次只变动第 33–34 章的四个双语正文和两个共享 SVG，与九个来源的 266 个唯一路径没有交集；中文权威版本及各语言环境、ID、GID、媒体序列与之前相同。调用方无冲突合入，保留六个正式主线文件原字节；原 35 单元、锁、工具、共享运行时及所迁修订不变。31–39 章仍只作为出版依赖，不能由这次合入获得校对覆盖。
 
 上述实施阶段的 HTML/site、读者视图及套件结果继续明确属于 f1 输入；新主线的结构、静态图新鲜度与 HTML 构建对应另行记录在综合 PR。完整输出、独立复审、两个已知 UI 阻塞及原 35 单元待办仍按上表跟踪，既有额度不重置。综合 PR 保持草稿，创建后关闭九个旧 PR并保留分支。
+
+
+## 四来源共享最后依赖／输出核查 · 2026-11-12
+
+本节对应综合草稿的冻结输入 `688a178936fc7384cddac6e75c478cb73824ddd3`（树 `ec4e66b3986a30c2184e2db81fa6bc1c2fdf4ae2`），已整合正式主线 `81a3d1b4fc5178bac0b7183d74c981fea1b6024a`，使用官方模板 0.5.1 与工具生成的 `6cfcf785096782b15084d719ec73c2ca16b6ed29/dev` 锁。此次共享 assignment 使用 #119、#134、#139、#141 各自原来保留的最后 1 次，四者均为 **已使用、剩余 0**；没有新增修复轮、复审轮或内容修复授权。工程核查已经终止，以下未满足条件仍须处置，不能记作独立内容批准。原 35 单元范围与历史 **9/35** 不变；第 31–39 章仅为出版依赖。
+
+当前证据根为 `/tmp/qg-final-output-688a178-20261112`；`collected-result.json` 是结构化移交入口，`evidence-sha256.json`、`output-files-sha256.json` 与 `changed-paths-sha256.json` 分别记录证据、实际输出及本轮六份台账最终摘要。文件摘要不自写进其所标识的台账，避免自引用；调用方应以交付 envelope 的摘要复核。本次不作提交、推送、远端作业变更、PR/目标生命周期或任何独立审查。
+
+源码对应：360/360 来源记录与当前字节相同；#119 的八份中英第 17–20 章与来源 `a0858ffa` 相同，#134 两份第 29 章仅各多三处空行，#141 两份第 30 章与 `ebb77e58` 相同。#139 的附录 A 旧表格经逐标签对应后，28 个双语修正字段均保留，终章参考引擎归属与当前计数同时保留。88 次章首引语比较、双语环境／媒体序列与 SUMMARY 对应通过，206 项正式模板清单（含符号链接）无差异。先前中断兼容副本没有成为收据或批准。见 `migration-recheck.json`、`per-origin-source-current.json`、`appendix28-current-fields.json`、`preservation-current.json`、`managed-official-v051.json`。
+
+精确 pin 对应覆盖声明图实际消费的全部 457 GID、215 模块／430 条源码和 Frozen 路径：原 pin 的 426 条路径逐字节不变，另四条为新增 RotationBoundary／RotationFaces 源码及状态路径；457 项 GID/kind/statement_id 均对应当前 Frozen 状态。原锁项没有删除或改写。未变修正及其旧源码／验算证据仅在这个精确闭包内复用；新增旋转内容、正式主线周边文字及第 31–39 章不继承内容批准，没有把旧整书导出改称当前。见 `source-pin-correspondence.json` 与保存的精确源码。独立复算两语各 215 formal／167 literature／6 open，锁 457＝320 theorem＋128 def＋9 inductive，44 单元、39 章、36 实验；声明图 457 行＝343 环境引用＋114 仅内联，引用差异 0；附录 C 为 251／95／111，457 个序号唯一，T041、T042 各一次。见 `counts-current.json`、`appendix-c-current-serials.json`。
+
+关闭构建缓存后实际执行中英 HTML、screen/print PDF、EPUB、slides、site 构建，全部退出 0；结构 check 为 0 错误／0 警告，150 张静态图为 0 stale／0 error，两份 EPUBCheck 均 valid、0 错误／0 警告。六份下载与 site 副本相同，两份 overview 各 39 页。`build-results.json`、`exports-current.json` 与 `input-output-unit-identity.json` 绑定当前输入、17 个生产单元键、工具版本、环境及缓存字体摘要；`consumer-binding-current.json` 另核对 20 份实验发布 JS/CSS、88 个 EPUB SVG 变换副本、136 张引用卡 JPG 与六份 deck SVG 变换。没有手改生成器、锁或托管输入；生成器没有改变任何追踪源码。
+
+实际阅读覆盖中英、light/navy、1440/390 的 80 个 HTML 组合／280 张原始截图，另做序曲计数图、末段、Pulse 条目的选择器补查；终章与附录 B 手机表格八组普通横向滚轮均能移动。两份实际 EPUB 提取 XHTML 在 light/dark 偏好、760/390 下作 64 组合／112 张原始截图，再补当前附录 C 的三个真实 section ID。修正了临时脚本的旧标题／路由／选择器，不改产品。已查看相关双语深浅手机／桌面、条件公式、词典与登记的汇总图；具体已看清单为 `visual-inspection-current.json`，不声称查看了全部截图或整本每页。HTML 原始页面没有脚本错误、失败资源、坏图、KaTeX 错误或整页横向溢出；EPUB 手机数学／长表的现有横向溢出最大仍为 474px，dark preference 仍是固定纸面样式，不是原生 Apple Books／实体设备批准。
+
+PDF 三类必须分开：本机默认中文 screen/print 为 888/928 页、英文 940/972 页，**每份中文仍有 28 页、英文 27 页使用 LastResort**。相同暂存 `main.typ` 使用既有字体目录并设置 `ignore_system_fonts=True` 的另行受控编译页数相同，没有 LastResort，但每份中文有 190、英文 206 条字体警告。精确 head 的 push CI `43178521288` 与 PR CI `43178553054` 现均 success；已下载 push 的 books-dist，CI 中文 896/932 页、英文 1015/1047 页，没有 LastResort，与本机两类均非等价字节或分页。CI 动态字体／工具清单没有从日志读取，不假定环境等价。对受控及 CI 四版分别作 37 个章节限定文本探针、实际页面裁图和数学补查：N、κ 的自然数／正值条件、Lüders 的非零条件、B.5/B.8/B.10 的假设与量词可见；最初文本探针漏掉数学或 Num-bers 换行，原结果保留。目标页未见所查数学源码泄漏或物理页边界越界。见 `pdf-reader-report.json`、`pdf-scoped-reader.json`、`pdf-symbolic-followup.json`、`controlled-pdf.json`、`ci-current.json`、`ci-pr-latest.json`。当前成功不追认历史默认字体失败，也不批准整本版式。
+
+当前既有浏览器套件共 16 次、2153 条断言全部通过：rapidity、layered-network、ETH、complexity、timeless、Pythagoras、Navier–Stokes、golden-cut、spatial-attractor、声明图的普通套件，以及六项原域慢帧套件；没有改测试、缩域或避开控件。ETH 保留全部 1296 维数组合及独立精确有理秩 NARROW `(1,5,1,5)`：draw0＝3、draw10＝2。另复算 `(5,1,5,1)` 的冻结三项量 5 与完整四割最小值 3，保留正数／排序／锥域限制；Kasteleyn 四环同号例与 Gram 60°/45° 半宽 0.6123724356957945 仅为独立有限验算，不代替普遍证明。实际查看 40 个当前实验视图、八个 Pythagoras 引用几何视图和八个终章真实 iframe 的普通鼠标／键盘轨道操作；后者当前成功仅是所测组合观察，不追认任意旧手机控件通过。见 `lab-results.json`、`independent-current-controls.json`、`media-reader-current.json`、`known-and-embedded-current.json`。
+
+**仍阻塞的共享消费者：**中英第 30 章第 461 行完整实验室图注仍说“三道割／three cuts”，把锥域内当前抽样秩混作可达最优值，并把锥域外一概说成三桥瓶颈；该错误实际进入当前 HTML/PDF/EPUB。`(1,1,1,5)` 在锥域外且完整割为 `(5,1,3,15)`，最小值 `bc=1`，三桥并非瓶颈。原 #119 已记录的 skill 旧“三道割”说明也未获本轮编辑权限。本轮冻结源码，没有修这两处，也不能据套件成功关闭原 C5/C6 对应条件；须由调用方按已有治理安排处置。
+
+**仍阻塞的 UI／输出：**原 #127 的两个已确认缺陷均复现：sphere-escape／fixed-point-convergence 在 1440×500、1280×480、双语 fresh/resize 的 16 组舞台／条带重叠 15.1875–94.4375px；334px 引用卡中 sphere 双语及 Newton 英文标题/HUD 重叠，Newton 中文该次未复现。该批旧 repair remaining 0，不修、不降测试、不宣称解决，继续影响第 29 章依赖及全目标闭环。幻灯片实际正确 `#/2`、`#/3`、`#/22`、`#/32` 路由完成双语、深浅偏好、1920/1440/390 共 48 视图；实际哈希 SVG 正常显示，但每语 12 个 preload SVG 路径仍 404，Wake Lock 仍被拒绝，手机固定画布很小。没有下游模板补丁。见 `known-and-embedded-current.json`、`media-reader-current.json`。
+
+**影片未闭环：**要求完整影片构建时，本机实测缺少 film Python packages、Kokoro 模型与 voices，未安装依赖。保存的 shell 最终 0 来自打印诊断尾部，绝非 film build 通过。film005/008 从当前源码新生成各五时刻与 poster 共 12 张临时静帧并实际查看，半宽／双曲参考情形仍有源码与算术对应；临时时间线不是旁白时序。最终站点有八个影片海报回退。CI 的 Slides and films success 只支持其作业完成；现有 books-dist／books-html／slides-pdf 上传没有可供本轮读者验收的整片，不能替代观看、听音频、字幕同步、时长或原生播放验收。没有用旧 MP4 的缓存键／元数据冒称新片，也不追认历史 ASSUMED-UNVERIFIED 实施路线。见 `film-current-limits.json`、`films-required.txt`。
+
+此次仅追加六份授权台账，完整原前缀保留；自有服务、浏览器和检查进程结束。#119 强制 R3、#134/#139/#141 初始 R1 仍欠，#114 R5、#118 未完成 R4 覆盖、#130 R2 也仍由调用方负责。综合独立内容批准、未满足消费者/UI/字体/EPUB/影片条件、原 35 单元其余覆盖、正式候选 CI/合入/Pages 均不得由本实施结果代替；既有源证据仅按上述闭包保存，不增加覆盖或作合入建议。

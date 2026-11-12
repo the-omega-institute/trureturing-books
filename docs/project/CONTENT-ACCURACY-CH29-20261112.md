@@ -91,3 +91,12 @@ Pythagoras 的 F14/F15 和负半径问题仍由 PR127 独立负责；本次不�
 剩余 assignment2 只用于实际依赖到位后的当前源码对应、必要整合与最终输出验证，不自动扩充问题范围。若当前主线改变，须比较最终正文、pin、相关媒体/工具/资源和消费输入；不能把本次 44 单元产物冒称后续版本产物。新 coda 及新增章节内容仍由其他工作负责。
 
 调用方继续负责 staging、commit、push、draft PR、initial R1 三席独立审查、后续复审、当前 CI、merge、Pages；正式候选须与本次修订散列建立对应。所有阻塞问题及依赖闭环后再作批准，本次不返回批准结论。历史 original35 汇总和未审单元状态不改。
+
+
+## 综合候选 688a178 的保留最后 assignment · 2026-11-12
+
+本批已保留的 assignment 2/2 现使用最后 1、剩余 0，没有增加修复次数。来源 `38a94883e81b76be8be16b50789015d40370255f` 的中英第 29 章与当前仅各多三处空行；原 precise-source、非退化／驻相近似／双二次曲面与 timeless-causal-crystal 归属的最小修正保留。当前 pin 的原源码闭包未变，来源／文献证据只在这个范围内复用。实际迁入 #127 的 Pythagoras 依赖后，当前双语站点、四 PDF、两 EPUB/EPUBCheck、timeless 与 Pythagoras 普通及慢帧套件、当前 drawer/引用卡、film008 半宽复算和临时静帧已有对应。
+
+该工程结果不构成完整 UI 或媒体闭环。#127 两个已确认布局阻塞在原尺寸域复现，其旧 remaining 0；不修、不降域、不宣布第 29 章媒体通过。film008 全片／音频／字幕、默认 PDF LastResort、EPUB 窄列／原生阅读器限制仍欠；现有 CI success 不等于实际媒体验收。**initial R1 三席**、其后正式候选与生命周期仍由调用方承担，原 35／历史 9/35 不变。
+
+共享完整命令、来源／产物对应、原尺寸 UI 阻塞与未满足条件见 `CONTENT-ACCURACY-CONSOLIDATED-20261112.md` 的“四来源共享最后依赖／输出核查”追加节；私有证据入口 `/tmp/qg-final-output-688a178-20261112/collected-result.json`。本实施结果不是独立审查、合入或 Pages 批准。
