@@ -74,7 +74,10 @@
   /* ---------- state ---------- */
   const S = { scene: 'speed', levels: 3, alpha: 45, N: 4, delta: 45 };
   let SF = speedFacts(weights(S.levels, S.alpha)), MON = monitor(S.delta * DEG, ITER);
-  const refresh = () => { SF = speedFacts(weights(S.levels, S.alpha)); MON = monitor(S.delta * DEG, ITER); };
+  // a second step size drawn as a dashed staircase over the columns: a different shape, the same magenta area
+  const cmpDelta = () => (S.delta === 90 ? 45 : 90);
+  let CMP = monitor(cmpDelta() * DEG, ITER);
+  const refresh = () => { SF = speedFacts(weights(S.levels, S.alpha)); MON = monitor(S.delta * DEG, ITER); CMP = monitor(cmpDelta() * DEG, ITER); };
 
   /* ---------- layout: the object on the left (or on top), its chart on the right (or below) ---------- */
   let boxes = null, chart = null;
@@ -250,12 +253,18 @@
       if (m.s_[n] > 1e-9) f.rect(n - hw, returned, n + hw, 1, P.magenta, { alpha: 0.6 });
     }
     f.hline(1, P.ink, { dash: [5, 4], alpha: 0.85, width: 1.2 * TH });
+    // the other step size: the top of its returned part, as a staircase, and its magenta area so far
+    let back2 = 0, area2 = 0; const stair = [];
+    for (let n = 0; n <= j; n++) { if (n >= 1) back2 += CMP.p[n]; area2 += CMP.s_[n]; stair.push([n - 0.5, back2], [n + 0.5, back2]); }
+    f.line(stair, P.magenta, { width: 1.8 * TH, dash: [5, 3] });
     f.rect(j - hw - 0.12, 0, j + hw + 0.12, 1, P.amber, { fill: false, stroke: P.amber, width: 1.6 * TH, glow: 8 });
     if (!TRV.thumbMode) {
       tagAt('one', f, NR, 1, L('= 1', '= 1'), 'num', -10, -10);
-      tagAt('area', f, NR * 0.45, 1.07, L(`品红面积 ${fix(area, 3)}`, `magenta area ${fix(area, 3)}`), 'mg', 0, 0);
+      // tags are set in capitals, which would turn δ into Δ: the step size is written in words here
+      tagAt('area', f, NR * 0.3, 1.07, L(`步长 ${S.delta}° · 品红面积 ${fix(area, 3)}`, `step ${S.delta}° · magenta area ${fix(area, 3)}`), 'mg', 0, 0);
+      tagAt('area2', f, NR * 0.76, 1.07, L(`虚线 步长 ${cmpDelta()}° · ${fix(area2, 3)}`, `dashed: step ${cmpDelta()}° · ${fix(area2, 3)}`), 'mg', 0, 0);
     }
-    return { j, fr, r, returned, area, notYet: m.s_[j] };
+    return { j, fr, r, returned, area, notYet: m.s_[j], cmp: { delta: cmpDelta(), returned: back2, area: area2 } };
   }
 
   /* ---------- stage ---------- */
@@ -325,7 +334,7 @@
   const LEGEND = {
     speed: [['cy', '到起点的夹角 θ；左边：重叠的各支', 'angle θ to the start; left: the parts of the overlap'], ['dm', '速度线 ΔH·t', 'speed line ΔH·t'], ['mg', '90° 的墙；左边：重叠为 0', 'the 90° wall; left: zero overlap'], ['am', '此刻', 'now']],
     zeno: [['cy', '线上的影子 · 留下的概率', 'shadow on the line · chance to stay'], ['mg', '离开线的一份 · 走掉的概率', 'part off the line · chance gone'], ['dm', '不看时的路', 'the unwatched path'], ['am', '当前的箭头', 'the current arrow']],
-    return: [['cy', '柱：已返回 · 球：箭头在线上的影子', 'columns: returned · sphere: the arrow\'s shadow on the line'], ['mg', '柱：还没回来 · 球：离开线的一份', 'columns: not yet · sphere: the part off the line'], ['am', '当前这一步 · 还没回来的那一支', 'the current step · the branch not yet back']]
+    return: [['cy', '柱：已返回 · 球：箭头在线上的影子', 'columns: returned · sphere: the arrow\'s shadow on the line'], ['mg', '柱：还没回来 · 球：离开线的一份', 'columns: not yet · sphere: the part off the line'], ['mg', '虚线台阶：另一个步长的已返回', 'dashed steps: returned, for another step size'], ['am', '当前这一步 · 还没回来的那一支', 'the current step · the branch not yet back']]
   };
   function drawText() {
     const t = clock.t;
@@ -429,7 +438,7 @@
     unequal: ['权重角 α = 30°：左边长箭头 0.75、短箭头 0.25，怎么转也抵消不完，琥珀色的点绕着青色虚线圆走，离品红的圆心最近 0.5。右边夹角最多升到 60°，碰不到品红的墙。', 'Weight angle α = 30°: on the left a long arrow of 0.75 and a short one of 0.25 never cancel; the amber dot circles outside the dashed cyan ring and comes no closer than 0.5 to the magenta centre. On the right the angle rises to 60° at most and never touches the magenta wall.'],
     strobe4: ['频闪 4 次，停在第 4 次测量之前：箭头刚转完这一段的 45°（青色的弧），离开线的品红横段长 sin 45° ≈ 0.71，是一阶；青色的影子只短了 1 − cos 45° ≈ 0.29，是二阶。右边留下的概率每测一次降一截，此刻 0.531；虚线是不看时的路，到 180° 全部走掉。', 'Four strobes, stopped before the fourth look: the arrow has just finished this 45° turn (the cyan arc); the magenta part off the line is sin 45° ≈ 0.71 long, first order, while the cyan shadow is only 1 − cos 45° ≈ 0.29 shorter, second order. On the right the chance to stay drops a step at every look and is 0.531 now; the dashed line is the unwatched path, which loses everything by 180°.'],
     strobe16: ['频闪 16 次，停在最后一段的半途：每段只转 11.25°，品红的一份刚露头就被拉回，青色的影子几乎不短。右边青色几乎铺满，此刻还剩 0.863，终点 N = 16 的环是 0.857。', 'Sixteen strobes, stopped half-way through the last turn: each turn is only 11.25°; the magenta part barely shows before the arrow is pulled back, and the cyan shadow hardly shortens. On the right the cyan nearly fills the plot: 0.863 is left now, and the ring at the end, N = 16, is 0.857.'],
-    mean: ['δ = 45°：每一步之后问一次“回来了吗”。第一根之后的柱子青色涨、品红缩，每根都正好到 1 这条线；品红面积从 1 涨向 2。', 'δ = 45°: after every step ask “back yet?”. Past the first column the cyan grows and the magenta shrinks, and every column reaches exactly the line at 1; the magenta area grows from 1 towards 2.']
+    mean: ['δ = 45°：每一步之后问一次“回来了吗”。第一根之后的柱子青色涨、品红缩，每根都正好到 1 这条线；品红面积从 1 涨向 2。品红虚线台阶是步长 δ = 90° 的同一本账：第一步就回来一半，此后很快回满，形状完全不同，品红面积同样走到 2。', 'δ = 45°: after every step ask “back yet?”. Past the first column the cyan grows and the magenta shrinks, and every column reaches exactly the line at 1; the magenta area grows from 1 towards 2. The dashed magenta staircase is the same ledger for the step δ = 90°: half comes back at the first step and the rest soon after, a quite different shape, yet its magenta area also reaches 2.']
   };
   let booting = true, moving = null;
   function applyPreset(id) {
@@ -471,7 +480,7 @@
         scene: S.scene, levels: S.levels, alpha: S.alpha, N: S.N, delta: S.delta, t, max: clock.max, playing: clock.playing, preset: cards.current,
         speed: { w: SF.w.slice(), theta: angleOf(SF.w, t), overlap: overlap(SF.w, t), arc: SF.dH * t, dH: SF.dH, meanH: SF.meanH, tauMT: SF.tauMT, tauML: SF.tauML, tauPerp: SF.tauPerp, minOv: SF.minOv, maxAngle: SF.maxAngle },
         zeno: { k: z.k, phi: z.phi, p1: z.p1, S: z.S, PN: z.PN },
-        ret: { j, p: MON.p.slice(0, NR + 1), s: MON.s_.slice(0, NR + 1), returned, notYet: MON.s_[j], mean: MON.mean, meanNp: MON.meanNp, sumP: MON.sumP },
+        ret: { j, p: MON.p.slice(0, NR + 1), s: MON.s_.slice(0, NR + 1), returned, notYet: MON.s_[j], mean: MON.mean, meanNp: MON.meanNp, sumP: MON.sumP, cmp: last && last.cmp ? Object.assign({}, last.cmp) : null },
         arrow: last && last.r ? last.r.slice() : null
       };
     },
