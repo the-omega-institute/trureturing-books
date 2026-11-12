@@ -1,99 +1,99 @@
-<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch01-shutter" data-lang="en" viewBox="0 0 540 270" width="540" height="270" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="A schematic. On the left a wheel whose rim is ticked all the way round: the direction can stop at any angle, and the amber arrow is the direction now. In the middle a vertical shutter splits along e₃ into an upper and a lower channel. On the right there are only two exits: the upper channel is recorded as +1 and the lower as −1, each a cyan dot.">
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch01-shutter" data-lang="en" viewBox="0 0 450 230" width="450" height="230" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="A schematic. On the left a wheel whose rim is ticked all the way round: the direction can stop at any angle, and the amber arrow is the direction now. In the middle a vertical shutter splits along e₃ into an upper and a lower channel. On the right there are only two exits: the upper channel is recorded as +1 and the lower as −1, each a cyan dot.">
 <title>A schematic. On the left a wheel whose rim is ticked all the way round: the direction can stop at any angle, and the amber arrow is the direction now. In the middle a vertical shutter splits along e₃ into an upper and a lower channel. On the right there are only two exits: the upper channel is recorded as +1 and the lower as −1, each a cyan dot.</title>
 <style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
-<circle cx="104" cy="128" r="76" class="ts-dim tf-cyan" stroke-width="1.5" fill-opacity="0.04"/>
-<line x1="171" y1="128" x2="180" y2="128" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="174.73" y1="121.81" x2="179.71" y2="121.38" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="173.92" y1="115.67" x2="178.85" y2="114.8" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="172.58" y1="109.62" x2="177.41" y2="108.33" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="170.72" y1="103.72" x2="175.42" y2="102.01" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="168.35" y1="97.99" x2="172.88" y2="95.88" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="162.02" y1="94.5" x2="169.82" y2="90" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="162.16" y1="87.28" x2="166.26" y2="84.41" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="158.39" y1="82.36" x2="162.22" y2="79.15" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="154.2" y1="77.8" x2="157.74" y2="74.26" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="149.64" y1="73.61" x2="152.85" y2="69.78" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="144.72" y1="69.84" x2="147.59" y2="65.74" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="137.5" y1="69.98" x2="142" y2="62.18" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="134.01" y1="63.65" x2="136.12" y2="59.12" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="128.28" y1="61.28" x2="129.99" y2="56.58" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="122.38" y1="59.42" x2="123.67" y2="54.59" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="116.33" y1="58.08" x2="117.2" y2="53.15" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="110.19" y1="57.27" x2="110.62" y2="52.29" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="104" y1="61" x2="104" y2="52" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="97.81" y1="57.27" x2="97.38" y2="52.29" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="91.67" y1="58.08" x2="90.8" y2="53.15" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="85.62" y1="59.42" x2="84.33" y2="54.59" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="79.72" y1="61.28" x2="78.01" y2="56.58" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="73.99" y1="63.65" x2="71.88" y2="59.12" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="70.5" y1="69.98" x2="66" y2="62.18" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="63.28" y1="69.84" x2="60.41" y2="65.74" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="58.36" y1="73.61" x2="55.15" y2="69.78" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="53.8" y1="77.8" x2="50.26" y2="74.26" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="49.61" y1="82.36" x2="45.78" y2="79.15" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="45.84" y1="87.28" x2="41.74" y2="84.41" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="45.98" y1="94.5" x2="38.18" y2="90" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="39.65" y1="97.99" x2="35.12" y2="95.88" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="37.28" y1="103.72" x2="32.58" y2="102.01" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="35.42" y1="109.62" x2="30.59" y2="108.33" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="34.08" y1="115.67" x2="29.15" y2="114.8" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="33.27" y1="121.81" x2="28.29" y2="121.38" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="37" y1="128" x2="28" y2="128" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="33.27" y1="134.19" x2="28.29" y2="134.62" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="34.08" y1="140.33" x2="29.15" y2="141.2" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="35.42" y1="146.38" x2="30.59" y2="147.67" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="37.28" y1="152.28" x2="32.58" y2="153.99" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="39.65" y1="158.01" x2="35.12" y2="160.12" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="45.98" y1="161.5" x2="38.18" y2="166" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="45.84" y1="168.72" x2="41.74" y2="171.59" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="49.61" y1="173.64" x2="45.78" y2="176.85" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="53.8" y1="178.2" x2="50.26" y2="181.74" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="58.36" y1="182.39" x2="55.15" y2="186.22" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="63.28" y1="186.16" x2="60.41" y2="190.26" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="70.5" y1="186.02" x2="66" y2="193.82" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="73.99" y1="192.35" x2="71.88" y2="196.88" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="79.72" y1="194.72" x2="78.01" y2="199.42" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="85.62" y1="196.58" x2="84.33" y2="201.41" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="91.67" y1="197.92" x2="90.8" y2="202.85" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="97.81" y1="198.73" x2="97.38" y2="203.71" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="104" y1="195" x2="104" y2="204" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="110.19" y1="198.73" x2="110.62" y2="203.71" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="116.33" y1="197.92" x2="117.2" y2="202.85" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="122.38" y1="196.58" x2="123.67" y2="201.41" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="128.28" y1="194.72" x2="129.99" y2="199.42" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="134.01" y1="192.35" x2="136.12" y2="196.88" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="137.5" y1="186.02" x2="142" y2="193.82" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="144.72" y1="186.16" x2="147.59" y2="190.26" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="149.64" y1="182.39" x2="152.85" y2="186.22" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="154.2" y1="178.2" x2="157.74" y2="181.74" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="158.39" y1="173.64" x2="162.22" y2="176.85" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="162.16" y1="168.72" x2="166.26" y2="171.59" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="162.02" y1="161.5" x2="169.82" y2="166" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="168.35" y1="158.01" x2="172.88" y2="160.12" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="170.72" y1="152.28" x2="175.42" y2="153.99" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="172.58" y1="146.38" x2="177.41" y2="147.67" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="173.92" y1="140.33" x2="178.85" y2="141.2" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="174.73" y1="134.19" x2="179.71" y2="134.62" class="ts-faint" stroke-width="1.1" fill="none"/>
-<line x1="104" y1="128" x2="154.71" y2="88.38" class="ts-amber" stroke-width="2.6" fill="none"/>
-<path d="M160.74 83.67 L155.97 92.19 L151.32 86.23Z" class="tf-amber"/>
-<circle cx="104" cy="128" r="3" class="tf-dim"/>
-<path d="M134.1 45.31 L128.26 43.41 L122.3 41.92 L116.25 40.86 L110.14 40.21 L104 40 L97.86 40.21 L91.75 40.86 L85.7 41.92 L79.74 43.41 L73.9 45.31 L68.21 47.61 L62.69 50.3 L57.37 53.37 L52.27 56.81 L47.43 60.59 L42.87 64.7 L38.6 69.12" class="ts-dim" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
-<path d="M38.6 69.12 L41.35 62.04 L45.58 66.12Z" class="tf-dim"/>
-<text class="tf-dim" x="104" y="236" font-size="13" text-anchor="middle">direction: any angle</text>
-<line x1="190" y1="128" x2="249.2" y2="128" class="ts-dim" stroke-width="1.6" fill="none"/>
-<path d="M256 128 L248 131.36 L248 124.64Z" class="tf-dim"/>
-<rect x="262" y="62" width="44" height="132" rx="4" class="ts-ink tf-panel" stroke-width="1.6"/>
-<line x1="284" y1="184" x2="284" y2="78.8" class="ts-cyan" stroke-width="1.6" fill="none"/>
-<path d="M284 72 L287.36 80 L280.64 80Z" class="tf-cyan"/>
-<text class="tf-cyan" x="292" y="52" font-size="14"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
-<text class="tf-dim" x="284" y="218" font-size="13" text-anchor="middle">shutter</text>
-<path d="M306 110 L356 98 L436 66" class="ts-cyan" stroke-width="2" stroke-linejoin="round" fill="none"/>
-<path d="M436 66 L429.82 72.09 L427.32 65.85Z" class="tf-cyan"/>
-<path d="M306 146 L356 158 L436 190" class="ts-cyan" stroke-width="2" stroke-linejoin="round" fill="none"/>
-<path d="M436 190 L427.32 190.15 L429.82 183.91Z" class="tf-cyan"/>
-<circle cx="450" cy="66" r="6.5" class="ts-bg tf-cyan" stroke-width="1.4"/>
-<circle cx="450" cy="190" r="6.5" class="ts-bg tf-cyan" stroke-width="1.4"/>
-<text class="tf-cyan" x="464" y="71.76" font-size="16" font-weight="600">+1</text>
-<text class="tf-cyan" x="464" y="195.76" font-size="16" font-weight="600">−1</text>
-<text class="tf-dim" x="462" y="132.68" font-size="13" text-anchor="middle">two records only</text>
+<circle cx="84" cy="124" r="66" class="ts-dim tf-cyan" stroke-width="1.5" fill-opacity="0.04"/>
+<line x1="141" y1="124" x2="150" y2="124" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="144.77" y1="118.68" x2="149.75" y2="118.25" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="144.07" y1="113.41" x2="149" y2="112.54" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="142.92" y1="108.21" x2="147.75" y2="106.92" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="141.32" y1="103.14" x2="146.02" y2="101.43" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="139.28" y1="98.22" x2="143.82" y2="96.11" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="133.36" y1="95.5" x2="141.16" y2="91" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="133.97" y1="89.01" x2="138.06" y2="86.14" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="130.73" y1="84.79" x2="134.56" y2="81.58" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="127.13" y1="80.87" x2="130.67" y2="77.33" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="123.21" y1="77.27" x2="126.42" y2="73.44" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="118.99" y1="74.03" x2="121.86" y2="69.94" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="112.5" y1="74.64" x2="117" y2="66.84" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="109.78" y1="68.72" x2="111.89" y2="64.18" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="104.86" y1="66.68" x2="106.57" y2="61.98" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="99.79" y1="65.08" x2="101.08" y2="60.25" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="94.59" y1="63.93" x2="95.46" y2="59" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="89.32" y1="63.23" x2="89.75" y2="58.25" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="84" y1="67" x2="84" y2="58" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="78.68" y1="63.23" x2="78.25" y2="58.25" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="73.41" y1="63.93" x2="72.54" y2="59" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="68.21" y1="65.08" x2="66.92" y2="60.25" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="63.14" y1="66.68" x2="61.43" y2="61.98" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="58.22" y1="68.72" x2="56.11" y2="64.18" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="55.5" y1="74.64" x2="51" y2="66.84" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="49.01" y1="74.03" x2="46.14" y2="69.94" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="44.79" y1="77.27" x2="41.58" y2="73.44" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="40.87" y1="80.87" x2="37.33" y2="77.33" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="37.27" y1="84.79" x2="33.44" y2="81.58" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="34.03" y1="89.01" x2="29.94" y2="86.14" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="34.64" y1="95.5" x2="26.84" y2="91" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="28.72" y1="98.22" x2="24.18" y2="96.11" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="26.68" y1="103.14" x2="21.98" y2="101.43" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="25.08" y1="108.21" x2="20.25" y2="106.92" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="23.93" y1="113.41" x2="19" y2="112.54" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="23.23" y1="118.68" x2="18.25" y2="118.25" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="27" y1="124" x2="18" y2="124" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="23.23" y1="129.32" x2="18.25" y2="129.75" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="23.93" y1="134.59" x2="19" y2="135.46" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="25.08" y1="139.79" x2="20.25" y2="141.08" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="26.68" y1="144.86" x2="21.98" y2="146.57" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="28.72" y1="149.78" x2="24.18" y2="151.89" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="34.64" y1="152.5" x2="26.84" y2="157" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="34.03" y1="158.99" x2="29.94" y2="161.86" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="37.27" y1="163.21" x2="33.44" y2="166.42" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="40.87" y1="167.13" x2="37.33" y2="170.67" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="44.79" y1="170.73" x2="41.58" y2="174.56" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="49.01" y1="173.97" x2="46.14" y2="178.06" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="55.5" y1="173.36" x2="51" y2="181.16" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="58.22" y1="179.28" x2="56.11" y2="183.82" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="63.14" y1="181.32" x2="61.43" y2="186.02" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="68.21" y1="182.92" x2="66.92" y2="187.75" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="73.41" y1="184.07" x2="72.54" y2="189" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="78.68" y1="184.77" x2="78.25" y2="189.75" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="84" y1="181" x2="84" y2="190" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="89.32" y1="184.77" x2="89.75" y2="189.75" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="94.59" y1="184.07" x2="95.46" y2="189" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="99.79" y1="182.92" x2="101.08" y2="187.75" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="104.86" y1="181.32" x2="106.57" y2="186.02" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="109.78" y1="179.28" x2="111.89" y2="183.82" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="112.5" y1="173.36" x2="117" y2="181.16" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="118.99" y1="173.97" x2="121.86" y2="178.06" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="123.21" y1="170.73" x2="126.42" y2="174.56" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="127.13" y1="167.13" x2="130.67" y2="170.67" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="130.73" y1="163.21" x2="134.56" y2="166.42" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="133.97" y1="158.99" x2="138.06" y2="161.86" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="133.36" y1="152.5" x2="141.16" y2="157" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="139.28" y1="149.78" x2="143.82" y2="151.89" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="141.32" y1="144.86" x2="146.02" y2="146.57" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="142.92" y1="139.79" x2="147.75" y2="141.08" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="144.07" y1="134.59" x2="149" y2="135.46" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="144.77" y1="129.32" x2="149.75" y2="129.75" class="ts-faint" stroke-width="1.1" fill="none"/>
+<line x1="84" y1="124" x2="126.83" y2="90.54" class="ts-amber" stroke-width="2.6" fill="none"/>
+<path d="M132.86 85.83 L128.09 94.35 L123.44 88.39Z" class="tf-amber"/>
+<circle cx="84" cy="124" r="3" class="tf-dim"/>
+<path d="M110.68 50.7 L105.5 49.02 L100.22 47.7 L94.86 46.76 L89.44 46.19 L84 46 L78.56 46.19 L73.14 46.76 L67.78 47.7 L62.5 49.02 L57.32 50.7 L52.27 52.74 L47.38 55.13 L42.67 57.85 L38.15 60.9 L33.86 64.25 L29.82 67.89 L26.03 71.81" class="ts-dim" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+<path d="M26.03 71.81 L28.78 64.73 L33.01 68.81Z" class="tf-dim"/>
+<text class="tf-dim" x="84" y="222" font-size="14" text-anchor="middle">any direction</text>
+<line x1="160" y1="124" x2="187.2" y2="124" class="ts-dim" stroke-width="1.6" fill="none"/>
+<path d="M194 124 L186 127.36 L186 120.64Z" class="tf-dim"/>
+<rect x="200" y="58" width="42" height="132" rx="4" class="ts-ink tf-panel" stroke-width="1.6"/>
+<line x1="221" y1="180" x2="221" y2="74.8" class="ts-cyan" stroke-width="1.6" fill="none"/>
+<path d="M221 68 L224.36 76 L217.64 76Z" class="tf-cyan"/>
+<text class="tf-cyan" x="229" y="48" font-size="15"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim" x="221" y="222" font-size="14" text-anchor="middle">shutter</text>
+<path d="M242 106 L286 94 L358 62" class="ts-cyan" stroke-width="2" stroke-linejoin="round" fill="none"/>
+<path d="M358 62 L352.05 68.32 L349.32 62.18Z" class="tf-cyan"/>
+<path d="M242 142 L286 154 L358 186" class="ts-cyan" stroke-width="2" stroke-linejoin="round" fill="none"/>
+<path d="M358 186 L349.32 185.82 L352.05 179.68Z" class="tf-cyan"/>
+<circle cx="372" cy="62" r="6.5" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="372" cy="186" r="6.5" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-cyan" x="386" y="68.12" font-size="17" font-weight="600">+1</text>
+<text class="tf-cyan" x="386" y="192.12" font-size="17" font-weight="600">−1</text>
+<text class="tf-dim" x="378" y="129.04" font-size="14" text-anchor="middle">two records only</text>
 </svg>

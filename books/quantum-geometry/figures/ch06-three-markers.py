@@ -12,7 +12,7 @@ import math
 
 from _ch06 import along
 
-SIZE = (548, 372)
+SIZE = (460, 372)
 ALT = {
     "zh": "三行，每行左边是一个小圆，里面画标记的两支箭头：灰色的 r_L 横放，琥珀色的 r_R 与它夹角 α；右边是屏上落点的分布。"
           "第一行“不标记”：α = 0，两支箭头重合，屏上是对比度满格的青色条纹。第二行“标记路径”：α = 90°，两支箭头垂直，品红的竖线是可区分度 D = 1，"
@@ -57,11 +57,11 @@ def draw(fig):
         cy = top + 60
         V = math.cos(math.radians(alpha))
         assert abs(V - (1 if alpha == 0 else 0)) < 1e-12
-        fig.text(8, cy - 8, t(*name), size=14, weight=600)
-        fig.text(8, cy + 14, f"α = {alpha}°", size=13, color="dim")
+        fig.text(8, cy - 8, t(*name), size=15, weight=600)
+        fig.text(8, cy + 16, f"α = {alpha}°", size=14, color="dim")
 
         # marker circle
-        mx, my, r = 160, cy, 42
+        mx, my, r = 162, cy, 40
         fig.circle(mx, my, r, color="faint", width=1.1, dash="3 4")
         if i == 2:          # read the marker along the two diagonals r_L ± r_R
             p, q = along(mx, my, 45, r + 8), along(mx, my, 225, r * 0.3)
@@ -74,11 +74,11 @@ def draw(fig):
             fig.line(mx, my, *tr, "area", 6, cap="round", opacity=0.8)
         fig.arrow(mx, my, *tl, "dim", 2.4)
         fig.arrow(mx, my, *tr, "now", 2.4)
-        fig.text(tl[0] + 6, tl[1] + 16, "*r*_{L}", size=13, color="dim")
-        fig.text(tr[0] + (6 if alpha == 0 else 8), tr[1] - (8 if alpha == 0 else 0), "*r*_{R}", size=13, color="now")
+        fig.text(tl[0] + 6, tl[1] + 16, "*r*_{L}", size=14, color="dim")
+        fig.text(tr[0] + (6 if alpha == 0 else 8), tr[1] - (8 if alpha == 0 else 0), "*r*_{R}", size=14, color="now")
 
         # the screen
-        ax = fig.axes(236, top + 14, 300, 92, (-1.5, 1.5), (0, 1.05))
+        ax = fig.axes(232, top + 14, 220, 92, (-1.5, 1.5), (0, 1.05))
         ax.cv.line(ax.X(-1.5), ax.Y(0), ax.X(1.5), ax.Y(0), "faint", 1.1)
         if i == 0:
             ax.area([(x, screen(x, V)) for x in xs], "cyan", base=0, fill_opacity=0.14)

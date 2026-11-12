@@ -1,57 +1,57 @@
-<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch03-polarizer-chain" data-lang="en" viewBox="0 0 500 330" width="500" height="330" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="N, the number of middle polarizers, runs across from 0 to 12; the transmitted share runs up from 0 to 1. The cyan dots are w_N = [cos²(π/(2(N+1)))]^{N+1}: 0 at N = 0, ¼ at N = 1 (the three-polarizer example, ringed), then rising steadily to about 0.83 at N = 12. A dashed violet line at 1 marks the limit given in the literature.">
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch03-polarizer-chain" data-lang="en" viewBox="0 0 460 330" width="460" height="330" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="N, the number of middle polarizers, runs across from 0 to 12; the transmitted share runs up from 0 to 1. The cyan dots are w_N = [cos²(π/(2(N+1)))]^{N+1}: 0 at N = 0, ¼ at N = 1 (the three-polarizer example, ringed), then rising steadily to about 0.83 at N = 12. A dashed violet line at 1 marks the limit given in the literature.">
 <title>N, the number of middle polarizers, runs across from 0 to 12; the transmitted share runs up from 0 to 1. The cyan dots are w_N = [cos²(π/(2(N+1)))]^{N+1}: 0 at N = 0, ¼ at N = 1 (the three-polarizer example, ringed), then rising steadily to about 0.83 at N = 12. A dashed violet line at 1 marks the limit given in the literature.</title>
 <style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
-<line x1="70" y1="218.44" x2="470" y2="218.44" class="ts-faint" stroke-width="1" stroke-dasharray="3 4" fill="none"/>
-<line x1="70" y1="162.89" x2="470" y2="162.89" class="ts-faint" stroke-width="1" stroke-dasharray="3 4" fill="none"/>
-<line x1="70" y1="107.33" x2="470" y2="107.33" class="ts-faint" stroke-width="1" stroke-dasharray="3 4" fill="none"/>
-<line x1="70" y1="51.78" x2="470" y2="51.78" class="ts-violet" stroke-width="1.6" stroke-dasharray="6 4" fill="none"/>
-<line x1="70" y1="274" x2="470" y2="274" class="ts-dim" stroke-width="1.3" fill="none"/>
-<line x1="85.38" y1="274" x2="85.38" y2="279" class="ts-dim" stroke-width="1.2" fill="none"/>
-<text class="tf-dim" x="85.38" y="292" font-size="13" text-anchor="middle">0</text>
-<line x1="116.15" y1="274" x2="116.15" y2="279" class="ts-dim" stroke-width="1.2" fill="none"/>
-<text class="tf-dim" x="116.15" y="292" font-size="13" text-anchor="middle">1</text>
-<line x1="146.92" y1="274" x2="146.92" y2="279" class="ts-dim" stroke-width="1.2" fill="none"/>
-<text class="tf-dim" x="146.92" y="292" font-size="13" text-anchor="middle">2</text>
-<line x1="208.46" y1="274" x2="208.46" y2="279" class="ts-dim" stroke-width="1.2" fill="none"/>
-<text class="tf-dim" x="208.46" y="292" font-size="13" text-anchor="middle">4</text>
-<line x1="270" y1="274" x2="270" y2="279" class="ts-dim" stroke-width="1.2" fill="none"/>
-<text class="tf-dim" x="270" y="292" font-size="13" text-anchor="middle">6</text>
-<line x1="331.54" y1="274" x2="331.54" y2="279" class="ts-dim" stroke-width="1.2" fill="none"/>
-<text class="tf-dim" x="331.54" y="292" font-size="13" text-anchor="middle">8</text>
-<line x1="393.08" y1="274" x2="393.08" y2="279" class="ts-dim" stroke-width="1.2" fill="none"/>
-<text class="tf-dim" x="393.08" y="292" font-size="13" text-anchor="middle">10</text>
-<line x1="454.62" y1="274" x2="454.62" y2="279" class="ts-dim" stroke-width="1.2" fill="none"/>
-<text class="tf-dim" x="454.62" y="292" font-size="13" text-anchor="middle">12</text>
-<line x1="70" y1="34" x2="70" y2="274" class="ts-dim" stroke-width="1.3" fill="none"/>
-<line x1="65" y1="274" x2="70" y2="274" class="ts-dim" stroke-width="1.2" fill="none"/>
-<text class="tf-dim" x="62" y="278.68" font-size="13" text-anchor="end">0</text>
-<line x1="65" y1="218.44" x2="70" y2="218.44" class="ts-dim" stroke-width="1.2" fill="none"/>
-<text class="tf-dim" x="62" y="223.12" font-size="13" text-anchor="end">¼</text>
-<line x1="65" y1="162.89" x2="70" y2="162.89" class="ts-dim" stroke-width="1.2" fill="none"/>
-<text class="tf-dim" x="62" y="167.57" font-size="13" text-anchor="end">½</text>
-<line x1="65" y1="107.33" x2="70" y2="107.33" class="ts-dim" stroke-width="1.2" fill="none"/>
-<text class="tf-dim" x="62" y="112.01" font-size="13" text-anchor="end">¾</text>
-<line x1="65" y1="51.78" x2="70" y2="51.78" class="ts-dim" stroke-width="1.2" fill="none"/>
-<text class="tf-dim" x="62" y="56.46" font-size="13" text-anchor="end">1</text>
-<path d="M85.38 274 L116.15 218.44 L146.92 180.25 L177.69 156.05 L208.46 139.46 L239.23 127.41 L270 118.26 L300.77 111.08 L331.54 105.3 L362.31 100.55 L393.08 96.57 L423.85 93.19 L454.62 90.28" class="ts-cyan" stroke-width="1.4" stroke-dasharray="2 3" stroke-linejoin="round" fill="none"/>
-<circle cx="85.38" cy="274" r="4.6" class="tf-cyan"/>
-<circle cx="116.15" cy="218.44" r="4.6" class="tf-cyan"/>
-<circle cx="146.92" cy="180.25" r="4.6" class="tf-cyan"/>
-<circle cx="177.69" cy="156.05" r="4.6" class="tf-cyan"/>
-<circle cx="208.46" cy="139.46" r="4.6" class="tf-cyan"/>
-<circle cx="239.23" cy="127.41" r="4.6" class="tf-cyan"/>
-<circle cx="270" cy="118.26" r="4.6" class="tf-cyan"/>
-<circle cx="300.77" cy="111.08" r="4.6" class="tf-cyan"/>
-<circle cx="331.54" cy="105.3" r="4.6" class="tf-cyan"/>
-<circle cx="362.31" cy="100.55" r="4.6" class="tf-cyan"/>
-<circle cx="393.08" cy="96.57" r="4.6" class="tf-cyan"/>
-<circle cx="423.85" cy="93.19" r="4.6" class="tf-cyan"/>
-<circle cx="454.62" cy="90.28" r="4.6" class="tf-cyan"/>
-<circle cx="116.15" cy="218.44" r="10" class="ts-ink" stroke-width="1.6" fill="none"/>
-<text class="tf-ink ts-bg" x="132.15" y="222.44" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">three polarizers: ¼</text>
-<text class="tf-ink ts-bg" x="99.38" y="262" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">two: 0</text>
-<text class="tf-cyan" x="454.62" y="116.28" font-size="13" text-anchor="middle">0.83</text>
-<text class="tf-violet" x="466.92" y="43.78" font-size="13" text-anchor="end">limit 1 (literature)</text>
-<text class="tf-dim" x="270" y="320" font-size="14" text-anchor="middle">middle polarizers <tspan font-style="italic">N</tspan></text>
-<text class="tf-dim" x="20" y="154" font-size="14" text-anchor="middle" transform="rotate(-90 20 154)">transmitted <tspan font-style="italic">w</tspan><tspan dy="0.28em" font-size="72%">N</tspan><tspan dy="-0.28em">​</tspan></text>
+<line x1="66" y1="218.44" x2="440" y2="218.44" class="ts-faint" stroke-width="1" stroke-dasharray="3 4" fill="none"/>
+<line x1="66" y1="162.89" x2="440" y2="162.89" class="ts-faint" stroke-width="1" stroke-dasharray="3 4" fill="none"/>
+<line x1="66" y1="107.33" x2="440" y2="107.33" class="ts-faint" stroke-width="1" stroke-dasharray="3 4" fill="none"/>
+<line x1="66" y1="51.78" x2="440" y2="51.78" class="ts-violet" stroke-width="1.6" stroke-dasharray="6 4" fill="none"/>
+<line x1="66" y1="274" x2="440" y2="274" class="ts-dim" stroke-width="1.3" fill="none"/>
+<line x1="80.38" y1="274" x2="80.38" y2="279" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="80.38" y="293" font-size="14" text-anchor="middle">0</text>
+<line x1="109.15" y1="274" x2="109.15" y2="279" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="109.15" y="293" font-size="14" text-anchor="middle">1</text>
+<line x1="137.92" y1="274" x2="137.92" y2="279" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="137.92" y="293" font-size="14" text-anchor="middle">2</text>
+<line x1="195.46" y1="274" x2="195.46" y2="279" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="195.46" y="293" font-size="14" text-anchor="middle">4</text>
+<line x1="253" y1="274" x2="253" y2="279" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="253" y="293" font-size="14" text-anchor="middle">6</text>
+<line x1="310.54" y1="274" x2="310.54" y2="279" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="310.54" y="293" font-size="14" text-anchor="middle">8</text>
+<line x1="368.08" y1="274" x2="368.08" y2="279" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="368.08" y="293" font-size="14" text-anchor="middle">10</text>
+<line x1="425.62" y1="274" x2="425.62" y2="279" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="425.62" y="293" font-size="14" text-anchor="middle">12</text>
+<line x1="66" y1="34" x2="66" y2="274" class="ts-dim" stroke-width="1.3" fill="none"/>
+<line x1="61" y1="274" x2="66" y2="274" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="58" y="279.04" font-size="14" text-anchor="end">0</text>
+<line x1="61" y1="218.44" x2="66" y2="218.44" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="58" y="223.48" font-size="14" text-anchor="end">¼</text>
+<line x1="61" y1="162.89" x2="66" y2="162.89" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="58" y="167.93" font-size="14" text-anchor="end">½</text>
+<line x1="61" y1="107.33" x2="66" y2="107.33" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="58" y="112.37" font-size="14" text-anchor="end">¾</text>
+<line x1="61" y1="51.78" x2="66" y2="51.78" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="58" y="56.82" font-size="14" text-anchor="end">1</text>
+<path d="M80.38 274 L109.15 218.44 L137.92 180.25 L166.69 156.05 L195.46 139.46 L224.23 127.41 L253 118.26 L281.77 111.08 L310.54 105.3 L339.31 100.55 L368.08 96.57 L396.85 93.19 L425.62 90.28" class="ts-cyan" stroke-width="1.4" stroke-dasharray="2 3" stroke-linejoin="round" fill="none"/>
+<circle cx="80.38" cy="274" r="4.6" class="tf-cyan"/>
+<circle cx="109.15" cy="218.44" r="4.6" class="tf-cyan"/>
+<circle cx="137.92" cy="180.25" r="4.6" class="tf-cyan"/>
+<circle cx="166.69" cy="156.05" r="4.6" class="tf-cyan"/>
+<circle cx="195.46" cy="139.46" r="4.6" class="tf-cyan"/>
+<circle cx="224.23" cy="127.41" r="4.6" class="tf-cyan"/>
+<circle cx="253" cy="118.26" r="4.6" class="tf-cyan"/>
+<circle cx="281.77" cy="111.08" r="4.6" class="tf-cyan"/>
+<circle cx="310.54" cy="105.3" r="4.6" class="tf-cyan"/>
+<circle cx="339.31" cy="100.55" r="4.6" class="tf-cyan"/>
+<circle cx="368.08" cy="96.57" r="4.6" class="tf-cyan"/>
+<circle cx="396.85" cy="93.19" r="4.6" class="tf-cyan"/>
+<circle cx="425.62" cy="90.28" r="4.6" class="tf-cyan"/>
+<circle cx="109.15" cy="218.44" r="10" class="ts-ink" stroke-width="1.6" fill="none"/>
+<text class="tf-ink ts-bg" x="125.15" y="222.44" font-size="15" stroke-width="4.2" stroke-linejoin="round" paint-order="stroke">three polarizers: ¼</text>
+<text class="tf-ink ts-bg" x="94.38" y="262" font-size="15" stroke-width="4.2" stroke-linejoin="round" paint-order="stroke">two: 0</text>
+<text class="tf-cyan" x="425.62" y="116.28" font-size="14" text-anchor="middle">0.83</text>
+<text class="tf-violet" x="437.12" y="43.78" font-size="14" text-anchor="end">limit 1 (literature)</text>
+<text class="tf-dim" x="253" y="320" font-size="15" text-anchor="middle">middle polarizers <tspan font-style="italic">N</tspan></text>
+<text class="tf-dim" x="20" y="154" font-size="15" text-anchor="middle" transform="rotate(-90 20 154)">transmitted <tspan font-style="italic">w</tspan><tspan dy="0.28em" font-size="72%">N</tspan><tspan dy="-0.28em">​</tspan></text>
 </svg>
