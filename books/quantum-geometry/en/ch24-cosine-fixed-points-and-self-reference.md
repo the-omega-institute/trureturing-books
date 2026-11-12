@@ -30,8 +30,10 @@ $$
 In this chapter we unfold this self-referential closure across four mathematical levels: **the Lean-verified stabilization theorem for contracting updates on finite sets**, **single-step context-relative interpretation fixed points and contextual non-uniqueness**, **the unique positive algebraic fixed point $\varphi = \frac{1+\sqrt{5}}{2}$ of the golden reciprocal map $x = 1 + 1/x$**, and **the classical analytic and number-theoretic background of cosine self-reference $\cos\theta^* = \theta^*$** recorded in the literature remarks [@rem-banach-dottie-hairy-ball-literature] and [@rem-dottie-angle-incommensurable].
 
 ::: {.figure src="ch24-overview"}
-**Figure 24.** The chapter at a glance. Panel I: the cyan cosine curve and the grey diagonal $y = x$, with the cobweb from $0$ winding into $\theta^* \approx 0.739$ (convergence applies existing results; full derivation in [@ex-ch33-mutual-cosine-monotonic-lock]). Panel II: the candidate set $\{0, 1, 2\}$ loses one element per step and stops changing at $\{0\}$ ([@thm-finite-contracting-updates-stabilize]). Panel III: the cyan curve $y = 1 + 1/x$ meets the diagonal on the positive half-line only at the green point $\varphi \approx 1.618$ ([@cor-golden-fixed-point-unique]).
+**Figure 24.** The chapter at a glance. Panel I: the cyan curve $y = 1 + 1/x$ and the grey diagonal $y = x$ cross only once for $x > 0$, at the green $\varphi \approx 1.618$ ([@cor-golden-fixed-point-unique]). Panel II: the cyan cosine curve and the grey diagonal $y = x$, with the cobweb from $0$ winding into $\theta^* \approx 0.739$, where a short magenta tangent has slope $-\sin\theta^*$ (convergence and rate apply existing results; the full derivation is in [@ex-ch33-mutual-cosine-monotonic-lock]). Panel III: the $3 \times 3$ listing of the example in §24.7, whose diagonal twisted by $f_1$, $(1, 2, 2)$, is exactly the cyan row $1$; the value $2$ at the landing spot (green ring) is the fixed point of $f_1$ ([@lem-diagonal-landing-fixed]).
 :::
+
+Panels I, II and III of Figure 24 follow §24.3, §24.4–§24.5 and §24.7 in turn: $1 + 1/x$ meets the diagonal only at $\varphi$, the cosine cobweb winds into $\theta^*$, and when the twisted diagonal lands back on the list, the landing cell holds a fixed point of the twist.
 
 ## 24.1 Discrete Contraction Must Stabilize: The Finite Contracting Update Theorem {#sec-ch24-1}
 
@@ -339,8 +341,8 @@ The following literature note records four classical theorems governing $\cos\th
    By the Poincaré–Brouwer Hairy Ball Theorem ([@rem-hairy-ball-adams-literature]), every continuous tangent vector field on an even-dimensional sphere $S^{2n}$ vanishes at some point. As an immediate consequence, **every continuous self-map $f : S^{2n} \to S^{2n}$ has either a fixed point $f(x) = +x$ or an antipodal point $f(x) = -x$**! Indeed, if $f(x) \neq \pm x$ everywhere on $S^{2n}$, the tangential projection $v(x) = f(x) - \langle f(x), x\rangle x$ would define a nowhere-vanishing continuous tangent field on $S^{2n}$, a contradiction. Meanwhile, on the closed Bloch ball $B^{n+1}$, Brouwer's fixed-point theorem guarantees that every continuous quantum channel map $\Phi : B^{n+1} \to B^{n+1}$ admits at least one fixed state $\Phi(\vv{r}^*) = \vv{r}^*$. (Brouwer's theorem on the standard simplex is verified in Lean, see [@thm-brouwer-standard-simplex]; the closed ball is homeomorphic to a simplex, but transferring the conclusion from the simplex to the ball is not formalized in this book.)
 :::
 
-::: {.viz src="sphere-escape" preset="far" height="500"}
-**Another start, the same end.** Starting far out at $x_0 = 3$, the amber cobweb drops into $[-1, 1]$ on its first step and from there winds in towards the magenta fixed point $x^* = \theta^* \approx 0.739$. The limit is independent of the start. Never hitting it at a finite step requires the separate nonfixed interval hypothesis, rather than convergence alone: $-\theta^*$ arrives in one step (full qualitative derivation in [@ex-ch33-mutual-cosine-monotonic-lock]).
+::: {.viz src="fixed-point-convergence" preset="far" height="500"}
+**Another start, the same end.** Starting far out at $x_0 = 3$, the ink-coloured cobweb drops into $[-1, 1]$ on its first step and from there winds in towards the fixed point $\theta^* \approx 0.739$ in the white ring; the amber dot is the current step. The limit is independent of the start. Never hitting it at a finite step requires the separate nonfixed interval hypothesis, rather than convergence alone: $-\theta^*$ arrives in one step (full qualitative derivation in [@ex-ch33-mutual-cosine-monotonic-lock]).
 :::
 
 Pushing one step further from the number-theoretic context of [@rem-banach-dottie-hairy-ball-literature], the author's foundational notes ask: *"What are the relations among transcendental numbers? Is $\pi$ a projection of $\theta$? Is $\theta$ the ultimate transcendental number?"* In modern number theory, the algebraic independence of $\theta^*$ and $\pi$ is governed by **Schanuel's Conjecture**, which we record as an open conjecture (`OPEN`, carrying no `lean` attribute).
@@ -398,14 +400,6 @@ $$
 
 Section 24.7 gives a typed reading of this aphorism: the function $\psi$ acts on its own name $\ulcorner\psi\urcorner$, and, under the capture hypothesis, the resulting value is a fixed point of the twist $f$. Function, name, and value have distinct roles.
 
-::: {.viz src="sphere-escape" preset="dottie" height="500"}
-**Cosine again and again.** Starting from $0$, the cobweb winds in on $\theta^* \approx 0.739$ while the view zooms along. Each step is closer, the error multiplied by about $0.67$, yet no step lands exactly.
-:::
-
-::: {.film src="006-sphere-beyond-spheres"}
-**Spheres beyond spheres: the diagonal escape and the cosine fixed point (2:28).** The film plays the whole chase through: flipping the diagonal of a list gives a string that escapes the list; in the four-address catalog it splits an old fiber, and raised as a new axis at right angles it turns two pieces into three ([@cor-complete-diagonal-topological-settlement]); seen from outside, the closed shadow circle is an open helix. The chase stops only where a list catches its own twisted diagonal, and there the landing value is a fixed point of the twist ([@lem-diagonal-landing-fixed]); with cosine as the twist, the cobweb from $1$ radian closes in on the one positive solution $\theta^* \approx 0.739$ ([@thm-dottie-rational-inverse-endpoint]).
-:::
-
 ## 24.5 Carrying the Loop Through: True Convergence Rate, Derivative Speed-Up, and the Width of the Rational Seam {#sec-ch24-5}
 
 The aphorism is stated; now let us do the arithmetic. The cosine table in [@ex-dottie-and-golden-iterations] lists only four rows, and the contraction constant $\sin 1 \approx 0.8415$ of [@rem-banach-dottie-hairy-ball-literature] is the worst case over the whole interval $[0, 1]$. Three questions are still open:
@@ -413,7 +407,7 @@ The aphorism is stated; now let us do the arithmetic. The cosine table in [@ex-d
 1. Close to $\theta^*$, by how much does one press of the cosine key actually shrink the error?
 
 ::: {.viz src="fixed-point-convergence" preset="rate" height="500"}
-**Each press multiplies the error by −0.674.** Taking the cosine again and again from $\theta_0 = 1$ while the view zooms with the error: zoomed in, the cyan curve lies on the magenta tangent, every turn has the same shape, and the ratio of successive turns tends to the slope of the tangent, $-\sin\theta^* \approx -0.674$, gentler than the global constant $-\sin 1 \approx -0.84$ of the dashed grey line ($\theta_0 = 1$ lies in $[0, 1]$ and is not $\theta^*$, so the error ratio tends to $-\sqrt{1 - (\theta^*)^2}$, an application of existing results, clauses 22–23 of [@ex-ch33-mutual-cosine-monotonic-lock]; the decimals are numerical).
+**Each press multiplies the error by −0.674.** Taking the cosine again and again from $\theta_0 = 1$ while the view zooms with the error: zoomed in, the cyan curve lies on the magenta tangent, every turn has the same shape, and the ratio of successive turns tends to the slope of the tangent, $-\sin\theta^* \approx -0.674$, gentler than the global constant $-\sin 1 \approx -0.84$ of the dashed grey line; every step is closer, yet no step lands exactly on $\theta^*$ ($\theta_0 = 1$ lies in $[0, 1]$ and is not $\theta^*$, so the error ratio tends to $-\sqrt{1 - (\theta^*)^2}$, an application of existing results, clauses 22–23 of [@ex-ch33-mutual-cosine-monotonic-lock]; the decimals are numerical).
 :::
 
 2. If the ruler reads not only the projection $\cos\theta$ but also the orthogonal component $\sin\theta$, how much faster does the loop close?
@@ -602,6 +596,10 @@ that is, after seventeen steps and two full turns the orbit is only $0.1102^\cir
 | $10^5$ | $-0.000006$ | $-0.003332$ | $1$ |
 
 The average of $f_1$ tends to $0$ quickly: the geometric sum gives the bound $\frac{1}{N\lvert\sin(\theta^*/2)\rvert} \approx \frac{2.77}{N}$. The average of $f_{17}$ hardly moves for a long time: it is sensitive exactly to the seventeen-step near-closure, the corresponding bound is $\frac{1}{N\lvert\sin(17\theta^*/2)\rvert} \approx \frac{1040}{N}$, and only for $N$ much larger than $1040$ does the average come close to the Haar average $0$. If the angle is replaced by $2\pi\cdot\frac{2}{17}$, which is commensurable with $\pi$, the orbit has only seventeen points and the average of $f_{17}$ is $1$ forever, not the Haar average: the irrationality hypothesis of [@lem-irrational-rotation-equidistribution] cannot be dropped.
+:::
+
+::: {.figure src="ch24-seventeen-steps"}
+**Turning by $\theta^*$: seventeen steps almost close, and only a long time covers the circle.** Left: $17$ points joined in order go round twice and almost close into a seventeen-pointed star; the start and step $17$ differ by only $0.11^\circ$ (magnified in the magenta box). Middle and right: step $k$ is drawn at $0.3 + 0.7k/N$ of the radius, later steps further out; after $100$ steps the points still form $17$ spokes, and after $3256$ steps the spokes have turned round into every direction. Equidistribution is [@lem-irrational-rotation-equidistribution], whose hypothesis $\theta^*/2\pi \notin \mathbb{Q}$ is a literature result ([@rem-dottie-angle-incommensurable]); the positions of the points are numerical.
 :::
 
 Within a hundred steps, the orbit with step $\theta^*$ looks almost indistinguishable from a regular heptadecagon; equidistribution shows itself only on a longer time scale. An observer with finitely many steps sees a closed polygon; the whole circle appears only in the limit of infinitely many.
@@ -982,6 +980,10 @@ The standard simplex is not an abstract solid: it is the set of all probability 
 Take $n = 2$; the simplex is the segment $\{(p, 1 - p) \mid p \in [0, 1]\}$. Since $\cos p \in [\cos 1, 1] \subset [0, 1]$ for $p \in [0, 1]$, the map $(p, 1 - p) \mapsto (\cos p, 1 - \cos p)$ is a continuous map of this segment into itself, and [@thm-brouwer-standard-simplex] yields $p \in [0, 1]$ with $\cos p = p$. (Substituting $\cos$ into the theorem is a manual remark of this book, not a frozen declaration.) So the **existence** of the cosine fixed point can be obtained without any contraction; what contraction supplies are two other things: **uniqueness**, and the **rate of convergence** computed in Section 24.5.
 
 The two mechanisms divide the work, and the diagonal adds a third piece. A continuous self-map of the standard simplex has a fixed point; a contraction self-map of a nonempty complete metric space also gives uniqueness and convergence of iteration. If a listing captures its twisted diagonal, the value of the landing row at its own name is fixed by the twist. This last conclusion retains the capture hypothesis and does not guarantee capture for an arbitrary listing.
+
+::: {.film src="006-sphere-beyond-spheres"}
+**Spheres beyond spheres: the diagonal escape and the cosine fixed point (2:28).** The film plays the whole chase through: flipping the diagonal of a list gives a string that escapes the list; in the four-address catalog it splits an old fiber, and raised as a new axis at right angles it turns two pieces into three ([@cor-complete-diagonal-topological-settlement]); seen from outside, the closed shadow circle is an open helix. The chase stops only where a list catches its own twisted diagonal, and there the landing value is a fixed point of the twist ([@lem-diagonal-landing-fixed]); with cosine as the twist, the cobweb from $1$ radian closes in on the one positive solution $\theta^* \approx 0.739$ ([@thm-dottie-rational-inverse-endpoint]).
+:::
 
 ---
 

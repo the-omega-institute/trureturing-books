@@ -30,8 +30,10 @@ $$
 在本章中，我们将用严密的数学与 Lean 4 形式化定理，把这幅自指画卷拆解为四个相互辉映的层次：**有限状态空间上的单调收缩稳定化定理**、**相邻步解释语境相对不动点与语境非唯一性定理**、**正实数上黄金连分数自指映射 $x = 1 + 1/x$ 的唯一代数不动点定理**，以及收录在文献注记 [@rem-banach-dottie-hairy-ball-literature] 与 [@rem-dottie-angle-incommensurable] 中的**Dottie 余弦自指 $\cos\theta^* = \theta^*$ 的经典分析与超越数论背景**。
 
 ::: {.figure src="ch24-overview"}
-**图 24。** 本章地图：第 I 栏，青色的余弦曲线与灰色对角线 $y = x$，从 $0$ 出发的蛛网一圈圈绕向 $\theta^* \approx 0.739$（收敛是既有结果的应用，完整推导见 [@ex-ch33-mutual-cosine-monotonic-lock]）；第 II 栏，候选集 $\{0, 1, 2\}$ 每步删去一个元素，到 $\{0\}$ 后不再变（[@thm-finite-contracting-updates-stabilize]）；第 III 栏，青色的 $y = 1 + 1/x$ 与对角线在正半轴上只交于绿色的 $\varphi \approx 1.618$（[@cor-golden-fixed-point-unique]）。
+**图 24。** 本章地图：第 I 栏，青色的曲线 $y = 1 + 1/x$ 与灰色对角线 $y = x$ 在正半轴上只交于绿色的 $\varphi \approx 1.618$（[@cor-golden-fixed-point-unique]）；第 II 栏，青色的余弦曲线与灰色对角线 $y = x$，从 $0$ 出发的蛛网一圈圈绕向 $\theta^* \approx 0.739$，那里一小段品红的切线斜率是 $-\sin\theta^*$（收敛与速率是既有结果的应用，完整推导见 [@ex-ch33-mutual-cosine-monotonic-lock]）；第 III 栏，§24.7 例中的 $3 \times 3$ 列表，用 $f_1$ 扭过的对角线 $(1, 2, 2)$ 正是青色的第 $1$ 行，落点上的值 $2$（绿圈）是 $f_1$ 的不动点（[@lem-diagonal-landing-fixed]）。
 :::
+
+图 24 第 I、II、III 栏依次对应 §24.3、§24.4–§24.5 与 §24.7：$1 + 1/x$ 与对角线只交于 $\varphi$，余弦蛛网绕向 $\theta^*$，扭过的对角线落回表里时，落点那一格上是扭转的不动点。
 
 ## 24.1 离散收缩的必然收束：有限收缩更新稳定化定理 {#sec-ch24-1}
 
@@ -341,8 +343,8 @@ $$
    回到[第二十一章](ch21-diagonalization-and-escape.md) [@rem-hairy-ball-adams-literature] 中的庞加莱—布劳威尔毛球定理：在任意偶数维球面 $S^{2n}$（如单量子比特布洛赫球面 $S^2$）上，**任何连续自映射 $f : S^{2n} \to S^{2n}$ 必然至少在某一点 $x \in S^{2n}$ 处满足正演不动点 $f(x) = +x$ 或对跖反射点 $f(x) = -x$**！证明极其优美：若对一切 $x \in S^{2n}$ 均有 $f(x) \neq x$ 且 $f(x) \neq -x$，则 $f(x)$ 与 $x$ 处处不共线，将其正交投影到 $x$ 处的切平面即可构造出处处非零的连续切向量场 $v(x) = f(x) - \langle f(x), x\rangle x \neq 0$，直接违背毛球定理！与此同时，若把视野扩展到包含球心混合态的闭布洛赫球体 $B^{n+1} = \{\vv{r} \in \mathbb{R}^{n+1} \mid \|\vv{r}\| \le 1\}$，布劳威尔不动点定理（Brouwer Fixed-Point Theorem）保证任何连续信道映射 $\Phi : B^{n+1} \to B^{n+1}$ 必在球体内部或球皮上拥有至少一个真正的不动点 $\Phi(\vv{r}^*) = \vv{r}^*$。（标准单纯形上的布劳威尔定理已由 Lean 验证，见 [@thm-brouwer-standard-simplex]；闭球与单纯形同胚，但把结论从单纯形转移到闭球的这一步未在本书形式化。）
 :::
 
-::: {.viz src="sphere-escape" preset="far" height="500"}
-**换个起点，同一个终点。** 从很远的 $x_0 = 3$ 出发，琥珀色的蛛网第一步就落进 $[-1, 1]$，此后一圈圈绕向品红的不动点 $x^* = \theta^* \approx 0.739$：终点与起点无关；“任何有限步都不命中”须另保留非不动点区间初值条件，不能由全局收敛推出，$-\theta^*$ 一步即达（完整定性推导见 [@ex-ch33-mutual-cosine-monotonic-lock]）。
+::: {.viz src="fixed-point-convergence" preset="far" height="500"}
+**换个起点，同一个终点。** 从很远的 $x_0 = 3$ 出发，墨色的蛛网第一步就落进 $[-1, 1]$，此后一圈圈绕向白圈标出的不动点 $\theta^* \approx 0.739$，琥珀色的点是当前这一步：终点与起点无关；“任何有限步都不命中”须另保留非不动点区间初值条件，不能由全局收敛推出，$-\theta^*$ 一步即达（完整定性推导见 [@ex-ch33-mutual-cosine-monotonic-lock]）。
 :::
 
 更进一步，围绕 [@rem-banach-dottie-hairy-ball-literature] 所记录的数论背景，作者在手稿中曾追问：*“超越数之间的关系？$\pi$ 是 $\theta$ 的一个投影？$\theta$ 是终极超越数？”* 这一关于 Dottie 数 $\theta^*$ 与圆周率 $\pi$ 之间代数独立性的深刻追问，在数论中直接通向尚未解决的**沙努埃尔猜想（Schanuel's Conjecture）**。我们按第三层认识论规范（`OPEN`）将其记录如下。
@@ -400,14 +402,6 @@ $$
 
 这一格言的类型化自指读法见 §24.7：函数 $\psi$ 作用于自己的名字 $\ulcorner\psi\urcorner$，所得的值在捕获前提下成为扭转 $f$ 的不动点。函数、名字与值各有角色。
 
-::: {.viz src="sphere-escape" preset="dottie" height="500"}
-**反复取余弦。** 从 $0$ 出发，蛛网一圈圈绕向 $\theta^* \approx 0.739$，画面跟着放大。每一步都更近，误差大约乘以 $0.67$，却没有哪一步恰好到达。
-:::
-
-::: {.film src="006-sphere-beyond-spheres"}
-**球外之球：对角线逃逸与余弦不动点（2:28）。** 视频把整条追逐演一遍：翻转清单的对角线，翻出的串逃出清单；在四地址目录里它劈开旧纤维，立成垂直的新轴后两块变成三块（[@cor-complete-diagonal-topological-settlement]），从外面看，闭合的影子圆是一条开口螺旋。追逐只在清单捕获自己扭过的对角线时停下，落点上的值是扭转的不动点（[@lem-diagonal-landing-fixed]）；取余弦作扭转，蛛网从 $1$ 弧度收向唯一的正解 $\theta^* \approx 0.739$（[@thm-dottie-rational-inverse-endpoint]）。
-:::
-
 ## 24.5 把闭环算到底：真实收敛率、导数加速与有理读数的裂缝宽度 {#sec-ch24-5}
 
 格言说完了，现在把账算清。[@ex-dottie-and-golden-iterations] 的余弦表只列了四行，[@rem-banach-dottie-hairy-ball-literature] 给出的压缩常数 $\sin 1 \approx 0.8415$ 则是整个区间 $[0, 1]$ 上最坏的一处。三个问题还悬着：
@@ -415,7 +409,7 @@ $$
 1. 靠近 $\theta^*$ 之后，每按一次余弦键，误差到底缩小多少？
 
 ::: {.viz src="fixed-point-convergence" preset="rate" height="500"}
-**每按一次，误差乘以 −0.674。** 从 $\theta_0 = 1$ 反复取余弦，画面跟着误差放大：放大之后青色曲线贴在品红的切线上，每一圈的形状都一样，相邻两圈之比趋于切线的斜率 $-\sin\theta^* \approx -0.674$，比灰色虚线代表的全局常数 $-\sin 1 \approx -0.84$ 平缓（$\theta_0 = 1$ 在 $[0, 1]$ 内且不是 $\theta^*$，误差比趋于 $-\sqrt{1 - (\theta^*)^2}$ 是既有结果的应用，见 [@ex-ch33-mutual-cosine-monotonic-lock] 第 22–23 项；小数是数值）。
+**每按一次，误差乘以 −0.674。** 从 $\theta_0 = 1$ 反复取余弦，画面跟着误差放大：放大之后青色曲线贴在品红的切线上，每一圈的形状都一样，相邻两圈之比趋于切线的斜率 $-\sin\theta^* \approx -0.674$，比灰色虚线代表的全局常数 $-\sin 1 \approx -0.84$ 平缓；每一步都更近，却没有哪一步恰好落上 $\theta^*$（$\theta_0 = 1$ 在 $[0, 1]$ 内且不是 $\theta^*$，误差比趋于 $-\sqrt{1 - (\theta^*)^2}$ 是既有结果的应用，见 [@ex-ch33-mutual-cosine-monotonic-lock] 第 22–23 项；小数是数值）。
 :::
 
 2. 如果尺子不只读投影 $\cos\theta$，还同时读正交分量 $\sin\theta$，闭合能快多少？
@@ -604,6 +598,10 @@ $$
 | $10^5$ | $-0.000006$ | $-0.003332$ | $1$ |
 
 $f_1$ 的平均很快趋于 $0$：几何和给出界 $\frac{1}{N\lvert\sin(\theta^*/2)\rvert} \approx \frac{2.77}{N}$。$f_{17}$ 则迟迟不动：它正好对十七步的近闭合敏感，相应的界是 $\frac{1}{N\lvert\sin(17\theta^*/2)\rvert} \approx \frac{1040}{N}$，要到 $N$ 远大于 $1040$ 之后，平均才接近 Haar 平均 $0$。把转角换成与 $\pi$ 可公度的 $2\pi\cdot\frac{2}{17}$，轨道只有十七个点，$f_{17}$ 的平均永远是 $1$，不趋于 Haar 平均：[@lem-irrational-rotation-equidistribution] 的无理性前提去不掉。
+:::
+
+::: {.figure src="ch24-seventeen-steps"}
+**以 $\theta^*$ 为步长转圈：十七步几乎闭合，长时间才走遍。** 左：$17$ 个点按顺序连起来，绕两圈，几乎闭合成十七角星形，起点与第 $17$ 步之间只差 $0.11^\circ$（品红框里放大）。中、右：第 $k$ 步画在离圆心 $0.3 + 0.7k/N$ 倍半径处，越晚越往外；$100$ 步时点仍排成 $17$ 条辐条，$3256$ 步时辐条一圈圈转开，遍及各个方向。等分布由 [@lem-irrational-rotation-equidistribution] 给出，其前提 $\theta^*/2\pi \notin \mathbb{Q}$ 是文献结果（[@rem-dottie-angle-incommensurable]）；点的位置是数值结果。
 :::
 
 在一百步之内，以 $\theta^*$ 为步长的轨道看上去和一个正十七边形几乎没有区别；等分布是在更长的时间尺度上才显形的。有限步的观察者看到的是闭合的多边形，无限步的极限里才是整个圆周。
@@ -984,6 +982,10 @@ $$
 取 $n = 2$，单纯形是线段 $\{(p, 1 - p) \mid p \in [0, 1]\}$。因为 $p \in [0, 1]$ 时 $\cos p \in [\cos 1, 1] \subset [0, 1]$，映射 $(p, 1 - p) \mapsto (\cos p, 1 - \cos p)$ 是这条线段到自身的连续映射，[@thm-brouwer-standard-simplex] 给出 $p \in [0, 1]$ 使 $\cos p = p$。（把 $\cos$ 代入定理的这一步是本书的手工说明，不是冻结声明。）于是余弦不动点的**存在**可以完全不借助压缩性得到；压缩性提供的是另外两样东西：**唯一**，以及 §24.5 算出的**收敛速度**。
 
 两种机制分工清楚，对角线再补上第三块。标准单纯形上的连续自映射有不动点；非空完备度量空间上的压缩自映射还有唯一性与迭代收敛保证；若列表捕获扭转对角线，落点那一行作用在自己名字上的值就是扭转的不动点。最后这条结论保留捕获前提，并不为任意列表保证捕获。
+
+::: {.film src="006-sphere-beyond-spheres"}
+**球外之球：对角线逃逸与余弦不动点（2:28）。** 视频把整条追逐演一遍：翻转清单的对角线，翻出的串逃出清单；在四地址目录里它劈开旧纤维，立成垂直的新轴后两块变成三块（[@cor-complete-diagonal-topological-settlement]），从外面看，闭合的影子圆是一条开口螺旋。追逐只在清单捕获自己扭过的对角线时停下，落点上的值是扭转的不动点（[@lem-diagonal-landing-fixed]）；取余弦作扭转，蛛网从 $1$ 弧度收向唯一的正解 $\theta^* \approx 0.739$（[@thm-dottie-rational-inverse-endpoint]）。
+:::
 
 ---
 
