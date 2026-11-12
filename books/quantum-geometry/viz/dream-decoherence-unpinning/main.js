@@ -130,7 +130,7 @@
     const x0 = R.x + head + Math.max(0, (R.w - head - size) / 2), y0 = R.y + head, cs = size / n;
     grid = { x0, y0, cs, n, size };
     let gmax = 0; m.ghost.forEach((row) => row.forEach((v) => { gmax = Math.max(gmax, v); }));
-    const side = (v) => cs * 0.88 * Math.sqrt(Math.max(0, v) / gmax);
+    const side = (v) => cs * (words ? 0.72 : 0.88) * Math.sqrt(Math.max(0, v) / gmax);
     // blocks of the anchor family
     if (S.scene === 'anchor') {
       const blocks = S.fam === 'fine' ? [[0, 0], [1, 1], [2, 2], [3, 3]] : [[0, 0], [1, 3]];
@@ -147,6 +147,7 @@
         ctx.fillStyle = TRV.alpha(col, role === 'keep' || role === 'read' ? 0.78 : 0.7); ctx.shadowColor = col; ctx.shadowBlur = TRV.thumbMode ? 14 : 8;
         ctx.fillRect(cx - sv / 2, cy - sv / 2, sv, sv); ctx.shadowBlur = 0;
       }
+      if (S.scene === 'record' && i === 0 && j === 1 && clock.t > 1e-6) drawTrail(ctx, cx, cy, cs, tk);
       if (i !== j && v > 1e-3) {   // the phase needle
         const ang = Math.atan2(m.rho[i][j][1], m.rho[i][j][0]), len = Math.max(sv / 2 - 2, cs * 0.12);
         ctx.strokeStyle = P.ink; ctx.lineWidth = 2 * tk; ctx.lineCap = 'round';
@@ -156,7 +157,7 @@
       if (role === 'read') { ctx.strokeStyle = P.amber; ctx.lineWidth = 2.5 * tk; ctx.shadowColor = P.amber; ctx.shadowBlur = 10; ctx.strokeRect(x0 + j * cs + 2, y0 + i * cs + 2, cs - 4, cs - 4); ctx.shadowBlur = 0; }
       if (words && cs >= 64) {
         const str = S.scene === 'record' ? fmtC(m.rho[i][j], 2) : fix(v, 2);
-        text(ctx, str, cx, y0 + (i + 1) * cs - 9, P.ink, { align: 'center', size: cs >= 110 ? 12.5 : 10.5 });
+        text(ctx, str, cx, y0 + (i + 1) * cs - cs * 0.06, P.ink, { align: 'center', size: cs >= 110 ? 12.5 : 10.5 });
       }
     }
     if (words) {
@@ -170,14 +171,40 @@
     if (S.scene === 'record' && words) drawRecords(ctx, { x: x0, y: y0 + size + 10, w: size });
   }
 
+  /** The path the phase of ρ₀₁ has taken so far, from 0 to clock.t: a dashed ink arc around the needle's pivot.
+      Only the phase is drawn (the size of the square is the modulus); the radius steps inward with every step taken,
+      so a turn out and back along the same arc reads as two strands. Dots mark where each whole step landed. */
+  const trailNow = () => {
+    const pts = [], n = Math.max(2, Math.ceil(clock.t * 60));
+    let prev = 0, unwrapped = 0, sweep = 0;
+    if (clock.t <= 1e-6 || S.r < 1e-9) return { pts, sweep, end: 0 };   // c = 0 has no phase to follow
+    for (let q = 0; q <= n; q++) {
+      const t = clock.t * q / n, z = z01(t);
+      if (Math.hypot(z[0], z[1]) < 1e-9) break;          // nothing left to point with (c = 0)
+      let a = Math.atan2(z[1], z[0]); while (a - prev > Math.PI) a -= TAU; while (a - prev < -Math.PI) a += TAU;
+      if (q) { sweep += Math.abs(a - prev); } unwrapped = a; prev = a; pts.push([t, a]);
+    }
+    return { pts, sweep, end: unwrapped };
+  };
+  function drawTrail(ctx, cx, cy, cs, tk) {
+    const tr = trailNow(); if (tr.pts.length < 2) return;
+    const R0 = cs * 0.36, dr = cs * 0.035, rad = (t) => R0 - dr * t;
+    ctx.save(); ctx.strokeStyle = P.ink; ctx.globalAlpha = 0.8; ctx.lineWidth = 1.4 * tk; ctx.setLineDash([5, 4]); ctx.lineCap = 'round';
+    ctx.beginPath(); tr.pts.forEach(([t, a], q) => { const x = cx + rad(t) * Math.cos(a), y = cy - rad(t) * Math.sin(a); if (q) ctx.lineTo(x, y); else ctx.moveTo(x, y); }); ctx.stroke();
+    ctx.setLineDash([]); ctx.globalAlpha = 1; ctx.fillStyle = P.ink;
+    for (const [t, a] of tr.pts) if (Math.abs(t - Math.round(t)) < 1e-9 && t <= clock.t + 1e-9) { ctx.beginPath(); ctx.arc(cx + rad(t) * Math.cos(a), cy - rad(t) * Math.sin(a), 2.6 * tk, 0, TAU); ctx.fill(); }
+    ctx.restore();
+  }
+
   function drawRecords(ctx, R) {
     const t = clock.t, c = overlap(), gap = 8, bw = (R.w - gap) / 2, bh = 40;
     const active = clock.t > 0 && clock.t < 4 ? STEPS[Math.min(3, Math.floor(clock.t - 1e-9))].copy : null;
     for (let k = 0; k < 2; k++) {
       const x = R.x + k * (bw + gap), done = (step) => t >= step - 1e-9;
       const wrote = done(k + 1), rev = done(k + 3);
-      const state = rev ? L(`已逆转 ×c̄ = ${fmtC([c[0], -c[1]], 2)}`, `reversed ×c̄ = ${fmtC([c[0], -c[1]], 2)}`)
-        : wrote ? L(`已写入 ×c = ${fmtC(c, 2)}`, `written ×c = ${fmtC(c, 2)}`) : L('尚未写入', 'not written yet');
+      const narrow = bw < 150;   // on a phone the factor does not fit in the box: name the step only
+      const state = rev ? (narrow ? L('已逆转', 'reversed') : L(`已逆转 ×c̄ = ${fmtC([c[0], -c[1]], 2)}`, `reversed ×c̄ = ${fmtC([c[0], -c[1]], 2)}`))
+        : wrote ? (narrow ? L('已写入', 'written') : L(`已写入 ×c = ${fmtC(c, 2)}`, `written ×c = ${fmtC(c, 2)}`)) : L('尚未写入', 'not written yet');
       const hot = active === k;
       ctx.strokeStyle = hot ? P.amber : P.lineHot; ctx.lineWidth = hot ? 2 : 1; if (hot) { ctx.shadowColor = P.amber; ctx.shadowBlur = 8; }
       ctx.strokeRect(x + 0.5, R.y + 0.5, bw - 1, bh - 1); ctx.shadowBlur = 0;
@@ -278,7 +305,7 @@
     if (S.scene === 'anchor') {
       const lam = lamNow(), c0 = crossNorm(anchored(0, S.fam), S.fam), c = crossNorm(m.rho, S.fam), ent = H(eig);
       $('hudBig').textContent = L(`锚点 · λ = ${fix(lam, 2)}`, `Anchors · λ = ${fix(lam, 2)}`);
-      $('hudSub').textContent = L(`${S.fam === 'fine' ? '锚点：逐个位置' : '锚点：躯体 | 其余三处'} · 跨块相干剩 ${fix(100 * (1 - lam), 0)}% · 对角不动`, `${S.fam === 'fine' ? 'anchors: every place' : 'anchors: body | the other three'} · ${fix(100 * (1 - lam), 0)}% of the cross-block coherence left · diagonal fixed`);
+      $('hudSub').textContent = L(`${S.fam === 'fine' ? '锚点：逐个位置' : '锚点：躯体 | 其余三处'} · 跨块相干剩 ${fix(100 * (1 - lam), 0)}% · 对角不动 · 熵 S = ${fix(ent, 2)}`, `${S.fam === 'fine' ? 'anchors: every place' : 'anchors: body | the other three'} · ${fix(100 * (1 - lam), 0)}% of the cross-block coherence left · diagonal fixed · entropy S = ${fix(ent, 2)}`);
       $('roKeyL').textContent = L('跨块相干的模长', 'modulus of the cross-block coherence');
       $('roKey').textContent = fix(c, 3); $('roKeySub').textContent = L(` = (1 − λ) × 出发时的 ${fix(c0, 3)}`, ` = (1 − λ) × ${fix(c0, 3)} at the start`);
       setRo(1, '锚点强度 λ', 'anchor strength λ', fix(lam, 3));
@@ -382,11 +409,11 @@
     wake_snap: { scene: 'wake', w: 0.4, lamDream: 0.1, still: 1 }
   };
   const NOTES = {
-    waking: ['清醒：已知数据把四个位置逐个钉住。λ 从 0 推到 1，品红的跨块方块缩到一点不剩，青色的对角一格不动；屏上的条纹淡成青色虚线的平滑包络，熵从 0 涨到 1.33。', 'Awake: the known data pin each of the four places. As λ goes from 0 to 1 the magenta cross-block squares shrink to nothing while the cyan diagonal does not move; on the screen the fringes fade into the smooth envelope of the dashed cyan curve, and the entropy rises from 0 to 1.33.'],
+    waking: ['清醒：已知数据把四个位置逐个钉住。λ 从 0 推到 1，品红的跨块方块缩到一点不剩，青色的对角一格不动；屏上的条纹淡成青色虚线的平滑包络，熵从 0 涨到 1.33（读数行的 S）。', 'Awake: the known data pin each of the four places. As λ goes from 0 to 1 the magenta cross-block squares shrink to nothing while the cyan diagonal does not move; on the screen the fringes fade into the smooth envelope of the dashed cyan curve, and the entropy rises from 0 to 1.33 (S in the readout line).'],
     blocks: ['锚点只分两块：躯体 x₀ 与其余三处。λ = 1 时只剪掉躯体与其余之间的相干（品红），其余三处之间的相干留在块里（青色），屏上还剩它们的青色条纹。', 'The anchors make two blocks only: the body x₀ and the other three places. At λ = 1 only the coherence between the body and the rest is cut (magenta); the coherence among the other three stays inside its block (cyan), and the screen keeps their cyan fringes.'],
-    half_erase: ['两份相位记录（c = −i）先后写入，ρ₀₁ 从 1/2 转到 −1/2；再只逆转副本 0：ρ₀₁ 停在 −i/2，指针朝下，条纹错开四分之一格，没有回到灰色虚线。', 'Two phase records (c = −i) are written one after the other and ρ₀₁ turns from 1/2 to −1/2; then copy 0 alone is reversed: ρ₀₁ stops at −i/2, the needle points down, and the fringes are shifted by a quarter period, not back on the dashed grey curve.'],
+    half_erase: ['两份相位记录（c = −i）先后写入，ρ₀₁ 从 1/2 转到 −1/2；再只逆转副本 0：ρ₀₁ 停在 −i/2，指针朝下，条纹错开四分之一格，没有回到灰色虚线。方格里的白色虚线弧记下相位走过的路：转出半圈，再转回四分之一圈。', 'Two phase records (c = −i) are written one after the other and ρ₀₁ turns from 1/2 to −1/2; then copy 0 alone is reversed: ρ₀₁ stops at −i/2, the needle points down, and the fringes are shifted by a quarter period, not back on the dashed grey curve. The dashed white arc in the square records the path of the phase: out half a turn, then a quarter of the way back.'],
     zero_overlap_fail: ['记录把两条路完全分开（c = 0）：写入第一份，品红的 ρ₀₁ 就缩没了，屏上只剩青色虚线的包络；两份都逆转，ρ₀₁ 仍是 0，条纹没有回来。', 'Records that tell the two paths apart completely (c = 0): once the first copy is written the magenta ρ₀₁ is gone and only the envelope of the dashed cyan curve is left on the screen; reverse both copies and ρ₀₁ is still 0, the fringes do not return.'],
-    quantum_eraser: ['两份相位记录都写入，再把两份都逆转：ρ₀₁ 沿半径 1/2 的圆转出半圈、再原路转回 1/2，条纹回到灰色虚线上。', 'Both phase records are written, then both are reversed: ρ₀₁ turns half way round the circle of radius 1/2 and back to 1/2, and the fringes land on the dashed grey curve again.'],
+    quantum_eraser: ['两份相位记录都写入，再把两份都逆转：ρ₀₁ 沿半径 1/2 的圆转出半圈、再原路转回 1/2，条纹回到灰色虚线上。方格里的白色虚线弧是相位走过的路：外圈转出半圈，内圈原路转回，圆点是每一步的落点。', 'Both phase records are written, then both are reversed: ρ₀₁ turns half way round the circle of radius 1/2 and back to 1/2, and the fringes land on the dashed grey curve again. The dashed white arc in the square is the path of the phase: out half a turn on the outer strand, back on the inner one, with a dot where each step landed.'],
     unpin_body: ['卸下锚点：λ 从 1 降到 0.1。品红的跨块方块重新长出来，|ρᵢⱼ| 回到原来的 0.9 倍，条纹回来；青色的对角——每个位置的权重——始终没动。', 'Unpinning: λ drops from 1 to 0.1. The magenta cross-block squares grow back to 0.9 times their original |ρᵢⱼ| and the fringes return; the cyan diagonal, the weight of each place, never moved.'],
     wake_snap: ['醒来：读出投影 P₀ 只留躯体 x₀ 那一格（琥珀框）。其余三处的权重与全部相干一起淡出，屏上只剩 x₀ 的一份包络；遗忘的权重 1 − Tr(P₀ρ) = 0.60。', 'Waking: the readout projection P₀ keeps only the body cell x₀ (amber frame). The weight of the other three places fades out with all the coherence and the screen keeps a single envelope for x₀; the forgotten weight is 1 − Tr(P₀ρ) = 0.60.']
   };
@@ -416,7 +443,7 @@
       const base = { scene: S.scene, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, n: m.n,
         rho: m.rho.map((row) => row.map((v) => v.slice())), eig, trace: m.rho.reduce((s, row, i) => s + row[i][0], 0) };
       if (S.scene === 'anchor') return Object.assign(base, { fam: S.fam, w: S.w, lam: lamNow(), path: S.path.slice(), cross: crossNorm(m.rho, S.fam), cross0: crossNorm(anchored(0, S.fam), S.fam), entropy: H(eig), relEntropy: relEntropy(S.fam) });
-      if (S.scene === 'record') return Object.assign(base, { r: S.r, phi: S.phi, z: m.rho[0][1].slice(), c: overlap(), mass: 2 * cabs(m.rho[0][1]) ** 2 });
+      if (S.scene === 'record') { const tr = trailNow(); return Object.assign(base, { r: S.r, phi: S.phi, z: m.rho[0][1].slice(), c: overlap(), mass: 2 * cabs(m.rho[0][1]) ** 2, trail: { sweep: tr.sweep, end: tr.end, points: tr.pts.length } }); }
       return Object.assign(base, { w: S.w, lamDream: S.lamDream, s: clock.t, kept: m.rho[0][0][0], forget: 1 - m.rho[0][0][0] });
     },
     /** The screen the stage draws, sampled at us: the total and the diagonal part. */
