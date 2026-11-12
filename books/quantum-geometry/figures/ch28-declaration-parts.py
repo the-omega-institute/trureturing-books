@@ -15,7 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 BOOK = ROOT / "books" / "quantum-geometry"
-ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"]
+ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
 
 SIZE = (560, 330)
 
@@ -43,7 +43,7 @@ def counts():
                         if gid:
                             assert gid in lock, f"{file}: {gid} is not in the lock"
                             cited[p].add(gid)
-    assert len(parts) == 9 and parts[3].startswith("第四部") and parts[5].startswith("第六部") and parts[8].startswith("终章")
+    assert len(parts) == 11 and parts[3].startswith("第四部") and parts[5].startswith("第六部") and parts[10].startswith("终章")
     rows = []
     for gids in cited:
         thm = sum(1 for g in gids if lock[g]["kind"] == "theorem")
@@ -55,11 +55,11 @@ ROWS = counts()
 TOTAL_THM = sum(t for t, _ in ROWS)
 
 ALT = {
-    "zh": "柱状图。横轴是第一至第八部与“终章与附录”，柱高是该部章节用 lean= 引用的不同声明数；"
+    "zh": "柱状图。横轴是第一至第十部与“终章与附录”，柱高是该部章节用 lean= 引用的不同声明数；"
           "每根柱子下段绿色是锁文件里种类为定理的声明，上段灰色是定义与归纳类型。"
           + "；".join(f"{lab}：定理 {t}、其他 {o}" for lab, (t, o) in zip(ROMAN + ["终章与附录"], ROWS))
           + "。柱子上方两道括号：第一至第三部标“第二十七章审计表”，第四至第六部标“第二十八章审计表”。",
-    "en": "A bar chart. Along the bottom are Parts I to VIII and 'coda and appendices'; each bar is the number of distinct "
+    "en": "A bar chart. Along the bottom are Parts I to X and 'coda and appendices'; each bar is the number of distinct "
           "declarations the chapters of that part cite with lean=, green below for declarations of kind theorem in the "
           "lock, grey above for definitions and inductive types. "
           + "; ".join(f"{lab}: {t} theorems, {o} other" for lab, (t, o) in zip(ROMAN + ["coda and appendices"], ROWS))
@@ -84,7 +84,7 @@ def draw(fig):
             fig.rect(x0, y2, x1 - x0, y1 - y2, color="dim", fill="dim", fill_opacity=0.22, width=1.2)
         fig.text((x0 + x1) / 2, y2 - 6, str(thm + other), size=13, anchor="middle")
         xl = (x0 + x1) / 2
-        if i < 8:
+        if i < 10:
             fig.text(xl, ax.Y(0) + 20, ROMAN[i], size=14, anchor="middle")
         else:
             fig.text(xl, ax.Y(0) + 20, t("终章", "coda"), size=13, anchor="middle")

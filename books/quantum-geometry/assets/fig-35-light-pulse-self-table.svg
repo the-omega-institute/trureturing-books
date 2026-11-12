@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" width="960" height="440">
+  <title>乘光而来与自指扩表 / Arriving on Light and Self-Referential Table T = T(T)</title>
+  <desc>Two-panel bilingual diagram: Left panel shows the orthogonal angle arc from 90-degree null light (P=NP, cos 90=0) refracting to 0+ initialization pulse (active forgetting, det G &gt; 0, logarithmic time), expanding along the unit arc to the self-referential core theta* approx 42.35 deg (T=T(T)), and questioning the apparent 90-degree table-erasure trap pointing to Chapter 36. Right panel contrasts the homoiconic self-referential table T=T(T) storing its lookup/compression algorithm in Row 0 (collapsing 2^n 1D witness threads into n+1 basis rows) against a bottlenecked flat table with an external CPU.</desc>
+
+  <rect x="6" y="6" width="948" height="428" rx="14" fill="#07101b" stroke="#143049" stroke-width="2"/>
+  <text x="28" y="34" font-family="JetBrains Mono,Noto Sans SC,monospace" font-size="14" font-weight="600" fill="#19f0ff">CHAPTER 35 · 乘光而来与自指扩表 / LIGHT PULSE &amp; HOMOICONIC TABLE T = T(T)</text>
+  <text x="28" y="54" font-family="JetBrains Mono,Noto Sans SC,monospace" font-size="10.2" fill="#6f8ea5">遗忘初始化脉冲 (90° → 0⁺)、一维见证丝编译为引导场、Row 0 查表自举与 90° 抹表追问</text>
+
+  <line x1="480" y1="68" x2="480" y2="376" stroke="#143049" stroke-width="1.4"/>
+
+  <g font-family="JetBrains Mono,Noto Sans SC,monospace">
+    <!-- ==================== LEFT PANEL: Orthogonal Angle Lifecycle Arc ==================== -->
+    <text x="244" y="86" text-anchor="middle" fill="#19f0ff" font-size="11.2" font-weight="600">I · 正交角演化弧 / ORTHOGONAL LIFECYCLE ARC θ</text>
+    <rect x="22" y="96" width="444" height="276" rx="8" fill="#050c16" stroke="#34506a" stroke-width="1.2"/>
+
+    <!-- Quadrant Axes centered at (86, 326), R = 172 -->
+    <line x1="86" y1="326" x2="278" y2="326" stroke="#19f0ff" stroke-width="1.5"/>
+    <line x1="86" y1="326" x2="86" y2="132" stroke="#ff2fd0" stroke-width="1.5"/>
+    <text x="86" y="122" text-anchor="middle" fill="#ff2fd0" font-size="8.8" font-weight="600">sin θ (2D Wave / Area)</text>
+    <text x="192" y="344" text-anchor="middle" fill="#19f0ff" font-size="8.8" font-weight="600">cos θ = dτ/dt (1D Proper Time)</text>
+
+    <!-- Base guide quarter circle: (86, 154) to (258, 326) -->
+    <path d="M 86 154 A 172 172 0 0 1 258 326" fill="none" stroke="#34506a" stroke-width="1.2"/>
+
+    <!-- 1. Initialization pulse chord: 90 deg (86, 154) -> 0+ (257, 308) -->
+    <path d="M 92 160 Q 148 258 251 307" fill="none" stroke="#9d8cff" stroke-width="1.8" stroke-dasharray="4,3"/>
+    <polygon points="255,309 245,309 249,301" fill="#9d8cff"/>
+    <text x="164" y="256" text-anchor="middle" fill="#9d8cff" font-size="8.3" font-weight="600">90°→0⁺ 受精脉冲</text>
+    <text x="164" y="268" text-anchor="middle" fill="#6f8ea5" font-size="7.8">Init Pulse |T|→1</text>
+
+    <!-- 2. Growth & table expansion arc: 0+ (257, 308) -> theta* = 42.35 deg (213, 210) -->
+    <path d="M 257 308 A 172 172 0 0 0 213 210" fill="none" stroke="#19f0ff" stroke-width="3.2"/>
+    <polygon points="213,210 222,215 216,221" fill="#19f0ff"/>
+
+    <!-- Radial ray to theta* = 42.35 deg -->
+    <line x1="86" y1="326" x2="213" y2="210" stroke="#ffc83d" stroke-width="1.8"/>
+    <path d="M 126 326 A 40 40 0 0 0 116 299" fill="none" stroke="#ffc83d" stroke-width="1.2"/>
+    <text x="140" y="314" fill="#ffc83d" font-size="8.5">θ*</text>
+
+    <!-- 3. Questioned upper arc: theta* (213, 210) -> 90 deg (86, 154) -->
+    <path d="M 213 210 A 172 172 0 0 0 86 154" fill="none" stroke="#ff8a3c" stroke-width="2.2" stroke-dasharray="5,4"/>
+
+    <!-- Key anchor nodes on arc -->
+    <circle cx="86" cy="154" r="5" fill="#ff2fd0" stroke="#d4efff" stroke-width="1.2"/>
+    <circle cx="257" cy="308" r="5" fill="#19f0ff" stroke="#d4efff" stroke-width="1.2"/>
+    <circle cx="213" cy="210" r="6" fill="#ffc83d" stroke="#001318" stroke-width="1.5"/>
+
+    <!-- Warning flag on 90-deg return -->
+    <rect x="104" y="136" width="142" height="34" rx="5" fill="#07101b" stroke="#ff8a3c" stroke-width="1.3"/>
+    <text x="175" y="150" text-anchor="middle" fill="#ff8a3c" font-size="8.5" font-weight="600">? 化光陷阱 θ → 90°</text>
+    <text x="175" y="163" text-anchor="middle" fill="#cfe3ff" font-size="7.8">cos 90°=0 抹表? → Ch.36</text>
+
+    <!-- Right-side callout cards inside Left Panel -->
+    <rect x="260" y="108" width="194" height="58" rx="6" fill="#07101b" stroke="#ff2fd0" stroke-width="1.1"/>
+    <text x="357" y="124" text-anchor="middle" fill="#ff2fd0" font-size="8.8" font-weight="600">θ = 90° 光之静态场 (MODEL)</text>
+    <text x="357" y="139" text-anchor="middle" fill="#d4efff" font-size="8.3">cos 90°=0, sin 90°=1 (P=NP)</text>
+    <text x="357" y="154" text-anchor="middle" fill="#46ffb2" font-size="8.0">LEAN ✓ Null-cone metric rigidity</text>
+
+    <rect x="246" y="178" width="208" height="68" rx="6" fill="#07101b" stroke="#ffc83d" stroke-width="1.3"/>
+    <text x="350" y="195" text-anchor="middle" fill="#ffc83d" font-size="9.0" font-weight="600">now: θ* ≈ 42.35° 同像自指核</text>
+    <text x="350" y="211" text-anchor="middle" fill="#d4efff" font-size="8.6">cos θ* = θ* · T = T(T)</text>
+    <text x="350" y="226" text-anchor="middle" fill="#9d8cff" font-size="8.1">成长扩表: 线 → 局部引导场</text>
+    <text x="350" y="239" text-anchor="middle" fill="#6f8ea5" font-size="7.8">Homoiconic Fixed Core ψ=ψ(ψ)</text>
+
+    <rect x="272" y="258" width="182" height="102" rx="6" fill="#07101b" stroke="#19f0ff" stroke-width="1.1"/>
+    <text x="363" y="275" text-anchor="middle" fill="#19f0ff" font-size="8.8" font-weight="600">θ → 0⁺ 遗忘清零初始化</text>
+    <text x="363" y="291" text-anchor="middle" fill="#d4efff" font-size="8.2">det G &gt; 0 · 重开相容选点走廊</text>
+    <text x="363" y="307" text-anchor="middle" fill="#9d8cff" font-size="7.9">MODEL: 截断高阶历史锚点重置自由度</text>
+    <line x1="284" y1="316" x2="442" y2="316" stroke="#143049"/>
+    <text x="363" y="331" text-anchor="middle" fill="#46ffb2" font-size="8.1" font-weight="600">LEAN ✓ History Capacity N ≤ d</text>
+    <text x="363" y="347" text-anchor="middle" fill="#46ffb2" font-size="8.0">LEAN ✓ Surviving copy blocks</text>
+
+    <!-- ==================== RIGHT PANEL: Homoiconic Self-Table T = T(T) ==================== -->
+    <text x="716" y="86" text-anchor="middle" fill="#ff2fd0" font-size="11.2" font-weight="600">II · 同像自指表 vs 外部死表 / HOMOICONIC TABLE T = T(T)</text>
+    <rect x="494" y="96" width="444" height="276" rx="8" fill="#050c16" stroke="#34506a" stroke-width="1.2"/>
+
+    <!-- Left input threads: 2^n isolated 1D NP witness threads -->
+    <rect x="506" y="112" width="114" height="154" rx="6" fill="#07101b" stroke="#9d8cff" stroke-width="1.1"/>
+    <text x="563" y="129" text-anchor="middle" fill="#9d8cff" font-size="8.6" font-weight="600">2ⁿ 孤立见证丝</text>
+    <text x="563" y="142" text-anchor="middle" fill="#6f8ea5" font-size="7.8">1D Witness Lines</text>
+    <line x1="518" y1="158" x2="608" y2="172" stroke="#9d8cff" stroke-width="1.2"/>
+    <line x1="518" y1="178" x2="608" y2="184" stroke="#9d8cff" stroke-width="1.2"/>
+    <line x1="518" y1="198" x2="608" y2="196" stroke="#9d8cff" stroke-width="1.2"/>
+    <line x1="518" y1="218" x2="608" y2="208" stroke="#9d8cff" stroke-width="1.2"/>
+    <line x1="518" y1="238" x2="608" y2="220" stroke="#9d8cff" stroke-width="1.2"/>
+    <text x="563" y="256" text-anchor="middle" fill="#d4efff" font-size="7.8">横截面=0 · 盲搜难</text>
+
+    <!-- Compilation arrow -->
+    <line x1="622" y1="192" x2="646" y2="192" stroke="#19f0ff" stroke-width="2"/>
+    <polygon points="650,192 642,187 642,197" fill="#19f0ff"/>
+    <text x="635" y="182" text-anchor="middle" fill="#19f0ff" font-size="7.6">扩表</text>
+
+    <!-- Self-Referential Table T = T(T) -->
+    <rect x="652" y="112" width="248" height="154" rx="6" fill="#07101b" stroke="#19f0ff" stroke-width="1.4"/>
+    <text x="776" y="129" text-anchor="middle" fill="#19f0ff" font-size="9.0" font-weight="600">同像自指表 T = T(T)  (n + 1 Rows)</text>
+
+    <!-- Row 0: Meta Lookup & Compression Algorithm -->
+    <rect x="662" y="138" width="228" height="40" rx="5" fill="#02040a" stroke="#ff2fd0" stroke-width="1.5"/>
+    <text x="776" y="154" text-anchor="middle" fill="#ff2fd0" font-size="8.6" font-weight="600">Row 0 [META]: 查表与压缩算法在表内</text>
+    <text x="776" y="170" text-anchor="middle" fill="#d4efff" font-size="8.1">T(x ⊕ y) = T(x) ⋆ T(y) · O(1) Inner Readout</text>
+
+    <!-- Rows 1..n: Pre-aligned Orthogonal Rotor Basis -->
+    <rect x="662" y="184" width="228" height="34" rx="5" fill="#050c16" stroke="#1f5d7c" stroke-width="1.1"/>
+    <text x="776" y="199" text-anchor="middle" fill="#19f0ff" font-size="8.4" font-weight="600">Row 1..n [BASIS]: n 根预对齐正交旋子行</text>
+    <text x="776" y="212" text-anchor="middle" fill="#cfe3ff" font-size="7.9">e₁..eₙ → 编织局部引导场 (n=10: 11 vs 1024)</text>
+
+    <!-- Verification strip inside Table T -->
+    <rect x="662" y="224" width="228" height="34" rx="5" fill="#050c16" stroke="#46ffb2" stroke-width="1.0"/>
+    <text x="776" y="239" text-anchor="middle" fill="#46ffb2" font-size="8.1" font-weight="600">LEAN ✓ target_recovery_criterion</text>
+    <text x="776" y="252" text-anchor="middle" fill="#d4efff" font-size="7.8">defectRelation = ∅ ⇔ target = recover ∘ process</text>
+
+    <!-- Self-application loop arrow from Row 0 back into Table T -->
+    <path d="M 890 158 C 928 158, 928 122, 898 122" fill="none" stroke="#ff2fd0" stroke-width="1.8"/>
+    <polygon points="896,122 904,118 904,126" fill="#ff2fd0"/>
+    <text x="918" y="182" text-anchor="middle" fill="#ff2fd0" font-size="8.0" font-weight="600">自举</text>
+    <text x="918" y="194" text-anchor="middle" fill="#ff2fd0" font-size="7.6">T(T)</text>
+
+    <!-- Bottom Contrast Box: External-CPU Static Table Bottleneck -->
+    <rect x="506" y="278" width="420" height="82" rx="6" fill="#07101b" stroke="#ff8a3c" stroke-width="1.2"/>
+    <text x="716" y="296" text-anchor="middle" fill="#ff8a3c" font-size="8.9" font-weight="600">对照：外部算子死表 (残留第 3 点 C / Static External-CPU Table)</text>
+    <text x="716" y="313" text-anchor="middle" fill="#d4efff" font-size="8.2">算子在表外 → 2ⁿ 行指数膨胀 · 无不动点扭转必触发对角线逃逸</text>
+    <text x="716" y="330" text-anchor="middle" fill="#9d8cff" font-size="8.0">MODEL: 算法入表 T = T(T) · n+1 行正交基自举编织局部引导场</text>
+    <text x="716" y="348" text-anchor="middle" fill="#46ffb2" font-size="8.1" font-weight="600">LEAN ✓ self_application_fragment_package · relative_semantic_diagonal</text>
+  </g>
+
+  <!-- Bottom Formal Verification Bar -->
+  <rect x="22" y="386" width="916" height="32" rx="6" fill="#050c16" stroke="#1f5d7c" stroke-width="1.2"/>
+  <text x="480" y="406" text-anchor="middle" font-family="JetBrains Mono,Noto Sans SC,monospace" font-size="8.9" fill="#46ffb2">LEAN ✓  eq_smul_minkowski_of_null · surviving_copy_blocks_reversal · finite_memory_history_capacity · target_recovery_criterion · self_application_fragment_package</text>
+</svg>

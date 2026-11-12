@@ -57,7 +57,7 @@
     <text x="688" y="182" text-anchor="middle" fill="#6f8ea5" font-size="8.2">NCG/E₈ · Wolfram</text>
     <text x="840" y="182" text-anchor="middle" fill="#6f8ea5" font-size="8.2">Langlands/HoTT · U</text>
     <text x="764" y="302" text-anchor="middle" fill="#9d8cff" font-size="9">MODEL: 8 Programs → 1 Crystal</text>
-    <text x="764" y="324" text-anchor="middle" fill="#6f8ea5" font-size="9">commit 1d9bf98cab83 (trureturing)</text>
+    <text x="764" y="324" text-anchor="middle" fill="#6f8ea5" font-size="9">trureturing · pinned audit ledger</text>
   </g>
 
   <rect x="24" y="368" width="872" height="30" rx="6" fill="#050c16" stroke="#1f5d7c"/>

@@ -153,7 +153,7 @@ def _cn(s):
     return _CN.index(s)
 
 
-def chapter_references(n=30):
+def chapter_references(n=39):
     """Counter {(cited, citing): mentions} over the Chinese chapters 1–n: a link to chNN-….md or the
     words “第 N 章” (Arabic or Chinese numerals) inside chapter M ≠ N. Captions of figures, lab cards,
     films and slide decks are skipped: they describe a picture, not what the chapter builds on."""
