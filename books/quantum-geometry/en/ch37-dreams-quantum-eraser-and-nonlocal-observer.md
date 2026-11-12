@@ -40,6 +40,7 @@ S\bigl(\rho(1)\bigr) - S\bigl(\rho(0)\bigr) \;=\; -\cos^2\theta\ln(\cos^2\theta)
 $$
 
 (evaluating to $\ln 2$ at equal superposition $\theta = \frac{\pi}{4}$). Why the daytime world feels at once **solid and reliable** yet **narrow and exhausting** is now algebraically transparent:
+
 - **Solid**, because record pinching obeys strict functional idempotence $\Pi_{\mathrm{wake}} \circ \Pi_{\mathrm{wake}} = \Pi_{\mathrm{wake}}$: so long as you interrogate the world millisecond after millisecond with the same known-data basis, every off-diagonal anomaly is crushed to zero ($P_k \rho P_l = 0$), tables stay tables, and walls never let a hand pass through;
 - **Narrow and exhausting**, because across every step of unitary evolution $U$ followed by basis pinching onto classical certainty, the deleted off-diagonal coherence is converted penny for penny into a nonnegative **quantum relative-entropy tax**! Sustaining a crisp one-dimensional daytime rail requires paying an ongoing thermodynamic entropy bill.
 
@@ -229,6 +230,7 @@ For Conjunct 1, any $y \in \operatorname{embedding} '' \mathrm{goldenModelSet}$ 
 :::
 
 Contemplate what [@thm-ch37-golden-cut-delone-multilocation] reveals for our observer ontology (`MODEL` (interpretive model)). We can verify right by hand how a single internal window $\mathrm{goldenWindow} = [\varphi - 2, \varphi - 1] \approx [-0.3820, +0.6180]$ activates multiple separated positions along $\mathbb{R}$ simultaneously (for $u = \langle a, b\rangle \in \mathrm{GoldenInt}$, the physical embedding is $a + b\varphi$ and the conjugate coordinate is $a + b(1 - \varphi)$):
+
 - For $u_{-2} = \langle -1, -1\rangle$ and $u_{-1} = \langle 0, -1\rangle$: the conjugate coordinates are $-1 - (1 - \varphi) = \varphi - 2$ (the exact left window endpoint) and $-(1 - \varphi) = \varphi - 1$ (the exact right window endpoint), lighting up negative-axis positions $y_{-2} = -1 - \varphi \approx -2.6180$ and $y_{-1} = -\varphi \approx -1.6180$ and realizing the sharp unit spacing $y_{-1} - y_{-2} = 1 \ge 1$;
 - For $u_0 = \langle 0, 0\rangle$: the conjugate coordinate is $0 \in [\varphi - 2, \varphi - 1]$, lighting up physical position $y_0 = 0$ (spacing $y_0 - y_{-1} = \varphi \approx 1.6180 \ge 1$);
 - For $u_1 = \langle 1, 1\rangle$ and $u_2 = \langle 1, 2\rangle$: the conjugate coordinates are $2 - \varphi \approx +0.3820 \in [\varphi - 2, \varphi - 1]$ and $3 - 2\varphi \approx -0.2361 \in [\varphi - 2, \varphi - 1]$, lighting up $y_1 = 1 + \varphi = \varphi^2 \approx 2.6180$ and $y_2 = 1 + 2\varphi \approx 4.2361$ (whereas the intermediate candidate $\langle 0, 1\rangle \mapsto \varphi \approx 1.6180$ has conjugate $1 - \varphi \approx -0.6180 < \varphi - 2$ outside the window and is filtered out, leaving adjacent gaps $y_1 - y_0 = \varphi^2 \approx 2.6180 \le 6$ and $y_2 - y_1 = \varphi \approx 1.6180 \ge 1$ strictly within the packing radius $1/2$ and covering radius $3$ bounds).
