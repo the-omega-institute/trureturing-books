@@ -171,8 +171,11 @@
 
   function drawPrime(g) {
     const c = g.ctx, W = g.W, H = g.H, k = step(), E = EUCLID[k], q = E.factors[0];
-    const cols = Math.max(1, Math.min(k, 6)), rowsN = Math.max(1, Math.ceil(k / 6)), areaW = W - 60, areaH = H - 78 - 150;
-    const r = Math.min(areaW / (cols * 2.5), areaH / (rowsN * 2.55), 74), top = 78 + Math.max(0, (areaH - rowsN * r * 2.55) / 2);
+    const compact = H < 300, cols = Math.max(1, Math.min(k, compact ? 3 : 6)), rowsN = Math.max(1, Math.ceil(k / cols));
+    const areaW = W - 60, topPad = compact ? 38 : 78, bottomPad = compact ? 42 : 150, areaH = Math.max(1, H - topPad - bottomPad);
+    const rowPitch = compact ? 2.2 : 2.55, colPitch = compact ? 2.2 : 2.5;
+    const r = Math.max(8, Math.min(areaW / (cols * colPitch), areaH / (rowsN * rowPitch), compact ? 28 : 74));
+    const top = topPad + Math.max(0, (areaH - rowsN * r * rowPitch) / 2);
     const dial = (x, y, rad, p, rem, col, big) => {
       c.strokeStyle = TRV.alpha(col, 0.55); c.lineWidth = 1.2; c.beginPath(); c.arc(x, y, rad, 0, kit.TAU); c.stroke();
       if (p <= 64) for (let t = 0; t < p; t++) { const a = -Math.PI / 2 + kit.TAU * t / p; c.fillStyle = t === 0 ? P.warn : TRV.alpha(col, 0.7); c.beginPath(); c.arc(x + rad * Math.cos(a), y + rad * Math.sin(a), t === 0 ? 3 : 1.8, 0, kit.TAU); c.fill(); }
@@ -182,10 +185,10 @@
       c.fillStyle = col; c.font = `600 ${Math.round(rad * (big ? 0.3 : 0.36))}px ${TRV.fonts.data}`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(String(p), x, y + 1);
       c.fillStyle = rem === 0 ? P.magenta : P.dim; c.font = `11px ${TRV.fonts.data}`; c.textBaseline = 'top'; c.fillText(`${L('余', 'rem')} ${rem}`, x, y + rad + 7);
     };
-    for (let i = 0; i < k; i++) { const col = i % 6, row = Math.floor(i / 6), n = Math.min(6, k - row * 6); dial(W / 2 + (col - (n - 1) / 2) * r * 2.5, top + r + 6 + row * r * 2.55, r, PRIMES[i], E.Q % PRIMES[i], P.cyan); }
+    for (let i = 0; i < k; i++) { const col = i % cols, row = Math.floor(i / cols), n = Math.min(cols, k - row * cols); dial(W / 2 + (col - (n - 1) / 2) * r * colPitch, top + r + 6 + row * r * rowPitch, r, PRIMES[i], E.Q % PRIMES[i], P.cyan); }
     if (!k) { c.fillStyle = P.dim; c.font = `13px ${TRV.fonts.body}`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(L('清单是空的：空乘积是 1', 'The list is empty: the empty product is 1'), W / 2, top + areaH / 2); }
     // Q and its factorization; the least prime factor gets its own dial, hand on 0
-    const by = H - 96, rr = Math.min(36, r);
+    const by = compact ? H - 28 : H - 96, rr = Math.min(compact ? 22 : 36, r);
     c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = P.ink; c.font = `600 ${W < 520 ? 14 : 18}px ${TRV.fonts.data}`;
     const prodText = k ? PRIMES.slice(0, k).join('·') : '1', line = `Q = ${k > 7 ? `p₁⋯p${k < 10 ? '₀₁₂₃₄₅₆₇₈₉'[k] : '₁' + '₀₁₂₃₄₅₆₇₈₉'[k - 10]}` : prodText} + 1 = ${E.Q}`;
     c.fillText(line, W / 2 - rr - 20, by - 14);

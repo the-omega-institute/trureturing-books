@@ -453,7 +453,7 @@ $$
 \delta_{k+1} \;=\; \frac{\theta^*}{2\,(1 + \lambda)}\,\delta_k^2 + O(\delta_k^3), \qquad \frac{\theta^*}{2\,(1 + \lambda)} \approx 0.2208054 .
 $$
 
-Picard iteration adds a fixed number of digits per step; Newton's iteration roughly doubles the number of correct digits per step.
+Picard iteration adds a fixed number of digits per step; once it is near the fixed point, Newton's iteration asymptotically doubles the number of correct digits.
 
 **Third question: the residual is the distance to the fixed point.** For $q \in [0, 1]$, apply the mean value theorem to $F$ and use $F(\theta^*) = 0$: there is some $\xi$ between $q$ and $\theta^*$ with
 
@@ -485,7 +485,7 @@ for infinitely many denominators $b$: the seam narrows like the square of the de
 :::
 
 ::: {.viz src="fixed-point-convergence" preset="newton" height="500"}
-**Follow the tangent, double the digits.** Again from $\theta_0 = 1$, each step reads the height of the curve and then follows the magenta tangent to the grey line $y = x$. The view zooms along: within four steps its width falls from about $0.6$ to the order of $10^{-20}$, the error being roughly squared at each step; the plain iteration needs $115$ steps to match step $4$ (numerical check in [@ex-dottie-rate-newton-rational]).
+**Follow the tangent: near the fixed point, digits double asymptotically.** Again from $\theta_0 = 1$, each step reads the height of the curve and then follows the magenta tangent to the grey line $y = x$. Once it is near the fixed point, the view zooms along: within four steps its width falls from about $0.6$ to the order of $10^{-20}$, with the error asymptotically squared at each step; the plain iteration needs $115$ steps to match step $4$ (numerical check in [@ex-dottie-rate-newton-rational]).
 :::
 
 ::: {.example #ex-dottie-rate-newton-rational title="Numerical Check of the True Contraction Rate, Newton's Quadratic Closure, and the Residuals of the Best Rational Readings"}

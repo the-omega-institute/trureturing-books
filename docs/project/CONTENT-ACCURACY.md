@@ -673,3 +673,31 @@ PR90 已合入、16 项来源 CI 全部成功；主线 CI/Pages 正在运行。�
 
 
 PR120 随后整合官方主线 `504d746` 为 `ccbb16960d6612c3ac028c4dbb66d61d0f0eef7b`：新增 40 个路径均不涉及本批六份正文、自己的图、四个引用实验室、工具/主题或 skill，先前本批及 PR90 的独立批准各自保持原边界。原锁 440 条逐项相同，当前 441 条，pin 不变；本轮 check 仍为 0 错误/0 警告、150 图无过期/错误。新第 22/24 章及派生计数的内容由对应批次另行核对，当前整书输出仍须以本次 CI 为准。
+
+## PR127 R2 前的有界 post-R1 修复交接（2026-11-12）
+
+本次输入 HEAD 为 `f772e82666a25c7e62501076e1b5987c68c7fb3a`，即用户指定的 PR127 候选；工作区起始时无已跟踪改动。范围只承接 R1 汇总中两项已确认的 SC3/SC4 阻断：`R1-ARCH-NEWTON-LOCAL-01` 与 `PR127-TESTS-01`。原 35 单元审计集合仍为原 35；出版物当前的第 31–39 章及 44 单元计数只作依赖，未计入已审覆盖。pin `1d9bf98cab8306e67ec38a739359f2cdae63877a`、锁文件、Lean、控制域、稳定 ID/GID、媒体顺序、托管文件、题记和 Film006 均未改。
+
+确认修复如下：
+
+- `R1-ARCH-NEWTON-LOCAL-01`：fixed-point-convergence 的中英文页面元数据、实验卡、HUD/依据说明及第 24 章相应句子均把牛顿的二次误差/正确位数翻倍明确限定为进入不动点邻域后的局部、渐近行为；从 `θ₀=1` 的数值表保持不变。图 `ch24-three-speeds` 的源与中英 SVG ALT/title 同步说明该限定，并刷新实际消费的双语卡片 JPEG。
+- `PR127-TESTS-01`：sphere-escape 的 prime 场景在舞台高度低于 300px 时采用三列紧凑两行布局、正半径和底部读数保留区；数值模型、素数控制和普通高度布局不变。`H≈218,k=6` 不再把负半径传给 `Canvas.arc`，读数、图例和下方图仍绘制。
+
+CH21 的 `CH21-GID-OVERCLAIM` 继续判为 discarded false finding：允许读取的精确来源收据 `/private/tmp/qg-accuracy-resume-20261112/pr127-r1-CH21-source-adjudication.json` 对 pinned source `D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean` 的 `complete_diagonal_topological_settlement` 给出四个合取项（含 `StrictObservationRefinement`）；锁中三项字符串是截断展示，不是声明类型。因此 ch21 正文、推论、proof 和 Film006 均保留，未改锁或声称重新编译 Lean。
+
+本次实际检查和边界：
+
+| 检查 | 实际结果与复用边界 |
+| --- | --- |
+| 数值与普通控件 | 80 位 `mpmath` 独立计算保留 `θ₀=1` 的 Newton 轨道，并复现支持域 `θ₀=-1.50` 的 `625.537445871540…`、`-342.361549141478…`、`x₅=3.535359379994…` 反例；两种语言实际选择 Newton、拖到 −1.50、逐步读 0–5，5/5 控件检查通过且无页面错误。 |
+| 受影响实验室套件 | `fixed-point-convergence` 普通 114/114、`VIZ_SLOW_FRAMES=1000` 114/114；`sphere-escape` 普通 105/105、慢帧 105/105。均含 stage-first、依据、双语、嵌入、手机、封面及独立数值核对。 |
+| 短视口普通读者路径 | 独立 Playwright 检查 zh resize 1440×500、en fresh 1440×500、zh fresh 1280×480 共 12/12；每次 30031 卡均为 prime step 6、canvas 非空、stage ≥218px、无新 page error。相关共享实验室仍使用项目固定夜间主题；zh/en 和 1440×900/390×844 的现有套件覆盖保持通过。 |
+| 真实站点章节消费 | 重新构建 site 后，实际打开 `_site` 的 Chapter 24 zh 1440×900 与 en 390×844 页面，滚动到 `fixed-point-convergence` Newton 和 `sphere-escape` Dottie iframe；4 个 iframe 均加载、stage 高度 384.3/268.1/317.8px，canvas 有像素且无 frame error。中英章节引用序列仍逐项存在。 |
+| 输出与静态媒体 | `./tbook build html --book quantum-geometry` 成功；`./tbook build site --book quantum-geometry` 成功。`viz-shots` 为两个实验室各写出桌面/嵌入/手机/封面七张官方 PNG；`viz-thumbs` 刷新 fixed-point 13 张、sphere 17 张实际消费 JPEG；`ch24-three-speeds` 中英 SVG 由脚本重建。已抽看桌面、手机和 30031/NEWTON 卡片。 |
+| 规则与语法 | `./tbook check`：1 book、0 errors、0 warnings；`git diff --check` 通过；`node --check` 两个 main.js、图脚本 `py_compile`、`quick_validate.py skills/local-content-accuracy` 均通过。 |
+
+站点构建仍报告仓库既有的 8 个 film toolchain 缺失警告（只保留海报并显示 “video not built”）；本次没有安装依赖或扩大到完整音视频重建。此前 R1 专门的 oversized element capture 失败仍是独立的非普通读者限制，不能以本次短视口修复冒称已消失；本次普通路径不再复现负半径。未运行 PDF/EPUB/EPUBCheck，因为本次改动只影响 HTML/交互实验室及其 PNG/JPEG/SVG 消费者；未变的数学、章节与导出依赖不冒称为新的整书字节证据。
+
+交互源/测试/静态图实现按要求尝试直接命令行 CLI：版本为 `claude 2.1.322`；无登录凭据的非交互实现调用退出并报告 `Not logged in · Please run /login`，未产生工作区改动。随后由本实施者按同一最小范围完成补丁，并以项目现有浏览器套件、独立计算和站点 iframe 检查独立验证；没有派生子代理、Git/GitHub 生命周期操作或读取根目录受保护的 untracked 文件。
+
+本次留下的是实现交接，不是 approval/verdict。当前没有本实施分配内的剩余修复义务；调用方仍须在最终候选上完成 mandatory R2 三席复审、current-main correspondence、PR127 的 CI、合入与 Pages 核对，并保留原 35 单元覆盖与第 31–39 章依赖边界。独立复审、PR/CI/merge/Pages 状态不因本地构建通过而自动成立。
