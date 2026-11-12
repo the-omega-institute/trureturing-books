@@ -69,7 +69,11 @@ Across the frozen diagonal-escape and self-application-fate modules of `truretur
    $$
 
    $$
-   \land\; \Bigl(\operatorname{HasFate}(m, \mathrm{.live}) \to \operatorname{fixedCoefficients}(m) = (1, -1, -1) \lor \operatorname{fixedCoefficients}(m) = (1, 1, -1)\Bigr) \;\land\; \Bigl(\operatorname{HasFate}(m, \mathrm{.live}) \to \operatorname{discriminant}(m) = 1^2 + 4\Bigr).
+   \begin{aligned}
+   &\land\; \Bigl(\operatorname{HasFate}(m, \mathrm{.live}) \to \operatorname{fixedCoefficients}(m) = (1, -1, -1) \\
+    &\quad \lor \operatorname{fixedCoefficients}(m) = (1, 1, -1)\Bigr) \\
+    &\;\land\; \Bigl(\operatorname{HasFate}(m, \mathrm{.live}) \to \operatorname{discriminant}(m) = 1^2 + 4\Bigr).
+   \end{aligned}
    $$
 :::
 
@@ -116,7 +120,12 @@ Across the frozen concept-fiber, golden-coding real-thread, and binary-Zeckendor
 2. **Strict Injectivity of the Complete Zeckendorf Readout Thread on $\mathbb{R}_{\ge 0}$** ([`zeckendorf_real_thread_injective`](lean:D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective)): For $x \in \mathbb{R}_{\ge 0}$ (`NNReal`) and resolution $\mathrm{level} \in \mathbb{N}$, define $\operatorname{goldenQuantization}(\mathrm{level}, x) := \lfloor\varphi^{\mathrm{level}} \cdot (x : \mathbb{R})\rfloor_+ \in \mathbb{N}$ ($\varphi = \mathrm{Real.goldenRatio}$) and the canonical Zeckendorf readout thread $\operatorname{zeckendorfRealThread}(x) := (\mathrm{level} \mapsto \operatorname{wEncoding}(\operatorname{goldenQuantization}(\mathrm{level}, x))) : \mathbb{N} \to \mathrm{WDigitString}$, where $\mathrm{WDigitString} = \{\mathrm{digits} : \operatorname{List}\;\mathbb{N} \mathrel{//} \mathrm{digits}.\mathrm{IsZeckendorfRep}\}$ and $\operatorname{wEncoding} : \mathbb{N} \simeq \mathrm{WDigitString}$. Then $\operatorname{zeckendorfRealThread}$ is strictly injective:
 
    $$
-   \operatorname{Function.Injective}(\operatorname{zeckendorfRealThread}), \quad\text{i.e.,}\quad \forall a, b \in \mathbb{R}_{\ge 0},\quad \operatorname{zeckendorfRealThread}(a) = \operatorname{zeckendorfRealThread}(b) \;\Longrightarrow\; a = b;
+   \begin{aligned}
+   &\operatorname{Function.Injective}(\operatorname{zeckendorfRealThread}), \\
+    &\quad\text{i.e.,}\quad \forall a, b \in \mathbb{R}_{\ge 0}, \\
+    &\quad \operatorname{zeckendorfRealThread}(a) = \operatorname{zeckendorfRealThread}(b) \\
+    &\;\Longrightarrow\; a = b;
+   \end{aligned}
    $$
 
 3. **Exact Equivalence Between Base-2 Golden Automaton Acceptance and `NoAdjacentOnes`** ([`base_success_iff_noAdjacentOnes`](lean:D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes)): For every binary word $\mathrm{word} \in \operatorname{List}(\operatorname{Fin} 2)$, writing $\operatorname{NoAdjacentOnes}(\mathrm{word}) := \mathrm{word}.\operatorname{IsChain}(u, v \mapsto u = 0 \lor v = 0)$, the partial deterministic finite automaton `binaryZeckendorfBase` accepts $\mathrm{word}$ if and only if no two adjacent `1`s occur:
