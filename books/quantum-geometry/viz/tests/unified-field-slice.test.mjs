@@ -86,7 +86,7 @@ await page.click('#speedChips [data-speed="2.5"]');
 check('the speed chips pick 2.5×', (await page.getAttribute('#speedChips [data-speed="2.5"]', 'aria-pressed')) === 'true');
 let s = await state();
 check('page carries its id', (await page.evaluate(() => document.body.dataset.vizId)) === ID);
-check('opens on the GUDERMANN card at η = ln 2, not playing', s.preset === 'gudermann' && s.scene === 'clock' && close(s.clock.eta, Math.LN2, 1e-12) && !s.playing);
+check('opens on the PHOTON card at its still η = 4, not playing', s.preset === 'photon' && s.scene === 'clock' && close(s.clock.eta, 4, 1e-12) && !s.playing);
 
 // the Gudermannian over a grid: θ, sin θ = tanh η, cos θ = sech η = 1/γ, and the two identities
 let worst = 0;
@@ -99,17 +99,26 @@ check('CLOCK: θ = gd(η), sin θ = tanh η, cos θ = sech η = 1/γ, cos² + si
 s = await seek(4);
 check('CLOCK: θ stays below 90° at η = 4', s.clock.theta < Math.PI / 2 && close(s.clock.theta, gdIndep(4), 1e-12));
 
-s = await pick('gudermann'); await ended(Math.LN2); s = await state();
-check('GUDERMANN: η = ln 2 gives cos θ = 0.8, sin θ = 0.6, θ = 36.87°', close(s.clock.cos, 0.8, 1e-12) && close(s.clock.sin, 0.6, 1e-12) && close(s.clock.theta * 180 / Math.PI, 36.8699, 1e-4));
-check('GUDERMANN: the key readout reads 0.640 + 0.360 = 1.000', s.key.replace(/\s+/g, ' ').includes('0.640 + 0.360 = 1.000'), s.key);
+s = await seek(Math.LN2);
+check('CLOCK: η = ln 2 gives cos θ = 0.8, sin θ = 0.6, θ = 36.87°', close(s.clock.cos, 0.8, 1e-12) && close(s.clock.sin, 0.6, 1e-12) && close(s.clock.theta * 180 / Math.PI, 36.8699, 1e-4));
+check('CLOCK at ln 2: the key readout reads 0.640 + 0.360 = 1.000', s.key.replace(/\s+/g, ' ').includes('0.640 + 0.360 = 1.000'), s.key);
 
 const tStar = fixedPoint();
-s = await pick('fixedpoint'); await ended(s.clock.etaStar); s = await state();
-check('FIXED POINT: the card stops where cos θ = θ (bisection θ* = 0.7390851332)', close(s.clock.theta, tStar, 1e-10) && close(s.clock.cos, s.clock.theta, 1e-10), `${s.clock.theta}`);
-check('FIXED POINT: |sin θ*| = √(1 − θ*²) ≈ 0.673612 and θ* + arcsin θ* = π/2', close(s.clock.sin, Math.sqrt(1 - tStar ** 2), 1e-10) && close(s.clock.sin, 0.673612, 1e-6) && close(tStar + Math.asin(tStar), Math.PI / 2, 1e-12));
+s = await pick('fixedpoint'); await ended(tStar); s = await state();
+check('FIXED POINT: its own scene, the card stops where cos θ = θ (bisection θ* = 0.7390851332)', s.scene === 'fixed' && close(s.fixed.theta, tStar, 1e-10) && close(s.fixed.cos, s.fixed.theta, 1e-10), `${s.scene} ${s.fixed.theta}`);
+check('FIXED POINT: |sin θ*| = √(1 − θ*²) ≈ 0.673612 and θ* + arcsin θ* = π/2', close(s.fixed.sin, Math.sqrt(1 - tStar ** 2), 1e-10) && close(s.fixed.sin, 0.673612, 1e-6) && close(tStar + Math.asin(tStar), Math.PI / 2, 1e-12));
+const num = (str) => parseFloat(str.replace(/−/g, '-').replace(/[^0-9.+-]/g, ''));
+check('FIXED POINT: the key readout cos θ − θ reads 0 there', Math.abs(num(s.key)) < 1e-4, s.key);
 {
   const leg = await page.textContent('#legend');
-  check('FIXED POINT: the header and legend read the fixed point, not a speed (no η, no v/c)', /θ\* = 0\.739/.test(s.hud) && !/η/.test(s.hud) && !/v\/c|速度/.test(leg) && leg.includes('sin θ*'), `${s.hud} | ${leg}`);
+  check('FIXED POINT: the header and legend read the fixed point, not a speed (no η, no v/c, no light)', /θ\* = 0\.739/.test(s.hud) && !/η/.test(s.hud) && !/v\/c|速度|光/.test(leg) && leg.includes('局部压缩率'), `${s.hud} | ${leg}`);
+}
+s = await seek(0.4);
+check('FIXED POINT: below θ* the shadow is longer than the arc (cos θ − θ > 0)', s.scene === 'fixed' && close(num(s.key), Math.cos(0.4) - 0.4, 1e-4) && num(s.key) > 0, s.key);
+{
+  const q = await page.evaluate(() => window.UNIFIED_DEBUG.point(Math.cos(1.1), Math.sin(1.1)));
+  await page.mouse.move(q[0], q[1]); await page.mouse.down(); await page.mouse.up(); s = await state();
+  check('FIXED POINT: dragging on the circle sets θ under the pointer', Math.abs(s.fixed.theta - 1.1) < 0.012 && s.preset === null, String(s.fixed.theta));
 }
 
 s = await pick('photon');
@@ -137,9 +146,9 @@ s = await seek(1.5);
 const e60 = Math.PI / 3, mid = rod(rod(s.loop.p0, AX.e2, -e60), AX.e1, -e60 / 2);
 check('LOOP: at step 1.5 the arrow has done R₂⁻¹ and half of R₁⁻¹', vclose(s.loop.r, mid, 1e-12));
 
-s = await pick('abelian'); await ended(4); s = await state();
+await page.click('#planeChips [data-plane="one"]'); s = await seek(4);
 ind = loopIndep('one', 60, s.loop.p0);
-check('ABELIAN: in one plane U = 1 and the arrow comes home', close(Math.abs(s.loop.U[0]), 1, 1e-12) && s.loop.phi < 1e-6 && vclose(s.loop.r, s.loop.p0, 1e-12) && vclose(s.loop.U, ind.q, 1e-12));
+check('ONE PLANE (plane chips): U = 1 and the arrow comes home', close(Math.abs(s.loop.U[0]), 1, 1e-12) && s.loop.phi < 1e-6 && vclose(s.loop.r, s.loop.p0, 1e-12) && vclose(s.loop.U, ind.q, 1e-12));
 
 // the controls of the loop
 await page.click('#planeChips [data-plane="two"]'); s = await state();
@@ -194,6 +203,7 @@ await page.locator('body').click({ position: { x: 5, y: 5 } });
 await page.keyboard.press('1'); s = await state(); check('key 1 opens the clock scene', s.scene === 'clock' && s.max === 4);
 await page.keyboard.press('2'); s = await state(); check('key 2 opens the loop scene', s.scene === 'loop' && s.max === 4);
 await page.keyboard.press('3'); s = await state(); check('key 3 opens the horizon scene', s.scene === 'horizon' && s.max === 180);
+await page.keyboard.press('4'); s = await state(); check('key 4 opens the fixed-point scene', s.scene === 'fixed' && close(s.max, 1.5, 1e-12));
 await page.click('#sceneChips [data-scene="loop"]'); s = await state(); check('the scene chips switch scenes', s.scene === 'loop');
 await seek(1); await page.keyboard.press('ArrowRight'); s = await state(); check('→ steps one turn of the loop', close(s.loop.tau, 2, 1e-12));
 await page.click('#rew'); s = await state(); check('⏮ goes back to the start', s.t === 0);
