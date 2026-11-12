@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch39-overview" data-lang="zh" data-wrap="1" viewBox="0 0 740 280" width="740" height="280" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="三栏。第一栏：上方一个灰色的指针寄存器 ptr 与它和内存之间的虚线隔墙被一个叉划掉；下方两行共八格，每格写着 p，每格都有一支青色的小箭头离开它又回到它自己，下方写着 p ≡ *p。第二栏：一条琥珀色的斜线是刀，它周围一条淡青色的带子里有一串青色的格点，带子外面什么也没有；下方是这些点投到刀上排成的一列长短段，短段记 1、长段记 0，字里没有相邻的 11。第三栏：墨色的单位箭头 Ψ 与水平的观察者之线成 θ 角；青色的影子 cos θ 躺在线上，品红的垂线 sin θ 站在它外面，下方写着 cos²θ + sin²θ = 1。">
+<title>三栏。第一栏：上方一个灰色的指针寄存器 ptr 与它和内存之间的虚线隔墙被一个叉划掉；下方两行共八格，每格写着 p，每格都有一支青色的小箭头离开它又回到它自己，下方写着 p ≡ *p。第二栏：一条琥珀色的斜线是刀，它周围一条淡青色的带子里有一串青色的格点，带子外面什么也没有；下方是这些点投到刀上排成的一列长短段，短段记 1、长段记 0，字里没有相邻的 11。第三栏：墨色的单位箭头 Ψ 与水平的观察者之线成 θ 角；青色的影子 cos θ 躺在线上，品红的垂线 sin θ 站在它外面，下方写着 cos²θ + sin²θ = 1。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="236" height="280" viewBox="0 0 236 280">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">I　全域 p ≡ *p</text>
+<rect x="56" y="54" width="50" height="28" rx="4" class="ts-dim tf-panel" stroke-width="1.4"/>
+<text class="tf-dim tr-fig-mono" x="81" y="73.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">ptr</text>
+<line x1="124" y1="48" x2="124" y2="90" class="ts-dim" stroke-width="1.6" stroke-dasharray="5 4" fill="none"/>
+<line x1="108" y1="68" x2="142.05" y2="68" class="ts-dim" stroke-width="1.4" fill="none"/>
+<path d="M148 68 L141 70.94 L141 65.06Z" class="tf-dim"/>
+<rect x="152" y="54" width="36" height="28" rx="4" class="ts-dim" stroke-width="1.4" fill="none"/>
+<line x1="102" y1="46" x2="146" y2="90" class="ts-dim" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+<line x1="102" y1="90" x2="146" y2="46" class="ts-dim" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+<rect x="21" y="130" width="38" height="34" rx="4" class="ts-ink tf-panel" stroke-width="1.5"/>
+<text class="tf-ink" x="40" y="152.04" font-size="14" text-anchor="middle"><tspan font-style="italic">p</tspan></text>
+<path d="M31.81 130.24 L30.94 128.73 L30.34 127.09 L30.04 125.37 L30.04 123.63 L30.34 121.91 L30.94 120.27 L31.81 118.76 L32.93 117.43 L34.26 116.31 L35.77 115.44 L37.41 114.84 L39.13 114.54 L40.87 114.54 L42.59 114.84 L44.23 115.44 L45.74 116.31 L47.07 117.43 L48.19 118.76 L49.06 120.27 L49.66 121.91 L49.96 123.63 L49.96 125.37 L49.66 127.09 L49.06 128.73 L48.19 130.24" class="ts-cyan" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+<path d="M48.19 130.24 L49.08 123.24 L53.81 125.97Z" class="tf-cyan"/>
+<rect x="73" y="130" width="38" height="34" rx="4" class="ts-ink tf-panel" stroke-width="1.5"/>
+<text class="tf-ink" x="92" y="152.04" font-size="14" text-anchor="middle"><tspan font-style="italic">p</tspan></text>
+<path d="M83.81 130.24 L82.94 128.73 L82.34 127.09 L82.04 125.37 L82.04 123.63 L82.34 121.91 L82.94 120.27 L83.81 118.76 L84.93 117.43 L86.26 116.31 L87.77 115.44 L89.41 114.84 L91.13 114.54 L92.87 114.54 L94.59 114.84 L96.23 115.44 L97.74 116.31 L99.07 117.43 L100.19 118.76 L101.06 120.27 L101.66 121.91 L101.96 123.63 L101.96 125.37 L101.66 127.09 L101.06 128.73 L100.19 130.24" class="ts-cyan" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+<path d="M100.19 130.24 L101.08 123.24 L105.81 125.97Z" class="tf-cyan"/>
+<rect x="125" y="130" width="38" height="34" rx="4" class="ts-ink tf-panel" stroke-width="1.5"/>
+<text class="tf-ink" x="144" y="152.04" font-size="14" text-anchor="middle"><tspan font-style="italic">p</tspan></text>
+<path d="M135.81 130.24 L134.94 128.73 L134.34 127.09 L134.04 125.37 L134.04 123.63 L134.34 121.91 L134.94 120.27 L135.81 118.76 L136.93 117.43 L138.26 116.31 L139.77 115.44 L141.41 114.84 L143.13 114.54 L144.87 114.54 L146.59 114.84 L148.23 115.44 L149.74 116.31 L151.07 117.43 L152.19 118.76 L153.06 120.27 L153.66 121.91 L153.96 123.63 L153.96 125.37 L153.66 127.09 L153.06 128.73 L152.19 130.24" class="ts-cyan" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+<path d="M152.19 130.24 L153.08 123.24 L157.81 125.97Z" class="tf-cyan"/>
+<rect x="177" y="130" width="38" height="34" rx="4" class="ts-ink tf-panel" stroke-width="1.5"/>
+<text class="tf-ink" x="196" y="152.04" font-size="14" text-anchor="middle"><tspan font-style="italic">p</tspan></text>
+<path d="M187.81 130.24 L186.94 128.73 L186.34 127.09 L186.04 125.37 L186.04 123.63 L186.34 121.91 L186.94 120.27 L187.81 118.76 L188.93 117.43 L190.26 116.31 L191.77 115.44 L193.41 114.84 L195.13 114.54 L196.87 114.54 L198.59 114.84 L200.23 115.44 L201.74 116.31 L203.07 117.43 L204.19 118.76 L205.06 120.27 L205.66 121.91 L205.96 123.63 L205.96 125.37 L205.66 127.09 L205.06 128.73 L204.19 130.24" class="ts-cyan" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+<path d="M204.19 130.24 L205.08 123.24 L209.81 125.97Z" class="tf-cyan"/>
+<rect x="21" y="196" width="38" height="34" rx="4" class="ts-ink tf-panel" stroke-width="1.5"/>
+<text class="tf-ink" x="40" y="218.04" font-size="14" text-anchor="middle"><tspan font-style="italic">p</tspan></text>
+<path d="M31.81 196.24 L30.94 194.73 L30.34 193.09 L30.04 191.37 L30.04 189.63 L30.34 187.91 L30.94 186.27 L31.81 184.76 L32.93 183.43 L34.26 182.31 L35.77 181.44 L37.41 180.84 L39.13 180.54 L40.87 180.54 L42.59 180.84 L44.23 181.44 L45.74 182.31 L47.07 183.43 L48.19 184.76 L49.06 186.27 L49.66 187.91 L49.96 189.63 L49.96 191.37 L49.66 193.09 L49.06 194.73 L48.19 196.24" class="ts-cyan" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+<path d="M48.19 196.24 L49.08 189.24 L53.81 191.97Z" class="tf-cyan"/>
+<rect x="73" y="196" width="38" height="34" rx="4" class="ts-ink tf-panel" stroke-width="1.5"/>
+<text class="tf-ink" x="92" y="218.04" font-size="14" text-anchor="middle"><tspan font-style="italic">p</tspan></text>
+<path d="M83.81 196.24 L82.94 194.73 L82.34 193.09 L82.04 191.37 L82.04 189.63 L82.34 187.91 L82.94 186.27 L83.81 184.76 L84.93 183.43 L86.26 182.31 L87.77 181.44 L89.41 180.84 L91.13 180.54 L92.87 180.54 L94.59 180.84 L96.23 181.44 L97.74 182.31 L99.07 183.43 L100.19 184.76 L101.06 186.27 L101.66 187.91 L101.96 189.63 L101.96 191.37 L101.66 193.09 L101.06 194.73 L100.19 196.24" class="ts-cyan" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+<path d="M100.19 196.24 L101.08 189.24 L105.81 191.97Z" class="tf-cyan"/>
+<rect x="125" y="196" width="38" height="34" rx="4" class="ts-ink tf-panel" stroke-width="1.5"/>
+<text class="tf-ink" x="144" y="218.04" font-size="14" text-anchor="middle"><tspan font-style="italic">p</tspan></text>
+<path d="M135.81 196.24 L134.94 194.73 L134.34 193.09 L134.04 191.37 L134.04 189.63 L134.34 187.91 L134.94 186.27 L135.81 184.76 L136.93 183.43 L138.26 182.31 L139.77 181.44 L141.41 180.84 L143.13 180.54 L144.87 180.54 L146.59 180.84 L148.23 181.44 L149.74 182.31 L151.07 183.43 L152.19 184.76 L153.06 186.27 L153.66 187.91 L153.96 189.63 L153.96 191.37 L153.66 193.09 L153.06 194.73 L152.19 196.24" class="ts-cyan" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+<path d="M152.19 196.24 L153.08 189.24 L157.81 191.97Z" class="tf-cyan"/>
+<rect x="177" y="196" width="38" height="34" rx="4" class="ts-ink tf-panel" stroke-width="1.5"/>
+<text class="tf-ink" x="196" y="218.04" font-size="14" text-anchor="middle"><tspan font-style="italic">p</tspan></text>
+<path d="M187.81 196.24 L186.94 194.73 L186.34 193.09 L186.04 191.37 L186.04 189.63 L186.34 187.91 L186.94 186.27 L187.81 184.76 L188.93 183.43 L190.26 182.31 L191.77 181.44 L193.41 180.84 L195.13 180.54 L196.87 180.54 L198.59 180.84 L200.23 181.44 L201.74 182.31 L203.07 183.43 L204.19 184.76 L205.06 186.27 L205.66 187.91 L205.96 189.63 L205.96 191.37 L205.66 193.09 L205.06 194.73 L204.19 196.24" class="ts-cyan" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+<path d="M204.19 196.24 L205.08 189.24 L209.81 191.97Z" class="tf-cyan"/>
+<text class="tf-ink" x="118" y="260" font-size="15" text-anchor="middle"><tspan font-style="italic">ψ</tspan> ≡ <tspan font-style="italic">ψ</tspan>(<tspan font-style="italic">ψ</tspan>)</text>
+</svg>
+<svg class="tr-fig-panel" x="252" y="0" width="236" height="280" viewBox="0 0 236 280">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">II　无刀则无晶</text>
+<path d="M19.47 194.35 L216.35 72.67 L216.35 58.65 L201.82 58.65 L11.65 176.18 L11.65 194.35Z" class="tf-cyan" fill-opacity="0.2"/>
+<line x1="11.65" y1="190.4" x2="216.35" y2="63.89" class="ts-amber" stroke-width="2.2" fill="none"/>
+<circle cx="22" cy="184" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="45" cy="161" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="68" cy="161" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="91" cy="138" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="114" cy="115" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="137" cy="115" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="160" cy="92" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="183" cy="92" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="206" cy="69" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<line x1="22" y1="236" x2="206" y2="236" class="ts-amber" stroke-width="1.8" fill="none"/>
+<circle cx="22" cy="236" r="3.6" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="48.85" cy="236" r="3.6" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="65.44" cy="236" r="3.6" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="92.28" cy="236" r="3.6" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="119.13" cy="236" r="3.6" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="135.72" cy="236" r="3.6" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="162.56" cy="236" r="3.6" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="179.15" cy="236" r="3.6" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="206" cy="236" r="3.6" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-dim tr-fig-mono" x="35.42" y="258" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0</text>
+<text class="tf-magenta tr-fig-mono" x="57.14" y="258" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1</text>
+<text class="tf-dim tr-fig-mono" x="78.86" y="258" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0</text>
+<text class="tf-dim tr-fig-mono" x="105.7" y="258" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0</text>
+<text class="tf-magenta tr-fig-mono" x="127.42" y="258" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1</text>
+<text class="tf-dim tr-fig-mono" x="149.14" y="258" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0</text>
+<text class="tf-magenta tr-fig-mono" x="170.86" y="258" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1</text>
+<text class="tf-dim tr-fig-mono" x="192.58" y="258" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0</text>
+</svg>
+<svg class="tr-fig-panel" x="504" y="0" width="236" height="280" viewBox="0 0 236 280">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">III　正交自折叠</text>
+<path d="M190 216 L189.62 205.3 L188.47 194.65 L186.57 184.12 L183.92 173.74 L180.54 163.58 L176.44 153.69 L171.65 144.11 L166.19 134.9 L160.08 126.11 L153.36 117.77 L146.07 109.93 L138.23 102.64 L129.89 95.92 L121.1 89.81 L111.89 84.35 L102.31 79.56 L92.42 75.46 L82.26 72.08 L71.88 69.43 L61.35 67.53 L50.7 66.38 L40 66" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 4" stroke-linejoin="round" fill="none"/>
+<line x1="40" y1="216" x2="40" y2="54" class="ts-dim" stroke-width="1.3" fill="none"/>
+<line x1="30" y1="216" x2="212" y2="216" class="ts-dim" stroke-width="1.3" fill="none"/>
+<line x1="154.91" y1="119.58" x2="154.91" y2="216" class="ts-magenta" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+<line x1="40" y1="216" x2="154.91" y2="216" class="ts-cyan" stroke-width="4.4" stroke-linecap="round" fill="none"/>
+<path d="M146.91 216 L146.91 224 L154.91 224" class="ts-dim" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+<line x1="40" y1="216" x2="148.4" y2="125.05" class="ts-ink" stroke-width="2.4" fill="none"/>
+<path d="M154.91 119.58 L149.95 129.23 L144.55 122.79Z" class="tf-ink"/>
+<path d="M79 216 L78.9 213.28 L78.62 210.57 L78.15 207.89 L77.49 205.25 L76.65 202.66 L75.63 200.14 L74.43 197.69 L73.07 195.33 L71.55 193.08 L69.88 190.93" class="ts-dim" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+<text class="tf-dim" x="87.83" y="203.63" font-size="14" text-anchor="middle">θ</text>
+<circle cx="40" cy="216" r="3.2" class="tf-ink"/>
+<text class="tf-ink" x="162.91" y="115.58" font-size="16" font-weight="600">Ψ</text>
+<text class="tf-cyan" x="97.45" y="236" font-size="14" text-anchor="middle">cos θ</text>
+<text class="tf-magenta ts-bg" x="162.91" y="172.79" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">sin θ</text>
+<text class="tf-ink" x="118" y="262" font-size="14" text-anchor="middle">cos²θ + sin²θ = 1</text>
+</svg>
+</svg>

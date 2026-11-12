@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch32-overview" data-lang="zh" data-wrap="1" viewBox="0 0 740 270" width="740" height="270" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="三栏。第一栏：两支墨色单位箭头 A 与 B 夹角 θ；B 投到 A 上的青色影子是 A·B = cos θ，两支箭头张成的品红平行四边形是 A∧B，高为 sin θ。第二栏：一只盒子的角上三根轴：θ 从青色的“线”到品红的“面积”，η 从圆（光滑）到六边形（多面体），λ 从圈外的点（球外 C）到圈内的点（场内）。第三栏：一个球，观察者站在北极，青色虚线的视线各走四分之一圈落到赤道上，品红的赤道就是 90° 视界；左上方球外的点 C 被划掉。">
+<title>三栏。第一栏：两支墨色单位箭头 A 与 B 夹角 θ；B 投到 A 上的青色影子是 A·B = cos θ，两支箭头张成的品红平行四边形是 A∧B，高为 sin θ。第二栏：一只盒子的角上三根轴：θ 从青色的“线”到品红的“面积”，η 从圆（光滑）到六边形（多面体），λ 从圈外的点（球外 C）到圈内的点（场内）。第三栏：一个球，观察者站在北极，青色虚线的视线各走四分之一圈落到赤道上，品红的赤道就是 90° 视界；左上方球外的点 C 被划掉。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="236" height="270" viewBox="0 0 236 270">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">I　一分为二：线与面</text>
+<path d="M30 200 L150 200 L218.83 101.7 L98.83 101.7Z" class="ts-magenta tf-magenta" stroke-width="1.3" stroke-linejoin="round" fill-opacity="0.16"/>
+<line x1="98.83" y1="101.7" x2="98.83" y2="200" class="ts-cyan" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<line x1="30" y1="200" x2="98.83" y2="200" class="ts-cyan" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.9"/>
+<line x1="30" y1="200" x2="141.5" y2="200" class="ts-ink" stroke-width="2.2" fill="none"/>
+<path d="M150 200 L140 204.2 L140 195.8Z" class="tf-ink"/>
+<line x1="30" y1="200" x2="93.95" y2="108.66" class="ts-ink" stroke-width="2.2" fill="none"/>
+<path d="M98.83 101.7 L96.53 112.3 L89.65 107.48Z" class="tf-ink"/>
+<circle cx="30" cy="200" r="3" class="tf-ink"/>
+<path d="M60 200 L59.92 197.79 L59.67 195.59 L59.27 193.41 L58.7 191.27 L57.98 189.17 L57.1 187.14 L56.08 185.17 L54.92 183.29 L53.62 181.5 L52.19 179.81 L50.64 178.22 L48.97 176.76 L47.21 175.43" class="ts-dim" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+<text class="tf-dim" x="66.41" y="185.73" font-size="13" text-anchor="middle">θ</text>
+<text class="tf-cyan" x="64.41" y="224" font-size="13" text-anchor="middle">A·B = cos θ</text>
+<text class="tf-magenta" x="214.83" y="91.7" font-size="13" text-anchor="end">A∧B</text>
+<text class="tf-ink" x="146" y="222" font-size="14" font-weight="600"><tspan font-style="italic">A</tspan></text>
+<text class="tf-ink" x="90.83" y="95.7" font-size="14" text-anchor="end" font-weight="600"><tspan font-style="italic">B</tspan></text>
+</svg>
+<svg class="tr-fig-panel" x="252" y="0" width="236" height="270" viewBox="0 0 236 270">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">II　三根诊断轴</text>
+<line x1="74" y1="220" x2="136" y2="220" class="ts-cyan" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+<line x1="136" y1="220" x2="188" y2="220" class="ts-magenta" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+<path d="M198 220 L188 224.2 L188 215.8Z" class="tf-magenta"/>
+<text class="tf-magenta" x="196" y="242" font-size="13" text-anchor="end">θ 面积</text>
+<text class="tf-cyan" x="78" y="242" font-size="13">线</text>
+<line x1="74" y1="220" x2="130.01" y2="179.31" class="ts-dim" stroke-width="1.8" fill="none"/>
+<path d="M136.2 174.81 L131.14 183.16 L126.69 177.04Z" class="tf-dim"/>
+<circle cx="104" cy="210" r="6" class="ts-dim" stroke-width="1.5" fill="none"/>
+<text class="tf-dim" x="116" y="213" font-size="13">光滑</text>
+<path d="M157.99 166.31 L150.2 161.81 L142.4 166.31 L142.4 175.31 L150.2 179.81 L157.99 175.31Z" class="ts-ink" stroke-width="1.6" stroke-linejoin="round" fill="none"/>
+<text class="tf-ink" x="163.2" y="175.81" font-size="13">η 多面体</text>
+<line x1="74" y1="220" x2="74" y2="116.05" class="ts-dim" stroke-width="1.8" fill="none"/>
+<path d="M74 108.4 L77.78 117.4 L70.22 117.4Z" class="tf-dim"/>
+<circle cx="52" cy="182.8" r="9" class="ts-dim" stroke-width="1.4" fill="none"/>
+<circle cx="37" cy="173.8" r="3" class="tf-dim"/>
+<text class="tf-dim" x="36" y="208.8" font-size="13" text-anchor="middle">球外 C</text>
+<circle cx="52" cy="116.4" r="9" class="ts-ink" stroke-width="1.4" fill="none"/>
+<circle cx="52" cy="116.4" r="3" class="tf-ink"/>
+<text class="tf-ink" x="84" y="112.4" font-size="13">λ 场内</text>
+</svg>
+<svg class="tr-fig-panel" x="504" y="0" width="236" height="270" viewBox="0 0 236 270">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">III　把 C 移进场内</text>
+<circle cx="128" cy="150" r="76" class="ts-dim tf-cyan" stroke-width="1.5" fill-opacity="0.03"/>
+<path d="M128 79.53 L125.55 79.73 L123.1 80.01 L120.66 80.36 L118.23 80.78 L115.81 81.28 L113.4 81.85 L111 82.5 L108.63 83.21 L106.27 84 L103.94 84.86 L101.64 85.79 L99.36 86.79 L97.11 87.86 L94.9 88.99 L92.72 90.19 L90.58 91.45 L88.48 92.77 L86.42 94.16 L84.4 95.6 L82.44 97.11 L80.52 98.67 L78.65 100.28 L76.84 101.95 L75.08 103.67 L73.37 105.44 L71.73 107.26 L70.14 109.12 L68.62 111.03 L67.16 112.97 L65.77 114.96 L64.44 116.99 L63.18 119.05 L61.99 121.14 L60.87 123.27 L59.83 125.42 L58.85 127.6 L57.95 129.81 L57.13 132.03 L56.38 134.28 L55.7 136.54 L55.11 138.81 L54.59 141.1 L54.15 143.4 L53.79 145.7 L53.52 148.01 L53.31 150.32 L53.19 152.64 L53.15 154.94" class="ts-cyan" stroke-width="1.5" stroke-dasharray="4 3" stroke-linejoin="round" fill="none"/>
+<path d="M128 79.53 L130.45 79.41 L132.9 79.36 L135.34 79.39 L137.77 79.49 L140.19 79.67 L142.6 79.92 L145 80.25 L147.37 80.66 L149.73 81.13 L152.06 81.68 L154.36 82.31 L156.64 83.01 L158.89 83.77 L161.1 84.61 L163.28 85.52 L165.42 86.5 L167.52 87.55 L169.58 88.66 L171.6 89.84 L173.56 91.09 L175.48 92.39 L177.35 93.76 L179.16 95.19 L180.92 96.68 L182.63 98.22 L184.27 99.82 L185.86 101.48 L187.38 103.18 L188.84 104.94 L190.23 106.74 L191.56 108.59 L192.82 110.49 L194.01 112.42 L195.13 114.4 L196.17 116.42 L197.15 118.47" class="ts-cyan" stroke-width="1.5" stroke-dasharray="4 3" stroke-linejoin="round" fill="none"/>
+<path d="M197.15 118.47 L198.05 120.55 L198.87 122.67 L199.62 124.81 L200.3 126.99 L200.89 129.18 L201.41 131.4 L201.85 133.64 L202.21 135.9 L202.48 138.17 L202.69 140.46 L202.81 142.75 L202.85 145.06" class="ts-cyan" stroke-width="1.12" stroke-dasharray="4 4" stroke-linejoin="round" fill="none" opacity="0.55"/>
+<path d="M128 79.53 L128.43 80.49 L128.86 81.52 L129.29 82.62 L129.72 83.8 L130.15 85.04 L130.57 86.36 L131 87.74 L131.42 89.19 L131.83 90.71 L132.24 92.29 L132.65 93.93 L133.05 95.63 L133.45 97.39 L133.84 99.2 L134.22 101.07 L134.6 102.99 L134.97 104.97 L135.33 106.99 L135.69 109.05 L136.03 111.16 L136.37 113.32 L136.7 115.51 L137.02 117.74 L137.33 120 L137.63 122.29 L137.92 124.62 L138.2 126.97 L138.47 129.35 L138.73 131.75 L138.97 134.16 L139.21 136.6 L139.43 139.05 L139.64 141.51 L139.84 143.98 L140.02 146.46 L140.19 148.94 L140.35 151.42 L140.5 153.9 L140.63 156.38 L140.75 158.84 L140.85 161.3 L140.94 163.75 L141.02 166.18 L141.08 168.6 L141.13 171 L141.17 173.37 L141.19 175.72 L141.2 178.04" class="ts-cyan" stroke-width="1.5" stroke-dasharray="4 3" stroke-linejoin="round" fill="none"/>
+<path d="M128 79.53 L127.57 78.65 L127.14 77.85 L126.71 77.13 L126.28 76.48 L125.85 75.91 L125.43 75.42 L125 75.01 L124.58 74.68 L124.17 74.43 L123.76 74.26 L123.35 74.17 L122.95 74.17" class="ts-cyan" stroke-width="1.5" stroke-dasharray="4 3" stroke-linejoin="round" fill="none"/>
+<path d="M122.95 74.17 L122.55 74.24 L122.16 74.4 L121.78 74.64 L121.4 74.96 L121.03 75.35 L120.67 75.83 L120.31 76.39 L119.97 77.03 L119.63 77.74 L119.3 78.53 L118.98 79.4 L118.67 80.35 L118.37 81.37 L118.08 82.46 L117.8 83.62 L117.53 84.86 L117.27 86.16 L117.03 87.54 L116.79 88.98 L116.57 90.49 L116.36 92.06 L116.16 93.69 L115.98 95.38 L115.81 97.13 L115.65 98.94 L115.5 100.8 L115.37 102.71 L115.25 104.68 L115.15 106.69 L115.06 108.75 L114.98 110.86 L114.92 113 L114.87 115.19 L114.83 117.41 L114.81 119.67 L114.8 121.96" class="ts-cyan" stroke-width="1.12" stroke-dasharray="4 4" stroke-linejoin="round" fill="none" opacity="0.55"/>
+<path d="M199.42 159.74 L200.68 158.32 L201.74 156.89 L202.6 155.43 L203.26 153.96 L203.71 152.48 L203.95 150.99 L203.99 149.5" class="ts-magenta" stroke-width="2.6" stroke-linejoin="round" fill="none"/>
+<path d="M203.99 149.5 L203.81 148.01 L203.43 146.53 L202.85 145.06 L202.05 143.6 L201.06 142.15 L199.86 140.73 L198.47 139.33 L196.88 137.97 L195.1 136.63 L193.14 135.34 L191.01 134.08 L188.7 132.87 L186.22 131.7 L183.58 130.58 L180.79 129.52 L177.86 128.51 L174.79 127.57 L171.59 126.68 L168.27 125.86 L164.85 125.1 L161.32 124.41 L157.7 123.79 L153.99 123.25 L150.22 122.77 L146.39 122.38 L142.5 122.05 L138.58 121.81 L134.62 121.64 L130.65 121.55 L126.67 121.53 L122.7 121.6 L118.74 121.74 L114.8 121.96 L110.9 122.26 L107.05 122.63 L103.26 123.08 L99.53 123.6 L95.88 124.2 L92.32 124.86 L88.86 125.6 L85.5 126.4 L82.26 127.26 L79.15 128.19 L76.17 129.18 L73.33 130.22 L70.64 131.32 L68.11 132.47 L65.74 133.67 L63.55 134.91 L61.53 136.2 L59.69 137.52 L58.04 138.88 L56.58 140.26 L55.32 141.68 L54.26 143.11 L53.4 144.57 L52.74 146.04 L52.29 147.52 L52.05 149.01 L52.01 150.5" class="ts-magenta" stroke-width="1.95" stroke-dasharray="4 4" stroke-linejoin="round" fill="none" opacity="0.55"/>
+<path d="M52.01 150.5 L52.19 151.99 L52.57 153.47 L53.15 154.94 L53.95 156.4 L54.94 157.85 L56.14 159.27 L57.53 160.67 L59.12 162.03 L60.9 163.37 L62.86 164.66 L64.99 165.92 L67.3 167.13 L69.78 168.3 L72.42 169.42 L75.21 170.48 L78.14 171.49 L81.21 172.43 L84.41 173.32 L87.73 174.14 L91.15 174.9 L94.68 175.59 L98.3 176.21 L102.01 176.75 L105.78 177.23 L109.61 177.62 L113.5 177.95 L117.42 178.19 L121.38 178.36 L125.35 178.45 L129.33 178.47 L133.3 178.4 L137.26 178.26 L141.2 178.04 L145.1 177.74 L148.95 177.37 L152.74 176.92 L156.47 176.4 L160.12 175.8 L163.68 175.14 L167.14 174.4 L170.5 173.6 L173.74 172.74 L176.85 171.81 L179.83 170.82 L182.67 169.78 L185.36 168.68 L187.89 167.53 L190.26 166.33 L192.45 165.09 L194.47 163.8 L196.31 162.48 L197.96 161.12 L199.42 159.74" class="ts-magenta" stroke-width="2.6" stroke-linejoin="round" fill="none"/>
+<circle cx="128" cy="79.53" r="4.6" class="tf-ink"/>
+<text class="tf-ink" x="138" y="69.53" font-size="13">观察者</text>
+<text class="tf-magenta" x="128" y="246" font-size="13" text-anchor="middle">赤道就是 90° 视界</text>
+<line x1="55.8" y1="55" x2="128" y2="79.53" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 4" fill="none"/>
+<circle cx="55.8" cy="55" r="4" class="tf-dim"/>
+<line x1="44.8" y1="44" x2="66.8" y2="66" class="ts-dim" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+<line x1="44.8" y1="66" x2="66.8" y2="44" class="ts-dim" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+<text class="tf-dim" x="71.8" y="60" font-size="14"><tspan font-style="italic">C</tspan></text>
+</svg>
+</svg>

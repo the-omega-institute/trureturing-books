@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch32-quarter-turns" data-lang="zh" viewBox="0 0 440 300" width="440" height="300" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="一个淡色的单位圆。墨色箭头 e 指向右；绕圆心转四分之一圈（紫色弧，90°）得到指向上的 R e；再转四分之一圈（第二段紫色弧）得到指向左的 R²e = −e，与 e 恰好反向。下方写着 R² = −I。">
+<title>一个淡色的单位圆。墨色箭头 e 指向右；绕圆心转四分之一圈（紫色弧，90°）得到指向上的 R e；再转四分之一圈（第二段紫色弧）得到指向左的 R²e = −e，与 e 恰好反向。下方写着 R² = −I。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<circle cx="220" cy="150" r="104" class="ts-faint" stroke-width="1.2" fill="none"/>
+<line x1="102" y1="150" x2="338" y2="150" class="ts-faint" stroke-width="1" stroke-dasharray="3 4" fill="none"/>
+<path d="M265.89 146.79 L265.55 143.6 L264.99 140.44 L264.22 137.32 L263.23 134.27 L262.02 131.29 L260.62 128.4 L259.01 125.62 L257.21 122.96 L255.24 120.43 L253.09 118.05 L250.78 115.82 L248.32 113.75 L245.72 111.86 L243 110.16 L240.17 108.66 L237.23 107.35 L234.21 106.25 L231.13 105.37 L227.99 104.7 L224.81 104.25" class="ts-violet" stroke-width="2.2" stroke-linejoin="round" fill="none"/>
+<path d="M224.81 104.25 L233.12 101.75 L232.41 108.43Z" class="tf-violet"/>
+<text class="tf-violet" x="266.67" y="108.01" font-size="13" text-anchor="middle">90°</text>
+<path d="M216.79 104.11 L213.6 104.45 L210.44 105.01 L207.32 105.78 L204.27 106.77 L201.29 107.98 L198.4 109.38 L195.62 110.99 L192.96 112.79 L190.43 114.76 L188.05 116.91 L185.82 119.22 L183.75 121.68 L181.86 124.28 L180.16 127 L178.66 129.83 L177.35 132.77 L176.25 135.79 L175.37 138.87 L174.7 142.01 L174.25 145.19" class="ts-violet" stroke-width="2.2" stroke-linejoin="round" fill="none"/>
+<path d="M174.25 145.19 L171.75 136.88 L178.43 137.59Z" class="tf-violet"/>
+<text class="tf-violet" x="173.33" y="108.01" font-size="13" text-anchor="middle">90°</text>
+<line x1="220" y1="150" x2="314.65" y2="150" class="ts-ink" stroke-width="2.4" fill="none"/>
+<path d="M324 150 L313 154.62 L313 145.38Z" class="tf-ink"/>
+<line x1="220" y1="150" x2="220" y2="55.35" class="ts-ink" stroke-width="2.4" fill="none"/>
+<path d="M220 46 L224.62 57 L215.38 57Z" class="tf-ink"/>
+<line x1="220" y1="150" x2="125.35" y2="150" class="ts-ink" stroke-width="2.4" fill="none"/>
+<path d="M116 150 L127 145.38 L127 154.62Z" class="tf-ink"/>
+<circle cx="220" cy="150" r="3.2" class="tf-ink"/>
+<text class="tf-ink" x="332" y="140" font-size="15" font-weight="600"><tspan font-style="italic">e</tspan></text>
+<text class="tf-ink" x="232" y="60" font-size="15" font-weight="600"><tspan font-style="italic">R e</tspan></text>
+<text class="tf-ink" x="122" y="138" font-size="15" text-anchor="end" font-weight="600"><tspan font-style="italic">R</tspan>²<tspan font-style="italic">e</tspan> = −<tspan font-style="italic">e</tspan></text>
+<rect x="185.7" y="273" width="68.6" height="22" class="ts-ok tf-ok" stroke-width="1.2" fill-opacity="0.12"/>
+<text class="tf-ok tr-fig-mono" x="192.7" y="290" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">R² = −I</text>
+</svg>

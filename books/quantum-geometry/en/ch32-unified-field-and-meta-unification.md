@@ -11,6 +11,10 @@ In this final chapter of Part VIII, we complete a two-stage synthesis (within ou
 1. **Constructing the Zero-Background *Orthogonal Self-Referential Unified Field Theory* (`MODEL`)**: Starting from three generative first principles—the background-free meta-axiom $\psi = \psi(\psi)$, pairwise orthogonal decomposition, and Pythagorean polyhedral approximation—we show how matter spinors, gauge curvature, holographic thermodynamic gravity, discrete ultraviolet stabilization, prime spectra, complexity horizons, and finite observers unfold from a single geometric vocabulary, culminating in a six-domain holographic isomorphism ledger and dual computational/formal verification closure;
 2. **Achieving a *Meta-Unification* of Eight Grand Programs (`MODEL`)**: Erecting a three-axis diagnostic coordinate system—the algebraic grade axis $\theta$, the polyhedral resolution axis $\eta$, and the observer-embedding axis $\lambda$—alongside the external quaternion-lattice and foundational-program literature surveyed in [@rem-ch32-icosian-e8-literature], [@rem-ch32-eight-programs-literature], and [@rem-ch32-meta-unification-table], we reconcile eight representative foundational programs as complementary cross-sections of one self-referential crystal.
 
+::: {.figure src="ch32-overview"}
+**Figure 32.** The chapter at a glance. Panel I: ink unit arrows $A$ and $B$ at an angle $\theta$; the cyan shadow of $B$ on $A$ is $A\cdot B = \cos\theta$, and the magenta parallelogram they span is $A\wedge B$, of height $\sin\theta$—the one operation a meeting of two performs is to split their relation into this line and this area (§32.1–32.2). Panel II: the three axes for diagnosing unified theories: $\theta$ from the cyan "line" to the magenta "area", $\eta$ from the smooth circle to the polytope, $\lambda$ from the outside point $C$ to inside the field (§32.3). Panel III: an observer at the north pole of a sphere; the cyan dashed lines of sight each run a quarter turn down to the equator, and the magenta equator is the $90^\circ$ horizon; the outside point $C$ at the upper left is struck out (§32.4). The axes and the horizon reading are the book's interpretive model (`MODEL`).
+:::
+
 ---
 
 ## 32.1 Three Zero-Background Generative Laws and Dual Verification Closure {#sec-ch32-generative-laws}
@@ -21,6 +25,11 @@ A genuinely foundational unified field theory cannot borrow a pre-fabricated Min
    Excise every external privileged reference point $C$ and every external legislator. There are no "laws" hovering outside states: **the operator that measures and counts (verbs `liáng` / `shǔ`) and the state being measured and recorded (nouns `liàng` / `shù`) are ontologically identical at the ground level.**
 2. **Law 1 — Pairwise Orthogonal Decomposition and Contractive Stabilization**:
    Whenever two entities meet, the sole primitive operation decomposes their relation into a **one-dimensional collinear inner product** (line / particle reading / proper-time persistence) plus a **two-dimensional orthogonal exterior product** (plane / quantum-gate rotor / gauge curvature) (external geometric-algebra and analytic formulas are recorded in [@rem-ch32-generative-laws-dottie-literature] below). Two successive orthogonal quarter-turns reverse sign (aligned in finite-dimensional complex matrix algebra with Conjunct 1 of [@thm-ch32-generative-self-reference-and-zeckendorf], $R^2 = -I_n$). Combined with timeless order-independence ([Chapter 29](ch29-timeless-causality-and-gram-space.md)), finite-step subset contraction stabilization, and the unique positive golden fixed point (Conjuncts 2–3 of [@thm-ch32-generative-self-reference-and-zeckendorf], `LEAN ✓`)—bridged in our interpretive `MODEL` (continuum literature background in [@rem-ch32-generative-laws-dottie-literature]) to unique self-referential equilibrium selection—Russell-type paradoxes of unconstrained self-application are damped by orthogonal bifurcation.
+
+::: {.figure src="ch32-quarter-turns"}
+**Two orthogonal quarter turns reverse the arrow.** The ink arrow $e$ points right; one violet $90^\circ$ turn gives $Re$ pointing up, and a second gives $R^2 e = -e$, exactly opposite to $e$. The picture is the real-plane instance $R$ with $Re_1 = e_2$, $Re_2 = -e_1$, which satisfies $R^{\mathsf T} = -R$ and $RR^{\mathsf T} = I$; the green $R^2 = -I$ is what item 1 of [@thm-ch32-generative-self-reference-and-zeckendorf] proves for every skew-adjoint unitary complex matrix.
+:::
+
 3. **Law 2 — The Pythagorean Fairness Mother-Law and Polyhedral Approximation**:
    Centered-purity Pythagorean conservation enforces the universal zero-free-lunch ledger ([Chapter 31](ch31-quantum-fairness.md) [@thm-ch31-seat-pythagorean-monogamy-fairness]); simultaneously, because every physical evolution or logical verification executes only a finite gate count $L < \infty$, **every ostensibly smooth sphere at finite resolution is a discrete polyhedral approximation** (external polyhedral angular-defect background in [@rem-ch32-generative-laws-dottie-literature]). At our physical modeling layer (`MODEL`), we interpret the kernel-verified Zeckendorf `NoAdjacentOnes` automaton theorem (Conjunct 4 of [@thm-ch32-generative-self-reference-and-zeckendorf] below) as a discrete ultraviolet coding lock forbidding unbounded adjacent high-frequency pileups.
 
@@ -65,7 +74,7 @@ Conjunct 1 negates $-(R^2) = R(-R) = R R^\dagger = I_n$; Conjunct 2 uses antiton
 External continuum geometric-algebra, real-analytic fixed-point, and polyhedral angular-defect formulas paired with these four formal anchors are recorded below:
 
 ::: {.remark #rem-ch32-generative-laws-dottie-literature title="Clifford Geometric Product, Dottie Contraction Rate, and Polyhedral Angular Defect (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** Continuum geometric-algebra, real-analytic fixed-point, and polyhedral-topology formulas referenced in the generative laws belong to classical mathematical literature and are not formalized as standalone theorems in `trureturing@dev`:
+**Literature result, not formalized in this book.** Continuum geometric algebra and polyhedral topology retain their literature setting. Item 2's qualitative cosine claims apply the endpoint and existing real-analysis results, with the full derivation in [@ex-ch33-mutual-cosine-monotonic-lock]; its decimals are not certified by that application:
 
 1. **Clifford Geometric Product and Even Cosine Power Series**: In Euclidean geometric algebra, the geometric product splits into scalar inner product and bivector wedge product,
 
@@ -74,13 +83,13 @@ External continuum geometric-algebra, real-analytic fixed-point, and polyhedral 
    $$
 
    with unit bivector square $\hat{\mathbf{I}}^2 = -1$ and entire alternating cosine series $\cos\theta = \sum_{k=0}^\infty \frac{(-1)^k}{(2k)!}\theta^{2k}$ (in finite-dimensional orthogonal bases, blade multiplication admits a classical binary `XOR` bitmask and swap-parity encoding; see [Chapter 25](ch25-rewriting-and-xor.md) [@rem-clifford-stabilizer-literature] and [Appendix B](appendix-b.md));
-2. **Local Contraction Factor and Complementary Identity at the Dottie Fixed Point**: At the unique real root $\theta^* \approx 0.7390851332\dots$ of $\cos\theta = \theta$ ([Chapter 24](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature]), the local derivative modulus is
+2. **Local Contraction Factor and Complementary Identity at the Dottie Fixed Point**: At the unique real root $\theta^* \approx 0.7390851332\dots$ of $\cos\theta = \theta$ ([@thm-dottie-rational-inverse-endpoint] and the all-real uniqueness derivation in [@ex-ch33-mutual-cosine-monotonic-lock]), the local derivative modulus is
 
    $$
    \bigl|(\cos)'(\theta^*)\bigr| = |\sin\theta^*| = \sqrt{1 - (\theta^*)^2} \approx 0.673612 < 1,
    $$
 
-   and because $\theta^* \in (0, \frac{\pi}{2})$ satisfies $\arcsin(\cos\theta^*) = \frac{\pi}{2} - \theta^*$, the complementary identity $\theta^* + \arcsin\theta^* = \frac{\pi}{2}$ holds identically;
+   and the same endpoint supplies $\cos\theta^*=\theta^*$ and the acute location; because $\theta^* \in (0, \frac{\pi}{2})$ satisfies $\arcsin(\cos\theta^*) = \frac{\pi}{2} - \theta^*$, the complementary identity $\theta^* + \arcsin\theta^* = \frac{\pi}{2}$ holds identically;
 3. **Two-Sphere Euler Characteristic and Icosahedral Angular Defect**: Every convex polyhedron homeomorphic to $S^2$ ($\chi(S^2) = 2$) has total vertex angular defect $2\pi\chi(S^2) = 4\pi = 720^\circ$ ($12 \times 60^\circ = 720^\circ$ on the regular icosahedron; cf. [Coda](coda.md) [@rem-coda-polyhedral-topology-literature]).
 :::
 
@@ -173,6 +182,10 @@ The continuum special-relativistic spinor, non-Abelian gauge curvature, and hori
 :::
 
 Bringing all thirty-two chapters onto a single canvas, one set of orthogonal primitives establishes a six-domain holographic isomorphism across **geometry/topology, quantum gauge fields, relativistic holography, arithmetic number theory, complexity/hydrodynamics, and observer dynamics**:
+
+::: {.figure src="ch32-six-readings"}
+**One meeting, read once in each of six domains.** The six small panels draw the same thing: two unit arrows at an angle $\theta$, a cyan shadow and a magenta parallelogram; the two lines beneath give how the table's "one-dimensional inner product" and "two-dimensional outer product" rows read in that domain—in relativity, for instance, the cyan line reads as the proper-time rate $d\tau/dt$ and the magenta area as the speed $v/c$. This is the book's synthesis (`MODEL`); the evidential tier of each entry is the one marked in the table below.
+:::
 
 ::: {.remark #rem-ch32-six-domain-isomorphism-table title="Six-Domain Holographic Isomorphism Master Ledger of the Orthogonal Self-Referential Unified Field (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** The master table below synthesizes structural correspondences across six domains: sub-items tagged `LEAN ✓` cite frozen theorems in `trureturing@dev`, external equations ($H\mathbf{\Psi}=0$, $F_{\mu\nu}$, RT surfaces, Hilbert reciprocity $\prod_v (a,b)_v = +1$, Arnold geodesics, BBBV/ETH bounds, and $\theta^* \approx 0.739085$) cite chapter literature remarks, unproved problems ($\mathrm{P}\neq\mathrm{NP}$, Critical Line $\sigma=1/2$, unforced 3D NS regularity) carry `OPEN`, and the cross-domain unification architecture constitutes our philosophical–geometric `MODEL`:
@@ -387,9 +400,7 @@ Set the four camps one by one into the compass above, join each pair with a line
 Finally, we assemble the eight programs' partial truths, residual external-frame bottlenecks, and meta-unification coordinates together with the chapter panorama diagram inside the master box below:
 
 ::: {.remark #rem-ch32-meta-unification-table title="Panorama Coordinate Ledger of Meta-Unification Across Eight Grand Programs (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** The figure and table below synthesize the eight external foundational programs (literature cited in [@rem-ch32-generative-laws-dottie-literature], [@rem-ch32-icosian-e8-literature], and [@rem-ch32-eight-programs-literature]) within our *Orthogonal Self-Referential Unified Field* interpretive framework (`MODEL`, with formal kernel anchors marked `LEAN ✓`):
-
-![Orthogonal self-referential unified field and three-axis meta-unification compass](../assets/fig-32-unified-field-meta-compass.svg)
+**Literature result, not formalized in this book.** The table below synthesizes the eight external foundational programs (literature cited in [@rem-ch32-generative-laws-dottie-literature], [@rem-ch32-icosian-e8-literature], and [@rem-ch32-eight-programs-literature]) within our *Orthogonal Self-Referential Unified Field* interpretive framework (`MODEL`, with formal kernel anchors marked `LEAN ✓`):
 
 **1. String / M-Theory**
 

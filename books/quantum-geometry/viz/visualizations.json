@@ -405,8 +405,8 @@
       "code": "ORTHO//HORIZON",
       "title": "视界之外的交叉点 · 一条缓慢下降的指数率、桥图的最小割与少数承重的模态",
       "title_en": "A crossover beyond the horizon · a slowly falling exponent rate, the minimal cut of a bridge graph and the few modes that carry the weight",
-      "summary": "第 30 章 ETH 一节的三个场景。指数率：示意曲线 r(n) = c·log₂log₂n/√log₂n 趋于零却降得极慢，c = 1 时要到 n ≈ 2⁵⁵⁸ 才低于 PPSZ 的 0.386，远在宇宙原子数 2²⁶⁶ 之外；常数 c 决定交叉点在视界的哪一边。桥图：宽度为 3 的双节点张量网络，随机整数实例的流矩阵的秩等于最小割 min(3ac, ad, bc)；锥域内最大秩等于 min(ad, bc) 已由 Lean 验证。模态：非负且总和为 T 的谱里，不小于阈值 θ 的模态至多 T/θ 个（Lean 已验证）。",
-      "summary_en": "Three scenes for the ETH section of chapter 30. The exponent rate: the schematic curve r(n) = c·log₂log₂n/√log₂n tends to zero but so slowly that for c = 1 it drops below the 0.386 of PPSZ only at n ≈ 2⁵⁵⁸, far beyond the 2²⁶⁶ atoms of the universe; the constant c decides on which side of the horizon the crossover lies. The bridge graph: a two-node tensor network of width 3 whose random integer flow matrix has the rank of the minimal cut min(3ac, ad, bc); that the greatest rank equals min(ad, bc) inside the cone is kernel-verified in Lean. The modes: in a nonnegative spectrum of total T at most T/θ modes reach a threshold θ (kernel-verified in Lean).",
+      "summary": "第 30 章 ETH 一节的三个场景。指数率：示意曲线 r(n) = c·log₂log₂n/√log₂n 趋于零却降得极慢，c = 1 时要到 n ≈ 2⁵⁵⁸ 才低于 PPSZ 的 0.386，远在宇宙原子数 2²⁶⁶ 之外；常数 c 决定交叉点在视界的哪一边；子句宽度 k = 3…6 只换 PPSZ 的基准线（唯一可满足情形的文献率 0.3863、0.5548、0.6502、0.7118）。桥图：宽度为 3 的双节点张量网络，随机整数实例的流矩阵的秩等于最小割 min(3ac, ad, bc)；锥域内最大秩等于 min(ad, bc) 已由 Lean 验证。模态：非负且总和为 T 的谱里，不小于阈值 θ 的模态至多 T/θ 个（Lean 已验证）。",
+      "summary_en": "Three scenes for the ETH section of chapter 30. The exponent rate: the schematic curve r(n) = c·log₂log₂n/√log₂n tends to zero but so slowly that for c = 1 it drops below the 0.386 of PPSZ only at n ≈ 2⁵⁵⁸, far beyond the 2²⁶⁶ atoms of the universe; the constant c decides on which side of the horizon the crossover lies; the clause width k = 3 … 6 only changes the PPSZ baseline (the literature rates of the uniquely satisfiable case, 0.3863, 0.5548, 0.6502, 0.7118). The bridge graph: a two-node tensor network of width 3 whose random integer flow matrix has the rank of the minimal cut min(3ac, ad, bc); that the greatest rank equals min(ad, bc) inside the cone is kernel-verified in Lean. The modes: in a nonnegative spectrum of total T at most T/θ modes reach a threshold θ (kernel-verified in Lean).",
       "path": "eth-horizon-crossover/",
       "thumbnail": "eth-horizon-crossover/thumb.jpg",
       "status": "live",
@@ -2741,6 +2741,65 @@
       "lean": [
         {
           "gid": "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique"
+        }
+      ]
+    },
+    {
+      "id": "hairy-ball-normal-escape",
+      "code": "ORTHO//HAIRY",
+      "title": "毛球、环面与法向逃逸",
+      "title_en": "Hairy balls, tori and the normal escape",
+      "summary": "可转动的球面与环面上铺满连续的切向箭头，品红的环圈出箭头为零的点。球面上的纬向场 (−y, x, 0) 在南北两极各有一个指标 +1 的零点；用立体投影拉回的一族场把南极的零点沿经线推到北极，两个合成偶极切场 w = (((1 − z)² − x² + y²)/2, −xy, x(1 − z)) 唯一的、指标 +2 的零点，指标之和始终是 2。环面 ((R + r cos θ) cos φ, (R + r cos θ) sin φ, r sin θ) 上的单位切场 ê_φ 处处长 1，没有零点。正二十面体逐级切成测地穹顶，ν = 1 到 6 的顶点角亏之和都是 4π。让箭头沿外法向抬起，w̃_λ = (1 − λ)w + λ(1 + z)/2·x 在 0 < λ < 1 时处处不为零，‖w̃₁(N)‖ = 1；λ = 1 时南极又成了零点。庞加莱—霍普夫与笛卡尔定理是文献结果，抬升的读法是诠释模型；四张实验卡可在第二十一、二十九章正文里单独引用。",
+      "summary_en": "Continuous tangent arrows cover a sphere and a torus that can be turned by hand; magenta rings circle the points where they vanish. The zonal field (−y, x, 0) has a zero of index +1 at each pole; a family pulled back by stereographic projection pushes the southern zero up a meridian into the North Pole, where the two become the single zero, of index +2, of the dipole field w = (((1 − z)² − x² + y²)/2, −xy, x(1 − z)); the indices always add up to 2. On the torus ((R + r cos θ) cos φ, (R + r cos θ) sin φ, r sin θ) the unit field ê_φ has length 1 everywhere and no zero. The icosahedron cut into geodesic domes keeps a total vertex defect of 4π for ν = 1 to 6. Lifted along the outward normal, w̃_λ = (1 − λ)w + λ(1 + z)/2·x vanishes nowhere for 0 < λ < 1 and ‖w̃₁(N)‖ = 1, while at λ = 1 the South Pole becomes a zero. Poincaré–Hopf and Descartes are literature results and the reading of the lift is an interpretation; each of the four experiment cards can be cited on its own from Chapters 21 and 29.",
+      "path": "hairy-ball-normal-escape/",
+      "thumbnail": "hairy-ball-normal-escape/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "毛球定理",
+        "庞加莱—霍普夫",
+        "欧拉示性数",
+        "环面",
+        "笛卡尔角亏",
+        "法向逃逸"
+      ],
+      "tags_en": [
+        "Hairy ball theorem",
+        "Poincaré–Hopf",
+        "Euler characteristic",
+        "Torus",
+        "Descartes defect",
+        "Normal escape"
+      ],
+      "theory": [
+        {
+          "label": "第二十一章 · 毛球定理、角亏与 Adams 球面",
+          "label_en": "Chapter 21 · Hairy ball, angle defect and Adams spheres",
+          "href": "../zh/ch21-diagonalization-and-escape.html#sec-ch21-4",
+          "href_en": "../en/ch21-diagonalization-and-escape.html#sec-ch21-4"
+        },
+        {
+          "label": "第二十九章 · 同余数椭圆曲线环面",
+          "label_en": "Chapter 29 · The congruent-number elliptic torus",
+          "href": "../zh/ch29-timeless-causality-and-gram-space.html#rem-ch29-elliptic-torus-literature",
+          "href_en": "../en/ch29-timeless-causality-and-gram-space.html#rem-ch29-elliptic-torus-literature"
+        },
+        {
+          "label": "终章 · 多面体近似与不可抹平的几何余项",
+          "label_en": "End chapter · Polyhedral approximation and its remainder",
+          "href": "../zh/coda.html#sec-coda-polyhedral-remainder",
+          "href_en": "../en/coda.html#sec-coda-polyhedral-remainder"
+        },
+        {
+          "label": "trureturing · DiagonalTopologicalEscape.lean",
+          "label_en": "trureturing · DiagonalTopologicalEscape.lean",
+          "href": "{trureturing}/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean",
+          "href_en": "{trureturing}/D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous"
         }
       ]
     }
