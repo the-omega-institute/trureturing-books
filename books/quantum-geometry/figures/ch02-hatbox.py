@@ -51,8 +51,8 @@ def draw(fig):
     sp.outline(fill="cyan", fill_opacity=0.05)
     for z in zs[1:-1]:
         sp.small_circle((0, 0, 1), math.degrees(math.acos(z)), "line", 1.8)
-    sp.dot((0, 0, 1), "now", 5)
-    sp.label((0, 0, 1), "*a*", dx=10, dy=-8, size=16, color="now")
+    sp.dot((0, 0, 1), "line", 5)   # the known state: cyan, as in the chapter's other figures (amber is only for B)
+    sp.label((0, 0, 1), "*a*", dx=10, dy=-8, size=16, color="line")
 
     # the scale of p
     sx = 336

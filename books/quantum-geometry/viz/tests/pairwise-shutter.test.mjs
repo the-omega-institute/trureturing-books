@@ -141,6 +141,18 @@ check('TURN: both tips keep their component along the violet axis (a rotation ab
 check('TURN: every one of the 4000 per-shot weights is 3/4', r.w.every((w) => close(w, 0.75, 1e-12)));
 check('TURN: the counts are exactly those of the 60° card without turning', s.k === sixtyK && s.k === recount(r.u, 0.75, 4000));
 
+// the TURN still printed in chapter 2: the pair stops 306° of the way round, visibly away from its start
+{
+  const pg = await T.goto(BOOK, ID, '?shot=1&lang=zh&preset=turn', await T.newPage());
+  await settle(pg);
+  const st = await pg.evaluate(() => ({ s: window.SHUTTER_DEBUG.state, run: window.SHUTTER_DEBUG.run(), sub: document.getElementById('hudSub').textContent, big: document.getElementById('hudBig').textContent }));
+  await pg.close();
+  const tStill = 0.85 * Math.log(1 + 4000), nStill = Math.floor(Math.expm1(tStill) + 1e-9), kStill = recount(st.run.u, 0.75, nStill);
+  check('TURN still: stopped at 306° of the turn, not back at the start', close(st.s.t, tStill, 1e-9) && close(st.s.alpha, 1.7 * Math.PI, 1e-9) && len(st.s.a.map((x, i) => x - st.s.A[i])) > 0.5 && !st.s.playing);
+  check('TURN still: the pair is still 60° apart with weight 3/4', close(ang(st.s.a, st.s.b), 60 * DEG, 1e-9) && close(overlap(st.s.a, st.s.b), 0.75, 1e-12) && st.big.includes('60°'), st.big);
+  check('TURN still: the readout counts the shots done so far, recounted from the same random numbers', st.s.N === nStill && st.s.k === kStill && st.sub.includes(`${nStill} 次里过了 ${kStill} 次`) && st.sub.includes(`k/N = ${(kStill / nStill).toFixed(3)}`), st.sub);
+}
+
 // RANDOM: uniform directions, uniform weights
 await pick('random'); check('RANDOM plays', await played()); s = await state(); r = await runOf();
 const dirs = r.dirs, N = dirs.length;
