@@ -4,7 +4,9 @@
    R_z(φ) R_y(θ) N. For a target point the page builds a word with a greedy rule (turn about a to set the azimuth, turn
    about b to push the angle from N out by at most 2α, finally turn about a onto the target). The rail advances one
    turn per unit. The "cover" scene draws, on the same sphere, the antipodal open caps of 45° around six rational axes
-   (or the three coordinate axes) and the great circle orthogonal to the current point.
+   (or the three coordinate axes) and the great circle orthogonal to the current point. The Lie–Trotter mode plays
+   (R_a(θ/n) R_b(θ/n))ⁿ with a = e₃, b = e₂ and θ = 90° (the chapter's example with x → a, y → b) next to the target
+   rotation about (0, 1, 1)/√2 by √2·θ, and reads the angle and axis of the product and its operator-norm error.
    Read-only probe for the browser suite: window.ANGLES_DEBUG. */
 (() => {
   'use strict';
@@ -13,7 +15,7 @@
   const DEG = Math.PI / 180, N = [0, 0, 1], E1 = [1, 0, 0], AX_A = [0, 0, 1];
 
   /* ---------- model ---------- */
-  const S = { scene: 'words', set: 'six', alpha: 90, theta: 60, phi: 45, explicit: null };
+  const S = { scene: 'words', set: 'six', alpha: 90, theta: 60, phi: 45, explicit: null, trot: 0 };
   const axisB = () => [0, Math.sin(S.alpha * DEG), Math.cos(S.alpha * DEG)];
   const target = () => v3.sph(S.theta * DEG, S.phi * DEG);
   const wrapPi = (x) => { let y = x % (2 * Math.PI); if (y <= -Math.PI + 1e-9) y += 2 * Math.PI; if (y > Math.PI + 1e-9) y -= 2 * Math.PI; return y; };
@@ -52,6 +54,7 @@
   }
   let W = [];   // the current word
   function rebuild() {
+    if (S.trot) { W = []; for (let k = 0; k < S.trot; k++) W.push({ ax: 'b', ang: TROT_THETA / S.trot }, { ax: 'a', ang: TROT_THETA / S.trot }); return; }
     if (S.explicit) { W = S.explicit.map(([ax, deg]) => ({ ax, ang: deg * DEG })); return; }
     const w = build();
     W = w || [];
@@ -73,6 +76,42 @@
     const cur = Math.min(W.length - 1, u > 1e-9 ? k : k - 1);
     return { p, f, bTurns, cur, polar: Math.acos(kit.clamp(p[2], -1, 1)) };
   }
+
+  /* Lie–Trotter: P_n = (R_a(θ/n) R_b(θ/n))ⁿ against the target exp(θ(K_a + K_b)), a rotation about (0, 1, 1)/√2 by √2·θ */
+  const TROT_THETA = Math.PI / 2, TROT_NS = [1, 2, 4, 16, 256], TROT_U = v3.unit([0, 1, 1]);
+  const rotm = (u, ang) => {   // Rodrigues: the matrix of the right-handed turn by ang about the unit vector u
+    const [x, y, z] = u, c = Math.cos(ang), s = Math.sin(ang), C = 1 - c;
+    return [[c + x * x * C, x * y * C - z * s, x * z * C + y * s], [y * x * C + z * s, c + y * y * C, y * z * C - x * s], [z * x * C - y * s, z * y * C + x * s, c + z * z * C]];
+  };
+  const mmul = (A, B) => A.map((r) => [0, 1, 2].map((j) => r[0] * B[0][j] + r[1] * B[1][j] + r[2] * B[2][j]));
+  const mT = (A) => [0, 1, 2].map((i) => [0, 1, 2].map((j) => A[j][i]));
+  const angleOf = (M) => Math.acos(kit.clamp((M[0][0] + M[1][1] + M[2][2] - 1) / 2, -1, 1));
+  const TROT_TARGET = rotm(TROT_U, Math.SQRT2 * TROT_THETA);
+  const trotCache = {};
+  /** The product P_n, its angle and axis, and ‖P_n − target‖ (= 2 sin(φ/2), φ the angle of targetᵀ P_n). */
+  function trotInfo(n) {
+    if (trotCache[n]) return trotCache[n];
+    const step = mmul(rotm(AX_A, TROT_THETA / n), rotm([0, 1, 0], TROT_THETA / n));
+    let P = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
+    for (let k = 0; k < n; k++) P = mmul(step, P);
+    const ang = angleOf(P);
+    let axis = v3.unit([P[2][1] - P[1][2], P[0][2] - P[2][0], P[1][0] - P[0][1]]);
+    if (v3.dot(axis, TROT_U) < 0) axis = v3.scale(axis, -1);
+    const err = 2 * Math.sin(angleOf(mmul(mT(TROT_TARGET), P)) / 2);
+    return (trotCache[n] = { n, P, angle: ang, axis, err, nErr: n * err });
+  }
+  /** The amber zigzag: N carried through the word, sampled along each turn, up to rail position t. */
+  function zigzag(t) {
+    const B = axisB(), pts = [N.slice()];
+    let p = N.slice();
+    for (let j = 0; j < W.length && j < t; j++) {
+      const share = Math.min(1, t - j), ax = W[j].ax === 'a' ? AX_A : B, ang = W[j].ang * share, m = Math.max(1, Math.ceil(Math.abs(ang) / (3 * DEG)));
+      for (let i = 1; i <= m; i++) pts.push(v3.rot(p, ax, ang * i / m));
+      p = pts[pts.length - 1];
+    }
+    return pts;
+  }
+  const targetRoad = () => Array.from({ length: 91 }, (_, i) => v3.rot(N, TROT_U, Math.SQRT2 * TROT_THETA * i / 90));
 
   /* the caps: colour i is {x : (x·âᵢ)² > ½}; for the rational axes that is 5 < 2(x·aᵢ)² exactly */
   const RAW = { six: [[1, 2, 0], [1, -2, 0], [0, 1, 2], [0, 1, -2], [2, 0, 1], [-2, 0, 1]], three: [[1, 0, 0], [0, 1, 0], [0, 0, 1]] };
@@ -154,14 +193,24 @@
       }
       // how far the turns about b made so far can reach from N
       const reach = 2 * S.alpha * DEG * now.bTurns;
-      if (S.alpha > 1e-9 && reach > 1e-9 && reach < Math.PI - 1e-6) {
+      if (!S.trot && S.alpha > 1e-9 && reach > 1e-9 && reach < Math.PI - 1e-6) {
         st.circle([0, 0, Math.cos(reach)], [0, 0, 1], Math.sin(reach), { color: P.cyan, width: 1.6 * thick, alpha: 0.9, dash: [7, 5], back: 0.35 });
         const D = st.facing(), h = v3.unit(v3.cross(D, [0, 0, 1])), deg = fix(reach / DEG, 0);   // the screen-left end of the circle
         st.tag('reach', [Math.sin(reach) * h[0], Math.sin(reach) * h[1], Math.cos(reach)], L(`离 N ≤ ${deg}°`, `≤ ${deg}° from N`), 'num c-cy', { dx: -40, dy: 14, fade: false });
       }
     }
+    if (S.trot) {   // Lie–Trotter: the target rotation's road, the whole zigzag faintly, the axes of P_n
+      st.path(targetRoad(), { color: P.ink, width: 2 * thick, alpha: 0.9, back: 0.35 });
+      st.dot(v3.rot(N, TROT_U, Math.SQRT2 * TROT_THETA), 7.5, P.ink, { ring: true, width: 1.8, alpha: 0.95 });
+      st.path(zigzag(len()), { color: P.amber, width: 1.2 * thick, alpha: 0.35, back: 0.3 });
+      for (const n of TROT_NS) if (n !== S.trot) st.dot(trotInfo(n).axis, 3.2, P.violet, { ring: true, width: 1.4, alpha: 0.75 });
+      const info = trotInfo(S.trot);
+      st.line([0, 0, 0], info.axis, { color: P.violet, width: 1.4 * thick, alpha: 0.8, dash: [4, 4], back: 0.5 });
+      st.dot(info.axis, 5.5, P.violet, { glow: 10, fade: false });
+      st.tag('trotAxis', info.axis, L(`P<sub>n</sub> 的转轴 · ${fix(info.angle / DEG, 2)}°`, `axis of P<sub>n</sub> · ${fix(info.angle / DEG, 2)}°`), 'raw c-vi', { dx: 0, dy: -18, fade: false });
+    }
     // this turn's circle: the point can only move along it
-    if (curAx) circleOf(now.p, curAx, { color: P.violet, width: 1.3 * thick, alpha: 0.85, dash: [3, 4], back: 0.3 });
+    if (curAx && !S.trot) circleOf(now.p, curAx, { color: P.violet, width: 1.3 * thick, alpha: 0.85, dash: [3, 4], back: 0.3 });
     // when the point sits on the axis of this turn it cannot move: show what the turn does to the flag instead
     if (curAx && Math.abs(v3.dot(now.p, curAx)) > 0.999) {
       const f0 = pose(now.cur).f, done = W[now.cur].ang * (t - now.cur), sweep = [];
@@ -170,8 +219,8 @@
       st.tag('spin', sweep[sweep.length - 1], L(`小旗转过 ${fix(Math.abs(done) / DEG, 0)}°`, `flag turned ${fix(Math.abs(done) / DEG, 0)}°`), 'raw ink', { dx: 0, dy: -22 });
     }
     // the road travelled and the target
-    if (t > 1e-9 && W.length) st.path(road(t), { color: P.ink, width: 1.8 * thick, alpha: 0.9, back: 0.35 });
-    if (!S.explicit) {
+    if (t > 1e-9 && W.length) st.path(S.trot ? zigzag(t) : road(t), { color: S.trot ? P.amber : P.ink, width: 1.8 * thick, alpha: 0.9, back: 0.35 });
+    if (!S.explicit && !S.trot) {
       const tg = target();
       st.dot(tg, 7.5, P.ink, { ring: true, width: 1.8, alpha: 0.95 });
       if (!cover) st.tag('tgt', tg, L('目标', 'target'), 'raw ink', { dx: 0, dy: 20 });
@@ -180,11 +229,16 @@
     st.arrow([0, 0, 0], now.p, { color: P.amber, width: 2.4 * thick, glow: 10, headSize: 10, fade: false });
     st.dot(now.p, 5.5, P.amber, { glow: 14, fade: false });
     st.arrow(now.p, v3.add(now.p, v3.scale(now.f, 0.34)), { color: P.ink, width: 1.8 * thick, headSize: 8, alpha: 0.95 });
-    if (!cover && now.p[2] < 0.97) st.tag('x', now.p, 'x', 'num c-am big', { dx: -14, dy: -12 });
+    if (!cover && !S.trot && now.p[2] < 0.97) st.tag('x', now.p, 'x', 'num c-am big', { dx: -14, dy: -12 });
     st.end();
 
     const k = Math.min(len(), Math.ceil(t - 1e-9)), polar = now.polar / DEG;
-    if (cover) {
+    if (S.trot) {
+      const info = trotInfo(S.trot);
+      $('hudBig').textContent = `Lie–Trotter · n = ${S.trot}`;
+      $('hudSub').innerHTML = L(`P<sub>n</sub> 转角 ${fix(info.angle / DEG, 2)}° · 误差 ${fix(info.err, 4)} · n × 误差 ${fix(info.nErr, 4)}`,
+        `angle of P<sub>n</sub> ${fix(info.angle / DEG, 2)}° · error ${fix(info.err, 4)} · n × error ${fix(info.nErr, 4)}`);
+    } else if (cover) {
       const col = colours(now.p, S.set);
       $('hudBig').textContent = L('覆盖 · ', 'Cover · ') + (col.held.length ? L(`x 在颜色 ${col.held.map((i) => NAMES[S.set][i]).join(' · ')}`, `x in colour ${col.held.map((i) => NAMES[S.set][i]).join(' · ')}`) : L('x 不在任何球冠里', 'x in no cap'));
       $('hudSub').innerHTML = L(`最贴近的轴：(x·â)² = ${fix(col.near, 3)} ${col.near > 0.5 ? '&gt;' : '≤'} ½`, `nearest axis: (x·â)² = ${fix(col.near, 3)} ${col.near > 0.5 ? '&gt;' : '≤'} ½`);
@@ -193,20 +247,20 @@
       const what = cur ? L(`绕 ${cur.ax} 转 ${fix(cur.ang / DEG, 1)}°`, `about ${cur.ax} by ${fix(cur.ang / DEG, 1)}°`) : L('还在北极', 'still at the pole');
       $('hudSub').innerHTML = `${what} · ${L('离 N', 'from N')} ${fix(polar, 1)}° · ${L('高度', 'height')} cos = ${fix(now.p[2], 3)}`;
     }
-    $('legReach').hidden = cover; $('polarPanel').hidden = cover; $('capPanel').hidden = !cover; $('legCaps').hidden = !cover; $('legPerp').hidden = !cover; $('legGap').hidden = !(cover && SURVEY[S.set].gaps.length);
+    $('legReach').hidden = cover || !!S.trot; $('legTrot').hidden = !S.trot; $('legRoad').hidden = !!S.trot; $('polarPanel').hidden = cover; $('capPanel').hidden = !cover; $('legCaps').hidden = !cover; $('legPerp').hidden = !cover; $('legGap').hidden = !(cover && SURVEY[S.set].gaps.length);
   }
 
   /* ---------- strip ---------- */
-  const sample = (fn) => { const max = Math.max(len(), 1), pts = [], n = Math.max(80, max * 40); for (let i = 0; i <= n; i++) { const t = max * i / n; pts.push([t, fn(t)]); } return pts; };
+  const sample = (fn) => { const max = Math.max(len(), 1), pts = [], n = Math.max(80, Math.min(max * 40, 1200)); for (let i = 0; i <= n; i++) { const t = max * i / n; pts.push([t, fn(t)]); } return pts; };
   const ticks = (max) => { const t = []; const step = max > 10 ? 2 : 1; for (let i = 0; i <= max; i += step) t.push(i); return t; };
   function drawPolar() {
     const max = Math.max(len(), 1), now = pose(clock.t), g = kit.plot($('polarPlot'), { x: [0, max], y: [0, 190], pad: [32, 10, 8, 22] });
     g.axes({ yTicks: [0, 90, 180], xTicks: ticks(max), xGrid: true, yFmt: (v) => `${v}°` });
-    if (S.alpha > 1e-9 || W.length) g.line(sample((t) => Math.min(180, 2 * S.alpha * pose(t).bTurns)), P.cyan, { width: 1.5, dash: [5, 4] });
+    if (!S.trot && (S.alpha > 1e-9 || W.length)) g.line(sample((t) => Math.min(180, 2 * S.alpha * pose(t).bTurns)), P.cyan, { width: 1.5, dash: [5, 4] });
     g.line(sample((t) => pose(t).polar / DEG), P.ink, { width: 2 });
     g.vline(clock.t, P.amber); g.dot(clock.t, now.polar / DEG, P.amber, 4);
-    g.legend([[P.ink, L('离 N 的角度', 'angle from N')], [P.cyan, L('上限 2α × 绕 b 的次数', 'bound 2α × turns about b'), 'dash']]);
-    $('polarMeta').textContent = `${fix(now.polar / DEG, 1)}° ≤ ${fix(Math.min(180, 2 * S.alpha * now.bTurns), 0)}°`;
+    g.legend(S.trot ? [[P.ink, L('离 N 的角度', 'angle from N')]] : [[P.ink, L('离 N 的角度', 'angle from N')], [P.cyan, L('上限 2α × 绕 b 的次数', 'bound 2α × turns about b'), 'dash']]);
+    $('polarMeta').textContent = S.trot ? `${fix(now.polar / DEG, 1)}°` : `${fix(now.polar / DEG, 1)}° ≤ ${fix(Math.min(180, 2 * S.alpha * now.bTurns), 0)}°`;
   }
   function drawCap() {
     const max = Math.max(len(), 1), now = pose(clock.t), g = kit.plot($('capPlot'), { x: [0, max], y: [0, 1.08], pad: [32, 10, 8, 22] });
@@ -220,7 +274,7 @@
   }
 
   /* ---------- readouts ---------- */
-  const wordText = () => (W.unreachable ? L('没有：两轴共线，N 走不开', 'none: the axes are collinear and N cannot move')
+  const wordText = () => (S.trot ? `(b ${fix(90 / S.trot, 2)}° → a ${fix(90 / S.trot, 2)}°) × ${S.trot}` : W.unreachable ? L('没有：两轴共线，N 走不开', 'none: the axes are collinear and N cannot move')
     : !W.length ? L('空字：已经在目标上', 'the empty word: already on target')
       : W.map((f) => `${f.ax} ${fix(f.ang / DEG, 1)}°`).join(' → '));
   function drawText() {
@@ -234,7 +288,9 @@
     $('roColors').textContent = col.held.length ? col.held.map((i) => NAMES[S.set][i]).join(' · ') : L('无', 'none');
     $('roNear').textContent = `${fix(col.near, 3)} · ${fix(SURVEY[S.set].worst, 3)}`;
     $('roAside').textContent = S.set === 'six' ? L('六根有理轴', 'six rational axes') : L('三根坐标轴', 'three coordinate axes');
-    $('roNote').innerHTML = S.scene === 'cover'
+    $('roNote').innerHTML = S.trot ? (() => { const i = trotInfo(S.trot); return L(`P<sub>n</sub> 绕 (${i.axis.map((c) => fix(c, 4)).join(', ')}) 转 ${fix(i.angle / DEG, 2)}°；目标绕 (0, 1, 1)/√2 转 √2 · 90° = 127.28°。误差 ‖P<sub>n</sub> − 目标‖ = ${fix(i.err, 4)}，n × 误差 = ${fix(i.nErr, 4)}。`,
+      `P<sub>n</sub> turns by ${fix(i.angle / DEG, 2)}° about (${i.axis.map((c) => fix(c, 4)).join(', ')}); the target turns by √2 · 90° = 127.28° about (0, 1, 1)/√2. Error ‖P<sub>n</sub> − target‖ = ${fix(i.err, 4)}, n × error = ${fix(i.nErr, 4)}.`); })()
+      : S.scene === 'cover'
       ? (SURVEY[S.set].gaps.length ? L(`三根坐标轴的球冠在对角线方向漏缝：那里 (x·eⱼ)² 最大只有 ${fix(SURVEY.three.worst, 3)}。`, `The caps of the three coordinate axes leave gaps on the diagonals, where the largest (x·eⱼ)² is only ${fix(SURVEY.three.worst, 3)}.`)
         : L(`六种颜色盖住整颗球：网格上最差的点也有 (x·â)² = ${fix(SURVEY.six.worst, 3)} &gt; ½。`, `The six colours cover the whole sphere: even the worst grid point has (x·â)² = ${fix(SURVEY.six.worst, 3)} &gt; ½.`))
       : W.unreachable ? L('两轴共线：两种转动都固定 N，旋转字再长也走不开。', 'Collinear axes: both kinds of turn fix N, and no word, however long, moves it.')
@@ -254,23 +310,24 @@
   });
   function fitRail(toEnd) { const max = Math.max(len(), 1); clock.setMax(max, true); clock.rate = Math.max(0.8, max / 6); clock.set(toEnd ? max : Math.min(clock.t, max)); }
   /** A control moved: rebuild the word for the target and show where it ends. */
-  function changed() { S.explicit = null; clock.pause(); rebuild(); fitRail(true); cards.mark(null); paint(); }
+  function changed() { S.explicit = null; S.trot = 0; trotChips.set('0', true); clock.pause(); rebuild(); fitRail(true); cards.mark(null); paint(); }
   const fA = kit.field($('alpha'), { fmt: (v) => `${fix(v, 0)}°`, onInput: (v) => { S.alpha = v; changed(); } });
   const fT = kit.field($('theta'), { fmt: (v) => `${fix(v, 0)}°`, onInput: (v) => { S.theta = v; changed(); } });
   const fF = kit.field($('phi'), { fmt: (v) => `${fix(v, 0)}°`, onInput: (v) => { S.phi = v; changed(); } });
+  const trotChips = kit.chips($('trotChips'), 'trot', (v) => { clock.pause(); S.trot = Number(v); S.explicit = null; if (S.trot) { S.scene = 'words'; S.alpha = 90; sceneChips.set('words', true); fA.set(90); } rebuild(); fitRail(true); cards.mark(null); paint(); });
   const setChips = kit.chips($('setChips'), 'set', (v) => { S.set = v; cards.mark(null); paint(); });
   const sceneChips = kit.chips($('sceneChips'), 'scene', (v) => { S.scene = v; cards.mark(null); paint(); });
   $('rew').addEventListener('click', () => { clock.pause(); clock.set(0); });
 
   /* ---------- experiment cards ---------- */
-  const VIEW = { side: [-0.35, 0.3], front: [-2.1, 0.38], under: [-2.1, -0.95], above: [-2.1, 1.05], cover: [-1.4, 0.32] };
+  const VIEW = { side: [-0.35, 0.3], front: [-2.1, 0.38], under: [-2.1, -0.95], above: [-2.1, 1.05], cover: [-1.4, 0.32], trotter: [-1.15, 0.42] };
   const PRESETS = {
     tilt: { scene: 'words', alpha: 90, theta: 60, phi: 45, word: [['b', 360]], view: 'side', still: 'end' },
     address: { scene: 'words', alpha: 90, theta: 60, phi: 45, view: 'front', still: 'end' },
     pole: { scene: 'words', alpha: 90, theta: 180, phi: 45, word: [['b', 180], ['a', 360]], view: 'under', still: 'end' },
     skew: { scene: 'words', alpha: 30, theta: 110, phi: 45, view: 'front', still: 'end' },
-    collinear: { scene: 'words', alpha: 0, theta: 60, phi: 45, word: [['b', 120], ['a', 90], ['b', 120], ['a', 90]], view: 'above', still: 'end' },
     narrow: { scene: 'words', alpha: 10, theta: 110, phi: 45, view: 'front', still: 'end' },
+    trotter: { scene: 'words', alpha: 90, theta: 60, phi: 45, trot: 4, view: 'trotter', still: 'end' },
     three: { scene: 'cover', set: 'three', alpha: 90, theta: Math.acos(1 / Math.sqrt(3)) / DEG, phi: 45, view: 'cover', still: 'end' },
     six: { scene: 'cover', set: 'six', alpha: 90, theta: 60, phi: 45, view: 'cover', still: 'end' }
   };
@@ -279,8 +336,8 @@
     address: ['先绕 e₂ 倾转 θ = 60°，再绕竖轴 e₃ 拧转 φ = 45°：第二步沿紫色虚线的纬度圈走，高度 cos θ = ½ 不变，停在白色的目标圈上，x = (√6/4, √6/4, ½)。', 'First tilt by θ = 60° about e₂, then twist by φ = 45° about the vertical axis e₃: the second turn runs along the violet dashed latitude circle at the fixed height cos θ = ½ and stops in the white target ring, x = (√6/4, √6/4, ½).'],
     pole: ['倾转 θ = 180° 到南极，再绕竖轴拧一整圈：琥珀色的点一动不动，只有白色的小旗在转。在两极，φ 取什么都是同一点。', 'Tilt by θ = 180° to the south pole, then twist a full turn about the vertical axis: the amber point does not move, only the white flag turns. At the poles every φ names the same point.'],
     skew: ['两根紫色转轴只差 30°：每次绕 b 最多把点推离 N 60°，青色虚线是到这一步为止能到的最远处。绕 b、绕 a 交替转四次，点停在离 N 110° 的白色目标圈上，青色虚线停在 120°。', 'The violet axes are only 30° apart: each turn about b pushes the point at most 60° further from N, and the cyan dashed circle is the farthest it can be so far. Four turns, alternating about b and about a, bring it to the white target ring 110° from N; the cyan circle stops at 120°.'],
-    collinear: ['两轴重合（α = 0）：绕 a 转和绕 b 转是同一种转动，都固定 N。琥珀色的点不动，白色的小旗只在水平面里转。', 'The axes coincide (α = 0): a turn about a and a turn about b are the same kind of turn, and both fix N. The amber point stays put, and the white flag only turns in the horizontal plane.'],
-    narrow: ['两根紫色转轴只差 10°：每次绕 b 只能推远 20°，青色虚线一格一格往外挪。同一个目标要十二个转动才到。', 'The violet axes are only 10° apart: each turn about b pushes out by just 20°, and the cyan dashed circle creeps outward one step at a time. The same target now takes twelve turns.'],
+    narrow: ['两根紫色转轴只差 10°：每次绕 b 只能推远 20°，青色虚线一格一格往外挪。同一个目标要十二个转动才到。夹角再缩小，螺旋越来越密；夹角为 0 时绕 a、绕 b 都固定 N，一步也走不出去。', 'The violet axes are only 10° apart: each turn about b pushes out by just 20°, and the cyan dashed circle creeps outward one step at a time. The same target now takes twelve turns. Shrink the angle further and the spiral winds ever tighter; at 0 both turns fix N and the point cannot take a single step.'],
+    trotter: ['Lie–Trotter，n = 4：a = e₃ 扮演例题的 x、b = e₂ 扮演 y，总角 θ = 90°。琥珀色的锯齿交替绕 b、绕 a 各转 4 次 22.5°，白色的弧是目标转动带着 N 走的路。紫色的点是 Pₙ 的转轴（空心的是 n = 1、2、16、256），转角 126.87°；n 越大越贴近两轴的角平分线。', 'Lie–Trotter, n = 4: a = e₃ plays the example\'s x and b = e₂ its y, with total angle θ = 90°. The amber zigzag turns by 22.5° about b and then about a, four times each; the white arc is the road along which the target rotation carries N. The violet point is the axis of Pₙ (hollow: n = 1, 2, 16, 256), with angle 126.87°; the larger n, the closer it moves to the bisector of the two axes.'],
     three: ['只用三根坐标轴的 45° 球冠：点走到卦限对角线 (1, 1, 1)/√3 时，三对灰色的圆都不含它，它落在品红的缝里。', 'Only the 45° caps of the three coordinate axes: when the point reaches the octant diagonal (1, 1, 1)/√3, none of the three grey pairs of circles holds it, and it sits in the magenta gap.'],
     six: ['六根有理轴的 12 个球冠：点停在 x = (√6/4, √6/4, ½)，被颜色 0、2、4 的青色球冠盖住；白色虚线是与 x 正交的大圆，它不进入这三种颜色的任何一个球冠。', 'The 12 caps of the six rational axes: the point stops at x = (√6/4, √6/4, ½), inside the cyan caps of colours 0, 2 and 4; the white dashed line is the great circle orthogonal to x, and it enters no cap of those three colours.']
   };
@@ -288,8 +345,8 @@
   function applyPreset(id) {
     const p = PRESETS[id];
     clock.pause();
-    S.scene = p.scene; S.alpha = p.alpha; S.theta = p.theta; S.phi = p.phi; S.explicit = p.word || null; if (p.set) S.set = p.set;
-    sceneChips.set(S.scene, true); setChips.set(S.set, true); fA.set(p.alpha); fT.set(Math.round(p.theta)); fF.set(p.phi);
+    S.scene = p.scene; S.alpha = p.alpha; S.theta = p.theta; S.phi = p.phi; S.explicit = p.word || null; S.trot = p.trot || 0; if (p.set) S.set = p.set;
+    trotChips.set(String(S.trot), true); sceneChips.set(S.scene, true); setChips.set(S.set, true); fA.set(p.alpha); fT.set(Math.round(p.theta)); fF.set(p.phi);
     rebuild(); fitRail(false); clock.set(0);
     stage.view(VIEW[p.view], TRV.still || booting ? 0 : 600);
     const still = p.still === 'end' ? len() : p.still;
@@ -309,7 +366,7 @@
       const s = pose(clock.t), col = colours(s.p, S.set);
       return { scene: S.scene, set: S.set, alpha: S.alpha, theta: S.theta, phi: S.phi, t: clock.t, max: clock.max, playing: clock.playing,
         preset: cards.current, explicit: !!S.explicit, unreachable: !!W.unreachable,
-        word: W.map((f) => ({ ax: f.ax, deg: f.ang / DEG })), p: s.p, flag: s.f, polar: s.polar / DEG, bTurns: s.bTurns,
+        word: W.map((f) => ({ ax: f.ax, deg: f.ang / DEG })), trot: S.trot, trotInfo: S.trot ? (({ angle, axis, err, nErr }) => ({ angle: angle / DEG, axis, err, nErr }))(trotInfo(S.trot)) : null, p: s.p, flag: s.f, polar: s.polar / DEG, bTurns: s.bTurns,
         held: col.held, near: col.near, worst: SURVEY[S.set].worst, gaps: SURVEY[S.set].gaps.length, target: target(), b: axisB() };
     },
     at: (t) => { const s = pose(t); return { p: s.p, polar: s.polar / DEG, bTurns: s.bTurns }; },
