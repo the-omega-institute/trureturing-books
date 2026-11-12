@@ -1,28 +1,31 @@
-"""第十八章地图：质量连起两个手性分量、绕小方格一圈、规范变换拧不动回路相位。
-Chapter 18 at a glance: the mass links the two chirality components, a walk once round a small
-square, and a gauge change that cannot move the loop phase.
+"""第十八章地图：质量连起两个手性分量、生成树的一条弦围出一个基本回路、规范变换拧不动回路相位。
+Chapter 18 at a glance: the mass links the two chirality components, a chord of a spanning tree closes a
+fundamental loop, and a gauge change that cannot move the loop phase.
 
 Panel I draws H = pZ + mX as a two-node graph: each component keeps its own diagonal term ±p, and
-the mass m is the only link between them. Panel II marks one plaquette 0 → 1 → 2 → 3 → 0 in a
-lattice. Panel III is the worked example: after the gauge g = (1, i, −1, −i) the edge phases read
+the mass m is the only link between them; the lower component is orange and striped. Panel II is a 3 × 3
+lattice with the spanning tree of the lattice page (every row and the left column, cyan): its 8 tree edges and
+4 chords give c = m + 1 − n = 4 (asserted); the chord in magenta closes the fundamental loop through the tree,
+shaded magenta. Panel III is the worked example: after the gauge g = (1, i, −1, −i) the edge phases read
 (i, i, i, −1) and the loop phase is still i (asserted).
 """
 
 import math
 
-from _ch18 import dial, gauge, loop_arrow, mid_arrow, square
+from _ch18 import dial, gauge, hatch_circle, loop_arrow, square, mid_arrow
 
 SIZE = (740, 270)
 WRAP = True
 ALT = {
-    "zh": "三栏。第一栏：上下两个圆点是二分量手性模型的两个分量，蓝色的上分量 Z = +1 与橙色的下分量 Z = −1；各自带一个绕回自身的小圈，标着 +p 与 −p；两点之间唯一的连线是双向箭头 m。"
-          "第二栏：一片方格格点中，有一个小方格涂成品红，四条边按 0 → 1 → 2 → 3 → 0 带着方向箭头，格内有一个逆时针的品红圆箭头，表示绕它走一圈。"
+    "zh": "三栏。第一栏：上下两个圆点是二分量手性模型的两个分量，蓝色的上分量 Z = +1 与橙色斜纹的下分量 Z = −1；各自带一个绕回自身的小圈，标着 +p 与 −p；两点之间唯一的连线是双向箭头 m。"
+          "第二栏：3 × 3 的格点上，青色的生成树是三行横边加最左一列；其余四条竖边是弦，三条画成灰色虚线，右上那一条是品红实线，它与树一起围出上面两格组成的品红长方形，里面一个逆时针的品红圆箭头；下方写着树边 8、弦 4 = m + 1 − n。"
           "第三栏：例题的单个方格，四个角上是紫色的规范指针 1、i、−1、−i，四条边中点是边相位指针，读作 i、i、i、−1；方格中心品红的回路指针指向 i。",
     "en": "Three panels. Panel I: two dots stacked vertically are the two components of the two-component chiral model, the "
-          "blue upper one Z = +1 and the orange lower one Z = −1; each has a small loop back to itself, marked +p and −p, and "
-          "the only link between them is a double arrow marked m. Panel II: in a patch of lattice, one small square is shaded "
-          "magenta; its four edges carry direction arrows 0 → 1 → 2 → 3 → 0, and a magenta counter-clockwise circular arrow "
-          "inside says: walk once around it. Panel III: the single square of the worked example; violet gauge pointers at the "
+          "blue upper one Z = +1 and the orange, striped lower one Z = −1; each has a small loop back to itself, marked +p and −p, and "
+          "the only link between them is a double arrow marked m. Panel II: a 3 × 3 lattice whose cyan spanning tree is the three "
+          "rows and the left column; the other four vertical edges are chords, three drawn grey and dashed, and the top-right "
+          "one solid magenta, which together with the tree closes the magenta rectangle of the top two cells, with a magenta "
+          "counter-clockwise circular arrow inside; beneath: tree 8, chords 4 = m + 1 − n. Panel III: the single square of the worked example; violet gauge pointers at the "
           "corners read 1, i, −1, −i, the edge-phase pointers at the edge midpoints read i, i, i, −1, and the magenta loop "
           "pointer at the centre points to i.",
 }
@@ -40,7 +43,9 @@ def draw(fig):
     x, y1, y2, r = 104, 86, 214, 23
     for y, role, sign, zh, en in ((y1, "blue", "+", "上分量", "upper"), (y2, "orange", "−", "下分量", "lower")):
         one.circle(x, y, r, color=role, fill=role, fill_opacity=0.22, width=2.2)
-        one.text(x, y, f"*Z* = {sign}1", size=13, color=role, anchor="middle", middle=True)
+        if role == "orange":                                                # striped: never the solid amber of "now"
+            hatch_circle(one, x, y, r - 1, "orange", gap=8.0, width=1.1)
+        one.text(x, y, f"*Z* = {sign}1", size=13, color=role, anchor="middle", middle=True, halo=True)
         cx = x + r + 16
         pts = [(cx + 14 * math.cos(math.radians(a)), y - 12 * math.sin(math.radians(a))) for a in range(150, 150 - 290, -10)]
         one.curve_arrow(pts, role, 1.8, head=7)
@@ -49,31 +54,52 @@ def draw(fig):
     one.arrow(x, y1 + r + 4, x, y2 - r - 4, "ink", 2.4, both=True)
     one.text(x + 10, (y1 + y2) / 2 + 6, "*m*", size=17, color="ink", weight=600)
 
-    # ---- II: once around a small square
-    title(two, "II　绕小方格一圈", "II  once round a square")
+    # ---- II: a spanning tree, its chords, and the fundamental loop of one chord
+    title(two, "II　一条弦围出一个回路", "II  a chord closes a loop")
     h = 66
-    xs = [19 + h * k for k in range(4)]
-    ys = [54 + h * k for k in range(4)]
-    for yy in ys:
-        two.line(xs[0] - 8, yy, xs[-1] + 8, yy, "faint", 1.3)
-    for xx in xs:
-        two.line(xx, ys[0] - 8, xx, ys[-1] + 8, "faint", 1.3)
-    for xx in xs:
-        for yy in ys:
-            two.dot(xx, yy, 2.6, "dim")
-    cx, cy = (xs[1] + xs[2]) / 2, (ys[1] + ys[2]) / 2
-    corners = square(cx, cy, h / 2)
-    two.polygon(corners, "area", fill_opacity=0.20)
-    for k in range(4):
-        p, q = corners[k], corners[(k + 1) % 4]
-        two.line(p[0], p[1], q[0], q[1], "ink", 2.4)
-        mid_arrow(two, p, q, "ink", 9)
-    for k, (px, py) in enumerate(corners):
-        two.dot(px, py, 4, "ink", ring="bg")
-        dx = -9 if k in (0, 3) else 9
-        dy = 16 if k in (0, 1) else -8
-        two.text(px + dx, py + dy, str(k), size=14, color="dim", anchor="end" if dx < 0 else "start", halo=True)
-    loop_arrow(two, cx, cy, 17, "area", width=2.4, head=9)
+    xs = [52 + h * k for k in range(3)]
+    ys = [64 + h * k for k in range(3)]
+    V = [(i, j) for i in range(3) for j in range(3)]                        # (column, row), row 0 on top
+    E = [((i, j), (i + 1, j)) for j in range(3) for i in range(2)] + [((i, j), (i, j + 1)) for i in range(3) for j in range(2)]
+    tree = [e for e in E if e[0][1] == e[1][1]] + [e for e in E if e[0][0] == e[1][0] == 0]   # every row and the left column
+    chords = [e for e in E if e not in tree]
+    n, m = len(V), len(E)
+    assert len(tree) == n - 1 and len(chords) == m + 1 - n == 4
+
+    def tree_path(a, b):                                                    # the unique path in the tree
+        adj = {v: [] for v in V}
+        for p, q in tree:
+            adj[p].append(q); adj[q].append(p)
+        prev, todo = {a: None}, [a]
+        while todo:
+            v = todo.pop(0)
+            for w in adj[v]:
+                if w not in prev:
+                    prev[w] = v; todo.append(w)
+        path, v = [], b
+        while v is not None:
+            path.append(v); v = prev[v]
+        return path[::-1]
+
+    chord = ((2, 0), (2, 1))
+    cycle = tree_path(chord[1], chord[0])                                   # back through the tree, then across the chord
+    assert cycle == [(2, 1), (1, 1), (0, 1), (0, 0), (1, 0), (2, 0)]
+    P = lambda v: (xs[v[0]], ys[v[1]])
+    two.polygon([P(v) for v in cycle], "area", fill_opacity=0.20)
+    for e in chords:
+        (x1, y1), (x2, y2) = P(e[0]), P(e[1])
+        if e == chord:
+            two.line(x1, y1, x2, y2, "area", 3.0)
+        else:
+            two.line(x1, y1, x2, y2, "dim", 1.6, dash="4 4")
+    for e in tree:
+        (x1, y1), (x2, y2) = P(e[0]), P(e[1])
+        two.line(x1, y1, x2, y2, "line", 3.0)
+    for v in V:
+        two.dot(*P(v), 4, "ink", ring="bg")
+    loop_arrow(two, (xs[0] + xs[1]) / 2, (ys[0] + ys[1]) / 2, 14, "area", width=2.2, head=8)
+    two.text(two.width / 2, 250, two.t("树边 8 · 弦 4 = *m* + 1 − *n*", "tree 8 · chords 4 = *m* + 1 − *n*"),
+             size=13, color="dim", anchor="middle")
 
     # ---- III: a gauge change spreads the phase round the square, the loop phase stays i
     title(three, "III　回路相位拧不动", "III  the loop phase stays")

@@ -41,3 +41,41 @@ def loop_arrow(cv, cx, cy, r, color="area", a0=110, sweep=300, width=2.0, head=8
 def gauge(u, g, edges):
     """u′(e) = g(t(e)) · u(e) · g(s(e))⁻¹ for edges given as (s, t)."""
     return [g[t] * ue / g[s] for ue, (s, t) in zip(u, edges)]
+
+
+def hatch_rect(cv, x, y, w, h, color="orange", gap=6.0, width=1.6):
+    """Diagonal stripes (45°, rising to the right) filling the rectangle [x, x + w] × [y, y + h].
+
+    The lower chirality component is drawn striped as well as orange, so that it never reads as the
+    solid amber reserved for "now".
+    """
+    c = -h
+    while c < w:
+        # the line u − v = c in local coordinates (u to the right, v upward from the bottom edge)
+        pts = []
+        for u in (0.0, w):
+            v = u - c
+            if 0 <= v <= h:
+                pts.append((u, v))
+        for v in (0.0, h):
+            u = v + c
+            if 0 <= u <= w:
+                pts.append((u, v))
+        pts = sorted(set(pts))
+        if len(pts) >= 2 and (pts[0] != pts[-1]):
+            (u1, v1), (u2, v2) = pts[0], pts[-1]
+            cv.line(x + u1, y + h - v1, x + u2, y + h - v2, color, width)
+        c += gap
+
+
+def hatch_circle(cv, x, y, r, color="orange", gap=6.0, width=1.6):
+    """Diagonal stripes (45°, rising to the right) filling the disc of radius r about (x, y)."""
+    k = -r * math.sqrt(2) + gap / 2
+    while k < r * math.sqrt(2):
+        # the line through the disc at signed distance k from the centre, direction (1, 1)/√2 (up-right)
+        half = math.sqrt(max(r * r - k * k, 0.0)) - 1.0
+        if half > 1:
+            mx, my = x + k / math.sqrt(2), y + k / math.sqrt(2)
+            d = half / math.sqrt(2)
+            cv.line(mx - d, my + d, mx + d, my - d, color, width)
+        k += gap
