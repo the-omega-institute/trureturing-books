@@ -64,6 +64,67 @@ check('a full list (N = 10) refuses another row and says so', (await state()).N 
 await pick('absorb'); s = await seek(7);
 check('ABSORB card: seven rows, the seventh is the escaped string of the first six', s.N === 7 && s.rows[6].slice(0, 6) === flipped(s.rows.slice(0, 6).map((r) => r.slice(0, 6))) && !s.rows.includes(s.d));
 
+/* ---------- fibres: the four-address catalog ---------- */
+// independent model: the four maps {0,1} → {0,1} as functions, blocks and pairs counted by brute force
+const MAPS = [() => 0, (x) => x, (x) => 1 - x, () => 1];
+const fibreModel = (lat) => {
+  const g = MAPS.map((D, a) => (D(lat[a]) === 0 ? 1 : 0)), pairs = [];
+  for (let a = 0; a < 4; a++) for (let b = 0; b < 4; b++) if (a < b && lat[a] === lat[b] && g[a] !== g[b]) pairs.push(`${a}${b}`);
+  const blocks = (key) => new Set([0, 1, 2, 3].map(key)).size;
+  return { g: g.join(''), pairs, before: blocks((a) => lat[a]), after: blocks((a) => lat[a] * 2 + g[a]) };
+};
+await pick('split'); s = await seek(6);
+check('SPLIT card: latent (0,0,0,1), g = 1100, the pair (a₁, a₂) is split, 2 → 3 blocks', s.scene === 'fiber' && s.lat === '0001' && s.fiber.g.join('') === '1100'
+  && s.fiber.pairs.length === 1 && s.fiber.pairs[0].join('') === '12' && s.fiber.before === 2 && s.fiber.after === 3 && s.step === 6);
+let fOk = true, fMin = 9;
+for (let code = 0; code < 16; code++) {
+  const want = [3, 2, 1, 0].map((i) => (code >> i) & 1);
+  for (let guard = 0; guard < 17 && (await state()).lat !== want.join(''); guard++) { await page.click('#nextLat'); await settle(page); }
+  s = await state(); const m = fibreModel(want);
+  fOk = fOk && s.lat === want.join('') && s.fiber.g.join('') === m.g && s.fiber.pairs.map((p) => p.join('')).join() === m.pairs.join() && s.fiber.before === m.before && s.fiber.after === m.after;
+  fMin = Math.min(fMin, m.pairs.length);
+  fOk = fOk && m.after > m.before;
+}
+check('for all 16 latent maps the page agrees with a brute-force count of g, deficit pairs and blocks', fOk);
+check('every latent map leaves at least one separated pair and strictly more blocks after the join', fMin >= 1);
+check('the fibre scene leaves the card when the latents change', s.preset === null);
+const latBefore = s.lat; await page.click('#latChips [data-a="3"]'); s = await state();
+check('a latent chip toggles that address and nothing else', s.lat.slice(0, 3) === latBefore.slice(0, 3) && s.lat[3] !== latBefore[3]);
+await pick('split'); s = await seek(6);
+const nodeAt = await page.evaluate(() => window.ESCAPE_DEBUG.node(0));
+await page.mouse.click(nodeAt[0], nodeAt[1]); s = await state();
+check('clicking an address on the stage toggles its latent coordinate', s.lat === '1001' && s.fiber.pairs.length >= 1);
+s = await seek(2);
+check('the rail computes g one address at a time', (await page.textContent('#hudBig')).includes('3'));
+
+/* ---------- pointer: the finite record overlap ---------- */
+const ptrModel = (N, shape, l) => {
+  const raw = []; for (let k = 0; k <= N; k++) raw.push(shape === 'flat' ? 1 : shape === 'tri' ? Math.min(k + 1, N + 1 - k) : Math.sin(Math.PI * (k + 1) / (N + 2)));
+  let n2 = 0; for (const x of raw) n2 += x * x; const c = raw.map((x) => x / Math.sqrt(n2));
+  let gsum = 0; for (let i = 0; i <= N; i++) { const j = i - l; if (j >= 0) gsum += c[i] * c[j]; }
+  return { gamma: Math.abs(gsum), bound: Math.cos(Math.PI / (Math.trunc(N / l) + 2)) };
+};
+await pick('pointer'); s = await state();
+const p0 = ptrModel(8, 'sine', 1);
+check('POINTER card: N = 8, sine shape, ℓ = 1, |γ| = cos(π/10) = 0.9511', s.scene === 'ptr' && s.pN === 8 && s.shape === 'sine' && s.ell === 1
+  && Math.abs(s.gammaAbs - p0.gamma) < 1e-12 && Math.abs(s.gammaAbs - Math.cos(Math.PI / 10)) < 1e-12 && Math.abs(s.bound - p0.bound) < 1e-15);
+let pOk = true, pMax = 0, eqOk = true;
+for (const shape of ['sine', 'tri', 'flat']) {
+  await page.click(`#shapeChips [data-shape="${shape}"]`); await settle(page);
+  for (const N of [2, 3, 5, 8, 13, 16]) {
+    await setRange('plen', N);
+    for (const l of [1, 2, 3, N]) {
+      if (l > N) continue; s = await seek(l - 1); const m = ptrModel(N, shape, l);
+      pOk = pOk && s.ell === l && Math.abs(s.gammaAbs - m.gamma) < 1e-12 && Math.abs(s.bound - m.bound) < 1e-12 && s.gammaAbs <= s.bound + 1e-12 && s.bound < 1;
+      pMax = Math.max(pMax, s.gammaAbs - s.bound);
+      if (shape === 'sine' && l === 1) eqOk = eqOk && Math.abs(s.gammaAbs - Math.cos(Math.PI / (N + 2))) < 1e-12;
+    }
+  }
+}
+check('three shapes, six lengths, four shifts: the overlap matches an independent sum and never exceeds cos(π/(⌊N/ℓ⌋ + 2)) < 1', pOk, `max excess ${pMax}`);
+check('the sine-shaped pointer meets the bound exactly at ℓ = 1', eqOk);
+check('the key readout says the overlap stays below 1', (await page.textContent('#roKey')).includes('< 1'));
+
 /* ---------- polygon and Taylor ---------- */
 await pick('zu'); s = await state();
 check('ZU-24576: the last step has 24576 sides', s.scene === 'poly' && s.step === 12 && s.n === 24576);
@@ -95,8 +156,8 @@ await setRange('tpoint', 2.5);
 check('the Taylor angle slider drives the second plot', (await page.textContent('#pBMeta')).includes('2.50'));
 
 /* ---------- cosine ---------- */
-await pick('dottie'); s = await seek(0);
-check('COSINE card starts the iteration at x₀ = 0 with the following camera', s.scene === 'cos' && s.x0 === 0 && s.zoom === 'follow');
+await scene('cos'); await setRange('x0', 0); await page.click('#zoomChips [data-zoom="follow"]'); s = await seek(0);
+check('the cosine scene starts the iteration at x₀ = 0 with the following camera', s.scene === 'cos' && s.x0 === 0 && s.zoom === 'follow');
 let x = 0, orbitErr = 0, positive = true, shrink = true, lastRes = Infinity;
 for (let k = 0; k <= 40; k++) {
   s = await seek(k); orbitErr = Math.max(orbitErr, Math.abs(s.xk - x));
@@ -106,8 +167,8 @@ check('the orbit matches an independent iteration for 40 steps', orbitErr < 1e-1
 check('the residual |cos xₖ − xₖ| shrinks at every step and is still positive at step 40', positive && shrink, `last ${lastRes}`);
 check('x* is the fixed point to machine precision', Math.abs(Math.cos(s.xstar) - s.xstar) < 1e-15 && Math.abs(s.xstar - 0.7390851332151607) < 1e-15);
 check('the error factor readout is near sin x*', Math.abs(parseFloat(await page.textContent('#ro3')) - Math.sin(s.xstar)) < 0.01);
-await pick('far'); s = await state();
-check('FAR-START uses x₀ = 3 and the whole-path camera', s.x0 === 3 && s.zoom === 'whole');
+await setRange('x0', 3); await page.click('#zoomChips [data-zoom="whole"]'); s = await state();
+check('a far start x₀ = 3 with the whole-path camera', s.x0 === 3 && s.zoom === 'whole');
 s = await seek(40);
 check('from x₀ = 3 the orbit heads for the same x*', Math.abs(s.xk - s.xstar) < 1e-6 && Math.abs(s.xk - s.xstar) > 0);
 await page.click('#zoomChips [data-zoom="follow"]'); check('the camera chips switch the view', (await state()).zoom === 'follow');
@@ -133,7 +194,7 @@ check('the key readout names the least prime factor', (await page.textContent('#
 
 /* ---------- scenes, rail, keyboard ---------- */
 await page.locator('body').click({ position: { x: 5, y: 5 } });
-for (const [key, sc] of [['2', 'poly'], ['3', 'cos'], ['4', 'prime'], ['1', 'diag']]) { await page.keyboard.press(key); check(`key ${key} opens the ${sc} scene`, (await state()).scene === sc); }
+for (const [key, sc] of [['2', 'fiber'], ['3', 'poly'], ['4', 'ptr'], ['5', 'cos'], ['6', 'prime'], ['1', 'diag']]) { await page.keyboard.press(key); check(`key ${key} opens the ${sc} scene`, (await state()).scene === sc); }
 const vis = await page.evaluate(() => [...document.querySelectorAll('[data-scenes]')].map((el) => [el.dataset.scenes, !el.hidden]));
 check('only the controls and evidence of the current scene are shown', vis.every(([sc, shown]) => shown === sc.split(' ').includes('diag')));
 await scene('prime'); s = await seek(3);
