@@ -123,6 +123,46 @@ for (const a of [0, 1, 5, 17, 41, 62, 63]) {
 }
 check('scanning to cell k (address k − 1) takes exactly k steps: not at k − 1, yes at k', scanOk, scanWhy);
 
+// the scan note compares the two schedules as they are: the list walk reaches address a at scanCount(a), the heap
+// descent reaches its leaf at TREE.depth; earlier, equal and later are decided here, for all 64 addresses and every
+// branch count (the scan note does not depend on the branches), at the end of the scan's own rail
+const relOf = (a) => (a === NCELLS - 1 ? 'last' : scanCount(a) < TREE.depth ? 'early' : scanCount(a) === TREE.depth ? 'tie' : 'late');
+const NOTE_RE = {
+  zh: { early: (k, d) => [`只要 ${k} 步`, `比路由树的 ${d} 层还早`, `最坏要 N = ${NCELLS} 步`], tie: (k, d) => [`要 ${k} 步`, `与路由树的 ${d} 层同时到达`], late: (k, d) => [`要 ${k} 步`, `在第 ${d} 步就已走到叶子`, `早 ${k - d} 步`], last: () => [`N = ${NCELLS} 步`] },
+  en: { early: (k, d) => [`in ${k} steps`, `before the tree's ${d} levels`, `up to N = ${NCELLS}`], tie: (k, d) => [`in ${k} steps`, `at the same step as the tree's ${d} levels`], late: (k, d) => [`takes ${k} steps`, `leaf at step ${d}`, `${k - d} steps earlier`], last: () => [`N = ${NCELLS} steps`] }
+};
+const FORBID = { zh: ['早已走到叶子'], en: ['long reached its leaf'] };
+const noteFor = async (pg, a, k) => {
+  await pg.evaluate(([v, kk]) => { const D = window.POINTER_DEBUG; D.setK(kk); D.scene('scan'); D.setAddr(v); }, [a, k]);
+  await settle(pg);
+  return { text: await pg.textContent('#roNote'), st: await pg.evaluate(() => window.POINTER_DEBUG.state) };
+};
+let schedOk = true, schedWhy = '';
+const counts = { early: 0, tie: 0, late: 0, last: 0 };
+for (let a = 0; a < NCELLS; a++) {
+  const kBr = [1, 2, 4, 8][a % 4], { text, st } = await noteFor(page, a, kBr), rel = relOf(a), k = scanCount(a);
+  counts[rel]++;
+  const ok = NOTE_RE.zh[rel](k, TREE.depth).every((w) => text.includes(w)) && !FORBID.zh.some((w) => text.includes(w))
+    && st.scanSteps === k && Math.abs(st.max - k) < 1e-9 && st.hit && st.levels === Math.min(k, TREE.depth)
+    && (rel === 'early' ? st.levels < TREE.depth : st.levels === TREE.depth);
+  if (!ok) { schedOk = false; schedWhy = schedWhy || `a=${a} (${rel}, branches ${kBr}): ${text}`; }
+}
+check('scan note, all 64 addresses (branches 1/2/4/8 in turn): addresses 0–4 the scan is first, 5 a tie, 6–62 the tree is first by k − 6 steps, 63 the whole table; rail ends at the scan step', schedOk && counts.early === 5 && counts.tie === 1 && counts.late === 57 && counts.last === 1, schedWhy || JSON.stringify(counts));
+{
+  const enPage = await T.goto(BOOK, ID, '?lang=en', await T.newPage());
+  await settle(enPage);
+  let langOk = true, langWhy = '';
+  for (const a of [0, 3, 4, 5, 6, 41, 62, 63]) {
+    for (const [pg, lang] of [[page, 'zh'], [enPage, 'en']]) {
+      const { text } = await noteFor(pg, a, 1), rel = relOf(a), k = scanCount(a);
+      if (!NOTE_RE[lang][rel](k, TREE.depth).every((w) => text.includes(w)) || FORBID[lang].some((w) => text.includes(w)) || (lang === 'en' && /[一-鿿]/.test(text))) { langOk = false; langWhy = langWhy || `${lang} a=${a}: ${text}`; }
+    }
+  }
+  check('scan note in both languages for early (0, 3, 4), equal (5) and later (6, 41, 62, 63) addresses names the true steps and never says the tree is always first', langOk, langWhy);
+  await enPage.close();
+}
+await page.evaluate(() => window.POINTER_DEBUG.setK(1));
+
 // the address slider and clicking a cell
 await page.evaluate(() => { const el = document.getElementById('addr'); el.value = '12'; el.dispatchEvent(new Event('input', { bubbles: true })); });
 s = await state();

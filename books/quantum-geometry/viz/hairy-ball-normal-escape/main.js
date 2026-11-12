@@ -1,5 +1,6 @@
 /* ORTHO//HAIRY · 毛球、环面与法向逃逸 · Hairy balls, tori and the normal escape
-   One stage, four scenes, one rail each:
+   One lit-solid stage (kit.solid): an opaque ball, an opaque torus or an opaque flat-faced dome, which hides whatever
+   lies on its far side; four scenes, one rail each:
      sphere  the zonal field (−y, x, 0) with a +1 zero at each pole, deformed through the pull-back of the plane field
              f(u) = e^{iψ}(a − u)/(1 + a) under stereographic projection u = (x + iy)/(1 − z): the second zero climbs a
              meridian from the South Pole and merges at the North Pole into the dipole field
@@ -100,20 +101,23 @@
   const torusPoint = (th, ph, r) => [(RBIG + r * Math.cos(th)) * Math.cos(ph), (RBIG + r * Math.cos(th)) * Math.sin(ph), r * Math.sin(th)];
   const torusNormal = (th, ph) => [Math.cos(th) * Math.cos(ph), Math.cos(th) * Math.sin(ph), Math.sin(th)];
   const ePhi = (ph) => [-Math.sin(ph), Math.cos(ph), 0];
-  const NPHI = 36, NTH = 14;
+  const NPHI = 36, NTH = 14;    // arrow sites: NPHI round the big circle, NTH round the tube
   const PHI0 = -2.95;           // where the amber point sets out (in front for the opening view)
-  /** V − E + F of the drawn quad mesh (vertices, unique edges, faces). */
-  function torusEuler() {
-    const id = (i, j) => ((i + NPHI) % NPHI) * NTH + (j + NTH) % NTH, edges = new Set();
+  /** The lit torus: cells round the big circle (φ) and round the tube (θ), and a grid line every [kφ, kθ] cells. */
+  const TORUS_MESH = { nu: 72, nv: 32, every: [6, 4] };
+  /** V − E + F of a closed quad mesh of nPhi × nTh cells on the torus (vertices, unique edges, faces). */
+  function torusEuler(nPhi, nTh) {
+    const id = (i, j) => ((i + nPhi) % nPhi) * nTh + (j + nTh) % nTh, edges = new Set();
     let F = 0;
-    for (let i = 0; i < NPHI; i++) for (let j = 0; j < NTH; j++) {
+    for (let i = 0; i < nPhi; i++) for (let j = 0; j < nTh; j++) {
       const a = id(i, j), b = id(i + 1, j), c = id(i + 1, j + 1), d = id(i, j + 1);
       for (const [u, v] of [[a, b], [b, c], [c, d], [d, a]]) edges.add(u < v ? `${u}-${v}` : `${v}-${u}`);
       F++;
     }
-    return { V: NPHI * NTH, E: edges.size, F };
+    return { V: nPhi * nTh, E: edges.size, F };
   }
-  const TORUS_EULER = torusEuler();
+  /** The grid drawn on the torus: 12 circles round the tube by 8 round the big circle. */
+  const TORUS_EULER = torusEuler(TORUS_MESH.nu / TORUS_MESH.every[0], TORUS_MESH.nv / TORUS_MESH.every[1]);
   /** Shortest ê_φ over a fine grid (it is a unit vector everywhere). */
   function torusMin() { let m = Infinity; for (let i = 0; i < 360; i++) m = Math.min(m, v3.len(ePhi(TAU * i / 360))); return m; }
   const TORUS_MIN = torusMin();
@@ -155,108 +159,117 @@
   }
   const nuOf = (t) => 1 + clamp(Math.round(t), 0, NU_MAX - 1);
 
-  /* ---------- drawing ---------- */
+  /* ---------- drawing ----------
+     The ball, the torus and the dome are opaque lit solids and hide what lies behind them. Every mark that belongs to
+     the surface is lifted a hair above it (LIFT, as a multiple of the radius of the ball; TORUS_LIFT along the
+     torus' normal), so that it sits cleanly on the lit faces while the body itself hides the far side. */
+  const LIFT = { meridian: 1.008, loop: 1.012, arrow: 1.014, ring: 1.016, bead: 1.02 };
+  const TORUS_LIFT = { arrow: 0.015, trail: 0.016 };
   const ARROW = 0.15;           // drawn length of a unit arrow
+  /** The unit ball, lit and opaque (u: angle from N, v: longitude), with a faint cyan grid of parallels and meridians. */
+  function ball(st, gridAlpha) {
+    st.surface('sphere', (u, v) => v3.sph(u, v), { u: [0, PI], v: [0, TAU], nu: 64, nv: 36, color: P.dim, grid: { every: [8, 6], color: P.cyan, alpha: gridAlpha }, id: 'sphere' });
+  }
+  /** The arrows of F at the sites facing the viewer (the ball hides the rest; skipping the far side keeps their tips
+      from poking out at the rim); with s.normal, the part of each arrow along the outward normal in magenta. */
   function fieldArrows(st, F, s) {
     const D = st.facing();
     for (const x of SITES) {
+      if (v3.dot(x, D) < -0.05) continue;
       const w = F(x), n = v3.len(w);
       if (n < 1e-4 || (s.skip && s.skip.some((k) => v3.dot(x, k.q) > Math.cos(k.rho * 1.2)))) continue;
-      const len = Math.min(0.26, ARROW * Math.sqrt(n)), front = v3.dot(x, D) >= 0, b = v3.add(x, v3.scale(w, len / n));
-      st.arrow(x, b, { color: s.color || P.cyan, width: front ? 1.4 : 1, alpha: front ? 0.9 : 0.12, headSize: 5, fade: false });
-      if (s.normal && front) {
+      const len = Math.min(0.26, ARROW * Math.sqrt(n)), a = v3.scale(x, LIFT.arrow);
+      st.arrow(a, v3.add(a, v3.scale(w, len / n)), { color: P.cyan, width: 1.4, headSize: 5 });
+      if (s.normal) {
         const k = v3.dot(w, x) * len / n;
-        if (k > 0.004) st.line(x, v3.add(x, v3.scale(x, k)), { color: P.magenta, width: 1.7, alpha: 0.75, fade: false });
+        if (k > 0.004) st.line([a, v3.add(a, v3.scale(x, k))], { color: P.magenta, width: 1.7, alpha: 0.85 });
       }
     }
   }
   /** A small loop round the zero q of F (angular radius rho) with the field's direction drawn at 18 points on it. */
   function indexLoop(st, F, q, rho) {
-    const e1 = v3.unit(v3.cross(q, Math.abs(q[2]) < 0.9 ? NP : [1, 0, 0])), e2 = v3.cross(q, e1), pts = [], front = v3.dot(q, st.facing()) >= 0;
+    const e1 = v3.unit(v3.cross(q, Math.abs(q[2]) < 0.9 ? NP : [1, 0, 0])), e2 = v3.cross(q, e1), pts = [];
     for (let i = 0; i <= 72; i++) { const a = TAU * i / 72; pts.push(v3.add(v3.scale(q, Math.cos(rho)), v3.scale(v3.add(v3.scale(e1, Math.cos(a)), v3.scale(e2, Math.sin(a))), Math.sin(rho)))); }
-    st.path(pts, { color: P.magenta, width: 1.2, alpha: front ? 0.75 : 0.3, fade: false });
+    const up = pts.map((x) => v3.scale(x, LIFT.loop));
+    st.line(up, { color: P.magenta, width: 1.4, alpha: 0.9 });
     for (let i = 0; i < 18; i++) {
       const x = pts[i * 4], w = F(x), n = v3.len(w);
       if (n < 1e-9) continue;
-      st.arrow(x, v3.add(x, v3.scale(w, Math.min(0.17, rho * 0.55) / n)), { color: P.cyan, width: front ? 2.2 : 1.2, alpha: front ? 1 : 0.35, headSize: 6, fade: false });
+      st.arrow(up[i * 4], v3.add(up[i * 4], v3.scale(w, Math.min(0.17, rho * 0.55) / n)), { color: P.cyan, width: 2.2, headSize: 6 });
     }
-    return pts.reduce((b, x) => (st.p(x)[0] > st.p(b)[0] ? x : b), pts[0]);   // rightmost point: where the label goes
+    return up.reduce((b, x) => (st.p(x)[0] > st.p(b)[0] ? x : b), up[0]);   // rightmost point: where the label goes
   }
-  function zeroRing(st, p, key, label, s) {
-    st.dot(p, 11, P.magenta, { ring: true, width: 2.6, fade: false, alpha: st.p(p)[2] >= 0 ? 1 : 0.45 });
-    st.dot(p, 16, P.magenta, { ring: true, width: 1, fade: false, alpha: st.p(p)[2] >= 0 ? 0.45 : 0.2 });
-    if (s && s.amber) st.dot(p, 4.5, P.amber, { glow: 12, fade: false });
-    if (label) st.tag(key, p, label, 'raw c-mg', { dx: (s && s.dx) || 40, dy: (s && s.dy) || -14 });
+  /** A zero on the ball: a magenta ring lying on the surface; the zero that can be dragged also carries an amber bead. */
+  function zeroMark(st, p, name, drag) {
+    st.ring(v3.scale(p, LIFT.ring), { r: 11, color: P.magenta, normal: p, key: 'zero' + name });
+    if (drag) st.bead(v3.scale(p, LIFT.bead), { r: 5.5, color: P.amber, glow: 1, key: 'moving' });
   }
 
   function drawSphere(st) {
     const t = clock.t, F = (x) => merged(x, t);
-    st.sphere(1, { lat: [0], lon: 0, shade: 0.08, alpha: 0.35 });
-    st.arc(SP, [1, 0, 0], { color: P.dim, width: 1.1, dash: [3, 4], alpha: 0.6 });
-    st.arc([1, 0, 0], NP, { color: P.dim, width: 1.1, dash: [3, 4], alpha: 0.6 });
+    ball(st, 0.25);
+    // the meridian the second zero climbs (longitude 0, from S through +X to N)
+    const mer = []; for (let i = 0; i <= 96; i++) mer.push(v3.scale(v3.sph(PI * i / 96, 0), LIFT.meridian));
+    st.line(mer, { color: P.ink, width: 1.1, dash: [3, 4], alpha: 0.5 });
     const Z = sphereZeros(t), m = movingZero(t), rho = Math.min(0.4, (m ? Math.acos(clamp(m[2], -1, 1)) : PI) * 0.42);
     fieldArrows(st, F, { skip: rho > 0.03 ? Z.map((z) => ({ q: z.p, rho })) : null });
     for (const z of Z) {
-      const lab = `${z.index > 0 ? '+' : ''}${z.index}`, at = rho > 0.03 ? indexLoop(st, F, z.p, rho) : z.p;
-      zeroRing(st, z.p, null, null, { amber: z.name !== 'N' });
+      const lab = `${z.index > 0 ? '+' : ''}${z.index}`, at = rho > 0.03 ? indexLoop(st, F, z.p, rho) : v3.scale(z.p, LIFT.ring);
+      zeroMark(st, z.p, z.name, z.name !== 'N');
       st.tag(z.name === 'N' ? 'zN' : 'zM', at, z.name === 'N' ? L(`北极 · 指标 ${lab}`, `North Pole · index ${lab}`) : L(`拖我 · 指标 ${lab}`, `drag me · index ${lab}`), 'raw c-mg', { dx: 96, dy: z.name === 'N' ? -10 : 10 });
     }
     return Z;
   }
 
   function drawTorus(st) {
-    const r = S.tube, D = st.facing(), ph0 = PHI0 + TAU * clock.t, th0 = PI / 3;
-    for (let i = 0; i < NPHI; i++) {
-      const ph = TAU * i / NPHI, pts = []; for (let j = 0; j <= 48; j++) pts.push(torusPoint(TAU * j / 48, ph, r));
-      st.path(pts, { color: P.lineHot, width: 0.6, alpha: 0.35, back: 0.35 });
-    }
-    for (let j = 0; j < 8; j++) {
-      const th = TAU * j / 8, pts = []; for (let i = 0; i <= 96; i++) pts.push(torusPoint(th, TAU * i / 96, r));
-      st.path(pts, { color: P.lineHot, width: 0.6, alpha: 0.35, back: 0.35 });
-    }
+    const r = S.tube, D = st.facing(), ph0 = PHI0 + TAU * clock.t, th0 = 0.65;
+    st.surface('torus', (u, v) => torusPoint(v, u, r), { u: [0, TAU], v: [0, TAU], nu: TORUS_MESH.nu, nv: TORUS_MESH.nv, color: P.dim, grid: { every: TORUS_MESH.every, color: P.violet, alpha: 0.35 }, id: 'torus' });
     for (let i = 0; i < NPHI; i++) for (let j = 0; j < NTH; j++) {
-      const ph = TAU * (i + 0.5 * (j % 2)) / NPHI, th = TAU * j / NTH, x = torusPoint(th, ph, r), front = v3.dot(torusNormal(th, ph), D) >= 0;
-      st.arrow(x, v3.add(x, v3.scale(ePhi(ph), 0.1)), { color: P.cyan, width: front ? 1.4 : 1, alpha: front ? 0.9 : 0.2, headSize: 5, fade: false });
+      const ph = TAU * (i + 0.5 * (j % 2)) / NPHI, th = TAU * j / NTH, nrm = torusNormal(th, ph);
+      if (v3.dot(nrm, D) < -0.05) continue;
+      const p0 = v3.add(torusPoint(th, ph, r), v3.scale(nrm, TORUS_LIFT.arrow));
+      st.arrow(p0, v3.add(p0, v3.scale(ePhi(ph), 0.1)), { color: P.cyan, width: 1.4, headSize: 5 });
     }
-    const x = torusPoint(th0, ph0, r), trail = [];
-    for (let i = 0; i <= 96; i++) trail.push(torusPoint(th0, PHI0 + TAU * clock.t * i / 96, r));
-    if (clock.t > 1e-6) st.path(trail, { color: P.amber, width: 1.6, alpha: 0.6, back: 0.35 });
-    st.arrow(x, v3.add(x, v3.scale(ePhi(ph0), 0.26)), { color: P.amber, width: 2.6, glow: 10, headSize: 11, fade: false });
-    st.dot(x, 5.5, P.amber, { glow: 12, fade: false });
-    st.tag('tp', x, `|ê<sub>φ</sub>| = ${fix(v3.len(ePhi(ph0)), 2)}`, 'raw c-am', { dx: 54, dy: -18 });
+    // the amber point on the parallel θ = th0, lifted along the normal, and the way it has come round the big circle
+    const on = (ph) => v3.add(torusPoint(th0, ph, r), v3.scale(torusNormal(th0, ph), TORUS_LIFT.trail));
+    if (clock.t > 1e-3) {
+      const trail = []; for (let i = 0; i <= 96; i++) trail.push(on(PHI0 + TAU * clock.t * i / 96));
+      st.tube('trail', trail, { color: P.amber, width: 2.4, alpha: 0.7 });
+    }
+    const pNow = on(ph0);
+    st.arrow(pNow, v3.add(pNow, v3.scale(ePhi(ph0), 0.26)), { color: P.amber, width: 2.6, headSize: 11 });
+    st.bead(pNow, { r: 6, color: P.amber, glow: 1, key: 'torusNow' });
+    st.tag('tp', pNow, `|ê<sub>φ</sub>| = ${fix(v3.len(ePhi(ph0)), 2)}`, 'raw c-am', { dx: 54, dy: -18 });
   }
 
   function drawDefect(st) {
-    const M = dome(nuOf(clock.t)), D = st.facing(), maxD = 60 * DEG;
-    const faces = M.T.map((t) => { const c = v3.scale(v3.add(v3.add(M.V[t[0]], M.V[t[1]]), M.V[t[2]]), 1 / 3); return { t, c, f: v3.dot(c, D) }; });
-    faces.sort((a, b) => a.f - b.f);
-    for (const q of faces) {
-      const pts = q.t.map((i) => M.V[i]);
-      if (q.f < 0) st.poly(pts, { color: P.lineHot, strokeAlpha: 0.12, width: 0.6 });
-      else st.poly(pts, { fill: P.cyan, alpha: 0.05 + 0.07 * q.f, color: P.lineHot, strokeAlpha: 0.55, width: 0.8 });
-    }
-    M.V.forEach((v, i) => {
-      if (v3.dot(v, D) < -0.05) return;
-      const r = 1.6 + 8 * Math.sqrt(Math.max(0, M.defect[i]) / maxD);
-      st.dot(v, r, P.magenta, { alpha: 0.9, fade: false, glow: M.deg[i] === 5 ? 8 : 0 });
-    });
+    const M = dome(nuOf(clock.t)), lvl = M.nu - 1, rTop = lvl === 0 ? 6 : lvl === 1 ? 5 : 4;
+    st.poly('dome', { vertices: M.V, faces: M.T }, { color: P.cyan, edges: P.ink, id: 'dome' });
+    st.glass('ball', [0, 0, 0], 1.004, { color: P.cyan, alpha: 0.05, rim: 0.3 });
+    // a bead on every vertex (the dome hides those on its far side); its area is the vertex's defect, the largest defect
+    // of the frame taking the bead size of its level
+    M.V.forEach((v, i) => st.bead(v3.scale(v, 1.015), { r: rTop * Math.sqrt(Math.max(0, M.defect[i]) / M.max), color: P.magenta, glow: lvl < 2 ? 0.6 : 0.3, key: 'v' + i }));
     return M;
   }
 
   function drawEscape(st) {
-    const lam = clock.t, F = (x) => lifted(x, lam), m = liftMin(lam);
-    st.sphere(1, { lat: [0], lon: 0, shade: 0.08, alpha: 0.35 });
-    // the tangent plane at the North Pole, seen edge-on the arrow stands out of it
-    const h = 0.26, sq = [[-h, -h, 1], [h, -h, 1], [h, h, 1], [-h, h, 1]];
-    st.poly(sq, { fill: P.dim, alpha: 0.22, color: P.dim, strokeAlpha: 0.6, width: 1 });
-    if (m.v > 1e-9 && m.z > -1 + 1e-6 && m.z < 1 - 1e-6) st.circle([0, 0, m.z], NP, Math.sqrt(1 - m.z * m.z), { color: P.magenta, width: 1.4, dash: [4, 4], alpha: 0.7, back: 0.3 });
+    const lam = clock.t, F = (x) => lifted(x, lam), m = liftMin(lam), top = v3.scale(NP, LIFT.bead);
+    ball(st, 0.22);
+    // the tangent plane at the North Pole, just above the ball: the amber arrow stands out of it
+    const h = 0.26, zt = 1.018;
+    st.fan([[-h, -h, zt], [h, -h, zt], [h, h, zt], [-h, h, zt]], { fill: P.dim, alpha: 0.45, color: P.ink, width: 1, strokeAlpha: 0.5 });
+    if (m.v > 1e-9 && m.z > -1 + 1e-6 && m.z < 1 - 1e-6) {
+      const rr = Math.sqrt(1 - m.z * m.z), ring = [];
+      for (let i = 0; i <= 120; i++) { const a = TAU * i / 120; ring.push(v3.scale([rr * Math.cos(a), rr * Math.sin(a), m.z], LIFT.loop)); }
+      st.line(ring, { color: P.magenta, width: 1.4, dash: [4, 4], alpha: 0.85 });
+    }
     fieldArrows(st, F, { normal: true });
     const wN = F(NP);
-    if (v3.len(wN) > 1e-6) st.arrow(NP, v3.add(NP, v3.scale(wN, 0.42)), { color: P.amber, width: 2.8, glow: 12, headSize: 12, fade: false });
-    st.dot(NP, 5, P.amber, { glow: 12, fade: false });
-    st.tag('wN', NP, `|w̃(N)| = ${fix(v3.len(wN), 2)}`, 'raw c-am', { dx: 62, dy: -20 });
-    if (lam < 1e-9) zeroRing(st, NP, 'zE', L('零点 · 指标 +2', 'zero · index +2'), { dx: -70, dy: -26 });
-    if (lam > 1 - 1e-9) zeroRing(st, SP, 'zS', L('南极：又是零点', 'South Pole: a zero again'), { dx: 0, dy: 28 });
+    if (v3.len(wN) > 1e-6) st.arrow(top, v3.add(top, v3.scale(wN, 0.42)), { color: P.amber, width: 2.8, headSize: 12 });
+    st.bead(top, { r: 5, color: P.amber, glow: 1, key: 'north' });
+    st.tag('wN', top, `|w̃(N)| = ${fix(v3.len(wN), 2)}`, 'raw c-am', { dx: 62, dy: -20 });
+    if (lam < 1e-9) { zeroMark(st, NP, 'N'); st.tag('zE', v3.scale(NP, LIFT.ring), L('零点 · 指标 +2', 'zero · index +2'), 'raw c-mg', { dx: -70, dy: -26 }); }
+    if (lam > 1 - 1e-9) { zeroMark(st, SP, 'S'); st.tag('zS', v3.scale(SP, LIFT.ring), L('南极：又是零点', 'South Pole: a zero again'), 'raw c-mg', { dx: 0, dy: 28 }); }
     return m;
   }
 
@@ -433,13 +446,13 @@
   kit.keys({ 1: () => sceneChips.set('sphere'), 2: () => sceneChips.set('torus'), 3: () => sceneChips.set('defect'), 4: () => sceneChips.set('escape') });
   for (const id of ['now', 'play']) $(id).addEventListener('pointerdown', () => { S.stop = null; });
 
-  // direct manipulation: drag the moving zero along its meridian
-  const stage = kit.stage3($('stage'), {
+  // direct manipulation: drag the moving zero along its meridian (only where the ball does not hide its bead)
+  const stage = kit.solid($('stage'), {
     canvas: $('cv'), radius: 0.4, onChange: () => paint(),
     onPick: (ev, st) => {
       if (S.scene !== 'sphere') return false;
-      const m = movingZero(clock.t) || NP;
-      if (st.near(ev, m) > 22) return false;
+      const m = v3.scale(movingZero(clock.t) || NP, LIFT.bead);
+      if (!(st.near(ev, m) < 26) || st.occluded(m, 0.02)) return false;
       cards.mark(null); S.stop = null; clock.pause();
       return true;
     },

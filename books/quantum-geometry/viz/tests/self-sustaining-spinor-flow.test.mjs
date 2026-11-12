@@ -229,6 +229,105 @@ await page.keyboard.press('Space');
 check('Space plays', await until(page, () => { const d = window.CLOSURE_DEBUG.state; return d.playing && d.t > 0; }));
 await page.keyboard.press('Space'); check('Space pauses', !(await state()).playing);
 
+/* ---------- the rail's t is the turn parameter, not J's angle from J₀ ---------- */
+// For a unit axis n and ĵ₀ = J₀/ρ, Rodrigues' formula gives cos α = (n·ĵ₀)² + (1 − (n·ĵ₀)²) cos t, α the principal angle in
+// [0, π]. Checked here over every plane, several starting spinors (ψ₀ = √ρ, two random ones, a slanted aim), the ends of the
+// density range, μ = 0 and μ = 0.6, and t across [0, 720°] including the folds at 180°, 360° and 540°.
+const alphaLaw = (n, j0, t) => { const c = dot(n, j0); return Math.acos(Math.max(-1, Math.min(1, c * c + (1 - c * c) * Math.cos(t)))); };
+const setIn = (id, v) => page.evaluate(([i, x]) => { const el = document.getElementById(i); el.value = String(x); el.dispatchEvent(new Event('input', { bubbles: true })); }, [id, v]);
+const TS = [0, 37, 90, 179, 180, 200, 270, 359, 360, 450, 505, 540, 630, 719, 720].map((d) => d * DEG);
+await setIn('mu', 0); await settle(page);
+let lawWorst = 0, lawWhy = '', combos = 0, tiltSeen = 0;
+for (const plane of ['e23', 'e31', 'e12']) {
+  await page.click(`#planeChips [data-plane="${plane}"]`); await settle(page);
+  for (const start of ['one', 'rand', 'rand', 'aim']) {
+    if (start === 'one') await page.click('#psiOne');
+    else if (start === 'rand') await page.click('#psiRandom');
+    else { await page.click('[data-preset="weave"]'); await settle(page); await page.click(`#planeChips [data-plane="${plane}"]`); }   // WEAVE's slanted J₀, kept
+    await settle(page);
+    for (const rho of [0.2, 1.6]) {
+      await setIn('rho', rho); await settle(page);
+      for (const mu of [0, 0.6]) {
+        await setIn('mu', mu); await settle(page);
+        for (const t of TS) {
+          const st = await page.evaluate((v) => { const D = window.CLOSURE_DEBUG; D.seek(v); return D.state; }, t);
+          const j0 = unit(model(fromBlades(st.psi0)).J), n = AXIS[plane], want = alphaLaw(n, j0, t);
+          const Jt = model(fromBlades(st.psi)).J, direct = Math.acos(Math.max(-1, Math.min(1, dot(unit(Jt), j0))));
+          const err = Math.max(Math.abs(st.Jback - want), Math.abs(direct - want), Math.abs(norm(Jt) - rho));
+          if (err > lawWorst) { lawWorst = err; lawWhy = `${plane}/${start}/ρ${rho}/μ${mu}/t${(t / DEG).toFixed(0)}`; }
+          combos++;
+          if (Math.abs(dot(n, j0)) > 1e-3 && Math.abs(dot(n, j0)) < 1 - 1e-3) tiltSeen++;
+        }
+      }
+    }
+  }
+}
+await setIn('mu', 0); await settle(page);
+check(`J’s angle from J₀ follows cos α = (n·ĵ₀)² + (1 − (n·ĵ₀)²) cos t, principal in [0°, 180°], over ${combos} plane/start/ρ/μ/t combinations (${tiltSeen} tilted)`, lawWorst < 1e-6 && combos === 3 * 4 * 2 * 2 * TS.length && tiltSeen > 0, `max error ${lawWorst} at ${lawWhy}`);
+
+/** The free-play note at t, read in one language: the plane, ψ₀ = √ρ when asked ('one'). */
+const noteAt = async (pg, plane, aimVec, t) => {
+  await pg.click(`#planeChips [data-plane="${plane}"]`); await settle(pg);
+  if (aimVec === 'one') await pg.click('#psiOne');
+  await settle(pg);
+  const st = await pg.evaluate((v) => { const D = window.CLOSURE_DEBUG; D.seek(v); return D.state; }, t);
+  await settle(pg);
+  return { st, text: await pg.textContent('#roNote'), ro: await pg.textContent('#roJback') };
+};
+{
+  const enP = await T.goto(BOOK, ID, '?lang=en', await T.newPage()); await settle(enP);
+  let ok = true, why = '';
+  // parallel: ψ₀ = √ρ (J₀ = e₃) turning in e₁e₂ (axis e₃); perpendicular: the same start in e₂e₃ (axis e₁)
+  const CASES = [['e12', 90, 0], ['e12', 450, 0], ['e23', 90, 90], ['e23', 200, 160], ['e23', 270, 90], ['e23', 500, 140]];
+  for (const [pg, lang] of [[page, 'zh'], [enP, 'en']]) {
+    for (const [plane, deg, alphaDeg] of CASES) {
+      const { st, text, ro } = await noteAt(pg, plane, 'one', deg * DEG);
+      const lawDeg = alphaLaw(AXIS[plane], [0, 0, 1], deg * DEG) / DEG;
+      const words = lang === 'zh'
+        ? [`转过 ${deg}°`, '这是转动参数，不是 J 离出发方向的夹角', `J 此刻离出发方向 ${Math.round(lawDeg)}°`, `小旗按半角转过 ${deg / 2}°`]
+        : [`Turned ${deg}°`, 'this is the turn parameter, not the angle of J from its start', `J is now ${Math.round(lawDeg)}° from its start`, `half angle, ${deg / 2}°`];
+      // no exact on-axis / fixed wording: the note reports the computed separation only, which may round to 0°
+      const bad = lang === 'zh' ? ['J 只转过同样的角', '就在转轴', '一直不动'] : ['J has turned through that angle', 'lies on the axis', 'does not move'];
+      if (Math.abs(lawDeg - alphaDeg) > 1e-9 || Math.abs(st.Jback / DEG - alphaDeg) > 1e-6 || !ro.startsWith(alphaDeg.toFixed(1)) || !words.every((w) => text.includes(w)) || bad.some((w) => text.includes(w))) {
+        ok = false; why = why || `${lang} ${plane} t=${deg}: ${text} | ${ro}`;
+      }
+    }
+  }
+  check('the note, parallel (ψ₀ = √ρ in e₁e₂: t = 90°, 450° leave J at 0°) and perpendicular (e₂e₃: 90° → 90°, 200° → 160°, 270° → 90°, 500° → 140°), both languages', ok, why);
+  // tilted: the slanted start of WEAVE, turned in e₂e₃ (axis e₁), then the free note at 90° and 180°
+  ok = true; why = '';
+  for (const [pg, lang] of [[page, 'zh'], [enP, 'en']]) {
+    await pg.click('[data-preset="weave"]'); await settle(pg);
+    for (const deg of [90, 180, 300]) {
+      await pg.evaluate(() => { const el = document.getElementById('rho'); el.value = '1'; el.dispatchEvent(new Event('input', { bubbles: true })); });
+      const st = await pg.evaluate((v) => { const D = window.CLOSURE_DEBUG; D.seek(v); return D.state; }, deg * DEG);
+      await settle(pg);
+      const text = await pg.textContent('#roNote'), j0 = unit([0.53, 0.29, 0.8]), want = alphaLaw([1, 0, 0], j0, deg * DEG) / DEG;
+      const shown = `${Math.round(want)}°`;
+      if (Math.abs(st.Jback / DEG - want) > 1e-6 || Math.abs(want - deg) < 1 || !text.includes(shown) || (lang === 'zh' ? !text.includes(`J 此刻离出发方向 ${shown}`) || /就在转轴|一直不动/.test(text) : !text.includes(`J is now ${shown} from its start`) || /lies on the axis|does not move/.test(text))) { ok = false; why = why || `${lang} ${deg}: ${text} (want ${want})`; }
+    }
+  }
+  check('the note, tilted start (the slanted J₀ of WEAVE in e₂e₃): α differs from t at 90°, 180°, 300° and the note names the true α, both languages', ok, why);
+  // the evidence: the history-lift box states its full hypotheses and nothing about J; the plane/flag reading sits with ARGUED/NUM
+  const ev = await page.evaluate(() => [...document.querySelectorAll('#evidence .lean')].map((b) => ({ cls: b.className.trim(), gid: (b.querySelector('[data-lean-gid]') || {}).dataset?.leanGid || '', zh: (b.querySelector('.zh') || {}).textContent || '', en: (b.querySelector('.en') || {}).textContent || '' })));
+  const lift = ev.find((b) => b.cls === 'lean' && /history_lift$/.test(b.gid)), nosec = ev.find((b) => b.cls === 'lean' && /no_continuous_global_section$/.test(b.gid));
+  const argued = ev.filter((b) => /argued/.test(b.cls)).pop(), num = ev.find((b) => /\bnum\b/.test(b.cls));
+  check('green history-lift box: continuous base path on [0, 1], upper start w with γ(0) = w², γ̂² = γ, γ̂(0) = w, uniqueness, no continuous global section, fullTurn from 1 ends at −1 (both languages)',
+    !!lift && ['[0, 1]', 'γ(0) = w²', 'γ̂(s)² = γ(s)', 'γ̂(0) = w', '唯一', '没有连续的全局截面', 'exp(2πis)', '从 1 提升，终点是 −1'].every((w) => lift.zh.includes(w))
+    && ['[0, 1]', 'γ(0) = w²', 'γ̂(s)² = γ(s)', 'γ̂(0) = w', 'uniqueness', 'no continuous global section', 'exp(2πis)', 'lifted from 1, ends at −1'].every((w) => lift.en.includes(w)));
+  check('the two green boxes say nothing about J, the flag or the page', [lift, nosec].every((b) => b && !/J|小旗|页面|旗/.test(b.zh) && !/\bJ\b|flag|page/.test(b.en)));
+  check('the plane/flag reading of the base circle sits in the ARGUED box: e^{it} is the chosen turn parameter, not J’s angle',
+    !!argued && argued.zh.includes('选定的转动参数') && argued.zh.includes('一般不是 J 离出发方向的夹角') && argued.zh.includes('小旗') && argued.en.includes('turn parameter chosen on the rail') && argued.en.includes('in general not the angle of J from its start') && argued.en.includes('flag'));
+  check('the NUM box gives the separation law and its principal range (both languages)',
+    !!num && num.zh.includes('cos α = (n·ĵ₀)² + (1 − (n·ĵ₀)²) cos t') && num.zh.includes('0°–180°') && num.en.includes('cos α = (n·ĵ₀)² + (1 − (n·ĵ₀)²) cos t') && num.en.includes('0°–180°'));
+  const drawer = await page.evaluate(() => [document.querySelector('#drawer .sheet > div.zh').textContent, document.querySelector('#drawer .sheet > div.en').textContent]);
+  check('the drawer distinguishes the turn parameter from J’s angle and no longer calls e^{it} the angle J has turned through',
+    drawer[0].includes('不是 J 与 J₀ 的夹角 α') && drawer[0].includes('选定的转动参数') && !drawer[0].includes('J 转过的角') && drawer[1].includes('not the angle α between J and J₀') && drawer[1].includes('chosen turn parameter') && !drawer[1].includes('the angle J has turned through'));
+  check('the English drawer names the lift with its prescribed compatible starting point, not “every path has a unique lift”',
+    drawer[1].includes('history-dependent lifting theorem') && drawer[1].includes('prescribed compatible upper starting point') && !drawer[1].includes('every path has a unique'));
+  await enP.close();
+}
+
 // English
 const en = await T.goto(BOOK, ID, '?lang=en&preset=turn360');
 await settle(en);

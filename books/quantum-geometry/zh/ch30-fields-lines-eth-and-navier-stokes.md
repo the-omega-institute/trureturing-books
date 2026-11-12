@@ -464,20 +464,22 @@ $C_5$ 中最长有向路含 $5$ 个顶点的 $12$ 个定向里，有 $2$ 个是�
 ::: {.remark #rem-ch30-eth-subexponential-literature title="指数时间假设（ETH / SETH）与 2026 年 10 月亚指数 3-SAT 预印本的文献说明"}
 **文献结果，未在本书形式化。** 本节讨论的细粒度复杂性假设、传统算法上界及 2026 年 10 月亚指数预印本均属外部研究文献，未包含在本书锁定的 `trureturing@dev` 形式化声明集中：
 
-1. **指数时间假设（ETH）、强指数时间假设（SETH）与稀疏化引理（R. Impagliazzo & R. Paturi, *CCC* 1999；R. Impagliazzo, R. Paturi & F. Zane, *J. Comput. Syst. Sci.* **62**, 367–375, 2001）**：对任意子句宽度 $k \ge 3$，定义 $k$-SAT 的渐近单变量指数成本率为
+1. **指数时间假设（ETH）、强指数时间假设（SETH）与稀疏化引理（R. Impagliazzo & R. Paturi, *CCC* 1999；R. Impagliazzo, R. Paturi & F. Zane, *J. Comput. Syst. Sci.* **62**, 367–375, 2001）**：固定子句宽度 $k \ge 3$，输入含 $n$ 个变量与 $m$ 条子句。考虑所有使某个确定性 $k$-SAT 算法具有下列时间上界的实数 $\delta\ge0$：
 
    $$
-   s_k = \inf \left\{ \delta \;\middle|\; k\text{-SAT 可在确定性 } O(2^{\delta n}) \text{ 时间内求解} \right\}.
+   2^{\delta n}(n+m)^{O(1)}.
    $$
 
-   **ETH** 假设 $s_3 > 0$（即不存在求解 $n$ 变量 3-SAT 的确定性 $2^{o(n)}$ 亚指数算法）；**SETH** 假设 $\lim_{k \to \infty} s_k = 1$。其伴随的**稀疏化引理（Sparsification Lemma）**证明：对任意固定 $\varepsilon > 0$ 与 $k \ge 3$，任意 $n$ 变量 $k$-SAT 公式均可在 $2^{\varepsilon n}\operatorname{poly}(n)$ 时间内归约为至多 $2^{\varepsilon n}$ 个稀疏 $k$-SAT 公式（每个公式至多含 $c(k, \varepsilon)\,n = O_{k,\varepsilon}(n)$ 条子句）的析取。此外，标准 **Tseitin 变换**将规模为 $S$ 的布尔电路线性归约为变量数 $N = \Theta(S)$ 的 3-SAT 公式；而在 2026 年 10 月之前，PPSZ 框架（R. Paturi, P. Pudlák, M. E. Saks & F. Zane, *J. ACM* **52**, 2005）及其后续改进给出的最快 3-SAT 算法上界约为 $1.307^n \approx 2^{0.386 n}$（单变量指数率上界 $r \approx 0.386$）。
-2. **2026 年 10 月下旬张量网络缩并亚指数 3-SAT 预印本与规约审计**：2026 年 10 月 26 日，两份相互独立、附带外部 **Lean 4 形式化代码**的研究预印本（67 页《The Exponential Time Hypothesis Is False》与 49 页《A $2^{o(n)}$ Time Algorithm for 3-SAT》）相继公布，宣称利用张量网络缩并（Tensor Network Contraction）与代数秩约分（Rank Arguments）构造出 3-SAT 的确定性亚指数时间算法，给出渐近运行时间上界
+   将这些指数率的下确界记作 $s_k$。**ETH** 假设 $s_3 > 0$（因而排除时间为 $2^{o(n)}(n+m)^{O(1)}$ 的确定性算法）；**SETH** 假设 $\lim_{k \to \infty} s_k = 1$。其伴随的**稀疏化引理（Sparsification Lemma）**证明：对任意固定 $\varepsilon > 0$ 与 $k \ge 3$，任意 $n$ 变量 $k$-SAT 公式均可在 $2^{\varepsilon n}(n+m)^{O(1)}$ 时间内归约为至多 $2^{\varepsilon n}$ 个稀疏 $k$-SAT 公式（每个公式至多含 $c(k, \varepsilon)\,n = O_{k,\varepsilon}(n)$ 条子句）的析取。此外，标准 **Tseitin 变换**将规模为 $S$ 的布尔电路线性归约为变量数 $N = \Theta(S)$ 的 3-SAT 公式；PPSZ 框架（R. Paturi, P. Pudlák, M. E. Saks & F. Zane, *J. ACM* **52**, 2005）及其后续随机算法改进提供约为 $1.307^n \approx 2^{0.386 n}$ 的时间上界（这里仅以 $r \approx 0.386$ 作随机算法比较基准，不与确定性 ETH 混同）。
+2. **已定位的原始论文与各自形式化范围**：OpenAI 的 67 页 [*The Exponential Time Hypothesis Is False*](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/paper.pdf)（10 月 17 日、10 月 25 日修订）定理 1.1 对每个固定 $k\ge2$ 声明精确计数 $k$-CNF 满足赋值的确定性位复杂度
 
    $$
-   T(n) = 2^{O\!\left(\frac{n \log\log n}{\sqrt{\log n}}\right)} = 2^{o(n)}
+   (n+m)^{O_k(1)}2^{O_k(n\log\log n/\sqrt{\log n})},
    $$
 
-   （其中一份外部公开 Lean 4 代码形式化了多项式空间下的 $2^{O(n (\log\log n)^2 / \sqrt{\log n})}$ 变体，另一份基于 Mathlib 形式化了固定 $k$ 下 `#k-SAT` 解计数问题的 $2^{o(n)}$ 确定性图灵机算法；截至 2026 年 11 月，Impagliazzo、Paturi 与 Ryan Williams 等学者正对自然语言规约与顶层形式化定义边界展开独立同行审计，复杂性理论家 Lance Fortnow 亦指出即便 ETH 被证伪，学界距离解决标准 $\mathrm{P}$ vs. $\mathrm{NP}$ 问题依然遥远）。
+   并给出多项式位空间界；[配套形式化范围说明](https://github.com/openai/math/blob/4eaee87548250b2682affda7d05d947c05554bae/lean/docs/378.md)针对规范编码长度 $L$，发布的是较弱的 $(L+1)^{O_k(1)}2^{O_k(n(\log\log n)^2/\sqrt{\log n})}$ 时间与多项式已访问带格数界。两种指数不能混写。Anthropic 的 49 页 [*A $2^{o(n)}$ Time Algorithm for 3-SAT*](https://github.com/anthropics/formal-math/blob/16a5ce41304fcdaea4e0be7c132e1c361dc26da5/eth/paper.pdf)（10 月 26 日）定理 1 在 word RAM 模型给出 $2^{O(\min\{k^2n\log\log n/\sqrt{\log n},\,km/\sqrt{\log m}\})}$ 上界；附录 E 区分 Mathlib 多栈图灵机命题、编码承诺与纸面模型之间未形式化的输入编码及模拟步骤。这些是外部发布的论文与形式化范围声明，本书未独立重建两套证明，也未将其纳入冻结定理。
+3. **可核查的审读归属**：Impagliazzo、Paturi、Williams 的[社区原始说明](https://ethdiscussion.blog/2026/10/26/eth-refutation-examination-and-discussion/)邀请独立检查，并明确表示其参与不等于认证；不能把“正在审读”写成认可结论。Fortnow 的 [10 月 28 日文章](https://blog.computationalcomplexity.org/2026/10/the-exponential-time-refutation.html)链接上述论文，同时说明一般多项式规约可能放大变量数，$2^{o(n)}$ 上界不自动传给所有 NP 问题。本节的几何类比与示意曲线也不判定标准 $P$ vs. $NP$。
+
 :::
 
 ### 1. 从“一维赋值线”升维到“张量关联场”的低秩约分与多面体近似之球（`MODEL`）
@@ -488,15 +490,15 @@ $C_5$ 中最长有向路含 $5$ 个顶点的 $12$ 个定向里，有 $2$ 个是�
 - **“球永远只是多面体近似”：三体局部切面与渐近缝隙（`MODEL`）**：作者以局部三体切面（$\mathbf{e}_i\wedge\mathbf{e}_j\wedge\mathbf{e}_k$）拼接整体的图像，诠释指数率上界随规模变化的可能性。若 [@rem-ch30-eth-subexponential-literature] 中预印本宣称的上界经审计成立，其有效单变量指数率将趋于 $0$；这一条件性算法主张不能由多面体比喻或上述有限维 Lean 原型推出。
 
 ::: {.viz src="eth-horizon-crossover" preset="bridge" height="500"}
-**流矩阵的秩等于最小割。** 桥图 $(a, b, c, d) = (2, 3, 2, 3)$：两道外割都是 $6$（品红虚线），三条桥能过 $12$。右边是一个随机整数实例的 $6 \times 6$ 流矩阵（青色为正项，灰色为负项），下面六根奇异值都不为零：秩 $6$，恰等于最小割。这只是一个实例；Lean 验证的 [@thm-bridge-quantum-maxflow-mincut] 表明：在其完整维数假设下，这类桥图的最大可达秩等于最小割，单次抽样的秩则可能更低。这条定理只讲桥图上的流与割，与上文转述的亚指数 3-SAT 预印本无关：它既不检验、也不支持那里的算法主张（[@rem-ch30-eth-subexponential-literature]，未经审计）。
+**流矩阵的秩等于最小割。** 桥图 $(a, b, c, d) = (2, 3, 2, 3)$：两道外割都是 $6$（品红虚线），三条桥能过 $12$。右边是一个随机整数实例的 $6 \times 6$ 流矩阵（青色为正项，灰色为负项），下面六根奇异值都不为零：秩 $6$，恰等于最小割。这只是一个实例；Lean 验证的 [@thm-bridge-quantum-maxflow-mincut] 表明：在其完整维数假设下，这类桥图的最大可达秩等于最小割，单次抽样的秩则可能更低。这条定理只讲桥图上的流与割，与上文转述的亚指数 3-SAT 预印本无关：它既不检验、也不支持那里的算法主张（[@rem-ch30-eth-subexponential-literature]，本书未独立重建）。
 :::
 
 ### 2. 银河算法（Galactic Algorithm）与宇宙视界：上界比较能说明什么？（`MODEL` 与认识论边界）
 
 ::: {.example #ex-ch30-galactic-crossover-scale title="亚指数上界曲线与局部搜索基准的跨宇宙尺度对比及二次编码膨胀"}
-**文献结果，未在本书形式化。** 单变量渐近指数率曲线缓慢趋零是否意味着场内有限观察者能在现实物理尺度上跨越复杂度壁垒？为了直观审视 [@rem-ch30-eth-subexponential-literature] 中外部文献渐近上界的尺度行为，考察以 $2$ 为底的示意性单变量指数曲线 $r_{\mathrm{new}}(n) = c \cdot \frac{\log_2(\log_2 n)}{\sqrt{\log_2 n}}$（对应运行时间上界形如 $2^{r_{\mathrm{new}}(n)\cdot n}$，此处取理想归一化常数 $c = 1$ 仅作文献渐近上界曲线的数值示意，而非对任意算法或物理观察者的严格下界证明），并与 [@rem-ch30-eth-subexponential-literature] 中的传统 PPSZ 局部搜索上界基准 $0.386$（$1.307^n \approx 2^{0.386 n}$）对表：
+**文献结果背景与数值示意（`MODEL`），未在本书形式化。** 单变量渐近指数率曲线缓慢趋零是否意味着场内有限观察者能在现实物理尺度上跨越复杂度壁垒？为了直观审视 [@rem-ch30-eth-subexponential-literature] 中上界表达式的尺度行为，考察以 $2$ 为底的示意性单变量指数曲线 $r_{\mathrm{new}}(n) = c \cdot \frac{\log_2(\log_2 n)}{\sqrt{\log_2 n}}$（对应运行时间上界形如 $2^{r_{\mathrm{new}}(n)\cdot n}$，此处取理想归一化常数 $c = 1$ 仅作文献渐近上界曲线的数值示意，而非对任意算法或物理观察者的严格下界证明），并与 [@rem-ch30-eth-subexponential-literature] 中的传统 PPSZ 局部搜索上界基准 $0.386$（$1.307^n \approx 2^{0.386 n}$）对表：
 
-| 观察者与系统尺度 $n$ | 对数尺度 $\log_2 n$ | 示意张量上界指数率 $r_{\mathrm{new}}(n)$（取 $c=1$） | 传统局部搜索上界基准（[@rem-ch30-eth-subexponential-literature]） | 尺度对比与几何模型解读（`MODEL`） |
+| 观察者与系统尺度 $n$ | 对数尺度 $\log_2 n$ | 示意上界指数率 $r_{\mathrm{new}}(n)$（取 $c=1$） | 传统局部搜索上界基准（[@rem-ch30-eth-subexponential-literature]） | 尺度对比与几何模型解读（`MODEL`） |
 | :--- | :---: | :---: | :---: | :--- |
 | **人类工程尺度**（$n = 65{,}536 = 2^{16}$） | $16$ | $\dfrac{\log_2 16}{\sqrt{16}} = \mathbf{1.000}$ | $\mathbf{0.386}$ | 在 $6.5$ 万变量处，$c=1$ 的示意曲线才刚刚降到与朴素 $2^n$ 穷举相当的指数率 $1.000$ |
 | **可观测宇宙原子总数**（$n \approx 10^{80} \approx 2^{266}$） | $\approx 266$ | $\dfrac{\log_2 266}{\sqrt{266}} \approx \mathbf{0.494}$ | $\mathbf{0.386}$ | 即使在 $n \approx 10^{80}$ 的宇宙重子尺度上，$c=1$ 示意曲线（$\approx 0.494$）仍高于 $0.386$ |
@@ -518,7 +520,7 @@ $C_5$ 中最长有向路含 $5$ 个顶点的 $12$ 个定向里，有 $2$ 个是�
 :::
 
 - **$P$（场）与 $NP$（线）的认识论对照（`MODEL`）**：导向结构与见证检查表现出不同的任务角色；它们可以在同一个问题中并存，因为 $P\subseteq NP$。上界曲线和编码尺度比较不把两类问题分开。
-- **形式内核核验与顶层规约审计的哥德尔—语义边界（`LEAN ✓` 原型与 `MODEL` 映照）**：[@rem-ch30-eth-subexponential-literature] 中最具认识论意味的一幕是——形式证明助手内核可以迅速核验脚本内部每一步推演的传递合法性，而学界仍需仔细审计“顶层形式化命题的定义是否忠实刻画了目标图灵机复杂度命题”。在本书第 21 章中，经 Lean 4 内核验证的**相对语义对角线与定义逃逸定理**严格证明：在给定无不动点扭转映射（`∀ v, twist v ≠ v`）的条件下，相对语义对角线构造必然逃出任何已编目解码族（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)），且当解码目录覆盖潜坐标上的全部解码函数时，该对角线目标相对于给定潜映射不满足语义完备性 `TargetAdequate`（[`relative_semantic_diagonal_target_inadequate_of_surjective`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective)）。将这一形式定理作为认识论原型（`MODEL`）来观照顶层规约审计，恰好印证了全书的核心准则：**形式内核在球内严格锁死推演链条的传递正确性，而对顶层命题边界定义之语义恰当性的审视，永远需要站在形式球壳之外！**
+- **形式内核核验与顶层规约审计的哥德尔—语义边界（`LEAN ✓` 原型与 `MODEL` 映照）**：[@rem-ch30-eth-subexponential-literature] 中提供了一个认识论问题：形式证明内核检查给定形式命题的推演；具体耗时取决于证明项、归约与实现。社区审读仍须追问“顶层形式化命题的定义是否忠实刻画了目标图灵机复杂度命题”。在本书第 21 章中，经 Lean 4 内核验证的**相对语义对角线与定义逃逸定理**严格证明：在给定无不动点扭转映射（`∀ v, twist v ≠ v`）的条件下，相对语义对角线构造必然逃出任何已编目解码族（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)），且当解码目录覆盖潜坐标上的全部解码函数时，该对角线目标相对于给定潜映射不满足语义完备性 `TargetAdequate`（[`relative_semantic_diagonal_target_inadequate_of_surjective`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective)）。将这一形式定理作为认识论原型（`MODEL`）来观照顶层规约审计，可以说明本书的写作准则：**形式内核核验给定定义、公理与规则下的推演；顶层定义是否表达目标问题仍须单独审查。这不等于证明整个公理系统的一致性。**
 
 ::: {.viz src="eth-horizon-crossover" height="640"}
 **交互实验室 `ORTHO//HORIZON`**：本节的三个场景。指数率：示意曲线 $r(n)$ 与 PPSZ 的 $0.386$ 在哪里相交，以及常数 $c$ 怎样把交叉点挪进或挪出阴影；桥图：单次抽样的流矩阵秩与四道割，冻结量 $\operatorname{QMinCut} = \min(3ac, ad, bc)$，第四道 $3bd$ 割由手工矩阵分解给出；自然数维数满足 $0 < a \le b$、$0 < c \le d$、$a^2 + b^2 \le 3ab$、$c^2 + d^2 \le 3cd$ 时，可达最大秩等于 $\operatorname{QMinCut} = \min(ad, bc)$（Lean 已验证），单次抽样仍可更低，锥域外须比较四道割；模态：谱里不小于阈值 $\tau$ 的模态数不超过 $RW/(\pi\tau)$（Lean 已验证）。取 $c = 1$ 的曲线只是示意，不是任何算法的实测。
@@ -526,11 +528,11 @@ $C_5$ 中最长有向路含 $5$ 个顶点的 $12$ 个定向里，有 $2$ 个是�
 
 ---
 
-## 纳维—斯托克斯（Navier–Stokes）与 $P$ vs. $NP$ 的场化同构——兰姆双向量、三维涡管拉伸与阿诺德测地线 {#sec-coda-navier-stokes-and-p-vs-np}
+## 纳维—斯托克斯（Navier–Stokes）与 $P$ vs. $NP$ 的场化类比——兰姆双向量、三维涡管拉伸与阿诺德测地线 {#sec-coda-navier-stokes-and-p-vs-np}
 
 > **作者原话**：“navier stokes与P/NP 问题, 都场化的话似乎很像”
 
-把**纳维—斯托克斯（Navier–Stokes, NS）存在性与光滑性问题**和 **$P$ vs. $NP$ 问题**同时放进克利福德正交场论模型（`MODEL`）里看，这两道千禧年大奖难题在几何底层立刻呈现出惊人的同构——它们在连续物理场与离散逻辑场中追问的是同一个核心张力：**当一个三维正交系统发生非线性自指耦合时，平滑的全局引导场（$P$ / 层流）会不会被高阶外积旋度无限拉伸、夹断并坍缩成横截面积为零的一维奇异细丝（$NP$ 见证丝 / 湍流爆破奇点）？**
+把**纳维—斯托克斯（Navier–Stokes, NS）存在性与光滑性问题**和 **$P$ vs. $NP$ 问题**并置，可以比较全局状态、局部读数与二次反馈的不同角色（`MODEL`）。这里没有给出连接流体解与布尔实例的映射，也没有证明它保留演化、可解性或计算成本，因而不构成数学同构。涡管细长的形状与见证检查的线形图像并不把两个问题化为同一个问题；流体爆破与投影不闭合均不推出 $P\neq NP$。
 
 ### 1. 内积势流与外积涡面的克利福德分离（`MODEL`）
 
@@ -744,8 +746,10 @@ $c_0$ 是整个多边形绕原点的无穷小转动：场对公共转动协变�
 **文献结果，未在本书形式化。** 本节涉及的经典流体几何恒等式、二维无条件全局光滑性定理以及三维**受迫**纳维—斯托克斯爆破结果均属外部文献，未包含在本书锁定的 `trureturing@dev` 形式化声明集中：
 
 1. **兰姆恒等式、螺旋度霍普夫不变量与二维无条件全局正则性**：对流分解 $(\mathbf{u}\cdot\nabla)\mathbf{u} = \frac{1}{2}\nabla(\|\mathbf{u}\|^2) + \boldsymbol{\omega}\times\mathbf{u}$ 源于 H. Lamb（*Hydrodynamics*）、无粘涡通量守恒源于开尔文环量定理（Lord Kelvin, 1869）、无粘流体螺旋度 $\mathcal{H} = \int \mathbf{u}\cdot\boldsymbol{\omega}\,dV$ 与 $S^3$ 霍普夫链环不变量的对应源于 J. J. Moreau（1961）与 H. K. Moffatt（1969）；二维不可压缩纳维—斯托克斯方程在任意时间上的无条件全局光滑解存在唯一性由 O. A. Ladyzhenskaya（*The Mathematical Theory of Viscous Incompressible Flow*, 1969）严格证明（注意：本书行内引用的冻结定理 [`all_grade_regularity_of_mild_path`](lean:D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path) 假设 $[0, \tau]$ 上连续温和解路径已给定，不等同于 Ladyzhenskaya 的无条件全局存在性定理）。
-2. **受迫三维纳维—斯托克斯（克雷陈述 C / D，含光滑外力 $\mathbf{f} \in C^\infty$）的 2026 年有限时间爆破构造与外部 Lean 4 验证**：在克雷数学研究所（C. Fefferman）制定的问题描述中，受迫陈述 C / D 允许施加光滑、紧支且保持总动能一致有界（$\sup_t \|\mathbf{u}(\cdot, t)\|_{L^2} < \infty$）的外力场 $\mathbf{f}(\mathbf{x}, t)$。2026 年公布的 166 页解析构造及其配套外部 Lean 4 形式化证明确认：在受迫情形下，精心设计的光滑外力可持续对齐并泵浦多尺度向内盘旋、轴向拉伸的自相似涡丝结构，使三维涡管拉伸局部压倒粘性耗散 $\nu\nabla^2\mathbf{u}$，在有限时间 $T^* < \infty$ 内产生横截面积 $A(t) \to 0$、$\limsup_{t \nearrow T^*} \|\mathbf{u}(\cdot, t)\|_{L^\infty} = \infty$ 的奇点（相关欧拉与流体奇点文献亦见 T. M. Elgindi, *Ann. of Math.* **194**, 2021；J. Chen & T. Y. Hou, 2022–2023；D. Córdoba & L. Martínez-Zoroa；以及 T. Buckmaster & L. Alpöge, 2026）。这些结果针对含外力或无粘情形，**并未解决**下文无外力（$\mathbf{f} \equiv \mathbf{0}$）粘性陈述 A / B。
+2. **OpenAI 的受迫三维纳维—斯托克斯解答（克雷陈述 C / D）**：[官方公告](https://openai.com/index/navier-stokes-solution/)、166 页论文 [*Finite time blowup for Navier–Stokes*](https://cdn.openai.com/pdf/32d9f210-8b73-45e0-91bc-82a30aef8a9a/navier-stokes.pdf)（定理 1.1、周期推论 10.6）与[固定源码](https://github.com/openai/NavierStokesAndEuler/tree/f9e8bc5b38b6e212696e8a30e3e91517af887bbd)给出同一项公开成果。对任意 $\nu>0$，从静止初态出发，构造光滑外力下的三维不可压缩解，使爆破前 $\sup_{t<T^*}\|\mathbf u(t)\|_{L^2}<\infty$ 而 $\limsup_{t\nearrow T^*}\|\mathbf u(t)\|_{L^\infty}=\infty$。能量界是速度场的性质；它不表示外力本身具有所谓“有界动能”。全空间 C 要求外力各阶时空导数速降，论文的光滑时空紧支外力满足更强条件；周期 D 的外力在空间周期、在时间速降，非零周期外力不能在整个 $\mathbb R^3$ 上空间紧支。[克雷原题](https://www.claymath.org/wp-content/uploads/2022/06/navierstokes.pdf#page=2)接受 A、B、C、D 中任一陈述的证明，故 C / D 本身就是官方题目的一条解答路线；零外力 A / B 仍为下文的 `OPEN`。源码的最终入口是 `NavierStokes.Comparator.navier_stokes_breakdown_R3` 与 `navier_stokes_breakdown_periodic`。这是外部文献及其发布的形式化，未进入本书冻结账本；本书的独立复验状态另记于工程审读记录。
+3. **分别辨认 Euler 结果**：同一公告另附 57 页论文 [*Finite time blowup for the Euler equation*](https://cdn.openai.com/pdf/315b36cd-ec98-4023-8342-93345194ece1/euler.pdf)，其定理 1.1 针对 $\nu=0$、**无外力**、光滑紧支无散初值，给出有限时间梯度无界与涡量时间积分发散。公告将 Alpöge、Buckmaster 的同期工作明确归于**受迫 Euler**。这两项 Euler 工作与上述正粘性受迫 NS 构造的方程、数据和结论不同。
 :::
+
 
 ::: {.viz src="navier-stokes-p-np" preset="burgers" height="500"}
 **粘性拦住：伯格斯涡。** 恒定拉伸之外再加上粘性：变细的涡核同时向外扩散，截面 $A$ 停在 $4\pi\nu/\alpha$ 附近不再变小，品红的涡度也随之停住，青色回路的环量仍是 $1$。拉伸与粘性恰好相抵，涡管不会夹断（示意模型，`MODEL`）。
@@ -825,8 +829,8 @@ $$
 
 结合 [@thm-coda-quadratic-advection-no-closure] 与上述文献背景，我们在正交几何诠释模型（`MODEL`）中获得三点收官洞察：
 
-- **粘性耗散的兰道尔擦除角色与一维形式见证丝（`MODEL`）**：在物理模型上，运动粘性 $\nu$（见 [@rem-ch30-lamb-decomposition-literature]）扮演着第八章“将微观正交旋转面积排入热浴化作热量”（对照球面梯度耗散定理 [`S2_dissipation`](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation)）的擦除角色；而在证明论模型上，无论是陶哲轩的自相似级联还是 [@rem-ch30-navier-stokes-forced-literature] 中的受迫爆破形式脚本，一旦一维形式证明见证丝被构造出来，验证内核只需顺着这一维逻辑链逐行做局部类型核验。
-- **连续统理想化与离散两子丈量的物理边界（`MODEL`）**：在受迫连续偏微分方程逼近理论奇点 $T^*$ 的过程中，远在速度梯度抵达数学无穷大之前，局部剪切率与尺度早已越过不可压缩连续介质假设的物理适用阈限（真实液体在此之前发生空化、可压缩效应或触及分子与量子离散截断）。正如序曲与[第二十一章](ch21-diagonalization-and-escape.md)确立的核心洞见——**“光滑的球永远只是近似！”** 连续统紫外奇点标志着无限细分理想化的模型边界，而有限观察者的“两子丈量”始终扎根在离散、有限分辨率的记录晶格之上。
+- **粘性耗散的兰道尔擦除角色与形式见证丝（`MODEL`）**：运动粘性 $\nu$ 的耗散可与第八章热浴擦除作类比（对照球面梯度耗散定理 [`S2_dissipation`](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation)），但不同模型中的能量律并非同一条定律。陶哲轩平均化模型或 OpenAI 受迫 NS 证明一经写出，就可检查具体推演；把证明画成“一维丝”不限制证明长度、归约成本或内核运行时间，也不保证某一问题族有多项式长度证书。
+- **连续统理想化与离散两子丈量的物理边界（`MODEL`）**：连续 PDE 的数学爆破促使我们追问连续介质近似的适用范围。真实流体是否出现可压缩效应、空化或分子尺度修正，取决于材料、状态与尺度，不能由这份爆破构造推出任何一种必然过程。作者的**“光滑的球永远只是近似！”**在这里表达有限分辨率的认识论立场；它不否定连续方程的精确数学意义，也不证明自然界只能采用某种离散本体。
 - **离散逻辑场与连续流体场的六重正交几何类比表（`MODEL`）**：
 
 ::: {.remark #rem-ch30-six-row-analogy-table title="离散逻辑场与连续流体场的六重正交几何类比表（含文献结果，未在本书形式化）"}
@@ -837,10 +841,75 @@ $$
 | **高效求解的类比** | **部分 $P$ 算法的导向结构**（$P\subseteq NP$；无旋场非定义，见 [@rem-ch30-karmarkar-kasteleyn-literature]） | **无旋势流 / 低雷诺数层流**（$\nabla\wedge\mathbf{u}=0$ 或粘性主导，见 [@rem-ch30-lamb-decomposition-literature]） | 作者以局部导向描绘高效求解；仍需算法与成本分析 |
 | **维度分水岭** | **2-SAT** vs. **3-SAT**（文献见 [@rem-ch30-query-sos-literature]） | **2D NS**（文献见 [@rem-ch30-navier-stokes-forced-literature]；条件温和路径正则性 [`all_grade_regularity_of_mild_path`](lean:D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path)） vs. **3D 无外力 NS**（[@conj-coda-navier-stokes-regularity]，`OPEN`） | 二维平面流无第三轴涡管拉伸；三维允许轴向涡管拉伸（见 [@rem-ch30-vorticity-transport-literature]） |
 | **复杂性引擎** | 自指递归与三元布尔阻挫环 | 二次对流非线性与涡管拉伸（[@rem-ch30-lamb-decomposition-literature]、[@rem-ch30-vorticity-transport-literature]）及跨尺度混合泄漏（[`no_exact_closure`](lean:D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure)） | 算子与状态自指耦合 $\psi(\psi)$，向高频正交模态 $\mathbf{k}_1+\mathbf{k}_2\to\mathbf{k}_3$ 级联 |
-| **见证 / 奇异细丝的类比** | **$NP$ 见证丝**是检查过程的图像，不蕴含难解性 | 条件坍缩情景下横截面趋零的**一维奇异涡丝**（见 [@rem-ch30-vorticity-transport-literature]） | 线形图像相似，不建立复杂度与流体奇点的数学等价 |
-| **物理防火墙** | 有限观察者 $90^\circ$ 视界与局部记忆截断 | 运动粘性耗散（[@rem-ch30-lamb-decomposition-literature]，对照 [`S2_dissipation`](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation)）与微观离散截断 | 兰道尔式正交面积耗散，抑制无穷步芝诺级联 |
+| **见证 / 奇异细丝的类比** | **$NP$ 见证丝**是检查过程的图像，不蕴含难解性 | 示意涡管的条件性截面坍缩；OpenAI 构造的核心相对细长（见 [@rem-ch30-vorticity-transport-literature]） | 线形图像相似，不建立复杂度与流体奇点的数学等价 |
+| **物理防火墙** | 有限观察者 $90^\circ$ 视界与局部记忆截断 | 运动粘性耗散（[@rem-ch30-lamb-decomposition-literature]，对照 [`S2_dissipation`](lean:D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation)）与微观离散截断 | 耗散与擦除的模型类比，不保证阻止任何流体爆破 |
 | **高维几何视角** | 无时间静态场全局交集（受限坍缩参照 [@rem-ch30-postselection-ctc-literature]） | 无穷维流形测地线视角（无粘文献参照 [@rem-ch30-tao-arnold-literature]） | 高维流形上的简洁几何运动在局部低维投影下展现为复杂的非线性能量传递 |
 
+:::
+
+### 5. 三个手算对照：能量、反馈与不闭合
+
+::: {.example #ex-ch30-core-energy-scaling title="局部速度无界而核心能量趋零：标度手算"}
+**手工推导，未在本书形式化。** 取上述 NS 论文第 2 节的典型核心标度，令 $\tau=1-t$、$0<h<1/100$：
+
+$$
+\begin{aligned}
+\ell_r&\asymp\tau^{1/2},\\
+\ell_z&\asymp\tau^{1/2-h},\\
+U&\asymp\tau^{-1/2-h},\\
+V_{\mathrm{core}}&\asymp\ell_r^2\ell_z\asymp\tau^{3/2-h},\\
+E_{\mathrm{core}}&\asymp U^2V_{\mathrm{core}}\asymp\tau^{1/2-3h}\longrightarrow0.
+\end{aligned}
+$$
+
+$U$ 同时趋于无穷：积分能量控制不自动控制局部速度。这里仅估算典型核心的阶，不是论文完整的全空间能量证明；后者还须控制核心外的场和修正项。两种长度都趋零，$\ell_r/\ell_z\asymp\tau^h\to0$ 只表示相对细长，并非轴向长度增长，更不表示一整条曲线都是奇点。
+:::
+
+#### 把显隐态分解用于 PDE：先列出交换条件 {#sec-ch30-projected-feedback}
+
+::: {.remark #rem-ch30-projected-feedback title="Leray 投影、傅里叶截断与缺失的二次反馈"}
+**手工推导，未在本书形式化。** 在 $\Omega=\mathbb T^3$ 或 $\mathbb R^3$ 上，固定 $s>5/2$。在爆破前任意紧时间区间 $I$ 上，假设无散速度 $u\in C(I;H^s(\Omega;\mathbb R^3))\cap C^1(I;H^{s-2})$、原外力 $f\in C(I;H^{s-2})$，且 NS 方程在 $H^{s-2}$ 中成立。压力取为 $\Omega$ 上的分布（环面情形为周期分布），满足 $\nabla p\in H^{s-2}$ 与 $\mathbb P\nabla p=0$。设 $\mathbb P$ 为 Leray 无散投影，令 $F=\mathbb P f$、$L=\nu\Delta$、$B(v,w)=\mathbb P((v\cdot\nabla)w)$，则 $\partial_tu=Lu-B(u,u)+F$。$F$ 是投影后的外力，不能把原外力 $f$ 的紧支性质直接赋给它。
+
+取固定、与时间无关的有界傅里叶低通截断 $\Pi$，满足 $\Pi^2=\Pi$，并在所用 Sobolev 空间上与空间导数、$\Delta$、$\mathbb P$ 交换。例如固定 $K>0$，逐分量乘以频率集合 $\{|k|\le K\}$ 的示性函数。环面上的有限频率集给出有限维投影；全空间频率截断通常仍为无限维。$\Pi$ 的有界性及时间独立性保证 $\partial_t\Pi u=\Pi\partial_tu$。上述正则性保证双线性乘积与各等式在 $H^{s-2}$ 中有意义；不在奇点时刻使用这些交换。
+
+令 $a=\Pi u$、$b=(1-\Pi)u$，直接展开得
+
+$$
+\begin{aligned}
+\partial_t a={}&La-\Pi B(a,a)+\Pi F\\
+&-\Pi\bigl(B(a,b)+B(b,a)\bigr)\\
+&-\Pi B(b,b).
+\end{aligned}
+$$
+
+后两行就是丢失的信息：两项显隐混合与一项隐态平方。上面的五模态见证为混合项 $+i/4$，向量场负号使加速度缺口为 $-i/4$；它不是隐态平方项的见证。
+
+原论文的脉冲机制突出另一件事：柱坐标速度分量的角均值可以为零，二次动量通量的角平均仍非零，为背景流补足应力并修正动量残差。最简单的手算是 $w(\theta)=A\cos(m\theta)$（非零整数 $m$），其角均值为 $0$，而 $w^2$ 的角均值为 $A^2/2$。这个标量算例只说明平方反馈可以留下来；它没有验证论文的向量脉冲。角平均不同于上述低通 $\Pi$；柱坐标基底随角度变化，压力、几何项及导数交换必须在原论文中另行处理。二者尚无已形式化的构造间桥梁。从这条恒等式走到爆破，还缺跨尺度增长、粘性竞争、全阶残差控制与极限构造。
+:::
+
+::: {.example #ex-ch30-dissipative-no-closure title="不闭合而始终有界的耗散二次系统"}
+**手工推导，未在本书形式化。** 在 $\mathbb R^2$ 上只观察第一坐标 $x$，考虑
+
+$$
+\begin{aligned}
+\dot x&=-\nu x-y^2,\\
+\dot y&=-\nu y+xy,\qquad\nu\ge0.
+\end{aligned}
+$$
+
+$(0,0)$ 与 $(0,1)$ 的可见读数同为 $0$，可见导数却分别为 $0$ 与 $-1$；所以不存在对全部状态有效的 $\dot x=g(x)$。但交叉项恰好相消：
+
+$$
+\begin{aligned}
+\frac{d}{dt}(x^2+y^2)
+&=2x(-\nu x-y^2)\\
+&\quad+2y(-\nu y+xy)\\
+&=-2\nu(x^2+y^2),\\
+x(t)^2+y(t)^2&=(x(0)^2+y(0)^2)e^{-2\nu t}.
+\end{aligned}
+$$
+
+多项式向量场局部光滑，正向轨道有界，故可延拓到任意有限时间。$\nu>0$ 时能量衰减，$\nu=0$ 时守恒，均无正向有限时间爆破。这是对“不闭合就足以推出爆破”的一般推理的反例，不是 NS 方程的反例。不闭合只排除给定投影下对所有状态的精确瞬时预测；它不排除近似闭合、记忆项、增广状态或其他投影，也不给出复杂性下界。
 :::
 
 ::: {.viz src="navier-stokes-p-np" height="640"}
@@ -851,7 +920,7 @@ $$
 
 ## 本章小结：离散逻辑场与连续流体场的正交合龙 {#sec-ch30-summary}
 
-本章以作者关于全局静态场与有限观察者、“场”与“线”的格言连接离散逻辑和连续流体。数学层面，静态满足子空间、额外资源下的复杂度等式、受限模型下界与标准 $P\neq NP$ 开放问题各有边界。在有限图着色这一例子中，Gallai–Hasse–Roy–Vitaver 定理给出“$G$ 可 $k$ 着色”与“存在一种定向，使每条有向路至多含 $k$ 个顶点”之间的精确等价（[@thm-ch30-gallai-roy]）；它只是交换两种存在性见证，不提供算法，也不解决一般的 $P$ vs. $NP$ 问题。银河交叉表比较的是示意上界（[@ex-ch30-galactic-crossover-scale]），不是普遍搜索下界。流体部分则并置 **兰姆分解（[@rem-ch30-lamb-decomposition-literature]）、无外力三维全局正则性开放猜想（[@conj-coda-navier-stokes-regularity]）与二次平流投影无精确闭合定理（[@thm-coda-quadratic-advection-no-closure]）**。这些结果为作者的几何诠释提供参照，并不建立两道开放难题的数学等价。
+本章以作者关于全局静态场与有限观察者、“场”与“线”的格言连接离散逻辑和连续流体。数学层面，静态满足子空间、额外资源下的复杂度等式、受限模型下界与标准 $P\neq NP$ 开放问题各有边界。在有限图着色这一例子中，Gallai–Hasse–Roy–Vitaver 定理给出“$G$ 可 $k$ 着色”与“存在一种定向，使每条有向路至多含 $k$ 个顶点”之间的精确等价（[@thm-ch30-gallai-roy]）；它只是交换两种存在性见证，不提供算法，也不解决一般的 $P$ vs. $NP$ 问题。银河交叉表比较的是示意上界（[@ex-ch30-galactic-crossover-scale]），不是普遍搜索下界。流体部分则并置 **兰姆分解（[@rem-ch30-lamb-decomposition-literature]）、无外力三维全局正则性开放猜想（[@conj-coda-navier-stokes-regularity]）与二次平流投影无精确闭合定理（[@thm-coda-quadratic-advection-no-closure]）**。这些结果为作者的几何诠释提供参照，并不建立两道开放难题的数学等价。 OpenAI 受迫 C / D 解答保持外部文献层级（[@rem-ch30-navier-stokes-forced-literature]）；标度手算与耗散对照分别辨明局部速度无界、有限能量和不闭合的关系（[@ex-ch30-core-energy-scaling]、[@ex-ch30-dissipative-no-closure]）。
 
 沿着这道正交视界继续向前，我们将在 **[第三十一章：量子的本质是公平](ch31-quantum-fairness.md)** 与 **[第三十二章：正交自指统一场与万流归宗](ch32-unified-field-and-meta-unification.md)** 中揭示五重几何特权的废除、遍历统计全息与跨纲领元统一，并最终步入 **[终章：在所有的球之外](coda.md)**，在多面体离散角亏余项（见终章 [@rem-coda-polyhedral-topology-literature]）、收缩不动点锚点与全书总导图中完成最后的升维回望。
 

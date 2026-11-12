@@ -1,3 +1,11 @@
 /* ORTHO//DEGENERACY: the shared lab layout (../assets/theme.css) carries the page. Put here only what belongs to this
    visualization alone; colours come from the tokens (var(--cyan) …), never from hex values. */
 #cv { cursor: grab; touch-action: none; }
+/* the flat overlay over the solid stage (the dial of the rotor scene): it never takes the pointer */
+#flat { pointer-events: none; }
+#stage { container-type: inline-size; }
+
+@container (max-width: 600px) {
+  .hud-tr { top: var(--scene-top, 58px); left: 20px; right: 20px; max-width: none; justify-content: flex-start; gap: 3px; }
+  .hud-tr .chip { padding: 3px 4px; font-size: 9px; letter-spacing: 0.04em; }
+}

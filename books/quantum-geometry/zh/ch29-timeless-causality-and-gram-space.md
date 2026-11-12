@@ -568,7 +568,7 @@ $$
 
 然而，斯宾诺莎（Baruch Spinoza）在《伦理学》（第一部分命题十七附释）中给出了穿透时空迷雾的几何回答：万物由自然本性永恒且无时间地必然推出，**“正如从三角形的本性中，必然推出其三内角之和等于两直角一样”**。在一个 $3\text{-}4\text{-}5$ 的直角三角形中，并不是直角边 $3$ 和 $4$ 先在时间里长出来、几纳秒后再把斜边 $5$ “推”出来；三条边在同一张正交平面上无时间地并存，勾股面积守恒 $3^2 + 4^2 = 5^2$ 就是它们之间绝对不可违抗的**几何因果律**！
 
-放到本书第三部第 10 章的球面内积几何中，这种“零时间的因果必然性”由 **Gram 矩阵半正定刚性（[`unit_gram_overlap_characterization`](lean:D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization) 与 [`lagrange_gram_identity`](lean:D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity)）** 给出精确刻画。任取单位球面上的三个状态方向 $\mathbf{A}, \mathbf{B}, \mathbf{C}$，记它们两两之间的实内积余弦为 $c_{AB} = \mathbf{A}\cdot\mathbf{B}$、$c_{BC} = \mathbf{B}\cdot\mathbf{C}$、$c_{AC} = \mathbf{A}\cdot\mathbf{C}$。无需任何时间演化，这三个成对投影就必须永恒服从 $3\times 3$ Gram 行列式非负定律：
+放到本书第三部第 10 章的球面内积几何中，**Gram 矩阵半正定约束（[`unit_gram_overlap_characterization`](lean:D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization) 与 [`lagrange_gram_identity`](lean:D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity)）** 给出静态相容条件；将其解释为“零时间的因果必然性”属于作者的几何模型（`MODEL`），不是物理因果律的证明。任取单位球面上的三个状态方向 $\mathbf{A}, \mathbf{B}, \mathbf{C}$，记它们两两之间的实内积余弦为 $c_{AB} = \mathbf{A}\cdot\mathbf{B}$、$c_{BC} = \mathbf{B}\cdot\mathbf{C}$、$c_{AC} = \mathbf{A}\cdot\mathbf{C}$。无需任何时间演化，这三个成对投影就必须永恒服从 $3\times 3$ Gram 行列式非负定律：
 
 $$
 \det G(\mathbf{A}, \mathbf{B}, \mathbf{C}) = \det\begin{pmatrix} 1 & c_{AB} & c_{AC} \\ c_{AB} & 1 & c_{BC} \\ c_{AC} & c_{BC} & 1 \end{pmatrix} = 1 - c_{AB}^2 - c_{BC}^2 - c_{AC}^2 + 2\,c_{AB}\,c_{BC}\,c_{AC} \ge 0.
@@ -591,7 +591,7 @@ $$
 请审视这道公式的双重品格：
 
 - **彻底的顺序无关（无时间性）**：公式关于指标 $(A, B, C)$ 完全对称，谁也不是谁的“过去”或“未来”；
-- **绝对的因果必然（零自由度刚性）**：一旦 $c_{AB}$ 与 $c_{BC}$ 给定，$c_{AC}$ 就被球面曲率当场锁死，没有任何概率摇摆的余地！同理，数学推理中的“公理 $\implies$ 定理”也绝不是公理在时间中生出定理，而是同一块形式晶体的不同切面；第 9 章与第 16 章中的量子门计数 $L$，只是观测者旋转手中测量标尺去对齐目标切面所花费的步数。
+- **相容窗口与附加条件下的刚性**：给定 $c_{AB}$ 与 $c_{BC}$，一般只将 $c_{AC}$ 限制在图示窗口内。共面条件将它限制到两个端点；端点不重合时，仍须额外指定分支才能唯一确定。比如 $c_{AB}=c_{BC}=0$ 时，三维中 $c_{AC}$ 可以取 $[-1,1]$ 内任意值。半正定约束不规定概率分布，也不证明唯一的物理因果轨迹。在作者的模型比喻中，“公理 $\implies$ 定理”可看作形式晶体的切面关系；第 9 章与第 16 章的门计数 $L$ 则仍服从各自门模型的具体前提。
 
 ::: {.film src="008-gram-window"}
 **两条余弦锁住第三条：格拉姆窗口（1:39）。** 固定 $\theta_1 = 60^\circ$、$\theta_2 = 45^\circ$，让 $\mathbf{C}$ 绕 $\mathbf{B}$ 转一圈：$c_{AC}$ 在 $[\cos 105^\circ, \cos 15^\circ]$ 里来回，紫色的体积在窗边塌成零，窗外的余弦会让 $\det G$ 变成负数；再让 $\theta_2$ 从 $0^\circ$ 走到 $180^\circ$，一道道窗口铺满格拉姆椭圆的切片。上沿碰到 $1$ 时 $\mathbf{C}$ 正好落在 $\mathbf{A}$ 上，这一步由 [@thm-ch29-gram-rigidity-and-pell] 的第二部分保证；片中其余数字都是屏幕上的计算。
@@ -722,4 +722,4 @@ $$
 :::
 
 
-下一章（[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)）中，我们将把这一“全局静态场 vs. 场内有限观察者”的几何张力推向计算复杂性与连续流体力学的最高峰——正面审视 **$\mathrm{P}$ vs. $\mathrm{NP}$**、**指数时间假设（ETH）与 2026 张量网络秩约分**以及**三维纳维—斯托克斯（Navier–Stokes）奇异涡丝**的场化同构。
+下一章（[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)）将并置 **$\mathrm P$ vs. $\mathrm{NP}$**、**指数时间假设（ETH）的外部论文与示意上界曲线**、**OpenAI 受迫三维 NS 的 C / D 解答与零外力 A / B 的剩余开放范围**。连接这些主题的是全局状态、局部观测和反馈的几何类比（`MODEL`），不构成保留计算成本与流体演化的数学同构。

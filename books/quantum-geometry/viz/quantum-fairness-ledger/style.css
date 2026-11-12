@@ -2,3 +2,11 @@
    with the ledger bar beside it. Colours come from the tokens, never from hex values. */
 #cv { cursor: grab; touch-action: none; }
 .sheet .evh { margin: 16px 0 6px; font-family: var(--font-display); font-size: 12px; letter-spacing: 0.14em; color: var(--cyan); text-transform: uppercase; }
+/* the flat overlay with the ledger bars, over the solid stage: it never takes the pointer */
+#flat { pointer-events: none; }
+#stage { container-type: inline-size; }
+
+@container (max-width: 600px) {
+  .hud-tr { top: var(--scene-top, 98px); left: 20px; right: 20px; max-width: none; justify-content: flex-start; gap: 3px; }
+  .hud-tr .chip { padding: 3px 4px; font-size: 9px; letter-spacing: 0.04em; }
+}

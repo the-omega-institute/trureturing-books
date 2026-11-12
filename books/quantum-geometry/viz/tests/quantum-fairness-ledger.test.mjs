@@ -16,8 +16,10 @@
 // exact words only at 0°, 90° and 180°, shares of r² elsewhere, in both languages; the random comparison is drawn point
 // for point, untruncated (read by wrapping kit.plot for plotB); every green box carries only its frozen statement and the
 // hand applications sit next to it in NUM boxes, side panel and drawer alike.
+// The ball is a lit solid (kit.solid) in a glass shell and the ledger bars sit on a flat overlay (#flat): solidChecks
+// runs on the opening HAAR card, and the overlay, the centre of the ball and the seeded beads are checked against the page.
 // It reads the page through window.FAIRNESS_DEBUG.
-import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
+import { session, stageFirstChecks, solidChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'quantum-fairness-ledger';
 const T = await session();
@@ -93,6 +95,34 @@ const scene = async (k) => { await page.locator('body').click({ position: { x: 3
 
 const lang = async (l) => { await page.click(`[data-lang-set="${l}"]`); await settle(page); };
 const texts = (ids) => page.evaluate((list) => Object.fromEntries(list.map((i) => [i, document.getElementById(i).textContent])), ids);
+
+/* ---------- the lit solid and the flat overlay ---------- */
+// HAAR: the opaque body is the amber cap with the 600 seeded beads, the shadows and the arrows, inside a transparent
+// glass shell that the coverage does not count (measured 8.7% opaque on the default 1440 × 900 page), so the floor is
+// 6%, not the default 12%; nothing is drawn larger to pass it. The cap is symmetric about the vertical axis it opens
+// round, so a sideways drag (yaw only) leaves its light and shade as they were by design: the turn tilts the camera
+// instead (a vertical drag on the empty corner of the stage), with the testkit's own threshold.
+const camOpen = await page.evaluate(() => Object.assign({}, window.TRV.solids[0].cam));
+const tilt = async (p) => {
+  const b = await p.evaluate(() => { const r = window.TRV.solids[0].el.getBoundingClientRect(); return [r.left, r.top, r.width, r.height]; });
+  const x = b[0] + b[2] * 0.06;
+  await p.mouse.move(x, b[1] + b[3] * 0.1); await p.mouse.down();
+  for (let k = 1; k <= 6; k++) await p.mouse.move(x, b[1] + b[3] * (0.1 + 0.05 * k));
+  await p.mouse.up();
+};
+await solidChecks(T, BOOK, ID, page, { rest: false, minShare: 0.06, turn: tilt });
+await page.evaluate((c) => { Object.assign(window.TRV.solids[0].cam, c); window.TRV.kit.flush(); }, camOpen);
+{
+  const cam = await page.evaluate(() => Object.assign({}, window.TRV.solids[0].cam));
+  check('solid: the camera is back where the card put it after the solid checks', close(cam.yaw, camOpen.yaw, 1e-12) && close(cam.pitch, camOpen.pitch, 1e-12) && close(cam.zoom, camOpen.zoom, 1e-12));
+  const f = await page.evaluate(() => { const el = document.getElementById('flat'), st = document.getElementById('stage'); return { aria: el.getAttribute('aria-hidden'), events: getComputedStyle(el).pointerEvents, sw: st.clientWidth, sh: st.clientHeight, ...window.FAIRNESS_DEBUG.overlay() }; });
+  check('overlay: #flat sits just after #cv, aria-hidden, never takes the pointer, and covers the stage', f.after === 'cv' && f.aria === 'true' && f.events === 'none' && !f.hidden && f.w === f.sw && f.h === f.sh, JSON.stringify(f));
+  check('overlay: on a wide stage the ledger bars are drawn on #flat', f.ink > 1000, JSON.stringify(f));
+  const c = await page.evaluate(() => window.FAIRNESS_DEBUG.centre());
+  check('solid: on a wide stage the ball is centred at 0.4 of the width, leaving room for the ledger', c.W > 600 && Math.abs(c.x - 0.4 * c.W) < 1e-6 && Math.abs(c.y - 0.54 * c.H) < 1e-6, JSON.stringify(c));
+  const s0 = await state(), beads = await page.evaluate(() => window.TRV.solids[0].marks().filter((m) => /^h\d+$/.test(m.key)).map((m) => [+m.key.slice(1), m.p]));
+  check('solid: every seeded point is a bead of the solid, at the page\'s own point', beads.length === s0.n && beads.every(([i, p]) => p.every((x, k) => x === s0.points[i][k])), `${beads.length} beads for N = ${s0.n}`);
+}
 
 let s = await state();
 check('opens on HAAR in the seat scene with all 600 points', s.preset === 'haar' && s.scene === 'seat' && s.n === 600 && !s.playing);
@@ -241,6 +271,8 @@ for (const lg of ['zh', 'en']) {
   check(`HAAR cited in a 315 × 500 phone frame (${lg}): the note keeps the Haar attribution, the exact quarter, the finite count and reciprocity`, lost.length === 0, lost.join(' / '));
   check(`HAAR cited in a 315 × 500 phone frame (${lg}): nothing scrolls inside the frame`, g.docScroll <= 0 && g.bodyScroll <= 0 && g.clipped <= 1 && g.inner.length === 0,
     JSON.stringify({ doc: g.docScroll, body: g.bodyScroll, clipped: g.clipped, inner: g.inner.slice(0, 3) }));
+  const cn = await fp.evaluate(() => ({ c: window.FAIRNESS_DEBUG.centre(), o: window.FAIRNESS_DEBUG.overlay() }));
+  check(`HAAR cited in a 315 × 500 phone frame (${lg}): the narrow stage centres the ball and leaves #flat blank (no ledger column)`, cn.c.W <= 600 && Math.abs(cn.c.x - 0.5 * cn.c.W) < 1e-6 && cn.o.ink === 0, JSON.stringify(cn));
   await fp.context().close();
 }
 
