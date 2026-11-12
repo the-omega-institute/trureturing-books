@@ -2631,6 +2631,65 @@
           "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
         }
       ]
+    },
+    {
+      "id": "dream-decoherence-unpinning",
+      "code": "ORTHO//DREAM",
+      "title": "梦境擦除 · 退相干、卸锚与联合逆转",
+      "title_en": "Dream erasure · decoherence, unpinning and joint reversal",
+      "summary": "同一张密度矩阵 |ρᵢⱼ| 的方格与它在屏上留下的条纹。锚点：全局纯态 Ψ 对先验投影族的退相干插值 ρ(λ) = (1 − λ)|Ψ⟩⟨Ψ| + λ Σₖ PₖΨΨ*Pₖ，跨块相干按 1 − λ 直线减少，对角的权重一格不动；λ = 1 时是捏合的不动点，熵从 0 涨到删去相干的相对熵；λ 降到 0.1，九成相干回来。记录：两份相位记录（c = −i）把 ρ₀₁ 从 1/2 转到 −1/2，只逆转一份停在 −i/2，两份都逆转复原为 1/2；记录重叠为零时逆转救不回来。醒来：读出投影只留躯体那一格，遗忘的权重与锚点强度无关。",
+      "summary_en": "One grid of the density matrix |ρᵢⱼ| and the fringes it leaves on a screen. Anchors: the decoherence interpolation ρ(λ) = (1 − λ)|Ψ⟩⟨Ψ| + λ Σₖ PₖΨΨ*Pₖ of a global pure state over a family of prior projections; the cross-block coherence falls in a straight line with 1 − λ while the diagonal weights stay put; at λ = 1 it is a fixed point of the pinching and the entropy has risen from 0 to the relative entropy of the deleted coherence; lower λ to 0.1 and nine tenths of the coherence return. Records: two phase records (c = −i) turn ρ₀₁ from 1/2 to −1/2, reversing one stops at −i/2, reversing both restores 1/2; with zero record overlap reversal cannot restore it. Waking: the readout keeps only the body cell, and the forgotten weight does not depend on the anchor strength.",
+      "path": "dream-decoherence-unpinning/",
+      "thumbnail": "dream-decoherence-unpinning/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "退相干",
+        "捏合",
+        "量子擦除",
+        "记录逆转",
+        "密度矩阵"
+      ],
+      "tags_en": [
+        "decoherence",
+        "pinching",
+        "quantum eraser",
+        "record reversal",
+        "density matrix"
+      ],
+      "theory": [
+        {
+          "label": "本书第三十七章",
+          "label_en": "Chapter 37",
+          "href": "../zh/ch37-dreams-quantum-eraser-and-nonlocal-observer.html",
+          "href_en": "../en/ch37-dreams-quantum-eraser-and-nonlocal-observer.html"
+        },
+        {
+          "label": "联合相干逆转（Blueprint）",
+          "label_en": "Joint coherent reversal (Blueprint)",
+          "href": "{trureturing}/Blueprint/D5/S3/ObserverMemory/JointCoherentReversal.md"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning.unreadState_fixed_iff"
+        },
+        {
+          "gid": "D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity"
+        },
+        {
+          "gid": "D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/JointCoherentReversal.joint_coherent_reversal"
+        },
+        {
+          "gid": "D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate"
+        }
+      ]
     }
   ]
 }
