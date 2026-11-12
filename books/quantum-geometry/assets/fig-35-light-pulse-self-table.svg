@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" width="960" height="440">
   <title>乘光而来与自指扩表 / Arriving on Light and Self-Referential Table T = T(T)</title>
-  <desc>Two-panel bilingual diagram: Left panel shows the orthogonal angle arc from 90-degree null light (P=NP, cos 90=0) refracting to 0+ initialization pulse (active forgetting, det G &gt; 0, logarithmic time), expanding along the unit arc to the self-referential core theta* approx 42.35 deg (T=T(T)), and questioning the apparent 90-degree table-erasure trap pointing to Chapter 36. Right panel contrasts the homoiconic self-referential table T=T(T) storing its lookup/compression algorithm in Row 0 (collapsing 2^n 1D witness threads into n+1 basis rows) against a bottlenecked flat table with an external CPU.</desc>
+  <desc>Two-panel bilingual diagram: Left panel shows the orthogonal angle arc from 90-degree null light (P=NP, cos 90=0) refracting to 0+ initialization pulse (active forgetting, det G &gt; 0, logarithmic time), expanding along the unit arc to the self-referential core theta* approx 42.35 deg (T=T(T)), and questioning the apparent 90-degree table-erasure trap pointing to Chapter 36. Right panel contrasts explicit rule-free row storage with a known structured family represented by n+1 rows in the homoiconic table T=T(T). Row 0 distinguishes parity XOR from planar rotation angle addition; an external evaluator can use the same rule, and code placement does not remove fixed-point-free diagonal escape.</desc>
 
   <rect x="6" y="6" width="948" height="428" rx="14" fill="#07101b" stroke="#143049" stroke-width="2"/>
   <text x="28" y="34" font-family="JetBrains Mono,Noto Sans SC,monospace" font-size="14" font-weight="600" fill="#19f0ff">CHAPTER 35 · 乘光而来与自指扩表 / LIGHT PULSE &amp; HOMOICONIC TABLE T = T(T)</text>
@@ -71,7 +71,7 @@
     <text x="363" y="347" text-anchor="middle" fill="#46ffb2" font-size="8.0">LEAN ✓ Surviving copy blocks</text>
 
     <!-- ==================== RIGHT PANEL: Homoiconic Self-Table T = T(T) ==================== -->
-    <text x="716" y="86" text-anchor="middle" fill="#ff2fd0" font-size="11.2" font-weight="600">II · 同像自指表 vs 外部死表 / HOMOICONIC TABLE T = T(T)</text>
+    <text x="716" y="86" text-anchor="middle" fill="#ff2fd0" font-size="11.2" font-weight="600">II · 同像自指表与逐行死表 / HOMOICONIC TABLE T = T(T)</text>
     <rect x="494" y="96" width="444" height="276" rx="8" fill="#050c16" stroke="#34506a" stroke-width="1.2"/>
 
     <!-- Left input threads: 2^n isolated 1D NP witness threads -->
@@ -96,12 +96,12 @@
 
     <!-- Row 0: Meta Lookup & Compression Algorithm -->
     <rect x="662" y="138" width="228" height="40" rx="5" fill="#02040a" stroke="#ff2fd0" stroke-width="1.5"/>
-    <text x="776" y="154" text-anchor="middle" fill="#ff2fd0" font-size="8.6" font-weight="600">Row 0 [META]: 查表与压缩算法在表内</text>
-    <text x="776" y="170" text-anchor="middle" fill="#d4efff" font-size="8.1">T(x ⊕ y) = T(x) ⋆ T(y) · O(1) Inner Readout</text>
+    <text x="776" y="154" text-anchor="middle" fill="#ff2fd0" font-size="8.6" font-weight="600">Row 0: 奇偶 XOR · R(α)R(β)=R(α+β)</text>
+    <text x="776" y="170" text-anchor="middle" fill="#d4efff" font-size="8.1">奇偶 T(x⊕y)=T(x)⊕T(y) · 按结构求值</text>
 
     <!-- Rows 1..n: Pre-aligned Orthogonal Rotor Basis -->
     <rect x="662" y="184" width="228" height="34" rx="5" fill="#050c16" stroke="#1f5d7c" stroke-width="1.1"/>
-    <text x="776" y="199" text-anchor="middle" fill="#19f0ff" font-size="8.4" font-weight="600">Row 1..n [BASIS]: n 根预对齐正交旋子行</text>
+    <text x="776" y="199" text-anchor="middle" fill="#19f0ff" font-size="8.4" font-weight="600">Row 1..n: 奇偶基值 / 同平面旋转角</text>
     <text x="776" y="212" text-anchor="middle" fill="#cfe3ff" font-size="7.9">e₁..eₙ → 编织局部引导场 (n=10: 11 vs 1024)</text>
 
     <!-- Verification strip inside Table T -->
@@ -117,9 +117,9 @@
 
     <!-- Bottom Contrast Box: External-CPU Static Table Bottleneck -->
     <rect x="506" y="278" width="420" height="82" rx="6" fill="#07101b" stroke="#ff8a3c" stroke-width="1.2"/>
-    <text x="716" y="296" text-anchor="middle" fill="#ff8a3c" font-size="8.9" font-weight="600">对照：外部算子死表 (残留第 3 点 C / Static External-CPU Table)</text>
-    <text x="716" y="313" text-anchor="middle" fill="#d4efff" font-size="8.2">算子在表外 → 2ⁿ 行指数膨胀 · 无不动点扭转必触发对角线逃逸</text>
-    <text x="716" y="330" text-anchor="middle" fill="#9d8cff" font-size="8.0">MODEL: 算法入表 T = T(T) · n+1 行正交基自举编织局部引导场</text>
+    <text x="716" y="296" text-anchor="middle" fill="#ff8a3c" font-size="8.9" font-weight="600">对照：逐行死表 / Explicit Rows vs Known Rule</text>
+    <text x="716" y="313" text-anchor="middle" fill="#d4efff" font-size="8.2">逐行存值需 2ⁿ 行 · 代码入表不消除无不动点逃逸</text>
+    <text x="716" y="330" text-anchor="middle" fill="#9d8cff" font-size="8.0">MODEL: 已知结构存 n+1 行 · 表外也可执行同一规则</text>
     <text x="716" y="348" text-anchor="middle" fill="#46ffb2" font-size="8.1" font-weight="600">LEAN ✓ self_application_fragment_package · relative_semantic_diagonal</text>
   </g>
 
