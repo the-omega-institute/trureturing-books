@@ -285,6 +285,14 @@
       "line": 182,
       "signature": "theorem golden_window_volume : volume goldenWindow = 1"
     },
+    "D5/S1/Depth/GoldenHurwitzBound.golden_hurwitz_bound": {
+      "module": "D5/S1/Depth/GoldenHurwitzBound",
+      "name": "D5.S1.Depth.golden_hurwitz_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:cf0763f662c3655d58498aab971b6b3dffda7be473d5796c52d3433acb494308",
+      "line": 46,
+      "signature": "theorem golden_hurwitz_bound (q : ℚ) : 1 / (Real.sqrt 5 * (q.den : ℝ) ^ 2 + q.den) < |Real.goldenRatio - q|"
+    },
     "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.goldenReciprocalMap": {
       "module": "D5/S1/FixedPoints/Algebraic/GoldenFixedPoint",
       "name": "D5.S1.FixedPoints.Algebraic.GoldenFixedPoint.goldenReciprocalMap",
@@ -316,6 +324,22 @@
       "statement_id": "sha256:f1e543c619f84ecae4890325f0da62d79dee07bfe3ea530f4a918af15cbb3343",
       "line": 94,
       "signature": "theorem continuous_average_tendsto_haar (α : ℝ) (hα : Irrational α) (ρ : ℝ) (f : AddCircle (1 : ℝ) → ℂ) (hf : Continuous f) : Tendsto (fun N : ℕ => (∑ i ∈ Finset.range N, f ((ρ + (i : ℝ) * α : ℝ) : AddCircle (1 : ℝ))) / (N : ℂ)) atTop (𝓝 (∫ x, f x ∂AddCircle.haarAddCircle))"
+    },
+    "D5/S1/Phase/ThreeGap/Main.three_gap_card_le_three": {
+      "module": "D5/S1/Phase/ThreeGap/Main",
+      "name": "ThreeGap.three_gap_card_le_three",
+      "kind": "theorem",
+      "statement_id": "sha256:73452cca2519671f0aac9172804b037d4893debaea39150d42b302516ea39ac3",
+      "line": 223,
+      "signature": "theorem three_gap_card_le_three (a : ℝ) (N : ℕ) : (gaps a N).toFinset.card ≤ 3"
+    },
+    "D5/S1/Phase/ThreeGap/Main.three_gap_lengths_eq": {
+      "module": "D5/S1/Phase/ThreeGap/Main",
+      "name": "ThreeGap.three_gap_lengths_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:73452cca2519671f0aac9172804b037d4893debaea39150d42b302516ea39ac3",
+      "line": 237,
+      "signature": "theorem three_gap_lengths_eq (a : ℝ) {N : ℕ} (h3 : (gaps a N).toFinset.card = 3) : (gaps a N).toFinset = ({etaPos a N, etaNeg a N, etaPos a N + etaNeg a N} : Finset ℝ)"
     },
     "D5/S1/Recurrence/NormOneTraceAddition.trace_recurrence": {
       "module": "D5/S1/Recurrence/NormOneTraceAddition",
@@ -652,6 +676,14 @@
       "statement_id": "sha256:8290384519fabbb47b99d637a47009c4903ac3ed57f4f1bccfa01c7a1cac221e",
       "line": 77,
       "signature": "theorem circuit_length (n : ℕ) : (circuit n).length = 2 * (n + 2)"
+    },
+    "D5/S3/Combinatorics/Partitions/ColouredEulerLedger.coloured_coefficient": {
+      "module": "D5/S3/Combinatorics/Partitions/ColouredEulerLedger",
+      "name": "D5.S3.Combinatorics.Partitions.ColouredEulerLedger.coloured_coefficient",
+      "kind": "theorem",
+      "statement_id": "sha256:c093d56982a51511137fbec5256046afbce4527120d49576e99425b789d5a110",
+      "line": 73,
+      "signature": "theorem coloured_coefficient (colors : ℕ → ℕ) (n : ℕ) : coeff n (eulerSeries (fun i => (colors (i + 1) : ℤ))) = (Nat.card (ColouredPartition colors n) : ℤ)"
     },
     "D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart.gaussian_unit": {
       "module": "D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart",
@@ -2716,6 +2748,30 @@
       "statement_id": "sha256:27a50d53ea4b7ef105570f1c854b960f2a96fb04b4ba357796287115baf6237b",
       "line": 67,
       "signature": "theorem orthogonal_syndrome_recovery (S : s → Matrix n d ℂ) (hS : OrthogonalSyndromes S) (sigma : Matrix s s ℂ) (rho : Matrix d d ℂ) : syndromeDecoding S (syndromeEncoding S sigma rho) = Matrix.trace sigma • rho"
+    },
+    "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_CAR": {
+      "module": "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner",
+      "name": "D5.S3.Quantum.SpinChains.SupersymmetricFermion.JordanWigner.fullC_CAR",
+      "kind": "theorem",
+      "statement_id": "sha256:8a81638a530816f83b4da59a0f897af918ed0c6f692bcf286a433be6a5dfa377",
+      "line": 119,
+      "signature": "theorem fullC_CAR {N : ℕ} (i : Fin N) : fullC i * (fullC i)ᴴ + (fullC i)ᴴ * fullC i = (1 : FullOperator N)"
+    },
+    "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_anticomm_of_lt": {
+      "module": "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner",
+      "name": "D5.S3.Quantum.SpinChains.SupersymmetricFermion.JordanWigner.fullC_anticomm_of_lt",
+      "kind": "theorem",
+      "statement_id": "sha256:8a81638a530816f83b4da59a0f897af918ed0c6f692bcf286a433be6a5dfa377",
+      "line": 62,
+      "signature": "theorem fullC_anticomm_of_lt {N : ℕ} (i j : Fin N) (hij : i < j) : fullC i * fullC j + fullC j * fullC i = 0"
+    },
+    "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner.fullC_mixed_anticomm_of_lt": {
+      "module": "D5/S3/Quantum/SpinChains/SupersymmetricFermion/JordanWigner",
+      "name": "D5.S3.Quantum.SpinChains.SupersymmetricFermion.JordanWigner.fullC_mixed_anticomm_of_lt",
+      "kind": "theorem",
+      "statement_id": "sha256:8a81638a530816f83b4da59a0f897af918ed0c6f692bcf286a433be6a5dfa377",
+      "line": 215,
+      "signature": "theorem fullC_mixed_anticomm_of_lt {N : ℕ} (i j : Fin N) (hij : i < j) : fullC i * (fullC j)ᴴ + (fullC j)ᴴ * fullC i = 0"
     },
     "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_attained": {
       "module": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound",

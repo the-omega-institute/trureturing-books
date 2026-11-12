@@ -348,12 +348,12 @@
       sub = `${L(`已测 ${z.k} / ${S.N} 次`, `${z.k} of ${S.N} looks done`)} · ${L('此刻留存', 'surviving now')} <span class="c-cy">${fix(z.S, 4)}</span>`;
       key = `P<sub>${S.N}</sub> = ${fix(z.PN, 4)} <small>[cos²(π/2N)]<sup>N</sup></small>`;
       rows = row('', '每段转角 180°/N', 'turn per look 180°/N', `${fix(180 / S.N, 4)}°`) + row('c', '每次答“是”cos²(π/2N)', 'a yes per look cos²(π/2N)', fix(z.p1, 4))
-        + row('m', '每段离开线的一份 sin(π/2N)', 'part off the line per look sin(π/2N)', fix(Math.sin(PI / (2 * S.N)), 4))
+        + row('m', '每段末离开线的一份（品红横段）sin(π/N)', 'part off the line at the end of a look (magenta) sin(π/N)', fix(Math.sin(PI / S.N), 4))
         + row('', '线上影子损失 1 − cos(π/N)', 'shadow lost per look 1 − cos(π/N)', fix(1 - Math.cos(PI / S.N), 4))
         + row('', '近似 1 − π²/(4N)', 'approx. 1 − π²/(4N)', S.N > 1 ? fix(1 - PI * PI / (4 * S.N), 4) : '—');
       aside = 'P_N = [cos²(π/2N)]^N';
       note = S.N === 1 ? L('只在终点测一次：不看的路一路翻到 |1⟩，留存为 0。', 'One look at the end only: the unwatched path goes all the way to |1⟩ and nothing survives.')
-        : L(`每段离开线的一份是一阶小量 ${fix(Math.sin(PI / (2 * S.N)), 3)}，影子只损失二阶小量；N 段加起来只走掉 ${fix(1 - z.PN, 3)}。`, `The part off the line per look is first order, ${fix(Math.sin(PI / (2 * S.N)), 3)}, while the shadow loses only a second-order amount; over N looks only ${fix(1 - z.PN, 3)} gets away.`);
+        : L(`每段末品红的横段长 sin(π/N) = ${fix(Math.sin(PI / S.N), 3)}，是一阶小量（希尔伯特空间里离开 |0⟩ 的振幅 sin(π/2N) = ${fix(Math.sin(PI / (2 * S.N)), 3)} 也是）；影子只损失二阶小量 1 − cos(π/N)，答“否”的概率 sin²(π/2N) 也是二阶；N 段加起来只走掉 ${fix(1 - z.PN, 3)}。`, `At the end of each look the magenta part off the line is sin(π/N) = ${fix(Math.sin(PI / S.N), 3)} long, first order (so is the Hilbert-space amplitude off |0⟩, sin(π/2N) = ${fix(Math.sin(PI / (2 * S.N)), 3)}); the shadow loses only the second-order 1 − cos(π/N), and a no has the second-order chance sin²(π/2N); over N looks only ${fix(1 - z.PN, 3)} gets away.`);
       pill = ['P_N', fix(z.PN, 3)];
     } else {
       const m = MON, j = Math.min(NR, Math.floor(t + 1e-9));

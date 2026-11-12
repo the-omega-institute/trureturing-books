@@ -58,6 +58,19 @@
 - [Chapter 31 The Essence of the Quantum Is Fairness: Fivefold Abolition of Geometric Privilege and Ergodic Statistical Holism](ch31-quantum-fairness.md)
 - [Chapter 32 Orthogonal Self-Referential Unified Field and Meta-Unification of Grand Foundational Programs](ch32-unified-field-and-meta-unification.md)
 
+# Part IX Mutual Illumination — Universal Observers, Self-Referential Table Expansion, and Transcending Reincarnation
+
+- [Chapter 33 All Beings as Observers: Self-Sustaining Basins and Mutual-Attractor Double Helices](ch33-all-beings-observers-and-mutual-attractors.md)
+- [Chapter 34 Orthogonality-Degeneracy Blind Spots: How Single vs. Double Orthogonality Inverts Observer Position](ch34-orthogonality-degeneracy-and-observer-position.md)
+- [Chapter 35 Arriving on a Pulse of Light and Self-Referential Table Expansion: From Initialization by Forgetting to the Homoiconic Loop $T = T(T)$](ch35-light-pulse-and-self-referential-table.md)
+- [Chapter 36 Infinite Discrete Steps and Quotienting Out Reincarnation: How the Hyperbolic Horizon Staircase Ends the Return-to-Light Loop](ch36-hyperbolic-steps-and-quotienting-reincarnation.md)
+
+# Part X Non-Duality — Dream Erasure, Memory Pointers, and Non-Dual Ontology
+
+- [Chapter 37 Dream Quantum Erasure, Known-Data Decoherence, and the Nonlocal Observer](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)
+- [Chapter 38 Ontological QRAM, the Observer Memory Pointer, and Recursive Self-Mapped Page Tables](ch38-observer-memory-pointer-and-ontological-qram.md)
+- [Chapter 39 The Observer Is the Ontological Universe: Substrate-Free Reflexive Domains, Relational Holography, and Spinor Self-Folding](ch39-observer-is-ontological-universe.md)
+
 # Coda and Appendices
 
 - [Coda: Outside All Spheres](coda.md)

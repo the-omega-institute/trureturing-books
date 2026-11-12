@@ -19,7 +19,7 @@ $$
 在这行只有六个符号的恒等式面前，困惑物理学界百年的波粒二象性、罗伯逊—薛定谔不确定性原理、双缝干涉与惠勒延迟选择实验，乃至传统量子力学教材里互不统属的“五大公设”，都将水落石出地收束为同一条初等几何铁律——**余弦粒子线与正弦波动面的勾股守恒 $\cos^2\theta + \sin^2\theta = 1$**。
 
 ::: {.figure src="ch06-overview"}
-**图 6。** 本章地图：第 I 栏，琥珀色的 $\vv{B}$ 落在 $\vv{A}$ 上的青色影子是 $\cos\theta$，两者张出的品红平行四边形是 $\sin\theta$；第 II 栏，四分之一圆 $D^2 + V^2 = 1$，琥珀色的点在 $\alpha = 60^\circ$ 处，由品红的 $D \approx 0.87$ 与青色的 $V = 0.5$ 拼成，圆弧两端分别是“只有路径”与“只有条纹”（[@thm-record-coherence-complementarity]）；第 III 栏，[@ex-wheeler-delayed-choice-tradeoff] 中 $\alpha = 60^\circ$ 的 $\rho$，青色的对角部分 $\Pi(\rho)$ 与品红的副对角部分 $\rho - \Pi(\rho)$ 是直角三角形的两条直角边，斜边是 $\rho$（[@cor-pinching-pythagorean]）。
+**图 6。** 本章地图：第 I 栏，琥珀色的 $\vv{B}$ 落在 $\vv{A}$ 上的青色影子是 $\cos\theta$，两者张出的品红平行四边形是 $\sin\theta$；第 II 栏，在等权纯双路、理想平衡合束并扫描参考相位的模型中，取 $\alpha = \arccos|c|$，四分之一圆 $D^2 + V^2 = 1$，琥珀色的点在 $\alpha = 60^\circ$ 处，由品红的 $D \approx 0.87$ 与青色的 $V = 0.5$ 拼成，圆弧两端分别是“只有路径”与“只有条纹”（[@thm-record-coherence-complementarity]）；第 III 栏，[@ex-wheeler-delayed-choice-tradeoff] 中 $\alpha = 60^\circ$ 的 $\rho$，青色的对角部分 $\Pi(\rho)$ 与品红的副对角部分 $\rho - \Pi(\rho)$ 是直角三角形的两条直角边，斜边是 $\rho$（[@cor-pinching-pythagorean]）。
 :::
 
 ## 6.1 内积 $\vv{A}\cdot\vv{B}$ 为何是“粒子”？外积 $\vv{A}\wedge\vv{B}$ 为何是“波”？ {#sec-inner-particle-outer-wave}
@@ -199,7 +199,7 @@ $$
 前三行是纯态：余量只来自协方差，前两行取等。后三行是混合态：第四行沿 $z$ 轴缩进球内，对易子期望从 $1$ 降到 $0.6$，而两个标准差的乘积仍是 $1$；最后一行是球心，对易子期望为零，不等式变成 $1 \ge 0$。
 :::
 
-球面上，不确定关系可以取等；往球心走，方差不会变小，对易子期望却随 $r_z$ 一起缩短，两者平方之差由混合度与协方差平方两项填满（$r_x r_y = 0$ 时恰为混合度）。
+沿固定布洛赫方向向球心收缩时，方差不减；上述平方余量由混合度与协方差平方共同组成（$r_x r_y = 0$ 时只有混合度项）。
 
 ## 6.3 双缝干涉与惠勒延迟选择的纯几何拆解：拆掉面积还是保留面积？ {#sec-double-slit-delayed-choice}
 
@@ -208,12 +208,12 @@ $$
 当一颗光子或电子穿过左缝 $\lvert L\rangle$ 与右缝 $\lvert R\rangle$ 时，如果在狭缝后方有某个环境自由度（或者路径探测器）试图记录“粒子到底走了哪条缝”，那么左缝分支会耦合到单位环境记录态 $r_L \in E$（$\|r_L\| = 1$），右缝分支会耦合到单位环境记录态 $r_R \in E$（$\|r_R\| = 1$）。
 
 ::: {.figure src="ch06-three-markers"}
-**标记的两支箭头决定屏上有没有条纹。** 每行左边是标记的两支箭头，灰色的 $r_L$ 与琥珀色的 $r_R$，右边是屏上落点的分布。不标记（$\alpha = 0$）：两支箭头重合，屏上是对比度满格的青色条纹。标记路径（$\alpha = 90^\circ$）：两支箭头垂直，品红的竖线是可区分度 $D = 1$，屏上只剩一个没有条纹的鼓包。擦除标记：箭头仍然垂直，改沿紫色的斜线读标记，按读数分出的两行是青色的条纹与错开半格的虚线反条纹，合起来仍是那个鼓包。包络是示意。
+**标记的两支箭头决定屏上有没有条纹。** 在等权纯双路、理想平衡合束并扫描参考相位的模型中，每行左边是标记的两支箭头，灰色的 $r_L$ 与琥珀色的 $r_R$，右边是屏上落点的分布。不标记（$\alpha = 0$）：两支箭头重合，屏上是对比度满格的青色条纹。标记路径（$\alpha = 90^\circ$）：两支箭头垂直，品红的竖线是可区分度 $D = 1$，屏上只剩一个没有条纹的鼓包。擦除标记：箭头仍然垂直，改沿紫色的斜线读标记，按读数分出的两行是青色的条纹与错开半格的虚线反条纹，合起来仍是那个鼓包。包络是示意。
 :::
 
 请盯住这两根环境记录箭头 $r_L$ 与 $r_R$ 之间的复内积重叠幅 $c := \langle r_L, r_R\rangle_{\mathbb{C}}$：
 
-- **干涉条纹的可见度（coherence visibility）** $V := \|c\| = |\langle r_L, r_R\rangle_{\mathbb{C}}| = \cos\alpha \in [0, 1]$，正是两根记录向量共线重叠的**内积余弦**；
+- 在**等权纯双路、理想平衡合束并扫描参考相位**的模型中，令 $\alpha := \arccos |c| \in [0, \pi/2]$。记录重叠可见度为 $V := \|c\| = |\langle r_L, r_R\rangle_{\mathbb{C}}| = \cos\alpha \in [0, 1]$；
 - **路径记录的可区分度（record distinguishability）** $D := \sqrt{1 - V^2} = \sin\alpha \in [0, 1]$，正是两根记录向量垂直张开的**外积正弦面积模长**！
 
 ::: {.viz src="double-slit-marker" preset="partial" height="500"}
@@ -269,7 +269,7 @@ $$
 现在再看惠勒的“延迟选择实验”，哪里还有半点“现在的测量窜改了光子几亿年前是粒子还是波的历史”的玄学惊悚？
 
 ::: {.example #ex-wheeler-delayed-choice-tradeoff title="双路径干涉仪与惠勒延迟选择的三档角度（α = 0, π/3, π/2）定量账本"}
-设双路径干涉仪中系统初态为等权叠加 $\frac{1}{\sqrt{2}}(\lvert 0\rangle + \lvert 1\rangle)$，与环境记录态耦合为 $\frac{1}{\sqrt{2}}(\lvert 0\rangle\otimes\lvert r_L\rangle + \lvert 1\rangle\otimes\lvert r_R\rangle)$，其中两单位记录态夹角为 $\alpha \in [0, \pi/2]$，即 $c = \langle r_L, r_R\rangle = \cos\alpha$。忽略环境后的单比特约化密度矩阵为
+设双路径干涉仪中系统初态为等权叠加 $\frac{1}{\sqrt{2}}(\lvert 0\rangle + \lvert 1\rangle)$，与环境记录态耦合为 $\frac{1}{\sqrt{2}}(\lvert 0\rangle\otimes\lvert r_L\rangle + \lvert 1\rangle\otimes\lvert r_R\rangle)$。对下方实矩阵例，取两单位环境记录态的重叠为实且非负的 $c = \langle r_L, r_R\rangle = \cos\alpha$，其中 $\alpha \in [0, \pi/2]$；这是等权、理想平衡合束并扫描参考相位的模型。忽略环境后的单比特约化密度矩阵为
 
 $$
 \rho(\alpha) = \frac{1}{2}\begin{pmatrix} 1 & \cos\alpha \\ \cos\alpha & 1 \end{pmatrix}.
@@ -309,7 +309,7 @@ $$
 :::
 
 ::: {.viz src="double-slit-marker" preset="mixed" height="500"}
-**混合的标记落在圆内。** 标记本身带噪声（纯度 $\lambda = 0.5$）：可见度仍是 $V = 0.5$，能读出的迹距离可区分度只剩 $0.43$，点沿品红的虚弧落进圆内，$D^2 + V^2 \approx 0.44 < 1$。这是上面 Englert 不等式（文献结果，未在本书形式化）的一个实例。
+**混合的标记落在圆内。** 标记本身带噪声（纯态权重 $\lambda = 0.5$，纯度 $\Tr\rho^2 = (1 + \lambda^2)/2 = 0.625$）：可见度仍是 $V = 0.5$，能读出的迹距离可区分度只剩 $0.43$，点沿品红的虚弧落进圆内，$D^2 + V^2 \approx 0.44 < 1$。这是上面 Englert 不等式（文献结果，未在本书形式化）的一个实例。
 :::
 
 ::: {.viz src="qubit-geometry" preset="area" height="500"}
@@ -317,7 +317,7 @@ $$
 :::
 
 ::: {.viz src="double-slit-marker" height="560"}
-交互实验室 `SLIT//MARKER`：屏上一个个到达的落点与条纹，互补圆上的两支标记箭头 $r_L$、$r_R$；拖动夹角，切换读标记的方式，或调低标记的纯度。页面上的数是数值演示；$D^2 + V^2 = 1$ 由 [@thm-record-coherence-complementarity] 保证，由 Lean 内核检查。
+交互实验室 `SLIT//MARKER`：屏上一个个到达的落点与条纹，互补圆上的两支标记箭头 $r_L$、$r_R$；拖动夹角，切换读标记的方式，或调低标记的纯态权重 $\lambda$。页面上的数是数值演示；纯态记录标记（$\lambda = 1$）的 $D^2 + V^2 = 1$ 由 [@thm-record-coherence-complementarity] 保证，由 Lean 内核检查；混合标记在 $\alpha > 0$ 时落进圆内、$\alpha = 0$ 时仍在圆上，是 Englert 不等式（文献结果，未在本书形式化）的情形。
 :::
 
 ## 6.4 交互实验：亲手拨动两子几何积、粒子内积与波动外积面 {#sec-interactive-qubit-geometry}

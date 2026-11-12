@@ -204,6 +204,7 @@ $$
 $$
 
 where the left summand represents a $\operatorname{CNOT}(t, c)$ gate with target $t \neq c$ and the right summand represents a single-qubit diagonal rotation $R_z(q, \varphi) = \operatorname{diag}(e^{\mp i\varphi/2})$;
+
 - For any gate list $\mathit{circuit} : \operatorname{List}(\operatorname{gate}(m))$, `circuitMatrix` is the ordered matrix product and `cnotCount` counts the number of $\mathrm{CNOT}$ gates in the list.
 
 Our next proposition proves that for every $n \ge 1$, there exists a $2n$-qubit real phase function $\theta$ invariant under bitwise negation $\theta(\neg x) = \theta(x)$ such that any ancilla-free $\{\mathrm{CNOT}, R_z\}$ circuit synthesizing $\operatorname{diag}(e^{i\theta(x)})$ up to a complex scalar $c \in \mathbb{C}$ requires at least $2^{2n-1} + 2n - 2$ $\mathrm{CNOT}$ gates.
