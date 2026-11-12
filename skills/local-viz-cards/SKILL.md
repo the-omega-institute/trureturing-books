@@ -69,6 +69,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `forgetting-rebirth-attractor` | 按内禀快度等步走，一格格逼近圆盘边界却永远到不了；按外部角度尺等步走，几步就撞上边界、擦表重来，绕成一只轮子 | `staircase` `horizon_gap` `klein_vs_poincare` `erase_reset` `quotient_fold` `cayley` |
 | `pointer-ontology-deref` | 一格一格扫要走遍全表；路由树每条分支只拨动根到叶的 log₂N 个开关；零号槽里写着页目录自己的地址，解引用一次就回到自己 | `qram_tree` `linear64` `superpose` `four_loops` `self_map` `diagonal_hit` |
 | `self-sustaining-spinor-flow` | 旋量夹住两块参考刀片，织出一根流向量与一块自旋面，三个平方始终相等；矢量转一圈就回来，旋量要转两圈 | `weave` `fierz` `turn360` `seam` `turn720` |
+| `gram-causal-elliptope` | 多记一步历史，下一步能落的窗口就收窄一圈；所有主子式非负，才装得进同一个内积空间 | `elliptope` `narrow` `violate` `flat` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -147,6 +148,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `pointer-ontology-deref` 的三条路共用一条以“步”为单位的时间轴，舞台是同一排 N = 64 格内存：上面是桶链式路由树（63 个开关，按“层、前缀”编号），下面是扫描总线，右边是第三十八章 N = 4 的二级页表（b₀ = 0x1000、T₁ = 0x2000、D₁,₂ = 0x9000 取自正文，其余地址为补全表格而选）。青色是设好的路由开关与走过的跳，墨色是扫描读过的格与要读的格，琥珀只给此刻的读头（扫描读头、路由前沿、正在读的槽、刚读出的值）；不在焦点的那两条路整体减淡。绿色框只给第三十八章用 `lean=` 引用的 `diagonal_landing_fixed`（页表场景），页面画的“读零号槽 f，f(0x1000) = 0x1000”只是它的一个具体形状；桶链式 QRAM 的 O(log N) 深度（Giovannetti–Lloyd–Maccone 2008）与 x86-64 递归页表标 `ARGUED`；“观察者是记忆指针”“p ≡ *p 的本体寻址”与“一拍走一层”的时间轴标 `MODEL`；页面不声称零号槽的一步是可实现的算法加速。路线图候选的 `stack_frame`（躯体栈帧）与 `theta_star` 未做：前者在正文里只是比喻表格的一行，后者属于第三十三、三十五章的不动点页面；候选 `idempotent_iff_range_fixed` 不在锁文件，`finite_contracting_updates_stabilize` 不在本章正文，均不标绿。本页与 `self-referential-table` · `diagonal`（对角格自己读自己）、`sphere-escape` · `diagonal`（康托尔对角线逃逸）不画同一画面：这里画的是地址解引用的路径与步数。
 
 `self-sustaining-spinor-flow` 与 `qubit-geometry` 的 `turn1`、`turn2` 分工：那两张在布洛赫球上看态 B 转一圈、两圈和旋子标量部 w 的读数，本页讲第三十九章的旋量双线性量与单侧光带：青色是流向量 J = ψe₃ψ̃（箭头长 ρ，虚线是它走过的路）；品红是自旋面 S = ψe₁e₂ψ̃，画成由 Re₁R̃、Re₂R̃ 张成、边长 √ρ、面积 ρ 的正方形（在三维里 S = I J，正是与 J 垂直的那块面）；紫色是转轴 n、绕 n 一圈的单侧（莫比乌斯）光带与插在 J 方位上的小旗，小旗方向 cos(t/2) n + sin(t/2) r 是 ψψ̃₀/ρ 的两个分量，旗尖走过的路是光带的边（两圈才闭合）；琥珀只给小旗此刻的落脚点；虚线小旗是出发时的那一面。三个平方 J²、−S²、ρ² 由 Cl(3,0) 逐刀片乘出（`NUM`），菲尔兹恒等式（含狄拉克旋量的 J<sub>μ</sub>J<sup>μ</sup> = σ² + ω²，页面不画）与 Spin(3) ≅ SU(2) → SO(3) 双覆叠按第三十九章文献注记标 `ARGUED`；“无底物自指旋量流”“观察者即宇宙本体”标 `MODEL`。绿色框只给该章定理 `thm-ch39-double-cover-no-section-and-720-lift` 用 `lean=` 引用的两条：`no_continuous_global_section` 与 `circle_double_cover_history_lift`。图注里说小旗“与出发时相反/同向”，不说“朝下/朝上”（舞台的视角里小旗是横着的）。路线图候选 `massless_knot`、`non_trivial_lift` 并入 `seam`；`grand_closure` 未做：第三十九章没有“从第一章 AB = A·B + A∧B 收束回 ψ = ψ(ψ)”的句子（章末只有一句回望第一、二章砍掉第 3 点 C 的话，且紧挨章中的旧手绘图）。
+
+`gram-causal-elliptope` 与 `timeless-causal-crystal` 的 `window`、`impossible`、`right` 及静态图 `ch29-gram-window` 分工：那几处只讲三根向量的窗口（两条余弦锁住第三条）；本页讲第四层的多步记忆：格拉姆表按 Q、P₀、P₋₁、…、P₋₍M−1₎ 排列，记忆深度 M 从 1 到 5，每多一个锚点 (y, z) = (Q·P₋₁, Q·P₀) 平面里就多一圈套在里面的椭圆，第一个变负的顺序主子式指出哪一层记忆先拒绝。舞台是三元椭圆体在历史 x = P₀·P₋₁ 处的截面：紫色是椭圆体（体积），品红是每层记忆的边界与贴边的点，青色是穿过候选的 z 的窗口和当前一层围出的泡泡（正文第四层第 2 条写作“绿色因果相容泡泡”，页面与图注不用绿色），琥珀色只给候选 Q。事件取在 ℝ⁶ = E∥ ⊕ E⊥（`flat` 卡与 ℝ³ 开关把每个事件换成它在 E∥ 上的投影再归一，说明为什么要六维）。绿色框只给第二十九章第二层行内引用的 `lagrange_gram_identity`（阶梯第二级 D₂ = 1 − z² 是面积的平方）；西尔维斯特判据、半正定与格拉姆矩阵的对应、三元椭圆体的边界标 `ARGUED`；把 G ⪰ 0 读作因果相容空间、把 `flat` 读作“无限全知观察者”一行标 `MODEL`。
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
@@ -346,9 +349,14 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十九章 | 第三座桥末 | `pythagoras-number-escape` 完整实验室 |
 | 第二十九章 | 第一层末 | `timeless-causal-crystal` · `crystal` |
 | 第二十九章 | 第二层 $\det G \ge 0$ 公式之后 | `timeless-causal-crystal` · `impossible` |
-| 第二十九章 | 第四层观察者对照表之后 | `timeless-causal-crystal` · `right` |
+| 第二十九章 | 第四层第 1 条（格拉姆椭圆体）之后 | `gram-causal-elliptope` · `elliptope` |
+| 第二十九章 | 第四层第 2 条（半正定矩阵补全）之后 | `gram-causal-elliptope` · `narrow` |
+| 第二十九章 | 第四层第 2 条之后、承接句“反过来，若硬把新的内积坐标填到泡泡之外……”之后 | `gram-causal-elliptope` · `violate` |
+| 第二十九章 | 第四层观察者对照表之后 | `gram-causal-elliptope` · `flat` |
+| 第二十九章 | 第四层观察者对照表之后、承接句“表的另一端是零记忆的瞬时观察者……”之后 | `timeless-causal-crystal` · `right` |
 | 第二十九章 | 第四层末 | `timeless-causal-crystal` · `window` |
 | 第二十九章 | 定理 `thm-ch29-gram-rigidity-and-pell` 之后 | `timeless-causal-crystal` 完整实验室 |
+| 第二十九章 | 本章小结第一段之后 | `gram-causal-elliptope` 完整实验室 |
 | 第三十章 | 第一节 · 2 列表（两道几何视界）之后 | `timeless-causal-crystal` · `thread` |
 | 第三十章 | 文献注记 `rem-ch30-query-sos-literature` 之后 | `timeless-causal-crystal` · `sos` |
 | 第三十章 | “$P$ 是场，$NP$ 是线”一节 · 1 的列表（离丝寻线）之后 | `timeless-causal-crystal` · `wilderness` |
