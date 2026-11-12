@@ -563,6 +563,155 @@ for (const lang of ['zh', 'en']) {
   await view(1440, 900);
   await pick('pythagoras'); await seek(8); checkUnitBar(await capture());
 }
+
+/* ---------- the labels above the unit bar are painted inside the conservation panel's own clip, apart ----------
+   During one repaint every clip() and fillText() on #cv is recorded with the clip active at that moment (save/restore
+   nesting and the transform included). Each label above the bar (the 1D statement and the amber xₖ readout painted
+   after it) is then drawn alone on a scratch canvas in the same font, alignment, baseline and device-pixel scale, and
+   its ink box is read from the painted pixels, not from text metrics. That ink must lie entirely within the active clip,
+   must not reach down into the unit bar, and the readout's ink box must not meet the 1D statement's (so neither is
+   painted over the other). Covered in both languages: the phone page (390 × 844, reached by the reader's
+   own path Twin → x₀ slider End → Squares → Angle → Conservation → ⏮), the chapter frame on a phone (?embed=1,
+   320 × 620) and on a wide page (?embed=1, 740 × 620), the cited figure frame (?embed=1, 740 × 500) and the desktop
+   page (1440 × 900); every supported off-scale start x₀ = 1.01 … 1.50 at step 0, and the on-scale and boundary labels
+   x₀ = 0 (x₀(x₀=1) = 1/1), x₀ = 1, x₀ = 1.50 at step 1 and the ADD-VS-SQUARE card at step 8, and the long on-scale
+   readouts x₁ … x₂₀ of the start x₀ = 0 (the widest, x₂₀(x₀=1) = 10946/17711) and x₂₀ of x₀ = 1.49. */
+const ONE_D = '1D: φ⁻¹ + φ⁻² = 1';
+const instrumentInk = (p) => p.evaluate(() => {
+  const ctx = document.getElementById('cv').getContext('2d');
+  const R = window.__inkRec = { on: false, texts: [], rects: [], clip: null, stack: [], path: [] };
+  const wrap = (name, fn) => { const orig = ctx[name]; ctx[name] = function (...a) { if (R.on) fn.apply(this, a); return orig.apply(this, a); }; };
+  const dev = (m, x, y) => [m.a * x + m.c * y + m.e, m.b * x + m.d * y + m.f];
+  const box = (m, x, y, w, h) => { const [x1, y1] = dev(m, x, y), [x2, y2] = dev(m, x + w, y + h); return [Math.min(x1, x2), Math.min(y1, y2), Math.max(x1, x2), Math.max(y1, y2)]; };
+  wrap('save', () => R.stack.push(R.clip));
+  wrap('restore', () => { R.clip = R.stack.pop() ?? null; });
+  wrap('beginPath', () => { R.path = []; });
+  wrap('rect', function (x, y, w, h) { R.path.push(box(this.getTransform(), x, y, w, h)); });
+  wrap('clip', () => {
+    // this stage clips only to axis-aligned rectangles; intersect with the clip already active
+    let c = R.path.length === 1 ? R.path[0].slice() : null;
+    if (c && R.clip) c = [Math.max(c[0], R.clip[0]), Math.max(c[1], R.clip[1]), Math.min(c[2], R.clip[2]), Math.min(c[3], R.clip[3])];
+    R.clip = c || [NaN, NaN, NaN, NaN];
+  });
+  wrap('fillRect', function (x, y, w, h) { R.rects.push({ style: this.fillStyle, b: box(this.getTransform(), x, y, w, h) }); });
+  wrap('fillText', function (text, x, y) {
+    const m = this.getTransform();
+    R.texts.push({ text: String(text), at: dev(m, x, y), s: Math.hypot(m.a, m.b), font: this.font, align: this.textAlign, base: this.textBaseline, style: this.fillStyle, clip: R.clip && R.clip.slice() });
+  });
+});
+const inkCapture = (p) => p.evaluate((ONE_D) => {
+  const R = window.__inkRec, P = window.TRV.palette;
+  R.texts = []; R.rects = []; R.clip = null; R.stack = []; R.on = true;
+  window.TRV.kit.flush();
+  R.on = false;
+  const scratch = document.createElement('canvas'), sc = scratch.getContext('2d', { willReadFrequently: true });
+  // colour without its alpha (the bar halves are translucent fills of cyan and magenta)
+  const norm = (v) => { sc.fillStyle = '#000'; sc.fillStyle = v; const f = sc.fillStyle, h = /^#(..)(..)(..)$/.exec(f); return h ? h.slice(1).map((x) => parseInt(x, 16)).join(',') : (/(\d+),\s*(\d+),\s*(\d+)/.exec(f) || []).slice(1).join(','); };
+  // device-pixel ink box of one label, read from its own pixels on a scratch canvas with the same text state
+  const ink = (t) => {
+    const pad = 40;
+    sc.setTransform(1, 0, 0, 1, 0, 0); sc.font = t.font;
+    const w = Math.ceil(sc.measureText(t.text).width * t.s) + 2 * pad, h = Math.ceil(40 * t.s) + 2 * pad;
+    scratch.width = w; scratch.height = h;
+    // same sub-pixel phase as on the stage, so the scratch pixels are the stage's own glyph pixels
+    const fx = t.at[0] - Math.floor(t.at[0]), fy = t.at[1] - Math.floor(t.at[1]);
+    const ox = (t.align === 'right' ? w - pad : t.align === 'center' ? Math.round(w / 2) : pad) + fx, oy = Math.round(h / 2) + fy;
+    sc.setTransform(t.s, 0, 0, t.s, ox, oy);
+    sc.font = t.font; sc.textAlign = t.align; sc.textBaseline = t.base; sc.fillStyle = '#fff';
+    sc.fillText(t.text, 0, 0);
+    const d = sc.getImageData(0, 0, w, h).data;
+    let x1 = Infinity, y1 = Infinity, x2 = -Infinity, y2 = -Infinity;
+    for (let j = 0; j < h; j++) for (let i = 0; i < w; i++) if (d[(j * w + i) * 4 + 3] > 0) { if (i < x1) x1 = i; if (i > x2) x2 = i; if (j < y1) y1 = j; if (j > y2) y2 = j; }
+    if (x2 < 0 || x1 === 0 || y1 === 0 || x2 === w - 1 || y2 === h - 1) return null; // nothing painted, or ink cut by the scratch edge
+    return [t.at[0] + x1 - ox, t.at[1] + y1 - oy, t.at[0] + x2 + 1 - ox, t.at[1] + y2 + 1 - oy];
+  };
+  const amber = norm(P.amber), cy = norm(P.cyan), mg = norm(P.magenta), oneD = R.texts.find((t) => t.text === ONE_D);
+  // the readout is the amber right-aligned label painted right after the 1D statement, on its line or on the line above
+  const next = oneD ? R.texts[R.texts.indexOf(oneD) + 1] : null;
+  const row = oneD ? [oneD, ...(next && norm(next.style) === amber && next.align === 'right' ? [next] : [])] : [];
+  let bar = null;
+  for (const a of R.rects) for (const b of R.rects) if (norm(a.style) === cy && norm(b.style) === mg && Math.abs(a.b[2] - b.b[0]) < 1e-6 && Math.abs(a.b[1] - b.b[1]) < 1e-6) bar = [a.b[0], a.b[1], b.b[2], b.b[3]];
+  const st = window.SPIRALS_DEBUG.state;
+  return { st: { scene: st.scene, focus: st.focus, x0: st.x0, step: st.step }, bar, row: row.map((t) => ({ text: t.text, clip: t.clip, ink: ink(t) })) };
+}, ONE_D);
+const INK = { labels: 0, worst: Infinity, overlaps: 0 };
+/* Problems of one captured label line: the expected readout present, every label's ink inside its clip and clear of the bar. */
+function inkProblems(c, label) {
+  const bad = [], L = c.row.find((r) => r.text !== ONE_D);
+  if (c.row.length !== 2 || !L || !L.text.startsWith(label)) bad.push(`line ${JSON.stringify(c.row.map((r) => r.text))} lacks ${label}`);
+  if (!c.bar) bad.push('no unit bar');
+  for (const r of c.row) {
+    const k = r.clip, b = r.ink;
+    if (!k || !b || k.some((v) => !Number.isFinite(v))) { bad.push(`${r.text}: no painted ink or no rectangular clip`); continue; }
+    const margin = Math.min(b[0] - k[0], b[1] - k[1], k[2] - b[2], k[3] - b[3]);
+    INK.labels++; INK.worst = Math.min(INK.worst, margin);
+    if (margin < 0) bad.push(`${r.text}: ink [${b.map((v) => v.toFixed(2))}] leaves clip [${k.map((v) => v.toFixed(2))}] by ${(-margin).toFixed(2)} px`);
+    if (c.bar && b[2] > c.bar[0] && b[0] < c.bar[2] && b[3] > c.bar[1]) bad.push(`${r.text}: ink bottom ${b[3].toFixed(2)} reaches the unit bar top ${c.bar[1].toFixed(2)}`);
+  }
+  const [a, b] = c.row.map((r) => r.ink);
+  if (a && b && a[0] < b[2] && b[0] < a[2] && a[1] < b[3] && b[1] < a[3]) {
+    INK.overlaps++;
+    bad.push(`${L.text}: ink [${b.map((v) => v.toFixed(2))}] is painted over the 1D statement's ink [${a.map((v) => v.toFixed(2))}] (${(Math.min(a[2], b[2]) - Math.max(a[0], b[0])).toFixed(2)} × ${(Math.min(a[3], b[3]) - Math.max(a[1], b[1])).toFixed(2)} px)`);
+  }
+  return bad;
+}
+const labelOf = (x0c, k) => { const b = x0c === 0 ? 100 : x0c, [p, q] = fibRational(b, k); return `x${subN(k)}${x0c === 0 ? '(x₀=1)' : ''}=${p}/${q}`; };
+const INK_VIEWS = [['phone', 390, 844, ''], ['chapter frame on a phone', 320, 620, '&embed=1'], ['chapter frame', 740, 620, '&embed=1'], ['figure frame', 740, 500, '&embed=1'], ['desktop', 1440, 900, '']];
+for (const lang of ['zh', 'en']) {
+  for (const [vname, w, h, q] of INK_VIEWS) {
+    const p = await T.open(BOOK, ID, `?lang=${lang}${q}`, { viewport: { width: w, height: h }, locale: lang === 'zh' ? 'zh-CN' : 'en-US' });
+    await settle(p, 200);
+    await instrumentInk(p);
+    const st = async () => { await settle(p); return p.evaluate(() => window.SPIRALS_DEBUG.state); };
+    const where = `${lang} ${vname} ${w}×${h}`;
+    // the reader's own path to the confirmed state: Twin, start slider End, Squares, Angle, Conservation, rewind
+    await p.click('[data-preset="twin"]'); await settle(p, 60);
+    await p.focus('#x0'); await p.keyboard.press('End'); await settle(p);
+    await p.click('#sceneChips [data-scene="cobweb"]'); await settle(p);
+    await p.click('#sceneChips [data-scene="angle"]'); await settle(p);
+    await p.click('#focusChips [data-focus="conservation"]'); await settle(p);
+    await p.click('#rew');
+    const s0 = await st();
+    check(`${where}: the reader's path lands on x₀ = 1.50, Angle · Conservation, step 0`,
+      s0.x0 === 1.5 && s0.scene === 'angle' && s0.focus === 'conservation' && s0.step === 0,
+      JSON.stringify({ x0: s0.x0, scene: s0.scene, focus: s0.focus, step: s0.step }));
+    const off = [];
+    for (let x0c = 150; x0c >= 101; x0c--) {
+      if (x0c !== 150) await p.evaluate((v) => { const el = document.getElementById('x0'); el.value = String(v); el.dispatchEvent(new Event('input', { bubbles: true })); }, x0c / 100);
+      await p.evaluate(() => window.SPIRALS_DEBUG.seek(0)); await settle(p);
+      const c = await inkCapture(p), bad = inkProblems(c, `${labelOf(x0c, 0)} > 1`);
+      if (c.st.x0 !== x0c / 100 || c.st.step !== 0 || c.st.scene !== 'angle') bad.push(`state ${JSON.stringify(c.st)}`);
+      if (bad.length) off.push(`x₀=${(x0c / 100).toFixed(2)}: ${bad.join('; ')}`);
+    }
+    check(`${where}: for all 50 off-scale starts x₀ = 1.01 … 1.50 at step 0 the exact "> 1" readout and the 1D statement are painted entirely inside the panel clip, clear of the bar and of each other`,
+      off.length === 0, `${off.length} failing: ${off.slice(0, 3).join(' | ')}`);
+    for (const [x0c, k] of [[150, 1], [100, 0], [0, 0]]) {
+      await p.evaluate((v) => { const el = document.getElementById('x0'); el.value = String(v); el.dispatchEvent(new Event('input', { bubbles: true })); }, x0c / 100);
+      await p.evaluate((t) => window.SPIRALS_DEBUG.seek(t), k); await settle(p);
+      const bad = inkProblems(await inkCapture(p), labelOf(x0c, k));
+      check(`${where} x₀=${(x0c / 100).toFixed(2)} k=${k}: on-scale readout ${labelOf(x0c, k)} and the 1D statement are painted entirely inside the panel clip, clear of the bar and of each other`, bad.length === 0, bad.join(' | '));
+    }
+    await p.click('[data-preset="pythagoras"]'); await settle(p, 60);
+    await p.evaluate(() => window.SPIRALS_DEBUG.seek(8)); await settle(p);
+    {
+      const bad = inkProblems(await inkCapture(p), labelOf(0, 8));
+      check(`${where} ADD-VS-SQUARE k=8: readout ${labelOf(0, 8)} and the 1D statement are painted entirely inside the panel clip, clear of the bar and of each other`, bad.length === 0, bad.join(' | '));
+    }
+    // the long on-scale readouts: every step of the start 0 (its own "(x₀=1)" form) and x₂₀ of the start 1.49
+    const long = [];
+    for (const [x0c, k] of [...Array.from({ length: 20 }, (_, j) => [0, j + 1]), [149, 20]]) {
+      await p.evaluate((v) => { const el = document.getElementById('x0'); el.value = String(v); el.dispatchEvent(new Event('input', { bubbles: true })); }, x0c / 100);
+      await p.evaluate((t) => window.SPIRALS_DEBUG.seek(t), k); await settle(p);
+      const bad = inkProblems(await inkCapture(p), labelOf(x0c, k));
+      if (bad.length) long.push(`x₀=${(x0c / 100).toFixed(2)} k=${k}: ${bad.join('; ')}`);
+    }
+    check(`${where}: the on-scale readouts x₁ … x₂₀ of x₀ = 0 and x₂₀ of x₀ = 1.49 are painted entirely inside the panel clip, clear of the bar and of the 1D statement`,
+      long.length === 0, `${long.length} failing: ${long.slice(0, 3).join(' | ')}`);
+    await p.context().close();
+  }
+}
+check(`label-line pixel-ink checks covered ${INK.labels} labels (smallest margin to the clip ${INK.worst.toFixed(2)} px, ${INK.overlaps} readouts painted over the 1D statement)`,
+  INK.labels === 2 * INK_VIEWS.length * 75 * 2 && INK.worst >= 0 && INK.overlaps === 0);
 await view(1440, 900);
 await page.click('[data-lang-set="zh"]');
 
