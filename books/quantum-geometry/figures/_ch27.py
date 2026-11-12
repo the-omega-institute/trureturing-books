@@ -19,6 +19,10 @@ LOCK = ROOT / "trureturing.lock.json"
 TITLE = 14
 CODE = 13
 PAD = 14
+CHIP = 13
+# The skeletons are drawn at most WIDTH wide: the smallest label (13) then stays at 10 px or more when a
+# phone shows the figure in its 358 px column.
+WIDTH = 460
 
 
 def lock_kind(gid: str) -> str | None:
@@ -101,7 +105,7 @@ def lean_box(p, cx: float, y: float, gid: str, *, note: str | None = None, w: fl
     name = label or gid.rsplit(".", 1)[1]
     mono = label is None
     nw = figkit.text_width(figkit.plain(name), CODE if mono else TITLE, mono=mono)
-    chip = figkit.text_width("LEAN ✓", 12, mono=True) + 14
+    chip = figkit.text_width("LEAN ✓", CHIP, mono=True) + 14
     inner = chip + 8 + nw
     if note:
         inner = max(inner, figkit.text_width(figkit.plain(note), CODE))
@@ -110,7 +114,7 @@ def lean_box(p, cx: float, y: float, gid: str, *, note: str | None = None, w: fl
     x = cx - w / 2
     p.rect(x, y, w, h, color="lean", fill="lean", fill_opacity=0.10, rx=6, width=1.6)
     x0 = cx - (chip + 8 + nw) / 2
-    p.chip(x0, y + 22, "LEAN ✓", "lean")
+    p.chip(x0, y + 22, "LEAN ✓", "lean", size=CHIP)
     p.text(x0 + chip + 8, y + 22, name, size=CODE if mono else TITLE, color="lean", mono=mono)
     if note:
         p.text(cx, y + 43, note, size=CODE, color="dim", anchor="middle")
