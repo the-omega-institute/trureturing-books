@@ -12,7 +12,8 @@ import math
 
 from tbook import figkit
 
-SIZE = (600, 300)
+SIZE = (580, 300)
+WRAP = True
 ALT = {
     "zh": "左边两个小复平面：琥珀色的箭头是 α = cos 30°（指向正右）与 β = sin 30° · e^{i70°}（转过 70°），合起来是四个实数。"
           "两个箭头都再转过同一个角 γ 的虚线副本，表示乘上全局相位。右边是一颗布洛赫球，球面上只有一支琥珀色的箭头，"
@@ -30,18 +31,17 @@ def outer(a, b):
     return [[a * a.conjugate(), a * b.conjugate()], [b * a.conjugate(), b * b.conjugate()]]
 
 
-def phasor(fig, cx, cy, r, z, name):
-    fig.circle(cx, cy, r, color="faint", width=1.2)
-    fig.line(cx - r - 6, cy, cx + r + 6, cy, "faint", 1.1)
-    fig.line(cx, cy + r + 6, cx, cy - r - 6, "faint", 1.1)
+def phasor(cv, cx, cy, r, z, name):
+    cv.circle(cx, cy, r, color="faint", width=1.2)
+    cv.line(cx - r - 6, cy, cx + r + 6, cy, "faint", 1.1)
+    cv.line(cx, cy + r + 6, cx, cy - r - 6, "faint", 1.1)
     zg = z * cmath.exp(1j * math.radians(GAMMA))
-    fig.arrow(cx, cy, cx + r * zg.real, cy - r * zg.imag, "now", 1.6, dash="4 3", opacity=0.75)
-    fig.arrow(cx, cy, cx + r * z.real, cy - r * z.imag, "now", 2.6)
-    fig.text(cx - r - 8, cy - r + 6, name, size=16, color="now", anchor="end")
+    cv.arrow(cx, cy, cx + r * zg.real, cy - r * zg.imag, "now", 1.6, dash="4 3", opacity=0.75)
+    cv.arrow(cx, cy, cx + r * z.real, cy - r * z.imag, "now", 2.6)
+    cv.text(cx - r - 8, cy - r + 6, name, size=17, color="now", anchor="end")
 
 
 def draw(fig):
-    t = fig.t
     a = complex(math.cos(math.radians(THETA / 2)), 0)
     b = cmath.exp(1j * math.radians(PHI)) * math.sin(math.radians(THETA / 2))
     g = cmath.exp(1j * math.radians(GAMMA))
@@ -52,15 +52,19 @@ def draw(fig):
     s = figkit.sph(THETA, PHI)
     assert all(abs(r[i] - s[i]) < 1e-12 for i in range(3))
 
-    R = 52
-    phasor(fig, 96, 92, R, a, "*α*")
-    phasor(fig, 96, 220, R, b, "*β*")
-    fig.text(96, 292, t("两个复数 = 四个实数", "2 complex numbers = 4 reals"), size=13, color="dim", anchor="middle")
-    fig.text(166, 158, t("虚线：同乘 e^{i*γ*}", "dashed: both × e^{i*γ*}"), size=13, color="dim")
+    left, right = fig.row([250, 300], 300, gap=16)
+    # ---- left: two complex numbers, four reals
+    R = 54
+    phasor(left, 88, 88, R, a, "*α*")
+    phasor(left, 88, 216, R, b, "*β*")
+    left.text(left.width / 2, 292, left.t("两个复数 = 四个实数", "2 complex numbers = 4 reals"), size=14, color="dim",
+              anchor="middle")
+    left.text(160, 128, left.t("虚线：", "dashed:"), size=14, color="dim")
+    left.text(160, 148, left.t("同乘 e^{i*γ*}", "both × e^{i*γ*}"), size=14, color="dim")
+    left.arrow(160, 168, 242, 168, "dim", 1.6, head=9)
 
-    fig.arrow(214, 132, 320, 132, "dim", 1.6, head=9)
-
-    sp = fig.sphere(460, 150, 104, el=18)
+    # ---- right: one arrow, two angles
+    sp = right.sphere(150, 150, 112, el=18)
     sp.outline()
     sp.great_circle((0, 0, 1), "faint", 1.2)
     sp.segment((0, 0, 0), (0, 0, 1.15), "faint", 1.2, dash="3 3")
@@ -72,7 +76,7 @@ def draw(fig):
     sp.curve([figkit.sph(90, PHI * k / 20) for k in range(21)], "dim", 1.3)
     sp.arrow(s, "now", 2.8)
     mid = figkit.slerp((0, 0, 1), s, 0.5)
-    sp.label(mid, "*θ*", dx=-16, dy=16, size=15, color="dim")
-    sp.label(figkit.sph(90, PHI / 2), "*φ*", dx=-4, dy=20, size=15, color="dim", anchor="middle")
-    sp.label(s, "*a*", dx=10, dy=-2, size=16, color="now")
-    fig.text(460, 292, t("一支箭头 = 两个角度", "one arrow = two angles"), size=13, color="dim", anchor="middle")
+    sp.label(mid, "*θ*", dx=-16, dy=16, size=16, color="dim")
+    sp.label(figkit.sph(90, PHI / 2), "*φ*", dx=-4, dy=20, size=16, color="dim", anchor="middle")
+    sp.label(s, "*a*", dx=10, dy=-2, size=17, color="now")
+    right.text(150, 292, right.t("一支箭头 = 两个角度", "one arrow = two angles"), size=14, color="dim", anchor="middle")
