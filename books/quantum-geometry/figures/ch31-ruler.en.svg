@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch31-ruler" data-lang="en" viewBox="0 0 440 330" width="440" height="330" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="Two ink unit arrows from one point, φ on the left and ψ on the right, at angle θ. Dropping perpendicularly from the tip of φ onto ψ gives one cyan shadow; dropping from the tip of ψ onto φ gives another. The two are mirror images, equally long, each labelled cos θ. Above, a grey point C joined to both tips by dashed lines is struck out with a cross.">
+<title>Two ink unit arrows from one point, φ on the left and ψ on the right, at angle θ. Dropping perpendicularly from the tip of φ onto ψ gives one cyan shadow; dropping from the tip of ψ onto φ gives another. The two are mirror images, equally long, each labelled cos θ. Above, a grey point C joined to both tips by dashed lines is struck out with a cross.</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<line x1="220" y1="41.28" x2="122" y2="130.26" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 4" fill="none"/>
+<line x1="220" y1="41.28" x2="318" y2="130.26" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 4" fill="none"/>
+<circle cx="220" cy="41.28" r="4.2" class="tf-dim"/>
+<line x1="209" y1="30.28" x2="231" y2="52.28" class="ts-dim" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+<line x1="209" y1="52.28" x2="231" y2="30.28" class="ts-dim" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+<text class="tf-dim" x="238" y="46.28" font-size="15"><tspan font-style="italic">C</tspan></text>
+<line x1="122" y1="130.26" x2="269" y2="215.13" class="ts-cyan" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<line x1="318" y1="130.26" x2="171" y2="215.13" class="ts-cyan" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<line x1="220" y1="300" x2="269" y2="215.13" class="ts-cyan" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.85"/>
+<circle cx="269" cy="215.13" r="3.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<line x1="220" y1="300" x2="171" y2="215.13" class="ts-cyan" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.85"/>
+<circle cx="171" cy="215.13" r="3.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<line x1="220" y1="300" x2="126.25" y2="137.62" class="ts-ink" stroke-width="2.2" fill="none"/>
+<path d="M122 130.26 L130.64 136.82 L123.36 141.02Z" class="tf-ink"/>
+<line x1="220" y1="300" x2="313.75" y2="137.62" class="ts-ink" stroke-width="2.2" fill="none"/>
+<path d="M318 130.26 L316.64 141.02 L309.36 136.82Z" class="tf-ink"/>
+<path d="M239.6 266.05 L237.18 264.77 L234.68 263.65 L232.11 262.72 L229.48 261.96 L226.81 261.4 L224.1 261.01 L221.37 260.82 L218.63 260.82 L215.9 261.01 L213.19 261.4 L210.52 261.96 L207.89 262.72 L205.32 263.65 L202.82 264.77 L200.4 266.05" class="ts-dim" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+<text class="tf-dim" x="220" y="253.94" font-size="14" text-anchor="middle">θ</text>
+<circle cx="220" cy="300" r="3.2" class="tf-ink"/>
+<text class="tf-ink" x="114" y="128.26" font-size="16" text-anchor="end" font-weight="600">φ</text>
+<text class="tf-ink" x="326" y="128.26" font-size="16" font-weight="600">ψ</text>
+<text class="tf-cyan ts-bg" x="281" y="229.13" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">cos θ</text>
+<text class="tf-cyan ts-bg" x="159" y="229.13" font-size="14" text-anchor="end" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">cos θ</text>
+<text class="tf-dim ts-bg" x="238" y="68" font-size="13" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">no third point needed</text>
+</svg>

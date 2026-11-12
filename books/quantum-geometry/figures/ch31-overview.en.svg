@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch31-overview" data-lang="en" data-wrap="1" viewBox="0 0 740 280" width="740" height="280" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="Three panels. Panel I: two ink unit arrows φ and ψ project onto each other; the two cyan shadows are equally long, cos θ each; the third point C above is struck out. Panel II: against the inner product ⟨φ, ψ⟩, the ink diagonal y = x and the cyan parabola y = x² cross only at 0 (φ ⊥ ψ) and 1 (φ = ψ). Panel III: 21 points laid round a circle by the golden angle; a cyan window covers 0.382 of the circle and 8 of the points land in it (cyan), the rest grey.">
+<title>Three panels. Panel I: two ink unit arrows φ and ψ project onto each other; the two cyan shadows are equally long, cos θ each; the third point C above is struck out. Panel II: against the inner product ⟨φ, ψ⟩, the ink diagonal y = x and the cyan parabola y = x² cross only at 0 (φ ⊥ ψ) and 1 (φ = ψ). Panel III: 21 points laid round a circle by the golden angle; a cyan window covers 0.382 of the circle and 8 of the points land in it (cyan), the rest grey.</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="236" height="280" viewBox="0 0 236 280">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">I  the eye-level ruler</text>
+<line x1="118" y1="93.04" x2="54" y2="151.15" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 4" fill="none"/>
+<line x1="118" y1="93.04" x2="182" y2="151.15" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 4" fill="none"/>
+<circle cx="118" cy="93.04" r="4.2" class="tf-dim"/>
+<line x1="107" y1="82.04" x2="129" y2="104.04" class="ts-dim" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+<line x1="107" y1="104.04" x2="129" y2="82.04" class="ts-dim" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+<text class="tf-dim" x="136" y="98.04" font-size="14"><tspan font-style="italic">C</tspan></text>
+<line x1="54" y1="151.15" x2="150" y2="206.57" class="ts-cyan" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<line x1="182" y1="151.15" x2="86" y2="206.57" class="ts-cyan" stroke-width="1.2" stroke-dasharray="3 3" fill="none"/>
+<line x1="118" y1="262" x2="150" y2="206.57" class="ts-cyan" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.85"/>
+<circle cx="150" cy="206.57" r="3.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<line x1="118" y1="262" x2="86" y2="206.57" class="ts-cyan" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.85"/>
+<circle cx="86" cy="206.57" r="3.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<line x1="118" y1="262" x2="58.25" y2="158.51" class="ts-ink" stroke-width="2.2" fill="none"/>
+<path d="M54 151.15 L62.64 157.71 L55.36 161.91Z" class="tf-ink"/>
+<line x1="118" y1="262" x2="177.75" y2="158.51" class="ts-ink" stroke-width="2.2" fill="none"/>
+<path d="M182 151.15 L180.64 161.91 L173.36 157.71Z" class="tf-ink"/>
+<path d="M130.8 239.83 L129.22 238.99 L127.59 238.26 L125.91 237.65 L124.19 237.16 L122.45 236.79 L120.68 236.54 L118.89 236.42 L117.11 236.42 L115.32 236.54 L113.55 236.79 L111.81 237.16 L110.09 237.65 L108.41 238.26 L106.78 238.99 L105.2 239.83" class="ts-dim" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+<text class="tf-dim" x="118" y="230.03" font-size="13" text-anchor="middle">θ</text>
+<circle cx="118" cy="262" r="3.2" class="tf-ink"/>
+<text class="tf-ink" x="46" y="149.15" font-size="15" text-anchor="end" font-weight="600">φ</text>
+<text class="tf-ink" x="190" y="149.15" font-size="15" font-weight="600">ψ</text>
+<text class="tf-cyan ts-bg" x="162" y="220.57" font-size="13" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">cos θ</text>
+<text class="tf-cyan ts-bg" x="74" y="220.57" font-size="13" text-anchor="end" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">cos θ</text>
+</svg>
+<svg class="tr-fig-panel" x="252" y="0" width="236" height="280" viewBox="0 0 236 280">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">II  the inner-product lock</text>
+<line x1="180.82" y1="44" x2="180.82" y2="240" class="ts-faint" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+<line x1="22" y1="105.89" x2="222" y2="105.89" class="ts-faint" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+<line x1="22" y1="209.05" x2="222.05" y2="209.05" class="ts-dim" stroke-width="1.3" fill="none"/>
+<path d="M228 209.05 L221 211.99 L221 206.11Z" class="tf-dim"/>
+<line x1="63.18" y1="240" x2="63.18" y2="43.95" class="ts-dim" stroke-width="1.3" fill="none"/>
+<path d="M63.18 38 L66.12 45 L60.24 45Z" class="tf-dim"/>
+<path d="M28.25 239.68 L29.5 238.58 L30.75 237.49 L32 236.39 L33.25 235.29 L34.5 234.2 L35.75 233.1 L37 232.01 L38.25 230.91 L39.5 229.81 L40.75 228.72 L42 227.62 L43.25 226.53 L44.5 225.43 L45.75 224.33 L47 223.24 L48.25 222.14 L49.5 221.04 L50.75 219.95 L52 218.85 L53.25 217.76 L54.5 216.66 L55.75 215.56 L57 214.47 L58.25 213.37 L59.5 212.28 L60.75 211.18 L62 210.08 L63.25 208.99 L64.5 207.89 L65.75 206.8 L67 205.7 L68.25 204.6 L69.5 203.51 L70.75 202.41 L72 201.32 L73.25 200.22 L74.5 199.12 L75.75 198.03 L77 196.93 L78.25 195.84 L79.5 194.74 L80.75 193.64 L82 192.55 L83.25 191.45 L84.5 190.36 L85.75 189.26 L87 188.16 L88.25 187.07 L89.5 185.97 L90.75 184.88 L92 183.78 L93.25 182.68 L94.5 181.59 L95.75 180.49 L97 179.39 L98.25 178.3 L99.5 177.2 L100.75 176.11 L102 175.01 L103.25 173.91 L104.5 172.82 L105.75 171.72 L107 170.63 L108.25 169.53 L109.5 168.43 L110.75 167.34 L112 166.24 L113.25 165.15 L114.5 164.05 L115.75 162.95 L117 161.86 L118.25 160.76 L119.5 159.67 L120.75 158.57 L122 157.47 L123.25 156.38 L124.5 155.28 L125.75 154.19 L127 153.09 L128.25 151.99 L129.5 150.9 L130.75 149.8 L132 148.71 L133.25 147.61 L134.5 146.51 L135.75 145.42 L137 144.32 L138.25 143.22 L139.5 142.13 L140.75 141.03 L142 139.94 L143.25 138.84 L144.5 137.74 L145.75 136.65 L147 135.55 L148.25 134.46 L149.5 133.36 L150.75 132.26 L152 131.17 L153.25 130.07 L154.5 128.98 L155.75 127.88 L157 126.78 L158.25 125.69 L159.5 124.59 L160.75 123.5 L162 122.4 L163.25 121.3 L164.5 120.21 L165.75 119.11 L167 118.02 L168.25 116.92 L169.5 115.82 L170.75 114.73 L172 113.63 L173.25 112.54 L174.5 111.44 L175.75 110.34 L177 109.25 L178.25 108.15 L179.5 107.06 L180.75 105.96 L182 104.86 L183.25 103.77 L184.5 102.67 L185.75 101.58 L187 100.48 L188.25 99.38 L189.5 98.29 L190.75 97.19 L192 96.09 L193.25 95 L194.5 93.9 L195.75 92.81 L197 91.71 L198.25 90.61 L199.5 89.52 L200.75 88.42 L202 87.33 L203.25 86.23 L204.5 85.13 L205.75 84.04 L207 82.94 L208.25 81.85 L209.5 80.75 L210.75 79.65 L212 78.56 L213.25 77.46 L214.5 76.37 L215.75 75.27 L217 74.17 L218.25 73.08 L219.5 71.98 L220.75 70.89 L222 69.79" class="ts-ink" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+<path d="M37.29 204.06 L38.37 204.47 L39.44 204.85 L40.51 205.23 L41.59 205.58 L42.66 205.92 L43.74 206.24 L44.81 206.54 L45.88 206.82 L46.96 207.09 L48.03 207.34 L49.1 207.58 L50.18 207.79 L51.25 207.99 L52.32 208.17 L53.4 208.34 L54.47 208.49 L55.54 208.62 L56.62 208.73 L57.69 208.83 L58.76 208.91 L59.84 208.97 L60.91 209.01 L61.99 209.04 L63.06 209.05 L64.13 209.05 L65.21 209.02 L66.28 208.98 L67.35 208.92 L68.43 208.85 L69.5 208.75 L70.57 208.64 L71.65 208.52 L72.72 208.37 L73.79 208.21 L74.87 208.03 L75.94 207.84 L77.01 207.63 L78.09 207.4 L79.16 207.15 L80.24 206.88 L81.31 206.6 L82.38 206.3 L83.46 205.99 L84.53 205.65 L85.6 205.3 L86.68 204.94 L87.75 204.55 L88.82 204.15 L89.9 203.73 L90.97 203.29 L92.04 202.84 L93.12 202.37 L94.19 201.88 L95.26 201.38 L96.34 200.86 L97.41 200.32 L98.49 199.76 L99.56 199.19 L100.63 198.6 L101.71 197.99 L102.78 197.36 L103.85 196.72 L104.93 196.06 L106 195.38 L107.07 194.69 L108.15 193.98 L109.22 193.25 L110.29 192.51 L111.37 191.74 L112.44 190.96 L113.51 190.17 L114.59 189.35 L115.66 188.52 L116.74 187.67 L117.81 186.81 L118.88 185.92 L119.96 185.02 L121.03 184.11 L122.1 183.17 L123.18 182.22 L124.25 181.25 L125.32 180.27 L126.4 179.26 L127.47 178.24 L128.54 177.21 L129.62 176.15 L130.69 175.08 L131.76 173.99 L132.84 172.88 L133.91 171.76 L134.99 170.62 L136.06 169.46 L137.13 168.29 L138.21 167.1 L139.28 165.89 L140.35 164.66 L141.43 163.42 L142.5 162.16 L143.57 160.88 L144.65 159.58 L145.72 158.27 L146.79 156.94 L147.87 155.59 L148.94 154.23 L150.01 152.85 L151.09 151.45 L152.16 150.04 L153.24 148.6 L154.31 147.15 L155.38 145.69 L156.46 144.2 L157.53 142.7 L158.6 141.18 L159.68 139.65 L160.75 138.09 L161.82 136.52 L162.9 134.94 L163.97 133.33 L165.04 131.71 L166.12 130.07 L167.19 128.42 L168.26 126.74 L169.34 125.05 L170.41 123.35 L171.49 121.62 L172.56 119.88 L173.63 118.12 L174.71 116.34 L175.78 114.55 L176.85 112.74 L177.93 110.91 L179 109.07 L180.07 107.21 L181.15 105.33 L182.22 103.43 L183.29 101.52 L184.37 99.59 L185.44 97.64 L186.51 95.67 L187.59 93.69 L188.66 91.69 L189.74 89.67 L190.81 87.64 L191.88 85.59 L192.96 83.52 L194.03 81.44 L195.1 79.33 L196.18 77.21 L197.25 75.08 L198.32 72.92 L199.4 70.75 L200.47 68.56 L201.54 66.36 L202.62 64.13 L203.69 61.89 L204.76 59.64 L205.84 57.36 L206.91 55.07 L207.99 52.76 L209.06 50.44" class="ts-cyan" stroke-width="2.6" stroke-linejoin="round" fill="none"/>
+<line x1="72.59" y1="221.05" x2="171.41" y2="221.05" class="ts-dim" stroke-width="1.3" stroke-dasharray="4 3" fill="none"/>
+<circle cx="63.18" cy="209.05" r="5.6" class="ts-bg tf-ink" stroke-width="1.4"/>
+<circle cx="180.82" cy="105.89" r="5.6" class="ts-bg tf-ink" stroke-width="1.4"/>
+<text class="tf-ink ts-bg" x="112" y="149.47" font-size="13" text-anchor="end" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">y</tspan> = <tspan font-style="italic">x</tspan></text>
+<text class="tf-cyan ts-bg" x="146.12" y="183.4" font-size="13" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">y</tspan> = <tspan font-style="italic">x</tspan>²</text>
+<text class="tf-ink ts-bg" x="53.18" y="193.05" font-size="13" text-anchor="end" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke">φ ⊥ ψ</text>
+<text class="tf-ink" x="170.82" y="97.89" font-size="13" text-anchor="end">φ = ψ</text>
+<text class="tf-dim" x="122" y="241.05" font-size="12" text-anchor="middle">no solution here</text>
+<text class="tf-dim" x="220" y="199.05" font-size="12" text-anchor="end">⟨φ, ψ⟩</text>
+</svg>
+<svg class="tr-fig-panel" x="504" y="0" width="236" height="280" viewBox="0 0 236 280">
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">III  the window&#x27;s share</text>
+<circle cx="118" cy="148" r="92" class="ts-faint" stroke-width="1.3" fill="none"/>
+<path d="M118 56 L111.51 56.23 L105.06 56.92 L98.66 58.06 L92.37 59.64 L86.2 61.67 L80.19 64.13 L74.37 67 L68.77 70.28 L63.41 73.95 L58.32 77.98 L53.53 82.37 L49.06 87.08 L44.94 92.09 L41.18 97.38 L37.8 102.93 L34.82 108.7 L32.25 114.66 L30.12 120.79 L28.42 127.06 L27.16 133.43 L26.36 139.87 L26.01 146.36 L26.13 152.85 L26.7 159.31 L27.72 165.73 L29.2 172.05 L31.12 178.25 L33.47 184.3 L36.24 190.18 L39.42 195.84 L42.98 201.26 L46.93 206.42 L51.23 211.29 L55.85 215.84" class="ts-cyan" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.55"/>
+<circle cx="66.66" cy="204.04" r="3.4" class="ts-bg tf-dim" stroke-width="1.4"/>
+<circle cx="193.71" cy="141.36" r="3.4" class="ts-bg tf-dim" stroke-width="1.4"/>
+<circle cx="57.69" cy="101.76" r="4.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="131.24" cy="222.84" r="3.4" class="ts-bg tf-dim" stroke-width="1.4"/>
+<circle cx="158.79" cy="83.87" r="3.4" class="ts-bg tf-dim" stroke-width="1.4"/>
+<circle cx="44.61" cy="167.73" r="4.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="185.45" cy="183.03" r="3.4" class="ts-bg tf-dim" stroke-width="1.4"/>
+<circle cx="91.93" cy="76.61" r="4.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="89" cy="218.25" r="3.4" class="ts-bg tf-dim" stroke-width="1.4"/>
+<circle cx="186.84" cy="115.79" r="3.4" class="ts-bg tf-dim" stroke-width="1.4"/>
+<circle cx="45.48" cy="125.25" r="4.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="156.11" cy="213.76" r="3.4" class="ts-bg tf-dim" stroke-width="1.4"/>
+<circle cx="134.32" cy="73.77" r="3.4" class="ts-bg tf-dim" stroke-width="1.4"/>
+<circle cx="55.83" cy="191.71" r="4.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="193.37" cy="157.77" r="3.4" class="ts-bg tf-dim" stroke-width="1.4"/>
+<circle cx="69.02" cy="89.89" r="4.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="114.86" cy="223.94" r="3.4" class="ts-bg tf-dim" stroke-width="1.4"/>
+<circle cx="171.61" cy="94.13" r="3.4" class="ts-bg tf-dim" stroke-width="1.4"/>
+<circle cx="42.08" cy="151.51" r="4.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="176.35" cy="196.69" r="3.4" class="ts-bg tf-dim" stroke-width="1.4"/>
+<circle cx="107.87" cy="72.68" r="4.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-cyan" x="118" y="153.76" font-size="16" text-anchor="middle" font-weight="600">8 / 21</text>
+<text class="tf-cyan" x="118" y="268" font-size="13" text-anchor="middle">2 − φ ≈ 0.382</text>
+</svg>
+</svg>
