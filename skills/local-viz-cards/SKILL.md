@@ -66,6 +66,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `quantum-fairness-ledger` | 没有特权的座位：照见是相互的，得一分就失一分，满额的纠缠与副本分不出第二份，从哪里出发都分到同样的份额 | `haar` `tradeoff` `cloning` `bell` `wstate` `ghz` `ergodic` |
 | `spherical-degeneracy-radar` | 转一次与转两次，终点不同，有的观察者却读出同一个数；把这些读不出差别的人收集起来，只剩极轴上的那一对 | `meridian` `sweep` `tilted` `hops` `equator` `frames` |
 | `unified-field-slice` | 时钟与速度是同一个圆上的线与面积；在两个平面里来回转一圈回不到原处；视界割断几条边，跨界的纠缠就封顶在那里 | `polytope` `fixedpoint` `gudermann` `photon` `abelian` `plaquette` `horizon` |
+| `gram-causal-elliptope` | 多记一步历史，下一步能落的窗口就收窄一圈；所有主子式非负，才装得进同一个内积空间 | `elliptope` `narrow` `violate` `flat` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -138,6 +139,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `spherical-degeneracy-radar` 与 `two-angle-addressing` 的 `address`、`pole` 及 `berry-loop` 的 `octant` 分工：那几张讲从北极出发的两角寻址、极点的方位角冗余与八分球回路的面积和相位，本页讲第三十四章的“读不出差别的观察者在哪里”：琥珀色是观察者探针 O 与它的轴，青色是两个结果落在观察者轴上的影子（读数）与青色虚线的盲圈（读数相同的观察者所在的大圆），淡青色是走过的盲圈，品红是第二次转动扫过的横向面、两个结果之差与两面小旗的夹角，紫色是极轴 ±e₃ 与差旋子 D 的小盘；实心点是一次（一步）的结果，空心圈是两次（两步）的结果。旋子按该章算例在 Cl(3,0) 里逐项相乘：R₁ = (1 − e₁e₃)/√2，R₂ = ((1 − e₂e₃)/√2)((1 − e₁e₂)/√2) = exp(−π/4 e₁e₂) R₁（左乘），两者都把 +e₁ 送到 +e₃。绿色框只给第三十四章用 `lean=` 引用的三条：`unit_perpendicular_pair`（与两根差向量都正交的单位向量）、`partition_inseparable_iff_kernel`（读数相同即同一纤维）与 `covariant_commutator_formula`（D 与 e₃ 对易、与 e₁ 不对易）；“简并处反演出观察者站位”标 `MODEL`；Berry—Pancharatnam 相位与虚拟 Z 门标 `ARGUED`，页面不计算；旋子乘积、读数与盲圈实算（`NUM`）。路线图候选的赤道反射轴族、`chirality`、`virtual_z` 未做：正文没有反射轴族的句子，后两者分别是 `berry-loop` 的 `reverse` 与 `pulse-area-virtual-z` 的 `vz`。
 
 `unified-field-slice` 只覆盖第三十二章上半篇（§32.1–32.2；下半篇的八纲领罗盘是 `meta-unification-compass`）。三个场景共用一条时间轴：“时钟”是单位圆加双曲线 t² − x² = 1，θ = gd(η)，青色的线是 cos θ = 1/γ（固有时率），品红的高是 sin θ = tanh η（速度），紫色是弧长 θ（`fixedpoint` 卡里弧长等于影子）；“回路”是球面上的旋子换位子 U = R₁R₂R₁⁻¹R₂⁻¹，琥珀色只给参考箭头的尖端，品红是没合上的缺口，紫色是转轴；“视界”是内接于球的正二十面体，青色是视界以内的边，品红是割断的边与每个顶点缺的 60°，琥珀是视界 λ。绿色框只给本章用 `lean=` 引用的三条：`eq_smul_minkowski_of_null`、`anchored_phase_classification`（只管单一平面的圆周相位，页面写明两个平面的换位子不在其内）、`QuantumMaxFlowMinCut.result`（桥图，页面写明二十面体不是它的实例）；Gudermann 恒等式、Dottie 不动点、720° 角亏、换位子曲率与秩 ≤ D^|∂A| 标 `ARGUED`，线/面积/视界/相互作用源的读法标 `MODEL`。路线图候选 `mincut`（桥图）与第三十章 `eth-horizon-crossover` · `bridge` 同一画面，改为二十面体上的 `horizon`；`generations`（内部空间三轴世代）在上半篇正文里没有可引用的句子，未做。
+
+`gram-causal-elliptope` 与 `timeless-causal-crystal` 的 `window`、`impossible`、`right` 及静态图 `ch29-gram-window` 分工：那几处只讲三根向量的窗口（两条余弦锁住第三条）；本页讲第四层的多步记忆：格拉姆表按 Q、P₀、P₋₁、…、P₋₍M−1₎ 排列，记忆深度 M 从 1 到 5，每多一个锚点 (y, z) = (Q·P₋₁, Q·P₀) 平面里就多一圈套在里面的椭圆，第一个变负的顺序主子式指出哪一层记忆先拒绝。舞台是三元椭圆体在历史 x = P₀·P₋₁ 处的截面：紫色是椭圆体（体积），品红是每层记忆的边界与贴边的点，青色是穿过候选的 z 的窗口和当前一层围出的泡泡（正文第四层第 2 条写作“绿色因果相容泡泡”，页面与图注不用绿色），琥珀色只给候选 Q。事件取在 ℝ⁶ = E∥ ⊕ E⊥（`flat` 卡与 ℝ³ 开关把每个事件换成它在 E∥ 上的投影再归一，说明为什么要六维）。绿色框只给第二十九章第二层行内引用的 `lagrange_gram_identity`（阶梯第二级 D₂ = 1 − z² 是面积的平方）；西尔维斯特判据、半正定与格拉姆矩阵的对应、三元椭圆体的边界标 `ARGUED`；把 G ⪰ 0 读作因果相容空间、把 `flat` 读作“无限全知观察者”一行标 `MODEL`。
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
@@ -328,9 +331,14 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十九章 | 第三座桥末 | `pythagoras-number-escape` 完整实验室 |
 | 第二十九章 | 第一层末 | `timeless-causal-crystal` · `crystal` |
 | 第二十九章 | 第二层 $\det G \ge 0$ 公式之后 | `timeless-causal-crystal` · `impossible` |
-| 第二十九章 | 第四层观察者对照表之后 | `timeless-causal-crystal` · `right` |
+| 第二十九章 | 第四层第 1 条（格拉姆椭圆体）之后 | `gram-causal-elliptope` · `elliptope` |
+| 第二十九章 | 第四层第 2 条（半正定矩阵补全）之后 | `gram-causal-elliptope` · `narrow` |
+| 第二十九章 | 第四层第 2 条之后、承接句“反过来，若硬把新的内积坐标填到泡泡之外……”之后 | `gram-causal-elliptope` · `violate` |
+| 第二十九章 | 第四层观察者对照表之后 | `gram-causal-elliptope` · `flat` |
+| 第二十九章 | 第四层观察者对照表之后、承接句“表的另一端是零记忆的瞬时观察者……”之后 | `timeless-causal-crystal` · `right` |
 | 第二十九章 | 第四层末 | `timeless-causal-crystal` · `window` |
 | 第二十九章 | 定理 `thm-ch29-gram-rigidity-and-pell` 之后 | `timeless-causal-crystal` 完整实验室 |
+| 第二十九章 | 本章小结第一段之后 | `gram-causal-elliptope` 完整实验室 |
 | 第三十章 | 第一节 · 2 列表（两道几何视界）之后 | `timeless-causal-crystal` · `thread` |
 | 第三十章 | 文献注记 `rem-ch30-query-sos-literature` 之后 | `timeless-causal-crystal` · `sos` |
 | 第三十章 | “$P$ 是场，$NP$ 是线”一节 · 1 的列表（离丝寻线）之后 | `timeless-causal-crystal` · `wilderness` |
