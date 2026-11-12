@@ -111,8 +111,36 @@ check('COPY: the joint state is (|00⟩ + |11⟩)/√2', c2.J.every((row, i) => 
 check('COPY: local entropy ln 2, the whole is pure (entropy 0), no heat', close(c2.S, LN2, 1e-9) && close(c2.Sglob, 0, 1e-7) && c2.heat === 0 && c2.linked);
 check('COPY: the system\'s reduced state equals the pinched one, and so does the reduced state of a copied ½I', close(c2.bloch[0], 0, 1e-12) && close(c2.bloch[1], 0, 1e-12));
 check('UNDO: the arrow is flat again, the record bit blank, entropy 0', close(c3.bloch[0], 1, 1e-12) && !c3.linked && close(c3.S, 0, 1e-9) && c3.heat === 0);
+// σ: the same diagonal as ρ and the opposite coherence; after the copy both reduce to the same point (theorem of §8.3)
+{
+  const flip = (J) => J.map((row, i) => row.map((x, j) => x * ((i >> 1) === (j >> 1) ? 1 : -1)));   // (Z ⊗ I) J (Z ⊗ I), by hand
+  const red = (J) => [J[0][0] + J[1][1] - J[2][2] - J[3][3], 2 * (J[0][2] + J[1][3])];              // Bloch (z, x) of the system
+  const m1 = s.hist[1], m2 = s.hist[2];
+  check('COPY: σ is the mirror of ρ before the copy (same diagonal, opposite coherence)', close(m1.blochM[0], -m1.bloch[0], 1e-12) && close(m1.blochM[1], m1.bloch[1], 1e-12) && close(m1.blochM[0], -1, 1e-12));
+  const Jm = flip(m2.J), rz = red(m2.J), sz = red(Jm);
+  check('COPY: locally ρ and σ coincide after the copy, globally the two joint states differ', close(rz[0], sz[0], 1e-12) && close(rz[1], sz[1], 1e-12) && close(m2.blochM[0], m2.bloch[0], 1e-12) && close(m2.blochM[1], m2.bloch[1], 1e-12)
+    && Math.max(...m2.J.flat().map((x, i) => Math.abs(x - Jm.flat()[i]))) > 0.4);
+  check('UNDO: σ goes back to its own place, opposite ρ', close(c3.blochM[0], -1, 1e-12) && close(c3.blochM[1], 0, 1e-12));
+}
 await page.evaluate(() => window.ERASE_DEBUG.seek(2)); await settle(page);
 check('while linked, both resets and a second copy are unavailable, undo is', await page.evaluate(() => ['reset', 'swap', 'copy'].every((o) => document.querySelector(`#ops [data-op="${o}"]`).disabled) && !document.querySelector('#ops [data-op="uncopy"]').disabled));
+
+// TWO STATES: data processing, recomputed on the Bloch arrows with the closed form of D
+await pick('dpi');
+check('TWO STATES plays by itself', await until(page, () => { const s = window.ERASE_DEBUG.state; return s.mode === 'dpi' && (s.playing || s.t > 0); }));
+await page.evaluate(() => window.ERASE_DEBUG.seek(5)); s = await state();
+{
+  const ops = ['dep', 'rot', 'pinch', 'dep', 'dep'], step = (v, o) => (o === 'dep' ? [0.5 * v[0], 0.5 * v[1]] : o === 'rot' ? turn(v, 0.7) : pinch(v));
+  let r = [0, 1], q = [1, 0]; const want = [Infinity];
+  for (const o of ops) { r = step(r, o); q = step(q, o); want.push(Dq(r, q)); }
+  const got = s.dpi.hist.map((h) => h.D);
+  check('TWO STATES: D after each step equals the closed form (∞ for two distinct pure states)', s.dpi.ops.join() === ops.join() && got[0] === Infinity && got.slice(1).every((d, i) => close(d, want[i + 1], 1e-9)), JSON.stringify(got));
+  check('TWO STATES: the chapter\'s numbers: depolarizing |0⟩ and |+⟩ with λ = 0.5 gives 0.2747; the turn by 0.7 rad leaves it; the Z pinch lowers it', got[1].toFixed(4) === '0.2747' && close(got[2], got[1], 1e-9) && got[3] < got[2] && got[3].toFixed(3) === '0.258');
+  check('TWO STATES: no step makes D larger', got.slice(1).every((d, i) => d <= (i === 0 ? Infinity : got[i]) + 1e-12));
+  check('TWO STATES: the turn moves both points rigidly (lengths and their distance unchanged)', close(Math.hypot(...s.dpi.hist[2].r), Math.hypot(...s.dpi.hist[1].r), 1e-12) && close(Math.hypot(s.dpi.hist[2].r[0] - s.dpi.hist[2].s[0], s.dpi.hist[2].r[1] - s.dpi.hist[2].s[1]), Math.hypot(s.dpi.hist[1].r[0] - s.dpi.hist[1].s[0], s.dpi.hist[1].r[1] - s.dpi.hist[1].s[1]), 1e-12));
+}
+await op('rot'); s = await state();
+check('an operation pressed in the two-state scene goes back to the ledger of one bit', s.mode === 'ledger' && s.n === 1 && s.preset === null);
 
 // operations and the rail
 await page.click('#restart'); s = await state();

@@ -13,7 +13,7 @@ As long as our gaze remains confined to static one-dimensional line segments, ho
 Opening Part II (*Unfolding Wings — From Line to Plane*), this chapter removes the mystique surrounding $i$ once and for all. We will establish a transparent geometric principle: **a single definite quantum state can determine only a one-dimensional directional line; a quantum gate turns states because a pair of non-collinear states (or a balanced pair of orthogonal operator components) spans a two-dimensional oriented area (a bivector)!** What textbooks write as the imaginary unit $i$ is not an "imaginary number" at all — it is the algebraic signature of a **planar $90^\circ$ quarter-turn generator**, because applying two successive $90^\circ$ turns in the same plane ($90^\circ + 90^\circ = 180^\circ$) inevitably reverses every vector in that plane!
 
 ::: {.figure src="ch05-overview"}
-**Figure 5.** The chapter at a glance. Panel I: the small magenta square is the unit bivector $\vv{I}$; the amber $\vv{e}_1$, multiplied twice on the right by $\vv{I}$, follows the two violet arcs through $\vv{e}_2$ to $-\vv{e}_1$. Panel II (schematic): two perpendicular arrows $A$ and $B$ of length $\frac{1}{\sqrt{2}}$ add up to the violet diagonal $S = A + B$, which ends on the dashed unit circle; the magenta square they span is $J = 2AB^*$. Panel III: the grey $\vv{v}$ turns about the violet axis $\hat{\vv{n}}$ into the amber $\vv{v}'$; the cyan part along the axis stays put, while the part in the magenta plane $\vv{B}$ turns through $\theta/2$ twice.
+**Figure 5.** The chapter at a glance. Panel I: the small magenta square is the unit bivector $\vv{I}$; the amber $\vv{e}_1$, multiplied twice on the right by $\vv{I}$, follows the two violet arcs through $\vv{e}_2$ to $-\vv{e}_1$. Panel II (schematic): two perpendicular arrows $A$ and $B$ of length $\frac{1}{\sqrt{2}}$ add up to the violet diagonal $S = A + B$, which ends on the dashed unit circle; the magenta square they span is $J = 2AB^*$. Panel III: the rotor on the left, the rotation on the right, and squaring $z \mapsto z^2$ carries the left circle onto the right one; as the angle runs from $0^\circ$ to $360^\circ$, the right circle is gone round once, back to the amber starting dot, while the violet arc on the left goes only half way from $1$ and stops at the amber $-1$ ([@thm-circle-double-cover-history-lift]).
 :::
 
 ## 5.1 Why $i^2 = -1$? The Geometric Inevitability of Two Successive $90^\circ$ Quarter-Turns by a Unit Bivector $I = \vv{e}_1 \wedge \vv{e}_2$ {#sec-unit-bivector-square}
@@ -53,10 +53,6 @@ $$
 $$
 
 The mystery dissolves on the spot. What algebraists christened the "imaginary unit" $i$ is not imaginary at all: **whenever an operator represents a norm-preserving $90^\circ$ quarter-turn in a plane (captured in matrix algebra by combining skew-adjointness $R^* = -R$ with right-unitarity $R R^* = I$), applying it twice in succession must yield the inversion $-I$**.
-
-::: {.film src="001-qubit-bloch-rotor"}
-**Half-angle rotors and the Bloch sphere (50 seconds).** An arrow on the sphere is a pure state; the geometric product splits its relation to the ruler into $\cos\theta$ along the line and $\sin\theta$ spanning an area; a rotor turns by half the angle from each side, so that after $360^\circ$ the arrow is back while the rotor is off by a sign, and only $720^\circ$ brings the rotor back.
-:::
 
 In the Lean 4 formalization module `Quantum/Algebra/Unitary`, we do not even need to postulate an external geometric algebra in advance; instead, we prove directly within $n \times n$ matrix algebra how a planar rotation generator emerges whenever a right-unitary operator $S$ ($S S^* = I$) is decomposed as a **balanced sum** $S = A + B$ of two half-norm components ($A A^* = \frac{1}{2}I$ and $B B^* = \frac{1}{2}I$, denoted [`halfIdentity`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.halfIdentity) in Lean). Unitarity of $S$ forces the symmetric cross-term $A B^* + B A^*$ to vanish, making the cross-product $A B^*$ automatically skew-adjoint!
 
@@ -151,7 +147,15 @@ Bivector geometry answers both questions in two transparent steps:
      $$
      The left half-angle $\theta/2$ and the right half-angle $\theta/2$ reinforce each other to rotate the in-plane vector by the full angle $\theta$!
 
+::: {.viz src="zyz-compile" preset="sandwich" height="500"}
+**Two half angles make one whole turn.** The amber arrow $\vv{v}$ turns $90^\circ$ about the violet $z$ axis: the cyan segment is its shadow on the axis, $\vv{v}_\perp$, and it does not move; the magenta sector is the area swept by the part in the plane, $\vv{v}_\parallel$, and a dashed line splits it into $45^\circ + 45^\circ$, one $\theta/2$ from each side. The three-dimensional sandwich action is a literature result, not formalized in this book ([@rem-clifford-rotor-literature]).
+:::
+
 To maintain strict formal boundaries: [@lemma-skew-adjoint-unitary-square] and [@thm-relative-complex-structure-square] verify the matrix-level identities $R^2 = -I_n$ and $J^2 = -I_n$ in the Lean kernel, whereas the identification of the full three-dimensional Clifford algebra with the Pauli matrix algebra $\mathrm{Cl}_{3,0}(\mathbb{R}) \cong M_2(\mathbb{C})$ (real dimension $8$), its **even subalgebra** with the quaternion algebra $\mathrm{Cl}^+_{3,0}(\mathbb{R}) \cong \mathbb{H}$ (real dimension $4$, whose unit sphere $S^3 \cong \mathrm{SU}(2)$ consists of rotors), and the full three-dimensional Rodrigues sandwich formula are documented as classical background in [@rem-clifford-rotor-literature].
+
+::: {.film src="001-qubit-bloch-rotor"}
+**Half-angle rotors and the Bloch sphere (50 seconds).** An arrow on the sphere is a pure state; the geometric product splits its relation to the ruler into $\cos\theta$ along the line and $\sin\theta$ spanning an area; a rotor turns by half the angle from each side, so that after $360^\circ$ the arrow is back while the rotor is off by a sign, and only $720^\circ$ brings the rotor back.
+:::
 
 The half angle leaves one question open. $R(2\pi) = \cos\pi - \vv{B}\sin\pi = -1$: the object is back where it started, yet the rotor is not. Is this a blemish of the notation $\theta/2$ that a cleverer parametrization would remove, or is it unavoidable? For a fixed plane of rotation $\vv{B}$ the question has a complete answer. The rotors $\cos\alpha - \vv{B}\sin\alpha$ about that plane form a circle under multiplication, and the sandwich computation above, $R\,\vv{v}_\parallel R^\dagger = R^2\,\vv{v}_\parallel$, shows that the in-plane rotation induced by a rotor $R$ is $R^2$. So within a fixed plane, "rotor $\mapsto$ rotation" is exactly the squaring map $z \mapsto z^2$ of the unit circle, and its topology is frozen at the pinned commit in the module `D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift`.
 
