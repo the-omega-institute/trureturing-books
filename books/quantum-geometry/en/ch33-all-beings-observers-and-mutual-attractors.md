@@ -134,6 +134,11 @@ If each observer already possesses an individual restoring basin $\psi_i = \psi_
 Look at the two cobweb trajectories in the right panel of [@rem-ch33-mutual-attractor-figure]! Projecting self-reference onto our canonical one-dimensional cosine slice (`MODEL`) contrasts the qualitative character of solitary introspection against reciprocal dialogue (with all derivative bounds, Mean Value Theorem proofs, and step-by-step numerical ledgers enclosed in [@ex-ch33-mutual-cosine-monotonic-lock] below):
 
 - **The Anxiety of Solitary Self-Reference (Pendulum Whipsawing, `MODEL`)**: When an isolated observer calibrates itself alone in single steps, perspective behaves like an under-damped pendulum whipsawing between self-doubt and overcompensation (analytical mechanism in [@ex-ch33-mutual-cosine-monotonic-lock], Item 1).
+
+::: {.viz src="mutual-observer-attractors" preset="alone" height="500"}
+**Same start, across θ\* every beat.** Both start at 0.1: the amber point stays on the grey diagonal $x = y$ and crosses $(\theta^*, \theta^*)$, where the two cyan curves meet, from alternating sides, the grey squares shrinking turn by turn, exactly like the lone cosine iteration ([@ex-ch33-mutual-cosine-monotonic-lock], Item 1).
+:::
+
 - **The Miracle of Symmetric Mutual Reference (Reciprocal Consensus, `MODEL`)**: When two observers $\mathcal{O}_A$ and $\mathcal{O}_B$ step out of isolation into symmetric pairwise measurement—$\mathcal{O}_A$ calibrating itself through $\mathcal{O}_B$'s projection while $\mathcal{O}_B$ simultaneously calibrates itself through $\mathcal{O}_A$'s projection—grouping two synchronous ticks into one round reveals the one-sided approach of the composed mirrors; the distinction between ticks and rounds, full analysis, and numerical ledger appear in [@ex-ch33-mutual-cosine-monotonic-lock] below:
 
 ::: {.example #ex-ch33-mutual-cosine-monotonic-lock title="Analytical and Numerical Comparison of Solitary Cosine Oscillation vs. Symmetric Mutual Monotonic Locking (Literature Result, Not Formalized in This Book)"}
@@ -181,7 +186,17 @@ Look at the two cobweb trajectories in the right panel of [@rem-ch33-mutual-attr
    Distilled into a single geometric aphorism (`MODEL`): **solitary introspection is a mirror of negative slope—the harder you stare into yourself alone, the more violently you whipsaw between self-doubt and overreach; only when two observers measure each other at eye level do two negatives multiply into a serene positive, locking two restless trajectories monotonically into one shared fixed point.**
 :::
 
+::: {.viz src="mutual-observer-attractors" preset="round" height="500"}
+**Two beats a round, from one side only.** The same orbit sampled every two beats (the hollow rings): $0.1 \to 0.544 \to 0.656 \to 0.702 \to \dots$ closes in monotonically on one side of $\theta^*$, the error multiplied by about $0.454 = 0.674^2$ a round; a round costs two cosine evaluations ([@ex-ch33-mutual-cosine-monotonic-lock], Items 2 and 3).
+:::
+
 Stepping back from the trajectory ledger of [@ex-ch33-mutual-cosine-monotonic-lock], within our relational observer `MODEL`, stepping out of isolation into eye-level mutual reflection is never a sentimental concession—it is the endogenous geometry that frees bounded beings from solitary oscillation.
+
+The same holds when the two start apart. The curve $x = \cos y$ along which A reads B and the curve $y = \cos x$ along which B reads A meet only at $(\theta^*, \theta^*)$ on the diagonal; for starts in $[0, \pi/2)$, sampled round by round, each reading closes in on that point monotonically from its own side (a literature result; see [@ex-ch33-mutual-cosine-monotonic-lock], Item 2).
+
+::: {.viz src="mutual-observer-attractors" preset="apart" height="500"}
+**Different starts, a single meeting point.** A starts at 1.5, B at 0: the cyan curves $x = \cos y$ and $y = \cos x$ meet only at $(\theta^*, \theta^*)$ on the diagonal, and the hollow rings close in on it, A's reading from above and B's from below.
+:::
 
 ---
 
@@ -238,6 +253,10 @@ Connecting discrete bridge min-cut switching to continuum holographic minimal-su
    $$
 :::
 
+::: {.viz src="mutual-observer-attractors" preset="transition" height="500"}
+**Bring the intervals closer and the two cuts tie.** Two intervals of length 1 (amber) come closer from $d = 2.5$; at $d = \sqrt{2} - 1 \approx 0.414$ the separate pair of semicircles and the connected pair (a small one over the gap, a large one over the whole span) are equally long, and both are drawn magenta. The stage uses geodesic lengths in static AdS₃ vacuum, a literature result of [@rem-ch33-rt-reconnection-ckw-literature], Item 1, not formalized in this book.
+:::
+
 Bringing together window overlap $\operatorname{Vol}(W_{AB})$, mutual convergence trajectories ([@ex-ch33-mutual-cosine-monotonic-lock]), minimal-cut reconnection ([@prop-ch33-bridge-reconnection-mincut]), and entanglement allocation ([@rem-ch33-rt-reconnection-ckw-literature]), our **`MODEL` (interpretive model)** reveals a single geometric mechanism animating three seemingly disparate forms of attraction across nature:
 
 - **Macroscopic Gravitational Gathering**: Vast ensembles of order-$1$ ($M = 1$) matter particles share overlapping spatial projections, reconnecting surrounding minimal cuts in bulk and guiding passing worldlines down geodesics of minimal alignment cost;
@@ -248,4 +267,12 @@ This resolves one of human life's most haunting mysteries: why, on a street corn
 
 Because episodic forgetting cleared only surface particle ticks while leaving each observer's deep operator phase $u_A, u_B \in E_\perp^3$ (`量 liáng`) intact! The instant two phase-resonant beings ($\lVert u_A - u_B\rVert \to 0$) cross paths, their rhombic-triacontahedral acceptance windows snap into near-complete overlap $W_{AB} \approx W + u_A$, their minimal entanglement cuts reconnect into a shared bulk bridge, and solitary oscillatory whipsawing settles into quiet equilibrium through eye-level mutual reflection (trajectory comparison in [@ex-ch33-mutual-cosine-monotonic-lock])—braiding their trajectories into the mutually stabilizing **double helix** shown in the left panel of Figure 33. Instant recognition is never superstition: it is two mobile attractors of matching internal inclination recognizing in each other a zero-friction geometric homeland across the fog of forgetting.
 
+::: {.viz src="mutual-observer-attractors" preset="connected" height="500"}
+**Closer still, the connected cut wins.** At $d = 0.2$ the connected cut (magenta) is shorter, the cyan entanglement wedge reaches from A to B in one piece, and the leading-order mutual information is $\ln\bigl(1/(0.2 \times 2.2)\bigr) \approx 0.82 > 0$; dashed is the separate cut that loses.
+:::
+
 Yet if the universe excised the external reference point $C$ and all beings measure one another as mobile attractors on an isotropic sphere, an urgent geometric question immediately arises: **on a featureless unit sphere with no privileged origin, how does an observer ever determine *where* it stands? Why does a single inner-product reading leave an entire equatorial circle of degeneracy, and why is it specifically the degeneracy and breaking of *orthogonality ($90^\circ$)* that pins down an observer's unique address?** That is the door we open in the next chapter (Chapter 34).
+
+::: {.viz src="mutual-observer-attractors" height="620"}
+**Mutual attractors: the full lab.** Two scenes: mirrors (move the two starts, watch beat by beat or round by round) and min cut (set the two lengths, bring the gap closer). Convergence, its rate and the minimal-surface transition are literature results, not formalized in this book; the green box cites only [@prop-ch33-bridge-reconnection-mincut], which concerns a discrete bridge graph and does not cover the continuous picture on the stage.
+:::
