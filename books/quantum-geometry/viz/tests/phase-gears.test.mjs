@@ -8,6 +8,7 @@
 // boundary it uses a second independent model, the finite geometric sum over the cells the comb actually has, and
 // checks every place that explains that case (note, drawer, evidence, meta, registry, Chapter 15 caption) against it.
 // It reads the page through window.PHASE_DEBUG.
+import fs from 'node:fs';
 import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'phase-gears';
@@ -74,6 +75,24 @@ check('ONE CELL: the spectrum is flat, every bar 1/8 (matrix)', worst(s.probs, s
 await pick('basis');
 check('ONE CELL plays by itself when clicked', await plays());
 check('ONE CELL stops at x = 5', await stopsAt(5));
+
+// ONE CELL, the cited still: the chain is one cyan arrow (no ink sum drawn over it), at the angle the caption names
+{
+  const shot = await T.newPage();
+  for (const lang of ['zh', 'en']) {
+    await T.goto(BOOK, ID, `?shot=1&lang=${lang}&preset=basis`, shot); await settle(shot);
+    const b = await shot.evaluate(() => window.PHASE_DEBUG.state);
+    const ang = Math.atan2(b.chain[1][1], b.chain[1][0]), want = (TAU * b.k * b.comb[0] / b.Q) % TAU;
+    // the angle as a reduced fraction of π, written the way the caption writes it
+    let p = Math.round(ang / PI * b.Q), q = b.Q; const gcd = (u, v) => (v ? gcd(v, u % v) : u); const d = gcd(p, q); p /= d; q /= d;
+    const tex = q === 1 ? `${p === 1 ? '' : p}\\pi` : `\\frac{${p === 1 ? '' : p}\\pi}{${q}}`;
+    const md = fs.readFileSync(new URL(`../../${lang}/ch15-grover-qft-and-period-finding.md`, import.meta.url), 'utf8');
+    const cap = (/::: \{\.viz src="phase-gears" preset="basis"[^}]*\}\n([\s\S]*?)\n:::/.exec(md) || [, ''])[1];
+    check(`ONE CELL still (${lang}): one cyan arrow on the chain and no ink sum over it`, b.chain.length === 2 && b.chainInk === false && close(ang, want, 1e-12));
+    check(`ONE CELL still (${lang}): the caption names the arrow's angle ${tex} and the flat bars 1/${b.Q}`, cap.includes(tex) && cap.includes(`\\frac{1}{${b.Q}}`) && b.probs.every((x) => close(x, 1 / b.Q, 1e-12)), tex);
+  }
+  await shot.close();
+}
 
 // CANCEL: Q = 16, comb {0, 4, 8, 12}, k = 1
 await pick('cancel'); check('CANCEL plays by itself', await plays());

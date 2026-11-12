@@ -100,6 +100,10 @@ const DATA = {"kinds":["theorem","def","inductive"],"index":43,"units":[{"file":
         ctx.fillStyle = c === S.src ? P.cyan : c < Math.floor(t) || (c === Math.floor(t) && t % 1 > 0) ? P.ink : P.dim;
         ctx.fillText(unitShort(u), g.X(c), g.pt + g.ih + 6);
       });
+      // what a column counts: each declaration once, in the chapter that cites it first
+      ctx.font = `${narrow ? 9.5 : 10.5}px ${TRV.fonts.body}`; ctx.textAlign = 'left'; ctx.fillStyle = P.dim;
+      const what = [L('每格一条声明，落在第一次引用它的那一章', 'one cell per declaration, in the chapter that first cites it'), L('后面的章再引用不再计', 'later citations add none')];
+      (narrow ? what : [what.join(L('；', '; '))]).forEach((line, i) => ctx.fillText(line, g.pl + 6, g.pt + 6 + i * 13));
     }
 
     // the reading position
@@ -126,6 +130,7 @@ const DATA = {"kinds":["theorem","def","inductive"],"index":43,"units":[{"file":
     }
 
     // cyan: what the chosen chapter cites (from the foot of its column)
+    const arcs = { cyan: [], amber: [] };   // what was drawn, for the probe
     const curve = (x1, y1, x2, y2, color, width, alpha) => {
       const lift = Math.min(g.ih * 0.9, 30 + Math.abs(x2 - x1) * 0.45);
       ctx.strokeStyle = color; ctx.lineWidth = width; ctx.globalAlpha = alpha; ctx.beginPath(); ctx.moveTo(x1, y1);
@@ -134,7 +139,7 @@ const DATA = {"kinds":["theorem","def","inductive"],"index":43,"units":[{"file":
     if (hasFocus && Math.floor(t) > S.src) {
       const x0 = g.X(S.src), y0 = g.Y(0);
       ctx.fillStyle = P.cyan; ctx.fillRect(x0 - cellW / 2 - 2, y0 + 1, cellW + 4, 3);
-      for (const gid of foc) if (cellBox[gid]) { const [cx, cy] = cellBox[gid]; curve(x0, y0, cx, cy, P.cyan, thumb ? 2.2 : 1.1, foc.size > 12 ? 0.45 : 0.8); }
+      for (const gid of foc) if (cellBox[gid]) { const [cx, cy] = cellBox[gid]; curve(x0, y0, cx, cy, P.cyan, thumb ? 2.2 : 1.1, foc.size > 12 ? 0.45 : 0.8); arcs.cyan.push(gid); }
       for (const gid of foc) if (cellBox[gid]) { const [cx, cy] = cellBox[gid]; ctx.strokeStyle = P.cyan; ctx.lineWidth = 1.4; ctx.strokeRect(cx - cellW / 2 - 1.5, cy - cellH / 2 - 1.5, cellW + 3, cellH + 3); }
     }
     // amber: the chosen declaration and every other chapter that cites it
@@ -142,7 +147,9 @@ const DATA = {"kinds":["theorem","def","inductive"],"index":43,"units":[{"file":
     if (sd && cellBox[sd.gid]) {
       const [cx, cy] = cellBox[sd.gid];
       for (const u of new Set(sd.cites.map((c) => c[0]))) {
-        if (u === IDX || colOf[u] === sd.col) continue;
+        // the chosen chapter's own line stays cyan: amber goes only to the other chapters that cite it
+        if (u === IDX || colOf[u] === sd.col || (hasFocus && foc.has(sd.gid) && colOf[u] === S.src)) continue;
+        arcs.amber.push(colOf[u]);
         const x2 = g.X(colOf[u]), y2 = g.Y(0);
         curve(cx, cy, x2, y2, P.amber, 1.6, 0.95);
         ctx.fillStyle = P.amber; ctx.beginPath(); ctx.arc(x2, y2 + 2, 3.2, 0, 2 * Math.PI); ctx.fill();
@@ -150,7 +157,7 @@ const DATA = {"kinds":["theorem","def","inductive"],"index":43,"units":[{"file":
       ctx.strokeStyle = P.amber; ctx.lineWidth = 2.4; ctx.shadowColor = P.amber; ctx.shadowBlur = 10;
       ctx.strokeRect(cx - cellW / 2 - 2.5, cy - cellH / 2 - 2.5, cellW + 5, cellH + 5); ctx.shadowBlur = 0;
     }
-    window.LEANMAP_BOXES = cellBox;   // read by the probe below (pointer tests)
+    window.LEANMAP_BOXES = cellBox; window.LEANMAP_ARCS = arcs;   // read by the probe below (pointer tests)
 
     const u = COLS[Math.min(NC - 1, Math.max(0, Math.ceil(t) - 1))], n = visible().length, met = metCount(t);
     $('hudBig').textContent = t <= 0 ? L('地图 · 还没开始读', 'Map · nothing read yet') : t >= NC ? L('地图 · 全书读完', 'Map · the whole book read') : L(`地图 · 读到${unitName(u)}`, `Map · read to ${unitName(u)}`);
@@ -255,12 +262,12 @@ const DATA = {"kinds":["theorem","def","inductive"],"index":43,"units":[{"file":
   const NOTES = {
     all: [`时间轴从序曲一章一章读到附录 B：每一章第一次引用的冻结声明落进这一章的柱子（绿色是定理，灰色是定义）。读完，${D.length} 格全部落定，正好是锁文件的条目数。`,
       `The rail reads from the prelude to Appendix B one chapter at a time: the frozen declarations a chapter cites first drop into its column (green theorems, grey definitions). At the end all ${D.length} cells have landed, exactly the number of entries in the lock file.`],
-    bedrock: [`第二十七章用定理环境逐行解剖的 ${env27.length} 条：青色的线从第二十七章的柱脚连回它们第一次出场的${homeNames(env27, 0)}。琥珀色选中平行四边形恒等式，另外引用它的几章也连了线。`,
-      `The ${env27.length} theorems Chapter 27 dissects in its own environments: cyan lines run from the foot of Chapter 27 back to where they first appear, ${homeNames(env27, 1)}. The parallelogram law is chosen in amber, with lines to the other chapters that cite it.`],
+    bedrock: [`第二十七章用定理环境逐行解剖的 ${env27.length} 条：${env27.length} 根青色的线从第二十七章的柱脚连回它们第一次出场的${homeNames(env27, 0)}，选中的那一格也是青线。琥珀色框住选中的平行四边形恒等式，琥珀色的线只连到另外引用它的几章。`,
+      `The ${env27.length} theorems Chapter 27 dissects in its own environments: ${env27.length} cyan lines run from the foot of Chapter 27 back to where they first appear, ${homeNames(env27, 1)}, the chosen cell's line among them. The amber frame marks the chosen parallelogram law, and amber lines go only to the other chapters that cite it.`],
     table27: [`第二十七章连同它的审计表一共引用 ${all27.length} 条：青色的线从它的柱脚伸回${span(all27, 0)}，其中 ${inParts(all27, 0, 2)} 条落在第一至三部。`,
       `Chapter 27, audit table included, cites ${all27.length} declarations: the cyan lines reach back from its foot to ${span(all27, 1)}, and ${inParts(all27, 0, 2)} of them land in Parts I–III.`],
-    closure: [`第二十八章解剖的 ${env28.length} 条：青色的线连回${homeNames(env28, 0)}。琥珀色选中未读不动点判据 unreadState_fixed_iff，它第一次出场在${DATA.units[FIX.home].n[0]}。`,
-      `The ${env28.length} theorems Chapter 28 dissects: cyan lines back to ${homeNames(env28, 1)}. The amber one is the unread fixed-point criterion unreadState_fixed_iff, which first appears in ${DATA.units[FIX.home].n[1]}.`],
+    closure: [`第二十八章解剖的 ${env28.length} 条：${env28.length} 根青色的线连回${homeNames(env28, 0)}，选中的那一格也是青线。琥珀色框住选中的未读不动点判据 unreadState_fixed_iff，它第一次出场在${DATA.units[FIX.home].n[0]}；琥珀色的线只连到另外引用它的章。`,
+      `The ${env28.length} theorems Chapter 28 dissects: ${env28.length} cyan lines back to ${homeNames(env28, 1)}, the chosen cell's line among them. The amber frame marks the chosen unread fixed-point criterion unreadState_fixed_iff, which first appears in ${DATA.units[FIX.home].n[1]}; amber lines go only to the other chapters that cite it.`],
     table28: [`第二十八章连同它的审计表一共引用 ${all28.length} 条：青色的线从它的柱脚伸回${span(all28, 0)}，其中 ${inParts(all28, 3, 5)} 条落在第四至六部。`,
       `Chapter 28, audit table included, cites ${all28.length} declarations: the cyan lines reach back from its foot to ${span(all28, 1)}, and ${inParts(all28, 3, 5)} of them land in Parts IV–VI.`],
     theorems: [`只留锁文件里种类为 theorem 的 ${nThm} 格，全是绿色；实心的被某个定理环境用 lean= 引用，空心的只出现在行内链接里。`,
@@ -291,7 +298,7 @@ const DATA = {"kinds":["theorem","def","inductive"],"index":43,"units":[{"file":
     get state() {
       const t = clock.t;
       return { t, max: NC, playing: clock.playing, preset: cards.current, filter: S.filter, src: S.src == null ? null : DATA.units[COLS[S.src]].file, srcCol: S.src, mode: S.mode, sel: S.sel,
-        visible: visible().length, met: metCount(t), focus: [...focus()].sort(), landed: visible().filter((d) => metIn(d, t)).map((d) => d.gid) };
+        visible: visible().length, met: metCount(t), focus: [...focus()].sort(), arcs: window.LEANMAP_ARCS && { cyan: [...window.LEANMAP_ARCS.cyan].sort(), amber: window.LEANMAP_ARCS.amber.map((c) => DATA.units[COLS[c]].file).sort() }, landed: visible().filter((d) => metIn(d, t)).map((d) => d.gid) };
     },
     /** The page's data as drawn: [gid, kind name, line, home unit file, [[unit file, 'e' | 'i'], …], serial]. */
     rows: () => D.map((d) => [d.gid, DATA.kinds[d.kind], d.line, DATA.units[d.home].file, d.cites.map(([u, m]) => [DATA.units[u].file, m]), d.serial]),

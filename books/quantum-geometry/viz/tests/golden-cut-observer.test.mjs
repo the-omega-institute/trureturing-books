@@ -185,6 +185,7 @@ check('at N = 233 the share of visits is within 0.01 of that measure, and the lo
 const wide = s.longest;
 await pick('narrow'); s = await seek(232); h = hitsOf(233, 0.45, 0.55);
 check('NARROW: window (0.45, 0.55); fewer visits and a longer longest gap, computed from the visits alone', near(s.u1, 0.45) && near(s.u2, 0.55) && s.hits.join() === h.join() && h.length >= 3 && s.longest === gapOf(h) && s.longest > wide && near(s.ratio, 1 / s.longest));
+check('NARROW: the still the card stops on (N = 233) prints the visits and the longest completed gap computed here, and the readouts carry no green tick', s.N === 233 && (await page.textContent('#hudSub')).includes(`进入 ${h.length} 次`) && (await page.textContent('#hudSub')).includes(`目前最长隔 ${gapOf(h)} 步`) && !/任何连续/.test(await page.textContent('#hudSub')) && (await D(() => document.querySelectorAll('#readouts .okmark').length)) === 0, await page.textContent('#hudSub'));
 s = await seek(10); h = hitsOf(11, 0.45, 0.55);
 check('NARROW with no visit yet (N = 11): no hits, no gap, and the page says so instead of inventing a bound', h.length === 0 && s.hits.length === 0 && s.longest === null && s.ratio === null && (await txt('#roKey')) === '—' && (await txt('#ro3')) === '—' && /还没有进入过/.test(await txt('#hudSub')) && (await txt('#ro1')) === '0');
 await page.click('[data-lang-set="en"]'); await settle(page, 60);

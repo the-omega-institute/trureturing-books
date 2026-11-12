@@ -121,7 +121,7 @@
     text(ctx, L('a + bφ 本身 →', 'a + bφ itself →'), g.pl + g.iw - 6, g.pt + g.ih - 9, P.dim, { align: 'right', size: 10.5, face: 'body' });
     text(ctx, L('↑ 共轭 a + bψ', '↑ the conjugate a + bψ'), g.X(0) + 6, g.pt + 8, P.dim, { size: 10.5, face: 'body' });
     if (S.patch) text(ctx, L(`固定的一小片 |x| ≤ ${PATCH}`, `the fixed patch |x| ≤ ${PATCH}`), g.X(0), g.pt + g.ih - 10, P.ink, { align: 'center', size: 11, face: 'body' });
-    else if (q.deep) text(ctx, L(`最深的点 · 离边 ${fix(margin(q.deep.c, u), 2)}`, `deepest point · ${fix(margin(q.deep.c, u), 2)} from the edge`), clamp(g.X(q.deep.x), g.pl + 70, g.pl + g.iw - 70), g.Y(lo) + 12, P.cyan, { align: 'center', size: 11, face: 'body' });
+    else if (q.deep) text(ctx, L(`最深的点 · 离边 ${fix(margin(q.deep.c, u), 2)}`, `deepest point · ${fix(margin(q.deep.c, u), 2)} from the edge`), clamp(g.X(q.deep.x), g.pl + 70, g.pl + g.iw - 70), g.Y(q.deep.c) - 15 * K - 8, P.cyan, { align: 'center', size: 11, face: 'body' });
   }
 
   /* ---------- cassini: the powers of φ in the same lattice ---------- */
@@ -147,7 +147,7 @@
     }
     if (!words) return;
     const [x, y] = power(k), tall = Math.abs(g.Y(y) - g.Y(0)) > 26;
-    text(ctx, `x·x′ = ${cassini(k) > 0n ? '+1' : '−1'}`, g.X(x / 2), tall ? g.Y(y / 2) : g.Y(0) + (y > 0 ? 14 : -13), tall ? P.ink : (y > 0 ? P.cyan : P.magenta), { align: 'center', size: 12, weight: 600 });
+    text(ctx, `x·x′ = ${cassini(k) > 0n ? '+1' : '−1'}`, g.X(x / 2), tall ? g.Y(y / 2) : g.Y(y) + (y > 0 ? -12 : 13), tall ? P.ink : (y > 0 ? P.cyan : P.magenta), { align: 'center', size: 12, weight: 600 });
     text(ctx, L('a + bφ 本身 →', 'a + bφ itself →'), g.pl + g.iw - 6, g.pt + g.ih - 8, P.dim, { align: 'right', size: 10.5, face: 'body' });
     text(ctx, L('↑ 共轭 a + bψ', '↑ the conjugate a + bψ'), g.X(0) + 6, g.pt + 8, P.dim, { size: 10.5, face: 'body' });
     text(ctx, 'x·x′ = +1', g.X(1.3), g.Y(0.95), P.cyan, { size: 10.5, alpha: 0.9 }); text(ctx, 'x·x′ = −1', g.X(1.3), g.Y(-0.95), P.magenta, { size: 10.5, alpha: 0.9 });
@@ -346,7 +346,7 @@
         : L(`窗口平移 u · 视野里选中 ${q.seen.length} 个点 · 相邻间隔：${names} · ${q.edge} 个离边不到 0.08`, `the window is shifted by u · ${q.seen.length} points selected in view · gaps between neighbours: ${names} · ${q.edge} less than 0.08 from an edge`);
       keyRO(L('相邻两点的间隔', 'gaps between neighbouring points'), `<span class="c-cy">${names}</span>`, only ? L('只有两种', 'two kinds only') : L('闭窗口两端各有一个格点', 'a lattice point on each end of the closed window'));
       set(1, L('窗口 W + u', 'the window W + u'), `[${fix(LO + u, 3)}, ${fix(HI + u, 3)}]`);
-      set(2, L('最小间隔', 'smallest gap'), `${fix(q.minGap, 3)} <span class="okmark">${q.minGap >= 1 - 1e-9 ? '≥ 1 ✓' : '✗'}</span>`);
+      set(2, L('最小间隔', 'smallest gap'), `${fix(q.minGap, 3)} ${q.minGap >= 1 - 1e-9 ? '≥ 1 ✓' : '✗'}`);
       if (S.patch) { set(3, L('容许的平移', 'admissible shifts'), `(${sgn(S.patch.lo, 3)}, ${sgn(S.patch.hi, 3)})`); set(4, L('小片以外：定住 / 未定', 'beyond the patch: fixed / undecided'), `${q.forced.length} / ${q.free.length}`); }
       else { set(3, L('视野里选中的点', 'points selected in view'), String(q.seen.length)); set(4, L('最深的点离边', 'deepest point, distance from the edge'), q.deep ? `${fix(margin(q.deep.c, u), 3)} <small>x = ${fix(q.deep.x, 2)}</small>` : '—'); }
       note = S.patch ? L('带圈的点在容许范围内怎么挪窗口都留在里面：中间这一小片把它们定住了，再远也一样。', 'The ringed points stay inside however the window moves within the admissible range: the small patch in the middle fixes them, however far away they are.')

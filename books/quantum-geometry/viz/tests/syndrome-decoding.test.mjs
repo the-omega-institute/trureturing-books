@@ -6,6 +6,7 @@
 // expectation value on the damaged state gives the syndrome, commutation read off from g·E ∓ E·g, the rooms as 8 × 2
 // embeddings S_j = E_j V, and decoding as Σ_i S_iᵀ ρ' S_i (the page uses bit arithmetic and symplectic parities).
 // The page is read through window.SYNDROME_DEBUG.
+import fs from 'node:fs';
 import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'syndrome-decoding';
@@ -118,6 +119,29 @@ const inRoom = (v, S) => { const p = mv(tp(S), v); return p[0] * p[0] + p[1] * p
 check('ROOMS: X₂ on θ = 60°, page agrees with the matrices', s.err.x.join() === '0,1,0' && agrees(s.branches[0], { x: [0, 1, 0], z: [0, 0, 0] }, 60));
 check('ROOMS: the whole state lies in room X₂ and nothing in the other three', close(inRoom(m.dam, ROOMS[2]), 1) && [0, 1, 3].every((j) => close(inRoom(m.dam, ROOMS[j]), 0)) && s.branches[0].room === 2);
 check('ROOMS: α, β ride along unchanged (S₂ᵀ of the damaged state is (α, β))', vecEq(mv(tp(ROOMS[2]), m.dam), logical(60)));
+
+// ROOMS, the cited still: the checks are read and the bars stand in the room, the decoder has not flipped anything yet
+{
+  const KET = ['000', '001', '010', '011', '100', '101', '110', '111'];
+  const shot = await T.newPage();
+  for (const lang of ['zh', 'en']) {
+    await T.goto(BOOK, ID, `?shot=1&lang=${lang}&preset=rooms`, shot); await settle(shot);
+    const r = await shot.evaluate(() => ({
+      s: window.SYNDROME_DEBUG.state,
+      amber: [...document.querySelectorAll('.tags .tag')].filter((e) => !e.hidden && e.querySelector('.c-am')).length,
+      sub: document.getElementById('hudSub').textContent, big: document.getElementById('hudBig').textContent
+    }));
+    const b = r.s.branches[0], mod = model(b.err, r.s.theta);
+    const on = [0, 1, 2, 3, 4, 5, 6, 7].filter((i) => Math.abs(mod.dam[i]) > 1e-9), syn = `(${mod.syn.map((v) => (v ? '−1' : '+1')).join(',')})`;
+    const md = fs.readFileSync(new URL(`../../${lang}/ch14-cloning-codes-and-braids.md`, import.meta.url), 'utf8');
+    const cap = (/::: \{\.viz src="syndrome-decoding" preset="rooms"[^}]*\}\n([\s\S]*?)\n:::/.exec(md) || [, ''])[1];
+    check(`ROOMS still (${lang}): stops after the checks are read, before the decoder acts (no amber flip on the stage)`, r.s.t === 2 && r.amber === 0 && !r.sub.includes(lang === 'zh' ? '翻回' : 'flip'), JSON.stringify([r.s.t, r.amber, r.sub]));
+    check(`ROOMS still (${lang}): both lights on and the bars in room ${syn}, the other three empty (matrices)`, mod.syn.join() === '1,1' && b.syn.join() === mod.syn.join() && r.big.includes(syn.replace(',', ', ')) && vecEq(b.amps[2], mod.dam));
+    const want = ['$(-1,-1)$', ...on.map((i) => `\\lvert ${KET[i]}\\rangle`)];
+    check(`ROOMS still (${lang}): the caption names room (−1,−1) and the kets ${on.map((i) => KET[i]).join(', ')} that carry the bars`, on.length === 2 && want.every((x) => cap.includes(x)), want.filter((x) => !cap.includes(x)).join(' '));
+  }
+  await shot.close();
+}
 
 // MIX: σ = diag(½, ¼, ⅛, ⅛), decoding gives Tr σ · ρ
 await pick('mix'); check('σ MIX plays', await played()); s = await state();

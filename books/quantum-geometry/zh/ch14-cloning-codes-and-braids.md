@@ -286,10 +286,6 @@ $$
 **一次交换：谁从前面过，记在第三个方向上。** 平面里的两颗粒子随时间往上走出世界线，绕中点转半圈换了位置：左边那股从前面过（离你近），右边那股从后面过。绳子上的数字是颜色：前面那股带着 $0$ 走到右边，后面那股被它改色，$1$ 变成 $0 \star 1 = 2$，正是 $\mathrm{crossing}(x, y) = (x \star y,\, x)$。
 :::
 
-::: {.viz src="braiding" preset="inverse" height="500"}
-**反着再交换一次，原样回来。** 左边先交换一次，再反着交换一次（这回右边那股从前面过），两股回到原位，颜色 $(0, 1)$ 原样回到顶端：$\mathrm{crossingInv}(\mathrm{crossing}(x, y)) = (x, y)$。右边是不交换的直线，顶端也是 $(0, 1)$。
-:::
-
 在源码模块 `D5/S0/Certificates/Quandles/BraidColoringTransport.lean` 中，这一编织不变量通过架（`Rack Q`）的代数着色传输得到了纯组合形式化。设类型 $Q$ 带有 `Rack Q` 实例，其上配备二元运算 $\star : Q \to Q \to Q$（源码记作 `act`）及逆运算 $\star^{-1} : Q \to Q \to Q$（源码记作 `invAct`），使得对每个固定的第一宗量 $x \in Q$，左平移作用映射 $L_x : y \mapsto x \star y$ 是双射（其逆映射为 $L_x^{-1} : y \mapsto x \star^{-1} y$，满足 `Function.LeftInverse (invAct x) (act x)` 与 `Function.RightInverse (invAct x) (act x)`，即 $x \star^{-1} (x \star y) = y$ 且 $x \star (x \star^{-1} y) = y$），并满足左自分配公理（left self-distributivity）：
 
 $$
@@ -308,6 +304,10 @@ $$
 \mathrm{crossing}_1\bigl(x, (y, z)\bigr) = \bigl(x \star y,\, (x, z)\bigr), \qquad
 \mathrm{crossing}_2\bigl(x, (y, z)\bigr) = \bigl(x,\, (y \star z,\, y)\bigr).
 $$
+
+::: {.viz src="braiding" preset="inverse" height="500"}
+**反着再交换一次，原样回来。** 左边先交换一次，再反着交换一次（这回右边那股从前面过），两股回到原位，颜色 $(0, 1)$ 原样回到顶端：$\mathrm{crossingInv}(\mathrm{crossing}(x, y)) = (x, y)$。右边是不交换的直线，顶端也是 $(0, 1)$。
+:::
 
 下面的推论证明，这两个相邻交叉算子在任意架 $Q$ 上严格满足三股 Yang–Baxter 编织恒等式。
 
@@ -497,6 +497,10 @@ $$
 2. **不变量只会说“不同”。** 计数不同，两个编织一定不是 Markov 等价的；计数相同，什么也推不出。
 3. **幂等公理省不得。** `coloringCount` 对任意有限的架都有定义，定理却要求 `[Quandle Q]`。[@ex-fox-three-colorings-markov] 的最后一步给出一个三元素的架，它的计数在一次稳定化下从 $3$ 变成 $0$。
 
+::: {.viz src="braiding" preset="rack" height="500"}
+**不幂等的架：添一股就一个也回不来。** 颜色规则换成 $x \star y = y + 1$。左边一股、没有交叉，三个着色都回得来。右边添一股、交叉一次：新股抄来的 $0$ 过交叉变成 $0 \star 0 = 1$，接回来对不上（品红），九个着色一个也回不来。
+:::
+
 ::: {.example #ex-fox-three-colorings-markov title="三种颜色数出 3、3、9：$\sigma_1$、$\sigma_1^2$、$\sigma_1^3$ 的闭合着色与稳定化前后的同一个数（含文献说明，未在本书形式化）"}
 **文献结果，未在本书形式化。** 下表“闭合的图形”一列（哪个编织闭合成哪个结或链环）是几何识别，属于经典纽结理论。本例的全部计数由穷举得到（每一个都可以手算核对），属手工推导，不是 Lean 结论；Lean 验证的是 [@thm-quandle-coloring-markov-invariant] 所断言的相等关系。
 
@@ -538,10 +542,6 @@ $$
 
 ::: {.viz src="braiding" preset="trefoil" height="500"}
 **$\sigma_1$ 与 $\sigma_1^3$ 数出不同的数。** 左边 $\sigma_1$，右边 $\sigma_1^3$，颜色都从 $(0, 1)$ 出发：左边接回来对不上（品红），右边对得上（青色）。回得来的着色左边 $3$ 个，右边 $9$ 个；$3 \ne 9$，按 [@thm-quandle-coloring-markov-invariant] 两者不是 Markov 等价的。
-:::
-
-::: {.viz src="braiding" preset="rack" height="500"}
-**不幂等的架：添一股就一个也回不来。** 颜色规则换成 $x \star y = y + 1$。左边一股、没有交叉，三个着色都回得来。右边添一股、交叉一次：新股抄来的 $0$ 过交叉变成 $0 \star 0 = 1$，接回来对不上（品红），九个着色一个也回不来。
 :::
 
 ::: {.remark #rem-alexander-markov-literature title="Artin、Alexander 与 Markov：从代数 Markov 类到链环不变量（文献结果，未在本书形式化）"}

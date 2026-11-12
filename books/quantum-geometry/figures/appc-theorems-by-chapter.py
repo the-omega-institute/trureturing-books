@@ -73,12 +73,12 @@ TYPICAL = sorted(n for _, _, n in ROWS)[:-7]            # every other chapter
 assert min(TYPICAL) == 4 and max(TYPICAL) == 10 < TIED[0][2]
 
 ALT = {
-    "zh": f"柱状图：横轴是第一章到第三十九章与终章，纵轴是这一章的定理环境用 lean= 引用的冻结定理条数，柱子都是绿色。"
+    "zh": f"柱状图：横轴是第一章到第三十九章与终章，纵轴是这一章的定理环境用 lean= 引用的冻结定理条数，同一条定理在几章被引用就各计一次，柱子都是绿色。"
           f"浅色底纹按部分组，标着罗马数字 I 到 X。最高的是第 {TOP[0]} 章，{TOP[2]} 条；其次第 {SECOND[0]} 章 {SECOND[2]} 条，"
           f"第 {THIRD[0]} 章 {THIRD[2]} 条，第 {FOURTH[0]} 章 {FOURTH[2]} 条；第 14 章、第 29 章与终章各 {TIED[0][2]} 条；其余各章 4 到 10 条。"
           f"40 根柱子合计 {TOTAL} 条，与附录 C 的 C.1 索引逐章一致。",
     "en": f"Bar chart: the horizontal axis runs over chapters 1 to 39 and the coda (C), the vertical axis is the number of frozen "
-          f"theorems the chapter's theorem environments cite with lean=; all bars are green. Light bands group the chapters "
+          f"theorems the chapter's theorem environments cite with lean=, a theorem counted again in each chapter that cites it; all bars are green. Light bands group the chapters "
           f"by part, marked I to X. The tallest is chapter {TOP[0]} with {TOP[2]}; then chapter {SECOND[0]} with "
           f"{SECOND[2]}, chapter {THIRD[0]} with {THIRD[2]}, chapter {FOURTH[0]} with {FOURTH[2]}; chapters 14 and 29 and the coda with {TIED[0][2]} each; "
           f"every other chapter has 4 to 10. The 40 bars add up to {TOTAL}, chapter by chapter the same as the C.1 index "
@@ -117,6 +117,6 @@ def draw(fig):
     ax.xaxis(ticks=ticks, labels=[str(v) for v in ticks[:-1]] + [t("终", "C")], size=14)
     fig.text(ax.x + ax.w / 2, ax.Y(0) + 40, t("章", "chapter"), size=14, color="dim", anchor="middle")
     ax.yaxis(ticks=(0, 10, 20, 30), size=14)
-    fig.text(8, 20, t("定理环境里 lean= 引用的冻结定理", "frozen theorems cited with lean= in theorem environments"),
+    fig.text(8, 20, t("每章定理环境 lean= 引用的定理（跨章重复计）", "theorems each chapter cites with lean= (reuse counts again)"),
              size=14, color="dim")
     fig.text(fig.width - 8, 20, t(f"合计 {TOTAL}", f"total {TOTAL}"), size=14, color="lean", weight=600, anchor="end")
