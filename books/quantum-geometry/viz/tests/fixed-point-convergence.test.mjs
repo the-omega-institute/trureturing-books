@@ -90,6 +90,15 @@ s = await seek(30);
 check('GOLDEN: the error ratio at step 30 is −1/φ² ≈ −0.381966 (within 1e-8)', Math.abs(s.ratio + 1 / toNum(mul(PH, PH))) < 1e-8 && Math.abs(s.slope + 0.381966) < 1e-6, `${s.ratio}`);
 check('GOLDEN: the green box for φ shows, the one for θ* hides', await page.evaluate(() => !document.querySelector('.lean[data-map="golden"]').hidden && document.querySelector('.lean[data-map="cos"]').hidden));
 
+/* FAR: the cosine from 3 */
+await pick('far');
+check('FAR card plays and stops at step 12', await stopped(12));
+s = await state();
+const o3f = orbit('cos', 300, 'iter', 60);
+check('FAR: the cosine from x₀ = 3, whole view', s.map === 'cos' && s.x0 === 3 && s.cam === 'whole');
+check('FAR: the first step lands in [−1, 1] (cos 3 = −0.98999), and the orbit agrees with an independent one', Math.abs(toNum(o3f.xs[1]) - Math.cos(3)) < 1e-15 && Math.abs(Math.cos(3)) <= 1 && s.u.every((u, k) => rel(u, o3f.d[k]) < 1e-12));
+check('FAR: by step 40 the path is within 1e-6 of the same θ* as from 1, and still not on it', Math.abs(o3f.d[40]) < 1e-6 && o3f.d[40] !== 0);
+
 /* CIRCLE */
 await pick('circle');
 check('CIRCLE card plays and stops at step 14', await stopped(14));
