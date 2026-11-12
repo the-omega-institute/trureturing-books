@@ -360,7 +360,6 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十九章 | 第一座桥“表盘立刻说明线素数写不成两平方和”一段之后 | `pythagoras-number-escape` · `seven` |
 | 第二十九章 | 定理 `thm-ch29-face-prime-two-squares` 证明后“几何上，p = a² + b² 说的是半径 √p 的圆穿过格点”一段之后 | `pythagoras-number-escape` · `five` |
 | 第二十九章 | 第一座桥手工推导 3（线素数的负佩尔方程无解）之后 | `pythagoras-number-escape` · `locked` |
-| 第二十九章 | 例 `ex-ch29-face-and-line-primes` 之后、文献注记 `rem-ch29-pell-primes-hilbert-literature` 之前 | `pythagoras-number-escape` · `minus` |
 | 第二十九章 | 第二座桥文献注记 `rem-ch29-elliptic-torus-literature` 之后 | `hairy-ball-normal-escape` · `torus` |
 | 第二十九章 | 第三座桥文献注记 `rem-ch29-hasse-gauss-literature` 之后 | `pythagoras-number-escape` · `count` |
 | 第二十九章 | 文献注记 `rem-ch29-arithmetic-geometry-literature` 之后 | `pythagoras-number-escape` · `sato` |
@@ -370,26 +369,23 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十九章 | 第四层第 1 条（格拉姆椭圆体）之后 | `gram-causal-elliptope` · `elliptope` |
 | 第二十九章 | 第四层第 2 条（半正定矩阵补全）之后 | `gram-causal-elliptope` · `narrow` |
 | 第二十九章 | 第四层第 2 条之后、承接句“反过来，若硬把新的内积坐标填到泡泡之外……”之后 | `gram-causal-elliptope` · `violate` |
-| 第二十九章 | 第四层观察者对照表之后 | `gram-causal-elliptope` · `flat` |
 | 第二十九章 | 第四层观察者对照表之后、承接句“表的另一端是零记忆的瞬时观察者……”之后 | `timeless-causal-crystal` · `right` |
-| 第二十九章 | 第四层末 | `timeless-causal-crystal` · `window` |
-| 第二十九章 | 定理 `thm-ch29-gram-rigidity-and-pell` 之后 | `timeless-causal-crystal` 完整实验室 |
 | 第二十九章 | 本章小结第一段之后 | `gram-causal-elliptope` 完整实验室 |
 | 第三十章 | 第一节 · 2 列表（两道几何视界）之后 | `timeless-causal-crystal` · `thread` |
 | 第三十章 | 文献注记 `rem-ch30-query-sos-literature` 之后 | `timeless-causal-crystal` · `sos` |
 | 第三十章 | “$P$ 是场，$NP$ 是线”一节 · 1 的列表（离丝寻线）之后 | `timeless-causal-crystal` · `wilderness` |
 | 第三十章 | 文献注记 `rem-ch30-karmarkar-kasteleyn-literature` 之后 | `timeless-causal-crystal` · `field` |
+| 第三十章 | “$P$ 是场，$NP$ 是线”一节末（“这八个字……”一段之后） | `timeless-causal-crystal` 完整实验室 |
 | 第三十章 | ETH 一节 · 1 末（张量关联场） | `eth-horizon-crossover` · `bridge` |
-| 第三十章 | 例 `ex-ch30-galactic-crossover-scale` 之后 | `eth-horizon-crossover` · `human`、`cross` |
+| 第三十章 | 例 `ex-ch30-galactic-crossover-scale` 之后 | `eth-horizon-crossover` · `atoms` |
 | 第三十章 | 例 `ex-ch30-galactic-crossover-scale` 后三点启示的第一条（银河算法）之后 | `eth-horizon-crossover` · `constant` |
-| 第三十章 | ETH 一节末 | `eth-horizon-crossover` · `atoms`，随后完整实验室 |
-| 第三十章 | 文献注记 `rem-ch30-lamb-decomposition-literature` 之后 | `navier-stokes-p-np` · `potential` |
+| 第三十章 | ETH 一节末 | `eth-horizon-crossover` 完整实验室 |
 | 第三十章 | 纳维—斯托克斯一节 · 1 末（兰姆恒等式） | `navier-stokes-p-np` · `vortex` |
-| 第三十章 | 文献注记 `rem-ch30-vorticity-transport-literature` 之后 | `navier-stokes-p-np` · `flat`、`strain` |
-| 第三十章 | 文献注记 `rem-ch30-navier-stokes-forced-literature` 之后、`runaway` 之前 | `navier-stokes-p-np` · `burgers` |
-| 第三十章 | 文献注记 `rem-ch30-navier-stokes-forced-literature` 之后、猜想 `conj-coda-navier-stokes-regularity` 之前 | `navier-stokes-p-np` · `runaway` |
+| 第三十章 | 文献注记 `rem-ch30-vorticity-transport-literature` 之后 | `navier-stokes-p-np` · `strain` |
+| 第三十章 | 纳维—斯托克斯一节 · 2 列表第 1 条（二维平面情形）之后、第 2 条之前 | `navier-stokes-p-np` · `flat` |
+| 第三十章 | 文献注记 `rem-ch30-navier-stokes-forced-literature` 之后、猜想 `conj-coda-navier-stokes-regularity` 之前 | `navier-stokes-p-np` · `burgers` |
+| 第三十章 | 猜想 `conj-coda-navier-stokes-regularity` 之后 | `navier-stokes-p-np` · `runaway` |
 | 第三十章 | 定理 `thm-coda-quadratic-advection-no-closure` 的证明之后 | `navier-stokes-p-np` · `mixed` |
-| 第三十章 | `mixed` 之后 | `navier-stokes-p-np` · `closed` |
 | 第三十章 | 纳维—斯托克斯一节末 | `navier-stokes-p-np` 完整实验室 |
 | 第三十一章 | §31.1 “丈量互易”列表之后 | `quantum-fairness-ledger` · `haar` |
 | 第三十一章 | §31.1 零免费午餐账本三项列表之后 | `quantum-fairness-ledger` · `tradeoff` |
