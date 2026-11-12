@@ -11,7 +11,7 @@
   const DS = [2, 3, 5, 6, 7, 10, 11, 13, 14, 15, 17, 19, 21, 22, 23, 26, 29, 30, 31, 33, 34, 35, 37];
   const sieve = (N) => { const s = new Uint8Array(N + 1), out = []; for (let i = 2; i <= N; i++) { if (!s[i]) { out.push(i); for (let j = i * i; j <= N; j += i) s[j] = 1; } } return out; };
   const ODD = sieve(97).slice(1), ALL = sieve(3000).slice(1);
-  const S = { scene: 'pell', d: 2, curve: 'cm', lucas: false, sato: false };
+  const S = { scene: 'pell', d: 2, curve: 'cm', sato: false };
   const sci = (x) => { if (x === 0) return '0'; const e = Math.floor(Math.log10(Math.abs(x))), m = x / Math.pow(10, e); return Math.abs(e) < 3 ? x.toPrecision(3) : `${m.toFixed(2)}×10${String(e).replace('-', '−').split('').map((c) => ({ '−': '⁻', 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹' }[c])).join('')}`; };
   const signed = (v) => (v > 0 ? '+' : '−') + String(v < 0 ? -v : v);
 
@@ -69,19 +69,11 @@
   const step = () => Math.floor(clock.t + 1e-9), frac = () => clock.t - step();
   const prime = () => ODD[Math.min(step(), ODD.length - 1)];
 
-  const lucasMode = () => S.scene === 'pell' && S.d === 5 && S.lucas;
-  /** The green ring with the largest index that is inside the view: (Fₖ, Lₖ) and Lₖ² − 5Fₖ². */
-  function lucasInView(nmax, mmax) {
-    let best = null;
-    LUCAS.forEach(([l, fb], k) => { if (fb <= nmax && l <= mmax) best = { k, L: l, F: fb, delta: l * l - 5 * fb * fb }; });
-    return best;
-  }
   /** The width of the Pell view in n (it widens from one convergent to the next as the rail moves). */
   function viewN() {
     const C = pell(S.d), k = step(), f = frac(), span = (j) => Math.max(2.6, 1.32 * Number(C.list[j].n) + 0.8);
     return Math.exp(Math.log(span(k)) * (1 - f) + Math.log(span(Math.min(KP, k + 1))) * f);
   }
-  const lucasNow = () => (lucasMode() ? lucasInView(viewN(), pell(S.d).root * viewN()) : null);
   const sub = (k) => String(k).replace(/\d/g, (c) => '₀₁₂₃₄₅₆₇₈₉'[c]);
 
   function drawPell() {
@@ -92,21 +84,18 @@
     if (g.iw / nmax >= 7 && g.ih / mmax >= 7) for (let i = 0; i <= nmax; i++) for (let j = 0; j <= mmax; j++) g.dot(i, j, P.faint, 1.3);
     const hyp = (s) => { const pts = []; for (let i = 0; i <= 160; i++) { const n = nmax * i / 160, v = S.d * n * n + s; pts.push(v >= 0 ? [n, Math.sqrt(v)] : null); } return pts; };
     c.save(); c.beginPath(); c.rect(g.pl, g.pt, g.iw, g.ih); c.clip();
-    if (S.d === 5) { g.line(hyp(4), P.ok, { width: 1, alpha: 0.6, dash: [4, 4] }); g.line(hyp(-4), P.ok, { width: 1, alpha: 0.6, dash: [4, 4] }); }
+    if (S.d === 5) { g.line(hyp(4), P.sigma, { width: 1, alpha: 0.6, dash: [4, 4] }); g.line(hyp(-4), P.sigma, { width: 1, alpha: 0.6, dash: [4, 4] }); }
     g.line(hyp(1), P.cyan, { width: 1.3, alpha: 0.8 }); g.line(hyp(-1), P.magenta, { width: 1.3, alpha: 0.8 });
     g.line([[0, 0], [nmax, mmax]], P.sigma, { width: 1.6 });
-    if (S.d === 5) for (const [l, fb] of LUCAS) if (fb <= nmax && l <= mmax) g.dot(fb, l, P.ok, 6, { ring: true, width: 1.6 });
-    // on the GOLDEN card the ledger reads the largest green ring in view: (Fₖ, Lₖ) on m² − 5n² = ±4
-    const luc = lucasNow();
-    if (luc) g.dot(luc.F, luc.L, P.ok, 9, { ring: true, width: 2.4, glow: 8 });
+    if (S.d === 5) for (const [l, fb] of LUCAS) if (fb <= nmax && l <= mmax) g.dot(fb, l, P.sigma, 6, { ring: true, width: 1.6 });
     for (let j = 0; j <= k; j++) { const q = C.list[j]; g.dot(Number(q.n), Number(q.m), q.delta > 0n ? P.cyan : P.magenta, j === k ? 5.5 : 3.6); }
     g.dot(Number(cur.n), Number(cur.m), P.amber, 10, { ring: true, width: 2, glow: 10 });
     c.restore();
     g.axes({ xTicks: [[0, '0'], [Number(cur.n), String(cur.n)]], yTicks: [[0, '0'], [Number(cur.m), String(cur.m)]] });
     g.text(nmax, 0, 'n', P.dim, { align: 'right', base: 'bottom', dx: -4, dy: -4 }); g.text(0, mmax, 'm', P.dim, { align: 'left', base: 'top', dx: 6, dy: 2 });
-    g.text(nmax, mmax, `m = √${S.d}·n`, P.sigma, { align: 'right', base: 'top', dx: luc ? -34 : -8, dy: luc ? 30 : 16, size: 11.5 });   // clear of the headline ring near the corner
+    g.text(nmax, mmax, `m = √${S.d}·n`, P.sigma, { align: 'right', base: 'top', dx: -8, dy: 16, size: 11.5 });
     // the area ledger: m² cells against d·n² cells, with a magnifier on their ends
-    const led = luc ? { m: BigInt(luc.L), n: BigInt(luc.F), delta: BigInt(luc.delta) } : cur;
+    const led = cur;
     if (wide) {
       const x0 = W - right + 34, bw = right - 64, m2 = led.m * led.m, dn2 = BigInt(S.d) * led.n * led.n, big = m2 > dn2 ? m2 : dn2, y1 = Math.max(96, H * 0.24), bh = 18;
       const len = (v) => bw * Number(v) / Number(big);
@@ -127,11 +116,6 @@
       c.fillStyle = led.delta > 0n ? P.cyan : P.magenta; c.font = `600 ${Math.min(22, bw / 11)}px ${TRV.fonts.data}`; c.textAlign = 'center'; c.textBaseline = 'top';
       c.fillText(`${led.m}² − ${S.d}·${led.n}² = ${signed(led.delta)}`, x0 + bw / 2, my + 2 * cs + 40);
       if (!TRV.thumbMode) { c.fillStyle = P.dim; c.font = `11.5px ${TRV.fonts.body}`; c.fillText(L(`两条色带的末端，放大到一格一格：差 ${diff > 0 ? diff : -diff} 格`, `the ends of the two bands, cell by cell: ${diff > 0 ? diff : -diff} cell${Math.abs(diff) === 1 ? '' : 's'} apart`), x0 + bw / 2, my + 2 * cs + 72); }
-    }
-    if (luc) {
-      $('hudBig').textContent = `${luc.L}² − 5·${luc.F}² = ${signed(BigInt(luc.delta))}`;
-      $('hudSub').textContent = L(`绿圈 (n, m) = (F${sub(luc.k)}, L${sub(luc.k)}) = (${luc.F}, ${luc.L})：落在 m² − 5n² = ±4 上；渐近分数已走到 ${cur.m}/${cur.n}`, `Green ring (n, m) = (F${sub(luc.k)}, L${sub(luc.k)}) = (${luc.F}, ${luc.L}): it lies on m² − 5n² = ±4; the convergents have reached ${cur.m}/${cur.n}`);
-      return;
     }
     $('hudBig').textContent = `√${S.d} ≈ ${cur.m}/${cur.n}`;
     $('hudSub').textContent = L(`第 ${k} 个渐近分数：沿线量差 ${sci(Math.abs(Number(cur.m) / Number(cur.n) - C.root))}，按面积量差 ${signed(cur.delta)} 格`, `Convergent ${k}: ${sci(Math.abs(Number(cur.m) / Number(cur.n) - C.root))} off along the line, ${signed(cur.delta)} cell${cur.delta === 1n || cur.delta === -1n ? '' : 's'} off in area`);
@@ -330,16 +314,12 @@
     if (S.scene === 'pell') {
       const C = pell(S.d), q = C.list[k], neg = negativePell(S.d);
       $('roKeyL').textContent = L('面积上的缺口 m² − d·n²', 'the gap in area, m² − d·n²');
-      const luc = lucasNow();
-      if (luc) {
-        $('roKeyL').textContent = L(`绿圈 (F${sub(luc.k)}, L${sub(luc.k)}) 上的 m² − 5n²`, `m² − 5n² on the green ring (F${sub(luc.k)}, L${sub(luc.k)})`);
-        $('roKey').innerHTML = `<span class="${luc.delta > 0 ? 'c-cy' : 'c-mg'}">${signed(BigInt(luc.delta))}</span>`; $('roKeySub').textContent = `${luc.L}² − 5·${luc.F}²`;
-      } else { $('roKey').innerHTML = `<span class="${q.delta > 0n ? 'c-cy' : 'c-mg'}">${signed(q.delta)}</span> <span class="okmark">${L('不是 0', 'not 0')} ✓</span>`; $('roKeySub').textContent = `${q.m}² − ${S.d}·${q.n}²`; }
+      $('roKey').innerHTML = `<span class="${q.delta > 0n ? 'c-cy' : 'c-mg'}">${signed(q.delta)}</span> <span class="chk">${L('不是 0', 'not 0')} ✓</span>`; $('roKeySub').textContent = `${q.m}² − ${S.d}·${q.n}²`;
       set(1, L('渐近分数 m/n', 'convergent m/n'), `${q.m}/${q.n}`); set(2, L('线上误差 |m/n − √d|', 'error on the line |m/n − √d|'), sci(Math.abs(Number(q.m) / Number(q.n) - C.root)));
       set(3, L('连分数', 'continued fraction'), `[${C.quot[0]}; ${C.quot.slice(1, C.period + 1).join(', ')}, …] <small>${L('周期', 'period')} ${C.period}</small>`);
-      set(4, 'm² − d·n² = −1', neg ? `${neg[0]}² − ${S.d}·${neg[1]}² <span class="okmark">✓</span>` : L('无解', 'no solution'));
+      set(4, 'm² − d·n² = −1', neg ? `${neg[0]}² − ${S.d}·${neg[1]}² <span class="chk">✓</span>` : L('无解', 'no solution'));
       $('roNote').textContent = neg ? L(`周期 ${C.period} 是奇数：差值能取到 −1，再走一个周期翻回 +1。`, `The period ${C.period} is odd: the gap reaches −1, and one more period flips it back to +1.`) : L(`周期 ${C.period} 是偶数：差值只在 +1 这一支上，永远到不了 −1。`, `The period ${C.period} is even: the gap only ever returns to +1 and never reaches −1.`);
-      what = `√${S.d} ≈ ${q.m}/${q.n}`; key = luc ? `${luc.L}² − 5·${luc.F}² = ${signed(BigInt(luc.delta))}` : `Δ = ${signed(q.delta)}`;
+      what = `√${S.d} ≈ ${q.m}/${q.n}`; key = `Δ = ${signed(q.delta)}`;
     } else if (S.scene === 'split') {
       const p = prime(), ab = twoSquares(p), roots = rootsOfMinusOne(p), neg = negativePell(p);
       $('roKeyL').textContent = L('这个素数是', 'this prime is');
@@ -360,12 +340,12 @@
         $('roKey').innerHTML = `${L('坏约化', 'bad reduction')} <small>Δ = ${DISC[S.curve]}</small>`; $('roKeySub').textContent = L(`曲线在 (${singular(S.curve, p)[0]}, 0) 自交`, `the curve crosses itself at (${singular(S.curve, p)[0]}, 0)`);
       } else {
         $('roKeyL').textContent = L('点数与 p + 1 之差 aₚ', 'aₚ: how far the count is from p + 1');
-        $('roKey').innerHTML = `${signed(E.a).replace(/[+−]0/, '0')} <span class="okmark">|aₚ| ≤ ${fix(bound, 2)} ✓</span>`; $('roKeySub').textContent = `aₚ = p + 1 − #E = ${p + 1} − ${E.n}`;
+        $('roKey').innerHTML = `${signed(E.a).replace(/[+−]0/, '0')} <span class="chk">|aₚ| ≤ ${fix(bound, 2)} ✓</span>`; $('roKeySub').textContent = `aₚ = p + 1 − #E = ${p + 1} − ${E.n}`;
       }
       set(1, L('点数 #E = p + 1 + Σχ', 'points #E = p + 1 + Σχ'), String(E.n)); set(2, 'cos θₚ = aₚ/(2√p)', bad ? '—' : fix(E.cos, 4));
       set(3, L('哈塞界 2√p', 'Hasse bound 2√p'), bad ? '—' : fix(bound, 3));
       set(5, L('自旋环 χₚ(f(x))', 'ring of spins χₚ(f(x))'), `<span class="c-cy">${cnt(1)}×(+1)</span> <span class="c-mg">${cnt(-1)}×(−1)</span> ${cnt(0)}×0 = ${signed(sum).replace(/[+−]0$/, '0')}`);
-      set(4, S.curve === 'cm' ? (ab ? `2|a|, p = ${ab[0]}² + ${ab[1]}²` : L('线素数', 'line prime')) : L('曲线', 'curve'), S.curve === 'cm' ? (ab ? `${2 * ab[0]} <span class="okmark">= |aₚ| ✓</span>` : `aₚ = 0 <span class="okmark">✓</span>`) : 'y² = x³ − x + 1');
+      set(4, S.curve === 'cm' ? (ab ? `2|a|, p = ${ab[0]}² + ${ab[1]}²` : L('线素数', 'line prime')) : L('曲线', 'curve'), S.curve === 'cm' ? (ab ? `${2 * ab[0]} <span class="chk">= |aₚ| ✓</span>` : `aₚ = 0 <span class="chk">✓</span>`) : 'y² = x³ − x + 1');
       $('roNote').textContent = bad ? L(`p = ${p} 是这条曲线的坏约化素数：判别式 ${DISC[S.curve]} 被 ${p} 整除，f 有二重根，曲线在 (${singular(S.curve, p)[0]}, 0) 自交（圆圈）。环上的自旋照样能数，但哈塞界、余弦与直方图只用良约化素数，这里跳过。`, `p = ${p} is a prime of bad reduction for this curve: the discriminant ${DISC[S.curve]} is divisible by ${p}, f has a double root and the curve crosses itself at (${singular(S.curve, p)[0]}, 0) (the circle). The spins on the ring can still be counted, but Hasse's bound, the cosine and the histogram use good primes only, so this prime is skipped.`)
         : S.curve === 'gen' ? L('这条曲线没有复乘：aₚ 不再有简单公式，余弦值散开，分布贴近半圆律。', 'This curve has no complex multiplication: aₚ has no simple formula any more, the cosines spread out and their distribution follows the semicircle law.')
         : ab ? L(`面素数：|aₚ| = 2·${ab[0]}，余弦的绝对值 ${fix(Math.abs(E.cos), 3)} 就是高斯三角形的 ${ab[0]}/√${p}（青色虚线）。`, `A plane prime: |aₚ| = 2·${ab[0]}, and the absolute cosine ${fix(Math.abs(E.cos), 3)} is ${ab[0]}/√${p} of the Gaussian triangle (the dashed cyan line).`)
@@ -379,7 +359,7 @@
     $('roAside').textContent = L(SC[S.scene].name[0], SC[S.scene].name[1]);
     $('pillScene').querySelector('strong').textContent = SC[S.scene].name[1]; $('pillWhat').querySelector('strong').textContent = what; $('pillKey').querySelector('strong').textContent = key;
     const LEG = {
-      pell: [['dm', '直线 m = √d·n', 'the line m = √d·n'], ['cy', '在线上方：差为正', 'above the line: positive gap'], ['mg', '在线下方：差为负', 'below the line: negative gap'], ['am', '当前的渐近分数', 'the current convergent']].concat(S.d === 5 ? [['ok', '(Fₙ, Lₙ)：±4 的全部解', '(Fₙ, Lₙ): every solution of ±4']] : []),
+      pell: [['dm', '直线 m = √d·n', 'the line m = √d·n'], ['cy', '在线上方：差为正', 'above the line: positive gap'], ['mg', '在线下方：差为负', 'below the line: negative gap'], ['am', '当前的渐近分数', 'the current convergent']].concat(S.d === 5 ? [['dm', '(Fₙ, Lₙ)：落在 m² − 5n² = ±4 上', '(Fₙ, Lₙ): on m² − 5n² = ±4']] : []),
       split: [['cy', '面素数：圆上有格点', 'plane prime: lattice points on the circle'], ['mg', '线素数：圆上没有格点', 'line prime: none on the circle']],
       curve: [['cy', 'χ = +1：一对点 ±y', 'χ = +1: a pair of points ±y'], ['mg', 'χ = −1：这一列没有点', 'χ = −1: no point in the column'], ['sg', 'χ = 0：分支点 y = 0', 'χ = 0: a branch point y = 0'], ['am', '余弦 cos θₚ', 'the cosine cos θₚ']]
     };
@@ -401,7 +381,7 @@
     document.querySelectorAll('[data-scenes]').forEach((el) => { el.hidden = !el.dataset.scenes.split(' ').includes(sc); });
     clock.pause(); clock.rate = SC[sc].rate; clock.setMax(SC[sc].max(), true); clock.set(t == null ? SC[sc].start() : t);
   }
-  const leave = () => { S.lucas = false; S.sato = false; cards.mark(null); };
+  const leave = () => { S.sato = false; cards.mark(null); };
   const sceneChips = kit.chips($('sceneChips'), 'scene', (v) => { leave(); setScene(v); });
   const fD = kit.field($('dsel'), { fmt: (v) => String(DS[v]), onInput: (v) => { S.d = DS[v]; leave(); paint(); } });
   const curveChips = kit.chips($('curveChips'), 'curve', (v) => { S.curve = v; leave(); paint(); });
@@ -411,9 +391,7 @@
   /* ---------- experiment cards ---------- */
   const NOTES = {
     hippasus: ['1/1、3/2、7/5、17/12、41/29……这些分数一上一下地夹住 √2，沿线看很快就分不出差别。但 m² 与 2n² 是两个整数，从不相等：放大镜里永远差着一格。', '1/1, 3/2, 7/5, 17/12, 41/29, … squeeze √2 from above and below, and along the line they soon cannot be told apart. But m² and 2n² are two integers that are never equal: in the magnifier they are always one cell apart.'],
-    minus: ['√13 的连分数周期是 5（奇数）。走到 18/5 时差值是 −1；再走一个周期到 649/180，差值翻成 +1。', 'The continued fraction of √13 has period 5 (odd). At 18/5 the gap is −1; one more period, at 649/180, flips it to +1.'],
     locked: ['√7 的周期是 4（偶数）。差值在 −3、+2、−3、+1 之间循环，每次回到 +1，却永远碰不到 −1。7 是线素数。', 'The period of √7 is 4 (even). The gap cycles through −3, +2, −3, +1 and returns to +1 each time, but never touches −1. 7 is a line prime.'],
-    golden: ['d = 5 是黄金比的根号。绿圈是 (Fₙ, Lₙ)：斐波那契数与卢卡斯数，它们恰好是 x² − 5y² = ±4 的全部解，这一点已由 Lean 内核验证。', 'd = 5 is the square root behind the golden ratio. The green rings are (Fₙ, Lₙ), Fibonacci and Lucas numbers: exactly the solutions of x² − 5y² = ±4, a fact checked by the Lean kernel.'],
     five: ['半径 √5 的圆穿过格点 (2, 1)：5 = 2² + 1²。把 2 + i 平方得到 3 + 4i，于是长出最熟悉的直角三角形 (3, 4, 5)。', 'The circle of radius √5 passes through the lattice point (2, 1): 5 = 2² + 1². Squaring 2 + i gives 3 + 4i, and out comes the most familiar right triangle, (3, 4, 5).'],
     seven: ['半径 √7 的圆从格点之间穿过，一个也碰不到。7 写不成两个平方之和，−1 也不是模 7 的平方。', 'The circle of radius √7 threads between the lattice points and touches none. 7 is not a sum of two squares, and −1 is not a square mod 7.'],
     count: ['把 y² = x³ − x 放到只有 13 个数的世界里逐格检查：7 个格点加无穷远点共 8 个，比 p + 1 = 14 少 6。13 = 3² + 2²，而 6 = 2·3：这个差正是高斯三角形奇数边的两倍。右上环上的颜色是 χ₁₃(x³ − x)：2 个 +1、8 个 −1、3 个 0，和为 −6。', 'Put y² = x³ − x into a world of only 13 numbers and check every cell: 7 grid points and the point at infinity make 8, six fewer than p + 1 = 14. 13 = 3² + 2², and 6 = 2·3: the difference is twice the odd leg of the Gaussian triangle. The ring at the upper right is coloured by χ₁₃(x³ − x): two +1, eight −1 and three 0, summing to −6.'],
@@ -421,16 +399,14 @@
   };
   let booting = true;
   function applyPreset(id) {
-    S.lucas = false; S.sato = false;
+    S.sato = false;
     const pellAt = (d, t, play) => {
       S.d = d; fD.set(DS.indexOf(d)); setScene('pell', t);
       if (play && !TRV.still && !(booting && !TRV.embed)) { clock.set(0); if (booting) kit.autoplay(clock, $('stage')); else clock.play(); }
     };
     const curve = (c) => { S.curve = c; curveChips.set(c, true); };
     if (id === 'hippasus') pellAt(2, 3, true);
-    else if (id === 'minus') pellAt(13, 4, false);
     else if (id === 'locked') pellAt(7, 3, false);
-    else if (id === 'golden') { pellAt(5, 3, false); S.lucas = true; paint(); }
     else if (id === 'five') setScene('split', ODD.indexOf(5));
     else if (id === 'seven') setScene('split', ODD.indexOf(7));
     else if (id === 'count') { curve('cm'); setScene('curve', ODD.indexOf(13)); }
@@ -445,7 +421,7 @@
   window.PYTHAGORAS_DEBUG = {
     get state() {
       const k = step(), C = pell(S.d), q = C.list[Math.min(k, KP)], p = prime(), E = count(S.curve, p), neg = negativePell(S.scene === 'pell' ? S.d : p);
-      return { lucas: lucasNow(), satoStage: satoMode(), hudBig: $('hudBig').textContent, scene: S.scene, step: k, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, d: S.d, m: String(q.m), n: String(q.n), delta: String(q.delta), period: C.period,
+      return { satoStage: satoMode(), hudBig: $('hudBig').textContent, scene: S.scene, step: k, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, d: S.d, m: String(q.m), n: String(q.n), delta: String(q.delta), period: C.period,
         deltas: C.list.map((x) => String(x.delta)), quot: C.quot.slice(0, 12), negPell: neg ? neg.map(String) : null, p, two: twoSquares(p), roots: rootsOfMinusOne(p), curve: S.curve, count: E.n, a: E.a, cos: E.cos, npoints: points(S.curve, p).length,
         chi: spins(S.curve, p), bad: isBad(S.curve, p), singular: isBad(S.curve, p) ? singular(S.curve, p) : null, angles: angles(p) };
     },

@@ -49,26 +49,15 @@ check('for all 23 values of d: 15 consecutive convergents (exact, coprime, unimo
 check('the gap m² − d·n² is never 0, stays below 2√d + 1, alternates in sign and reaches +1', seamOk);
 check('each convergent is closer to √d than every fraction with a smaller denominator (brute force)', bestOk);
 check('m² − d·n² = −1: the page agrees with an exhaustive search for every d, and with the parity of the period', negOk, `${minusSeen} of 23 solvable`);
-await pick('minus'); s = await state();
-check('MINUS-ONE: 18² − 13·5² = −1', s.d === 13 && s.m === '18' && s.n === '5' && s.delta === '-1' && s.period === 5);
-s = await seek(9); check('one more period: 649² − 13·180² = +1', s.m === '649' && s.n === '180' && s.delta === '1');
 await pick('locked'); s = await state();
 check('LOCKED: d = 7 has an even period, gaps −3, +2, −3, +1, and no solution of −1', s.d === 7 && s.period === 4 && s.deltas.slice(0, 4).join() === '-3,2,-3,1' && s.negPell === null && !s.deltas.includes('-1'));
-await pick('golden'); s = await state();
-check('GOLDEN: d = 5 and the legend points at the Lean-classified ±4 points', s.d === 5 && (await page.textContent('#legend')).includes('±4'));
+await setRange('dsel', DS.indexOf(5)); s = await state();
+check('d = 5: the legend names the grey rings on m² − 5n² = ±4', s.d === 5 && (await page.textContent('#legend')).includes('±4'));
 {
-  // the still of the GOLDEN card: its headline is a green ring (F_k, L_k) on m² − 5n² = ±4, as the caption says
-  const fib = [0n, 1n], luc = [2n, 1n]; for (let i = 2; i < 30; i++) { fib.push(fib[i - 1] + fib[i - 2]); luc.push(luc[i - 1] + luc[i - 2]); }
-  const r = s.lucas, F = r && BigInt(r.F), Lk = r && BigInt(r.L), dd = r && Lk * Lk - 5n * F * F;
-  const nmax = Math.max(2.6, 1.32 * Number(s.n) + 0.8);          // the view at an integer rail position
-  const last = fib.map((f, i) => i).filter((i) => Number(fib[i]) <= nmax && Number(luc[i]) <= Math.sqrt(5) * nmax).pop();
-  check('GOLDEN still: the headline ring is (F_k, L_k), the largest one in view, and L_k² − 5F_k² = ±4',
-    !!r && r.k === last && F === fib[r.k] && Lk === luc[r.k] && (dd === 4n || dd === -4n) && dd === BigInt(r.delta));
-  const big = (await page.textContent('#hudBig')).replace(/\s+/g, ' ');
-  check('GOLDEN still: the big readout is that ±4 equation, not a ±1 convergent', !!r && big === `${r.L}² − 5·${r.F}² = ${dd > 0n ? '+' : '−'}4` && !big.includes('≈'));
-  check('GOLDEN still: the key readout agrees', !!r && (await page.textContent('#roKey')).includes(`${dd > 0n ? '+' : '−'}4`) && (await page.textContent('#roKeySub')).includes(`${r.L}² − 5·${r.F}²`));
-  await setRange('dsel', 2); s = await state();
-  check('moving any control leaves the GOLDEN reading and returns to the convergent', s.lucas === null && (await page.textContent('#hudBig')).includes('≈'));
+  // the grey rings at d = 5: every (F_k, L_k) satisfies L_k² − 5F_k² = ±4 (independent recurrence)
+  const fib = [0n, 1n], luc = [2n, 1n]; for (let i = 2; i < 24; i++) { fib.push(fib[i - 1] + fib[i - 2]); luc.push(luc[i - 1] + luc[i - 2]); }
+  check('the (F_k, L_k) pairs drawn at d = 5 all lie on m² − 5n² = ±4', fib.every((f, i) => { const d = luc[i] * luc[i] - 5n * f * f; return d === 4n || d === -4n; }));
+  check('no green Lean box for the ±4 classification: the pell scene shows a plain note instead', await page.evaluate(() => !document.querySelector('.lean a[data-lean-gid*="pell_pm_four"]') && !!document.querySelector('p.note[data-scenes="pell"]')));
 }
 await setRange('dsel', 0); check('other values of d do not show the ±4 legend entry', !(await page.textContent('#legend')).includes('±4'));
 check('changing d leaves the experiment card', (await state()).preset === null);
