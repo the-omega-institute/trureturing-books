@@ -40,6 +40,7 @@ S\bigl(\rho(1)\bigr) - S\bigl(\rho(0)\bigr) \;=\; -\cos^2\theta\ln(\cos^2\theta)
 $$
 
 （在 $\theta = \frac{\pi}{4}$ 等幅分岔处单步熵税取特值 $\ln 2$）。由此，为什么白天的世界显得如此“坚硬、稳定”，却又如此“狭窄、令人疲惫”，在代数上便一目了然：
+
 - **坚硬**，是因为捏合算子满足严格幂等律 $\Pi_{\mathrm{wake}} \circ \Pi_{\mathrm{wake}} = \Pi_{\mathrm{wake}}$：只要你每秒钟用同一套已知数据反复核验世界，一切非对角异端都被压死为零（$P_k \rho P_l = 0$），桌子永远是桌子，墙壁绝不会穿身而过；
 - **狭窄与疲惫**，是因为每经历一轮幺正演化 $U$ 再用已知基捏合锁死一维确定性，被删除的非对角相干性都会一分不少地转化为严格非负的**量子相对熵税**！日复一日的清醒专注，本质上是在不断支付热力学熵账单来维持一条纤细的一维经典铁轨。
 
@@ -244,6 +245,7 @@ $$
 :::
 
 请体会 [@thm-ch37-golden-cut-delone-multilocation] 在观察者本体论（`MODEL`（模型诠释））上的壮阔意涵。不妨在实轴上直接点算几颗由同一扇窗口 $\mathrm{goldenWindow} = [\varphi - 2, \varphi - 1] \approx [-0.3820, +0.6180]$ 同时选中的切投截点（对 $u = \langle a, b\rangle \in \mathrm{GoldenInt}$，实嵌入为 $a + b\varphi$，共轭内坐标为 $a + b(1 - \varphi)$）：
+
 - 取 $u_{-2} = \langle -1, -1\rangle$ 与 $u_{-1} = \langle 0, -1\rangle$：共轭内坐标分别为 $-1 - (1 - \varphi) = \varphi - 2$（恰踩中窗口左端点）与 $-(1 - \varphi) = \varphi - 1$（恰踩中窗口右端点），同时点亮负半轴截点 $y_{-2} = -1 - \varphi \approx -2.6180$ 与 $y_{-1} = -\varphi \approx -1.6180$，刚性兑现最小分离下界 $y_{-1} - y_{-2} = 1 \ge 1$；
 - 取 $u_0 = \langle 0, 0\rangle$：共轭内坐标为 $0 \in [\varphi - 2, \varphi - 1]$，点亮原点截点 $y_0 = 0$（相邻间距 $y_0 - y_{-1} = \varphi \approx 1.6180 \ge 1$）；
 - 取 $u_1 = \langle 1, 1\rangle$ 与 $u_2 = \langle 1, 2\rangle$：共轭内坐标分别为 $2 - \varphi \approx +0.3820 \in [\varphi - 2, \varphi - 1]$ 与 $3 - 2\varphi \approx -0.2361 \in [\varphi - 2, \varphi - 1]$，点亮截点 $y_1 = 1 + \varphi = \varphi^2 \approx 2.6180$ 与 $y_2 = 1 + 2\varphi \approx 4.2361$（而夹在 $y_0$ 与 $y_1$ 之间的候选格点 $\langle 0, 1\rangle \mapsto \varphi \approx 1.6180$ 因共轭值 $1 - \varphi \approx -0.6180 < \varphi - 2$ 落出窗外被自动筛除，相邻激活点间距 $y_1 - y_0 = \varphi^2 \approx 2.6180 \le 6$ 与 $y_2 - y_1 = \varphi \approx 1.6180 \ge 1$ 严守填充半径 $1/2$ 与覆盖半径 $3$ 的双半径证书）。

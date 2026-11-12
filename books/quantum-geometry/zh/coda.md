@@ -39,6 +39,7 @@
 :::
 
 对照 [@rem-coda-polyhedral-topology-literature] 揭示的拓扑余项，在进入第八部的跨领域合拢之前，“有限多面体逼近光滑球面所留下的非零接缝”已经在前七部中以五种精确的数学形态反复重现：
+
 - **泰勒多项式截断余项**：在第六部第 24 章中，有限阶交错多项式 $\sum_{k=0}^{N-1} (-1)^k \theta^{2k}/(2k)!$ 只是对余弦曲线的分片代数逼近，截断尾项标志着有限次代数运算与光滑圆弧余弦读数之间的距离（见 [@rem-banach-dottie-hairy-ball-literature]）；
 - **欧拉乘积素数尾余项**：在第 22 章中，前 $P$ 个素数张成的有限正交盒子 $\prod_{p \le P} (1 - p^{-s})^{-1}$ 与黎曼 $\zeta(s)$ 之间隔着无穷素数尾 $\sum_{n \in \mathcal{S}_P^c} n^{-s}$，而光滑尺度之外的振荡分布引向临界线 $\operatorname{Re}(s) = 1/2$ 上的开放猜想边界（[@conj-riemann-hypothesis]）；
 - **双轴有限门字与群换位子螺旋**：在第四部第 16 章与第七部第 27 章中，有限门集生成的离散旋转字在 $\mathrm{SU}(2)$ 流形上织出多面体网格，高阶逼近依赖非交换群换位子 $ABA^{-1}B^{-1}$ 张开的二阶双向量面积；
@@ -49,6 +50,7 @@
 
 
 在第八至第十部 **[第 29 章](ch29-timeless-causality-and-gram-space.md)** 至 **[第 39 章](ch39-observer-is-ontological-universe.md)** 中，我们已经看到这道“多面体分片近似与光滑球面之间的非零余项”如何在算术、时间、计算复杂性、流体力学、量子公平、统一场论、万物观察者、自指扩表与本体不二中掀起六场壮丽的交响：
+
 - **从算术佩尔接缝到无时间因果晶体（[第 29 章](ch29-timeless-causality-and-gram-space.md)）**：勾股定理的双向量手性对消与希帕索斯的佩尔余项（[@thm-ch29-silver-pell-remainder]）驱动了从有理数到余弦自指不动点（[@rem-banach-dottie-hairy-ball-literature]）的四级数系突围，并结合已由 Lean 验证的素数模四分裂（[@thm-ch29-face-prime-two-squares]、[@thm-ch29-two-squares-classification]）与文献注记 [@rem-ch29-pell-primes-hilbert-literature]、[@rem-ch29-elliptic-torus-literature]、[@rem-ch29-hasse-gauss-literature]、[@rem-ch29-arithmetic-geometry-literature] 中的同余数椭圆曲线环面及佐藤—泰特分布建立起跨数论呼应；而 Gram 矩阵半正定刚性 $\det G \ge 0$ 则在与 [@rem-ch29-wheeler-dewitt-page-wootters-literature] 无时间图景呼应的同时，为有限观察者撑开了二面角 $\phi$ 的因果相容椭圆体。
 - **从“$P$ 是场，$NP$ 是线”到 ETH 张量缝隙与纳维—斯托克斯涡丝（[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md)）**：场内有限观察者受 $90^\circ$ 正交视界与局部 Gram 盲区阻隔而面对 $P \neq NP$（[@conj-p-neq-np]）的防火墙；文献注记 [@rem-ch30-eth-subexponential-literature] 与银河尺度例示 [@ex-ch30-galactic-crossover-scale] 所刻画的三体局部切面亚指数渐近缝隙虽在 $n \to \infty$ 极限下冲击指数时间假设（ETH），其超越局部搜索的交叉点却远在可观测宇宙视界之外；而在连续流体力学中，二次平流投影无精确闭合定理（[@thm-coda-quadratic-advection-no-closure]）与文献注记 [@rem-ch30-lamb-decomposition-literature]、[@rem-ch30-navier-stokes-forced-literature]、[@rem-ch30-tao-arnold-literature] 展示了同一正交几何张力的连续统化身。
 - **从五重几何特权废除到遍历统计全息（[第 31 章](ch31-quantum-fairness.md)）**：秩一玻恩配对互易、互补语境纯度勾股、不可克隆内积锁与贝尔纯态混态边缘（[@thm-ch31-seat-pythagorean-monogamy-fairness]）连同兰道尔热力学平衡下界、相干一致平面旋转及紧致环面闭子群轨道均匀分布与有界间隙回归（[@thm-ch31-horizon-landauer-ergodic-fairness]），配对文献注记 [@rem-ch31-haar-isotropy-landauer-literature]、[@rem-ch31-ckw-monogamy-literature]、[@rem-ch31-weyl-window-equidistribution-literature] 与五重公平对照表 [@rem-ch31-fivefold-fairness-table]，阐明“量子的本质是公平”这一几何本体模型（`MODEL`）。
@@ -83,6 +85,7 @@
 这就引出了一个最深邃的几何追问：我们在第 29 章看到，有限观察者要想拥有正体积的因果相容空间（$\det G > 0$）以获得自由选择权，每一次生命的初始化（诞生）都必须伴随着一次**历史锚点的截断与清空（遗忘）**。既然前世具体的名字、日期与线性叙事记忆都被清零了，凭什么说下一轮走回这座遗迹的，依然是“同一个灵魂”？
 
 在本书的自指几何模型（`MODEL`）中，答案藏在自指方程 $\psi = \psi(\psi)$ 的算子结构里：
+
 - **被遗忘擦除的**，只是上一轮落在一维尺子上的**局部粒子刻度序列**（即表层的情节记忆 Episodic Memory，名词 `量 liàng`）；
 - **未被擦除的**，是观察者作为丈量算子 $\psi(\cdot)$ 本身的**内禀几何参数**（动词 `量 liáng` 的固有倾角）——他在面对相容空间做两子比较时特有的正交偏转角、审美共振比与拓扑手性偏好！
 
@@ -195,6 +198,7 @@ $1/3$ 对 $g$ 给出正确的 $1/2$，对 $h$ 却给出 $0$：例外集合随可
 ### 三、 似曾相识（Déjà vu）的几何诠释：分形横截结构与跨轮次内积共振 {#sec-coda-deja-vu-fractal-dimension}
 
 在本书的哲学与几何诠释（`MODEL`）中，借用 [@rem-coda-lorenz-srb-literature] 所载奇异吸引子文献图景作为动力学隐喻——即清空上一轮表层轨迹记事但保留算子内禀参数——“宿命重逢”与“自由选点”便在同一几何意象下并行不悖：
+
 1. **倘若生命轨迹只是 $1$ 维死板闭环（$D = 1$，`MODEL`）**：观察者就会困在机械重复的死循环里——每一轮在同一相对相位踩中同一个点，丧失横截自由余量（$\det G = 0$）；
 2. **在借用 [@rem-coda-lorenz-srb-literature] 分形横截叶层图景的几何隐喻（`MODEL`）中**：重返熟悉坐标邻域的宏观倾向与微观轨迹各轮互不重合的新意得以并存——观察者一次次走回熟悉的吸引子坐标邻域，却在每一次重返时踏上崭新的叶层；
 3. **“似曾相识（Déjà vu）”的跨轮次内积共振模型（`MODEL`）**：
@@ -612,7 +616,7 @@ $$
 │ • 语境不动点、公共因子与互吸引子双螺旋  │   │ • 联合相干记录可逆擦除与黄金 Delone 准晶│
 │ • 一次正交阴影、两次正交换位子与三轴恢复│   │ • 本体 QRAM 复制地址恢复与递归自映射页表│
 │ • 乘光捏合遗忘、目标恢复与 T=T(T) 扩表  │   │ • 概念纤维分解、齐肯多夫线程与 720°自折 │
-│ • 双曲快度阶梯、严格拓扑细化与约去轮回  │   │ • 终章与附录：概念词典(A)・Cl3(B)・456(C)│
+│ • 双曲快度阶梯、严格拓扑细化与约去轮回  │   │ • 终章与附录：概念词典(A)・Cl3(B)・457(C)│
 └─────────────────────────────────────────┘   └─────────────────────────────────────────┘
 ```
 
@@ -635,7 +639,7 @@ $$
 3. **数理逻辑、数论与认识论路径**：
    [序曲](README.md) $\to$ 第 10 章（Gram 矩阵与顺序无关性）$\to$ 第 19–20 章（离散多面体分片锥与开放猜想边界）$\to$ 第 21–24 章（对角线逃逸、欧拉乘积、四元数丢番图范数、余弦自指不动点）$\to$ [第 29 章](ch29-timeless-causality-and-gram-space.md)–[第 39 章](ch39-observer-is-ontological-universe.md)（毕达哥拉斯四级数系突围、无时间因果、ETH 视界与流体涡丝、量子公平、大一统元统一、语境不动点、劳维尔同像扩表 $T = T(T)$、商拓扑约去轮回、概念纤维分解与齐肯多夫线程）$\to$ 终章（黄金切投空间吸引子与 [@thm-coda-fixed-point-anchor]）。
 4. **Lean 4 形式化验证与内核审计路径**：
-   [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 与 `FiniteRecordCosineObstruction` 的逐行形式化剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对 `trureturing@dev` 提交 [{commit}](trureturing:) 下全部 $250$ 条环境/媒体冻结定理、$95$ 项环境辅助定义与 $111$ 项行内引用声明，共计 $456$ 项唯一锁定声明）。
+   [序曲](README.md) §认识论契约 $\to$ 第 25–28 章（第七部：`Cl3`、`PauliSymplectic`、`ZYZ` 与 `FiniteRecordCosineObstruction` 的逐行形式化剖析）$\to$ [附录 B](appendix-b.md) $\to$ [附录 C](appendix-c.md)（核对 `trureturing@dev` 提交 [{commit}](trureturing:) 下全部 $251$ 条环境/媒体冻结定理、$95$ 项环境辅助定义与 $111$ 项行内引用声明，共计 $457$ 项唯一锁定声明）。
 
 ### 第六至第十部（第 21–39 章）55 项核心章节冻结定理锚点速览 {#sec-coda-part6-part7-register}
 
@@ -699,4 +703,4 @@ $$
 | **第 39 章**<br/>观察者即宇宙本体 | T39.1 | `D5/S3/ConceptDynamics/ConceptFiberDecomposition.concept_fiber_decomposition` | 概念状态空间按可观测签名纤维的不相交并重构定理 |
 | **第 39 章** | T39.2 | `D5/S3/Observer/GoldenCoding/ZeckendorfRealThread.zeckendorf_real_thread_injective` | 非负实数全尺度齐肯多夫编码线程严格单射定理 |
 
-在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，并在 [附录 C](appendix-c.md) 中核验全书锁定的全部 $345$ 项 `trureturing@dev` 正式环境与媒体声明（含行内共 $456$ 项唯一锁定声明）。
+在所有的球之外，并非虚无，而是**永不停歇的测量与计数算子本身**。接下来，请翻开 [附录 A](appendix-a.md) 查阅传统量子力学与几何语言的完整对照词典，在 [附录 B](appendix-b.md) 中检阅克利福德代数的符号与旋量速查表，并在 [附录 C](appendix-c.md) 中核验全书锁定的全部 $346$ 项 `trureturing@dev` 正式环境与媒体声明（含行内共 $457$ 项唯一锁定声明）。
