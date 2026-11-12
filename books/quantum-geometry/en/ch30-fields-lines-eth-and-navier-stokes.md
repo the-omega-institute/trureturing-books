@@ -71,8 +71,8 @@ The unconditional restricted-model lower bounds corresponding to these two geome
 3. **Bounded-Degree Sum-of-Squares (SoS) Lower Bound (D. Grigoriev, *Theor. Comput. Sci.* **259**, 613–622, 2001; G. Schoenebeck, *FOCS*, 593–602, 2008)**: For random 3-XOR / 3-SAT instances that are globally unsatisfiable due to parity frustration, every local Lasserre / Gram semidefinite relaxation $G_M \succeq 0$ of degree $M = o(n)$ remains feasible and positive semidefinite with high probability, ruling out subexponential-size SoS refutations at sublinear degree.
 :::
 
-::: {.viz src="timeless-causal-crystal" preset="longer" height="500"}
-**16 times the space, 4 times the steps.** With $4096$ candidates the angle per step shrinks to a quarter ($2\theta = 1.79^\circ$) and the steps grow to about $50$; in the plot below, the cyan $(\pi/4)\sqrt{N}$ and the dashed magenta $N/2$ pull further and further apart. The thread lengthens like $\sqrt{N}$, and there is still no slope to follow; this is the same order as the query lower bound of item 1 above (a literature result).
+::: {.viz src="timeless-causal-crystal" preset="sos" height="500"}
+**Two literals close at order 2; three-way parity does not.** The cyan points: for each $n$ a random 2-SAT formula, in which resolving two 2-clauses on a variable leaves at most two literals, so the resolution closure stays at order $2$ and whether the empty clause appears decides satisfiability (numbers computed by the page). The dashed magenta line: for random 3-XOR / 3-SAT, the literature result of item 3 above says that sum-of-squares relaxations of order $o(n)$ stay consistent everywhere; the slope of this line is only schematic (`MODEL`). Amber is the observer's order $M$. These lower bounds constrain this family of relaxations only and do not imply $\mathrm{P}\neq\mathrm{NP}$ ([@conj-p-neq-np], `OPEN`).
 :::
 
 ### 3. The Author's Interpretation: Complexity Horizons, Subjective Time, and Choice
@@ -108,6 +108,10 @@ $$
 
 - **Verification along the thread**: Costs include reading the input and witness encodings and performing each local check. If check $i$ costs $c_i$, the checks contribute $\sum_{i=1}^k c_i$, which is $O(k)$ only when each cost is uniformly bounded. Counting segments alone proves no polynomial bit complexity. Formal proof terms can also be pictured as threads, but arbitrary proof terms have no uniform linear guarantee here on encoding length, type checking, or reduction cost, so this analogy does not place them within the same $NP$ verification argument;
 - **Search without a field**: Efficient witness checking does not automatically supply an efficient search method; it does not rule one out either. A “zero-cross-section thread” expresses the author's picture of unguided search, not a discrete complexity lower bound or a claim that every $NP$ problem is hard.
+
+::: {.viz src="timeless-causal-crystal" preset="wilderness" height="500"}
+**One field: straight along the thread, circling off it.** The plane carries a single autonomous field $\mathbf{F} = g(\tilde y)\bigl(1, h'(x)\bigr) + \bigl(1 - g(\tilde y)\bigr)\mathbf{F}_{\mathrm{swirl}}$, with $\tilde y = y - h(x)$, $g(\tilde y) = e^{-\tilde y^2/\varepsilon^2}$, and $\mathbf{F}_{\mathrm{swirl}}$ vanishing on the thread. The probe that starts at $S_0$ exactly on the cyan witness thread $y = h(x)$ runs along it to $S^*$; three magenta probes that start only a little off it, but outside the channel $|\tilde y| < \varepsilon$, are caught by the first vortex under the same integrator and never reach the target. A schematic model of “a thread without a field” (`MODEL`), not a complexity lower bound.
+:::
 
 ### 2. Why "$P$ Is a Field" (`弃线造场，局部切面处处对齐全局`)
 

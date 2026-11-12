@@ -28,7 +28,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `qubit-geometry` | 粒子是线，波是面积，两者是同一个几何积的两个投影 | `line` `area` `half` `phase` `hadamard` `hzh` `turn1` `turn2` |
 | `sphere-escape` | 以为把球封住了，总还有一点留在外面 | `diagonal` `absorb` `liuhui` `zu` `dottie` `far` `euclid` `thirteen` |
 | `pythagoras-number-escape` | 线上的误差可以趋于零，面积上的缺口至少一格 | `hippasus` `minus` `locked` `golden` `five` `seven` `count` `sato` |
-| `timeless-causal-crystal` | 两条余弦锁住第三条的窗口，观察者只能在窗口里选点 | `window` `edge` `impossible` `right` `crystal` `field` `thread` `longer` |
+| `timeless-causal-crystal` | 两条余弦锁住第三条的窗口，观察者只能在窗口里选点 | `window` `impossible` `right` `crystal` `field` `thread` `sos` `wilderness` |
 | `navier-stokes-p-np` | 对流项拆成梯度与兰姆两半；涡管被拉细；只看一部分的观察者得不到闭合 | `potential` `vortex` `flat` `strain` `burgers` `runaway` `closed` `mixed` |
 | `eth-horizon-crossover` | 渐近更好的曲线要到视界之外才追上；流矩阵的秩等于最小割；过线的模态数有墙 | `human` `atoms` `cross` `constant` `bridge` `narrow` `plateau` `tail` |
 | `spatial-attractor-deja-vu` | 忘掉起点，轨道还是落回同一对翅膀，一次次经过同一处 | `butterfly` `forget` `return` `shrink` `sheet` `dimension` `fixed` `cycle` |
@@ -326,12 +326,12 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十九章 | 第三座桥末 | `pythagoras-number-escape` 完整实验室 |
 | 第二十九章 | 第一层末 | `timeless-causal-crystal` · `crystal` |
 | 第二十九章 | 第二层 $\det G \ge 0$ 公式之后 | `timeless-causal-crystal` · `impossible` |
-| 第二十九章 | 第二层末（“零自由度刚性”列表之后） | `timeless-causal-crystal` · `edge` |
 | 第二十九章 | 第四层观察者对照表之后 | `timeless-causal-crystal` · `right` |
 | 第二十九章 | 第四层末 | `timeless-causal-crystal` · `window` |
 | 第二十九章 | 定理 `thm-ch29-gram-rigidity-and-pell` 之后 | `timeless-causal-crystal` 完整实验室 |
 | 第三十章 | 第一节 · 2 列表（两道几何视界）之后 | `timeless-causal-crystal` · `thread` |
-| 第三十章 | 文献注记 `rem-ch30-query-sos-literature` 之后 | `timeless-causal-crystal` · `longer` |
+| 第三十章 | 文献注记 `rem-ch30-query-sos-literature` 之后 | `timeless-causal-crystal` · `sos` |
+| 第三十章 | “$P$ 是场，$NP$ 是线”一节 · 1 的列表（离丝寻线）之后 | `timeless-causal-crystal` · `wilderness` |
 | 第三十章 | 文献注记 `rem-ch30-karmarkar-kasteleyn-literature` 之后 | `timeless-causal-crystal` · `field` |
 | 第三十章 | ETH 一节 · 1 末（张量关联场） | `eth-horizon-crossover` · `bridge` |
 | 第三十章 | 例 `ex-ch30-galactic-crossover-scale` 之后 | `eth-horizon-crossover` · `human`、`cross` |

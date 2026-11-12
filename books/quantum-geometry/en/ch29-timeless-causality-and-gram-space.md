@@ -593,10 +593,6 @@ This single equation exhibits two inseparable faces:
 - **Complete order-independence (timelessness)**: the relation is completely permutation-symmetric in $(A, B, C)$, with no "earlier cause" or "later effect";
 - **Absolute causal necessity (zero-degree-of-freedom rigidity)**: once $c_{AB}$ and $c_{BC}$ are fixed, spherical geometry locks $c_{AC}$ with zero slack! Likewise, mathematical deduction ($\text{Axioms} \implies \text{Theorems}$) is timeless crystal facet alignment, where the gate count $L$ of Chapters 9 and 16 merely counts how many steps an observer takes to rotate their measurement ruler into alignment with the target facet.
 
-::: {.viz src="timeless-causal-crystal" preset="edge" height="500"}
-**At the edge: all three coplanar.** Turn $\mathbf{C}$ to its nearest position to $\mathbf{A}$: the three vectors fall into one plane, the violet volume collapses to zero, and the amber $c_{AC}$ is exactly $\cos(60^\circ - 45^\circ)$, the minus-sign branch of the locus above.
-:::
-
 ::: {.film src="008-gram-window"}
 **Two cosines lock the third: the Gram window (1:39).** With $\theta_1 = 60^\circ$ and $\theta_2 = 45^\circ$ fixed, $\mathbf{C}$ goes once round $\mathbf{B}$: $c_{AC}$ swings through $[\cos 105^\circ, \cos 15^\circ]$, the violet volume collapses to zero at the edges, and a cosine outside the window would make $\det G$ negative. Then $\theta_2$ runs from $0^\circ$ to $180^\circ$ and the windows fill the slice of the Gram ellipse. Where the top edge reaches $1$, $\mathbf{C}$ lands exactly on $\mathbf{A}$, which is the second part of [@thm-ch29-gram-rigidity-and-pell]; every other number in the film is computed on screen.
 :::
