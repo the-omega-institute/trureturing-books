@@ -1,7 +1,7 @@
 {
   "schema": "trureturing-books.template-manifest.v1",
   "template": "trureturing-books-template",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "files": {
     ".claude/skills": {
       "sha256": "c1aefaccb300698f4b7ae764e1fa857f93c0609ba47b078e4806d926f289c23b",
@@ -72,7 +72,7 @@
       "mode": "100644"
     },
     "docs/CHANGELOG.md": {
-      "sha256": "550dbdd0a01df777bce20fbc257fd251436482ef0f79b28eb2e4e5b1a78fc9e9",
+      "sha256": "d77ee5505f05296607c08a4270f9a0197a7933526766193885697e421746c18f",
       "mode": "100644"
     },
     "docs/CONTAINERS.md": {
@@ -496,7 +496,7 @@
       "mode": "100644"
     },
     "theme/viz/theme.css": {
-      "sha256": "c271d2721cfd6981ed73d9212e4d1eb37998aa2c6bf6f47c83d0b5f56e21df04",
+      "sha256": "8924e09ae6ab420f3eaaf090fb6fd7de64901296de197b83881b93a97ce9ba0a",
       "mode": "100644"
     },
     "tools/container/Dockerfile": {
@@ -592,7 +592,7 @@
       "mode": "100644"
     },
     "tools/node/viz-testkit.mjs": {
-      "sha256": "589d2e873aa0abcfd1d290be6f0e102ce7e9b6ca2cc4aa4c007ea63467dbba4f",
+      "sha256": "9e5793f683aca38118233f260f1d3fdff8c08d5aedae4cc33767962a36d4d392",
       "mode": "100644"
     },
     "tools/node/viz-thumbs.mjs": {
@@ -672,7 +672,7 @@
       "mode": "100644"
     },
     "tools/tbook/mdscan.py": {
-      "sha256": "dab9536dc3f7796d2f059aef163c5466656d0df23dec7978d502916775e54499",
+      "sha256": "2ae94ba339dcdf1c1d495ea26b0f66eccc46e2e0fd0ea46626f26cf218a58324",
       "mode": "100644"
     },
     "tools/tbook/model.py": {
@@ -732,7 +732,7 @@
       "mode": "100644"
     },
     "tools/tests/test_blocks.py": {
-      "sha256": "f5dfa61acdb6f281cc4845d80793891d00c74a5c8bcc274fcd97df8dcc189546",
+      "sha256": "d92cc69a5d3e8ee1bc24b59cac9de10f75bf2c4e712ef2ddc23d2300d8e9d488",
       "mode": "100644"
     },
     "tools/tests/test_buildcache.py": {
@@ -824,7 +824,7 @@
       "mode": "100644"
     },
     "tools/tests/test_viz.py": {
-      "sha256": "1fbb9ef870358e7926f808f565eaf3ce57f1c1060b61d3aa177928f6deb339bc",
+      "sha256": "7aac09c6a0857d0637ae23b4c3ae3123acc0bd5c1a1d70cdc97f31a09b58b670",
       "mode": "100644"
     }
   }
