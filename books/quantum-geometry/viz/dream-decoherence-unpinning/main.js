@@ -121,7 +121,7 @@
     return `${sgn(re, d).replace(/^\+/, '')} ${im < 0 ? '−' : '+'} ${fix(Math.abs(im), d)}i`;
   };
   const NAMES = () => (S.scene === 'record' ? ['x₀', 'x₁'] : ['x₀', 'x₁', 'x₂', 'x₃']);
-  let grid = null;
+  let grid = null, disc = null;
   const roleColor = (role) => (role === 'keep' ? P.cyan : role === 'read' ? P.cyan : P.magenta);
 
   function drawMatrix(ctx, R, m) {
@@ -147,7 +147,6 @@
         ctx.fillStyle = TRV.alpha(col, role === 'keep' || role === 'read' ? 0.78 : 0.7); ctx.shadowColor = col; ctx.shadowBlur = TRV.thumbMode ? 14 : 8;
         ctx.fillRect(cx - sv / 2, cy - sv / 2, sv, sv); ctx.shadowBlur = 0;
       }
-      if (S.scene === 'record' && i === 0 && j === 1 && clock.t > 1e-6) drawTrail(ctx, cx, cy, cs, tk);
       if (i !== j && v > 1e-3) {   // the phase needle
         const ang = Math.atan2(m.rho[i][j][1], m.rho[i][j][0]), len = Math.max(sv / 2 - 2, cs * 0.12);
         ctx.strokeStyle = P.ink; ctx.lineWidth = 2 * tk; ctx.lineCap = 'round';
@@ -168,12 +167,10 @@
       }
       if (S.scene !== 'record' && cs >= 46) text(ctx, L('躯体', 'body'), x0 + 0.5 * cs, y0 - 25, P.dim, { align: 'center', size: 10, face: 'body' });
     }
-    if (S.scene === 'record' && words) drawRecords(ctx, { x: x0, y: y0 + size + 10, w: size });
+    if (S.scene === 'record' && words) drawRecords(ctx, { x: R.recX != null ? R.recX : x0, y: y0 + size + 10, w: R.recW || size });
   }
 
-  /** The path the phase of ρ₀₁ has taken so far, from 0 to clock.t: a dashed ink arc around the needle's pivot.
-      Only the phase is drawn (the size of the square is the modulus); the radius steps inward with every step taken,
-      so a turn out and back along the same arc reads as two strands. Dots mark where each whole step landed. */
+  /** The path the phase of ρ₀₁ has taken so far, from 0 to clock.t, unwrapped (for the trail on the phase disc). */
   const trailNow = () => {
     const pts = [], n = Math.max(2, Math.ceil(clock.t * 60));
     let prev = 0, unwrapped = 0, sweep = 0;
@@ -186,14 +183,47 @@
     }
     return { pts, sweep, end: unwrapped };
   };
-  function drawTrail(ctx, cx, cy, cs, tk) {
-    const tr = trailNow(); if (tr.pts.length < 2) return;
-    const R0 = cs * 0.36, dr = cs * 0.035, rad = (t) => R0 - dr * t;
-    ctx.save(); ctx.strokeStyle = P.ink; ctx.globalAlpha = 0.8; ctx.lineWidth = 1.4 * tk; ctx.setLineDash([5, 4]); ctx.lineCap = 'round';
-    ctx.beginPath(); tr.pts.forEach(([t, a], q) => { const x = cx + rad(t) * Math.cos(a), y = cy - rad(t) * Math.sin(a); if (q) ctx.lineTo(x, y); else ctx.moveTo(x, y); }); ctx.stroke();
-    ctx.setLineDash([]); ctx.globalAlpha = 1; ctx.fillStyle = P.ink;
-    for (const [t, a] of tr.pts) if (Math.abs(t - Math.round(t)) < 1e-9 && t <= clock.t + 1e-9) { ctx.beginPath(); ctx.arc(cx + rad(t) * Math.cos(a), cy - rad(t) * Math.sin(a), 2.6 * tk, 0, TAU); ctx.fill(); }
-    ctx.restore();
+  /** The phase disc of ρ₀₁: the complex plane with the dashed grey circle of radius 1/2 (where ρ₀₁ starts), the three
+      landing points of the Lean certificate 1/2, −1/2, −i/2, a magenta arrow from the centre to ρ₀₁ now, and the path it
+      has taken (dashed ink). The arrow and the dots where each whole step landed are exact; the trail is drawn a little
+      inside |ρ₀₁| and steps inward with every step taken, so a turn out and back along the same arc reads as two strands.
+      With c = 0 the arrow shrinks to the centre. */
+  function drawDisc(ctx, R) {
+    const words = !TRV.thumbMode, tk = thick(), head = words ? 22 : 4;
+    const rad0 = Math.max(24, Math.min(R.w, R.h - head) / 2 - (words ? 26 : 6)), cx = R.x + R.w / 2, cy = R.y + head + (R.h - head) / 2;
+    const sc = rad0 / 0.5, X = (z) => cx + sc * z[0], Y = (z) => cy - sc * z[1];
+    disc = { cx, cy, rad: rad0 };
+    ctx.save();
+    ctx.strokeStyle = P.faint; ctx.lineWidth = 1; ctx.beginPath();
+    ctx.moveTo(cx - rad0 - 12, cy); ctx.lineTo(cx + rad0 + 12, cy); ctx.moveTo(cx, cy - rad0 - 12); ctx.lineTo(cx, cy + rad0 + 12); ctx.stroke();
+    ctx.strokeStyle = P.dim; ctx.lineWidth = 1.2 * tk; ctx.setLineDash([4, 4]); ctx.beginPath(); ctx.arc(cx, cy, rad0, 0, TAU); ctx.stroke(); ctx.setLineDash([]);
+    if (words) {
+      text(ctx, L('ρ₀₁ 的相位盘', 'phase disc of ρ₀₁'), cx, R.y + 8, P.dim, { align: 'center', size: 11, face: 'body' });
+      for (const [z, s, dx, dy, al] of [[[0.5, 0], '1/2', 6, -10, 'left'], [[-0.5, 0], '−1/2', -6, -10, 'right'], [[0, -0.5], '−i/2', 8, 12, 'left']]) {
+        ctx.fillStyle = P.dim; ctx.beginPath(); ctx.arc(X(z), Y(z), 2.2, 0, TAU); ctx.fill();
+        text(ctx, s, X(z) + dx, Y(z) + dy, P.dim, { align: al, size: 11 });
+      }
+    }
+    const tr = trailNow();
+    if (tr.pts.length > 1) {
+      const dr = rad0 * 0.07, rr = (t) => Math.max(2, sc * cabs(z01(t)) - dr * (t + 0.6));
+      ctx.strokeStyle = P.ink; ctx.globalAlpha = 0.8; ctx.lineWidth = 1.4 * tk; ctx.setLineDash([5, 4]); ctx.lineCap = 'round';
+      ctx.beginPath(); tr.pts.forEach(([t, a], q) => { const x = cx + rr(t) * Math.cos(a), y = cy - rr(t) * Math.sin(a); if (q) ctx.lineTo(x, y); else ctx.moveTo(x, y); }); ctx.stroke();
+      ctx.setLineDash([]); ctx.globalAlpha = 1;
+      const [tl, al] = tr.pts[tr.pts.length - 1], hx = cx + rr(tl) * Math.cos(al), hy = cy - rr(tl) * Math.sin(al), back = tr.pts[Math.max(0, tr.pts.length - 4)];
+      const bx = cx + rr(back[0]) * Math.cos(back[1]), by = cy - rr(back[0]) * Math.sin(back[1]), ang = Math.atan2(hy - by, hx - bx);
+      if (Math.hypot(hx - bx, hy - by) > 0.5) { ctx.fillStyle = P.ink; ctx.beginPath(); ctx.moveTo(hx, hy); ctx.lineTo(hx - 7 * Math.cos(ang - 0.45), hy - 7 * Math.sin(ang - 0.45)); ctx.lineTo(hx - 7 * Math.cos(ang + 0.45), hy - 7 * Math.sin(ang + 0.45)); ctx.closePath(); ctx.fill(); }
+    }
+    ctx.fillStyle = P.magenta;
+    for (let k = 0; k <= 4 && k <= clock.t + 1e-9; k++) { const z = z01(k); ctx.beginPath(); ctx.arc(X(z), Y(z), 3.4 * tk, 0, TAU); ctx.fill(); }
+    const z = z01(clock.t), len = sc * cabs(z);
+    ctx.strokeStyle = P.magenta; ctx.lineWidth = 2.6 * tk; ctx.lineCap = 'round'; ctx.shadowColor = P.magenta; ctx.shadowBlur = 8;
+    if (len > 3) {
+      const a = Math.atan2(z[1], z[0]), ex = cx + len * Math.cos(a), ey = cy - len * Math.sin(a);
+      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(ex, ey); ctx.stroke();
+      ctx.fillStyle = P.magenta; ctx.beginPath(); ctx.moveTo(ex + 3 * Math.cos(a), ey - 3 * Math.sin(a)); ctx.lineTo(ex - 9 * Math.cos(a - 0.42), ey + 9 * Math.sin(a - 0.42)); ctx.lineTo(ex - 9 * Math.cos(a + 0.42), ey + 9 * Math.sin(a + 0.42)); ctx.closePath(); ctx.fill();
+    } else { ctx.fillStyle = P.magenta; ctx.beginPath(); ctx.arc(cx, cy, 4.5 * tk, 0, TAU); ctx.fill(); }
+    ctx.shadowBlur = 0; ctx.restore();
   }
 
   function drawRecords(ctx, R) {
@@ -204,7 +234,7 @@
       const wrote = done(k + 1), rev = done(k + 3);
       const narrow = bw < 150;   // on a phone the factor does not fit in the box: name the step only
       const state = rev ? (narrow ? L('已逆转', 'reversed') : L(`已逆转 ×c̄ = ${fmtC([c[0], -c[1]], 2)}`, `reversed ×c̄ = ${fmtC([c[0], -c[1]], 2)}`))
-        : wrote ? (narrow ? L('已写入', 'written') : L(`已写入 ×c = ${fmtC(c, 2)}`, `written ×c = ${fmtC(c, 2)}`)) : L('尚未写入', 'not written yet');
+        : wrote ? (narrow ? L('已写入', 'written') : L(`已写入 ×c = ${fmtC(c, 2)}`, `written ×c = ${fmtC(c, 2)}`)) : narrow ? L('未写入', 'not yet') : L('尚未写入', 'not written yet');
       const hot = active === k;
       ctx.strokeStyle = hot ? P.amber : P.lineHot; ctx.lineWidth = hot ? 2 : 1; if (hot) { ctx.shadowColor = P.amber; ctx.shadowBlur = 8; }
       ctx.strokeRect(x + 0.5, R.y + 0.5, bw - 1, bh - 1); ctx.shadowBlur = 0;
@@ -243,29 +273,30 @@
     const bottom = TRV.thumbMode ? 24 : Math.max(18, $('legend').offsetHeight + 20);
     const g0 = kit.plot($('cv'), { x: [0, 1], y: [0, 1], pad: [0, 0, 0, 0] }), ctx = g0.ctx, Wd = g0.W, Ht = g0.H;
     const x0 = 16, w = Wd - 32, h = Math.max(80, Ht - top - bottom), wide = w >= 560, m = current();
-    const mat = wide ? { x: x0, y: top, w: Math.min(w * 0.46, h + 30), h } : { x: x0, y: top, w, h: h * 0.58 };
-    const scr = wide ? { x: mat.x + mat.w + 24, y: top + 18, w: w - mat.w - 24, h: h - 18 } : { x: x0, y: top + h * 0.58 + 12, w, h: h * 0.42 - 12 };
+    const rec = S.scene === 'record';
+    let mat = wide ? { x: x0, y: top, w: Math.min(w * (rec ? 0.36 : 0.46), h + 30), h } : { x: x0, y: top, w, h: h * 0.58 };
+    let dsc = null;
+    if (rec && wide) { dsc = { x: mat.x + mat.w + 12, y: top, w: Math.min(w * 0.3, h), h: h * 0.85 }; }
+    else if (rec) { const half = (w - 10) / 2; dsc = { x: x0 + half + 10, y: top, w: half, h: mat.h - 52 }; mat = { x: x0, y: top, w: half, h: mat.h, recX: x0, recW: w }; }
+    const sx = dsc && wide ? dsc.x + dsc.w + 18 : mat.x + mat.w + 24;
+    const scr = wide ? { x: sx, y: top + 18, w: x0 + w - sx, h: h - 18 } : { x: x0, y: top + h * 0.58 + 12, w, h: h * 0.42 - 12 };
+    disc = null;
     drawMatrix(ctx, mat, m);
+    if (dsc) drawDisc(ctx, dsc);
     drawScreen(ctx, { x: scr.x, y: scr.y, w: scr.w, h: scr.h, W: Wd, H: Ht }, m);
   }
 
   /* ---------- the strip: what changes and what does not along the rail ---------- */
   function drawPlot() {
     if (TRV.still || TRV.figure) return;
-    if (S.scene === 'record') {
-      const g = kit.plot($('plotA'), { x: [-0.62, 0.62], y: [-0.62, 0.62], pad: [30, 12, 8, 18], equal: true });
-      const circ = []; for (let k = 0; k <= 120; k++) circ.push([0.5 * Math.cos(k * TAU / 120), 0.5 * Math.sin(k * TAU / 120)]);
-      g.line([[g.x0, 0], [g.x1, 0]], P.faint, { width: 1 }); g.line([[0, g.y0], [0, g.y1]], P.faint, { width: 1 });
-      g.line(circ, P.dim, { width: 1, dash: [3, 3] });
-      const path = []; for (let k = 0; k <= 200; k++) { const z = z01(4 * k / 200); path.push([z[0], z[1]]); }
-      g.line(path, P.magenta, { width: 1.6, alpha: 0.55 });
-      const marks = [];   // steps that land on the same point share one label (0 and 4, 1 and 3 for c = −i)
-      for (let k = 0; k <= 4; k++) { const z = z01(k), hit = marks.find((mk) => Math.hypot(mk.z[0] - z[0], mk.z[1] - z[1]) < 0.02); if (hit) hit.ks.push(k); else marks.push({ z, ks: [k] }); }
-      for (const mk of marks) { g.dot(mk.z[0], mk.z[1], P.magenta, 3.2); g.text(mk.z[0], mk.z[1], mk.ks.join(' · '), P.ink, { dx: 6, dy: -8, size: 10 }); }
-      const z = z01(clock.t); g.dot(z[0], z[1], P.amber, 5, { glow: 10 });
-      g.text(0.5, 0, '1/2', P.dim, { dx: 4, dy: 9, size: 10 }); g.text(0, -0.5, '−i/2', P.dim, { dx: 5, dy: 8, size: 10 });
-      $('pATitle').innerHTML = L('非对角元在复平面上的路', 'The off-diagonal entry in the complex plane');
-      $('pAMeta').textContent = L(`第 ${fix(clock.t, 2)} 步：${fmtC(z, 3)}`, `step ${fix(clock.t, 2)}: ${fmtC(z, 3)}`);
+    if (S.scene === 'record') {   // the phase disc on the stage shows where ρ₀₁ points; the strip shows its size
+      const g = kit.plot($('plotA'), { x: [0, 4], y: [0, 0.56], pad: [30, 12, 10, 20] });
+      g.axes({ yTicks: [[0, '0'], [0.25, '1/4'], [0.5, '1/2']], xTicks: [0, 1, 2, 3, 4].map((k) => [k, String(k)]) });
+      const mod = []; for (let k = 0; k <= 200; k++) { const z = z01(4 * k / 200); mod.push([4 * k / 200, cabs(z)]); }
+      g.line(mod, P.magenta, { width: 2.2 });
+      const z = z01(clock.t); g.vline(clock.t, P.amber, { alpha: 0.8 }); g.dot(clock.t, cabs(z), P.amber, 4.5);
+      $('pATitle').innerHTML = L('沿记录的步数：非对角元的模长', 'Along the record steps: the size of the off-diagonal entry');
+      $('pAMeta').innerHTML = `<span style="color: var(--magenta)">|ρ₀₁|</span> · ${L(`第 ${fix(clock.t, 2)} 步`, `step ${fix(clock.t, 2)}`)} · |ρ₀₁| = ${fix(cabs(z), 3)}`;
       return;
     }
     const g = kit.plot($('plotA'), { x: [0, 1], y: [0, 1.08], pad: [30, 12, 10, 20] });
@@ -293,10 +324,24 @@
   const SCENE_NAME = { anchor: ['锚点', 'Anchors'], record: ['记录', 'Records'], wake: ['醒来', 'Waking'] };
   const STEP_TEXT = [['出发：等幅叠加，ρ₀₁ = 1/2', 'Start: the equal superposition, ρ₀₁ = 1/2'], ['写入副本 0', 'Writing copy 0'], ['写入副本 1', 'Writing copy 1'], ['逆转副本 0', 'Reversing copy 0'], ['逆转副本 1', 'Reversing copy 1']];
   const LEG = {
-    anchor: [['cy box', '对角、块里的格与它们的条纹：留下的', 'diagonal and in-block cells and their fringes: what stays'], ['mg box', '跨块的格与它添的条纹：被剪的', 'cross-block cells and their fringes: what is cut'], ['dm', '灰框：锚点的块', 'grey frames: the anchor blocks']],
-    record: [['cy box', '对角', 'diagonal'], ['mg box', '相干 ρ₀₁ 与它添的条纹', 'the coherence ρ₀₁ and its fringes'], ['am', '这一步作用的那份记录', 'the record acting at this step']],
+    anchor: [['cy box', '对角、块里的格与它们的条纹：留下的', 'kept: diagonal, in-block cells, their fringes'], ['mg box', '跨块的格与它添的条纹：被剪的', 'cut: cross-block cells, their fringes'], ['dm', '灰框：锚点的块', 'grey frames: anchor blocks']],
+    record: [['cy box', '对角', 'diagonal'], ['mg box', '相干 ρ₀₁（方格与盘上的箭头）与它添的条纹', 'coherence ρ₀₁ (square, arrow on the disc) and its fringes'], ['am', '这一步作用的那份记录', 'the record acting at this step']],
     wake: [['am', '读出 P₀：躯体那一格', 'readout P₀: the body cell'], ['cy box', '留下的权重', 'weight kept'], ['mg box', '淡出的部分', 'what fades out']]
   };
+  /** The stage title shares its row with the scene buttons: on a narrow stage, where the full title would run under
+      them, drop the scene name and keep the key quantity; if even that does not fit, move the title block below the
+      buttons. In a still the buttons are hidden and the full title stays where it is. */
+  const overlaps = (a, b) => a.right > b.left - 6 && a.left < b.right && a.top < b.bottom && b.top < a.bottom;
+  function setHud(full, short) {
+    const big = $('hudBig'), chips = $('sceneChips'), tl = big.parentElement;
+    big.textContent = full; tl.style.marginTop = '';
+    if (TRV.thumbMode || TRV.shot || chips.offsetParent === null) return;
+    const b = chips.getBoundingClientRect(), ink = () => { const r = document.createRange(); r.selectNodeContents(big); return r.getBoundingClientRect(); };
+    if (!overlaps(ink(), b)) return;
+    big.textContent = short;
+    const a = ink();
+    if (overlaps(a, b)) tl.style.marginTop = `${Math.ceil(b.bottom - a.top + 4)}px`;
+  }
   const setRo = (k, zh, en, val) => { $(`roL${k}`).textContent = L(zh, en); $(`ro${k}`).textContent = val; };
   function drawText() {
     const m = current(), eig = eigen(m), tr = m.rho.reduce((s, row, i) => s + row[i][0], 0);
@@ -304,7 +349,7 @@
     $('roAside').textContent = S.scene === 'record' ? 'ρ₀₁' : S.scene === 'wake' ? 'P₀' : 'λ';
     if (S.scene === 'anchor') {
       const lam = lamNow(), c0 = crossNorm(anchored(0, S.fam), S.fam), c = crossNorm(m.rho, S.fam), ent = H(eig);
-      $('hudBig').textContent = L(`锚点 · λ = ${fix(lam, 2)}`, `Anchors · λ = ${fix(lam, 2)}`);
+      setHud(L(`锚点 · λ = ${fix(lam, 2)}`, `Anchors · λ = ${fix(lam, 2)}`), `λ = ${fix(lam, 2)}`);
       $('hudSub').textContent = L(`${S.fam === 'fine' ? '锚点：逐个位置' : '锚点：躯体 | 其余三处'} · 跨块相干剩 ${fix(100 * (1 - lam), 0)}% · 对角不动 · 熵 S = ${fix(ent, 2)}`, `${S.fam === 'fine' ? 'anchors: every place' : 'anchors: body | the other three'} · ${fix(100 * (1 - lam), 0)}% of the cross-block coherence left · diagonal fixed · entropy S = ${fix(ent, 2)}`);
       $('roKeyL').textContent = L('跨块相干的模长', 'modulus of the cross-block coherence');
       $('roKey').textContent = fix(c, 3); $('roKeySub').textContent = L(` = (1 − λ) × 出发时的 ${fix(c0, 3)}`, ` = (1 − λ) × ${fix(c0, 3)} at the start`);
@@ -320,7 +365,7 @@
       $('pillKey').querySelector('strong').textContent = `S ${fix(ent, 3)}`;
     } else if (S.scene === 'record') {
       const z = m.rho[0][1], k = Math.min(4, Math.floor(clock.t + 1e-9)), c = overlap(), prod = cmul(z, [2, 0]);
-      $('hudBig').textContent = L(`记录 · ρ₀₁ = ${fmtC(z, 2)}`, `Records · ρ₀₁ = ${fmtC(z, 2)}`);
+      setHud(L(`记录 · ρ₀₁ = ${fmtC(z, 2)}`, `Records · ρ₀₁ = ${fmtC(z, 2)}`), `ρ₀₁ = ${fmtC(z, 2)}`);
       const stepNow = clock.t <= 1e-9 ? 0 : Math.min(4, Math.ceil(clock.t - 1e-9));
       $('hudSub').textContent = `${L(...STEP_TEXT[stepNow])} · ${L(`每份记录的重叠 c = ${fmtC(c, 2)}`, `overlap of each record c = ${fmtC(c, 2)}`)}`;
       $('roKeyL').textContent = L('非对角元 ρ₀₁', 'off-diagonal entry ρ₀₁');
@@ -338,7 +383,7 @@
       $('pillKey').querySelector('strong').textContent = fmtC(z, 2);
     } else {
       const s = clock.t, keep = m.rho[0][0][0], pf = 1 - keep, pAt = (l) => 1 - anchored(l, 'fine')[0][0][0];
-      $('hudBig').textContent = L(`醒来 · 遗忘 ${fix(pf, 2)}`, `Waking · forgotten ${fix(pf, 2)}`);
+      setHud(L(`醒来 · 遗忘 ${fix(pf, 2)}`, `Waking · forgotten ${fix(pf, 2)}`), L(`遗忘 ${fix(pf, 2)}`, `forgotten ${fix(pf, 2)}`));
       $('hudSub').textContent = L(`读出 P₀ = |x₀⟩⟨x₀| · 进度 ${fix(100 * s, 0)}% · 梦中 λ = ${fix(S.lamDream, 2)}`, `readout P₀ = |x₀⟩⟨x₀| · ${fix(100 * s, 0)}% done · dream λ = ${fix(S.lamDream, 2)}`);
       $('roKeyL').textContent = L('遗忘的权重 1 − Tr(P₀ρ)', 'forgotten weight 1 − Tr(P₀ρ)');
       $('roKey').textContent = fix(pf, 3); $('roKeySub').textContent = L(' = 1 − |⟨x₀|Ψ⟩|²', ' = 1 − |⟨x₀|Ψ⟩|²');
@@ -405,16 +450,16 @@
     half_erase: { scene: 'record', r: 1, phi: 90, to: 3, still: 3 },
     zero_overlap_fail: { scene: 'record', r: 0, phi: 90, still: 4 },
     quantum_eraser: { scene: 'record', r: 1, phi: 90, still: 4 },
-    unpin_body: { scene: 'anchor', fam: 'fine', w: 0.4, path: [1, 0.1], still: 1 },
+    unpin_body: { scene: 'anchor', fam: 'body', w: 0.4, path: [1, 0.1], still: 1 },
     wake_snap: { scene: 'wake', w: 0.4, lamDream: 0.1, still: 1 }
   };
   const NOTES = {
     waking: ['清醒：已知数据把四个位置逐个钉住。λ 从 0 推到 1，品红的跨块方块缩到一点不剩，青色的对角一格不动；屏上的条纹淡成青色虚线的平滑包络，熵从 0 涨到 1.33（读数行的 S）。', 'Awake: the known data pin each of the four places. As λ goes from 0 to 1 the magenta cross-block squares shrink to nothing while the cyan diagonal does not move; on the screen the fringes fade into the smooth envelope of the dashed cyan curve, and the entropy rises from 0 to 1.33 (S in the readout line).'],
     blocks: ['锚点只分两块：躯体 x₀ 与其余三处。λ = 1 时只剪掉躯体与其余之间的相干（品红），其余三处之间的相干留在块里（青色），屏上还剩它们的青色条纹。', 'The anchors make two blocks only: the body x₀ and the other three places. At λ = 1 only the coherence between the body and the rest is cut (magenta); the coherence among the other three stays inside its block (cyan), and the screen keeps their cyan fringes.'],
-    half_erase: ['两份相位记录（c = −i）先后写入，ρ₀₁ 从 1/2 转到 −1/2；再只逆转副本 0：ρ₀₁ 停在 −i/2，指针朝下，条纹错开四分之一格，没有回到灰色虚线。方格里的白色虚线弧记下相位走过的路：转出半圈，再转回四分之一圈。', 'Two phase records (c = −i) are written one after the other and ρ₀₁ turns from 1/2 to −1/2; then copy 0 alone is reversed: ρ₀₁ stops at −i/2, the needle points down, and the fringes are shifted by a quarter period, not back on the dashed grey curve. The dashed white arc in the square records the path of the phase: out half a turn, then a quarter of the way back.'],
-    zero_overlap_fail: ['记录把两条路完全分开（c = 0）：写入第一份，品红的 ρ₀₁ 就缩没了，屏上只剩青色虚线的包络；两份都逆转，ρ₀₁ 仍是 0，条纹没有回来。', 'Records that tell the two paths apart completely (c = 0): once the first copy is written the magenta ρ₀₁ is gone and only the envelope of the dashed cyan curve is left on the screen; reverse both copies and ρ₀₁ is still 0, the fringes do not return.'],
-    quantum_eraser: ['两份相位记录都写入，再把两份都逆转：ρ₀₁ 沿半径 1/2 的圆转出半圈、再原路转回 1/2，条纹回到灰色虚线上。方格里的白色虚线弧是相位走过的路：外圈转出半圈，内圈原路转回，圆点是每一步的落点。', 'Both phase records are written, then both are reversed: ρ₀₁ turns half way round the circle of radius 1/2 and back to 1/2, and the fringes land on the dashed grey curve again. The dashed white arc in the square is the path of the phase: out half a turn on the outer strand, back on the inner one, with a dot where each step landed.'],
-    unpin_body: ['卸下锚点：λ 从 1 降到 0.1。品红的跨块方块重新长出来，|ρᵢⱼ| 回到原来的 0.9 倍，条纹回来；青色的对角——每个位置的权重——始终没动。', 'Unpinning: λ drops from 1 to 0.1. The magenta cross-block squares grow back to 0.9 times their original |ρᵢⱼ| and the fringes return; the cyan diagonal, the weight of each place, never moved.'],
+    half_erase: ['两份相位记录（c = −i）先后写入，ρ₀₁ 从 1/2 转到 −1/2；再只逆转副本 0：相位盘上品红的箭头停在 −i/2，条纹错开四分之一格，没有回到灰色虚线。盘上的白色虚线记下箭头走过的路：转出半圈，再转回四分之一圈。', 'Two phase records (c = −i) are written one after the other and ρ₀₁ turns from 1/2 to −1/2; then copy 0 alone is reversed: the magenta arrow on the phase disc stops at −i/2, and the fringes are shifted by a quarter period, not back on the dashed grey curve. The dashed white line on the disc records the arrow’s path: out half a turn, then a quarter of the way back.'],
+    zero_overlap_fail: ['记录把两条路完全分开（c = 0）：写入第一份，品红的 ρ₀₁ 就缩没了，相位盘上的箭头缩成圆心的一点，屏上只剩青色虚线的包络；两份都逆转，ρ₀₁ 仍是 0，条纹没有回来。', 'Records that tell the two paths apart completely (c = 0): once the first copy is written the magenta ρ₀₁ is gone, the arrow on the phase disc shrinks to a dot at the centre, and only the envelope of the dashed cyan curve is left on the screen; reverse both copies and ρ₀₁ is still 0, the fringes do not return.'],
+    quantum_eraser: ['两份相位记录都写入，再把两份都逆转：相位盘上品红的箭头沿半径 1/2 的灰色虚线圆转出半圈、再原路转回 1/2，条纹回到灰色虚线上。盘上的白色虚线是箭头走过的路：外圈转出半圈，内圈原路转回；品红圆点是每一步的落点 1/2、−i/2、−1/2。', 'Both phase records are written, then both are reversed: the magenta arrow on the phase disc turns half way round the dashed grey circle of radius 1/2 and back to 1/2, and the fringes land on the dashed grey curve again. The dashed white line on the disc is the arrow’s path: out half a turn on the outer strand, back on the inner one; the magenta dots are where the steps landed, 1/2, −i/2, −1/2.'],
+    unpin_body: ['卸下躯体这一枚锚点：锚点分成躯体 x₀ 与其余三处两块，λ 从 1 降到 0.1。只有躯体连向其余三处的品红方块重新长出来，回到原来 |ρᵢⱼ| 的 0.9 倍，屏上品红的条纹回来；其余三处之间的青色方块始终在；青色的对角——每个位置的权重——始终没动。', 'Unloading the body’s anchor: the anchors make two blocks, the body x₀ and the other three places, and λ drops from 1 to 0.1. Only the magenta squares linking the body to the other three grow back, to 0.9 times their original |ρᵢⱼ|, and the magenta fringes return on the screen; the cyan squares among the other three were there all along; the cyan diagonal, the weight of each place, never moved.'],
     wake_snap: ['醒来：读出投影 P₀ 只留躯体 x₀ 那一格（琥珀框）。其余三处的权重与全部相干一起淡出，屏上只剩 x₀ 的一份包络；遗忘的权重 1 − Tr(P₀ρ) = 0.60。', 'Waking: the readout projection P₀ keeps only the body cell x₀ (amber frame). The weight of the other three places fades out with all the coherence and the screen keeps a single envelope for x₀; the forgotten weight is 1 − Tr(P₀ρ) = 0.60.']
   };
   let booting = true;
@@ -443,7 +488,7 @@
       const base = { scene: S.scene, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, n: m.n,
         rho: m.rho.map((row) => row.map((v) => v.slice())), eig, trace: m.rho.reduce((s, row, i) => s + row[i][0], 0) };
       if (S.scene === 'anchor') return Object.assign(base, { fam: S.fam, w: S.w, lam: lamNow(), path: S.path.slice(), cross: crossNorm(m.rho, S.fam), cross0: crossNorm(anchored(0, S.fam), S.fam), entropy: H(eig), relEntropy: relEntropy(S.fam) });
-      if (S.scene === 'record') { const tr = trailNow(); return Object.assign(base, { r: S.r, phi: S.phi, z: m.rho[0][1].slice(), c: overlap(), mass: 2 * cabs(m.rho[0][1]) ** 2, trail: { sweep: tr.sweep, end: tr.end, points: tr.pts.length } }); }
+      if (S.scene === 'record') { const tr = trailNow(); return Object.assign(base, { r: S.r, phi: S.phi, z: m.rho[0][1].slice(), c: overlap(), mass: 2 * cabs(m.rho[0][1]) ** 2, trail: { sweep: tr.sweep, end: tr.end, points: tr.pts.length }, grid: grid && { x0: grid.x0, size: grid.size }, disc: disc && { cx: disc.cx, cy: disc.cy, rad: disc.rad }, arrow: disc ? [m.rho[0][1][0] * disc.rad / 0.5, m.rho[0][1][1] * disc.rad / 0.5] : null }); }
       return Object.assign(base, { w: S.w, lamDream: S.lamDream, s: clock.t, kept: m.rho[0][0][0], forget: 1 - m.rho[0][0][0] });
     },
     /** The screen the stage draws, sampled at us: the total and the diagonal part. */
