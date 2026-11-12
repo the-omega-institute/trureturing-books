@@ -25,14 +25,10 @@ Compare the two routes on a concrete classroom calculation. Suppose two arrows l
 - **The redundant Point-$C$ coordinate detour**: Treating the ceiling as an external $Z$ axis, you first write $\lvert\psi_A\rangle = \binom{\cos 30^\circ}{\sin 30^\circ} = \binom{\sqrt{3}/2}{1/2}$, next write $\lvert\psi_B\rangle = \binom{\cos 60^\circ}{\sin 60^\circ} = \binom{1/2}{\sqrt{3}/2}$, multiply four components to get $\langle\psi_B\mid\psi_A\rangle = \frac{\sqrt{3}}{4} + \frac{\sqrt{3}}{4} = \frac{\sqrt{3}}{2}$, and square to obtain $\frac{3}{4}$ — and if azimuthal angles $\phi_A, \phi_B$ are nonzero as well, eight trigonometric products and complex exponentials flood the page!
 - **The zero-redundancy self-referential shortcut**: What does the ceiling have to do with these two arrows? When only a known premise state $A$ and a target state $B$ exist, what deserves to serve as the principal axis? **State $A$ itself!** Align your zero-degree reference directly along $A$; then $B$ sits at the single intrinsic angle $\theta = 120^\circ - 60^\circ = 60^\circ$, and half a second of mental arithmetic gives $\cos^2(60^\circ/2) = \cos^2 30^\circ = \frac{3}{4}$!
 
-::: {.viz src="pairwise-shutter" preset="sixty" height="500"}
-**Run the worked example through the shutter and count.** The cyan $A$ and the amber $B$ are a single angle $\theta = 60^\circ$ apart; the dashed cyan line is the weight $\frac{3}{4}$, the thin curve is the share of passes $k/N$, and the horizontal axis counts shots on a log scale. The share jumps about for the first few shots and hugs the line by four thousand; the pale band is the reference scale $p \pm 2\sqrt{p(1-p)/N}$. A sampling demonstration; for the weight itself see [@thm-rank-one-born-pairing].
-:::
-
 In finite-dimensional matrix algebra, which operation natively erases every trace of an external basis $C$? Literally the **matrix trace** ($\Tr X = \sum_i X_{ii}$). By cyclicity, $\Tr(U^{-1} X U) = \Tr(X U U^{-1}) = \Tr(X)$ for every invertible basis change $U$: twist the external scaffolding $C$ however you please, and the trace pairing $\Tr(\rho P)$ between a state $\rho$ and a projector $P$ never flickers! Zero-redundancy comparison between $\rho$ and $P$ is therefore naturally expressed via the canonical basis-free trace pairing.
 
 ::: {.viz src="pairwise-shutter" preset="turn" height="500"}
-**Turn both arrows together and the weight stays put.** The same pair and the same random numbers as in the previous figure, except that before each shot $A$ and $B$ turn a little together about the violet axis; the dashed paths are where the tips have been, and the grey dashed arrows are the pair as it started. The angle stays $60^\circ$, the dashed cyan line stays at $\frac{3}{4}$, and the thin curve is exactly the one without turning.
+**Turn both arrows together and the weight stays put.** The cyan $A$ and the amber $B$ are the pair of the worked example above, one angle $\theta = 60^\circ$ apart; the dashed cyan line is the weight $\frac{3}{4}$, and the thin curve is the share of passes $k/N$ against the number of shots (log scale), jumpy at first and hugging the line by four thousand shots. Before each shot $A$ and $B$ turn a little together about the violet axis; the dashed paths are where the tips have been, and the grey dashed arrows are the pair as it started. The angle stays $60^\circ$, and with the same random numbers the counted curve is exactly the one the pair gives without turning. A sampling demonstration; for the weight see [@thm-rank-one-born-pairing].
 :::
 
 ::: {.definition #def-born-probability title="Finite-Dimensional Born Trace Weight" lean="D5/S3/Quantum/FiniteDimensional.bornProbability"}
@@ -248,10 +244,6 @@ Every piece of the puzzle clicks into place:
 
 1. **Collinear alignment ($\theta = 0^\circ$)**: $\vv{a} \cdot \vv{b} = +1$, giving probability $\frac{1 + 1}{2} = 1$ (certain passage);
 
-::: {.viz src="pairwise-shutter" preset="same" height="500"}
-**Aligned: every shot passes.** The amber $B$ coincides with the cyan $A$ and the cyan stretch fills the whole diameter, weight $1$: every press of the shutter is a pass, every square is solid, and the thin curve sits on $1$ from the first shot.
-:::
-
 2. **Spatial orthogonality ($\theta = 90^\circ$, e.g., North $\lvert 0\rangle$ tested along East $\lvert +\rangle$)**: $\vv{a} \cdot \vv{b} = 0$, zero directional bias, giving the fair-coin midpoint $\frac{1 + 0}{2} = \frac{1}{2}$;
 
 ::: {.viz src="pairwise-shutter" preset="right" height="500"}
@@ -259,10 +251,6 @@ Every piece of the puzzle clicks into place:
 :::
 
 3. **Spatial opposition ($\theta = 180^\circ$, e.g., North $\lvert 0\rangle$ tested along South $\lvert 1\rangle$)**: in three-dimensional space, two opposite outcomes point antipodally ($\theta = 180^\circ$, $\cos 180^\circ = -1$), whereas in probability and inner-product geometry, mutual exclusion requires zero overlap ($\cos 90^\circ = 0$). The affine rescaling $x \mapsto \frac{1 + x}{2}$ maps $[-1, +1]$ onto $[0, 1]$, which trigonometrically halves $\theta$ into $\cos^2(\theta/2)$!
-
-::: {.viz src="pairwise-shutter" preset="opposite" height="500"}
-**Opposite: not a single pass.** The amber $B$ sits opposite the cyan $A$ and the cyan stretch shrinks to a point, weight $0$: the shutter never passes, every square is hollow, and the thin curve sits on $0$ from the first shot.
-:::
 
 For ready reference in later chapters, the benchmark angles across both pictures are collected below:
 
@@ -273,10 +261,6 @@ For ready reference in later chapters, the benchmark angles across both pictures
 | $90^\circ$ | $45^\circ$ | $0$ | $1/2$ | Orthogonal equator; unbiased $50:50$ split |
 | $120^\circ$ | $60^\circ$ | $-1/2$ | $1/4$ | Obtuse opposition (symmetric trine angle) |
 | $180^\circ$ | $90^\circ$ | $-1$ | $0$ | Antipodal on $S^2$ $\leftrightarrow$ orthogonal in $\mathbb{C}^2$ |
-:::
-
-::: {.viz src="qubit-geometry" preset="line" height="500"}
-**Start with the first row of the table.** The amber arrow $B$ points along the cyan ruler $A$: the cyan line has length $1$ and the magenta area is zero, matching $\theta = 0^\circ$ and weight $1$. Drag $B$ to the equator and then to the south pole, and compare the displayed angle with the $90^\circ$ and $180^\circ$ rows above.
 :::
 
 The table above goes angle by angle. Ask a different question: if the direction of the target state $\vv{b}$ is random, uniformly distributed on the sphere, how is the compatibility weight $p = \cos^2\frac{\theta}{2}$ distributed? Intuition may guess that it favours the middle, or the two ends. Neither is right.
@@ -405,6 +389,10 @@ $$
 
 The outcome of the peeling is precisely the spectral decomposition of $E$: the two probes are its eigendirections and the two weights its eigenvalues. Yet the peeling itself solves no eigenvalue equation and needs no external basis $\{\lvert 0\rangle, \lvert 1\rangle\}$ (the matrices above are written out only as a check). The first probe is the brightest direction of the reading, the second the brightest direction of the remainder, and every step is a pairwise measurement.
 
+::: {.figure src="ch02-peel"}
+**The brightest direction of the reading is the first probe.** Both Bloch spheres are seen from the side, and the brighter the cyan, the larger the reading. The left one is $f(\rho_{\vv{a}}) = 0.45 + 0.25\,\vv{a}\cdot\vv{s}$: brightest at $\vv{s} = (0.8, 0, 0.6)$, where the amber dot is the first probe $p_1$ with weight $0.7$, and darkest at the antipode $-\vv{s}$, at $0.2$. The right one is the remainder $r_1$ after peeling off $0.7\,e_{p_1}$: zero at $\vv{s}$ and brightest now at $-\vv{s}$, where the amber dot is $p_2$ with weight $0.2$, so that $E = 0.7\,p_1 + 0.2\,p_2$. The example is a hand computation ([@ex-qubit-confirmation-peel]); the decomposition it mirrors is [@thm-positive-dual-generation].
+:::
+
 > Do not erect coordinates before you measure: the brightest direction of a reading is the axis the reading chooses for itself.
 
 Three boundaries need to be drawn. First, the length bound of [@thm-positive-dual-generation] is $\dim A$, which is $4$ for a qubit. Only two layers appear because $\mathbb{C}^2$ holds at most two mutually orthogonal unit vectors ($\Tr(p_i p_j) = 0$ means $\langle\psi_i\mid\psi_j\rangle = 0$); this sharper bound of $2$ is a manual observation about the example, not a conclusion of the theorem. Second, that a qubit satisfies the seven items is the manual derivation above; the header of the cited Lean file states that the application to a compact normalized base and the state-side spectral bridge are separate mathematical obligations, outside this theorem. Third, the theorem decomposes readings that are positive on probes; it answers "what is a reading made of", and it does not assert that every additive probability assignment takes the trace-pairing form. That uniqueness question is answered for effects in finite dimension by [@thm-busch-effect-density] below; Gleason's theorem on the projection lattice is discussed in [@rem-gleason-literature].
@@ -467,6 +455,10 @@ Here $p(P_{\vv{n}}) = \frac{1}{2}\bigl(1 + \vv{r}\cdot\vv{n}\bigr) \approx 0.818
 The hemisphere frame function cannot do this. Let $f(P_{\vv{n}}) = 1$ if $\vv{n}$ lies in the northern hemisphere ($n_z > 0$; on the equator decide by $n_x > 0$, then by $n_y > 0$), and $f(P_{\vv{n}}) = 0$ otherwise. Every antipodal pair satisfies $f(P_{\vv{n}}) + f(P_{-\vv{n}}) = 1$, so $f$ is a legitimate frame function on projections. If some $p$ satisfying the hypotheses of the theorem agreed with $f$ on projections, the theorem would make $p$ a trace pairing, hence linear on effects, and the two splittings above would have to give the same $p(E)$. But the first gives $\frac{1}{2}\bigl(f(P_{+x}) + f(P_{+z})\bigr) = \frac{1}{2}(1 + 1) = 1$ and the second $0.8536 \times 1 + 0.1464 \times 0 = 0.8536$. The contradiction shows that $f$ does not extend to an additive probability on effects: effects tie different measurement axes together, which the two-dimensional projection lattice cannot do.
 :::
 
+::: {.figure src="ch02-hemisphere"}
+**A hemisphere frame function, lawful on projections, contradicts itself on effects.** On the cyan northern hemisphere $f = 1$, on the dark southern one $f = 0$. The same effect $E = \frac{1}{2}P_{+x} + \frac{1}{2}P_{+z}$ split along $+x$ and $+z$ gives $\frac{1}{2}(1 + 1) = 1$, and split along its own eigenaxis $\pm\vv{n}$ gives $0.8536 \times 1 + 0.1464 \times 0 = 0.8536$; the magenta line marks that the two differ. This is the hand counterexample of [@ex-qubit-busch-reconstruction]: it shows why the premise of [@thm-busch-effect-density], additivity on effects, cannot be weakened to additivity on projections, and is not itself a theorem.
+:::
+
 > A projection asks only "yes or no"; an effect can also ask "how much". Once "how much" can be asked, the trace pairing is the only way left to write a probability.
 
 ::: {.remark #rem-gleason-literature title="Gleason's Theorem and Busch's Theorem in Infinite Dimension (Literature Result, Not Formalized in This Book)"}
@@ -480,10 +472,6 @@ Our pinned repository focuses on constructive finite-dimensional matrix reductio
 
 ::: {.viz src="pairwise-shutter" height="560"}
 The full lab: drag the amber $B$ or the cyan $A$ and watch the cyan stretch and the weight change together while the share of passes follows; draw new random numbers and the curve changes while the dashed cyan line does not; “both turn together” and “a random direction each shot” are in the left column.
-:::
-
-::: {.film src="002-pairwise-born"}
-**Pairwise measurement: from two arrows to the Born weight (1 min 26 s).** Two arrows $60^\circ$ apart read their own angle from the two diagonals of their parallelogram ([@thm-parallelogram-norm-law]); with $A$ as its own axis, the foot $C$ becomes the cyan shadow $\cos\theta$ that $B$ casts on $A$; squeezing that shadow from $[-1, 1]$ into $[0, 1]$ gives the weight $\cos^2(\theta/2)$ ([@thm-born-modulus-square]); only squares let a shutter and its complement share the whole weight ([@thm-born-probability-skeleton]); finally an environment records the branch, and the arrow shrinks to a short line on the vertical axis inside the ball (see [Chapter 4](ch04-decoherence.md)).
 :::
 
 Having eliminated the external third point $C$ and derived $\cos^2(\theta/2) = \frac{1 + \cos\theta}{2}$ from pure trace geometry, we now turn the spotlight onto the ruler itself — the **idempotent projector** $P^2 = P$ that appeared in every theorem of this chapter. Why do "detecting a particle," "naming a logical concept," and "experiencing a tick of classical linear time" all reduce to the single equation $P^2 = P$? Let us step into [Chapter 3](ch03-projectors-and-duality.md).
