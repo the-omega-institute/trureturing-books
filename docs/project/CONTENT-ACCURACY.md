@@ -714,3 +714,30 @@ prime 舞台以实际 `measureText` 墨迹盒规划四个 band，遍历 `k=0..12
 现有 normal/slow 实验室套件均重新独立通过：sphere `130/130`、`105/105`；fixed-point `130/130`、`114/114`，两份测试还通过 `node --check`。`./tbook check` 为 0 error/0 warning；`TBOOK_FILMS=skip ./tbook build html pdf epub site --book quantum-geometry` 成功。双语 HTML、四份 screen/print PDF、两份 EPUB 与 `_site` 均从当前源生成；两份 EPUBCheck 5.3.0 均 valid、0 error、0 warning（裸 `epubcheck` shell 命令仍 exit 127）。四版 PDF 检测到 64 个受影响页并逐页渲染，逐一抽查中英 screen/print 的 prime/Newton 代表页，公式、标签和图注完整可读，无可见裁切或重叠；站点中英 ch21/ch22/ch24 的 12 个页面组合及 4 个直接实验室页无页面、控制台、HTTP、iframe 或溢出错误。两个实验室的全部 30 张实际消费 JPEG still（含 fig-euclid/fig-newton 与 thumb）已刷新并抽查。输出、站点/下载、PDF 页面和 still 字节对应见 `consumer-correspondence.json`、`pdf-page-evidence.json`、`pdf-visual-inspection.json` 与 `verification.json`。
 
 保留限制：pypandoc bundled binary 报 `Bad CPU type in executable` 后使用系统 Pandoc；8 个 films 因 `TBOOK_FILMS=skip` 只生成海报回退；Noto CJK SC 未安装；受控字体输出不等同默认 macOS/CI 字节；窄屏 EPUB 默认字体、原生 Apple Books/其他阅读器、实体设备与完整音视频/字幕同步仍未验收。该记录只证明本有界实现和消费者检查，不增加原 35 单元批准覆盖，也不构成 whole-book approval。调用方仍需封存候选、执行 mandatory R3 三席复审并处理其独立结论，随后负责 PR/CI、合入与 Pages；本批没有剩余实现额度。
+
+
+## PR127 当前依赖整合与开放版式缺陷（2026-11-12）
+
+本次由调用方提供的密封干净输入为 `9f8b5541a4ea6a23aefae75d3e5c098010ee381a`，已整合 main `efbdeb52`；接受的 post-R2 实现为 `7f057e740ba62e60822ec2a2f3ddae2e3e67ca17`，它是实现证据，独立 R3 仍待办。当前 pin 为 `6cfcf785096782b15084d719ec73c2ca16b6ed29`。原 35 单元审计集合、作者题记和哲学文风、稳定 ID/GID、媒体次序及历史失败路线事实保持；第 31–39 章与出版物 44 单元只作依赖，新增批准覆盖为 0。调用方提供的源码对应确认原 448 个锁条目及 426 个 source/state 路径无变化；本次另核对接受修复的 36 个源、测试与 JPEG 路径，全部逐字节相同。复用仅限该未变闭包，不把旧 `8489` 整书输出称为当前输出；ch21 四合取项的既定有效结论与 Film006 均未改。
+
+通过官方 `./tbook template update --to v0.5.1` 升级 0.5.0 → 0.5.1，来源为正式 tag `v0.5.1`，提交 `4e47a4b1e2377131253946e91302337a3c655188`。六个托管文件及两个模板身份文件由工具更新，无冲突、无迁移、无本地托管替代修补；没有安装环境或共享依赖，也无需新增媒体实现。
+
+按现有生成器规则独立重算：44 单元、457 声明，其中 theorem 320、def 128、inductive 9；正式环境 215、明确标注文献结果的中文环境 165、开放环境 6。逐章去重再求和为 329，40 根柱与附录 C 的 251 个 T 行所列锚点逐章一致；这不是全书去重定理数。逐部计数、声明图的每条引用/首次出场/附录序号也与当前输入相符。六份双语计数 SVG、其现存 deck 副本和声明图生成数据均等于当前生成器结果，断言全部保留，无过期物需要改数或重画。当前两版 39 页 deck 的实际 PDF 含 457/320/215/165。
+
+实际验证见 `build/content-accuracy/pr127-integration-20261112/`：
+
+- 最终 `./tbook check` 为 1 book、0 errors、0 warnings；150 图的双语完整来源检查为 0 stale、0 errors。工具测试运行 886 项，836 通过、50 跳过。两个接受修复的实验室 normal/slow 各 158/158；声明图 119/119；四份源/测试模块语法检查通过。
+- 关闭构建缓存、跳过影片，以现存系统 Pandoc 完整生成双语 HTML/site、四份 screen/print PDF、两份 EPUB，站点链同时生成并检查双语 deck。两份 EPUBCheck 5.3.0 均 valid、0 errors、0 warnings。176 个章节 HTML/站点文件有精确摘要，站点按官方 film-unbuilt 标记转换与 HTML 对应；六份下载逐字节相同。每份 PDF 的 24 处相关源图及每份 EPUB 的 24 张相关源图均按嵌入字节摘要对应；96 个 PDF 图像页已渲染，8 个 prime/Newton 代表页已查看。没有把这称为全书逐页排版验收。
+- 当前受控字体浏览器检查覆盖六个相关章节/计数消费者的中英、navy/light、桌面/手机 48 组合、168 个 iframe，无页面/控制台/资源/KaTeX/坏图/整页横溢错误；嵌入舞台与下方图表之间无重叠。初次站点检查的测试字体路由错误产生 HTTP404，失败记录保留；改由测试上下文读取现有字体包后完成上述复验，未改产品或安装依赖。
+- 按官方截图参数另在证据目录渲染 45 张 still/cover：42 张带标签数学卡与两个 cover 全字节相同；sphere cover 只有 87 个像素、最大通道差 2/255 的捕获差异（18×9 包围盒），无图景/数字变化，接受的源 cover 保持原字节。全部源与当前输出摘要分别保留，不把“源补丁保留”当作当前输出证明。
+
+**当前验收未通过的确认缺陷（只报告，未扩展修复）：**
+
+1. `PR127-INTEGRATION-SHORT-STAGE-OCCLUSION`：完整实验室在 1440×500 / 1280×480、中英、fresh/resize 的 16 个组合均出现下方 strip 覆盖 stage，重叠 15.1875–94.4375 px；英文 1280×480 的 prime 标签/图例被遮住。共享 `.lab .center` 的第一行允许收缩到 0，而 stage 子项至少 220 px、strip 176 px、间隙 10 px；center 小于 406 px 时，第一行可小于子项下限。现有 prime 内部四 band 在本次 208 个状态均有限、间隔为正且 BigInt 对应，但不能证明跨容器内容可见。此前 156 个 fixture 只支持其有限六布局与内部几何，不能称普遍布局保证。
+2. `PR127-INTEGRATION-NARROW-CARD-HUD-OCCLUSION`：实际 334 px 书内卡片中，绝对定位的场景按钮与舞台标题共用顶行。四个中英页面中三个有标题文字交叠：sphere 中文约 25.52×17 px、英文 161.58×17 px，Newton 英文 61.64×17 px；Newton 中文该项未复现。手机当前站点截图与文字 Range/按钮盒测量均保留。
+
+这两项属于当前读者版式缺陷，并非新数学修订授权；它们在正式 0.5.1 下复现，但本次未建立由该升级新引入的因果归属。没有在本书库改共享主题或媒体实现。post-R2 修复额度仍为 0，本次单独依赖整合额度已用尽，剩余 0，不据此发明全局轮数上限。当前交接是完成整合与验证后的开放缺陷报告，不是批准。
+
+技能无需因运行一批而重写：现有 `skills/local-content-accuracy/SKILL.md` 第 3/5 步已要求实际控制域、全部既有消费者和实际桌面/手机/主题检查，其末段已明确集成后独立重算派生计数；`references/review-protocol.md` 的依赖对应与验证矩阵也覆盖本轮经验。质量门的有限通过不能代替这些实际查看义务。
+
+保留限制：可选 Noto CJK SC 未安装；本地字体与受控浏览器输出不建立默认平台/CI 字节等价。构建时 8 个 films 均为海报/“video not built”回退，其当前 film.json 元数据另有摘要，未接受完整影片/音频/字幕。原生 Apple Books/其他阅读器、实体设备、窄屏默认字体 EPUB 仍未验收。调用方须封存最终对应、裁定并另行处理上述版式缺陷（托管修复应回馈模板，禁止本地 workaround），在最终集成候选上完成 mandatory R3 三席，随后承担推送、PR/CI、合入与 Pages。没有本轮同伴结果，没有原 35 或新增 9 单元的整体批准。
