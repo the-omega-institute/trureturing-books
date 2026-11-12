@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "6cfcf785096782b15084d719ec73c2ca16b6ed29",
-  "pinned_at": "2026-11-11T15:44:45Z",
+  "commit": "a767dce5d7b4a01bd003f8722405c672f4eaaafa",
+  "pinned_at": "2026-11-12T05:43:05Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -44,6 +44,70 @@
       "statement_id": "sha256:074877dbe3e7ad85e88911b6dd3f8e26d1611d261e449f821c5407c5ea744d54",
       "line": 29,
       "signature": "theorem isUnit_iff_norm_eq_one_or_neg_one (x : GoldenInt) : IsUnit x ↔ norm x = 1 ∨ norm x = -1"
+    },
+    "D5/S0/Certificates/Combinatorics/NormalizedPfaffian.P": {
+      "module": "D5/S0/Certificates/Combinatorics/NormalizedPfaffian",
+      "name": "D5.S0.Certificates.Combinatorics.DeformedJucysMurphyNoncommutation.P",
+      "kind": "def",
+      "statement_id": "sha256:46aff3be8ac2fe1da532e8ee0cf25be0a5455d31e2b4265a8d996469965f6624",
+      "line": 25,
+      "signature": "abbrev P (k : ℕ)"
+    },
+    "D5/S0/Certificates/Combinatorics/NormalizedPfaffian.canonical_mate": {
+      "module": "D5/S0/Certificates/Combinatorics/NormalizedPfaffian",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.CanonicalPairListing.canonical_mate",
+      "kind": "theorem",
+      "statement_id": "sha256:46aff3be8ac2fe1da532e8ee0cf25be0a5455d31e2b4265a8d996469965f6624",
+      "line": 250,
+      "signature": "theorem canonical_mate {n : ℕ} (p : P n) (i : Fin n) : p.val (canonicalListing p ⟨2 * i.val, by omega⟩) = canonicalListing p ⟨2 * i.val + 1, by omega⟩"
+    },
+    "D5/S0/Certificates/Combinatorics/NormalizedPfaffian.inversionCrossNestEquiv": {
+      "module": "D5/S0/Certificates/Combinatorics/NormalizedPfaffian",
+      "name": "D5.S0.Certificates.Combinatorics.NormalizedPfaffianCount.inversionCrossNestEquiv",
+      "kind": "def",
+      "statement_id": "sha256:46aff3be8ac2fe1da532e8ee0cf25be0a5455d31e2b4265a8d996469965f6624",
+      "line": 744,
+      "signature": "noncomputable def inversionCrossNestEquiv {n : ℕ} (s : Equiv.Perm (Pos n)) (hs : s ∈ normalizedListings n) : InvType s ≃ CrossType (pairingOfListing s) ⊕ (NestType (pairingOfListing s) × Fin 2) where toFun"
+    },
+    "D5/S0/Certificates/Combinatorics/NormalizedPfaffian.inversion_card_eq_cross_add_two_nesting_card": {
+      "module": "D5/S0/Certificates/Combinatorics/NormalizedPfaffian",
+      "name": "D5.S0.Certificates.Combinatorics.NormalizedPfaffianCount.inversion_card_eq_cross_add_two_nesting_card",
+      "kind": "theorem",
+      "statement_id": "sha256:46aff3be8ac2fe1da532e8ee0cf25be0a5455d31e2b4265a8d996469965f6624",
+      "line": 848,
+      "signature": "theorem inversion_card_eq_cross_add_two_nesting_card {n : ℕ} (s : Equiv.Perm (Pos n)) (hs : s ∈ normalizedListings n) : Fintype.card (InvType s) = Fintype.card (CrossType (pairingOfListing s)) + 2 * Fintype.card (NestType (pairingOfListing s))"
+    },
+    "D5/S0/Certificates/Combinatorics/NormalizedPfaffian.listingEquiv": {
+      "module": "D5/S0/Certificates/Combinatorics/NormalizedPfaffian",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.CanonicalPairListing.listingEquiv",
+      "kind": "def",
+      "statement_id": "sha256:46aff3be8ac2fe1da532e8ee0cf25be0a5455d31e2b4265a8d996469965f6624",
+      "line": 241,
+      "signature": "noncomputable def listingEquiv (n : ℕ) : {s : Equiv.Perm (Fin (2 * n)) // s ∈ normalizedListings n} ≃ P n where toFun s"
+    },
+    "D5/S0/Certificates/Combinatorics/NormalizedPfaffian.listing_value_canonical": {
+      "module": "D5/S0/Certificates/Combinatorics/NormalizedPfaffian",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.CanonicalPairListing.listing_value_canonical",
+      "kind": "theorem",
+      "statement_id": "sha256:46aff3be8ac2fe1da532e8ee0cf25be0a5455d31e2b4265a8d996469965f6624",
+      "line": 404,
+      "signature": "theorem listing_value_canonical {n : ℕ} (f : Fin (2 * n) → Fin (2 * n) → ℤˣ) (hf : ∀ x y, x ≠ y → f y x = -f x y) (s : Equiv.Perm (Fin (2 * n))) : listingValue f s = listingValue f (canonicalListing (pairingOfListing s))"
+    },
+    "D5/S0/Certificates/Combinatorics/NormalizedPfaffian.pfaffian": {
+      "module": "D5/S0/Certificates/Combinatorics/NormalizedPfaffian",
+      "name": "D5.S0.Certificates.IshikawaKoutschanMotzkinPfaffianRefutation.pfaffian",
+      "kind": "def",
+      "statement_id": "sha256:46aff3be8ac2fe1da532e8ee0cf25be0a5455d31e2b4265a8d996469965f6624",
+      "line": 60,
+      "signature": "def pfaffian {R : Type*} [CommRing R] {n : ℕ} (A : Matrix (Fin (2 * n)) (Fin (2 * n)) R) : R"
+    },
+    "D5/S0/Certificates/Combinatorics/NormalizedPfaffian.pfaffian_eq_crossing_sum": {
+      "module": "D5/S0/Certificates/Combinatorics/NormalizedPfaffian",
+      "name": "D5.S0.Certificates.Combinatorics.NormalizedPfaffianCount.pfaffian_eq_crossing_sum",
+      "kind": "theorem",
+      "statement_id": "sha256:46aff3be8ac2fe1da532e8ee0cf25be0a5455d31e2b4265a8d996469965f6624",
+      "line": 950,
+      "signature": "theorem pfaffian_eq_crossing_sum {n : ℕ} {R : Type*} [CommRing R] (A : Matrix (Pos n) (Pos n) R) : pfaffian A = ∑ s ∈ normalizedListings n, crossingCoefficient (pairingOfListing s) * (∏ a : lowerEndpoints (pairingOfListing s), A a.val ((pairingOfListing s).val a.val))"
     },
     "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null": {
       "module": "D5/S0/Certificates/MinkowskiNullConeRigidity",
@@ -756,6 +820,94 @@
       "statement_id": "sha256:c093d56982a51511137fbec5256046afbce4527120d49576e99425b789d5a110",
       "line": 73,
       "signature": "theorem coloured_coefficient (colors : ℕ → ℕ) (n : ℕ) : coeff n (eulerSeries (fun i => (colors (i + 1) : ℤ))) = (Nat.card (ColouredPartition colors n) : ℤ)"
+    },
+    "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.NiceOdd": {
+      "module": "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.AlternatingCyclePfaffian.NiceOdd",
+      "kind": "def",
+      "statement_id": "sha256:b3a59dfc57f377e13a71c4fcddfde572a4373e888e88f8a67d7b6d00f5565d54",
+      "line": 122,
+      "signature": "def NiceOdd (epsilon : G.Dart → ZMod 2) : Prop"
+    },
+    "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.Reverses": {
+      "module": "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.AlternatingCyclePfaffian.Reverses",
+      "kind": "def",
+      "statement_id": "sha256:b3a59dfc57f377e13a71c4fcddfde572a4373e888e88f8a67d7b6d00f5565d54",
+      "line": 110,
+      "signature": "def Reverses (epsilon : G.Dart → ZMod 2) : Prop"
+    },
+    "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.alternating_cycle_flip": {
+      "module": "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.AlternatingCyclePfaffian.alternating_cycle_flip",
+      "kind": "theorem",
+      "statement_id": "sha256:b3a59dfc57f377e13a71c4fcddfde572a4373e888e88f8a67d7b6d00f5565d54",
+      "line": 237,
+      "signature": "theorem alternating_cycle_flip {M : G.Subgraph} (hM : M.IsPerfectMatching) {v : V} {p : G.Walk v v} (hp : p.IsCycle) (ha : p.toSubgraph.spanningCoe.IsAlternating M.spanningCoe) : Even p.length ∧ (∃ N : G.Subgraph, N.IsPerfectMatching ∧ (∀ x y, N.Adj x y ↔ (M.Adj x y ∧ ¬ p.toSubgraph.Adj x y) ∨ (p.toSubgraph.Adj x y ∧ ¬ M.Adj x y))) ∧ ∃ N : (G.induce p.toSubgraph.vertsᶜ).Subgraph, N.IsPerfectMatching"
+    },
+    "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.alternating_cycle_transport": {
+      "module": "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.AlternatingCyclePfaffian.alternating_cycle_transport",
+      "kind": "theorem",
+      "statement_id": "sha256:b3a59dfc57f377e13a71c4fcddfde572a4373e888e88f8a67d7b6d00f5565d54",
+      "line": 599,
+      "signature": "theorem alternating_cycle_transport {n : ℕ} (label : V ≃ Fin (2 * n)) {epsilon : G.Dart → ZMod 2} (he : Reverses epsilon) (M : {M : G.Subgraph // M.IsPerfectMatching}) {v : V} {p : G.Walk v v} (hp : p.IsCycle) (ha : p.toSubgraph.spanningCoe.IsAlternating M.val.spanningCoe) : ∃ N : {N : G.Subgraph // N.IsPerfectMatching}, (∀ x y, N.val.Adj x y ↔ (M.val.Adj x y ∧ ¬p.toSubgraph.Adj x y) ∨ (p.toSubgraph.Adj x y ∧ ¬M.val.Adj x y)) ∧ matchingTau label epsilon M * matchingTau label epsilon N = -(p.darts.map (dartSign epsilon)).prod"
+    },
+    "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.matchingEquiv": {
+      "module": "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.CallanA002067Hafnian.matchingEquiv",
+      "kind": "def",
+      "statement_id": "sha256:b3a59dfc57f377e13a71c4fcddfde572a4373e888e88f8a67d7b6d00f5565d54",
+      "line": 95,
+      "signature": "noncomputable def matchingEquiv (n : ℕ) : {M : (⊤ : SimpleGraph (Fin (2 * n))).Subgraph // M.IsPerfectMatching} ≃ P n where toFun"
+    },
+    "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.niceOdd_matching_tau_eq": {
+      "module": "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.AlternatingCyclePfaffian.niceOdd_matching_tau_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:b3a59dfc57f377e13a71c4fcddfde572a4373e888e88f8a67d7b6d00f5565d54",
+      "line": 679,
+      "signature": "theorem niceOdd_matching_tau_eq {n : ℕ} (label : V ≃ Fin (2 * n)) {epsilon : G.Dart → ZMod 2} (he : Reverses epsilon) (ho : NiceOdd epsilon) (M N : {M : G.Subgraph // M.IsPerfectMatching}) : matchingTau label epsilon M = matchingTau label epsilon N"
+    },
+    "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.orientationUnit": {
+      "module": "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.WeightedPfaffianMatching.orientationUnit",
+      "kind": "def",
+      "statement_id": "sha256:b3a59dfc57f377e13a71c4fcddfde572a4373e888e88f8a67d7b6d00f5565d54",
+      "line": 976,
+      "signature": "noncomputable def orientationUnit (label : V ≃ Fin (2 * n)) (epsilon : G.Dart → ZMod 2) : ℤˣ"
+    },
+    "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.weighted_pfaffian_identity": {
+      "module": "D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.WeightedPfaffianMatching.weighted_pfaffian_identity",
+      "kind": "theorem",
+      "statement_id": "sha256:b3a59dfc57f377e13a71c4fcddfde572a4373e888e88f8a67d7b6d00f5565d54",
+      "line": 983,
+      "signature": "theorem weighted_pfaffian_identity [Fintype V] {R : Type*} [CommRing R] (label : V ≃ Fin (2 * n)) {epsilon : G.Dart → ZMod 2} (he : Reverses epsilon) (ho : NiceOdd epsilon) (w : G.edgeSet → R) : pfaffian (orientedMatrix label epsilon w) = ((orientationUnit label epsilon : ℤ) : R) * partitionFunction w"
+    },
+    "D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles.equivalence": {
+      "module": "D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.InvolutionEvenCycles.equivalence",
+      "kind": "def",
+      "statement_id": "sha256:5b848bb8446166bfc5fa762209b5fe0e718b2a43dd83a1365ad59f7362d535ac",
+      "line": 548,
+      "signature": "def equivalence : (FixedPointFreeInvolution X × FixedPointFreeInvolution X) ≃ {q : Perm X // (∀ x, q x ≠ x) ∧ ∀ c ∈ q.cycleFactorsFinset, Even c.support.card} where toFun"
+    },
+    "D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles.rooted_interlacing": {
+      "module": "D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.InvolutionEvenCycles.rooted_interlacing",
+      "kind": "theorem",
+      "statement_id": "sha256:5b848bb8446166bfc5fa762209b5fe0e718b2a43dd83a1365ad59f7362d535ac",
+      "line": 514,
+      "signature": "theorem rooted_interlacing (s t : FixedPointFreeInvolution X) : recover (forward (s,t)) = (s,t) ∧ (∀ x y, (interlace s t).SameCycle x y ↔ Connected s.val t.val x y) ∧ (∀ x, Connected s.val t.val x (componentRoot s t x) ∧ ∀ y, Connected s.val t.val x y → componentRoot s t x ≤ y) ∧ (∀ m, (∀ y, Connected s.val t.val m y → m ≤ y) → ∀ k : ℕ, (interlace s t ^ (2*k)) m = ((t.val*s.val)^k) m ∧ (interlace s t ^ (2*k+1)) m = s.val (((t.val*s.val)^k) m)) ∧ (∀ x, interlace s t x = (if firstPhase s t x then s.val x else t.val x) ∧ (interlace s t)⁻¹ x = (if firstPhase s t x then t.val x else s.val x) ∧ (cyc"
+    },
+    "D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles.rooted_reconstruction": {
+      "module": "D5/S3/Combinatorics/PerfectMatchings/InvolutionEvenCycles",
+      "name": "D5.S3.Combinatorics.PerfectMatchings.InvolutionEvenCycles.rooted_reconstruction",
+      "kind": "theorem",
+      "statement_id": "sha256:5b848bb8446166bfc5fa762209b5fe0e718b2a43dd83a1365ad59f7362d535ac",
+      "line": 539,
+      "signature": "theorem rooted_reconstruction (q : {q : Perm X // (∀ x, q x ≠ x) ∧ ∀ c ∈ q.cycleFactorsFinset, Even c.support.card}) : forward (recover q) = q ∧ ∀ x, (recover q).1.val x = (if cyclePhase q.val x then q.val x else q.val⁻¹ x) ∧ (recover q).2.val x = (if cyclePhase q.val x then q.val⁻¹ x else q.val x)"
     },
     "D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart.gaussian_unit": {
       "module": "D5/S3/ConceptDynamics/Coding/ResetNativeIntegerChart",
@@ -3540,6 +3692,14 @@
       "statement_id": "sha256:d757f2e1548914d4fcc0c9979f1f66fa7b34d85d2f955a2663c7c075c5a064c2",
       "line": 50,
       "signature": "@[simp] theorem xi_reading_reflection (s : ℂ) : xiReading (1 - s) = xiReading s"
+    },
+    "D5/S3/Zeros/Convolution/PerfectMatchingCount.FixedPointFreeInvolution": {
+      "module": "D5/S3/Zeros/Convolution/PerfectMatchingCount",
+      "name": "D5.S3.Zeros.Convolution.PerfectMatchingCount.FixedPointFreeInvolution",
+      "kind": "def",
+      "statement_id": "sha256:caf959099b98eea6648d3c0d1aa2f8865db155c7bcbd4ca8877fa944772952af",
+      "line": 30,
+      "signature": "abbrev FixedPointFreeInvolution (α : Type*)"
     },
     "D5/S3/Zeros/Endpoints/XiEndpointValues.xi_reading_endpoint_values": {
       "module": "D5/S3/Zeros/Endpoints/XiEndpointValues",

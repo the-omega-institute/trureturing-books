@@ -12,7 +12,7 @@
 2. **得失公平（Gain–Loss Fairness）**：互补语境中心化纯度勾股守恒立下零免费午餐账本，任何一维确定度的所得必以正交维度残余潜能的所失或热熵耗散兑付；
 3. **关系公平（Relational Fairness）**：不可克隆内积判据与贝尔纯态混态边缘（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 3–4 款；外部多体延伸见 [@rem-ch31-ckw-monogamy-literature]）锁死关联预算，深切的交融无法批发量产；
 4. **博弈公平（Horizon Fairness）**：相干一致旋转的固定步幅定律（[@thm-ch31-horizon-landauer-ergodic-fairness] 第 2 款）与有限观察者复杂性防火墙（[第 30 章](ch30-fields-lines-eth-and-navier-stokes.md) [@conj-p-neq-np]；外部背景见 [@rem-ch30-query-sos-literature]）阻止算力垄断者提前剧透生命终局；
-5. **遍历公平（Ergodic Fairness）**：诞生遗忘重置相容自由度（`MODEL`），而紧致环面闭子群轨道均匀分布与有界间隙回归定理（[@thm-ch31-horizon-landauer-ergodic-fairness] 第 3–4 款；外部遍历论延伸见 [@rem-ch31-weyl-window-equidistribution-literature]）支撑“长程旅程共享统计全息星光”的本体诠释。
+5. **遍历公平（Ergodic Fairness）**：诞生遗忘重置相容自由度（`MODEL`），而紧致环面闭子群轨道均匀分布与有界间隙回归定理（[@thm-ch31-horizon-landauer-ergodic-fairness] 第 3–4 款；窗口应用与边界见 [@rem-ch31-weyl-window-equidistribution-literature]）支撑“长程旅程共享统计全息星光”的本体诠释。
 
 ![量子公平五重铁律与遍历统计全息图景](../assets/fig-31-quantum-fairness.svg)
 
@@ -132,7 +132,7 @@
 把本书的观察者动力学与紧致环面遍历定理展开，答案清澈而温暖：
 
 1. **诞生遗忘重置自由度（`MODEL`）**：正如[第 29 章](ch29-timeless-causality-and-gram-space.md)（[@thm-ch29-gram-rigidity-and-pell]）与[终章](coda.md)所揭示的，若旧轮次的历史锚点无休止地堆叠，相容选点余量终将趋于锁死。“诞生即遗忘”通过截断高阶历史包袱，让每一位从遗忘中醒来重新出发的有限观察者，面前都重新张开一片正体积的自由选点走廊。
-2. **闭子群轨道均匀分布与有界间隙回归（`LEAN ✓` + `MODEL`）**：短期几步之内，局部切片的顺逆确实参差不齐；但在紧致环面群动力学层面，`trureturing` 的**环面闭子群轨道均匀分布定理**与**观测窗有界间隙回归定理**（下方 [@thm-ch31-horizon-landauer-ergodic-fairness] 第 3–4 款）严格证明：连续可观测量的时间平均必然收敛于闭子群 $G = \overline{\langle g\rangle}$ 上的归一化平移不变概率测度积分，且任何与连续像集 $\operatorname{range}(h)$ 相交的非空开区间 $(u, v)$ 都必以有界步数间隙 $M$ 反复重逢，并享有不低于 $\frac{1}{M+1} - \varepsilon$ 的**正下渐近访问密度**（关于高维无理平移下带边界接受窗指示函数的外部遍历论延伸，见下方 [@rem-ch31-weyl-window-equidistribution-literature]）。
+2. **闭子群轨道均匀分布与有界间隙回归（`LEAN ✓` + `MODEL`）**：短期几步之内，局部切片的顺逆确实参差不齐；但在紧致环面群动力学层面，`trureturing` 的**环面闭子群轨道均匀分布定理**与**观测窗有界间隙回归定理**（下方 [@thm-ch31-horizon-landauer-ergodic-fairness] 第 3–4 款）严格证明：连续可观测量的时间平均必然收敛于闭子群 $G = \overline{\langle g\rangle}$ 上的归一化平移不变概率测度积分，且任何与连续像集 $\operatorname{range}(h)$ 相交的非空开区间 $(u, v)$ 都必以有界步数间隙 $M$ 反复重逢，并享有不低于 $\frac{1}{M+1} - \varepsilon$ 的**正下渐近访问密度**（高维无理平移下零边界窗口的完整应用与其前提，见下方 [@rem-ch31-weyl-window-equidistribution-literature]）。
 
 让我们先把热力学擦除平衡界、相干搜索步幅旋转以及环面闭子群遍历与有界回归四条形式化定理精确锚定如下。
 
@@ -168,20 +168,51 @@
 第 1 款由 $\mathrm{mutualInfo} + \mathrm{divergence} \ge 0$ 与实数加法单调性直接推出；第 2 款在 $p = 1$ 时由 `unit_success` 得 $U = W$，在 $p < 1$ 时验证 $W, B$ 的相互正交等距性并对步数 $n$ 用三角和角公式归纳，再由克罗内克积线性性提升至任意伴随张量因子 $R$；第 3 款利用时间平均算子列的等度连续性将收敛子空间 $S \subseteq C(G, \mathbb{C})$ 刻画为闭子空间，结合环面特征标的几何级数抵消与三角多项式稠密逼近证出全空间收敛；第 4 款由紧空间开原像严格正测度证出 $\operatorname{supp}(h_*\mu) = \operatorname{range}(h)$，并由紧致平移开覆盖有限子覆盖提取有界回归跨度 $M$ 及正下渐近访问密度下界。完整证明由 Lean 内核检查。
 :::
 
-从连续观测函数延伸至带边界接受窗指示函数的外部遍历论文献背景整理于下框：
+从连续观测函数延伸到实际接受窗计数的复用推导与剩余遍历论边界整理于下框：
 
-::: {.remark #rem-ch31-weyl-window-equidistribution-literature title="无理环面唯一遍历性与接受窗指示函数的外尔等分布定理（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** [@thm-ch31-horizon-landauer-ergodic-fairness] 第 3 款对任意元素 $g : I \to \mathrm{Circle}$ 在其生成的闭子群 $G = \overline{\langle g\rangle}$ 上对连续函数 $f \in C(G, \mathbb{C})$ 成立；将其特化为高维内空间环面 $\mathbb{T}_\perp^d = \mathbb{R}^d / \mathbb{Z}^d$（如 $d = 3$）上不同窗口平移相位 $u_1, u_2 \in \mathbb{T}_\perp^3$ 对同一接受窗 $W$ 的驻留占比恒等式，需引用以下经典遍历论定理（未作为独立定理包含在本书锁定的形式化声明集中）：
+::: {.remark #rem-ch31-weyl-window-equidistribution-literature title="全环面零边界窗口频率：既有结果的应用与唯一遍历性的边界"}
+**既有结果的复合应用。** [@thm-ch31-horizon-landauer-ergodic-fairness] 第 3 款只直接陈述闭轨道群上连续函数的平均；下面保留从它到实际窗口计数的全部接口，不将窗口结论冒充该端点的陈述。取任意有限指标类型 $I$（允许空类型），$\alpha:I\to\mathbb R$，令 $\beta_i=\alpha_i\pmod{\mathbb Z}\in\mathrm{AddCircle}(1)$、$T=(\mathrm{AddCircle}(1))^I$，$\mu$ 为整座 $T$ 上归一化 Haar 概率测度。假设在 $\mathrm{Option}(I)=\{\mathrm{none}\}\sqcup\{\mathrm{some}(i):i\in I\}$ 上的族
 
-- **克罗内克—外尔高维环面唯一遍历与约当可测集等分布定理（H. Weyl, *Math. Ann.* **77**, 313–352, 1916）**：若环面平移步长向量 $\boldsymbol{\alpha} \in \mathbb{R}^d$ 满足 $1, \alpha_1, \dots, \alpha_d$ 在有理数域 $\mathbb{Q}$ 上线性无关，则平移映射 $x \mapsto x + \boldsymbol{\alpha} \pmod{\mathbb{Z}^d}$ 在整座环面 $G = \mathbb{T}_\perp^d$ 上**唯一遍历（uniquely ergodic）**（即唯一的遍历不变概率测度就是归一化勒贝格/哈尔测度）。进而，通过上下连续包络函数夹逼，对 $\mathbb{T}_\perp^d$ 中任意边界勒贝格测度为零（$\operatorname{Vol}(\partial W) = 0$，即约当可测，如凸多面体接受窗）的子集 $W$ 及**任意两个初始平移相位 $u_1, u_2 \in \mathbb{T}_\perp^d$**，轨道落入平移窗口 $W + u_i$ 的渐近频率与初始相位 $u_i$ 完全无关，一致收敛于窗口的相对体积：
+$$
+a(\mathrm{none})=1,\qquad a(\mathrm{some}(i))=\alpha_i
+$$
 
-  $$
-  \lim_{T \to \infty} \frac{1}{T}\sum_{t=1}^{T} \mathbf{1}_W\bigl(\pi_\perp(z_t) - u_1\bigr)
-  \;=\;
-  \lim_{T \to \infty} \frac{1}{T}\sum_{t=1}^{T} \mathbf{1}_W\bigl(\pi_\perp(z_t) - u_2\bigr)
-  \;=\;
-  \frac{\operatorname{Vol}(W)}{\operatorname{Vol}(\mathbb{T}_\perp^d)}.
-  $$
+在 $\mathbb Q$ 上线性无关。取任意子集 $W\subseteq T$，只要求 $\mu(\partial W)=0$，**不另加 Borel 可测前提**。则对每个 $\varepsilon>0$，存在 $N_0\ge1$，使同一个 $N_0$ 对所有起点 $x\in T$ 和所有 $N\ge N_0$ 同时满足
+
+$$
+\left|\frac1N\sum_{j=0}^{N-1}
+\mathbf1_W\bigl(x+(j+1)\beta\bigr)-(\mu W)_{\mathbb R}\right|<\varepsilon.
+$$
+
+这里 $(\mu W)_{\mathbb R}$ 是有限测度值的实数读数；指示函数使用实际的成员关系。求和恰好取时刻 $1,\ldots,N$，不是 $0,\ldots,N-1$。
+
+**独立性如何进入。** 若整数 $k:I\to\mathbb Z$、$m\in\mathbb Z$ 满足 $\sum_i k_i\alpha_i=m$，在 `none` 放系数 $-m$、在 `some(i)` 放 $k_i$ 就得到该有理族的一条零关系，故所有 $k_i=0$。这正是 [`dense_circle_sequence`](lean:D5/S3/Fourier/BiquadraticKroneckerTimes.dense_circle_sequence) 的整数特征标前提。对 $g_i=\exp(2\pi i\alpha_i)$，结合 [`TorusOrbitClosure.result`](lean:D5/S3/Fourier/TorusOrbitClosure.result)，非负幂的闭包是整座圆周乘积，而非某个真子环面。逐坐标的 [AddCircle.homeomorphCircle](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Analysis/SpecialFunctions/Complex/Circle.lean#L435) 将此闭包对应到上述加法环面，保留实际生成元与所有起点。
+
+**连续平均与 Haar 搬运。** 将 [`TorusOrbitEquidistribution.result`](lean:D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result) 用于该 $g$。从闭圆周轨道到 $T$ 的连续满同态用 [MonoidHom.measurePreserving](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/MeasureTheory/Measure/Haar/Unique.lean#L951) 搬运 Haar 测度，两端总质量均为 $1$；平移不变性使 $z\mapsto f(x+z)$ 的积分等于 $f$ 的积分。于是每个连续复函数 $f$、每个 $x$ 的实际平均 $N^{-1}\sum_{j<N}f(x+(j+1)\beta)$ 收敛于 $\int f\,d\mu$。在 $N=0$ 时空和及全函数除法给零，不影响趋于无穷的极限。
+
+**为什么同一个阈值适用于所有起点。** 令 $R(x)=x+\beta$。它是等距平移，因而是 $1$-Lipschitz；紧环面上的连续 $f$ 一致连续。[uniformEquicontinuous_birkhoffAverage](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Dynamics/BirkhoffSum/NormedSpace.lean#L129) 给出平均族的等度连续性，再由紧致性与 [Equicontinuous.tendsto_uniformFun_iff_pi](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Topology/UniformSpace/Ascoli.lean#L167) 把逐点连续平均升级为关于 $x$ 一致收敛。以 $(m,x)$ 为指标，从 $R(x)$ 出发取 $m+1$ 步的经验概率测度 $\nu_{m,x}$。紧空间上连续函数有界，[ProbabilityMeasure.tendsto_iff_forall_integral_rclike_tendsto](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/MeasureTheory/Measure/ProbabilityMeasure.lean#L373) 与 `tendsto_prod_top_iff` 因而给出在乘积滤子 $\mathrm{atTop}\times^s\top$ 上的弱收敛 $\nu_{m,x}\to\mu$。第二个因子的 $\top$ 保留“所有 $x$ 同时”，不是几乎处处起点。
+
+**从测度到真正计数。** 零边界假设只在 [ProbabilityMeasure.tendsto_measure_of_null_frontier_of_tendsto'](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/MeasureTheory/Measure/Portmanteau.lean#L334) 处使用；它允许任意 $W$，没有 Borel 前提。再用 `Measure.dirac_apply` 与 `Measure.finsetSum_apply`，经验质量恰好是
+
+$$
+\nu_{m,x}(W)=\frac{1}{m+1}\sum_{j=0}^{m}
+\mathbf1_W\bigl(x+(j+1)\beta\bigr).
+$$
+
+乘积滤子的收敛给出某个 $M$，使所有 $m\ge M$、所有 $x$ 的误差小于 $\varepsilon$。取 $N_0=M+1$；对 $N\ge N_0$ 令 $m=N-1$，有 $m+1=N$，便精确得到上式要求的分母、求和范围与相位，而非忽略首项后的近似替代。
+
+**保留的边界。** $N_0$ 依赖 $\alpha,W,\varepsilon$；没有关于 $\alpha$ 或 $W$ 的一致性，也没有有效速率。不同平移窗口的读法可由 $\mathbf1_{W+u}(j\beta)=\mathbf1_W(-u+j\beta)$ 得到。若某个切投模型独立满足对每个 $j\ge1$ 都有 $\pi_\perp(z_j)=x+j\beta\in T$，则对任意 $u\in T$，
+
+$$
+\begin{aligned}
+\pi_\perp(z_j)-u&=(x-u)+j\beta,\\
+\mathbf1_{W+u}(\pi_\perp(z_j))&=\mathbf1_W((x-u)+j\beta),\\
+\frac1N\sum_{j=1}^{N}\mathbf1_{W+u}(\pi_\perp(z_j))
+&=\frac1N\sum_{j=0}^{N-1}\mathbf1_W((x-u)+(j+1)\beta).
+\end{aligned}
+$$
+
+这就精确识别为起点 $x-u$ 的上述轨道计数；同一个 $N_0$ 对所有起点的结论适用，时间仍为 $1,\ldots,N$。轨迹等式是模型须另行建立的假设，不能从环面定理推出，也不对任意物理或切投模型作此断言。该窗口结论本身不分类所有不变测度，亦不推出唯一遍历性的更强陈述；Weyl（1916，*Math. Ann.* **77**, 313–352）的经典理论仍有其独立文献背景。物理公平、内部空间及灵魂相位的诠释仍为 `MODEL`。这是源说明中的有限复用推导，没有新增 Lean 定理，也不作新颖性主张。
 :::
 
 看清了这一长程图景，短期的一城一池便不再令人绝望：在我们的观察者诠释模型（`MODEL`）中，局部切片的顺逆各有参差，但拉通紧致环面遍历回归的长程画卷，宇宙给每一个灵魂相位分配的吸引子重逢机会、正交旋转预算，以及自指迭代向不动点（见[第 24 章](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature]）收束的引力，**没有一毫一厘的偏私**。
@@ -197,7 +228,7 @@
 | **二、得失公平 (Gain–Loss Fairness)** | 互补语境中心化纯度勾股守恒（`LEAN ✓`）、$\cos^2\theta + \sin^2\theta = 1$（`文献结果`）与兰道尔热熵平衡界 $-\Delta S \le \beta Q$（`LEAN ✓`，$k_B T \ln 2$ 为 `文献结果`） | `LEAN ✓` / `文献结果` / `MODEL` | 封死“既占尽一维确定刻度、又免费保留无限正交演化潜能”的零成本贪婪 |
 | **三、关系公平 (Relational Fairness)** | 通用克隆内积判据与贝尔纯态混态边缘 $\frac{1}{2}I_2$（`LEAN ✓`）；三量子比特 CKW 单配性 $\tau(\mathbf{A}:\mathbf{B}) + \tau(\mathbf{A}:\mathbf{C}) \le 1 - \|\mathbf{r}_A\|^2 \le 1$（`文献结果`） | `LEAN ✓` / `文献结果` / `MODEL` | 封死叠加纯态的盲目量产与深度二体纠缠的无限批发垄断 |
 | **四、博弈公平 (Horizon Fairness)** | 一致放大旋转步幅定律（`LEAN ✓`）、高维 $\theta_0 \approx \frac{\pi}{2} - 2^{-n/2}$ 与 BBBV $\Omega(2^{n/2})$ 查询下界（`文献结果`）及 $\mathrm{P} \neq \mathrm{NP}$ 边界（`OPEN`） | `LEAN ✓` / `文献结果` / `OPEN` / `MODEL` | 封死算力霸权对全局因果相容晶体的瞬间剧透与赢家通吃，守护选择悬念 |
-| **五、遍历公平 (Ergodic Fairness)** | 诞生遗忘重置相容余量（`MODEL`）、环面闭子群哈尔均匀分布与正下渐近访问密度有界回归（`LEAN ✓`）及无理平移外尔窗口等分布 $\operatorname{Vol}(W)/\operatorname{Vol}(\mathbb{T}_\perp^d)$（`文献结果`） | `LEAN ✓` / `文献结果` / `MODEL` | 封死初始相位偏置造成的永恒阶层固化，实现“短期境遇异而长程天道同”的统计全息 |
+| **五、遍历公平 (Ergodic Fairness)** | 诞生遗忘重置相容余量（`MODEL`）、环面闭子群哈尔均匀分布与正下渐近访问密度有界回归（`LEAN ✓`）及无理平移零边界窗口频率 $\mu(W)$（既有结果的应用，见 [@rem-ch31-weyl-window-equidistribution-literature]） | `LEAN ✓` / `文献结果` / `MODEL` | 封死初始相位偏置造成的永恒阶层固化，实现“短期境遇异而长程天道同”的统计全息 |
 :::
 
 把这一笔添进全书的底色里，“量子”二字就不再只是冰冷的算符与几何，而有了最深沉的温度：**宇宙砍掉了高高在上的第 3 点，让万物只能平视着彼此两两丈量；它用勾股定理收走了全知全能的特权，用视界保护了有限生命的悬念，最后又用无理数的遍历，保证每一个从遗忘中醒来的灵魂，终将在漫长的旅程里分到同样丰盛的星光。**

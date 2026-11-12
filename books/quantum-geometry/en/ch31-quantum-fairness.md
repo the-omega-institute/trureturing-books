@@ -12,7 +12,7 @@ In the classical mechanistic worldview, structural privilege appeared natural: s
 2. **Gain–Loss Fairness**: Complementary-context centered-purity Pythagorean conservation enforces a zero-free-lunch ledger in which every unit of one-dimensional certainty is paid for by orthogonal residual potential or thermodynamic heat dissipation;
 3. **Relational Fairness**: The inner-product no-cloning lock and maximally mixed Bell marginal (Conjuncts 3–4 of [@thm-ch31-seat-pythagorean-monogamy-fairness]; external multipartite extensions in [@rem-ch31-ckw-monogamy-literature]) cap shared correlation budgets so deep entanglement cannot be mass-produced;
 4. **Horizon Fairness**: The fixed step-angle law of coherent uniform amplification (Conjunct 2 of [@thm-ch31-horizon-landauer-ergodic-fairness]) and the finite-observer complexity firewall ([Chapter 30](ch30-fields-lines-eth-and-navier-stokes.md) [@conj-p-neq-np]; external context in [@rem-ch30-query-sos-literature]) block computational monopolies from spoiling the suspense of finite life;
-5. **Ergodic Fairness**: Birth-forgetting resets choice freedom (`MODEL`), while compact-torus closed-subgroup equidistribution and bounded-gap return (Conjuncts 3–4 of [@thm-ch31-horizon-landauer-ergodic-fairness]; external ergodic-theory extensions in [@rem-ch31-weyl-window-equidistribution-literature]) ground our ontological reading of shared long-run statistical holism.
+5. **Ergodic Fairness**: Birth-forgetting resets choice freedom (`MODEL`), while compact-torus closed-subgroup equidistribution and bounded-gap return (Conjuncts 3–4 of [@thm-ch31-horizon-landauer-ergodic-fairness]; window application and boundaries in [@rem-ch31-weyl-window-equidistribution-literature]) ground our ontological reading of shared long-run statistical holism.
 
 ![Quantum fairness across five geometric tiers and ergodic statistical holism](../assets/fig-31-quantum-fairness.svg)
 
@@ -132,7 +132,7 @@ Even with the first three tiers in place, human existence presses two deeper que
 Unfolding our cut-and-project observer model alongside compact-torus ergodic theory reveals a crystalline answer:
 
 1. **Birth-Forgetting Resets Choice Freedom (`MODEL`)**: As shown in [Chapter 29](ch29-timeless-causality-and-gram-space.md) ([@thm-ch29-gram-rigidity-and-pell]) and the [Coda](coda.md), unbounded accumulation of historical anchors would eventually drive compatible choice slack toward lockup. Birth-forgetting truncates high-order historical baggage so that every finite observer awakening anew faces a fresh corridor of positive-volume choice.
-2. **Closed-Subgroup Equidistribution and Bounded-Gap Return (`LEAN ✓` + `MODEL`)**: Over a handful of local steps, disparate slices genuinely encounter different local fortunes; yet on any compact torus subgroup, `trureturing`'s **torus orbit equidistribution theorem** and **bounded-gap observation-window return theorem** (Conjuncts 3–4 of [@thm-ch31-horizon-landauer-ergodic-fairness] below) prove that Cesàro time averages of continuous observables converge strictly to the normalized translation-invariant probability integral on the closed orbit subgroup $G = \overline{\langle g\rangle}$, and every nonempty open interval $(u, v)$ intersecting $\operatorname{range}(h)$ is revisited with bounded gap $M$ and **positive lower asymptotic visit density** at least $\frac{1}{M+1} - \varepsilon$ (for external ergodic-theory extensions to sharp acceptance-window indicators under irrational torus translations, see [@rem-ch31-weyl-window-equidistribution-literature] below).
+2. **Closed-Subgroup Equidistribution and Bounded-Gap Return (`LEAN ✓` + `MODEL`)**: Over a handful of local steps, disparate slices genuinely encounter different local fortunes; yet on any compact torus subgroup, `trureturing`'s **torus orbit equidistribution theorem** and **bounded-gap observation-window return theorem** (Conjuncts 3–4 of [@thm-ch31-horizon-landauer-ergodic-fairness] below) prove that Cesàro time averages of continuous observables converge strictly to the normalized translation-invariant probability integral on the closed orbit subgroup $G = \overline{\langle g\rangle}$, and every nonempty open interval $(u, v)$ intersecting $\operatorname{range}(h)$ is revisited with bounded gap $M$ and **positive lower asymptotic visit density** at least $\frac{1}{M+1} - \varepsilon$ (for the complete null-frontier window application under irrational torus translations and its hypotheses, see [@rem-ch31-weyl-window-equidistribution-literature] below).
 
 We first anchor the four formal theorems governing Landauer heat balance, coherent amplification rotation, torus orbit equidistribution, and bounded-gap window return.
 
@@ -168,20 +168,51 @@ Across the frozen thermodynamic-divergence, coherent-amplification, and Fourier 
 Conjunct 1 follows from $\mathrm{mutualInfo} + \mathrm{divergence} \ge 0$; Conjunct 2 gives $U = W$ via `unit_success` when $p = 1$, and when $p < 1$ verifies mutual isometric orthogonality of $W$ and $B$, inducts on $n$ via angle-addition identities, and distributes Kronecker tensoring across $\otimes_k R$; Conjunct 3 uses equicontinuity of the Cesàro evaluation operators to close the convergence subspace $S \subseteq C(G, \mathbb{C})$, canceling nontrivial torus characters via geometric sums and extending by trigonometric-polynomial density; Conjunct 4 proves $\operatorname{supp}(h_*\mu) = \operatorname{range}(h)$ from strict positivity on nonempty open pullbacks and extracts the uniform return gap $M$ and positive lower asymptotic visit density bound from a finite subcover of compact orbit translates. The full proof is checked by the Lean kernel.
 :::
 
-External ergodic-theory extensions from continuous observables to sharp acceptance-window indicators are recorded below:
+The reuse derivation from continuous observables to actual acceptance-window counts, and its remaining ergodic boundaries, are given below:
 
-::: {.remark #rem-ch31-weyl-window-equidistribution-literature title="Irrational Torus Unique Ergodicity and Weyl Window Equidistribution (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** Conjunct 3 of [@thm-ch31-horizon-landauer-ergodic-fairness] holds for any torus element $g : I \to \mathrm{Circle}$ and continuous $f \in C(G, \mathbb{C})$ on its closed orbit subgroup $G = \overline{\langle g\rangle}$; specializing to phase-independent window-residence equality on the full internal torus $\mathbb{T}_\perp^d = \mathbb{R}^d / \mathbb{Z}^d$ (such as $d = 3$) invokes the classical ergodic theorem below (not formalized as a standalone theorem in `trureturing@dev`):
+::: {.remark #rem-ch31-weyl-window-equidistribution-literature title="Null-Frontier Window Frequencies on the Full Torus: An Application and Its Ergodic Boundaries"}
+**A composite application of existing results.** Conjunct 3 of [@thm-ch31-horizon-landauer-ergodic-fairness] directly states an average for continuous functions on the closed orbit group. Here are the interfaces needed to reach actual window counts; the window conclusion is not the statement of that endpoint. Let $I$ be any finite index type, including the empty type, let $\alpha:I\to\mathbb R$, and set $\beta_i=\alpha_i\pmod{\mathbb Z}\in\mathrm{AddCircle}(1)$, $T=(\mathrm{AddCircle}(1))^I$. Let $\mu$ be normalized Haar probability on the full $T$. Assume that the family on $\mathrm{Option}(I)=\{\mathrm{none}\}\sqcup\{\mathrm{some}(i):i\in I\}$ given by
 
-- **Kronecker–Weyl Unique Ergodicity and Jordan-Measurable Window Equidistribution (H. Weyl, *Math. Ann.* **77**, 313–352, 1916)**: If a translation vector $\boldsymbol{\alpha} \in \mathbb{R}^d$ has $1, \alpha_1, \dots, \alpha_d$ linearly independent over $\mathbb{Q}$, then $x \mapsto x + \boldsymbol{\alpha} \pmod{\mathbb{Z}^d}$ is **uniquely ergodic** on the full torus $G = \mathbb{T}_\perp^d$ (normalized Lebesgue/Haar measure is its sole invariant Borel probability measure). Approximating from above and below by continuous Urysohn envelopes, for every subset $W \subset \mathbb{T}_\perp^d$ with Lebesgue-null boundary ($\operatorname{Vol}(\partial W) = 0$, i.e., Jordan measurable, including every convex polyhedral acceptance window) and **any two initial internal phases $u_1, u_2 \in \mathbb{T}_\perp^d$**, the asymptotic residence fraction inside the shifted window $W + u_i$ is completely independent of $u_i$:
+$$
+a(\mathrm{none})=1,\qquad a(\mathrm{some}(i))=\alpha_i
+$$
 
-  $$
-  \lim_{T \to \infty} \frac{1}{T}\sum_{t=1}^{T} \mathbf{1}_W\bigl(\pi_\perp(z_t) - u_1\bigr)
-  \;=\;
-  \lim_{T \to \infty} \frac{1}{T}\sum_{t=1}^{T} \mathbf{1}_W\bigl(\pi_\perp(z_t) - u_2\bigr)
-  \;=\;
-  \frac{\operatorname{Vol}(W)}{\operatorname{Vol}(\mathbb{T}_\perp^d)}.
-  $$
+is linearly independent over $\mathbb Q$. Let $W\subseteq T$ be any set with $\mu(\partial W)=0$, **without an additional Borel measurability premise**. For every $\varepsilon>0$ there is $N_0\ge1$ such that the same $N_0$ works for every starting point $x\in T$ and every $N\ge N_0$:
+
+$$
+\left|\frac1N\sum_{j=0}^{N-1}
+\mathbf1_W\bigl(x+(j+1)\beta\bigr)-(\mu W)_{\mathbb R}\right|<\varepsilon.
+$$
+
+Here $(\mu W)_{\mathbb R}$ is the real value of the finite measure, and the indicator uses actual membership in $W$. The samples are exactly times $1,\ldots,N$, rather than $0,\ldots,N-1$.
+
+**Where independence enters.** If integers $k:I\to\mathbb Z$ and $m\in\mathbb Z$ satisfy $\sum_i k_i\alpha_i=m$, place coefficient $-m$ at `none` and $k_i$ at `some(i)`. Independence of the rational family forces every $k_i=0$. This is precisely the integer-character premise of [`dense_circle_sequence`](lean:D5/S3/Fourier/BiquadraticKroneckerTimes.dense_circle_sequence). For $g_i=\exp(2\pi i\alpha_i)$, together with [`TorusOrbitClosure.result`](lean:D5/S3/Fourier/TorusOrbitClosure.result), it identifies the closure of the nonnegative powers with the whole product of circles, rather than a proper subtorus. The coordinate maps [AddCircle.homeomorphCircle](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Analysis/SpecialFunctions/Complex/Circle.lean#L435) transport this closure to the additive torus, retaining the actual generator and every starting point.
+
+**Continuous averages and Haar transport.** Apply [`TorusOrbitEquidistribution.result`](lean:D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result) to this $g$. The continuous surjective homomorphism from the closed circle orbit to $T$ transports Haar measure by [MonoidHom.measurePreserving](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/MeasureTheory/Measure/Haar/Unique.lean#L951), since both total masses are $1$. Translation invariance identifies the integral of $z\mapsto f(x+z)$ with that of $f$. Thus for every continuous complex $f$ and every $x$, the actual average $N^{-1}\sum_{j<N}f(x+(j+1)\beta)$ converges to $\int f\,d\mu$. At $N=0$ the empty sum and totalized division give zero; this does not affect the limit at infinity.
+
+**Why the threshold is uniform in the starting point.** Write $R(x)=x+\beta$. Translation is an isometry, hence $1$-Lipschitz; continuous $f$ on the compact torus is uniformly continuous. [uniformEquicontinuous_birkhoffAverage](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Dynamics/BirkhoffSum/NormedSpace.lean#L129) gives equicontinuity of the averages, and compactness with [Equicontinuous.tendsto_uniformFun_iff_pi](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/Topology/UniformSpace/Ascoli.lean#L167) upgrades pointwise continuous averages to uniform convergence in $x$. Index empirical probabilities $\nu_{m,x}$ by $(m,x)$, taking $m+1$ steps starting at $R(x)$. Continuous functions are bounded on this compact space, so [ProbabilityMeasure.tendsto_iff_forall_integral_rclike_tendsto](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/MeasureTheory/Measure/ProbabilityMeasure.lean#L373) and `tendsto_prod_top_iff` give weak convergence $\nu_{m,x}\to\mu$ along $\mathrm{atTop}\times^s\top$. The second factor $\top$ retains all starting points simultaneously, rather than almost every starting point.
+
+**From measures to the actual count.** The null-frontier assumption is used once, at [ProbabilityMeasure.tendsto_measure_of_null_frontier_of_tendsto'](https://github.com/leanprover-community/mathlib4/blob/56a005855ea17e0b0958f73ec801ae140b0a1679/Mathlib/MeasureTheory/Measure/Portmanteau.lean#L334), which allows arbitrary $W$ without a Borel premise. Then `Measure.dirac_apply` and `Measure.finsetSum_apply` compute the empirical mass exactly as
+
+$$
+\nu_{m,x}(W)=\frac{1}{m+1}\sum_{j=0}^{m}
+\mathbf1_W\bigl(x+(j+1)\beta\bigr).
+$$
+
+Product-filter convergence supplies $M$ such that the error is below $\varepsilon$ for every $m\ge M$ and every $x$. Set $N_0=M+1$. For $N\ge N_0$, choose $m=N-1$; then $m+1=N$. This gives exactly the denominator, summation range, and phase required above, without replacing the first term by an asymptotic approximation.
+
+**Residual boundaries.** $N_0$ depends on $\alpha,W,\varepsilon$. There is no uniformity over $\alpha$ or $W$ and no effective rate. Translated windows can be read through $\mathbf1_{W+u}(j\beta)=\mathbf1_W(-u+j\beta)$. If a cut-and-project model independently satisfies $\pi_\perp(z_j)=x+j\beta\in T$ for every $j\ge1$, then for any $u\in T$,
+
+$$
+\begin{aligned}
+\pi_\perp(z_j)-u&=(x-u)+j\beta,\\
+\mathbf1_{W+u}(\pi_\perp(z_j))&=\mathbf1_W((x-u)+j\beta),\\
+\frac1N\sum_{j=1}^{N}\mathbf1_{W+u}(\pi_\perp(z_j))
+&=\frac1N\sum_{j=0}^{N-1}\mathbf1_W((x-u)+(j+1)\beta).
+\end{aligned}
+$$
+
+This identifies the count exactly with the established orbit count starting at $x-u$, so the same $N_0$ for every starting point applies, still at times $1,\ldots,N$. The trajectory equality is a hypothesis the model must establish separately; it does not follow from the torus theorem and is not asserted for arbitrary physical or cut-and-project models. The window result alone neither classifies invariant measures nor establishes the stronger unique-ergodicity statement. Weyl's classical theory (1916, *Math. Ann.* **77**, 313–352) retains its separate literature setting. Physical fairness, internal space, and soul phases remain `MODEL` interpretations. This is the finite reuse derivation in the source exposition, with no new Lean theorem or novelty claim.
 :::
 
 Seen in this long-horizon light, local disparities lose their sting: in our observer model (`MODEL`), short slices vary from smooth centers to turbulent rims, yet across compact-torus ergodic return the universe grants every soul phase impartial attractor-reunion opportunities, orthogonal rotation budgets, and self-referential fixed-point pull (cf. [Chapter 24](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature]), without a hair's breadth of favoritism.
@@ -197,7 +228,7 @@ We conclude by consolidating all five tiers of quantum fairness and their exact 
 | **2. Gain–Loss Fairness (得失公平)** | Complementary-context centered-purity Pythagoras (`LEAN ✓`), $\cos^2\theta + \sin^2\theta = 1$ (`Literature`), and Landauer balance $-\Delta S \le \beta Q$ (`LEAN ✓`; $k_B T \ln 2$ `Literature`) | `LEAN ✓` / `Literature` / `MODEL` | Abolishes the free-lunch greed of claiming $100\%$ 1D certainty while retaining $100\%$ orthogonal dynamical freedom |
 | **3. Relational Fairness (关系公平)** | Cloning inner-product lock & Bell mixed marginal $\frac{1}{2}I_2$ (`LEAN ✓`); 3-qubit CKW monogamy $\tau(\mathbf{A}:\mathbf{B}) + \tau(\mathbf{A}:\mathbf{C}) \le 1 - \|\mathbf{r}_A\|^2 \le 1$ (`Literature`) | `LEAN ✓` / `Literature` / `MODEL` | Abolishes blind copying of live superpositions and wholesale monopolization of exclusive bipartite entanglement |
 | **4. Horizon Fairness (博弈公平)** | Coherent amplification step-angle rotation (`LEAN ✓`), high-dimensional $\theta_0 \approx \frac{\pi}{2} - 2^{-n/2}$ & BBBV $\Omega(2^{n/2})$ lower bound (`Literature`), and $\mathrm{P} \neq \mathrm{NP}$ (`OPEN`) | `LEAN ✓` / `Literature` / `OPEN` / `MODEL` | Abolishes instant computational spoilers over the global causal crystal, sheltering the suspense of finite choice |
-| **5. Ergodic Fairness (遍历公平)** | Birth-forgetting choice reset (`MODEL`), closed-subgroup torus Haar equidistribution & positive lower asymptotic visit density return (`LEAN ✓`), and Weyl window equidistribution $\operatorname{Vol}(W)/\operatorname{Vol}(\mathbb{T}_\perp^d)$ (`Literature`) | `LEAN ✓` / `Literature` / `MODEL` | Abolishes permanent caste lock-in from initial phase bias, realizing statistical holism across divergent local paths |
+| **5. Ergodic Fairness (遍历公平)** | Birth-forgetting choice reset (`MODEL`), closed-subgroup torus Haar equidistribution & positive lower asymptotic visit density return (`LEAN ✓`), and null-frontier window frequency $\mu(W)$ (application of existing results, [@rem-ch31-weyl-window-equidistribution-literature]) | `LEAN ✓` / `Literature` / `MODEL` | Abolishes permanent caste lock-in from initial phase bias, realizing statistical holism across divergent local paths |
 :::
 
 Woven into the fabric of this monograph, the word *quantum* ceases to be cold operator machinery and acquires an unmistakable human warmth: **the universe cut away the lofty third point above, compelling all beings to measure one another pairwise at eye level; with the Pythagorean theorem it revoked the privilege of omniscience and omnipotence, with the horizon it sheltered the suspense of finite life, and finally with irrational ergodicity it guaranteed that every soul awakening from forgetting shall, across the long journey, receive an equally abundant share of starlight.**

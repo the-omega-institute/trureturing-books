@@ -61,7 +61,7 @@
 与上述四块形式化基石配对的连续几何代数、实分析不动点导数与球面多面体角亏外部文献公式汇总于下框：
 
 ::: {.remark #rem-ch32-generative-laws-dottie-literature title="克利福德几何积分解、余弦不动点压缩率与多面体拓扑角亏（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 本节创生律模型中引用的连续几何代数分解、实分析不动点导数与多面体拓扑恒等式属经典数学文献，未作为独立定理包含在本书锁定的形式化声明集中：
+**文献结果，未在本书形式化。** 本节创生律模型中引用的连续几何代数分解、多面体拓扑恒等式仍属文献背景；第 2 项的余弦定性结论是端点与现成实分析结果的应用，完整推导见 [@ex-ch33-mutual-cosine-monotonic-lock]，小数不由该应用认证：
 
 1. **克利福德几何积与偶次余弦幂级数**：在欧氏几何代数中，两向量几何积分解为标量内积与双向量外积
 
@@ -70,13 +70,13 @@
    $$
 
    其中单位双向量满足 $\hat{\mathbf{I}}^2 = -1$，实余弦整函数展开为绝对收敛交错幂级数 $\cos\theta = \sum_{k=0}^\infty \frac{(-1)^k}{(2k)!}\theta^{2k}$（有限维正交基片乘法在文献中可按二进制指标异或 `XOR` 与定向交换符号编码，见[第 25 章](ch25-rewriting-and-xor.md) [@rem-clifford-stabilizer-literature]与[附录 B](appendix-b.md)）；
-2. **Dottie 余弦不动点的局部压缩率与余角恒等式**：实轴方程 $\cos\theta = \theta$ 的唯一实根 $\theta^* \approx 0.7390851332\dots$（见[第 24 章](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature]）处的一阶导数绝对值为局部压缩率
+2. **Dottie 余弦不动点的局部压缩率与余角恒等式**：实轴方程 $\cos\theta = \theta$ 的唯一实根 $\theta^* \approx 0.7390851332\dots$（见 [@thm-dottie-rational-inverse-endpoint] 及 [@ex-ch33-mutual-cosine-monotonic-lock] 的全实轴唯一性推导）处的一阶导数绝对值为局部压缩率
 
    $$
    \bigl|(\cos)'(\theta^*)\bigr| = |\sin\theta^*| = \sqrt{1 - (\theta^*)^2} \approx 0.673612 < 1,
    $$
 
-   且由反余弦与反正弦的余角恒等式 $\arcsin(\cos\theta^*) = \frac{\pi}{2} - \theta^*$（因 $\theta^* \in (0, \frac{\pi}{2})$），严格成立 $\theta^* + \arcsin\theta^* = \frac{\pi}{2}$；
+   由同一个端点的 $\cos\theta^*=\theta^*$ 与锐角位置，再用反余弦与反正弦的余角恒等式 $\arcsin(\cos\theta^*) = \frac{\pi}{2} - \theta^*$（因 $\theta^* \in (0, \frac{\pi}{2})$），严格成立 $\theta^* + \arcsin\theta^* = \frac{\pi}{2}$；
 3. **二维球面欧拉示性数与正二十面体角亏**：紧致二维球面满足 $\chi(S^2) = 2$，任意同胚于 $S^2$ 的凸多面体顶点角亏总和恒为 $2\pi\chi(S^2) = 4\pi = 720^\circ$（正二十面体表现为 $12$ 个五度顶点各亏缺 $60^\circ$，$12 \times 60^\circ = 720^\circ$，见[终章](coda.md) [@rem-coda-polyhedral-topology-literature]）。
 :::
 

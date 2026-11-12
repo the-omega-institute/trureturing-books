@@ -61,7 +61,7 @@ Conjunct 1 negates $-(R^2) = R(-R) = R R^\dagger = I_n$; Conjunct 2 uses antiton
 External continuum geometric-algebra, real-analytic fixed-point, and polyhedral angular-defect formulas paired with these four formal anchors are recorded below:
 
 ::: {.remark #rem-ch32-generative-laws-dottie-literature title="Clifford Geometric Product, Dottie Contraction Rate, and Polyhedral Angular Defect (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** Continuum geometric-algebra, real-analytic fixed-point, and polyhedral-topology formulas referenced in the generative laws belong to classical mathematical literature and are not formalized as standalone theorems in `trureturing@dev`:
+**Literature result, not formalized in this book.** Continuum geometric algebra and polyhedral topology retain their literature setting. Item 2's qualitative cosine claims apply the endpoint and existing real-analysis results, with the full derivation in [@ex-ch33-mutual-cosine-monotonic-lock]; its decimals are not certified by that application:
 
 1. **Clifford Geometric Product and Even Cosine Power Series**: In Euclidean geometric algebra, the geometric product splits into scalar inner product and bivector wedge product,
 
@@ -70,13 +70,13 @@ External continuum geometric-algebra, real-analytic fixed-point, and polyhedral 
    $$
 
    with unit bivector square $\hat{\mathbf{I}}^2 = -1$ and entire alternating cosine series $\cos\theta = \sum_{k=0}^\infty \frac{(-1)^k}{(2k)!}\theta^{2k}$ (in finite-dimensional orthogonal bases, blade multiplication admits a classical binary `XOR` bitmask and swap-parity encoding; see [Chapter 25](ch25-rewriting-and-xor.md) [@rem-clifford-stabilizer-literature] and [Appendix B](appendix-b.md));
-2. **Local Contraction Factor and Complementary Identity at the Dottie Fixed Point**: At the unique real root $\theta^* \approx 0.7390851332\dots$ of $\cos\theta = \theta$ ([Chapter 24](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature]), the local derivative modulus is
+2. **Local Contraction Factor and Complementary Identity at the Dottie Fixed Point**: At the unique real root $\theta^* \approx 0.7390851332\dots$ of $\cos\theta = \theta$ ([@thm-dottie-rational-inverse-endpoint] and the all-real uniqueness derivation in [@ex-ch33-mutual-cosine-monotonic-lock]), the local derivative modulus is
 
    $$
    \bigl|(\cos)'(\theta^*)\bigr| = |\sin\theta^*| = \sqrt{1 - (\theta^*)^2} \approx 0.673612 < 1,
    $$
 
-   and because $\theta^* \in (0, \frac{\pi}{2})$ satisfies $\arcsin(\cos\theta^*) = \frac{\pi}{2} - \theta^*$, the complementary identity $\theta^* + \arcsin\theta^* = \frac{\pi}{2}$ holds identically;
+   and the same endpoint supplies $\cos\theta^*=\theta^*$ and the acute location; because $\theta^* \in (0, \frac{\pi}{2})$ satisfies $\arcsin(\cos\theta^*) = \frac{\pi}{2} - \theta^*$, the complementary identity $\theta^* + \arcsin\theta^* = \frac{\pi}{2}$ holds identically;
 3. **Two-Sphere Euler Characteristic and Icosahedral Angular Defect**: Every convex polyhedron homeomorphic to $S^2$ ($\chi(S^2) = 2$) has total vertex angular defect $2\pi\chi(S^2) = 4\pi = 720^\circ$ ($12 \times 60^\circ = 720^\circ$ on the regular icosahedron; cf. [Coda](coda.md) [@rem-coda-polyhedral-topology-literature]).
 :::
 
