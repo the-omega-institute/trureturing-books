@@ -92,17 +92,19 @@
   }
 
   /* ---------- state and scenes ---------- */
-  const S = { scene: 'clock', eta: LN2, tau: 0, lam: 0, eps: 60, plane: 'two', bond: 2 };
+  const S = { scene: 'clock', eta: LN2, theta: 0.3, tau: 0, lam: 0, eps: 60, plane: 'two', bond: 2 };
+  const TH_MAX = 1.5;
   const SCENES = {
     clock: { max: ETA_MAX, rate: 0.7, step: 0.1, get: () => S.eta, set: (v) => { S.eta = v; } },
+    fixed: { max: TH_MAX, rate: 0.3, step: 0.02, get: () => S.theta, set: (v) => { S.theta = v; } },
     loop: { max: 4, rate: 0.8, step: 1, get: () => S.tau, set: (v) => { S.tau = v; } },
     horizon: { max: 180, rate: 40, step: 15, get: () => S.lam, set: (v) => { S.lam = v; } }
   };
   const LEGEND = {
     clock: [['cy', '线 cos θ = 1/γ：固有时率', 'line cos θ = 1/γ: proper-time rate'], ['mg', '面积 sin θ = tanh η：速度 v/c', 'area sin θ = tanh η: speed v/c'], ['vi', '弧长 θ', 'arc length θ'], ['am', '当前的点', 'the current point']],
     loop: [['am', '箭头的尖端', 'tip of the arrow'], ['vi', '转轴', 'axis of a turn'], ['mg', '没合上的缺口', 'the gap left open']],
-    // at the fixed point the same stage is read without relativity: the magenta height is the contraction rate, not a speed
-    fixed: [['cy', '影子 cos θ', 'the shadow cos θ'], ['mg', '高 sin θ*：反复取余弦时误差的缩小倍数', 'height sin θ*: the factor the error shrinks by under repeated cosines'], ['vi', '弧长 θ', 'arc length θ'], ['am', '当前的点', 'the current point']],
+    // the fixed-point scene has only the unit circle: nothing on it is a speed
+    fixed: [['vi', '弧长 θ（下方拉直）', 'arc length θ (straightened below)'], ['cy', '影子 cos θ', 'the shadow cos θ'], ['mg', '高 sin θ：在 θ* 处是局部压缩率', 'height sin θ: at θ* the local contraction rate'], ['am', '圆上当前的点', 'the current point on the circle']],
     // with no horizon pushed in (λ = 0) only the polytope and its angle deficits are on the stage
     polytope: [['mg', '每个顶点的角亏 60°', 'the 60° angle deficit at each vertex'], ['dm', '正二十面体的边', 'edges of the icosahedron']],
     horizon: [['cy', '视界以内的边', 'edges inside the horizon'], ['mg', '割断的边 · 角亏', 'cut edges · angle deficits'], ['am', '视界 λ', 'the horizon λ'], ['dm', '视界以外', 'beyond the horizon']]
@@ -113,14 +115,53 @@
   const stage = kit.stage3($('stage'), {
     canvas: $('cv'), radius: TRV.thumbMode ? 0.42 : 0.36, cy: TRV.figure ? 0.53 : 0.55,
     onChange: () => paint(),
-    onPick: (ev) => { if (S.scene !== 'clock') return false; dragClock(ev); return true; },
-    onDrag: (ev) => dragClock(ev)
+    onPick: (ev) => { if (S.scene === 'clock') dragClock(ev); else if (S.scene === 'fixed') dragFixed(ev); else return false; return true; },
+    onDrag: (ev) => (S.scene === 'fixed' ? dragFixed(ev) : dragClock(ev))
   });
   function dragClock(ev) {
     if (!G) return;
     const b = $('cv').getBoundingClientRect(), x = G.invX(ev.clientX - b.left), y = G.invY(ev.clientY - b.top);
     const th = kit.clamp(Math.atan2(y, x), 0, gd(ETA_MAX));
     clock.pause(); cards.mark(null); clock.set(kit.clamp(gdInv(th), 0, ETA_MAX));
+  }
+
+  function dragFixed(ev) {
+    if (!G) return;
+    const b = $('cv').getBoundingClientRect(), x = G.invX(ev.clientX - b.left), y = G.invY(ev.clientY - b.top);
+    clock.pause(); cards.mark(null); clock.set(kit.clamp(Math.atan2(y, x), 0, TH_MAX));
+  }
+
+  /** The fixed point on its own: the unit circle, the arc θ, the shadow cos θ and the height sin θ. */
+  function drawFixed() {
+    const st = stage, cv = $('cv');
+    st.begin();
+    const w = cv.clientWidth, h = cv.clientHeight, thumb = TRV.thumbMode, lw = thumb ? 1.8 : 1;
+    const g = G = kit.plot(cv, { x: [-0.22, 1.62], y: [-0.36, 1.14], equal: true, pad: [24, 24, h < 420 ? 62 : 74, 44] });
+    const c = g.ctx, X = g.X, Y = g.Y, th = S.theta, co = Math.cos(th), si = Math.sin(th);
+    c.save(); c.beginPath(); c.rect(g.pl, g.pt, g.iw, g.ih); c.clip();
+    const seg = (a, b, color, s) => g.line([a, b], color, Object.assign({ width: 1.6 * lw }, s));
+    seg([g.x0, 0], [g.x1, 0], P.faint, { width: 1 }); seg([0, -0.05], [0, g.y1], P.faint, { width: 1 });
+    const circ = []; for (let i = 0; i <= 90; i++) { const a = Math.PI / 2 * i / 90; circ.push([Math.cos(a), Math.sin(a)]); }
+    g.line(circ, P.dim, { width: 1.3 * lw });
+    seg([0, 0], [co, si], P.ink, { width: 1.2 * lw, alpha: 0.6 });
+    // where the arc and the shadow agree
+    seg([THETA_STAR, -0.26], [THETA_STAR, 0.02], P.dim, { width: 1, dash: [3, 4] });
+    const arc = []; for (let i = 0; i <= 60; i++) { const a = th * i / 60; arc.push([Math.cos(a), Math.sin(a)]); }
+    g.line(arc, P.violet, { width: 3 * lw, alpha: 0.85 });
+    seg([0, -0.14], [th, -0.14], P.violet, { width: 3 * lw, alpha: 0.85 });
+    seg([co, 0], [co, si], P.magenta, { width: 3.2 * lw, glow: 6 });
+    seg([0, 0], [co, 0], P.cyan, { width: 5 * lw, glow: 10 });
+    g.dot(co, si, P.amber, 6 * lw, { glow: 14 });
+    c.restore();
+    if (!thumb) {
+      const at = (x, y, dx, dy) => [X(x) + (dx || 0), Y(y) + (dy || 0)];
+      const tag = (key, p, html, cls) => st.tag(key, p, html, cls, { screen: true });
+      tag('fcos', at(co / 2, 0, 0, -13), `cos θ = ${fix(co, 3)}`, 'num c-cy');
+      tag('farc', at(th / 2, -0.14, 0, 15), `${L('弧长', 'arc')} θ = ${fix(th, 3)}`, 'num c-vi');
+      tag('fsin', at(co, si / 2, -52, 0), `sin θ = ${fix(si, 3)}`, 'num c-mg');
+      tag('fstar', at(THETA_STAR, -0.24, 16, 0), 'θ*', 'num');
+    }
+    st.end();
   }
 
   function drawClock() {
@@ -253,6 +294,16 @@
       g.legend([[P.cyan, 'cos θ = sech η'], [P.magenta, 'sin θ = tanh η'], [P.violet, L('θ / 90°', 'θ / 90°'), 'dash']], { bottom: true, dy: -10 });
       $('plotTitle').innerHTML = L('<span>推得越快：时钟越慢，速度越贴近光</span>', '<span>The harder the push, the slower the clock and the closer to light</span>');
       $('plotMeta').textContent = `η = ${fix(S.eta, 3)} · θ = ${fix(k.theta / DEG, 2)}°`;
+    } else if (S.scene === 'fixed') {
+      const g = kit.plot(cv, { x: [0, TH_MAX], y: [0, 1.5], pad: [30, 10, 8, 22] });
+      g.axes({ yTicks: [0, 0.5, 1, 1.5], xTicks: [0, 0.5, 1, 1.5], xGrid: true });
+      const a = [], b = [];
+      for (let i = 0; i <= 150; i++) { const x = TH_MAX * i / 150; a.push([x, x]); b.push([x, Math.cos(x)]); }
+      g.line(a, P.violet, { width: 1.8 }); g.line(b, P.cyan, { width: 1.8 });
+      g.vline(S.theta, P.amber); g.dot(THETA_STAR, THETA_STAR, P.ink, 4);
+      g.legend([[P.violet, L('弧长 θ', 'arc θ')], [P.cyan, L('影子 cos θ', 'shadow cos θ')]], { right: true, bottom: true });
+      $('plotTitle').innerHTML = L('<span>弧长与影子只相交一次</span>', '<span>The arc and the shadow cross only once</span>');
+      $('plotMeta').textContent = `θ = ${fix(S.theta, 3)} · θ* = ${fix(THETA_STAR, 4)}`;
     } else if (S.scene === 'loop') {
       const g = kit.plot(cv, { x: [0, 90], y: [0, 130], pad: [34, 10, 8, 22] });
       g.axes({ yTicks: [0, 60, 120], xTicks: [0, 30, 60, 90], xGrid: true, yFmt: (v) => `${v}°`, xFmt: (v) => `${v}°` });
@@ -291,7 +342,7 @@
         : `θ = gd(η) = ${fix(k.theta / DEG, 2)}° · <span class="c-cy">cos θ = ${fix(k.cos, 3)}</span> · <span class="c-mg">sin θ = ${fix(k.sin, 3)}</span>`;
       if (fp) leg = 'fixed';
       keyName = L('线² + 面积²', 'line² + area²');
-      key = `<span class="c-cy">${fix(c2, 3)}</span> + <span class="c-mg">${fix(s2, 3)}</span> = ${fix(c2 + s2, 3)} <span class="okmark">✓</span>`;
+      key = `<span class="c-cy">${fix(c2, 3)}</span> + <span class="c-mg">${fix(s2, 3)}</span> = ${fix(c2 + s2, 3)} ✓`;
       rows = row('', '快度 η · 角 θ = gd(η)', 'rapidity η · angle θ = gd(η)', `${fix(S.eta, 4)} · ${fix(k.theta / DEG, 2)}°`)
         + row('c', '固有时率 dτ/dt = cos θ = sech η', 'proper-time rate dτ/dt = cos θ = sech η', `${fix(k.cos, 4)} = ${fix(k.sech, 4)}`)
         + row('m', '速度 v/c = sin θ = tanh η', 'speed v/c = sin θ = tanh η', `${fix(k.sin, 4)} = ${fix(k.tanh, 4)}`)
@@ -302,6 +353,21 @@
           : L(`同一个角 θ：青色的线是时钟走得多快，品红的高是跑得多快，两者的平方加起来总是 1。`, 'One angle θ: the cyan line is how fast the clock runs, the magenta height how fast the body moves, and their squares always add up to 1.');
       aside = 'sin θ = tanh η';
       pill = fp ? ['sin θ*', fix(k.sin, 3)] : ['v/c', fix(k.sin, 3)];
+    } else if (sc === 'fixed') {
+      const th = S.theta, co = Math.cos(th), si = Math.sin(th), at = Math.abs(th - THETA_STAR) < 5e-4;
+      big = at ? L(`不动点 · θ* = ${fix(th, 3)}`, `Fixed point · θ* = ${fix(th, 3)}`) : L(`不动点 · θ = ${fix(th, 3)}`, `Fixed point · θ = ${fix(th, 3)}`);
+      sub = `<span class="c-vi">${L('弧长', 'arc')} θ = ${fix(th, 3)}</span> · <span class="c-cy">cos θ = ${fix(co, 3)}</span> · <span class="c-mg">sin θ = ${fix(si, 3)}</span>`;
+      keyName = L('影子 − 弧长 cos θ − θ', 'shadow − arc cos θ − θ');
+      key = sgn(co - th, 4);
+      rows = row('', '角 θ（弧度 · 度）', 'angle θ (radians · degrees)', `${fix(th, 4)} · ${fix(th / DEG, 2)}°`)
+        + row('c', '影子 cos θ', 'shadow cos θ', fix(co, 4))
+        + row('m', '高 sin θ', 'height sin θ', fix(si, 4))
+        + row('', 'cos θ = θ 的根 θ*', 'root θ* of cos θ = θ', fix(THETA_STAR, 6));
+      note = at ? L(`θ = θ* ≈ ${fix(THETA_STAR, 6)}：紫色的弧长与青色的影子一样长，cos θ = θ。品红的高 sin θ* = ${fix(Math.sin(THETA_STAR), 4)} 是反复取余弦时误差每步缩小的倍数。`, `θ = θ* ≈ ${fix(THETA_STAR, 6)}: the violet arc and the cyan shadow have the same length, cos θ = θ. The magenta height sin θ* = ${fix(Math.sin(THETA_STAR), 4)} is the factor by which repeated cosines shrink the error at each step.`)
+        : th < THETA_STAR ? L('影子比弧长长：cos θ − θ > 0。把点往上推，弧长变长、影子变短。', 'The shadow is longer than the arc: cos θ − θ > 0. Push the point up: the arc grows and the shadow shrinks.')
+          : L('弧长已经比影子长：cos θ − θ < 0。两者只在 θ* 处相等一次。', 'The arc is now longer than the shadow: cos θ − θ < 0. The two agree only once, at θ*.');
+      aside = 'cos θ = θ';
+      pill = ['θ', fix(th, 3)];
     } else if (sc === 'loop') {
       const now = loopAt(S.tau), R = loopU(), done = S.tau >= 4 - 1e-9, b = R.biv;
       const leg = Math.min(3, now.k);
@@ -345,12 +411,12 @@
     $('hudBig').innerHTML = big; $('hudSub').innerHTML = sub;
     $('ro').innerHTML = `<div class="key"><dt>${keyName}</dt><dd><b>${key}</b></dd></div>${rows}`;
     $('roNote').textContent = note; $('roAside').textContent = aside;
-    $('pillScene').querySelector('strong').textContent = { clock: L('时钟', 'CLOCK'), loop: L('回路', 'LOOP'), horizon: L('视界', 'HORIZON') }[sc];
+    $('pillScene').querySelector('strong').textContent = { clock: L('时钟', 'CLOCK'), fixed: L('不动点', 'FIXED'), loop: L('回路', 'LOOP'), horizon: L('视界', 'HORIZON') }[sc];
     $('pillKeyName').textContent = pill[0]; $('pillKey').querySelector('strong').textContent = pill[1];
     $('legend').innerHTML = LEGEND[leg].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
   }
 
-  function drawStage() { if (S.scene === 'clock') drawClock(); else if (S.scene === 'loop') drawLoop(); else drawHorizon(); }
+  function drawStage() { if (S.scene === 'clock') drawClock(); else if (S.scene === 'fixed') drawFixed(); else if (S.scene === 'loop') drawLoop(); else drawHorizon(); }
   const paint = kit.painter(() => { drawText(); drawStage(); drawPlot(); }, [$('stage'), $('plot')]);
 
   /* ---------- the rail ---------- */
@@ -359,6 +425,7 @@
     range: $('now'), play: $('play'), label: $('tau'), speeds: $('speedChips'), max: ETA_MAX, rate: 0.7, step: 0.1, t: S.eta,
     // the label is first drawn while the clock is being built: it reads t, max and S only
     format: (t, max) => S.scene === 'clock' ? `η = ${fix(t, 3)} <small>/ ${fix(max, 0)}</small>`
+      : S.scene === 'fixed' ? `θ = ${fix(t, 3)} <small>/ ${fix(max, 1)}</small>`
       : S.scene === 'loop' ? `${L('步', 'step')} ${fix(t, 2)} <small>/ 4</small>` : `λ = ${fix(t, 1)}° <small>/ 180°</small>`,
     onChange: (t, c) => {
       if (stopAt != null && c.playing && t >= stopAt - 1e-9) { const s = stopAt; stopAt = null; c.pause(); c.set(s); return; }
@@ -388,25 +455,21 @@
   const planeChips = kit.chips($('planeChips'), 'plane', (v) => { leave(); S.plane = v; paint(); });
   const bondChips = kit.chips($('bondChips'), 'bond', (v) => { leave(); S.bond = +v; paint(); });
   $('rew').addEventListener('click', () => { clock.pause(); clock.set(0); });
-  kit.keys({ 1: () => { leave(); setScene('clock'); }, 2: () => { leave(); setScene('loop'); }, 3: () => { leave(); setScene('horizon'); } });
+  kit.keys({ 1: () => { leave(); setScene('clock'); }, 2: () => { leave(); setScene('loop'); }, 3: () => { leave(); setScene('horizon'); }, 4: () => { leave(); setScene('fixed'); } });
 
   /* ---------- experiment cards: scene, where the rail starts and stops, the still, and what else the card sets ---------- */
   const PRESETS = {
     polytope: { scene: 'horizon', from: 0, still: 0 },
-    fixedpoint: { scene: 'clock', from: 0, to: ETA_STAR, still: ETA_STAR },
-    gudermann: { scene: 'clock', from: 0, to: LN2, still: LN2 },
+    fixedpoint: { scene: 'fixed', from: 0, to: THETA_STAR, still: THETA_STAR },
     photon: { scene: 'clock', from: LN2, to: ETA_MAX, still: ETA_MAX },
-    abelian: { scene: 'loop', plane: 'one', eps: 60, from: 0, to: 4, still: 4 },
     plaquette: { scene: 'loop', plane: 'two', eps: 60, from: 0, to: 4, still: 4 },
     horizon: { scene: 'horizon', bond: 2, from: 0, to: 90, still: 90 }
   };
   const NOTES = {
     polytope: ['球面上内接一个正二十面体，北极的顶点是观察者。每个顶点挤着 5 个等边三角形，角加起来只有 300°：品红的小扇形就是摊平后缺的那 60°。12 个顶点一共缺 720° = 4π。', 'A regular icosahedron sits in the sphere, with the observer at the vertex on the north pole. Five equilateral triangles meet at each vertex and their angles add to only 300°: the small magenta wedge is the 60° that is missing once they are laid flat. The 12 vertices miss 720° = 4π in all.'],
     fixedpoint: ['圆上的点停在 θ* ≈ 0.739：紫色的弧长 θ 与青色的影子 cos θ 一样长，这是 cos θ = θ 唯一的实根。品红的高 sin θ* ≈ 0.674，是反复取余弦时误差每步缩小的倍数。', 'The point on the circle stops at θ* ≈ 0.739: the violet arc length θ is as long as the cyan shadow cos θ, the only real root of cos θ = θ. The magenta height sin θ* ≈ 0.674 is the factor by which the error shrinks at each step of taking cosines again and again.'],
-    gudermann: ['快度 η 从 0 推到 ln 2：双曲线上的琥珀色事件走到 (5/4, 3/4)，世界线在 t = 1 处的高度 tanh η = 0.6，平移到圆上，落点 θ = 36.87°。青色的线 cos θ = 0.8 = 1/γ 是时钟的速率，品红的高 sin θ = 0.6 是速度 v/c：0.8² + 0.6² = 1。', 'Push the rapidity η from 0 to ln 2: the amber event on the hyperbola reaches (5/4, 3/4), the worldline crosses t = 1 at height tanh η = 0.6, and carried across to the circle that height lands at θ = 36.87°. The cyan line cos θ = 0.8 = 1/γ is the rate of the clock and the magenta height sin θ = 0.6 is the speed v/c: 0.8² + 0.6² = 1.'],
-    photon: ['η 从 ln 2 一直推到 4：世界线贴向白色的光线，圆上的点贴向 θ = 90°。青色的线缩到 0.04，时钟几乎停摆；品红的高逼近 1，却碰不到：η 有限时 θ 总小于 90°。', 'Push η from ln 2 all the way to 4: the worldline hugs the white light line and the point on the circle creeps up to θ = 90°. The cyan line shrinks to 0.04 and the clock all but stops; the magenta height nears 1 without touching it: for finite η, θ stays below 90°.'],
-    abelian: ['两个旋子都绕 e₃ 转 60°，都在 e₁e₂ 这一个平面里：琥珀色的箭头沿同一条纬线退两步、再进两步，回到起点。同一平面里的转动次序可以交换，U = R₁R₂R₁⁻¹R₂⁻¹ = 1。', 'Both rotors turn by 60° about e₃, both in the one plane e₁e₂: the amber arrow goes two steps back and two steps forward along one parallel and ends where it started. Turns in one plane can be taken in either order, so U = R₁R₂R₁⁻¹R₂⁻¹ = 1.'],
-    plaquette: ['换成两个平面：R₁ 绕 e₁、R₂ 绕 e₂，各转 60°，依次施加 R₂⁻¹、R₁⁻¹、R₂、R₁。四步走完箭头没回到起点：品红的弧是缺口，紫色的线是余下那个转动的轴。U = 0.875 − (0.217e₂₃ − 0.217e₃₁ + 0.375e₁₂)，余下转角 57.9°。', 'Now two planes: R₁ about e₁ and R₂ about e₂, 60° each, applied as R₂⁻¹, R₁⁻¹, R₂, R₁. After four steps the arrow is not home: the magenta arc is the gap and the violet line is the axis of the turn left over. U = 0.875 − (0.217e₂₃ − 0.217e₃₁ + 0.375e₁₂), a left-over turn of 57.9°.'],
+    photon: ['η 从 ln 2 一直推到 4：世界线贴向白色的光线，圆上的点贴向 θ = 90°。青色的线缩到 0.04，时钟几乎停摆；品红的高逼近 1，却碰不到：η 有限时 θ 总小于 90°。出发的 η = ln 2 处，青色的线是 0.8 = 1/γ，品红的高是 0.6，0.8² + 0.6² = 1。', 'Push η from ln 2 all the way to 4: the worldline hugs the white light line and the point on the circle creeps up to θ = 90°. The cyan line shrinks to 0.04 and the clock all but stops; the magenta height nears 1 without touching it: for finite η, θ stays below 90°. At the start, η = ln 2, the cyan line is 0.8 = 1/γ and the magenta height 0.6, with 0.8² + 0.6² = 1.'],
+    plaquette: ['换成两个平面：R₁ 绕 e₁、R₂ 绕 e₂，各转 60°，依次施加 R₂⁻¹、R₁⁻¹、R₂、R₁。四步走完箭头没回到起点：品红的弧是缺口，紫色的线是余下那个转动的轴。U = 0.875 − (0.217e₂₃ − 0.217e₃₁ + 0.375e₁₂)，余下转角 57.9°。把两根转轴都换成同一根（同一个平面），四步互相抵消，U = 1。', 'Now two planes: R₁ about e₁ and R₂ about e₂, 60° each, applied as R₂⁻¹, R₁⁻¹, R₂, R₁. After four steps the arrow is not home: the magenta arc is the gap and the violet line is the axis of the turn left over. U = 0.875 − (0.217e₂₃ − 0.217e₃₁ + 0.375e₁₂), a left-over turn of 57.9°. Put both turns about one axis (one plane) and the four steps cancel: U = 1.'],
     horizon: ['视界从北极往下推到 λ = 90°：以内是北极和第一圈 5 个顶点，青色的边留在里面，品红的 10 条边被割断。每条边携带 D 维指标时，跨视界的施密特秩至多 D¹⁰。', 'The horizon is pushed down from the north pole to λ = 90°: inside it are the pole and the first ring of 5 vertices, the cyan edges stay inside and the 10 magenta edges are cut. If every edge carries a D-dimensional index, the Schmidt rank across the horizon is at most D¹⁰.']
   };
   let booting = true;
@@ -437,6 +500,7 @@
       const k = clockAt(S.eta), now = loopAt(S.tau), R = loopU(), H = horizonAt(S.lam);
       return {
         scene: S.scene, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, eps: S.eps, plane: S.plane, bond: S.bond,
+        fixed: { theta: S.theta, cos: Math.cos(S.theta), sin: Math.sin(S.theta), thetaStar: THETA_STAR },
         clock: { eta: S.eta, theta: k.theta, cos: k.cos, sin: k.sin, cosh: k.cosh, sinh: k.sinh, sech: k.sech, tanh: k.tanh, gamma: k.gamma, thetaStar: THETA_STAR, etaStar: ETA_STAR },
         loop: { tau: S.tau, p0: P0.slice(), r: now.r, q: now.q, U: R.U, phi: R.phi, axis: R.axis, legs: legs().map(([n, a]) => [n.slice(), a]) },
         horizon: { lam: S.lam, cut: H.cut, nA: H.nA, inside: H.inside, bound: H.bound, inA: H.inA.slice(), V: ICO.V.map((v) => v.slice()), E: ICO.E.map((e) => e.slice()), F: ICO.F.length, deficit: ICO.deficit.slice() },
@@ -449,7 +513,7 @@
     camera: () => Object.assign({}, stage.cam)
   };
   window.TRV_THUMB = () => { applyPreset('plaquette'); cards.mark('plaquette'); clock.pause(); clock.set(4); stage.cam.yaw = -0.5; stage.cam.pitch = 0.32; paint.now(); };
-  cards.pick(cards.initial('gudermann'));
+  cards.pick(cards.initial('photon'));
   booting = false;
   paint();
 })();

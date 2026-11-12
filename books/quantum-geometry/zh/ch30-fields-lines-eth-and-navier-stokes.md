@@ -5,7 +5,7 @@
 在[第 29 章](ch29-timeless-causality-and-gram-space.md)中，我们看到全局时间场是一座无时间的几何晶体（对照第 29 章无时间文献注记 [@rem-ch29-wheeler-dewitt-page-wootters-literature]），而场内的有限观察者只能在格拉姆椭圆体（$\det G \ge 0$）中一步步选点前行。现在，让我们将这一“球外静态场 vs. 球内有限观察者”的双重视角推向当代数学与理论物理最壮阔的交汇处——把计算复杂性理论中的 **$\mathrm{P}$ vs. $\mathrm{NP}$ 问题**、**指数时间假设（ETH）及其 2026 年 10 月张量网络秩约分亚指数前沿文献（[@rem-ch30-eth-subexponential-literature]）**，以及流体力学中的 **无外力三维纳维—斯托克斯（Navier–Stokes）全局正则性开放猜想（[@conj-coda-navier-stokes-regularity]）与受迫情形文献进展（[@rem-ch30-navier-stokes-forced-literature]）** 放进同一张克利福德正交场论画布中。
 
 ::: {.figure src="ch30-overview"}
-**图 30。** 本章地图：第 I 栏，琥珀色的 $P_0$ 是有限观察者的态，墨色箭头是 $n = 2, 4, 8$ 时隐藏的目标，一支比一支更贴近 $90^\circ$ 视界，投到 $P_0$ 上的青色影子越来越短；第 II 栏，取 $c = 1$ 的青色示意曲线 $r(n)$ 与品红的 PPSZ 基准 $0.386$ 交于 $\log_2 n \approx 558$，远在灰色阴影（可观测宇宙，$\log_2 n \le 266$）之外（示意曲线的数值对比，`MODEL`，见 [@ex-ch30-galactic-crossover-scale]）；第 III 栏，示意的涡管被拉长、变细，青色回路的环量 $\Gamma = \omega A$ 不变，品红的涡度随之变大；无外力的光滑三维流会不会这样把截面缩到零，是红色标出的开放问题（[@conj-coda-navier-stokes-regularity]）。
+**图 30。** 本章地图：第 I 栏，琥珀色的 $P_0$ 是有限观察者的态，墨色箭头是 $n = 2, 4, 8$ 时隐藏的目标，一支比一支更贴近 $90^\circ$ 视界，投到 $P_0$ 上的青色影子越来越短；第 II 栏，五边形 $C_5$ 的顶点按颜色 $c = (0, 1, 0, 1, 2)$ 摆在三条横线上，每条边的箭头都朝上，最长的线是青色的 $2 \to 3 \to 4$，恰好三个顶点，与颜色数相同（[@thm-ch30-gallai-roy]）；第 III 栏，示意的涡管被拉长、变细，青色回路的环量 $\Gamma = \omega A$ 不变，品红的涡度随之变大；无外力的光滑三维流会不会这样把截面缩到零，是红色标出的开放问题（[@conj-coda-navier-stokes-regularity]）。
 :::
 
 ---
@@ -85,10 +85,6 @@ $$
 | **场内有限观察者**<br/>（Finite Observer in the Field） | 查询与 SoS 下界各有限定；标准 $P\neq NP$ 仍为 `OPEN`（[@rem-ch30-query-sos-literature]、[@conj-p-neq-np]） | 小初始重叠、给定反射乘积的旋转 [`uniform_operator_rotation`](lean:D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation) 与局部 Gram 盲区 | **展开的主观时间（作者诠释）**：逐步选点与证明承载旅程的意义 |
 
 **“全局静态场的 $P = NP$，赋予了宇宙绝对自洽的‘真’；而有限观察者的 $P \neq NP$，则用那道 $\frac{\pi}{2}$ 的正交视界替生命挡住了剧透，把静态的真理拉长成了一场值得一步步去丈量、去证明、去选择的壮丽旅程。”**
-
-::: {.figure src="ch30-horizon"}
-**变量越多，目标越贴近 $90^\circ$ 视界。** 琥珀色的 $P_0$ 是观察者出发的均匀态，墨色箭头是 $n = 2, 4, 8$ 时唯一的隐藏目标 $\mathbf{S}^*$，与 $P_0$ 的夹角依次是 $60^\circ$、$75.5^\circ$、$86.4^\circ$；它们投到 $P_0$ 上的青色影子 $\cos\theta_0 = 2^{-n/2}$ 依次是 $1/2$、$1/4$、$1/16$。竖直的虚线就是 $\theta_0 \approx \pi/2 - 2^{-n/2}$ 逼近的那道正交视界。
-:::
 
 ---
 
@@ -283,6 +279,10 @@ $$
 给定补图匹配的实际限制使 $|I|$ 为偶数，所以右侧为 $1$。若 $q=p^{\mathrm{rev}}$，反向关系使两次遍历的和相差圈长在 $\mathbb F_2$ 中的值；偶长条件使此差为零。因此最初选出的同一个定向适用于所有这些圈与匹配。完整证明由 Lean 内核检查。
 :::
 
+::: {.figure src="ch30-face-odd-orientation"}
+**同一个定向：每个面、每条 nice 偶圈上都是奇数。** $4 \times 4$ 的格点图按平面旋转有九个方格面和外面一个面，每条边一支箭头；方格里的数是沿这个面走一圈、与箭头相反的 dart 个数，全是奇数，外面的面是 $3$。琥珀色的偶圈有十条边，圈内一侧的六个方格淡青，圈内的两个青色顶点是 $I$，圈外最下面一行的四个品红顶点是 $J$，删去圈后两侧都有完美匹配；沿琥珀色的圈，与箭头相反的 dart 有 $5$ 个（[@thm-ch30-face-odd-nice-cycle-orientation]、[@thm-ch30-cycle-face-sides]）。图上的定向是一个实例，由脚本解出，并对这张图的每一条 nice 偶圈逐一核对。
+:::
+
 ::: {.remark #rem-ch30-rotation-pfaffian-boundary title="有限旋转前提与完整平面匹配结论的边界"}
 **既有结果的应用与文献结果的边界。** 上面三个定理仍只处理已给定实际顶点旋转、dart 非空、连通及整数欧拉式的有限组合情形。下面把两种匹配的实际交错、原始 Pfaffian 的符号约定和同一张图上的系数传递逐一接起来；这些解释不另立复合定理盒。
 
@@ -341,6 +341,10 @@ $$
 [`orientationUnit`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.orientationUnit) 在有匹配时取任一实际匹配的整数单位系数，无匹配时取 $1$；它只依赖图、枚举与定向，独立于 $R,w$。故公式包括负权、零权、零因子环和特征 $2$，不使用除法。顶点集为空（$n=0$）时，唯一空匹配使两边为 $1$；顶点集非空的无边图没有完美匹配，属于所有配对项为零且 $Z=0$ 的无完美匹配情形。若进一步 $R=\mathbb R$ 且每个实际边权非负，则 $Z\ge0$、$|u|=1$，取绝对值得 $|\operatorname{Pf}(A)|=Z$；这是上述恒等式的应用，不另有一个绝对值端点定理。
 
 上面的有限旋转定向与此恒等式只有在**同一张实际图**上才能合用：保留原来的连通、dart 非空和整数欧拉假设，将原来的反向 dart 条件识别为 `Reverses`，并将每条偶简单圈的实际顶点删除补图匹配送入原 nice 圈条件，才能取得这里的 `NiceOdd`。从任意几何平面嵌入取得该旋转及完整面轨道的对应、超出旋转前提的图、完整凯莱行列式平方恒等式 `FullCayley`、$\sqrt{\det A}$ 表述、有理输入的精确算法和位复杂度及一般二分计数的 `#P`-完全性仍须分别处理，后者保留为 [@rem-ch30-karmarkar-kasteleyn-literature] 的文献结果。源审计 `29266` 保留 10 项验证、9 项未决；条件符号恒等式不消去这些残余义务。
+:::
+
+::: {.figure src="ch30-alternating-flip"}
+**翻一条交替圈：两组匹配的系数只差圈上的 dart 符号。** 左栏同一个 $2 \times 3$ 格点图上有两组完美匹配：青色的 $M$ 是三条竖边，品红的 $N$ 是横边 $01$、$34$ 与共同的竖边 $25$；两组不同的边恰好围成琥珀色的交替圈 $0 \to 1 \to 4 \to 3$，翻转它就把 $M$ 变成 $N$。右栏每条边一支箭头，沿这个圈走，顺箭头的 dart 记 $\delta = +1$，逆箭头记 $-1$，四个 $\delta$ 之积是 $-1$；按 [`alternating_cycle_transport`](lean:D5/S3/Combinatorics/PerfectMatchings/AlternatingCyclePfaffian.alternating_cycle_transport)，$\tau(M)\tau(N) = -\prod\delta = +1$，两组匹配的系数相同。箭头取的是使三个面都为奇的定向（[@thm-ch30-face-odd-nice-cycle-orientation]），具体的图与系数是脚本算出的实例。
 :::
 
 [@rem-ch30-karmarkar-kasteleyn-literature] 中的算法与几何推广仍有文献边界；上述条件匹配恒等式则已有精确供应声明。另一个“场”与“线”两边都能写成精确数学的离散问题，是给图的顶点着色。
@@ -445,6 +449,10 @@ $C_5$ 中最长有向路含 $5$ 个顶点的 $12$ 个定向里，有 $2$ 个是�
 
 这八个字为全书的复杂度与证明哲学画上了最凝练的句号：**“求场难如登天，顺线一步看穿。”**
 
+::: {.viz src="timeless-causal-crystal" height="640"}
+**交互实验室 `ORTHO//CAUSAL`**：同一颗球上的四个场景。窗口：两条余弦锁住第三条的范围，$\det G$ 是三根向量撑开的体积的平方；书页：有限时钟上所有页同时存在，条件化才取出一页；场：梯度流处处有坡度，降下的势能等于走过的耗散；线：振幅放大每步只转 $2\theta$，约 $(\pi/4)\sqrt{N}$ 步到达。把它们读作“选择”“书页”“场”与“线”是本书的诠释（`MODEL`）；$\mathrm{P} \neq \mathrm{NP}$ 仍是开放问题，本页的任何画面都不推出它的答案。
+:::
+
 ---
 
 ## 指数时间假设（ETH）、2026 张量网络秩约分与宇宙学视界：上界曲线的尺度与诠释边界 {#sec-coda-eth-tensor-rank-and-cosmic-horizon}
@@ -497,12 +505,8 @@ $C_5$ 中最长有向路含 $5$ 个顶点的 $12$ 个定向里，有 $2$ 个是�
 此外，$g(n)=n\log\log n/\sqrt{\log n}$ 比 $\log n$ 增长快，因此对固定 $c>0$，比较函数 $2^{c g(n)}$ 超过每个固定次多项式。但 $T(n)=2^{O(g(n))}$ 只是上界，允许更快甚至多项式时间的算法，并不证明 $P\neq NP$。对于自然参数为 $n$、所用电路编码规模为 $S=\Theta(n^2)$ 的问题，若 Tseitin 转换产生 $N=\Theta(n^2)$ 个变量，代入所讨论的公式得到上界 $2^{O(n^2\log\log n/\sqrt{\log n})}$。这是该编码与该上界表达式的尺度变化，不是最优算法必须付出的超指数成本。表中的 $c=1$ 曲线既不固定大 $O$ 中的真实常数与适用阈值，也不据此判定现实算法的快慢。
 :::
 
-::: {.viz src="eth-horizon-crossover" preset="human" height="500"}
-**$2^{16}$ 个变量：指数率才降回 $1$。** 琥珀色的读数停在 $n = 2^{16}$，六万多个变量：取 $c = 1$ 的青色示意曲线在这里才降到 $1$，每个变量付出的指数与穷举相同；品红的 PPSZ 是 $0.386$。这是上表第一行（示意曲线的数值对比，`MODEL`）。
-:::
-
-::: {.viz src="eth-horizon-crossover" preset="cross" height="500"}
-**交叉点：$n \approx 2^{558}$。** 让规模一路增大：青色曲线缓缓下降，直到 $n \approx 2^{558}$ 才与品红的 $0.386$ 相交，远在阴影（可观测宇宙原子数以内的规模）之外。这是上表最后一行（示意曲线的数值对比，`MODEL`）。
+::: {.viz src="eth-horizon-crossover" preset="atoms" height="500"}
+**交叉点在视界之外。** 青色是取 $c = 1$ 的示意曲线 $r(n) = \log_2(\log_2 n)/\sqrt{\log_2 n}$，品红是 PPSZ 的 $0.386$，阴影是可观测宇宙原子数 $2^{266}$ 以内的规模。琥珀色的读数停在 $n = 2^{266}$：曲线还在 $0.494$，要到 $n \approx 2^{558}$ 才降到 $0.386$（示意曲线的数值对比，`MODEL`）。
 :::
 
 [@ex-ch30-galactic-crossover-scale] 中跨越宇宙尺度的数值与规约对比，为本书“球内有限观察者 vs. 球外之球”的认识论图景（`MODEL`）提供了三点深刻启示：
@@ -515,10 +519,6 @@ $C_5$ 中最长有向路含 $5$ 个顶点的 $12$ 个定向里，有 $2$ 个是�
 
 - **$P$（场）与 $NP$（线）的认识论对照（`MODEL`）**：导向结构与见证检查表现出不同的任务角色；它们可以在同一个问题中并存，因为 $P\subseteq NP$。上界曲线和编码尺度比较不把两类问题分开。
 - **形式内核核验与顶层规约审计的哥德尔—语义边界（`LEAN ✓` 原型与 `MODEL` 映照）**：[@rem-ch30-eth-subexponential-literature] 中最具认识论意味的一幕是——形式证明助手内核可以迅速核验脚本内部每一步推演的传递合法性，而学界仍需仔细审计“顶层形式化命题的定义是否忠实刻画了目标图灵机复杂度命题”。在本书第 21 章中，经 Lean 4 内核验证的**相对语义对角线与定义逃逸定理**严格证明：在给定无不动点扭转映射（`∀ v, twist v ≠ v`）的条件下，相对语义对角线构造必然逃出任何已编目解码族（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)），且当解码目录覆盖潜坐标上的全部解码函数时，该对角线目标相对于给定潜映射不满足语义完备性 `TargetAdequate`（[`relative_semantic_diagonal_target_inadequate_of_surjective`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective)）。将这一形式定理作为认识论原型（`MODEL`）来观照顶层规约审计，恰好印证了全书的核心准则：**形式内核在球内严格锁死推演链条的传递正确性，而对顶层命题边界定义之语义恰当性的审视，永远需要站在形式球壳之外！**
-
-::: {.viz src="eth-horizon-crossover" preset="atoms" height="500"}
-**交叉点在视界之外。** 青色是取 $c = 1$ 的示意曲线 $r(n) = \log_2(\log_2 n)/\sqrt{\log_2 n}$，品红是 PPSZ 的 $0.386$，阴影是可观测宇宙原子数 $2^{266}$ 以内的规模。琥珀色的读数停在 $n = 2^{266}$：曲线还在 $0.494$，要到 $n \approx 2^{558}$ 才降到 $0.386$（示意曲线的数值对比，`MODEL`）。
-:::
 
 ::: {.viz src="eth-horizon-crossover" height="640"}
 **交互实验室 `ORTHO//HORIZON`**：本节的三个场景。指数率：示意曲线 $r(n)$ 与 PPSZ 的 $0.386$ 在哪里相交，以及常数 $c$ 怎样把交叉点挪进或挪出阴影；桥图：单次抽样的流矩阵秩与四道割，冻结量 $\operatorname{QMinCut} = \min(3ac, ad, bc)$，第四道 $3bd$ 割由手工矩阵分解给出；自然数维数满足 $0 < a \le b$、$0 < c \le d$、$a^2 + b^2 \le 3ab$、$c^2 + d^2 \le 3cd$ 时，可达最大秩等于 $\operatorname{QMinCut} = \min(ad, bc)$（Lean 已验证），单次抽样仍可更低，锥域外须比较四道割；模态：谱里不小于阈值 $\tau$ 的模态数不超过 $RW/(\pi\tau)$（Lean 已验证）。取 $c = 1$ 的曲线只是示意，不是任何算法的实测。
@@ -550,14 +550,10 @@ $$
 在经典连续介质流体力学中，由此可区分两类区域：当正交外积旋度为零（$\nabla\wedge\mathbf{u} = 0$，无旋势流）时，对流非线性退化为纯标量势梯度并直接并入伯努利总压抵消，单连通域上无散无旋流场归约为线性拉普拉斯势场 $\mathbf{u} = -\nabla\Phi$；当正交外积旋度非零（$\nabla\wedge\mathbf{u} \neq 0$，有旋涡流）时，由于标量势梯度的外微分恒为零，标量压强梯度无法抵消外积旋度 $\nabla\wedge\mathbf{u}$，流线与正交涡面发生非线性耦合。
 :::
 
-::: {.viz src="navier-stokes-p-np" preset="potential" height="500"}
-**无旋：对流项只是一个梯度。** $s = 0$ 的驻点流 $\mathbf{u} = (x, -y)$，没有涡度。琥珀色探针处，白色的对流项箭头与青色的梯度那一半完全重合，品红的兰姆那一半为零：这一项整个并入压强。
-:::
-
 将 [@rem-ch30-lamb-decomposition-literature] 所载的无旋势流相与有旋涡流相映射回上一节“$P$ 是无旋导向场，$NP$ 是旋涡荒原中的细线”的几何类比模型（`MODEL`），无旋相在概念上对应光滑全局导向场（类比流体中的 $P$ 态），而有旋相则对应多尺度旋涡缠绕。
 
 ::: {.viz src="navier-stokes-p-np" preset="vortex" height="500"}
-**对流项的两半。** 平面流 $\mathbf{u} = (1 - s)(x, -y) + s(-y, x)$ 在 $s = 0.8$ 时的流线，涡度 $\omega = 2s = 1.6$。琥珀色探针处，白色箭头是对流项 $(\mathbf{u}\cdot\nabla)\mathbf{u}$，它是青色的梯度那一半 $\nabla(\|\mathbf{u}\|^2/2)$ 与品红的兰姆那一半 $\boldsymbol{\omega}\times\mathbf{u}$ 之和；把 $s$ 调回 $0$，品红箭头消失。探针可以拖动。
+**对流项的两半。** 平面流 $\mathbf{u} = (1 - s)(x, -y) + s(-y, x)$ 在 $s = 0.8$ 时的流线，涡度 $\omega = 2s = 1.6$。琥珀色探针处，白色箭头是对流项 $(\mathbf{u}\cdot\nabla)\mathbf{u}$，它是青色的梯度那一半 $\nabla(\|\mathbf{u}\|^2/2)$ 与品红的兰姆那一半 $\boldsymbol{\omega}\times\mathbf{u}$ 之和；把 $s$ 调回 $0$（无旋的驻点流），品红箭头消失，白色箭头与青色箭头重合：整个对流项是一个梯度，并入压强。探针可以拖动。
 :::
 
 ### 2. 为什么两道难题都在“第 2 维 $\to$ 第 3 维”发生相变？（几何类比 `MODEL` 与开放猜想边界）
@@ -576,10 +572,6 @@ $$
 $$
 :::
 
-::: {.viz src="navier-stokes-p-np" preset="flat" height="500"}
-**二维：涡管不被拉伸。** 涡度垂直于流动的平面，没有东西去拉它：涡管不变细，粘性只让它慢慢变粗（截面 $A$ 从虚线的 $1$ 涨到约 $2$），青色回路的环量 $\Gamma = \omega A$ 不变，品红的涡度只降不升（示意模型，`MODEL`）。
-:::
-
 ::: {.viz src="navier-stokes-p-np" preset="strain" height="500"}
 **三维：越拉越细。** 沿轴以恒定拉伸率拉这根涡管，不计粘性：它越来越长、越来越细，青色回路的环量 $\Gamma = \omega A$ 不变，所以品红的涡度按 $\Gamma/A$ 一路变大，即上式的 $\|\boldsymbol{\omega}\| \approx \Gamma/A$（示意模型，`MODEL`）。
 :::
@@ -588,6 +580,11 @@ $$
 
 - **二维平面情形（[@rem-ch30-vorticity-transport-literature]）$\leftrightarrow$ 类比二元链 2-SAT（`MODEL`）**：
   将 [@rem-ch30-vorticity-transport-literature] 所载的二维平面流情形与二元链 2-SAT 并置对照（`MODEL`），在本书锁定的 `trureturing@dev` 库中，冻结定理 [`all_grade_regularity_of_mild_path`](lean:D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path) 给出了二维周期傅里叶空间上的一项**条件性高阶正则性提升定理**：若已给定一条在 $[0, \tau]$ 上连续的加权 $H^2$ 零均值实无散温和解路径，且其初值在全部空间 Sobolev 阶数 $m \in \mathbb{N}$ 上可和，则该路径在每一空间阶数 $m$ 上皆满足强微分方程（无条件二维全局正则性经典定理另见 [@rem-ch30-navier-stokes-forced-literature]）。
+
+::: {.viz src="navier-stokes-p-np" preset="flat" height="500"}
+**二维：涡管不被拉伸。** 涡度垂直于流动的平面，没有东西去拉它：涡管不变细，粘性只让它慢慢变粗（截面 $A$ 从虚线的 $1$ 涨到约 $2$），青色回路的环量 $\Gamma = \omega A$ 不变，品红的涡度只降不升（示意模型，`MODEL`）。
+:::
+
 - **三维细涡管条件坍缩情景（[@rem-ch30-vorticity-transport-literature]）$\leftrightarrow$ 类比三元面片 3-SAT（`MODEL`）**：
   将 [@rem-ch30-vorticity-transport-literature] 所载的三维条件性细涡管情景与三元面片 3-SAT 并置对照，在几何类比模型（`MODEL`）上，该条件坍缩图景好比把一张平滑三维“场（类比 $P$）”挤压向“一维细丝（类比 $NP$ 见证丝）”！
 
@@ -689,6 +686,10 @@ $$
 
 四个因子是四类运动。$X^2$ 是零本征值，下面单独处理。两个带加号的因子给出纯虚根 $\pm i\,m/\sqrt{2}$ 与 $\pm i\,(m-1)/2$：围绕平衡位置的振荡，不增不减。带减号的因子给出实根对：正的一支发散，负的一支收缩。库里另有一条冻结定理（[`off_axis_is_real`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonRealBoundary.off_axis_is_real)）：$J_{2m}$ 的复本征值只要实部非零就是实数，所以 $E^{u}$ 与 $E^{s}$ 已经收尽全部增长与衰减的本征方向。六边形（$m = 3$）是第一个出现发散方向的多边形，此后每添两个涡旋，发散方向多两个。
 
+::: {.viz src="vortex-polygon" preset="hexagon" height="500"}
+**六边形：沿发散方向推一下，偏离按 $e^{\lambda t}$ 长大。** 六个涡旋正负相间（青色 $+$、品红 $-$）停在半径 $R = 1$ 的圆上（$b = 2$，$\Omega = \tfrac12$）；沿本征值 $\lambda = 1/\sqrt{2}$ 的一个本征方向推 $10^{-9}$，琥珀色的箭头是放大后的位移，到 $t = 10$ 长到初始的约 $1177$ 倍，与 $e^{10/\sqrt{2}}$ 一致（[@thm-ch30-vortex-polygon-spectrum]）。舞台上的运动是非线性方程的数值积分，不是冻结声明。
+:::
+
 ::: {.proposition #prop-ch30-vortex-polygon-neutral-drift title="非零本征值半单、零本征值的二阶若尔当块与无界的线性漂移；偶极与正方形" lean="D5/S3/FluidDynamics/Vortices/AlternatingPolygonDecomposition.geometric_eq_algebraic D5/S3/FluidDynamics/Vortices/AlternatingPolygonNeutral.neutral_generalized_finrank D5/S3/FluidDynamics/Vortices/AlternatingPolygonNeutral.neutral_geometric_finrank D5/S3/FluidDynamics/Vortices/AlternatingPolygonCartesianChain.cartesian_chain D5/S3/FluidDynamics/Vortices/AlternatingPolygonCartesianChain.unbounded_linear_drift D5/S3/FluidDynamics/Vortices/AlternatingPolygonSmallCases.dipole D5/S3/FluidDynamics/Vortices/AlternatingPolygonSmallCases.square"}
 设 $m \ge 1$。第 1、2、4 条把 $J_{2m}$ 看作 $\mathbb{C}^{4m}$ 上的线性算子。
 
@@ -712,6 +713,10 @@ $$
 :::
 
 $c_0$ 是整个多边形绕原点的无穷小转动：场对公共转动协变（[@lem-ch30-vortex-polygon-equilibrium] 的证明用过这一点），转过去的多边形仍然静止，所以这个方向落在 $J_{2m}$ 的核里。$c_1$ 让正涡旋沿半径移动 $1/\delta_m$，负涡旋反向移动同样的距离。把两种涡旋的半径这样错开之后，线性化方程的解不是振荡，而是整圈涡旋沿 $c_0$ 方向匀速转走。谱看不见这件事：零与纯虚数都算“不增长”，一个二阶若尔当块却让解随时间线性增大。偶极（$m = 1$）与正方形（$m = 2$）的全部本征值都在虚轴上，它们的线性化方程同样有这样一个无界的解。换回一般的 $b, \Omega > 0$，只需把 $c_1$ 除以 $2\Omega$（[`physical_cartesian_chain`](lean:D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalDerivative.physical_cartesian_chain)）。
+
+::: {.viz src="vortex-polygon" preset="drift" height="500"}
+**正方形：谱全在虚轴上，整圈仍然转走。** 四个涡旋沿若尔当链 $c_1$ 推 $\varepsilon = 0.01$：青色的正涡旋退到半径 $0.99$，品红的负涡旋外移到 $1.01$，灰色的圈是出发的位置；整圈绕原点匀速转动，到 $t = 100$ 琥珀色的角约为 $57^\circ$，即 $1$ 弧度，正是线性化解给出的 $\varepsilon t$（[@prop-ch30-vortex-polygon-neutral-drift]）。转角来自非线性方程的数值积分。
+:::
 
 ::: {.example #ex-ch30-vortex-octagon-spectrum title="正八边形的十六个本征值：从方程数值求出，再与冻结的重数逐项对照"}
 取 $m = 4$、$b = 2$、$\Omega = \tfrac12$，于是 $R_{b,\Omega} = 1$，八个涡旋位于单位圆上，相空间是 $\mathbb{R}^{16}$。下面的数值只用到 [@def-ch30-alternating-vortex-polygon] 中的方程，不用任何闭式：把场逐项键入，用符号求导得到 $P_8$ 处的 $16 \times 16$ 偏导数矩阵（与步长 $10^{-12}$ 的中心差分逐元相差不超过 $3 \times 10^{-24}$），以 $40$ 位十进制精度求本征值；代数重数取数值上重合的本征值个数，几何重数取 $16 - \operatorname{rank}(J_8 - \lambda I)$。场在 $P_8$ 处的最大分量为 $8 \times 10^{-41}$。标号 $r$ 与 [@thm-ch30-vortex-polygon-spectrum] 的证明相同：$r = 0, 1$ 对应两个带加号的因子，$r = m$ 对应 $X^2$。本征值四舍五入到所示位数：
@@ -746,10 +751,6 @@ $c_0$ 是整个多边形绕原点的无穷小转动：场对公共转动协变�
 **粘性拦住：伯格斯涡。** 恒定拉伸之外再加上粘性：变细的涡核同时向外扩散，截面 $A$ 停在 $4\pi\nu/\alpha$ 附近不再变小，品红的涡度也随之停住，青色回路的环量仍是 $1$。拉伸与粘性恰好相抵，涡管不会夹断（示意模型，`MODEL`）。
 :::
 
-::: {.viz src="navier-stokes-p-np" preset="runaway" height="500"}
-**越拉越细（示意模型）。** 青色回路的环量 $\Gamma = \omega A$ 不变，虚线是出发时的涡管。这里让拉伸率正比于涡度本身（$\alpha = \kappa\omega$，示意性的闭合，不是纳维—斯托克斯方程的解）：$\kappa\Gamma = 0.50$ 大于 $4\pi\nu = 0.151$，到 $t = 2.4$ 截面已缩到 $0.162$，品红的涡度升到 $6.18$，截面将在 $t^* = 2.86$ 归零。真实的三维流体是否如此，正是下面的开放问题（`MODEL`）。
-:::
-
 ::: {.conjecture #conj-coda-navier-stokes-regularity title="无外力三维不可压缩纳维—斯托克斯方程的全局光滑性猜想（克雷千禧年陈述 A / B）"}
 给定严格正运动粘性系数 $\nu > 0$ 且**外力恒等于零（$\mathbf{f} \equiv \mathbf{0}$）**，考察全空间 $\mathbb{R}^3$（陈述 A）或三维环面 $\mathbb{T}^3 = \mathbb{R}^3/\mathbb{Z}^3$（陈述 B）上的自治三维不可压缩纳维—斯托克斯方程组：
 
@@ -758,6 +759,10 @@ $$
 $$
 
 对于任意光滑、无散度（$\nabla\cdot\mathbf{u}_0 = 0$）且在 $\mathbb{R}^3$ 上无穷远处满足施瓦茨速降条件（或在 $\mathbb{T}^3$ 上光滑周期）的初始速度场 $\mathbf{u}_0$，是否恒存在定义在全部非负时间 $\mathbb{R}^3 \times [0, \infty)$（或 $\mathbb{T}^3 \times [0, \infty)$）上且满足有限动能界的全局光滑解 $(\mathbf{u}, p) \in C^\infty$，抑或存在某个光滑无外力初值在有限时间 $T^* < \infty$ 内丧失光滑性（有限时间爆破）？这一无外力三维纳维—斯托克斯全局正则性问题至今悬而未决。
+:::
+
+::: {.viz src="navier-stokes-p-np" preset="runaway" height="500"}
+**越拉越细（示意模型）。** 青色回路的环量 $\Gamma = \omega A$ 不变，虚线是出发时的涡管。这里让拉伸率正比于涡度本身（$\alpha = \kappa\omega$，示意性的闭合，不是纳维—斯托克斯方程的解）：$\kappa\Gamma = 0.50$ 大于 $4\pi\nu = 0.151$，到 $t = 2.4$ 截面已缩到 $0.162$，品红的涡度升到 $6.18$，截面将在 $t^* = 2.86$ 归零。真实的三维流体是否如此，正是上面的开放问题（`MODEL`）。
 :::
 
 ### 3. 场的自指与二次平流投影闭合阻碍定理（`LEAN ✓`）
@@ -803,11 +808,7 @@ $$
 :::
 
 ::: {.viz src="navier-stokes-p-np" preset="mixed" height="500"}
-**看不见的变量漏进来。** 只看 $x$ 的观察者：每条曲线是固定一个 $x$ 时，看得见的加速度 $P(V)$ 随看不见的 $y$ 的变化。混合项打开后，曲线张成一把扇子：同一个 $x = 0.5$，青色是 $y = 0$ 时的加速度，琥珀色的点是当前 $y$ 时的加速度，琥珀色竖线是两者之差。差不为零，就没有只依赖 $x$ 的精确闭合（$\mathbb{R}^2$ 上的示意实例；一般判据与五模态实例见上面的定理）。
-:::
-
-::: {.viz src="navier-stokes-p-np" preset="closed" height="500"}
-**没有泄漏：低频自己说了算。** 三项泄漏都关掉：看不见的 $y$ 怎么变，琥珀色的点都沿着水平线走，与青色的 $y = 0$ 时的加速度一样，两者之差为零。只看 $x$ 的观察者可以自己预测下一步，这是上面判据的“当”那一半（$\mathbb{R}^2$ 上的示意实例）。
+**看不见的变量漏进来。** 只看 $x$ 的观察者：每条曲线是固定一个 $x$ 时，看得见的加速度 $P(V)$ 随看不见的 $y$ 的变化。混合项打开后，曲线张成一把扇子：同一个 $x = 0.5$，青色是 $y = 0$ 时的加速度，琥珀色的点是当前 $y$ 时的加速度，琥珀色竖线是两者之差。差不为零，就没有只依赖 $x$ 的精确闭合（$\mathbb{R}^2$ 上的示意实例；一般判据与五模态实例见上面的定理）。把三项泄漏都关掉，每条曲线都变成水平线，琥珀色的点与青色的点重合，这是判据“当”的那一半。
 :::
 
 ### 4. 粘性兰道尔擦除、高维测地线视角与连续—离散六重类比总结（`MODEL`）
@@ -853,3 +854,7 @@ $$
 本章以作者关于全局静态场与有限观察者、“场”与“线”的格言连接离散逻辑和连续流体。数学层面，静态满足子空间、额外资源下的复杂度等式、受限模型下界与标准 $P\neq NP$ 开放问题各有边界。在有限图着色这一例子中，Gallai–Hasse–Roy–Vitaver 定理给出“$G$ 可 $k$ 着色”与“存在一种定向，使每条有向路至多含 $k$ 个顶点”之间的精确等价（[@thm-ch30-gallai-roy]）；它只是交换两种存在性见证，不提供算法，也不解决一般的 $P$ vs. $NP$ 问题。银河交叉表比较的是示意上界（[@ex-ch30-galactic-crossover-scale]），不是普遍搜索下界。流体部分则并置 **兰姆分解（[@rem-ch30-lamb-decomposition-literature]）、无外力三维全局正则性开放猜想（[@conj-coda-navier-stokes-regularity]）与二次平流投影无精确闭合定理（[@thm-coda-quadratic-advection-no-closure]）**。这些结果为作者的几何诠释提供参照，并不建立两道开放难题的数学等价。
 
 沿着这道正交视界继续向前，我们将在 **[第三十一章：量子的本质是公平](ch31-quantum-fairness.md)** 与 **[第三十二章：正交自指统一场与万流归宗](ch32-unified-field-and-meta-unification.md)** 中揭示五重几何特权的废除、遍历统计全息与跨纲领元统一，并最终步入 **[终章：在所有的球之外](coda.md)**，在多面体离散角亏余项（见终章 [@rem-coda-polyhedral-topology-literature]）、收缩不动点锚点与全书总导图中完成最后的升维回望。
+
+::: {.viz src="vortex-polygon" height="640"}
+**交互实验室 `ORTHO//POLYGON`**：$2m$ 个正负相间的点涡排在圆上，每个涡旋另带一项绕原点的进动（$b = 2$，$\Omega = \tfrac12$）。可以换涡旋个数（$2$ 到 $12$）与推法：不推时整圈只在半径 $R = 1$ 上静止，换到半径 $1.2$ 正负涡旋就转开；从六边形起沿发散方向推一下，偏离按 $e^{\lambda t}$ 长大；偶极与正方形沿 $c_1$ 推一下，整圈匀速转走。静止半径、正实本征值与线性漂移是 Lean 已验证的定理（[@lem-ch30-vortex-polygon-equilibrium]、[@thm-ch30-vortex-polygon-spectrum]、[@prop-ch30-vortex-polygon-neutral-drift]）；舞台上的运动是数值积分。
+:::

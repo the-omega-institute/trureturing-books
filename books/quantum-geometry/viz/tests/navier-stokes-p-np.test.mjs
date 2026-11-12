@@ -29,8 +29,8 @@ check('opens on STRETCH: the tube under steady strain, without viscosity, at the
 const { alpha, kappa, gamma, a0 } = s.consts;
 
 /* ---------- the two halves of advection ---------- */
-await pick('potential'); s = await state();
-check('POTENTIAL: s = 0, no vorticity, the Lamb half is zero and advection equals its gradient half', s.scene === 'lamb' && s.t === 0 && s.lamb.w === 0 && Math.hypot(...s.lamb.lamb) === 0 && near(s.lamb.adv[0], s.lamb.grad[0]) && near(s.lamb.adv[1], s.lamb.grad[1]));
+await pick('vortex'); s = await seek(0);
+check('LAMB at s = 0 (the stagnation flow): no vorticity, the Lamb half is zero and advection equals its gradient half', s.scene === 'lamb' && s.t === 0 && s.lamb.w === 0 && Math.hypot(...s.lamb.lamb) === 0 && near(s.lamb.adv[0], s.lamb.grad[0]) && near(s.lamb.adv[1], s.lamb.grad[1]));
 const vel = (q, x, y) => [(1 - q) * x - q * y, -(1 - q) * y + q * x];
 let idOK = true, idBad = '', seed = 11; const rnd = () => { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; };
 for (let k = 0; k < 60 && idOK; k++) {
@@ -52,7 +52,7 @@ s = await seek(0.8); check('at s = 0.8 the vorticity is 1.6 and the readout show
 const to = await D(() => window.VORTEX_DEBUG.at(-0.6, 0.9));
 await page.mouse.click(to[0], to[1]); s = await state();
 check('clicking the stage moves the probe there', near(s.probe[0], -0.6, 0.03) && near(s.probe[1], 0.9, 0.03) && s.preset === null, JSON.stringify(s.probe));
-check('the residual of the identity at the probe is shown as passing', (await page.textContent('#ro4')).includes('✓'));
+check('the residual of the identity at the probe is shown as passing', (await page.textContent('#ro4')).includes('相符'));
 
 /* ---------- the vortex tube ---------- */
 const rhs = (mode, nu, A) => (mode === 'flat' ? 4 * Math.PI * nu : mode === 'strain' ? 4 * Math.PI * nu - alpha * A : 4 * Math.PI * nu - kappa * gamma);
@@ -106,8 +106,8 @@ await page.click('#modeChips [data-mode="strain"]'); s = await state();
 check('the mode chips switch the kind of stretching and restart the rail', s.mode === 'strain' && s.t === 0);
 
 /* ---------- closure ---------- */
-await pick('closed'); s = await seek(1.7);
-check('CLOSED: no leak, the seen acceleration does not depend on the unseen y', s.scene === 'closure' && s.closed && near(s.seen[0], s.seen[1], 1e-12) && /存在精确闭合/.test(await page.textContent('#roKeySub')));
+await pick('mixed'); await setRange('mix', 0); s = await seek(1.7);
+check('MIXED with every leak off: no leak, the seen acceleration does not depend on the unseen y', s.scene === 'closure' && s.closed && near(s.seen[0], s.seen[1], 1e-12) && /存在精确闭合/.test(await page.textContent('#roKeySub')));
 {
   // the labels at the right edge: written here from P(V) = −x − x² (no leak, y = 1), every x once, and lines that end at
   // the same height (x = −1 and x = 0) share one label instead of two printed over each other

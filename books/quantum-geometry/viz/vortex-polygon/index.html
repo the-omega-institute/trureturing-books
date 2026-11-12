@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="ORTHO//POLYGON · Alternating vortex polygons · rest, divergence and drift">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORTHO//POLYGON 交错涡旋多边形 · 平衡、发散与漂移</title>
+<meta name="description" content="2m 个正负相间的点涡排在圆上，带一项绕原点的进动：只在一个半径上静止；从六边形起有按 e^(λt) 长大的方向；偶极与正方形的谱全在虚轴上，整圈却会匀速转走。2m point vortices of alternating sign on a circle, with a precession about the centre: they rest at one radius only; from the hexagon on some directions grow like e^(λt); the dipole and the square have a purely imaginary spectrum, yet the ring turns away steadily.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="vortex-polygon">
+<div class="app lab" id="app">
+  <header class="top">
+    <div class="brand">
+      <a class="crumb" href="../"><span class="zh">◂ 可视化索引</span><span class="en">◂ Visualizations</span></a>
+      <h1 class="logo" data-text="ORTHO//POLYGON">ORTHO<b>//</b>POLYGON</h1>
+      <div class="tagline">
+        <span class="zh">交错涡旋多边形 · <em>可微不等于稳定，谱中性不等于有界</em></span>
+        <span class="en">Alternating vortex polygons · <em>smooth is not stable, and a neutral spectrum is not bounded</em></span>
+      </div>
+    </div>
+    <div class="status" aria-live="polite">
+      <span class="pill" id="pillN">2m <strong>—</strong></span>
+      <span class="pill hot" id="pillKey"><strong>—</strong></span>
+      <div class="langs" role="group" aria-label="语言 Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div>
+    </div>
+  </header>
+
+  <aside class="col deck" aria-label="实验控制" data-aria-en="Experiment controls">
+    <section class="panel sec">
+      <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">PRESETS</span></h2>
+      <div class="presets cards" id="presets">
+        <button class="preset" data-preset="rest" aria-pressed="false"><span class="code">AT REST</span><span class="cn zh">半径 R：一动不动</span><span class="cn en">Radius R: not a stir</span></button>
+        <button class="preset" data-preset="radius" aria-pressed="false"><span class="code">RADIUS 1.2</span><span class="cn zh">换个半径：正负涡旋转开</span><span class="cn en">Another radius: the signs turn apart</span></button>
+        <button class="preset" data-preset="hexagon" aria-pressed="false"><span class="code">HEXAGON</span><span class="cn zh">六边形：推一下按 e^(λt) 长大</span><span class="cn en">Hexagon: a push grows like e^(λt)</span></button>
+        <button class="preset" data-preset="drift" aria-pressed="false"><span class="code">SQUARE DRIFT</span><span class="cn zh">正方形：谱中性，整圈转走</span><span class="cn en">Square: neutral spectrum, the ring turns away</span></button>
+      </div>
+      <p class="note" id="presetNote"></p>
+    </section>
+    <section class="panel sec">
+      <h2><span class="zh">涡旋与推法</span><span class="en">Vortices and push</span><span class="aside">b = 2 · Ω = ½</span></h2>
+      <div class="chips" id="mChips" role="group" aria-label="m（涡旋个数 2m）" data-aria-en="m (2m vortices)">
+        <button class="chip" data-m="1" aria-pressed="false">2</button><button class="chip" data-m="2" aria-pressed="false">4</button><button class="chip" data-m="3" aria-pressed="true">6</button><button class="chip" data-m="4" aria-pressed="false">8</button><button class="chip" data-m="5" aria-pressed="false">10</button><button class="chip" data-m="6" aria-pressed="false">12</button>
+      </div>
+      <div class="chips" id="modeChips" role="group" aria-label="怎样推" data-aria-en="How to push">
+        <button class="chip" data-mode="rest" aria-pressed="false"><span class="zh">不推</span><span class="en">No push</span></button>
+        <button class="chip" data-mode="radius" aria-pressed="false"><span class="zh">半径 1.2</span><span class="en">Radius 1.2</span></button>
+        <button class="chip" data-mode="unstable" aria-pressed="true"><span class="zh">不稳定方向</span><span class="en">Unstable direction</span></button>
+        <button class="chip" data-mode="drift" aria-pressed="false"><span class="zh">若尔当链 c₁</span><span class="en">Jordan chain c₁</span></button>
+      </div>
+      <p class="note"><span class="zh">时间轴是时间 t。不稳定方向只在六边形起才有（m ≥ 3）；若尔当链漂移只给偶极与正方形（m ≤ 2），它们的谱全在虚轴上。</span><span class="en">The rail is the time t. Unstable directions exist from the hexagon on (m ≥ 3); the Jordan-chain drift is offered for the dipole and the square (m ≤ 2), whose spectrum is purely imaginary.</span></p>
+    </section>
+  </aside>
+
+  <main class="center">
+    <div class="stage still" id="stage" data-thumb aria-label="正负相间的点涡排在圆上，以及它们随时间的运动" data-aria-en="Point vortices of alternating sign on a circle, and how they move in time">
+      <canvas class="fill" id="cv"></canvas>
+      <div class="scan"></div><div class="vig"></div>
+      <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+      <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+      <div class="hud-bl" id="legend"></div>
+    </div>
+    <div class="tour" id="tour">
+      <button class="tbtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button>
+      <div class="what"></div>
+      <button class="tbtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button>
+    </div>
+    <div class="strip">
+      <section class="panel">
+        <div class="head"><h2 id="plotTitle"></h2><span id="plotMeta"></span></div>
+        <canvas id="plot" aria-label="沿时间轴的偏离或转角" data-aria-en="The deviation or the angle along the rail"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <aside class="col side" aria-label="读数与依据" data-aria-en="Readouts and evidence">
+    <section class="panel sec" id="readouts" aria-live="polite">
+      <h2><span class="zh">读数</span><span class="en">Readouts</span><span class="aside">F<sub>2,½</sub></span></h2>
+      <dl class="ro" id="ro"></dl>
+      <p class="note" id="roNote"></p>
+    </section>
+    <section class="panel sec" id="evidence">
+      <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">对 N ≥ 3、ρ &gt; 0 与任意 θ：居中正 N 边形 P<sub>N</sub>(ρ, θ) 是场 F<sub>b,Ω</sub> 的零点，当且仅当 N 为偶数且 ρ = R<sub>b,Ω</sub> = √(b/(4Ω))。已冻结：</span><span class="en">For N ≥ 3, ρ &gt; 0 and any θ: the centred regular N-gon P<sub>N</sub>(ρ, θ) is a zero of the field F<sub>b,Ω</sub> iff N is even and ρ = R<sub>b,Ω</sub> = √(b/(4Ω)). Frozen: </span><a class="leanref" data-lean-gid="D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.regular_equilibrium_iff_radius" href="#" target="_blank" rel="noopener"><code>regular_equilibrium_iff_radius</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">m ≥ 3、b, Ω &gt; 0 时，平衡点处导数的正实本征值恰为 λ<sub>r</sub> = Ω(m − r)√(r² − 2)，r = 2, …, m − 1。已冻结：</span><span class="en">For m ≥ 3 and b, Ω &gt; 0, the positive real eigenvalues of the derivative at the equilibrium are exactly λ<sub>r</sub> = Ω(m − r)√(r² − 2), r = 2, …, m − 1. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physical_positive_eigenvalue_iff" href="#" target="_blank" rel="noopener"><code>physical_positive_eigenvalue_iff</code></a></span></div>
+      <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">对一切 m ≥ 1，线性化方程 v′ = J<sub>2m</sub>v 有解 v(t) = c₁ + t c₀，c₀ 是整圈的无穷小转动，且这条解无界。已冻结：</span><span class="en">For every m ≥ 1, the linearized equation v′ = J<sub>2m</sub>v has the solution v(t) = c₁ + t c₀, where c₀ is the infinitesimal turn of the whole ring, and this solution is unbounded. Frozen: </span><a class="leanref" data-lean-gid="D5/S3/FluidDynamics/Vortices/AlternatingPolygonCartesianChain.unbounded_linear_drift" href="#" target="_blank" rel="noopener"><code>unbounded_linear_drift</code></a></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">舞台上的运动是用四阶龙格—库塔法积分非线性方程 ż = F<sub>2,½</sub>(z) 得到的数值观察，不是冻结声明；不稳定方向的本征向量由中心差分雅可比矩阵的反幂迭代求出。</span><span class="en">The motion on the stage is a numerical observation, the nonlinear equation ż = F<sub>2,½</sub>(z) integrated with the classical Runge–Kutta method, not a frozen statement; the unstable eigenvector comes from inverse iteration on a central-difference Jacobian.</span></span></div>
+      <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：点涡方程（亥姆霍兹、基尔霍夫）与囚禁玻色—爱因斯坦凝聚体中带进动项的涡旋模型（Barry 与 Kevrekidis）。</span><span class="en">Literature results, not formalized in this book: the point-vortex equations (Helmholtz, Kirchhoff) and the vortex model with a precession term for trapped Bose–Einstein condensates (Barry and Kevrekidis).</span></span></div>
+      <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
+    </section>
+  </aside>
+
+  <footer class="rail" id="rail">
+    <div class="transport">
+      <button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button>
+      <button class="tbtn" id="play" aria-label="播放 / 暂停" data-aria-en="Play / pause" aria-pressed="false">▶</button>
+      <span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed">
+        <button class="chip" data-speed="0.35" aria-pressed="false">0.35×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2.5" aria-pressed="false">2.5×</button>
+      </span>
+    </div>
+    <div class="clock">
+      <span class="tau" id="tau"></span>
+      <input type="range" id="now" min="0" max="10" step="any" value="0" aria-label="时间轴：时间 t" data-aria-en="Rail: the time t">
+    </div>
+    <div class="keys">
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span>
+    </div>
+  </footer>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+    <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 这个页面在演示什么</span><span class="en">Theory interface · what this page shows</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+    <div class="zh">
+      <p class="lede">第 30 章的样本：平面流处处无旋，只在 2m 个点上各有一根涡丝，正负相间排在圆上，每个涡旋另带一项绕原点的进动。舞台画的是这些点本身，时间轴推动时间。本页是数值演示，不是证明。</p>
+      <ol>
+        <li><b>静止。</b>场 F<sub>b,Ω</sub> 的第一项让涡旋绕原点进动，第二项是其余涡旋吹来的速度。偶数个涡旋只在半径 R = √(b/(4Ω)) 上两者相抵（这里 b = 2、Ω = ½，R = 1）；换一个半径，正负涡旋朝相反方向转开。</li>
+        <li><b>发散。</b>从六边形起，平衡点的线性化有 2(m − 2) 维的发散方向，本征值是 λ<sub>r</sub> = Ω(m − r)√(r² − 2)。沿 r = 2 的本征方向推 10⁻⁹，偏离按 e<sup>λt</sup> 长大；方程在平衡点处光滑，平衡却不稳定。</li>
+        <li><b>漂移。</b>偶极与正方形的本征值全在虚轴上，零本征值却有一个二阶若尔当块：沿 c₁ 推 ε，线性化解 ε(c₁ + t c₀) 让整圈匀速转走，转角 εt。舞台上积分的是非线性方程，转角与 εt 的对照是数值观察。</li>
+      </ol>
+      <p class="lede refs">书中：<a href="../../zh/ch30-fields-lines-eth-and-navier-stokes.html#lem-ch30-vortex-polygon-equilibrium" target="_top">静止条件</a> · <a href="../../zh/ch30-fields-lines-eth-and-navier-stokes.html#thm-ch30-vortex-polygon-spectrum" target="_top">完整谱</a> · <a href="../../zh/ch30-fields-lines-eth-and-navier-stokes.html#prop-ch30-vortex-polygon-neutral-drift" target="_top">若尔当块与漂移</a> · <a href="../../zh/ch30-fields-lines-eth-and-navier-stokes.html#ex-ch30-vortex-octagon-spectrum" target="_top">正八边形的数值</a></p>
+    </div>
+    <div class="en">
+      <p class="lede">A sample from Chapter 30: a plane flow with no vorticity anywhere except at 2m points, each pierced by a filament, alternating in sign around a circle, each vortex also precessing about the centre. The stage draws the points themselves; the rail moves time. The page is a numerical illustration, not a proof.</p>
+      <ol>
+        <li><b>Rest.</b> The first term of the field F<sub>b,Ω</sub> makes each vortex precess about the centre, the second is the velocity the other vortices blow on it. An even ring balances the two only at the radius R = √(b/(4Ω)) (here b = 2, Ω = ½, R = 1); at another radius the two signs turn apart.</li>
+        <li><b>Divergence.</b> From the hexagon on, the linearization at the equilibrium has 2(m − 2) diverging directions, with eigenvalues λ<sub>r</sub> = Ω(m − r)√(r² − 2). A push of 10⁻⁹ along an eigenvector of r = 2 grows like e<sup>λt</sup>; the equation is smooth at the equilibrium, and the equilibrium is unstable.</li>
+        <li><b>Drift.</b> The dipole and the square have a purely imaginary spectrum, but the zero eigenvalue carries a Jordan block of size two: a push ε along c₁ has the linearized solution ε(c₁ + t c₀), which turns the whole ring at a steady rate, through the angle εt. The stage integrates the nonlinear equation; the comparison of its angle with εt is a numerical observation.</li>
+      </ol>
+      <p class="lede refs">In the book: <a href="../../en/ch30-fields-lines-eth-and-navier-stokes.html#lem-ch30-vortex-polygon-equilibrium" target="_top">the rest condition</a> · <a href="../../en/ch30-fields-lines-eth-and-navier-stokes.html#thm-ch30-vortex-polygon-spectrum" target="_top">the full spectrum</a> · <a href="../../en/ch30-fields-lines-eth-and-navier-stokes.html#prop-ch30-vortex-polygon-neutral-drift" target="_top">the Jordan block and the drift</a> · <a href="../../en/ch30-fields-lines-eth-and-navier-stokes.html#ex-ch30-vortex-octagon-spectrum" target="_top">the octagon in numbers</a></p>
+    </div>
+  </div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

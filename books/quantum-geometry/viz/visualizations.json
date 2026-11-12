@@ -324,15 +324,6 @@
       "lean": [
         {
           "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
-        },
-        {
-          "gid": "D5/S3/Observer/Conditioning.conditionalState_isState"
-        },
-        {
-          "gid": "D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation"
-        },
-        {
-          "gid": "D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation"
         }
       ]
     },
@@ -385,12 +376,6 @@
       "lean": [
         {
           "gid": "D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff"
-        },
-        {
-          "gid": "D5/S3/Observer/Reversal/QuadraticObservationClosure.observed_increment"
-        },
-        {
-          "gid": "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.mixed_witness"
         },
         {
           "gid": "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure"
@@ -2399,8 +2384,8 @@
       "code": "ORTHO//UNIFIED",
       "title": "正交自指统一场切片",
       "title_en": "A slice of the orthogonal self-referential unified field",
-      "summary": "第三十二章上半篇的三个画面：同一个角 θ = gd(η) 把固有时率 cos θ = 1/γ 与速度 sin θ = tanh η 扣在一个圆上；两个平面上的旋子来回转一圈留下 U = R₁R₂R₁⁻¹R₂⁻¹ ≠ 1 的二向量余项，同一平面里则回到原处；球面二十面体每个顶点缺 60°、共缺 720°，观察者的视界推到 90° 割断 10 条边，跨视界的施密特秩不超过 D¹⁰。",
-      "summary_en": "Three pictures from the first half of Chapter 32: one angle θ = gd(η) puts the proper-time rate cos θ = 1/γ and the speed sin θ = tanh η on one circle; rotors turning back and forth in two planes leave a bivector remainder U = R₁R₂R₁⁻¹R₂⁻¹ ≠ 1, while in one plane they come home; an icosahedron on the sphere misses 60° at each vertex and 720° in all, and the observer's horizon pushed to 90° cuts 10 edges, so the Schmidt rank across it is at most D¹⁰.",
+      "summary": "第三十二章上半篇的三个画面：同一个角 θ = gd(η) 把固有时率 cos θ = 1/γ 与速度 sin θ = tanh η 扣在一个圆上，同一个圆上弧长 θ 与影子 cos θ 只在不动点 θ* ≈ 0.739 处相等；两个平面上的旋子来回转一圈留下 U = R₁R₂R₁⁻¹R₂⁻¹ ≠ 1 的二向量余项，同一平面里则回到原处；球面二十面体每个顶点缺 60°、共缺 720°，观察者的视界推到 90° 割断 10 条边，跨视界的施密特秩不超过 D¹⁰。",
+      "summary_en": "Three pictures from the first half of Chapter 32: one angle θ = gd(η) puts the proper-time rate cos θ = 1/γ and the speed sin θ = tanh η on one circle, where the arc θ and the shadow cos θ agree only at the fixed point θ* ≈ 0.739; rotors turning back and forth in two planes leave a bivector remainder U = R₁R₂R₁⁻¹R₂⁻¹ ≠ 1, while in one plane they come home; an icosahedron on the sphere misses 60° at each vertex and 720° in all, and the observer's horizon pushed to 90° cuts 10 edges, so the Schmidt rank across it is at most D¹⁰.",
       "path": "unified-field-slice/",
       "thumbnail": "unified-field-slice/thumb.jpg",
       "status": "live",
@@ -2644,11 +2629,7 @@
           "href": "{trureturing}/D5/S3/QuantumBounds/LagrangeGramIdentity.lean"
         }
       ],
-      "lean": [
-        {
-          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
-        }
-      ]
+      "lean": []
     },
     {
       "id": "dream-decoherence-unpinning",
@@ -2937,6 +2918,57 @@
         },
         {
           "gid": "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.full_symmetry_not_fixed_line_localization"
+        }
+      ]
+    },
+    {
+      "id": "vortex-polygon",
+      "code": "ORTHO//POLYGON",
+      "title": "交错涡旋多边形 · 平衡、发散与漂移",
+      "title_en": "Alternating vortex polygons · rest, divergence and drift",
+      "summary": "第 30 章的二维样本：2m 个点涡正负相间排在圆上，每个涡旋另带一项绕原点的进动（b = 2，Ω = ½）。只在半径 R = √(b/(4Ω)) 上整圈静止，换一个半径正负涡旋就转开；从六边形起，沿本征值 λ_r = Ω(m − r)√(r² − 2) 的方向推 10⁻⁹，偏离按 e^(λt) 长大，到 t = 10 约 1177 倍；偶极与正方形的谱全在虚轴上，沿若尔当链 c₁ 推 ε，整圈仍匀速转走，转角 ≈ εt。静止半径、正实本征值与无界的线性漂移是 Lean 已验证的定理；非线性积分是数值观察。",
+      "summary_en": "A two-dimensional sample from Chapter 30: 2m point vortices of alternating sign on a circle, each also precessing about the centre (b = 2, Ω = ½). The ring rests only at the radius R = √(b/(4Ω)); at another radius the two signs turn apart. From the hexagon on, a push of 10⁻⁹ along an eigenvector of λ_r = Ω(m − r)√(r² − 2) grows like e^(λt), about 1177 times by t = 10; the dipole and the square have a purely imaginary spectrum, yet a push ε along the Jordan chain c₁ turns the whole ring steadily, through about εt. The resting radius, the positive eigenvalues and the unbounded linear drift are theorems verified in Lean; the nonlinear integration is a numerical observation.",
+      "path": "vortex-polygon/",
+      "thumbnail": "vortex-polygon/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "点涡",
+        "交错多边形",
+        "本征值",
+        "若尔当块",
+        "第 30 章"
+      ],
+      "tags_en": [
+        "point vortices",
+        "alternating polygon",
+        "eigenvalues",
+        "Jordan block",
+        "chapter 30"
+      ],
+      "theory": [
+        {
+          "label": "第 30 章 · 交错涡旋多边形的完整谱",
+          "label_en": "Chapter 30 · The full spectrum of the alternating vortex polygon",
+          "href": "../zh/ch30-fields-lines-eth-and-navier-stokes.html#thm-ch30-vortex-polygon-spectrum",
+          "href_en": "../en/ch30-fields-lines-eth-and-navier-stokes.html#thm-ch30-vortex-polygon-spectrum"
+        },
+        {
+          "label": "第 30 章 · 零本征值的若尔当块与无界漂移",
+          "label_en": "Chapter 30 · The Jordan block at zero and the unbounded drift",
+          "href": "../zh/ch30-fields-lines-eth-and-navier-stokes.html#prop-ch30-vortex-polygon-neutral-drift",
+          "href_en": "../en/ch30-fields-lines-eth-and-navier-stokes.html#prop-ch30-vortex-polygon-neutral-drift"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.regular_equilibrium_iff_radius"
+        },
+        {
+          "gid": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physical_positive_eigenvalue_iff"
+        },
+        {
+          "gid": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonCartesianChain.unbounded_linear_drift"
         }
       ]
     }

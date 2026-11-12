@@ -29,7 +29,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `sphere-escape` | 以为把球封住了，总还有一点留在外面 | `diagonal` `split` `absorb` `pointer` `liuhui` `zu` `thirteen` |
 | `pythagoras-number-escape` | 线上的误差可以趋于零，面积上的缺口至少一格 | `hippasus` `locked` `five` `seven` `count` `sato` |
 | `timeless-causal-crystal` | 两条余弦锁住第三条的窗口，观察者只能在窗口里选点 | `window` `impossible` `right` `crystal` `field` `thread` `sos` `wilderness` |
-| `navier-stokes-p-np` | 对流项拆成梯度与兰姆两半；涡管被拉细（伯格斯涡核按精确解趋向 R∞ ∝ Re^(−½)，条带小图另画 K41 统计标度，两者不互推）；只看一部分的观察者得不到闭合 | `potential` `vortex` `flat` `strain` `burgers` `runaway` `closed` `mixed` |
+| `navier-stokes-p-np` | 对流项拆成梯度与兰姆两半；涡管被拉细（伯格斯涡核按精确解趋向 R∞ ∝ Re^(−½)，条带小图另画 K41 统计标度，两者不互推）；只看一部分的观察者得不到闭合 | `vortex` `flat` `strain` `burgers` `runaway` `mixed` |
 | `eth-horizon-crossover` | 渐近更好的曲线要到视界之外才追上；单次抽样流矩阵的秩与四道割比较；过线的模态数有墙 | `human` `atoms` `cross` `constant` `bridge` `narrow` `plateau` `tail` |
 | `spatial-attractor-deja-vu` | 忘掉起点，轨道还是落回同一对翅膀，一次次经过同一处 | `forget` `return` `shrink` `dimension` `fixed` `cycle` |
 | `golden-cut-observer` | 窗口挪一挪，贴边的点翻转，深处的点留在原地 | `cut` `phason` `empire` `cassini` `returns` `narrow` `window` `gaps` `pi` |
@@ -65,7 +65,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `self-referential-table` | 同一张表，横着读是尺子，竖着读是被量的东西；拿它读它自己，读回来的还是它；碰歪一格，它自己回到一张幂等的表 | `reset` `expand_table` `full` `dual_read` `heal` `orthogonal_zero` |
 | `quantum-fairness-ledger` | 没有特权的座位：照见是相互的，得一分就失一分，满额的纠缠与副本分不出第二份，从哪里出发都分到同样的份额 | `haar` `tradeoff` `cloning` `bell` `wstate` `ghz` `ergodic` |
 | `spherical-degeneracy-radar` | 转一次与转两次，终点不同，有的观察者却读出同一个数；把这些读不出差别的人收集起来，只剩极轴上的那一对 | `meridian` `sweep` `tilted` `hops` `equator` `frames` `pullback` |
-| `unified-field-slice` | 时钟与速度是同一个圆上的线与面积；在两个平面里来回转一圈回不到原处；视界割断几条边，跨界的纠缠就封顶在那里 | `polytope` `fixedpoint` `gudermann` `photon` `abelian` `plaquette` `horizon` |
+| `unified-field-slice` | 时钟与速度是同一个圆上的线与面积；在两个平面里来回转一圈回不到原处；视界割断几条边，跨界的纠缠就封顶在那里 | `polytope` `fixedpoint` `photon` `plaquette` `horizon` |
 | `forgetting-rebirth-attractor` | 按内禀快度等步走，一格格逼近圆盘边界却永远到不了；按外部角度尺等步走，几步就撞上边界、擦表重来，绕成一只轮子 | `staircase` `klein_vs_poincare` `erase_reset` `quotient_fold` `cayley` |
 | `pointer-ontology-deref` | 一格一格扫要走遍全表；路由树每条分支只拨动根到叶的 log₂N 个开关；零号槽里写着页目录自己的地址，解引用一次就回到自己 | `qram_tree` `linear64` `superpose` `four_loops` `self_map` `diagonal_hit` |
 | `self-sustaining-spinor-flow` | 旋量夹住两块参考刀片，织出一根流向量与一块自旋面，三个平方始终相等；矢量转一圈就回来，旋量要转两圈 | `weave` `fierz` `turn360` `seam` `turn720` |
@@ -75,6 +75,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `hairy-ball-normal-escape` | 球面上贴着的箭头总留一个发旋：两个能合成一个，却消不掉；换成环面，或让箭头沿法向立起一点，才处处不为零 | `merge` `torus` `defect` `escape` |
 | `dottie-fibonacci-spirals` | 负导数把一维递推拧成北东南西的回旋方格；弯曲圆弧把加法守恒换成勾股守恒 | `twin` `whirl` `pythagoras` `tilt` `zoom` `division` |
 | `critical-mirror` | 零点四个一组，只有站在镜面上才缩成一对；对称本身锁不住零点 | `quartet` `cayley` `thin` `quartic` |
+| `vortex-polygon` | 正负相间的点涡只在一个半径上静止；从六边形起推一下就按 e^(λt) 长大，正方形的谱全在虚轴上，整圈却会匀速转走 | `rest` `radius` `hexagon` `drift` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -146,7 +147,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 `spherical-degeneracy-radar` 与 `two-angle-addressing` 的 `address`、`pole` 及 `berry-loop` 的 `octant` 分工：那几张讲从北极出发的两角寻址、极点的方位角冗余与八分球回路的面积和相位，本页讲第三十四章的“读不出差别的观察者在哪里”：琥珀色是观察者探针 O 与它的轴，青色是两个结果落在观察者轴上的影子（读数）与青色虚线的盲圈（读数相同的观察者所在的大圆），淡青色是走过的盲圈，品红是第二次转动扫过的横向面、两个结果之差与两面小旗的夹角，紫色是极轴 ±e₃ 与差旋子 D 的小盘；实心点是一次（一步）的结果，空心圈是两次（两步）的结果。旋子按该章算例在 Cl(3,0) 里逐项相乘：R₁ = (1 − e₁e₃)/√2，R₂ = ((1 − e₂e₃)/√2)((1 − e₁e₂)/√2) = exp(−π/4 e₁e₂) R₁（左乘），两者都把 +e₁ 送到 +e₃。绿色框只给第三十四章用 `lean=` 引用的四条（第四条 `observer_pullback_trace_identity` 见下文“拉回”场景）：`unit_perpendicular_pair`（与两根差向量都正交的单位向量）、`partition_inseparable_iff_kernel`（读数相同即同一纤维）与 `covariant_commutator_formula`（D 与 e₃ 对易、与 e₁ 不对易）；“简并处反演出观察者站位”标 `MODEL`；Berry—Pancharatnam 相位与虚拟 Z 门标 `ARGUED`，页面不计算；旋子乘积、读数与盲圈实算（`NUM`）。“拉回”场景（`pullback`）把 θ = 60°、φ = 90° 的两个结果绕斜轴 k（离 e₃ 60°、方位角 220°，紫色）转过 ψ 让琥珀色的观察者读，墨色虚线是态不动、观察者转回 −ψ 的 R⁻¹O；两种读法逐位相同，转轴按钮可拨到观察者自己的轴上，此时 R⁻¹O = O、读数不随 ψ 变。绿色框另给 `observer_pullback_trace_identity`，写明页面只演示单量子比特幺正信道、一步演化这一个实例（迹读数 (1 + O·v)/2），把不动效应读成一根轴所需的旋转与协变条件照正文写。路线图候选的赤道反射轴族、`chirality`、`virtual_z` 未做：正文没有反射轴族的句子，后两者分别是 `berry-loop` 的 `reverse` 与 `pulse-area-virtual-z` 的 `vz`。
 
-`unified-field-slice` 只覆盖第三十二章上半篇（§32.1–32.2；下半篇的八纲领罗盘是 `meta-unification-compass`）。三个场景共用一条时间轴：“时钟”是单位圆加双曲线 t² − x² = 1，θ = gd(η)，青色的线是 cos θ = 1/γ（固有时率），品红的高是 sin θ = tanh η（速度），紫色是弧长 θ（`fixedpoint` 卡里弧长等于影子）；“回路”是球面上的旋子换位子 U = R₁R₂R₁⁻¹R₂⁻¹，琥珀色只给参考箭头的尖端，品红是没合上的缺口，紫色是转轴；“视界”是内接于球的正二十面体，青色是视界以内的边，品红是割断的边与每个顶点缺的 60°，琥珀是视界 λ。绿色框只给本章用 `lean=` 引用的三条：`eq_smul_minkowski_of_null`、`anchored_phase_classification`（只管单一平面的圆周相位，页面写明两个平面的换位子不在其内）、`QuantumMaxFlowMinCut.result`（桥图，页面写明二十面体不是它的实例）；Gudermann 恒等式、Dottie 不动点（既有结果的应用，见第三十三章例 `ex-ch33-mutual-cosine-monotonic-lock`）、720° 角亏、换位子曲率与秩 ≤ D^|∂A| 标 `ARGUED`，线/面积/视界/相互作用源的读法标 `MODEL`。路线图候选 `mincut`（桥图）与第三十章 `eth-horizon-crossover` · `bridge` 同一画面，改为二十面体上的 `horizon`；`generations`（内部空间三轴世代）在上半篇正文里没有可引用的句子，未做。
+`unified-field-slice` 只覆盖第三十二章上半篇（§32.1–32.2；下半篇的八纲领罗盘是 `meta-unification-compass`）。四个场景共用一条时间轴：“时钟”是单位圆加双曲线 t² − x² = 1，θ = gd(η)，青色的线是 cos θ = 1/γ（固有时率），品红的高是 sin θ = tanh η（速度），紫色是弧长 θ；“不动点”（`fixedpoint` 卡）只有单位圆，时间轴是角 θ，紫色的弧长 θ 与青色的影子 cos θ 在 θ* 处等长，品红的高 sin θ 在 θ* 处读作局部压缩率而不是速度；“回路”是球面上的旋子换位子 U = R₁R₂R₁⁻¹R₂⁻¹，琥珀色只给参考箭头的尖端，品红是没合上的缺口，紫色是转轴（`plaquette` 卡是两个平面；同一个平面 U = 1 的对照由平面按钮给出，第三十二章在定理第 2 款之后改引 `lattice-gauge-loop` · `anchor`）；“视界”是内接于球的正二十面体，青色是视界以内的边，品红是割断的边与每个顶点缺的 60°，琥珀是视界 λ。绿色框只给本章用 `lean=` 引用的三条：`eq_smul_minkowski_of_null`、`anchored_phase_classification`（只管单一平面的圆周相位，页面写明两个平面的换位子不在其内）、`QuantumMaxFlowMinCut.result`（桥图，页面写明二十面体不是它的实例）；Gudermann 恒等式、Dottie 不动点（既有结果的应用，见第三十三章例 `ex-ch33-mutual-cosine-monotonic-lock`）、720° 角亏、换位子曲率与秩 ≤ D^|∂A| 标 `ARGUED`，线/面积/视界/相互作用源的读法标 `MODEL`。路线图候选 `mincut`（桥图）与第三十章 `eth-horizon-crossover` · `bridge` 同一画面，改为二十面体上的 `horizon`；`generations`（内部空间三轴世代）在上半篇正文里没有可引用的句子，未做。
 
 `forgetting-rebirth-attractor` 的舞台是单位开圆盘（两轴等比），白色圆周是第三十六章的纯光视界 θ = 90°；三个场景画在同一张圆盘上。“阶梯”：从 θ*（cos θ = θ 的根）出发，η<sub>k</sub> = η₀ + kΔη，η₀ = gd⁻¹(θ*) ≈ 0.8173；Beltrami–Klein 半径 r = sin θ = tanh η、测地线是直弦，庞加莱半径 ρ = tan(θ/2) = tanh(η/2)、测地线是与圆周正交的圆弧，两者由径向等距 ρ = r/(1 + √(1 − r²)) 连续变形；两种固有时率 √(1 − r²) 与 (1 − ρ²)/(1 + ρ²) 都等于 sech η。右侧（窄屏在右下角）的放大镜按 10 的整数次幂缩小视野，品红的缝 1 − r 按 2/(e<sup>2η</sup> + 1) 直接算，不经 1 − tanh。“轮回”：外部角度尺每步加 Δθ = θ₁ − θ*（阶梯的第一步），越过 90° 的那一步记作恰在圆周上，下一步回到圆心；一圈一根辐条，折叠后第一次撞边之后的步按“步号模周期 p”落到 p 个位置；折叠程度 f 可拖，每个点沿自己的圆转过原角度的 f 倍，灰色虚线弧是转过的路、淡色空心圈是展开时的位置（`quotient_fold` 的静态图因此看得见折叠这个动作）。原 `horizon_gap` 卡（Δη = 1.5 走到第 10 级）并入 `staircase` 的说明，靠步长滑块即可复现。“分式”：w = (s − 1)/s 下直线 Re s = c 的像圆。青色是阶梯的点、过每一级的测地线、角度尺走过的路与像圆，品红只给到边界的缝与撞上圆周的那一步（以及小图里被捏掉的相干 ½s²），琥珀只给当前一步与当前的像圆；回到圆心的虚线与辐条是中性灰。绿色框只给第三十六章用 `lean=` 引用的四条：`pinching_hilbert_schmidt_pythagorean` 与 `pinching_discarded_coherence_mass`（轮回场景，取 ρ = ½[[1 + c, s], [s, 1 − c]]）、`target_factors_iff_continuous_partition`（折叠：读出 = 步号模 p，目标 = 角度）、`cayley_ratio_norm_one_iff_critical_line`（分式场景）；逆古德曼变换、两种圆盘的度规与等距标 `ARGUED`；阶梯、擦表、轮子与“约去轮回”的读法标 `MODEL`；各数实算（`NUM`）。路线图候选的 `pinching_vonNeumannEntropy_ge`、`lorentz_boost_preserves_minkowski`、`conditionalState_isState` 不在本章的 `lean=` 引用里，未上页面；兰道尔下界 k<sub>B</sub>T ln 2 本章正文没有提到，未上页面；候选卡 `attractor_return` 与终章 `spatial-attractor-deja-vu` 重复、本章没有对应的句子，未做；正文讲到的分式临界圆补做成 `cayley`。
 
@@ -392,27 +393,27 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十九章 | 第四层第 1 条（格拉姆椭圆体）之后 | `gram-causal-elliptope` · `elliptope` |
 | 第二十九章 | 第四层第 2 条（半正定矩阵补全）之后 | `gram-causal-elliptope` · `narrow` |
 | 第二十九章 | 第四层第 2 条之后、承接句“反过来，若硬把新的内积坐标填到泡泡之外……”之后 | `gram-causal-elliptope` · `violate` |
-| 第二十九章 | 第四层观察者对照表之后 | `gram-causal-elliptope` · `flat` |
 | 第二十九章 | 第四层观察者对照表之后、承接句“表的另一端是零记忆的瞬时观察者……”之后 | `timeless-causal-crystal` · `right` |
-| 第二十九章 | 第四层末 | `timeless-causal-crystal` · `window` |
-| 第二十九章 | 定理 `thm-ch29-gram-rigidity-and-pell` 之后 | `timeless-causal-crystal` 完整实验室 |
 | 第二十九章 | 本章小结第一段之后 | `gram-causal-elliptope` 完整实验室 |
 | 第三十章 | 第一节 · 2 列表（两道几何视界）之后 | `timeless-causal-crystal` · `thread` |
 | 第三十章 | 文献注记 `rem-ch30-query-sos-literature` 之后 | `timeless-causal-crystal` · `sos` |
 | 第三十章 | “$P$ 是场，$NP$ 是线”一节 · 1 的列表（离丝寻线）之后 | `timeless-causal-crystal` · `wilderness` |
 | 第三十章 | 文献注记 `rem-ch30-karmarkar-kasteleyn-literature` 之后 | `timeless-causal-crystal` · `field` |
+| 第三十章 | “$P$ 是场，$NP$ 是线”一节末（“这八个字……”一段之后） | `timeless-causal-crystal` 完整实验室 |
 | 第三十章 | ETH 一节 · 1 末（张量关联场） | `eth-horizon-crossover` · `bridge` |
-| 第三十章 | 例 `ex-ch30-galactic-crossover-scale` 之后 | `eth-horizon-crossover` · `human`、`cross` |
+| 第三十章 | 例 `ex-ch30-galactic-crossover-scale` 之后 | `eth-horizon-crossover` · `atoms` |
 | 第三十章 | 例 `ex-ch30-galactic-crossover-scale` 后三点启示的第一条（银河算法）之后 | `eth-horizon-crossover` · `constant` |
-| 第三十章 | ETH 一节末 | `eth-horizon-crossover` · `atoms`，随后完整实验室 |
-| 第三十章 | 文献注记 `rem-ch30-lamb-decomposition-literature` 之后 | `navier-stokes-p-np` · `potential` |
+| 第三十章 | ETH 一节末 | `eth-horizon-crossover` 完整实验室 |
 | 第三十章 | 纳维—斯托克斯一节 · 1 末（兰姆恒等式） | `navier-stokes-p-np` · `vortex` |
-| 第三十章 | 文献注记 `rem-ch30-vorticity-transport-literature` 之后 | `navier-stokes-p-np` · `flat`、`strain` |
-| 第三十章 | 文献注记 `rem-ch30-navier-stokes-forced-literature` 之后、`runaway` 之前 | `navier-stokes-p-np` · `burgers` |
-| 第三十章 | 文献注记 `rem-ch30-navier-stokes-forced-literature` 之后、猜想 `conj-coda-navier-stokes-regularity` 之前 | `navier-stokes-p-np` · `runaway` |
+| 第三十章 | 文献注记 `rem-ch30-vorticity-transport-literature` 之后 | `navier-stokes-p-np` · `strain` |
+| 第三十章 | 纳维—斯托克斯一节 · 2 列表第 1 条（二维平面情形）之后、第 2 条之前 | `navier-stokes-p-np` · `flat` |
+| 第三十章 | 定理 `thm-ch30-vortex-polygon-spectrum` 的证明后“四个因子是四类运动”一段之后 | `vortex-polygon` · `hexagon` |
+| 第三十章 | 命题 `prop-ch30-vortex-polygon-neutral-drift` 的证明后“$c_0$ 是整个多边形绕原点的无穷小转动”一段之后 | `vortex-polygon` · `drift` |
+| 第三十章 | 文献注记 `rem-ch30-navier-stokes-forced-literature` 之后、猜想 `conj-coda-navier-stokes-regularity` 之前 | `navier-stokes-p-np` · `burgers` |
+| 第三十章 | 猜想 `conj-coda-navier-stokes-regularity` 之后 | `navier-stokes-p-np` · `runaway` |
 | 第三十章 | 定理 `thm-coda-quadratic-advection-no-closure` 的证明之后 | `navier-stokes-p-np` · `mixed` |
-| 第三十章 | `mixed` 之后 | `navier-stokes-p-np` · `closed` |
 | 第三十章 | 纳维—斯托克斯一节末 | `navier-stokes-p-np` 完整实验室 |
+| 第三十章 | 章末（最后一段之后） | `vortex-polygon` 完整实验室 |
 | 第三十一章 | §31.1 “丈量互易”列表之后 | `quantum-fairness-ledger` · `haar` |
 | 第三十一章 | §31.1 零免费午餐账本三项列表之后 | `quantum-fairness-ledger` · `tradeoff` |
 | 第三十一章 | §31.2 列表第 1 项（不可克隆内积判据）之后 | `quantum-fairness-ledger` · `cloning` |
@@ -426,8 +427,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十二章 | §32.2 列表第 1 条（物质旋量与狭义相对论）之后、第 2 条之前 | `unified-field-slice` · `photon` |
 | 第三十二章 | §32.2 列表第 2 条（规范相互作用与环路残差）之后、第 3 条之前 | `unified-field-slice` · `plaquette` |
 | 第三十二章 | §32.2 列表第 3 条（全息热力学引力与视界）之后、第 4 条之前 | `unified-field-slice` · `horizon` |
-| 第三十二章 | 定理 `thm-ch32-null-cone-holonomy-and-holographic-cut` 的证明之后 | `unified-field-slice` · `abelian` |
-| 第三十二章 | 文献注记 `rem-ch32-dirac-yang-mills-jacobson-literature` 之后 | `unified-field-slice` · `gudermann` |
+| 第三十二章 | 定理 `thm-ch32-null-cone-holonomy-and-holographic-cut` 的证明之后 | `lattice-gauge-loop` · `anchor` |
 | 第三十二章 | §32.2 末（文献注记 `rem-ch32-six-domain-isomorphism-table` 之后、§32.3 之前；上半篇末尾） | `unified-field-slice` 完整实验室 |
 | 第三十二章 | §32.3 三根诊断轴列表之后、“在逐一检阅四大理论阵营之前”之前 | `meta-unification-compass` · `cube` |
 | 第三十二章 | 文献注记 `rem-ch32-icosian-e8-literature` 之后，各隔一句承上启下的话 | `meta-unification-compass` · `icosians`、`e8`、`fold` |
