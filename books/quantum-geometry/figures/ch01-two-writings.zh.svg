@@ -38,7 +38,7 @@
 <path d="M224.3 116.01 L217.69 123.19 L214.55 116.31Z" class="tf-amber"/>
 <text class="tf-dim" x="176.9" y="84.88" font-size="16"><tspan font-style="italic">θ</tspan></text>
 <text class="tf-dim" x="174.99" y="203.43" font-size="16" text-anchor="middle"><tspan font-style="italic">φ</tspan></text>
-<text class="tf-amber" x="234.3" y="114.01" font-size="17"><tspan font-style="italic">a</tspan></text>
+<text class="tf-amber" x="234.3" y="114.01" font-size="17"><tspan font-weight="700" font-style="italic">a</tspan></text>
 <text class="tf-dim" x="150" y="292" font-size="14" text-anchor="middle">一支箭头 = 两个角度</text>
 </svg>
 </svg>
