@@ -148,7 +148,7 @@ $$
 Since $\mathrm{energy} > 0$ and $\hbar > 0$, multiplying both sides by $\frac{\hbar}{2\cdot\mathrm{energy}} > 0$ yields $\tau \ge \frac{\pi\hbar}{4\cdot\mathrm{energy}}$. For the indexed family, each step $i \in \mathrm{Fin}\,N$ obeys $\tau(i) \ge \frac{\pi\hbar}{4\cdot\mathrm{energy}}$ by the single-step bound; summing over $i \in \mathrm{Fin}\,N$ gives $N \cdot \frac{\pi\hbar}{4\cdot\mathrm{energy}} \le \sum_{i \in \mathrm{Fin}\,N} \tau(i) \le T$, and multiplying by $\frac{4\cdot\mathrm{energy}}{\pi\hbar} > 0$ yields [`record_count_upper_bound`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.record_count_upper_bound): $N \le \frac{4\cdot\mathrm{energy}\cdot T}{\pi\hbar}$. The full proof is checked by the Lean kernel.
 :::
 
-[@thm-fubini-study-record-time] makes the relationship between quantum area and classical time crystal clear: two-dimensional quantum area rotates at angular rate $\mathrm{energy}/\hbar$, while the discrete tick count $N$ of a classical clock simply counts how many orthogonal $\pi/2$ walls have been crossed!
+[@thm-fubini-study-record-time] expresses the conversion between “classical time” and “quantum time” as a conditional geometric constraint: two legs from a common anchor, each limited by a speed bound $\mathrm{energy}/\hbar$, must together span the orthogonal wall. Here $\mathrm{energy}>0$ is an upper-bound parameter, with no automatic identification as a system's actual energy. The preparation and evolution must be specified before this picture of “orthogonal tokens” can describe a concrete clock.
 
 The $\mathrm{energy}$ of the theorem is an abstract speed parameter. Replacing it by the energy fluctuation of a concrete Hamiltonian shows when the bound is attained, when it is not, and how long a real qubit takes to cross the wall once.
 
@@ -216,7 +216,7 @@ $$
 \tau_\perp = \frac{\pi\hbar}{E} = \frac{1}{2f} = 100\,\mathrm{ps} .
 $$
 
-By the counting bound of [@thm-fubini-study-record-time] with $\mathrm{energy} = \Delta H = \frac{hf}{2}$, within $T = 25\,\mathrm{ns}$ one has $N \le \frac{4\cdot\mathrm{energy}\cdot T}{\pi\hbar} = 4fT = 500$. Under drive the situation differs: [@ex-five-ghz-pi-over-two] of [Chapter 11](ch11-pulses-and-virtual-z.md) removes the carrier in the rotating frame, the energy scale of the effective Hamiltonian is the Rabi frequency $\Omega = 2\pi \times 10\,\mathrm{MHz}$, the initial state $\lvert 0\rangle$ has $\Delta H = \frac{\hbar\Omega}{2}$, and the orthogonalization time is $\tau_\perp = \frac{\pi}{\Omega} = 50\,\mathrm{ns}$, exactly twice the $25\,\mathrm{ns}$ quarter turn computed there. These two preparation-and-evolution protocols have orthogonalization times differing by a factor of five hundred. Each must be evaluated using its evolution generator and specified readout reference.
+By the counting bound of [@thm-fubini-study-record-time] with $\mathrm{energy} = \Delta H = \frac{hf}{2}$, provided each step satisfies the common-preparation and two-endpoint displacement assumptions and the sequential contact budget, within $T = 25\,\mathrm{ns}$ one has $N \le \frac{4\cdot\mathrm{energy}\cdot T}{\pi\hbar} = 4fT = 500$. Under drive the situation differs: [@ex-five-ghz-pi-over-two] of [Chapter 11](ch11-pulses-and-virtual-z.md) removes the carrier in the rotating frame, the energy scale of the effective Hamiltonian is the Rabi frequency $\Omega = 2\pi \times 10\,\mathrm{MHz}$, the initial state $\lvert 0\rangle$ has $\Delta H = \frac{\hbar\Omega}{2}$, and the orthogonalization time is $\tau_\perp = \frac{\pi}{\Omega} = 50\,\mathrm{ns}$, exactly twice the $25\,\mathrm{ns}$ quarter turn computed there. These two preparation-and-evolution protocols have orthogonalization times differing by a factor of five hundred. Each must be evaluated using its evolution generator and specified readout reference.
 :::
 
 ::: {.viz src="speed-limit-zeno" preset="three" height="500"}
@@ -228,6 +228,7 @@ The three-level state arrives late but does reach the wall; once the two-level w
 ::: {.viz src="speed-limit-zeno" preset="unequal" height="500"}
 **Uneven weights: the wall is out of reach.** Weight angle $\alpha = 30^\circ$: on the left a long cyan arrow of $0.75$ and a short one of $0.25$ never cancel, and the amber dot comes no closer to the magenta centre than $0.5 = \lvert\cos 2\alpha\rvert$. On the right the angle rises to $2\alpha = 60^\circ$ at most and never touches the magenta wall.
 :::
+
 
 ## 7.3 The Quantum Zeno Effect: Exterior-Area Evolution Frozen by High-Frequency Inner-Product Measurements {#sec-quantum-zeno-effect}
 
@@ -484,13 +485,121 @@ By definition, $0 < \Delta E_{\mathrm{pass}} - \frac{\Delta S}{\beta}$ holds if 
 :::
 
 ::: {.remark #rem-qsl-zeno-literature title="Mandelstam–Tamm, Margolus–Levitin Dynamical Speed Limits, and the Misra–Sudarshan Zeno Theorem (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** In this chapter, [@thm-fubini-study-record-time] derives $\tau \ge \frac{\pi\hbar}{4\cdot\mathrm{energy}}$ and $N \le \frac{4\cdot\mathrm{energy}\cdot T}{\pi\hbar}$ in Lean 4 from the Fubini–Study spherical triangle inequality [`fs_angle_triangle`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle) taking the single-leg displacement bound $\theta_{\mathrm{FS}}(a, m_k) \le \mathrm{energy}\cdot\tau/\hbar$ as an explicit hypothesis. In the quantum-dynamics literature, the differential derivation of those displacement bounds and the continuous Zeno limit are established in three classic theorems:
+**Literature result, not formalized in this book.** In this chapter, [@thm-fubini-study-record-time] derives $\tau \ge \frac{\pi\hbar}{4\cdot\mathrm{energy}}$ and $N \le \frac{4\cdot\mathrm{energy}\cdot T}{\pi\hbar}$ in Lean 4 from the Fubini–Study spherical triangle inequality [`fs_angle_triangle`](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle) taking the single-leg displacement bound $\theta_{\mathrm{FS}}(a, m_k) \le \mathrm{energy}\cdot\tau/\hbar$ as an explicit hypothesis. We first derive the global displacement bound for autonomous pure-state evolution, then give the related classical references and the scope of the Zeno limit.
 
-1. **Mandelstam–Tamm energy-variance speed limit (L. Mandelstam & I. Tamm, 1945)**: In *The uncertainty relation between energy and time in non-relativistic quantum mechanics* (J. Phys. USSR **9**, 249–254, 1945) and the Anandan–Aharonov geometric formulation (Phys. Rev. Lett. **65**, 1697, 1990), the instantaneous Fubini–Study speed along a Schrödinger trajectory equals the energy standard deviation divided by $\hbar$, $\frac{ds_{\mathrm{FS}}}{dt} = \frac{\Delta H}{\hbar}$. Integrating across the orthogonal separation $\theta_{\mathrm{FS}} = \frac{\pi}{2}$ yields the minimum orthogonalization time
-   $$
-   \tau_\perp \ge \frac{\pi\hbar}{2\,\Delta H}.
-   $$
-   Choosing the anchor $a$ in [@thm-fubini-study-record-time] at the geodesic midpoint between $m_0$ and $m_1$ (each half-leg of length $\frac{\pi}{4}$) with $\mathrm{energy} = \Delta H$ matches this bound directly.
+**Autonomous orbits: from two levels to arbitrary finite dimension.** The two-level orbit of [@ex-orthogonalization-times] already exposes the mechanism. In the energy basis, $A=\begin{pmatrix}0&0\\0&E\end{pmatrix}$; the initial state is an equal superposition, and evolution multiplies its second component by $e^{-iEt/\hbar}$. Removing the common phase generated by the mean energy $\mu=E/2$ leaves two components rotating with opposite phases and fluctuation $\Delta=E/2$. Until first orthogonality, the angle equals $\Delta t/\hbar$. Beyond it, $\arccos|\cos(Et/(2\hbar))|$ turns back while the distance travelled keeps increasing. A global speed bound controls the endpoint angle at every time; it does not require that angle to increase monotonically.
+
+Now take any finite-dimensional complex inner-product space $E$, a self-adjoint continuous complex-linear operator $A:E\to E$, a unit initial state $\psi$, and $\hbar>0$. Here $E$ denotes the space, rather than the preceding example's energy gap. The inner product is linear in its second argument. Define the mean energy, centered fluctuation, and actual evolution for this same preparation by
+
+$$
+\begin{aligned}
+\mu&=\operatorname{Re}\langle\psi,A\psi\rangle,\\
+\Delta&=\norm{A\psi-(\mu:\mathbb C)\psi},\\
+\psi_t&=\exp\!\left(\frac{-it}{\hbar}A\right)\psi
+\qquad(t\in\mathbb R).
+\end{aligned}
+$$
+
+Self-adjointness makes the energy expectation real, with $\Delta^2=\langle\psi,A^2\psi\rangle-\mu^2$. Thus $\Delta$ is the energy standard deviation of this Hamiltonian in this initial state, rather than an operator norm. The classical Mandelstam–Tamm angle bound is
+
+$$
+\arccos\bigl|\langle\psi,\psi_t\rangle\bigr|
+\le \frac{|t|\Delta}{\hbar}
+\qquad\text{for every }t\in\mathbb R.
+$$
+
+The projective angle here is precisely the arccosine of the overlap modulus, with no extra factor of $2$. See S. Deffner and S. Campbell, *Quantum speed limits: from Heisenberg's uncertainty principle to optimal quantum control*, J. Phys. A: Math. Theor. **50**, 453001 (2017), [arXiv:1705.08023v2](https://arxiv.org/abs/1705.08023v2), §2.5, Eqs. (23), (28)–(33), [DOI:10.1088/1751-8121/aa86c6](https://doi.org/10.1088/1751-8121/aa86c6). We spell out the autonomous pure-state case below, including its endpoints.
+
+**Remove the phase that leaves the projective state unchanged.** Let $I$ be the identity operator and set
+
+$$
+\begin{aligned}
+B&=A-\mu I,& G&=-iB/\hbar,\\
+v(t)&=e^{tG}\psi,& w(t)&=v'(t)=Gv(t),\\
+c&=\Delta/\hbar.&
+\end{aligned}
+$$
+
+Since $B$ is self-adjoint and $G^*=-G$, $e^{tG}$ is unitary and commutes with $B$. Hence
+
+$$
+\begin{aligned}
+\norm{v(t)}&=1,\\
+\norm{w(t)}&=\norm{e^{tG}G\psi}=c,\\
+\langle v(t),w(t)\rangle
+&=-\frac{i}{\hbar}\langle\psi,B\psi\rangle=0.
+\end{aligned}
+$$
+
+The last equality says that the velocity has no phase component along the state itself: the motion is horizontal. The first two say that it moves on the unit sphere at constant speed $c$.
+
+**Project the velocity onto the real overlap.** Write $r(t)=\operatorname{Re}\langle\psi,v(t)\rangle$, so $-1\le r(t)\le1$ and $r(0)=1$. Regard the complex space as a real inner-product space. Subtracting the real projection along $v(t)$ leaves $\psi-r(t)v(t)$, with
+
+$$
+\norm{\psi-r(t)v(t)}^2=1-r(t)^2.
+$$
+
+Since $\langle v,w\rangle=0$, Cauchy–Schwarz gives
+
+$$
+\begin{aligned}
+|r'(t)|
+&=\bigl|\operatorname{Re}\langle\psi-r(t)v(t),w(t)\rangle\bigr|\\
+&\le c\sqrt{1-r(t)^2}.
+\end{aligned}
+$$
+
+**Integrate without excluding endpoints.** Differentiating $\arccos r$ directly would introduce a zero denominator at $r=\pm1$. Instead fix $0\le q<1$ and use $f_q(t)=\arccos(qr(t))$. Its denominator is everywhere strictly positive, and
+
+$$
+\begin{aligned}
+|f_q'(t)|
+&=\frac{q|r'(t)|}{\sqrt{1-q^2r(t)^2}}\\
+&\le c\frac{q\sqrt{1-r(t)^2}}{\sqrt{1-q^2r(t)^2}}
+\le c.
+\end{aligned}
+$$
+
+The last step uses $q^2(1-r^2)\le1-q^2r^2$, equivalently $q^2\le1$. The mean value theorem between $0$ and any real $t$ yields
+
+$$
+|f_q(t)-f_q(0)|\le c|t|,
+\qquad f_q(0)=\arccos q.
+$$
+
+Take $q=n/(n+1)$ for $n\in\mathbb N$ and let $n\to\infty$. Continuity of $\arccos$ on the closed interval $[-1,1]$ gives $\arccos r(t)\le c|t|$. No division at a sphere endpoint occurs, and no displacement bound has been assumed in deriving it.
+
+**Restore the actual Hamiltonian evolution.** Since $A=B+\mu I$,
+
+$$
+\begin{aligned}
+\psi_t&=e^{-i\mu t/\hbar}v(t),\\
+r(t)&\le|\langle\psi,v(t)\rangle|
+=|\langle\psi,\psi_t\rangle|.
+\end{aligned}
+$$
+
+The scalar phase has modulus $1$. The decreasing nature of $\arccos$ now gives the claimed global bound. It includes $t=0$, negative times, arbitrarily large real times, and overlap modulus $0$ or $1$. The left side always lies in $[0,\pi/2]$; at long times the right side may exceed $\pi/2$, with no need to truncate the time domain. If $\Delta=0$, then $B\psi=0$ and $v(t)=\psi$: actual evolution changes only the common phase, the projective angle stays zero, and orthogonality is impossible. If $\Delta>0$ and orthogonality is reached after a nonnegative physical duration $\tau_\perp$, then
+
+$$
+\tau_\perp\ge\frac{\pi\hbar}{2\Delta}.
+$$
+
+**Connecting to the conditional record-time theorem.** [@thm-fubini-study-record-time] needs two displacement bounds from the same unit anchor $a$ to orthogonal endpoints $m_0,m_1$. One sufficient realization specifies, for each $k=0,1$, an autonomous self-adjoint Hamiltonian $A_k$ on the finite-dimensional space, evolving from the same preparation $a$ to $m_k$ at time $t_k$, up to a scalar phase of modulus one, with
+
+$$
+\begin{aligned}
+\mu_k&=\operatorname{Re}\langle a,A_ka\rangle,\\
+\Delta_k&=\norm{A_ka-\mu_k a}\le\mathrm{energy},\\
+|t_k|&\le\tau,\qquad \mathrm{energy}>0.
+\end{aligned}
+$$
+
+The bound in this remark then gives $\theta_{\mathrm{FS}}(a,m_k)\le\mathrm{energy}\cdot\tau/\hbar$ for each endpoint. Only with actual orthogonality of the two endpoints does the conditional theorem yield $\tau\ge\pi\hbar/(4\cdot\mathrm{energy})$. Using matching symbols in two formulas, or merely choosing a geometric midpoint, cannot supply the trajectories, preparation, and common resource bound. The equal-weight two-level orbit above supplies a particular realization: take its temporal midpoint as anchor, with the two endpoints on opposite half-orbits and $\tau=\tau_\perp/2$. The half-orbit factor $\pi/4$ is thus consistent with the full-orbit factor $\pi/2$.
+
+Counting records independently requires the total contact budget $\sum_i\tau(i)\le T$. When sequential, nonoverlapping contact intervals justify that physical budget, their timing must be checked separately; the angle bound does not establish it. The result here is a literature speed bound for the specified finite-dimensional autonomous Hamiltonian, with no claim for arbitrary open, driven, or unbounded dynamics or for a universal clock tick. It computes no full monitored first-return mean and supplies neither the spectral counting nor the operator-summation steps missing in [@prob-monitored-spectral-mean].
+
+1. **Mandelstam–Tamm energy-variance speed limit (L. Mandelstam & I. Tamm, 1945)**: *The uncertainty relation between energy and time in non-relativistic quantum mechanics* (J. Phys. USSR **9**, 249–254, 1945) and the projective formulation of Anandan and Aharonov (Phys. Rev. Lett. **65**, 1697, 1990) provide the classical background to the derivation above. The orbit has path-length speed $\Delta H/\hbar$. A general orbit need not follow a geodesic, but its endpoint geodesic angle cannot exceed its length. The exact locator in the Deffner–Campbell review appears above.
 2. **Margolus–Levitin mean-energy speed limit (N. Margolus & L. B. Levitin, 1998)**: In *The maximum speed of dynamical evolution* (Physica D **120**, 188–195, 1998), bounding the spectral expansion via $\cos x \ge 1 - \frac{2}{\pi}(x + \sin x)$ shows that the mean energy $\langle H\rangle$ above the ground state $E_0 = 0$ imposes the complementary bound
    $$
    \tau_\perp \ge \frac{\pi\hbar}{2\,\langle H\rangle}.
