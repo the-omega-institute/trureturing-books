@@ -21,11 +21,12 @@ en = "A bilingual monograph and self-contained textbook uniting physical intuiti
 
 [outputs]
 html = true
-pdf = ["screen", "print"]
+pdf = ["screen", "print", "academic"]
 epub = true
 
 [pdf]
 paper = "a4"
+academic_paper = "iso-b5"
 
 [epub]
 embed_fonts = false
