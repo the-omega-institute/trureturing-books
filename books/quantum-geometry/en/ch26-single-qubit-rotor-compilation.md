@@ -371,7 +371,7 @@ Let us verify the compiled multivector coefficients and rotated basis vectors on
 :::
 
 ::: {.viz src="zyz-compile" preset="t" height="500"}
-**The $T$ gate: the middle turn is zero.** For $(\alpha, \beta, \gamma) = (\pi/4, 0, 0)$ the first two angles vanish, and neither the amber arrow nor the white tripod moves; the last turn is $45^\circ$ about the violet $z$ axis, the arrow runs $45^\circ$ along the equator from $e_1$, $Re_3$ stays at the north pole, and the rotor at the top is $0.924 - 0.383\,e_1e_2$.
+**The $T$ gate: $\gamma$ and $\beta$ are zero.** For $(\alpha, \beta, \gamma) = (\pi/4, 0, 0)$ the two turns that act first, $\gamma$ and $\beta$, have zero angle, and neither the amber arrow nor the white tripod moves; the last turn is $45^\circ$ about the violet $z$ axis, the arrow runs $45^\circ$ along the equator from $e_1$, $Re_3$ stays at the north pole, and the rotor at the top is $0.924 - 0.383\,e_1e_2$.
 :::
 
 ::: {.viz src="zyz-compile" preset="h" height="500"}

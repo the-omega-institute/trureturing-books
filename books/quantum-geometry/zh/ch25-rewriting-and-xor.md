@@ -190,6 +190,11 @@ $$
   I_3^2 = (e_1 e_2 e_3)(e_1 e_2 e_3) = (-1)^3 e_1^2 e_2^2 e_3^2 = -1!
   $$
   在复化矩阵表示 $e_1 \mapsto X, e_2 \mapsto Y, e_3 \mapsto Z, I_3 \mapsto i I_2$ 下，赤道双矢量 $e_1 e_2$ 恰等于 $I_3 e_3 \leftrightarrow iZ$（同理 $e_2 e_3 = I_3 e_1 \leftrightarrow iX$，$e_3 e_1 = -e_1 e_3 = I_3 e_2 \leftrightarrow iY$）。
+
+::: {.viz src="blade-multiplication" preset="pseudo" height="500"}
+**伪标量的平方：I₃ · I₃ = −1。** 三位全部抵掉（⊕ 那一行三个青色的叉）；右栏里品红的交叉共 0 + 1 + 2 = 3 次，是奇数，结果是 −1。紫色框住的 I₃ 那一行与那一列逐格相同：I₃ 与每块刀片对易。
+:::
+
 - **两比特辛泡利字（2-bit symplectic Pauli encoding `pauli(x, z, phase)`）**：在第四部稳定子码与本章 [@thm-qubit-weyl-star] 的外尔对语言里，人们常把由两个反对易对合生成元（记作 $X_{\mathrm{sym}}$ 与 $Z_{\mathrm{sym}}$）生成的二元泡利词编码为两比特辛向量 $(x, z) \in \{0, 1\}^2$。在下面的 `GeometricState.pauli(x, z, phase)` 方法中，我们将辛比特 $x \in \{0,1\}$ 绑定到第 $0$ 位（刀片 $e_1$，掩码 `1`），将辛比特 $z \in \{0,1\}$ 绑定到第 $1$ 位（刀片 $e_2$，掩码 `2`），即
   $$
   \mathrm{mask}(x, z) = x \;\texttt{|}\; (z \ll 1) \in \{0, 1, 2, 3\}.
@@ -198,10 +203,6 @@ $$
   $$
   \operatorname{pauli}(1, 0) \cdot \operatorname{pauli}(0, 1) = e_1 e_2 = -\operatorname{pauli}(0, 1) \cdot \operatorname{pauli}(1, 0)!
   $$
-
-::: {.viz src="blade-multiplication" preset="pseudo" height="500"}
-**伪标量的平方：I₃ · I₃ = −1。** 三位全部抵掉（⊕ 那一行三个青色的叉）；右栏里品红的交叉共 0 + 1 + 2 = 3 次，是奇数，结果是 −1。紫色框住的 I₃ 那一行与那一列逐格相同：I₃ 与每块刀片对易。
-:::
 
 此外，对任意 $k$-阶刀片（$k = \operatorname{popcount}(m)$），把因子顺序完全颠倒的**逆序共轭（reversion）** $\widetilde{E}_m$ 需要做 $\frac{k(k-1)}{2}$ 次相邻对换，符号为 $(-1)^{k(k-1)/2}$：对 $k \in \{0, 1\}$ 为 $+1$，对 $k \in \{2, 3\}$ 为 $-1$。
 
