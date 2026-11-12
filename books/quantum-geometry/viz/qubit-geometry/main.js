@@ -14,7 +14,7 @@
   const AXIS_NAME = { x: 'x̂', y: 'ŷ', z: 'ẑ', h: 'ĥ' };
   const GATES = { X: ['x', 180], Y: ['y', 180], Z: ['z', 180], H: ['h', 180], S: ['z', 90], T: ['z', 45] };
   const PERP = { z: [[1, 0, 0], [0, 1, 0]], x: [[0, 1, 0], [0, 0, 1]], y: [[0, 0, 1], [1, 0, 0]] };   // fringe-phase frame about A
-  const S = { theta: 60, phi: 40, axis: 'z', gates: [], turnAxis: 'z', alpha: 90 };
+  const S = { theta: 60, phi: 40, axis: 'z', gates: [], turnAxis: 'z', alpha: 90, poles: false };   // poles: the SIX POLES reading (kept while B is dragged)
   const qOf = (n, a) => { const s = Math.sin(a / 2); return [Math.cos(a / 2), n[0] * s, n[1] * s, n[2] * s]; };
   const qMul = (a, b) => [
     a[0] * b[0] - a[1] * b[1] - a[2] * b[2] - a[3] * b[3], a[0] * b[1] + a[1] * b[0] + a[2] * b[3] - a[3] * b[2],
@@ -66,8 +66,15 @@
     const st = stage, c = st.begin(), now = read(clock.t), n = S.gates.length;
     st.sphere(1, { lat: [0], lon: 2 });
     for (const k of ['x', 'y', 'z']) st.line(v3.scale(AXES[k], -1.16), v3.scale(AXES[k], 1.16), { color: P.faint, width: 1, alpha: 0.9, back: 0.5 });
-    st.tag('k0', [0, 0, 1.27], '|0⟩', 'num'); st.tag('k1', [0, 0, -1.27], '|1⟩', 'num');
-    st.tag('kp', [1.27, 0, 0], '|+⟩', 'num'); st.tag('ki', [0, 1.27, 0], '|+i⟩', 'num');
+    // pole names, except where B's own label sits on top of one
+    const poleTag = (key, v, txt) => { if (v3.len(v3.sub(v3.scale(v, 1 / 1.27), now.r)) > 0.2) st.tag(key, v, txt, 'num'); };
+    poleTag('k0', [0, 0, 1.27], '|0⟩'); poleTag('k1', [0, 0, -1.27], '|1⟩');
+    poleTag('kp', [1.27, 0, 0], '|+⟩'); poleTag('ki', [0, 1.27, 0], '|+i⟩');
+    if (S.poles) {
+      // the six poles: three antipodal pairs on the axes
+      poleTag('km', [-1.27, 0, 0], '|−⟩'); poleTag('kmi', [0, -1.27, 0], '|−i⟩');
+      for (const v of [[0, 0, 1], [0, 0, -1], [1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0]]) st.dot(v, 3.2, P.dim, { ring: true });
+    }
     // the path of B: travelled (solid) and still to come (dashed)
     const path = (a, b) => { const pts = []; for (let i = 0, m = Math.max(2, Math.ceil((b - a) * 40)); i <= m; i++) pts.push(at(a + (b - a) * i / m).r); return pts; };
     if (n && clock.t < n) st.path(path(clock.t, n), { color: P.amber, width: 1, alpha: 0.45, dash: [3, 5], back: 0.35 });
@@ -81,11 +88,11 @@
       st.tag('gax', v3.scale(g.n, -1.2), `${g.name} · ${AXIS_NAME[g.ax]}`, 'raw c-vi', { dx: 30 });
     }
     // the area: the rectangle spanned by A and the part of B perpendicular to A
-    if (now.area > 1e-3) st.poly([[0, 0, 0], now.A, v3.add(now.A, now.perp), now.perp], { fill: P.magenta, alpha: 0.2, color: P.magenta, strokeAlpha: 0.55 });
+    if (now.area > 1e-3 && !S.poles) st.poly([[0, 0, 0], now.A, v3.add(now.A, now.perp), now.perp], { fill: P.magenta, alpha: 0.2, color: P.magenta, strokeAlpha: 0.55 });
     // the ruler A, the line (shadow of B on A), the perpendicular leg, the state B
     st.line(v3.scale(now.A, -1), now.A, { color: P.cyan, width: 1, alpha: 0.5, back: 0.5 });
     st.arrow([0, 0, 0], now.A, { color: P.cyan, width: 1.4, alpha: 0.75, headSize: 9 });
-    st.line(now.foot, now.r, { color: P.magenta, width: 2.2, back: 0.6 });
+    if (!S.poles) st.line(now.foot, now.r, { color: P.magenta, width: 2.2, back: 0.6 });
     c.save(); c.shadowColor = P.cyan; c.shadowBlur = 10;
     st.line([0, 0, 0], now.foot, { color: P.cyan, width: 4.5, back: 0.7 });
     c.restore();
@@ -96,19 +103,48 @@
     // B's label sits a fixed 18 px beyond the tip on screen, also when B points almost at or away from the viewer
     const tip = st.p(now.r), ox = tip[0] - st.cx, oy = tip[1] - st.cy, ol = Math.hypot(ox, oy);
     st.tag('B', now.r, 'B', 'hot', ol > 0.5 ? { dx: 18 * ox / ol, dy: 18 * oy / ol } : { dy: -18 });
-    if (Math.abs(now.line) > 0.06) st.tag('ln', v3.scale(now.foot, 0.5), `${L('线', 'line')} ${fix(now.line, 2)}`, 'num c-cy', { dx: -34 });
-    if (now.area > 0.08) st.tag('ar', v3.add(now.foot, v3.scale(now.perp, 0.5)), `${L('面积', 'area')} ${fix(now.area, 2)}`, 'num c-mg', { dy: -16 });
+    if (Math.abs(now.line) > 0.06 && !S.poles) st.tag('ln', v3.scale(now.foot, 0.5), `${L('线', 'line')} ${fix(now.line, 2)}`, 'num c-cy', { dx: -34 });
+    if (now.area > 0.08 && !S.poles) st.tag('ar', v3.add(now.foot, v3.scale(now.perp, 0.5)), `${L('面积', 'area')} ${fix(now.area, 2)}`, 'num c-mg', { dy: -16 });
     st.end();
+    drawRotorInset(c, now);
     const g = now.k < n ? S.gates[now.k] : null;
     $('hudBig').textContent = `θ(A,B) = ${fix(now.angle, 1)}°`;
-    $('hudSub').innerHTML = !n ? (TRV.still ? L(`线 cos θ = ${fix(now.line, 2)} · 面积 sin θ = ${fix(now.area, 2)}`, `line cos θ = ${fix(now.line, 2)} · area sin θ = ${fix(now.area, 2)}`) : L('还没有门：拖动 B，或选一张实验卡', 'No gates yet: drag B, or pick an experiment'))
+    const b2 = now.r[2];
+    $('hudSub').innerHTML = S.poles && !n ? L(`ρ<sub>B</sub> 的对角元 (1 ± b₂)/2 = ${fix((1 + b2) / 2, 2)} · ${fix((1 - b2) / 2, 2)}`, `diagonal of ρ<sub>B</sub>, (1 ± b₂)/2 = ${fix((1 + b2) / 2, 2)} · ${fix((1 - b2) / 2, 2)}`)
+      : !n ? (TRV.still ? L(`线 cos θ = ${fix(now.line, 2)} · 面积 sin θ = ${fix(now.area, 2)}`, `line cos θ = ${fix(now.line, 2)} · area sin θ = ${fix(now.area, 2)}`) : L('还没有门：拖动 B，或选一张实验卡', 'No gates yet: drag B, or pick an experiment'))
       : (g ? (g.total
         // a turn longer than 180° rides the rail in pieces: report the whole turn and how much of it is done
         ? L(`${g.name}：绕 ${AXIS_NAME[g.ax]} 共转 ${fix(g.total, 0)}°，已转 ${fix(g.before + g.deg * now.f, 0)}°`, `${g.name}: a ${fix(g.total, 0)}° turn about ${AXIS_NAME[g.ax]}, ${fix(g.before + g.deg * now.f, 0)}° done`)
         : L(`第 ${now.k + 1} / ${n} 门 ${g.name}：绕 ${AXIS_NAME[g.ax]} 转 ${g.deg}°，已转 ${fix(g.deg * now.f, 0)}°`, `Gate ${now.k + 1} of ${n}, ${g.name}: a ${g.deg}° turn about ${AXIS_NAME[g.ax]}, ${fix(g.deg * now.f, 0)}° done`))
         : (S.gates[n - 1].total && Math.abs(S.gates[n - 1].total - n * S.gates[n - 1].deg) < 1e-9
           ? L(`转完：绕 ${AXIS_NAME[S.gates[0].ax]} 共转 ${fix(S.gates[0].total, 0)}°`, `Turn complete: ${fix(S.gates[0].total, 0)}° about ${AXIS_NAME[S.gates[0].ax]}`)
-          : L(`线路走完：${n} 个门`, `End of the circuit: ${n} gate${n > 1 ? 's' : ''}`))) + ` · ${L('旋子 w', 'rotor w')} = <b class="c-vi">${sgn(now.q[0], 2)}</b>`;
+          : L(`线路走完：${n} 个门`, `End of the circuit: ${n} gate${n > 1 ? 's' : ''}`))) + (S.hideW ? '' : ` · ${L('旋子 w', 'rotor w')} = <b class="c-vi">${sgn(now.q[0], 2)}</b>`);
+  }
+  /** One long turn about a fixed axis (a custom turn of 360° or more, laid on the rail in pieces): a small plot on the
+      stage of the rotor's scalar part w = cos(α/2) against the angle turned, so that a still shows where w comes back. */
+  function drawRotorInset(c, now) {
+    const gs = S.gates;
+    if (!gs.length || !(gs[0].total >= 360) || gs.some((g) => g.total !== gs[0].total || g.ax !== gs[0].ax)) return;
+    const total = gs[0].total, done = gs.length ? Math.min(total, (now.k < gs.length ? gs[now.k].before + gs[now.k].deg * now.f : total)) : 0;
+    const W = c.canvas.clientWidth, H = c.canvas.clientHeight, thumb = TRV.thumbMode;
+    const w = Math.min(190, W * 0.36), h = Math.min(86, H * 0.2), x0 = W - w - 40, y0 = H - h - 40;
+    const X = (a) => x0 + w * a / total, Y = (v) => y0 + h / 2 - (h / 2 - 6) * v;
+    c.save();
+    c.strokeStyle = P.faint; c.lineWidth = 1; c.globalAlpha = 0.8;
+    c.beginPath(); c.moveTo(x0, Y(0)); c.lineTo(x0 + w, Y(0)); c.stroke();
+    for (let a = 0; a <= total + 1e-9; a += 360) { c.beginPath(); c.moveTo(X(a), y0); c.lineTo(X(a), y0 + h); c.setLineDash([2, 3]); c.stroke(); c.setLineDash([]); }
+    c.globalAlpha = 1; c.strokeStyle = P.violet; c.lineWidth = thumb ? 3 : 1.8; c.beginPath();
+    for (let i = 0; i <= 120; i++) { const a = total * i / 120, px = X(a), py = Y(Math.cos(a * DEG / 2)); i ? c.lineTo(px, py) : c.moveTo(px, py); }
+    c.stroke();
+    c.fillStyle = P.amber; c.beginPath(); c.arc(X(done), Y(Math.cos(done * DEG / 2)), thumb ? 5 : 4, 0, 2 * Math.PI); c.fill();
+    if (!thumb) {
+      c.font = '12px "JetBrains Mono", monospace'; c.fillStyle = P.ink; c.textBaseline = 'top'; c.textAlign = 'center';
+      for (let a = 0; a <= total + 1e-9; a += 360) c.fillText(`${a}°`, X(a), y0 + h + 3);
+      c.textAlign = 'left'; c.textBaseline = 'bottom'; c.fillStyle = P.violet;
+      c.fillText(`w = cos(α/2)`, x0, y0 - 2);
+      c.textAlign = 'right'; c.fillStyle = P.ink; c.fillText('+1', x0 - 3, Y(1) + 6); c.fillText('−1', x0 - 3, Y(-1) + 6);
+    }
+    c.restore();
   }
 
   /* ---------- strip: what a detector sees; the line and the rotor along the circuit ---------- */
@@ -146,7 +182,7 @@
   /* ---------- readouts, circuit tape ---------- */
   function drawText() {
     const now = read(clock.t), n = S.gates.length, l2 = now.line * now.line, a2 = now.area * now.area;
-    $('roSum').innerHTML = `<span class="c-cy">${fix(l2, 3)}</span> + <span class="c-mg">${fix(a2, 3)}</span> = ${fix(l2 + a2, 3)} <span class="okmark">✓</span>`;
+    $('roSum').innerHTML = `<span class="c-cy">${fix(l2, 3)}</span> + <span class="c-mg">${fix(a2, 3)}</span> = ${fix(l2 + a2, 3)} ✓`;
     $('roSumSub').textContent = L('影子的平方加面积的平方，总是 1', 'shadow squared plus area squared is always 1');
     $('roLine').textContent = sgn(now.line, 3); $('roArea').textContent = fix(now.area, 3);
     $('roP0').innerHTML = `${fix(now.p0, 3)} <small>= cos²(θ/2)</small>`; $('roVis').innerHTML = `${fix(now.area, 3)} <small>= sin θ</small>`;
@@ -210,7 +246,7 @@
     clock.playing = false; $('play').disabled = !n; $('rew').disabled = !n; $('now').disabled = !n; $('undo').disabled = !n; $('clear').disabled = !n;
     clock.setMax(n || 1, true); clock.set(Math.min(tau == null ? n : tau, n));
   }
-  function touched() { cards.mark(null); rebuild(); paint(); }
+  function touched() { S.hideW = false; cards.mark(null); rebuild(); paint(); }
   /** Append a turn of `deg` degrees about axis `ax`, in pieces of at most 180° so that the rail moves at an even pace. */
   function addTurn(ax, deg, name) {
     const pieces = Math.ceil(deg / 180 - 1e-9), each = deg / pieces;
@@ -218,6 +254,7 @@
     return pieces;
   }
   function appendAndPlay(fn) {
+    S.poles = false; S.hideW = false;
     const before = S.gates.length;
     if (before >= 24) { TRV.toast($('toast'), L('线路最多 24 个门', 'A circuit holds at most 24 gates')); return; }
     fn(); cards.mark(null); circuitChanged(before); clock.play();
@@ -225,7 +262,7 @@
   const fTheta = kit.field($('theta'), { fmt: (v) => `${fix(S.theta, 0)}°`, onInput: (v) => { S.theta = v; fTheta.show(); touched(); } });
   const fPhi = kit.field($('phi'), { fmt: (v) => `${fix(S.phi, 0)}°`, onInput: (v) => { S.phi = v; fPhi.show(); touched(); } });
   const fAlpha = kit.field($('alpha'), { fmt: (v) => `${v}°`, onInput: (v) => { S.alpha = v; } });
-  const axisChips = kit.chips($('axisChips'), 'axis', (v) => { S.axis = v; cards.mark(null); paint(); });
+  const axisChips = kit.chips($('axisChips'), 'axis', (v) => { S.axis = v; S.poles = false; cards.mark(null); paint(); });
   const turnChips = kit.chips($('turnChips'), 'turn', (v) => { S.turnAxis = v; });
   const camChips = kit.chips($('camChips'), 'cam', (v) => stage.view(v));
   $('gateChips').addEventListener('click', (ev) => { const b = ev.target.closest('[data-gate]'); if (b) appendAndPlay(() => { const [ax, deg] = GATES[b.dataset.gate]; addTurn(ax, deg, b.dataset.gate); }); });
@@ -239,24 +276,22 @@
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
-    line: { theta: 0, phi: 0, axis: 'z', turns: [] },
     area: { theta: 90, phi: 0, axis: 'z', turns: [] },
     half: { theta: 60, phi: 40, axis: 'z', turns: [] },
     phase: { theta: 90, phi: 0, axis: 'z', turns: [['z', 360]], play: true, still: 0.3 },
     hadamard: { theta: 0, phi: 0, axis: 'z', turns: [['h', 180, 'H']], play: true, still: 1 },
     hzh: { theta: 60, phi: 40, axis: 'z', turns: [['h', 180, 'H'], ['z', 180, 'Z'], ['h', 180, 'H']], play: true, still: 1.55 },
-    turn1: { theta: 60, phi: 40, axis: 'z', turns: [['x', 360]], play: true, still: 2 },
-    turn2: { theta: 60, phi: 40, axis: 'z', turns: [['x', 720]], play: true, still: 4 }
+    turn2: { theta: 90, phi: 90, axis: 'z', turns: [['x', 720]], play: true, still: 2 },
+    poles: { theta: 90, phi: 0, axis: 'z', turns: [], poles: true }
   };
   const NOTES = {
-    line: ['B 就躺在量尺 A 上：青色的线是 1，整根 B 都是影子；品红的面积是 0，舞台上没有面。这是“粒子”的一端。', 'B lies along the ruler A: the cyan line is 1, all of B is shadow, and the magenta area is 0, so the stage shows no face. This is the “particle” end.'],
     area: ['B 与 A 垂直：影子缩成一个点，面积撑到最大。两种咔哒各占一半，条纹最清楚。这是“波”的一端。', 'B is perpendicular to A: the shadow shrinks to a point and the area is as large as it gets. The clicks are 50 / 50 and the fringes are sharpest. This is the “wave” end.'],
     half: ['夹角 60°：线是 0.5，面积是 0.87。咔哒 75% 偏向 +A，同时条纹还留着 87% 的对比。两个数的平方加起来仍是 1。', 'At 60° the line is 0.5 and the area 0.87. The clicks lean 75% towards +A while the fringes keep 87% of their contrast. The two squares still add up to 1.'],
     phase: ['B 沿赤道绕 A 转一圈：青色的影子始终为零，品红的面积跟着 B 转向，大小不变。相位改的是面积的朝向，不是线。', 'B goes once round A along the equator: the cyan shadow stays at zero, and the magenta area turns with B without changing size. A phase changes which way the area faces, not the line.'],
     hadamard: ['从 |0⟩ 出发加一个 H 门：B 绕紫色的 ĥ 轴转 180° 落到 |+⟩，青色的线全部变成品红的面积。', 'Start at |0⟩ and apply H: B turns 180° about the violet ĥ axis and lands on |+⟩, and all of the cyan line becomes magenta area.'],
     hzh: ['先 H、再 Z、再 H：B 依次绕 ĥ、ẑ、ĥ 各转 180°，紫色虚线是正在转的那根轴。舞台左上角的 w 是累积旋子的标量部，从 +1 出发，每一步都在变。', 'H, then Z, then H: B turns 180° about ĥ, then ẑ, then ĥ again; the violet dashed line is the axis of the turn in progress. The w at the top left of the stage is the scalar part of the accumulated rotor: it starts at +1 and changes at every step.'],
-    turn1: ['绕 x̂ 转 360°：B 回到出发点，线和面积都回来了；旋子的标量部 w（舞台左上角）却从 +1 走到 −1。', 'A 360° turn about x̂: B returns to where it started, and so do the line and the area; the scalar part w of the rotor (top left of the stage) goes from +1 to −1.'],
-    turn2: ['再转一圈，一共 720°：w 才回到 +1。矢量一圈，旋子两圈。', 'One more turn, 720° in all: only now is w back at +1. One turn for the vector, two for the rotor.']
+    turn2: ['B 从 |+i⟩ 出发，绕 x̂ 沿 yz 平面里的大圆连转两圈。转满第一圈（360°）时 B 回到出发点，旋子的标量部 w（舞台左上角）却是 −1；右下角紫色的曲线是 w = cos(α/2)，琥珀色的点是此刻，转满两圈、共 720° 时 w 才回到 +1。矢量一圈，旋子两圈。', 'B starts at |+i⟩ and goes twice round the great circle in the yz plane about x̂. After the first full turn (360°) B is back where it started, yet the scalar part w of the rotor (top left of the stage) is −1; the violet curve at the bottom right is w = cos(α/2), with the amber dot at the present moment, and only after two full turns, 720° in all, is w back at +1. One turn for the vector, two for the rotor.'],
+    poles: ['六个极点是三对对跖点：|0⟩ 与 |1⟩ 在南北极，|±⟩ 在 ±x，|±i⟩ 在 ±y。青色的 A 在北极 |0⟩，琥珀色的 B 停在正东 |+⟩，夹角 90°；左上角读出 B 的投影矩阵的两个对角元 (1 ± b₂)/2。把 B 拖到南极 |1⟩：夹角到 180°，对角元成了 0 与 1。希尔伯特空间里正交的两个态，在球面上是对跖点。', 'The six poles are three antipodal pairs: |0⟩ and |1⟩ at the poles, |±⟩ at ±x, |±i⟩ at ±y. The cyan A is at the north pole |0⟩ and the amber B stops due east at |+⟩, 90° away; the top left reads the two diagonal entries (1 ± b₂)/2 of B\'s projection matrix. Drag B to the south pole |1⟩: the angle reaches 180° and the diagonal entries become 0 and 1. Two states orthogonal in Hilbert space are antipodal points on the sphere.']
   };
   let booting = true, moving = null;
   function applyPreset(id) {
@@ -264,7 +299,7 @@
     if (moving) { moving.cancel(); moving = null; }
     const land = () => {
       moving = null;
-      S.theta = p.theta; S.phi = p.phi; S.gates = [];
+      S.theta = p.theta; S.phi = p.phi; S.gates = []; S.poles = !!p.poles; S.hideW = id === 'phase';   // the PHASE card is about the area alone: no rotor readout
       for (const t of p.turns) addTurn(t[0], t[1], t[2]);
       fTheta.set(p.theta); fPhi.set(p.phi);
       circuitChanged(p.play ? 0 : undefined);
@@ -286,7 +321,7 @@
 
   /* ---------- probe, cover, start ---------- */
   window.QUBIT_DEBUG = {
-    get state() { const s = read(clock.t); return { theta: S.theta, phi: S.phi, axis: S.axis, tau: clock.t, n: S.gates.length, playing: clock.playing, preset: cards.current, r: s.r, q: s.q, line: s.line, area: s.area, p0: s.p0, p1: s.p1, phase: s.phase, sheet: s.sheet, gates: S.gates.map((g) => [g.ax, g.deg]) }; },
+    get state() { const s = read(clock.t); return { poles: S.poles, theta: S.theta, phi: S.phi, axis: S.axis, tau: clock.t, n: S.gates.length, playing: clock.playing, preset: cards.current, r: s.r, q: s.q, line: s.line, area: s.area, p0: s.p0, p1: s.p1, phase: s.phase, sheet: s.sheet, gates: S.gates.map((g) => [g.ax, g.deg]) }; },
     compareX, at: (tau) => { const s = read(tau); return { r: s.r, q: s.q, line: s.line, area: s.area, sheet: s.sheet }; },
     seek: (t) => { clock.pause(); clock.set(t); }, camera: () => Object.assign({}, stage.cam),
     /** Viewport coordinates of the tip of B (for pointer tests). */

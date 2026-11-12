@@ -9,7 +9,7 @@ Walk into an actual superconducting-qubit lab, ion-trap chamber, or NMR spectrom
 Who stole the missing length $1 - \norm{\vv{r}}$? Does "decoherence" mean that nature suffers an irreversible ontological decay? Closing Part I, this chapter explains the geometric mechanism of mixed states: **orthogonal record coupling and partial-trace marginalization in a larger joint space shorten the reduced local state** ([@thm-nonselective-marginal] and [@thm-reduced-access-defect], alongside C\*-algebraic representation compression [@thm-stinespring-dilation] and the general Schrödinger-picture channel dilation recorded in [@rem-stinespring-literature]). Picture a tilted spear casting a shorter shadow to get a feel for the shortening of the local Bloch vector; the partial trace itself acts on the joint density operator.
 
 ::: {.figure src="ch04-overview"}
-**Figure 4.** The chapter at a glance, each panel a vertical cross-section of the Bloch ball. Panel I: the amber local arrow heads for $\lvert +\rangle$ on the shell (dashed) but stops inside at $\cos\theta_{\mathrm{env}}$. Panel II: step by step, phase damping narrows the ball into thinner cyan ellipses of the same height, closing in on the violet vertical axis. Panel III: the amber point first loses its sideways part and lands on the vertical axis, then loses $r_z$ and lands on the violet centre $\frac{1}{2}I$.
+**Figure 4.** The chapter at a glance, each panel a vertical cross-section of the Bloch ball. Panel I: the amber local arrow heads for $\lvert +\rangle$ on the shell (dashed) but stops inside at $\cos\theta_{\mathrm{env}}$. Panel II: amplitude damping ($\gamma = \frac{1}{2}$) shrinks the ball and pushes it north into the cyan ellipse; $\rho$ at the north pole stays, $\sigma$ at $+x$ is pulled north, and the line between them shrinks from the dashed one to the solid one, $T$ from $0.707$ to $0.433$ ([@prop-trace-distance-metric-contraction]; the Bloch form of this channel is a literature result, not formalized in this book). Panel III: the amber point first loses its sideways part and lands on the vertical axis, then loses $r_z$ and lands on the violet centre $\frac{1}{2}I$.
 :::
 
 ## 4.1 Pure States Are the Spherical Shell ($\|\vv{r}\| = 1$), Mixed States Are Truncated Chords Inside ($\|\vv{r}\| < 1$) {#sec-ch04-1}
@@ -34,11 +34,11 @@ Compare this with [@prop-qubit-bloch-core] from [Chapter 1](ch01-measurement.md)
 **The shadow between the two environment records is the length of the local Bloch arrow.** On the left, the environment states $\lvert e_0\rangle$ and $\lvert e_1\rangle$ meet at the angle $\theta_{\mathrm{env}}$, and the cyan shadow of $\lvert e_1\rangle$ on $\lvert e_0\rangle$ has length $\cos\theta_{\mathrm{env}}$. On the right, in the vertical cross-section of the Bloch ball, the amber arrow $\vv{r}$ heads for $\lvert +\rangle$ on the shell (dashed) but reaches only $\cos\theta_{\mathrm{env}}$; the cyan segment beneath it is exactly as long as the shadow on the left. The figure takes $\theta_{\mathrm{env}} = 50^\circ$.
 :::
 
-::: {.viz src="bloch-noise" preset="shorten" height="500"}
-**A line that leaves the skin.** Phase damping acts step by step on $\lvert +\rangle$ and $\lvert -\rangle$ at the two ends of the equator: the amber $\rho$ and the white $\sigma$ leave the skin drawn as a thin wire and shrink along the horizontal axis towards the centre, while the cyan ball narrows at the waist. The top left of the stage reads the transverse fraction left as $\cos\theta_{\mathrm{env}}$ and gives that angle; the white line is the distance between the two states.
-:::
-
 In the sharp limit $\theta_{\mathrm{env}} = 90^\circ$ where the environment distinguishes system branches orthogonally ($\cos 90^\circ = 0$), the interaction is an isometric recording map, and turning one's gaze away from the record reproduces the exact Lüders unread state $\sum_a P_a \rho P_a$ of [Chapter 3](ch03-projectors-and-duality.md). Our first theorem proves this identity across arbitrary finite systems and outcome registers.
+
+::: {.viz src="bloch-noise" preset="shorten" height="500"}
+**Turn the angle between the records and the local arrow shortens with it.** At the bottom right are the two records $\lvert e_0\rangle$, $\lvert e_1\rangle$ of the environment; along the rail their angle $\theta_{\mathrm{env}}$ turns from $0^\circ$ to $90^\circ$, and the cyan shadow is their overlap $\cos\theta_{\mathrm{env}}$. After the environment is traced out, the amber $\rho$ that started at $\lvert +\rangle$ (and the white $\sigma$ from $\lvert -\rangle$) shrinks along the horizontal axis to exactly $\cos\theta_{\mathrm{env}}$. The frame stops at $75^\circ$, where the arrow keeps $0.26$; at $90^\circ$ the records are orthogonal and the arrow has shrunk to the centre.
+:::
 
 ::: {.theorem #thm-nonselective-marginal title="Partial Trace of Isometric Recording Equals the Nonselective Block Sum" lean="D5/S3/Quantum/Decoherence/NonselectiveMarginalization.nonselective_recording_marginal"}
 Let $\mathrm{System}$ and $\mathrm{Outcome}$ be finite types with decidable equality, and let $\{P_a\}_{a \in \mathrm{Outcome}}$ be a family of matrices on $\mathrm{System}$ satisfying self-adjointness $P_a^* = P_a$, orthogonal idempotence $P_a P_b = \delta_{ab} P_a$, and completeness $\sum_a P_a = I$. Define the canonical recording matrix $V \in M_{(\mathrm{System} \times \mathrm{Outcome}) \times \mathrm{System}}(\mathbb{C})$ and the partial trace $\Tr_{\mathrm{Outcome}}$ over the outcome register by
@@ -147,6 +147,10 @@ $$
 
 Look at the four corners on the right: the coherence sign $\pm\frac{1}{2}$ was never erased — it simply moved from $(00, 10)$ out to the extreme corners $(00, 11)$ and $(11, 00)$! Yet taking the partial trace $\Tr_{\mathrm{env}}$ replaces each $2\times 2$ environment block by the sum of its *own* two diagonal entries: in the upper-right $2\times 2$ block, the block-diagonal positions $(00, 10)$ and $(01, 11)$ are both $0$, while the corner $(00, 11)$ holding $\pm\frac{1}{2}$ sits off the environment diagonal and is skipped! Thus both states reduce locally to the identical matrix $\frac{1}{2}\bigl(\begin{smallmatrix} 1+0 & 0+0 \\ 0+0 & 0+1 \end{smallmatrix}\bigr) = \frac{1}{2}I$.
 
+::: {.figure src="ch04-copy-matrix"}
+**The coherence has not vanished; it has moved to a corner the partial trace cannot reach.** Both $4\times 4$ grids are ordered $00, 01, 10, 11$, thin frames mark the four $2\times 2$ blocks, and the partial trace reads only the two diagonal cells of each block (cyan edges). On the left, $B(\lvert\pm\rangle\langle\pm\rvert)$ before the controlled copy: the magenta $\pm\frac{1}{2}$ sits at $(00, 10)$ and $(10, 00)$, inside cyan cells, where the partial trace reads it. On the right, $R(\lvert\pm\rangle\langle\pm\rvert)$ after the copy: the $\pm\frac{1}{2}$ has moved to $(00, 11)$ and $(11, 00)$, on no block's diagonal, so the partial trace returns $\frac{1}{2}I$ for both signs, while running $U_{\mathrm{copy}}^*$ backwards restores it (items 2, 3, 4 and 6 of [@thm-reduced-access-defect]; the matrix entries are the text's hand computation).
+:::
+
 > Spilled milk looks irreversible only when you stare solely at the cup; in the ledger of the whole room, every phase is still accounted for.
 
 ## 4.2 Understanding Quantum Noise Geometrically Without Memorizing Kraus Operators {#sec-ch04-2}
@@ -156,7 +160,7 @@ Once we see how the partial trace shortens the local Bloch vector in this exampl
 Start with complete transverse dephasing — **standard-basis pinching** $\mathcal{P}(\rho)$ ([`pinching`](lean:D5/S3/QuantumChannels/Pinching.pinching) in Lean, preserving diagonal entries $\rho_{00}, \rho_{11}$ and zeroing off-diagonal entries $\rho_{01}, \rho_{10}$). Under the Hilbert–Schmidt inner product ([`hilbertSchmidtInner`](lean:D5/S3/QuantumChannels/Pinching.hilbertSchmidtInner) $\langle A, B\rangle_{\mathrm{HS}} = \Tr(A^* B)$), pinching is an exact orthogonal projection flattening the Bloch sphere onto its vertical diameter $[-\vv{e}_3, +\vv{e}_3]$, and the discarded equatorial mass equals the sum of squared moduli of the two off-diagonal entries!
 
 ::: {.viz src="bloch-noise" preset="pinch" height="500"}
-**Squashed onto the axis.** One step of complete dephasing: the cyan ball is squashed into a vertical line, and the violet dashes mark the whole axis as fixed. $\rho$ and $\sigma$ have the same height and differ only sideways, so they land on the same point of the axis and the white line shrinks to nothing; what is squashed away is the coherence mass carried by the sideways part, which the top left reads off for $\rho$ as it drops from $0.375$ to $0$ ([@thm-pinching-pythagorean]).
+**Squashed onto the axis.** One step of complete dephasing: the cyan ball is squashed into a vertical line, and the violet dashes mark the whole axis as fixed. $\rho$ and $\sigma$ have the same height and differ only sideways, so they land on the same point of the axis and the white line shrinks to nothing; the two magenta segments are the sideways parts of the two starting points that are squashed away, and they carry the coherence mass, which the top left reads off for $\rho$ as it drops from $0.375$ to $0$ ([@thm-pinching-pythagorean]).
 :::
 
 ::: {.theorem #thm-pinching-pythagorean title="Hilbert–Schmidt Pythagorean Split and Discarded Coherence Mass of Qubit Pinching" lean="D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass"}
@@ -251,6 +255,10 @@ At the first step it indeed sends the amplitude $1$ to $0.8$, and $0.6\,i$ leaks
 | $6$ | $0.2621$ | $-0.7522$ | $0.2621$ | $0.9313$ |
 
 From the second step on, a single environment sends the leaked amplitude back; at $n = 39$, $(J^{39})_{00} = 0.99934$, an almost complete recovery, while $c^{39} = 0.00017$. Site 0 of the collision model gives exactly $c^n$ in every row, in agreement with the induction in the proof. The leaked probability $1 - c^{2n}$ has not vanished: it is spread over sites $1, 2, \dots, n$, and the total norm stays $1$.
+:::
+
+::: {.figure src="ch04-fresh-environment"}
+**The same environment sends the amplitude back; only a fresh one lets it go for good.** The cyan points are $c^n$ ($c = 0.8$) at cell $0$ of the collision model, which meets a fresh environment at every step and decays to zero ([@thm-unitary-power-dilation]); the grey points are $(J^n)_{00} = \cos n\varphi$ for the same environment used again and again, swinging between $-1$ and $1$ and back at $0.999$ at $n = 39$ (the circled point). Both columns of numbers are the hand computation of [@ex-halmos-one-step-recurrence]; that a finite environment must send the amplitude back is the text's hand argument, not formalized in this book.
 :::
 
 > Leaked amplitude does not come back, not because it has vanished, but because the environment that meets the system is always a fresh one.
@@ -505,10 +513,6 @@ Four geometric properties converge at this single point:
 **The centre does not remember how it was mixed.** Half north with half south, half east with half west, or half of each end of the dashed tilted chord: every equal mixture has the midpoint of its chord as Bloch vector, and all of them land on the violet centre $\frac{1}{2}I$ (item 3 of [@ex-maximally-mixed-center]).
 :::
 
-::: {.viz src="bloch-noise" height="560"}
-**The full lab.** Switch between the three noises, set the strength per step and $T_2 / T_1$, or drag $\rho$ and $\sigma$ on the skin, and follow along the rail how the cyan ball deforms and how the white line only shrinks.
-:::
-
 ---
 
 ### Summary of Part I: From Point to Line — Ready to Open the Plane
@@ -520,4 +524,12 @@ Across the four chapters of Part I, the theorem statements checked by the Lean k
 - **Chapter 3** revealed particles, concepts, and ticks of classical linear time as fixed points of idempotent lines $P^2 = P$ ([@thm-pinching-idempotent], [@thm-unread-fixed-iff], [@thm-conditional-state-valid]), paired inseparably with their Hodge-dual wave planes via complementary Pythagorean tomography ([@thm-complementary-pythagoras]), and bounded the record capacity of a $d$-dimensional system by $N \le d$ ([@prop-record-capacity]) together with the entropic uncertainty relation for complementary contexts ([@prop-collision-entropy-uncertainty]);
 - **Chapter 4** traced decoherence to partial-trace marginalization ([@thm-nonselective-marginal]), proved that local irreversibility is an environment-access defect rather than ontological loss ([@thm-reduced-access-defect]), described the contraction geometry of phase damping, amplitude damping, and pinching ([@thm-pinching-pythagorean], [@prop-phase-damping-decay], [@prop-amplitude-damping-contraction], [@cor-pinching-zero-offdiag]), used Stinespring's dilation ([@thm-stinespring-dilation]) to explain representation compression, showed with the Sz.-Nagy unitary power dilation ([@thm-unitary-power-dilation]) that all powers of a contraction are shadows of one unitary evolution, and bounded two-state distinguishability through trace-distance contraction under channels on a fixed finite index type ([@prop-trace-distance-metric-contraction]).
 
+::: {.viz src="bloch-noise" height="560"}
+**The full lab.** Switch between the three noises, set the strength per step and $T_2 / T_1$, or drag $\rho$ and $\sigma$ on the skin, and follow along the rail how the cyan ball deforms and how the white line only shrinks.
+:::
+
 With the one-dimensional projection line $\vv{a}\cdot\vv{b} = \cos\theta$ firmly in hand, **Part II (*Unfolding Wings — From Line to Plane*)** raises our gaze to the oriented two-dimensional area $\vv{a} \wedge \vv{b} = \sin\theta\,\hat{I}$ — revealing why the "imaginary unit" is nothing more than a $90^\circ$ planar turn, and unifying quantum gates with all five textbook postulates through the single Clifford geometric product $AB = A\cdot B + A\wedge B$.
+
+::: {.film src="002-pairwise-born"}
+**Pairwise measurement: from two arrows to the Born weight (1 min 26 s).** Two arrows $60^\circ$ apart read their own angle from the two diagonals of their parallelogram ([@thm-parallelogram-norm-law]); with $A$ as its own axis, the foot $C$ becomes the cyan shadow $\cos\theta$ that $B$ casts on $A$; squeezing that shadow from $[-1, 1]$ into $[0, 1]$ gives the weight $\cos^2(\theta/2)$ ([@thm-born-modulus-square]); only squares let a shutter and its complement share the whole weight ([@thm-born-probability-skeleton]); finally an environment records the branch, and the arrow shrinks to a short line on the vertical axis inside the ball ([@thm-nonselective-marginal]).
+:::

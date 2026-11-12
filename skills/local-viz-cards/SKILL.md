@@ -25,7 +25,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 | 页面 | 一句话 | 卡（`preset`） |
 | --- | --- | --- |
-| `qubit-geometry` | 粒子是线，波是面积，两者是同一个几何积的两个投影 | `line` `area` `half` `phase` `hadamard` `hzh` `turn1` `turn2` |
+| `qubit-geometry` | 粒子是线，波是面积，两者是同一个几何积的两个投影 | `area` `half` `phase` `hadamard` `hzh` `turn2` `poles` |
 | `sphere-escape` | 以为把球封住了，总还有一点留在外面 | `diagonal` `absorb` `liuhui` `zu` `dottie` `far` `euclid` `thirteen` |
 | `pythagoras-number-escape` | 线上的误差可以趋于零，面积上的缺口至少一格 | `hippasus` `minus` `locked` `golden` `five` `seven` `count` `sato` |
 | `timeless-causal-crystal` | 两条余弦锁住第三条的窗口，观察者只能在窗口里选点 | `window` `impossible` `right` `crystal` `field` `thread` `sos` `wilderness` |
@@ -33,7 +33,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `eth-horizon-crossover` | 渐近更好的曲线要到视界之外才追上；单次抽样流矩阵的秩与四道割比较；过线的模态数有墙 | `human` `atoms` `cross` `constant` `bridge` `narrow` `plateau` `tail` |
 | `spatial-attractor-deja-vu` | 忘掉起点，轨道还是落回同一对翅膀，一次次经过同一处 | `forget` `return` `shrink` `dimension` `fixed` `cycle` |
 | `golden-cut-observer` | 窗口挪一挪，贴边的点翻转，深处的点留在原地 | `cut` `phason` `empire` `cassini` `returns` `narrow` `window` `gaps` `pi` |
-| `repeated-projection` | 投一次，箭头只剩线上的影子；再投多少次，影子都不再动 | `once` `twice` `fixed` `perp` `sum` |
+| `repeated-projection` | 投一次，箭头只剩线上的影子；再投多少次，影子都不再动 | `twice` `fixed` `perp` `sum` `chain` |
 | `bloch-noise` | 噪声把球往里压、往北推，却从不把球里的两个点拉开 | `shorten` `pinch` `dephase` `amp` `wide` `distance` `centre` |
 | `double-slit-marker` | 路径记得越清，条纹越淡；两者落在同一个圆上，怎么读标记可以等落点到了再定 | `wave` `partial` `which` `delayed` `erase` `mixed` |
 | `erasure-ledger` | 转动不记账；抹掉横着的那一份，系统的熵就多出这一份；把比特复位，这笔熵要化成热付给环境，只能多付，不能少付 | `pinch` `steps` `cycle` `bath` `copy` `dpi` |
@@ -43,7 +43,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `pulse-area-virtual-z` | 包络下有多少面积，态就转多大的角；绕竖轴的那一转不发脉冲，只改后面脉冲的相位 | `carrier` `quarter` `gauss` `detune` `order` `vz` `sign` |
 | `parameter-shift` | 左右各转 90° 取两个值，两值之差的一半正好是这一点的斜率；小步长差分总差一点，还把散粒噪声放大 | `shift` `anywhere` `step` `noise` |
 | `equator-concentration` | 维数越高，球面上的点越挤在垂直于测量轴的赤道上，宽度按 1/√d 缩小 | `three` `width` `bound` `twenty` |
-| `pairwise-shutter` | 快门每次只报“过”或“不过”；按得越多，“过”的比例越贴近两支箭头的夹角定下的权重 | `clicks` `sixty` `right` `same` `opposite` `turn` `random` |
+| `pairwise-shutter` | 快门每次只报“过”或“不过”；按得越多，“过”的比例越贴近两支箭头的夹角定下的权重 | `clicks` `right` `same` `opposite` `turn` `random` |
 | `chsh-dial` | 四个余弦叠起来能越过 2，却越不过两侧张开的面积给的天花板；经典的隐方向怎么转都越不过 2 | `collinear` `sixty` `cross` `sweep` `tsirelson` `hidden` `arc` |
 | `syndrome-decoding` | 校验只问相邻两个比特一不一致：亮起的灯指出翻了哪一个，翻回去，叠加原样回来；翻两个或翻相位，灯就指错或者不亮 | `single` `rooms` `mix` `two` `phase` |
 | `braiding` | 交换两颗粒子，谁从前面过记在第三个方向上；反着交换一次就回来，同向交换两次回不来，三股的两种顺序落在同一处 | `over` `inverse` `twice` `yb` `close` `stabilize` `trefoil` `rack` |
@@ -79,9 +79,9 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 `navier-stokes-p-np`、`eth-horizon-crossover`、`spatial-attractor-deja-vu`、`golden-cut-observer` 四个页面的依据分层要写在页面与图注里：第三十章转述的 2026 年预印本只作为该章的转述出现，页面上的曲线与涡管是示意模型（`MODEL`）；菱形三十面体与“帝国”是文献结果（`ARGUED`）；灵魂、遗迹、似曾相识是诠释模型（`MODEL`）；只有带 Lean 链接的绿色框是已验证定理。`spatial-attractor-deja-vu` 不引用任何 Lean 定理：重返（两轮各一次经过、两点相距 ‖x₁(t<sub>a</sub>) − x₂(t<sub>b</sub>)‖ < ε）处单位切向的内积 cos δθ = v̂₁·v̂₂ 标 `NUM` 与 `MODEL`，舞台上画成青色与品红的两支箭头；Tucker 的奇异吸引子定理与卡普兰—约克公式标 `ARGUED`；两个非零平衡点 C₊、C₋ 的 x、y 同号（ρ = 28 时是不稳定的鞍焦点），画成中性色空心圈；ρ = 14 时两点都稳定，同样的参数下每一轮落进哪一个由起点所在的吸引域决定（`fixed` 卡的两轮落进相反的两点），标签写“稳定点 C₊/C₋”、按落进它的那一轮着青色或品红，点在窄屏画布边外时标签收进画布并带箭头指向它；页面自己的数值核对不用绿色 ✓。`forget` 的说明条第二行是两轮到此刻为止高过 C₊、C₋（z > ρ − 1）的时间比例与两轮此刻的距离（`NUM`）：讲“忘掉的是起点，留下的是比例”；`return` 在右下角开一个放大 4 倍的小窗，画遗迹邻域、两段弧与两支长的单位切向，说明条给出 δθ 与 cos δθ。`golden-cut-observer` 的场景“缝”画旋转的前 N 个点在长为 1 的圆周上切出的弧，按长度分类上色（最短青、中间紫、最长品红，琥珀只给最新的点），绿色框只给终章用 `lean=` 引用的三距离定理与黄金赫尔维茨界，“每段弧长于 1/(√5 N)”是正文的手工推导（`ARGUED`），各个 N 的读数标 `NUM`；Delone 集定理在终章只以行内链接出现，页面上写成不带颜色的说明。
 
-`repeated-projection` 的箭头是布洛赫矢量，“投一次”是沿测量线的未读测量 $P_+\rho P_+ + P_-\rho P_-$，不是第三章偏振片例题里的选择性条件更新（那里 $0^\circ$ 与 $90^\circ$ 偏振片在布洛赫球上是同一条线的两端）；“一投等于投到线上的影子”是页面的数值核对（`NUM`），绿色框只给本章引用的三条定理：捏合幂等、不动点判据、互补勾股。
+`repeated-projection` 的箭头是布洛赫矢量，页面分两种操作。“投一次”是沿测量线的未读测量 $P_+\rho P_+ + P_-\rho P_-$，箭头落到线上的影子、缩进球内；“一投等于投到线上的影子”是页面的数值核对（`NUM`）。`chain` 卡与“中间片数 N”滑块是第三章偏振片例题的选择性条件更新：读出结果、只留通过的一支（$0^\circ$ 与 $90^\circ$ 偏振片在布洛赫球上是同一条线的两端，中间片把这段经线等分），态每跳一次留在球皮上，代价记在相乘的权重里，青色竖条是累计权重；$N \to \infty$ 的极限是文献结果，页面不画。绿色框只给本章引用的五条定理：捏合幂等、不动点判据、互补勾股、条件态合法、有序外积链之迹。整页（不带 `preset`）打开在刚投一次的那一帧。
 
-`bloch-noise` 的绿色框只引用第四章正文已用 `lean=` 引用的定理；三种噪声的布洛赫仿射形式与 $T = \frac{1}{2}\lVert\vv{r} - \vv{s}\rVert$ 按该章例题标 `ARGUED`；时间轴上两个整数步之间取相邻整数步输出的凸组合、把横向剩余读成 $\cos\theta_{\mathrm{env}}$ 标 `MODEL`。`wide` 卡里的映射不是信道：舞台标题写明“固定北极的仿射映射（不是信道）”，不叫振幅阻尼，也不标两态距离，页面只说它刺穿球皮；`pinch` 卡（相位阻尼强度取 1）的标题是“捏合”。
+`bloch-noise` 的绿色框只引用第四章正文已用 `lean=` 引用的定理；三种噪声的布洛赫仿射形式与 $T = \frac{1}{2}\lVert\vv{r} - \vv{s}\rVert$ 按该章例题标 `ARGUED`；时间轴上两个整数步之间取相邻整数步输出的凸组合、相位阻尼卡把横向剩余读成 $\cos\theta_{\mathrm{env}}$ 标 `MODEL`。`shorten` 卡换成另一个场景：时间轴是环境两条记录的夹角 $\theta_{\mathrm{env}}$（$0^\circ \to 90^\circ$），右下角画两条记录与青色的影子 $\cos\theta_{\mathrm{env}}$，局部箭头由 $a\lvert 0\rangle\lvert e_0\rangle + b\lvert 1\rangle\lvert e_1\rangle$ 求偏迹直接算出（`NUM`，第 4.1 节的手算），不标绿。`pinch` 卡用品红画出两个起点被压掉的横向一段（其平方带着相干质量）。`wide` 卡里的映射不是信道：舞台标题写明“固定北极的仿射映射（不是信道）”，不叫振幅阻尼，也不标两态距离，页面只说它刺穿球皮；`pinch` 卡（相位阻尼强度取 1）的标题是“捏合”。
 
 `double-slit-marker` 的绿色框只给纯态标记的 $D^2 + V^2 = 1$（`pure_record_distinguishability_coherence_complementarity`）与捏合去掉的相干质量（`pinching_discarded_coherence_mass`）；混合标记落在圆内用迹距离可辨度，是 Englert 不等式（`ARGUED`）；屏上的高斯包络、二维实向量标记与两种读法是示意模型（`MODEL`）。这一页的青色是条纹对比度 $V$（影子）与擦除后分拣出的两行，品红是路径可辨度 $D$（高）与按路径分拣出的两行。
 
@@ -99,7 +99,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 `equator-concentration` 不引用任何 Lean 定理（第十二章引用的冻结定理与球面测度集中无关，正文强调它们相互独立）：E[x₁²] = 1/d、马尔可夫上界、x₁ 的密度 ∝ (1 − x²)^{(d−3)/2} 与贫瘠高原都是文献结果（`ARGUED`）；带内外的精确份额由不完全贝塔函数算出、舞台上的点是精确分布的分位数（`NUM`）。页面不画梯度。青色是赤道带里的点与带内密度，品红是带外的点与带外密度。d ≥ 2⁹ 时鼓包薄得看不清，密度那一栏的右上角出现放大镜：纵轴换成 x₁√d、放大 √d 倍，带边 ±ε√d 落在窗外时用一行字写明。
 
-`pairwise-shutter` 的青色是已知态 $A$、它那条直径上从 $-1$ 端到 $B$ 的垂足的一段（长度占直径的 $p$）、权重的虚线与“过”的方块；琥珀色是目标态 $B$ 与当前的比例；细曲线（墨色）是数出来的比例 $k/N$；紫色只在 `turn` 卡里出现，是两支共用的转轴；`turn` 卡的灰色虚线箭头是出发时的那一对（它的静态图停在转过 $306^\circ$ 处，与出发时分得开）。绿色框只给第二章用 `lean=` 引用的两条定理：`born_probability_skeleton`（过与不过两份权重非负、相加为 1）与 `rank_one_born_pairing_weight`（$\lvert\langle\phi\mid\psi\rangle\rvert^2 = \Tr(\rho P_k)$）；半角公式 $(1 + \cos\theta)/2$ 与随机方向上权重均匀是第二章例题的手算，页面三路数值核对标 `NUM`；快门计数是固定种子的抽样模型，比例趋向权重是大数定律（本书未形式化），浅色带 $p \pm 2\sqrt{p(1-p)/N}$ 只是参考尺度，一并标 `MODEL`。这一页不画 `qubit-geometry` · `line` 的“影子长 $\cos\theta$”，只画计数。
+`pairwise-shutter` 的青色是已知态 $A$、它那条直径上从 $-1$ 端到 $B$ 的垂足的一段（长度占直径的 $p$）、权重的虚线与“过”的方块；琥珀色是目标态 $B$ 与当前的比例；细曲线（墨色）是数出来的比例 $k/N$；紫色只在 `turn` 卡里出现，是两支共用的转轴；`turn` 卡的灰色虚线箭头是出发时的那一对（它的静态图停在转过 $306^\circ$ 处，与出发时分得开）。绿色框只给第二章用 `lean=` 引用的两条定理：`born_probability_skeleton`（过与不过两份权重非负、相加为 1）与 `rank_one_born_pairing_weight`（$\lvert\langle\phi\mid\psi\rangle\rvert^2 = \Tr(\rho P_k)$）；半角公式 $(1 + \cos\theta)/2$ 与随机方向上权重均匀是第二章例题的手算，页面三路数值核对标 `NUM`；快门计数是固定种子的抽样模型，比例趋向权重是大数定律（本书未形式化），浅色带 $p \pm 2\sqrt{p(1-p)/N}$ 只是参考尺度，一并标 `MODEL`。这一页不画布洛赫球上“影子长 $\cos\theta$”的读数，只画计数。
 
 `chsh-dial` 的绿色框只引用第十三章正文用 `lean=` 引用的五条定理：经典上界（`classical_chsh_abs_le_two`，“隐方向”场景的 360 个等距隐方向、权重各 1/360 正是一个有限确定性纤维模型）、一侧可交换时 S² = 4I、四点谱、固定算子的 2√2 与幺正策略的贝尔值上界（取 d = 2 为手工推导）。贝尔态上的同平面关联 cos(夹角)、N = 4|sin α sin β| 与“转动 Bob 的一对方向，⟨S⟩ 最高恰为 √(4 + 4 sin α sin β)”是页面的数值（`NUM`）；均匀隐方向玩具模型与它的折线标 `MODEL`；一般隐变量测度下的 |S| ≤ 2 与无穷维 Tsirelson 界标 `ARGUED`。这一页的青色是四个余弦（量尺上一段段叠起来的四项、余弦弧）与给 +2 的隐方向，品红是两侧张开的面积、谱点 ±√(4 ± N)、弧与折线之差与给 −2 的隐方向；Alice 是实线箭头，Bob 是虚线箭头，时间轴转动 Bob 的一对方向 φ。
 
@@ -151,7 +151,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 `pointer-ontology-deref` 的三条路共用一条以“步”为单位的时间轴，舞台是同一排 N = 64 格内存：上面是桶链式路由树（63 个开关，按“层、前缀”编号），下面是扫描总线，右边是第三十八章 N = 4 的二级页表（b₀ = 0x1000、T₁ = 0x2000、D₁,₂ = 0x9000 取自正文，其余地址为补全表格而选）。页表场景（`four_loops`、`self_map`、`diagonal_hit`）把路由树与扫描带整体收起，页表居中，琥珀只留在此刻读到的那一格或那张表上；只走一跳时（`diagonal_hit`）左边并排画指针寄存器 p 与它读出的 *p（p = 0x1000 = *p，青色“=”），下面对照一枚普通指针 p = 0x2000 读出 T₁[0] = 0x7000（“≠”）。青色是设好的路由开关与走过的跳，墨色是扫描读过的格与要读的格，琥珀只给此刻的读头（扫描读头、路由前沿、正在读的槽、刚读出的值）；不在焦点的那两条路整体减淡。绿色框只给第三十八章用 `lean=` 引用的 `diagonal_landing_fixed`（页表场景），页面画的零号槽 Mem[0x1000][0] = 0x1000 是自地址闭环（槽里存的是地址），要接到这条定理还须整行捕获 g(a₀) = diagonal(f, g)，页面不核对它，图注与依据框照此写；桶链式 QRAM 的 O(log N) 深度（Giovannetti–Lloyd–Maccone 2008）与 x86-64 递归页表标 `ARGUED`；“观察者是记忆指针”“p ≡ *p 的本体寻址”与“一拍走一层”的时间轴标 `MODEL`；页面不声称零号槽的一步是可实现的算法加速。路线图候选的 `stack_frame`（躯体栈帧）与 `theta_star` 未做：前者在正文里只是比喻表格的一行，后者属于第三十三、三十五章的不动点页面；候选 `idempotent_iff_range_fixed` 不在锁文件，`finite_contracting_updates_stabilize` 不在本章正文，均不标绿。本页与 `self-referential-table` · `dual_read` 的对角格（对角格自己读自己）、`sphere-escape` · `diagonal`（康托尔对角线逃逸）不画同一画面：这里画的是地址解引用的路径与步数。
 
-`self-sustaining-spinor-flow` 与 `qubit-geometry` 的 `turn1`、`turn2` 分工：那两张在布洛赫球上看态 B 转一圈、两圈和旋子标量部 w 的读数，本页讲第三十九章的旋量双线性量与单侧光带：青色是流向量 J = ψe₃ψ̃（箭头长 ρ，虚线是它走过的路）；品红是自旋面 S = ψe₁e₂ψ̃，画成由 Re₁R̃、Re₂R̃ 张成、边长 √ρ、面积 ρ 的正方形（在三维里 S = I J，正是与 J 垂直的那块面）；紫色是转轴 n、绕 n 一圈的单侧（莫比乌斯）光带与插在 J 方位上的小旗，小旗方向 cos(t/2) n + sin(t/2) r 是 ψψ̃₀/ρ 的两个分量，旗尖走过的路是光带的边（两圈才闭合）；琥珀只给小旗此刻的落脚点；虚线小旗是出发时的那一面。三个平方 J²、−S²、ρ² 由 Cl(3,0) 逐刀片乘出（`NUM`），菲尔兹恒等式（含狄拉克旋量的 J<sub>μ</sub>J<sup>μ</sup> = σ² + ω²，页面不画）与 Spin(3) ≅ SU(2) → SO(3) 双覆叠按第三十九章文献注记标 `ARGUED`；J 是欧氏向量、S 是欧氏双矢量，“流向量”“自旋面”的叫法与时间流、规范面的读法同“无底物自指旋量流”“观察者即宇宙本体”一起标 `MODEL`。绿色框只给该章定理 `thm-ch39-double-cover-no-section-and-720-lift` 用 `lean=` 引用的两条：`no_continuous_global_section` 与 `circle_double_cover_history_lift`。图注里说小旗“与出发时相反/同向”，不说“朝下/朝上”（舞台的视角里小旗是横着的）。光带用 `kit.solid` 画成有厚度的受光实体，单一紫色，明暗只来自固定在相机上的灯：莫比乌斯带上没有不留接缝的全局两面，所以不给“两叶”各上一种颜色（那道接缝正是 `no_continuous_global_section` 禁止的一刀）。旗尖已经走过的那段边画成发亮的实线，还没走的画淡虚线，`turn360`（一半实线）与 `turn720`（整圈实线）的静态图因此一眼可分；小旗贴在朝向读者的那一面，被带挡住时确实被挡住，每 30° 一个紫色环点一下跳到那个转角，琥珀点（旗尖）可沿带拖动。`seam` 不用实体：它把光带沿底圈展开成一行（二维），每 30° 一面小旗从左到右排开（n 朝上、r 斜画为朝屏幕外），下方并排放出发的虚线小旗与回到起点的那一面，十二面逐面可读——展开图比在实体上挤一圈小旗更清楚。完整实验室另有“二元隔墙 μ”滑块（`MODEL`，正文没有给 μ 数学定义，只作画面过渡）：μ > 0 时光带沿中线剪开，小旗走第一圈的一半收成中间的指针球，第二圈的一半撑成外面的内存壳；每张卡与封面都停在 μ = 0，即这条可核算的光带。参照图里的 Gap、|cos θ − θ|、sin 2θ 等读数与米田节点光束不搬（本章没有定义，或属别章）。路线图候选 `massless_knot`、`non_trivial_lift` 并入 `seam`；`grand_closure` 未做：第三十九章没有“从第一章 AB = A·B + A∧B 收束回 ψ = ψ(ψ)”的句子（章末只有一句回望第一、二章砍掉第 3 点 C 的话）。
+`self-sustaining-spinor-flow` 与 `qubit-geometry` 的 `turn2` 分工：那一张在布洛赫球上看态 B 转一圈、两圈和旋子标量部 w 的读数，本页讲第三十九章的旋量双线性量与单侧光带：青色是流向量 J = ψe₃ψ̃（箭头长 ρ，虚线是它走过的路）；品红是自旋面 S = ψe₁e₂ψ̃，画成由 Re₁R̃、Re₂R̃ 张成、边长 √ρ、面积 ρ 的正方形（在三维里 S = I J，正是与 J 垂直的那块面）；紫色是转轴 n、绕 n 一圈的单侧（莫比乌斯）光带与插在 J 方位上的小旗，小旗方向 cos(t/2) n + sin(t/2) r 是 ψψ̃₀/ρ 的两个分量，旗尖走过的路是光带的边（两圈才闭合）；琥珀只给小旗此刻的落脚点；虚线小旗是出发时的那一面。三个平方 J²、−S²、ρ² 由 Cl(3,0) 逐刀片乘出（`NUM`），菲尔兹恒等式（含狄拉克旋量的 J<sub>μ</sub>J<sup>μ</sup> = σ² + ω²，页面不画）与 Spin(3) ≅ SU(2) → SO(3) 双覆叠按第三十九章文献注记标 `ARGUED`；J 是欧氏向量、S 是欧氏双矢量，“流向量”“自旋面”的叫法与时间流、规范面的读法同“无底物自指旋量流”“观察者即宇宙本体”一起标 `MODEL`。绿色框只给该章定理 `thm-ch39-double-cover-no-section-and-720-lift` 用 `lean=` 引用的两条：`no_continuous_global_section` 与 `circle_double_cover_history_lift`。图注里说小旗“与出发时相反/同向”，不说“朝下/朝上”（舞台的视角里小旗是横着的）。光带用 `kit.solid` 画成有厚度的受光实体，单一紫色，明暗只来自固定在相机上的灯：莫比乌斯带上没有不留接缝的全局两面，所以不给“两叶”各上一种颜色（那道接缝正是 `no_continuous_global_section` 禁止的一刀）。旗尖已经走过的那段边画成发亮的实线，还没走的画淡虚线，`turn360`（一半实线）与 `turn720`（整圈实线）的静态图因此一眼可分；小旗贴在朝向读者的那一面，被带挡住时确实被挡住，每 30° 一个紫色环点一下跳到那个转角，琥珀点（旗尖）可沿带拖动。`seam` 不用实体：它把光带沿底圈展开成一行（二维），每 30° 一面小旗从左到右排开（n 朝上、r 斜画为朝屏幕外），下方并排放出发的虚线小旗与回到起点的那一面，十二面逐面可读——展开图比在实体上挤一圈小旗更清楚。完整实验室另有“二元隔墙 μ”滑块（`MODEL`，正文没有给 μ 数学定义，只作画面过渡）：μ > 0 时光带沿中线剪开，小旗走第一圈的一半收成中间的指针球，第二圈的一半撑成外面的内存壳；每张卡与封面都停在 μ = 0，即这条可核算的光带。参照图里的 Gap、|cos θ − θ|、sin 2θ 等读数与米田节点光束不搬（本章没有定义，或属别章）。路线图候选 `massless_knot`、`non_trivial_lift` 并入 `seam`；`grand_closure` 未做：第三十九章没有“从第一章 AB = A·B + A∧B 收束回 ψ = ψ(ψ)”的句子（章末只有一句回望第一、二章砍掉第 3 点 C 的话）。
 
 `gram-causal-elliptope` 与 `timeless-causal-crystal` 的 `window`、`impossible`、`right` 及静态图 `ch29-gram-window` 分工：那几处只讲三根向量的窗口（两条余弦锁住第三条）；本页讲第四层的多步记忆：格拉姆表按 Q、P₀、P₋₁、…、P₋₍M−1₎ 排列，记忆深度 M 从 1 到 5，每多一个锚点 (y, z) = (Q·P₋₁, Q·P₀) 平面里就多一圈套在里面的椭圆，第一个变负的顺序主子式指出哪一层记忆先拒绝。舞台是三元椭圆体在历史 x = P₀·P₋₁ 处的截面：紫色是椭圆体（体积），品红是每层记忆的边界与贴边的点，青色是穿过候选的 z 的窗口和当前一层围出的泡泡（正文第四层第 2 条写作“绿色因果相容泡泡”，页面与图注不用绿色），琥珀色只给候选 Q。事件取在 ℝ⁶ = E∥ ⊕ E⊥（`flat` 卡与 ℝ³ 开关把每个事件换成它在 E∥ 上的投影再归一，说明为什么要六维）。绿色框只给第二十九章第二层行内引用的 `lagrange_gram_identity`（阶梯第二级 D₂ = 1 − z² 是面积的平方）；西尔维斯特判据、半正定与格拉姆矩阵的对应、三元椭圆体的边界标 `ARGUED`；把 G ⪰ 0 读作因果相容空间、把 `flat` 读作“无限全知观察者”一行标 `MODEL`。
 
@@ -169,32 +169,28 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 | 章节 | 位置 | 引用 |
 | --- | --- | --- |
-| 第一章 | §1.1 末（两子互为尺规） | `qubit-geometry` · `line` |
 | 第一章 | §1.2 快门插图 `ch01-shutter` 之后、“全能属性账本”一段之前 | `pairwise-shutter` · `clicks` |
-| 第二章 | §2.1 两条路线（迂回与零冗余）的列表之后、“矩阵的迹”一段之前 | `pairwise-shutter` · `sixty` |
+| 第一章 | §1.3 例 `ex-bloch-six-poles` 之后、“至此，我们已经完成了第一场大扫除”之前 | `qubit-geometry` · `poles` |
 | 第二章 | §2.1 “矩阵的迹”一段之后、定义 `def-born-probability` 之前 | `pairwise-shutter` · `turn` |
-| 第二章 | §2.3 “这行等式”之后的列表第 1 条（同向共线）之后、第 2 条之前 | `pairwise-shutter` · `same` |
 | 第二章 | §2.3 “这行等式”之后的列表第 2 条（球面正交）之后、第 3 条之前 | `pairwise-shutter` · `right` |
-| 第二章 | §2.3 同一列表第 3 条（球面反向）之后、“为了方便后续章节随时查核”之前 | `pairwise-shutter` · `opposite` |
-| 第二章 | §2.3 半角换算表之后 | `qubit-geometry` · `line` |
 | 第二章 | §2.3 “单比特是唯一‘公平’的情形”一段之后 | `pairwise-shutter` · `random` |
 | 第二章 | 文献注记 `rem-gleason-literature` 之后、转入第三章之前 | `pairwise-shutter` 完整实验室 |
 | 第三章 | §3.1 题记“给混沌命名……”之后、存在线插图之前 | `repeated-projection` · `twice` |
 | 第三章 | §3.1 定理 `thm-unread-fixed-iff` 之后的解读段末 | `repeated-projection` · `fixed` |
 | 第三章 | §3.2 单比特勾股算例“反之，当态纯粹躺在赤道平面上……必然归零”之后、“波与粒从不打架”之前 | `repeated-projection` · `perp` |
 | 第三章 | §3.2 单比特勾股算例末（“两条直角边”） | `repeated-projection` · `sum` |
-| 第三章 | 章末、转入第四章之前 | `repeated-projection` · `once`，随后完整实验室 |
-| 第四章 | §4.1 局部布洛赫向量 $(\cos\theta_{\mathrm{env}}, 0, 0)$ 一段之后 | `bloch-noise` · `shorten` |
+| 第三章 | §3.3 “[@ex-malus-three-polarizers] 清晰展示了……”一段之后、“但这里还藏着第一部最深的一个悬念”之前 | `repeated-projection` · `chain` |
+| 第三章 | 章末、转入第四章之前 | `repeated-projection` 完整实验室 |
+| 第四章 | §4.1 “特别地，当环境彻底分辨了系统的不同分支”一段之后、定理 `thm-nonselective-marginal` 之前 | `bloch-noise` · `shorten` |
 | 第四章 | §4.2 捏合投影一段之后、定理 `thm-pinching-pythagorean` 之前 | `bloch-noise` · `pinch` |
 | 第四章 | §4.2 相位阻尼一段之后、命题 `prop-phase-damping-decay` 之前 | `bloch-noise` · `dephase` |
 | 第四章 | §4.2 振幅阻尼一段之后 | `bloch-noise` · `amp` |
 | 第四章 | §4.2 指数包络 $T_2 \le 2T_1$ 一段之后、文献注记 `rem-relaxation-envelope-literature` 之前 | `bloch-noise` · `wide` |
 | 第四章 | §4.2 末（“可分辨性只会丢”） | `bloch-noise` · `distance` |
 | 第四章 | §4.3 开头一段之后 | `bloch-noise` · `centre` |
-| 第四章 | 例 `ex-maximally-mixed-center` 之后、第一部小结之前 | `bloch-noise` 完整实验室 |
+| 第四章 | 第一部小结的四条列表之后、“至此，第一重帷幕”一段之前 | `bloch-noise` 完整实验室 |
 | 第五章 | §5.2 三明治积两条推导（$v_\perp$ 不动、$v_\parallel$ 合成整角）之后、“这里需要严守”之前 | `zyz-compile` · `sandwich` |
 | 第五章 | §5.2 定理 `thm-circle-double-cover-history-lift` 译回旋子的列表（“两整圈”）之后、例 `ex-rotor-two-turns` 之前 | `qubit-geometry` · `turn2` |
-| 第五章 | §5.2 末（旋子） | `qubit-geometry` · `turn1` |
 | 第五章 | §5.3 全局相位与相对相位的对照之后 | `qubit-geometry` · `phase` |
 | 第五章 | §5.4 门图鉴表之前 | `qubit-geometry` · `hadamard` |
 | 第五章 | §5.4 门图鉴算例之后、文献注记之前 | `qubit-geometry` · `hzh` |

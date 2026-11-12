@@ -11,7 +11,7 @@ In classical Chinese, the character *liàng* (量) preserves an older wisdom thr
 This chapter takes our first step in breaking metaphysical illusions. Combining geometric pictures with theorems verified in the Lean kernel, we develop the author's interpretation: **first comes the relational verb of two states measuring one another (*liáng*); only afterward appears the discrete click on the detector screen (*liàng*).** Every celebrated "paradox" of introductory quantum mechanics begins the moment we invert cause and effect, projecting the outcome of a relational act backward in time and hardening it into the private possession of an isolated thing.
 
 ::: {.figure src="ch01-overview"}
-**Figure 1.** The chapter at a glance. Panel I: a single arrow $A$ in empty space; however it is turned about its tail, the grey dashed copies look alike and no $\theta$ can be named. Panel II: behind two arrows $x$ and $y$ stands a grey dashed external frame $C$, and the cyan angle $\theta$ between them does not need it. Panel III: the cyan arrow $A$ serves as the ruler, the amber arrow $B$ opens an angle $\theta$ with it, and an ideal two-outcome reading lands only at the two ends of $A$'s line, $+1$ and $-1$.
+**Figure 1.** The chapter at a glance. Panel I: the cyan angle $\theta$ between two arrows $x$ and $y$; the grey dashed external frame $C$ behind them is struck out, since the angle does not need it. Panel II: the cyan arrow $A$ serves as the ruler, the amber arrow $B$ opens an angle $\theta$ with it, and an ideal two-outcome reading lands only at the two ends of $A$'s line, $+1$ and $-1$. Panel III: the amber $\alpha$ and $\beta$ in two complex planes on the left are four real numbers; the Bloch sphere on the right carries a single amber arrow and two angles $\theta$ and $\phi$.
 :::
 
 ## 1.1 One Is Too Few, Three Is Redundant {#sec-ch01-1}
@@ -68,10 +68,6 @@ $$
 :::
 
 Without drawing a single coordinate axis, the $60^\circ$ inclination between $x$ and $y$ steps straight out of the port contrast. Two states meeting in the dark carry their own ruler; every third reference frame $C$ is scaffolding waiting to be dismantled ([Chapter 2](ch02-born-rule.md)).
-
-::: {.viz src="qubit-geometry" preset="line" height="500"}
-**Two arrows, each the other's ruler.** Start with two aligned directions on the qubit Bloch sphere: the amber arrow $B$ lies along the cyan ruler $A$, their angle is $0^\circ$, and the cyan line has length $1$. Drag $B$ to see the angle and its shadow on $A$ change together.
-:::
 
 > One monad alone is mute; three points breed coordinate mirages; two arrows meeting in the dark suffice to measure the world.
 
@@ -220,6 +216,10 @@ $$
 
 chain consecutive modes together ($A_{00} = A_{11} = \cdots = A_{N-1,N-1} = c$) and banish every relative phase twist. Conversely, if the overlap graph breaks into disconnected islands (as under a superselection rule forbidding coherent superpositions between two sectors), independent phases $c_1 \neq c_2$ on the two islands become physically undetectable across any allowed ray test — confirming once again that **without pairwise overlapping comparison, even relative phase has no physical meaning.**
 
+::: {.figure src="ch01-phase-chain"}
+**Clasp neighbours pairwise and the phases lock into one.** In the top row the six dials are the phases of a diagonal unitary $A$ on six modes, and the five cyan edges are the test rays $e_i + e_{i+1}$, linking the six modes into one chain; every pointer points the same way: $A = cI$ ([@thm-ray-phase-rigidity]). In the bottom row the edge between modes $2$ and $3$ is missing, and the two islands point two different ways, $c_2 \neq c_1$, while the four remaining tests still pass; this is a hand counterexample in which the theorem's connectivity premise fails, not part of the theorem.
+:::
+
 Within the standard pure-state ray description, [@thm-ray-phase-rigidity] characterizes the unitary freedom preserving these rays. For normalized $\lvert\psi\rangle$, replacing the column vector by its rank-one projector $\rho = \lvert\psi\rangle\langle\psi\rvert$ annihilates global phase automatically: for $c\in U(1)$, $(c\lvert\psi\rangle)(\bar{c}\langle\psi\rvert) = |c|^2 \lvert\psi\rangle\langle\psi\rvert = \lvert\psi\rangle\langle\psi\rvert$.
 
 Better still, for a single qubit, the traceless directional part of every such $2\times 2$ Hermitian matrix corresponds bijectively to an ordinary real vector $\vv{a} = (a_0, a_1, a_2) \in \mathbb{R}^3$. With the three Pauli matrices
@@ -279,6 +279,10 @@ Substituting $B(\vv{a})$ from [@prop-qubit-bloch-core] into the preceding defini
 | $-\vv{e}_2 = (0, -1, 0)$ | $\lvert -i\rangle = \frac{1}{\sqrt{2}}\binom{1}{-i}$ | $\frac{1}{2}\begin{pmatrix} 1 & i \\ -i & 1 \end{pmatrix}$ | Back/Y pole ($-Y$) |
 
 Notice the most revealing geometric clue in this table: $\lvert 0\rangle$ and $\lvert 1\rangle$, which are orthogonal in Hilbert space ($\langle 0\mid 1\rangle = 0$, $90^\circ$), do not sit at right angles on the Bloch sphere — they sit at **opposite poles**, North $+\vv{e}_3$ and South $-\vv{e}_3$, separated by $\theta = 180^\circ$! Why is the Hilbert-space angle $\theta/2$ half the physical angle $\theta$ on the sphere? That famous factor of one-half is a direct consequence of zero-redundancy inner-product projection, as the next chapter will reveal.
+:::
+
+::: {.viz src="qubit-geometry" preset="poles" height="500"}
+**The six poles: two orthogonal states are antipodal on the sphere.** The six poles are three antipodal pairs: $\lvert 0\rangle$ and $\lvert 1\rangle$ at the north and south poles, $\lvert\pm\rangle$ at $\pm\vv{e}_1$, $\lvert\pm i\rangle$ at $\pm\vv{e}_2$. The cyan $A$ sits at the north pole $\lvert 0\rangle$ and the amber $B$ stops due east at $\lvert +\rangle$, $90^\circ$ away; the top left reads the two diagonal entries $\frac{1 \pm b_2}{2}$ of $B$'s projection matrix, both $\frac{1}{2}$ here ([@prop-qubit-bloch-core]). Drag $B$ to the south pole $\lvert 1\rangle$: the angle becomes $180^\circ$ and the diagonal entries become $0$ and $1$.
 :::
 
 With this, our first conceptual housecleaning is complete: there are no isolated "quantum pellets" floating in a void, only directional rays encountering and measuring one another on a sphere; and there are no ghostly four-parameter complex column vectors, within the scope of single-qubit pure states, only real unit arrows $\vv{a} \in S^2$ stripped of normalization and global-phase redundancy. When two such real arrows $\vv{a}$ and $\vv{b}$ meet face to face, how do they compute transition probabilities directly without borrowing any external coordinate frame? Let us open the door to [Chapter 2](ch02-born-rule.md).
