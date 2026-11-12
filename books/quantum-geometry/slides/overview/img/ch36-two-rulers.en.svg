@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch36-two-rulers" data-lang="en" viewBox="0 0 460 236" width="460" height="236" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="Two rulers. The upper one is the angle θ from 0° to 90°, cut off at 90° by a magenta wall. The lower one is the rapidity η, running from 0 to the right with an arrow marked +∞. Six cyan points sit evenly on the lower ruler, labelled k = 0 to 5; dashed lines take them to their angles on the upper ruler: the first at θ* ≈ 42°, the rest crowding ever closer to the 90° wall, all to its left.">
+<title>Two rulers. The upper one is the angle θ from 0° to 90°, cut off at 90° by a magenta wall. The lower one is the rapidity η, running from 0 to the right with an arrow marked +∞. Six cyan points sit evenly on the lower ruler, labelled k = 0 to 5; dashed lines take them to their angles on the upper ruler: the first at θ* ≈ 42°, the rest crowding ever closer to the 90° wall, all to its left.</title>
+<style>.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}</style>
+<line x1="44" y1="74" x2="374" y2="74" class="ts-ink" stroke-width="2" fill="none"/>
+<line x1="44" y1="74" x2="44" y2="80" class="ts-dim" stroke-width="1.2" fill="none"/>
+<line x1="99" y1="74" x2="99" y2="80" class="ts-dim" stroke-width="1.2" fill="none"/>
+<line x1="154" y1="74" x2="154" y2="80" class="ts-dim" stroke-width="1.2" fill="none"/>
+<line x1="209" y1="74" x2="209" y2="80" class="ts-dim" stroke-width="1.2" fill="none"/>
+<line x1="264" y1="74" x2="264" y2="80" class="ts-dim" stroke-width="1.2" fill="none"/>
+<line x1="319" y1="74" x2="319" y2="80" class="ts-dim" stroke-width="1.2" fill="none"/>
+<line x1="374" y1="74" x2="374" y2="80" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="44" y="96" font-size="13" text-anchor="middle">0°</text>
+<text class="tf-dim" x="209" y="96" font-size="13" text-anchor="middle">45°</text>
+<line x1="374" y1="52" x2="374" y2="88" class="ts-magenta" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+<text class="tf-magenta" x="374" y="44" font-size="14" text-anchor="middle" font-weight="600">90° pure light</text>
+<text class="tf-ink" x="32" y="79.76" font-size="16" text-anchor="end" font-style="italic">θ</text>
+<line x1="44" y1="176" x2="429.5" y2="176" class="ts-ink" stroke-width="2" fill="none"/>
+<path d="M438 176 L428 180.2 L428 171.8Z" class="tf-ink"/>
+<line x1="44" y1="176" x2="44" y2="170" class="ts-dim" stroke-width="1.2" fill="none"/>
+<line x1="94" y1="176" x2="94" y2="170" class="ts-dim" stroke-width="1.2" fill="none"/>
+<line x1="144" y1="176" x2="144" y2="170" class="ts-dim" stroke-width="1.2" fill="none"/>
+<line x1="194" y1="176" x2="194" y2="170" class="ts-dim" stroke-width="1.2" fill="none"/>
+<line x1="244" y1="176" x2="244" y2="170" class="ts-dim" stroke-width="1.2" fill="none"/>
+<line x1="294" y1="176" x2="294" y2="170" class="ts-dim" stroke-width="1.2" fill="none"/>
+<line x1="344" y1="176" x2="344" y2="170" class="ts-dim" stroke-width="1.2" fill="none"/>
+<text class="tf-dim" x="44" y="164" font-size="13" text-anchor="middle">0</text>
+<text class="tf-dim" x="438" y="162" font-size="14" text-anchor="end">+∞</text>
+<text class="tf-ink" x="32" y="181.76" font-size="16" text-anchor="end" font-style="italic">η</text>
+<line x1="84.87" y1="176" x2="199.27" y2="74" class="ts-cyan" stroke-width="1.1" stroke-dasharray="3 3" fill="none" opacity="0.8"/>
+<circle cx="84.87" cy="176" r="4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="199.27" cy="74" r="4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-cyan" x="84.87" y="198" font-size="13" text-anchor="middle">0</text>
+<line x1="134.87" y1="176" x2="306.33" y2="74" class="ts-cyan" stroke-width="1.1" stroke-dasharray="3 3" fill="none" opacity="0.8"/>
+<circle cx="134.87" cy="176" r="4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="306.33" cy="74" r="4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-cyan" x="134.87" y="198" font-size="13" text-anchor="middle">1</text>
+<line x1="184.87" y1="176" x2="348.92" y2="74" class="ts-cyan" stroke-width="1.1" stroke-dasharray="3 3" fill="none" opacity="0.8"/>
+<circle cx="184.87" cy="176" r="4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="348.92" cy="74" r="4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-cyan" x="184.87" y="198" font-size="13" text-anchor="middle">2</text>
+<line x1="234.87" y1="176" x2="364.76" y2="74" class="ts-cyan" stroke-width="1.1" stroke-dasharray="3 3" fill="none" opacity="0.8"/>
+<circle cx="234.87" cy="176" r="4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="364.76" cy="74" r="3" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-cyan" x="234.87" y="198" font-size="13" text-anchor="middle">3</text>
+<line x1="284.87" y1="176" x2="370.6" y2="74" class="ts-cyan" stroke-width="1.1" stroke-dasharray="3 3" fill="none" opacity="0.8"/>
+<circle cx="284.87" cy="176" r="4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="370.6" cy="74" r="3" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-cyan" x="284.87" y="198" font-size="13" text-anchor="middle">4</text>
+<line x1="334.87" y1="176" x2="372.75" y2="74" class="ts-cyan" stroke-width="1.1" stroke-dasharray="3 3" fill="none" opacity="0.8"/>
+<circle cx="334.87" cy="176" r="4" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<circle cx="372.75" cy="74" r="3" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-cyan" x="334.87" y="198" font-size="13" text-anchor="middle">5</text>
+<text class="tf-dim" x="68.87" y="198" font-size="13" text-anchor="end"><tspan font-style="italic">k</tspan> =</text>
+<text class="tf-cyan" x="199.27" y="62" font-size="14" text-anchor="middle">θ*</text>
+<text class="tf-dim" x="209" y="224" font-size="13" text-anchor="middle">equal steps Δη = 1  ·  sin θ = tanh η</text>
+</svg>
