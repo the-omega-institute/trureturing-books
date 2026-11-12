@@ -68,7 +68,15 @@ Across the frozen finite-dimensional measurement, tomography, pure-state, and en
 1. **Modulus-Square Reciprocity of Rank-One Born Pairing** ([`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight)): Let $n, \kappa$ be finite types (`[Fintype n] [DecidableEq n] [Fintype kappa]`), let $P : \kappa \to M_n(\mathbb{C})$ satisfy `IsRecordMeasurement P`, and let $\rho \in M_n(\mathbb{C})$ satisfy `rho.PosSemidef ∧ Matrix.trace rho = 1`. Whenever $P_k = \phi\phi^*$ (`Matrix.vecMulVec phi (star phi)`) and $\rho = \psi\psi^*$ (`Matrix.vecMulVec psi (star psi)`),
 
    $$
-   \operatorname{recordWeight}(P, \rho, k) = \bigl(\|\phi^* \bullet_v \psi\|^2 : \mathbb{C}\bigr) \;\land\; \operatorname{recordWeight}(P, \rho, k) = \operatorname{Tr}(\rho P_k) \;\land\; \operatorname{unreadState}(P, \rho) = \sum_{j \in \kappa} \operatorname{recordWeight}(P, \rho, j)\bullet \operatorname{conditionalState}(P, \rho, j);
+   \begin{aligned}
+   &\operatorname{recordWeight}(P, \rho, k) \\
+   &\quad = \bigl(\|\phi^* \bullet_v \psi\|^2 : \mathbb{C}\bigr) \\
+   &{}\land\; \operatorname{recordWeight}(P, \rho, k) \\
+   &\quad = \operatorname{Tr}(\rho P_k) \\
+   &{}\land\; \operatorname{unreadState}(P, \rho) \\
+   &\quad = \sum_{j \in \kappa}\Bigl(\operatorname{recordWeight}(P, \rho, j) \\
+   &\qquad \bullet \operatorname{conditionalState}(P, \rho, j)\Bigr);
+   \end{aligned}
    $$
 2. **Complementary-Context Centered-Purity Pythagoras** ([`complementary_context_probability_pythagoras`](lean:D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras)): Let $d, L$ be finite types with $d$ nonempty, let $E$ be a complete real inner-product space, and let `visible` be a closed subspace of $E$. If the centered purity satisfies $\operatorname{Re}\operatorname{Tr}(\rho^2) - |d|^{-1} = \|\mathrm{state}\|^2$ and $\|\mathrm{visible.starProjection}(\mathrm{state})\|^2 = \sum_{l \in L}\sum_{j \in d}\bigl(\mathrm{probability}(l, j) - |d|^{-1}\bigr)^2$, then
 
