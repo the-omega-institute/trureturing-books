@@ -66,7 +66,7 @@
   const vt = (x, d = 2) => `(${x.map((y) => fix(y, d)).join(', ')})`;
 
   /* ---------- state ---------- */
-  const S = { rho: 1, plane: 'e23', R0: ONE.slice(), seed: 0, fan: false, ref: false, band: true, max: FULL };
+  const S = { rho: 1, plane: 'e23', R0: ONE.slice(), seed: 0, fan: false, ref: false, band: true, max: FULL, mu: 0, unrolled: false };
   const PL = () => PLANES[S.plane];
   /** ψ and everything woven from it at rail value t. */
   function at(t) {
@@ -82,130 +82,217 @@
       Jback: Math.acos(clamp(v3.dot(v3.unit(J), v3.unit(J0)), -1, 1)) };
   }
 
-  /* ---------- the band ---------- */
-  const RB = 1.5, HW = 0.5;
+  /* ---------- where the band starts ---------- */
   /** Bearing (angle in the plane of the turn, from a towards b) of the start of J; 0 when J lies on the axis. */
   function bearing0() {
     const pl = PL(), J0 = at(0).J0, x = v3.dot(J0, pl.a), y = v3.dot(J0, pl.b);
     return Math.hypot(x, y) > 1e-6 * S.rho ? Math.atan2(y, x) : 0;
   }
   const radial = (pl, al) => v3.add(v3.scale(pl.a, Math.cos(al)), v3.scale(pl.b, Math.sin(al)));
-  /** The centre of the band at turn u, and its width direction (half a turn per round). */
-  function bandAt(u, a0) {
-    const pl = PL(), r = radial(pl, a0 + u), tg = radial(pl, a0 + u + PI / 2);
-    return { c: v3.scale(r, RB), w: v3.add(v3.scale(pl.n, Math.cos(u / 2)), v3.scale(r, Math.sin(u / 2))), r, tg };
+  /* ---------- the solid: the one-sided band, or (μ > 0) the pointer ball and the memory shell it is split into ----------
+     The band goes once round the axis n at radius RB. Its width direction w(t) = cos(t/2) n + sin(t/2) r(t) turns half
+     a turn per round (r(t) is the outward unit vector at the bearing a0 + t), so it is a Möbius band, drawn as a thin
+     slab. It is cut along its centre line into one long strip, t from 0 to 720°: the part with t < 360° (the first
+     round, "the pointer") lies on one side of the centre line and the part with t ≥ 360° (the second round, "the
+     memory") on the other; at μ = 0 the two pieces close up into the band, with no seam. At μ = 1 the first piece is
+     a ball round the centre and the second a ring shell round it, the dualist picture of §39.1 (MODEL); in between,
+     every point of the solid lies on the straight segment between its two places. The flag of ψ(t) stands on the
+     strip at t, from the centre line to the edge, and its tip is the point of the edge at t. */
+  const RB = 1.5, HW = 0.5, TH = 0.05, RBALL = 0.62, RTOR = 1.62, ATOR = 0.36, FACE = 0.42;
+  const NU = 96, NV = 20;
+  /** Frame at turn t: centre c, outward r, travel T, axis n, width direction w and the band's normal N = w × T. */
+  function frame(t, a0) {
+    const pl = PL(), r = radial(pl, a0 + t), T = radial(pl, a0 + t + PI / 2), c2 = Math.cos(t / 2), s2 = Math.sin(t / 2);
+    return { r, T, n: pl.n, c: v3.scale(r, RB), w: v3.add(v3.scale(pl.n, c2), v3.scale(r, s2)), N: v3.add(v3.scale(r, -c2), v3.scale(pl.n, s2)) };
   }
+  /** The cross-section of the slab at v in [0, 1]: [across (in half-widths), up (in half-thicknesses)]: the top face
+      from the centre line out, the rounded rim, the bottom face back in. */
+  function section(v) {
+    if (v <= FACE) return [v / FACE, 1];
+    if (v >= 1 - FACE) return [(1 - v) / FACE, -1];
+    const f = PI * (v - FACE) / (1 - 2 * FACE);
+    return [1 + (TH / HW) * Math.sin(f), Math.cos(f)];
+  }
+  function bandPoint(t, v, a0) { const F = frame(t, a0), s = section(v); return v3.add(F.c, v3.add(v3.scale(F.w, HW * s[0]), v3.scale(F.N, TH * s[1]))); }
+  /** Where the same point of the strip sits in the split picture (μ = 1): piece 0 a ball, piece 1 a ring shell. */
+  function splitPoint(piece, t, v, a0) {
+    const F = frame(t, a0);
+    if (!piece) { const th = PI * v; return v3.add(v3.scale(F.r, RBALL * Math.sin(th)), v3.scale(F.n, RBALL * Math.cos(th))); }
+    const ph = TAU * v + PI / 2;
+    return v3.add(v3.scale(F.r, RTOR + ATOR * Math.cos(ph)), v3.scale(F.n, ATOR * Math.sin(ph)));
+  }
+  /** A point of the solid: piece 0 has t in [0, 360°], piece 1 in [360°, 720°]. */
+  function solidPoint(piece, t, v, a0, mu) { const b = bandPoint(t, v, a0); return mu > 0 ? v3.lerp(b, splitPoint(piece, t, v, a0), mu) : b; }
+  /** The edge of the solid at t (the middle of the rim), pushed out by `off` along the outward direction of the edge. */
+  function edgeAt(t, a0, mu, off) {
+    const pc = pieceOf(t), p = solidPoint(pc, t, 0.5, a0, mu), q = v3.lerp(solidPoint(pc, t, 0, a0, mu), solidPoint(pc, t, 1, a0, mu), 0.5);
+    const out = v3.unit(v3.sub(p, q));
+    return { p: v3.add(p, v3.scale(out, off || 0)), out };
+  }
+  const pieceOf = (t) => (t < TAU - 1e-9 ? 0 : 1);
 
   /* ---------- stage ---------- */
-  let drag = false;
-  const stage = kit.stage3($('stage'), {
-    canvas: $('cv'), radius: TRV.thumbMode ? 0.25 : 0.23, cy: 0.52, yaw: -0.5, pitch: 0.36,
+  let drag = null, last = { nodes: [], tip: null };
+  const stage = kit.solid($('stage'), {
+    canvas: $('cv'), radius: TRV.thumbMode ? 0.235 : 0.25, cy: 0.52, yaw: -1.1, pitch: 0.5,
     onChange: () => paint(),
-    onPick: (ev, st) => { const X = at(clock.t); drag = st.near(ev, X.J) < 26; return drag; },
-    onDrag: (ev, st) => { if (!drag) return; cards.mark(null); restoreMax(); aimJ(st.pick(ev)); },
-    onDrop: () => { drag = false; }
+    onPick: (ev, st) => {
+      if (S.unrolled) return false;
+      const X = at(clock.t);
+      if (st.near(ev, X.J) < 24 && !st.occluded(X.J, 0.02)) { drag = 'J'; return true; }
+      const k = st.nearest(ev, last.nodes.map((n) => n.p), 13);
+      if (k >= 0) { leave(); clock.pause(); clock.set(last.nodes[k].t); drag = 'tip'; return true; }
+      if (last.tip && st.near(ev, last.tip) < 18) { drag = 'tip'; return true; }
+      drag = null; return false;
+    },
+    onDrag: (ev, st) => {
+      if (drag === 'J') { leave(); aimJ(st.pick(ev)); return; }
+      if (drag !== 'tip') return;
+      const h = st.hit(ev);
+      if (h && (h.id === 'piece0' || h.id === 'piece1')) { leave(); clock.pause(); clock.set(clamp(h.u, 0, clock.max)); }
+    },
+    onDrop: () => { drag = null; }
   });
+  function leave() { cards.mark(null); restoreMax(); }
 
-  function drawBand(st, t, a0) {
-    const N = 120, quads = [];
-    for (let i = 0; i < N; i++) {
-      const u0 = TAU * i / N, u1 = TAU * (i + 1) / N, p = bandAt(u0, a0), q = bandAt(u1, a0);
-      const pts = [v3.add(p.c, v3.scale(p.w, -HW)), v3.add(p.c, v3.scale(p.w, HW)), v3.add(q.c, v3.scale(q.w, HW)), v3.add(q.c, v3.scale(q.w, -HW))];
-      quads.push({ pts, d: pts.reduce((s, x) => s + st.p(x)[2], 0) / 4 });
+  /** The 2D picture of the card SEAM: the band unrolled along its base circle, bearing from left to right. At each
+      bearing the band's width direction w = cos(t/2) n + sin(t/2) r turns in the plane of n (up) and r (out of the
+      page, drawn slanting down and to the left); the flags planted every 30° are drawn as w, and the first and the last
+      one are repeated side by side on the right. */
+  function drawUnrolled(t) {
+    const cv = $('flat'), g = kit.plot(cv, { x: [-0.8, 12.8], y: [-6.2, 2.4], pad: [16, 16, 60, 52], equal: true });
+    const OUT = [-0.42, -0.34], X = (deg) => deg / 30, FL = 1.45;   // r drawn slanting; one flag every 30° = one unit
+    const dir = (deg) => { const h = deg * DEG / 2; return [Math.sin(h) * OUT[0], Math.cos(h) + Math.sin(h) * OUT[1]]; };
+    const flagAt = (x0, y0, deg, s) => {
+      const d = dir(deg), k = s.len || FL, tip = [x0 + k * d[0], y0 + k * d[1]], mid = [x0 + 0.7 * k * d[0], y0 + 0.7 * k * d[1]];
+      g.line([[x0, y0], tip], s.color, { width: s.width, dash: s.dash });
+      g.poly([tip, [mid[0] + 0.45, (tip[1] + mid[1]) / 2], mid], s.color, { alpha: s.dash ? 0 : 0.9, stroke: s.color, width: 1.2 });
+    };
+    // the strip the band sweeps, its centre line (the bearing) and the flags planted every 30°
+    g.poly([[X(0), -1.6], [X(360), -1.6], [X(360), 1.6], [X(0), 1.6]], P.violet, { alpha: 0.08 });
+    g.line([[X(0), 0], [X(360), 0]], P.violet, { width: 1.4, alpha: 0.8 });
+    for (let d = 0; d <= 360; d += 90) g.text(X(d), -1.95, `${d}°`, P.dim, { align: 'center', size: 11 });
+    g.text(X(0), 2.15, L('沿底圈展开：n 朝上，r 朝屏幕外（斜画）', 'unrolled along the base circle: n up, r out of the page (drawn slanting)'), P.dim, { size: 11 });
+    const shown = Math.min(t / DEG, 360 + 1e-6);
+    for (let d = 0; d <= shown + 1e-6; d += 30) flagAt(X(d), 0, d, { color: P.violet, width: d === 0 ? 1.6 : 2.4, dash: d === 0 ? [4, 3] : null });
+    if (t > 1e-3 && t < TAU - 1e-3) { const d = t / DEG; flagAt(X(d), 0, d, { color: P.violet, width: 3 }); g.dot(X(d), 0, P.amber, 5); }
+    // below: the first and the last flag side by side
+    g.line([[3.2, -4.3], [8.8, -4.3]], P.violet, { width: 1.2, alpha: 0.5 });
+    flagAt(4.6, -4.3, 0, { color: P.violet, width: 2, dash: [4, 3], len: 1.6 });
+    g.text(4.6, -5.6, L('出发 · 0°', 'start · 0°'), P.violet, { align: 'center', size: 12 });
+    if (t >= TAU - 1e-6) {
+      flagAt(7.4, -4.3, 360, { color: P.violet, width: 3.2, len: 1.6 });
+      g.dot(7.4, -4.3, P.amber, 5);
+      g.text(7.4, -2.5, L('回到起点 · 360°', 'back at the start · 360°'), P.violet, { align: 'center', size: 12 });
     }
-    quads.sort((x, y) => x.d - y.d);
-    for (const qd of quads) st.poly(qd.pts, { fill: P.violet, alpha: (TRV.thumbMode ? 0.2 : 0.11) * (qd.d < 0 ? 0.7 : 1) });
-    // the edge: one closed curve that goes twice round
-    const edge = [];
-    for (let i = 0; i <= 2 * N; i++) { const u = 2 * TAU * i / (2 * N), b = bandAt(u, a0); edge.push(v3.add(b.c, v3.scale(b.w, HW))); }
-    st.path(edge, { color: P.violet, width: 1, alpha: 0.5, back: 0.35 });
-    // the base circle of the band
-    st.circle([0, 0, 0], PL().n, RB, { color: P.violet, width: 0.8, alpha: 0.35, dash: [2, 5], back: 0.4 });
   }
-  /** A flag: a pole from the centre line of the band to its edge, with a pennant at the top pointing along the travel. */
-  function flag(st, u, a0, s) {
+
+  /** The flag of ψ(t) on the face of the solid that looks at the viewer: pole from the centre line to the edge along
+      the surface, pennant at the edge pointing along the travel. */
+  function flag(st, t, a0, mu, s) {
     s = s || {};
-    const b = bandAt(u, a0), tip = v3.add(b.c, v3.scale(b.w, HW)), k = s.small ? 0.6 : 1;
-    st.line(b.c, tip, { color: P.violet, width: (s.width || 2.4), alpha: s.alpha == null ? 1 : s.alpha, dash: s.dash, fade: false });
-    const low = v3.add(b.c, v3.scale(b.w, HW * (1 - 0.42 * k))), mid = v3.add(v3.add(b.c, v3.scale(b.w, HW * (1 - 0.21 * k))), v3.scale(b.tg, 0.3 * k));
-    st.poly([tip, mid, low], s.dash ? { color: P.violet, width: 1.4, dash: s.dash, strokeAlpha: 0.9 } : { fill: P.violet, alpha: (s.alpha == null ? 1 : s.alpha) * 0.9, color: P.violet, width: 1, strokeAlpha: 1 });
-    return { base: b.c, tip };
-  }
-  function drawFlags(st, t, a0) {
-    // the trail of the flag's tip: the edge of the band, as far as ψ has gone
-    if (!S.fan && t > 1e-3) {
-      const n = Math.max(2, Math.ceil(t / (2 * DEG))), tr = [];
-      for (let j = 0; j <= n; j++) { const u = t * j / n, b = bandAt(u, a0); tr.push(v3.add(b.c, v3.scale(b.w, HW))); }
-      st.path(tr, { color: P.violet, width: 3.2, alpha: 0.95, back: 0.45 });
-    }
-    if (S.fan) for (let u = PI / 6; u < t - 1e-6; u += PI / 6) flag(st, u, a0, { width: 1.6, alpha: 0.7, small: true });
-    // the flag at the start (dashed) and the flag now
-    const moved = t > 0.05;
-    const f0 = moved ? flag(st, 0, a0, { width: 1.8, dash: [4, 3], alpha: 0.9 }) : null;
-    const f = flag(st, t, a0, { width: 3.2 });
-    st.dot(f.base, 5.5, P.amber, { glow: 12, fade: false });
-    const up = (u) => (v3.dot(bandAt(u, a0).w, PL().n) < 0 ? 18 : -18);
-    // the start flag is labelled when the current flag is back at the same bearing (or far from it)
-    const near = Math.abs(((t + PI) % TAU) - PI) < 0.6;
-    if (f0 && (!near || Math.cos(t / 2) < 0)) st.tag('flag0', f0.tip, L('出发时', 'at the start'), 'raw c-vi', { dx: 0, dy: up(0) });
-    st.tag('flag', f.tip, L('ψ 的小旗', 'flag of ψ'), 'raw c-vi', { dx: 0, dy: up(t) });
-    return f;
+    const pc = pieceOf(t), F = frame(t, a0), D = st.facing();
+    const along = (v) => solidPoint(pc, t, v, a0, mu);
+    const top = v3.dot(v3.sub(along(FACE * 0.5), along(1 - FACE * 0.5)), D) >= 0;   // which face is nearer the eye
+    const vs = (f) => (top ? FACE * f : 1 - FACE * f);
+    const lift = v3.scale(F.N, (top ? 1 : -1) * (TH * (1 - mu) + 0.012));   // just off the face, so it sits on it
+    const on = (v) => v3.add(along(v), lift);
+    const pole = []; for (let k = 0; k <= 8; k++) pole.push(on(vs(k / 8)));
+    st.line(pole, { color: P.violet, width: s.width || 2.6, alpha: s.alpha == null ? 1 : s.alpha, dash: s.dash });
+    const tip = on(vs(1)), low = on(vs(0.62)), mid = v3.add(on(vs(0.81)), v3.scale(F.T, 0.26 * (s.small ? 0.7 : 1)));
+    st.fan([tip, mid, low], s.dash ? { color: P.violet, width: 1.4, dash: s.dash, strokeAlpha: 0.95 } : { fill: P.violet, alpha: (s.alpha == null ? 1 : s.alpha) * 0.95, color: P.violet, width: 1, strokeAlpha: 1 });
+    return { base: along(vs(0)), tip, rim: along(0.5) };
   }
   function drawSpin(st, X) {
-    const k = Math.sqrt(X.rho), a = v3.scale(X.A, k), b = v3.scale(X.B, k), ab = v3.add(a, b);
-    st.poly([[0, 0, 0], a, ab, b], { fill: P.magenta, alpha: TRV.thumbMode ? 0.4 : 0.26, color: P.magenta, width: 1.4, strokeAlpha: 0.9 });
-    // the sense of S: a small arc from Re₁R̃ towards Re₂R̃
+    const k = Math.sqrt(X.rho), a = v3.scale(X.A, k), b = v3.scale(X.B, k);
+    st.fan([[0, 0, 0], a, v3.add(a, b), b], { fill: P.magenta, alpha: TRV.thumbMode ? 0.42 : 0.3, color: P.magenta, width: 1.4 });
     const arc = [];
     for (let j = 0; j <= 16; j++) { const g = (PI / 2) * j / 16; arc.push(v3.scale(v3.add(v3.scale(X.A, Math.cos(g)), v3.scale(X.B, Math.sin(g))), 0.42 * k)); }
-    st.path(arc, { color: P.magenta, width: 1.6, alpha: 0.95, fade: false });
-    const end = arc[arc.length - 1], prev = arc[arc.length - 3];
-    st.arrow(prev, end, { color: P.magenta, width: 1.6, headSize: 7, fade: false });
-    st.tag('S', v3.scale(ab, 0.62), 'S', 'raw c-mg', { dx: 0, dy: 0 });
+    st.line(arc, { color: P.magenta, width: 1.6, alpha: 0.95 });
+    st.arrow(arc[arc.length - 3], arc[arc.length - 1], { color: P.magenta, width: 1.6, headSize: 7 });
+    st.tag('S', v3.scale(v3.add(a, b), 0.62), 'S', 'raw c-mg', { dx: 0, dy: 0 });
   }
   function drawRef(st) {
-    st.arrow([0, 0, 0], E3, { color: P.dim, width: 1.4, dash: [4, 4], headSize: 8, fade: false });
+    st.arrow([0, 0, 0], E3, { color: P.dim, width: 1.4, dash: [4, 4], headSize: 8 });
     st.tag('e3', [0, 0, 1.12], 'e₃', 'raw ink', {});
-    st.poly([[0, 0, 0], E1, [1, 1, 0], E2], { color: P.dim, width: 1, dash: [3, 4], strokeAlpha: 0.8 });
+    st.line([[0, 0, 0], E1, [1, 1, 0], E2], { color: P.dim, width: 1, dash: [3, 4], alpha: 0.8, close: true });
     st.tag('e12', [1, 1, 0], 'e₁e₂', 'raw ink', { dx: 16, dy: 8 });
   }
+  function drawJ(st, J) { st.arrow([0, 0, 0], J, { color: P.cyan, width: 3.4, headSize: 13 }); }
 
   function drawStage() {
-    const st = stage, t = clock.t, X = at(t), a0 = bearing0();
-    st.begin();
-    st.sphere(1, { lat: [0], lon: 0, shade: 0.06, alpha: 0.3 });
-    const n = PL().n;
-    if (!S.ref) {
-      st.line(v3.scale(n, -1.95), v3.scale(n, 1.95), { color: P.violet, width: 1.4, alpha: 0.75, back: 0.4 });
-      st.tag('axis', v3.scale(n, 2.05), 'n', 'raw c-vi', {});
+    const st = stage, t = clock.t, X = at(t), a0 = bearing0(), mu = S.mu;
+    $('flat').hidden = !S.unrolled;
+    if (S.unrolled) {   // the card SEAM: the band unrolled along its base circle (2D)
+      st.begin(); st.end();
+      drawUnrolled(t);
+      $('hudBig').textContent = L('沿底圈展开的光带', 'the band unrolled along its base circle');
+      $('hudSub').innerHTML = `${L('每 30° 插一面小旗', 'a flag every 30°')} · ${L('转过', 'turned')} ${fix(t / DEG, 0)}° · <span class="c-vi">${signText(X)}</span>`;
+      $('legend').innerHTML = [['vi', L('小旗 w = cos(t/2) n + sin(t/2) r；虚线：出发时的那一面', 'flags w = cos(t/2) n + sin(t/2) r; dashed: the one at the start')], ['am', L('此刻', 'now')]].map(([k, q]) => `<span><i class="sw ${k}"></i>${q}</span>`).join('');
+      return X;
     }
-    if (S.band) drawBand(st, t, a0);
+    st.begin();
+    const n = PL().n, ax = [v3.scale(n, -2.05), v3.scale(n, 2.05)];
+    if (!S.ref) { st.line(ax, { color: P.violet, width: 1.4, alpha: 0.75 }); st.tag('axis', v3.scale(n, 2.15), 'n', 'raw c-vi', {}); }
+    const look = { color: P.violet, grid: { every: [4, 2] } };   // one colour: light and shade come from the camera only
+    if (S.band) {
+      for (const piece of [0, 1]) {
+        st.surface(`piece${piece}`, (u, v) => solidPoint(piece, u, v, a0, mu), Object.assign({ u: piece ? [TAU, FULL] : [0, TAU], v: [0, 1], nu: NU, nv: NV }, look));
+      }
+    }
     if (S.ref) drawRef(st);
-    // the path of J's tip so far, and where J started
-    const tip0 = X.J0;
-    const n2 = Math.max(2, Math.ceil(Math.min(t, TAU) / (3 * DEG))), jp = [];
+    const tip0 = X.J0, n2 = Math.max(2, Math.ceil(Math.min(t, TAU) / (3 * DEG))), jp = [];
     for (let j = 0; j <= n2; j++) jp.push(at(Math.min(t, TAU) * j / n2).J);
-    if (t > 1e-3) st.path(jp, { color: P.cyan, width: 1.6, alpha: 0.7, dash: [5, 4], back: 0.4 });
-    if (S.ref && v3.len(v3.sub(v3.unit(X.J), E3)) > 0.05) st.arc(E3, v3.unit(X.J), { color: P.violet, width: 1.4, alpha: 0.8, dash: [3, 3] }, 0.5);
+    if (t > 1e-3) st.line(jp, { color: P.cyan, width: 1.6, alpha: 0.75, dash: [5, 4] });
+    if (S.ref && v3.len(v3.sub(v3.unit(X.J), E3)) > 0.05) { const arc = []; for (let k = 0; k <= 40; k++) arc.push(v3.scale(v3.slerp(E3, v3.unit(X.J), k / 40), 0.5)); st.line(arc, { color: P.violet, width: 1.4, alpha: 0.8, dash: [3, 3] }); }
     drawSpin(st, X);
-    if (t > 1e-3 && v3.len(v3.sub(X.J, tip0)) > 0.05) st.dot(tip0, 4.5, P.cyan, { ring: true, width: 2 });
-    st.arrow([0, 0, 0], X.J, { color: P.cyan, width: 3.4, headSize: 13, glow: 10 });
+    if (t > 1e-3 && v3.len(v3.sub(X.J, tip0)) > 0.05) st.ring(tip0, { color: P.cyan, r: 4.5 });
+    drawJ(st, X.J);
     st.tag('J', X.J, 'J', 'raw c-cy', { dx: 14, dy: -12 });
-    if (S.band) drawFlags(st, t, a0);
+    last = { nodes: [], tip: null };
+    if (S.band) {
+      // the stations: every 30° of the turn, a ring on the edge of the solid (two rounds: 24 rings)
+      for (let k = 0; k < 24; k++) { const tk = k * PI / 6, e = edgeAt(tk, a0, mu, 0.012); last.nodes.push({ t: tk, p: e.p }); st.ring(e.p, { color: P.violet, r: 5, normal: e.out, key: `node${k}` }); }
+      if (S.fan) for (let u = PI / 6; u < t - 1e-6; u += PI / 6) flag(st, u, a0, mu, { width: 1.6, alpha: 0.75, small: true });
+      const f0 = t > 0.05 ? flag(st, 0, a0, mu, { width: 1.8, dash: [4, 3] }) : null;
+      const f = flag(st, t, a0, mu, { width: 3 });
+      // the path of the flag's tip so far: the edge of the band, as far as ψ has gone
+      // the edge: the part the flag's tip has run along is solid, the rest a faint dashed line
+      if (t > 1e-3) {
+        const k = Math.max(2, Math.ceil(t / (2 * DEG))), tr = [];
+        for (let j = 0; j <= k; j++) { const u = t * j / k; tr.push(edgeAt(u, a0, mu, 0.012).p); }
+        st.tube('trail', tr, { color: P.violet, width: 4, glow: 1.1 });
+      }
+      if (t < FULL - 1e-3) {
+        const k = Math.max(2, Math.ceil((FULL - t) / (2 * DEG))), rest = [];
+        for (let j = 0; j <= k; j++) { const u = t + (FULL - t) * j / k; rest.push(edgeAt(Math.min(u, FULL - 1e-9), a0, mu, 0.012).p); }
+        st.line(rest, { color: P.violet, width: 1.3, alpha: 0.55, dash: [3, 5] });
+      }
+      const now = edgeAt(Math.min(t, FULL - 1e-9), a0, mu, 0.03).p;
+      st.bead(now, { color: P.amber, r: 6.5, key: 'now' });
+      last.tip = now;
+      const near = Math.abs(((t + PI) % TAU) - PI) < 0.6;
+      if (f0 && (!near || Math.cos(t / 2) < 0)) st.tag('flag0', f0.tip, L('出发时', 'at the start'), 'raw c-vi', { dx: 0, dy: -16 });
+      st.tag('flag', f.tip, L('ψ 的小旗', 'flag of ψ'), 'raw c-vi', { dx: 0, dy: 18 });
+      if (mu > 0.15) {   // MODEL: the dualist picture
+        st.tag('ptr', v3.scale(n, RBALL * mu + 0.25 * (1 - mu)), L('指针', 'pointer'), 'raw c-cy', { dx: 0, dy: -14 });
+        st.tag('mem', solidPoint(1, FULL - PI / 2, 0.25, a0, mu), L('内存壳', 'memory shell'), 'raw c-mg', { dx: 0, dy: -16 });
+      }
+    }
     st.end();
-    const back = X.c < 0;
-    $('hudBig').textContent = `J² = −S² = ρ² = ${fix(X.J2[0], 2)}`;
+    $('hudBig').textContent = mu > 0.005 ? L(`二元隔墙 μ = ${fix(mu, 2)}（模型）`, `dualist wall μ = ${fix(mu, 2)} (model)`) : `J² = −S² = ρ² = ${fix(X.J2[0], 2)}`;
     $('hudSub').innerHTML = `${L('在', 'in ')}${PL().name}${L(' 面里转过', ', turned')} ${fix(t / DEG, 0)}° · <span class="c-cy">${L('J 离出发方向', 'J from its start')} ${fix(X.Jback / DEG, 0)}°</span> · <span class="c-vi">${signText(X)}</span>`;
     const LEG = [['cy', S.ref ? L('流向量 J = ψe₃ψ̃', 'current J = ψe₃ψ̃') : L('流向量 J = ψe₃ψ̃；虚线：J 走过的路', 'current J = ψe₃ψ̃; dashed: its path')], ['mg', L('自旋面 S = ψe₁e₂ψ̃', 'spin plane S = ψe₁e₂ψ̃')]];
     if (S.ref) LEG.push(['dm', L('参考刀片 e₃ 与 e₁e₂', 'reference blades e₃ and e₁e₂')], ['vi', L('ψ 把 e₃ 带到 J', 'ψ carries e₃ to J')]);
-    else if (S.band) LEG.push(['vi', L('转轴、单侧光带与 ψ 的小旗', 'axis, one-sided band and the flag of ψ')], ['am', L('此刻', 'now')]);
+    else if (S.band) LEG.push(['vi', L('单侧光带、转轴、ψ 的小旗；实线：旗尖走过的边，虚线：还没走的', 'one-sided band, axis, the flag of ψ; solid: the edge its tip has run along, dashed: still ahead')], ['am', L('此刻', 'now')]);
     else LEG.push(['vi', L('转轴 n', 'axis n')]);
     $('legend').innerHTML = LEG.map(([k, s]) => `<span><i class="sw ${k}"></i>${s}</span>`).join('');
-    return Object.assign(X, { back });
+    return X;
   }
   function signText(X) {
     if (Math.abs(X.c - 1) < 1e-9) return 'ψ = +ψ₀';
     if (Math.abs(X.c + 1) < 1e-9) return 'ψ = −ψ₀';
-    return L(`ψ 比 ψ₀：${fix(X.c, 2)}`, `ψ vs ψ₀: ${fix(X.c, 2)}`);
+    return L(`ψ 离 ψ₀ 转过半角 ${fix(Math.acos(Math.max(-1, Math.min(1, X.c))) / DEG, 0)}°`, `ψ has turned a half angle of ${fix(Math.acos(Math.max(-1, Math.min(1, X.c))) / DEG, 0)}° from ψ₀`);
   }
 
   /* ---------- strip: what comes back when ---------- */
@@ -244,6 +331,8 @@
       'A full 360°: the cyan J is back where it started, and so is the magenta S; but the violet flag is on the other side of the band, opposite to the dashed starting flag — ψ = −ψ₀. J and S see the rotation, not the sign of ψ.');
     else if (Math.abs(tm - 2) < 1e-6) note = L('转满 720°：小旗回到出发时的那一面，旗尖走过的路（光带的边）首尾相接——ψ = +ψ₀。',
       'A full 720°: the flag is back on the side it started from and the path of its tip, the edge of the band, closes up — ψ = +ψ₀.');
+    else if (S.mu > 0.005) note = L(`模型：二元隔墙 μ = ${fix(S.mu, 2)}。光带沿中线剪成两件：小旗走第一圈的那一半收成中间的指针球，走第二圈的那一半撑成外面的内存壳，中间隔着缝。μ 只是画面的过渡，本章没有给它数学定义；推回 0，两件就是第三十九章那条单侧光带。`,
+      `Model: dualist wall μ = ${fix(S.mu, 2)}. The band is cut along its centre line into two pieces: the half the flag runs along in its first round shrinks into the pointer ball in the middle, the half of its second round spreads into the memory shell round it, with a gap between. μ only moves the picture; the chapter gives it no mathematical definition. Push it back to 0 and the two pieces are the one-sided band of Chapter 39.`);
     else if (t < 1e-6) note = L('还没转：小旗顺着转轴 n 竖着。J 的长度是 ρ，品红正方形的面积也是 ρ。', 'Not turned yet: the flag stands along the axis n. J has length ρ, and the magenta square has area ρ too.');
     else note = L(`转过 ${fix(t / DEG, 0)}°：J 只转过同样的角，小旗只转过一半（${fix(t / 2 / DEG, 0)}°）。三个平方仍然相等。`,
       `Turned ${fix(t / DEG, 0)}°: J has turned through that angle, the flag through half of it (${fix(t / 2 / DEG, 0)}°). The three squares still agree.`);
@@ -261,13 +350,22 @@
     onChange: () => paint()
   });
   function restoreMax() { if (S.max !== FULL) { S.max = FULL; clock.setMax(FULL, true); } }
-  const fRho = kit.field($('rho'), { fmt: (v) => fix(v, 2), onInput: (v) => { cards.mark(null); restoreMax(); S.rho = v; paint(); } });
-  const planeChips = kit.chips($('planeChips'), 'plane', (v) => { cards.mark(null); restoreMax(); S.plane = v; paint(); });
-  $('psiOne').addEventListener('click', () => { cards.mark(null); restoreMax(); S.R0 = ONE.slice(); paint(); });
-  function randomPsi() { cards.mark(null); restoreMax(); S.seed += 1; S.R0 = randomRotor(S.seed); paint(); }
+  /** μ moves smoothly (a card) or at once (the slider). */
+  let muTween = null;
+  function setMu(v, ms) {
+    if (muTween) { muTween.cancel(); muTween = null; }
+    const m0 = S.mu;
+    if (!ms) { S.mu = v; fMu.set(v); paint(); return; }
+    muTween = kit.tween(ms, (e) => { S.mu = m0 + (v - m0) * e; fMu.set(Math.round(S.mu * 100) / 100); paint(); }, () => { muTween = null; });
+  }
+  const fMu = kit.field($('mu'), { fmt: (v) => fix(v, 2), onInput: (v) => { leave(); setMu(v); } });
+  const fRho = kit.field($('rho'), { fmt: (v) => fix(v, 2), onInput: (v) => { leave(); S.rho = v; paint(); } });
+  const planeChips = kit.chips($('planeChips'), 'plane', (v) => { leave(); S.plane = v; paint(); });
+  $('psiOne').addEventListener('click', () => { leave(); S.R0 = ONE.slice(); paint(); });
+  function randomPsi() { leave(); S.seed += 1; S.R0 = randomRotor(S.seed); paint(); }
   $('psiRandom').addEventListener('click', randomPsi);
-  $('fanChip').addEventListener('click', () => { cards.mark(null); restoreMax(); S.fan = !S.fan; $('fanChip').setAttribute('aria-pressed', String(S.fan)); paint(); });
-  $('bandChip').addEventListener('click', () => { cards.mark(null); restoreMax(); S.band = !S.band; $('bandChip').setAttribute('aria-pressed', String(S.band)); if (S.band && stage.cam.zoom > 1.05) stage.view([stage.cam.yaw, stage.cam.pitch, 1], 400); paint(); });
+  $('fanChip').addEventListener('click', () => { leave(); S.fan = !S.fan; $('fanChip').setAttribute('aria-pressed', String(S.fan)); paint(); });
+  $('bandChip').addEventListener('click', () => { leave(); S.band = !S.band; $('bandChip').setAttribute('aria-pressed', String(S.band)); if (S.band && stage.cam.zoom > 1.05) stage.view([stage.cam.yaw, stage.cam.pitch, 1], 400); paint(); });
   $('rew').addEventListener('click', () => { clock.pause(); clock.set(0); });
   kit.keys({ r: randomPsi });
   /** Choose ψ₀ so that J at the current turn points at the unit vector p. */
@@ -281,11 +379,11 @@
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
-    weave: { rho: 1, plane: 'e23', aim: [0.53, 0.29, 0.8], ref: true, band: false, at: 0, view: [-0.5, 0.36, 1.55] },
-    fierz: { rho: 1.3, plane: 'e31', seed: 7, band: false, play: true, still: 2.2, view: [-0.5, 0.36, 1.3] },
-    turn360: { rho: 1, plane: 'e23', play: true, still: TAU, max: TAU, view: [-0.42, 0.3, 0.9] },
-    seam: { rho: 1, plane: 'e23', fan: true, play: true, still: TAU, max: TAU, view: [-0.42, 0.3, 0.9] },
-    turn720: { rho: 1, plane: 'e23', play: true, still: FULL, view: [-0.42, 0.3, 0.9] }
+    weave: { rho: 1, plane: 'e23', aim: [0.53, 0.29, 0.8], ref: true, at: 0, view: [-1.1, 0.5, 1.05] },
+    fierz: { rho: 1.3, plane: 'e31', seed: 7, play: true, still: 2.2, view: [-0.4, 0.9, 0.95] },
+    turn360: { rho: 1, plane: 'e23', play: true, still: TAU, max: TAU, view: [-1.1, 0.5, 0.95] },
+    seam: { rho: 1, plane: 'e23', fan: true, unrolled: true, play: true, still: TAU, max: TAU, view: [-1.1, 0.5, 0.95] },
+    turn720: { rho: 1, plane: 'e23', play: true, still: FULL, view: [-1.1, 0.5, 0.95] }
   };
   const NOTES = {
     weave: ['ψ₀ 是一枚斜着的旋量（ρ = 1）。它夹住虚线的 e₃，织出青色的流向量 J；夹住虚线的 e₁e₂ 正方形，织出品红的自旋面 S——那块面正好与 J 垂直。紫色虚线小弧是 ψ 把 e₃ 带到 J 走的路。',
@@ -308,7 +406,9 @@
     S.fan = !!p.fan; $('fanChip').setAttribute('aria-pressed', String(S.fan));
     S.band = p.band !== false; $('bandChip').setAttribute('aria-pressed', String(S.band));
     S.ref = !!p.ref;
+    S.unrolled = !!p.unrolled;
     S.max = p.max || FULL;
+    if (booting || TRV.still || S.mu < 0.005) setMu(0); else setMu(0, 700);   // every card is on the closed band
     if (booting || TRV.still) { stage.cam.yaw = p.view[0]; stage.cam.pitch = p.view[1]; stage.cam.zoom = p.view[2]; } else stage.view(p.view, 600);
     clock.pause(); clock.setMax(S.max, true); clock.set(p.at || 0);
     if (p.play) {
@@ -322,7 +422,7 @@
     idle: ['自由探索：拖动 J 的箭头尖换一个 ψ₀，改密度 ρ 或转动的平面，拖时间轴。随时可以再选一张卡。', 'Free play: drag the tip of J to choose another ψ₀, change the density ρ or the plane of the turn, scrub the rail. Pick a card again at any time.'] });
   // leaving a card clears the reference blades it showed
   const mark0 = cards.mark;
-  cards.mark = (id) => { if (!id) S.ref = false; mark0(id); };
+  cards.mark = (id) => { if (!id) { S.ref = false; S.unrolled = false; } mark0(id); };
 
   TRV.drawer({ drawer: $('drawer'), open: $('infoBtn'), close: $('drawerClose') });
   TRV.startGlitch(document.querySelector('.brand'));
@@ -330,24 +430,33 @@
   /* ---------- probe, cover, start ---------- */
   window.CLOSURE_DEBUG = {
     get state() {
-      const t = clock.t, X = at(t), a0 = bearing0(), b = bandAt(t, a0);
+      const t = clock.t, X = at(t), a0 = bearing0(), F = frame(t, a0);
       return { preset: cards.current, t, max: clock.max, playing: clock.playing, rho: S.rho, plane: S.plane, fan: S.fan, ref: S.ref, band: S.band, zoom: stage.cam.zoom,
         psi: X.psi.slice(), psi0: X.psi0.slice(), J: X.J, J0: X.J0, S: X.Sm.slice(), A: X.A, B: X.B,
         J2: X.J2.slice(), S2: X.S2.slice(), rhoM: X.rhoM.slice(), c: X.c, s: X.s, Jback: X.Jback,
-        axis: PL().n.slice(), flagDir: b.w, flagBase: b.c, keyText: $('roKey').textContent };
+        axis: PL().n.slice(), flagDir: F.w, flagBase: F.c, mu: S.mu, unrolled: !!S.unrolled, tip: last.tip, mode: stage.mode, keyText: $('roKey').textContent };
     },
     /** ψ (8 blade coefficients [1, e₁, e₂, e₁e₂, e₃, e₁e₃, e₂e₃, e₁e₂e₃]) at rail value t, without moving the rail. */
     psiAt: (t) => at(t).psi.slice(),
     /** J, S, J², S² and ψψ̃ that the page's product gives for an arbitrary even multivector ψ (8 blade coefficients). */
     bilinears: (psi) => { const J = sandwich(psi, vec(E3)), Sm = sandwich(psi, E12); return { J: vecOf(J), Jm: J, S: Sm, J2: mul(J, J), S2: mul(Sm, Sm), rho: mul(psi, rev(psi)) }; },
     seek: (t) => { clock.pause(); clock.set(t); },
+    /** Set the camera [yaw, pitch, zoom] at once. */
+    view: (v) => { stage.cam.yaw = v[0]; stage.cam.pitch = v[1]; stage.cam.zoom = v[2] || 1; paint.now(); },
+    /** A point of the solid as the page draws it: piece 0 (t in [0, 2π]) or 1 (t in [2π, 4π]), v across the slab. */
+    solid: (piece, t, v, mu) => solidPoint(piece, t, v, bearing0(), mu == null ? S.mu : mu),
+    /** The band's centre line, width direction and normal at t, and its dimensions. */
+    band: (t) => { const F = frame(t, bearing0()); return { c: F.c, w: F.w, N: F.N, HW, TH, FACE }; },
+    /** What the stage has under a viewport point: the piece and its (t, v), or null. */
+    hit: (x, y) => { const h = stage.hit({ clientX: x, clientY: y }); return h && { id: h.id, u: h.u, v: h.v, front: h.front }; },
+    nodes: () => last.nodes.map((n) => { const q = stage.p(n.p), b = $('cv').getBoundingClientRect(); return { t: n.t, x: b.left + q[0], y: b.top + q[1], hidden: stage.occluded(n.p, 0.02) }; }),
     /** Push a playing clock to just before t without stopping it (tests that wait for a card to stop by itself). */
     nudge: (t) => { if (clock.playing && clock.t < t) clock.set(t, true); },
     /** Viewport coordinates of a world point. */
     screen: (v) => { const q = stage.p(v), bx = $('cv').getBoundingClientRect(); return [bx.left + q[0], bx.top + q[1], q[2]]; },
     under: (x, y) => stage.pick({ clientX: x, clientY: y })
   };
-  window.TRV_THUMB = () => { cards.pick('turn720'); stage.cam.yaw = -0.42; stage.cam.pitch = 0.3; stage.cam.zoom = 0.95; clock.pause(); clock.set(1.5 * TAU); paint.now(); };
+  window.TRV_THUMB = () => { cards.pick('turn720'); setMu(0); stage.cam.yaw = -1.1; stage.cam.pitch = 0.5; stage.cam.zoom = 1; clock.pause(); clock.set(1.5 * TAU); paint.now(); };
   cards.pick(cards.initial('weave'));
   booting = false;
   paint();
