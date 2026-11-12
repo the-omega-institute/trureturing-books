@@ -16,7 +16,7 @@
 4. **正交自折叠消解唯我论与四阶终局**：阐明唯一全体如何在互补语境纯度勾股守恒（[@prop-ch39-orthogonal-folding-and-objective-common-factor] 第 1 款，`LEAN ✓`）与正交折叠模型（`MODEL`）下拆分为“局部小我栈帧”与“铁律浩瀚宇宙”，在彻底砍净第 3 点 $C$ 的第四阶终局中同时超越机械唯物论与狂妄唯我论。
 
 ::: {.figure src="ch39-overview"}
-**图 39。** 本章地图：第 I 栏，灰色的指针寄存器 `ptr` 与它和内存之间的虚线隔墙被划掉，每一格 $p$ 都有一支青色箭头离开它又回到它自己——全域 `p ≡ *p`；第 II 栏，琥珀色的刀周围的淡青带子里亮着一串青色格点，带子外什么也没有，这些点投到刀上排成的长短段，短段记 $1$、长段记 $0$，没有相邻的 `11`；第 III 栏，单位箭头 $\Psi$ 正交折成落在观察者之线上的青色 $\cos\theta$ 与撑在它外面的品红 $\sin\theta$，$\cos^2\theta + \sin^2\theta = 1$。三栏都是本章的模型诠释（`MODEL`）的示意；旋量的 $720^\circ$ 单侧双覆叠见 §39.3 的实验卡。
+**图 39。** 本章地图：第 I 栏，灰色的指针寄存器 `ptr` 与它和内存之间的虚线隔墙被划掉，每一格 $p$ 都有一支青色箭头离开它又回到它自己——全域 `p ≡ *p`；第 II 栏，琥珀色的刀周围的淡青带子里亮着一串青色格点，带子外什么也没有，这些点投到刀上排成的长短段，短段记 $1$、长段记 $0$，没有相邻的 `11`；第 III 栏，下面的青色箭头在底圈 $z$ 上从 $1$ 出发绕满一整圈，上面紫色的唯一提升从 $w = +1$ 出发只走了半圈，停在 $-1$，两圈之间是平方映射 $z = w^2$。第 I、II 栏是本章模型诠释（`MODEL`）的示意；第 III 栏是 [@thm-ch39-double-cover-no-section-and-720-lift] 第 2 款（`LEAN ✓`），走满 $720^\circ$ 的情形见 §39.3 的实验卡。
 :::
 
 ---
@@ -83,6 +83,10 @@ $$
 
 ::: proof
 第 1 款对函数等式 $h : g(a_0) = \operatorname{diagonal}(f, g)$ 在自变量 $a_0$ 处调用逐点求值 `congrFun h a₀`，展开 $\operatorname{diagonal}(f, g)(a_0) = f(g(a_0, a_0))$ 并取对称性即得 $f(g(a_0, a_0)) = g(a_0, a_0)$。第 2 款将 $m = \langle a, b, c, d\rangle$ 沿四个分量 $a, b, c, d \in \operatorname{Fin} 2$ 执行穷举展开 `fin_cases`，先由 `norm_num [Nondegenerate, determinant]` 自动消去全部 $10$ 个行列式为零的退化分支；对余下的 $6$ 个非退化分支逐一由可判定算术验证其精确命中 `.empty`、`.dead`、`.collapse`、`.live` 四者中唯一一项，并核实满足 $\operatorname{discriminant}(m) = 5$ 的 `.live` 分支当且仅当 $(a,b,c,d) \in \{(1,1,1,0), (0,1,1,1)\}$（即 `IsPhiFamily m`），此时不动点多项式系数恰为 $(1, -1, -1)$ 或 $(1, 1, -1)$，判别式恒为 $1^2 + 4 = 5$。完整证明由 Lean 内核检查。
+:::
+
+::: {.figure src="ch39-four-fates"}
+**十六个二元自映射里，只有两个存活。** 四行四列是系数取 $0$ 或 $1$ 的全部 $16$ 个矩阵 $m = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$：灰色虚线框的 $10$ 个行列式为零；墨色框的 $6$ 个非退化，各写一种命运——单位阵 `.empty`，$\begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$ 为 `.dead`，判别式 $\Delta = 4$ 与 $\Delta = 0$ 的两个为 `.collapse`；青色框的两个为 `.live`，$\Delta = 5$，即 $x = 1 + 1/x$ 与 $x = 1/(x + 1)$（[@thm-ch39-self-application-four-fates-and-diagonal-identity] 第 2 款）。
 :::
 
 [@thm-ch39-self-application-four-fates-and-diagonal-identity] 为“无底物宇宙何以不坠死寂”给出了惊心动魄的代数判词（`MODEL`（模型诠释））：一个彻底拆掉外部第 3 点 $C$ 的二元自指系统，若想既不沦为空洞重言式（`.empty`），也不陷入自相矛盾的逻辑死锁（`.dead`）或平庸有理退化（`.collapse`），它**唯一**能够持续呼吸、生生不息的活路（`.live`），就是落入判别式 $\Delta = 5$ 的黄金自指族！宇宙之所以到处流淌着黄金比与五度角亏的印记，不是因为某位造物主偏爱无理数美学，而是因为**唯有黄金自指，才能在没有任何底层死介质托底的虚空中自己把自己稳稳托住**。
@@ -322,8 +326,8 @@ $$
 
 站在第三十九章的收束高台回望全书十部征程，从[第一章](ch01-measurement.md)把“量子”还原为平视动词，到本章写出“观察者即宇宙本体”，我们走完了一座**分四步彻底砍净“隐藏第 3 点 $C$”的认知阶梯（`MODEL`（模型诠释））**。下框将这四重演进阶段列成一张总表，其后的图把它们画成一级级台阶：
 
-::: {.remark #rem-ch39-four-stage-endgame-table title="砍除隐藏“第 3 点 C”的四阶认知演进总表与单侧双覆叠全景图（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 下表综合对照近代认识论与计算机体系结构文献背景（见 [@rem-ch39-von-neumann-scott-reflexive-domain-literature]、[@rem-ch39-kant-yoneda-lemma-literature] 与 [@rem-ch39-cartan-penrose-hestenes-fierz-literature]）与本书十部曲四阶本体论演进模型（`MODEL`，形式化内核定理标为 `LEAN ✓`）：
+::: {.remark #rem-ch39-four-stage-endgame-table title="砍除隐藏“第 3 点 C”的四阶认知演进总表与单侧双覆叠全景图（本书模型，附文献背景）"}
+**本书的诠释模型（`MODEL`）；所引文献背景未在本书形式化，形式化内核定理标 `LEAN ✓`。** 下表综合对照近代认识论与计算机体系结构文献背景（见 [@rem-ch39-von-neumann-scott-reflexive-domain-literature]、[@rem-ch39-kant-yoneda-lemma-literature] 与 [@rem-ch39-cartan-penrose-hestenes-fierz-literature]）与本书十部曲四阶本体论演进模型（`MODEL`，形式化内核定理标为 `LEAN ✓`）：
 
 | 认知演进阶段（`MODEL`） | 核心存在论图景与基本原语 | 隐藏“第 3 点 $C$”的残留形态 | 二元裂缝度与外部余项 | 存在论与认识论终局判词 |
 | :--- | :--- | :--- | :--- | :--- |
