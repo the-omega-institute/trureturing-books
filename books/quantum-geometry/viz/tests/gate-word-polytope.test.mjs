@@ -4,9 +4,10 @@
 // spinors instead: H = (1/√2)[[1, 1], [1, −1]] and T = diag(1, e^{iπ/4}) act on |0⟩, and the Bloch vector is read off
 // as (2 Re ā b, 2 Im ā b, |a|² − |b|²). It finds the covering radius by enumerating spherical circumcentres of triples
 // (L ≤ 9) or by a grid with local refinement (larger L), and checks the page's hull face by face against all points.
-// It reads the page through window.GATE_DEBUG and never calls the page's own model.
+// It reads the page through window.GATE_DEBUG and never calls the page's own model. The hull is a lit solid
+// (kit.solid); the staircase of the card SHRINK is drawn on the flat overlay #flat, shown only with that card.
 import fs from 'node:fs';
-import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
+import { session, stageFirstChecks, solidChecks, settle, until, inkShare } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'gate-word-polytope';
 const T = await session();
@@ -150,8 +151,17 @@ await pick('nearest'); s = await seek(10);
 const tgt = [Math.sin(110 / DEG) * Math.cos(200 / DEG), Math.sin(110 / DEG) * Math.sin(200 / DEG), Math.cos(110 / DEG)];
 nn = nearestOf(ORBIT[10].map((o) => o.p), tgt);
 check('NEAREST: θ = 110°, φ = 200° at L = 10: 17.04°, gap 0.0439, by the word HTHTTTTTH', vclose(s.target, tgt, 1e-12) && close(s.nearest.angle, nn.angle, 1e-9) && close(nn.angle, 17.04, 0.005) && close(s.gap, 1 - nn.h, 1e-12) && close(s.gap, 0.0439, 0.00005) && s.nearest.word === 'HTHTTTTTH' && vclose(apply(s.nearest.word), nn.p, 1e-12));
+check('NEAREST: no staircase, the flat overlay #flat is hidden', !s.flat && await page.evaluate(() => document.getElementById('flat').hidden));
+{ // the hull of L = 10 is an opaque lit solid inside the glass sphere; afterwards the camera is put back
+  const cam = await page.evaluate(() => window.GATE_DEBUG.camera());
+  await solidChecks(T, BOOK, ID, page, { rest: false });
+  await page.evaluate((c) => window.GATE_DEBUG.setCamera(c), cam); s = await state();
+  const back = await page.evaluate(() => window.GATE_DEBUG.camera());
+  check('NEAREST: after the solid checks the camera is back and the card still reads L = 10', close(back.yaw, cam.yaw, 1e-12) && close(back.pitch, cam.pitch, 1e-12) && close(back.zoom, cam.zoom, 1e-12) && s.L === 10 && vclose(s.target, tgt, 1e-12));
+}
 await pick('shrink'); s = await seek(20);
 check('SHRINK: L = 20, 971 points, worst direction, ε = 9.10° > 0', s.L === 20 && s.count === 971 && s.mode === 'worst' && close(s.eps, 9.10, 0.005));
+check('SHRINK: the staircase is drawn on the flat overlay #flat, shown over the solid stage', s.chart && s.flat && !(await page.evaluate(() => document.getElementById('flat').hidden)) && (await inkShare(page, '#flat')) > 0.01);
 
 // SHRINK, the cited still: the staircase ε_L stands on the stage beside the sphere, and the caption's numbers are its numbers
 {
@@ -162,6 +172,7 @@ check('SHRINK: L = 20, 971 points, worst direction, ε = 9.10° > 0', s.L === 20
       const st = window.GATE_DEBUG.state, lab = `${st.eps.toFixed(2)}°`;
       return { st, label: [...document.querySelectorAll('#stage .tags .tag')].some((e) => !e.hidden && e.textContent.trim() === lab) };
     });
+    check(`SHRINK still (${lang}): the staircase is on the flat overlay #flat, shown`, r.st.flat && !(await shot.evaluate(() => document.getElementById('flat').hidden)) && (await inkShare(shot, '#flat')) > 0.01);
     const st = r.st, md = fs.readFileSync(new URL(`../../${lang}/ch16-qsvt-walks-and-compilation.md`, import.meta.url), 'utf8');
     const cap = (/::: \{\.viz src="gate-word-polytope" preset="shrink"[^}]*\}\n([\s\S]*?)\n:::/.exec(md) || [, ''])[1];
     const flat = st.epsAll.some((e, l) => l > 0 && close(e, st.epsAll[l - 1], 1e-9));
@@ -174,6 +185,7 @@ check('SHRINK: L = 20, 971 points, worst direction, ε = 9.10° > 0', s.L === 20
 
 // controls
 await pick('nearest'); await seek(10);
+check('leaving SHRINK for NEAREST hides the flat overlay #flat again', !(await state()).flat && await page.evaluate(() => document.getElementById('flat').hidden));
 await setRange('theta', 40); await setRange('phi', 75); s = await state();
 const t2 = [Math.sin(40 / DEG) * Math.cos(75 / DEG), Math.sin(40 / DEG) * Math.sin(75 / DEG), Math.cos(40 / DEG)];
 nn = nearestOf(ORBIT[10].map((o) => o.p), t2);

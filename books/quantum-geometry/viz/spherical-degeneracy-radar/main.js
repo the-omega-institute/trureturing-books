@@ -11,6 +11,8 @@
               and read by the pulled-back observer R̃OR: the two readings agree for every ψ (rail ψ); with k = O
               the pulled-back observer stays where it is and the reading never changes.
    Every vector comes from one product: Cl(3,0) multivectors multiplied blade by blade, rotors acting by s ↦ R s R̃.
+   The stage is kit.solid: a glass sphere, opaque lit patches and tubes inside it, and a flat canvas (#flat) for the
+   rotor scene's dial.
    Read-only probe for the browser suite: window.DEGEN_DEBUG. */
 (() => {
   'use strict';
@@ -97,38 +99,58 @@
     return [v3.len(now) > 1e-9 ? now : d(t + PI), d(ref)];
   }
 
-  /* ---------- stage ---------- */
+  /* ---------- stage: a glass sphere with lit marks in it (kit.solid) ----------
+     The unit sphere is a glass shell, so what lies inside stays visible; the swept latitude sector, the octant the two
+     roads enclose and the wedge between the flags are opaque lit surfaces, the axes and the gap are lit tubes, states
+     and observers are beads and rings. Great circles, latitude circles and arcs are sampled here and drawn as lines.
+     The dial of the difference rotor is flat: it is drawn on the 2D canvas #flat over the stage (rotor scene only). */
   let drag = false;
-  const stage = kit.stage3($('stage'), {
+  const stage = kit.solid($('stage'), {
     canvas: $('cv'), radius: TRV.thumbMode ? 0.4 : 0.34, cy: TRV.figure ? 0.5 : 0.52, yaw: -2.0, pitch: 0.36,
     onChange: () => paint(),
-    onPick: (ev, st) => { drag = st.near(ev, S.O) < 24 && st.p(S.O)[2] > -0.05; return drag; },
+    onPick: (ev, st) => { drag = st.near(ev, S.O) < 24 && v3.dot(S.O, st.facing()) > -0.05; return drag; },
     onDrag: (ev, st) => { if (!drag) return; cards.mark(null); setObserver(st.pick(ev)); },
     onDrop: () => { drag = false; }
   });
   /** Push a label away from the centre of the sphere. */
   const outward = (st, p, r = 18) => { const q = st.p(p), o = st.p([0, 0, 0]), dx = q[0] - o[0], dy = q[1] - o[1], l = Math.hypot(dx, dy); return l < 4 ? { dx: 0, dy: -r } : { dx: r * dx / l, dy: r * dy / l }; };
 
+  /* page geometry: sampled circles and arcs, drawn with the stage's own line and tube */
+  /** k + 1 points round the circle of centre c, unit normal n and radius r (closed: the last point is the first). */
+  function circlePts(c, n, r, k = 144) {
+    const e1 = v3.unit(v3.cross(n, Math.abs(n[2]) < 0.9 ? E3 : E1)), e2 = v3.cross(n, e1), pts = [];
+    for (let i = 0; i <= k; i++) { const a = TAU * i / k; pts.push(v3.add(c, v3.add(v3.scale(e1, r * Math.cos(a)), v3.scale(e2, r * Math.sin(a))))); }
+    return pts;
+  }
+  /** The great-circle arc from the unit vector u to the unit vector w (v3.slerp), at radius r. */
+  const greatPts = (u, w, r = 1, k = 48) => Array.from({ length: k + 1 }, (_, i) => v3.scale(v3.slerp(u, w, i / k), r));
+  /** A straight line from a to b, skipped where the two ends meet. */
+  const seg = (st, a, b, s) => { if (v3.len(v3.sub(b, a)) > 1e-6) st.line([a, b], s); };
+  /** A lit rod (a keyed tube) from a to b, skipped where the two ends meet. */
+  const rod = (st, key, a, b, s) => { if (v3.len(v3.sub(b, a)) > 1e-6) st.tube(key, [a, b], s); };
+  /** Lines lying on the opaque patches sit a hair above them. */
+  const LIFT = 1.006;
+
   function drawFrameAxes(st) {
-    st.line([0, 0, -1.2], [0, 0, 1.24], { color: P.violet, width: 1.6, alpha: 0.9, back: 0.4 });
+    rod(st, 'polar', [0, 0, -1.2], [0, 0, 1.24], { width: 1.6, color: P.violet });
     st.tag('pN', [0, 0, 1.2], '+e₃', 'raw c-vi', { dx: 24 });
     st.tag('pS', [0, 0, -1.14], '−e₃', 'raw c-vi', { dx: 24 });
     for (const [ax, key, nm] of [[E1, 'x1', 'e₁'], [E2, 'x2', 'e₂']]) {
-      st.line([0, 0, 0], v3.scale(ax, 1.22), { color: P.dim, width: 1, alpha: 0.7, dash: [3, 4] });
+      st.line([[0, 0, 0], v3.scale(ax, 1.22)], { color: P.dim, width: 1, alpha: 0.7, dash: [3, 4] });
       // the turned frame carries its own labels, and the observer's label wins where the two would meet
       if (S.scene !== 'frames' && S.scene !== 'rotor' && S.scene !== 'pull' && v3.dot(S.O, ax) < 0.97) st.tag(key, v3.scale(ax, 1.32), nm, 'raw ink', {});
     }
   }
   function drawObserver(st, X, cx) {
     const O = S.O, { ra, rb } = reading(X);
-    st.line([0, 0, 0], v3.scale(O, 1.18), { color: P.amber, width: 1.6, alpha: 0.85, back: 0.5 });
+    rod(st, 'obsAxis', [0, 0, 0], v3.scale(O, 1.18), { width: 1.6, color: P.amber });
     // the two shadows on the observer's axis, and the gap between them
     const fa = v3.scale(O, ra), fb = v3.scale(O, rb);
-    st.line(X.a, fa, { color: P.cyan, width: 1.2, dash: [3, 4], alpha: 0.75, back: 0.5 });
-    st.line(X.b, fb, { color: P.cyan, width: 1.2, dash: [3, 4], alpha: 0.75, back: 0.5 });
-    if (!(cx && cx.noGap) && Math.abs(rb - ra) > 2e-3) st.line(fa, fb, { color: P.magenta, width: 4, alpha: 0.95, fade: false });
-    st.dot(fa, 3.6, P.cyan, { fade: false }); st.dot(fb, 3.6, P.cyan, { fade: false });
-    st.dot(O, 6.5, P.amber, { glow: 14, fade: false });
+    seg(st, X.a, fa, { color: P.cyan, width: 1.2, dash: [3, 4], alpha: 0.75 });
+    seg(st, X.b, fb, { color: P.cyan, width: 1.2, dash: [3, 4], alpha: 0.75 });
+    if (!(cx && cx.noGap) && Math.abs(rb - ra) > 2e-3) rod(st, 'gap', fa, fb, { width: 4, color: P.magenta });
+    st.bead(fa, { r: 3.6, color: P.cyan, key: 'shadowOnce' }); st.bead(fb, { r: 3.6, color: P.cyan, key: 'shadowTwice' });
+    st.bead(O, { r: 6.5, color: P.amber, key: 'observer' });
     if (!cx || !cx.noTag) st.tag('obs', O, obsText(), 'raw c-am', cx && cx.obsOff ? cx.obsOff : obsOff(st, O));
   }
   const obsText = () => L('观察者 O', 'observer O');
@@ -144,52 +166,59 @@
   /** Two label boxes overlap, with a 6 px margin around each. */
   const boxesMeet = (a, b) => Math.abs(a.x - b.x) < (a.w + b.w) / 2 + 6 && Math.abs(a.y - b.y) < (a.h + b.h) / 2 + 6;
   function drawPair(st, X, la, lb, offA, offB) {
-    st.dot(X.a, 5.5, P.ink, { glow: 8 });
-    st.dot(X.b, 6, P.ink, { ring: true, width: 2.2 });
+    st.bead(X.a, { r: 5.5, color: P.ink, key: 'once' });
+    st.ring(X.b, { r: 6, color: P.ink, key: 'twice' });
     if (la) st.tag('ta', X.a, la, 'raw ink', offA || outward(st, X.a, 24));
     if (lb) st.tag('tb', X.b, lb, 'raw ink', offB || outward(st, X.b, 24));
   }
   /** Earlier blind circles: faint, one every 15° of the rail. */
   function drawTrail(st, upTo, normalAt) {
-    for (let u = PI / 12; u < upTo - 1e-9; u += PI / 12) { const n = normalAt(u); if (n) st.circle([0, 0, 0], n, 1, { color: P.cyan, width: 1, alpha: TRV.thumbMode ? 0.32 : 0.22, back: 0.4 }); }
+    for (let u = PI / 12; u < upTo - 1e-9; u += PI / 12) { const n = normalAt(u); if (n) st.line(circlePts([0, 0, 0], n, 1), { color: P.cyan, width: 1, alpha: TRV.thumbMode ? 0.32 : 0.22 }); }
   }
 
   function drawAddress(st, t) {
     const X = sceneAt(t), a = X.a;
     // first turn: e₃ → v₁ in the meridian plane; second turn: v₁ → v₂ along the latitude, sweeping magenta
-    st.arc(E3, a, { color: P.dim, width: 1.4, dash: [4, 4], alpha: 0.85 });
+    st.line(greatPts(E3, a), { color: P.dim, width: 1.4, dash: [4, 4], alpha: 0.85 });
     const zc = [0, 0, a[2]], pts = [];
     const N = Math.max(2, Math.ceil(Math.abs(t) / (3 * DEG)));
     for (let j = 0; j <= N; j++) pts.push(act(rotor(E1, E2, t * j / N), a));
-    if (t > 1e-3) { st.poly([zc, ...pts], { fill: P.magenta, alpha: TRV.thumbMode ? 0.22 : 0.14 }); st.path(pts, { color: P.magenta, width: 2.4, alpha: 0.95 }); }
-    st.circle(zc, E3, Math.hypot(a[0], a[1]), { color: P.dim, width: 0.8, alpha: 0.45, dash: [2, 4] });
+    if (t > 1e-3) {
+      // the latitude sector [zc, …pts]: a lit fan from the axis out to the arc the second turn sweeps
+      const r = Math.hypot(a[0], a[1]);
+      st.surface('sweep', (u, v) => [r * v * Math.cos(u), r * v * Math.sin(u), a[2]], { u: [0, t], v: [0, 1], nu: N, nv: 4, color: P.magenta, id: 'sweep' });
+      st.tube('sweepEdge', pts, { width: 2.4, color: P.magenta });
+    }
+    st.line(circlePts(zc, E3, Math.hypot(a[0], a[1])), { color: P.dim, width: 0.8, alpha: 0.45, dash: [2, 4] });
     if (S.trail) drawTrail(st, t, (u) => blindNormal(sceneAt(u), u));
     const n = blindNormal(X, t);
-    if (n) st.circle([0, 0, 0], n, 1, { color: P.cyan, width: 2, dash: [6, 5], alpha: 0.95 });
+    if (n) st.line(circlePts([0, 0, 0], n, 1), { color: P.cyan, width: 2, dash: [6, 5], alpha: 0.95 });
     drawPair(st, X, L('一次 v₁', 'once v₁'), t > 0.12 && t < TAU - 0.12 ? L('两次 v₂', 'twice v₂') : '', null, null);
     drawObserver(st, X);
     return X;
   }
 
-  function drawRotor(st, t) {
+  function drawRotor(st, t, fc) {
     const X = sceneAt(t);
-    st.arc(E1, E3, { color: P.ink, width: 1.4, alpha: 0.55 });
-    st.arc(E1, E2, { color: P.ink, width: 1.4, alpha: 0.55, dash: [5, 5] });
-    st.arc(E2, E3, { color: P.ink, width: 1.4, alpha: 0.55, dash: [5, 5] });
+    // the octant e₁ → e₂ → e₃ the two roads enclose, a lit patch of the sphere; the roads run on it
+    st.surface('octant', (u, v) => v3.sph(u, v), { u: [0, H], v: [0, H], nu: 24, nv: 24, color: P.dim, id: 'octant' });
+    st.line(greatPts(E1, E3, LIFT), { color: P.ink, width: 1.4, alpha: 0.55 });
+    st.line(greatPts(E1, E2, LIFT), { color: P.ink, width: 1.4, alpha: 0.55, dash: [5, 5] });
+    st.line(greatPts(E2, E3, LIFT), { color: P.ink, width: 1.4, alpha: 0.55, dash: [5, 5] });
     const FL = 0.5;
-    st.arrow(X.a, v3.add(X.a, v3.scale(X.fa, FL)), { color: P.ink, width: 1.8, headSize: 8, fade: false });
-    st.arrow(X.b, v3.add(X.b, v3.scale(X.fb, FL)), { color: P.ink, width: 1.8, headSize: 8, dash: [4, 3], fade: false });
+    st.arrow(X.a, v3.add(X.a, v3.scale(X.fa, FL)), { color: P.ink, width: 1.8, headSize: 8 });
+    st.arrow(X.b, v3.add(X.b, v3.scale(X.fb, FL)), { color: P.ink, width: 1.8, headSize: 8, dash: [4, 3] });
     // the angle between the two flags, measured in the tangent plane at the common end point
     const ang = Math.atan2(v3.dot(X.a, v3.cross(X.fa, X.fb)), v3.dot(X.fa, X.fb));
     if (v3.len(v3.sub(X.a, X.b)) < 1e-6 && Math.abs(ang) > 1e-3) {
-      const w = [X.a];
-      for (let j = 0; j <= 24; j++) w.push(v3.add(X.a, v3.scale(v3.rot(X.fa, X.a, ang * j / 24), FL * 0.62)));
-      st.poly(w, { fill: P.magenta, alpha: 0.38 });
+      // a lit fan in the tangent plane, a hair off the sphere it touches
+      const off = v3.scale(X.a, LIFT - 1), w = [v3.add(X.a, off)];
+      for (let j = 0; j <= 24; j++) w.push(v3.add(v3.add(X.a, v3.scale(v3.rot(X.fa, X.a, ang * j / 24), FL * 0.62)), off));
+      st.poly('wedge', { vertices: w, faces: Array.from({ length: 24 }, (_, j) => [0, j + 1, j + 2]) }, { color: P.magenta, edges: false, id: 'wedge' });
       st.tag('wedge', v3.add(X.a, v3.scale(v3.rot(X.fa, X.a, ang / 2), FL * 1.05)), `${L('差', 'apart')} ${fix(Math.abs(ang) / DEG, 0)}°`, 'raw c-mg', { dx: 18, dy: -4 });
     }
-    st.dot(E1, 4, P.dim, {});
+    st.bead(E1, { r: 4, color: P.dim, key: 'start' });
     st.tag('start', E1, L('起点 +e₁', 'start +e₁'), 'raw ink', { dx: -6, dy: 22 });
-    const end = X.h >= 2 - 1e-9;
     const away = X.h > 0.2;
     drawPair(st, X, '', '', null, null);
     // each road's label sits at the tip of its own flag
@@ -198,12 +227,12 @@
       st.tag('tb', v3.add(X.b, v3.scale(X.fb, FL)), L('两步', 'two hops'), 'raw ink', { dx: 0, dy: -16 });
     }
     drawObserver(st, X);
-    drawDial(st, X.D);
+    drawDial(st, X.D, fc);
     return X;
   }
-  /** Dial: the difference rotor D = R₂R̃₁ in the plane of its scalar and e₁e₂ parts. */
-  function drawDial(st, D) {
-    const c = st.ctx, R = clamp(Math.min(st.W, st.H) * (TRV.thumbMode ? 0.12 : 0.09), 26, 64);
+  /** Dial on the flat canvas: the difference rotor D = R₂R̃₁ in the plane of its scalar and e₁e₂ parts. */
+  function drawDial(st, D, c) {
+    const R = clamp(Math.min(st.W, st.H) * (TRV.thumbMode ? 0.12 : 0.09), 26, 64);
     const leg = $('legend'), legH = leg && st.W < 640 ? leg.offsetHeight + 22 : (TRV.figure ? 18 : 26);
     const cx = st.W - R - 44, cy = st.H - R - legH - 6;
     c.save(); c.lineWidth = 1 * st.lw; c.strokeStyle = P.dim; c.globalAlpha = 0.85;
@@ -214,26 +243,28 @@
     c.beginPath(); c.moveTo(cx, cy); c.lineTo(cx + R * x, cy - R * y); c.stroke();
     c.shadowBlur = 0; c.fillStyle = P.violet; c.beginPath(); c.arc(cx + R * x, cy - R * y, 3.5 * st.lw, 0, TAU); c.fill();
     c.restore();
+    dialAt = [cx, cy, R];
     st.tag('dialT', [cx, cy - R - 12], `D = ${rotorText(D)}`, 'raw c-vi', { screen: true });
     st.tag('dialL', [cx, cy + R + 11], len > 0.999 ? L('全在 e₁∧e₂ 面里', 'all in the e₁∧e₂ plane') : L(`e₁∧e₂ 面内占 ${fix(len * len * 100, 0)}%`, `${fix(len * len * 100, 0)}% in the e₁∧e₂ plane`), 'raw c-vi', { screen: true });
   }
+  let dialAt = null;
 
   function drawTest(st, t) {
     const X = sceneAt(t), fr = S.scene === 'frames';
-    st.circle([0, 0, 0], X.f1, 1, { color: P.ink, width: 1.8, alpha: 0.8 });                 // image of the equator, one hop
-    st.circle([0, 0, 0], X.f2, 1, { color: P.ink, width: 1.8, alpha: 0.8, dash: [6, 5] });  // image of the equator, two hops
+    st.line(circlePts([0, 0, 0], X.f1, 1), { color: P.ink, width: 1.8, alpha: 0.8 });                 // image of the equator, one hop
+    st.line(circlePts([0, 0, 0], X.f2, 1), { color: P.ink, width: 1.8, alpha: 0.8, dash: [6, 5] });  // image of the equator, two hops
     if (fr) {
       for (const [f, key, nm] of [[X.f1, 'f1', 'e₁(γ)'], [X.f2, 'f2', 'e₂(γ)']]) { st.arrow([0, 0, 0], f, { color: P.dim, width: 1.4, headSize: 8, alpha: 0.85 }); st.tag(key, v3.scale(f, 1.16), nm, 'raw ink', {}); }
       if (S.trail) drawTrail(st, t, (u) => blindNormal(sceneAt(u)));
     }
-    st.dot(X.s, 4.5, P.dim, {});
+    st.bead(X.s, { r: 4.5, color: P.dim, key: 's' });
     st.tag('s', X.s, fr ? 's' : 's(α)', 'raw ink', outward(st, X.s, 18));
-    st.arc(X.s, X.a, { color: P.dim, width: 1, dash: [2, 4], alpha: 0.7 });
-    st.arc(X.s, X.b, { color: P.dim, width: 1, dash: [2, 4], alpha: 0.7 });
-    if (v3.len(v3.sub(X.a, X.b)) > 2e-3) st.line(X.a, X.b, { color: P.magenta, width: 2.6, alpha: 0.95 });
+    st.line(greatPts(X.s, X.a), { color: P.dim, width: 1, dash: [2, 4], alpha: 0.7 });
+    st.line(greatPts(X.s, X.b), { color: P.dim, width: 1, dash: [2, 4], alpha: 0.7 });
+    if (v3.len(v3.sub(X.a, X.b)) > 2e-3) rod(st, 'gapAB', X.a, X.b, { width: 2.6, color: P.magenta });
     const n = blindNormal(X);
-    if (n) st.circle([0, 0, 0], n, 1, { color: P.cyan, width: 2, dash: [6, 5], alpha: 0.95 });
-    for (const q of [E3, [0, 0, -1]]) st.dot(q, 8, P.violet, { ring: true, width: 2 });
+    if (n) st.line(circlePts([0, 0, 0], n, 1), { color: P.cyan, width: 2, dash: [6, 5], alpha: 0.95 });
+    for (const q of [E3, [0, 0, -1]]) st.ring(q, { r: 8, color: P.violet, key: q[2] > 0 ? 'poleN' : 'poleS' });
     drawPair(st, X, 's₁', 's₂', null, null);
     drawObserver(st, X);
     return X;
@@ -241,22 +272,22 @@
 
   function drawPull(st, t) {
     const X = sceneAt(t), N = 36;
-    st.line(v3.scale(X.k, -1.3), v3.scale(X.k, 1.3), { color: P.violet, width: 2, alpha: 0.95, back: 0.4 });
+    rod(st, 'kAxis', v3.scale(X.k, -1.3), v3.scale(X.k, 1.3), { width: 2, color: P.violet });
     st.tag('kAx', v3.scale(X.k, 1.36), S.axis === 'O' ? L('转轴 = O', 'axis = O') : L('转轴 k', 'axis k'), 'raw c-vi', {});
     // where each state was, and the way it has turned about k
     for (const [v0, key] of [[X.a0, 'a'], [X.b0, 'b']]) {
       const w = []; for (let j = 0; j <= N; j++) w.push(act(axisRotor(X.k, t * j / N), v0));
-      if (t > 1e-3) st.path(w, { color: P.ink, width: 1.5, dash: [4, 4], alpha: 0.6 });
-      st.dot(v0, 4, P.dim, { ring: key === 'b', width: 1.4 });
+      if (t > 1e-3) st.line(w, { color: P.ink, width: 1.5, dash: [4, 4], alpha: 0.6 });
+      if (key === 'b') st.ring(v0, { r: 4, color: P.dim, key: 'leftTwice' }); else st.bead(v0, { r: 4, color: P.dim, key: 'leftOnce' });
     }
     // the pulled-back observer reads the states left alone: its axis and its two shadows, in neutral ink
     const Op = X.Op, sa = v3.scale(Op, X.pa), sb = v3.scale(Op, X.pb);
     if (v3.len(v3.sub(Op, S.O)) > 1e-3) {
-      st.line([0, 0, 0], v3.scale(Op, 1.14), { color: P.ink, width: 1.4, dash: [5, 4], alpha: 0.8, back: 0.5 });
-      st.line(X.a0, sa, { color: P.dim, width: 1, dash: [2, 4], alpha: 0.7, back: 0.5 });
-      st.line(X.b0, sb, { color: P.dim, width: 1, dash: [2, 4], alpha: 0.7, back: 0.5 });
-      st.dot(sa, 3, P.ink, { fade: false }); st.dot(sb, 3, P.ink, { fade: false });
-      st.dot(Op, 5.5, P.ink, { ring: true, width: 2 });
+      seg(st, [0, 0, 0], v3.scale(Op, 1.14), { color: P.ink, width: 1.4, dash: [5, 4], alpha: 0.8 });
+      seg(st, X.a0, sa, { color: P.dim, width: 1, dash: [2, 4], alpha: 0.7 });
+      seg(st, X.b0, sb, { color: P.dim, width: 1, dash: [2, 4], alpha: 0.7 });
+      st.bead(sa, { r: 3, color: P.ink, key: 'pullOnce' }); st.bead(sb, { r: 3, color: P.ink, key: 'pullTwice' });
+      st.ring(Op, { r: 5.5, color: P.ink, key: 'pulled' });
       // its label only where it cannot sit on the observer's own label (near ψ = 0 and 360° the two anchors meet)
       const offP = outward(st, Op, 30);
       if (!boxesMeet(labelBox(st, Op, offP, 'R⁻¹O'), labelBox(st, S.O, obsOff(st, S.O), obsText()))) st.tag('opull', Op, 'R⁻¹O', 'raw ink', offP);
@@ -267,10 +298,17 @@
   }
 
   function drawStage() {
-    const st = stage, c = st.begin(), t = clock.t;
-    st.sphere(1, { lat: [0], lon: 0, shade: 0.08, alpha: 0.42 });
+    const st = stage, t = clock.t, flat = $('flat');
+    st.begin();
+    // the flat overlay: shown and drawn on in the rotor scene only, cleared on every frame
+    flat.hidden = S.scene !== 'rotor';
+    const dpr = TRV.fitCanvas(flat), fc = flat.getContext('2d');
+    fc.setTransform(1, 0, 0, 1, 0, 0); fc.clearRect(0, 0, flat.width, flat.height); fc.setTransform(dpr, 0, 0, dpr, 0, 0);
+    dialAt = null;
+    st.glass('sphere', [0, 0, 0], 1, { color: P.cyan, alpha: 0.08, rim: 0.55 });
+    st.line(circlePts([0, 0, 0], E3, 1), { color: P.lineHot, width: 1.1, alpha: 0.55 });   // the equator
     drawFrameAxes(st);
-    const X = S.scene === 'address' ? drawAddress(st, t) : S.scene === 'rotor' ? drawRotor(st, t) : S.scene === 'pull' ? drawPull(st, t) : drawTest(st, t);
+    const X = S.scene === 'address' ? drawAddress(st, t) : S.scene === 'rotor' ? drawRotor(st, t, fc) : S.scene === 'pull' ? drawPull(st, t) : drawTest(st, t);
     st.end();
     const { ra, rb } = reading(X), gap = rb - ra;
     const big = { address: L('寻址', 'Address'), rotor: L('旋子', 'Rotors'), test: L('测试态', 'Test state'), frames: L('标架', 'Frames'), pull: L('拉回', 'Pullback') }[S.scene];
@@ -286,6 +324,8 @@
       frames: [['dm', L('转过 γ 的标架与它的两个像', 'the frame turned by γ and its images')], ['mg', L('s₁ 与 s₂ 之差', 's₁ minus s₂')], ['cy', S.trail ? L('虚线：盲圈；淡线：走过的盲圈', 'dashed: blind circle; faint: earlier ones') : L('虚线：盲圈', 'dashed: blind circle')], ['am', L('观察者', 'observer')]]
     }[S.scene];
     $('legend').innerHTML = LEG.map(([k, s]) => `<span><i class="sw ${k}"></i>${s}</span>`).join('');
+    const hud = $('hudSub').parentElement;
+    $('stage').style.setProperty('--scene-top', `${hud.offsetTop + hud.offsetHeight + 8}px`);
     return X;
   }
 
@@ -473,8 +513,14 @@
     pairAt: (t) => { const X = sceneAt(t); return { a: X.a, b: X.b }; },
     seek: (t) => { clock.pause(); clock.set(t); },
     camera: () => Object.assign({}, stage.cam),
-    /** Viewport coordinates of a world point. */
-    screen: (v) => { const q = stage.p(v), b = $('cv').getBoundingClientRect(); return [b.left + q[0], b.top + q[1], q[2]]; },
+    /** Viewport coordinates of a world point, and whether it faces the viewer (v · facing). */
+    screen: (v) => { const q = stage.p(v), b = $('cv').getBoundingClientRect(); return [b.left + q[0], b.top + q[1], v3.dot(v, stage.facing())]; },
+    /** The flat overlay: whether it is shown, its size, how many of its pixels are drawn on, and the dial (CSS pixels). */
+    overlay: () => {
+      const f = $('flat'), d = f.getContext('2d').getImageData(0, 0, f.width, f.height).data;
+      let ink = 0; for (let i = 3; i < d.length; i += 4) if (d[i] > 0) ink++;
+      return { hidden: f.hidden, after: f.previousElementSibling && f.previousElementSibling.id, w: f.clientWidth, h: f.clientHeight, ink, dial: dialAt && dialAt.slice() };
+    },
     under: (x, y) => stage.pick({ clientX: x, clientY: y })
   };
   window.TRV_THUMB = () => { cards.pick('sweep'); stage.cam.yaw = -2.0; stage.cam.pitch = 0.5; clock.pause(); clock.set(1.5 * PI); paint.now(); };

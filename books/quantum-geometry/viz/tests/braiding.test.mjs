@@ -6,8 +6,10 @@
 // chapter's crossing / crossingInv on pairs and crossing₁ / crossing₂ on nested triples (x, (y, z)), closed colourings
 // counted by nested loops, and the geometry read off the page's sampled world lines: the winding angle of the pair,
 // which strand is nearer the viewer at a crossing, and where each strand ends.
+// The stage is a lit solid (kit.solid): solidChecks runs on the opening card, and the suite checks the fitted layout and
+// the beads of now against the page's own world lines.
 // The page is read through window.BRAID_DEBUG.
-import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
+import { session, stageFirstChecks, solidChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'braiding';
 const T = await session();
@@ -75,6 +77,37 @@ const D3 = RACKS.dihedral;
 const agreesA = (s, Q) => run(Q, s.A.bottom, s.A.word).join() === s.A.top.join() && count(Q, s.A.n, s.A.word) === s.A.count;
 const agreesB = (s, Q) => run(Q, s.B.bottom, s.B.word).join() === s.B.top.join() && count(Q, s.B.n, s.B.word) === s.B.count;
 
+/* ---------- the lit solid ---------- */
+// The opening card (σ₁, run to the top): two thin tubes, their beads and lines. Thin strands cover far less of the stage
+// than a ball would (measured 2.7% opaque on the default 1440 × 900 page), so the coverage floor is 2%, not the default
+// 12%; nothing is drawn larger to pass it. Light and shade, the turn of the camera and picking are checked as usual.
+const camOpen = await Dv(() => Object.assign({}, window.TRV.solids[0].cam));
+await solidChecks(T, BOOK, ID, page, { rest: false, minShare: 0.02 });
+await Dv((c) => { Object.assign(window.TRV.solids[0].cam, c); window.TRV.kit.flush(); }, camOpen);
+{
+  const cam = await Dv(() => window.BRAID_DEBUG.state.camera);
+  check('solid: the camera is back where the card put it after the solid checks', close(cam.yaw, camOpen.yaw, 1e-12) && close(cam.pitch, camOpen.pitch, 1e-12) && close(cam.zoom, camOpen.zoom, 1e-12));
+  const rt = await Dv(() => { const sc = window.TRV.solids[0]; return { stage: sc.el.id, gl: !!sc.el.querySelector('canvas.solid-gl'), mode: sc.mode, cv: getComputedStyle(document.getElementById('cv')).visibility }; });
+  check('solid: the stage is a kit.solid drawn by WebGL, the 2D canvas kept only for the resting picture', rt.stage === 'stage' && rt.gl && rt.mode === 'webgl' && rt.cv === 'hidden', JSON.stringify(rt));
+}
+/** Every strand end of both braids inside the stage, with a margin, and the scale the fit asked for. */
+async function fitted(tag) {
+  const g = await Dv(() => window.BRAID_DEBUG.layout());
+  const ends = g.ends.flat(2), inside = ends.every(([x, y]) => x > 8 && x < g.W - 8 && y > 8 && y < g.H - 8);
+  return check(`${tag}: the fitted layout keeps every strand end inside the stage`, inside && g.unit > 20 && ends.length > 0, JSON.stringify({ W: g.W, H: g.H, unit: g.unit, ends: ends.slice(0, 4) }));
+}
+await fitted('σ₁');
+{
+  // the beads of now are marks of the solid, one per strand, at the exact point of each world line at the rail's height
+  const near = (p, pts) => { let d = Infinity; for (let i = 1; i < pts.length; i++) { const a = pts[i - 1], b = pts[i], ab = b.map((x, k) => x - a[k]), ap = p.map((x, k) => x - a[k]), L2 = ab.reduce((u, x) => u + x * x, 0), u = L2 ? Math.max(0, Math.min(1, ab.reduce((w, x, k) => w + x * ap[k], 0) / L2)) : 0; d = Math.min(d, Math.hypot(...ap.map((x, k) => x - u * ab[k]))); } return d; };
+  await Dv(() => window.BRAID_DEBUG.seek(0.43)); await settle(page);
+  const ms = await Dv(() => window.TRV.solids[0].marks().filter((m) => /^now0/.test(m.key)));
+  const ln0 = await linesOf(0), z0 = ln0.pts[0][0][2], z1 = ln0.pts[0].at(-1)[2], zNow = z0 + 0.43 * (z1 - z0);
+  const onLine = ms.length === 2 && ms.every((m) => close(m.p[2], zNow, 1e-12) && Math.min(...ln0.pts.map((pts) => near(m.p, pts))) < 2e-3);
+  check('σ₁ at t = 0.43: one amber bead per strand, on its world line at the height of now (the tube runs up to it)', onLine, JSON.stringify(ms.map((m) => m.p)));
+  await Dv(() => window.BRAID_DEBUG.seek(1)); await settle(page);
+}
+
 let s = await state();
 check('opens on σ₁ with the whole braid run', s.preset === 'over' && s.t === 1 && !s.playing && s.A.word.join() === '1');
 check('σ₁: colours (0, 1) reach the top as (0 ⋆ 1, 0) = (2, 0)', s.A.bottom.join() === '0,1' && s.A.top.join() === '2,0' && agreesA(s, D3));
@@ -141,6 +174,7 @@ check('model: the negative stabilization also counts 9', count(D3, 3, [-2, 1, 1,
 
 // TREFOIL
 await pick('trefoil'); check('3 ≠ 9 plays', await played()); s = await state();
+await fitted('3 ≠ 9 (two closed braids, front view)');
 check('3 ≠ 9: σ₁ counts 3, σ₁³ counts 9', s.A.count === 3 && s.B.count === 9 && s.B.top.join() === '0,1' && agreesB(s, D3));
 
 // RACK
