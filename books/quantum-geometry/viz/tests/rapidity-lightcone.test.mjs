@@ -56,6 +56,12 @@ check('BOOST: the key readout prints t² − x² = 16.0000', s.key.includes('16.
 await pick('boost');
 check('BOOST plays by itself when clicked', await plays());
 check('BOOST stops at η = ln 2 by itself', await stopped('boost') && close((await state()).eta, LN2, 1e-9));
+s = await state();
+// the still of BOOST: the amber t′ axis is the traveller's, it runs through v = (5, 3), and v sits on it at τ = 4
+const tAxis = B(-LN2, [1, 0]);
+check('BOOST still: the amber t′ axis is exp(−ln 2 · K)(1, 0) and runs through v = (5, 3) (the overview panel II and the film lean the same way)', near(s.boost.axisT, tAxis, 1e-9) && close(tAxis[0] * 3 - tAxis[1] * 5, 0, 1e-12) && tAxis[1] > 0);
+check('BOOST still: v = 4 × (unit t′), so v reads (4, 0) in the traveller\'s frame, and the page shows Bv = (4, 0)', near([4 * tAxis[0], 4 * tAxis[1]], [5, 3], 1e-9) && close(restTau([5, 3]), 4, 1e-9) && near(s.boost.event, [4, 0], 1e-9));
+check('BOOST still: the HUD reads “推动 · η = 0.693” and no ghost beads are drawn', s.hud.trim() === '推动 · η = 0.693' && s.boost.ghosts.length === 0);
 let worst = 0;
 for (let i = 0; i <= 22; i++) { s = await seek(i * 0.1); worst = Math.max(worst, Math.abs(s.boost.event[0] ** 2 - s.boost.event[1] ** 2 - 16), Math.hypot(s.boost.event[0] - B(s.eta, [5, 3])[0], s.boost.event[1] - B(s.eta, [5, 3])[1])); }
 check('the boosted event stays on t² − x² = 16 and matches the series at 23 points of the rail', worst < 1e-9, String(worst));
@@ -96,6 +102,9 @@ for (let i = 0; i < 8; i++) beadOk = beadOk && near(s.boost.beads[i], want[i], 1
 check('CONE: the eight beads match the series at η = 1', beadOk);
 const lc = (v) => [v[0] + v[1], v[0] - v[1]];
 check('CONE: in coordinates u = t + x, u′ = t − x each bead keeps u or u′ = 0 and the other is scaled by e^∓1', s.boost.beads.every((b, i) => { const j = Math.floor(i / 2) + 1, [u, u2] = lc(b); return i % 2 === 0 ? close(u2, 0, 1e-9) && close(u, 2 * j * Math.exp(-1), 1e-9) : close(u, 0, 1e-9) && close(u2, 2 * j * Math.exp(1), 1e-9); }));
+const ghostWant = []; for (const ge of [-0.6, 0]) for (const j of [1, 2, 3, 4]) ghostWant.push(B(ge, [j, j]), B(ge, [j, -j]));
+check('CONE still: the hollow beads are the beads at η = −0.6 and η = 0 (series), all on the cone', s.boost.ghosts.length === 16 && s.boost.ghosts.every((g, i) => near(g, ghostWant[i], 1e-9) && close(qf(g), 0, 1e-9)));
+check('CONE still: the HUD reads “光锥不动 · η = 1.000”', s.hud.trim() === '光锥不动 · η = 1.000');
 
 // SCALE k
 await pick('scale');
@@ -105,6 +114,7 @@ s = await state();
 check('SCALE: k = 1.5 sends (5, 3) to (6, 0), t² − x² = 36 = 2.25 × 16', s.k === 1.5 && near(s.boost.event, B(LN2, [5, 3], 1.5), 1e-9) && near(s.boost.event, [6, 0], 1e-9) && close(qf(s.boost.event), 2.25 * 16, 1e-9));
 check('SCALE: the unit tick has t² − x² = k² = 2.25 and the beads stay null', close(qf(s.boost.tick), 2.25, 1e-9) && s.boost.beads.every((b) => close(qf(b), 0, 1e-9)));
 check('SCALE: q(kBv) = q(kBe₀) · q(v) for random v (series)', [[2.3, -0.7], [-1.1, 4.2], [0.4, 0.4]].every((v) => close(qf(B(LN2, v, 1.5)), qf(B(LN2, [1, 0], 1.5)) * qf(v), 1e-9)));
+check('SCALE still: the unit tick lies on the t′ axis at τ = 1.5 (rest-frame time), the HUD reads “比例 · k = 1.50” and the subtitle τ = 4 → 6.00', near(s.boost.tick, B(-LN2, [1, 0], 1.5), 1e-9) && close(restTau(s.boost.tick), 1.5, 1e-9) && s.hud.trim() === '比例 · k = 1.50' && (await page.textContent('#hudSub')).includes('τ = 4 → ' + (Math.sqrt(qf(B(LN2, [5, 3], 1.5)))).toFixed(2)));
 await page.evaluate(() => { const el = document.getElementById('k'); el.value = '0.5'; el.dispatchEvent(new Event('input', { bubbles: true })); });
 s = await state();
 check('the scale slider: k = 0.5 leaves the card and puts the event on t² − x² = 4', s.k === 0.5 && s.preset === null && close(qf(s.boost.event), 4, 1e-9));
@@ -151,7 +161,7 @@ await page.click('#apexReset'); s = await state();
 check('“A back to (5, 3)” resets the turning point', near(s.apex, [5, 3]));
 
 // caliper drag
-await page.click('#sceneChips [data-scene="caliper"]'); s = await clickAt(1, -2);
+await page.click('#sceneChips [data-scene="caliper"]'); await settle(page); s = await clickAt(1, -2);
 check('dragging in the caliper scene sets w to the pointer\'s x', Math.abs(s.w + 2) < 0.08, String(s.w));
 
 // scenes, rail and keyboard

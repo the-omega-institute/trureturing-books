@@ -129,6 +129,7 @@
   const seen = (x, y) => -x + S.lin * y - (x * x + S.mix * x * y + S.self * y * y);        // P(V(x, y)) on ℝ², P(x, y) = (x, 0)
   const terms = (x, y) => ({ lin: S.lin * y, mix: S.mix * x * y, self: S.self * y * y });  // P(L b), P(B(a, b) + B(b, a)), P(B(b, b))
   const isClosed = () => S.lin === 0 && S.mix === 0 && S.self === 0;
+  let lineTags = [];   // the right-edge labels of the closure scene, as drawn: [{ v, xs }]
   function drawClosure(y) {
     const g = kit.plot($('cv'), { x: [-1.08, 1.08], y: [-3.4, 1.4], pad: [46, 22, box.top + 6, box.bottom + 22] }), ctx = g.ctx; view = g;
     g.axes({ yTicks: [-3, -2, -1, 0, 1], xTicks: [-1, -0.5, 0, 0.5, 1], xLabel: L('看不见的 y', 'the unseen y'), yLabel: L('看见的加速度 P(V)', 'the seen acceleration P(V)') });
@@ -136,7 +137,13 @@
     for (const x of [-1, -0.5, 0, 0.5, 1]) {
       const pts = []; for (let i = 0; i <= 80; i++) { const yy = -1 + i / 40; pts.push([yy, seen(x, yy)]); }
       g.line(pts, x === X0 ? P.ink : P.dim, { width: x === X0 ? 2.2 : 1.3, alpha: x === X0 ? 1 : 0.85 });
-      if (!TRV.thumbMode) g.text(1, seen(x, 1), `x = ${fix(x, 1)}`, x === X0 ? P.ink : P.dim, { dx: -4, dy: -9, align: 'right', size: 10.5 });
+    }
+    // one label per height at the right edge: curves that end at (nearly) the same height share it, so that labels of
+    // coinciding lines (x = −1 and x = 0 when every leak is off) are not printed on top of each other
+    if (!TRV.thumbMode) {
+      const ends = []; for (const x of [-1, -0.5, 0, 0.5, 1]) { const v = seen(x, 1), e = ends.find((q) => Math.abs(q.v - v) < 0.12); if (e) e.xs.push(x); else ends.push({ v, xs: [x] }); }
+      lineTags = ends.map((e) => ({ v: e.v, xs: e.xs.slice() }));
+      for (const e of ends) g.text(1, e.v, `x = ${e.xs.map((x) => fix(x, 1)).join(', ')}`, e.xs.includes(X0) ? P.ink : P.dim, { dx: -4, dy: -9, align: 'right', size: 10.5 });
     }
     const v0 = seen(X0, 0), v1 = seen(X0, y), gap = v1 - v0;
     g.hline(v0, P.cyan, { dash: [4, 3], alpha: 0.8 });
@@ -324,7 +331,7 @@
     get state() {
       const d = split(clock.t, S.probe[0], S.probe[1]), tb = tube(S.mode, S.nu, clock.t), y = clock.t - 1;
       return { scene: S.scene, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, probe: S.probe.slice(), lamb: d,
-        mode: S.mode, nu: S.nu, tube: tb, tStar: tStar(S.nu), floor: 4 * Math.PI * S.nu / ALPHA, rInf: rInf(S.nu), k41: (({ re, eta, ndof }) => ({ re, eta, ndof }))(k41(S.nu)), leaks: [S.lin, S.self, S.mix], y, x: X0, seen: [seen(X0, 0), seen(X0, y)], terms: terms(X0, y), closed: isClosed(),
+        mode: S.mode, nu: S.nu, tube: tb, tStar: tStar(S.nu), floor: 4 * Math.PI * S.nu / ALPHA, rInf: rInf(S.nu), k41: (({ re, eta, ndof }) => ({ re, eta, ndof }))(k41(S.nu)), leaks: [S.lin, S.self, S.mix], y, x: X0, seen: [seen(X0, 0), seen(X0, y)], terms: terms(X0, y), closed: isClosed(), lineTags: lineTags.map((e) => ({ v: e.v, xs: e.xs.slice() })),
         consts: { alpha: ALPHA, kappa: KAPPA, gamma: GAMMA, a0: A0, beta: BETA } };
     },
     seek: (t) => { clock.pause(); clock.set(t); },

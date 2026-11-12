@@ -79,7 +79,7 @@ const stopped = (id) => until(page, (c) => { const s = window.GROWTH_DEBUG.state
 const plays = () => until(page, () => window.GROWTH_DEBUG.state.playing);
 
 let s = await state();
-check('opens on ENTROPY CAPS in the growth scene at layer 14', s.preset === 'saturate' && s.scene === 'growth' && close(s.t, 14, 1e-9));
+const s0 = s;
 
 // the run itself
 const run = await page.evaluate(() => window.GROWTH_DEBUG.run());
@@ -105,16 +105,21 @@ check('the entropy curve is −Σ λ log₂ λ of those eigenvalues at every lay
 check('the entropy never passes min(2 × gates across the cut, 4 bits) — the grey staircase and the white line', run.entropy.every((v, t) => v <= Math.min(2 * run.cross[t], 4) + 1e-9));
 
 // ENTROPY CAPS
-const tail = run.entropy.slice(40), mean = tail.reduce((a, b) => a + b, 0) / tail.length, lo = Math.min(...tail), hi = Math.max(...tail);
-let t0 = 0; while (t0 < 90 && run.entropy[t0] < mean - 0.25) t0++;
+// the band: min and max of the entropy from layer 40 on; t0: scanning down from the end, the first layer of the last
+// unbroken run inside the band (the suite's own scan, the page computes it its own way)
+const tail = run.entropy.slice(40), lo = Math.min(...tail), hi = Math.max(...tail);
+let t0 = 90; for (let t = 90; t >= 0; t--) { if (run.entropy[t] < lo || run.entropy[t] > hi) break; t0 = t; }
+const gatesAt0 = 3 * Math.ceil(t0 / 2) + 4 * Math.floor(t0 / 2);
+check('opens on ENTROPY CAPS in the growth scene at the settling layer', s0.preset === 'saturate' && s0.scene === 'growth' && close(s0.t, t0, 1e-9));
 await pick('saturate');
 check('ENTROPY CAPS plays by itself', await plays());
-check('ENTROPY CAPS stops at layer 14', await stopped('saturate'));
+check(`ENTROPY CAPS stops at layer ${t0}`, await stopped('saturate') && close((await state()).t, t0, 1e-9));
 s = await state();
-check('ENTROPY CAPS: settles at the layer the note names, inside the band it names, with 49 gates at layer 14', s.growth.late.t0 === t0 && close(s.growth.late.min, lo) && close(s.growth.late.max, hi) && t0 <= 14 && s.growth.gates === 49 && run.entropy[14] >= lo - 0.3, `t0 ${t0}, band ${lo.toFixed(2)}–${hi.toFixed(2)}`);
+check(`ENTROPY CAPS still: from layer ${t0} on every entropy is inside ${lo.toFixed(2)}–${hi.toFixed(2)}, the still's own value too, with ${gatesAt0} gates`, s.growth.late.t0 === t0 && close(s.growth.late.min, lo) && close(s.growth.late.max, hi) && s.growth.entropy >= lo && s.growth.entropy <= hi && s.growth.gates === gatesAt0 && run.entropy[t0 - 1] < lo, `t0 ${t0}, band ${lo.toFixed(2)}–${hi.toFixed(2)}, S ${s.growth.entropy}`);
 check('ENTROPY CAPS: the settled band is under 4 bits and well above half of it', hi < 4 && lo > 3);
 const note = await page.textContent('#presetNote');
-check('ENTROPY CAPS: the note quotes the band and the gate count', note.includes(lo.toFixed(2)) && note.includes(hi.toFixed(2)) && note.includes('49'));
+check('ENTROPY CAPS: the note quotes the layer, the band, the still\'s entropy and the gate count', note.includes(`第 ${t0} 层`) && note.includes(lo.toFixed(2)) && note.includes(hi.toFixed(2)) && note.includes(run.entropy[t0].toFixed(2)) && note.includes(String(gatesAt0)));
+check('ENTROPY CAPS still: the magenta model line is hidden (no model in the subtitle or the legend)', !s.model && !(await page.textContent('#hudSub')).includes('模型') && !(await page.textContent('#legend')).includes('模型'));
 
 // 2^N CEILING
 await pick('ceiling');
@@ -169,6 +174,12 @@ s = await state();
 const seq = [[2, 3], [2, 4], [3, 5], [3, 6], [4, 7], [4, 8]].map((c) => asap(11, c).D);
 check('DEPTH FLOOR: the cut sets of the note give 9, 8, 7, 6, 5, 4 layers', seq.join(',') === '9,8,7,6,5,4');
 check('DEPTH FLOOR: it ends on {4, 8} with 4 layers, on the white line', s.depth.cuts.join(',') === '4,8' && s.depth.D === 4 && s.depth.floor === 4);
+{ // the still of the card (a figure shot) keeps the start {2, 3} as faint outlines: the suite's greedy layering gives 9 layers there
+  const fig = await T.newPage(); await T.goto(BOOK, ID, '?lang=zh&preset=floor&shot=1', fig); await settle(fig);
+  const f = await fig.evaluate(() => window.GROWTH_DEBUG.state);
+  check('DEPTH FLOOR still: {4, 8} at 4 layers with the ghost of the start {2, 3} at 9 layers', f.depth.cuts.join(',') === '4,8' && f.depth.D === 4 && JSON.stringify(f.ghost) === '[2,3]' && asap(11, [2, 3]).D === 9 && f.ghostDepth === 9, JSON.stringify([f.ghost, f.ghostDepth]));
+  await fig.close();
+}
 
 // the theorem, by exhaustion
 let thmOk = true, bad = '';

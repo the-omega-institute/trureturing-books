@@ -221,6 +221,13 @@ check('NARROW plays from M = 1', await until(page, () => { const d = window.ELLI
 // do not wait for the whole run: push the playing clock near its end, then let it stop by itself
 await page.evaluate(() => window.ELLIPTOPE_DEBUG.advance(3.8));
 check('NARROW stops by itself at M = 5', await until(page, () => { const d = window.ELLIPTOPE_DEBUG.state; return !d.playing && d.M === 5 && d.t === 4; }));
+{
+  // the still the card stops on: the window through Q is about a quarter of [−1, 1], as the card note and the caption say
+  const d = await state(), w = windowBisect(V6, 5, d.y), ratio = (w[1] - w[0]) / 2;
+  check('NARROW still: the window (bisection here) is about a quarter of [−1, 1]', Math.round(1 / ratio) === 4 && Math.abs(d.windows[4].hi - d.windows[4].lo - (w[1] - w[0])) < 1e-6, `[${w[0]}, ${w[1]}] → ${ratio}`);
+  const note = await page.textContent('#presetNote');
+  check('NARROW note says a quarter', note.includes('四分之一'), note);
+}
 await page.locator('body').click({ position: { x: 5, y: 5 } });
 await page.keyboard.press('Space');
 check('Space plays again', await until(page, () => { const d = window.ELLIPTOPE_DEBUG.state; return d.playing; }));

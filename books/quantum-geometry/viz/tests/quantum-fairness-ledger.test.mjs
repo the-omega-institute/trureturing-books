@@ -68,6 +68,7 @@ const scene = async (k) => { await page.locator('body').click({ position: { x: 3
 
 let s = await state();
 check('opens on HAAR in the seat scene with all 600 points', s.preset === 'haar' && s.scene === 'seat' && s.n === 600 && !s.playing);
+{ const hn = await page.textContent('#presetNote'); check('HAAR note marks the uniform measure as a literature result', /哈尔测度）?，?文献结果/.test(hn), hn); }
 
 // SEAT
 {
@@ -167,6 +168,15 @@ check('opens on HAAR in the seat scene with all 600 points', s.preset === 'haar'
   check('CLONING plays by itself', await until(page, () => { const d = window.FAIRNESS_DEBUG.state; return d.playing && d.t > 0; }));
   s = await seek(4);
   check('CLONING at M = 5: η = 7/15 and F = 11/15', s.M === 5 && close(s.eta, 7 / 15, 1e-12) && close(s.F, 11 / 15, 1e-12) && (await page.textContent('#roKey')).includes('0.7333'));
+  const cn = await page.textContent('#presetNote');
+  check('CLONING note: the universal cloner is a literature result, and the exactly copied pair needs another machine', cn.includes('文献结果') && cn.includes('另一台') && !cn.includes('同一台'), cn);
+}
+
+// no ASCII underscore subscripts in what the reader sees (τ_AB, r_A, ρ_A are written with real subscripts)
+{
+  await pick('wstate'); await settle(page);
+  const seen = await page.evaluate(() => document.body.innerText);
+  check('the bonds scene shows no raw underscore subscripts', !/[τrρ]_[A-Za-zψφ(]/.test(seen), (seen.match(/.{0,12}[τrρ]_.{0,12}/) || [''])[0]);
 }
 
 // ERGODIC

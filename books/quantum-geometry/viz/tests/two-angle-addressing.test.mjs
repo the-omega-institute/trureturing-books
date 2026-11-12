@@ -164,6 +164,24 @@ await page.click('#play'); check('▶ again pauses', !(await state()).playing);
 await setRange('now', 3.4); s = await state();
 check('scrubbing the rail turns part of a factor, as the quaternions say', close(s.t, 3.4) && agrees(s) < 1e-12);
 
+// the printed stills: opened as viz-thumbs.mjs does (?shot=1&preset=…), each card shows the frame its caption tells
+const shot = await T.goto(BOOK, ID, '?shot=1&lang=zh&preset=tilt', await T.newPage());
+const shotState = async () => { await settle(shot); return shot.evaluate(() => window.ANGLES_DEBUG.state); };
+const hudPolar = async () => { const m = (await shot.textContent('#hudSub')).match(/离 N ([\d.]+)°/); return m ? Number(m[1]) : NaN; };
+const spinTag = async () => { const t = await shot.evaluate(() => Array.from(document.querySelectorAll('#stage .tag')).filter((e) => !e.hidden).map((e) => e.textContent).find((x) => x.includes('小旗转过'))); const m = t && t.match(/([\d.]+)°/); return m ? Number(m[1]) : NaN; };
+s = await shotState();
+let qp = wordAt(s.word, s.alpha, s.t).p, qpolar = Math.acos(Math.max(-1, Math.min(1, qp[2]))) / DEG;
+check('ONE-TURN still: the word has played to its end and the point is back at N, as the caption says', close(s.t, s.max) && !s.playing && vclose(qp, [0, 0, 1], 1e-9) && close(await hudPolar(), Number(qpolar.toFixed(1)), 1e-9), `t ${s.t}/${s.max}, polar ${qpolar}`);
+await T.goto(BOOK, ID, '?shot=1&lang=zh&preset=pole', shot); s = await shotState();
+const flagTurn = Math.acos(Math.max(-1, Math.min(1, dot(wordAt(s.word, 90, s.t).flag, wordAt(s.word, 90, 1).flag)))) / DEG;
+const twist = Math.abs(s.word[1].deg) * (s.t - 1);
+check('POLE still: the twist has run its full turn, the point sits at the south pole and the flag readout says one whole turn', close(s.t, s.max) && vclose(wordAt(s.word, 90, s.t).p, [0, 0, -1], 1e-9) && close(flagTurn, 0, 1e-5) && close(await spinTag(), Math.round(twist), 1e-9) && close(twist, 360, 1e-9), `t ${s.t}, flag tag ${await spinTag()}`);
+await T.goto(BOOK, ID, '?shot=1&lang=zh&preset=collinear', shot); s = await shotState();
+qp = wordAt(s.word, 0, s.t).p;
+const lastTurn = Math.abs(s.word[s.word.length - 1].deg);
+check('COLLINEAR still: the whole word has played, N never moved, and the flag readout is the last turn', close(s.t, s.max) && vclose(qp, [0, 0, 1], 1e-9) && close(await hudPolar(), 0, 1e-9) && close(await spinTag(), Math.round(lastTurn), 1e-9) && close(wordAt(s.word, 0, s.t).flag[2], 0, 1e-12), `t ${s.t}, tag ${await spinTag()}`);
+await shot.close();
+
 // language
 await page.click('[data-lang-set="en"]'); await settle(page);
 check('the stage title follows the language', (await page.textContent('#hudBig')).startsWith('Address'));

@@ -55,7 +55,7 @@ At the equal superposition $\theta = \frac{\pi}{4}$ the one-step tax evaluates t
 - **Narrow and exhausting**, because across every step of unitary evolution $U$ followed by basis pinching that deletes coherence between sectors, the deleted off-diagonal coherence is converted penny for penny into a nonnegative **quantum relative-entropy tax**! In this `MODEL`, sustaining a crisp one-dimensional daytime rail feels like paying an ongoing entropy bill; turning that information-entropy tax into physical heat dissipation also requires the bath, initial-state, and entropy-balance conditions of [Chapter 31](ch31-quantum-fairness.md) [@thm-ch31-horizon-landauer-ergodic-fairness].
 
 ::: {.viz src="dream-decoherence-unpinning" preset="waking" height="500"}
-**Awake: the known data pin every place.** As the anchor strength λ goes from 0 to 1, the magenta cross-block squares shrink by 1 − λ to nothing while the cyan diagonal, the weight of each place, does not move; on the screen the fringes fade into the smooth envelope of the dashed cyan curve, and the entropy rises from 0 to the relative entropy of the deleted coherence ([@thm-ch37-known-data-pinching-and-entropy-tax], items 1 and 3). The four places and the screen are a model chosen for the picture.
+**Awake: the known data pin every place.** As the anchor strength λ goes from 0 to 1, the magenta cross-block squares shrink by 1 − λ to nothing while the cyan diagonal, the weight of each place, does not move; on the screen the fringes fade into the smooth envelope of the dashed cyan curve, and the entropy (S in the readout line) rises from 0 to the relative entropy of the deleted coherence ([@thm-ch37-known-data-pinching-and-entropy-tax], items 1 and 3). The four places and the screen are a model chosen for the picture.
 :::
 
 The formal theorem below locks record-pinching idempotence, the vanishing-off-diagonal fixed-point criterion, exact qubit discarded coherence mass, and the multi-step coherence-deletion entropy identity onto a single Lean-4-verified foundation:
@@ -157,7 +157,7 @@ $$
 $$
 
 ::: {.viz src="dream-decoherence-unpinning" preset="half_erase" height="500"}
-**Two records, only one reversed.** Two phase records (c = −i) are written one after the other and the magenta ρ₀₁ turns from 1/2 to −1/2; reverse copy 0 alone and it stops at −i/2, the needle in its square points down, and the fringes sit a quarter period off the dashed grey curve ([@thm-ch37-joint-coherent-record-erasure], item 2).
+**Two records, only one reversed.** Two phase records (c = −i) are written one after the other and the magenta ρ₀₁ turns from 1/2 to −1/2; reverse copy 0 alone and it stops at −i/2, the needle in its square points down, and the fringes sit a quarter period off the dashed grey curve; the dashed white arc in the square records the path of the phase, out half a turn and a quarter of the way back ([@thm-ch37-joint-coherent-record-erasure], item 2).
 :::
 
 Two kernel theorems establish both general full-family unimodular reversal and this exact two-copy certificate:
@@ -200,7 +200,7 @@ For Conjunct 1, unfolding `multi_record_channel_apply` twice expresses entry $(i
 Conjunct 2 of [@thm-ch37-joint-coherent-record-erasure] captures the lived difference between shallow half-sleep and deep nocturnal release (`MODEL` (interpretive model)): when two daytime commitments invert an initial $+1/2$ coherence into $-1/2$, loosening only copy `{0}` leaves the unreversed second guard twisting the phase onto $-i/2$; only when both copies are jointly conjugated across `Finset.univ` does the buried $+1/2$ amplitude resurface intact!
 
 ::: {.viz src="dream-decoherence-unpinning" preset="quantum_eraser" height="500"}
-**Joint reversal of every copy.** Both phase records are written, then both are reversed: ρ₀₁ turns half way round the circle of radius 1/2 and back to 1/2, and the fringes land on the dashed grey curve again ([@thm-ch37-joint-coherent-record-erasure], item 1, every record with |c|² = 1).
+**Joint reversal of every copy.** Both phase records are written, then both are reversed: ρ₀₁ turns half way round the circle of radius 1/2 and back to 1/2, and the fringes land on the dashed grey curve again; the dashed white arc in the square is the path of the phase, out half a turn on the outer strand and back on the inner one, with a dot where each step landed ([@thm-ch37-joint-coherent-record-erasure], item 1, every record with |c|² = 1).
 :::
 
 ---

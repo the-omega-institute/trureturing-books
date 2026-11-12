@@ -109,6 +109,7 @@ await pick('waking');
 check('WAKING: the card plays by itself', await until(page, () => { const d = window.DREAM_DEBUG.state; return d.preset === 'waking' && (d.playing || d.t > 0); }));
 s = await seek(1);
 check('WAKING: every place, λ runs 0 → 1', s.fam === 'fine' && close(s.lam, 1) && s.path[0] === 0 && s.path[1] === 1);
+check('WAKING: the still names the entropy at λ = 1, D(Ψ‖𝒫Ψ) = −Σ pᵢ ln pᵢ, to two places', (await page.textContent('#hudSub')).includes(`S = ${dExp.toFixed(2)}`), await page.textContent('#hudSub'));
 await pick('blocks'); s = await seek(1);
 const RB = rhoOf(0.4, 1, 'body');
 check('TWO-BLOCKS: at λ = 1 the body–rest coherence is zero and the coherence among x₁…x₃ stays', s.fam === 'body' && maxDiff(realPart(s.rho), RB) < 1e-12 && s.rho[0][1][0] === 0 && close(s.rho[1][2][0], (0.6 / 3), 1e-12));
@@ -151,10 +152,18 @@ check('HALF-ERASE: the card plays by itself', await until(page, () => { const d 
 await D(() => window.DREAM_DEBUG.jump(2.9));
 check('HALF-ERASE: the play stops by itself at step 3', await until(page, () => { const d = window.DREAM_DEBUG.state; return !d.playing && d.t === 3; }));
 s = await state();
+/** The phase path of ρ₀₁ through the whole steps 0 … k of the record channel: total turn and where it ends (unwrapped). */
+const phasePath = (r, phi, k) => { let prev = 0, sweep = 0; for (let q = 1; q <= k; q++) { const z = expected(r, phi, q)[0][1]; let a = Math.atan2(z[1], z[0]); while (a - prev > Math.PI) a -= 2 * Math.PI; while (a - prev < -Math.PI) a += 2 * Math.PI; sweep += Math.abs(a - prev); prev = a; } return { sweep, end: prev }; };
+const ph3 = phasePath(1, 90, 3);
+check('HALF-ERASE: the trail in the ρ₀₁ square has turned 3π/2 and ends at −π/2', close(s.trail.sweep, ph3.sweep, 1e-6) && close(s.trail.end, ph3.end, 1e-9) && close(ph3.sweep, 1.5 * Math.PI, 1e-12), JSON.stringify(s.trail));
 check('HALF-ERASE: ρ₀₁ = −i/2 (certificate)', close(s.z[0], 0, 1e-12) && close(s.z[1], -0.5, 1e-12));
 s = await seek(2);
 check('two copies written: ρ₀₁ = −1/2 (certificate)', close(s.z[0], -0.5, 1e-12) && close(s.z[1], 0, 1e-12));
-await pick('quantum_eraser'); s = await seek(4);
+await pick('quantum_eraser'); s = await seek(0);
+check('JOINT-REVERSAL at step 0: no trail yet', s.trail.points === 0 && s.trail.sweep === 0);
+s = await seek(4);
+const ph4 = phasePath(1, 90, 4);
+check('JOINT-REVERSAL: the still is told apart from the start by its trail: out half a turn and back (sweep 2π, ends at 0)', close(s.trail.sweep, ph4.sweep, 1e-6) && close(ph4.sweep, 2 * Math.PI, 1e-12) && Math.abs(s.trail.end) < 1e-9 && s.trail.points > 2, JSON.stringify(s.trail));
 check('JOINT-REVERSAL: both reversed, ρ₀₁ = 1/2, the whole matrix restored', maxDiff(s.rho.map((r) => r.map((v) => v[0])), [[0.5, 0.5], [0.5, 0.5]]) < 1e-12 && Math.abs(s.z[1]) < 1e-12);
 scr = await D((u) => window.DREAM_DEBUG.screen(u), us);
 const KB = 2 * Math.PI / 0.5, SB = 0.55;
@@ -162,6 +171,7 @@ check('JOINT-REVERSAL: the screen is back to env·(1 + cos Ku)', scr.every((v, k
 check('coherence mass = |ρ₀₁|² + |ρ₁₀|² = 1/2', close(s.mass, 0.5, 1e-12));
 await pick('zero_overlap_fail'); s = await seek(1);
 check('ZERO-OVERLAP: one record with c = 0 kills ρ₀₁', s.r === 0 && Math.hypot(...s.z) === 0);
+check('ZERO-OVERLAP: c = 0 has no phase, so no trail is drawn', s.trail.points === 0);
 s = await seek(4);
 check('ZERO-OVERLAP: reversing both copies does not restore it (ρ₀₁ = 0, fringes gone)', Math.hypot(...s.z) === 0 && (await D((u) => window.DREAM_DEBUG.screen(u), us)).every((v) => close(v.all, v.diag, 1e-15)));
 await setRange('r', 0.6); s = await seek(4);

@@ -36,6 +36,7 @@ check('brute force: the Eisenstein values ≤ 13 are 0, 1, 3, 4, 7, 9, 12, 13', 
 let s = await state();
 check('page carries its id', (await page.evaluate(() => document.body.dataset.vizId)) === 'norm-lattice');
 check('opens on the HEX card, paused, in the complex plane at t = −1', s.preset === 'hex' && !s.playing && s.scene === 'eis' && Math.abs(s.m - 1) < 1e-9 && Math.abs(s.t + 1) < 1e-9);
+check('HEX: the title names the complex plane and not the parameter t, which the text has not introduced yet', (await page.textContent('#hudBig')).includes('复平面') && !(await page.textContent('#hudBig')).includes('t ='));
 
 /* ---------- HEX ---------- */
 s = await card('hex');
@@ -108,11 +109,40 @@ check('NORM: g = 2 + φ and ḡ = 2 + φ̄ (φ by Newton)', Math.abs(s.uv[0] - (
 check('NORM: rectangle area g·ḡ = 5 = 2² + 2·1 − 1², and the key says 5', Math.abs(s.uv[0] * s.uv[1] - 5) < 1e-9 && s.norm === 5 && s.key.trim() === '5');
 
 /* ---------- PELL ---------- */
+// the labels on the golden stage: none overlap, none sit on the cyan trace diagonal, and the current one is clear of
+// the dashed drop from the point to its trace foot. Screen positions come from the page's own pointAt (an affine map).
+async function goldLabels() {
+  return page.evaluate(() => {
+    const D = window.NORM_DEBUG, st = D.state, o = D.pointAt(0, 0), e1 = D.pointAt(1, 0), e2 = D.pointAt(0, 1);
+    const phi = (1 + Math.sqrt(5)) / 2, a = st.g[0], b = st.g[1];
+    // uv(1, 0) = (1, 1), uv(0, 1) = (φ, φ̄): solve for the screen image of (u, v) = (1, 0) and (0, 1)
+    const cu = [], cv = [];
+    // screen = o + u·Eu + v·Ev with Eu + Ev = e1 − o and φ·Eu + (1 − φ)·Ev = e2 − o
+    for (const i of [0, 1]) { const s1 = e1[i] - o[i], s2 = e2[i] - o[i], Ev = (phi * s1 - s2) / (phi - (1 - phi)), Eu = s1 - Ev; cu.push(Eu); cv.push(Ev); }
+    const scr = (u, v) => [o[0] + u * cu[0] + v * cv[0], o[1] + u * cu[1] + v * cv[1]];
+    const tags = [...document.querySelectorAll('.tags .tag')].filter((t) => !t.hidden).map((t) => { const r = t.getBoundingClientRect(); return { cls: t.className, text: t.textContent, r: [r.left, r.top, r.right, r.bottom] }; });
+    const u = st.uv[0], v = st.uv[1], tr = (u + v) / 2;
+    return { tags, p: scr(u, v), foot: scr(tr, tr), d0: scr(0, 0), d1: scr(1, 1) };
+  });
+}
+function labelsClear(L) {
+  const hit = (r, q, pad = 1) => q[0] > r[0] - pad && q[0] < r[2] + pad && q[1] > r[1] - pad && q[1] < r[3] + pad;
+  const over = (a, b) => a[0] < b[2] && b[0] < a[2] && a[1] < b[3] && b[1] < a[3];
+  const side = (q) => (L.d1[0] - L.d0[0]) * (q[1] - L.d0[1]) - (L.d1[1] - L.d0[1]) * (q[0] - L.d0[0]);
+  const crossesDiag = (r) => { const sg = [[r[0], r[1]], [r[2], r[1]], [r[0], r[3]], [r[2], r[3]]].map((q) => Math.sign(side(q))); return !sg.every((x) => x === sg[0]); };
+  const bad = [];
+  for (let i = 0; i < L.tags.length; i++) for (let j = i + 1; j < L.tags.length; j++) if (over(L.tags[i].r, L.tags[j].r)) bad.push(`${L.tags[i].text} × ${L.tags[j].text}`);
+  for (const t of L.tags) if (!t.cls.includes('hot') && /\(|2a/.test(t.text) && crossesDiag(t.r)) bad.push(`${t.text} on the diagonal`);
+  const cur = L.tags.find((t) => t.cls.includes('hot'));
+  if (cur) for (let i = 2; i <= 18; i++) { const f = i / 20, q = [L.p[0] + f * (L.foot[0] - L.p[0]), L.p[1] + f * (L.foot[1] - L.p[1])]; if (hit(cur.r, q)) { bad.push(`${cur.text} on the dashed drop`); break; } }
+  return bad;
+}
 s = await card('pell');
 const tr = s.uv[0] + s.uv[1], bb = (s.uv[0] - s.uv[1]) / Math.sqrt(5);
 check('PELL: the frame is turned, the diagonal shadow is the trace 5 and the other is √5·b with b = 1', Math.abs(s.alpha - 1) < 1e-9 && Math.abs(tr - 5) < 1e-9 && Math.abs(bb - 1) < 1e-9);
 check('PELL: trace² − 5b² = 20 = 4 × norm, in integers', 5 * 5 - 5 * 1 * 1 === 4 * s.norm && Math.abs(tr * tr - 5 * bb * bb - 4 * s.uv[0] * s.uv[1]) < 1e-9);
 check('PELL: the readout shows 20 = 4 × 5', (await page.textContent('#ro3')).includes('20 = 4 × 5'));
+{ const bad = labelsClear(await goldLabels()); check('PELL still: the point label and the trace label are apart, off the diagonal and off the dashed drop', bad.length === 0, bad.join(' | ')); }
 
 /* ---------- UNITS ---------- */
 s = await card('units');
@@ -124,6 +154,7 @@ for (let k = 0; k <= 4; k++) {
   if (!good) { ok = false; detail = `k=${k} ${JSON.stringify(x.g)} ${x.norm}`; }
 }
 check('UNITS: φᵏ gives (2a + b, b) = (Lₖ, Fₖ), norm (−1)ᵏ, and sits at (φᵏ, φ̄ᵏ), k = 0 … 4', ok, detail);
+{ await seek(4); const bad = labelsClear(await goldLabels()); check('UNITS still: the hop labels (2, 0) … (4, 2), the trace and the point label do not overlap or sit on the cyan diagonal', bad.length === 0, bad.join(' | ')); }
 s = await seek(3.8);
 check('UNITS: between steps the page says the slide is animation', s.moving && s.note.length > 4);
 

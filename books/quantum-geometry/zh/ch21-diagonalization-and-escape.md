@@ -13,7 +13,7 @@
 在本章中，我们将看到：这种“要表达当前系统的整体存在，就必须跳进更大外围空间”的法向逃逸现象，绝不仅是一则优美的微分几何比喻；在集合论与观测拓扑的底层，它的抽象骨架直接具象化为本书经 Lean 4 内核形式化验证的**相对语义对角线与观测拓扑加细四重奏**（`DiagonalTopologicalEscape`），并与经典元数学中的对角线不完备文献遥相呼应（严格前提对比见 [@rem-godel-tarski-comparison-literature]）。只要一台完备解码器试图在非空地址集与固定潜坐标（latent coordinate）的纤维划分下穷尽所有输出映射，任何无不动点的翻转算子（twist）都会沿着相对语义对角线当场刺穿旧观测拓扑，强迫概念读出向“球外之球”严格加细！
 
 ::: {.figure src="ch21-overview"}
-**图 21。** 本章地图：第 I 栏，潜坐标的两根纤维，品红虚线把左边那根劈成 $g = 1$ 的 $a_0, a_1$ 与 $g = 0$ 的 $a_2$（[@ex-cantor-godel-diagonal-table]）；第 II 栏，品红的开口螺旋绕紫色的轴 $\vv{e}_{n+1}$ 上升，青色的影子绕一圈就闭合，螺旋却已高出 $2\pi c$；第 III 栏，$S^0$ 到 $S^8$ 中只有紫色的 $S^0, S^1, S^3, S^7$ 可平行化，$S^2$ 上的切向量场必有零点（文献结果，未在本书形式化，见 [@rem-hairy-ball-adams-literature]）。
+**图 21。** 本章地图：第 I 栏，潜坐标的两根纤维，品红虚线把左边那根劈成 $g = 1$ 的 $a_0, a_1$ 与 $g = 0$ 的 $a_2$（[@ex-cantor-godel-diagonal-table]）；第 II 栏，品红的开口螺旋绕紫色的轴 $\vv{e}_{n+1}$ 上升，青色的影子绕一圈就闭合，螺旋却已高出 $2\pi c$（这一栏是本章的诠释意象，不是定理）；第 III 栏，$S^0$ 到 $S^8$ 中只有紫色的 $S^0, S^1, S^3, S^7$ 可平行化，$S^2$ 上的切向量场必有零点（文献结果，未在本书形式化，见 [@rem-hairy-ball-adams-literature]）。
 :::
 
 ## 21.1 为什么表达面积必须站在面外：概念读出与划分拓扑 {#sec-ch21-1}
@@ -73,6 +73,10 @@ $$
 :::
 
 请看 [@def-relative-semantic-diagonal] 与 [@def-separation-deficit] 联手设下的天罗地网：对任意地址 $a \in \mathrm{Address}$，因为 $\operatorname{twist}$ 无不动点，必有 $g(a) \neq \operatorname{decoderCatalog}(a, \operatorname{latent}(a))$（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)）——在第 $a$ 号地址自己头上，对角线 $g$ 的取值永远跟第 $a$ 号解码器算出的结果唱反调！
+
+::: {.viz src="sphere-escape" preset="diagonal" height="500"}
+**对角线逃出清单。** 逐行读出对角线上的那一位并翻转，拼成品红色的 $d$；$d$ 与第 $k$ 行在第 $k$ 位不同，所以不在清单里（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode) 取 $\operatorname{latent} = \mathrm{id}$、$\operatorname{twist} = \neg$）。右侧的点阵是全部 $2^N$ 个串，与 $d$ 相容的候选每步减半。
+:::
 
 由此，在 Lean 模块 `DiagonalTopologicalEscape` 中，我们迎来了刻画“球内语言必然破裂、概念拓扑被迫升维”的四条核心形式化定理。
 
@@ -189,10 +193,6 @@ $$
 :::
 
 > 完备的目录必自裂其壳；凡想在球内穷尽一切者，必被对角线顺着法向顶出球外。
-
-::: {.viz src="sphere-escape" preset="diagonal" height="500"}
-**对角线逃出清单。** 逐行读出对角线上的那一位并翻转，拼成品红色的 $d$；$d$ 与第 $k$ 行在第 $k$ 位不同，所以不在清单里（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode) 取 $\operatorname{latent} = \mathrm{id}$、$\operatorname{twist} = \neg$）。右侧的点阵是全部 $2^N$ 个串，与 $d$ 相容的候选每步减半。
-:::
 
 ## 21.3 割圆多面体、泰勒截断裂缝与开口螺旋投影 {#sec-ch21-3}
 
