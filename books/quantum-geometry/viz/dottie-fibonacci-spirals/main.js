@@ -403,7 +403,7 @@
     if (!follow) {
       const sx = B.X(S.x0c / 100), sy = B.Y(S.x0c / 100);
       ctx.fillStyle = P.void;
-      ctx.strokeStyle = step() === 0 ? P.amber : P.cyan;
+      ctx.strokeStyle = step() === 0 ? P.amber : (S.map === 'fib' ? P.magenta : P.cyan);
       ctx.lineWidth = 1.8 * lw;
       ctx.beginPath(); ctx.arc(sx, sy, 4.8 * lw, 0, TAU); ctx.fill(); ctx.stroke();
     }
@@ -753,11 +753,18 @@
     ctx.lineWidth = 1.8 * lw;
     ctx.beginPath(); ctx.moveTo(xSplit, pyBar - 2); ctx.lineTo(xSplit, pyBar + barH + 2); ctx.stroke();
     const Of = buildOrbit('fib', S.x0c === 0 ? 100 : S.x0c), kBar = step();
-    const xkBar = clamp(Of.xs[Math.min(kBar, KMAX)], 0, 1);
-    ctx.fillStyle = P.amber;
-    ctx.strokeStyle = P.stage;
-    ctx.lineWidth = 1.1 * lw;
-    ctx.beginPath(); ctx.arc(B.X(xkBar), pyBar, 3.3 * lw, 0, TAU); ctx.fill(); ctx.stroke();
+    const xkBar = Of.xs[Math.min(kBar, KMAX)];
+    // A start x₀ ∈ (1, 1.5] lies past the unit bar: point beyond its end instead of pinning the marker at 1.
+    const offBar = xkBar > 1;
+    const tipX = x1P + 2 * lw + Math.max(10 * lw, Math.min(16 * lw, B.bx + B.bw - x1P - 5 * lw));
+    if (offBar) {
+      drawArrowSeg(ctx, x1P + 2 * lw, pyBar + barH / 2, tipX, pyBar + barH / 2, P.amber, 2.2, lw, 7);
+    } else {
+      ctx.fillStyle = P.amber;
+      ctx.strokeStyle = P.stage;
+      ctx.lineWidth = 1.1 * lw;
+      ctx.beginPath(); ctx.arc(B.X(xkBar), pyBar, 3.3 * lw, 0, TAU); ctx.fill(); ctx.stroke();
+    }
 
     if (!TRV.thumbMode) {
       ctx.font = font(10, 'data', 600);
@@ -765,13 +772,23 @@
       ctx.fillStyle = P.ink;
       ctx.textAlign = 'left';
       ctx.fillText('1D: φ⁻¹ + φ⁻² = 1', x0P, pyBar - 3);
-      const fibTag = S.x0c === 0
+      const w1D = ctx.measureText('1D: φ⁻¹ + φ⁻² = 1').width;
+      let fibTag = S.x0c === 0
         ? `x${sub(kBar)}(x₀=1)=${Of.rationals[Math.min(kBar, KMAX)]}`
         : `x${sub(kBar)}=${Of.rationals[Math.min(kBar, KMAX)]}`;
       ctx.font = font(9.5, 'data', 600);
       ctx.fillStyle = P.amber;
       ctx.textAlign = 'right';
-      ctx.fillText(fibTag, x1P, pyBar - 3);
+      // off the bar: the tag says so and ends above the arrow, clear of the 1D statement (short form when cramped)
+      let tagX = x1P;
+      if (offBar) {
+        const minLeft = x0P + w1D + 6, right = B.bx + B.bw - 4 * lw;
+        const place = (t) => Math.min(right, Math.max(tipX + 2 * lw, minLeft + ctx.measureText(t).width));
+        const full = `${fibTag} > 1${L(' 尺外', ' off-scale')}`;
+        fibTag = place(full) - ctx.measureText(full).width >= minLeft ? full : `${fibTag} > 1`;
+        tagX = place(fibTag);
+      }
+      ctx.fillText(fibTag, tagX, pyBar - 3);
       ctx.font = font(10, 'data', 600);
       ctx.textBaseline = 'top';
       ctx.fillStyle = P.cyan;
@@ -1052,7 +1069,10 @@
     $('pillStep').querySelector('strong').textContent = String(k);
     $('pillAngle').querySelector('strong').textContent = `${fix(sp.alphaDeg, 2)}°`;
 
-    // Stage HUD top-left & bottom-left legend
+    // Stage HUD top-left & bottom-left legend: the cobweb entries follow the maps actually drawn (cos θ only when the
+    // cosine map is on, 1/(1+x) only when the reciprocal map is on, the dashed tangent only for a single map).
+    const hasCos = S.map !== 'fib', hasFib = S.map !== 'cos';
+    const tangentItem = S.map !== 'both' ? [`<span><i class="sw dash mg"></i>${L('不动点切线', 'fixed-point tangent')}</span>`] : [];
     if (S.scene === 'cobweb') {
       const kind = S.map === 'fib' ? 'fib' : 'cos', O = buildOrbit(kind, S.x0c);
       $('hudBig').textContent = S.cam === 'follow' && S.map !== 'both'
@@ -1063,8 +1083,9 @@
         `|ΔV| = |ΔH| = ${sci(O.sides[k])} · turn ${O.dirs[k][0]} → ${O.dirs[k][1]} (180°/step)`
       );
       $('legend').innerHTML = [
-        `<span><i class="sw cy"></i>${L('cos θ 与分段 90° 弧', 'cos θ & 90° guides')}</span>`,
-        ...(S.map !== 'cos' ? [`<span><i class="sw mg"></i>1/(1 + x)</span>`] : [`<span><i class="sw dash mg"></i>${L('不动点切线', 'fixed-point tangent')}</span>`]),
+        ...(hasCos ? [`<span><i class="sw cy"></i>${L('cos θ 与分段 90° 弧', 'cos θ & 90° guides')}</span>`] : []),
+        ...(hasFib ? [`<span><i class="sw mg"></i>${L('1/(1 + x) 与分段 90° 弧', '1/(1 + x) & 90° guides')}</span>`] : []),
+        ...tangentItem,
         `<span><i class="sw ink"></i>${L('已走折线', 'walked cobweb')}</span>`,
         `<span><i class="sw am"></i>${L('当前直角步与方格', 'active step & square')}</span>`
       ].join('');
@@ -1077,8 +1098,9 @@
         `Cobweb 180°/step · Polar 90°/step: sin θ*≈${fix(LAMd, 4)} vs φ⁻¹≈${fix(IPHId, 4)}`
       );
       $('legend').innerHTML = [
-        `<span><i class="sw cy"></i>${L('cos θ / θ* 正交螺旋', 'cos θ / θ* spiral')}</span>`,
-        `<span><i class="sw mg"></i>${L('1/(1+x) / φ⁻¹ 黄金螺旋', '1/(1+x) / φ⁻¹ spiral')}</span>`,
+        `<span><i class="sw cy"></i>${hasCos ? L('cos θ / θ* 正交螺旋', 'cos θ / θ* spiral') : L('θ* 正交螺旋', 'θ* spiral')}</span>`,
+        `<span><i class="sw mg"></i>${hasFib ? L('1/(1+x) / φ⁻¹ 黄金螺旋', '1/(1+x) / φ⁻¹ spiral') : L('φ⁻¹ 黄金螺旋', 'φ⁻¹ spiral')}</span>`,
+        ...tangentItem,
         `<span><i class="sw vi"></i>${L('蛛网每臂 90° 螺旋', 'cobweb per-arm spiral')}</span>`,
         `<span><i class="sw am"></i>${L('当前步 k 标记', 'active step k')}</span>`
       ].join('');
