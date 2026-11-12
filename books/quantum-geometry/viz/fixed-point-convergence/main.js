@@ -272,7 +272,7 @@
       $('hudBig').textContent = L(`渐近分数 ${r.a}/${r.b}`, `CONVERGENT ${r.a}/${r.b}`);
       $('hudSub').textContent = L(`残差 |cos q − q| = ${sci(Math.abs(r.res))} > 0；分母² × 残差 = ${fix(r.b2res, 3)} < 1 + sin 1 · 视野宽 ${sci(2 * V.h)}`, `Residual |cos q − q| = ${sci(Math.abs(r.res))} > 0; denominator² × residual = ${fix(r.b2res, 3)} < 1 + sin 1 · view width ${sci(2 * V.h)}`);
       $('roKeyL').textContent = L('分母² × 残差', 'denominator² × residual');
-      $('roKey').innerHTML = `${fix(r.b2res, 4)} <span class="okmark">&lt; 1 + sin 1 ✓</span>`; $('roKeySub').textContent = `b²·|cos(a/b) − a/b|, 1 + sin 1 = ${fix(1 + SIN1, 4)}`;
+      $('roKey').innerHTML = `${fix(r.b2res, 4)} <span class="chk">&lt; 1 + sin 1 ✓</span>`; $('roKeySub').textContent = `b²·|cos(a/b) − a/b|, 1 + sin 1 = ${fix(1 + SIN1, 4)}`;
       set(1, L('读数 q = a/b', 'reading q = a/b'), `${r.a}/${r.b} = ${r.q.toFixed(10)}`);
       set(2, L('离 θ* 多远 |q − θ*|', 'distance to θ*, |q − θ*|'), sci(Math.abs(r.u)));
       set(3, L('残差 |cos q − q|', 'residual |cos q − q|'), sci(Math.abs(r.res)));
@@ -445,6 +445,7 @@
   /* ---------- experiment cards ---------- */
   const CARDS = {
     golden: { scene: 'iter', map: 'golden', x0: 1, cam: 'whole', to: 8, still: 6 },
+    far: { scene: 'iter', map: 'cos', x0: 3, cam: 'whole', to: 12, still: 5 },
     rate: { scene: 'iter', map: 'cos', x0: 1, cam: 'follow', to: 20, still: 8 },
     circle: { scene: 'iter', map: 'cos', x0: 1, cam: 'circle', to: 14, still: 14 },
     newton: { scene: 'newton', map: 'cos', x0: 1, cam: 'follow', to: 2, still: 2 },
@@ -453,6 +454,7 @@
   };
   const NOTES = {
     golden: ['从 x₀ = 1 反复按 1 + 1/x：折线依次落在 2、3/2、5/3、8/5……，一左一右夹住青色曲线与灰线的交点 φ ≈ 1.618。每一圈的宽度约是上一圈的 0.382 倍，正是品红切线斜率的大小。', 'Press 1 + 1/x again and again from x₀ = 1: the path lands on 2, 3/2, 5/3, 8/5, …, closing on φ ≈ 1.618, where the cyan curve meets the grey line, from alternating sides. Each turn is about 0.382 times as wide as the one before, the size of the slope of the magenta tangent.'],
+    far: ['从很远的 x₀ = 3 出发反复取余弦：第一步就落进 [−1, 1]（cos 3 ≈ −0.990），此后一圈圈绕向同一个 θ* ≈ 0.739。终点与起点无关。', 'Take the cosine again and again from a far start, x₀ = 3: the first step already lands in [−1, 1] (cos 3 ≈ −0.990), and from there the path winds in on the same θ* ≈ 0.739. The end does not depend on the start.'],
     rate: ['从 θ₀ = 1 反复取余弦，画面跟着误差放大。放大之后曲线与品红切线重合，每一圈的形状都一样：近点时相邻两圈的误差之比趋于约 −0.674（切线斜率 −sin θ*），比灰色虚线（全局常数 −sin 1 ≈ −0.84）平缓。', 'Take the cosine again and again from θ₀ = 1 while the view zooms with the error. Zoomed in, the curve lies on the magenta tangent and every turn has the same shape: near the fixed point the ratio of successive errors tends to about −0.674 (the tangent slope −sin θ*), gentler than the dashed grey line (the global constant −sin 1 ≈ −0.84).'],
     circle: ['同一张图加上单位圆。圆上的点 P = (θ*, sin θ*)：青色的横坐标是蛛网收进去的位置 θ*，品红的高度 λ = sin θ* ≈ 0.674 是每步缩小的比例，也是品红切线斜率的大小。', 'The same plane with the unit circle. The point P = (θ*, sin θ*) on it: its cyan abscissa is θ*, where the cobweb closes in, and its magenta height λ = sin θ* ≈ 0.674 is the ratio by which each step shrinks the error, the size of the slope of the magenta tangent.'],
     newton: ['同样从 θ₀ = 1 出发，每一步先竖着读曲线的高度，再沿品红切线走到灰线。进入不动点邻域后画面跟着放大，停在第 2 步：视野宽约 10⁻⁴，琥珀色的 x₂ 刚沿上一步的品红切线落到灰线上，正确位数 0 → 1 → 4，误差渐近地每步平方一次。拖时间轴看第 3、4 步：9 位、20 位。', 'Again from θ₀ = 1: each step reads the height of the curve, then follows the magenta tangent to the grey line. Once it is near the fixed point, the view zooms along and stops at step 2, about 10⁻⁴ wide: the amber x₂ has just come down the magenta tangent of the previous step onto the grey line; correct digits 0 → 1 → 4, with the error asymptotically squared at each step. Scrub the rail for steps 3 and 4: 9 and 20 digits.'],

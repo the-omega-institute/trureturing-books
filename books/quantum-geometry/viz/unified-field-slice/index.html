@@ -38,9 +38,7 @@
       <div class="presets cards" id="presets">
         <button class="preset" data-preset="polytope" aria-pressed="false"><span class="code">ICOSA 720°</span><span class="cn zh">二十面体：每个顶点缺 60°，一共缺 720°</span><span class="cn en">Icosahedron: 60° missing at each vertex, 720° in all</span></button>
         <button class="preset" data-preset="fixedpoint" aria-pressed="false"><span class="code">FIXED POINT</span><span class="cn zh">弧长等于影子的那一个角</span><span class="cn en">The one angle whose arc equals its shadow</span></button>
-        <button class="preset" data-preset="gudermann" aria-pressed="false"><span class="code">GUDERMANN</span><span class="cn zh">快度 ln 2：时钟 0.8，速度 0.6</span><span class="cn en">Rapidity ln 2: clock 0.8, speed 0.6</span></button>
         <button class="preset" data-preset="photon" aria-pressed="false"><span class="code">TOWARDS LIGHT</span><span class="cn zh">推向光速：时钟停摆，点贴到 90°</span><span class="cn en">Towards light: the clock stops, the point reaches 90°</span></button>
-        <button class="preset" data-preset="abelian" aria-pressed="false"><span class="code">ONE PLANE</span><span class="cn zh">同一个平面里来回转：回到原处</span><span class="cn en">Back and forth in one plane: home again</span></button>
         <button class="preset" data-preset="plaquette" aria-pressed="false"><span class="code">R₁R₂R₁⁻¹R₂⁻¹</span><span class="cn zh">两个平面里来回转：剩下一个转动</span><span class="cn en">Back and forth in two planes: a turn is left over</span></button>
         <button class="preset" data-preset="horizon" aria-pressed="false"><span class="code">|∂A| = 10</span><span class="cn zh">视界推到 90°：割断 10 条边</span><span class="cn en">The horizon at 90°: 10 edges cut</span></button>
       </div>
@@ -50,6 +48,11 @@
     <section class="panel sec" data-scenes="clock">
       <h2><span class="zh">快度</span><span class="en">Rapidity</span><span class="aside">θ = gd(η)</span></h2>
       <p class="note"><span class="zh">时间轴推动快度 η；也可以直接拖动圆上琥珀色的点，页面按 η = arsinh(tan θ) 反算快度。</span><span class="en">The rail pushes the rapidity η; you can also drag the amber point on the circle, and the page works back η = arsinh(tan θ).</span></p>
+    </section>
+
+    <section class="panel sec" data-scenes="fixed" hidden>
+      <h2><span class="zh">不动点</span><span class="en">Fixed point</span><span class="aside">cos θ = θ</span></h2>
+      <p class="note"><span class="zh">时间轴推动圆上的角 θ；也可以直接拖动圆上琥珀色的点。紫色的弧长与青色的影子只在 θ* 处一样长。</span><span class="en">The rail pushes the angle θ on the circle; you can also drag the amber point. The violet arc and the cyan shadow have the same length only at θ*.</span></p>
     </section>
 
     <section class="panel sec" data-scenes="loop" hidden>
@@ -81,6 +84,7 @@
       <div class="hud-tl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
       <div class="hud-tr chips" id="sceneChips" role="group" aria-label="场景" data-aria-en="Scene">
         <button class="chip" data-scene="clock" aria-pressed="true"><span class="zh">时钟</span><span class="en">Clock</span></button>
+        <button class="chip" data-scene="fixed" aria-pressed="false"><span class="zh">不动点</span><span class="en">Fixed point</span></button>
         <button class="chip" data-scene="loop" aria-pressed="false"><span class="zh">回路</span><span class="en">Loop</span></button>
         <button class="chip" data-scene="horizon" aria-pressed="false"><span class="zh">视界</span><span class="en">Horizon</span></button>
       </div>
@@ -114,7 +118,7 @@
       <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
       <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：θ = gd(η) 时 sin θ = tanh η、cos θ = sech η，故 cos²θ + sin²θ = 1 与 cosh²η − sinh²η = 1 是同一条恒等式；狭义相对论把 tanh η 读作 v/c、把 sech η 读作 dτ/dt = 1/γ。凸多面体顶点角亏之和为 4π = 720°。两个平面上转动的换位子在小回路极限下给出 ε² 量级的曲率二向量（杨—米尔斯 F = [D, D]）。若网络每条边携带 D 维指标，跨一道割的施密特秩不超过 D 的割边数次方。既有结果的应用（第 24 章的余弦端点定理与第 33 章例 ex-ch33-mutual-cosine-monotonic-lock）：cos θ = θ 的唯一实根是 θ*，sin θ* = √(1 − θ*²)，θ* + arcsin θ* = π/2；θ* ≈ 0.739085 的小数是数值。</span><span class="en">Literature results, not formalized in this book: with θ = gd(η), sin θ = tanh η and cos θ = sech η, so cos²θ + sin²θ = 1 and cosh²η − sinh²η = 1 are one identity; special relativity reads tanh η as v/c and sech η as dτ/dt = 1/γ. The angle deficits at the vertices of a convex polyhedron add up to 4π = 720°. For small loops the commutator of turns in two planes gives a curvature bivector of order ε² (Yang–Mills F = [D, D]). If each edge of a network carries a D-dimensional index, the Schmidt rank across a cut is at most D to the number of cut edges. Application of existing results (the cosine endpoint theorem of chapter 24 and Example ex-ch33-mutual-cosine-monotonic-lock of chapter 33): the only real root of cos θ = θ is θ*, with sin θ* = √(1 − θ*²) and θ* + arcsin θ* = π/2; the decimals θ* ≈ 0.739085 are numerical.</span></span></div>
       <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">本书第三十二章的诠释：把固有时率读作内积（青色的线）、把速度读作外积（品红的面积）、把 90° 读作正交视界，把两个平面转动的回路余项读作相互作用的几何源，把观察者 90° 处的视界读作切开关系网络的一道割。这是统一场纲领的示意，不是由这些数学事实推出的物理结论。</span><span class="en">The reading of Chapter 32 of this book: the proper-time rate as an inner product (the cyan line), the speed as an outer product (the magenta area), 90° as the orthogonal horizon, the loop remainder of turns in two planes as the geometric source of an interaction, and the observer's horizon at 90° as a cut through the network of relations. It is a picture of the unified-field programme, not a physical conclusion derived from these mathematical facts.</span></span></div>
-      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数都按双精度实时算出：gd(η)、旋子的四元数乘积、二十面体的顶点角与割边数。这是数值演示，不是证明。</span><span class="en">Every number on the page is computed live in double precision: gd(η), the quaternion products of the rotors, the vertex angles and cut edges of the icosahedron. A numerical illustration, not a proof.</span></span></div>
+      <div class="lean num"><span class="ok">NUM</span><span><span class="zh">页面上的数都按双精度实时算出：gd(η)、cos θ = θ 的根 θ*（牛顿迭代）、旋子的四元数乘积、二十面体的顶点角与割边数。这是数值演示，不是证明。</span><span class="en">Every number on the page is computed live in double precision: gd(η), the root θ* of cos θ = θ (by Newton’s method), the quaternion products of the rotors, the vertex angles and cut edges of the icosahedron. A numerical illustration, not a proof.</span></span></div>
       <button class="chip" id="infoBtn"><span class="zh">理论接口 DATA SHARD</span><span class="en">DATA SHARD · theory</span></button>
     </section>
   </aside>
@@ -132,7 +136,7 @@
       <input type="range" id="now" min="0" max="1" step="any" value="0" aria-label="时间轴：快度 η、回路走到第几步，或视界的极角 λ" data-aria-en="Rail: the rapidity η, how far round the loop, or the polar angle λ of the horizon">
     </div>
     <div class="keys">
-      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>1</kbd>–<kbd>3</kbd> <span class="zh">场景</span><span class="en">scenes</span> · <span class="zh">拖动球面转动视角</span><span class="en">drag the sphere to turn it</span>
+      <kbd>Space</kbd> <span class="zh">播放</span><span class="en">play</span> · <kbd>←</kbd><kbd>→</kbd> <span class="zh">逐步</span><span class="en">step</span> · <kbd>1</kbd>–<kbd>4</kbd> <span class="zh">场景</span><span class="en">scenes</span> · <span class="zh">拖动球面转动视角</span><span class="en">drag the sphere to turn it</span>
     </div>
   </footer>
 </div>

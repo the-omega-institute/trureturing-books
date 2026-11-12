@@ -97,10 +97,6 @@ $$
 对 $n \in \mathbb{N}$ 归纳并应用和角公式 $\sin((2n+1)\theta)\cos(2\theta) + \cos((2n+1)\theta)\sin(2\theta) = \sin((2n+3)\theta)$ 及余弦和角公式，即得 $Q^n U = \sin((2n+1)\theta)W + \cos((2n+1)\theta)B$。最后对等式两端右作 $\otimes_{\mathrm{K}} R$，由克罗内克积的线性分配律立即得出带参考矩阵 $R$ 的扩展恒等式（结论 2）。完整证明由 Lean 内核检查。
 :::
 
-::: {.viz src="grover-reflections" preset="mirrors" height="500"}
-**两面镜子合成一次转动。** $N = 8$ 时 $\theta \approx 20.70^\circ$：琥珀色的箭头先在失败轴 $B$（镜 1）里照一次，箭头尖沿竖直虚线翻到轴下；再在 $\lvert s\rangle$ 那条虚线（镜 2）里照一次，翻回来时比出发处高了 $2\theta \approx 41.41^\circ$，紫色的弧就是这一转。青色的影子是在目标轴 $W$ 上的成功振幅，从 $0.354$ 长到 $0.884$（[@thm-grover-uniform-rotation]，$n = 1$）。
-:::
-
 请结合图 15 面板 I 体会 [@thm-grover-uniform-rotation] 的三条关键边界：
 
 1. **必须保留 $p = 1$ 的独立分支**：当初始状态已经百分之百落在目标子空间内（$p = 1$）时，失败分母 $\sqrt{1 - p} = 0$，此时无须定义失败基向量 $B$，定理直接给出 $U = W$；而当 $0 < p < 1$ 时，$n = 0$ 自动还原初始正交分解 $U = \sin\theta\,W + \cos\theta\,B$。
@@ -154,6 +150,10 @@ $$
 记 $X = \mathrm{shiftMatrix}(M)$、$Z = \mathrm{clockMatrix}(M)$。因为 $X$ 与 $Z$ 均为幺正矩阵，每个 $\mathrm{displacement}(M, a, b) = X^{a.\mathrm{val}} Z^{b.\mathrm{val}}$ 亦为幺正矩阵，满足 $D(a, b) \cdot \mathrm{star}(D(a, b)) = I_M$。利用基本 Weyl 交换关系 $Z^b X^c = \omega_M^{(b \cdot c).\mathrm{val}} X^c Z^b$ 与 $X^a Z^d = \omega_M^{(-a \cdot d).\mathrm{val}} Z^d X^a$，将左端内部的 $X^{c.\mathrm{val}} Z^{d.\mathrm{val}}$ 逐步移到最右侧的 $\mathrm{star}(D(a, b))$ 之后：跨过 $Z^{b.\mathrm{val}}$ 产生相位因子 $\omega_M^{(b \cdot c).\mathrm{val}}$，跨过 $X^{a.\mathrm{val}}$ 产生相位因子 $\omega_M^{(-a \cdot d).\mathrm{val}}$。两个相位在 $\mathrm{ZMod}\,M$ 中合并为 $\omega_M^{(b \cdot c - a \cdot d).\mathrm{val}}$，而左侧剩余的 $D(a, b) \cdot \mathrm{star}(D(a, b))$ 缩并为单位阵 $I_M$，留下 $\omega_M^{(b \cdot c - a \cdot d).\mathrm{val}} \bullet D(c, d)$。完整证明由 Lean 内核检查。
 :::
 
+
+::: {.figure src="ch15-weyl-area"}
+**共轭只留下一个相位，由两次位移张成的面积决定。** 取 $M = 8$。左边是 $\mathrm{ZMod}\,8 \times \mathrm{ZMod}\,8$ 的格点，横轴是平移次数 $a$，纵轴是时钟次数 $b$；两支青色箭头 $(a, b) = (2, 1)$ 与 $(c, d) = (1, 3)$ 张出品红的平行四边形，有向面积 $ad - bc = 5$。右边是 $8$ 格的相位钟，琥珀色的指针停在 $\omega_8^{3}$，因为 $bc - ad = -5 \equiv 3 \pmod 8$（[@lemma-phase-kickback-weyl]）。把指数读成有向面积的相反数，只是对 $bc - ad$ 这个行列式的几何读法；指针的位置由 $8 \times 8$ 矩阵直接核对。
+:::
 在使用 [@lemma-phase-kickback-weyl] 时，请务必核对三处符号与边界细节：
 
 1. **模 $M$ 减法先于 `.val` 取值**：指数 $(b \cdot c - a \cdot d).\mathrm{val}$ 是先在环 $\mathrm{ZMod}\,M$ 内部完成乘法与减法，再通过 `.val` 取出 $\{0, 1, \dots, M-1\}$ 中的代表元整数作为 $\mathrm{windowRoot}(M)$ 的自然数幂次。
@@ -204,6 +204,10 @@ $$
 
 **重要规范提醒**：[@prop-finite-character-cancellation] 右端在 $x \in H$ 时给出的是**未归一化**的子群基数 $|\mathrm{annihilator}(H)|$，绝不能把这股未归一化的代数和直接称作“概率 $1$”！在实际量子电路中，必须除以初态归一化因子 $\sqrt{|H|}$ 与幺正 QFT 的归一化因子 $\sqrt{m}$，才能把振幅转化为满足玻恩法则的单位概率分布。
 
+::: {.viz src="phase-gears" preset="four" height="500"}
+**周期 4 留下四根峰。** $Q = 16$、梳子 $\{0, 4, 8, 12\}$：看 $k = 4$ 时四支青色箭头全部朝右，链长 $4$，这是未归一化的和，不是概率 $1$；扫完之后谱上只剩 $0$、$4$、$8$、$12$ 四根等高的柱子，每根 $\frac{1}{4}$，正落在品红的 $sQ/r$ 上，其余十二根都是 $0$。
+:::
+
 ## 有限周期采样与 Shor 阶重建 {#sec-shor-order-reconstruction}
 
 将 [@prop-finite-character-cancellation] 的正交筛子应用于 $\mathrm{ZMod}\,m$ 上的任意复值函数 $f : \mathrm{ZMod}\,m \to \mathbb{C}$，便立即导出调和分析与量子周期寻找的共同枢纽——**有限泊松求和公式（Finite Poisson Summation Formula）**。
@@ -241,6 +245,12 @@ $$
 最后利用有限循环群子群与零化子的拉格朗日基数恒等式 $\mathrm{Fintype.card}(H) \cdot \mathrm{Fintype.card}(\mathrm{annihilator}(H)) = m$，两边同乘 $\frac{\mathrm{Fintype.card}(H)}{m}$ 消去因子 $\frac{|H| \cdot |H^\perp|}{m} = 1$，即得左端 $\sum_{h : H} f(h.1)$。完整证明由 Lean 内核检查。
 :::
 
+
+在 $m = 32$、周期 $r = 8$ 的例子里，位置梳子 $H = \{0, 8, 16, 24\}$ 只有 $4$ 格，零化子 $H^\perp = \{0, 4, 8, \dots, 28\}$ 却有 $8$ 个频率，间距是 $m/r = 4$。
+
+::: {.viz src="phase-gears" preset="dual" height="500"}
+**峰距是 $Q/r$，不是 $r$。** $Q = 32$、周期 $r = 8$：寄存器上青色的梳子 $H = \{0, 8, 16, 24\}$ 只有 $4$ 格，间距 $8$；扫完之后谱上留下 $8$ 根等高的柱子，每根 $\frac{1}{8}$，落在 $0, 4, 8, \dots, 28$，正是 $H^\perp$ 的 $8$ 个频率，间距 $Q/r = 4$。看 $k = 4$ 时四支青色箭头全部朝右，链长 $4$；$\lvert H\rvert \cdot \lvert H^\perp\rvert = 4 \cdot 8 = 32$（[@cor-finite-poisson-period]）。例中的 $Q = 16$、$r = 4$ 恰好 $r = Q/r = 4$，两把梳子重合。
+:::
 ::: {.remark #rem-shor-divisibility-boundary-literature title="有限泊松求和与一般非整除 Shor 周期恢复的边界（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 在将 [@cor-finite-poisson-period] 与 Shor 大数分解算法对接时，下述两条边界——尤其是第 2 条中一般非整除情形（$r \nmid Q$）下的狄利克雷/费耶尔（Dirichlet/Fejér）核尖峰集中性与连分数有理逼近恢复定理——属于量子算法文献结论（详见下文 [@rem-grover-qft-shor-literature]），未在本书形式化：
 
@@ -365,10 +375,6 @@ $N = 8$ 时走两步仍差一点，成功概率停在 $\frac{121}{128}$。
 :::
 
 第三步的周期态经过 QFT，只在 $k \in \{0, 4, 8, 12\}$ 四个频点上留下峰。
-
-::: {.viz src="phase-gears" preset="four" height="500"}
-**周期 4 留下四根峰。** $Q = 16$、梳子 $\{0, 4, 8, 12\}$：看 $k = 4$ 时四支青色箭头全部朝右，链长 $4$；扫完之后谱上只剩 $0$、$4$、$8$、$12$ 四根等高的柱子，每根 $\frac{1}{4}$，正落在品红的 $sQ/r$ 上，其余十二根都是 $0$。
-:::
 
 再由峰读阶：$k = 4$ 与 $12$ 直接给出阶 $4$，$k = 8$ 只给出它的真因子 $2$，$k = 0$ 不含信息。
 

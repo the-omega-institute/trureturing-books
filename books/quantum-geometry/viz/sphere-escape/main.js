@@ -1,6 +1,9 @@
-/* ORTHO//ESCAPE: four scenes of one fact — after finitely many steps something is still outside.
+/* ORTHO//ESCAPE: six scenes of one fact — after finitely many steps something is still outside.
    diag   flip the diagonal of an N × N list: the string d differs from row k in place k
+   fiber  four addresses, a surjective catalog of the four decoders {0,1} → {0,1}: whatever the latent coordinates,
+          the diagonal g splits one of the fibres, and adjoining g as a second axis gives more blocks
    poly   the regular n-gon inscribed in the unit circle, n = 6 · 2^k: the gap 1 − cos(π/n) under the arc
+   ptr    a pointer on N + 1 cells shifted by ℓ: its overlap |γ(ℓ)| stays below the apothem cos(π/(⌊N/ℓ⌋ + 2))
    cos    x_{k+1} = cos x_k: the residual |cos x_k − x_k| shrinks geometrically and stays positive
    prime  Q = p_1 ⋯ p_k + 1 leaves remainder 1 on every listed prime: its prime factors are off the list
    One rail (the step k) drives every scene; the two plots under the stage show what is left outside.
@@ -9,7 +12,7 @@
   'use strict';
   const { kit, L } = TRV, { fix } = kit, P = TRV.palette;
   const $ = (id) => document.getElementById(id);
-  const S = { scene: 'diag', N: 6, seed: 11, rows: [], x0: 0, zoom: 'follow', tpoint: 1 };
+  const S = { scene: 'diag', N: 6, seed: 11, rows: [], x0: 0, zoom: 'follow', tpoint: 1, lat: [0, 0, 0, 1], pN: 8, shape: 'sine' };
   const sci = (x) => { if (x === 0) return '0'; const e = Math.floor(Math.log10(Math.abs(x))), m = x / Math.pow(10, e); return Math.abs(e) < 3 ? x.toPrecision(3) : `${m.toFixed(2)}×10${String(e).replace('-', '−').split('').map((c) => ({ '−': '⁻', 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹' }[c])).join('')}`; };
 
   /* ---------- diag: the list and its flipped diagonal ---------- */
@@ -37,6 +40,29 @@
     return { actual: Math.abs(Math.cos(theta) - sum), lagrange: b, bound: b * Math.exp(theta) };
   }
 
+  /* ---------- fiber: the four-address catalog of the chapter's hand calculation ---------- */
+  const DEC = [[0, 0], [0, 1], [1, 0], [1, 1]];   // D_a(0), D_a(1): constant 0, identity, negation, constant 1 — every map {0,1} → {0,1} once
+  const SUB = '₀₁₂₃₄₅₆₇₈₉';
+  const gOf = (lat) => DEC.map((D, a) => 1 - D[lat[a]]);
+  function fiberFacts(lat) {
+    const g = gOf(lat), pairs = [];
+    for (let a = 0; a < 4; a++) for (let b = a + 1; b < 4; b++) if (lat[a] === lat[b] && g[a] !== g[b]) pairs.push([a, b]);
+    return { g, pairs, before: new Set(lat).size, after: new Set(lat.map((l, a) => `${l}${g[a]}`)).size };
+  }
+  const latOf = (code) => [3, 2, 1, 0].map((i) => (code >> i) & 1);   // the 16 latent maps, a₀ first
+  const ALLLAT = Array.from({ length: 16 }, (_, code) => fiberFacts(latOf(code)));
+  let fiberHit = [];   // node positions on the stage, for clicks
+
+  /* ---------- ptr: a finite record pointer and its shifted copy ---------- */
+  function pointer(N, shape) {
+    const c = Array.from({ length: N + 1 }, (_, k) => (shape === 'flat' ? 1 : shape === 'tri' ? Math.min(k + 1, N + 1 - k) : Math.sin(Math.PI * (k + 1) / (N + 2))));
+    const n = Math.sqrt(c.reduce((s, x) => s + x * x, 0));
+    return c.map((x) => x / n);
+  }
+  const gamma = (c, l) => { let s = 0; for (let k = 0; k + l < c.length; k++) s += c[k + l] * c[k]; return s; };
+  const apothem = (N, l) => Math.cos(Math.PI / (Math.floor(N / l) + 2));
+  const ell = () => Math.min(S.pN, step() + 1);
+
   /* ---------- cos: the orbit of x ↦ cos x ---------- */
   const KCOS = 40;
   let XSTAR = 0.7; for (let i = 0; i < 300; i++) XSTAR = Math.cos(XSTAR);
@@ -51,7 +77,9 @@
   /* ---------- scenes ---------- */
   const SC = {
     diag: { max: () => S.N, rate: 1.5, start: () => S.N, name: ['对角线', 'DIAGONAL'] },
+    fiber: { max: () => 6, rate: 1.1, start: () => 6, name: ['纤维', 'FIBRES'] },
     poly: { max: () => 12, rate: 1.1, start: () => 4, name: ['割圆', 'POLYGON'] },
+    ptr: { max: () => S.pN - 1, rate: 0.9, start: () => 0, name: ['指针', 'POINTER'] },
     cos: { max: () => KCOS, rate: 3, start: () => 12, name: ['余弦', 'COSINE'] },
     prime: { max: () => PRIMES.length, rate: 0.9, start: () => 4, name: ['素数', 'PRIMES'] }
   };
@@ -137,6 +165,110 @@
     c.fillStyle = P.dim; c.font = `12px ${TRV.fonts.body}`; c.fillText(L('条边', 'sides'), cx, cy + R * 0.14);
     $('hudBig').textContent = L(`内接正 ${n} 边形`, `INSCRIBED REGULAR ${n}-GON`);
     $('hudSub').textContent = L(`半周长 ${halfPerimeter(n).toFixed(10)} < π；每条边的中点离圆弧还有 ${sci(gap(n))}`, `Half-perimeter ${halfPerimeter(n).toFixed(10)} < π; the midpoint of each side is still ${sci(gap(n))} short of the arc`);
+  }
+
+  function drawFiber(g) {
+    const c = g.ctx, W = g.W, H = g.H, t = clock.t, k = step(), f = Math.max(0, Math.min(1, t - 5)), F = fiberFacts(S.lat);
+    const rise = f * f * (3 - 2 * f), small = W < 520;
+    const top = 92, bot = H - 64, mid = (top + bot) / 2, colW = Math.min(W * 0.36, 300), gapX = Math.min(W * 0.06, 50);
+    const x0 = Math.max(small ? 40 : 70, (W - 2 * colW - gapX) / 2 + (small ? 12 : 24)), colX = [x0, x0 + colW + gapX];
+    const r = Math.max(11, Math.min(17, (bot - top) / 22)), rowH = Math.min(r * 3.2, (bot - top) / 5.2);
+    const bandY = [mid + (bot - top) * 0.24, mid - (bot - top) * 0.24];   // g = 0 below, g = 1 above
+    const members = [0, 1].map((l) => [0, 1, 2, 3].filter((a) => S.lat[a] === l));
+    const pos = [];
+    for (const l of [0, 1]) members[l].forEach((a, i) => {
+      const yFlat = mid + (i - (members[l].length - 1) / 2) * rowH;
+      const same = members[l].filter((b) => F.g[b] === F.g[a]), j = same.indexOf(a);
+      const yRise = bandY[F.g[a]] + (j - (same.length - 1) / 2) * rowH * 0.9;
+      pos[a] = [colX[l] + r + 10, yFlat + (yRise - yFlat) * rise];
+    });
+    fiberHit = pos.map((p, a) => ({ a, x: p[0], y: p[1], r: r + 6 }));
+    // the new axis: g, rising out of the old readout
+    if (rise > 0) {
+      c.globalAlpha = rise; const ax = colX[0] - (small ? 22 : 34);
+      c.strokeStyle = P.violet; c.lineWidth = 1.4; c.beginPath(); c.moveTo(ax, bot); c.lineTo(ax, top - 4); c.stroke();
+      c.beginPath(); c.moveTo(ax - 4, top + 4); c.lineTo(ax, top - 4); c.lineTo(ax + 4, top + 4); c.stroke();
+      c.fillStyle = P.violet; c.font = `600 12px ${TRV.fonts.data}`; c.textAlign = 'center'; c.textBaseline = 'bottom'; c.fillText('g', ax, top - 8);
+      c.font = `11px ${TRV.fonts.data}`; c.textBaseline = 'middle'; c.textAlign = 'right'; c.fillText('1', ax - 6, bandY[1]); c.fillText('0', ax - 6, bandY[0]);
+      c.globalAlpha = 1;
+    }
+    // fibres: one box per latent value; after the join each splits into the blocks of (latent, g)
+    const box = (x, y0, y1, col, a, label) => {
+      c.globalAlpha = a; c.strokeStyle = col; c.lineWidth = 1.4; c.fillStyle = TRV.alpha(col, 0.07);
+      c.beginPath(); c.roundRect ? c.roundRect(x, y0, colW, y1 - y0, 8) : c.rect(x, y0, colW, y1 - y0); c.fill(); c.stroke();
+      if (label) { c.fillStyle = col; c.font = `600 ${small ? 11 : 12}px ${TRV.fonts.data}`; c.textAlign = 'left'; c.textBaseline = 'bottom'; c.fillText(label, x + 4, y0 - 5); }
+      c.globalAlpha = 1;
+    };
+    for (const l of [0, 1]) {
+      const n = members[l].length;
+      if (!n) { box(colX[l], mid - rowH * 0.6, mid + rowH * 0.6, P.faint, 1, `latent = ${l}`); c.fillStyle = P.dim; c.font = `11px ${TRV.fonts.body}`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(L('空纤维', 'empty fibre'), colX[l] + colW / 2, mid); continue; }
+      box(colX[l], mid - (n / 2) * rowH - 4, mid + (n / 2) * rowH + 4, P.cyan, 1 - rise, `latent = ${l}`);
+      for (const gv of [0, 1]) {
+        const m = members[l].filter((a) => F.g[a] === gv).length; if (!m || rise === 0) continue;
+        box(colX[l], bandY[gv] - (m / 2) * rowH * 0.9 - 4, bandY[gv] + (m / 2) * rowH * 0.9 + 4, P.cyan, rise, gv === 1 ? `(${l}, 1)` : `(${l}, 0)`);
+      }
+    }
+    // separation deficit: a pair in one fibre on which g disagrees
+    if (t >= 4.02) {
+      c.globalAlpha = Math.min(1, (t - 4) * 1.6); c.strokeStyle = P.magenta; c.lineWidth = 2;
+      F.pairs.forEach(([a, b], i) => {
+        const p = pos[a], q = pos[b], bx = p[0] - r - 12 - i * 9;
+        c.beginPath(); c.moveTo(p[0] - r, p[1]); c.bezierCurveTo(bx - 14, p[1], bx - 14, q[1], q[0] - r, q[1]); c.stroke();
+      });
+      c.globalAlpha = 1;
+    }
+    // the four addresses with their decoders: the cell at latent(a) is read, then flipped to g(a)
+    const cs = Math.max(15, Math.min(22, r * 1.25));
+    for (let a = 0; a < 4; a++) {
+      const [x, y] = pos[a], done = a < Math.min(k, 4), now = a === k - 1 && t < 4.02 && k >= 1;
+      c.fillStyle = P.void; c.strokeStyle = now ? P.amber : P.cyan; c.lineWidth = now ? 2.2 : 1.6;
+      c.beginPath(); c.arc(x, y, r, 0, kit.TAU); c.fill(); c.stroke();
+      c.fillStyle = P.ink; c.font = `600 ${Math.round(r * 0.8)}px ${TRV.fonts.data}`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(`a${SUB[a]}`, x, y + 1);
+      const tx = x + r + 10;
+      if (!small) { c.fillStyle = P.dim; c.font = `10px ${TRV.fonts.data}`; c.textAlign = 'left'; c.textBaseline = 'bottom'; c.fillText(`D${SUB[a]}(0) D${SUB[a]}(1)`, tx, y - cs / 2 - 2); }
+      for (const v of [0, 1]) {
+        const cx = tx + v * (cs + 4), read = S.lat[a] === v;
+        c.strokeStyle = read ? (now ? P.amber : P.cyan) : TRV.alpha(P.sigma, 0.6); c.lineWidth = read ? 1.8 : 1;
+        c.strokeRect(cx + 0.5, y - cs / 2 + 0.5, cs - 1, cs - 1);
+        c.fillStyle = read ? P.ink : P.dim; c.font = `${Math.round(cs * 0.55)}px ${TRV.fonts.data}`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(String(DEC[a][v]), cx + cs / 2, y + 1);
+      }
+      if (done || t >= 4) { c.fillStyle = P.magenta; c.font = `600 ${Math.round(cs * 0.62)}px ${TRV.fonts.data}`; c.textAlign = 'left'; c.textBaseline = 'middle'; c.fillText(`g = ${F.g[a]}`, tx + 2 * cs + 14, y + 1); }
+    }
+    $('hudBig').textContent = t < 4 ? L(`第 ${Math.min(k + 1, 4)} 个地址：读自己的坐标，喂自己的解码器，再翻转`, `ADDRESS ${Math.min(k + 1, 4)}: READ ITS COORDINATE, FEED ITS DECODER, FLIP`)
+      : rise < 1 ? L(`同一根纤维里 g 不同的地址：${F.pairs.length} 对`, `${F.pairs.length} PAIR${F.pairs.length === 1 ? '' : 'S'} IN ONE FIBRE WITH DIFFERENT g`)
+      : L(`并入 g 之后：${F.before} 块 → ${F.after} 块`, `AFTER ADJOINING g: ${F.before} → ${F.after} BLOCKS`);
+    $('hudSub').textContent = L(`latent = (${S.lat.join(', ')})，g = (${F.g.join(', ')})；点一个地址换它的潜坐标`, `latent = (${S.lat.join(', ')}), g = (${F.g.join(', ')}); click an address to change its latent coordinate`);
+  }
+
+  function drawPtr(g) {
+    const c = g.ctx, W = g.W, H = g.H, N = S.pN, l = ell(), cc = pointer(N, S.shape), gm = Math.abs(gamma(cc, l)), ap = apothem(N, l), m = Math.floor(N / l), n = m + 2;
+    const shift = Math.min(N, Math.max(1, clock.t + 1));   // the copy slides continuously; the readings use whole shifts
+    const small = W < 560, top = 96, bot = H - 70;
+    // left: the pointer amplitudes and the copy shifted by ℓ
+    const bw = small ? W - 40 : W * 0.5, bx0 = 30, bh = small ? (bot - top) * 0.46 : bot - top;
+    const X = (k) => bx0 + ((k + 0.7) / (2 * N + 0.4)) * bw, Y = (v) => top + bh - v * bh * 0.8, w = Math.max(3, bw / (2 * N + 0.4) * 0.62);
+    c.strokeStyle = P.faint; c.lineWidth = 1; c.beginPath(); c.moveTo(bx0, Y(0)); c.lineTo(bx0 + bw, Y(0)); c.stroke();
+    cc.forEach((v, k) => { c.fillStyle = TRV.alpha(P.cyan, 0.75); c.fillRect(X(k) - w / 2, Y(v), w, Y(0) - Y(v)); });
+    cc.forEach((v, k) => { c.strokeStyle = P.magenta; c.lineWidth = 1.6; c.strokeRect(X(k + shift) - w / 2 + 1, Y(v), w - 2, Y(0) - Y(v)); });
+    c.fillStyle = P.dim; c.font = `11px ${TRV.fonts.data}`; c.textAlign = 'center'; c.textBaseline = 'top';
+    c.fillText('0', X(0), Y(0) + 5); c.fillText(String(N), X(N), Y(0) + 5);
+    c.fillStyle = P.magenta; c.fillText(`+${l}`, X(shift), Y(0) + 5);
+    // right: the unit circle, the inscribed (m + 2)-gon, its apothem and the overlap on the same radius
+    const R = small ? Math.min((bot - top) * 0.22, W * 0.3) : Math.min(W * 0.2, (bot - top) * 0.42), cx = small ? W / 2 : W * 0.78, cy = small ? bot - R - 6 : (top + bot) / 2 + 10;
+    c.strokeStyle = P.sigma; c.lineWidth = 1.4; c.beginPath(); c.arc(cx, cy, R, 0, kit.TAU); c.stroke();
+    c.beginPath(); for (let j = 0; j <= n; j++) { const a = -Math.PI / 2 - Math.PI / n + kit.TAU * j / n, x = cx + R * Math.cos(a), y = cy + R * Math.sin(a); if (j) c.lineTo(x, y); else c.moveTo(x, y); }
+    c.fillStyle = TRV.alpha(P.cyan, 0.08); c.fill(); c.strokeStyle = P.cyan; c.lineWidth = 1.6; c.stroke();
+    c.strokeStyle = P.magenta; c.lineWidth = 3; c.beginPath(); c.moveTo(cx, cy - R * ap); c.lineTo(cx, cy - R); c.stroke();
+    c.strokeStyle = TRV.alpha(P.cyan, 0.8); c.lineWidth = 1.2; c.setLineDash([4, 3]); c.beginPath(); c.moveTo(cx, cy); c.lineTo(cx, cy - R * ap); c.stroke(); c.setLineDash([]);
+    c.fillStyle = P.cyan; c.beginPath(); c.arc(cx, cy, 2.5, 0, kit.TAU); c.fill();
+    c.save(); c.shadowColor = P.amber; c.shadowBlur = 10; c.fillStyle = P.amber; c.beginPath(); c.arc(cx, cy - R * gm, 5, 0, kit.TAU); c.fill(); c.restore();
+    c.font = `${small ? 11 : 12}px ${TRV.fonts.data}`; c.textBaseline = 'middle';
+    c.textAlign = 'left'; c.fillStyle = P.cyan; c.fillText(`cos(π/${n}) = ${ap.toFixed(4)}`, cx + 10, cy - R * ap + 26);
+    c.textAlign = 'right'; c.fillStyle = P.amber; c.fillText(`|γ(${l})| = ${gm.toFixed(4)}`, cx - 10, cy - R * gm + (gm > ap - 0.08 ? 26 : 0));
+    c.textAlign = 'left'; c.fillStyle = P.magenta; c.fillText(L(`弓高 ${sci(1 - ap)}`, `sagitta ${sci(1 - ap)}`), cx + 10, cy - R - 10);
+    $('hudBig').textContent = `|γ(${l})| = ${gm.toFixed(4)} ≤ cos(π/${n}) = ${ap.toFixed(4)} < 1`;
+    $('hudSub').textContent = L(`${N + 1} 格的指针平移 ℓ = ${l} 格：m = ⌊${N}/${l}⌋ = ${m}，正 ${n} 边形的边心距；不可恢复的误差至少 ${sci((1 - ap) / 2)}`,
+      `A pointer on ${N + 1} cells shifted by ℓ = ${l}: m = ⌊${N}/${l}⌋ = ${m}, the apothem of the regular ${n}-gon; the unrecoverable error is at least ${sci((1 - ap) / 2)}`);
   }
 
   function cosView() {
@@ -417,6 +549,32 @@
       g2.line(all, P.magenta); g2.line(list, P.cyan); g2.vline(N, P.amber); g2.dot(N, 1 << N, P.magenta, 4); g2.dot(N, N, P.cyan, 4);
       g2.legend([[P.magenta, L('全部串 2ᴺ', 'all strings 2ᴺ')], [P.cyan, L('清单 N 行', 'N listed rows')]], { right: false });
       $('pBTitle').textContent = L('清单装不下多少', 'How much the list cannot hold'); $('pBMeta').textContent = `${(1 << N) - new Set(S.rows.map(toInt)).size} ${L('个在外', 'outside')}`;
+    } else if (S.scene === 'fiber') {
+      const code = S.lat.reduce((v, b) => v * 2 + b, 0), maxP = Math.max(...ALLLAT.map((x) => x.pairs.length));
+      const g = kit.plot(A, { x: [-0.6, 15.6], y: [0, maxP + 0.6], pad: [30, 10, 10, 22] });
+      g.axes({ yTicks: [0, 1, maxP], xTicks: [[0, '0000'], [5, '0101'], [10, '1010'], [15, '1111']] });
+      ALLLAT.forEach((x, i) => g.rect(i - 0.32, 0, i + 0.32, x.pairs.length, P.magenta, { alpha: i === code ? 0.95 : 0.45 }));
+      g.hline(1, P.dim, { dash: [4, 3] }); g.vline(code, P.amber, { alpha: 0.7 });
+      $('pATitle').textContent = L('16 种潜坐标，亏损点对', 'Deficit pairs, all 16 latents'); $('pAMeta').textContent = `min ${Math.min(...ALLLAT.map((x) => x.pairs.length))} ≥ 1`;
+      const g2 = kit.plot(B, { x: [-0.6, 15.6], y: [0, 4.6], pad: [30, 10, 10, 22] });
+      g2.axes({ yTicks: [1, 2, 3, 4], xTicks: [[0, '0000'], [5, '0101'], [10, '1010'], [15, '1111']] });
+      ALLLAT.forEach((x, i) => { g2.rect(i - 0.34, 0, i - 0.02, x.before, P.cyan, { alpha: i === code ? 0.95 : 0.5 }); g2.rect(i + 0.02, 0, i + 0.34, x.after, P.violet, { alpha: i === code ? 0.95 : 0.5 }); });
+      g2.vline(code, P.amber, { alpha: 0.7 });
+      g2.legend([[P.cyan, L('只看 latent', 'latent alone')], [P.violet, L('并入 g 之后', 'with g adjoined')]], { right: false });
+      $('pBTitle').textContent = L('块数：并入前后', 'Blocks before and after'); $('pBMeta').textContent = `${ALLLAT[code].before} → ${ALLLAT[code].after}`;
+    } else if (S.scene === 'ptr') {
+      const N = S.pN, cc = pointer(N, S.shape), l = ell(), ys = [], bs = [];
+      for (let j = 1; j <= N; j++) { ys.push([j, Math.abs(gamma(cc, j))]); bs.push([j - 0.5, apothem(N, j)], [j + 0.5, apothem(N, j)]); }
+      const g = kit.plot(A, { x: [0.4, N + 0.6], y: [0, 1.05], pad: [34, 10, 10, 22] });
+      g.axes({ yTicks: [0, 0.5, 1], xTicks: [1, Math.ceil(N / 2), N] });
+      g.hline(1, P.sigma, { dash: [2, 3] }); g.line(bs, P.cyan, { dash: [5, 3] }); ys.forEach((p) => g.dot(p[0], p[1], p[0] === l ? P.amber : P.magenta, p[0] === l ? 4.5 : 3));
+      g.legend([[P.magenta, '|γ(ℓ)|'], [P.cyan, 'cos(π/(⌊N/ℓ⌋ + 2))', 'dash']], { right: false });
+      $('pATitle').textContent = L('每个平移的重叠与它的界', 'Overlap at every shift, and its bound'); $('pAMeta').textContent = `ℓ = ${l}`;
+      const g2 = kit.plot(B, { x: [1, 40], y: [1e-4, 1], logY: true, pad: [42, 10, 10, 22] });
+      g2.axes({ yTicks: [[1, '1'], [0.1, '0.1'], [0.01, '0.01'], [1e-3, '10⁻³']], xTicks: [1, 10, 20, 30, 40] });
+      const eb = []; for (let M = 1; M <= 40; M++) eb.push([M, (1 - Math.cos(Math.PI / (M + 2))) / 2]);
+      g2.line(eb, P.magenta); g2.dot(N, (1 - Math.cos(Math.PI / (N + 2))) / 2, P.amber, 4.5);
+      $('pBTitle').textContent = L('指针越长，误差下界越小', 'Longer pointer, smaller error floor'); $('pBMeta').textContent = `ℓ = 1, N = ${N}`;
     } else if (S.scene === 'poly') {
       const g = kit.plot(A, { x: [0, 12], y: [1e-10, 1], logY: true, pad: [42, 24, 10, 22] });
       g.axes({ yTicks: [[1, '1'], [1e-3, '10⁻³'], [1e-6, '10⁻⁶'], [1e-9, '10⁻⁹']], xTicks: [[0, '6'], [2, '24'], [4, '96'], [6, '384'], [8, '1536'], [10, '6144'], [12, '24576']] });
@@ -463,16 +621,34 @@
     if (S.scene === 'diag') {
       const N = S.N, d = dOf(S.rows), hd = S.rows.map((r) => hamming(r, d)), distinct = new Set(S.rows.map(toInt)).size;
       $('roKeyL').textContent = L('d 与清单最近的一行', 'd and the nearest row of the list');
-      $('roKey').innerHTML = L(`差 ${Math.min(...hd)} 位`, `${Math.min(...hd)} bit${Math.min(...hd) === 1 ? '' : 's'} apart`) + ' <span class="okmark">≥ 1 ✓</span>';
+      $('roKey').innerHTML = L(`差 ${Math.min(...hd)} 位`, `${Math.min(...hd)} bit${Math.min(...hd) === 1 ? '' : 's'} apart`) + ' <span class="chk">≥ 1 ✓</span>';
       $('roKeySub').textContent = L('第 k 行至少在第 k 位与 d 不同', 'row k differs from d at least in place k');
       set(1, L('清单', 'the list'), L(`${N} 行`, `${N} rows`)); set(2, L('逃出的串 d', 'the escaped string d'), k >= N ? d.join('') : d.slice(0, k).join('') + '·'.repeat(N - k));
       set(3, L('全部串', 'all strings'), `2^${N} = ${1 << N}`); set(4, L('清单之外', 'off the list'), `${(1 << N) - distinct}`);
       $('roNote').textContent = N < 10 ? L('“把 d 收进清单”会多出一行和一列，新的对角线又翻出一个清单外的串。', '“Put d on the list” adds a row and a column, and the new diagonal again produces a string that is off the list.') : L('N = 10 是本页的上限；道理对任何 N 都一样。', 'N = 10 is the limit of this page; the argument is the same for every N.');
       pill = `${(1 << N) - distinct}`;
+    } else if (S.scene === 'fiber') {
+      const F = fiberFacts(S.lat);
+      $('roKeyL').textContent = L('同一纤维里 g 不同的点对', 'pairs in one fibre that g separates');
+      $('roKey').innerHTML = `${F.pairs.length} <span class="chk">≥ 1 ✓</span>`;
+      $('roKeySub').textContent = F.pairs.map(([a, b]) => `(a${SUB[a]}, a${SUB[b]})`).join(' ');
+      set(1, 'latent(a₀ … a₃)', S.lat.join('')); set(2, L('对角线 g', 'diagonal g'), F.g.join(''));
+      set(3, L('块数：并入 g 前 → 后', 'blocks: before → after g'), `${F.before} → ${F.after}`); set(4, L('16 种 latent 中被劈开的', 'latents split, of 16'), `${ALLLAT.filter((x) => x.pairs.length > 0).length} / 16`);
+      $('roNote').textContent = L('四个解码器恰好是 {0, 1} 到 {0, 1} 的全部四个映射，目录是满射；所以无论怎么排潜坐标，对角线都劈开某根纤维。', 'The four decoders are exactly the four maps {0, 1} → {0, 1}, so the catalog is surjective; however the latent coordinates are arranged, the diagonal splits some fibre.');
+      pill = String(F.pairs.length);
+    } else if (S.scene === 'ptr') {
+      const N = S.pN, l = ell(), gm = Math.abs(gamma(pointer(N, S.shape), l)), ap = apothem(N, l);
+      $('roKeyL').textContent = L('平移 ℓ 格后与自己的重叠', 'overlap with itself after a shift of ℓ');
+      $('roKey').innerHTML = `${gm.toFixed(4)} <span class="chk">≤ ${ap.toFixed(4)} &lt; 1 ✓</span>`; $('roKeySub').textContent = `|γ(ℓ)| ≤ cos(π/(⌊N/ℓ⌋ + 2))`;
+      set(1, L('指针格数 N + 1', 'pointer cells N + 1'), String(N + 1)); set(2, L('平移 ℓ', 'shift ℓ'), String(l));
+      set(3, L('多边形边数 ⌊N/ℓ⌋ + 2', 'polygon sides ⌊N/ℓ⌋ + 2'), String(Math.floor(N / l) + 2)); set(4, L('不可恢复误差至少', 'unrecoverable error at least'), sci((1 - ap) / 2));
+      $('roNote').textContent = S.shape === 'sine' && l === 1 ? L('正弦形的指针在 ℓ = 1 恰好贴到边心距：界取得到，却仍小于 1。', 'The sine-shaped pointer meets the apothem exactly at ℓ = 1: the bound is attained, and it is still below 1.')
+        : L('换形状、换长度都推不过多边形那条边；有限格的指针一平移就留下痕迹。', 'No shape and no length pushes past the side of the polygon; a finite pointer always leaves a trace when it is shifted.');
+      pill = sci((1 - ap) / 2);
     } else if (S.scene === 'poly') {
       const n = sides(k);
       $('roKeyL').textContent = L('边的中点到圆弧的缝', 'gap between a side and the arc');
-      $('roKey').innerHTML = `${sci(gap(n))} <span class="okmark">&gt; 0 ✓</span>`; $('roKeySub').textContent = '1 − cos(π/n) = 2 sin²(π/2n)';
+      $('roKey').innerHTML = `${sci(gap(n))} <span class="chk">&gt; 0 ✓</span>`; $('roKeySub').textContent = '1 − cos(π/n) = 2 sin²(π/2n)';
       set(1, L('边数 n', 'sides n'), String(n)); set(2, L('半周长 n sin(π/n)', 'half-perimeter n sin(π/n)'), halfPerimeter(n).toFixed(10));
       set(3, L('π − 半周长', 'π − half-perimeter'), sci(piDeficit(n))); set(4, L('每翻一倍，缝缩到', 'each doubling shrinks the gap to'), k < 12 ? `${fix(gap(sides(k + 1)) / gap(n), 4)}` : '—');
       $('roNote').textContent = L('刘徽由 192 边形的面积（等于 96 边形的半周长）得 3.1410，祖冲之算到 24576 边得 3.1415926。每翻一倍，缝大约缩到四分之一，却从不为零。', 'Liu Hui got 3.1410 from the area of the 192-gon (which equals the half-perimeter of the 96-gon), and Zu Chongzhi 3.1415926 with 24576 sides. Each doubling shrinks the gap to about a quarter, and it is never zero.');
@@ -480,7 +656,7 @@
     } else if (S.scene === 'cos') {
       const xs = orbit(S.x0), res = Math.abs(Math.cos(xs[k]) - xs[k]);
       $('roKeyL').textContent = L('这一步离不动点还差', 'still to go at this step');
-      $('roKey').innerHTML = `${sci(res)} <span class="okmark">${res > 0 ? '&gt; 0 ✓' : ''}</span>`; $('roKeySub').textContent = '|cos xₖ − xₖ|';
+      $('roKey').innerHTML = `${sci(res)} <span class="chk">${res > 0 ? '&gt; 0 ✓' : ''}</span>`; $('roKeySub').textContent = '|cos xₖ − xₖ|';
       set(1, `x${k < 10 ? '₀₁₂₃₄₅₆₇₈₉'[k] : 'ₖ'}`, xs[k].toFixed(12)); set(2, L('不动点 x*', 'fixed point x*'), XSTAR.toFixed(12));
       set(3, L('每步误差约乘以', 'error factor per step'), k > 0 && Math.abs(xs[k - 1] - XSTAR) > 1e-13 ? fix(Math.abs(xs[k] - XSTAR) / Math.abs(xs[k - 1] - XSTAR), 4) : '—'); set(4, 'sin x*', Math.sin(XSTAR).toFixed(4));
       $('roNote').textContent = L('误差按等比缩小：再走多少步都只是乘上一个小于 1 的数，不会变成零。', 'The error shrinks geometrically: however many more steps, it is only multiplied by a number below 1 and never becomes zero.');
@@ -488,7 +664,7 @@
     } else {
       const E = EUCLID[k];
       $('roKeyL').textContent = L('Q 的最小素因子', 'least prime factor of Q');
-      $('roKey').innerHTML = `${E.factors[0]} <span class="okmark">${L('不在清单里', 'not on the list')} ✓</span>`; $('roKeySub').textContent = E.factors.length === 1 ? L('Q 本身是素数', 'Q is itself prime') : `Q = ${E.factors.join(' × ')}`;
+      $('roKey').innerHTML = `${E.factors[0]} <span class="chk">${L('不在清单里', 'not on the list')} ✓</span>`; $('roKeySub').textContent = E.factors.length === 1 ? L('Q 本身是素数', 'Q is itself prime') : `Q = ${E.factors.join(' × ')}`;
       set(1, L('清单', 'the list'), k ? PRIMES.slice(0, k).join(', ') : L('空', 'empty')); set(2, 'Q = p₁⋯pₖ + 1', String(E.Q));
       set(3, L('欧拉乘积 ∏(1 − p⁻²)⁻¹', 'Euler product ∏(1 − p⁻²)⁻¹'), E.euler.toFixed(6)); set(4, L('π²/6 − 乘积', 'π²/6 − product'), sci(ZETA2 - E.euler));
       $('roNote').textContent = L('Q 除以清单里每个素数都余 1，所以整除 Q 的素数一定是新的。', 'Q leaves remainder 1 on every listed prime, so any prime that divides Q is new.');
@@ -500,6 +676,8 @@
     $('pillGap').querySelector('strong').textContent = pill;
     const LEG = {
       diag: [['box cy', '清单里的 1', 'a 1 on the list'], ['am', '已读的对角元', 'diagonal bits read'], ['box mg', '翻转得到的 d', 'the flipped string d']],
+      fiber: [['box cy', '纤维：latent 相同', 'fibre: same latent'], ['mg', 'g 不同的一对', 'a pair g separates'], ['vi', '新轴 g', 'the new axis g'], ['am', '正在读的地址', 'address being read']],
+      ptr: [['box cy', '指针的振幅', 'pointer amplitudes'], ['box mg', '平移 ℓ 格的副本', 'the copy shifted by ℓ'], ['am', '重叠 |γ(ℓ)|', 'overlap |γ(ℓ)|'], ['mg', '弓高', 'sagitta']],
       poly: [['dm', '圆', 'the circle'], ['cy', '内接多边形', 'the inscribed polygon'], ['box mg', '缝', 'the gap']],
       cos: [['cy', 'y = cos x', 'y = cos x'], ['am', '迭代走过的路', 'the path of the iteration'], ['mg', '不动点 x*', 'the fixed point x*']],
       prime: [['cy', '清单里的素数：余 1', 'listed primes: remainder 1'], ['mg', '新素数：余 0', 'the new prime: remainder 0'], ['wn', '刻度 0 = 整除', 'tick 0 = divides']]
@@ -511,14 +689,14 @@
   // readouts and legend first: the prime stage measures the legend it has to keep clear of
   const paint = kit.painter(() => {
     drawText();
-    if (S.scene === 'cos') drawCos(); else { const g = kit.plot($('cv'), { x: [0, 1], y: [0, 1], pad: [0, 0, 0, 0] }); ({ diag: drawDiag, poly: drawPoly, prime: drawPrime })[S.scene](g); }
+    if (S.scene === 'cos') drawCos(); else { const g = kit.plot($('cv'), { x: [0, 1], y: [0, 1], pad: [0, 0, 0, 0] }); ({ diag: drawDiag, fiber: drawFiber, poly: drawPoly, ptr: drawPtr, prime: drawPrime })[S.scene](g); }
     drawPlots();
   }, [$('stage'), $('plotA'), $('plotB')]);
 
   /* ---------- controls ---------- */
   const clock = kit.clock({
     range: $('now'), play: $('play'), label: $('tau'), speeds: $('speedChips'), max: 6, rate: 1.5, step: 1,
-    format: (t, max) => `${L('步', 'step')} ${Math.floor(t + 1e-9)} <small>/ ${max.toFixed(0)}</small>`,
+    format: (t, max) => (S.scene === 'ptr' ? `ℓ = ${Math.floor(t + 1e-9) + 1} <small>/ ${(max + 1).toFixed(0)}</small>` : `${L('步', 'step')} ${Math.floor(t + 1e-9)} <small>/ ${max.toFixed(0)}</small>`),
     onChange: (t, c) => { if (stopAt != null && c.playing && t >= stopAt) { const at = stopAt; stopAt = null; c.pause(); c.set(at); return; } paint(); }
   });
   function setScene(sc, t) {
@@ -543,22 +721,31 @@
   $('absorb').addEventListener('click', () => { leave(); doAbsorb(); paint(); });
   $('identity').addEventListener('click', () => { leave(); S.rows = Array.from({ length: S.N }, (_, i) => Array.from({ length: S.N }, (_, j) => (i === j ? 1 : 0))); clock.set(S.N); });
   $('rew').addEventListener('click', () => { clock.pause(); clock.set(0); });
+  function setLat(lat) { S.lat = lat.slice(); document.querySelectorAll('#latChips [data-a]').forEach((b) => { const a = +b.dataset.a; b.querySelector('b').textContent = String(S.lat[a]); }); paint(); }
+  document.querySelectorAll('#latChips [data-a]').forEach((b) => b.addEventListener('click', () => { const lat = S.lat.slice(), a = +b.dataset.a; lat[a] = 1 - lat[a]; leave(); setLat(lat); }));
+  $('nextLat').addEventListener('click', () => { const code = (S.lat.reduce((v, x) => v * 2 + x, 0) + 1) % 16; leave(); setLat(latOf(code)); });
+  const fPN = kit.field($('plen'), { onInput: (v) => { S.pN = v; leave(); clock.setMax(S.pN - 1, true); clock.set(Math.min(clock.t, S.pN - 1)); paint(); } });
+  const shapeChips = kit.chips($('shapeChips'), 'shape', (v) => { S.shape = v; leave(); paint(); });
   $('cv').addEventListener('click', (ev) => {
+    if (S.scene === 'fiber') {
+      const b = $('cv').getBoundingClientRect(), x = ev.clientX - b.left, y = ev.clientY - b.top, h = fiberHit.find((p) => Math.hypot(p.x - x, p.y - y) <= p.r);
+      if (h) { const lat = S.lat.slice(); lat[h.a] = 1 - lat[h.a]; leave(); setLat(lat); }
+      return;
+    }
     if (S.scene !== 'diag' || !hit) return;
     const b = $('cv').getBoundingClientRect(), j = Math.floor((ev.clientX - b.left - hit.gx) / hit.s), i = Math.floor((ev.clientY - b.top - hit.gy) / hit.s);
     if (i >= 0 && i < hit.N && j >= 0 && j < hit.N) { S.rows[i][j] = 1 - S.rows[i][j]; leave(); paint(); }
   });
-  kit.keys({ 1: () => { leave(); setScene('diag'); }, 2: () => { leave(); setScene('poly'); }, 3: () => { leave(); setScene('cos'); }, 4: () => { leave(); setScene('prime'); } });
+  kit.keys({ 1: () => { leave(); setScene('diag'); }, 2: () => { leave(); setScene('fiber'); }, 3: () => { leave(); setScene('poly'); }, 4: () => { leave(); setScene('ptr'); }, 5: () => { leave(); setScene('cos'); }, 6: () => { leave(); setScene('prime'); } });
 
   /* ---------- experiment cards ---------- */
   const NOTES = {
     diagonal: ['清单有 6 行。逐行读对角线上的那一位并翻转，拼出 d。d 与第 k 行在第 k 位不同，所以它不是任何一行；右边的点阵里，与 d 相容的候选每步减半，最后剩下的那个不在清单上。', 'The list has 6 rows. Read the diagonal bit of each row and flip it to build d. d differs from row k in place k, so it is none of the rows; in the dot grid the candidates compatible with d halve at each step, and the one that remains is not on the list.'],
+    split: ['四个地址，解码器是常零、恒等、取反、常一。潜坐标取 (0, 0, 0, 1)：每个地址读自己的坐标、喂自己的解码器、再翻转，得 g = (1, 1, 0, 0)。左边那根纤维里 a₀、a₁ 的 g 是 1，a₂ 的是 0，品红线连起 g 不同的两对；把 g 立成第二根轴，两块变成三块。点任一地址换它的潜坐标：16 种排法里品红线总在。', 'Four addresses whose decoders are constant 0, identity, negation and constant 1. With latent (0, 0, 0, 1) each address reads its own coordinate, feeds its own decoder and flips the result: g = (1, 1, 0, 0). In the left fibre a₀ and a₁ get g = 1 and a₂ gets 0, and magenta lines join the two pairs that g separates; raise g as a second axis and two blocks become three. Click any address to change its latent coordinate: in all 16 arrangements a magenta line remains.'],
     absorb: ['把逃走的 d 收进清单当第 7 行，再补一列让表保持方形。新的对角线立刻翻出另一个不在清单里的串。收编多少次都一样。', 'Take the escaped d onto the list as row 7 and add a column to keep the table square. The new diagonal at once flips out another string that is off the list. It is the same however often you absorb.'],
+    pointer: ['一台 9 格的记录指针，振幅是正弦形（青色），品红的轮廓是它平移 ℓ = 1 格的副本。两者的重叠 |γ(1)| = 0.9511（琥珀色的点）恰好等于正 10 边形的边心距 cos(π/10)，却到不了圆上的 1；那段品红的弓高就是记不下又补不回的部分。拖时间轴加大 ℓ，多边形边数变少，界也随之降低。', 'A record pointer on 9 cells with sine-shaped amplitudes (cyan); the magenta outline is its copy shifted by ℓ = 1. Their overlap |γ(1)| = 0.9511 (the amber dot) equals the apothem cos(π/10) of the regular 10-gon exactly, and still falls short of the 1 on the circle; the magenta sagitta is what is neither recorded nor recoverable. Drag the rail to increase ℓ: the polygon loses sides and the bound drops.'],
     liuhui: ['刘徽从正 6 边形出发，每次把边数翻倍：6、12、24、48、96、192。多边形越来越像圆，放大镜里的缝却一直在。', 'Liu Hui started from the hexagon and doubled the sides each time: 6, 12, 24, 48, 96, 192. The polygon looks more and more like the circle, yet the gap in the magnifier is always there.'],
     zu: ['祖冲之算到 24576 边。肉眼早已分不出多边形和圆，缝只有 8×10⁻⁹，但把它放大十亿倍，它和第一步时一模一样。', 'Zu Chongzhi went to 24576 sides. The eye cannot tell polygon from circle any more and the gap is only 8×10⁻⁹, but magnified a billion times it looks exactly as it did at the first step.'],
-    dottie: ['从 0 出发反复取余弦。蛛网一圈圈绕向 x* ≈ 0.739，画面跟着放大。每一步都更近，误差乘以大约 0.67，却没有哪一步恰好到达。', 'Start at 0 and take the cosine again and again. The cobweb winds in on x* ≈ 0.739 while the view zooms along. Each step is closer, the error multiplied by about 0.67, yet no step lands exactly.'],
-    far: ['换一个很远的起点 x₀ = 3：第一步就被拉进 [−1, 1]，之后走向同一个 x*。终点与起点无关；至于有限步到不了它，这里只就显示的起点 x₀ = 3 而言。', 'Take a far start, x₀ = 3: the first step pulls it into [−1, 1] and from there it heads for the same x*. The end does not depend on the start; that no finite number of steps reaches it is claimed here only for the displayed start x₀ = 3.'],
-    euclid: ['清单每多一个素数，就把它们全部乘起来再加一。新数 Q 在每只钟上都指着 1，从不指着 0，所以整除 Q 的素数一定不在清单里。', 'Each time the list gains a prime, multiply them all and add one. The new number Q points at 1 on every dial, never at 0, so any prime dividing Q is not on the list.'],
     thirteen: ['2·3·5·7·11·13 + 1 = 30031 不是素数，它等于 59 × 509。欧几里得的论证没有说 Q 是素数，只说它的素因子都是新的。', '2·3·5·7·11·13 + 1 = 30031 is not prime: it is 59 × 509. Euclid\'s argument does not say that Q is prime, only that its prime factors are all new.']
   };
   let booting = true, stopAt = null;
@@ -573,12 +760,11 @@
     stopAt = null;
     if (id === 'diagonal' || id === 'absorb') { S.N = 6; S.seed = 11; fSize.set(6); fSeed.set(11); S.rows = makeList(6, 11); }
     if (id === 'diagonal') run('diag');
+    else if (id === 'split') { setLat([0, 0, 0, 1]); run('fiber'); }
+    else if (id === 'pointer') { S.pN = 8; fPN.set(8); S.shape = 'sine'; shapeChips.set('sine', true); setScene('ptr', 0); }
     else if (id === 'absorb') { setScene('diag', 6); doAbsorb(true); if (TRV.still || (booting && !TRV.embed)) clock.set(S.N); else if (booting) kit.autoplay(clock, $('stage')); else clock.play(); }
     else if (id === 'liuhui') run('poly', 5);
     else if (id === 'zu') setScene('poly', 12);
-    else if (id === 'dottie') { S.x0 = 0; fX0.set(0); S.zoom = 'follow'; zoomChips.set('follow', true); run('cos', null, 9); }
-    else if (id === 'far') { S.x0 = 3; fX0.set(3); S.zoom = 'whole'; zoomChips.set('whole', true); run('cos', 12); }
-    else if (id === 'euclid') run('prime', null, 4);
     else if (id === 'thirteen') setScene('prime', 6);
   }
   const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
@@ -591,11 +777,12 @@
     get state() {
       const k = step(), d = dOf(S.rows), xs = orbit(S.x0);
       return { scene: S.scene, step: k, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, N: S.N, seed: S.seed, rows: S.rows.map((r) => r.join('')), d: d.join(''),
-        hamming: S.rows.map((r) => hamming(r, d)), n: sides(Math.min(k, 12)), gap: gap(sides(Math.min(k, 12))), x0: S.x0, xk: xs[Math.min(k, KCOS)], xstar: XSTAR, zoom: S.zoom, euclid: EUCLID[Math.min(k, PRIMES.length)], tpoint: S.tpoint };
+        hamming: S.rows.map((r) => hamming(r, d)), n: sides(Math.min(k, 12)), gap: gap(sides(Math.min(k, 12))), x0: S.x0, xk: xs[Math.min(k, KCOS)], xstar: XSTAR, zoom: S.zoom, euclid: EUCLID[Math.min(k, PRIMES.length)], tpoint: S.tpoint,
+        lat: S.lat.join(''), fiber: fiberFacts(S.lat), pN: S.pN, shape: S.shape, ell: ell(), c: pointer(S.pN, S.shape), gammaAbs: Math.abs(gamma(pointer(S.pN, S.shape), ell())), bound: apothem(S.pN, ell()) };
     },
     /** The last prime-stage layout: free band, sizes, the box of every dial, of Q, its factorization and the least-prime-factor dial, and the gaps between the bands (canvas CSS px). */
     get prime() { return S.scene === 'prime' && primeLast ? JSON.parse(JSON.stringify(primeLast)) : null; },
-    seek: (t) => { clock.pause(); clock.set(t); }, taylor, cell:(i, j) => { const b = $('cv').getBoundingClientRect(); return [b.left + hit.gx + (j + 0.5) * hit.s, b.top + hit.gy + (i + 0.5) * hit.s]; }
+    seek: (t) => { clock.pause(); clock.set(t); }, taylor, node: (a) => { const b = $('cv').getBoundingClientRect(), h = fiberHit[a]; return [b.left + h.x, b.top + h.y]; }, cell: (i, j) => { const b = $('cv').getBoundingClientRect(); return [b.left + hit.gx + (j + 0.5) * hit.s, b.top + hit.gy + (i + 0.5) * hit.s]; }
   };
   window.TRV_THUMB = () => { S.N = 8; S.seed = 5; S.rows = makeList(8, 5); setScene('diag', 8); paint.now(); };
   S.rows = makeList(S.N, S.seed); cards.pick(cards.initial('diagonal'));

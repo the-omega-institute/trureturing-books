@@ -85,11 +85,7 @@ check('FIFTY: widths 27.07 and √50 = 7.07, ratio 3.83 (as the card says)', clo
 check('FIFTY: the two tallest bars stand at ±34', JSON.stringify(peaks(s)) === '[-34,34]', JSON.stringify(peaks(s)));
 check('FIFTY: the probabilities add up to 1', close(s.total, 1, 1e-12) && close(W.q.reduce((a, b) => a + b, 0), 1, 1e-12));
 
-await pick('ten'); s = await seek(10);
-W = walk(121, 10, STAR);
-check('TEN: n = 10, coin c*, the quantum distribution matches the matrix power', s.n === 10 && gap(s.q, W.q) < 1e-12);
-check('TEN: nothing beyond ±n, and only positions of the parity of n are occupied', s.xs.every((x, i) => (Math.abs(x) > 10 || (x - 10) % 2 !== 0 ? s.q[i] < 1e-15 && s.k[i] < 1e-15 : true)));
-check('TEN: tallest bars at ±6, σ = 5.47 against √10 = 3.16', JSON.stringify(peaks(s)) === '[-6,6]' && close(s.sigmaQ, 5.47, 0.005) && close(width(W.q, 121).sigma, s.sigmaQ, 1e-9) && close(s.sigmaC, Math.sqrt(10), 1e-12), `${s.sigmaQ}`);
+check('FIFTY: nothing beyond ±n, and only positions of the parity of n are occupied', s.xs.every((x, i) => (Math.abs(x) > 50 || (x - 50) % 2 !== 0 ? s.q[i] < 1e-15 && s.k[i] < 1e-15 : true)));
 
 await pick('width'); s = await seek(60);
 check('WIDTH: the width scene at n = 60', s.scene === 'width' && s.n === 60);
@@ -110,6 +106,12 @@ check('REAL-COIN: lopsidedness ½ Σ |P(x) − P(−x)| = 0.51, leaning left', c
 const star = walk(121, 50, STAR);
 check('REAL-COIN: a mirror pair (0, x), (1, −x) holds the same total as with c* (test-side)', W.z0.every((a, x) => close(a + W.z1[(121 - x) % 121], star.z0[x] + star.z1[(121 - x) % 121], 1e-12)));
 check('REAL-COIN: …but the real coin does not split it evenly', s.pairGap > 0.1 && close(s.pairGap, Math.max(...W.z0.map((a, x) => Math.abs(a - W.z1[(121 - x) % 121]))), 1e-12));
+check('REAL-COIN: the card shows the pairs scene, one bar per x with |ψ(0, x)|² below and |ψ(1, −x)|² above', s.scene === 'pairs' && (await page.textContent('#hudBig')).startsWith('镜像对')
+  && s.pairs.length === 121 && s.pairs.every(([x, a, b]) => { const i = ((x % 121) + 121) % 121; return close(a, W.z0[i], 1e-12) && close(b, W.z1[(121 - i) % 121], 1e-12); }));
+check('REAL-COIN: every pair reaches the dashed total of c* exactly', s.pairs.every(([x, a, b, t]) => { const i = ((x % 121) + 121) % 121; return close(a + b, t, 1e-12) && close(t, star.z0[i] + star.z1[(121 - i) % 121], 1e-12); }));
+check('REAL-COIN: the largest gap within a pair is 0.145 (as the card says)', close(s.pairGap, 0.1445, 0.0005), String(s.pairGap));
+await setRange('phi', 90); s = await state();
+check('REAL-COIN → c*: on the pairs scene every pair is split evenly and the totals stay', s.scene === 'pairs' && s.pairGap < 1e-12 && s.pairs.every(([, a, b, t]) => close(a, b, 1e-12) && close(a + b, t, 1e-12)));
 
 await pick('ring'); s = await seek(20);
 W = walk(9, 20, STAR);
@@ -167,14 +169,16 @@ check('the p slider changes the cycle to ZMod 31 (with φ = 45°)', s.p === 31 &
 check('the strip records the lopsidedness of every step', close(s.imbalances[20], s.imbalance, 1e-15) && close(s.imbalances[7], (() => { const w = walk(31, 7, c45); return w.q.reduce((a, v, x) => a + Math.abs(v - w.q[(31 - x) % 31]), 0) / 2; })(), 1e-12));
 await page.click('#sceneChips [data-scene="width"]'); s = await state();
 check('the scene chips switch to the width scene', s.scene === 'width' && (await page.textContent('#hudBig')).startsWith('宽度'));
+await page.click('#sceneChips [data-scene="pairs"]'); s = await state();
+check('the scene chips switch to the mirror pairs', s.scene === 'pairs' && (await page.textContent('#hudBig')).startsWith('镜像对'));
 await page.click('#sceneChips [data-scene="dist"]'); s = await state();
 check('…and back to the spread', s.scene === 'dist' && (await page.textContent('#hudBig')).startsWith('分布'));
 
 // playback, rail and keyboard
 await pick('fifty'); await seek(0);
-await page.click('[data-preset="ten"]');
+await page.click('[data-preset="ring"]');
 check('clicking a card plays it', await until(page, () => { const d = window.WALK_DEBUG.state; return d.playing && d.t > 0; }));
-check('the card stops by itself at its step (n = 10)', await until(page, () => { const d = window.WALK_DEBUG.state; return !d.playing && d.n === 10; }));
+check('the card stops by itself at its step (n = 20)', await until(page, () => { const d = window.WALK_DEBUG.state; return !d.playing && d.n === 20; }));
 await page.click('#rew'); s = await state(); check('⏮ returns to the origin (n = 0, all probability at x = 0)', s.n === 0 && close(s.q[0], 1, 1e-12) && close(s.k[0], 1));
 await page.locator('body').click({ position: { x: 5, y: 5 } });
 await page.keyboard.press('ArrowRight'); await page.keyboard.press('ArrowRight'); check('→ takes one step at a time', (await state()).n === 2);
@@ -187,7 +191,7 @@ check('Space pauses', !paused.playing && close((await state()).t, paused.t));
 await page.click('#play'); check('▶ plays', await until(page, () => window.WALK_DEBUG.state.playing));
 await page.click('#play'); check('▶ again pauses', !(await state()).playing);
 await setRange('now', 23.6); s = await state();
-check('scrubbing the rail shows the whole step reached (n = 23)', s.n === 23 && gap(s.q, walk(121, 23, STAR).q) < 1e-12);
+check('scrubbing the rail shows the whole step reached (n = 23)', s.n === 23 && gap(s.q, walk(9, 23, STAR).q) < 1e-12);
 
 // language
 await page.click('[data-lang-set="en"]'); await settle(page);

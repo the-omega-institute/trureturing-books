@@ -130,9 +130,28 @@ await setRange('strength', 0.3); s = await state();
 check('a weaker strength lengthens the rail (p = 0.3 → 8 steps)', s.p === 0.3 && s.max === 8 && s.preset === null);
 
 // cards: end states
-await pick('shorten'); s = await seek(2);
-check('SHORTER: |+⟩ and |−⟩ under phase damping shrink along x to ±0.49 at N = 2', vclose(s.rho, [0.49, 0, 0], 1e-12) && vclose(s.sig, [-0.49, 0, 0], 1e-12) && close(s.len, 0.49, 1e-12));
-check('SHORTER: the stage names the record angle θ_env = arccos 0.49', (await page.textContent('#hudSub')).includes(`${(Math.acos(0.49) / DEG).toFixed(1)}°`));
+// SHORTER: the rail is the angle θ_env of the two environment records. Independent check: build the joint pure state
+// a|0⟩|e₀⟩ + b|1⟩|e₁⟩ as a 4-vector, form the 4 × 4 density matrix and trace the environment out by summing blocks.
+function partialTrace(r, thDeg) {
+  const t = Math.acos(Math.max(-1, Math.min(1, r[2]))) / 2, ph = Math.atan2(r[1], r[0]), th = thDeg * DEG;
+  const a = [Math.cos(t), 0], b = [Math.sin(t) * Math.cos(ph), Math.sin(t) * Math.sin(ph)];
+  const e0 = [1, 0], e1 = [Math.cos(th), Math.sin(th)];
+  const psi = [[a[0] * e0[0], a[1] * e0[0]], [a[0] * e0[1], a[1] * e0[1]], [b[0] * e1[0], b[1] * e1[0]], [b[0] * e1[1], b[1] * e1[1]]];   // |s e⟩, index 2s + e
+  const J = (i, j) => [psi[i][0] * psi[j][0] + psi[i][1] * psi[j][1], psi[i][1] * psi[j][0] - psi[i][0] * psi[j][1]];   // ψ_i ψ̄_j
+  const red = [0, 1].map((i) => [0, 1].map((j) => [0, 1].reduce((acc, e) => { const z = J(2 * i + e, 2 * j + e); return [acc[0] + z[0], acc[1] + z[1]]; }, [0, 0])));
+  return blochOf(red);
+}
+await pick('shorten'); s = await seek(50);
+check('SHORTER: the rail is the record angle, the page is in the environment scene', s.scene === 'env' && s.max === 90);
+check('SHORTER at θ_env = 50°: |+⟩ and |−⟩ shrink along x to ±cos 50°, by the 4 × 4 partial trace', vclose(s.rho, partialTrace(s.rho0, 50), 1e-12) && vclose(s.sig, partialTrace(s.sig0, 50), 1e-12) && vclose(s.rho, [Math.cos(50 * DEG), 0, 0], 1e-12) && close(s.len, Math.cos(50 * DEG), 1e-12));
+check('SHORTER: the stage reads the arrow length cos θ_env', (await page.textContent('#hudSub')).includes(Math.cos(50 * DEG).toFixed(3)) && (await page.textContent('#hudBig')).includes('50.0°'));
+let ptErr = 0;
+for (const th of [0, 15, 33, 61, 89]) { s = await seek(th); ptErr = Math.max(ptErr, ...s.rho.map((x, i) => Math.abs(x - partialTrace(s.rho0, th)[i])), Math.abs(s.T - Math.cos(th * DEG))); }
+check('SHORTER: at five angles ρ is the partial trace and the distance of the |±⟩ pair is cos θ_env', ptErr < 1e-12, `max error ${ptErr}`);
+s = await seek(90);
+check('SHORTER at 90°: orthogonal records, the arrow is at the centre (the unread pinching of the text)', vclose(s.rho, [0, 0, 0], 1e-12) && vclose(s.sig, [0, 0, 0], 1e-12));
+await setRange('strength', 0.3); s = await state();
+check('the strength slider takes the page back to the step-by-step noises', s.scene === 'noise' && s.max === 8);
 await pick('pinch'); s = await seek(1);
 let R = evolve('dephase', 1, s.rho0, 1);
 check('ONTO-AXIS: one step of pinching leaves ρ with zero off-diagonal entries and the same diagonal', coherenceMass(R) < 1e-24 && close(R[0][0][0], density(s.rho0)[0][0][0], 1e-12) && close(s.mass, 0, 1e-12));
@@ -238,6 +257,10 @@ check('T2 > 2T1 still: the escape label reads the farthest image point, found by
 check('T2 > 2T1 still: no distance T is shown on the stage, and the readout says the theorem does not apply', !w.vis.some((t) => /^T /.test(t.text)) && /不是信道/.test(w.dist));
 const tagOf = (o, re) => o.vis.find((t) => re.test(t.text));
 check('T2 > 2T1 still: the labels “fixed point” and |0⟩ do not sit on each other or on the escape label', (() => { const a = tagOf(w, /不动点/), b = tagOf(w, /\|0⟩/), e = tagOf(w, /出界/); return a && b && e && !overlaps(a, b) && !overlaps(a, e) && !overlaps(b, e); })());
+const dStill = await stillOf('distance');
+check('NEVER-FARTHER still: the labels ρ and |0⟩ at the north pole do not sit on each other', (() => { const a = tagOf(dStill, /^ρ$/), b = tagOf(dStill, /\|0⟩/); return a && b && !overlaps(a, b); })());
+const shStill = await stillOf('shorten');
+check('SHORTER still: θ_env = 75°, the arrow keeps cos 75° = 0.259', close(shStill.s.t, 75) && close(shStill.s.len, Math.cos(75 * DEG), 1e-12) && shStill.sub.includes('0.259'), shStill.sub);
 const pinchStill = await stillOf('pinch');
 check('ONTO-AXIS still: the title says pinching, not phase damping, and the readout gives the coherence mass of ρ lost, 0.375 → 0', /捏合/.test(pinchStill.big) && !/相位阻尼/.test(pinchStill.big) && pinchStill.sub.includes(`${coherenceMass(density(pinchStill.s.rho0)).toFixed(3)} → 0.000`), pinchStill.sub);
 check('ONTO-AXIS still: ρ and σ land on one point and their labels do not overlap', vclose(pinchStill.s.rho, pinchStill.s.sig, 1e-12) && !overlaps(tagOf(pinchStill, /^ρ$/), tagOf(pinchStill, /^σ$/)));

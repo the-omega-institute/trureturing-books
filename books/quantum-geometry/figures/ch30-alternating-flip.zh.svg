@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch30-alternating-flip" data-lang="zh" data-wrap="1" viewBox="0 0 436 246" width="436" height="246" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="两栏，同一个 2 × 3 格点图，顶点 0、1、2 在上，3、4、5 在下。左栏：青色的完美匹配 M 是三条竖边，品红的 N 是两条横边 01、34 加上共同的竖边 25；两组不同的边围成一个琥珀色的四边形圈 0—1—4—3。右栏：每条边一支箭头，沿圈 0 → 1 → 4 → 3 → 0 走，每条圈边标出 δ = +1（顺箭头）或 −1（逆箭头），四个 δ 之积是 −1；下方写着 τ(M) τ(N) = −∏δ = +1。">
+<title>两栏，同一个 2 × 3 格点图，顶点 0、1、2 在上，3、4、5 在下。左栏：青色的完美匹配 M 是三条竖边，品红的 N 是两条横边 01、34 加上共同的竖边 25；两组不同的边围成一个琥珀色的四边形圈 0—1—4—3。右栏：每条边一支箭头，沿圈 0 → 1 → 4 → 3 → 0 走，每条圈边标出 δ = +1（顺箭头）或 −1（逆箭头），四个 δ 之积是 −1；下方写着 τ(M) τ(N) = −∏δ = +1。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<svg class="tr-fig-panel" x="0" y="0" width="206" height="246" viewBox="0 0 206 246">
+<text class="tf-ink" x="103" y="22" font-size="14" text-anchor="middle" font-weight="600">两组匹配，差一个圈</text>
+<path d="M34 76 L100 76 L100 142 L34 142Z" class="ts-amber" stroke-width="7" stroke-linejoin="round" fill="none" opacity="0.45"/>
+<line x1="34" y1="76" x2="100" y2="76" class="ts-faint" stroke-width="1.2" fill="none"/>
+<line x1="100" y1="76" x2="166" y2="76" class="ts-faint" stroke-width="1.2" fill="none"/>
+<line x1="34" y1="142" x2="100" y2="142" class="ts-faint" stroke-width="1.2" fill="none"/>
+<line x1="100" y1="142" x2="166" y2="142" class="ts-faint" stroke-width="1.2" fill="none"/>
+<line x1="34" y1="76" x2="34" y2="142" class="ts-faint" stroke-width="1.2" fill="none"/>
+<line x1="100" y1="76" x2="100" y2="142" class="ts-faint" stroke-width="1.2" fill="none"/>
+<line x1="166" y1="76" x2="166" y2="142" class="ts-faint" stroke-width="1.2" fill="none"/>
+<line x1="30.5" y1="76" x2="30.5" y2="142" class="ts-cyan" stroke-width="3.4" fill="none"/>
+<line x1="96.5" y1="76" x2="96.5" y2="142" class="ts-cyan" stroke-width="3.4" fill="none"/>
+<line x1="162.5" y1="76" x2="162.5" y2="142" class="ts-cyan" stroke-width="3.4" fill="none"/>
+<line x1="34" y1="72.5" x2="100" y2="72.5" class="ts-magenta" stroke-width="3.4" fill="none"/>
+<line x1="34" y1="138.5" x2="100" y2="138.5" class="ts-magenta" stroke-width="3.4" fill="none"/>
+<line x1="169.5" y1="76" x2="169.5" y2="142" class="ts-magenta" stroke-width="3.4" fill="none"/>
+<circle cx="34" cy="76" r="10" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="34" y="80.68" font-size="13" text-anchor="middle" font-weight="600">0</text>
+<circle cx="100" cy="76" r="10" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="100" y="80.68" font-size="13" text-anchor="middle" font-weight="600">1</text>
+<circle cx="166" cy="76" r="10" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="166" y="80.68" font-size="13" text-anchor="middle" font-weight="600">2</text>
+<circle cx="34" cy="142" r="10" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="34" y="146.68" font-size="13" text-anchor="middle" font-weight="600">3</text>
+<circle cx="100" cy="142" r="10" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="100" y="146.68" font-size="13" text-anchor="middle" font-weight="600">4</text>
+<circle cx="166" cy="142" r="10" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="166" y="146.68" font-size="13" text-anchor="middle" font-weight="600">5</text>
+<line x1="30" y1="179.84" x2="48" y2="179.84" class="ts-cyan" stroke-width="2.6" fill="none"/>
+<text class="tf-dim" x="56" y="184" font-size="13"><tspan font-style="italic">M</tspan></text>
+<line x1="30" y1="199.84" x2="48" y2="199.84" class="ts-magenta" stroke-width="2.6" fill="none"/>
+<text class="tf-dim" x="56" y="204" font-size="13"><tspan font-style="italic">N</tspan></text>
+<line x1="30" y1="219.84" x2="48" y2="219.84" class="ts-amber" stroke-width="2.6" fill="none"/>
+<text class="tf-dim" x="56" y="224" font-size="13"><tspan font-style="italic">M</tspan> △ <tspan font-style="italic">N</tspan></text>
+</svg>
+<svg class="tr-fig-panel" x="230" y="0" width="206" height="246" viewBox="0 0 206 246">
+<text class="tf-ink" x="103" y="22" font-size="14" text-anchor="middle" font-weight="600">圈上的 δ</text>
+<path d="M34 76 L100 76 L100 142 L34 142Z" class="ts-amber" stroke-width="7" stroke-linejoin="round" fill="none" opacity="0.45"/>
+<line x1="100" y1="76" x2="34" y2="76" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M61 76 L71 71.8 L71 80.2Z" class="tf-ink"/>
+<line x1="166" y1="76" x2="100" y2="76" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M127 76 L137 71.8 L137 80.2Z" class="tf-ink"/>
+<line x1="34" y1="142" x2="100" y2="142" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M73 142 L63 146.2 L63 137.8Z" class="tf-ink"/>
+<line x1="100" y1="142" x2="166" y2="142" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M139 142 L129 146.2 L129 137.8Z" class="tf-ink"/>
+<line x1="34" y1="76" x2="34" y2="142" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M34 115 L29.8 105 L38.2 105Z" class="tf-ink"/>
+<line x1="100" y1="76" x2="100" y2="142" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M100 115 L95.8 105 L104.2 105Z" class="tf-ink"/>
+<line x1="166" y1="76" x2="166" y2="142" class="ts-ink" stroke-width="1.5" fill="none"/>
+<path d="M166 115 L161.8 105 L170.2 105Z" class="tf-ink"/>
+<text class="tf-amber" x="67" y="64.04" font-size="14" text-anchor="middle" font-weight="600">−1</text>
+<text class="tf-amber" x="117" y="114.04" font-size="14" text-anchor="middle" font-weight="600">+1</text>
+<text class="tf-amber" x="67" y="164.04" font-size="14" text-anchor="middle" font-weight="600">−1</text>
+<text class="tf-amber" x="17" y="114.04" font-size="14" text-anchor="middle" font-weight="600">−1</text>
+<circle cx="34" cy="76" r="10" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="34" y="80.68" font-size="13" text-anchor="middle" font-weight="600">0</text>
+<circle cx="100" cy="76" r="10" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="100" y="80.68" font-size="13" text-anchor="middle" font-weight="600">1</text>
+<circle cx="166" cy="76" r="10" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="166" y="80.68" font-size="13" text-anchor="middle" font-weight="600">2</text>
+<circle cx="34" cy="142" r="10" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="34" y="146.68" font-size="13" text-anchor="middle" font-weight="600">3</text>
+<circle cx="100" cy="142" r="10" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="100" y="146.68" font-size="13" text-anchor="middle" font-weight="600">4</text>
+<circle cx="166" cy="142" r="10" class="ts-ink tf-bg" stroke-width="1.6"/>
+<text class="tf-ink" x="166" y="146.68" font-size="13" text-anchor="middle" font-weight="600">5</text>
+<text class="tf-amber" x="103" y="194" font-size="14" text-anchor="middle">∏δ = −1</text>
+<text class="tf-ink" x="103" y="220" font-size="14" text-anchor="middle">τ(<tspan font-style="italic">M</tspan>) τ(<tspan font-style="italic">N</tspan>) = −∏δ = +1</text>
+</svg>
+</svg>

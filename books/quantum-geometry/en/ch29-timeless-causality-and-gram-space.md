@@ -320,10 +320,6 @@ $$
 which are exactly the two legs read off from the Gaussian product $(1 + i)(22 + 23i) = -1 + 45i$.
 :::
 
-::: {.viz src="pythagoras-number-escape" preset="minus" height="500"}
-**$d = 13$: first $-1$, then $+1$.** The amber convergent walks along the line $m = \sqrt{13}\,n$. At $18/5$ the gap is $m^2 - 13n^2 = -1$ (magenta, below the line), the entry for $p = 13$ in the last column of the table above; one more period on, at $649/180$, it flips to $+1$ (cyan). That the negative Pell equation of every plane prime is solvable is a literature result, recorded in the remark below.
-:::
-
 ::: {.remark #rem-ch29-pell-primes-hilbert-literature title="Splitting and Inertia of Primes in the Gaussian Integers, the Negative Pell Equation for Plane Primes, and Hilbert Reciprocity (Literature result, not formalized in this book)"}
 **Literature result, not formalized in this book.** The boxes and manual derivations above stop at "is a sum of two squares" and "descends under division." The following three classical results lie outside the frozen declarations of the `trureturing@dev` commit locked by this book:
 
@@ -684,10 +680,6 @@ Conversely, if the new inner-product coordinates are forced outside the bubble, 
 | **Zero-Memory Instantaneous Observer**<br/>（零记忆瞬时观察者） | Historical backbone lost: $\cos\theta \to 0$, $M = 0$ | Compatible radius $\sin\theta = 1$ unconstrained | **Maximum Sphere Noise**: devoid of causal continuity, every step degenerates into memoryless random drift |
 | **Finite Self-Referential Prototype**<br/>（有限自指观察者原型，`MODEL`） | Modeled by the 1D Dottie fixed point $\cos\theta^* = \theta^* \approx 0.7391$, $\sin\theta^* \approx 0.6736$ | $\det G > 0$, open corridor radius $(\sin\theta^*)^2 \approx 0.4538 > 0$ | **Golden Breath (`MODEL`)**: a geometric metaphor balancing a $\approx 73.9\%$ causal backbone with $\approx 67.4\%$ orthogonal slack for renewal |
 
-::: {.viz src="gram-causal-elliptope" preset="flat" height="500"}
-**No fourth direction: the bubble keeps only its edge.** Squeeze the same history back into three dimensions (only $E_\parallel$): four or more vectors span no volume, and the whole table has $\det G = 0$. At the third depth the magenta bubble keeps only its dashed edge; at the fourth and fifth only isolated points can be realized, the window for $z$ shrinks to one value, and the amber $\mathbf{Q}$ is pinned there. Reading this as the compatible radius collapsing to $0$ in the "Infinite Omniscient Observer" row of the table above is this book's interpretation (`MODEL`).
-:::
-
 At the other end of the table stands the zero-memory instantaneous observer, with the window wide open:
 
 ::: {.viz src="timeless-causal-crystal" preset="right" height="500"}
@@ -695,10 +687,6 @@ At the other end of the table stands the zero-memory instantaneous observer, wit
 :::
 
    This seals the book's synthesis of time, causality, and agency in a single aphorism: ***"Globally timeless, hence eternal; finitely observed, hence new at every step."*** (**“全局无时间，故万古长存；观察者有限，故步步皆新。”**) (In the **[Coda](coda.md)**, we will pair the Lean-verified **`trureturing` Cut-and-Project Golden Model Set and Zeckendorf Observer Route theorems** with an explicit authorial geometric interpretation (`MODEL`): viewing cross-round invariant operator parameters as internal conjugate-window phase anchors and historical ruins as low-dissipation **spatial attractors**, to illuminate why a finite observer experiences déjà-vu resonance across Cassini's $(-1)^{n+1}$ norm seam and strange-attractor fractal sheets.)
-
-::: {.viz src="timeless-causal-crystal" preset="window" height="500"}
-**The Gram window.** $\mathbf{B}$ stands at the north pole and $\mathbf{C}$ can only go around it: $c_{AC}$ swings inside $[\cos(\theta_1 + \theta_2), \cos(\theta_1 - \theta_2)]$, and the volume spanned by the three vectors is positive inside the window and collapses to zero at its edges. You can also drag $\mathbf{C}$ on the sphere.
-:::
 
 ::: {.theorem #thm-ch29-gram-rigidity-and-pell title="Golden-Integer Pell Norm Identity and Unit-Vector Gram Overlap Equivalence" lean="D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm, D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization"}
 Across arithmetic quadratic lattices and inner-product spaces, discrete seam norms and unit-vector overlap equivalence are established by two Lean-4-verified theorems:
@@ -720,10 +708,6 @@ Across arithmetic quadratic lattices and inner-product spaces, discrete seam nor
 
 ::: proof
 Part 1 expands $(2a + b)^2 - 5b^2 = 4a^2 + 4ab + b^2 - 5b^2 = 4(a^2 + ab - b^2) = 4\,\operatorname{norm}(g)$ directly in ring arithmetic. Part 2 applies the Cauchy–Schwarz equality characterization for unit vectors (`inner_eq_one_iff_of_norm_eq_one`) to obtain $\langle \operatorname{record}(i), \operatorname{record}(j)\rangle_{\mathbb{K}} = 1 \iff \operatorname{record}(i) = \operatorname{record}(j)$ and lifts reflexivity, symmetry, and transitivity of equality to prove `Equivalence`. The full proof is checked by the Lean kernel.
-:::
-
-::: {.viz src="timeless-causal-crystal" height="640"}
-**Interactive laboratory `ORTHO//CAUSAL`**: four scenes on one sphere. The window: two cosines fix the range of the third, and $\det G$ is the squared volume the three vectors span; the pages: on a finite clock all pages exist at once, and conditioning picks one; the field: a gradient flow has a slope everywhere, and the potential it loses equals the dissipation it pays; the thread: amplitude amplification turns only $2\theta$ per step and arrives after about $(\pi/4)\sqrt{N}$ steps. Reading these as “choice”, “pages”, “field” and “thread” is this book's interpretation (`MODEL`); whether $\mathrm{P} \neq \mathrm{NP}$ remains an open problem, and nothing drawn on the page settles it.
 :::
 
 

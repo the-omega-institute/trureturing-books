@@ -6,8 +6,8 @@
       "code": "ORTHO//QUBIT",
       "title": "一个量子比特的线与面积 · 布洛赫球、旋子与双覆盖",
       "title_en": "The line and the area of one qubit · Bloch sphere, rotors and the double cover",
-      "summary": "在布洛赫球上拖动态矢量 B，对着量尺 A 看它的两个投影：共线的影子 A·B = cos θ 是“线”，决定探测器两种咔哒的比例；垂直撑开的面 |A∧B| = sin θ 是“面积”，决定干涉条纹的明暗对比；两者的平方和恒为 1。再给它加上量子门：每个门是一枚旋子，整个球绕固定轴转满 360° 时旋子差一个负号，转满 720° 才真正回来；H·Z·H 与 X 在球面上是同一个转动，旋子却是 −R_X。八张实验卡各讲其中一件事，可以在正文里单独引用。",
-      "summary_en": "Drag the state vector B on the Bloch sphere and read its two projections against the ruler A: the collinear shadow A·B = cos θ is the “line”, which sets the odds of the detector's two clicks; the perpendicular face |A∧B| = sin θ is the “area”, which sets the contrast of the interference fringes; their squares always sum to 1. Then add gates: each gate is a rotor, the rotor is off by a sign after a full 360° turn of the whole sphere about a fixed axis and returns only after 720°; H·Z·H and X are the same turn of the sphere, yet the rotor is −R_X. Each of the eight experiment cards makes one of these points and can be cited on its own from the text.",
+      "summary": "在布洛赫球上拖动态矢量 B，对着量尺 A 看它的两个投影：共线的影子 A·B = cos θ 是“线”，决定探测器两种咔哒的比例；垂直撑开的面 |A∧B| = sin θ 是“面积”，决定干涉条纹的明暗对比；两者的平方和恒为 1。再给它加上量子门：每个门是一枚旋子，整个球绕固定轴转满 360° 时旋子差一个负号，转满 720° 才真正回来；H·Z·H 与 X 在球面上是同一个转动，旋子却是 −R_X。七张实验卡各讲其中一件事，可以在正文里单独引用。",
+      "summary_en": "Drag the state vector B on the Bloch sphere and read its two projections against the ruler A: the collinear shadow A·B = cos θ is the “line”, which sets the odds of the detector's two clicks; the perpendicular face |A∧B| = sin θ is the “area”, which sets the contrast of the interference fringes; their squares always sum to 1. Then add gates: each gate is a rotor, the rotor is off by a sign after a full 360° turn of the whole sphere about a fixed axis and returns only after 720°; H·Z·H and X are the same turn of the sphere, yet the rotor is −R_X. Each of the seven experiment cards makes one of these points and can be cited on its own from the text.",
       "path": "qubit-geometry/",
       "thumbnail": "qubit-geometry/thumb.jpg",
       "status": "live",
@@ -30,10 +30,10 @@
       ],
       "theory": [
         {
-          "label": "第一章 §1.1 · 两子互为尺规",
-          "label_en": "Chapter 1 §1.1 · Two arrows, each the other's ruler",
-          "href": "../zh/ch01-measurement.html#sec-ch01-1",
-          "href_en": "../en/ch01-measurement.html#sec-ch01-1"
+          "label": "第一章 §1.3 · 布洛赫球面六大极点",
+          "label_en": "Chapter 1 §1.3 · The six poles of the Bloch sphere",
+          "href": "../zh/ch01-measurement.html#sec-ch01-3",
+          "href_en": "../en/ch01-measurement.html#sec-ch01-3"
         },
         {
           "label": "第二章 §2.3 · 玻恩权重与半角换算",
@@ -73,10 +73,7 @@
           "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary"
         },
         {
-          "gid": "D5/S3/Observer/Conditioning.recordWeight_sum"
-        },
-        {
-          "gid": "D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian"
+          "gid": "D5/S3/Quantum/Measurement/Bloch/QubitBloch.B_formula_core"
         },
         {
           "gid": "D5/S3/Quantum/FiniteDimensional.qubit_weyl_star"
@@ -91,8 +88,8 @@
       "code": "ORTHO//ESCAPE",
       "title": "球外之球 · 有限的清单总留下一点在外面",
       "title_en": "The sphere beyond the sphere · a finite list always leaves something outside",
-      "summary": "四个场景画同一件事：有限步之后总有东西留在外面。对角线：逐行翻转对角元得到的串 d 与第 k 行在第 k 位不同，所以不在清单里；把 d 收编进去，新的对角线又翻出一个。割圆：内接正 n 边形（n = 6·2ᵏ，从刘徽的 6 边到祖冲之的 24576 边）与圆弧之间的缝 1 − cos(π/n) 永远大于零，放大镜一直把它放大到看得见。余弦：xₖ₊₁ = cos xₖ 的误差按等比缩小却不为零。素数：p₁⋯pₖ + 1 除以清单里每个素数都余 1，它的素因子都在清单之外。舞台下方的图画出“留在外面的量”随步数的变化。",
-      "summary_en": "Four scenes of one fact: after finitely many steps something is still outside. The diagonal: the string d obtained by flipping the diagonal bit of each row differs from row k in place k, so it is not on the list; absorb d and the new diagonal flips out another. The polygon: the gap 1 − cos(π/n) between the inscribed regular n-gon (n = 6·2ᵏ, from Liu Hui's 6 sides to Zu Chongzhi's 24576) and the arc is always positive, and a magnifier keeps it large enough to see. The cosine: the error of xₖ₊₁ = cos xₖ shrinks geometrically and is never zero. The primes: p₁⋯pₖ + 1 leaves remainder 1 on every listed prime, so its prime factors are off the list. The plots under the stage show what is left outside, step by step.",
+      "summary": "六个场景画同一件事：有限步之后总有东西留在外面。对角线：逐行翻转对角元得到的串 d 与第 k 行在第 k 位不同，所以不在清单里；把 d 收编进去，新的对角线又翻出一个。纤维：四个地址的解码目录是满射，无论潜坐标怎么排，对角线 g 都劈开一根纤维，把 g 立成第二根轴后块数增加。割圆：内接正 n 边形（n = 6·2ᵏ，从刘徽的 6 边到祖冲之的 24576 边）与圆弧之间的缝 1 − cos(π/n) 永远大于零，放大镜一直把它放大到看得见。指针：N + 1 格的记录指针平移 ℓ 格后与自己的重叠不超过正 (⌊N/ℓ⌋ + 2) 边形的边心距，到不了 1。余弦：xₖ₊₁ = cos xₖ 的误差按等比缩小却不为零。素数：p₁⋯pₖ + 1 除以清单里每个素数都余 1，它的素因子都在清单之外。舞台下方的图画出“留在外面的量”随步数的变化。",
+      "summary_en": "Six scenes of one fact: after finitely many steps something is still outside. The diagonal: the string d obtained by flipping the diagonal bit of each row differs from row k in place k, so it is not on the list; absorb d and the new diagonal flips out another. The fibres: the four-address catalog is surjective, so however the latent coordinates are arranged the diagonal g splits a fibre, and raising g as a second axis adds blocks. The polygon: the gap 1 − cos(π/n) between the inscribed regular n-gon (n = 6·2ᵏ, from Liu Hui's 6 sides to Zu Chongzhi's 24576) and the arc is always positive, and a magnifier keeps it large enough to see. The pointer: a record pointer on N + 1 cells, shifted by ℓ, overlaps itself by at most the apothem of the regular (⌊N/ℓ⌋ + 2)-gon, never 1. The cosine: the error of xₖ₊₁ = cos xₖ shrinks geometrically and is never zero. The primes: p₁⋯pₖ + 1 leaves remainder 1 on every listed prime, so its prime factors are off the list. The plots under the stage show what is left outside, step by step.",
       "path": "sphere-escape/",
       "thumbnail": "sphere-escape/thumb.jpg",
       "status": "live",
@@ -163,6 +160,9 @@
           "gid": "D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.coefficient_gamma_le_cosine"
         },
         {
+          "gid": "D5/S3/Quantum/QuantumChannels/FiniteRecordCosineObstruction.finite_record_cosine_obstruction"
+        },
+        {
           "gid": "D5/S3/Zeros/ZetaIdentities.riemann_zeta_euler_product"
         },
         {
@@ -178,8 +178,8 @@
       "code": "ORTHO//PYTHAGORAS",
       "title": "±1 接缝 · 佩尔的一格、线素数与面素数、模 p 数点",
       "title_en": "The ±1 seam · Pell's one cell, line primes and plane primes, points mod p",
-      "summary": "沿着 ±1 接缝走一遍的三个场景。佩尔接缝：√d（无平方因子 2 ≤ d ≤ 37）的渐近分数 m/n 在格点上沿直线越贴越近，|m/n − √d| 趋于零，m² − d·n² 却是非零整数；两条色带末端的放大镜显示它们永远差着整数格，差值的符号来回翻转，连分数周期为奇数时才取得到 −1（d = 5 时绿圈标出已由 Lean 验证的全部 ±4 解）。线素数与面素数：半径 √p 的圆上有格点当且仅当 p ≡ 1 (mod 4)，这时 a + bi 的平方给出整数直角三角形；格点的方向角 θ 是希尔伯特夹角，平方后的三角形转过布洛赫极角 2θ。模 p 数点：自旋环把勒让德符号 χₚ(f(x)) 画成一圈青色 +1、品红 −1 与中性 0，点数是 p + 1 + Σχ；曲线 y² = x³ − x 在 𝔽ₚ 上的 aₚ 被哈塞界 ±2√p 关住，线素数恰在零上，面素数的余弦等于高斯三角形的余弦；换成 y² = x³ − x + 1，余弦的分布贴近半圆律，p = 23 处明确标出坏约化（Δ = −368 = −2⁴·23）。",
-      "summary_en": "Three scenes along the ±1 seam. The Pell seam: on the lattice the convergents m/n of √d (squarefree 2 ≤ d ≤ 37) hug the line ever more closely, |m/n − √d| goes to zero, yet m² − d·n² is a nonzero integer; a magnifier on the ends of two bands shows that they always differ by whole cells, the sign of the gap flips back and forth, and −1 is reached only when the period of the continued fraction is odd (for d = 5 the green rings mark all the ±4 solutions, as verified in Lean). Line primes and plane primes: the circle of radius √p passes through lattice points exactly when p ≡ 1 (mod 4), and then the square of a + bi gives an integer right triangle; the direction θ of the lattice point is the Hilbert angle, and the squared triangle turns through the Bloch polar angle 2θ. Points mod p: a ring of spins draws the Legendre symbols χₚ(f(x)) as cyan +1, magenta −1 and neutral 0, and the count is p + 1 + Σχ; for the curve y² = x³ − x over 𝔽ₚ, aₚ is held inside Hasse's bound ±2√p, line primes sit exactly at zero and the cosine of a plane prime equals the cosine of its Gaussian triangle; for y² = x³ − x + 1 the cosines follow the semicircle law, and p = 23 is flagged as a prime of bad reduction (Δ = −368 = −2⁴·23).",
+      "summary": "沿着 ±1 接缝走一遍的三个场景。佩尔接缝：√d（无平方因子 2 ≤ d ≤ 37）的渐近分数 m/n 在格点上沿直线越贴越近，|m/n − √d| 趋于零，m² − d·n² 却是非零整数；两条色带末端的放大镜显示它们永远差着整数格，差值的符号来回翻转，连分数周期为奇数时才取得到 −1（d = 5 时灰圈标出落在 m² − 5n² = ±4 上的 (Fₖ, Lₖ)）。线素数与面素数：半径 √p 的圆上有格点当且仅当 p ≡ 1 (mod 4)，这时 a + bi 的平方给出整数直角三角形；格点的方向角 θ 是希尔伯特夹角，平方后的三角形转过布洛赫极角 2θ。模 p 数点：自旋环把勒让德符号 χₚ(f(x)) 画成一圈青色 +1、品红 −1 与中性 0，点数是 p + 1 + Σχ；曲线 y² = x³ − x 在 𝔽ₚ 上的 aₚ 被哈塞界 ±2√p 关住，线素数恰在零上，面素数的余弦等于高斯三角形的余弦；换成 y² = x³ − x + 1，余弦的分布贴近半圆律，p = 23 处明确标出坏约化（Δ = −368 = −2⁴·23）。",
+      "summary_en": "Three scenes along the ±1 seam. The Pell seam: on the lattice the convergents m/n of √d (squarefree 2 ≤ d ≤ 37) hug the line ever more closely, |m/n − √d| goes to zero, yet m² − d·n² is a nonzero integer; a magnifier on the ends of two bands shows that they always differ by whole cells, the sign of the gap flips back and forth, and −1 is reached only when the period of the continued fraction is odd (for d = 5 grey rings mark the pairs (Fₖ, Lₖ) on m² − 5n² = ±4). Line primes and plane primes: the circle of radius √p passes through lattice points exactly when p ≡ 1 (mod 4), and then the square of a + bi gives an integer right triangle; the direction θ of the lattice point is the Hilbert angle, and the squared triangle turns through the Bloch polar angle 2θ. Points mod p: a ring of spins draws the Legendre symbols χₚ(f(x)) as cyan +1, magenta −1 and neutral 0, and the count is p + 1 + Σχ; for the curve y² = x³ − x over 𝔽ₚ, aₚ is held inside Hasse's bound ±2√p, line primes sit exactly at zero and the cosine of a plane prime equals the cosine of its Gaussian triangle; for y² = x³ − x + 1 the cosines follow the semicircle law, and p = 23 is flagged as a prime of bad reduction (Δ = −368 = −2⁴·23).",
       "path": "pythagoras-number-escape/",
       "thumbnail": "pythagoras-number-escape/thumb.jpg",
       "status": "live",
@@ -238,9 +238,6 @@
         }
       ],
       "lean": [
-        {
-          "gid": "D5/S3/Arith/GoldenPell.pell_pm_four_iff_signed_lucas_fib"
-        },
         {
           "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
         },
@@ -327,15 +324,6 @@
       "lean": [
         {
           "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
-        },
-        {
-          "gid": "D5/S3/Observer/Conditioning.conditionalState_isState"
-        },
-        {
-          "gid": "D5/S3/Geometry/Riemannian/GradientDissipation.S2_dissipation"
-        },
-        {
-          "gid": "D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation"
         }
       ]
     },
@@ -390,12 +378,6 @@
           "gid": "D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff"
         },
         {
-          "gid": "D5/S3/Observer/Reversal/QuadraticObservationClosure.observed_increment"
-        },
-        {
-          "gid": "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.mixed_witness"
-        },
-        {
           "gid": "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure"
         }
       ]
@@ -405,8 +387,8 @@
       "code": "ORTHO//HORIZON",
       "title": "视界之外的交叉点 · 一条缓慢下降的指数率、桥图的最小割与少数承重的模态",
       "title_en": "A crossover beyond the horizon · a slowly falling exponent rate, the minimal cut of a bridge graph and the few modes that carry the weight",
-      "summary": "第 30 章 ETH 一节的三个场景。指数率：示意曲线 r(n) = c·log₂log₂n/√log₂n 趋于零却降得极慢，c = 1 时要到 n ≈ 2⁵⁵⁸ 才低于 PPSZ 的 0.386，远在宇宙原子数 2²⁶⁶ 之外；常数 c 决定交叉点在视界的哪一边；子句宽度 k = 3…6 只换 PPSZ 的基准线（唯一可满足情形的文献率 0.3863、0.5548、0.6502、0.7118）。桥图：宽度为 3 的双节点张量网络，每个随机整数实例的流矩阵的秩都不超过 Lean 的三项割上界 QMinCut = min(3ac, ad, bc)，也不超过第四道割 3bd（初等推导，未形式化），整张图的最小割是这四道的最小值；对自然数维数 0 < a ≤ b、0 < c ≤ d 且 a² + b² ≤ 3ab、c² + d² ≤ 3cd（锥域），能达到的最大秩等于 QMinCut = min(ad, bc) 已由 Lean 验证，但单次抽样的秩可以更低；锥域外须比较四道割。模态：非负且总和为 T 的谱里，不小于阈值 θ 的模态至多 T/θ 个（Lean 已验证）。",
-      "summary_en": "Three scenes for the ETH section of chapter 30. The exponent rate: the schematic curve r(n) = c·log₂log₂n/√log₂n tends to zero but so slowly that for c = 1 it drops below the 0.386 of PPSZ only at n ≈ 2⁵⁵⁸, far beyond the 2²⁶⁶ atoms of the universe; the constant c decides on which side of the horizon the crossover lies; the clause width k = 3 … 6 only changes the PPSZ baseline (the literature rates of the uniquely satisfiable case, 0.3863, 0.5548, 0.6502, 0.7118). The bridge graph: a two-node tensor network of width 3 where the flow matrix of each random integer instance has rank at most Lean's three-term cut bound QMinCut = min(3ac, ad, bc) and at most the fourth cut 3bd (an elementary argument, not formalized), the minimal cut of the whole graph being the least of the four; that for natural-number dimensions with 0 < a ≤ b, 0 < c ≤ d, a² + b² ≤ 3ab and c² + d² ≤ 3cd (the cone) the greatest attainable rank equals QMinCut = min(ad, bc) is kernel-verified in Lean, though a single draw can fall lower; outside the cone the four cuts must be compared. The modes: in a nonnegative spectrum of total T at most T/θ modes reach a threshold θ (kernel-verified in Lean).",
+      "summary": "第 30 章 ETH 一节的三个场景。指数率：示意曲线 r(n) = c·log₂log₂n/√log₂n 趋于零却降得极慢，c = 1 时要到 n ≈ 2⁵⁵⁸ 才低于 PPSZ 的 0.386，远在宇宙原子数 2²⁶⁶ 之外；常数 c 决定交叉点在视界的哪一边；子句宽度 k = 3…6 只换 PPSZ 的基准线（唯一可满足情形的文献率 0.3863、0.5548、0.6502、0.7118）。桥图：宽度为 3 的双节点张量网络，每个随机整数实例的流矩阵的秩都不超过 Lean 的三项割上界 QMinCut = min(3ac, ad, bc)，也不超过第四道割 3bd（初等推导，未形式化），整张图的最小割是这四道的最小值；对自然数维数 0 < a ≤ b、0 < c ≤ d 且 a² + b² ≤ 3ab、c² + d² ≤ 3cd（锥域），能达到的最大秩等于 QMinCut = min(ad, bc) 已由 Lean 验证，但单次抽样的秩可以更低；锥域外须比较四道割。模态：非负且总和为迹预算 RW/π 的谱里，不小于阈值 τ 的模态至多 RW/(πτ) 个（Lean 已验证）；第 12 章引用它在几何谱 2^−(j+1)、τ = 1/8 上的情形：3 个过线，墙在 8。",
+      "summary_en": "Three scenes for the ETH section of chapter 30. The exponent rate: the schematic curve r(n) = c·log₂log₂n/√log₂n tends to zero but so slowly that for c = 1 it drops below the 0.386 of PPSZ only at n ≈ 2⁵⁵⁸, far beyond the 2²⁶⁶ atoms of the universe; the constant c decides on which side of the horizon the crossover lies; the clause width k = 3 … 6 only changes the PPSZ baseline (the literature rates of the uniquely satisfiable case, 0.3863, 0.5548, 0.6502, 0.7118). The bridge graph: a two-node tensor network of width 3 where the flow matrix of each random integer instance has rank at most Lean's three-term cut bound QMinCut = min(3ac, ad, bc) and at most the fourth cut 3bd (an elementary argument, not formalized), the minimal cut of the whole graph being the least of the four; that for natural-number dimensions with 0 < a ≤ b, 0 < c ≤ d, a² + b² ≤ 3ab and c² + d² ≤ 3cd (the cone) the greatest attainable rank equals QMinCut = min(ad, bc) is kernel-verified in Lean, though a single draw can fall lower; outside the cone the four cuts must be compared. The modes: in a nonnegative spectrum whose total is the trace budget RW/π, at most RW/(πτ) modes reach a threshold τ (kernel-verified in Lean); chapter 12 cites it on the geometric spectrum 2^−(j+1) at τ = 1/8: three clear the line, the wall stands at 8.",
       "path": "eth-horizon-crossover/",
       "thumbnail": "eth-horizon-crossover/thumb.jpg",
       "status": "live",
@@ -588,8 +570,8 @@
       "code": "IDEMPOTENT//LINE",
       "title": "反复投影",
       "title_en": "Projecting again and again",
-      "summary": "布洛赫球里的一支箭头、一条测量线和与它垂直的对偶平面。按一次“投一次”，就是沿这条线测量而不读结果（P₊ρP₊ + P₋ρP₋，用 2×2 复矩阵实算）：箭头落到它在线上的影子，面上的那一份消失，箭头变短；再投多少次，影子都一动不动。箭头本来在线上就投不动，整个躺在对偶平面里就投成零；线上一份加面上一份拼回原箭头，纯度盈余等于概率偏离加剩余质量。五张实验卡各讲一件事，可以在第三章正文里单独引用。",
-      "summary_en": "Inside the Bloch ball: an arrow, a measurement line and the dual plane perpendicular to it. One press of “Project” is a measurement along the line whose result is not read (P₊ρP₊ + P₋ρP₋, computed with 2×2 complex matrices): the arrow drops to its shadow on the line, its part in the plane is gone and it gets shorter; press again as often as you like and the shadow does not move. An arrow already on the line cannot be moved, an arrow lying in the dual plane projects to zero, and the line part plus the plane part rebuild the arrow, so that the purity surplus is the probability deviation plus the residual mass. Each of the five experiment cards makes one of these points and can be cited on its own from Chapter 3.",
+      "summary": "布洛赫球里的一支箭头、一条测量线和与它垂直的对偶平面。按一次“投一次”，就是沿这条线测量而不读结果（P₊ρP₊ + P₋ρP₋，用 2×2 复矩阵实算）：箭头落到它在线上的影子，面上的那一份消失，箭头变短；再投多少次，影子都一动不动。箭头本来在线上就投不动，整个躺在对偶平面里就投成零；线上一份加面上一份拼回原箭头，纯度盈余等于概率偏离加剩余质量。另一种操作是读出结果、只留通过的一支：偏振片链里态每跳一次都留在球皮上，代价记在相乘的权重里。五张实验卡各讲一件事，可以在第三章正文里单独引用。",
+      "summary_en": "Inside the Bloch ball: an arrow, a measurement line and the dual plane perpendicular to it. One press of “Project” is a measurement along the line whose result is not read (P₊ρP₊ + P₋ρP₋, computed with 2×2 complex matrices): the arrow drops to its shadow on the line, its part in the plane is gone and it gets shorter; press again as often as you like and the shadow does not move. An arrow already on the line cannot be moved, an arrow lying in the dual plane projects to zero, and the line part plus the plane part rebuild the arrow, so that the purity surplus is the probability deviation plus the residual mass. The other operation reads the result and keeps the branch that passed: along a chain of polarizers the state stays on the skin at every hop, and the price is booked in the multiplied weight. Each of the five experiment cards makes one of these points and can be cited on its own from Chapter 3.",
       "path": "repeated-projection/",
       "thumbnail": "repeated-projection/thumb.jpg",
       "status": "live",
@@ -636,6 +618,12 @@
         },
         {
           "gid": "D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning.conditionalState_isState"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/BargmannImaginaryMaximizers.bargmann_path_product"
         }
       ]
     },
@@ -902,8 +890,8 @@
       "code": "TWO//ANGLES",
       "title": "球面两角寻址与旋转字",
       "title_en": "Two-angle addressing and rotation words",
-      "summary": "从北极 N 出发，先绕水平轴 e₂ 倾转 θ、再绕竖轴 e₃ 拧转 φ，就到达球面上任一点 r(θ, φ)；第二步只沿高度 cos θ 不变的纬度圈走，在两极则白拧一圈。两根转轴斜着时，页面按一条贪心规则当场构造旋转字：每次绕 b 的转动最多把点推离 N 2α，所以夹角越小要转的次数越多，而两轴共线时 N 寸步难移。“覆盖”场景在同一颗球上画出六根有理轴的 12 个 45° 球冠：它们盖住整颗球，与当前点正交的大圆不进入含它的任何球冠；三根坐标轴的球冠则在卦限对角线处漏缝。八张实验卡各讲其中一件事，可以在正文里单独引用。",
-      "summary_en": "From the north pole N, tilt by θ about the horizontal axis e₂ and then twist by φ about the vertical axis e₃, and you reach any point r(θ, φ) of the sphere; the second turn runs along the latitude circle of fixed height cos θ, and at the poles it does nothing. With skew axes the page builds a rotation word on the spot by a greedy rule: each turn about b pushes the point at most 2α further from N, so a smaller angle between the axes needs more turns, and collinear axes cannot move N at all. The “Cover” scene draws, on the same sphere, the 12 caps of 45° around six rational axes: they cover the whole sphere, and the great circle orthogonal to the current point enters none of the caps that hold it; the caps of the three coordinate axes leave gaps at the octant diagonals. Each of the eight experiment cards makes one of these points and can be cited on its own from the text.",
+      "summary": "从北极 N 出发，先绕水平轴 e₂ 倾转 θ、再绕竖轴 e₃ 拧转 φ，就到达球面上任一点 r(θ, φ)；第二步只沿高度 cos θ 不变的纬度圈走，在两极则白拧一圈。两根转轴斜着时，页面按一条贪心规则当场构造旋转字：每次绕 b 的转动最多把点推离 N 2α，所以夹角越小要转的次数越多，而两轴共线时 N 寸步难移。“覆盖”场景在同一颗球上画出六根有理轴的 12 个 45° 球冠：它们盖住整颗球，与当前点正交的大圆不进入含它的任何球冠；三根坐标轴的球冠则在卦限对角线处漏缝。Lie–Trotter 一卡把绕两根正交轴的转动各切成 n 份交替做，读出乘积的转角、转轴与误差，看它贴近生成元相加的那一次转动。八张实验卡各讲其中一件事，可以在正文里单独引用。",
+      "summary_en": "From the north pole N, tilt by θ about the horizontal axis e₂ and then twist by φ about the vertical axis e₃, and you reach any point r(θ, φ) of the sphere; the second turn runs along the latitude circle of fixed height cos θ, and at the poles it does nothing. With skew axes the page builds a rotation word on the spot by a greedy rule: each turn about b pushes the point at most 2α further from N, so a smaller angle between the axes needs more turns, and collinear axes cannot move N at all. The “Cover” scene draws, on the same sphere, the 12 caps of 45° around six rational axes: they cover the whole sphere, and the great circle orthogonal to the current point enters none of the caps that hold it; the caps of the three coordinate axes leave gaps at the octant diagonals. The Lie–Trotter card cuts the turns about two orthogonal axes into n slices each, alternates them, and reads off the angle, axis and error of the product as it closes in on the one rotation obtained by adding the generators. Each of the eight experiment cards makes one of these points and can be cited on its own from the text.",
       "path": "two-angle-addressing/",
       "thumbnail": "two-angle-addressing/thumb.jpg",
       "status": "live",
@@ -958,6 +946,9 @@
         },
         {
           "gid": "D5/S3/Topology/SphereOrthogonalityCover.sphere_two_open_orthogonality_free_cover_lower_six"
+        },
+        {
+          "gid": "D5/S3/Quantum/Analysis/TrotterProduct.trotter_product"
         }
       ]
     },
@@ -1170,8 +1161,8 @@
       "code": "PAIR//SHUTTER",
       "title": "两子丈量与快门计数",
       "title_en": "Pairwise measurement and shutter counts",
-      "summary": "布洛赫球上两支箭头：青色的 A 是已知态，琥珀色的 B 是目标态，两者之间只有一个角 θ。快门每次只报“过”（+1）或“不过”（−1），一次过不过说不准；按得越多，“过”的比例 k/N 越贴近权重 p = Tr(ρ_A P_B) = (1 + cos θ)/2：B 向 A 的直径作垂线，垂足把直径分出的青色一段就是 p。共线时每次都过，对跖时一次也不过，90° 时一半一半而晃得最厉害；两支一起转，权重与计数都不变；B 每次取随机方向时，权重在 [0, 1] 上均匀分布。七张实验卡各讲其中一件事，可以在正文里单独引用。",
-      "summary_en": "Two arrows on the Bloch sphere: the cyan A is the known state, the amber B the target, and between them there is just one angle θ. Each shot of the shutter reports only “pass” (+1) or “fail” (−1), and no single shot can be foretold; the more shots, the closer the share of passes k/N comes to the weight p = Tr(ρ_A P_B) = (1 + cos θ)/2, which is the cyan stretch cut off on A's diameter by the foot of B's perpendicular. Collinear arrows pass every time, antipodal ones never, at 90° it is half and half with the widest wobble; turning both together changes neither the weight nor the counts; with a random direction for B at every shot the weight is uniform on [0, 1]. Each of the seven experiment cards makes one of these points and can be cited on its own from the text.",
+      "summary": "布洛赫球上两支箭头：青色的 A 是已知态，琥珀色的 B 是目标态，两者之间只有一个角 θ。快门每次只报“过”（+1）或“不过”（−1），一次过不过说不准；按得越多，“过”的比例 k/N 越贴近权重 p = Tr(ρ_A P_B) = (1 + cos θ)/2：B 向 A 的直径作垂线，垂足把直径分出的青色一段就是 p。共线时每次都过，对跖时一次也不过，90° 时一半一半而晃得最厉害；两支一起转，权重与计数都不变；B 每次取随机方向时，权重在 [0, 1] 上均匀分布。六张实验卡各讲其中一件事，可以在正文里单独引用。",
+      "summary_en": "Two arrows on the Bloch sphere: the cyan A is the known state, the amber B the target, and between them there is just one angle θ. Each shot of the shutter reports only “pass” (+1) or “fail” (−1), and no single shot can be foretold; the more shots, the closer the share of passes k/N comes to the weight p = Tr(ρ_A P_B) = (1 + cos θ)/2, which is the cyan stretch cut off on A's diameter by the foot of B's perpendicular. Collinear arrows pass every time, antipodal ones never, at 90° it is half and half with the widest wobble; turning both together changes neither the weight nor the counts; with a random direction for B at every shot the weight is uniform on [0, 1]. Each of the six experiment cards makes one of these points and can be cited on its own from the text.",
       "path": "pairwise-shutter/",
       "thumbnail": "pairwise-shutter/thumb.jpg",
       "status": "live",
@@ -1227,8 +1218,8 @@
       "code": "CHSH//DIAL",
       "title": "CHSH 角度盘",
       "title_en": "The CHSH angle dial",
-      "summary": "Alice 与 Bob 在同一张角度盘上各摆两个测量方向。贝尔态 |Φ⁺⟩ 上两方向的关联是夹角的余弦，CHSH 值是四个余弦的加减，在量尺上一段段叠起来。两侧各张开一块面积（|sin α| 与 |sin β|），它们决定这组方向的天花板 √(4 + 4|sin α sin β|)：Alice 的两个方向重合时天花板落在 2，两侧都张成直角时升到 2√2，再把 Bob 的十字架转 45°，四个余弦正好叠到 2√2。换成 360 个隐方向的经典模型，每个隐方向只给 +2 或 −2，平均怎么转都越不过 2；余弦弧与经典折线在 45° 与 135° 的四段之差合计 2√2 − 2。七张实验卡可以在第十三章正文里单独引用。",
-      "summary_en": "On one dial Alice and Bob each set two measurement directions. On the Bell state |Φ⁺⟩ two directions correlate as the cosine of their angle, and the CHSH value adds and subtracts four cosines, stacked step by step on a gauge. Each side opens an area (|sin α| and |sin β|), and these set the ceiling √(4 + 4|sin α sin β|) of the chosen directions: at 2 when Alice's two directions coincide, at 2√2 when both sides open a right angle; turn Bob's cross by 45° and the four cosines stack exactly to 2√2. Against a classical model of 360 hidden directions, each giving only +2 or −2, the mean never exceeds 2 however the directions turn; the four gaps between the cosine arc and the classical polyline at 45° and 135° add up to 2√2 − 2. Each of the seven experiment cards can be cited on its own from Chapter 13.",
+      "summary": "Alice 与 Bob 在同一张角度盘上各摆两个测量方向。贝尔态 |Φ⁺⟩ 上两方向的关联是夹角的余弦，CHSH 值是四个余弦的加减，在量尺上一段段叠起来。两侧各张开一块面积（|sin α| 与 |sin β|），它们决定这组方向的天花板 √(4 + 4|sin α sin β|)：Alice 的两个方向重合时天花板落在 2，两侧都张成直角时升到 2√2，再把 Bob 的十字架转 45°，四个余弦正好叠到 2√2。换成 360 个隐方向的经典模型，每个隐方向只给 +2 或 −2，平均怎么转都越不过 2；余弦弧与经典折线在 45° 与 135° 的四段之差合计 2√2 − 2。六张实验卡可以在第十三章正文里单独引用。",
+      "summary_en": "On one dial Alice and Bob each set two measurement directions. On the Bell state |Φ⁺⟩ two directions correlate as the cosine of their angle, and the CHSH value adds and subtracts four cosines, stacked step by step on a gauge. Each side opens an area (|sin α| and |sin β|), and these set the ceiling √(4 + 4|sin α sin β|) of the chosen directions: at 2 when Alice's two directions coincide, at 2√2 when both sides open a right angle; turn Bob's cross by 45° and the four cosines stack exactly to 2√2. Against a classical model of 360 hidden directions, each giving only +2 or −2, the mean never exceeds 2 however the directions turn; the four gaps between the cosine arc and the classical polyline at 45° and 135° add up to 2√2 − 2. Each of the six experiment cards can be cited on its own from Chapter 13.",
       "path": "chsh-dial/",
       "thumbnail": "chsh-dial/thumb.jpg",
       "status": "live",
@@ -1389,8 +1380,8 @@
       "code": "WALK//SPREAD",
       "title": "游走扩散",
       "title_en": "How walks spread",
-      "summary": "同一条线（一个足够长的圈 ZMod p）上，量子游走与经典随机游走从同一个原点出发，并排画在线的上下两侧。量子的一份按正文的 Hadamard 单步规则带着硬币相干地走，两个尖峰贴着 ±n 往外跑，宽度按步数 n 线性长大；经典的一份每步左右各 ½，宽度只按 √n 长大，走 50 步时两者相差 3.83 倍。硬币取 c* = (1, i)/√2 时每一对镜像模式 (0, x)、(1, −x) 都均分概率，分布左右对称；换成同样一半一半的实硬币 (1, 1)/√2，分布就偏向一边。圈只有 9 个点时游走绕回来，对称仍在。五张实验卡可以在第十六章正文里单独引用。",
-      "summary_en": "On one line (a long enough cycle ZMod p) a quantum walk and a classical random walk start from the same origin, drawn above and below the line. The quantum one follows the text's Hadamard step, moving coherently with its coin: its two peaks run out next to ±n and its width grows linearly in the number of steps n. The classical one steps left or right with probability ½ and widens only like √n; after fifty steps they are 3.83 times apart. With the coin c* = (1, i)/√2 every mirror pair of modes (0, x), (1, −x) splits its probability evenly and the distribution is symmetric; a real coin (1, 1)/√2, half and half as well, tilts it to one side. On a cycle of only nine points the walk wraps round and the symmetry stays. Each of the five experiment cards can be cited on its own from Chapter 16.",
+      "summary": "同一条线（一个足够长的圈 ZMod p）上，量子游走与经典随机游走从同一个原点出发，并排画在线的上下两侧。量子的一份按正文的 Hadamard 单步规则带着硬币相干地走，两个尖峰贴着 ±n 往外跑，宽度按步数 n 线性长大；经典的一份每步左右各 ½，宽度只按 √n 长大，走 50 步时两者相差 3.83 倍。硬币取 c* = (1, i)/√2 时每一对镜像模式 (0, x)、(1, −x) 都均分概率，分布左右对称；换成同样一半一半的实硬币 (1, 1)/√2，分布就偏向一边；“镜像对”场景把每一对的两段叠成一根柱，总高与硬币无关，c* 时两段等高。圈只有 9 个点时游走绕回来，对称仍在。四张实验卡可以在第十六章正文里单独引用。",
+      "summary_en": "On one line (a long enough cycle ZMod p) a quantum walk and a classical random walk start from the same origin, drawn above and below the line. The quantum one follows the text's Hadamard step, moving coherently with its coin: its two peaks run out next to ±n and its width grows linearly in the number of steps n. The classical one steps left or right with probability ½ and widens only like √n; after fifty steps they are 3.83 times apart. With the coin c* = (1, i)/√2 every mirror pair of modes (0, x), (1, −x) splits its probability evenly and the distribution is symmetric; a real coin (1, 1)/√2, half and half as well, tilts it to one side. The scene “Pairs” stacks the two modes of each pair into one bar: its height does not depend on the coin, and with c* the two parts are equal. On a cycle of only nine points the walk wraps round and the symmetry stays. Each of the four experiment cards can be cited on its own from Chapter 16.",
       "path": "walk-spreading/",
       "thumbnail": "walk-spreading/thumb.jpg",
       "status": "live",
@@ -1493,8 +1484,8 @@
       "code": "GROVER//REFLECT",
       "title": "Grover 两次反射",
       "title_en": "Grover's two reflections",
-      "summary": "Grover 搜索的每一步是两面镜子：先对失败轴照一次，再对初始态 |s⟩ 那条线照一次，合起来在目标与失败两轴张成的平面里转 2θ，sin θ = 1/√N；第 n 步后箭头停在 (2n + 1)θ，在目标轴上的影子就是成功振幅。N = 4 一步正好立在目标上；N = 8 两步之后成功概率 121/128，第三步转过了头；N = 256 时十二小步爬到 0.99995，第一个峰的步数紧跟 π√N/4。五张实验卡可以在第十五章正文里单独引用。",
-      "summary_en": "Each Grover step is two mirrors: one in the failure axis, then one in the line of the initial state |s⟩. Together they turn the state by 2θ, with sin θ = 1/√N, in the plane of the target and failure axes; after n steps the arrow sits at (2n + 1)θ and its shadow on the target axis is the success amplitude. N = 4 lands exactly on the target in one step; N = 8 reaches 121/128 after two steps and overshoots on the third; N = 256 climbs to 0.99995 in twelve small steps, and the first-peak step count follows π√N/4. Each of the five experiment cards can be cited on its own from Chapter 15.",
+      "summary": "Grover 搜索的每一步是两面镜子：先对失败轴照一次，再对初始态 |s⟩ 那条线照一次，合起来在目标与失败两轴张成的平面里转 2θ，sin θ = 1/√N；第 n 步后箭头停在 (2n + 1)θ，在目标轴上的影子就是成功振幅。N = 4 一步正好立在目标上；N = 8 两步之后成功概率 121/128，第三步转过了头；N = 256 时十二小步爬到 0.99995，第一个峰的步数紧跟 π√N/4。四张实验卡可以在第十五章正文里单独引用。",
+      "summary_en": "Each Grover step is two mirrors: one in the failure axis, then one in the line of the initial state |s⟩. Together they turn the state by 2θ, with sin θ = 1/√N, in the plane of the target and failure axes; after n steps the arrow sits at (2n + 1)θ and its shadow on the target axis is the success amplitude. N = 4 lands exactly on the target in one step; N = 8 reaches 121/128 after two steps and overshoots on the third; N = 256 climbs to 0.99995 in twelve small steps, and the first-peak step count follows π√N/4. Each of the four experiment cards can be cited on its own from Chapter 15.",
       "path": "grover-reflections/",
       "thumbnail": "grover-reflections/thumb.jpg",
       "status": "live",
@@ -1539,8 +1530,8 @@
       "code": "PHASE//GEARS",
       "title": "相位齿轮与周期",
       "title_en": "Phase gears and the period",
-      "summary": "量子傅里叶变换给寄存器里的每一格 x 拧一排相位齿轮：第一只每格转半圈，往后每只慢一半；频率 k 的相位是 k 的二进制位选中的那几只齿轮的转角之和，Q = 8、x = 5 时三只齿轮停在 π、π/2、5π/4。把周期梳子上各格的相位箭头首尾相接：r 整除 Q、梳子为完整陪集（x₀ < r）时不共振的频率绕成闭合的多边形、合成为零（Q = 16、k = 1 正是 1 + i − 1 − i = 0），谱上只剩 r 根等高的峰；r 不整除 Q 时只有一部分 sQ/r 落在整数上，谱是梳子实际各格箭头的有限和（例如 Q = 64、r = 6、x₀ = 0 时峰摊在 sQ/r 附近）；截短的梳子未必集中在 sQ/r 附近，只剩一格时谱是平的；连分数从峰读出的阶只是候选，要再检验。五张实验卡可以在第十五章正文里单独引用。",
-      "summary_en": "The quantum Fourier transform turns a row of phase gears for every cell x of the register: the first turns half a turn per cell and each next one half as fast; the phase of frequency k is the sum of the angles of the gears picked by the binary digits of k, and at Q = 8, x = 5 the three gears rest at π, π/2 and 5π/4. Chain the phase arrows of the cells of a periodic comb head to tail: when r divides Q and the comb is a complete coset (x₀ < r) every off-resonant frequency closes into a polygon and sums to zero (Q = 16, k = 1 is exactly 1 + i − 1 − i = 0), leaving r equal peaks; when r does not divide Q only some of the values sQ/r are integers and the spectrum is the finite sum over the comb's actual cells (for example, at Q = 64, r = 6, x₀ = 0 the peaks spread near sQ/r); a truncated comb need not concentrate near sQ/r, and a single cell gives a flat spectrum; the order read from a peak by continued fractions is only a candidate to be checked. Each of the five experiment cards can be cited on its own from Chapter 15.",
+      "summary": "量子傅里叶变换给寄存器里的每一格 x 拧一排相位齿轮：第一只每格转半圈，往后每只慢一半；频率 k 的相位是 k 的二进制位选中的那几只齿轮的转角之和，Q = 8、x = 5 时三只齿轮停在 π、π/2、5π/4。把周期梳子上各格的相位箭头首尾相接：r 整除 Q、梳子为完整陪集（x₀ < r）时不共振的频率绕成闭合的多边形、合成为零（Q = 16、k = 1 正是 1 + i − 1 − i = 0），谱上只剩 r 根等高的峰；r 不整除 Q 时只有一部分 sQ/r 落在整数上，谱是梳子实际各格箭头的有限和（例如 Q = 64、r = 6、x₀ = 0 时峰摊在 sQ/r 附近）；截短的梳子未必集中在 sQ/r 附近，只剩一格时谱是平的；连分数从峰读出的阶只是候选，要再检验。Q = 32、周期 8 时位置梳子只有 4 格，谱上却有 8 根峰，峰距是 Q/r = 4 而不是 r。六张实验卡可以在第十五章正文里单独引用。",
+      "summary_en": "The quantum Fourier transform turns a row of phase gears for every cell x of the register: the first turns half a turn per cell and each next one half as fast; the phase of frequency k is the sum of the angles of the gears picked by the binary digits of k, and at Q = 8, x = 5 the three gears rest at π, π/2 and 5π/4. Chain the phase arrows of the cells of a periodic comb head to tail: when r divides Q and the comb is a complete coset (x₀ < r) every off-resonant frequency closes into a polygon and sums to zero (Q = 16, k = 1 is exactly 1 + i − 1 − i = 0), leaving r equal peaks; when r does not divide Q only some of the values sQ/r are integers and the spectrum is the finite sum over the comb's actual cells (for example, at Q = 64, r = 6, x₀ = 0 the peaks spread near sQ/r); a truncated comb need not concentrate near sQ/r, and a single cell gives a flat spectrum; the order read from a peak by continued fractions is only a candidate to be checked. With Q = 32 and period 8 the comb of positions has only 4 cells while the spectrum has 8 peaks, Q/r = 4 apart rather than r. Each of the six experiment cards can be cited on its own from Chapter 15.",
       "path": "phase-gears/",
       "thumbnail": "phase-gears/thumb.jpg",
       "status": "live",
@@ -2396,8 +2387,8 @@
       "code": "ORTHO//UNIFIED",
       "title": "正交自指统一场切片",
       "title_en": "A slice of the orthogonal self-referential unified field",
-      "summary": "第三十二章上半篇的三个画面：同一个角 θ = gd(η) 把固有时率 cos θ = 1/γ 与速度 sin θ = tanh η 扣在一个圆上；两个平面上的旋子来回转一圈留下 U = R₁R₂R₁⁻¹R₂⁻¹ ≠ 1 的二向量余项，同一平面里则回到原处；球面二十面体每个顶点缺 60°、共缺 720°，观察者的视界推到 90° 割断 10 条边，跨视界的施密特秩不超过 D¹⁰。",
-      "summary_en": "Three pictures from the first half of Chapter 32: one angle θ = gd(η) puts the proper-time rate cos θ = 1/γ and the speed sin θ = tanh η on one circle; rotors turning back and forth in two planes leave a bivector remainder U = R₁R₂R₁⁻¹R₂⁻¹ ≠ 1, while in one plane they come home; an icosahedron on the sphere misses 60° at each vertex and 720° in all, and the observer's horizon pushed to 90° cuts 10 edges, so the Schmidt rank across it is at most D¹⁰.",
+      "summary": "第三十二章上半篇的三个画面：同一个角 θ = gd(η) 把固有时率 cos θ = 1/γ 与速度 sin θ = tanh η 扣在一个圆上，同一个圆上弧长 θ 与影子 cos θ 只在不动点 θ* ≈ 0.739 处相等；两个平面上的旋子来回转一圈留下 U = R₁R₂R₁⁻¹R₂⁻¹ ≠ 1 的二向量余项，同一平面里则回到原处；球面二十面体每个顶点缺 60°、共缺 720°，观察者的视界推到 90° 割断 10 条边，跨视界的施密特秩不超过 D¹⁰。",
+      "summary_en": "Three pictures from the first half of Chapter 32: one angle θ = gd(η) puts the proper-time rate cos θ = 1/γ and the speed sin θ = tanh η on one circle, where the arc θ and the shadow cos θ agree only at the fixed point θ* ≈ 0.739; rotors turning back and forth in two planes leave a bivector remainder U = R₁R₂R₁⁻¹R₂⁻¹ ≠ 1, while in one plane they come home; an icosahedron on the sphere misses 60° at each vertex and 720° in all, and the observer's horizon pushed to 90° cuts 10 edges, so the Schmidt rank across it is at most D¹⁰.",
       "path": "unified-field-slice/",
       "thumbnail": "unified-field-slice/thumb.jpg",
       "status": "live",
@@ -2641,11 +2632,7 @@
           "href": "{trureturing}/D5/S3/QuantumBounds/LagrangeGramIdentity.lean"
         }
       ],
-      "lean": [
-        {
-          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
-        }
-      ]
+      "lean": []
     },
     {
       "id": "dream-decoherence-unpinning",
@@ -2884,6 +2871,107 @@
         },
         {
           "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary"
+        }
+      ]
+    },
+    {
+      "id": "critical-mirror",
+      "code": "ORTHO//MIRROR",
+      "title": "镜子与凯莱圆 · 零点四个一组，在线上才缩成一对",
+      "title_en": "The mirror and the Cayley circle · zeros come in fours, and pair up only on the line",
+      "summary": "两个平面并排。左边是临界带：拖动一点 ρ，ξ 的反射 s ↦ 1 − s 与共轭给出它的三个伴，四点 ρ、ρ̄、1 − ρ、1 − ρ̄ 绕 ½ 成组，只有 Re ρ = ½ 时两两重合。右边是凯莱坐标 w = (s − 1)/s：临界线是单位圆，s ↦ 1 − s̄ 是关于圆的反演，离线点的四个像两个在圆内、两个在圆外，高处只偏出圆周一层薄膜（放大镜拉开 ln|w|）。四次式场景用同样对称、零点 ½ ± δ ± iγ 的多项式说明：它沿临界线取正实数从不变号，而 ξ 在 14 与 15 之间变号，对称本身锁不住零点。",
+      "summary_en": "Two planes side by side. On the left, the critical strip: drag a point ρ, and the reflection s ↦ 1 − s of ξ together with conjugation give it three partners, the four points ρ, ρ̄, 1 − ρ, 1 − ρ̄ grouping around ½ and coinciding in pairs only when Re ρ = ½. On the right, the Cayley coordinate w = (s − 1)/s: the critical line is the unit circle and s ↦ 1 − s̄ is inversion in it; an off-line point has two images inside and two outside, and high up they leave the circle by only a thin film (a magnifier stretches ln|w|). The quartic scene uses a polynomial with the same symmetries and zeros ½ ± δ ± iγ: along the critical line it takes positive real values and never changes sign, while ξ changes sign between 14 and 15, so symmetry alone does not pin the zeros down.",
+      "path": "critical-mirror/",
+      "thumbnail": "critical-mirror/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "临界线",
+        "反射对称",
+        "凯莱比",
+        "单位圆反演",
+        "黎曼猜想",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Critical line",
+        "Reflection symmetry",
+        "Cayley ratio",
+        "Inversion in the circle",
+        "Riemann hypothesis",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第二十二章 §22.4 · 临界对称轴与黎曼猜想的认识论边界",
+          "label_en": "Chapter 22 §22.4 · The critical line and the epistemic boundary of the Riemann hypothesis",
+          "href": "../zh/ch22-primes-euler-products-and-zeros.html#sec-ch22-4",
+          "href_en": "../en/ch22-primes-euler-products-and-zeros.html#sec-ch22-4"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Zeros/CompletedZeta.xi_reading_reflection"
+        },
+        {
+          "gid": "D5/S3/Zeros/Symmetry/ZetaConjugationCovariance.xi_reading_one_sub_conj"
+        },
+        {
+          "gid": "D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line"
+        },
+        {
+          "gid": "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.full_symmetry_not_fixed_line_localization"
+        }
+      ]
+    },
+    {
+      "id": "vortex-polygon",
+      "code": "ORTHO//POLYGON",
+      "title": "交错涡旋多边形 · 平衡、发散与漂移",
+      "title_en": "Alternating vortex polygons · rest, divergence and drift",
+      "summary": "第 30 章的二维样本：2m 个点涡正负相间排在圆上，每个涡旋另带一项绕原点的进动（b = 2，Ω = ½）。只在半径 R = √(b/(4Ω)) 上整圈静止，换一个半径正负涡旋就转开；从六边形起，沿本征值 λ_r = Ω(m − r)√(r² − 2) 的方向推 10⁻⁹，偏离按 e^(λt) 长大，到 t = 10 约 1177 倍；偶极与正方形的谱全在虚轴上，沿若尔当链 c₁ 推 ε，整圈仍匀速转走，转角 ≈ εt。静止半径、正实本征值与无界的线性漂移是 Lean 已验证的定理；非线性积分是数值观察。",
+      "summary_en": "A two-dimensional sample from Chapter 30: 2m point vortices of alternating sign on a circle, each also precessing about the centre (b = 2, Ω = ½). The ring rests only at the radius R = √(b/(4Ω)); at another radius the two signs turn apart. From the hexagon on, a push of 10⁻⁹ along an eigenvector of λ_r = Ω(m − r)√(r² − 2) grows like e^(λt), about 1177 times by t = 10; the dipole and the square have a purely imaginary spectrum, yet a push ε along the Jordan chain c₁ turns the whole ring steadily, through about εt. The resting radius, the positive eigenvalues and the unbounded linear drift are theorems verified in Lean; the nonlinear integration is a numerical observation.",
+      "path": "vortex-polygon/",
+      "thumbnail": "vortex-polygon/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "点涡",
+        "交错多边形",
+        "本征值",
+        "若尔当块",
+        "第 30 章"
+      ],
+      "tags_en": [
+        "point vortices",
+        "alternating polygon",
+        "eigenvalues",
+        "Jordan block",
+        "chapter 30"
+      ],
+      "theory": [
+        {
+          "label": "第 30 章 · 交错涡旋多边形的完整谱",
+          "label_en": "Chapter 30 · The full spectrum of the alternating vortex polygon",
+          "href": "../zh/ch30-fields-lines-eth-and-navier-stokes.html#thm-ch30-vortex-polygon-spectrum",
+          "href_en": "../en/ch30-fields-lines-eth-and-navier-stokes.html#thm-ch30-vortex-polygon-spectrum"
+        },
+        {
+          "label": "第 30 章 · 零本征值的若尔当块与无界漂移",
+          "label_en": "Chapter 30 · The Jordan block at zero and the unbounded drift",
+          "href": "../zh/ch30-fields-lines-eth-and-navier-stokes.html#prop-ch30-vortex-polygon-neutral-drift",
+          "href_en": "../en/ch30-fields-lines-eth-and-navier-stokes.html#prop-ch30-vortex-polygon-neutral-drift"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonParameters.regular_equilibrium_iff_radius"
+        },
+        {
+          "gid": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonPhysicalSpectrum.physical_positive_eigenvalue_iff"
+        },
+        {
+          "gid": "D5/S3/FluidDynamics/Vortices/AlternatingPolygonCartesianChain.unbounded_linear_drift"
         }
       ]
     }
