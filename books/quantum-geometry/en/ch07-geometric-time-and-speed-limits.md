@@ -309,30 +309,42 @@ $$
 
 This orbit span is the cyclic space of the initial vector. Two finite-dimensional arguments explain why a direction that never triggers the detector must be treated differently inside and outside $C$.
 
-::: {.remark #rem-monitored-cyclic-observability title="No permanent dark state in the cyclic space: a finite-dimensional derivation"}
-**Literature result, not formalized in this book.** Put $T=(I-P_v)U$. The operator $U$ preserves $C$, and the range of $P_v$ lies in $C$, so both $T$ and $P_vU$ restrict to operators from $C$ to itself:
+::: {.proposition #rem-monitored-cyclic-observability title="No permanent dark state in the cyclic space" lean="D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredContraction.cyclic_future_kernel_eq_bot"}
+Retain the finite-dimensional complex inner-product space $E$, unitary $U$, arbitrary vector $v\in E$, and cyclic space $C$ defined above. Put $T=(I-P_v)U$. The operator $U$ preserves $C$, and the range of $P_v$ lies in $C$, so both $T$ and $P_vU$ restrict to operators from $C$ to itself:
 
 $$
 A=T|_C,\qquad B=(P_vU)|_C.
 $$
 
-Collect the directions producing no click at any future step:
+Then the directions producing no click at any future step form the zero subspace:
 
 $$
-K=\bigcap_{n\in\mathbb N}\ker(BA^n).
+K=\bigcap_{n\in\mathbb N}\ker(BA^n)=\{0\}.
 $$
+:::
 
+::: proof
 For $x\in K$, the equation $Bx=0$ gives $Ax=Ux$. Shifting the click history by one step also gives $Ax\in K$, so $U$ preserves $K$. The restriction $U|_K$ is injective on a finite-dimensional space and hence surjective; therefore $U^{-1}$ preserves $K$ too. Write any $x\in K$ as $x=Uy$ with $y\in K$. Since $By=P_vUy=0$, we have $x\perp v$. Iterating backwards under $U$ now gives $x\perp U^nv$ for every $n\ge0$. Yet $x$ belongs to their span $C$, so
 
 $$
 K=\{0\}.
 $$
 
-No unit-vector assumption is needed: when $v=0$, the cyclic space is zero. Omitting the cyclic restriction would make the conclusion false. With $U=I$ and $v=e_1$, any nonzero vector orthogonal to $e_1$ never clicks. This argument establishes observability within the cyclic space; it does not yet compute an infinite return-probability sum.
+No unit-vector assumption is needed: when $v=0$, the cyclic space is zero. Omitting the cyclic restriction would make the conclusion false. With $U=I$ and $v=e_1$, any nonzero vector orthogonal to $e_1$ never clicks. This argument establishes observability within the cyclic space; it does not yet compute an infinite return-probability sum. The full proof is checked by the Lean kernel.
 :::
 
-::: {.remark #rem-monitored-cyclic-power-contraction title="Why does the absence of a permanent dark state force strict contraction after finitely many steps?"}
-**Literature result, not formalized in this book.** Now assume $\norm v=1$, and let $d=\dim_{\mathbb C}C\ge1$. Orthogonal projection and the isometry of $U$ give, for $x\in C$,
+::: {.proposition #rem-monitored-cyclic-power-contraction title="Strict power contraction of the actual cyclic monitored operator" lean="D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredPowerBound.cyclic_power_contraction"}
+Retain the finite-dimensional complex inner-product space $E$, unitary $U$, cyclic space $C$, and actual restriction $A=((I-P_v)U)|_C$ from [@rem-monitored-cyclic-observability], and assume $\norm v=1$. Then there exist $N\in\mathbb N$ and $q\in\mathbb R$ such that
+
+$$
+N\ge1,\qquad 0\le q<1,\qquad \norm{A^N}_{\mathrm{op}}\le q,
+$$
+
+where the norm is the operator norm on $C\to C$.
+:::
+
+::: proof
+Let $d=\dim_{\mathbb C}C\ge1$. Orthogonal projection and the isometry of $U$ give, for $x\in C$,
 
 $$
 \norm{Ax}^2+\norm{Bx}^2=\norm{x}^2.
@@ -353,8 +365,10 @@ $$
 N\ge1,\qquad 0\le q<1,\qquad \norm{A^N}_{\mathrm{op}}\le q.
 $$
 
-Compactness turns a loss in every direction into one strict loss bound shared by all directions. The bound may depend on $U,v$; it is not a uniform constant across all systems. For monitored-return background, see Grünbaum, Velázquez, Werner and Werner, *Recurrence for discrete time unitary evolutions*, arXiv:1202.3903v3, Theorem 2. These two finite-dimensional derivations are not counted as Lean theorem entries in this book.
+Compactness turns a loss in every direction into one strict loss bound shared by all directions. The formal proof expresses $A,B$ in orthonormal coordinates as a conservative single-channel matrix system and reuses the finite-step contraction estimate for zero dark space, choosing the same $N=d$ and $q=\norm{A^d}_{\mathrm{op}}$. The full proof is checked by the Lean kernel.
 :::
+
+The bound may depend on $U,v$; it is not a uniform constant across all systems. For monitored-return background, see Grünbaum, Velázquez, Werner and Werner, *Recurrence for discrete time unitary evolutions*, arXiv:1202.3903v3, Theorem 2.
 
 ::: {.problem #prob-monitored-spectral-mean title="Formalization gap: from actual monitored histories to occupied spectral points"}
 For every finite-dimensional complex inner-product space, unitary $U$, and unit vector $v$, retain $p_{n+1}=\lvert\langle v,UT^nv\rangle\rvert^2$ from [@def-monitored-return]. Define the occupied spectrum by

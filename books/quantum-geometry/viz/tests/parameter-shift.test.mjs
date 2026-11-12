@@ -209,6 +209,104 @@ await page.keyboard.press('Space'); check('Space pauses', !(await state()).playi
 await setRange('now', PI + 1); s = await state();
 check('the rail sets θ and the readouts follow', close(s.theta, 1, 1e-9) && close(s.shift, -Math.sin(1), 1e-12));
 
+// SHOTS notes: each pair of settings has its own shot noise, (1 − f²)/N at each of its own two angles. The widths are
+// recomputed here from the state-vector f; their ratio is not always above 1 (for f = cos θ at θ = 0° it is sin h / h,
+// 2/π at h = 90°). A pair is shown without noise only when the page's computed variance is exactly 0 (f is ±1 in double
+// precision), and then the independent width must vanish too and the ratio is called undefined; a positive width below the
+// four-decimal display is still a width, shown as "< 0.0001", with a finite ratio.
+const ftl = fOf([0.48, 0.60, 0.64], [0.80, 0.36, 0.48]);
+const widthsOf = (fm, th, h, N) => { const hr = h * DEG; return [Math.sqrt((1 - fm(th + Q) ** 2) + (1 - fm(th - Q) ** 2)) / (2 * Math.sqrt(N)), Math.sqrt((1 - fm(th + hr) ** 2) + (1 - fm(th - hr) ** 2)) / (2 * hr * Math.sqrt(N))]; };
+const fmtN = (x, d) => (Math.abs(x) < 0.5 * 10 ** -d ? 0 : x).toFixed(d).replace('-', '−');
+const fmtW = (x) => (x > 0 && x < 5e-5 ? '< 0.0001' : fmtN(x, 4));
+const shotsView = async () => { const v = await state(); return { s: v, note: await page.textContent('#roNote'), ro: await page.textContent('#ro'), pill: (await page.textContent('#pillKey strong')).trim() }; };
+/** What the shots readouts must say for independent widths [w0, w1], in the page language. */
+function noiseVerdict(v, w, zh) {
+  const bad = /Infinity|NaN|宽了|同样的噪声|same noise/.test(v.note + v.ro + v.pill);
+  const zS = v.s.shots.sdShift === 0, zF = v.s.shots.sdFd === 0, dp = zh ? '双精度' : 'double precision';
+  if ((zS && !(w[0] < 1e-12)) || (zF && !(w[1] < 1e-12))) return false;   // a computed zero must be a zero of the model too
+  if (zS && zF) return !bad && v.pill === '—' && v.note.includes(dp) && v.note.includes(zh ? '两种估计的理论宽度都是 0' : 'both estimates have predicted width 0');
+  if (zS) return !bad && v.pill === '—' && v.note.includes(dp) && v.note.includes(zh ? '宽度之比没有定义' : 'ratio of widths would divide by 0') && v.note.includes(fmtW(v.s.shots.sdFd));
+  if (/双精度|double precision|没有定义|undefined/.test(v.note)) return false;     // a positive width is never called zero
+  const r = w[1] / w[0], near = Math.abs(r - 1) < 5e-4, d = r < 10 ? 3 : 2;
+  const word = r > 1 ? (zh ? (near ? '略宽' : '更宽') : (near ? 'is slightly wider' : 'is wider')) : r < 1 ? (zh ? (near ? '略窄' : '反而更窄') : (near ? 'is slightly narrower' : 'is narrower')) : '';
+  return !bad && v.pill === fmtN(r, 1) && v.note.includes(zh ? `${fmtN(r, d)} 倍` : `${fmtN(r, d)} times`) && (!word || v.note.includes(word))
+    && !(r > 1 && /更窄|略窄|narrower/.test(v.note)) && !(r < 1 && /更宽|略宽|wider/.test(v.note))
+    && v.note.includes(zh ? '各有自己的散粒噪声' : 'its own shot noise') && Number.isFinite(r)
+    && (v.s.shots.sdShift < 5e-5) === v.note.includes(zh ? '不是 0，只是小于 0.0001' : 'is not 0, only below 0.0001');
+}
+// native controls: the keyboard rail of the curve scene sets θ, the h slider takes arrow keys, chips are clicked
+const nativeTheta = async (deg) => {   // Home is −180°, each → is 15°
+  await page.click('#sceneChips [data-scene="curve"]'); await page.locator('body').click({ position: { x: 5, y: 5 } });
+  await page.keyboard.press('Home'); for (let i = 0; i < (deg + 180) / 15; i++) await page.keyboard.press('ArrowRight');
+  await settle(page);
+};
+const nativeH = async (h) => { await page.focus('#h'); await page.keyboard.press('Home'); for (let i = 1; i < h; i++) await page.keyboard.press('ArrowRight'); await page.locator('body').click({ position: { x: 5, y: 5 } }); await settle(page); };
+const toShots = async () => { await page.click('#sceneChips [data-scene="shots"]'); await settle(page); };
+for (const zh of [true, false]) {
+  await page.click(`[data-lang-set="${zh ? 'zh' : 'en'}"]`); await settle(page);
+  await page.click('#modelChips [data-model="z"]');
+  const tag = zh ? 'zh' : 'en';
+  await nativeTheta(0); await nativeH(6); await toShots(); await page.click('#shotChips [data-shots="100"]'); await settle(page);
+  let v = await shotsView(), w = widthsOf(fz, v.s.theta, 6, 100);
+  check(`native (${tag}) θ = 0°, h = 6°, N = 100: widths 0.07071 and 0.07058, the small step is narrower (ratio sin h / h = 0.998) and the note says so`,
+    v.s.scene === 'shots' && close(v.s.theta, 0, 1e-9) && v.s.h === 6 && v.s.N === 100 && close(v.s.shots.sdShift, 0.07071067811865475, 1e-12) && close(v.s.shots.sdFd, 0.07058151073702297, 1e-12)
+    && close(w[1] / w[0], Math.sin(6 * DEG) / (6 * DEG), 1e-12) && close(v.s.shots.sdFd / v.s.shots.sdShift, 0.9981732973708011, 1e-12) && noiseVerdict(v, w, zh) && v.note.includes('0.998'), `${v.note} | ${v.pill}`);
+  await nativeH(90); v = await shotsView(); w = widthsOf(fz, v.s.theta, 90, 100);
+  check(`native (${tag}) θ = 0°, h = 90°: the ratio is 2/π = 0.6366 and the note calls the small step narrower`,
+    v.s.h === 90 && close(v.s.shots.sdFd, 0.045015815807855304, 1e-12) && close(v.s.shots.sdFd / v.s.shots.sdShift, 2 / PI, 1e-12) && noiseVerdict(v, w, zh) && v.note.includes('0.637'), `${v.note} | ${v.pill}`);
+  await nativeTheta(60); await nativeH(6); await toShots(); v = await shotsView(); w = widthsOf(fz, v.s.theta, 6, 100);
+  check(`native (${tag}) θ = 60°, h = 6°, N = 100: ratio 16.48, wider, as in the chapter's example`,
+    close(v.s.shots.sdFd / v.s.shots.sdShift, 16.4795, 5e-5) && noiseVerdict(v, w, zh) && v.note.includes('16.48'), `${v.note} | ${v.pill}`);
+  await nativeTheta(90); await toShots(); v = await shotsView(); w = widthsOf(fz, v.s.theta, 6, 100);
+  check(`native (${tag}) θ = 90°, h = 6°: θ ± 90° sit at f = ±1, the ±90° estimate has no shot noise, no ratio (no ∞/NaN)`,
+    close(v.s.theta, Q, 1e-9) && w[0] < 1e-12 && w[1] > 0.01 && v.s.shots.sdShift === 0 && noiseVerdict(v, w, zh) && !(await page.textContent('#ro')).includes('Infinity'), `${v.note} | ${v.pill} | ${v.s.shots.sdShift}`);
+  await nativeH(90); v = await shotsView(); w = widthsOf(fz, v.s.theta, 90, 100);
+  check(`native (${tag}) θ = 90°, h = 90°: all four settings at f = ±1, neither estimate has shot noise`, v.s.shots.sdShift === 0 && v.s.shots.sdFd === 0 && noiseVerdict(v, w, zh), `${v.note} | ${v.pill}`);
+  // just off θ = 90°: 1e-6 rad leaves a positive ±90° width far below the display (finite ratio, "< 0.0001", never "0");
+  // 1e-9 rad rounds the computed f to ±1, which the note calls a double-precision zero, not an exact property of the model
+  await nativeH(6);
+  await page.click('#sceneChips [data-scene="curve"]'); await seek(PI + Q + 1e-6); await toShots(); v = await shotsView(); w = widthsOf(fz, v.s.theta, 6, 100);
+  check(`(${tag}) θ = 90° + 1e-6 rad: the ±90° width ${v.s.shots.sdShift} is positive though below 0.0001; it is shown as "< 0.0001" with a finite ratio, not as no noise`,
+    v.s.shots.sdShift > 0 && v.s.shots.sdShift < 5e-5 && close(v.s.shots.sdShift, w[0], 1e-12) && v.pill !== '—' && v.ro.includes('< 0.0001') && noiseVerdict(v, w, zh), `${v.note} | ${v.pill}`);
+  await page.click('#sceneChips [data-scene="curve"]'); await seek(PI + Q + 1e-9); await toShots(); v = await shotsView(); w = widthsOf(fz, v.s.theta, 6, 100);
+  check(`(${tag}) θ = 90° + 1e-9 rad: the computed ±90° variance rounds to 0; the note says so in double-precision terms and shows no ratio`,
+    v.s.theta !== Q && v.s.shots.sdShift === 0 && v.pill === '—' && noiseVerdict(v, w, zh), `${v.note} | ${v.pill} | ${v.s.theta}`);
+}
+// the supported domain: both models, θ every 15°, every h of the slider at a few values, the three N chips
+{
+  const counts = { wider: 0, narrower: 0, noShift: 0, none: 0 }, failures = [];
+  for (const zh of [true, false]) {
+    await page.click(`[data-lang-set="${zh ? 'zh' : 'en'}"]`);
+    for (const model of ['z', 'tilt']) {
+      await page.click(`#modelChips [data-model="${model}"]`);
+      const fm = model === 'z' ? fz : ftl;
+      for (const N of zh ? [10, 100, 1000] : [100]) {
+        await toShots(); await page.click(`#shotChips [data-shots="${N}"]`);
+        for (const h of [1, 6, 30, 60, 89, 90]) {
+          await setRange('h', h);
+          // one round trip per row of θ: the scene chips are clicked in the page, the readouts read after kit.flush()
+          const rows = await page.evaluate((deg) => Array.from({ length: 25 }, (_, k) => {
+            document.querySelector('#sceneChips [data-scene="curve"]').click(); window.SHIFT_DEBUG.seek(k * 15 * deg);
+            document.querySelector('#sceneChips [data-scene="shots"]').click(); window.TRV.kit.flush();
+            return { s: window.SHIFT_DEBUG.state, note: document.getElementById('roNote').textContent, ro: document.getElementById('ro').textContent, pill: document.querySelector('#pillKey strong').textContent.trim() };
+          }), DEG);
+          for (let k = 0; k <= 24; k++) {
+            const v = rows[k], w = widthsOf(fm, v.s.theta, h, N);
+            const ok = v.s.model === model && v.s.N === N && v.s.h === h && close(v.s.shots.sdShift, w[0], 1e-12) && close(v.s.shots.sdFd, w[1], 1e-12) && noiseVerdict(v, w, zh);
+            if (!ok) failures.push(`${model} N${N} h${h} θ${k * 15 - 180}: ${v.note} | ${v.pill}`);
+            const zS = v.s.shots.sdShift === 0, zF = v.s.shots.sdFd === 0;
+            if (zh) { if (zS && zF) counts.none++; else if (zS) counts.noShift++; else if (w[1] > w[0]) counts.wider++; else counts.narrower++; }
+          }
+        }
+      }
+    }
+  }
+  check(`supported domain (2 models × 25 θ × 6 h × N, zh and en): widths match the independent per-pair variances and every note, ratio row and pill agrees (${JSON.stringify(counts)})`,
+    failures.length === 0 && counts.wider > 0 && counts.narrower > 0 && counts.noShift > 0 && counts.none > 0, failures.slice(0, 3).join(' || '));
+  await page.click('[data-lang-set="zh"]'); await page.click('#modelChips [data-model="z"]'); await toShots(); await page.click('#shotChips [data-shots="100"]'); await setRange('h', 30);
+  await page.click('#sceneChips [data-scene="curve"]'); await settle(page);
+}
+
 // English
 // the printed stills of SHIFT and SMALL STEP (opened as viz-thumbs.mjs does) tell different things: SHIFT hides the
 // small-step chord, which the text has not met yet; SMALL STEP marks the chord and the gap of its bar to the tangent

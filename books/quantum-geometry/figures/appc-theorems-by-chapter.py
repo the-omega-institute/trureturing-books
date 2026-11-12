@@ -87,11 +87,11 @@ def index_counts():
 ROWS = counts()
 TOTAL = sum(n for _, _, n, _ in ROWS)
 NEW = sum(a for _, _, _, a in ROWS)
-assert (TOTAL, NEW) == (331, 239)
+assert (TOTAL, NEW) == (335, 243)
 N_INDEX, INDEX = index_counts()
-assert len(ROWS) == 40 and N_INDEX == 253
+assert len(ROWS) == 40 and N_INDEX == 257
 assert {k: n for k, _, n, _ in ROWS} == dict(INDEX), (ROWS, INDEX)
-assert TOTAL == sum(INDEX.values()) == 331
+assert TOTAL == sum(INDEX.values()) == 335
 BY = sorted(ROWS, key=lambda r: -r[2])
 TOP, SECOND, THIRD, FOURTH = BY[:4]
 assert [r[0] for r in BY[:4]] == ["22", "30", "4", "24"] and len({r[2] for r in BY[:4]}) == 4

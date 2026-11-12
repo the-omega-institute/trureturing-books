@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "37ac4a0d6a8b6cea9792ac70953eeebe40c05792",
-  "pinned_at": "2026-11-12T19:43:31Z",
+  "commit": "9b6270e9795ed74542ab38e06a271f706174239c",
+  "pinned_at": "2026-11-12T21:13:23Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -3381,6 +3381,22 @@
       "line": 68,
       "signature": "theorem pinching_hilbert_schmidt_pythagorean (rho : QubitMatrix) : hilbertSchmidtInner rho rho = hilbertSchmidtInner (pinching rho) (pinching rho) + hilbertSchmidtInner (rho - pinching rho) (rho - pinching rho)"
     },
+    "D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredContraction.cyclic_future_kernel_eq_bot": {
+      "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredContraction",
+      "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.CyclicMonitoredContraction.cyclic_future_kernel_eq_bot",
+      "kind": "theorem",
+      "statement_id": "sha256:0fb6a694e7796081e5681b95c2177269cd9508ccd0dc04bcc111098f187f4313",
+      "line": 75,
+      "signature": "theorem cyclic_future_kernel_eq_bot (U : E ≃ₗᵢ[ℂ] E) (v : E) : (⨅ n : ℕ, LinearMap.ker ((cyclicClick U v).toLinearMap.comp ((cyclicStep U v).toLinearMap ^ n))) = ⊥"
+    },
+    "D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredPowerBound.cyclic_power_contraction": {
+      "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredPowerBound",
+      "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.CyclicMonitoredPowerBound.cyclic_power_contraction",
+      "kind": "theorem",
+      "statement_id": "sha256:544bab1da74377d730da774b8a4e819c2ae05ed8bd08302690f80efa5203f0e1",
+      "line": 61,
+      "signature": "theorem cyclic_power_contraction (U : E ≃ₗᵢ[ℂ] E) (v : E) (hv : ‖v‖ = 1) : ∃ N : ℕ, 1 ≤ N ∧ ∃ q : ℝ, 0 ≤ q ∧ q < 1 ∧ ‖cyclicStep U v ^ N‖ ≤ q"
+    },
     "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitoredHistory": {
       "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation",
       "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.MonitoredReturnConservation.monitoredHistory",
@@ -3852,6 +3868,30 @@
       "statement_id": "sha256:d42c4a0a6d7c0e9779156a97b715482e15a2795cac7aabc19ec834f7af06ef2e",
       "line": 25,
       "signature": "theorem riemann_zeta_dirichlet_sum_eq_euler_product (s : ℂ) (hs : 1 < s.re) : (∑' n : ℕ, (n : ℂ) ^ (-s)) = ∏' p : Nat.Primes, (1 - (p : ℂ) ^ (-s))⁻¹"
+    },
+    "D5/S3/QuantumContext/TwoAnchorGram.twoAnchorGram": {
+      "module": "D5/S3/QuantumContext/TwoAnchorGram",
+      "name": "D5.S3.QuantumContext.TwoAnchorGram.twoAnchorGram",
+      "kind": "def",
+      "statement_id": "sha256:e8013d85cdb5aeecdf979dcd6cddd1aee261b38988844751912f540d75971b43",
+      "line": 18,
+      "signature": "def twoAnchorGram {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v : E) : Matrix (Fin 2) (Fin 2) ℝ"
+    },
+    "D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_formula": {
+      "module": "D5/S3/QuantumContext/TwoAnchorGram",
+      "name": "D5.S3.QuantumContext.TwoAnchorGram.two_anchor_gram_det_formula",
+      "kind": "theorem",
+      "statement_id": "sha256:e8013d85cdb5aeecdf979dcd6cddd1aee261b38988844751912f540d75971b43",
+      "line": 23,
+      "signature": "theorem two_anchor_gram_det_formula {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v : E) : (twoAnchorGram u v).det = ‖u‖ ^ 2 * ‖v‖ ^ 2 - (⟪u, v⟫_ℝ) ^ 2"
+    },
+    "D5/S3/QuantumContext/TwoAnchorGram.two_anchor_gram_det_pos_iff": {
+      "module": "D5/S3/QuantumContext/TwoAnchorGram",
+      "name": "D5.S3.QuantumContext.TwoAnchorGram.two_anchor_gram_det_pos_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:e8013d85cdb5aeecdf979dcd6cddd1aee261b38988844751912f540d75971b43",
+      "line": 31,
+      "signature": "theorem two_anchor_gram_det_pos_iff {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (u v : E) : 0 < (twoAnchorGram u v).det ↔ LinearIndependent ℝ ![u, v]"
     }
   }
 }
