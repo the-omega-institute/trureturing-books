@@ -256,8 +256,38 @@ $$
 This identifies the count exactly with the established orbit count starting at $x-u$, so the same $N_0$ for every starting point applies, still at times $1,\ldots,N$. The trajectory equality is a hypothesis the model must establish separately; it does not follow from the torus theorem and is not asserted for arbitrary physical or cut-and-project models. The window result alone neither classifies invariant measures nor establishes the stronger unique-ergodicity statement. Weyl's classical theory (1916, *Math. Ann.* **77**, 313–352) retains its separate literature setting. Physical fairness, internal space, and soul phases remain `MODEL` interpretations. This is the finite reuse derivation in the source exposition, with no new Lean theorem or novelty claim.
 :::
 
+::: {.remark #rem-ch31-circular-window-discrepancy title="Finite-Step Error for Complementary-Width Circular Windows: A Mechanical-Word Application"}
+**An application of existing results.** The card uses a special relation between rotation step and window width. Take any $0<\alpha<1$, initial phase $u\in\mathbb R$, and window centre $c\in\mathbb R$, and put $w=1-\alpha$ and $a=c-w/2$. Write $\{x\}=x-\lfloor x\rfloor$. For the left-closed, right-open circular window, define the first $N$ hits by
+
+$$
+H_N=\#\bigl\{1\le n\le N:\{u+n\alpha-a\}<w\bigr\}.
+$$
+
+Here $N\in\mathbb N$ may be zero, and the sample times are exactly $1,\ldots,N$. All these parameters satisfy
+
+$$
+\left|H_N-Nw\right|<1.
+$$
+
+**The exact mechanical-word correspondence.** Put $\rho=u-a$. The $n$th lower mechanical letter is
+
+$$
+b_n=\lfloor\rho+(n+1)\alpha\rfloor-\lfloor\rho+n\alpha\rfloor\in\{0,1\}.
+$$
+
+A carry occurs exactly when $\{\rho+n\alpha\}\ge1-\alpha$. Thus a window hit is precisely $b_n=0$: equality at the threshold causes a carry and excludes the right endpoint. With $C_N=\sum_{n=1}^{N}b_n$, we have $H_N=N-C_N$. This is the true-letter count in [`lower_mechanical_window_true_discrepancy`](lean:D5/S1/Words/Mechanical/MechanicalDensity.lower_mechanical_window_true_discrepancy), with slope $\alpha$, intercept $\rho$, start index $i=1$, and length $N$. That result gives $|C_N-N\alpha|<1$; negating the discrepancy gives the claimed bound. The endpoint telescope in [`lowerMechanicalWindowTrueCount_eq_floor`](lean:D5/S1/Words/Mechanical/MechanicalBalance.lowerMechanicalWindowTrueCount_eq_floor) also gives the exact error
+
+$$
+H_N-Nw=\{\rho+(N+1)\alpha\}-\{\rho+\alpha\}.
+$$
+
+Both fractional parts lie in $[0,1)$, explaining why the strict bound is independent of phase, window position, and sample length. For $N>0$, division gives $|H_N/N-w|<1/N$, so the hit frequency tends to $w$. The card takes $\alpha=\varphi-1$ and $w=2-\varphi$. Its nested fractional parts give the same membership predicate because $\{\{x\}-a\}=\{x-a\}$.
+
+**Scope.** No irrationality assumption on $\alpha$ is needed, but the width must be $1-\alpha$. This application does not classify bounded remainders for arbitrary independent window widths, certify the card's floating-point computation, or establish physical fairness. It applies existing declarations and adds no Lean theorem or novelty claim.
+:::
+
 ::: {.viz src="quantum-fairness-ledger" preset="ergodic" height="500"}
-**Different starts, the same share.** Two states start at different phases and turn about the vertical axis by the golden angle at each step; the share of steps in the cyan window tends to $2 - \varphi \approx 0.382$ for both (the window frequency is an application of existing results to Conjunct 3 of [@thm-ch31-horizon-landauer-ergodic-fairness] and a null-frontier window, see [@rem-ch31-weyl-window-equidistribution-literature]; the bounded gaps between hits are Conjunct 4), and the gap between the hits and $T(2-\varphi)$ always stays below $1$ (the Hecke–Kesten bounded remainder, a literature result not formalized in this book).
+**Different starts, the same share.** Two states start at different phases and turn about the vertical axis by the golden angle at each step; the share of steps in the cyan window tends to $2 - \varphi \approx 0.382$ for both (the window frequency is an application of existing results to Conjunct 3 of [@thm-ch31-horizon-landauer-ergodic-fairness] and a null-frontier window, see [@rem-ch31-weyl-window-equidistribution-literature]; the bounded gaps between hits are Conjunct 4), and the gap between the hits and $T(2-\varphi)$ always stays below $1$ (an application of existing mechanical-word results, see [@rem-ch31-circular-window-discrepancy]).
 :::
 
 Seen in this long-horizon light, local disparities lose their sting: in our observer model (`MODEL`), short slices vary from smooth centers to turbulent rims, yet across compact-torus ergodic return the universe grants every soul phase impartial attractor-reunion opportunities, orthogonal rotation budgets, and self-referential fixed-point pull (cf. [Chapter 24](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature]), without a hair's breadth of favoritism.
