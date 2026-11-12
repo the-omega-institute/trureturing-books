@@ -56,6 +56,56 @@ check('SHIFT: f(60°) = 1/2, f(150°) = −√3/2, f(−30°) = √3/2 (state ve
 check('SHIFT: half the difference is −√3/2 ≈ −0.8660254038', close(s.shift, -0.8660254038, 1e-10));
 check('SHIFT: the commutator slope equals the numerical derivative of the state-vector f', close(s.slope, deriv(fz, PI / 3), 1e-8) && close(s.slope, -Math.sin(PI / 3), 1e-12));
 check('SHIFT: the HUD and the key readout print −0.8660', (await page.textContent('#hudSub')).includes('−0.8660') && (await page.textContent('#ro .key')).includes('−0.866025'));
+
+// the magenta chord as drawn: the canvas calls of one synchronous repaint are intercepted and the segment is read off
+// them, then compared with the two sampled points (θ ∓ h, f(θ ∓ h)) placed in pixels from the state-vector f
+/** Every solid magenta two-point stroke on the stage canvas during one repaint, in viewport pixels. */
+const magentaSegments = () => page.evaluate(() => {
+  const C = CanvasRenderingContext2D.prototype, keep = { beginPath: C.beginPath, moveTo: C.moveTo, lineTo: C.lineTo, stroke: C.stroke };
+  const cv = document.getElementById('cv'), probe = document.createElement('canvas').getContext('2d'), paths = new Map(), out = [];
+  probe.strokeStyle = TRV.palette.magenta;
+  C.beginPath = function () { paths.set(this, []); return keep.beginPath.call(this); };
+  C.moveTo = function (x, y) { if (!paths.has(this)) paths.set(this, []); paths.get(this).push([[x, y]]); return keep.moveTo.call(this, x, y); };
+  C.lineTo = function (x, y) { const p = paths.get(this); if (p && p.length) p[p.length - 1].push([x, y]); return keep.lineTo.call(this, x, y); };
+  C.stroke = function (...a) { if (this.canvas === cv && this.strokeStyle === probe.strokeStyle && !this.getLineDash().length) out.push((paths.get(this) || []).map((sp) => sp.slice())); return keep.stroke.apply(this, a); };
+  try { TRV.kit.flush(); } finally { Object.assign(C, keep); }
+  const r = cv.getBoundingClientRect();
+  return out.filter((sp) => sp.length === 1 && sp[0].length === 2).map((sp) => sp[0].map(([x, y]) => [r.left + x, r.top + y]));
+});
+/** Pixels of the curve plot, anchored on its points at θ = 0 and θ = π, where f = cos θ is 1 and −1. */
+const pixelMap = async () => {
+  const [a, b] = await page.evaluate(() => [window.SHIFT_DEBUG.curvePoint(0), window.SHIFT_DEBUG.curvePoint(Math.PI)]);
+  return { X: (x) => a[0] + (b[0] - a[0]) * x / PI, Y: (y) => a[1] + (b[1] - a[1]) * (1 - y) / 2, y: (py) => 1 - 2 * (py - a[1]) / (b[1] - a[1]) };
+};
+const offLine = ([[x0, y0], [x1, y1]], [x, y]) => Math.abs((y1 - y0) * (x - x0) - (x1 - x0) * (y - y0)) / Math.hypot(x1 - x0, y1 - y0);
+/** The drawn chord at θ (the longest magenta segment across θ) and how far the two samples at θ ∓ h lie from its line. */
+async function chord(th, h) {
+  const m = await pixelMap(), xt = m.X(th), segs = await magentaSegments();
+  const c = segs.filter((sg) => Math.min(sg[0][0], sg[1][0]) < xt && Math.max(sg[0][0], sg[1][0]) > xt).sort((u, v) => Math.abs(v[1][0] - v[0][0]) - Math.abs(u[1][0] - u[0][0]))[0];
+  if (!c) return { off: Infinity, spans: false, msg: 'no magenta segment across θ' };
+  const pts = [th - h, th + h].map((x) => [m.X(x), m.Y(fz(x))]), at = (px) => m.y(c[0][1] + (c[1][1] - c[0][1]) * (px - c[0][0]) / (c[1][0] - c[0][0]));
+  return { off: Math.max(...pts.map((p) => offLine(c, p))), spans: Math.min(c[0][0], c[1][0]) <= pts[0][0] + 0.5 && Math.max(c[0][0], c[1][0]) >= pts[1][0] - 0.5,
+    msg: `drawn line at θ ∓ h: ${at(pts[0][0]).toFixed(4)}, ${at(pts[1][0]).toFixed(4)}; samples ${fz(th - h).toFixed(4)}, ${fz(th + h).toFixed(4)}` };
+}
+check('the pixel anchors: f(0) = 1 and f(π) = −1 for the state-vector f = cos θ', close(fz(0), 1, 1e-12) && close(fz(PI), -1, 1e-12));
+let ch = await chord(s.theta, 30 * DEG);
+check('SHIFT: the magenta chord on the canvas joins the samples (30°, √3/2) and (90°, 0) and reaches both', ch.off < 0.75 && ch.spans && close(fz(PI / 6), Math.sqrt(3) / 2, 1e-12) && close(fz(PI / 2), 0, 1e-12), `${ch.msg}; ${ch.off.toFixed(2)} px off`);
+// an extremum: at θ = 0 the slope is 0, and so is the small-step difference f′(θ)·sin h / h
+await seek(PI); s = await state();
+const h30r = 30 * DEG;
+check('θ = 0: the commutator slope, half the ±90° difference and the ±30° difference are all 0, like the state-vector derivative', close(s.theta, 0, 1e-12) && Math.abs(s.slope) < 1e-12 && Math.abs(s.shift) < 1e-12 && Math.abs(s.fd) < 1e-12
+  && Math.abs(deriv(fz, 0)) < 1e-8 && Math.abs((fz(h30r) - fz(-h30r)) / (2 * h30r)) < 1e-12);
+ch = await chord(s.theta, h30r);
+check('θ = 0: the chord is level at cos 30° through both samples, not at the top of the curve', ch.off < 0.75 && ch.spans, `${ch.msg}; ${ch.off.toFixed(2)} px off`);
+let ro = await page.textContent('#ro'), rn = await page.textContent('#roNote');
+check('θ = 0 (zh): no difference / slope ratio is shown as computed, and the note says both are 0', ro.includes('斜率为 0，没有比值') && !ro.includes('差分 / 斜率') && rn.includes('同为 0'), `${ro} | ${rn}`);
+await page.click('[data-lang-set="en"]'); await settle(page);
+ro = await page.textContent('#ro'); rn = await page.textContent('#roNote');
+check('θ = 0 (en): the same in English', ro.includes('slope 0: no ratio') && !ro.includes('difference / slope') && rn.includes('both 0'), `${ro} | ${rn}`);
+await page.click('[data-lang-set="zh"]'); await settle(page);
+await seek(PI + PI / 3); await setRange('h', 90); s = await state();
+ch = await chord(s.theta, 90 * DEG);
+check('h = 90°: the chord reaches the two cyan settings θ ± 90° and passes through both', s.h === 90 && ch.off < 0.75 && ch.spans, `${ch.msg}; ${ch.off.toFixed(2)} px off`);
 await pick('shift');
 check('SHIFT plays by itself when clicked', await plays());
 // the card runs from 0° to 60°; bring the playing clock to 58° instead of waiting out the whole sweep, then let the page stop itself
@@ -115,6 +165,13 @@ const [mS, ssS] = meanSd(smp.est), [mF, ssF] = meanSd(smp.fd);
 check('SHOTS: both clouds centre on the slope −0.866 within 4 standard errors', Math.abs(mS + Math.sqrt(3) / 2) < 4 * sdS / Math.sqrt(200) && Math.abs(mF - (fz(PI / 3 + h6) - fz(PI / 3 - h6)) / (2 * h6)) < 4 * sdF / Math.sqrt(200), `${mS} ${mF}`);
 check('SHOTS: the measured widths are within 20% of the predicted ones, and the page reports the same', Math.abs(ssS / sdS - 1) < 0.2 && Math.abs(ssF / sdF - 1) < 0.2 && close(s.shots.sd, ssS, 1e-12) && close(s.shots.fdSd, ssF, 1e-12), `${ssS} ${ssF}`);
 check('SHOTS: dots that fall off the gauge (|value| > 3.2) are counted', s.offGauge === smp.fd.filter((v) => Math.abs(v) > 3.2).length);
+const offRaw = smp.k.map((k) => recon(k, 100)[1]).filter((v) => Math.abs(v) > 3.2).length;
+check('SHOTS (seed 1): none of the 200 small-step dots falls off the ±3.2 gauge (recounted from the raw counts), and the card note says none does', offRaw === 0 && s.offGauge === 0 && !(await page.textContent('#presetNote')).includes('落出'), `${offRaw} ${s.offGauge}`);
+await page.click('#shotChips [data-shots="10"]'); await settle(page); await setRange('h', 1); s = await state();
+const smp10 = await page.evaluate(() => window.SHIFT_DEBUG.samples());
+const off10 = smp10.k.filter((k) => Math.abs((2 * k[2] / 10 - 1) - (2 * k[3] / 10 - 1)) / (2 * DEG) > 3.2).length;
+check('N = 10, h = 1°: dots that do fall off the gauge are counted, recounted here from the raw counts', s.N === 10 && s.h === 1 && s.trials === 200 && smp10.k.length === 200 && off10 > 0 && s.offGauge === off10, `${s.offGauge} ${off10}`);
+await setRange('h', 6);
 await page.click('#shotChips [data-shots="1000"]'); s = await state();
 smp = await page.evaluate(() => window.SHIFT_DEBUG.samples());
 check('the shots chips: N = 1000 narrows both predicted widths by √10 and leaves the card', s.N === 1000 && close(s.shots.sdShift, sdS / Math.sqrt(10), 1e-12) && close(s.shots.sdFd, sdF / Math.sqrt(10), 1e-12) && s.preset === null);
@@ -167,6 +224,7 @@ check('the rail sets θ and the readouts follow', close(s.theta, 1, 1e-9) && clo
 }
 await page.click('[data-lang-set="en"]'); await pick('noise'); await seek(200);
 check('English: the HUD reads “200 trials · 100 shots each”', (await page.textContent('#hudBig')).trim() === '200 trials · 100 shots each');
+check('English: the SHOTS note does not claim dots off the gauge', !(await page.textContent('#presetNote')).includes('off the gauge'));
 
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();

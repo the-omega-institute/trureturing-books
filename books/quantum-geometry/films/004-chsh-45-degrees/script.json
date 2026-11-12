@@ -1,11 +1,11 @@
 {
   "voice": "af_heart",
   "speed": 0.94,
-  "say": {"Lean": "Leen", "CHSH": "C H S H", "theta": "thayta", "phi": "fye", "qubit": "cue-bit"},
+  "say": {"Lean": "Leen", "CHSH": "C H S H", "ZX": "Z X", "theta": "thayta", "phi": "fye", "qubit": "cue-bit"},
   "music": {"bpm": 76, "progression": "d-minor"},
   "scenes": [
     {"id": "arc", "name": "ARC AND LINE", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
-      ["On the Bell state, two measuring directions at an angle theta agree with correlation cosine theta.", "贝尔态上，两个测量方向夹角为 θ，两边读数的关联就是 cos θ。"],
+      ["On the Bell state, two measuring directions in the ZX plane at an angle theta agree with correlation cosine theta.", "贝尔态上，ZX 平面内两个测量方向夹角为 θ，两边读数的关联就是 cos θ。"],
       ["A toy classical model, hiding a random direction in each pair, draws a straight line instead.", "一个经典玩具模型：每对粒子藏一个随机方向，画出来的却是一条直线 1 − 2θ/π。"],
       ["The two meet at zero, ninety and one hundred eighty degrees.", "两者在 0°、90°、180° 处重合。"],
       ["Halfway between, at forty-five degrees, the arc stands higher by about zero point two oh seven.", "走到半途的 45°，弧比折线高出约 0.207。"]
@@ -31,7 +31,7 @@
     {"id": "ceiling", "name": "CEILING", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.5, 0.4], "lines": [
       ["Where does the extra room come from? Square the CHSH operator.", "多出来的空间从哪里来？把 CHSH 算子平方。"],
       ["Lean checks that the square is four, plus a cross term of the two sides' commutators.", "Lean 内核检验：平方等于 4，再加一个由两侧换位子相乘而成的交叉项。"],
-      ["For qubits, each commutator is an oriented area. Open both to right angles, and the square reaches eight.", "对单比特方向，每个换位子都是一块有向面积；两侧都张成直角，平方就到 8。"],
+      ["For qubits, each commutator is an oriented area. Open both to right angles, and the largest eigenvalue of the square reaches eight.", "单比特的换位子是有向面积；两侧张成直角，平方的最大本征值到 8。"],
       ["So the ceiling is root eight. Lean checks that the forty-five degree operator reaches two root two, and no state goes higher.", "所以天花板是 √8。Lean 内核检验：这个 45° 算子恰好达到 2√2，任何态都超不过。"],
       ["Classical answers stop at two, the cosine arc at two root two: a factor of root two.", "经典应答停在 2，余弦弧停在 2√2：相差 √2 倍。"]
     ], "cues": [{"line": 1, "at": 2.8, "kind": "stamp"}, {"line": 3, "at": 3.4, "kind": "stamp"}]},
