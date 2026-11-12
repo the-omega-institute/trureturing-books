@@ -9,7 +9,7 @@ m = 4 they are ±5 with eigenvectors (2, 1)/√5 and (1, −2)/√5, so the uppe
 
 import math
 
-SIZE = (520, 350)
+SIZE = (500, 350)
 ALT = {
     "zh": "能级图，纵轴是能量 E。左列 m = 0：E = +3 处一根全蓝的横条（上分量 Z = +1），E = −3 处一根全橙的横条（下分量 Z = −1）。"
           "右列 m = 4：两根横条被推到 E = +5 与 E = −5；+5 的横条 4/5 是蓝、1/5 是橙，−5 的横条 1/5 是蓝、4/5 是橙。虚线把左右两列对应的能级连起来。",
@@ -51,9 +51,10 @@ def draw(fig):
     fig.text(ax_x + 8, Y(6.1) + 6, "*E*", size=15, color="dim")
     for E in (5, 3, 0, -3, -5):
         fig.line(ax_x - 5, Y(E), ax_x, Y(E), "dim", 1.2)
-        fig.text(ax_x - 9, Y(E), (f"{E:+d}" if E else "0").replace("-", "−"), size=13, color="dim", anchor="end", middle=True)
+        fig.text(ax_x - 9, Y(E), (f"{E:+d}" if E else "0").replace("-", "−"), size=14, color="dim", anchor="end", middle=True)
 
-    cols = [(112, free, t("*m* = 0", "*m* = 0")), (300, mass, t("*m* = 4", "*m* = 4"))]
+    xm = 284                              # the left edge of the massive column
+    cols = [(112, free, t("*m* = 0", "*m* = 0")), (xm, mass, t("*m* = 4", "*m* = 4"))]
     w, bh = 130, 14
     for x0, levels, head in cols:
         fig.text(x0 + w / 2, 26, head, size=15, color="ink", weight=600, anchor="middle")
@@ -66,13 +67,13 @@ def draw(fig):
                 fig.rect(x0 + w * a, y - bh / 2, w * (1 - a), bh, color=None, fill="orange", fill_opacity=0.85)
             fig.rect(x0, y - bh / 2, w, bh, color="ink", width=1.2)
     for (e0, _), (e1, v1) in zip(free, mass):
-        fig.line(112 + w + 4, Y(e0), 300 - 4, Y(e1), "dim", 1.3, dash="4 3")
+        fig.line(112 + w + 4, Y(e0), xm - 4, Y(e1), "dim", 1.3, dash="4 3")
     for e, v in mass:
         a = v[0] ** 2
         y = Y(e)
-        fig.text(300 + w + 10, y, f"*E* = {e:+.0f}".replace("+-", "−").replace("-", "−"), size=14, color="ink", middle=True)
+        fig.text(xm + w + 10, y, f"*E* = {e:+.0f}".replace("+-", "−").replace("-", "−"), size=14, color="ink", middle=True)
         lab_y = y + bh / 2 + 18 if e > 0 else y - bh / 2 - 7        # on the side facing E = 0
-        fig.text(300 + w * a / 2, lab_y, "4/5" if a > 0.5 else "1/5", size=13, color="blue", anchor="middle")
-        fig.text(300 + w * a + w * (1 - a) / 2, lab_y, "1/5" if a > 0.5 else "4/5", size=13, color="orange", anchor="middle")
-    fig.legend(112, 334, [("blue", t("上分量 *Z* = +1", "upper, *Z* = +1"))], swatch="box")
-    fig.legend(300, 334, [("orange", t("下分量 *Z* = −1", "lower, *Z* = −1"))], swatch="box")
+        fig.text(xm + w * a / 2, lab_y, "4/5" if a > 0.5 else "1/5", size=14, color="blue", anchor="middle")
+        fig.text(xm + w * a + w * (1 - a) / 2, lab_y, "1/5" if a > 0.5 else "4/5", size=14, color="orange", anchor="middle")
+    fig.legend(112, 334, [("blue", t("上分量 *Z* = +1", "upper, *Z* = +1"))], swatch="box", size=14)
+    fig.legend(xm, 334, [("orange", t("下分量 *Z* = −1", "lower, *Z* = −1"))], swatch="box", size=14)

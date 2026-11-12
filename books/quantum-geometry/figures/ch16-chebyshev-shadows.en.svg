@@ -17,20 +17,20 @@
 <line x1="330" y1="57.44" x2="330" y2="196" class="ts-dim" stroke-width="1.2" stroke-dasharray="4 3" fill="none"/>
 <line x1="250" y1="196" x2="326.18" y2="64.06" class="ts-ink" stroke-width="2.2" fill="none"/>
 <path d="M330 57.44 L328.77 67.12 L322.23 63.34Z" class="tf-ink"/>
-<text class="tf-dim" x="338" y="48.26" font-size="13" text-anchor="middle"><tspan font-style="italic">m</tspan> = 1</text>
+<text class="tf-dim" x="338" y="48.62" font-size="14" text-anchor="middle"><tspan font-style="italic">m</tspan> = 1</text>
 <circle cx="330" cy="196" r="5.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
 <text class="tf-cyan" x="330" y="220" font-size="14" text-anchor="middle"><tspan font-style="italic">T</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em"> = ½</tspan></text>
 <line x1="170" y1="57.44" x2="170" y2="196" class="ts-dim" stroke-width="1.2" stroke-dasharray="4 3" fill="none"/>
 <line x1="250" y1="196" x2="173.82" y2="64.06" class="ts-ink" stroke-width="2.2" fill="none"/>
 <path d="M170 57.44 L177.77 63.34 L171.23 67.12Z" class="tf-ink"/>
-<text class="tf-dim" x="162" y="48.26" font-size="13" text-anchor="middle"><tspan font-style="italic">m</tspan> = 2</text>
+<text class="tf-dim" x="162" y="48.62" font-size="14" text-anchor="middle"><tspan font-style="italic">m</tspan> = 2</text>
 <circle cx="170" cy="196" r="5.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
 <text class="tf-cyan" x="170" y="220" font-size="14" text-anchor="middle"><tspan font-style="italic">T</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em"> = −½</tspan></text>
 <line x1="250" y1="196" x2="97.65" y2="196" class="ts-amber" stroke-width="3" fill="none"/>
 <path d="M90 196 L99 192.22 L99 199.78Z" class="tf-amber"/>
 <circle cx="90" cy="196" r="5.4" class="ts-bg tf-cyan" stroke-width="1.4"/>
 <text class="tf-cyan" x="90" y="220" font-size="14" text-anchor="middle"><tspan font-style="italic">T</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em"> = −1</tspan></text>
-<text class="tf-dim" x="410" y="182" font-size="13" text-anchor="end"><tspan font-style="italic">m</tspan> = 0</text>
-<text class="tf-amber" x="90" y="182" font-size="13"><tspan font-style="italic">m</tspan> = 3</text>
+<text class="tf-dim" x="410" y="182" font-size="14" text-anchor="end"><tspan font-style="italic">m</tspan> = 0</text>
+<text class="tf-amber" x="90" y="182" font-size="14"><tspan font-style="italic">m</tspan> = 3</text>
 <text class="tf-dim" x="250" y="254" font-size="14" text-anchor="middle"><tspan font-style="italic">x</tspan> = cos <tspan font-style="italic">θ</tspan> = ½</text>
 </svg>

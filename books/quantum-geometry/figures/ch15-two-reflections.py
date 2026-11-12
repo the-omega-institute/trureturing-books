@@ -28,7 +28,7 @@ def draw(fig):
     th = math.degrees(grover_theta(N))
     assert abs(th - 20.7048) < 1e-4
     cx, cy, R = 60, 245, 185
-    P = plane(fig, cx, cy, R, below=True)
+    P = plane(fig, cx, cy, R, below=True, size=14)
 
     # the two mirrors
     fig.text(cx + R * 1.0 + 12, cy + 24, t("镜 1：*I* − 2*P*", "mirror 1: *I* − 2*P*"), size=14, color="dim")
@@ -61,5 +61,5 @@ def draw(fig):
     fig.angle(cx, cy, 44, 0, th, "*θ*")
 
     fig.text(u[0] + 8, u[1] - 8, "*U*", size=15)
-    fig.text(u1[0] + 8, u1[1] + 4, t("翻一次", "after 1"), size=13, color="dim")
+    fig.text(u1[0] + 8, u1[1] + 4, t("翻一次", "after 1"), size=14, color="dim")
     fig.text(u3[0] + 10, u3[1] - 2, t("*QU*：翻两次", "*QU*: after 2"), size=14, color="now")

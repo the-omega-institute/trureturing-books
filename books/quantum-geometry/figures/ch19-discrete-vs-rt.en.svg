@@ -1,39 +1,43 @@
-<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch19-discrete-vs-rt" data-lang="en" viewBox="0 0 560 300" width="560" height="300" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="Two small pictures with a crossed-out arrow between them. On the left, the width-three bridge graph (tensors M and N, three bridges and four legs a, b, c, d), with a green LEAN ✓ tag beneath it: max-flow = min-cut in the cone. On the right, a disc standing for a constant-time slice of continuum spacetime; a cyan arc on its rim is the boundary region A, and a violet arc γ_A leaves the two ends of A at right angles to the rim and dips into the disc: the minimal curve. Beneath it a violet tag: RT · literature. The arrow from left to right carries a cross and the words: continuum limit, not proved in this book.">
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch19-discrete-vs-rt" data-lang="en" data-wrap="1" viewBox="0 0 576 300" width="576" height="300" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="Two small pictures with a crossed-out arrow between them. On the left, the width-three bridge graph (tensors M and N, three bridges and four legs a, b, c, d), with a green LEAN ✓ tag beneath it: max-flow = min-cut in the cone. On the right, a disc standing for a constant-time slice of continuum spacetime; a cyan arc on its rim is the boundary region A, and a violet arc γ_A leaves the two ends of A at right angles to the rim and dips into the disc: the minimal curve. Beneath it a violet tag: RT · literature. The arrow from left to right carries a cross and the words: continuum limit, not proved in this book.">
 <title>Two small pictures with a crossed-out arrow between them. On the left, the width-three bridge graph (tensors M and N, three bridges and four legs a, b, c, d), with a green LEAN ✓ tag beneath it: max-flow = min-cut in the cone. On the right, a disc standing for a constant-time slice of continuum spacetime; a cyan arc on its rim is the boundary region A, and a violet arc γ_A leaves the two ends of A at right angles to the rim and dips into the disc: the minimal curve. Beneath it a violet tag: RT · literature. The arrow from left to right carries a cross and the words: continuum limit, not proved in this book.</title>
 <style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
-<line x1="87" y1="117" x2="149" y2="117" class="ts-ink" stroke-width="2.2" fill="none"/>
-<line x1="87" y1="128" x2="149" y2="128" class="ts-ink" stroke-width="2.2" fill="none"/>
-<line x1="87" y1="139" x2="149" y2="139" class="ts-ink" stroke-width="2.2" fill="none"/>
-<line x1="70" y1="104" x2="70" y2="68" class="ts-ink" stroke-width="2.2" fill="none"/>
-<line x1="70" y1="152" x2="70" y2="188" class="ts-ink" stroke-width="2.2" fill="none"/>
-<circle cx="70" cy="68" r="3.2" class="tf-ink"/>
-<circle cx="70" cy="188" r="3.2" class="tf-ink"/>
-<text class="tf-dim" x="70" y="58" font-size="14" text-anchor="middle"><tspan font-style="italic">a</tspan></text>
-<text class="tf-dim" x="70" y="207.8" font-size="14" text-anchor="middle"><tspan font-style="italic">b</tspan></text>
-<line x1="166" y1="104" x2="166" y2="68" class="ts-ink" stroke-width="2.2" fill="none"/>
-<line x1="166" y1="152" x2="166" y2="188" class="ts-ink" stroke-width="2.2" fill="none"/>
-<circle cx="166" cy="68" r="3.2" class="tf-ink"/>
-<circle cx="166" cy="188" r="3.2" class="tf-ink"/>
-<text class="tf-dim" x="166" y="58" font-size="14" text-anchor="middle"><tspan font-style="italic">d</tspan></text>
-<text class="tf-dim" x="166" y="207.8" font-size="14" text-anchor="middle"><tspan font-style="italic">c</tspan></text>
-<rect x="53" y="104" width="34" height="48" rx="5" class="ts-ink tf-panel" stroke-width="2"/>
-<text class="tf-ink" x="70" y="133.76" font-size="16" text-anchor="middle" font-weight="600"><tspan font-style="italic">M</tspan></text>
-<rect x="149" y="104" width="34" height="48" rx="5" class="ts-ink tf-panel" stroke-width="2"/>
-<text class="tf-ink" x="166" y="133.76" font-size="16" text-anchor="middle" font-weight="600"><tspan font-style="italic">N</tspan></text>
-<rect x="6.6" y="246" width="222.8" height="21" class="ts-ok tf-ok" stroke-width="1.2" fill-opacity="0.12"/>
-<text class="tf-ok tr-fig-mono" x="13.6" y="262" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">LEAN ✓ flow = cut in the cone</text>
-<circle cx="438" cy="132" r="92" class="ts-dim tf-panel" stroke-width="1.8"/>
-<path d="M381.36 59.5 L382.21 60.57 L383.07 61.61 L383.96 62.64 L384.86 63.66 L385.79 64.65 L386.73 65.63 L387.69 66.59 L388.67 67.53 L389.67 68.46 L390.69 69.36 L391.72 70.25 L392.77 71.11 L393.83 71.96 L394.91 72.78 L396.01 73.58 L397.12 74.37 L398.24 75.13 L399.38 75.87 L400.53 76.59 L401.7 77.29 L402.88 77.96 L404.07 78.62 L405.27 79.25 L406.49 79.85 L407.72 80.44 L408.96 81 L410.2 81.54 L411.46 82.05 L412.73 82.54 L414.01 83.01 L415.29 83.45 L416.59 83.86 L417.89 84.26 L419.19 84.62 L420.51 84.97 L421.83 85.29 L423.16 85.58 L424.49 85.85 L425.83 86.09 L427.17 86.31 L428.51 86.5 L429.86 86.67 L431.21 86.81 L432.57 86.92 L433.93 87.01 L435.28 87.08 L436.64 87.12 L438 87.13 L439.36 87.12 L440.72 87.08 L442.07 87.01 L443.43 86.92 L444.79 86.81 L446.14 86.67 L447.49 86.5 L448.83 86.31 L450.17 86.09 L451.51 85.85 L452.84 85.58 L454.17 85.29 L455.49 84.97 L456.81 84.62 L458.11 84.26 L459.41 83.86 L460.71 83.45 L461.99 83.01 L463.27 82.54 L464.54 82.05 L465.8 81.54 L467.04 81 L468.28 80.44 L469.51 79.85 L470.73 79.25 L471.93 78.62 L473.12 77.96 L474.3 77.29 L475.47 76.59 L476.62 75.87 L477.76 75.13 L478.88 74.37 L479.99 73.58 L481.09 72.78 L482.17 71.96 L483.23 71.11 L484.28 70.25 L485.31 69.36 L486.33 68.46 L487.33 67.53 L488.31 66.59 L489.27 65.63 L490.21 64.65 L491.14 63.66 L492.04 62.64 L492.93 61.61 L493.79 60.57 L494.64 59.5" class="ts-violet" stroke-width="3" stroke-linejoin="round" fill="none"/>
-<path d="M494.64 59.5 L489.45 55.73 L484 52.33 L478.33 49.31 L472.46 46.7 L466.43 44.5 L460.26 42.73 L453.98 41.4 L447.62 40.5 L441.21 40.06 L434.79 40.06 L428.38 40.5 L422.02 41.4 L415.74 42.73 L409.57 44.5 L403.54 46.7 L397.67 49.31 L392 52.33 L386.55 55.73 L381.36 59.5" class="ts-cyan" stroke-width="4.2" stroke-linejoin="round" fill="none"/>
-<text class="tf-cyan" x="438" y="30" font-size="16" text-anchor="middle" font-weight="600"><tspan font-style="italic">A</tspan></text>
-<text class="tf-violet" x="438" y="109.13" font-size="16" text-anchor="middle" font-weight="600"><tspan font-style="italic">γ</tspan><tspan dy="0.28em" font-size="72%">A</tspan><tspan dy="-0.28em">​</tspan></text>
-<text class="tf-dim" x="438" y="206" font-size="13" text-anchor="middle">continuum</text>
-<rect x="377" y="246" width="122" height="21" class="ts-violet tf-violet" stroke-width="1.2" fill-opacity="0.12"/>
-<text class="tf-violet tr-fig-mono" x="384" y="262" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">RT · literature</text>
-<line x1="222" y1="128" x2="318.35" y2="128" class="ts-dim" stroke-width="1.8" stroke-dasharray="5 4" fill="none"/>
-<path d="M326 128 L317 131.78 L317 124.22Z" class="tf-dim"/>
-<line x1="264" y1="118" x2="284" y2="138" class="ts-ink" stroke-width="2.4" stroke-linecap="round" fill="none"/>
-<line x1="264" y1="138" x2="284" y2="118" class="ts-ink" stroke-width="2.4" stroke-linecap="round" fill="none"/>
-<text class="tf-dim" x="274" y="158" font-size="13" text-anchor="middle">continuum limit</text>
-<text class="tf-dim" x="274" y="176" font-size="13" text-anchor="middle">not proved here</text>
+<svg class="tr-fig-panel" x="0" y="0" width="240" height="300" viewBox="0 0 240 300">
+<line x1="89" y1="117" x2="151" y2="117" class="ts-ink" stroke-width="2.2" fill="none"/>
+<line x1="89" y1="128" x2="151" y2="128" class="ts-ink" stroke-width="2.2" fill="none"/>
+<line x1="89" y1="139" x2="151" y2="139" class="ts-ink" stroke-width="2.2" fill="none"/>
+<line x1="72" y1="104" x2="72" y2="68" class="ts-ink" stroke-width="2.2" fill="none"/>
+<line x1="72" y1="152" x2="72" y2="188" class="ts-ink" stroke-width="2.2" fill="none"/>
+<circle cx="72" cy="68" r="3.2" class="tf-ink"/>
+<circle cx="72" cy="188" r="3.2" class="tf-ink"/>
+<text class="tf-dim" x="72" y="58" font-size="14" text-anchor="middle"><tspan font-style="italic">a</tspan></text>
+<text class="tf-dim" x="72" y="207.8" font-size="14" text-anchor="middle"><tspan font-style="italic">b</tspan></text>
+<line x1="168" y1="104" x2="168" y2="68" class="ts-ink" stroke-width="2.2" fill="none"/>
+<line x1="168" y1="152" x2="168" y2="188" class="ts-ink" stroke-width="2.2" fill="none"/>
+<circle cx="168" cy="68" r="3.2" class="tf-ink"/>
+<circle cx="168" cy="188" r="3.2" class="tf-ink"/>
+<text class="tf-dim" x="168" y="58" font-size="14" text-anchor="middle"><tspan font-style="italic">d</tspan></text>
+<text class="tf-dim" x="168" y="207.8" font-size="14" text-anchor="middle"><tspan font-style="italic">c</tspan></text>
+<rect x="55" y="104" width="34" height="48" rx="5" class="ts-ink tf-panel" stroke-width="2"/>
+<text class="tf-ink" x="72" y="133.76" font-size="16" text-anchor="middle" font-weight="600"><tspan font-style="italic">M</tspan></text>
+<rect x="151" y="104" width="34" height="48" rx="5" class="ts-ink tf-panel" stroke-width="2"/>
+<text class="tf-ink" x="168" y="133.76" font-size="16" text-anchor="middle" font-weight="600"><tspan font-style="italic">N</tspan></text>
+<rect x="8.6" y="246" width="222.8" height="21" class="ts-ok tf-ok" stroke-width="1.2" fill-opacity="0.12"/>
+<text class="tf-ok tr-fig-mono" x="15.6" y="262" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">LEAN ✓ flow = cut in the cone</text>
+</svg>
+<svg class="tr-fig-panel" x="256" y="0" width="320" height="300" viewBox="0 0 320 300">
+<line x1="6" y1="128" x2="92.35" y2="128" class="ts-dim" stroke-width="1.8" stroke-dasharray="5 4" fill="none"/>
+<path d="M100 128 L91 131.78 L91 124.22Z" class="tf-dim"/>
+<line x1="43" y1="118" x2="63" y2="138" class="ts-ink" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+<line x1="43" y1="138" x2="63" y2="118" class="ts-ink" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+<text class="tf-dim" x="53" y="158" font-size="13" text-anchor="middle">continuum limit</text>
+<text class="tf-dim" x="53" y="176" font-size="13" text-anchor="middle">not proved here</text>
+<circle cx="218" cy="132" r="92" class="ts-dim tf-panel" stroke-width="1.8"/>
+<path d="M161.36 59.5 L162.21 60.57 L163.07 61.61 L163.96 62.64 L164.86 63.66 L165.79 64.65 L166.73 65.63 L167.69 66.59 L168.67 67.53 L169.67 68.46 L170.69 69.36 L171.72 70.25 L172.77 71.11 L173.83 71.96 L174.91 72.78 L176.01 73.58 L177.12 74.37 L178.24 75.13 L179.38 75.87 L180.53 76.59 L181.7 77.29 L182.88 77.96 L184.07 78.62 L185.27 79.25 L186.49 79.85 L187.72 80.44 L188.96 81 L190.2 81.54 L191.46 82.05 L192.73 82.54 L194.01 83.01 L195.29 83.45 L196.59 83.86 L197.89 84.26 L199.19 84.62 L200.51 84.97 L201.83 85.29 L203.16 85.58 L204.49 85.85 L205.83 86.09 L207.17 86.31 L208.51 86.5 L209.86 86.67 L211.21 86.81 L212.57 86.92 L213.93 87.01 L215.28 87.08 L216.64 87.12 L218 87.13 L219.36 87.12 L220.72 87.08 L222.07 87.01 L223.43 86.92 L224.79 86.81 L226.14 86.67 L227.49 86.5 L228.83 86.31 L230.17 86.09 L231.51 85.85 L232.84 85.58 L234.17 85.29 L235.49 84.97 L236.81 84.62 L238.11 84.26 L239.41 83.86 L240.71 83.45 L241.99 83.01 L243.27 82.54 L244.54 82.05 L245.8 81.54 L247.04 81 L248.28 80.44 L249.51 79.85 L250.73 79.25 L251.93 78.62 L253.12 77.96 L254.3 77.29 L255.47 76.59 L256.62 75.87 L257.76 75.13 L258.88 74.37 L259.99 73.58 L261.09 72.78 L262.17 71.96 L263.23 71.11 L264.28 70.25 L265.31 69.36 L266.33 68.46 L267.33 67.53 L268.31 66.59 L269.27 65.63 L270.21 64.65 L271.14 63.66 L272.04 62.64 L272.93 61.61 L273.79 60.57 L274.64 59.5" class="ts-violet" stroke-width="3" stroke-linejoin="round" fill="none"/>
+<path d="M274.64 59.5 L269.45 55.73 L264 52.33 L258.33 49.31 L252.46 46.7 L246.43 44.5 L240.26 42.73 L233.98 41.4 L227.62 40.5 L221.21 40.06 L214.79 40.06 L208.38 40.5 L202.02 41.4 L195.74 42.73 L189.57 44.5 L183.54 46.7 L177.67 49.31 L172 52.33 L166.55 55.73 L161.36 59.5" class="ts-cyan" stroke-width="4.2" stroke-linejoin="round" fill="none"/>
+<text class="tf-cyan" x="218" y="30" font-size="16" text-anchor="middle" font-weight="600"><tspan font-style="italic">A</tspan></text>
+<text class="tf-violet" x="218" y="109.13" font-size="16" text-anchor="middle" font-weight="600"><tspan font-style="italic">γ</tspan><tspan dy="0.28em" font-size="72%">A</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim" x="218" y="206" font-size="13" text-anchor="middle">continuum</text>
+<rect x="157" y="246" width="122" height="21" class="ts-violet tf-violet" stroke-width="1.2" fill-opacity="0.12"/>
+<text class="tf-violet tr-fig-mono" x="164" y="262" font-size="12" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">RT · literature</text>
+</svg>
 </svg>
