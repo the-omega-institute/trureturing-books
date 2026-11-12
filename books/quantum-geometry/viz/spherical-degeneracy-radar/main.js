@@ -229,10 +229,10 @@
     const bits = S.scene === 'address' ? `φ = ${fix(t / DEG, 0)}°` : S.scene === 'rotor' ? L(`第 ${fix(t, 2)} 步`, `hop ${fix(t, 2)}`) : S.scene === 'test' ? `α = ${fix(t / DEG, 0)}°` : `γ = ${fix(t / DEG, 0)}°`;
     $('hudSub').innerHTML = `${bits} · <span class="c-cy">${L('一次读', 'once reads')} ${fix(ra, 3)}</span> · <span class="c-cy">${L('两次读', 'twice reads')} ${fix(rb, 3)}</span>`;
     const LEG = {
-      address: [['vi', L('极轴 ±e₃', 'polar axis ±e₃')], ['mg', L('第二次转动扫过的横向面', 'the side turn and its sweep')], ['cy', L('影子；虚线：读数相同的盲圈', 'shadows; dashed: the blind circle')], ['am', L('观察者', 'observer')]],
+      address: [['vi', L('极轴 ±e₃', 'polar axis ±e₃')], ['mg', L('第二次转动扫过的横向面', 'the side turn and its sweep')], ['cy', S.trail ? L('影子；虚线：读数相同的盲圈；淡线：走过的盲圈', 'shadows; dashed: the blind circle; faint: earlier ones') : L('影子；虚线：读数相同的盲圈', 'shadows; dashed: the blind circle')], ['am', L('观察者', 'observer')]],
       rotor: [['dm', L('实线一步、虚线两步', 'solid one hop, dashed two')], ['mg', L('两面小旗的夹角', 'angle between the flags')], ['vi', L('差旋子 D', 'difference rotor D')], ['am', L('观察者', 'observer')]],
       test: [['dm', L('赤道的两个像：实线一步、虚线两步', 'images of the equator: solid one hop, dashed two')], ['mg', L('s₁ 与 s₂ 之差', 's₁ minus s₂')], ['cy', L('影子；虚线：盲圈', 'shadows; dashed: blind circle')], ['am', L('观察者', 'observer')]],
-      frames: [['dm', L('转过 γ 的标架与它的两个像', 'the frame turned by γ and its images')], ['mg', L('s₁ 与 s₂ 之差', 's₁ minus s₂')], ['cy', L('虚线：盲圈；淡线：走过的盲圈', 'dashed: blind circle; faint: earlier ones')], ['am', L('观察者', 'observer')]]
+      frames: [['dm', L('转过 γ 的标架与它的两个像', 'the frame turned by γ and its images')], ['mg', L('s₁ 与 s₂ 之差', 's₁ minus s₂')], ['cy', S.trail ? L('虚线：盲圈；淡线：走过的盲圈', 'dashed: blind circle; faint: earlier ones') : L('虚线：盲圈', 'dashed: blind circle')], ['am', L('观察者', 'observer')]]
     }[S.scene];
     $('legend').innerHTML = LEG.map(([k, s]) => `<span><i class="sw ${k}"></i>${s}</span>`).join('');
     return X;
