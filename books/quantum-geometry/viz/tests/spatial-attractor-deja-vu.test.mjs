@@ -93,6 +93,10 @@ check('the arcs do not coincide: no passage of one round goes through the same p
 check('the two rounds are out of step at the end', s.gap > 1, String(s.gap));
 await pick('return'); s = await state();
 check('RETURN: stopped at t = 22 with both rounds past the ruin', near(s.t, 22) && s.counts[0] >= 1 && s.counts[1] >= 1 && s.cos > 0.97 && /方向夹角/.test(await page.textContent('#hudSub')));
+{ // the card's caption reads the angle off the line above the figure and says its cosine is close to 1
+  const want = await expectedReturn(s), ang = want && Math.acos(dot3(unitF(want.a.x), unitF(want.b.x))) * 180 / Math.PI;
+  check('RETURN: the line above the figure prints the angle of the latest return, and its cosine (recomputed here) is above 0.99', want && (await page.textContent('#hudSub')).includes(`${ang.toFixed(1)}°`) && Math.cos(ang * Math.PI / 180) > 0.99, JSON.stringify([ang, await page.textContent('#hudSub')]));
+}
 s = await seek(0.5); check('before either round has passed, no inner product is shown', s.cos === null && (await page.textContent('#roKey')).trim() === '—');
 await pick('forget'); const sf = await seek(40);
 check('FORGET: other starts (seed 3), the same parameters, and again both rounds pass by the ruin', sf.seed === 3 && sf.rho === 28 && dist(sf.starts[0], s.starts[0]) > 1 && sf.counts[0] >= 1 && sf.counts[1] >= 1 && sf.cos > 0.9, JSON.stringify([sf.counts, sf.cos]));
@@ -136,9 +140,21 @@ check('ρ = 160: the greatest exponent is zero and the estimate is 1, a closed l
 await pick('fixed'); s = await seek(40);
 const r14 = Math.sqrt(BETA * 13), fps = [[r14, r14, 13], [-r14, -r14, 13]];
 check('FIXED: at ρ = 14 each round ends in one of the two fixed points (±√(β(ρ−1)), ±√(β(ρ−1)), ρ−1)', s.rho === 14 && s.now.every((q) => Math.min(dist(q, fps[0]), dist(q, fps[1])) < 1e-3) && f(fps[0], 14).every((v) => Math.abs(v) < 1e-12), JSON.stringify(s.now));
+// the caption: the parameter makes the end a point; the start decides which of the two. Each start is integrated here on
+// its own to t = 40, and the cyan round k ends at C₋ while the magenta round k+1 ends at C₊
+const endOf = (k) => run(s.starts[k], 4000, 14), nameOf = (q) => (dist(q, fps[0]) < dist(q, fps[1]) ? 'C₊' : 'C₋');
+check('FIXED: the two starts end in different fixed points, cyan (round k) at C₋ and magenta (round k+1) at C₊ (integrated here)', [0, 1].every((k) => dist(endOf(k), s.now[k]) < 1e-6) && nameOf(endOf(0)) === 'C₋' && nameOf(endOf(1)) === 'C₊', JSON.stringify(s.now));
 await pick('cycle'); s = await seek(40);
 let loopGap = 1e9; for (let i = 3500; i <= 4000; i++) { const q = await D((ii) => window.ATTRACTOR_DEBUG.point(0, ii), i); loopGap = Math.min(loopGap, dist(q, s.now[1])); }
 check('CYCLE: at ρ = 160 the second round ends on the loop the first one is tracing', s.rho === 160 && loopGap < 1.5, String(loopGap));
+// the card draws the transient before t = 30 faint; the bright part, t ∈ [30, 40], is the closed loop: every point of
+// round k+1 there lies near round k there, and round k itself comes back (within 1.5) to where it was at t = 30
+{ const seg = await D(() => [0, 1].map((k) => { const out = []; for (let i = 3000; i <= 4000; i++) out.push(window.ATTRACTOR_DEBUG.point(k, i)); return out; }));
+  const farthest = Math.max(...seg[1].map((q) => Math.min(...seg[0].map((p) => dist(p, q)))));
+  const back = Math.min(...seg[0].slice(200).map((p) => dist(p, seg[0][0])));
+  check('CYCLE: the card fades everything before t = 30, and after that both rounds run on one closed loop', s.settle === 30 && farthest < 3 && back < 3, JSON.stringify([s.settle, farthest, back])); }
+await page.click('#rhoChips [data-rho="28"]'); s = await state();
+check('leaving the card (another ρ) draws the whole orbit bright again', s.settle === 0 && s.preset === null);
 
 /* ---------- camera, keyboard, language ---------- */
 await pick('butterfly'); await seek(40);

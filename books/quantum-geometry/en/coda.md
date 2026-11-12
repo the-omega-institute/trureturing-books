@@ -90,11 +90,7 @@ In our self-referential geometric model (`MODEL`), the answer resides in the ope
 - **What forgetting never erases** is the observer's **intrinsic geometric parameter tuple** as the measuring operator $\psi(\cdot)$ itself (the intrinsic inclination of the verb `liáng`)—its characteristic orthogonal deflection angle, aesthetic resonance ratio, and topological chirality preference when comparing states inside the compatible space!
 
 ::: {.viz src="spatial-attractor-deja-vu" preset="fixed" height="500"}
-**Other parameters: into a point.** Change $\rho$ to $14$: the cyan and magenta rounds each spiral into a fixed point and then stay, and the pair of wings is gone. Where an orbit ends up is decided by the parameters of the equation, not by its start; reading the parameters as an "intrinsic inclination" is an interpretive model (`MODEL`).
-:::
-
-::: {.viz src="spatial-attractor-deja-vu" preset="cycle" height="500"}
-**$\rho = 160$: one closed loop.** Both rounds land on the same closed loop and tread the same place on every lap. This is a one-dimensional attractor: it repeats, with no room to spare, the "rigid 1D closed loop" of item 1 in Section 3 below (`MODEL`).
+**Other parameters: into a point.** Change $\rho$ to $14$: the cyan and magenta rounds each spiral into a fixed point and then stay, and the pair of wings is gone. The parameters decide that the end is a point rather than the wings; the start decides only which of the two points: here cyan falls into $C_-$ and magenta into $C_+$; reading the parameters as an "intrinsic inclination" is an interpretive model (`MODEL`).
 :::
 
 Before unfolding this philosophical picture into cross-round recurrence on fractal sheets, we enclose the three classical continuous dynamical-systems theorems invoked as an analogy—the Lorenz strange attractor, its SRB physical measure, and Poincaré recurrence—inside a dedicated literature remark:
@@ -121,10 +117,6 @@ The general mechanism in item 2, that time averages converge almost everywhere t
 
 ::: {.viz src="spatial-attractor-deja-vu" preset="forget" height="500"}
 **Forget the start, land on the same wings.** Two orbits of the Lorenz system at $(\sigma, \rho, \beta) = (10, 28, 8/3)$: cyan is round $k$ and magenta round $k+1$, with distant starts (the two rings) and the same parameters. After a short wander both land on the same pair of wings; the small amber dots mark each passage through the neighbourhood of the “ruin” (the amber circle). Reading an orbit as “a round” is an interpretive model (`MODEL`).
-:::
-
-::: {.viz src="spatial-attractor-deja-vu" preset="dimension" height="500"}
-**A little more than a surface.** The three Lyapunov exponents are estimated along one long orbit (cyan); the readout above the figure gives $\lambda_1 \approx 0.9$, $\lambda_2 \approx 0$, $\lambda_3 \approx -14.6$ and the Kaplan–Yorke estimate $D_{\mathrm{KY}} \approx 2.06$ (a numerical estimate, not a theorem).
 :::
 
 **How precise can “forgetting the start” be made?** In the “forget the start” card above, the cyan and magenta orbits begin far apart and still land on the same pair of wings. “Landing in the same place” can mean two things. Pointwise, it would mean the two orbits end up close together. A chaotic system does exactly the opposite: $\lambda_1 > 0$ amplifies any small difference in the starts exponentially. Statistically, it means the two orbits spend the same fractions of time in each region. Item 2 of [@rem-coda-lorenz-srb-literature] is about the statistical sense. The general mechanism behind it has nothing to do with the Lorenz equations, and it is frozen as the following theorem.
@@ -206,7 +198,17 @@ The two rings in the “forget the start” card are not on the attractor, and a
 In our philosophical and geometric interpretation (`MODEL`), borrowing the strange-attractor picture recorded in [@rem-coda-lorenz-srb-literature] as a dynamical metaphor—clearing surface trajectory records while preserving the operator's intrinsic parameters—reconciles fated return with free agency:
 
 1. **Were a life trajectory a rigid 1D closed loop ($D = 1$, `MODEL`)**: the observer would be trapped in a mechanical cycle—stepping on the exact same point at the exact same relative phase in every round with zero transverse slack ($\det G = 0$);
+
+::: {.viz src="spatial-attractor-deja-vu" preset="cycle" height="500"}
+**$\rho = 160$: one closed loop.** The transient before $t = 30$ is drawn faint; the bright part is the last ten units of time, in which both rounds run on the same closed loop (the cyan one hidden under the magenta, all but its current point) and tread the same place on every lap. This is a one-dimensional attractor: it repeats, with no room to spare, the "rigid 1D closed loop" of item 1 above (`MODEL`).
+:::
+
 2. **In the geometric metaphor (`MODEL`) borrowing the fractal transverse-sheet picture of [@rem-coda-lorenz-srb-literature]**: recurring visits to a familiar landmark neighborhood coexist with non-repeating novelty across rounds—bringing the observer back repeatedly to the same landmark neighborhood while stepping onto a fresh sheet at every visit;
+
+::: {.viz src="spatial-attractor-deja-vu" preset="dimension" height="500"}
+**A little more than a surface.** The three Lyapunov exponents are estimated along one long orbit (cyan); the readout above the figure gives $\lambda_1 \approx 0.9$, $\lambda_2 \approx 0$, $\lambda_3 \approx -14.6$ and the Kaplan–Yorke estimate $D_{\mathrm{KY}} \approx 2.06$ (a numerical estimate, not a theorem).
+:::
+
 3. **Déjà Vu as Cross-Round Pairwise Inner-Product Resonance (`MODEL`)**:
    Translating this into the author's geometric metaphor: when an observer suddenly halts on the worn stone steps of an ancient citadel, struck by the tremor *"I have stood in this exact spot before,"* if the local basin geometry steers the observer's attention vectors in rounds $k$ and $k+1$ into nearly parallel tangent orientations ($\delta\theta \to 0$) within $\mathcal{U}_\epsilon(\mathbf{x}_{\mathrm{ruin}})$, then the **pairwise inner-product projection (`liáng`)** between the present attention state $\mathbf{\Psi}^{(k+1)}$ and the prior imprint $\mathbf{\Psi}^{(k)}$ satisfies
 
@@ -217,7 +219,7 @@ In our philosophical and geometric interpretation (`MODEL`), borrowing the stran
    In this interpretive model (`MODEL`), **Déjà vu** represents the high-amplitude cross-round inner-product resonance triggered when the same observer operator re-enters a spatial attractor neighborhood with nearly collinear attention orientation ($\delta\theta \to 0$).
 
 ::: {.viz src="spatial-attractor-deja-vu" preset="return" height="500"}
-**Nearly parallel in passing.** Stopped at $t = 22$: both rounds have passed the neighbourhood of the ruin (the amber circle). The arcs along which they passed do not coincide, yet their directions are nearly parallel: the line above the figure gives the angle at the latest return (a passage of each round, the two points less than $\varepsilon$ apart), the short cyan and magenta arrows are the unit tangents there, and their inner product $\cos\delta\theta = \hat{\mathbf{v}}_1\cdot\hat{\mathbf{v}}_2$ is close to $1$ (a number computed on the page). Reading this as déjà vu is an interpretive model (`MODEL`).
+**Nearly parallel in passing.** Stopped at $t = 22$: both rounds have passed the neighbourhood of the ruin (the amber circle). The arcs along which they passed do not coincide, yet their directions are nearly parallel: the line above the figure gives the angle $\delta\theta$ at the latest return (a passage of each round, the two points less than $\varepsilon$ apart), only a few degrees, and the short cyan and magenta arrows are the unit tangents there; their inner product $\cos\delta\theta = \hat{\mathbf{v}}_1\cdot\hat{\mathbf{v}}_2$ is therefore close to $1$ (a number computed on the page). Reading this as déjà vu is an interpretive model (`MODEL`).
 :::
 
 ::: {.viz src="spatial-attractor-deja-vu" height="640"}
@@ -252,6 +254,11 @@ In the formal architecture of `trureturing`, the mathematical primitives underly
 
      defines the full window-selected model set $\operatorname{modelSet}(\operatorname{goldenWindow}) = \{y \in \mathbb{R} \mid \exists x \in \mathrm{GoldenInt},\, \operatorname{embedding}(x) = y \wedge \operatorname{embedding}(\operatorname{conj} x) \in \operatorname{goldenWindow}\}$ (matching `goldenCutAndProjectSet`), which [`exists_golden_modelSet_delone`](lean:D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone) certifies as a **Delone set in $\mathbb{R}$ with packing radius $1/2$ and covering radius $3$**. Its uniform discrete separation rests on the **Reciprocal Norm Separation Theorem** [`norm_separation`](lean:D5/S3/Fourier/GoldenModelSetDelone.norm_separation): for any distinct golden integers $u \neq v \in \mathrm{GoldenInt}$ and any real bound $B$, $|\operatorname{embedding}(\operatorname{conj} u) - \operatorname{embedding}(\operatorname{conj} v)| \le B$ implies $1 \le |\operatorname{embedding}(u) - \operatorname{embedding}(v)| \cdot B$.
    - **Natural-Number $\beta$-Expansion Range `goldenModelSet` and the Beatty Observer Route**: The natural-number golden expansion $\operatorname{betaGolden} : \mathbb{N} \to \mathrm{GoldenInt}$ has range $\operatorname{goldenModelSet} = \operatorname{range}(\operatorname{betaGolden})$, whose physical image is proved to be a subset of the full cut-and-project set, $\operatorname{embedding} '' \operatorname{goldenModelSet} \subseteq \operatorname{goldenCutAndProjectSet}$ ([`golden_model_set_subset_cut_and_project`](lean:D5/S1/Deficit/ModelSet/GoldenCutAndProject.golden_model_set_subset_cut_and_project); the reverse inclusion does not hold because elements such as $-\varphi$ hit the right window endpoint with negative $b$-coordinate). Moreover, `goldenModelSet` decomposes into disjoint self-similar branches $\operatorname{phiBranch} \cup \operatorname{phiSquaredBranch}$ ([`golden_model_set_self_similar`](lean:D5/S1/Deficit/ModelSet/GoldenModelSetSelfSimilar.golden_model_set_self_similar)), its prefix sets `goldenPrefix n` have asymptotic counting density converging to $1/\sqrt{5}$ ([`golden_model_set_density`](lean:D5/S1/Deficit/ModelSet/GoldenModelSetDensity.golden_model_set_density)), and the physical observer route $\beta(v) = \sqrt{5}\,v + \operatorname{remainder}(v)$ satisfies $\operatorname{remainder}(v) \in (\varphi - 2, \varphi - 1]$ with two-letter step spacings $\beta(v+1) - \beta(v) \in \{\varphi, \varphi^2\}$ ([`golden_observer_route_w_c1`](lean:D5/S1/Deficit/Beatty/GoldenObserverRoute.golden_observer_route_w_c1)).
+
+::: {.viz src="golden-cut-observer" preset="cut" height="500"}
+**A window cuts out a chain of points.** The golden integers $a + b\varphi$ drawn as lattice points: across, the number itself; up, its conjugate $a + b\psi$. The amber window $[\varphi - 2, \varphi - 1]$ selects the cyan points, and projected to the line below, neighbours are $\varphi$ or $\varphi^2$ apart; the closed window has a lattice point on each of its two ends (magenta), so one extra gap of length $1$ appears left of the origin. The green rings are the golden expansions $\beta(n)$ of the natural numbers, which Lean verifies to lie in this window.
+:::
+
 2. **Higher-Dimensional Cut-and-Project Model and Window Phase Parameterization (`MODEL`)**:
    Extending the 1D kernel theorems above to 3D physical space (whose 6D icosahedral quasicrystal literature background is enclosed in [@rem-coda-quasicrystal-empire-literature] below), our interdisciplinary geometric model (`MODEL`) pictures the timeless cosmic background as a higher-dimensional mother lattice $\mathbb{Z}^D \subset E_\parallel \oplus E_\perp$ and parameterizes an individual observer's perspective by the golden irrational slope $\varphi$ together with an **internal orthogonal window phase anchor $u \in E_\perp$**, slicing out the model set $\Lambda_u = \{\pi_\parallel(z) \mid z \in \mathbb{Z}^D,\; \pi_\perp(z) \in W + u\}$ via the shifted window $W + u \subset E_\perp$.
 
@@ -264,10 +271,6 @@ In the formal architecture of `trureturing`, the mathematical primitives underly
 
 ::: {.figure src="coda-no-eleven"}
 **The Zeckendorf automaton accepts exactly the words with no adjacent `11`.** Of the sixteen four-letter binary words, the eight cyan ones have no two adjacent $1$s and are accepted; each of the eight magenta ones contains an adjacent pair $11$ (the first one is boxed) and is rejected. The acceptance condition is $\operatorname{NoAdjacentOnes}(w)$ from item 3 of [@thm-coda-golden-cut-observer-cassini].
-:::
-
-::: {.viz src="golden-cut-observer" preset="cut" height="500"}
-**A window cuts out a chain of points.** The golden integers $a + b\varphi$ drawn as lattice points: across, the number itself; up, its conjugate $a + b\psi$. The amber window $[\varphi - 2, \varphi - 1]$ selects the cyan points, and projected to the line below, neighbours are $\varphi$ or $\varphi^2$ apart; the closed window has a lattice point on each of its two ends (magenta), so one extra gap of length $1$ appears left of the origin. The green rings are the golden expansions $\beta(n)$ of the natural numbers, which Lean verifies to lie in this window.
 :::
 
 ### 2. Philosophical Interpretation Model (`MODEL`): What Is "the Same Soul" vs. "a Single Finite Life and Forgetting"? {#sec-coda-trureturing-soul-vs-lifetime}
@@ -336,6 +339,11 @@ Finally, let us state the kernel-verified **Fibonacci–Cassini Norm Identity** 
    $$
 
    Look at the right-hand side of Cassini's identity (alongside the rational-slope convergence backdrop recorded in Item 3 of [@rem-coda-quasicrystal-empire-literature]): **$(-1)^{k+1} = \pm 1$**! It exhibits the **same $\pm 1$ minimal unit-norm arithmetic seam** seen in Chapter 29 in the Lean-verified Pell remainder of Hippasus, $P_{k+2}P_k - P_{k+1}^2 = (-1)^{k+1}$ ([@thm-ch29-silver-pell-remainder]), and the Lean-verified mod-4 prime splitting ([@thm-ch29-face-prime-two-squares]), as well as in that chapter's literature remark on the branch points of the congruent-number cubic curve ([@rem-ch29-elliptic-torus-literature])!
+
+::: {.viz src="golden-cut-observer" preset="cassini" height="500"}
+**The area is always $\pm 1$.** The same lattice again. The powers $\varphi^2, \varphi^3, \dots$ lie above the horizontal axis (cyan) and below it (magenta) in turn, on the hyperbolas $x \cdot x' = \pm 1$; the rectangle each spans with the origin grows longer and flatter, yet its area is exactly $1$. The filled one is $\varphi^5 = 3 + 5\varphi$: $F_4 F_6 - F_5^2 = 3 \cdot 8 - 5^2 = -1$. Between the two hyperbolas there is no lattice point but the origin.
+:::
+
 2. **Torus Observation-Window Bounded-Gap Return Theorem ([`TorusObservationWindowReturns.result`](lean:D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result), `LEAN ✓`)**:
    In `trureturing`, for any finite index type $I$, any torus element $g : I \to \mathrm{Circle}$, and the compact topological closure $G = \overline{\langle g\rangle}$ of the cyclic subgroup generated by $g$ with Haar probability measure $\mu$ and generator $a = \langle g, \dots\rangle \in G$, every continuous real observable $h \in C(G, \mathbb{R})$ and every observed sequence $e : \mathbb{N} \to \mathbb{R}$ with vanishing observation error $\lim_{n\to\infty}(e(n) - h(a^n)) = 0$ satisfy:
    - The support of the pushforward measure $\operatorname{Measure.map} h\,\mu$ equals $\operatorname{range}(h)$;
@@ -347,10 +355,6 @@ Finally, let us state the kernel-verified **Fibonacci–Cassini Norm Identity** 
 
 3. **Geometric Interpretation of Cross-Round Return and Déjà Vu (`MODEL`)**:
    In our philosophical synthesis (`MODEL`), the alternating sign $(-1)^{k+1}$ signifies that successive rational approximations approach the irrational golden direction from alternating sides without collapsing onto a periodic loop, while bounded-gap torus recurrence guarantees that any target region corresponding to an open observation window $(u_1, u_2)$ meeting $\operatorname{range}(h)$ (or a deep-interior window neighborhood with positive safety margin $d_{\partial} > 0$) is visited repeatedly within bounded gaps $M$ and positive eventual frequency—providing the mathematical inspiration for why the same soul returns to familiar spatial attractors and experiences the cross-round inner-product resonance $\cos\delta\theta \to 1$ of Déjà vu.
-
-::: {.viz src="golden-cut-observer" preset="cassini" height="500"}
-**The area is always $\pm 1$.** The same lattice again. The powers $\varphi^2, \varphi^3, \dots$ lie above the horizontal axis (cyan) and below it (magenta) in turn, on the hyperbolas $x \cdot x' = \pm 1$; the rectangle each spans with the origin grows longer and flatter, yet its area is exactly $1$. The filled one is $\varphi^5 = 3 + 5\varphi$: $F_4 F_6 - F_5^2 = 3 \cdot 8 - 5^2 = -1$. Between the two hyperbolas there is no lattice point but the origin.
-:::
 
 ::: {.viz src="golden-cut-observer" preset="returns" height="500"}
 **Back in the window with bounded gaps.** A point on the circle turns by the golden angle at each step, and its height $\cos 2\pi n\varphi$ is plotted on the right. The amber band is the observation window $(0.2, 0.8)$ and cyan marks the steps inside it: $21$ visits in the first $89$ steps, never more than $7$ steps apart (magenta). This is a numerical illustration over finitely many steps; that such a bound exists for all $n$ is the theorem verified in Lean.
@@ -376,7 +380,7 @@ Part 1 derives injectivity of `minkowskiEmbedding` and the model-set characteriz
 :::
 
 ::: {.viz src="golden-cut-observer" preset="narrow" height="500"}
-**A narrow window: longer waits, still bounded.** Narrow the amber observation window to $(0.45, 0.55)$: in the first $233$ steps only $8$ cyan steps fall inside, and the longest gap, marked in magenta, stretches to $48$ steps, yet the gaps are still bounded. In the plot further down the page, the cyan share of steps inside stays no lower than the dashed magenta $1/(M + 1)$. Finitely many steps are a numerical demonstration; bounded returns for all $n$ are item 4 of the theorem above.
+**A narrow window: longer waits, still bounded.** Narrow the amber observation window to $(0.45, 0.55)$: in the first $233$ steps only $8$ cyan steps fall inside, and the longest gap, marked in magenta, stretches to $48$ steps, yet the gaps are still bounded. Finitely many steps are a numerical demonstration; bounded returns for all $n$ are item 4 of the theorem above.
 :::
 
 **Gaps in time, gaps in space.** The cards “back in the window with bounded gaps” and “a narrow window” above look at time: how many steps the orbit takes to come back to the window. Put the first $N$ points of the same golden-angle orbit on the circle together and the question is about space: how long is the arc between neighbouring points? The answer is strikingly tidy, and not only for the golden angle.

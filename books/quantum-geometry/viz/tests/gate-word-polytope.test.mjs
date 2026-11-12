@@ -5,6 +5,7 @@
 // as (2 Re ā b, 2 Im ā b, |a|² − |b|²). It finds the covering radius by enumerating spherical circumcentres of triples
 // (L ≤ 9) or by a grid with local refinement (larger L), and checks the page's hull face by face against all points.
 // It reads the page through window.GATE_DEBUG and never calls the page's own model.
+import fs from 'node:fs';
 import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'gate-word-polytope';
@@ -151,6 +152,25 @@ nn = nearestOf(ORBIT[10].map((o) => o.p), tgt);
 check('NEAREST: θ = 110°, φ = 200° at L = 10: 17.04°, gap 0.0439, by the word HTHTTTTTH', vclose(s.target, tgt, 1e-12) && close(s.nearest.angle, nn.angle, 1e-9) && close(nn.angle, 17.04, 0.005) && close(s.gap, 1 - nn.h, 1e-12) && close(s.gap, 0.0439, 0.00005) && s.nearest.word === 'HTHTTTTTH' && vclose(apply(s.nearest.word), nn.p, 1e-12));
 await pick('shrink'); s = await seek(20);
 check('SHRINK: L = 20, 971 points, worst direction, ε = 9.10° > 0', s.L === 20 && s.count === 971 && s.mode === 'worst' && close(s.eps, 9.10, 0.005));
+
+// SHRINK, the cited still: the staircase ε_L stands on the stage beside the sphere, and the caption's numbers are its numbers
+{
+  const shot = await T.newPage();
+  for (const lang of ['zh', 'en']) {
+    await T.goto(BOOK, ID, `?shot=1&lang=${lang}&preset=shrink`, shot); await settle(shot);
+    const r = await shot.evaluate(() => {
+      const st = window.GATE_DEBUG.state, lab = `${st.eps.toFixed(2)}°`;
+      return { st, label: [...document.querySelectorAll('#stage .tags .tag')].some((e) => !e.hidden && e.textContent.trim() === lab) };
+    });
+    const st = r.st, md = fs.readFileSync(new URL(`../../${lang}/ch16-qsvt-walks-and-compilation.md`, import.meta.url), 'utf8');
+    const cap = (/::: \{\.viz src="gate-word-polytope" preset="shrink"[^}]*\}\n([\s\S]*?)\n:::/.exec(md) || [, ''])[1];
+    const flat = st.epsAll.some((e, l) => l > 0 && close(e, st.epsAll[l - 1], 1e-9));
+    check(`SHRINK still (${lang}): the staircase is on the stage, its bars are the test's own ε₀ … ε₂₀, and the current one is labelled`, st.chart && st.L === 20 && r.label && st.epsAll.length === 21 && st.epsAll.every((e, l) => close(e, exact[l], l <= 9 ? 1e-7 : 2e-4)));
+    const nums = [`${Math.round(exact[0])}^\\circ`, `\\varepsilon_{${st.L}} = ${st.eps.toFixed(2)}^\\circ`, `$${st.count}$`];
+    check(`SHRINK still (${lang}): the caption names 180°, ε₂₀ = ${st.eps.toFixed(2)}°, the ${st.count} points, and some layers do not shrink`, flat && nums.every((x) => cap.includes(x)), nums.filter((x) => !cap.includes(x)).join(' '));
+  }
+  await shot.close();
+}
 
 // controls
 await pick('nearest'); await seek(10);

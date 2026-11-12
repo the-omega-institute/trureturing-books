@@ -173,6 +173,7 @@ check('at N = 233 the share of visits is within 0.01 of that measure, and the lo
 const wide = s.longest;
 await pick('narrow'); s = await seek(232); h = hitsOf(233, 0.45, 0.55);
 check('NARROW: window (0.45, 0.55); fewer visits, longer waits, still at least one visit in every block of M + 1 steps', near(s.u1, 0.45) && near(s.u2, 0.55) && s.hits.join() === h.join() && h.length >= 3 && s.longest === longestOf(233, h) && s.longest > wide && h.length >= Math.floor(233 / s.longest));
+check('NARROW: the still the card stops on (N = 233) prints the visits and the longest wait computed here, and the readouts carry no green tick', s.N === 233 && (await page.textContent('#hudSub')).includes(`进入 ${h.length} 次`) && (await page.textContent('#hudSub')).includes(`任何连续 ${longestOf(233, h)} 步`) && (await D(() => document.querySelectorAll('#readouts .okmark').length)) === 0, await page.textContent('#hudSub'));
 await setRange('wc', -0.5); await setRange('ww', 0.3); s = await state(); h = hitsOf(s.N, -0.65, -0.35);
 check('the sliders move the window (here to (−0.65, −0.35)) and the visits follow', near(s.u1, -0.65) && near(s.u2, -0.35) && s.hits.join() === h.join() && s.preset === null && (await page.textContent('#oWC')).trim() === '−0.50');
 await setRange('wc', 0.9); await setRange('ww', 0.05); s = await state();
