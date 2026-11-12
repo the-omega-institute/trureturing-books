@@ -5,7 +5,8 @@
      depolarizing   (f x, f y, f z)                  f = 1 − p per step
    The rail counts steps N. At whole N the map is exactly N steps; between two whole steps the page takes the convex
    combination of the outputs of the two neighbouring whole steps. The stage draws the unit ball before (thin wire),
-   its image (cyan), two states ρ (amber) and σ (white) that start on the skin, their distance, and the fixed points.
+   its image (cyan), two states ρ (amber) and σ (white) that start on the skin, their distance, and the fixed points;
+   a map that is not a channel is drawn as a lit solid in a glass shell instead (drawSolid).
    Read-only probe for the browser suite: window.NOISE_DEBUG. */
 (() => {
   'use strict';
@@ -76,7 +77,8 @@
     canvas: $('cv'), radius: TRV.thumbMode ? 0.41 : 0.335, cy: TRV.figure ? 0.53 : 0.52,
     onChange: () => paint(),
     onPick: (ev, st) => {
-      const now = read(clock.t), d = (v) => st.near(ev, v);
+      const now = read(clock.t);
+      const d = (v) => (solidOn && solid.occluded(v, 0.02) ? 1e9 : st.near(ev, v));   // what the solid hides cannot be picked
       const dr = Math.min(d(S.rho0), d(now.rho)), ds = Math.min(d(S.sig0), d(now.sig));
       grab = Math.min(dr, ds) < 22 ? (dr <= ds ? 'rho' : 'sig') : null;
       return !!grab;
@@ -84,6 +86,94 @@
     onDrag: (ev, st) => { const r = v3.unit(st.pick(ev)); if (grab === 'rho') S.rho0 = r; else if (grab === 'sig') S.sig0 = r; touched(); },
     onDrop: () => { grab = null; }
   });
+  /* ---------- the solid stage: a map that is not a channel ----------
+     When one step breaks the north-pole criterion (λ² > a, the card T2 > 2T1), the question the page asks is which
+     part of the image lies outside the ball; a wire outline cannot tell inside from outside there. For that case only,
+     the stage draws with kit.solid, under the same camera: the unit ball as a glass shell, its image as a lit opaque
+     solid, cyan inside the ball and magenta where it lies outside, the trace of the solid on the skin as a thin white
+     line. Marks sit on the solid and are hidden where it hides them. Every other state keeps the wire stage above. */
+  const solid = kit.solid($('stage'), { canvas: $('sv'), radius: TRV.thumbMode ? 0.41 : 0.335, cy: TRV.figure ? 0.53 : 0.52, rotate: false, onChange: () => paint() });
+  let solidOn = false;
+  /** Where the image lies outside the unit ball: |F|² − 1 = (a² − λ²) z² + 2ah z + h² + λ² − 1 > 0 for the pre-image
+      height z of a point of the sphere. For the amplitude family z = 1 is a root (the fixed north pole), so the part
+      outside is the image of the cap z0 < z ≤ 1. Returns z0, or null when nothing lies outside. */
+  function capOf(m) {
+    const A = m.a * m.a - m.lam * m.lam, B = 2 * m.a * m.h, C = m.h * m.h + m.lam * m.lam - 1;
+    if (farthest(m).r <= 1 + 1e-9 || A >= -1e-12) return null;
+    const disc = Math.sqrt(Math.max(0, B * B - 4 * A * C));
+    return kit.clamp(Math.min((-B + disc) / (2 * A), (-B - disc) / (2 * A)), -1, 1);
+  }
+  const NU = 96, K = 18;
+  /** The image solid, sampled on columns of the azimuth (run backwards, so that the grid's normals point outwards); in
+      every column the polar angle runs in two stretches that meet at the polar angle θ0 of the cap, so that the
+      magenta edge is exact. A half-axis thinner than a few pixels is drawn at that thickness (no zero-thickness sheet);
+      when both are, the image is one point and the dots show it. */
+  function drawImage(sc, m) {
+    const eps = 3.5 / sc.unit, lam = Math.max(m.lam, eps), a = Math.max(m.a, eps);
+    if (m.lam < eps && m.a < eps) return { z0: null };
+    const z0 = capOf(m), th0 = z0 == null ? 0 : Math.acos(z0), rows = [];
+    for (let j = 0; j <= 2 * K + 1; j++) rows.push([]);
+    for (let i = 0; i <= NU; i++) {
+      const ph = -2 * Math.PI * i / NU, at = (th) => [lam * Math.sin(th) * Math.cos(ph), lam * Math.sin(th) * Math.sin(ph), a * Math.cos(th) + m.h];
+      for (let j = 0; j <= K; j++) rows[j].push(at(th0 * j / K));
+      for (let j = 0; j <= K; j++) rows[K + 1 + j].push(at(th0 + (Math.PI - th0) * j / K));
+    }
+    const nv = 2 * K + 1;
+    sc.surface('image', rows, { colors: [P.cyan, P.magenta], range: [0, 1], value: (u, v) => (z0 != null && Math.round(v * nv) <= K ? 1 : 0) });
+    return { z0 };
+  }
+  function drawSolid(on, now) {
+    const sc = solid, m = now.m;
+    if (!on) { if (solidOn) { sc.begin(); sc.end(); solidOn = false; } return; }
+    solidOn = true;
+    Object.assign(sc.cam, { yaw: stage.cam.yaw, pitch: stage.cam.pitch, zoom: stage.cam.zoom });
+    sc.begin();
+    sc.glass('ball', [0, 0, 0], 1, { color: P.ink, alpha: 0.045, rim: 0.32 });
+    const eq = []; for (let i = 0; i <= 96; i++) { const t = 2 * Math.PI * i / 96; eq.push([Math.cos(t), Math.sin(t), 0]); }
+    sc.line(eq, { color: P.faint, width: 1, alpha: 0.7 });
+    sc.line([[0, 0, -1.18], [0, 0, 1.18]], { color: P.faint, width: 1, alpha: 0.9 });
+    sc.line([[-1.12, 0, 0], [1.12, 0, 0]], { color: P.faint, width: 1, alpha: 0.6 });
+    sc.tag('k0', [0, 0, 1.08], '|0⟩', 'num', now.escapes ? { dx: -50, dy: -6 } : { dx: -22 });
+    const img = drawImage(sc, m);
+    // the trace of the solid on the skin: the circle at the image height a z0 + h
+    if (img.z0 != null) {
+      const zc = m.a * img.z0 + m.h, rc = m.lam * Math.sqrt(Math.max(0, 1 - img.z0 * img.z0)) * 1.004, ring = [];
+      for (let i = 0; i <= 120; i++) { const t = 2 * Math.PI * i / 120; ring.push([rc * Math.cos(t), rc * Math.sin(t), zc]); }
+      sc.line(ring, { color: P.ink, width: 1.4, alpha: 0.95 });
+    }
+    // the fixed north pole (on the tip of the solid: always in view), and the farthest image point
+    if (S.p > 1e-9 && clock.t > 1e-9) {
+      sc.bead([0, 0, 1], { color: P.violet, r: 6.5, glow: 0.8, key: 'fix' });
+      sc.ring([0, 0, 1], { color: P.violet, r: 10.5, normal: sc.facing() });
+      sc.tag('fx', [0, 0, 1], L('不动点', 'fixed point'), 'raw c-vi', now.escapes ? { dx: 58, dy: -20, occlude: false } : { dx: 54, dy: -12, occlude: false });
+    }
+    if (now.escapes) {
+      const side = v3.unit(v3.cross([0, 0, 1], sc.facing())), z = now.far.z, w = Math.sqrt(Math.max(0, 1 - z * z));
+      const q = apply(m, [w * side[0], w * side[1], z]);
+      sc.bead(q, { color: P.magenta, r: 5.5, glow: 0.8, key: 'esc' });
+      const tight = sc.p(q)[0] + 150 > sc.W;   // a narrow stage: the label goes below the point instead of beside it
+      sc.tag('esc', q, L(`出界 ‖r‖ = ${fix(now.far.r, 3)}`, `out ‖r‖ = ${fix(now.far.r, 3)}`), 'num c-mg', tight ? { dx: -40, dy: 42, occlude: false } : { dx: 62, dy: -10, occlude: false });
+    }
+    // the two states: where they started (rings on the skin), the road travelled, where they are now (no distance:
+    // the map is not a channel)
+    const road = (v) => { const pts = [], n = Math.max(2, Math.ceil(clock.t * 24)); for (let i = 0; i <= n; i++) pts.push(apply(mapAt(clock.t * i / n), v)); return pts; };
+    if (clock.t > 1e-9) {
+      sc.line(road(S.sig0), { color: P.ink, width: 1, alpha: 0.5 });
+      sc.line(road(S.rho0), { color: P.amber, width: 1.2, alpha: 0.65 });
+      sc.line([S.rho0, S.sig0], { color: P.dim, width: 1, alpha: 0.8, dash: [4, 4] });
+    }
+    sc.ring(S.sig0, { color: P.ink, r: 5, alpha: 0.75, normal: S.sig0, key: 'sig0' });
+    sc.ring(S.rho0, { color: P.amber, r: 5.5, alpha: 0.85, normal: S.rho0, key: 'rho0' });
+    sc.bead(now.sig, { color: P.ink, r: 4.5, glow: 0.4, key: 'sig' });
+    sc.arrow([0, 0, 0], now.rho, { color: P.amber, width: 2.6, headSize: 11 });
+    sc.bead(now.rho, { color: P.amber, r: 5, glow: 0.7, key: 'rho' });
+    const pr = sc.p(now.rho), ps = sc.p(now.sig), dx = pr[0] - ps[0], dy = pr[1] - ps[1], dl = Math.hypot(dx, dy);
+    const ux = dl > 1 ? dx / dl : 1, uy = dl > 1 ? dy / dl : 0;
+    sc.tag('rho', now.rho, 'ρ', 'num c-am big', { dx: 15 * ux + 4, dy: 15 * uy - 6 });
+    sc.tag('sig', now.sig, 'σ', 'num big', { dx: -15 * ux - 4, dy: -15 * uy - 6 });
+    sc.end();
+  }
+
   /** Draw a polyline of world points, magenta (thicker) where it lies outside the unit ball and `color` inside. */
   function runs(pts, color, s) {
     let cur = [pts[0]], out = null;
@@ -96,7 +186,11 @@
     flush();
   }
   function drawStage() {
-    const st = stage, c = st.begin(), now = read(clock.t), m = now.m, D = st.facing(), thick = TRV.thumbMode ? 1.6 : 1;
+    // a map that is not a channel is drawn on the solid stage (see drawSolid); everything else on the wire stage below
+    const now = read(clock.t), solidNow = !env() && notChannel();
+    drawSolid(solidNow, now);
+    const st = stage, c = st.begin(), m = now.m, D = st.facing(), thick = TRV.thumbMode ? 1.6 : 1;
+    if (!solidNow) {
     // the unit ball before the noise
     st.sphere(1, { lat: [0], lon: 2, shade: 0.04, alpha: TRV.thumbMode ? 0.75 : 0.4 });
     st.line([0, 0, -1.18], [0, 0, 1.18], { color: P.faint, width: 1, alpha: 0.9, back: 0.5 });
@@ -162,6 +256,7 @@
     st.tag('rho', now.rho, 'ρ', 'num c-am big', { dx: 15 * ux + 4, dy: 15 * uy - 6 });
     st.tag('sig', now.sig, 'σ', 'num big', { dx: -15 * ux - 4, dy: -15 * uy - 6 });
     if (dl > 46 && !notChannel()) st.tag('T', v3.scale(v3.add(now.rho, now.sig), 0.5), `T ${fix(now.T, 3)}`, 'num', { dx: 14 * -uy, dy: 14 * ux });
+    }
     st.end();
     $('legEsc').hidden = !now.escapes;
     if (env()) {
@@ -290,12 +385,19 @@
     centre: ['强度 1 的去极化：整颗球缩成紫色的球心一点。北极的 ρ 与 +x 的 σ 落在同一处，距离为零。', 'Depolarizing at strength 1: the whole ball shrinks to the violet centre. ρ from the north pole and σ from +x land on the same spot, at distance zero.']
   };
   let booting = true;
+  const WIDE_PITCH = 0.12;
+  let camBefore = null;
   function applyPreset(id) {
     const p = PRESETS[id];
     clock.pause();
     S.scene = p.scene || 'noise';
     S.ch = p.ch; S.p = p.p; S.ratio = p.ratio; S.rho0 = at(p.rho[0], p.rho[1]); S.sig0 = at(p.sig[0], p.sig[1]);
     chChips.set(p.ch, true); fP.set(p.p); fR.set(p.ratio);
+    // T2 > 2T1 looks at the solid from lower down, so that the magenta piece shows sideways past the glass shell; the
+    // camera the reader had is given back when the next card is picked
+    const cam = stage.cam;
+    if (id === 'wide') { if (!camBefore) camBefore = { yaw: cam.yaw, pitch: cam.pitch }; cam.pitch = WIDE_PITCH; }
+    else if (camBefore) { Object.assign(cam, camBefore); camBefore = null; }
     setMax(p.max); clock.set(0);
     // a still (cover, cited figure shot) and the opening view of the full page show the card's telling frame;
     // inside a chapter the card plays once the reader has scrolled it into view; a click plays at once
@@ -318,6 +420,9 @@
     at: (N) => { const s = read(N); return { rho: s.rho, sig: s.sig, lam: s.m.lam, a: s.m.a, h: s.m.h, T: s.T, escapes: s.escapes, farthest: s.far.r }; },
     seek: (t) => { clock.pause(); clock.set(t); },
     camera: () => Object.assign({}, stage.cam),
+    /** The image as the stage draws it now: 'wire', or 'solid' (a map that is not a channel), with its half-axes and
+        centre and the pre-image height z0 above which it lies outside the ball (null: nowhere). */
+    image: () => { const m = mapAt(clock.t); return { drawn: solidOn ? 'solid' : 'wire', lam: m.lam, a: m.a, h: m.h, z0: capOf(m) }; },
     /** Viewport coordinates of a world point (for pointer tests). */
     screen: (v) => { const q = stage.p(v), b = $('cv').getBoundingClientRect(); return [b.left + q[0], b.top + q[1]]; }
   };
