@@ -2433,6 +2433,58 @@
           "gid": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result"
         }
       ]
+    },
+    {
+      "id": "gram-causal-elliptope",
+      "code": "ORTHO//ELLIPTOPE",
+      "title": "多步记忆的格拉姆窗口 · 记得越多，窗口越窄",
+      "title_en": "Gram windows with memory · the more you remember, the narrower the window",
+      "summary": "有限观察者记住 M 步历史，挑下一步就是补全一张 (M+1) × (M+1) 的格拉姆表，它必须半正定。舞台是三元格拉姆椭圆体（鼓胀的四面体 1 − x² − y² − z² + 2xyz ≥ 0）与它在历史 x = P₀·P₋₁ 处的截面：每多记一个更早的锚点，候选 Q 的 (y, z) 就多一圈品红的椭圆约束，套在上一圈里面，穿过 Q 的 z 的窗口一圈圈收窄。把 z 填到某一圈之外，按 Q, P₀, P₋₁, … 的顺序，第一个变负的顺序主子式正好指出是哪一层记忆拒绝了它。事件取在 ℝ⁶ = E∥ ⊕ E⊥ 中，M = 1 … 5 每一层都还有内部；压回三维时四根以上的向量撑不出体积，泡泡只剩边界和孤立的点。半正定判据与椭圆体的刻画是文献结果，把 G ⪰ 0 读作因果相容空间是本书第 29 章的诠释。",
+      "summary_en": "A finite observer remembering M steps of history chooses the next step by completing an (M+1) × (M+1) Gram table, which must be positive semidefinite. The stage is the three-element Gram elliptope (the swollen tetrahedron 1 − x² − y² − z² + 2xyz ≥ 0) and its slice at the history's x = P₀·P₋₁: each older anchor remembered adds a magenta ellipse constraining the candidate Q's (y, z), nested inside the last, and the window for z through Q narrows ring by ring. Fill z in outside one of the rings and, in the order Q, P₀, P₋₁, …, the first leading principal minor to turn negative says exactly which depth of memory refuses it. The events live in ℝ⁶ = E∥ ⊕ E⊥, so every depth M = 1 … 5 keeps an inside; squeezed back into three dimensions, four or more vectors span no volume and the bubble keeps only its edge and isolated points. The semidefiniteness criteria and the description of the elliptope are literature results; reading G ⪰ 0 as the causally compatible space is the interpretation of chapter 29 of this book.",
+      "path": "gram-causal-elliptope/",
+      "thumbnail": "gram-causal-elliptope/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "格拉姆矩阵",
+        "半正定",
+        "椭圆体",
+        "主子式",
+        "有限观察者",
+        "第 29 章"
+      ],
+      "tags_en": [
+        "Gram matrix",
+        "positive semidefinite",
+        "elliptope",
+        "principal minors",
+        "finite observer",
+        "chapter 29"
+      ],
+      "theory": [
+        {
+          "label": "第 29 章 · 第二层 斯宾诺莎三角形与格拉姆刚性",
+          "label_en": "Chapter 29 · Level 2, Spinoza's triangle and Gram rigidity",
+          "href": "../zh/ch29-timeless-causality-and-gram-space.html#sec-coda-hume-spinoza-gram",
+          "href_en": "../en/ch29-timeless-causality-and-gram-space.html#sec-coda-hume-spinoza-gram"
+        },
+        {
+          "label": "第 29 章 · 第四层 有限观察者与因果相容空间",
+          "label_en": "Chapter 29 · Level 4, the finite observer and the compatible space",
+          "href": "../zh/ch29-timeless-causality-and-gram-space.html#sec-coda-finite-observer-time-field",
+          "href_en": "../en/ch29-timeless-causality-and-gram-space.html#sec-coda-finite-observer-time-field"
+        },
+        {
+          "label": "Lean 源码 · LagrangeGramIdentity.lean",
+          "label_en": "Lean source · LagrangeGramIdentity.lean",
+          "href": "{trureturing}/D5/S3/QuantumBounds/LagrangeGramIdentity.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity"
+        }
+      ]
     }
   ]
 }
