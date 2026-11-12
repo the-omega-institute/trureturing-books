@@ -1,4 +1,4 @@
-/* Film 004 · 45°: the cosine arc above the classical line · 45°：余弦弧高出经典折线
+/* Film 004 · 45°: the cosine arc above the toy classical line · 45°：余弦弧高出玩具经典折线
    (book quantum-geometry, part IV: chapter 13). Scenes for theme/film/engine.js.
 
    Directions live in the (Z, X) plane, measured from Z towards X: n(t) = cos t · Z + sin t · X. Alice is drawn
@@ -242,7 +242,7 @@ function cdTitle(S) {
   const p = clamp(u / 1.3);
   txt(`${DATA.book.code} · FILM ${DATA.film.number}`, W / 2, 330, { size: 26, fam: F.mono, w: 700, align: 'center', c: C.cyan, a: ta, ls: 10 });
   txt(DATA.film.title_zh, W / 2, 480, { size: 92, fam: F.zh, w: 900, align: 'center', c: C.white, a: ta * clamp(p * 1.6), ab: 4 });
-  txt(scramble('45°: THE COSINE ARC ABOVE THE CLASSICAL LINE', p, 5), W / 2, 580, { size: 40, fam: F.orb, w: 900, align: 'center', c: C.white, a: ta, ls: 5, ab: 2 });
+  txt(scramble('45°: THE COSINE ARC ABOVE THE TOY CLASSICAL LINE', p, 5), W / 2, 580, { size: 40, fam: F.orb, w: 900, align: 'center', c: C.white, a: ta, ls: 5, ab: 2 });
   txt('ARC · FOUR PAIRS · TURN · TABLES · CEILING', W / 2, 660, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.mag, a: ta * 0.9, ls: 8 });
 }
 
@@ -603,7 +603,7 @@ FILM.poster = () => {
   txt('1 − 2θ/π', apX(2.45), apY(cdToy(2.45)) - 26, { size: 24, fam: F.math, w: 700, c: C.white, a: 0.6 });
   txt(DATA.film.title_zh, 450, 360, { size: 56, fam: F.zh, w: 900, align: 'center', c: C.white, ab: 4 });
   txt('45°: THE COSINE ARC', 450, 452, { size: 40, fam: F.orb, w: 900, align: 'center', c: C.white, ab: 3, ls: 4 });
-  txt('ABOVE THE CLASSICAL LINE', 450, 504, { size: 32, fam: F.orb, w: 900, align: 'center', c: C.white, ab: 2, ls: 4 });
+  txt('ABOVE THE TOY CLASSICAL LINE', 450, 504, { size: 32, fam: F.orb, w: 900, align: 'center', c: C.white, ab: 2, ls: 4 });
   cdRich([['CHSH:  ', C.white], ['2', C.lean], ['  →  ', C.white], ['2√2', C.cyan]], 450, 600, { size: 50, align: 'center', ab: 1 });
   bloom(0.6);
   txt(`${DATA.book.code} · FILM ${DATA.film.number}`, 450, 680, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.cyan, ls: 8 });
