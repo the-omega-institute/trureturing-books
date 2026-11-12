@@ -14,13 +14,19 @@ In the classical mechanistic worldview, structural privilege appeared natural: s
 4. **Horizon Fairness**: The fixed step-angle law of coherent uniform amplification (Conjunct 2 of [@thm-ch31-horizon-landauer-ergodic-fairness]) and the finite-observer complexity firewall ([Chapter 30](ch30-fields-lines-eth-and-navier-stokes.md) [@conj-p-neq-np]; external context in [@rem-ch30-query-sos-literature]) block computational monopolies from spoiling the suspense of finite life;
 5. **Ergodic Fairness**: Birth-forgetting resets choice freedom (`MODEL`), while compact-torus closed-subgroup equidistribution and bounded-gap return (Conjuncts 3–4 of [@thm-ch31-horizon-landauer-ergodic-fairness]; external ergodic-theory extensions in [@rem-ch31-weyl-window-equidistribution-literature]) ground our ontological reading of shared long-run statistical holism.
 
-![Quantum fairness across five geometric tiers and ergodic statistical holism](../assets/fig-31-quantum-fairness.svg)
+::: {.figure src="ch31-overview"}
+**Figure 31.** The chapter at a glance. Panel I: the ink vectors $\phi$ and $\psi$ measure each other, and each one's cyan shadow on the other has the same length $\cos\theta$; the third point $C$ above is struck out. Panel II: the ink diagonal $y = x$ and the cyan parabola $y = x^2$ meet only at $0$ ($\phi \perp \psi$) and $1$ ($\phi = \psi$), the lock a cloning machine puts on the inner product. Panel III: of $21$ points laid round a circle by the golden angle, $8$ land in the cyan window covering $2 - \varphi \approx 0.382$ of the circle, and in the long run the share tends to the window's $2 - \varphi$ (schematic; equidistribution for indicator windows is in [@rem-ch31-weyl-window-equidistribution-literature]).
+:::
 
 ---
 
 ## 31.1 Seat Fairness and Gain–Loss Fairness: Eye-Level Rulers and the Zero-Free-Lunch Ledger {#sec-ch31-seat-and-pythagoras}
 
 The oldest source of privilege is to install an exalted tribunal outside the arena—precisely the external "third point $C$" we excised in [Chapter 2](ch02-born-rule.md)—so whichever state sits closer to the throne may declare itself the universal standard.
+
+::: {.figure src="ch31-ruler"}
+**Two states measure each other; no third point is needed.** The ink unit vectors $\phi$ and $\psi$ are $\theta$ apart: the cyan shadow of $\phi$ on $\psi$ and the cyan shadow of $\psi$ on $\phi$ are mirror images of equal length $\cos\theta$ (here $\theta = 60^\circ$, so each is $1/2$); the point $C$ above, joined to both tips, is struck out. This is a real-plane slice; for complex inner products the Born weight is the same squared modulus either way, $|\langle\phi,\psi\rangle|^2 = |\langle\psi,\phi\rangle|^2$ (Conjunct 1 of [@thm-ch31-seat-pythagorean-monogamy-fairness]).
+:::
 
 In pure-state geometry, by contrast, every normalized state inhabits a symmetric space devoid of privileged axes (`MODEL`); quantum geometry abolishes any disembodied "view from nowhere" (philosophical and literary context in [@rem-ch31-haar-isotropy-landauer-literature] below) through two algebraic laws:
 
@@ -118,6 +124,10 @@ Across the frozen finite-dimensional measurement, tomography, pure-state, and en
 Conjunct 1 combines `rank_one_pure_state_modulus_square_reduction` with `unread_eq_weighted_ensemble` (from which conjugate inversion of the dot product gives $\|\phi^* \bullet_v \psi\|^2 = \|\psi^* \bullet_v \phi\|^2$); Conjunct 2 applies `Submodule.norm_sq_eq_add_norm_sq_starProjection` across orthogonal projections in the complete real inner-product space $E$; Conjunct 3 uses isometric preservation of tensor inner products $\langle\phi, \psi\rangle\langle\mathrm{blank}, \mathrm{blank}\rangle = \langle\phi, \psi\rangle^2$ over the integral domain $\mathbb{C}$ via `eq_zero_or_one_of_sq_eq_self` and `inner_eq_one_iff_of_norm_eq_one`; Conjunct 4 evaluates the block partial trace of the $4\times 4$ projector and checks $(\frac{1}{2}I_2)^2 = \frac{1}{4}I_2 \neq \frac{1}{2}I_2$. The full proof is checked by the Lean kernel.
 :::
 
+::: {.figure src="ch31-cloning-lock"}
+**The inner-product lock opens at only two values, $0$ and $1$.** The horizontal axis is the inner product $x = \langle\phi,\psi\rangle$; a single cloning machine forces $x = x^2$, and the ink diagonal $y = x$ meets the cyan parabola $y = x^2$ only at the origin ($\phi \perp \psi$) and at $(1, 1)$ ($\phi = \psi$); in between the parabola stays below the diagonal and there is no solution (Conjunct 3 of [@thm-ch31-seat-pythagorean-monogamy-fairness]). Only the real axis is drawn; over the complex numbers $z = z^2$ likewise has only $z = 0$ and $z = 1$.
+:::
+
 External quantum-information extensions to three-qubit and multipartite entanglement shares are recorded below:
 
 ::: {.remark #rem-ch31-ckw-monogamy-literature title="Three-Qubit CKW Entanglement Monogamy Inequality and Bell / W / GHZ Budget Audit (Literature Result, Not Formalized in This Book)"}
@@ -193,6 +203,10 @@ Across the frozen thermodynamic-divergence, coherent-amplification, and Fourier 
 
 ::: proof
 Conjunct 1 follows from $\mathrm{mutualInfo} + \mathrm{divergence} \ge 0$; Conjunct 2 gives $U = W$ via `unit_success` when $p = 1$, and when $p < 1$ verifies mutual isometric orthogonality of $W$ and $B$, inducts on $n$ via angle-addition identities, and distributes Kronecker tensoring across $\otimes_k R$; Conjunct 3 uses equicontinuity of the Cesàro evaluation operators to close the convergence subspace $S \subseteq C(G, \mathbb{C})$, canceling nontrivial torus characters via geometric sums and extending by trigonometric-polynomial density; Conjunct 4 proves $\operatorname{supp}(h_*\mu) = \operatorname{range}(h)$ from strict positivity on nonempty open pullbacks and extracts the uniform return gap $M$ and positive lower asymptotic visit density bound from a finite subcover of compact orbit translates. The full proof is checked by the Lean kernel.
+:::
+
+::: {.figure src="ch31-rotation-steps"}
+**Each round turns the state by exactly $2\theta$; no step can be skipped.** In the plane of the success direction $W$ (vertical) and the failure direction $B$ (horizontal), after $n$ rounds the state is $\sin((2n+1)\theta)\,W + \cos((2n+1)\theta)\,B$: it starts $\theta$ above $B$ and each round adds one violet turn of $2\theta$ (Conjunct 2 of [@thm-ch31-horizon-landauer-ergodic-fairness]). Here $\theta = \pi/14$, so $p = \sin^2\theta \approx 0.050$, and the amber round $n = 3$ lands exactly on $W$; the smaller $p$, the shorter each step and the more rounds it takes.
 :::
 
 External ergodic-theory extensions from continuous observables to sharp acceptance-window indicators are recorded below:
