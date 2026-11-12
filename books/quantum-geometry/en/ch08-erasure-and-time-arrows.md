@@ -272,7 +272,7 @@ Each of the two density-matrix balances in this example is a **literature result
 
 Every row satisfies $\beta Q = -\Delta S_{\mathrm{sys}} + I + D$ and the Landauer lower bound, and in every row the inequality is strict: since $D > 0$, claim 3 of [@cor-landauer-bound-saturation] rules out equality.
 
-**Reading.** The cleaner the erasure is meant to be ($p \to 1$, the final system state approaching the pure state $\lvert 0\rangle\langle 0\rvert$), the closer the entropy decrease comes to its ceiling $\ln 2 \approx 0.6931$, while the excess term $D$ grows without bound. With one reservoir qubit and one swap, a bit cannot be erased at the price $k_B T\ln 2$; the dimensionless excess heat $\beta Q-(\ln 2-h(p))$ equals $D$, so the corresponding excess physical heat is $k_B T D$. Approaching the Landauer bound requires both $D$ and $I$ to tend to zero, which calls for a larger reservoir and a slower process.
+**Reading.** The cleaner the erasure is meant to be ($p \to 1$, the final system state approaching the pure state $\lvert 0\rangle\langle 0\rvert$), the closer the entropy decrease comes to its ceiling $\ln 2 \approx 0.6931$, while the excess term $D$ grows without bound. With one reservoir qubit and one swap, a bit cannot be erased at the price $k_B T\ln 2$; the dimensionless excess heat $\beta Q-(\ln 2-h(p))$ equals $D$, so the corresponding excess physical heat is $k_B T D$. Approaching the Landauer bound requires both $D$ and $I$ to tend to zero; a larger reservoir and a quasistatic implementation provide a standard route to this limit.
 :::
 
 ::: {.viz src="erasure-ledger" preset="bath" height="500"}

@@ -272,7 +272,7 @@ $$
 
 每一行都满足 $\beta Q = -\Delta S_{\mathrm{sys}} + I + D$，也都满足兰道尔下界，而且都是严格不等：因为 $D > 0$，按 [@cor-landauer-bound-saturation] 的结论 3，等号取不到。
 
-**读法。** 想擦得越干净（$p \to 1$，系统末态越接近纯态 $\lvert 0\rangle\langle 0\rvert$），系统熵减趋于上限 $\ln 2 \approx 0.6931$，而超额项 $D$ 无界增长。只用一个热浴量子比特、一次交换，是做不到以 $k_B T\ln 2$ 的代价擦除一比特的；无量纲超额热量 $\beta Q-(\ln 2-h(p))$ 恰好等于 $D$，对应多付的物理热量为 $k_B T D$。要逼近兰道尔界，就得让 $D$ 与 $I$ 都趋于零，这需要更大的热浴和更缓慢的过程。
+**读法。** 想擦得越干净（$p \to 1$，系统末态越接近纯态 $\lvert 0\rangle\langle 0\rvert$），系统熵减趋于上限 $\ln 2 \approx 0.6931$，而超额项 $D$ 无界增长。只用一个热浴量子比特、一次交换，是做不到以 $k_B T\ln 2$ 的代价擦除一比特的；无量纲超额热量 $\beta Q-(\ln 2-h(p))$ 恰好等于 $D$，对应多付的物理热量为 $k_B T D$。要逼近兰道尔界，就得让 $D$ 与 $I$ 都趋于零；采用更大的热浴与准静态方案，是逼近这一极限的一条标准途径。
 :::
 
 ::: {.viz src="erasure-ledger" preset="bath" height="500"}
@@ -318,7 +318,7 @@ $$
   \operatorname{recordOverlap}\bigl(\operatorname{reverseRecord}(r), i, j\bigr) = \overline{\operatorname{recordOverlap}(r, i, j)};
   $$
   因此，当每个已逆转副本 $l$ 在分支 $(i, j)$ 处具有**幺模重叠因子**（$\overline{\operatorname{recordOverlap}(\mathrm{records}(l), i, j)} \cdot \operatorname{recordOverlap}(\mathrm{records}(l), i, j) = 1$）时，前向因子与反演共轭因子相乘恰好抵消为 $1$！若观察者能把宇宙中**全部**副本（$S = \mathrm{Finset.univ}$）悉数逆转，联合相干逆转定理 [`joint_coherent_reversal`](lean:D5/S3/ObserverMemory/JointCoherentReversal.joint_coherent_reversal) 保证初态矩阵元 $\rho_{ij}$ 精确复原；
-- 但哪怕观察者逆转了除 $k$ 以外的**所有其他副本**（即对 $S = \mathrm{Finset.univ.erase}\,k$ 实施相干逆转，且所有 $l \neq k$ 均满足幺模抵消条件 $\overline{c_l} c_l = 1$），只要宇宙角落里还漏掉**唯一一份**未逆转的幸存副本 $k \in \mathrm{Copy}$，且该副本在 $(i, j)$ 处的重叠因子不为 $1$（$\operatorname{recordOverlap}(\mathrm{records}(k), i, j) \neq 1$），那么单幸存副本合成定理 [`one_surviving_copy_composition_apply`](lean:D5/S3/ObserverMemory/JointCoherentReversal.one_surviving_copy_composition_apply) 与下面的命题就在这个指定协议和这些假设下宣告：**任何非零相干元 $\rho_{ij} \neq 0$ 都绝不可能复原！（双副本显式充要判据亦见 [`two_copy_joint_reversal_certificate`](lean:D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate)。）**
+- 但哪怕观察者逆转了除 $k$ 以外的**所有其他副本**（即对 $S = \mathrm{Finset.univ.erase}\,k$ 实施相干逆转，且所有 $l \neq k$ 均满足幺模抵消条件 $\overline{c_l} c_l = 1$），只要宇宙角落里还漏掉**唯一一份**未逆转的幸存副本 $k \in \mathrm{Copy}$，且该副本在 $(i, j)$ 处的重叠因子不为 $1$（$\operatorname{recordOverlap}(\mathrm{records}(k), i, j) \neq 1$），那么单幸存副本合成定理 [`one_surviving_copy_composition_apply`](lean:D5/S3/ObserverMemory/JointCoherentReversal.one_surviving_copy_composition_apply) 与下面的命题就在这个指定协议和这些假设下宣告：**任何非零相干元 $\rho_{ij} \neq 0$ 都绝不可能复原！（双副本显式证书亦见 [`two_copy_joint_reversal_certificate`](lean:D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate)。）**
 
 ::: {.figure src="ch08-surviving-copy"}
 **倒带只消去幺模的相位，漏下的副本 $k$ 留下它的 $c_k$。** 复平面上，灰色虚线箭头是原来的相干元 $\rho_{01}$。前向时它沿单位圆转过副本 1、2 的相位（青色的弧），再被副本 $k$ 缩短并转一下（品红的段）；倒带时副本 1、2 的相位沿小圆转回来（青色虚线弧），停在琥珀色的箭头 $c_k\rho_{01}$，回不到灰色箭头的尖端（[@prop-surviving-copy-blocks-reversal]）。图中取 $c_1 = e^{i40^\circ}$、$c_2 = e^{i30^\circ}$、$c_k = 0.6\,e^{i25^\circ}$。

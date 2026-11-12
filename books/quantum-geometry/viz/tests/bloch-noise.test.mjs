@@ -56,6 +56,39 @@ function bruteFarthest(lam, a) {
   for (let it = 0, h = 0.005; it < 40; it++, h /= 2) for (const z of [bz - h, bz + h]) { if (z < -1 || z > 1) continue; const v = F(Math.sqrt(1 - z * z), 0, z); if (v > best) { best = v; bz = z; } }
   return best;
 }
+/* Channel or not, from the Choi matrix. A Bloch action r ↦ (λx, λy, az + h) is extended linearly to every 2 × 2 matrix
+   through the Paulis (I ↦ I + hZ, X ↦ λX, Y ↦ λY, Z ↦ aZ); a map is a channel exactly when its Choi matrix
+   J[2i + k][2j + l] = Φ(|i⟩⟨j|)[k][l] has no negative eigenvalue and its partial trace over the output is I. */
+const cs = (z, k) => [z[0] * k, z[1] * k], cmat = (A, z) => A.map((r) => r.map((w) => cmul(w, z))), tr = (A) => cadd(A[0][0], A[1][1]);
+const affineMap = (lam, a, h) => (M) => { const t0 = tr(M); return mscale([cmat(I2, t0), cmat(Z, cs(t0, h)), cmat(X, cs(tr(mmul(M, X)), lam)), cmat(Y, cs(tr(mmul(M, Y)), lam)), cmat(Z, cs(tr(mmul(M, Z)), a))].reduce(madd), 0.5); };
+const matUnit = (i, j) => [0, 1].map((r) => [0, 1].map((q) => c(r === i && q === j ? 1 : 0)));
+function choi(Phi) {
+  const J = Array.from({ length: 4 }, () => Array.from({ length: 4 }, () => c(0)));
+  for (const i of [0, 1]) for (const j of [0, 1]) { const O = Phi(matUnit(i, j)); for (const k of [0, 1]) for (const l of [0, 1]) J[2 * i + k][2 * j + l] = O[k][l]; }
+  return J;
+}
+/** The smallest eigenvalue of a Hermitian matrix A + iB: cyclic Jacobi rotations on the real symmetric [[A, −B], [B, A]]. */
+function minEig(H) {
+  const n = H.length, N = 2 * n, S = Array.from({ length: N }, () => new Array(N).fill(0));
+  for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) { const [re, im] = H[i][j]; S[i][j] = re; S[i + n][j + n] = re; S[i][j + n] = -im; S[i + n][j] = im; }
+  for (let sweep = 0; sweep < 60; sweep++) {
+    let off = 0; for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) off += S[i][j] ** 2;
+    if (off < 1e-30) break;
+    for (let p = 0; p < N; p++) for (let q = p + 1; q < N; q++) {
+      if (S[p][q] === 0) continue;
+      const th = (S[q][q] - S[p][p]) / (2 * S[p][q]), t = (th >= 0 ? 1 : -1) / (Math.abs(th) + Math.sqrt(th * th + 1)), co = 1 / Math.sqrt(t * t + 1), si = t * co;
+      for (let k = 0; k < N; k++) { const x = S[k][p], y = S[k][q]; S[k][p] = co * x - si * y; S[k][q] = si * x + co * y; }
+      for (let k = 0; k < N; k++) { const x = S[p][k], y = S[q][k]; S[p][k] = co * x - si * y; S[q][k] = si * x + co * y; }
+    }
+  }
+  return Math.min(...S.map((r, i) => r[i]));
+}
+const isChannel = (Phi) => { const J = choi(Phi), ptr = (i, j) => cadd(J[2 * i][2 * j], J[2 * i + 1][2 * j + 1]); return minEig(J) >= -1e-12 && [0, 1].every((i) => [0, 1].every((j) => Math.hypot(...cadd(ptr(i, j), c(i === j ? -1 : 0))) < 1e-12)); };
+const choiGap = (F, G) => { const A = choi(F), B = choi(G); return Math.max(...A.flatMap((r, i) => r.map((z, j) => Math.hypot(z[0] - B[i][j][0], z[1] - B[i][j][1])))); };
+/** The two ends of the strength slider, as Kraus operators: no decay {I}, and the reset to |0⟩ {|0⟩⟨0|, |0⟩⟨1|}. */
+const IDENTITY = channel([I2]), RESET = channel([[[c(1), c(0)], [c(0), c(0)]], [[c(0), c(1)], [c(0), c(0)]]]);
+/** One step of the amplitude family at strength p with T2 = ratio · T1: Kraus operators at the ends, lifetime envelopes inside. */
+const ampStep = (p, ratio) => { if (p === 0) return IDENTITY; if (p === 1) return RESET; const m = lifetimeMap(p, ratio, 1); return affineMap(m.lam, m.a, 1 - m.a); };
 
 /* ---------- the gates every stage-first page must pass ---------- */
 await stageFirstChecks(T, BOOK, ID);
@@ -235,6 +268,81 @@ check('ONTO-AXIS still: ρ and σ land on one point and their labels do not over
 // language
 await page.click('[data-lang-set="en"]'); await settle(page);
 check('the stage title follows the language', (await page.textContent('#hudBig')).startsWith('Amplitude damping'));
+
+// the T2 > 2T1 card, then only the strength moved to an end of its slider: the ratio stays at 6, but p = 0 is the
+// identity and p = 1 the reset to the north pole, both channels whatever the ratio; strictly inside, T2 > 2T1 is not
+const ep = await T.goto(BOOK, ID, '?lang=zh', await T.newPage());
+const WORDS = { zh: { not: /不是信道/, amp: /^振幅阻尼 · /, grows: /只减不增/, inside: /在球里/ }, en: { not: /not a channel/, amp: /^Amplitude damping · /, grows: /never grows/, inside: /inside/ } };
+/** What the reader sees in the current language: stage title and line, readouts, the stage labels with their boxes. */
+const shown = async () => { await settle(ep); return ep.evaluate(() => {
+  const txt = (id) => document.getElementById(id).textContent;
+  const tags = [...document.querySelectorAll('#stage .tag')].filter((t) => !t.hidden).map((t) => { const b = t.getBoundingClientRect(); return { text: t.textContent, l: b.left, r: b.right, t: b.top, b: b.bottom }; });
+  return { lang: document.documentElement.dataset.lang, big: txt('hudBig'), sub: txt('hudSub'), dist: txt('roDistSub'), ball: txt('roBall'), tags, s: window.NOISE_DEBUG.state,
+    ctrl: [txt('oStrength'), document.getElementById('ratio').value, txt('oRatio')] };
+}); };
+/** The page's verdict in one language: 'not' or 'channel' when title, line and distance readout agree, else 'mixed'. */
+const verdict = (v) => {
+  const w = WORDS[v.lang], cites = /> 2 T₁/.test(v.sub);
+  if (w.not.test(v.big) && w.not.test(v.dist) && cites) return 'not';
+  return w.amp.test(v.big) && !w.not.test(v.big) && w.grows.test(v.dist) && !w.not.test(v.dist) && !cites ? 'channel' : 'mixed';
+};
+const lang = async (l) => { await ep.click(`[data-lang-set="${l}"]`); await settle(ep); };
+const both = async () => { await lang('zh'); const zh = await shown(); await lang('en'); const en = await shown(); await lang('zh'); return { zh, en }; };
+/** A key on a slider's own keyboard (Home / End / arrows move a range input to its ends or by one step). */
+const slider = async (id, k) => { await ep.focus(`#${id}`); await ep.keyboard.press(k); await settle(ep); };
+/** Keys on the rail: leave the slider first, so that Home and → reach the clock. */
+const rail = async (...ks) => { await ep.evaluate(() => document.activeElement && document.activeElement.blur()); for (const k of ks) { await ep.keyboard.press(k); await settle(ep); } };
+const tagT = (v) => v.tags.find((t) => /^T \d/.test(t.text));
+await lang('zh');
+await ep.click('[data-preset="wide"]'); await settle(ep);
+await rail('Home', 'ArrowRight');
+let v = await both(), es = v.zh.s;
+check('T2 > 2T1 card, rail at N = 1 by Home and →: p = ½, T2 / T1 = 6, paused', es.preset === 'wide' && es.p === 0.5 && es.ratio === 6 && close(es.t, 1) && !es.playing);
+check('inside 0 < p < 1 (p = ½, T2 = 6 T1): the Choi matrix of one step has a negative eigenvalue, and in both languages the title, the line under it and the distance readout say it is not a channel, with no distance label on the stage', !isChannel(ampStep(0.5, 6)) && choiGap(affineMap(es.lam, es.a, es.h), ampStep(0.5, 6)) < 1e-12 && verdict(v.zh) === 'not' && verdict(v.en) === 'not' && !tagT(v.zh) && !tagT(v.en), JSON.stringify([v.zh.big, v.en.big, v.en.dist]));
+for (const [k, r, ok] of [['Home', 0.5, true], ['End', 8, false]]) {
+  await slider('ratio', k); v = await both(); es = v.zh.s;
+  check(`p = ½ at the end T2 / T1 = ${r} of the lifetime slider: the Choi matrix of the page's step says ${ok ? 'channel' : 'not a channel'}, and so do both languages`, es.ratio === r && es.p === 0.5 && close(es.t, 1) && choiGap(affineMap(es.lam, es.a, es.h), ampStep(0.5, r)) < 1e-12 && isChannel(ampStep(0.5, r)) === ok && verdict(v.zh) === (ok ? 'channel' : 'not') && verdict(v.en) === (ok ? 'channel' : 'not'), JSON.stringify([v.zh.big, v.en.big]));
+}
+const T0of = (s) => traceDistance(density(s.rho0), density(s.sig0));
+const overlapsAny = (v, a) => v.tags.some((b) => b !== a && a.l < b.r && b.l < a.r && a.t < b.b && b.t < a.b);
+for (const [end, p, K, name] of [['Home', 0, IDENTITY, 'identity {I}'], ['End', 1, RESET, 'reset {|0⟩⟨0|, |0⟩⟨1|}']]) {
+  await ep.click('[data-preset="wide"]'); await settle(ep);
+  await slider('strength', end); await rail('Home', 'ArrowRight');
+  v = await both(); es = v.zh.s;
+  check(`p = ${p} by the strength slider's ${end} key after the card: T2 / T1 stays 6.0, the rail is at N = 1`, es.p === p && es.ratio === 6 && v.zh.ctrl[0] === p.toFixed(2) && v.zh.ctrl[1] === '6' && v.zh.ctrl[2] === '6.0' && es.preset === null && close(es.t, 1) && !es.playing, JSON.stringify(v.zh.ctrl));
+  check(`p = ${p}, T2 = 6 T1: the page's step has the Choi matrix of the Kraus ${name}, a channel; ρ and σ are where the Kraus operators put them`, choiGap(affineMap(es.lam, es.a, es.h), K) < 1e-12 && isChannel(K) && isChannel(ampStep(p, 6)) && vclose(es.rho, blochOf(K(density(es.rho0))), 1e-12) && vclose(es.sig, blochOf(K(density(es.sig0))), 1e-12));
+  check(`p = ${p}, T2 = 6 T1: in both languages the title says amplitude damping, the line under it does not cite T2 > 2T1, the distance readout says it never grows and the ball is kept`, verdict(v.zh) === 'channel' && verdict(v.en) === 'channel' && WORDS.zh.inside.test(v.zh.ball) && WORDS.en.inside.test(v.en.ball) && !es.escapes, JSON.stringify([v.zh.big, v.zh.sub, v.zh.dist, v.en.big, v.en.sub, v.en.dist]));
+  const Tk = traceDistance(K(density(es.rho0)), K(density(es.sig0)));
+  check(`p = ${p}, T2 = 6 T1: the distance after (${Tk.toFixed(4)}) is the Kraus value and not above the distance before (${T0of(es).toFixed(4)})`, close(es.T, Tk, 1e-12) && Tk <= T0of(es) + 1e-12);
+  if (p === 0) check('p = 0, T2 = 6 T1: the stage labels the distance T with the Kraus value in both languages, clear of every other label', [v.zh, v.en].every((x) => { const a = tagT(x); return a && a.text === `T ${Tk.toFixed(3)}` && !overlapsAny(x, a); }), JSON.stringify(v.zh.tags.map((t) => t.text)));
+  for (const [k, r] of [['Home', 0.5], ['End', 8]]) {
+    await slider('ratio', k); v = await both(); es = v.zh.s;
+    check(`p = ${p} at the end T2 / T1 = ${r} of the lifetime slider: still the Kraus ${name}, and both languages call it a channel`, es.ratio === r && es.p === p && choiGap(affineMap(es.lam, es.a, es.h), K) < 1e-12 && verdict(v.zh) === 'channel' && verdict(v.en) === 'channel', JSON.stringify([v.zh.big, v.en.big]));
+  }
+  // one notch inside the slider the ratio counts again: T2 = 8 T1 is not a channel at p = 0.01 or 0.99
+  await slider('strength', p === 0 ? 'ArrowRight' : 'ArrowLeft'); v = await both(); es = v.zh.s;
+  const q = p === 0 ? 0.01 : 0.99;
+  check(`one notch inside, p = ${q} at T2 = 8 T1: the page's step has a Choi matrix with a negative eigenvalue and both languages say not a channel`, close(es.p, q, 1e-12) && es.ratio === 8 && close(es.t, 1) && choiGap(affineMap(es.lam, es.a, es.h), ampStep(es.p, 8)) < 1e-12 && !isChannel(ampStep(es.p, 8)) && verdict(v.zh) === 'not' && verdict(v.en) === 'not', JSON.stringify([es.p, v.zh.big, v.en.big]));
+}
+// p = 1 between the two whole steps of its rail: the convex mixture of the identity and the reset, still a channel
+await ep.click('[data-preset="wide"]'); await settle(ep);
+await slider('strength', 'End'); await rail('Home');
+await ep.evaluate(() => { const el = document.getElementById('now'); el.value = '0.5'; el.dispatchEvent(new Event('input', { bubbles: true })); });
+v = await both(); es = v.zh.s;
+const halfway = (M) => madd(mscale(IDENTITY(M), 0.5), mscale(RESET(M), 0.5));
+check('p = 1, T2 = 6 T1, the rail scrubbed to N = ½: the page shows the Choi matrix of ½ identity + ½ reset, a channel, and both languages say so', es.p === 1 && es.ratio === 6 && close(es.t, 0.5) && choiGap(affineMap(es.lam, es.a, es.h), halfway) < 1e-12 && isChannel(halfway) && verdict(v.zh) === 'channel' && verdict(v.en) === 'channel');
+// the theory drawer, in each language: the rate equivalence is stated for 0 < p < 1 and the two ends are named
+const endsAreChannels = [0.5, 2, 6, 8].every((r) => isChannel(ampStep(0, r)) && isChannel(ampStep(1, r))) && [2.1, 6, 8].every((r) => [0.01, 0.5, 0.99].every((p) => !isChannel(ampStep(p, r))));
+const idFixesAll = [[0, 0, -1], [1, 0, 0], [0.3, -0.4, 0.5]].every((r) => vclose(blochOf(IDENTITY(density(r))), r, 1e-12)) && !vclose(blochOf(STEP.amp(0.01)(density([0, 0, -1]))), [0, 0, -1], 1e-6);
+for (const l of ['zh', 'en']) {
+  await lang(l); await ep.click('#infoBtn'); await settle(ep);
+  const items = await ep.evaluate((x) => ({ open: !document.getElementById('drawer').hidden, li: [...document.querySelectorAll(`#drawer .sheet > .${x} li`)].map((li) => li.innerText) }), l);
+  await ep.keyboard.press('Escape'); await settle(ep);
+  const rate = items.li.find((t) => t.includes('T₂ ≤ 2T₁')) || '', shapes = items.li.find((t) => t.includes('(cx, cy, z)')) || '';
+  check(`drawer (${l}): T2 ≤ 2T1 ⇔ λ² ≤ a is stated for 0 < p < 1 and p = 0, p = 1 are named as channels for every ratio, as the Choi matrices show`, items.open && endsAreChannels && rate.includes('0 < p < 1') && /p = 0\b/.test(rate) && /p = 1\b/.test(rate), rate);
+  check(`drawer (${l}): the fixed sets of the three noises are given for p > 0, and p = 0 keeps every point (the identity Kraus map fixes them all)`, idFixesAll && shapes.includes('p > 0') && /p = 0\b/.test(shapes), shapes);
+}
+await lang('zh'); await ep.close();
 
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();

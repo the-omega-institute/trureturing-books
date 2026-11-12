@@ -299,6 +299,79 @@ $$
 
 [@prop-monitored-return-conservation] 说的是概率一分不少：前 $N$ 步里首次返回的概率，加上至今没有返回的概率，恰好是 $1$。它不依赖 $U$ 是什么，也不依赖空间的维数。把它用到 [@ex-zeno-strobe-freezing] 的那只旋转比特上，会得到一个与芝诺冻结正好相对的结论。
 
+在讨论平均返回时间之前，先看初态究竟能访问哪些方向。有限维复内积空间 $E$ 中，令 $U$ 为幺正算子，$v\in E$，并记
+
+$$
+C=\operatorname{span}_{\mathbb C}\{U^n v:n\in\mathbb N\},
+\qquad
+P_v=\text{到 }\mathbb C v\text{ 的正交投影}.
+$$
+
+$C$ 是这条轨道张成的循环空间。下面两个有限维论证说明：要找永久不响的探测器方向，必须区分 $C$ 内外。
+
+::: {.remark #rem-monitored-cyclic-observability title="循环空间里没有永久暗态：有限维推导"}
+**文献结果，未在本书形式化。** 令 $T=(I-P_v)U$。$U$ 保持 $C$，$P_v$ 的像包含在 $C$ 中，因此 $T$ 与 $P_vU$ 均可限制为 $C\to C$ 上的算子
+
+$$
+A=T|_C,\qquad B=(P_vU)|_C.
+$$
+
+把所有将来都不产生点击的方向放在一起：
+
+$$
+K=\bigcap_{n\in\mathbb N}\ker(BA^n).
+$$
+
+若 $x\in K$，则 $Bx=0$，所以 $Ax=Ux$；把点击历史向前移一步又给出 $Ax\in K$。故 $U$ 保持 $K$。$U|_K$ 是有限维空间上的单射，因而满射，$U^{-1}$ 也保持 $K$。对任意 $x\in K$，可写成 $x=Uy$、$y\in K$，由 $By=P_vUy=0$ 得 $x\perp v$。再沿 $U^{-1}$ 迭代，便有 $x\perp U^nv$ 对每个 $n\ge0$ 成立。$x$ 同时属于这些向量张成的 $C$，只能为零：
+
+$$
+K=\{0\}.
+$$
+
+这段推导不要求 $v$ 是单位向量；$v=0$ 时 $C=\{0\}$。若不限制到实际循环空间，结论会失效：取 $U=I$、$v=e_1$，与 $e_1$ 正交的非零向量永远不会点击。这里讨论的是循环空间内的可观测性，还没有计算返回概率的无穷和。
+:::
+
+::: {.remark #rem-monitored-cyclic-power-contraction title="没有永久暗态，为什么会在有限步后严格收缩？"}
+**文献结果，未在本书形式化。** 再设 $\norm v=1$，记 $d=\dim_{\mathbb C}C\ge1$。对 $x\in C$，投影的勾股分解与 $U$ 的等距性给出
+
+$$
+\norm{Ax}^2+\norm{Bx}^2=\norm{x}^2.
+$$
+
+令 $K_m=\bigcap_{j=0}^{m-1}\ker(BA^j)$，其中 $K_0=C$。若某一步 $K_m=K_{m+1}$，把历史向前移一步可知 $A$ 保持 $K_m$，从而它已是永久暗空间。上一段证明这个空间为零。因此只要 $K_m\ne\{0\}$，它的维数就必须严格下降；至多 $d$ 步便有 $K_d=\{0\}$。
+
+对任意单位向量 $x\in C$，有限守恒式于是给出
+
+$$
+\norm{A^d x}^2
+=1-\sum_{j=0}^{d-1}\norm{BA^j x}^2<1.
+$$
+
+有限维单位球面紧致，连续函数 $x\mapsto\norm{A^dx}$ 能取到最大值，所以这个最大值也严格小于一。取 $N=d$、$q=\norm{A^d}_{\mathrm{op}}$，得到
+
+$$
+N\ge1,\qquad 0\le q<1,\qquad \norm{A^N}_{\mathrm{op}}\le q.
+$$
+
+紧致性在这里把“每个方向都有损失”变成“所有方向共享一个严格损失界”。这个界可以依赖于 $U,v$，并未给出对所有系统统一的收缩常数。关于监测返回的文献背景，见 Grünbaum、Velázquez、Werner 与 Werner，*Recurrence for discrete time unitary evolutions*，arXiv:1202.3903v3，Theorem 2。这两段作为有限维推导列出，不计入本书的 Lean 定理账本。
+:::
+
+::: {.problem #prob-monitored-spectral-mean title="形式化缺口：从实际监测历史到占据谱点数"}
+对任意有限维复内积空间、幺正 $U$ 与单位向量 $v$，沿用 [@def-monitored-return] 的 $p_{n+1}=\lvert\langle v,UT^nv\rangle\rvert^2$。定义占据谱集合
+
+$$
+S=\{\lambda\in\mathbb C:\exists w\in E,\ Uw=\lambda w\ \text{且}\ \langle w,v\rangle\ne0\}.
+$$
+
+需要完成的形式化陈述是：若 $\sum_{n=0}^{\infty}p_{n+1}=1$，则 $S$ 有限，且
+
+$$
+\sum_{n=0}^{\infty}(n+1)p_{n+1}=\#S.
+$$
+
+这是已知文献定理的形式化缺口，数学上不作为未解决猜想。上面的循环空间与收缩论证仍需连接到算子迹的收敛求和、生存概率尾和到首次返回均值的转换，以及 $\dim C=\#S$；最后一式数的是不同占据谱值，并非本征值的代数重数。有限步守恒或某个正次幂严格收缩，都不能单独替代这条完整结论。
+:::
+
 ::: {.example #ex-first-return-qubit title="旋转比特的首次返回统计：平均返回时间恒为 2，与步长无关"}
 设单比特每一步绕 $X$ 轴转过布洛赫角 $\delta$，即 $U = \cos\frac{\delta}{2}\,I - i\sin\frac{\delta}{2}\,X$，初态 $v = \lvert 0\rangle$。记 $c = \cos\frac{\delta}{2}$，$s = \sin\frac{\delta}{2}$，并设 $s \neq 0$。
 
