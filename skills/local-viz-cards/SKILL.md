@@ -66,6 +66,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `quantum-fairness-ledger` | 没有特权的座位：照见是相互的，得一分就失一分，满额的纠缠与副本分不出第二份，从哪里出发都分到同样的份额 | `haar` `tradeoff` `cloning` `bell` `wstate` `ghz` `ergodic` |
 | `spherical-degeneracy-radar` | 转一次与转两次，终点不同，有的观察者却读出同一个数；把这些读不出差别的人收集起来，只剩极轴上的那一对 | `meridian` `sweep` `tilted` `hops` `equator` `frames` |
 | `unified-field-slice` | 时钟与速度是同一个圆上的线与面积；在两个平面里来回转一圈回不到原处；视界割断几条边，跨界的纠缠就封顶在那里 | `polytope` `fixedpoint` `gudermann` `photon` `abelian` `plaquette` `horizon` |
+| `self-sustaining-spinor-flow` | 旋量夹住两块参考刀片，织出一根流向量与一块自旋面，三个平方始终相等；矢量转一圈就回来，旋量要转两圈 | `weave` `fierz` `turn360` `seam` `turn720` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -136,6 +137,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `spherical-degeneracy-radar` 与 `two-angle-addressing` 的 `address`、`pole` 及 `berry-loop` 的 `octant` 分工：那几张讲从北极出发的两角寻址、极点的方位角冗余与八分球回路的面积和相位，本页讲第三十四章的“读不出差别的观察者在哪里”：琥珀色是观察者探针 O 与它的轴，青色是两个结果落在观察者轴上的影子（读数）与青色虚线的盲圈（读数相同的观察者所在的大圆），淡青色是走过的盲圈，品红是第二次转动扫过的横向面、两个结果之差与两面小旗的夹角，紫色是极轴 ±e₃ 与差旋子 D 的小盘；实心点是一次（一步）的结果，空心圈是两次（两步）的结果。旋子按该章算例在 Cl(3,0) 里逐项相乘：R₁ = (1 − e₁e₃)/√2，R₂ = ((1 − e₂e₃)/√2)((1 − e₁e₂)/√2) = exp(−π/4 e₁e₂) R₁（左乘），两者都把 +e₁ 送到 +e₃。绿色框只给第三十四章用 `lean=` 引用的三条：`unit_perpendicular_pair`（与两根差向量都正交的单位向量）、`partition_inseparable_iff_kernel`（读数相同即同一纤维）与 `covariant_commutator_formula`（D 与 e₃ 对易、与 e₁ 不对易）；“简并处反演出观察者站位”标 `MODEL`；Berry—Pancharatnam 相位与虚拟 Z 门标 `ARGUED`，页面不计算；旋子乘积、读数与盲圈实算（`NUM`）。路线图候选的赤道反射轴族、`chirality`、`virtual_z` 未做：正文没有反射轴族的句子，后两者分别是 `berry-loop` 的 `reverse` 与 `pulse-area-virtual-z` 的 `vz`。
 
 `unified-field-slice` 只覆盖第三十二章上半篇（§32.1–32.2；下半篇的八纲领罗盘是 `meta-unification-compass`）。三个场景共用一条时间轴：“时钟”是单位圆加双曲线 t² − x² = 1，θ = gd(η)，青色的线是 cos θ = 1/γ（固有时率），品红的高是 sin θ = tanh η（速度），紫色是弧长 θ（`fixedpoint` 卡里弧长等于影子）；“回路”是球面上的旋子换位子 U = R₁R₂R₁⁻¹R₂⁻¹，琥珀色只给参考箭头的尖端，品红是没合上的缺口，紫色是转轴；“视界”是内接于球的正二十面体，青色是视界以内的边，品红是割断的边与每个顶点缺的 60°，琥珀是视界 λ。绿色框只给本章用 `lean=` 引用的三条：`eq_smul_minkowski_of_null`、`anchored_phase_classification`（只管单一平面的圆周相位，页面写明两个平面的换位子不在其内）、`QuantumMaxFlowMinCut.result`（桥图，页面写明二十面体不是它的实例）；Gudermann 恒等式、Dottie 不动点、720° 角亏、换位子曲率与秩 ≤ D^|∂A| 标 `ARGUED`，线/面积/视界/相互作用源的读法标 `MODEL`。路线图候选 `mincut`（桥图）与第三十章 `eth-horizon-crossover` · `bridge` 同一画面，改为二十面体上的 `horizon`；`generations`（内部空间三轴世代）在上半篇正文里没有可引用的句子，未做。
+
+`self-sustaining-spinor-flow` 与 `qubit-geometry` 的 `turn1`、`turn2` 分工：那两张在布洛赫球上看态 B 转一圈、两圈和旋子标量部 w 的读数，本页讲第三十九章的旋量双线性量与单侧光带：青色是流向量 J = ψe₃ψ̃（箭头长 ρ，虚线是它走过的路）；品红是自旋面 S = ψe₁e₂ψ̃，画成由 Re₁R̃、Re₂R̃ 张成、边长 √ρ、面积 ρ 的正方形（在三维里 S = I J，正是与 J 垂直的那块面）；紫色是转轴 n、绕 n 一圈的单侧（莫比乌斯）光带与插在 J 方位上的小旗，小旗方向 cos(t/2) n + sin(t/2) r 是 ψψ̃₀/ρ 的两个分量，旗尖走过的路是光带的边（两圈才闭合）；琥珀只给小旗此刻的落脚点；虚线小旗是出发时的那一面。三个平方 J²、−S²、ρ² 由 Cl(3,0) 逐刀片乘出（`NUM`），菲尔兹恒等式（含狄拉克旋量的 J<sub>μ</sub>J<sup>μ</sup> = σ² + ω²，页面不画）与 Spin(3) ≅ SU(2) → SO(3) 双覆叠按第三十九章文献注记标 `ARGUED`；“无底物自指旋量流”“观察者即宇宙本体”标 `MODEL`。绿色框只给该章定理 `thm-ch39-double-cover-no-section-and-720-lift` 用 `lean=` 引用的两条：`no_continuous_global_section` 与 `circle_double_cover_history_lift`。图注里说小旗“与出发时相反/同向”，不说“朝下/朝上”（舞台的视角里小旗是横着的）。路线图候选 `massless_knot`、`non_trivial_lift` 并入 `seam`；`grand_closure` 未做：第三十九章没有“从第一章 AB = A·B + A∧B 收束回 ψ = ψ(ψ)”的句子（章末只有一句回望第一、二章砍掉第 3 点 C 的话，且紧挨章中的旧手绘图）。
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
@@ -395,6 +398,12 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 附录 C | C.2.1 行内声明表之后、C.3 之前 | `lean-declaration-map` · `inline` |
 | 附录 C | C.4 核验清单之后、注记 `rem-appendix-c-epistemic-boundary` 之前 | `lean-declaration-map` · `theorems` |
 | 附录 C | 附录末 | `lean-declaration-map` 完整实验室 |
+| 第三十九章 | §39.3 第二段（“观察者从来没有‘住在时空里’”）之后、“数学物理史上……”一段之前 | `self-sustaining-spinor-flow` · `weave` |
+| 第三十九章 | 文献注记 `rem-ch39-cartan-penrose-hestenes-fierz-literature` 之后 | `self-sustaining-spinor-flow` · `fierz` |
+| 第三十九章 | 例 `ex-ch39-even-clifford-spinor-bilinear-fierz` 之后 | `self-sustaining-spinor-flow` · `turn360` |
+| 第三十九章 | 定理 `thm-ch39-double-cover-no-section-and-720-lift` 的证明之后 | `self-sustaining-spinor-flow` · `seam` |
+| 第三十九章 | 该定理之后的“请屏息凝视”一段之后、§39.4 之前 | `self-sustaining-spinor-flow` · `turn720` |
+| 第三十九章 | 章末（最后一段之后） | `self-sustaining-spinor-flow` 完整实验室 |
 
 ## 增删或修改一张卡之后
 
