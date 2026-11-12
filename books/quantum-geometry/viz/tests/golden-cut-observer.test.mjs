@@ -71,6 +71,25 @@ for (let n = 0; n < 40; n++) {
 check('β(n) for n < 40: the page’s golden integers have b = n, equal the sum of the powers of φ at the Zeckendorf digits, and a is the one integer that puts the conjugate in (φ − 2, φ − 1]', betaOK);
 check('every β(n) is selected by the window at u = 0, and consecutive ones are φ or φ² apart', betaIn && stepOK);
 check('−φ is selected at u = 0 but is no β(n): the inclusion is proper', zero.some((p) => p.a === 0 && p.b === -1) && !s.beta.some(([a, b]) => a === 0 && b === -1));
+// the Zeckendorf codes behind β(n): no two adjacent 1s, the Fibonacci weights add up to n, and an independent greedy agrees digit by digit
+const zFib = (i) => { let a = 1, b = 1; for (let k = 0; k < i + 1; k++) [a, b] = [b, a + b]; return a; };   // F_{i+2}: 1, 2, 3, 5, …
+const greedy = (n) => { const out = []; let r = n; while (r > 0) { let i = 0; while (zFib(i + 1) <= r) i++; out[i] = 1; r -= zFib(i); } for (let i = 0; i < out.length; i++) out[i] = out[i] || 0; return out.length ? out : [0]; };
+const pageCodes = await D(() => Array.from({ length: 1001 }, (_, n) => window.CUT_DEBUG.zeck(n)));
+let zNoAdj = true, zSum = true, zSame = true, zBad = '';
+pageCodes.forEach((d, n) => {
+  if (d.some((x, i) => i && x && d[i - 1])) { zNoAdj = false; zBad = `adjacent at n=${n}`; }
+  if (d.reduce((t, x, i) => t + x * zFib(i), 0) !== n) { zSum = false; zBad = `sum at n=${n}`; }
+  if (d.join('') !== greedy(n).join('')) { zSame = false; zBad = `n=${n}: ${d.join('')} vs ${greedy(n).join('')}`; }
+});
+check('Zeckendorf codes of n = 0 … 1000: no two adjacent 1s', zNoAdj, zBad);
+check('and the Fibonacci weights 1, 2, 3, 5, … of their 1s add up to n', zSum, zBad);
+check('and they agree digit by digit with a greedy written here (largest Fibonacci number not above what is left)', zSame, zBad);
+// uniqueness by brute force: among all words of length 12 with no adjacent 1s, exactly one has each value below F_14 = 377
+const byValue = new Map(); for (let w = 0; w < 4096; w++) { if (w & (w >> 1)) continue; let v = 0; for (let i = 0; i < 12; i++) if (w >> i & 1) v += zFib(i); byValue.set(v, (byValue.get(v) || []).concat([w])); }
+check('brute force over the 377 words of length 12 with no adjacent 1s: every n < 377 has exactly one, and it is the page’s code', [...Array(377).keys()].every((n) => { const ws = byValue.get(n) || []; if (ws.length !== 1) return false; const d = pageCodes[n]; let w = 0; d.forEach((x, i) => { if (x) w |= 1 << i; }); return w === ws[0]; }));
+const zs = await D(() => window.CUT_DEBUG.zstrip());
+check('the strip below the stage shows the codes for n = 0 … 54, in at most 8 rows, with no adjacent pair and no wrong sum flagged', zs.n === 54 && zs.codes.length === 55 && zs.codes.every((d, n) => d.join('') === pageCodes[n].join('') && d.length <= 8) && zs.codes[54].length === 8 && zs.adjacent.length === 0 && zs.wrong.length === 0);
+check('the strip asks its question in its title and reports the count', /相邻的 1 吗/.test(await page.textContent('#pBTitle')) && /相邻的 1：0 处/.test(await page.textContent('#pBMeta')));
 check('the green rings are announced at u = 0 only', /β\(n\)/.test(await page.textContent('#legend')) && !/β\(n\)/.test((await seek(0.8), await page.textContent('#legend'))));
 // a point withstands exactly the shifts smaller than its distance to the edge
 s = await seek(0.6); const u0 = s.u, here = chosen(u0).filter((p) => Math.abs(p.x) <= s.half), marg = (p, u) => Math.min(p.c - LO - u, HI + u - p.c);
@@ -130,6 +149,11 @@ const onCurve = pageLattice.filter((p) => Math.abs(Math.abs(p.x * p.c) - 1) < 1e
 check(`between the hyperbolas x·x′ = ±1 there is no lattice point but the origin, and the ${onCurve.length} points on them are ± powers of φ`, inside.length === 0 && onCurve.length >= 10 && onCurve.every((p) => { const t = Math.log(Math.abs(p.x)) / Math.log(PHI); return near(t, Math.round(t), 1e-7); }));
 let ratioOK = true; for (let k = 1; k <= 12; k++) { const e = Number(F[k + 1]) / Number(F[k]) - PHI; if (Math.sign(e) !== (k % 2 ? -1 : 1) || !near(Math.abs(e), Math.pow(PHI, -k) / Number(F[k]), 1e-12)) ratioOK = false; }
 check('Fₖ₊₁/Fₖ − φ alternates in sign and equals ±φ⁻ᵏ/Fₖ', ratioOK);
+// the slope convention y/x = Fₖ/Fₖ₊₁ → φ⁻¹ for the integer point (Fₖ₊₁, Fₖ): the error is ψᵏ⁺¹/Fₖ₊₁
+s = await state(); let slopeOK = true;
+for (let k = 1; k <= 12; k++) { const e = s.slopes[k - 1], want = Math.pow(PSI, k + 1) / Number(F[k + 1]), viaInt = (Number(F[k]) * PHI - Number(F[k + 1])) / (Number(F[k + 1]) * PHI); if (!near(e, want, 1e-13) || !near(e, viaInt, 1e-13) || Math.sign(e) !== (k % 2 ? 1 : -1)) slopeOK = false; }
+check('the slope strip: Fₖ/Fₖ₊₁ − φ⁻¹ equals ψᵏ⁺¹/Fₖ₊₁, alternates in sign starting above, and shrinks towards 0', slopeOK && Math.abs(s.slopes[11]) < 1e-5);
+check('the strip states the convention y/x = Fₖ/Fₖ₊₁ → φ⁻¹', /y\/x = Fₖ\/Fₖ₊₁ → φ⁻¹/.test(await page.textContent('#pAMeta')));
 
 /* ---------- returns ---------- */
 await pick('returns'); s = await seek(88);
@@ -190,7 +214,7 @@ check('the share of the window at least d∂ deep is (1 − d∂/r)³ (Monte Car
 s = await seek(0); check('at the centre d∂ is the inradius', near(s.d, s.rin, 1e-12) && near(s.share, 0, 1e-12));
 s = await seek(1); check('at s = 1 the point is on the boundary: d∂ = 0', Math.abs(s.d) < 1e-9);
 s = await seek(1.1); check('beyond it the point is outside and the page says so', !s.inside && s.d < 0 && depthOf(s.p) < 0 && /窗外/.test(await page.textContent('#roKey')) && /不在窗口里/.test(await page.textContent('#hudSub')));
-await pick('edge'); await page.waitForTimeout(250); s = await state();
+await pick('edge'); s = await state();
 check('EDGE plays the point outwards from the centre', s.preset === 'edge' && (s.playing || s.s > 0)); s = await seek(0.93);
 check('at s = 0.93 the point is still inside, a short distance from the nearest face', s.inside && s.d > 0 && s.d < 0.12 * s.rin);
 

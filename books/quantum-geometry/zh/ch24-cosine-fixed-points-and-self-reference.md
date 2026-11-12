@@ -413,7 +413,17 @@ $$
 格言说完了，现在把账算清。[@ex-dottie-and-golden-iterations] 的余弦表只列了四行，[@rem-banach-dottie-hairy-ball-literature] 给出的压缩常数 $\sin 1 \approx 0.8415$ 则是整个区间 $[0, 1]$ 上最坏的一处。三个问题还悬着：
 
 1. 靠近 $\theta^*$ 之后，每按一次余弦键，误差到底缩小多少？
+
+::: {.viz src="fixed-point-convergence" preset="rate" height="500"}
+**每按一次，误差乘以 −0.674。** 从 $\theta_0 = 1$ 反复取余弦，画面跟着误差放大：放大之后青色曲线贴在品红的切线上，每一圈的形状都一样，相邻两圈之比趋于切线的斜率 $-\sin\theta^* \approx -0.674$，比灰色虚线代表的全局常数 $-\sin 1 \approx -0.84$ 平缓（文献结果，见 [@rem-dottie-convergent-residual-literature]）。
+:::
+
 2. 如果尺子不只读投影 $\cos\theta$，还同时读正交分量 $\sin\theta$，闭合能快多少？
+
+::: {.viz src="fixed-point-convergence" preset="newton" height="500"}
+**沿切线走，位数翻倍。** 同样从 $\theta_0 = 1$ 出发，每一步先竖着读曲线的高度，再沿品红的切线走到灰线 $y = x$。画面跟着放大：四步之内视野宽从约 $0.6$ 缩到 $10^{-20}$ 量级，误差大约每步平方一次；单纯迭代要走 $115$ 步才到第 $4$ 步的精度（数值核对见 [@ex-dottie-rate-newton-rational]）。
+:::
+
 3. 一把只有有限分母刻度的尺子，读数离 $\cos q = q$ 最近能到多近？
 
 ::: {.figure src="ch24-three-speeds"}
@@ -478,16 +488,10 @@ $$
 对无穷多个分母 $b$ 成立：裂缝可以按分母的平方收窄，却永不为零。
 :::
 
-::: {.viz src="fixed-point-convergence" preset="rate" height="500"}
-**每按一次，误差乘以 −0.674。** 从 $\theta_0 = 1$ 反复取余弦，画面跟着误差放大：放大之后青色曲线贴在品红的切线上，每一圈的形状都一样，相邻两圈之比趋于切线的斜率 $-\sin\theta^* \approx -0.674$，比灰色虚线代表的全局常数 $-\sin 1 \approx -0.84$ 平缓（文献结果，见 [@rem-dottie-convergent-residual-literature]）。
-:::
+回到第一问的答案：不动点停在哪里、闭环合拢多快，是单位圆上同一个点 $(\theta^*, \lambda)$ 的两个坐标。
 
 ::: {.viz src="fixed-point-convergence" preset="circle" height="500"}
 **停在哪里，合拢多快。** 同一张蛛网图加上单位圆：圆上的点 $P = (\theta^*, \sin\theta^*)$，青色的横坐标 $\theta^*$ 是蛛网收进去的位置，品红的高度 $\lambda = \sin\theta^* \approx 0.674$ 是每步缩小的比例，也就是品红切线斜率的大小；$(\theta^*)^2 + \lambda^2 = 1$。$\theta^*$ 的存在与唯一见 [@thm-dottie-rational-inverse-endpoint]。
-:::
-
-::: {.viz src="fixed-point-convergence" preset="newton" height="500"}
-**沿切线走，位数翻倍。** 同样从 $\theta_0 = 1$ 出发，每一步先竖着读曲线的高度，再沿品红的切线走到灰线 $y = x$。画面跟着放大：四步之内视野宽从约 $0.6$ 缩到 $10^{-20}$ 量级，误差大约每步平方一次；单纯迭代要走 $115$ 步才到第 $4$ 步的精度（数值核对见 [@ex-dottie-rate-newton-rational]）。
 :::
 
 ::: {.example #ex-dottie-rate-newton-rational title="真实压缩率、牛顿二次闭合与最佳有理读数残差的数值核对"}

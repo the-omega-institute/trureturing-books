@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch31-rotation-steps" data-lang="zh" viewBox="0 0 440 350" width="440" height="350" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="一个四分之一圆，水平轴是失败方向 B，竖直轴是成功方向 W。从 B 上方 θ 处出发，四支箭头依次指向 θ、3θ、5θ、7θ，标着 n = 0、1、2，最后一支琥珀色的箭头 n = 3 正好落在 W 上。每两支相邻箭头之间有一段紫色的弧，都是 2θ。">
+<title>一个四分之一圆，水平轴是失败方向 B，竖直轴是成功方向 W。从 B 上方 θ 处出发，四支箭头依次指向 θ、3θ、5θ、7θ，标着 n = 0、1、2，最后一支琥珀色的箭头 n = 3 正好落在 W 上。每两支相邻箭头之间有一段紫色的弧，都是 2θ。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<path d="M306 300 L305.4 283.16 L303.6 266.41 L300.61 249.83 L296.44 233.51 L291.12 217.53 L284.67 201.96 L277.13 186.9 L268.54 172.41 L258.93 158.57 L248.36 145.45 L236.88 133.12 L224.55 121.64 L211.43 111.07 L197.59 101.46 L183.1 92.87 L168.04 85.33 L152.47 78.88 L136.49 73.56 L120.17 69.39 L103.59 66.4 L86.84 64.6 L70 64" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 4" stroke-linejoin="round" fill="none"/>
+<line x1="70" y1="300" x2="325.2" y2="300" class="ts-dim" stroke-width="1.4" fill="none"/>
+<path d="M332 300 L324 303.36 L324 296.64Z" class="tf-dim"/>
+<line x1="70" y1="300" x2="70" y2="44.8" class="ts-dim" stroke-width="1.4" fill="none"/>
+<path d="M70 38 L73.36 46 L66.64 46Z" class="tf-dim"/>
+<path d="M312.65 239.82 L311.48 235.3 L310.23 230.79 L308.89 226.31 L307.47 221.86 L305.97 217.43 L304.39 213.03 L302.72 208.66 L300.97 204.33 L299.14 200.03 L297.23 195.76 L295.24 191.53 L293.17 187.34 L291.03 183.18 L288.81 179.07 L286.51 175 L284.13 170.97 L281.68 166.99 L279.16 163.06 L276.56 159.17 L273.89 155.33 L271.15 151.54 L268.34 147.81" class="ts-violet" stroke-width="2" stroke-linejoin="round" fill="none"/>
+<path d="M268.34 147.81 L274.9 151.63 L270.2 155.17Z" class="tf-violet"/>
+<path d="M262.51 140.5 L259.49 136.93 L256.41 133.41 L253.26 129.96 L250.05 126.56 L246.78 123.22 L243.44 119.95 L240.04 116.74 L236.59 113.59 L233.07 110.51 L229.5 107.49 L225.87 104.54 L222.19 101.66 L218.46 98.85 L214.67 96.11 L210.83 93.44 L206.94 90.84 L203.01 88.32 L199.03 85.87 L195 83.49 L190.93 81.19 L186.82 78.97 L182.66 76.83" class="ts-violet" stroke-width="2" stroke-linejoin="round" fill="none"/>
+<path d="M182.66 76.83 L190.23 77.43 L187.53 82.65Z" class="tf-violet"/>
+<path d="M174.24 72.77 L169.97 70.86 L165.67 69.03 L161.34 67.28 L156.97 65.61 L152.57 64.03 L148.14 62.53 L143.69 61.11 L139.21 59.77 L134.7 58.52 L130.18 57.35 L125.63 56.27 L121.06 55.27 L116.48 54.36 L111.88 53.53 L107.26 52.79 L102.63 52.14 L97.99 51.57 L93.34 51.09 L88.68 50.7 L84.02 50.39 L79.35 50.17 L74.67 50.04" class="ts-violet" stroke-width="2" stroke-linejoin="round" fill="none"/>
+<path d="M74.67 50.04 L81.75 47.3 L81.59 53.18Z" class="tf-violet"/>
+<line x1="70" y1="300" x2="293.45" y2="249" class="ts-ink" stroke-width="1.8" fill="none" opacity="0.55"/>
+<path d="M300.08 247.49 L293.03 252.54 L291.54 245.99Z" class="tf-ink" opacity="0.55"/>
+<line x1="70" y1="300" x2="249.2" y2="157.1" class="ts-ink" stroke-width="1.8" fill="none" opacity="0.7"/>
+<path d="M254.51 152.86 L250.35 160.47 L246.16 155.22Z" class="tf-ink" opacity="0.7"/>
+<line x1="70" y1="300" x2="169.45" y2="93.5" class="ts-ink" stroke-width="1.8" fill="none" opacity="0.85"/>
+<path d="M172.4 87.37 L171.95 96.04 L165.9 93.12Z" class="tf-ink" opacity="0.85"/>
+<line x1="70" y1="300" x2="70" y2="72.5" class="ts-amber" stroke-width="2.6" fill="none"/>
+<path d="M70 64 L74.2 74 L65.8 74Z" class="tf-amber"/>
+<path d="M145.52 300 L145.49 297.88 L145.4 295.77 L145.25 293.65 L145.05 291.54 L144.78 289.44 L144.45 287.35 L144.07 285.27 L143.63 283.2" class="ts-dim" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
+<text class="tf-dim" x="158.96" y="295.02" font-size="14" text-anchor="middle">θ</text>
+<circle cx="70" cy="300" r="3.2" class="tf-ink"/>
+<text class="tf-dim ts-bg" x="274.3" y="278.3" font-size="13" text-anchor="middle" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">n</tspan> = 0</text>
+<text class="tf-dim ts-bg" x="242.63" y="192.27" font-size="13" text-anchor="middle" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">n</tspan> = 1</text>
+<text class="tf-dim ts-bg" x="176.76" y="128.5" font-size="13" text-anchor="middle" stroke-width="3.64" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">n</tspan> = 2</text>
+<text class="tf-violet" x="233.35" y="100.2" font-size="14">2θ</text>
+<text class="tf-ink" x="336" y="305" font-size="16" font-weight="600"><tspan font-style="italic">B</tspan></text>
+<text class="tf-dim" x="336" y="324" font-size="13">失败</text>
+<text class="tf-ink" x="82" y="46" font-size="16" font-weight="600"><tspan font-style="italic">W</tspan></text>
+<text class="tf-dim" x="106" y="46" font-size="13">成功</text>
+<text class="tf-amber" x="88" y="86" font-size="13"><tspan font-style="italic">n</tspan> = 3</text>
+<text class="tf-dim" x="40" y="336" font-size="13">sin²θ = <tspan font-style="italic">p</tspan> ≈ 0.050</text>
+</svg>

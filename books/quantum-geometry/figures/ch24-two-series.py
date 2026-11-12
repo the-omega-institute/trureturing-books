@@ -34,11 +34,11 @@ assert abs(4 * THETA - 2.9563405) < 1e-7 and abs(math.pi / 4 - 0.7853982) < 1e-7
 def draw(fig):
     t = fig.t
     ax = fig.axes(70, 28, 360, 252, (0, 1.08), (0, 5.4))
-    ax.xaxis(ticks=[0, 0.5, 1], labels=["0", "0.5", "1"], size=13)
-    ax.yaxis(ticks=[0, 1, 2, 4, 5], size=13)
+    ax.xaxis(ticks=[0, 0.5, 1], labels=["0", "0.5", "1"], size=14)
+    ax.yaxis(ticks=[0, 1, 2, 4, 5], size=14)
     ax.plot(A, 0, 1, color="line", width=2.4)
     ax.points([(1, A(1))], "line", r=3.4)
-    ax.text(1, A(1), "2 + π", dx=-10, dy=-2, size=13, color="line", anchor="end", middle=True)
+    ax.text(1, A(1), "2 + π", dx=-10, dy=-2, size=14, color="line", anchor="end", middle=True)
 
     X, Y = ax.X(THETA), ax.Y(math.pi)
     fig.arrow(X, ax.Y(0), X, Y + 6, "line", 1.8, head=8)

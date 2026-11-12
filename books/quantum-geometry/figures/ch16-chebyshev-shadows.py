@@ -49,9 +49,9 @@ def draw(fig):
         fig.arrow(cx, cy, tx, ty, color, width)
         lx, ly = cx + (R + 16) * math.cos(a), cy - (R + 16) * math.sin(a)
         if m in (1, 2):
-            fig.text(lx, ly, f"*m* = {m}", size=13, color="dim", anchor="middle", middle=True)
+            fig.text(lx, ly, f"*m* = {m}", size=14, color="dim", anchor="middle", middle=True)
         fig.dot(tx, cy, 5.4, "line", ring="bg")
         fig.text(tx, cy + 24, f"*T*_{{{m}}} = {VALUES[m]}", size=14, color="line", anchor="middle")
-    fig.text(cx + R, cy - 14, "*m* = 0", size=13, color="dim", anchor="end")
-    fig.text(cx - R, cy - 14, "*m* = 3", size=13, color="now")
+    fig.text(cx + R, cy - 14, "*m* = 0", size=14, color="dim", anchor="end")
+    fig.text(cx - R, cy - 14, "*m* = 3", size=14, color="now")
     fig.text(cx, cy + 58, t("*x* = cos *θ* = ½", "*x* = cos *θ* = ½"), size=14, color="dim", anchor="middle")

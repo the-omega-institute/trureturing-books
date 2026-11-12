@@ -33,8 +33,8 @@
 <text class="tf-ink ts-bg" x="190" y="24" font-size="14" text-anchor="end" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">110₂  <tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">23</tspan><tspan dy="-0.28em">​</tspan></text>
 <circle cx="390" cy="30" r="4.6" class="ts-bg tf-ink" stroke-width="1.4"/>
 <text class="tf-ink ts-bg" x="400" y="24" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke"><tspan font-style="italic">I</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">  111₂</tspan></text>
-<text class="tf-dim" x="191" y="294" font-size="13" text-anchor="middle">→ <tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">（第 0 位）</tspan></text>
-<text class="tf-dim" x="78" y="184" font-size="13" text-anchor="end">↑ <tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
-<text class="tf-dim" x="134" y="229" font-size="13" text-anchor="end"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
-<text class="tf-amber" x="470" y="330" font-size="13" text-anchor="end">乘 <tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">23</tspan><tspan dy="-0.28em">：在 </tspan><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">、</tspan><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em"> 上各走一步</tspan></text>
+<text class="tf-dim" x="191" y="294" font-size="14" text-anchor="middle">→ <tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">1</tspan><tspan dy="-0.28em">（第 0 位）</tspan></text>
+<text class="tf-dim" x="78" y="184" font-size="14" text-anchor="end">↑ <tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-dim" x="134" y="229" font-size="14" text-anchor="end"><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">​</tspan></text>
+<text class="tf-amber" x="470" y="330" font-size="14" text-anchor="end">乘 <tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">23</tspan><tspan dy="-0.28em">：在 </tspan><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">2</tspan><tspan dy="-0.28em">、</tspan><tspan font-style="italic">e</tspan><tspan dy="0.28em" font-size="72%">3</tspan><tspan dy="-0.28em"> 上各走一步</tspan></text>
 </svg>

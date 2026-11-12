@@ -12,6 +12,10 @@ We develop this blind-spot inversion principle across three progressive stages, 
 2. **Spherical Octant Curvature and Rotor Blind Spots**: Using the partition-topology inseparability kernel [`partition_inseparable_iff_kernel`](lean:D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel) and covariant commutator factorization [`covariant_commutator_formula`](lean:D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula), together with a complete analytical and numerical derivation of spherical addressing and octant rotor holonomy ([@ex-ch34-spherical-addressing-and-octant-rotors]), we prove that *you stand on the normal of whichever area's rotation you cannot see*;
 3. **Universal Observer Localization Across Dimensions (`MODEL`)**: Anchored by null-cone spatial rigidity [`null_cone_spatial_rigidity`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.null_cone_spatial_rigidity) and golden cut-and-project subset inclusion [`golden_model_set_subset_cut_and_project`](lean:D5/S1/Deficit/ModelSet/GoldenCutAndProject.golden_model_set_subset_cut_and_project), we extend the same inversion law across planar turns, zero-duration superconducting phase-frame updates, geometric phase, relativistic simultaneity slices ([@rem-ch34-virtual-z-berry-relativity-literature]), and the six-dimensional golden hypercube slice.
 
+::: {.figure src="ch34-overview"}
+**Figure 34.** The chapter at a glance. Panel I: on the magenta latitude circle at $\theta = 60^\circ$, the filled dot $\mathbf{v}_1$ and three hollow rings $\mathbf{v}_2(\phi)$ drop along cyan dashed lines to one point $\cos\theta$ on the violet polar axis, so the amber observer $\mathbf{O}$ at the pole cannot read the azimuth. Panel II: the $90^\circ$ turn inside the magenta equatorial disc $\mathbf{e}_1 \wedge \mathbf{e}_2$ is exactly the area the amber observer on its normal cannot see (these two panels are the hand computation of [@ex-ch34-spherical-addressing-and-octant-rotors], a literature result not formalized in this book). Panel III: on a square lattice, the amber golden slice $E_\parallel$ sits in the cyan acceptance window, and the points in the window drop onto the slice along the magenta internal direction $E_\perp$ (the cut-and-project scheme of [@prop-ch34-null-cone-and-golden-cut-orientation]; reading the slice as the observer's position is an interpretive model, `MODEL`).
+:::
+
 ---
 
 ## Second-Orthogonality Invisibility in Spherical Addressing: Symmetry Meridian and Polar Normal Inversion {#sec-ch34-spherical-addressing-inversion}
@@ -28,7 +32,15 @@ We develop this blind-spot inversion principle across three progressive stages, 
    - Equality across the entire azimuthal circle $\phi \in [0, 2\pi)$ renders the equatorial plane $\mathbf{e}_1 \wedge \mathbf{e}_2$ orthogonally invisible, uniquely locking the observer's axis onto the polar normal $\mathbf{O} = \pm\mathbf{e}_3$!
 :::
 
+::: {.viz src="spherical-degeneracy-radar" preset="meridian" height="500"}
+**A 90° side turn: the observers who cannot tell lie on the symmetric meridian.** The solid dot is the once-turned $\mathbf{v}_1$, the open ring the twice-turned $\mathbf{v}_2$, and the magenta is the side area the second turn sweeps along the latitude. The amber observer stands on the dashed cyan great circle $O_1 = O_2$; both cyan shadows fall on the same point of its axis and the gap is zero ([@ex-ch34-spherical-addressing-preview]).
+:::
+
 Stepping back from [@ex-ch34-spherical-addressing-preview], conventional measurement theory mourns degeneracy only because it secretly gazes down from an external coordinate grid and regrets "losing the transverse angle." Inside a self-contained geometry without point $C$ (`MODEL`), **transverse invisibility is the universe's built-in compass for self-localization**.
+
+::: {.viz src="spherical-degeneracy-radar" preset="sweep" height="500"}
+**The azimuth goes once round: only the polar axis is on every blind circle.** The observer stands at the North Pole; the dashed cyan blind circle turns with $\phi$ about the violet vertical, and the faint cyan circles are the ones already passed. They meet only at $\pm\mathbf{e}_3$, and at the pole the two shadows stay together at $\cos\theta$.
+:::
 
 At the formal kernel level, three structural facts make this inversion airtight: any pair of vectors in $\mathbb{R}^3$ admits a common unit normal, exact finite words in the rotation circles of any two noncollinear axes generate every orientation-preserving isometry of $\mathbb{R}^3$, and multi-step state evolution pulls back without loss onto the observer's measurement effect. The theorem below locks all three together.
 
@@ -67,18 +79,24 @@ Conjunct 1 sets $P = \operatorname{span}_{\mathbb{R}}\{a, b\} \subseteq \mathrm{
 Taken together, the three clauses of [@thm-ch34-perpendicular-axis-and-pullback] expose the exact mechanism of observer inversion: Conjunct 1 guarantees a unit normal axis $n$ perpendicular to any two directions swept out by a second orthogonal step; Conjunct 2 confirms that finite words around two noncollinear axes generate all of $\mathrm{SO}(3)$; and Conjunct 3 translates "applying an extra rotation step to the state" into "pulling the measurement `effect` one step backward onto the observer"—for a self-adjoint measurement effect, invariance of trace readouts on every input density state makes the effect a fixed point of the dual map by separation of the trace pairing. Reading that fixed effect as an axis further requires a channel known to represent an orientation-preserving rotation, with the effect's nonscalar part encoding the nonzero probe direction $\mathbf{O}$ injectively and covariantly under rotation; a scalar effect carries no direction. Under the unit-probe, nonzero-tilt, and full-azimuth conditions above, the familiar compass returns: **those rotations fix the probe axis and hence belong to $\operatorname{axisCircle}(\mathbf{O})$!**
 
 ::: {.remark #rem-ch34-localization-figure title="Polar-Axis Inversion and Octant Rotor Blind-Spot Diagram (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** The left panel combines formal perpendicular-axis and adjoint-pullback laws ([@thm-ch34-perpendicular-axis-and-pullback], `LEAN ✓`) with two-step spherical addressing inversion ([@ex-ch34-spherical-addressing-and-octant-rotors]); the right panel illustrates octant rotor holonomy and geometric-phase background ([@ex-ch34-spherical-addressing-and-octant-rotors] and [@rem-ch34-virtual-z-berry-relativity-literature]):
-
-![Polar-axis inversion under two-step spherical addressing and octant rotor-holonomy blind spots](../assets/fig-34-orthogonality-observer-localization.svg)
+**Literature result, not formalized in this book.** Two-step spherical addressing inversion ([@ex-ch34-spherical-addressing-and-octant-rotors]), combined with the formal perpendicular-axis and adjoint-pullback laws ([@thm-ch34-perpendicular-axis-and-pullback], `LEAN ✓`), is drawn in Panel I of Figure 34 and in this section's two lab cards `meridian` and `sweep`; octant rotor holonomy and its geometric-phase background ([@ex-ch34-spherical-addressing-and-octant-rotors] and [@rem-ch34-virtual-z-berry-relativity-literature]) are drawn in Panel II of Figure 34, in the next section's four lab cards `hops`, `equator`, `tilted` and `frames`, and in the octant-loop card further on.
 :::
 
 ---
 
 ## Spherical Octant and Rotor Curvature: You Stand on the Normal of Whichever Area You Cannot See {#sec-ch34-octant-rotor-holonomy}
 
-Moving from static vector addressing to the **octant orthogonal-circuit model (`MODEL`)** in the right panel of [@rem-ch34-localization-figure] (with the single-step vs. two-step rotor products, holonomy discrepancy, and equatorial test-vector comparison derived inside attributed example [@ex-ch34-spherical-addressing-and-octant-rotors] Part 2 below, and continuum geometric-phase literature recorded in [@rem-ch34-virtual-z-berry-relativity-literature]) elevates the comparison between single and double orthogonality from point coordinates to **readout kernels and commutator blind spots**.
+Moving from static vector addressing to the **octant orthogonal-circuit model (`MODEL`)** in Panel II of Figure 34 (with the single-step vs. two-step rotor products, holonomy discrepancy, and equatorial test-vector comparison derived inside attributed example [@ex-ch34-spherical-addressing-and-octant-rotors] Part 2 below, and continuum geometric-phase literature recorded in [@rem-ch34-virtual-z-berry-relativity-literature]) elevates the comparison between single and double orthogonality from point coordinates to **readout kernels and commutator blind spots**.
+
+::: {.viz src="spherical-degeneracy-radar" preset="hops" height="500"}
+**One hop or two: the same end point, carried flags 90° apart.** The solid one hop climbs straight up through $\mathbf{e}_1\wedge\mathbf{e}_3$ to $+\mathbf{e}_3$; the dashed two hops reach $\mathbf{e}_2$ first and then $+\mathbf{e}_3$. The two flags (the images of $\mathbf{e}_2$) end a magenta $90^\circ$ apart in the $\mathbf{e}_1\wedge\mathbf{e}_2$ plane, and the violet difference rotor $\exp(-\frac{\pi}{4}\mathbf{e}_1\mathbf{e}_2)$ at the lower right lies wholly in that plane ([@ex-ch34-spherical-addressing-and-octant-rotors]).
+:::
 
 When two distinct evolution sequences produce distinct states in the full carrier space, how can a bounded internal observer still record identical readings for both? At the level of observation topology and ring algebra, two formal theorems pinpoint why: **every readout map induces a partition topology whose topologically inseparable pairs coincide with its readout kernel, while the commutator between an operator $U$ and an observable $f$ factors as $(\mathrm{translated} - f) \cdot U$—so whenever semiconjugation leaves $f$ unshifted ($\mathrm{translated} = f$), the commutator vanishes immediately!**
+
+::: {.viz src="spherical-degeneracy-radar" preset="equator" height="500"}
+**Different end states, and still some observers read one number.** The equator test state at $\alpha = 60^\circ$ goes to the solid great circle under the one-hop rotor and to the dashed one under the two-hop rotor; the two circles meet only at the violet $\pm\mathbf{e}_3$. The amber observer at $\mathbf{e}_2$ reads $\frac{\sqrt{3}}{2}$ and $0$, and the magenta piece is that gap; the dashed cyan circle is the blind circle $O_1 + O_2 = 0$, whose observers read the two end states as one number, the same fibre of the readout ([@thm-ch34-readout-kernel-and-covariant-commutator]).
+:::
 
 ::: {.theorem #thm-ch34-readout-kernel-and-covariant-commutator title="Partition-Topology Inseparability Kernel and Covariant Commutator Factorization" lean="D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula"}
 In the frozen observation-partition-topology and covariant-commutator modules of `trureturing`, the following two theorems hold simultaneously:
@@ -101,6 +119,10 @@ In Conjunct 1, endowing $B$ with the discrete topology $\bot$ makes the singleto
 :::
 
 [@thm-ch34-readout-kernel-and-covariant-commutator] strips all mystique from observational blind spots: topological inseparability of distinct states $x \neq y$ under $\operatorname{partitionTopology}(\mathrm{readout})$ directly traces the fiber kernel of `readout`, and whenever a holonomy transformation $U$ fixes the observer's observable ($\mathrm{translated} = f$), their commutator collapses to zero ($U f - f U = 0$). We now work out every sign of both the spherical addressing difference and the octant rotor holonomy in $\mathbb{R}^3$ and $\mathcal{Cl}_{3,0}^+$.
+
+::: {.figure src="ch34-readout-fibers"}
+**Two different end states on one fiber are read as the same number.** The equatorial test state at $\alpha = 60^\circ$ goes to $\mathbf{s}_{\mathrm{once}}$ (filled dot) under the one-step rotor and to $\mathbf{s}_{\mathrm{twice}}$ (hollow ring) under the two-step rotor; both have the same $\mathbf{e}_3$ component $\frac{1}{2}$, so only the $\mathbf{e}_1$–$\mathbf{e}_2$ plane is drawn. The amber observer $\mathbf{O} = (-\mathbf{e}_1 + \mathbf{e}_2)/\sqrt{2}$ has $O_1 + O_2 = 0$; the parallel cyan lines are the fibers of equal reading $\mathbf{O}\cdot\mathbf{x}$, both end states lie on one of them with the reading $\sin\alpha/\sqrt{2} \approx 0.61$, and their magenta difference runs along the fiber, in the kernel of the readout ([@thm-ch34-readout-kernel-and-covariant-commutator], item 1).
+:::
 
 ::: {.example #ex-ch34-spherical-addressing-and-octant-rotors title="Complete Analytical and Numerical Derivation of Spherical Addressing Inversion and Octant Rotor Holonomy (Literature Result, Not Formalized in This Book)"}
 **Literature result, not formalized in this book.** Part 1 below is an elementary inner-product derivation in $\mathbb{R}^3$, while Part 2 uses standard bivector-exponential rotor and duality conventions in the even subalgebra $\mathcal{Cl}_{3,0}^+$ of the real three-dimensional geometric algebra $\mathcal{Cl}_{3,0}(\mathbb{R})$ (with $\mathbf{e}_i^2 = 1$ and $\mathbf{e}_i\mathbf{e}_j = -\mathbf{e}_j\mathbf{e}_i$ for $i \neq j$, not formalized as a standalone continuum rotor module in `trureturing@dev`):
@@ -175,7 +197,15 @@ In Conjunct 1, endowing $B$ with the discrete topology $\bot$ makes the singleto
    A polar observer $\mathbf{O} = (0, 0, 1)$ obtains the identical overlap $\frac{1}{2}$ (squared weight $\frac{1}{4}$) on all four vectors, whereas an equatorial observer tilted by $\beta_{\mathrm{obs}} = \frac{\pi}{2}$ to $\mathbf{O}' = (0, 1, 0)$ reads $0$ vs. $\frac{\sqrt{3}}{2}$ on $(\mathbf{v}_1, \mathbf{v}_2)$ and $\frac{\sqrt{3}}{2}$ vs. $0$ on $(\mathbf{s}_{\mathrm{once}}, \mathbf{s}_{\mathrm{twice}})$: because the octant holonomy factor $\exp\!\left(-\frac{\pi}{4}\mathbf{e}_1\mathbf{e}_2\right)$ separating $R_{\mathrm{once}}$ from $R_{\mathrm{twice}}$ lies wholly inside $\mathbf{e}_1 \wedge \mathbf{e}_2$, an equatorial observer immediately resolves $\sin\alpha$ from $0$ while only the polar observer at $\pm\mathbf{e}_3$ remains structurally blind to that plane.
 :::
 
+::: {.viz src="spherical-degeneracy-radar" preset="tilted" height="500"}
+**Off the polar axis, the readings open up with the azimuth.** The amber observer is $45^\circ$ from the North Pole, in the $\mathbf{e}_2\wedge\mathbf{e}_3$ plane: the two cyan shadows part and the magenta gap opens as $\sin\theta\sin\beta_{\mathrm{obs}}\sin\phi$, with a peak-to-peak spread of $2\sin\theta\sin\beta_{\mathrm{obs}} \approx 1.22$; the figure shows $\phi = 90^\circ$, with readings of about $0.35$ and $0.97$.
+:::
+
 Stepping back from the rotor calculation in Part 2 of [@ex-ch34-spherical-addressing-and-octant-rotors], the geometric localization principle crystallizes into a single aphorism (`MODEL`): **whichever rotation plane's turning you cannot see, you are standing directly on its orthogonal normal axis.**
+
+::: {.viz src="spherical-degeneracy-radar" preset="frames" height="500"}
+**Turning the initial frame: the pole stays on the blind circle.** Turn the equatorial frame by $\gamma$ and build the two rotors again ($\alpha = 60^\circ$): the dashed cyan blind circle turns with the frame about the vertical, and the faint cyan circles are the ones already passed. The amber observer at the North Pole is on every one of them and always reads $\cos\alpha = \frac{1}{2}$ twice.
+:::
 
 ---
 
@@ -218,6 +248,10 @@ Four classic counterparts of this blind-spot localization principle across super
 4. **Galileo's Ship Cabin and Einstein's Relativity of Simultaneity (Galileo Galilei, *Dialogo*, 1632; A. Einstein, *Ann. Phys.* **17**, 891–921, 1905)**: Galileo observed that mechanical experiments inside a sealed cabin cannot detect the ship's uniform velocity; Einstein showed in special relativity that an inertial observer's four-velocity $\mathbf{u}_{\mathrm{obs}}$ is Minkowski-orthogonal to its three-dimensional simultaneity slice ($\eta(\mathbf{u}_{\mathrm{obs}}, \Delta x) = 0 \iff \Delta t' = 0$). Identifying which orthogonal spatial flash events register zero time-difference degeneracy uniquely inverts the observer's own four-velocity $\mathbf{u}_{\mathrm{obs}}$!
 :::
 
+::: {.viz src="berry-loop" preset="octant" height="500"}
+**The octant loop: the arrow turns by $\pi/2$, the phase of the inner products keeps half.** From the loop page of Chapter 10: the cyan loop $N \to +X \to +Y \to N$ encloses a magenta area $\Omega = \pi/2$, the amber arrow carried round comes back turned by $\pi/2$, and the cyan needle at the lower right stops at $\pi/4$; the Berry-phase convention $\gamma_B = -\Omega/2$ is a literature result, not formalized in this book ([@rem-ch34-virtual-z-berry-relativity-literature]).
+:::
+
 Within our cross-dimensional **interpretive model (`MODEL`)**, the four-tier table boxed below unifies observer localization from a single plane and the unit sphere to four-dimensional relativistic spacetime and the six-dimensional golden hypercube:
 
 ::: {.remark #rem-ch34-localization-master-table title="Four-Tier Universal Observer Localization Table (Literature Result, Not Formalized in This Book)"}
@@ -231,6 +265,14 @@ Within our cross-dimensional **interpretive model (`MODEL`)**, the four-tier tab
 | **4. 6D Golden Hypercube $\mathbb{Z}^6 \subset \mathbb{R}^6 = E_\parallel^3 \oplus E_\perp^3$** | Idempotent physical projection $P_\parallel^2 = P_\parallel$ vs. orthogonal rotations inside $E_\perp^3$ (`MODEL` extending [@prop-ch34-null-cone-and-golden-cut-orientation]) | Entire 3D internal conjugate subspace $E_\perp^3 = \ker P_\parallel$ is invisible to a single static physical projection | Orthogonal complement $(E_\perp^3)^\perp = E_\parallel^3$ uniquely locks the golden cut orientation of the observer's physical 3-space |
 :::
 
+::: {.figure src="ch34-three-localizations"}
+**One localization law on three stages: the direction the reading cannot see (magenta) and the observer (amber) are orthogonal.** Panel I: in a single plane, $\mathbf{u}_0 = \mathbf{e}_1$ turns once to $\mathbf{u}_1 = \mathbf{e}_2$ (filled dot) and twice to $\mathbf{u}_2 = -\mathbf{e}_1$ (hollow ring); the amber dashed line is the anti-bisector $O_2 = -O_1$, perpendicular to the magenta chord $\mathbf{u}_2 - \mathbf{u}_1$, and the shadows of both points on it fall on one cyan point. Panel II: in a spacetime diagram, the worldline $u$ of a moving observer (amber) and its line of simultaneity (magenta) are mirror images in the grey light cone and Minkowski-orthogonal (drawn for $v = 0.5c$; a literature result, not formalized in this book). Panel III: the golden slice $E_\parallel$ and the internal direction $E_\perp$, with the acceptance window $[-\varphi^{-2}, \varphi^{-1}]$ as the narrow cyan strip ([@prop-ch34-null-cone-and-golden-cut-orientation], item 2; reading the slice as the observer's position is an interpretive model, `MODEL`).
+:::
+
 Standing before this four-tier ledger, the last epistemological fog of a zero-background universe lifts cleanly away: a finite observer never needed an external "third point $C$" hovering outside the cosmos to tell it where it stands. An eye cannot directly see its own retina, and a probe cannot register twists inside the plane normal to its own line of sight; yet by comparing a single orthogonal step against a double orthogonal step and gathering every plane whose rotation leaves the dial silent, the observer maps its own coordinates from within—**wherever orthogonal steps degenerate into one reading, precisely there lies the ground beneath the observer's own feet.**
+
+::: {.viz src="spherical-degeneracy-radar" height="640"}
+**The spherical degeneracy radar.** Four scenes share one sphere: addressing, rotors, the test state and the frames. Drag the amber observer and watch which turns vanish from its readings and which blind circles pass through where it stands.
+:::
 
 Yet what we have localized in this chapter is still the observer's static axis $\mathbf{O}$ at a **single slice instant**. What happens when the observer ceases to stand still, migrates its memory anchors step by step across the causal lattice, and advances across rounds as its finite acceptance window opens and closes—turning hidden transverse area into subjective time flow and topological echo? That dynamical passage unfolds directly in Chapter 35.

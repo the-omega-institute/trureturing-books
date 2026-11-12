@@ -8,7 +8,7 @@ Cyan cells are the products with sign +, magenta cells those with sign −.
 
 from _appb import NAME, ORDER, blade_mul, cayley_table_from_text
 
-SIZE = (476, 404)
+SIZE = (456, 404)    # mask labels of 13 at most 465 wide: 10 px or more in a phone column of 358
 ALT = {
     "zh": "一张 8 × 8 的格子：行是左因子，列是右因子，次序都是 1、e₁、e₂、e₃、e₁₂、e₁₃、e₂₃、e₁₂₃，每个基片下方写着它的三位掩码。"
           "每格写着乘积，青色的格子符号为正，品红的格子符号为负。第一行与第一列全是青色；对角线上前四格是 +1，后四格是 −1；"
@@ -19,7 +19,7 @@ ALT = {
           "four; 40 of the 64 cells are positive and 24 negative.",
 }
 
-X0, Y0, CW, CH = 64, 52, 51, 38
+X0, Y0, CW, CH = 66, 52, 48, 38
 
 
 def draw(fig):
@@ -39,10 +39,10 @@ def draw(fig):
     for k, m in enumerate(ORDER):
         x = X0 + k * CW + CW / 2
         fig.text(x, Y0 - 22, NAME[m], size=14, anchor="middle")
-        fig.text(x, Y0 - 7, format(m, "03b"), size=12, color="dim", anchor="middle", mono=True)
+        fig.text(x, Y0 - 7, format(m, "03b"), size=13, color="dim", anchor="middle", mono=True)
         y = Y0 + k * CH + CH / 2
-        fig.text(X0 - 30, y - 1, NAME[m], size=14, anchor="end", middle=True)
-        fig.text(X0 - 5, y, format(m, "03b"), size=12, color="dim", anchor="end", middle=True, mono=True)
+        fig.text(X0 - 34, y - 1, NAME[m], size=14, anchor="end", middle=True)
+        fig.text(X0 - 5, y, format(m, "03b"), size=13, color="dim", anchor="end", middle=True, mono=True)
     for i, a in enumerate(ORDER):
         for j, b in enumerate(ORDER):
             s, m = cells[(a, b)]

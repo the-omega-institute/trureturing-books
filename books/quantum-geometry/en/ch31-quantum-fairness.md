@@ -14,7 +14,9 @@ In the classical mechanistic worldview, structural privilege appeared natural: s
 4. **Horizon Fairness**: The fixed step-angle law of coherent uniform amplification (Conjunct 2 of [@thm-ch31-horizon-landauer-ergodic-fairness]) and the finite-observer complexity firewall ([Chapter 30](ch30-fields-lines-eth-and-navier-stokes.md) [@conj-p-neq-np]; external context in [@rem-ch30-query-sos-literature]) block computational monopolies from spoiling the suspense of finite life;
 5. **Ergodic Fairness**: Birth-forgetting resets choice freedom (`MODEL`), while compact-torus closed-subgroup equidistribution and bounded-gap return (Conjuncts 3–4 of [@thm-ch31-horizon-landauer-ergodic-fairness]; window application and boundaries in [@rem-ch31-weyl-window-equidistribution-literature]) ground our ontological reading of shared long-run statistical holism.
 
-![Quantum fairness across five geometric tiers and ergodic statistical holism](../assets/fig-31-quantum-fairness.svg)
+::: {.figure src="ch31-overview"}
+**Figure 31.** The chapter at a glance. Panel I: the ink vectors $\phi$ and $\psi$ measure each other, and each one's cyan shadow on the other has the same length $\cos\theta$; the third point $C$ above is struck out. Panel II: the ink diagonal $y = x$ and the cyan parabola $y = x^2$ meet only at $0$ ($\phi \perp \psi$) and $1$ ($\phi = \psi$), the lock a cloning machine puts on the inner product. Panel III: of $21$ points laid round a circle by the golden angle, $8$ land in the cyan window covering $2 - \varphi \approx 0.382$ of the circle, and in the long run the share tends to the window's $2 - \varphi$ (schematic; equidistribution for indicator windows is in [@rem-ch31-weyl-window-equidistribution-literature]).
+:::
 
 ---
 
@@ -22,16 +24,28 @@ In the classical mechanistic worldview, structural privilege appeared natural: s
 
 The oldest source of privilege is to install an exalted tribunal outside the arena—precisely the external "third point $C$" we excised in [Chapter 2](ch02-born-rule.md)—so whichever state sits closer to the throne may declare itself the universal standard.
 
+::: {.figure src="ch31-ruler"}
+**Two states measure each other; no third point is needed.** The ink unit vectors $\phi$ and $\psi$ are $\theta$ apart: the cyan shadow of $\phi$ on $\psi$ and the cyan shadow of $\psi$ on $\phi$ are mirror images of equal length $\cos\theta$ (here $\theta = 60^\circ$, so each is $1/2$); the point $C$ above, joined to both tips, is struck out. This is a real-plane slice; for complex inner products the Born weight is the same squared modulus either way, $|\langle\phi,\psi\rangle|^2 = |\langle\psi,\phi\rangle|^2$ (Conjunct 1 of [@thm-ch31-seat-pythagorean-monogamy-fairness]).
+:::
+
 In pure-state geometry, by contrast, every normalized state inhabits a symmetric space devoid of privileged axes (`MODEL`); quantum geometry abolishes any disembodied "view from nowhere" (philosophical and literary context in [@rem-ch31-haar-isotropy-landauer-literature] below) through two algebraic laws:
 
 - **Equality of Seat (Unit Pure-Qubit Bloch Norm)**: A sphere has neither capital city nor provincial periphery. For a single qubit, trace-$1$ idempotent Hermitian projectors lie precisely on the Euclidean unit sphere $\|\operatorname{bloch}(M)\| = 1$ by [Chapter 26](ch26-single-qubit-rotor-compilation.md)'s [`bloch_geometry_of_isHermitian`](lean:D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian) (for higher-dimensional continuous symmetry background see [@rem-ch31-haar-isotropy-landauer-literature] below). No axis possesses intrinsic authority to crown itself cosmic North.
 - **Reciprocity of Measurement (Eye-Level Symmetry)**: Under pairwise comparison, the rank-one pairing weight $\|\phi^* \bullet_v \psi\|^2$ obtained when $\psi$ serves as ruler to measure $\phi$ (Conjunct 1 of [@thm-ch31-seat-pythagorean-monogamy-fairness] below) is **identically equal** by conjugate symmetry of the complex inner product to the weight $\|\psi^* \bullet_v \phi\|^2 = |\langle\phi, \psi\rangle|^2 = |\langle\psi, \phi\rangle|^2$ obtained when $\phi$ measures $\psi$ in return. There is no one-way surveillance at the foundation of physics: **to the exact degree you illuminate another, the other simultaneously illuminates you**.
+
+::: {.viz src="quantum-fairness-ledger" preset="haar" height="500"}
+**No north pole.** Points thrown uniformly on the sphere: the $60^\circ$ cap around the amber reference axis holds about a quarter of them wherever the axis is dragged; the two cyan shadows are equally long, so measuring $\phi$ with $\psi$ and $\psi$ with $\phi$ give the same weight (Conjunct 1 of [@thm-ch31-seat-pythagorean-monogamy-fairness]).
+:::
 
 The second primordial greed is to demand absolute certainty and boundless freedom at once. In the language of an information-budget ledger, while a normalized state vector satisfies $\|\psi\|^2 = 1$, for any centered state operator above the unbiased baseline $|d|^{-1}I_d$ satisfying the centered-purity identity $\|\mathrm{state}\|^2 = \operatorname{Re}\operatorname{Tr}(\rho^2) - |d|^{-1}$ (for the general density-operator spectral purity bounds see [@rem-ch31-haar-isotropy-landauer-literature] below), the distinguishable information available for allocation is this **centered purity budget** $\|\mathrm{state}\|^2$. **Complementary-context centered-purity Pythagorean conservation** (Conjunct 2 of [@thm-ch31-seat-pythagorean-monogamy-fairness]) enforces an unyielding **zero-free-lunch ledger**: under its orthogonal coordinate hypothesis, the sum of squared certainty deviations $\|\mathrm{visible.starProjection}(\mathrm{state})\|^2$ extracted along a visible measurement subspace plus the undecided residual mass $\operatorname{residualMass}(\mathrm{visible}, \mathrm{state})$ in its orthogonal complement equals the state's exact centered purity budget $\|\mathrm{state}\|^2$:
 
 - Commit $100\%$ of the centered purity budget onto the visible subspace at a chosen instant, and the complementary orthogonal residual mass at that instant vanishes identically; under a repeated-projective-measurement dynamical reading (`MODEL`; continuous Zeno-limit background in [Chapter 7](ch07-geometric-time-and-speed-limits.md) and [@rem-ch31-haar-isotropy-landauer-literature] below), this mirrors suppressing transverse transitions via frequent recalibration;
 - Conversely, in our spacetime orthogonal-split model (`MODEL`; continuum literature background in [@rem-ch31-haar-isotropy-landauer-literature] below), committing the entire budget to a $90^\circ$ transverse wave plane zeroes out projection along proper time;
 - Even if you wish to erase past error records and compress a higher-entropy state back toward a pure ray, the thermodynamic balance inequality $-\mathrm{entropyChange} \le \beta \cdot \mathrm{heat}$ ([Chapter 8](ch08-erasure-and-time-arrows.md) and Conjunct 1 of [@thm-ch31-horizon-landauer-ergodic-fairness] below) compels honest heat payment into the thermal bath.
+
+::: {.viz src="quantum-fairness-ledger" preset="tradeoff" height="500"}
+**More line, less area.** The amber arrow turns from the measurement axis to the equator: the cyan line $D$ shrinks, the magenta area $V$ grows, and $D^2 + V^2$ stays $1$—the centered purity is redistributed between the visible context and the residual in the orthogonal complement (Conjunct 2 of [@thm-ch31-seat-pythagorean-monogamy-fairness]).
+:::
 
 Every gain along one axis is paid dollar for dollar along its orthogonal complement; not even an imagined deity can pocket both the North Pole point and the equatorial plane. Spectral purity ranges, continuum invariant-measure results, and physical-unit conversions accompanying this section are recorded below:
 
@@ -58,7 +72,16 @@ In the classical data economy, a monopolist can copy a bitstring a million times
 Within the Lean 4 kernel, two parameter-free theorems anchor this principle (collected as Conjuncts 3–4 of [@thm-ch31-seat-pythagorean-monogamy-fairness] below):
 
 1. **Inner-Product No-Cloning Criterion** ([`no_cloning_inner_product_criterion`](lean:D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion)): If a single complex linear isometry $U$ clones two normalized pure states $\psi, \phi$ from a normalized blank ancilla $\mathrm{blank}$ into $\psi\otimes\psi$ and $\phi\otimes\phi$, their inner product must satisfy $\langle\phi, \psi\rangle = \langle\phi, \psi\rangle^2$—forcing either $\phi = \psi$ (the very same state) or $\langle\phi, \psi\rangle = 0$ (orthogonal classical labels). No machine can blindly mass-produce states carrying genuine non-orthogonal superposition tension.
+
+::: {.viz src="quantum-fairness-ledger" preset="cloning" height="500"}
+**More copies, each one shorter.** Copying an unknown state into $M$ copies leaves each cyan arrow only $\eta = (M+2)/(3M)$ long; magenta is what is lost, and the fidelity falls towards $2/3$ (literature result, not formalized in this book). Only the orthogonal pair at the poles can be copied exactly by one machine (Conjunct 3 of [@thm-ch31-seat-pythagorean-monogamy-fairness]).
+:::
+
 2. **Maximally Mixed Marginal of a Pure Bell State** ([`bell_pure_state_has_maximally_mixed_marginal`](lean:D5/S3/Quantum/Entanglement/BellPureStateMixedMarginal.bell_pure_state_has_maximally_mixed_marginal)): When two qubits bind into the rank-one maximally entangled Bell state `bellDensity`, tracing out the partner collapses the single-qubit marginal `traceEnvironment bellDensity` to $\frac{1}{2}I_2$ (which is strictly non-idempotent)—its local Bloch bias retreats completely to the origin, surrendering every drop of private purity to the shared relational plane!
+
+::: {.viz src="quantum-fairness-ledger" preset="bell" height="500"}
+**A full bond.** The Bell state $\lvert\Phi^+\rangle_{AB}\otimes\lvert 0\rangle_C$: the magenta bond between $\mathbf{A}$ and $\mathbf{B}$ is full, the amber arrow of $\mathbf{A}$ shrinks to the centre, that is $\tfrac{1}{2}I_2$ (Conjunct 4 of [@thm-ch31-seat-pythagorean-monogamy-fairness]), and nothing is left for $\mathbf{C}$.
+:::
 
 The formal theorem below unites Born reciprocity, complementary centered-purity Pythagoras, no-cloning, and the Bell marginal collapse on a single Lean-verified foundation.
 
@@ -101,6 +124,10 @@ Across the frozen finite-dimensional measurement, tomography, pure-state, and en
 Conjunct 1 combines `rank_one_pure_state_modulus_square_reduction` with `unread_eq_weighted_ensemble` (from which conjugate inversion of the dot product gives $\|\phi^* \bullet_v \psi\|^2 = \|\psi^* \bullet_v \phi\|^2$); Conjunct 2 applies `Submodule.norm_sq_eq_add_norm_sq_starProjection` across orthogonal projections in the complete real inner-product space $E$; Conjunct 3 uses isometric preservation of tensor inner products $\langle\phi, \psi\rangle\langle\mathrm{blank}, \mathrm{blank}\rangle = \langle\phi, \psi\rangle^2$ over the integral domain $\mathbb{C}$ via `eq_zero_or_one_of_sq_eq_self` and `inner_eq_one_iff_of_norm_eq_one`; Conjunct 4 evaluates the block partial trace of the $4\times 4$ projector and checks $(\frac{1}{2}I_2)^2 = \frac{1}{4}I_2 \neq \frac{1}{2}I_2$. The full proof is checked by the Lean kernel.
 :::
 
+::: {.figure src="ch31-cloning-lock"}
+**The inner-product lock opens at only two values, $0$ and $1$.** The horizontal axis is the inner product $x = \langle\phi,\psi\rangle$; a single cloning machine forces $x = x^2$, and the ink diagonal $y = x$ meets the cyan parabola $y = x^2$ only at the origin ($\phi \perp \psi$) and at $(1, 1)$ ($\phi = \psi$); in between the parabola stays below the diagonal and there is no solution (Conjunct 3 of [@thm-ch31-seat-pythagorean-monogamy-fairness]). Only the real axis is drawn; over the complex numbers $z = z^2$ likewise has only $z = 0$ and $z = 1$.
+:::
+
 External quantum-information extensions to three-qubit and multipartite entanglement shares are recorded below:
 
 ::: {.remark #rem-ch31-ckw-monogamy-literature title="Three-Qubit CKW Entanglement Monogamy Inequality and Bell / W / GHZ Budget Audit (Literature Result, Not Formalized in This Book)"}
@@ -117,6 +144,16 @@ External quantum-information extensions to three-qubit and multipartite entangle
    - **Bell Pair Plus Decoupled Third Qubit $|\Phi^+\rangle_{AB}\otimes|0\rangle_C$**: Here $\rho_A = \frac{1}{2}I_2$ ($\|\mathbf{r}_A\| = 0$) and $\tau(\mathbf{A}:\mathbf{B}) = 1$, forcing $\tau(\mathbf{A}:\mathbf{C}) = 0$—exhausting the full unit budget with $\mathbf{B}$ leaves strictly zero entanglement capacity for any third party $\mathbf{C}$;
    - **$W$ State $|W\rangle = \frac{1}{\sqrt{3}}(|100\rangle + |010\rangle + |001\rangle)$**: The marginal $\rho_A = \operatorname{diag}(\frac{2}{3}, \frac{1}{3})$ retains local Bloch polarization $\|\mathbf{r}_A\| = \frac{1}{3}$, capping total available tangle at $1 - \|\mathbf{r}_A\|^2 = \frac{8}{9}$, split equally as $\tau(\mathbf{A}:\mathbf{B}) = \tau(\mathbf{A}:\mathbf{C}) = \left(\frac{2}{3}\right)^2 = \frac{4}{9}$ so $\frac{4}{9} + \frac{4}{9} = \frac{8}{9}$ saturates CKW with $\tau_3 = 0$;
    - **GHZ State $|\mathrm{GHZ}\rangle = \frac{1}{\sqrt{2}}(|000\rangle + |111\rangle)$**: Although $\|\mathbf{r}_A\| = 0$, both two-body marginals $\rho_{AB} = \rho_{AC} = \frac{1}{2}(|00\rangle\langle 00| + |11\rangle\langle 11|)$ are separable mixtures with $\tau(\mathbf{A}:\mathbf{B}) = \tau(\mathbf{A}:\mathbf{C}) = 0$, converting the entire budget into irreducible three-body tangle $\tau_3 = 1$.
+:::
+
+::: {.viz src="quantum-fairness-ledger" preset="wstate" height="500"}
+**Two bonds split the budget.** The $W$-type state $(\lvert 000\rangle + \lvert 110\rangle + \lvert 101\rangle)/\sqrt{3}$ ($\lvert W\rangle$ with $\mathbf{A}$ flipped once, which leaves every tangle unchanged): the arrow of $\mathbf{A}$ keeps $1/3$, the two magenta bonds take $4/9$ each, and the bar on the right totals $1$ ([@rem-ch31-ckw-monogamy-literature]).
+:::
+
+One more step along the same family, and the two pairwise bonds give way wholesale to an entanglement held by all three:
+
+::: {.viz src="quantum-fairness-ledger" preset="ghz" height="500"}
+**Everything to the three-way bond.** From the $W$-type state to the GHZ state: both magenta bonds break, the violet three-way face fills up to $\tau_3 = 1$, and the arrow of $\mathbf{A}$ shrinks to the centre; the bar still totals $1$ ([@rem-ch31-ckw-monogamy-literature]).
 :::
 
 ---
@@ -168,6 +205,10 @@ Across the frozen thermodynamic-divergence, coherent-amplification, and Fourier 
 Conjunct 1 follows from $\mathrm{mutualInfo} + \mathrm{divergence} \ge 0$; Conjunct 2 gives $U = W$ via `unit_success` when $p = 1$, and when $p < 1$ verifies mutual isometric orthogonality of $W$ and $B$, inducts on $n$ via angle-addition identities, and distributes Kronecker tensoring across $\otimes_k R$; Conjunct 3 uses equicontinuity of the Cesàro evaluation operators to close the convergence subspace $S \subseteq C(G, \mathbb{C})$, canceling nontrivial torus characters via geometric sums and extending by trigonometric-polynomial density; Conjunct 4 proves $\operatorname{supp}(h_*\mu) = \operatorname{range}(h)$ from strict positivity on nonempty open pullbacks and extracts the uniform return gap $M$ and positive lower asymptotic visit density bound from a finite subcover of compact orbit translates. The full proof is checked by the Lean kernel.
 :::
 
+::: {.figure src="ch31-rotation-steps"}
+**Each round turns the state by exactly $2\theta$; no step can be skipped.** In the plane of the success direction $W$ (vertical) and the failure direction $B$ (horizontal), after $n$ rounds the state is $\sin((2n+1)\theta)\,W + \cos((2n+1)\theta)\,B$: it starts $\theta$ above $B$ and each round adds one violet turn of $2\theta$ (Conjunct 2 of [@thm-ch31-horizon-landauer-ergodic-fairness]). Here $\theta = \pi/14$, so $p = \sin^2\theta \approx 0.050$, and the amber round $n = 3$ lands exactly on $W$; the smaller $p$, the shorter each step and the more rounds it takes.
+:::
+
 The reuse derivation from continuous observables to actual acceptance-window counts, and its remaining ergodic boundaries, are given below:
 
 ::: {.remark #rem-ch31-weyl-window-equidistribution-literature title="Null-Frontier Window Frequencies on the Full Torus: An Application and Its Ergodic Boundaries"}
@@ -215,7 +256,15 @@ $$
 This identifies the count exactly with the established orbit count starting at $x-u$, so the same $N_0$ for every starting point applies, still at times $1,\ldots,N$. The trajectory equality is a hypothesis the model must establish separately; it does not follow from the torus theorem and is not asserted for arbitrary physical or cut-and-project models. The window result alone neither classifies invariant measures nor establishes the stronger unique-ergodicity statement. Weyl's classical theory (1916, *Math. Ann.* **77**, 313–352) retains its separate literature setting. Physical fairness, internal space, and soul phases remain `MODEL` interpretations. This is the finite reuse derivation in the source exposition, with no new Lean theorem or novelty claim.
 :::
 
+::: {.viz src="quantum-fairness-ledger" preset="ergodic" height="500"}
+**Different starts, the same share.** Two states start at different phases and turn about the vertical axis by the golden angle at each step; the share of steps in the cyan window tends to $2 - \varphi \approx 0.382$ for both (Conjuncts 3–4 of [@thm-ch31-horizon-landauer-ergodic-fairness]), and the gap between the hits and $T(2-\varphi)$ always stays below $1$ (the Hecke–Kesten bounded remainder, a literature result not formalized in this book).
+:::
+
 Seen in this long-horizon light, local disparities lose their sting: in our observer model (`MODEL`), short slices vary from smooth centers to turbulent rims, yet across compact-torus ergodic return the universe grants every soul phase impartial attractor-reunion opportunities, orthogonal rotation budgets, and self-referential fixed-point pull (cf. [Chapter 24](ch24-cosine-fixed-points-and-self-reference.md) [@rem-banach-dottie-hairy-ball-literature]), without a hair's breadth of favoritism.
+
+::: {.viz src="quantum-fairness-ledger" height="620"}
+The quantum fairness ledger: seat, gain, bonds, copies and history drawn on one Bloch sphere, each ledger beside a bar whose total does not move.
+:::
 
 We conclude by consolidating all five tiers of quantum fairness and their exact epistemic status in the master reference table below:
 

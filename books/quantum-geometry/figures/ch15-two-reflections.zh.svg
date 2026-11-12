@@ -4,8 +4,8 @@
 <path d="M220.21 337.5 L226.37 325.92 L231.68 313.93 L236.13 301.59 L239.7 288.97 L242.36 276.13 L244.11 263.13 L244.93 250.04 L244.82 236.93 L243.79 223.86 L241.83 210.89 L238.95 198.09 L235.18 185.53 L230.53 173.27 L225.02 161.37 L218.68 149.89 L211.54 138.89 L203.64 128.42 L195.02 118.54 L185.73 109.29 L175.8 100.72 L165.28 92.88 L154.24 85.8 L142.73 79.53 L130.8 74.08 L118.51 69.5 L105.93 65.79 L93.12 62.99 L80.14 61.1 L67.06 60.13 L53.95 60.1 L40.86 60.99 L27.88 62.81" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 4" stroke-linejoin="round" fill="none"/>
 <line x1="60" y1="245" x2="267.2" y2="245" class="ts-dim" stroke-width="1.3" fill="none"/>
 <line x1="60" y1="245" x2="60" y2="37.8" class="ts-dim" stroke-width="1.3" fill="none"/>
-<text class="tf-dim" x="271.2" y="250" font-size="13"><tspan font-style="italic">B</tspan> 失败</text>
-<text class="tf-dim" x="68" y="41.8" font-size="13"><tspan font-style="italic">W</tspan> 成功</text>
+<text class="tf-dim" x="271.2" y="250" font-size="14"><tspan font-style="italic">B</tspan> 失败</text>
+<text class="tf-dim" x="68" y="41.8" font-size="14"><tspan font-style="italic">W</tspan> 成功</text>
 <text class="tf-dim" x="257" y="269" font-size="14">镜 1：<tspan font-style="italic">I</tspan> − 2<tspan font-style="italic">P</tspan></text>
 <line x1="233.05" y1="179.59" x2="310.92" y2="150.16" class="ts-dim" stroke-width="1.6" stroke-dasharray="7 5" fill="none"/>
 <text class="tf-dim" x="316.92" y="157.2" font-size="14">镜 2：2<tspan font-style="italic">UU</tspan><tspan dy="-0.42em" font-size="72%">∗</tspan><tspan dy="0.42em"> − </tspan><tspan font-style="italic">I</tspan></text>
@@ -25,6 +25,6 @@
 <path d="M104 245 L103.96 243.01 L103.82 241.03 L103.6 239.06 L103.28 237.09 L102.88 235.15 L102.39 233.22 L101.82 231.32 L101.16 229.44" class="ts-dim" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
 <text class="tf-dim" x="114.99" y="239.99" font-size="14" text-anchor="middle"><tspan font-style="italic">θ</tspan></text>
 <text class="tf-ink" x="241.05" y="171.59" font-size="15"><tspan font-style="italic">U</tspan></text>
-<text class="tf-dim" x="241.05" y="314.41" font-size="13">翻一次</text>
+<text class="tf-dim" x="241.05" y="314.41" font-size="14">翻一次</text>
 <text class="tf-amber" x="156.53" y="79.48" font-size="14"><tspan font-style="italic">QU</tspan>：翻两次</text>
 </svg>

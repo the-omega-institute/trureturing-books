@@ -20,5 +20,5 @@
 <circle cx="372.6" cy="112.7" r="5" class="ts-bg tf-cyan" stroke-width="1.4"/>
 <text class="tf-ink" x="414" y="24" font-size="14" text-anchor="middle"><tspan font-style="italic">α</tspan> = 90°</text>
 <text class="tf-cyan" x="414" y="172" font-size="14" text-anchor="middle" font-weight="600">1</text>
-<text class="tf-dim" x="4" y="194" font-size="13">visible length sin <tspan font-style="italic">α</tspan></text>
+<text class="tf-dim" x="4" y="194" font-size="14">visible length sin <tspan font-style="italic">α</tspan></text>
 </svg>

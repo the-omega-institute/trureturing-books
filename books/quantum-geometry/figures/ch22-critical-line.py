@@ -9,7 +9,7 @@ and t = 15, where the text reports the sign change of ξ.
 
 from _ch22 import ZEROS, check_zeta, zeta
 
-SIZE = (520, 280)
+SIZE = (500, 286)
 ALT = {
     "zh": "坐标图，横轴是 t（0 到 50），纵轴是 |ζ(½ + it)|（0 到 4）。墨色曲线从 t = 0 处的 1.46 起伏前进，十次落到横轴上，"
           "落点是十个品红的点，第一个标着 14.13。右上角的红色标签写着：所有非平凡零点都在这条线上吗？开放问题。",
@@ -31,14 +31,14 @@ def draw(fig):
     assert len(mins) == len(ZEROS) and all(abs(m - z) < 0.06 for m, z in zip(mins, ZEROS))
     assert 14 < ZEROS[0] < 15
 
-    ax = fig.axes(56, 40, 430, 196, (0, 50), (0, 4))
+    ax = fig.axes(46, 46, 424, 196, (0, 50), (0, 4))
     ax.grid(ys=[1, 2, 3])
-    ax.xaxis(ticks=[0, 10, 20, 30, 40, 50], label="*t*", size=13)
-    ax.yaxis(ticks=[0, 1, 2, 3, 4], size=13)
+    ax.xaxis(ticks=[0, 10, 20, 30, 40, 50], label="*t*", size=14)
+    ax.yaxis(ticks=[0, 1, 2, 3, 4], size=14)
     ax.path(samples, "ink", 2.2)
     for z in ZEROS:
         x, y = ax.pt(z, 0)
         fig.dot(x, y, 4.4, "area", ring="bg")
-    ax.text(ZEROS[0], 0, "14.13", dy=-12, size=13, color="area", anchor="middle", halo=True)
+    ax.text(ZEROS[0], 0, "14.13", dx=-9, dy=-8, size=14, color="area", anchor="end", halo=True)
     ax.text(0, 4, "|ζ(½ + *it*)|", dx=8, dy=4, size=14)
-    fig.chip(486, 26, t("全都在这条线上？开放问题", "all zeros on this line? open"), "open", anchor="end")
+    fig.chip(470, 26, t("全都在这条线上？开放问题", "all zeros on this line? open"), "open", size=14, anchor="end")

@@ -12,6 +12,10 @@
 2. **八分球面曲率与旋子盲区**：借助划分拓扑不可分核定理 [`partition_inseparable_iff_kernel`](lean:D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel) 与协变换位子因式分解 [`covariant_commutator_formula`](lean:D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula)，并在 [@ex-ch34-spherical-addressing-and-octant-rotors] 中完整手算三维球面寻址差值与八分球面旋子和乐，严格证明“看不见哪块面积的转动，你就站在哪块面积的法向轴上”；
 3. **跨维度的普适观察者定位律（`MODEL`）**：结合零光锥空间刚性定理 [`null_cone_spatial_rigidity`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.null_cone_spatial_rigidity) 与黄金切投子集包含定理 [`golden_model_set_subset_cut_and_project`](lean:D5/S1/Deficit/ModelSet/GoldenCutAndProject.golden_model_set_subset_cut_and_project)，将同一简并反演机制贯通至单平面旋转、超导硬件零耗时相位帧更新与几何相位及相对论同时面文献背景（[@rem-ch34-virtual-z-berry-relativity-literature]），直至六维黄金超立方切片。
 
+::: {.figure src="ch34-overview"}
+**图 34。** 本章地图：第 I 栏，纬度 $\theta = 60^\circ$ 的品红纬圈上，实心点 $\mathbf{v}_1$ 与三个空心圈 $\mathbf{v}_2(\phi)$ 沿青色虚线落到紫色极轴上的同一点 $\cos\theta$，站在极点的琥珀色观察者 $\mathbf{O}$ 读不出方位角；第 II 栏，品红的赤道圆盘 $\mathbf{e}_1 \wedge \mathbf{e}_2$ 里转过 $90^\circ$ 的那块面积，恰是站在其法轴上的琥珀色观察者看不见的面（这两栏是 [@ex-ch34-spherical-addressing-and-octant-rotors] 的手算，文献结果，未在本书形式化）；第 III 栏，方格点阵上琥珀色的黄金切片 $E_\parallel$ 与青色的接受窗，窗里的点沿品红的内部方向 $E_\perp$ 落到切片上（[@prop-ch34-null-cone-and-golden-cut-orientation] 的切投格局；把切片读成观察者的站位是模型诠释，`MODEL`）。
+:::
+
 ---
 
 ## 球面寻址中的二次正交隐身：对称子午线与极点法向反演 {#sec-ch34-spherical-addressing-inversion}
@@ -28,7 +32,15 @@
    - 整圈方位角 $\phi \in [0, 2\pi)$ 读数全都相同，意味着横向旋转面 $\mathbf{e}_1 \wedge \mathbf{e}_2$ 对该观察者彻底正交隐身，将探针轴唯一反演锁定在法向极点 $\mathbf{O} = \pm\mathbf{e}_3$ 上！
 :::
 
+::: {.viz src="spherical-degeneracy-radar" preset="meridian" height="500"}
+**横拐 90°：读不出差别的观察者落在对称子午线上。** 实心点是一次正交的 $\mathbf{v}_1$，空心圈是两次正交的 $\mathbf{v}_2$，品红是第二次转动沿纬线扫过的横向面。琥珀色的观察者站在 $O_1 = O_2$ 的青色虚线大圆上，两道青色影子落在它轴上的同一点，读数差为零（[@ex-ch34-spherical-addressing-preview]）。
+:::
+
 对照 [@ex-ch34-spherical-addressing-preview] 的几何图景，传统测量理论之所以把简并视为“缺憾”，是因为它暗中站在一个全知外部坐标系里惋惜“丢掉了横向角”；而在无外部第 3 点的自包含几何里（`MODEL`），**横向自由度的简并隐身恰恰是宇宙颁给观察者的自定位罗盘**。
+
+::: {.viz src="spherical-degeneracy-radar" preset="sweep" height="500"}
+**方位角转一圈：每一条盲圈都经过的只有极轴。** 观察者站在北极，青色虚线的盲圈随 $\phi$ 绕紫色竖轴转动，淡青色是已经走过的盲圈；它们只在 $\pm\mathbf{e}_3$ 相交，北极上的两道影子始终重合在 $\cos\theta$。
+:::
 
 在形式化内核中，为什么三维空间里任意两根轴总能立起一根公共单位法向量、任意两根不共线轴的整圆旋转有限字足以走遍全部保定向正交变换，且作用在状态上的演化步总是等价于把测量效应向观察者一侧对偶拉回？下面这条合取定理将这三块基石严密锁定在同一座证明基座之上。
 
@@ -67,18 +79,24 @@
 把 [@thm-ch34-perpendicular-axis-and-pullback] 的三款结论连起来看，观察者反演的底层几何豁然贯通：第 1 款保证只要二次正交转向扫过任意一对独立方向 $a, b$，三维空间必定留出一根与之同时垂直的单位法轴 $n$；第 2 款指出仅凭两根不共线轴的整圆旋转有限字即可无死角覆盖全部三维刚体旋转；而第 3 款则把“被测状态多转了一步”精确翻译为“观察者手里的测量效应 `effect` 被对偶映射往回拉了一步”——对自伴测量效应，若所有输入密度态的迹读数均不变，迹配对的分离性便使该效应成为对偶映射的不动点。要把这个不动效应读成一根轴，还须已知信道来自保定向旋转，且效应的非标量部分与非零探针方向 $\mathbf{O}$ 一一对应并随旋转协变；标量效应本身没有方向。在前述单位探针、非零倾转与全方位角扫描的设置下，这才落回熟悉的几何罗盘：**那族旋转固定探针轴，亦即属于 $\operatorname{axisCircle}(\mathbf{O})$！**
 
 ::: {.remark #rem-ch34-localization-figure title="球面两步正交寻址极轴反演与八分球面旋子盲区图解（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 下图左栏结合正交法轴与对偶拉回定理（[@thm-ch34-perpendicular-axis-and-pullback]，`LEAN ✓`）展示球面两步寻址极轴反演（[@ex-ch34-spherical-addressing-and-octant-rotors]）；右栏展示八分球面旋子和乐与几何相位文献背景（[@ex-ch34-spherical-addressing-and-octant-rotors] 与 [@rem-ch34-virtual-z-berry-relativity-literature]）：
-
-![球面两步正交寻址的极轴反演与八分球面旋子曲率盲区](../assets/fig-34-orthogonality-observer-localization.svg)
+**文献结果，未在本书形式化。** 结合正交法轴与对偶拉回定理（[@thm-ch34-perpendicular-axis-and-pullback]，`LEAN ✓`）的球面两步寻址极轴反演（[@ex-ch34-spherical-addressing-and-octant-rotors]）画在图 34 第 I 栏与本节的 `meridian`、`sweep` 两张实验卡里；八分球面旋子和乐与几何相位文献背景（[@ex-ch34-spherical-addressing-and-octant-rotors] 与 [@rem-ch34-virtual-z-berry-relativity-literature]）画在图 34 第 II 栏、下一节的 `hops`、`equator`、`tilted`、`frames` 四张实验卡，以及后文的八分球面回路卡里。
 :::
 
 ---
 
 ## 八分球面与旋子曲率：看不见哪块面积，你就站在哪根轴上 {#sec-ch34-octant-rotor-holonomy}
 
-如果说球面点寻址还只是“静态向量投影”，那么当我们把目光投向 [@rem-ch34-localization-figure] 右半幅的**八分球面正交回路模型（`MODEL`）**（一步路径与两步路径的旋子乘积、和乐差异与赤道测试态对比完整封装于下文归属算例 [@ex-ch34-spherical-addressing-and-octant-rotors] 第 2 部分，连续几何相位文献背景见 [@rem-ch34-virtual-z-berry-relativity-literature]）时，“一次正交 vs. 两次正交”的反演威力更会上升到**算子读出核与换位子盲区**的层面。
+如果说球面点寻址还只是“静态向量投影”，那么当我们把目光投向图 34 第 II 栏的**八分球面正交回路模型（`MODEL`）**（一步路径与两步路径的旋子乘积、和乐差异与赤道测试态对比完整封装于下文归属算例 [@ex-ch34-spherical-addressing-and-octant-rotors] 第 2 部分，连续几何相位文献背景见 [@rem-ch34-virtual-z-berry-relativity-literature]）时，“一次正交 vs. 两次正交”的反演威力更会上升到**算子读出核与换位子盲区**的层面。
+
+::: {.viz src="spherical-degeneracy-radar" preset="hops" height="500"}
+**一步与两步：终点相同，随行的小旗差 90°。** 实线一步沿 $\mathbf{e}_1\wedge\mathbf{e}_3$ 直上 $+\mathbf{e}_3$，虚线两步先到 $\mathbf{e}_2$ 再上 $+\mathbf{e}_3$；两面小旗（$\mathbf{e}_2$ 的像）在 $\mathbf{e}_1\wedge\mathbf{e}_2$ 面里差出品红的 $90^\circ$，右下角紫色的差旋子 $\exp(-\frac{\pi}{4}\mathbf{e}_1\mathbf{e}_2)$ 整个落在这个面里（[@ex-ch34-spherical-addressing-and-octant-rotors]）。
+:::
 
 当两条不同演化路径在全状态空间中导出并不相同的末态，为什么某位场内观察者依然会把二者读成“同一个结果”？在观测拓扑与抽象环代数层面，答案由两条极其精炼的内核定理给出：**读出映射诱导的划分拓扑把一切同读数状态粘合成拓扑不可分等价类，而算符换位子的全部非零作用都通过半共轭平移差项 $(\mathrm{translated} - f)$ 右乘 $U$ 因式分解——故只要共轭作用不改变被测观测量（$\mathrm{translated} = f$），换位子便当场归零！**
+
+::: {.viz src="spherical-degeneracy-radar" preset="equator" height="500"}
+**末态不同，有的观察者仍读成同一个数。** 赤道测试态 $\alpha = 60^\circ$ 经一步旋子落到实线大圆、经两步落到虚线大圆，两圈只在紫色的 $\pm\mathbf{e}_3$ 相交。站在 $\mathbf{e}_2$ 的琥珀色观察者读出 $\frac{\sqrt{3}}{2}$ 与 $0$，品红一段就是这个差；青色虚线是 $O_1 + O_2 = 0$ 的盲圈，站在它上面的观察者把两个末态读成同一个数，两者落在读出的同一根纤维上（[@thm-ch34-readout-kernel-and-covariant-commutator]）。
+:::
 
 ::: {.theorem #thm-ch34-readout-kernel-and-covariant-commutator title="读出划分拓扑不可分核刻画与协变换位子因式分解定理" lean="D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula"}
 在 `trureturing` 冻结的观测划分拓扑模块与量子代数协变换位子模块中，以下两项定理同时成立：
@@ -101,6 +119,10 @@
 :::
 
 [@thm-ch34-readout-kernel-and-covariant-commutator] 的两款结论一针见血地挑破了盲区的代数本质：在划分拓扑 $\operatorname{partitionTopology}(\mathrm{readout})$ 中，$x \neq y$ 而 $\mathrm{readout}(x) = \mathrm{readout}(y)$ 并不是拓扑失灵，而是精确标出了观察者读出纤维的切向核方向；而在协变换位子公式 $U f - f U = (\mathrm{translated} - f) U$ 中，一旦被测可观测量 $f$ 恰好是旋转 $U$ 的不动轴算符（$\mathrm{translated} = f$），换位子便当场归零（$U f - f U = 0$）！下面我们在三维实内积空间 $\mathbb{R}^3$ 与实三维几何代数偶子代数 $\mathcal{Cl}_{3,0}^+$ 中，把球面两步寻址与八分球面旋子和乐的每一个正负号完整手算出来。
+
+::: {.figure src="ch34-readout-fibers"}
+**两个不同的末态落在同一根纤维上，就被读成同一个数。** 赤道测试态 $\alpha = 60^\circ$ 经一步与两步旋子得到 $\mathbf{s}_{\mathrm{once}}$（实心点）与 $\mathbf{s}_{\mathrm{twice}}$（空心圈）；两者的 $\mathbf{e}_3$ 分量同为 $\frac{1}{2}$，图中只画 $\mathbf{e}_1$–$\mathbf{e}_2$ 面。琥珀色的观察者 $\mathbf{O} = (-\mathbf{e}_1 + \mathbf{e}_2)/\sqrt{2}$ 满足 $O_1 + O_2 = 0$；青色的平行线是读数 $\mathbf{O}\cdot\mathbf{x}$ 相同的纤维，两个末态落在同一根上，读数都是 $\sin\alpha/\sqrt{2} \approx 0.61$，品红的差沿着纤维、落在读数的核里（[@thm-ch34-readout-kernel-and-covariant-commutator] 第 1 款）。
+:::
 
 ::: {.example #ex-ch34-spherical-addressing-and-octant-rotors title="球面两步寻址反演与八分球面旋子和乐的完整解析推导（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 下述第 1 部分为 $\mathbb{R}^3$ 标准正交基下的初等线性代数内积计算；第 2 部分采用实三维几何代数 $\mathcal{Cl}_{3,0}(\mathbb{R})$ 及其偶子代数 $\mathcal{Cl}_{3,0}^+$ 的标准双向量旋子指数与对偶记号（满足 $\mathbf{e}_i^2 = 1$ 及异轴反对易 $\mathbf{e}_i\mathbf{e}_j = -\mathbf{e}_j\mathbf{e}_i$，未作为独立连续旋子模块包含在本书锁定的形式化声明集中）：
@@ -175,7 +197,15 @@
    极点观察者 $\mathbf{O} = (0, 0, 1)$ 对四根向量的内积读数整齐划一地等于 $\frac{1}{2}$（模方配对权重均为 $\frac{1}{4}$）；而偏离极轴 $\beta_{\mathrm{obs}} = \frac{\pi}{2}$、站在 $\mathbf{O}' = (0, 1, 0)$ 处的赤道观察者对 $(\mathbf{v}_1, \mathbf{v}_2)$ 读出 $0$ 与 $\frac{\sqrt{3}}{2}$，对 $(\mathbf{s}_{\mathrm{once}}, \mathbf{s}_{\mathrm{twice}})$ 读出 $\frac{\sqrt{3}}{2}$ 与 $0$——可见一次正交旋子与两次正交旋子之间相差的八分球面和乐因子 $\exp\!\left(-\frac{\pi}{4}\mathbf{e}_1\mathbf{e}_2\right)$ 完全落在赤道双向量面 $\mathbf{e}_1 \wedge \mathbf{e}_2$ 内，赤道观察者一眼就能分辨 $\sin\alpha$ 与 $0$ 的分裂，唯独法向极点观察者 $\pm\mathbf{e}_3$ 对整块 $\mathbf{e}_1 \wedge \mathbf{e}_2$ 面积天然正交失明。
 :::
 
+::: {.viz src="spherical-degeneracy-radar" preset="tilted" height="500"}
+**偏离极轴，读数随方位角张开。** 琥珀色的观察者离北极 $45^\circ$、站在 $\mathbf{e}_2\wedge\mathbf{e}_3$ 面里：两道青色影子分开，品红的读数差按 $\sin\theta\sin\beta_{\mathrm{obs}}\sin\phi$ 张开，峰峰值 $2\sin\theta\sin\beta_{\mathrm{obs}} \approx 1.22$；图中 $\phi = 90^\circ$，读数约为 $0.35$ 与 $0.97$。
+:::
+
 对照 [@ex-ch34-spherical-addressing-and-octant-rotors] 第 2 部分的旋子和乐核验，一句直抵几何本质的定位箴言便水落石出（`MODEL`）：**看不见哪块旋转平面的转动，你就恰恰站在那块平面的正交法向轴上。**
+
+::: {.viz src="spherical-degeneracy-radar" preset="frames" height="500"}
+**转动初始标架：极点始终在盲圈上。** 把赤道标架转过 $\gamma$ 再造两枚旋子（$\alpha = 60^\circ$），青色虚线的盲圈跟着标架绕竖轴转，淡青色是转过的盲圈；北极的琥珀色观察者在每一条上，两路读数始终都是 $\cos\alpha = \frac{1}{2}$。
+:::
 
 ---
 
@@ -218,6 +248,10 @@
 4. **伽利略船舱相对性与爱因斯坦同时面反演（Galileo Galilei, *Dialogo*, 1632；A. Einstein, *Ann. Phys.* **17**, 891–921, 1905）**：伽利略指出密封船舱内的力学实验无法测出船自身的匀速直线运动速度；爱因斯坦在狭义相对论中进一步揭示，惯性观察者的四维速度 $\mathbf{u}_{\mathrm{obs}}$（自身静止时间轴）对外界空间方向满足闵可夫斯基正交 $\eta(\mathbf{u}_{\mathrm{obs}}, \Delta x) = 0 \iff \Delta t' = 0$。因此，只要看哪一族正交空间闪光事件在该观察者账本里“同时发生（时间差简并为零）”，那张三维同时超平面的唯一类时法向量就分毫不差地反演出观察者自身的四维速度 $\mathbf{u}_{\mathrm{obs}}$！
 :::
 
+::: {.viz src="berry-loop" preset="octant" height="500"}
+**八分球面回路：箭头转过 $\pi/2$，内积的相位只记下一半。** 第十章的回路页：青色回路 $N \to +X \to +Y \to N$ 圈住品红面积 $\Omega = \pi/2$，沿回路搬运的琥珀色箭头回到起点时转过 $\pi/2$，右下角青色的指针停在 $\pi/4$；贝里相位约定 $\gamma_B = -\Omega/2$ 是文献结果，未在本书形式化（[@rem-ch34-virtual-z-berry-relativity-literature]）。
+:::
+
 最后，在本书的跨维度几何诠释框架（**`MODEL`（模型诠释）**）下，我们将从二维单平面、三维单位球面、四维相对论时空一直到六维黄金超立方母格的**普适观察者定位四阶总表**收束于下框：
 
 ::: {.remark #rem-ch34-localization-master-table title="普适观察者定位四阶总表（文献结果，未在本书形式化）"}
@@ -231,6 +265,14 @@
 | **4. 六维黄金母格 $\mathbb{Z}^6 \subset \mathbb{R}^6 = E_\parallel^3 \oplus E_\perp^3$** | 幂等物理投影 $P_\parallel^2 = P_\parallel$ 与内部补空间 $E_\perp^3$ 内的正交转动（[@prop-ch34-null-cone-and-golden-cut-orientation] 推广之 `MODEL`） | 整个三维内部共轭子空间 $E_\perp^3 = \ker P_\parallel$ 在单次静态物理坐标投影下完全隐身 | 简并核的正交补 $(E_\perp^3)^\perp = E_\parallel^3$ 唯一锁定观察者三维物理世界在六维超立方中的黄金切片朝向 |
 :::
 
+::: {.figure src="ch34-three-localizations"}
+**三个舞台上的同一条定位律：读数看不见的方向（品红）与观察者（琥珀）互相垂直。** 第 I 栏，单平面里 $\mathbf{u}_0 = \mathbf{e}_1$ 转一次到 $\mathbf{u}_1 = \mathbf{e}_2$（实心点）、转两次到 $\mathbf{u}_2 = -\mathbf{e}_1$（空心圈），琥珀色虚线是与品红弦 $\mathbf{u}_2 - \mathbf{u}_1$ 垂直的反角平分线 $O_2 = -O_1$，两点在它上面的影子落在同一个青色点；第 II 栏，时空图里运动观察者的世界线 $u$（琥珀）与它的同时线（品红）关于灰色光锥对称，二者闵氏正交（示意取 $v = 0.5c$；文献结果，未在本书形式化）；第 III 栏，黄金切片 $E_\parallel$ 与内部方向 $E_\perp$，青色窄带是接受窗 $[-\varphi^{-2}, \varphi^{-1}]$（[@prop-ch34-null-cone-and-golden-cut-orientation] 第 2 款；切片即站位是模型诠释，`MODEL`）。
+:::
+
 站在四阶总表前再读章首那句箴言，零背景宇宙里最幽微的一层认识论迷雾彻底散尽：有限观察者从来不需要祈求一颗悬浮在宇宙之外的“第 3 点 $C$”来替自己标定经纬。你的眼睛看不见自己的视网膜，你的尺子量不出沿自身视线法向旋拧的赤道圆环；然而，只要你在球面上做一次正交转向与两次正交转向，把所有令你读数归于沉寂的旋转平面收集起来——**凡简并处，皆是自身立锥之地。**
+
+::: {.viz src="spherical-degeneracy-radar" height="640"}
+**球面简并雷达。** 四个场景共用一颗球：寻址、旋子、测试态与标架。拖动琥珀色的观察者，看哪些转动在它的读数里隐身、哪些盲圈经过它的站位。
+:::
 
 不过，本章锁定的还只是观察者在**单一切片时刻**的静态站位轴 $\mathbf{O}$。倘若观察者不再原地驻足，而是顺着因果晶格一步步迁移记忆锚点、在有限窗口的开合之间跨轮次推进，那块原本对单次投影隐身的横向旋转面积，又将如何转化为驱动主观时间流逝与拓扑回响的动态引擎？这正是下一章（第三十五章）即将展开的篇章。

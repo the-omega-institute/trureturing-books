@@ -2,7 +2,7 @@
 //   node books/quantum-geometry/viz/tests/qubit-geometry.test.mjs      (or: node tools/node/viz-test.mjs quantum-geometry)
 // The page keeps gates as unit quaternions. The suite recomputes everything with 2 × 2 complex matrices acting on the
 // spinor, so the two implementations check each other, and reads the page through window.QUBIT_DEBUG.
-import { session, stageFirstChecks, settle } from '../../../../tools/node/viz-testkit.mjs';
+import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'qubit-geometry';
 const T = await session();
@@ -34,13 +34,13 @@ await stageFirstChecks(T, BOOK, ID);
 
 /* ---------- page-specific invariants ---------- */
 const page = await T.goto(BOOK, ID, '?lang=zh');
-await page.waitForTimeout(300);
+await settle(page);
 const state = async () => { await settle(page); return page.evaluate(() => window.QUBIT_DEBUG.state); };
 // playback advances on animation frames, and a busy runner delivers them late: wait until the page reports the move, not for a fixed time
-const until = (fn) => page.waitForFunction(fn, null, { timeout: 30000 }).catch(() => {});
+const frames = (n) => page.evaluate((k) => new Promise((done) => { const f = () => (k-- > 0 ? requestAnimationFrame(f) : done()); f(); }), n);
 const pick = async (id) => { await page.click(`[data-preset="${id}"]`); await settle(page); };   // a card glides B to its start before it applies; settle lands that glide instead of waiting for it
 const end = async () => { await page.evaluate(() => { const d = window.QUBIT_DEBUG; d.seek(d.state.n); }); return state(); };
-const setRange = async (id, v) => { await page.evaluate(([i, val]) => { const el = document.getElementById(i); el.value = String(val); el.dispatchEvent(new Event('input', { bubbles: true })); }, [id, v]); await page.waitForTimeout(40); };
+const setRange = async (id, v) => { await page.evaluate(([i, val]) => { const el = document.getElementById(i); el.value = String(val); el.dispatchEvent(new Event('input', { bubbles: true })); }, [id, v]); await settle(page); };
 
 let s = await state();
 check('starts on the SIXTY card with no gates', s.preset === 'half' && s.n === 0 && s.theta === 60 && s.phi === 40);
@@ -115,7 +115,7 @@ await pick('half');
 const seq = ['H', 'S', 'X', 'T', 'Y', 'Z'], TURN = { X: ['x', 180], Y: ['y', 180], Z: ['z', 180], H: ['h', 180], S: ['z', 90], T: ['z', 45] };
 let gateErr = 0;
 for (let k = 0; k < seq.length; k++) {
-  await page.click(`#gateChips [data-gate="${seq[k]}"]`); await page.waitForTimeout(40);
+  await page.click(`#gateChips [data-gate="${seq[k]}"]`); await settle(page);
   s = await end(); e = expected(60, 40, seq.slice(0, k + 1).map((g) => TURN[g]));
   gateErr = Math.max(gateErr, ...s.r.map((x, i) => Math.abs(x - e.r[i])), ...s.q.map((x, i) => Math.abs(x - e.q[i])));
 }
@@ -137,9 +137,9 @@ await page.locator('body').click({ position: { x: 5, y: 5 } });
 await page.keyboard.press('ArrowRight'); check('→ steps one gate forward', close((await state()).tau, 3));
 await page.keyboard.press('ArrowLeft'); await page.keyboard.press('ArrowLeft'); check('← steps back', close((await state()).tau, 1));
 await page.keyboard.press('Home'); check('Home returns to ψ₀', close((await state()).tau, 0));
-await page.keyboard.press('Space'); await until(() => { const d = window.QUBIT_DEBUG.state; return d.playing && d.tau > 0; }); s = await state();
-check('Space plays', s.playing && s.tau > 0);
-await page.keyboard.press('Space'); const paused = await state(); await page.waitForTimeout(200);
+await page.keyboard.press('Space');
+check('Space plays', await until(page, () => { const d = window.QUBIT_DEBUG.state; return d.playing && d.tau > 0; }));
+await page.keyboard.press('Space'); const paused = await state(); await frames(3);   // three more animation frames: a running clock would have moved
 check('Space pauses', !paused.playing && close((await state()).tau, paused.tau));
 await page.keyboard.press('End'); check('End goes to the end of the circuit', close((await state()).tau, 7));
 await setRange('now', 3.25); check('scrubbing the rail sets τ', close((await state()).tau, 3.25));

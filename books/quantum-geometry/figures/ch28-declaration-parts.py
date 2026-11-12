@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[3]
 BOOK = ROOT / "books" / "quantum-geometry"
 ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
 
-SIZE = (560, 330)
+SIZE = (460, 330)    # at most 460 wide with labels of 13 or more: 10 px or more in a phone column of 358
 
 
 def counts():
@@ -72,10 +72,10 @@ def draw(fig):
     t = fig.t
     top = max(a + b for a, b in ROWS)
     ymax = (top // 20 + 1) * 20
-    ax = fig.axes(56, 64, 488, 206, (0, len(ROWS)), (0, ymax))
-    ax.yaxis(ticks=list(range(0, ymax + 1, 20)))
+    ax = fig.axes(46, 64, 404, 206, (0, len(ROWS)), (0, ymax))
+    ax.yaxis(ticks=list(range(0, ymax + 1, 20)), size=13)
     ax.xaxis()
-    bw = 0.56
+    bw = 0.6
     for i, (thm, other) in enumerate(ROWS):
         x0, x1 = ax.X(i + 0.5 - bw / 2), ax.X(i + 0.5 + bw / 2)
         y0, y1, y2 = ax.Y(0), ax.Y(thm), ax.Y(thm + other)
@@ -90,8 +90,8 @@ def draw(fig):
             fig.text(xl, ax.Y(0) + 20, t("终章", "coda"), size=13, anchor="middle")
             fig.text(xl, ax.Y(0) + 36, t("附录", "app."), size=13, anchor="middle")
     # the two audit tables
-    for (a, b), label in (((0, 3), t("第二十七章审计表", "Chapter 27 table")), ((3, 6), t("第二十八章审计表", "Chapter 28 table"))):
+    for (a, b), label in (((0, 3), t("第 27 章审计表", "Chapter 27 table")), ((3, 6), t("第 28 章审计表", "Chapter 28 table"))):
         y = 48
-        fig.brace(ax.X(a + 0.12), y, ax.X(b - 0.12), y, label)
-    fig.legend(72, 90, [("lean", t("定理", "theorems")), ("dim", t("定义、归纳类型", "definitions, inductives"))], swatch="box")
+        fig.brace(ax.X(a + 0.1), y, ax.X(b - 0.1), y, label)
+    fig.legend(62, 90, [("lean", t("定理", "theorems")), ("dim", t("定义、归纳类型", "definitions, inductives"))], swatch="box")
     assert TOTAL_THM > 0

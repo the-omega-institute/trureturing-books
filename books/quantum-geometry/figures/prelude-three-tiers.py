@@ -55,10 +55,10 @@ def draw(fig):
     scale = (x1 - x0) / max(lean, lit, open_)
     rows = [(lean, "lean", "LEAN ✓", 40), (lit, "argued", t("文献结果", "literature"), 112), (open_, "open", "OPEN", 184)]
     for n, role, tag, y in rows:
-        fig.chip(x0 - 12, y + 6, tag, role, size=13, anchor="end")
+        fig.chip(x0 - 12, y + 6, tag, role, size=14, anchor="end")
         fig.rect(x0, y - 12, max(3.0, n * scale), 24, color=role, fill=role, fill_opacity=0.28, width=1.3)
         fig.text(x0 + n * scale + 8, y, str(n), size=15, color=role, weight=600, middle=True)
     fig.text(x0, 72, t(f"锁文件里共 {theorems} 条 theorem 声明", f"{theorems} theorem declarations in the lock file"),
-             size=13, color="dim")
-    fig.text(x0, 144, t("注记与例，写明“未在本书形式化”", "remarks and examples, marked not formalized"), size=13, color="dim")
-    fig.text(x0, 216, t("猜想，不带 lean=", "conjectures, no lean="), size=13, color="dim")
+             size=14, color="dim")
+    fig.text(x0, 144, t("注记与例，写明“未在本书形式化”", "remarks and examples, marked not formalized"), size=14, color="dim")
+    fig.text(x0, 216, t("猜想，不带 lean=", "conjectures, no lean="), size=14, color="dim")

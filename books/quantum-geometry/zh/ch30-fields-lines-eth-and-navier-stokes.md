@@ -71,8 +71,8 @@ $$
 3. **有界阶平方和（SoS）半正定松弛下界（D. Grigoriev, *Theor. Comput. Sci.* **259**, 613–622, 2001；G. Schoenebeck, *FOCS*, 593–602, 2008）**：对于存在全局奇偶矛盾而不可满足的随机 3-XOR / 3-SAT 实例，任何阶数 $M = o(n)$ 的局部 Lasserre / Gram 半正定矩阵松弛 $G_M \succeq 0$ 均以高概率保持半正定与局部自洽，无法在亚线性松弛阶数（对应亚指数规模半正定规划）内证伪不可满足性。
 :::
 
-::: {.viz src="timeless-causal-crystal" preset="longer" height="500"}
-**空间翻 $16$ 倍，步数翻 $4$ 倍。** 候选增到 $4096$ 个，每步的转角缩到四分之一（$2\theta = 1.79^\circ$），步数变成约 $50$；下方的图里青色的 $(\pi/4)\sqrt{N}$ 与品红虚线的 $N/2$ 越拉越开。线变长的速度是 $\sqrt{N}$，仍然没有坡度可循；这与上面第 1 条的查询下界同阶（文献结果）。
+::: {.viz src="timeless-causal-crystal" preset="sos" height="500"}
+**两元在阶 2 闭合，三元奇偶没有。** 青色的点：每个 $n$ 取一个随机 2-SAT 公式，两条两元子句消去一个变量，推出的仍至多两个文字，所以消解闭包停在阶 $2$，空子句是否出现就判定了可满足性（页面的数值）。品红的虚线：对随机 3-XOR / 3-SAT，上面第 3 条的文献结果说阶 $o(n)$ 的平方和松弛仍处处相容，这条直线的斜率只是示意（`MODEL`）。琥珀色是观察者的阶 $M$。这些下界只约束这一族松弛，不推出 $\mathrm{P}\neq\mathrm{NP}$（[@conj-p-neq-np]，`OPEN`）。
 :::
 
 ### 3. 作者的诠释：复杂度视界、主观时间与自由选择
@@ -108,6 +108,10 @@ $$
 
 - **顺线验真（Verification along the line）**：必须计入读取输入与见证编码、以及每一节检查的实际成本；若第 $i$ 节成本为 $c_i$，逐节检查贡献 $\sum_{i=1}^k c_i$，只有每节成本一致有界时才是 $O(k)$。折线的段数本身不证明多项式位复杂度。形式证明项也可比喻为见证丝，但任意证明项的编码长度、类型检查与归约成本并无这里所需的统一线性保证，不能直接归入同一个 $NP$ 验证论证；
 - **离丝寻线（Searching without a field）**：见证可被高效检查，并不自动给出高效搜寻方法；反之，也不排除这种方法。“零横截面见证丝”表达作者关于无导引搜寻的图像，不是离散问题的复杂度下界，亦不适用于断言所有 $NP$ 问题都难解。
+
+::: {.viz src="timeless-causal-crystal" preset="wilderness" height="500"}
+**同一个场：丝上直达，丝外打转。** 平面上只有一个自治场 $\mathbf{F} = g(\tilde y)\bigl(1, h'(x)\bigr) + \bigl(1 - g(\tilde y)\bigr)\mathbf{F}_{\mathrm{swirl}}$，其中 $\tilde y = y - h(x)$，$g(\tilde y) = e^{-\tilde y^2/\varepsilon^2}$，$\mathbf{F}_{\mathrm{swirl}}$ 在丝上为零。从 $S_0$ 出发、恰在青色见证丝 $y = h(x)$ 上的探针沿丝直达 $S^*$；离丝只差一点、但在通道 $|\tilde y| < \varepsilon$ 之外出发的三根品红探针，在同一个积分器下被第一个涡旋卷住，到不了目标。这是“有线无场”的示意模型（`MODEL`），不是复杂度下界。
+:::
 
 ### 2. 为什么“$P$ 是场”（弃线造场，局部切面处处对齐全局）？
 
@@ -504,6 +508,11 @@ $C_5$ 中最长有向路含 $5$ 个顶点的 $12$ 个定向里，有 $2$ 个是�
 [@ex-ch30-galactic-crossover-scale] 中跨越宇宙尺度的数值与规约对比，为本书“球内有限观察者 vs. 球外之球”的认识论图景（`MODEL`）提供了三点深刻启示：
 
 - **银河算法与有限观察者的物理尺度边界（`MODEL`）**：[@ex-ch30-galactic-crossover-scale] 的归一化示意曲线展示了超天文尺度才交叉的可能性，与“银河算法”的尺度图像呼应。**有限记忆历史容量定理**（[`finite_memory_history_capacity`](lean:D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity)，约束可区分历史数）与**开放可积电路最小深度定理**（[`OpenIntegrableCircuitMinDepth.result`](lean:D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result)，在其局部性前提下给出最小深度 $\lfloor N/(\kappa+1)\rfloor+1$）各自刻画特定模型的资源限制。它们与上界曲线并置可用于作者的有限观察者诠释，但不能组合成所有 SAT 算法的下界或有限观察者必然难解的证明；标准 $P\neq NP$ 仍为 `OPEN`（[@conj-p-neq-np]）。
+
+::: {.viz src="eth-horizon-crossover" preset="constant" height="500"}
+**常数减半，交叉点回到视界之内。** 取 $c = 1/2$：青色示意曲线与品红的 $0.386$ 交在 $n \approx 2^{57}$，落进阴影（可观测宇宙原子数以内的规模）。大 O 记号不给出常数 $c$，交叉点落在视界的哪一边全看它（示意曲线的数值对比，`MODEL`）。
+:::
+
 - **$P$（场）与 $NP$（线）的认识论对照（`MODEL`）**：导向结构与见证检查表现出不同的任务角色；它们可以在同一个问题中并存，因为 $P\subseteq NP$。上界曲线和编码尺度比较不把两类问题分开。
 - **形式内核核验与顶层规约审计的哥德尔—语义边界（`LEAN ✓` 原型与 `MODEL` 映照）**：[@rem-ch30-eth-subexponential-literature] 中最具认识论意味的一幕是——形式证明助手内核可以迅速核验脚本内部每一步推演的传递合法性，而学界仍需仔细审计“顶层形式化命题的定义是否忠实刻画了目标图灵机复杂度命题”。在本书第 21 章中，经 Lean 4 内核验证的**相对语义对角线与定义逃逸定理**严格证明：在给定无不动点扭转映射（`∀ v, twist v ≠ v`）的条件下，相对语义对角线构造必然逃出任何已编目解码族（[`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)），且当解码目录对潜空间满射时，该对角线目标相对于给定潜映射不满足语义完备性 `TargetAdequate`（[`relative_semantic_diagonal_target_inadequate_of_surjective`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_target_inadequate_of_surjective)）。将这一形式定理作为认识论原型（`MODEL`）来观照顶层规约审计，恰好印证了全书的核心准则：**形式内核在球内严格锁死推演链条的传递正确性，而对顶层命题边界定义之语义恰当性的审视，永远需要站在形式球壳之外！**
 

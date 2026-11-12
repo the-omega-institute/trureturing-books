@@ -3,7 +3,7 @@
 // Reads the page through window.PYTHAGORAS_DEBUG and checks it against independent brute-force computations:
 // best rational approximations, exhaustive searches for the Pell equations, two-square decompositions and point
 // counts over F_p.
-import { session, stageFirstChecks, settle } from '../../../../tools/node/viz-testkit.mjs';
+import { session, stageFirstChecks, settle, until as untilPage } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'pythagoras-number-escape';
 const T = await session();
@@ -19,7 +19,7 @@ const page = await T.goto(BOOK, ID, '?lang=zh');
 await settle(page, 300);
 const state = async () => { await settle(page); return page.evaluate(() => window.PYTHAGORAS_DEBUG.state); };
 // playback advances on animation frames, and a busy runner delivers them late: wait until the page reports the move, not for a fixed time
-const until = (fn) => page.waitForFunction(fn, null, { timeout: 30000 }).catch(() => {});
+const until = (fn) => untilPage(page, fn);
 const seek = async (t) => { await page.evaluate((v) => window.PYTHAGORAS_DEBUG.seek(v), t); return state(); };
 const pick = async (id) => { await page.click(`[data-preset="${id}"]`); await settle(page, 60); };
 const setRange = async (id, v) => { await page.evaluate(([i, val]) => { const el = document.getElementById(i); el.value = String(val); el.dispatchEvent(new Event('input', { bubbles: true })); }, [id, v]); await settle(page); };
@@ -75,6 +75,24 @@ for (let i = 0; i < ODD.length; i++) {
 check('for the 24 odd primes up to 97: a² + b² = p and a root of −1 exist exactly when p ≡ 1 (mod 4)', splitOk);
 check('each plane prime gives the integer right triangle (|a² − b²|, 2ab, p)', tripleOk);
 check('m² − p·n² = −1 has a solution exactly for the plane primes', pellOk);
+// the Hilbert angle θ of the lattice point (A, B) and the Bloch polar angle 2θ of the squared triangle
+let angOk = true, angText = true;
+for (let i = 0; i < ODD.length; i++) {
+  const p = ODD[i]; if (p % 4 !== 1) continue;
+  s = await seek(i);
+  let A = 0, B = 0; for (let x = 1; x * x < p; x++) for (let y = 1; y <= x; y++) if (x * x + y * y === p) { A = x; B = y; }
+  const cosT = A / Math.sqrt(p), sinT = B / Math.sqrt(p), bloch = 2 * Math.acos(cosT);
+  angOk = angOk && s.angles && s.angles.A === A && s.angles.B === B && Math.abs(cosT ** 2 + sinT ** 2 - 1) < 1e-12
+    && Math.abs(s.angles.theta - Math.acos(cosT) * 180 / Math.PI) < 1e-9 && Math.abs(s.angles.bloch - bloch * 180 / Math.PI) < 1e-9
+    && Math.abs(Math.cos(bloch) - (A * A - B * B) / p) < 1e-12 && Math.abs(Math.sin(bloch) - 2 * A * B / p) < 1e-12;
+  const t = await page.textContent('#ro5');
+  angText = angText && t.includes((Math.acos(cosT) * 180 / Math.PI).toFixed(2)) && t.includes((bloch * 180 / Math.PI).toFixed(2));
+}
+check('plane primes: θ of (A, B) obeys cos²θ + sin²θ = 1, and the squared triangle over p is the Bloch vector (sin 2θ, 0, cos 2θ)', angOk);
+check('the readout names both the Hilbert angle θ and the Bloch polar angle 2θ', angText);
+check('the readout note keeps the two angles apart', /θ_Bloch = 2θ/.test(await page.textContent('#roNote')) || (await state()).angles === null);
+const drawerAngles = await page.evaluate(() => ['zh', 'en'].map((l) => document.querySelector(`#drawer .sheet > div.${l}`).textContent));
+check('the theory drawer separates the Hilbert angle θ from the Bloch angle 2θ in both languages', drawerAngles.every((t) => t.includes('Bloch') && t.includes('2θ') && t.includes('cos²θ + sin²θ')));
 await pick('seven'); s = await state();
 check('LINE-7: no two squares, no root of −1', s.p === 7 && s.two === null && s.roots.length === 0 && (await page.textContent('#roKey')).includes('≠'));
 
@@ -96,6 +114,45 @@ let genOk = true, nonzeroOnLine = 0;
 for (let i = 0; i < ODD.length; i++) { s = await seek(i); const p = ODD[i], n = brute(fgen, p), a = p + 1 - n; genOk = genOk && s.curve === 'gen' && s.count === n && s.a === a && Math.abs(a) <= 2 * Math.sqrt(p); if (p % 4 === 3 && a !== 0) nonzeroOnLine++; }
 check('y² = x³ − x + 1: the point counts match a brute-force count, within Hasse\'s bound', genOk);
 check('on that curve line primes are no longer pinned at 0', nonzeroOnLine > 5, `${nonzeroOnLine} line primes with a ≠ 0`);
+// the ring of spins: Legendre symbols by Euler's criterion, checked against a direct count of the pairs (x, y)
+const powmod = (b, e, m) => { let r = 1n, x = BigInt(b) % BigInt(m), E = BigInt(e); const M = BigInt(m); while (E > 0n) { if (E & 1n) r = r * x % M; x = x * x % M; E >>= 1n; } return r; };
+const euler = (v, p) => { v = ((v % p) + p) % p; if (v === 0) return 0; return powmod(v, (p - 1) / 2, p) === 1n ? 1 : -1; };
+let spinOk = true, mirrorOk = true, badOk = true, toastOk = false;
+for (const [curve, f] of [['cm', fcm], ['gen', fgen]]) {
+  await page.click(`#curveChips [data-curve="${curve}"]`); await settle(page);
+  for (let i = 0; i < ODD.length; i++) {
+    s = await seek(i); const p = ODD[i], chi = [];
+    for (let x = 0; x < p; x++) chi.push(euler(f(x), p));
+    const sum = chi.reduce((a, b) => a + b, 0);
+    spinOk = spinOk && s.chi.join() === chi.join() && brute(f, p) === p + 1 + sum && s.count === p + 1 + sum;
+    if (curve === 'cm') for (let x = 1; x < p; x++) mirrorOk = mirrorOk && chi[p - x] === (p % 4 === 3 ? -chi[x] : chi[x]);
+    // bad reduction exactly where p divides the discriminant −16(4a³ + 27b²): 64 for y² = x³ − x, −368 = −2⁴·23 for y² = x³ − x + 1
+    const disc = curve === 'cm' ? -16 * (4 * -1 + 0) : -16 * (4 * -1 + 27);
+    const bad = disc % p === 0;
+    badOk = badOk && s.bad === bad;
+    if (bad) {
+      const [x0] = s.singular;
+      badOk = badOk && curve === 'gen' && p === 23 && disc === -368 && ((f(x0) % p) + p) % p === 0 && ((3 * x0 * x0 - 1) % p + p) % p === 0 && s.singular[1] === 0
+        && (await page.textContent('#roKey')).includes('坏约化') && (await page.textContent('#roKey')).includes('−368') && (await page.textContent('#ro2')).trim() === '—';
+      toastOk = (await page.textContent('#toast')).includes('−368 = −2⁴·23');
+    }
+  }
+}
+check('the ring of spins is χₚ(f(x)) by Euler\'s criterion, and #E = p + 1 + Σχ matches a direct count of (x, y), for both curves and 24 primes', spinOk);
+check('on y² = x³ − x, x and −x carry opposite spins on line primes and equal spins on plane primes', mirrorOk);
+check('bad reduction is flagged exactly at p = 23 for y² = x³ − x + 1 (Δ = −368), with the singular point and no cosine', badOk);
+check('reaching p = 23 on that curve raises a bad-reduction notice', toastOk);
+check('the stage legend colours the spins cyan, magenta and neutral, never green', await page.evaluate(() => { const l = document.getElementById('legend'); return !!l.querySelector('.sw.cy') && !!l.querySelector('.sw.mg') && !!l.querySelector('.sw.sg') && !l.querySelector('.sw.ok'); }));
+// Gauss on y² = x³ − x with a odd and b even, found independently: |aₚ| = 2|a|
+await page.click('#curveChips [data-curve="cm"]'); await settle(page);
+let gaussOdd = true; const gaussSeen = [];
+for (const p of [5, 13, 17, 29, 37, 41, 53, 61, 73, 89, 97]) {
+  let a = 0; for (let x = 1; x * x < p; x += 2) { const y2 = p - x * x, y = Math.round(Math.sqrt(y2)); if (y * y === y2 && y % 2 === 0) a = x; }
+  const ap = p + 1 - brute(fcm, p); s = await seek(ODD.indexOf(p));
+  gaussOdd = gaussOdd && a > 0 && Math.abs(ap) === 2 * a && s.a === ap; gaussSeen.push(`${p}:${ap}`);
+}
+check('y² = x³ − x: |aₚ| = 2|a| with p = a² + b², a odd and b even (p = 5, 13, 17, 29, 37, 41, 53, 61, 73, 89, 97)', gaussOdd, gaussSeen.join(' '));
+await page.click('#curveChips [data-curve="gen"]'); await settle(page);
 let h = await page.evaluate(() => window.PYTHAGORAS_DEBUG.hist());
 check('the histogram covers the 428 good primes below 3000', h && h.n === 428 && h.bins.reduce((a, b) => a + b, 0) === 428, h && String(h.n));
 // second moment of the semicircle law is 1/4: bin centres give a rough check that the histogram has that shape
@@ -114,8 +171,8 @@ check('only the controls and evidence of the current scene are shown', vis.every
 s = await seek(2); await page.keyboard.press('ArrowRight'); s = await state();
 check('→ moves to the next prime', s.step === 3 && s.p === 11);
 await page.keyboard.press('End'); check('End reaches p = 97', (await state()).p === 97);
-await page.keyboard.press('Home'); await page.keyboard.press('Space'); await until(() => { const d = window.PYTHAGORAS_DEBUG.state; return d.playing && d.t > 0; }); s = await state();
-check('Space plays through the primes', s.playing && s.t > 0);
+await page.keyboard.press('Home'); await page.keyboard.press('Space');
+check('Space plays through the primes', await until(() => { const d = window.PYTHAGORAS_DEBUG.state; return d.playing && d.t > 0; }));
 await page.keyboard.press('Space'); check('Space pauses', !(await state()).playing);
 check('the rail label names the prime', /^p \d+/.test((await page.textContent('#tau')).trim()));
 await page.click('#sceneChips [data-scene="pell"]'); await settle(page, 40);

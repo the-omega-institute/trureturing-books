@@ -341,7 +341,7 @@
     return Math.atan2(im, re) / DEG;
   }
   const PRESETS = {
-    collinear: { scene: 'dial', a0: 0, a1: 0, beta: 60, from: -90, to: 90, still: 0 },
+    collinear: { scene: 'dial', a0: 0, a1: 0, beta: 60, from: -90, to: 90, still: -40 },
     sixty: { scene: 'dial', a0: 0, a1: 60, beta: 60, from: 0, to: bestPhi(0, 60, 60), still: 0 },
     cross: { scene: 'dial', a0: 0, a1: 90, beta: 90, still: 0 },
     sweep: { scene: 'dial', a0: 0, a1: 90, beta: 90, from: 0, to: 90, still: 20 },
@@ -350,7 +350,7 @@
     arc: { scene: 'arc', a0: 0, a1: 90, beta: 90, still: 45 }
   };
   const NOTES = {
-    collinear: ['Alice 的两支实线箭头重合在 Z 上，她那块品红面积缩成一条线，量尺上品红的刻度落到 2，和经典上界的虚线重合。时间轴转动 Bob 的一对虚线箭头：琥珀色的横线按 2 cos φ 起落，在 φ = 0° 碰到 2，从不越过。', 'Alice\'s two solid arrows coincide on Z; her magenta area shrinks to a line, and the magenta mark on the gauge drops to 2, onto the dashed classical bound. The rail turns Bob\'s dashed pair: the amber bar rises and falls as 2 cos φ, touches 2 at φ = 0° and never goes past.'],
+    collinear: ['Alice 的两支实线箭头重合在 Z 上，她那块品红面积缩成一条线，量尺上品红的刻度落到 2，和经典上界的虚线重合。时间轴转动 Bob 的一对虚线箭头：琥珀色的横线按 2 cos φ 起落，在 φ = 0° 碰到 2，从不越过；停在 φ = −40° 时它是 1.532，在品红的刻度之下。', 'Alice\'s two solid arrows coincide on Z; her magenta area shrinks to a line, and the magenta mark on the gauge drops to 2, onto the dashed classical bound. The rail turns Bob\'s dashed pair: the amber bar rises and falls as 2 cos φ, touches 2 at φ = 0° and never goes past; stopped at φ = −40° it reads 1.532, below the magenta mark.'],
     sixty: ['两侧各张 60°，两块品红面积相同，N = 3。φ = 0° 时四段青色 1 + ½ + ½ + ½ 叠到 2.5，越过了虚线 2，离品红的刻度 √7 ≈ 2.646 还差一截；内侧的品红点线在 ±1。Bob 的一对方向转到 19.1°，琥珀色的横线正好碰到 √7。', 'Both sides open 60°, two equal magenta areas, N = 3. At φ = 0° the four cyan steps 1 + ½ + ½ + ½ stack to 2.5, past the dashed 2 but short of the magenta mark √7 ≈ 2.646; the inner dotted magenta marks sit at ±1. Turn Bob\'s pair to 19.1° and the amber bar just touches √7.'],
     cross: ['两侧都张成直角，两块品红面积都是整个正方形，N = 4，品红的刻度升到量尺顶上的 2√2。可 Bob 的十字架与 Alice 的对齐（B₀ 在 A₀ 上，B₁ 与 A₁ 相反），四段青色只是 1 + 0 + 0 + 1 = 2：天花板到了顶，CHSH 值还在经典上界上。', 'Both sides open a right angle, both magenta areas are full squares, N = 4, and the magenta mark rises to 2√2 at the top of the gauge. But Bob\'s cross is aligned with Alice\'s (B₀ on A₀, B₁ opposite A₁), so the four cyan steps are just 1 + 0 + 0 + 1 = 2: the ceiling is at the top, the CHSH value still on the classical bound.'],
     sweep: ['两侧都是直角，时间轴把 Bob 的十字架从 0° 转到 90°：琥珀色的横线按 2√2 cos(φ − 45°) 起落，在 0° 与 90° 是 2，只在 45° 碰到品红的刻度 2√2。停在 20° 时，它是 2.563。', 'Both sides at right angles; the rail turns Bob\'s cross from 0° to 90°. The amber bar rises and falls as 2√2 cos(φ − 45°): 2 at 0° and at 90°, touching the magenta mark 2√2 only at 45°. Stopped at 20° it reads 2.563.'],

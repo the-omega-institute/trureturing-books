@@ -239,7 +239,13 @@ $$
 \operatorname{residualMass}(V, s) = \frac{1}{2}\bigl(r_x^2 + r_y^2\bigr)!
 $$
 
-On the pure shell $\norm{\vv{r}}^2 = 1$, $r_z^2 + (r_x^2 + r_y^2) = 1$: the sharper the particle bias $|r_z| \to 1$ along the chosen line, the smaller the wave interference $r_x^2 + r_y^2$ left in the equatorial plane, and conversely. **Wave and particle never contradict one another; they are the two orthogonal legs cut from a single unit hypotenuse by an axis $V$ and its Hodge dual $\star V$.**
+On the pure shell $\norm{\vv{r}}^2 = 1$, $r_z^2 + (r_x^2 + r_y^2) = 1$: the sharper the particle bias $|r_z| \to 1$ along the chosen line, the smaller the wave interference $r_x^2 + r_y^2$ left in the equatorial plane, and conversely.
+
+::: {.viz src="repeated-projection" preset="perp" height="500"}
+**Lying in the dual plane, no shadow on the line.** The grey dashed arrow, before the press, lies entirely in the magenta equatorial dual plane and casts no shadow on the cyan measurement line Z; one press shrinks the amber arrow to a point at the centre, with line and plane both $0$.
+:::
+
+**Wave and particle never contradict one another; they are the two orthogonal legs cut from a single unit hypotenuse by an axis $V$ and its Hodge dual $\star V$.**
 
 ::: {.viz src="repeated-projection" preset="sum" height="500"}
 **One part on the line, one in the plane.** The cyan shadow lies on the measurement line Z and the magenta part lies in the equatorial dual plane; they are perpendicular and together rebuild the amber arrow, and at the top left line² + plane² equals the arrow's length squared. Halve both sides and you have the single-qubit ledger of [@thm-complementary-pythagoras].

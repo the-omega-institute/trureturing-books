@@ -51,6 +51,6 @@ def draw(fig):
     p = st.P(-0.62, math.sqrt(1 + 0.62 ** 2))
     fig.text(p[0], p[1] - 12, "*t*^{2} − *x*^{2} = 1", size=14, color="line", anchor="middle")
     p = st.P(1.3, 1.3)
-    fig.text(p[0] + 10, p[1] + 10, t("光锥", "light cone"), size=13, color="dim")
+    fig.text(p[0] + 10, p[1] + 10, t("光锥", "light cone"), size=14, color="dim")
     p = st.P(sh * 0.62, ch * 0.62)
     fig.text(p[0] - 10, p[1], "*β* = 3/5", size=14, color="now", anchor="end", middle=True, halo=True)

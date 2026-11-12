@@ -90,12 +90,12 @@ def draw(fig):
         else:
             left = names[a] if a == 0 else f"{names[a]} = {gamma_word(phi[a])}"
         fig.text(XL - 34, y, left, size=14, anchor="end", middle=True)
-        fig.text(XL - 4, y, str(grade(phi[a][1])), size=12, color="dim", anchor="end", middle=True)
+        fig.text(XL - 4, y, str(grade(phi[a][1])), size=13, color="dim", anchor="end", middle=True)
         fig.line(XL + 4, y, XR - 26, y, role, 2.0 if k else 1.4)
-        fig.text(XR - 20, y, str(k), size=12, color="dim", middle=True)
+        fig.text(XR - 20, y, str(k), size=13, color="dim", middle=True)
         fig.text(XR + 4, y, NAME[a], size=14, color=role, middle=True, weight=600 if k else None)
         fig.text(XS, y, "+1" if sq > 0 else "−1", size=14, color="cyan" if sq > 0 else "magenta", anchor="middle",
                  middle=True)
         y += 26
-    fig.text(XL - 4, y + 10, t("阶", "grade"), size=12, color="dim", anchor="end", middle=True)
-    fig.text(XR - 20, y + 10, t("阶", "grade"), size=12, color="dim", middle=True)
+    fig.text(XL - 4, y + 10, t("阶", "grade"), size=13, color="dim", anchor="end", middle=True)
+    fig.text(XR - 20, y + 10, t("阶", "grade"), size=13, color="dim", middle=True)

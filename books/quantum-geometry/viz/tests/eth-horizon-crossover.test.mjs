@@ -3,6 +3,7 @@
 // Reads the page through window.HORIZON_DEBUG and checks it against independent computations written here: the
 // crossover by walking down the curve, the flow matrix rebuilt from the page's M and N, its rank by Gaussian elimination
 // over a prime field, its singular values through the trace of the Gram matrix, and the counts by direct summation.
+import { readFileSync } from 'node:fs';
 import { session, stageFirstChecks, settle, cjkLeftovers } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'eth-horizon-crossover';
@@ -25,20 +26,27 @@ const setRange = async (id, v) => { await D(([i, val]) => { const el = document.
 /* ---------- the exponent rate ---------- */
 const rate = (c, l) => c * (Math.log(Math.log(2 ** l) / Math.LN2) / Math.LN2) / Math.sqrt(l);   // c·log₂log₂n/√log₂n with n = 2^l (l ≤ 1000)
 const r2 = (c, l) => c * (Math.log(l) / Math.LN2) / Math.sqrt(l);
-const PPSZ = Math.log(1.307) / Math.LN2;   // 1.307ⁿ = 2^(0.38626 n)
+/* The PPSZ rate for unique k-SAT is 1 − μ_k/(k−1), μ_k = Σ_{j≥1} 1/(j(j + x)), x = 1/(k−1). Two independent routes here:
+   (1) Gauss's digamma theorem: μ_k/(k−1) = ψ(1 + 1/q) + γ with q = k − 1, and
+       ψ(1/q) + γ = −ln(2q) − (π/2)·cot(π/q) + 2·Σ_{n=1}^{⌊(q−1)/2⌋} cos(2πn/q)·ln sin(πn/q),  ψ(1 + 1/q) = ψ(1/q) + q;
+   (2) the series μ_k summed forward to N terms, with the tail Σ_{j>N} 1/(j(j+x)) bounded between 1/(N+1+x) and 1/(N+x). */
+const ppszClosed = (k) => { const q = k - 1; let s = 0; for (let n = 1; n <= Math.floor((q - 1) / 2); n++) s += Math.cos(2 * Math.PI * n / q) * Math.log(Math.sin(Math.PI * n / q)); const cot = q === 2 ? 0 : 1 / Math.tan(Math.PI / q); return 1 - (q - Math.log(2 * q) - Math.PI / 2 * cot + 2 * s); };
+const ppszSeries = (k, N = 1000000) => { const x = 1 / (k - 1); let mu = 0; for (let j = 1; j <= N; j++) mu += 1 / (j * (j + x)); mu += 0.5 * (1 / (N + 1 + x) + 1 / (N + x)); return 1 - mu / (k - 1); };
+const PPSZ = ppszClosed(3);   // = 2 ln 2 − 1 = 0.38629…, and 2^0.38629 = 1.307
 /** Where c·log₂(l)/√l falls to the rate of PPSZ: walk down the falling branch from its top at l = e², then interpolate. */
-function crossover(c) {
-  if (c * (2 / Math.LN2) / Math.E <= PPSZ) return null;
-  let l = Math.E ** 2; const h = 0.01; while (r2(c, l + h) > PPSZ) l += h;
-  return l + h * (r2(c, l) - PPSZ) / (r2(c, l) - r2(c, l + h));
+function crossoverAt(c, P) {
+  if (c * (2 / Math.LN2) / Math.E <= P) return null;
+  let l = Math.E ** 2; const h = 0.01; while (r2(c, l + h) > P) l += h;
+  return l + h * (r2(c, l) - P) / (r2(c, l) - r2(c, l + h));
 }
+const crossover = (c) => crossoverAt(c, PPSZ);
 let s = await state();
 check('opens on ATOMS: c = 1 at log₂ n = 266', s.preset === 'atoms' && s.scene === 'rates' && s.c === 1 && s.l === 266);
-check('at the atoms of the universe the schematic rate is 0.494, above 0.386', near(s.rate, r2(1, 266), 1e-12) && near(s.rate, rate(1, 266), 1e-9) && s.rate.toFixed(3) === '0.494' && s.rate > PPSZ && near(s.ppsz, PPSZ, 1e-12) && PPSZ.toFixed(3) === '0.386' && /PPSZ 更低/.test(await page.textContent('#hudSub')));
+check('at the atoms of the universe the schematic rate is 0.494, above 0.386', near(s.rate, r2(1, 266), 1e-12) && near(s.rate, rate(1, 266), 1e-9) && s.rate.toFixed(3) === '0.494' && s.rate > PPSZ && near(s.ppsz, PPSZ, 1e-11) && PPSZ.toFixed(3) === '0.386' && /PPSZ 更低/.test(await page.textContent('#hudSub')));
 check('the crossover for c = 1 is beyond the horizon, at n ≈ 2⁵⁵⁸', near(s.crossover, crossover(1), 1e-4) && Math.round(s.crossover) === 558 && s.crossover > s.atoms && r2(1, 557) > PPSZ && r2(1, 559) < PPSZ && /视界之外/.test(await page.textContent('#ro4')));
 await pick('human'); s = await state();
 check('HUMAN: at n = 2¹⁶ the rate is exactly 1, the rate of brute force', s.l === 16 && near(s.rate, 1, 1e-12));
-await pick('cross'); await page.waitForTimeout(400); s = await state();
+await pick('cross'); s = await state();
 check('CROSSOVER plays the scale upward', s.playing || s.t > 2);
 s = await seek(600); check('past the crossover the schematic curve is the lower one', s.rate < PPSZ && /示意曲线更低/.test(await page.textContent('#hudSub')));
 await pick('constant'); s = await state();
@@ -49,6 +57,28 @@ const c0 = PPSZ * Math.sqrt(266) / (Math.log(266) / Math.LN2);
 check('the crossover sits exactly at the horizon for c ≈ 0.78', near(c0, 0.782, 1e-3) && crossover(c0 + 0.01) > 266 && crossover(c0 - 0.01) < 266);
 await setRange('cc', 0.35); s = await state();
 check('the slider sets c; at c = 0.35 the curve is below 0.386 everywhere', s.c === 0.35 && s.crossover === null && s.preset === null && /无/.test(await page.textContent('#ro3')));
+
+/* ---------- the clause width k: the PPSZ table ---------- */
+const TABLE = { 3: '0.3863', 4: '0.5548', 5: '0.6502', 6: '0.7118' };
+check('PPSZ rates by two independent routes (digamma closed form, direct series): k = 3, 4 give the literature values 0.3863 and 0.5548; k = 5, 6 give 0.6502 and 0.7118',
+  [3, 4, 5, 6].every((k) => near(ppszClosed(k), ppszSeries(k), 1e-9) && ppszClosed(k).toFixed(4) === TABLE[k]) && near(PPSZ, 2 * Math.LN2 - 1, 1e-13) && 2 ** PPSZ > 1.3065 && 2 ** PPSZ < 1.3075,
+  [3, 4, 5, 6].map((k) => `${k}: ${ppszClosed(k)} / ${ppszSeries(k)}`).join(' | '));
+const big = [100, 1000, 4000].map((k) => k * (1 - ppszSeries(k, 400000)));
+check('for large k the rate tends to 1 − π²/(6k): k·(1 − r_k) → π²/6 = 1.645 (not π²/(6 ln 2) = 2.373)', Math.abs(big[2] - Math.PI ** 2 / 6) < 5e-4 && Math.abs(big[1] - Math.PI ** 2 / 6) < 2e-3 && big[0] > big[1] && big[1] > big[2] && big[2] > Math.PI ** 2 / 6 && Math.abs(big[2] - Math.PI ** 2 / (6 * Math.LN2)) > 0.5, big.join(' '));
+const pageRates = await D(() => [3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((k) => window.HORIZON_DEBUG.ppszOf(k)));
+check('the page’s PPSZ rates for k = 3 … 12 agree with the digamma closed form to 1e-10', pageRates.every((v, i) => near(v, ppszClosed(i + 3), 1e-10)), pageRates.join(' '));
+await pick('atoms');
+let kOK = true, kBad = '';
+for (const k of [4, 5, 6, 3]) {
+  await page.click(`#kChips [data-k="${k}"]`); s = await state();
+  const p = ppszClosed(k), mine = crossoverAt(1, p), ro2 = await page.textContent('#ro2');
+  if (!(s.k === k && near(s.ppsz, p, 1e-10) && ro2.trim() === TABLE[k] && near(s.crossover, mine, 1e-4) && s.c === 1 && near(s.rate, r2(1, 266), 1e-12) && (k === 3 ? s.preset === null : true))) { kOK = false; kBad = JSON.stringify([k, s.k, s.ppsz, ro2, s.crossover, mine]); }
+}
+check('the k chips move only the PPSZ baseline: its rate, the readout and the crossover follow k; the schematic curve stays', kOK, kBad);
+s = await state();
+check('choosing k leaves the card; with k = 6 the crossover for c = 1 is near 2⁷⁸, well inside the horizon', s.preset === null && crossoverAt(1, ppszClosed(6)) < 90 && crossoverAt(1, ppszClosed(6)) > 70 && s.k === 3 && near(s.crossover, crossover(1), 1e-4));
+await page.click('#kChips [data-k="5"]'); await pick('atoms'); s = await state();
+check('a card of the rates scene resets k to 3', s.k === 3 && near(s.ppsz, PPSZ, 1e-10) && (await page.getAttribute('#kChips [data-k="3"]', 'aria-pressed')) === 'true');
 
 /* ---------- the bridge graph ---------- */
 const MOD = 1000003n;
@@ -111,7 +141,7 @@ for (const prof of ['plateau', 'geometric', 'power']) {
 }
 check('three spectra × six thresholds: the count and the total match direct summation, and count × θ ≤ T every time', modeOK, modeBad);
 check('the geometric spectrum sums to 1/(1 − 0.82) and the power law to 4(π²/6 − 1)', near(sum(spec.geometric), 1 / 0.18, 1e-9) && Math.abs(sum(spec.power) - 4 * (Math.PI ** 2 / 6 - 1)) < 1e-4);
-await pick('tail'); await page.waitForTimeout(400); s = await state();
+await pick('tail'); s = await state();
 check('TAIL plays the threshold downward on the power law', s.prof === 'power' && (s.playing || s.t > 0));
 s = await seek(1); check('at θ = 0.02 thirteen modes of the power law reach the threshold, far below the wall at 129', s.count === 13 && near(s.wall, 4 * (Math.PI ** 2 / 6 - 1) / 0.02, 0.05));
 await page.click('#profChips [data-prof="plateau"]'); await seek(0.2);
@@ -124,6 +154,23 @@ await page.click('body', { position: { x: 5, y: 5 } });
 for (const [key, sc] of [['1', 'rates'], ['2', 'cut'], ['3', 'modes']]) { await page.keyboard.press(key); check(`key ${key} switches to the scene ${sc}`, (await state()).scene === sc); }
 await page.keyboard.press('1'); await page.keyboard.press('Home'); await page.keyboard.press('Space'); await until(() => { const d = window.HORIZON_DEBUG.state; return d.playing && d.t > 0; }); s = await state();
 check('Space plays the scale', s.playing && s.t > 0); await page.keyboard.press('Space'); check('Space pauses', !(await state()).playing);
+/* ---------- the epistemic red line: ETH stays open ---------- */
+const RED_ZH = /(证伪|推翻|否定|驳倒|驳斥|打破|攻破)(了)?\s*(指数时间假设|ETH)|(指数时间假设|ETH)[^。；;]{0,6}(被|已被|已经被|遭)?(证伪|推翻|否定|驳倒|攻破)|(指数时间假设|ETH)\s*(是错|为假|不成立|已破)/;
+const RED_EN = /\b(falsif\w*|refut\w*|disprov\w*|overturn\w*|debunk\w*|break\w*|broke)\s+(the\s+)?(ETH|exponential[- ]time hypothesis)\b|\b(ETH|exponential[- ]time hypothesis)\s+(is|was|has been|had been|been|are)\s+(now\s+)?(false|refuted|disproved|disproven|falsified|wrong|broken|overturned)\b/i;
+const here = (f) => readFileSync(new URL(`../${ID}/${f}`, import.meta.url), 'utf8');
+const entry = JSON.parse(readFileSync(new URL('../visualizations.json', import.meta.url), 'utf8')).visualizations.find((v) => v.id === ID);
+const sources = [here('index.html'), here('main.js'), JSON.stringify(entry)].join('\n');
+const shown = {};
+for (const lang of ['zh', 'en']) { await page.click(`[data-lang-set="${lang}"]`); await settle(page); shown[lang] = await D(() => document.body.innerText + ' ' + [...document.querySelectorAll('[aria-label],[data-aria-en],[title]')].map((e) => [e.getAttribute('aria-label'), e.getAttribute('data-aria-en'), e.getAttribute('title')].join(' ')).join(' ') + ' ' + document.getElementById('drawer').textContent); }
+check('red line (中文): nothing on the page, in its sources or in its registry entry says ETH is falsified', !RED_ZH.test(sources) && !RED_ZH.test(shown.zh) && !RED_ZH.test(shown.en) && RED_ZH.test('预印本证伪了 ETH') && RED_ZH.test('ETH 已被推翻'), (sources.match(RED_ZH) || shown.zh.match(RED_ZH) || [''])[0]);
+check('red line (English): nothing on the page, in its sources or in its registry entry says ETH is false', !RED_EN.test(sources) && !RED_EN.test(shown.zh) && !RED_EN.test(shown.en) && RED_EN.test('the preprints refute the ETH') && RED_EN.test('The Exponential Time Hypothesis Is False'), (sources.match(RED_EN) || shown.en.match(RED_EN) || [''])[0]);
+check('ETH is marked OPEN in both languages; the candidate curve is the schematic upper bound reported in chapter 30 (MODEL); the PPSZ table is ARGUED for the uniquely satisfiable case', await D(() => {
+  const open = document.querySelector('#evidence .lean.open'), model = document.querySelector('.lean.model[data-scenes="rates"]'), argued = document.querySelector('.lean.argued[data-scenes="rates"]');
+  return !!open && /指数时间假设/.test(open.querySelector('.zh').textContent) && /ETH/.test(open.querySelector('.zh').textContent) && /exponential time hypothesis/.test(open.querySelector('.en').textContent) && /开放问题/.test(open.textContent) && /Open problems/.test(open.textContent)
+    && !!model && /第 30 章所转述的亚指数候选上界示意曲线/.test(model.textContent) && /candidate subexponential upper bound reported in chapter 30/.test(model.textContent)
+    && !!argued && /文献结果，未在本书形式化/.test(argued.textContent) && /唯一可满足/.test(argued.textContent) && /uniquely satisfiable/.test(argued.textContent) && /0\.3863、0\.5548、0\.6502、0\.7118/.test(argued.textContent);
+}));
+await page.click('[data-lang-set="zh"]'); await settle(page);
 check('the schematic curve is labelled as a model and the preprints as unaudited', await D(() => { const m = document.querySelector('.lean.model[data-scenes="rates"]'); return !!m && /审计/.test(m.textContent) && /不是定理/.test(m.textContent) && !!document.querySelector('.lean.open'); }));
 await page.click('[data-lang-set="en"]'); await settle(page, 150);
 for (const sc of ['rates', 'cut', 'modes']) { await page.click(`#sceneChips [data-scene="${sc}"]`); await settle(page, 60); const left = await cjkLeftovers(page); check(`English: no Chinese left in the scene ${sc} after free play`, left.length === 0, left.slice(0, 4).join(' | ')); }

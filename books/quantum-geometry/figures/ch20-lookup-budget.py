@@ -8,7 +8,7 @@ chapter's remark on P/poly. The crossing n = 10 is checked by the script.
 
 import math
 
-SIZE = (520, 320)
+SIZE = (500, 320)
 ALT = {
     "zh": "坐标图：横轴是输入长度 n，从 1 到 24；纵轴是大小，按对数刻度标出 1、2⁸、2¹⁶、2²⁴。"
           "品红的直线是查找表的行数 2ⁿ，青色的曲线是多项式预算 n³。两者在 n = 10 处交叉（竖直虚线），此后品红线在上方越走越远。"
@@ -25,10 +25,10 @@ def draw(fig):
     cross = next(n for n in range(2, 40) if 2 ** n > n ** 3)
     assert cross == 10 and all(2 ** n > n ** 3 for n in range(10, 60))
 
-    ax = fig.axes(76, 58, 404, 200, (1, 24), (0, 25))
+    ax = fig.axes(76, 58, 384, 200, (1, 24), (0, 25))
     ax.grid(ys=[8, 16, 24])
-    ax.xaxis(ticks=[1, 5, 10, 15, 20, 24], label="*n*", size=13)
-    ax.yaxis(ticks=[0, 8, 16, 24], labels=["1", "2^{8}", "2^{16}", "2^{24}"], size=13)
+    ax.xaxis(ticks=[1, 5, 10, 15, 20, 24], label="*n*", size=14)
+    ax.yaxis(ticks=[0, 8, 16, 24], labels=["1", "2^{8}", "2^{16}", "2^{24}"], size=14)
     ax.plot(lambda n: n, color="area", width=3.0)
     ax.plot(lambda n: 3 * math.log2(n), color="line", width=3.0)
     ax.vline(cross, "dim", 1.3, dash="3 4")
@@ -37,7 +37,7 @@ def draw(fig):
 
     ax.text(19.5, 19.5, t("查找表 2^{*n*} 行", "table: 2^{*n*} rows"), dx=-8, dy=-6, size=14, color="area", anchor="end")
     ax.text(24, 3 * math.log2(24), t("预算 *n*^{3}", "budget *n*^{3}"), dx=-2, dy=22, size=14, color="line", anchor="end")
-    ax.text(cross, 1.2, "*n* = 10", dx=6, size=13, color="dim")
+    ax.text(cross, 1.2, "*n* = 10", dx=6, size=14, color="dim")
 
-    fig.chip(20, 30, t("文献", "literature"), "argued")
-    fig.chip(SIZE[0] - 20, 30, t("P ≠ NP：开放", "P ≠ NP: OPEN"), "open", anchor="end")
+    fig.chip(20, 30, t("文献", "literature"), "argued", size=14)
+    fig.chip(SIZE[0] - 20, 30, t("P ≠ NP：开放", "P ≠ NP: OPEN"), "open", size=14, anchor="end")

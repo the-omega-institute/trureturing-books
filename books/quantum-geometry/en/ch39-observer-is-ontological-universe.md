@@ -154,6 +154,10 @@ With passive memory and the thing-in-itself gone, common sense raises its penult
 
 No! Here we harvest the deepest seed planted in Part V ([Chapter 17](ch17-lorentz-geometry.md) and [Chapter 18](ch18-spinors-and-gauge-curvature.md)), unveiled at full strength only now that observer and universe stand identical (`MODEL` (interpretive model)): **the observer has never walked inside pre-existing spacetime; rather, one-dimensional timelike currents and two-dimensional spatial gauge planes are bilinear robe-folds woven on the fly as the observer spinor $\psi$ turns around to pair with its reversed self $\tilde{\psi}$!**
 
+::: {.viz src="self-sustaining-spinor-flow" preset="weave" height="500"}
+**A spinor sandwiching two reference blades.** Dashed are the reference $\mathbf{e}_3$ and the $\mathbf{e}_1\mathbf{e}_2$ square; the spinor $\psi$ sandwiches the first into the cyan current vector $\mathbf{J} = \psi\mathbf{e}_3\tilde{\psi}$ and the second into the magenta spin plane $\mathbf{S} = \psi\mathbf{e}_1\mathbf{e}_2\tilde{\psi}$, which lies at right angles to $\mathbf{J}$; the short dashed violet arc is the way $\psi$ carries $\mathbf{e}_3$ to $\mathbf{J}$ (the products are those of [@ex-ch39-even-clifford-spinor-bilinear-fierz]).
+:::
+
 The classical mathematical-physics lineage reconstructing spacetime vectors and gauge bivectors as spinor bilinears is recorded below:
 
 ::: {.remark #rem-ch39-cartan-penrose-hestenes-fierz-literature title="Cartan–Penrose–Hestenes Spinor Bilinear Spacetime Reconstruction and the Fierz Identity (Literature Result, Not Formalized in This Book)"}
@@ -165,6 +169,10 @@ The classical mathematical-physics lineage reconstructing spacetime vectors and 
    $$
    \mathbf{J}^2 \;=\; -\mathbf{S}^2 \;=\; \rho^2.
    $$
+:::
+
+::: {.viz src="self-sustaining-spinor-flow" preset="fierz" height="500"}
+**The three squares always agree.** Take any spinor ($\rho = 1.3$) and keep turning it in the $\mathbf{e}_3\mathbf{e}_1$ plane: the cyan $\mathbf{J}$ has length $1.3$, the magenta square has area $1.3$, and the top of the stage reads $\mathbf{J}^2 = -\mathbf{S}^2 = \rho^2 = 1.69$. This is the page’s numerical check of the Fierz identity of [@rem-ch39-cartan-penrose-hestenes-fierz-literature] (a literature result, not formalized in this book).
 :::
 
 Alongside the spinor-geometric context of [@rem-ch39-cartan-penrose-hestenes-fierz-literature], the worked example below verifies spinor bilinear self-pairing and half-angle double-cover arithmetic explicitly in the three-dimensional Euclidean even subalgebra:
@@ -205,6 +213,10 @@ $$
 4. **$360^\circ$ Spinor Sign Inversion vs. $720^\circ$ Return**: After one full $360^\circ$ physical turn ($\vartheta = 2\pi$), the bilinear observables already return to $\mathbf{J}(2\pi) = \rho\mathbf{e}_3$ and $\mathbf{S}(2\pi) = \rho\mathbf{e}_1\mathbf{e}_2$, whereas the spinor itself has crossed onto the opposite sheet $\psi(2\pi) = \sqrt{\rho}\cos\pi = -\psi(0)$! Only after a second full turn to $\vartheta = 4\pi$ ($720^\circ$) does $\psi(4\pi) = \sqrt{\rho}\cos 2\pi = +\psi(0)$ return home.
 :::
 
+::: {.viz src="self-sustaining-spinor-flow" preset="turn360" height="500"}
+**A full $360^\circ$: the vector is back, the spinor is not.** Turning once round in the $\mathbf{e}_2\mathbf{e}_3$ plane as in [@ex-ch39-even-clifford-spinor-bilinear-fierz]: the cyan $\mathbf{J}$ comes back to $\mathbf{e}_3$ and the magenta $\mathbf{S}$ is as it was, but the violet flag has slid to the other side of the one-sided band and points opposite to the dashed starting flag: $\psi = -\psi_0$.
+:::
+
 That $360^\circ$ sheet flip in Step 4 of [@ex-ch39-even-clifford-spinor-bilinear-fierz] is no coordinate quirk! In the concept-topology module of `trureturing`, two kernel theorems on the squaring double cover $\operatorname{square}(z) = z^2$ rigorously forbid any attempt to slice the spinor bundle globally into disconnected "subject" and "object" sheets:
 
 ::: {.theorem #thm-ch39-double-cover-no-section-and-720-lift title="No Continuous Global Section and History-Dependent Path Lifting with 360° Sheet Exchange on the Circle Double Cover" lean="D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"}
@@ -229,7 +241,15 @@ Let $\mathrm{Circle} = \{z \in \mathbb{C} : \lvert z\rvert = 1\}$ denote the uni
 For Conjunct 1, suppose a continuous section $s : \mathrm{Circle} \to \mathrm{Circle}$ satisfied $(s(z))^2 = z$, and form the continuous quotient $r(t) := s(\operatorname{Circle.exp}(t)) / \operatorname{Circle.exp}(t/2)$ on $\mathbb{R}$. Squaring gives $(r(t))^2 = \operatorname{Circle.exp}(t) / \operatorname{Circle.exp}(t) = 1$, confining $r(\mathbb{R})$ to the discrete two-point set $\{1, -1\} \subset \mathrm{Circle}$; preconnectedness of $\mathbb{R}$ (`isPreconnected_univ.constant_of_mapsTo`) forces $r(t) \equiv r(0)$, yet evaluating at $t = 2\pi$ via $\operatorname{Circle.exp}(2\pi) = 1$ and $\operatorname{Circle.exp}(\pi) = -1$ yields $r(2\pi) = s(1) / (-1) = -r(0)$, contradicting `Circle.neg_ne_self`! Conjunct 2 establishes general unique path lifting from Mathlib's `liftPath_lifts`, `liftPath_zero`, and `eq_liftPath_iff'`, then constructs the explicit half-angle path $\mathrm{halfTurn}(t) := \operatorname{Circle.exp}(\pi t) \in C(I, \mathrm{Circle})$, verifies $(\operatorname{Circle.exp}(\pi t))^2 = \operatorname{Circle.exp}(2\pi t)$ with $\mathrm{halfTurn}(0) = 1$ to identify $\mathrm{lifted} = \mathrm{halfTurn}$ by uniqueness, and evaluates $\mathrm{lifted}(1) = \operatorname{Circle.exp}(\pi) = -1$. The full proof is checked by the Lean kernel.
 :::
 
+::: {.viz src="self-sustaining-spinor-flow" preset="seam" height="500"}
+**Flags all the way round do not match at the start.** From the start, a violet flag is planted every $30^\circ$, each continuing the one before; back at the start the last one points opposite to the dashed first flag. A square root chosen continuously round the base circle cannot match up on return: this is [@thm-ch39-double-cover-no-section-and-720-lift], item 1 (no continuous global section) and item 2 (the unique lift of the $360^\circ$ loop ends at $-1$).
+:::
+
 Pause before the one-sided topology of [@thm-ch39-double-cover-no-section-and-720-lift] (`MODEL` (interpretive model)): because `no_continuous_global_section` forbids tearing the double cover globally into two separate sheets, reality has no dividing wall with "inner subjective observer ($+1$ sheet)" painted on one side and "outer objective cosmos ($-1$ sheet)" painted on the other! Like a traveller gliding along a single one-sided twisted ribbon, you set out from the inward observing pole $\mathrm{lifted}(0) = +1$, advance continuously through $360^\circ$ without ever stepping across a subject–object boundary, and find that the ground beneath your feet has turned seamlessly into the starry sheet $\mathrm{lifted}(1) = -1$; advance through a second $360^\circ$ ($720^\circ$ in total), and the entire starry firmament flows back into your own eyes!
+
+::: {.viz src="self-sustaining-spinor-flow" preset="turn720" height="500"}
+**Home only after $720^\circ$.** One more turn: the violet flag is back on its first side, $\psi = +\psi_0$; the violet trail of the flag’s tip is the band’s edge, which closes only after going round twice, while the cyan $\mathbf{J}$ goes round twice.
+:::
 
 ---
 
@@ -294,3 +314,7 @@ Looking back from this thirty-ninth summit across all ten parts—from restoring
 :::
 
 Gaze one last time at the luminous one-sided $720^\circ$ ribbon turning quietly across the dark field on the right of our figure. As the illusory binary wall on the left dissolves under $\mu \to 0$, a warm amber point glides along the non-splittable double cover: across the first $360^\circ$ arc it is the inward-looking pointer, the dreaming mind beside the pillow, the finite player deliberating before the complexity horizon; then, without crossing a single boundary, through the central spinor twist it turns naturally into the second $360^\circ$ arc—becoming the billion-light-year web of galaxies, the symphony of primes and zeros, and the incorruptible constitution of quantum fairness, before flowing at $720^\circ$ right back into the eyes reading this line. From the very first moment in [Chapter 1](ch01-measurement.md) and [Chapter 2](ch02-born-rule.md) when we cut away external Point $C$ and wrote $\psi = \psi(\psi)$, the ending was already sealed: there was never a tiny observer gazing up in solitude at a foreign cosmos; from beginning to end, the ontological universe has been folding itself orthogonally into a pair of eyes so that, across the long and fair starlight journey, it might reunite with itself. Let us now push open the final door of this book and step into the [Coda](coda.md), *Outside All Spheres*.
+
+::: {.viz src="self-sustaining-spinor-flow" height="640"}
+**The self-sustaining spinor flow lab.** Change the density $\rho$ or the plane of the turn, or drag the tip of $\mathbf{J}$ to choose another spinor: the three squares $\mathbf{J}^2$, $-\mathbf{S}^2$ and $\rho^2$ in the readouts always agree; along the rail the cyan curve returns to $1$ after one turn, the violet one after two.
+:::

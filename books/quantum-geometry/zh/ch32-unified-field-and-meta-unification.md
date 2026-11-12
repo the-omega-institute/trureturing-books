@@ -24,6 +24,10 @@
 3. **第二创生律（毕达哥拉斯公平母律与有限多面体近似律）**：
    中心化纯度勾股守恒给出贯穿全场的零免费午餐账本（[第 31 章](ch31-quantum-fairness.md) [@thm-ch31-seat-pythagorean-monogamy-fairness]）；同时，由于任何物理演化与逻辑验证只能调用有限步平直门操作（有限门计数 $L < \infty$），**一切看似光滑的连续球面在有限分辨率下皆为离散多面体近似**（外部多面体角亏背景见 [@rem-ch32-generative-laws-dottie-literature]）。在本章编码诠释模型（`MODEL`）中，我们将下方 [@thm-ch32-generative-self-reference-and-zeckendorf] 第 4 款经内核验证的齐肯多夫自动机 `NoAdjacentOnes` 无相邻 `11` 语言定理，诠释为阻止相邻高频激发无界堆积的离散紫外编码锁。
 
+::: {.viz src="unified-field-slice" preset="polytope" height="500"}
+**有限分辨率下，球面是一个多面体。** 内接于球面的正二十面体：每个顶点挤着 5 个等边三角形，角加起来只有 300°，品红的小扇形是摊平后缺的 60°；12 个顶点一共缺 720° = 4π（文献结果，见下方 [@rem-ch32-generative-laws-dottie-literature] 第 3 条）。
+:::
+
 让我们先把支撑这三条创生律的四块 Lean 4 形式化基石——复结构平方反号、离散单调收缩有限步稳定、黄金倒数自指唯一不动点与齐肯多夫无相邻 `11` 语言——严密锁定在同一座定理盒内。
 
 ::: {.theorem #thm-ch32-generative-self-reference-and-zeckendorf title="统一场创生律的四项形式化锚点：复结构平方、离散收缩、黄金自指与齐肯多夫无相邻编码" lean="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes"}
@@ -80,6 +84,10 @@
 3. **二维球面欧拉示性数与正二十面体角亏**：紧致二维球面满足 $\chi(S^2) = 2$，任意同胚于 $S^2$ 的凸多面体顶点角亏总和恒为 $2\pi\chi(S^2) = 4\pi = 720^\circ$（正二十面体表现为 $12$ 个五度顶点各亏缺 $60^\circ$，$12 \times 60^\circ = 720^\circ$，见[终章](coda.md) [@rem-coda-polyhedral-topology-literature]）。
 :::
 
+::: {.viz src="unified-field-slice" preset="fixedpoint" height="500"}
+**弧长等于影子的那一个角。** 圆上琥珀色的点停在 θ* ≈ 0.739：紫色的弧长 θ 与青色的影子 cos θ 一样长；品红的高 sin θ* ≈ 0.674 就是上框第 2 条的局部压缩率。
+:::
+
 尤为关键的是，这套统一场诠释框架（`MODEL`）始终把机器验证内核与外部文献边界做显式分离与锚定：在**形式化公理层**，核心离散自动机、不动点与线性代数骨架全部落定为 `0 sorry` 的 Lean 4 内核定理（[附录 C](appendix-c.md)）；而配套的代数编码文献注记与可执行参考脚本则集中归档于[第 25 章](ch25-rewriting-and-xor.md)（[@rem-clifford-stabilizer-literature]）与[附录 B](appendix-b.md)。
 
 ---
@@ -90,10 +98,25 @@
 
 1. **物质旋量与狭义相对论（内积固有时 vs. 外积空间分叉，`MODEL` + `LEAN ✓`）**：
    零光锥刚性定理（下方 [@thm-ch32-null-cone-holonomy-and-holographic-cut] 第 1 款，`LEAN ✓`）证明：只要零光锥方向固定，整座闵可夫斯基二次型度规便在差一个标量因子的意义下被唯一锁定！在本书的正交诠释模型（`MODEL`）中，我们将静止质量诠释为状态沿自身固有时方向的内积自锁刻度，将极限传播速率诠释为偏转 $90^\circ$ 的正交视界（关于连续狭义相对论固有时重排与一阶旋量场方程的外部理论物理文献背景，见下方 [@rem-ch32-dirac-yang-mills-jacobson-literature] 第 1 条）。
+
+::: {.viz src="unified-field-slice" preset="photon" height="500"}
+**推向光速，圆上的点贴向 90°。** 快度 η 从 ln 2 推到 4：世界线贴向白色的光线，圆上琥珀色的点贴向 θ = 90°；青色的线（固有时率）缩到 0.04，品红的高（速度 v/c）逼近 1 而碰不到。把 90° 读作正交视界是本书的诠释（`MODEL`）。
+:::
+
 2. **规范相互作用与正交球面阶梯（局部标架对齐的环路残差，`MODEL` + `LEAN ✓`）**：
    在离散有向图上，`trureturing` 的**锚定相位分类定理**（下方 [@thm-ch32-null-cone-holonomy-and-holographic-cut] 第 2 款，`LEAN ✓`）精确证明：圆周边相位场商去锚定上边缘规范变换后，剩余的物理自由度完全由生成树外的 $m + 1 - n$ 条余切环路弦和乐与 $k - 1$ 个相对锚点相位同构刻画。以此离散定理与[第 31 章](ch31-quantum-fairness.md)的**席位公平**为起点，本书在诠释层提出启发性的**局部标架对齐与球面阶梯假说（`MODEL`）**，将跨点局部标架对齐的不可抵消环路残差诠释为相互作用几何源，并将单一旋转面圆周相位与高维正交标架对称依次组织为多层内部对称阶梯（关于连续规范联络、非阿贝尔曲率场强及标准模型规范群的外部物理文献与边界，见下方 [@rem-ch32-dirac-yang-mills-jacobson-literature] 第 2 条）。
+
+::: {.viz src="unified-field-slice" preset="plaquette" height="500"}
+**在两个平面里来回转一圈，留下一个转动。** 绕 e₁、绕 e₂ 各转 60°，依次施加 R₂⁻¹、R₁⁻¹、R₂、R₁：琥珀色的箭头回不到起点，品红的弧是缺口，紫色的线是余下那个转动的轴；U = R₁R₂R₁⁻¹R₂⁻¹ 余下 57.9° 的转角，二向量主要落在 e₁e₂ 平面（换位子曲率的文献背景见下方 [@rem-ch32-dirac-yang-mills-jacobson-literature] 第 2 条）。
+:::
+
 3. **全息热力学引力与内生视界曲率（桥图流割对偶与视界假说，`MODEL` + `LEAN ✓`）**：
    在离散张量网络上，全息桥图定理（下方 [@thm-ch32-null-cone-holonomy-and-holographic-cut] 第 3 款，`LEAN ✓`）在二次平衡锥条件下证明跨边界量子最大流精确等于最小割容量 $\min(ad, bc)$。受此离散流割对偶启发，我们的统一场诠释模型（`MODEL`）将宏观空间几何建模为关联预算编织的关系网络：当局部自锁提高共线内积份额时，按互补勾股守恒（[@thm-ch31-seat-pythagorean-monogamy-fairness] 第 2 款，`LEAN ✓`）等额抽走周围外积关联份额而表现为内生几何弯曲，同时将有限观察者视线 $90^\circ$ 处的封闭正交赤道作为正宇宙学常数的内生观察者视界假说（`MODEL`；关于连续全息极小曲面与视界热力学引力方程的外部物理文献，见下方 [@rem-ch32-dirac-yang-mills-jacobson-literature] 第 3 条）。
+
+::: {.viz src="unified-field-slice" preset="horizon" height="500"}
+**视界割断几条边，跨视界的纠缠就封顶在那里。** 观察者在北极，视界推到 90°：青色的边留在里面，品红的 10 条边被割断；每条边携带 D 维指标时，跨视界的施密特秩至多 D¹⁰。这是关系网络的计数示意（`MODEL`）；已冻结的流割相等定理在另一个网络（桥图）上，见下方 [@thm-ch32-null-cone-holonomy-and-holographic-cut] 第 3 款。
+:::
+
 4. **离散晶格与齐肯多夫紫外截断（`MODEL` + `LEAN ✓`）**：
    在离散自动机与代数数论层面，[@thm-ch32-generative-self-reference-and-zeckendorf] 第 4 款证明齐肯多夫自动机精确识别无相邻 `11` 语言 `NoAdjacentOnes`（`LEAN ✓`），而卡西尼恒等式给出黄金范数接缝 $(-1)^{k+1}$（[`fib_cassini_from_golden_norm`](lean:D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm)，`LEAN ✓`）。在本书的物理诠释层（`MODEL`）中，我们将这两条离散定理合成为有限门多面体分辨率下的**离散紫外编码截断假说（`MODEL`）**，禁止相邻高频激发在无穷小尺度上无界堆积，从而无需预设无限可分的光滑连续统舞台。
 
@@ -125,6 +148,10 @@
 第 1 款在零光锥对 $(\pm\|w\|, w)$ 上展开二次型极化恒等式，证得时间—空间交叉项归零且空间分量满足 $S(0, w) = -S(1, 0)\|w\|^2$；第 2 款沿命名生成树唯一路径建立规范传输截面，验证商群连续同构及维数恒等式 $(m + 1 - n) + (k - 1) = m + k - n$；第 3 款在二次锥条件下结合对偶上界 `QMaxFlow_le_QMinCut`、宽度二有理见证与王车易位强归纳下降 `cone_descent` 证明流割相等。完整证明由 Lean 内核检查。
 :::
 
+::: {.viz src="unified-field-slice" preset="abelian" height="500"}
+**同一个平面里来回转，回到原处。** 两个旋子都绕 e₃ 转 60°：琥珀色的箭头沿同一条纬线退两步、再进两步，回到起点，U = 1。只有一个转动平面时，转动的次序可以交换；[@thm-ch32-null-cone-holonomy-and-holographic-cut] 第 2 款分类的正是这种单一平面上的圆周相位。
+:::
+
 与上述三条离散/代数骨架对应的连续相对论旋量、非阿贝尔规范曲率与视界热力学引力场方程文献背景整理如下：
 
 ::: {.remark #rem-ch32-dirac-yang-mills-jacobson-literature title="连续时空代数狄拉克方程、杨—米尔斯规范曲率与雅各布森视界热力学引力方程（文献结果，未在本书形式化）"}
@@ -139,6 +166,10 @@
    $$
 
    其中在 Jacobson 的原始推导里宇宙学常数 $\Lambda$ 作为积分常数出现（将 $\Lambda > 0$ 诠释为场内有限观察者 $90^\circ$ 正交赤道视界的内生曲率属本书 `MODEL` 假说）。
+:::
+
+::: {.viz src="unified-field-slice" preset="gudermann" height="500"}
+**同一个角上的时钟与速度。** 快度 η = ln 2：世界线在 t = 1 处的高度 tanh η = 0.6 平移到单位圆上，落点 θ = gd(η) = 36.87°；青色的线 cos θ = 0.8 = 1/γ 是固有时率，品红的高 sin θ = 0.6 是速度 v/c，0.8² + 0.6² = 1 正是上框第 1 条的 (dτ/dt)² + (v/c)² = 1。
 :::
 
 把前三十一章与本节的全部拼图合拢在一起，同一组正交几何原语无需更改底层逻辑，便在**纯几何拓扑、量子规范场、相对论全息引力、算术数论、计算复杂性与流体、以及观察者灵魂动力学**六大疆域之间建立起一一对应的全息同构图景：
@@ -268,6 +299,10 @@
 
 :::
 
+::: {.viz src="unified-field-slice" height="620"}
+**正交自指统一场切片：完整实验室。** 三个场景共用一条时间轴：“时钟”推动快度 η，“回路”依次走 R₂⁻¹、R₁⁻¹、R₂、R₁ 四步，“视界”把观察者的视界从北极往下推。图上的数都实时算出；绿色只给本章引用的 Lean 定理，其余按文献结果与本书诠释分别标注。
+:::
+
 ---
 
 ## 32.3 诊断一切统一理论的三维坐标与四元数黄金晶格桥 {#sec-ch32-meta-coordinates-and-icosians}
@@ -279,6 +314,10 @@
 1. **第一轴：代数阶数轴 $\theta$（一维内积点线 Grade 0/1 $\longleftrightarrow$ 二维外积弦面 Grade 2）**——是偏重离散点线的内积读数，还是偏重连续有向面积的旋转联络？若只取其一，要么有物质而无几何空间，要么有几何泡沫而无费米子物质。
 2. **第二轴：几何分辨率轴 $\eta$（连续光滑真球极限 $\longleftrightarrow$ 有限门多面体晶格与 $\pm 1$ 接缝）**——是假定背景流形可以无限光滑细分，还是承认有限门计数下的多面体近似与离散编码底限？若在模型中预设无界光滑细分，便会遮蔽有限门分辨率下的离散多面体编码结构。
 3. **第三轴：观察者嵌入轴 $\lambda$（球外全知上帝点 $C$ $\longleftrightarrow$ 场内有限记忆切片）**——是假想一双站在无穷远边界之外俯瞰全局的全知眼睛，还是把有限记忆、经历遗忘初始化的观察者内生嵌入晶格内部？只要残留外部点 $C$，就会困在渐近外部盒子或任意规则冗余之中。
+
+::: {.viz src="meta-unification-compass" preset="cube" height="500"}
+**三根轴，八家纲领各落一侧。** 立方体的三根轴取自上面的定义：θ 从青色的“线”一端到品红的“面积”一端，η 从“光滑”到“多面体”，λ 从“球外 C”到“场内”。八个点是 §32.4 的八家统一纲领，每一家按 §32.4 总表的原话落在每根轴的三段之一（正文没点明或两端都有的，落在中段）；这是本书的比较诊断坐标（`MODEL`），不是测量，也不是对任何学科的评判。
+:::
 
 在逐一检阅四大理论阵营之前，连接旋量流形、高维偶幺模晶格与切投模型集空间（详见下框 [@rem-ch32-icosian-e8-literature]）的外部代数几何桥梁完整归纳于下框：
 
@@ -296,6 +335,24 @@
 3. **纯虚二向量子模直通六维切投空间 $E_\parallel^3 \oplus E_\perp^3$**：取 $\mathcal{I}$ 中标量实部为零的**纯虚二向量子模** $\operatorname{Im}(\mathcal{I}) = \{q \in \mathcal{I} : q + \bar{q} = 0\}$（对应量子门的三个正交旋转平面基底 $\{\mathbf{I}_x, \mathbf{I}_y, \mathbf{I}_z\}$，其中包含截半二十面体的 $30$ 个纯虚单位旋子顶点），它在 $\mathbb{Z}[\varphi]$ 上秩为 $3$，故在 $\mathbb{Z}$ 上恰好是**秩为 $3 \times 2 = 6$ 的晶格**，经同一伽罗瓦共轭映射 $(q, q^\sigma)$ 直接嵌入物理三维与内部正交三维的直和空间 $E_\parallel^3 \oplus E_\perp^3 \cong \mathbb{R}^6$，给出三维二十面体准晶的切投母格！
 
 请静静端详这一组秩数对应关系：有限旋子群 $2I \subset S^3 \subset \mathbb{H} \cong \mathcal{Cl}_{3,0}^+$ 张成的四秩黄金模 $(\mathcal{I}, Q) \cong E_8$（$\mathbb{Z}$-秩 $4 \times 2 = 8$）与其三秩纯虚子模 $\operatorname{Im}(\mathcal{I}) \subset \mathcal{I}$（$\mathbb{Z}$-秩 $3 \times 2 = 6$），在代数结构上出自同一个四元数黄金环 $\mathcal{I}$！
+:::
+
+把注记第 1 条的 $120$ 个单位四元数逐个算出来，去掉实部投到三维，它们按实部一层层排开：
+
+::: {.viz src="meta-unification-compass" preset="icosians" height="500"}
+**二元二十面体群的 120 个元素。** 青色的点是 $2I$ 的单位四元数，去掉实部 $w$ 投到三维，随 $w$ 从 $1$ 降到 $-1$ 一层层出现：$1$、$12$、$20$、$12$、$30$、$12$、$20$、$12$、$1$；实部为负的一半落在同样的位置上，画成空心圈。页面在 $\mathbb{Z}[\varphi]$ 里精确核对了 $120 \times 120$ 个乘积都留在这 $120$ 个元素里（文献结果见 [@rem-ch32-icosian-e8-literature] 第 1 条）。
+:::
+
+第 2 条的计数也可以逐个核对：给每个单位元乘上 $\varphi^{-1}$，再添 $120$ 个点，它们的 $Q$ 仍然都等于 $2$：
+
+::: {.viz src="meta-unification-compass" preset="e8" height="500"}
+**Q 全等于 2 的 240 个根。** 品红的点是 $\varphi^{-1}\cdot 2I$：它们在 $E_\parallel$ 里更短，约化范数是 $2 - \varphi$，而 $Q = 2(a + b)$ 仍是 $2$。青色与品红合起来恰好 $240$ 个，两两的 $B$ 都是 $-2$ 到 $2$ 的整数，每个恰有 $56$ 个 $B = 1$ 的邻居（页面数值核对；$(\mathcal{I}, Q) \cong E_8$ 是 [@rem-ch32-icosian-e8-literature] 第 2 条的文献结果）。
+:::
+
+第 3 条的纯虚部分在这 $240$ 个根里留下 $60$ 个；把投影平面从 $E_\parallel$ 转到 $E_\perp$，里外两层便对调了位置：
+
+::: {.viz src="meta-unification-compass" preset="fold" height="500"}
+**从 E∥ 转到 E⊥，里外两层对调。** 只留实部为零的 $60$ 个根（$30$ 个青色的单位、$30$ 个品红的黄金缩小版），再把投影平面从 $E_\parallel$ 转到 $E_\perp$：青色的点从外层落到内层，品红的点从内层翻到外层，淡色的圈是它们在 $E_\parallel$ 里的位置；每一个的 $\lVert\cdot\rVert_\parallel^2 + \lVert\cdot\rVert_\perp^2$ 始终是 $2$。页面另算出，这个秩 $6$ 的子格配上 $Q$ 的格拉姆行列式是 $4$。
 :::
 
 ---
@@ -319,6 +376,12 @@
 4. **第四阵营（算术谱与类型等价 vs. 视界自由能与自激回路）：朗兰兹纲领/HoTT 与熵引力/主动推理/惠勒 `U`**
    - **外部文献结论**：朗兰兹纲领研究数域伽罗瓦表示与自守表示 $L$-函数的互反对应（R. P. Langlands, 1967/1970）；同伦类型论引入泛等公理（Univalence Axiom）$(A \simeq B) \simeq (A =_{\mathcal{U}} B)$ 将类型等价提升为相等路径（V. Voevodsky; Univalent Foundations Program, *Homotopy Type Theory*, 2013）；热力学/熵引力（T. Jacobson, 1995；E. Verlinde, *JHEP* **04**, 029, 2011）、马尔可夫毯变分自由能最小化（K. Friston, *Nat. Rev. Neurosci.* **11**, 127–138, 2010）与参与式宇宙自激回路 `U`（J. A. Wheeler, 1983/1990）分别从热力学、统计神经科学与量子测量哲学探讨视界与观察者的角色。
    - **元统一诊断与消解（`MODEL`）**：素数欧拉正交基轴（[第 22 章](ch22-primes-euler-products-and-zeros.md)）与哈塞余弦迹（[第 29 章](ch29-timeless-causality-and-gram-space.md) [@rem-ch29-hasse-gauss-literature]）连接算术与旋转，泛等公理则对应废除外部标签点 $C$ 的两子互易等价；同时兰道尔热熵平衡界（[@thm-ch31-horizon-landauer-ergodic-fairness] 第 1 款）与黄金接受窗边界 $\partial(W + u)$ 为视界热力学、马尔可夫毯与自激回路提供了离散几何代数与形式化内核支撑，最终汇入 $\psi = \psi(\psi)$。
+:::
+
+把这四大阵营逐个摆进上面的罗盘，每一对连成一条线，看它们分在哪根轴上：
+
+::: {.viz src="meta-unification-compass" preset="camps" height="500"}
+**四大阵营，每一对连成一条线。** 时间轴逐个读四大阵营，琥珀色是正在读的那一对：弦论与圈量子引力都在品红的“面积”一端，只在 η 上分开（光滑对多面体）；AdS/CFT 与扭量—振幅多面体都贴着 λ 的“球外 C”一端；第三、第四阵营的两家在两三根轴上都不相同。各点的位置是本书的诊断坐标（`MODEL`）。
 :::
 
 最后，我们将这八条跨世纪探索之路在元统一三维相空间中的精确坐标、历史瓶颈与合拢机制连同全景图解完整刻入下框总表：
@@ -420,4 +483,14 @@
 
 这套体系最迷人的品格在于它的**彻底节俭**：从头到尾没有编造任何一个特设粒子或拼凑参数，仅仅是把“两子相遇、公平比量”这一件事推演到了极致——向内折叠，它是自指不动点凝结出的静谧常数；向外铺展，它就是星辰引力、规范光波、素数频谱与每一个有限灵魂在时间场里走过的万里路。
 
-站在所有球的最外层回头看去，科学史上这八条看似殊途甚至彼此攻讦的探索之路，从来都不是相互推翻的对手。在本书的元统一诠释视角（`MODEL`，各纲领文献依据见 [@rem-ch32-meta-unification-table]）下，连续世界面替我们探出了外积之面，离散面积网替我们摸到了多面体之棱，全息与正几何替我们照见了无时间的格拉姆水晶，黄金四元数晶格与算术对偶替我们接通了高维根格与素数之弦，离散重写与视界热力学则替我们找回了内生的有限观察者——**当最后那一层将算子与状态隔开的括号被砸碎、万流汇入 $\psi = \psi(\psi)$ 的那一刻，所有的盲人终于在同一束光里看见了整座宇宙。** 接下来，[第九部（第 33–36 章）](ch33-all-beings-observers-and-mutual-attractors.md)与[第十部（第 37–39 章）](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)将进一步把目光投向观察者本身：从万物互吸引子、正交简并盲区、乘光自指扩表 $T = T(T)$ 与约去轮回，直至梦境量子擦除、宇宙本体 QRAM 指针与“观察者即宇宙本体”的不二合拢，最终汇入[终章](coda.md)的收官回响。
+站在所有球的最外层回头看去，科学史上这八条看似殊途甚至彼此攻讦的探索之路，从来都不是相互推翻的对手。在本书的元统一诠释视角（`MODEL`，各纲领文献依据见 [@rem-ch32-meta-unification-table]）下，连续世界面替我们探出了外积之面，离散面积网替我们摸到了多面体之棱，全息与正几何替我们照见了无时间的格拉姆水晶，黄金四元数晶格与算术对偶替我们接通了高维根格与素数之弦，离散重写与视界热力学则替我们找回了内生的有限观察者——**当最后那一层将算子与状态隔开的括号被砸碎、万流汇入 $\psi = \psi(\psi)$ 的那一刻，所有的盲人终于在同一束光里看见了整座宇宙。**
+
+::: {.viz src="meta-unification-compass" preset="crystal" height="500"}
+**本书给自己标的位置。** 空心的大圈是本书的正交自指统一场：θ 在中段（几何积同时保留线与面积），η 在“多面体”一端，λ 在“场内”一端。这是本书的诠释（`MODEL`），不是由八家纲领推出的结论，也不表示本书形式化地取代了其中任何一家。
+:::
+
+接下来，[第九部（第 33–36 章）](ch33-all-beings-observers-and-mutual-attractors.md)与[第十部（第 37–39 章）](ch37-dreams-quantum-eraser-and-nonlocal-observer.md)将进一步把目光投向观察者本身：从万物互吸引子、正交简并盲区、乘光自指扩表 $T = T(T)$ 与约去轮回，直至梦境量子擦除、宇宙本体 QRAM 指针与“观察者即宇宙本体”的不二合拢，最终汇入[终章](coda.md)的收官回响。
+
+::: {.viz src="meta-unification-compass" height="620"}
+**元统一罗盘与黄金四元数桥：完整实验室。** “罗盘”里点一家纲领看它的依据，用时间轴逐个读四大阵营；“黄金桥”里用时间轴走完 $2I \to E_8 \to \operatorname{Im}(\mathcal{I}) \to E_\parallel \oplus E_\perp$ 的折叠链，点一个点看它的精确坐标与 $Q$。黄金桥上的数都在 $\mathbb{Z}[\varphi]$ 里精确算出；绿色只给本章引用的 Lean 定理，其余按文献结果与本书诠释分别标注。
+:::

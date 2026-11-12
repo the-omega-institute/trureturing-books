@@ -28,13 +28,13 @@ def draw(fig):
     cx, cy, s = 190, 172, 230
     slices = penrose(fig, cx, cy, s)
     h = s / 2
-    fig.text(cx - h - 10, cy + h - 6, t("左边界", "left"), size=13, color="dim", anchor="end")
-    fig.text(cx + h + 10, cy + h - 6, t("右边界", "right"), size=13, color="dim")
-    fig.text(cx, cy - h - 12, t("奇点", "singularity"), size=13, color="dim", anchor="middle")
+    fig.text(cx - h - 10, cy + h - 6, t("左边界", "left"), size=14, color="dim", anchor="end")
+    fig.text(cx + h + 10, cy + h - 6, t("右边界", "right"), size=14, color="dim")
+    fig.text(cx, cy - h - 12, t("奇点", "singularity"), size=14, color="dim", anchor="middle")
     for i, pts in enumerate(slices):
-        fig.text(pts[-1][0] + 10, pts[-1][1] + 4, f"*t* = {i}", size=13, color="axis")
+        fig.text(pts[-1][0] + 10, pts[-1][1] + 4, f"*t* = {i}", size=14, color="axis")
     last = slices[-1]
     mid = last[len(last) // 2]
     fig.text(mid[0], mid[1] - 12, "*Σ*_{*t*}", size=15, color="axis", anchor="middle", weight=600, halo=True)
-    fig.text(cx, cy + h + 26, t("黑洞内部（示意）", "black-hole interior (schematic)"), size=13, color="dim", anchor="middle")
-    fig.chip(fig.width - 10, 60, t("C ∝ V(Σ_{t})？开放", "C ∝ V(Σ_{t})? OPEN"), "open", anchor="end")
+    fig.text(cx, cy + h + 26, t("黑洞内部（示意）", "black-hole interior (schematic)"), size=14, color="dim", anchor="middle")
+    fig.chip(fig.width - 10, 60, t("C ∝ V(Σ_{t})？开放", "C ∝ V(Σ_{t})? OPEN"), "open", size=14, anchor="end")

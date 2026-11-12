@@ -12,7 +12,7 @@ asserted against Jacobi's formula 8·Σ_{4∤d|n} d).
 import itertools
 import math
 
-SIZE = (520, 300)
+SIZE = (500, 300)
 ALT = {
     "zh": "以 a = b = −1（哈密顿四元数）为例。横轴是标量部 x₀，也就是迹的一半，纵轴是向量部的长度 |v|。"
           "四个青色的半圆是约化范数 Nrd = 1、2、3、4。每个整四元数落在某个半圆与竖线 x₀ = 整数的交点上；"
@@ -25,7 +25,7 @@ ALT = {
 }
 
 NMAX = 4
-CX, BASE, S = 286, 222, 84
+CX, BASE, S = 274, 222, 80
 
 
 def quaternions():
@@ -53,10 +53,10 @@ def draw(fig):
     for x0 in range(-2, 3):
         fig.line(X(x0), BASE, X(x0), Y(2.05), "faint", 1.0, dash="2 4")
         fig.line(X(x0), BASE, X(x0), BASE + 5, "dim", 1.2)
-        fig.text(X(x0), BASE + 20, str(x0).replace("-", "−"), size=13, color="dim", anchor="middle")
-        fig.text(X(x0), BASE + 44, str(2 * x0).replace("-", "−"), size=13, color="line", anchor="middle")
+        fig.text(X(x0), BASE + 20, str(x0).replace("-", "−"), size=14, color="dim", anchor="middle")
+        fig.text(X(x0), BASE + 44, str(2 * x0).replace("-", "−"), size=14, color="line", anchor="middle")
     fig.text(X(-2.45) - 8, BASE + 20, "*x*_{0}", size=14, color="dim", anchor="end")
-    fig.text(X(-2.45) - 8, BASE + 44, t("迹 2*x*_{0}", "trace 2*x*_{0}"), size=13, color="line", anchor="end")
+    fig.text(X(-2.45) - 8, BASE + 44, t("迹 2*x*_{0}", "trace 2*x*_{0}"), size=14, color="line", anchor="end")
     fig.line(X(0), BASE, X(0), Y(2.2), "dim", 1.3)
     fig.text(X(0) - 8, Y(2.2) + 6, "|*v*|", size=14, color="dim", anchor="end")
 
@@ -73,4 +73,4 @@ def draw(fig):
     for (x0, m), c in sorted(pts.items()):
         x, y = X(x0), Y(math.sqrt(m))
         fig.dot(x, y, 4.8, "line", ring="bg")
-        fig.text(x + 8, y - 7 if m else y - 9, f"{c}", size=13, color="ink", halo=True)
+        fig.text(x + 8, y - 7 if m else y - 9, f"{c}", size=14, color="ink", halo=True)

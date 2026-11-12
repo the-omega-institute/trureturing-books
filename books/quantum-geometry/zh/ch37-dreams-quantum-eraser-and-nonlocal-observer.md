@@ -46,6 +46,10 @@ $$
 - **坚硬**，是因为捏合算子满足严格幂等律 $\Pi_{\mathrm{wake}} \circ \Pi_{\mathrm{wake}} = \Pi_{\mathrm{wake}}$：只要你每秒钟用同一套已知数据反复核验世界，一切非对角异端都被压死为零（$P_k \rho P_l = 0$），桌子永远是桌子，墙壁绝不会穿身而过；
 - **狭窄与疲惫**，是因为每经历一轮幺正演化 $U$ 再用已知基捏合删除跨扇区相干，被删除的非对角相干性都会一分不少地转化为严格非负的**量子相对熵税**！日复一日的清醒专注，在这一 `MODEL` 中像是在不断支付熵账单，维持一条纤细的一维经典铁轨；若把这笔信息熵税兑现为物理热耗散，还须接上[第 31 章](ch31-quantum-fairness.md) [@thm-ch31-horizon-landauer-ergodic-fairness] 的热浴、初始态与熵平衡条件。
 
+::: {.viz src="dream-decoherence-unpinning" preset="waking" height="500"}
+**清醒：已知数据把每个位置都钉住。** 锚点强度 λ 从 0 推到 1，品红的跨块方格按 1 − λ 缩小到一点不剩，青色的对角——每个位置的权重——一格不动；屏上的条纹淡成青色虚线的平滑包络，熵从 0 涨到删去相干的相对熵（[@thm-ch37-known-data-pinching-and-entropy-tax] 第 1、3 款）。四个位置与屏的画法是示意模型。
+:::
+
 下面这条合取定理将记录捏合的函数幂等性、零非对角块不动点充要判据、单比特丢弃相干质量公式以及多步幺正—捏合轨迹的熵产恒等式统一锁定在 Lean 4 内核基座之上：
 
 ::: {.theorem #thm-ch37-known-data-pinching-and-entropy-tax title="已知数据记录捏合幂等律、不动点判据、丢弃相干质量与相干删除熵产恒等式" lean="D5/S3/Observer/Conditioning.unreadState_fixed_iff D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity"}
@@ -77,6 +81,10 @@ $$
 
 ::: proof
 第 1 款中，先由左乘正交消去引理 $P_k \operatorname{unreadState}(P, \rho) = P_k \rho P_k$ 右乘 $P_k$ 并利用 $P_k^2 = P_k$ 逐点证出 $\operatorname{unreadState}(P, \operatorname{unreadState}(P, \rho)) = \operatorname{unreadState}(P, \rho)$，再由 `funext` 得函数复合幂等；对不动点充要条件，正向由 $\rho = \operatorname{unreadState}(P, \rho)$ 左乘 $P_k$、右乘 $P_l$（$k \neq l$）并代入 $P_k P_l = 0$ 即得 $P_k \rho P_l = 0$，反向利用完备性 $P_k \rho = P_k \rho (\sum_l P_l) = P_k \rho P_k$ 对 $k$ 求和并再套用 $\sum_k P_k = 1$ 还原 $\rho$。第 2 款在 $\operatorname{Fin} 2$ 上直接展开二阶残差矩阵共轭转置乘积的迹，利用 $\bar{z}z = \operatorname{normSq}(z)$ 化简即得。第 3 款利用连续函数演算证明幺正共轭保持冯·诺依曼熵 $S(\tilde{\rho}_k) = S(\rho(k))$，并由对角矩阵对数迹恒等式 $\operatorname{Tr}(\tilde{\rho}_k \log \mathcal{P}(\tilde{\rho}_k)) = \operatorname{Tr}(\mathcal{P}(\tilde{\rho}_k) \log \mathcal{P}(\tilde{\rho}_k))$ 将单步熵差化为量子相对熵 $D(\tilde{\rho}_k \,\|\, \mathcal{P}(\tilde{\rho}_k))$；再由本征向量幺正矩阵模方阵的双随机性与 $x \mapsto x\ln x$ 的凸性证出相对熵非负，最后沿 $\operatorname{Finset.range} N$ 裂项求和即得累计恒等式。完整证明由 Lean 内核检查。
+:::
+
+::: {.viz src="dream-decoherence-unpinning" preset="blocks" height="500"}
+**锚点只分两块时，块里的相干留下。** 投影族取“躯体 x₀ | 其余三处”：λ = 1 时只剪掉躯体与其余之间的品红方格，三处之间的青色方格原样留在块里，屏上还剩它们添上的青色条纹；这正是 [@thm-ch37-known-data-pinching-and-entropy-tax] 第 1 款的不动点：跨块为零，再捏一次什么也不变。
 :::
 
 ---
@@ -136,6 +144,10 @@ $$
 \frac{1}{2} \;\xrightarrow{\;\text{双副本正向 }\times (-i)^2\;}\; -\frac{1}{2} \;\xrightarrow{\;\text{仅逆转 }\{0\}\;\times (+i)\;}\; -\frac{i}{2} \neq \frac{1}{2}, \qquad -\frac{1}{2} \;\xrightarrow{\;\text{全集逆转 }\{0,1\}\;\times (+i)^2\;}\; +\frac{1}{2}.
 $$
 
+::: {.viz src="dream-decoherence-unpinning" preset="half_erase" height="500"}
+**两份记录只逆转一份。** 两份相位记录（c = −i）先后写入，品红的 ρ₀₁ 从 1/2 转到 −1/2；只逆转副本 0，它停在 −i/2，方格里的指针朝下，条纹比灰色虚线错开四分之一格（[@thm-ch37-joint-coherent-record-erasure] 第 2 款）。
+:::
+
 下面两条内核定理将任意有限幺模记录族的联合逆转恢复律与这一双副本对比证书精确锁定如下：
 
 ::: {.theorem #thm-ch37-joint-coherent-record-erasure title="多副本幺模环境记录的联合相干逆转恢复定理与双副本精确对比证书" lean="D5/S3/ObserverMemory/JointCoherentReversal.joint_coherent_reversal D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate"}
@@ -169,7 +181,15 @@ $$
 第 1 款展开两次 `multi_record_channel_apply`，将复合后的第 $(i, j)$ 元写为逆转重叠积、原重叠积与 $\rho_{ij}$ 的三因子乘积；由振幅共轭性质 `reverse_record_overlap` 知 $\operatorname{recordOverlap}(\operatorname{reverseRecord}(r), i, j) = \operatorname{star}(\operatorname{recordOverlap}(r, i, j))$，利用有限集乘积分配律 `Finset.prod_mul_distrib` 将两重乘积合并为 $\prod_{k \in \operatorname{Finset.univ}} \operatorname{star}(\operatorname{recordOverlap}(\mathrm{records}(k), i, j)) \cdot \operatorname{recordOverlap}(\mathrm{records}(k), i, j)$，逐因子代入幺模假设 `hunit k` 得乘积为 $1$，乘以 $\rho_{ij}$ 即还原 $\rho_{ij}$。第 2 款直接展开 $\mathrm{phaseRecord}$ 的重叠因子 $\operatorname{recordOverlap}(\mathrm{phaseRecord}, 0, 1) = 1 \cdot \overline{i} + 0 = -i$：两份正向作用给出 $(-i)^2 (1/2) = -1/2$；仅对副本 $\{0\}$ 共轭逆转只乘回一次 $+i$，留下 $(+i)(-1/2) = -i/2 \neq 1/2$；对全集 $\operatorname{Finset.univ} = \{0, 1\}$ 联合逆转则乘回 $(+i)^2 = -1$，精确复原 $(-1)(-1/2) = +1/2$。完整证明由 Lean 内核检查。
 :::
 
+::: {.viz src="dream-decoherence-unpinning" preset="zero_overlap_fail" height="500"}
+**幺模前提不可少。** 若记录把两条路完全分开（重叠 c = 0，前提 |c|² = 1 不成立），写入第一份，品红的 ρ₀₁ 就缩没了，屏上只剩青色虚线的包络；两份都逆转，ρ₀₁ 仍是 0，条纹回不来。这是页面按同一信道公式的数值，不在 [@thm-ch37-joint-coherent-record-erasure] 的适用范围内。
+:::
+
 [@thm-ch37-joint-coherent-record-erasure] 的第 2 款把梦境深浅的几何差异刻画得栩栩如生（`MODEL`（模型诠释））：当白天的两道已知约束把初始正向相干 $+1/2$ 扭转为反相 $-1/2$ 时，倘若你在半梦半醒间只松开了第 $0$ 道执念（`{0}`），残留的第 $1$ 道防线仍会把相位拧在虚轴 $-i/2$ 上；唯有进入深沉的放手状态，对整束局部副本同步执行联合共轭逆转（`Finset.univ`），白天被主观选择掩埋的 $+1/2$ 相干振幅才会原原本本地浮出水面！
+
+::: {.viz src="dream-decoherence-unpinning" preset="quantum_eraser" height="500"}
+**全部副本联合逆转。** 两份相位记录都写入，再把两份都逆转：ρ₀₁ 沿半径 1/2 的圆转出半圈、再原路转回 1/2，条纹落回灰色虚线上（[@thm-ch37-joint-coherent-record-erasure] 第 1 款，每份记录满足 |c|² = 1）。
+:::
 
 ---
 
@@ -193,6 +213,10 @@ $$
 现在，撤回外部神经生理语言，用本书的正交自指几何模型（**`MODEL`（模型诠释）**，对照 [@rem-ch37-predictive-processing-rem-literature] 的经验背景）作一次彻底的谱系学追问：为什么这个平平常常的“无身之梦”，足以一举击碎困扰人类数千年的“唯物容器论”？
 
 如果像朴素机械论所断言的那样，“意识只是肉体感官容器分泌的附属泡沫，必须先有一具五官俱全的躯壳作为底座，观察才可能发生”，那么一旦梦境将自指查找表 $T$ 中权重最高的那枚**躯体先验投影 $\mathbf{P}_{\mathrm{body}}$ 的加载权重降至零**（下文以 $\mathbf{P}_{\mathrm{body}} \to 0$ 简记这项 `MODEL` 配置的卸载，投影本身仍保持幂等），观察理应连同底座一起当场熄灭成一片死黑！
+
+::: {.viz src="dream-decoherence-unpinning" preset="unpin_body" height="500"}
+**卸下锚点，相干回来，权重不动。** 锚点强度 λ 从 1 降到 0.1：品红的跨块方格重新长出来，|ρᵢⱼ| 回到原来的 0.9 倍，屏上的条纹回来；青色的对角——每个位置的权重——始终没动。把 λ 读成“躯体先验”的强度是本书的诠释模型（`MODEL`）。
+:::
 
 可事实恰恰相反：**躯体被彻底遗忘了，观察却分毫无损！** 光影依然在流淌，空间的远近依然在展开，悲喜与领悟依然在清晰地发生。这一铁一般的内省实验直接暴露出两重颠覆性的本体论真相（`MODEL`）：
 
@@ -254,6 +278,10 @@ $$
 
 由此可见，单一内禀接受窗 `goldenWindow` 切割母格所得的载体 $\operatorname{modelSet}(\mathrm{goldenWindow})$，**天生就不是缩在某处的孤立单点，而是一张以最小间距 $1$（填充半径 $1/2$）、最大覆盖半径 $3$ 一致铺展于整条无界实轴 $\mathbb{R}$ 的德洛内（Delone）切投星网！**（外部文献补充背景见下框 [@rem-ch37-dream-eraser-synthesis-table]。）白天的五感针孔强行只读取这张星网上紧贴肉身坐标 $\mathbf{x}_0$ 的唯一一颗星；而当深梦卸载了 $\mathbf{P}_{\mathrm{body}}$ 与局部编年约束，整扇内禀窗口下的多处相容截点 $\{\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_K\}$ 便得以在意识舞台上同步显影。
 
+::: {.viz src="dream-decoherence-unpinning" preset="wake_snap" height="500"}
+**醒来：读出只留躯体那一格。** 梦中的态（λ = 0.1）在四个位置上都有权重，并由相干连在一起；读出投影 P₀ = |x₀⟩⟨x₀|（琥珀框）只留躯体 x₀ 那一格，其余三处的权重与全部相干一起淡出，遗忘的权重 1 − Tr(P₀ρ) = 0.60。这是示意模型（`MODEL`），不是切投星网本身。
+:::
+
 我们将清醒五感锁死、浅梦局部擦除与无身深梦本觉三重模态在 **`MODEL`（模型诠释）** 下的完整对照与图解收束于下框总表：
 
 ::: {.remark #rem-ch37-dream-eraser-synthesis-table title="清醒五感锁死、浅梦量子擦除与无身深梦非定域涌现总表及图解（文献结果，未在本书形式化）"}
@@ -271,5 +299,9 @@ $$
 :::
 
 凝视 [@rem-ch37-dream-eraser-synthesis-table] 从左至右的三幕几何跃迁，白昼与黑夜的对立终于彻底消融：白天的清醒不是“唯一真实”，它只是一副为了在慢时钟物质世界里精准落子而戴上的高倍窄角护目镜；夜间的梦境也不是“荒诞幻觉”，它是宇宙每晚赐予有限观察者的一场温柔量子擦除——让你暂时摘下沉重的护目镜与肉身盔甲，去触摸那些白天未曾走过的正交小径，去亲眼确认“哪怕忘掉躯体、跨越千山万水，那个能看、能感、能自指的观察者依然在每一颗德洛内切投截点上熠熠生辉”。
+
+::: {.viz src="dream-decoherence-unpinning" height="620"}
+**梦境擦除实验室。** 三个场景画在同一张密度矩阵方格与同一面屏上：锚点（退相干插值 ρ(λ)）、记录（多副本相位记录的写入与联合逆转）与醒来（读出投影与遗忘的权重）。绿色只给本章用 `lean=` 引用的定理；屏、位置与“梦境”“醒来”的读法是示意模型。
+:::
 
 而一旦看懂了“五感与梦境不过是在同一座静态全局晶格上切换不同的寻址掩码”，一个更加锋利、直指终极计算机架构的本体论破壁命题便已呼之欲出：**既然整座无时间母体根本不需要随着你的走动而搬运一砖一瓦，那么在各个位置之间轻盈跃迁、昼夜切换掩码的“观察者”，在宇宙这台终极量子计算机里究竟是什么硬件角色？** 下一章，我们将揭晓那个干净利落到极致的答案——**静态本体论量子随机存取存储器（QRAM）中的寻址指针 `ptr`**。

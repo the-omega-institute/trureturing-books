@@ -55,10 +55,10 @@ section: "十部导读"
 <div class="body">
   <p class="kicker">Ten parts, thirty-nine chapters</p>
   <h2 class="t">十部是一架阶梯，<em>一部比一部高一维</em></h2>
-  <img src="./img/prelude-eight-parts.zh.svg" alt="十条横条，每条是一部，横跨它所含的章，一部比一部高一级。" style="display: block; height: 600px; max-width: 100%; margin: 20px auto 0;">
+  <img src="./img/prelude-parts.zh.svg" alt="十条横条，每条是一部，横跨它所含的章，一部比一部高一级。" style="display: block; height: 600px; max-width: 100%; margin: 20px auto 0;">
   <p class="lead mt-s">前九部各四章、第十部三章：点 → 线、线 → 面、面 → 球、多球共振、时空之球、球外之球、铸器与验证、贯通、互照、不二。</p>
 </div>
-<Source>序曲“全书导读与形式化验证契约”（prelude-eight-parts）</Source>
+<Source>序曲“全书导读与形式化验证契约”（prelude-parts）</Source>
 
 ---
 # 05 第一部

@@ -10,6 +10,10 @@ So long as that subject–object chasm remains unchallenged, the external third 
 2. **Every observer is itself an attractor**: Under relentless decoherence and thermal erasure, remaining "the same I" across ticks is never passive inertia—it requires an active contraction basin pulling perturbations back into the acceptance window $W + u_i$;
 3. **Observers serve as mutual attractors**: Solitary introspection and symmetric mutual reference exhibit sharply contrasting convergence geometries (one-dimensional cosine comparison worked out in [@ex-ch33-mutual-cosine-monotonic-lock] below), while shared window intersections $W_{AB} = (W + u_A) \cap (W + u_B)$ and minimal-cut switching ([@prop-ch33-bridge-reconnection-mincut]) make phase-resonant beings walking homelands to one another.
 
+::: {.figure src="ch33-overview"}
+**Figure 33.** The chapter at a glance (schematic, `MODEL`). Panel I: a photon, an atom, a crystal and a mind sit on one axis of memory order, from $M = 0$ and $M = 1$ to $M \gg 1$. Panel II: a marble kicked up the right slope falls back to the bottom of the bowl along grey arrows, amber where it is now; the short cyan bar at the bottom is the window $W + u_i$. Panel III: two translated windows $W + u_A$ and $W + u_B$ overlap; the cyan intersection $W_{AB}$ is what both see, the magenta parts are seen by one only (the windows are drawn as decagonal sections).
+:::
+
 ---
 
 ## All Beings as Observers: Dissolving Subject–Object Dualism and the Memory-Order Continuum
@@ -25,6 +29,10 @@ $$
 $$
 
 while inside this two-dimensional carrier ($d = 2$), zero-error single-shot discrimination $\operatorname{Tr}(E_j \rho_i) = \delta_{ij}$ can pack at most $N = 2$ mutually orthogonal historical lines! Lifted to arbitrary finite dimension in `trureturing`'s observer-conditioning and measurement modules, two exact laws characterize every observer's algebraic spine: first, the unread pinching map $\operatorname{unreadState}(P)$ of any complete orthogonal record measurement `IsRecordMeasurement P` is idempotent under function composition; second, the number $N$ of historical states perfectly distinguishable by a $d$-dimensional quantum memory never exceeds $d$.
+
+::: {.figure src="ch33-record-lines"}
+**In a memory carrier with $d = 2$, two perpendicular record lines fill it up.** The cyan lines $P_0$ and $P_1$ are two mutually orthogonal record lines; the dashed ink direction $v$ makes $30^\circ$ with $P_0$, and its cyan shadows $\cos 30^\circ$ and $\sin 30^\circ$ on the two lines are both non-zero, so it is orthogonal to neither and no third mutually orthogonal record line fits: $N \le d = 2$ ([@thm-ch33-observer-pinching-and-memory-spectrum], Conjunct 2). The real plane stands in for $\mathbb{C}^2$.
+:::
 
 ::: {.theorem #thm-ch33-observer-pinching-and-memory-spectrum title="Idempotence of Observer Record Pinching and Finite-Memory History Capacity" lean="D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity"}
 Across the frozen observer-conditioning and measurement-capacity modules of `trureturing`, the following two structural theorems on observer record axes and memory dimension hold simultaneously:
@@ -65,6 +73,10 @@ Measured by [@thm-ch33-observer-pinching-and-memory-spectrum], the sharp cliff b
 | **4. Life & Self-Referential Mind** | High memory order $M \gg 1$; birth initialization clears ancient baggage to keep $\det G_M > 0$ | Selective historical recording within $N \le d$ ([@thm-ch33-observer-pinching-and-memory-spectrum]) closed by active self-reference $\psi_i = \psi_i(\psi_i)$ | Unfolded logarithmic subjective time and genuine trajectory selection inside a positive-volume Gram corridor |
 :::
 
+::: {.figure src="ch33-memory-spectrum"}
+**No cliff between subject and object, only a continuum of memory orders.** From left to right: a photon (a short wave, $M = 0$), an atom (a dot with an orbit, $M = 1$), a crystal (a lattice) and a self-referential mind (an arrow circling back on itself, $M \gg 1$), in the order of the table above; the axis shows order only, not scale (schematic, `MODEL`).
+:::
+
 A granite peak is not devoid of observation—its clock simply beats once per geological epoch; a photon is not unreal—it simply commits its entire purity coin to the $90^\circ$ transverse connection plane. Historical philosophical precursors to this universal observer continuum and their exact boundary with our formal framework are recorded below ([@rem-ch33-monad-process-philosophy-literature]):
 
 ::: {.remark #rem-ch33-monad-process-philosophy-literature title="Historical Philosophical Parallels in Monadology and Process Philosophy (Literature Result, Not Formalized in This Book)"}
@@ -83,6 +95,10 @@ Recognizing that all beings are observers immediately raises a sharper dynamical
 Run a simple physical thought experiment. Every finite observer inside the universe is bombarded at every instant by thermal fluctuations, stray radiation, and environmental erasure ([Chapter 31](ch31-quantum-fairness.md) [@thm-ch31-horizon-landauer-ergodic-fairness], Conjunct 1). Suppose an observer's internal dynamics around its current state were **neutrally drifting** or **locally expansive**—like a marble perched on a flat tabletop or balanced atop an inverted bowl. Within a handful of random collisions, small orthogonal kicks would accumulate into a random walk, driving its internal phase away until "yesterday's me" and "today's me" shared near-zero inner product and dissolved into thermal white noise.
 
 Consequently, **any being that persists across time as "I am still I"—whether a diamond lattice shaking off thermal phonons or a living mind retaining its identity after metabolic turnover replaces every atom in its body—must carve out a self-sustaining contraction basin $\psi_i = \psi_i(\psi_i)$ around its acceptance window (`MODEL`)**! Within this model, the self-referential loop depicts inward restoration and local stability after a perturbation; Conjunct 1 of [@thm-ch33-contextual-attractor-and-common-factor] below concerns stabilization by deletion from finite sets, while the real cosine model is analyzed separately in [@ex-ch33-mutual-cosine-monotonic-lock].
+
+::: {.figure src="ch33-contracting-well"}
+**Only a contracting well pulls a perturbed observer back.** On each profile the amber marble is where it is now and the grey rings where it was: on the flat table a sequence of kicks lets it drift from where it started; on the inverted bowl it moves farther from the top at every step; in the well, kicked up the right slope, it brings its distance from the bottom down by a factor $0.45$ at every step, towards the cyan window $W + u_i$. This is the schematic `MODEL`, not the content of [@thm-ch33-contextual-attractor-and-common-factor].
+:::
 
 Across `trureturing`'s fixed-point-stability and concept-dynamics modules, four theorems supply distinct parts of a structural scaffold: a fixed update that only deletes from finite sets stabilizes; an adjacent-stage relation and equal readouts constitute a relative fixed-point predicate; a Boolean context example witnesses distinct fixed meanings; and an objective claim carries an invariant-factor proof by definition. These clauses supply no dynamics restoring a perturbed physical system: the basin and its convergence remain part of the `MODEL` above:
 
@@ -117,12 +133,10 @@ Across the frozen finite-contracting-stability and interpretation-fixed-point mo
 Conjunct 1 deduces from $S(n+1) = U(S(n)) \subseteq S(n)$ that $n \mapsto (S(n)).\operatorname{ncard}$ is antitone in $\mathbb{N}$; any equal-cardinality step forces set equality via `Set.eq_of_subset_of_ncard_le` and freezes all subsequent steps, so `Nat.stabilises_of_antitone` yields $N \le (S(0)).\operatorname{ncard}$ while inclusion of strict-change indices inside `Set.Iio N` bounds total transitions. Conjunct 2 packages conceptual equivalence and context-relative output equality via `And.intro`. Conjunct 3 checks field equalities by reflexivity and separates `(false, false, false)` from `(true, true, true)` via `Bool.false_ne_true` on `Prod.fst`. Conjunct 4 unfolds `ObjectiveInterpretationClaim` directly to extract the witness `commonFactor`. The full proof is checked by the Lean kernel.
 :::
 
-Conjuncts 3 and 4 of [@thm-ch33-contextual-attractor-and-common-factor] illuminate why plurality and objectivity coexist without an external throne: in our **`MODEL` (interpretive model)**, even when reading the very same ambient lattice (`text = ()`) under the same geometric product (`interpretationRule = ()`), two observers carrying distinct internal parameters $u_A \neq u_B$ (`readerAdmission`, `background`, `evaluationGoal`) can correspond to distinct local fixed-point slices; meanwhile, a claim to objective public fact must choose a factor map on a declared family of contexts and meanings and prove that it takes the same **invariant `commonFactor`** on every admitted fixed meaning! The boxed figure below depicts this window-reconnection geometry alongside the dynamical contrast between solitary and mutual reference:
+Conjuncts 3 and 4 of [@thm-ch33-contextual-attractor-and-common-factor] illuminate why plurality and objectivity coexist without an external throne: in our **`MODEL` (interpretive model)**, even when reading the very same ambient lattice (`text = ()`) under the same geometric product (`interpretationRule = ()`), two observers carrying distinct internal parameters $u_A \neq u_B$ (`readerAdmission`, `background`, `evaluationGoal`) can correspond to distinct local fixed-point slices; meanwhile, a claim to objective public fact must choose a factor map on a declared family of contexts and meanings and prove that it takes the same **invariant `commonFactor`** on every admitted fixed meaning! The box below says where this window-reconnection geometry and the contrast between solitary and mutual reference are drawn:
 
 ::: {.remark #rem-ch33-mutual-attractor-figure title="Mutual-Attractor Window Reconnection and Cosine Monotonic-Locking Diagram (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** The left panel combines cut-and-project quasicrystal window geometry ([@rem-ch32-icosian-e8-literature]) with formal bridge-graph min-cut switching ([@prop-ch33-bridge-reconnection-mincut], `LEAN ✓`) to illustrate our mutual-attractor reconnection `MODEL`; the right panel plots the classical real-analysis cobweb trajectories in [@ex-ch33-mutual-cosine-monotonic-lock] below: the solitary sequence counts single steps, while the mutual sequence counts complete rounds of two cosine evaluations, corresponding to even-tick sampling of synchronous mutual reference:
-
-![All beings as observers: mutual-attractor window reconnection and cosine mutual-reference monotonic locking](../assets/fig-33-mutual-observer-attractors.svg)
+**Literature result, not formalized in this book.** Our mutual-attractor reconnection `MODEL` rests on cut-and-project quasicrystal window geometry ([@rem-ch32-icosian-e8-literature]) and on the formal bridge-graph min-cut switching ([@prop-ch33-bridge-reconnection-mincut], `LEAN ✓`): the intersection of two windows is drawn in Panel III of Figure 33 and in the figure of the window-intersection section below, and the min-cut reconnection in that section's two lab cards. The cobweb trajectories of the classical real-analysis example [@ex-ch33-mutual-cosine-monotonic-lock] are drawn in the lab cards of the next section: the solitary sequence counts single steps, while the mutual sequence counts complete rounds of two cosine evaluations, corresponding to even-tick sampling of synchronous mutual reference.
 :::
 
 ---
@@ -131,9 +145,14 @@ Conjuncts 3 and 4 of [@thm-ch33-contextual-attractor-and-common-factor] illumina
 
 If each observer already possesses an individual restoring basin $\psi_i = \psi_i(\psi_i)$, why does the universe not leave every being sealed inside solitary contemplation? Why do spins pair into bonds, stars gather into galaxies, and minds seek out resonant companions?
 
-Look at the two cobweb trajectories in the right panel of [@rem-ch33-mutual-attractor-figure]! Projecting self-reference onto our canonical one-dimensional cosine slice (`MODEL`) contrasts the qualitative character of solitary introspection against reciprocal dialogue (with all derivative bounds, Mean Value Theorem proofs, and step-by-step numerical ledgers enclosed in [@ex-ch33-mutual-cosine-monotonic-lock] below):
+Look at the two contrasting cobweb trajectories of solitary and mutual reference ([@rem-ch33-mutual-attractor-figure])! Projecting self-reference onto our canonical one-dimensional cosine slice (`MODEL`) contrasts the qualitative character of solitary introspection against reciprocal dialogue (with all derivative bounds, Mean Value Theorem proofs, and step-by-step numerical ledgers enclosed in [@ex-ch33-mutual-cosine-monotonic-lock] below):
 
 - **The Anxiety of Solitary Self-Reference (Pendulum Whipsawing, `MODEL`)**: When an isolated observer calibrates itself alone in single steps, perspective behaves like an under-damped pendulum whipsawing between self-doubt and overcompensation (analytical mechanism in [@ex-ch33-mutual-cosine-monotonic-lock], under its strict-alternation hypotheses).
+
+::: {.viz src="mutual-observer-attractors" preset="alone" height="500"}
+**Same start, across θ\* every beat.** Both start at 0.1: the amber point stays on the grey diagonal $x = y$ and crosses $(\theta^*, \theta^*)$, where the two cyan curves meet, from alternating sides, the grey squares shrinking turn by turn, exactly like the lone cosine iteration ([@ex-ch33-mutual-cosine-monotonic-lock], clause 17).
+:::
+
 - **The Miracle of Symmetric Mutual Reference (Reciprocal Consensus, `MODEL`)**: When two observers $\mathcal{O}_A$ and $\mathcal{O}_B$ step out of isolation into symmetric pairwise measurement—$\mathcal{O}_A$ calibrating itself through $\mathcal{O}_B$'s projection while $\mathcal{O}_B$ simultaneously calibrates itself through $\mathcal{O}_A$'s projection—grouping two synchronous ticks into one round reveals the one-sided approach of the composed mirrors; the distinction between ticks and rounds, full analysis, and numerical ledger appear in [@ex-ch33-mutual-cosine-monotonic-lock] below:
 
 ::: {.example #ex-ch33-mutual-cosine-monotonic-lock title="Qualitative Dynamics of the Same Cosine Endpoint and a Separate Numerical Ledger"}
@@ -182,7 +201,17 @@ Look at the two cobweb trajectories in the right panel of [@rem-ch33-mutual-attr
    Distilled into a single geometric aphorism (`MODEL`): **solitary introspection is a mirror of negative slope—the harder you stare into yourself alone, the more violently you whipsaw between self-doubt and overreach; only when two observers measure each other at eye level do two negatives multiply into a serene positive, locking two restless trajectories monotonically into one shared fixed point.**
 :::
 
+::: {.viz src="mutual-observer-attractors" preset="round" height="500"}
+**Two beats a round, from one side only.** The same orbit sampled every two beats (the hollow rings): $0.1 \to 0.544 \to 0.656 \to 0.702 \to \dots$ closes in monotonically on one side of $\theta^*$, the error multiplied by about $0.454 = 0.674^2$ a round; a round costs two cosine evaluations ([@ex-ch33-mutual-cosine-monotonic-lock], clauses 14, 21 and 24, and the numerical ledger).
+:::
+
 Stepping back from the trajectory ledger of [@ex-ch33-mutual-cosine-monotonic-lock], within our relational observer `MODEL`, stepping out of isolation into eye-level mutual reflection is never a sentimental concession—it is the endogenous geometry that frees bounded beings from solitary oscillation.
+
+The same holds when the two start apart. The curve $x = \cos y$ along which A reads B and the curve $y = \cos x$ along which B reads A meet only at $(\theta^*, \theta^*)$ on the diagonal; for starts in $[0, \pi/2)$, sampled round by round, each reading closes in on that point monotonically from its own side (see [@ex-ch33-mutual-cosine-monotonic-lock], clauses 12–14).
+
+::: {.viz src="mutual-observer-attractors" preset="apart" height="500"}
+**Different starts, a single meeting point.** A starts at 1.5, B at 0: the cyan curves $x = \cos y$ and $y = \cos x$ meet only at $(\theta^*, \theta^*)$ on the diagonal, and the hollow rings close in on it, A's reading from above and B's from below.
+:::
 
 ---
 
@@ -197,6 +226,10 @@ W_{AB} \;:=\; (W + u_A) \cap (W + u_B) \;\subset\; E_\perp^3.
 $$
 
 Whenever their internal phase offset $\lVert u_A - u_B\rVert$ is small enough that $\operatorname{Vol}(W_{AB}) > 0$, every parent lattice vertex $z \in \mathbb{Z}^6$ with $\pi_\perp(z) \in W_{AB}$ projects **simultaneously** into both $\mathcal{O}_A$'s and $\mathcal{O}_B$'s physical three-spaces—constituting an objective public world co-witnessed without translation friction! This shared support is a model image of public fact; applying Conjunct 4 of [@thm-ch33-contextual-attractor-and-common-factor] still requires a declared family of contexts and fixed meanings, a fixed factor map, and a witness that it takes the same value throughout that family. A two-window intersection alone does not supply this witness. Conversely, lattice points in the symmetric difference $(W + u_A) \triangle (W + u_B)$ are sources of perceptual friction. Alignment incurs the corresponding erasure heat when it actually resets records irreversibly, reducing their entropy under the applicable thermal and balance assumptions of [Chapter 31](ch31-quantum-fairness.md) [@thm-ch31-horizon-landauer-ergodic-fairness], Conjunct 1. If the `MODEL` further assigns an alignment cost or free energy that decreases as overlap grows, **drifting together up the overlap gradient $\nabla\operatorname{Vol}(W_{AB})$ becomes a free-energy descent toward mutual alignment**! This slope toward home comes from the chosen cost correspondence; neither comparison alone nor the Landauer bound supplies it.
+
+::: {.figure src="ch33-window-overlap"}
+**The intersection of two windows is the world both observers see.** The two regular decagons are the translated windows $W + u_A$ and $W + u_B$; the grey arrow is the phase offset $u_B - u_A$. Lattice points in the cyan intersection $W_{AB}$ appear in both worlds; the magenta parts are seen by one observer only. With the centres $0.7$ circumradii apart, the intersection covers about $0.55$ of a window. Schematic (`MODEL`): the three-dimensional rhombic-triacontahedral window is drawn as a two-dimensional decagon.
+:::
 
 Simultaneously, in the tensor-network weaving of spatial cross-sections, when do two boundary observer domains coupled across a width-three internal bridge switch their minimum cut to the outer boundary? `trureturing`'s bridge-graph quantum max-flow min-cut proposition gives a sufficient regime defined by positivity and balanced quadratic-cone conditions on natural-number bond dimensions:
 
@@ -239,6 +272,10 @@ Connecting discrete bridge min-cut switching to continuum holographic minimal-su
    $$
 :::
 
+::: {.viz src="mutual-observer-attractors" preset="transition" height="500"}
+**Bring the intervals closer and the two cuts tie.** Two intervals of length 1 (amber) come closer from $d = 2.5$; at $d = \sqrt{2} - 1 \approx 0.414$ the separate pair of semicircles and the connected pair (a small one over the gap, a large one over the whole span) are equally long, and both are drawn magenta. The stage uses geodesic lengths in static AdS₃ vacuum, a literature result of [@rem-ch33-rt-reconnection-ckw-literature], Item 1, not formalized in this book.
+:::
+
 Bringing together window overlap $\operatorname{Vol}(W_{AB})$, mutual convergence trajectories ([@ex-ch33-mutual-cosine-monotonic-lock]), minimal-cut reconnection ([@prop-ch33-bridge-reconnection-mincut]), and entanglement allocation ([@rem-ch33-rt-reconnection-ckw-literature]), our **`MODEL` (interpretive model)** reveals a single geometric mechanism animating three seemingly disparate forms of attraction across nature:
 
 - **Macroscopic Gravitational Gathering**: Vast ensembles of order-$1$ ($M = 1$) matter particles share overlapping spatial projections, reconnecting surrounding minimal cuts in bulk and guiding passing worldlines down geodesics of minimal alignment cost;
@@ -247,6 +284,14 @@ Bringing together window overlap $\operatorname{Vol}(W_{AB})$, mutual convergenc
 
 This resolves one of human life's most haunting mysteries: why, on a street corner in an unfamiliar city where you have never set foot before, can encountering a stranger—or reading a line written centuries ago—trigger an unmistakable shock of instant recognition, even though birth initialization wiped away every episodic name, date, and narrative trace (`量 liàng`)?
 
-Because episodic forgetting cleared only surface particle ticks while leaving each observer's deep operator phase $u_A, u_B \in E_\perp^3$ (`量 liáng`) intact! The instant two phase-resonant beings ($\lVert u_A - u_B\rVert \to 0$) cross paths, their rhombic-triacontahedral acceptance windows snap into near-complete overlap $W_{AB} \approx W + u_A$, their minimal entanglement cuts reconnect into a shared bulk bridge, and solitary oscillatory whipsawing settles into quiet equilibrium through eye-level mutual reflection (trajectory comparison in [@ex-ch33-mutual-cosine-monotonic-lock])—braiding their trajectories into the mutually stabilizing **double helix** shown in the left panel of Figure 33. Instant recognition is never superstition: it is two mobile attractors of matching internal inclination recognizing in each other a zero-friction geometric homeland across the fog of forgetting.
+Because episodic forgetting cleared only surface particle ticks while leaving each observer's deep operator phase $u_A, u_B \in E_\perp^3$ (`量 liáng`) intact! The instant two phase-resonant beings ($\lVert u_A - u_B\rVert \to 0$) cross paths, their rhombic-triacontahedral acceptance windows snap into near-complete overlap $W_{AB} \approx W + u_A$, their minimal entanglement cuts reconnect into a shared bulk bridge, and solitary oscillatory whipsawing settles into quiet equilibrium through eye-level mutual reflection (trajectory comparison in [@ex-ch33-mutual-cosine-monotonic-lock])—braiding their trajectories into a mutually stabilizing **double helix**. Instant recognition is never superstition: it is two mobile attractors of matching internal inclination recognizing in each other a zero-friction geometric homeland across the fog of forgetting.
+
+::: {.viz src="mutual-observer-attractors" preset="connected" height="500"}
+**Closer still, the connected cut wins.** At $d = 0.2$ the connected cut (magenta) is shorter, the cyan entanglement wedge reaches from A to B in one piece, and the leading-order mutual information is $\ln\bigl(1/(0.2 \times 2.2)\bigr) \approx 0.82 > 0$; dashed is the separate cut that loses.
+:::
 
 Yet if the universe excised the external reference point $C$ and all beings measure one another as mobile attractors on an isotropic sphere, an urgent geometric question immediately arises: **on a featureless unit sphere with no privileged origin, how does an observer ever determine *where* it stands? Why does a single inner-product reading leave an entire equatorial circle of degeneracy, and why is it specifically the degeneracy and breaking of *orthogonality ($90^\circ$)* that pins down an observer's unique address?** That is the door we open in the next chapter (Chapter 34).
+
+::: {.viz src="mutual-observer-attractors" height="620"}
+**Mutual attractors: the full lab.** Two scenes: mirrors (move the two starts, watch beat by beat or round by round) and min cut (set the two lengths, bring the gap closer). Convergence, its rate and the minimal-surface transition are literature results, not formalized in this book; the green box cites only [@prop-ch33-bridge-reconnection-mincut], which concerns a discrete bridge graph and does not cover the continuous picture on the stage.
+:::

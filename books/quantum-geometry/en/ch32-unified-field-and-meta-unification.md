@@ -24,6 +24,10 @@ A genuinely foundational unified field theory cannot borrow a pre-fabricated Min
 3. **Law 2 — The Pythagorean Fairness Mother-Law and Polyhedral Approximation**:
    Centered-purity Pythagorean conservation enforces the universal zero-free-lunch ledger ([Chapter 31](ch31-quantum-fairness.md) [@thm-ch31-seat-pythagorean-monogamy-fairness]); simultaneously, because every physical evolution or logical verification executes only a finite gate count $L < \infty$, **every ostensibly smooth sphere at finite resolution is a discrete polyhedral approximation** (external polyhedral angular-defect background in [@rem-ch32-generative-laws-dottie-literature]). At our physical modeling layer (`MODEL`), we interpret the kernel-verified Zeckendorf `NoAdjacentOnes` automaton theorem (Conjunct 4 of [@thm-ch32-generative-self-reference-and-zeckendorf] below) as a discrete ultraviolet coding lock forbidding unbounded adjacent high-frequency pileups.
 
+::: {.viz src="unified-field-slice" preset="polytope" height="500"}
+**At finite resolution the sphere is a polyhedron.** A regular icosahedron inscribed in the sphere: five equilateral triangles meet at each vertex and their corners add up to only 300°, and the small magenta wedge is the 60° missing once they are laid flat; the 12 vertices miss 720° = 4π in all (a literature result, item 3 of [@rem-ch32-generative-laws-dottie-literature] below).
+:::
+
 We first anchor the four Lean-4-verified cornerstones supporting these generative laws—complex-structure squaring, finite monotone contraction stabilization, golden reciprocal uniqueness, and the Zeckendorf `NoAdjacentOnes` language.
 
 ::: {.theorem #thm-ch32-generative-self-reference-and-zeckendorf title="Four Formal Cornerstones of the Generative Core: Complex-Structure Squaring, Finite Contraction, Golden Self-Reference, and Zeckendorf Non-Adjacency" lean="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes"}
@@ -80,6 +84,10 @@ External continuum geometric-algebra, real-analytic fixed-point, and polyhedral 
 3. **Two-Sphere Euler Characteristic and Icosahedral Angular Defect**: Every convex polyhedron homeomorphic to $S^2$ ($\chi(S^2) = 2$) has total vertex angular defect $2\pi\chi(S^2) = 4\pi = 720^\circ$ ($12 \times 60^\circ = 720^\circ$ on the regular icosahedron; cf. [Coda](coda.md) [@rem-coda-polyhedral-topology-literature]).
 :::
 
+::: {.viz src="unified-field-slice" preset="fixedpoint" height="500"}
+**The one angle whose arc equals its shadow.** The amber point on the circle stops at θ* ≈ 0.739: the violet arc length θ is exactly as long as the cyan shadow cos θ, and the magenta height sin θ* ≈ 0.674 is the local contraction rate of item 2 in the box above.
+:::
+
 Crucially, this unified-field interpretive architecture (`MODEL`) maintains an explicit boundary and pairing between machine-checked anchors and attributed literature notes: at the **formal axiomatic layer**, every discrete-automaton, fixed-point, and linear-algebraic backbone is checked with `0 sorry` by the Lean 4 kernel ([Appendix C](appendix-c.md)), while companion algebraic-encoding literature notes and executable reference scripts are archived in [Chapter 25](ch25-rewriting-and-xor.md) ([@rem-clifford-stabilizer-literature]) and [Appendix B](appendix-b.md).
 
 ---
@@ -90,10 +98,25 @@ Extending the bridges built in Part V ([Chapter 17](ch17-lorentz-geometry.md)–
 
 1. **Matter Spinors and Special Relativity (Inner-Product Proper Time vs. Exterior Spatial Bifurcation, `MODEL` + `LEAN ✓`)**:
    Minkowski null-cone rigidity (Conjunct 1 of [@thm-ch32-null-cone-holonomy-and-holographic-cut] below, `LEAN ✓`) proves that fixing null-cone rays determines the entire Lorentzian quadratic form up to a single scalar factor! In our geometric model (`MODEL`), we interpret rest mass as collinear inner-product self-locking along an observer's proper-time axis and the limiting propagation speed as a $90^\circ$ orthogonal horizon (external continuum proper-time rearrangement and first-order spinor wave-equation formulations are recorded in Item 1 of [@rem-ch32-dirac-yang-mills-jacobson-literature] below).
+
+::: {.viz src="unified-field-slice" preset="photon" height="500"}
+**Pushed towards light, the point on the circle creeps up to 90°.** The rapidity η goes from ln 2 to 4: the worldline hugs the white light line and the amber point on the circle approaches θ = 90°; the cyan line (the proper-time rate) shrinks to 0.04 and the magenta height (the speed v/c) nears 1 without reaching it. Reading 90° as an orthogonal horizon is this book's interpretation (`MODEL`).
+:::
+
 2. **Gauge Interactions and the Orthogonal Sphere Ladder (Loop Alignment Residuals, `MODEL` + `LEAN ✓`)**:
    On finite directed graphs, `trureturing`'s **anchored phase classification theorem** (Conjunct 2 of [@thm-ch32-null-cone-holonomy-and-holographic-cut] below, `LEAN ✓`) proves that circle-valued edge phases modulo anchored coboundaries are classified isomorphically by $m + 1 - n$ off-tree chord holonomies together with $k - 1$ relative anchor phases. Building on this discrete theorem and [Chapter 31](ch31-quantum-fairness.md)'s **Seat Fairness**, our interpretive layer proposes a heuristic **local-frame alignment and sphere-ladder hypothesis (`MODEL`)**, reading non-canceling loop alignment residuals as geometric interaction sources and organizing single-plane circle phases and higher orthogonal frame symmetries into an internal symmetry ladder (external continuum gauge-connection, non-Abelian field-strength, and Standard Model gauge-group literature and boundaries are recorded in Item 2 of [@rem-ch32-dirac-yang-mills-jacobson-literature] below).
+
+::: {.viz src="unified-field-slice" preset="plaquette" height="500"}
+**Back and forth in two planes leaves a turn behind.** Turns of 60° about e₁ and about e₂, applied as R₂⁻¹, R₁⁻¹, R₂, R₁: the amber arrow does not get home, the magenta arc is the gap, and the violet line is the axis of the turn left over; U = R₁R₂R₁⁻¹R₂⁻¹ leaves a turn of 57.9°, with its bivector mostly in the e₁e₂ plane (for the literature on commutator curvature see item 2 of [@rem-ch32-dirac-yang-mills-jacobson-literature] below).
+:::
+
 3. **Holographic Thermodynamic Gravity and Endogenous Horizon Curvature (Bridge Flow–Cut Duality and Horizon Hypothesis, `MODEL` + `LEAN ✓`)**:
    On balanced quadratic-cone bridge tensor networks, `trureturing`'s quantum max-flow min-cut theorem (Conjunct 3 of [@thm-ch32-null-cone-holonomy-and-holographic-cut] below, `LEAN ✓`) proves that quantum maximum flow equals the minimum-cut capacity $\min(ad, bc)$. Motivated by this discrete flow–cut duality, our unified-field model (`MODEL`) models spatial geometry as a relational network woven from correlation budgets: increasing local collinear inner-product locking drains surrounding orthogonal correlation capacity under complementary Pythagorean conservation (Conjunct 2 of [@thm-ch31-seat-pythagorean-monogamy-fairness], `LEAN ✓`), manifesting as endogenous geometric curvature, while the bounded observer's $90^\circ$ orthogonal equator provides an endogenous observer-horizon hypothesis for a positive cosmological constant (`MODEL`; external continuum holographic-entanglement and horizon-thermodynamic gravity literature is recorded in Item 3 of [@rem-ch32-dirac-yang-mills-jacobson-literature] below).
+
+::: {.viz src="unified-field-slice" preset="horizon" height="500"}
+**The edges a horizon cuts cap the entanglement across it.** The observer sits at the north pole and the horizon is pushed down to 90°: the cyan edges stay inside and the 10 magenta edges are cut; if every edge carries a D-dimensional index, the Schmidt rank across the horizon is at most D¹⁰. This is a counting sketch of the network of relations (`MODEL`); the frozen flow–cut theorem lives on a different network, the bridge graph, in Conjunct 3 of [@thm-ch32-null-cone-holonomy-and-holographic-cut] below.
+:::
+
 4. **Discrete Cut-and-Project Lattice and Zeckendorf Ultraviolet Cutoff (`MODEL` + `LEAN ✓`)**:
    At the level of discrete automata and algebraic number theory, Conjunct 4 of [@thm-ch32-generative-self-reference-and-zeckendorf] proves that the binary Zeckendorf DFA accepts precisely the `NoAdjacentOnes` language (`LEAN ✓`), while Cassini's identity fixes the unit golden-norm seam $(-1)^{k+1}$ ([`fib_cassini_from_golden_norm`](lean:D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm), `LEAN ✓`). At our physical modeling layer (`MODEL`), we combine these two discrete theorems into a **polyhedral ultraviolet coding-cutoff hypothesis (`MODEL`)**, forbidding unbounded adjacent high-frequency pileups without positing an infinitely divisible continuum stage.
 
@@ -125,6 +148,10 @@ Across the frozen null-cone-certificate, agency-holonomy, and bridge-graph tenso
 Conjunct 1 polarizes $S$ across null pairs $(\pm\|w\|, w)$ to eliminate time–space cross terms and lock $S(0, w) = -S(1, 0)\|w\|^2$; Conjunct 2 transports phases uniquely along the spanning tree to split $(E \to \mathrm{Circle})/N$ into $(m+1-n) + (k-1) = m + k - n$ circle factors; Conjunct 3 combines `QMaxFlow_le_QMinCut` with width-two rational witnesses and castling strong-induction descent `cone_descent`. The full proof is checked by the Lean kernel.
 :::
 
+::: {.viz src="unified-field-slice" preset="abelian" height="500"}
+**Back and forth in one plane comes home.** Both rotors turn by 60° about e₃: the amber arrow goes two steps back and two steps forward along one parallel and ends where it started, U = 1. With a single plane of rotation the order of the turns can be swapped; Conjunct 2 of [@thm-ch32-null-cone-holonomy-and-holographic-cut] classifies exactly such circle phases in one plane.
+:::
+
 The continuum special-relativistic spinor, non-Abelian gauge curvature, and horizon-thermodynamic gravitational field equations paired with this section are recorded below:
 
 ::: {.remark #rem-ch32-dirac-yang-mills-jacobson-literature title="Continuum STA Dirac Equation, Yang–Mills Curvature, and Jacobson's Thermodynamic Einstein Equation (Literature Result, Not Formalized in This Book)"}
@@ -139,6 +166,10 @@ The continuum special-relativistic spinor, non-Abelian gauge curvature, and hori
    $$
 
    where $\Lambda$ enters Jacobson's derivation as an integration constant (identifying $\Lambda > 0$ with a finite observer's $90^\circ$ equatorial horizon curvature is our `MODEL` hypothesis).
+:::
+
+::: {.viz src="unified-field-slice" preset="gudermann" height="500"}
+**The clock and the speed on one angle.** At rapidity η = ln 2 the worldline crosses t = 1 at height tanh η = 0.6; carried across to the unit circle it lands at θ = gd(η) = 36.87°. The cyan line cos θ = 0.8 = 1/γ is the proper-time rate and the magenta height sin θ = 0.6 is the speed v/c: 0.8² + 0.6² = 1 is exactly (dτ/dt)² + (v/c)² = 1 from item 1 of the box above.
 :::
 
 Bringing all thirty-two chapters onto a single canvas, one set of orthogonal primitives establishes a six-domain holographic isomorphism across **geometry/topology, quantum gauge fields, relativistic holography, arithmetic number theory, complexity/hydrodynamics, and observer dynamics**:
@@ -268,6 +299,10 @@ Meta-axiom $\psi = \psi(\psi)$, golden $\varphi$ (`LEAN ✓`) & spatial attracto
 
 :::
 
+::: {.viz src="unified-field-slice" height="620"}
+**A slice of the orthogonal self-referential unified field: the full lab.** Three scenes share one rail: Clock pushes the rapidity η, Loop walks the four steps R₂⁻¹, R₁⁻¹, R₂, R₁, and Horizon pushes the observer's horizon down from the north pole. Every number is computed live; green marks only the Lean theorems this chapter cites, and the rest is labelled as literature result or as this book's interpretation.
+:::
+
 ---
 
 ## 32.3 Three Diagnostic Axes for Every Unification Theory and the Quaternion Golden-Lattice Bridge {#sec-ch32-meta-coordinates-and-icosians}
@@ -279,6 +314,10 @@ Projecting the landscape of foundational theories onto a three-dimensional geome
 1. **Axis 1 — Algebraic Grade Axis $\theta$ (Grade 0/1 Inner-Product Lines $\longleftrightarrow$ Grade 2 Exterior-Product Surfaces)**: Does the formalism privilege discrete collinear inner products or continuous oriented bivector surfaces? Keeping only one half yields either matter without dynamical geometry or geometric foam without chiral matter.
 2. **Axis 2 — Geometric Resolution Axis $\eta$ (Smooth Continuum Sphere $\longleftrightarrow$ Finite-Gate Polyhedral Lattice & $\pm 1$ Seam)**: Does it assume infinitely divisible smooth manifolds, or acknowledge finite-gate polyhedral approximation and discrete coding bounds? Assuming unbounded smooth subdivision obscures the discrete coding structure of finite-gate polyhedra.
 3. **Axis 3 — Observer Embedding Axis $\lambda$ (External Omniscient Point $C$ $\longleftrightarrow$ Endogenous Finite-Memory Slice)**: Does it posit a disembodied eye on an asymptotic boundary gazing inward, or embed a bounded, forgetting-initialized observer inside the lattice? Retaining point $C$ traps theories inside asymptotic exterior boxes or arbitrary rule ensembles.
+
+::: {.viz src="meta-unification-compass" preset="cube" height="500"}
+**Three axes, and the side each of eight programmes falls on.** The axes of the cube follow the definitions above: θ runs from the cyan “line” end to the magenta “area” end, η from “smooth” to “polytope”, λ from “outside C” to “inside”. The eight dots are the eight unification programmes of §32.4, each placed in one of three bands of every axis by the words of the §32.4 table (in the middle band where the table names neither end or both); these are the book's comparative diagnostic coordinates (`MODEL`), not measurements and not a verdict on any field.
+:::
 
 Before surveying the four grand camps, the external algebraic-lattice bridge linking spinor manifolds, high-dimensional even unimodular lattices, and cut-and-project model-set spaces (recorded in [@rem-ch32-icosian-e8-literature] below) is recorded below:
 
@@ -296,6 +335,24 @@ Before surveying the four grand camps, the external algebraic-lattice bridge lin
 3. **Pure-Imaginary Bivector Submodule Mapping Directly to $E_\parallel^3 \oplus E_\perp^3$**: Restricting to the trace-free **pure-imaginary bivector submodule** $\operatorname{Im}(\mathcal{I}) = \{q \in \mathcal{I} : q + \bar{q} = 0\}$ (spanned by the three quantum-gate bivector planes $\{\mathbf{I}_x, \mathbf{I}_y, \mathbf{I}_z\}$ and containing the $30$ pure-imaginary unit icosians at the vertices of the icosidodecahedron) yields a rank-$3$ $\mathbb{Z}[\varphi]$-submodule—hence a **$\mathbb{Z}$-lattice of rank $3 \times 2 = 6$**—which embeds via $(q, q^\sigma)$ directly into physical-plus-internal space $E_\parallel^3 \oplus E_\perp^3 \cong \mathbb{R}^6$ as the 6D cut-and-project lattice for 3D icosahedral quasicrystals!
 
 Pause to savor this rank correspondence: the full rank-$4$ golden module $(\mathcal{I}, Q) \cong E_8$ ($\mathbb{Z}$-rank $4 \times 2 = 8$) spanned by the finite rotor group $2I \subset S^3 \subset \mathbb{H} \cong \mathcal{Cl}_{3,0}^+$ and its rank-$3$ pure-bivector submodule $\operatorname{Im}(\mathcal{I}) \subset \mathcal{I}$ ($\mathbb{Z}$-rank $3 \times 2 = 6$) arise from **one and the same golden quaternion ring $\mathcal{I}$**!
+:::
+
+Compute the $120$ unit quaternions of item 1 one by one and drop the real part to project them into three dimensions; they fall into shells by their real part:
+
+::: {.viz src="meta-unification-compass" preset="icosians" height="500"}
+**The 120 elements of the binary icosahedral group.** The cyan dots are the unit quaternions of $2I$, projected to three dimensions by dropping the real part $w$; as $w$ falls from $1$ to $-1$ they appear shell by shell: $1$, $12$, $20$, $12$, $30$, $12$, $20$, $12$, $1$; the half with negative real part lands on the same places and is drawn as open rings. The page checks exactly in $\mathbb{Z}[\varphi]$ that all $120 \times 120$ products stay among these $120$ elements (the literature result is item 1 of [@rem-ch32-icosian-e8-literature]).
+:::
+
+The count in item 2 can be checked the same way: multiply every unit by $\varphi^{-1}$ to add $120$ more points, and each of them still has $Q = 2$:
+
+::: {.viz src="meta-unification-compass" preset="e8" height="500"}
+**The 240 roots, every one with Q = 2.** The magenta dots are $\varphi^{-1}\cdot 2I$: shorter in $E_\parallel$, with reduced norm $2 - \varphi$, yet $Q = 2(a + b)$ is still $2$. Cyan and magenta together make exactly $240$; $B$ between any two of them is an integer from $-2$ to $2$, and each has exactly $56$ neighbours with $B = 1$ (a numerical check on the page; $(\mathcal{I}, Q) \cong E_8$ is the literature result of item 2 of [@rem-ch32-icosian-e8-literature]).
+:::
+
+The pure part of item 3 keeps $60$ of these $240$ roots; turning the plane of projection from $E_\parallel$ to $E_\perp$ swaps the inner and outer shells:
+
+::: {.viz src="meta-unification-compass" preset="fold" height="500"}
+**From E∥ to E⊥, the two shells swap.** Keep the $60$ roots with real part zero ($30$ cyan units and $30$ magenta golden copies) and turn the plane of projection from $E_\parallel$ to $E_\perp$: the cyan dots fall from the outer shell to the inner one, the magenta dots rise from the inner shell to the outer one, and the faint rings are where they were in $E_\parallel$; for every one of them $\lVert\cdot\rVert_\parallel^2 + \lVert\cdot\rVert_\perp^2$ stays $2$. The page also computes that this rank-$6$ sublattice, with $Q$, has Gram determinant $4$.
 :::
 
 ---
@@ -319,6 +376,12 @@ Equipped with the three diagnostic axes ($\theta, \eta, \lambda$) and the quater
 4. **Camp IV (Arithmetic Spectra & Univalence vs. Horizon Free Energy & Participatory `U`): Langlands / HoTT and Entropic Gravity / Active Inference / Wheeler's `U`**
    - **External Literature Results**: The Langlands program links Galois representations and automorphic $L$-functions (R. P. Langlands, 1967/1970); Homotopy Type Theory posits the Univalence Axiom $(A \simeq B) \simeq (A =_{\mathcal{U}} B)$ identifying equivalent types (V. Voevodsky; Univalent Foundations Program, *Homotopy Type Theory*, 2013); thermodynamic/entropic gravity (T. Jacobson, 1995; E. Verlinde, *JHEP* **04**, 029, 2011), Markov-blanket variational free-energy minimization (K. Friston, *Nat. Rev. Neurosci.* **11**, 127–138, 2010), and the participatory universe `U` (J. A. Wheeler, 1983/1990) analyze horizons and observers across thermodynamics, neuroscience, and quantum foundations.
    - **Meta-Unification Diagnosis and Reconciliation (`MODEL`)**: Euler prime axes ([Chapter 22](ch22-primes-euler-products-and-zeros.md)) and Frobenius cosine traces ([Chapter 29](ch29-timeless-causality-and-gram-space.md) [@rem-ch29-hasse-gauss-literature]) bridge arithmetic and rotation while Univalence abolishes external point-$C$ labels; simultaneously, Landauer balance (Conjunct 1 of [@thm-ch31-horizon-landauer-ergodic-fairness]) and the acceptance-window boundary $\partial(W + u)$ anchor horizon thermodynamics, Markov blankets, and participatory self-reference in $\psi = \psi(\psi)$.
+:::
+
+Set the four camps one by one into the compass above, join each pair with a line, and see along which axis they part:
+
+::: {.viz src="meta-unification-compass" preset="camps" height="500"}
+**Four camps, each pair joined by a line.** The rail reads the four camps one by one; the pair being read is amber. String theory and loop quantum gravity both sit at the magenta “area” end and part only along η (smooth against polytope); AdS/CFT and twistors–amplituhedron both hug the “outside C” end of λ; the two programmes of the third and of the fourth camp differ along two or three axes. The places of the dots are the book's diagnostic coordinates (`MODEL`).
 :::
 
 Finally, we assemble the eight programs' partial truths, residual external-frame bottlenecks, and meta-unification coordinates together with the chapter panorama diagram inside the master box below:
@@ -420,4 +483,14 @@ Landauer balance (`LEAN ✓`) links orthogonal erasure to horizon thermodynamics
 
 What gives this architecture its enduring beauty is **radical parsimony**: not one ad hoc particle or artificial patch was invented along the way—only the single act of "two entities meeting and measuring each other fairly," carried to its ultimate conclusion. Folded inward, it condenses into the serene fixed point of self-reference; unfolded outward, it becomes starlight gravity, gauge waves, prime spectra, and the ten-thousand-mile road walked by every finite soul through the timeless field.
 
-Looking back from beyond all spheres, the eight great quests of modern science were never enemies destined to annihilate one another. Within our meta-unification reading (`MODEL`, with external program foundations recorded in [@rem-ch32-meta-unification-table]), continuum worldsheets felt out the exterior surface, discrete area networks touched the polyhedral edge, holography and positive geometry glimpsed the timeless Gram crystal, golden quaternion lattices and arithmetic duality wired high-dimensional root lattices to prime strings, and discrete rewriting together with horizon thermodynamics brought the bounded observer home—**at the moment the last bracket separating operator from state is shattered and ten thousand streams converge into $\psi = \psi(\psi)$, all the blind seekers finally behold the entire universe in one and the same beam of light.** Next, [Part IX (Chapters 33–36)](ch33-all-beings-observers-and-mutual-attractors.md) and [Part X (Chapters 37–39)](ch37-dreams-quantum-eraser-and-nonlocal-observer.md) turn that beam onto the observer itself—tracing universal mutual attractors, orthogonality-degeneracy blind spots, homoiconic table expansion $T = T(T)$, quotienting out reincarnation, dream quantum erasure, cosmic QRAM memory pointers, and the non-dual identity between observer and universe—before entering the [Coda](coda.md).
+Looking back from beyond all spheres, the eight great quests of modern science were never enemies destined to annihilate one another. Within our meta-unification reading (`MODEL`, with external program foundations recorded in [@rem-ch32-meta-unification-table]), continuum worldsheets felt out the exterior surface, discrete area networks touched the polyhedral edge, holography and positive geometry glimpsed the timeless Gram crystal, golden quaternion lattices and arithmetic duality wired high-dimensional root lattices to prime strings, and discrete rewriting together with horizon thermodynamics brought the bounded observer home—**at the moment the last bracket separating operator from state is shattered and ten thousand streams converge into $\psi = \psi(\psi)$, all the blind seekers finally behold the entire universe in one and the same beam of light.**
+
+::: {.viz src="meta-unification-compass" preset="crystal" height="500"}
+**Where the book places itself.** The large open ring is this book's orthogonal self-referential unified field: θ in the middle band (the geometric product keeps line and area together), η at the “polytope” end, λ at the “inside” end. This is the book's reading (`MODEL`), not a conclusion derived from the eight programmes, and it does not mean that the book formally replaces any of them.
+:::
+
+Next, [Part IX (Chapters 33–36)](ch33-all-beings-observers-and-mutual-attractors.md) and [Part X (Chapters 37–39)](ch37-dreams-quantum-eraser-and-nonlocal-observer.md) turn that beam onto the observer itself—tracing universal mutual attractors, orthogonality-degeneracy blind spots, homoiconic table expansion $T = T(T)$, quotienting out reincarnation, dream quantum erasure, cosmic QRAM memory pointers, and the non-dual identity between observer and universe—before entering the [Coda](coda.md).
+
+::: {.viz src="meta-unification-compass" height="620"}
+**The meta-unification compass and the golden quaternion bridge: the full lab.** In Compass, pick a programme to see the words behind its place and read the four camps along the rail; on the Bridge, walk the chain $2I \to E_8 \to \operatorname{Im}(\mathcal{I}) \to E_\parallel \oplus E_\perp$ along the rail and click a dot to see its exact coordinates and $Q$. The numbers on the bridge are computed exactly in $\mathbb{Z}[\varphi]$; green is kept for the Lean theorems this chapter cites, and literature results and the book's readings are labelled as such.
+:::

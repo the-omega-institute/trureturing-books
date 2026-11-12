@@ -10,7 +10,7 @@ tier is built from, magenta the constant that escaped the tier below.
 
 from _ch29 import stairs
 
-SIZE = (560, 296)
+SIZE = (460, 300)
 ALT = {
     "zh": "四级台阶从左向右升高，分别标着第 1 层 ℤ、ℚ，第 2 层 √2、φ，第 3 层 π、e，第 4 层 θ* ≈ 0.739。"
           "每级台阶上方有一幅小图：第 1 层是数轴 0 到 2 上的青色有理点 m/n；第 2 层是青色单位正方形和它品红的对角线 √2；"
@@ -25,4 +25,4 @@ ALT = {
 
 
 def draw(fig):
-    stairs(fig, 0, 140, 292, 225, 32)
+    stairs(fig, 0, 115, 296, 222, 34, fs=14, icon_s=1.0, icon_dy=52)
