@@ -2527,6 +2527,58 @@
           "gid": "D5/S0/Diagonal/EscapeCount.diagonal_landing_fixed"
         }
       ]
+    },
+    {
+      "id": "self-sustaining-spinor-flow",
+      "code": "ORTHO//CLOSURE",
+      "title": "自持旋量流",
+      "title_en": "Self-sustaining spinor flow",
+      "summary": "三维偶子代数里的旋量 ψ = √ρ R 夹住 e₃ 织出青色的流向量 J，夹住 e₁e₂ 织出品红的自旋面 S，页面当场乘出 J²、−S²、ρ² 三个相等的平方（菲尔兹恒等式，文献结果）。让 ψ 绕紫色的轴转：J 转一圈就回到原处，ψ 却成了 −ψ，紫色小旗沿单侧光带翻到另一面；走满 720° 才回到 +ψ。绿色框只给第三十九章引用的圆周双覆叠两条定理。",
+      "summary_en": "An even spinor ψ = √ρ R of three-dimensional space sandwiches e₃ into the cyan current vector J and e₁e₂ into the magenta spin plane S, and the page multiplies out the three equal squares J², −S² and ρ² on the spot (the Fierz identity, a literature result). Turn ψ about the violet axis: J is back after one turn while ψ has become −ψ and the violet flag has slid to the other side of the one-sided band; only 720° brings back +ψ. Green goes only to the two circle double-cover theorems that Chapter 39 cites.",
+      "path": "self-sustaining-spinor-flow/",
+      "thumbnail": "self-sustaining-spinor-flow/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "旋量",
+        "菲尔兹恒等式",
+        "双覆叠",
+        "720°",
+        "第三十九章"
+      ],
+      "tags_en": [
+        "spinors",
+        "Fierz identity",
+        "double cover",
+        "720°",
+        "Chapter 39"
+      ],
+      "theory": [
+        {
+          "label": "本书第三十九章",
+          "label_en": "Chapter 39",
+          "href": "../zh/ch39-observer-is-ontological-universe.html",
+          "href_en": "../en/ch39-observer-is-ontological-universe.html"
+        },
+        {
+          "label": "圆周双覆叠无连续截面（Lean）",
+          "label_en": "No continuous section of the circle double cover (Lean)",
+          "href": "{trureturing}/D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.lean"
+        },
+        {
+          "label": "圆周双覆叠的历史依赖提升（Lean）",
+          "label_en": "History-dependent lift of the circle double cover (Lean)",
+          "href": "{trureturing}/D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section"
+        },
+        {
+          "gid": "D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift"
+        }
+      ]
     }
   ]
 }

@@ -68,6 +68,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `unified-field-slice` | 时钟与速度是同一个圆上的线与面积；在两个平面里来回转一圈回不到原处；视界割断几条边，跨界的纠缠就封顶在那里 | `polytope` `fixedpoint` `gudermann` `photon` `abelian` `plaquette` `horizon` |
 | `forgetting-rebirth-attractor` | 按内禀快度等步走，一格格逼近圆盘边界却永远到不了；按外部角度尺等步走，几步就撞上边界、擦表重来，绕成一只轮子 | `staircase` `horizon_gap` `klein_vs_poincare` `erase_reset` `quotient_fold` `cayley` |
 | `pointer-ontology-deref` | 一格一格扫要走遍全表；路由树每条分支只拨动根到叶的 log₂N 个开关；零号槽里写着页目录自己的地址，解引用一次就回到自己 | `qram_tree` `linear64` `superpose` `four_loops` `self_map` `diagonal_hit` |
+| `self-sustaining-spinor-flow` | 旋量夹住两块参考刀片，织出一根流向量与一块自旋面，三个平方始终相等；矢量转一圈就回来，旋量要转两圈 | `weave` `fierz` `turn360` `seam` `turn720` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -144,6 +145,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `forgetting-rebirth-attractor` 的舞台是单位开圆盘（两轴等比），白色圆周是第三十六章的纯光视界 θ = 90°；三个场景画在同一张圆盘上。“阶梯”：从 θ*（cos θ = θ 的根）出发，η<sub>k</sub> = η₀ + kΔη，η₀ = gd⁻¹(θ*) ≈ 0.8173；Beltrami–Klein 半径 r = sin θ = tanh η、测地线是直弦，庞加莱半径 ρ = tan(θ/2) = tanh(η/2)、测地线是与圆周正交的圆弧，两者由径向等距 ρ = r/(1 + √(1 − r²)) 连续变形；两种固有时率 √(1 − r²) 与 (1 − ρ²)/(1 + ρ²) 都等于 sech η。右侧（窄屏在右下角）的放大镜按 10 的整数次幂缩小视野，品红的缝 1 − r 按 2/(e<sup>2η</sup> + 1) 直接算，不经 1 − tanh。“轮回”：外部角度尺每步加 Δθ = θ₁ − θ*（阶梯的第一步），越过 90° 的那一步记作恰在圆周上，下一步回到圆心；一圈一根辐条，折叠后第一次撞边之后的步按“步号模周期 p”落到 p 个位置。“分式”：w = (s − 1)/s 下直线 Re s = c 的像圆。青色是阶梯的点、过每一级的测地线、角度尺走过的路与像圆，品红只给到边界的缝与撞上圆周的那一步（以及小图里被捏掉的相干 ½s²），琥珀只给当前一步与当前的像圆；回到圆心的虚线与辐条是中性灰。绿色框只给第三十六章用 `lean=` 引用的四条：`pinching_hilbert_schmidt_pythagorean` 与 `pinching_discarded_coherence_mass`（轮回场景，取 ρ = ½[[1 + c, s], [s, 1 − c]]）、`target_factors_iff_continuous_partition`（折叠：读出 = 步号模 p，目标 = 角度）、`cayley_ratio_norm_one_iff_critical_line`（分式场景）；逆古德曼变换、两种圆盘的度规与等距标 `ARGUED`；阶梯、擦表、轮子与“约去轮回”的读法标 `MODEL`；各数实算（`NUM`）。路线图候选的 `pinching_vonNeumannEntropy_ge`、`lorentz_boost_preserves_minkowski`、`conditionalState_isState` 不在本章的 `lean=` 引用里，未上页面；兰道尔下界 k<sub>B</sub>T ln 2 本章正文没有提到，未上页面；候选卡 `attractor_return` 与终章 `spatial-attractor-deja-vu` 重复、本章没有对应的句子，未做；正文讲到的分式临界圆补做成 `cayley`。
 
 `pointer-ontology-deref` 的三条路共用一条以“步”为单位的时间轴，舞台是同一排 N = 64 格内存：上面是桶链式路由树（63 个开关，按“层、前缀”编号），下面是扫描总线，右边是第三十八章 N = 4 的二级页表（b₀ = 0x1000、T₁ = 0x2000、D₁,₂ = 0x9000 取自正文，其余地址为补全表格而选）。青色是设好的路由开关与走过的跳，墨色是扫描读过的格与要读的格，琥珀只给此刻的读头（扫描读头、路由前沿、正在读的槽、刚读出的值）；不在焦点的那两条路整体减淡。绿色框只给第三十八章用 `lean=` 引用的 `diagonal_landing_fixed`（页表场景），页面画的“读零号槽 f，f(0x1000) = 0x1000”只是它的一个具体形状；桶链式 QRAM 的 O(log N) 深度（Giovannetti–Lloyd–Maccone 2008）与 x86-64 递归页表标 `ARGUED`；“观察者是记忆指针”“p ≡ *p 的本体寻址”与“一拍走一层”的时间轴标 `MODEL`；页面不声称零号槽的一步是可实现的算法加速。路线图候选的 `stack_frame`（躯体栈帧）与 `theta_star` 未做：前者在正文里只是比喻表格的一行，后者属于第三十三、三十五章的不动点页面；候选 `idempotent_iff_range_fixed` 不在锁文件，`finite_contracting_updates_stabilize` 不在本章正文，均不标绿。本页与 `self-referential-table` · `diagonal`（对角格自己读自己）、`sphere-escape` · `diagonal`（康托尔对角线逃逸）不画同一画面：这里画的是地址解引用的路径与步数。
+
+`self-sustaining-spinor-flow` 与 `qubit-geometry` 的 `turn1`、`turn2` 分工：那两张在布洛赫球上看态 B 转一圈、两圈和旋子标量部 w 的读数，本页讲第三十九章的旋量双线性量与单侧光带：青色是流向量 J = ψe₃ψ̃（箭头长 ρ，虚线是它走过的路）；品红是自旋面 S = ψe₁e₂ψ̃，画成由 Re₁R̃、Re₂R̃ 张成、边长 √ρ、面积 ρ 的正方形（在三维里 S = I J，正是与 J 垂直的那块面）；紫色是转轴 n、绕 n 一圈的单侧（莫比乌斯）光带与插在 J 方位上的小旗，小旗方向 cos(t/2) n + sin(t/2) r 是 ψψ̃₀/ρ 的两个分量，旗尖走过的路是光带的边（两圈才闭合）；琥珀只给小旗此刻的落脚点；虚线小旗是出发时的那一面。三个平方 J²、−S²、ρ² 由 Cl(3,0) 逐刀片乘出（`NUM`），菲尔兹恒等式（含狄拉克旋量的 J<sub>μ</sub>J<sup>μ</sup> = σ² + ω²，页面不画）与 Spin(3) ≅ SU(2) → SO(3) 双覆叠按第三十九章文献注记标 `ARGUED`；“无底物自指旋量流”“观察者即宇宙本体”标 `MODEL`。绿色框只给该章定理 `thm-ch39-double-cover-no-section-and-720-lift` 用 `lean=` 引用的两条：`no_continuous_global_section` 与 `circle_double_cover_history_lift`。图注里说小旗“与出发时相反/同向”，不说“朝下/朝上”（舞台的视角里小旗是横着的）。路线图候选 `massless_knot`、`non_trivial_lift` 并入 `seam`；`grand_closure` 未做：第三十九章没有“从第一章 AB = A·B + A∧B 收束回 ψ = ψ(ψ)”的句子（章末只有一句回望第一、二章砍掉第 3 点 C 的话，且紧挨章中的旧手绘图）。
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
@@ -426,6 +429,12 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 附录 C | C.2.1 行内声明表之后、C.3 之前 | `lean-declaration-map` · `inline` |
 | 附录 C | C.4 核验清单之后、注记 `rem-appendix-c-epistemic-boundary` 之前 | `lean-declaration-map` · `theorems` |
 | 附录 C | 附录末 | `lean-declaration-map` 完整实验室 |
+| 第三十九章 | §39.3 第二段（“观察者从来没有‘住在时空里’”）之后、“数学物理史上……”一段之前 | `self-sustaining-spinor-flow` · `weave` |
+| 第三十九章 | 文献注记 `rem-ch39-cartan-penrose-hestenes-fierz-literature` 之后 | `self-sustaining-spinor-flow` · `fierz` |
+| 第三十九章 | 例 `ex-ch39-even-clifford-spinor-bilinear-fierz` 之后 | `self-sustaining-spinor-flow` · `turn360` |
+| 第三十九章 | 定理 `thm-ch39-double-cover-no-section-and-720-lift` 的证明之后 | `self-sustaining-spinor-flow` · `seam` |
+| 第三十九章 | 该定理之后的“请屏息凝视”一段之后、§39.4 之前 | `self-sustaining-spinor-flow` · `turn720` |
+| 第三十九章 | 章末（最后一段之后） | `self-sustaining-spinor-flow` 完整实验室 |
 
 ## 增删或修改一张卡之后
 
