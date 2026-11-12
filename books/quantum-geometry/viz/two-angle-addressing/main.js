@@ -265,11 +265,11 @@
   /* ---------- experiment cards ---------- */
   const VIEW = { side: [-0.35, 0.3], front: [-2.1, 0.38], under: [-2.1, -0.95], above: [-2.1, 1.05], cover: [-1.4, 0.32] };
   const PRESETS = {
-    tilt: { scene: 'words', alpha: 90, theta: 60, phi: 45, word: [['b', 360]], view: 'side', still: 0.8 },
+    tilt: { scene: 'words', alpha: 90, theta: 60, phi: 45, word: [['b', 360]], view: 'side', still: 'end' },
     address: { scene: 'words', alpha: 90, theta: 60, phi: 45, view: 'front', still: 'end' },
-    pole: { scene: 'words', alpha: 90, theta: 180, phi: 45, word: [['b', 180], ['a', 360]], view: 'under', still: 1.6 },
+    pole: { scene: 'words', alpha: 90, theta: 180, phi: 45, word: [['b', 180], ['a', 360]], view: 'under', still: 'end' },
     skew: { scene: 'words', alpha: 30, theta: 110, phi: 45, view: 'front', still: 'end' },
-    collinear: { scene: 'words', alpha: 0, theta: 60, phi: 45, word: [['b', 120], ['a', 90], ['b', 120], ['a', 90]], view: 'above', still: 2.5 },
+    collinear: { scene: 'words', alpha: 0, theta: 60, phi: 45, word: [['b', 120], ['a', 90], ['b', 120], ['a', 90]], view: 'above', still: 'end' },
     narrow: { scene: 'words', alpha: 10, theta: 110, phi: 45, view: 'front', still: 'end' },
     three: { scene: 'cover', set: 'three', alpha: 90, theta: Math.acos(1 / Math.sqrt(3)) / DEG, phi: 45, view: 'cover', still: 'end' },
     six: { scene: 'cover', set: 'six', alpha: 90, theta: 60, phi: 45, view: 'cover', still: 'end' }
