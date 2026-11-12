@@ -80,7 +80,7 @@ $$
 :::
 
 ::: {.viz src="rapidity-lightcone" preset="boost" height="500"}
-**η = ln 2 把 (5, 3) 推到 (4, 0)。** 琥珀色的点沿青色双曲线 $\tau = 4$ 滑到时间轴上，这时 $\cosh\eta = 5/4$、$\sinh\eta = 3/4$；琥珀色的两根轴像剪刀一样向光锥合拢，灰色虚线是它们原来的位置。
+**η = ln 2 把 (5, 3) 推到 (4, 0)。** 琥珀色的两根轴是以快度 $\eta$ 运动的旅行者的 $t'$、$x'$ 轴，像剪刀一样向光锥合拢，灰色虚线是原来的 $t$、$x$ 轴；到 $\eta = \ln 2$（$\beta = 3/5$）时，$t'$ 轴正好穿过灰圈里的原事件 $v = (5, 3)$。琥珀色的点 $Bv$ 是 $v$ 在旅行者坐标里的读数，沿青色双曲线 $\tau = 4$ 滑到时间轴上的 $(4, 0)$，这时 $\cosh\eta = 5/4$、$\sinh\eta = 3/4$。
 :::
 
 ## 光锥零线与空间限制 {#sec-null-cone-rigidity}
@@ -186,14 +186,14 @@ $$
 \operatorname{minkowski}_d(Bv) = \operatorname{minkowski}_d(Be_0)\cdot\operatorname{minkowski}_d(v).
 $$
 
-要想由此推出严格的洛伦兹间隔不变性 $\operatorname{minkowski}_d(Bv) = \operatorname{minkowski}_d(v)$，必须**额外独立施加尺度归一化条件** $\operatorname{minkowski}_d(Be_0) = 1$（在物理上对应于运动方向垂直横尺的长度标定或标准原子钟单位固有时的归一化）。
-
 ::: {.viz src="rapidity-lightcone" preset="cone" height="500"}
-**推动下光锥不动。** $\eta$ 从 $-0.6$ 扫到 $1$：白色珠子只沿白色光锥滑动，右边一串挤向原点、左边一串散开，没有一颗离开这两条线；琥珀色的点沿青色双曲线走，灰色网格被压成菱形。
+**推动下光锥不动。** $\eta$ 从 $-0.6$ 扫到 $1$：白色珠子只沿白色光锥滑动，右边一串挤向原点、左边一串散开，没有一颗离开这两条线；空心的淡白珠子是 $\eta = -0.6$ 与 $\eta = 0$ 时它们的位置。琥珀色的点沿青色双曲线走。
 :::
 
+要想由此推出严格的洛伦兹间隔不变性 $\operatorname{minkowski}_d(Bv) = \operatorname{minkowski}_d(v)$，必须**额外独立施加尺度归一化条件** $\operatorname{minkowski}_d(Be_0) = 1$（在物理上对应于运动方向垂直横尺的长度标定或标准原子钟单位固有时的归一化）。
+
 ::: {.viz src="rapidity-lightcone" preset="scale" height="500"}
-**乘上比例 k：光锥保住，刻度没保住。** $k = 1.5$、$\eta = \ln 2$：白色珠子仍在光锥上，琥珀色的点却从青色的 $\tau = 4$ 落到青色虚线 $\tau = 6$ 上，单位刻度落在 $\tau = 1.5$ 上；差的正是因子 $\operatorname{minkowski}_1(kBe_0) = k^2$（[@prop-null-cone-rigidity]）。
+**乘上比例 k：光锥保住，刻度没保住。** $k = 1.5$、$\eta = \ln 2$：白色珠子仍在光锥上，琥珀色的点却从青色的 $\tau = 4$ 落到青色虚线 $\tau = 6$ 上，$t'$ 轴上的单位刻度落在青色细虚线 $\tau = 1.5$ 上；差的正是因子 $\operatorname{minkowski}_1(kBe_0) = k^2$（[@prop-null-cone-rigidity]）。
 :::
 
 > 光锥零线锁死度规的骨架形状，而单位时钟标定最后那一分比例刻度；拆开这两步，狭义相对论就不再有任何神秘的“时空魔法”。

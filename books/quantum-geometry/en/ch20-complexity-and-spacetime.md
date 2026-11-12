@@ -75,7 +75,7 @@ recurses on prefix length $M$ with $j$ remaining splits to obtain $(S_0, g_0)$ (
 :::
 
 ::: {.viz src="complexity-growth" preset="floor" height="500"}
-**Move the turning points and the stack stops on the white line.** N = 11, κ = 2: as the magenta triangles move step by step from {2, 3} to {4, 8}, the cyan bricks come down from 9 layers one at a time to 4 and land on the white line ⌊11/3⌋ + 1 = 4, below which they never go ([@thm-open-circuit-min-depth]).
+**Move the turning points and the stack stops on the white line.** N = 11, κ = 2: as the magenta triangles move step by step from {2, 3} to {4, 8}, the cyan bricks come down from 9 layers one at a time to 4 and land on the white line ⌊11/3⌋ + 1 = 4, below which they never go; the grey dashed outlines and faint magenta triangles are the 9 layers of the start {2, 3} ([@thm-open-circuit-min-depth]).
 :::
 
 Keep the contract of [@thm-open-circuit-min-depth] sharp: $\operatorname{minDepth}(N, \kappa)$ is the optimal parallel layer depth over configurations $|S| = \kappa$ within the **fixed open-boundary integrable circuit family** `circuit N S`; it is neither the unconstrained minimum gate count to synthesize an arbitrary unitary operator nor physical time $t$. Let us write out the explicit layer schedules at $\kappa = 2$ for $N = 8$ and $N = 11$.
@@ -163,7 +163,7 @@ In chaotic many-body models and holographic black-hole narratives, after subsyst
 :::
 
 ::: {.viz src="complexity-growth" preset="saturate" height="500"}
-**Entropy caps first; the gate count goes on.** A random brick-wall circuit on 8 qubits run to layer 14: the cyan half-chain entropy climbs along the grey staircase and around layer 13 settles between 3.18 and 3.36 bits, under the white 4-bit line, while the white line (gates used) rises all the way to 49. The random circuit is an illustrative model; its entropy and gate count are computed layer by layer ([@rem-complexity-growth-literature]).
+**Entropy caps first; the gate count goes on.** A random brick-wall circuit on 8 qubits run to layer 15: the cyan half-chain entropy climbs along the grey staircase and from layer 15 on stays between 3.18 and 3.36 bits (3.20 at this layer), under the white 4-bit line, while the white line (gates used) rises all the way to 52. The random circuit is an illustrative model; its entropy and gate count are computed layer by layer ([@rem-complexity-growth-literature]).
 :::
 
 ::: {.viz src="complexity-growth" preset="ceiling" height="500"}
