@@ -40,6 +40,7 @@ $$
 $$
 
 其行指标取自乘积类型 $\operatorname{Fin} a \times \operatorname{Fin} d$（共 $ad$ 行），列指标取自 $\operatorname{Fin} b \times \operatorname{Fin} c$（共 $bc$ 列）；
+
 - 定义可达秩集合 $\operatorname{attainable}(a, b, c, d) = \bigl\{\, r \in \mathbb{N} \;\big|\; \exists M, N,\; \operatorname{rank}(\operatorname{flow}(M, N)) = r \,\bigr\}$，并将**量子最大流** `QMaxFlow` 定义为可达秩的上确界：
 
 $$

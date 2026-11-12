@@ -204,6 +204,7 @@ $$
 $$
 
 其中左支为受控非门 $\operatorname{CNOT}(t, c)$（以控制位 $c$ 翻转目标位 $t \neq c$），右支为作用在第 $q$ 个比特上的单比特实角度对角相位旋转门 $R_z(q, \varphi) = \operatorname{diag}(e^{\mp i\varphi/2})$；
+
 - 对任意门列表 $\mathit{circuit} : \operatorname{List}(\operatorname{gate}(m))$，`circuitMatrix` 为按列表顺序累乘所得的 $2^m \times 2^m$ 复酉矩阵，而 `cnotCount` 则精确统计列表中属于左支的 $\mathrm{CNOT}$ 门个数。
 
 下面的命题证明了：对任意 $n \ge 1$，在满足逐位取反反射对称性 $\theta(\neg x) = \theta(x)$ 的 $2n$ 比特实相位函数族中，必然存在一个最坏实例 $\theta$，使得任何仅用 $\mathrm{CNOT}$ 与单比特 $R_z$ 门（即使允许相差任意全局复标量因子 $c \in \mathbb{C}$）精确合成对角算子 $\operatorname{diag}(e^{i\theta(x)})$ 的电路，都至少需要 $2^{2n-1} + 2n - 2$ 个 $\mathrm{CNOT}$ 门！
