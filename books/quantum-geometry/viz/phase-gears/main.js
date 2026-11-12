@@ -112,7 +112,7 @@
   }
 
   /* ---------- chain ---------- */
-  let chainPts = [];
+  let chainPts = [], chainInk = false;
   function drawChain(t) {
     const b = boxes.chain, c = comb(), k = S.k;
     // fit the whole chain (all cells) so that the scale does not jump during the sweep
@@ -126,7 +126,11 @@
     chainPts = shown;
     for (let i = 1; i < shown.length; i++) arrow(X(shown[i - 1]), X(shown[i]), P.cyan, 1.8, { alpha: 0.9, head: 7 });
     const end = shown[shown.length - 1];
-    if (Math.hypot(end[0], end[1]) > 1e-9) arrow(X([0, 0]), X(end), P.ink, 2.6, { head: 10 }); else dot(X([0, 0]), 4, P.ink, { ring: true });
+    // the ink sum, unless the chain is a single cyan arrow (then the sum is that arrow and would only cover it)
+    chainInk = shown.length !== 2;
+    if (chainInk) {
+      if (Math.hypot(end[0], end[1]) > 1e-9) arrow(X([0, 0]), X(end), P.ink, 2.6, { head: 10 }); else dot(X([0, 0]), 4, P.ink, { ring: true });
+    }
     dot(X([0, 0]), 2.5, P.ink);
     if (!TRV.thumbMode) {
       tag('cT', cx, b.y + 6, b.w < 200 ? `k = ${k}` : L(`k = ${k} 的相位箭头首尾相接`, `phase arrows of k = ${k}, head to tail`), 'raw');
@@ -326,7 +330,7 @@
       const t = clock.t, cell = Math.floor(t + 1e-9), q = bits();
       return {
         Q: S.Q, r: S.r, x0: S.x0, k: S.k, read: S.read, t, max: clock.max, playing: clock.playing, preset: cards.current, cell,
-        comb: comb(), probs: spectrum(t), finalProbs: spectrum(lastCell()), chain: chainPts.map((p) => p.slice()), sum: sum(S.k, t),
+        comb: comb(), probs: spectrum(t), finalProbs: spectrum(lastCell()), chain: chainPts.map((p) => p.slice()), chainInk, sum: sum(S.k, t),
         gears: Array.from({ length: q }, (_, i) => { const j = q - 1 - i; return { weight: Math.pow(2, j), lit: ((S.k >> j) & 1) === 1, angle: TAU * ((Math.pow(2, j) * t) % S.Q) / S.Q }; }),
         peaks: peaks(spectrum(lastCell())), readOrder: readOrder(S.k)
       };
