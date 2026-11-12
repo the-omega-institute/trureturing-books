@@ -63,3 +63,31 @@
 | `books/quantum-geometry/slides/overview/slides.en.md` | `546e8e004de5a4f7203c4d3176fea77891b9e98424218ca2e853b5c6b971c625` |
 | `books/quantum-geometry/slides/overview/slides.md` | `7209aaec7a38eb0ba75fc54455140d7b81859e0a4dd9d7fa486c733d51e01f5e` |
 | `books/quantum-geometry/zh/ch08-erasure-and-time-arrows.md` | `c7ea81e6e63a51f8c5bb803f8d61a92ecf646f176ca77d7cb06cb35513db7602` |
+
+## PR144：当前主线依赖整合与产物对应（2026-11-12）
+
+以上保留原实施阶段的历史输入、产物与待办归属。随后，候选 `0be1501865becdae074b583a560d9ff2446a11ab` 的首轮 architecture、quality、tests 三席均已批准，无阻塞项；其范围是该候选的第八章限定修订、相关计数消费者及当时的 0.5.0 产物，不是全章、原 35 单元或新增第 31–39 章的整体批准。本次只完成一项必要的当前依赖整合与输出实施，没有开启新的内容审计、数学修复、独立复审或技能修订。
+
+本次输入是调用方已解决但未提交的合并：`HEAD=0be1501865becdae074b583a560d9ff2446a11ab`，`MERGE_HEAD=efbdeb52ec4fd7f3e970622a9df5d553a77944bc`（官方主线 PR99）。已逐项核对 `/tmp/qg-template-v051-sync-evidence/pr144-current-integration/input-tracked-manifest.json`，1,539 个已跟踪路径全部相符；HEAD 单独不能代表这些输入。六处计数/deck 冲突的临时来方内容按原生成规则重新计算，不作为已验收结果沿用。合并索引和 Git 生命周期始终由调用方持有。
+
+当前锁为 `trureturing@6cfcf785096782b15084d719ec73c2ca16b6ed29`、分支 `dev`，457 项声明：320 theorem、128 def、9 inductive。锁文件保持调用方输入字节，未运行 pin 或手改。调用方提供的 `main-efb-pin-correspondence.json` 证明原 448 项锁记录及 213 个模块的 426 份源码/冻结状态片均未变；本次的完整 check 另核对当前锁、冻结身份与分支可达性，doctor 确认为本地 `origin/dev` 的祖先。第八章双语源文件与首轮批准候选及原实施记录的摘要完全相同，因此仅在这段未变依赖内复用既有数学、文献、风格和题记证据；新旋转/附录内容及来方 60 个出版依赖路径不因此获得内容批准。
+
+### 当前派生计数与官方模板
+
+- 保持 `prelude-three-tiers.py` 的生成规则与断言：中文章节中带 `lean=` 的 theorem/lemma/proposition/corollary 环境计为正式环境，起始行或第一正文行注明文献结果的 remark/example 计为文献环境，conjecture/problem 计为开放环境。当前独立中英核对均为 **215 / 166 / 6**；英文的两处既有标题采用 `Literature Result` 大写，核对时按同一语义计入，没有改其文字或排除源文件。320 是锁中 theorem 声明数，457 是全部声明数，都不等同于正文正式环境数。
+- 只用 `./tbook fig build --book quantum-geometry prelude-three-tiers` 重出两种语言的正文 SVG 和现有两份 deck 深色副本。来方 deck 第 37 页的文献 Stat/ALT 仍为 165，已最小同步为 166；215、6、320、457 原已正确。序曲双语图注按源计数而未写死数字，无需改写。第八章其他相关图和全部 150 个图脚本均通过当前源时效检查。
+- 模板只经 `./tbook template update --to v0.5.1` 安装：官方提交 `4e47a4b1e2377131253946e91302337a3c655188`，预览与实装均 0 冲突、无需迁移。恰好六个托管文件加 `template.toml`、`template-manifest.json` 两个元数据文件改变，206 项托管清单字节全部相符，八个变化路径与官方发布字节相符。官方清单 SHA-256 为 `5599a167c52867703deef71aca77c735a1bf740a326ab21ad57aa8de0c735ac0`。没有直接改托管文件、私有运行时或 CSS；没有改技能，也没有改交互实验室的源码、测试或静态预览图。
+
+### 当前实际验证
+
+构建在指定仓库完成，`TBOOK_CACHE=0`；使用现有依赖，不安装共享环境。实际转换器为 `/opt/homebrew/bin/pandoc` 3.13，未将 doctor 报告的另一份 3.9 当作实际转换器。当前源、锁、模板、工具和字体输入及产物文件摘要记录在 `/tmp/pr144-current-worker-20261112/`：`build-source-manifest.json`、`font-tool-inputs.json`、`output-identity.json`、`output-file-manifests.json` 和 `output-correspondence.json`。构建后重新比对，全部已跟踪构建输入保持该快照；随后只有本台账和全局台账追加了工程记录，不影响出版输入。
+
+- 完整 `./tbook check`：1 本可见书，0 错误、0 警告；150 图的完整 freshness/source 检查：0 过期、0 错误。四份变化 SVG 的 XML 与内部引用验证通过；中英深色、浅色、手机、印刷八张实际图已查看。
+- 完整工具套件：886 项，836 通过、50 跳过，退出 0。现有 erasure-ledger 浏览器套件 136/136 通过，包含官方新质量门的窄嵌入时间轴布局、指针、键盘与读数检查；没有改测试或重出未变媒体静态图。
+- 双语 HTML、四份 screen/print PDF、两份 EPUB、双语各 39 页的 slides 及 site 均新构建成功，退出 0。96 个 HTML 页面无 `katex-error`。两份 EPUB 各 223 个 XML 成员可解析，EPUBCheck 5.3.0 均 valid、0 错误、0 警告、无跳过；新增文献注记各出现一次。deck 构建执行完整布局/字体检查和 PDF 导出；最终构建包及站点包中嵌入的 tier SVG 解码后与对应 deck 源逐字节一致。
+- 使用实际 `./tbook serve --port 18869` 的 `/trureturing-books/` 前缀：查看中英第八章/序曲 × ayu/light × 1440/390px 的 16 组当前页面、48 处引用/完整嵌入、8 组完整实验室指针和 Home/→/End 操作及读数，另看双语 deck 第 37 页的桌面/手机共 4 组。无页面/嵌入横向溢出或浏览器错误；文献注记三条、无 Lean 徽章，原格言仍在框外。实验室沿用固定夜间舞台。预览服务退出 0，端口已确认停止监听，浏览器和检查进程均已结束。
+- 实际 PDF 页数为中文 screen 886、print 926，英文 screen 937、print 970。查看文献段落及相邻页：153–154、161–162、164–165、174–175；tier 图在第 20、21、23、25 页，另看两份 deck PDF 第 37 页。中文 print 的第三条说明续到下一页，内容与框外格言完整。两 EPUB 的当前 XHTML 文献段落亦在桌面/390px 预览，变化注记本身无横向溢出。
+
+限制继续明确：本地实际字体含 Noto Serif/Sans SC、主题字体和系统回退；字体文件摘要与可见字体族已记录，不能建立默认环境、旧受控导出与 CI 的字体等价。未测试原生 Books、真实设备或全书逐页显示。390px 的 Chromium EPUB 预览中，第八章其他内容使整章文档宽度达到中文 717、英文 659px，变化注记自身为 364px 且可读；该现象保留为当前输出限制，没有借本次计数/模板任务改写无关公式或正文。固定 1920×1080 的幻灯片在手机上整体缩放，不作手机字号优化验收。EPUB 构建有 Pandoc `--mathml` 弃用提示，EPUBCheck 本身无警告。来方八个 film.json 的源链接已变，本次 `TBOOK_FILMS=skip`，全部仅发布 poster fallback；旧整片、音轨和旧 pin/模板整书导出均不冒称当前结果。
+
+原 35 单元的历史 9/35 及其余 26 待办不增加；出版 44 单元、新第 31–39 章仍仅作依赖。既有第八章 Stein 限定、文献 remark、格言、正式环境、证明、ID/GID、媒体顺序及全部章节源字节均保留本次输入。本项有限实施额度已用完，剩余 **0**。这是未提交的实现交接，不作自我批准或全目标完成声明。调用方仍须核对最终提交与路径摘要、首轮三席证据可复用的精确边界和本次变化的复审对应，负责 PR144 的提交、CI、合入及 Pages；这些生命周期结果本次均未执行、未声称完成。技能迭代保留原目标与既定负责人，不在本项修改。
