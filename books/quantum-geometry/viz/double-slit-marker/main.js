@@ -18,7 +18,7 @@
   const $ = (id) => document.getElementById(id);
   const DEG = Math.PI / 180, NMAX = 1600, K = 8 * Math.PI, SIG = 0.45, GRID = 1201;
   const env = (x) => Math.exp(-x * x / (2 * SIG * SIG));
-  const S = { alpha: 60, lambda: 1, reader: 'none', hold: false, split: 0 };
+  const S = { alpha: 60, lambda: 1, reader: 'none', hold: false, split: 0, then: null };
 
   /* ---------- the law on the screen ---------- */
   const XS = Array.from({ length: GRID }, (_, i) => -1 + 2 * i / (GRID - 1));
@@ -233,18 +233,28 @@
 
   /* ---------- controls ---------- */
   let splitTween = null;
-  function splitTo(target, ms) {
+  function splitTo(target, ms, done) {
     if (splitTween) splitTween.cancel();
     const from = S.split;
-    if (from === target) { paint(); return; }
-    splitTween = kit.tween(TRV.still ? 0 : ms == null ? 700 : ms, (e) => { S.split = from + (target - from) * e; paint(); }, () => { splitTween = null; });
+    if (from === target) { paint(); if (done) done(); return; }
+    splitTween = kit.tween(TRV.still ? 0 : ms == null ? 700 : ms, (e) => { S.split = from + (target - from) * e; paint(); }, () => { splitTween = null; if (done) done(); });
+  }
+  // a card that reads the same hits twice: once sorted by the first reading, pause, gather them back, sort by the second
+  let seqTween = null;
+  function stopSequence() { S.then = null; if (seqTween) { seqTween.cancel(); seqTween = null; } }
+  function rereadLater() {
+    if (!S.then) return;
+    seqTween = kit.tween(1400, () => {}, () => {
+      seqTween = null; const to = S.then; if (!to) return; S.then = null;
+      splitTo(0, 450, () => { S.reader = to; readerChips.set(to, true); splitTo(1, 700); });
+    });
   }
   const clock = kit.clock({
     range: $('now'), play: $('play'), label: $('tau'), speeds: $('speedChips'), max: NMAX, t: NMAX, rate: 400, step: 100, rangeStep: '1',
     format: (t, max) => `${L('落点 ', 'HITS ')}${Math.floor(t + 1e-9)} <small>/ ${max}</small>`,
-    onChange: (t) => { if (S.hold && t >= NMAX - 1e-9) { S.hold = false; splitTo(1); } paint(); }
+    onChange: (t) => { if (S.hold && t >= NMAX - 1e-9) { S.hold = false; splitTo(1, null, rereadLater); } paint(); }
   });
-  const leave = () => cards.mark(null);
+  const leave = () => { cards.mark(null); stopSequence(); };
   let angTween = null;
   function setAlpha(v, quiet) { if (angTween) { angTween.cancel(); angTween = null; } S.alpha = clamp(v, 0, 90); fA.set(Math.round(S.alpha)); if (!quiet) leave(); paint(); }
   const fA = kit.field($('alpha'), { fmt: (v) => `${v}°`, onInput: (v) => setAlpha(v) });
@@ -254,8 +264,8 @@
     S.hold = !!late && v !== 'none';
     if (S.hold) { if (splitTween) splitTween.cancel(); S.split = 0; paint(); } else splitTo(v === 'none' ? 0 : 1);
   }
-  const readerChips = kit.chips($('readerChips'), 'reader', (v) => { leave(); setReader(v); });
-  $('rew').addEventListener('click', () => { clock.pause(); clock.set(0); });
+  const readerChips = kit.chips($('readerChips'), 'reader', (v) => { leave(); stopSequence(); setReader(v); });
+  $('rew').addEventListener('click', () => { clock.pause(); stopSequence(); clock.set(0); });
 
   // drag the amber arrow round the quarter circle
   let dragging = false;
@@ -271,7 +281,7 @@
     partial: { alpha: 60, lambda: 1, reader: 'none' },
     which: { alpha: 90, lambda: 1, reader: 'none' },
     delayed: { alpha: 90, lambda: 1, reader: 'path', late: true },
-    erase: { alpha: 90, lambda: 1, reader: 'erase', late: true },
+    erase: { alpha: 90, lambda: 1, reader: 'path', late: true, then: 'erase' },
     mixed: { alpha: 60, lambda: 0.5, reader: 'none' }
   };
   const NOTES = {
@@ -279,7 +289,7 @@
     partial: ['α = 60°：青色的影子 V = 0.5，品红的高 D = 0.87，点仍在圆上。条纹还在，只是暗纹不再全黑，青色的带子变窄了一半。', 'α = 60°: the cyan shadow is V = 0.5, the magenta height D = 0.87, and the point is still on the circle. The fringes remain, but the dark ones are no longer black and the cyan band is half as thick.'],
     which: ['α = 90°：两支箭头垂直，影子缩成零，点停在圆顶。落点堆成一个平滑的鼓包，没有条纹。', 'α = 90°: the arrows are square, the shadow shrinks to nothing and the point sits at the top of the circle. The hits pile up into a smooth hump without fringes.'],
     delayed: ['α = 90°。落点先到齐，然后才按路径读标记：同一批落点按读数分成两行，“左缝”一行与“右缝”一行加起来正好是全部落点，都是没有条纹的品红鼓包。', 'α = 90°. All hits arrive first, and only then is the marker read for the path: the same hits are split into two rows that add up to all of them, and both the “left” row and the “right” row are magenta humps without fringes.'],
-    erase: ['同样 α = 90°、同一批落点，这回按擦除方向读标记，分出的两行都画成青色：“读作 +”一行是条纹，“读作 −”一行是错开半格的反条纹，两行合起来仍是上面那个鼓包。', 'Again α = 90° and the same hits, but this time the marker is read to erase, and both rows are drawn in cyan: the “read as +” row shows fringes, the “read as −” row anti-fringes shifted by half a period, and together they are still the hump above.'],
+    erase: ['α = 90°，落点先到齐，再读标记。先按路径读：同一批落点分成“左缝”“右缝”两行，都是没有条纹的品红鼓包；停一下，收回来改按擦除方向重读，两行都变成青色：“读作 +”一行是条纹，“读作 −”一行是错开半格的反条纹。最上面“全部落点”那一行始终不变：后来的读法没有移动任何一个落点，只决定怎样把它们分开。', 'α = 90°: all hits arrive first, and the marker is read afterwards. Read for the path, the same hits split into a “left” and a “right” row, both magenta humps without fringes; after a pause they are gathered back and read again to erase, and both rows turn cyan: the “read as +” row shows fringes, the “read as −” row anti-fringes shifted by half a period. The top row, “all hits”, never changes: the later reading moves no hit; it only decides how they are sorted.'],
     mixed: ['标记本身带噪声（纯态权重 λ = 0.5，纯度 Tr ρ² = 0.625）：对比度仍是 V = 0.5，能读出的可辨度只剩 D = 0.43，点落进圆内，沿品红的虚弧走：D² + V² = 0.44 < 1。', 'A noisy marker (pure-state weight λ = 0.5, purity Tr ρ² = 0.625): the contrast is still V = 0.5, but only D = 0.43 of distinguishability can be read; the point falls inside the circle and moves along the dashed magenta arc: D² + V² = 0.44 < 1.']
   };
   let booting = true;
@@ -292,10 +302,10 @@
     const settled = TRV.still || (booting && !TRV.embed);
     if (settled) {
       // a still and the opening view of the full page show the telling frame: every hit in, the marker already read
-      setReader(p.reader, false); if (splitTween) splitTween.cancel(); S.split = p.reader === 'none' ? 0 : 1; clock.set(NMAX);
+      stopSequence(); setReader(p.then || p.reader, false); if (splitTween) splitTween.cancel(); S.split = p.reader === 'none' ? 0 : 1; clock.set(NMAX);
       return;
     }
-    setReader(p.reader, p.late);
+    stopSequence(); setReader(p.reader, p.late); S.then = p.then || null;
     clock.set(0);
     if (booting) kit.autoplay(clock, $('stage')); else clock.play();
   }
@@ -308,7 +318,7 @@
   window.SLIT_DEBUG = {
     get state() {
       const V = contrast(), D = disting(), n = shown();
-      return { alpha: S.alpha, lambda: S.lambda, reader: S.reader, hold: S.hold, split: S.split, t: clock.t, n, max: clock.max, playing: clock.playing, preset: cards.current,
+      return { alpha: S.alpha, lambda: S.lambda, reader: S.reader, then: S.then, hold: S.hold, split: S.split, t: clock.t, n, max: clock.max, playing: clock.playing, preset: cards.current,
         V, D, sum: V * V + D * D, mass: V * V / 2, counted: counted(n), basis: basis() };
     },
     /** The hits on the screen now: positions, and the row each one is sorted into (null while the marker is unread). */
