@@ -95,3 +95,20 @@ C5/C6 是 **PR119** 的共享 optimum/sample/mincut 家族：正文最大可达�
 私有证据根 `/tmp/qg-bridge-caption-134fc10-20261112`：入口 `producer-inputs.json`、`preservation.json`、`claim-reasoning.json`、`frozen-and-published-binding.json`、`build-results.json`、`exports-reader.json`、`output-binding.json`、`epubcheck.json`、`browser-reader.json`、`verification-history.json` 和最终 `handoff.json`。本节是实施证据，非独立批准。调用方仍欠本次受影响修复的强制三席复审，原 #119 R3、#134/#139/#141 initial R1 及其余既有 #114 R5／#118 R4／#130 R2 义务不变；组合、提交／推送、现有 #157、CI、合入和 Pages 全由调用方负责。原 35 范围、历史 9/35 和新增 31–39 仅为出版依赖的边界不变。
 
 输出边界补充：上文未重画的“封面静帧”指实验室缩略图；书籍封面 PNG 随既有 EPUB／站点导出正常生成，属于本次实际输出链，未更改封面源码。
+
+
+## 4b0c20e 的桥图语义家族最小消费者修复 · 2026-11-12
+
+本次依据已结案的 18 组语义映射，仅修复余下两个已确认消费者：中英 ch30 第 425 行 bridge 卡图注的最后一句，以及 `local-viz-cards` 第 33 行总表中的桥图分句。单次有限修复 **1/1 已使用、remaining 0**；旧图注／调查／来源 final 额度保持已用尽，不设或重置全局额度。输入干净 HEAD `4b0c20eedd25f4320d4a7b9db49a9212f6564f86`，书 0.1.0-beta.1、官方模板 0.5.2、pin `6cfcf785096782b15084d719ec73c2ca16b6ed29/dev`、457 条锁声明保持。
+
+中文先改、英文自然同步。固定 `(2,3,2,3)`、draw0、秩 6 的全部原说明及标题保留；泛化句现在以“最大可达秩”为主语，明确通过既有 `thm-bridge-quantum-maxflow-mincut`（定理 19.6）绑定完整自然数／正性／排序／两条二次锥假设，并说明单次抽样的秩可能更低。总表只描述单次抽样流矩阵的秩与四道割比较，不再无条件声称饱和。正确生产器、完整图注 461、指南 109、正式盒／证明、稳定 ID/GID、题记、作者其余措辞及媒体顺序均逐字节保留；冻结三项 `QMinCut` 与手工第四割的归属未改。
+
+与结案调查作当前对应：17 个指定 blob/SHA256 及 `theme/viz`、`tools/tbook`、`tools/node` 三树相符，锁与精确 pin 保持。只在此闭包内复用历史 132/132、1296 控制组合及未变静帧，不冒称本轮重跑。现有普通证据 `(1,1,1,1)` draw4 秩 0／最优 1、NARROW draw0／draw10 秩 3／2、锥外 `(1,1,1,5)` 的 `bc=1`、无排序 `(5,1,5,1)` 冻结 5／全图割 3 均与新句相容。18 行映射逐项登记：只闭合 M04/F1 与 M15/F2 的本次缺陷，其余依据精确保留复用；drawer、slides、coda 与假设必要性措辞仍按原分类保留为 advisory。无未来所有匿名副本不存在的主张，无新增原 35 覆盖或新定理。
+
+最终三源补丁通过 `./tbook check` **0 错误／0 警告**、已有 `quick_validate.py skills/local-viz-cards`、差异空白及完整追踪保全检查。两账本输入前缀原样保留，最终五路径 before/after SHA256 与全部追踪路径保全清单另存。没有新措辞测试、整套工具测试或媒体实施。直接调用仓库现有 HTML／Pandoc 生产器及窄范围 HTML／下载发布步骤，避免总构建重画静态图或重建文稿。首轮新引用在实物输出中出现重复“定理”标签，已在获准句内精简并重新构建最终八单元；中间产物收据单独保留，不作为最终验收。
+
+当前双语 HTML、四份默认 screen/print PDF、两份 EPUB 均从最终补丁生成；六下载与站点副本逐字节一致，两份额外 EPUBCheck 均 valid、0 错误／0 警告。现有 `tbook serve` 子路径上实际查看 HTML／提取的真实 EPUB ch040 各两语 × 1440/390 × 深浅偏好，共 16 当前视图；425 改句、定理链接及固定实例可读，图注自身无溢出，无页面错误／失败资源。四 PDF 实际图注物理页 zh screen 629、zh print 658、en screen 651、en print 675 已渲染查看，均无 LastResort；整书页数 888／928／940／972，默认中文每版仍 28 页、英文每版仍 27 页使用 LastResort。环境记录项目 Python 3.12.13、原生 Pandoc 3.9、mdBook 0.5.4、Node 25.8.1、Typst 包 0.15.2／creator 0.15.1、EPUBCheck 5.3.0，11 缓存字体与 453 字体族及默认系统字体启用；不声称等同旧 CI 或受控字体环境。
+
+保留实际限制：EPUB ch30 在 390px 整章仍溢出中文 179px／英文 296px，深色偏好仍呈纸面；未在原生 Apple Books 验收，未作全书内容／版式批准。文稿与影片本轮均未重建或新验收，沿用既有文稿 preload／Wake Lock／手机固定画布、已知 UI、整片／音频／字幕及历史实施路线 ASSUMED-UNVERIFIED 的边界；未听音频、未连续观看影片。外部已结案影片能力指针未用于本次组装或扩大接受。本轮站点仍为每语八影片海报回退。全部自有服务及检查进程在终态交付前结束。
+
+证据根：`/tmp/qg-template-v051-sync-evidence/bridge-consumer-class-repair-20261112`，入口 `current-correspondence.json`、`semantic-map-correspondence.json`、`build-inputs.json`、`build-results.json`、`output-binding.json`、`caption-reader.json`、`pdf-reader.json`、`epubcheck.json`、`preservation.json` 与 `collected-result.json`。这是有限实施与当前输出证据，不是独立批准或家族外覆盖。强制受影响三席复审、所有原来源审查债务及 #157、Git/GitHub、CI／合入／Pages 仍归调用方；本轮未启动任何席位或生命周期操作，原 35 范围、历史 9/35 与新增 31–39 仅为出版依赖的边界不变。
