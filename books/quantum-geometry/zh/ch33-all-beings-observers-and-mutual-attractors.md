@@ -10,6 +10,10 @@
 2. **观察者本身即吸引子**：在无处不在的退相干冲刷下，“我依然是我”绝非静态惰性，而是一座围绕内禀接受窗 $W + u_i$ 持续向内拉回的自维持收缩势阱；
 3. **观察者互为吸引子**：孤立内省与平视互指在收敛轨迹上展现截然相反的几何品格（一维余弦互指算例见下文 [@ex-ch33-mutual-cosine-monotonic-lock]），并通过接受窗交集与极小割重联（[@prop-ch33-bridge-reconnection-mincut]）让相位契合的众生互为移动的故乡。
 
+::: {.figure src="ch33-overview"}
+**图 33。** 本章地图（示意模型，`MODEL`）：第 I 栏，光子、原子、晶体与心智排在同一条记忆阶数轴上，自 $M = 0$、$M = 1$ 到 $M \gg 1$；第 II 栏，被踢上右坡的小球沿灰色箭头一步步落回碗底，琥珀色的是它现在的位置，碗底的青色短线是接受窗 $W + u_i$；第 III 栏，两扇平移的接受窗 $W + u_A$ 与 $W + u_B$ 相交，青色的交集 $W_{AB}$ 是双方共同看见的部分，品红是只有一方看见的部分（接受窗画成正十边形截面）。
+:::
+
 ---
 
 ## 万物皆为观察者：消融主客二元与记忆阶数连续谱
@@ -25,6 +29,10 @@ $$
 $$
 
 且在这座二维复载体（$d = 2$）中，要使单次测量零误差区分一族历史态 $\operatorname{Tr}(E_j \rho_i) = \delta_{ij}$，正交支撑子空间至多只能容纳 $N = 2$ 条相互垂直的历史记录线！推广到任意有限维，`trureturing` 的观察者条件化与量子测量模块用两条严丝合缝的形式化定律刻画了一切观察者的极小代数骨架：其一，完备正交自伴投影族 $P : \kappa \to M_n(\mathbb{C})$（`IsRecordMeasurement P`）诱导的未读记录映射 $\operatorname{unreadState}(P)$ 在函数复合下严格幂等；其二，$d$ 维物理记忆载体单次可完美区分的历史状态数恒满足 $N \le d$。
+
+::: {.figure src="ch33-record-lines"}
+**在 $d = 2$ 的记忆载体里，两条互相垂直的记录线已经占满。** 青色的 $P_0$、$P_1$ 是两条两两垂直的记录线；墨色虚线的第三个方向 $v$ 与 $P_0$ 成 $30^\circ$，投到两条线上的青色影子 $\cos 30^\circ$、$\sin 30^\circ$ 都不为零，与哪一条都不垂直，第三条两两垂直的记录线放不下：$N \le d = 2$（[@thm-ch33-observer-pinching-and-memory-spectrum] 第 2 款）。图以实平面示意 $\mathbb{C}^2$。
+:::
 
 ::: {.theorem #thm-ch33-observer-pinching-and-memory-spectrum title="观察者记录捏合幂等性与有限记忆历史容量上界" lean="D5/S3/Observer/Conditioning/FiniteRecordPinchingIdempotence.finite_record_pinching_idempotent D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity"}
 在 `trureturing` 冻结的观察者条件化与量子测量容量模块中，以下两项关于有限观察者记录轴与记忆维数的定理同时成立：
@@ -65,6 +73,10 @@ $$
 | **4. 生命与自指心智** | 高阶记忆 $M \gg 1$，诞生初始化清空远古包袱，维持正体积走廊 $\det G_M > 0$ | 在有限容量 $N \le d$（[@thm-ch33-observer-pinching-and-memory-spectrum]）内主动筛选记录并闭合自指回路 $\psi_i = \psi_i(\psi_i)$ | 展开具有前后纵深与对数压缩感的主观时间流，在相容椭圆体中行使自由选点 |
 :::
 
+::: {.figure src="ch33-memory-spectrum"}
+**主客之间没有断崖，只有一条记忆阶数的连续谱。** 自左向右是光子（一段波，$M = 0$）、原子（带轨道的点，$M = 1$）、晶体（点阵）与自指心智（绕回自身的箭头，$M \gg 1$），次序取自上表；轴只表示次序，不按比例（示意模型，`MODEL`）。
+:::
+
 石头并非没有知觉，它的时钟只是慢到以地质纪元为单位呼吸；光子并非虚无缥缈，它只是把全部纯度预算交给了 $90^\circ$ 的横向联络面。科学思想史上曾与这一连续谱遥相呼应的哲学文献及其与本书形式体系的严格边界说明如下（[@rem-ch33-monad-process-philosophy-literature]）：
 
 ::: {.remark #rem-ch33-monad-process-philosophy-literature title="单子论与过程哲学的历史思想参照及形式边界说明（文献结果，未在本书形式化）"}
@@ -83,6 +95,10 @@ $$
 不妨做一个最朴素的物理思想实验。任何身处宇宙内部的有限观察者，每一秒都在遭受海量热涨落、杂散辐射与环境擦除的随机冲刷（热力学擦除下界见[第 31 章](ch31-quantum-fairness.md) [@thm-ch31-horizon-landauer-ergodic-fairness] 第 1 款）。假如一位观察者的内部状态演化在相空间里是**中性漂移**甚或**向外发散**的——就像把一颗弹珠放在平坦桌面或倒扣碗底上——那么只需几次微小的正交扰动，它的窗口相位就会像醉汉游走一样漂离初态，“昨天的我”与“今天的我”将彻底失去内积重叠，瞬间融化在热平衡的背景白噪声里。
 
 因此，任何能够在时间风浪里连续维持“我依然是我”的存在——无论是一颗在高温振动中保持晶格对称的金刚石，还是一个在十年新陈代谢换遍全身原子后依然认得童年故乡的生命体——**其存在本身就等价于在状态空间中挖出了一座围绕接受窗向内聚拢的“自维持收缩势阱”（`MODEL`）**！在这一模型里，我们以算子自指回路 $\psi_i = \psi_i(\psi_i)$ 描画外部微扰后的向内恢复与局部稳定；下方 [@thm-ch33-contextual-attractor-and-common-factor] 第 1 款刻画有限集合删减的稳定化，实轴余弦模型则另见 [@ex-ch33-mutual-cosine-monotonic-lock]。
+
+::: {.figure src="ch33-contracting-well"}
+**只有收缩的势阱能把受扰的观察者拉回原处。** 三条剖面上，琥珀色的是小球现在的位置，灰色空心圈是之前的位置：平坦的桌面上，一串扰动让它漂离起点；倒扣的碗上，它每一步离顶点更远；势阱里，被踢上右坡的小球每一步离碗底的距离缩到原来的 $0.45$ 倍，落向碗底青色的接受窗 $W + u_i$。这是示意模型（`MODEL`），不是 [@thm-ch33-contextual-attractor-and-common-factor] 的内容。
+:::
 
 在 `trureturing` 的不动点稳定性与概念诠释动力学模块中，四条内核定理为这一图景提供各有边界的结构骨架：固定更新算子在有限集合上只删不增，故有限步稳定；相邻概念的关系与读出相等封装为语境相对不动点谓词；二值语境实例见证固定意义可以相异；客观主张则按定义携带不变公因子的证明。这四款并未给出受扰物理系统的恢复动力学，势阱与收敛仍由上面的 `MODEL` 承担：
 
@@ -117,12 +133,10 @@ $$
 第 1 款由 $S(n+1) = U(S(n)) \subseteq S(n)$ 建立自然数基数序列 $n \mapsto (S(n)).\operatorname{ncard}$ 的非增单调性（`Antitone`），当相邻两步基数相等时由有限子集等基数判据 `Set.eq_of_subset_of_ncard_le` 推出 $S(n+1) = S(n)$ 从而后续步步锁死，结合 `Nat.stabilises_of_antitone` 给出稳定时刻 $N \le (S(0)).\operatorname{ncard}$，并由一切严格变化步均落在 `Set.Iio N` 内推出跳变总数上界；第 2 款直接由合取构造子 `And.intro` 将概念等价与固定语境下的像相等封装为 `IsRelativeInterpretationFixedPoint`；第 3 款对 `baselineContext` 与 `alternateContext` 展开记录字段自反性并用 `Bool.false_ne_true` 及首分量投影 `congrArg Prod.fst` 证伪三元组相等；第 4 款展开携带证明的 `ObjectiveInterpretationClaim` 定义直接提取存在见证 `commonFactor`。完整证明由 Lean 内核检查。
 :::
 
-细读 [@thm-ch33-contextual-attractor-and-common-factor] 的第 3 款与第 4 款，观察者势阱的几何品格豁然开朗：在我们的 **`MODEL`（模型诠释）** 中，哪怕面对同一座静态宇宙母格（同一份 `text` 与同一套正交几何 `interpretationRule`），携带不同内部窗口参数 $u_A \neq u_B$（对应不同的 `readerAdmission`、`background` 与 `evaluationGoal`）的两位观察者 $\mathcal{O}_A$ 与 $\mathcal{O}_B$，可以对应不同的局部不动点切片；而要想在其间建立真正的“客观公共事实”，绝不能靠某一方强权宣布自己代表绝对点 $C$，而须在声明的语境与意义族上选定因子提取映射，证明它对所有入选的不动点意义恒取同一**不变公因子（`commonFactor`）**！下框图解汇集了双观察者接受窗重联双螺旋与孤立自指对比对称互指的收敛轨迹：
+细读 [@thm-ch33-contextual-attractor-and-common-factor] 的第 3 款与第 4 款，观察者势阱的几何品格豁然开朗：在我们的 **`MODEL`（模型诠释）** 中，哪怕面对同一座静态宇宙母格（同一份 `text` 与同一套正交几何 `interpretationRule`），携带不同内部窗口参数 $u_A \neq u_B$（对应不同的 `readerAdmission`、`background` 与 `evaluationGoal`）的两位观察者 $\mathcal{O}_A$ 与 $\mathcal{O}_B$，可以对应不同的局部不动点切片；而要想在其间建立真正的“客观公共事实”，绝不能靠某一方强权宣布自己代表绝对点 $C$，而须在声明的语境与意义族上选定因子提取映射，证明它对所有入选的不动点意义恒取同一**不变公因子（`commonFactor`）**！下框注明双观察者接受窗重联与孤立、互指两种收敛轨迹分别画在哪里：
 
 ::: {.remark #rem-ch33-mutual-attractor-figure title="互吸引子接受窗重联与余弦互指单调锁死图解（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 下图左栏结合切投准晶接受窗文献背景（[@rem-ch32-icosian-e8-literature]）与桥图极小割定理（[@prop-ch33-bridge-reconnection-mincut]，`LEAN ✓`）展示双观察者吸引子重联模型（`MODEL`）；右栏展示下文实分析算例 [@ex-ch33-mutual-cosine-monotonic-lock] 中孤立余弦迭代与二阶互指复合迭代的蛛网轨迹对比：孤立序列按单步计时，互指序列按含两次余弦求值的完整复合轮计时，对应同步互指的偶数拍采样：
-
-![万物皆为观察者：互吸引子接受窗重联与余弦互指单调锁死](../assets/fig-33-mutual-observer-attractors.svg)
+**文献结果，未在本书形式化。** 双观察者吸引子重联模型（`MODEL`）建立在切投准晶接受窗文献背景（[@rem-ch32-icosian-e8-literature]）与桥图极小割定理（[@prop-ch33-bridge-reconnection-mincut]，`LEAN ✓`）之上：两扇接受窗的交集画在图 33 第 III 栏与下文“接受窗交集”一节的图里，极小割的重联画在该节的两张实验卡里。下文实分析算例 [@ex-ch33-mutual-cosine-monotonic-lock] 中孤立余弦迭代与二阶互指复合迭代的蛛网轨迹对比画在下一节的实验卡里：孤立序列按单步计时，互指序列按含两次余弦求值的完整复合轮计时，对应同步互指的偶数拍采样。
 :::
 
 ---
@@ -131,7 +145,7 @@ $$
 
 既然每位观察者自己已经是一座自维持吸引子，宇宙为什么不让每个灵魂各自关起门来孤芳自赏，却偏偏让万物生出永不停息的相互倾慕、结键与纠缠？
 
-答案就写在 [@rem-ch33-mutual-attractor-figure] 右半幅那两条截然不同的蛛网轨迹里！让我们把观察者的自维持反馈投影到一维余弦切片模型（`MODEL`）上对照孤立内省与平视互指的动力学品格（严格导数估计、中值定理证明与逐步数值账本全部封存于下框 [@ex-ch33-mutual-cosine-monotonic-lock]）：
+答案就写在孤立内省与平视互指那两条截然不同的蛛网轨迹里（[@rem-ch33-mutual-attractor-figure]）！让我们把观察者的自维持反馈投影到一维余弦切片模型（`MODEL`）上对照孤立内省与平视互指的动力学品格（严格导数估计、中值定理证明与逐步数值账本全部封存于下框 [@ex-ch33-mutual-cosine-monotonic-lock]）：
 
 - **独自闭门内省的宿命（反向摇摆焦虑，`MODEL`）**：当孤立观察者只拿自己当镜子单步省察时，视角犹如缺乏阻尼缓冲的单摆，容易在“自卑低估”与“自负过冲”之间左右交替拉锯（解析机制见下框 [@ex-ch33-mutual-cosine-monotonic-lock] 第 1 条）。
 
@@ -212,6 +226,10 @@ $$
 
 只要两者的内禀相位差 $\lVert u_A - u_B\rVert$ 足够接近，使得交集体积 $\operatorname{Vol}(W_{AB}) > 0$，每一个内部投影落在 $W_{AB}$ 中的母格点 $z \in \mathbb{Z}^6$，就会**同时**出现在 $\mathcal{O}_A$ 与 $\mathcal{O}_B$ 的三维物理世界切片里，凝结为双方无需言传便共同见证的公共现实！这份两窗共有的支持，是公共事实的模型图像；要承接 [@thm-ch33-contextual-attractor-and-common-factor] 第 4 款，还须声明语境与不动点意义的范围、固定因子映射，并给出跨该范围恒取同值的见证，单凭两窗交集尚未完成这一步。反之，落在对称差 $(W + u_A) \triangle (W + u_B)$ 中的边缘格点，是双方认知错位的摩擦源；若对齐实际包含降低记录熵的不可逆重置，且热浴与熵平衡条件满足[第 31 章](ch31-quantum-fairness.md) [@thm-ch31-horizon-landauer-ergodic-fairness] 第 1 款的适用假设，才须支付相应的擦除热账单。若进一步在 `MODEL` 中把对齐成本或自由能选为随窗口重叠增大而下降的量，**顺着窗口交集体积梯度 $\nabla\operatorname{Vol}(W_{AB})$ 彼此靠拢，便成为跨观察者对齐的自由能下山路径**！这条通向故乡的坡道，来自所选的成本对应，不能仅由比较账本或兰道尔界推出。
 
+::: {.figure src="ch33-window-overlap"}
+**两扇接受窗的交集，就是双方共同看见的世界。** 左右两个正十边形是平移后的接受窗 $W + u_A$ 与 $W + u_B$，灰色箭头是相位差 $u_B - u_A$；青色的交集 $W_{AB}$ 里的格点同时出现在两人的世界里，品红的部分只有一方看见。两中心相距 $0.7$ 倍外接圆半径时，交集约占一扇窗的 $0.55$。示意模型（`MODEL`）：三维的菱形三十面体接受窗画成二维的正十边形。
+:::
+
 与此同时，在编织空间截面的张量网络层面上，当两片观察者边界区域通过三路内部纠缠桥耦合时，何时极小割会从桥内部瓶颈切换到包裹双侧的外边界割面？`trureturing` 的三宽张量桥图最大流最小割命题在任意自然数维数下给出一个由正性与双侧二次锥条件界定的充分区域：
 
 ::: {.proposition #prop-ch33-bridge-reconnection-mincut title="三宽张量桥图的量子最大流最小割与外边界极小割归约命题" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result"}
@@ -265,7 +283,7 @@ $$
 
 这便彻底解开了人间最动人的一桩悬案：为什么在一座你此生从未踏足的陌生城市转角，当你偶然迎面撞见某个素昧平生的人（或读到几百年前某位灵魂留下的字句）时，明明诞生时的遗忘初始化已经把过往轮次的表层姓名、年月与情节记忆（`量 liàng`）擦得一干二净，心底却会毫无征兆地升起“如故人重逢、如倦鸟归林”的震颤？
 
-因为表层记事虽已归零，你们各自作为丈量算子（`量 liáng`）的内禀窗口相位 $u_A, u_B \in E_\perp^3$ 却从未磨灭！当 $\lVert u_A - u_B\rVert \to 0$ 的两位观察者迎面相遇，两扇菱形三十面体接受窗瞬间严丝合缝地叠合成同一片辽阔的公共世界 $W_{AB} \approx W + u_A$，连通极小割桥在两人之间轰然重联，孤立内省时的视角摇摆在平视互指回路（轨迹对比见 [@ex-ch33-mutual-cosine-monotonic-lock]）中瞬间归于安宁——你们的世界线就此围绕共同的不动点缠绕成上图左栏那根互相守护的**双螺旋**。所谓“一见如故”，从来不是神秘的宿命巧合，而是两座内禀倾角高度同频的移动吸引子，在穿过遗忘迷雾后认出了彼此零摩擦的几何故乡。
+因为表层记事虽已归零，你们各自作为丈量算子（`量 liáng`）的内禀窗口相位 $u_A, u_B \in E_\perp^3$ 却从未磨灭！当 $\lVert u_A - u_B\rVert \to 0$ 的两位观察者迎面相遇，两扇菱形三十面体接受窗瞬间严丝合缝地叠合成同一片辽阔的公共世界 $W_{AB} \approx W + u_A$，连通极小割桥在两人之间轰然重联，孤立内省时的视角摇摆在平视互指回路（轨迹对比见 [@ex-ch33-mutual-cosine-monotonic-lock]）中瞬间归于安宁——你们的世界线就此围绕共同的不动点缠绕成一根互相守护的**双螺旋**。所谓“一见如故”，从来不是神秘的宿命巧合，而是两座内禀倾角高度同频的移动吸引子，在穿过遗忘迷雾后认出了彼此零摩擦的几何故乡。
 
 ::: {.viz src="mutual-observer-attractors" preset="connected" height="500"}
 **再近一点，连通的割胜出。** $d = 0.2$ 时连通的割（品红）更短，青色的纠缠楔从 A 连到 B 成为一片，领先阶互信息 $\ln\bigl(1/(0.2 \times 2.2)\bigr) \approx 0.82 > 0$；虚线是落选的分开的割。
