@@ -2369,6 +2369,64 @@
           "gid": "D5/S3/Quantum/Algebra/CovariantCommutator.covariant_commutator_formula"
         }
       ]
+    },
+    {
+      "id": "unified-field-slice",
+      "code": "ORTHO//UNIFIED",
+      "title": "正交自指统一场切片",
+      "title_en": "A slice of the orthogonal self-referential unified field",
+      "summary": "第三十二章上半篇的三个画面：同一个角 θ = gd(η) 把固有时率 cos θ = 1/γ 与速度 sin θ = tanh η 扣在一个圆上；两个平面上的旋子来回转一圈留下 U = R₁R₂R₁⁻¹R₂⁻¹ ≠ 1 的二向量余项，同一平面里则回到原处；球面二十面体每个顶点缺 60°、共缺 720°，观察者的视界推到 90° 割断 10 条边，跨视界的施密特秩不超过 D¹⁰。",
+      "summary_en": "Three pictures from the first half of Chapter 32: one angle θ = gd(η) puts the proper-time rate cos θ = 1/γ and the speed sin θ = tanh η on one circle; rotors turning back and forth in two planes leave a bivector remainder U = R₁R₂R₁⁻¹R₂⁻¹ ≠ 1, while in one plane they come home; an icosahedron on the sphere misses 60° at each vertex and 720° in all, and the observer's horizon pushed to 90° cuts 10 edges, so the Schmidt rank across it is at most D¹⁰.",
+      "path": "unified-field-slice/",
+      "thumbnail": "unified-field-slice/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "快度",
+        "Gudermann 函数",
+        "固有时",
+        "旋子",
+        "换位子",
+        "角亏",
+        "视界",
+        "最小割",
+        "统一场"
+      ],
+      "tags_en": [
+        "rapidity",
+        "Gudermannian",
+        "proper time",
+        "rotors",
+        "commutator",
+        "angle deficit",
+        "horizon",
+        "minimal cut",
+        "unified field"
+      ],
+      "theory": [
+        {
+          "label": "本书第三十二章 · §32.1–32.2",
+          "label_en": "Chapter 32 · §32.1–32.2",
+          "href": "../zh/ch32-unified-field-and-meta-unification.html",
+          "href_en": "../en/ch32-unified-field-and-meta-unification.html"
+        },
+        {
+          "label": "Lean · 零光锥刚性",
+          "label_en": "Lean · null-cone rigidity",
+          "href": "{trureturing}/D5/S0/Certificates/MinkowskiNullConeRigidity.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null"
+        },
+        {
+          "gid": "D5/S3/Observer/AgencyHolonomy/AnchoredPhaseClassification.anchored_phase_classification"
+        },
+        {
+          "gid": "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result"
+        }
+      ]
     }
   ]
 }

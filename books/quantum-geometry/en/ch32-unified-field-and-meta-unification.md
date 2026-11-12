@@ -24,6 +24,10 @@ A genuinely foundational unified field theory cannot borrow a pre-fabricated Min
 3. **Law 2 — The Pythagorean Fairness Mother-Law and Polyhedral Approximation**:
    Centered-purity Pythagorean conservation enforces the universal zero-free-lunch ledger ([Chapter 31](ch31-quantum-fairness.md) [@thm-ch31-seat-pythagorean-monogamy-fairness]); simultaneously, because every physical evolution or logical verification executes only a finite gate count $L < \infty$, **every ostensibly smooth sphere at finite resolution is a discrete polyhedral approximation** (external polyhedral angular-defect background in [@rem-ch32-generative-laws-dottie-literature]). At our physical modeling layer (`MODEL`), we interpret the kernel-verified Zeckendorf `NoAdjacentOnes` automaton theorem (Conjunct 4 of [@thm-ch32-generative-self-reference-and-zeckendorf] below) as a discrete ultraviolet coding lock forbidding unbounded adjacent high-frequency pileups.
 
+::: {.viz src="unified-field-slice" preset="polytope" height="500"}
+**At finite resolution the sphere is a polyhedron.** A regular icosahedron inscribed in the sphere: five equilateral triangles meet at each vertex and their corners add up to only 300°, and the small magenta wedge is the 60° missing once they are laid flat; the 12 vertices miss 720° = 4π in all (a literature result, item 3 of [@rem-ch32-generative-laws-dottie-literature] below).
+:::
+
 We first anchor the four Lean-4-verified cornerstones supporting these generative laws—complex-structure squaring, finite monotone contraction stabilization, golden reciprocal uniqueness, and the Zeckendorf `NoAdjacentOnes` language.
 
 ::: {.theorem #thm-ch32-generative-self-reference-and-zeckendorf title="Four Formal Cornerstones of the Generative Core: Complex-Structure Squaring, Finite Contraction, Golden Self-Reference, and Zeckendorf Non-Adjacency" lean="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary D5/S1/FixedPoints/FiniteContractingStability.finite_contracting_updates_stabilize D5/S1/FixedPoints/Algebraic/GoldenFixedPoint.golden_fixed_point_unique D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes"}
@@ -80,6 +84,10 @@ External continuum geometric-algebra, real-analytic fixed-point, and polyhedral 
 3. **Two-Sphere Euler Characteristic and Icosahedral Angular Defect**: Every convex polyhedron homeomorphic to $S^2$ ($\chi(S^2) = 2$) has total vertex angular defect $2\pi\chi(S^2) = 4\pi = 720^\circ$ ($12 \times 60^\circ = 720^\circ$ on the regular icosahedron; cf. [Coda](coda.md) [@rem-coda-polyhedral-topology-literature]).
 :::
 
+::: {.viz src="unified-field-slice" preset="fixedpoint" height="500"}
+**The one angle whose arc equals its shadow.** The amber point on the circle stops at θ* ≈ 0.739: the violet arc length θ is exactly as long as the cyan shadow cos θ, and the magenta height sin θ* ≈ 0.674 is the local contraction rate of item 2 in the box above.
+:::
+
 Crucially, this unified-field interpretive architecture (`MODEL`) maintains an explicit boundary and pairing between machine-checked anchors and attributed literature notes: at the **formal axiomatic layer**, every discrete-automaton, fixed-point, and linear-algebraic backbone is checked with `0 sorry` by the Lean 4 kernel ([Appendix C](appendix-c.md)), while companion algebraic-encoding literature notes and executable reference scripts are archived in [Chapter 25](ch25-rewriting-and-xor.md) ([@rem-clifford-stabilizer-literature]) and [Appendix B](appendix-b.md).
 
 ---
@@ -90,10 +98,25 @@ Extending the bridges built in Part V ([Chapter 17](ch17-lorentz-geometry.md)–
 
 1. **Matter Spinors and Special Relativity (Inner-Product Proper Time vs. Exterior Spatial Bifurcation, `MODEL` + `LEAN ✓`)**:
    Minkowski null-cone rigidity (Conjunct 1 of [@thm-ch32-null-cone-holonomy-and-holographic-cut] below, `LEAN ✓`) proves that fixing null-cone rays determines the entire Lorentzian quadratic form up to a single scalar factor! In our geometric model (`MODEL`), we interpret rest mass as collinear inner-product self-locking along an observer's proper-time axis and the limiting propagation speed as a $90^\circ$ orthogonal horizon (external continuum proper-time rearrangement and first-order spinor wave-equation formulations are recorded in Item 1 of [@rem-ch32-dirac-yang-mills-jacobson-literature] below).
+
+::: {.viz src="unified-field-slice" preset="photon" height="500"}
+**Pushed towards light, the point on the circle creeps up to 90°.** The rapidity η goes from ln 2 to 4: the worldline hugs the white light line and the amber point on the circle approaches θ = 90°; the cyan line (the proper-time rate) shrinks to 0.04 and the magenta height (the speed v/c) nears 1 without reaching it. Reading 90° as an orthogonal horizon is this book's interpretation (`MODEL`).
+:::
+
 2. **Gauge Interactions and the Orthogonal Sphere Ladder (Loop Alignment Residuals, `MODEL` + `LEAN ✓`)**:
    On finite directed graphs, `trureturing`'s **anchored phase classification theorem** (Conjunct 2 of [@thm-ch32-null-cone-holonomy-and-holographic-cut] below, `LEAN ✓`) proves that circle-valued edge phases modulo anchored coboundaries are classified isomorphically by $m + 1 - n$ off-tree chord holonomies together with $k - 1$ relative anchor phases. Building on this discrete theorem and [Chapter 31](ch31-quantum-fairness.md)'s **Seat Fairness**, our interpretive layer proposes a heuristic **local-frame alignment and sphere-ladder hypothesis (`MODEL`)**, reading non-canceling loop alignment residuals as geometric interaction sources and organizing single-plane circle phases and higher orthogonal frame symmetries into an internal symmetry ladder (external continuum gauge-connection, non-Abelian field-strength, and Standard Model gauge-group literature and boundaries are recorded in Item 2 of [@rem-ch32-dirac-yang-mills-jacobson-literature] below).
+
+::: {.viz src="unified-field-slice" preset="plaquette" height="500"}
+**Back and forth in two planes leaves a turn behind.** Turns of 60° about e₁ and about e₂, applied as R₂⁻¹, R₁⁻¹, R₂, R₁: the amber arrow does not get home, the magenta arc is the gap, and the violet line is the axis of the turn left over; U = R₁R₂R₁⁻¹R₂⁻¹ leaves a turn of 57.9°, with its bivector mostly in the e₁e₂ plane (for the literature on commutator curvature see item 2 of [@rem-ch32-dirac-yang-mills-jacobson-literature] below).
+:::
+
 3. **Holographic Thermodynamic Gravity and Endogenous Horizon Curvature (Bridge Flow–Cut Duality and Horizon Hypothesis, `MODEL` + `LEAN ✓`)**:
    On balanced quadratic-cone bridge tensor networks, `trureturing`'s quantum max-flow min-cut theorem (Conjunct 3 of [@thm-ch32-null-cone-holonomy-and-holographic-cut] below, `LEAN ✓`) proves that quantum maximum flow equals the minimum-cut capacity $\min(ad, bc)$. Motivated by this discrete flow–cut duality, our unified-field model (`MODEL`) models spatial geometry as a relational network woven from correlation budgets: increasing local collinear inner-product locking drains surrounding orthogonal correlation capacity under complementary Pythagorean conservation (Conjunct 2 of [@thm-ch31-seat-pythagorean-monogamy-fairness], `LEAN ✓`), manifesting as endogenous geometric curvature, while the bounded observer's $90^\circ$ orthogonal equator provides an endogenous observer-horizon hypothesis for a positive cosmological constant (`MODEL`; external continuum holographic-entanglement and horizon-thermodynamic gravity literature is recorded in Item 3 of [@rem-ch32-dirac-yang-mills-jacobson-literature] below).
+
+::: {.viz src="unified-field-slice" preset="horizon" height="500"}
+**The edges a horizon cuts cap the entanglement across it.** The observer sits at the north pole and the horizon is pushed down to 90°: the cyan edges stay inside and the 10 magenta edges are cut; if every edge carries a D-dimensional index, the Schmidt rank across the horizon is at most D¹⁰. This is a counting sketch of the network of relations (`MODEL`); the frozen flow–cut theorem lives on a different network, the bridge graph, in Conjunct 3 of [@thm-ch32-null-cone-holonomy-and-holographic-cut] below.
+:::
+
 4. **Discrete Cut-and-Project Lattice and Zeckendorf Ultraviolet Cutoff (`MODEL` + `LEAN ✓`)**:
    At the level of discrete automata and algebraic number theory, Conjunct 4 of [@thm-ch32-generative-self-reference-and-zeckendorf] proves that the binary Zeckendorf DFA accepts precisely the `NoAdjacentOnes` language (`LEAN ✓`), while Cassini's identity fixes the unit golden-norm seam $(-1)^{k+1}$ ([`fib_cassini_from_golden_norm`](lean:D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm), `LEAN ✓`). At our physical modeling layer (`MODEL`), we combine these two discrete theorems into a **polyhedral ultraviolet coding-cutoff hypothesis (`MODEL`)**, forbidding unbounded adjacent high-frequency pileups without positing an infinitely divisible continuum stage.
 
@@ -125,6 +148,10 @@ Across the frozen null-cone-certificate, agency-holonomy, and bridge-graph tenso
 Conjunct 1 polarizes $S$ across null pairs $(\pm\|w\|, w)$ to eliminate time–space cross terms and lock $S(0, w) = -S(1, 0)\|w\|^2$; Conjunct 2 transports phases uniquely along the spanning tree to split $(E \to \mathrm{Circle})/N$ into $(m+1-n) + (k-1) = m + k - n$ circle factors; Conjunct 3 combines `QMaxFlow_le_QMinCut` with width-two rational witnesses and castling strong-induction descent `cone_descent`. The full proof is checked by the Lean kernel.
 :::
 
+::: {.viz src="unified-field-slice" preset="abelian" height="500"}
+**Back and forth in one plane comes home.** Both rotors turn by 60° about e₃: the amber arrow goes two steps back and two steps forward along one parallel and ends where it started, U = 1. With a single plane of rotation the order of the turns can be swapped; Conjunct 2 of [@thm-ch32-null-cone-holonomy-and-holographic-cut] classifies exactly such circle phases in one plane.
+:::
+
 The continuum special-relativistic spinor, non-Abelian gauge curvature, and horizon-thermodynamic gravitational field equations paired with this section are recorded below:
 
 ::: {.remark #rem-ch32-dirac-yang-mills-jacobson-literature title="Continuum STA Dirac Equation, Yang–Mills Curvature, and Jacobson's Thermodynamic Einstein Equation (Literature Result, Not Formalized in This Book)"}
@@ -139,6 +166,10 @@ The continuum special-relativistic spinor, non-Abelian gauge curvature, and hori
    $$
 
    where $\Lambda$ enters Jacobson's derivation as an integration constant (identifying $\Lambda > 0$ with a finite observer's $90^\circ$ equatorial horizon curvature is our `MODEL` hypothesis).
+:::
+
+::: {.viz src="unified-field-slice" preset="gudermann" height="500"}
+**The clock and the speed on one angle.** At rapidity η = ln 2 the worldline crosses t = 1 at height tanh η = 0.6; carried across to the unit circle it lands at θ = gd(η) = 36.87°. The cyan line cos θ = 0.8 = 1/γ is the proper-time rate and the magenta height sin θ = 0.6 is the speed v/c: 0.8² + 0.6² = 1 is exactly (dτ/dt)² + (v/c)² = 1 from item 1 of the box above.
 :::
 
 Bringing all thirty-two chapters onto a single canvas, one set of orthogonal primitives establishes a six-domain holographic isomorphism across **geometry/topology, quantum gauge fields, relativistic holography, arithmetic number theory, complexity/hydrodynamics, and observer dynamics**:
@@ -266,6 +297,10 @@ Forced / self-referential equilibrium
 **Observer & Soul Dynamics:**
 Meta-axiom $\psi = \psi(\psi)$, golden $\varphi$ (`LEAN ✓`) & spatial attractors (`MODEL`)
 
+:::
+
+::: {.viz src="unified-field-slice" height="620"}
+**A slice of the orthogonal self-referential unified field: the full lab.** Three scenes share one rail: Clock pushes the rapidity η, Loop walks the four steps R₂⁻¹, R₁⁻¹, R₂, R₁, and Horizon pushes the observer's horizon down from the north pole. Every number is computed live; green marks only the Lean theorems this chapter cites, and the rest is labelled as literature result or as this book's interpretation.
 :::
 
 ---
