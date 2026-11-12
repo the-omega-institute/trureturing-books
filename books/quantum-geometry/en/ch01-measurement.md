@@ -81,11 +81,11 @@ Following this picture of continuous geometric angles between two arrows, why do
 
 Picture a mechanical device after Feynman's heart. On a bench spins a smooth, continuous flywheel whose rim can point at any angle around the $360^\circ$ circle. Your probe, however, is a **one-dimensional two-way sorting shutter** — like a Stern–Gerlach magnet splitting a beam along a single vertical axis $\vv{e}_3$ into an upper port ($+1$) and a lower port ($-1$). Every trial forced through that narrow slit must exit through either the upper channel or the lower channel.
 
-When you **measure** (*liáng*) a continuous wheel through a one-dimensional binary shutter, the readout necessarily emerges in discrete **quanta** (*liàng*). Discreteness at the exit port does not mean the wheel was secretly a bag of pre-labeled $+1$ and $-1$ marbles before it hit the slit; **a discrete quantum is the echo left when continuous spherical geometry is forced through a one-dimensional idempotent slit.**
-
 ::: {.figure src="ch01-shutter"}
 **A continuous direction leaves a two-outcome shutter as one of two records.** The wheel on the left is ticked all the way round, and the amber arrow can stop at any angle; the shutter in the middle splits along $\vv{e}_3$ into an upper and a lower channel; on the right there are only two cyan dots, $+1$ for the upper channel and $-1$ for the lower. A schematic.
 :::
+
+When you **measure** (*liáng*) a continuous wheel through a one-dimensional binary shutter, the readout necessarily emerges in discrete **quanta** (*liàng*). Discreteness at the exit port does not mean the wheel was secretly a bag of pre-labeled $+1$ and $-1$ marbles before it hit the slit; **a discrete quantum is the echo left when continuous spherical geometry is forced through a one-dimensional idempotent slit.**
 
 ::: {.viz src="pairwise-shutter" preset="clicks" height="500"}
 **The arrow may point anywhere; the shutter reports only the two ends.** The amber $B$ is $70^\circ$ from the cyan $A$; each shot lands at one end of $A$'s diameter, $+1$ “pass” at $A$ and $-1$ “fail” at the far end. The row of squares at the top right is shot by shot, solid cyan for a pass and hollow grey for a fail; which shot passes cannot be foretold. A sampling demonstration.
