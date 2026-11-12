@@ -253,7 +253,7 @@ $$
 \end{aligned}
 $$
 
-This identifies the count exactly with the established orbit count starting at $x-u$, so the same $N_0$ for every starting point applies, still at times $1,\ldots,N$. The trajectory equality is a hypothesis the model must establish separately; it does not follow from the torus theorem and is not asserted for arbitrary physical or cut-and-project models. The window result alone neither classifies invariant measures nor establishes the stronger unique-ergodicity statement. Weyl's classical theory (1916, *Math. Ann.* **77**, 313–352) retains its separate literature setting. Physical fairness, internal space, and soul phases remain `MODEL` interpretations. This is the finite reuse derivation in the source exposition, with no new Lean theorem or novelty claim.
+This identifies the count exactly with the established orbit count starting at $x-u$, so the same $N_0$ for every starting point applies, still at times $1,\ldots,N$. The trajectory equality is a hypothesis the model must establish separately; it does not follow from the torus theorem and is not asserted for arbitrary physical or cut-and-project models. This paragraph does not separately state or formalize invariant-measure classification or unique ergodicity. Weyl's classical theory (1916, *Math. Ann.* **77**, 313–352) retains its separate literature setting. Physical fairness, internal space, and soul phases remain `MODEL` interpretations. This is the finite reuse derivation in the source exposition, with no new Lean theorem or novelty claim.
 :::
 
 ::: {.remark #rem-ch31-circular-window-discrepancy title="Finite-Step Error for Complementary-Width Circular Windows: A Mechanical-Word Application"}
