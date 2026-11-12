@@ -1,12 +1,13 @@
-"""一份纯度正交折成两翼：落在观察者之线上的 cos²θ 与撑在它外面的 sin²θ，加起来恰好是整份 1，没有第 3 点。
-One unit of purity folds orthogonally into two wings: cos²θ lying on the observer's line and sin²θ
-standing across it; together they are exactly the whole 1, with no third point.
+"""纯度预算正交折成两翼：落在观察者之线上的 cos²θ 与撑在它外面的 sin²θ，两份归一化份额加起来恰好是 1，没有第 3 点。
+The purity budget folds orthogonally into two wings: cos²θ lying on the observer's line and sin²θ
+standing across it; the two normalized shares add up to exactly 1, with no third point.
 
 The orthogonal self-folding of §39.4 (MODEL) drawn as Pythagoras: Ψ is a unit arrow at θ = 40° above
 the observer's line; the cyan square on the shadow cos θ has area cos²θ ≈ 0.59, the magenta square on
 the drop sin θ has area sin²θ ≈ 0.41, and the grey dashed square on Ψ has area 1; the identity
 cos²θ + sin²θ = 1 and the two areas are asserted. The zero-slack split of a purity budget into a
-visible part and an orthogonal residual is item 1 of the chapter's proposition.
+visible part and an orthogonal residual is item 1 of the chapter's proposition. The squares are the
+shares normalized by the centered purity budget B > 0; the actual masses are B cos²θ and B sin²θ.
 """
 
 import math
