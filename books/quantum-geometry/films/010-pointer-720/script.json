@@ -15,14 +15,14 @@
       ["Index zero, zero: every hop comes home. The address and what it holds are one number. p equals star p.", "索引 [0, 0]：每一跳都回到原处。地址与它存着的内容是同一个数：p = *p。"]
     ], "cues": [{"line": 3, "at": 2.2, "kind": "chime"}]},
     {"id": "diag", "name": "DIAGONAL", "lead": 0.5, "tail": 0.5, "music": [0.9, 0.8, 0.8, 0.5, 0.4], "lines": [
-      ["Why does this work? Take any table g and a map f. Read the diagonal and apply f: that is a new row.", "为什么行得通？任取一张表 g 和一个映射 f：沿对角线读下来再作用 f，得到新的一行。"],
+      ["Chapter thirty-eight reads this beside a theorem on tables. Take a table g and a map f; read the diagonal and apply f: a new row.", "第 38 章把它与一条关于表的定理并读：取一张表 g、一个映射 f，沿对角线读下来再作用 f，得到新的一行。"],
       ["If f moves every value, as flipping a bit does, the new row differs from row a at entry a. It escapes every table.", "若 f 处处挪动取值（比如翻转一个比特），新行在第 a 格就与第 a 行不同：它逃出每一张表。"],
       ["If instead some row a-nought is the diagonal, then the cell a-nought, a-nought is a fixed point of f.", "反过来，若某一行 a₀ 正是这条对角线，那么格子 (a₀, a₀) 就是 f 的不动点。"],
       ["Lean has checked both statements, for any types, finite or not.", "这两条都已由 Lean 内核检验，对任意类型成立，有限无限都一样。"]
     ], "cues": [{"line": 1, "at": 3.2, "kind": "impact"}, {"line": 3, "at": 0.8, "kind": "stamp"}]},
     {"id": "turn", "name": "HALF TURN", "lead": 0.5, "tail": 0.5, "music": [1.0, 0.8, 0.9, 0.6, 0.5], "lines": [
       ["One loop closes the table. Now turn a spinor through a full circle in a plane.", "一圈回环就合上了页表。现在让一个旋量在一个平面里转满一整圈。"],
-      ["The current J, made from psi and its reverse, comes all the way back. Psi itself has turned only half way: its sign is minus one.", "由 ψ 与其反序夹出的流向量 J 完整地转了回来；ψ 自己却只转了一半，符号成了 −1。"],
+      ["The vector J, made from psi and its reverse, comes all the way back. Psi itself has turned only half way: its sign is minus one.", "由 ψ 与其反序夹出的向量 J 完整地转了回来；ψ 自己却只转了一半，符号成了 −1。"],
       ["On the circle, squaring is a double cover. Lift one full turn from one, and the only continuous lift ends at minus one.", "在圆周上，平方映射是双覆叠。从 1 出发提升绕一整圈，唯一的连续提升停在 −1。"],
       ["A second turn, seven hundred and twenty degrees in all, brings it home to plus one.", "再转一圈，合计 720°，它才回到 +1。"]
     ], "cues": [{"line": 2, "at": 3.4, "kind": "chime"}]},

@@ -7,12 +7,13 @@
               P[0] = 0x1000 (its own address), P[i] = addr T_i, T_1[j] = 0x7000 + 0x1000 j. The walk
               Walk(b, [i₁, …, i_L]) = Walk(Mem[b][i₁], [i₂, …]) is computed here; the paging scheme itself is a
               literature result (rem-ch38-x86-recursive-page-table-literature), so the scene is badged NUM.
-     DIAG     the diagonal d(f, g)(a) = f(g(a, a)) on a 4 × 4 table of values in Z/4 (computed here), and the two
+     DIAG     (read beside the self-address loop, which meets the first theorem only when a whole row captures the
+              diagonal, as chapter 38 says) the diagonal d(f, g)(a) = f(g(a, a)) on a 4 × 4 table of values in Z/4 (computed here), and the two
               Lean theorems of chapter 38 (thm-ch38-self-mapped-diagonal-fixed-point, also cited in chapter 39):
                 EscapeCount.diagonal_landing_fixed:          g a₀ = diagonal f g  →  f (g a₀ a₀) = g a₀ a₀
                 QualitativeEscape.self_application_fragment_package: if f has no fixed point, diagonal f h ∉ range h
                   for every table h (no finiteness assumed).
-     TURN     the rotor R(ϑ) = cos(ϑ/2) − sin(ϑ/2) e₂e₃ and the current J = R e₃ R̃ = cos ϑ e₃ − sin ϑ e₂
+     TURN     the rotor R(ϑ) = cos(ϑ/2) − sin(ϑ/2) e₂e₃ and the Euclidean vector J = R e₃ R̃ = cos ϑ e₃ − sin ϑ e₂
               (ex-ch39-even-clifford-spinor-bilinear-fierz: literature, badged ARGUED), recomputed here with a small
               Clifford algebra Cl(3, 0); then the squaring double cover of the circle and its lift w = e^{iϑ/2}
               (CircleDoubleCoverHistoryLift.circle_double_cover_history_lift: the lift of the full turn from 1 is
@@ -535,7 +536,7 @@ SCENES.turn = S => {
   txt('J', jx + 16, jy - 10, { size: 34, fam: F.math, w: 700, c: C.cyan, a });
   txt('J = ψ e₃ ψ̃ = cos ϑ e₃ − sin ϑ e₂', cx, cy + R + 80, { size: 24, fam: F.math, w: 700, align: 'center', c: C.cyan, a });
   ptTag(120, 228, 'LITERATURE · 文献结果', a);
-  ptTag(120, 278, 'MODEL · 模型诠释', a * (1 - Q(S, 1, 'The current J', 0.5)));
+  ptTag(120, 278, 'MODEL · 模型诠释', a * (1 - Q(S, 1, 'The vector J', 0.5)));
 
   /* right: the cover */
   ptCoverDraw(a * Q(S, 0, 'turn a spinor', 0.8), th);
