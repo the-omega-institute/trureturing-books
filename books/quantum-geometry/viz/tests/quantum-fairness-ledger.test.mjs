@@ -11,7 +11,8 @@
 //   ergodic  the orbit recounted through h(x) = cos 2π(x − c) > cos π(2 − φ), and the closed form of the discrepancy
 //            {(T + 1)α + u'} − {α + u'} (Hecke–Kesten for an interval of length 1 − α), run to T = 10⁵
 // Accuracy regressions: the finite seeded cap count is not axis-invariant and the centroid is not monotone in N (the
-// exact invariant is the Haar measure, said apart from the sample); the gain note at r = 0 has no direction and uses
+// exact invariant is the Haar measure, said apart from the sample; the HAAR note stays short enough to leave the ball
+// ≥ 220 px in a 315 × 500 phone frame); the gain note at r = 0 has no direction and uses
 // exact words only at 0°, 90° and 180°, shares of r² elsewhere, in both languages; the random comparison is drawn point
 // for point, untruncated (read by wrapping kit.plot for plotB); every green box carries only its frozen statement and the
 // hand applications sit next to it in NUM boxes, side panel and drawer alike.
@@ -95,6 +96,7 @@ const texts = (ids) => page.evaluate((list) => Object.fromEntries(list.map((i) =
 
 let s = await state();
 check('opens on HAAR in the seat scene with all 600 points', s.preset === 'haar' && s.scene === 'seat' && s.n === 600 && !s.playing);
+{ const hn = await page.textContent('#presetNote'); check('HAAR note marks the uniform measure as a literature result', /哈尔测度）?，?文献结果/.test(hn), hn); }
 
 // The green boxes, side panel and drawer alike: each carries only its frozen statement; the hand application of it
 // sits in the NUM box right after it, cites the declaration by name only, and never links it as verified.
@@ -218,6 +220,30 @@ check('opens on HAAR in the seat scene with all 600 points', s.preset === 'haar'
     JSON.stringify(s.psi));
 }
 
+// HAAR cited in a chapter on a phone (a 315 × 500 iframe): the card's note shares the frame with the ball, so it must stay
+// short enough to leave the stage ≥ 220 px tall, still say every idea of the card, and never scroll inside the frame.
+for (const lg of ['zh', 'en']) {
+  const fp = await T.open(BOOK, ID, `?embed=1&lang=${lg}&preset=haar`, { viewport: { width: 315, height: 500 }, locale: lg === 'zh' ? 'zh-CN' : 'en-US', reducedMotion: 'reduce' });
+  await settle(fp, 300); await fp.evaluate(() => window.FAIRNESS_DEBUG.seek(600)); await settle(fp, 200);
+  const g = await fp.evaluate(() => {
+    const st = document.getElementById('stage').getBoundingClientRect(), tour = document.querySelector('.tour').getBoundingClientRect(), what = document.querySelector('.tour .what');
+    const inner = [...document.querySelectorAll('body *')].filter((e) => /(auto|scroll)/.test(getComputedStyle(e).overflowY) && e.scrollHeight > e.clientHeight + 1).map((e) => e.id || e.className);
+    const de = document.documentElement;
+    return { h: st.height, top: st.top, bottom: st.bottom, tourBottom: tour.bottom, vh: innerHeight, docScroll: de.scrollHeight - de.clientHeight, bodyScroll: document.body.scrollHeight - document.body.clientHeight,
+      clipped: what.scrollHeight - what.clientHeight, inner, note: what.textContent, preset: window.FAIRNESS_DEBUG.state.preset };
+  });
+  const ideas = lg === 'zh'
+    ? [/哈尔测度）?，?文献结果/, '未在本书形式化', '恰占四分之一', '固定种子', '接近四分之一', '青色的影子一样长', 'ψ 量 φ', 'φ 量 ψ']
+    : ['Haar measure', 'literature result', 'not formalized in this book', 'exactly a quarter', 'fixed-seed', 'close to a quarter', 'cyan shadows are equal', 'ψ measuring φ', 'φ measuring ψ'];
+  const lost = ideas.filter((w) => (w instanceof RegExp ? !w.test(g.note) : !g.note.includes(w))).map(String);
+  check(`HAAR cited in a 315 × 500 phone frame (${lg}): the stage stays ≥ 220 px tall and inside the frame`, g.preset === 'haar' && g.h >= 220 && g.top >= 0 && g.bottom <= g.tourBottom && g.tourBottom <= g.vh + 1,
+    JSON.stringify({ h: Math.round(g.h), top: Math.round(g.top), tourBottom: Math.round(g.tourBottom), vh: g.vh }));
+  check(`HAAR cited in a 315 × 500 phone frame (${lg}): the note keeps the Haar attribution, the exact quarter, the finite count and reciprocity`, lost.length === 0, lost.join(' / '));
+  check(`HAAR cited in a 315 × 500 phone frame (${lg}): nothing scrolls inside the frame`, g.docScroll <= 0 && g.bodyScroll <= 0 && g.clipped <= 1 && g.inner.length === 0,
+    JSON.stringify({ doc: g.docScroll, body: g.bodyScroll, clipped: g.clipped, inner: g.inner.slice(0, 3) }));
+  await fp.context().close();
+}
+
 // GAIN
 {
   s = await scene(2);
@@ -332,6 +358,22 @@ check('opens on HAAR in the seat scene with all 600 points', s.preset === 'haar'
   check('CLONING plays by itself', await until(page, () => { const d = window.FAIRNESS_DEBUG.state; return d.playing && d.t > 0; }));
   s = await seek(4);
   check('CLONING at M = 5: η = 7/15 and F = 11/15', s.M === 5 && close(s.eta, 7 / 15, 1e-12) && close(s.F, 11 / 15, 1e-12) && (await page.textContent('#roKey')).includes('0.7333'));
+  const cn = await page.textContent('#presetNote');
+  check('CLONING note: the universal cloner is a literature result, and the exactly copied pair needs another machine', cn.includes('文献结果') && cn.includes('另一台') && !cn.includes('同一台'), cn);
+}
+
+// no ASCII underscore subscripts in what the reader sees (τ_AB, r_A, ρ_A are written with real subscripts)
+{
+  await pick('wstate'); await settle(page);
+  const seen = await page.evaluate(() => document.body.innerText);
+  check('the bonds scene shows no raw underscore subscripts', !/[τrρ]_[A-Za-zψφ(]/.test(seen), (seen.match(/.{0,12}[τrρ]_.{0,12}/) || [''])[0]);
+  // every evidence box (side panel and drawer) and the drawer list, both languages, hidden scenes included: P_k, σ_z,
+  // Σ_l, p_l(j), r_A, r_ψ are real subscripts too; only the Lean names inside <code> keep their underscores
+  const raw = await page.$$eval('.lean, #drawer ol li', (els) => els.flatMap((el) => {
+    const c = el.cloneNode(true); c.querySelectorAll('code').forEach((x) => x.remove());
+    return c.textContent.match(/.{0,10}[A-Za-zΣσρτψφ]_[A-Za-zψφ(0-9].{0,8}/g) || [];
+  }));
+  check('no evidence box or drawer item carries a raw underscore subscript outside the Lean names, in either language', raw.length === 0, raw.slice(0, 3).join(' | '));
 }
 
 // ERGODIC

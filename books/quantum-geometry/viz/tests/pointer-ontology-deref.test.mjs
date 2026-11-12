@@ -148,12 +148,23 @@ check('Walk_L(b₀, [0, …, 0]) = b₀ for L = 1 … 6 (each leading 0 keeps th
 
 await pick('diagonal_hit'); s = await seekEnd();
 check('p = *p: one hop, Mem[0x1000][0] = 0x1000, the result is the address itself', s.scene === 'table' && s.idx.length === 1 && s.result === CH.b0 && s.hops.length === 1 && s.hops[0].base === s.hops[0].value);
+// the register beside the table: p and *p side by side, and an ordinary pointer for contrast (T₁[0] from the chapter's
+// definition Tᵢ[j] = addr(Dᵢ,ⱼ) = 0x1000·(4i + j + 3), i.e. 0x7000), each pair looked up here in the page's memory
+const regWant = [[CH.b0, mem[CH.b0][0]], [CH.T1, 0x1000 * (4 * 1 + 0 + 3)]];
+check('p = *p: the register shows p = 0x1000 = *p with “=”, and the ordinary pointer 0x2000 → 0x7000 with “≠”',
+  Array.isArray(s.register) && s.register.length === 2 && regWant[1][1] === mem[CH.T1][0]
+  && s.register.every((r, q) => r.p === regWant[q][0] && r.star === regWant[q][1] && r.sign === (regWant[q][0] === regWant[q][1] ? '=' : '≠')));
+check('table cards fold the routing tree away and keep a single amber “now”', !s.treeShown && s.amberMarks === 1);
 check('p = *p: the LEAN ✓ box of the table scene is shown', await page.evaluate(() => !document.querySelector('.lean[data-scenes="table"]').hidden));
 await pick('self_map'); s = await seekEnd();
+check('[0, 1] at the end: no tree, exactly one amber mark', !s.treeShown && s.amberMarks === 1);
 check('[0, 1]: two hops, the leaf table T₁ (0x2000) is read out', s.hops.length === 2 && s.hops[0].value === CH.b0 && s.result === CH.T1);
 s = await seek(1);
 check('[0, 1]: after one hop the walk is back at 0x1000 and no result yet', s.hops.length === 1 && s.hops[0].value === CH.b0 && s.result === null);
-await pick('four_loops'); s = await seekEnd();
+await pick('four_loops'); s = await seek(2);
+check('[0, 0, 0, 0] mid-walk: no tree, exactly one amber mark (the slot being read)', !s.treeShown && s.amberMarks === 1 && s.register === null);
+s = await seekEnd();
+check('[0, 0, 0, 0] at the end: no tree, exactly one amber mark (P, the value read)', !s.treeShown && s.amberMarks === 1);
 check('[0, 0, 0, 0]: four hops, every one through slot 0, ends at 0x1000', s.hops.length === 4 && s.hops.every((h) => h.base === CH.b0 && h.slot === 0 && h.value === CH.b0) && s.result === CH.b0);
 await page.click('[data-idx="1,2"]'); s = await seekEnd();
 check('index chip [1, 2]: two ordinary hops reach the data frame 0x9000', s.scene === 'table' && s.result === CH.D12 && s.hops[0].value === CH.T1);

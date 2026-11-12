@@ -15,8 +15,10 @@
 
   /* ---------- model ---------- */
   const S = { ch: 'amp', p: 0.3, ratio: 2, rho0: [0, 0, -1], sig0: [1, 0, 0] };
-  /** Past T₂ = 2 T₁ the north-pole map keeps more sideways than √a and is no longer a channel (nor amplitude damping). */
-  const notChannel = () => S.ch === 'amp' && S.ratio > 2 + 1e-9;
+  /** One step of the amplitude family breaks the north-pole ball criterion: λ² > a for λ = a^(T₁/T₂), a = 1 − p.
+      For 0 < p < 1 this happens exactly when T₂ > 2 T₁; the map then is no channel (nor amplitude damping). At the
+      endpoints λ² = a for every ratio: p = 0 is the identity and p = 1 resets the whole ball to the north pole. */
+  const notChannel = () => { if (S.ch !== 'amp') return false; const m = whole(1); return m.lam * m.lam > m.a + 1e-12; };
   const chName = (c) => (c === 'amp' && notChannel() ? L('固定北极的仿射映射（不是信道）', 'A map fixing the north pole (not a channel)')
     : c === 'dephase' && S.p > 1 - 1e-12 ? L('捏合（完全去相干）', 'Pinching (complete dephasing)')
       : ({ dephase: L('相位阻尼', 'Phase damping'), amp: L('振幅阻尼', 'Amplitude damping'), depol: L('去极化', 'Depolarizing') })[c]);

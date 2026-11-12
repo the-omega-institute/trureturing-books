@@ -15,11 +15,11 @@ SIZE = (480, 330)
 ALT = {
     "zh": "一条青色的曲线 y = A(x) = 2x + 2 arcsin x，从原点升到 x = 1 处的 2 + π。曲线上标出一点 (θ*, π)。"
           "从横轴上的 θ* ≈ 0.739 竖直向上走到曲线、再水平向左走到纵轴，读出 π，这是级数 A 的方向；"
-          "反过来从纵轴上的 π 水平向右走到曲线、再向下走到横轴，读回 θ*，这是复合逆 B 的方向（品红虚线）。",
+          "反过来沿同一条路，从纵轴上的 π 水平向右走到这一点、再向下走到横轴，读回 θ*，这是复合逆 B 的方向（叠在青线上的品红细虚线）。",
     "en": "A cyan curve y = A(x) = 2x + 2 arcsin x rising from the origin to 2 + π at x = 1. One point on it is marked, "
           "(θ*, π). Going straight up from θ* ≈ 0.739 on the horizontal axis to the curve and then left to the vertical axis "
-          "reads off π: the direction of the series A. Going the other way, right from π on the vertical axis to the curve and "
-          "down to the horizontal axis, reads back θ*: the direction of the compositional inverse B (dashed magenta).",
+          "reads off π: the direction of the series A. Going back along the same path, right from π on the vertical axis to the point and "
+          "down to the horizontal axis, reads back θ*: the direction of the compositional inverse B (the thin dashed magenta line on top of the cyan).",
 }
 
 
@@ -41,10 +41,12 @@ def draw(fig):
     ax.text(1, A(1), "2 + π", dx=-10, dy=-2, size=14, color="line", anchor="end", middle=True)
 
     X, Y = ax.X(THETA), ax.Y(math.pi)
-    fig.arrow(X, ax.Y(0), X, Y + 6, "line", 1.8, head=8)
-    fig.arrow(X - 4, Y, ax.X(0) + 2, Y, "line", 1.8, head=8)
-    fig.line(ax.X(0), Y + 7, X, Y + 7, "area", 1.6, dash="5 3")
-    fig.arrow(X + 7, Y + 7, X + 7, ax.Y(0) - 2, "area", 1.6, head=8, dash="5 3")
+    # A and B run along the same two legs through the same point (θ*, π), in opposite directions:
+    # A (solid cyan) up from θ* and left to π; B (thinner dashed magenta, drawn on top) right from π and down to θ*
+    fig.arrow(X, ax.Y(0), X, Y + 6, "line", 2.8, head=9)
+    fig.arrow(X - 4, Y, ax.X(0) + 2, Y, "line", 2.8, head=9)
+    fig.arrow(ax.X(0) + 4, Y, X - 8, Y, "area", 1.3, head=7, dash="5 3")
+    fig.arrow(X, Y + 8, X, ax.Y(0) - 2, "area", 1.3, head=7, dash="5 3")
     fig.dot(X, Y, 5.2, "ink", ring="bg")
 
     fig.text(ax.X(0) - 8, Y, "π", size=15, color="ink", anchor="end", middle=True, weight=600)

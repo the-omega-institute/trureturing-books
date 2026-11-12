@@ -320,5 +320,400 @@ check('English Angle HUD preserves lowercase Greek θ* and φ⁻¹ (zero upperca
   JSON.stringify(hudTitles));
 await page.click('[data-lang-set="zh"]');
 
+/* ---------- legend and unit-bar marker against the geometry actually drawn on the stage canvas ----------
+   Every draw call on #cv is recorded during one repaint. The test then identifies, with its own arithmetic, which
+   curves (y = cos x, y = 1/(1 + x)), 90° guides (quarter arcs from (xⱼ, xⱼ) to (xⱼ₊₁, xⱼ₊₁) on its own 90-digit orbits),
+   fixed-point tangents (slope −sin θ* or −φ⁻²) and polar spirals (R = κ^{2φ/π}) are really there, and requires the legend
+   to name exactly those. The unit-bar marker is located from the drawn bar rectangles and compared with the exact
+   rational iterate. */
+await page.evaluate(() => {
+  const ctx = document.getElementById('cv').getContext('2d');
+  const R = window.__spiralsRec = { on: false, ops: [], path: [] };
+  const scratch = document.createElement('canvas').getContext('2d');
+  R.norm = (v) => { scratch.fillStyle = '#000'; scratch.fillStyle = v; return scratch.fillStyle; };
+  const hook = (name, fn) => {
+    const orig = ctx[name];
+    ctx[name] = function (...a) { if (R.on) fn.apply(this, a); return orig.apply(this, a); };
+  };
+  hook('beginPath', () => { R.path = []; });
+  hook('moveTo', (x, y) => R.path.push({ x, y, m: 1 }));
+  hook('lineTo', (x, y) => R.path.push({ x, y }));
+  hook('arc', (x, y, r) => R.path.push({ x, y, r, arc: 1 }));
+  hook('rect', (x, y, w, h) => R.path.push({ x, y, w, h, rect: 1 }));
+  hook('stroke', function () { R.ops.push({ op: 'stroke', style: this.strokeStyle, dash: this.getLineDash().length > 0, path: R.path.slice() }); });
+  hook('fill', function () { R.ops.push({ op: 'fill', style: this.fillStyle, path: R.path.slice() }); });
+  hook('fillRect', function (x, y, w, h) { R.ops.push({ op: 'fillRect', style: this.fillStyle, x, y, w, h }); });
+  hook('fillText', function (text, x, y) { R.ops.push({ op: 'text', text: String(text), style: this.fillStyle, align: this.textAlign, x, y, w: this.measureText(String(text)).width }); });
+});
+const capture = () => page.evaluate(() => {
+  const R = window.__spiralsRec, P = window.TRV.palette, cv = document.getElementById('cv').getBoundingClientRect();
+  R.ops = []; R.path = []; R.on = true;
+  window.TRV.kit.flush();
+  R.on = false;
+  const ops = R.ops, st = window.SPIRALS_DEBUG.state;
+  const col = {};
+  for (const [k, v] of Object.entries({ cy: P.cyan, mg: P.magenta, am: P.amber, vi: P.violet, dm: P.dim, ink: P.sigma })) col[k] = R.norm(v);
+  let frame = null;
+  if (st.scene !== 'angle') {
+    const p1 = window.SPIRALS_DEBUG.cobwebAt(0.5), p2 = window.SPIRALS_DEBUG.cobwebAt(0.9);
+    frame = { a: 0.5, b: 0.9, p1: [p1[0] - cv.left, p1[1] - cv.top], p2: [p2[0] - cv.left, p2[1] - cv.top] };
+  }
+  const legend = [...document.querySelectorAll('#legend > span')].map((s) => ({ sw: s.querySelector('i').className, text: s.textContent.trim() }));
+  return { ops, col, frame, legend, st: { scene: st.scene, map: st.map, cam: st.cam, x0: st.x0, step: st.step }, lang: document.documentElement.lang };
+});
+const rgb = (s) => {
+  const h = /^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(s);
+  if (h) return h.slice(1).map((x) => parseInt(x, 16)).join(',');
+  const m = /rgba?\((\d+),\s*(\d+),\s*(\d+)/.exec(s);
+  return m ? m.slice(1).join(',') : s;
+};
+const pts = (op) => op.path.filter((p) => !p.arc && !p.rect);
+const SUBD = '₀₁₂₃₄₅₆₇₈₉', subN = (n) => String(n).split('').map((d) => SUBD[+d]).join('');
+const gcdN = (a, b) => { while (b) [a, b] = [b, a % b]; return a; };
+function fibRational(x0c, k) { // exact x_k of x ↦ 1/(1 + x) from x₀ = x0c/100: p/q ↦ q/(p + q)
+  let p = BigInt(x0c), q = 100n; const g = gcdN(p, q); p /= g; q /= g;
+  for (let j = 0; j < k; j++) [p, q] = [q, p + q];
+  return [p, q];
+}
+const orbitCache = new Map();
+const orbitOf = (kind, x0c) => {
+  const key = `${kind}|${x0c}`;
+  if (!orbitCache.has(key)) orbitCache.set(key, refOrbit(kind, x0c, 20));
+  return orbitCache.get(key);
+};
+
+/* What the cobweb panel and the polar panel really show, decided only from the recorded calls. */
+function analyse(c) {
+  const out = { curves: {}, guides: { cos: [], fib: [] }, tangents: [], spirals: {}, circle: false, strokedRGB: new Set(), dashedRGB: new Set() };
+  const painted = (op) => op.path.length > 1 || (op.path.length === 1 && (op.path[0].arc || op.path[0].rect));
+  for (const op of c.ops) if ((op.op === 'stroke' || op.op === 'fill') && painted(op)) (op.dash ? out.dashedRGB : out.strokedRGB).add(rgb(op.style));
+  for (const op of c.ops) if (op.op === 'fillRect') out.strokedRGB.add(rgb(op.style));
+  if (c.frame) {
+    const f = c.frame, sx = (f.p2[0] - f.p1[0]) / (f.b - f.a), sy = (f.p1[1] - f.p2[1]) / (f.b - f.a);
+    const U = (px) => f.a + (px - f.p1[0]) / sx, V = (py) => f.a + (f.p1[1] - py) / sy, Y = (v) => f.p1[1] - (v - f.a) * sy;
+    out.equalAspect = Math.abs(sx / sy - 1) < 1e-9;
+    const fn = { cos: Math.cos, fib: (x) => 1 / (1 + x) };
+    for (const op of c.ops) {
+      if (op.op !== 'stroke') continue;
+      const P = pts(op);
+      if (P.length >= 60 && !op.dash) {
+        for (const kind of ['cos', 'fib']) {
+          if (P.every((p) => Math.abs(Y(fn[kind](U(p.x))) - p.y) < 0.01)) out.curves[kind] = rgb(op.style);
+        }
+      } else if (P.length >= 20 && P.length <= 40) {
+        const a = P[0], b = P[P.length - 1], found = [];
+        const hit = (p, v) => Math.abs(U(p.x) - v) * Math.abs(sx) < 0.05 && Math.abs(V(p.y) - v) * Math.abs(sy) < 0.05;
+        for (const kind of ['cos', 'fib']) {
+          const xs = orbitOf(kind, Math.round(c.st.x0 * 100)).xs;
+          for (let j = 0; j <= 20; j++) if (hit(a, xs[j]) && hit(b, xs[j + 1])) found.push({ kind, j, rgb: rgb(op.style) });
+        }
+        // an arc shared by both orbits (from x₀ = 0 both maps first step to 1) identifies neither map
+        if (new Set(found.map((g) => g.kind)).size === 1) for (const g of found) out.guides[g.kind].push(g);
+      } else if (P.length === 2 && op.dash && rgb(op.style) === rgb(c.col.mg)) {
+        const u1 = U(P[0].x), v1 = V(P[0].y), u2 = U(P[1].x), v2 = V(P[1].y), slope = (v2 - v1) / (u2 - u1);
+        for (const [kind, sl, star] of [['cos', -LAMd, THd], ['fib', -IPH2d, IPHd]]) {
+          if (Math.abs(slope - sl) < 1e-9 && Math.abs(v1 - star - sl * (u1 - star)) * Math.abs(sy) < 0.01) out.tangents.push(kind);
+        }
+      }
+    }
+  }
+  // polar panel: the dashed dim unit circle gives the centre and the scale; spirals must obey R = κ^{2φ/π}
+  const circ = c.ops.find((op) => op.op === 'stroke' && op.dash && rgb(op.style) === rgb(c.col.dm) && op.path.length === 1 && op.path[0].arc && op.path[0].r > 20);
+  if (circ) {
+    out.circle = true;
+    const { x: cx, y: cy, r: sc } = circ.path[0];
+    const kap = { theta: LAMd, phi: IPHd, cobweb: Math.sqrt(LAMd) };
+    for (const op of c.ops) {
+      if (op.op !== 'stroke') continue;
+      const P = pts(op);
+      if (P.length < 40) continue;
+      let phi = 0, prev = null, ok = Math.abs(P[0].x - cx) < 0.01 && Math.abs(cy - P[0].y - sc) < 0.01;
+      for (const p of P) {
+        if (!ok) break;
+        const a = Math.atan2(p.x - cx, cy - p.y);
+        if (prev != null) { let d = a - prev; while (d > Math.PI) d -= 2 * Math.PI; while (d < -Math.PI) d += 2 * Math.PI; phi += d; }
+        prev = a;
+        p.r = Math.hypot(p.x - cx, cy - p.y) / sc; p.phi = phi;
+      }
+      if (!ok) continue;
+      for (const [name, k] of Object.entries(kap)) {
+        if (P.every((p) => Math.abs(p.r - Math.pow(k, (2 * p.phi) / Math.PI)) * sc < 0.01) && P[P.length - 1].phi > 2 * Math.PI) out.spirals[name] = rgb(op.style);
+      }
+    }
+  }
+  return out;
+}
+const legendHas = (c, sw, re) => c.legend.some((e) => e.sw === `sw ${sw}` && re.test(e.text));
+const tag = (c) => `${c.lang} ${c.st.scene}/${c.st.map}/${c.st.cam} x₀=${c.st.x0} k=${c.st.step}`;
+
+function checkCobwebLegend(c) {
+  const A = analyse(c), col = c.col, rc = rgb(col.cy), rm = rgb(col.mg);
+  const want = { cos: ['cos'], fib: ['fib'], both: ['cos', 'fib'] }[c.st.map];
+  const drawn = Object.keys(A.curves).sort();
+  const nonCurrent = (kind) => A.guides[kind].filter((g) => g.rgb !== rgb(col.am));
+  const info = JSON.stringify({ drawn, curves: A.curves, tangents: A.tangents, guides: { cos: nonCurrent('cos').length, fib: nonCurrent('fib').length }, legend: c.legend });
+  check(`${tag(c)}: the stage draws exactly the selected map curve(s) in their own colours on an equal-aspect frame`,
+    A.equalAspect && JSON.stringify(drawn) === JSON.stringify(want)
+    && (!A.curves.cos || A.curves.cos === rc) && (!A.curves.fib || A.curves.fib === rm), info);
+  const guideOk = ['cos', 'fib'].every((kind) => nonCurrent(kind).every((g) => g.rgb === (kind === 'cos' ? rc : rm))
+    && (c.st.step === 0 || (nonCurrent(kind).length > 0) === want.includes(kind)))
+    && ['cos', 'fib'].every((kind) => A.guides[kind].filter((g) => g.rgb === rgb(col.am)).every((g) => g.j === c.st.step));
+  check(`${tag(c)}: completed 90° guides lie on the drawn maps' own orbits in their colours, only step k in amber`, guideOk, info);
+  const tanWant = c.st.map === 'both' ? [] : want;
+  check(`${tag(c)}: a dashed fixed-point tangent is drawn exactly for a single map, with that map's slope`,
+    JSON.stringify(A.tangents) === JSON.stringify(tanWant), info);
+  check(`${tag(c)}: legend names cos θ, 1/(1 + x) and the tangent exactly when they are drawn`,
+    legendHas(c, 'cy', /cos θ/) === !!A.curves.cos
+    && legendHas(c, 'mg', /1\/\(1 ?\+ ?x\)/) === !!A.curves.fib
+    && legendHas(c, 'dash mg', /./) === (A.tangents.length > 0), info);
+  if (c.st.scene === 'cobweb') {
+    const sw = { cy: rc, mg: rm };
+    const missing = c.legend.filter((e) => { const k = e.sw.split(' ').pop(); return k in sw && !(e.sw.includes('dash') ? A.dashedRGB : A.strokedRGB).has(sw[k]); });
+    const cyanUnexplained = !c.legend.some((e) => e.sw === 'sw cy') && [...A.strokedRGB, ...A.dashedRGB].includes(rc);
+    check(`${tag(c)}: every cyan/magenta legend entry is painted on the stage and no cyan is painted without a cyan legend entry`,
+      missing.length === 0 && !cyanUnexplained, JSON.stringify({ missing, cyanUnexplained }));
+  } else {
+    check(`${tag(c)}: both polar spirals (θ* cyan, φ⁻¹ magenta) and the violet per-arm spiral are drawn and named in the legend`,
+      A.spirals.theta === rc && A.spirals.phi === rm && A.spirals.cobweb === rgb(col.vi)
+      && legendHas(c, 'cy', /θ\*/) && legendHas(c, 'mg', /φ⁻¹/) && legendHas(c, 'vi', /./), JSON.stringify({ spirals: A.spirals, legend: c.legend }));
+  }
+}
+
+function checkUnitBar(c, wide = true) {
+  const col = c.col, rc = rgb(col.cy), rm = rgb(col.mg), ra = rgb(col.am);
+  const rects = c.ops.filter((o) => o.op === 'fillRect');
+  let bar = null;
+  for (const r1 of rects) for (const r2 of rects) {
+    if (rgb(r1.style) === rc && rgb(r2.style) === rm && Math.abs(r1.x + r1.w - r2.x) < 1e-6 && Math.abs(r1.y - r2.y) < 1e-6 && Math.abs(r1.h - r2.h) < 1e-6) bar = { x0: r1.x, xs: r2.x, x1: r2.x + r2.w, y: r1.y, h: r1.h };
+  }
+  const k = c.st.step, x0c = Math.round(c.st.x0 * 100), barStart = x0c === 0 ? 100 : x0c;
+  const [p, q] = fibRational(barStart, k), val = Number(p) / Number(q), off = p > q;
+  const label = `x${subN(k)}${x0c === 0 ? '(x₀=1)' : ''}=${p}/${q}`;
+  const pyMid = bar ? bar.y + bar.h / 2 : 0, s = bar ? bar.x1 - bar.x0 : 0;
+  const amberFills = c.ops.filter((o) => o.op === 'fill' && rgb(o.style) === ra);
+  const barDots = bar ? amberFills.filter((o) => o.path.length === 1 && o.path[0].arc && Math.abs(o.path[0].y - bar.y) < 0.01) : [];
+  const heads = bar ? amberFills.filter((o) => { const P = pts(o); return P.length === 3 && P.every((pt) => pt.x > bar.x1 && pt.y >= bar.y - 1 && pt.y <= bar.y + bar.h + 1); }) : [];
+  const headOk = heads.length === 1 && (() => { const P = pts(heads[0]), tip = P.reduce((m, pt) => (pt.x > m.x ? pt : m)); return Math.abs(tip.y - pyMid) < 0.01 && P.filter((pt) => pt !== tip).every((pt) => pt.x < tip.x - 1); })();
+  const panel = bar && c.ops.find((o) => o.op === 'stroke' && o.path.length === 1 && o.path[0].rect && o.path[0].x <= bar.x0 && o.path[0].x + o.path[0].w >= bar.x1 && o.path[0].y <= bar.y && o.path[0].y + o.path[0].h >= bar.y);
+  const headVisible = heads.length === 1 && panel && pts(heads[0]).every((pt) => pt.x <= panel.path[0].x + panel.path[0].w - 1);
+  const tagOps = c.ops.filter((o) => o.op === 'text' && rgb(o.style) === ra && bar && o.align === 'right' && Math.abs(o.y - (bar.y - 3)) < 0.5);
+  const tags = tagOps.map((o) => o.text);
+  const oneD = c.ops.find((o) => o.op === 'text' && o.text === '1D: φ⁻¹ + φ⁻² = 1');
+  const offWord = c.lang === 'en' ? 'off-scale' : '尺外';
+  const info = JSON.stringify({ bar, val, off, label, tags, dots: barDots.map((o) => o.path[0].x), heads: heads.length, headOk, headVisible });
+  check(`${tag(c)}: unit bar spans 0 … 1 at the shared 1:1 scale and splits exactly at φ⁻¹ (1D: φ⁻¹ + φ⁻² = 1 stays drawn)`,
+    !!bar && Math.abs((bar.xs - bar.x0) / s - IPHd) < 1e-9 && c.ops.some((o) => o.op === 'text' && o.text === '1D: φ⁻¹ + φ⁻² = 1'), info);
+  if (!off) {
+    check(`${tag(c)}: amber marker sits at the exact iterate ${p}/${q} on the bar, with the exact label at the bar end and no off-scale arrow`,
+      barDots.length === 1 && Math.abs(barDots[0].path[0].x - (bar.x0 + val * s)) < 0.01 && heads.length === 0
+      && tags.length === 1 && tags[0] === label && Math.abs(tagOps[0].x - bar.x1) < 0.5, info);
+  } else {
+    check(`${tag(c)}: off-scale start ${p}/${q} > 1 is never pinned on the bar: no amber dot, a right-pointing amber arrow past the bar end inside the panel, and a label giving ${label} with "> 1"${wide ? ` ${offWord}` : ''} above the arrow, clear of the 1D statement`,
+      barDots.length === 0 && headOk && headVisible && tags.length === 1 && tags[0].startsWith(label) && tags[0].includes('> 1') && (!wide || tags[0].includes(offWord))
+      && (c.lang !== 'en' || !/[\u3400-\u9fff]/.test(tags[0]))
+      && tagOps[0].x > bar.x1 && tagOps[0].x <= panel.path[0].x + panel.path[0].w && tagOps[0].x - tagOps[0].w >= oneD.x + oneD.w, info);
+  }
+  // the 2D panel: θ_k projected onto the unit circle at its true angle (frame from the bar scale and the fixed-point ring)
+  const ring = c.ops.find((o) => o.op === 'stroke' && rgb(o.style) === rc && o.path.length === 1 && o.path[0].arc && Math.abs(o.path[0].r - 6) < 1e-9);
+  const th = orbitOf('cos', x0c).xs[k];
+  const dots2 = amberFills.filter((o) => o.path.length === 1 && o.path[0].arc && Math.abs(o.path[0].r - 3.6) < 1e-9 && bar && Math.abs(o.path[0].y - bar.y) > 0.5);
+  const ok2 = !!ring && Math.abs(ring.path[0].x - (bar.x0 + THd * s)) < 0.01 && dots2.length === 1
+    && Math.abs(dots2[0].path[0].x - (bar.x0 + Math.cos(th) * s)) < 0.01 && Math.abs(dots2[0].path[0].y - (ring.path[0].y + (LAMd - Math.sin(th)) * s)) < 0.01;
+  check(`${tag(c)}: amber θₖ = ${th.toFixed(4)} sits on the unit circle at its own angle (never clamped)`, ok2,
+    JSON.stringify({ ring: ring && ring.path[0], dots2: dots2.map((o) => o.path[0]), th }));
+}
+
+check('start slider keeps its supported domain 0 … 1.50 in steps of 0.01',
+  await page.evaluate(() => { const e = document.getElementById('x0'); return e.min === '0' && e.max === '1.5' && e.step === '0.01'; }));
+const view = async (w, h) => { await page.setViewportSize({ width: w, height: h }); await settle(page, 60); };
+for (const lang of ['zh', 'en']) {
+  await view(1440, 900);
+  await page.click(`[data-lang-set="${lang}"]`); await settle(page, 40);
+  // F1 path: WHIRLING-SQUARES → 1/(1 + x) → step 5, then its endpoints and the adjacent maps and cameras
+  await pick('whirl'); await page.click('#mapChips [data-map="fib"]'); await seek(5);
+  checkCobwebLegend(await capture());
+  for (const k of [0, 20]) { await seek(k); checkCobwebLegend(await capture()); }
+  await page.click('#mapChips [data-map="cos"]'); await seek(5); checkCobwebLegend(await capture());
+  await page.click('#mapChips [data-map="both"]'); await seek(5); checkCobwebLegend(await capture());
+  await page.click('#mapChips [data-map="fib"]'); await page.click('#camChips [data-cam="follow"]'); await seek(6); checkCobwebLegend(await capture());
+  await pick('zoom'); await seek(12); checkCobwebLegend(await capture());
+  // TWIN scene: the same left panel next to the polar models, for each map
+  await pick('twin'); await seek(8); checkCobwebLegend(await capture());
+  await page.click('#mapChips [data-map="fib"]'); await seek(5); checkCobwebLegend(await capture());
+  await pick('division'); await seek(7); checkCobwebLegend(await capture());
+  // ANGLE scene: its polar legend stays valid (all four models drawn)
+  await pick('tilt'); await seek(1);
+  {
+    const c = await capture(), A = analyse(c);
+    check(`${lang} angle: θ*, φ⁻¹ and per-arm spirals plus the dashed closed circle are drawn and named in the legend`,
+      A.circle && A.spirals.theta === rgb(c.col.cy) && A.spirals.phi === rgb(c.col.mg) && A.spirals.cobweb === rgb(c.col.vi)
+      && legendHas(c, 'cy', /θ\*/) && legendHas(c, 'mg', /φ⁻¹/) && legendHas(c, 'vi', /82\.83/) && legendHas(c, 'dash dm', /90\.00/),
+      JSON.stringify({ spirals: A.spirals, legend: c.legend }));
+  }
+  // F2 path: start 1.50 in TWIN → SQUARES → ANGLE → conservation → step 0, then the adjacent supported states
+  await pick('twin'); await setRange('x0', 1.5);
+  await page.click('#sceneChips [data-scene="cobweb"]'); await settle(page);
+  await page.click('#sceneChips [data-scene="angle"]'); await settle(page);
+  await page.click('#focusChips [data-focus="conservation"]'); await seek(0);
+  checkUnitBar(await capture());
+  for (const k of [1, 20]) { await seek(k); checkUnitBar(await capture()); }
+  for (const [x, k] of [[1.01, 0], [1, 0], [0, 0], [1.25, 0], [1.25, 1]]) { await setRange('x0', x); await seek(k); checkUnitBar(await capture()); }
+  await setRange('x0', 1.5); await seek(0);
+  await view(390, 844); checkUnitBar(await capture(), false);
+  await view(1440, 900);
+  await pick('pythagoras'); await seek(8); checkUnitBar(await capture());
+}
+
+/* ---------- the labels above the unit bar are painted inside the conservation panel's own clip, apart ----------
+   During one repaint every clip() and fillText() on #cv is recorded with the clip active at that moment (save/restore
+   nesting and the transform included). Each label above the bar (the 1D statement and the amber xₖ readout painted
+   after it) is then drawn alone on a scratch canvas in the same font, alignment, baseline and device-pixel scale, and
+   its ink box is read from the painted pixels, not from text metrics. That ink must lie entirely within the active clip,
+   must not reach down into the unit bar, and the readout's ink box must not meet the 1D statement's (so neither is
+   painted over the other). Covered in both languages: the phone page (390 × 844, reached by the reader's
+   own path Twin → x₀ slider End → Squares → Angle → Conservation → ⏮), the chapter frame on a phone (?embed=1,
+   320 × 620) and on a wide page (?embed=1, 740 × 620), the cited figure frame (?embed=1, 740 × 500) and the desktop
+   page (1440 × 900); every supported off-scale start x₀ = 1.01 … 1.50 at step 0, and the on-scale and boundary labels
+   x₀ = 0 (x₀(x₀=1) = 1/1), x₀ = 1, x₀ = 1.50 at step 1 and the ADD-VS-SQUARE card at step 8, and the long on-scale
+   readouts x₁ … x₂₀ of the start x₀ = 0 (the widest, x₂₀(x₀=1) = 10946/17711) and x₂₀ of x₀ = 1.49. */
+const ONE_D = '1D: φ⁻¹ + φ⁻² = 1';
+const instrumentInk = (p) => p.evaluate(() => {
+  const ctx = document.getElementById('cv').getContext('2d');
+  const R = window.__inkRec = { on: false, texts: [], rects: [], clip: null, stack: [], path: [] };
+  const wrap = (name, fn) => { const orig = ctx[name]; ctx[name] = function (...a) { if (R.on) fn.apply(this, a); return orig.apply(this, a); }; };
+  const dev = (m, x, y) => [m.a * x + m.c * y + m.e, m.b * x + m.d * y + m.f];
+  const box = (m, x, y, w, h) => { const [x1, y1] = dev(m, x, y), [x2, y2] = dev(m, x + w, y + h); return [Math.min(x1, x2), Math.min(y1, y2), Math.max(x1, x2), Math.max(y1, y2)]; };
+  wrap('save', () => R.stack.push(R.clip));
+  wrap('restore', () => { R.clip = R.stack.pop() ?? null; });
+  wrap('beginPath', () => { R.path = []; });
+  wrap('rect', function (x, y, w, h) { R.path.push(box(this.getTransform(), x, y, w, h)); });
+  wrap('clip', () => {
+    // this stage clips only to axis-aligned rectangles; intersect with the clip already active
+    let c = R.path.length === 1 ? R.path[0].slice() : null;
+    if (c && R.clip) c = [Math.max(c[0], R.clip[0]), Math.max(c[1], R.clip[1]), Math.min(c[2], R.clip[2]), Math.min(c[3], R.clip[3])];
+    R.clip = c || [NaN, NaN, NaN, NaN];
+  });
+  wrap('fillRect', function (x, y, w, h) { R.rects.push({ style: this.fillStyle, b: box(this.getTransform(), x, y, w, h) }); });
+  wrap('fillText', function (text, x, y) {
+    const m = this.getTransform();
+    R.texts.push({ text: String(text), at: dev(m, x, y), s: Math.hypot(m.a, m.b), font: this.font, align: this.textAlign, base: this.textBaseline, style: this.fillStyle, clip: R.clip && R.clip.slice() });
+  });
+});
+const inkCapture = (p) => p.evaluate((ONE_D) => {
+  const R = window.__inkRec, P = window.TRV.palette;
+  R.texts = []; R.rects = []; R.clip = null; R.stack = []; R.on = true;
+  window.TRV.kit.flush();
+  R.on = false;
+  const scratch = document.createElement('canvas'), sc = scratch.getContext('2d', { willReadFrequently: true });
+  // colour without its alpha (the bar halves are translucent fills of cyan and magenta)
+  const norm = (v) => { sc.fillStyle = '#000'; sc.fillStyle = v; const f = sc.fillStyle, h = /^#(..)(..)(..)$/.exec(f); return h ? h.slice(1).map((x) => parseInt(x, 16)).join(',') : (/(\d+),\s*(\d+),\s*(\d+)/.exec(f) || []).slice(1).join(','); };
+  // device-pixel ink box of one label, read from its own pixels on a scratch canvas with the same text state
+  const ink = (t) => {
+    const pad = 40;
+    sc.setTransform(1, 0, 0, 1, 0, 0); sc.font = t.font;
+    const w = Math.ceil(sc.measureText(t.text).width * t.s) + 2 * pad, h = Math.ceil(40 * t.s) + 2 * pad;
+    scratch.width = w; scratch.height = h;
+    // same sub-pixel phase as on the stage, so the scratch pixels are the stage's own glyph pixels
+    const fx = t.at[0] - Math.floor(t.at[0]), fy = t.at[1] - Math.floor(t.at[1]);
+    const ox = (t.align === 'right' ? w - pad : t.align === 'center' ? Math.round(w / 2) : pad) + fx, oy = Math.round(h / 2) + fy;
+    sc.setTransform(t.s, 0, 0, t.s, ox, oy);
+    sc.font = t.font; sc.textAlign = t.align; sc.textBaseline = t.base; sc.fillStyle = '#fff';
+    sc.fillText(t.text, 0, 0);
+    const d = sc.getImageData(0, 0, w, h).data;
+    let x1 = Infinity, y1 = Infinity, x2 = -Infinity, y2 = -Infinity;
+    for (let j = 0; j < h; j++) for (let i = 0; i < w; i++) if (d[(j * w + i) * 4 + 3] > 0) { if (i < x1) x1 = i; if (i > x2) x2 = i; if (j < y1) y1 = j; if (j > y2) y2 = j; }
+    if (x2 < 0 || x1 === 0 || y1 === 0 || x2 === w - 1 || y2 === h - 1) return null; // nothing painted, or ink cut by the scratch edge
+    return [t.at[0] + x1 - ox, t.at[1] + y1 - oy, t.at[0] + x2 + 1 - ox, t.at[1] + y2 + 1 - oy];
+  };
+  const amber = norm(P.amber), cy = norm(P.cyan), mg = norm(P.magenta), oneD = R.texts.find((t) => t.text === ONE_D);
+  // the readout is the amber right-aligned label painted right after the 1D statement, on its line or on the line above
+  const next = oneD ? R.texts[R.texts.indexOf(oneD) + 1] : null;
+  const row = oneD ? [oneD, ...(next && norm(next.style) === amber && next.align === 'right' ? [next] : [])] : [];
+  let bar = null;
+  for (const a of R.rects) for (const b of R.rects) if (norm(a.style) === cy && norm(b.style) === mg && Math.abs(a.b[2] - b.b[0]) < 1e-6 && Math.abs(a.b[1] - b.b[1]) < 1e-6) bar = [a.b[0], a.b[1], b.b[2], b.b[3]];
+  const st = window.SPIRALS_DEBUG.state;
+  return { st: { scene: st.scene, focus: st.focus, x0: st.x0, step: st.step }, bar, row: row.map((t) => ({ text: t.text, clip: t.clip, ink: ink(t) })) };
+}, ONE_D);
+const INK = { labels: 0, worst: Infinity, overlaps: 0 };
+/* Problems of one captured label line: the expected readout present, every label's ink inside its clip and clear of the bar. */
+function inkProblems(c, label) {
+  const bad = [], L = c.row.find((r) => r.text !== ONE_D);
+  if (c.row.length !== 2 || !L || !L.text.startsWith(label)) bad.push(`line ${JSON.stringify(c.row.map((r) => r.text))} lacks ${label}`);
+  if (!c.bar) bad.push('no unit bar');
+  for (const r of c.row) {
+    const k = r.clip, b = r.ink;
+    if (!k || !b || k.some((v) => !Number.isFinite(v))) { bad.push(`${r.text}: no painted ink or no rectangular clip`); continue; }
+    const margin = Math.min(b[0] - k[0], b[1] - k[1], k[2] - b[2], k[3] - b[3]);
+    INK.labels++; INK.worst = Math.min(INK.worst, margin);
+    if (margin < 0) bad.push(`${r.text}: ink [${b.map((v) => v.toFixed(2))}] leaves clip [${k.map((v) => v.toFixed(2))}] by ${(-margin).toFixed(2)} px`);
+    if (c.bar && b[2] > c.bar[0] && b[0] < c.bar[2] && b[3] > c.bar[1]) bad.push(`${r.text}: ink bottom ${b[3].toFixed(2)} reaches the unit bar top ${c.bar[1].toFixed(2)}`);
+  }
+  const [a, b] = c.row.map((r) => r.ink);
+  if (a && b && a[0] < b[2] && b[0] < a[2] && a[1] < b[3] && b[1] < a[3]) {
+    INK.overlaps++;
+    bad.push(`${L.text}: ink [${b.map((v) => v.toFixed(2))}] is painted over the 1D statement's ink [${a.map((v) => v.toFixed(2))}] (${(Math.min(a[2], b[2]) - Math.max(a[0], b[0])).toFixed(2)} × ${(Math.min(a[3], b[3]) - Math.max(a[1], b[1])).toFixed(2)} px)`);
+  }
+  return bad;
+}
+const labelOf = (x0c, k) => { const b = x0c === 0 ? 100 : x0c, [p, q] = fibRational(b, k); return `x${subN(k)}${x0c === 0 ? '(x₀=1)' : ''}=${p}/${q}`; };
+const INK_VIEWS = [['phone', 390, 844, ''], ['chapter frame on a phone', 320, 620, '&embed=1'], ['chapter frame', 740, 620, '&embed=1'], ['figure frame', 740, 500, '&embed=1'], ['desktop', 1440, 900, '']];
+for (const lang of ['zh', 'en']) {
+  for (const [vname, w, h, q] of INK_VIEWS) {
+    const p = await T.open(BOOK, ID, `?lang=${lang}${q}`, { viewport: { width: w, height: h }, locale: lang === 'zh' ? 'zh-CN' : 'en-US' });
+    await settle(p, 200);
+    await instrumentInk(p);
+    const st = async () => { await settle(p); return p.evaluate(() => window.SPIRALS_DEBUG.state); };
+    const where = `${lang} ${vname} ${w}×${h}`;
+    // the reader's own path to the confirmed state: Twin, start slider End, Squares, Angle, Conservation, rewind
+    await p.click('[data-preset="twin"]'); await settle(p, 60);
+    await p.focus('#x0'); await p.keyboard.press('End'); await settle(p);
+    await p.click('#sceneChips [data-scene="cobweb"]'); await settle(p);
+    await p.click('#sceneChips [data-scene="angle"]'); await settle(p);
+    await p.click('#focusChips [data-focus="conservation"]'); await settle(p);
+    await p.click('#rew');
+    const s0 = await st();
+    check(`${where}: the reader's path lands on x₀ = 1.50, Angle · Conservation, step 0`,
+      s0.x0 === 1.5 && s0.scene === 'angle' && s0.focus === 'conservation' && s0.step === 0,
+      JSON.stringify({ x0: s0.x0, scene: s0.scene, focus: s0.focus, step: s0.step }));
+    const off = [];
+    for (let x0c = 150; x0c >= 101; x0c--) {
+      if (x0c !== 150) await p.evaluate((v) => { const el = document.getElementById('x0'); el.value = String(v); el.dispatchEvent(new Event('input', { bubbles: true })); }, x0c / 100);
+      await p.evaluate(() => window.SPIRALS_DEBUG.seek(0)); await settle(p);
+      const c = await inkCapture(p), bad = inkProblems(c, `${labelOf(x0c, 0)} > 1`);
+      if (c.st.x0 !== x0c / 100 || c.st.step !== 0 || c.st.scene !== 'angle') bad.push(`state ${JSON.stringify(c.st)}`);
+      if (bad.length) off.push(`x₀=${(x0c / 100).toFixed(2)}: ${bad.join('; ')}`);
+    }
+    check(`${where}: for all 50 off-scale starts x₀ = 1.01 … 1.50 at step 0 the exact "> 1" readout and the 1D statement are painted entirely inside the panel clip, clear of the bar and of each other`,
+      off.length === 0, `${off.length} failing: ${off.slice(0, 3).join(' | ')}`);
+    for (const [x0c, k] of [[150, 1], [100, 0], [0, 0]]) {
+      await p.evaluate((v) => { const el = document.getElementById('x0'); el.value = String(v); el.dispatchEvent(new Event('input', { bubbles: true })); }, x0c / 100);
+      await p.evaluate((t) => window.SPIRALS_DEBUG.seek(t), k); await settle(p);
+      const bad = inkProblems(await inkCapture(p), labelOf(x0c, k));
+      check(`${where} x₀=${(x0c / 100).toFixed(2)} k=${k}: on-scale readout ${labelOf(x0c, k)} and the 1D statement are painted entirely inside the panel clip, clear of the bar and of each other`, bad.length === 0, bad.join(' | '));
+    }
+    await p.click('[data-preset="pythagoras"]'); await settle(p, 60);
+    await p.evaluate(() => window.SPIRALS_DEBUG.seek(8)); await settle(p);
+    {
+      const bad = inkProblems(await inkCapture(p), labelOf(0, 8));
+      check(`${where} ADD-VS-SQUARE k=8: readout ${labelOf(0, 8)} and the 1D statement are painted entirely inside the panel clip, clear of the bar and of each other`, bad.length === 0, bad.join(' | '));
+    }
+    // the long on-scale readouts: every step of the start 0 (its own "(x₀=1)" form) and x₂₀ of the start 1.49
+    const long = [];
+    for (const [x0c, k] of [...Array.from({ length: 20 }, (_, j) => [0, j + 1]), [149, 20]]) {
+      await p.evaluate((v) => { const el = document.getElementById('x0'); el.value = String(v); el.dispatchEvent(new Event('input', { bubbles: true })); }, x0c / 100);
+      await p.evaluate((t) => window.SPIRALS_DEBUG.seek(t), k); await settle(p);
+      const bad = inkProblems(await inkCapture(p), labelOf(x0c, k));
+      if (bad.length) long.push(`x₀=${(x0c / 100).toFixed(2)} k=${k}: ${bad.join('; ')}`);
+    }
+    check(`${where}: the on-scale readouts x₁ … x₂₀ of x₀ = 0 and x₂₀ of x₀ = 1.49 are painted entirely inside the panel clip, clear of the bar and of the 1D statement`,
+      long.length === 0, `${long.length} failing: ${long.slice(0, 3).join(' | ')}`);
+    await p.context().close();
+  }
+}
+check(`label-line pixel-ink checks covered ${INK.labels} labels (smallest margin to the clip ${INK.worst.toFixed(2)} px, ${INK.overlaps} readouts painted over the 1D statement)`,
+  INK.labels === 2 * INK_VIEWS.length * 75 * 2 && INK.worst >= 0 && INK.overlaps === 0);
+await view(1440, 900);
+await page.click('[data-lang-set="zh"]');
+
 check('no page error, console error or failed request', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();

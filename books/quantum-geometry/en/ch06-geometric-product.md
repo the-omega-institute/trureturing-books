@@ -19,7 +19,7 @@ $$
 Before this six-symbol identity, wave–particle duality, the Robertson–Schrödinger uncertainty relation, double-slit interference, Wheeler's delayed-choice experiment, and the five disconnected postulates of textbook quantum mechanics all collapse into a single elementary geometric law: **Pythagorean conservation $\cos^2\theta + \sin^2\theta = 1$ between the cosine particle line and the sine wave area**.
 
 ::: {.figure src="ch06-overview"}
-**Figure 6.** The chapter at a glance. Panel I: the cyan shadow of the amber $\vv{B}$ on $\vv{A}$ is $\cos\theta$, and the magenta parallelogram they span is $\sin\theta$. Panel II: for equal-weight pure paths with ideal balanced recombination and a scanned reference phase, set $\alpha = \arccos|c|$; the quarter circle $D^2 + V^2 = 1$; the amber point at $\alpha = 60^\circ$ is made of the cyan $V = 0.5$ across and the magenta $D \approx 0.87$ up; the right end of the arc is “fringes only”, the top end “path only” ([@thm-record-coherence-complementarity]). Panel III: the $\rho$ of [@ex-wheeler-delayed-choice-tradeoff] at $\alpha = 60^\circ$; its cyan diagonal part $\Pi(\rho)$ and magenta off-diagonal part $\rho - \Pi(\rho)$ are the two legs of a right triangle whose hypotenuse is $\rho$ ([@cor-pinching-pythagorean]).
+**Figure 6.** The chapter at a glance. Panel I: the cyan shadow of the amber $\vv{B}$ on $\vv{A}$ is $\cos\theta$, and the magenta parallelogram they span is $\sin\theta$. Panel II: for equal-weight pure paths with ideal balanced recombination and a scanned reference phase, set $\alpha = \arccos|c|$; the quarter circle $D^2 + V^2 = 1$; the amber point at $\alpha = 60^\circ$ is made of the cyan $V = 0.5$ across and the magenta $D \approx 0.87$ up; the right end of the arc is “fringes only”, the top end “path only” ([@thm-record-coherence-complementarity]). Panel III: the row $\vv{r} = (0.5, 0.5, 0.5)$ of [@ex-mixed-qubit-robertson-slack] as one upright bar of total height $(\sigma_A\sigma_B)^2 = 0.5625$; from the bottom up, the magenta commutator term $\lvert C_{1/2}\rvert^2 = r_z^2 = 0.25$ (the floor, marked by a dashed line), a thin cyan piece, the squared covariance $\mathrm{cov}^2 = r_x^2 r_y^2 = 0.0625$, and the grey mixedness $1 - \norm{\vv{r}}^2 = 0.25$; everything above the floor is slack ([@thm-mixed-state-robertson]).
 :::
 
 ## 6.1 Why Is the Inner Product $\vv{A}\cdot\vv{B}$ the "Particle" and the Exterior Product $\vv{A}\wedge\vv{B}$ the "Wave"? {#sec-inner-particle-outer-wave}
@@ -199,6 +199,10 @@ Both terms on the right are nonnegative, which proves the inequality once more, 
 The first three rows are pure states: the slack comes from the covariance alone, and the first two rows attain equality. The last three rows are mixed states: in the fourth row the state has moved inward along the $z$ axis, the commutator expectation has dropped from $1$ to $0.6$, and the product of the two standard deviations is still $1$; the last row is the centre of the ball, where the commutator expectation vanishes and the inequality becomes $1 \ge 0$.
 :::
 
+::: {.figure src="ch06-robertson-budget"}
+**The slack of the uncertainty relation is made of two pieces: the mixedness and the squared covariance.** Each bar is one row of the table above; its whole length is $(\sigma_A\sigma_B)^2$, and a vertical line marks $1$. The magenta piece is the commutator term $r_z^2$, the floor of the uncertainty relation; the cyan piece is the squared covariance $r_x^2 r_y^2$; the grey piece is the mixedness $1 - \norm{\vv{r}}^2$. The first three rows are pure states and have no grey, and only the third has cyan; in the last three the grey grows down the column, and the last row, the centre of the ball, has no magenta and is grey throughout ([@thm-robertson-schrodinger], [@thm-mixed-state-robertson]; the slack identity is a hand derivation).
+:::
+
 Along a fixed Bloch direction toward the centre, the variances do not decrease; the squared slack above consists of mixedness together with squared covariance (with only the mixedness term when $r_x r_y = 0$).
 
 ## 6.3 Pure Geometric Dissection of Double-Slit Interference and Wheeler's Delayed Choice: Discarding or Preserving the Area? {#sec-double-slit-delayed-choice}
@@ -242,15 +246,7 @@ Then all five complementarity statements hold:
 By the Cauchy–Schwarz inequality and $\|r_L\| = \|r_R\| = 1$, we have $0 \le V = \|\langle r_L, r_R\rangle_{\mathbb{C}}\| \le \|r_L\|\|r_R\| = 1$, so $1 - V^2 \ge 0$. Squaring $D = \sqrt{1 - V^2}$ gives $D^2 = 1 - V^2$, hence $D^2 + V^2 = 1$ (claim 1). If $c = 0$, then $V = \|0\| = 0$ and $D = \sqrt{1 - 0} = 1$ (claim 2). If $V = 1$, then $D = \sqrt{1 - 1^2} = 0$ (claims 3 and 5). Conversely, if $D = 1$, then claim 1 implies $1 + V^2 = 1$, so $V^2 = 0 \implies V = \|c\| = 0 \implies c = 0$, whence $c \cdot a = 0 \cdot a = 0$ for every $a \in \mathbb{C}$ (claim 4). The full proof is checked by the Lean kernel.
 :::
 
-::: {.viz src="double-slit-marker" preset="which" height="500"}
-**Orthogonal markers, no fringes.** At $\alpha = 90^\circ$ the arrows are square: the cyan shadow shrinks to nothing, the magenta height reaches the top, and the point sits at the highest point of the circle (property 2 of [@thm-record-coherence-complementarity]). The hits on the screen pile up into a hump without fringes.
-:::
-
 Property 3 is the other end: when the two markers coincide, $V = 1$ and $D = 0$, and the screen shows fringes of full contrast.
-
-::: {.viz src="double-slit-marker" preset="wave" height="500"}
-**Coincident markers, full fringes.** At $\alpha = 0$ the amber $r_R$ lies on $r_L$: the cyan shadow is the whole radius, the magenta height is zero, and the point sits at the right-hand end of the circle (property 3 of [@thm-record-coherence-complementarity]). The hits on the screen pile up into fringes of full contrast, with almost none landing in the dark fringes.
-:::
 
 Back on the single qubit of Section 6.1, this wave end is the one where the area is full and the line has shrunk to a point:
 
@@ -298,12 +294,8 @@ Evaluating [@thm-record-coherence-complementarity] and [@cor-pinching-pythagorea
 Nothing in Wheeler's delayed choice reaches backward in time: prior to the final measurement, the joint state $\frac{1}{\sqrt{2}}(\lvert 0\rangle\lvert r_L\rangle + \lvert 1\rangle\lvert r_R\rangle)$ is a single unified geometric-product field containing both diagonal populations and off-diagonal coherence blocks; choosing whether to read out orthogonal which-way records or recombine the beams at the exit port simply chooses **whether to project that field onto its diagonal particle line or preserve its transverse bivector area**!
 :::
 
-::: {.viz src="double-slit-marker" preset="delayed" height="500"}
-**Hits first, reading later.** At $\alpha = 90^\circ$ the marker is read for the path only after every hit has landed: the same hits are split by the reading into a “left” and a “right” row that together hold every hit, and both magenta rows are humps without fringes.
-:::
-
 ::: {.viz src="double-slit-marker" preset="erase" height="500"}
-**The same hits, read another way.** The very same hits, but now the marker is read to erase, and both rows it sorts into are cyan: the “read as +” row shows fringes, the “read as −” row anti-fringes shifted by half a period, and together they are still the hump above. The later choice moves no hit on the screen; it only decides how they are sorted.
+**The same hits, read another way.** $\alpha = 90^\circ$; the marker is read only after all hits are in. In playback the same hits are first read for the path and split into a “left” and a “right” row, both magenta humps without fringes; after a pause they are gathered back and read again to erase. The picture stops after the second reading: both rows are cyan, the “read as +” row shows fringes and the “read as −” row anti-fringes shifted by half a period, while the top row, all the hits, is the same hump throughout. The later choice moves no hit on the screen; it only decides how they are sorted.
 :::
 
 ::: {.remark #rem-englert-greenberger-literature title="Wootters–Zurek, Greenberger–Yasin, and Englert Wave–Particle Duality Inequalities (Literature Result, Not Formalized in This Book)"}
@@ -324,10 +316,6 @@ Englert's trace-distance inequality for general mixed environmental states is ci
 **A mixed marker falls inside the circle.** When the marker itself is noisy (pure-state weight $\lambda = 0.5$, purity $\Tr\rho^2 = (1 + \lambda^2)/2 = 0.625$), the visibility is still $V = 0.5$, but only $0.43$ of trace-distance distinguishability can be read: the point drops inside the circle along the dashed magenta arc, $D^2 + V^2 \approx 0.44 < 1$. This is one instance of Englert's inequality above (a literature result, not formalized in this book).
 :::
 
-::: {.viz src="double-slit-marker" height="560"}
-Interactive laboratory `SLIT//MARKER`: hits arriving one by one on the screen with their fringes, and the two marker arrows $r_L$ and $r_R$ on the complementarity circle; drag the angle, change how the marker is read, or lower its pure-state weight $\lambda$. The numbers on the page are a numerical illustration; $D^2 + V^2 = 1$ for a pure record marker ($\lambda = 1$) is [@thm-record-coherence-complementarity], checked by the Lean kernel, while a mixed marker, inside the circle for $\alpha > 0$ and on it at $\alpha = 0$, is a case of Englert's inequality (a literature result, not formalized in this book).
-:::
-
 ## 6.4 Interactive Laboratory: Hands-On Exploration of the Pairwise Geometric Product, Particle Inner Line, and Wave Wedge Area {#sec-interactive-qubit-geometry}
 
 
@@ -341,6 +329,12 @@ Each of the eight experiment cards on the left makes one point; the figures in t
 
 ::: {.viz src="qubit-geometry" height="620"}
 Interactive laboratory `ORTHO//QUBIT`: the line $\vv{A}\cdot\vv{B}$ and the area $\vv{A}\wedge\vv{B}$ on the Bloch sphere, the detector's clicks and fringes, and the double cover: one turn for the vector, two for the rotor. The numbers on the page are a numerical illustration; the cited theorems are checked by the Lean kernel.
+:::
+
+The double-slit marker of 6.3 has a full laboratory too, `SLIT//MARKER`: drag the marker angle $\alpha$ on the complementarity circle and the fringe contrast $V = \cos\alpha$ on the screen trades off against the magenta height $D = \sin\alpha$ on the circle, and the way the marker is read can be changed after all the hits are in.
+
+::: {.viz src="double-slit-marker" height="560"}
+Interactive laboratory `SLIT//MARKER`: hits arriving one by one on the screen with their fringes, and the two marker arrows $r_L$ and $r_R$ on the complementarity circle; drag the angle, change how the marker is read, or lower its pure-state weight $\lambda$. The numbers on the page are a numerical illustration; $D^2 + V^2 = 1$ for a pure record marker ($\lambda = 1$) is [@thm-record-coherence-complementarity], checked by the Lean kernel, while a mixed marker, inside the circle for $\alpha > 0$ and on it at $\alpha = 0$, is a case of Englert's inequality (a literature result, not formalized in this book).
 :::
 
 If the particle is the line, the wave is the area, and both belong to a single geometric-product field, what happens when this oriented area sweeps continuously across the sphere? Why did the author's intuition declare, *"the line is classical time, and the area is quantum time"*? Let us turn to [Chapter 7](ch07-geometric-time-and-speed-limits.md).

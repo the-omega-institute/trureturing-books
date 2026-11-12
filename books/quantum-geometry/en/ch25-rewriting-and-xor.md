@@ -175,12 +175,8 @@ With this 3-bit encoding, the geometric product of any two basis blades $E_{\mat
    \operatorname{sign}(\mathrm{left}, \mathrm{right}) = (-1)^{\operatorname{inv}(\mathrm{left}, \mathrm{right})}.
    $$
 
-::: {.viz src="blade-multiplication" preset="e1e2" height="500"}
-**No swap: e₁ · e₂ = +e₁₂.** Each blade holds one bit, and the masks give 001₂ ⊕ 010₂ = 011₂; the two factors in the right panel are already in order, no lines cross, and the cell is cyan.
-:::
-
 ::: {.viz src="blade-multiplication" preset="e2e1" height="500"}
-**One swap, one sign: e₂ · e₁ = −e₁₂.** The XOR of the masks is still 011₂, but the right e₁ has to move past the left e₂: the two magenta lines cross once, the sign becomes −, and the cell is magenta.
+**One swap, one sign: e₂ · e₁ = −e₁₂.** In either order the masks give 001₂ ⊕ 010₂ = 011₂. In e₁ · e₂ the two factors are already in order, no swap is needed, and that cell of the table is cyan; in e₂ · e₁ the right e₁ has to move past the left e₂, the two magenta lines in the right panel cross once, the sign becomes −, and this cell is magenta.
 :::
 
 Notice how both conventions in the code fit together with 100% consistency:
@@ -228,6 +224,10 @@ The key step is pushing the clock past the shift: $Z X = \omega\,X Z$, hence $Z^
 :::
 
 The exponent $bc - ad$ of Claim 4 is the **symplectic pairing** of the two index pairs $(a, b)$ and $(c, d)$: it changes sign when the pairs are swapped and vanishes when a pair is paired with itself. Claim 3 yields a commutation criterion (a manual derivation, not formalized in this book; the Lean module itself states no such consequence): $D(c, d)\,D(a, b)$ is invertible, so $D(a, b)$ and $D(c, d)$ commute if and only if $\omega^{\,bc - ad} = 1$, that is, $bc - ad \equiv 0 \pmod M$.
+
+::: {.figure src="ch25-weyl-clock"}
+**For $M = 3$ one swap is not a change of sign but a turn by $120^\circ$.** The left panel shows the three basis vectors $\lvert 0\rangle, \lvert 1\rangle, \lvert 2\rangle$ of a three-level system: the cyan arrows are the shift $X$, which pushes each one to the next round the ring, and the violet $1, \omega, \omega^2$ are the phases the clock $Z$ gives them. The right panel is the unit circle of phases: by the composition law $ZX = \omega\,XZ$, and the violet arc turns $120^\circ$ from $XZ$ to $ZX$; the dashed arc is the same arc for $M = 2$, a turn of $180^\circ$ to $-1$, which is a change of sign ([@thm-weyl-displacement-laws]).
+:::
 
 The multiplication law for several $M$-level systems side by side is already cited in [Chapter 14](ch14-cloning-codes-and-braids.md), [@lemma-pauli-word-phase]: its cross-phase exponent $\sum_n a.z_n \cdot b.x_n$ is the exponent $bc$ of Claim 1 summed over the systems.
 

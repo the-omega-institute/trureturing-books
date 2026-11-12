@@ -2,8 +2,8 @@
 Chapter 19 at a glance: the cut of an interval in a layered network, flow equal to cut on the
 width-three bridge graph, and log-capacity facets stitched along a seam.
 
-Panel I is a schematic binary layered network over 8 boundary legs: the interval of legs 2–5 is cut
-off by two bonds (counted by the script). Panel II is the worked example (a, b, c, d) = (2, 3, 2, 3)
+Panel I is an ordinary binary tree over 8 boundary legs (not the MERA-style network of the
+layered-network-cut cards): the interval of legs 2–5 is cut off by two bonds (counted by the script). Panel II is the worked example (a, b, c, d) = (2, 3, 2, 3)
 with its two outer min cuts of capacity 6. Panel III is the slice a = 2, b = 3, c = 2 of the
 log-capacity envelope with the lattice points d = 2, 3, 4.
 """
@@ -15,11 +15,11 @@ from _ch19 import bridge, cut_lines, envelope, qmincut
 SIZE = (740, 290)
 WRAP = True
 ALT = {
-    "zh": "三栏。第一栏：一张二叉的层级网络，底边 8 条腿，往上每层两两合并到一个张量，直到顶上一个；底边第 3 到第 6 条腿是琥珀色的区间，"
+    "zh": "三栏。第一栏：一棵普通的二叉树（不是后面实验卡里的层级网络），底边 8 条腿，往上每层两两合并到一个张量，直到顶上一个；底边第 3 到第 6 条腿是琥珀色的区间，"
           "把它切下来只需割断品红标出的两条键，而不是四条腿。"
           "第二栏：宽度三桥图，张量 M、N 之间三条桥，腿 a = 2、b = 3、c = 2、d = 3；上下两道品红的虚线是最小割 ad = bc = 6，下面一枚绿色的 LEAN ✓ 标签：流 = 割 = 6。"
           "第三栏：对数容量图，蓝色的斜线 ln ad 与橙色的水平线 ln bc 在竖直虚线（接缝）处拼成一条折线，折线上三个格点 d = 2、3、4；右下一枚紫色标签：RT · 文献。",
-    "en": "Three panels. Panel I: a binary layered network with 8 legs along the bottom, merging in pairs into one tensor per "
+    "en": "Three panels. Panel I: an ordinary binary tree (not the layered network of the later experiment cards) with 8 legs along the bottom, merging in pairs into one tensor per "
           "step up to a single tensor at the top; legs 3 to 6 are the amber interval, and cutting it off takes only the two "
           "bonds marked magenta, not four legs. Panel II: the width-three bridge graph, three bridges between tensors M and N, "
           "legs a = 2, b = 3, c = 2, d = 3; the two magenta dashed lines above and below are the min cut ad = bc = 6, with a "
@@ -46,7 +46,7 @@ def draw(fig):
     one, two, three = fig.row([236, 236, 236], 290, gap=16)
 
     # ---- I: the cut of an interval in a layered network
-    title(one, "I　层级网络里的割", "I  a cut in a layered net")
+    title(one, "I　二叉树里的割", "I  a cut in a binary tree")
     levels = tree_levels(8)
     A = set(range(2, 6))
     # bonds above a node are cut when the node's legs lie inside A and its parent's do not
@@ -76,7 +76,7 @@ def draw(fig):
     for lv in range(1, len(levels)):
         for x, y in pos[lv]:
             one.rect(x - 8, y - 7, 16, 14, color="ink", fill="panel", width=1.6, rx=3)
-    one.text(one.width / 2, 274, one.t("4 条腿，割 2 条键", "4 legs, 2 bonds cut"), size=13, color="dim", anchor="middle")
+    one.text(one.width / 2, 274, one.t("树：4 条腿，割 2 条键", "tree: 4 legs, 2 bonds cut"), size=13, color="dim", anchor="middle")
 
     # ---- II: flow = cut on the width-three bridge graph
     title(two, "II　宽度三桥：流 = 割", "II  bridge: flow = cut")

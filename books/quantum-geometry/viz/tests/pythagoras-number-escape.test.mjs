@@ -60,6 +60,20 @@ check('LOCKED: the readout and both drawers state the even-period case as “of 
   && /±1 两个值里只出现 \+1/.test(lockedNote) && /±1 两个值里只出现 \+1/.test(pellDrawer[0]) && /of the two values ±1 only \+1 occurs/.test(pellDrawer[1]) && !/只能取到 \+1/.test(pellDrawer[0]) && !/only \+1 does/.test(pellDrawer[1]) && !/只在 \+1 这一支上/.test(lockedNote), lockedNote);
 await pick('golden'); s = await state();
 check('GOLDEN: d = 5 and the legend points at the Lean-classified ±4 points', s.d === 5 && (await page.textContent('#legend')).includes('±4'));
+{
+  // the still of the GOLDEN card: its headline is a green ring (F_k, L_k) on m² − 5n² = ±4, as the caption says
+  const fib = [0n, 1n], luc = [2n, 1n]; for (let i = 2; i < 30; i++) { fib.push(fib[i - 1] + fib[i - 2]); luc.push(luc[i - 1] + luc[i - 2]); }
+  const r = s.lucas, F = r && BigInt(r.F), Lk = r && BigInt(r.L), dd = r && Lk * Lk - 5n * F * F;
+  const nmax = Math.max(2.6, 1.32 * Number(s.n) + 0.8);          // the view at an integer rail position
+  const last = fib.map((f, i) => i).filter((i) => Number(fib[i]) <= nmax && Number(luc[i]) <= Math.sqrt(5) * nmax).pop();
+  check('GOLDEN still: the headline ring is (F_k, L_k), the largest one in view, and L_k² − 5F_k² = ±4',
+    !!r && r.k === last && F === fib[r.k] && Lk === luc[r.k] && (dd === 4n || dd === -4n) && dd === BigInt(r.delta));
+  const big = (await page.textContent('#hudBig')).replace(/\s+/g, ' ');
+  check('GOLDEN still: the big readout is that ±4 equation, not a ±1 convergent', !!r && big === `${r.L}² − 5·${r.F}² = ${dd > 0n ? '+' : '−'}4` && !big.includes('≈'));
+  check('GOLDEN still: the key readout agrees', !!r && (await page.textContent('#roKey')).includes(`${dd > 0n ? '+' : '−'}4`) && (await page.textContent('#roKeySub')).includes(`${r.L}² − 5·${r.F}²`));
+  await setRange('dsel', 2); s = await state();
+  check('moving any control leaves the GOLDEN reading and returns to the convergent', s.lucas === null && (await page.textContent('#hudBig')).includes('≈'));
+}
 await setRange('dsel', 0); check('other values of d do not show the ±4 legend entry', !(await page.textContent('#legend')).includes('±4'));
 check('changing d leaves the experiment card', (await state()).preset === null);
 
@@ -103,6 +117,7 @@ check('LINE-7: no two squares, no root of −1', s.p === 7 && s.two === null && 
 /* ---------- points mod p ---------- */
 await pick('count'); s = await state();
 check('COUNT-13: 8 points over F₁₃ (7 on the grid and the point at infinity), a = +6 = 2·3', s.scene === 'curve' && s.curve === 'cm' && s.p === 13 && s.count === 8 && s.npoints === 7 && s.a === 6);
+check('COUNT-13: the readout names the gap aₚ, not a (the chapter\'s a is a leg of the Gaussian triangle)', (await page.textContent('#pillKey')).includes('aₚ = +6') && !/(^|[^ₚ])a = /.test(await page.textContent('#pillKey')));
 const brute = (f, p) => { let n = 1; for (let x = 0; x < p; x++) for (let y = 0; y < p; y++) if ((y * y - f(x)) % p === 0) n++; return n; };
 const fcm = (x) => x * x * x - x, fgen = (x) => x * x * x - x + 1;
 let cmOk = true, gaussOk = true;
@@ -166,6 +181,15 @@ await pick('count'); h = await page.evaluate(() => window.PYTHAGORAS_DEBUG.hist(
 check('for y² = x³ − x about half of the primes sit in the bin at 0', h.n === 429 && h.bins[12] / h.n > 0.45, `${h.bins[12]} of ${h.n}`);
 await pick('sato'); s = await state();
 check('SATO–TATE card switches to the curve without complex multiplication', s.curve === 'gen' && s.scene === 'curve');
+{
+  // the still of the SATO card: the histogram and the semicircle take the stage, as the caption describes
+  const n53 = brute(fgen, 53), cos53 = (54 - n53) / (2 * Math.sqrt(53));
+  check('SATO still: the histogram with the semicircle law is on the stage at p = 53 (cos θₚ = 0.137 from a brute-force count)',
+    s.satoStage === true && s.p === 53 && Math.abs(s.cos - cos53) < 1e-12 && cos53.toFixed(3) === '0.137'
+      && (await page.textContent('#hudBig')).includes('半圆') && (await page.textContent('#legend')).includes('半圆律') && (await page.textContent('#legend')).includes('直方图'));
+  await page.click('#curveChips [data-curve="cm"]'); await settle(page); s = await state();
+  check('switching the curve leaves the SATO stage', s.satoStage === false && !(await page.textContent('#legend')).includes('直方图'));
+}
 
 /* ---------- scenes, rail, keyboard ---------- */
 await page.locator('body').click({ position: { x: 5, y: 5 } });

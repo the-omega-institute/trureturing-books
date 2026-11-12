@@ -175,12 +175,8 @@ $$
    \operatorname{sign}(\mathrm{left}, \mathrm{right}) = (-1)^{\operatorname{inv}(\mathrm{left}, \mathrm{right})}.
    $$
 
-::: {.viz src="blade-multiplication" preset="e1e2" height="500"}
-**不用交换：e₁ · e₂ = +e₁₂。** 两块刀片各占一位，掩码 001₂ ⊕ 010₂ = 011₂；右栏的两枚因子已经按顺序排好，没有交叉的线，表里这一格是青色。
-:::
-
 ::: {.viz src="blade-multiplication" preset="e2e1" height="500"}
-**交换一次，变一次号：e₂ · e₁ = −e₁₂。** 掩码的异或不变，仍是 011₂；右边的 e₁ 要越过左边的 e₂，两条品红的线交叉一次，符号变成 −，表里这一格是品红。
+**交换一次，变一次号：e₂ · e₁ = −e₁₂。** 两种次序的掩码异或都是 001₂ ⊕ 010₂ = 011₂。e₁ · e₂ 的两枚因子已经按顺序排好，不用交换，表里那一格是青色；e₂ · e₁ 右边的 e₁ 要越过左边的 e₂，右栏两条品红的线交叉一次，符号变成 −，表里这一格是品红。
 :::
 
 请特别注意表中两处最容易混淆的对应关系，我们在代码与正文中将它们严格区分、保持百分之百自洽：
@@ -236,6 +232,10 @@ $$
 :::
 
 结论 4 的指数 $bc - ad$ 是两个下标对 $(a, b)$ 与 $(c, d)$ 的**辛配对**：交换两对下标它变号，与自己配对为零。由结论 3 可以读出对易判据（手工推导，未在本书形式化；Lean 模块本身不陈述这一推论）：$D(c, d)\,D(a, b)$ 可逆，所以 $D(a, b)$ 与 $D(c, d)$ 对易当且仅当 $\omega^{\,bc - ad} = 1$，即 $bc - ad \equiv 0 \pmod M$。
+
+::: {.figure src="ch25-weyl-clock"}
+**$M = 3$ 时交换一次不是变号，而是转过 $120^\circ$。** 左栏是三能级系统的三个基矢 $\lvert 0\rangle, \lvert 1\rangle, \lvert 2\rangle$：青色的箭头是移位 $X$，把每个基矢沿环推到下一个，紫色的 $1, \omega, \omega^2$ 是时钟 $Z$ 给它们的相位。右栏是相位的单位圆：由合成律，$ZX = \omega\,XZ$，紫色的弧从 $XZ$ 转过 $120^\circ$ 到 $ZX$；虚线是 $M = 2$ 时的同一段弧，转过 $180^\circ$ 落在 $-1$，即变号（[@thm-weyl-displacement-laws]）。
+:::
 
 多个 $M$ 能级系统并排时的乘法律已在[第十四章](ch14-cloning-codes-and-braids.md) [@lemma-pauli-word-phase] 中引用：那里的交叉相位指数 $\sum_n a.z_n \cdot b.x_n$，就是本定理结论 1 的指数 $bc$ 逐个系统求和。
 

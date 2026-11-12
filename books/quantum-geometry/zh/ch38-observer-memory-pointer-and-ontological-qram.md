@@ -13,7 +13,7 @@
 3. **递归自映射页表（`p = *p`）与 `NULL` 清零轮回的终结**：用页表零号槽位存储自身基址展示自寻址闭环，再在 `MODEL` 中将查表规则与被查之表合拢（$\psi = \psi(\psi)$），以多级离散间接寻址取代撞入 $90^\circ$ 光视界时的悬空清零重置。
 
 ::: {.figure src="ch38-overview"}
-**图 38。** 本章地图（示意模型，`MODEL`）：第 I 栏，一块从不移动的内存阵列，指针寄存器 `ptr` 的青色光束落在琥珀色的当前格上，这是一次解引用 `*ptr`，灰色虚线箭头把读头推向下一格，这是 `ptr++`；第 II 栏，三枚指针 $\mathrm{ptr}_A$、$\mathrm{ptr}_B$、$\mathrm{ptr}_C$ 以共享借用 `&State` 指向同一页，旁边被划掉的虚线页是不可克隆判据排除的、对未知态的通用精确拷贝 `memcpy`（[@thm-ch38-pointer-width-and-no-deep-copy]）；第 III 栏，四格页目录 $P$ 的零号槽写着它自己的地址 `0x1000`，青色箭头绕回 $P$ 本身，即 `p = *p`，第 1–3 格通向叶页表 $T_1$–$T_3$（[@ex-ch38-recursive-page-table-dereference]）。
+**图 38。** 本章地图（示意模型，`MODEL`）：第 I 栏，一块从不移动的内存阵列，指针寄存器 `ptr` 的青色光束落在琥珀色的当前格上，这是一次解引用 `*ptr`，灰色虚线箭头把读头推向下一格，这是 `ptr++`；第 II 栏，三枚指针 $\mathrm{ptr}_A$、$\mathrm{ptr}_B$、$\mathrm{ptr}_C$ 以共享借用 `&State` 指向同一页，旁边被划掉的虚线页是不可克隆判据排除的、对未知态的通用精确拷贝 `memcpy`（[@thm-ch38-pointer-width-and-no-deep-copy]）；第 III 栏，四格页目录 $P$ 的零号槽写着它自己的地址 `0x1000`，青色箭头绕回 $P$ 本身，即 `p = *p`；抽象的三种遍历行为由 [@thm-ch38-recursive-page-table-walk] 形式化，第 1–3 格通向具体示意中的叶页表 $T_1$–$T_3$（[@ex-ch38-recursive-page-table-dereference]）。
 :::
 
 ---
@@ -226,8 +226,31 @@ $$
 
 为了让读者亲手触摸“把页表自己的基址写进零号槽位”如何将 `p = *p` 化为最具体的有限离散代数，我们在下框中完整推演一座 $N$ 槽位页目录的多级解引用算术：
 
-::: {.example #ex-ch38-recursive-page-table-dereference title="N 槽位递归自映射页目录的多级解引用手算核验（文献结果，未在本书形式化）"}
-**文献结果，未在本书形式化。** 本例用有限离散数组显式演示操作系统递归页表自映射（[@rem-ch38-x86-recursive-page-table-literature] 第 1 条）的步进算术，该硬件分页模型未作为独立声明包含在 `trureturing@dev` 中。设有限地址集合包含一座顶层页目录 $P[0..N-1]$（$N \ge 2$，物理基址记为 $b_0 := \operatorname{addr}(P)$）、$N - 1$ 张叶级页表 $T_1, \dots, T_{N-1}$（每张含 $N$ 个槽位 $T_i[0..N-1]$）以及用户数据页帧 $D_{i,j}$（$1 \le i \le N-1,\; 0 \le j \le N-1$）。令内存读取映射满足 $\operatorname{Mem}[\operatorname{addr}(X)] = X$，并在顶层页目录的**零号槽位写入自身基址**，其余槽位指向叶级页表：
+::: {.theorem #thm-ch38-recursive-page-table-walk title="递归页表遍历：数据读取、叶表内省与根闭包" lean="D5/S0/Diagonal/RecursivePageTable.recursive_page_table_walk"}
+设 `Address` 为任意类型，`lookup : Address \to \operatorname{Fin} N \to Address` 为页表读取映射，并取根地址、叶地址、数据地址以及索引 `selfSlot`、`i`、`j`。若
+
+$$
+\operatorname{lookup}(root,selfSlot)=root,\qquad
+\operatorname{lookup}(root,i)=leaf,\qquad
+\operatorname{lookup}(leaf,j)=data,
+$$
+
+则递归定义的 `pageWalk` 满足
+
+$$
+\begin{aligned}
+\operatorname{pageWalk}(lookup,root,[i,j]) &= data,\\
+\operatorname{pageWalk}(lookup,root,[selfSlot,i]) &= leaf,\\
+\operatorname{pageWalk}(lookup,root,[\underbrace{selfSlot,\ldots,selfSlot}_{L\text{ 次}}]) &= root
+\quad\text{对每个有限 }L。
+\end{aligned}
+$$
+
+第一式是普通两级数据读取，第二式表示经过一次自映射后可直接内省叶表，第三式是根地址的有限次自闭包。完整证明由 Lean 内核检查。
+:::
+
+::: {.example #ex-ch38-recursive-page-table-dereference title="N 槽位递归自映射页目录的多级解引用手算核验（具体示意）"}
+上面的抽象三模式遍历已经由 [@thm-ch38-recursive-page-table-walk] 形式化。下面的例子用有限地址数组和十六进制标签实例化同一模式；操作系统硬件语义仍是示意模型，不另作 Lean 断言。设有限地址集合包含一座顶层页目录 $P[0..N-1]$（$N \ge 2$，物理基址记为 $b_0 := \operatorname{addr}(P)$）、$N - 1$ 张叶级页表 $T_1, \dots, T_{N-1}$（每张含 $N$ 个槽位 $T_i[0..N-1]$）以及用户数据页帧 $D_{i,j}$（$1 \le i \le N-1,\; 0 \le j \le N-1$）。令内存读取映射满足 $\operatorname{Mem}[\operatorname{addr}(X)] = X$，并在顶层页目录的**零号槽位写入自身基址**，其余槽位指向叶级页表：
 
 $$
 P[0] \;=\; b_0 \;=\; \operatorname{addr}(P), \qquad P[i] \;=\; \operatorname{addr}(T_i) \quad (1 \le i \le N-1), \qquad T_i[j] \;=\; \operatorname{addr}(D_{i,j}).
@@ -275,7 +298,7 @@ $$
    由 [@thm-ch38-self-mapped-diagonal-fixed-point] 第 2 款，只要寻址变换抗拒自指（$\forall y,\; f(y) \neq y$），它就注定逃逸每一张表，逼迫观察者徒劳地向表外祈求更高一层的“外部观察者”；而在零号槽位种下 $P[0] = \operatorname{addr}(P)$，得到的是自地址闭环，槽里存的是地址。要把它接到第 1 款，还须有整行捕获条件 $g(a_0)=\operatorname{diagonal}(f,g)$；第 3 款的唯一黄金根则属于所选正倒数映射。**让查表程序住进被查之表，是这一 `MODEL` 另行给出的执行规则！** 三种视野由索引区分：`[1,2]` 返回外境数据地址 `0x9000`，`[0,1]` 返回叶表地址 `0x2000`，`[0,0]` 返回根地址 `0x1000`；沿零号槽反复 `*p`、`**p`、`***p` 始终停在根，不会自行切换视野。
 
 ::: {.viz src="pointer-ontology-deref" preset="diagonal_hit" height="500"}
-**地址与读出的内容是同一个数。** p = 0x1000，一次解引用读 Mem[0x1000][0] = 0x1000：青色箭头弯回页目录自己，琥珀色的框落在 P 上。只有写着自己地址的这一格如此，读别的地址仍要一级一级走；这一格是自地址闭环，槽里存的是地址；要接到 [@thm-ch38-self-mapped-diagonal-fixed-point] 第 1 款的对角落点，还须另有整行捕获条件 $g(a_0) = \operatorname{diagonal}(f, g)$。
+**地址与读出的内容是同一个数。** p = 0x1000，一次解引用读 Mem[0x1000][0] = 0x1000：左边的指针寄存器 p 与它读出的 *p 并排，中间是青色的“=”；右边青色箭头弯回页目录自己，琥珀色的框落在 P 上。下面对照的普通指针 p = 0x2000 读出 T₁[0] = 0x7000，两数不等：只有写着自己地址的这一格如此，读别的地址仍要一级一级走；这一格是自地址闭环，槽里存的是地址；要接到 [@thm-ch38-self-mapped-diagonal-fixed-point] 第 1 款的对角落点，还须另有整行捕获条件 $g(a_0) = \operatorname{diagonal}(f, g)$。
 :::
 
 2. **为什么盲目撞入纯光视界（$\theta = 90^\circ$）会触发失忆轮回？——悬空空指针重置（`ptr = NULL`）**：

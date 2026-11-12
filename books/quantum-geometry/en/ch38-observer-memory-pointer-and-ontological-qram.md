@@ -13,7 +13,7 @@ In this architectural pivot chapter leading into [Chapter 39](ch39-observer-is-o
 3. **Recursive Self-Mapped Page Table (`p = *p`) and the End of `NULL`-Reset Reincarnation**: Writing the top-level page directory's own base address into Slot `[0,0]` exhibits a self-addressing loop, with the lookup rule and table then united in our `MODEL` ($\psi = \psi(\psi)$), replacing `ptr = NULL` garbage-collection resets at the $90^\circ$ light horizon with multi-level discrete indirection across the entire ontological crystal.
 
 ::: {.figure src="ch38-overview"}
-**Figure 38.** The chapter at a glance (schematic model, `MODEL`). Panel I: a memory array that never moves; the cyan beam of the pointer register `ptr` lands on the amber current cell, a dereference `*ptr`, and a grey dashed arrow pushes the head to the next cell, `ptr++`. Panel II: three pointers $\mathrm{ptr}_A$, $\mathrm{ptr}_B$, $\mathrm{ptr}_C$ hold shared borrows `&State` of one page; the struck-out dashed page beside it is the universal exact copy `memcpy` of an unknown state, ruled out by the no-cloning criterion ([@thm-ch38-pointer-width-and-no-deep-copy]). Panel III: slot 0 of the four-slot page directory $P$ holds $P$'s own address `0x1000`, and a cyan arrow loops back into $P$ itself, `p = *p`; slots 1–3 lead to the leaf tables $T_1$–$T_3$ ([@ex-ch38-recursive-page-table-dereference]).
+**Figure 38.** The chapter at a glance (schematic model, `MODEL`). Panel I: a memory array that never moves; the cyan beam of the pointer register `ptr` lands on the amber current cell, a dereference `*ptr`, and a grey dashed arrow pushes the head to the next cell, `ptr++`. Panel II: three pointers $\mathrm{ptr}_A$, $\mathrm{ptr}_B$, $\mathrm{ptr}_C$ hold shared borrows `&State` of one page; the struck-out dashed page beside it is the universal exact copy `memcpy` of an unknown state, ruled out by the no-cloning criterion ([@thm-ch38-pointer-width-and-no-deep-copy]). Panel III: slot 0 of the four-slot page directory $P$ holds $P$'s own address `0x1000`, and a cyan arrow loops back into $P$ itself, `p = *p`; the abstract three-pattern behavior is formalized in [@thm-ch38-recursive-page-table-walk], while slots 1–3 lead to the leaf tables $T_1$–$T_3$ in the concrete illustration ([@ex-ch38-recursive-page-table-dereference]).
 :::
 
 ---
@@ -226,8 +226,31 @@ Conjunct 1 evaluates both sides of the function equality $g(a_0) = \operatorname
 
 To see with complete concrete clarity how writing a page directory's base address into its own Slot `0` turns `p = *p` into pure finite discrete algebra, let us step through an explicit $N$-entry page directory by hand:
 
-::: {.example #ex-ch38-recursive-page-table-dereference title="Explicit Multi-Step Dereferencing on an N-Entry Recursive Self-Mapped Page Directory (Literature Result, Not Formalized in This Book)"}
-**Literature result, not formalized in this book.** This worked example illustrates the finite-array arithmetic of operating-system recursive page-table self-mapping (Item 1 of [@rem-ch38-x86-recursive-page-table-literature]); this hardware paging model is not formalized as a standalone declaration in `trureturing@dev`. Consider a finite memory address space containing a top-level page directory $P[0..N-1]$ ($N \ge 2$) at physical base address $b_0 := \operatorname{addr}(P)$, together with $N - 1$ leaf page tables $T_1, \dots, T_{N-1}$ (each holding $N$ slots $T_i[0..N-1]$) and user data frames $D_{i,j}$ ($1 \le i \le N-1,\; 0 \le j \le N-1$). Let memory lookup satisfy $\operatorname{Mem}[\operatorname{addr}(X)] = X$, and **store the page directory's own base address in Slot `0`** while Slots $1 \dots N-1$ point to leaf tables:
+::: {.theorem #thm-ch38-recursive-page-table-walk title="Recursive Page-Table Walk: Data Lookup, Leaf Introspection, and Root Closure" lean="D5/S0/Diagonal/RecursivePageTable.recursive_page_table_walk"}
+Let `Address` be any type, let `lookup : Address \to \operatorname{Fin} N \to Address`, and choose a root address, a leaf address, a data address, and indices `selfSlot`, `i`, and `j`. If
+
+$$
+\operatorname{lookup}(root,selfSlot)=root,\qquad
+\operatorname{lookup}(root,i)=leaf,\qquad
+\operatorname{lookup}(leaf,j)=data,
+$$
+
+then the recursively defined `pageWalk` satisfies
+
+$$
+\begin{aligned}
+\operatorname{pageWalk}(lookup,root,[i,j]) &= data,\\
+\operatorname{pageWalk}(lookup,root,[selfSlot,i]) &= leaf,\\
+\operatorname{pageWalk}(lookup,root,[\underbrace{selfSlot,\ldots,selfSlot}_{L\text{ times}}]) &= root
+\quad\text{for every finite }L.
+\end{aligned}
+$$
+
+The first equality is the ordinary two-level data lookup, the second exposes the leaf table after one self-map step, and the third is the root self-closure. The complete proof is checked by the Lean kernel.
+:::
+
+::: {.example #ex-ch38-recursive-page-table-dereference title="Explicit Multi-Step Dereferencing on an N-Entry Recursive Self-Mapped Page Directory (Concrete Illustration)"}
+The abstract three-pattern walk above is formalized by [@thm-ch38-recursive-page-table-walk]. The worked example below instantiates the same pattern with a finite address array and hexadecimal labels; the operating-system hardware interpretation remains an illustrative model rather than an additional Lean claim. Consider a finite memory address space containing a top-level page directory $P[0..N-1]$ ($N \ge 2$) at physical base address $b_0 := \operatorname{addr}(P)$, together with $N - 1$ leaf page tables $T_1, \dots, T_{N-1}$ (each holding $N$ slots $T_i[0..N-1]$) and user data frames $D_{i,j}$ ($1 \le i \le N-1,\; 0 \le j \le N-1$). Let memory lookup satisfy $\operatorname{Mem}[\operatorname{addr}(X)] = X$, and **store the page directory's own base address in Slot `0`** while Slots $1 \dots N-1$ point to leaf tables:
 
 $$
 P[0] \;=\; b_0 \;=\; \operatorname{addr}(P), \qquad P[i] \;=\; \operatorname{addr}(T_i) \quad (1 \le i \le N-1), \qquad T_i[j] \;=\; \operatorname{addr}(D_{i,j}).
@@ -275,7 +298,7 @@ Uniting [@thm-ch38-self-mapped-diagonal-fixed-point] with [@ex-ch38-recursive-pa
    By Conjunct 2 of [@thm-ch38-self-mapped-diagonal-fixed-point], any addressing rule that refuses self-reference ($\forall y,\; f(y) \neq y$) inevitably escapes every table, condemning thought to posit an endless tower of external observers; storing $P[0] = \operatorname{addr}(P)$ establishes a self-addressing loop, whose slot contains an address. Applying Conjunct 1 additionally requires whole-row capture $g(a_0)=\operatorname{diagonal}(f,g)$; Conjunct 3’s unique golden root belongs to the chosen positive reciprocal map. **Putting the lookup program inside its table is an execution rule supplied by this `MODEL`!** The three views use distinct indices: `[1,2]` returns data address `0x9000`, `[0,1]` returns leaf-table address `0x2000`, and `[0,0]` returns root address `0x1000`. Repeated zero-slot `*p`, `**p`, and `***p` all remain at the root; depth alone never switches views.
 
 ::: {.viz src="pointer-ontology-deref" preset="diagonal_hit" height="500"}
-**The address and what it reads are the same number.** p = 0x1000, and one dereference reads Mem[0x1000][0] = 0x1000: the cyan arrow curls back to the directory and the amber frame lands on P. Only this cell, which holds its own address, does that; any other address still takes every level. The cell is a self-addressing loop whose slot holds an address; connecting it to the diagonal landing of Conjunct 1 of [@thm-ch38-self-mapped-diagonal-fixed-point] additionally requires whole-row capture $g(a_0) = \operatorname{diagonal}(f, g)$.
+**The address and what it reads are the same number.** p = 0x1000, and one dereference reads Mem[0x1000][0] = 0x1000: on the left the pointer register p and what it reads, *p, stand side by side with a cyan = sign between them, while on the right the cyan arrow curls back to the directory and the amber frame lands on P. The ordinary pointer below for contrast, p = 0x2000, reads T₁[0] = 0x7000, and the two differ: only the cell that holds its own address does this; any other address still takes every level. The cell is a self-addressing loop whose slot holds an address; connecting it to the diagonal landing of Conjunct 1 of [@thm-ch38-self-mapped-diagonal-fixed-point] additionally requires whole-row capture $g(a_0) = \operatorname{diagonal}(f, g)$.
 :::
 
 2. **Why Crashing Unmapped into Pure Light ($\theta = 90^\circ$) Triggers Amnesic Reincarnation — Dangling Null-Pointer Reset (`ptr = NULL`)**:

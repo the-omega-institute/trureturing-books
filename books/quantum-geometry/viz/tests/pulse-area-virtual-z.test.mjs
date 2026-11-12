@@ -151,6 +151,20 @@ check('DETUNED: the same area π/2 misses the undetuned end by about 26°', clos
 check('DETUNED: the note gives the miss the suite computes', (await page.textContent('#roNote')).includes(`${miss.toFixed(1)}°`));
 s = await seek(12.5);
 check('DETUNED: in mid-pulse the axis is tilted out of the equator', s.axis && s.axis[2] > 0.1 && s.axis[2] < 0.5);
+// the printed still of the detuned card (opened as viz-thumbs.mjs does): the miss is drawn and labelled with the
+// suite's own number, and the axis label names the trail's lowest tip, not the vertical axis of the envelope's end
+{
+  const shot = await T.goto(BOOK, ID, '?shot=1&lang=zh&preset=detune', await T.newPage());
+  await settle(shot);
+  const st = await shot.evaluate(() => window.PULSE_DEBUG.state);
+  const tags = await shot.evaluate(() => Array.from(document.querySelectorAll('#stage .tag')).filter((e) => !e.hidden).map((e) => e.textContent));
+  const missS = Math.acos(run(st, 'main', st.max).reduce((a, x, i) => a + x * run(st, 'det', st.max)[i], 0)) / DEG;
+  const lowest = Math.asin(st.det * MHZ / Math.hypot(st.peak, st.det * MHZ)) / DEG;
+  check('DETUNED still: it stops at the end of the pulse, where the caption\'s miss is measured', close(st.t, 25) && close(st.t, st.max));
+  check('DETUNED still: the arc between the white ring and the amber state carries the miss the suite computes', tags.includes(`差 ${missS.toFixed(1)}°`), `${missS.toFixed(2)}° / ${tags.join(' | ')}`);
+  check('DETUNED still: the violet label gives the lowest tilt of the axis tip, at the envelope\'s peak', tags.includes(`轴端最低处倾出赤道 ${lowest.toFixed(0)}°`) && close(st.sway, lowest, 1e-9) && !tags.some((x) => x.includes('90°')), `${lowest} / ${st.sway} / ${tags.join(' | ')}`);
+  await shot.close();
+}
 await pick('order'); s = await seek(50);
 check('SWAP-ORDER: X then Y takes the north pole to −y; Y then X takes it to +x', vdist(s.r, [0, -1, 0]) < 1e-9 && vdist(s.ghostState.r, [1, 0, 0]) < 1e-9 && s.ghost === 'two' && close(s.max, 50) && err(s) < 1e-8);
 await pick('vz'); s = await seek(25);
