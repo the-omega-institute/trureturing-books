@@ -11,7 +11,7 @@
   const DS = [2, 3, 5, 6, 7, 10, 11, 13, 14, 15, 17, 19, 21, 22, 23, 26, 29, 30, 31, 33, 34, 35, 37];
   const sieve = (N) => { const s = new Uint8Array(N + 1), out = []; for (let i = 2; i <= N; i++) { if (!s[i]) { out.push(i); for (let j = i * i; j <= N; j += i) s[j] = 1; } } return out; };
   const ODD = sieve(97).slice(1), ALL = sieve(3000).slice(1);
-  const S = { scene: 'pell', d: 2, curve: 'cm' };
+  const S = { scene: 'pell', d: 2, curve: 'cm', lucas: false, sato: false };
   const sci = (x) => { if (x === 0) return '0'; const e = Math.floor(Math.log10(Math.abs(x))), m = x / Math.pow(10, e); return Math.abs(e) < 3 ? x.toPrecision(3) : `${m.toFixed(2)}×10${String(e).replace('-', '−').split('').map((c) => ({ '−': '⁻', 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹' }[c])).join('')}`; };
   const signed = (v) => (v > 0 ? '+' : '−') + String(v < 0 ? -v : v);
 
@@ -69,9 +69,24 @@
   const step = () => Math.floor(clock.t + 1e-9), frac = () => clock.t - step();
   const prime = () => ODD[Math.min(step(), ODD.length - 1)];
 
+  const lucasMode = () => S.scene === 'pell' && S.d === 5 && S.lucas;
+  /** The green ring with the largest index that is inside the view: (Fₖ, Lₖ) and Lₖ² − 5Fₖ². */
+  function lucasInView(nmax, mmax) {
+    let best = null;
+    LUCAS.forEach(([l, fb], k) => { if (fb <= nmax && l <= mmax) best = { k, L: l, F: fb, delta: l * l - 5 * fb * fb }; });
+    return best;
+  }
+  /** The width of the Pell view in n (it widens from one convergent to the next as the rail moves). */
+  function viewN() {
+    const C = pell(S.d), k = step(), f = frac(), span = (j) => Math.max(2.6, 1.32 * Number(C.list[j].n) + 0.8);
+    return Math.exp(Math.log(span(k)) * (1 - f) + Math.log(span(Math.min(KP, k + 1))) * f);
+  }
+  const lucasNow = () => (lucasMode() ? lucasInView(viewN(), pell(S.d).root * viewN()) : null);
+  const sub = (k) => String(k).replace(/\d/g, (c) => '₀₁₂₃₄₅₆₇₈₉'[c]);
+
   function drawPell() {
     const cv = $('cv'), W = cv.clientWidth, H = cv.clientHeight, C = pell(S.d), k = step(), f = frac(), cur = C.list[k], wide = W > 640;
-    const span = (j) => Math.max(2.6, 1.32 * Number(C.list[j].n) + 0.8), nmax = Math.exp(Math.log(span(k)) * (1 - f) + Math.log(span(Math.min(KP, k + 1))) * f), mmax = C.root * nmax;
+    const nmax = viewN(), mmax = C.root * nmax;
     const right = wide ? Math.round(W * 0.44) : 24, g = kit.plot(cv, { x: [0, nmax], y: [0, mmax], pad: [44, right, 84, 54] }), c = g.ctx;
     // lattice (while it is coarse enough to see), the line m = √d·n and the two hyperbolas m² − d·n² = ±1
     if (g.iw / nmax >= 7 && g.ih / mmax >= 7) for (let i = 0; i <= nmax; i++) for (let j = 0; j <= mmax; j++) g.dot(i, j, P.faint, 1.3);
@@ -81,20 +96,24 @@
     g.line(hyp(1), P.cyan, { width: 1.3, alpha: 0.8 }); g.line(hyp(-1), P.magenta, { width: 1.3, alpha: 0.8 });
     g.line([[0, 0], [nmax, mmax]], P.sigma, { width: 1.6 });
     if (S.d === 5) for (const [l, fb] of LUCAS) if (fb <= nmax && l <= mmax) g.dot(fb, l, P.ok, 6, { ring: true, width: 1.6 });
+    // on the GOLDEN card the ledger reads the largest green ring in view: (Fₖ, Lₖ) on m² − 5n² = ±4
+    const luc = lucasNow();
+    if (luc) g.dot(luc.F, luc.L, P.ok, 9, { ring: true, width: 2.4, glow: 8 });
     for (let j = 0; j <= k; j++) { const q = C.list[j]; g.dot(Number(q.n), Number(q.m), q.delta > 0n ? P.cyan : P.magenta, j === k ? 5.5 : 3.6); }
     g.dot(Number(cur.n), Number(cur.m), P.amber, 10, { ring: true, width: 2, glow: 10 });
     c.restore();
     g.axes({ xTicks: [[0, '0'], [Number(cur.n), String(cur.n)]], yTicks: [[0, '0'], [Number(cur.m), String(cur.m)]] });
     g.text(nmax, 0, 'n', P.dim, { align: 'right', base: 'bottom', dx: -4, dy: -4 }); g.text(0, mmax, 'm', P.dim, { align: 'left', base: 'top', dx: 6, dy: 2 });
-    g.text(nmax, mmax, `m = √${S.d}·n`, P.sigma, { align: 'right', base: 'top', dx: -8, dy: 16, size: 11.5 });
+    g.text(nmax, mmax, `m = √${S.d}·n`, P.sigma, { align: 'right', base: 'top', dx: luc ? -34 : -8, dy: luc ? 30 : 16, size: 11.5 });   // clear of the headline ring near the corner
     // the area ledger: m² cells against d·n² cells, with a magnifier on their ends
+    const led = luc ? { m: BigInt(luc.L), n: BigInt(luc.F), delta: BigInt(luc.delta) } : cur;
     if (wide) {
-      const x0 = W - right + 34, bw = right - 64, m2 = cur.m * cur.m, dn2 = BigInt(S.d) * cur.n * cur.n, big = m2 > dn2 ? m2 : dn2, y1 = Math.max(96, H * 0.24), bh = 18;
+      const x0 = W - right + 34, bw = right - 64, m2 = led.m * led.m, dn2 = BigInt(S.d) * led.n * led.n, big = m2 > dn2 ? m2 : dn2, y1 = Math.max(96, H * 0.24), bh = 18;
       const len = (v) => bw * Number(v) / Number(big);
       c.font = `12px ${TRV.fonts.data}`; c.textAlign = 'left'; c.textBaseline = 'bottom';
-      c.fillStyle = P.cyan; c.fillText(`m² = ${cur.m}² = ${m2}`, x0, y1 - 5); c.fillRect(x0, y1, len(m2), bh);
-      c.fillStyle = P.magenta; c.fillText(`${S.d}·n² = ${S.d}·${cur.n}² = ${dn2}`, x0, y1 + bh + 34); c.fillRect(x0, y1 + bh + 39, len(dn2), bh);
-      const cs = Math.min(26, bw / 8.5), my = y1 + 2 * bh + 84, n = 7, mx = x0 + (bw - cs * (n + 1)) / 2, diff = Number(cur.delta);
+      c.fillStyle = P.cyan; c.fillText(`m² = ${led.m}² = ${m2}`, x0, y1 - 5); c.fillRect(x0, y1, len(m2), bh);
+      c.fillStyle = P.magenta; c.fillText(`${S.d}·n² = ${S.d}·${led.n}² = ${dn2}`, x0, y1 + bh + 34); c.fillRect(x0, y1 + bh + 39, len(dn2), bh);
+      const cs = Math.min(26, bw / 8.5), my = y1 + 2 * bh + 84, n = 7, mx = x0 + (bw - cs * (n + 1)) / 2, diff = Number(led.delta);
       c.strokeStyle = TRV.alpha(P.amber, 0.6); c.setLineDash([3, 4]); c.lineWidth = 1; c.beginPath(); c.moveTo(x0 + bw, y1 + bh); c.lineTo(mx + cs * (n + 1), my - 8); c.moveTo(x0 + bw - 14, y1 + 2 * bh + 39); c.lineTo(mx, my - 8); c.stroke(); c.setLineDash([]);
       c.strokeStyle = P.amber; c.strokeRect(mx - 8.5, my - 8.5, cs * (n + 1) + 16, cs * 2 + 30);
       // the last cells of both rows; the cells one row has and the other lacks glow amber
@@ -105,9 +124,14 @@
         else if (has) { c.fillStyle = TRV.alpha(row ? P.magenta : P.cyan, 0.75); c.fillRect(x + 1.5, y + 1.5, cs - 3, cs - 3); }
         else { c.strokeStyle = TRV.alpha(P.dim, 0.5); c.lineWidth = 1; c.strokeRect(x + 2, y + 2, cs - 4, cs - 4); }
       }
-      c.fillStyle = cur.delta > 0n ? P.cyan : P.magenta; c.font = `600 ${Math.min(22, bw / 11)}px ${TRV.fonts.data}`; c.textAlign = 'center'; c.textBaseline = 'top';
-      c.fillText(`${cur.m}² − ${S.d}·${cur.n}² = ${signed(cur.delta)}`, x0 + bw / 2, my + 2 * cs + 40);
+      c.fillStyle = led.delta > 0n ? P.cyan : P.magenta; c.font = `600 ${Math.min(22, bw / 11)}px ${TRV.fonts.data}`; c.textAlign = 'center'; c.textBaseline = 'top';
+      c.fillText(`${led.m}² − ${S.d}·${led.n}² = ${signed(led.delta)}`, x0 + bw / 2, my + 2 * cs + 40);
       if (!TRV.thumbMode) { c.fillStyle = P.dim; c.font = `11.5px ${TRV.fonts.body}`; c.fillText(L(`两条色带的末端，放大到一格一格：差 ${diff > 0 ? diff : -diff} 格`, `the ends of the two bands, cell by cell: ${diff > 0 ? diff : -diff} cell${Math.abs(diff) === 1 ? '' : 's'} apart`), x0 + bw / 2, my + 2 * cs + 72); }
+    }
+    if (luc) {
+      $('hudBig').textContent = `${luc.L}² − 5·${luc.F}² = ${signed(BigInt(luc.delta))}`;
+      $('hudSub').textContent = L(`绿圈 (n, m) = (F${sub(luc.k)}, L${sub(luc.k)}) = (${luc.F}, ${luc.L})：落在 m² − 5n² = ±4 上；渐近分数已走到 ${cur.m}/${cur.n}`, `Green ring (n, m) = (F${sub(luc.k)}, L${sub(luc.k)}) = (${luc.F}, ${luc.L}): it lies on m² − 5n² = ±4; the convergents have reached ${cur.m}/${cur.n}`);
+      return;
     }
     $('hudBig').textContent = `√${S.d} ≈ ${cur.m}/${cur.n}`;
     $('hudSub').textContent = L(`第 ${k} 个渐近分数：沿线量差 ${sci(Math.abs(Number(cur.m) / Number(cur.n) - C.root))}，按面积量差 ${signed(cur.delta)} 格`, `Convergent ${k}: ${sci(Math.abs(Number(cur.m) / Number(cur.n) - C.root))} off along the line, ${signed(cur.delta)} cell${cur.delta === 1n || cur.delta === -1n ? '' : 's'} off in area`);
@@ -160,10 +184,43 @@
     $('hudSub').textContent = ab ? L(`面素数：半径 √${p} 的圆穿过 8 个格点`, `A plane prime: the circle of radius √${p} passes through 8 lattice points`) : L(`线素数：半径 √${p} 的圆一个格点也碰不到`, `A line prime: the circle of radius √${p} touches no lattice point at all`);
   }
 
+  /** The histogram of cos θₚ over the good primes below 3000, 24 bins on [−1, 1]. */
+  function hist(key) {
+    if (!histCache[key]) { const bins = new Array(24).fill(0); let n = 0; for (const q of ALL) { if (BAD[key].includes(q)) continue; const u = count(key, q).cos; bins[Math.min(23, Math.floor((u + 1) / 2 * 24))]++; n++; } histCache[key] = { bins, n }; }
+    return histCache[key];
+  }
+  const satoMode = () => S.scene === 'curve' && S.curve === 'gen' && S.sato;
+  /** SATO card: the histogram and the semicircle law take the stage; the current prime is the amber line. */
+  function drawSatoStage(c, x0, y0, w, h, p, E) {
+    const Hh = hist('gen'), X = (u) => x0 + (u + 1) / 2 * w, Y = (v) => y0 + h - v / 1.25 * h;
+    c.strokeStyle = P.lineHot; c.lineWidth = 1; c.beginPath(); c.moveTo(x0, y0 + h); c.lineTo(x0 + w, y0 + h); c.stroke();
+    c.fillStyle = P.dim; c.font = `11px ${TRV.fonts.data}`; c.textAlign = 'center'; c.textBaseline = 'top';
+    for (const u of [-1, -0.5, 0, 0.5, 1]) { c.fillRect(X(u) - 0.5, y0 + h, 1, 5); c.fillText(String(u).replace('-', '−'), X(u), y0 + h + 8); }
+    c.fillText('cos θₚ', X(0), y0 + h + 24);
+    Hh.bins.forEach((b, i) => { const v = Math.min(b / Hh.n * 12, 1.25), xa = X(-1 + i / 12) + 1.5, xb = X(-1 + (i + 1) / 12) - 1.5; c.fillStyle = TRV.alpha(P.violet, 0.6); c.fillRect(xa, Y(v), xb - xa, y0 + h - Y(v)); });
+    c.strokeStyle = P.amber; c.lineWidth = 2; c.setLineDash([6, 4]); c.beginPath();
+    for (let i = 0; i <= 120; i++) { const u = -1 + i / 60, v = (2 / Math.PI) * Math.sqrt(Math.max(0, 1 - u * u)); if (i) c.lineTo(X(u), Y(v)); else c.moveTo(X(u), Y(v)); }
+    c.stroke(); c.setLineDash([]);
+    c.fillStyle = P.amber; c.font = `12px ${TRV.fonts.data}`; c.textAlign = 'left'; c.textBaseline = 'bottom'; c.fillText(L('半圆律 (2/π)√(1 − u²)', 'semicircle law (2/π)√(1 − u²)'), X(-1), Y(1.0));
+    if (!isBad('gen', p)) {
+      const xc = X(E.cos); c.strokeStyle = P.amber; c.lineWidth = 1.6; c.beginPath(); c.moveTo(xc, y0 + 4); c.lineTo(xc, y0 + h); c.stroke();
+      c.fillStyle = P.ink; c.font = `600 13px ${TRV.fonts.data}`; c.textAlign = E.cos > 0.3 ? 'right' : 'left'; c.textBaseline = 'top';
+      c.fillText(`p = ${p}: cos θₚ = ${fix(E.cos, 3)}`, xc + (E.cos > 0.3 ? -6 : 6), y0 + 4);
+    }
+    c.fillStyle = P.dim; c.font = `12px ${TRV.fonts.body}`; c.textAlign = 'left'; c.textBaseline = 'bottom';
+    c.fillText(L(`${Hh.n} 个良约化素数，p < 3000`, `${Hh.n} good primes, p < 3000`), x0, y0 - 6);
+  }
+
   function drawCurve() {
-    const cv = $('cv'), W = cv.clientWidth, H = cv.clientHeight, p = prime(), E = count(S.curve, p), ab = twoSquares(p), wide = W > 640;
+    const cv = $('cv'), W = cv.clientWidth, H = cv.clientHeight, p = prime(), E = count(S.curve, p), ab = twoSquares(p), wide = W > 640, sato = satoMode();
     const g = kit.plot(cv, { x: [0, 1], y: [0, 1], pad: [0, 0, 0, 0] }), c = g.ctx;
-    const side = Math.min(wide ? W * 0.52 : W - 60, H - 150), cell = side / p, gx = wide ? Math.max(44, W * 0.3 - side / 2) : (W - side) / 2, gy = 80 + (H - 140 - side) / 2;
+    if (sato && !wide) {   // narrow: the histogram alone
+      drawSatoStage(c, 30, 110, W - 60, H - 210, p, E);
+      $('hudBig').textContent = L('佐藤—泰特：半圆', 'SATO–TATE: THE SEMICIRCLE');
+      $('hudSub').textContent = L(`y² = x³ − x + 1：${hist('gen').n} 个素数的 cos θₚ 贴着半圆律`, `y² = x³ − x + 1: cos θₚ over ${hist('gen').n} primes follows the semicircle law`);
+      return;
+    }
+    const side = Math.min(wide ? (sato ? W * 0.28 : W * 0.52) : W - 60, H - 150), cell = side / p, gx = wide ? (sato ? 44 : Math.max(44, W * 0.3 - side / 2)) : (W - side) / 2, gy = 80 + (H - 140 - side) / 2;
     c.strokeStyle = P.lineHot; c.lineWidth = 1; c.strokeRect(gx - 0.5, gy - 0.5, side + 1, side + 1);
     if (cell >= 5) { c.fillStyle = TRV.alpha(P.faint, 0.8); for (let x = 0; x < p; x++) for (let y = 0; y < p; y++) c.fillRect(gx + (x + 0.5) * cell - 0.6, gy + side - (y + 0.5) * cell - 0.6, 1.2, 1.2); }
     c.strokeStyle = TRV.alpha(P.dim, 0.6); c.setLineDash([4, 4]); c.beginPath(); c.moveTo(gx, gy + side - (p / 2) * cell); c.lineTo(gx + side, gy + side - (p / 2) * cell); c.stroke(); c.setLineDash([]);
@@ -178,6 +235,12 @@
     if (!wide) {   // narrow: the spins as one dot under each column
       const rr = Math.max(1.6, Math.min(4, cell * 0.36));
       for (let x = 0; x < p; x++) { c.fillStyle = spinCol(chi[x]); c.beginPath(); c.arc(gx + (x + 0.5) * cell, gy + side + 10, rr, 0, kit.TAU); c.fill(); }
+    }
+    if (wide && sato) {
+      drawSatoStage(c, gx + side + 70, 110, W - (gx + side + 70) - 50, H - 220, p, E);
+      $('hudBig').textContent = L('佐藤—泰特：半圆', 'SATO–TATE: THE SEMICIRCLE');
+      $('hudSub').textContent = L(`左：y² = x³ − x + 1 在 𝔽${p} 上的 ${E.n} 个点；右：${hist('gen').n} 个素数的 cos θₚ 贴着半圆律`, `Left: the ${E.n} points of y² = x³ − x + 1 over F_${p}; right: cos θₚ over ${hist('gen').n} primes follows the semicircle law`);
+      return;
     }
     if (wide) {   // the ring of spins χ_p(f(x)), x = 0 at the top, x and −x mirror images
       const R1 = Math.min(W * 0.11, (H - 160) * 0.2), cx = W * 0.79, cy1 = (TRV.thumbMode ? 84 : 118) + R1, dr = Math.max(1.8, Math.min(5.5, Math.PI * R1 / p * 0.72)) * (TRV.thumbMode ? 1.5 : 1);
@@ -203,7 +266,7 @@
       c.save(); c.shadowColor = P.amber; c.shadowBlur = 10; c.strokeStyle = P.amber; c.lineWidth = 2.2; c.beginPath(); c.moveTo(cx, cy); c.lineTo(px, py); c.stroke(); c.fillStyle = P.amber; c.beginPath(); c.arc(px, py, 4.5, 0, kit.TAU); c.fill(); c.restore();
       c.strokeStyle = P.amber; c.lineWidth = 4; c.beginPath(); c.moveTo(cx, cy); c.lineTo(px, cy); c.stroke();
       c.fillStyle = P.ink; c.font = `600 15px ${TRV.fonts.data}`; c.textAlign = 'center'; c.textBaseline = 'bottom'; c.fillText(`cos θₚ = ${fix(E.cos, 3)}`, cx, cy - r - 30);
-      c.fillStyle = P.dim; c.font = `11.5px ${TRV.fonts.data}`; c.fillText(`a / (2√p) = ${signed(E.a).replace('+0', '0').replace('−0', '0')} / ${fix(2 * Math.sqrt(p), 2)}`, cx, cy - r - 12);
+      c.fillStyle = P.dim; c.font = `11.5px ${TRV.fonts.data}`; c.fillText(`aₚ / (2√p) = ${signed(E.a).replace('+0', '0').replace('−0', '0')} / ${fix(2 * Math.sqrt(p), 2)}`, cx, cy - r - 12);
     }
     $('hudBig').textContent = bad ? L(`p = ${p}：坏约化`, `p = ${p}: BAD REDUCTION`) : L(`在 𝔽${p} 上有 ${E.n} 个点`, `${E.n} POINTS OVER F_${p}`);
     $('hudSub').textContent = bad ? L(`判别式 ${DISC[S.curve]} 被 ${p} 整除：曲线在 (${sing[0]}, 0) 自交，这个素数不计入哈塞界与直方图`, `The discriminant ${DISC[S.curve]} is divisible by ${p}: the curve crosses itself at (${sing[0]}, 0), and this prime is left out of Hasse's bound and the histogram`)
@@ -245,9 +308,8 @@
       g.line(up, P.amber, { dash: [4, 3], width: 1.2 }); g.line(dn, P.amber, { dash: [4, 3], width: 1.2 });
       for (const q of xs) { const a = count(S.curve, q).a; g.rect(q - 0.7, 0, q + 0.7, a, a > 0 ? P.cyan : P.magenta, { alpha: q === p ? 1 : 0.6 }); if (!a) g.dot(q, 0, P.sigma, 1.8); }
       g.vline(p, P.amber, { alpha: 0.7 });
-      $('pATitle').textContent = L('aₚ 被 ±2√p 关住', 'aₚ is held inside ±2√p'); $('pAMeta').textContent = isBad(S.curve, p) ? L('坏约化', 'bad reduction') : `a = ${signed(count(S.curve, p).a).replace(/[+−]0/, '0')}`;
-      const key = S.curve; if (!histCache[key]) { const bins = new Array(24).fill(0); let n = 0; for (const q of ALL) { if (BAD[key].includes(q)) continue; const u = count(key, q).cos; bins[Math.min(23, Math.floor((u + 1) / 2 * 24))]++; n++; } histCache[key] = { bins, n }; }
-      const Hh = histCache[key], dens = Hh.bins.map((b) => b / Hh.n * 12), g2 = kit.plot(B, { x: [-1, 1], y: [0, 1.25], pad: [30, 10, 10, 22] });
+      $('pATitle').textContent = L('aₚ 被 ±2√p 关住', 'aₚ is held inside ±2√p'); $('pAMeta').textContent = isBad(S.curve, p) ? L('坏约化', 'bad reduction') : `aₚ = ${signed(count(S.curve, p).a).replace(/[+−]0/, '0')}`;
+      const key = S.curve, Hh = hist(key), dens = Hh.bins.map((b) => b / Hh.n * 12), g2 = kit.plot(B, { x: [-1, 1], y: [0, 1.25], pad: [30, 10, 10, 22] });
       g2.axes({ yTicks: [0, 0.5, 1], xTicks: [[-1, '−1'], [0, '0'], [1, '1']] });
       dens.forEach((v, i) => g2.rect(-1 + i / 12 + 0.006, 0, -1 + (i + 1) / 12 - 0.006, Math.min(v, 1.25), key === 'gen' ? P.violet : P.cyan, { alpha: 0.6 }));
       if (key === 'gen') { const sc2 = []; for (let i = 0; i <= 80; i++) { const u = -1 + i / 40; sc2.push([u, (2 / Math.PI) * Math.sqrt(Math.max(0, 1 - u * u))]); } g2.line(sc2, P.amber, { dash: [5, 3] }); g2.legend([[P.amber, L('半圆律', 'semicircle law'), 'dash']], { right: false }); }
@@ -268,12 +330,16 @@
     if (S.scene === 'pell') {
       const C = pell(S.d), q = C.list[k], neg = negativePell(S.d);
       $('roKeyL').textContent = L('面积上的缺口 m² − d·n²', 'the gap in area, m² − d·n²');
-      $('roKey').innerHTML = `<span class="${q.delta > 0n ? 'c-cy' : 'c-mg'}">${signed(q.delta)}</span> <span class="okmark">${L('不是 0', 'not 0')} ✓</span>`; $('roKeySub').textContent = `${q.m}² − ${S.d}·${q.n}²`;
+      const luc = lucasNow();
+      if (luc) {
+        $('roKeyL').textContent = L(`绿圈 (F${sub(luc.k)}, L${sub(luc.k)}) 上的 m² − 5n²`, `m² − 5n² on the green ring (F${sub(luc.k)}, L${sub(luc.k)})`);
+        $('roKey').innerHTML = `<span class="${luc.delta > 0 ? 'c-cy' : 'c-mg'}">${signed(BigInt(luc.delta))}</span>`; $('roKeySub').textContent = `${luc.L}² − 5·${luc.F}²`;
+      } else { $('roKey').innerHTML = `<span class="${q.delta > 0n ? 'c-cy' : 'c-mg'}">${signed(q.delta)}</span> <span class="okmark">${L('不是 0', 'not 0')} ✓</span>`; $('roKeySub').textContent = `${q.m}² − ${S.d}·${q.n}²`; }
       set(1, L('渐近分数 m/n', 'convergent m/n'), `${q.m}/${q.n}`); set(2, L('线上误差 |m/n − √d|', 'error on the line |m/n − √d|'), sci(Math.abs(Number(q.m) / Number(q.n) - C.root)));
       set(3, L('连分数', 'continued fraction'), `[${C.quot[0]}; ${C.quot.slice(1, C.period + 1).join(', ')}, …] <small>${L('周期', 'period')} ${C.period}</small>`);
       set(4, 'm² − d·n² = −1', neg ? `${neg[0]}² − ${S.d}·${neg[1]}² <span class="okmark">✓</span>` : L('无解', 'no solution'));
       $('roNote').textContent = neg ? L(`周期 ${C.period} 是奇数：差值能取到 −1，再走一个周期翻回 +1。`, `The period ${C.period} is odd: the gap reaches −1, and one more period flips it back to +1.`) : L(`周期 ${C.period} 是偶数：±1 两个值里只出现 +1，差值永远到不了 −1。`, `The period ${C.period} is even: of the two values ±1 only +1 occurs; the gap never reaches −1.`);
-      what = `√${S.d} ≈ ${q.m}/${q.n}`; key = `Δ = ${signed(q.delta)}`;
+      what = `√${S.d} ≈ ${q.m}/${q.n}`; key = luc ? `${luc.L}² − 5·${luc.F}² = ${signed(BigInt(luc.delta))}` : `Δ = ${signed(q.delta)}`;
     } else if (S.scene === 'split') {
       const p = prime(), ab = twoSquares(p), roots = rootsOfMinusOne(p), neg = negativePell(p);
       $('roKeyL').textContent = L('这个素数是', 'this prime is');
@@ -304,7 +370,7 @@
         : S.curve === 'gen' ? L('这条曲线没有复乘：aₚ 不再有简单公式，余弦值散开，分布贴近半圆律。', 'This curve has no complex multiplication: aₚ has no simple formula any more, the cosines spread out and their distribution follows the semicircle law.')
         : ab ? L(`面素数：|aₚ| = 2·${ab[0]}，余弦的绝对值 ${fix(Math.abs(E.cos), 3)} 就是高斯三角形的 ${ab[0]}/√${p}（青色虚线）。`, `A plane prime: |aₚ| = 2·${ab[0]}, and the absolute cosine ${fix(Math.abs(E.cos), 3)} is ${ab[0]}/√${p} of the Gaussian triangle (the dashed cyan line).`)
           : L('线素数：x 与 −x 的贡献正好抵消，aₚ = 0，角度落在 90°。', 'A line prime: the contributions of x and −x cancel exactly, aₚ = 0 and the angle sits at 90°.');
-      what = `p = ${p}`; key = bad ? L('坏约化', 'BAD') : `a = ${signed(E.a).replace(/[+−]0/, '0')}`;
+      what = `p = ${p}`; key = bad ? L('坏约化', 'BAD') : `aₚ = ${signed(E.a).replace(/[+−]0/, '0')}`;
       const badKey = bad ? S.curve + p : null;
       if (badKey && badKey !== lastBad && !TRV.still) TRV.toast($('toast'), L(`p = ${p}：坏约化。Δ(E) = ${DISC[S.curve]}，曲线在 (${singular(S.curve, p)[0]}, 0) 自交，不计入哈塞界与佐藤—泰特直方图。`, `p = ${p}: bad reduction. Δ(E) = ${DISC[S.curve]}; the curve crosses itself at (${singular(S.curve, p)[0]}, 0) and is left out of Hasse's bound and the Sato–Tate histogram.`), 6000);
       lastBad = badKey;
@@ -317,6 +383,7 @@
       split: [['cy', '面素数：圆上有格点', 'plane prime: lattice points on the circle'], ['mg', '线素数：圆上没有格点', 'line prime: none on the circle']],
       curve: [['cy', 'χ = +1：一对点 ±y', 'χ = +1: a pair of points ±y'], ['mg', 'χ = −1：这一列没有点', 'χ = −1: no point in the column'], ['sg', 'χ = 0：分支点 y = 0', 'χ = 0: a branch point y = 0'], ['am', '余弦 cos θₚ', 'the cosine cos θₚ']]
     };
+    if (satoMode()) LEG.curve = [['cy', '曲线上的点', 'points on the curve'], ['vi', 'cos θₚ 的直方图', 'histogram of cos θₚ'], ['am', '半圆律；当前 p 的 cos θₚ', 'semicircle law; cos θₚ at the current p']];
     const html = LEG[S.scene].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
     if ($('legend')._h !== html) { $('legend').innerHTML = html; $('legend')._h = html; }
   }
@@ -334,7 +401,7 @@
     document.querySelectorAll('[data-scenes]').forEach((el) => { el.hidden = !el.dataset.scenes.split(' ').includes(sc); });
     clock.pause(); clock.rate = SC[sc].rate; clock.setMax(SC[sc].max(), true); clock.set(t == null ? SC[sc].start() : t);
   }
-  const leave = () => cards.mark(null);
+  const leave = () => { S.lucas = false; S.sato = false; cards.mark(null); };
   const sceneChips = kit.chips($('sceneChips'), 'scene', (v) => { leave(); setScene(v); });
   const fD = kit.field($('dsel'), { fmt: (v) => String(DS[v]), onInput: (v) => { S.d = DS[v]; leave(); paint(); } });
   const curveChips = kit.chips($('curveChips'), 'curve', (v) => { S.curve = v; leave(); paint(); });
@@ -354,6 +421,7 @@
   };
   let booting = true;
   function applyPreset(id) {
+    S.lucas = false; S.sato = false;
     const pellAt = (d, t, play) => {
       S.d = d; fD.set(DS.indexOf(d)); setScene('pell', t);
       if (play && !TRV.still && !(booting && !TRV.embed)) { clock.set(0); if (booting) kit.autoplay(clock, $('stage')); else clock.play(); }
@@ -362,11 +430,11 @@
     if (id === 'hippasus') pellAt(2, 3, true);
     else if (id === 'minus') pellAt(13, 4, false);
     else if (id === 'locked') pellAt(7, 3, false);
-    else if (id === 'golden') pellAt(5, 5, false);
+    else if (id === 'golden') { pellAt(5, 3, false); S.lucas = true; paint(); }
     else if (id === 'five') setScene('split', ODD.indexOf(5));
     else if (id === 'seven') setScene('split', ODD.indexOf(7));
     else if (id === 'count') { curve('cm'); setScene('curve', ODD.indexOf(13)); }
-    else if (id === 'sato') { curve('gen'); setScene('curve', ODD.indexOf(53)); }
+    else if (id === 'sato') { curve('gen'); setScene('curve', ODD.indexOf(53)); S.sato = true; paint(); }
   }
   const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：换场景、换 d、拖时间轴。随时可以再选一张卡。', 'Free play: switch scenes, change d, scrub the rail. Pick a card again at any time.'] });
@@ -377,7 +445,7 @@
   window.PYTHAGORAS_DEBUG = {
     get state() {
       const k = step(), C = pell(S.d), q = C.list[Math.min(k, KP)], p = prime(), E = count(S.curve, p), neg = negativePell(S.scene === 'pell' ? S.d : p);
-      return { scene: S.scene, step: k, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, d: S.d, m: String(q.m), n: String(q.n), delta: String(q.delta), period: C.period,
+      return { lucas: lucasNow(), satoStage: satoMode(), hudBig: $('hudBig').textContent, scene: S.scene, step: k, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, d: S.d, m: String(q.m), n: String(q.n), delta: String(q.delta), period: C.period,
         deltas: C.list.map((x) => String(x.delta)), quot: C.quot.slice(0, 12), negPell: neg ? neg.map(String) : null, p, two: twoSquares(p), roots: rootsOfMinusOne(p), curve: S.curve, count: E.n, a: E.a, cos: E.cos, npoints: points(S.curve, p).length,
         chi: spins(S.curve, p), bad: isBad(S.curve, p), singular: isBad(S.curve, p) ? singular(S.curve, p) : null, angles: angles(p) };
     },

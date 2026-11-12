@@ -2,8 +2,9 @@
    Two-dimensional Minkowski spacetime, events (t, x), c = 1, q(t, x) = t² − x². The stage is the spacetime diagram
    itself: x across, t up, equal scales, the light cone t = ±x in white. Four scenes on one rail:
      orbit    one event v = (5, 3) turned (magenta circle, t² + x² kept) and boosted (cyan hyperbola, t² − x² kept)
-     boost    kB(η) acting on v, on the beads (j, ±j) of the cone, on the lab grid and on the axes (amber); k = 1 is
-              a Lorentz boost, any other k keeps the cone but moves v off its hyperbola
+     boost    kB(η) acting on v and on the beads (j, ±j) of the cone; the amber axes are the traveller's t′, x′ at
+              rapidity η (t′ through v at η = ln 2), so the amber point Bv reads v in that frame; k = 1 is a
+              Lorentz boost, any other k keeps the cone but moves v off its hyperbola
      caliper  the spatial displacement (0, w) (amber) and the two null vectors (±|w|, w) that clamp it
      paths    O = (0, 0) → P = (10, 0): the rest worldline and the bent one through the turning point A, with one tick
               per unit of proper time, all boosted together by η
@@ -39,7 +40,7 @@
   const viewOf = (sc) => (TRV.thumbMode ? SCENES[sc].thumb : SCENES[sc].view);
 
   /* ---------- state ---------- */
-  const S = { scene: 'boost', s: 0, eta: LN2, w: 3, k: 1, etaP: 0, apex: V0.slice() };
+  const S = { scene: 'boost', s: 0, eta: LN2, w: 3, k: 1, etaP: 0, apex: V0.slice(), ghost: false };
   const V = { x: viewOf('boost').x.slice(), t: viewOf('boost').t.slice() };
   const parOf = (sc) => (sc === 'orbit' ? S.s : sc === 'boost' ? S.eta : sc === 'caliper' ? S.w : S.etaP);
   function setPar(sc, v) { if (sc === 'orbit') S.s = v; else if (sc === 'boost') S.eta = v; else if (sc === 'caliper') S.w = v; else S.etaP = v; }
@@ -126,51 +127,48 @@
     return {};
   }
 
+  /** The axes of the traveller moving with rapidity η, drawn in the lab diagram: t′ along (cosh η, sinh η), x′ along
+      (sinh η, cosh η). At η = ln 2 the t′ axis runs through v = (5, 3), whose reading in the traveller's coordinates is Bv. */
+  const travAxes = (eta) => ({ t: [Math.cosh(eta), Math.sinh(eta)], x: [Math.sinh(eta), Math.cosh(eta)] });
+  const GHOSTS = [-0.6, 0];                   // the cone card leaves hollow beads where η was −0.6 and 0
+
   function drawBoost(g) {
-    const k = S.k, e = S.eta;
-    // the lab grid carried by kB (faint), then the hyperbolas t² − x² = n²
-    if (k > 1e-6) {
-      const c = g.ctx; c.save(); c.strokeStyle = P.dim; c.globalAlpha = 0.22; c.lineWidth = 1;
-      for (let j = -14; j <= 14; j++) {
-        for (const pair of [[[ -M, j], [M, j]], [[j, -M], [j, M]]]) {
-          const a = boost(e, pair[0], k), b = boost(e, pair[1], k);
-          c.beginPath(); c.moveTo(g.X(a[1]), g.Y(a[0])); c.lineTo(g.X(b[1]), g.Y(b[0])); c.stroke();
-        }
-      }
-      c.restore();
-    }
-    for (let n = 1; n <= 12; n++) if (n !== 4) hyper(g, n, P.cyan, { width: (n === 1 ? 1.3 : 1) * TH, alpha: n === 1 ? 0.5 : 0.22 });
+    const k = S.k, e = S.eta, ax = travAxes(e);
+    // τ = 1 (faint, where the unit tick sits for k = 1), τ = 4 (the event's hyperbola), and τ = 4k, τ = k when k ≠ 1
+    const scaled = Math.abs(k - 1) > 1e-6 && k > 1e-6;
+    hyper(g, 1, P.cyan, { width: 1.3 * TH, alpha: 0.5 });
     cone(g, [0, 0], { past: 0.5 });
     hyper(g, 4, P.cyan, { width: 2.4 * TH, glow: 6 });
-    if (Math.abs(k - 1) > 1e-6 && k > 1e-6) hyper(g, 4 * k, P.cyan, { width: 1.6 * TH, dash: [6, 5], alpha: 0.9 });
-    // the old axes (grey dashed) and where kB carries them (amber)
+    if (scaled) { hyper(g, 4 * k, P.cyan, { width: 1.6 * TH, dash: [6, 5], alpha: 0.9 }); hyper(g, k, P.cyan, { width: 1.2 * TH, dash: [4, 4], alpha: 0.6 }); }
+    // the lab axes (grey dashed) and the traveller's axes t′, x′ (amber)
     g.line([[0, -M], [0, M]], P.dim, { width: 1.2, dash: [5, 5], alpha: 0.8 });
     g.line([[-M, 0], [M, 0]], P.dim, { width: 1.2, dash: [5, 5], alpha: 0.8 });
-    const et = boost(e, [1, 0], k), ex = boost(e, [0, 1], k);
-    if (k > 1e-6) {
-      const lt = Math.hypot(...et), lx = Math.hypot(...ex), ut = [et[0] / lt, et[1] / lt], ux = [ex[0] / lx, ex[1] / lx];
-      seg(g, [-M * ut[0], -M * ut[1]], [M * ut[0], M * ut[1]], P.amber, { width: 1.4 * TH, alpha: 0.75 });
-      seg(g, [-M * ux[0], -M * ux[1]], [M * ux[0], M * ux[1]], P.amber, { width: 1.4 * TH, alpha: 0.75 });
-      if (!TRV.thumbMode) {
-        tagAt('bTa', exitPoint(ut, 0.55), 't′', 'raw hot', 0, 0);
-        tagAt('bXa', exitPoint(ux, 0.55), 'x′', 'raw hot', 0, 0);
-      }
+    const ut = ax.t.map((z) => z / Math.hypot(...ax.t)), ux = ax.x.map((z) => z / Math.hypot(...ax.x));
+    seg(g, [-M * ut[0], -M * ut[1]], [M * ut[0], M * ut[1]], P.amber, { width: 1.4 * TH, alpha: 0.75 });
+    seg(g, [-M * ux[0], -M * ux[1]], [M * ux[0], M * ux[1]], P.amber, { width: 1.4 * TH, alpha: 0.75 });
+    if (!TRV.thumbMode) {
+      tagAt('bTa', exitPoint(ut, 0.55), 't′', 'raw hot', 0, 0);
+      tagAt('bXa', exitPoint(ux, 0.55), 'x′', 'raw hot', 0, 0);
     }
-    // beads on the cone
+    // beads on the cone; on the cone card, hollow beads where η was −0.6 and 0
+    if (S.ghost) for (const ge of GHOSTS) if (ge < e - 0.05) for (const j of BEADS) for (const sgnx of [1, -1]) dot(g, boost(ge, [j, sgnx * j], k), P.ink, 3.4, { ring: true, width: 1.2, alpha: 0.55 });
     for (const j of BEADS) for (const sgnx of [1, -1]) dot(g, boost(e, [j, sgnx * j], k), P.ink, 3.6, { glow: 6 });
-    // v and its image
+    // v (grey ring), the unit tick on t′ (k units along it), and the reading kBv (amber)
     dot(g, V0, P.dim, 4.5, { ring: true, width: 1.4 });
-    const bv = boost(e, V0, k);
+    const bv = boost(e, V0, k), et = [k * ax.t[0], k * ax.t[1]];
     arrow(g, [0, 0], et, P.amber, 2.2, {});
     dot(g, et, P.amber, 4, {});
     arrow(g, [0, 0], bv, P.amber, 2.4, { alpha: 0.9 });
     dot(g, bv, P.amber, 6.5, { glow: 14 });
     if (!TRV.thumbMode) {
-      tagAt('bV', V0, 'v = (5, 3)', 'raw ink', 48, -20);
-      tagAt('bBv', bv, `${Math.abs(k - 1) < 1e-9 ? 'Bv' : 'kBv'} = (${fix(bv[0], 2)}, ${fix(bv[1], 2)})`, 'raw hot', bv[1] > 2.5 ? -86 : 92, bv[1] > 2.5 ? 0 : -22);
+      tagAt('bV', V0, 'v = (5, 3)', 'raw ink', -30, -44);
+      tagAt('bBv', bv, `${scaled ? 'kBv' : 'Bv'} = (${fix(bv[0], 2)}, ${fix(bv[1], 2)})`, 'raw hot', bv[1] > 2.5 ? -86 : -112, bv[1] > 2.5 ? 0 : 24);
       const h4 = [4 * Math.cosh(-0.9), 4 * Math.sinh(-0.9)];
       tagAt('bH4', h4, 'τ = 4', 'raw cy', -26, 0);
-      if (Math.abs(k - 1) > 1e-6 && k > 1e-6) { const hk = [4 * k * Math.cosh(0.95), 4 * k * Math.sinh(0.95)]; tagAt('bHk', hk, `τ = ${fix(4 * k, 2)}`, 'raw cy', 34, 0); }
+      if (scaled) {
+        const hk = [4 * k * Math.cosh(0.95), 4 * k * Math.sinh(0.95)]; tagAt('bHk', hk, `τ = ${fix(4 * k, 2)}`, 'raw cy', 34, 0);
+        tagAt('bTick', et, `τ = ${fix(k, 2)}`, 'raw hot', 40, 10);
+      }
       tagAt('bCone', [V.t[1] - 0.8, V.t[1] - 0.8], 't = x', 'tick', 34, 0);
     }
     return { bv, et };
@@ -254,7 +252,7 @@
       S.apex = inDiamond(lab); paint(); return;
     }
     if (v == null || !isFinite(v)) return;
-    cards.mark(null);
+    S.ghost = false; cards.mark(null);
     clock.pause(); clock.set(clamp(v, cf.lo, cf.hi) - cf.lo);
   }
 
@@ -336,7 +334,7 @@
   const pt = (v, d) => `(${fix(v[0], d)}, ${fix(v[1], d)})`;
   const LEGEND = {
     orbit: [['mg', '转动：圆 t² + x² = 34', 'turn: circle t² + x² = 34'], ['cy', '推动：双曲线 t² − x² = 16', 'boost: hyperbola t² − x² = 16'], ['dm', '白线：光锥 t = ±x', 'white lines: light cone t = ±x']],
-    boost: [['cy', '双曲线 t² − x² = τ²', 'hyperbolas t² − x² = τ²'], ['am', '当前事件与被推动的轴', 'current event and the boosted axes'], ['dm', '白线与珠子：光锥', 'white lines and beads: light cone']],
+    boost: [['cy', '双曲线 t² − x² = τ²', 'hyperbolas t² − x² = τ²'], ['am', 'Bv 与旅行者的轴 t′、x′', "Bv and the traveller's axes t′, x′"], ['dm', '白线与珠子：光锥', 'white lines and beads: light cone']],
     caliper: [['am', '空间位移 (0, w)', 'spatial displacement (0, w)'], ['dm', '白色箭头：零向量 (±|w|, w)', 'white arrows: null vectors (±|w|, w)']],
     paths: [['cy', '经 A 的折线，每格 1 个单位固有时', 'bent path through A, one tick per unit of proper time'], ['dm', '白色粗线：静止世界线', 'thick white line: rest worldline'], ['am', '折返点 A', 'turning point A']]
   };
@@ -356,16 +354,18 @@
       aside = 'cos² + sin² = 1 · cosh² − sinh² = 1';
       pill = ['t² − x²', fix(q(b), 2)];
     } else if (sc === 'boost') {
-      const e = S.eta, bv = boost(e, V0, S.k), et = boost(e, [1, 0], S.k);
-      big = L(`推动 · η = ${fix(e, 3)}`, `Boost · η = ${fix(e, 3)}`);
-      sub = `β = ${fix(Math.tanh(e), 3)} · γ = ${fix(Math.cosh(e), 3)} · <span class="c-cy">t² − x² = ${fix(q(bv), 2)}</span>`;
+      const e = S.eta, k = S.k, bv = boost(e, V0, k), scaled = Math.abs(k - 1) > 1e-9;
+      big = S.ghost ? L(`光锥不动 · η = ${fix(e, 3)}`, `The cone stays · η = ${fix(e, 3)}`)
+        : scaled ? L(`比例 · k = ${fix(k, 2)}`, `Scale · k = ${fix(k, 2)}`) : L(`推动 · η = ${fix(e, 3)}`, `Boost · η = ${fix(e, 3)}`);
+      sub = scaled ? `η = ${fix(e, 3)} · k² = ${fix(k * k, 2)} · <span class="c-cy">τ = 4 → ${fix(Math.sqrt(Math.max(0, q(bv))), 2)}</span>`
+        : `β = ${fix(Math.tanh(e), 3)} · γ = ${fix(Math.cosh(e), 3)} · <span class="c-cy">t² − x² = ${fix(q(bv), 2)}</span>`;
       keyName = L('被推动的事件的 t² − x²', 't² − x² of the boosted event');
-      key = `${fix(q(bv), 4)}${Math.abs(S.k - 1) > 1e-9 ? ` <small>= ${fix(S.k * S.k, 4)} × 16</small>` : ''}`;
+      key = `${fix(q(bv), 4)}${scaled ? ` <small>= ${fix(k * k, 4)} × 16</small>` : ''}`;
       rows = row('', 'cosh η · sinh η', 'cosh η · sinh η', `${fix(Math.cosh(e), 4)} · ${fix(Math.sinh(e), 4)}`) + row('', 'cosh²η − sinh²η', 'cosh²η − sinh²η', fix(Math.cosh(e) ** 2 - Math.sinh(e) ** 2, 6))
-        + row('', '速度 β = tanh η', 'velocity β = tanh η', fix(Math.tanh(e), 4)) + row('', `${Math.abs(S.k - 1) < 1e-9 ? 'B' : 'kB'}(5, 3)`, `${Math.abs(S.k - 1) < 1e-9 ? 'B' : 'kB'}(5, 3)`, pt(bv, 4))
-        + row('c', '单位刻度的 t² − x²', 't² − x² of the unit tick', fix(q(et), 4)) + row('', '比例 k', 'scale k', fix(S.k, 2));
-      note = Math.abs(S.k - 1) < 1e-9 ? L('k = 1：琥珀色的点留在青色双曲线 τ = 4 上，单位刻度留在 τ = 1 上。', 'k = 1: the amber point stays on the cyan hyperbola τ = 4 and the unit tick on τ = 1.')
-        : L(`k = ${fix(S.k, 2)}：珠子仍在光锥上，琥珀色的点却到了 τ = ${fix(4 * S.k, 2)}，单位刻度到了 τ = ${fix(S.k, 2)}。`, `k = ${fix(S.k, 2)}: the beads are still on the cone, but the amber point is on τ = ${fix(4 * S.k, 2)} and the unit tick on τ = ${fix(S.k, 2)}.`);
+        + row('', '速度 β = tanh η', 'velocity β = tanh η', fix(Math.tanh(e), 4)) + row('', `${scaled ? 'kB' : 'B'}(5, 3)`, `${scaled ? 'kB' : 'B'}(5, 3)`, pt(bv, 4))
+        + row('c', '单位刻度的 t² − x²', 't² − x² of the unit tick', fix(k * k, 4)) + row('', '比例 k · k²', 'scale k · k²', `${fix(k, 2)} · ${fix(k * k, 4)}`);
+      note = !scaled ? L('k = 1：琥珀色的点留在青色双曲线 τ = 4 上，t′ 轴上的单位刻度留在 τ = 1 上。', 'k = 1: the amber point stays on the cyan hyperbola τ = 4 and the unit tick on t′ stays on τ = 1.')
+        : L(`k = ${fix(k, 2)}：珠子仍在光锥上，琥珀色的点却到了 τ = ${fix(4 * k, 2)}，单位刻度到了 τ = ${fix(k, 2)}。`, `k = ${fix(k, 2)}: the beads are still on the cone, but the amber point is on τ = ${fix(4 * k, 2)} and the unit tick on τ = ${fix(k, 2)}.`);
       aside = 'q(kBv) = q(kBe₀)·q(v)';
       pill = ['η', fix(e, 3)];
     } else if (sc === 'caliper') {
@@ -436,7 +436,7 @@
   }
 
   /* ---------- controls ---------- */
-  const leave = () => cards.mark(null);
+  const leave = () => { S.ghost = false; cards.mark(null); };
   const sceneChips = kit.chips($('sceneChips'), 'scene', (v) => { leave(); setScene(v, true); });
   const fK = kit.field($('k'), { fmt: (v) => fix(v, 2), onInput: (v) => { leave(); S.k = v; paint(); } });
   $('apexReset').addEventListener('click', () => { leave(); S.apex = V0.slice(); paint(); });
@@ -450,7 +450,7 @@
     circle: { scene: 'orbit', from: 0, to: 1.5, still: 1.5 },
     boost: { scene: 'boost', k: 1, from: 0, to: LN2, still: LN2 },
     caliper: { scene: 'caliper', from: -5, to: 3, still: 3 },
-    cone: { scene: 'boost', k: 1, from: -0.6, to: 1, still: 1 },
+    cone: { scene: 'boost', k: 1, from: -0.6, to: 1, still: 1, ghost: true },
     scale: { scene: 'boost', k: 1.5, from: 0, to: LN2, still: LN2 },
     light: { scene: 'paths', eta: 0, apexFrom: [5, 3], apexTo: [5, 5] },
     twins: { scene: 'paths', eta: 0, apexFrom: [5, 0], apexTo: [5, 3] },
@@ -458,10 +458,10 @@
   };
   const NOTES = {
     circle: ['同一个事件 v = (5, 3)，一边转动、一边推动。品红的点沿品红的圆走，t² + x² 保持 34；青色的点沿青色的双曲线走，t² − x² 保持 16。s 走到 1.5 时，品红的点已经穿过白色的光锥跑到外面，青色的点贴着光锥，却始终在里面。', 'One event v = (5, 3), turned on one side and boosted on the other. The magenta point runs along the magenta circle with t² + x² held at 34; the cyan point runs along the cyan hyperbola with t² − x² held at 16. By s = 1.5 the magenta point has crossed the white light cone to the outside, while the cyan one hugs the cone and stays inside.'],
-    boost: ['快度 η 从 0 推到 ln 2：琥珀色的点沿青色双曲线 τ = 4 从 v = (5, 3) 滑到 (4, 0)，这时 cosh η = 5/4，sinh η = 3/4，β = 3/5。琥珀色的两根轴像剪刀一样向光锥合拢，灰色虚线是它们原来的位置。', 'Push the rapidity η from 0 to ln 2: the amber point slides along the cyan hyperbola τ = 4 from v = (5, 3) to (4, 0), where cosh η = 5/4, sinh η = 3/4 and β = 3/5. The two amber axes close toward the light cone like scissors; the grey dashed lines are where they started.'],
+    boost: ['快度 η 从 0 推到 ln 2：琥珀色的两根轴是以快度 η 运动的旅行者的 t′、x′ 轴，像剪刀一样向光锥合拢，到 η = ln 2（β = 3/5）时 t′ 轴正好穿过灰圈里的原事件 v = (5, 3)；灰色虚线是原来的 t、x 轴。琥珀色的点 Bv 是 v 在旅行者坐标里的读数，沿青色双曲线 τ = 4 滑到 (4, 0)：这时 cosh η = 5/4，sinh η = 3/4。', 'Push the rapidity η from 0 to ln 2: the two amber axes are the t′ and x′ axes of a traveller moving with rapidity η; they close toward the light cone like scissors, and at η = ln 2 (β = 3/5) the t′ axis runs right through the original event v = (5, 3) in the grey ring; the grey dashed lines are the original t and x axes. The amber point Bv is v read in the traveller’s coordinates and slides along the cyan hyperbola τ = 4 to (4, 0), where cosh η = 5/4 and sinh η = 3/4.'],
     caliper: ['任取一个空间位移 (0, w)（琥珀色）。在时间方向上向上、向下各垫起 |w|，正好踩在未来与过去两条光锥线上：两支白色箭头 (±|w|, w) 的 t² − x² 都是 0。虚线菱形的两条对角线，一条是横着的 2(0, w)，一条是竖着的 2|w|(1, 0)：两支一加一减，就是证明里那把双向卡尺。', 'Take any spatial displacement (0, w) (amber). Lift it by |w| up and down in time and it lands exactly on the future and past light-cone lines: both white arrows (±|w|, w) have t² − x² = 0. The dashed rhombus has the horizontal 2(0, w) and the vertical 2|w|(1, 0) as diagonals: adding and subtracting the two arrows is the two-sided caliper of the proof.'],
-    cone: ['η 从 −0.6 扫到 1：白色光锥一动不动。光锥上的白色珠子只沿光锥滑——右边一串挤向原点，左边一串散开——没有一颗离开这两条线；琥珀色的点沿青色双曲线走，灰色网格被压成菱形。', 'Sweep η from −0.6 to 1: the white light cone does not move. The white beads on it only slide along it — the right-hand string crowds toward the origin, the left-hand string spreads out — and none leaves the two lines; the amber point runs along its cyan hyperbola, and the grey grid is squeezed into rhombi.'],
-    scale: ['把推动再乘一个比例 k = 1.5，η 推到 ln 2：白色珠子仍然只在光锥上滑，光锥照样保住；琥珀色的点却落到 (6, 0)，离开青色的 τ = 4，到了青色虚线 τ = 6 上；琥珀色的单位刻度也落在 τ = 1.5 而不是 τ = 1 上。', 'Multiply the boost by a scale k = 1.5 and push η to ln 2: the white beads still only slide along the light cone, so the cone is kept all the same; but the amber point lands at (6, 0), off the cyan τ = 4 and onto the dashed cyan τ = 6, and the amber unit tick sits on τ = 1.5 instead of τ = 1.'],
+    cone: ['η 从 −0.6 扫到 1：白色光锥一动不动。光锥上的白色珠子只沿光锥滑——右边一串挤向原点，左边一串散开——没有一颗离开这两条线；空心的淡白珠子是 η = −0.6 与 η = 0 时它们的位置。琥珀色的点沿青色双曲线走。', 'Sweep η from −0.6 to 1: the white light cone does not move. The white beads on it only slide along it — the right-hand string crowds toward the origin, the left-hand string spreads out — and none leaves the two lines; the faint hollow beads mark where they were at η = −0.6 and η = 0. The amber point runs along its cyan hyperbola.'],
+    scale: ['把推动再乘一个比例 k = 1.5，η 推到 ln 2：白色珠子仍然只在光锥上滑，光锥照样保住；琥珀色的点却落到 (6, 0)，离开青色的 τ = 4，到了青色虚线 τ = 6 上；t′ 轴上琥珀色的单位刻度也落在青色细虚线 τ = 1.5 上，而不是 τ = 1 上：差的正是 k² = 2.25。', 'Multiply the boost by a scale k = 1.5 and push η to ln 2: the white beads still only slide along the light cone, so the cone is kept all the same; but the amber point lands at (6, 0), off the cyan τ = 4 and onto the dashed cyan τ = 6, and the amber unit tick on t′ sits on the thin dashed cyan τ = 1.5 instead of τ = 1: the difference is exactly k² = 2.25.'],
     light: ['把折返点 A 拖到光锥上的 (5, 5)：两段都沿白色菱形的边走，t² − x² = 0，青色折线上一个刻度也没有，τ = 0；白色粗线（静止世界线）走满 10 个刻度。', 'Drag the turning point A onto the light cone at (5, 5): both legs run along the edges of the white diamond with t² − x² = 0, the cyan path carries not a single tick and τ = 0; the thick white rest worldline carries all 10.'],
     twins: ['折返点 A 从 (5, 0) 移到 (5, 3)：青色折线上的刻度从 10 个减到 8 个（每段 4 个），白色粗线（静止世界线）始终 10 个。去程的每个刻度都落在以 O 为心的一条淡青色双曲线上。', 'The turning point A moves from (5, 0) to (5, 3): the ticks on the cyan path drop from 10 to 8 (4 on each leg), while the thick white rest worldline keeps all 10. Each tick of the outbound leg sits on one of the faint cyan hyperbolas centred at O.'],
     frames: ['换到去程旅行者的参考系：η 从 0 推到 ln 2。所有事件沿着淡青色双曲线滑动，去程变成竖直的 (4, 0)，回程变成 (8.5, −7.5)，白色粗线也歪了；可青色折线上仍是 8 个刻度，白色粗线上仍是 10 个。', 'Switch to the outbound traveller\'s frame: push η from 0 to ln 2. Every event slides along the faint cyan hyperbolas; the outbound leg becomes the vertical (4, 0), the return leg (8.5, −7.5), and the thick white line leans over too; yet the cyan path still carries 8 ticks and the thick white line 10.']
@@ -484,6 +484,7 @@
   function applyPreset(id) {
     const p = PRESETS[id];
     stopApex();
+    S.ghost = !!p.ghost;
     if (p.k != null) { S.k = p.k; fK.set(p.k); }
     if (p.apex) S.apex = p.apex.slice();
     if (p.eta != null) S.etaP = p.eta;
@@ -518,7 +519,7 @@
         scene: S.scene, s: S.s, eta: S.eta, w: S.w, k: S.k, etaP: S.etaP, apex: S.apex.slice(),
         t: clock.t, max: clock.max, playing: clock.playing || apexPlaying, preset: cards.current, view: { x: V.x.slice(), t: V.t.slice() },
         orbit: { turned: turn(S.s, V0), boosted: boost(S.s, V0) },
-        boost: { event: boost(S.eta, V0, S.k), tick: boost(S.eta, [1, 0], S.k), xaxis: boost(S.eta, [0, 1], S.k), beads: BEADS.flatMap((j) => [boost(S.eta, [j, j], S.k), boost(S.eta, [j, -j], S.k)]), cosh: Math.cosh(S.eta), sinh: Math.sinh(S.eta), beta: Math.tanh(S.eta) },
+        boost: { event: boost(S.eta, V0, S.k), tick: travAxes(S.eta).t.map((z) => S.k * z), axisT: travAxes(S.eta).t, axisX: travAxes(S.eta).x, ghost: S.ghost, ghosts: S.ghost ? GHOSTS.filter((ge) => ge < S.eta - 0.05).flatMap((ge) => BEADS.flatMap((j) => [boost(ge, [j, j], S.k), boost(ge, [j, -j], S.k)])) : [], beads: BEADS.flatMap((j) => [boost(S.eta, [j, j], S.k), boost(S.eta, [j, -j], S.k)]), cosh: Math.cosh(S.eta), sinh: Math.sinh(S.eta), beta: Math.tanh(S.eta) },
         caliper: { plus: [Math.abs(S.w), S.w], minus: [-Math.abs(S.w), S.w], spatial: [0, S.w] },
         paths: { A: W.now.A, P: W.now.P, tau1: W.tau1, tau2: W.tau2, tauBent: W.tauBent, tauRest: W.tauRest, dt1: W.dt1, dt2: W.dt2, dtRest: W.dtRest,
           ticksBent: Math.floor(W.tau1 + 1e-9) + Math.floor(W.tau2 + 1e-9), ticksRest: Math.floor(W.tauRest + 1e-9) },

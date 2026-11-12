@@ -30,10 +30,10 @@
 <path d="M387.14 222 L386.86 214.11 L386.04 206.25 L384.66 198.48 L382.75 190.82 L380.31 183.3 L377.36 175.98 L373.89 168.89 L369.95 162.05 L365.53 155.5 L360.67 149.28 L355.38 143.41 L349.7 137.92 L343.65 132.85 L337.27 128.21 L330.57 124.02 L323.6 120.31 L316.38 117.1 L308.96 114.4 L301.37 112.22 L293.65 110.58 L285.83 109.48 L277.95 108.93 L270.05 108.93 L262.17 109.48 L254.35 110.58 L246.63 112.22 L239.04 114.4 L231.62 117.1 L224.4 120.31 L217.43 124.02 L210.73 128.21 L204.35 132.85 L198.3 137.92 L192.62 143.41 L187.33 149.28 L182.47 155.5 L178.05 162.05 L174.11 168.89 L170.64 175.98 L167.69 183.3 L165.25 190.82 L163.34 198.48 L161.96 206.25 L161.14 214.11 L160.86 222" class="ts-cyan" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
 <path d="M412.56 222 L412.23 212.33 L411.22 202.72 L409.54 193.19 L407.2 183.81 L404.21 174.61 L400.58 165.64 L396.34 156.95 L391.51 148.57 L386.1 140.55 L380.15 132.93 L373.67 125.75 L366.72 119.03 L359.31 112.81 L351.48 107.13 L343.28 102 L334.74 97.46 L325.91 93.53 L316.82 90.22 L307.52 87.55 L298.06 85.54 L288.48 84.2 L278.84 83.52 L269.16 83.52 L259.52 84.2 L249.94 85.54 L240.48 87.55 L231.18 90.22 L222.09 93.53 L213.26 97.46 L204.72 102 L196.52 107.13 L188.69 112.81 L181.28 119.03 L174.33 125.75 L167.85 132.93 L161.9 140.55 L156.49 148.57 L151.66 156.95 L147.42 165.64 L143.79 174.61 L140.8 183.81 L138.46 193.19 L136.78 202.72 L135.77 212.33 L135.44 222" class="ts-cyan" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
 <path d="M434 222 L433.61 210.84 L432.44 199.73 L430.5 188.73 L427.8 177.9 L424.35 167.28 L420.17 156.92 L415.27 146.88 L409.69 137.21 L403.44 127.95 L396.57 119.15 L389.09 110.85 L381.06 103.1 L372.51 95.92 L363.47 89.35 L354 83.44 L344.14 78.19 L333.94 73.65 L323.44 69.83 L312.71 66.75 L301.78 64.43 L290.72 62.88 L279.58 62.1 L268.42 62.1 L257.28 62.88 L246.22 64.43 L235.29 66.75 L224.56 69.83 L214.06 73.65 L203.86 78.19 L194 83.44 L184.53 89.35 L175.49 95.92 L166.94 103.1 L158.91 110.85 L151.43 119.15 L144.56 127.95 L138.31 137.21 L132.73 146.88 L127.83 156.92 L123.65 167.28 L120.2 177.9 L117.5 188.73 L115.56 199.73 L114.39 210.84 L114 222" class="ts-cyan" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
-<text class="tf-cyan ts-bg" x="244.03" y="152.87" font-size="14" text-anchor="middle" font-weight="600" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">1</text>
-<text class="tf-cyan ts-bg" x="167.69" y="188.34" font-size="14" text-anchor="middle" font-weight="600" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">2</text>
-<text class="tf-cyan ts-bg" x="143.79" y="179.65" font-size="14" text-anchor="middle" font-weight="600" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">3</text>
-<text class="tf-cyan ts-bg" x="123.65" y="172.32" font-size="14" text-anchor="middle" font-weight="600" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">4</text>
+<text class="tf-cyan ts-bg" x="231.75" y="147.57" font-size="14" text-anchor="middle" font-weight="600" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">1</text>
+<text class="tf-cyan ts-bg" x="158.29" y="184.92" font-size="14" text-anchor="middle" font-weight="600" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">2</text>
+<text class="tf-cyan ts-bg" x="137.25" y="168.99" font-size="14" text-anchor="middle" font-weight="600" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">3</text>
+<text class="tf-cyan ts-bg" x="126.78" y="142.04" font-size="14" text-anchor="middle" font-weight="600" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">4</text>
 <text class="tf-cyan" x="104.4" y="182" font-size="14" text-anchor="end" font-weight="600">Nrd</text>
 <circle cx="114" cy="222" r="4.8" class="ts-bg tf-cyan" stroke-width="1.4"/>
 <text class="tf-ink ts-bg" x="122" y="213" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">1</text>
@@ -46,13 +46,13 @@
 <circle cx="194" cy="83.44" r="4.8" class="ts-bg tf-cyan" stroke-width="1.4"/>
 <text class="tf-ink ts-bg" x="202" y="76.44" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">8</text>
 <circle cx="274" cy="142" r="4.8" class="ts-bg tf-cyan" stroke-width="1.4"/>
-<text class="tf-ink ts-bg" x="282" y="135" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">6</text>
+<text class="tf-ink ts-bg" x="286" y="135" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">6</text>
 <circle cx="274" cy="108.86" r="4.8" class="ts-bg tf-cyan" stroke-width="1.4"/>
-<text class="tf-ink ts-bg" x="282" y="101.86" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">12</text>
+<text class="tf-ink ts-bg" x="286" y="101.86" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">12</text>
 <circle cx="274" cy="83.44" r="4.8" class="ts-bg tf-cyan" stroke-width="1.4"/>
-<text class="tf-ink ts-bg" x="282" y="76.44" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">8</text>
+<text class="tf-ink ts-bg" x="286" y="76.44" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">8</text>
 <circle cx="274" cy="62" r="4.8" class="ts-bg tf-cyan" stroke-width="1.4"/>
-<text class="tf-ink ts-bg" x="282" y="55" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">6</text>
+<text class="tf-ink ts-bg" x="286" y="55" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">6</text>
 <circle cx="354" cy="222" r="4.8" class="ts-bg tf-cyan" stroke-width="1.4"/>
 <text class="tf-ink ts-bg" x="362" y="213" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">1</text>
 <circle cx="354" cy="142" r="4.8" class="ts-bg tf-cyan" stroke-width="1.4"/>

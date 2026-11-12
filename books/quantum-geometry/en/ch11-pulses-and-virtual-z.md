@@ -301,7 +301,7 @@ Next verify the four concrete numerical items:
 :::
 
 ::: {.viz src="pulse-area-virtual-z" preset="detune" height="500"}
-**Detuned, the area no longer decides.** The same Gaussian envelope of area $\pi/2$, with the drive $5\,\mathrm{MHz}$ off: the violet axis tilts out of the equator and sways with the envelope (the dashed violet trail is where its tip has been), and the amber state misses the end of the white dashed (undetuned) path by about $26^\circ$. The page cuts the pulse into a thousand or more slices and multiplies them in time order: a numerical illustration.
+**Detuned, the area no longer decides.** The same Gaussian envelope of area $\pi/2$, with the drive $5\,\mathrm{MHz}$ off: the violet axis tilts out of the equator and sways with the envelope. The dashed violet trail is where its tip has been: it comes closest to the equator, $12^\circ$ off it, at the envelope's peak, and when the pulse ends the envelope is back at zero and the faint axis is vertical again. The amber state misses the end of the white dashed (undetuned) path; the short white arc between the two marks the miss, about $26^\circ$. The page cuts the pulse into a thousand or more slices and multiplies them in time order: a numerical illustration.
 :::
 
 ::: {.viz src="pulse-area-virtual-z" height="560"}

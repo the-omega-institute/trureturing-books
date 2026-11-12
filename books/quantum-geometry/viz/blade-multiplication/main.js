@@ -388,13 +388,12 @@
 
   /* ---------- experiment cards ---------- */
   const PRESETS = {
-    e1e2: { scene: 'cl3', pair: [1, 2], play: true }, e2e1: { scene: 'cl3', pair: [2, 1], play: true },
+    e2e1: { scene: 'cl3', pair: [2, 1], play: true },
     square: { scene: 'cl3', pair: [3, 3], hl: 'diag', play: true }, pseudo: { scene: 'cl3', pair: [7, 7], hl: 'pseudo', play: true },
     pauli: { scene: 'pauli', pair: [2, 1], play: true }, vector: { scene: 'vector', play: true }
   };
   const NOTES = {
-    e1e2: ['e₁ · e₂：左边的 e₁ 与右边的 e₂ 已经按 e₁ e₂ e₃ 的顺序排好，一次也不用交换，没有交叉的线；异或后两位都在，乘积是 +e₁₂，表里这一格是青色。', 'e₁ · e₂: the e₁ on the left and the e₂ on the right are already in the order e₁ e₂ e₃, so no swap is needed and no lines cross; both bits survive the XOR, the product is +e₁₂, and its cell is cyan.'],
-    e2e1: ['e₂ · e₁：右边的 e₁ 要越过左边的 e₂ 才能排好，两条线交叉一次，符号变成 −；异或的结果仍是 e₁₂。表里这一格是品红，关于对角线对称的 e₁ · e₂ 那一格是青色。', 'e₂ · e₁: the e₁ on the right must move past the e₂ on the left, the two lines cross once, and the sign becomes −; the XOR is still e₁₂. This cell is magenta, and its mirror image e₁ · e₂ across the diagonal is cyan.'],
+    e2e1: ['e₂ · e₁ 与 e₁ · e₂：两种次序的掩码异或都是 001₂ ⊕ 010₂ = 011₂，即 e₁₂。e₁ · e₂ 已按 e₁ e₂ e₃ 的顺序排好，不用交换，乘积是 +e₁₂，表里那一格是青色；反过来 e₂ · e₁ 右边的 e₁ 要越过左边的 e₂，两条线交叉一次，符号变成 −，这一格是品红，与 e₁ · e₂ 那一格关于对角线对称。', 'e₂ · e₁ and e₁ · e₂: in either order the masks XOR to 001₂ ⊕ 010₂ = 011₂, that is e₁₂. In e₁ · e₂ the factors are already in the order e₁ e₂ e₃, no swap is needed, the product is +e₁₂, and that cell is cyan; the other way round, in e₂ · e₁ the e₁ on the right must move past the e₂ on the left, the two lines cross once, the sign becomes −, and this cell is magenta, the mirror image of the e₁ · e₂ cell across the diagonal.'],
     square: ['e₁₂ · e₁₂：右边的 e₁ 越过左边的 e₂ 一次（−），然后 e₁e₁、e₂e₂ 各自抵成 +1；异或把两位全部清零，乘积是 −1。虚线框住的对角线上，1、e₁、e₂、e₃ 自乘为 +1（青色），e₁₂、e₁₃、e₂₃、I₃ 自乘为 −1（品红）。', 'e₁₂ · e₁₂: the right e₁ moves past the left e₂ once (−), then e₁e₁ and e₂e₂ each cancel to +1; the XOR clears both bits and the product is −1. Along the dashed diagonal, 1, e₁, e₂, e₃ square to +1 (cyan) and e₁₂, e₁₃, e₂₃, I₃ square to −1 (magenta).'],
     pseudo: ['I₃ · I₃：右边的 e₁ 越过 e₃、e₂，右边的 e₂ 再越过 e₃，共 0 + 1 + 2 = 3 次交叉，奇数；三对同号抵成 +1，乘积是 −1。紫色框住的 I₃ 那一行与那一列逐格相同：I₃ 与每块刀片对易。', 'I₃ · I₃: the right e₁ moves past e₃ and e₂, then the right e₂ past e₃: 0 + 1 + 2 = 3 crossings, an odd number; three equal pairs cancel to +1 and the product is −1. The violet row and column of I₃ agree cell by cell: I₃ commutes with every blade.'],
     pauli: ['只用两位：第 0 位记 X，第 1 位记 Z，四个泡利字 I、X、Z、XZ 排成 4 × 4 的表。Z · X 要交换一次，得到 −XZ；四个品红格正是左因子含 Z、右因子含 X 的那四格。', 'Two bits only: bit 0 is X, bit 1 is Z, and the four Pauli words I, X, Z, XZ fill a 4 × 4 table. Z · X needs one swap and gives −XZ; the four magenta cells are exactly those whose left factor contains Z and right factor contains X.'],

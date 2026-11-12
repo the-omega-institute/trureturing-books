@@ -362,10 +362,6 @@ $$
 **反着走，手性翻转。** 同一个三角形改走 $N \to +Y \to +X \to N$：品红的面积一样大，琥珀色的箭头却往另一边转 $\frac{\pi}{2}$，右下角青色的指针停在 $-\frac{\pi}{4}$。三个相邻内积的模平方仍然都是 $\frac{1}{2}$：只看模平方，分不出这两种走法。
 :::
 
-::: {.viz src="berry-loop" height="560"}
-完整实验室：拖动青色的顶点、在边上加点或反着走，比较品红的面积、琥珀色箭头的转角与右下角青色指针的相位；也可以切到“转序”与“梳毛”两个场景。
-:::
-
 ### 无时间诠释：格拉姆几何如何约束因果相容空间？ {#sec-timeless-gram-causality}
 
 > **作者原话**：“顺序无关的本质就是根本不存在前后的时间......因果就是这样必然”,这句话直接把人类困扰了两千五百年的“时间之谜”与“休谟因果死结”一刀劈开了。
@@ -444,6 +440,10 @@ $$
 3. **三维旋转器球 $S^3 \cong \mathrm{SU}(2) \subset \mathrm{Cl}^+_{3,0}$ 的全局可平行化**：单位旋转器构成三维欧氏克利福德偶子代数 $\mathrm{Cl}^+_{3,0}$ 的单位球面 $S^3 \cong \mathrm{SU}(2)$，其欧拉示性数 $\chi(S^3) = 0$，且由显式左平移标架 $(pI_x, pI_y, pI_z)$ 给出全局非零正交切标架（而非仅凭 $\chi(S^3) = 0$ 推断可平行化）。映射 $\mathrm{SU}(2) \to \mathrm{SO}(3)$ 是二对一双覆盖而非同构；总空间 $S^3$ 的可平行化并不给出基空间 $S^2$ 上的全局截面。
 4. **贝里几何相位与西蒙和乐解释**（参见 M. V. Berry, *Quantal phase factors accompanying adiabatic changes*, Proc. R. Soc. A **392**, 45–57, 1984, DOI `10.1098/rspa.1984.0023`；以及 B. Simon, *Holonomy, the quantum adiabatic theorem, and Berry's phase*, Phys. Rev. Lett. **51**, 2167, 1983, DOI `10.1103/PhysRevLett.51.2167`）：在剥离动力学相位并固定定向与自旋朝上本征支后，沿 $S^2$ 闭合回路绝热平行移动获得的几何相位为 $\gamma_B = -\Omega/2$。这一非平凡和乐在完整保留复内积信息时依然存在；格拉姆矩阵的两两自洽性并不抹杀物理算符的真实非对易性。
 5. **休谟因果问题、斯宾诺莎几何必然性与无时间量子关联文献**（参见 D. Hume, *A Treatise of Human Nature*, 1739 / *An Enquiry Concerning Human Understanding*, 1748；B. Spinoza, *Ethica, Ordine Geometrico Demonstrata*, 1677, Part I, Prop. 17 Scholium；以及[第二十九章](ch29-timeless-causality-and-gram-space.md)将详述的 B. S. DeWitt, *Phys. Rev.* **160**, 1113, 1967 与 D. N. Page, W. K. Wootters, *Phys. Rev. D* **27**, 2885, 1983）：本章第 4 节关于“顺序无关性与格拉姆几何因果刚性”的讨论，其代数核心是半正定格拉姆矩阵约束 $\det G(\mathbf{A},\mathbf{B},\mathbf{C}) \ge 0$ 与 [@thm-gram-unitary-reconstruction]；将其与休谟经验主义因果批判、斯宾诺莎几何必然性及无时间量子态诠释相联系属于科学哲学与基础物理诠释，未在本书 Lean 代码库中形式化。
+:::
+
+::: {.viz src="berry-loop" height="560"}
+完整实验室：拖动青色的顶点、在边上加点或反着走，比较品红的面积、琥珀色箭头的转角与右下角青色指针的相位；也可以切到“转序”与“梳毛”两个场景。
 :::
 
 至此，我们在理论上彻底澄明了球面转序、贝里相位与格拉姆矩阵重构的关系。那么，当我们走进真正的超导量子计算实验室，工程师们究竟是用什么物理手段在芯片上拨动这颗三维球面上的方向箭头？为什么绕 $X, Y$ 轴转需要实打实地发射几十纳秒的微波脉冲，而绕 $Z$ 轴转却可以在理想脉冲调度下做到**“零附加模拟脉冲时长”**？让我们进入[第十一章](ch11-pulses-and-virtual-z.md)。

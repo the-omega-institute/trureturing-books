@@ -264,6 +264,10 @@ $$
 2. **当 `RaySupportConnected tests` 被移除或断开时**：设 $\mathrm{tests} = \{\vv{e}_0, \vv{e}_1\}$，没有任何一个测试向量在坐标 $0$ 与 $1$ 处**同时非零**。此时 `Relation.ReflTransGen (fun i j => ∃ x ∈ tests, x i ≠ 0 ∧ x j ≠ 0) 0 1` 不成立！在物理上，相位门 $A = \operatorname{diag}(1, i) \in U(2, \mathbb{C})$ 保持 $\vv{e}_0$ 与 $\vv{e}_1$ 的射线不变，但它显然不是标量矩阵 $c I_2$。源码中的 `hconnect : RaySupportConnected tests` 恰恰在 `hchain (hconnect i j)` 这一行严丝合缝地堵住了“不连通子空间各自携带独立相对相位”的反例漏洞！
 :::
 
+::: {.figure src="ch27-ray-counterexample"}
+**支撑图一断开，两格的相位就各走各的。** 两栏里的两个圆是 $\iota = \operatorname{Fin} 2$ 的两个坐标，圆里紫色的箭头是对角元 $A_{00}$、$A_{11}$ 的相位。左栏只有一个测试态 $x = (1, 1)$，青色的弧连起两格，两支箭头指向同一方向：$A = c_0 I_2$（[@prop-audit-ray-phase-rigidity]）。右栏的测试态 $\vv{e}_0$、$\vv{e}_1$ 各只罩住一格，两格之间的虚线弧被划掉；$\operatorname{diag}(1, i)$ 保持两条坐标射线，两支箭头却相差 $90^\circ$，不是 $c I_2$。右栏是去掉连通前提后的反例，不是定理的结论。
+:::
+
 ::: {.remark #rem-lean-kernel-trust-boundary-literature title="依值类型论内核、德布鲁因准则与物理语义边界（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 关于交互式定理证明器 Lean 4 的逻辑基础与形式化信任边界，其计算机科学文献归属如下：
 
