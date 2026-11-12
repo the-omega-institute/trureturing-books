@@ -7,15 +7,18 @@
 //   E₈       Q = 2(a + b) recomputed from Nrd in the √5 basis; the 240 vectors of Q = 2 found by scanning ±2I and ±φ⁻¹·2I;
 //            B between all pairs; a ℤ-basis by incremental gcd insertion and the Gram determinant over rationals (BigInt);
 //   E∥ ⊕ E⊥  the weighted coordinates from the Galois conjugate √5 ↦ −√5.
+//   shells   the places of each shell from the independent group; edges as the pairs at the least distance, faces from
+//            Euler's V − E + F = 2, and the page's faces checked for planarity, convexity and edge length.
 //   compass  the bands of §32.4 restated here as the specification of the coding.
-import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
+import { session, stageFirstChecks, solidChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'meta-unification-compass';
 const T = await session();
 const { check } = T;
 const close = (a, b, eps = 1e-9) => Math.abs(a - b) <= eps;
 
-await stageFirstChecks(T, BOOK, ID);
+// only the first leg of the bridge draws a solid; the cover (E₈) and every other picture are on the 2D canvas #cv
+await stageFirstChecks(T, BOOK, ID, { cover: '#cv' });
 
 /* ---------- independent model: ℚ(√5) with coordinates (u + v√5)/4, u, v integers ---------- */
 const S5 = Math.sqrt(5), PHI = (1 + S5) / 2;
@@ -151,21 +154,97 @@ for (const R of s.roots) {
 }
 check('E∥ ⊕ E⊥: the weighted coordinates use the conjugate √5 ↦ −√5, and ‖∥‖² + ‖⊥‖² = 2 for all 240', wErr < 1e-12, `${wErr}`);
 
+/* ---------- the solid (only the first leg of the bridge draws one) ---------- */
+await pick('icosians'); await seek(1);
+await solidChecks(T, BOOK, ID, page);
+
+/* ---------- the shells: places, hulls, the polyhedra they make ---------- */
+{
+  s = await state();
+  const fam = (gold) => (gold ? G.map(timesPhiInv) : G);
+  const absw = (q) => { const x = q.map(val); return Math.abs(x[0]) / Math.hypot(...x); };
+  const placesOf = (gold, w, perp) => {
+    const out = [];
+    for (const q of fam(gold)) {
+      if (Math.abs(absw(q) - w) > 1e-9) continue;
+      const x = q.map((c) => val(perp ? conj(c) : c)), k = perp ? WQ : WP, p = [k * x[1], k * x[2], k * x[3]];
+      if (!out.some((o) => Math.hypot(o[0] - p[0], o[1] - p[1], o[2] - p[2]) < 1e-9)) out.push(p);
+    }
+    return out;
+  };
+  const EXPECT = [[1, null], [PHI / 2, 'icosahedron'], [0.5, 'dodecahedron'], [(PHI - 1) / 2, 'icosahedron'], [0, 'icosidodecahedron']];
+  const KIND = { icosahedron: [12, 30, 20, { 3: 20 }], dodecahedron: [20, 30, 12, { 5: 12 }], icosidodecahedron: [30, 60, 32, { 3: 20, 5: 12 }] };
+  let shellOk = true; const why = [];
+  const sameSet = (a, b) => a.length === b.length && a.every((p) => b.some((o) => Math.hypot(o[0] - p[0], o[1] - p[1], o[2] - p[2]) < 1e-9));
+  for (const gold of [false, true]) for (const [w, kind] of EXPECT) {
+    const sh = s.shells.find((x) => x.gold === gold && Math.abs(x.w - w) < 1e-9);
+    if (!sh) { shellOk = false; why.push(`no shell ${gold} ${w}`); continue; }
+    const want = fam(gold).filter((q) => Math.abs(absw(q) - w) < 1e-9).length;
+    if (sh.count !== want) { shellOk = false; why.push(`count ${gold} ${w}: ${sh.count} ≠ ${want}`); }
+    for (const sp of w === 0 ? ['par', 'perp'] : ['par']) {
+      const mine = placesOf(gold, w, sp === 'perp'), pg = sh.spaces[sp];
+      if (!pg || !sameSet(mine, pg.pts)) { shellOk = false; why.push(`places ${gold} ${w} ${sp}`); continue; }
+      if (!kind) { if (pg.hull || mine.length !== 1) { shellOk = false; why.push('the ±1 shell is one place without a hull'); } continue; }
+      // independent: equal norms; edges at the least distance; F from Euler's formula
+      const r = mine.map((p) => Math.hypot(...p)), dmin = Math.min(...mine.flatMap((p, i) => mine.slice(i + 1).map((o) => Math.hypot(o[0] - p[0], o[1] - p[1], o[2] - p[2]))));
+      let E = 0; for (let i = 0; i < mine.length; i++) for (let j = i + 1; j < mine.length; j++) if (Math.abs(Math.hypot(mine[i][0] - mine[j][0], mine[i][1] - mine[j][1], mine[i][2] - mine[j][2]) - dmin) < 1e-9) E++;
+      const V = mine.length, F = 2 - V + E, [kV, kE, kF, kSizes] = KIND[kind];
+      const h = pg.hull;
+      const facesOk = h && h.faces.every((f) => {
+        const P = f.map((m) => pg.pts[m]);
+        const a = P[0], u = P[1].map((x, k) => x - a[k]), v = P[2].map((x, k) => x - a[k]);
+        const n = [u[1] * v[2] - u[2] * v[1], u[2] * v[0] - u[0] * v[2], u[0] * v[1] - u[1] * v[0]], nn = Math.hypot(...n);
+        const side = (p) => ((p[0] - a[0]) * n[0] + (p[1] - a[1]) * n[1] + (p[2] - a[2]) * n[2]) / nn;
+        const planar = P.every((p) => Math.abs(side(p)) < 1e-9), signs = pg.pts.map(side), convex = signs.every((x) => x < 1e-9) || signs.every((x) => x > -1e-9);
+        const ring = P.every((p, t) => { const q = P[(t + 1) % P.length]; return Math.abs(Math.hypot(q[0] - p[0], q[1] - p[1], q[2] - p[2]) - dmin) < 1e-9; });
+        return planar && convex && ring;
+      });
+      const sizes = {}; if (h) for (const f of h.faces) sizes[f.length] = (sizes[f.length] || 0) + 1;
+      const ok = Math.max(...r) - Math.min(...r) < 1e-9 && V === kV && E === kE && F === kF && JSON.stringify(sizes) === JSON.stringify(kSizes)
+        && h.V === V && h.E === E && h.F === F && JSON.stringify(h.sizes) === JSON.stringify(kSizes) && facesOk && pg.name === kind
+        && h.faces.reduce((acc, f) => acc + f.length, 0) === 2 * E;
+      if (!ok) { shellOk = false; why.push(`${gold ? 'φ⁻¹·2I' : '2I'} |w| ${w.toFixed(3)} ${sp}: page ${pg.name} ${h && [h.V, h.E, h.F]} vs ${V},${E},${F}`); }
+    }
+  }
+  check('SHELLS: every shell of 2I and φ⁻¹·2I has the places of the independent group; 12 make an icosahedron, 20 a dodecahedron, 30 an icosidodecahedron (V, E, F, face sizes, planar convex faces with equal edges; also in E⊥)', shellOk, why.slice(0, 3).join(' | '));
+}
+
 /* ---------- the cards of the bridge ---------- */
 s = await pick('icosians');
 check('ICOSIANS: the card plays the shells', await until(page, () => window.COMPASS_DEBUG.state.playing || window.COMPASS_DEBUG.state.t > 0));
 check('ICOSIANS: it stops at the end of the first leg', await ended(1)); s = await state();
 check('ICOSIANS: all 120 of 2I drawn, none of the golden copies', s.bridge.n === 120 && s.bridge.units === 120 && s.bridge.golden === 0);
 check('ICOSIANS: the selected element reads ½ + ½i + ½j + ½k', s.roots[s.bridge.sel].text === '½ + ½i + ½j + ½k' && /½ \+ ½i/.test(await page.textContent('#ro')), s.roots[s.bridge.sel].text);
+const drawnSig = (st) => st.drawn.map((d) => `${d.gold ? 'g' : 'u'}${d.w.toFixed(3)}${d.space}${d.solid ? '*' : ''}`).sort().join(' ');
+check('ICOSIANS: four shells are drawn; the solid one is the dodecahedron of the selected element, the others are edge cages', drawnSig(s) === ['u0.000par', 'u0.309par', 'u0.500par*', 'u0.809par'].sort().join(' ')
+  && s.drawn.filter((d) => d.solid).every((d) => d.poly.faces.length === 12 && d.poly.faces.every((f) => f.length === 5)) && /正十二面体 · 顶点 20 · 棱 30 · 面 12/.test(await page.textContent('#ro')), drawnSig(s));
+check('ICOSIANS: the label on the stage names the polyhedron of the selected shell', (await page.$$eval('#stage .tag', (ts) => ts.filter((t) => !t.hidden).map((t) => t.textContent))).some((x) => /正十二面体 · 20/.test(x)));
 const W = Object.keys(shells).map(Number).sort((a, b) => b - a);
 let cum = 0, cumOk = true;
 for (let k = 0; k < W.length; k++) { cum += shells[W[k].toFixed(9)]; const t = (1 - W[k]) / 2; s = await seek(t + 1e-7); if (s.bridge.units !== cum) cumOk = false; }
 check('SHELLS: as w falls the drawn count grows 1, 13, 33, 45, 75, 87, 107, 119, 120', cumOk);
+s = await seek((1 - PHI / 2) / 2 + 1e-7);
+check('SHELLS: before the dodecahedron appears, the one shell with a hull (the inner icosahedron) is the solid', drawnSig(s) === 'u0.809par*', drawnSig(s));
+await page.click('#pickChips [data-pick="inner"]'); s = await seek(1);
+check('the chip (φ + φ⁻¹i + j)/2 makes the inner icosahedron the solid', /正二十面体 · 顶点 12 · 棱 30 · 面 20/.test(await page.textContent('#ro')) && s.drawn.filter((d) => d.solid).length === 1 && s.drawn.filter((d) => d.solid).every((d) => !d.gold && Math.abs(d.w - PHI / 2) < 1e-9));
+{
+  // a ball no shell hides is picked; one behind or inside the solid is not
+  const vis1 = await page.evaluate(() => { const D = window.COMPASS_DEBUG, sc = window.TRV.solids[0];
+    return D.state.bridge.visible.map((i) => [i, sc.occluded(D.world(i), 0.02)]); });
+  const cur = (await state()).bridge.sel, hidden = vis1.find(([i, hid]) => hid && i !== cur);
+  check('FIRST LEG: some balls are hidden by the solid', !!hidden);
+  if (hidden) {
+    const hxy = await page.evaluate((i) => window.COMPASS_DEBUG.screen(i), hidden[0]);
+    await page.mouse.click(hxy[0], hxy[1]); s = await state();
+    check('FIRST LEG: a ball hidden by the solid cannot be picked', s.bridge.sel !== hidden[0], `${hidden[0]} → ${s.bridge.sel}`);
+  }
+}
 s = await pick('e8');
 check('E8: the card plays', await until(page, () => window.COMPASS_DEBUG.state.playing || window.COMPASS_DEBUG.state.t > 1));
 check('E8: it stops at 2', await ended(2)); s = await state();
 check('E8: 240 roots drawn, 120 + 120', s.bridge.n === 240 && s.bridge.golden === 120);
 check('E8: the selected golden copy reads Nrd 2 − φ and Q 2', /2 − φ · 2/.test(await page.textContent('#ro')) && s.roots[s.bridge.sel].gold);
+check('E8: past the first leg the bridge draws points only, on the 2D canvas, as before', s.drawn.length === 0);
 s = await pick('fold');
 check('FOLD: the card plays through the last two legs', await until(page, () => window.COMPASS_DEBUG.state.playing || window.COMPASS_DEBUG.state.t > 2));
 check('FOLD: it stops at 4', await ended(4)); s = await state();
@@ -179,6 +258,7 @@ for (const i of vis) {
   if (R.gold ? !(rNow > rPar + 0.4) : !(rNow < rPar - 0.4)) swap = false;
 }
 check('FOLD: at 4 every root sits at its E⊥ place; the units moved in, the golden copies moved out', swap);
+check('FOLD: no solid in the last leg', s.drawn.length === 0);
 s = await seek(3.5);
 let mid = true;
 for (const i of s.bridge.visible) { const R = s.roots[i], a = Math.PI / 4, p = s.bridge.pos[i]; if (![0, 1, 2].every((k) => close(p[k], Math.cos(a) * R.par[k] + Math.sin(a) * R.perp[k], 1e-12))) mid = false; }
