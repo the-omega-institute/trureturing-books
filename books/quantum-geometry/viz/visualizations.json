@@ -390,12 +390,6 @@
           "gid": "D5/S3/Observer/Reversal/QuadraticObservationClosure.quadratic_closure_iff"
         },
         {
-          "gid": "D5/S3/Observer/Reversal/QuadraticObservationClosure.observed_increment"
-        },
-        {
-          "gid": "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.mixed_witness"
-        },
-        {
           "gid": "D5/S3/FluidDynamics/Fourier/AdvectionClosureInstance.no_exact_closure"
         }
       ]
