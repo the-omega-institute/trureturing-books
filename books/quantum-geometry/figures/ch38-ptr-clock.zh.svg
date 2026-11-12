@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch38-ptr-clock" data-lang="zh" viewBox="0 0 460 312" width="460" height="312" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="一张由六行、八列小格组成的图。每一行是同一段内存在一拍时的样子，八格里依次写着 3 1 4 1 5 9 2 6，每一行都完全相同；左边写着 t = 0 到 t = 5。每一行有一格是琥珀色，从第 0 拍的第 1 格起，每往下一行就右移一格，相邻两行的琥珀格之间连着一支箭头，图下注明箭头是每一拍的 ptr++；右边写着这一拍读出的值，*ptr = 1、4、1、5、9、2。">
+<title>一张由六行、八列小格组成的图。每一行是同一段内存在一拍时的样子，八格里依次写着 3 1 4 1 5 9 2 6，每一行都完全相同；左边写着 t = 0 到 t = 5。每一行有一格是琥珀色，从第 0 拍的第 1 格起，每往下一行就右移一格，相邻两行的琥珀格之间连着一支箭头，图下注明箭头是每一拍的 ptr++；右边写着这一拍读出的值，*ptr = 1、4、1、5、9、2。</title>
+<style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
+<text class="tf-dim tr-fig-mono" x="88" y="40" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0</text>
+<text class="tf-dim tr-fig-mono" x="120" y="40" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1</text>
+<text class="tf-dim tr-fig-mono" x="152" y="40" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">2</text>
+<text class="tf-dim tr-fig-mono" x="184" y="40" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">3</text>
+<text class="tf-dim tr-fig-mono" x="216" y="40" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">4</text>
+<text class="tf-dim tr-fig-mono" x="248" y="40" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">5</text>
+<text class="tf-dim tr-fig-mono" x="280" y="40" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">6</text>
+<text class="tf-dim tr-fig-mono" x="312" y="40" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">7</text>
+<text class="tf-dim" x="60" y="40" font-size="13" text-anchor="end">地址</text>
+<text class="tf-dim" x="60" y="69.68" font-size="13" text-anchor="end"><tspan font-style="italic">t</tspan> = 0</text>
+<rect x="73" y="53" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="88" y="70.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">3</text>
+<rect x="105" y="53" width="30" height="24" rx="2" class="ts-amber tf-amber" stroke-width="2" fill-opacity="0.22"/>
+<text class="tf-amber tr-fig-mono" x="120" y="70.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle" font-weight="700">1</text>
+<rect x="137" y="53" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="152" y="70.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">4</text>
+<rect x="169" y="53" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="184" y="70.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1</text>
+<rect x="201" y="53" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="216" y="70.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">5</text>
+<rect x="233" y="53" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="248" y="70.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">9</text>
+<rect x="265" y="53" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="280" y="70.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">2</text>
+<rect x="297" y="53" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="312" y="70.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">6</text>
+<text class="tf-amber tr-fig-mono" x="344" y="69.68" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace">*ptr = 1</text>
+<text class="tf-dim" x="60" y="107.68" font-size="13" text-anchor="end"><tspan font-style="italic">t</tspan> = 1</text>
+<rect x="73" y="91" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="88" y="108.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">3</text>
+<rect x="105" y="91" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="120" y="108.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1</text>
+<rect x="137" y="91" width="30" height="24" rx="2" class="ts-amber tf-amber" stroke-width="2" fill-opacity="0.22"/>
+<text class="tf-amber tr-fig-mono" x="152" y="108.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle" font-weight="700">4</text>
+<rect x="169" y="91" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="184" y="108.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1</text>
+<rect x="201" y="91" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="216" y="108.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">5</text>
+<rect x="233" y="91" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="248" y="108.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">9</text>
+<rect x="265" y="91" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="280" y="108.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">2</text>
+<rect x="297" y="91" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="312" y="108.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">6</text>
+<text class="tf-amber tr-fig-mono" x="344" y="107.68" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace">*ptr = 4</text>
+<text class="tf-dim" x="60" y="145.68" font-size="13" text-anchor="end"><tspan font-style="italic">t</tspan> = 2</text>
+<rect x="73" y="129" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="88" y="146.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">3</text>
+<rect x="105" y="129" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="120" y="146.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1</text>
+<rect x="137" y="129" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="152" y="146.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">4</text>
+<rect x="169" y="129" width="30" height="24" rx="2" class="ts-amber tf-amber" stroke-width="2" fill-opacity="0.22"/>
+<text class="tf-amber tr-fig-mono" x="184" y="146.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle" font-weight="700">1</text>
+<rect x="201" y="129" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="216" y="146.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">5</text>
+<rect x="233" y="129" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="248" y="146.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">9</text>
+<rect x="265" y="129" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="280" y="146.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">2</text>
+<rect x="297" y="129" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="312" y="146.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">6</text>
+<text class="tf-amber tr-fig-mono" x="344" y="145.68" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace">*ptr = 1</text>
+<text class="tf-dim" x="60" y="183.68" font-size="13" text-anchor="end"><tspan font-style="italic">t</tspan> = 3</text>
+<rect x="73" y="167" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="88" y="184.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">3</text>
+<rect x="105" y="167" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="120" y="184.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1</text>
+<rect x="137" y="167" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="152" y="184.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">4</text>
+<rect x="169" y="167" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="184" y="184.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1</text>
+<rect x="201" y="167" width="30" height="24" rx="2" class="ts-amber tf-amber" stroke-width="2" fill-opacity="0.22"/>
+<text class="tf-amber tr-fig-mono" x="216" y="184.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle" font-weight="700">5</text>
+<rect x="233" y="167" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="248" y="184.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">9</text>
+<rect x="265" y="167" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="280" y="184.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">2</text>
+<rect x="297" y="167" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="312" y="184.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">6</text>
+<text class="tf-amber tr-fig-mono" x="344" y="183.68" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace">*ptr = 5</text>
+<text class="tf-dim" x="60" y="221.68" font-size="13" text-anchor="end"><tspan font-style="italic">t</tspan> = 4</text>
+<rect x="73" y="205" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="88" y="222.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">3</text>
+<rect x="105" y="205" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="120" y="222.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1</text>
+<rect x="137" y="205" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="152" y="222.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">4</text>
+<rect x="169" y="205" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="184" y="222.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1</text>
+<rect x="201" y="205" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="216" y="222.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">5</text>
+<rect x="233" y="205" width="30" height="24" rx="2" class="ts-amber tf-amber" stroke-width="2" fill-opacity="0.22"/>
+<text class="tf-amber tr-fig-mono" x="248" y="222.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle" font-weight="700">9</text>
+<rect x="265" y="205" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="280" y="222.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">2</text>
+<rect x="297" y="205" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="312" y="222.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">6</text>
+<text class="tf-amber tr-fig-mono" x="344" y="221.68" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace">*ptr = 9</text>
+<text class="tf-dim" x="60" y="259.68" font-size="13" text-anchor="end"><tspan font-style="italic">t</tspan> = 5</text>
+<rect x="73" y="243" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="88" y="260.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">3</text>
+<rect x="105" y="243" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="120" y="260.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1</text>
+<rect x="137" y="243" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="152" y="260.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">4</text>
+<rect x="169" y="243" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="184" y="260.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">1</text>
+<rect x="201" y="243" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="216" y="260.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">5</text>
+<rect x="233" y="243" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="248" y="260.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">9</text>
+<rect x="265" y="243" width="30" height="24" rx="2" class="ts-amber tf-amber" stroke-width="2" fill-opacity="0.22"/>
+<text class="tf-amber tr-fig-mono" x="280" y="260.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle" font-weight="700">2</text>
+<rect x="297" y="243" width="30" height="24" rx="2" class="ts-edge tf-panel" stroke-width="1.1"/>
+<text class="tf-dim tr-fig-mono" x="312" y="260.04" font-size="14" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">6</text>
+<text class="tf-amber tr-fig-mono" x="344" y="259.68" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace">*ptr = 2</text>
+<line x1="124" y1="77" x2="143.59" y2="88.43" class="ts-dim" stroke-width="1.5" fill="none"/>
+<path d="M148 91 L141.55 90.15 L144.09 85.8Z" class="tf-dim"/>
+<line x1="156" y1="115" x2="175.59" y2="126.43" class="ts-dim" stroke-width="1.5" fill="none"/>
+<path d="M180 129 L173.55 128.15 L176.09 123.8Z" class="tf-dim"/>
+<line x1="188" y1="153" x2="207.59" y2="164.43" class="ts-dim" stroke-width="1.5" fill="none"/>
+<path d="M212 167 L205.55 166.15 L208.09 161.8Z" class="tf-dim"/>
+<line x1="220" y1="191" x2="239.59" y2="202.43" class="ts-dim" stroke-width="1.5" fill="none"/>
+<path d="M244 205 L237.55 204.15 L240.09 199.8Z" class="tf-dim"/>
+<line x1="252" y1="229" x2="271.59" y2="240.43" class="ts-dim" stroke-width="1.5" fill="none"/>
+<path d="M276 243 L269.55 242.15 L272.09 237.8Z" class="tf-dim"/>
+<text class="tf-dim" x="72" y="298.68" font-size="13">箭头：每一拍 ptr++</text>
+</svg>
