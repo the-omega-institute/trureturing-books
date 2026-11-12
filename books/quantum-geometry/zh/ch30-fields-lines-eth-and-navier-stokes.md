@@ -582,7 +582,7 @@ $$
   将 [@rem-ch30-vorticity-transport-literature] 所载的二维平面流情形与二元链 2-SAT 并置对照（`MODEL`），在本书锁定的 `trureturing@dev` 库中，冻结定理 [`all_grade_regularity_of_mild_path`](lean:D5/S3/FluidDynamics/Fourier/MildPathRegularity.all_grade_regularity_of_mild_path) 给出了二维周期傅里叶空间上的一项**条件性高阶正则性提升定理**：若已给定一条在 $[0, \tau]$ 上连续的加权 $H^2$ 零均值实无散温和解路径，且其初值在全部空间 Sobolev 阶数 $m \in \mathbb{N}$ 上可和，则该路径在每一空间阶数 $m$ 上皆满足强微分方程（无条件二维全局正则性经典定理另见 [@rem-ch30-navier-stokes-forced-literature]）。
 
 ::: {.viz src="navier-stokes-p-np" preset="flat" height="500"}
-**二维：涡管不被拉伸。** 涡度垂直于流动的平面，没有东西去拉它：涡管不变细，粘性只让它慢慢变粗（截面 $A$ 从虚线的 $1$ 涨到约 $2$），青色回路的环量 $\Gamma = \omega A$ 不变，品红的涡度只降不升（示意模型，`MODEL`）。
+**二维：涡管不被拉伸。** 涡度垂直于流动的平面，没有东西去拉它：涡管不变细，粘性只让它慢慢变粗（截面 $A$ 从端面上虚线圈的 $1$ 涨到约 $2$），青色回路的环量 $\Gamma = \omega A$ 不变，品红的涡度只降不升（示意模型，`MODEL`）。
 :::
 
 - **三维细涡管条件坍缩情景（[@rem-ch30-vorticity-transport-literature]）$\leftrightarrow$ 类比三元面片 3-SAT（`MODEL`）**：
@@ -762,7 +762,7 @@ $$
 :::
 
 ::: {.viz src="navier-stokes-p-np" preset="runaway" height="500"}
-**越拉越细（示意模型）。** 青色回路的环量 $\Gamma = \omega A$ 不变，虚线是出发时的涡管。这里让拉伸率正比于涡度本身（$\alpha = \kappa\omega$，示意性的闭合，不是纳维—斯托克斯方程的解）：$\kappa\Gamma = 0.50$ 大于 $4\pi\nu = 0.151$，到 $t = 2.4$ 截面已缩到 $0.162$，品红的涡度升到 $6.18$，截面将在 $t^* = 2.86$ 归零。真实的三维流体是否如此，正是上面的开放问题（`MODEL`）。
+**越拉越细（示意模型）。** 青色回路的环量 $\Gamma = \omega A$ 不变，淡影与虚线圈是出发时的涡管。这里让拉伸率正比于涡度本身（$\alpha = \kappa\omega$，示意性的闭合，不是纳维—斯托克斯方程的解）：$\kappa\Gamma = 0.50$ 大于 $4\pi\nu = 0.151$，到 $t = 2.4$ 截面已缩到 $0.162$，品红的涡度升到 $6.18$，截面将在 $t^* = 2.86$ 归零。真实的三维流体是否如此，正是上面的开放问题（`MODEL`）。
 :::
 
 ### 3. 场的自指与二次平流投影闭合阻碍定理（`LEAN ✓`）
