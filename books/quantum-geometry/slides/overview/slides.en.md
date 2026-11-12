@@ -2,7 +2,7 @@
 # 01 Cover
 theme: ../../../../theme/slides
 title: "Geometric Intuition of Quantum Computing · Overview"
-info: "An overview of Geometric Intuition of Quantum Computing: the four blind spots and the ten-part, thirty-nine-chapter dimensional ladder; for Parts I–VIII their core pictures, main Lean-verified theorems, literature results and open problems; the counts of the three tiers of warrant across all ten parts; and the full thirty-nine-chapter dependency map."
+info: "An overview of Geometric Intuition of Quantum Computing: the four blind spots and the ten-part, thirty-nine-chapter dimensional ladder; for each of the ten parts its core picture, main Lean-verified theorems, literature results and open problems; the counts of the three tiers of warrant; and the full thirty-nine-chapter dependency map."
 htmlAttrs:
   lang: "en"
 deck:
@@ -10,7 +10,7 @@ deck:
   book: "Geometric Intuition of Quantum Computing"
   title: "Overview"
   version: "0.1.0"
-  blurb: "From pairwise measurement to spheres beyond spheres: the core pictures and main theorems of Parts I–VIII, with the ten-part, thirty-nine-chapter ladder, tiers of warrant and dependency map, in thirty-nine slides."
+  blurb: "From pairwise measurement to spheres beyond spheres: the core pictures, main theorems and three tiers of warrant across ten parts and thirty-nine chapters, in one forty-eight-slide deck."
 layout: cover
 ---
 
@@ -633,7 +633,28 @@ For idempotent $P$ and $V(x) = Lx - B(x, x)$, an exact closure $P(V(x)) = f(P(x)
 <Source>Chapter 29 (SilverSlopeAbelianPellArithmetic) · Chapter 30 (QuadraticObservationClosure)</Source>
 
 ---
-# 36 Part VIII · literature and open problems
+# 36 Part VIII · theorems (continued)
+section: "Part VIII · theorems"
+---
+
+<div class="body">
+  <p class="kicker">Theorem 31.4 · Theorem 32.1</p>
+  <h2 class="t">Each round turns <em>2θ</em>; two quarter turns <em>reverse</em></h2>
+<TheoremCard class="compact mt-s" label="Theorem 31.4" title="Uniform amplification turns in a plane (item 2)" gid="D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation" cite="thm-ch31-horizon-landauer-ergodic-fairness">
+
+Let $J$, $C$ be isometries, $P$ a projection, and let $U = CJ$ have success overlap $p$: $(PU)^\dagger(PU) = p\,I$ with $0 < p < 1$; put $\theta = \arcsin\sqrt p$ and let $W$, $B$ be the success and failure parts. Then for every $n$, $(\operatorname{iterate}(U, P))^n\,U = \sin\bigl((2n + 1)\theta\bigr)\,W + \cos\bigl((2n + 1)\theta\bigr)\,B$.
+
+</TheoremCard>
+<TheoremCard class="compact mt-s" label="Theorem 32.1" title="A skew-adjoint unitary squares to minus one (item 1)" gid="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary" cite="thm-ch32-generative-self-reference-and-zeckendorf">
+
+Let $R$ be a finite square complex matrix with $R^\dagger = -R$ and $R R^\dagger = I_n$. Then $R^2 = -I_n$.
+
+</TheoremCard>
+</div>
+<Source>Chapter 31 (CoherentUniformAmplification) · Chapter 32 (BalancedUnitaryComplexStructure)</Source>
+
+---
+# 37 Part VIII · literature and open problems
 section: "Part VIII · warrant"
 ---
 
@@ -657,7 +678,157 @@ section: "Part VIII · warrant"
 <Source>Chapter 29 literature remark · Chapter 30 conjecture</Source>
 
 ---
-# 37 Three tiers of warrant
+# 38 Part IX
+layout: section
+chapter: "09"
+section: "Part IX"
+---
+
+<p class="kicker">Part IX · Chapters 33–36</p>
+<h2 class="t">Mutual illumination: <em>universal observers, self-referential tables, beyond reincarnation</em></h2>
+<p class="lead">Whatever keeps records and takes part in pairwise measurement can be read as an observer; one and two orthogonal turns giving the same reading locate the observer; the lookup algorithm lives in the table; equal steps in rapidity never reach the pure light at <Tex t="90^\circ" />.</p>
+<div class="card mt">
+  <ul class="plain">
+    <li>Ch. 33 All beings as observers · Ch. 34 Orthogonality-degeneracy blind spots</li>
+    <li>Ch. 35 Arriving on light, table expansion · Ch. 36 Infinite discrete steps</li>
+  </ul>
+</div>
+
+---
+# 39 Part IX · picture
+section: "Part IX · picture"
+---
+
+<div class="body">
+  <p class="kicker">Chapter 36 · two rulers</p>
+  <h2 class="t">The angle ruler ends at <em>90°</em>; the rapidity ruler <em>runs to infinity</em></h2>
+  <img src="./img/ch36-two-rulers.en.svg" alt="The upper angle ruler is cut off by a magenta wall at 90°; the lower rapidity ruler runs to infinity, and its evenly spaced cyan dots map along dashed lines to angles crowding towards 90°." style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
+  <p class="lead mt-s">On the rapidity ruler the cyan dots start at <Tex t="\eta_0 \approx 0.817" /> in equal steps <Tex t="\Delta\eta = 1" />; dashed lines send each to its angle <Tex t="\theta_k" /> (<Tex t="\sin\theta_k = \tanh\eta_k" />), each crowding closer to the magenta <Tex t="90^\circ" /> wall, all of them left of it.</p>
+</div>
+<Source>Chapter 36, ch36-two-rulers</Source>
+
+---
+# 40 Part IX · theorems
+section: "Part IX · theorems"
+---
+
+<div class="body">
+  <p class="kicker">Theorem 33.1 · Theorem 34.2</p>
+  <h2 class="t">At most <em>d</em> histories; two axes <em>make every rotation</em></h2>
+<TheoremCard class="compact mt-s" label="Theorem 33.1" title="History capacity of a finite memory (item 2)" gid="D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity" cite="thm-ch33-observer-pinching-and-memory-spectrum">
+
+Let $\rho_1, \ldots, \rho_N$ be $d$-dimensional density matrices and $E_1, \ldots, E_N$ positive semidefinite with $\sum_j E_j = 1$. If $\operatorname{Tr}(E_j \rho_i)$ is $1$ for $i = j$ and $0$ otherwise, then $N \le d$.
+
+</TheoremCard>
+<TheoremCard class="compact mt-s" label="Theorem 34.2" title="Exact finite words in two rotation axes (item 2)" gid="D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word" cite="thm-ch34-perpendicular-axis-and-pullback">
+
+Let $a, b \in \mathbb{R}^3$ be non-collinear: $\langle a, b\rangle^2 < \lVert a\rVert^2 \lVert b\rVert^2$. Then every orthogonal map $R$ of determinant $1$ is a finite product of orientation-preserving rotations each fixing $a$ or fixing $b$.
+
+</TheoremCard>
+</div>
+<Source>Chapter 33 (FiniteMemoryHistoryCapacity) · Chapter 34 (TwoAxisFiniteRotation)</Source>
+
+---
+# 41 Part IX · literature
+section: "Part IX · warrant"
+---
+
+<div class="body">
+  <p class="kicker">Literature results · not formalized in this book</p>
+  <h2 class="t">Table bounds and the hyperbolic disk are literature; <em>the observer ontology is interpretation</em></h2>
+  <div class="g2 mt">
+    <div class="card violet">
+      <h4>Literature · Chapter 35</h4>
+      <h3>Yao's space–time trade-off and Karp–Lipton</h3>
+      <p>A table of <Tex t="S" /> precomputed cells cuts online queries to <Tex t="T" /> probes, subject to trade-off lower bounds (for black-box permutation inversion, <Tex t="S \cdot T \ge \Omega(N)" />); if <Tex t="\mathrm{NP} \subseteq \mathrm{P}/\mathrm{poly}" />, the polynomial hierarchy collapses to its second level.</p>
+    </div>
+    <div class="card violet">
+      <h4>Literature · Chapter 36</h4>
+      <h3>The Gudermannian and the Poincaré disk</h3>
+      <p><Tex t="\theta = \operatorname{gd}(\eta) = \arcsin(\tanh\eta)" /> links rapidity and angle; in the Poincaré disk the geodesic distance from the centre to radius <Tex t="r = \tan(\theta/2)" /> is <Tex t="\eta" />, which tends to <Tex t="\infty" /> as <Tex t="r \to 1" />.</p>
+    </div>
+  </div>
+  <p class="lead mt">“All beings are observers”, “observers attract one another” and “quotienting out reincarnation” are the book's interpretive model (MODEL): argued from verified theorems, not derived from them. Part IX has no open problems.</p>
+</div>
+<Source>Chapters 35 and 36, literature remarks</Source>
+
+---
+# 42 Part X
+layout: section
+chapter: "10"
+section: "Part X"
+---
+
+<p class="kicker">Part X · Chapters 37–39</p>
+<h2 class="t">Non-duality: <em>dreams, pointers, one ontology</em></h2>
+<p class="lead">Observing decoheres with known data, and deleted coherence pays an entropy tax; the observer is a memory pointer over static memory that cannot be deep-copied; seer and seen are two sheets of one double cover, with no continuous section between them.</p>
+<div class="card mt">
+  <ul class="plain">
+    <li>Ch. 37 Dream quantum erasure · Ch. 38 Ontological QRAM and the memory pointer</li>
+    <li>Ch. 39 The observer is the ontological universe</li>
+  </ul>
+</div>
+
+---
+# 43 Part X · picture
+section: "Part X · picture"
+---
+
+<div class="body">
+  <p class="kicker">Chapter 37 · the entropy tax</p>
+  <h2 class="t">The coherence cut away and the entropy paid <em>both peak at π/4</em></h2>
+  <img src="./img/ch37-entropy-tax.en.svg" alt="The horizontal axis is the rotation angle θ. The magenta curve is the coherence mass removed by pinching, the ink curve the entropy increase; both vanish at the ends and peak together at θ = π/4." style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
+  <p class="lead mt-s">The magenta curve is the coherence mass <Tex t="\tfrac12\sin^2 2\theta" /> one pinching step removes, the ink curve the entropy increase; both are <Tex t="0" /> at <Tex t="\theta = 0" /> and <Tex t="\theta = \pi/2" />, and at <Tex t="\theta = \pi/4" /> they reach <Tex t="1/2" /> and <Tex t="\ln 2" />.</p>
+</div>
+<Source>Chapter 37, ch37-entropy-tax</Source>
+
+---
+# 44 Part X · theorems
+section: "Part X · theorems"
+---
+
+<div class="body">
+  <p class="kicker">Theorem 38.3 · Theorem 39.7</p>
+  <h2 class="t">Non-orthogonal states <em>cannot be deep-copied</em>; the double cover <em>has no section</em></h2>
+<TheoremCard class="compact mt-s" label="Theorem 38.3" title="No universal deep copy: the inner-product criterion (item 2)" gid="D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion" cite="thm-ch38-pointer-width-and-no-deep-copy">
+
+Let $U$ be a complex linear isometric equivalence of $H \otimes H$. If unit vectors $\psi, \phi$ and one unit blank state satisfy $U(\psi \otimes \mathrm{blank}) = \psi \otimes \psi$ and $U(\phi \otimes \mathrm{blank}) = \phi \otimes \phi$, then $\langle\phi, \psi\rangle = \langle\phi, \psi\rangle^2$, and $\phi = \psi$ or $\langle\phi, \psi\rangle = 0$.
+
+</TheoremCard>
+<TheoremCard class="compact mt-s" label="Theorem 39.7" title="No continuous global section of the squaring cover (item 1)" gid="D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section" cite="thm-ch39-double-cover-no-section-and-720-lift">
+
+There is no continuous map $s$ from the unit circle to itself with $s(z)^2 = z$ for every $z$ on it.
+
+</TheoremCard>
+</div>
+<Source>Chapter 38 (NoCloningInnerProductCriterion) · Chapter 39 (CircleDoubleCoverNoSection)</Source>
+
+---
+# 45 Part X · literature
+section: "Part X · warrant"
+---
+
+<div class="body">
+  <p class="kicker">Literature results · not formalized in this book</p>
+  <h2 class="t">Quantum erasers and spinor bilinears are literature; <em>non-duality is interpretation</em></h2>
+  <div class="g2 mt">
+    <div class="card violet">
+      <h4>Literature · Chapter 37</h4>
+      <h3>Which-path marking and delayed-choice erasure</h3>
+      <p>Fringes vanish when the path is recorded distinguishably; projecting the probe onto the complementary basis and sorting by its reading brings them back in the conditional sub-ensembles. The unconditional total never changes, so no signal goes back in time.</p>
+    </div>
+    <div class="card violet">
+      <h4>Literature · Chapter 39</h4>
+      <h3>Spinor bilinears and the Fierz identity</h3>
+      <p>A spinor is not observed directly; spacetime quantities are its bilinears: <Tex t="\mathbf J = \psi\gamma_0\tilde\psi" />, <Tex t="\mathbf S = \psi\mathbf I_{12}\tilde\psi" />; at <Tex t="\beta = 0" />, <Tex t="\mathbf J^2 = -\mathbf S^2 = \rho^2" />.</p>
+    </div>
+  </div>
+  <p class="lead mt">Dream erasure, the memory pointer and “the observer is the ontological universe” are the book's interpretive model (MODEL): argued from verified theorems, not derived from them. Part X has no open problems.</p>
+</div>
+<Source>Chapters 37 and 39, literature remarks</Source>
+
+---
+# 46 Three tiers of warrant
 section: "Three tiers"
 ---
 
@@ -665,21 +836,21 @@ section: "Three tiers"
   <p class="kicker">Three tiers of warrant</p>
   <h2 class="t">Three tiers of warrant, <em>three colours</em>, never mixed</h2>
   <div class="split mt">
-    <img src="./img/prelude-three-tiers.en.svg" alt="Three bars: green 215, violet 164, red 6; under the green bar, 330 theorem declarations in the lock file." style="display: block; width: 900px; max-width: 100%;">
+    <img src="./img/prelude-three-tiers.en.svg" alt="Three bars: green counts the theorems with a Lean reference, violet the literature results, red the open conjectures; under the green bar, the number of theorem declarations in the lock file." style="display: block; width: 900px; max-width: 100%;">
     <div>
-      <div class="g3">
-        <Stat value="215" label="theorems, lemmas, propositions and corollaries with lean=" tone="ok" />
-        <Stat value="164" label="remarks and examples marked “literature result, not formalized”" tone="violet" />
-        <Stat value="6" label="open conjectures, marked OPEN, with no Lean reference" tone="warn" />
-      </div>
-      <p class="lead mt">The lock file <span class="mono">trureturing.lock.json</span> pins <PinnedCommit />: 477 declarations, 330 of them Lean theorems.</p>
+      <ul class="plain">
+        <li><span class="hl-ok">LEAN ✓</span>: theorems, lemmas, propositions and corollaries with lean=</li>
+        <li><span class="hl-violet">Literature</span>: remarks and examples marked “literature result, not formalized”</li>
+        <li><span class="hl-warn">OPEN</span>: open conjectures, with no Lean reference</li>
+      </ul>
+      <p class="lead mt">The counts on the left are computed by the figure script from the text and the lock file <span class="mono">trureturing.lock.json</span>, and follow the book; the lock pins <PinnedCommit />.</p>
     </div>
   </div>
 </div>
 <Source>Counted from both editions and trureturing.lock.json · Prelude, prelude-three-tiers · Appendix C</Source>
 
 ---
-# 38 Dependency map
+# 47 Dependency map
 section: "Dependency map"
 ---
 
@@ -702,11 +873,11 @@ section: "Dependency map"
 <Source>Coda, “Ten-Part, Thirty-Nine-Chapter Reading and Dependency Map” (coda-dependency-tree)</Source>
 
 ---
-# 39 Closing
+# 48 Closing
 layout: cover
 ---
 
 <p class="kicker">Read · Verify · Watch</p>
 <h1 class="display">The book explains,<br><em>Lean</em> decides</h1>
-<p class="lead">Read online or as PDF and EPUB; 150 static figures, 36 interactive labs, ten parts and thirty-nine chapters with eight explainer films; check every theorem at the pinned trureturing commit.</p>
+<p class="lead">Read online or as PDF and EPUB; ten parts and thirty-nine chapters with static figures, interactive labs and explainer films; check every theorem at the pinned trureturing commit.</p>
 <p class="lead mt mono hl-cyan">Prelude → Ch. 1 · Appendix C: locked index</p>

@@ -166,7 +166,7 @@ The full architecture of *Geometric Intuition of Quantum Computing* comprises **
 :::
 
 ::: {.slides src="overview"}
-A 39-slide overview: the four blind spots and the ten-part dimensional ladder; the core pictures, main theorems, literature results and open problems of Parts I–VIII; and the counts of the three tiers of warrant across all ten parts and the full thirty-nine-chapter dependency map.
+A 48-slide overview of the whole book: the four blind spots and the dimensional ladder; each of the ten parts' core picture, main theorems, literature results and open problems; the counts of the three tiers of warrant and the dependency map.
 :::
 
 Readers may begin directly with [Chapter 1](ch01-measurement.md): no prior familiarity with operator algebras or advanced quantum theory is assumed, and every $2\times 2$ matrix calculation, trace identity, Bloch coordinate map, and partial-trace reduction is worked out explicitly through [Chapter 2](ch02-born-rule.md), [Chapter 3](ch03-projectors-and-duality.md), and [Chapter 4](ch04-decoherence.md).

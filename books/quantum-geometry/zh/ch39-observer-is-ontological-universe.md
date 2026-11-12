@@ -144,8 +144,7 @@ $$
 :::
 
 ::: {.figure src="ch39-golden-thread"}
-**两个不同的数，迟早在某一级黄金读数上分开。** 从上到下是读数级 $l = 0, \dots, 7$：每一行里青色的格子是 $[n/\varphi^l, (n+1)/\varphi^l)$，$n = \lfloor\varphi^l x
-floor$，墨色竖线是 $a = 0.50$ 与 $b = 0.55$，右边两列是两数读数的齐肯多夫字。$l \le 4$ 时两数同在一格、字也相同；从 $l = 5$ 起一条品红的格界落在两数之间，两个字从此不同。证明里的保证是 $\varphi^l(b - a) \ge 2$ 的那一级（这里是 $l = 8$）一定分开，实际分得更早。这正是 [@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] 第 2 款：读出线程相同的两个数必相等。
+**两个不同的数，迟早在某一级黄金读数上分开。** 从上到下是读数级 $l = 0, \dots, 7$：每一行里青色的格子是 $[n/\varphi^l, (n+1)/\varphi^l)$，$n = \lfloor\varphi^l x\rfloor$，墨色竖线是 $a = 0.50$ 与 $b = 0.55$，右边两列是两数读数的齐肯多夫字。$l \le 4$ 时两数同在一格、字也相同；从 $l = 5$ 起一条品红的格界落在两数之间，两个字从此不同。证明里的保证是 $\varphi^l(b - a) \ge 2$ 的那一级（这里是 $l = 8$）一定分开，实际分得更早。这正是 [@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] 第 2 款：读出线程相同的两个数必相等。
 :::
 
 现在，请把 [@thm-ch39-fiber-reconstruction-and-zeckendorf-thread] 的三束强光聚焦回我们的切投模型集宇宙（`MODEL`（模型诠释）），见证全书教学脚手架的一次彻底倒转！

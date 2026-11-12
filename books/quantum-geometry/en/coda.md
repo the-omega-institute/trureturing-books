@@ -640,7 +640,7 @@ This monograph consists of the **[Prelude](README.md)**, **Ten Parts (39 Chapter
 :::
 
 ::: {.slides src="overview"}
-A 39-slide overview: the four blind spots and the ten-part dimensional ladder; the core pictures, main theorems, literature results and open problems of Parts I–VIII; and the counts of the three tiers of warrant across all ten parts and the full thirty-nine-chapter dependency map.
+A 48-slide overview of the whole book: the four blind spots and the dimensional ladder; each of the ten parts' core picture, main theorems, literature results and open problems; the counts of the three tiers of warrant and the dependency map.
 :::
 
 ### Four Recommended Reading Tracks {#sec-coda-reading-tracks}

@@ -239,7 +239,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第十一章 | 文献注记 `rem-pulses-literature` 之后（章末） | `pulse-area-virtual-z` · `detune`，随后完整实验室 |
 | 第十二章 | 开篇三座高峰第 2 条（参数位移律）之后、第 3 条之前 | `parameter-shift` · `noise` |
 | 第十二章 | §泡利转角与精确参数位移 · 文献注记 `rem-parameter-shift-rule-literature` 之前 | `parameter-shift` · `shift` |
-| 第十二章 | 文献注记 `rem-parameter-shift-rule-literature` 之后（该节末） | `parameter-shift` · `anywhere`，随后完整实验室 |
+| 第十二章 | 文献注记 `rem-parameter-shift-rule-literature` 之后、讲有限步长截断偏差的那句话之后 | `parameter-shift` · `step` |
+| 第十二章 | `step` 卡之后、讲两点公式没有这一截偏差的那句话之后（该节末） | `parameter-shift` · `anywhere`，隔一句后是完整实验室 |
 | 第十二章 | §赤道集中与贫瘠高原的条件 · 文献注记 `rem-sphere-equator-markov-literature` 之前 | `equator-concentration` · `three`、`width` |
 | 第十二章 | 文献注记 `rem-sphere-equator-markov-literature` 之后 | `equator-concentration` · `bound`、`twenty` |
 | 第十二章 | 推论 `cor-finite-trace-mode-budget` 的证明之后 | `eth-horizon-crossover` · `plateau`、`tail` |

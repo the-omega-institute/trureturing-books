@@ -3,9 +3,9 @@
 **每一条定理都经 Lean 内核验证的双语形式化专著与教材书库。**  
 *Bilingual formal monographs and self-contained textbooks in which every theorem is kernel-verified in Lean.*
 
-本书库中的每一部专著均遵循“书负责解释，Lean 负责成立”的分工契约：所有正式的 `theorem`、`lemma`、`proposition` 与 `corollary` 均按全局标识符（GID）绑定至 [trureturing](https://github.com/the-omega-institute/trureturing)（`dev` 分支，精确提交锁定于 [trureturing.lock.json](trureturing.lock.json)）中已经 Lean 4 内核验证并冻结的声明。同一份中英双语源码同步导出为在线 HTML（构建期 KaTeX 排版与源码永久链接）、PDF（深色屏幕版与白底印刷版）及兼容 Apple Books 的 EPUB 3。
+本书库中的每一部专著均遵循“书负责解释，Lean 负责成立”的分工契约：所有正式的 `theorem`、`lemma`、`proposition` 与 `corollary` 均按全局标识符（GID）绑定至 [trureturing](https://github.com/the-omega-institute/trureturing)（`dev` 分支，精确提交锁定于 [trureturing.lock.json](trureturing.lock.json)）中已经 Lean 4 内核验证并冻结的声明。同一份中英双语源码同步导出为在线 HTML（构建期 KaTeX 排版与源码永久链接）、PDF（深色屏幕版、白底印刷版与学术专著版）及兼容 Apple Books 的 EPUB 3。
 
-Every formal `theorem`, `lemma`, `proposition`, and `corollary` in this library cites a declaration verified by the Lean 4 kernel and frozen on the `dev` branch of [trureturing](https://github.com/the-omega-institute/trureturing), pinned in [trureturing.lock.json](trureturing.lock.json). A single aligned Chinese and English source builds cleanly into online HTML, screen and print PDFs, and MathML-enabled EPUB 3.
+Every formal `theorem`, `lemma`, `proposition`, and `corollary` in this library cites a declaration verified by the Lean 4 kernel and frozen on the `dev` branch of [trureturing](https://github.com/the-omega-institute/trureturing), pinned in [trureturing.lock.json](trureturing.lock.json). A single aligned Chinese and English source builds cleanly into online HTML, screen, print, and academic PDFs, and MathML-enabled EPUB 3.
 
 ---
 
@@ -67,7 +67,8 @@ cargo install mdbook --version 0.5.4 --locked
 | :--- | :--- |
 | `./tbook check` | 校验章节结构、中英双语逐项对齐、数学语法与所钉 Lean 冻结声明引用 |
 | `./tbook pin --refresh` | 在当前所钉 `trureturing` 提交上解析新增或变更的声明引用并更新锁文件 |
-| `./tbook build html pdf epub site` | 构建中英双语 HTML、屏幕版/印刷版 PDF、EPUB 3 与书库门户站点 |
+| `./tbook build html pdf epub site` | 构建中英双语 HTML、屏幕版/印刷版/学术版 PDF、EPUB 3 与书库门户站点 |
+| `./tbook build pdf --book quantum-geometry --variant academic` | 导出中英文学术专著 PDF（B5 衬线、独立前置页、传统定理与证明排版）；文件位于 `build/dist/quantum-geometry/` |
 | `./tbook serve` | 本地启动预览服务器查看 `_site/` 构建产物 |
 | `./tbook books` | 列出当前公开书目（模板示例书已通过 [site.toml](site.toml) 的 `hide = ["example-*"]` 隐藏） |
 | `./tbook template status` | 检查上游发布模板版本与托管文件完整性 |

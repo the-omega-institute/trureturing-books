@@ -2,7 +2,7 @@
 # 01 封面
 theme: ../../../../theme/slides
 title: "量子计算的几何直觉 · 全书概览"
-info: "《量子计算的几何直觉》全书概览：四重盲区与十部三十九章升维阶梯，第一至第八部各自的核心图景、主要的 Lean 已验证定理、文献结果与开放问题，全书十部三层依据的条数，以及全书三十九章依赖导图。"
+info: "《量子计算的几何直觉》全书概览：四重盲区与十部三十九章升维阶梯，十部各自的核心图景、主要的 Lean 已验证定理、文献结果与开放问题，三层依据的条数，以及全书三十九章依赖导图。"
 htmlAttrs:
   lang: "zh-CN"
 deck:
@@ -10,7 +10,7 @@ deck:
   book: "量子计算的几何直觉"
   title: "全书概览"
   version: "0.1.0"
-  blurb: "从两子丈量到球外之球：第一至第八部的核心图景与主要定理，配全书十部三十九章阶梯、三层依据与依赖导图，共三十九页。"
+  blurb: "从两子丈量到球外之球：十部三十九章的核心图景、主要定理与三层依据，一份四十八页的演示看完全书。"
 layout: cover
 ---
 
@@ -633,7 +633,28 @@ section: "第八部 · 定理"
 <Source>第二十九章（SilverSlopeAbelianPellArithmetic）· 第三十章（QuadraticObservationClosure）</Source>
 
 ---
-# 36 第八部 · 文献结果与开放问题
+# 36 第八部 · 定理（续）
+section: "第八部 · 定理"
+---
+
+<div class="body">
+  <p class="kicker">Theorem 31.4 · Theorem 32.1</p>
+  <h2 class="t">放大每轮只转 <em>2θ</em>；连转两次四分之一圈<em>恰好反向</em></h2>
+<TheoremCard class="compact mt-s" label="定理31.4" title="相干一致放大的平面步进旋转（第 2 款）" gid="D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation" cite="thm-ch31-horizon-landauer-ergodic-fairness">
+
+设 $J$、$C$ 等距，$P$ 是投影，$U = CJ$ 的成功重叠率为 $p$：$(PU)^\dagger(PU) = p\,I$，$0 < p < 1$；记 $\theta = \arcsin\sqrt p$，$W$、$B$ 为成功与失败分量。则对每个 $n$，$(\operatorname{iterate}(U, P))^n\,U = \sin\bigl((2n + 1)\theta\bigr)\,W + \cos\bigl((2n + 1)\theta\bigr)\,B$。
+
+</TheoremCard>
+<TheoremCard class="compact mt-s" label="定理32.1" title="反自伴幺正复结构的二次旋转反号（第 1 款）" gid="D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary" cite="thm-ch32-generative-self-reference-and-zeckendorf">
+
+设 $R$ 是有限维复方阵，满足 $R^\dagger = -R$ 且 $R R^\dagger = I_n$。则 $R^2 = -I_n$。
+
+</TheoremCard>
+</div>
+<Source>第三十一章（CoherentUniformAmplification）· 第三十二章（BalancedUnitaryComplexStructure）</Source>
+
+---
+# 37 第八部 · 文献结果与开放问题
 section: "第八部 · 依据"
 ---
 
@@ -657,7 +678,157 @@ section: "第八部 · 依据"
 <Source>第二十九章 文献注记 · 第三十章 猜想</Source>
 
 ---
-# 37 三层依据
+# 38 第九部
+layout: section
+chapter: "09"
+section: "第九部"
+---
+
+<p class="kicker">第九部 · 第 33–36 章</p>
+<h2 class="t">互照 · 万物观察者、<em>自指扩表与超越轮回</em></h2>
+<p class="lead">能留下记录、参与两子比量的存在都可读作观察者；一次与两次正交读数相同，反演出观察者的位置；查表的算法也在表里；按内禀快度等步走，永远走不到 <Tex t="90^\circ" /> 的纯光。</p>
+<div class="card mt">
+  <ul class="plain">
+    <li>第 33 章 万物皆为观察者 · 第 34 章 正交简并盲区</li>
+    <li>第 35 章 乘光而来与自指扩表 · 第 36 章 无穷离散步与约去轮回</li>
+  </ul>
+</div>
+
+---
+# 39 第九部 · 图景
+section: "第九部 · 图景"
+---
+
+<div class="body">
+  <p class="kicker">Chapter 36 · two rulers</p>
+  <h2 class="t">角度尺在 <em>90°</em> 到头，快度尺<em>通向无穷</em></h2>
+  <img src="./img/ch36-two-rulers.zh.svg" alt="上面的角度尺在 90° 处被品红的墙截断；下面的快度尺通向无穷，等距的青色点经虚线落到角度尺上，越来越挤向 90°。" style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
+  <p class="lead mt-s">快度尺上，青色的点从 <Tex t="\eta_0 \approx 0.817" /> 起等步 <Tex t="\Delta\eta = 1" /> 排开；虚线把每一点送到角度尺上的 <Tex t="\theta_k" />（<Tex t="\sin\theta_k = \tanh\eta_k" />），一个比一个更挤向品红的 <Tex t="90^\circ" /> 墙，却都在墙的左边。</p>
+</div>
+<Source>第三十六章 ch36-two-rulers</Source>
+
+---
+# 40 第九部 · 定理
+section: "第九部 · 定理"
+---
+
+<div class="body">
+  <p class="kicker">Theorem 33.1 · Theorem 34.2</p>
+  <h2 class="t">能完美区分的历史<em>不超过维数</em>；两根轴的转动<em>拼出一切转动</em></h2>
+<TheoremCard class="compact mt-s" label="定理33.1" title="有限维记忆的可区分历史容量（第 2 款）" gid="D5/S3/Quantum/Measurements/FiniteMemoryHistoryCapacity.finite_memory_history_capacity" cite="thm-ch33-observer-pinching-and-memory-spectrum">
+
+设 $\rho_1, \ldots, \rho_N$ 是 $d$ 维密度矩阵，$E_1, \ldots, E_N$ 半正定且 $\sum_j E_j = 1$。若 $\operatorname{Tr}(E_j \rho_i)$ 在 $i = j$ 时为 $1$、否则为 $0$，则 $N \le d$。
+
+</TheoremCard>
+<TheoremCard class="compact mt-s" label="定理34.2" title="双轴旋转的精确有限字生成（第 2 款）" gid="D5/S3/Geometry/TwoAxisFiniteRotation.two_axis_finite_word" cite="thm-ch34-perpendicular-axis-and-pullback">
+
+设 $a, b \in \mathbb{R}^3$ 不共线：$\langle a, b\rangle^2 < \lVert a\rVert^2 \lVert b\rVert^2$。则每个行列式为 $1$ 的正交变换 $R$，都等于有限个保定向、固定 $a$ 或固定 $b$ 的旋转之积。
+
+</TheoremCard>
+</div>
+<Source>第三十三章（FiniteMemoryHistoryCapacity）· 第三十四章（TwoAxisFiniteRotation）</Source>
+
+---
+# 41 第九部 · 文献结果
+section: "第九部 · 依据"
+---
+
+<div class="body">
+  <p class="kicker">Literature results · not formalized in this book</p>
+  <h2 class="t">查表界与双曲圆盘是文献，<em>观察者本体是诠释</em></h2>
+  <div class="g2 mt">
+    <div class="card violet">
+      <h4>文献结果 · 第三十五章</h4>
+      <h3>姚期智查表时空权衡与卡普—利普顿定理</h3>
+      <p>预存 <Tex t="S" /> 个单元的表把在线查询压到 <Tex t="T" /> 步，受时空权衡下界制约（如黑盒置换求逆 <Tex t="S \cdot T \ge \Omega(N)" />）；若 <Tex t="\mathrm{NP} \subseteq \mathrm{P}/\mathrm{poly}" />，多项式谱系坍缩到第二层。</p>
+    </div>
+    <div class="card violet">
+      <h4>文献结果 · 第三十六章</h4>
+      <h3>古德曼函数与庞加莱圆盘</h3>
+      <p><Tex t="\theta = \operatorname{gd}(\eta) = \arcsin(\tanh\eta)" /> 沟通快度与角度；庞加莱圆盘上半径 <Tex t="r = \tan(\theta/2)" /> 处到圆心的测地距离是 <Tex t="\eta" />，<Tex t="r \to 1" /> 时 <Tex t="\eta \to \infty" />。</p>
+    </div>
+  </div>
+  <p class="lead mt">“万物皆为观察者”“观察者互为吸引子”与“约去轮回”是本书的诠释模型（MODEL），借已验证的定理立论，不由它们推出；第九部没有开放问题。</p>
+</div>
+<Source>第三十五章、第三十六章 文献注记</Source>
+
+---
+# 42 第十部
+layout: section
+chapter: "10"
+section: "第十部"
+---
+
+<p class="kicker">第十部 · 第 37–39 章</p>
+<h2 class="t">不二 · 梦境擦除、<em>记忆指针与本体不二</em></h2>
+<p class="lead">观察是用已知数据退相干，剪掉的相干要付熵税；观察者是在静止内存上滑动的记忆指针，不能深拷贝；能观与所观是同一条双覆叠的两叶，没有连续的截面把它们切开。</p>
+<div class="card mt">
+  <ul class="plain">
+    <li>第 37 章 梦境量子擦除与非定域观察者 · 第 38 章 宇宙本体 QRAM 与记忆指针</li>
+    <li>第 39 章 观察者即宇宙本体</li>
+  </ul>
+</div>
+
+---
+# 43 第十部 · 图景
+section: "第十部 · 图景"
+---
+
+<div class="body">
+  <p class="kicker">Chapter 37 · the entropy tax</p>
+  <h2 class="t">剪掉的相干与付出的熵税，<em>同在 π/4 到顶</em></h2>
+  <img src="./img/ch37-entropy-tax.zh.svg" alt="横轴是旋转角 θ。品红的曲线是捏合剪掉的相干质量，墨色的曲线是熵增，两者在两端为零、在 θ = π/4 处同时到顶。" style="display: block; height: 560px; max-width: 100%; margin: 24px auto 0;">
+  <p class="lead mt-s">品红的曲线是一步捏合剪掉的相干质量 <Tex t="\tfrac12\sin^2 2\theta" />，墨色的曲线是熵增；两者在 <Tex t="\theta = 0" /> 与 <Tex t="\theta = \pi/2" /> 处为 <Tex t="0" />，在 <Tex t="\theta = \pi/4" /> 处分别取 <Tex t="1/2" /> 与 <Tex t="\ln 2" />。</p>
+</div>
+<Source>第三十七章 ch37-entropy-tax</Source>
+
+---
+# 44 第十部 · 定理
+section: "第十部 · 定理"
+---
+
+<div class="body">
+  <p class="kicker">Theorem 38.3 · Theorem 39.7</p>
+  <h2 class="t">非正交的态<em>不能深拷贝</em>；平方双覆叠<em>没有连续截面</em></h2>
+<TheoremCard class="compact mt-s" label="定理38.3" title="禁通用深拷贝的内积判据（第 2 款）" gid="D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion" cite="thm-ch38-pointer-width-and-no-deep-copy">
+
+设 $U$ 是 $H \otimes H$ 上的复线性等距同构。若单位向量 $\psi, \phi$ 与同一个单位空白态满足 $U(\psi \otimes \mathrm{blank}) = \psi \otimes \psi$、$U(\phi \otimes \mathrm{blank}) = \phi \otimes \phi$，则 $\langle\phi, \psi\rangle = \langle\phi, \psi\rangle^2$，且 $\phi = \psi$ 或 $\langle\phi, \psi\rangle = 0$。
+
+</TheoremCard>
+<TheoremCard class="compact mt-s" label="定理39.7" title="平方双覆叠无连续全局截面（第 1 款）" gid="D5/S3/ConceptDynamics/Topology/CircleDoubleCoverNoSection.no_continuous_global_section" cite="thm-ch39-double-cover-no-section-and-720-lift">
+
+不存在连续映射 $s$ 把单位圆周映到单位圆周，使得对其上每个 $z$ 都有 $s(z)^2 = z$。
+
+</TheoremCard>
+</div>
+<Source>第三十八章（NoCloningInnerProductCriterion）· 第三十九章（CircleDoubleCoverNoSection）</Source>
+
+---
+# 45 第十部 · 文献结果
+section: "第十部 · 依据"
+---
+
+<div class="body">
+  <p class="kicker">Literature results · not formalized in this book</p>
+  <h2 class="t">量子擦除与旋量双线性是文献，<em>本体不二是诠释</em></h2>
+  <div class="g2 mt">
+    <div class="card violet">
+      <h4>文献结果 · 第三十七章</h4>
+      <h3>路径标记与延迟选择量子擦除</h3>
+      <p>路径被可区分地记录时条纹消失；把探针投到互补基、按读数分类，条件子系综里条纹回来。无条件的总和始终不变，不能逆时传信。</p>
+    </div>
+    <div class="card violet">
+      <h4>文献结果 · 第三十九章</h4>
+      <h3>旋量双线性与菲尔兹恒等式</h3>
+      <p>旋量不能直接观测，时空量由它夹持生成：<Tex t="\mathbf J = \psi\gamma_0\tilde\psi" />，<Tex t="\mathbf S = \psi\mathbf I_{12}\tilde\psi" />；在 <Tex t="\beta = 0" /> 时 <Tex t="\mathbf J^2 = -\mathbf S^2 = \rho^2" />。</p>
+    </div>
+  </div>
+  <p class="lead mt">梦境擦除、记忆指针与“观察者即宇宙本体”是本书的诠释模型（MODEL），借已验证的定理立论，不由它们推出；第十部没有开放问题。</p>
+</div>
+<Source>第三十七章、第三十九章 文献注记</Source>
+
+---
+# 46 三层依据
 section: "三层依据"
 ---
 
@@ -665,21 +836,21 @@ section: "三层依据"
   <p class="kicker">Three tiers of warrant</p>
   <h2 class="t">三层依据，<em>三种颜色</em>，从不越级</h2>
   <div class="split mt">
-    <img src="./img/prelude-three-tiers.zh.svg" alt="三条横条：绿色 215，紫色 164，红色 6；绿色下注锁文件里 330 条 theorem 声明。" style="display: block; width: 900px; max-width: 100%;">
+    <img src="./img/prelude-three-tiers.zh.svg" alt="三条横条：绿色是带 Lean 引用的定理条数，紫色是文献结果的条数，红色是开放猜想的条数；绿色下注锁文件里 theorem 声明的条数。" style="display: block; width: 900px; max-width: 100%;">
     <div>
-      <div class="g3">
-        <Stat value="215" label="带 lean= 的定理、引理、命题与推论" tone="ok" />
-        <Stat value="164" label="写明“文献结果，未在本书形式化”的注记与例" tone="violet" />
-        <Stat value="6" label="开放猜想，标为 OPEN，不带 Lean 引用" tone="warn" />
-      </div>
-      <p class="lead mt">锁文件 <span class="mono">trureturing.lock.json</span> 钉住 <PinnedCommit />，共 477 项声明，其中 330 项是 Lean theorem。</p>
+      <ul class="plain">
+        <li><span class="hl-ok">LEAN ✓</span>：带 lean= 的定理、引理、命题与推论</li>
+        <li><span class="hl-violet">文献结果</span>：写明“文献结果，未在本书形式化”的注记与例</li>
+        <li><span class="hl-warn">OPEN</span>：开放猜想，不带 Lean 引用</li>
+      </ul>
+      <p class="lead mt">左图的条数由图脚本从正文与锁文件 <span class="mono">trureturing.lock.json</span> 算出，随书更新；锁文件钉住 <PinnedCommit />。</p>
     </div>
   </div>
 </div>
 <Source>按中英两版正文与 trureturing.lock.json 统计 · 序曲 prelude-three-tiers · 附录 C</Source>
 
 ---
-# 38 依赖导图
+# 47 依赖导图
 section: "依赖导图"
 ---
 
@@ -702,11 +873,11 @@ section: "依赖导图"
 <Source>终章“全书十部曲三十九章阅读与依赖导图”（coda-dependency-tree）</Source>
 
 ---
-# 39 结尾
+# 48 结尾
 layout: cover
 ---
 
 <p class="kicker">Read · Verify · Watch</p>
 <h1 class="display">书负责解释，<br><em>Lean</em> 负责成立</h1>
-<p class="lead">在线阅读，下载 PDF 与 EPUB；150 张静态图、36 个交互实验室，十部三十九章配八部讲解视频；每一条定理都能在所钉的 trureturing 提交上逐条核对。</p>
+<p class="lead">在线阅读，下载 PDF 与 EPUB；十部三十九章配有静态图、交互实验室与讲解视频；每一条定理都能在所钉的 trureturing 提交上逐条核对。</p>
 <p class="lead mt mono hl-cyan">序曲 → 第一章 · 附录 C：锁定声明完整索引</p>
