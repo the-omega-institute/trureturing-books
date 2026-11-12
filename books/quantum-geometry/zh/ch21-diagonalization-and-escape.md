@@ -183,7 +183,7 @@ $$
 :::
 
 ::: {.viz src="sphere-escape" preset="split" height="500"}
-**换一种潜坐标，纤维照样被劈开。** 四个地址的解码器是常零、恒等、取反、常一；潜坐标取 $(0, 0, 0, 1)$ 时，左边那根纤维里的 $a_1$ 与 $a_2$ 得到不同的 $g$，品红线连起这一对；把 $g$ 立成紫色的第二根轴，两块变成三块。点任一地址换它的潜坐标，$16$ 种排法里品红线总在（[@cor-complete-diagonal-topological-settlement]；这四个解码器恰是 $\{0, 1\}$ 上的全部映射，目录满射）。
+**换一种潜坐标，纤维照样被劈开。** 四个地址的解码器是常零、恒等、取反、常一；潜坐标取 $(0, 0, 0, 1)$ 时，左边那根纤维里 $a_0$、$a_1$ 的 $g$ 是 $1$，$a_2$ 的是 $0$，品红线连起 $g$ 不同的两对 $(a_0, a_2)$、$(a_1, a_2)$；把 $g$ 立成紫色的第二根轴，两块变成三块。点任一地址换它的潜坐标，$16$ 种排法里品红线总在（[@cor-complete-diagonal-topological-settlement]；这四个解码器恰是 $\{0, 1\}$ 上的全部映射，目录满射）。
 :::
 
 这正是抽象对角线不动点模式在观测拓扑中的纯粹骨架（与元数学文献的精确边界对照见 [@rem-godel-tarski-comparison-literature]）。在我们的抽象拓扑框架中，每当一个系统把某类候选解码映射装进一部关于当前潜坐标满射的目录 `decoderCatalog`，并用无不动点算子 `twist` 构造自指对角线 $g$ 时，$g$ 必然劈开原系统的某根等价类余纤维。若要同时保留旧读出并让 $g$ 连续，联合读出 $\operatorname{conceptJoin}(\operatorname{latent}, g)$ 给出所需的最小共同加细，任何同时完成这两项任务的读出都能恢复它；而若想在新坐标空间 $\mathrm{Coordinate}_{k+1} = \mathrm{Coordinate}_k \times \mathrm{Output}$ 上继续触发下一轮对角线逃逸 $g'$，则**必须以在新一轮（通常需要扩容的）地址空间 $\mathrm{Address}_{k+1}$ 上重新建立新的满射解码目录 $\operatorname{decoderCatalog}_{k+1} : \mathrm{Address}_{k+1} \twoheadrightarrow (\mathrm{Coordinate}_{k+1} \to \mathrm{Output})$ 为前提**——例如在 [@ex-cantor-godel-diagonal-table] 的四地址布尔模型中，合并后的坐标空间有 $4$ 个坐标对（对应 $2^4 = 16$ 个布尔函数，即便只看实际命中的 $3$ 根非空联合纤维也有 $2^3 = 8 > 4$ 个布尔函数），原来的 $4$ 个地址已不足以构成新阶段的满射目录，唯有连同地址空间一起向外扩容，才能开启下一层“球外之球”的攀升！

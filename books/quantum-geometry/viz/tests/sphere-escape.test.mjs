@@ -76,8 +76,8 @@ const fibreModel = (lat) => {
 await pick('split');
 await page.waitForFunction(() => { const d = window.ESCAPE_DEBUG.state; return d.scene === 'fiber' && !d.playing; }, null, { timeout: 120000 }).catch(() => {});
 s = await seek(6);
-check('SPLIT card: latent (0,0,0,1), g = 1100, the pair (a₁, a₂) is split, 2 → 3 blocks', s.scene === 'fiber' && s.lat === '0001' && s.fiber.g.join('') === '1100'
-  && s.fiber.pairs.length === 1 && s.fiber.pairs[0].join('') === '12' && s.fiber.before === 2 && s.fiber.after === 3 && s.step === 6);
+check('SPLIT card: latent (0,0,0,1), g = 1100, the pairs (a₀, a₂) and (a₁, a₂) are split, 2 → 3 blocks', s.scene === 'fiber' && s.lat === '0001' && s.fiber.g.join('') === '1100'
+  && s.fiber.pairs.map((p) => p.join('')).join() === '02,12' && s.fiber.before === 2 && s.fiber.after === 3 && s.step === 6);
 let fOk = true, fMin = 9;
 for (let code = 0; code < 16; code++) {
   const want = [3, 2, 1, 0].map((i) => (code >> i) & 1);
