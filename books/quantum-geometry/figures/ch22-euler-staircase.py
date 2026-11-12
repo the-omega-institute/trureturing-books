@@ -39,8 +39,8 @@ def draw(fig):
 
     ax = fig.axes(60, 34, 400, 212, (1, 26), (1.3, 1.66))
     ax.grid(ys=[1.4, 1.5, 1.6])
-    ax.xaxis(ticks=[1, 3, 5, 10, 15, 20, 25], label=t("清单里的素数个数 *K*", "number of listed primes *K*"), size=13)
-    ax.yaxis(ticks=[1.3, 1.4, 1.5, 1.6], labels=["1.3", "1.4", "1.5", "1.6"], size=13)
+    ax.xaxis(ticks=[1, 3, 5, 10, 15, 20, 25], label=t("清单里的素数个数 *K*", "number of listed primes *K*"), size=14)
+    ax.yaxis(ticks=[1.3, 1.4, 1.5, 1.6], labels=["1.3", "1.4", "1.5", "1.6"], size=14)
     stair = []
     for k in range(1, 26):
         stair += [(k, vals[k]), (k + 1, vals[k])]
@@ -49,6 +49,6 @@ def draw(fig):
     ax.hline(z2, "ink", 2.2)
     ax.path(stair, "line", 2.4)
     ax.text(26, z2, "ζ(2) = π²/6", dx=-4, dy=-9, size=14, anchor="end")
-    ax.text(3.15, vals[3], "25/16", dy=17, size=13, color="line")
-    ax.text(24.2, z2 - 0.045, t("还差 0.0030", "still 0.0030 short"), size=13, color="area", anchor="end", halo=True)
+    ax.text(3.15, vals[3], "25/16", dy=17, size=14, color="line")
+    ax.text(24.2, z2 - 0.045, t("还差 0.0030", "still 0.0030 short"), size=14, color="area", anchor="end", halo=True)
     fig.arrow(ax.X(24.4), ax.Y(z2 - 0.038), ax.X(25.5), ax.Y(z2 - 0.004), "area", 1.3, head=6)

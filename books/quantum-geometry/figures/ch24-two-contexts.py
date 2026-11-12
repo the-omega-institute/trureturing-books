@@ -8,7 +8,7 @@ The two columns are baselineContext ((), false, false, false, ()) and alternateC
 dashed line.
 """
 
-SIZE = (520, 330)
+SIZE = (404, 330)
 ALT = {
     "zh": "两列，各是一个解释语境的五个字段，自上而下：文本、读者准入、背景、评估目标、解释规则。"
           "两列的文本都是 ()，解释规则都是 ()，用虚线连起来表示相同；中间三格左列全是 F，右列全是 T。"
@@ -40,8 +40,9 @@ def draw(fig):
     mb, ma = fixed_meaning(BASE), fixed_meaning(ALT_CTX)
     assert mb == (False, False, False) and ma == (True, True, True) and mb != ma
 
-    cols = [(250, t("基准语境", "baseline"), BASE), (410, t("备择语境", "alternate"), ALT_CTX)]
-    top, h, bw = 50, 34, 104
+    CL, CR = 190, 334
+    cols = [(CL, t("基准语境", "baseline"), BASE), (CR, t("备择语境", "alternate"), ALT_CTX)]
+    top, h, bw = 50, 34, 100
     for cx, name, ctx in cols:
         fig.text(cx, 30, name, size=14, color="ink", weight=600, anchor="middle")
         for i, v in enumerate(ctx):
@@ -54,16 +55,16 @@ def draw(fig):
         yb = top + 5 * (h + 6) + 10
         fig.arrow(cx, yb - 12, cx, yb + 18, "dim", 1.4, head=7)
         m = fixed_meaning(ctx)
-        fig.rect(cx - 60, yb + 22, 120, 38, color="ink", fill="panel", rx=6, width=1.8)
+        fig.rect(cx - 56, yb + 22, 112, 38, color="ink", fill="panel", rx=6, width=1.8)
         fig.text(cx, yb + 41, "(" + ", ".join(show(v) for v in m) + ")", size=16, color="ink", weight=600,
                  anchor="middle", middle=True)
     for i in (0, 4):
         y = top + i * (h + 6) + h / 2
-        fig.line(250 + bw / 2 + 4, y, 410 - bw / 2 - 4, y, "dim", 1.3, dash="4 3")
-        fig.text(330, y - 6, t("相同", "same"), size=13, color="dim", anchor="middle")
+        fig.line(CL + bw / 2 + 4, y, CR - bw / 2 - 4, y, "dim", 1.3, dash="4 3")
+        fig.text((CL + CR) / 2, y - 6, t("相同", "same"), size=14, color="dim", anchor="middle")
     yb = top + 5 * (h + 6) + 10
-    fig.text(330, yb + 41, "≠", size=22, color="ink", weight=600, anchor="middle", middle=True)
+    fig.text((CL + CR) / 2, yb + 41, "≠", size=22, color="ink", weight=600, anchor="middle", middle=True)
     for i, (zh, en) in enumerate(FIELDS):
         y = top + i * (h + 6) + h / 2
-        fig.text(250 - bw / 2 - 12, y, t(zh, en), size=13, color="dim", anchor="end", middle=True)
-    fig.text(250 - bw / 2 - 12, yb + 41, t("固定意义", "fixed meaning"), size=13, color="dim", anchor="end", middle=True)
+        fig.text(CL - bw / 2 - 12, y, t(zh, en), size=14, color="dim", anchor="end", middle=True)
+    fig.text(CL - bw / 2 - 12, yb + 41, t("固定意义", "fixed meaning"), size=14, color="dim", anchor="end", middle=True)

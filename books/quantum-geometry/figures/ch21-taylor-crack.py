@@ -9,7 +9,7 @@ ex-taylor-remainder-three-bounds.
 
 import math
 
-SIZE = (480, 300)
+SIZE = (440, 300)
 ALT = {
     "zh": "坐标图，横轴 θ 从 0 到 3.5，纵轴从 −1.6 到 1.3。墨色的粗曲线是 cos θ。三条青色曲线是只取前 N 项的余弦多项式，N = 2、3、4："
           "在 θ 小时都与 cos θ 重合，往右依次在越来越远处离开它。N = 3 那条与 cos θ 之间的缝涂成品红，标着 R₆(θ)；"
@@ -43,11 +43,11 @@ def check_table():
 def draw(fig):
     t = fig.t
     check_table()
-    ax = fig.axes(56, 24, 396, 232, (0, 3.5), (-1.6, 1.3))
+    ax = fig.axes(52, 24, 368, 232, (0, 3.5), (-1.6, 1.3))
     ax.grid(ys=[-1, 1])
     ax.hline(0, "faint", 1.2)
-    ax.xaxis(ticks=[0, math.pi / 2, math.pi], labels=["0", "π/2", "π"], label="θ", size=13)
-    ax.yaxis(ticks=[-1, 0, 1], labels=["−1", "0", "1"], size=13)
+    ax.xaxis(ticks=[0, math.pi / 2, math.pi], labels=["0", "π/2", "π"], label="θ", size=14)
+    ax.yaxis(ticks=[-1, 0, 1], labels=["−1", "0", "1"], size=14)
     pts = []
     n = 200
     for i in range(n + 1):
@@ -59,10 +59,10 @@ def draw(fig):
         ax.plot(lambda x, N=N: poly(N, x), color="line", width=1.8)
     ax.plot(math.cos, color="ink", width=2.8)
     # labels where each polynomial leaves the plot or ends
-    ax.text(math.sqrt(2 * 2.6), -1.6, "*N* = 2", dx=-12, dy=-6, size=13, color="line", anchor="end")
-    ax.text(3.5, poly(3, 3.5), "*N* = 3", dx=-8, dy=-2, size=13, color="line", anchor="end")
+    ax.text(math.sqrt(2 * 2.6), -1.6, "*N* = 2", dx=-12, dy=-6, size=14, color="line", anchor="end")
+    ax.text(3.5, poly(3, 3.5), "*N* = 3", dx=-8, dy=-2, size=14, color="line", anchor="end")
     assert -1.6 < poly(4, 3.5) < math.cos(3.5)                    # N = 4 stays in the frame, below cos θ
-    ax.text(3.5, -1.6, "*N* = 4", dx=-6, dy=-6, size=13, color="line", anchor="end")
+    ax.text(3.5, -1.6, "*N* = 4", dx=-6, dy=-6, size=14, color="line", anchor="end")
     ax.text(0.5, 1.0, "cos θ", dy=-12, size=14, anchor="middle")
     xm = 3.0
     ax.text(xm, (math.cos(xm) + poly(3, xm)) / 2, "*R*_{6}(θ)", size=14, color="area", anchor="middle", halo=True)

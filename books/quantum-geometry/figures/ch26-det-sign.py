@@ -48,8 +48,8 @@ def draw(fig):
     fig.line(cx - R * 1.45, cy, cx + R * 1.45, cy, "faint", 1.1, dash="3 4")
     fig.line(cx, cy + R * 1.2, cx, cy - R * 1.2, "faint", 1.1, dash="3 4")
     fig.circle(cx, cy, R, color="lean", fill="lean", width=2.4, fill_opacity=0.12)
-    fig.text(cx + R * 1.45 - 2, cy - 6, "*x*", size=13, color="dim", anchor="end")
-    fig.text(cx + 6, cy - R * 1.2 + 10, "*z*", size=13, color="dim")
+    fig.text(cx + R * 1.45 - 2, cy - 6, "*x*", size=14, color="dim", anchor="end")
+    fig.text(cx + 6, cy - R * 1.2 + 10, "*z*", size=14, color="dim")
 
     for k, role, rad in (("pure", "now", 5.6), ("mixed", "ink", 5.0), ("out", "area", 5.6)):
         x, y = P(*pts[k])
@@ -61,8 +61,8 @@ def draw(fig):
     fig.text(x - 10, y + 4, "det = 0.19 > 0", size=14, color="ink", anchor="end", halo=True)
     x, y = P(*pts["out"])
     fig.text(x + 10, y + 4, "det = −0.17 < 0", size=14, color="area", weight=600, halo=True)
-    fig.text(x + 10, y + 22, t("不是正半定", "not PSD"), size=13, color="area", halo=True)
+    fig.text(x + 10, y + 22, t("不是正半定", "not PSD"), size=14, color="area", halo=True)
 
-    fig.text(340, 70, t("迹为 1 时", "with trace 1"), size=13, color="dim")
+    fig.text(340, 70, t("迹为 1 时", "with trace 1"), size=14, color="dim")
     fig.text(340, 94, "det = (1 − |*r*|^{2}) / 4", size=15, color="ink", weight=600)
     fig.text(340, 130, t("正半定 ⇒ |*r*| ≤ 1", "PSD ⇒ |*r*| ≤ 1"), size=14, color="lean", weight=600)
