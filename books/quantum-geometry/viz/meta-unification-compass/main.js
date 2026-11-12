@@ -135,6 +135,55 @@
     return sign * A[n - 1][n - 1];
   }
 
+  /* ---------- shells: the elements of one family (2I or φ⁻¹·2I) with one |w|, and the convex hull of their places ----------
+     Each shell is computed from the elements themselves: its distinct places in E∥ (and, for the pure ones, in E⊥),
+     their convex hull by brute force over all triples (a face is a plane that has every place on one side; places on
+     the plane are ordered round the face), and the counts V, E, F with the sizes of the faces. */
+  function hull(pts) {
+    const n = pts.length, faces = [], seen = new Set(), c0 = v3.scale(pts.reduce((a, p) => v3.add(a, p), [0, 0, 0]), 1 / n);
+    const scale = Math.max(...pts.map((p) => v3.len(v3.sub(p, c0))));
+    for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) for (let k = j + 1; k < n; k++) {
+      let nm = v3.cross(v3.sub(pts[j], pts[i]), v3.sub(pts[k], pts[i]));
+      const L = v3.len(nm); if (L < 1e-9 * scale * scale) continue;
+      nm = v3.scale(nm, 1 / L);
+      const tol = 1e-9 * scale, on = []; let pos = 0, neg = 0;
+      for (let m = 0; m < n; m++) { const s = v3.dot(nm, v3.sub(pts[m], pts[i])); if (s > tol) pos++; else if (s < -tol) neg++; else on.push(m); }
+      if (pos && neg) continue;
+      const id = on.join(','); if (seen.has(id)) continue; seen.add(id);
+      if (pos) nm = v3.scale(nm, -1);   // outward
+      const fc = v3.scale(on.reduce((a, m) => v3.add(a, pts[m]), [0, 0, 0]), 1 / on.length);
+      const e1 = v3.unit(v3.sub(pts[on[0]], fc)), e2 = v3.cross(nm, e1);
+      on.sort((a, b) => { const pa = v3.sub(pts[a], fc), pb = v3.sub(pts[b], fc); return Math.atan2(v3.dot(pa, e2), v3.dot(pa, e1)) - Math.atan2(v3.dot(pb, e2), v3.dot(pb, e1)); });
+      faces.push({ v: on, n: nm, d: v3.dot(nm, pts[on[0]]) });
+    }
+    const edges = new Set();
+    for (const f of faces) f.v.forEach((a, t) => { const b = f.v[(t + 1) % f.v.length]; edges.add(a < b ? `${a},${b}` : `${b},${a}`); });
+    const sizes = {}; for (const f of faces) sizes[f.v.length] = (sizes[f.v.length] || 0) + 1;
+    return { faces, V: n, E: edges.size, F: faces.length, sizes };
+  }
+  const NAMES = { '12,30,20,3:20': ['正二十面体', 'icosahedron'], '20,30,12,5:12': ['正十二面体', 'dodecahedron'], '30,60,32,3:20,5:12': ['截半二十面体', 'icosidodecahedron'] };
+  const nameOf = (h) => NAMES[[h.V, h.E, h.F, ...Object.keys(h.sizes).sort().map((s) => `${s}:${h.sizes[s]}`)].join(',')] || null;
+  const placeKey = (p) => p.map((x) => (Math.abs(x) < 5e-10 ? 0 : x).toFixed(8)).join(',');
+  const SHELLS = (() => {
+    const out = [];
+    for (const gold of [false, true]) {
+      const ws = [...new Set(ROOTS.filter((R) => R.gold === gold).map((R) => Math.abs(R.w).toFixed(9)))].map(Number).sort((a, b) => b - a);
+      for (const aw of ws) {
+        const members = ROOTS.filter((R) => R.gold === gold && Math.abs(Math.abs(R.w) - aw) < 1e-9).map((R) => R.i);
+        const sh = { gold, w: aw, members, count: members.length };
+        for (const [sp, field] of [['par', 'par'], ['perp', 'perp']]) {
+          if (sp === 'perp' && aw > 1e-9) continue;
+          const places = new Map();
+          for (const i of members) { const p = ROOTS[i][field]; const k = placeKey(p); if (!places.has(k)) places.set(k, p); }
+          const pts = [...places.values()], h = pts.length >= 4 ? hull(pts) : null;
+          sh[sp] = { pts, key: [...places.keys()].sort().join('|'), hull: h, name: h ? nameOf(h) : null, radius: Math.max(...pts.map((p) => v3.len(p))) };
+        }
+        out.push(sh);
+      }
+    }
+    return out;
+  })();
+  const shellOf = (i) => SHELLS.find((s) => s.members.includes(i));
   /* ---------- how to write a coordinate (p + rφ)/2 ---------- */
   function coef(p, r) {
     const v = (p + r * PHI) / 2;
@@ -242,6 +291,14 @@
     onChange: () => paint(),
     onPick: (ev, st) => pickAt(ev, st)
   });
+  // The first leg of the bridge (2I shell by shell) draws its shells as lit solids on a second stage, which follows the
+  // camera of the first: dragging and picking stay with the 2D stage; this one only draws and tells what a solid hides.
+  // Every other picture of the page is drawn on the 2D stage as before.
+  const solid = kit.solid($('stage'), {
+    canvas: $('cvs'), radius: TRV.thumbMode ? 0.38 : 0.36, cy: TRV.figure ? 0.54 : 0.56, yaw: -0.3, pitch: 0.5,
+    rotate: false, onChange: () => paint(), onPick: () => true
+  });
+  const solidLeg = (B) => S.scene === 'bridge' && B.leg === 0;
   function pickAt(ev, st) {
     let best = null, bd = 14;
     if (S.scene === 'compass') {
@@ -252,7 +309,8 @@
     const B = lastBridge || bridgeAt(S.tb);
     // the nearest dot under the pointer; of dots drawn on the same place, the one nearest the viewer
     let bz = -Infinity;
-    ROOTS.forEach((R, i) => { if (!B.vis[i]) return; const w = v3.scale(B.pos[i], DISP), d = st.near(ev, w), z = st.p(w)[2]; if (d < bd - 0.5 || (d < bd + 0.5 && d < 14 && z > bz)) { bd = Math.min(bd, d); bz = z; best = i; } });
+    const hides = solidLeg(B);
+    ROOTS.forEach((R, i) => { if (!B.vis[i]) return; const w = v3.scale(B.pos[i], DISP), d = st.near(ev, w), z = st.p(w)[2]; if (hides && solid.occluded(w, 0.02)) return; if (d < bd - 0.5 || (d < bd + 0.5 && d < 14 && z > bz)) { bd = Math.min(bd, d); bz = z; best = i; } });
     if (best == null) return false;
     cards.mark(null); select(best); return true;
   }
@@ -335,6 +393,65 @@
     }
     st.end();
   }
+  /* ---------- the first leg of the bridge: the shells as a solid and as cages ----------
+     While 2I appears shell by shell, every shell with a hull whose elements are on the stage is drawn. The shell of the
+     selected element (or, when it is not on the stage yet, the newest shell) is a lit, flat-shaded polyhedron; every
+     other shell is a cage of its edges, so that the shells around the solid stay visible and the solid hides what is
+     behind and inside it. */
+  let lastShells = [];
+  function shellsAt(B) {
+    const space = B.leg < 3 || B.alpha < 1e-9 ? 'par' : B.alpha > Math.PI / 2 - 1e-9 ? 'perp' : null;
+    if (!space) return [];
+    const list = [], keys = new Set();
+    for (const sh of SHELLS) {
+      const g = sh[space];
+      if (!g || !g.hull || !sh.members.some((i) => B.vis[i]) || keys.has(g.key)) continue;
+      keys.add(g.key); list.push({ sh, g, space, solid: false });
+    }
+    // the solid: the shell of the selected element; else the shell admitted last (its |w| nearest the cut)
+    let focus = B.vis[S.sel] ? list.find((x) => x.sh.members.includes(S.sel)) : null;
+    if (!focus && list.length) focus = list.slice().sort((x, y) => (B.leg < 2 ? x.sh.w - y.sh.w : y.sh.w - x.sh.w) || (x.sh.gold ? -1 : 1))[0];
+    if (focus) focus.solid = true;
+    return list;
+  }
+  /** The polyhedron of a shell on the stage: its vertices and faces. */
+  const solidOf = (s) => ({ vertices: s.g.pts.map((p) => v3.scale(p, DISP)), faces: s.g.hull.faces.map((f) => f.v.slice()) });
+  /** The edges of a shell (pairs of vertex indices). */
+  const edgesOf = (s) => { const e = new Map(); for (const f of s.g.hull.faces) f.v.forEach((a, t) => { const b = f.v[(t + 1) % f.v.length]; e.set(a < b ? `${a},${b}` : `${b},${a}`, [Math.min(a, b), Math.max(a, b)]); }); return [...e.values()]; };
+
+  function drawSolid() {
+    const st = solid, B = lastBridge = bridgeAt(S.tb), thumb = TRV.thumbMode;
+    Object.assign(st.cam, stage.cam);
+    st.begin();
+    // the sphere Q = 2 holds every projection of a root (a projection is never longer than the vector): a glass shell
+    st.glass('qsphere', [0, 0, 0], Math.SQRT2 * DISP, { color: P.cyan, alpha: 0.04, rim: 0.22 });
+    const shells = lastShells = shellsAt(B);
+    for (const s of shells) {
+      const col = s.sh.gold ? P.magenta : P.cyan, m = solidOf(s);
+      if (s.solid) st.poly('shell', m, { color: col, edges: P.stage, id: s.g.key });
+      else for (const [a, b] of edgesOf(s)) st.line([m.vertices[a], m.vertices[b]], { color: col, width: 1.1, alpha: 0.5 });
+    }
+    const front = [frontier(B, false), frontier(B, true)];
+    ROOTS.forEach((R, i) => {
+      if (!B.vis[i]) return;
+      const p = v3.scale(B.pos[i], DISP), col = R.gold ? P.magenta : P.cyan;
+      const fresh = B.leg === (R.gold ? 1 : 0) && Math.abs(R.w - front[R.gold ? 1 : 0]) < 1e-9;
+      if (R.w < -1e-9) st.ring(p, { r: R.gold ? 4.6 : 5.6, color: col, key: 'r' + i });
+      else st.bead(p, { r: R.gold ? 3.2 : 4, color: col, glow: fresh ? 0.9 : 0.45, key: 'r' + i });
+    });
+    // the selected element, and the name of the polyhedron its shell makes
+    if (B.vis[S.sel]) {
+      const p = v3.scale(B.pos[S.sel], DISP), s = shells.find((x) => x.sh.members.includes(S.sel));
+      st.ring(p, { r: 7.5, color: P.amber, key: 'sel' });
+      if (!thumb && s && s.g.name) st.tag('shell', p, `${L(...s.g.name)} · ${s.g.hull.V}`, 'raw c-am', { dy: -20 });
+    }
+    if (!thumb) {
+      const R = Math.SQRT2 * DISP;
+      st.tag('qsphere', [R * 0.72, -R * 0.72, -0.05], L('球面：Q = 2', 'sphere: Q = 2'), 'raw ink', { dx: 34, dy: 10, occlude: false });
+    }
+    st.end();
+  }
+
   /** The real part of the shell admitted last in the current leg (for the glow of the newest shell). */
   function frontier(B, gold) {
     let m = Infinity;
@@ -398,6 +515,13 @@
   }
 
   /* ---------- readouts, hud ---------- */
+  /** The shell of element i as the page computed it: how many elements, the polyhedron its places make, V · E · F. */
+  function shellText(i) {
+    const sh = shellOf(i), g = sh.par;
+    const n = L(`${sh.count} 个元素`, `${sh.count} elements`);
+    if (!g.hull) return `${n} · ${L('落在原点', 'at the origin')}`;
+    return `${n} · ${g.name ? L(...g.name) : '—'} · ${L('顶点', 'vertices')} ${g.hull.V} · ${L('棱', 'edges')} ${g.hull.E} · ${L('面', 'faces')} ${g.hull.F}`;
+  }
   const row = (cls, zh, en, val) => `<div class="${cls}"><dt>${L(zh, en)}</dt><dd>${val}</dd></div>`;
   const LEGEND = {
     compass: [['cy', '线（内积）', 'line (inner product)'], ['mg', '面积（外积）', 'area (outer product)'], ['am', '正在读 · 选中', 'being read · selected'], ['dm', '纲领（MODEL）', 'programmes (MODEL)']],
@@ -441,8 +565,8 @@
       rows = row('wide', '选中的元素 q', 'selected element q', qtext(R.q))
         + row('', 'Nrd q · Q', 'Nrd q · Q', `${nrdText(R.nrd)} · ${R.Q}`)
         + row('', '2I 乘法封闭', '2I closed under products', `${F.closed} / ${F.products}`)
-        + row('', 'Q = 2 的元素 · 两两的 B', 'elements with Q = 2 · B between them', `${F.qTwo} · ${F.integral ? L('整数', 'integers') : '—'} ${F.bRange[0]}…${F.bRange[1]}`.replace('-', '−'))
-        + row('', '每个根 B = 1 的邻居', 'neighbours with B = 1 per root', String(F.neighbours))
+        + row('wide', '选中元素所在的层', 'the shell of the selected element', shellText(S.sel))
+        + row('', 'Q = 2 的元素 · 两两的 B · B = 1 的邻居', 'elements with Q = 2 · B between them · neighbours with B = 1', `${F.qTwo} · ${F.integral ? L('整数', 'integers') : '—'} ${F.bRange[0]}…${F.bRange[1]} · ${F.neighbours}`.replace('-', '−'))
         + row('', '格拉姆行列式：𝓘（秩 8）· Im 𝓘（秩 6）', 'Gram determinant: 𝓘 (rank 8) · Im 𝓘 (rank 6)', `${F.det} · ${F.pureDet}`);
       note = B.leg === 0 ? L('去掉实部 w 投到三维：同一个 |w| 落在同一层球面上，层的大小 1、12、20、12、30……；实部为负的一半落在同样的位置，画成空心圈。', 'Dropping the real part w: elements with the same |w| land on one spherical shell, of sizes 1, 12, 20, 12, 30, …; the half with negative real part lands on the same places and is drawn as open rings.')
         : B.leg === 1 ? L('每个单位元乘上 φ⁻¹：在 E∥ 里缩短，Nrd 变成 2 − φ，可 Q = 2(a + b) 仍是 2。两份合起来 240 个，两两的 B 都是整数，每个恰有 56 个邻居：这是 E₈ 的根。', 'Each unit times φ⁻¹: shorter in E∥, Nrd becomes 2 − φ, yet Q = 2(a + b) is still 2. Together 240 of them, every B between two of them an integer, each with exactly 56 neighbours: the roots of E₈.')
@@ -456,10 +580,16 @@
     $('roNote').textContent = note; $('roAside').textContent = aside;
     $('pillScene').querySelector('strong').textContent = { compass: L('罗盘', 'COMPASS'), bridge: L('黄金桥', 'BRIDGE') }[S.scene];
     $('pillKeyName').textContent = pill[0]; $('pillKey').querySelector('strong').textContent = pill[1];
-    $('legend').innerHTML = LEGEND[S.scene].concat(S.scene === 'compass' && S.book ? [['dm', '大空心圈：本书（MODEL）', 'large open ring: the book (MODEL)']] : []).map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
+    $('legend').innerHTML = LEGEND[S.scene].concat(S.scene === 'compass' && S.book ? [['dm', '大空心圈：本书（MODEL）', 'large open ring: the book (MODEL)']] : [])
+      .concat(S.scene === 'bridge' && bridgeAt(S.tb).leg === 0 ? [['dm', '实体：选中那一层 · 细线：其余各层', 'solid: the selected shell · lines: the other shells']] : []).map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
   }
 
-  function drawStage() { if (S.scene === 'compass') drawCompass(); else drawBridge(); }
+  function drawStage() {
+    if (S.scene === 'bridge' && bridgeAt(S.tb).leg === 0) { stage.begin(); stage.end(); drawSolid(); return; }
+    lastShells = [];
+    solid.begin(); solid.end();
+    if (S.scene === 'compass') drawCompass(); else drawBridge();
+  }
   const paint = kit.painter(() => { drawStage(); drawText(); drawPlot(); }, [$('stage'), $('plot')]);
 
   /* ---------- the rail ---------- */
@@ -499,7 +629,7 @@
   const bookChips = kit.chips($('bookChips'), 'book', (v) => { leave(); S.book = v === 'on'; if (!S.book && S.prog === 'book') S.prog = null; paint(); });
   const find = (q) => ROOTS.findIndex((R) => key(R.q) === key(q));
   const GOLDEN = [0, 0, 1, 0, -1, 1, 0, 1];
-  const PICKS = [['one', find([2, 0, 0, 0, 0, 0, 0, 0])], ['i', find([0, 0, 2, 0, 0, 0, 0, 0])], ['hurwitz', find([1, 0, 1, 0, 1, 0, 1, 0])], ['golden', find(GOLDEN)], ['shrunk', 120 + TWO_I.findIndex((q) => key(q) === key(GOLDEN))]];
+  const PICKS = [['one', find([2, 0, 0, 0, 0, 0, 0, 0])], ['i', find([0, 0, 2, 0, 0, 0, 0, 0])], ['hurwitz', find([1, 0, 1, 0, 1, 0, 1, 0])], ['golden', find(GOLDEN)], ['shrunk', 120 + TWO_I.findIndex((q) => key(q) === key(GOLDEN))], ['inner', find([0, 1, -1, 1, 1, 0, 0, 0])]];
   const pickChips = kit.chips($('pickChips'), 'pick', (v) => { leave(); const hit = PICKS.find(([n]) => n === v); if (hit) select(hit[1]); });
   $('rew').addEventListener('click', () => { clock.pause(); clock.set(0); });
   kit.keys({ 1: () => { leave(); setScene('compass'); }, 2: () => { leave(); setScene('bridge'); } });
@@ -519,7 +649,7 @@
     cube: ['三根轴取自 §32.3：θ 从线（青）到面积（品红），η 从光滑到多面体，λ 从球外的点 C 到场内的观察者。八个点是 §32.4 的八家纲领，按总表原话落在各轴的三段之一（本书的诊断坐标）。', 'The three axes come from §32.3: θ runs from line (cyan) to area (magenta), η from smooth to polytope, λ from the outside point C to the observer inside. The eight dots are the eight programmes of §32.4, each in one of three bands of every axis according to the words of the table (the book\'s diagnostic coordinates).'],
     camps: ['时间轴逐个读四大阵营，每一对连成一条线，琥珀色是正在读的那一对：弦论与圈量子引力只在 η 上分开（光滑对多面体）；AdS/CFT 与扭量都贴着 λ 的球外一端；第三、第四阵营的两家在两三根轴上都不同。', 'The rail reads the four camps one by one and joins each pair with a line; the pair being read is amber. String theory and loop quantum gravity part only along η (smooth against polytope); AdS/CFT and twistors both sit at the outside end of λ; the two programmes of the third and fourth camps differ along two or three axes.'],
     crystal: ['画出本书给自己标的位置：θ 中段（几何积同时保留线与面积）、η 多面体一端、λ 场内一端。这是本书的诠释（MODEL），不是由八家纲领推出的结论。', 'The book\'s place for itself, drawn in: θ in the middle (the geometric product keeps line and area together), η at the polytope end, λ at the inside end. This is the book\'s reading (MODEL), not a conclusion derived from the eight programmes.'],
-    icosians: ['二元二十面体群的 120 个单位四元数，去掉实部 w 投到三维，按 w 从 1 到 −1 一层层出现：1、12、20、12、30、12、20、12、1；实部为负的一半落在同样的位置，画成空心圈。琥珀圈是 (1 + i + j + k)/2。', 'The 120 unit quaternions of the binary icosahedral group, projected to three dimensions by dropping the real part w, appear shell by shell as w runs from 1 to −1: 1, 12, 20, 12, 30, 12, 20, 12, 1; the half with negative real part lands on the same places, drawn as open rings. The amber ring is (1 + i + j + k)/2.'],
+    icosians: ['二元二十面体群的 120 个单位四元数，去掉实部 w 投到三维，按 w 从 1 到 −1 一层层出现：1、12、20、12、30、12、20、12、1；实部为负的一半落在同样的位置，画成空心圈。琥珀圈是 (1 + i + j + k)/2：它那一层的 20 个位置围成实心的正十二面体，其余各层只画出棱。', 'The 120 unit quaternions of the binary icosahedral group, projected to three dimensions by dropping the real part w, appear shell by shell as w runs from 1 to −1: 1, 12, 20, 12, 30, 12, 20, 12, 1; the half with negative real part lands on the same places, drawn as open rings. The amber ring is (1 + i + j + k)/2: the 20 places of its shell enclose a solid dodecahedron, and the other shells are drawn by their edges.'],
     e8: ['再加上 120 个乘了 φ⁻¹ 的品红点：它们在 E∥ 里更短，Nrd = 2 − φ，Q = 2(a + b) 却仍是 2。青色与品红合起来 240 个，正是 E₈ 的根数。琥珀圈是 φ⁻¹(i + φ⁻¹j + φk)/2。', 'Add the 120 magenta points multiplied by φ⁻¹: shorter in E∥, with Nrd = 2 − φ, yet Q = 2(a + b) is still 2. Cyan and magenta together make 240, exactly the number of roots of E₈. The amber ring is φ⁻¹(i + φ⁻¹j + φk)/2.'],
     fold: ['只留实部为零的 60 个根，再把投影平面从 E∥ 转到 E⊥：青色的 30 个单位从外层落到内层，品红的 30 个从内层翻到外层，淡色的圈是它们在 E∥ 里的位置。琥珀圈是 (i + φ⁻¹j + φk)/2：‖∥‖² + ‖⊥‖² 始终是 2。', 'Keep the 60 roots with real part zero and turn the plane of projection from E∥ to E⊥: the 30 cyan units fall from the outer shell to the inner, the 30 magenta ones rise from the inner to the outer, and the faint rings are where they were in E∥. The amber ring is (i + φ⁻¹j + φk)/2: ‖∥‖² + ‖⊥‖² stays 2.']
   };
@@ -557,6 +687,10 @@
         bridge: { t: S.tb, leg: B.leg, n: B.n, units: B.units, golden: B.golden, alpha: B.alpha, sel: S.sel, visible: B.vis.map((v, i) => (v ? i : -1)).filter((i) => i >= 0), pos: B.pos.map((p) => p.slice()) },
         roots: ROOTS.map((R) => ({ q: R.q.slice(), gold: R.gold, nrd: R.nrd.slice(), Q: R.Q, par: R.par.slice(), perp: R.perp.slice(), par2: R.par2, perp2: R.perp2, text: qtext(R.q) })),
         facts: JSON.parse(JSON.stringify(FACTS)),
+        shells: SHELLS.map((sh) => ({ gold: sh.gold, w: sh.w, members: sh.members.slice(), count: sh.count,
+          spaces: Object.fromEntries(['par', 'perp'].filter((k) => sh[k]).map((k) => [k, { pts: sh[k].pts.map((p) => p.slice()), name: sh[k].name && sh[k].name[1],
+            hull: sh[k].hull && { V: sh[k].hull.V, E: sh[k].hull.E, F: sh[k].hull.F, sizes: Object.assign({}, sh[k].hull.sizes), faces: sh[k].hull.faces.map((f) => f.v.slice()) } }])) })),
+        drawn: lastShells.map((s) => ({ gold: s.sh.gold, w: s.sh.w, space: s.space, solid: s.solid, poly: solidOf(s), edges: edgesOf(s) })),
         hud: $('hudBig').textContent, sub: $('hudSub').textContent, key: $('ro').querySelector('.key dd').textContent
       };
     },
@@ -566,6 +700,8 @@
       const b = $('cv').getBoundingClientRect(), w = typeof what === 'number' ? v3.scale(bridgeAt(S.tb).pos[what], DISP) : world(byId(what).c), q = stage.p(w);
       return [b.left + q[0], b.top + q[1]];
     },
+    /** The world point where root i is drawn on the bridge now. */
+    world: (i) => v3.scale(bridgeAt(S.tb).pos[i], DISP),
     camera: () => Object.assign({}, stage.cam)
   };
   window.TRV_THUMB = () => { applyPreset('e8'); cards.mark('e8'); clock.pause(); clock.set(2); paint.now(); };
