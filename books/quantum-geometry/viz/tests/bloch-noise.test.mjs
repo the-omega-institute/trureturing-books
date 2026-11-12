@@ -2,9 +2,11 @@
 //   node books/quantum-geometry/viz/tests/bloch-noise.test.mjs      (or: node tools/node/viz-test.mjs quantum-geometry)
 // The page moves Bloch vectors with affine maps. The suite recomputes everything with 2 × 2 complex density matrices:
 // Kraus operators applied step by step, the trace distance from the eigenvalues of ρ − σ, the coherence mass from the
-// off-diagonal entries, and the north-pole criterion by sampling the closed ball. It reads the page through
+// off-diagonal entries, and the north-pole criterion by sampling the closed ball. For a map that is not a channel the
+// stage draws the image as a lit solid: the part outside the ball is found again by bisection on the meridian of the
+// lifetime map, and the colours the WebGL canvas shows there are read back. It reads the page through
 // window.NOISE_DEBUG and never calls the page's own model.
-import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
+import { session, stageFirstChecks, solidChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'bloch-noise';
 const T = await session();
@@ -92,6 +94,31 @@ const ampStep = (p, ratio) => { if (p === 0) return IDENTITY; if (p === 1) retur
 
 /* ---------- the gates every stage-first page must pass ---------- */
 await stageFirstChecks(T, BOOK, ID);
+// the solid checks run on the one card that draws a solid, T2 > 2T1, one step in (the image is large there); the
+// image is a body of revolution about the vertical axis, so the camera is tipped (a vertical drag over empty stage)
+// rather than turned about that axis, which would leave its light and shade alone
+{
+  const sp = await T.goto(BOOK, ID, '?lang=zh&preset=wide');
+  await settle(sp); await sp.evaluate(() => window.NOISE_DEBUG.seek(1)); await settle(sp);
+  const tip = async (pg) => {
+    const b = await pg.evaluate(() => { const r = window.TRV.solids[0].el.getBoundingClientRect(); return [r.left, r.top, r.width, r.height]; });
+    await pg.mouse.move(b[0] + b[2] * 0.05, b[1] + b[3] * 0.12); await pg.mouse.down();
+    for (let k = 1; k <= 6; k++) await pg.mouse.move(b[0] + b[2] * 0.05, b[1] + b[3] * (0.12 + 0.06 * k));
+    await pg.mouse.up();
+  };
+  await solidChecks(T, BOOK, ID, sp, { turn: tip, rest: false });
+  // resting inside a book, on the card that draws the solid (the shared check opens the default card, which draws none):
+  // the WebGL context is given back after a rest, the frame stays on the page's park canvas #sv, and a touch takes it back
+  const em = await T.open(BOOK, ID, '?embed=1&lang=zh&preset=wide', { viewport: { width: 740, height: 620 } });
+  await settle(em);
+  const parked = await until(em, () => { const sc = window.TRV.solids && window.TRV.solids[0]; return !!sc && sc.contexts > 0 && sc.parked(); }, null, 120000);
+  const shown = await em.evaluate(() => { const sc = window.TRV.solids[0]; return { gl: !!sc.el.querySelector('canvas.solid-gl'), still: document.getElementById('sv').style.visibility === 'visible' }; });
+  check('solid (T2 > 2T1 in a chapter): the WebGL context is given back after a rest and the frame stays as a picture', parked && !shown.gl && shown.still, JSON.stringify(shown));
+  const eb = await em.evaluate(() => { const r = window.TRV.solids[0].el.getBoundingClientRect(); return [r.left + 8, r.top + r.height - 8]; });
+  await em.mouse.move(eb[0], eb[1]); await em.mouse.down(); await em.mouse.up(); await settle(em);
+  check('solid (T2 > 2T1 in a chapter): a touch takes the context back', await em.evaluate(() => !window.TRV.solids[0].parked()));
+  await em.context().close();
+}
 
 /* ---------- page-specific invariants ---------- */
 const page = await T.goto(BOOK, ID, '?lang=zh');
@@ -264,6 +291,40 @@ check('SHORTER still: θ_env = 75°, the arrow keeps cos 75° = 0.259', close(sh
 const pinchStill = await stillOf('pinch');
 check('ONTO-AXIS still: the title says pinching, not phase damping, and the readout gives the coherence mass of ρ lost, 0.375 → 0', /捏合/.test(pinchStill.big) && !/相位阻尼/.test(pinchStill.big) && pinchStill.sub.includes(`${coherenceMass(density(pinchStill.s.rho0)).toFixed(3)} → 0.000`), pinchStill.sub);
 check('ONTO-AXIS still: ρ and σ land on one point and their labels do not overlap', vclose(pinchStill.s.rho, pinchStill.s.sig, 1e-12) && !overlaps(tagOf(pinchStill, /^ρ$/), tagOf(pinchStill, /^σ$/)));
+
+// the solid stage: only a map that is not a channel is drawn as a solid; every channel keeps the wire stage
+const drawnOn = {};
+for (const [card, N] of [['shorten', 75], ['pinch', 1], ['dephase', 2.5], ['amp', 3.5], ['distance', 1], ['centre', 1], ['wide', 2]]) {
+  await pick(card); await seek(N); drawnOn[card] = (await page.evaluate(() => window.NOISE_DEBUG.image())).drawn;
+}
+check('only the T2 > 2T1 card (a map that is not a channel) is drawn as a lit solid; the six channel cards keep the wire stage', drawnOn.wide === 'solid' && ['shorten', 'pinch', 'dephase', 'amp', 'distance', 'centre'].every((c) => drawnOn[c] === 'wire'), JSON.stringify(drawnOn));
+s = await state();
+let im = await page.evaluate(() => window.NOISE_DEBUG.image());
+const wl = lifetimeMap(s.p, 6, 2), Fz = (z) => Math.hypot(wl.lam * Math.sqrt(Math.max(0, 1 - z * z)), wl.a * z + 1 - wl.a) - 1;
+let lo = -1, hi = 0.999;   // |F| − 1 < 0 at the south pole, > 0 just below the north pole: one crossing in between
+for (let k = 0; k < 80; k++) { const mid = (lo + hi) / 2; if (Fz(mid) > 0) hi = mid; else lo = mid; }
+const z0ind = (lo + hi) / 2;
+let capOK = true;
+for (let i = 1; i < 200; i++) { const z = -1 + 2 * i / 200; if (Math.abs(z - z0ind) > 1e-6 && (Fz(z) > 0) !== (z > z0ind)) capOK = false; }
+check('T2 > 2T1 at N = 2: the solid has half-axes (λ, λ, a) = (a^(1/6), a^(1/6), a) about (0, 0, 1 − a), and its magenta part starts at the pre-image height z₀ found by bisection: exactly the cap above z₀ lies outside the ball', close(im.lam, wl.lam, 1e-12) && close(im.a, wl.a, 1e-12) && close(im.h, 1 - wl.a, 1e-12) && im.z0 !== null && close(im.z0, z0ind, 1e-9) && capOK, `${im.z0} vs ${z0ind}`);
+const zc = wl.a * z0ind + 1 - wl.a, rc = wl.lam * Math.sqrt(1 - z0ind * z0ind);
+check('T2 > 2T1 at N = 2: the thin white line where the solid meets the skin is a circle of the unit sphere (radius and height from z₀)', close(Math.hypot(rc, zc), 1, 1e-9) && zc > 0.6 && zc < 0.7, `${rc}, ${zc}`);
+/** The colour the WebGL canvas shows at the projection of a world point (after a fresh frame). */
+const pixelAt = (v) => page.evaluate(async (w) => {
+  const sc = window.TRV.solids[0]; await sc.ready; window.TRV.kit.flush();
+  const cv = sc.el.querySelector('canvas.solid-gl'), q = sc.p(w), k = cv.width / cv.clientWidth;
+  const cp = document.createElement('canvas'); cp.width = cv.width; cp.height = cv.height; const c = cp.getContext('2d'); c.drawImage(cv, 0, 0);
+  const d = c.getImageData(Math.round(q[0] * k), Math.round(q[1] * k), 1, 1).data; return [d[0], d[1], d[2], d[3]];
+}, v);
+/** The image point of the pre-image polar angle th on the meridian that faces the camera. */
+const facePoint = async (th) => { const D = await page.evaluate(() => window.TRV.solids[0].facing()), ph = Math.atan2(D[1], D[0]); return [wl.lam * Math.sin(th) * Math.cos(ph), wl.lam * Math.sin(th) * Math.sin(ph), wl.a * Math.cos(th) + 1 - wl.a]; };
+const th0 = Math.acos(z0ind), pMag = await pixelAt(await facePoint(th0 * 0.5)), pCy = await pixelAt(await facePoint(th0 + 0.25 * (Math.PI - th0)));
+check('T2 > 2T1 at N = 2: on the solid, the part outside the ball shows magenta and the part inside shows cyan', pMag[3] > 250 && pMag[0] > pMag[1] + 60 && pCy[3] > 240 && pCy[1] > pCy[0] + 40 && pCy[2] > pCy[0] + 40, JSON.stringify([pMag, pCy]));
+const wideCam = await page.evaluate(() => window.NOISE_DEBUG.camera());
+await setRange('ratio', 2); im = await page.evaluate(() => window.NOISE_DEBUG.image());
+check('moving T2 / T1 back to 2 makes the map a channel again, and the stage goes back to the wire drawing', im.drawn === 'wire' && im.z0 === null);
+await pick('amp'); const ampCam = await page.evaluate(() => window.NOISE_DEBUG.camera());
+check('T2 > 2T1 lowers the camera for its solid, and the next card gets the camera back', close(wideCam.pitch, 0.12, 1e-12) && !close(ampCam.pitch, 0.12, 1e-6), JSON.stringify([wideCam, ampCam]));
 
 // language
 await page.click('[data-lang-set="en"]'); await settle(page);
