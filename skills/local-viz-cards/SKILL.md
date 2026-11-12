@@ -62,6 +62,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `fixed-point-convergence` | 蛛网每绕一圈，误差乘上不动点处的斜率；连斜率一起读，几步就合拢；有理读数却总差一道缝 | `golden` `rate` `circle` `newton` `rational` `ruler` |
 | `lean-declaration-map` | 书里引用的每一条冻结声明都落在它第一次出场的那一章；读完正文，锁文件里的条目一条不剩全部落定 | `all` `bedrock` `table27` `closure` `table28` `theorems` `inline` |
 | `mutual-observer-attractors` | 两人同时读对方，逐拍可以越过不动点，两拍一轮却从一侧锁进同一个 (θ*, θ*)；两段区间拉近，连通的割在 d_crit 处胜出 | `alone` `round` `apart` `transition` `connected` |
+| `self-referential-table` | 同一张表，横着读是尺子，竖着读是被量的东西；拿它读它自己，读回来的还是它；碰歪一格，它自己回到一张幂等的表 | `reset` `expand_table` `full` `dual_read` `diagonal` `heal` `orthogonal_zero` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -124,6 +125,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `lean-declaration-map` 的舞台按阅读顺序排开 34 根柱子（序曲、三十章、终章、附录 A 与 B；附录 C 引用全部条目，不单列一柱，只在读数里给序号），每一格是 `trureturing.lock.json` 的一条声明，落在中文正文第一次引用它的那一章。数据由页面目录里的 `gen-data.py` 从锁文件与中文章节（`:::` 行上的 `lean="…"` 记为环境引用，`(lean:…)` 记为行内引用）生成并写进 `main.js` 的生成段，不手填；锁文件或章节变了要重新运行它并重新出图。绿色只给锁文件里种类为 `theorem` 的格子，灰色是定义，空心是只有行内链接的；青色是某一章引用的那些（从它的柱脚连线），琥珀只给选中的一格、连到另外引用它的章的线与阅读位置。依据框里的绿色只给第二十七、二十八章用 `lean=` 逐行解剖的八条定理；格数、种类与出现的章标 `NUM`，“落在首次出场的章”与柱内次序标 `MODEL`。测试按锁文件核对条目数、种类与源码行，并用另一种扫描重读章节核对每一处引用。路线图候选“一部”改为两张审计表卡 `table27`、`table28`（正文的两张表恰好分别覆盖第一至三部与第四至六部），“正文已解剖的那几条”按两章拆成 `bedrock` 与 `closure`，另按附录 C.2.1 加了 `inline`。
 
 `mutual-observer-attractors` 与 `fixed-point-convergence`、`layered-network-cut` 分工：第二十四章讲单个余弦迭代怎样收束，本页讲两个观察者同时互读 (x, y) ↦ (cos y, cos x)：舞台是两人读数的平面，青色是两人的读法 x = cos y 与 y = cos x，灰色方框是走过的各拍，空心的环是每两拍取一次的样本，琥珀只给这一拍；第十九章讲层级网络的离散最小割，本页的“极小割”场景是两段边界区间在静态 AdS₃ 真空里的测地线竞争，品红是较短的割，青色是它围出的纠缠楔，琥珀是两段区间 A、B，虚线是落选的割。依据分层：绿色框只给第三十三章用 `lean=` 引用的 `QuantumMaxFlowMinCut.result`，并写明它是离散桥图、不覆盖舞台上的连续图；Ryu–Takayanagi 两区间相变与 ln 形式的测地线长、g = cos∘cos 的压缩与无二周期、每拍 −sin θ* 与每轮 sin²θ* 都标 `ARGUED`；轨道与割长标 `NUM`；“观察者”“互为故乡”标 `MODEL`。路线图候选里的 `wells`（势阱变形网格）是纯诠释画面，`pinch` 与 `repeated-projection` 重复，`disconnected` 已由 `transition` 的播放起点覆盖，三者未做成卡；候选里的 `finite_record_pinching_idempotent`、`finite_contracting_updates_stabilize` 舞台上没有对应画面，不标绿。
+
+`self-referential-table` 的舞台是一张可点击的 N × N 表 T = Σ vₐvₐᵀ（vₐ 取前 r 个离散余弦向量，N ∈ {4, 8, 12}），青色是正的格、品红是负的格，琥珀只给选中的格、刚加进来的一项、当前的秩或当前这一步。四个场景：扩表（对角格之和 = 秩，地址槽）、读表（第 i 行逐项读第 j 列）、自愈（点格子加 ε，迭代 3T² − 2T³，右边是每一步的本征值，½ 以上青色、以下品红）、正交补（‖Tψ‖ = cos θ）。绿色框只给第三十五章用 `lean=` 引用、且落在舞台上的 `finite_memory_history_capacity`（扩表场景：r 行两两正交的记录可被完全区分，故 r ≤ N）；本章其余六条冻结定理只在抽屉的声明地图里。“对称幂等 ⟺ 正交投影”“迹 = 秩”与牛顿—舒尔茨迭代的收敛阈值、二次收敛标 `ARGUED`：‖Δ‖₂ < (√3 − 1)/2 时回到同秩的投影（离原表很近，一般不是原表），‖Δ‖₂ < ½ 时回到某个投影；“生命扩表”“T = T(T)”的诠释标 `MODEL`。本页与 `repeated-projection`（单比特投影的幂等）、`sphere-escape` · `diagonal`（康托尔对角线逃逸）不画同一画面：这里不画对角线逃逸，只画对角格自己读自己。
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
@@ -338,6 +341,14 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十三章 | 文献注记 `rem-ch33-rt-reconnection-ckw-literature` 之后、“把窗口交集体积……合拢”一段之前 | `mutual-observer-attractors` · `transition` |
 | 第三十三章 | “因为表层记事虽已归零”一段之后、转入第三十四章一段之前 | `mutual-observer-attractors` · `connected` |
 | 第三十三章 | 章末 | `mutual-observer-attractors` 完整实验室 |
+| 第三十五章 | 第一节 Lean 三定理列表第 3 条（`finite_memory_history_capacity`）之后、“这里的清表”一段之前 | `self-referential-table` · `full` |
+| 第三十五章 | 第一节“因此，乘着光来……”一段之后、定理 `thm-ch35-null-pulse-and-record-blocking` 之前 | `self-referential-table` · `reset` |
+| 第三十五章 | “成长即扩表”一节三步列表之后、“下面我们将……”一段之前 | `self-referential-table` · `expand_table` |
+| 第三十五章 | “查表算法亦在表内”一节“把原本悬浮在表外的……”一段之后 | `self-referential-table` · `dual_read` |
+| 第三十五章 | 同节列表第 2 条（“收束解释器追问”）之后、$T = T(T)$ 公式之前 | `self-referential-table` · `diagonal` |
+| 第三十五章 | “在实轴一维投影模型……”一段之后、定理 `thm-ch35-lawvere-diagonal-and-homoiconic-closure` 之前 | `self-referential-table` · `heal` |
+| 第三十五章 | 末节“若记忆只以这条轴的偏置读出……”一段之后 | `self-referential-table` · `orthogonal_zero` |
+| 第三十五章 | 末节加粗的追问之后、转入第三十六章之前 | `self-referential-table` 完整实验室 |
 | 终章 | 空间吸引子 · 一 末 | `spatial-attractor-deja-vu` · `butterfly` |
 | 终章 | 空间吸引子 · 二 “内禀几何参数”列表之后 | `spatial-attractor-deja-vu` · `fixed`、`cycle` |
 | 终章 | 空间吸引子 · 二 末（文献注记 `rem-coda-lorenz-srb-literature` 之后） | `spatial-attractor-deja-vu` · `forget`、`dimension` |
