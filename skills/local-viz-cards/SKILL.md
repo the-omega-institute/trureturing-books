@@ -26,8 +26,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 页面 | 一句话 | 卡（`preset`） |
 | --- | --- | --- |
 | `qubit-geometry` | 粒子是线，波是面积，两者是同一个几何积的两个投影 | `line` `area` `half` `phase` `hadamard` `hzh` `turn1` `turn2` |
-| `sphere-escape` | 以为把球封住了，总还有一点留在外面 | `diagonal` `absorb` `liuhui` `zu` `dottie` `far` `euclid` `thirteen` |
-| `pythagoras-number-escape` | 线上的误差可以趋于零，面积上的缺口至少一格 | `hippasus` `minus` `locked` `golden` `five` `seven` `count` `sato` |
+| `sphere-escape` | 以为把球封住了，总还有一点留在外面 | `diagonal` `split` `absorb` `pointer` `liuhui` `zu` `thirteen` |
+| `pythagoras-number-escape` | 线上的误差可以趋于零，面积上的缺口至少一格 | `hippasus` `locked` `five` `seven` `count` `sato` |
 | `timeless-causal-crystal` | 两条余弦锁住第三条的窗口，观察者只能在窗口里选点 | `window` `impossible` `right` `crystal` `field` `thread` `sos` `wilderness` |
 | `navier-stokes-p-np` | 对流项拆成梯度与兰姆两半；涡管被拉细（伯格斯涡核按精确解趋向 R∞ ∝ Re^(−½)，条带小图另画 K41 统计标度，两者不互推）；只看一部分的观察者得不到闭合 | `potential` `vortex` `flat` `strain` `burgers` `runaway` `closed` `mixed` |
 | `eth-horizon-crossover` | 渐近更好的曲线要到视界之外才追上；流矩阵的秩等于最小割；过线的模态数有墙 | `human` `atoms` `cross` `constant` `bridge` `narrow` `plateau` `tail` |
@@ -56,10 +56,10 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `layered-network-cut` | 把边界上的一段切下来，割要从网络里面穿过；区间翻倍，割只多两三条腿 | `one` `four` `grow` `two` |
 | `complexity-growth` | 熵几层就封顶，门数还一层层往上长；电路怎么排，层数都压不到 ⌊N/(κ+1)⌋ + 1 以下 | `saturate` `ceiling` `cv` `floor` `eight` `eleven` |
 | `norm-lattice` | 换一组坐标去读，系数全变了，格点上的范数一个也没动；范数锁在 ±1 的点只能沿双曲线一格一格地跳 | `hex` `skew` `shear` `range` `norm` `pell` `units` |
-| `euler-product-sieve` | 有限个素数乘起来总比 ζ 少一截：少的正是带着清单外素因子的整数，s 越靠近 1 少得越多 | `two` `near` `all` `five` `remainder` `thirtyone` |
+| `euler-product-sieve` | 有限个素数乘起来总比 ζ 少一截：少的正是带着清单外素因子的整数，s 越靠近 1 少得越多 | `two` `near` `all` `five` `thirtyone` |
 | `blade-multiplication` | 两块刀片相乘：重复的方向成对抵掉，剩下的是掩码的异或；正负号只看排好顺序要交换几次 | `e2e1` `square` `pseudo` `pauli` `vector` |
 | `zyz-compile` | 绕 z、绕 y、再绕 z 转三段，乘出来只是一枚旋子：绕一根轴的一次转动 | `sandwich` `chain` `h` `fold` |
-| `fixed-point-convergence` | 蛛网每绕一圈，误差乘上不动点处的斜率；连斜率一起读，几步就合拢；有理读数却总差一道缝 | `golden` `rate` `circle` `newton` `rational` `ruler` |
+| `fixed-point-convergence` | 蛛网每绕一圈，误差乘上不动点处的斜率；连斜率一起读，几步就合拢；有理读数却总差一道缝 | `golden` `far` `rate` `circle` `newton` `rational` `ruler` |
 | `lean-declaration-map` | 书里引用的每一条冻结声明都落在它第一次出场的那一章；读完正文，锁文件里的条目一条不剩全部落定 | `all` `bedrock` `table27` `closure` `table28` `theorems` `inline` |
 | `mutual-observer-attractors` | 两人同时读对方，逐拍可以越过不动点，两拍一轮却从一侧锁进同一个 (θ*, θ*)；两段区间拉近，连通的割在 d_crit 处胜出 | `alone` `round` `apart` `transition` `connected` |
 | `self-referential-table` | 同一张表，横着读是尺子，竖着读是被量的东西；拿它读它自己，读回来的还是它；碰歪一格，它自己回到一张幂等的表 | `reset` `expand_table` `full` `dual_read` `diagonal` `heal` `orthogonal_zero` |
@@ -73,6 +73,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `dream-decoherence-unpinning` | 锚点剪掉位置之间的相干，各处的权重一格不动；放松锚点，或把每一份记录都逆转，条纹就回来——记录把两条路完全分开时回不来 | `waking` `blocks` `half_erase` `zero_overlap_fail` `quantum_eraser` `unpin_body` `wake_snap` |
 | `meta-unification-compass` | 八家统一纲领在三根轴上各偏一侧；120 个转动加上它们的黄金缩小版，恰是 E₈ 的 240 个根，Q 全都等于 2 | `cube` `camps` `crystal` `icosians` `e8` `fold` |
 | `hairy-ball-normal-escape` | 球面上贴着的箭头总留一个发旋：两个能合成一个，却消不掉；换成环面，或让箭头沿法向立起一点，才处处不为零 | `merge` `torus` `defect` `escape` |
+| `critical-mirror` | 零点四个一组，只有站在镜面上才缩成一对；对称本身锁不住零点 | `quartet` `cayley` `thin` `quartic` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -122,17 +123,17 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 `complexity-growth` 有两个场景。“增长”是 8 个量子比特、固定种子哈尔随机两比特门的砖墙电路：半链熵（青色）由 16 × 16 约化密度矩阵的本征值逐层实算、门数与跨割门数按门表数出（`NUM`）；熵不超过 4 比特与每道跨割门至多加 2 比特（灰色台阶）、exp(O(N)) 复杂度天花板与热化后预期线性增长按第二十章文献注记标 `ARGUED`；品红的“预期复杂度” min(门数, 2^N) 与天花板的常数是示意模型（`MODEL`），页面不声称算出了复杂度；把品红上升段读成体积的 CV 标 `OPEN`（舞台上的红字与依据框用同一个 `--warn`）。“深度”是第二十章的开放边界链：青色的砖是 N + 1 道门按最早可放的层排好，品红三角是折返点 S，白线是 minDepth(N, κ)，灰色虚线是旧公式；绿色框只给本章用 `lean=` 引用的 `OpenIntegrableCircuitMinDepth.result` 与 `OpenIntegrableCircuitDepthRefutation.result`，CNOT 下界与偶圈长度不上页面。路线图候选“最小深度的下界”做成 `floor`，“增长停在哪里是开放的”改为 `ceiling`（天花板是文献结果）与 `cv`（开放的是 CV 读法），并按正文的两个反例加了 `eight` 与 `eleven`。
 
-`norm-lattice` 与 `pythagoras-number-escape` 的 `golden`、`minus`、`locked` 分工：那几张讲渐近分数逼近 √d 与 ±1 的接缝，本页讲整数格与范数等值线：艾森斯坦格画在复平面 x + y·e^{iπ/3}，换成整数坐标 (P, Q) = (x + (t + 1)y, y) 读出 Qform(t, ·, ·)；黄金整数画在 (g, ḡ) 平面，范数是矩形面积。绿色框只给第二十三章用 `lean=` 引用的四条定理（`Qform_eq_eisNorm`、`Qform_discriminant`、`Qform_range_eq_eisNorm`、`pell_form_eq_four_mul_norm`）；正文以行内链接提到的 `pell_pm_four_iff_signed_lucas_fib` 不在页面上标绿，`units` 卡只展示 φᵏ 的 (2a + b, b) = (Lₖ, Fₖ) 与范数 (−1)ᵏ（`NUM`），不声称它们是全部解。格子面积 √3/2、系数是基矢的内积、判别式 = −4 × 面积²、“取到的值”逐点代入都标 `NUM`；非整数 t 的中间帧、两种坐标之间的过渡与两次乘 φ 之间的滑动标 `MODEL`；四元数范数在 ℚ 中定义 ℤ 标 `ARGUED`。这一页的青色是当前点所在的那条范数等值线及其上的格点、黄金场景里迹的对角线与影子，品红是格子（面积）与黄金范数的矩形和它那一级的双曲线，琥珀只给当前的点与正在滑动的基矢 u₂，其余等值线是中性灰（虚线上没有格点）。
+`norm-lattice` 与 `pythagoras-number-escape` 的 `hippasus`、`locked` 分工：那几张讲渐近分数逼近 √d 与 ±1 的接缝，本页讲整数格与范数等值线：艾森斯坦格画在复平面 x + y·e^{iπ/3}，换成整数坐标 (P, Q) = (x + (t + 1)y, y) 读出 Qform(t, ·, ·)；黄金整数画在 (g, ḡ) 平面，范数是矩形面积。绿色框只给第二十三章用 `lean=` 引用的四条定理（`Qform_eq_eisNorm`、`Qform_discriminant`、`Qform_range_eq_eisNorm`、`pell_form_eq_four_mul_norm`）；正文以行内链接提到的 `pell_pm_four_iff_signed_lucas_fib` 不在页面上标绿，`units` 卡只展示 φᵏ 的 (2a + b, b) = (Lₖ, Fₖ) 与范数 (−1)ᵏ（`NUM`），不声称它们是全部解。格子面积 √3/2、系数是基矢的内积、判别式 = −4 × 面积²、“取到的值”逐点代入都标 `NUM`；非整数 t 的中间帧、两种坐标之间的过渡与两次乘 φ 之间的滑动标 `MODEL`；`skew` 卡在整数坐标的斜椭圆之外，用淡色点与青色虚线圆画出同一批格点在复平面里的位置，细线连起每个格点的两处位置（(8, 3) 连到 (−1, 3)）；`range` 卡的静态图停在 t = 1，细线（走过的路）与值域条是主角，与 `skew`（t = 2）不是同一画面；四元数范数在 ℚ 中定义 ℤ 标 `ARGUED`。这一页的青色是当前点所在的那条范数等值线及其上的格点、黄金场景里迹的对角线与影子，品红是格子（面积）与黄金范数的矩形和它那一级的双曲线，琥珀只给当前的点与正在滑动的基矢 u₂，其余等值线是中性灰（虚线上没有格点）。
 
-`pythagoras-number-escape` 的“模 p 数点”场景按勒让德符号着色：舞台格子里 y ≠ 0 的点（成对 ±y，所在列 χₚ(f(x)) = +1）是青色，y = 0 的分支点是中性色（`sigma`）；右上的自旋环把 x = 0 … p − 1 排成一圈，青色 +1、品红 −1、中性 0，环心写 Σχ 与 p + 1 + Σχ = #E；琥珀只给弗罗贝尼乌斯余弦的指针，绿色不用。下方小图的柱子按 aₚ 的正负着青/品红。y² = x³ − x + 1 的判别式是 −368 = −2⁴·23：p = 23 时页面弹出坏约化提示、圈出奇点 (13, 0)，不给余弦与哈塞界，直方图只用良约化素数（428 个，p < 3000）。“线与面素数”场景区分两种角：格点 (a, b) 的方向角 θ 是希尔伯特夹角（cos²θ + sin²θ = 1），平方后的三角形转过布洛赫极角 2θ；第三章的 `complementary_context_probability_pythagoras` 在第二十九章与终章只以行内链接出现，所以页面只在抽屉里指向第三章，不标绿。`count` 卡的图注写环上的 2 个 +1、8 个 −1、3 个 0。读数里点数与 p + 1 之差一律写 aₚ，不写 a（第二十九章正文的 a 是高斯三角形的边）。`golden` 卡的舞台主读数是视野里最大的绿圈 (Fₖ, Lₖ) 上的 Lₖ² − 5Fₖ² = ±4（停在第 3 个渐近分数 161/72，绿圈 (89, 199)，−4），任何操作都退回渐近分数的 ±1 读数；`sato` 卡把 3000 以内良约化素数的 cos θₚ 直方图（紫）与半圆律（琥珀虚线）放到舞台右侧，𝔽₅₃ 的点阵缩到左侧，自旋环与半圆表盘不画。
+`pythagoras-number-escape` 的“模 p 数点”场景按勒让德符号着色：舞台格子里 y ≠ 0 的点（成对 ±y，所在列 χₚ(f(x)) = +1）是青色，y = 0 的分支点是中性色（`sigma`）；右上的自旋环把 x = 0 … p − 1 排成一圈，青色 +1、品红 −1、中性 0，环心写 Σχ 与 p + 1 + Σχ = #E；琥珀只给弗罗贝尼乌斯余弦的指针，绿色不用。下方小图的柱子按 aₚ 的正负着青/品红。y² = x³ − x + 1 的判别式是 −368 = −2⁴·23：p = 23 时页面弹出坏约化提示、圈出奇点 (13, 0)，不给余弦与哈塞界，直方图只用良约化素数（428 个，p < 3000）。“线与面素数”场景区分两种角：格点 (a, b) 的方向角 θ 是希尔伯特夹角（cos²θ + sin²θ = 1），平方后的三角形转过布洛赫极角 2θ；第三章的 `complementary_context_probability_pythagoras` 在第二十九章与终章只以行内链接出现，所以页面只在抽屉里指向第三章，不标绿。`count` 卡的图注写环上的 2 个 +1、8 个 −1、3 个 0。读数里点数与 p + 1 之差一律写 aₚ，不写 a（第二十九章正文的 a 是高斯三角形的边）。d = 5 时舞台上 m² − 5n² = ±4 的两条虚线与 (Fₖ, Lₖ) 圈都用中性灰：第二十三章只以行内链接提到 `pell_pm_four_iff_signed_lucas_fib`，所以佩尔场景只用一段说明写明它在 trureturing 中已冻结、正文未以定理环境引用，不标绿；`sato` 卡把 3000 以内良约化素数的 cos θₚ 直方图（紫）与半圆律（琥珀虚线）放到舞台右侧，𝔽₅₃ 的点阵缩到左侧，自旋环与半圆表盘不画。
 
-`euler-product-sieve` 与 `sphere-escape` 的 `euclid`、`thirteen` 分工：那两张讲“乘起来加一”找到清单外的素数，本页讲有限个素数的欧拉乘积怎样逼近 ζ(s) 以及筛的余项。舞台上方是实轴 1 < s ≤ 4 上墨色的 ζ(s)、青色的前 K 个素数的乘积与其间品红的缺口（纵轴按“值 − 1”取对数，刻度写值本身），品红虚线是乘积加上下一个素数的 p⁻ˢ，右边的放大镜把当前 s 处的缺口按品红格的 n⁻ˢ 自下而上拆开；下方是整数 1 到 96，青色在乘积的展开里，品红带着清单外的素因子；琥珀只给当前的 s 与刚加进的素数的格子。绿色框只给第二十二章用 `lean=` 引用的三条：`riemann_zeta_euler_product`、`riemann_zeta_dirichlet_sum_eq_euler_product` 与 `riemann_zeta_residue_one`（Lean 对复数 s 陈述，页面只取实数 s）；余项等于最大素因子大于 p<sub>K</sub> 的整数之和、在实数 s > 1 上大于 p<sub>K+1</sub>⁻ˢ 与 ζ(2) = π²/6 按该章例题标 `ARGUED`；ζ(s)、乘积、放大镜各段与“差不到 1% 要几个素数”实算（`NUM`）；黎曼猜想只在抽屉里标 `OPEN`，页面不画临界带。路线图候选里的“只用 2”“用到 5”“用到 31”“s 越靠近 1 需要的素数越多”“筛的余项”依次做成 `two`、`five`、`thirtyone`、`near`、`remainder`，另加 `all`（到 97 格子全青、缺口仍在）配推论 `cor-dirichlet-sum-eq-euler-product`。
+`euler-product-sieve` 与 `sphere-escape` 的 `thirteen` 分工：那两张讲“乘起来加一”找到清单外的素数，本页讲有限个素数的欧拉乘积怎样逼近 ζ(s) 以及筛的余项。舞台上方是实轴 1 < s ≤ 4 上墨色的 ζ(s)、青色的前 K 个素数的乘积与其间品红的缺口（纵轴按“值 − 1”取对数，刻度写值本身），品红虚线是乘积加上下一个素数的 p⁻ˢ，右边的放大镜把当前 s 处的缺口按品红格的 n⁻ˢ 自下而上拆开；下方是整数 1 到 96，青色在乘积的展开里，品红带着清单外的素因子；琥珀只给当前的 s 与刚加进的素数的格子。绿色框只给第二十二章用 `lean=` 引用的三条：`riemann_zeta_euler_product`、`riemann_zeta_dirichlet_sum_eq_euler_product` 与 `riemann_zeta_residue_one`（Lean 对复数 s 陈述，页面只取实数 s）；余项等于最大素因子大于 p<sub>K</sub> 的整数之和、在实数 s > 1 上大于 p<sub>K+1</sub>⁻ˢ 与 ζ(2) = π²/6 按该章例题标 `ARGUED`；ζ(s)、乘积、放大镜各段与“差不到 1% 要几个素数”实算（`NUM`）；黎曼猜想只在抽屉里标 `OPEN`，页面不画临界带。路线图候选里的“只用 2”“用到 5”“用到 31”“s 越靠近 1 需要的素数越多”“筛的余项”依次做成 `two`、`five`、`thirtyone`、`near`；“筛的余项”并进 `five`（静态图停在 s = 2，点这张卡时琥珀色竖线从 s = 4 扫到 1.3，垫底的始终是 7⁻ˢ），另加 `all`（到 97 格子全青，停在 s = 1.2，缺口 1.23 仍占 ζ 的五分之一以上，与静态图 `ch22-euler-staircase` 的 s = 2 不是同一个数）配推论 `cor-dirichlet-sum-eq-euler-product`。
 
 `blade-multiplication` 的舞台左边是乘法表（8 块刀片、4 个泡利字或向量自乘的 3 × 3 九项），右边把选中的一格拆开：上方三行是左、右掩码与异或（两边都有的位画青色叉），下方一行一步，右因子逐个向左越过较大的左因子，每次交换画成两条交叉的品红线，排好后同号一对汇成青色的 +1；琥珀只给当前一格与当前这一步，紫色只在 `pseudo` 卡里框出 I₃ 的一行与一列（体积）。三维刀片的位运算规则本章没有冻结成 Lean 定理：8 × 8 表与逐步排序标 `NUM`（逐格与泡利矩阵乘积核对），排序的画法标 `MODEL`，Cl(3,0) ≅ M₂(ℂ) 与 Gottesman–Knill 标 `ARGUED`；绿色框只给本章用 `lean=` 引用的定理：泡利字场景的 `displacement_mul`、`qubit_weyl_star`（`displacement_two_anticommute` 在声明地图里），向量场景的 `B_formula_core`（B(3, 4, 12)² = 169·I 的乘法本身是 `NUM`）。抽屉里的“声明地图”列出第二十五章 `lean=` 引用的全部 9 条冻结定理，测试按章节文件与锁文件核对条目数与链接。路线图候选的 e₁e₂、e₂e₁ 变号、e₁₂e₁₂ = −1、伪标量、泡利字依次做成 `e2e1`（同时交代 e₁ · e₂ 不交换、表里那一格是青色）、`square`、`pseudo`、`pauli`，另按例 `ex-xor-pauli-table` 第 3 条加了 `vector`。
 
 `zyz-compile` 与 `qubit-geometry` 的 `hadamard`、`turn2` 及 `two-angle-addressing` 的 `address` 分工：那几张讲 H 门绕对角轴的 180°、旋子转两整圈变号、从北极出发的两角寻址，本页讲第二十六章的正向编译：三段 R_z(α) R_y(β) R_z(γ)（γ 先作用）在八个刀片掩码上按异或乘成一枚旋子，并用夹心积转动箭头与整个三脚架。舞台上琥珀是当前的箭头 v，紫色是固定的 z、y 转轴（这一段加粗）与旋子自己的转轴 n（虚线），青色是 v 在这一段转轴上的影子（不动），品红是 v⊥ 绕轴扫过的扇形（虚线分成左右两个半角），白色是三脚架 Re₁、Re₂、Re₃ 与走过的路。第二十六章用 `lean=` 引用的四条冻结定理都在状态一侧（`blochMatrix_trace`、`bloch_blochMatrix`、`bloch_geometry_of_isHermitian`、`norm_bloch_le_trace_of_posSemidef`），页面只在箭头的纯态 ρ = blochMatrix(1, v) 上标绿并当场核对，抽屉里的声明地图恰是这四条；旋子编译本身没有冻结定理，乘积、三列、转轴与转角标 `NUM`；任意 U(2) 的 ZYZ 分解、Spin(3) → SO(3) 二对一与“单位旋子即一次绕轴转动”按该章文献注记标 `ARGUED`。路线图候选“X 门”正文没有对应的句子，未做；“任意轴”做成 `fold`（单一转轴），T 门 (π/4, 0, 0) 只是绕 z 的一段转动，与 `sandwich` 同一种画面，不单列卡，由 `h` 的说明交代一句，“夹心作用”做成 `sandwich`，另加 `chain`（例题的三元组 (0.37, −0.81, 0.52)）。
 
-`fixed-point-convergence` 与 `sphere-escape` 的 `dottie`、`far` 分工：那两张讲“总有一点留在外面”，本页讲“怎样收束、收得多快”。舞台是蛛网图（曲线 y = f(x) 与直线 y = x），“跟着放大”时以不动点为原点重新标尺。绿色框只给第二十四章用 `lean=` 引用的 `golden_fixed_point_unique`（φ 是 1 + 1/x 唯一的正不动点）与 `rational_inverse_endpoint`（只取其中 θ* 的存在、唯一与 0 < θ* < 1）；全局收敛、严格交替的条件与误差比极限 −sin θ* 是第三十三章例 `ex-ch33-mutual-cosine-monotonic-lock` 把端点定理与现成实分析结果接起来的既有结果应用，标 `ARGUED`；[0, 1] 上的压缩常数 sin 1、牛顿二次收敛、残差双边界与 (1 + sin 1)/b² 界按 §24.4–24.5 的文献注记标 `ARGUED`；轨道、残差、“单纯迭代要走几步”与连分数部分商都以 70 位定点整数实算（`NUM`）。`newton` 卡停在第 2 步（视野宽约 10⁻⁴，正确位数 0 → 1 → 4），切线这一步还看得见；第 4 步的精度交给静态图 `ch24-three-speeds`。这一页的青色是曲线 y = f(x)（只读投影）与单位圆上 P 的横坐标 θ*，品红是斜率那一半：不动点处的切线、牛顿沿切线走的那一段、λ = sin θ* 的高度与残差竖线；琥珀只给当前这一步或当前读数；走过的折线是中性墨色，灰色虚线是最陡斜率 −sin 1 与残差的楔形边界。路线图候选“开普勒方程”“半程落体”讲的是 θ* 住在哪里，正文那里没有关于收束快慢的句子，未做成卡；正文讲了而候选没有的“单位圆上的线与面”（`circle`）与“十进制千分尺”（`ruler`）补做成卡。
+`fixed-point-convergence` 讲“怎样收束、收得多快”；第二十四章的余弦蛛网全部用这一页（`far` 从 x₀ = 3 出发、看全程，第一步落进 [−1, 1]），`sphere-escape` 的余弦场景只留在它的完整实验室里，不再被章节按卡引用。舞台是蛛网图（曲线 y = f(x) 与直线 y = x），“跟着放大”时以不动点为原点重新标尺。绿色框只给第二十四章用 `lean=` 引用的 `golden_fixed_point_unique`（φ 是 1 + 1/x 唯一的正不动点）与 `rational_inverse_endpoint`（只取其中 θ* 的存在、唯一与 0 < θ* < 1）；全局收敛、严格交替的条件与误差比极限 −sin θ* 是第三十三章例 `ex-ch33-mutual-cosine-monotonic-lock` 把端点定理与现成实分析结果接起来的既有结果应用，标 `ARGUED`；[0, 1] 上的压缩常数 sin 1、牛顿二次收敛、残差双边界与 (1 + sin 1)/b² 界按 §24.4–24.5 的文献注记标 `ARGUED`；轨道、残差、“单纯迭代要走几步”与连分数部分商都以 70 位定点整数实算（`NUM`）。`newton` 卡停在第 2 步（视野宽约 10⁻⁴，正确位数 0 → 1 → 4），切线这一步还看得见；第 4 步的精度交给静态图 `ch24-three-speeds`。这一页的青色是曲线 y = f(x)（只读投影）与单位圆上 P 的横坐标 θ*，品红是斜率那一半：不动点处的切线、牛顿沿切线走的那一段、λ = sin θ* 的高度与残差竖线；琥珀只给当前这一步或当前读数；走过的折线是中性墨色，灰色虚线是最陡斜率 −sin 1 与残差的楔形边界。路线图候选“开普勒方程”“半程落体”讲的是 θ* 住在哪里，正文那里没有关于收束快慢的句子，未做成卡；正文讲了而候选没有的“单位圆上的线与面”（`circle`）与“十进制千分尺”（`ruler`）补做成卡。
 
 `lean-declaration-map` 的舞台按阅读顺序排开 43 根柱子（序曲、三十九章、终章、附录 A 与 B；附录 C 引用全部条目，不单列一柱，只在读数里给序号），每一格是 `trureturing.lock.json` 的一条声明，落在中文正文第一次引用它的那一章。数据由页面目录里的 `gen-data.py` 从锁文件与中文章节（`:::` 行上的 `lean="…"` 记为环境引用，`(lean:…)` 记为行内引用）生成并写进 `main.js` 的生成段，不手填；锁文件或章节变了要重新运行它并重新出图。绿色只给锁文件里种类为 `theorem` 的格子，灰色是定义，空心是只有行内链接的；青色是某一章引用的那些（从它的柱脚连线），琥珀只给选中的一格、连到另外引用它的章的线与阅读位置。依据框里的绿色只给第二十七、二十八章用 `lean=` 逐行解剖的八条定理；格数、种类与出现的章标 `NUM`，“落在首次出场的章”与柱内次序标 `MODEL`。测试按锁文件核对条目数、种类与源码行，并用另一种扫描重读章节核对每一处引用。路线图候选“一部”改为两张审计表卡 `table27`、`table28`（正文的两张表恰好分别覆盖第一至三部与第四至六部），“正文已解剖的那几条”按两章拆成 `bedrock` 与 `closure`，另按附录 C.2.1 加了 `inline`。
 
@@ -159,6 +160,10 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `meta-unification-compass` 只覆盖第三十二章下半篇（§32.3–32.4）。两个场景共用一条时间轴：“罗盘”是立方体 [0, 1]³，三根轴照 §32.3 的定义（θ 阶数：青色的“线”一端到品红的“面积”一端；η 分辨率：光滑到多面体；λ 观察者：球外 C 到场内），八家纲领按 §32.4 总表原话落在每根轴的三段之一（点明哪一端就落在那一端，没点明或两端都有落在中段，同格的在中段里错开），整只立方体与“本书的位置”都标 `MODEL`，页面写明不是测量、不是对学科的评判、本书没有形式化地取代哪一家；时间轴逐个读四大阵营，琥珀色只给正在读的那一对与选中的一家。“黄金桥”在 ℤ[φ] 里精确算 2I 的 120 个元素（去掉实部投到三维，青色）与 φ⁻¹·2I（品红），Q(q) = 2(a + b) = 2 的 240 个根、两两 B ∈ {−2…2}、56 个邻居、𝓘 的格拉姆行列式 1，纯虚的 60 个按带权坐标 (√(2φ/√5) q, √(2φ⁻¹/√5) q^σ) 从 E∥ 转到 E⊥；琥珀色只给选中的元素。纯虚子模配上 Q 的格拉姆行列式是 4（D₆ 格），页面照实写，不称它为带标准内积的 ℤ⁶。绿色框只给本章 `lean=` 引用的 `golden_fixed_point_unique`（页面坐标里的 φ）；2I、(𝓘, Q) ≅ E₈ 与准晶切投母格标 `ARGUED`，ℤ[φ] 里的核对标 `NUM`。路线图候选 `strings_lqg`、`holography_twistor`、`ncg_langlands` 合为一张 `camps`：§32.4 只有一处可引用，且正文把非对易几何与 Wolfram 超图配成一个阵营、朗兰兹与熵引力配成一个阵营。
 
 `hairy-ball-normal-escape` 与 `berry-loop` · `comb`、`unified-field-slice` · `polytope` 及静态图 `ch21-angle-defect`、`coda-defect-spread` 分工：`comb` 已画“两极各一个 +1 的梳不平的场”，本页只把纬向场 (−y, x, 0) 当起点（`merge` 的起始状态，时间轴拨回起点即是），讲 `comb` 没有的四件事：两个 +1 推成偶极切场 w = (((1 − z)² − x² + y²)/2, −xy, x(1 − z)) 的一个 +2（`merge`，中间那一族是立体投影拉回的 e^{iψ}(a − u)/(1 + a)，为画面选定，标 `MODEL`）、环面 ê_φ 处处长 1（`torus`）、测地穹顶 ν = 1…6 的顶点角亏之和恒为 4π（`defect`，`ch21-angle-defect` 只画 ν = 1，`coda-defect-spread` 用横条画同一组数，故本卡只在第二十一章引用、不放进终章）、法向抬升 w̃_λ = (1 − λ)w + λ(1 + z)/2·x（`escape` 停在 λ = ½；把时间轴拨到 λ = 1，南极又成零点，页面如实画出并在抽屉里写明）。这一页品红是零点（发旋）、绕零点的小圈、角亏圆点与沿法向立起的部分；青色是切向箭头与平的三角面；琥珀只给可拖动的零点、环面上当前的点与北极处的箭头；灰色是北极的切平面。绿色框只给第二十一章用 `lean=` 引用的 `complete_diagonal_not_continuous`，页面写明它讲的是对角线在划分拓扑下不连续、与毛球定理不是同一条陈述；路线图候选 `no_continuous_global_section` 只在第五、三十九章引用，未标绿。庞加莱—霍普夫、毛球定理与笛卡尔定理标 `ARGUED`，指标、角亏与最短箭头的长度标 `NUM`。
+
+`sphere-escape` 的六个场景（对角线、纤维、割圆、指针、余弦、素数）共用一条时间轴。“纤维”场景是第二十一章例 `ex-cantor-godel-diagonal-table` 的四地址目录（解码器常零、恒等、取反、常一，恰好满射）：读者点地址改它的潜坐标，时间轴先逐个算出 g，再把同一纤维里 g 不同的点对连成品红线（分离亏损），最后把 g 立成紫色的第二根轴、块数变多；16 种潜坐标都劈开某根纤维，绿色框只给 `complete_diagonal_topological_settlement`。“指针”场景画 N + 1 格的记录指针（青色条）与平移 ℓ 格的副本（品红轮廓），右边是正 (⌊N/ℓ⌋ + 2) 边形的边心距（青色虚线）与弓高（品红），琥珀色的点是 |γ(ℓ)|；正弦形在 ℓ = 1 时恰好取到边心距（页面实算），绿色框给 `coefficient_gamma_le_cosine` 与 `finite_record_cosine_obstruction`。页面读数里“相符”的勾是中性色（`.chk`），不是绿色。
+
+`critical-mirror` 的舞台是两个并排的平面：左边是临界带 0 < Re s < 1（纵向压缩），琥珀色的 ρ = ½ ± δ + iγ 与三个品红的伴 ρ̄、1 − ρ、1 − ρ̄，δ = 0 时两两重合成青色的两点；右边是凯莱坐标 w = (s − 1)/s，单位圆是青色，右上的放大镜以辐角为横轴、ln|w| 为纵轴，把高处只偏出圆周万分之几的四个像拉开。“四次式”场景把右边换成同样对称的四次式 F(½ + it)（青色，最低处琥珀色）与 ξ(½ + it)（品红，各用各的标尺；ξ 由欧拉—麦克劳林求 ζ、斯特林求 Γ）。前五个零点是灰色的数值点（与静态图 `ch22-critical-line`、`ch22-overview` 里的零点同为灰色）。时间轴是 ρ 到镜面的距离 δ。绿色框只给第二十二章用 `lean=` 引用的 `xi_reading_reflection`、`xi_reading_one_sub_conj`、`cayley_ratio_norm_one_iff_critical_line` 与 `full_symmetry_not_fixed_line_localization`；零点高度、|w|、F、ξ 标 `NUM`；黎曼猜想只在抽屉里标 `OPEN`，页面不画“全部零点”。
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
@@ -309,7 +314,9 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十章 | 猜想 `conj-complexity-equals-volume` 之后、§纠缠桥与 ER=EPR 之前 | `complexity-growth` · `cv` |
 | 第二十章 | 例 `ex-cnot-and-cycle-bounds` 之后、P/NP 的提问之前 | `complexity-growth` 完整实验室 |
 | 第二十一章 | §21.2 “对角线 g 的取值永远跟第 a 号解码器算出的结果唱反调”一段之后、“由此，在 Lean 模块 `DiagonalTopologicalEscape` 中”之前 | `sphere-escape` · `diagonal` |
+| 第二十一章 | §21.2 例 `ex-cantor-godel-diagonal-table` 之后、“这正是抽象对角线不动点模式”一段之前 | `sphere-escape` · `split` |
 | 第二十一章 | §21.2 例 `ex-cantor-godel-diagonal-table` 后“连同地址空间一起向外扩容”一段之后 | `sphere-escape` · `absorb` |
+| 第二十一章 | §21.3 “下界可以直接读成几何量”一段之后、“有限门计数的硬下界”之前 | `sphere-escape` · `pointer` |
 | 第二十一章 | §21.3 末 | `sphere-escape` · `liuhui` |
 | 第二十一章 | §21.4 插图 `ch21-angle-defect` 之后“图里只有十二个顶点”一段之后 | `hairy-ball-normal-escape` · `defect` |
 | 第二十一章 | §21.4 “零点可以推着走、可以合并”一段之后 | `hairy-ball-normal-escape` · `merge` |
@@ -318,12 +325,16 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十一章 | §21.4 末 | `sphere-escape` 完整实验室 |
 | 第二十二章 | §22.1 单根素数轴的等比级数一段（“合二为一”）之后、`classicalZeta` 约定之前 | `euler-product-sieve` · `two` |
 | 第二十二章 | §22.2 “s → 1⁺ 时放大因子 p/(p − 1) 累积发散”一段之后、引理 `lem-riemann-zeta-residue-one` 之前 | `euler-product-sieve` · `near` |
-| 第二十二章 | 推论 `cor-dirichlet-sum-eq-euler-product` 的证明之后、`sphere-escape` · `euclid` 之前 | `euler-product-sieve` · `all` |
-| 第二十二章 | §22.2 末 | `sphere-escape` · `euclid` |
-| 第二十二章 | 例 `ex-prime-log-orthogonality-and-sieve` 之后 | `euler-product-sieve` · `five`、`remainder` |
+| 第二十二章 | 推论 `cor-dirichlet-sum-eq-euler-product` 的证明之后、“加法里的同一个窍门”之前 | `euler-product-sieve` · `all` |
+| 第二十二章 | 例 `ex-prime-log-orthogonality-and-sieve` 之后 | `euler-product-sieve` · `five` |
 | 第二十二章 | §22.3 “首项裂缝……生长之门”一段之后、`sphere-escape` · `thirteen` 之前 | `euler-product-sieve` · `thirtyone` |
 | 第二十二章 | §22.3 `thirtyone` 之后一句（“欧几里得的那一招”）之后、格言之前 | `sphere-escape` · `thirteen` |
 | 第二十二章 | §22.3 格言之后、§22.4 之前 | `euler-product-sieve` 完整实验室 |
+| 第二十二章 | §22.4 “结论 3 有一个立即的推论”一段（零点四个一组）之后 | `critical-mirror` · `quartet` |
+| 第二十二章 | §22.4 凯莱坐标的反演一段与 |w|² − 1 的公式之后、例 `ex-cayley-unit-circle-zeros` 之前 | `critical-mirror` · `cayley` |
+| 第二十二章 | 例 `ex-cayley-unit-circle-zeros` 之后 | `critical-mirror` · `thin` |
+| 第二十二章 | 例 `ex-quartic-mock-quartet` 之后 | `critical-mirror` · `quartic` |
+| 第二十二章 | “所以，证明黎曼猜想所需要的信息”一段之后、罗宾不等式一段之前 | `critical-mirror` 完整实验室 |
 | 第二十三章 | §23.1 艾森斯坦整数环引言段（“让我们先考察复平面上最对称的二维晶格”）之后、Lean 模块说明之前 | `norm-lattice` · `hex` |
 | 第二十三章 | §23.1 末段（“同一颗六角范数球在不同斜交基底下的投影”）之后、§23.2 之前 | `norm-lattice` · `skew` |
 | 第二十三章 | 引理 `lem-qform-discriminant` 的证明之后、“由于剪切变换……”一段之前 | `norm-lattice` · `shear` |
@@ -331,11 +342,9 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十三章 | 定义 `def-golden-int-and-norm` 之后、代数迹一段之前 | `norm-lattice` · `norm` |
 | 第二十三章 | 命题 `prop-pell-form-eq-four-mul-norm` 的证明之后 | `norm-lattice` · `pell` |
 | 第二十三章 | 佩尔—卢卡斯—斐波那契锁定一段（“当且仅当……$(\pm L_n, \pm F_n)$”）之后、例 `ex-eisenstein-and-golden-pell-lattice` 引言之前 | `norm-lattice` · `units` |
-| 第二十三章 | §23.2 例 `ex-eisenstein-and-golden-pell-lattice` 之后 | `pythagoras-number-escape` · `golden` |
-| 第二十三章 | §23.2 末（`pythagoras-number-escape` · `golden` 之后、§23.3 之前） | `norm-lattice` 完整实验室 |
+| 第二十三章 | §23.2 末（例 `ex-eisenstein-and-golden-pell-lattice` 之后、§23.3 之前） | `norm-lattice` 完整实验室 |
 | 第二十四章 | §24.3 推论 `cor-golden-fixed-point-unique` 的证明之后、“为什么是 1 + 1/x”一段之前 | `fixed-point-convergence` · `golden` |
-| 第二十四章 | §24.4 文献注记 `rem-banach-dottie-hairy-ball-literature` 之后、猜想 `conj-schanuel-dottie` 之前 | `sphere-escape` · `far` |
-| 第二十四章 | §24.4 末 | `sphere-escape` · `dottie` |
+| 第二十四章 | §24.4 文献注记 `rem-banach-dottie-hairy-ball-literature` 之后、猜想 `conj-schanuel-dottie` 之前 | `fixed-point-convergence` · `far` |
 | 第二十四章 | §24.5 三个问题列表第 1 条之后、第 2 条之前 | `fixed-point-convergence` · `rate` |
 | 第二十四章 | §24.5 三个问题列表第 2 条之后、第 3 条之前 | `fixed-point-convergence` · `newton` |
 | 第二十四章 | 文献注记 `rem-dottie-convergent-residual-literature` 之后“回到第一问的答案”一句之后、例 `ex-dottie-rate-newton-rational` 之前 | `fixed-point-convergence` · `circle` |
@@ -360,7 +369,6 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第二十九章 | 第一座桥“表盘立刻说明线素数写不成两平方和”一段之后 | `pythagoras-number-escape` · `seven` |
 | 第二十九章 | 定理 `thm-ch29-face-prime-two-squares` 证明后“几何上，p = a² + b² 说的是半径 √p 的圆穿过格点”一段之后 | `pythagoras-number-escape` · `five` |
 | 第二十九章 | 第一座桥手工推导 3（线素数的负佩尔方程无解）之后 | `pythagoras-number-escape` · `locked` |
-| 第二十九章 | 例 `ex-ch29-face-and-line-primes` 之后、文献注记 `rem-ch29-pell-primes-hilbert-literature` 之前 | `pythagoras-number-escape` · `minus` |
 | 第二十九章 | 第二座桥文献注记 `rem-ch29-elliptic-torus-literature` 之后 | `hairy-ball-normal-escape` · `torus` |
 | 第二十九章 | 第三座桥文献注记 `rem-ch29-hasse-gauss-literature` 之后 | `pythagoras-number-escape` · `count` |
 | 第二十九章 | 文献注记 `rem-ch29-arithmetic-geometry-literature` 之后 | `pythagoras-number-escape` · `sato` |
