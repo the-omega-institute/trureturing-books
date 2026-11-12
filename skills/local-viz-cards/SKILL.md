@@ -65,6 +65,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | `self-referential-table` | 同一张表，横着读是尺子，竖着读是被量的东西；拿它读它自己，读回来的还是它；碰歪一格，它自己回到一张幂等的表 | `reset` `expand_table` `full` `dual_read` `diagonal` `heal` `orthogonal_zero` |
 | `quantum-fairness-ledger` | 没有特权的座位：照见是相互的，得一分就失一分，满额的纠缠与副本分不出第二份，从哪里出发都分到同样的份额 | `haar` `tradeoff` `cloning` `bell` `wstate` `ghz` `ergodic` |
 | `spherical-degeneracy-radar` | 转一次与转两次，终点不同，有的观察者却读出同一个数；把这些读不出差别的人收集起来，只剩极轴上的那一对 | `meridian` `sweep` `tilted` `hops` `equator` `frames` |
+| `dream-decoherence-unpinning` | 锚点剪掉位置之间的相干，各处的权重一格不动；放松锚点，或把每一份记录都逆转，条纹就回来——记录把两条路完全分开时回不来 | `waking` `blocks` `half_erase` `zero_overlap_fail` `quantum_eraser` `unpin_body` `wake_snap` |
 
 ### 各页面的依据分层、用语与分工
 
@@ -133,6 +134,8 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 `quantum-fairness-ledger` 把第 31 章的五重公平中的五本账（席位、得失、关系、复制、遍历）画在同一颗布洛赫球上，每本账旁一根总额为 1 的柱子；正文的“博弈公平”（一致放大旋转步幅）没有单独的场景：平面里每步转过同一角度的图景已在 `grover-reflections` 里画出，再加一个场景会冲淡主角。青色是留在里面的（影子、A 自己留下的 ‖r_A‖²、副本的箭头、窗口与命中），品红是让出去的（横向的面积、二体纠缠、复制丢掉的部分），紫色是三体纠缠 τ₃ 与遍历场景的转轴，琥珀是读者拖动的参考轴、当前的态与当前一步。绿色框只给第 31 章用 `lean=` 引用的六条：`rank_one_born_pairing_weight`、`complementary_context_probability_pythagoras`、`no_cloning_inner_product_criterion`、`bell_pure_state_has_maximally_mixed_marginal`、`TorusOrbitEquidistribution.result` 与 `TorusObservationWindowReturns.result`（窗口取 h(x) = cos 2π(x − c) 落在开区间里的那段弧）。哈尔测度、CKW 单配性、对称 1 → M 克隆保真度 (2M + 1)/(3M)（第 31 章正文未写，页面补充的文献背景）、外尔等分布与 Hecke–Kesten 有界余项标 `ARGUED`；“公平”的诠释与把黄金旋转画成两个绕竖轴进动的态标 `MODEL`。关系场景走的态族 a|000⟩ + b|110⟩ + c|101⟩ + g|111⟩ 里的 W 型态是 |W⟩ 对 A 翻转一次，纠缠量与正文注记里的 |W⟩ 相同。
 
 `spherical-degeneracy-radar` 与 `two-angle-addressing` 的 `address`、`pole` 及 `berry-loop` 的 `octant` 分工：那几张讲从北极出发的两角寻址、极点的方位角冗余与八分球回路的面积和相位，本页讲第三十四章的“读不出差别的观察者在哪里”：琥珀色是观察者探针 O 与它的轴，青色是两个结果落在观察者轴上的影子（读数）与青色虚线的盲圈（读数相同的观察者所在的大圆），淡青色是走过的盲圈，品红是第二次转动扫过的横向面、两个结果之差与两面小旗的夹角，紫色是极轴 ±e₃ 与差旋子 D 的小盘；实心点是一次（一步）的结果，空心圈是两次（两步）的结果。旋子按该章算例在 Cl(3,0) 里逐项相乘：R₁ = (1 − e₁e₃)/√2，R₂ = ((1 − e₂e₃)/√2)((1 − e₁e₂)/√2) = exp(−π/4 e₁e₂) R₁（左乘），两者都把 +e₁ 送到 +e₃。绿色框只给第三十四章用 `lean=` 引用的三条：`unit_perpendicular_pair`（与两根差向量都正交的单位向量）、`partition_inseparable_iff_kernel`（读数相同即同一纤维）与 `covariant_commutator_formula`（D 与 e₃ 对易、与 e₁ 不对易）；“简并处反演出观察者站位”标 `MODEL`；Berry—Pancharatnam 相位与虚拟 Z 门标 `ARGUED`，页面不计算；旋子乘积、读数与盲圈实算（`NUM`）。路线图候选的赤道反射轴族、`chirality`、`virtual_z` 未做：正文没有反射轴族的句子，后两者分别是 `berry-loop` 的 `reverse` 与 `pulse-area-virtual-z` 的 `vz`。
+
+`dream-decoherence-unpinning` 与 `double-slit-marker` 的 `erase`、`delayed`，`erasure-ledger` 的 `pinch`，`bloch-noise` 的 `dephase` 分工：那几张讲双缝路径标记的读法、捏合的熵账与布洛赫球上的退相干，本页讲第三十七章的“锚点剪掉位置之间的相干”。舞台是一张密度矩阵方格（方块面积是 |ρᵢⱼ|，方块里的短线指向相位，虚线框是出发时的大小）与它在远场屏上留下的亮度（青色虚线只由对角给出，青色填色是锚点块里的相干添上的条纹，品红填色是其余相干添上的条纹，灰色虚线是出发时的屏）。青色是对角与块里的格（留下的），品红是跨块的格、被记录作用的 ρ₀₁ 与醒来时淡出的格（被剪掉、逃出去的），灰框是锚点的块，琥珀只给这一步作用的那份记录与醒来时读出的那一格。三个场景：锚点（四个位置 x₀…x₃、x₀ 是躯体，ρ(λ) = (1 − λ)|Ψ⟩⟨Ψ| + λ Σₖ PₖΨΨ*Pₖ，投影族“逐个位置”或“躯体 | 其余”）、记录（等幅叠加上两份重叠 c = |c|e^{−iφ} 的记录，写入乘 c、逆转乘 c̄）、醒来（P₀ = |x₀⟩⟨x₀| 的读出，遗忘权重 1 − Tr(P₀ρ) 与 λ 无关）。绿色框只给第三十七章用 `lean=` 引用、且落在舞台上的六条：`finite_record_pinching_idempotent`、`unreadState_fixed_iff`、`entropy_production_coherence_deletion_identity`（只在“逐个位置”即按基捏合、λ = 1 时）、`pinching_discarded_coherence_mass`（记录场景的相干质量）、`joint_coherent_reversal`（写明前提 |c|² = 1）与 `two_copy_joint_reversal_certificate`；|c| < 1 与 c = 0 的结果、本征值与熵标 `NUM`；Scully–Drühl 量子擦除、环境诱导退相干、预测加工与快速眼动睡眠标 `ARGUED`；“梦境卸下躯体先验”“醒来”“多位置涌现”的读法与远场屏标 `MODEL`。本章的黄金切投与德洛内定理不在本页。路线图候选的 `waking_beam` 改名 `waking`（捏合不把态剪成一点，剪成一点的是醒来的读出）；`multi_locus` 并入 `wake_snap`（读出前的四处相干、读出后只剩一格）；另加 `blocks`（块捏合的不动点）与 `half_erase`（证书的 −i/2）；候选的 `unread_post_measurement_fixed_iff_commutes`、`pinching_vonNeumannEntropy_ge` 本章正文未用 `lean=` 引用，不标绿（捏合不减熵只在测试里核对）。
 
 ## 正文里的引用（中英文版本位置与卡名相同）
 
@@ -370,6 +373,14 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十四章 | 该例之后的定位箴言段之后、第三节之前 | `spherical-degeneracy-radar` · `frames` |
 | 第三十四章 | 文献注记 `rem-ch34-virtual-z-berry-relativity-literature` 之后 | `berry-loop` · `octant` |
 | 第三十四章 | 四阶总表之后的“凡简并处”一段之后 | `spherical-degeneracy-radar` 完整实验室 |
+| 第三十七章 | §37.1 “坚硬 / 狭窄与疲惫”列表之后、定理 `thm-ch37-known-data-pinching-and-entropy-tax` 的引言之前 | `dream-decoherence-unpinning` · `waking` |
+| 第三十七章 | 该定理的证明之后、§37.2 之前 | `dream-decoherence-unpinning` · `blocks` |
+| 第三十七章 | §37.2 双副本相位账本公式之后、定理 `thm-ch37-joint-coherent-record-erasure` 的引言之前 | `dream-decoherence-unpinning` · `half_erase` |
+| 第三十七章 | 定理 `thm-ch37-joint-coherent-record-erasure` 的证明之后 | `dream-decoherence-unpinning` · `zero_overlap_fail` |
+| 第三十七章 | “第 2 款把梦境深浅……”一段之后、§37.3 之前 | `dream-decoherence-unpinning` · `quantum_eraser` |
+| 第三十七章 | §37.3 “如果像朴素机械论所断言……”一段之后、“可事实恰恰相反”之前 | `dream-decoherence-unpinning` · `unpin_body` |
+| 第三十七章 | §37.4 “由此可见……”一段之后、总表引言之前 | `dream-decoherence-unpinning` · `wake_snap` |
+| 第三十七章 | “凝视……”一段之后、转入第三十八章一段之前 | `dream-decoherence-unpinning` 完整实验室 |
 | 终章 | 空间吸引子 · 一 末 | `spatial-attractor-deja-vu` · `butterfly` |
 | 终章 | 空间吸引子 · 二 “内禀几何参数”列表之后 | `spatial-attractor-deja-vu` · `fixed`、`cycle` |
 | 终章 | 空间吸引子 · 二 末（文献注记 `rem-coda-lorenz-srb-literature` 之后） | `spatial-attractor-deja-vu` · `forget`、`dimension` |
