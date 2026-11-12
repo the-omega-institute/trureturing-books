@@ -263,8 +263,8 @@
       "code": "ORTHO//CAUSAL",
       "title": "没有时间的必然 · 格拉姆窗口、书页、场与线",
       "title_en": "Necessity without time · the Gram window, a book of pages, a field and a thread",
-      "summary": "同一颗球上的四个场景。窗口：B 立在北极，A 与它夹角 θ₁，C 只能绕它转，于是 A·C = cos θ₁ cos θ₂ + sin θ₁ sin θ₂ cos φ 只能落在 [cos(θ₁ + θ₂), cos(θ₁ − θ₂)] 里；det G 是三根向量撑开的体积的平方，贴上窗边时三者共面、体积为零，窗外 det G 为负，没有向量能实现。书页：有限时钟上所有页同时画在球上，整本书在“拨一格”之下不变，条件化才取出读头下的那一页。场：势能 V = 1 − cos α 的梯度流从任何地方都流向目标，降下的势能等于走过的耗散。线：在 N = 2ⁿ 个候选里找一个目标，振幅放大每步只转 2θ，约 (π/4)√N 步到达。把它们读作“选择”“书页”“场”与“线”是本书终章的诠释。",
-      "summary_en": "Four scenes on one sphere. The window: B stands at the north pole, A makes the angle θ₁ with it and C can only go around it, so A·C = cos θ₁ cos θ₂ + sin θ₁ sin θ₂ cos φ can only fall in [cos(θ₁ + θ₂), cos(θ₁ − θ₂)]; det G is the squared volume the three vectors span, zero at the edges of the window where they are coplanar and negative outside, where no vectors exist. The pages: on a finite clock all pages are drawn on the sphere at once, the whole book is unchanged by a tick, and conditioning picks the page under the reading head. The field: the gradient flow of V = 1 − cos α runs to the target from anywhere, and the potential it loses equals the dissipation it pays. The thread: to find one target among N = 2ⁿ candidates amplitude amplification turns only 2θ per step and arrives after about (π/4)√N steps. Reading these as “choice”, “pages”, “field” and “thread” is the interpretation of this book's coda.",
+      "summary": "同一颗球上的四个场景。窗口：B 立在北极，A 与它夹角 θ₁，C 只能绕它转，于是 A·C = cos θ₁ cos θ₂ + sin θ₁ sin θ₂ cos φ 只能落在 [cos(θ₁ + θ₂), cos(θ₁ − θ₂)] 里；det G 是三根向量撑开的体积的平方，贴上窗边时三者共面、体积为零，窗外 det G 为负，没有向量能实现。书页：有限时钟上所有页同时画在球上，整本书在“拨一格”之下不变，条件化才取出读头下的那一页。场：势能 V = 1 − cos α 的梯度流从任何地方都流向目标，降下的势能等于走过的耗散。线：在 N = 2ⁿ 个候选里找一个目标，振幅放大每步只转 2θ，约 (π/4)√N 步到达。阶：随机 2-SAT 公式的消解闭包停在两元子句，随机 3-XOR / 3-SAT 的平方和松弛在阶 o(n) 内仍相容（文献结果，直线斜率为示意）。荒野：同一个自治场里，见证丝 y = h(x) 是精确的不变曲线，丝上的探针直达目标，通道外出发的探针被涡旋卷住（示意模型）。把它们读作“选择”“书页”“场”“线”与“见证丝”是本书第 29、30 章的诠释；图灵机意义下的 P ≠ NP 仍是开放问题，本页不推出它的任何答案。",
+      "summary_en": "Four scenes on one sphere. The window: B stands at the north pole, A makes the angle θ₁ with it and C can only go around it, so A·C = cos θ₁ cos θ₂ + sin θ₁ sin θ₂ cos φ can only fall in [cos(θ₁ + θ₂), cos(θ₁ − θ₂)]; det G is the squared volume the three vectors span, zero at the edges of the window where they are coplanar and negative outside, where no vectors exist. The pages: on a finite clock all pages are drawn on the sphere at once, the whole book is unchanged by a tick, and conditioning picks the page under the reading head. The field: the gradient flow of V = 1 − cos α runs to the target from anywhere, and the potential it loses equals the dissipation it pays. The thread: to find one target among N = 2ⁿ candidates amplitude amplification turns only 2θ per step and arrives after about (π/4)√N steps. The order: the resolution closure of random 2-SAT formulas stays at two-literal clauses, while sum-of-squares relaxations of random 3-XOR / 3-SAT stay consistent up to order o(n) (a literature result; the slope of the line is schematic). The wilderness: in one autonomous field the witness thread y = h(x) is an exact invariant curve, the probe on it runs to the target, and probes started outside the channel are caught by vortices (a schematic model). Reading these as “choice”, “pages”, “field”, “thread” and “witness thread” is the interpretation of chapters 29 and 30 of this book; P ≠ NP in the sense of Turing machines remains open, and the page settles nothing about it.",
       "path": "timeless-causal-crystal/",
       "thumbnail": "timeless-causal-crystal/thumb.jpg",
       "status": "live",
@@ -276,7 +276,10 @@
         "梯度流",
         "振幅放大",
         "P 是场，NP 是线",
-        "第 29 章"
+        "平方和松弛",
+        "见证丝",
+        "第 29 章",
+        "第 30 章"
       ],
       "tags_en": [
         "Gram window",
@@ -285,7 +288,10 @@
         "gradient flow",
         "amplitude amplification",
         "P is a field, NP is a line",
-        "chapter 29"
+        "sum of squares",
+        "witness thread",
+        "chapter 29",
+        "chapter 30"
       ],
       "theory": [
         {
