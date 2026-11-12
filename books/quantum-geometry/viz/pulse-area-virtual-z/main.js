@@ -128,6 +128,9 @@
   /** X, Y, −X or −Y when the phase points along one of them, else null. */
   const axisName = (d) => { const x = nrm(d), k = Math.round(x); return Math.abs(x - k) < 1e-9 && AXES[String(k)] ? AXES[String(k)] : null; };
   const fmtNs = (t) => `${fix(t, t < 2 ? 2 : 1)} ns`;
+  /** The angle between two Bloch vectors in degrees, atan2(|a × b|, a · b): accurate near 0° and near 180° alike. */
+  const sepDeg = (a, b) => Math.atan2(v3.len(v3.cross(a, b)), v3.dot(a, b)) / DEG;
+  const fmtP0 = (r) => fix((1 + r[2]) / 2, 4);
   const shapeName = (s) => (s === 'gauss' ? L('高斯波', 'Gaussian') : L('方波', 'Square'));
   const face = (f) => (f === 'body' ? TRV.fonts.body : TRV.fonts.data);
   function text(ctx, str, x, y, color, o) {
@@ -349,15 +352,24 @@
   };
   function drawText(now, C) {
     const pr = C.main, end = pr.end, area = pr.pulses.reduce((s, p) => s + p.A * SHAPES[p.shape].cum(p.T, p.T), 0), ang = qangle(now.q), P0 = (1 + now.r[2]) / 2;
-    const leg = [['mg box', '包络下的面积 = 转过的角', 'area under the envelope = angle turned'], ['vi', '转轴', 'the axis'], ['am', '当前的态', 'the current state'], ['cy', '在 Z 轴上的影子：P(0)', 'shadow on the Z axis: P(0)']];
+    // area = angle holds pulse by pulse only at resonance (each pulse a turn about its own fixed equatorial axis)
+    const leg = [S.det === 0 ? ['mg box', '包络下的面积 = 每个脉冲转过的角', 'area under the envelope = angle each pulse turns'] : ['mg box', '包络下的面积', 'area under the envelope'], ['vi', '转轴', 'the axis'], ['am', '当前的态', 'the current state'], ['cy', '在 Z 轴上的影子：P(0)', 'shadow on the Z axis: P(0)']];
     if (C.kind) leg.push(['dash', GHOST_WORDS[C.kind][0], GHOST_WORDS[C.kind][1]]);
     const html = leg.map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
     if ($('legend')._h !== html) { $('legend').innerHTML = html; $('legend')._h = html; }
     const noDrive = area < 1e-12;
+    // the HUD equates the area swept with the angle turned only while a single resonant pulse has acted so far: no
+    // detuning, and no second pulse begun, whatever its phase (the angle shown is the principal angle of the propagator)
+    const oneAxis = S.det === 0 && (!S.two || now.t <= S.T + 1e-9);
+    const onPole = Math.hypot(S.r0[0], S.r0[1]) < 1e-9;
     $('hudBig').textContent = noDrive ? L('没有驱动', 'No drive') : `${S.two ? '2 × ' : ''}${shapeName(S.shape)} · ${S.two ? '2 × ' : ''}${fmtPi(S.area)}`;
     let sub = `t = ${fmtNs(now.t)} / ${fmtNs(end)}`;
-    if (noDrive) sub += S.frame === 'lab' ? L(` · 赤道上的态转了 ${fix(now.t * W0 / TAU, 2)} 圈`, ` · the equator has turned ${fix(now.t * W0 / TAU, 2)} times`) : L(' · 旋转系里一动不动', ' · nothing moves in the rotating frame');
-    else if (S.det !== 0) sub += L(` · 面积 ${fmtPi(now.area)}，转角 ${fmtPi(ang)}`, ` · area ${fmtPi(now.area)}, angle ${fmtPi(ang)}`);
+    if (noDrive) {
+      if (S.frame === 'lab') sub += L(` · 赤道上的态转了 ${fix(now.t * W0 / TAU, 2)} 圈`, ` · the equator has turned ${fix(now.t * W0 / TAU, 2)} times`);
+      else if (S.det === 0) sub += L(' · 共振：旋转系里一动不动', ' · on resonance: nothing moves in the rotating frame');
+      else if (onPole) sub += L(' · 失谐，但态在极点上：不动', ' · detuned, but the state sits on a pole: it stays');
+      else sub += L(` · 失谐 ${fix(S.det, 1)} MHz：旋转系里绕 z 轴进动`, ` · detuned ${fix(S.det, 1)} MHz: it precesses about z in the rotating frame`);
+    } else if (!oneAxis) sub += L(` · 面积 ${fmtPi(now.area)}，转角 ${fmtPi(ang)}`, ` · area ${fmtPi(now.area)}, angle ${fmtPi(ang)}`);
     else sub += L(` · 扫过面积 ${fmtPi(now.area)} = 转过 ${fix(now.area / DEG, 1)}°`, ` · area swept ${fmtPi(now.area)} = ${fix(now.area / DEG, 1)}° turned`);
     if (Math.abs(S.lam) > 1e-9) sub += L(` · Z(${fmtDeg(S.lam)}) 用时 0 ns`, ` · Z(${fmtDeg(S.lam)}) takes 0 ns`);
     $('hudSub').textContent = sub;
@@ -369,11 +381,59 @@
     $('roTime').textContent = `${fmtNs(end)}` + (Math.abs(S.lam) > 1e-9 ? L(' · 其中 Z：0 ns', ' · of which Z: 0 ns') : '');
     $('roAside').textContent = S.frame === 'lab' ? L('实验室系', 'lab frame') : L('旋转系', 'rotating frame');
     let note;
-    if (noDrive) note = L('没有驱动时，旋转系里什么都不动；实验室系里赤道上的态绕 z 轴每 0.2 ns 转一圈，两极（白点）不动。', 'With no drive nothing moves in the rotating frame; in the lab frame a state on the equator goes round z every 0.2 ns, and the poles (white dots) stay put.');
-    else if (C.kind === 'lam') note = S.sign > 0 ? L(`实线与虚线终点高度相同：P(0) 一样，只差绕 z 的 ${fmtDeg(S.lam)}。`, `The solid and dashed ends have the same height: the same P(0), only ${fmtDeg(S.lam)} apart about z.`) : L('相位改错了符号：实线的终点高度与虚线不同，读数变了。', 'The phase shift has the wrong sign: the solid end sits at another height, and the readout changes.');
-    else if (C.kind === 'two') note = L('两个同面积的脉冲，换个次序，终点不同：绕不同轴的转动不对易。', 'Two pulses of the same area end elsewhere when swapped: turns about different axes do not commute.');
-    else if (C.kind === 'det') note = L(`失谐时转轴随包络晃动：面积还是 ${fmtPi(area)}，终点离虚线 ${fix(Math.acos(clamp(v3.dot(evaluate(pr, end).r, evaluate(C.ghost, end).r), -1, 1)) / DEG, 1)}°。`, `Detuned, the axis sways with the envelope: the area is still ${fmtPi(area)}, yet the end lies ${fix(Math.acos(clamp(v3.dot(evaluate(pr, end).r, evaluate(C.ghost, end).r), -1, 1)) / DEG, 1)}° from the dashed one.`);
-    else note = L(`面积 ${fmtPi(area)} 转 ${fix(area / DEG, 1)}°；包络的形状不改变终点。`, `An area of ${fmtPi(area)} turns ${fix(area / DEG, 1)}°; the shape of the envelope does not change the end point.`);
+    if (noDrive) note = S.det === 0
+      ? L('没有驱动，只剩 H₀ 的自由演化：共振的旋转系里什么都不动；实验室系里赤道上的态绕 z 轴每 0.2 ns 转一圈，两极（白点）不动。', 'With no drive only the free evolution by H₀ is left: on resonance nothing moves in the rotating frame; in the lab frame a state on the equator goes round z every 0.2 ns, and the poles (white dots) stay put.')
+      : L(`没有驱动，只剩 H₀ 的自由演化：实验室系里赤道上的态绕 z 轴每 0.2 ns 转一圈，两极（白点）不动；旋转系跟着 ω_d 转，与 ω₀ 差了 Δ，所以旋转系里的态仍绕 z 轴进动，每 ${fix(1000 / Math.abs(S.det), 0)} ns 一圈，只有两极不动。`, `With no drive only the free evolution by H₀ is left: in the lab frame a state on the equator goes round z every 0.2 ns, and the poles (white dots) stay put; the rotating frame turns at ω_d, Δ away from ω₀, so a state there still precesses about z, once every ${fix(1000 / Math.abs(S.det), 0)} ns, and only the poles stay put.`);
+    else {
+      // Every comparison below is read off the model at the end of the whole program, whatever the rail's time, and
+      // labelled so; it reports the measured angle between the two ends and both P(0), and claims sameness or a
+      // difference only from those numbers (to the precision shown) or from an exact identity, never from the phases
+      // alone. The numbers are rotating-frame ones (the frame of the area law and of the comparisons).
+      const mEnd = evaluate(pr, end).r, gEnd = C.ghost ? evaluate(C.ghost, end).r : null;
+      const gap = gEnd ? fix(sepDeg(mEnd, gEnd), 1) : '', apart = !!gEnd && Number(gap) !== 0, lab = S.frame === 'lab';
+      const at = L(`全程终点（t = ${fmtNs(end)}${lab ? '，旋转系' : ''}）`, `Full-program end${gEnd ? 's' : ''} (t = ${fmtNs(end)}${lab ? ', rotating frame' : ''})`);
+      const tag = { det: ['（不失谐）', ' (undetuned)'], gauss: ['（同面积方波）', ' (a square pulse of the same area)'] }[C.kind] || [' ', ''];
+      const pair = gEnd ? L(`${at}：实线 P(0) = ${fmtP0(mEnd)}，虚线${tag[0]}P(0) = ${fmtP0(gEnd)}，相距 ${gap}°`, `${at}: solid P(0) = ${fmtP0(mEnd)}, dashed${tag[1]} P(0) = ${fmtP0(gEnd)}, ${gap}° apart`) : '';
+      if (C.kind === 'lam') {
+        // conjugation by R_z(λ) turns the drive's phase by λ and leaves ΔZ alone, so the axial identity holds for any
+        // envelope and detuning: with the phase sent at φ − λ the literal end is the hardware end turned by λ about z
+        const lz = fmtDeg(S.lam), exact = S.sign > 0 || Math.abs(nrm(2 * S.lam)) < 1e-9;
+        if (exact) note = L(`${S.sign < 0 ? `λ = ${lz} 时 φ + λ 与 φ − λ 是同一个相位，这里符号无关。` : ''}实线只发相位 φ − λ 的脉冲，虚线照字面先做 Z(${lz}) 再按 φ 发脉冲：把实线的终点绕 z 轴转 ${lz} 就得到虚线的终点（落在 z 轴上的终点不动），所以两者高度相同。${pair}。`,
+          `${S.sign < 0 ? `At λ = ${lz}, φ + λ and φ − λ are the same phase, so the sign makes no difference here. ` : ''}The solid path sends only the pulse at φ − λ; the dashed one takes the circuit literally, Z(${lz}) and then the pulse at φ. Turning the solid end by ${lz} about z gives the dashed end (an end on the z axis stays where it is), so the two have the same height. ${pair}.`);
+        else {
+          const v = fmtP0(mEnd) !== fmtP0(gEnd) ? ['：读数变了。', ': the readout changes.']
+            : apart ? ['：读数在四位小数上相同，终点却不是同一点。', ': the readouts agree to four decimals, but the ends are not the same point.']
+              : ['：在这个精度上两个终点相同。', ': to this precision the two ends coincide.'];
+          note = L(`相位改错了符号（φ + λ）：轴向共轭恒等式不再把实线和虚线联系起来，终点只能逐个比较。${pair}${v[0]}`, `The phase shift has the wrong sign (φ + λ): the axial identity no longer ties the solid path to the dashed one, so the ends can only be compared directly. ${pair}${v[1]}`);
+        }
+      } else if (C.kind === 'two') {
+        // different end points from the same start prove that the two propagators do not commute; equal ones prove nothing
+        note = (nrm(S.phi - S.phi2) === 0 ? L(`两个脉冲完全相同，换个次序还是同一个程序。${pair}。`, `The two pulses are identical, so swapping them gives the same program. ${pair}.`)
+          : apart ? L(`两个脉冲换个次序，终点不同，所以这两个转动不对易。${pair}。`, `Swapped, the two pulses end at different points, so the two turns do not commute. ${pair}.`)
+            : L(`两个脉冲换个次序，在这个精度上终点相同。${pair}。`, `Swapped, the two pulses end at the same point to this precision. ${pair}.`))
+          + (S.det === 0 && nrm(S.phi - S.phi2) !== 0 ? L(`两个脉冲的面积合计 ${fmtPi(area)}，合成传播子的转角是 ${fmtPi(qangle(evaluate(pr, end).q))}。`, ` Their areas add up to ${fmtPi(area)}; the combined propagator turns by ${fmtPi(qangle(evaluate(pr, end).q))}.`) : '');
+      } else if (C.kind === 'det') {
+        // the generator is (Ω(t) cos φ, Ω(t) sin φ, Δ): a square envelope keeps it fixed, a Gaussian one turns it from z
+        // (the ends, where Ω = 0) to its smallest tilt at the peak and back
+        const p = pr.pulses[0], dz = fix(S.det, 1);
+        if (p.shape === 'square') {
+          const ax = v3.unit([p.A * Math.cos(p.phi), p.A * Math.sin(p.phi), p.det]), axs = `(${ax.map((x) => fix(x, 2)).join(', ')})`, tilt = fix(Math.asin(clamp(ax[2], -1, 1)) / DEG, 1);
+          note = L(`失谐 ${dz} MHz 的方波：振幅不变，所以旋转系里整段脉冲的转轴固定为 ${axs}，倾出赤道 ${tilt}°；面积还是 ${fmtPi(area)}。${pair}。`,
+            `A square pulse detuned by ${dz} MHz: the amplitude is constant, so in the rotating frame the axis stays at ${axs} for the whole pulse, ${tilt}° off the equator; the area is still ${fmtPi(area)}. ${pair}.`);
+        } else {
+          const tilt = fix(Math.asin(p.det / Math.hypot(p.A, p.det)) / DEG, 1), pole = p.det > 0 ? '+z' : `${MINUS}z`;
+          note = L(`失谐 ${dz} MHz 的高斯包络：旋转系里的转轴随包络变化，峰值处倾出赤道 ${tilt}°，两端 Ω = 0 处竖直，沿 ${pole}；面积还是 ${fmtPi(area)}。${pair}。`,
+            `A Gaussian envelope detuned by ${dz} MHz: in the rotating frame the axis changes with the envelope, ${tilt}° off the equator at the peak and vertical, along ${pole}, at the two ends where Ω = 0; the area is still ${fmtPi(area)}. ${pair}.`);
+        }
+      } else {
+        // one resonant pulse (square, or Gaussian against the square of the same area): the area is the propagator's
+        // angle; how far a given state moves on the sphere depends on its distance from the axis
+        const from = fix(sepDeg(pr.r0, mEnd), 1);
+        note = L(`面积 ${fmtPi(area)} 是传播子的转角：旋转系里态绕转轴转过 ${fix(area / DEG, 1)}°，它在球面上走多远却取决于起点（起点在转轴上就不动）。`, `The area ${fmtPi(area)} is the angle of the propagator: in the rotating frame the state turns ${fix(area / DEG, 1)}° about the axis, but how far it moves on the sphere depends on where it starts (a start on the axis stays put). `)
+          + (gEnd ? L(`${pair}；实线离起点 ${from}°。`, `${pair}; the solid end is ${from}° from the start.`)
+            : L(`${at}：P(0) = ${fmtP0(mEnd)}（起点 ${fmtP0(pr.r0)}），离起点 ${from}°。`, `${at}: P(0) = ${fmtP0(mEnd)} (start ${fmtP0(pr.r0)}), ${from}° from the start.`));
+      }
+    }
     $('roNote').textContent = note;
     $('pillArea').querySelector('strong').textContent = fmtPi(now.area);
     $('pillTime').querySelector('strong').textContent = fmtNs(end);

@@ -149,7 +149,7 @@ Since $\mathrm{energy} > 0$ and $\hbar > 0$, multiplying both sides by $\frac{\h
 The $\mathrm{energy}$ of the theorem is an abstract speed parameter. Replacing it by the energy fluctuation of a concrete Hamiltonian shows when the bound is attained, when it is not, and how long a real qubit takes to cross the wall once.
 
 ::: {.viz src="speed-limit-zeno" preset="equal" height="500"}
-**Two even levels: the angle runs along the speed line into the wall.** On the left two cyan arrows of length one half; when they point opposite ways their sum vanishes and the amber dot falls into the magenta centre. On the right the cyan angle curve runs along the dashed speed line $\Delta H\,t/\hbar$ all the way and meets the magenta $90^\circ$ wall at $t = \pi\hbar/E$. The half-way point splits it into $45^\circ + 45^\circ$, exactly the case in which [@thm-fubini-study-record-time] holds with equality ([@ex-orthogonalization-times]).
+**Two even levels: the angle runs along the speed line into the wall.** The frame stops just before the wall, at $t = 0.9\,\pi\hbar/E$: on the left two cyan arrows of length one half are about to point opposite ways and the amber dot is only $0.16$ from the magenta centre; once they are opposite their sum vanishes and the dot falls into the centre. On the right the cyan angle curve runs along the dashed speed line $\Delta H\,t/\hbar$, at $81^\circ$ now, and meets the magenta $90^\circ$ wall at $t = \pi\hbar/E$. The half-way point splits it into $45^\circ + 45^\circ$, exactly the case in which [@thm-fubini-study-record-time] holds with equality ([@ex-orthogonalization-times]).
 :::
 
 ::: {.example #ex-orthogonalization-times title="Working the Speed Limit Out: Attained for Two Levels, Not for Three, and Never Reached by an Unequal Superposition"}
@@ -236,7 +236,7 @@ In our line-and-area geometry, the mechanism is completely elementary: **over a 
 :::
 
 ::: {.viz src="speed-limit-zeno" preset="strobe16" height="500"}
-**Sixteen strobes: it hardly gets away.** The arrow is pulled back to $\lvert 0\rangle$ after every $11.25^\circ$: the magenta part, first order in the step, is cut off as soon as it shows, and the cyan shadow hardly shortens. On the right the cyan survival nearly fills the plot, with $0.857$ left at $180^\circ$; the dashed line is the unwatched path.
+**Sixteen strobes: it hardly gets away.** The arrow is pulled back to $\lvert 0\rangle$ after every $11.25^\circ$: the magenta part, first order in the step, is cut off as soon as it shows, and the cyan shadow hardly shortens. The frame stops half-way through the last turn: on the right the cyan survival nearly fills the plot, with $0.863$ left now and $0.857$ at the ring for $N = 16$ at the end; the dashed line is the unwatched path.
 :::
 
 ::: {.example #ex-zeno-strobe-freezing title="Analytical Formula and Numerical Ledger (N = 1, 4, 16, 64) for Stroboscopic Quantum Zeno Freezing"}
@@ -262,7 +262,7 @@ Evaluating $P_N(T)$ at $N = 1, 4, 16, 64$ shows how rapid inner-product polling 
 :::
 
 ::: {.viz src="speed-limit-zeno" preset="strobe4" height="500"}
-**Four strobes: half of it stays.** The arrow is pulled back after every $45^\circ$; the cyan arc is as far as each turn gets. On the right the chance to stay drops a step at each look and is $0.531$ at $180^\circ$, while the dashed unwatched path has lost everything by then. The ring marks are the end points for $N = 1, 16, 64$ ([@ex-zeno-strobe-freezing]).
+**Four strobes: half of it stays.** The arrow is pulled back after every $45^\circ$; the cyan arc is as far as each turn gets. The frame stops before the fourth look, with the arrow at the end of its turn: the magenta part off the line is $\sin 45^\circ \approx 0.71$ long, first order, while the cyan shadow is only $1 - \cos 45^\circ \approx 0.29$ shorter, second order. On the right the chance to stay drops a step at each look and is $0.531$ now, while the dashed unwatched path has lost everything by $180^\circ$. The ring marks are the end points for $N = 1, 16, 64$ ([@ex-zeno-strobe-freezing]).
 :::
 
 [@ex-zeno-strobe-freezing] follows only one branch: the one in which every probe answers "still in $\lvert 0\rangle$". The same stroboscopic detector can keep a second ledger. Start from the initial state $v$; after each unitary step $U$ ask "has it returned to $v$?". If the answer is yes, stop the clock; if no, the state is projected onto the orthogonal complement of $v$ and the next step begins. This yields two sequences of numbers: the probability of returning for the first time exactly at step $n$, and the probability of not having returned during the first $n$ steps. This ledger has a frozen Lean theorem, valid for every unitary evolution.

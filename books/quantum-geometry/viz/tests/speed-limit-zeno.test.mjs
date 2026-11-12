@@ -184,5 +184,42 @@ check('the rail sets t and the readouts follow', close(s.t, 1, 1e-9) && close(s.
 await page.click('[data-lang-set="en"]'); await pick('strobe4'); await finished();
 check('English: the HUD reads “Strobe N = 4”', (await page.textContent('#hudBig')).trim() === 'Strobe N = 4');
 
+// the stills that the chapters print: each card stops on the frame its caption describes
+const shot = await T.newPage();
+const still = async (id) => { await T.goto(BOOK, ID, `?shot=1&lang=zh&preset=${id}`, shot); await settle(shot); return shot.evaluate(() => window.ZENO_DEBUG.state); };
+s = await still('equal');
+const tE = s.t, ovE = Math.sqrt(cabs2(inner(psi(w2, 0), psi(w2, tE))));
+check('still EQUAL: stops before the wall, the two arrows apart (t = 0.9π, angle 81°, overlap 0.16)', close(tE, 0.9 * PI, 1e-9) && close(s.speed.theta, fsAngle(w2, tE), 1e-9)
+  && (fsAngle(w2, tE) / DEG).toFixed(0) === '81' && ovE.toFixed(2) === '0.16' && ovE > 0.05);
+check('still EQUAL: the HUD prints the angle 81.0°', (await shot.textContent('#hudSub')).includes(`${(fsAngle(w2, tE) / DEG).toFixed(1)}°`));
+s = await still('strobe4');
+{ // three looks answered yes, then the fourth turn of 45° completed: evolve the vector independently
+  let v = [[1, 0], [0, 0]];
+  for (let k = 0; k < 3; k++) { v = stepU(PI / 4, v); v = [v[0], [0, 0]]; }
+  v = stepU(PI / 4, v);
+  const n2 = cabs2(v[0]) + cabs2(v[1]), a = [v[0][0] / Math.sqrt(n2), v[0][1] / Math.sqrt(n2)], b = [v[1][0] / Math.sqrt(n2), v[1][1] / Math.sqrt(n2)];
+  const ab = cmul(conj(a), b), bz = cabs2(a) - cabs2(b), trans = Math.hypot(2 * ab[0], 2 * ab[1]);
+  check('still STROBE ×4: three looks done, the fourth turn of 45° complete, the fourth look not yet made', s.zeno.k === 3 && close(s.zeno.phi, PI / 4, 1e-6));
+  check('still STROBE ×4: survival now = |⟨0|ψ⟩|² of the evolved vector = 0.531', close(s.zeno.S, cabs2(v[0]), 1e-6) && cabs2(v[0]).toFixed(3) === '0.531');
+  check('still STROBE ×4: the magenta part off the line is sin 45° ≈ 0.71 and the shadow is 1 − cos 45° ≈ 0.29 short', close(Math.hypot(s.arrow[0], s.arrow[1]), trans, 1e-6) && trans.toFixed(2) === '0.71' && close(1 - s.arrow[2], 1 - bz, 1e-6) && (1 - bz).toFixed(2) === '0.29');
+  check('still STROBE ×4: the HUD prints 3 of 4 looks and the survival 0.5308', (await shot.textContent('#hudSub')).replace(/\s+/g, '').includes('3/4') && (await shot.textContent('#hudSub')).includes(cabs2(v[0]).toFixed(4)));
+}
+s = await still('strobe16');
+{
+  let v = [[1, 0], [0, 0]];
+  for (let k = 0; k < 15; k++) { v = stepU(PI / 16, v); v = [v[0], [0, 0]]; }
+  v = stepU(PI / 32, v);
+  check('still STROBE ×16: half-way through the last turn the survival is 0.863, the end ring 0.857', s.zeno.k === 15 && close(s.zeno.S, cabs2(v[0]), 1e-9) && cabs2(v[0]).toFixed(3) === '0.863' && strobeSurvival(16).toFixed(3) === '0.857');
+}
+s = await still('unequal');
+{ // the speed-line label must not sit on the dashed ceiling "at most 60.0°"
+  const boxes = await shot.evaluate(() => [...document.querySelectorAll('#stage .tag')].filter((t) => !t.hidden).map((t) => { const r = t.getBoundingClientRect(); return [t.textContent, r.left, r.top, r.right, r.bottom]; }));
+  const sl = boxes.find((b) => b[0].includes('速度线')), ceil = boxes.find((b) => b[0].includes('最多')), yc = await shot.evaluate(() => window.ZENO_DEBUG.chartY(60));
+  const hit = (p, q) => p[1] < q[3] && q[1] < p[3] && p[2] < q[4] && q[2] < p[4];
+  check('still UNEVEN: the speed-line label clears the dashed 60° ceiling and its label', sl && ceil && !hit(sl, ceil) && (sl[4] < yc - 2 || sl[2] > yc + 2), JSON.stringify([sl, ceil, yc]));
+}
+s = await still('mean');
+check('still RETURN: the legend says the cyan columns are returned and the sphere shows the arrow\'s shadow', /柱：已返回/.test(await shot.textContent('#legend')) && /球：箭头在线上的影子/.test(await shot.textContent('#legend')));
+
 check('no page error, console error or failed request (page-specific part)', T.errors.length === 0, T.errors.slice(0, 4).join(' | '));
 await T.finish();

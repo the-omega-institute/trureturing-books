@@ -4,12 +4,15 @@
 // Independent checks:
 //   growth  the suite re-runs the page's gate list with its own update rule (each new amplitude summed from the four
 //           amplitudes it mixes with), compares the states, builds ρ_A itself and checks the page's 16 eigenvalues
-//           through the power sums Tr ρ_A^k = Σ λ^k, k = 1 … 16 (which fix the spectrum); the cut bound and the gate
-//           counts are counted from the gate list.
+//           through the power sums Tr ρ_A^k = Σ λ^k, k = 1 … 16 (which fix the spectrum); it also finds the entropy of
+//           every layer on its own, from the squared singular values of the 16 × 16 amplitude matrix (one-sided Jacobi),
+//           and from those the onset layer, the entropy at the still and the late window that the notes and the
+//           chapter caption quote; the cut bound and the gate counts are counted from the gate list.
 //   depth   the suite builds circuit(N, S) as the chapter writes it (indices not in S descending, then those in S
 //           ascending), schedules it greedily (each gate one layer after the last earlier gate it shares a site with)
 //           and finds the minimum over |S| = κ by trying every S.
 // It reads the page through window.GROWTH_DEBUG.
+import { readFileSync } from 'node:fs';
 import { session, stageFirstChecks, settle, until } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'quantum-geometry', ID = 'complexity-growth';
@@ -66,6 +69,31 @@ function rhoA(st) {
 }
 const cmul = ([A, B], [C, D]) => { const n = 16, R = [], I = []; for (let i = 0; i < n; i++) { R.push(new Array(n).fill(0)); I.push(new Array(n).fill(0)); for (let k = 0; k < n; k++) { const ar = A[i][k], ai = B[i][k]; for (let j = 0; j < n; j++) { R[i][j] += ar * C[k][j] - ai * D[k][j]; I[i][j] += ar * D[k][j] + ai * C[k][j]; } } } return [R, I]; };
 const trace = ([R]) => R.reduce((s, r, i) => s + r[i], 0);
+/** Squared singular values of the amplitude matrix Ψ[a][b] = ψ(a + 16 b) (left four qubits = low bits), by one-sided
+    (Hestenes) Jacobi: rotate pairs of columns until all are orthogonal; the squared column norms are then the
+    eigenvalues of ρ_A = Ψ Ψ†. It never forms ρ_A and shares no step with the page's eigen-solver. */
+function schmidtWeights(st) {
+  const re = [], im = [];
+  for (let b = 0; b < 16; b++) { re.push(new Array(16)); im.push(new Array(16)); for (let a = 0; a < 16; a++) { re[b][a] = st.re[a + 16 * b]; im[b][a] = st.im[a + 16 * b]; } }
+  for (let sweep = 0; sweep < 80; sweep++) {
+    let rotated = false;
+    for (let i = 0; i < 16; i++) for (let j = i + 1; j < 16; j++) {
+      let al = 0, be = 0, gr = 0, gi = 0;
+      for (let k = 0; k < 16; k++) { al += re[i][k] ** 2 + im[i][k] ** 2; be += re[j][k] ** 2 + im[j][k] ** 2; gr += re[i][k] * re[j][k] + im[i][k] * im[j][k]; gi += re[i][k] * im[j][k] - im[i][k] * re[j][k]; }
+      const g = Math.hypot(gr, gi);
+      if (g <= 1e-15 * Math.sqrt(al * be) || g < 1e-300) continue;
+      rotated = true;
+      const z = (be - al) / (2 * g), t = (z >= 0 ? 1 : -1) / (Math.abs(z) + Math.sqrt(1 + z * z)), c = 1 / Math.sqrt(1 + t * t), s = c * t, pr = gr / g, pi = -gi / g;
+      for (let k = 0; k < 16; k++) {
+        const vr = re[j][k] * pr - im[j][k] * pi, vi = re[j][k] * pi + im[j][k] * pr;   // column j times e^{−iφ}
+        const ur = re[i][k], ui = im[i][k];
+        re[i][k] = c * ur - s * vr; im[i][k] = c * ui - s * vi; re[j][k] = s * ur + c * vr; im[j][k] = s * ui + c * vi;
+      }
+    }
+    if (!rotated) break;
+  }
+  return re.map((col, b) => col.reduce((acc, v, k) => acc + v * v + im[b][k] ** 2, 0)).sort((x, y) => y - x);
+}
 
 /* ---------- the gates every stage-first page must pass ---------- */
 await stageFirstChecks(T, BOOK, ID);
@@ -103,18 +131,40 @@ check('the page\'s 16 eigenvalues match Tr ρ_A^k for k = 1 … 16 at five layer
 const H = (sp) => sp.reduce((a, l) => (l > 1e-15 ? a - l * Math.log2(l) : a), 0);
 check('the entropy curve is −Σ λ log₂ λ of those eigenvalues at every layer', run.entropy.every((v, t) => close(v, H(run.spectra[t]), 1e-9)));
 check('the entropy never passes min(2 × gates across the cut, 4 bits) — the grey staircase and the white line', run.entropy.every((v, t) => v <= Math.min(2 * run.cross[t], 4) + 1e-9));
+// the entropy of every layer, found here from the suite's own states without the page's eigenvalues
+const ownS = states.map((st) => H(schmidtWeights(st)));
+const ownWorst = ownS.reduce((w, v, t) => Math.max(w, Math.abs(v - run.entropy[t])), 0);
+check('the entropy of all 91 layers, from the suite\'s own states by one-sided Jacobi on the amplitude matrix, equals the page\'s', ownWorst < 1e-9, String(ownWorst));
 
-// ENTROPY CAPS
-const tail = run.entropy.slice(40), mean = tail.reduce((a, b) => a + b, 0) / tail.length, lo = Math.min(...tail), hi = Math.max(...tail);
-let t0 = 0; while (t0 < 90 && run.entropy[t0] < mean - 0.25) t0++;
+// ENTROPY CAPS: three different things — the onset layer, the entropy at the still (layer 14), the late window 40–90
+const FROM = 40, tail = ownS.slice(FROM), mean = tail.reduce((a, b) => a + b, 0) / tail.length, lo = Math.min(...tail), hi = Math.max(...tail);
+let t0 = 0; while (t0 < 90 && ownS[t0] < mean - 0.25) t0++;
+const f2 = (x) => x.toFixed(2), sOn = f2(ownS[t0]), sStill = f2(ownS[14]), win = [f2(lo), f2(hi)];
 await pick('saturate');
 check('ENTROPY CAPS plays by itself', await plays());
 check('ENTROPY CAPS stops at layer 14', await stopped('saturate'));
 s = await state();
-check('ENTROPY CAPS: settles at the layer the note names, inside the band it names, with 49 gates at layer 14', s.growth.late.t0 === t0 && close(s.growth.late.min, lo) && close(s.growth.late.max, hi) && t0 <= 14 && s.growth.gates === 49 && run.entropy[14] >= lo - 0.3, `t0 ${t0}, band ${lo.toFixed(2)}–${hi.toFixed(2)}`);
-check('ENTROPY CAPS: the settled band is under 4 bits and well above half of it', hi < 4 && lo > 3);
-const note = await page.textContent('#presetNote');
-check('ENTROPY CAPS: the note quotes the band and the gate count', note.includes(lo.toFixed(2)) && note.includes(hi.toFixed(2)) && note.includes('49'));
+check('ENTROPY CAPS: the page\'s onset layer and late window (layers 40–90) are the ones found here, with 49 gates at layer 14', s.growth.late.from === FROM && s.growth.late.t0 === t0 && close(s.growth.late.min, lo) && close(s.growth.late.max, hi) && close(s.growth.late.mean, mean) && t0 === 13 && s.growth.layer === 14 && close(s.growth.entropy, ownS[14]) && s.growth.gates === 49, `t0 ${t0}, window ${win.join('–')}`);
+check('ENTROPY CAPS: at the onset (layer 13) and at the still (layer 14) the entropy is 3.14 bits, below the late window 3.18–3.36: the window does not start at the onset', sOn === '3.14' && sStill === '3.14' && close(ownS[13], ownS[14], 1e-9) && ownS[13] < lo && ownS[14] < lo && win.join('–') === '3.18–3.36' && hi < 4 && lo > 3, `${ownS[13]} ${ownS[14]} ${lo} ${hi}`);
+const notesAt = async () => ({ preset: await page.textContent('#presetNote'), ro: await page.textContent('#roNote') });
+const zhNotes = await notesAt();
+await page.click('[data-lang-set="en"]'); await settle(page);
+const enNotes = await notesAt();
+await page.click('[data-lang-set="zh"]'); await settle(page);
+check('ENTROPY CAPS (zh): the note gives 3.14 bits at layers 13 and 14, the gate count 49, and 3.18–3.36 only for layers 40–90', zhNotes.preset.includes(`第 ${t0} 层升到 ${sOn} 比特`) && zhNotes.preset.includes(`第 14 层仍是 ${sStill}`) && zhNotes.preset.includes('49') && zhNotes.preset.includes(`第 ${FROM}–90 层）在 ${win[0]}–${win[1]} 比特之间`) && !/13 层前后停在/.test(zhNotes.preset), zhNotes.preset);
+check('ENTROPY CAPS (en): the same three facts', enNotes.preset.includes(`reaches ${sOn} bits at layer ${t0}`) && enNotes.preset.includes(`still ${sStill} at layer 14`) && enNotes.preset.includes('49') && enNotes.preset.includes(`(layers ${FROM}–90) wanders between ${win[0]} and ${win[1]} bits`) && !/settles between/.test(enNotes.preset), enNotes.preset);
+check('ENTROPY CAPS: the readout at layer 14 gives the current entropy and names the late window (both languages)', zhNotes.ro.includes(`熵已到 ${sStill} 比特（第 ${FROM}–90 层在 ${win[0]}–${win[1]} 比特之间起伏）`) && enNotes.ro.includes(`The entropy is at ${sStill} bits (layers ${FROM}–90 wander between ${win[0]} and ${win[1]} bits)`), JSON.stringify([zhNotes.ro, enNotes.ro]));
+let roOK = true, roBad = '';
+for (const t of [5, 12, 13, 20, 50, 73]) {
+  await seek(t); const ro = await page.textContent('#roNote');
+  const ok = t < t0 ? /熵还在爬/.test(ro) : ro.includes(`熵已到 ${f2(ownS[t])} 比特`) && ro.includes(`第 ${FROM}–90 层`);
+  if (!ok) { roOK = false; roBad = `${t}: ${ro}`; }
+}
+check('the readout note reports the entropy of the layer it is on, and the window only as layers 40–90', roOK, roBad);
+const caption = (lang) => { const md = readFileSync(new URL(`../../${lang}/ch20-complexity-and-spacetime.md`, import.meta.url), 'utf8'); const i = md.indexOf('::: {.viz src="complexity-growth" preset="saturate"'); return i < 0 ? '' : md.slice(i, md.indexOf('\n:::', i + 3)); };
+const capZh = caption('zh'), capEn = caption('en');
+check('chapter 20 caption of ENTROPY CAPS (zh) matches: 3.14 at layers 13 and 14, 3.18–3.36 for layers 40–90, 49 gates', capZh.includes(`第 ${t0} 层升到 ${sOn} 比特，第 14 层仍是 ${sStill}`) && capZh.includes(`第 ${FROM}–90 层）在 ${win[0]}–${win[1]} 比特之间`) && capZh.includes('49') && !/13 层前后停在/.test(capZh), capZh.slice(0, 200));
+check('…and in English', capEn.includes(`reaches ${sOn} bits at layer ${t0} and is still ${sStill} at layer 14`) && capEn.includes(`(layers ${FROM}–90) wanders between ${win[0]} and ${win[1]} bits`) && capEn.includes('49') && !/settles between/.test(capEn), capEn.slice(0, 200));
 
 // 2^N CEILING
 await pick('ceiling');

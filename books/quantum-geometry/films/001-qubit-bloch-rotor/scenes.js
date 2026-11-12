@@ -1,4 +1,4 @@
-/* Film 001 · Half-Angle Rotors and the Bloch Sphere · 半角转子与布洛赫球 (book quantum-geometry, part II).
+/* Film 001 · Half-Angle Rotors and the Bloch Sphere · 半角旋子与布洛赫球 (book quantum-geometry, part II).
    Scenes for theme/film/engine.js.
 
    Lean citations (film.json "lean", at the pinned trureturing commit) and the four themes of the film:
@@ -17,11 +17,10 @@
           B = ½(1+i) Î, where Î = i n̂·σ, the hypotheses hold and J = −Î: the bivector squares to −I₂ and generates
           the rotor R(α) = cos(α/2) I₂ − Î sin(α/2) = exp(−iα n̂·σ/2). Axis invariance R B(n̂) R† = B(n̂) and the
           full-angle turn of the plane are computed exactly here, not cited.
-     4. Spinor double cover / phase damping
-          R(2π) = −I₂ and R(4π) = +I₂ are computed exactly here, not cited.
-          QubitWitnesses.phaseDampingIterate_apply: phaseDampingIterate c N ρ i j = ρ i j if i = j, else cᴺ · ρ i j,
-          so the Bloch vector goes (x, y, z) ↦ (cᴺx, cᴺy, z); with c = 1 − γ and N = 1 this is
-          ((1 − γ)x, (1 − γ)y, z).
+     4. Spinor double cover ........ CircleDoubleCoverHistoryLift.circle_double_cover_history_lift
+          the fixed-plane case: the squaring map of the circle is a covering, a loop turning once lifts to a path
+          from 1 to −1, and there is no continuous square root on the circle (chapter 5, thm-circle-double-cover-
+          history-lift). R(2π) = −I₂ and R(4π) = +I₂ for the 2×2 rotors are computed exactly here, not cited.
 
    On load, FILM.init checks DATA.lean against these five theorems (present, kind theorem, statement digest) and
    re-derives every identity shown on screen in exact Gaussian-rational 2×2 matrix arithmetic (BigInt fractions)
@@ -98,16 +97,12 @@ const QX = (() => {
     const [ca, sa] = double(co, si);
     return vadd(vadd(vsc(ca, v), vsc(sa, cross(n, v))), vsc(mul(dot(n, v), sub(ONE, ca)), n));
   };
-  /* trureturing QubitWitnesses.phaseDamping: diagonal kept, off-diagonal entries times c */
-  const damp = (cc, A) => [A[0], cmul(re(cc), A[1]), cmul(re(cc), A[2]), A[3]];
-  const dampIter = (cc, N, A) => { for (let k = 0; k < N; k++) A = damp(cc, A); return A; };
-  const pow = (a, N) => { let r = ONE; for (let k = 0; k < N; k++) r = mul(r, a); return r; };
   /* ρ = ½[[1 + z, x − iy], [x + iy, 1 − z]] → (x, y, z) */
   const blochOf = A => [mul(TWO, A[2].re), mul(TWO, A[2].im), sub(A[0].re, A[3].re)];
   return {
     q, add, sub, mul, neg, eq, O, ONE, HALF, TWO, MINUS, c, C0, C1, CI, re, cadd, csub, cmul, cneg, conj, ceq, abs2,
     M, madd, msub, mmul, dag, msc, meq, tr, det, I2, Z2, NEG_I2, SX, SY, SZ, vec, dot, cross, vsc, vadd, vsub, veq,
-    B, Bcore, rho, ket, outer, braket, norm2, biv, rotor, double, rodrigues, damp, dampIter, pow, blochOf
+    B, Bcore, rho, ket, outer, braket, norm2, biv, rotor, double, rodrigues, blochOf
   };
 })();
 
@@ -143,14 +138,13 @@ const QB_LEAN = {
   rank_one_pure_state_modulus_square_reduction: 'D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction',
   relativeComplexStructure_square: 'D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.relativeComplexStructure_square',
   lagrange_gram_identity: 'D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity',
-  phaseDampingIterate_apply: 'D5/S3/Quantum/QubitWitnesses.phaseDampingIterate_apply'
+  circle_double_cover_history_lift: 'D5/S3/ConceptDynamics/Topology/CircleDoubleCoverHistoryLift.circle_double_cover_history_lift'
 };
 /* rational unit vectors (Pythagorean quadruples) [x, y, z, d] and rational half-angles [cos α/2, sin α/2, d] */
 const QB_UNITS = [[1, 2, 2, 3], [2, 3, 6, 7], [1, 4, 8, 9], [2, 6, 9, 11], [4, 4, 7, 9], [2, 10, 11, 15], [0, 3, 4, 5],
   [1, 0, 0, 1], [0, 1, 0, 1], [0, 0, 1, 1], [-2, 1, -2, 3], [6, -2, 3, 7], [-1, -8, 4, 9], [0, 0, -1, 1]];
 const QB_HALVES = [[1, 0, 1], [0, 1, 1], [-1, 0, 1], [3, 4, 5], [4, -3, 5], [5, 12, 13], [-8, 15, 17], [7, 24, 25]];
 const QB_AXIS = QF.unit([1, 2, 2]);      // the rotor axis n̂ = (1, 2, 2)/3 of the SANDWICH ROTOR scene
-const QB_GAMMA = 0.3;                    // the phase-damping strength of the SPINOR scene: c = 1 − γ = 0.7
 const QB_STATS = { exact: 0, float: 0 };
 
 FILM.init.push(() => {
@@ -267,20 +261,7 @@ FILM.init.push(() => {
     units.forEach((v, j) => check(X.meq(X.mmul(X.mmul(R2, X.B(v)), X.dag(R2)), X.B(v)), `R(2π) moves v at ${i}, ${j}`));
   });
 
-  /* 8. phase damping: N-fold iterate = entrywise formula (phaseDampingIterate_apply), Bloch (cᴺx, cᴺy, z) */
-  [[0, 1], [1, 4], [3, 10], [1, 2], [1, 1]].forEach(([gn, gd]) => {
-    const cc = X.sub(X.ONE, X.q(gn, gd));
-    units.forEach((v, j) => {
-      const r0 = X.rho(v);
-      for (let N = 0; N <= 4; N++) {
-        const rN = X.dampIter(cc, N, r0), cN = X.pow(cc, N);
-        check(X.meq(rN, [r0[0], X.cmul(X.re(cN), r0[1]), X.cmul(X.re(cN), r0[2]), r0[3]]), `phase damping entries at γ = ${gn}/${gd}, N = ${N}, ${j}`);
-        check(X.veq(X.blochOf(rN), [X.mul(cN, v[0]), X.mul(cN, v[1]), v[2]]), `phase damping Bloch map at γ = ${gn}/${gd}, N = ${N}, ${j}`);
-      }
-    });
-  });
-
-  /* 9. the floating-point rotors the animation draws */
+  /* 8. the floating-point rotors the animation draws */
   const fcheck = (ok, m) => { QB_STATS.float++; if (!ok) fail(m); };
   const axes = [QB_AXIS, [0, 0, 1], QF.unit([2, -1, 2]), QF.unit([-1, 4, 8])];
   const probes = [[0, 0, 1], [1, 0, 0], QF.unit([2, 3, 6]), QF.unit([-1, -8, 4])];
@@ -316,8 +297,6 @@ function qbView(cx, cy, R, yaw, el) {
   V.cx = cx; V.cy = cy; V.R = R;
   return V;
 }
-/* the same view of the sphere squeezed by k in x and y (the image of phase damping) */
-function qbSqueeze(V, k) { const S = p => V([k * p[0], k * p[1], p[2]]); S.cx = V.cx; S.cy = V.cy; S.R = V.R; return S; }
 /* a parametric 3-D curve: front runs bright, back runs faint */
 function qbPath(V, fn, n, col, aF, aB, lw = 2) {
   if (aF <= 0.003 && aB <= 0.003) return;
@@ -656,7 +635,7 @@ SCENES.rotor = S => {
   txt(`α/2 + α/2 = α = ${qbDeg(al)}`, x1, cy + 106, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.mag, a: hf });
   /* the rotor */
   const x = 1010, w = 790, y = 392;
-  panel(x, y, w, 214, sa, C.cyan, 'ROTOR · 转子');
+  panel(x, y, w, 214, sa, C.cyan, 'ROTOR · 旋子');
   qbRich([['R(α) = ', C.white], ['cos(α/2)', C.now], [' I₂ − Î ', C.white], ['sin(α/2)', C.now]], x + 28, y + 80, { size: 32, a: sa });
   txt('= exp(−iα n̂·σ/2)    n̂ = (1, 2, 2)/3', x + 28, y + 124, { size: 24, fam: F.math, w: 700, c: C.white, a: sa * 0.95 });
   const la = a * Q(S, 0, 'half the angle', 0.6);
@@ -707,36 +686,21 @@ function qbDial(cx, cy, r, ang, col, a, marks) {
 SCENES.spinor = S => {
   const u = S.u, a = clamp(u / 0.5) * clamp((S.d - u) / 0.5);
   if (a <= 0) return;
-  badgeQ(S, [[0, null, 'computed'], [2, 'Phase damping', 'lean']]);
-  const al = qbSpinAngle(S), dmp = Q(S, 2, 'Phase damping', 0.7, -0.3), keep = 1 - dmp;
+  badgeQ(S, [[0, null, 'computed']]);
+  const al = qbSpinAngle(S);
   const V = qbView(520, 505, 270, -2.05 + 0.04 * u, 0.32);
-  /* phase damping: iterates N = 0 … 4 of c = 1 − γ, the squeezed image of the sphere */
-  const c = 1 - QB_GAMMA, nf = clamp((u - phraseAt(S, 2, 'shrinks') - 0.1) / 0.55, 0, 4);
-  const N = Math.floor(nf), kN = Math.pow(c, N + ease(nf - N));
-  qbSphere(V, a * (1 - 0.55 * dmp), { poles: true });
-  if (dmp > 0) qbSphere(qbSqueeze(V, kN), a * dmp, { ring: false, axes: false, col: C.mag, eq: C.mag });
+  qbSphere(V, a, { poles: true });
   const ph = QB_SPIN_PH + al, v = QF.sph(QB_SPIN_TH, ph), zc = Math.cos(QB_SPIN_TH), rr = Math.sin(QB_SPIN_TH);
   /* the orbit of v about z and the swept turns */
-  qbPath(V, s => [rr * Math.cos(TAU * s), rr * Math.sin(TAU * s), zc], 96, C.cyan, 0.35 * a * keep, 0.14 * a * keep, 1.6);
+  qbPath(V, s => [rr * Math.cos(TAU * s), rr * Math.sin(TAU * s), zc], 96, C.cyan, 0.35 * a, 0.14 * a, 1.6);
   const sweep = Math.min(al, TAU), extra = Math.max(0, al - TAU);
-  if (sweep > 0.01) qbPath(V, s => [rr * Math.cos(QB_SPIN_PH + sweep * s), rr * Math.sin(QB_SPIN_PH + sweep * s), zc], 96, C.now, 0.8 * a * keep, 0.4 * a * keep, 3.5);
-  if (extra > 0.01) qbPath(V, s => [1.04 * rr * Math.cos(QB_SPIN_PH + extra * s), 1.04 * rr * Math.sin(QB_SPIN_PH + extra * s), zc], 96, C.mag, 0.9 * a * keep, 0.45 * a * keep, 3.5);
-  if (dmp <= 0) qbVec(V, v, C.now, a, { label: 'v' });
-  else {
-    const v0 = QF.sph(QB_SPIN_TH, QB_SPIN_PH + 2 * TAU), pz = V([0, 0, zc]), p0 = V(v0);
-    dashed(p0[0], p0[1], pz[0], pz[1], C.cyan, 0.85 * a * dmp, 2.5);
-    dot(pz[0], pz[1], 9, 'c', a * dmp);
-    for (let k = 0; k <= N; k++) {
-      const pk = V([Math.pow(c, k) * v0[0], Math.pow(c, k) * v0[1], zc]);
-      dot(pk[0], pk[1], k === N ? 13 : 9, k === N ? 'g' : 'c', a * dmp);
-      txt(String(k), pk[0], pk[1] - 18, { size: 18, fam: F.mono, w: 700, align: 'center', c: C.cyan, a: a * dmp * 0.9 });
-    }
-    qbVec(V, [kN * v0[0], kN * v0[1], zc], C.now, a * dmp, { label: 'r', tip: false });
-  }
+  if (sweep > 0.01) qbPath(V, s => [rr * Math.cos(QB_SPIN_PH + sweep * s), rr * Math.sin(QB_SPIN_PH + sweep * s), zc], 96, C.now, 0.8 * a, 0.4 * a, 3.5);
+  if (extra > 0.01) qbPath(V, s => [1.04 * rr * Math.cos(QB_SPIN_PH + extra * s), 1.04 * rr * Math.sin(QB_SPIN_PH + extra * s), zc], 96, C.mag, 0.9 * a, 0.45 * a, 3.5);
+  qbVec(V, v, C.now, a, { label: 'v' });
   const turns = al / TAU;
-  txt(`α = ${qbDeg(al, 0)}   ·   ${turns.toFixed(2)} turns`, 520, 860, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.now, a: a * keep });
+  txt(`α = ${qbDeg(al, 0)}   ·   ${turns.toFixed(2)} turns`, 520, 860, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.now, a });
   /* dials and the rotor matrix */
-  const da = a * keep * at(S, 0, 0.6, -0.2);
+  const da = a * at(S, 0, 0.6, -0.2);
   if (da > 0) {
     txt('ROTOR · R(α) PHASE α/2', 1170, 205, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.now, a: da, ls: 2 });
     txt('BLOCH VECTOR · α', 1600, 205, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.cyan, a: da, ls: 2 });
@@ -752,27 +716,10 @@ SCENES.spinor = S => {
     qbRich([['R(4π) = ', C.white], ['+I₂', C.cyan]], 1170, 596, { size: 40, align: 'center', a: m2 * da, ab: 2 });
     stamp('SIGN FLIP', 1610, 588, m1 * da, C.mag, 34, -0.06);
     stamp('BACK TO +1', 1610, 588, m2 * da, C.cyan, 34, -0.06);
-  }
-  /* phase damping panel */
-  const pa = a * dmp;
-  if (pa > 0) {
-    const x = 1010, y = 180, w = 790;
-    panel(x, y, w, 656, pa, C.cyan, 'PHASE DAMPING · 相位阻尼');
-    txt('phaseDampingIterate c N ρ i j', x + 28, y + 82, { size: 24, fam: F.mono, w: 700, c: C.white, a: pa });
-    txt('  = if i = j then ρ i j else cᴺ · ρ i j', x + 28, y + 120, { size: 24, fam: F.mono, w: 700, c: C.white, a: pa });
-    qbLean(x + 28, y + 170, 'phaseDampingIterate_apply', pa, { size: 20 });
-    txt('ρ = ½', x + 28, y + 262, { size: 30, fam: F.math, w: 700, c: C.white, a: pa });
-    qbMat(x + 130, y + 250, [['1 + z', 'cᴺ (x − iy)'], ['cᴺ (x + iy)', '1 − z']], pa, { size: 26, cw: 220, cols: [[C.cyan, C.mag], [C.mag, C.cyan]] });
-    txt('c = 1 − γ,  N = 1:', x + 28, y + 382, { size: 24, fam: F.math, w: 700, c: C.white, a: pa });
-    txt('(x, y, z) ↦ ((1 − γ)x, (1 − γ)y, z)', x + 28, y + 428, { size: 30, fam: F.math, w: 700, c: C.now, a: pa, ab: 1 });
-    qbNumTag(x + w - 110, y + 25, pa);
-    txt(`γ = ${QB_GAMMA.toFixed(1)}  ·  c = ${c.toFixed(1)}  ·  iterates N = 0 … 4`, x + 28, y + 474, { size: 21, fam: F.mono, w: 700, c: C.dim, a: pa });
-    const v0 = QF.sph(QB_SPIN_TH, QB_SPIN_PH + 2 * TAU);
-    for (let k = 0; k <= 4; k++) {
-      const ck = Math.pow(c, k), on = k === N, ya = y + 516 + k * 31, ra = pa * (k <= N ? 1 : 0.3);
-      txt(`N = ${k}   cᴺ = ${ck.toFixed(4)}   r = (${qbNum(ck * v0[0], 3)}, ${qbNum(ck * v0[1], 3)}, ${qbNum(zc, 3)})`, x + 28, ya,
-        { size: 21, fam: F.mono, w: 700, c: on ? C.now : C.white, a: ra });
-    }
+    /* the matrices are computed; the theorem behind the sign is the fixed-plane circle case */
+    const la = da * Q(S, 0, 'minus one', 0.6, 0.4);
+    qbLean(1010, 830, 'circle_double_cover_history_lift', la, { size: 18 });
+    txt('fixed-plane case · 固定平面情形', 1010, 866, { size: 18, fam: F.zh, w: 700, c: C.dim, a: la });
   }
 };
 

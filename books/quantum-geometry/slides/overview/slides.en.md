@@ -10,7 +10,7 @@ deck:
   book: "Geometric Intuition of Quantum Computing"
   title: "Overview"
   version: "0.1.0"
-  blurb: "From pairwise measurement to spheres beyond spheres: the core pictures, main theorems and three tiers of warrant across ten parts and thirty-nine chapters, in one deck."
+  blurb: "From pairwise measurement to spheres beyond spheres: the core pictures, main theorems and three tiers of warrant across ten parts and thirty-nine chapters, in one forty-eight-slide deck."
 layout: cover
 ---
 
@@ -30,7 +30,7 @@ section: "In one sentence"
     <p>“What we take to be a point is in fact a line; what we take to be a line is in fact a plane; what we take to be a plane is in fact a sphere; and when we think we have seen the sphere, we are already enclosed within a larger sphere.”</p>
     <p>“This is the <Tex t="\psi = \psi(\psi)" /> we investigated from the very beginning.”</p>
   </div>
-  <p class="lead mt">Measure the target state <Tex t="\vec b" /> directly against the known state <Tex t="\vec a" />: the reading is the compatibility <Tex t="\vec a \cdot \vec b = \cos\theta" />, with no external third point <Tex t="C" />. When the ruler <Tex t="\cos" /> and the mark <Tex t="\theta" /> become one, <Tex t="\cos\theta^* = \theta^*" />.</p>
+  <p class="lead mt">In the prelude’s real unit-vector projection picture, measure the target state <Tex t="\vec b" /> directly against the known state <Tex t="\vec a" />: the reading is the compatibility <Tex t="\vec a \cdot \vec b = \cos\theta" />, with no external third point <Tex t="C" />. When the ruler <Tex t="\cos" /> and the mark <Tex t="\theta" /> become one, <Tex t="\cos\theta^* = \theta^*" />.</p>
 </div>
 <Source>Prelude: epigraph (Auric's own words) and “Reader's Guide and Formal Verification Contract”</Source>
 
@@ -43,7 +43,7 @@ section: "Four blind spots"
   <p class="kicker">Four blind spots · one ladder</p>
   <h2 class="t">Point, line, plane, sphere — <em>and a sphere beyond</em></h2>
   <img src="./img/prelude-overview.en.svg" alt="The prelude's three-panel map: a collinear line of sight sees one point; two arrows open a directed area; the old sphere is the equator of a new one." style="display: block; width: 1240px; max-width: 100%; margin: 20px auto 0;">
-  <p class="lead mt-s">Panel I: sight and ray are collinear, leaving one point. Panel II: two arrows open the magenta directed area <Tex t="A \wedge B = \sin\theta\,\hat I" />. Panel III: the old sphere is the cyan equator of the new one, and the violet normal <Tex t="\pm\vec e_{n+1}" /> escapes it.</p>
+  <p class="lead mt-s">Panel I: sight O aligns with source-facing A; incoming light travels along −A, leaving one point. Panel II: two arrows open the magenta directed area <Tex t="A \wedge B = \sin\theta\,\hat I" />. Panel III: the old sphere is the cyan equator of the new one, and the violet normal <Tex t="\pm\vec e_{n+1}" /> escapes it.</p>
 </div>
 <Source>Prelude, Figure 0 (prelude-overview)</Source>
 
@@ -570,7 +570,7 @@ section: "Part VII · warrant"
     <div class="card violet">
       <h4>Literature · Chapter 26</h4>
       <h3>The SU(2) → SO(3) double cover and ZYZ Euler decomposition</h3>
-      <p>The book verifies Bloch reconstruction and the trace identities; the universal theorem that every single-qubit unitary has ZYZ Euler angles is cited from the literature.</p>
+      <p>The book verifies Bloch reconstruction and the trace identities; the universal theorem that every single-qubit unitary has ZYZ Euler angles up to a global phase is cited from the literature.</p>
     </div>
     <div class="card violet">
       <h4>Literature · Chapter 27</h4>
