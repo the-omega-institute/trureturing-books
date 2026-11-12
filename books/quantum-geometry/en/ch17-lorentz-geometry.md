@@ -80,7 +80,7 @@ One sometimes sees the auxiliary trigonometric parameterization $\sin\theta = \b
 :::
 
 ::: {.viz src="rapidity-lightcone" preset="boost" height="500"}
-**η = ln 2 takes (5, 3) to (4, 0).** The amber point slides along the cyan hyperbola $\tau = 4$ onto the time axis, where $\cosh\eta = 5/4$ and $\sinh\eta = 3/4$; the two amber axes close toward the light cone like scissors, and the grey dashed lines are where they started.
+**η = ln 2 takes (5, 3) to (4, 0).** The two amber axes are the $t'$ and $x'$ axes of a traveller moving with rapidity $\eta$; they close toward the light cone like scissors, and the grey dashed lines are the original $t$ and $x$ axes. At $\eta = \ln 2$ ($\beta = 3/5$) the $t'$ axis runs right through the original event $v = (5, 3)$ in the grey ring. The amber point $Bv$ is $v$ read in the traveller's coordinates: it slides along the cyan hyperbola $\tau = 4$ to $(4, 0)$ on the time axis, where $\cosh\eta = 5/4$ and $\sinh\eta = 3/4$.
 :::
 
 ## Null light cones and spatial restrictions {#sec-null-cone-rigidity}
@@ -186,14 +186,14 @@ $$
 \operatorname{minkowski}_d(Bv) = \operatorname{minkowski}_d(Be_0)\cdot\operatorname{minkowski}_d(v).
 $$
 
-To conclude full Lorentz invariance $\operatorname{minkowski}_d(Bv) = \operatorname{minkowski}_d(v)$, one must **separately impose the scale normalization** $\operatorname{minkowski}_d(Be_0) = 1$ (physically corresponding to calibrating unit clock ticks on the boosted time axis $Be_0$ or matching transverse rods).
-
 ::: {.viz src="rapidity-lightcone" preset="cone" height="500"}
-**The light cone stays put under a boost.** Sweep $\eta$ from $-0.6$ to $1$: the white beads only slide along the white cone, the right-hand string crowding toward the origin and the left-hand one spreading out, and none leaves the two lines; the amber point runs along its cyan hyperbola, and the grey grid is squeezed into rhombi.
+**The light cone stays put under a boost.** Sweep $\eta$ from $-0.6$ to $1$: the white beads only slide along the white cone, the right-hand string crowding toward the origin and the left-hand one spreading out, and none leaves the two lines; the faint hollow beads mark where they were at $\eta = -0.6$ and $\eta = 0$. The amber point runs along its cyan hyperbola.
 :::
 
+To conclude full Lorentz invariance $\operatorname{minkowski}_d(Bv) = \operatorname{minkowski}_d(v)$, one must **separately impose the scale normalization** $\operatorname{minkowski}_d(Be_0) = 1$ (physically corresponding to calibrating unit clock ticks on the boosted time axis $Be_0$ or matching transverse rods).
+
 ::: {.viz src="rapidity-lightcone" preset="scale" height="500"}
-**Times k: the cone survives, the tick does not.** At $k = 1.5$ and $\eta = \ln 2$ the white beads are still on the cone, but the amber point drops off the cyan $\tau = 4$ onto the dashed cyan $\tau = 6$, and the unit tick lands on $\tau = 1.5$; the mismatch is exactly the factor $\operatorname{minkowski}_1(kBe_0) = k^2$ ([@prop-null-cone-rigidity]).
+**Times k: the cone survives, the tick does not.** At $k = 1.5$ and $\eta = \ln 2$ the white beads are still on the cone, but the amber point drops off the cyan $\tau = 4$ onto the dashed cyan $\tau = 6$, and the unit tick on the $t'$ axis lands on the thin dashed cyan $\tau = 1.5$; the mismatch is exactly the factor $\operatorname{minkowski}_1(kBe_0) = k^2$ ([@prop-null-cone-rigidity]).
 :::
 
 > The null cone locks the shape of the metric up to scale; a unit clock tick fixes the single remaining factor $S(1, 0) = 1$.

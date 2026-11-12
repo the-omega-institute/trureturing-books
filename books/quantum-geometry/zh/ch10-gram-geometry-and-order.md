@@ -137,7 +137,7 @@ $$
 | $120^\circ$ | $0.0625$ | $0.1875$ | $0.03906$ | $0.03906$ | $71.57^\circ$ | $71.57^\circ$ |
 | $150^\circ$ | $0.0045$ | $0.0625$ | $0.00393$ | $0.00393$ | $85.89^\circ$ | $85.89^\circ$ |
 
-$\theta = 90^\circ$ 一行就是八分球回路：$\Delta = \frac{1+i}{4}$，即结论 2。三角形越张越大，三条边越来越“不相融”，$\lvert\Delta\rvert$ 一路缩小；辐角却一路增大，始终是面积的一半。第五列与第四列逐行相同，是上面的手工推导；最后两列逐行相同，是 Van Oosterom–Strackee 公式在这五个三角形上的数值核对，不是证明。
+$\theta = 90^\circ$ 一行就是八分球回路：$\Delta = \frac{1+i}{4}$，即结论 2。三角形越张越大，从北极出发的两条边越来越“不相融”，$\lvert\Delta\rvert$ 一路缩小；辐角却一路增大，始终是面积的一半。第五列与第四列逐行相同，是上面的手工推导；最后两列逐行相同，是 Van Oosterom–Strackee 公式在这五个三角形上的数值核对，不是证明。
 :::
 
 为了精确计算任意纬度圈上两个复旋量的两两内积，在 Lean 模块 `BargmannImaginaryMaximizers` 中，对高度参数 $t \in [0, 1]$ 与复数 $z \in \mathbb{C}$，定义二维复向量 `latitude t z` 为
@@ -173,7 +173,7 @@ $$
 
 在进入全局格拉姆重构之前，我们必须立下一块醒目的警示牌：**“两两比较顺序无关”绝不意味着可以把不同时刻的物理测量仪器随意颠倒，或者只凭单次测量的静态概率分布（POVM 效应元）就抹去测量后的状态更新机制！**
 
-在量子测量理论中，一个双结果测量仪器由一族克劳修斯（Kraus）算符 $K_b \in M_2(\mathbb{C})$（$b \in \mathrm{Bool} = \{\mathrm{true}, \mathrm{false}\}$）描述：
+在量子测量理论中，一个双结果测量仪器由一族克劳斯（Kraus）算符 $K_b \in M_2(\mathbb{C})$（$b \in \mathrm{Bool} = \{\mathrm{true}, \mathrm{false}\}$）描述：
 
 1. **静态效应元（单次概率）**：只看第一次测量出结果 $b$ 的概率时，玻恩定则只关心正算符 $E_b = K_b^* K_b$（满足完备性 $\sum_b E_b = I$）；
 2. **动态分支更新（序贯联合概率）**：一旦紧接着要做第二次测量（探测效应元 $F$），状态已经发生了依赖于具体仪器算符 $K_b$ 的分支演化 $\rho \mapsto K_b \rho K_b^*$，两步联合玻恩权重为 $\operatorname{bornProbability}(K_b \rho K_b^*, F) = \Tr(K_b \rho K_b^* F)$。
@@ -362,10 +362,6 @@ $$
 **反着走，手性翻转。** 同一个三角形改走 $N \to +Y \to +X \to N$：品红的面积一样大，琥珀色的箭头却往另一边转 $\frac{\pi}{2}$，右下角青色的指针停在 $-\frac{\pi}{4}$。三个相邻内积的模平方仍然都是 $\frac{1}{2}$：只看模平方，分不出这两种走法。
 :::
 
-::: {.viz src="berry-loop" height="560"}
-完整实验室：拖动青色的顶点、在边上加点或反着走，比较品红的面积、琥珀色箭头的转角与右下角青色指针的相位；也可以切到“转序”与“梳毛”两个场景。
-:::
-
 ### 无时间诠释：格拉姆几何如何约束因果相容空间？ {#sec-timeless-gram-causality}
 
 > **作者原话**：“顺序无关的本质就是根本不存在前后的时间......因果就是这样必然”,这句话直接把人类困扰了两千五百年的“时间之谜”与“休谟因果死结”一刀劈开了。
@@ -444,6 +440,10 @@ $$
 3. **三维旋转器球 $S^3 \cong \mathrm{SU}(2) \subset \mathrm{Cl}^+_{3,0}$ 的全局可平行化**：单位旋转器构成三维欧氏克利福德偶子代数 $\mathrm{Cl}^+_{3,0}$ 的单位球面 $S^3 \cong \mathrm{SU}(2)$，其欧拉示性数 $\chi(S^3) = 0$，且由显式左平移标架 $(pI_x, pI_y, pI_z)$ 给出全局非零正交切标架（而非仅凭 $\chi(S^3) = 0$ 推断可平行化）。映射 $\mathrm{SU}(2) \to \mathrm{SO}(3)$ 是二对一双覆盖而非同构；总空间 $S^3$ 的可平行化并不给出基空间 $S^2$ 上的全局截面。
 4. **贝里几何相位与西蒙和乐解释**（参见 M. V. Berry, *Quantal phase factors accompanying adiabatic changes*, Proc. R. Soc. A **392**, 45–57, 1984, DOI `10.1098/rspa.1984.0023`；以及 B. Simon, *Holonomy, the quantum adiabatic theorem, and Berry's phase*, Phys. Rev. Lett. **51**, 2167, 1983, DOI `10.1103/PhysRevLett.51.2167`）：在剥离动力学相位并固定定向与自旋朝上本征支后，沿 $S^2$ 闭合回路绝热平行移动获得的几何相位为 $\gamma_B = -\Omega/2$。这一非平凡和乐在完整保留复内积信息时依然存在；格拉姆矩阵的两两自洽性并不抹杀物理算符的真实非对易性。
 5. **休谟因果问题、斯宾诺莎几何必然性与无时间量子关联文献**（参见 D. Hume, *A Treatise of Human Nature*, 1739 / *An Enquiry Concerning Human Understanding*, 1748；B. Spinoza, *Ethica, Ordine Geometrico Demonstrata*, 1677, Part I, Prop. 17 Scholium；以及[第二十九章](ch29-timeless-causality-and-gram-space.md)将详述的 B. S. DeWitt, *Phys. Rev.* **160**, 1113, 1967 与 D. N. Page, W. K. Wootters, *Phys. Rev. D* **27**, 2885, 1983）：本章第 4 节关于“顺序无关性与格拉姆几何因果刚性”的讨论，其代数核心是半正定格拉姆矩阵约束 $\det G(\mathbf{A},\mathbf{B},\mathbf{C}) \ge 0$ 与 [@thm-gram-unitary-reconstruction]；将其与休谟经验主义因果批判、斯宾诺莎几何必然性及无时间量子态诠释相联系属于科学哲学与基础物理诠释，未在本书 Lean 代码库中形式化。
+:::
+
+::: {.viz src="berry-loop" height="560"}
+完整实验室：拖动青色的顶点、在边上加点或反着走，比较品红的面积、琥珀色箭头的转角与右下角青色指针的相位；也可以切到“转序”与“梳毛”两个场景。
 :::
 
 至此，我们在理论上彻底澄明了球面转序、贝里相位与格拉姆矩阵重构的关系。那么，当我们走进真正的超导量子计算实验室，工程师们究竟是用什么物理手段在芯片上拨动这颗三维球面上的方向箭头？为什么绕 $X, Y$ 轴转需要实打实地发射几十纳秒的微波脉冲，而绕 $Z$ 轴转却可以在理想脉冲调度下做到**“零附加模拟脉冲时长”**？让我们进入[第十一章](ch11-pulses-and-virtual-z.md)。

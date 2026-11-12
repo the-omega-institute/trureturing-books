@@ -131,6 +131,74 @@ s = await seek(0);
 check('with an empty list Q = 2', s.euclid.Q === 2 && s.euclid.factors.join() === '2');
 check('the key readout names the least prime factor', (await page.textContent('#roKey')).trim().startsWith('2'));
 
+/* ---------- the prime stage at every step, in both languages and every supported layout ---------- */
+// Each layout gets its own context and walks the rail k = 0 … 12 on the prime scene. ESCAPE_DEBUG.prime is read in the
+// same task as the seek, so no animation frame can move the rail in between. Its boxes are tested against the canvas,
+// the free band and one another; its numbers against Q and its factors computed here in BigInt by trial division.
+const factorBig = (n) => { const f = []; for (let p = 2n; p * p <= n; p += p === 2n ? 1n : 2n) while (n % p === 0n) { f.push(p); n /= p; } if (n > 1n) f.push(n); return f; };
+const EU = Array.from({ length: LIST.length + 1 }, (_, k) => { const Q = LIST.slice(0, k).reduce((a, p) => a * BigInt(p), 1n) + 1n; return { Q, f: factorBig(Q) }; });
+check('BigInt: every Q = p₁⋯pₖ + 1 (k = 0 … 12) is the product of its factors, all prime and off the list, with remainder 1 on every listed prime',
+  EU.every(({ Q, f }, k) => f.reduce((a, x) => a * x, 1n) === Q && f.every((x, i) => isPrime(x) && !LIST.slice(0, k).some((p) => BigInt(p) === x) && (i === 0 || f[i - 1] <= x))
+    && LIST.slice(0, k).every((p) => Q % BigInt(p) === 1n)) && EU[6].Q === 30031n && EU[6].f.join('×') === '59×509');
+const sep = (a, b) => Math.max(b[0] - a[2], a[0] - b[2], b[1] - a[3], a[1] - b[3]);   // > 0 iff the two boxes are disjoint
+const finiteBox = (b) => Array.isArray(b) && b.length === 4 && b.every(Number.isFinite) && b[2] > b[0] && b[3] > b[1];
+const ints = (str) => (String(str).match(/[0-9]+/g) || []);   // ASCII digits only: the subscripts of p₁⋯pₖ are not numbers here
+const BANDS = ['dials', 'eq', 'fac', 'lpf'], PAIRS = BANDS.flatMap((a, i) => BANDS.slice(i + 1).map((b) => `${a}|${b}`)), EPS = 1e-6;
+const LAYOUTS = [
+  ['full desktop', '&preset=euclid', { width: 1440, height: 900 }],
+  ['short-height desktop', '&preset=euclid', { width: 1440, height: 560 }],
+  ['phone', '&preset=euclid', { width: 390, height: 844 }],
+  ['embedded lab', '&embed=1', { width: 740, height: 620 }],
+  ['cited card', '&embed=1&preset=euclid', { width: 740, height: 500 }],
+  ['still (?shot=1)', '&shot=1&preset=euclid', { width: 800, height: 450 }]
+];
+for (const [name, query, viewport] of LAYOUTS) for (const lang of ['zh', 'en']) {
+  const p = await T.open(BOOK, ID, `?lang=${lang}${query}`, { viewport, locale: lang === 'en' ? 'en-US' : 'zh-CN', reducedMotion: query.includes('shot') ? 'reduce' : 'no-preference' });
+  await settle(p, 300);
+  if (!query.includes('preset')) { await p.click('#sceneChips [data-scene="prime"]'); await settle(p, 40); }
+  const geo = [], dat = [];
+  for (let k = 0; k <= LIST.length; k++) {
+    const r = await p.evaluate((v) => {
+      window.ESCAPE_DEBUG.seek(v); window.TRV.kit.flush();
+      const b = document.getElementById('cv').getBoundingClientRect();
+      return { s: window.ESCAPE_DEBUG.state, L: window.ESCAPE_DEBUG.prime, cw: b.width, ch: b.height };
+    }, k);
+    const { s, L: P } = r, E = EU[k], tag = `k=${k}`;
+    if (!P || s.scene !== 'prime' || s.step !== k || P.k !== k) { geo.push(`${tag}: no prime layout for this step`); dat.push(`${tag}: no prime layout for this step`); continue; }
+    // geometry: canvas, free band, four finite bands, every pair apart, nothing outside the free band
+    if (P.fallback !== false) geo.push(`${tag}: fallback`);
+    if (Math.abs(P.W - r.cw) > 1 || Math.abs(P.H - r.ch) > 1) geo.push(`${tag}: layout ${P.W}×${P.H} vs canvas ${r.cw}×${r.ch}`);
+    const F = P.free || {};
+    if (!(Number.isFinite(F.top) && Number.isFinite(F.bottom) && F.top >= 0 && F.top < F.bottom && F.bottom <= P.H)) geo.push(`${tag}: free band ${JSON.stringify(F)}`);
+    const B = P.bands || {};
+    if (Object.keys(B).sort().join() !== [...BANDS].sort().join() || !BANDS.every((n) => finiteBox(B[n]))) geo.push(`${tag}: band boxes ${JSON.stringify(B)}`);
+    else {
+      for (const n of BANDS) { const b = B[n]; if (b[0] < -EPS || b[2] > P.W + EPS || b[1] < F.top - EPS || b[3] > F.bottom + EPS) geo.push(`${tag}: ${n} ${b.map((v) => v.toFixed(1))} outside x∈[0, ${P.W}], y∈[${F.top}, ${F.bottom}]`); }
+      const mine = PAIRS.map((key) => { const [a, b] = key.split('|'); return [key, sep(B[a], B[b])]; });
+      if (Object.keys(P.pairs || {}).sort().join() !== [...PAIRS].sort().join()) geo.push(`${tag}: pairs ${Object.keys(P.pairs || {})}`);
+      for (const [key, v] of mine) { if (!(v > 0)) geo.push(`${tag}: ${key} separation ${v}`); if (!(Math.abs(P.pairs[key] - v) < 1e-9)) geo.push(`${tag}: ${key} reported ${P.pairs[key]}, recomputed ${v}`); }
+      const least = Math.min(...mine.map(([, v]) => v));
+      if (!(P.gaps && P.gaps.min > 0 && Math.abs(P.gaps.min - least) < 1e-9)) geo.push(`${tag}: min gap ${P.gaps && P.gaps.min} vs ${least}`);
+    }
+    for (const d of P.dials || []) if (!finiteBox(d.box) || d.box[1] < F.top - EPS || d.box[3] > F.bottom + EPS || d.box[0] < -EPS || d.box[2] > P.W + EPS) geo.push(`${tag}: dial ${d.spec && d.spec.p} box ${d.box}`);
+    // data: Q, its factors, the listed dials, the least prime factor, the equation and the factorization as drawn
+    if (P.primes !== 12) dat.push(`${tag}: primes ${P.primes}`);
+    if (!(Number.isSafeInteger(s.euclid.Q) && BigInt(s.euclid.Q) === E.Q)) dat.push(`${tag}: Q ${s.euclid.Q} vs ${E.Q}`);
+    if (s.euclid.factors.map(String).join('×') !== E.f.join('×')) dat.push(`${tag}: factors ${s.euclid.factors} vs ${E.f}`);
+    const dials = P.dials || [];
+    if (dials.length !== k || !dials.every((d, i) => d.spec && d.spec.p === LIST[i] && BigInt(d.spec.rem) === E.Q % BigInt(LIST[i]) && d.spec.rem === 1 && d.spec.r > 0)) dat.push(`${tag}: listed dials ${JSON.stringify(dials.map((d) => d.spec && [d.spec.p, d.spec.rem]))}`);
+    if (k === 0 ? !(P.empty && finiteBox(P.empty.box) && P.r === null) : !(P.empty === null && Number.isFinite(P.r) && P.r > 0 && P.cols >= 1 && P.rows >= 1 && P.cols * P.rows >= k)) dat.push(`${tag}: band 1 ${JSON.stringify({ empty: !!P.empty, r: P.r, cols: P.cols, rows: P.rows })}`);
+    const lp = P.lpf && P.lpf.spec;
+    if (!(lp && BigInt(lp.p) === E.f[0] && lp.rem === 0 && E.Q % BigInt(lp.p) === 0n && Number.isFinite(P.lpfR) && P.lpfR > 0 && lp.r === P.lpfR && finiteBox(P.lpf.box))) dat.push(`${tag}: least prime ${lp && [lp.p, lp.rem]} vs ${E.f[0]}`);
+    const eqN = ints(P.eq && P.eq.text), facN = ints(P.fac && P.fac.text);
+    if (!(eqN.length >= 2 && eqN[eqN.length - 1] === E.Q.toString() && eqN[eqN.length - 2] === '1' && (k === 0 || k > 7 || eqN.slice(0, k).join() === LIST.slice(0, k).join()) && Number.isFinite(P.eqFont) && P.eqFont > 0)) dat.push(`${tag}: equation ${P.eq && P.eq.text}`);
+    if (!(facN.join('×') === E.f.join('×') && facN.reduce((a, x) => a * BigInt(x), 1n) === E.Q && Number.isFinite(P.facFont) && P.facFont > 0)) dat.push(`${tag}: factorization ${P.fac && P.fac.text}`);
+  }
+  check(`prime stage, ${name} (${viewport.width}×${viewport.height}), ${lang}: at every k = 0 … 12 the four bands have finite boxes inside the free band, every pair is apart, the least gap is positive, no fallback`, geo.length === 0, geo.slice(0, 3).join(' | '));
+  check(`prime stage, ${name}, ${lang}: 12 primes; Q, its factors, the listed dials (remainder 1), the least prime factor (remainder 0), the equation and the factorization agree with BigInt at every k`, dat.length === 0, dat.slice(0, 3).join(' | '));
+  await p.context().close();
+}
+
 /* ---------- scenes, rail, keyboard ---------- */
 await page.locator('body').click({ position: { x: 5, y: 5 } });
 for (const [key, sc] of [['2', 'poly'], ['3', 'cos'], ['4', 'prime'], ['1', 'diag']]) { await page.keyboard.press(key); check(`key ${key} opens the ${sc} scene`, (await state()).scene === sc); }

@@ -3,7 +3,8 @@ A precomputed lookup table has 2ⁿ rows and soon outgrows any polynomial budget
 already exceeds n³, and the gap only widens.
 
 Both curves are exact (log₂ of 2ⁿ and of n³); n³ stands for an arbitrary polynomial budget, as in the
-chapter's remark on P/poly. The crossing n = 10 is checked by the script.
+chapter's remark on P/poly. The upper real crossing is near n = 9.94; the script checks the
+integer threshold n = 10 marked by the dashed line.
 """
 
 import math
@@ -11,11 +12,11 @@ import math
 SIZE = (500, 320)
 ALT = {
     "zh": "坐标图：横轴是输入长度 n，从 1 到 24；纵轴是大小，按对数刻度标出 1、2⁸、2¹⁶、2²⁴。"
-          "品红的直线是查找表的行数 2ⁿ，青色的曲线是多项式预算 n³。两者在 n = 10 处交叉（竖直虚线），此后品红线在上方越走越远。"
+          "品红的直线是查找表的行数 2ⁿ，青色的曲线是多项式预算 n³。两者在 n ≈ 9.94 处交叉；竖直虚线标出 n = 10，此后的整数 n 均有 2ⁿ > n³，品红线在上方越走越远。"
           "左上一枚紫色标签：文献；右上一枚红色标签：P ≠ NP 开放。",
     "en": "A plot: across, the input length n from 1 to 24; up, size on a log scale marked 1, 2⁸, 2¹⁶, 2²⁴. The magenta "
           "straight line is the number of rows of the lookup table, 2ⁿ; the cyan curve is a polynomial budget n³. They cross "
-          "at n = 10 (dashed vertical), after which the magenta line pulls ever further ahead. A violet tag at the top left: "
+          "near n ≈ 9.94; the dashed line marks n = 10, from which onward 2ⁿ > n³ for integer n, and the magenta line pulls ever further ahead. A violet tag at the top left: "
           "literature; a red tag at the top right: P ≠ NP open.",
 }
 
