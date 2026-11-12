@@ -637,3 +637,18 @@ PR90 已合入、16 项来源 CI 全部成功；主线 CI/Pages 正在运行。�
 
 
 PR120 随后整合官方主线 `504d746` 为 `ccbb16960d6612c3ac028c4dbb66d61d0f0eef7b`：新增 40 个路径均不涉及本批六份正文、自己的图、四个引用实验室、工具/主题或 skill，先前本批及 PR90 的独立批准各自保持原边界。原锁 440 条逐项相同，当前 441 条，pin 不变；本轮 check 仍为 0 错误/0 警告、150 图无过期/错误。新第 22/24 章及派生计数的内容由对应批次另行核对，当前整书输出仍须以本次 CI 为准。
+
+
+## Chapter30 有界局部实施 1/2（2026-11-12；待依赖/输出与 initial R1）
+
+ORIGINAL35 不变；input HEAD `38d4170af944de421e82e4ea6fa699b9456a5749`，pin `1d9bf98cab8306e67ec38a739359f2cdae63877a`（dev），447 锁项；当前出版 44 单元，ch31–39 只作依赖、不计批准。完成 intake 的 530 明列路径与输入全部 SHA256 相同；完整 intake 的双语/64 唯一 GID/34 模块/媒体覆盖保留其只读结论 revise 的边界，不是对未来补丁的批准。先验 repo-prior-exposed，其余未知/不可控，不作无先验或多样性声明。
+
+本次只改 ch30 双语五处：C1 保留随机模型、固定充分大常数密度及 XOR/SAT 标准编码前提；C2 Pfaffian 完美匹配项同号；C3 五边形只是一个奇圈；C4 decoderCatalog 覆盖 Coordinate→Output 解码函数空间；C7 删除过时三十二章数。Schoenebeck 作者站完整论文定理12、完整 exact-pin RelativeSemanticDiagonal 与局部独立计算复核适用性。每语言五行改动，题记/结构/正式 ID/GID/媒体顺序/证明结语保持。local-content-accuracy skill 只增加优化/存在量词与抽样构造的一句教训，既有 quick validator 通过。
+
+实际验证：archive `./tbook check --offline` 为 **1134 错误/499 警告**；私有副本加入 intake 的34份 exact-pin state 后为 **1134 错误/418 警告**，ch30正文诊断 **0/0**，61正文 GID 冻结身份对应。缺失其他出版媒体依赖与离线未验状态使全书零错误要求仍未满足，不冒称 check 通过。既有 HTML 入口双语成功；完整 site 入口因不完整 registry 失败，部分站点补复制已有三实验室资源后，实际 serve/Chromium 的 ch30 × zh/en × 1440/390 × navy/light 八组合及五处改句40截图通过；此处不批准媒体语义或完整最终产物。服务已退出。PDF/EPUB/EPUBCheck/全媒体最终验证仍 pending，未重渲染不变视频。
+
+C5/C6 留给现有 PR119 shared optimum/sample/mincut owner，未重复修改正文家族或媒体；PR134 drawer、PR99 formalization 与其他单独 owner 归属保持。A1–A3 仅 advisory，未认证文献继续归属并保留限制。调用方负责 official cd4d 空行增量对应、真实依赖整合、封存/及时 draft PR/push、CI/合入/Pages；完整最终输入的 check/site/PDF/EPUB/media 与 **initial R1 三席**均待办。本次完成 assignment **1/2**，恰留 **1** 次保留最终依赖实施，不重置旧额度；不新增全35或新章节批准，未审/受保护单元保持 pending。
+
+五路径补丁的输入对应、来源、实际验证限制与私有证据入口详见 [CONTENT-ACCURACY-CH30-20261112.md](CONTENT-ACCURACY-CH30-20261112.md)；最终 changed-file SHA256 随 worker envelope / 私有 handoff 交接。未执行 Git/GitHub/goal/lifecycle、委派、活跃工件读取或发布。
+
+第 30 章五项局部修订已接入官方 `57f8a40`，保留新主线空行；完整仓库源码校验为 0 错误、0 警告，skill 快速校验通过。私有副本缺依赖的失败仍保留历史归属；本次没有将源码门禁视作内容批准。共享实验室、该章样本／最优值措辞的最终对应、当前导出、初轮三席复审、PR/CI/合入/Pages 仍待完成。原 35 单元审计边界不变，当前题记原始手稿专项核对不提前计为通过。
