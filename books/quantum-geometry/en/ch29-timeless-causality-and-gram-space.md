@@ -320,10 +320,6 @@ $$
 which are exactly the two legs read off from the Gaussian product $(1 + i)(22 + 23i) = -1 + 45i$.
 :::
 
-::: {.viz src="pythagoras-number-escape" preset="minus" height="500"}
-**$d = 13$: first $-1$, then $+1$.** The amber convergent walks along the line $m = \sqrt{13}\,n$. At $18/5$ the gap is $m^2 - 13n^2 = -1$ (magenta, below the line), the entry for $p = 13$ in the last column of the table above; one more period on, at $649/180$, it flips to $+1$ (cyan). That the negative Pell equation of every plane prime is solvable is a literature result, recorded in the remark below.
-:::
-
 ::: {.remark #rem-ch29-pell-primes-hilbert-literature title="Splitting and Inertia of Primes in the Gaussian Integers, the Negative Pell Equation for Plane Primes, and Hilbert Reciprocity (Literature result, not formalized in this book)"}
 **Literature result, not formalized in this book.** The boxes and manual derivations above stop at "is a sum of two squares" and "descends under division." The following three classical results lie outside the frozen declarations of the `trureturing@dev` commit locked by this book:
 

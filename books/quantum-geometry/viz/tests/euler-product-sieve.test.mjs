@@ -63,7 +63,9 @@ check('the residue: (s − 1)·ζ(s) is within 1e-3 of 1 at s = 1 + 10⁻⁴', M
 
 /* ---------- UP-TO-5: the worked example of the chapter ---------- */
 s = await card('five', true);
-check('UP-TO-5: plays by itself and stops at K = 3 (2, 3, 5) at s = 2', s.K === 3 && JSON.stringify(s.primes) === '[2,3,5]' && Math.abs(s.s - 2) < 1e-9);
+check('UP-TO-5 clicked: K = 3 (2, 3, 5) and the sweep ends at s = 1.3', s.K === 3 && JSON.stringify(s.primes) === '[2,3,5]' && Math.abs(s.s - 1.3) < 1e-9);
+s = await setS(2);
+check('UP-TO-5 at s = 2 (its still): K = 3', s.K === 3 && Math.abs(s.s - 2) < 1e-9);
 check('UP-TO-5: the product is 25/16 = 1.5625', Math.abs(s.product - 25 / 16) < 1e-12, `${s.product}`);
 check('UP-TO-5: the product equals the sum over 5-smooth integers (exponent expansion)', (() => {
   let a = 0; for (let i = 0; i < 60; i++) for (let j = 0; j < 40; j++) for (let k = 0; k < 30; k++) a += Math.pow(2, -2 * i) * Math.pow(3, -2 * j) * Math.pow(5, -2 * k);
@@ -99,19 +101,22 @@ s = await card('thirtyone');
 check('UP-TO-31: K = 11 at s = 2, gap 0.0102, first magenta 37', s.K === 11 && s.gap.toFixed(4) === '0.0102' && near(s.gap, zeta(2) - product(11, 2), 1e-9) && s.cyan.indexOf(false) === 36 && s.next === 37);
 check('UP-TO-31: the gap still exceeds 37⁻²', s.gap > 37 ** -2 && s.slices[0][0] === 37);
 s = await card('all');
-check('UP-TO-97: K = 25 up to 97, every cell 1 … 96 cyan', s.K === 25 && s.primes[24] === 97 && s.cyan.every(Boolean));
-check('UP-TO-97: the gap is 0.0030 and its lowest slice is 101⁻²', s.gap.toFixed(4) === '0.0030' && near(s.gap, zeta(2) - product(25, 2), 1e-8) && s.slices[0][0] === 101 && s.gap > 101 ** -2);
+check('UP-TO-97: K = 25 up to 97 at s = 1.2, every cell 1 … 96 cyan', s.K === 25 && s.primes[24] === 97 && s.cyan.every(Boolean) && Math.abs(s.s - 1.2) < 1e-9);
+check('UP-TO-97 at s = 1.2: product 4.37, ζ 5.59, gap 1.23 (more than a fifth of ζ), lowest slice 101⁻ˢ', s.product.toFixed(2) === '4.37' && zeta(1.2).toFixed(2) === '5.59'
+  && s.gap.toFixed(2) === '1.23' && near(s.gap, zeta(1.2) - product(25, 1.2), 1e-8) && s.gap / zeta(1.2) > 0.2 && s.slices[0][0] === 101 && s.gap > 101 ** -1.2, `${s.product} ${s.gap}`);
+s = await setS(2);
+check('UP-TO-97 at s = 2 (the figure ch22-euler-staircase): the gap is 0.0030', s.gap.toFixed(4) === '0.0030' && near(s.gap, zeta(2) - product(25, 2), 1e-8));
 
-/* ---------- REMAINDER: the floor p_{K+1}^−s along the sweep ---------- */
-await page.click('[data-preset="remainder"]');
-check('REMAINDER: the amber line sweeps down to s = 1.3', await until(page, () => Math.abs(window.EULER_DEBUG.state.s - 1.3) < 1e-9));
+/* ---------- UP-TO-5 clicked: the sweep of the remainder floor p_{K+1}^−s ---------- */
+await page.click('[data-preset="five"]');
+check('UP-TO-5 clicked: the amber line sweeps down to s = 1.3', await until(page, () => Math.abs(window.EULER_DEBUG.state.s - 1.3) < 1e-9));
 s = await state();
-check('REMAINDER: K = 3 throughout, the lowest slice is 7⁻ˢ', s.K === 3 && s.slices[0][0] === 7 && Math.abs(s.slices[0][1] - 7 ** -1.3) < 1e-14);
+check('UP-TO-5 sweep: K = 3 throughout, the lowest slice is 7⁻ˢ', s.K === 3 && s.slices[0][0] === 7 && Math.abs(s.slices[0][1] - 7 ** -1.3) < 1e-14);
 let floorOk = true;
 for (const x of [4, 3.3, 2.5, 2, 1.7, 1.5, 1.3, 1.1, 1.05]) { const r = await setS(x); if (!(r.gap > r.floor && Math.abs(r.floor - 7 ** -x) < 1e-14 && near(r.gap, zeta(x) - product(3, x), 1e-9))) floorOk = false; }
-check('REMAINDER: at every s tried, gap = ζ − product > 7⁻ˢ (independent values)', floorOk);
+check('UP-TO-5 sweep: at every s tried, gap = ζ − product > 7⁻ˢ (independent values)', floorOk);
 s = await setS(1.5);
-check('REMAINDER: at s = 1.5 the gap matches the sum over non-5-smooth n (tail bound ∫ x⁻¹·⁵ beyond 10⁶)', (() => { const r = roughSum(3, 1.5, 1000000); const tail = 2 / Math.sqrt(1e6); return s.gap >= r && s.gap - r <= tail; })());
+check('UP-TO-5 sweep: at s = 1.5 the gap matches the sum over non-5-smooth n (tail bound ∫ x⁻¹·⁵ beyond 10⁶)', (() => { const r = roughSum(3, 1.5, 1000000); const tail = 2 / Math.sqrt(1e6); return s.gap >= r && s.gap - r <= tail; })());
 
 /* ---------- primes needed for 1% ---------- */
 s = await setS(2);
