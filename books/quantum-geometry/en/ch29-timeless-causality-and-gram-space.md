@@ -362,6 +362,10 @@ Passing from a single quadratic conic to the classical congruent-number problemâ
 - Because $\chi(T^2) = 0$, the even-sphere Hairy Ball obstruction (cf. [@rem-hairy-ball-adams-literature]) disappears on the torus: the invariant holomorphic differential $\omega = dx/y$ is everywhere nonvanishing and pole-free on the smooth projective curve $E_d$, endowing $E_d(\mathbb{Q})$ with a smooth global abelian group law $P \oplus Q$ (cf. [@rem-diophantine-z-in-q-literature] in Chapter 23 on Poonen's elliptic-curve divisibility method).
 :::
 
+::: {.viz src="hairy-ball-normal-escape" preset="torus" height="500"}
+**On a torus the arrows vanish nowhere.** On the torus $\bigl((R + r\cos\theta)\cos\phi,\, (R + r\cos\theta)\sin\phi,\, r\sin\theta\bigr)$ ($R > r > 0$) the cyan unit tangent vectors $\hat{\mathbf{e}}_\phi = (-\sin\phi, \cos\phi, 0)$ all point along the big circle, with length $1$ everywhere; the amber point goes once round, its arrow never shrinking, and there is no magenta ring of a zero on the torus. $\chi(T^2) = 0$, against $\chi(S^2) = 2$ for the sphere (literature result, not formalized in this book; see [@rem-ch29-elliptic-torus-literature]). The picture shows a surface of the same topology, not the elliptic curve itself.
+:::
+
 ### Pillar 3: Finite-Field Elliptic-Curve Reduction, the Frobenius Cosine, and the $S^3 \cong \mathrm{SU}(2)$ Projection {#sec-coda-hasse-sato-tate}
 
 A deeper arithmeticâ€“geometric correspondence appears when we reduce the normalized congruent-number elliptic curve $E : y^2 = x^3 - x$ onto each odd prime axis $\mathbb{F}_p$ ($p \ge 3$) from Chapter 22:

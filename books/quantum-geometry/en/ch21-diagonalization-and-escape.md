@@ -433,6 +433,30 @@ Reading items 3 and 4 together illuminates the topological backdrop of [Chapter 
 **For flat triangles to close into a sphere, the vertex defects must add up to $4\pi$.** On the left, five equilateral triangles laid flat around one vertex: five corners of $60^\circ$ make only $300^\circ$, and the magenta gap below is the $60^\circ$ angular defect. On the right, each of the icosahedron's twelve magenta vertices is short by $60^\circ$, for a total of $12 \times 60^\circ = 720^\circ = 4\pi$ (literature result, not formalized in this book; see [@rem-hairy-ball-adams-literature]).
 :::
 
+The figure has only twelve vertices. Cut each triangular face into $\nu^2$ smaller triangles and push the new vertices out onto the sphere (a geodesic dome): the vertices grow from $12$ to $42$, $92$ and $162$, each one short by less and less, and yet the shortfalls always add up to $4\pi$:
+
+::: {.viz src="hairy-ball-normal-escape" preset="defect" height="500"}
+**Finer and finer, the total defect stays put.** Each face of the icosahedron is cut into $\nu^2$ flat triangles and the vertices are pushed out to the sphere; the area of each magenta dot is that vertex's defect. As the rail cuts each edge into $\nu = 1$ up to $\nu = 6$ pieces, the dots grow in number and shrink in size, while the readout at the upper left stays at $720^\circ = 4\pi$ (literature result, not formalized in this book; see [@rem-hairy-ball-adams-literature]).
+:::
+
+The hairy ball theorem only says that a zero cannot be avoided. The Poincaré–Hopf theorem says more: each zero carries an integer index (walk once round it on a small loop and count how many times the arrow turns), and the indices of all the zeros add up to $\chi(S^2) = 2$. The field that cannot be combed, met with the Berry loops earlier, has a $+1$ at each pole. Zeros can be pushed around and merged, but the sum cannot be pushed away:
+
+::: {.viz src="hairy-ball-normal-escape" preset="merge" height="500"}
+**Two $+1$ zeros become one $+2$.** The cyan arrows start from the zonal field $(-y, x, 0)$ and change continuously while the rail pushes the southern zero up a meridian to the North Pole; once there, a single zero is left, and the cyan arrows on the small magenta loop round it turn twice. This is the dipole field $\vv{w} = \bigl(\frac{(1-z)^2 - x^2 + y^2}{2},\, -xy,\, x(1-z)\bigr)$, with $\lVert\vv{w}\rVert = 1 - z$, vanishing only at the North Pole. The indices always add up to $2$ (literature result, not formalized in this book; see [@rem-hairy-ball-adams-literature]; the family of fields in between was chosen for the picture).
+:::
+
+The zero cannot be removed because the arrows are required to lie in the tangent plane. Let them stand partly up along the outward normal and, in space, they vanish nowhere. This is how the book puts "a sphere beyond the sphere" into the picture (`MODEL`); it does not refute the hairy ball theorem, since an arrow that stands up is no longer a tangent vector.
+
+::: {.viz src="hairy-ball-normal-escape" preset="escape" height="500"}
+**Standing up along the normal, the zero is gone.** The arrows of the dipole field are raised half-way by $\widetilde{\vv{w}}_\lambda = (1-\lambda)\,\vv{w} + \lambda\,\frac{1+z}{2}\,\vv{x}$ ($\lambda = \frac12$): the short magenta strokes are the part that stands up, and at the North Pole the amber arrow sticks out of the grey tangent plane with length $\frac12$; the shortest arrows lie on the dashed magenta circle, about $0.447$ long, and no zero is left on the sphere. Reading the lift as leaving the tangent space is an interpretation (`MODEL`).
+:::
+
+The full laboratory below puts these pictures together, with one more scene: on the torus, whose Euler characteristic is $0$, the arrows can be nonzero everywhere, a point the torus of the congruent-number elliptic curve returns to.
+
+::: {.viz src="hairy-ball-normal-escape" height="640"}
+Interactive laboratory `ORTHO//HAIRY`: the zonal field on the sphere with its two $+1$ zeros, the family that pushes them into one $+2$, the unit tangent field on the torus, the geodesic domes of finer and finer subdivision with their vertex defects, and the lift $\widetilde{\vv{w}}_\lambda$ along the outward normal. Every index, every defect and the length of the shortest arrow are computed by the page (`NUM`); the Poincaré–Hopf and Descartes theorems are literature results ([@rem-hairy-ball-adams-literature]), and the reading of the lift is an interpretation (`MODEL`). The green box in the evidence panel is [@thm-complete-diagonal-not-continuous], which says that the diagonal is not continuous for the partition topology; it is not the hairy ball theorem.
+:::
+
 Reading these classical topological results ([@rem-hairy-ball-adams-literature]) alongside our kernel-verified relative semantic diagonal settlement ([@cor-complete-diagonal-topological-settlement]) highlights a shared structural motif: **singularities and incompleteness inside a sphere can be resolved only from a sphere beyond the sphere.**
 
 ::: {.viz src="sphere-escape" height="640"}
