@@ -229,11 +229,11 @@ Summability of $\lambda$ with $\tau > 0$ implies that only finitely many indices
 :::
 
 ::: {.viz src="eth-horizon-crossover" preset="plateau" height="500"}
-**A plateau: few modes carry the weight.** The first few modes are close to $1$, and from the ninth on the spectrum drops to zero. At the amber threshold $\theta = 0.5$, eight cyan modes clear the line while the magenta wall stands at $T/\theta = 16$ (on the page, $T$ is the trace budget $RW/\pi$ and $\theta$ is $\tau$): the count stays short of the wall, which is [@cor-finite-trace-mode-budget].
+**A plateau: few modes carry the weight.** The first few modes are close to $1$, and from the ninth on the spectrum drops to zero. At the amber threshold $\tau = 0.5$, eight cyan modes clear the line while the magenta wall stands at $RW/(\pi\tau) = 16$ (the spectrum on the page sums to the trace budget $RW/\pi$): the count stays short of the wall, which is [@cor-finite-trace-mode-budget].
 :::
 
 ::: {.viz src="eth-horizon-crossover" preset="tail" height="500"}
-**Lower threshold: more modes, never past the wall.** Switch to a power law with a long tail and lower the amber threshold all the way: more and more cyan bars clear the line, the magenta wall $T/\theta$ retreats as well, and the bars never reach it (at $\theta = 0.07$, six modes clear the line and the wall stands at $37.4$).
+**Lower threshold: more modes, never past the wall.** Switch to a power law with a long tail and lower the amber threshold all the way: more and more cyan bars clear the line, the magenta wall $RW/(\pi\tau)$ retreats as well, and the bars never reach it (at $\tau = 0.07$, six modes clear the line and the wall stands at $37.4$).
 :::
 
 Note that [@cor-finite-trace-mode-budget] does not separately assume $R > 0$ or $W > 0$ (the trace identity $\sum_j \lambda_j = RW/\pi$ with $\lambda_j \ge 0$ implies only that the product satisfies $R W \ge 0$, not that $R \ge 0$ and $W \ge 0$ individually — for instance, $R = -\pi$ and $W = -1$ satisfy all hypotheses), and it concerns a sufficient spectral superlevel counting bound rather than learnability, uniform sphere measure, random-circuit gradients, or a barren-plateau tail bound.
