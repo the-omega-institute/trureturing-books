@@ -701,3 +701,16 @@ CH21 的 `CH21-GID-OVERCLAIM` 继续判为 discarded false finding：允许读�
 交互源/测试/静态图实现按要求尝试直接命令行 CLI：版本为 `claude 2.1.322`；无登录凭据的非交互实现调用退出并报告 `Not logged in · Please run /login`，未产生工作区改动。随后由本实施者按同一最小范围完成补丁，并以项目现有浏览器套件、独立计算和站点 iframe 检查独立验证；没有派生子代理、Git/GitHub 生命周期操作或读取根目录受保护的 untracked 文件。
 
 本次留下的是实现交接，不是 approval/verdict。当前没有本实施分配内的剩余修复义务；调用方仍须在最终候选上完成 mandatory R2 三席复审、current-main correspondence、PR127 的 CI、合入与 Pages 核对，并保留原 35 单元覆盖与第 31–39 章依赖边界。独立复审、PR/CI/merge/Pages 状态不因本地构建通过而自动成立。
+
+
+## PR127 post-R2 有界实现（2026-11-12）
+
+本轮密封输入为 `8489b84102f0d913f16b8de1c9a210305a71c2d8`，pin 仍为 `1d9bf98cab8306e67ec38a739359f2cdae63877a`。原 35 单元审计集合保持不变；出版中的第 31–39 章与 44 单元只作依赖，不计入已审覆盖。本轮只处理 R2 aggregate 已确认的 prime 舞台标签碰撞与 Newton 局部域/实现路线义务，保留现有作者题记、正文语气、稳定 ID/GID、媒体顺序、当前 pin 拥有的 href/# 迁移、regular icosahedron 图注以及 rational-start cosine/injectivity 修复；未改 ch21、Film006、Lean、锁、托管文件或共享 mobile rail。
+
+直接媒体实现按项目命令通过 `claude -p --model opus` 完成，终端版本为 `claude 2.1.322 (Claude Code)`，未使用 Claude Subagent。成功路线实际写入 `sphere-escape/main.js`、`fixed-point-convergence/main.js` 与 `fixed-point-convergence/index.html`；当前 `sphere-escape/index.html` 中较早的已接受 pin/domain 文字被保留。指定的 pre-route manifest 为 `/tmp/qg-accuracy-resume-20261112/pr127-pre-route-media-source/source-manifest.json`（标签 `f772e826`），对应关系和 touched-path/source-hash 收据见 `build/content-accuracy/pr127-postr2-20261112/implementation-route.json`。早先认证失败（`Not logged in · Please run /login`）和一次历史只读 `git diff --stat` 路线违规均如实保留，未改写成合规证据；本轮未执行 Git/GitHub 生命周期操作，也未读取受保护根笔记或诊断日志。
+
+prime 舞台以实际 `measureText` 墨迹盒规划四个 band，遍历 `k=0..12`、中英文和完整支持的六种尺寸（1440×900、1440×560、390×844、740×620、740×500、800×450），记录 canvas/free-band 对应、有限盒、六组两两间隔、正最小间隙、无 fallback、正字体尺寸与 BigInt 的 Q/因子/余数/lpf 一致。共 156 个布局状态；不隐藏公式、不缩小控制域。Newton 页面固定 `rho=0.5`，对 cos `[−1.50,3.00]` 的 451 个 hundredths 起点和 `1+1/x` `[0.20,5.00]` 的 481 个起点逐一核对 70/90 位轨道、五步分母、局部标记、`RES=10^-60` 截止和局部二次律。实测常数为 cos `C=0.3927652529`、`C·rho=0.1963826265`、极限系数 `0.2208053959`；`1+1/x` 为 `C=0.5851128635`、`C·rho=0.2925564318`、极限系数 `0.1708203932`，均满足 `C·rho<1`。
+
+现有 normal/slow 实验室套件均重新独立通过：sphere `130/130`、`105/105`；fixed-point `130/130`、`114/114`，两份测试还通过 `node --check`。`./tbook check` 为 0 error/0 warning；`TBOOK_FILMS=skip ./tbook build html pdf epub site --book quantum-geometry` 成功。双语 HTML、四份 screen/print PDF、两份 EPUB 与 `_site` 均从当前源生成；两份 EPUBCheck 5.3.0 均 valid、0 error、0 warning（裸 `epubcheck` shell 命令仍 exit 127）。四版 PDF 检测到 64 个受影响页并逐页渲染，逐一抽查中英 screen/print 的 prime/Newton 代表页，公式、标签和图注完整可读，无可见裁切或重叠；站点中英 ch21/ch22/ch24 的 12 个页面组合及 4 个直接实验室页无页面、控制台、HTTP、iframe 或溢出错误。两个实验室的全部 30 张实际消费 JPEG still（含 fig-euclid/fig-newton 与 thumb）已刷新并抽查。输出、站点/下载、PDF 页面和 still 字节对应见 `consumer-correspondence.json`、`pdf-page-evidence.json`、`pdf-visual-inspection.json` 与 `verification.json`。
+
+保留限制：pypandoc bundled binary 报 `Bad CPU type in executable` 后使用系统 Pandoc；8 个 films 因 `TBOOK_FILMS=skip` 只生成海报回退；Noto CJK SC 未安装；受控字体输出不等同默认 macOS/CI 字节；窄屏 EPUB 默认字体、原生 Apple Books/其他阅读器、实体设备与完整音视频/字幕同步仍未验收。该记录只证明本有界实现和消费者检查，不增加原 35 单元批准覆盖，也不构成 whole-book approval。调用方仍需封存候选、执行 mandatory R3 三席复审并处理其独立结论，随后负责 PR/CI、合入与 Pages；本批没有剩余实现额度。
