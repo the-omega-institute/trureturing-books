@@ -49,17 +49,14 @@ const agree = (s, N) => {
   return { worst, off };
 };
 
-// TWO MIRRORS: N = 8, one step
+// opening card N = 8; its states also show the two mirrors of the first step
 let s = await state();
-check('opens on TWO MIRRORS at N = 8, step 1', s.preset === 'mirrors' && close(s.N, 8, 1e-9) && s.n === 1 && s.phase === 0);
+check('opens on N = 8 at step 2', s.preset === 'eight' && close(s.N, 8, 1e-9) && s.n === 2 && s.phase === 0);
 let ag = agree(s, 8);
 check('N = 8: every state and mirror image matches the 8-dimensional oracle + diffusion run, which never leaves the plane', ag.worst < 1e-12 && ag.off < 1e-12, JSON.stringify(ag));
-check('TWO MIRRORS: mirror 1 flips W and keeps B; mirror 2 brings the arrow 2θ ≈ 41.41° above the start', close(s.mids[0][0], s.states[0][0], 1e-12) && close(s.mids[0][1], -s.states[0][1], 1e-12)
+check('two mirrors: mirror 1 flips W and keeps B; mirror 2 brings the arrow 2θ ≈ 41.41° above the start', close(s.mids[0][0], s.states[0][0], 1e-12) && close(s.mids[0][1], -s.states[0][1], 1e-12)
   && close((Math.atan2(s.states[1][1], s.states[1][0]) - Math.atan2(s.states[0][1], s.states[0][0])) / DEG, 2 * Math.asin(1 / Math.sqrt(8)) / DEG, 1e-9) && close(2 * s.theta / DEG, 41.4096, 1e-4));
-check('TWO MIRRORS: the cyan shadow grows from 0.354 to 0.884', close(s.states[0][1], 1 / Math.sqrt(8), 1e-12) && close(s.states[1][1], 5 / Math.sqrt(32), 1e-12));
-await pick('mirrors');
-check('TWO MIRRORS plays by itself when clicked', await plays());
-check('TWO MIRRORS stops at step 1 by itself', await stopsAt(1));
+check('two mirrors: the cyan shadow grows from 0.354 to 0.884 in the first step', close(s.states[0][1], 1 / Math.sqrt(8), 1e-12) && close(s.states[1][1], 5 / Math.sqrt(32), 1e-12));
 await seek(0.5); s = await state();
 check('half a step is the image in mirror 1: the arrow at (cos θ, −sin θ)', s.phase === 1 && close(s.arrow[0], Math.cos(s.theta), 1e-12) && close(s.arrow[1], -Math.sin(s.theta), 1e-12));
 check('the HUD names the mirror', (await page.textContent('#hudBig')).includes('镜 1 之后'));

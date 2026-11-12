@@ -106,6 +106,24 @@ check('PERIOD 4: k = 4, the four arrows all point right, chain of length 4', clo
 let worstSweep = 0; for (const t of [0, 3, 7, 11, 14]) { await seek(t); worstSweep = Math.max(worstSweep, worst((await state()).probs, spectrum(16, 4, 0, t))); }
 check('during the sweep every bar matches the matrix applied to the swept cells (5 positions)', worstSweep < 1e-12, String(worstSweep));
 
+// DUAL COMB: Q = 32, r = 8, the comb and the spectrum are different combs
+await pick('dual'); check('DUAL COMB plays by itself', await plays()); check('DUAL COMB stops at the last cell', await stopsAt(31)); s = await state();
+const sp32 = spectrum(32, 8, 0), peaks32 = [0, 4, 8, 12, 16, 20, 24, 28];
+check('DUAL COMB: the comb is {0, 8, 16, 24} and the spectrum is 1/8 at the multiples of 4, 0 elsewhere (32 × 32 matrix)', s.comb.join() === '0,8,16,24' && worst(s.probs, sp32) < 1e-12 && peaks32.every((k) => close(s.probs[k], 1 / 8, 1e-12)) && s.probs.filter((p) => p > 1e-12).length === 8);
+check('DUAL COMB: k = 4, the four arrows all point right, chain of length 4', s.k === 4 && close(s.sum[0], 4, 1e-12) && close(s.sum[1], 0, 1e-12));
+{
+  // H = {0, 8, 16, 24} in ZMod 32 and its annihilator by brute force; the finite Poisson formula on a test function
+  const Hq = [0, 8, 16, 24], ann32 = []; for (let k = 0; k < 32; k++) if (Hq.every((h) => (k * h) % 32 === 0)) ann32.push(k);
+  const f = (x) => [Math.cos(x * x + 1), Math.sin(3 * x) - x / 7];
+  const dft = (k) => { let re = 0, im = 0; for (let x = 0; x < 32; x++) { const w = cexp(-TAU * x * k / 32), v = cmul(w, f(x)); re += v[0]; im += v[1]; } return [re, im]; };
+  const lhs = Hq.reduce((a, h) => [a[0] + f(h)[0], a[1] + f(h)[1]], [0, 0]);
+  const rhs = ann32.reduce((a, k) => { const d = dft(k); return [a[0] + d[0], a[1] + d[1]]; }, [0, 0]).map((v) => v * Hq.length / 32);
+  check('DUAL COMB: annihilator(H) = {0, 4, …, 28}, |H| · |H⊥| = 4 · 8 = 32, and the finite Poisson formula holds (brute force)', ann32.join() === peaks32.join() && Hq.length * ann32.length === 32 && close(lhs[0], rhs[0], 1e-9) && close(lhs[1], rhs[1], 1e-9));
+  check('DUAL COMB: the peaks sit Q/r = 4 apart while the comb cells sit r = 8 apart', s.peaks.join() === peaks32.join() && s.comb[1] - s.comb[0] === 8);
+  const sub = await page.textContent('#hudSub');
+  check('DUAL COMB: the HUD reads |H| = 4 · |H⊥| = 8 · 峰距 Q/r = 4', sub.includes('|H| = 4') && sub.includes('|H⊥| = 8') && sub.includes('Q/r = 4'), sub);
+}
+
 // READ r: reading the order
 await pick('read'); check('READ r plays by itself', await plays()); check('READ r stops at the last cell', await stopsAt(15)); s = await state();
 const reads = await page.evaluate(() => [0, 4, 8, 12].map((k) => window.PHASE_DEBUG.readOrder(k)));
