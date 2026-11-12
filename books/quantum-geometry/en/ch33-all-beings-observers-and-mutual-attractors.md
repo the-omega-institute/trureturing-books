@@ -202,7 +202,7 @@ Look at the two contrasting cobweb trajectories of solitary and mutual reference
 :::
 
 ::: {.viz src="mutual-observer-attractors" preset="round" height="500"}
-**Two beats a round, from one side only.** The same orbit sampled every two beats (the hollow rings): $0.1 \to 0.544 \to 0.656 \to 0.702 \to \dots$ closes in monotonically on one side of $\theta^*$, the error multiplied by about $0.454 = 0.674^2$ a round; a round costs two cosine evaluations ([@ex-ch33-mutual-cosine-monotonic-lock], clauses 14, 21, 23 and 24, and the numerical ledger).
+**Two beats a round, from one side only.** The same orbit sampled every two beats (the hollow rings): $0.1 \to 0.544 \to 0.656 \to 0.702 \to \dots$ closes in monotonically on one side of $\theta^*$, the error multiplied by about $0.454 = 0.674^2$ a round. A round costs two cosine evaluations, and the rings are just the even beats of the same orbit as in the previous card: the same number of cosine evaluations lands in the same place, so what the round buys is no more crossing from side to side, not speed ([@ex-ch33-mutual-cosine-monotonic-lock], clauses 14, 21, 23 and 24, and the numerical ledger).
 :::
 
 Stepping back from the trajectory ledger of [@ex-ch33-mutual-cosine-monotonic-lock], within our relational observer `MODEL`, stepping out of isolation into eye-level mutual reflection is never a sentimental concession—it is the endogenous geometry that frees bounded beings from solitary oscillation.
