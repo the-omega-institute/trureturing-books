@@ -105,25 +105,12 @@ check('SANDWICH: the 45.0° + 45.0° reading sits outside the sphere\'s outline,
 check('SANDWICH: the y label is outside the outline (not inside the magenta fan)', !!yTag && gapFromCentre(yTag, lab.disc) > lab.disc.r, JSON.stringify(yTag));
 check('SANDWICH: the rotor is cos 45° − sin 45° e₁₂', vclose([0, 3, 5, 6].map((m) => s.full[m]), [Math.SQRT1_2, -Math.SQRT1_2, 0, 0], 1e-12));
 
-// T
-await pick('t'); s = await seek(3);
-check('T-GATE: (π/4, 0, 0) compiles to 0.923880 − 0.382683 e₁₂', vclose([0, 3, 5, 6].map((m) => s.full[m]), [Math.cos(Math.PI / 8), -Math.sin(Math.PI / 8), 0, 0], 1e-12) && rotorErr(s, 3) < 1e-12);
-const still = await page.evaluate(() => Array.from({ length: 21 }, (_, i) => window.ZYZ_DEBUG.at(2 * i / 20)));
-check('T-GATE: during the two zero turns the arrow does not move', still.every((p) => vclose(p, [1, 0, 0], 1e-12)));
-{
-  // the card's title names exactly the turns whose angle is zero (read from the page's angles, not a fixed string)
-  const zeroNames = [['γ', s.gamma], ['β', s.beta], ['α', s.alpha]].filter(([, a]) => Math.abs(a) < 1e-12).map(([n]) => n);
-  const nonZero = [['γ', s.gamma], ['β', s.beta], ['α', s.alpha]].filter(([, a]) => Math.abs(a) >= 1e-12).map(([n]) => n);
-  const titles = await page.$$eval('[data-preset="t"] .cn', (els) => els.map((e) => e.textContent));
-  check('T-GATE: the card title names the zero turns (γ and β), not the turning one (α)', zeroNames.join() === 'γ,β' && titles.length === 2 && titles.every((t) => zeroNames.every((n) => t.includes(n)) && nonZero.every((n) => !t.includes(n))), titles.join(' | '));
-}
-check('T-GATE: v ends 45° along the equator and Re₃ stays at the pole', vclose(s.v, [Math.SQRT1_2, Math.SQRT1_2, 0], 1e-12) && vclose(s.frame[2], [0, 0, 1], 1e-12) && vclose(s.axis, [0, 0, 1], 1e-12) && close(s.phi, Math.PI / 4, 1e-12));
-
 // H
 await pick('h'); s = await seek(3);
 check('HADAMARD: (0, π/2, π) compiles to −(e₁₂ + e₂₃)/√2', vclose([0, 3, 5, 6].map((m) => s.full[m]), [0, -Math.SQRT1_2, 0, -Math.SQRT1_2], 1e-12) && rotorErr(s, 3) < 1e-12);
 check('HADAMARD: Re₁ = e₃, Re₂ = −e₂, Re₃ = e₁', vclose(s.columns[0], [0, 0, 1], 1e-12) && vclose(s.columns[1], [0, -1, 0], 1e-12) && vclose(s.columns[2], [1, 0, 0], 1e-12));
 check('HADAMARD: the single axis is (e₁ + e₃)/√2 and the angle 180°', s.fold && vclose(s.axis, [Math.SQRT1_2, 0, Math.SQRT1_2], 1e-12) && close(s.phi, Math.PI, 1e-12));
+check('HADAMARD: the note also places the T gate (π/4, 0, 0): its only non-zero turn is the last one, 45° about z', /T 门 \(π\/4, 0, 0\)/.test(await page.textContent('#presetNote')) && /45°/.test(await page.textContent('#presetNote')));
 const pole = await page.evaluate(() => Array.from({ length: 11 }, (_, i) => window.ZYZ_DEBUG.at(i / 10)));
 check('HADAMARD: in the first turn v sits on the z axis and stays at N; then it comes down to e₁', pole.every((p) => vclose(p, [0, 0, 1], 1e-12)) && vclose(s.v, [1, 0, 0], 1e-12));
 s = await seek(0.5);
