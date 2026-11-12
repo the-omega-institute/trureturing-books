@@ -303,7 +303,7 @@ check('TWIN preset note accurately distinguishes 8 completed updates Q₀…Q₇
   zhTwinNote.includes('Q₀…Q₇') && zhTwinNote.includes('Q₈') && zhTwinNote.includes('4.5')
   && zhTwinNote.includes('8 次历史递推') && zhTwinNote.includes('9 次递推')
   && enTwinNote.includes('Q₀…Q₇') && enTwinNote.includes('Q₈') && enTwinNote.includes('4.5')
-  && enTwinNote.includes('8 completed updates') && enTwinNote.includes('9 displayed updates'),
+  && enTwinNote.includes('eight completed historical Picard updates Q₀…Q₇') && enTwinNote.includes('nine updates (4.5 cobweb turns)'),
   JSON.stringify({ zhTwinNote, enTwinNote }));
 check('English HUD renders Twin Spirals title cleanly', (await text('#hudBig')) === 'TWIN SPIRALS · STEP 8');
 await page.click('#sceneChips [data-scene="angle"]');
