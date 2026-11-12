@@ -113,10 +113,21 @@ let worst = Infinity;
 for (const e of [0.05, 0.1, 0.3]) { await setRange('eps', e); for (const n of [2, 5, 8, 12]) { await seek(n - 1); const st = await state(); worst = Math.min(worst, st.bound - st.out); if (n <= 8 && !close(st.out, tailSimpson(st.d, e), 1e-8)) worst = -1; } }
 check('the bound lies above the actual share at 12 settings of d and ε, and the share agrees with Simpson where it applies', worst >= 0, String(worst));
 check('the ε slider leaves the card', (await state()).preset === null);
+{
+  const shot = await T.goto(BOOK, ID, '?shot=1&lang=zh&preset=bound', await T.newPage());
+  await settle(shot);
+  const v = await shot.evaluate(() => ({ s: window.EQUATOR_DEBUG.state, tags: Array.from(document.querySelectorAll('#stage .tag')).filter((e) => !e.hidden).map((e) => e.textContent) }));
+  check('MARKOV still: the stage shows the share-and-bound scene at n = 7, and its two labels give the suite\'s 0.0231 and 0.195', v.s.scene === 'curve' && v.s.d === 128 && v.tags.some((x) => x.includes(`精确份额 ${t128.toFixed(4)}`)) && v.tags.some((x) => x.includes(`= ${(1 / (128 * 0.04)).toFixed(3)}`)), v.tags.join(' | '));
+  await shot.close();
+}
+await page.click('#sceneChips [data-scene="crowd"]'); s = await state();
+check('the scene chips switch back to the dots and leave the card', s.scene === 'crowd' && s.preset === null);
 
 // TWENTY QUBITS
+await pick('bound'); check('MARKOV opens the share-and-bound scene', (await state()).scene === 'curve');
 await pick('twenty');
 check('20 QUBITS plays by itself', await plays());
+check('20 QUBITS returns to the dots', (await state()).scene === 'crowd');
 await seek(19); s = await state();
 check('20 QUBITS: d = 2²⁰ = 1,048,576 and the Markov bound 100/2²⁰ ≈ 9.54 × 10⁻⁵ (Chapter 12)', s.d === 1048576 && close(s.bound, 100 / 1048576, 1e-15) && close(s.bound, 9.5367e-5, 1e-9));
 const la = log10TailAsym(1048576, 0.1);

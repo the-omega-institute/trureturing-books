@@ -61,7 +61,7 @@
   }
 
   /* ---------- state and samples ---------- */
-  const S = { t: 4, eps: 0.1, seed: 1 };
+  const S = { t: 4, eps: 0.1, seed: 1, scene: 'crowd' };   // scene: the dots and the density, or the share against n
   let UNI = null;
   function mulberry32(a) { return () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
   function draw() {
@@ -209,13 +209,40 @@
     }
   }
 
+  /** The "bound" scene: the exact outside share and the Markov bound against n = log₂ d, on a log scale, one line
+      above the other; the amber line is the current n. */
+  const CURVE_Y = [1e-12, 2];
+  function drawCurve(W, H, F) {
+    const b = layout(W, H).c, top = b.y, bottom = H - (b.y + (boxes.side ? b.h : b.h + boxes.p.h + 8)), e = F.eps;
+    const g = kit.plot($('cv'), { x: [1, NMAX], y: CURVE_Y, logY: true, pad: [52, 26, top + 8, Math.max(bottom, 20) + 22], clear: false });
+    const words = !TRV.thumbMode;
+    g.axes({ yTicks: words ? [[1e-12, '10⁻¹²'], [1e-9, '10⁻⁹'], [1e-6, '10⁻⁶'], [1e-3, '10⁻³'], [1, '1']] : [], xTicks: words ? [1, 5, 10, 15, 20] : [], xLabel: words ? L('n = log₂ d', 'n = log₂ d') : '' });
+    const ex = [], bd = [];
+    for (let i = 0; i <= 190; i++) {
+      const n = 1 + 19 * i / 190, d = dOf(n), lo = lnOut(d, e);
+      ex.push([n, lo > Math.log(CURVE_Y[0]) ? Math.exp(lo) : null]); bd.push([n, Math.min(1, 1 / (d * e * e))]);
+    }
+    g.line(bd, P.magenta, { width: 2.2 * TH, dash: [7, 5] });
+    g.line(ex, P.magenta, { width: 3 * TH });
+    const n = F.n, ok = F.lnOut > Math.log(CURVE_Y[0]);
+    g.vline(n, P.amber, { alpha: 0.85, width: 1.6 * TH });
+    g.dot(n, Math.min(1, F.bound), P.magenta, 5 * TH, { ring: true, width: 2 });
+    if (ok) g.dot(n, F.out, P.magenta, 5.5 * TH);
+    if (words) {
+      stage.tag('cvb', [g.X(n), g.Y(Math.min(1, F.bound))], L(`上界 1/(dε²) = ${F.bound < 1e-3 ? share(Math.log(F.bound)) : fix(F.bound, 3)}`, `bound 1/(dε²) = ${F.bound < 1e-3 ? share(Math.log(F.bound)) : fix(F.bound, 3)}`), 'raw mg', { screen: true, dx: 92, dy: -16 });
+      if (ok) stage.tag('cve', [g.X(n), g.Y(F.out)], L(`精确份额 ${share(F.lnOut)}`, `exact share ${share(F.lnOut)}`), 'raw mg', { screen: true, dx: g.X(n) > 260 ? -100 : 78, dy: g.X(n) > 260 ? 26 : 16 });
+      stage.tag('cvn', [g.X(n), g.Y(CURVE_Y[0])], `n = ${fix(n, n % 1 ? 2 : 0)}`, 'raw am', { screen: true, dx: 24, dy: -14 });
+    }
+  }
   const stage = kit.stage3($('stage'), { canvas: $('cv'), rotate: false });
   function drawStage() {
     const cv = $('cv'), W = cv.clientWidth, H = cv.clientHeight, F = facts(), sm = samples();
     boxes = layout(W, H);
     stage.begin();
-    drawCircle(W, H, F, sm);
-    drawDensity(W, H, F, sm);
+    if (S.scene === 'curve') { LOUPE = null; drawCurve(W, H, F); } else {
+      drawCircle(W, H, F, sm);
+      drawDensity(W, H, F, sm);
+    }
     stage.end();
   }
 
@@ -256,7 +283,7 @@
       : L(`上界 1/(dε²) 只用到 E[x₁²] = 1/d，比实际份额大 ${F.lnOut > Math.log(1e-300) ? fix(F.bound / F.out, 1) : `10${String(Math.round(Math.log10(F.bound) - F.log10Out)).split('').map((c) => SUP[c] || c).join('')}`} 倍。`, `The bound 1/(dε²) uses only E[x₁²] = 1/d and is ${F.lnOut > Math.log(1e-300) ? fix(F.bound / F.out, 1) : `10${String(Math.round(Math.log10(F.bound) - F.log10Out)).split('').map((c) => SUP[c] || c).join('')}`} times the actual share.`);
     $('pillD').querySelector('strong').textContent = dName(d);
     $('pillOut').querySelector('strong').textContent = share(F.lnOut);
-    $('legend').innerHTML = [['cy', '赤道带里的点；带内的密度', 'points in the equator belt; density inside'], ['mg', '带外的点；带外的密度', 'points outside; density outside'], ['dm', '精确密度；点的直方图', 'exact density; histogram of the points']]
+    $('legend').innerHTML = (S.scene === 'curve' ? [['mg', '实线：带外的精确份额', 'solid: the exact outside share'], ['mg', '虚线：马尔可夫上界 1/(dε²)', 'dashed: the Markov bound 1/(dε²)'], ['am', '当前的 n', 'the current n']] : [['cy', '赤道带里的点；带内的密度', 'points in the equator belt; density inside'], ['mg', '带外的点；带外的密度', 'points outside; density outside'], ['dm', '精确密度；点的直方图', 'exact density; histogram of the points']])
       .map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
   }
 
@@ -275,6 +302,7 @@
 
   /* ---------- controls ---------- */
   const leave = () => cards.mark(null);
+  const sceneChips = kit.chips($('sceneChips'), 'scene', (v) => { leave(); S.scene = v; paint(); });
   const fEps = kit.field($('eps'), { fmt: (v) => fix(v, 2), onInput: (v) => { leave(); S.eps = v; paint(); } });
   const redraw = () => { leave(); S.seed++; draw(); smKey = ''; paint(); };
   $('redraw').addEventListener('click', redraw);
@@ -286,19 +314,19 @@
   const PRESETS = {
     three: { t: L3, eps: 0.1 },
     width: { t: 10, eps: 0.1 },
-    bound: { t: 7, eps: 0.2 },
+    bound: { t: 7, eps: 0.2, scene: 'curve' },
     twenty: { t: 20, eps: 0.1 }
   };
   const NOTES = {
     three: ['普通的三维球面，d = 3：圆上的点上下铺开，右边的密度是一条竖直的直线 1/2，直方图围着它起伏——点的高度 x₁ 在 −1 到 1 之间均匀分布。ε = 0.1 的赤道带里恰好是 10% 的点（青色），其余 90% 是品红。', 'The ordinary sphere, d = 3: the dots spread up and down the circle, and on the right the density is a vertical straight line at 1/2 with the histogram around it: the height x₁ is spread evenly between −1 and 1. The belt with ε = 0.1 holds exactly 10% of the points (cyan); the other 90% are magenta.'],
     width: ['维数从 2 一路升到 2¹⁰ = 1024：点越来越挤向赤道，鼓包越来越窄、越来越高，±1/√d 的短横线一起向赤道收拢。到 d = 1024 时宽度是 0.031，带外只剩 0.13%；鼓包薄得看不清，右上角的放大镜把赤道附近放大 32 倍，鼓包在那里仍是 ±1/√d 那么宽。', 'The dimension rises from 2 to 2¹⁰ = 1024: the dots crowd ever closer to the equator, the bump grows narrower and taller, and the ±1/√d ticks close in with it. At d = 1024 the width is 0.031 and only 0.13% lies outside; the bump is too thin to see, so the magnifier at the upper right enlarges the equator 32 times, and there it is still ±1/√d wide.'],
-    bound: ['d = 2⁷ = 128，带宽 ε = 0.2：品红的带外份额是 0.023，马尔可夫上界 1/(dε²) = 0.195 在它之上，大了八倍多。', 'd = 2⁷ = 128 with ε = 0.2: the magenta outside share is 0.023, and the Markov bound 1/(dε²) = 0.195 lies above it, more than eight times larger.'],
+    bound: ['带宽 ε = 0.2，横轴是 n = log₂ d，纵轴取对数：品红实线是带外的精确份额，品红虚线是马尔可夫上界 1/(dε²)，虚线处处压在实线之上。琥珀色的线停在 n = 7（d = 128）：份额 0.023，上界 0.195，大了八倍多。', 'Belt half-width ε = 0.2, n = log₂ d across, a log scale up the side: the solid magenta line is the exact outside share and the dashed magenta line the Markov bound 1/(dε²), lying above the solid one everywhere. The amber line stops at n = 7 (d = 128): share 0.023, bound 0.195, more than eight times larger.'],
     twenty: ['二十个量子比特，d = 2²⁰ = 1,048,576，ε = 0.1：所有的点都落在赤道上，密度缩成赤道上的一根细针；右上角的放大镜把赤道附近放大 1024 倍，针原来是一个宽 ±1/√d 的鼓包，带边 ±ε 远在窗外。带外份额的马尔可夫上界是 9.54 × 10⁻⁵，精确值约为 3 × 10⁻²²⁹¹。', 'Twenty qubits, d = 2²⁰ = 1,048,576, ε = 0.1: every dot lands on the equator and the density shrinks to a thin needle there; the magnifier at the upper right enlarges the equator 1024 times, and the needle turns out to be a bump ±1/√d wide, with the belt edges ±ε far outside the window. The Markov bound on the outside share is 9.54 × 10⁻⁵; the exact share is about 3 × 10⁻²²⁹¹.']
   };
   let booting = true;
   function applyPreset(id) {
     const p = PRESETS[id], still = p.t;
-    S.eps = p.eps; fEps.set(p.eps);
+    S.eps = p.eps; fEps.set(p.eps); S.scene = p.scene || 'crowd'; sceneChips.set(S.scene, true);
     clock.pause(); stopAt = null;
     clock.set(still - 1);
     // a still (cover, cited figure shot) and the opening view of the full page show the card's telling frame;
@@ -316,7 +344,7 @@
 
   /* ---------- probe, cover, start ---------- */
   window.EQUATOR_DEBUG = {
-    get state() { const F = facts(); return Object.assign({ t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, seed: S.seed, loupe: LOUPE && Object.assign({}, LOUPE) }, F); },
+    get state() { const F = facts(); return Object.assign({ scene: S.scene, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current, seed: S.seed, loupe: LOUPE && Object.assign({}, LOUPE) }, F); },
     samples: () => samples().x.slice(),
     density: (x) => density(dOf(S.t), x),
     loupeDensity: (z) => { const d = dOf(S.t); return density(d, z / Math.sqrt(d)) / Math.sqrt(d); },

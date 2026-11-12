@@ -222,6 +222,8 @@ $$
 **普通的三维球面上，点的高度均匀分布。** $d = 3$：圆上的点上下铺开，右边的精确密度是一条竖直的直线 $1/2$；$\varepsilon = 0.1$ 的赤道带里恰好是 10% 的点（青色），其余 90% 是品红的点。高度均匀是阿基米德的经典结果，未在本书形式化。
 :::
 
+从 $d = 3$ 往上升维数，同一条 $\varepsilon = 0.1$ 的赤道带装下的点越来越多。
+
 ::: {.viz src="equator-concentration" preset="width" height="500"}
 **维数越高，点越挤向赤道。** 时间轴把维数从 $d = 2$ 升到 $d = 2^{10}$：圆上的点挤向垂直于测量轴的赤道，右边的鼓包变窄变高，两道短横线 $\pm 1/\sqrt{d}$ 一起收拢；到 $d = 1024$ 时带外只剩 0.13%，鼓包薄得看不清，右上角的放大镜把赤道附近放大 32 倍，鼓包在那里仍宽 $\pm 1/\sqrt{d}$。宽度 $1/\sqrt{d}$ 来自 $\mathbb{E}[x_1^2] = 1/d$（[@rem-sphere-equator-markov-literature]）。
 :::
@@ -243,8 +245,10 @@ $$
 :::
 
 ::: {.viz src="equator-concentration" preset="bound" height="500"}
-**马尔可夫上界总在实际份额之上。** $d = 2^7 = 128$、$\varepsilon = 0.2$：品红的带外份额是 0.023，上界 $1/(d\varepsilon^2) = 0.195$ 在它之上，大了八倍多（[@rem-sphere-equator-markov-literature]）。
+**马尔可夫上界总在实际份额之上。** 带宽 $\varepsilon = 0.2$，横轴是 $n = \log_2 d$，纵轴取对数：品红实线是带外的精确份额，品红虚线是上界 $1/(d\varepsilon^2)$，虚线处处压在实线之上。琥珀色的线停在 $d = 2^7 = 128$：份额 0.023，上界 0.195，大了八倍多（[@rem-sphere-equator-markov-literature]）。
 :::
+
+维数升到 $d = 2^{20}$、带宽收窄到 $\varepsilon = 0.1$ 时，这条上界给出的就是上面注记里的 $9.54 \times 10^{-5}$。
 
 ::: {.viz src="equator-concentration" preset="twenty" height="500"}
 **二十个量子比特：所有的点都在赤道窄带里。** $d = 2^{20}$、$\varepsilon = 0.1$：圆上的点全落在赤道上，密度缩成赤道上的一根细针；右上角的放大镜把赤道附近放大 1024 倍，针原来是一个宽 $\pm 1/\sqrt{d}$ 的鼓包，带边 $\pm\varepsilon$ 远在窗外。马尔可夫上界给出 $9.54 \times 10^{-5}$，页面用不完全贝塔函数算出的精确份额约为 $3 \times 10^{-2291}$。这是受限实振幅模型上的测度集中，不是电路梯度定律（[@rem-mbqc-gradients-literature]）。
@@ -277,12 +281,8 @@ $$
 两边同除以正数 $\tau > 0$，即得 $\operatorname{ncard}(S_\tau) \le \frac{R W}{\pi \tau}$。完整证明由 Lean 内核检查。
 :::
 
-::: {.viz src="eth-horizon-crossover" preset="plateau" height="500"}
-**平台谱：承重的模态屈指可数。** 前几个模态接近 $1$，第九个起迅速掉到零。琥珀色的阈值 $\tau = 0.5$ 下，青色的过线模态有 $8$ 个，品红的墙在 $RW/(\pi\tau) = 16$（页面上这条谱的总和就是迹预算 $RW/\pi$）：个数不超过墙，就是 [@cor-finite-trace-mode-budget]。
-:::
-
-::: {.viz src="eth-horizon-crossover" preset="tail" height="500"}
-**阈值降低：个数涨，仍不过墙。** 换成拖着长尾的幂律谱，再把琥珀色的阈值一路降低：过线的青色柱子越来越多，品红的墙 $RW/(\pi\tau)$ 也跟着后退，柱子始终到不了墙（$\tau = 0.07$ 时 $6$ 个过线，墙在 $37.4$）。
+::: {.viz src="eth-horizon-crossover" preset="geometric" height="500"}
+**几何谱：过线三根，墙在 8。** 用 [@ex-cluster-shift-and-gradient] 第 5 步的几何谱 $\lambda_j = 2^{-(j+1)}$，总和就是迹预算 $RW/\pi = 1$。琥珀色的阈值 $\tau = \frac{1}{8}$ 下，过线的青色柱子是 $j = 0, 1, 2$ 三根，每根在高度 $\tau$ 处有一道琥珀色刻线，表示它至少付出 $\tau$；三道刻线加起来不超过总预算，所以过线的个数 $3$ 到不了品红的墙 $RW/(\pi\tau) = 8$，这就是 [@cor-finite-trace-mode-budget]。
 :::
 
 请严格区分 [@cor-finite-trace-mode-budget] 与随机电路贫瘠高原的边界：[@cor-finite-trace-mode-budget] 不单独假定 $R > 0$ 或 $W > 0$（由 $\lambda_j \ge 0$ 与 $\sum_j \lambda_j = RW/\pi$ 仅蕴含乘积非负 $R W \ge 0$，而不蕴含 $R \ge 0$ 与 $W \ge 0$ 各自非负，例如 $R = -\pi, W = -1$ 同样满足全部前提），它证明的是**给定非负可和序列迹等式 $\sum_j \lambda_j = RW/\pi$ 下的谱超水平集有限计数上界**，既不是可学习性的必要条件，也不是均匀球面测度集中或随机量子电路梯度方差定理本身。
