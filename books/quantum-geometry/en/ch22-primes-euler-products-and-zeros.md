@@ -329,15 +329,17 @@ Notice the exact structural parallel between [@ex-prime-log-orthogonality-and-si
 **Up to 31, the leak starts at 37.** The list holds the $11$ primes up to $31$: everything from $1$ to $36$ is cyan, and the first magenta cell is $37$. At $s = 2$ the gap has shrunk to $0.0102$, yet its lowest slice in the magnifier is still $37^{-2}$: the only way to close that slice is to put $37$ on the list.
 :::
 
+Euclid's trick needs a careful reading here: multiply all the primes on the list and add one, and the result has no prime factor on the list (Euclid's argument, a literature result), yet it need not be prime itself, and the new prime it reveals need not be the next one.
+
 ::: {.viz src="sphere-escape" preset="thirteen" height="500"}
 **The sum need not be prime itself.** The list is $2, 3, 5, 7, 11, 13$ and $Q = 30031$: every clock hand points at $1$, none at $0$. Yet $Q = 59 \times 509$ is not prime. Euclid's argument (a literature result) says only that the prime factors of $Q$ are off the list, and the new prime it finds, $59$, is not the next one, $17$.
 :::
 
+> Composite numbers are the diagonal lattice points of the prime basis; Euler's product simply projects an entangled sum along the natural-number line onto its mutually orthogonal prime axes.
+
 ::: {.viz src="euler-product-sieve" height="560"}
 The full lab of the Euler product and the sieve: scrub the rail to add or drop primes, drag the amber line to move $s$, and click a magenta cell to put its largest prime factor on the list. In the first small plot below, the ink curve $(s - 1)\zeta(s)$ heads for the green dashed line at $1$ ([@lem-riemann-zeta-residue-one]) while the cyan $(s - 1)$ times the product heads for $0$; the second shows how many primes the product needs to come within $1\%$ of $\zeta(s)$.
 :::
-
-> Composite numbers are the diagonal lattice points of the prime basis; Euler's product simply projects an entangled sum along the natural-number line onto its mutually orthogonal prime axes.
 
 ## 22.4 The Critical Symmetry Line $\sigma = 1/2$ and the Epistemic Boundary of the Riemann Hypothesis {#sec-ch22-4}
 
