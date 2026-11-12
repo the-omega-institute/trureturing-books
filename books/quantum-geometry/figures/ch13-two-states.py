@@ -9,7 +9,7 @@ local cell empty (their marginals are ½I); the classical state fills only (Z, Z
 
 from _ch13 import bell_density, board, classical_density, coefficients, sector
 
-SIZE = (540, 286)
+SIZE = (430, 262)
 ALT = {
     "zh": "两张并排的 4 × 4 格子，行是 Alice 的 I、X、Y、Z，列是 Bob 的。左边是经典关联态，右边是贝尔态 Φ⁺。"
           "两张格子左上角都是 1，第一行与第一列的六格青色局域格全都空着。右下的品红关联格里，经典关联态只有 (Z, Z) 一格是 +1；"
@@ -23,7 +23,7 @@ ALT = {
 
 def draw(fig):
     t = fig.t
-    cell = 40
+    cell = 34
     cl = coefficients(classical_density())
     bell = coefficients(bell_density())
     for c in (cl, bell):
@@ -32,13 +32,14 @@ def draw(fig):
     assert {k: v for k, v in cl.items() if v and sector(*k) == "corr"} == {("Z", "Z"): 1}
     assert {k: v for k, v in bell.items() if v and sector(*k) == "corr"} == {("X", "X"): 1, ("Y", "Y"): -1, ("Z", "Z"): 1}
 
-    for x0, vals, name in ((48, cl, t("经典关联态", "classical correlated")), (318, bell, t("贝尔态 Φ⁺", "Bell state Φ⁺"))):
+    xl, xr = 40, 254
+    for x0, vals, name in ((xl, cl, t("经典关联态", "classical correlated")), (xr, bell, t("贝尔态 Φ⁺", "Bell state Φ⁺"))):
         fig.text(x0 + 2 * cell, 24, name, size=14, weight=600, anchor="middle")
         board(fig, x0, 62, cell, values=vals)
         fig.text(x0 + 2 * cell, 62 + 4 * cell + 26, t("局域格全空", "local cells all empty"), size=13, color="line",
                  anchor="middle")
-    fig.text(48 + 2 * cell, 62 + 4 * cell + 48, t("关联格：一格", "correlations: one cell"), size=13, color="area",
+    fig.text(xl + 2 * cell, 62 + 4 * cell + 48, t("关联格：一格", "correlations: one cell"), size=13, color="area",
              anchor="middle")
-    fig.text(318 + 2 * cell, 62 + 4 * cell + 48, t("关联格：三格", "correlations: three cells"), size=13, color="area",
+    fig.text(xr + 2 * cell, 62 + 4 * cell + 48, t("关联格：三格", "correlations: three cells"), size=13, color="area",
              anchor="middle")
-    fig.text(270, 62 + 2 * cell + 5, "≠", size=24, color="dim", anchor="middle", middle=True)
+    fig.text((xl + 4 * cell + xr) / 2, 62 + 2 * cell + 5, "≠", size=24, color="dim", anchor="middle", middle=True)
