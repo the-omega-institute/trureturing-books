@@ -115,11 +115,13 @@ Applying $\Phi_{1/2}$ again and again, $n = 0, 1, 2, 3, 4$ times, gives $0.36806
 **Rotation keeps it, pinching lowers it.** For two general states with Bloch vectors $(0.3, 0.2, 0.5)$ and $(-0.1, 0.4, 0.2)$, the relative entropy is $0.1602$; after a rotation by $0.7$ radians about the $y$-axis it is still $0.1602$; after pinching in the $Z$ basis it drops to $0.0499$.
 :::
 
+::: {.remark #rem-channel-dpi-literature title="Literature result, not formalized in this book"}
 The following are **literature results, not formalized in this book**:
 
 - the monotonicity was first proved by G. Lindblad (1975) for completely positive trace-preserving maps and by A. Uhlmann (1977) in a more general setting;
-- the quantum Stein lemma gives relative entropy its operational meaning as the optimal error exponent for telling $\rho$ from $\sigma$, so "$D$ only goes down" reads "no preprocessing makes the hypothesis test easier";
+- the quantum Stein lemma gives relative entropy its operational meaning as the optimal asymptotic type-II error exponent for testing i.i.d. copies of $\rho$ against $\sigma$, with type-I error bounded by a fixed $0 < \epsilon < 1$, so "$D$ only goes down" reads "no preprocessing makes the hypothesis test easier";
 - the monotonicity also holds for trace-preserving maps that are merely positive, not completely positive (A. Müller-Hermes and D. Reeb, 2017).
+:::
 
 > A process can only erase differences, never create them.
 
