@@ -405,8 +405,8 @@
       "code": "ORTHO//HORIZON",
       "title": "视界之外的交叉点 · 一条缓慢下降的指数率、桥图的最小割与少数承重的模态",
       "title_en": "A crossover beyond the horizon · a slowly falling exponent rate, the minimal cut of a bridge graph and the few modes that carry the weight",
-      "summary": "第 30 章 ETH 一节的三个场景。指数率：示意曲线 r(n) = c·log₂log₂n/√log₂n 趋于零却降得极慢，c = 1 时要到 n ≈ 2⁵⁵⁸ 才低于 PPSZ 的 0.386，远在宇宙原子数 2²⁶⁶ 之外；常数 c 决定交叉点在视界的哪一边；子句宽度 k = 3…6 只换 PPSZ 的基准线（唯一可满足情形的文献率 0.3863、0.5548、0.6502、0.7118）。桥图：宽度为 3 的双节点张量网络，随机整数实例的流矩阵的秩等于最小割 min(3ac, ad, bc)；锥域内最大秩等于 min(ad, bc) 已由 Lean 验证。模态：非负且总和为 T 的谱里，不小于阈值 θ 的模态至多 T/θ 个（Lean 已验证）。",
-      "summary_en": "Three scenes for the ETH section of chapter 30. The exponent rate: the schematic curve r(n) = c·log₂log₂n/√log₂n tends to zero but so slowly that for c = 1 it drops below the 0.386 of PPSZ only at n ≈ 2⁵⁵⁸, far beyond the 2²⁶⁶ atoms of the universe; the constant c decides on which side of the horizon the crossover lies; the clause width k = 3 … 6 only changes the PPSZ baseline (the literature rates of the uniquely satisfiable case, 0.3863, 0.5548, 0.6502, 0.7118). The bridge graph: a two-node tensor network of width 3 whose random integer flow matrix has the rank of the minimal cut min(3ac, ad, bc); that the greatest rank equals min(ad, bc) inside the cone is kernel-verified in Lean. The modes: in a nonnegative spectrum of total T at most T/θ modes reach a threshold θ (kernel-verified in Lean).",
+      "summary": "第 30 章 ETH 一节的三个场景。指数率：示意曲线 r(n) = c·log₂log₂n/√log₂n 趋于零却降得极慢，c = 1 时要到 n ≈ 2⁵⁵⁸ 才低于 PPSZ 的 0.386，远在宇宙原子数 2²⁶⁶ 之外；常数 c 决定交叉点在视界的哪一边；子句宽度 k = 3…6 只换 PPSZ 的基准线（唯一可满足情形的文献率 0.3863、0.5548、0.6502、0.7118）。桥图：宽度为 3 的双节点张量网络，随机整数实例的流矩阵的秩等于最小割 min(3ac, ad, bc)；锥域内最大秩等于 min(ad, bc) 已由 Lean 验证。模态：非负且总和为迹预算 RW/π 的谱里，不小于阈值 τ 的模态至多 RW/(πτ) 个（Lean 已验证）；第 12 章引用它在几何谱 2^−(j+1)、τ = 1/8 上的情形：3 个过线，墙在 8。",
+      "summary_en": "Three scenes for the ETH section of chapter 30. The exponent rate: the schematic curve r(n) = c·log₂log₂n/√log₂n tends to zero but so slowly that for c = 1 it drops below the 0.386 of PPSZ only at n ≈ 2⁵⁵⁸, far beyond the 2²⁶⁶ atoms of the universe; the constant c decides on which side of the horizon the crossover lies; the clause width k = 3 … 6 only changes the PPSZ baseline (the literature rates of the uniquely satisfiable case, 0.3863, 0.5548, 0.6502, 0.7118). The bridge graph: a two-node tensor network of width 3 whose random integer flow matrix has the rank of the minimal cut min(3ac, ad, bc); that the greatest rank equals min(ad, bc) inside the cone is kernel-verified in Lean. The modes: in a nonnegative spectrum whose total is the trace budget RW/π, at most RW/(πτ) modes reach a threshold τ (kernel-verified in Lean); chapter 12 cites it on the geometric spectrum 2^−(j+1) at τ = 1/8: three clear the line, the wall stands at 8.",
       "path": "eth-horizon-crossover/",
       "thumbnail": "eth-horizon-crossover/thumb.jpg",
       "status": "live",
@@ -893,8 +893,8 @@
       "code": "TWO//ANGLES",
       "title": "球面两角寻址与旋转字",
       "title_en": "Two-angle addressing and rotation words",
-      "summary": "从北极 N 出发，先绕水平轴 e₂ 倾转 θ、再绕竖轴 e₃ 拧转 φ，就到达球面上任一点 r(θ, φ)；第二步只沿高度 cos θ 不变的纬度圈走，在两极则白拧一圈。两根转轴斜着时，页面按一条贪心规则当场构造旋转字：每次绕 b 的转动最多把点推离 N 2α，所以夹角越小要转的次数越多，而两轴共线时 N 寸步难移。“覆盖”场景在同一颗球上画出六根有理轴的 12 个 45° 球冠：它们盖住整颗球，与当前点正交的大圆不进入含它的任何球冠；三根坐标轴的球冠则在卦限对角线处漏缝。八张实验卡各讲其中一件事，可以在正文里单独引用。",
-      "summary_en": "From the north pole N, tilt by θ about the horizontal axis e₂ and then twist by φ about the vertical axis e₃, and you reach any point r(θ, φ) of the sphere; the second turn runs along the latitude circle of fixed height cos θ, and at the poles it does nothing. With skew axes the page builds a rotation word on the spot by a greedy rule: each turn about b pushes the point at most 2α further from N, so a smaller angle between the axes needs more turns, and collinear axes cannot move N at all. The “Cover” scene draws, on the same sphere, the 12 caps of 45° around six rational axes: they cover the whole sphere, and the great circle orthogonal to the current point enters none of the caps that hold it; the caps of the three coordinate axes leave gaps at the octant diagonals. Each of the eight experiment cards makes one of these points and can be cited on its own from the text.",
+      "summary": "从北极 N 出发，先绕水平轴 e₂ 倾转 θ、再绕竖轴 e₃ 拧转 φ，就到达球面上任一点 r(θ, φ)；第二步只沿高度 cos θ 不变的纬度圈走，在两极则白拧一圈。两根转轴斜着时，页面按一条贪心规则当场构造旋转字：每次绕 b 的转动最多把点推离 N 2α，所以夹角越小要转的次数越多，而两轴共线时 N 寸步难移。“覆盖”场景在同一颗球上画出六根有理轴的 12 个 45° 球冠：它们盖住整颗球，与当前点正交的大圆不进入含它的任何球冠；三根坐标轴的球冠则在卦限对角线处漏缝。Lie–Trotter 一卡把绕两根正交轴的转动各切成 n 份交替做，读出乘积的转角、转轴与误差，看它贴近生成元相加的那一次转动。八张实验卡各讲其中一件事，可以在正文里单独引用。",
+      "summary_en": "From the north pole N, tilt by θ about the horizontal axis e₂ and then twist by φ about the vertical axis e₃, and you reach any point r(θ, φ) of the sphere; the second turn runs along the latitude circle of fixed height cos θ, and at the poles it does nothing. With skew axes the page builds a rotation word on the spot by a greedy rule: each turn about b pushes the point at most 2α further from N, so a smaller angle between the axes needs more turns, and collinear axes cannot move N at all. The “Cover” scene draws, on the same sphere, the 12 caps of 45° around six rational axes: they cover the whole sphere, and the great circle orthogonal to the current point enters none of the caps that hold it; the caps of the three coordinate axes leave gaps at the octant diagonals. The Lie–Trotter card cuts the turns about two orthogonal axes into n slices each, alternates them, and reads off the angle, axis and error of the product as it closes in on the one rotation obtained by adding the generators. Each of the eight experiment cards makes one of these points and can be cited on its own from the text.",
       "path": "two-angle-addressing/",
       "thumbnail": "two-angle-addressing/thumb.jpg",
       "status": "live",
@@ -949,6 +949,9 @@
         },
         {
           "gid": "D5/S3/Topology/SphereOrthogonalityCover.sphere_two_open_orthogonality_free_cover_lower_six"
+        },
+        {
+          "gid": "D5/S3/Quantum/Analysis/TrotterProduct.trotter_product"
         }
       ]
     },
