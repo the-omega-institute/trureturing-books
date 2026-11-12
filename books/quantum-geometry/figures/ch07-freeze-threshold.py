@@ -8,7 +8,7 @@ the line at β_c = ½.
 
 from _ch07 import freeze_deposit
 
-SIZE = (480, 300)
+SIZE = (440, 300)
 ALT = {
     "zh": "横轴是逆温度 β，纵轴是熵税 ΔS，被动能量 ΔE_pass 固定为 1。一条斜线 ΔS = β·ΔE_pass 把平面分成两块："
           "斜线下方是青色的 D > 0，上方是品红的 D < 0。一条琥珀色的水平虚线停在 ΔS = ½ 的高度，在 β_c = ½ 处穿过斜线，"
@@ -24,7 +24,7 @@ def draw(fig):
     t = fig.t
     de = 1.0
     x0, x1, y0, y1 = 0.0, 2.0, -0.6, 1.6
-    ax = fig.axes(64, 26, 380, 220, (x0, x1), (y0, y1))
+    ax = fig.axes(64, 26, 340, 220, (x0, x1), (y0, y1))
     # D = 0 on ΔS = β·ΔE_pass; check the sign on both sides
     for b, s in ((1.5, 0.2), (0.3, 1.2), (1.0, -0.4)):
         d = freeze_deposit(b, s, de)
