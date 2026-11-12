@@ -2802,6 +2802,78 @@
           "gid": "D5/S3/ConceptDynamics/ObservationTopology/DiagonalTopologicalEscape.complete_diagonal_not_continuous"
         }
       ]
+    },
+    {
+      "id": "dottie-fibonacci-spirals",
+      "code": "ORTHO//SPIRALS",
+      "title": "双螺旋对应 · 从黄金连分数到余弦回旋方格",
+      "title_en": "Twin spirals · from the golden continued fraction to cosine whirling squares",
+      "summary": "为什么反复取余弦逼近 θ* ≈ 0.7391 的过程很像斐波那契黄金螺旋？因为两者的不动点导数都严格为负（−sin θ* ≈ −0.6736 与 −φ⁻² ≈ −0.3820）：蛛网平面上每一步竖走到曲线、横走回对角线 y = x 的两臂严格等长 |Bₖ − Aₖ| = |Aₖ₊₁ − Bₖ| = |f(xₖ) − xₖ|（每步走两臂绕 (x*, x*) 转 180°，从 x₀ < x* 出发按“北 → 东 → 南 → 西”同向转向，从 x₀ > x* 出发移相两象限为“南 → 西 → 北 → 东”），嵌套出回旋方格与分段 90° 圆弧导引线。对照光滑等角对数螺旋模型 R(φ) = R₀e⁻ᵇᵠ，θ* 正交螺旋每转 90° 按 sin θ* ≈ 0.6736 收缩（向心径向切角 α ≈ 75.88°），黄金螺旋按 φ⁻¹ ≈ 0.6180 收缩（向心切角 72.97°），蛛网双步螺旋按 √(sin θ*) ≈ 0.8207 收缩（向心切角 82.83°），与 90.00° 闭合圆并排；平直一维满足加法守恒 φ⁻¹ + φ⁻² = 1，弯上单位圆则化为二维勾股平方守恒 (θ*)² + sin²θ* = 1。六张实验卡可在第二十四章与第三十二章正文里单独引用。",
+      "summary_en": "Why does iterating cos θ toward θ* ≈ 0.7391 wind inward like a Fibonacci golden spiral? Because both maps have strictly negative slope at their fixed point (−sin θ* ≈ −0.6736 and −φ⁻² ≈ −0.3820): on the cobweb plane each vertical step to the curve and horizontal return to y = x have equal length |Bₖ − Aₖ| = |Aₖ₊₁ − Bₖ| = |f(xₖ) − xₖ| (winding 180° across two arms per step: clockwise N → E → S → W from x₀ < x*, or S → W → N → E from x₀ > x*), nesting whirling squares with piecewise 90° quarter-circle guides. Alongside smooth equiangular logarithmic spiral models R(φ) = R₀e⁻ᵇᵠ, the θ* orthogonal spiral shrinks by sin θ* ≈ 0.6736 per quarter-turn (inward-radial tangent angle α ≈ 75.88°), the Fibonacci spiral by φ⁻¹ ≈ 0.6180 (72.97°), and the cobweb two-step spiral by √(sin θ*) ≈ 0.8207 (82.83°), set beside the 90.00° closed circle; 1D additive conservation φ⁻¹ + φ⁻² = 1 bends onto the unit circle as 2D Pythagorean conservation (θ*)² + sin²θ* = 1. Six experiment cards can be cited on their own from Chapters 24 and 32.",
+      "path": "dottie-fibonacci-spirals/",
+      "thumbnail": "dottie-fibonacci-spirals/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-12",
+      "tags": [
+        "余弦不动点",
+        "斐波那契螺旋",
+        "回旋方格",
+        "对数螺旋",
+        "切角",
+        "勾股守恒",
+        "Lean 4 已证"
+      ],
+      "tags_en": [
+        "Cosine fixed point",
+        "Fibonacci spiral",
+        "Whirling squares",
+        "Logarithmic spiral",
+        "Tangent angle",
+        "Pythagorean conservation",
+        "Lean 4 verified"
+      ],
+      "theory": [
+        {
+          "label": "第二十四章 §24.5 · 双螺旋对应：从一维黄金连分数到二维余弦回旋方格",
+          "label_en": "Chapter 24 §24.5 · Twin-spiral correspondence: golden continued fraction to cosine whirling squares",
+          "href": "../zh/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-dottie-fibonacci-spirals",
+          "href_en": "../en/ch24-cosine-fixed-points-and-self-reference.html#sec-ch24-dottie-fibonacci-spirals"
+        },
+        {
+          "label": "第三十二章 §32.1 · 正交自指统一场中的双螺旋分工",
+          "label_en": "Chapter 32 §32.1 · Dual-spiral division of labor in the unified field",
+          "href": "../zh/ch32-unified-field-and-meta-unification.html#sec-ch32-generative-laws",
+          "href_en": "../en/ch32-unified-field-and-meta-unification.html#sec-ch32-generative-laws"
+        },
+        {
+          "label": "终章 · 卡西尼 ±1 接缝与黄金比的赫尔维茨界",
+          "label_en": "Coda · Cassini's ±1 seam and the Hurwitz bound at the golden ratio",
+          "href": "../zh/coda.html#thm-coda-golden-hurwitz",
+          "href_en": "../en/coda.html#thm-coda-golden-hurwitz"
+        },
+        {
+          "label": "Lean 源码 · GoldenInverseBranchFixedPoint.lean",
+          "label_en": "Lean source · GoldenInverseBranchFixedPoint.lean",
+          "href": "{trureturing}/D5/S3/Analytic/Characterizations/GoldenInverseBranchFixedPoint.lean"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Analytic/PowerSeries/DottieInverseSeries.rational_inverse_endpoint"
+        },
+        {
+          "gid": "D5/S3/Analytic/Characterizations/GoldenInverseBranchFixedPoint.golden_inverse_branch_positive_fixed_point_iff"
+        },
+        {
+          "gid": "D5/S1/Scale/Fibonacci.fib_cassini_from_golden_norm"
+        },
+        {
+          "gid": "D5/S1/Depth/GoldenHurwitzBound.golden_hurwitz_bound"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary"
+        }
+      ]
     }
   ]
 }
