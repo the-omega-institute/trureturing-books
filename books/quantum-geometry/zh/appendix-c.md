@@ -553,7 +553,7 @@
 | O5 | `#conj-schanuel-dottie` | `CH24` | 沙努埃尔猜想在余弦不动点 $\theta^*$ 与圆周率 $\pi$ 上的代数无关性推论 | 沙努埃尔猜想（Schanuel's Conjecture）蕴涵 Dottie 自指不动点 $\theta^* = \cos\theta^*$ 与圆周率 $\pi$ 在 $\mathbb{Q}$ 上代数无关（$\operatorname{tr.deg}_{\mathbb{Q}}\mathbb{Q}(\theta^*, \pi) = 2$；伴随文献注记 `#rem-banach-dottie-hairy-ball-literature` 另述 Chow 关于 $\theta^* \notin \mathrm{EL}$ 的条件定理） | 无（严禁） | `OPEN`（红） |
 | O6 | `#rem-ryu-takayanagi-literature` | `CH19` | 连续 AdS/CFT 笠—高柳（Ryu–Takayanagi）全息纠缠熵公式 | 连续反德西特时空极小曲面面积 $S(A) = \operatorname{Area}(\gamma_A)/(4G_N)$ 的完整泛函与量子极值曲面证明（本书仅形式化离散桥图最大流最小割定理） | 无（文献） | `文献结果` |
 | O7 | `#rem-diophantine-z-in-q-literature` | `CH23` | 有理数域上的希尔伯特第十问题 $H_{10}(\mathbb{Q})$ 与 $\mathbb{Z} \subset \mathbb{Q}$ 存在性定义 | $\mathbb{Z}$ 在 $\mathbb{Q}$ 中是否存在纯存在量词（$\exists$）丢番图定义及 $H_{10}(\mathbb{Q})$ 的可判定性（Koenigsmann 2016 给出 $\forall\exists$ 一阶刻画，但 $H_{10}(\mathbb{Q})$ 仍开放） | 无（文献） | `OPEN / 文献` |
-| O8 | `#conj-coda-navier-stokes-regularity` | `CH30` | 无外力三维不可压缩纳维—斯托克斯全局光滑性猜想（克雷千禧年陈述 A / B） | 给定正粘性 $\nu > 0$ 与恒零外力 $\mathbf{f} \equiv \mathbf{0}$，对 $\mathbb{R}^3$（或 $\mathbb{T}^3$）上任意光滑无散度速降（或周期）初值 $\mathbf{u}_0$，自治流体是否在 $[0, \infty)$ 上恒存在有限动能全局光滑解，抑或发生有限时间爆破（受迫陈述 C / D 爆破文献另见 `#rem-ch30-navier-stokes-forced-literature`） | 无（严禁） | `OPEN`（红） |
+| O8 | `#conj-coda-navier-stokes-regularity` | `CH30` | 无外力三维不可压缩纳维—斯托克斯全局光滑性猜想（克雷千禧年陈述 A / B） | 给定正粘性 $\nu > 0$ 与恒零外力 $\mathbf{f} \equiv \mathbf{0}$，对 $\mathbb{R}^3$（或 $\mathbb{T}^3$）上任意光滑无散度速降（或周期）初值 $\mathbf{u}_0$，自治流体是否在 $[0, \infty)$ 上恒存在有限动能全局光滑解，抑或发生有限时间爆破（OpenAI 受迫 C / D 是官方题目的一条解答路线；外部文献与发布的形式化另见 [@rem-ch30-navier-stokes-forced-literature]，不属本书冻结定理） | 无（严禁） | `OPEN`（红） |
 
 :::
 
