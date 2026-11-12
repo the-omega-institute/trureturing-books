@@ -647,7 +647,7 @@ $$
    - **椭圆体内部相容空间（$|\cos\phi| < 1 \iff \det G > 0$）**：只要前两步保留了未坍缩的正交面积（$\sin\theta_1 > 0$ 且 $\sin\theta_2 > 0$），观察者就可以在二面角 $\phi \in (0, \pi)$ 中自由折出非零三向量体积 $\mathbf{A}\wedge\mathbf{B}\wedge\mathbf{C} \neq 0$，向高一维的正交方向开启新的因果分支！
 
 ::: {.viz src="gram-causal-elliptope" preset="elliptope" height="500"}
-**两层记忆：鼓胀四面体的一片截面。** 紫色的鼓胀四面体是全部满足 $1 - x^2 - y^2 - z^2 + 2xyz \ge 0$ 的 $(x, y, z)$。图中 $\mathbf{P}_0$ 是当前点，$\mathbf{Q}$ 是候选的下一点；历史定下 $x = \mathbf{P}_0\cdot\mathbf{P}_{-1}$，$\mathbf{Q}$ 只能把 $(y, z) = (\mathbf{Q}\cdot\mathbf{P}_{-1},\, \mathbf{Q}\cdot\mathbf{P}_0)$ 放进 $x$ 处的截面，品红的椭圆是它的边（$\det G = 0$）。竖着穿过琥珀色 $\mathbf{Q}$ 的青色线段是 $z$ 的窗口 $[xy - \sqrt{(1-x^2)(1-y^2)},\, xy + \sqrt{(1-x^2)(1-y^2)}]$。椭圆体的这一刻画是文献结果，未在本书形式化。
+**两层记忆：鼓胀四面体的一片截面。** 紫色的鼓胀四面体是全部满足 $1 - x^2 - y^2 - z^2 + 2xyz \ge 0$ 的 $(x, y, z)$。图中 $\mathbf{P}_0$ 是当前点，$\mathbf{Q}$ 是候选的下一点；历史定下 $x = \mathbf{P}_0\cdot\mathbf{P}_{-1}$，$\mathbf{Q}$ 只能把 $(y, z) = (\mathbf{Q}\cdot\mathbf{P}_{-1},\, \mathbf{Q}\cdot\mathbf{P}_0)$ 放进 $x$ 处的截面（图中把实体在这里切开，截面朝前），品红的椭圆是它的边（$\det G = 0$）。竖着穿过琥珀色 $\mathbf{Q}$ 的青色线段是 $z$ 的窗口 $[xy - \sqrt{(1-x^2)(1-y^2)},\, xy + \sqrt{(1-x^2)(1-y^2)}]$。椭圆体的这一刻画是文献结果，未在本书形式化。
 :::
 
 2. **“不断在时间场中选点”——作为半正定矩阵补全（PSD Matrix Completion）的折线生命轨迹**：
