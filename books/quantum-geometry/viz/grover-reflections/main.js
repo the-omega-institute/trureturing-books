@@ -4,7 +4,8 @@
      plane   the unit circle, the two mirror lines (the failure axis and the line of |s⟩), the state arrow (amber),
              its shadows on W (cyan: the success amplitude) and on B (magenta), and the 2θ arcs of the steps (violet)
      bars    the success probability after each whole step n = 0 … nMax; the current step framed in amber
-   The rail is the step count; every half step is one mirror. The page applies the mirrors one at a time to the
+   The rail is the step count; every half step is one mirror. The first peak is found over the whole first half turn,
+   whatever nMax is, and nMax always reaches at least one step past it. The page applies the mirrors one at a time to the
    arrow in the plane; between two mirror images the tip slides across the mirror along a perpendicular (animation).
    Read-only probe for the browser suite: window.GROVER_DEBUG. */
 (() => {
@@ -18,10 +19,15 @@
   /* ---------- the model: mirrors in the plane ---------- */
   /** The mirror image of v in the line through the origin at the angle a. */
   const reflect = (v, a) => { const c = Math.cos(2 * a), s = Math.sin(2 * a); return [c * v[0] + s * v[1], s * v[0] - c * v[1]]; };
+  /** The best whole step count for a given θ, found by trying every n of the first half turn, (2n + 1)θ ≤ π. */
+  function bestOf(th) { const top = Math.floor((PI / th - 1) / 2); let b = 0, pb = -1; for (let n = 0; n <= top; n++) { const p = Math.sin((2 * n + 1) * th) ** 2; if (p > pb + 1e-12) { pb = p; b = n; } } return b; }
+  /** The first peak of θ and the number of whole steps drawn: the usual span (at most 52 steps), lengthened only
+      when the first peak or the step after it would fall beyond it. */
+  function spanOf(th) { const best = bestOf(th); return { best, nMax: Math.max(clamp(Math.ceil(PI / (2 * th)), 3, 52), best + 1) }; }
   const S = { theta: Math.asin(1 / Math.sqrt(8)) };
   let M = null;                                // { theta, nMax, states, mids, probs, best }
   function build() {
-    const th = S.theta, nMax = clamp(Math.ceil(PI / (2 * th)), 3, 52);
+    const th = S.theta, { best, nMax } = spanOf(th);
     const states = [[Math.cos(th), Math.sin(th)]], mids = [];
     for (let n = 0; n < nMax; n++) {
       const mid = reflect(states[n], 0);            // I − 2P: mirror in the failure axis B
@@ -29,8 +35,6 @@
       states.push(reflect(mid, th));                // 2|s⟩⟨s| − I: mirror in the line of |s⟩
     }
     const probs = states.map((v) => v[1] * v[1]);
-    const top = Math.floor((PI / th - 1) / 2);      // the first half turn: (2n + 1)θ ≤ π
-    let best = 0; probs.forEach((p, n) => { if (n <= top && p > probs[best] + 1e-12) best = n; });
     M = { theta: th, nMax, states, mids, probs, best };
   }
   build();
@@ -46,11 +50,10 @@
     if (u <= 0.5 + 1e-9) return { v: lerp(M.states[n], M.mids[n], Math.min(1, u / 0.5)), n, half: Math.abs(u - 0.5) < 1e-9, phase: 1 };
     return { v: lerp(M.mids[n], M.states[n + 1], (u - 0.5) / 0.5), n, half: false, phase: 2 };
   }
-  /** The best whole step count for a given θ, found by trying every n of the first half turn, (2n + 1)θ ≤ π. */
-  function bestOf(th) { const top = Math.floor((PI / th - 1) / 2); let b = 0, pb = -1; for (let n = 0; n <= top; n++) { const p = Math.sin((2 * n + 1) * th) ** 2; if (p > pb + 1e-12) { pb = p; b = n; } } return b; }
 
   /* ---------- layout: plane | bars on a wide stage, plane above bars on a narrow one ---------- */
   let boxes = null, planeG = null, barsG = null;
+  const VIEW = { barTicks: [], plot: null };     // what the last frame drew on the axes (read by the probe)
   function layout(W, H) {
     const st = $('stage').getBoundingClientRect(), below = (el) => (el ? el.getBoundingClientRect().bottom - st.top : 0);
     const top = TRV.thumbMode ? 24 : Math.max(46, below($('hudBig').parentElement)) + 6;
@@ -136,8 +139,10 @@
     const b = boxes.b, nM = M.nMax;
     const g = kit.plot($('cv'), { x: [-0.6, nM + 0.6], y: [0, 1.08], pad: padOf(b, W, H, 30, 4, boxes.side ? 40 : 22, 20), clear: false });
     barsG = g;
-    const every = nM <= 12 ? 1 : nM <= 26 ? 2 : 5, xt = [];
+    // past 52 steps (only at the smallest angles) the labels thin out so the row is no denser than at 52
+    const every = nM <= 12 ? 1 : nM <= 26 ? 2 : nM <= 52 ? 5 : 10, xt = [];
     for (let n = 0; n <= nM; n += every) xt.push([n, String(n)]);
+    VIEW.barTicks = xt.map((t) => t[0]);
     g.axes({ yTicks: TRV.thumbMode ? [] : [[0, '0'], [0.5, '0.5'], [1, '1']], xTicks: TRV.thumbMode ? [] : xt, xLabel: TRV.thumbMode ? '' : 'n' });
     g.hline(1, P.faint, { dash: [3, 4] });
     const wbar = 0.3;
@@ -149,7 +154,7 @@
     if (!TRV.thumbMode) {
       if (boxes.side) tagAt('bT', g, (nM) / 2, 1.08, L('每一步之后的成功概率', 'success probability after each step'), 'raw', 0, -30);
       tagAt('bC', g, cur, M.probs[cur], fix(M.probs[cur], 4), 'num hot', 0, -24);
-      if (M.best !== cur && (boxes.side || Math.abs(M.best - cur) * g.scale > 90)) tagAt('bBest', g, M.best, M.probs[M.best], L(`最佳 n = ${M.best}`, `best n = ${M.best}`), 'raw cy', 0, -14);
+      if (M.best !== cur && (boxes.side || Math.abs(M.best - cur) * g.scale > 90)) tagAt('bBest', g, M.best, M.probs[M.best], L(`第一个峰 n = ${M.best}`, `first peak n = ${M.best}`), 'raw cy', 0, -14);
     }
   }
 
@@ -198,20 +203,41 @@
   }
 
   /* ---------- strip: the best step count for each N ---------- */
-  function drawPlot() {
-    const g = kit.plot($('plot'), { x: [2, 1024], y: [0, 27], logX: true, pad: [30, 10, 8, 22] });
-    $('plotTitle').innerHTML = L('逐个比较得到的最佳步数', 'The best step count, found by trying every n');
-    g.axes({ yTicks: [[0, '0'], [5, '5'], [10, '10'], [15, '15'], [20, '20'], [25, '25']], xTicks: [[2, '2'], [8, '8'], [32, '32'], [128, '128'], [512, '512']], xLabel: 'N' });
+  // The usual window is N = 2 … 1024 by n* = 0 … 27. When the dragged θ takes N outside it (below 2 above 45°,
+  // above 1024 below about 1.79°), the window widens to the power of two beyond the current N, and the staircase
+  // and the curve are drawn over the whole widened window, so the current point is never pinned to an edge.
+  const PLOT_N = [2, 1024], PLOT_Y = 27;
+  const stair = [0];                               // stair[N]: the first-peak step count at the whole number N ≥ 1
+  const stairAt = (N) => { while (stair.length <= N) stair.push(bestOf(Math.asin(1 / Math.sqrt(stair.length)))); return stair[N]; };
+  let plotWin = null;
+  function plotWindow(N) {
+    const lo = N < PLOT_N[0] * (1 - 1e-9) ? Math.pow(2, Math.floor(Math.log2(N))) : PLOT_N[0];
+    const hi = N > PLOT_N[1] * (1 + 1e-9) ? Math.pow(2, Math.ceil(Math.log2(N))) : PLOT_N[1];
+    if (plotWin && plotWin.lo === lo && plotWin.hi === hi) return plotWin;
     const steps = [];
-    for (let N = 2; N <= 1024; N++) { const b = bestOf(Math.asin(1 / Math.sqrt(N))); if (steps.length) steps.push([N, steps[steps.length - 1][1]]); steps.push([N, b]); }
-    g.line(steps, P.cyan, { width: 1.8 });
-    const curve = []; for (let i = 0; i <= 120; i++) { const N = 2 * Math.pow(512, i / 120); curve.push([N, PI * Math.sqrt(N) / 4]); }
-    g.line(curve, P.ink, { width: 1.3, dash: [5, 4], alpha: 0.8 });
-    const Nn = clamp(Nof(), 2, 1024);
+    for (let k = Math.ceil(lo); k <= hi; k++) { const b = stairAt(k); if (steps.length) steps.push([k, steps[steps.length - 1][1]]); steps.push([k, b]); }
+    const curve = []; for (let i = 0; i <= 120; i++) { const x = lo * Math.pow(hi / lo, i / 120); curve.push([x, PI * Math.sqrt(x) / 4]); }
+    const yTop = hi === PLOT_N[1] ? PLOT_Y : Math.ceil(Math.max(stairAt(hi), PI * Math.sqrt(hi) / 4)) + 2;
+    const yStep = yTop <= 30 ? 5 : yTop <= 60 ? 10 : 20, yt = [];
+    for (let v = 0; v <= yTop; v += yStep) yt.push([v, String(v)]);
+    // a label every two octaves (three on a window wider than ten), none within half an octave of the right edge
+    const every = Math.pow(2, Math.log2(hi / lo) <= 10 ? 2 : 3), xt = lo < PLOT_N[0] ? [[lo, String(lo)]] : [];
+    for (let v = PLOT_N[0]; v <= hi / Math.SQRT2; v *= every) xt.push([v, String(v)]);
+    plotWin = { lo, hi, yTop, steps, curve, xt, yt };
+    return plotWin;
+  }
+  function drawPlot() {
+    const Nn = Nof(), w = plotWindow(Nn);
+    const g = kit.plot($('plot'), { x: [w.lo, w.hi], y: [0, w.yTop], logX: true, pad: [30, 10, 8, 22] });
+    $('plotTitle').innerHTML = L('第一个峰的步数（逐个比较 n）', 'The first-peak step count, found by trying every n');
+    g.axes({ yTicks: w.yt, xTicks: w.xt, xLabel: 'N' });
+    g.line(w.steps, P.cyan, { width: 1.8 });
+    g.line(w.curve, P.ink, { width: 1.3, dash: [5, 4], alpha: 0.8 });
     g.vline(Nn, P.amber, { alpha: 0.85 });
-    g.dot(Nn, bestOf(S.theta), P.amber, 4);
-    g.legend([[P.cyan, L('最佳步数', 'best step count')], [P.ink, 'π√N/4', 'dash']], { right: false });
+    g.dot(Nn, M.best, P.amber, 4);
+    g.legend([[P.cyan, L('第一个峰的步数', 'first-peak step count')], [P.ink, 'π√N/4', 'dash']], { right: false });
     $('plotMeta').textContent = `N = ${nLabel()} · n* = ${M.best}`;
+    VIEW.plot = { x: [w.lo, w.hi], y: [0, w.yTop], xTicks: w.xt.map((t) => t[0]), yTicks: w.yt.map((t) => t[0]), point: [Nn, M.best] };
   }
 
   /* ---------- readouts, HUD, legend ---------- */
@@ -226,11 +252,11 @@
       + row('', 'θ = arcsin(1/√N)', 'θ = arcsin(1/√N)', `${fix(th / DEG, 4)}°`)
       + row('c', '成功振幅 sin((2n + 1)θ)', 'Success amplitude sin((2n + 1)θ)', fix(M.states[n][1], 6))
       + row('m', '失败振幅 cos((2n + 1)θ)', 'Failure amplitude cos((2n + 1)θ)', fix(M.states[n][0], 6))
-      + row('', '最佳步数与它的成功概率', 'Best step count and its success', `${M.best} · ${fix(M.probs[M.best], 6)}`)
+      + row('', '第一个峰的步数与成功概率', 'First peak: step count and success', `${M.best} · ${fix(M.probs[M.best], 6)}`)
       + row('', 'π√N/4', 'π√N/4', fix(PI * Math.sqrt(Nof()) / 4, 3));
     const exact = Math.abs(p - 1) < 1e-12;
     $('roNote').textContent = exact ? L('箭头正好立在目标上：测量必然找到标记项。', 'The arrow stands exactly on the target: a measurement is certain to find the marked item.')
-      : n > M.best ? L(`已经转过了头：第 ${M.best} 步时成功概率最高（${fix(M.probs[M.best], 4)}），再转只会离开目标。`, `Past the target: step ${M.best} had the highest success (${fix(M.probs[M.best], 4)}); turning on only moves away.`)
+      : n > M.best ? L(`已经转过了头：第一个峰在第 ${M.best} 步（${fix(M.probs[M.best], 4)}）。继续迭代，成功概率会振荡。`, `Past the target: the first peak was step ${M.best} (${fix(M.probs[M.best], 4)}). Further iterations make the success probability oscillate.`)
       : L(`每一步转 2θ = ${fix(2 * th / DEG, 3)}°；离竖轴还差 ${fix(Math.abs(90 - ang / DEG), 3)}°。`, `Each step turns 2θ = ${fix(2 * th / DEG, 3)}°; ${fix(Math.abs(90 - ang / DEG), 3)}° to go to the vertical axis.`);
     $('pillN').querySelector('strong').textContent = nLabel();
     $('pillP').querySelector('strong').textContent = fix(p, 4);
@@ -278,7 +304,7 @@
     four: ['N = 4，θ = 30°。只走一步，箭头从 30° 转 60° 到 90°，正好立在目标轴上：青色的影子长 1，品红的影子消失，右边第 1 根柱子顶到 1。', 'N = 4, θ = 30°. One step turns the arrow by 60° from 30° to 90°, exactly onto the target axis: the cyan shadow has length 1, the magenta one vanishes, and bar 1 on the right reaches 1.'],
     eight: ['N = 8。第 1 步后成功概率 25/32 = 0.78125，第 2 步后 121/128 = 0.9453125：箭头停在 5θ ≈ 103.5°，已越过竖轴一点，品红的影子还剩 −0.234。整数步落不到正好 90°。', 'N = 8. After step 1 the success is 25/32 = 0.78125, after step 2 it is 121/128 = 0.9453125: the arrow stops at 5θ ≈ 103.5°, a little past the vertical axis, with a magenta shadow of −0.234 left. Whole steps cannot land exactly on 90°.'],
     over: ['N = 8，再走第 3 步：箭头转到 7θ ≈ 144.9°，青色的影子缩回 0.575，成功概率掉到 0.330。右边的柱子先升后降，第 2 根最高。', 'N = 8, one more step: the arrow turns to 7θ ≈ 144.9°, the cyan shadow shrinks back to 0.575 and the success drops to 0.330. The bars on the right rise and then fall; bar 2 is the highest.'],
-    sqrt: ['N = 256，θ ≈ 3.58°。每一步只转 7.17°，十二段紫色的小弧把箭头从 3.6° 送到 89.6°，成功概率 0.99995。十二正是 π√256/4 ≈ 12.57 取整附近的最佳步数。', 'N = 256, θ ≈ 3.58°. Each step turns only 7.17°; twelve small violet arcs carry the arrow from 3.6° to 89.6°, success 0.99995. Twelve is the best step count, next to π√256/4 ≈ 12.57.']
+    sqrt: ['N = 256，θ ≈ 3.58°。每一步只转 7.17°，十二段紫色的小弧把箭头从 3.6° 送到 89.6°，成功概率 0.99995。十二正是第一个峰的步数，在 π√256/4 ≈ 12.57 附近。', 'N = 256, θ ≈ 3.58°. Each step turns only 7.17°; twelve small violet arcs carry the arrow from 3.6° to 89.6°, success 0.99995. Twelve is the step count of the first peak, next to π√256/4 ≈ 12.57.']
   };
   let booting = true;
   function applyPreset(id) {
@@ -305,10 +331,14 @@
       return {
         theta: S.theta, N: Nof(), nMax: M.nMax, t: clock.t, max: clock.max, playing: clock.playing, preset: cards.current,
         n, phase: now.phase, arrow: now.v.slice(), success: M.probs[n], best: M.best,
-        states: M.states.map((v) => v.slice()), mids: M.mids.map((v) => v.slice()), probs: M.probs.slice()
+        states: M.states.map((v) => v.slice()), mids: M.mids.map((v) => v.slice()), probs: M.probs.slice(),
+        // what the last frame drew: the bar labels, and the small plot's window, labels and current point
+        barTicks: VIEW.barTicks.slice(), plot: VIEW.plot && JSON.parse(JSON.stringify(VIEW.plot))
       };
     },
     bestOf: (N) => bestOf(Math.asin(1 / Math.sqrt(N))),
+    /** The first peak and the number of whole steps drawn at an angle θ (computes only; changes nothing). */
+    span: (th) => spanOf(th),
     seek: (t) => { clock.pause(); clock.set(t); },
     /** Viewport coordinates of a point of the plane and of the centre of bar n, for pointer tests. */
     planePoint: (x, y) => { const b = $('cv').getBoundingClientRect(); return planeG ? [b.left + planeG.X(x), b.top + planeG.Y(y)] : null; },

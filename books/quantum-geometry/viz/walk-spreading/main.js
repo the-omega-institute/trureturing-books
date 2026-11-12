@@ -186,8 +186,9 @@
     g.vline(n, P.amber, { alpha: 0.6 });
     g.dot(n, F.sigmaQ, P.amber, 4.5 * TH, { glow: 8 }); g.dot(n, F.sigmaC, P.amber, 4.5 * TH, { glow: 8 });
     if (!thumb) {
-      tagAt('wq', g, 30, R.steps[30].sigmaQ, L('量子：一条直线', 'quantum: a straight line'), 'raw cy', -70, -18);
-      tagAt('wc', g, 30, R.steps[30].sigmaC, L('经典：√n', 'classical: √n'), 'raw', 0, -16);
+      // generic names: the straight line and √n belong to the line only; once the walk wraps round the cycle both widths stay below p/2
+      tagAt('wq', g, 30, R.steps[30].sigmaQ, L('量子宽度', 'quantum width'), 'raw cy', -70, -18);
+      tagAt('wc', g, 30, R.steps[30].sigmaC, L('经典宽度', 'classical width'), 'raw', 0, -16);
       if (n > 0) { tagAt('vq', g, n, F.sigmaQ, fix(F.sigmaQ, 1), 'num cy', -30, -12); tagAt('vc', g, n, F.sigmaC, fix(F.sigmaC, 1), 'num', -26, -14); }
     }
   }

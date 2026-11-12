@@ -6,7 +6,7 @@ In [Chapter 13](ch13-entanglement-and-chsh.md) and [Chapter 14](ch14-cloning-cod
 
 When stripped of circuit notation, the two flagship families of quantum algorithms — **Grover amplitude amplification** and **Quantum Fourier Transform (QFT) period finding in Shor's algorithm** — embody the two geometric mechanisms pointed to in our opening epigraph:
 
-- **Grover search composes two reflections into an invariant-plane rotation**: Inside an isotropic $l$-dimensional search space, the prepared state and the target projection span a common two-dimensional block plane; reflecting first across the target subspace ("one orthogonal step") and then across the prepared subspace ("two orthogonal steps") rotates the state vector by $2\theta$ straight toward the target!
+- **Grover search composes two reflections into an invariant-plane rotation**: Inside an isotropic $l$-dimensional search space, the prepared state and the target projection span a common two-dimensional block plane; reflecting first across the orthogonal complement of the target subspace ("one orthogonal step") and then across the prepared subspace ("two orthogonal steps") rotates the state vector by $2\theta$ straight toward the target!
 - **QFT and period finding harness character orthogonality across binary phase gears**: Conjugating Weyl shift and clock operators kicks back symplectic phases that wind binary equatorial gears; summing characters over the dual annihilator subgroup cancels every non-resonant frequency to zero while constructively reinforcing the hidden period!
 
 ::: {.figure src="ch15-overview"}
@@ -102,7 +102,7 @@ Three boundaries in [@thm-grover-uniform-rotation] must be kept explicit (Figure
 3. **Discrete integer-step overshoot**: Because $n \in \mathbb{N}$ is an integer, $(2n + 1)\theta$ steps discretely. For small $p = 1/N$, choosing $n \approx \frac{\pi}{4}\sqrt{N}$ brings $(2n + 1)\theta$ close to $\pi/2$, but except for special angles such as $p = 1/4$ ($\theta = \pi/6, n = 1$), standard integer-step Grover iteration cannot hit $\sin((2n + 1)\theta) = 1$ exactly for arbitrary $N$.
 
 ::: {.viz src="grover-reflections" preset="sqrt" height="500"}
-**About $\frac{\pi}{4}\sqrt{N}$ steps to the top.** At $N = 256$ each step turns only $2\theta \approx 7.17^\circ$; twelve small violet arcs carry the amber arrow from $3.6^\circ$ to $89.6^\circ$, success $0.99995$. Twelve is the best step count, next to $\frac{\pi}{4}\sqrt{256} \approx 12.57$.
+**About $\frac{\pi}{4}\sqrt{N}$ steps to the top.** At $N = 256$ each step turns only $2\theta \approx 7.17^\circ$; twelve small violet arcs carry the amber arrow from $3.6^\circ$ to $89.6^\circ$, success $0.99995$. Twelve is the first-peak step count, next to $\frac{\pi}{4}\sqrt{256} \approx 12.57$.
 :::
 
 Whole steps can only approach $\pi/2$: take one more step than the best count and the arrow turns past the target.
@@ -324,7 +324,7 @@ The order is then read off a peak: $k = 4$ and $12$ give the order $4$ directly,
 :::
 
 ::: {.viz src="phase-gears" height="560"}
-The full lab of phase gears and the period: change the register size $Q$, the period $r$ and the offset, and click a bar to choose a frequency $k$ and watch its phase arrows laid head to tail; when $r$ divides $Q$ the off-resonant chains close to zero ([@prop-finite-character-cancellation]), otherwise the peaks spread near $sQ/r$ (a literature result, not formalized in this book).
+The full lab of phase gears and the period: change the register size $Q$, the period $r$ and the offset, and click a bar to choose a frequency $k$ and watch its phase arrows laid head to tail; when $r$ divides $Q$ and the comb is a complete coset (offset $x_0<r$), the off-resonant chains close to zero ([@prop-finite-character-cancellation]). This page's comb does not wrap: truncating it at the boundary changes peak heights and leaves off-resonant weight. When $r$ does not divide $Q$, the spectrum is still the finite sum over the comb's actual cells: in Shor's setting (offset $x_0<r$, the comb running to the end of the register, $Q \ge N^2 > r^2$) the peaks concentrate near $sQ/r$, and the order read by continued fractions must still be checked (a literature result, not formalized in this book); a truncated comb can lose that concentration, and a single cell gives a flat spectrum.
 :::
 
 Seeing how Grover's planar rotations and the QFT's Fourier cancellation operate, two deeper questions arise: **can we unify search, phase estimation, Hamiltonian simulation, and matrix inversion under a single Chebyshev polynomial recurrence on two-dimensional blocks (Quantum Singular Value Transformation, QSVT)? And when we compile continuous rotations into finite words over a discrete gate set $\{H, T\}$, how do finite-vertex polytopes approximate the sphere?** Let us enter the concluding chapter of Part IV — [Chapter 16](ch16-qsvt-walks-and-compilation.md).

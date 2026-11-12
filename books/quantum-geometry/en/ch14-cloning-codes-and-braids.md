@@ -396,11 +396,15 @@ Take $N = 2$: $c_0 = \sigma^- \otimes I$ and $c_1 = Z \otimes \sigma^-$. Everyth
 **$c_1c_3$ and $c_3c_1$ differ only at site $1$, by a sign.** Take $N = 4$. The top two rows are the factors of $c_1$ and $c_3$ site by site, with $c_3$ trailing its $Z$ string over sites $0, 1, 2$; the bottom two rows multiply them in both orders. At site $0$, $ZZ = I$, and sites $2$ and $3$ agree; only the magenta column $1$ has $\sigma^- Z = -\sigma^-$ on one side and $Z\sigma^- = \sigma^-$ on the other, so $c_1c_3 = -c_3c_1$ ([@thm-jordan-wigner-car]).
 :::
 
-On a one-dimensional chain, nearest-neighbour hopping stays local; the price is an invisible parity tail. The following are **literature results, not formalized in this book**:
+On a one-dimensional chain, nearest-neighbour hopping stays local; the price is an invisible parity tail.
+
+::: {.remark #rem-jordan-wigner-literature title="Jordan–Wigner and Higher-Dimensional Encodings (Literature Results, Not Formalized in This Book)"}
+The following are **literature results, not formalized in this book**:
 
 - the construction is due to P. Jordan and E. Wigner (*Z. Phys.* **47**, 631–651, 1928);
 - the general link between spin and statistics is the spin–statistics theorem;
-- on a two-dimensional lattice the $Z$ strings necessarily grow long and hopping terms become nonlocal, which is why other encodings such as Bravyi–Kitaev (2002) or Verstraete–Cirac (2005) are used.
+- on a two-dimensional lattice, a linear ordering generally gives some hopping terms long $Z$ strings and nonlocal qubit support; alternatives such as Bravyi–Kitaev (2002) or Verstraete–Cirac (2005) change this cost.
+:::
 
 > The fermion's minus sign does not live in the particle; it lives in the parity string to its left.
 

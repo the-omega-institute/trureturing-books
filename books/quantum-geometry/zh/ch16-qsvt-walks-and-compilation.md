@@ -51,7 +51,7 @@ $$
 T_0(x) = 1, \qquad T_1(x) = x, \qquad T_{m+2}(x) = 2x\,T_{m+1}(x) - T_m(x).
 $$
 
-在二维量子电路中，考察以 $x \in [-1, 1]$ 为左上角块编码的 $\mathrm{SU}(2)$ 信号旋转矩阵
+这里取 $\theta = \arccos x \in [0, \pi]$。在二维量子电路中，考察以 $x \in [-1, 1]$ 为左上角块编码的 $\mathrm{SU}(2)$ 信号旋转矩阵
 
 $$
 W(x) = \begin{pmatrix} x & i\sqrt{1 - x^2} \\ i\sqrt{1 - x^2} & x \end{pmatrix} = \begin{pmatrix} \cos\theta & i\sin\theta \\ i\sin\theta & \cos\theta \end{pmatrix} = \exp(i\theta \sigma_X) \in \mathrm{SU}(2).
@@ -202,7 +202,7 @@ $$
    \mathcal{S}_L = \bigl\{R_w \vv{r}_0 \;\big|\; w \in \mathcal{W}_L\bigr\} \subset S^2.
    $$
 
-   注意两点：(i) $\mathcal{S}_L$ 只是**固定初态 $\vv{r}_0$ 的单态可达轨迹点集**，而不是三参数门算子全空间；(ii) 采用 $|w| \le L$（而非 $|w| = L$）才保证单调嵌套 $\mathcal{S}_L \subseteq \mathcal{S}_{L+1}$，且点数满足上界 $|\mathcal{S}_L| \le \sum_{j=0}^L 2^j = 2^{L+1} - 1$（由于代数关系如 $H^2 = I$ 及稳定子不动点会产生碰撞重复，实际点数严格小于该上界）。
+   注意两点：(i) $\mathcal{S}_L$ 只是**固定初态 $\vv{r}_0$ 的单态可达轨迹点集**，而不是三参数门算子全空间；(ii) 采用 $|w| \le L$（而非 $|w| = L$）才保证单调嵌套 $\mathcal{S}_L \subseteq \mathcal{S}_{L+1}$，且点数满足上界 $|\mathcal{S}_L| \le \sum_{j=0}^L 2^j = 2^{L+1} - 1$（代数关系如 $H^2 = I$ 及稳定子不动点可产生碰撞重复，使实际点数小于该上界）。
 
 ::: {.viz src="gate-word-polytope" preset="one" height="500"}
 **门长 1：一条线段。** 北极是 $T$ 的不动点，只有 $H$ 把它送到 $\vv{e}_x$：两个青色的点只连成一条线段，还谈不上多面体。琥珀色的目标落在 $\vv{e}_x$ 上，门字 $H$ 精确命中，没有品红的缺口；紫色是 $H$ 与 $T$ 的转轴。

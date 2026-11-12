@@ -51,7 +51,7 @@ $$
 T_0(x) = 1, \qquad T_1(x) = x, \qquad T_{m+2}(x) = 2x\,T_{m+1}(x) - T_m(x).
 $$
 
-In a two-dimensional quantum signal block, the $\mathrm{SU}(2)$ rotation matrix
+Here $\theta = \arccos x \in [0, \pi]$. In a two-dimensional quantum signal block, the $\mathrm{SU}(2)$ rotation matrix
 
 $$
 W(x) = \begin{pmatrix} x & i\sqrt{1 - x^2} \\ i\sqrt{1 - x^2} & x \end{pmatrix} = \begin{pmatrix} \cos\theta & i\sin\theta \\ i\sin\theta & \cos\theta \end{pmatrix} = \exp(i\theta \sigma_X) \in \mathrm{SU}(2) \qquad (x \in [-1, 1])
@@ -188,7 +188,7 @@ In [@prop-two-axis-finite-word], each step chooses any continuous angle from $\m
    \mathcal{S}_L = \bigl\{R_w \vv{r}_0 \;\big|\; w \in \mathcal{W}_L\bigr\} \subset S^2.
    $$
 
-   Note that $\mathcal{S}_L$ is the orbit of a **fixed initial state $\vv{r}_0$**, not the full $3$-parameter gate space; using $|w| \le L$ ensures monotonic nesting $\mathcal{S}_L \subseteq \mathcal{S}_{L+1}$ with $|\mathcal{S}_L| \le \sum_{j=0}^L 2^j = 2^{L+1} - 1$ (with collisions reducing the count).
+   Note that $\mathcal{S}_L$ is the orbit of a **fixed initial state $\vv{r}_0$**, not the full $3$-parameter gate space; using $|w| \le L$ ensures monotonic nesting $\mathcal{S}_L \subseteq \mathcal{S}_{L+1}$ with $|\mathcal{S}_L| \le \sum_{j=0}^L 2^j = 2^{L+1} - 1$ (collisions can reduce the count).
 
 ::: {.viz src="gate-word-polytope" preset="one" height="500"}
 **Length 1: a segment.** The north pole is fixed by $T$, and only $H$ carries it to $\vv{e}_x$: the two cyan points span a segment, nothing like a polytope yet. The amber target sits on $\vv{e}_x$, the word $H$ hits it exactly, and there is no magenta gap; violet marks the axes of $H$ and $T$.

@@ -123,7 +123,7 @@ Lean 模块 `D5/S3/Quantum/CloningMachine` 直接把这一候选机器约化态�
 [@thm-cloning-machine-spectrum] 严格证明的是 [@def-cloning-machine-reduced-state] 中给定 $2\times 2$ 矩阵的密度态性质、行列式、输入无关谱与机器熵闭式；它与三比特克隆等距偏迹之间的对应见下例（[@ex-buzek-hillery-three-marginals]）。
 
 ::: {.example #ex-buzek-hillery-three-marginals title="Bužek–Hillery 克隆机的三个边缘态：克隆体保真度 5/6，机器比特反向收缩到 1/3"}
-**文献结果，未在本书形式化**（V. Bužek 与 M. Hillery，Phys. Rev. A **54**, 1844, 1996；最优性见 N. Gisin 与 M. Massar，Phys. Rev. Lett. **79**, 2153, 1997；亦见 [@rem-buzek-hillery-isometry-literature]）。下面的三个边缘态由该克隆等距直接求偏迹得到，并已对随机输入态作数值核对。
+**文献结果，未在本书形式化**（V. Bužek 与 M. Hillery，Phys. Rev. A **54**, 1844, 1996；最优性见 N. Gisin 与 S. Massar，Phys. Rev. Lett. **79**, 2153, 1997；亦见 [@rem-buzek-hillery-isometry-literature]）。下面的三个边缘态由该克隆等距直接求偏迹得到，并已对随机输入态作数值核对。
 
 记输出态为 $\lvert\Omega\rangle = \sqrt{\frac{2}{3}}\,\lvert\psi\psi\rangle\lvert\psi^\perp\rangle_M - \sqrt{\frac{1}{3}}\,\lvert S\rangle\lvert\psi\rangle_M$，其中 $\lvert S\rangle = \frac{1}{\sqrt{2}}\bigl(\lvert\psi\psi^\perp\rangle + \lvert\psi^\perp\psi\rangle\bigr)$。
 
@@ -396,11 +396,15 @@ $$
 **$c_1c_3$ 与 $c_3c_1$ 只在第 $1$ 格差一个负号。** 取 $N = 4$。上两行是 $c_1$ 与 $c_3$ 逐格的因子，$c_3$ 在格点 $0, 1, 2$ 上拖着 $Z$ 串；下两行是两种次序逐格相乘。格点 $0$ 上 $ZZ = I$，格点 $2$、$3$ 两行相同；只有品红的第 $1$ 列一边是 $\sigma^- Z = -\sigma^-$，一边是 $Z\sigma^- = \sigma^-$，于是 $c_1c_3 = -c_3c_1$（[@thm-jordan-wigner-car]）。
 :::
 
-一维链上，最近邻跳跃保持局域，代价只是一个看不见的奇偶尾巴。以下是**文献结果，未在本书形式化**：
+一维链上，最近邻跳跃保持局域，代价只是一个看不见的奇偶尾巴。
+
+::: {.remark #rem-jordan-wigner-literature title="Jordan–Wigner 与高维编码（文献结果，未在本书形式化）"}
+以下是**文献结果，未在本书形式化**：
 
 - 这一构造出自 P. Jordan 与 E. Wigner（*Z. Phys.* **47**, 631–651, 1928）；
 - 自旋与统计之间的一般联系是自旋—统计定理；
-- 在二维格点上 $Z$ 串必然拉长、跳跃项变成非局域，因而需要 Bravyi–Kitaev（2002）或 Verstraete–Cirac（2005）等其他编码。
+- 在二维格点上，通常的一维排序会使一些跳跃项带上长 $Z$ 串而变为非局域；可采用 Bravyi–Kitaev（2002）或 Verstraete–Cirac（2005）等其他编码来改变这种代价。
+:::
 
 > 费米子的负号不住在粒子里，住在它左边那一串奇偶里。
 
