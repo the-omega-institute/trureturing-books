@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch39-overview" data-lang="zh" data-wrap="1" viewBox="0 0 740 280" width="740" height="280" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="三栏。第一栏：上方一个灰色的指针寄存器 ptr 与它和内存之间的虚线隔墙被一个叉划掉；下方两行共八格，每格写着 p，每格都有一支青色的小箭头离开它又回到它自己，下方写着 p ≡ *p。第二栏：一条琥珀色的斜线是刀，它周围一条淡青色的带子里有一串青色的格点，带子外面什么也没有；下方是这些点投到刀上排成的一列长短段，短段记 1、长段记 0，字里没有相邻的 11。第三栏：墨色的单位箭头 Ψ 与水平的观察者之线成 θ 角；青色的影子 cos θ 躺在线上，品红的垂线 sin θ 站在它外面，下方写着 cos²θ + sin²θ = 1。">
-<title>三栏。第一栏：上方一个灰色的指针寄存器 ptr 与它和内存之间的虚线隔墙被一个叉划掉；下方两行共八格，每格写着 p，每格都有一支青色的小箭头离开它又回到它自己，下方写着 p ≡ *p。第二栏：一条琥珀色的斜线是刀，它周围一条淡青色的带子里有一串青色的格点，带子外面什么也没有；下方是这些点投到刀上排成的一列长短段，短段记 1、长段记 0，字里没有相邻的 11。第三栏：墨色的单位箭头 Ψ 与水平的观察者之线成 θ 角；青色的影子 cos θ 躺在线上，品红的垂线 sin θ 站在它外面，下方写着 cos²θ + sin²θ = 1。</title>
+<svg xmlns="http://www.w3.org/2000/svg" class="tr-fig" data-tr-fig="ch39-overview" data-lang="zh" data-wrap="1" viewBox="0 0 740 280" width="740" height="280" font-family="'Noto Sans SC', 'Noto Sans CJK SC', 'Source Sans 3', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif" role="img" aria-label="三栏。第一栏：上方一个灰色的指针寄存器 ptr 与它和内存之间的虚线隔墙被一个叉划掉；下方两行共八格，每格写着 p，每格都有一支青色的小箭头离开它又回到它自己，下方写着 p ≡ *p。第二栏：一条琥珀色的斜线是刀，它周围一条淡青色的带子里有一串青色的格点，带子外面什么也没有；下方是这些点投到刀上排成的一列长短段，短段记 1、长段记 0，字里没有相邻的 11。第三栏：上下两个虚线圆，上面是 w，下面是 z = w²；下圆上一支青色箭头从 1 出发绕满一整圈，上圆上一支紫色箭头从 +1 出发只走了半圈，停在 −1；下方一个绿色的 LEAN ✓ 标记。">
+<title>三栏。第一栏：上方一个灰色的指针寄存器 ptr 与它和内存之间的虚线隔墙被一个叉划掉；下方两行共八格，每格写着 p，每格都有一支青色的小箭头离开它又回到它自己，下方写着 p ≡ *p。第二栏：一条琥珀色的斜线是刀，它周围一条淡青色的带子里有一串青色的格点，带子外面什么也没有；下方是这些点投到刀上排成的一列长短段，短段记 1、长段记 0，字里没有相邻的 11。第三栏：上下两个虚线圆，上面是 w，下面是 z = w²；下圆上一支青色箭头从 1 出发绕满一整圈，上圆上一支紫色箭头从 +1 出发只走了半圈，停在 −1；下方一个绿色的 LEAN ✓ 标记。</title>
 <style>.ts-ink{stroke:#0b1622}.tf-ink{fill:#0b1622}.ts-dim{stroke:#45607a}.tf-dim{fill:#45607a}.ts-faint{stroke:#9db3c4}.tf-faint{fill:#9db3c4}.ts-edge{stroke:#b9d0dd}.tf-edge{fill:#b9d0dd}.ts-hot{stroke:#5f9bb5}.tf-hot{fill:#5f9bb5}.ts-bg{stroke:#ffffff}.tf-bg{fill:#ffffff}.ts-panel{stroke:#eef5f9}.tf-panel{fill:#eef5f9}.ts-sheet{stroke:#f7fbfd}.tf-sheet{fill:#f7fbfd}.ts-cyan{stroke:#007c8a}.tf-cyan{fill:#007c8a}.ts-magenta{stroke:#b0128f}.tf-magenta{fill:#b0128f}.ts-amber{stroke:#946200}.tf-amber{fill:#946200}.ts-violet{stroke:#5a45c8}.tf-violet{fill:#5a45c8}.ts-ok{stroke:#087a4c}.tf-ok{fill:#087a4c}.ts-warn{stroke:#c21f3a}.tf-warn{fill:#c21f3a}.ts-blue{stroke:#1d5fd0}.tf-blue{fill:#1d5fd0}.ts-orange{stroke:#b85410}.tf-orange{fill:#b85410}.ts-sigma{stroke:#28405a}.tf-sigma{fill:#28405a}@media (prefers-color-scheme:dark){.ts-ink{stroke:#d4efff}.tf-ink{fill:#d4efff}.ts-dim{stroke:#6f8ea5}.tf-dim{fill:#6f8ea5}.ts-faint{stroke:#34506a}.tf-faint{fill:#34506a}.ts-edge{stroke:#143049}.tf-edge{fill:#143049}.ts-hot{stroke:#1f5d7c}.tf-hot{fill:#1f5d7c}.ts-bg{stroke:#03060c}.tf-bg{fill:#03060c}.ts-panel{stroke:#07101b}.tf-panel{fill:#07101b}.ts-sheet{stroke:#050c16}.tf-sheet{fill:#050c16}.ts-cyan{stroke:#19f0ff}.tf-cyan{fill:#19f0ff}.ts-magenta{stroke:#ff2fd0}.tf-magenta{fill:#ff2fd0}.ts-amber{stroke:#ffc83d}.tf-amber{fill:#ffc83d}.ts-violet{stroke:#9d8cff}.tf-violet{fill:#9d8cff}.ts-ok{stroke:#46ffb2}.tf-ok{fill:#46ffb2}.ts-warn{stroke:#ff5064}.tf-warn{fill:#ff5064}.ts-blue{stroke:#2a7bff}.tf-blue{fill:#2a7bff}.ts-orange{stroke:#ff8a3c}.tf-orange{fill:#ff8a3c}.ts-sigma{stroke:#cfe3ff}.tf-sigma{fill:#cfe3ff}}</style>
 <svg class="tr-fig-panel" x="0" y="0" width="236" height="280" viewBox="0 0 236 280">
 <text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">I　全域 p ≡ *p</text>
@@ -78,21 +78,25 @@
 <text class="tf-dim tr-fig-mono" x="192.58" y="258" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" text-anchor="middle">0</text>
 </svg>
 <svg class="tr-fig-panel" x="504" y="0" width="236" height="280" viewBox="0 0 236 280">
-<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">III　正交自折叠</text>
-<path d="M190 216 L189.62 205.3 L188.47 194.65 L186.57 184.12 L183.92 173.74 L180.54 163.58 L176.44 153.69 L171.65 144.11 L166.19 134.9 L160.08 126.11 L153.36 117.77 L146.07 109.93 L138.23 102.64 L129.89 95.92 L121.1 89.81 L111.89 84.35 L102.31 79.56 L92.42 75.46 L82.26 72.08 L71.88 69.43 L61.35 67.53 L50.7 66.38 L40 66" class="ts-faint" stroke-width="1.2" stroke-dasharray="3 4" stroke-linejoin="round" fill="none"/>
-<line x1="40" y1="216" x2="40" y2="54" class="ts-dim" stroke-width="1.3" fill="none"/>
-<line x1="30" y1="216" x2="212" y2="216" class="ts-dim" stroke-width="1.3" fill="none"/>
-<line x1="154.91" y1="119.58" x2="154.91" y2="216" class="ts-magenta" stroke-width="3.2" stroke-linecap="round" fill="none"/>
-<line x1="40" y1="216" x2="154.91" y2="216" class="ts-cyan" stroke-width="4.4" stroke-linecap="round" fill="none"/>
-<path d="M146.91 216 L146.91 224 L154.91 224" class="ts-dim" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
-<line x1="40" y1="216" x2="148.4" y2="125.05" class="ts-ink" stroke-width="2.4" fill="none"/>
-<path d="M154.91 119.58 L149.95 129.23 L144.55 122.79Z" class="tf-ink"/>
-<path d="M79 216 L78.9 213.28 L78.62 210.57 L78.15 207.89 L77.49 205.25 L76.65 202.66 L75.63 200.14 L74.43 197.69 L73.07 195.33 L71.55 193.08 L69.88 190.93" class="ts-dim" stroke-width="1.4" stroke-linejoin="round" fill="none"/>
-<text class="tf-dim" x="87.83" y="203.63" font-size="14" text-anchor="middle">θ</text>
-<circle cx="40" cy="216" r="3.2" class="tf-ink"/>
-<text class="tf-ink" x="162.91" y="115.58" font-size="16" font-weight="600">Ψ</text>
-<text class="tf-cyan" x="97.45" y="236" font-size="14" text-anchor="middle">cos θ</text>
-<text class="tf-magenta ts-bg" x="162.91" y="172.79" font-size="14" stroke-width="3.92" stroke-linejoin="round" paint-order="stroke">sin θ</text>
-<text class="tf-ink" x="118" y="262" font-size="14" text-anchor="middle">cos²θ + sin²θ = 1</text>
+<text class="tf-ink" x="118" y="22" font-size="14" text-anchor="middle" font-weight="600">III　转一圈只到 −1</text>
+<circle cx="118" cy="92" r="40" class="ts-dim" stroke-width="1.2" stroke-dasharray="4 4" fill="none"/>
+<circle cx="118" cy="206" r="40" class="ts-dim" stroke-width="1.2" stroke-dasharray="4 4" fill="none"/>
+<path d="M158 92 L157.95 89.91 L157.78 87.82 L157.51 85.74 L157.13 83.68 L156.64 81.65 L156.04 79.64 L155.34 77.67 L154.54 75.73 L153.64 73.84 L152.64 72 L151.55 70.21 L150.36 68.49 L149.09 66.83 L147.73 65.23 L146.28 63.72 L144.77 62.27 L143.17 60.91 L141.51 59.64 L139.79 58.45 L138 57.36 L136.16 56.36 L134.27 55.46 L132.33 54.66 L130.36 53.96 L128.35 53.36 L126.32 52.87 L124.26 52.49 L122.18 52.22 L120.09 52.05 L118 52 L115.91 52.05 L113.82 52.22 L111.74 52.49 L109.68 52.87 L107.65 53.36 L105.64 53.96 L103.67 54.66 L101.73 55.46 L99.84 56.36 L98 57.36 L96.21 58.45 L94.49 59.64 L92.83 60.91 L91.23 62.27 L89.72 63.72 L88.27 65.23 L86.91 66.83 L85.64 68.49 L84.45 70.21 L83.36 72 L82.36 73.84 L81.46 75.73 L80.66 77.67 L79.96 79.64 L79.36 81.65 L78.87 83.68 L78.49 85.74 L78.22 87.82 L78.05 89.91 L78 92" class="ts-violet" stroke-width="2.4" stroke-linejoin="round" fill="none"/>
+<path d="M78 92 L74.85 83.91 L81.57 84.09Z" class="tf-violet"/>
+<path d="M158 206 L157.78 201.82 L157.13 197.68 L156.04 193.64 L154.54 189.73 L152.64 186 L150.36 182.49 L147.73 179.23 L144.77 176.27 L141.51 173.64 L138 171.36 L134.27 169.46 L130.36 167.96 L126.32 166.87 L122.18 166.22 L118 166 L113.82 166.22 L109.68 166.87 L105.64 167.96 L101.73 169.46 L98 171.36 L94.49 173.64 L91.23 176.27 L88.27 179.23 L85.64 182.49 L83.36 186 L81.46 189.73 L79.96 193.64 L78.87 197.68 L78.22 201.82 L78 206 L78.22 210.18 L78.87 214.32 L79.96 218.36 L81.46 222.27 L83.36 226 L85.64 229.51 L88.27 232.77 L91.23 235.73 L94.49 238.36 L98 240.64 L101.73 242.54 L105.64 244.04 L109.68 245.13 L113.82 245.78 L118 246 L122.18 245.78 L126.32 245.13 L130.36 244.04 L134.27 242.54 L138 240.64 L141.51 238.36 L144.77 235.73 L147.73 232.77 L150.36 229.51 L152.64 226 L154.54 222.27" class="ts-cyan" stroke-width="2.4" stroke-linejoin="round" fill="none"/>
+<path d="M154.54 222.27 L153.9 230.92 L147.92 227.87Z" class="tf-cyan"/>
+<circle cx="158" cy="92" r="4.2" class="ts-bg tf-violet" stroke-width="1.4"/>
+<circle cx="78" cy="92" r="4.2" class="ts-bg tf-violet" stroke-width="1.4"/>
+<circle cx="158" cy="206" r="4.2" class="ts-bg tf-cyan" stroke-width="1.4"/>
+<text class="tf-violet" x="166" y="97" font-size="14">+1</text>
+<text class="tf-violet" x="70" y="97" font-size="14" text-anchor="end">−1</text>
+<text class="tf-cyan" x="166" y="211" font-size="14">1</text>
+<text class="tf-ink" x="52" y="62" font-size="15" text-anchor="middle"><tspan font-style="italic">w</tspan></text>
+<text class="tf-ink" x="52" y="176" font-size="15" text-anchor="middle"><tspan font-style="italic">z</tspan></text>
+<line x1="118" y1="140" x2="118" y2="152.05" class="ts-dim" stroke-width="1.4" fill="none"/>
+<path d="M118 158 L115.06 151 L120.94 151Z" class="tf-dim"/>
+<text class="tf-dim" x="126" y="154" font-size="14"><tspan font-style="italic">z</tspan> = <tspan font-style="italic">w</tspan>²</text>
+<rect x="87.6" y="249" width="60.8" height="22" class="ts-ok tf-ok" stroke-width="1.2" fill-opacity="0.12"/>
+<text class="tf-ok tr-fig-mono" x="94.6" y="266" font-size="13" font-family="'JetBrains Mono', 'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace" font-weight="600">LEAN ✓</text>
 </svg>
 </svg>
