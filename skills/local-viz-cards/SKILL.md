@@ -21,7 +21,7 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 
 ## 页面与它们的卡
 
-本书有 36 个交互页面，下表按登记表（`books/quantum-geometry/viz/visualizations.json`）的顺序排列。
+本书有 41 个交互页面，下表按登记表（`books/quantum-geometry/viz/visualizations.json`）的顺序排列。
 
 | 页面 | 一句话 | 卡（`preset`） |
 | --- | --- | --- |
@@ -346,20 +346,6 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十章 | 定理 `thm-coda-quadratic-advection-no-closure` 的证明之后 | `navier-stokes-p-np` · `mixed` |
 | 第三十章 | `mixed` 之后 | `navier-stokes-p-np` · `closed` |
 | 第三十章 | 纳维—斯托克斯一节末 | `navier-stokes-p-np` 完整实验室 |
-| 第三十三章 | “互指单调锁死”一节列表第 1 条（独自闭门内省）之后、第 2 条之前 | `mutual-observer-attractors` · `alone` |
-| 第三十三章 | 例 `ex-ch33-mutual-cosine-monotonic-lock` 之后、“对照……轨迹账本”一段之前 | `mutual-observer-attractors` · `round` |
-| 第三十三章 | “两人起点不同时也是如此”一段之后、“接受窗交集”一节之前 | `mutual-observer-attractors` · `apart` |
-| 第三十三章 | 文献注记 `rem-ch33-rt-reconnection-ckw-literature` 之后、“把窗口交集体积……合拢”一段之前 | `mutual-observer-attractors` · `transition` |
-| 第三十三章 | “因为表层记事虽已归零”一段之后、转入第三十四章一段之前 | `mutual-observer-attractors` · `connected` |
-| 第三十三章 | 章末 | `mutual-observer-attractors` 完整实验室 |
-| 第三十五章 | 第一节 Lean 三定理列表第 3 条（`finite_memory_history_capacity`）之后、“这里的清表”一段之前 | `self-referential-table` · `full` |
-| 第三十五章 | 第一节“因此，乘着光来……”一段之后、定理 `thm-ch35-null-pulse-and-record-blocking` 之前 | `self-referential-table` · `reset` |
-| 第三十五章 | “成长即扩表”一节三步列表之后、“下面我们将……”一段之前 | `self-referential-table` · `expand_table` |
-| 第三十五章 | “查表算法亦在表内”一节“把原本悬浮在表外的……”一段之后 | `self-referential-table` · `dual_read` |
-| 第三十五章 | 同节列表第 2 条（“收束解释器追问”）之后、$T = T(T)$ 公式之前 | `self-referential-table` · `diagonal` |
-| 第三十五章 | “在实轴一维投影模型……”一段之后、定理 `thm-ch35-lawvere-diagonal-and-homoiconic-closure` 之前 | `self-referential-table` · `heal` |
-| 第三十五章 | 末节“若记忆只以这条轴的偏置读出……”一段之后 | `self-referential-table` · `orthogonal_zero` |
-| 第三十五章 | 末节加粗的追问之后、转入第三十六章之前 | `self-referential-table` 完整实验室 |
 | 第三十一章 | §31.1 “丈量互易”列表之后 | `quantum-fairness-ledger` · `haar` |
 | 第三十一章 | §31.1 零免费午餐账本三项列表之后 | `quantum-fairness-ledger` · `tradeoff` |
 | 第三十一章 | §31.2 列表第 1 项（不可克隆内积判据）之后 | `quantum-fairness-ledger` · `cloning` |
@@ -367,14 +353,6 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十一章 | 文献注记 `rem-ch31-ckw-monogamy-literature` 之后 | `quantum-fairness-ledger` · `wstate`，一句过渡，再 `ghz` |
 | 第三十一章 | 文献注记 `rem-ch31-weyl-window-equidistribution-literature` 之后 | `quantum-fairness-ledger` · `ergodic` |
 | 第三十一章 | “看清了这一长程图景”一段之后、五重公平总表之前 | `quantum-fairness-ledger` 完整实验室 |
-| 第三十四章 | 例 `ex-ch34-spherical-addressing-preview` 之后 | `spherical-degeneracy-radar` · `meridian` |
-| 第三十四章 | 该例之后的解读段（“自定位罗盘”）之后 | `spherical-degeneracy-radar` · `sweep` |
-| 第三十四章 | 八分球面一节第一段之后 | `spherical-degeneracy-radar` · `hops` |
-| 第三十四章 | 八分球面一节第二段（“读成同一个结果”）之后、定理 `thm-ch34-readout-kernel-and-covariant-commutator` 之前 | `spherical-degeneracy-radar` · `equator` |
-| 第三十四章 | 例 `ex-ch34-spherical-addressing-and-octant-rotors` 之后 | `spherical-degeneracy-radar` · `tilted` |
-| 第三十四章 | 该例之后的定位箴言段之后、第三节之前 | `spherical-degeneracy-radar` · `frames` |
-| 第三十四章 | 文献注记 `rem-ch34-virtual-z-berry-relativity-literature` 之后 | `berry-loop` · `octant` |
-| 第三十四章 | 四阶总表之后的“凡简并处”一段之后 | `spherical-degeneracy-radar` 完整实验室 |
 | 第三十二章 | §32.1 三条创生律列表之后、定理 `thm-ch32-generative-self-reference-and-zeckendorf` 引言之前 | `unified-field-slice` · `polytope` |
 | 第三十二章 | 文献注记 `rem-ch32-generative-laws-dottie-literature` 之后 | `unified-field-slice` · `fixedpoint` |
 | 第三十二章 | §32.2 列表第 1 条（物质旋量与狭义相对论）之后、第 2 条之前 | `unified-field-slice` · `photon` |
@@ -383,6 +361,28 @@ description: 修改或新增《量子计算的几何直觉》的交互可视化�
 | 第三十二章 | 定理 `thm-ch32-null-cone-holonomy-and-holographic-cut` 的证明之后 | `unified-field-slice` · `abelian` |
 | 第三十二章 | 文献注记 `rem-ch32-dirac-yang-mills-jacobson-literature` 之后 | `unified-field-slice` · `gudermann` |
 | 第三十二章 | §32.2 末（文献注记 `rem-ch32-six-domain-isomorphism-table` 之后、§32.3 之前；上半篇末尾） | `unified-field-slice` 完整实验室 |
+| 第三十三章 | “互指单调锁死”一节列表第 1 条（独自闭门内省）之后、第 2 条之前 | `mutual-observer-attractors` · `alone` |
+| 第三十三章 | 例 `ex-ch33-mutual-cosine-monotonic-lock` 之后、“对照……轨迹账本”一段之前 | `mutual-observer-attractors` · `round` |
+| 第三十三章 | “两人起点不同时也是如此”一段之后、“接受窗交集”一节之前 | `mutual-observer-attractors` · `apart` |
+| 第三十三章 | 文献注记 `rem-ch33-rt-reconnection-ckw-literature` 之后、“把窗口交集体积……合拢”一段之前 | `mutual-observer-attractors` · `transition` |
+| 第三十三章 | “因为表层记事虽已归零”一段之后、转入第三十四章一段之前 | `mutual-observer-attractors` · `connected` |
+| 第三十三章 | 章末 | `mutual-observer-attractors` 完整实验室 |
+| 第三十四章 | 例 `ex-ch34-spherical-addressing-preview` 之后 | `spherical-degeneracy-radar` · `meridian` |
+| 第三十四章 | 该例之后的解读段（“自定位罗盘”）之后 | `spherical-degeneracy-radar` · `sweep` |
+| 第三十四章 | 八分球面一节第一段之后 | `spherical-degeneracy-radar` · `hops` |
+| 第三十四章 | 八分球面一节第二段（“读成同一个结果”）之后、定理 `thm-ch34-readout-kernel-and-covariant-commutator` 之前 | `spherical-degeneracy-radar` · `equator` |
+| 第三十四章 | 例 `ex-ch34-spherical-addressing-and-octant-rotors` 之后 | `spherical-degeneracy-radar` · `tilted` |
+| 第三十四章 | 该例之后的定位箴言段之后、第三节之前 | `spherical-degeneracy-radar` · `frames` |
+| 第三十四章 | 文献注记 `rem-ch34-virtual-z-berry-relativity-literature` 之后 | `berry-loop` · `octant` |
+| 第三十四章 | 四阶总表之后的“凡简并处”一段之后 | `spherical-degeneracy-radar` 完整实验室 |
+| 第三十五章 | 第一节 Lean 三定理列表第 3 条（`finite_memory_history_capacity`）之后、“这里的清表”一段之前 | `self-referential-table` · `full` |
+| 第三十五章 | 第一节“因此，乘着光来……”一段之后、定理 `thm-ch35-null-pulse-and-record-blocking` 之前 | `self-referential-table` · `reset` |
+| 第三十五章 | “成长即扩表”一节三步列表之后、“下面我们将……”一段之前 | `self-referential-table` · `expand_table` |
+| 第三十五章 | “查表算法亦在表内”一节“把原本悬浮在表外的……”一段之后 | `self-referential-table` · `dual_read` |
+| 第三十五章 | 同节列表第 2 条（“收束解释器追问”）之后、$T = T(T)$ 公式之前 | `self-referential-table` · `diagonal` |
+| 第三十五章 | “在实轴一维投影模型……”一段之后、定理 `thm-ch35-lawvere-diagonal-and-homoiconic-closure` 之前 | `self-referential-table` · `heal` |
+| 第三十五章 | 末节“若记忆只以这条轴的偏置读出……”一段之后 | `self-referential-table` · `orthogonal_zero` |
+| 第三十五章 | 末节加粗的追问之后、转入第三十六章之前 | `self-referential-table` 完整实验室 |
 | 终章 | 空间吸引子 · 一 末 | `spatial-attractor-deja-vu` · `butterfly` |
 | 终章 | 空间吸引子 · 二 “内禀几何参数”列表之后 | `spatial-attractor-deja-vu` · `fixed`、`cycle` |
 | 终章 | 空间吸引子 · 二 末（文献注记 `rem-coda-lorenz-srb-literature` 之后） | `spatial-attractor-deja-vu` · `forget`、`dimension` |
