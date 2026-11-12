@@ -3,7 +3,7 @@
 **每一条定理都经 Lean 内核验证的双语形式化专著与教材书库。**  
 *Bilingual formal monographs and self-contained textbooks in which every theorem is kernel-verified in Lean.*
 
-本书库中的每一部专著均遵循“书负责解释，Lean 负责成立”的分工契约：所有正式的 `theorem`、`lemma`、`proposition` 与 `corollary` 均按全局标识符（GID）绑定至 [trureturing](https://github.com/the-omega-institute/trureturing)（`dev` 分支，精确提交锁定于 [trureturing.lock.json](trureturing.lock.json)）中已经 Lean 4 内核验证并冻结的声明。同一份中英双语源码同步导出为在线 HTML（构建期 KaTeX 排版与源码永久链接）、PDF（深色屏幕版、白底印刷版与学术专著版）及兼容 Apple Books 的 EPUB 3。
+本书库中的每一部专著均遵循“书负责解释，Lean 负责成立”的分工契约：所有正式的 `theorem`、`lemma`、`proposition` 与 `corollary` 均按全局标识符（GID）绑定至 [trureturing](https://github.com/the-omega-institute/trureturing)（`dev` 分支，精确提交锁定于 [trureturing.lock.json](trureturing.lock.json)）中已经 Lean 4 内核验证并冻结的声明。同一份中英双语源码同步导出为在线 HTML（构建期 KaTeX 排版与源码永久链接）、PDF（A4 单栏研究预印本）及兼容 Apple Books 的 EPUB 3。
 
 Every formal `theorem`, `lemma`, `proposition`, and `corollary` in this library cites a declaration verified by the Lean 4 kernel and frozen on the `dev` branch of [trureturing](https://github.com/the-omega-institute/trureturing), pinned in [trureturing.lock.json](trureturing.lock.json). The aligned Chinese and English editions publish online HTML, single-column research preprint PDFs, and MathML-enabled EPUB 3.
 
