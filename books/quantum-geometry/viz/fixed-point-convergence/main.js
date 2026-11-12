@@ -422,7 +422,7 @@
   /* ---------- experiment cards ---------- */
   const CARDS = {
     golden: { scene: 'iter', map: 'golden', x0: 1, cam: 'whole', to: 8, still: 6 },
-    far: { scene: 'iter', map: 'cos', x0: 3, cam: 'whole', to: 12, still: 12 },
+    far: { scene: 'iter', map: 'cos', x0: 3, cam: 'whole', to: 12, still: 5 },
     rate: { scene: 'iter', map: 'cos', x0: 1, cam: 'follow', to: 20, still: 8 },
     circle: { scene: 'iter', map: 'cos', x0: 1, cam: 'circle', to: 14, still: 14 },
     newton: { scene: 'newton', map: 'cos', x0: 1, cam: 'follow', to: 2, still: 2 },
