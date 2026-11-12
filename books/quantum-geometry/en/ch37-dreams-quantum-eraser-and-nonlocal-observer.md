@@ -63,7 +63,12 @@ Across the frozen observer-conditioning, pinching-projection, and quantum-dynami
 3. **Entropy-Production and Coherence-Deletion Identity Under Repeated Unitary–Pinching Steps** ([`entropy_production_coherence_deletion_identity`](lean:D5/S3/Quantum/Dynamics/EntropyProductionCoherenceDeletionIdentity.entropy_production_coherence_deletion_identity)): Let $n$ be a finite decidable type (`[Fintype n] [DecidableEq n]`), let $U \in \operatorname{unitaryGroup}(n, \mathbb{C})$, and let $\rho : \mathbb{N} \to \operatorname{DensityState}(n)$ satisfy $\forall k \in \mathbb{N},\; \rho(k + 1) = \operatorname{basisPinchingState}(\operatorname{unitaryConjugateState}(U, h_U, \rho(k)))$. Writing $\tilde{\rho}_k := \operatorname{unitaryConjugateState}(U, h_U, \rho(k))$, each step's von Neumann entropy increase equals the nonnegative quantum relative entropy of deleted coherence, and the $N$-step cumulative entropy gain equals the exact sum of those step taxes:
 
    $$
-   \forall k \in \mathbb{N},\quad S\bigl(\rho(k+1)\bigr) - S\bigl(\rho(k)\bigr) = D\bigl(\tilde{\rho}_k \,\big\|\, \operatorname{basisPinchingState}(\tilde{\rho}_k)\bigr) \ge 0, \qquad \forall N \in \mathbb{N},\quad S\bigl(\rho(N)\bigr) - S\bigl(\rho(0)\bigr) = \sum_{k \in \operatorname{Finset.range} N} D\bigl(\tilde{\rho}_k \,\big\|\, \operatorname{basisPinchingState}(\tilde{\rho}_k)\bigr).
+   \begin{aligned}
+   &\forall k \in \mathbb{N},\quad S\bigl(\rho(k+1)\bigr) - S\bigl(\rho(k)\bigr) \\
+    &\quad = D\bigl(\tilde{\rho}_k \,\big\|\, \operatorname{basisPinchingState}(\tilde{\rho}_k)\bigr) \ge 0, \\
+    &\forall N \in \mathbb{N},\quad S\bigl(\rho(N)\bigr) - S\bigl(\rho(0)\bigr) \\
+    &\quad = \sum_{k \in \operatorname{Finset.range} N} D\bigl(\tilde{\rho}_k \,\big\|\, \operatorname{basisPinchingState}(\tilde{\rho}_k)\bigr).
+   \end{aligned}
    $$
 :::
 
@@ -223,7 +228,12 @@ The following two cut-and-project selection and global Delone uniformity theorem
 2. **Certified Delone Packing and Covering Radii of the Complete Golden Model Set** ([`exists_golden_modelSet_delone`](lean:D5/S3/Fourier/GoldenModelSetDelone.exists_golden_modelSet_delone)): Over the bi-infinite cut-and-project carrier $\operatorname{modelSet}(\mathrm{goldenWindow}) = \{y \in \mathbb{R} \mid \exists x \in \mathrm{GoldenInt},\; \operatorname{embedding}(x) = y \land \operatorname{embedding}(\operatorname{conj}(x)) \in \mathrm{goldenWindow}\}$, there exists a verified Mathlib Delone set $D : \operatorname{Delone.DeloneSet}\;\mathbb{R}$ with exact carrier, uniform packing radius $1/2$, and uniform covering radius $3$:
 
    $$
-   \exists\, D : \operatorname{Delone.DeloneSet}\;\mathbb{R},\qquad D.\mathrm{carrier} = \operatorname{modelSet}(\mathrm{goldenWindow}) \;\land\; D.\mathrm{packingRadius} = \bigl(\tfrac{1}{2} : \mathbb{R}_{\ge 0}\bigr) \;\land\; D.\mathrm{coveringRadius} = \bigl(3 : \mathbb{R}_{\ge 0}\bigr)
+   \begin{aligned}
+   &\exists\, D : \operatorname{Delone.DeloneSet}\;\mathbb{R}, \\
+    &D.\mathrm{carrier} = \operatorname{modelSet}(\mathrm{goldenWindow}) \\
+    &\;\land\; D.\mathrm{packingRadius} = \bigl(\tfrac{1}{2} : \mathbb{R}_{\ge 0}\bigr) \\
+    &\;\land\; D.\mathrm{coveringRadius} = \bigl(3 : \mathbb{R}_{\ge 0}\bigr)
+   \end{aligned}
    $$
 
    (where packing radius $1/2$ encodes uniform node separation $\forall x \neq y \in \operatorname{modelSet}(\mathrm{goldenWindow}),\; \operatorname{dist}(x, y) \ge 1$, and covering radius $3$ encodes uniform relative density $\forall x \in \mathbb{R},\; \exists y \in \operatorname{modelSet}(\mathrm{goldenWindow}),\; \operatorname{dist}(x, y) \le 3$).
