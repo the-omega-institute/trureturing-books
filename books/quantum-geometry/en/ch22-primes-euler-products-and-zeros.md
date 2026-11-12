@@ -682,7 +682,7 @@ The zero of smallest imaginary part in the upper half-plane is $t_1$, so all non
 :::
 
 ::: {.viz src="critical-mirror" preset="thin" height="500"}
-**High up, the critical strip is a thin film on the circle.** $\rho = 0.6 + 14i$ is $0.1$ off the mirror, and its image leaves the circle by only about five parts in ten thousand: $\lvert w\rvert = 0.999491$, with the inverted image at $1.000510$. The magnifier at the top right stretches the angle and $\ln\lvert w\rvert$ apart: the cyan circle becomes a straight line, and the four images sit on either side of it at the corners of a rectangle (the numbers are those of [@ex-cayley-unit-circle-zeros]).
+**High up, the critical strip is a thin film on the circle.** $\rho = 0.6 + 14i$ is $0.1$ off the mirror, and its image leaves the circle by only about five parts in ten thousand: $\lvert w\rvert = 0.999491$, with the inverted image at $1.000510$. The magnifier at the lower left stretches the angle and $\ln\lvert w\rvert$ apart: the cyan circle becomes a straight line, and the four images sit on either side of it at the corners of a rectangle (the numbers are those of [@ex-cayley-unit-circle-zeros]).
 :::
 
 **Symmetry alone does not pin the zeros.** Since $\xi$ has both the reflection and the conjugation symmetry, could these two symmetries by themselves force the zeros onto the mirror? They cannot, and a quartic polynomial suffices as a counterexample. The module `D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization` at the pinned commit writes it down.

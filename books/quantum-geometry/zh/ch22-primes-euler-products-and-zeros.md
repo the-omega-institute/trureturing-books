@@ -682,7 +682,7 @@ $t = 0$（即 $s = \frac{1}{2}$）落在 $w = -1$；$t \to +\infty$ 时 $w \to 1
 :::
 
 ::: {.viz src="critical-mirror" preset="thin" height="500"}
-**高处的临界带是贴着圆周的一层薄膜。** $\rho = 0.6 + 14i$ 离镜面 $0.1$，它的像只偏出圆周约万分之五：$\lvert w\rvert = 0.999491$，反演的像 $1.000510$。右上的放大镜把辐角与 $\ln\lvert w\rvert$ 拉开，青色的圆周在镜中成了一条直线，四个像在它两侧排成矩形（数值取自 [@ex-cayley-unit-circle-zeros]）。
+**高处的临界带是贴着圆周的一层薄膜。** $\rho = 0.6 + 14i$ 离镜面 $0.1$，它的像只偏出圆周约万分之五：$\lvert w\rvert = 0.999491$，反演的像 $1.000510$。左下的放大镜把辐角与 $\ln\lvert w\rvert$ 拉开，青色的圆周在镜中成了一条直线，四个像在它两侧排成矩形（数值取自 [@ex-cayley-unit-circle-zeros]）。
 :::
 
 **对称性本身锁不住零点。** 既然 $\xi$ 同时具有反射与共轭两种对称，能不能单凭这两种对称推出零点必在镜面上？不能，而且反例只需要一个四次多项式。所钉仓库的模块 `D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization` 把它写了出来。
