@@ -214,6 +214,25 @@ await page.keyboard.press(' ');
 await page.click('[data-lang-set="en"]'); await settle(page);
 check('the key readout is rewritten in English', /cross-block/.test(await page.textContent('#roKeyL')));
 
+/* ---------- attribution: green boxes state the general theorems; the page's own instances sit with NUM ---------- */
+{
+  const boxes = await D(() => [...document.querySelectorAll('#evidence .lean')].map((b) => ({ cls: b.className, gids: [...b.querySelectorAll('[data-lean-gid]')].map((a) => a.dataset.leanGid.split('.').pop()),
+    zh: (b.querySelector('.zh') || {}).textContent || '', en: (b.querySelector('.en') || {}).textContent || '' })));
+  const green = boxes.filter((b) => b.cls.trim() === 'lean'), num = boxes.find((b) => /\bnum\b/.test(b.cls));
+  const APPLIED = { zh: ['舞台上', '“逐个位置”', '“记录”场景', '读数'], en: ['on the stage', '“every place”', 'Records scene', 'readout'] };
+  const general = green.slice(0, 3);
+  check('the first three green boxes cite the general pinching, fixed-point, entropy-production and coherence-mass theorems',
+    JSON.stringify(general.map((b) => b.gids)) === JSON.stringify([['finite_record_pinching_idempotent', 'unreadState_fixed_iff'], ['entropy_production_coherence_deletion_identity'], ['pinching_discarded_coherence_mass']]));
+  check('those green boxes carry no sentence about the page’s own stage or readout (both languages)',
+    general.every((b) => APPLIED.zh.every((w) => !b.zh.includes(w)) && APPLIED.en.every((w) => !b.en.includes(w))), JSON.stringify(general.map((b) => [b.zh.slice(0, 40), b.en.slice(0, 40)])));
+  check('the NUM box names the three applications as the page’s numbers, in both languages',
+    !!num && ['跨块方格全空', 'D(Ψ ‖ 𝒫(Ψ))', '相干质量', 'Lean 没有对这些具体的数作证明'].every((w) => num.zh.includes(w))
+    && ['cross-block cells are empty', 'D(Ψ ‖ 𝒫(Ψ))', 'coherence mass', 'Lean proves nothing about these particular numbers'].every((w) => num.en.includes(w)));
+  const cert = green[3];
+  check('the exact two-copy certificate stays green with its frozen values 1/2, −1/2, −i/2, 1/2',
+    !!cert && cert.gids.includes('two_copy_joint_reversal_certificate') && ['1/2', '−1/2', '−i/2'].every((w) => cert.zh.includes(w) && cert.en.includes(w)));
+}
+
 /* ---------- layout: the stage title clears the scene buttons on a phone; the English legend of a still is one line ---------- */
 /** The box of the text itself (a range over the element's contents), not of the element, which a flex column stretches. */
 const box = (pg, sel) => pg.evaluate((q) => { const rg = document.createRange(); rg.selectNodeContents(document.querySelector(q)); const r = rg.getBoundingClientRect(); return { l: r.left, r: r.right, t: r.top, b: r.bottom, h: r.height }; }, sel);

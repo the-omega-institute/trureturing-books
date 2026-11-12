@@ -334,8 +334,12 @@
     else if (S.mu > 0.005) note = L(`模型：二元隔墙 μ = ${fix(S.mu, 2)}。光带沿中线剪成两件：小旗走第一圈的那一半收成中间的指针球，走第二圈的那一半撑成外面的内存壳，中间隔着缝。μ 只是画面的过渡，本章没有给它数学定义；推回 0，两件就是第三十九章那条单侧光带。`,
       `Model: dualist wall μ = ${fix(S.mu, 2)}. The band is cut along its centre line into two pieces: the half the flag runs along in its first round shrinks into the pointer ball in the middle, the half of its second round spreads into the memory shell round it, with a gap between. μ only moves the picture; the chapter gives it no mathematical definition. Push it back to 0 and the two pieces are the one-sided band of Chapter 39.`);
     else if (t < 1e-6) note = L('还没转：小旗顺着转轴 n 竖着。J 的长度是 ρ，品红正方形的面积也是 ρ。', 'Not turned yet: the flag stands along the axis n. J has length ρ, and the magenta square has area ρ too.');
-    else note = L(`转过 ${fix(t / DEG, 0)}°：J 只转过同样的角，小旗只转过一半（${fix(t / 2 / DEG, 0)}°）。三个平方仍然相等。`,
-      `Turned ${fix(t / DEG, 0)}°: J has turned through that angle, the flag through half of it (${fix(t / 2 / DEG, 0)}°). The three squares still agree.`);
+    else {
+      // t is the turn parameter in the chosen plane; J's angle from J₀ is the principal value X.Jback in [0°, 180°]
+      const al = fix(X.Jback / DEG, 0);
+      note = L(`在 ${PL().name} 面里转过 ${fix(t / DEG, 0)}°：这是转动参数，不是 J 离出发方向的夹角。J 此刻离出发方向 ${al}°；小旗按半角转过 ${fix(t / 2 / DEG, 0)}°。三个平方仍然相等。`,
+        `Turned ${fix(t / DEG, 0)}° in ${PL().name}: this is the turn parameter, not the angle of J from its start. J is now ${al}° from its start; the flag has turned through the half angle, ${fix(t / 2 / DEG, 0)}°. The three squares still agree.`);
+    }
     $('roNote').textContent = note;
     $('pillTurn').querySelector('strong').textContent = `${fix(t / DEG, 0)}°`;
     $('pillSign').querySelector('strong').textContent = sgn(X.c, 2);

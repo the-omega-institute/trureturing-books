@@ -277,7 +277,11 @@
     if (S.scene === 'scan') {
       big = L(`扫描 · 第 ${Math.min(s, scanSteps())} 步`, `Scan · step ${Math.min(s, scanSteps())}`);
       hud = read >= scanSteps() ? L(`读到地址 ${S.a}：它是第 ${S.a + 1} 格，恰好用了 ${S.a + 1} 步`, `address ${S.a} reached: it is cell ${S.a + 1}, in exactly ${S.a + 1} steps`) : L(`读头一拍读一格，已读 ${read} 格，要读到第 ${S.a + 1} 格`, `one cell per tick, ${read} read so far, cell ${S.a + 1} to go for`);
-      note = S.a === N - 1 ? L('最后一格要把整张表走一遍：N = 64 步。', 'The last cell takes a walk over the whole table: N = 64 steps.') : L('逐格扫描读第 k 格就要 k 步；同一时刻，路由树早已走到叶子。', 'Scanning to cell k takes k steps; by then the tree has long reached its leaf.');
+      const k = scanSteps(), d = depthOf(N);   // scan: cell k = a + 1 at step k; tree: the leaf at step d = log₂N
+      note = S.a === N - 1 ? L('最后一格要把整张表走一遍：N = 64 步。', 'The last cell takes a walk over the whole table: N = 64 steps.')
+        : k < d ? L(`读到第 ${k} 格（地址 ${S.a}）扫描只要 ${k} 步，比路由树的 ${d} 层还早：表头附近，扫描反而先到。树赢在最坏情形：任何地址都只要 ${d} 步，扫描最坏要 N = ${N} 步。`, `Scanning reaches cell ${k} (address ${S.a}) in ${k} steps, before the tree's ${d} levels: near the head of the table the scan arrives first. The tree wins in the worst case: every address takes ${d} steps, a scan up to N = ${N}.`)
+          : k === d ? L(`读到第 ${k} 格（地址 ${S.a}）扫描要 ${k} 步，与路由树的 ${d} 层同时到达；再往后的每一格，扫描都比树晚。`, `Scanning reaches cell ${k} (address ${S.a}) in ${k} steps, at the same step as the tree's ${d} levels; for every later cell the scan arrives after the tree.`)
+            : L(`读到第 ${k} 格（地址 ${S.a}）扫描要 ${k} 步；路由树在第 ${d} 步就已走到叶子，早 ${k - d} 步。`, `Scanning to cell ${k} (address ${S.a}) takes ${k} steps; the tree reached its leaf at step ${d}, ${k - d} steps earlier.`);
     } else if (S.scene === 'tree') {
       big = L(`路由树 · ${act} / ${SWITCHES.length} 个开关`, `Tree · ${act} / ${SWITCHES.length} switches`);
       hud = S.k === 1 ? L(`地址 ${S.a} = ${bin(S.a)}₂：每一位拨一层，深度 log₂64 = ${depthOf(N)}`, `address ${S.a} = ${bin(S.a)}₂: one bit per level, depth log₂64 = ${depthOf(N)}`)
