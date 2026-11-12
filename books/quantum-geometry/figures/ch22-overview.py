@@ -6,7 +6,8 @@ Panel I places n = 2^a 3^b (a ≤ 3, b ≤ 2) at (a, b) and walks to 12 = 2² ·
 Panel II colours 1 … 30 by whether they factor over {2, 3, 5}; the first that does not is 7 (checked).
 Panel III draws the strip 0 < σ < 1, the line σ = ½, the pole at s = 1 and the first ten zeros at heights
 taken from the literature (each checked to make ζ vanish numerically); whether every zero is on the
-line is the open Riemann hypothesis.
+line is the open Riemann hypothesis; an off-line zero could only come as a mirror pair about σ = ½, so the
+question is drawn as two question marks at one height.
 """
 
 from _ch22 import ZEROS, check_zeta, smooth
@@ -17,13 +18,14 @@ ALT = {
     "zh": "三栏。第一栏：横轴每走一步乘 2，竖轴每走一步乘 3，格点上标着 1、2、4、8、3、6、12、24、9、18、36、72；两支青色箭头"
           "先横走两步、再竖走一步，到达 12 = 2² × 3。第二栏：1 到 30 排成方格，能只用 2、3、5 乘出来的格子是青色，其余是品红，"
           "第一个品红格是 7。第三栏：竖着的临界带夹在 σ = 0 与 σ = 1 之间，中间是虚线 σ = ½，s = 1 处打着叉（极点）；"
-          "十个零点从下往上都落在虚线上；带里另画一个红色虚线圈和问号，旁边的红色标签写着“开放问题”。",
+          "十个零点从下往上都落在虚线上；虚线两侧同一高度各有一个红色虚线圈和问号，用红色细虚线连着，表示离线零点若有，必成对出现；下方的红色标签写着“开放问题”。",
     "en": "Three panels. Panel I: each step right multiplies by 2, each step up by 3; the lattice points read 1, 2, 4, 8, 3, 6, "
           "12, 24, 9, 18, 36, 72, and two cyan arrows go two steps right and one step up to reach 12 = 2² × 3. Panel II: the "
           "numbers 1 to 30 in a grid; those that are products of 2, 3 and 5 alone are cyan, the rest magenta, and the first "
           "magenta cell is 7. Panel III: the vertical critical strip between σ = 0 and σ = 1 with the dashed line σ = ½ in "
-          "the middle and a cross at s = 1 (the pole); ten zeros climb the dashed line. A red dashed circle with a question "
-          "mark sits off the line, and a red tag reads “open”.",
+          "the middle and a cross at s = 1 (the pole); ten zeros climb the dashed line. Two red dashed circles with question "
+          "marks sit at one height on either side of the line, joined by a thin red dashed line: an off-line zero could "
+          "only come as such a pair. A red tag reads “open”.",
 }
 
 
@@ -90,8 +92,12 @@ def draw(fig):
     three.text(sx(1) + 10, ty(0) + 4, "*s* = 1", size=13, color="dim")
     for t in ZEROS:
         three.dot(sx(0.5), ty(t), 3.6, "ink", ring="bg")
-    qx, qy = sx(0.8), ty(36)
-    three.circle(qx, qy, 9, color="open", width=1.6, dash="3 2")
-    three.text(qx, qy, "?", size=13, color="open", weight=600, anchor="middle", middle=True)
+    # an off-line zero could only come in a mirror pair σ ± it ↔ 1 − σ + it (reflection with conjugation), so the
+    # open question is drawn as two question marks at one height, joined across the line
+    qy = ty(36)
+    three.line(sx(0.2) + 9, qy, sx(0.8) - 9, qy, "open", 1.0, dash="2 3")
+    for qs in (0.2, 0.8):
+        three.circle(sx(qs), qy, 9, color="open", width=1.6, dash="3 2")
+        three.text(sx(qs), qy, "?", size=13, color="open", weight=600, anchor="middle", middle=True)
     three.text(sx(0.5), ty(52) - 6, "σ = ½", size=13, color="ink", anchor="middle")
     three.chip(118, 264, three.t("开放问题", "open"), "open", anchor="middle")

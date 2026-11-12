@@ -13,7 +13,7 @@ Recall the foundational geometric principle uncovered in the [Prelude](README.md
 In this chapter we will see how this law — *to express the totality of a system as an entity, one must inhabit a larger ambient space* — reaches beyond a differential-geometric metaphor. At the foundation of set theory and observation topology, its abstract skeleton is captured by the **relative semantic diagonal and observation-topology refinement quartet** (`DiagonalTopologicalEscape`), verified here by the Lean 4 kernel, and compared with classical metamathematical diagonal theorems in [@rem-godel-tarski-comparison-literature]. Whenever a complete decoder catalog over a nonempty address space attempts to exhaust all output maps within the fiber partition of a fixed latent coordinate, any fixed-point-free twist operator immediately rips across the old observation topology along the relative semantic diagonal, forcing the concept readout to refine strictly into a "sphere beyond spheres."
 
 ::: {.figure src="ch21-overview"}
-**Figure 21.** The chapter at a glance. Panel I: the two fibers of the latent coordinate; the dashed magenta line splits the left one into $a_0, a_1$ with $g = 1$ and $a_2$ with $g = 0$ ([@ex-cantor-godel-diagonal-table]). Panel II: a magenta open helix climbs around the violet axis $\vv{e}_{n+1}$; its cyan shadow closes after one turn, while the helix already stands $2\pi c$ higher. Panel III: of $S^0$ through $S^8$ only the violet $S^0, S^1, S^3, S^7$ are parallelizable, and every tangent field on $S^2$ vanishes somewhere (literature result, not formalized in this book; see [@rem-hairy-ball-adams-literature]).
+**Figure 21.** The chapter at a glance. Panel I: the two fibers of the latent coordinate; the dashed magenta line splits the left one into $a_0, a_1$ with $g = 1$ and $a_2$ with $g = 0$ ([@ex-cantor-godel-diagonal-table]). Panel II: a magenta open helix climbs around the violet axis $\vv{e}_{n+1}$; its cyan shadow closes after one turn, while the helix already stands $2\pi c$ higher (this panel is the chapter's interpretive picture, not a theorem). Panel III: of $S^0$ through $S^8$ only the violet $S^0, S^1, S^3, S^7$ are parallelizable, and every tangent field on $S^2$ vanishes somewhere (literature result, not formalized in this book; see [@rem-hairy-ball-adams-literature]).
 :::
 
 ## 21.1 Why Naming an Area Requires Standing Outside It: Concept Readouts and Partition Topologies {#sec-ch21-1}
@@ -73,6 +73,10 @@ $$
 :::
 
 Notice the trap sprung by [@def-relative-semantic-diagonal] and [@def-separation-deficit]: at every address $a \in \mathrm{Address}$, because $\operatorname{twist}$ has no fixed points, $g(a) \neq \operatorname{decoderCatalog}(a, \operatorname{latent}(a))$ ([`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)) — at its own address $a$, the diagonal $g$ always disagrees with the $a$-th cataloged decoder!
+
+::: {.viz src="sphere-escape" preset="diagonal" height="500"}
+**The diagonal leaves the list.** Read the diagonal bit of each row and flip it to build the magenta $d$; $d$ differs from row $k$ in place $k$, so it is not on the list ([`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode) with $\operatorname{latent} = \mathrm{id}$ and $\operatorname{twist} = \neg$). The dot grid on the right holds all $2^N$ strings, and the candidates compatible with $d$ halve at every step.
+:::
 
 In the Lean module `DiagonalTopologicalEscape`, this mechanism yields four kernel-verified theorems proving that no complete internal catalog can contain its own diagonal without refining its observation topology.
 
@@ -189,10 +193,6 @@ This quartet captures the pure abstract diagonal skeleton in observation topolog
 :::
 
 > A complete catalog necessarily cracks its own shell; whoever tries to exhaust the world from inside a single sphere is thrust outward along the diagonal normal.
-
-::: {.viz src="sphere-escape" preset="diagonal" height="500"}
-**The diagonal leaves the list.** Read the diagonal bit of each row and flip it to build the magenta $d$; $d$ differs from row $k$ in place $k$, so it is not on the list ([`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode) with $\operatorname{latent} = \mathrm{id}$ and $\operatorname{twist} = \neg$). The dot grid on the right holds all $2^N$ strings, and the candidates compatible with $d$ halve at every step.
-:::
 
 ## 21.3 Inscribed Polytopes, Taylor Remainder Seams, and the Open Helix {#sec-ch21-3}
 

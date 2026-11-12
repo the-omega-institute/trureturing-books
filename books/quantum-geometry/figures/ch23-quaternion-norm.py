@@ -63,9 +63,10 @@ def draw(fig):
     for n in range(1, NMAX + 1):
         r = math.sqrt(n)
         fig.arc(CX, BASE, S * r, 0, 180, "line", 1.8)
-    for n in range(1, NMAX + 1):
-        a = math.radians(112 if n == 1 else 160)
-        r = math.sqrt(n) * S
+    # each Nrd label sits just outside its half circle, in the gap before the next one and off the dashed lines x₀ = k
+    for n, deg in zip(range(1, NMAX + 1), (118, 160, 157, 150)):
+        a = math.radians(deg)
+        r = math.sqrt(n) * S + 10
         fig.text(CX + r * math.cos(a), BASE - r * math.sin(a), f"{n}", size=14, color="line", anchor="middle",
                  middle=True, weight=600, halo=True)
     fig.text(X(-2.12), Y(0.5), "Nrd", size=14, color="line", anchor="end", weight=600)
@@ -73,4 +74,5 @@ def draw(fig):
     for (x0, m), c in sorted(pts.items()):
         x, y = X(x0), Y(math.sqrt(m))
         fig.dot(x, y, 4.8, "line", ring="bg")
-        fig.text(x + 8, y - 7 if m else y - 9, f"{c}", size=14, color="ink", halo=True)
+        # on the axis x₀ = 0 the count stands a little further out, clear of the axis line
+        fig.text(x + (12 if x0 == 0 else 8), y - 7 if m else y - 9, f"{c}", size=14, color="ink", halo=True)

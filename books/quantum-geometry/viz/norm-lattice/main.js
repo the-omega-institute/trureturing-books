@@ -272,18 +272,22 @@
     // labels
     if (!b.thumb) {
       const gl = at.g, ab = A > 0.5 ? `(2a + b, b) = (${2 * gl[0] + gl[1]}, ${gl[1]})` : `(a, b) = (${num(gl[0])}, ${num(gl[1])})`;
-      const up = at.uv[1] >= 0 ? -16 : 16;
-      stage.tag('cur', [g.X(at.uv[0]), g.Y(at.uv[1]) + up], ab, 'num hot', { screen: true, dx: 0 });
+      // the current label sits up and to the right of the point, clear of the dashed drop to the trace diagonal (up-left)
+      const up = at.uv[1] >= 0 ? -18 : 18, half = 4 + 3.9 * ab.length, room = g.X(at.uv[0]) + 2 * half + 16 < cv.clientWidth;
+      stage.tag('cur', [g.X(at.uv[0]), g.Y(at.uv[1]) + up], ab, 'num hot', { screen: true, dx: room ? half + 10 : -(half + 10) });
       if (Math.abs(at.uv[1]) * g.scale > 30 || A < 0.5) stage.tag('area', [g.X(at.uv[0] / 2), g.Y(at.uv[1] / 2)], `${L('面积', 'area')} ${num(at.uv[0] * at.uv[1])}`, 'num mg', { screen: true });
       if (A > 0.5) {
         const tr = (at.uv[0] + at.uv[1]) / 2;
-        stage.tag('trace', [g.X(tr) + 10, g.Y(tr) + 14], `2a + b = ${num(gl[0] * 2 + gl[1])}`, 'num cy', { screen: true, dx: 34 });
+        // on the far side of the diagonal from the point, so it does not sit on the dashed drop
+        stage.tag('trace', [g.X(tr), g.Y(tr)], `2a + b = ${num(gl[0] * 2 + gl[1])}`, 'num cy', { screen: true, dx: -62, dy: -16 });
       }
       if (S.smax > 0) {
         H.forEach((h, j) => {
           if (j >= at.k || j === 0 && at.k === 0) return;
           const p = uvOf(h), lab = `(${2 * h[0] + h[1]}, ${h[1]})`;
-          stage.tag(`h${j}`, [g.X(p[0]), g.Y(p[1]) + (p[1] >= 0 ? -14 : 14)], lab, 'num mg', { screen: true });
+          // a hop on or above the cyan diagonal is labelled to its left, one below it above or below the point
+          const onDiag = p[1] >= p[0] - 1e-9;
+          stage.tag(`h${j}`, [g.X(p[0]), g.Y(p[1])], lab, 'num mg', onDiag ? { screen: true, dx: -44, dy: -4 } : { screen: true, dy: p[1] >= 0 ? -14 : 14 });
         });
       }
     }
@@ -298,7 +302,8 @@
     const t = tOf();
     if (S.scene === 'eis') {
       const a = 1, bb = -(2 * t + 1), c = t * t + t + 1;
-      $('hudBig').textContent = `${L('艾森斯坦', 'Eisenstein')} · t = ${num(t)}`;
+      // at t = −1 the integer coordinates are (x, y) themselves, and in the complex plane there is nothing to name t for yet
+      $('hudBig').textContent = S.m > 0.5 && Math.abs(t + 1) < 1e-9 ? L('艾森斯坦整数 · 复平面', 'Eisenstein integers · complex plane') : `${L('艾森斯坦', 'Eisenstein')} · t = ${num(t)}`;
       $('hudSub').textContent = S.m > 0.5
         ? L(`复平面：圆是范数的等值线 · 格子面积 ${fix(R3 / 2, 3)}`, `Complex plane: circles are norm levels · cell area ${fix(R3 / 2, 3)}`)
         : `Qform = ${poly(a, bb, c)} · Δ = ${num(bb * bb - 4 * a * c)}`;

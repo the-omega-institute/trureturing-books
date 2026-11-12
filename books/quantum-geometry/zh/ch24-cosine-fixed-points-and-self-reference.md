@@ -421,7 +421,7 @@ $$
 2. 如果尺子不只读投影 $\cos\theta$，还同时读正交分量 $\sin\theta$，闭合能快多少？
 
 ::: {.viz src="fixed-point-convergence" preset="newton" height="500"}
-**沿切线走，位数翻倍。** 同样从 $\theta_0 = 1$ 出发，每一步先竖着读曲线的高度，再沿品红的切线走到灰线 $y = x$。画面跟着放大：四步之内视野宽从约 $0.6$ 缩到 $10^{-20}$ 量级，误差大约每步平方一次；单纯迭代要走 $115$ 步才到第 $4$ 步的精度（数值核对见 [@ex-dottie-rate-newton-rational]）。
+**沿切线走，位数翻倍。** 同样从 $\theta_0 = 1$ 出发，每一步先竖着读曲线的高度，再沿品红的切线走到灰线 $y = x$。画面跟着放大，停在第 $2$ 步：视野宽约 $10^{-4}$，琥珀色的 $x_2$ 刚沿上一步的品红切线落到灰线上，离白圈 $\theta^*$ 还差 $2.78\times10^{-5}$；放大到这里，青色曲线已经直得和切线分不开。正确的十进制位数依次是 $0$、$1$、$4$，误差大约每步平方一次；单纯迭代要走 $24$ 步才到这一步的精度（数值核对见 [@ex-dottie-rate-newton-rational]）。
 :::
 
 3. 一把只有有限分母刻度的尺子，读数离 $\cos q = q$ 最近能到多近？
@@ -549,10 +549,6 @@ $$
 **二十三等分胜过千分尺。** 琥珀色的 $17/23$ 与虚线标出的尺子读数 $739/1000$ 并排：千分尺上离 $\theta^*$ 最近的一格，残差约为 $17/23$ 的两倍（$1.42\times10^{-4}$ 对 $7.58\times10^{-5}$）。
 :::
 
-::: {.viz src="fixed-point-convergence" height="560"}
-**不动点的收束：完整实验室。** 三个场景画在同一张蛛网图上：迭代（$\cos x$ 或 $1 + 1/x$，可拖动起点、切换镜头）、牛顿、有理读数（可调尺子的分母）。定性余弦收敛与有条件的渐近因子见 [@ex-ch33-mutual-cosine-monotonic-lock] 的复用推导；牛顿法、数值与残差界仍保留文献或数值边界；绿色框只给 [@cor-golden-fixed-point-unique] 与 [@thm-dottie-rational-inverse-endpoint]。
-:::
-
 有理读数永远对不准，那么换一种闭合方式——不让投影回到自己，而让旋转回到起点——行不行？答案同样是否定的，而且这一次不需要任何猜想。
 
 ::: {.remark #rem-dottie-angle-incommensurable title="θ* 与 π 不可公度：以不动点为转角的旋转永不闭合（文献结果，未在本书形式化）"}
@@ -611,6 +607,10 @@ $f_1$ 的平均很快趋于 $0$：几何和给出界 $\frac{1}{N\lvert\sin(\thet
 :::
 
 在一百步之内，以 $\theta^*$ 为步长的轨道看上去和一个正十七边形几乎没有区别；等分布是在更长的时间尺度上才显形的。有限步的观察者看到的是闭合的多边形，无限步的极限里才是整个圆周。
+
+::: {.viz src="fixed-point-convergence" height="560"}
+**不动点的收束：完整实验室。** 三个场景画在同一张蛛网图上：迭代（$\cos x$ 或 $1 + 1/x$，可拖动起点、切换镜头）、牛顿、有理读数（可调尺子的分母）。定性余弦收敛与有条件的渐近因子见 [@ex-ch33-mutual-cosine-monotonic-lock] 的复用推导；牛顿法、数值与残差界仍保留文献或数值边界；绿色框只给 [@cor-golden-fixed-point-unique] 与 [@thm-dottie-rational-inverse-endpoint]。
+:::
 
 ## 24.6 “$\pi$ 是 $\theta$ 的一个投影？”：互逆的两条级数、开普勒方程与半程落体 {#sec-ch24-6}
 
@@ -828,7 +828,7 @@ $A$ 的相邻项之比趋于 $(\theta^*)^2 \approx 0.546$。$B$ 的相邻非零�
 所以两句话同时成立，并不矛盾：解析上，$\pi$ 与 $\theta^*$ 互为对方的有理系数幂级数的值（[@thm-dottie-rational-inverse-endpoint]、[@ex-dottie-pi-series]）；代数上，在沙努埃尔猜想（[@conj-schanuel-dottie]）之下，二者之间没有任何多项式关系。$A$ 与 $B$ 是无穷级数，不是多项式；上表列出的有限截断都留下非零的差。一般截断余项的非零性、系数符号规律及计算资源界均不包含在端点定理中。
 
 ::: {.figure src="ch24-two-series"}
-**$\pi$ 与 $\theta^*$ 是同一条曲线上同一个点的两个坐标。** 青色曲线是 $A(x) = 2x + 2\arcsin x$；从横轴上的 $\theta^*$ 竖直往上、再向左，读出 $\pi = A(\theta^*)$，这是青色箭头；从纵轴上的 $\pi$ 向右、再竖直往下，读回 $\theta^* = B(\pi)$，这是品红虚线箭头。$B$ 在 $\pi$ 处的绝对收敛与和见 [@thm-dottie-rational-inverse-endpoint]；$\pi = A(\theta^*)$ 用到的反正弦展开见 [@rem-arcsin-series-derivation]（文献结果，未在本书形式化）。
+**$\pi$ 与 $\theta^*$ 是同一条曲线上同一个点的两个坐标。** 青色曲线是 $A(x) = 2x + 2\arcsin x$；从横轴上的 $\theta^*$ 竖直往上、再向左，读出 $\pi = A(\theta^*)$，这是青色箭头；从纵轴上的 $\pi$ 向右、再竖直往下，读回 $\theta^* = B(\pi)$，走的是同一条路，这是叠在青色箭头上的品红虚线箭头。$B$ 在 $\pi$ 处的绝对收敛与和见 [@thm-dottie-rational-inverse-endpoint]；$\pi = A(\theta^*)$ 用到的反正弦展开见 [@rem-arcsin-series-derivation]（文献结果，未在本书形式化）。
 :::
 
 **不动点住在哪里：摆线的半程。** 辅助方程 $\eta + \sin\eta = \pi/2$ 在天体力学开普勒方程与径向自由落体中的物理化身汇总于下例（[@ex-dottie-free-fall]）。
