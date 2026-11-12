@@ -320,10 +320,6 @@ $$
 这正是高斯整数的乘法 $(1 + i)(22 + 23i) = -1 + 45i$ 读出的两条直角边。
 :::
 
-::: {.viz src="pythagoras-number-escape" preset="minus" height="500"}
-**$d = 13$：先到 $-1$，再到 $+1$。** 琥珀色的渐近分数沿直线 $m = \sqrt{13}\,n$ 走：走到 $18/5$ 时 $m^2 - 13n^2 = -1$（品红，在线下方），即上表最后一列 $p = 13$ 的那一格；再走一个周期到 $649/180$，差值翻成 $+1$（青色）。面素数的负佩尔方程总有解，是下面注记里的文献结果。
-:::
-
 ::: {.remark #rem-ch29-pell-primes-hilbert-literature title="素数在高斯整数中的分裂与惰性、面素数的负佩尔方程与希尔伯特互反律（文献结果，未在本书形式化）"}
 **文献结果，未在本书形式化。** 上面的方框与手工推导止步于“写成两平方和”与“整除时的下降”。以下三条经典结论不在本书锁定的 `trureturing@dev` 冻结声明集中：
 
@@ -684,10 +680,6 @@ $$
 | **零记忆瞬时观察者**<br/>（Zero-Memory Instantaneous Observer） | 历史主干归零，$\cos\theta \to 0$，$M = 0$ | 相容半径 $\sin\theta = 1$ 漫无边际 | **白噪声迷失（Maximum Sphere Noise）**：没有任何因果主干约束，每一次选点都沦为纯粹的随机盲撞 |
 | **有限自指观察者原型**<br/>（Finite Self-Referential Prototype，`MODEL`） | 以 Dottie 一维自指不动点 $\cos\theta^* = \theta^* \approx 0.7391$，$\sin\theta^* \approx 0.6736$ 为平衡原型 | $\det G > 0$，相容半径 $(\sin\theta^*)^2 \approx 0.4538 > 0$ 恒定开启 | **黄金呼吸（Golden Breath，`MODEL`）**：作为兼顾 $\approx 73.9\%$ 因果历史主干与 $\approx 67.4\%$ 正交余量的几何隐喻（配合第 4、28 章的有限擦除与条件更新） |
 
-::: {.viz src="gram-causal-elliptope" preset="flat" height="500"}
-**没有第四个方向：泡泡只剩边界。** 把同一段历史压回三维（只留 $E_\parallel$）：四根以上的向量撑不出体积，整张表的 $\det G = 0$。记到第三层，品红的泡泡只剩虚线的边界；记到第四、五层，能实现的只剩孤立的点，$z$ 的窗口缩成一个值，琥珀色的 $\mathbf{Q}$ 就钉在那里。把它读作上表“无限全知观察者”一行的相容半径坍缩为 $0$，是本书的诠释（`MODEL`）。
-:::
-
 表的另一端是零记忆的瞬时观察者，窗口全开：
 
 ::: {.viz src="timeless-causal-crystal" preset="right" height="500"}
@@ -695,10 +687,6 @@ $$
 :::
 
    这正是全书关于时间、因果与观察者的终极结语：**“全局无时间，故万古长存；观察者有限，故步步皆新。”**（而在 **[终章](coda.md)** 中，我们将进一步对照 `trureturing` 已验证的**高维格点黄金切投模型集（Cut-and-Project Golden Model Set）与齐肯多夫观察者路由定理**，构建一幅作者哲学与几何诠释模型（`MODEL`）：把跨轮次不变的算子参数诠释为内禀共轭窗口相位，把现实中的历史遗迹诠释为低曲率耗散的**空间吸引子**，解释为何有限观察者会在卡西尼 $(-1)^{n+1}$ 范数接缝与奇异吸引子分形叶层上经历似曾相识的共振。）
-
-::: {.viz src="timeless-causal-crystal" preset="window" height="500"}
-**格拉姆窗口。** $\mathbf{B}$ 立在北极，$\mathbf{C}$ 只能绕它转一圈：$c_{AC}$ 在 $[\cos(\theta_1 + \theta_2), \cos(\theta_1 - \theta_2)]$ 里来回，三根向量撑开的体积在窗口内部为正，贴上窗边时塌成零。也可以在球上直接拖动 $\mathbf{C}$。
-:::
 
 ::: {.theorem #thm-ch29-gram-rigidity-and-pell title="黄金整数佩尔范数恒等式与单位向量族 Gram 重叠等价关系定理" lean="D5/S3/Arith/GoldenPell.pell_form_eq_four_mul_norm, D5/S3/Quantum/PureState/UnitGramIndistinguishability.unit_gram_overlap_characterization"}
 在算术二次格与内积空间几何中，离散接缝范数与单位向量记录的成对重叠判据分别由以下两条经 Lean 4 内核验证的定理给出：
@@ -720,10 +708,6 @@ $$
 
 ::: proof
 第一部分将左边 $(2a + b)^2 - 5b^2 = 4a^2 + 4ab + b^2 - 5b^2 = 4(a^2 + ab - b^2)$ 直接在环算术下展开，与黄金整数范数定义 $4\,\operatorname{norm}(g)$ 逐项恒等。第二部分对归一化向量 $\operatorname{record}(i), \operatorname{record}(j)$ 直接调用内积空间柯西—施瓦茨取等判据（`inner_eq_one_iff_of_norm_eq_one`）得到 $\langle \operatorname{record}(i), \operatorname{record}(j)\rangle_{\mathbb{K}} = 1 \iff \operatorname{record}(i) = \operatorname{record}(j)$，再将相等关系的自反性、对称性与传递性提升为单位 Gram 重叠关系的等价性（`Equivalence`）。完整证明由 Lean 内核检查。
-:::
-
-::: {.viz src="timeless-causal-crystal" height="640"}
-**交互实验室 `ORTHO//CAUSAL`**：同一颗球上的四个场景。窗口：两条余弦锁住第三条的范围，$\det G$ 是三根向量撑开的体积的平方；书页：有限时钟上所有页同时存在，条件化才取出一页；场：梯度流处处有坡度，降下的势能等于走过的耗散；线：振幅放大每步只转 $2\theta$，约 $(\pi/4)\sqrt{N}$ 步到达。把它们读作“选择”“书页”“场”与“线”是本书的诠释（`MODEL`）；$\mathrm{P} \neq \mathrm{NP}$ 仍是开放问题，本页的任何画面都不推出它的答案。
 :::
 
 
