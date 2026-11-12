@@ -1,5 +1,5 @@
-"""477 条锁定声明的对账：种类 × 出现方式（附录 C §C.4）。
-The ledger of the 477 locked declarations: kind × how the book cites them (appendix C, C.4).
+"""479 条锁定声明的对账：种类 × 出现方式（附录 C §C.4）。
+The ledger of the 479 locked declarations: kind × how the book cites them (appendix C, C.4).
 
 Nothing is typed by hand. Kinds come from trureturing.lock.json (theorem; def and inductive together). How a
 declaration is cited comes from the Chinese chapters, appendix C left out: by a `lean="…"` attribute on a `:::`
@@ -45,18 +45,18 @@ CELL, IDX = ledger()
 GET = lambda k, h: CELL.get((k, h), 0)
 THM = sum(GET("thm", h) for h in ("env", "media", "inline"))
 DEF = sum(GET("def", h) for h in ("env", "media", "inline"))
-assert (GET("thm", "env"), GET("thm", "media"), GET("thm", "inline")) == (248, 3, 79)
+assert (GET("thm", "env"), GET("thm", "media"), GET("thm", "inline")) == (248, 3, 81)
 assert (GET("def", "env"), GET("def", "media"), GET("def", "inline")) == (95, 0, 52)
-assert (THM, DEF, THM + DEF) == (330, 147, 477) and IDX == {"T": 251, "D": 95, "R": 131}
+assert (THM, DEF, THM + DEF) == (332, 147, 479) and IDX == {"T": 251, "D": 95, "R": 133}
 
 ALT = {
     "zh": "一张两行三列的账：行是定理与定义，列是“定理或定义环境里用 lean= 引用”“由媒体引用、正文只以行内链接提到”“只在行内链接里出现”。"
-          "定理一行是 248、3、79，合计 330；定义一行是 95、0、52，合计 147；总计 477。三个虚线框标出附录 C 的三张索引："
-          "C.1 = 248 + 3 = 251，C.2 = 95，C.2.1 = 79 + 52 = 131。",
+          "定理一行是 248、3、81，合计 332；定义一行是 95、0、52，合计 147；总计 479。三个虚线框标出附录 C 的三张索引："
+          "C.1 = 248 + 3 = 251，C.2 = 95，C.2.1 = 81 + 52 = 133。",
     "en": "A ledger of two rows and three columns: the rows are theorems and definitions, the columns are cited with lean= in "
-          "an environment, cited by media and only inline in the text, and reached by inline links only. The theorem row reads 248, 3, 79, total 330; "
-          "the definition row 95, 0, 52, total 147; in all 477. Three dashed frames mark the three indexes of appendix C: "
-          "C.1 = 248 + 3 = 251, C.2 = 95, C.2.1 = 79 + 52 = 131.",
+          "an environment, cited by media and only inline in the text, and reached by inline links only. The theorem row reads 248, 3, 81, total 332; "
+          "the definition row 95, 0, 52, total 147; in all 479. Three dashed frames mark the three indexes of appendix C: "
+          "C.1 = 248 + 3 = 251, C.2 = 95, C.2.1 = 81 + 52 = 133.",
 }
 
 
@@ -89,4 +89,4 @@ def draw(fig):
     fig.text(X0 + CW, Y0 - 12, f"C.1 = {GET('thm', 'env')} + {GET('thm', 'media')} = {IDX['T']}", size=15, color="ink", anchor="middle", middle=True)
     fig.text(X0 + CW / 2, yb, f"C.2 = {IDX['D']}", size=15, color="ink", anchor="middle", middle=True)
     fig.text(X0 + 2.5 * CW, yb, f"C.2.1 = {GET('thm', 'inline')} + {GET('def', 'inline')} = {IDX['R']}", size=15, color="ink", anchor="middle", middle=True)
-    fig.text(8, 22, t("锁文件 477 条声明：种类 × 出现方式", "the 477 entries of the lock: kind × how they are cited"), size=15, color="dim")
+    fig.text(8, 22, t(f"锁文件 {THM + DEF} 条声明：种类 × 出现方式", f"the {THM + DEF} entries of the lock: kind × how they are cited"), size=15, color="dim")

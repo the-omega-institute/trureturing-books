@@ -103,13 +103,9 @@
   const lerpAt = (arr, t) => { const i = clamp(Math.floor(t), 0, TMAX), j = Math.min(TMAX, i + 1), f = clamp(t - i, 0, 1); return arr[i] + (arr[j] - arr[i]) * f; };
   const model = (g) => Math.min(g, CEIL);
   const cutBound = (t) => Math.min(HALF, 2 * RUN.cross[clamp(Math.floor(t), 0, TMAX)]);
-  /** First layer at which the entropy is within 0.25 bit of its late-time mean, and that mean. */
-  /* the late band: min and max of the entropy from layer 40 on; t0 is the first layer from which it never leaves that band */
-  const LATE = (() => {
-    const tail = RUN.S.slice(40), m = tail.reduce((s, v) => s + v, 0) / tail.length, lo = Math.min(...tail), hi = Math.max(...tail);
-    let t0 = TMAX; while (t0 > 0 && RUN.S[t0 - 1] >= lo && RUN.S[t0 - 1] <= hi) t0--;
-    return { mean: m, t0, min: lo, max: hi };
-  })();
+  /** The late window (layers `from` … TMAX): its mean, lowest and highest entropy; and the first layer t0 at which the
+      entropy comes within 0.25 bit of that mean (the onset, which lies far before the window). */
+  const LATE = (() => { const from = 40, tail = RUN.S.slice(from); const m = tail.reduce((s, v) => s + v, 0) / tail.length; let t0 = 0; while (t0 < TMAX && RUN.S[t0] < m - 0.25) t0++; return { from, mean: m, t0, min: Math.min(...tail), max: Math.max(...tail) }; })();
   const T_CEIL = RUN.gates.findIndex((g) => g >= CEIL);
 
   /* ======================= depth: the open chain of Chapter 20 ======================= */
@@ -156,7 +152,7 @@
   }
 
   /* ======================= state ======================= */
-  const S = { scene: 'growth', t: 12, cv: false, model: true, N: 8, kappa: 2, cuts: new Set([3, 6]), lt: 3, hold: 0, ghost: null };
+  const S = { scene: 'growth', t: 12, cv: false, N: 8, kappa: 2, cuts: new Set([3, 6]), lt: 3, hold: 0, ghost: null };
   const sortedCuts = () => [...S.cuts].sort((a, b) => a - b);
   function depthInfo() {
     const lay = layersOf(S.N, S.cuts), D = Math.max(...lay) + 1, k = S.cuts.size;
@@ -194,13 +190,13 @@
       if (pts.length > 1) g.area(pts, P.warn, { alpha: 0.1 });
       g.vline(t1, P.warn, { alpha: 0.6, dash: [3, 4] });
     }
-    if (S.model) g.line(full((x) => model(gatesAt(x))), P.magenta, { width: 4 * TH, alpha: 0.16 });
+    g.line(full((x) => model(gatesAt(x))), P.magenta, { width: 4 * TH, alpha: 0.16 });
     g.line(full(gatesAt), P.ink, { width: 1.2 * TH, alpha: 0.22 });
-    if (S.model) g.line(upto((x) => model(gatesAt(x))), P.magenta, { width: 4.2 * TH, alpha: 0.85, glow: 8 });
-    g.line(upto(gatesAt), P.ink, { width: (S.model ? 1.6 : 2.4) * TH, alpha: 0.95 });
+    g.line(upto((x) => model(gatesAt(x))), P.magenta, { width: 4.2 * TH, alpha: 0.85, glow: 8 });
+    g.line(upto(gatesAt), P.ink, { width: 1.6 * TH, alpha: 0.95 });
     g.vline(t, P.amber, { width: 1.4 * TH, alpha: 0.9 });
     g.dot(t, gatesAt(t), P.amber, 5 * TH, { glow: 10 });
-    if (S.model) g.dot(t, model(gatesAt(t)), P.magenta, 4 * TH, {});
+    g.dot(t, model(gatesAt(t)), P.magenta, 4 * TH, {});
     // the entropy lane
     const g2 = kit.plot(cv, { x: [0, TMAX], y: [0, 4.6], pad: [left, right, lo.top + hTop + gap, lo.bottom + 18], clear: false });
     G2 = g2;
@@ -218,7 +214,7 @@
       const R = g.pl + g.iw;
       tag('gGates', clamp(g.X(t) + 14, g.pl + 60, R - 70), g.Y(gatesAt(t)) - 16, `${L('门数', 'gates')} ${RUN.gates[Math.floor(t)]}`, 'raw ink');
       tag('gCeil', R - 92, g.Y(CEIL) - 12, L('≈ 2^N 天花板（量级）', '≈ 2^N ceiling (order)'), 'raw ink');
-      if (S.model) tag('gModel', g.pl + 120, g.Y(model(gatesAt(Math.min(TMAX, 46)))) - 4, L('预期复杂度（模型）', 'expected complexity (model)'), 'raw mg');
+      tag('gModel', g.pl + 120, g.Y(model(gatesAt(Math.min(TMAX, 46)))) - 4, L('预期复杂度（模型）', 'expected complexity (model)'), 'raw mg');
       if (S.cv && t > 4) tag('gCV', g.pl + g.iw * 0.42, g.Y(26), L('CV：这段线 ∝ 虫洞体积？OPEN', 'CV: this stretch ∝ wormhole volume? OPEN'), 'raw wn');
       tag('sCeil', R - 92, g2.Y(HALF) - 11, L('上限 log₂16 = 4 比特', 'ceiling log₂16 = 4 bits'), 'raw ink');
       tag('sCurve', clamp(g2.X(t) + 12, g2.pl + 60, R - 60), g2.Y(sAt(t)) + 18, `S = ${fix(sAt(t), 2)}`, 'raw cy');
@@ -330,13 +326,13 @@
     if (S.scene === 'growth') {
       const t = S.t, i = clamp(Math.floor(t), 0, TMAX), s = RUN.S[i], gc = RUN.gates[i];
       big = L(`增长 · 第 ${i} 层`, `Growth · layer ${i}`);
-      sub = `<span class="c-cy">S = ${fix(s, 3)} bit</span> · ${L('门数', 'gates')} ${gc}${S.model ? ` · <span class="c-mg">${L('模型', 'model')} ${model(gc)}</span>` : ''}`;
+      sub = `<span class="c-cy">S = ${fix(s, 3)} bit</span> · ${L('门数', 'gates')} ${gc} · <span class="c-mg">${L('模型', 'model')} ${model(gc)}</span>`;
       keyName = L('半链熵 · 已用门数', 'half-chain entropy · gates used');
       key = `${fix(s, 3)} <small>bit · ${gc} ${L('道门', 'gates')}</small>`;
       rows = row('', '层数（深度）', 'layers (depth)', String(i)) + row('', '跨过割线的门', 'gates across the cut', String(RUN.cross[i]))
         + row('c', '熵的上限 min(2 × 跨割门数, 4)', 'entropy ceiling min(2 × across, 4)', `${cutBound(i)} bit`) + row('m', '预期复杂度 min(门数, 2^N)', 'expected complexity min(gates, 2^N)', String(model(gc)));
       note = i < LATE.t0 ? L('熵还在爬：每道跨割门至多给它 2 比特。', 'The entropy is still climbing: each gate across the cut gives it at most 2 bits.')
-        : gc < CEIL ? L(`熵已停在 ${fix(LATE.min, 2)}–${fix(LATE.max, 2)} 比特之间，门数还在长。`, `The entropy has settled between ${fix(LATE.min, 2)} and ${fix(LATE.max, 2)} bits; the gate count is still growing.`)
+        : gc < CEIL ? L(`熵已到 ${fix(s, 2)} 比特（第 ${LATE.from}–${TMAX} 层在 ${fix(LATE.min, 2)}–${fix(LATE.max, 2)} 比特之间起伏），门数还在长。`, `The entropy is at ${fix(s, 2)} bits (layers ${LATE.from}–${TMAX} wander between ${fix(LATE.min, 2)} and ${fix(LATE.max, 2)} bits); the gate count is still growing.`)
           : L('门数已过 2^N：模型里的复杂度停在天花板上，白线还在往上走。', 'The gate count is past 2^N: the model complexity stays on its ceiling while the white line keeps rising.');
       aside = 'S = −Σ λ log₂ λ';
       pill = ['S', fix(s, 2)];
@@ -359,7 +355,7 @@
     $('roNote').textContent = note; $('roAside').textContent = aside;
     $('pillScene').querySelector('strong').textContent = S.scene === 'growth' ? L('增长', 'GROWTH') : L('深度', 'DEPTH');
     $('pillKeyName').textContent = pill[0]; $('pillKey').querySelector('strong').textContent = pill[1];
-    $('legend').innerHTML = LEGEND[S.scene].filter(([cl]) => S.model || S.scene !== 'growth' || cl !== 'mg').map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
+    $('legend').innerHTML = LEGEND[S.scene].map(([cl, zh, en]) => `<span><i class="sw ${cl}"></i>${L(zh, en)}</span>`).join('');
     $('cvBtn').setAttribute('aria-pressed', String(S.cv));
   }
 
@@ -406,18 +402,17 @@
 
   /* ======================= experiment cards ======================= */
   const FLOOR_PATH = [[2, 3], [2, 4], [3, 5], [3, 6], [4, 7], [4, 8]];
-  const T_SAT = LATE.t0;   // the saturate card stops at the first layer from which the entropy stays in its late band
   const PRESETS = {
-    saturate: { scene: 'growth', cv: false, model: false, from: 0, to: T_SAT, still: T_SAT, rate: 3 },
+    saturate: { scene: 'growth', cv: false, from: 0, to: 14, still: 14, rate: 3 },
     ceiling: { scene: 'growth', cv: false, from: 14, to: TMAX, still: TMAX, rate: 10 },
     cv: { scene: 'growth', cv: true, from: 10, to: 60, still: 60, rate: 8 },
     floor: { scene: 'depth', N: 11, cuts: [4, 8], path: FLOOR_PATH },
     eight: { scene: 'depth', N: 8, cuts: [3, 6], from: 0, to: 3, still: 3 },
     eleven: { scene: 'depth', N: 11, cuts: [4, 8], from: 0, to: 4, still: 4 }
   };
-  const fmtS = (x) => fix(x, 2);
+  const fmtS = (x) => fix(x, 2), SAT = PRESETS.saturate.still;
   const NOTES = {
-    saturate: [`从第 0 层走到第 ${T_SAT} 层：青色的熵沿灰色台阶爬上去，从第 ${LATE.t0} 层起停在 ${fmtS(LATE.min)}–${fmtS(LATE.max)} 比特之间（这一层是 ${fmtS(RUN.S[T_SAT])}），压在 4 比特的白线下面；同一段时间里白线（门数）从 0 一直涨到 ${RUN.gates[T_SAT]}，没有停的意思。`, `From layer 0 to layer ${T_SAT}: the cyan entropy climbs along the grey staircase and from layer ${LATE.t0} on stays between ${fmtS(LATE.min)} and ${fmtS(LATE.max)} bits (${fmtS(RUN.S[T_SAT])} at this layer), under the white 4-bit line; over the same stretch the white line (gate count) rises from 0 to ${RUN.gates[T_SAT]} with no sign of stopping.`],
+    saturate: [`从第 0 层走到第 ${SAT} 层：青色的熵沿灰色台阶爬上去，第 ${LATE.t0} 层升到 ${fmtS(RUN.S[LATE.t0])} 比特，第 ${SAT} 层仍是 ${fmtS(RUN.S[SAT])}，压在 4 比特的白线下面；同一段时间里白线（门数）从 0 一直涨到 ${RUN.gates[SAT]}，没有停的意思。淡色的后段（第 ${LATE.from}–${TMAX} 层）在 ${fmtS(LATE.min)}–${fmtS(LATE.max)} 比特之间起伏。`, `From layer 0 to layer ${SAT}: the cyan entropy climbs along the grey staircase, reaches ${fmtS(RUN.S[LATE.t0])} bits at layer ${LATE.t0} and is still ${fmtS(RUN.S[SAT])} at layer ${SAT}, under the white 4-bit line; over the same stretch the white line (gate count) rises from 0 to ${RUN.gates[SAT]} with no sign of stopping. The faint later stretch (layers ${LATE.from}–${TMAX}) wanders between ${fmtS(LATE.min)} and ${fmtS(LATE.max)} bits.`],
     ceiling: [`接着一直走到第 ${TMAX} 层：青色的熵一直趴在原处；白线（门数）一路涨到 ${RUN.gates[TMAX]}；品红的预期复杂度跟着白线走，到第 ${T_CEIL} 层碰到虚线 2^N = ${CEIL}，就横着走了——门可以一直加，复杂度过不了这道天花板。`, `Run on to layer ${TMAX}: the cyan entropy stays where it was; the white line (gate count) climbs to ${RUN.gates[TMAX]}; the magenta expected complexity follows it until layer ${T_CEIL}, meets the dashed 2^N = ${CEIL} and runs flat from there — gates can always be added, the complexity cannot pass this ceiling.`],
     cv: ['红色标出的是品红线上升的那一段：熵早已停住，它还在涨。复杂度等于体积猜想把这一段读成黑洞内部切片的体积——这是开放猜想，舞台上没有画任何体积。', 'The red mark covers the rising stretch of the magenta line: the entropy stopped long ago, and this line is still climbing. The complexity = volume conjecture reads this stretch as the volume of a slice through the black-hole interior — an open conjecture; no volume is drawn on the stage.'],
     floor: ['N = 11、两个折返点。品红三角从 {2, 3} 一步步挪到 {4, 8}：最高的砖从 9 层降到 8、7、6、5，最后 4 层，正好落在白线上；再怎么挪也到不了白线下面。灰色虚线框与淡品红三角是起点 {2, 3} 的 9 层。', 'N = 11 with two turning points. The magenta triangles move step by step from {2, 3} to {4, 8}: the tallest stack drops from 9 layers to 8, 7, 6, 5 and finally 4, right on the white line; no placement gets below it. The grey dashed outlines and faint magenta triangles are the 9 layers of the start {2, 3}.'],
@@ -425,7 +420,7 @@
     eleven: ['N = 11、S = {4, 8}：12 道门排成 4 层，每层 3 道，顶在白线上；灰色虚线是旧公式说的 5 层，高出一层。', 'N = 11, S = {4, 8}: the 12 gates stack into 4 layers of 3 and top out on the white line; the grey dashed line is the 5 layers the old formula says, one too many.']
   };
   let booting = true, floorTween = null, floorPlaying = false;
-  function stopFloor() { if (floorTween) { floorTween.cancel(); floorTween = null; } floorPlaying = false; S.hold = 0; S.ghost = null; S.model = true; }
+  function stopFloor() { if (floorTween) { floorTween.cancel(); floorTween = null; } floorPlaying = false; S.hold = 0; S.ghost = null; }
   function floorPlayer(path) {
     const run = {
       playing: false, pause() {},
@@ -442,7 +437,7 @@
     const p = PRESETS[id];
     stopFloor();
     if (p.cv != null) S.cv = p.cv;
-    S.model = p.model !== false; S.ghost = null;
+    S.ghost = null;
     if (p.N != null) { S.N = p.N; fN.set(p.N); S.cuts = new Set(p.cuts); S.kappa = p.cuts.length; kappaChips.set(String(S.kappa), true); }
     if (p.scene === 'growth' && p.still != null) S.t = p.still;
     if (p.scene === 'depth') { S.lt = depthOf(S.N, S.cuts); if (p.path) S.hold = 9; }
@@ -470,7 +465,7 @@
     get state() {
       const d = depthInfo();
       return {
-        scene: S.scene, t: clock.t, max: clock.max, playing: clock.playing || floorPlaying, preset: cards.current, cv: S.cv, model: S.model, ghost: S.ghost ? S.ghost.slice() : null, ghostDepth: S.ghost ? Math.max(...layersOf(S.N, new Set(S.ghost))) + 1 : null,
+        scene: S.scene, t: clock.t, max: clock.max, playing: clock.playing || floorPlaying, preset: cards.current, cv: S.cv, ghost: S.ghost ? S.ghost.slice() : null, ghostDepth: S.ghost ? Math.max(...layersOf(S.N, new Set(S.ghost))) + 1 : null,
         growth: { layer: Math.floor(S.t), entropy: RUN.S[clamp(Math.floor(S.t), 0, TMAX)], gates: RUN.gates[clamp(Math.floor(S.t), 0, TMAX)], cross: RUN.cross[clamp(Math.floor(S.t), 0, TMAX)], tCeil: T_CEIL, late: LATE },
         depth: { N: S.N, cuts: sortedCuts(), layers: d.lay.slice(), D: d.D, floor: d.floor, guess: d.guess, brute: d.brute, lt: S.lt, order: orderOf(S.N, S.cuts) },
         hud: $('hudBig').textContent, key: $('ro').querySelector('.key dd').textContent

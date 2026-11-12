@@ -71,6 +71,8 @@ const want = await expectedReturn(s);
 check('the return is the latest pair of passages, one per round, whose points are less than ε apart (found here on its own)', want && s.ret && near(s.ret.ta, want.a.t) && near(s.ret.tb, want.b.t) && near(s.ret.sep, want.sep, 1e-5) && s.ret.sep < s.eps, JSON.stringify([s.ret, want && [want.a.t, want.b.t, want.sep]]));
 const cosInd = want && dot3(unitF(want.a.x), unitF(want.b.x));
 check('cos δθ = v̂₁·v̂₂ of the unit tangents at the return, with both orbits re-integrated here by RK4, is close to 1', want && near(s.cos, cosInd, 1e-6) && s.cos > 0.97 && near(s.angle, Math.acos(s.cos) * 180 / Math.PI, 1e-6), JSON.stringify([s.cos, cosInd]));
+const tangentGap = want && s.ret ? Math.max(...[[s.ret.dirs[0], want.a.x], [s.ret.dirs[1], want.b.x]].map(([d, x]) => Math.hypot(...d.map((v, j) => v - unitF(x)[j])))) : Infinity;
+check('the two tangents of the return are the unit vectors F/‖F‖ at those two passages themselves (each recomputed here), not at other passages', tangentGap < 1e-6 && s.ret.dirs.every((d) => near(Math.hypot(...d), 1, 1e-12)), String(tangentGap));
 check('the readouts show cos δθ and the distance of the two points of the return, below ε', (await page.textContent('#roKey')).trim() === s.cos.toFixed(4) && (await page.textContent('#ro5')).includes(s.ret.sep.toFixed(3)) && (await page.textContent('#ro5')).includes('< ε = 2') && /重返/.test(await page.textContent('#roL5')));
 check('the evidence beside the rounds marks cos δθ as NUM and its déjà-vu reading as MODEL', await D(() => { const v = (sel) => [...document.querySelectorAll(sel)].some((e) => !e.hidden && e.dataset.scenes === 'rounds'); return v('#readouts .lean.num') && v('#readouts .lean.model'); }));
 
@@ -157,6 +159,58 @@ check('FIXED: at ρ = 14 each round ends in one of the two fixed points (±√(�
 // its own to t = 40, and the cyan round k ends at C₋ while the magenta round k+1 ends at C₊
 const endOf = (k) => run(s.starts[k], 4000, 14), nameOf = (q) => (dist(q, fps[0]) < dist(q, fps[1]) ? 'C₊' : 'C₋');
 check('FIXED: the two starts end in different fixed points, cyan (round k) at C₋ and magenta (round k+1) at C₊ (integrated here)', [0, 1].every((k) => dist(endOf(k), s.now[k]) < 1e-6) && nameOf(endOf(0)) === 'C₋' && nameOf(endOf(1)) === 'C₊', JSON.stringify(s.now));
+// ρ = 14: C₊ and C₋ are both stable, and the destination depends on the start, not on the parameters alone
+const txt = async (sel) => (await page.textContent(sel)).replace(/\s+/g, ' ').trim();
+const C = Math.sqrt(104 / 3), Cp = [C, C, 13], Cm = [-C, -C, 13];
+const jac14 = ([x, y, z]) => [[-SIG, SIG, 0], [14 - z, -1, -x], [y, x, -BETA]];
+const charPolyRH = (J) => {   // λ³ + a₂λ² + a₁λ + a₀ from the trace, the principal 2 × 2 minors and the determinant
+  const tr = J[0][0] + J[1][1] + J[2][2], m2 = (i, j) => J[i][i] * J[j][j] - J[i][j] * J[j][i];
+  const det = J[0][0] * (J[1][1] * J[2][2] - J[1][2] * J[2][1]) - J[0][1] * (J[1][0] * J[2][2] - J[1][2] * J[2][0]) + J[0][2] * (J[1][0] * J[2][1] - J[1][1] * J[2][0]);
+  return [-tr, m2(0, 1) + m2(0, 2) + m2(1, 2), -det];
+};
+let sinkOK = true;
+for (const c of [Cp, Cm]) { const [a2, a1, a0] = charPolyRH(jac14(c)); if (!f(c, 14).every((v) => Math.abs(v) < 1e-12) || !(a2 > 0 && a1 > 0 && a0 > 0 && a2 * a1 > a0)) sinkOK = false; }
+check('ρ = 14: C₊, C₋ = (±√(104/3), ±√(104/3), 13) are equilibria and both are stable (Routh–Hurwitz on the Jacobian’s characteristic polynomial)', sinkOK && near(C * C, BETA * 13, 1e-12));
+const end = s.starts.map((st0) => run(st0, 4000, 14)), sideOf = (q) => (dist(q, Cp) < dist(q, Cm) ? 'C₊' : 'C₋');
+check('the two default starts, integrated here to t = 40, go to opposite stable points: round k to C₋, round k+1 to C₊', dist(end[0], Cm) < 1e-4 && dist(end[1], Cp) < 1e-4, JSON.stringify(end));
+check('the page reports the same destinations, named after the equilibria it draws', s.ends && s.ends.join() === end.map(sideOf).join() && s.ends.join() === 'C₋,C₊' && s.equilibria[0].name === 'C₊' && dist(s.equilibria[0].p, Cp) < 1e-12 && s.equilibria[1].name === 'C₋' && dist(s.equilibria[1].p, Cm) < 1e-12 && !s.unstable && s.now.every((q, k) => dist(q, end[k]) < 1e-6));
+check('FIXED readouts (zh): the destinations C₋ · C₊, the basin of the start named in the note and the card', (await txt('#ro4')) === 'C₋ · C₊' && /t = 40 时落到的稳定点/.test(await txt('#roL4')) && /第 k 轮落进 C₋，第 k\+1 轮落进 C₊/.test(await txt('#roNote')) && /吸引域/.test(await txt('#roNote')) && /吸引域/.test(await txt('#presetNote')) && !/没有选择/.test(await txt('#roNote')));
+check('the tagline qualifies the parameters: they set the attractors, the basin sets the destination', /吸引域/.test(await txt('.tagline .zh')) && /basin of the start/.test(await D(() => document.querySelector('.tagline .en').textContent)));
+await pick('return'); await seek(40); await page.click('#rhoChips [data-rho="14"]'); s = await state();
+check('the ρ chip alone (from RETURN, seed 0) switches to the same two-stable-point picture and leaves the card', s.rho === 14 && s.preset === null && s.ends.join() === 'C₋,C₊' && (await txt('#ro4')) === 'C₋ · C₊');
+await page.click('#rhoChips [data-rho="28"]'); s = await state();
+check('back at ρ = 28 the wings reading is unchanged: no destinations, the starts’ distance and the shared-wings note', s.ends === null && /两个起点相距/.test(await txt('#roL4')) && /共享的只是这对翅膀/.test(await txt('#roNote')));
+await page.click('[data-lang-set="en"]'); await settle(page, 60); await page.click('#rhoChips [data-rho="14"]'); s = await state();
+check('English ρ = 14 readouts: “stable point reached by t = 40”, C₋ · C₊, and the basin of the start decides', (await txt('#roL4')) === 'stable point reached by t = 40' && (await txt('#ro4')) === 'C₋ · C₊' && /round k falls into C₋, round k\+1 into C₊/.test(await txt('#roNote')) && /basin of the start/.test(await txt('#roNote')));
+{ const left = await cjkLeftovers(page); check('English: no Chinese left at ρ = 14', left.length === 0, left.slice(0, 4).join(' | ')); }
+// the two stage labels of the stable points stay whole inside the canvas at every width; where the fixed camera leaves a point past the edge, its label says so with an arrow
+for (const [view, w, h, q] of [['desktop', 1440, 900, ''], ['embed', 740, 620, 'embed=1&'], ['cited figure', 740, 500, 'embed=1&'], ['phone', 390, 844, '']]) for (const lang of ['zh', 'en']) {
+  const pg = await T.open(BOOK, ID, `?${q}lang=${lang}&preset=fixed`, { viewport: { width: w, height: h }, locale: lang === 'zh' ? 'zh-CN' : 'en-US' });
+  await settle(pg, 300); await pg.evaluate(() => window.ATTRACTOR_DEBUG.seek(40)); await settle(pg, 150);
+  const g = await pg.evaluate(() => {
+    const st = document.getElementById('stage'), sb = st.getBoundingClientRect(), box = (e) => { const b = e.getBoundingClientRect(); return [b.left - sb.left, b.top - sb.top, b.right - sb.left, b.bottom - sb.top]; };
+    const shown = (e) => !e.hidden && getComputedStyle(e).display !== 'none' && getComputedStyle(e).visibility !== 'hidden';
+    const tags = [...st.querySelectorAll('.tags .tag')].filter(shown).map((t) => ({ text: t.textContent, cls: t.className, opacity: Number(getComputedStyle(t).opacity), box: box(t) }));
+    const hud = ['.hud-tl', '.hud-tr', '.hud-bl'].map((c) => st.querySelector(c)).filter((e) => e && shown(e)).map(box);
+    const d = window.ATTRACTOR_DEBUG.state;
+    return { size: [st.clientWidth, st.clientHeight], tags, hud, views: d.eqViews, canvas: d.canvas, ends: d.ends, ro4: document.getElementById('ro4').textContent.replace(/\s+/g, ' ').trim() };
+  });
+  const name = lang === 'zh' ? '稳定点' : 'stable point', sink = ['₊', '₋'].map((c) => g.tags.filter((t) => t.text.includes(`${name} C${c}`))), others = g.tags.filter((t) => !t.text.includes(`${name} C`));
+  const hit = (a, b) => a[0] < b[2] && b[0] < a[2] && a[1] < b[3] && b[1] < a[3], M = 6;
+  const one = sink.every((x) => x.length === 1), lab = one ? sink.map((x) => x[0]) : [];
+  const inside = one && lab.every((t) => t.box[0] >= M && t.box[1] >= M && t.box[2] <= g.size[0] - M && t.box[3] <= g.size[1] - M && t.box[2] - t.box[0] > 40 && t.opacity === 1);
+  const arrows = one && lab.every((t, k) => t.text === (g.views[k].off < 0 ? `← ${name} C${'₊₋'[k]}` : g.views[k].off > 0 ? `${name} C${'₊₋'[k]} →` : `${name} C${'₊₋'[k]}`));
+  const offOK = g.views.every((v) => v.off === (v.x < 4.5 ? -1 : v.x > g.canvas[0] - 4.5 ? 1 : 0));
+  const clear = one && !hit(lab[0].box, lab[1].box) && lab.every((t) => [...others.map((o) => o.box), ...g.hud].every((b) => !hit(t.box, b)));
+  const near26 = one && lab.every((t, k) => Math.abs((t.box[1] + t.box[3]) / 2 - (g.views[k].y + 26)) < 1.5 && (g.views[k].off !== 0 || Math.abs((t.box[0] + t.box[2]) / 2 - g.views[k].x) < 1.5));
+  const colours = one && /\bmg\b/.test(lab[0].cls) && /\bcy\b/.test(lab[1].cls) && g.ends.join() === 'C₋,C₊';
+  check(`${view} ${w}px (${lang}): the labels of C₊ and C₋ are whole inside the canvas, at full opacity, clear of the other labels and the HUD`, inside && clear, JSON.stringify(g.tags.map((t) => [t.text, t.box.map(Math.round), t.opacity])));
+  check(`${view} ${w}px (${lang}): each label sits under its point, carries an arrow only when the point is past the canvas edge, and is coloured by the round that reaches it`, arrows && offOK && near26 && colours, JSON.stringify([g.views, g.canvas, lab.map((t) => [t.text, t.cls])]));
+  if (view === 'phone') check(`phone (${lang}): both points lie just past the canvas edge here, the labels point to them, and the readout still names both destinations`, g.views[0].off === 1 && g.views[1].off === -1 && g.ro4 === 'C₋ · C₊', JSON.stringify([g.views, g.ro4]));
+  else check(`${view} ${w}px (${lang}): both points and their rings are inside the canvas, so the labels carry no arrow`, g.views.every((v) => v.off === 0 && v.x > 4.5 && v.x < g.canvas[0] - 4.5 && v.y > 4.5 && v.y < g.canvas[1] - 4.5) && g.ro4 === 'C₋ · C₊', JSON.stringify(g.views));
+  await pg.context().close();
+}
+await page.click('[data-lang-set="zh"]'); await settle(page, 60);
 await pick('cycle'); s = await seek(40);
 let loopGap = 1e9; for (let i = 3500; i <= 4000; i++) { const q = await D((ii) => window.ATTRACTOR_DEBUG.point(0, ii), i); loopGap = Math.min(loopGap, dist(q, s.now[1])); }
 check('CYCLE: at ρ = 160 the second round ends on the loop the first one is tracing', s.rho === 160 && loopGap < 1.5, String(loopGap));
