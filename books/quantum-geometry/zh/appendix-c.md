@@ -2,28 +2,28 @@
 
 本附录是全书认识论边界的**总账本（Master Audit Ledger）**。根据本书序曲确立的“认识论契约”，全书所有数学陈述严格划分为三类，并在机器锁定的 `trureturing.lock.json`（钉死于 `trureturing@dev` 提交 [{commit}](trureturing:)）中接受逐条核验：
 
-1. **C.1 冻结定理总索引（252 条唯一 `theorem` 声明）**：凡在正文中置于 `theorem`、`lemma`、`proposition`、`corollary` 环境或交互沙盒/短片/讲义 `lean:` 锚点中的命题，其 `lean="<GID>"` 必须解析为 `trureturing` 仓库 `Golden/Frozen/state/<module>.lean.json` 中已由 Lean 4 内核验证且无 `sorry` 的 `theorem` 声明；
-2. **C.2 形式化定义与代数载体总索引（95 项唯一 `definition` / `structure` / `inductive` 声明）**：置于 `definition` 环境或媒体锚点中的核心代数构造、旋量类型与状态空间定义；以及 **C.2.1 行内辅助引理与构造索引（133 项行内引用声明）**，与 C.1、C.2 共同构成 `trureturing.lock.json` 中锁定的全部 **480 项唯一声明**（`252 + 95 + 133 = 480`）；
+1. **C.1 冻结定理总索引（254 条唯一 `theorem` 声明）**：凡在正文中置于 `theorem`、`lemma`、`proposition`、`corollary` 环境或交互沙盒/短片/讲义 `lean:` 锚点中的命题，其 `lean="<GID>"` 必须解析为 `trureturing` 仓库 `Golden/Frozen/state/<module>.lean.json` 中已由 Lean 4 内核验证且无 `sorry` 的 `theorem` 声明；
+2. **C.2 形式化定义与代数载体总索引（95 项唯一 `definition` / `structure` / `inductive` 声明）**：置于 `definition` 环境或媒体锚点中的核心代数构造、旋量类型与状态空间定义；以及 **C.2.1 行内辅助引理与构造索引（133 项行内引用声明）**，与 C.1、C.2 共同构成 `trureturing.lock.json` 中锁定的全部 **482 项唯一声明**（`254 + 95 + 133 = 482`）；
 3. **C.3 开放问题与未形式化前沿边界台账（8 项：6 个 `conjecture` / `OPEN` 环境 + 2 项前沿文献边界 `remark`）**：尚未在 `trureturing` 中完成内核形式化或属于数学物理前沿未决猜想的命题，在全书中一律以无 `lean` 属性的 `conjecture`（红色 `OPEN` 徽章）或带明确文献说明的 `remark` 环境隔离呈现，绝不冒充已验证定理。
 
 ::: {.viz src="lean-declaration-map" preset="all" height="500"}
-**480 格，一格一条锁定声明。** 时间轴从序曲读到附录 B，每一章第一次引用的声明落进这一章的柱子：绿色是锁文件里种类为 theorem 的定理，灰色是定义，空心的只在行内链接里出现。读完正文，地图上的格数与 `trureturing.lock.json` 的条目数相同。每条声明只在第一次引用它的那一章计一格，后面的章再引用不再计，定义与行内链接也各占一格；所以这里的柱高与下文 C.1 那张按章的柱状图不同，那张图只数定理环境里的定理，跨章重复计。
+**482 格，一格一条锁定声明。** 时间轴从序曲读到附录 B，每一章第一次引用的声明落进这一章的柱子：绿色是锁文件里种类为 theorem 的定理，灰色是定义，空心的只在行内链接里出现。读完正文，地图上的格数与 `trureturing.lock.json` 的条目数相同。每条声明只在第一次引用它的那一章计一格，后面的章再引用不再计，定义与行内链接也各占一格；所以这里的柱高与下文 C.1 那张按章的柱状图不同，那张图只数定理环境里的定理，跨章重复计。
 :::
 
 ---
 
-## C.1 已验证并冻结的 Lean 4 定理总索引（252 条唯一 `theorem` GID） {#sec-appendix-c-theorems}
+## C.1 已验证并冻结的 Lean 4 定理总索引（254 条唯一 `theorem` GID） {#sec-appendix-c-theorems}
 
-下表按模块路径字母顺序列出全书正式数学环境与媒体组件引用的全部 **252 条唯一冻结定理**（跨章节环境复用后共构成 330 处定理级形式化锚点）。点击每条声明名称可直接跳转至对应的 Lean 4 源码树与冻结状态摘要：
+下表按模块路径字母顺序列出全书正式数学环境与媒体组件引用的全部 **254 条唯一冻结定理**（跨章节环境复用后共构成 332 处定理级形式化锚点）。点击每条声明名称可直接跳转至对应的 Lean 4 源码树与冻结状态摘要：
 
 ::: {.figure src="appc-theorems-by-chapter"}
-**每一章的定理环境用 `lean=` 引用了多少条冻结定理。** 横轴是第一章到第三十九章与终章，浅色底纹按部分组（I–X）；每根绿色柱子是这一章引用的已验证定理条数，同一条定理在几章各被引用就各计一次，定义与只在行内链接里出现的声明不计。每根柱子分两段：实心的下段是在这一章第一次出场的定理（与上面声明地图同一规则：中文正文第一次引用它的那一章），合计 $238$ 条，它们都是地图上这一章柱子里的绿格；空心的上段是前面已出场、这一章再引用的，合计 $92$ 条，第九、十部各章以它为主。地图的柱子还含定义与只在行内链接里出现的声明，所以比这里的实心段高。第二十二章最高，$35$ 条；其次第三十章 $23$ 条，第四章 $17$ 条、第二十四章 $16$ 条，第十四章、第二十九章与终章各 $13$ 条；其余各章 $4$ 到 $10$ 条。柱高合计 $330$，由脚本从 `trureturing.lock.json` 与中文章节算出，并与下表最后一栏逐章核对；下表 $249$ 条冻结定理至少出现在一根柱子中；另三条 `T035`、`T066`、`T112` 由媒体引用，正文只以行内链接引用，不计入柱高（`T046` 同时被第三十五章定理环境与 `viz/sphere-escape` 引用）。
+**每一章的定理环境用 `lean=` 引用了多少条冻结定理。** 横轴是第一章到第三十九章与终章，浅色底纹按部分组（I–X）；每根绿色柱子是这一章引用的已验证定理条数，同一条定理在几章各被引用就各计一次，定义与只在行内链接里出现的声明不计。每根柱子分两段：实心的下段是在这一章第一次出场的定理（与上面声明地图同一规则：中文正文第一次引用它的那一章），合计 $240$ 条，它们都是地图上这一章柱子里的绿格；空心的上段是前面已出场、这一章再引用的，合计 $92$ 条，第九、十部各章以它为主。地图的柱子还含定义与只在行内链接里出现的声明，所以比这里的实心段高。第二十二章最高，$35$ 条；其次第三十章 $23$ 条，第四章 $17$ 条、第二十四章 $16$ 条，第十四章、第二十九章与终章各 $13$ 条；其余各章 $4$ 到 $10$ 条。柱高合计 $332$，由脚本从 `trureturing.lock.json` 与中文章节算出，并与下表最后一栏逐章核对；下表 $251$ 条冻结定理至少出现在一根柱子中；另三条 `T035`、`T066`、`T112` 由媒体引用，正文只以行内链接引用，不计入柱高（`T046` 同时被第三十五章定理环境与 `viz/sphere-escape` 引用）。
 :::
 
-下表按模块路径排序，这 $252$ 条按模块族与第一次出场的部的分布是：`Quantum` 一族独占 $79$ 条，`FluidDynamics` 的 $19$ 条全在第八部。
+下表按模块路径排序，这 $254$ 条按模块族与第一次出场的部的分布是：`Quantum` 一族独占 $79$ 条，`FluidDynamics` 的 $19$ 条全在第八部。
 
 ::: {.figure src="appc-modules-by-part"}
-**C.1 的 $252$ 条定理落在哪几块模块上。** 行是 trureturing 的模块族（模块路径的前三段，这里都在 `D5/S3/` 下），较小的各族并成最后一行；列是第一至第十部与“终”（终章与附录 A、B），按上面声明地图的同一规则，取每条定理在中文正文里第一次出场的部。每格是条数，底色越深条数越多，空格为零；右边一列与最下一行是合计。`Quantum` 一族 $79$ 条，分布在第一至第七部；`FluidDynamics` 的 $19$ 条全在第八部，`Zeros` 与 `Weil` 只在第六部。这里只数条目，不表示模块之间的证明依赖；数字由脚本从锁文件、中文章节与下表算出。
+**C.1 的 $254$ 条定理落在哪几块模块上。** 行是 trureturing 的模块族（模块路径的前三段，这里都在 `D5/S3/` 下），较小的各族并成最后一行；列是第一至第十部与“终”（终章与附录 A、B），按上面声明地图的同一规则，取每条定理在中文正文里第一次出场的部。每格是条数，底色越深条数越多，空格为零；右边一列与最下一行是合计。`Quantum` 一族 $79$ 条，分布在第一至第七部；`FluidDynamics` 的 $19$ 条全在第八部，`Zeros` 与 `Weil` 只在第六部。这里只数条目，不表示模块之间的证明依赖；数字由脚本从锁文件、中文章节与下表算出。
 :::
 
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 引用章节与环境 ID |
@@ -280,12 +280,14 @@
 | `T250` | [`D5.S3.Zeros.ZetaIdentities.riemann_zeta_residue_one`](lean:D5/S3/Zeros/ZetaIdentities.riemann_zeta_residue_one) | [{source}](lean:D5/S3/Zeros/ZetaIdentities.riemann_zeta_residue_one) | `theorem` | Ch 22 `#lem-riemann-zeta-residue-one`; media `viz/visualizations.json`, `viz/euler-product-sieve/index.html` |
 | `T251` | [`D5.S3.Zeros.ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product`](lean:D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product) | [{source}](lean:D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product) | `theorem` | Ch 22 `#cor-dirichlet-sum-eq-euler-product`, Ch 28, 终章, 附录 A; media `viz/visualizations.json`, `viz/euler-product-sieve/index.html` |
 | `T252` | [`D5.S0.Diagonal.RecursivePageTable.recursive_page_table_walk`](lean:D5/S0/Diagonal/RecursivePageTable.recursive_page_table_walk) | [{source}](lean:D5/S0/Diagonal/RecursivePageTable.recursive_page_table_walk) | `theorem` | Ch 38 `#thm-ch38-recursive-page-table-walk` |
+| `T253` | [`D5.S3.QuantumChannels.ProjectionDiagnostics.CyclicMonitoredContraction.cyclic_future_kernel_eq_bot`](lean:D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredContraction.cyclic_future_kernel_eq_bot) | [{source}](lean:D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredContraction.cyclic_future_kernel_eq_bot) | `theorem` | Ch 7 `#rem-monitored-cyclic-observability` |
+| `T254` | [`D5.S3.QuantumChannels.ProjectionDiagnostics.CyclicMonitoredPowerBound.cyclic_power_contraction`](lean:D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredPowerBound.cyclic_power_contraction) | [{source}](lean:D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredPowerBound.cyclic_power_contraction) | `theorem` | Ch 7 `#rem-monitored-cyclic-power-contraction` |
 
 ---
 
 ## C.2 形式化定义、结构与归纳类型索引（95 项唯一声明） {#sec-appendix-c-definitions}
 
-下表列出全书 `definition` 环境与媒体组件锁定的 **95 项唯一基础定义、代数结构与归纳类型**（它们与 C.1 的 252 条定理共同构成全书正式环境与媒体锁定的 **347 项核心声明**）：
+下表列出全书 `definition` 环境与媒体组件锁定的 **95 项唯一基础定义、代数结构与归纳类型**（它们与 C.1 的 254 条定理共同构成全书正式环境与媒体锁定的 **349 项核心声明**）：
 
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 引用章节与环境 ID |
 | :--- | :--- | :--- | :--- | :--- |
@@ -389,7 +391,7 @@
 
 ## C.2.1 行内引用的辅助定理与定义索引（133 项唯一声明） {#sec-appendix-c-inline}
 
-除上述 C.1 与 C.2 中绑定于正式数学环境或媒体锚点的 347 项声明外，正文、证明解析与附录对照表中还通过 `[name](lean:GID)` 行内链接直接引用了 **133 项辅助定理与构造定义**。将这 133 项行内声明纳入总账后，本附录完整覆盖了 `trureturing.lock.json` 中的全部 **480 项唯一锁定声明**（`252 + 95 + 133 = 480`）：
+除上述 C.1 与 C.2 中绑定于正式数学环境或媒体锚点的 349 项声明外，正文、证明解析与附录对照表中还通过 `[name](lean:GID)` 行内链接直接引用了 **133 项辅助定理与构造定义**。将这 133 项行内声明纳入总账后，本附录完整覆盖了 `trureturing.lock.json` 中的全部 **482 项唯一锁定声明**（`254 + 95 + 133 = 482`）：
 
 | 序号 | Lean 声明（点击跳转源码） | 所属模块与行号 | 种类 | 行内引用章节 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -561,22 +563,22 @@
 | :--- | :--- | :--- | :---: |
 | **上游仓库与分支** | `the-omega-institute/trureturing` 分支 `dev` | `site.toml` `[trureturing]` 配置与 `git merge-base --is-ancestor` | `PASS` |
 | **所钉提交 SHA** | [{commit}](trureturing:) | `trureturing.lock.json` `commit` 字段精确锁定 | `PASS` |
-| **冻结定理总数** | `252` 项环境/媒体定理（含行内共 `333` 项 `kind == "theorem"`） | 核对 `Golden/Frozen/state/<module>.lean.json` 中每项状态片与 `statement_id` 哈希 | `PASS` |
+| **冻结定理总数** | `254` 项环境/媒体定理（含行内共 `335` 项 `kind == "theorem"`） | 核对 `Golden/Frozen/state/<module>.lean.json` 中每项状态片与 `statement_id` 哈希 | `PASS` |
 | **辅助定义与结构数** | `95` 项环境定义（含行内共 `147` 项 `kind` 为 `def` 或 `inductive`） | 单独归入第 C.2 节，绝不与 `theorem / lemma / proposition / corollary` 混计 | `PASS` |
 | **多语言结构对齐** | `zh` 与 `en` 章节序列、环境 ID、Lean 引用序列 100% 一致 | `./tbook check` 跨版本逐项比对（`0 error(s)`） | `PASS` |
 
 ::: {.figure src="appc-ledger"}
-**$480$ 条锁定声明的对账：种类 × 出现方式。** 行是锁文件里的种类（定理；定义与归纳类型合为一行），列是它在中文正文里怎样被引用：在某个定理或定义环境里用 `lean=` 引用；由媒体引用、正文只以行内链接提到；只在行内链接里出现。定理一行 $249 + 3 + 81 = 333$，定义一行 $95 + 0 + 52 = 147$，合计 $480$。三个虚线框是本附录的三张索引：C.1 $= 249 + 3 = 252$，C.2 $= 95$，C.2.1 $= 81 + 52 = 133$。数字由脚本从锁文件、中文章节与三张索引算出并相互核对。
+**$482$ 条锁定声明的对账：种类 × 出现方式。** 行是锁文件里的种类（定理；定义与归纳类型合为一行），列是它在中文正文里怎样被引用：在某个定理或定义环境里用 `lean=` 引用；由媒体引用、正文只以行内链接提到；只在行内链接里出现。定理一行 $251 + 3 + 81 = 335$，定义一行 $95 + 0 + 52 = 147$，合计 $482$。三个虚线框是本附录的三张索引：C.1 $= 251 + 3 = 254$，C.2 $= 95$，C.2.1 $= 81 + 52 = 133$。数字由脚本从锁文件、中文章节与三张索引算出并相互核对。
 :::
 
-这张账的第一行在声明地图上是 $333$ 格绿色：被定理环境引用的 $249$ 格画成实心，其余 $3 + 81 = 84$ 格空心。
+这张账的第一行在声明地图上是 $335$ 格绿色：被定理环境引用的 $251$ 格画成实心，其余 $3 + 81 = 84$ 格空心。
 
 ::: {.viz src="lean-declaration-map" preset="theorems" height="500"}
-**只看定理。** 地图只留锁文件里种类为 theorem 的 333 格，全是绿色：实心的 249 格被定理环境用 `lean=` 引用，空心的 84 格只出现在行内链接里。
+**只看定理。** 地图只留锁文件里种类为 theorem 的 335 格，全是绿色：实心的 251 格被定理环境用 `lean=` 引用，空心的 84 格只出现在行内链接里。
 :::
 
 ::: {.remark #rem-appendix-c-epistemic-boundary title="完整声明索引的验证边界说明"}
-本附录第 C.1 节所列的 252 条正式环境与媒体定理、第 C.2 节所列的 95 项环境定义/结构以及第 C.2.1 节所列的 133 项行内交叉引用声明（总计 480 项形式化声明：333 项定理 + 147 项定义/结构）均已在 `trureturing@dev` 提交 [{commit}](trureturing:) 下由 Lean 4 内核验证并写入 `trureturing.lock.json`；而第 C.3 节登记的开放猜想（`OPEN`）与经典文献定理（文献结果，未在本书形式化）则严格排除在形式化定理计数之外，确保全书的每一枚 `LEAN ✓` 徽章均具备零歧义的内核证明背书。
+本附录第 C.1 节所列的 254 条正式环境与媒体定理、第 C.2 节所列的 95 项环境定义/结构以及第 C.2.1 节所列的 133 项行内交叉引用声明（总计 482 项形式化声明：335 项定理 + 147 项定义/结构）均已在 `trureturing@dev` 提交 [{commit}](trureturing:) 下由 Lean 4 内核验证并写入 `trureturing.lock.json`；而第 C.3 节登记的开放猜想（`OPEN`）与经典文献定理（文献结果，未在本书形式化）则严格排除在形式化定理计数之外，确保全书的每一枚 `LEAN ✓` 徽章均具备零歧义的内核证明背书。
 :::
 
 ::: {.viz src="lean-declaration-map" height="560"}

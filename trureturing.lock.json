@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "af4e8db2907be5b6ce1601b9dc54aa3e606c760d",
-  "pinned_at": "2026-11-12T17:18:03Z",
+  "commit": "915cbde6d6f981a60b218b30c5025095c09d70ef",
+  "pinned_at": "2026-11-12T19:37:55Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -3372,6 +3372,22 @@
       "statement_id": "sha256:89589cffec4065508d46b324a472f9464b0c1bf461d0ce87567073df22ff6147",
       "line": 68,
       "signature": "theorem pinching_hilbert_schmidt_pythagorean (rho : QubitMatrix) : hilbertSchmidtInner rho rho = hilbertSchmidtInner (pinching rho) (pinching rho) + hilbertSchmidtInner (rho - pinching rho) (rho - pinching rho)"
+    },
+    "D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredContraction.cyclic_future_kernel_eq_bot": {
+      "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredContraction",
+      "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.CyclicMonitoredContraction.cyclic_future_kernel_eq_bot",
+      "kind": "theorem",
+      "statement_id": "sha256:0fb6a694e7796081e5681b95c2177269cd9508ccd0dc04bcc111098f187f4313",
+      "line": 75,
+      "signature": "theorem cyclic_future_kernel_eq_bot (U : E ≃ₗᵢ[ℂ] E) (v : E) : (⨅ n : ℕ, LinearMap.ker ((cyclicClick U v).toLinearMap.comp ((cyclicStep U v).toLinearMap ^ n))) = ⊥"
+    },
+    "D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredPowerBound.cyclic_power_contraction": {
+      "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/CyclicMonitoredPowerBound",
+      "name": "D5.S3.QuantumChannels.ProjectionDiagnostics.CyclicMonitoredPowerBound.cyclic_power_contraction",
+      "kind": "theorem",
+      "statement_id": "sha256:544bab1da74377d730da774b8a4e819c2ae05ed8bd08302690f80efa5203f0e1",
+      "line": 61,
+      "signature": "theorem cyclic_power_contraction (U : E ≃ₗᵢ[ℂ] E) (v : E) (hv : ‖v‖ = 1) : ∃ N : ℕ, 1 ≤ N ∧ ∃ q : ℝ, 0 ≤ q ∧ q < 1 ∧ ‖cyclicStep U v ^ N‖ ≤ q"
     },
     "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation.monitoredHistory": {
       "module": "D5/S3/QuantumChannels/ProjectionDiagnostics/MonitoredReturnConservation",
