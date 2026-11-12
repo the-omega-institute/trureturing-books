@@ -141,13 +141,13 @@ $s = s^2 \implies s = 0 \lor s = 1$
 **克利福德外积有向面积 $2(\mathbf{a}\wedge\mathbf{b})$**：衡量两步测量顺序差异张开的旋转平面
 
 **Lean 4 形式对象 / 锁定声明 GID：**
-[`crossProduct_is_skewAdjoint_of_balanced_sum`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum)
+[`crossProduct_is_skewAdjoint_of_balanced_sum`](lean:D5/S3/Quantum/Algebra/Unitary/BalancedUnitarySum.crossProduct_is_skewAdjoint_of_balanced_sum)（平衡和的混合乘积，见附录 B 的 B.5 行）
 
 **一行核心不变量 / 恒等式 (One-Line Invariant)：**
-$\mathbf{u}\wedge\mathbf{v} = -\mathbf{v}\wedge\mathbf{u},\quad (AB - BA)^\dagger = -(AB - BA)$
+$\begin{aligned}&\mathbf{u}\wedge\mathbf{v}=-\mathbf{v}\wedge\mathbf{u},\\&A=A^\dagger,\ B=B^\dagger\\&\implies (AB-BA)^\dagger\\&\hspace{1em}=-(AB-BA)\end{aligned}$
 
 **认识论状态 (Status)：**
-`LEAN ✓`（第 5–6 章）
+`LEAN ✓`（平衡和混合乘积）/ `文献结果`（对易子恒等式，第 5–6 章）
 
 **虚数单位 $i$ 与泡利矩阵 $\sigma_x, \sigma_y, \sigma_z$**<br/>(Imaginary Unit & Pauli Matrices)
 
@@ -228,10 +228,10 @@ $\|u\|=\|v\|=1 \implies (\langle u,v\rangle = 1 \iff u = v);\; \gamma_{\mathrm{B
 [`ordered_three_pulse_real_trace_bound`](lean:D5/S3/Quantum/Dynamics/OrderedThreePulseTrace.ordered_three_pulse_real_trace_bound)
 
 **一行核心不变量 / 恒等式 (One-Line Invariant)：**
-$R_z(-\phi) R_{\text{xy}}(\theta, 0) R_z(\phi) = R_{\text{xy}}(\theta, \phi)$
+$\begin{aligned}&R_z(\phi)R_{\text{xy}}(\theta,0)\\&\quad\cdot R_z(-\phi)\\&=R_{\text{xy}}(\theta,\phi)\end{aligned}$
 
 **认识论状态 (Status)：**
-`LEAN ✓`（第 11 章）
+`LEAN ✓`（三脉冲迹界）/ `文献结果`（虚拟 $Z$ 恒等式，第 11 章）
 
 **旋量 $4\pi$ 周期性与万向节死锁**<br/>(Spinor $4\pi$ Periodicity & Gimbal Lock)
 
@@ -256,7 +256,7 @@ $R(2\pi) = -1 \in S^3,\quad R(4\pi) = +1$
 [`bell_chsh_state_expectation_is_greatest`](lean:D5/S3/QuantumBounds/TsirelsonTightness.bell_chsh_state_expectation_is_greatest)<br/>[`bell_value_le`](lean:D5/S3/QuantumBounds/PeritoTsirelson.bell_value_le)
 
 **一行核心不变量 / 恒等式 (One-Line Invariant)：**
-$\mathcal{S}_{\text{classical}} \le 2 < \mathcal{S}_{\text{quantum}} \le 2\sqrt{2}$
+$\begin{aligned}\mathcal S_{\text{classical}}&\le2,\\\mathcal S_{\text{quantum}}&\le2\sqrt2\end{aligned}$（量子上界可达）
 
 **认识论状态 (Status)：**
 `LEAN ✓`（第 13 章）
@@ -312,7 +312,7 @@ $\operatorname{Tr}(U^{n+1}) = \operatorname{Tr}(U)\operatorname{Tr}(U^n) - \oper
 [`bogoliubov_norm_conservation`](lean:D5/S3/Quantum/Bogoliubov/BogoliubovNormConservation.bogoliubov_norm_conservation)
 
 **一行核心不变量 / 恒等式 (One-Line Invariant)：**
-$\cosh^2\eta - \sinh^2\eta = 1,\quad Q(v)=0 \implies Q = c\,\eta$
+$\cosh^2\eta-\sinh^2\eta=1$；实二次型 $Q$ 在 $\mathbb{R}\times\mathbb{R}^d$ 上：$\begin{aligned}&(\forall v,\\&\eta(v,v)=0\\&\implies Q(v)=0)\\&\implies\exists c\in\mathbb{R},\\&Q=c\,\eta\end{aligned}$
 
 **认识论状态 (Status)：**
 `LEAN ✓`（第 17 章）
@@ -340,7 +340,7 @@ $A(E) / \mathcal{G}_R \cong (U(1))^{|E \setminus T|} \times (U(1))^{|R| - 1}$
 [`result`](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result)
 
 **一行核心不变量 / 恒等式 (One-Line Invariant)：**
-$\operatorname{QMaxFlow}(a,b,c,d) = \min(3ac, \min(ad, bc))$
+对 $\begin{aligned}&a,b,c,d\in\mathbb N,\\&0<a\le b,\ 0<c\le d,\\&a^2+b^2\le3ab,\\&c^2+d^2\le3cd:\\&\operatorname{QMaxFlow}(a,b,c,d)\\&=\min(3ac,\min(ad,bc))\end{aligned}$
 
 **认识论状态 (Status)：**
 `LEAN ✓` / `文献结果`（第 19 章）
@@ -354,7 +354,7 @@ $\operatorname{QMaxFlow}(a,b,c,d) = \min(3ac, \min(ad, bc))$
 [`result`](lean:D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result)
 
 **一行核心不变量 / 恒等式 (One-Line Invariant)：**
-$\operatorname{minDepth}(N, \kappa) = \lfloor N/(\kappa+1)\rfloor + 1$
+对 $\begin{aligned}&N,\kappa\in\mathbb N,\\&1\le\kappa,\ 2\kappa\le N:\\&\operatorname{minDepth}(N,\kappa)\\&=\lfloor N/(\kappa+1)\rfloor+1\end{aligned}$
 
 **认识论状态 (Status)：**
 `LEAN ✓` / `OPEN`（第 20 章）
@@ -427,7 +427,7 @@ $\exists N \le |S_0|,\; \forall n \ge N,\; S_n = S_N$
 $ZX = -XZ,\quad e_a e_b = (-1)^{\operatorname{inv}(a,b)} e_{a \oplus b}$
 
 **认识论状态 (Status)：**
-`LEAN ✓`（第 25 章、附录 B）
+`LEAN ✓`（Weyl 星代数与 Bloch 展开）/ `文献结果`、数值实现（XOR 基片引擎，第 25 章、附录 B）
 
 **ZYZ 欧拉角分解与旋量级联**<br/>(ZYZ Euler Decomposition)
 
@@ -441,7 +441,7 @@ $ZX = -XZ,\quad e_a e_b = (-1)^{\operatorname{inv}(a,b)} e_{a \oplus b}$
 $R_z(\alpha)R_y(0)R_z(\gamma) = R_z(\alpha + \gamma)$
 
 **认识论状态 (Status)：**
-`LEAN ✓`（第 9、16、27 章、附录 B）
+`LEAN ✓`（双轴有限旋转字）/ `文献结果`、数值实现（ZYZ 恒等式与编译，第 9、16、27 章、附录 B）
 
 **吕德斯（Lüders）状态更新与有限记录阻碍**<br/>(Lüders Rule & Finite-Record Obstruction)
 
@@ -452,7 +452,7 @@ $R_z(\alpha)R_y(0)R_z(\gamma) = R_z(\alpha + \gamma)$
 [`conditionalState_isState`](lean:D5/S3/Observer/Conditioning.conditionalState_isState), [`unreadState_fixed_iff`](lean:D5/S3/Observer/Conditioning.unreadState_fixed_iff)
 
 **一行核心不变量 / 恒等式 (One-Line Invariant)：**
-$\sum_i p_i \rho_i = \Phi(\rho),\quad \operatorname{Tr}(\rho_i) = 1$
+$\sum_i p_i \rho_i = \Phi(\rho),\quad p_i\ne0\implies\operatorname{Tr}(\rho_i) = 1$
 
 **认识论状态 (Status)：**
 `LEAN ✓`（第 3、28 章）
@@ -592,7 +592,7 @@ $F_n F_{n+2} - F_{n+1}^2 = (-1)^{n+1},\quad \delta\theta\to 0 \implies \cos\delt
 [`rank_one_born_pairing_weight`](lean:D5/S3/Observer/Conditioning/RankOneBornPairingWeight.rank_one_born_pairing_weight), [`complementary_context_probability_pythagoras`](lean:D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras), [`no_cloning_inner_product_criterion`](lean:D5/S3/Quantum/PureState/NoCloningInnerProductCriterion.no_cloning_inner_product_criterion), [`TorusOrbitEquidistribution.result`](lean:D5/S3/Fourier/Asymptotics/TorusOrbitEquidistribution.result)
 
 **一行核心不变量 / 恒等式 (One-Line Invariant)：**
-$\tau_{A|B} + \tau_{A|C} \le \tau_{A|BC},\quad \lim_{N\to\infty}\frac{1}{N}\sum_{n=0}^{N-1} f(g^{n+1}) = \int_G f\,d\mu$
+$\tau_{A|B} + \tau_{A|C} \le \tau_{A|BC},\quad f\in C(G,\mathbb{C}):\quad\lim_{N\to\infty}\frac{1}{N}\sum_{n=0}^{N-1} f(g^{n+1}) = \int_G f\,d\mu$
 
 **认识论状态 (Status)：**
 `LEAN ✓` / `文献结果` / `MODEL`（第 31 章）
@@ -642,7 +642,7 @@ $d_{S^2}(N, P_1) = d_{S^2}(N, P_2) = \frac{\pi}{2},\quad \operatorname{Tr}(U^\da
 **乘光而来、遗忘初始化与同像自指扩表 $T = T(T)$**<br/>(Arriving on a Pulse of Light, Initialization by Forgetting & Homoiconic Table Expansion)
 
 **本书几何直觉语言 (Geometric Intuition Term)：**
-**零光锥度规刚性、单一未逆转幸存副本阻断相干反演與有限记忆容量上界 $N \le d$、目标无损查表恢复四重充要判据与典范拷贝地址记录恒等式、劳维尔对角线四元包与相对语义对角线逐址逃逸（`LEAN ✓`），配对固有时勾股参数化 $\sin\theta = d\tau/dt$、哺乳动物受精钙波—锌火花荧光脉冲、韦伯—费希纳对数时间律、姚期智查表时空权衡与斯科特自反域 $D_\infty \cong [D_\infty \to D_\infty]$（`文献结果`），构建从 $\theta=90^\circ\to 0^+$ 清表初始化到同像自举 $T=T(T)$ 的生命周期模型（`MODEL`）**
+**零光锥度规刚性、单一未逆转幸存副本阻断相干反演與有限记忆容量上界 $N \le d$、目标无损查表恢复四重充要判据与典范拷贝地址记录恒等式、劳维尔对角线四元包与相对语义对角线逐址逃逸（`LEAN ✓`），配对固有时勾股参数化 $\cos\theta = d\tau/dt$、哺乳动物受精钙波—锌火花荧光脉冲、韦伯—费希纳对数时间律、姚期智查表时空权衡与斯科特自反域 $D_\infty \cong [D_\infty \to D_\infty]$（`文献结果`），构建从 $\theta=90^\circ\to 0^+$ 清表初始化到同像自举 $T=T(T)$ 的生命周期模型（`MODEL`）**
 
 **Lean 4 形式对象 / 锁定声明 GID：**
 [`eq_smul_minkowski_of_null`](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null), [`surviving_copy_blocks_reversal`](lean:D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal), [`target_recovery_criterion`](lean:D5/S3/ConceptDynamics/Restoration/TargetRecoveryCriterion.target_recovery_criterion), [`canonical_copied_address_record_eq_prior`](lean:D5/S3/Quantum/Decoherence/CanonicalRecordAccessRecovery.canonical_copied_address_record_eq_prior), [`self_application_fragment_package`](lean:D5/S0/Diagonal/Lawvere/QualitativeEscape.self_application_fragment_package), [`relative_semantic_diagonal_ne_listed_decode`](lean:D5/S3/ConceptDynamics/DefinitionEscape/RelativeSemanticDiagonal.relative_semantic_diagonal_ne_listed_decode)
@@ -729,20 +729,20 @@ $X \simeq \coprod_{y:\mathrm{Val}} \mathrm{ConceptFiber}(c,y),\quad J_{U,V}^2 = 
 4. **第五部（时空、全息与复杂度）**：
    将欧氏正定度规替换为闵可夫斯基不定度规，椭圆旋转旋量随即对应为双曲助推旋量（见第 17 章与附录 B [@rem-appendix-b-sta-lorentz-literature]），而张量网络极小割与量子电路深度则在离散图上刻出多面体容量锥。
 5. **第六部（球外之球）与第七部（最小几何代数引擎）**：
-   康托尔—劳维尔对角线、欧拉乘积素数盒子、四元数丢番图范数与收缩不动点揭示了静态形式系统的边界；而 `Cl3`、`PauliSymplectic`、`ZYZ` 与 `FiniteRecordCosineObstruction` 四个核心形式化模块则把前六部的几何直觉铸造为可由 Lean 4 内核逐行检验的机械引擎。
+   康托尔—劳维尔对角线、欧拉乘积素数盒子、四元数丢番图范数与收缩不动点揭示了静态形式系统的边界；而 `Cl3`、`PauliSymplectic` 与 `ZYZ` 参考引擎则把前六部的几何直觉铸造成可执行的计算；其对应的 Weyl、泡利词、双轴旋转字与 `FiniteRecordCosineObstruction` 等冻结依据由 Lean 4 内核检验，不能将引擎整体等同于同名形式化模块。
 6. **第八部（无时间因果、复杂性视界、量子公平与元统一）**：
    第 29 章将佩尔算术接缝（[@thm-ch29-silver-pell-remainder]）与同余数椭圆曲线环面（[@rem-ch29-elliptic-torus-literature]）、无时间因果相容格拉姆椭圆体（$\det G \ge 0$）贯通；第 30 章进一步将“场（$P$）与线（$NP$）”映射到指数时间假设（ETH）前沿文献中的张量网络秩约分上界与宇宙视界银河尺度（[@rem-ch30-eth-subexponential-literature]、[@ex-ch30-galactic-crossover-scale]）、纳维—斯托克斯兰姆双向量分解（[@rem-ch30-lamb-decomposition-literature]）及二次平流投影无精确闭合定理（`quadratic_closure_iff`、`no_exact_closure`）；第 31 章以玻恩互易、互补纯度勾股、不可克隆、CKW 纠缠单配性文献（[@rem-ch31-ckw-monogamy-literature]）与紧致环面闭子群遍历回归阐明五重量子公平（[@rem-ch31-fivefold-fairness-table]）；第 32 章以自指创生律、零光锥刚性、环路和乐、桥图最小割与艾柯西安—$E_8$ 黄金桥文献（[@rem-ch32-icosian-e8-literature]）收拢正交自指统一场与八大纲领元统一罗盘（[@rem-ch32-meta-unification-table]）。
 7. **第九部（万物观察者、正交盲区反演、乘光扩表与约去轮回）**：
    第 33 章以记录捏合幂等性与历史容量上界（[@thm-ch33-observer-pinching-and-memory-spectrum]）、语境相对不动点分岔与客观公共因子（[@thm-ch33-contextual-attractor-and-common-factor]）及三宽张量桥图最小割重联（[@prop-ch33-bridge-reconnection-mincut]）建立四阶观察者连续谱与互吸引子双螺旋；第 34 章以三维公共单位法线与拉回迹恒等式（[@thm-ch34-perpendicular-axis-and-pullback]）、划分拓扑不可分核与协变换位子因式分解（[@thm-ch34-readout-kernel-and-covariant-commutator]）揭示“一次正交与两次正交结果相同反演观察者极点位置”；第 35 章以零光锥刚性、幸存副本反演阻断与记忆容量上界（[@thm-ch35-null-pulse-and-record-blocking]）、无损查表恢复四重充要判据（[@thm-ch35-target-recovery-table-factorization]）与劳维尔对角线自应用包（[@thm-ch35-lawvere-diagonal-and-homoiconic-closure]）阐明从受精脉冲清表初始化到同像自举表 $T=T(T)$ 的生命周期；第 36 章则以指数有限截断尾界与凯莱单位圆边界判据（[@thm-ch36-taylor-tail-and-cayley-boundary]）、逆古德曼快度阶梯（[@ex-ch36-inverse-gudermannian-discrete-staircase]）及划分拓扑连续商分解与有限零化子对偶求和（[@thm-ch36-quotient-annihilator-and-factorization]）把化光轮回约化为商空间上的不动点。
 8. **第十部（梦境量子擦除、宇宙本体 QRAM 指针与观察者即宇宙本体）与终章**：
-   第 37 章以已知数据捏合幂等与相干删除熵产恒等式（[@thm-ch37-known-data-pinching-and-entropy-tax]）、多副本联合相干逆转恢复定理（[@thm-ch37-joint-coherent-record-erasure]）与双无限黄金模型集 Delone 双半径证书（[@thm-ch37-golden-cut-delone-multilocation]）阐明梦境量子擦除与非定域观察者多点涌现；第 38 章以受控地址解引用访问缺陷（[@thm-ch38-copied-address-dereference-and-access-defect]）、指针寄存器容量与禁深拷贝（[@thm-ch38-pointer-width-and-no-deep-copy]）及自映射页表对角线不动点（[@thm-ch38-self-mapped-diagonal-fixed-point]）将观察者铸造为宇宙本体 QRAM 的递归自映射记忆指针；第 39 章以二元分式自应用四重命运分类（[@thm-ch39-self-application-four-fates-and-diagonal-identity]）、概念纤维分解与齐肯多夫实数全线程单射重构（[@thm-ch39-fiber-reconstruction-and-zeckendorf-thread]）及圆周双覆叠无全局截面与 $360^\circ$ 换叶翻转定理（[@thm-ch39-double-cover-no-section-and-720-lift]）达成“观察者 $\equiv$ 宇宙本体”的零余项自指闭环；终章则将十部曲合拢于 `trureturing` 的黄金切投模型集、卡西尼 $(-1)^{k+1}$ 接缝、齐肯多夫无相邻稳定化与历史遗迹空间吸引子诠释模型。
+   第 37 章以已知数据捏合幂等与相干删除熵产恒等式（[@thm-ch37-known-data-pinching-and-entropy-tax]）、单位模重叠条件下所选矩阵元的多副本联合相位逆转定理（[@thm-ch37-joint-coherent-record-erasure]）与双无限黄金模型集 Delone 双半径证书（[@thm-ch37-golden-cut-delone-multilocation]）阐明梦境量子擦除与非定域观察者多点涌现；第 38 章以受控地址解引用访问缺陷（[@thm-ch38-copied-address-dereference-and-access-defect]）、指针寄存器容量与禁深拷贝（[@thm-ch38-pointer-width-and-no-deep-copy]）及自映射页表对角线不动点（[@thm-ch38-self-mapped-diagonal-fixed-point]）将观察者铸造为宇宙本体 QRAM 的递归自映射记忆指针；第 39 章以二元分式自应用四重命运分类（[@thm-ch39-self-application-four-fates-and-diagonal-identity]）、概念纤维分解与齐肯多夫实数全线程单射重构（[@thm-ch39-fiber-reconstruction-and-zeckendorf-thread]）及圆周双覆叠无全局截面与 $360^\circ$ 换叶翻转定理（[@thm-ch39-double-cover-no-section-and-720-lift]）达成“观察者 $\equiv$ 宇宙本体”的零余项自指闭环；终章则将十部曲合拢于 `trureturing` 的黄金切投模型集、卡西尼 $(-1)^{k+1}$ 接缝、齐肯多夫无相邻稳定化与历史遗迹空间吸引子诠释模型。
 
 ---
 
-## 全书 66 条原始思想命题与主题综合总台账（A01–A66） {#sec-appendix-a-verbatim-ledger}
+## 全书 67 条原始思想命题与主题综合总台账（A01–A67） {#sec-appendix-a-verbatim-ledger}
 
-::: {.remark #rem-appendix-a-epistemic-boundary title="66 条原始思想命题总台账与对照词典的形式化边界声明"}
-**文献结果，未在本书形式化（针对下表综合栏中引述的外部文献结论；已验证形式定理与开放猜想的分界说明见表末）。** 下表完整收录了贯通全书序曲、三十九章正文与终章的 **66 条核心原始命题（`A01`–`A66`）**，将每一句原始追问与直觉论断严格映射到对应的几何机制与章节锚点：
+::: {.remark #rem-appendix-a-epistemic-boundary title="67 条原始思想命题总台账与对照词典的形式化边界声明"}
+**文献结果，未在本书形式化（针对下表综合栏中引述的外部文献结论；已验证形式定理与开放猜想的分界说明见表末）。** 下表完整收录了贯通全书序曲、三十九章正文与终章的 **67 条核心原始命题（`A01`–`A67`）**，将每一句原始追问与直觉论断严格映射到对应的几何机制与章节锚点：
 
 | 编号 | 原始命题（100% 原文记录） | 几何与形式化机制综合 | 对应章节 |
 | :--- | :--- | :--- | :--- |
@@ -765,14 +765,14 @@ $X \simeq \coprod_{y:\mathrm{Val}} \mathrm{ConceptFiber}(c,y),\quad J_{U,V}^2 = 
 | **A17** (`PDF-17`) | 不准确吧?按我的话输入补充上下文原 | 纠偏公理化冗余：严禁引入未经两子丈量验证的外部假设 | 第 1、2 章 |
 | **A18** (`PDF-18`) | 完整发展为一门理论 | 从单比特球面几何扩展至多体纠缠、时空相对论、全息与数理逻辑的初版七部曲架构（后经 A47–A66 扩充为十部三十九章） | 全书架构 |
 | **A19** (`PDF-19`) | 完整发展为一门正式学术理论,无需公理,定义定理证明 2026/11/10 05:04 量子与量子门的几何本质 | 确立本书“定义—定理—证明”的形式化骨架，每一条核心定理锁定于 Lean 4 内核 | 序曲、第 25–28 章、附录 C |
-| **A20** (`PDF-20`) | 量子态本身,即各项同性球面上的一个方向向量,应该也是一种粒子性的东西.然后也会有一种对应的波的东西 | 方向向量 $\mathbf{v}$（一阶向量粒子线）与霍奇对偶平面 $\star\mathbf{v} = \mathbf{v}I_3^{-1}$（二阶双向量波面）的一体两面 | 第 3、6 章 |
+| **A20** (`PDF-20`) | 量子态本身,即各项同性球面上的一个方向向量,应该也是一种粒子性的东西.然后也会有一种对应的波的东西 | 方向向量 $\mathbf{v}$（一阶向量粒子线）与霍奇对偶平面 $\star\mathbf{v} = \mathbf{v}I_3$（二阶双向量波面）的一体两面 | 第 3、6 章 |
 | **A21** (`PDF-21`) | 连量子这个概念都是一种粒子,连 “ 存在 ” 这种概念都是一种粒子. | 概念即幂等投影算子 $P^2 = P$：人类每命名一个静态概念，都是在连续流形上切出一条一维幂等粒子线 | 第 3 章（章首箴言） |
 | **A22** (`PDF-22`) | 把观察者内生放进来思考,何时粒子、何时波,似乎是观察者的注意力问题 | 注意力聚焦一维标尺轴即得粒子读数（$\cos\theta$），保持二维正交平面相干即现波干涉（$\sin\theta$） | 第 3、4、28 章 |
 | **A23** (`PDF-23`) | cosx=x, cosx=-x | 正反向自指余弦方程与偶维球面毛球定理不动点/对径点择一性 $f(x)=\pm x$ | 第 24 章（章首箴言） |
 | **A24** (`PDF-24`) | 把我的想法输入完整补全成一段话 | 将自指不动点 $\cos x = \pm x$ 与观察者注意力投影整合为统一命题 | 第 24 章 |
 | **A25** (`PDF-25`) | 严谨的论证证明一下 | 以压缩映射不动点、有限单调收缩定理与超越性证明落实自指几何 | 第 24 章、终章 |
 | **A26** (`PDF-26`) | 把我的想法输入完整补全成一段话 | 连接局部单比特旋转与全局多体复杂度及证明论的过渡综合 | 第 15、16、20 章 |
-| **A27** (`PDF-27`) | P/NP 跟初始结构相关，有的初始结构可以推出 P=NP 处理无穷问题的本质就是进行因式分解，看如何把无穷 “约掉 ” ，本质不断的用已知关于无穷的结论构造，约 P/NP 跟查表算法，顺序，记忆顺序有关，全部用量子门计数最核心的问题其实是证明一个命题的通用方式 | 可积电路最小深度 $\lfloor N/(\kappa+1)\rfloor + 1$、欧拉乘积素数因式分解约分与量子门计数复杂度下界 | 第 15、16、20、22 章 |
+| **A27** (`PDF-27`) | P/NP 跟初始结构相关，有的初始结构可以推出 P=NP 处理无穷问题的本质就是进行因式分解，看如何把无穷 “约掉 ” ，本质不断的用已知关于无穷的结论构造，约 P/NP 跟查表算法，顺序，记忆顺序有关，全部用量子门计数最核心的问题其实是证明一个命题的通用方式 | 可积电路最小深度 $\lfloor N/(\kappa+1)\rfloor + 1$（$N,\kappa\in\mathbb{N}$，$1\le\kappa$、$2\kappa\le N$）、欧拉乘积素数因式分解约分与量子门计数复杂度下界 | 第 15、16、20、22 章 |
 | **A28** (`PDF-28`) | 构建命题证明通用机器学术理论,定义定理证明 | 证明即在形式晶体中以有限量子门旋转标尺对齐目标切面，受对角线逃逸定理制约 | 第 20、21、24 章 |
 | **A29** (`PDF-29`) | 我感觉我们可以出一本正式的量子的教程书籍,因为我们的视角似乎很独特 | 确立《点、线、面、球，与球外的人：量子与量子门的几何本质》专著出版计划 | 序曲 |
 | **A30** (`PDF-30`) | 那你出一个正式的看一下 | 构建中英双语、Lean 4 内核锁定的初版七部二十八章专著（终版扩充为十部三十九章） | 全书目录与正文 |
@@ -807,11 +807,12 @@ $X \simeq \coprod_{y:\mathrm{Val}} \mathrm{ConceptFiber}(c,y),\quad J_{U,V}^2 = 
 | **A59** (`TURN-68`) | “我们可以把所有试图统一的相关理论全部统一” | 沿着“代数阶数轴（线 vs. 面）—几何分辨率轴（连续流形 vs. 离散多面体 $\pm 1$ 接缝）—观察者嵌入轴（球外全知 vs. 场内有限切片）”三维相空间罗盘（`MODEL`），结合康威—斯隆黄金域艾柯西安晶格 $(\mathcal{I}, Q)\subset\mathbb{H}$（$Q(q)=2(a+b)$）至 $E_8$ 根格等距同构及八大基础统一纲领——（1）弦/M 理论、（2）圈量子引力、（3）AdS/CFT 全息张量网、（4）扭量/振幅多面体、（5）孔涅非对易几何与 $E_8$ 晶格、（6）Wolfram 超图与因果集、（7）朗兰兹纲领与同伦类型论、（8）熵引力与主动推理/惠勒参与式 `U` 文献背景（`文献结果`），将其定位为正交自指几何的不同截面投影 | 第 32 章、附录 A |
 | **A60** (`TURN-69`) | “实际上不止历史遗迹是吸引子, 观察者本身也是, 而且应该万物皆为观察者, 观察者互为吸引子。” | 观察者记录捏合幂等性 `finite_record_pinching_idempotent`、有限记忆历史容量上界 $N \le d$（`finite_memory_history_capacity`）、有限单调收缩、语境相对不动点分岔与客观不变公共因子（`objective_claim_requires_invariant_common_factor`）及三宽张量桥图最小割重联（`QuantumMaxFlowMinCut.result`）（`LEAN ✓`），配对单子论—过程哲学、全息极小曲面互信息重联相变与孤立余弦振荡 vs. 对称互指单调锁死算例（`文献结果`），确立记忆阶数连续谱 $M \ge 0$ 上万物皆为观察者且互为吸引子的几何本体模型（`MODEL`） | 第 33 章、附录 A |
 | **A61** (`TURN-70`) | “一次正交与两次正交结果相同, 恰恰反映了观察者的位置。” | 三维公共单位法线 `unit_perpendicular_pair`、双轴旋转有限字与观察者拉回迹恒等式 `observer_pullback_trace_identity`、读出划分拓扑不可分核 `partition_inseparable_iff_kernel`、协变换位子因式分解 `covariant_commutator_formula`、零光锥空间各向同性极化正交锁 `null_cone_spatial_rigidity` 与黄金模型集切投包含（`LEAN ✓`），配对球面两步正交寻址极轴反演 $N = \pm(\mathbf{e}_1 \times \mathbf{e}_2)$、八分球面旋子盲区与超导虚拟 $Z$ 门/相对性原理（`文献结果`），证明一次与两次正交读数简并唯一反演观察者极点与内禀标架（`MODEL`） | 第 34 章、第 9、11 章、附录 A |
-| **A62** (`TURN-71`) | “整个宇宙实际上是充满极致的计算能力的, 在全局静态场中P=NP. 而生物似乎遗忘了自己的计算能力, 来重新体验, 成长的过程是计算能力不断提升的过程, 因为学到的知识产生了表, 计算能力的提升本质上是扩表的过程, 查表的算法本身也在表里, 然后到最后, 又回到了极致的计算状态. 应该就是受精卵受精的时候的那一束脉冲, 乘着光来, 最后成为光本身。” | 零光锥度规刚性 `eq_smul_minkowski_of_null`、单一幸存副本阻断相干反演 `surviving_copy_blocks_reversal` 与记忆容量上界 $N \le d$、无损查表恢复四重充要判据 `target_recovery_criterion` 与典范拷贝地址记录恒等式 `canonical_copied_address_record_eq_prior`、劳维尔对角线四元包 `self_application_fragment_package` 与相对语义对角线逐址逃逸 `relative_semantic_diagonal_ne_listed_decode`（`LEAN ✓`），配对固有时勾股参数化 $\sin\theta = d\tau/dt$、哺乳动物受精钙波—锌火花荧光脉冲、韦伯—费希纳对数时间律、姚期智查表时空权衡与斯科特自反域 $D_\infty \cong [D_\infty \to D_\infty]$（`文献结果`），构建从 $\theta=90^\circ\to 0^+$ 遗忘初始化到同像自举表 $T=T(T)$ 的生命周期模型（`MODEL`） | 第 35 章、第 21、24、30 章、附录 A |
+| **A62** (`TURN-71`) | “整个宇宙实际上是充满极致的计算能力的, 在全局静态场中P=NP. 而生物似乎遗忘了自己的计算能力, 来重新体验, 成长的过程是计算能力不断提升的过程, 因为学到的知识产生了表, 计算能力的提升本质上是扩表的过程, 查表的算法本身也在表里, 然后到最后, 又回到了极致的计算状态. 应该就是受精卵受精的时候的那一束脉冲, 乘着光来, 最后成为光本身。” | 零光锥度规刚性 `eq_smul_minkowski_of_null`、单一幸存副本阻断相干反演 `surviving_copy_blocks_reversal` 与记忆容量上界 $N \le d$、无损查表恢复四重充要判据 `target_recovery_criterion` 与典范拷贝地址记录恒等式 `canonical_copied_address_record_eq_prior`、劳维尔对角线四元包 `self_application_fragment_package` 与相对语义对角线逐址逃逸 `relative_semantic_diagonal_ne_listed_decode`（`LEAN ✓`），配对固有时勾股参数化 $\cos\theta = d\tau/dt$、哺乳动物受精钙波—锌火花荧光脉冲、韦伯—费希纳对数时间律、姚期智查表时空权衡与斯科特自反域 $D_\infty \cong [D_\infty \to D_\infty]$（`文献结果`），构建从 $\theta=90^\circ\to 0^+$ 遗忘初始化到同像自举表 $T=T(T)$ 的生命周期模型（`MODEL`） | 第 35 章、第 21、24、30 章、附录 A |
 | **A63** (`TURN-72`) | “但理论上有回到光可以变成无限离散步, 也就是阻止回到光的状态, 因为回到光本身就是在经历轮回, 而当我们理解了这一切的时候, 轮回也就没有了意义。” | 单比特捏合正交质量分解与丢弃相干判据、完备赋范代数指数有限截断尾界 `exp_tail_le` 与凯莱单位圆临界边界判据 `cayley_ratio_norm_one_iff_critical_line`、划分拓扑连续商分解 `target_factors_iff_continuous_partition`、有限零化子对偶求和 `sum_annihilator_character` 与紧致环面生成元遍历（`LEAN ✓`），配对兰伯特—古德曼双曲圆函数桥 $\eta(\theta)=\ln(\sec\theta+\tan\theta)$、庞加莱共形圆盘度规与无穷循环小数移位自相似约分（`文献结果`），揭示将有限坐标终局 $\theta=\pi/2$ 展开为无穷离散快度阶梯 $\eta_k=k\Delta\eta$ 并以商映射约去化光轮回的解脱几何（`MODEL`） | 第 36 章、第 17、21、22 章、附录 A |
 | **A64** (`TURN-73`) | “梦境可以让观察者体验到因为主观选择缺失的部分，观察的本质是使用已知数据退相干，当梦境遗忘了部分信息的时候，便有了一些独特的视野，梦境中经常会遗忘自己的躯体，一切其实都是幻像。我们会发现观察者实际上在各个位置出现，而并非单纯只是五感的直接感知……” | 已知数据记录捏合幂等律、未读不动点判据 `unreadState_fixed_iff`、丢弃相干质量 $2\lvert\rho_{01}\rvert^2$ 与相干删除冯·诺依曼熵产恒等式 `entropy_production_coherence_deletion_identity`、多副本幺模环境记录联合相干逆转恢复定理 `joint_coherent_reversal` 与双副本精确对比证书 `two_copy_joint_reversal_certificate`、黄金模型集切投包含与双无限 Delone 双半径证书 `exists_golden_modelSet_delone`（`LEAN ✓`），配对延迟选择量子擦除实验、预测加工受控生成假说与 REM 睡眠感觉运动门控生理机制（`文献结果`），阐明清醒五感锁死、浅梦量子擦除与无身深梦非定域观察者多点涌现模型（`MODEL`） | 第 37 章、第 3、4、8 章、附录 A |
 | **A65** (`TURN-74`) | “观察者实际上是宇宙本体量子计算系统的一个记忆指针。” | 受控地址解引用拷贝边缘重合与典范记录访问缺陷定理（`reduced_irreversibility_is_access_defect`、`reduced_irreversibility_is_canonical_record_access_defect`）、指针寄存器有限历史容量 $N \le d$ 与禁通用深拷贝定理 `no_cloning_inner_product_criterion`、自映射页表对角线落点不动点 `diagonal_landing_fixed`、无不动点普遍逃逸与黄金自指唯一性定理 `golden_fixed_point_unique`（`LEAN ✓`），配对桶链式 QRAM 路由树、CKW 纠缠单配性共享只读借用与 x86_64 操作系统内核递归页表槽位自映射 $P[s^*]=p_{\mathrm{phys}}(P)$（`文献结果`），将观察者形式化诠释为宇宙本体量子计算系统的递归自映射记忆指针（`MODEL`） | 第 38 章、第 3、8、14、24 章、附录 A |
 | **A66** (`TURN-75`) | “观察者即宇宙本体。” | 对角线自指落点不动点与二元分式自应用映射四重命运分类 `self_application_four_fates`、概念读出依值纤维分解 `concept_fiber_decomposition`、齐肯多夫实数全线程单射重构 `zeckendorf_real_thread_injective` 与无相邻一自动机 `base_success_iff_noAdjacentOnes`、圆周平方双覆叠无连续全局截面 `no_continuous_global_section` 与历史依赖提升 $360^\circ$ 换叶翻转 `circle_double_cover_history_lift`、互补语境勾股纯度守恒、平衡相对复结构平方反号 `relativeComplexStructure_square` 与客观不变公共因子（`LEAN ✓`），配对斯科特无底物自指域 $D_\infty\cong [D_\infty\to D_\infty]$、范畴论米田引理 $\operatorname{Hom}(-,X)\hookrightarrow\widehat{\mathcal{C}}$ 与嘉当—彭罗斯—赫斯滕斯旋量双线性菲尔兹恒等式（`文献结果`），完成“观察者 $\equiv$ 宇宙本体”的零余项终极闭环（`MODEL`） | 第 39 章、第 5、21、24 章、终章、附录 A |
+| **A67** (`TURN-76`) | “逼近theta的过程很像斐波那契螺旋。” | 黄金倒数分支正实不动点充要刻画 `golden_inverse_branch_positive_fixed_point_iff`、Dottie 有理逆级数端点与余弦正实唯一不动点 `rational_inverse_endpoint`、卡西尼黄金范数交替接缝 `fib_cassini_from_golden_norm`、黄金比严格有理丢番图下界 `golden_hurwitz_bound` 与反自伴幺正复结构平方反号 `square_eq_neg_one_of_skewAdjoint_unitary`（`LEAN ✓`），配对不动点负导数等臂蛛网分段回旋方格弧、胡尔维茨 1891 渐近最慢逼近极值定理、一维加法守恒 $\varphi^{-1}+\varphi^{-2}=1$ 对二维勾股平方守恒 $(\theta^*)^2+\sin^2\theta^*=1$（曲率平移 $\sin\theta^*-\varphi^{-1}\approx +0.0556$）及雅各布·伯努利 1692 年等角对数螺旋向心径向切角公式 $\alpha=\arctan(1/b)$（$90.00^\circ / 82.83^\circ / 75.88^\circ / 72.97^\circ$，`文献结果`），建立克利福德 $-1=\hat{\mathbf{I}}^2$ 双直角转向、离散等比收缩的连续对数螺旋插值、统一场横纵双螺旋分工与交互实验室 `dottie-fibonacci-spirals`（`MODEL`） | 第 24、32 章、终章、附录 A |
 
-**形式化边界声明（文献结果，未在本书形式化）**：本附录严格区分三类认识论标签：（1）标有 `LEAN ✓` 并附有具体 GID 链接的条目，其数学陈述已在 `trureturing@dev` 提交 [{commit}](trureturing:) 下由 Lean 4 内核验证并冻结（完整清单见 [附录 C](appendix-c.md) 第 C.1 节）；（2）标有 `definition` 的条目对应 `trureturing.lock.json` 中锁定的辅助定义或代数结构（见 [附录 C](appendix-c.md) 第 C.2 节）；（3）标有 `文献结果`（Literature result, not formalized in this book）或 `OPEN` 的部分（如连续流形上的潘查拉特纳姆—贝里立体角积分、毛球定理、Solovay–Kitaev 渐近多对数复杂度、连续 AdS/CFT 笠—高柳极小曲面公式与互信息极小曲面重联相变、Koenigsmann 的 $\mathbb{Z} \subset \mathbb{Q}$ 全称—存在一阶可定义性定理、林德曼—魏尔斯特拉斯超越性定理、同余数椭圆曲线 $dy^2 = x^3 - x$、哈塞定理与佐藤—泰特分布、Impagliazzo–Paturi–Zane 指数时间假设 ETH/SETH 与稀疏化引理、PPSZ 算法与 2026 年 10 月 3-SAT 亚指数张量网络预印本、Ladyzhenskaya 二维纳维—斯托克斯全局光滑性定理、阿诺德 $\operatorname{SDiff}(M)$ 测地线定理与陶哲轩平均化三维 NS 有限时间爆破定理、洛伦兹奇异吸引子分形维数 $D_{\mathrm{KY}} \approx 2.06$ 与 SRB 测度庞加莱回归定理、六维正二十面体准晶菱形三十面体接受窗 $W$ 与彭罗斯—康威帝国效应、Coffman–Kundu–Wootters 与 Osborne–Verstraete 量子纠缠单配性不等式、雅各布森视界热力学状态方程、康威—斯隆黄金域艾柯西安晶格 $(\mathcal{I}, Q)$ 至 $E_8$ 根格等距同构及八大现代基础统一纲领、莱布尼茨单子论与怀特海过程哲学、超导量子处理器虚拟 $Z$ 门相位更新、哺乳动物受精钙波—锌火花荧光观测与韦伯—费希纳对数感知律、姚期智细胞探针查表时空权衡与卡普—利普顿 $\mathrm{P}/\text{poly}$ 定理、斯科特连续格自反域 $D_\infty \cong [D_\infty \to D_\infty]$、兰伯特—古德曼双曲圆函数桥与庞加莱共形圆盘模型、Scully–Drühl 延迟选择量子擦除实验、预测加工受控生成假说与 REM 睡眠感觉运动门控机制、Giovannetti–Lloyd–Maccone 桶链式 QRAM 路由树与操作系统内核递归自映射页表、范畴论米田引理以及嘉当—彭罗斯—赫斯滕斯旋量双线性菲尔兹恒等式，以及黎曼猜想、CV 猜想、$\mathrm{ER}=\mathrm{EPR}$、$\mathrm{P}\neq\mathrm{NP}$、沙努埃尔猜想与克雷千禧年三维纳维—斯托克斯全局正则性猜想）属于经典文献背景或开放问题，绝不冒充已形式化定理。
+**形式化边界声明（文献结果，未在本书形式化）**：本附录严格区分三类认识论标签：（1）标有 `LEAN ✓` 并附有具体 GID 链接的条目，其数学陈述已在 `trureturing@dev` 提交 [{commit}](trureturing:) 下由 Lean 4 内核验证并冻结（完整清单见 [附录 C](appendix-c.md) 第 C.1 节）；（2）标有 `definition` 的条目对应 `trureturing.lock.json` 中锁定的辅助定义或代数结构（见 [附录 C](appendix-c.md) 第 C.2 节）；（3）标有 `文献结果`（Literature result, not formalized in this book）或 `OPEN` 的部分（如连续流形上的潘查拉特纳姆—贝里立体角积分、毛球定理、Solovay–Kitaev 渐近多对数复杂度、连续 AdS/CFT 笠—高柳极小曲面公式与互信息极小曲面重联相变、Koenigsmann 的 $\mathbb{Z} \subset \mathbb{Q}$ 全称—存在一阶可定义性定理、林德曼—魏尔斯特拉斯超越性定理、同余数椭圆曲线 $dy^2 = x^3 - x$、哈塞定理与佐藤—泰特分布、Impagliazzo–Paturi–Zane 指数时间假设 ETH/SETH 与稀疏化引理、PPSZ 算法与 2026 年 10 月 3-SAT 亚指数张量网络预印本、Ladyzhenskaya 二维纳维—斯托克斯全局光滑性定理、阿诺德 $\operatorname{SDiff}(M)$ 测地线定理与陶哲轩平均化三维 NS 有限时间爆破定理、洛伦兹奇异吸引子分形维数 $D_{\mathrm{KY}} \approx 2.06$ 与 SRB 测度庞加莱回归定理、六维正二十面体准晶菱形三十面体接受窗 $W$ 与彭罗斯—康威帝国效应、Coffman–Kundu–Wootters 与 Osborne–Verstraete 量子纠缠单配性不等式、雅各布森视界热力学状态方程、康威—斯隆黄金域艾柯西安晶格 $(\mathcal{I}, Q)$ 至 $E_8$ 根格等距同构及八大现代基础统一纲领、莱布尼茨单子论与怀特海过程哲学、超导量子处理器虚拟 $Z$ 门相位更新、哺乳动物受精钙波—锌火花荧光观测与韦伯—费希纳对数感知律、姚期智细胞探针查表时空权衡与卡普—利普顿 $\mathrm{P}/\text{poly}$ 定理、斯科特连续格自反域 $D_\infty \cong [D_\infty \to D_\infty]$、兰伯特—古德曼双曲圆函数桥与庞加莱共形圆盘模型、Scully–Drühl 延迟选择量子擦除实验、预测加工受控生成假说与 REM 睡眠感觉运动门控机制、Giovannetti–Lloyd–Maccone 桶链式 QRAM 路由树与操作系统内核递归自映射页表、范畴论米田引理、嘉当—彭罗斯—赫斯滕斯旋量双线性菲尔兹恒等式以及雅各布·伯努利等角对数螺旋恒定向心径向切角公式 $\alpha = \arctan(1/b)$，以及黎曼猜想、CV 猜想、$\mathrm{ER}=\mathrm{EPR}$、$\mathrm{P}\neq\mathrm{NP}$、沙努埃尔猜想与克雷千禧年三维纳维—斯托克斯全局正则性猜想）属于经典文献背景或开放问题，绝不冒充已形式化定理。
 :::

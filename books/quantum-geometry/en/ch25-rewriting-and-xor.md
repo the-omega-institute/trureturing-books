@@ -43,7 +43,7 @@ $$
 :::
 
 ::: proof
-In `D5/S3/Quantum/FiniteDimensional.lean:24`, the proof splits the five conjuncts via `constructor`, applies matrix extensionality `ext i j` and finite case enumeration `fin_cases i <;> fin_cases j` over `Fin 2`, and discharges each entry by `simp [qubitX, qubitZ, pow_two, Matrix.mul_apply, Fin.sum_univ_two]`. Explicitly,
+In `D5/S3/Quantum/FiniteDimensional.lean:24`, the proof splits the five conjuncts via four `constructor` steps, applies matrix extensionality `ext i j` and finite case enumeration `fin_cases i <;> fin_cases j` over `Fin 2`, and discharges each entry by `simp [qubitX, qubitZ, pow_two, Matrix.mul_apply, Fin.sum_univ_two]`. Explicitly,
 
 $$
 \operatorname{qubitZ}\cdot\operatorname{qubitX} = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix} = -\begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} = -(\operatorname{qubitX}\cdot\operatorname{qubitZ}),

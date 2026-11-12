@@ -25,6 +25,8 @@ Maintain one row per SUMMARY unit. A row can say `pending`, `read-only review`, 
 
 On recovery or integration, record the prior evidence candidate, current input HEAD and changed scope. Compare the dependencies relevant to each reused conclusion: text/environment bytes, referenced source and pin, media/captions, and output tools/assets. State which evidence survives and why, which changed claims need fresh review, and which outputs need rebuilding. Do not treat changed tooling as a new content audit of every chapter, or unchanged text as approval of new media. For an uncommitted handoff, identify the input HEAD and changed file digests; a later committed hash needs the lifecycle owner’s correspondence check.
 
+For an upstream table, list or display reflow, record how each affected claim’s old row/field corresponds to its current stable location and labelled fields in both languages, including assumptions, qualifiers, conclusions and source/GID/attribution bindings. Carry the already-confirmed minimal corrections into those fields where their justification still holds, retaining author wording and the upstream presentation. Established semantic correspondence can justify reuse of the relevant evidence despite changed bytes; line growth or a new layout alone adds no claims or audit credit. A changed or missing hypothesis, qualifier, conclusion or source binding beyond those corrections needs fresh review of that claim. Correspondence alone does not establish content accuracy or approve the surrounding material.
+
 ## Three review seats
 
 - **Architecture:** lock pin and branch, GID resolution and theorem kinds, bilingual environment/media parity, epistemic color and block classification, managed-file boundaries, and scoped links.
@@ -42,9 +44,12 @@ Choose checks that match the change, and record the actual result:
 | Chapter text, environments, GIDs | `./tbook check`; both-language environment sequence and GID comparison; source/state inspection at the current pin |
 | Formula, table, angle, probability, or physical scale | independent calculation or a reproducible small script, with assumptions and rounding stated |
 | SVG or image | XML parse, internal-reference check, and visual inspection at relevant output sizes |
-| Interactive lab or its caption | changed-lab browser tests with independent edge cases; project-required shots inspected and cited stills regenerated |
+| Interactive lab implementation | changed-lab browser tests with independent edge cases; project-required shots inspected and cited stills regenerated |
+| Caption wording only, with unchanged producer dependencies | verify claims against the current producer/source; reuse producer/still evidence only after the explicit relevant dependency correspondence above, with fresh verification for uncovered claims; validate affected bilingual outputs/readers per the output row. Wording changes alone do not require lab shots or still regeneration |
 | HTML/PDF/EPUB/site output | affected `./tbook build` targets, EPUBCheck for EPUBs, and browser inspection of changed pages in desktop/mobile and relevant themes |
 | Integration or lock-pin change | explicit dependency comparison, then affected architecture/quality checks and output validation; confirm current pin and historical baseline separately |
+
+When an actual PDF glyph or font concern arises, extracted/`ActualText` strings and font-resource metadata do not establish painted readability. Record reading-scale pixel witnesses for the affected passages against the actual candidate and PDF artifact, stating material correspondence and unknowns about the producing renderer and environment. Successful compilation or extraction, or readable output in another environment, does not discharge the observed concern in the affected environment. Preserve author notation and voice; use [book-export](../../book-export/SKILL.md) for conversion diagnosis and the existing upstream route for shared defects.
 
 ## PR handoff
 
