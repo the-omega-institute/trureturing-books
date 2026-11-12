@@ -1,9 +1,9 @@
 /* BRAID//STRANDS: the shared lab layout (../assets/theme.css) carries the page. Put here only what belongs to this
    visualization alone; colors come from the tokens (var(--cyan) …), never from hex values. */
-#cv { cursor: grab; touch-action: none; }
+#cv, .stage canvas.solid-gl { cursor: grab; touch-action: none; }
 /* colors on the strands are numbers: a little larger than the other labels */
 .tag.big-c { font-size: 14px; font-weight: 600; }
-/* the legend names only what is on the stage: the arc colors only while the braid is closed */
-.stage:not(.closed) .lg-closed { display: none !important; }
+/* the legend names only what is on the stage: tubes while the braid is open, the diagram and its arc colors once it is closed */
+.stage:not(.closed) .lg-closed, .stage.closed .lg-open { display: none !important; }
 .deck .chips + .chips { margin-top: 6px; }
 .gens .chip:disabled { opacity: 0.35; }
