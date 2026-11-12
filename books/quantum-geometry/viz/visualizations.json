@@ -6,8 +6,8 @@
       "code": "ORTHO//QUBIT",
       "title": "一个量子比特的线与面积 · 布洛赫球、旋子与双覆盖",
       "title_en": "The line and the area of one qubit · Bloch sphere, rotors and the double cover",
-      "summary": "在布洛赫球上拖动态矢量 B，对着量尺 A 看它的两个投影：共线的影子 A·B = cos θ 是“线”，决定探测器两种咔哒的比例；垂直撑开的面 |A∧B| = sin θ 是“面积”，决定干涉条纹的明暗对比；两者的平方和恒为 1。再给它加上量子门：每个门是一枚旋子，整个球绕固定轴转满 360° 时旋子差一个负号，转满 720° 才真正回来；H·Z·H 与 X 在球面上是同一个转动，旋子却是 −R_X。八张实验卡各讲其中一件事，可以在正文里单独引用。",
-      "summary_en": "Drag the state vector B on the Bloch sphere and read its two projections against the ruler A: the collinear shadow A·B = cos θ is the “line”, which sets the odds of the detector's two clicks; the perpendicular face |A∧B| = sin θ is the “area”, which sets the contrast of the interference fringes; their squares always sum to 1. Then add gates: each gate is a rotor, the rotor is off by a sign after a full 360° turn of the whole sphere about a fixed axis and returns only after 720°; H·Z·H and X are the same turn of the sphere, yet the rotor is −R_X. Each of the eight experiment cards makes one of these points and can be cited on its own from the text.",
+      "summary": "在布洛赫球上拖动态矢量 B，对着量尺 A 看它的两个投影：共线的影子 A·B = cos θ 是“线”，决定探测器两种咔哒的比例；垂直撑开的面 |A∧B| = sin θ 是“面积”，决定干涉条纹的明暗对比；两者的平方和恒为 1。再给它加上量子门：每个门是一枚旋子，整个球绕固定轴转满 360° 时旋子差一个负号，转满 720° 才真正回来；H·Z·H 与 X 在球面上是同一个转动，旋子却是 −R_X。七张实验卡各讲其中一件事，可以在正文里单独引用。",
+      "summary_en": "Drag the state vector B on the Bloch sphere and read its two projections against the ruler A: the collinear shadow A·B = cos θ is the “line”, which sets the odds of the detector's two clicks; the perpendicular face |A∧B| = sin θ is the “area”, which sets the contrast of the interference fringes; their squares always sum to 1. Then add gates: each gate is a rotor, the rotor is off by a sign after a full 360° turn of the whole sphere about a fixed axis and returns only after 720°; H·Z·H and X are the same turn of the sphere, yet the rotor is −R_X. Each of the seven experiment cards makes one of these points and can be cited on its own from the text.",
       "path": "qubit-geometry/",
       "thumbnail": "qubit-geometry/thumb.jpg",
       "status": "live",
@@ -30,10 +30,10 @@
       ],
       "theory": [
         {
-          "label": "第一章 §1.1 · 两子互为尺规",
-          "label_en": "Chapter 1 §1.1 · Two arrows, each the other's ruler",
-          "href": "../zh/ch01-measurement.html#sec-ch01-1",
-          "href_en": "../en/ch01-measurement.html#sec-ch01-1"
+          "label": "第一章 §1.3 · 布洛赫球面六大极点",
+          "label_en": "Chapter 1 §1.3 · The six poles of the Bloch sphere",
+          "href": "../zh/ch01-measurement.html#sec-ch01-3",
+          "href_en": "../en/ch01-measurement.html#sec-ch01-3"
         },
         {
           "label": "第二章 §2.3 · 玻恩权重与半角换算",
@@ -73,10 +73,7 @@
           "gid": "D5/S3/Quantum/Algebra/Unitary/BalancedUnitaryComplexStructure.square_eq_neg_one_of_skewAdjoint_unitary"
         },
         {
-          "gid": "D5/S3/Observer/Conditioning.recordWeight_sum"
-        },
-        {
-          "gid": "D5/S3/Quantum/Information/ActualPureQubitGeometry.bloch_geometry_of_isHermitian"
+          "gid": "D5/S3/Quantum/Measurement/Bloch/QubitBloch.B_formula_core"
         },
         {
           "gid": "D5/S3/Quantum/FiniteDimensional.qubit_weyl_star"
@@ -582,8 +579,8 @@
       "code": "IDEMPOTENT//LINE",
       "title": "反复投影",
       "title_en": "Projecting again and again",
-      "summary": "布洛赫球里的一支箭头、一条测量线和与它垂直的对偶平面。按一次“投一次”，就是沿这条线测量而不读结果（P₊ρP₊ + P₋ρP₋，用 2×2 复矩阵实算）：箭头落到它在线上的影子，面上的那一份消失，箭头变短；再投多少次，影子都一动不动。箭头本来在线上就投不动，整个躺在对偶平面里就投成零；线上一份加面上一份拼回原箭头，纯度盈余等于概率偏离加剩余质量。五张实验卡各讲一件事，可以在第三章正文里单独引用。",
-      "summary_en": "Inside the Bloch ball: an arrow, a measurement line and the dual plane perpendicular to it. One press of “Project” is a measurement along the line whose result is not read (P₊ρP₊ + P₋ρP₋, computed with 2×2 complex matrices): the arrow drops to its shadow on the line, its part in the plane is gone and it gets shorter; press again as often as you like and the shadow does not move. An arrow already on the line cannot be moved, an arrow lying in the dual plane projects to zero, and the line part plus the plane part rebuild the arrow, so that the purity surplus is the probability deviation plus the residual mass. Each of the five experiment cards makes one of these points and can be cited on its own from Chapter 3.",
+      "summary": "布洛赫球里的一支箭头、一条测量线和与它垂直的对偶平面。按一次“投一次”，就是沿这条线测量而不读结果（P₊ρP₊ + P₋ρP₋，用 2×2 复矩阵实算）：箭头落到它在线上的影子，面上的那一份消失，箭头变短；再投多少次，影子都一动不动。箭头本来在线上就投不动，整个躺在对偶平面里就投成零；线上一份加面上一份拼回原箭头，纯度盈余等于概率偏离加剩余质量。另一种操作是读出结果、只留通过的一支：偏振片链里态每跳一次都留在球皮上，代价记在相乘的权重里。五张实验卡各讲一件事，可以在第三章正文里单独引用。",
+      "summary_en": "Inside the Bloch ball: an arrow, a measurement line and the dual plane perpendicular to it. One press of “Project” is a measurement along the line whose result is not read (P₊ρP₊ + P₋ρP₋, computed with 2×2 complex matrices): the arrow drops to its shadow on the line, its part in the plane is gone and it gets shorter; press again as often as you like and the shadow does not move. An arrow already on the line cannot be moved, an arrow lying in the dual plane projects to zero, and the line part plus the plane part rebuild the arrow, so that the purity surplus is the probability deviation plus the residual mass. The other operation reads the result and keeps the branch that passed: along a chain of polarizers the state stays on the skin at every hop, and the price is booked in the multiplied weight. Each of the five experiment cards makes one of these points and can be cited on its own from Chapter 3.",
       "path": "repeated-projection/",
       "thumbnail": "repeated-projection/thumb.jpg",
       "status": "live",
@@ -630,6 +627,12 @@
         },
         {
           "gid": "D5/S3/Quantum/Tomography/ComplementaryContextProbabilityPythagoras.complementary_context_probability_pythagoras"
+        },
+        {
+          "gid": "D5/S3/Observer/Conditioning.conditionalState_isState"
+        },
+        {
+          "gid": "D5/S3/Quantum/Information/BargmannImaginaryMaximizers.bargmann_path_product"
         }
       ]
     },
@@ -1161,8 +1164,8 @@
       "code": "PAIR//SHUTTER",
       "title": "两子丈量与快门计数",
       "title_en": "Pairwise measurement and shutter counts",
-      "summary": "布洛赫球上两支箭头：青色的 A 是已知态，琥珀色的 B 是目标态，两者之间只有一个角 θ。快门每次只报“过”（+1）或“不过”（−1），一次过不过说不准；按得越多，“过”的比例 k/N 越贴近权重 p = Tr(ρ_A P_B) = (1 + cos θ)/2：B 向 A 的直径作垂线，垂足把直径分出的青色一段就是 p。共线时每次都过，对跖时一次也不过，90° 时一半一半而晃得最厉害；两支一起转，权重与计数都不变；B 每次取随机方向时，权重在 [0, 1] 上均匀分布。七张实验卡各讲其中一件事，可以在正文里单独引用。",
-      "summary_en": "Two arrows on the Bloch sphere: the cyan A is the known state, the amber B the target, and between them there is just one angle θ. Each shot of the shutter reports only “pass” (+1) or “fail” (−1), and no single shot can be foretold; the more shots, the closer the share of passes k/N comes to the weight p = Tr(ρ_A P_B) = (1 + cos θ)/2, which is the cyan stretch cut off on A's diameter by the foot of B's perpendicular. Collinear arrows pass every time, antipodal ones never, at 90° it is half and half with the widest wobble; turning both together changes neither the weight nor the counts; with a random direction for B at every shot the weight is uniform on [0, 1]. Each of the seven experiment cards makes one of these points and can be cited on its own from the text.",
+      "summary": "布洛赫球上两支箭头：青色的 A 是已知态，琥珀色的 B 是目标态，两者之间只有一个角 θ。快门每次只报“过”（+1）或“不过”（−1），一次过不过说不准；按得越多，“过”的比例 k/N 越贴近权重 p = Tr(ρ_A P_B) = (1 + cos θ)/2：B 向 A 的直径作垂线，垂足把直径分出的青色一段就是 p。共线时每次都过，对跖时一次也不过，90° 时一半一半而晃得最厉害；两支一起转，权重与计数都不变；B 每次取随机方向时，权重在 [0, 1] 上均匀分布。六张实验卡各讲其中一件事，可以在正文里单独引用。",
+      "summary_en": "Two arrows on the Bloch sphere: the cyan A is the known state, the amber B the target, and between them there is just one angle θ. Each shot of the shutter reports only “pass” (+1) or “fail” (−1), and no single shot can be foretold; the more shots, the closer the share of passes k/N comes to the weight p = Tr(ρ_A P_B) = (1 + cos θ)/2, which is the cyan stretch cut off on A's diameter by the foot of B's perpendicular. Collinear arrows pass every time, antipodal ones never, at 90° it is half and half with the widest wobble; turning both together changes neither the weight nor the counts; with a random direction for B at every shot the weight is uniform on [0, 1]. Each of the six experiment cards makes one of these points and can be cited on its own from the text.",
       "path": "pairwise-shutter/",
       "thumbnail": "pairwise-shutter/thumb.jpg",
       "status": "live",

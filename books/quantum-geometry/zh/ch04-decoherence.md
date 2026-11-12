@@ -160,7 +160,7 @@ $$
 首先看最纯粹的横向去相干极限——**标准基捏合投影** $\mathcal{P}(\rho)$（Lean 模块 `QuantumChannels/Pinching` 中定义为 [`pinching`](lean:D5/S3/QuantumChannels/Pinching.pinching)，保留对角元 $\rho_{00}, \rho_{11}$、抹零副对角元 $\rho_{01}, \rho_{10}$）。在矩阵希尔伯特—施密特内积（[`hilbertSchmidtInner`](lean:D5/S3/QuantumChannels/Pinching.hilbertSchmidtInner) $\langle A, B\rangle_{\mathrm{HS}} = \Tr(A^* B)$）下，捏合不是粗暴的涂改，而是一次精确的正交勾股投影：整颗布洛赫球被垂直压扁到南北极直径线段 $[-\vv{e}_3, +\vv{e}_3]$ 上，而被压掉的水平赤道质量恰好等于两个副对角相干元的模平方之和！
 
 ::: {.viz src="bloch-noise" preset="pinch" height="500"}
-**压到竖轴上。** 一步完全去相干：青色的球被压成竖直的一条线，紫色虚线标出整根竖轴都是不动点。$\rho$ 与 $\sigma$ 高度相同、只差横向部分，落到轴上同一点，白线缩成零；被压掉的正是横向那一截所带的相干质量，左上角读出 $\rho$ 的这份质量从 $0.375$ 降到 $0$（[@thm-pinching-pythagorean]）。
+**压到竖轴上。** 一步完全去相干：青色的球被压成竖直的一条线，紫色虚线标出整根竖轴都是不动点。$\rho$ 与 $\sigma$ 高度相同、只差横向部分，落到轴上同一点，白线缩成零；品红的两段是两个起点被压掉的横向部分，它们所带的正是相干质量，左上角读出 $\rho$ 的这份质量从 $0.375$ 降到 $0$（[@thm-pinching-pythagorean]）。
 :::
 
 ::: {.theorem #thm-pinching-pythagorean title="单比特捏合投影的希尔伯特—施密特勾股分解与丢弃相干质量" lean="D5/S3/QuantumChannels/PinchingProjection.pinching_hilbert_schmidt_pythagorean D5/S3/QuantumChannels/PinchingProjection.pinching_discarded_coherence_mass"}
