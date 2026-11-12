@@ -152,10 +152,13 @@
 
   /* ---------- stage ---------- */
   const W = (x, y, z) => [K * x, K * y, K * z];
-  const stage = kit.stage3($('stage'), {
-    canvas: $('cv'), radius: TRV.thumbMode ? 0.42 : 0.38, cy: 0.53, yaw: -1.3, pitch: 0.2,
+  const VIEW = [-1.08, 0.28];                            // the slice turned towards the viewer, the body seen from the side
+  const EPS = 0.004;                                     // marks on the cut face sit just in front of it
+  const onFace = (x, y, z) => W(x + EPS, y, z);
+  const stage = kit.solid($('stage'), {
+    canvas: $('cv'), radius: TRV.thumbMode ? 0.42 : 0.38, cy: 0.53, yaw: VIEW[0], pitch: VIEW[1],
     onChange: () => paint(),
-    onPick: (ev, st) => S.space === 'r6' && st.near(ev, W(sp().x, S.y, S.z)) < 26,
+    onPick: (ev, st) => { const q = onFace(sp().x, S.y, S.z); return S.space === 'r6' && st.near(ev, q) < 26 && !st.occluded(q, 0.02); },
     onDrag: (ev) => { const q = planeAt(ev.clientX, ev.clientY); if (q) { leave(); setQ(q[0], q[1]); } }
   });
   /** Screen point → (y, z) on the slice x = x_history. */
@@ -165,58 +168,79 @@
     const R = [cyw, -syw, 0], U = [syw * spp, cyw * spp, cp], D = [-syw * cp, -cyw * cp, spp];
     const a = (cx - b.left - stage.cx) / stage.unit, c = (stage.cy - (cy - b.top)) / stage.unit;
     if (Math.abs(D[0]) < 0.05) return null;
-    const tt = (K * sp().x - a * R[0] - c * U[0]) / D[0];
+    const tt = (K * (sp().x + EPS) - a * R[0] - c * U[0]) / D[0];
     const v = [0, 1, 2].map((i) => a * R[i] + c * U[i] + tt * D[i]);
     return [kit.clamp(v[1] / K, -1, 1), kit.clamp(v[2] / K, -1, 1)];
   }
-  function ellipseSlice(axis, c0) {
-    // points of 1 − c0² − p² − q² + 2c0pq = 0: p = (u + v)/√2, q = (u − v)/√2, u = √(1 + c0) cos t, v = √(1 − c0) sin t
-    const pts = [];
-    for (let i = 0; i <= 72; i++) {
-      const t = kit.TAU * i / 72, u = Math.sqrt(1 + c0) * Math.cos(t), v = Math.sqrt(1 - c0) * Math.sin(t), p = (u + v) / Math.SQRT2, q = (u - v) / Math.SQRT2;
-      pts.push(axis === 'x' ? W(c0, p, q) : axis === 'y' ? W(p, c0, q) : W(p, q, c0));
+  /* The solid: the elliptope 1 − x² − y² − z² + 2xyz ≥ 0, cut open at the history's x so that the slice faces the
+     viewer; the part x > x_history is kept as faint outlines. With x = sin s, y = sin t its two sheets are
+     z = xy ± √((1−x²)(1−y²)) = cos(s − t) and −cos(s + t), so the grid lines of the surface are the lines x = const and
+     y = const: two of the three inner products held fixed. */
+  const NS = 40, NT = 48, HALF = Math.PI / 2;
+  const sheet = (sign) => (s, t) => [Math.sin(s), Math.sin(t), sign > 0 ? Math.cos(s - t) : -Math.cos(s + t)];
+  /** The slice x = c0 of the elliptope: r = 1 its edge (det G₃ = 0), r < 1 inside; p = (u + v)/√2, q = (u − v)/√2. */
+  function slicePoint(c0, r, a) {
+    const u = r * Math.sqrt(1 + c0) * Math.cos(a), v = r * Math.sqrt(1 - c0) * Math.sin(a);
+    return [c0, (u + v) / Math.SQRT2, (u - v) / Math.SQRT2];
+  }
+  /** The solid as drawn, in (x, y, z): rows[j][i] of the two sheets on s ∈ [−π/2, asin x], t ∈ [−π/2, π/2]
+      (row j: t fixed, so y fixed; column i: s fixed, so x fixed), and the cut face (row j: radius j/6 of the slice). */
+  function solidModel() {
+    const x = sp().x, s1 = Math.asin(x);
+    const rows = (f) => { const out = []; for (let j = 0; j <= NT; j++) { const r = []; for (let i = 0; i <= NS; i++) r.push(f(-HALF + (s1 + HALF) * i / NS, -HALF + Math.PI * j / NT)); out.push(r); } return out; };
+    const cap = []; for (let j = 0; j <= 6; j++) { const r = []; for (let i = 0; i <= 72; i++) r.push(slicePoint(x, Math.max(j / 6, 1e-3), kit.TAU * i / 72)); cap.push(r); }
+    return { cut: x, upper: rows(sheet(1)), lower: rows(sheet(-1)), cap };
+  }
+  function drawSolid() {
+    const st = stage, m = solidModel(), toW = (rows) => rows.map((r) => r.map((p) => W(...p)));
+    const grid = { every: [5, 6] };
+    st.surface('upper', toW(m.upper), { color: P.violet, back: P.violet, grid, id: 'elliptope' });
+    st.surface('lower', toW(m.lower), { color: P.violet, back: P.violet, grid, id: 'elliptope' });
+    st.surface('cap', toW(m.cap), { color: P.violet, back: P.violet, id: 'slice' });
+    // the part beyond the cut, as outlines: the y-lines of the two sheets carried on, and two x-slices
+    const s1 = Math.asin(m.cut);
+    for (let j = 0; j <= NT; j += 6) {
+      const t = -HALF + Math.PI * j / NT;
+      for (const sg of [1, -1]) { const pts = []; for (let i = 0; i <= 16; i++) pts.push(W(...sheet(sg)(s1 + (HALF - s1) * i / 16, t))); st.line(pts, { color: P.violet, width: 0.9, alpha: 0.55 }); }
     }
-    return pts;
+    for (const f of [1 / 3, 2 / 3]) { const c0 = Math.sin(s1 + (HALF - s1) * f), pts = []; for (let i = 0; i <= 72; i++) pts.push(W(...slicePoint(c0, 1, kit.TAU * i / 72))); st.line(pts, { color: P.violet, width: 0.9, alpha: 0.55 }); }
   }
   function drawStage(f) {
-    const st = stage, s = sp(), x = s.x, thumb = TRV.thumbMode, lw = thumb ? 1.7 : 1;
+    const st = stage, s = sp(), x = s.x;
     st.begin();
-    // the elliptope: slices and the six edges of its tetrahedron
-    for (const c0 of [-0.75, -0.4, 0, 0.4, 0.75]) { st.path(ellipseSlice('z', c0), { color: P.violet, width: 0.7 * lw, alpha: 0.32, close: true }); }
-    const V = [[1, 1, 1], [1, -1, -1], [-1, 1, -1], [-1, -1, 1]];
-    for (let i = 0; i < 4; i++) for (let j = i + 1; j < 4; j++) st.line(W(...V[i]), W(...V[j]), { color: P.violet, width: 1.1 * lw, alpha: 0.6 });
-    // axes
-    st.line(W(-1.2, 0, 0), W(1.25, 0, 0), { color: P.faint, width: 0.8 }); st.line(W(0, -1.2, 0), W(0, 1.25, 0), { color: P.faint, width: 0.8 }); st.line(W(0, 0, -1.2), W(0, 0, 1.25), { color: P.faint, width: 0.8 });
+    drawSolid();
+    // axes (inside the body they are hidden by it)
+    st.line([W(-1.2, 0, 0), W(1.25, 0, 0)], { color: P.faint, width: 0.8 }); st.line([W(0, -1.2, 0), W(0, 1.25, 0)], { color: P.faint, width: 0.8 }); st.line([W(0, 0, -1.2), W(0, 0, 1.25)], { color: P.faint, width: 0.8 });
     // the slice at the history's x: the square is the one-step window |z| ≤ 1
-    st.path([W(x, -1, -1), W(x, 1, -1), W(x, 1, 1), W(x, -1, 1)], { color: P.lineHot, width: 1, alpha: 0.9, close: true, fade: false });
-    const ringPath = (m) => ring(m).pts.map(([z, y]) => W(x, y, z));
+    st.line([onFace(x, -1, -1), onFace(x, 1, -1), onFace(x, 1, 1), onFace(x, -1, 1)], { color: P.lineHot, width: 1, alpha: 0.9, close: true });
+    const ringPath = (m) => ring(m).pts.map(([z, y]) => onFace(x, y, z));
     for (let m = 2; m <= MMAX; m++) {
       if (m > f.M + 1 || (m === f.M + 1 && f.frac <= 0.001)) continue;
       const cur = m === f.M, incoming = m === f.M + 1, refuses = f.firstNeg && m === f.firstNeg - 1;
       if (S.space === 'r3' && m >= 4) {
-        for (const [y, z] of points3(m)) st.dot(W(x, y, z), (cur ? 5 : 3.5) * (thumb ? 1.3 : 1), P.magenta, { alpha: incoming ? f.frac : cur ? 1 : 0.5, fade: false });
+        for (const [y, z] of points3(m)) st.bead(onFace(x, y, z), { r: cur ? 5 : 3.5, color: P.magenta, alpha: incoming ? Math.max(0.05, f.frac) : cur ? 1 : 0.5, key: 'p3' });
         continue;
       }
       const pts = ringPath(m), r3open = S.space === 'r3' && m === 3;
-      if (cur && !r3open) st.poly(pts, { fill: P.cyan, alpha: thumb ? 0.16 : 0.1 });
-      st.path(pts, { color: P.magenta, width: (refuses ? 3.2 : cur ? 2.4 : 1.4) * lw, alpha: incoming ? 0.85 * f.frac : cur || refuses ? 1 : 0.6, dash: r3open ? [5, 4] : [], fade: false });
+      if (cur && !r3open) st.fan(pts, { fill: P.cyan, alpha: TRV.thumbMode ? 0.22 : 0.16 });
+      st.line(pts, { color: P.magenta, width: refuses ? 3.2 : cur ? 2.4 : 1.4, alpha: incoming ? Math.max(0.05, 0.85 * f.frac) : cur || refuses ? 1 : 0.6, dash: r3open ? [5, 4] : [] });
     }
     // the window for z through the candidate (it narrows smoothly while the next ring fades in)
     const w0 = f.win, w1 = f.M < MMAX && f.frac > 0.001 ? f.wins[f.M] : null, e = TRV.smooth(f.frac);
     if (w0) {
       const lo = w1 ? w0.lo + (w1.lo - w0.lo) * e : w0.lo, hi = w1 ? w0.hi + (w1.hi - w0.hi) * e : w0.hi;
-      if (w0.open && hi - lo > 1e-6) st.line(W(x, S.y, lo), W(x, S.y, hi), { color: P.cyan, width: 4.5 * lw, fade: false });
-      for (const z of (w0.open ? [lo, hi] : w0.pts)) st.dot(W(x, S.y, z), 4.2 * (thumb ? 1.3 : 1), P.magenta, { fade: false });
+      if (w0.open && hi - lo > 1e-6) st.line([onFace(x, S.y, lo), onFace(x, S.y, hi)], { color: P.cyan, width: 4.5 });
+      for (const z of (w0.open ? [lo, hi] : w0.pts)) st.bead(onFace(x, S.y, z), { r: 4.2, color: P.magenta, key: 'end' });
     }
-    // the candidate
-    const q = W(x, S.y, S.z), inside = f.C.psd;
-    if (inside) st.dot(q, 6.5, P.amber, { glow: 14, fade: false }); else st.dot(q, 7, P.amber, { ring: true, width: 2.4, fade: false });
+    // the candidate: a bead when the table is semidefinite, a hollow ring lying on the slice when it is not
+    const q = onFace(x, S.y, S.z);
+    if (f.C.psd) st.bead(q, { r: 6.5, color: P.amber, key: 'q' }); else st.ring(q, { r: 7, color: P.amber, normal: [1, 0, 0], key: 'q' });
     // labels
     st.tag('ay', W(0, 1.34, 0), 'y', 'num'); st.tag('az', W(0, 0, 1.33), 'z', 'num');
     st.tag('q', q, 'Q', 'hot', { dx: 16, dy: -12 });
     if (f.firstNeg) {
       const m = f.firstNeg - 1, side = ring(Math.max(2, m)).pts.reduce((a, p) => (p[1] > a[1] ? p : a));
-      st.tag('neg', W(x, side[1], side[0]), `D${SUB[f.firstNeg]} &lt; 0`, 'mg', { dx: 30 });
+      st.tag('neg', onFace(x, side[1], side[0]), `D${SUB[f.firstNeg]} &lt; 0`, 'mg', { dx: 34, dy: -20 });
     }
     st.end();
   }
@@ -310,10 +334,10 @@
   /** z for the VIOLATE card: inside the depth-3 window but above the depth-4 window, at the reference y. */
   const zViolate = () => { const save = S.space; S.space = 'r6'; const w3 = windowAt(3, HOME.y), w4 = windowAt(4, HOME.y); S.space = save; return (w3.hi + w4.hi) / 2; };
   const NOTES = {
-    elliptope: ['只记两步：紫色的鼓胀四面体是三元格拉姆表 det G₃ ≥ 0 的全体，历史定下 x = P₀·P₋₁，候选 Q 的 (y, z) 只能落在 x 处的截面里，品红的椭圆是它的边。竖着穿过琥珀色 Q 的青色线段就是 z 的窗口 [xy − √((1−x²)(1−y²)), xy + √((1−x²)(1−y²))]。', 'Two steps remembered: the violet swollen tetrahedron is every three-element Gram table with det G₃ ≥ 0. The history fixes x = P₀·P₋₁, so the candidate Q can only put its (y, z) in the slice at x, bounded by the magenta ellipse. The cyan segment through the amber Q is the window for z, [xy − √((1−x²)(1−y²)), xy + √((1−x²)(1−y²))].'],
+    elliptope: ['只记两步：紫色的实心鼓胀四面体是三元格拉姆表 det G₃ ≥ 0 的全体，表面的网格线是 x 固定、y 固定的线。历史定下 x = P₀·P₋₁，体就在 x 处切开，切面朝前（切掉的一块只留淡淡的轮廓）；候选 Q 的 (y, z) 只能落在这块切面上，品红的椭圆是它的边。竖着穿过琥珀色 Q 的青色线段两端落在体的表面上，它就是 z 的窗口 [xy − √((1−x²)(1−y²)), xy + √((1−x²)(1−y²))]。', 'Two steps remembered: the solid violet swollen tetrahedron is every three-element Gram table with det G₃ ≥ 0; the grid lines on its surface are the lines of fixed x and of fixed y. The history fixes x = P₀·P₋₁, so the body is cut open at x with the cut facing you (the part cut away is left as faint outlines); the candidate Q can only put its (y, z) on this cut face, bounded by the magenta ellipse. The cyan segment through the amber Q ends on the surface of the body: it is the window for z, [xy − √((1−x²)(1−y²)), xy + √((1−x²)(1−y²))].'],
     narrow: ['时间轴从只记一步走到记五步。每多记一个更早的锚点，截面里就多一圈品红的椭圆，套在上一圈里面；穿过琥珀色 Q 的青色窗口一圈圈收窄，从整个 [−1, 1] 缩到约原来的四分之一，但 Q 始终在里面。', 'The rail goes from one step remembered to five. Each older anchor adds a magenta ellipse in the slice, nested inside the last; the cyan window through the amber Q narrows ring by ring, from all of [−1, 1] to about a quarter of it, and Q stays inside.'],
     flat: ['把同一段历史压回三维（只留 E∥）：时间轴从记两步走到记五步。四根以上的向量撑不出体积，记到第三层，品红的泡泡只剩虚线的边界，琥珀色的 Q 被钉在窗口边上；记到第四、五层，能实现的只剩孤立的点，z 的窗口缩成一个值，Q 就钉在那里，det G = 0。', 'The same history squeezed back into three dimensions (only E∥): the rail goes from two steps remembered to five. Four or more vectors span no volume: at the third depth the magenta bubble keeps only its dashed edge and the amber Q is pinned to the edge of the window; at the fourth and fifth only isolated points can be realized, the window for z shrinks to one value with Q pinned there, and det G = 0.'],
-    violate: ['记住五步，却把 z 填在第三圈之内、第四圈之外：琥珀色的 Q 成了空心圈。阶梯上 D₁ 到 D₄ 都还非负，D₅ 先变负，正是加粗的第四圈（记到 P₋₃ 时）拒绝了它；这张表装不进任何内积空间。', 'Five steps remembered, but z filled in inside the third ring and outside the fourth: the amber Q becomes a hollow ring. On the ladder D₁ to D₄ are still nonnegative and D₅ turns negative first: the thickened fourth ring (memory reaching P₋₃) is the one that refuses it. This table fits in no inner-product space.']
+    violate: ['记住五步，却把 z 填在第三圈之内、第四圈之外：琥珀色的 Q 成了空心圈，仍躺在紫色体的切面上。阶梯上 D₁ 到 D₄ 都还非负，D₅ 先变负，正是加粗的第四圈（记到 P₋₃ 时）拒绝了它；这张表装不进任何内积空间。', 'Five steps remembered, but z filled in inside the third ring and outside the fourth: the amber Q becomes a hollow ring, still lying on the violet cut face. On the ladder D₁ to D₄ are still nonnegative and D₅ turns negative first: the thickened fourth ring (memory reaching P₋₃) is the one that refuses it. This table fits in no inner-product space.']
   };
   let booting = true;
   function run(play, still) { if (TRV.still || (booting && !TRV.embed)) clock.set(still); else if (play) { if (booting) kit.autoplay(clock, $('stage')); else clock.play(); } }
@@ -328,7 +352,7 @@
       setQ(s.y, zViolate(), ms); clock.set(MMAX - 1);
       if (!TRV.still && !booting) TRV.toast($('toast'), L('D₅ < 0：第四层记忆拒绝了这个候选', 'D₅ < 0: the fourth depth of memory refuses this candidate'));
     }
-    if (!TRV.still && !booting) stage.view([-1.3, 0.2]);
+    if (!TRV.still && !booting) stage.view(VIEW);
   }
   const cards = kit.cards($('presets'), { notes: NOTES, noteEl: $('presetNote'), tour: $('tour'), onPick: applyPreset,
     idle: ['自由探索：在截面里拖动琥珀色的 Q，或拖滑块、换记忆深度、换空间。拖动空白处旋转舞台。随时可以再选一张卡。', 'Free play: drag the amber Q in the slice, or move the sliders, change the depth of memory or the space. Drag empty space to rotate the stage. Pick a card again at any time.'] });
@@ -351,10 +375,16 @@
     advance: (t) => { if (clock.playing && clock.t < t) clock.set(t); },
     setQ: (y, z) => { leave(); setQ(y, z); },
     zViolate,
+    /** The solid as drawn, in (x, y, z): the two sheets (rows of fixed y, columns of fixed x) and the cut face. */
+    solid: () => solidModel(),
+    /** Turn the camera now (no tween) and draw the frame. */
+    view: (yaw, pitch) => { stage.cam.yaw = yaw; stage.cam.pitch = pitch; paint.now(); },
+    /** The marks of the frame (beads and rings) with whether a solid hides them. */
+    marks: () => stage.marks().map((m) => ({ key: m.key, kind: m.kind, hidden: m.hidden, x: m.x, y: m.y })),
     /** Viewport coordinates of the candidate, and of a point (y, z) of the slice. */
-    at: (y, z) => { const q = stage.p(W(sp().x, y == null ? S.y : y, z == null ? S.z : z)), b = $('cv').getBoundingClientRect(); return [b.left + q[0], b.top + q[1]]; }
+    at: (y, z) => { const q = stage.p(onFace(sp().x, y == null ? S.y : y, z == null ? S.z : z)), b = $('cv').getBoundingClientRect(); return [b.left + q[0], b.top + q[1]]; }
   };
-  window.TRV_THUMB = () => { setSpace('r6'); clock.pause(); S.y = HOME.y; S.z = HOME.z; clock.set(MMAX - 1); stage.cam.yaw = -1.3; stage.cam.pitch = 0.2; paint.now(); };
+  window.TRV_THUMB = () => { setSpace('r6'); clock.pause(); S.y = HOME.y; S.z = HOME.z; clock.set(MMAX - 1); stage.cam.yaw = VIEW[0]; stage.cam.pitch = VIEW[1]; paint.now(); };
   cards.pick(cards.initial('narrow'));
   booting = false;
   paint();
